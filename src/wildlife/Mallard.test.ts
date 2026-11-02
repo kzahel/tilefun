@@ -174,7 +174,7 @@ it("moves within its pond habitat and restores moved, deleted and manually creat
     expect(flock().length).toBeGreaterThanOrEqual(2);
 
     for (let i = 0; i < 1000; i++) {
-      await s.step({ dx: 0, dy: 0, jump: false, sprinting: false }, 0.1);
+      await s.step({ dx: 0, dy: 0, jump: false, sprinting: false });
       for (const duck of flock()) {
         const ai = required(duck.mallard);
         expect(

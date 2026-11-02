@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { getEntityAABB } from "../entities/collision.js";
-import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
+import { curvedTrackPath } from "../scenarios/CurvedTrainRecipe.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { CURVE_TYPES, createCurveTrain, curveTrainView } from "./CurveTrain.js";
 import { railAlignment } from "./RailPath.js";
@@ -27,7 +27,7 @@ it("selects untouched native ends and middles in each cardinal orientation", () 
   expect(curveTrainView(middle, 64)).toMatchObject({ x: 395, y: 104, width: 41, height: 112 });
 });
 it("assembles at native size on all four straight sections and restores each distinct body", () => {
-  const path = required(curvedTrainRecipe().railways?.[0]?.path),
+  const path = curvedTrackPath(),
     a = railAlignment(path);
   for (const stop of path.stops) {
     const cars = createCurveTrain(a, stop.distance);

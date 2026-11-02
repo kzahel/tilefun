@@ -123,7 +123,7 @@ it("replicates surfaces through the normal codec and predicts ramp movement thro
     for (let i = 1; i <= 260; i++) {
       const input = { ...idle, dx: 1 };
       predictInput(predictor, firstSeq + i - 1, input, dt, view.world, view.props, view.entities);
-      await s.step(input, dt);
+      await s.step(input);
       for (const buffer of s.frames()) {
         const m = decodeServerMessage(buffer);
         if (m.type !== "sync-cvars" && (m.type === "frame" || m.type.startsWith("sync-")))
@@ -218,7 +218,7 @@ it("blocks a climb with insufficient headroom and cannot enter a slab from its s
     expect((s.player.player.wz ?? 0) + 12).toBeLessThanOrEqual(30.1);
     await s.command({ kind: "teleport", position: { wx: 80, wy: 80 }, z: 42 });
     // Give the actor horizontal intent before gravity, against the deck's solid edge.
-    await s.step({ ...idle, dy: -1 }, 0.1);
+    await s.step({ ...idle, dy: -1 });
     expect(s.player.player.position.wy).toBeGreaterThan(64);
   } finally {
     await s.close();

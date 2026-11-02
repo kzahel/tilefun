@@ -25,6 +25,5 @@ export function rangeWorkRecipe(kind: "horse" | "giraffe" | "beaver"): ScenarioR
     props: [],
     nativeProps: kind === "giraffe" ? [{ type: "prop-palm-tree", wx: 208, wy: 152 }] : [],
     actors,
-    traffic: [],
   };
 }

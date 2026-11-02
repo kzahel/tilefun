@@ -30,7 +30,6 @@ const PlayIdeasPage = lazy(() => import("./PlayIdeasPage.js"));
 const ReviewPage = lazy(() => import("./ReviewPage.js"));
 const CharactersPage = lazy(() => import("./CharactersPage.js"));
 const CarProjectionPage = lazy(() => import("./CarProjectionPage.js"));
-const TrafficPage = lazy(() => import("./TrafficPage.js"));
 const WorldGeometryPage = lazy(() => import("./WorldGeometryPage.js"));
 const PhysicsPage = lazy(() => import("./PhysicsPage.js"));
 const VehiclesPage = lazy(() => import("./VehiclesPage.js"));
@@ -972,7 +971,7 @@ function ToolPage() {
       </AuthGate>
     );
   if (tool.id === "car-projection") return <CarProjectionPage />;
-  if (tool.id === "traffic") return <TrafficPage />;
+  if (tool.id === "traffic") return <WorldGeometryPage defaultFixture="realm" />;
   if (tool.id === "world-geometry") return <WorldGeometryPage />;
   if (tool.id === "physics") return <PhysicsPage />;
   if (tool.id === "vehicles")

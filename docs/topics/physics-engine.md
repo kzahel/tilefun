@@ -49,8 +49,9 @@ reopened in the wildlife behavior ledger.
 Basic ordinary GPU Worker edit/play recovery, NPC push/prediction and actual
 P2P reversal/convergence checks pass, alongside the normal two-session lab's
 input/fence/reload/teardown checks. The reset is **not ready for delivery yet**:
-old vehicle/equipment collision paths and controls still require
-simplification/removal, followed by residency/streaming and post-cleanup browser/
+the old vehicle traffic/equipment/parking/rail services and controls have been
+removed; obsolete presentation/query helpers still need deletion, followed by
+residency/streaming and post-cleanup browser/
 device qualification, Chromebook measurements and final review. Useful
 lab scenarios now exercise the game kernel, but lab acceptance alone does not
 establish complete cutover. See 205 for exact evidence.

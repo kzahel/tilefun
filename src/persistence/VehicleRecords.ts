@@ -1,26 +1,26 @@
-import type { SavedTraffic, TrafficState, TrafficSystem } from "../traffic/TrafficSystem.js";
+import type { SavedVehicle, VehicleRegistry, VehicleState } from "../traffic/VehicleRegistry.js";
 import { actorScope, durableId } from "./ActorRecords.js";
 import type { RealmRecords } from "./RealmRecords.js";
 import type { SaveManager } from "./SaveManager.js";
 
-/** Traffic uses the same durable transaction/holder policy with its own route codec. */
-export class TrafficRecords {
-  private origins = new WeakMap<TrafficState, string>();
+/** Independent vehicle poses use the ordinary durable transaction/holder policy.
+ * The collection name stays traffic so existing saves remain readable. */
+export class VehicleRecords {
+  private origins = new WeakMap<VehicleState, string>();
   constructor(
-    readonly traffic: TrafficSystem,
+    readonly vehicles: VehicleRegistry,
     readonly records: RealmRecords,
     readonly saves: SaveManager,
   ) {
-    traffic.managed = true;
-    traffic.onChange = (state, destroyed) => this.changed(state, destroyed);
-    traffic.onRestore = (state, record) => {
+    vehicles.onChange = (state, destroyed) => this.changed(state, destroyed);
+    vehicles.onRestore = (state, record) => {
       if (!record.persistentId || !record.originScope)
         throw new Error("Invalid durable traffic identity.");
       state.entity.persistentId = record.persistentId;
       this.origins.set(state, record.originScope);
     };
   }
-  private changed(state: TrafficState, destroyed: boolean): void {
+  private changed(state: VehicleState, destroyed: boolean): void {
     const key = durableId(state.entity);
     const origin = this.origins.get(state) ?? actorScope(state.entity.position);
     this.origins.set(state, origin);
@@ -44,34 +44,32 @@ export class TrafficRecords {
             key,
             scope: actorScope(state.entity.position),
             value: {
-              ...this.traffic.snapshot(state),
+              ...this.vehicles.snapshot(state),
               persistentId: key,
               originScope: origin,
             },
           },
     );
   }
-  validate(records: readonly SavedTraffic[]): void {
-    if (records.length + this.traffic.states.size > 1024)
-      throw new Error("Traffic residency budget exceeded.");
+  validate(records: readonly SavedVehicle[]): void {
     for (const record of records)
       if (
         !record.persistentId ||
         !record.originScope ||
         !Number.isFinite(record.wx) ||
         !Number.isFinite(record.wy) ||
-        !Number.isFinite(record.speed)
+        !Number.isFinite(record.wz ?? 0)
       )
         throw new Error("Invalid durable traffic state.");
-    this.traffic.prepareRestore(records);
+    this.vehicles.validate(records);
   }
-  restore(records: readonly SavedTraffic[]): void {
+  restore(records: readonly SavedVehicle[]): void {
     this.validate(records);
-    this.traffic.restore(records);
+    this.vehicles.restore(records);
   }
   release(scope: string): void {
-    for (const state of this.traffic.states.values())
+    for (const state of this.vehicles.states.values())
       if (actorScope(state.entity.position) === scope)
-        this.traffic.entities.remove(state.entity.id, false);
+        this.vehicles.entities.remove(state.entity.id, false);
   }
 }

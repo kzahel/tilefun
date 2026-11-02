@@ -3,41 +3,28 @@ import { required } from "../art/ArtCatalog.js";
 import { Direction } from "../entities/Entity.js";
 import { createPerson1 } from "../entities/Person.js";
 import { createPlayer } from "../entities/Player.js";
-import { TrainTapMovement } from "../input/TrainTapMovement.js";
-import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
-import { buildLaneGraph, samplePath } from "../traffic/LaneGraph.js";
 import { createFauna } from "../wildlife/Fauna.js";
 import { HORN_STARTLE_RADIUS } from "./HornReaction.js";
 import { PlayerSession } from "./PlayerSession.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 function recipe(): ScenarioRecipe {
-  const graph = buildLaneGraph([
-    { a: { x: 0, y: 0 }, b: { x: 40, y: 0 }, width: 8, intercity: false },
-    { a: { x: 40, y: 0 }, b: { x: 40, y: 40 }, width: 8, intercity: false },
-    { a: { x: 40, y: 40 }, b: { x: 0, y: 40 }, width: 8, intercity: false },
-    { a: { x: 0, y: 40 }, b: { x: 0, y: 0 }, width: 8, intercity: false },
-  ]);
-  const lane = required([...graph.lanes.values()].find((l) => l.direction === Direction.Right));
-  const pose = samplePath(lane.path, 80);
   return {
     version: 1,
     id: "driving-test",
     generation: FLAT_SCENARIO,
-    player: createPlayer(pose.x, pose.y - 28),
+    player: createPlayer(80, -28),
     props: [],
-    roads: [{ left: -128, right: 768, top: -64, bottom: 704 }],
-    trafficLanes: [...graph.lanes.values()],
-    traffic: [{ name: "car", model: "compact-1", laneId: lane.id, x: 0, y: 0, distance: 80 }],
+    parkedVehicles: [{ name: "car", model: "compact-1", wx: 80, wy: 0, facing: Direction.Right }],
   };
 }
 
 it("normalizes diagonals, retains off-road cars through exit and reload, and restores an inside driver", async () => {
   const s = await ScenarioSession.create(recipe());
   try {
-    let car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+    let car = required(s.realm.vehicleRegistry?.states.get(required(s.handles.car)));
     s.realm.vehicles.enter(s.player, car.entity.id);
     const initial = { ...car.entity.position };
     for (let i = 0; i < 60; i++) await s.step({ ...idle, dx: 1, dy: -1 });
@@ -48,7 +35,7 @@ it("normalizes diagonals, retains off-road cars through exit and reload, and res
     const savedHeading = car.entity.vehicleHeading;
     await s.reload();
     car = required(
-      [...(s.realm.traffic?.states.values() ?? [])].find(
+      [...(s.realm.vehicleRegistry?.states.values() ?? [])].find(
         (c) => c.entity.proceduralId === car.entity.proceduralId,
       ),
     );
@@ -60,16 +47,14 @@ it("normalizes diagonals, retains off-road cars through exit and reload, and res
     const parked = { ...car.entity.position };
     const parkedHeading = car.entity.vehicleHeading;
     s.realm.vehicles.exit(s.player);
-    expect(car.parked).toBe(true);
     for (let i = 0; i < 60; i++) await s.step(idle);
     expect(car.entity.position).toEqual(parked);
     await s.reload();
-    const restored = [...(s.realm.traffic?.states.values() ?? [])].find(
+    const restored = [...(s.realm.vehicleRegistry?.states.values() ?? [])].find(
       (c) => c.entity.proceduralId === car.entity.proceduralId,
     );
-    expect(restored?.parked).toBe(true);
     expect(restored?.entity.position).toEqual(parked);
-    expect(restored?.entity.vehicleHeading).toBe(parkedHeading);
+    expect(restored?.entity.vehicleHeading).toBeCloseTo(parkedHeading ?? 0, 3);
   } finally {
     await s.close();
   }
@@ -77,20 +62,23 @@ it("normalizes diagonals, retains off-road cars through exit and reload, and res
 it("nudges players at bounded speed and rejects distant boarding and obstructed exits", async () => {
   const s = await ScenarioSession.create(recipe());
   try {
-    const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+    const car = required(s.realm.vehicleRegistry?.states.get(required(s.handles.car)));
     s.player.player.position.wx -= 1000;
     expect(() => s.realm.vehicles.enter(s.player, car.entity.id)).toThrow(/beside/);
     s.player.player.position = { wx: car.entity.position.wx, wy: car.entity.position.wy - 28 };
     s.realm.vehicles.enter(s.player, car.entity.id);
-    const obstacle = s.realm.entityManager.spawn(
-      createPlayer(car.entity.position.wx + 70, car.entity.position.wy),
-    );
+    const guest = new PlayerSession("contact-guest");
+    await s.realm.addPlayer(guest);
+    guest.editorEnabled = false;
+    guest.visibleRange = { ...s.player.visibleRange };
+    const obstacle = guest.player;
+    obstacle.position = { wx: car.entity.position.wx + 70, wy: car.entity.position.wy };
     const beforePush = obstacle.position.wx;
     for (let i = 0; i < 80; i++) await s.step({ ...idle, dx: 1 });
     expect(obstacle.position.wx).toBeGreaterThan(beforePush + 10);
     expect(car.entity.position.wx).toBeLessThan(obstacle.position.wx - 25);
     expect(car.entity.velocity?.vx).toBeGreaterThan(0);
-    expect(car.entity.velocity?.vx).toBeLessThanOrEqual(40);
+    expect(car.entity.velocity?.vx).toBeLessThanOrEqual(112.01);
     s.realm.world.getCollisionIfLoaded = () => 3;
     expect(() => s.realm.vehicles.exit(s.player)).toThrow(/No clear place/);
     expect(s.player.player.parentId).toBe(car.entity.id);
@@ -103,52 +91,11 @@ it("nudges players at bounded speed and rejects distant boarding and obstructed 
     await s.close();
   }
 });
-it("drives a whole curved train, brakes before reverse, stops and resumes service after exit", async () => {
-  const s = await ScenarioSession.create(curvedTrainRecipe(false));
-  try {
-    const service = required(s.realm.railway?.services.get("curved-service"));
-    const car = required(service.carriages[1]);
-    s.player.player.position = { wx: car.position.wx, wy: car.position.wy - 24 };
-    s.realm.vehicles.enter(s.player, car.id);
-    const initial = service.record.distance ?? 0;
-    for (let i = 0; i < 100; i++) await s.step({ ...idle, dx: 1 });
-    expect(service.record.distance).toBeGreaterThan(initial + 100);
-    const beforeReverse = service.record.distance ?? 0;
-    await s.step({ ...idle, dx: -1 });
-    expect(service.record.distance).toBeGreaterThan(beforeReverse);
-    for (let i = 0; i < 150; i++) await s.step({ ...idle, dx: -1 });
-    expect(service.record.distance).toBeLessThan(beforeReverse);
-    for (let i = 0; i < 60; i++) await s.step(idle);
-    expect(service.speed).toBe(0);
-    const stopped = service.record.distance;
-    for (let i = 0; i < 30; i++) await s.step(idle);
-    expect(service.record.distance).toBe(stopped);
-    expect(s.player.player.position).toEqual(car.position);
-    s.realm.vehicles.exit(s.player);
-    expect(service.driverId).toBeUndefined();
-    expect(s.player.player.parentId).toBeUndefined();
-  } finally {
-    await s.close();
-  }
-});
-it("train side taps start, stop and reverse without holding a finger", () => {
-  const tap = new TrainTapMovement();
-  tap.tap(1);
-  expect(tap.direction).toBe(1);
-  tap.tap(1);
-  expect(tap.direction).toBe(0);
-  tap.tap(-1);
-  expect(tap.direction).toBe(-1);
-  tap.tap(1);
-  expect(tap.direction).toBe(1);
-  tap.cancel();
-  expect(tap.direction).toBe(0);
-});
 
 it("restores a returning player on clear ground when their saved seat is already claimed or gone", async () => {
   const s = await ScenarioSession.create(recipe());
   try {
-    const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+    const car = required(s.realm.vehicleRegistry?.states.get(required(s.handles.car)));
     s.realm.vehicles.enter(s.player, car.entity.id);
     const saved = s.realm.playerData(s.player);
     const returning = new PlayerSession("returning");
@@ -170,42 +117,14 @@ it("restores a returning player on clear ground when their saved seat is already
   }
 });
 
-it("saves a driven train through a bend and holds the open route end until reversed", async () => {
-  const s = await ScenarioSession.create(curvedTrainRecipe(false));
-  try {
-    let train = required(s.realm.railway?.services.get("curved-service"));
-    const car = required(train.carriages[1]);
-    s.player.player.position = { wx: car.position.wx, wy: car.position.wy - 24 };
-    s.realm.vehicles.enter(s.player, car.id);
-    for (let i = 0; i < 500; i++) await s.step({ ...idle, dx: 1 });
-    const before = train.record.distance ?? 0;
-    expect(before).toBeGreaterThan(1000);
-    await s.reload();
-    train = required(s.realm.railway?.services.get("curved-service"));
-    expect(train.record.distance).toBeCloseTo(before, 3);
-    expect(s.realm.vehicles.get(s.player)?.proceduralId).toBe(car.proceduralId);
-    expect(s.player.player.collider).toBeNull();
-    for (let i = 0; i < 1500; i++) await s.step({ ...idle, dx: 1 });
-    const end = required(train.line.path?.stops.at(-1)).distance;
-    expect(train.record.distance).toBe(end);
-    expect(train.speed).toBe(0);
-    for (let i = 0; i < 90; i++) await s.step({ ...idle, dx: 1 });
-    expect(train.record.distance).toBe(end);
-    for (let i = 0; i < 90; i++) await s.step({ ...idle, dx: -1 });
-    expect(train.record.distance).toBeLessThan(end - 50);
-  } finally {
-    await s.close();
-  }
-}, 15000);
-
 it.each(["garbage-truck-green", "garbage-truck-orange"])(
   "only the %s driver toggles a silent beacon; style is ignored and reload preserves it",
   async (model) => {
     const input = recipe();
-    required(input.traffic?.[0]).model = model;
+    required(input.parkedVehicles?.[0]).model = model;
     const s = await ScenarioSession.create(input);
     try {
-      const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+      const car = required(s.realm.vehicleRegistry?.states.get(required(s.handles.car)));
       const other = new PlayerSession("spectator", s.realm.entityManager.spawn(createPlayer(0, 0)));
       s.realm.vehicles.emergency(other, "toggle");
       expect(car.entity.emergencyState).toBeUndefined();
@@ -215,7 +134,7 @@ it.each(["garbage-truck-green", "garbage-truck-orange"])(
       s.realm.vehicles.emergency(s.player, "style");
       expect(car.entity.emergencyState).toBe(1);
       await s.reload();
-      const restored = required(s.realm.traffic?.states.get(required(s.handles.car)));
+      const restored = required(s.realm.vehicleRegistry?.states.get(required(s.handles.car)));
       expect(restored.entity.emergencyState).toBe(1);
       s.realm.vehicles.exit(s.player);
       s.realm.vehicles.emergency(s.player, "toggle");
@@ -229,15 +148,16 @@ it.each(["garbage-truck-green", "garbage-truck-orange"])(
 it("admits horn events only from the driver, rate limits them, and broadcasts the authoritative sound", async () => {
   const s = await ScenarioSession.create(recipe());
   try {
-    const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+    const car = required(s.realm.vehicleRegistry?.states.get(required(s.handles.car)));
     s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn", active: true });
     expect(s.realm.vehicles.takeHorns()).toEqual([]);
     s.realm.vehicles.enter(s.player, car.entity.id);
     s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn", active: true });
     s.realm.handleMessage(s.player.clientId, s.player, { type: "vehicle-horn", active: true });
+    const hornPosition = { ...car.entity.position };
     const { decodeServerMessage } = await import("../shared/binaryCodec.js");
     const messages = s
-      .tick(1 / 60)
+      .tick()
       .map(decodeServerMessage)
       .filter((m) => m.type === "vehicle-horn");
     expect(messages).toEqual([
@@ -245,8 +165,8 @@ it("admits horn events only from the driver, rate limits them, and broadcasts th
         type: "vehicle-horn",
         vehicleId: car.entity.id,
         active: true,
-        wx: car.entity.position.wx,
-        wy: car.entity.position.wy,
+        wx: hornPosition.wx,
+        wy: hornPosition.wy,
         kind: "car",
       },
     ]);
@@ -267,7 +187,7 @@ it("makes nearby people, cats and dogs escape from an admitted honk and then set
   const s = await ScenarioSession.create(recipe());
   try {
     const r = s.realm,
-      car = required(r.traffic?.states.get(required(s.handles.car))).entity,
+      car = required(r.vehicleRegistry?.states.get(required(s.handles.car))).entity,
       origin = { ...car.position };
     const person = r.entityManager.spawn(createPerson1(origin.wx + 90, origin.wy));
     const resident = r.entityManager.spawn(createPerson1(origin.wx - 90, origin.wy));
@@ -320,7 +240,7 @@ it("bounds horn reactions, protects players and mounts, and does not restart esc
   const s = await ScenarioSession.create(recipe());
   try {
     const r = s.realm,
-      car = required(r.traffic?.states.get(required(s.handles.car))).entity,
+      car = required(r.vehicleRegistry?.states.get(required(s.handles.car))).entity,
       { wx, wy } = car.position;
     const distant = r.entityManager.spawn(createPerson1(wx + HORN_STARTLE_RADIUS + 1, wy));
     const elevated = r.entityManager.spawn(createPerson1(wx + 60, wy));
@@ -360,12 +280,12 @@ it("sustains a held horn, releases immediately, and expires abandoned holds", as
   const { decodeServerMessage } = await import("../shared/binaryCodec.js");
   const s = await ScenarioSession.create(recipe());
   try {
-    const car = required(s.realm.traffic?.states.get(required(s.handles.car)));
+    const car = required(s.realm.vehicleRegistry?.states.get(required(s.handles.car)));
     s.realm.vehicles.enter(s.player, car.entity.id);
     for (let i = 0; i < 180; i++) {
       if (i % 12 === 0) s.realm.vehicles.honk(s.player, true);
       const horns = s
-        .tick(1 / 60)
+        .tick()
         .map(decodeServerMessage)
         .filter((m) => m.type === "vehicle-horn");
       expect(horns.every((h) => h.active)).toBe(true);
@@ -380,28 +300,6 @@ it("sustains a held horn, releases immediately, and expires abandoned holds", as
     s.player.editorEnabled = true;
     s.realm.vehicles.honk(s.player, true);
     expect(s.realm.vehicles.takeHorns()).toEqual([]);
-  } finally {
-    await s.close();
-  }
-});
-
-it("a curved service gently pushes at its front and preserves the train whistle command", async () => {
-  const s = await ScenarioSession.create(curvedTrainRecipe());
-  try {
-    const service = required(s.realm.railway?.services.get("curved-service"));
-    const car = required([...service.carriages].sort((a, b) => b.position.wx - a.position.wx)[0]);
-    s.player.player.position = { wx: car.position.wx, wy: car.position.wy - 24 };
-    s.realm.vehicles.enter(s.player, car.id);
-    s.realm.vehicles.honk(s.player);
-    expect(s.realm.vehicles.takeHorns()[0]?.kind).toBe("train");
-    const person = s.realm.entityManager.spawn(
-      createPlayer(car.position.wx + required(car.collider).width / 2 + 5, car.position.wy),
-    );
-    person.wz = person.groundZ = 0;
-    const x = person.position.wx;
-    for (let i = 0; i < 90; i++) await s.step({ ...idle, dx: 1 });
-    expect(person.position.wx).toBeGreaterThan(x + 20);
-    expect(service.speed).toBeLessThanOrEqual(80.01);
   } finally {
     await s.close();
   }

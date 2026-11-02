@@ -30,7 +30,7 @@ import {
 import recipes from "../scenarios/NaturalLandscapeRecipe.ts?raw";
 import presentation from "../scenarios/ScenarioPresentationHost.ts?raw";
 import raceLanes from "../traffic/RacetrackLanes.ts?raw";
-import traffic from "../traffic/TrafficSystem.ts?raw";
+import traffic from "../traffic/VehicleRegistry.ts?raw";
 import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 

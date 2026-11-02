@@ -14,21 +14,22 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     id: "car-transporter",
     name: "Car transporter playground",
     description:
-      "Drive a real car up the loading ramp, secure it and carry it with the shared game controls.",
+      "Transporter apparatus is deferred during physics reset 205. Static models remain available.",
     url: "workshop.html?geometry=transporter#/tool/world-geometry",
     mode: "link",
   },
   {
     id: "towing",
     name: "Tow truck playground",
-    description: "Attach, tow and release a real parked car with the shared game controls.",
+    description:
+      "Wheel-lift towing is deferred during physics reset 205. Static models remain available.",
     url: "workshop.html?geometry=towing#/tool/world-geometry",
     mode: "link",
   },
   {
     id: "truck-bed",
     name: "Truck bed playground",
-    description: "Walk and jump inside a dump-truck bed, ride along and inspect clipping geometry.",
+    description: "Specialized truck-bed interaction is deferred during physics reset 205.",
     url: "workshop.html?geometry=truck-bed#/tool/world-geometry",
     mode: "link",
   },
@@ -129,9 +130,9 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
   {
     id: "traffic",
-    name: "Traffic playground",
+    name: "Basic driving",
     description:
-      "Gentle traffic on generated roads. Test stopping, roof riding, turns and jumping off.",
+      "Drive ordinary upright cars with the shared physics kernel; test contacts, ramps and reload.",
     url: "workshop.html#/tool/traffic",
     mode: "source",
   },
@@ -371,7 +372,7 @@ export const CITY_BATCHES: ReviewBatch[] = [
     id: "parking-visits",
     name: "Shopping trips & parking",
     description:
-      "Playable shopping visits with reserved bays, pedestrians and at most two car maneuvers.",
+      "Historical shopping-trip study; autonomous parking visits are deferred during physics reset 205.",
     toolId: "parking-lab",
   },
   {

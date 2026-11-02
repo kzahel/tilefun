@@ -117,7 +117,7 @@ it("runs all four frog cycles, land and water in the production pond Realm, and 
     const clips = new Set<number>(),
       media = new Set<boolean>();
     for (let i = 0; i < 1600; i++) {
-      await s.step(idle, 0.1);
+      await s.step(idle);
       for (const frog of frogs()) {
         clips.add(frog.sprite?.clip ?? 0);
         media.add(
@@ -176,13 +176,13 @@ it.each([true, false])(
     });
     try {
       for (let i = 0; i < 6; i++) {
-        if (input) await s.step(idle, 1 / 60);
-        else s.tick(1 / 60);
+        if (input) await s.step(idle);
+        else s.tick();
       }
       const animal = required(s.realm.entityManager.entities.find((e) => e.type === FROG_TYPE));
       expect(s.player.player.jumpVZ).toBeUndefined();
       expect(animal.wanderAI?.state).toBe("scared");
-      for (let i = 0; i < 42; i++) await s.step(idle, 1 / 60);
+      for (let i = 0; i < 42; i++) await s.step(idle);
       expect(animal.frog?.state).toBe("hop");
       const saved = encodeActor(animal);
       await s.reload();

@@ -70,12 +70,12 @@ it("packet bursts cannot add player travel or extra world integration; short gap
       dx: 1,
       seq: 101,
     });
-    s.tick(1 / 60);
+    s.tick();
     expect(p.position.wx - start).toBeGreaterThan(0.5);
     expect(p.position.wx - start).toBeLessThan(1.2);
     expect(s.realm.collisionDiagnostics?.worldSteps).toBe(1);
     expect(s.player.lastProcessedInputSeq).toBe(101);
-    s.tick(1 / 60);
+    s.tick();
     expect(p.position.wx - start).toBeGreaterThan(1.5);
     expect(s.realm.collisionDiagnostics?.worldSteps).toBe(2);
   } finally {

@@ -1,4 +1,21 @@
-# Vehicles: traffic, driving and roof riding
+# Vehicles: shared physics baseline
+
+Status: reset 205 active; basic upright driving, seats, paint/lights and durable poses use the shared Rapier scene.
+Updated: 2026-11-03.
+
+[205](../tactical/205-physics-reset.md) supersedes the delivered-motion contracts below.
+Cars are independent upright bodies driven by ordinary input; a registry owns only
+placement, identity, depot population and saved poses. Generated depots remain;
+autonomous road traffic, parking visitors/racers, wheel-lift towing, transporter
+apparatus and tipping-bed/cargo controls are deferred. Their old motion services
+and authority/UI commands are removed. Saved traffic poses remain readable in the
+existing collection; obsolete routes and coupling metadata are discarded. Models,
+paints, approved pixels and static layout planners remain unchanged.
+
+New suspension/full tumbling and dynamic vehicle orientation are follow-on work.
+Remaining obsolete presentation/query helpers still need deletion before reset
+completion. The old feature descriptions below are historical, not current promises.
+
 
 [175](../tactical/175-vehicle-depot-and-walkable-ramps.md) adds city speedway infield
 vehicle depots: seven saved parked vehicles, loading/recovery lanes and a small

@@ -423,6 +423,7 @@ export class AnimalWorkSystem {
         gap(animal.position, target.position) <= (kind === "dog" ? 18 : 12) &&
         Math.abs((animal.wz ?? 0) - (target.wz ?? 0)) <= 6
       ) {
+        settleFauna(animal);
         this.enter(task, "pickup");
         return true;
       }
@@ -441,6 +442,7 @@ export class AnimalWorkSystem {
           const returnedBall = this.find(task.heldId);
           if (returnedBall?.workItem) returnedBall.workItem.returned = true;
           this.drop(animal);
+          settleFauna(animal);
           task.deliveries++;
           delete task.targetId;
           this.enter(task, "rest");
@@ -461,9 +463,10 @@ export class AnimalWorkSystem {
         if (
           gap(site.position, animal.position) < 8 &&
           Math.abs((site.wz ?? 0) - (animal.wz ?? 0)) <= 3
-        )
+        ) {
+          settleFauna(animal);
           this.enter(task, "deposit");
-        else if (!this.go(animal, site.position, site.wz ?? 0, context, planning))
+        } else if (!this.go(animal, site.position, site.wz ?? 0, context, planning))
           this.cancel(animal, 2);
       }
       return true;
@@ -490,8 +493,10 @@ export class AnimalWorkSystem {
         (site.workItem?.contents.length ?? 0) > 0 &&
         (task.deliveries % 2 === 0 || task.retrieved > 0)
       ) {
-        if (gap(site.position, animal.position) < 8) this.enter(task, "retrieve");
-        else {
+        if (gap(site.position, animal.position) < 8) {
+          settleFauna(animal);
+          this.enter(task, "retrieve");
+        } else {
           if (!this.go(animal, site.position, site.wz ?? 0, context, planning)) {
             task.cooldown = 2;
             return false;

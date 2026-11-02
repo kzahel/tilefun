@@ -1,15 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
 import { locateSurfaceSpace } from "../physics/TerrainExcavation.js";
-import { CURVE_TRAIN, curveTrainView, isCurveTrain } from "../railway/CurveTrain.js";
-import { railAlignment } from "../railway/RailPath.js";
-import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
 import {
   describeSurfaceSupport,
   type SurfaceVisibility,
 } from "../rendering/SurfacePresentation.js";
-import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
-import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
 import {
   GENERATED_CROSSINGS,
   generatedCrossingRecipe,
@@ -17,7 +12,6 @@ import {
 import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { realmPhysicsRecipe } from "../scenarios/RealmPhysicsRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
-import { TRAIN_GEOMETRY_STARTS, trainGeometryRecipe } from "../scenarios/TrainGeometryRecipe.js";
 import { GARAGE_STARTS, undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import {
   VEHICLE_BRIDGE_STARTS,
@@ -25,13 +19,9 @@ import {
   vehicleGeometryRecipe,
 } from "../scenarios/VehicleGeometryRecipe.js";
 import { GEOMETRY_STARTS, worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
-import { originalVehicle } from "../traffic/OriginalVehicles.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
-import { drawCurvedRailLayout } from "./CurvedTrainPreview.js";
+import DeferredVehiclePage from "./DeferredVehiclePage.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
-import TowingPage from "./TowingPage.js";
-import TransporterPage from "./TransporterPage.js";
-import TruckBedPage from "./TruckBedPage.js";
 
 export type GeometryCanvas = HTMLCanvasElement & {
   __physicsSample?: (
@@ -39,356 +29,172 @@ export type GeometryCanvas = HTMLCanvasElement & {
   ) => Promise<import("../scenarios/ScenarioProtocol.js").ScenarioResponse["physicsDiagnostics"]>;
   __presentationDiagnostics?: () => ReturnType<ScenarioPresentationHost["getDiagnostics"]>;
 };
-
-export default function WorldGeometryPage() {
-  if (new URLSearchParams(location.search).get("geometry") === "transporter")
-    return <TransporterPage />;
-  if (new URLSearchParams(location.search).get("geometry") === "towing") return <TowingPage />;
-  if (new URLSearchParams(location.search).get("geometry") === "truck-bed") return <TruckBedPage />;
-  return new URLSearchParams(location.search).get("geometry")?.startsWith("nature-") ? (
-    <NaturalLandscapePage />
-  ) : (
-    <GeometryFixtures />
-  );
+const FIXTURES = ["deck", "garage", "crossing", "car-bridge", "car-garage", "realm"];
+export default function WorldGeometryPage({
+  defaultFixture = "deck",
+}: {
+  defaultFixture?: string;
+}) {
+  const initial = new URLSearchParams(location.search).get("geometry") ?? defaultFixture;
+  if (initial.startsWith("nature-")) return <NaturalLandscapePage />;
+  if (
+    !FIXTURES.includes(initial) &&
+    !GENERATED_CROSSINGS.some((c) => initial === `generated-${c.seed}`)
+  )
+    return <DeferredVehiclePage />;
+  return <GeometryFixtures initial={initial} />;
 }
-function GeometryFixtures() {
+function GeometryFixtures({ initial }: { initial: string }) {
   const canvas = useRef<GeometryCanvas>(null),
     scene = useRef<ScenarioPresentationHost | null>(null);
-  const [fixture, setFixture] = useState(
-    () => new URLSearchParams(location.search).get("geometry") ?? "deck",
-  );
+  const keys = useRef(new Set<string>());
+  const [fixture, setFixture] = useState(initial),
+    [restart, setRestart] = useState(0);
   const [vehicleModel, setVehicleModel] = useState(() => {
     const model = new URLSearchParams(location.search).get("vehicle") ?? "compact-1";
     return VEHICLE_MODELS.includes(model) ? model : "compact-1";
   });
+  const [reverse, setReverse] = useState(false),
+    [paused, setPaused] = useState(false);
+  const [visibility, setVisibility] = useState<SurfaceVisibility>("auto");
+  const [status, setStatus] = useState("Loading scene…"),
+    [error, setError] = useState("");
+  const settings = useRef({ paused, visibility });
+  settings.current = { paused, visibility };
+  const garage = fixture === "garage" || fixture === "car-garage";
+  const vehicle = fixture.startsWith("car-");
   const generatedIndex = GENERATED_CROSSINGS.findIndex((c) => fixture === `generated-${c.seed}`);
-  const trainPrototype = fixture.startsWith("train-authored-");
-  const authoredTrains = !new URLSearchParams(location.search).has("nativeTrains");
-  const trainLoop = fixture === "train-loop" || fixture === "train-authored-loop";
-  const cityTrains = fixture === "city-trains" || fixture === "train-authored-city";
-  const generated = generatedIndex >= 0;
-  const garage = fixture === "garage" || fixture === "car-garage",
-    crossing = fixture === "crossing" || fixture === "car-bridge" || generated,
-    vehicle = fixture === "car-garage" || fixture === "car-bridge",
-    trainGrade = fixture === "train-grades";
-  const trainCurve =
-    trainLoop || fixture === "train-winding" || fixture === "train-authored-winding" || cityTrains;
-  const [followTrain, setFollowTrain] = useState(!trainCurve || cityTrains);
-  const [reverse, setReverse] = useState(false);
-  const generatedScene = useMemo(
-    () => (generatedIndex >= 0 ? generatedCrossingRecipe(generatedIndex, reverse) : undefined),
+  const generated = useMemo(
+    () => (generatedIndex < 0 ? undefined : generatedCrossingRecipe(generatedIndex, reverse)),
     [generatedIndex, reverse],
   );
-  const curveRecipe = useMemo(
+  const recipe = useMemo(
     () =>
-      cityTrains
-        ? cityTrainRecipe()
-        : trainCurve
-          ? curvedTrainRecipe(trainLoop, reverse)
-          : undefined,
-    [trainCurve, trainLoop, reverse, cityTrains],
-  );
-  const curveAlignment = curveRecipe?.railways?.[0]?.path
-    ? railAlignment(curveRecipe.railways[0].path)
-    : undefined;
-  const keys = useRef(new Set<string>());
-  const [error, setError] = useState(""),
-    [restart, setRestart] = useState(0);
-  const [paused, setPaused] = useState(false),
-    [visibility, setVisibility] = useState<SurfaceVisibility>("auto");
-  const [status, setStatus] = useState("Loading scene…");
-  const settings = useRef({ paused, visibility, followTrain });
-  settings.current = { paused, visibility, followTrain };
-  // biome-ignore lint/correctness/useExhaustiveDependencies: restart replaces the keyed canvas and its Worker/renderer.
-  useEffect(() => {
-    const c = required(canvas.current);
-    let alive = true,
-      lastStatus = "";
-    setError("");
-    setPaused(false);
-    keys.current.clear();
-    const host = new ScenarioPresentationHost(
-      c,
+      generated?.recipe ??
       (fixture === "realm"
         ? realmPhysicsRecipe(
             new URLSearchParams(location.search).has("crowd")
               ? Number(new URLSearchParams(location.search).get("crowd"))
               : undefined,
           )
-        : undefined) ??
-        curveRecipe ??
-        (generatedScene
-          ? generatedScene.recipe
-          : trainGrade
-            ? trainGeometryRecipe(reverse)
-            : vehicle
-              ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
-              : crossing
-                ? railCrossingRecipe()
-                : garage
-                  ? undergroundGarageRecipe()
-                  : worldGeometryRecipe()),
-
-      {
-        authoredTrains,
-        width: 960,
-        height: crossing ? 720 : 640,
-        fixedCamera: generatedScene
-          ? { wx: generatedScene.bridge.x * 16, wy: generatedScene.bridge.y * 16 - 16 }
-          : trainGrade || trainCurve
-            ? (_player, alpha) => {
-                const middle = scene.current?.session.view.entities.find(
-                  (e) => e.type === (trainCurve ? CURVE_TRAIN : "train-carriage-v1:middle"),
-                );
-                if (!settings.current.followTrain || !middle)
-                  return cityTrains ? required(curveRecipe).player.position : { wx: 0, wy: -16 };
-                const p = interpolatePosition(middle.position, middle.prevPosition, alpha);
-                return { wx: p.wx, wy: p.wy - (interpolateWz(middle, alpha) ?? 0) - 16 };
-              }
-            : { wx: crossing ? 0 : vehicle ? -48 : -16, wy: -16 },
-        terrain: generated || trainCurve,
-        surfaceVisibility: () => settings.current.visibility,
-        settings: () => ({
-          paused: settings.current.paused,
-          zoom:
-            trainGrade || trainCurve
-              ? settings.current.followTrain
-                ? cityTrains
-                  ? 0.75
-                  : 0.4
-                : trainCurve
-                  ? trainLoop
-                    ? 0.14
-                    : 0.1
-                  : 0.09
-              : crossing
-                ? 0.225
-                : vehicle
-                  ? 0.5
-                  : 0.625,
-          terrainPacing: "throughput",
-        }),
-        input: () => ({
-          dx:
-            Number(keys.current.has("ArrowRight") || keys.current.has("d")) -
-            Number(keys.current.has("ArrowLeft") || keys.current.has("a")),
-          dy:
-            Number(keys.current.has("ArrowDown") || keys.current.has("s")) -
-            Number(keys.current.has("ArrowUp") || keys.current.has("w")),
-          jump: keys.current.has(" "),
-          sprinting: keys.current.has("Shift"),
-          reversing: keys.current.has("r"),
-        }),
-        underlay: (frame, h) => {
-          if (generated) return;
-          if (curveAlignment) {
-            drawCurvedRailLayout(frame, h.camera, curveAlignment);
-            return;
-          }
-          const scale = h.camera.scale;
-          if (trainGrade) {
-            const a = h.camera.worldToScreen(-1728, -160);
-            frame.rect(a.sx, a.sy, 3456 * scale, 320 * scale, "#edf1e8", "#7f928d");
-            for (const y of [-8, 8]) {
-              const p = h.camera.worldToScreen(-1664, y),
-                q = h.camera.worldToScreen(1664, y);
-              frame.line(p.sx, p.sy, q.sx, q.sy, "#47595f");
-            }
-            return;
-          }
-          if (crossing) {
-            const a = h.camera.worldToScreen(-672, -400);
-            frame.rect(a.sx, a.sy, 1344 * scale, 800 * scale, "#edf1e8", "#7f928d");
-            for (let x = -640; x <= 640; x += 16) {
-              const p = h.camera.worldToScreen(x, -12);
-              frame.rect(p.sx, p.sy, 4 * scale, 24 * scale, "#9e8c70");
-            }
-            for (const y of [-8, 8]) {
-              const p = h.camera.worldToScreen(-640, y),
-                q = h.camera.worldToScreen(640, y);
-              frame.line(p.sx, p.sy, q.sx, q.sy, "#47595f");
-            }
-            return;
-          }
-          const left = vehicle ? -352 : -256,
-            right = vehicle ? 256 : 224;
-          const a = h.camera.worldToScreen(left, -144);
-          frame.rect(a.sx, a.sy, (right - left) * scale, 288 * scale, "#edf1e8", "#7f928d");
-          for (let x = left; x <= right; x += 16) {
-            const p = h.camera.worldToScreen(x, -144),
-              q = h.camera.worldToScreen(x, 144);
-            frame.line(p.sx, p.sy, q.sx, q.sy, "#d6ded5");
-          }
-          for (let y = -144; y <= 144; y += 16) {
-            const p = h.camera.worldToScreen(left, y),
-              q = h.camera.worldToScreen(right, y);
-            frame.line(p.sx, p.sy, q.sx, q.sy, "#d6ded5");
-          }
-          if (garage) {
-            const entry = h.camera.worldToScreen(-192, -32),
-              room = h.camera.worldToScreen(0, -64);
-            frame.rect(entry.sx, entry.sy, 192 * scale, 64 * scale, "#526567");
-            frame.rect(room.sx, room.sy, 160 * scale, 128 * scale, "#526567");
-          }
-          const path = h.camera.worldToScreen(48, -144);
-          if (!garage && settings.current.visibility !== "upper")
-            frame.rect(path.sx, path.sy, 64 * scale, 288 * scale, "#bfcabd");
-        },
-        overlay: (frame) => {
-          frame.label(
-            trainCurve
-              ? cityTrains
-                ? "CITY-TO-CITY ROOF RIDING"
-                : trainLoop
-                  ? "TOWN LOOP · FOUR STOPS"
-                  : "WINDING INTER-TOWN ROUTE"
-              : generated
-                ? `GENERATED CROSSING · SEED ${GENERATED_CROSSINGS[generatedIndex]?.seed}`
-                : trainGrade
-                  ? "TRAIN GRADES"
-                  : crossing
-                    ? "ROAD OVER RAIL"
-                    : garage
-                      ? "STREET → GARAGE"
-                      : "RAMP → DECK",
-            35,
-            38,
-            "#253b42",
-            "bold 16px sans-serif",
-          );
-          frame.label(
-            trainCurve
-              ? "Native train sprites · pixel tracks · jump on the roof · 8s station stops"
-              : trainGrade
-                ? "Bridge 64 · tunnel −96 · 8s stops · horizontal native carriages"
-                : crossing
-                  ? generated
-                    ? "Road 96 · train 0 · clearance 88 · roof riding"
-                    : "Road 64 · train 0 · clearance 56 · train height 44"
-                  : garage
-                    ? vehicle
-                      ? "Car floor −48 · street 0 · opposite direction starts a new run"
-                      : "Walk right to descend · floor −48 · street 0"
-                    : "Passage below runs north / south",
-            35,
-            62,
-            "#435a60",
-            "14px sans-serif",
-          );
-        },
-        onFrame: (h) => {
-          const player = h.session.view.playerEntity;
-          c.dataset.generatedSeed = generatedScene
-            ? String(generatedScene.recipe.generation.seed)
-            : "";
-          c.dataset.bridgeX = generatedScene ? String(generatedScene.bridge.x * 16) : "0";
-          c.dataset.bridgeY = generatedScene ? String(generatedScene.bridge.y * 16) : "0";
-          c.dataset.surfaceCount = String(
-            h.session.view.props.filter((p) => p.collider?.surface).length,
-          );
-          c.dataset.playerX = String(player.position.wx);
-          c.dataset.playerY = String(player.position.wy);
-          c.dataset.playerZ = String(player.wz ?? 0);
-          c.dataset.serverZ = String(h.session.view.serverPlayerEntity.wz ?? 0);
-          c.dataset.support = describeSurfaceSupport(h.session.view.props, player);
-          c.dataset.space = locateSurfaceSpace(h.session.view.props, player);
-          c.dataset.serverSpace = locateSurfaceSpace(
-            h.session.view.props,
-            h.session.view.serverPlayerEntity,
-          );
-          c.dataset.visibility = settings.current.visibility;
-          const carriages = h.session.view.entities
-            .filter((e) => e.type.startsWith("train-carriage-v1:") || isCurveTrain(e))
-            .sort((a, b) => a.position.wx - b.position.wx);
-          c.dataset.carriagePoses = JSON.stringify(
-            carriages.map((e) => [e.position.wx, e.position.wy, e.sprite?.frameRow]),
-          );
-          c.dataset.carriageSources = carriages
-            .map(
-              (e) =>
-                curveTrainView(e.type, e.sprite?.frameRow ?? 0)?.name ?? "native-horizontal-bank",
-            )
-            .join(",");
-          c.dataset.carriageCount = String(carriages.length);
-          c.dataset.trainArt = authoredTrains ? "authored-blue-v3" : "native-sprites";
-          c.dataset.carriageHeights = carriages.map((e) => (e.wz ?? 0).toFixed(2)).join(",");
-          c.dataset.trainCamera = settings.current.followTrain ? "follow" : "overview";
-          const train = h.session.view.entities.find(
-            (e) =>
-              e.type ===
-              (trainCurve
-                ? CURVE_TRAIN
-                : trainGrade
-                  ? "train-carriage-v1:middle"
-                  : "train-local-v1"),
-          );
-          if (train) {
-            c.dataset.trainY = String(train.position.wy);
-            c.dataset.trainVy = String(train.velocity?.vy ?? 0);
-            c.dataset.trainHeading = String(train.sprite?.frameRow ?? 0);
-            c.dataset.trainX = String(train.position.wx);
-            c.dataset.trainZ = String(train.wz ?? 0);
-            c.dataset.trainVx = String(train.velocity?.vx ?? 0);
-          }
-          const car = h.session.view.entities.find((e) => e.type.startsWith("vehicle-v1:"));
-          if (car) {
-            c.dataset.carModel = car.type.slice(11);
-            c.dataset.carX = String(car.position.wx);
-            c.dataset.carY = String(car.position.wy);
-            c.dataset.carZ = String(car.wz ?? 0);
-          }
-          const next = `${trainGrade ? `Carriage heights ${c.dataset.carriageHeights} · ` : ""}${car ? `Car height ${(car.wz ?? 0).toFixed(1)} · ` : ""}Height ${(player.wz ?? 0).toFixed(1)} · ${c.dataset.support} · space ${c.dataset.space} · ${settings.current.visibility} view${train ? ` · train ${Math.round(train.position.wx)} (8s station stops)` : ""}`;
-          if (next !== lastStatus && alive) {
-            lastStatus = next;
-            setStatus(next);
-          }
-        },
-        onError: (e) => {
-          delete c.dataset.ready;
-          if (alive) setError(String(e));
-        },
+        : vehicle
+          ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
+          : fixture === "crossing"
+            ? railCrossingRecipe()
+            : garage
+              ? undergroundGarageRecipe()
+              : worldGeometryRecipe()),
+    [generated, fixture, garage, vehicle, reverse, vehicleModel],
+  );
+  const starts =
+    generated?.starts ??
+    (vehicle
+      ? garage
+        ? VEHICLE_GARAGE_STARTS
+        : VEHICLE_BRIDGE_STARTS
+      : garage
+        ? GARAGE_STARTS
+        : fixture === "crossing"
+          ? CROSSING_STARTS
+          : GEOMETRY_STARTS);
+  // biome-ignore lint/correctness/useExhaustiveDependencies: restart deliberately replaces the Worker and canvas.
+  useEffect(() => {
+    const c = required(canvas.current);
+    let alive = true,
+      lastStatus = "";
+    keys.current.clear();
+    setError("");
+    setPaused(false);
+    const host = new ScenarioPresentationHost(c, recipe, {
+      width: 960,
+      height: 640,
+      terrain: !!generated || fixture === "realm",
+      ...(vehicle || fixture === "realm"
+        ? {}
+        : {
+            fixedCamera: generated
+              ? { wx: generated.bridge.x * 16, wy: generated.bridge.y * 16 - 16 }
+              : { wx: 0, wy: -16 },
+          }),
+      surfaceVisibility: () => settings.current.visibility,
+      settings: () => ({
+        paused: settings.current.paused,
+        zoom: generated || fixture === "crossing" ? 0.225 : 0.625,
+        terrainPacing: "throughput",
+      }),
+      input: () => ({
+        dx:
+          Number(keys.current.has("ArrowRight") || keys.current.has("d")) -
+          Number(keys.current.has("ArrowLeft") || keys.current.has("a")),
+        dy:
+          Number(keys.current.has("ArrowDown") || keys.current.has("s")) -
+          Number(keys.current.has("ArrowUp") || keys.current.has("w")),
+        jump: keys.current.has(" "),
+        sprinting: keys.current.has("Shift"),
+        reversing: keys.current.has("r"),
+      }),
+      onFrame: (h) => {
+        const p = h.session.view.playerEntity,
+          server = h.session.view.serverPlayerEntity;
+        c.dataset.playerX = String(p.position.wx);
+        c.dataset.playerY = String(p.position.wy);
+        c.dataset.playerZ = String(p.wz ?? 0);
+        c.dataset.serverZ = String(server.wz ?? 0);
+        c.dataset.support = describeSurfaceSupport(h.session.view.props, p);
+        c.dataset.space = locateSurfaceSpace(h.session.view.props, p);
+        c.dataset.serverSpace = locateSurfaceSpace(h.session.view.props, server);
+        c.dataset.visibility = settings.current.visibility;
+        c.dataset.generatedSeed = generated ? String(generated.recipe.generation.seed) : "";
+        c.dataset.bridgeX = String((generated?.bridge.x ?? 0) * 16);
+        c.dataset.bridgeY = String((generated?.bridge.y ?? 0) * 16);
+        c.dataset.surfaceCount = String(
+          h.session.view.props.filter((p) => p.collider?.surface).length,
+        );
+        const car =
+          h.session.view.entities.find((e) => e.id === h.session.handles.car) ??
+          h.session.view.entities.find((e) => e.type.startsWith("vehicle-v1:"));
+        if (car) {
+          c.dataset.carX = String(car.position.wx);
+          c.dataset.carY = String(car.position.wy);
+          c.dataset.carZ = String(car.wz ?? 0);
+          c.dataset.carModel = car.type.slice(11);
+        }
+        const next = `Height ${(p.wz ?? 0).toFixed(1)} · ${c.dataset.support} · space ${c.dataset.space}`;
+        if (next !== lastStatus && alive) {
+          lastStatus = next;
+          setStatus(next);
+        }
       },
-    );
+      onError: (reason) => {
+        delete c.dataset.ready;
+        if (alive) setError(String(reason));
+      },
+    });
     scene.current = host;
-    c.__presentationDiagnostics = () => host.getDiagnostics();
     c.__physicsSample = (reset) => host.session.samplePhysicsDiagnostics(reset);
+    c.__presentationDiagnostics = () => host.getDiagnostics();
     void host.ready
       .then(() => {
         if (alive) c.dataset.ready = "true";
       })
-      .catch((e) => {
-        if (alive) setError(String(e));
+      .catch((reason) => {
+        if (alive) setError(String(reason));
       });
     const release = () => keys.current.clear();
     window.addEventListener("blur", release);
     return () => {
       alive = false;
       delete c.dataset.ready;
+      delete c.__physicsSample;
       delete c.__presentationDiagnostics;
       host.dispose();
       scene.current = null;
       keys.current.clear();
       window.removeEventListener("blur", release);
     };
-  }, [
-    restart,
-    garage,
-    crossing,
-    vehicle,
-    vehicleModel,
-    reverse,
-    trainGrade,
-    trainCurve,
-    curveRecipe,
-    curveAlignment,
-    fixture,
-    generated,
-    generatedIndex,
-    generatedScene,
-  ]);
+  }, [recipe, restart, generated, fixture, vehicle]);
   const touch = (key: string) => ({
     onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
-      // Keep a held control from starting selection or stealing canvas focus.
       e.preventDefault();
       e.currentTarget.setPointerCapture(e.pointerId);
       keys.current.add(key);
@@ -399,168 +205,73 @@ function GeometryFixtures() {
   });
   return (
     <section>
-      <p className="eyebrow">ENGINE PROOF / SCHEMATIC GEOMETRY</p>
+      <p className="eyebrow">SHARED GAME PHYSICS</p>
       <h1>World geometry lab</h1>
       <p>
-        {trainPrototype
-          ? "Inspect the blue train's three authored carriages with unchanged service spacing and physics. Watch curves, joins and reversal. Static couplers can leave gaps or overlap. These reviewed carriages also run in the main game. Select GPU + meshes to see the models; Canvas and GPU sprites keep the source artwork."
-          : trainCurve
-            ? cityTrains
-              ? "Jump from the station onto the train roof and ride from Willowhaven to Willowbridge. This is the real generated world, with broad curves and eight-second station stops. GPU + meshes uses the reviewed blue carriages; Canvas and GPU sprites retain native artwork. Walk on the roof, jump off or save/reload during the ride."
-              : "Watch each carriage follow the rails through smooth corners. The loop circulates through four stops; the winding corridor serves two termini and a through station. Ride the roof, run either direction and save/reload mid-bend. GPU + meshes uses the reviewed blue carriages with continuous track headings; native sprite fallback switches cardinal views at corners. Pixel tracks use the production terrain renderer; town/platform markers are schematic."
-            : generated
-              ? "Explore a real generated road/rail crossing. Both ramps, the level railway and traffic routes come from the current regional generator. Initial car and train positions are staged near the crossing for review; save/reload uses the ordinary world machinery."
-              : trainGrade
-                ? "Follow three carriages over a bridge and down into a tunnel. Each body follows its own support height. The train stops eight seconds at each terminus and reverses. Carriages stay horizontal, so slope joins are a visible limitation of this proof."
-                : vehicle
-                  ? "Watch the vehicle follow the ramp with upright body clearance. GPU + meshes tilts each vehicle to its wheel contacts; sprite views stay level. It stops at the far end. Run the opposite direction to start a fresh return trip."
-                  : crossing
-                    ? "Walk north over the road bridge and down the far ramp. The train passes east/west below, stops at each end for eight seconds, then reverses. Use trackside to inspect clearance from below."
-                    : garage
-                      ? "Walk right from the entrance to descend into the garage, then left to return to the street. Jump inside to test the ceiling. Street and garage starts share map coordinates at different heights."
-                      : "Walk up the ramp, cross the deck, or pass underneath. Jump beneath the deck to test its ceiling; walk off an edge to fall."}{" "}
-        Arrows/WASD move; Space jumps.
-      </p>
-      <p>
-        Automatic cutaway reveals the space you occupy. View selection changes drawing only. This is
-        diagnostic geometry, not finished building artwork.
+        Walk ramps, cross bridges, pass underneath and drive ordinary upright cars. Arrows/WASD
+        move, Space jumps, E enters or leaves a nearby car, R reverses. Touch and controller use the
+        same controls. Specialized equipment and train services are deferred.
       </p>
       <label>
         Fixture{" "}
         <select
           aria-label="Geometry fixture"
           value={fixture}
-          onChange={(e) => {
-            keys.current.clear();
-            setFixture(e.target.value);
-            if (e.target.value === "city-trains") setFollowTrain(true);
-            const url = new URL(location.href);
-            url.searchParams.set("geometry", e.target.value);
-            history.replaceState(null, "", url);
-          }}
+          onChange={(e) => setFixture(e.target.value)}
         >
-          {GENERATED_CROSSINGS.map((c) => (
-            <option key={c.seed} value={`generated-${c.seed}`}>
-              Generated bridge · {c.label}
+          {FIXTURES.map((f) => (
+            <option key={f} value={f}>
+              {f}
             </option>
           ))}
-          <option value="realm">Realm physics replacement proof</option>
-          <option value="deck">Raised deck and passage</option>
-          <option value="garage">Underground parking garage</option>
-          <option value="crossing">Road bridge over railway</option>
-          <option value="car-bridge">Car over railway bridge</option>
-          <option value="car-garage">Car in underground garage</option>
-          <option value="city-trains">City-to-city trains · generated world</option>
-          <option value="train-authored-loop">Authored blue train · curve/join inspection</option>
-          <option value="train-authored-winding">Authored blue train · reversal inspection</option>
-          <option value="train-authored-city">Authored blue train · existing city service</option>
-          <option value="train-loop">Train around a town · four stops</option>
-          <option value="train-winding">Winding train route between towns</option>
-          <option value="train-grades">Train over bridge and through tunnel</option>
+          {GENERATED_CROSSINGS.map((c) => (
+            <option key={c.seed} value={`generated-${c.seed}`}>
+              {c.label}
+            </option>
+          ))}
         </select>
       </label>
       {vehicle && (
         <label>
           Vehicle{" "}
           <select
-            aria-label="Grade vehicle"
+            aria-label="Vehicle model"
             value={vehicleModel}
-            onChange={(e) => {
-              keys.current.clear();
-              setVehicleModel(e.target.value);
-              const url = new URL(location.href);
-              url.searchParams.set("vehicle", e.target.value);
-              history.replaceState(null, "", url);
-            }}
+            onChange={(e) => setVehicleModel(e.target.value)}
           >
-            {VEHICLE_MODELS.map((model) => (
-              <option key={model} value={model}>
-                {originalVehicle(model)?.name ?? model.replaceAll("-", " ")}
-              </option>
+            {VEHICLE_MODELS.map((m) => (
+              <option key={m}>{m}</option>
             ))}
           </select>
         </label>
       )}
-      <div className="actions geometry-controls">
-        {(vehicle || trainGrade || trainCurve || generated) && !cityTrains && (
+      <div className="actions">
+        {Object.entries(starts).map(([name, start]) => (
           <button
-            type="button"
-            onContextMenu={(e) => e.preventDefault()}
-            onClick={() => {
-              setPaused(false);
-              setReverse(!reverse);
-            }}
-          >
-            Run opposite direction
-          </button>
-        )}
-        {Object.entries(
-          curveRecipe
-            ? { observer: { position: curveRecipe.player.position, z: 0 } }
-            : generatedScene
-              ? generatedScene.starts
-              : trainGrade
-                ? TRAIN_GEOMETRY_STARTS
-                : vehicle
-                  ? garage
-                    ? VEHICLE_GARAGE_STARTS
-                    : VEHICLE_BRIDGE_STARTS
-                  : crossing
-                    ? CROSSING_STARTS
-                    : garage
-                      ? GARAGE_STARTS
-                      : GEOMETRY_STARTS,
-        ).map(([name, start]) => (
-          <button
-            onContextMenu={(e) => e.preventDefault()}
-            type="button"
             key={name}
+            type="button"
             onClick={() => {
-              keys.current.clear();
               void scene.current
                 ?.command({ kind: "teleport", ...start })
                 .catch((e) => setError(String(e)));
               canvas.current?.focus();
             }}
           >
-            Start at {name}
+            {name}
           </button>
         ))}
-        {(trainCurve || trainGrade) && (
-          <button
-            onContextMenu={(e) => e.preventDefault()}
-            type="button"
-            onClick={() => {
-              keys.current.clear();
-              setFollowTrain(true);
-              void scene.current
-                ?.command({ kind: "train-position", roof: true })
-                .catch((e) => setError(String(e)));
-              canvas.current?.focus();
-            }}
-          >
-            Ride train roof
+        {vehicle && (
+          <button type="button" onClick={() => setReverse(!reverse)}>
+            Opposite direction
           </button>
         )}
-        <button
-          onContextMenu={(e) => e.preventDefault()}
-          type="button"
-          onClick={() => setPaused(!paused)}
-        >
+        <button type="button" onClick={() => setPaused(!paused)}>
           {paused ? "Resume" : "Pause"}
         </button>
-        <button
-          onContextMenu={(e) => e.preventDefault()}
-          type="button"
-          onClick={() => {
-            setPaused(false);
-            setRestart(restart + 1);
-          }}
-        >
+        <button type="button" onClick={() => setRestart(restart + 1)}>
           Reset scene
         </button>
         <button
-          onContextMenu={(e) => e.preventDefault()}
           type="button"
           onClick={() => {
             void scene.current?.session
@@ -575,13 +286,6 @@ function GeometryFixtures() {
           Save / reload scene
         </button>
       </div>
-      {fixture === "realm" && (
-        <p>
-          Replacement qualification: shared collision for terrain, characters, one controlled car
-          and balls. Autonomous traffic, moving roof passengers, apparatus and full wildlife parity
-          remain unqualified. Cars stay upright. This uses the game’s shared default kernel.
-        </p>
-      )}
       <label>
         Visible surfaces{" "}
         <select
@@ -591,35 +295,18 @@ function GeometryFixtures() {
         >
           <option value="auto">Automatic cutaway</option>
           <option value="all">All surfaces</option>
-          <option value="lower">
-            {garage || trainGrade ? "Underground + ramp" : "Lower passage"}
-          </option>
-          <option value="upper">
-            {garage || trainGrade ? "Above ground" : "Upper deck + ramp"}
-          </option>
+          <option value="lower">Lower passage</option>
+          <option value="upper">Upper deck</option>
         </select>
       </label>
-      {(trainGrade || trainCurve) && (
-        <label>
-          Train camera{" "}
-          <select
-            aria-label="Train camera"
-            value={followTrain ? "follow" : "overview"}
-            onChange={(e) => setFollowTrain(e.target.value === "follow")}
-          >
-            <option value="follow">Follow train</option>
-            {!cityTrains && <option value="overview">Whole route</option>}
-          </select>
-        </label>
-      )}
       <p role="status">{status}</p>
-      {error ? <p role="alert">{error}</p> : null}
+      {error && <p role="alert">{error}</p>}
       <div style={{ position: "relative", maxWidth: 960, overflow: "hidden", borderRadius: 12 }}>
         <canvas
-          key={`${fixture}-${restart}-${reverse}`}
+          key={`${fixture}-${restart}-${reverse}-${vehicleModel}`}
           ref={canvas}
           width={960}
-          height={crossing ? 720 : 640}
+          height={640}
           aria-label="World geometry scene"
           tabIndex={0}
           style={{ display: "block", width: "100%", touchAction: "none" }}
@@ -656,9 +343,9 @@ function GeometryFixtures() {
           ["Jump", " "],
         ].map(([label, key]) => (
           <button
-            onContextMenu={(e) => e.preventDefault()}
-            type="button"
             key={key}
+            type="button"
+            onContextMenu={(e) => e.preventDefault()}
             {...touch(key ?? "")}
           >
             {label}

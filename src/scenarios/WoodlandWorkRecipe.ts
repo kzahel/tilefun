@@ -53,6 +53,5 @@ export function woodlandWorkRecipe(
     props: [],
     nativeProps: [{ type: "prop-oak-tree", wx: 128, wy: 104 }],
     actors,
-    traffic: [],
   };
 }

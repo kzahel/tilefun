@@ -52,7 +52,7 @@ it.each(["deer", "peacock", "raven"] as const)(
     recipe.actors = required(recipe.actors).slice(0, 1);
     const s = await ScenarioSession.create(recipe);
     try {
-      for (let i = 0; i < 300; i++) await s.step(idle, 1 / 30);
+      for (let i = 0; i < 300; i++) await s.step(idle);
       expect(actors(s).filter((e) => e.deer || e.fauna)).toHaveLength(1);
       expect(actors(s).filter((e) => e.workItem)).toEqual([]);
     } finally {
@@ -90,7 +90,7 @@ it("two ravens reserve and store each real pebble at most once", async () => {
   }
 }, 60000);
 async function until(s: ScenarioSession, test: () => boolean, seconds = 80) {
-  for (let i = 0; i < seconds * 30 && !test(); i++) await s.step(idle, 1 / 30);
+  for (let i = 0; i < seconds * 60 && !test(); i++) await s.step(idle);
   expect(
     actors(s)
       .filter((e) => e.deer || e.fauna)
@@ -180,14 +180,14 @@ it("a lone peacock and birds from different natural groups cannot make up a part
   required(b.fauna).groupId = "two";
   const s = await ScenarioSession.create(recipe);
   try {
-    for (let i = 0; i < 300; i++) await s.step(idle, 1 / 30);
+    for (let i = 0; i < 300; i++) await s.step(idle);
     expect(
       actors(s)
         .filter((e) => e.fauna)
         .every((e) => !e.animalWork?.partnerId && !e.animalWork?.courted),
     ).toBe(true);
     s.realm.entityManager.remove(required(actors(s).find((e) => e.fauna?.groupId === "two")).id);
-    for (let i = 0; i < 120; i++) await s.step(idle, 1 / 30);
+    for (let i = 0; i < 120; i++) await s.step(idle);
     expect(animal(s).animalWork?.partnerId).toBeUndefined();
   } finally {
     await s.close();
@@ -233,7 +233,7 @@ it("a placed cache is reused, stops at three objects and leaves a fourth pebble 
     const a = animal(s),
       site = required(actors(s).find((e) => e.type === forageType("hoard")));
     await until(s, () => a.animalWork?.deliveries === 3, 120);
-    for (let i = 0; i < 600; i++) await s.step(idle, 1 / 30);
+    for (let i = 0; i < 600; i++) await s.step(idle);
     expect(actors(s).filter((e) => e.type === forageType("hoard"))).toHaveLength(1);
     expect(a.animalWork?.siteId).toBe(site.persistentId);
     expect(site.workItem?.storedIds).toHaveLength(3);

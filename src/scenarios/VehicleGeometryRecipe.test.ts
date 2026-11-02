@@ -4,103 +4,42 @@ import { ScenarioSession } from "./ScenarioSession.js";
 import { vehicleGeometryRecipe } from "./VehicleGeometryRecipe.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
-for (const garage of [false, true])
-  for (const reverse of [false, true]) {
-    it(`drives the full ${garage ? "garage" : "bridge"} route ${reverse ? "back" : "out"} and reloads on its slope`, async () => {
-      const s = await ScenarioSession.create(vehicleGeometryRecipe(garage, reverse));
-      try {
-        let reloaded = false,
-          min = 0,
-          max = 0,
-          previous = garage && reverse ? -48 : 0;
-        for (let i = 0; i < 250; i++) {
-          await s.step(idle, 0.1);
-          const car = required([...required(s.realm.traffic).states.values()][0]);
-          const z = car.entity.wz ?? 0;
-          expect(Math.abs(z - previous)).toBeLessThanOrEqual(3.601);
-          previous = z;
-          min = Math.min(min, z);
-          max = Math.max(max, z);
-          if (!reloaded && (garage ? z < -12 && z > -36 : z > 12 && z < 48)) {
-            const before = required(s.realm.traffic).snapshot(car);
-            await s.reload();
-            expect(
-              required(s.realm.traffic).snapshot(
-                required([...required(s.realm.traffic).states.values()][0]),
-              ),
-            ).toEqual(before);
-            reloaded = true;
-          }
-        }
-        const car = required([...required(s.realm.traffic).states.values()][0]);
-        expect(reloaded).toBe(true);
-        expect(garage ? min : max).toBe(garage ? -48 : 64);
-        expect(car.entity.wz).toBe(garage && !reverse ? -48 : 0);
-        expect(car.distance, car.waiting).toBeGreaterThan(car.lane.path.length - 65);
-        expect(car.speed).toBe(0);
-      } finally {
-        await s.close();
-      }
-    });
-  }
-
-for (const obstruction of [
-  "low ceiling",
-  "pedestrian",
-  "street pedestrian",
-  "missing road",
-] as const) {
-  it(`garage respects ${obstruction}`, async () => {
-    const recipe = vehicleGeometryRecipe(true);
-    if (obstruction === "low ceiling")
-      required(
-        recipe.props.find((p) => p.collider?.surface?.id === "garage-roof")?.collider?.surface,
-      ).thickness = 32;
-    const s = await ScenarioSession.create(recipe);
+for (const garage of [false, true]) {
+  it(`controls a car over the ${garage ? "garage ramp" : "bridge"} and reloads while on its slope`, async () => {
+    const s = await ScenarioSession.create(vehicleGeometryRecipe(garage));
+    const car = () => required(s.realm.vehicleRegistry?.states.get(required(s.handles.car))).entity;
     try {
-      if (obstruction.includes("pedestrian"))
-        await s.command({
-          kind: "teleport",
-          position: { wx: 80, wy: 0 },
-          z: obstruction === "street pedestrian" ? 0 : -48,
-        });
-      if (obstruction === "missing road") {
-        const chunk = required(s.realm.world.getChunkIfLoaded(-1, 0));
-        chunk.setRoad(10, 0, 0);
+      await s.command({ kind: "enter-vehicle", entityId: car().id });
+      let reloaded = false,
+        extreme = 0;
+      for (let i = 0; i < (garage ? 360 : 800); i++) {
+        await s.step({ ...idle, dx: garage ? 1 : 0, dy: garage ? 0 : -1 });
+        const z = car().wz ?? 0;
+        extreme = garage ? Math.min(extreme, z) : Math.max(extreme, z);
+        if (!reloaded && (garage ? z < -12 && z > -36 : z > 12 && z < 48)) {
+          const before = { ...car().position },
+            height = z,
+            identity = car().proceduralId;
+          await s.reload();
+          expect(car().proceduralId).toBe(identity);
+          expect(car().position).toEqual(before);
+          expect(car().wz).toBeCloseTo(height, 3);
+          expect(s.player.player.parentId).toBe(car().id);
+          reloaded = true;
+        }
+        if (garage ? car().position.wx > 90 : car().position.wy < -350) break;
       }
-      for (let i = 0; i < 220; i++) await s.step(idle, 0.1);
-      const car = required([...required(s.realm.traffic).states.values()][0]);
-      expect(car.speed).toBe(0);
-      if (obstruction === "street pedestrian") expect(car.entity.position.wx).toBeGreaterThan(90);
-      else expect(car.entity.position.wx).toBeLessThan(obstruction === "pedestrian" ? 50 : 0);
+      expect(reloaded).toBe(true);
+      expect(garage ? extreme < -47 : extreme > 63).toBe(true);
+      expect(garage ? car().position.wx > 90 : car().position.wy < -350).toBe(true);
+      for (let i = 0; i < 30; i++) await s.step(idle);
+      const stop = { ...car().position };
+      for (let i = 0; i < 30; i++) await s.step(idle);
+      expect(Math.hypot(car().position.wx - stop.wx, car().position.wy - stop.wy)).toBeLessThan(
+        0.5,
+      );
     } finally {
       await s.close();
     }
-  });
+  }, 20000);
 }
-
-it("carries a roof rider continuously up the bridge and restores both heights", async () => {
-  const s = await ScenarioSession.create(vehicleGeometryRecipe(false));
-  try {
-    await s.command({ kind: "traffic-position", roof: true });
-    let max = 0;
-    for (let i = 0; i < 135; i++) {
-      await s.step(idle, 0.1);
-      const car = required([...required(s.realm.traffic).states.values()][0]).entity;
-      max = Math.max(max, car.wz ?? 0);
-      expect(s.player.player.wz).toBeCloseTo(
-        (car.wz ?? 0) + required(car.collider?.physicalHeight),
-        2,
-      );
-    }
-    expect(max).toBe(64);
-    await s.reload();
-    const car = required([...required(s.realm.traffic).states.values()][0]).entity;
-    expect(s.player.player.wz).toBeCloseTo(
-      (car.wz ?? 0) + required(car.collider?.physicalHeight),
-      2,
-    );
-  } finally {
-    await s.close();
-  }
-});

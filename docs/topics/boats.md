@@ -1,5 +1,19 @@
 # Boats and wildlife lakes
 
+Status: boat driving/natural boat population deferred by physics reset 205; lakes, water wildlife and exact boat assets retained.
+Updated: 2026-11-03.
+
+[205](../tactical/205-physics-reset.md) removes the separate water-driving solver and
+boat boarding controls. Existing saved boat poses can restore as passive ordinary
+bodies, and a former saved boat driver returns on foot through ordinary safe
+arrival. This does not establish buoyancy, water handling or a usable boat seat.
+Static appearance/source checks, lake generation and wildlife data remain; no
+art-review approval or pixel bank was changed. A future watercraft controller must
+use the common physics scene.
+
+The operation/validation described below is historical and currently deferred.
+
+
 Topic: boats
 Status: implemented and validated; original appearance pending human review.
 Updated: 2026-10-25.

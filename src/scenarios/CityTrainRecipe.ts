@@ -15,6 +15,5 @@ export function cityTrainRecipe(): ScenarioRecipe {
     generation: createDescriptor("regional", 2026),
     player: createPlayer(start.x * 16, start.y * 16),
     props: [],
-    traffic: [],
   };
 }

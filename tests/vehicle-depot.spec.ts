@@ -6,11 +6,10 @@ import { vehicleDepot } from "../src/generation/regional/VehicleDepotPlanner.js"
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import type { Camera } from "../src/rendering/Camera.js";
 import type { Chunk } from "../src/world/Chunk.js";
-import { chooseVehicleAction } from "./helpers/context-actions.js";
 import { flushLocalWorld, stopLocalWorld } from "./helpers/local-world.js";
 
 test.use({ channel: "chromium", hasTouch: true, viewport: { width: 1280, height: 850 } });
-test("generated depot is a named map destination with real parked cars and walkable ramps", async ({
+test("generated depot is a named map destination with real parked cars", async ({
   page,
 }, testInfo) => {
   test.setTimeout(90000);
@@ -77,8 +76,6 @@ test("generated depot is a named map destination with real parked cars and walka
       ),
     )
     .toBeLessThan(64);
-  const truck = (await facts()).truck;
-  if (!truck) throw Error("No generated truck");
   await page.evaluate(async (center) => {
     const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
     await g.gcSendRequest({
@@ -132,51 +129,11 @@ test("generated depot is a named map destination with real parked cars and walka
     )
     .toBe(true);
   await page.screenshot({ path: testInfo.outputPath("depot-overview.png") });
-  await page.evaluate(() => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-    (Reflect.get(g, "debugPanel") as { setZoom(value: number): void }).setZoom(1);
-  });
-  await page.evaluate(async (t) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-    await g.gcSendRequest({
-      type: "rcon",
-      requestId: g.nextRequestId++,
-      command: `tp ${t.x} ${t.y + 40}`,
-    });
-  }, truck);
-  await chooseVehicleAction(page, "Deploy ramp");
-  await expect.poll(async () => (await facts()).truck?.ramp).toBe(1);
-  await page.evaluate(async (t) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-    await g.gcSendRequest({
-      type: "rcon",
-      requestId: g.nextRequestId++,
-      command: `tp ${t.x - 171} ${t.y + 16}`,
-    });
-  }, truck);
-  await expect.poll(async () => (await facts()).player.x).toBeCloseTo(truck.x - 171, 1);
-  await expect.poll(async () => (await facts()).player.y).toBeCloseTo(truck.y + 16, 1);
-  await page.locator("#game").focus();
-  await page.keyboard.down("ArrowRight");
-  try {
-    await expect
-      .poll(async () => (await facts()).player.x, { intervals: [20] })
-      .toBeGreaterThan(truck.x - 45);
-  } finally {
-    await page.keyboard.up("ArrowRight");
-  }
-  await expect.poll(async () => (await facts()).player.z).toBeCloseTo(24.65, 1);
-  await page.screenshot({ path: testInfo.outputPath("depot-walking.png") });
   await flushLocalWorld(page);
   await stopLocalWorld(page);
   await page.reload();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 60000 });
-  await expect.poll(async () => (await facts()).truck?.ramp).toBe(1);
-  await stopLocalWorld(page);
-  await page.goto("/tilefun/?nogamepad&renderer=canvas");
-  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 60000 });
-  await expect.poll(async () => (await facts()).player.z).toBeCloseTo(24.65, 1);
-  await page.screenshot({ path: testInfo.outputPath("depot-walking-canvas.png") });
+  await expect.poll(async () => (await facts()).truck).not.toBeNull();
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole("button", { name: "Open world map" }).tap();
   await expect(destination).toBeVisible({ timeout: 15000 });

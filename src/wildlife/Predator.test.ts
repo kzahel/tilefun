@@ -231,7 +231,6 @@ describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
         player: createPlayer(64, 160),
         props: [],
         actors: [hunter, prey],
-        traffic: [],
       });
       try {
         const entities = () => session.realm.entityManager.entities;

@@ -192,7 +192,7 @@ it("runs hops, flights, crown rests and songs in production Realm and saves dura
     const clips = new Set<number>();
     let perched = false;
     for (let i = 0; i < 700; i++) {
-      await s.step(idle, 0.1);
+      await s.step(idle);
       for (const bird of birds()) {
         clips.add(bird.sprite?.clip ?? 0);
         perched ||= bird.robin?.state === "perch";
@@ -290,13 +290,13 @@ it.each([true, false])(
     });
     try {
       for (let i = 0; i < 6; i++) {
-        if (input) await s.step(idle, 1 / 60);
-        else s.tick(1 / 60);
+        if (input) await s.step(idle);
+        else s.tick();
       }
       const animal = required(s.realm.entityManager.entities.find((e) => e.type === ROBIN_TYPE));
       expect(s.player.player.jumpVZ).toBeUndefined();
       expect(animal.wanderAI?.state).toBe("scared");
-      for (let i = 0; i < 22; i++) await s.step(idle, 1 / 60);
+      for (let i = 0; i < 22; i++) await s.step(idle);
       expect(animal.robin?.state).toBe("flight");
       const saved = encodeActor(animal);
       await s.reload();

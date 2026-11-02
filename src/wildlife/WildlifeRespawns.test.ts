@@ -115,7 +115,7 @@ it("saves pending countdowns and atomically replaces their records with distant 
   });
   const range = { minCx: -5, maxCx: 5, minCy: -5, maxCy: 5 };
   try {
-    await session.step({ dx: 0, dy: 0, jump: false, sprinting: false }, 1 / 60, range);
+    await session.step({ dx: 0, dy: 0, jump: false, sprinting: false }, range);
     const queue = () => session.realm.entityManager.wildlifeRespawns;
     expect(queue().size).toBe(1);
     const saved = structuredClone([...queue().values()]);
@@ -124,7 +124,7 @@ it("saves pending countdowns and atomically replaces their records with distant 
     expect(session.realm.entityManager.entities.some((e) => e.deer)).toBe(false);
     // Step the real Realm clock through the complete delay on loaded terrain.
     for (let i = 0; i < 3700 && queue().size; i++)
-      await session.step({ dx: 0, dy: 0, jump: false, sprinting: false }, 1 / 30, range);
+      await session.step({ dx: 0, dy: 0, jump: false, sprinting: false }, range);
     expect(queue().size).toBe(0);
     const replacement = required(session.realm.entityManager.entities.find((e) => e.deer));
     expect(replacement.naturalSpawnId).toBe("saved-deer");

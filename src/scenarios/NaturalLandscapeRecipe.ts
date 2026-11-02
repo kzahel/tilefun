@@ -207,8 +207,6 @@ export function naturalLandscapeRecipe(
       landscape: profile,
       player: createPlayer(lake.x * 16, (lake.y - lake.ry) * 16 - 20),
       props: [],
-      traffic: [],
-      trafficPopulation: true,
     };
   }
   if (!at && ["wolf-pack", "food-web-natural", "food-web-placed"].includes(id)) {
@@ -241,7 +239,6 @@ export function naturalLandscapeRecipe(
       player: createPlayer(64, 192),
       props: [],
       actors,
-      traffic: [],
     };
   }
   const predator = PREDATOR_PROFILES.find((p) => p.species === id);
@@ -268,7 +265,6 @@ export function naturalLandscapeRecipe(
         ? { nativeProps: [{ type: "prop-griffin-perch", wx: 32, wy: 64 }] }
         : {}),
       actors: [createPredator(predator.species, 64, 64), deer, rabbit],
-      traffic: [],
     };
   }
   if (id === "train")
@@ -284,8 +280,6 @@ export function naturalLandscapeRecipe(
       landscape: profile,
       player: createPlayer(track.center.x * 16, (track.center.y + 37) * 16),
       props: [],
-      traffic: [],
-      trafficPopulation: true,
     };
   }
   // Pet-coat arrivals inspect real seeded settlement individuals, whose greens
@@ -298,7 +292,6 @@ export function naturalLandscapeRecipe(
       landscape: profile,
       player: createPlayer((point.x - 4) * 16, point.y * 16),
       props: [],
-      traffic: [],
     };
   }
   if (!at && ["farmstead", "village-pets", "city-pets", "city-center"].includes(id)) {
@@ -323,7 +316,6 @@ export function naturalLandscapeRecipe(
       landscape: profile,
       player,
       props: [],
-      traffic: [],
     };
   }
   if (![point.x, point.y].every((n) => Number.isFinite(n) && Math.abs(n) <= 2 ** 23))
@@ -362,7 +354,6 @@ export function naturalLandscapeRecipe(
     landscape: profile,
     player: createPlayer(arrival.x * 16, arrival.y * 16),
     props: [],
-    traffic: [],
   };
 }
 export function naturalExplorerUrl(

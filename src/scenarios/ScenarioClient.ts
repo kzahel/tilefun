@@ -53,8 +53,6 @@ export class ScenarioClient {
   readonly ready: Promise<void>;
   onHorn?: (message: VehicleHornMessage) => void;
   handles: Record<string, number> = {};
-  traffic: ScenarioResponse["traffic"];
-  parking: ScenarioResponse["parking"];
   physicsDiagnostics: ScenarioResponse["physicsDiagnostics"];
   async samplePhysicsDiagnostics(reset = false) {
     await this.request({ kind: "diagnostics", reset });
@@ -165,8 +163,6 @@ export class ScenarioClient {
         this.guestFrames.flush();
       }
       this.handles = response.handles;
-      this.traffic = response.traffic;
-      this.parking = response.parking;
       if (response.physicsDiagnostics) this.physicsDiagnostics = response.physicsDiagnostics;
       this.clock = response.clock;
       if (response.id > 0) this.synchronizePrediction();
@@ -257,7 +253,7 @@ export class ScenarioClient {
   }
 
   /** Submit/predict input only. Realm advances on its own ServerLoop cadence. */
-  submitInput(input: Movement, _dt = 1 / 60, range?: ChunkRange, seat: 0 | 1 = 0): boolean {
+  submitInput(input: Movement, range?: ChunkRange, seat: 0 | 1 = 0): boolean {
     if (this.failure) throw this.failure;
     if (!this.loaded || this.closed || !this.running || this.busy || !this.channel.writable)
       return false;
@@ -293,7 +289,7 @@ export class ScenarioClient {
     this.schedulePump();
     try {
       await this.ready;
-      await this.request({ kind: "step", input, dt: 1 / 60, range });
+      await this.request({ kind: "step", input, range });
       this.host.seq = Math.max(this.host.seq, this.view.lastProcessedInputSeq);
       this.view.resetPresentationClock(true);
       this.synchronizePrediction(true);

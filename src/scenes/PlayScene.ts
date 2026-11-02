@@ -13,13 +13,13 @@ import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresen
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import { projectWorld } from "../rendering/Projection.js";
 import { quantizeAxis } from "../shared/binaryCodec.js";
-import { occupiedVehicle } from "../traffic/Driving.js";
 import {
   hasVehicleLights,
   isEmergencyVehicle,
   isWarningVehicle,
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
+import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";

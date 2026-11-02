@@ -31,7 +31,7 @@ async function scene(wall = false, freeze = true) {
 async function jumpOn(s: ScenarioSession) {
   // Ordinary input from beside the body: no teleport, launch assist or gravity override.
   for (let i = 0; i < 60 && s.player.gameplaySession.mountId === null; i++)
-    await s.step({ ...idle, dx: 1, jump: true }, 1 / 60);
+    await s.step({ ...idle, dx: 1, jump: true });
   expect(s.player.gameplaySession.mountId).toBe(horse(s).id);
   expect(s.player.player.parentId).toBe(horse(s).id);
   expect(s.player.player.wz).toBe((horse(s).wz ?? 0) + 18);
@@ -43,7 +43,7 @@ describe("horse riding through the shared Realm", () => {
     const s = await scene();
     try {
       await s.command({ kind: "teleport", position: { ...horse(s).position }, z: 26 });
-      for (let i = 0; i < 30; i++) await s.step(idle, 1 / 60);
+      for (let i = 0; i < 30; i++) await s.step(idle);
       expect(s.player.gameplaySession.mountId).toBe(horse(s).id);
       expect(horse(s).wanderAI?.state).toBe("ridden");
       expect(s.player.player.jumpVZ).toBeUndefined();
@@ -64,29 +64,29 @@ describe("horse riding through the shared Realm", () => {
         expect(horse(s).fauna?.alarmFrom).toBeUndefined();
         const clips = required(ENTITY_DEFS[horse(s).type]?.sprite?.clips);
         const x = horse(s).position.wx;
-        for (let i = 0; i < 60; i++) await s.step({ ...idle, dx: 1 }, 1 / 60);
+        for (let i = 0; i < 60; i++) await s.step({ ...idle, dx: 1 });
         expect(horse(s).position.wx - x).toBeCloseTo(160, 1);
         expect(s.player.player.position).toEqual(horse(s).position);
         expect(clips[horse(s).sprite?.clip ?? 0]?.name).toBe("ride");
         expect(horse(s).sprite?.frameCol).toBeGreaterThanOrEqual(1);
         expect(startleFauna(horse(s), s.player.player.position)).toBe(false);
         const sprintX = horse(s).position.wx;
-        for (let i = 0; i < 30; i++) await s.step({ ...idle, dx: 1, sprinting: true }, 1 / 60);
+        for (let i = 0; i < 30; i++) await s.step({ ...idle, dx: 1, sprinting: true });
         expect(horse(s).position.wx - sprintX).toBeCloseTo(160, 1);
         expect(clips[horse(s).sprite?.clip ?? 0]?.name).toBe("ride-sprint");
-        await s.step(idle, 1 / 60);
+        await s.step(idle);
         expect(horse(s).velocity).toEqual({ vx: 0, vy: 0 });
         expect(clips[horse(s).sprite?.clip ?? 0]?.name).toBe("idle");
         await s.reload();
         expect(s.player.gameplaySession.mountId).toBe(horse(s).id);
         expect(s.player.player.parentId).toBe(horse(s).id);
         const dismount = { ...horse(s).position };
-        await s.step({ ...idle, jump: true }, 1 / 60);
+        await s.step({ ...idle, jump: true });
         expect(s.player.gameplaySession.mountId).toBeNull();
         expect(s.player.player.parentId).toBeUndefined();
         expect(s.player.player.jumpVZ).toBeGreaterThan(0);
         expect(horse(s).fauna?.home).toEqual(dismount);
-        for (let i = 0; i < 45; i++) await s.step({ ...idle, dx: -1 }, 1 / 60);
+        for (let i = 0; i < 45; i++) await s.step({ ...idle, dx: -1 });
         expect(s.player.gameplaySession.mountId).toBeNull();
         expect(horse(s).wanderAI?.state).not.toBe("ridden");
       } finally {
@@ -98,10 +98,10 @@ describe("horse riding through the shared Realm", () => {
   it("never mounts from nearby ground and keeps whole-body obstacle collision", async () => {
     const s = await scene(true);
     try {
-      for (let i = 0; i < 15; i++) await s.step({ ...idle, dx: 1 }, 1 / 60);
+      for (let i = 0; i < 15; i++) await s.step({ ...idle, dx: 1 });
       expect(s.player.gameplaySession.mountId).toBeNull();
       await jumpOn(s);
-      for (let i = 0; i < 90; i++) await s.step({ ...idle, dx: 1, sprinting: true }, 1 / 60);
+      for (let i = 0; i < 90; i++) await s.step({ ...idle, dx: 1, sprinting: true });
       expect(horse(s).position.wx).toBeLessThanOrEqual(200 - 17);
       expect(horse(s).position.wx).toBeGreaterThan(150);
       expect(s.player.player.position).toEqual(horse(s).position);

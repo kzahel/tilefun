@@ -19,11 +19,11 @@ export class ScenarioWorkerHost {
     private readonly writable: () => boolean = () => true,
   ) {
     this.loop = new ServerLoop(
-      (dt) => {
+      () => {
         const session = this.session;
         if (!session) return;
         const canPublish = this.writable();
-        const frames = session.tick(dt, canPublish);
+        const frames = session.tick(canPublish);
         this.ticks++;
         // Realm does not advance replica baselines while output is backpressured.
         if (frames.length) this.publish(this.response(0, frames));
@@ -50,12 +50,6 @@ export class ScenarioWorkerHost {
 
   private response(id: number, frames: ArrayBuffer[]): ScenarioResponse {
     const handles = { ...this.session?.handles };
-    for (const state of this.session?.realm.traffic?.states.values() ?? [])
-      if (state.lane.race && state.entity.proceduralId)
-        handles[`racer:${state.entity.proceduralId}`] = state.entity.id;
-    const car = this.session?.realm.traffic?.states.get(this.session.handles.car ?? -1);
-    const parking =
-      this.session?.realm.parking?.diagnostics ?? this.session?.realm.traffic?.shoppingDiagnostics;
     return {
       id,
       frames,
@@ -69,17 +63,7 @@ export class ScenarioWorkerHost {
             },
           }
         : {}),
-      ...(parking ? { parking } : {}),
       clock: { mode: this.mode, running: this.running, ticks: this.ticks },
-      ...(car
-        ? {
-            traffic: {
-              speed: car.speed,
-              waiting: car.waiting,
-              count: this.session?.realm.traffic?.states.size ?? 0,
-            },
-          }
-        : {}),
     };
   }
 
@@ -109,7 +93,7 @@ export class ScenarioWorkerHost {
               break;
             case "step":
               if (this.running) throw new Error("Pause authority before manual stepping");
-              await session.step(request.input, request.dt, request.range);
+              await session.step(request.input, request.range);
               this.ticks++;
               break;
             case "command":

@@ -1,11 +1,10 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { nearestRail, railAlignment } from "../railway/RailPath.js";
-import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
+import { curvedTrackPath } from "../scenarios/CurvedTrainRecipe.js";
 import { drawRailTile, railPixel } from "./RailTrackRaster.js";
 
 it("aligns pixel rails/sleepers on straights and arcs at positive and negative chunk seams", () => {
-  const path = required(curvedTrainRecipe().railways?.[0]?.path),
+  const path = curvedTrackPath(),
     a = railAlignment(path);
   for (const p of a.samples(32)) expect(nearestRail(path, p.x, p.y).distance).toBeLessThan(0.001);
   const render = (tx: number, ty: number) => {

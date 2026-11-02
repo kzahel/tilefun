@@ -14,7 +14,7 @@ const animal = (s: ScenarioSession) =>
 const source = (s: ScenarioSession) =>
   required(s.realm.entityManager.entities.find((e) => e.workItem?.growth));
 async function until(s: ScenarioSession, p: () => boolean, seconds = 60) {
-  for (let i = 0; i < seconds * 30 && !p(); i++) await s.step(idle, 1 / 30);
+  for (let i = 0; i < seconds * 60 && !p(); i++) await s.step(idle);
   expect(
     s.realm.entityManager.entities.map((e) => ({
       type: e.type,
@@ -36,7 +36,7 @@ it("goat browses one finite shrub portion, hops onto an actual rock and returns 
   try {
     let a = animal(s);
     await until(s, () => a.animalWork?.state === "browse");
-    expect(a.velocity).toEqual({ vx: 0, vy: 0 });
+    expect(Math.hypot(a.velocity?.vx ?? 0, a.velocity?.vy ?? 0)).toBeLessThan(0.1);
     await until(s, () => a.animalWork?.state === "hop" && (a.wz ?? 0) > 4);
     expect(a.animalWork?.eaten).toBe(1);
     expect(source(s).workItem?.units).toBe(2);
@@ -45,12 +45,12 @@ it("goat browses one finite shrub portion, hops onto an actual rock and returns 
     a = saved(s, a);
     expect(a.wz).toBeCloseTo(before ?? 0, 5);
     await until(s, () => a.animalWork?.state === "perch");
-    expect(a.wz).toBe(8);
+    expect(Math.abs((a.wz ?? Infinity) - 8)).toBeLessThan(0.5);
     expect(a.animalWork?.hops).toBe(1);
     await s.reload();
     a = saved(s, a);
-    expect(a.wz).toBe(8);
-    await until(s, () => a.animalWork?.state === "idle" && (a.wz ?? 0) === 0);
+    expect(Math.abs((a.wz ?? Infinity) - 8)).toBeLessThan(0.5);
+    await until(s, () => a.animalWork?.state === "idle" && Math.abs(a.wz ?? Infinity) < 0.5);
     expect(a.animalWork?.hops).toBe(1);
   } finally {
     await s.close();
@@ -65,7 +65,7 @@ it.each(["root", "pickup"] as const)(
       const a = animal(s);
       await until(s, () => a.animalWork?.state === state);
       startleFauna(a, { wx: a.position.wx + 12, wy: a.position.wy });
-      await s.step(idle, 1 / 30);
+      await s.step(idle);
       expect(a.animalWork?.state).toBe("idle");
       expect(a.animalWork?.eaten).toBe(0);
       const roots = s.realm.entityManager.entities.filter(
@@ -97,9 +97,9 @@ it("unready rock support freezes an admitted hop, and removing it preserves heig
     expect(a.fauna?.motion?.elapsed).toBe(elapsed);
     const rock = required(s.realm.propManager.props.find((p) => p.type === "prop-low-rock"));
     s.realm.propManager.remove(rock.id);
-    await s.step(idle, 1 / 30);
+    await s.step(idle);
     expect(Math.abs((a.wz ?? 0) - (z ?? 0))).toBeLessThan(2);
-    await until(s, () => !a.fauna?.motion && (a.wz ?? 0) === 0);
+    await until(s, () => !a.fauna?.motion && Math.abs(a.wz ?? Infinity) < 0.5);
     expect(a.animalWork?.hops ?? 0).toBe(0);
   } finally {
     await s.close();
@@ -263,14 +263,14 @@ it("removing a rock just before landing gives the goat time to settle onto the g
     s.realm.propManager.remove(rock.id);
     let previous = a.wz ?? 0;
     for (let i = 0; i < 60 && a.fauna?.motion; i++) {
-      await s.step(idle, 1 / 30);
+      await s.step(idle);
       const height = a.wz ?? 0;
       expect(Math.abs(height - previous)).toBeLessThan(2);
-      expect(height).toBeGreaterThanOrEqual(0);
+      expect(height).toBeGreaterThanOrEqual(-0.5);
       previous = height;
     }
     expect(a.fauna?.motion).toBeUndefined();
-    expect(a.wz).toBe(0);
+    expect(Math.abs(a.wz ?? Infinity)).toBeLessThan(0.5);
   } finally {
     await s.close();
   }

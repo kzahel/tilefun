@@ -5,17 +5,12 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
-import { aabbLacksWater, getEntityAABB } from "../entities/collision.js";
-import { Direction } from "../entities/Entity.js";
-import { createPlayer } from "../entities/Player.js";
-import { FlatStrategy } from "../generation/FlatStrategy.js";
+import { getEntityAABB } from "../entities/collision.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
-import { axisBox, boxDepth } from "../physics/OrientedBox.js";
 import { CarMeshAsset } from "../rendering/CarMeshAsset.js";
-import { boardingDistance, boardingRange, drivenCarPose } from "../traffic/Driving.js";
 import {
   applyVehicleFacing,
   createVehicle,
@@ -23,12 +18,9 @@ import {
   TRAFFIC_MODELS,
   VEHICLE_MODELS,
 } from "../traffic/Vehicle.js";
-import { entityBody } from "../traffic/VehicleContact.js";
-import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
-import { BOAT_BEAM, BOAT_LENGTH, BOAT_MESH, BOAT_MODEL, BOAT_MOORING_RADIUS } from "./Boat.js";
+import { BOAT_MESH, BOAT_MODEL } from "./Boat.js";
 
-const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 const lakeOwner = [1, -2] as const;
 it("retains exact editable source and a wheel-free exported boat with animated propeller", async () => {
   const receipt = JSON.parse(
@@ -119,104 +111,4 @@ it("creates broad connected water, a dry boarding beach and varied valid natural
     right = world.getChunk(x + 1, y);
   for (let row = 0; row < 33; row++)
     expect(left.getSubgrid(32, row)).toBe(right.getSubgrid(0, row));
-});
-
-it("keeps moorings on water and within boarding reach across fractional shore alignments", () => {
-  const n = new NaturalLandscape(regionalWorld(2026), "thicket");
-  const g = createGenerator(createDescriptor("regional", 2026));
-  const world = new World(g.terrain);
-  for (const [x, y] of [
-    [1, -2],
-    [2, -1],
-    [3, -3],
-    [3, 2],
-  ] as const) {
-    const lake = required(n.lake(x, y));
-    const shore = (lake.y - lake.ry) * 16;
-    const cx = Math.floor(lake.x / 16),
-      cy = Math.floor((Math.floor(shore / 16 + 0.5) * 16 + 1 + BOAT_MOORING_RADIUS) / 256);
-    const p = required(n.boats(cx, cy)[0]);
-    for (let dy = -1; dy <= 1; dy++)
-      for (let dx = -1; dx <= 1; dx++) world.getChunk(cx + dx, cy + dy);
-    const boat = createVehicle(BOAT_MODEL, p.wx, p.wy);
-    expect(drivenCarPose(boat, idle, 1 / 60, world, [], []), lake.id).toBeDefined();
-    expect(boardingDistance(createPlayer(lake.x * 16, shore - 20), boat)).toBeLessThanOrEqual(
-      boardingRange(boat),
-    );
-  }
-});
-
-it("shares water-only rolling steering and reverse while refusing shore, obstacles and unloaded water", () => {
-  const world = new World(new FlatStrategy());
-  for (let y = -2; y <= 2; y++)
-    for (let x = -2; x <= 2; x++) world.getChunk(x, y).collision.fill(CollisionFlag.Water);
-  let e = createVehicle(BOAT_MODEL, 0, 0, Direction.Right);
-  const first = required(drivenCarPose(e, { dx: 0, dy: 1 }, 1 / 60, world, [], []));
-  expect(first.vehicleHeading).toBeGreaterThan(0);
-  for (let i = 0; i < 90; i++)
-    e = required(drivenCarPose(e, { dx: 0, dy: 1 }, 1 / 60, world, [], []));
-  expect(e.position.wy).toBeGreaterThan(0);
-  expect(e.position.wx).toBeGreaterThan(10);
-  e = createVehicle(BOAT_MODEL, 0, 0, Direction.Right);
-  for (let i = 0; i < 90; i++)
-    e = required(drivenCarPose(e, { dx: 0, dy: 0, reversing: true }, 1 / 60, world, [], []));
-  expect(e.velocity?.vx).toBeCloseTo(-38);
-  const dry = new World(new FlatStrategy());
-  dry.getChunk(0, 0);
-  expect(
-    drivenCarPose(createVehicle(BOAT_MODEL, 96, 96), idle, 1 / 60, dry, [], []),
-  ).toBeUndefined();
-  expect(drivenCarPose(e, idle, 1 / 60, new World(new FlatStrategy()), [], [])).toBeUndefined();
-  const other = createVehicle(BOAT_MODEL, e.position.wx - BOAT_LENGTH - 0.1, e.position.wy);
-  other.id = 99;
-  expect(drivenCarPose(e, idle, 1 / 60, world, [], [other], undefined, [])).toBeUndefined();
-});
-
-it("uses the measured hull in narrow water and lets a shore overlap retreat without going inland", () => {
-  const world = new World(new FlatStrategy());
-  for (let y = -1; y <= 1; y++) for (let x = -1; x <= 1; x++) world.getChunk(x, y);
-  // Three tile rows fit the measured beam, but not an 80px square.
-  world.getCollisionIfLoaded = (_x, y) =>
-    y >= -1 && y <= 1 ? CollisionFlag.Water : CollisionFlag.None;
-  const boat = createVehicle(BOAT_MODEL, 0, 8, Direction.Right);
-  expect(boat.collider?.width).toBe(BOAT_LENGTH);
-  expect(boat.collider?.height).toBe(BOAT_BEAM);
-  expect(drivenCarPose(boat, { dx: 1, dy: 0 }, 1 / 60, world, [], [])).toBeDefined();
-
-  // A saved/edited bank overlaps the rear by 8px. Only movement out is legal.
-  world.getCollisionIfLoaded = (x) => (x >= 0 ? CollisionFlag.Water : CollisionFlag.None);
-  const stranded = createVehicle(BOAT_MODEL, 28, 8, Direction.Right);
-  expect(
-    drivenCarPose(stranded, { dx: 1, dy: 0 }, 1 / 60, world, [], [])?.position.wx,
-  ).toBeGreaterThan(28);
-  expect(drivenCarPose(stranded, { dx: -1, dy: 0 }, 1 / 60, world, [], [])).toBeUndefined();
-  const clear = createVehicle(BOAT_MODEL, 36, 8, Direction.Right);
-  expect(drivenCarPose(clear, { dx: -1, dy: 0 }, 1 / 60, world, [], [])).toBeUndefined();
-});
-
-it("checks the rotated hull rather than dry corners of its enclosing rectangle", () => {
-  const world = new World(new FlatStrategy());
-  for (let y = -1; y <= 1; y++) for (let x = -1; x <= 1; x++) world.getChunk(x, y);
-  const boat = createVehicle(BOAT_MODEL, 0, 0);
-  boat.vehicleHeading = Math.fround(Math.PI / 4);
-  applyVehicleFacing(boat);
-  const body = entityBody(boat);
-  world.getCollisionIfLoaded = (x, y) =>
-    boxDepth(
-      body,
-      axisBox(
-        { left: x * 16, right: (x + 1) * 16, top: y * 16, bottom: (y + 1) * 16 },
-        -1e30,
-        1e30,
-      ),
-    ) > 0
-      ? CollisionFlag.Water
-      : CollisionFlag.None;
-  expect(
-    aabbLacksWater(
-      getEntityAABB(boat.position, required(boat.collider)),
-      world.getCollisionIfLoaded,
-    ),
-  ).toBe(true);
-  expect(drivenCarPose(boat, idle, 1 / 60, world, [], [])).toBeDefined();
 });

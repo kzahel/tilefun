@@ -9553,11 +9553,11 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:268"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:265"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:906"
+          "source": "src/server/Realm.ts:835"
         },
         {
           "system": "Gameplay",
@@ -10485,7 +10485,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:908"
+          "source": "src/server/Realm.ts:837"
         },
         {
           "system": "Gameplay",
@@ -10615,7 +10615,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:908"
+          "source": "src/server/Realm.ts:837"
         },
         {
           "system": "Gameplay",
@@ -29755,11 +29755,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/NaturalLandscapeRecipe.ts:268"
+          "source": "src/scenarios/NaturalLandscapeRecipe.ts:265"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:906"
+          "source": "src/server/Realm.ts:835"
         },
         {
           "system": "Gameplay",
@@ -33797,18 +33797,6 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/TowingRecipe.ts:12"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/scenarios/TransporterRecipe.ts:8"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/scenarios/TruckBedRecipe.ts:36"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/wildlife/FoodWeb.ts:722"
         }
       ]
@@ -35198,10 +35186,6 @@
         {
           "system": "Gameplay",
           "source": "src/traffic/VehicleBed.ts:218"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/workshop/TruckBedCandidate.ts:98"
         }
       ]
     },
@@ -35411,11 +35395,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:126"
+          "source": "src/client/ClientStateView.ts:125"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:635"
+          "source": "src/client/ClientStateView.ts:633"
         },
         {
           "system": "Gameplay",
@@ -35479,15 +35463,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:79"
+          "source": "src/scenarios/ScenarioSession.ts:73"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:214"
+          "source": "src/scenarios/ScenarioSession.ts:75"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:363"
+          "source": "src/scenarios/ScenarioSession.ts:134"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/ScenarioSession.ts:213"
         },
         {
           "system": "Gameplay",
@@ -35511,35 +35499,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:333"
+          "source": "src/server/Realm.ts:301"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1347"
+          "source": "src/server/Realm.ts:1261"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1551"
+          "source": "src/server/Realm.ts:1465"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2261"
+          "source": "src/server/Realm.ts:2120"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2474"
+          "source": "src/server/Realm.ts:2333"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:147"
+          "source": "src/server/RealmStreaming.ts:145"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:213"
+          "source": "src/server/RealmStreaming.ts:211"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:214"
+          "source": "src/server/RealmStreaming.ts:212"
         },
         {
           "system": "Gameplay",
@@ -35551,27 +35539,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Driving.ts:605"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/traffic/MovingSupport.ts:117"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/traffic/ParkingSystem.ts:348"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/traffic/VehicleBedSlide.ts:54"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/traffic/VehicleCargo.ts:21"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/traffic/VehiclePush.ts:146"
         },
         {
           "system": "Gameplay",
@@ -36359,19 +36327,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:484"
+          "source": "src/wildlife/AnimalWorkSystem.ts:487"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:527"
+          "source": "src/wildlife/AnimalWorkSystem.ts:532"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:575"
+          "source": "src/wildlife/AnimalWorkSystem.ts:580"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:584"
+          "source": "src/wildlife/AnimalWorkSystem.ts:589"
         },
         {
           "system": "Gameplay",
@@ -36647,23 +36615,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1442"
+          "source": "src/server/Realm.ts:1356"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2438"
+          "source": "src/server/Realm.ts:2297"
         },
         {
           "system": "Gameplay",
           "source": "src/server/RealmActivity.ts:51"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/traffic/VehiclePush.ts:107"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/traffic/VehiclePush.ts:146"
         },
         {
           "system": "Gameplay",
@@ -36675,11 +36635,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:520"
+          "source": "src/wildlife/AnimalWorkSystem.ts:525"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:581"
+          "source": "src/wildlife/AnimalWorkSystem.ts:586"
         },
         {
           "system": "Gameplay",
@@ -37513,7 +37473,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:908"
+          "source": "src/server/Realm.ts:837"
         },
         {
           "system": "Gameplay",
@@ -37647,7 +37607,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:908"
+          "source": "src/server/Realm.ts:837"
         },
         {
           "system": "Gameplay",
@@ -38211,7 +38171,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:385"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:355"
         },
         {
           "system": "Editor",

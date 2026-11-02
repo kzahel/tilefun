@@ -155,7 +155,7 @@ it("runs native motion in production Realm and retains group/manual identity and
     const deer = () => s.realm.entityManager.entities.filter((e) => e.type === DEER_TYPE);
     expect(deer().length).toBeGreaterThanOrEqual(2);
     for (let i = 0; i < 750; i++) {
-      await s.step(idle, 0.1);
+      await s.step(idle);
       for (const d of deer()) {
         expect(
           Math.hypot(
@@ -209,13 +209,13 @@ it.each([true, false])(
     });
     try {
       for (let i = 0; i < 6; i++) {
-        if (input) await s.step(idle, 1 / 60);
-        else s.tick(1 / 60);
+        if (input) await s.step(idle);
+        else s.tick();
       }
       const animal = required(s.realm.entityManager.entities.find((e) => e.type === DEER_TYPE));
       expect(s.player.player.jumpVZ).toBeUndefined();
       expect(animal.wanderAI?.state).toBe("scared");
-      for (let i = 0; i < 40; i++) await s.step(idle, 1 / 60);
+      for (let i = 0; i < 40; i++) await s.step(idle);
       expect(animal.deer?.state).toBe("flee");
       const saved = encodeActor(animal);
       await s.reload();

@@ -40,6 +40,5 @@ export function meadowWorkRecipe(kind: "rabbit" | "robin" | "meerkat"): Scenario
     props: [],
     nativeProps: kind === "robin" ? [{ type: "prop-oak-tree", wx: 128, wy: 104 }] : [],
     actors,
-    traffic: [],
   };
 }

@@ -7,10 +7,8 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { SPRITE_MANIFEST } from "../assets/GameAssets.js";
-import { RemoteStateView } from "../client/ClientStateView.js";
 import { VEHICLE_PALETTE } from "../editor/EditorPalettes.js";
 import { Direction } from "../entities/Entity.js";
-import { createPlayer } from "../entities/Player.js";
 import {
   AUTHORED_VEHICLE_MESHES,
   authoredVehicleForType,
@@ -18,17 +16,12 @@ import {
 } from "../rendering/AuthoredVehicleMeshes.js";
 import { CarMeshAsset } from "../rendering/CarMeshAsset.js";
 import { EntityMeshPose } from "../rendering/EntityMeshPose.js";
-import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
-import { ScenarioSession } from "../scenarios/ScenarioSession.js";
-import { decodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
-import { World } from "../world/World.js";
 import { AUTONOMOUS_ORIGINAL_VEHICLES } from "./AutonomousOriginalVehicles.fixture.js";
 import { verifyOriginalWheelGeometryAndTravel } from "./AutonomousOriginalVehicles.test-helper.js";
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
 import { readRetainedReplayInput } from "./RetainedReplayInputs.test-helper.js";
-import { TrafficTestHarness } from "./TrafficTestHarness.js";
 import { TRANSPORTER_EXPECTATIONS } from "./Transporter.fixture.js";
 import {
   applyVehicleFacing,
@@ -176,62 +169,6 @@ it("registers every combined model exactly once across editor, assets, traffic a
   }
 });
 
-it.each([...AUTONOMOUS_ORIGINAL_VEHICLES, TRANSPORTER_EXPECTATIONS])(
-  "admits $model through ordinary generated-road traffic selection",
-  ({ model, bounds }) => {
-    const roadWidth = bounds[1] * 2 + 12;
-    const scene = new TrafficTestHarness();
-    for (const state of [...scene.traffic.states.values()])
-      scene.entities.remove(state.entity.id, false);
-    // Isolate the target identity while retaining production lane selection,
-    // deterministic model choice, width admission and collision checks.
-    const graph = scene.strategy.trafficNetwork(4800, 8304);
-    const positions = [
-      { x: 4800, y: 8304 },
-      ...[...graph.lanes.values()].slice(0, 64).map((lane) => lane.a),
-      // Roster growth changes selector modulo; cover a bounded real-world grid.
-      ...Array.from({ length: 33 }, (_, i) => (i - 16) * 4096).flatMap((dx) =>
-        Array.from({ length: 33 }, (_, i) => ({ x: 4800 + dx, y: 8304 + (i - 16) * 4096 })),
-      ),
-    ];
-    let productionCandidates = 0;
-    for (const position of positions) {
-      scene.player.position = { wx: position.x, wy: position.y };
-      const cx = Math.floor(position.x / 256),
-        cy = Math.floor(position.y / 256);
-      scene.traffic.visibleRanges = [{ minCx: cx, maxCx: cx, minCy: cy, maxCy: cy }];
-      // Probe the ordinary deterministic selector before loading terrain. This
-      // stays bounded as future entries change its modulo and chosen identities.
-      const candidates: { wx: number; wy: number }[] = [];
-      scene.traffic.canSpawn = (identity, wx, wy) => {
-        if (identity.includes(`:${model}:`)) candidates.push({ wx, wy });
-        return false;
-      };
-      scene.traffic.tick(2.1, [scene.player]);
-      productionCandidates += candidates.length;
-      if (!candidates.length) continue;
-      for (const point of candidates) {
-        const px = Math.floor(point.wx / 256),
-          py = Math.floor(point.wy / 256);
-        for (let y = py - 2; y <= py + 2; y++)
-          for (let x = px - 2; x <= px + 2; x++) scene.world.getChunk(x, y);
-      }
-      scene.traffic.canSpawn = (identity) => identity.includes(`:${model}:`);
-      scene.traffic.tick(2.1, [scene.player]);
-      if (scene.traffic.states.size) break;
-    }
-    const car = required(
-      [...scene.traffic.states.values()][0],
-      `No ${model} after ${positions.length} generated positions and ${productionCandidates} production candidates`,
-    );
-    expect(car.entity.type).toBe(`vehicle-v1:${model}`);
-    expect(car.placed).not.toBe(true);
-    expect(car.lane.width).toBeGreaterThanOrEqual(roadWidth);
-    expect(car.entity.proceduralId).toContain("traffic-v1:");
-  },
-  20_000,
-);
-
 it("preserves the exact 45-type source bank", () => {
   expect(
     createHash("sha256").update(readFileSync("src/traffic/vehicles-v1.json")).digest("hex"),
@@ -367,159 +304,5 @@ it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
     for (const path of Object.keys(receipt.inputs))
       expect(path).not.toMatch(/^(?:data|test-results)\//);
     expect(vehiclePerformance(`vehicle-v1:${family.model}`)).toEqual(family.performance);
-  },
-);
-
-it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
-  "excludes $model from undersized roads with a live population control",
-  ({ model, bounds }) => {
-    const roadWidth = bounds[1] * 2 + 12;
-    const scene = new TrafficTestHarness();
-    for (const state of [...scene.traffic.states.values()])
-      scene.entities.remove(state.entity.id, false);
-    const graph = scene.strategy.trafficNetwork(4800, 8304);
-    const originalWidths = new Map([...graph.lanes.values()].map((lane) => [lane.id, lane.width]));
-    // Hold this generated region fixed while exercising the public population path.
-    scene.strategy.trafficNetwork = () => graph;
-    for (const lane of graph.lanes.values()) lane.width = Math.min(lane.width, roadWidth - 1);
-    const considered: string[] = [];
-    scene.traffic.canSpawn = (identity) => {
-      considered.push(identity);
-      return true;
-    };
-    const populate = () => {
-      for (const position of [
-        { x: 4800, y: 8304 },
-        ...[...graph.lanes.values()].slice(0, 12).map((lane) => lane.a),
-      ]) {
-        scene.player.position = { wx: position.x, wy: position.y };
-        const cx = Math.floor(position.x / 256),
-          cy = Math.floor(position.y / 256);
-        for (let y = cy - 7; y <= cy + 7; y++)
-          for (let x = cx - 7; x <= cx + 7; x++) scene.world.getChunk(x, y);
-        scene.traffic.visibleRanges = [{ minCx: cx, maxCx: cx, minCy: cy, maxCy: cy }];
-        scene.traffic.tick(2.1, [scene.player]);
-      }
-    };
-    populate();
-    expect(considered.some((identity) => identity.includes(`:${model}:`))).toBe(false);
-    const cars = [...scene.traffic.states.values()];
-    expect(
-      cars.every((car) => car.lane.width < roadWidth && car.entity.type !== `vehicle-v1:${model}`),
-    ).toBe(true);
-    if (roadWidth <= 80) {
-      // The shared population prefilter requires an 80px onward route before
-      // model selection. A sub-74px microcar road therefore admits no model.
-      // Restore the same real network to prove the negative used a live path.
-      expect(considered).toHaveLength(0);
-      expect(cars).toHaveLength(0);
-      for (const lane of graph.lanes.values()) lane.width = required(originalWidths.get(lane.id));
-      populate();
-      expect(considered.length).toBeGreaterThan(0);
-      expect(scene.traffic.states.size).toBeGreaterThan(0);
-    } else {
-      expect(considered.length).toBeGreaterThan(0);
-      expect(cars.length).toBeGreaterThan(0);
-    }
-  },
-);
-
-it.each(AUTONOMOUS_ORIGINAL_VEHICLES)(
-  "places, boards, drives, reloads and deletes $model through production Realm persistence",
-  async (family) => {
-    const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
-    const session = await ScenarioSession.create({
-      version: 1,
-      id: `original-${family.model}`,
-      generation: FLAT_SCENARIO,
-      player: createPlayer(0, 0),
-      props: [],
-    });
-    try {
-      session.player.editorEnabled = true;
-      session.realm.handleMessage(session.player.clientId, session.player, {
-        type: "edit-spawn",
-        entityType: `vehicle-v1:${family.model}`,
-        wx: 160,
-        wy: 0,
-      });
-      const car = required([...required(session.realm.traffic).states.values()][0]);
-      const identity = car.entity.proceduralId;
-      expect(identity).toMatch(/^placed-vehicle-v1:/);
-      expect(car.placed).toBe(true);
-      session.player.editorEnabled = false;
-      session.player.player.position = { wx: 160, wy: -16 };
-      session.realm.vehicles.enter(session.player, car.entity.id);
-      expect(session.player.player.parentId).toBe(car.entity.id);
-      // Slow work vehicles retain the same meaningful 80px movement target.
-      // Four seconds bounds the production-input control without inflating speed.
-      for (let i = 0; i < 240 && car.entity.position.wx <= 240; i++)
-        await session.step({ ...idle, dx: 1 });
-      expect(car.entity.position.wx).toBeGreaterThan(240);
-      const straight = car.entity.vehicleHeading ?? 0;
-      for (let i = 0; i < 240 && (car.entity.vehicleHeading ?? 0) > straight - 0.35; i++)
-        await session.step({ ...idle, dy: -1 });
-      expect(car.entity.vehicleHeading).toBeLessThan(straight - 0.3);
-      const forward = required(car.entity.vehicleHeading);
-      for (let i = 0; i < 240 && (car.entity.vehicleHeading ?? 0) < forward + 0.25; i++)
-        await session.step({ ...idle, dy: -1, reversing: true });
-      expect(car.entity.vehicleHeading).toBeGreaterThan(forward + 0.2);
-      for (let i = 0; i < 60; i++) await session.step(idle);
-      expect(Math.hypot(car.entity.velocity?.vx ?? 0, car.entity.velocity?.vy ?? 0)).toBe(0);
-      const stopped = { position: { ...car.entity.position }, heading: car.entity.vehicleHeading };
-      for (let i = 0; i < 30; i++) await session.step(idle);
-      expect(car.entity.position).toEqual(stopped.position);
-      expect(car.entity.vehicleHeading).toBe(stopped.heading);
-      const replica = new RemoteStateView(new World());
-      for (const packet of session.frames()) {
-        const message = decodeServerMessage(packet);
-        if (message.type === "frame" || message.type.startsWith("sync-"))
-          replica.applyMessage(message as Parameters<RemoteStateView["applyMessage"]>[0]);
-      }
-      expect(replica.entities.find((e) => e.id === car.entity.id)?.vehicleHeading).toBe(
-        stopped.heading,
-      );
-      const position = { ...car.entity.position };
-      await session.reload();
-      const restored = required(
-        [...required(session.realm.traffic).states.values()].find(
-          (state) => state.entity.proceduralId === identity,
-        ),
-      );
-      expect(restored.entity.type).toBe(`vehicle-v1:${family.model}`);
-      expect(restored.entity.position).toEqual(position);
-      expect(restored.entity.vehicleHeading).toBe(stopped.heading);
-      expect(restored.placed).toBe(true);
-      expect(session.player.player.parentId).toBe(restored.entity.id);
-      session.realm.vehicles.exit(session.player);
-      for (let i = 0; i < 60; i++) await session.step(idle);
-      expect(restored.parked).toBe(true);
-      expect(restored.entity.position).toEqual(position);
-      // Per-model support height is a physical contract, independent of GPU mesh
-      // loading. Retain real browser roof/input representatives separately.
-      const rider = session.player.player;
-      const supportHeight = family.model === "dump-truck" ? (400 / 23) * 1.25 : family.bounds[2];
-      rider.position = { ...restored.entity.position };
-      rider.wz = supportHeight + 3;
-      rider.jumpZ = rider.wz;
-      rider.jumpVZ = -40;
-      session.realm.entityManager.spatialHash.update(rider);
-      for (let i = 0; i < 12; i++) await session.step(idle);
-      expect(rider.wz).toBe(supportHeight);
-      session.player.editorEnabled = true;
-      session.realm.handleMessage(session.player.clientId, session.player, {
-        type: "edit-delete-entity",
-        entityId: restored.entity.id,
-      });
-      await session.step(idle);
-      await session.reload();
-      expect(
-        [...required(session.realm.traffic).states.values()].some(
-          (state) => state.entity.proceduralId === identity,
-        ),
-      ).toBe(false);
-    } finally {
-      await session.close();
-    }
   },
 );

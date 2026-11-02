@@ -73,7 +73,6 @@ it("ticks independently of inputs and output pressure without awaiting a ready v
           id: 3,
           kind: "step",
           input: { dx: 0, dy: 0, jump: false, sprinting: false },
-          dt: 1 / 60,
         })
       ).error,
     ).toContain("Pause authority");

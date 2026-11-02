@@ -13,7 +13,7 @@ afterEach(async () => {
   for (const session of sessions.values()) await session.close();
   sessions.clear();
 });
-async function step(m: FurnitureMotion, dx: number, dy: number, dt = 1 / 120, jump = false) {
+async function step(m: FurnitureMotion, dx: number, dy: number, jump = false) {
   let session = sessions.get(m);
   if (!session) {
     session = await ScenarioSession.create(furnitureRecipe(m));
@@ -21,7 +21,7 @@ async function step(m: FurnitureMotion, dx: number, dy: number, dt = 1 / 120, ju
   }
   const player = session.player.player;
   Object.assign(player, structuredClone(m.player), { id: player.id, type: "player" });
-  await session.step({ dx, dy, jump, sprinting: false }, dt);
+  await session.step({ dx, dy, jump, sprinting: false });
   Object.assign(m.player, JSON.parse(JSON.stringify(player)));
   if (player.jumpVZ === undefined) delete m.player.jumpVZ;
 }
@@ -120,7 +120,7 @@ describe("furniture in shared game physics", () => {
     let maxZ = 0;
     for (let i = 0; i < 500; i++) {
       const z = m.player.wz ?? 0;
-      await step(m, 0, z > 34 && m.player.position.wy > 84 ? -1 : 0, 1 / 120, true);
+      await step(m, 0, z > 34 && m.player.position.wy > 84 ? -1 : 0, true);
       maxZ = Math.max(maxZ, m.player.wz ?? 0);
     }
     expect(maxZ).toBeGreaterThan(32);
@@ -139,7 +139,7 @@ describe("furniture in shared game physics", () => {
       m.gravityScale = gravity;
       let highest = 0;
       for (let i = 0; i < 600; i++) {
-        await step(m, 0, 0, 1 / 120, true);
+        await step(m, 0, 0, true);
         highest = Math.max(highest, m.player.wz ?? 0);
       }
       return highest;
@@ -153,7 +153,7 @@ describe("furniture in shared game physics", () => {
     expect(m.canStand(80, 84, 32)).toBe(true);
     m.setBody("wardrobe", { height: 48, walkableTop: false });
     expect(m.canStand(80, 84, 32)).toBe(false);
-    await step(m, 0, 0, 1 / 120, true);
+    await step(m, 0, 0, true);
     m.resetPlayer();
     expect(m.player.wz).toBe(0);
     expect(m.player.jumpVZ).toBeUndefined();

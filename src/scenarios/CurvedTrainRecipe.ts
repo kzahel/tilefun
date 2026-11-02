@@ -1,12 +1,10 @@
 import { required } from "../art/ArtCatalog.js";
-import { createPlayer } from "../entities/Player.js";
 import {
   RailAlignment,
   type RailPath,
   type RailSegment,
   segmentLength,
 } from "../railway/RailPath.js";
-import { FLAT_SCENARIO, type ScenarioRecipe } from "./ScenarioRecipe.js";
 
 const line = (x: number, y: number, endX: number, endY: number): RailSegment => ({
   kind: "line",
@@ -24,7 +22,7 @@ const arc = (x: number, y: number, angle: number, sweep: number): RailSegment =>
   radius: 256,
 });
 /** A loop with four stops, or a two-terminus corridor with opposite bends and a through stop. */
-export function curvedTrainRecipe(loop = true, reverse = false): ScenarioRecipe {
+export function curvedTrackPath(loop = true, reverse = false): RailPath {
   const segments: RailSegment[] = loop
     ? [
         line(-384, -512, 384, -512),
@@ -63,12 +61,5 @@ export function curvedTrainRecipe(loop = true, reverse = false): ScenarioRecipe 
         ],
   };
   new RailAlignment(path);
-  return {
-    version: 1,
-    id: loop ? "train-town-loop-v1" : "train-winding-link-v1",
-    generation: FLAT_SCENARIO,
-    player: createPlayer(loop ? 0 : -1088, loop ? -400 : 480),
-    props: [],
-    railways: [{ id: "curved-service", start: -100, end: 100, y: 0, path }],
-  };
+  return path;
 }

@@ -10,7 +10,6 @@ import {
   TRANSPORTER,
   transporterWorld,
 } from "../traffic/CarTransporter.js";
-import { isDrivable } from "../traffic/Driving.js";
 import {
   hasVehicleLights,
   isWarningVehicle,
@@ -26,6 +25,7 @@ import {
   hasDetailedVehicleSurface,
 } from "../traffic/VehicleBed.js";
 import { gradeRoofOffset, vehicleGroundPose } from "../traffic/VehicleGroundPose.js";
+import { isDrivable } from "../traffic/VehicleSeats.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
 import { isCarryable } from "../wildlife/ForageResources.js";
 import { isRoadkill, ROADKILL_FADE_SECONDS, ROADKILL_SCALE_Y } from "../wildlife/Roadkill.js";

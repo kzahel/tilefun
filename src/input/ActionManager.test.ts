@@ -8,13 +8,13 @@ function makeCanvas(width = 800, height = 600): HTMLCanvasElement {
 }
 
 describe("ActionManager", () => {
-  it("opens contextual actions with Q without throwing or jumping", () => {
+  it("dispatches interact without throwing or jumping", () => {
     const actions = new ActionManager();
     const context = vi.fn(),
       throwing = vi.fn();
-    actions.on("context_actions", context);
+    actions.on("enter_place", context);
     actions.on("throw", throwing);
-    actions.pressKey("q");
+    actions.pressKey("e");
     expect(context).toHaveBeenCalledOnce();
     expect(throwing).not.toHaveBeenCalled();
     expect(actions.getMovement().jump).toBe(false);

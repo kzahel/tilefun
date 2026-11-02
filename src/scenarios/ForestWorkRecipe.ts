@@ -24,6 +24,5 @@ export function forestWorkRecipe(kind: "deer" | "peacock" | "raven"): ScenarioRe
     player: createPlayer(320, 304),
     actors,
     props: [],
-    traffic: [],
   };
 }

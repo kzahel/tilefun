@@ -25,6 +25,5 @@ export function animalWorkRecipe(kind: "dog" | "crow" | "squirrel"): ScenarioRec
     props: [],
     nativeProps: kind === "crow" ? [{ type: "prop-oak-tree", wx: 128, wy: 104 }] : [],
     actors: [worker, ...resources],
-    traffic: [],
   };
 }

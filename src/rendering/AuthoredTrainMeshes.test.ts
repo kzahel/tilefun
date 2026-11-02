@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
 import { createCurveTrain } from "../railway/CurveTrain.js";
 import { RailAlignment } from "../railway/RailPath.js";
-import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
+import { curvedTrackPath } from "../scenarios/CurvedTrainRecipe.js";
 import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
 import { EntityMeshPose, meshAssetFor } from "./EntityMeshPose.js";
 
@@ -19,7 +19,7 @@ it("selects three reviewed carriage identities by default, independently of the 
 });
 
 it("reverses signed wheel travel while retaining the physical end orientation and simulation", () => {
-  const path = curvedTrainRecipe().railways?.[0]?.path;
+  const path = curvedTrackPath();
   if (!path) throw Error("Missing train fixture");
   const cars = createCurveTrain(new RailAlignment(path), 200);
   const train = cars[2];
@@ -49,7 +49,7 @@ it("reverses signed wheel travel while retaining the physical end orientation an
 });
 
 it("uses independent continuous curve tangents and preserves them when velocity reverses", () => {
-  const path = curvedTrainRecipe().railways?.[0]?.path;
+  const path = curvedTrackPath();
   if (!path) throw Error("Missing train fixture");
   const cars = createCurveTrain(new RailAlignment(path), 900);
   const poses = new EntityMeshPose();

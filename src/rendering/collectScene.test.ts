@@ -6,7 +6,7 @@ import { Direction, type Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { createCurveTrain } from "../railway/CurveTrain.js";
 import { RailAlignment } from "../railway/RailPath.js";
-import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
+import { curvedTrackPath } from "../scenarios/CurvedTrainRecipe.js";
 import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { createVehicle, VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { DUMP_BED, hasDetailedVehicleSurface, hasVehicleBed } from "../traffic/VehicleBed.js";
@@ -304,7 +304,7 @@ function collect(entity: Entity, alpha = 1, zoom = 1 / 3, frame?: SceneFrame, he
 }
 
 it("keeps a native train comparison disabled and uses physical heading in frameless collection", () => {
-  const path = curvedTrainRecipe().railways?.[0]?.path;
+  const path = curvedTrackPath();
   if (!path) throw Error("Missing train path");
   const train = createCurveTrain(new RailAlignment(path), 900)[2];
   if (!train?.sprite) throw Error("Missing front carriage");

@@ -1,12 +1,12 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
-import { curvedTrainRecipe } from "../scenarios/CurvedTrainRecipe.js";
+import { curvedTrackPath } from "../scenarios/CurvedTrainRecipe.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { createCurveTrain } from "./CurveTrain.js";
 import { carriagePose, RailAlignment, segmentLength } from "./RailPath.js";
 
-const path = (loop = true) => required(required(curvedTrainRecipe(loop).railways)[0]?.path);
+const path = (loop = true) => curvedTrackPath(loop);
 it("joins straights and arcs tangentially and wraps the loop without a seam", () => {
   const a = new RailAlignment(path());
   let distance = 0;

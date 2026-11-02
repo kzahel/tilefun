@@ -22,7 +22,7 @@ it.each(["dog", "crow", "squirrel"] as const)(
       const headings = new Set<number>();
       let reloaded = false;
       for (let i = 0; i < 90 * 30 && !animal.animalWork?.deliveries; i++) {
-        await s.step(idle, 1 / 30);
+        await s.step(idle);
         if (!animal.fauna?.motion) continue;
         const dx = animal.fauna.target.wx - animal.position.wx;
         const dy = animal.fauna.target.wy - animal.position.wy;
@@ -177,7 +177,7 @@ it("releases a carried resource on alarm without consuming or duplicating it", a
     await until(s, () => !!squirrel.animalWork?.heldId);
     const id = squirrel.animalWork?.heldId;
     startleFauna(squirrel, { wx: squirrel.position.wx - 8, wy: squirrel.position.wy });
-    await s.step(idle, 1 / 30);
+    await s.step(idle);
     const item = required(s.realm.entityManager.entities.find((e) => e.persistentId === id));
     expect(item.parentId).toBeUndefined();
     expect(item.workItem?.claimedBy).toBeUndefined();
@@ -197,7 +197,7 @@ it("restores the eating action and attached food before the first reload snapsho
   try {
     let squirrel = actor(s, "red-squirrel");
     await until(s, () => squirrel.animalWork?.state === "eat", 120);
-    await s.step(idle, 0.1);
+    await s.step(idle);
     const held = squirrel.animalWork?.heldId,
       clip = squirrel.sprite?.clip;
     await s.reload();
@@ -216,7 +216,7 @@ it("restores the eating action and attached food before the first reload snapsho
 const actor = (s: ScenarioSession, kind: string) =>
   required(s.realm.entityManager.entities.find((e) => e.type.includes(kind) && e.fauna));
 async function until(s: ScenarioSession, test: () => boolean, seconds = 45) {
-  for (let i = 0; i < seconds * 30 && !test(); i++) await s.step(idle, 1 / 30);
+  for (let i = 0; i < seconds * 60 && !test(); i++) await s.step(idle);
   if (!test())
     throw Error(
       JSON.stringify(

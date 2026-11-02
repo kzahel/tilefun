@@ -43,7 +43,6 @@ it.each([false, true])(
       player: createPlayer(64, 192),
       props: [],
       actors: [hunter, deer],
-      traffic: [],
     });
     try {
       const bird = () =>
@@ -117,7 +116,6 @@ it("lands on an ordinary perch inserted beneath an already committed descending 
     player: createPlayer(64, 192),
     props: [],
     actors: [bird],
-    traffic: [],
   });
   try {
     await session.step(idle);

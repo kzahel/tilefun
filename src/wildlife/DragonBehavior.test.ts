@@ -43,7 +43,6 @@ it("owns one durable hoard, returns home, and respects deletion of its treasure"
     player: createPlayer(64, 192),
     props: [],
     actors: [dragon],
-    traffic: [],
   });
   try {
     const hoards = () =>

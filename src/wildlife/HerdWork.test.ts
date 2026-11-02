@@ -22,7 +22,7 @@ const context: WorkContext = {
   ready: () => true,
 };
 async function until(s: ScenarioSession, check: () => boolean, seconds = 80) {
-  for (let i = 0; i < seconds * 30 && !check(); i++) await s.step(idle, 1 / 30);
+  for (let i = 0; i < seconds * 60 && !check(); i++) await s.step(idle);
   expect(
     animals(s).map((e) => ({ p: e.position, work: e.animalWork, ai: e.fauna })),
     "Timed out",
@@ -58,7 +58,7 @@ it("interrupted cow rumination keeps its paid meal and resumes without eating ag
     const a = animal(s);
     await until(s, () => a.animalWork?.state === "ruminate");
     startleFauna(a, { wx: a.position.wx + 10, wy: a.position.wy });
-    await s.step(idle, 1 / 30);
+    await s.step(idle);
     expect(a.animalWork?.ruminated ?? 0).toBe(0);
     expect(a.animalWork?.eaten).toBe(1);
     expect(item(s).workItem?.claimedBy).toBeUndefined();
@@ -298,7 +298,7 @@ it("natural cow and donkey supplies preserve manual placement semantics", async 
     r.actors = [createFauna(kind, 112, 176)];
     const s = await ScenarioSession.create(r);
     try {
-      for (let i = 0; i < 90; i++) await s.step(idle, 1 / 30);
+      for (let i = 0; i < 90; i++) await s.step(idle);
       expect(s.realm.entityManager.entities.some((e) => e.workItem)).toBe(false);
     } finally {
       await s.close();

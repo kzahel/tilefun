@@ -102,7 +102,7 @@ it("loose food does not dilute bounded predator prey acquisition", async () => {
       const hunter = required(s.realm.entityManager.entities.find((e) => e.predator));
       const frames = [];
       for (let i = 0; i < 600 && !hunter.predator?.meals; i++) {
-        await s.step(idle, 1 / 30);
+        await s.step(idle);
         frames.push({
           p: { ...hunter.position },
           state: hunter.predator?.state,
@@ -118,7 +118,7 @@ it("loose food does not dilute bounded predator prey acquisition", async () => {
   expect(outcomes[1]).toEqual(outcomes[0]);
 }, 60000);
 async function until(s: ScenarioSession, check: () => boolean, seconds = 45) {
-  for (let i = 0; i < seconds * 30 && !check(); i++) await s.step(idle, 1 / 30);
+  for (let i = 0; i < seconds * 60 && !check(); i++) await s.step(idle);
   if (!check())
     throw Error(
       JSON.stringify(
@@ -186,7 +186,7 @@ it("does not create resources for a manually placed animal and refuses unready o
     });
     expect(plant.workItem?.claimedBy).toBeUndefined();
     s.realm.entityManager.remove(plant.id);
-    for (let i = 0; i < 120; i++) await s.step(idle, 1 / 30);
+    for (let i = 0; i < 120; i++) await s.step(idle);
     expect(s.realm.entityManager.entities.some((e) => e.workItem)).toBe(false);
     expect(rabbit.animalWork?.eaten).toBe(0);
   } finally {
@@ -246,7 +246,7 @@ it("lookout alarms leave following companions protected and ignore harmless anim
     await until(s, () => group.some((e) => e.animalWork?.state === "scan"));
     const watcher = required(group.find((e) => e.animalWork?.state === "scan"));
     s.realm.entityManager.spawn(createFauna("dog", watcher.position.wx + 100, watcher.position.wy));
-    for (let i = 0; i < 45; i++) await s.step(idle, 1 / 30);
+    for (let i = 0; i < 45; i++) await s.step(idle);
     expect(watcher.animalWork?.state).toBe("scan");
     const buddy = required(group.find((e) => e !== watcher));
     if (buddy.wanderAI) buddy.wanderAI.following = true;
@@ -342,7 +342,7 @@ it("rabbits release claimed food on a scare and competing animals cannot duplica
     const rabbit = required(s.realm.entityManager.entities.find((e) => e.rabbit));
     await until(s, () => rabbit.animalWork?.state === "eat");
     s.player.player.position = { ...rabbit.position };
-    await s.step(idle, 0.1);
+    await s.step(idle);
     const plant = required(
       s.realm.entityManager.entities.find((e) => e.workItem?.kind === "greens"),
     );

@@ -92,7 +92,7 @@ it.each(subjects)(
           });
         }
         // Explicit fixed stepping runs the real authority without wall-clock waits.
-        session.tick(1 / 60);
+        session.tick();
         const live = observe();
         scared ||= live.wanderAI?.state === "scared";
         ricochet ||= session.realm.entityManager.entities.some(

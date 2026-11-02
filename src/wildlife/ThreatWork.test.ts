@@ -26,7 +26,7 @@ const context: WorkContext = {
   environment: { canOccupy: () => true, isWater: () => false, surfaceZ: () => 0 },
 };
 async function until(s: ScenarioSession, p: () => boolean, seconds = 30) {
-  for (let i = 0; i < seconds * 30 && !p(); i++) await s.step(idle, 1 / 30);
+  for (let i = 0; i < seconds * 60 && !p(); i++) await s.step(idle);
   expect(
     actors(s).map((e) => ({ type: e.type, work: e.animalWork, ai: e.fauna, p: e.position })),
   ).toSatisfy(() => p());
@@ -96,7 +96,7 @@ it.each(["hedgehog", "porcupine", "fox"] as const)(
     r.actors = required(r.actors).slice(0, 1);
     const s = await ScenarioSession.create(r);
     try {
-      for (let i = 0; i < 150; i++) await s.step(idle, 1 / 30);
+      for (let i = 0; i < 150; i++) await s.step(idle);
       expect(actors(s).filter((e) => e.fauna || e.predator)).toHaveLength(1);
       expect(actors(s).some((e) => e.workItem)).toBe(false);
     } finally {
@@ -183,7 +183,7 @@ it.each(["remove", "move", "raise", "carry"] as const)(
         prey.jumpZ = 12;
         prey.jumpVZ = 60;
       } else prey.parentId = s.player.player.id;
-      await s.step(idle, 1 / 30);
+      await s.step(idle);
       expect(a.animalWork?.state).toBe("pounce");
       expect(a.fauna?.motion).toBeDefined();
       await until(s, () => !a.fauna?.motion);

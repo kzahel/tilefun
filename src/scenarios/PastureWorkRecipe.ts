@@ -24,6 +24,5 @@ export function pastureWorkRecipe(kind: "goat" | "pig" | "elephant"): ScenarioRe
           ? [{ type: "prop-oak-tree", wx: 208, wy: 152 }]
           : [],
     actors: [animal, food],
-    traffic: [],
   };
 }

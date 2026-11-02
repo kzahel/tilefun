@@ -29,7 +29,7 @@ export interface SavedMeta {
 
 /** Bounded inspection DTO; never persisted as a world-wide actor snapshot. */
 export interface InspectionState extends SavedMeta {
-  traffic?: import("../traffic/TrafficSystem.js").SavedTraffic[];
+  vehicles?: import("../traffic/VehicleRegistry.js").SavedVehicle[];
   deletedProceduralIds?: string[];
   proceduralEdits?: SerializedEntity[];
   entities?: SerializedEntity[];
@@ -45,7 +45,6 @@ export interface SavedPlayerData {
   /** Preserve total and passive XY motion only for an airborne save. */
   airborneVelocity?: { vx: number; vy: number; momentumX?: number; momentumY?: number };
   mount?: { id: string; offsetX: number; offsetY: number; wz: number; jumpZ: number };
-  roofRide?: { identity: string; offsetX: number; offsetY: number; height?: number };
   returnLocation?: import("../server/PlayerSession.js").PlayerSession["returnLocation"];
   gemsCollected: number;
   x: number;

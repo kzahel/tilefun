@@ -1,4 +1,17 @@
-# Generated railways, stations and trains
+# Generated railways and retained train assets
+
+Status: train services and driving/recall/roof-carry control are deferred by physics reset 205.
+Updated: 2026-11-03.
+
+[205](../tactical/205-physics-reset.md) deletes the railway motion/passenger service,
+train recall command and corresponding executable lab controls. Static regional
+tracks, stations, bridge geometry, route planning and exact authored train banks
+remain. Retained rail alignment tests exercise geometry and asset data without a
+second simulation. Old train lab bookmarks explain the deferral. Services must
+return through the common physics scene if resumed later.
+
+The delivery details and validation below describe the earlier implementation.
+
 
 Topic: trains
 Status: generated two-city trains, broad curves, cached pixel tracks, inside driving and saved roof riding delivered; loops remain authored lab fixtures.

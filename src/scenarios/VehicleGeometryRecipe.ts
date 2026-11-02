@@ -1,5 +1,5 @@
+import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
-import { type Lane, path, samplePath } from "../traffic/LaneGraph.js";
 import { railCrossingRecipe } from "./RailCrossingRecipe.js";
 import { type ScenarioRecipe, scenarioWalls } from "./ScenarioRecipe.js";
 import { undergroundGarageRecipe } from "./UndergroundGarageRecipe.js";
@@ -14,8 +14,7 @@ export const VEHICLE_BRIDGE_STARTS = {
   trackside: { position: { wx: 80, wy: 40 }, z: 0 },
 };
 
-/** Straight, terminal production traffic routes. Shared footprint support checks
- * the upright body envelope; vehicle meshes follow their measured wheel contacts. */
+/** Ordinary controlled cars and authored static surfaces, sharing the game physics. */
 export function vehicleGeometryRecipe(
   garage: boolean,
   reverse = false,
@@ -23,26 +22,12 @@ export function vehicleGeometryRecipe(
 ): ScenarioRecipe {
   const base = garage ? undergroundGarageRecipe() : railCrossingRecipe();
   const a = garage ? { x: reverse ? 80 : -272, y: 0 } : { x: 0, y: reverse ? -384 : 384 };
-  const b = garage ? { x: reverse ? -320 : 128, y: 0 } : { x: 0, y: reverse ? 416 : -416 };
-  const route = path([a, b]);
-  const lane: Lane = {
-    id: `vehicle-${garage ? "garage" : "bridge"}-${reverse ? "return" : "outbound"}`,
-    from: "start",
-    to: "end",
-    a,
-    b,
-    path: route,
-    direction: samplePath(route, 0).direction,
-    width: 96,
-    intercity: false,
-    surfaceFollowing: true,
-  };
-  const start = garage ? VEHICLE_GARAGE_STARTS.garage : VEHICLE_BRIDGE_STARTS.bridge;
-  const player = createPlayer(start.position.wx, start.position.wy);
-  player.wz = player.groundZ = start.z;
+  const z = garage && reverse ? -48 : 0;
+  const player = createPlayer(a.x + (garage ? 0 : 32), a.y + (garage ? 32 : 0));
+  player.wz = player.groundZ = z;
   return {
     ...base,
-    id: lane.id,
+    id: `vehicle-${garage ? "garage" : "bridge"}-${reverse ? "return" : "outbound"}`,
     player,
     props: [
       ...base.props.filter((p) => p.collider?.surface),
@@ -53,17 +38,20 @@ export function vehicleGeometryRecipe(
         ? { left: -336, right: 160, top: -32, bottom: 32 }
         : { left: -48, right: 48, top: -448, bottom: 448 },
     ],
-    trafficLanes: [lane],
-    trafficSpeed: 72,
-    traffic: [
+    parkedVehicles: [
       {
         name: "car",
         model,
-        laneId: lane.id,
-        x: a.x,
-        y: a.y,
-        distance: 0,
-        z: garage && reverse ? -48 : 0,
+        wx: a.x,
+        wy: a.y,
+        z,
+        facing: garage
+          ? reverse
+            ? Direction.Left
+            : Direction.Right
+          : reverse
+            ? Direction.Down
+            : Direction.Up,
       },
     ],
   };

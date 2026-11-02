@@ -70,12 +70,12 @@ it("a real throw clears its owner, hits a duck, and preserves the duck through e
       dirY: 0,
       force: 0,
     });
-    await s.step(idle, 1 / 60);
+    await s.step(idle);
     expect(Math.abs(s.player.player.velocity?.vx ?? 0)).toBeLessThan(0.01);
     const states = new Set<string>();
     const duck = required(s.realm.entityManager.entities.find((e) => e.type === MALLARD_TYPE));
     for (let i = 0; i < 260; i++) {
-      await s.step(idle, 1 / 60);
+      await s.step(idle);
       states.add(required(duck.mallard).state);
     }
     expect(states.has("startle")).toBe(true);
@@ -104,20 +104,20 @@ it.each([true, false])(
       const duck = () =>
         required(s.realm.entityManager.entities.find((e) => e.type === MALLARD_TYPE));
       for (let i = 0; i < 8; i++) {
-        if (input) await s.step(idle, 1 / 60);
-        else s.tick(1 / 60);
+        if (input) await s.step(idle);
+        else s.tick();
       }
       expect(s.player.player.jumpVZ).toBeUndefined();
       expect(duck().mallard?.state).toBe("startle");
       const id = duck().persistentId;
-      for (let i = 0; i < 60; i++) await s.step(idle, 1 / 60);
+      for (let i = 0; i < 60; i++) await s.step(idle);
       expect(duck().mallard?.state).toBe("flight");
       expect(duck().wz).toBeGreaterThan(0);
       const saved = encodeActor(duck());
       await s.reload();
       expect(duck().persistentId).toBe(id);
       expect(duck().mallard).toEqual(saved.state.mallard);
-      for (let i = 0; i < 210; i++) await s.step(idle, 1 / 60);
+      for (let i = 0; i < 210; i++) await s.step(idle);
       expect(duck().mallard?.state).not.toBe("flight");
       expect(Math.abs(duck().wz ?? 0)).toBeLessThan(0.05);
       expect(duck().persistentId).toBe(id);

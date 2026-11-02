@@ -95,7 +95,7 @@ it("replicates excavation geometry and predicts negative-height movement through
     for (let i = 1; i <= 270; i++) {
       const input = { ...idle, dx: 1 };
       predictInput(predictor, firstSeq + i - 1, input, dt, view.world, view.props, view.entities);
-      await s.step(input, dt);
+      await s.step(input);
       for (const buffer of s.frames()) {
         const m = decodeServerMessage(buffer);
         if (m.type !== "sync-cvars" && (m.type === "frame" || m.type.startsWith("sync-")))

@@ -942,25 +942,6 @@ export default function NaturalLandscapePage() {
         >
           Save / reload scene
         </button>
-        {caseId === "train" && (
-          <>
-            <button
-              type="button"
-              onClick={() => {
-                setFollow(true);
-                void host.current
-                  ?.command({ kind: "train-position", roof: true })
-                  .catch((e) => setError(String(e)));
-                canvas.current?.focus();
-              }}
-            >
-              Ride train roof
-            </button>
-            <button type="button" onClick={() => setFollow(!follow)}>
-              {follow ? "Follow player" : "Follow train"}
-            </button>
-          </>
-        )}
         {(FAUNA_PROFILES.some((p) => p.species === caseId)
           ? FAUNA_PROFILES.filter((p) => p.species === caseId).map((p) => ({
               type: faunaType(p.species),

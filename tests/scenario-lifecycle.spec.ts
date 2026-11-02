@@ -24,10 +24,7 @@ test("lab navigation and tuning dispose Worker sessions without creating saved w
     await page.evaluate(() => {
       location.hash = "#/tool/traffic";
     });
-    await expect(page.getByLabel("Generated traffic playground")).toHaveAttribute(
-      "data-ready",
-      "true",
-    );
+    await expect(page.getByLabel("World geometry scene")).toHaveAttribute("data-ready", "true");
     await expect.poll(() => page.workers().length).toBe(1);
     await page.getByRole("button", { name: "Reset scene", exact: true }).click();
     await expect.poll(() => page.workers().length).toBe(1);

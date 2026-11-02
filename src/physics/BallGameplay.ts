@@ -37,7 +37,7 @@ export function tickSharedBallGameplay(
       ball.deathTimer ??= BALL_DESPAWN_TIME;
     if (scene.incomingSpeed(ball.id) < 8) continue;
     for (const id of scene.contactIds(ball.id) ?? []) {
-      if (id === ball.ballThrowerId) continue;
+      if (id === ball.ballThrowerId || scene.incomingContactSpeed(ball.id, id) < 8) continue;
       const other = manager.byId.get(id);
       if (!other || other.type === "ball") continue;
       const dx = other.position.wx - ball.position.wx,

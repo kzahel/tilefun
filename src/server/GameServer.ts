@@ -1,5 +1,4 @@
 import type { BlendGraph } from "../autotile/BlendGraph.js";
-import { isBoat } from "../boats/Boat.js";
 import {
   applyPlayerModel,
   isPlayerModel,
@@ -51,9 +50,7 @@ import {
 } from "../persistence/WorldInspection.js";
 import { WorldStorePool } from "../persistence/WorldStorePool.js";
 import type { ClientMessage, RealmInfo, WorldMapMessage } from "../shared/protocol.js";
-import { drivenCarPose } from "../traffic/Driving.js";
 import type { IServerTransport } from "../transport/Transport.js";
-import { around } from "./InterestManager.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { Realm } from "./Realm.js";
 import { type RealmDestination, RealmTransitions } from "./RealmTransitions.js";
@@ -837,39 +834,6 @@ export class GameServer {
               y: saved.player.y / TILE_SIZE,
               generation: realm.generation,
             };
-            // A saved inside driver is supported by the actual durable boat,
-            // rather than standing on the water below it. Explicit travel still
-            // follows ordinary dry-arrival checks and clears the driving seat.
-            if (saved.player.driving) {
-              await realm.ensureReady(
-                around(Math.floor(saved.player.x / 256), Math.floor(saved.player.y / 256), 3),
-              );
-              const boat = realm.entityManager.entities.find(
-                (e) => isBoat(e) && e.proceduralId === saved.player.driving?.identity,
-              );
-              if (
-                boat?.collider &&
-                realm.vehicles.available(boat.id) &&
-                Math.hypot(boat.position.wx - saved.player.x, boat.position.wy - saved.player.y) < 2
-              ) {
-                if (
-                  drivenCarPose(
-                    { ...boat, velocity: { vx: 0, vy: 0 } },
-                    { dx: 0, dy: 0 },
-                    1 / 60,
-                    realm.world,
-                    realm.propManager.props,
-                    realm.entityManager.entities,
-                  )
-                )
-                  return {
-                    realm,
-                    allowInterior: true,
-                    savedPlayer: saved.player,
-                    returnLocation: saved.player.returnLocation ?? null,
-                  };
-              }
-            }
             const position = await safeArrival(realm, arrival);
             const exact = position.wx === saved.player.x && position.wy === saved.player.y;
             return {
@@ -1486,43 +1450,13 @@ export class GameServer {
 
     // Global messages handled by GameServer
     switch (msg.type) {
-      case "call-train": {
-        const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
-        void this.trackOperation(
-          realm
-            ? realm.callTrain(session, msg.benchId)
-            : Promise.reject(Error("Train unavailable.")),
-        )
-          .then(() =>
-            this.transport.send(clientId, { type: "train-called", requestId: msg.requestId }),
-          )
-          .catch((error) =>
-            this.transport.send(clientId, {
-              type: "request-error",
-              requestId: msg.requestId,
-              message: error instanceof Error ? error.message : String(error),
-            }),
-          );
-        return;
-      }
-      case "vehicle-transporter-action":
-      case "vehicle-tow-action":
-      case "vehicle-bed-action":
       case "enter-vehicle":
       case "exit-vehicle": {
         try {
           const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
           if (!realm || session.transitioning || realm.saveManager?.pressured)
             throw Error("Vehicle control is unavailable right now.");
-          if (msg.type === "vehicle-transporter-action") {
-            realm.vehicles.transporter(session, msg.entityId, msg.action);
-          } else if (msg.type === "vehicle-tow-action") {
-            if (!Number.isSafeInteger(msg.entityId)) throw Error("Invalid vehicle.");
-            realm.vehicles.tow(session, msg.entityId, msg.action);
-          } else if (msg.type === "vehicle-bed-action") {
-            if (!Number.isSafeInteger(msg.entityId)) throw Error("Invalid vehicle.");
-            realm.vehicles.bed(session, msg.entityId, msg.action);
-          } else if (msg.type === "enter-vehicle") {
+          if (msg.type === "enter-vehicle") {
             if (!Number.isSafeInteger(msg.entityId)) throw Error("Invalid vehicle.");
             realm.vehicles.enter(session, msg.entityId);
           } else realm.vehicles.exit(session);

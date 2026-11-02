@@ -1,8 +1,6 @@
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
-import type { RailRoute } from "../railway/RailwaySystem.js";
-import type { Lane } from "../traffic/LaneGraph.js";
 
 /** Data only: the Realm owns all updates, collisions, AI and persistence. */
 export interface ScenarioRecipe {
@@ -17,38 +15,20 @@ export interface ScenarioRecipe {
   /** Known ordinary prop identities retain production AI semantics and persistence. */
   nativeProps?: { type: string; wx: number; wy: number }[];
   actors?: Entity[];
-  /** Native parked bodies use durable TrafficRecords, just like editor placement. */
+  /** Native parked bodies use durable VehicleRecords, just like editor placement. */
   parkedVehicles?: {
     model: string;
+    name?: string;
+    z?: number;
     paintSchemeId?: string;
     wx: number;
     wy: number;
     facing: import("../entities/Entity.js").Direction;
   }[];
-  /** Authored straight or curved tracks, served by the production RailwaySystem. */
-  railways?: RailRoute[];
-  /** Initial saved positions for generated services in temporary review worlds. */
-  railwayStarts?: { id: string; x: number; target: 0 | 1 }[];
   gravity?: number;
   /** Bounded Worker timings, sampled on explicit diagnostics requests. */
   measurePhysics?: boolean;
-  parking?: import("../traffic/ParkingSystem.js").ParkingLot;
-  trafficLanes?: Lane[];
-  trafficSpeed?: number;
-  /** Keep normal generated traffic/parked population alongside staged road cars. */
-  trafficPopulation?: boolean;
   roads?: { left: number; right: number; top: number; bottom: number }[];
-  traffic?: {
-    z?: number;
-    model: string;
-    paintSchemeId?: string;
-    laneId: string;
-    x: number;
-    y: number;
-    distance: number;
-    name: string;
-    vehicleBed?: true;
-  }[];
 }
 export const FLAT_SCENARIO = {
   type: "flat",
@@ -68,7 +48,7 @@ export function applyScenarioAppearance(entity: Entity, template: Entity): void 
   if (template.sortOffsetY === undefined) delete entity.sortOffsetY;
   else entity.sortOffsetY = template.sortOffsetY;
   if (template.sprite && entity.sprite) {
-    const { direction, frameRow, frameCol, moving, animTimer } = entity.sprite;
+    const { direction, frameRow, frameCol, moving, animTimer, clip, clipElapsedMs } = entity.sprite;
     entity.sprite = {
       ...structuredClone(template.sprite),
       direction,
@@ -77,6 +57,10 @@ export function applyScenarioAppearance(entity: Entity, template: Entity): void 
       moving,
       animTimer,
     };
+    if (clip === undefined) delete entity.sprite.clip;
+    else entity.sprite.clip = clip;
+    if (clipElapsedMs === undefined) delete entity.sprite.clipElapsedMs;
+    else entity.sprite.clipElapsedMs = clipElapsedMs;
   } else entity.sprite = structuredClone(template.sprite);
 }
 /** Invisible ordinary wall props, shared by every bounded fixture. */

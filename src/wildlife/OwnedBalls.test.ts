@@ -58,7 +58,7 @@ it("throws ten persistent toys, evicts oldest across reload/unload, and keeps or
       delete b.jumpVZ;
       delete b.jumpZ;
     }
-    for (let i = 0; i < 1200; i++) await s.step(idle, 1 / 30);
+    for (let i = 0; i < 1200; i++) await s.step(idle);
     expect(s.realm.entityManager.entities.filter((e) => e.type === "ball")).toHaveLength(10);
     expect(
       s.realm.entityManager.entities

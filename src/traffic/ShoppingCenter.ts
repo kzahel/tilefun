@@ -1,4 +1,4 @@
-import type { ParkingLot } from "./ParkingSystem.js";
+import type { ParkingLot } from "./ParkingLot.js";
 
 /** Generated geometry in world pixels; one quiet visitor per center. */
 export interface ShoppingCenter {

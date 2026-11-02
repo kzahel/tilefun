@@ -104,7 +104,7 @@ it("reconciles delayed ordered input/snapshots through pushing, reversal, jump a
       if (item)
         f.s.realm.handleMessage(f.s.player.clientId, f.s.player, decodeClientMessage(item.buffer));
     }
-    f.s.tick(PHYSICS_DT);
+    f.s.tick();
     lastFrame = Math.max(lastFrame, tick + 4 + ((tick + 1) % 3));
     frames.push({ at: lastFrame, buffers: f.s.frames() });
     while (frames[0] && frames[0].at <= tick) {
@@ -115,7 +115,7 @@ it("reconciles delayed ordered input/snapshots through pushing, reversal, jump a
     maxReplay = Math.max(maxReplay, f.predictor.recoveryDiagnostics.replayStepsThisTick);
   }
   for (let i = 0; i < 30; i++) {
-    f.s.tick(PHYSICS_DT);
+    f.s.tick();
     f.receive(f.s.frames());
     f.predictor.update(PHYSICS_DT, idle, f.view.world, f.view.props, f.view.serverEntities);
   }
@@ -136,7 +136,7 @@ it("bounds history/replay and resumes from an acknowledged fence instead of inve
     seq: 150,
     ...idle,
   });
-  f.s.tick(PHYSICS_DT);
+  f.s.tick();
   f.receive(f.s.frames());
   f.predictor.update(PHYSICS_DT, idle, f.view.world, f.view.props, f.view.serverEntities);
   expect(f.predictor.recoveryDiagnostics.status).toBe("ready");
@@ -181,7 +181,7 @@ it("keeps local animation advancing when every update performs replay", async ()
         ...idle,
         dx: 1,
       });
-      f.s.tick(PHYSICS_DT);
+      f.s.tick();
       f.receive(f.s.frames());
     }
     phases.add(f.predictor.player?.sprite?.frameCol ?? -1);
@@ -220,7 +220,7 @@ it("holds an overflowed scene and rejects stale state across reload instead of d
 it("caps replay slices and accepts a snapshot that covers the pending suffix", async () => {
   const f = await setup();
   for (let seq = 2; seq <= 80; seq++) f.input(seq, { ...idle, dx: 1 });
-  f.s.tick(PHYSICS_DT);
+  f.s.tick();
   f.receive(f.s.frames());
   expect(f.predictor.recoveryDiagnostics.status).toBe("replaying");
   f.predictor.update(PHYSICS_DT, idle, f.view.world, f.view.props, f.view.serverEntities);
@@ -230,7 +230,7 @@ it("caps replay slices and accepts a snapshot that covers the pending suffix", a
     seq: 80,
     ...idle,
   });
-  f.s.tick(PHYSICS_DT);
+  f.s.tick();
   f.receive(f.s.frames());
   expect(f.predictor.recoveryDiagnostics.status).toBe("ready");
   expect(f.predictor.recoveryDiagnostics.retainedInputs).toBe(0);
@@ -263,7 +263,7 @@ it("keeps a delayed second player's contact component coherent at render fractio
   await f.s.realm.addPlayer(guest);
   guest.visibleRange = { ...f.s.player.visibleRange };
   guest.player.position = { wx: 42, wy: 32 };
-  f.s.tick(PHYSICS_DT);
+  f.s.tick();
   f.receive(f.s.frames());
   let now = 0;
   const view = new RemoteStateView(new World()),
@@ -320,7 +320,7 @@ it("keeps a delayed second player's contact component coherent at render fractio
           ...idle,
         });
     }
-    f.s.tick(PHYSICS_DT);
+    f.s.tick();
     f.receive(f.s.frames());
     frameAt = Math.max(frameAt, tick + 5 + ((tick + 1) % 3));
     deliveries.push({
@@ -378,4 +378,28 @@ it("predicts normalized basic car steering and derives its seat from the same bo
     f.receive(f.s.frames());
   }
   expect(car.position.wx).toBeGreaterThan(120);
+});
+
+it("publishes coherent seat membership without advancing a manual physics tick", async () => {
+  const f = await setup({
+    version: 1,
+    id: "seat-publication",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(80, -28),
+    props: [],
+    parkedVehicles: [{ name: "car", model: "compact-1", wx: 80, wy: 0, facing: 3 }],
+  });
+  const before = f.s.realm.collisionDiagnostics?.worldSteps;
+  await f.s.command({ kind: "enter-vehicle", entityId: f.s.handles.car ?? -1 });
+  expect(() => f.receive(f.s.frames())).not.toThrow();
+  expect(f.predictor.recoveryDiagnostics.status).toBe("ready");
+  expect(f.view.physicsState?.bodies.some((b) => b.id === f.view.serverPlayerEntity.id)).toBe(
+    false,
+  );
+  f.input(1, { ...idle, dx: 1 });
+  await f.s.command({ kind: "exit-vehicle" });
+  expect(() => f.receive(f.s.frames())).not.toThrow();
+  expect(f.view.physicsState?.bodies.some((b) => b.id === f.view.serverPlayerEntity.id)).toBe(true);
+  expect(f.predictor.recoveryDiagnostics.status).toBe("ready");
+  expect(f.s.realm.collisionDiagnostics?.worldSteps).toBe(before);
 });

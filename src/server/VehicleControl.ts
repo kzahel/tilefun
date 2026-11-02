@@ -1,4 +1,3 @@
-import { BOAT_SEAT_Z, isBoat } from "../boats/Boat.js";
 import {
   aabbOverlapsPropWalls,
   aabbOverlapsSolid,
@@ -8,56 +7,27 @@ import {
 import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { getSurfaceZ, resolveGroundZForTracking } from "../physics/surfaceHeight.js";
-import { isTrain } from "../railway/Train.js";
 import type { VehicleHornMessage } from "../shared/protocol.js";
-import {
-  isTransporter,
-  supportingTransporter,
-  type TransporterAction,
-} from "../traffic/CarTransporter.js";
-import {
-  boardingDistance,
-  boardingHeightRange,
-  boardingRange,
-  isDrivable,
-} from "../traffic/Driving.js";
 import {
   hasVehicleLights,
   isWarningVehicle,
   nextVehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
-import type { TowAction } from "../traffic/Towing.js";
-import type { VehicleBedAction } from "../traffic/VehicleCargo.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
+import { boardingDistance, isDrivable } from "../traffic/VehicleSeats.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { HORN_STARTLE_COOLDOWN, HORN_STARTLE_RADIUS, reactToHorn } from "./HornReaction.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { safeArrival } from "./SafeArrival.js";
-import { controlTow } from "./TowControl.js";
-import { controlTransporter } from "./TransporterControl.js";
-import { controlVehicleBed } from "./VehicleBedControl.js";
 
 /** Inside seats use ordinary replicated parenting/mount identity. Roof riders are independent. */
 export class VehicleControl {
-  transporter(session: PlayerSession, id: number, action: TransporterAction): void {
-    this.realm.requireLegacyInteraction("transporter apparatus");
-    controlTransporter(this.realm, session, id, action);
-  }
-  tow(session: PlayerSession, id: number, action: TowAction): void {
-    this.realm.requireLegacyInteraction("tow apparatus");
-    controlTow(this.realm, session, id, action);
-  }
-  bed(session: PlayerSession, id: number, action: VehicleBedAction): void {
-    this.realm.requireLegacyInteraction("vehicle bed apparatus");
-    controlVehicleBed(this.realm, session, id, action);
-  }
   private drivers = new Map<
     number,
     {
       session: PlayerSession;
       vehicle: Entity;
-      lastInput: number;
       lastHorn?: number;
       lastHornEvent?: number;
       lastHornStartle?: number;
@@ -92,11 +62,7 @@ export class VehicleControl {
       active,
       wx: vehicle.position.wx,
       wy: vehicle.position.wy,
-      kind: isTrain(vehicle)
-        ? "train"
-        : vehiclePerformance(vehicle.type).pushWeight >= 500
-          ? "heavy"
-          : "car",
+      kind: vehiclePerformance(vehicle.type).pushWeight >= 500 ? "heavy" : "car",
     });
   }
   takeHorns(): VehicleHornMessage[] {
@@ -108,18 +74,8 @@ export class VehicleControl {
     return this.drivers.get(session.player?.id)?.vehicle;
   }
   available(id: number): boolean {
-    const car = this.realm.traffic?.states.get(id);
-    if (car)
-      return (
-        car.driverId === undefined &&
-        !car.shopping &&
-        car.entity.towedBy === undefined &&
-        car.entity.transportedBy === undefined
-      );
-    const train = [...(this.realm.railway?.services.values() ?? [])].find((s) =>
-      s.carriages.some((c) => c.id === id),
-    );
-    return !!train && train.driverId === undefined && !train.retiring && !train.record.deleted;
+    const state = this.realm.vehicleRegistry?.states.get(id);
+    return !!state && isDrivable(state.entity) && state.driverId === undefined;
   }
   async restoreOnFoot(session: PlayerSession, fallback: Entity["position"]): Promise<void> {
     const r = this.realm;
@@ -140,45 +96,24 @@ export class VehicleControl {
   enter(session: PlayerSession, id: number, restore = false): void {
     const r = this.realm,
       vehicle = r.entityManager.byId.get(id);
-    if (
-      !vehicle ||
-      !isDrivable(vehicle) ||
-      !vehicle.collider ||
-      vehicle.towedBy !== undefined ||
-      vehicle.transportedBy !== undefined
-    )
+    const car = r.vehicleRegistry?.states.get(id);
+    if (!vehicle || !isDrivable(vehicle) || !vehicle.collider || !car)
       throw Error("Vehicle unavailable.");
-    if (r.usesReplacementPhysics && (isTrain(vehicle) || isBoat(vehicle) || isTransporter(vehicle)))
-      throw Error("This vehicle is not qualified for the Rapier realm proof");
-    const car = r.traffic?.states.get(id);
-    const train = [...(r.railway?.services.values() ?? [])].find((s) =>
-      s.carriages.includes(vehicle),
-    );
-    if ((!car && !train) || train?.retiring || train?.record.deleted)
-      throw Error("Vehicle unavailable.");
-    if (car?.shopping || car?.driverId !== undefined || train?.driverId !== undefined)
-      throw Error("Someone is already driving.");
+    if (car.driverId !== undefined) throw Error("Someone is already driving.");
     if (
       !restore &&
       (session.editorEnabled ||
         session.transitioning ||
         session.retired ||
         session.gameplaySession.mountId !== null ||
-        boardingDistance(session.player, vehicle) > boardingRange(vehicle) ||
-        Math.abs((session.player.wz ?? 0) - (vehicle.wz ?? 0)) >
-          boardingHeightRange(vehicle, r.entityManager.entities))
+        boardingDistance(session.player, vehicle) > 32 ||
+        Math.abs((session.player.wz ?? 0) - (vehicle.wz ?? 0)) > 12)
     )
       throw Error("Stand beside the vehicle to enter.");
     if (!restore && Math.hypot(vehicle.velocity?.vx ?? 0, vehicle.velocity?.vy ?? 0) > 3)
       throw Error("Wait for the vehicle to stop.");
     if (r.saveManager?.pressured) throw Error("Saving is delayed. Please try again shortly.");
-    if (car) r.traffic?.takeControl(car, session.player.id);
-    if (train) {
-      train.driverId = session.player.id;
-      train.driveInput = 0;
-      train.speed = 0;
-      for (const c of train.carriages) c.velocity = { vx: 0, vy: 0 };
-    }
+    r.vehicleRegistry?.takeControl(car, session.player.id);
     const p = session.player;
     p.parentId = id;
     p.localOffsetX = p.localOffsetY = 0;
@@ -192,7 +127,7 @@ export class VehicleControl {
     session.lastProcessedInputSeq = session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
     session.inputQueue = [];
     session.controls.reset(session.lastProcessedInputSeq);
-    this.drivers.set(p.id, { session, vehicle, lastInput: r.worldAPI.time });
+    this.drivers.set(p.id, { session, vehicle });
     this.sync();
     r.savePlayerData(session);
   }
@@ -207,23 +142,16 @@ export class VehicleControl {
     )
       return;
     vehicle.emergencyState = nextVehicleLightState(vehicle, action);
-    const car = this.realm.traffic?.states.get(vehicle.id);
-    if (car) this.realm.traffic?.onChange?.(car, false);
+    const car = this.realm.vehicleRegistry?.states.get(vehicle.id);
+    if (car) this.realm.vehicleRegistry?.onChange?.(car, false);
   }
   stop(session: PlayerSession): void {
     const vehicle = this.get(session);
     if (!vehicle) return;
-    vehicle.velocity = { vx: 0, vy: 0 };
+    vehicle.motionIntent = { vx: 0, vy: 0 };
     if (vehicle.sprite) vehicle.sprite.moving = false;
-    const train = [...(this.realm.railway?.services.values() ?? [])].find(
-      (s) => s.driverId === session.player.id,
-    );
-    if (train) {
-      train.speed = 0;
-      train.driveInput = 0;
-      train.driveBoost = false;
-      for (const c of train.carriages) c.velocity = { vx: 0, vy: 0 };
-    }
+    session.inputQueue = [];
+    session.controls.reset(session.lastProcessedInputSeq);
   }
   exit(session: PlayerSession, forced = false): void {
     this.honk(session, false);
@@ -231,32 +159,9 @@ export class VehicleControl {
     if (!vehicle) return;
     this.stop(session);
     const placement = this.exitPlacement(session.player, vehicle);
-    if (!placement && !forced)
-      throw Error(
-        isBoat(vehicle)
-          ? "Move beside a clear shore to get out."
-          : "No clear place to get out. Move somewhere open first.",
-      );
-    const car = this.realm.traffic?.states.get(vehicle.id);
-    if (car) this.realm.traffic?.releaseControl(car, !forced);
-    const train = [...(this.realm.railway?.services.values() ?? [])].find(
-      (s) => s.driverId === session.player.id,
-    );
-    if (train) {
-      delete train.driverId;
-      delete train.driveInput;
-      delete train.driveBoost;
-      // Resume the next station in the current direction, including after manual reversal.
-      if (train.line.path) {
-        const distance = train.record.distance ?? 0,
-          stops = train.line.path.stops;
-        const next = train.record.target
-          ? stops.findIndex((s) => s.distance > distance + 0.01)
-          : stops.map((s) => s.distance < distance - 0.01).lastIndexOf(true);
-        train.record.nextStop = next < 0 ? (train.record.target ? stops.length - 1 : 0) : next;
-      }
-      train.record.dwell = 8;
-    }
+    if (!placement && !forced) throw Error("No clear place to get out. Move somewhere open first.");
+    const car = this.realm.vehicleRegistry?.states.get(vehicle.id);
+    if (car) this.realm.vehicleRegistry?.releaseControl(car);
     const p = session.player;
     delete p.parentId;
     delete p.localOffsetX;
@@ -299,12 +204,7 @@ export class VehicleControl {
         this.honk(session, false);
       const p = session.player;
       p.position = { ...vehicle.position };
-      p.wz = p.groundZ = (vehicle.wz ?? 0) + (isBoat(vehicle) ? BOAT_SEAT_Z : 0);
-      if (isBoat(vehicle) && p.sprite && vehicle.sprite) {
-        p.sprite.direction = vehicle.sprite.direction;
-        p.sprite.frameRow = vehicle.sprite.direction;
-        p.sprite.moving = false;
-      }
+      p.wz = p.groundZ = vehicle.wz ?? 0;
       p.jumpZ = 0;
       this.realm.entityManager.spatialHash.update(p);
     }
@@ -320,7 +220,7 @@ export class VehicleControl {
     const b = getEntityAABB(vehicle.position, vehicle.collider);
     const x = Math.max(b.left, Math.min(b.right, player.position.wx));
     const y = Math.max(b.top, Math.min(b.bottom, player.position.wy));
-    for (const gap of isBoat(vehicle) ? [16, 24, 32, 48, 64, 80, 96] : [16, 24, 32, 48, 64])
+    for (const gap of [16, 24, 32, 48, 64])
       for (const [wx, wy] of [
         [x, b.top - gap],
         [x, b.bottom + gap],
@@ -352,8 +252,7 @@ export class VehicleControl {
           [],
         );
         if (
-          Math.abs(z - (vehicle.wz ?? 0)) >
-            (supportingTransporter(vehicle, r.entityManager.entities) ? 32 : 16) ||
+          Math.abs(z - (vehicle.wz ?? 0)) > 16 ||
           props.some((p) =>
             aabbOverlapsPropWalls(box, p.position, p, z, collider.physicalHeight ?? 16),
           )

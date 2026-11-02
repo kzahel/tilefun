@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import type { GpuRenderBackend } from "../src/rendering/GpuRenderBackend.js";
-import type { TrafficCanvas } from "../src/workshop/TrafficPage.js";
+import type { GeometryCanvas } from "../src/workshop/WorldGeometryPage.js";
 
 test.use({ channel: "chromium" });
 test("adjacent sprites have no gaps or overlaps at fractional scales on either backend", async ({
@@ -469,14 +469,14 @@ test("shared traffic scenario feeds the same GPU mesh path", async ({ page }) =>
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
-  const canvas = page.getByLabel("Generated traffic playground");
+  const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   expect(
-    await canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.().pixelSnap),
+    await canvas.evaluate((c: GeometryCanvas) => c.__presentationDiagnostics?.().pixelSnap),
   ).toBe(true);
   await expect
     .poll(() =>
-      canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.().meshDraws ?? 0),
+      canvas.evaluate((c: GeometryCanvas) => c.__presentationDiagnostics?.().meshDraws ?? 0),
     )
     .toBeGreaterThan(0);
   expect(errors).toEqual([]);
@@ -485,15 +485,17 @@ test("shared traffic scenario feeds the same GPU mesh path", async ({ page }) =>
 test("Traffic override selects original non-blue road vehicles without changing their types", async ({
   page,
 }) => {
-  await page.goto("/tilefun/workshop.html?renderer=gpu&meshes&allcars3d#/tool/traffic");
-  const canvas = page.getByLabel("Generated traffic playground");
+  await page.goto(
+    "/tilefun/workshop.html?geometry=car-garage&vehicle=pickup&renderer=gpu&meshes&allcars3d#/tool/world-geometry",
+  );
+  const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await expect
     .poll(() =>
-      canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.().meshDraws ?? 0),
+      canvas.evaluate((c: GeometryCanvas) => c.__presentationDiagnostics?.().meshDraws ?? 0),
     )
     .toBeGreaterThan(0);
-  const diagnostics = await canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.());
+  const diagnostics = await canvas.evaluate((c: GeometryCanvas) => c.__presentationDiagnostics?.());
   expect(diagnostics?.carMeshOverride).toBe(true);
   expect(
     diagnostics?.meshEligibleVehicleTypes?.some((type) => type !== "vehicle-v1:compact-1"),
@@ -501,7 +503,7 @@ test("Traffic override selects original non-blue road vehicles without changing 
   await page.getByRole("button", { name: "Reset scene", exact: true }).click();
   await expect(canvas).toHaveAttribute("data-ready", "true");
   expect(
-    await canvas.evaluate((c: TrafficCanvas) => c.__presentationDiagnostics?.().carMeshOverride),
+    await canvas.evaluate((c: GeometryCanvas) => c.__presentationDiagnostics?.().carMeshOverride),
   ).toBe(true);
 });
 

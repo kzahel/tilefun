@@ -85,7 +85,7 @@ import {
   LAST_WORLD_KEY,
   TAB_SESSION_KEY,
 } from "../shared/storageKeys.js";
-import { occupiedVehicle } from "../traffic/Driving.js";
+import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransport.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { ChatHUD } from "../ui/ChatHUD.js";
@@ -610,16 +610,9 @@ export class GameClient {
           : "";
       }
     });
-    this.vehicleControl = new VehicleControl(
-      async (request) => {
-        this.clearPlayInput();
-        return this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
-      },
-      () => this.clearPlayInput(),
-    );
-    this.actions.on("context_actions", () => {
-      if (!(this.scenes.current instanceof PlayScene) || this.playInputBlocked) return;
-      this.vehicleControl.openActions();
+    this.vehicleControl = new VehicleControl(async (request) => {
+      this.clearPlayInput();
+      return this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
     });
     this.actions.on("enter_place", () => {
       if (!(this.scenes.current instanceof PlayScene) || this.playInputBlocked) return;
@@ -1806,7 +1799,7 @@ export class GameClient {
   }
 
   private get playInputBlocked(): boolean {
-    return this.playUIBlocked || !!this.vehicleControl?.actionsOpen;
+    return this.playUIBlocked;
   }
   private get playUIBlocked(): boolean {
     return this.hamburgerOpen || this.optionsDialog.visible || this.focusPaused || document.hidden;

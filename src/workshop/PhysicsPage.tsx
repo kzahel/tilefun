@@ -74,7 +74,7 @@ export default function PhysicsPage() {
       };
     }
     const loop = new GameLoop({
-      update(dt) {
+      update() {
         try {
           session.pump();
           session.setRunning(!state.current.paused && !document.hidden);
@@ -86,7 +86,6 @@ export default function PhysicsPage() {
                   : index === state.current.seat
                     ? manualInput()
                     : COOP_IDLE,
-                dt,
                 undefined,
                 index,
               );

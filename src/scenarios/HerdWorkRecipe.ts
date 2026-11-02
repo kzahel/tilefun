@@ -19,6 +19,5 @@ export function herdWorkRecipe(kind: "cow" | "sheep" | "donkey"): ScenarioRecipe
     player: createPlayer(320, 304),
     actors,
     props: [],
-    traffic: [],
   };
 }

@@ -1,4 +1,3 @@
-import { required } from "../art/ArtCatalog.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { TerrainId } from "../autotile/TerrainId.js";
@@ -38,6 +37,7 @@ import { descriptorFromMetadata } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { ProceduralActors } from "../generation/ProceduralActors.js";
 import { ProceduralProps } from "../generation/ProceduralProps.js";
+import { NaturalStrategy } from "../generation/regional/NaturalStrategy.js";
 import { regionalStart } from "../generation/regional/RegionalSpawn.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
@@ -67,7 +67,7 @@ import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import { RealmRecords } from "../persistence/RealmRecords.js";
 import type { InspectionState, SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
-import { TrafficRecords } from "../persistence/TrafficRecords.js";
+import { VehicleRecords } from "../persistence/VehicleRecords.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { tickSharedBallGameplay } from "../physics/BallGameplay.js";
 import { getGravityScale } from "../physics/Gravity.js";
@@ -76,16 +76,8 @@ import { PhysicsScene } from "../physics/PhysicsScene.js";
 import { playerMotionIntent, vehicleMotionIntent } from "../physics/PlayerControls.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
-import { type RailRouteSource, RailwaySystem } from "../railway/RailwaySystem.js";
 import type { ClientMessage } from "../shared/protocol.js";
-import { type ParkingLot, ParkingSystem, type SavedParking } from "../traffic/ParkingSystem.js";
-import { roofSupport } from "../traffic/RoofSupport.js";
-import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
-import {
-  EMPTY_TRAFFIC_ROUTES,
-  type TrafficRouteSource,
-  TrafficSystem,
-} from "../traffic/TrafficSystem.js";
+import { VehicleRegistry, type VehicleSource } from "../traffic/VehicleRegistry.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { AnimalWorkSystem } from "../wildlife/AnimalWorkSystem.js";
 import { browsingRocks } from "../wildlife/BrowsingRocks.js";
@@ -140,20 +132,11 @@ export interface RealmOptions {
   gravity?: () => number;
   random?: () => number;
   ambientSpawns?: boolean;
-  /** Explicit route source for authored infrastructure/scenarios. */
-  railways?: RailRouteSource;
-  traffic?: TrafficRouteSource;
-  parking?: ParkingLot;
+  vehicleSource?: VehicleSource;
 }
 
 export class Realm {
   private physicsScene: PhysicsScene | undefined;
-  get usesReplacementPhysics() {
-    return true;
-  }
-  requireLegacyInteraction(feature: string): void {
-    throw Error(`${feature} is retired during the shared physics reset`);
-  }
   get collisionDiagnostics() {
     return this.physicsScene?.diagnostics ?? null;
   }
@@ -240,22 +223,7 @@ export class Realm {
   /** Tracks processed road intersections/segments for structure generation. */
   private processedStructureKeys = new Set<string>();
   private proceduralActors!: ProceduralActors;
-  traffic: TrafficSystem | null = null;
-  parking: ParkingSystem | null = null;
-  railway: RailwaySystem | null = null;
-  async callTrain(session: PlayerSession, benchId: number): Promise<void> {
-    if (!this.railway || !Number.isSafeInteger(benchId)) throw Error("Train unavailable.");
-    await this.railway.callTrain(
-      session.player,
-      benchId,
-      () =>
-        !session.editorEnabled &&
-        !session.transitioning &&
-        !session.retired &&
-        session.realmId === this.currentWorldId &&
-        session.gameplaySession.mountId === null,
-    );
-  }
+  vehicleRegistry: VehicleRegistry | null = null;
   private proceduralProps: ProceduralProps;
 
   /** Sessions currently in this realm. */
@@ -370,16 +338,11 @@ export class Realm {
     this.ownedBalls = new OwnedBalls(this.entityManager);
     this.propManager = new PropManager();
     const trafficRoutes =
-      this.options.traffic ??
-      (this.generator?.terrain instanceof TrafficStrategy ? this.generator.terrain : undefined);
-    this.traffic = this.interior
+      this.options.vehicleSource ??
+      (this.generator?.terrain instanceof NaturalStrategy ? this.generator.terrain : undefined);
+    this.vehicleRegistry = this.interior
       ? null
-      : new TrafficSystem(
-          this.world,
-          this.entityManager,
-          this.propManager,
-          trafficRoutes ?? EMPTY_TRAFFIC_ROUTES,
-        );
+      : new VehicleRegistry(this.world, this.entityManager, this.propManager, trafficRoutes ?? {});
     this.treeBrush = new TreeBrushEditor(this.propManager, () => this.saveManager?.markMetaDirty());
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
       this.saveManager?.markMetaDirty(),
@@ -457,34 +420,6 @@ export class Realm {
     }
     applyPlayerModel(player, session.playerModel);
     this.entityManager.spawn(player);
-    const ride = saved?.roofRide;
-    if ((ride || saved?.driving) && this.railway) {
-      this.railway.update([...this.sessions.values()].map((s) => s.player).concat(player));
-      await this.railway.settle();
-      if (this.railway.error) throw this.railway.error;
-    }
-    if (
-      ride &&
-      Number.isFinite(ride.offsetX) &&
-      Number.isFinite(ride.offsetY) &&
-      (ride.height === undefined ||
-        (Number.isFinite(ride.height) && ride.height >= 0 && ride.height <= 512)) &&
-      Math.hypot(ride.offsetX, ride.offsetY) < 512
-    ) {
-      const vehicle = this.entityManager.entities.find((e) => e.proceduralId === ride.identity);
-      if (vehicle?.collider) {
-        player.position = {
-          wx: vehicle.position.wx + ride.offsetX,
-          wy: vehicle.position.wy + ride.offsetY,
-        };
-        player.wz = (vehicle.wz ?? 0) + (ride.height ?? vehicle.collider.physicalHeight ?? 0);
-        player.groundZ = player.wz;
-        if (roofSupport(player, [vehicle])?.id !== vehicle.id) {
-          player.position = { wx: spawnX, wy: spawnY };
-          player.wz = player.groundZ = saved?.wz ?? 0;
-        }
-      }
-    }
 
     session.player = player;
     session.gameplaySession = {
@@ -612,10 +547,6 @@ export class Realm {
 
   playerData(session: PlayerSession): SavedPlayerData {
     const mount = this.entityManager.byId.get(session.gameplaySession.mountId ?? -1);
-    const support = roofSupport(session.player, this.entityManager.entities);
-    const identity = support
-      ? this.entityManager.entities.find((e) => e.id === support.id)?.proceduralId
-      : undefined;
     const driven = this.vehicles.get(session);
     return {
       ...(driven?.proceduralId
@@ -634,18 +565,6 @@ export class Realm {
               offsetY: session.player.localOffsetY ?? 0,
               wz: session.player.wz ?? 0,
               jumpZ: session.player.jumpZ ?? 0,
-            },
-          }
-        : {}),
-      ...(support && identity
-        ? {
-            roofRide: {
-              identity,
-              offsetX: session.player.position.wx - support.position.wx,
-              offsetY: session.player.position.wy - support.position.wy,
-              ...(support.vehicleBed
-                ? { height: (session.player.wz ?? 0) - (support.wz ?? 0) }
-                : {}),
             },
           }
         : {}),
@@ -682,8 +601,6 @@ export class Realm {
   /** Close persistence if the given worldId matches the currently loaded world. */
   async closePersistenceIfCurrent(worldId: string): Promise<void> {
     if (worldId === this.currentWorldId && this.saveManager) {
-      await this.railway?.close();
-      this.railway = null;
       await this.streaming?.close();
       await this.saveManager.close();
       this.saveManager = null;
@@ -730,6 +647,18 @@ export class Realm {
           .filter((s) => !dormantClientIds.has(s.clientId))
           .map((s) => s.visibleRange),
         [...this.sessions.values()].filter((s) => !dormantClientIds.has(s.clientId)),
+      );
+    if (this.tickCounter % 120 === 0)
+      this.vehicleRegistry?.populate(
+        [...this.sessions.values()]
+          .filter((s) => !s.retired && !s.transitioning)
+          .map((s) =>
+            around(
+              Math.floor(s.player.position.wx / 256),
+              Math.floor(s.player.position.wy / 256),
+              2,
+            ),
+          ),
       );
     const gravity = this.options.gravity?.() ?? getGravityScale();
     const controls = new Map<number, import("../input/ActionManager.js").Movement>();
@@ -1087,15 +1016,14 @@ export class Realm {
 
         // Route/parking clocks no longer own poses. Persist shared readback for cars.
         for (const e of participants) {
-          const car = this.traffic?.states.get(e.id);
+          const car = this.vehicleRegistry?.states.get(e.id);
           if (!car) continue;
-          car.speed = Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0);
           if (
             e.position.wx !== e.prevPosition?.wx ||
             e.position.wy !== e.prevPosition?.wy ||
             e.wz !== e.prevWz
           )
-            this.traffic?.onChange?.(car, false);
+            this.vehicleRegistry?.onChange?.(car, false);
         }
         this.vehicles.sync();
 
@@ -1224,6 +1152,14 @@ export class Realm {
       session.player.jumpInputState =
         (session.jumpConsumed ? 1 : 0) | (session.lastJumpHeld ? 2 : 0);
     const scene = this.physicsScene;
+    // A paused/manual publication may follow boarding, exit or an explicit edit
+    // before the next clock tick. Refresh membership/edits without integrating,
+    // so entity baselines and numerical physics describe the same bodies.
+    scene?.synchronize(
+      this.entityManager.queryEntities.filter(
+        (e) => this.entityManager.byId.get(e.id) === e && !e.tags?.has("passage"),
+      ),
+    );
     return this.replication.build(clientId, {
       roomState: this.roomState,
       world: this.world,
@@ -1253,28 +1189,6 @@ export class Realm {
         maxCx: Math.ceil(((this.roomState?.document.width ?? 5) * 32) / CHUNK_SIZE_PX) - 1,
         maxCy: Math.ceil(((this.roomState?.document.height ?? 5) * 32) / CHUNK_SIZE_PX) - 1,
       };
-    if (this.railway && this.streaming) {
-      this.railway.update(
-        [...this.sessions.values()]
-          .filter((s) => !s.retired && !s.transitioning)
-          .map((s) => s.player),
-      );
-      this.streaming.interest.set("railways", this.railway.tickets());
-    }
-    if (this.traffic) {
-      this.traffic.visibleRanges = Array.isArray(range) ? range : [range as ChunkRange];
-      this.streaming?.interest.set(
-        "shopping",
-        this.traffic.shoppingRanges().map((r) => ({
-          range: r,
-          activity: 0,
-          reason: "dependency" as const,
-        })),
-      );
-      const support = this.traffic.supportRanges([...this.sessions.values()].map((s) => s.player));
-      if (support.length)
-        range = [...(Array.isArray(range) ? range : [range as ChunkRange]), ...support];
-    }
     if (this.streaming) {
       this.streaming.update(
         Array.isArray(range) ? range : [range as ChunkRange],
@@ -1335,7 +1249,7 @@ export class Realm {
   inspectionState(): InspectionState {
     return {
       ...this.proceduralProps.save(),
-      ...(this.traffic ? { traffic: this.traffic.save() } : {}),
+      ...(this.vehicleRegistry ? { vehicles: this.vehicleRegistry.save() } : {}),
       playerX: 0,
       playerY: 0,
       cameraX: 0,
@@ -1642,8 +1556,6 @@ export class Realm {
     const worldMeta = overrideMeta ?? (await registry.getWorld(worldId));
     if (!worldMeta) throw new Error("World not found.");
     descriptorFromMetadata(worldMeta); // Reject unsupported identity before replacing live state.
-    await this.railway?.close();
-    this.railway = null;
     await this.streaming?.close();
     this.streaming = null;
     this.activity.clear();
@@ -1669,16 +1581,11 @@ export class Realm {
     this.ownedBalls = new OwnedBalls(this.entityManager);
     this.propManager = new PropManager();
     const trafficRoutes =
-      this.options.traffic ??
-      (this.generator?.terrain instanceof TrafficStrategy ? this.generator.terrain : undefined);
-    this.traffic = this.interior
+      this.options.vehicleSource ??
+      (this.generator?.terrain instanceof NaturalStrategy ? this.generator.terrain : undefined);
+    this.vehicleRegistry = this.interior
       ? null
-      : new TrafficSystem(
-          this.world,
-          this.entityManager,
-          this.propManager,
-          trafficRoutes ?? EMPTY_TRAFFIC_ROUTES,
-        );
+      : new VehicleRegistry(this.world, this.entityManager, this.propManager, trafficRoutes ?? {});
     this.treeBrush = new TreeBrushEditor(this.propManager, () => this.saveManager?.markMetaDirty());
     this.proceduralProps = new ProceduralProps(this.propManager, () =>
       this.saveManager?.markMetaDirty(),
@@ -1766,23 +1673,6 @@ export class Realm {
         ...(job ? { value: structuredClone(job) } : { value: null, deleted: true }),
       }));
     };
-    const parkingLot = this.options.parking;
-    this.parking =
-      parkingLot && !this.interior
-        ? new ParkingSystem(
-            parkingLot,
-            this.world,
-            this.entityManager,
-            this.propManager,
-            () =>
-              this.saveManager?.markRecordDirty("parkingVisits", parkingLot.id, () => ({
-                collection: "parkingVisits",
-                key: parkingLot.id,
-                value: required(this.parking).snapshot(),
-              })),
-            (await store.get("parkingVisits", parkingLot.id)) as SavedParking | undefined,
-          )
-        : null;
     if (
       this.interior &&
       savedMeta?.interior &&
@@ -1812,8 +1702,8 @@ export class Realm {
       () => this.buildSaveMeta(),
     );
     this.proceduralProps.managed = true;
-    const trafficRecords = this.traffic
-      ? new TrafficRecords(this.traffic, this.records, this.saveManager)
+    const trafficRecords = this.vehicleRegistry
+      ? new VehicleRecords(this.vehicleRegistry, this.records, this.saveManager)
       : undefined;
     this.streaming = new RealmStreaming(
       this.world,
@@ -1852,40 +1742,8 @@ export class Realm {
       trafficRecords,
     );
 
-    if (this.parking) {
-      const b = this.parking.lot.bounds;
-      // One bounded authored lot owns its complete movement/crossing dependency,
-      // independent of diagnostic camera zoom. Released with this Realm's streaming.
-      this.streaming.interest.set("parking", [
-        {
-          range: {
-            minCx: Math.floor(b.left / 256),
-            maxCx: Math.floor((b.right - 1) / 256),
-            minCy: Math.floor(b.top / 256),
-            maxCy: Math.floor((b.bottom - 1) / 256),
-          },
-          activity: 0,
-          reason: "dependency",
-        },
-      ]);
-    }
-    const railwayRoutes =
-      this.options.railways ??
-      (this.generator.terrain instanceof RailwayStrategy
-        ? this.generator.terrain.railways
-        : undefined);
-    this.railway = railwayRoutes
-      ? new RailwaySystem(
-          railwayRoutes,
-          this.world,
-          this.entityManager,
-          this.propManager,
-          this.saveManager,
-          (range) => this.ensureReady(range),
-        )
-      : null;
-    if (this.traffic)
-      this.traffic.canSpawn = (id, wx, wy) =>
+    if (this.vehicleRegistry)
+      this.vehicleRegistry.canSpawn = (id, wx, wy) =>
         !this.records?.features.has(id) &&
         !this.saveManager?.pressured &&
         this.entityManager.entities.length < PERSISTENCE_BUDGET.actors - 16 &&
@@ -1993,13 +1851,11 @@ export class Realm {
     // Explicit readiness fences may load chunks after the ordinary budgeted pass.
     // Publish complete terrain even when authority will stay paused after reload.
     this.world.computeAutotile(this.blendGraph);
-    this.parking?.sync();
-    this.traffic?.syncShopping();
+    this.vehicleRegistry?.populate([range]);
   }
 
   async flushAsync(): Promise<void> {
     await this.mutations.drain();
-    await this.railway?.settle();
     for (const session of this.sessions.values()) this.savePlayerData(session);
     this.saveManager?.markMetaDirty();
     await this.saveManager?.flushAsync();
@@ -2025,8 +1881,6 @@ export class Realm {
   /** Teardown mods and close persistence. */
   async destroy(): Promise<void> {
     await this.mutations.drain();
-    await this.railway?.close();
-    this.railway = null;
     await this.streaming?.close();
     const saves = this.saveManager;
     try {
@@ -2045,7 +1899,6 @@ export class Realm {
     for (const prop of [...this.propManager.props]) this.propManager.remove(prop.id, false);
     for (const [key] of this.world.chunks.entries()) this.world.chunks.remove(key);
     this.records?.features.clear();
-    this.parking = null;
     this.sessions.clear();
     this.activity.clear();
     this.propActivity.clear();
@@ -2250,7 +2103,13 @@ export class Realm {
     let changed = false;
     if (this.interior && (!furnitureAsset(entityType) || !this.roomState)) return;
     if (entityType.startsWith("vehicle-v1:")) {
-      changed = !!this.traffic?.place(entityType.slice(11), wx, wy, undefined, paintSchemeId);
+      changed = !!this.vehicleRegistry?.place(
+        entityType.slice(11),
+        wx,
+        wy,
+        undefined,
+        paintSchemeId,
+      );
     } else if (isPropType(entityType)) {
       const prop = createProp(entityType, wx, wy);
       if (this.interior && this.roomGeometry) {
@@ -2359,7 +2218,7 @@ export class Realm {
     if (this.streaming && this.records) {
       for (const session of sessions)
         if (this.streaming.supported(session.player, dt)) result.set(session.player, dt);
-      for (const state of this.traffic?.states.values() ?? []) {
+      for (const state of this.vehicleRegistry?.states.values() ?? []) {
         if (
           this.streaming.demand.get(actorScope(state.entity.position))?.activity &&
           this.streaming.supported(state.entity, dt)

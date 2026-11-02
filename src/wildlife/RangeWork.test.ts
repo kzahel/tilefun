@@ -24,7 +24,7 @@ const context = {
   ready: () => true,
 };
 async function until(s: ScenarioSession, predicate: () => boolean, seconds = 120) {
-  for (let i = 0; i < seconds * 30 && !predicate(); i++) await s.step(idle, 1 / 30);
+  for (let i = 0; i < seconds * 60 && !predicate(); i++) await s.step(idle);
   expect(
     s.realm.entityManager.entities.map((e) => ({
       type: e.type,
@@ -56,7 +56,7 @@ it("mounting a grazing horse cancels its task through shared sync without cleari
     await until(s, () => a.animalWork?.state === "graze");
     const food = target(s, a);
     setFaunaRidden(a, true);
-    await s.step(idle, 1 / 30);
+    await s.step(idle);
     expect(a.animalWork?.state).toBe("idle");
     expect(a.wanderAI?.state).toBe("ridden");
     expect(a.sprite?.clip).toBe(0);
@@ -175,7 +175,7 @@ it("beaver reloads a real carried branch and consumes exactly four branches into
     await s.reload();
     a = saved(s, a);
     expect(saved(s, lodge).workItem?.units).toBe(4);
-    for (let i = 0; i < 30 * 8; i++) await s.step(idle, 1 / 30);
+    for (let i = 0; i < 30 * 8; i++) await s.step(idle);
     expect(a.animalWork?.deliveries).toBe(4);
     expect(items(s).filter((e) => e.workItem?.kind === "lodge")).toHaveLength(1);
     expect(saved(s, lodge).workItem?.claimedBy).toBeUndefined();
@@ -214,7 +214,7 @@ it.each(["pickup", "return"] as const)(
       const a = animal(s);
       await until(s, () => a.animalWork?.state === state);
       startleFauna(a, { wx: a.position.wx + 10, wy: a.position.wy });
-      await s.step(idle, 1 / 30);
+      await s.step(idle);
       expect(branches(s)).toBe(6);
       expect(items(s).every((e) => !e.workItem?.claimedBy && e.parentId === undefined)).toBe(true);
       expect(a.fauna?.alarmFrom).toBeDefined();
@@ -341,7 +341,7 @@ it.each(["horse", "giraffe", "beaver"] as const)(
     recipe.nativeProps = [];
     const s = await ScenarioSession.create(recipe);
     try {
-      for (let i = 0; i < 90; i++) await s.step(idle, 1 / 30);
+      for (let i = 0; i < 90; i++) await s.step(idle);
       expect(items(s)).toHaveLength(0);
       expect(animal(s).animalWork?.eaten).toBe(0);
       expect(animal(s).animalWork?.deliveries).toBe(0);

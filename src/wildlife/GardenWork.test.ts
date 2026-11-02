@@ -16,7 +16,7 @@ const subject = (s: ScenarioSession) =>
 const sources = (s: ScenarioSession) =>
   s.realm.entityManager.entities.filter((e) => e.workItem?.growth);
 async function until(s: ScenarioSession, p: () => boolean, seconds = 90) {
-  for (let i = 0; i < seconds * 30 && !p(); i++) await s.step(idle, 1 / 30);
+  for (let i = 0; i < seconds * 60 && !p(); i++) await s.step(idle);
   expect(
     s.realm.entityManager.entities.map((e) => ({
       type: e.type,
@@ -110,7 +110,7 @@ it("competing chickens cannot duplicate stock or manufacture supplies when place
   empty.actors = empty.actors?.filter((e) => e.fauna) ?? [];
   const manual = await ScenarioSession.create(empty);
   try {
-    for (let i = 0; i < 120; i++) await manual.step(idle, 1 / 30);
+    for (let i = 0; i < 120; i++) await manual.step(idle);
     expect(sources(manual)).toHaveLength(0);
     expect(subject(manual).animalWork?.eaten).toBe(0);
   } finally {
@@ -196,7 +196,7 @@ it.each(["scratch", "peck"] as const)(
       const a = subject(s);
       await until(s, () => a.animalWork?.state === state);
       startleFauna(a, { wx: a.position.wx + 8, wy: a.position.wy });
-      await s.step(idle, 1 / 30);
+      await s.step(idle);
       const seeds = s.realm.entityManager.entities.filter(
         (e) => e.workItem?.kind === "seed" && !e.workItem.growth,
       );

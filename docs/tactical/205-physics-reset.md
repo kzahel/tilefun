@@ -451,3 +451,89 @@ were refreshed from canonical data. The historical `node scripts/wildlife/status
 runner cannot rebuild this checkout's old campaign queue because ignored
 `data/wildlife-campaign-v2/progress.json` is absent. Its retained historical sections
 were preserved; no campaign/session state or human approvals were invented.
+
+
+### Checkpoint 4d — independent vehicles and fixed scenario clock (in progress)
+
+Replaced TrafficSystem with a small VehicleRegistry: model placement, generated
+saved depot identities, driver ownership and pose/paint/light persistence. Basic
+land vehicles use ordinary shared velocity/heading intent and derived inside seats.
+No route, parking, boat, train, towing, transporter or bed-equipment service owns
+motion. Removed their authority/UI commands and executable scenario options;
+static generation/layout/track planners, banks and exact art reviews remain.
+Old durable traffic records read their absolute saved poses as independent bodies;
+legacy route/coupling/apparatus fields are intentionally discarded. The collection
+name remains traffic for save compatibility; new snapshots have version 2.
+
+ScenarioSession now exposes exactly one fixed tick/step, without a duration argument
+or per-recipe service matrix. The ordinary Worker owns continuous stepping. The
+geometry lab offers actual controlled cars, authored ramps/bridges/garage, generated
+crossings and the Realm crowd fixture; retired interactive bookmarks explain the
+deferral. Basic driving opens through the old traffic tool URL. Candidate identities
+and historical batches remain, with explicit deferred descriptions/exclusions.
+Removed old service/equipment/per-model motion matrices; kept independent model,
+source, appearance, geometry and codec checks. Main-game mobile GPU placement/seat/
+save/delete and embedded Worker/GPU lifecycle checks replace traffic lab matrices.
+
+The focused 50-case core/authority/prediction/registry/seat/placement/depot/garage/
+bridge run passes. The wider initial audit passed 599/644 checks and exposed an
+obsolete 33-model steering/roof matrix, retired boat/train lifecycle assertions,
+legacy scenario duration helpers, exact kinematic zeroes and two real issues.
+Cars now use the same fixed subpixel edge bevel as characters to cross the garage
+ramp seam. Rounded resting balls can retain positive raw manifold distances after sleeping;
+support/contact classification now uses the constraints Rapier actually solves,
+with normal/separating-velocity checks intact. Projectile hit reactions use their
+pre-solver velocity towards the actual contact normal, so pushing a resting ball
+does not count as that ball striking its pusher. Lab appearance reapplication preserves saved
+animation clips/phase. Work pickup/deposit/retrieve arrivals clear the travel motor,
+so a dog can pick up a physical ball rather than continue pushing it during its
+pickup animation. Post-fix evidence and final commit are recorded below.
+
+Still incomplete: remove now-unneeded mixed rendering/query/legacy pose helpers,
+finish residency/streaming and Chromebook evidence, final requested review and
+readiness. This checkpoint does not claim a completed reset or vehicle tumbling.
+
+Post-fix native checkpoint: **108 checks pass in 15 files**, covering common
+contacts/prediction, ordinary authority, placement/seat/save/paint/registry migration,
+car bridge/garage/depot traversal and tombstones, Worker parity, repeated fetch
+through reload, pasture support/removal and keyboard/controller hints. All three
+TypeScript projects pass. The canonical wildlife behavior-ledger freshness check
+passes; the historical production queue still cannot rebuild without ignored
+`data/wildlife-campaign-v2/progress.json` (same documented checkout limitation).
+No human review/approval state or asset pixels changed. Browser/build qualification
+is recorded separately after the final source inventory is generated.
+
+Next cleanup audit: CollisionIndex is still maintained by EntityManager; the old
+`resolveCollision`/ground-tracking/air-momentum exports remain alongside their
+retired helpers. CollisionDebug and scene collection still expose old equipment/
+cosmetic grade geometry. Remove those remaining consumers/pose writers rather than
+keeping a misleading second collision description. Also qualify sleeping loose
+bodies when their support geometry is edited: static section removal currently
+passes `wakeUp=false`; establish the actual outcome and correct it before the
+save/edit/lifecycle gate is called complete.
+
+The first full-Chromium boundary run passed six of seven checks (ordinary GPU
+Worker contacts, delayed P2P, mobile game placement/seat/save/delete, co-op lab,
+Worker client-stall/lifecycle fences and GPU context replacement). It exposed a
+real manual-lab boarding mismatch: the immediate response paired a new seat parent
+baseline with the preceding physics membership. Shared Realm replication now
+refreshes membership/explicit edits before capture, without integrating or advancing
+the clock. A native predictor regression covers enter/exit at an unchanged tick;
+this is shared publication behavior, not a lab-only physics path. The bounded
+Chromebook gate must include this registry pass's cost. Vehicle records also retain
+vertical velocity, with a real falling-car reload/continuation regression.
+Both new boundaries pass with 33 related cases (35 total across six files).
+
+Delivery evidence for this checkpoint: **110 focused native checks pass across
+15 files**, all three TypeScript projects pass, and changed-source lint has no
+introduced diagnostics (two existing warnings remain). Fresh art catalog, the
+2,119-candidate Workshop manifest and production build pass. **All seven full-
+Chromium checks pass** on the finished bundle: ordinary Worker NPC/prediction,
+delayed P2P reversal/convergence, two-seat Worker lab/fences/reload, real-time
+Worker client-stall/lifecycle behavior, embedded GPU resize/context recovery/
+teardown, controlled car garage traversal/seat reload, and mobile game car
+placement/driving/save/delete. The mobile editor capture was visually inspected.
+No promoted assets, source pixels or review approvals changed. This remains an
+unfinished reset checkpoint: no dev-ready marker and no Chromebook performance
+claim. Continue the remaining helper/residency/edit cleanup, then the device gate
+and requested final review.

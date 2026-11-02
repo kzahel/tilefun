@@ -3,38 +3,18 @@ import type { Movement } from "../input/ActionManager.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 export type ScenarioCommand =
-  | {
-      kind: "vehicle-transporter-action";
-      entityId: number;
-      action: import("../traffic/CarTransporter.js").TransporterAction;
-    }
-  | {
-      kind: "vehicle-tow-action";
-      entityId: number;
-      action: import("../traffic/Towing.js").TowAction;
-    }
-  | {
-      kind: "vehicle-bed-action";
-      entityId: number;
-      action: import("../traffic/VehicleCargo.js").VehicleBedAction;
-    }
-  | { kind: "vehicle-bed"; action: "board" | "outside" | "drive" | "stop" }
   | { kind: "place-entity"; entityType: string; position: Entity["position"] }
   | { kind: "throw-ball"; dirX: number; dirY: number; force: number }
   | { kind: "vehicle-horn"; active: boolean }
-  | { kind: "call-train"; benchId: number }
   | { kind: "vehicle-emergency"; action: "toggle" | "style" }
   | { kind: "enter-vehicle"; entityId: number }
   | { kind: "exit-vehicle" }
   | { kind: "view-range"; range: ChunkRange }
-  | { kind: "teleport"; position: Entity["position"]; z?: number }
-  | { kind: "traffic-position"; roof: boolean }
-  | { kind: "train-position"; roof: boolean; carriage?: number }
-  | { kind: "traffic-settings"; speed?: number; gap?: number };
+  | { kind: "teleport"; position: Entity["position"]; z?: number };
 export type ScenarioRequest = { id: number } & (
   | { kind: "open"; recipe: ScenarioRecipe; mode?: "manual" | "realtime" }
   | { kind: "clock"; running: boolean }
-  | { kind: "step"; input: Movement; dt: number; range?: ChunkRange }
+  | { kind: "step"; input: Movement; range?: ChunkRange }
   | { kind: "command"; command: ScenarioCommand }
   | { kind: "reload" }
   | { kind: "diagnostics"; reset?: boolean }
@@ -50,8 +30,6 @@ export type ScenarioResponse = {
   frames: ArrayBuffer[];
   guestFrames?: ArrayBuffer[];
   handles: Record<string, number>;
-  parking?: import("../traffic/ParkingSystem.js").ParkingSystem["diagnostics"];
-  traffic?: { speed: number; waiting: string; count: number };
   error?: string;
   clock?: { mode: "manual" | "realtime"; running: boolean; ticks: number };
 };

@@ -130,7 +130,7 @@ it("runs all native cycles on dry ground in the production Realm and retains sav
     expect(rabbits().length).toBeGreaterThanOrEqual(2);
     const clips = new Set<number>();
     for (let i = 0; i < 1000; i++) {
-      await s.step(idle, 0.1);
+      await s.step(idle);
       for (const rabbit of rabbits()) {
         clips.add(rabbit.sprite?.clip ?? 0);
         expect(
@@ -186,13 +186,13 @@ it.each([true, false])(
     });
     try {
       for (let i = 0; i < 6; i++) {
-        if (input) await s.step(idle, 1 / 60);
-        else s.tick(1 / 60);
+        if (input) await s.step(idle);
+        else s.tick();
       }
       const animal = required(s.realm.entityManager.entities.find((e) => e.type === RABBIT_TYPE));
       expect(s.player.player.jumpVZ).toBeUndefined();
       expect(animal.wanderAI?.state).toBe("scared");
-      for (let i = 0; i < 22; i++) await s.step(idle, 1 / 60);
+      for (let i = 0; i < 22; i++) await s.step(idle);
       expect(animal.rabbit?.state).toBe("hop");
       const saved = encodeActor(animal);
       await s.reload();

@@ -3,16 +3,13 @@ import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import { getEntityAABB } from "../entities/collision.js";
 import { Direction } from "../entities/Entity.js";
-import { createPlayer } from "../entities/Player.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
-import { surfaceZAt } from "../physics/SurfacePatch.js";
 import {
   AUTHORED_VEHICLE_MESHES,
   vehicleMeshHeightScale,
 } from "../rendering/AuthoredVehicleMeshes.js";
 import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { World } from "../world/World.js";
-import { drivenCarPose } from "./Driving.js";
 import { applyVehicleFacing, createVehicle, VEHICLE_MODELS } from "./Vehicle.js";
 import { gradeRoofOffset, vehicleGroundPose } from "./VehicleGroundPose.js";
 import profiles from "./vehicle-ground-contacts.json" with { type: "json" };
@@ -134,65 +131,6 @@ it("preserves conservative roof headroom while visually attaching a rider to the
       const delta = h * (1 - fit) - gradeRoofOffset(pose, car.vehicleHeading ?? 0, x, y, h * fit);
       expect(delta).toBeGreaterThan(0);
       expect(Number.isFinite(delta)).toBe(true);
-    }
-});
-
-it("admits real uphill/downhill rolling turns at 30/50Hz while retaining slab and passenger clearance", () => {
-  for (const dt of [1 / 30, 0.02])
-    for (const heading of [0, Math.PI]) {
-      const { car, props, world } = fixture(0.25, 0, heading);
-      const before = structuredClone(car);
-      const next = drivenCarPose(
-        car,
-        { dx: 1, dy: -1, relativeDriving: true },
-        dt,
-        world,
-        props,
-        [],
-      );
-      expect(next).toBeDefined();
-      const delta = (next?.vehicleHeading ?? heading) - heading;
-      expect(Math.abs(Math.atan2(Math.sin(delta), Math.cos(delta)))).toBeGreaterThan(0.01);
-      expect(car).toEqual(before);
-      if (!car.collider) throw Error("Missing car body");
-      const ceiling = surfaceProp(
-        { left: -128, right: 128, top: -128, bottom: 128 },
-        {
-          id: "ceiling",
-          spaceId: "ceiling",
-          z: (car.wz ?? 0) + 30,
-          riseX: 0,
-          riseY: 0,
-          thickness: 4,
-          connectsTo: [],
-        },
-      );
-      const rider = createPlayer(0, 0);
-      rider.id = 2;
-      rider.wz = (car.wz ?? 0) + (car.collider.physicalHeight ?? 24);
-      expect(
-        drivenCarPose(
-          car,
-          { dx: 1, dy: -1, relativeDriving: true },
-          dt,
-          world,
-          [...props, ceiling],
-          [car, rider],
-        ),
-      ).toBeUndefined();
-      if (!props[0]?.collider?.surface || !next?.collider) throw Error("Missing support");
-      const box = getEntityAABB(next.position, next.collider),
-        surface = props[0].collider.surface;
-      expect(next.wz).toBeCloseTo(
-        Math.max(
-          ...[box.left, box.right].flatMap((x) =>
-            [box.top, box.bottom].map((y) =>
-              surfaceZAt(surface, { left: -256, right: 256, top: -256, bottom: 256 }, x, y),
-            ),
-          ),
-        ),
-        5,
-      );
     }
 });
 

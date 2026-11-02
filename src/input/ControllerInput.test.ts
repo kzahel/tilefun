@@ -15,11 +15,11 @@ function pad(buttons: number[] = [], axes = [0, 0, 0, 0], index = 0): Gamepad {
   } as unknown as Gamepad;
 }
 describe("controller session", () => {
-  it("maps gameplay B to contextual actions while preserving menu back and release fences", () => {
+  it("preserves menu back and release fences without a retired gameplay action", () => {
     const session = new ControllerInput();
     session.sample([pad()], 0);
     expect(session.sample([pad([1])], 1)).toEqual(["back"]);
-    expect(CONTROLLER_ACTIONS.back).toBe("context_actions");
+    expect(CONTROLLER_ACTIONS.back).toBeUndefined();
     session.uiActive = () => true;
     expect(session.sample([pad([1])], 2)).toEqual([]);
     session.sample([pad()], 3);

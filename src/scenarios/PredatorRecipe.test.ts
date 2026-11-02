@@ -31,7 +31,7 @@ it.each(PREDATOR_PROFILES)(
       for (let i = 0; i < 1800; i++) {
         if (hunter().sprite?.clip === 2 && (aquatic ? fish().length : prey().length) < population)
           break;
-        session.tick(1 / 60);
+        session.tick();
       }
       expect(hunter().predator?.meals).toBeGreaterThan(0);
       expect(hunter().sprite?.clip).toBe(2);

@@ -9,7 +9,7 @@ export const CROSSING_STARTS = {
   "north approach": { position: { wx: 0, wy: -352 }, z: 0 },
 } as const;
 
-/** Road ramps run north/south; the native horizontal train stays on level track.
+/** Road ramps run north/south; the level underpass stays unobstructed.
  * 56px under the deck clears its 44px body. No train grade/art substitution.
  */
 export function railCrossingRecipe(): ScenarioRecipe {
@@ -19,7 +19,6 @@ export function railCrossingRecipe(): ScenarioRecipe {
     id: "world-geometry-rail-crossing-v1",
     generation: FLAT_SCENARIO,
     player: createPlayer(start.position.wx, start.position.wy),
-    railways: [{ id: "crossing-shuttle", start: -24, end: 24, y: 0 }],
     props: [
       surfaceProp(
         { left: -48, right: 48, top: -320, bottom: -64 },

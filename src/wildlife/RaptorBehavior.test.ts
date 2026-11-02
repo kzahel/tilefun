@@ -72,7 +72,6 @@ describe.each(["owl", "eagle", "hawk"] as const)("%s shared aerial hunting", (sp
         props: [],
         nativeProps: [{ type: "prop-griffin-perch", wx: 32, wy: 64 }],
         actors: [hunter, prey],
-        traffic: [],
       });
       try {
         expect(session.realm.propManager.props.some((p) => p.type === "prop-griffin-perch")).toBe(

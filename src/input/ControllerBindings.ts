@@ -28,7 +28,6 @@ export const CONTROLLER_BUTTONS: Record<number, ControllerCommand> = {
 export const CONTROLLER_ACTIONS: Partial<Record<ControllerCommand, ActionName>> = {
   menu: "toggle_menu",
   confirm: "jump",
-  back: "context_actions",
   throw: "throw",
   interact: "enter_place",
   edit: "toggle_editor",

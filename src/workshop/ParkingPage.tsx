@@ -9,7 +9,7 @@ import {
   parkingStudy,
 } from "../art/studies/ParkingLotStudy.js";
 import { ErrorMessage, reviewPath } from "./App.js";
-import { ParkingPlay } from "./ParkingPlay.js";
+import DeferredVehiclePage from "./DeferredVehiclePage.js";
 import { PreviewViewport } from "./PreviewViewport.js";
 import { reviewAssets } from "./ReviewAssets.js";
 import "./parking.css";
@@ -88,7 +88,7 @@ export default function ParkingPage() {
         </button>
       </div>
       {live ? (
-        <ParkingPlay />
+        <DeferredVehiclePage />
       ) : (
         <>
           <fieldset className="parking-options" aria-label="Parking layouts">

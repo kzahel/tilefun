@@ -44,7 +44,6 @@ it("owns one persistent floor web, returns to ambush and never creates manual pr
     player: createPlayer(64, 192),
     props: [],
     actors: [spider],
-    traffic: [],
   });
   try {
     for (let i = 0; i < 600; i++) await session.step(idle);

@@ -85,10 +85,10 @@ it("freezes resident motion/RNG/phase, reloads it and wakes without elapsed-time
     };
     const cold = s.realm.entityManager.spawn(createRobin(680, 64));
     expect(cold.wz).toBeUndefined();
-    s.tick(1 / 60);
+    s.tick();
     expect(cold.wz).toBeDefined();
     const coldTimer = cold.robin?.timer;
-    for (let i = 0; i < 60; i++) s.tick(1 / 60);
+    for (let i = 0; i < 60; i++) s.tick();
     expect(cold.robin?.timer).toBe(coldTimer);
     expect(actor.position).toEqual(before.position);
     expect(actor.robin.motion?.elapsed).toBe(before.phase);
@@ -98,7 +98,7 @@ it("freezes resident motion/RNG/phase, reloads it and wakes without elapsed-time
     const restored = find();
     expect(restored?.robin?.motion?.elapsed).toBe(before.phase);
     s.player.visibleRange = view(2);
-    s.tick(1 / 60);
+    s.tick();
     expect(restored?.robin?.motion?.elapsed).toBeCloseTo((before.phase ?? 0) + 1 / 60);
   } finally {
     await s.close();

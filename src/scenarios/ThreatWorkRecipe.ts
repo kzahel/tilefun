@@ -14,6 +14,5 @@ export function threatWorkRecipe(kind: "hedgehog" | "porcupine" | "fox"): Scenar
       kind === "fox" ? createFauna("mouse", 164, 176) : createPredator("wolf", 192, 176),
     ],
     props: [],
-    traffic: [],
   };
 }

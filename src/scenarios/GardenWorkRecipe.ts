@@ -25,6 +25,5 @@ export function gardenWorkRecipe(kind: "chicken" | "bee" | "hummingbird"): Scena
     player: createPlayer(320, 304),
     props: [],
     actors,
-    traffic: [],
   };
 }

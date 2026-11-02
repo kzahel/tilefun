@@ -46,7 +46,7 @@ interface Body {
   offsetX: number;
   offsetY: number;
   state: PhysicsBodyState;
-  incomingSpeed: number;
+  incomingVelocity: RAPIER.Vector;
 }
 interface Section {
   identity: unknown;
@@ -199,7 +199,7 @@ export class PhysicsScene {
         const shape =
           entity.type === "ball"
             ? RAPIER.ColliderDesc.ball(Math.min(hx, hz, halfY))
-            : kind === "character"
+            : kind === "character" || kind === "vehicle"
               ? RAPIER.ColliderDesc.roundCuboid(hx - bevel, halfY - bevel, hz - bevel, bevel)
               : RAPIER.ColliderDesc.cuboid(hx, halfY, hz);
         shape
@@ -218,7 +218,7 @@ export class PhysicsScene {
           halfY,
           offsetX,
           offsetY,
-          incomingSpeed: 0,
+          incomingVelocity: { x: 0, y: 0, z: 0 },
           state: {
             id: entity.id,
             kind,
@@ -356,7 +356,7 @@ export class PhysicsScene {
     for (const [id, entry] of this.bodies) {
       if (entry.kind === "loose") {
         const v = entry.body.linvel();
-        entry.incomingSpeed = Math.hypot(v.x, v.y, v.z) * SCALE;
+        entry.incomingVelocity = v;
         continue;
       }
       if (entry.kind === "fixed") continue;
@@ -439,12 +439,9 @@ export class PhysicsScene {
     this.world.contactPairsWith(entry.collider, (other) => {
       this.world.contactPair(entry.collider, other, (manifold, flipped) => {
         const otherId = this.colliderIds.get(other.handle);
-        let touching = false;
-        for (let i = 0; i < manifold.numContacts(); i++)
-          if (manifold.contactDist(i) <= 0.005) {
-            touching = true;
-            break;
-          }
+        // Use the contact constraints Rapier actually solves, including its
+        // resting margin. Raw manifold distance can remain positive after sleep.
+        const touching = manifold.numSolverContacts() > 0;
         if (otherId !== undefined && touching) {
           let neighbors = this.contacts.get(entry.entity.id);
           if (!neighbors) {
@@ -548,7 +545,23 @@ export class PhysicsScene {
 
   /** Contact consequences need incident speed, before the solver removes it. */
   incomingSpeed(id: number): number {
-    return this.bodies.get(id)?.incomingSpeed ?? 0;
+    const v = this.bodies.get(id)?.incomingVelocity;
+    return v ? Math.hypot(v.x, v.y, v.z) * SCALE : 0;
+  }
+
+  /** Projectile speed towards this contact before the solver changed velocities.
+   * Walking into a resting ball, or pushing it away, is not a projectile hit. */
+  incomingContactSpeed(id: number, otherId: number): number {
+    const source = this.bodies.get(id),
+      target = this.bodies.get(otherId);
+    if (!source || !target) return 0;
+    let speed = 0;
+    this.world.contactPair(source.collider, target.collider, (manifold, flipped) => {
+      const n = manifold.normal(),
+        v = source.incomingVelocity;
+      speed = Math.max(speed, (v.x * n.x + v.y * n.y + v.z * n.z) * (flipped ? -1 : 1) * SCALE);
+    });
+    return speed;
   }
 
   bodyState(id: number): Readonly<PhysicsBodyState> | undefined {
