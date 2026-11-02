@@ -5,6 +5,7 @@ import type { Movement } from "../input/ActionManager.js";
 import type { IWorldRegistry, WorldMeta } from "../persistence/IWorldRegistry.js";
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
+import { prepareCharacterPhysics } from "../physics/CharacterPhysics.js";
 import { validateSurfacePatch } from "../physics/SurfacePatch.js";
 import { validateExcavations } from "../physics/TerrainExcavation.js";
 import { railAlignment } from "../railway/RailPath.js";
@@ -85,6 +86,7 @@ export class ScenarioSession {
     recipe: ScenarioRecipe,
     simulationFactory?: () => Promise<RealmSimulationOwner>,
   ): Promise<ScenarioSession> {
+    await prepareCharacterPhysics(recipe.physics?.characterPhysics ?? 0);
     const session = new ScenarioSession(structuredClone(recipe), simulationFactory);
     try {
       await session.open(true);

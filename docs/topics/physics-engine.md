@@ -1,7 +1,7 @@
 # General 3D physics backend
 
-Status: provisional direction; two-client full-physics laboratory and remote correction presentation delivered for inspection.
-Updated: 2026-11-01.
+Status: opt-in on-foot game integration available; dynamic-world migration remains provisional.
+Updated: 2026-11-02.
 
 Owns the proposed physics-backend migration. [World geometry](world-geometry.md)
 owns authoring semantics; [prediction](player-prediction.md) owns input replay;
@@ -42,6 +42,46 @@ Measure adapter/API overhead, whole Worker ticks, main-thread prediction/replay,
 frame tails, contact counts, geometry updates and memory. WASM is not an automatic
 speedup; sparse specialized collision can be cheaper, AI/rendering are separate
 costs, and dynamic contacts may increase work. No Chromebook gain is established.
+
+## Opt-in game characters (197)
+
+[197](../tactical/197-opt-in-game-character-physics.md) adds an experimental on-foot
+backend to ordinary Worker authority and PlayerPredictor. Start the game with
+`?physics=rapier&hull=box` or `hull=capsule`; authority can switch with
+`sv_characterphysics 0|1|2` (legacy / fixed box / capsule). This is a host setting,
+synchronized to guests. Normal launches select 0 and never initialize Rapier.
+The World Geometry deck fixture offers **Character contacts** using these same
+engine paths, normal input, prediction and renderer.
+
+The TypeScript motor still owns acceleration/friction, sprint, jump intent, air
+control and existing physics CVars. Rapier WASM resolves the selected player's
+collision, support and gravity step, including idle authority ticks. Its cuboid
+keeps the existing anchored 10×6 footprint and 12-pixel height regardless of facing.
+The comparison capsule is inscribed (6×6 footprint, same anchor and full height).
+Reusable shape descriptors accept either hull for later character/NPC adoption;
+NPC motion is not migrated in this slice.
+
+Each movement substep builds and frees a canonical local query scene from normal
+terrain, exact excavation planes, wall geometry, one-way surfaces, ramps, slabs
+and nearby actors. Long authored structures are clipped to the local extent,
+including far-world origin rebasing. The scene has a 512-collider limit, bounded
+partition/cut complexity and at most 512 pixels of XY swept extent; over-budget
+queries reject. Rebuilding is deliberately simple for replay correctness and
+has **no established performance advantage**. Cache/residency changes need measured
+authority and replay tails before promotion.
+
+Grounded player pushing shares current side-contact proposals and checks both
+environment endpoints. A per-interval displacement budget combines own and passive
+travel without storing received motion as velocity. Player prediction uses private
+pushed-body copies, cleared on every authoritative rebase. Recipient-specific
+water/one-way rules, landing momentum conversion and wildlife mounting remain shared.
+
+This opt-in slice keeps existing ownership for general dynamics, AI and vehicles.
+It does not solve the full-world lab's both-active cube corrections. Airborne
+recipients, chains/crowds, initial overlaps/hull expansion, moving roofs/vehicle-bed
+details, independent clocks, persistence/editing under broad content and Chromebook
+tail latency remain qualification gates. Neither default rollout nor a WASM/SAB
+server rewrite is implied.
 
 ## Controlled-player contacts (195–196)
 

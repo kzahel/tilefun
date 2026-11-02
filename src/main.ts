@@ -497,6 +497,8 @@ function createLocalHost(keepAliveWhenHidden = false): WorkerClientTransport {
     new Worker(new URL("./server/local-server.worker.ts", import.meta.url), { type: "module" }),
     {
       metrics: performanceMetrics.enabled,
+      characterPhysics:
+        params.get("physics") === "rapier" ? (params.get("hull") === "capsule" ? 2 : 1) : 0,
       onError: (error) => {
         peerHost?.close();
         showErrorOverlay(error);

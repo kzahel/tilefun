@@ -7,6 +7,11 @@ import type { AABB } from "../entities/collision.js";
  * - Client: iterates flat snapshot arrays (checks `clientSolid`)
  */
 export interface MovementContext {
+  moveCharacter?(
+    entity: import("../entities/Entity.js").Entity,
+    dt: number,
+    physics: import("./PlayerMovement.js").MovementPhysicsParams,
+  ): import("./PlayerMovement.js").JumpGravityOutcome;
   /** Tile collision flags at the given tile coords. */
   getCollision(tx: number, ty: number): number;
   /** Tile elevation at the given tile coords. */

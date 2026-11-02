@@ -9,6 +9,7 @@ import {
   physicsStart,
   slabVertices,
 } from "./BridgeFixture.js";
+import { shareCharacterContact } from "./CharacterContact.js";
 import { POSE_STRIDE } from "./PhysicsProtocol.js";
 
 let initialization: Promise<void> | undefined;
@@ -270,41 +271,15 @@ export class RapierWorld {
     if (!hit) return;
     // Collider-cast normals are local. Controlled capsules stay unrotated.
     const n = hit.normal1;
-    const firstIn = first.x * n.x + first.y * n.y + first.z * n.z;
-    const secondIn = -(second.x * n.x + second.y * n.y + second.z * n.z);
-    const closing = firstIn + secondIn;
-    // Casts can report t=0 at the resting skin even while moving apart/tangent.
-    if (closing <= 1e-6) return;
-    const inward = Math.max(0, firstIn) + Math.max(0, secondIn);
-    const remove = closing * (1 - Math.max(0, hit.time_of_impact - 0.001));
-    // Equal controlled masses share a horizontal contact response: walking
-    // into an idle player moves both, opposing input balances. Vertical contact
-    // still blocks the falling/jumping motor instead of pushing a support down.
-    // Resolve THIS tick's proposals; solved velocities never become next input.
-    const horizontalContact = Math.abs(n.y) < 0.5;
-    const firstShare = remove * (horizontalContact ? 0.5 : Math.max(0, firstIn) / inward);
-    const secondShare = remove - firstShare;
-    const horizontalBudgets = [first, second].map((move) =>
-      Math.max(PHYSICS_WALK_SPEED * PHYSICS_DT, Math.hypot(move.x, move.z)),
+    const response = shareCharacterContact(
+      first,
+      second,
+      n,
+      hit.time_of_impact,
+      PHYSICS_WALK_SPEED * PHYSICS_DT,
     );
-
-    first.x -= n.x * firstShare;
-    first.y -= n.y * firstShare;
-    first.z -= n.z * firstShare;
-    second.x += n.x * secondShare;
-    second.y += n.y * secondShare;
-    second.z += n.z * secondShare;
-    // A sideways push plus full tangential walking can exceed walking speed.
-    // Bound the combined horizontal proposal, preserving any existing support
-    // carry in the original budget. This is per-tick motion, not stored inertia.
-    for (const [index, move] of [first, second].entries()) {
-      const speed = Math.hypot(move.x, move.z);
-      const budget = horizontalBudgets[index] ?? 0;
-      if (speed > budget) {
-        move.x *= budget / speed;
-        move.z *= budget / speed;
-      }
-    }
+    if (!response) return;
+    const { firstIn, secondIn } = response;
     if (n.y < -0.5 && firstIn > 0) {
       firstState.grounded = true;
       firstState.verticalSpeed = 0;

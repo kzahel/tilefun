@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
+import type { CharacterPhysicsMode } from "../physics/CharacterPhysics.js";
 import { locateSurfaceSpace } from "../physics/TerrainExcavation.js";
 import { CURVE_TRAIN, curveTrainView, isCurveTrain } from "../railway/CurveTrain.js";
 import { railAlignment } from "../railway/RailPath.js";
@@ -16,6 +17,7 @@ import {
 } from "../scenarios/GeneratedCrossingRecipe.js";
 import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
+import type { ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { TRAIN_GEOMETRY_STARTS, trainGeometryRecipe } from "../scenarios/TrainGeometryRecipe.js";
 import { GARAGE_STARTS, undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import {
@@ -47,12 +49,19 @@ export default function WorldGeometryPage() {
     <GeometryFixtures />
   );
 }
+function characterRecipe(recipe: ScenarioRecipe, mode: CharacterPhysicsMode): ScenarioRecipe {
+  return mode ? { ...recipe, physics: { ...recipe.physics, characterPhysics: mode } } : recipe;
+}
 function GeometryFixtures() {
   const canvas = useRef<GeometryCanvas>(null),
     scene = useRef<ScenarioPresentationHost | null>(null);
   const [fixture, setFixture] = useState(
     () => new URLSearchParams(location.search).get("geometry") ?? "deck",
   );
+  const [characterPhysics, setCharacterPhysics] = useState<CharacterPhysicsMode>(() => {
+    const params = new URLSearchParams(location.search);
+    return params.get("physics") === "rapier" ? (params.get("hull") === "capsule" ? 2 : 1) : 0;
+  });
   const [vehicleModel, setVehicleModel] = useState(() => {
     const model = new URLSearchParams(location.search).get("vehicle") ?? "compact-1";
     return VEHICLE_MODELS.includes(model) ? model : "compact-1";
@@ -105,18 +114,21 @@ function GeometryFixtures() {
     keys.current.clear();
     const host = new ScenarioPresentationHost(
       c,
-      curveRecipe ??
-        (generatedScene
-          ? generatedScene.recipe
-          : trainGrade
-            ? trainGeometryRecipe(reverse)
-            : vehicle
-              ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
-              : crossing
-                ? railCrossingRecipe()
-                : garage
-                  ? undergroundGarageRecipe()
-                  : worldGeometryRecipe()),
+      characterRecipe(
+        curveRecipe ??
+          (generatedScene
+            ? generatedScene.recipe
+            : trainGrade
+              ? trainGeometryRecipe(reverse)
+              : vehicle
+                ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
+                : crossing
+                  ? railCrossingRecipe()
+                  : garage
+                    ? undergroundGarageRecipe()
+                    : worldGeometryRecipe()),
+        fixture === "deck" ? characterPhysics : 0,
+      ),
       {
         authoredTrains,
         width: 960,
@@ -372,6 +384,7 @@ function GeometryFixtures() {
     generated,
     generatedIndex,
     generatedScene,
+    characterPhysics,
   ]);
   const touch = (key: string) => ({
     onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
@@ -561,6 +574,21 @@ function GeometryFixtures() {
           Save / reload scene
         </button>
       </div>
+      <label>
+        Character contacts (deck fixture){" "}
+        <select
+          aria-label="Character contacts"
+          disabled={fixture !== "deck"}
+          value={characterPhysics}
+          onChange={(event) =>
+            setCharacterPhysics(Number(event.target.value) as CharacterPhysicsMode)
+          }
+        >
+          <option value={0}>Game default</option>
+          <option value={1}>Rapier fixed box</option>
+          <option value={2}>Rapier capsule</option>
+        </select>
+      </label>
       <label>
         Visible surfaces{" "}
         <select

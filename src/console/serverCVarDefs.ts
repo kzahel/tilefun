@@ -3,6 +3,15 @@ import type { CVarDesc } from "./CVar.js";
 /** Shared server CVar definitions — used by both server (for real registration) and client (for stubs). */
 export const SERVER_CVAR_DEFS: readonly CVarDesc[] = [
   {
+    name: "sv_characterphysics",
+    description: "Experimental on-foot contacts: 0 legacy, 1 fixed Rapier box, 2 upright capsule",
+    type: "number",
+    defaultValue: 0,
+    min: 0,
+    max: 2,
+    category: "sv",
+  },
+  {
     name: "sv_tickrate",
     description: "Server command tick rate (Hz, legacy alias for sv_tick_ms)",
     type: "number",

@@ -70,6 +70,8 @@ import { SaveManager } from "../persistence/SaveManager.js";
 import { TrafficRecords } from "../persistence/TrafficRecords.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
+import { CharacterMotionBudget } from "../physics/CharacterMotionBudget.js";
+import { completePlayerLanding } from "../physics/PlayerLanding.js";
 import {
   applyFriction,
   applyPlatformerAirFriction,
@@ -176,6 +178,7 @@ export interface RealmOptions {
 }
 
 export class Realm {
+  private readonly characterMotionBudget = new CharacterMotionBudget();
   get persistenceDiagnostics() {
     return {
       realmId: this.currentWorldId,
@@ -740,6 +743,7 @@ export class Realm {
         [...this.sessions.values()].filter((s) => !dormantClientIds.has(s.clientId)),
       );
     const movementPhysics = this.options.physics?.() ?? getMovementPhysicsParams();
+    this.characterMotionBudget.clear();
     const preSteppedEntityIds = new Set<number>();
     const landingCarryExcluded = new Set<number>();
 
@@ -905,6 +909,8 @@ export class Realm {
             queryProps,
             movingEntity: session.player,
             excludeIds: playerExclude,
+            motionBudget: this.characterMotionBudget,
+            pushBody: (before, after) => this.applyCharacterPush(before, after),
             noclip: session.debugNoclip,
           });
           let nextState = {
@@ -975,6 +981,49 @@ export class Realm {
           if (mount?.velocity) {
             applyFriction(mount, dt, 1.0, movementPhysics);
           }
+        }
+        if (
+          movementPhysics.characterPhysics &&
+          !session.debugNoclip &&
+          session.gameplaySession.mountId === null
+        ) {
+          const ctx = this.characterMovementContext(session);
+          let landed = false;
+          let idleWildlifeContactId: number | undefined;
+          for (let substep = 0; substep < Math.max(1, this.physicsMult); substep++) {
+            const result = ctx.moveCharacter?.(
+              session.player,
+              dt / Math.max(1, this.physicsMult),
+              movementPhysics,
+            );
+            if (result?.landed) {
+              const landing = completePlayerLanding(
+                session.player,
+                result.groundZ,
+                this.entityManager.entities,
+                result.supportEntityId,
+              );
+              if (landing.wildlifeContactId !== undefined)
+                idleWildlifeContactId = landing.wildlifeContactId;
+            }
+            landed ||= result?.landed ?? false;
+          }
+          preSteppedEntityIds.add(session.player.id);
+          this.updateLastSafePosition(session);
+          this.handlePlayerStepOutcome(
+            session,
+            {
+              landed,
+              groundZ: session.player.groundZ ?? 0,
+              enteredWater: landed && this.isEntityOnWater(session.player),
+              endedGrounded: session.player.jumpVZ === undefined,
+              ...(idleWildlifeContactId !== undefined
+                ? { wildlifeContactId: idleWildlifeContactId }
+                : {}),
+            },
+            (x, y) => this.world.getHeightAt(x, y),
+            movementPhysics,
+          );
         }
       }
     }
@@ -2398,6 +2447,46 @@ export class Realm {
   }
 
   /** Handle server-only side effects after applying a pure player simulation step. */
+  private characterMovementContext(session: PlayerSession) {
+    const queryProps = (aabb: import("../entities/collision.js").AABB) =>
+      this.propManager.getPropsInChunkRange(
+        Math.floor(aabb.left / CHUNK_SIZE_PX) - 1,
+        Math.floor(aabb.top / CHUNK_SIZE_PX) - 1,
+        Math.floor(aabb.right / CHUNK_SIZE_PX) + 1,
+        Math.floor(aabb.bottom / CHUNK_SIZE_PX) + 1,
+      );
+    const queryEntities = (aabb: import("../entities/collision.js").AABB) =>
+      this.entityManager.spatialHash.queryRange(
+        Math.floor(aabb.left / CHUNK_SIZE_PX) - 1,
+        Math.floor(aabb.top / CHUNK_SIZE_PX) - 1,
+        Math.floor(aabb.right / CHUNK_SIZE_PX) + 1,
+        Math.floor(aabb.bottom / CHUNK_SIZE_PX) + 1,
+      );
+    return createMovementContext({
+      getCollision: (x, y) => this.world.getCollisionIfLoaded(x, y),
+      getHeight: (x, y) => this.world.getHeightAt(x, y),
+      queryProps,
+      queryEntities,
+      movingEntity: session.player,
+      excludeIds: new Set([session.player.id]),
+      noclip: session.debugNoclip,
+      motionBudget: this.characterMotionBudget,
+      pushBody: (before, after) => this.applyCharacterPush(before, after),
+    });
+  }
+  private applyCharacterPush(before: Entity, after: Entity) {
+    before.prevPosition = { ...before.position };
+    before.prevWz = before.wz ?? 0;
+    before.position = after.position;
+    before.wz = after.wz ?? before.wz ?? 0;
+    for (const key of ["groundZ", "jumpZ", "jumpVZ"] as const) {
+      if (after[key] === undefined) delete before[key];
+      else before[key] = after[key];
+    }
+    this.entityManager.spatialHash.update(before);
+    this.records?.changed(before);
+  }
+
   private handlePlayerStepOutcome(
     session: PlayerSession,
     outcome: PlayerStepOutcome,

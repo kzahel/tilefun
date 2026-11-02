@@ -6,6 +6,13 @@ its shared-memory local mode and “future” multiplayer phases are historical.
 
 ## Runtime ownership
 
+[197](tactical/197-opt-in-game-character-physics.md) adds optional on-foot Rapier
+character contacts inside the existing authority/prediction steps. The Worker
+loads its own WASM before selecting the mode; clients lazy-load separate private
+instances. `sync-cvars` carries the authoritative optional character mode (omission
+means legacy). Input history retains its mode for replay. There is no extra physics
+Worker, shared memory or general dynamic-world ownership change.
+
 [191](tactical/191-cooperative-physics-laboratory.md) extends the experimental
 physics reference to two real Realm sessions, separate client replicas and full
 small-world dynamic-body replay. Its shared scenario coordinator clock permits

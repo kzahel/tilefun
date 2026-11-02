@@ -3,8 +3,10 @@ import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { setSpriteClipElapsed, tickSpriteAnimation } from "../entities/spriteAnimation.js";
+import { prepareCharacterPhysics } from "../physics/CharacterPhysics.js";
 import {
   getMovementPhysicsParams,
+  selectCharacterPhysics,
   setAccelerate,
   setAirAccelerate,
   setAirWishCap,
@@ -480,6 +482,11 @@ export class RemoteStateView implements ClientStateView {
 
   /** Apply physics CVars sync for client prediction. */
   private applySyncCVars(msg: SyncCVarsMessage): void {
+    const mode = msg.cvars.characterPhysics ?? 0;
+    selectCharacterPhysics(mode);
+    void prepareCharacterPhysics(mode).catch((error) =>
+      console.error("Prediction physics initialization failed", error),
+    );
     setGravityScale(msg.cvars.gravity);
     setFriction(msg.cvars.friction);
     setAccelerate(msg.cvars.accelerate);

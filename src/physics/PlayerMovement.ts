@@ -16,22 +16,23 @@ import {
   TICK_RATE,
   TILE_SIZE,
 } from "../config/constants.js";
-import { aabbOverlapsSolid, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
+import { aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import { setSpriteClip } from "../entities/spriteAnimation.js";
 import type { Movement } from "../input/ActionManager.js";
 import { isTrain } from "../railway/Train.js";
 import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
 import { slideOnVehicleBed } from "../traffic/VehicleBedSlide.js";
-import { DEER_TYPE } from "../wildlife/Deer.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
-import { FROG_TYPE } from "../wildlife/Frog.js";
-import { MALLARD_TYPE } from "../wildlife/Mallard.js";
-import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
-import { ROBIN_TYPE } from "../wildlife/Robin.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { clearAirMomentum, clipAirMomentum, inheritAirMomentum } from "./AirborneMomentum.js";
+import {
+  type CharacterPhysicsMode,
+  prepareCharacterPhysics,
+  validateCharacterPhysics,
+} from "./CharacterPhysics.js";
 import type { MovementContext } from "./MovementContext.js";
+import { completePlayerLanding } from "./PlayerLanding.js";
 import { getSurfaceProperties } from "./SurfaceFriction.js";
 import {
   applyGroundTracking,
@@ -46,6 +47,7 @@ import {
 const BLOCK_MASK = CollisionFlag.Solid | CollisionFlag.Water;
 
 export interface MovementPhysicsParams {
+  characterPhysics?: CharacterPhysicsMode;
   walkSpeed?: number;
   walkFrameDuration?: number;
   revision: number;
@@ -69,6 +71,7 @@ export function getPhysicsCVarRevision(): number {
 }
 
 const movementPhysicsParams: Omit<MovementPhysicsParams, "revision"> = {
+  characterPhysics: 0,
   gravityScale: 1,
   friction: PLAYER_FRICTION,
   accelerate: PLAYER_ACCELERATE,
@@ -92,6 +95,9 @@ function setPhysicsParam<K extends keyof Omit<MovementPhysicsParams, "revision">
 export function getMovementPhysicsParams(): MovementPhysicsParams {
   return {
     revision: physicsCVarRevision,
+    ...(movementPhysicsParams.characterPhysics
+      ? { characterPhysics: movementPhysicsParams.characterPhysics }
+      : {}),
     gravityScale: movementPhysicsParams.gravityScale,
     friction: movementPhysicsParams.friction,
     accelerate: movementPhysicsParams.accelerate,
@@ -102,6 +108,22 @@ export function getMovementPhysicsParams(): MovementPhysicsParams {
     smallJumps: movementPhysicsParams.smallJumps,
     platformerAir: movementPhysicsParams.platformerAir,
   };
+}
+
+let characterRequest = 0;
+export function getCharacterPhysics(): CharacterPhysicsMode {
+  return movementPhysicsParams.characterPhysics ?? 0;
+}
+export function selectCharacterPhysics(mode: number): void {
+  characterRequest++;
+  setPhysicsParam("characterPhysics", validateCharacterPhysics(mode));
+}
+export async function configureCharacterPhysics(mode: number): Promise<void> {
+  validateCharacterPhysics(mode);
+  const request = ++characterRequest;
+  await prepareCharacterPhysics(mode);
+  if (request === characterRequest)
+    setPhysicsParam("characterPhysics", mode as CharacterPhysicsMode);
 }
 
 export function setGravityScale(scale: number): void {
@@ -218,6 +240,8 @@ export interface JumpGravityOutcome {
   landed: boolean;
   groundZ: number;
   wildlifeContactId?: number;
+  /** Physical contact identity supplied by a collision backend before landing effects. */
+  supportEntityId?: number;
 }
 
 export interface PlayerStepOutcome {
@@ -390,27 +414,45 @@ export function stepPlayerFromInput(
       entity.velocity.vx += mx * scaleDelta;
       entity.velocity.vy += my * scaleDelta;
     }
-    moveAndCollide(entity, stepDt, ctx);
-    if (entity.velocity) {
-      entity.velocity.vx -= (entity.airMomentumX ?? 0) * scaleDelta;
-      entity.velocity.vy -= (entity.airMomentumY ?? 0) * scaleDelta;
+    let gravity: JumpGravityOutcome;
+    let surfaces: ReturnType<SurfaceSampler>;
+    if (physics.characterPhysics && ctx.moveCharacter && !ctx.noclip) {
+      gravity = ctx.moveCharacter(entity, stepDt, physics);
+      surfaces = sampleSurfaces(entity);
+      if (entity.velocity) {
+        entity.velocity.vx -= (entity.airMomentumX ?? 0) * scaleDelta;
+        entity.velocity.vy -= (entity.airMomentumY ?? 0) * scaleDelta;
+      }
+      if (gravity.landed)
+        gravity = completePlayerLanding(
+          entity,
+          gravity.groundZ,
+          surfaces.entities,
+          gravity.supportEntityId,
+        );
+    } else {
+      moveAndCollide(entity, stepDt, ctx);
+      if (entity.velocity) {
+        entity.velocity.vx -= (entity.airMomentumX ?? 0) * scaleDelta;
+        entity.velocity.vy -= (entity.airMomentumY ?? 0) * scaleDelta;
+      }
+      surfaces = sampleSurfaces(entity);
+      const trackedGroundZ = resolveGroundZForTracking(
+        entity,
+        getHeight,
+        surfaces.props,
+        surfaces.entities,
+      );
+      applyGroundTracking(entity, trackedGroundZ, true);
+      gravity = tickJumpGravity(
+        entity,
+        stepDt,
+        getHeight,
+        physics,
+        surfaces.props,
+        surfaces.entities,
+      );
     }
-    const surfaces = sampleSurfaces(entity);
-    const trackedGroundZ = resolveGroundZForTracking(
-      entity,
-      getHeight,
-      surfaces.props,
-      surfaces.entities,
-    );
-    applyGroundTracking(entity, trackedGroundZ, true);
-    const gravity = tickJumpGravity(
-      entity,
-      stepDt,
-      getHeight,
-      physics,
-      surfaces.props,
-      surfaces.entities,
-    );
     groundZ = gravity.groundZ;
     landed = landed || gravity.landed;
     wildlifeContactId ??= gravity.wildlifeContactId;
@@ -594,39 +636,7 @@ export function tickJumpGravity(
     const groundZ = resolveGroundZForLanding(entity, getHeight, props, entities, prevWz);
     entity.groundZ = groundZ;
     if (entity.wz <= groundZ) {
-      entity.wz = groundZ;
-      Reflect.set(entity, "jumpVZ", undefined);
-      Reflect.set(entity, "jumpZ", undefined);
-      if (entity.airMomentumX !== undefined || entity.airMomentumY !== undefined) {
-        // World velocity becomes walking velocity relative to the new roof.
-        const support = roofSupport(entity, entities ?? []);
-        if (entity.velocity && support?.velocity) {
-          entity.velocity.vx -= support.velocity.vx;
-          entity.velocity.vy -= support.velocity.vy;
-        }
-        clearAirMomentum(entity);
-      }
-      // Wildlife is ordinary solid support: keep the completed landing grounded.
-      // Report contact for authority startle AI without an automatic jump impulse.
-      const footprint = entity.collider ? getEntityAABB(entity.position, entity.collider) : null;
-      const animal =
-        entity.type === "player" && footprint
-          ? entities?.find(
-              (e) =>
-                (e.type === MALLARD_TYPE ||
-                  e.type === FROG_TYPE ||
-                  e.type === RABBIT_TYPE ||
-                  e.type === ROBIN_TYPE ||
-                  e.type === DEER_TYPE ||
-                  faunaProfile(e.type) !== undefined) &&
-                e.collider?.solid !== false &&
-                e.collider &&
-                Math.abs((e.wz ?? 0) + (e.collider.physicalHeight ?? 0) - groundZ) < 0.001 &&
-                aabbsOverlap(footprint, getEntityAABB(e.position, e.collider)),
-            )
-          : undefined;
-      if (animal) return { landed: true, groundZ, wildlifeContactId: animal.id };
-      return { landed: true, groundZ };
+      return completePlayerLanding(entity, groundZ, entities);
     }
     entity.jumpZ = entity.wz - groundZ;
     return { landed: false, groundZ };

@@ -1,5 +1,14 @@
 # Player prediction and moving contacts
 
+[197](../tactical/197-opt-in-game-character-physics.md) integrates the opt-in
+Rapier character solver into the ordinary PlayerPredictor. Retained inputs keep
+their hull/backend and physics parameters; unready WASM holds prediction until it
+can replay those commands. Private pushed-player copies clear on both on-foot
+and mounted rebases and never mutate replica entities. The default solver and
+`cl_nopredict` retain their normal ownership. This does not promote full-world
+dynamic rollback; [physics engine](physics-engine.md#opt-in-game-characters-197)
+records the scope and remaining gates.
+
 [194](../tactical/194-coherent-contact-presentation.md) corrects mixed avatar/cube
 display timelines and independent offsets in the Rapier lab. Contact components
 share scene time and a rigid transform. This fixes early pushes in idle observers;

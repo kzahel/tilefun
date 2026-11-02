@@ -1,5 +1,12 @@
 # Embedded engine labs
 
+[197](../tactical/197-opt-in-game-character-physics.md) adds an opt-in **Character
+contacts** selector to the World Geometry deck fixture. Fixed box and capsule use
+the same character backend as the ordinary game launcher, with normal Realm,
+Worker, PlayerPredictor and ScenarioPresentationHost. Other fixtures keep their
+existing backend. The full-world cooperative Rapier lab remains a separate dynamic
+reference; its existing contact/presentation regressions remain required.
+
 [196](../tactical/196-restore-controlled-player-pushing.md) restores intended player
 pushing through the shared motor response, with positive idle-recipient movement,
 bounded speed and release/wall checks. The cube-free pushing script shares visual

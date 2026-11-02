@@ -303,6 +303,7 @@ export interface WorldMapMessage {
 
 /** Physics CVar values that affect client-side prediction. */
 export interface PhysicsCVars {
+  characterPhysics?: import("../physics/CharacterPhysics.js").CharacterPhysicsMode;
   gravity: number;
   friction: number;
   accelerate: number;

@@ -4,6 +4,8 @@ import type { Entity, PositionComponent, SpriteComponent } from "../entities/Ent
 import type { Prop } from "../entities/Prop.js";
 import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import type { Movement } from "../input/ActionManager.js";
+import { CharacterMotionBudget } from "../physics/CharacterMotionBudget.js";
+import { characterPhysicsReady } from "../physics/CharacterPhysics.js";
 import type { MovementPhysicsParams } from "../physics/PlayerMovement.js";
 import {
   getMovementPhysicsParams,
@@ -731,6 +733,9 @@ export class PlayerPredictor {
       hasRevisionMismatch: false,
     };
 
+    // Every authority rebase invalidates speculative body displacement, on foot
+    // as well as mounted. Rebuild it from retained inputs against fresh poses.
+    this.pushedBodies.clear();
     // Detect mount from server state
     const serverMount =
       mountEntityId !== undefined ? (entities.find((e) => e.id === mountEntityId) ?? null) : null;
@@ -769,7 +774,6 @@ export class PlayerPredictor {
       const oldMountX = this.predictedMount.position.wx;
       const oldMountY = this.predictedMount.position.wy;
 
-      this.pushedBodies.clear();
       // Snap mount to server's authoritative position and Z state
       this.predictedMount.position.wx = serverMount.position.wx;
       this.predictedMount.position.wy = serverMount.position.wy;
@@ -1514,7 +1518,7 @@ export class PlayerPredictor {
     entities: readonly Entity[],
     physics: MovementPhysicsParams,
   ): void {
-    if (!this.predicted) return;
+    if (!this.predicted || !characterPhysicsReady(physics.characterPhysics ?? 0)) return;
     const stepDts = splitInputStepDurations(dt, MAX_INPUT_STEP_SECONDS);
     if (stepDts.length === 0) return;
     const queryEntities = (_aabb: {
@@ -1532,7 +1536,12 @@ export class PlayerPredictor {
       right: number;
       bottom: number;
     }): readonly Prop[] => props;
-    const sampleSurfaces = createSurfaceSampler({ queryEntities, queryProps });
+    const originalQuery = queryEntities;
+    const collisionEntities = (aabb: Parameters<typeof queryEntities>[0]) =>
+      physics.characterPhysics
+        ? originalQuery(aabb).map((body) => this.pushedBodies.get(body.id) ?? body)
+        : originalQuery(aabb);
+    const sampleSurfaces = createSurfaceSampler({ queryEntities: collisionEntities, queryProps });
     const getCollision = (tx: number, ty: number) => world.getCollisionIfLoaded(tx, ty);
     const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
     const getTerrainAt = (tx: number, ty: number) => world.getBlendBaseAt(tx, ty);
@@ -1640,10 +1649,12 @@ export class PlayerPredictor {
         getHeight,
         getTerrainAt,
         getRoadAt,
-        queryEntities,
+        queryEntities: collisionEntities,
         queryProps,
         movingEntity: this.predicted,
         excludeIds: playerExclude,
+        motionBudget: new CharacterMotionBudget(),
+        pushBody: (_before, after) => this.pushedBodies.set(after.id, after),
         noclip: this.noclip,
         deferRoofCarry: true,
       });

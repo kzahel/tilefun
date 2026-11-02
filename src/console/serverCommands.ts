@@ -1,5 +1,7 @@
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import {
+  configureCharacterPhysics,
+  getCharacterPhysics,
   setAccelerate,
   setAirAccelerate,
   setAirWishCap,
@@ -38,6 +40,16 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
   for (const def of SERVER_CVAR_DEFS) {
     engine.cvars.register(def);
   }
+
+  const characterPhysics = getCVar(engine, "sv_characterphysics");
+  characterPhysics.set(getCharacterPhysics());
+  characterPhysics.onChange((value) => {
+    const previous = getCharacterPhysics();
+    void configureCharacterPhysics(value as number).catch((error) => {
+      console.error("Character physics initialization failed", error);
+      if (characterPhysics.get() === value) characterPhysics.set(previous);
+    });
+  });
 
   // ── Wire CVars to server state ──
   const sv_speed = getCVar(engine, "sv_speed");

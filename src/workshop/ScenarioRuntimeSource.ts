@@ -1,4 +1,12 @@
 import movement from "../entities/EntityManager.ts?raw";
+import characterBudget from "../physics/CharacterMotionBudget.ts?raw";
+import characterPhysics from "../physics/CharacterPhysics.ts?raw";
+import characterLanding from "../physics/PlayerLanding.ts?raw";
+import characterMovement from "../physics/PlayerMovement.ts?raw";
+import characterContact from "../physics/rapier/CharacterContact.ts?raw";
+import characterShape from "../physics/rapier/CharacterShape.ts?raw";
+import clippedTerrain from "../physics/rapier/ClippedTerrain.ts?raw";
+import characterBackend from "../physics/rapier/GameCharacterPhysics.ts?raw";
 import client from "../scenarios/ScenarioClient.ts?raw";
 import presentation from "../scenarios/ScenarioPresentationHost.ts?raw";
 import protocol from "../scenarios/ScenarioProtocol.ts?raw";
@@ -18,6 +26,14 @@ import wildlifeRespawns from "../wildlife/WildlifeRespawns.ts?raw";
 
 /** Live behavior reviews include host timing/transport, not just recipe/physics. */
 export const scenarioRuntimeSource = {
+  characterPhysics,
+  characterMovement,
+  characterLanding,
+  clippedTerrain,
+  characterContact,
+  characterBudget,
+  characterBackend,
+  characterShape,
   generation,
   predatorAI,
   wildlifeRespawns,

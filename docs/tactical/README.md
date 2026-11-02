@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [197 Opt-in game character physics](197-opt-in-game-character-physics.md) | Delivered opt-in on-foot Rapier contacts through normal Worker/prediction, fixed box/capsule comparison and game CVars; [physics engine](../topics/physics-engine.md) |
 | [196 Restore player pushing](196-restore-controlled-player-pushing.md) | Restores bounded pushing from current motor proposals; positive idle-recipient travel, release and wall checks; [physics engine](../topics/physics-engine.md) |
 | [195 Player contact feedback](195-player-contact-feedback.md) | Shared motor relative sweeps remove runaway gliding/speed bursts; raw release/follow/jump/wall and replay checks; [physics engine](../topics/physics-engine.md) |
 | [194 Coherent contact presentation](194-coherent-contact-presentation.md) | Delivered for observer inspection: whole-component timelines/rigid transforms fix early cube motion in idle observers; both-active corrections remain a blocker; [physics engine](../topics/physics-engine.md) |

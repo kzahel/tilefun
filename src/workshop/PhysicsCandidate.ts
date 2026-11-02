@@ -1,6 +1,7 @@
 import { sha256 } from "../art/ArtSource.js";
 import limits from "../client/PredictionLimits.ts?raw";
 import geometry from "../physics/rapier/BridgeFixture.ts?raw";
+import characterContact from "../physics/rapier/CharacterContact.ts?raw";
 import pairPredictor from "../physics/rapier/FullWorldPredictor.ts?raw";
 import latency from "../physics/rapier/OrderedLatency.ts?raw";
 import pairAuthority from "../physics/rapier/PairAuthority.ts?raw";
@@ -47,6 +48,7 @@ export async function buildPhysicsCandidate(): Promise<WorkshopCandidate> {
           pairPort,
           pairWorker,
           geometry,
+          characterContact,
           backend,
           predictor,
           latency,

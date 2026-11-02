@@ -6,6 +6,7 @@ import {
   getAccelerate,
   getAirAccelerate,
   getAirWishCap,
+  getCharacterPhysics,
   getFriction,
   getGravityScale,
   getNoBunnyHop,
@@ -328,6 +329,7 @@ export class RealmReplicator {
       messages.push({
         type: "sync-cvars",
         cvars: {
+          ...(getCharacterPhysics() ? { characterPhysics: getCharacterPhysics() } : {}),
           gravity: getGravityScale(),
           friction: getFriction(),
           accelerate: getAccelerate(),

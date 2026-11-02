@@ -13,6 +13,7 @@ import {
   vehicleBedStepZ,
 } from "../traffic/VehicleBed.js";
 import { zRangesOverlap } from "./AABB3D.js";
+import { stepCharacterPhysics } from "./CharacterPhysics.js";
 import type { MovementContext } from "./MovementContext.js";
 import { querySurfacePatch } from "./SurfacePatch.js";
 import type { EntitySurface, PropSurface } from "./surfaceHeight.js";
@@ -24,6 +25,8 @@ export interface SimulationQuerySource {
 }
 
 export interface CreateMovementContextOptions extends SimulationQuerySource {
+  motionBudget?: import("./CharacterMotionBudget.js").CharacterMotionBudget;
+  pushBody?(before: Entity, after: Entity): void;
   getCollision: (tx: number, ty: number) => number;
   getHeight: (tx: number, ty: number) => number;
   getTerrainAt?: (tx: number, ty: number) => number;
@@ -47,6 +50,7 @@ function defaultShouldEntityBlock(other: Entity): boolean {
 export function createMovementContext(options: CreateMovementContextOptions): MovementContext {
   const shouldEntityBlock = options.shouldEntityBlock ?? defaultShouldEntityBlock;
   const ctx: MovementContext = {
+    moveCharacter: (entity, dt, physics) => stepCharacterPhysics(entity, dt, physics, options),
     getCollision: options.getCollision,
     getHeight: options.getHeight,
     getTerrainZ: (aabb) => terrainBaseZ(aabb, options.getHeight, options.queryProps(aabb)),

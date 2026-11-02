@@ -2,6 +2,7 @@ import { RemoteStateView } from "../client/ClientStateView.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { predictInput } from "../client/predictInput.js";
 import type { Movement } from "../input/ActionManager.js";
+import { prepareCharacterPhysics } from "../physics/CharacterPhysics.js";
 import {
   decodeServerMessage,
   encodeClientMessage,
@@ -84,7 +85,10 @@ export class ScenarioClient {
     this.worker.onerror = (event) => this.fail(new Error(event.message));
     this.worker.onmessageerror = () =>
       this.fail(new Error("Could not decode scenario Worker message"));
-    this.ready = this.request({ kind: "open", recipe, mode: "realtime" }).then(() => {
+    this.ready = Promise.all([
+      prepareCharacterPhysics(physics.characterPhysics ?? 0),
+      this.request({ kind: "open", recipe, mode: "realtime" }),
+    ]).then(() => {
       this.loaded = true;
     });
     void this.ready.catch(() => {});
