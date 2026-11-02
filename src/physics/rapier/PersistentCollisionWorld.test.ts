@@ -88,33 +88,37 @@ it("drives an ordinary car into an NPC through replacement contacts and reconstr
   }
 });
 
-it("uses the shared collision world for an ordinary bouncing and rolling ball", async () => {
-  const ball = createBall(64, 32);
-  ball.wz = 20;
-  ball.jumpVZ = -5;
-  ball.velocity = { vx: 30, vy: 0 };
-  const session = await ScenarioSession.create({
-    version: 1,
-    id: "persistent-ball",
-    generation: FLAT_SCENARIO,
-    props: [],
-    actors: [ball],
-    player: createPlayer(32, 32),
-    physics: { characterPhysics: 3 },
-  });
-  try {
-    const actor = session.realm.entityManager.entities.find((e) => e.type === "ball");
-    if (!actor) throw Error("Missing ball");
-    let bounced = false;
-    for (let i = 0; i < 120; i++) {
-      await session.step(idle, 1 / 60);
-      bounced ||= (actor.jumpVZ ?? 0) > 5;
-      expect(actor.wz).toBeGreaterThan(-0.1);
+it.each([3, 4] as const)(
+  "uses one stable hull for an ordinary bouncing and rolling ball (mode %s)",
+  async (mode) => {
+    const ball = createBall(64, 32);
+    ball.wz = 20;
+    ball.jumpVZ = -5;
+    ball.velocity = { vx: 30, vy: 0 };
+    const session = await ScenarioSession.create({
+      version: 1,
+      id: "persistent-ball",
+      generation: FLAT_SCENARIO,
+      props: [],
+      actors: [ball],
+      player: createPlayer(32, 32),
+      physics: { characterPhysics: mode },
+    });
+    try {
+      const actor = session.realm.entityManager.entities.find((e) => e.type === "ball");
+      if (!actor) throw Error("Missing ball");
+      let bounced = false;
+      for (let i = 0; i < 120; i++) {
+        await session.step(idle, 1 / 60);
+        bounced ||= (actor.jumpVZ ?? 0) > 5;
+        expect(actor.wz).toBeGreaterThan(-0.1);
+      }
+      expect(bounced).toBe(true);
+      expect(actor.position.wx).toBeGreaterThan(66);
+      expect(actor.wz).toBeLessThan(0.2);
+      expect(session.realm.collisionDiagnostics?.replacedActorShapes).toBe(0);
+    } finally {
+      await session.close();
     }
-    expect(bounced).toBe(true);
-    expect(actor.position.wx).toBeGreaterThan(66);
-    expect(actor.wz).toBeLessThan(0.2);
-  } finally {
-    await session.close();
-  }
-});
+  },
+);

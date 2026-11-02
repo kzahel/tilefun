@@ -45,7 +45,14 @@ export class PersistentCollisionWorld {
     this.unsupported.set(reason, (this.unsupported.get(reason) ?? 0) + 1);
     return undefined;
   }
-  readonly metrics = { queries: 0, rebuiltSections: 0, queryMs: 0, geometryMs: 0, refreshMs: 0 };
+  readonly metrics = {
+    replacedActorShapes: 0,
+    queries: 0,
+    rebuiltSections: 0,
+    queryMs: 0,
+    geometryMs: 0,
+    refreshMs: 0,
+  };
 
   beginFrame() {
     this.frame++;
@@ -203,6 +210,7 @@ export class PersistentCollisionWorld {
     const shape = `${capsule}:${hull.half.x}:${hull.half.y}:${hull.half.z}`;
     let actor = this.actors.get(entity.id);
     if (actor && actor.shape !== shape) {
+      this.metrics.replacedActorShapes++;
       this.world.removeCollider(actor.collider, false);
       this.actors.delete(entity.id);
       actor = undefined;

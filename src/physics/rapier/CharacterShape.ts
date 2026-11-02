@@ -7,6 +7,12 @@ import { entityBody } from "../../traffic/VehicleContact.js";
 
 export const PHYSICS_PIXELS_PER_METRE = 16;
 export type CharacterHull = "box" | "capsule";
+export function usesCapsule(entity: Entity, mode: number | undefined): boolean {
+  return (
+    (mode === 2 && entity.type === "player") ||
+    (mode === 4 && (entity.type === "player" || !!entity.wanderAI))
+  );
+}
 /** Physics hull and center derive from the same anchored game rectangle. No facing input. */
 export function characterShape(entity: Entity, hull: CharacterHull, physicalVehicle = false) {
   const collider = entity.collider;

@@ -33,12 +33,16 @@ export function controlledBallMotion(
     gravityScale: BALL_GRAVITY / JUMP_GRAVITY,
     walkSpeed: Math.max(1, Math.hypot(velocity.vx, velocity.vy)),
   });
-  for (const normal of result.collisionNormals ?? []) {
-    if (Math.abs(normal.y) >= 0.5) continue;
-    const closing = original.vx * normal.x + original.vy * normal.z;
+  const sideNormals = (result.collisionNormals ?? []).filter((normal) => Math.abs(normal.y) < 0.5);
+  if (sideNormals.length) Object.assign(velocity, original);
+  for (const normal of sideNormals) {
+    const length = Math.hypot(normal.x, normal.z) || 1;
+    const nx = normal.x / length,
+      ny = normal.z / length;
+    const closing = velocity.vx * nx + velocity.vy * ny;
     if (closing < 0) {
-      velocity.vx = original.vx - (1 + BOUNCE_RESTITUTION) * closing * normal.x;
-      velocity.vy = original.vy - (1 + BOUNCE_RESTITUTION) * closing * normal.z;
+      velocity.vx -= (1 + BOUNCE_RESTITUTION) * closing * nx;
+      velocity.vy -= (1 + BOUNCE_RESTITUTION) * closing * ny;
     }
   }
   if (result.landed && Math.abs(impact) >= BOUNCE_STOP_VZ) {

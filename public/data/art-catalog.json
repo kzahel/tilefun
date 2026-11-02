@@ -9557,7 +9557,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1253"
+          "source": "src/server/Realm.ts:1264"
         },
         {
           "system": "Gameplay",
@@ -10485,7 +10485,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1255"
+          "source": "src/server/Realm.ts:1266"
         },
         {
           "system": "Gameplay",
@@ -10615,7 +10615,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1255"
+          "source": "src/server/Realm.ts:1266"
         },
         {
           "system": "Gameplay",
@@ -29759,7 +29759,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1253"
+          "source": "src/server/Realm.ts:1264"
         },
         {
           "system": "Gameplay",
@@ -35479,35 +35479,31 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:128"
+          "source": "src/physics/rapier/CharacterShape.ts:12"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:129"
+          "source": "src/physics/rapier/CharacterShape.ts:13"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:140"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:143"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:145"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:173"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:175"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:243"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:245"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:244"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:246"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/physics/rapier/PersistentCollisionWorld.ts:283"
+          "source": "src/physics/rapier/PersistentCollisionWorld.ts:291"
         },
         {
           "system": "Gameplay",
@@ -35547,23 +35543,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:360"
+          "source": "src/server/Realm.ts:371"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1737"
+          "source": "src/server/Realm.ts:1748"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1922"
+          "source": "src/server/Realm.ts:1933"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2709"
+          "source": "src/server/Realm.ts:2720"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2929"
+          "source": "src/server/Realm.ts:2940"
         },
         {
           "system": "Gameplay",
@@ -36675,23 +36671,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:115"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:119"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:176"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:174"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:332"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:330"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/GameCharacterPhysics.ts:504"
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:502"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/PersistentCollisionWorld.ts:278"
+          "source": "src/physics/rapier/PersistentCollisionWorld.ts:286"
         },
         {
           "system": "Editor",
@@ -36699,15 +36695,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1833"
+          "source": "src/server/Realm.ts:1844"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2589"
+          "source": "src/server/Realm.ts:2600"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2893"
+          "source": "src/server/Realm.ts:2904"
         },
         {
           "system": "Gameplay",
@@ -37569,7 +37565,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1255"
+          "source": "src/server/Realm.ts:1266"
         },
         {
           "system": "Gameplay",
@@ -37703,7 +37699,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1255"
+          "source": "src/server/Realm.ts:1266"
         },
         {
           "system": "Gameplay",

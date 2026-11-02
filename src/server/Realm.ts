@@ -183,6 +183,17 @@ export interface RealmOptions {
 
 export class Realm {
   private collisionWorld: PersistentCollisionWorld | undefined;
+  get usesReplacementPhysics() {
+    return usesRealmPhysics(
+      (this.options.physics?.() ?? getMovementPhysicsParams()).characterPhysics,
+    );
+  }
+  requireLegacyInteraction(feature: string): void {
+    if (this.usesReplacementPhysics) {
+      this.collisionWorld?.reject(feature);
+      throw Error(`${feature} is not qualified for the Rapier realm proof`);
+    }
+  }
   get collisionDiagnostics() {
     return this.collisionWorld?.diagnostics ?? null;
   }
@@ -995,7 +1006,7 @@ export class Realm {
         }
       } else if (!session.editorEnabled && session.player.velocity) {
         if (this.vehicles.get(session)) {
-          this.vehicles.missingInput(session, dt);
+          this.vehicles.missingInput(session);
           continue;
         }
         // No input this tick (timing jitter) â€” apply friction only.

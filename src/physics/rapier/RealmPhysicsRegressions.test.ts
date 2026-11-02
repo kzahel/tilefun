@@ -44,7 +44,7 @@ it("rejects a chassis rotation that sweeps into a wall", async () => {
   }
 });
 
-it("commits car falling state and advances it during missing-input ticks", async () => {
+it("commits car falling state on admitted commands without double stepping empty intervals", async () => {
   const deck = surfaceProp(
     { left: -64, top: 0, right: 96, bottom: 128 },
     { id: "deck", spaceId: "upper", z: 32, riseX: 0, riseY: 0, thickness: 8, connectsTo: [] },
@@ -75,8 +75,10 @@ it("commits car falling state and advances it during missing-input ticks", async
     expect(falling).toBe(true);
     const before = car.wz ?? 0;
     const x = car.position.wx;
-    for (let i = 0; i < 45; i++) session.tick(1 / 60);
+    session.tick(1 / 60);
     expect(car.position.wx).toBeCloseTo(x, 3);
+    expect(car.wz).toBeCloseTo(before, 3);
+    for (let i = 0; i < 45; i++) await session.step(idle, 1 / 60);
     expect(car.wz).toBeLessThan(before - 10);
     expect(car.wz).toBeCloseTo(0, 0);
     expect(car.jumpVZ).toBeUndefined();
@@ -124,3 +126,27 @@ it.each([false, true])(
     }
   },
 );
+
+it("rejects deferred apparatus commands before legacy collision/pose handlers run", async () => {
+  const session = await ScenarioSession.create({
+    version: 1,
+    id: "exclusive-apparatus",
+    generation: FLAT_SCENARIO,
+    props: [],
+    player: createPlayer(0, 0),
+    physics: { characterPhysics: 3 },
+  });
+  try {
+    expect(() => session.realm.vehicles.tow(session.player, 123, "attach")).toThrow(
+      "not qualified for the Rapier realm proof",
+    );
+    expect(() => session.realm.vehicles.transporter(session.player, 123, "deploy")).toThrow(
+      "not qualified for the Rapier realm proof",
+    );
+    expect(() => session.realm.vehicles.bed(session.player, 123, "load")).toThrow(
+      "not qualified for the Rapier realm proof",
+    );
+  } finally {
+    await session.close();
+  }
+});

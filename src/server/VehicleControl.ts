@@ -10,7 +10,11 @@ import { createPlayer } from "../entities/Player.js";
 import { getSurfaceZ, resolveGroundZForTracking } from "../physics/surfaceHeight.js";
 import { isTrain } from "../railway/Train.js";
 import type { VehicleHornMessage } from "../shared/protocol.js";
-import { supportingTransporter, type TransporterAction } from "../traffic/CarTransporter.js";
+import {
+  isTransporter,
+  supportingTransporter,
+  type TransporterAction,
+} from "../traffic/CarTransporter.js";
 import {
   boardingDistance,
   boardingHeightRange,
@@ -37,12 +41,15 @@ import { controlVehicleBed } from "./VehicleBedControl.js";
 /** Inside seats use ordinary replicated parenting/mount identity. Roof riders are independent. */
 export class VehicleControl {
   transporter(session: PlayerSession, id: number, action: TransporterAction): void {
+    this.realm.requireLegacyInteraction("transporter apparatus");
     controlTransporter(this.realm, session, id, action);
   }
   tow(session: PlayerSession, id: number, action: TowAction): void {
+    this.realm.requireLegacyInteraction("tow apparatus");
     controlTow(this.realm, session, id, action);
   }
   bed(session: PlayerSession, id: number, action: VehicleBedAction): void {
+    this.realm.requireLegacyInteraction("vehicle bed apparatus");
     controlVehicleBed(this.realm, session, id, action);
   }
   private drivers = new Map<
@@ -141,6 +148,8 @@ export class VehicleControl {
       vehicle.transportedBy !== undefined
     )
       throw Error("Vehicle unavailable.");
+    if (r.usesReplacementPhysics && (isTrain(vehicle) || isBoat(vehicle) || isTransporter(vehicle)))
+      throw Error("This vehicle is not qualified for the Rapier realm proof");
     const car = r.traffic?.states.get(id);
     const train = [...(r.railway?.services.values() ?? [])].find((s) =>
       s.carriages.includes(vehicle),
@@ -230,10 +239,7 @@ export class VehicleControl {
     if (car) this.realm.traffic?.onChange?.(car, false);
   }
   /** Cars hold across input gaps; trains brake on the service clock. */
-  missingInput(session: PlayerSession, dt = 0): void {
-    const vehicle = this.get(session),
-      car = vehicle && this.realm.traffic?.states.get(vehicle.id);
-    if (car && dt > 0) this.realm.traffic?.idleCollisionStep(car, dt);
+  missingInput(session: PlayerSession): void {
     const train = [...(this.realm.railway?.services.values() ?? [])].find(
       (s) => s.driverId === session.player.id,
     );

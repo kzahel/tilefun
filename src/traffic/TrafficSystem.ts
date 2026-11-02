@@ -179,25 +179,6 @@ export class TrafficSystem {
     if (resolve) this.drivingQueries.resolveCarMotion = resolve;
     else delete this.drivingQueries.resolveCarMotion;
   }
-  /** Empty command intervals hold horizontal driving pose, but an already falling
-   * replacement car must still advance gravity once on the authority clock. */
-  idleCollisionStep(state: TrafficState, dt: number): void {
-    if (!this.drivingQueries.resolveCarMotion || state.entity.jumpVZ === undefined) return;
-    const next = this.drivingQueries.resolveCarMotion(
-      state.entity,
-      { ...state.entity, position: { ...state.entity.position } },
-      dt,
-      [],
-    );
-    if (!next) return;
-    state.entity.position = next.position;
-    for (const key of ["wz", "groundZ", "jumpVZ", "jumpZ"] as const) {
-      if (next[key] === undefined) delete state.entity[key];
-      else state.entity[key] = next[key];
-    }
-    this.entities.spatialHash.update(state.entity);
-    this.onChange?.(state, false);
-  }
   private spawnClock = 0;
   private liveShopping = new Set<ParkingSystem>();
   private retired = new Map<string, number>();

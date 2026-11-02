@@ -51,9 +51,13 @@ are included despite their legacy non-solid flag.
 One upright controlled car retains steering/acceleration intent but uses the same
 world for collision, gentle NPC pushes and gravity. Conservative padded angular
 samples reject turning into walls and retain straight-roll recovery. Vertical
-state commits with the authority pose; missing-input intervals hold horizontal
-travel while advancing an already falling car. Ordinary balls retain gameplay hit
-reactions/lifetime and bounce using Rapier contact normals, including airborne or
+state commits with the authority pose. Controlled cars retain the existing admitted
+command clock: empty input intervals hold their entire pose, and real neutral
+commands brake/advance falling normally. Adding idle gravity without a shared time
+budget would double-count later queued commands, so that attempt was removed.
+Free-running vehicle gravity and its prediction timing remain future work.
+Ordinary balls retain gameplay hit reactions/lifetime and bounce using Rapier
+contact normals, including airborne or
 unpushed recipients. No legacy ball contact pass also runs.
 
 World Geometry's **Realm physics replacement proof** uses ordinary Realm actors,
@@ -85,3 +89,30 @@ The requested read-only Sol 6.1 high review identified five issues: section spil
 unchecked car rotation, missing committed car vertical state, missing ball bounce
 normal and missing hit reactions for unpushed recipients. Focused regressions and
 fixes were added; re-review, final browser checks and the decision record are pending.
+
+
+Implementation checkpoint `2221278f` passes 264 focused native tests, all three
+TypeScript projects and a production build with current catalogs/2119 identities.
+Four distinct full-Chromium cases pass across the normal game, geometry lab,
+replacement NPC contact and actual P2P host/delayed guest. The initial new game
+fixture had sent editor commands while in Play; switching to Edit fixed the fixture
+without a runtime change. The isolated default streaming runner reports no errors
+or failures. Follow-up review found four additional issues: duplicated idle car
+gravity, inconsistent mode-4 ball hulls, overwritten corner reflections and direct
+apparatus command fallthrough. These receive a separate correction checkpoint and
+validation before the final device decision.
+
+The follow-up review is clean after those corrections. Device benchmark captures
+now explicitly scroll the canvas into view before measuring. Earlier captures did
+not enforce canvas visibility; use their authority timings as preliminary evidence,
+not a rendering qualification. The final paired device run follows the corrected
+source checkpoint and records the visible-canvas configuration.
+
+Corrected checkpoint validation: 267 focused native tests in 21 files and all
+three TypeScript projects pass. Current catalog/manifest verify 2119 candidate
+identities in full Chromium at retina scale; production build passes. All four
+selected browser cases pass on the corrected source: original opt-in/legacy
+return, shared geometry, ordinary replacement NPC pushing and real P2P delayed
+guest reversals/convergence. Changed-file Biome checks pass with only existing
+non-null assertion warnings. Final read-only `gpt-6.1-sol` at verified high effort
+reports no actionable findings in the correction paths.

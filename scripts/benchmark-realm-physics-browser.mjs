@@ -73,6 +73,7 @@ try {
           url.hash = "/tool/world-geometry";
           await page.goto(url.href, { waitUntil: "domcontentloaded" });
           await page.waitForSelector('canvas[data-ready="true"]', { timeout: 60000 });
+          await page.locator('canvas[data-ready="true"]').scrollIntoViewIfNeeded();
           await page.bringToFront();
           await page.waitForTimeout(warmup * 1000);
           const start = await page.evaluate(async () => {

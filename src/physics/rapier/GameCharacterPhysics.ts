@@ -18,7 +18,11 @@ import {
   guardCharacterSideContact,
   shareCharacterContact,
 } from "./CharacterContact.js";
-import { characterShape, PHYSICS_PIXELS_PER_METRE as SCALE } from "./CharacterShape.js";
+import {
+  characterShape,
+  PHYSICS_PIXELS_PER_METRE as SCALE,
+  usesCapsule,
+} from "./CharacterShape.js";
 import { compileCollisionGeometry } from "./CollisionGeometry.js";
 import { PersistentCollisionWorld } from "./PersistentCollisionWorld.js";
 import { initRapier } from "./RapierWorld.js";
@@ -66,7 +70,7 @@ class GameCharacterPhysics implements CharacterMotionBackend {
     desired.z = admitted.y / SCALE;
     const hull = characterShape(
       entity,
-      physics.characterPhysics === 2 || physics.characterPhysics === 4 ? "capsule" : "box",
+      usesCapsule(entity, physics.characterPhysics) ? "capsule" : "box",
       !!persistent,
     );
     let origin = {
@@ -125,20 +129,14 @@ class GameCharacterPhysics implements CharacterMotionBackend {
       for (const other of bodies) {
         const shape = characterShape(
           other,
-          (other.type === "player" && physics.characterPhysics === 2) ||
-            ((other.type === "player" || !!other.wanderAI) && physics.characterPhysics === 4)
-            ? "capsule"
-            : "box",
+          usesCapsule(other, physics.characterPhysics) ? "capsule" : "box",
           !!persistent,
         );
         actors.set(other.id, {
           entity: other,
           sideHalfHeight: shape.sideHalfHeight,
           collider:
-            persistent?.actor(
-              other,
-              (other.type === "player" || !!other.wanderAI) && physics.characterPhysics === 4,
-            ) ??
+            persistent?.actor(other, usesCapsule(other, physics.characterPhysics)) ??
             add(
               shape.descriptor.setTranslation(
                 shape.center.x - origin.x,
@@ -150,7 +148,7 @@ class GameCharacterPhysics implements CharacterMotionBackend {
       }
       // The collider offset is physical skin, not a change to the saved foot anchor.
       const character =
-        persistent?.actor(entity, physics.characterPhysics === 4) ??
+        persistent?.actor(entity, usesCapsule(entity, physics.characterPhysics)) ??
         add(
           hull.descriptor.setTranslation(
             hull.center.x - origin.x,
