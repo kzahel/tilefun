@@ -9557,7 +9557,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1264"
+          "source": "src/server/Realm.ts:917"
         },
         {
           "system": "Gameplay",
@@ -10485,7 +10485,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1266"
+          "source": "src/server/Realm.ts:919"
         },
         {
           "system": "Gameplay",
@@ -10615,7 +10615,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1266"
+          "source": "src/server/Realm.ts:919"
         },
         {
           "system": "Gameplay",
@@ -29759,7 +29759,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1264"
+          "source": "src/server/Realm.ts:917"
         },
         {
           "system": "Gameplay",
@@ -33437,7 +33437,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:913"
+          "source": "src/scenes/PlayScene.ts:811"
         },
         {
           "system": "Gameplay",
@@ -33493,7 +33493,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:913"
+          "source": "src/scenes/PlayScene.ts:811"
         },
         {
           "system": "Gameplay",
@@ -33545,7 +33545,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:913"
+          "source": "src/scenes/PlayScene.ts:811"
         },
         {
           "system": "Gameplay",
@@ -35411,27 +35411,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:143"
+          "source": "src/client/ClientStateView.ts:142"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:694"
+          "source": "src/client/ClientStateView.ts:683"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:120"
+          "source": "src/console/serverCommands.ts:83"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/PlayerPredictor.ts:1117"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/console/serverCommands.ts:206"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/console/serverCommands.ts:278"
+          "source": "src/console/serverCommands.ts:155"
         },
         {
           "system": "Editor",
@@ -35475,15 +35467,19 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/physics/PhysicsScene.ts:68"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/physics/PlayerLanding.ts:36"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/CharacterShape.ts:12"
+          "source": "src/physics/rapier/CharacterShape.ts:14"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/rapier/CharacterShape.ts:13"
+          "source": "src/physics/rapier/CharacterShape.ts:15"
         },
         {
           "system": "Gameplay",
@@ -35539,27 +35535,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/PlayerSession.ts:84"
+          "source": "src/server/PlayerSession.ts:86"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:371"
+          "source": "src/server/Realm.ts:339"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1748"
+          "source": "src/server/Realm.ts:1360"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1933"
+          "source": "src/server/Realm.ts:1545"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2720"
+          "source": "src/server/Realm.ts:2258"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2940"
+          "source": "src/server/Realm.ts:2471"
         },
         {
           "system": "Gameplay",
@@ -36651,19 +36647,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityManager.ts:169"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/persistence/ActorRecords.ts:141"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallPhysics.ts:55"
+          "source": "src/physics/BallGameplay.ts:23"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallPhysics.ts:222"
+          "source": "src/physics/BallGameplay.ts:42"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/BallPhysics.ts:47"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/BallPhysics.ts:214"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/PhysicsScene.ts:67"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/PhysicsScene.ts:196"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/PhysicsScene.ts:203"
         },
         {
           "system": "Gameplay",
@@ -36691,19 +36703,15 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:830"
+          "source": "src/scenes/PlayScene.ts:728"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1844"
+          "source": "src/server/Realm.ts:1456"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2600"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/server/Realm.ts:2904"
+          "source": "src/server/Realm.ts:2435"
         },
         {
           "system": "Gameplay",
@@ -37565,7 +37573,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1266"
+          "source": "src/server/Realm.ts:919"
         },
         {
           "system": "Gameplay",
@@ -37699,7 +37707,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1266"
+          "source": "src/server/Realm.ts:919"
         },
         {
           "system": "Gameplay",
@@ -38267,7 +38275,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:64"
+          "source": "src/scenes/renderWorld.ts:54"
         },
         {
           "system": "Gameplay",

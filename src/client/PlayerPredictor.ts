@@ -1,1790 +1,657 @@
-import { BOAT_SEAT_Z, isBoat } from "../boats/Boat.js";
 import { getEntityAABB } from "../entities/collision.js";
-import type { Entity, PositionComponent, SpriteComponent } from "../entities/Entity.js";
+import type { Entity, PositionComponent } from "../entities/Entity.js";
+import { updatePlayerSpriteFromInput } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import type { Movement } from "../input/ActionManager.js";
-import { CharacterMotionBudget } from "../physics/CharacterMotionBudget.js";
+import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
+import { type MotionIntent, type PhysicsGeometry, PhysicsScene } from "../physics/PhysicsScene.js";
+import { MAX_PREDICTION_BODIES, type PhysicsState } from "../physics/PhysicsState.js";
 import {
-  characterPhysicsReady,
-  createCollisionWorld,
-  usesRealmPhysics,
-} from "../physics/CharacterPhysics.js";
-import { controlledCarMotion } from "../physics/ControlledCarMotion.js";
-import type { MovementPhysicsParams } from "../physics/PlayerMovement.js";
-import {
-  getMovementPhysicsParams,
-  getServerPhysicsMult,
-  INPUT_BACKLOG_STEP_BUDGET,
-  MAX_INPUT_STEP_SECONDS,
-  splitInputStepDurations,
-  stepMountFromInput,
-  stepPlayerFromInput,
-} from "../physics/PlayerMovement.js";
-import { createMovementContext, createSurfaceSampler } from "../physics/SimulationEnvironment.js";
-import { isTrain } from "../railway/Train.js";
+  CONTROL_HOLD_TICKS,
+  playerMotionIntent,
+  vehicleMotionIntent,
+} from "../physics/PlayerControls.js";
+import { getGravityScale } from "../physics/PlayerMovement.js";
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
-import { drivenCarPose } from "../traffic/Driving.js";
-import { retainDrivingQueries } from "../traffic/DrivingQueries.js";
-import { type RoofOffset, roofOffset, roofPosition } from "../traffic/MovingSupport.js";
-import { roofSupport } from "../traffic/RoofSupport.js";
-import { isVehicle } from "../traffic/Vehicle.js";
-import { bedFloorSupport, movingSupportZ } from "../traffic/VehicleBed.js";
-import type { VehiclePush } from "../traffic/VehiclePush.js";
+import { interpolateHeading } from "../rendering/PresentationTimeline.js";
 import type { World } from "../world/World.js";
 
-import { PredictionCollisionTimeline } from "./PredictionCollisionTimeline.js";
-import {
-  INPUT_BUFFER_SIZE,
-  INPUT_HISTORY_SECONDS,
-  REPLAY_TIME_BUDGET_SECONDS,
-} from "./PredictionLimits.js";
-
-/** If predicted and server positions diverge by more than this, snap immediately. */
-const SNAP_THRESHOLD = 32;
-
-/** Ring buffer capacity for stored inputs (replay-based reconciliation). */
-/** Per prediction tick, including continuation of a replay started by a snapshot. */
-const REPLAY_STEP_BUDGET = INPUT_BACKLOG_STEP_BUDGET;
-/** Allow a resumed authority to acknowledge the lost prefix before explicit resync. */
-const HISTORY_GAP_GRACE_SECONDS = 0.25;
-
-/** Ordinary controlled animation owns local phase; physically timed clips do not. */
-function predictionSprite(
-  local: SpriteComponent | null,
-  authoritative: SpriteComponent | null,
-): SpriteComponent | null {
-  if (!authoritative) return null;
-  const sprite = { ...authoritative };
-  if (
-    local &&
-    local.sheetKey === sprite.sheetKey &&
-    local.frameCount === sprite.frameCount &&
-    local.clip === sprite.clip &&
-    local.clipElapsedMs === undefined &&
-    sprite.clipElapsedMs === undefined
-  ) {
-    sprite.frameCol = local.frameCol;
-    sprite.animTimer = local.animTimer;
-  }
-  return sprite;
+const MAX_HISTORY = 120;
+const REPLAY_STEPS_PER_UPDATE = 8;
+const REPLAY_MS_PER_UPDATE = 2;
+export interface StoredInput {
+  seq: number;
+  tick: number;
+  movement: Movement;
 }
-
-type ReconcileTiming = { expectedInputDt?: number; serverTick?: number; simulationTime?: number };
-type ReconcileRequest = {
-  player: Entity;
-  ack: number;
-  world: World;
-  props: readonly Prop[];
-  entities: readonly Entity[];
-  mountId: number | undefined;
-  timing: ReconcileTiming | undefined;
-};
+export interface ReconcileTiming {
+  serverTick?: number;
+  physics?: PhysicsState;
+}
 export interface PredictionRecoveryDiagnostics {
-  status: "ready" | "replaying" | "history-gap" | "resync" | "stale";
+  status: "waiting" | "ready" | "replaying" | "history-gap" | "overflow" | "stale";
   retainedInputs: number;
   retainedSeconds: number;
   discardedThroughSeq: number | undefined;
   replayStepsThisTick: number;
   replayAck: number | undefined;
 }
-
-export interface StoredInput {
-  seq: number;
-  movement: Movement;
-  dt: number;
-  physics: MovementPhysicsParams;
-  jumpStateBefore?: { jumpConsumed: boolean; lastJumpHeld: boolean };
-}
-
-export type ReconcileCauseTag =
-  | "dt_mismatch"
-  | "replay_backlog"
-  | "grounded_flip"
-  | "quantization_like"
-  | "param_mismatch"
-  | "jump_state"
-  | "velocity_drift";
-
-export interface ReconcileStateSnapshot {
-  wx: number;
-  wy: number;
-  wz: number;
-  vx: number;
-  vy: number;
-  jumpVZ: number;
-  grounded: boolean;
-}
-
 export interface ReconcileDiagnostics {
-  mode: "player" | "mount";
   ackSeq: number;
-  serverTick: number | undefined;
-  expectedInputDt: number | undefined;
+  physicsTick: number;
+  epoch: number;
+  bodies: number;
+  omitted: number;
   replayCount: number;
-  replayFirstSeq: number | undefined;
-  replayLastSeq: number | undefined;
-  replayDtMin: number;
-  replayDtMax: number;
-  replayDtAvg: number;
-  replayDtSpread: number;
-  replayPhysicsRevisions: readonly number[];
-  currentPhysicsRevision: number;
-  correctionPosErr: number;
-  correctionVelErr: number;
+  replayMs: number;
+  /** Agreement at the same past tick; absent if that tick was not retained. */
+  pastTickError: number | undefined;
+  /** Current-pose correction after restoring and replaying, not past-tick error. */
   resimPosErr: number;
-  resimVelErr: number;
-  supportId: number | null;
-  resimSupportPosErr: number | null;
-  causeTags: readonly ReconcileCauseTag[];
-  predictedBefore: ReconcileStateSnapshot;
-  authoritative: ReconcileStateSnapshot;
-  predictedAfter: ReconcileStateSnapshot;
+  status: PredictionRecoveryDiagnostics["status"];
+}
+interface Request {
+  player: Entity;
+  ack: number;
+  state: PhysicsState;
+  entities: readonly Entity[];
+  world: World;
+  props: readonly Prop[];
+}
+interface Replay {
+  request: Request;
+  nextInputTick: number;
+  steps: number;
+  ms: number;
+  before: Entity;
+  pastError: number | undefined;
+  inputs: StoredInput[];
+}
+function clone(entity: Entity): Entity {
+  return {
+    ...entity,
+    position: { ...entity.position },
+    velocity: entity.velocity && { ...entity.velocity },
+    collider: entity.collider && { ...entity.collider },
+    sprite: entity.sprite && { ...entity.sprite },
+    wanderAI: entity.wanderAI && { ...entity.wanderAI },
+    ...(entity.tags ? { tags: new Set(entity.tags) } : {}),
+  };
+}
+function distance(a: Entity, b: Entity) {
+  return Math.hypot(
+    a.position.wx - b.position.wx,
+    a.position.wy - b.position.wy,
+    (a.wz ?? 0) - (b.wz ?? 0),
+  );
 }
 
-interface ReconcileReplayStats {
-  count: number;
-  firstSeq: number | undefined;
-  lastSeq: number | undefined;
-  dtMin: number;
-  dtMax: number;
-  dtAvg: number;
-  dtSpread: number;
-  revisions: readonly number[];
-  currentRevision: number;
-  hasMixedRevisions: boolean;
-  hasRevisionMismatch: boolean;
-}
-
-/**
- * Client-side player prediction with input replay reconciliation.
- *
- * Maintains a predicted player entity that is updated locally each client tick
- * using the same physics as the server. When authoritative server state arrives,
- * the predictor snaps to the server position and replays all unacknowledged
- * inputs to rebuild the correct predicted position.
- *
- * When the player is riding a mount, the predictor also maintains a predicted
- * mount entity. Input is applied to the mount's velocity, and the player's
- * position is derived from the mount + local offset.
+/** One bounded private copy of the ordinary fixed-step kernel. Inputs address
+ * local ticks; an acknowledged snapshot anchors that clock to an authority tick.
+ * Replay never integrates once per packet or mutates replica entities.
  */
 export class PlayerPredictor {
-  private collisionWorld:
-    | import("../physics/rapier/PersistentCollisionWorld.js").PersistentCollisionWorld
-    | undefined;
-  private presentationInputSeconds = 0;
-  private presentationInputDt = 0;
-  private presentationEpoch: object = {};
-
-  /** Local input clock excludes simulation time discarded by the catch-up cap. */
-  presentationClock(alpha: number): CameraPresentationTime | null {
-    if (this.support || (this.predictedMount && isTrain(this.predictedMount))) return null;
-    return {
-      time: this.presentationInputSeconds - this.presentationInputDt * (1 - alpha),
-      domain: this.presentationEpoch,
-    };
-  }
-  constructor(
-    private readonly physics = getMovementPhysicsParams,
-    private readonly physicsMult = getServerPhysicsMult,
-    private readonly clock = () => performance.now() / 1000,
-  ) {}
-
-  /** The predicted player entity. */
+  private scene: PhysicsScene | undefined;
+  private initialization: Promise<void> | undefined;
+  private generation = 0;
   private predicted: Entity | null = null;
-
-  private collisionTimeline = new PredictionCollisionTimeline();
-  private predictionTime: number | undefined;
-  private reconciledAt = 0;
-  private collisionStepSeconds = 0;
-  private presentationError = { wx: 0, wy: 0, at: 0 };
-  private prevPresentationError = { wx: 0, wy: 0 };
-  private clearPresentationError(): void {
-    this.presentationError = { wx: 0, wy: 0, at: this.clock() };
-    this.prevPresentationError = { wx: 0, wy: 0 };
-  }
-  private displayedError() {
-    const decay = Math.exp(-Math.max(0, this.clock() - this.presentationError.at) / 0.06);
-    return { wx: this.presentationError.wx * decay, wy: this.presentationError.wy * decay };
-  }
-  // Source timestamps accompany physics endpoints. Only passive XY samples
-  // the remote clock; locally controlled steering retains its input interpolation.
-  private poseSourceSeconds: number | undefined;
-  private prevPoseSourceSeconds: number | undefined;
-  private sourceFrameSeconds: number | undefined;
-  private support: Entity | null = null;
-  private supportOffset: RoofOffset | null = null;
-  private prevSupportOffset: RoofOffset | null = null;
-  private supportDisplayShift: PositionComponent | null = null;
-  private flightDisplayShift: { wx: number; wy: number; landedAt?: number } | null = null;
-
-  /** Whether noclip is active (skip collision in prediction). */
-  noclip = false;
-
-  /** Previous predicted position for render interpolation. */
-  private _prevPosition: PositionComponent = { wx: 0, wy: 0 };
-
-  /** Previous predicted jumpZ for render interpolation. */
-  private _prevJumpZ = 0;
-
-  /** Previous predicted wz for render interpolation. */
-  private _prevWz = 0;
-
-  /** Whether the current jump press has been consumed (Quake's oldbuttons). */
-  private jumpConsumed = false;
-
-  /** Whether jump was held on the most recent input (for landing-frame check). */
-  private lastJumpHeld = false;
-
-  /** Ring buffer of recent inputs for replay-based reconciliation. */
-  private inputBuffer: StoredInput[] = [];
-  private inputSeconds = 0;
-  private discardedThroughSeq: number | undefined;
-  private gapSince: number | undefined;
-  private resyncThroughSeq: number | undefined;
-  private receivedAck: number | undefined;
-  private receivedTick: number | undefined;
-  private lastAuthority: { ack: number; player: Entity } | undefined;
-  private recoveryStatus: PredictionRecoveryDiagnostics["status"] = "ready";
-  private replayStepsThisTick = 0;
-  private replayedThroughSeq = -1;
-  private replayJob:
-    | {
-        candidate: PlayerPredictor;
-        steps: Generator<number>;
-        request: ReconcileRequest;
-        next: IteratorResult<number>;
-      }
-    | undefined;
-  private queuedReconcile: ReconcileRequest | undefined;
-
-  /** Last reconciliation correction (predicted - server, before replay). */
-  private _lastCorrection = { wx: 0, wy: 0, wz: 0, vx: 0, vy: 0, jumpVZ: 0 };
-
-  /** Last detailed reconciliation sample for diagnostics. */
-  private _lastReconcileDiagnostics: ReconcileDiagnostics | null = null;
-
-  /** The predicted mount entity (null when not riding). */
   private predictedMount: Entity | null = null;
-  private pushedBodies = new Map<number, Entity>();
+  private bodies = new Map<number, Entity>();
+  private published = new Map<number, Entity>();
+  private motorIntents = new Map<number, MotionIntent>();
+  private inputHistory: StoredInput[] = [];
+  private inputTick = 0;
+  private appliedInputTick = 0;
+  private animationInputTick = 0;
+  private retiredEpochs = new Set<number>();
+  private ackInputTick = 0;
+  private latestSeq = 0;
+  private discardedThroughSeq: number | undefined;
+  private receivedAck = -1;
+  private receivedServerTick = -1;
+  private epoch: number | undefined;
+  private queued: Request | undefined;
+  private replay: Replay | undefined;
+  private status: PredictionRecoveryDiagnostics["status"] = "waiting";
+  private lastReplaySteps = 0;
+  private stateHistory = new Map<number, Entity>();
+  private geometry: PhysicsGeometry | undefined;
+  private geometryWorld: World | undefined;
+  private geometryProps: readonly Prop[] | undefined;
+  private propsRevision = 0;
+  private riderLift = 0;
+  private clockEpoch: object = {};
+  private activeUntil = -Infinity;
+  private correction = { wx: 0, wy: 0, wz: 0, vx: 0, vy: 0, jumpVZ: 0 };
+  private displayError = { x: 0, y: 0, z: 0, at: 0 };
+  private diagnostics: ReconcileDiagnostics | null = null;
 
-  /** Mount entity ID from the latest server state. */
-  private _mountId: number | null = null;
-
-  /** Local offset of rider on mount. */
-  private mountOffsetX = 0;
-  private mountOffsetY = 0;
-
-  /** Previous mount pose for render interpolation. */
-  private _mountPrevHeading: number | undefined;
-  private _mountPrevPosition: PositionComponent = { wx: 0, wy: 0 };
-
-  /**
-   * Initialize or re-initialize prediction from a server entity.
-   * Called on first server state and on world load.
-   */
-  reset(serverPlayer: Entity, serverMount?: Entity): void {
-    this.collisionWorld?.dispose();
-    this.collisionWorld = undefined;
-    this.pushedBodies.clear();
-    this.presentationInputSeconds = this.presentationInputDt = 0;
-    this.presentationEpoch = {};
-    this.supportDisplayShift = this.flightDisplayShift = null;
-    this.poseSourceSeconds = this.prevPoseSourceSeconds = this.sourceFrameSeconds = undefined;
-    this.clearPresentationError();
-    this.predicted = this.clonePlayer(serverPlayer);
-    this.support = null;
-    this.supportOffset = this.prevSupportOffset = null;
-    this.collisionTimeline.clear();
-    this.predictionTime = undefined;
-    this._prevPosition = {
-      wx: this.predicted.position.wx,
-      wy: this.predicted.position.wy,
-    };
-    this._prevJumpZ = this.predicted.jumpZ ?? 0;
-    this._prevWz = this.predicted.wz ?? 0;
-    this.clearInputHistory();
-    this.jumpConsumed = ((serverPlayer.jumpInputState ?? 0) & 1) !== 0;
-    this.lastJumpHeld = ((serverPlayer.jumpInputState ?? 0) & 2) !== 0;
-    this._lastReconcileDiagnostics = null;
-
-    if (serverMount && serverPlayer.parentId === serverMount.id) {
-      this.predictedMount = this.clonePlayer(serverMount);
-      this._mountId = serverMount.id;
-      this.mountOffsetX = serverPlayer.localOffsetX ?? 0;
-      this.mountOffsetY = serverPlayer.localOffsetY ?? 0;
-      this._mountPrevHeading = this.predictedMount.vehicleHeading;
-      this._mountPrevPosition = {
-        wx: this.predictedMount.position.wx,
-        wy: this.predictedMount.position.wy,
-      };
-    } else {
-      this.predictedMount = null;
-      this._mountId = null;
-    }
+  constructor(
+    private readonly gravity = getGravityScale,
+    private readonly clock = () => performance.now() / 1000,
+  ) {
+    void this.ready;
   }
-
-  /**
-   * Store an input in the ring buffer for replay-based reconciliation.
-   */
-  storeInput(seq: number, movement: Movement, dt: number): void {
-    const input: StoredInput = {
+  get ready(): Promise<void> {
+    if (this.scene) return Promise.resolve();
+    if (this.initialization) return this.initialization;
+    const generation = this.generation;
+    this.initialization = PhysicsScene.create().then((scene) => {
+      if (generation !== this.generation) {
+        scene.dispose();
+        return;
+      }
+      this.scene = scene;
+      this.initialization = undefined;
+    });
+    return this.initialization;
+  }
+  reset(player: Entity, mount?: Entity): void {
+    this.scene?.clear();
+    void this.ready;
+    this.predicted = clone(player);
+    this.predicted.prevPosition = { ...player.position };
+    this.predicted.prevWz = player.wz ?? 0;
+    this.predictedMount = mount && player.parentId === mount.id ? clone(mount) : null;
+    this.riderLift = (player.wz ?? 0) - (mount?.wz ?? 0);
+    this.bodies.clear();
+    this.published.clear();
+    this.motorIntents.clear();
+    this.inputHistory = [];
+    this.inputTick =
+      this.appliedInputTick =
+      this.animationInputTick =
+      this.ackInputTick =
+      this.latestSeq =
+        0;
+    this.receivedAck = this.receivedServerTick = -1;
+    this.epoch = undefined;
+    this.discardedThroughSeq = undefined;
+    this.queued = this.replay = undefined;
+    this.status = "waiting";
+    this.stateHistory.clear();
+    this.clockEpoch = {};
+    this.displayError = { x: 0, y: 0, z: 0, at: this.clock() };
+    this.activeUntil = -Infinity;
+    this.diagnostics = null;
+  }
+  clearPredicted(): void {
+    this.generation++;
+    this.scene?.dispose();
+    this.scene = undefined;
+    this.initialization = undefined;
+    this.predicted = this.predictedMount = null;
+    this.bodies.clear();
+    this.published.clear();
+    this.motorIntents.clear();
+    this.inputHistory = [];
+    this.queued = this.replay = undefined;
+    this.geometry = this.geometryWorld = this.geometryProps = undefined;
+    this.stateHistory.clear();
+    this.retiredEpochs.clear();
+    this.status = "waiting";
+  }
+  storeInput(seq: number, movement: Movement, _dt: number): void {
+    if (!this.predicted || seq <= Math.max(this.latestSeq, this.receivedAck)) return;
+    this.latestSeq = seq;
+    this.inputTick++;
+    const length = movement.relativeDriving ? 1 : Math.max(1, Math.hypot(movement.dx, movement.dy));
+    this.inputHistory.push({
       seq,
-      movement: { ...movement },
-      dt,
-      physics: this.physics(),
-      jumpStateBefore: { jumpConsumed: this.jumpConsumed, lastJumpHeld: this.lastJumpHeld },
-    };
-    this.inputBuffer.push(input);
-    this.inputSeconds += Number.isFinite(dt) && dt > 0 ? dt : 0;
-    // An in-flight replay also consumes commands generated while it is working.
-    this.replayJob?.candidate.inputBuffer.push(input);
-    while (
-      this.inputBuffer.length > INPUT_BUFFER_SIZE ||
-      this.inputSeconds > INPUT_HISTORY_SECONDS + 1e-9
-    ) {
-      const discarded = this.inputBuffer.shift();
-      if (!discarded) break;
-      this.inputSeconds -= Number.isFinite(discarded.dt) && discarded.dt > 0 ? discarded.dt : 0;
-      this.discardedThroughSeq = discarded.seq;
-      // A scratch replay may already have integrated the removed prefix. Keep
-      // that valid work, but never retain an unbounded second command array.
-      if (
-        this.replayJob &&
-        (this.replayJob.candidate.replayedThroughSeq < discarded.seq ||
-          this.replayJob.candidate.inputBuffer.length > INPUT_BUFFER_SIZE)
-      )
-        this.discardReplay();
-      this.queuedReconcile = undefined;
+      tick: this.inputTick,
+      movement: { ...movement, dx: movement.dx / length, dy: movement.dy / length },
+    });
+    const submitted = this.inputHistory[this.inputHistory.length - 1];
+    if (this.replay && submitted) this.replay.inputs.push(submitted);
+    if (movement.dx || movement.dy || movement.jump || movement.jumpPressed)
+      this.activeUntil = this.clock() + 0.3;
+    while (this.inputHistory.length > MAX_HISTORY) {
+      const discarded = this.inputHistory.shift();
+      if (discarded) this.discardedThroughSeq = discarded.seq;
+    }
+    if (this.discardedThroughSeq !== undefined && this.receivedAck < this.discardedThroughSeq) {
+      this.replay = undefined;
+      this.status = "history-gap";
     }
   }
-
-  /**
-   * Run one prediction tick. Called from PlayScene.update() at FIXED_DT rate.
-   * Applies movement input + collision using the client's world data.
-   */
-  update(
-    dt: number,
-    movement: Movement,
-    world: World,
-    props: readonly Prop[],
-    entities: readonly Entity[],
-  ): void {
-    if (!this.predicted) return;
-    this.presentationInputSeconds += dt;
-    this.presentationInputDt = dt;
-
-    // Autonomous roof motion follows the latest committed pose once, independently
-    // of how many player commands are generated/replayed against that snapshot.
-    if (this.support && this.supportOffset) {
-      const current = entities.find((e) => e.id === this.support?.id);
-      if (current) {
-        const height = movingSupportZ(this.support, this.predicted) - (this.support.wz ?? 0);
-        this.support = current;
-        this.predicted.position = roofPosition(this.supportOffset, current);
-        this.predicted.wz = this.predicted.groundZ =
-          this.supportOffset.bedFloor && this.predicted.collider
-            ? (bedFloorSupport(
-                current,
-                getEntityAABB(this.predicted.position, this.predicted.collider),
-              ) ?? (current.wz ?? 0) + height)
-            : (current.wz ?? 0) + height;
-      } else this.clearSupport();
-    }
-    this.captureSupport(entities);
-    this.prevSupportOffset = this.supportOffset && { ...this.supportOffset };
-    if (this.support) this.poseSourceSeconds = this.sourceFrameSeconds;
-    this.prevPoseSourceSeconds = this.poseSourceSeconds;
-    this.prevPresentationError = this.displayedError();
-    // Save previous state for render interpolation
-    this._prevPosition = {
-      wx: this.predicted.position.wx,
-      wy: this.predicted.position.wy,
-    };
-    this._prevJumpZ = this.predicted.jumpZ ?? 0;
-    this._prevWz = this.predicted.wz ?? 0;
-    if (this.predictedMount) {
-      this._mountPrevHeading = this.predictedMount.vehicleHeading;
-      this._mountPrevPosition = {
-        wx: this.predictedMount.position.wx,
-        wy: this.predictedMount.position.wy,
-      };
-    }
-
-    // Replay establishes a collision horizon; wall time advances it between
-    // arrivals. Commands generated together share that horizon, rather than
-    // inventing an extra NPC tick for each catch-up command.
-    const collisionTime = this.predictionTime;
-    if (collisionTime !== undefined)
-      this.predictionTime =
-        collisionTime + Math.max(0, this.clock() - this.reconciledAt - this.collisionStepSeconds);
-    this.applyInput(movement, dt, world, props, entities, this.physics());
-    // Replay applies physics only; live prediction advances this clock once.
-    if (this.predicted.sprite?.clipElapsedMs === undefined) tickSpriteAnimation(this.predicted, dt);
-    if (this.predictedMount && this.predictedMount.sprite?.clipElapsedMs === undefined)
-      tickSpriteAnimation(this.predictedMount, dt);
-    this.predictionTime = collisionTime;
-    // Current input is already predicted before scratch recovery may commit it.
-    if (this.replayJob) this.drainReplay();
-    else if (this.queuedReconcile) {
-      const request = this.queuedReconcile;
-      this.queuedReconcile = undefined;
-      this.startReplay(request);
-    }
-    this.lastReplaySteps = this.replayStepsThisTick;
-    this.replayStepsThisTick = 0;
-  }
-
-  /**
-   * Reconcile predicted position against authoritative server state using
-   * input replay. Called when a new FrameMessage is applied.
-   *
-   * 1. Snap to server's authoritative position
-   * 2. Discard acknowledged inputs (seq <= lastProcessedInputSeq)
-   * 3. Replay remaining unacknowledged inputs with full collision
-   *
-   * This eliminates drift from lost/overwritten inputs while preserving
-   * responsive local prediction.
-   */
   reconcile(
     player: Entity,
     ack: number,
     world: World,
     props: readonly Prop[],
     entities: readonly Entity[],
-    mountId?: number,
+    _mountId?: number,
     timing?: ReconcileTiming,
   ): void {
+    const state = timing?.physics;
+    if (!state || !this.predicted || this.retiredEpochs.has(state.epoch)) return;
     if (
-      (this.receivedAck !== undefined && ack < this.receivedAck) ||
-      (timing?.serverTick !== undefined &&
-        this.receivedTick !== undefined &&
-        timing.serverTick < this.receivedTick)
-    ) {
-      if (!this.replayJob) this.recoveryStatus = "stale";
+      this.epoch === state.epoch &&
+      (ack < this.receivedAck ||
+        (timing?.serverTick !== undefined && timing.serverTick < this.receivedServerTick))
+    )
       return;
-    }
-    const previous = this.lastAuthority;
-    const discontinuity =
-      this.predicted &&
-      (this.predicted.id !== player.id ||
-        (previous?.ack === ack &&
-          Math.hypot(
-            player.position.wx - previous.player.position.wx,
-            player.position.wy - previous.player.position.wy,
-          ) > SNAP_THRESHOLD));
-    const changedMount = (mountId ?? null) !== this._mountId;
-    this.rememberAuthority(player, ack, timing);
-    if (
-      !this.predicted ||
-      discontinuity ||
-      (changedMount && (this.replayJob || this.discardedThroughSeq !== undefined))
-    ) {
+    if (this.epoch !== undefined && this.epoch !== state.epoch) {
+      this.retiredEpochs.add(this.epoch);
+      if (this.retiredEpochs.size > 8) {
+        const oldest = this.retiredEpochs.values().next().value;
+        if (oldest !== undefined) this.retiredEpochs.delete(oldest);
+      }
       this.reset(
         player,
-        entities.find((e) => e.id === mountId),
+        entities.find((e) => e.id === player.parentId),
       );
-      this.rememberAuthority(player, ack, timing);
-      return;
     }
-    if (timing?.simulationTime !== undefined)
-      this.collisionTimeline.record(timing.simulationTime, entities);
-    if (this.resyncThroughSeq !== undefined) {
-      if (ack < this.resyncThroughSeq) {
-        this.recoveryStatus = "resync";
-        return;
-      }
-      this.resyncThroughSeq = undefined;
-    }
-    if (this.discardedThroughSeq !== undefined) {
-      if (ack < this.discardedThroughSeq) {
-        if (
-          this.replayJob &&
-          this.replayJob.candidate.replayedThroughSeq >= this.discardedThroughSeq
-        )
-          return;
-        this.discardReplay();
-        this.queuedReconcile = undefined;
-        this.gapSince ??= this.clock();
-        this.recoveryStatus = "history-gap";
-        if (this.clock() - this.gapSince >= HISTORY_GAP_GRACE_SECONDS) {
-          const fence = this.inputBuffer.at(-1)?.seq ?? this.discardedThroughSeq;
-          this.reset(
-            player,
-            entities.find((e) => e.id === mountId),
-          );
-          this.rememberAuthority(player, ack, timing);
-          // Old snapshots cannot replay the suffix against an incomplete baseline.
-          this.resyncThroughSeq = fence;
-          this.recoveryStatus = "resync";
-        }
-        return;
-      }
-      this.discardedThroughSeq = this.gapSince = undefined;
-    }
-    const request = { player, ack, world, props, entities, mountId, timing };
-    const cost = this.replayCost(ack);
-    if (this.replayJob) {
-      if (cost <= REPLAY_STEP_BUDGET - this.replayStepsThisTick) {
-        this.discardReplay();
-        this.queuedReconcile = undefined;
-      } else {
-        // Retain progress; newer snapshots do not restart a long replay every tick.
-        this.queuedReconcile = this.freezeRequest(request);
-        return;
-      }
-    }
-    this.queuedReconcile = undefined;
-    this.startReplay(request);
-  }
-
-  get recoveryDiagnostics(): PredictionRecoveryDiagnostics {
-    return {
-      status: this.recoveryStatus,
-      retainedInputs: this.inputBuffer.length,
-      retainedSeconds: this.inputSeconds,
-      discardedThroughSeq: this.discardedThroughSeq,
-      replayStepsThisTick: this.lastReplaySteps,
-      replayAck: this.replayJob?.request.ack,
-    };
-  }
-  private lastReplaySteps = 0;
-
-  /** Internal relocation/resync resets must retain this snapshot's admission fence. */
-  private rememberAuthority(player: Entity, ack: number, timing?: ReconcileTiming): void {
+    this.epoch = state.epoch;
     this.receivedAck = ack;
-    this.receivedTick = timing?.serverTick ?? this.receivedTick;
-    this.lastAuthority = { ack, player: this.clonePlayer(player) };
-  }
-
-  private discardReplay(): void {
-    this.replayJob?.candidate.collisionWorld?.dispose();
-    this.replayJob = undefined;
-  }
-
-  private clearInputHistory(): void {
-    this.inputBuffer = [];
-    this.inputSeconds = 0;
-    this.discardedThroughSeq = this.gapSince = this.resyncThroughSeq = undefined;
-    this.receivedAck = this.receivedTick = undefined;
-    this.lastAuthority = undefined;
-    this.discardReplay();
-    this.queuedReconcile = undefined;
-    this.recoveryStatus = "ready";
-    this.replayStepsThisTick = this.lastReplaySteps = 0;
-  }
-
-  private replayCost(ack: number): number {
-    let count = 0;
-    for (const input of this.inputBuffer) {
-      if (input.seq > ack) count += Math.max(1, splitInputStepDurations(input.dt).length);
-      if (count > REPLAY_STEP_BUDGET) break;
-    }
-    return count;
-  }
-
-  private freezeRequest(request: ReconcileRequest): ReconcileRequest {
-    const props = request.props.slice();
-    retainDrivingQueries(request.props, props);
-    return {
-      ...request,
-      player: this.clonePlayer(request.player),
-      // Replicas are mutated by subsequent frames. Preserve this replay's baseline.
-      entities: request.entities.map((e) => ({
-        ...e,
-        position: { ...e.position },
-        velocity: e.velocity && { ...e.velocity },
-        sprite: e.sprite && { ...e.sprite },
-        collider: e.collider && { ...e.collider },
-        wanderAI: e.wanderAI && { ...e.wanderAI },
-      })),
+    this.receivedServerTick = timing?.serverTick ?? this.receivedServerTick + 1;
+    const acknowledged = [...this.inputHistory].reverse().find((input) => input.seq <= ack);
+    if (acknowledged) this.ackInputTick = acknowledged.tick;
+    this.inputHistory = this.inputHistory.filter((input) => input.seq > ack);
+    const request: Request = {
+      player: clone(player),
+      ack,
+      state,
+      entities: state.bodies
+        .map((body) => entities.find((e) => e.id === body.id))
+        .filter((e): e is Entity => !!e)
+        .map(clone),
+      world,
       props,
     };
+    // Retain the parent's replicated seat metadata even though it has no body.
+    this.riderLift = (player.wz ?? 0) - (entities.find((e) => e.id === player.parentId)?.wz ?? 0);
+    this.queued = request;
+    const lastReplayInput = this.replay?.inputs[this.replay.inputs.length - 1];
+    if (lastReplayInput && ack >= lastReplayInput.seq) this.replay = undefined;
+    if (!this.replay && this.scene) this.startReplay();
   }
-
-  /** Physics state only; the live input and animation clocks remain owned by this predictor. */
-  private copyPredictionState(source: PlayerPredictor): void {
-    this.predicted = source.predicted;
-    this.predictedMount = source.predictedMount;
-    this.pushedBodies = new Map(source.pushedBodies);
-    this._mountId = source._mountId;
-    this.mountOffsetX = source.mountOffsetX;
-    this.mountOffsetY = source.mountOffsetY;
-    this.jumpConsumed = source.jumpConsumed;
-    this.lastJumpHeld = source.lastJumpHeld;
-    this._prevPosition = source._prevPosition;
-    this._prevJumpZ = source._prevJumpZ;
-    this._prevWz = source._prevWz;
-    this._mountPrevPosition = source._mountPrevPosition;
-    this._mountPrevHeading = source._mountPrevHeading;
-    this.support = source.support;
-    this.supportOffset = source.supportOffset;
-    this.prevSupportOffset = source.prevSupportOffset;
-    this.supportDisplayShift = source.supportDisplayShift;
-    this.flightDisplayShift = source.flightDisplayShift;
-    this.poseSourceSeconds = source.poseSourceSeconds;
-    this.prevPoseSourceSeconds = source.prevPoseSourceSeconds;
-    this.sourceFrameSeconds = source.sourceFrameSeconds;
-    this.presentationError = source.presentationError;
-    this.prevPresentationError = source.prevPresentationError;
-    this.predictionTime = source.predictionTime;
-    this.reconciledAt = source.reconciledAt;
-    this.collisionStepSeconds = source.collisionStepSeconds;
-    this._lastCorrection = source._lastCorrection;
-    this._lastReconcileDiagnostics = source._lastReconcileDiagnostics;
+  private bindGeometry(world: World, props: readonly Prop[]) {
+    if (world === this.geometryWorld && props === this.geometryProps && this.geometry) return;
+    this.geometryWorld = world;
+    this.geometryProps = props;
+    this.propsRevision++;
+    this.geometry = {
+      getCollision: (x, y) => world.getCollisionIfLoaded(x, y),
+      getHeight: (x, y) => world.getHeightAt(x, y),
+      queryProps: (bounds) =>
+        props.filter((prop) => {
+          // The common compiler clips exact wall/surface shapes. This is only a
+          // conservative broad filter and includes long authored bridge sections.
+          const c = prop.collider;
+          if (!c || prop.walls?.length) return true;
+          const x = prop.position.wx + c.offsetX,
+            y = prop.position.wy + c.offsetY;
+          return (
+            x + c.width / 2 >= bounds.left &&
+            x - c.width / 2 <= bounds.right &&
+            y + c.height / 2 >= bounds.top &&
+            y - c.height / 2 <= bounds.bottom
+          );
+        }),
+      geometryVersion: (cx, cy) => {
+        const chunk = world.getChunkIfLoaded(cx, cy);
+        return {
+          identity: chunk,
+          revision: `${chunk?.revision}:${chunk?.visualRevision}:${chunk?.physicsRevision}:${this.propsRevision}`,
+        };
+      },
+    };
   }
-
-  private startReplay(request: ReconcileRequest): void {
-    const cost = this.replayCost(request.ack);
-    if (cost <= REPLAY_STEP_BUDGET - this.replayStepsThisTick) {
-      for (const steps of this.reconcileSteps(
-        request.player,
-        request.ack,
-        request.world,
-        request.props,
-        request.entities,
-        request.mountId,
-        request.timing,
-      ))
-        this.replayStepsThisTick += steps;
-      this.lastReplaySteps = this.replayStepsThisTick;
-      this.recoveryStatus = "ready";
+  private startReplay() {
+    const request = this.queued,
+      scene = this.scene;
+    if (!request || !scene || !this.predicted) return;
+    this.queued = undefined;
+    const { state } = request;
+    const anchorId = request.player.parentId ?? request.player.id;
+    const missing =
+      state.bodies.length !== request.entities.length ||
+      !state.bodies.some((b) => b.id === anchorId);
+    if (
+      state.omitted ||
+      state.bodies.length > MAX_PREDICTION_BODIES ||
+      missing ||
+      (this.discardedThroughSeq !== undefined && request.ack < this.discardedThroughSeq)
+    ) {
+      this.predicted = clone(request.player);
+      this.predictedMount = request.entities.find((e) => e.id === request.player.parentId) ?? null;
+      this.published.clear();
+      this.status = state.omitted ? "overflow" : missing ? "waiting" : "history-gap";
+      this.diagnostics = {
+        ackSeq: request.ack,
+        physicsTick: state.tick,
+        epoch: state.epoch,
+        bodies: state.bodies.length,
+        omitted: state.omitted,
+        replayCount: 0,
+        replayMs: 0,
+        pastTickError: undefined,
+        resimPosErr: 0,
+        status: this.status,
+      };
       return;
     }
-    const frozen = this.freezeRequest(request);
-    const candidate = new PlayerPredictor(this.physics, this.physicsMult, this.clock);
-    candidate.copyPredictionState(this);
-    candidate.predicted = this.predicted && this.clonePlayer(this.predicted);
-    candidate.predictedMount = this.predictedMount && this.clonePlayer(this.predictedMount);
-    candidate.inputBuffer = this.inputBuffer.slice();
-    candidate.collisionTimeline = this.collisionTimeline.fork();
-    candidate.noclip = this.noclip;
-    const steps = candidate.reconcileSteps(
-      frozen.player,
-      frozen.ack,
-      frozen.world,
-      frozen.props,
-      frozen.entities,
-      frozen.mountId,
-      frozen.timing,
-      this,
+    const before = clone(this.predicted),
+      past = this.stateHistory.get(state.tick);
+    const pastError = past ? distance(past, request.player) : undefined;
+    this.bindGeometry(request.world, request.props);
+    this.bodies = new Map(request.entities.map((e) => [e.id, e]));
+    const kinds = new Map(state.bodies.map((b) => [b.id, b.kind]));
+    scene.synchronize([...this.bodies.values()], kinds);
+    scene.restore(state);
+    this.motorIntents = new Map(
+      state.bodies.map((body) => [
+        body.id,
+        {
+          vx: body.desiredVx,
+          vy: body.desiredVy,
+          jump: body.jumpHeld,
+          ...(body.controlUntil === undefined ? {} : { controlUntil: body.controlUntil }),
+          ...(body.altitude === undefined ? {} : { altitude: body.altitude }),
+          ...(body.desiredHeading === undefined ? {} : { heading: body.desiredHeading }),
+        },
+      ]),
     );
-    this.replayJob = { candidate, steps, request: frozen, next: steps.next() };
-    this.recoveryStatus = "replaying";
-    this.drainReplay();
+    this.replay = {
+      request,
+      nextInputTick: this.ackInputTick + 1,
+      steps: 0,
+      ms: 0,
+      before,
+      pastError,
+      inputs: [...this.inputHistory],
+    };
+    this.status = "replaying";
+    if (this.replay.nextInputTick > this.inputTick) this.drainReplay();
   }
-
-  private drainReplay(): void {
-    const job = this.replayJob;
-    if (!job) return;
-    const started = this.clock();
+  private drainReplay() {
+    const job = this.replay,
+      scene = this.scene;
+    if (!job || !scene || !this.geometry) return;
+    const start = performance.now();
+    let steps = 0;
     while (
-      !job.next.done &&
-      this.replayStepsThisTick + job.next.value <= REPLAY_STEP_BUDGET &&
-      this.clock() - started < REPLAY_TIME_BUDGET_SECONDS
+      job.nextInputTick <= this.inputTick &&
+      steps < REPLAY_STEPS_PER_UPDATE &&
+      (steps === 0 || performance.now() - start < REPLAY_MS_PER_UPDATE)
     ) {
-      this.replayStepsThisTick += job.next.value;
-      job.next = job.steps.next();
+      const sample = job.inputs.find((input) => input.tick === job.nextInputTick);
+      if (!sample) {
+        this.status = "history-gap";
+        this.replay = undefined;
+        return;
+      }
+      this.step(sample.movement, job.request.player);
+      job.nextInputTick++;
+      job.steps++;
+      steps++;
     }
-    this.lastReplaySteps = this.replayStepsThisTick;
-    if (!job.next.done) return;
-    this.copyPredictionState(job.candidate);
-    // Keep live collision arrivals, but use the replay's current physics horizon.
-    this.trimInputBuffer(job.request.ack);
-    this.discardReplay();
-    this.recoveryStatus = "ready";
+    this.lastReplaySteps += steps;
+    job.ms += performance.now() - start;
+    if (job.nextInputTick <= this.inputTick) return;
+    this.replay = undefined;
+    this.status = "ready";
+    this.appliedInputTick = this.inputTick;
+    this.publish(job.request.player);
+    const after = this.predicted;
+    if (!after) return;
+    this.correction = {
+      wx: job.before.position.wx - after.position.wx,
+      wy: job.before.position.wy - after.position.wy,
+      wz: (job.before.wz ?? 0) - (after.wz ?? 0),
+      vx: (job.before.velocity?.vx ?? 0) - (after.velocity?.vx ?? 0),
+      vy: (job.before.velocity?.vy ?? 0) - (after.velocity?.vy ?? 0),
+      jumpVZ: (job.before.jumpVZ ?? 0) - (after.jumpVZ ?? 0),
+    };
+    const oldError = this.error();
+    const offset = {
+      x: this.correction.wx + oldError.x,
+      y: this.correction.wy + oldError.y,
+      z: this.correction.wz + oldError.z,
+    };
+    this.displayError = {
+      ...(Math.hypot(offset.x, offset.y, offset.z) < 32 ? offset : { x: 0, y: 0, z: 0 }),
+      at: this.clock(),
+    };
+    this.diagnostics = {
+      ackSeq: job.request.ack,
+      physicsTick: job.request.state.tick,
+      epoch: job.request.state.epoch,
+      bodies: this.bodies.size,
+      omitted: 0,
+      replayCount: job.steps,
+      replayMs: job.ms,
+      pastTickError: job.pastError,
+      resimPosErr: distance(job.before, after),
+      status: this.status,
+    };
   }
-
-  private *reconcileSteps(
-    serverPlayer: Entity,
-    lastProcessedInputSeq: number,
+  private step(movement: Movement, player: Entity) {
+    const scene = this.scene;
+    if (!scene || !this.geometry) return;
+    const controlled = this.bodies.get(player.parentId ?? player.id);
+    if (!controlled) return;
+    const intent = controlled.type.startsWith("vehicle-v1:")
+      ? vehicleMotionIntent(controlled, movement)
+      : playerMotionIntent(movement);
+    this.motorIntents.set(controlled.id, {
+      ...intent,
+      controlUntil: scene.physicsTick + CONTROL_HOLD_TICKS,
+    });
+    scene.step(this.motorIntents, this.geometry, this.gravity());
+    updatePlayerSpriteFromInput(this.bodies.get(player.id) ?? player, movement);
+  }
+  private publish(authority: Entity) {
+    const previous = this.predicted;
+    const body = this.bodies.get(authority.id);
+    const parent = this.bodies.get(authority.parentId ?? -1);
+    this.predicted = body ? clone(body) : clone(authority);
+    if (parent) {
+      this.predicted.position = {
+        wx: parent.position.wx + (authority.localOffsetX ?? 0),
+        wy: parent.position.wy + (authority.localOffsetY ?? 0),
+      };
+      this.predicted.wz = (parent.wz ?? 0) + this.riderLift;
+    }
+    if (
+      previous?.sprite &&
+      this.predicted.sprite &&
+      previous.sprite.sheetKey === this.predicted.sprite.sheetKey &&
+      previous.sprite.clipElapsedMs === undefined &&
+      this.predicted.sprite.clipElapsedMs === undefined
+    ) {
+      this.predicted.sprite.frameCol = previous.sprite.frameCol;
+      this.predicted.sprite.animTimer = previous.sprite.animTimer;
+    }
+    this.predicted.prevPosition = parent
+      ? {
+          wx: (parent.prevPosition ?? parent.position).wx + (authority.localOffsetX ?? 0),
+          wy: (parent.prevPosition ?? parent.position).wy + (authority.localOffsetY ?? 0),
+        }
+      : { ...(body?.prevPosition ?? this.predicted.position) };
+    this.predicted.prevWz = parent
+      ? (parent.prevWz ?? parent.wz ?? 0) + this.riderLift
+      : (body?.prevWz ?? this.predicted.wz ?? 0);
+    this.predicted.prevJumpZ = body?.prevJumpZ ?? this.predicted.jumpZ ?? 0;
+    this.predictedMount = parent ? clone(parent) : null;
+    this.published = new Map([...this.bodies].map(([id, e]) => [id, clone(e)]));
+    if (this.scene) {
+      this.stateHistory.set(this.scene.physicsTick, clone(this.predicted));
+      while (this.stateHistory.size > MAX_HISTORY) {
+        const first = this.stateHistory.keys().next().value;
+        if (first !== undefined) this.stateHistory.delete(first);
+      }
+    }
+  }
+  update(
+    _dt: number,
+    movement: Movement,
     world: World,
     props: readonly Prop[],
-    entities: readonly Entity[],
-    mountEntityId?: number,
-    diagnostics?: ReconcileTiming,
-    live?: PlayerPredictor,
-  ): Generator<number> {
-    if (diagnostics?.simulationTime !== undefined) {
-      this.predictionTime = diagnostics.simulationTime;
-      this.reconciledAt = this.clock();
-      this.collisionStepSeconds = diagnostics.expectedInputDt ?? 0;
+    _entities: readonly Entity[],
+  ): void {
+    if (!this.predicted) return;
+    this.lastReplaySteps = 0;
+    this.bindGeometry(world, props);
+    if (!this.replay && this.queued && this.scene) {
+      this.startReplay();
     }
-    if (!this.predicted) {
-      const serverMount =
-        serverPlayer.parentId !== undefined
-          ? entities.find((e) => e.id === serverPlayer.parentId)
-          : undefined;
-      this.reset(serverPlayer, serverMount);
-      return;
+    if (this.replay) this.drainReplay();
+    else if (this.status === "ready" && this.appliedInputTick < this.inputTick) {
+      this.appliedInputTick = this.inputTick;
+      const submitted = this.inputHistory[this.inputHistory.length - 1];
+      this.step(submitted?.movement ?? movement, this.predicted);
+      this.publish(this.predicted);
     }
+    if (this.animationInputTick < this.inputTick) {
+      this.animationInputTick = this.inputTick;
+      if (this.predicted?.sprite?.clipElapsedMs === undefined && this.predicted)
+        tickSpriteAnimation(this.predicted, PHYSICS_DT);
+    }
+  }
 
-    let oldSupportId = this.support?.id;
-    let oldOffset = this.supportOffset && { ...this.supportOffset };
-    let oldPoseSourceSeconds = this.poseSourceSeconds;
-    let oldMomentumX = this.predicted.airMomentumX;
-    let oldMomentumY = this.predicted.airMomentumY;
-    let predictedBefore = this.snapshotEntity(this.predicted);
-    const authoritative = this.snapshotEntity(serverPlayer);
-    this._lastCorrection = {
-      wx: predictedBefore.wx - authoritative.wx,
-      wy: predictedBefore.wy - authoritative.wy,
-      wz: predictedBefore.wz - authoritative.wz,
-      vx: predictedBefore.vx - authoritative.vx,
-      vy: predictedBefore.vy - authoritative.vy,
-      jumpVZ: predictedBefore.jumpVZ - authoritative.jumpVZ,
+  private error() {
+    const decay = Math.exp(-Math.max(0, this.clock() - this.displayError.at) / 0.06);
+    return {
+      x: this.displayError.x * decay,
+      y: this.displayError.y * decay,
+      z: this.displayError.z * decay,
     };
-    let replayStats: ReconcileReplayStats = {
-      count: 0,
-      firstSeq: undefined,
-      lastSeq: undefined,
-      dtMin: 0,
-      dtMax: 0,
-      dtAvg: 0,
-      dtSpread: 0,
-      revisions: [],
-      currentRevision: this.physics().revision,
-      hasMixedRevisions: false,
-      hasRevisionMismatch: false,
-    };
-
-    // Every authority rebase invalidates speculative body displacement, on foot
-    // as well as mounted. Rebuild it from retained inputs against fresh poses.
-    this.pushedBodies.clear();
-    // Detect mount from server state
-    const serverMount =
-      mountEntityId !== undefined ? (entities.find((e) => e.id === mountEntityId) ?? null) : null;
-
-    if (serverMount) {
-      this.clearSupport();
-      // ── Riding: predict the mount ──
-      if (!this.predictedMount || this._mountId !== serverMount.id) {
-        // Just started riding or mount changed
-        this.predictedMount = this.clonePlayer(serverMount);
-        this._mountId = serverMount.id;
-        this._mountPrevHeading = this.predictedMount.vehicleHeading;
-        this._mountPrevPosition = {
-          wx: serverMount.position.wx,
-          wy: serverMount.position.wy,
-        };
-      }
-      this.mountOffsetX = serverPlayer.localOffsetX ?? 0;
-      this.mountOffsetY = serverPlayer.localOffsetY ?? 0;
-
-      // Sync wz and jump state from server — jumpZ is visual lift while riding
-      if (serverPlayer.wz !== undefined) {
-        this.predicted.wz = serverPlayer.wz;
-      } else {
-        delete this.predicted.wz;
-      }
-      if (serverPlayer.jumpZ !== undefined) {
-        this.predicted.jumpZ = serverPlayer.jumpZ;
-      } else {
-        delete this.predicted.jumpZ;
-      }
-      delete this.predicted.airMomentumX;
-      delete this.predicted.airMomentumY;
-      delete this.predicted.jumpVZ;
-
-      const oldMountX = this.predictedMount.position.wx;
-      const oldMountY = this.predictedMount.position.wy;
-
-      // Snap mount to server's authoritative position and Z state
-      this.predictedMount.position.wx = serverMount.position.wx;
-      this.predictedMount.position.wy = serverMount.position.wy;
-      this.predictedMount.collider = serverMount.collider;
-      if (serverMount.vehicleHeading !== undefined)
-        this.predictedMount.vehicleHeading = serverMount.vehicleHeading;
-      else delete this.predictedMount.vehicleHeading;
-      if (serverMount.emergencyState !== undefined)
-        this.predictedMount.emergencyState = serverMount.emergencyState;
-      else delete this.predictedMount.emergencyState;
-      for (const key of [
-        "vehicleBedTilt",
-        "vehicleBedTarget",
-        "towTargetId",
-        "towedBy",
-        "vehicleRamp",
-        "transportLoadId",
-        "transportedBy",
-      ] as const) {
-        const value = serverMount[key];
-        if (value === undefined) delete this.predictedMount[key];
-        else this.predictedMount[key] = value;
-      }
-      if (serverMount.vehicleBed) this.predictedMount.vehicleBed = true;
-      else delete this.predictedMount.vehicleBed;
-      if (serverMount.paintSchemeId !== undefined)
-        this.predictedMount.paintSchemeId = serverMount.paintSchemeId;
-      else delete this.predictedMount.paintSchemeId;
-      if (isVehicle(serverMount) || isTrain(serverMount))
-        this.predictedMount.velocity = serverMount.velocity && { ...serverMount.velocity };
-      this.predictedMount.sprite = predictionSprite(this.predictedMount.sprite, serverMount.sprite);
-      if (serverMount.wanderAI) {
-        this.predictedMount.wanderAI = { ...serverMount.wanderAI };
-      }
-      if (serverMount.wz !== undefined) {
-        this.predictedMount.wz = serverMount.wz;
-      } else {
-        delete this.predictedMount.wz;
-      }
-      if (serverMount.groundZ !== undefined) {
-        this.predictedMount.groundZ = serverMount.groundZ;
-      } else {
-        delete this.predictedMount.groundZ;
-      }
-
-      // Snap player to server position
-      const oldX = this.predicted.position.wx;
-      const oldY = this.predicted.position.wy;
-      this.predicted.position.wx = serverPlayer.position.wx;
-      this.predicted.position.wy = serverPlayer.position.wy;
-
-      // Trim acknowledged inputs
-      this.trimInputBuffer(lastProcessedInputSeq);
-      replayStats = this.collectReplayStats();
-
-      // Replay unacknowledged inputs on mount
-      for (const input of this.inputBuffer) {
-        yield Math.max(1, splitInputStepDurations(input.dt).length);
-        this.applyInput(input.movement, input.dt, world, props, entities, input.physics);
-        this.replayedThroughSeq = input.seq;
-      }
-
-      // Snap check for mount teleport
-      const mdx = this.predictedMount.position.wx - oldMountX;
-      const mdy = this.predictedMount.position.wy - oldMountY;
-      if (mdx * mdx + mdy * mdy > SNAP_THRESHOLD * SNAP_THRESHOLD) {
-        this._mountPrevHeading = this.predictedMount.vehicleHeading;
-        this._mountPrevPosition = {
-          wx: this.predictedMount.position.wx,
-          wy: this.predictedMount.position.wy,
-        };
-      }
-
-      // Snap check for player teleport
-      const dx = this.predicted.position.wx - oldX;
-      const dy = this.predicted.position.wy - oldY;
-      if (dx * dx + dy * dy > SNAP_THRESHOLD * SNAP_THRESHOLD) {
-        this.prevPoseSourceSeconds = this.poseSourceSeconds;
-        this._prevPosition = {
-          wx: this.predicted.position.wx,
-          wy: this.predicted.position.wy,
-        };
-      }
-    } else {
-      // ── Not riding: standard reconciliation ──
-      this.predictedMount = null;
-      this._mountId = null;
-
-      const oldX = this.predicted.position.wx;
-      const oldY = this.predicted.position.wy;
-
-      this.poseSourceSeconds = this.sourceFrameSeconds = diagnostics?.simulationTime;
-      this.prevPoseSourceSeconds ??= this.poseSourceSeconds;
-      // Snap to server's authoritative position, velocity, and jump state.
-      // Velocity must be snapped because the friction/acceleration model is
-      // path-dependent — replaying inputs from the wrong starting velocity
-      // produces different results than the server.
-      this.predicted.position.wx = serverPlayer.position.wx;
-      this.predicted.position.wy = serverPlayer.position.wy;
-      if (serverPlayer.velocity) {
-        if (!this.predicted.velocity) {
-          this.predicted.velocity = { vx: serverPlayer.velocity.vx, vy: serverPlayer.velocity.vy };
-        } else {
-          this.predicted.velocity.vx = serverPlayer.velocity.vx;
-          this.predicted.velocity.vy = serverPlayer.velocity.vy;
-        }
-      }
-      if (serverPlayer.wz !== undefined) {
-        this.predicted.wz = serverPlayer.wz;
-      } else {
-        delete this.predicted.wz;
-      }
-      if (serverPlayer.jumpZ !== undefined) {
-        this.predicted.jumpZ = serverPlayer.jumpZ;
-      } else {
-        delete this.predicted.jumpZ;
-      }
-      if (serverPlayer.jumpVZ !== undefined) {
-        this.predicted.jumpVZ = serverPlayer.jumpVZ;
-      } else {
-        delete this.predicted.jumpVZ;
-      }
-
-      for (const key of ["airMomentumX", "airMomentumY"] as const) {
-        const value = serverPlayer[key];
-        if (value === undefined) delete this.predicted[key];
-        else this.predicted[key] = value;
-      }
-      this.captureSupport(entities);
-      if (this.support?.id !== oldSupportId)
-        this.prevSupportOffset = this.supportOffset && { ...this.supportOffset };
-
-      // Trim acknowledged inputs
-      this.trimInputBuffer(lastProcessedInputSeq);
-      replayStats = this.collectReplayStats();
-
-      // Jump latches belong to the acknowledged state too, not to the latest
-      // predicted command. Otherwise replay can suppress an unacknowledged jump.
-      const latch = serverPlayer.jumpInputState;
-      const before = this.inputBuffer[0]?.jumpStateBefore;
-      if (latch !== undefined) {
-        this.jumpConsumed = (latch & 1) !== 0;
-        this.lastJumpHeld = (latch & 2) !== 0;
-      } else if (before) {
-        // Direct/reference callers without replicated latch state.
-        this.jumpConsumed = before.jumpConsumed;
-        this.lastJumpHeld = before.lastJumpHeld;
-      }
-      // Replay unacknowledged inputs on top of server position
-      for (const input of this.inputBuffer) {
-        yield Math.max(1, splitInputStepDurations(input.dt).length);
-        this.applyInput(input.movement, input.dt, world, props, entities, input.physics);
-        this.replayedThroughSeq = input.seq;
-      }
-
-      // If position changed drastically (teleport/knockback), also snap
-      // the previous position so render interpolation doesn't create a slide
-      const dx = this.predicted.position.wx - oldX;
-      const dy = this.predicted.position.wy - oldY;
-      if (dx * dx + dy * dy > SNAP_THRESHOLD * SNAP_THRESHOLD) {
-        this.prevPoseSourceSeconds = this.poseSourceSeconds;
-        this._prevPosition = {
-          wx: this.predicted.position.wx,
-          wy: this.predicted.position.wy,
-        };
+  }
+  private get active() {
+    const player = this.predicted;
+    const anchor = player && (player.parentId ?? player.id);
+    return (
+      this.clock() < this.activeUntil ||
+      (!!player &&
+        (player.jumpVZ !== undefined ||
+          Math.hypot(player.velocity?.vx ?? 0, player.velocity?.vy ?? 0) > 2 ||
+          this.scene?.bodyState(anchor ?? -1)?.supportId !== undefined))
+    );
+  }
+  presentationClock(alpha: number): CameraPresentationTime | null {
+    if (!this.active || !this.scene) return null;
+    return { time: (this.scene.physicsTick - 1 + alpha) * PHYSICS_DT, domain: this.clockEpoch };
+  }
+  /** One rigid display correction and one tick for the local contact component. */
+  presentEntities(alpha: number, buffered: readonly Entity[]): Entity[] {
+    const player = this.predicted,
+      scene = this.scene;
+    if (!player || !scene || this.status !== "ready" || !this.active) return [...buffered];
+    const root = player.parentId ?? player.id,
+      component = new Set<number>([root, player.id]);
+    const anchor = this.published.get(root) ?? player;
+    if (anchor.collider) {
+      const a = getEntityAABB(anchor.position, anchor.collider);
+      for (const entity of this.published.values()) {
+        if (!entity.collider) continue;
+        const b = getEntityAABB(entity.position, entity.collider);
+        const dx = Math.max(a.left - b.right, b.left - a.right, 0),
+          dy = Math.max(a.top - b.bottom, b.top - a.bottom, 0);
+        if (Math.hypot(dx, dy) <= 24) component.add(entity.id);
       }
     }
-
-    if (live?.predicted) {
-      // Scratch physics becomes visible only when it has reached the newest input.
-      // Compare with the current live pose, not the pose several frames ago.
-      oldSupportId = live.support?.id;
-      oldOffset = live.supportOffset && { ...live.supportOffset };
-      oldPoseSourceSeconds = live.poseSourceSeconds;
-      oldMomentumX = live.predicted.airMomentumX;
-      oldMomentumY = live.predicted.airMomentumY;
-      predictedBefore = live.snapshotEntity(live.predicted);
-      this.reconciledAt = live.clock();
-      this._prevPosition = { ...live._prevPosition };
-      this._prevJumpZ = live._prevJumpZ;
-      this._prevWz = live._prevWz;
-      this._mountPrevPosition = { ...live._mountPrevPosition };
-      this._mountPrevHeading = live._mountPrevHeading;
-      this.prevSupportOffset = live.prevSupportOffset;
-      this.prevPoseSourceSeconds = live.prevPoseSourceSeconds;
-      this.presentationError = live.presentationError;
-      this.prevPresentationError = live.prevPresentationError;
-      this.predicted.sprite = predictionSprite(live.predicted.sprite, this.predicted.sprite);
-      if (this.predictedMount && live.predictedMount?.id === this.predictedMount.id)
-        this.predictedMount.sprite = predictionSprite(
-          live.predictedMount.sprite,
-          this.predictedMount.sprite,
-        );
-      if (
-        Math.hypot(
-          this.predicted.position.wx - predictedBefore.wx,
-          this.predicted.position.wy - predictedBefore.wy,
-        ) > SNAP_THRESHOLD
-      )
-        this._prevPosition = { ...this.predicted.position };
-      if (
-        this.predictedMount &&
-        live.predictedMount &&
-        Math.hypot(
-          this.predictedMount.position.wx - live.predictedMount.position.wx,
-          this.predictedMount.position.wy - live.predictedMount.position.wy,
-        ) > SNAP_THRESHOLD
-      ) {
-        this._mountPrevHeading = this.predictedMount.vehicleHeading;
-        this._mountPrevPosition = { ...this.predictedMount.position };
-      }
-      this._lastCorrection = {
-        wx: predictedBefore.wx - authoritative.wx,
-        wy: predictedBefore.wy - authoritative.wy,
-        wz: predictedBefore.wz - authoritative.wz,
-        vx: predictedBefore.vx - authoritative.vx,
-        vy: predictedBefore.vy - authoritative.vy,
-        jumpVZ: predictedBefore.jumpVZ - authoritative.jumpVZ,
+    for (const id of component)
+      for (const neighbor of scene.contactIds(id) ?? []) component.add(neighbor);
+    const error = this.error();
+    return buffered.map((entity) => {
+      if (!component.has(entity.id)) return entity;
+      const predicted = entity.id === player.id ? player : this.published.get(entity.id);
+      if (!predicted) return entity;
+      const prev = predicted.prevPosition ?? predicted.position;
+      const position = {
+        wx: prev.wx + (predicted.position.wx - prev.wx) * alpha + error.x,
+        wy: prev.wy + (predicted.position.wy - prev.wy) * alpha + error.y,
       };
-      replayStats = this.collectReplayStats();
-    }
-
-    // Copy server-authoritative state that we don't predict
-    this.predicted.id = serverPlayer.id;
-    if (serverPlayer.playerModel !== undefined)
-      this.predicted.playerModel = serverPlayer.playerModel;
-    else delete this.predicted.playerModel;
-    this.predicted.collider = serverPlayer.collider;
-    // Sprite: copy structural fields (sheet, dimensions) from server, but
-    // preserve predicted animation state (moving, direction, frameRow,
-    // frameDuration). The server's sprite may have stale animation if a
-    // no-input tick or timing jitter set moving=false between acked inputs.
-    const localSprite = this.predicted.sprite;
-    const compatibleSprite =
-      localSprite?.sheetKey === serverPlayer.sprite?.sheetKey &&
-      localSprite?.frameCount === serverPlayer.sprite?.frameCount &&
-      localSprite?.clip === serverPlayer.sprite?.clip;
-    const predMoving = compatibleSprite ? localSprite?.moving : undefined;
-    const predDirection = this.predicted.sprite?.direction;
-    const predFrameRow = this.predicted.sprite?.frameRow;
-    const predFrameDuration = this.predicted.sprite?.frameDuration;
-    this.predicted.sprite = predictionSprite(localSprite, serverPlayer.sprite);
-    if (this.predicted.sprite && predMoving !== undefined) {
-      this.predicted.sprite.moving = predMoving;
-      this.predicted.sprite.direction = predDirection ?? this.predicted.sprite.direction;
-      this.predicted.sprite.frameRow = predFrameRow ?? this.predicted.sprite.frameRow;
-      if (predFrameDuration !== undefined) this.predicted.sprite.frameDuration = predFrameDuration;
-    }
-    if (serverPlayer.parentId !== undefined) {
-      this.predicted.parentId = serverPlayer.parentId;
-    } else {
-      delete this.predicted.parentId;
-    }
-    if (serverPlayer.localOffsetX !== undefined) {
-      this.predicted.localOffsetX = serverPlayer.localOffsetX;
-    } else {
-      delete this.predicted.localOffsetX;
-    }
-    if (serverPlayer.localOffsetY !== undefined) {
-      this.predicted.localOffsetY = serverPlayer.localOffsetY;
-    } else {
-      delete this.predicted.localOffsetY;
-    }
-    if (serverPlayer.flashHidden !== undefined)
-      this.predicted.flashHidden = serverPlayer.flashHidden;
-    if (serverPlayer.sortOffsetY !== undefined)
-      this.predicted.sortOffsetY = serverPlayer.sortOffsetY;
-    if (serverPlayer.noShadow !== undefined) {
-      this.predicted.noShadow = serverPlayer.noShadow;
-    } else {
-      delete this.predicted.noShadow;
-    }
-    if (serverPlayer.deathTimer !== undefined) this.predicted.deathTimer = serverPlayer.deathTimer;
-
-    const predictedAfter = this.snapshotEntity(this.predicted);
-    const correctionPosErr = Math.hypot(
-      this._lastCorrection.wx,
-      this._lastCorrection.wy,
-      this._lastCorrection.wz,
-    );
-    const correctionVelErr = Math.hypot(this._lastCorrection.vx, this._lastCorrection.vy);
-    const resimPosErr = Math.hypot(
-      predictedAfter.wx - predictedBefore.wx,
-      predictedAfter.wy - predictedBefore.wy,
-      predictedAfter.wz - predictedBefore.wz,
-    );
-    let displayCorrectionX = predictedBefore.wx - predictedAfter.wx;
-    let displayCorrectionY = predictedBefore.wy - predictedAfter.wy;
-    if (
-      !predictedBefore.grounded &&
-      !predictedAfter.grounded &&
-      oldPoseSourceSeconds !== undefined &&
-      this.poseSourceSeconds !== undefined
-    ) {
-      // Passive source-time sampling already accounts for endpoint time changes.
-      // Decay only the residual contact displacement, not that expected travel.
-      const sourceAdvance = this.poseSourceSeconds - oldPoseSourceSeconds;
-      if (oldMomentumX !== undefined && oldMomentumX === this.predicted.airMomentumX)
-        displayCorrectionX += oldMomentumX * sourceAdvance;
-      if (oldMomentumY !== undefined && oldMomentumY === this.predicted.airMomentumY)
-        displayCorrectionY += oldMomentumY * sourceAdvance;
-    }
-    // Small residual contact corrections are display-only. Physics still uses
-    // the authoritative replay result; supports have their own exact pose binding.
-    if (resimPosErr > SNAP_THRESHOLD || serverMount || this.noclip) this.flightDisplayShift = null;
-    if (
-      this.support ||
-      oldSupportId !== undefined ||
-      serverMount ||
-      resimPosErr > 8 ||
-      Math.abs(predictedAfter.wz - predictedBefore.wz) > 0.1
-    ) {
-      this.clearPresentationError();
-    } else if (Math.hypot(displayCorrectionX, displayCorrectionY) > 0.00025) {
-      const error = this.displayedError();
-      const wx = error.wx + displayCorrectionX;
-      const wy = error.wy + displayCorrectionY;
-      if (Math.hypot(wx, wy) > 8) this.clearPresentationError();
-      else this.presentationError = { wx, wy, at: this.clock() };
-    }
-    const resimVelErr = Math.hypot(
-      predictedAfter.vx - predictedBefore.vx,
-      predictedAfter.vy - predictedBefore.vy,
-    );
-    this._lastReconcileDiagnostics = {
-      mode: serverMount ? "mount" : "player",
-      ackSeq: lastProcessedInputSeq,
-      serverTick: diagnostics?.serverTick,
-      expectedInputDt: diagnostics?.expectedInputDt,
-      replayCount: replayStats.count,
-      replayFirstSeq: replayStats.firstSeq,
-      replayLastSeq: replayStats.lastSeq,
-      replayDtMin: replayStats.dtMin,
-      replayDtMax: replayStats.dtMax,
-      replayDtAvg: replayStats.dtAvg,
-      replayDtSpread: replayStats.dtSpread,
-      replayPhysicsRevisions: replayStats.revisions,
-      currentPhysicsRevision: replayStats.currentRevision,
-      correctionPosErr,
-      correctionVelErr,
-      resimPosErr,
-      resimVelErr,
-      supportId: this.support?.id ?? null,
-      resimSupportPosErr:
-        this.support && this.supportOffset && oldOffset && this.support.id === oldSupportId
-          ? Math.hypot(
-              roofPosition(this.supportOffset, this.support).wx -
-                roofPosition(oldOffset, this.support).wx,
-              roofPosition(this.supportOffset, this.support).wy -
-                roofPosition(oldOffset, this.support).wy,
-            )
-          : null,
-      causeTags: this.inferReconcileCauseTags(
-        predictedBefore,
-        authoritative,
-        replayStats,
-        correctionPosErr,
-        correctionVelErr,
-        this._lastCorrection.jumpVZ,
-        diagnostics?.expectedInputDt,
-      ),
-      predictedBefore,
-      authoritative,
-      predictedAfter,
-    };
+      const z =
+        (predicted.prevWz ?? predicted.wz ?? 0) * (1 - alpha) +
+        (predicted.wz ?? 0) * alpha +
+        error.z;
+      return {
+        ...predicted,
+        sprite: entity.id === player.id ? predicted.sprite : entity.sprite,
+        position,
+        prevPosition: position,
+        wz: z,
+        prevWz: z,
+        ...(predicted.vehicleHeading === undefined
+          ? {}
+          : {
+              vehicleHeading: interpolateHeading(
+                predicted.prevVehicleHeading ?? predicted.vehicleHeading,
+                predicted.vehicleHeading,
+                alpha,
+              ),
+            }),
+      };
+    });
   }
-
-  /** Clear predicted state (e.g. when switching worlds). */
-  clearPredicted(): void {
-    this.collisionWorld?.dispose();
-    this.collisionWorld = undefined;
-    this.predicted = null;
-    this.clearPresentationError();
-    this.clearSupport();
-    this.collisionTimeline.clear();
-    this.predictionTime = undefined;
-    this.predictedMount = null;
-    this.clearInputHistory();
-    this._lastReconcileDiagnostics = null;
+  samplePresentationPlayer(
+    alpha: number,
+    displayed: readonly Entity[],
+    _sourceSeconds?: number,
+  ): Entity | null {
+    return (
+      this.presentEntities(alpha, displayed).find((e) => e.id === this.predicted?.id) ??
+      this.presentationPlayer
+    );
   }
-
-  /** Get the predicted player entity (or null before first server state). */
-  get player(): Entity | null {
+  get player() {
     return this.predicted;
   }
-
-  /** Render-only pose: carrier and passenger use the same interpolation endpoints. */
   get presentationPlayer(): Entity | null {
     const player = this.predicted;
     if (!player) return null;
-    const support = this.support,
-      offset = this.supportOffset;
-    if (!support || !offset) {
-      const error = this.displayedError();
-      return {
-        ...player,
-        position: { wx: player.position.wx + error.wx, wy: player.position.wy + error.wy },
-        prevPosition: {
-          wx: this._prevPosition.wx + this.prevPresentationError.wx,
-          wy: this._prevPosition.wy + this.prevPresentationError.wy,
-        },
-        prevWz: this._prevWz,
-        prevJumpZ: this._prevJumpZ,
-      };
-    }
-    const previous = { ...support, position: support.prevPosition ?? support.position };
-    const height = movingSupportZ(support, player) - (support.wz ?? 0);
+    const error = this.error(),
+      previous = error;
     return {
       ...player,
-      position: roofPosition(offset, support),
-      prevPosition: roofPosition(this.prevSupportOffset ?? offset, previous),
-      wz: (support.wz ?? 0) + height,
-      prevWz: (support.prevWz ?? support.wz ?? 0) + height,
-      prevJumpZ: this._prevJumpZ,
-    };
-  }
-
-  /** Collapse local interpolation onto one render pose. Carrier contribution is
-   * sampled on the remote display timeline; voluntary roof walking stays local.
-   */
-  samplePresentationPlayer(
-    alpha: number,
-    displayedEntities: readonly Entity[],
-    sourceSeconds?: number,
-  ): Entity | null {
-    const player = this.presentationPlayer;
-    if (!player) return null;
-    if (this.predictedMount && isTrain(this.predictedMount)) {
-      const vehicle = displayedEntities.find((e) => e.id === this.predictedMount?.id);
-      if (vehicle)
-        return {
-          ...player,
-          position: { ...vehicle.position },
-          prevPosition: { ...vehicle.position },
-          wz: vehicle.wz ?? 0,
-          prevWz: vehicle.wz ?? 0,
-        };
-    }
-    let position: PositionComponent;
-    const support = displayedEntities.find((e) => e.id === this.support?.id);
-    const offset = this.supportOffset,
-      previousOffset = this.prevSupportOffset ?? offset;
-    if (support && offset && previousOffset) {
-      position = roofPosition(
-        {
-          ...(offset.bedFloor ? { bedFloor: true as const } : {}),
-          x: previousOffset.x + (offset.x - previousOffset.x) * alpha,
-          y: previousOffset.y + (offset.y - previousOffset.y) * alpha,
-        },
-        support,
-      );
-      const raw = roofPosition(
-        {
-          ...(offset.bedFloor ? { bedFloor: true as const } : {}),
-          x: previousOffset.x + (offset.x - previousOffset.x) * alpha,
-          y: previousOffset.y + (offset.y - previousOffset.y) * alpha,
-        },
-        this.support ?? support,
-      );
-      this.supportDisplayShift = { wx: position.wx - raw.wx, wy: position.wy - raw.wy };
-      this.flightDisplayShift = null;
-    } else {
-      const prev = player.prevPosition ?? player.position;
-      position = {
-        wx: prev.wx + (player.position.wx - prev.wx) * alpha,
-        wy: prev.wy + (player.position.wy - prev.wy) * alpha,
-      };
-    }
-    if (
-      player.jumpVZ !== undefined &&
-      player.airMomentumX === undefined &&
-      player.airMomentumY === undefined
-    )
-      this.flightDisplayShift = null;
-    if (
-      !support &&
-      player.jumpVZ !== undefined &&
-      (player.airMomentumX !== undefined || player.airMomentumY !== undefined) &&
-      sourceSeconds !== undefined &&
-      this.poseSourceSeconds !== undefined &&
-      this.prevPoseSourceSeconds !== undefined
-    ) {
-      const physicsTime =
-        this.prevPoseSourceSeconds + (this.poseSourceSeconds - this.prevPoseSourceSeconds) * alpha;
-      this.flightDisplayShift ??= { wx: 0, wy: 0 };
-      // Preserve a clipped axis's existing translation rather than popping to
-      // its committed wall pose. Landing retains the established release policy.
-      if (player.airMomentumX)
-        this.flightDisplayShift.wx = player.airMomentumX * (sourceSeconds - physicsTime);
-      if (player.airMomentumY)
-        this.flightDisplayShift.wy = player.airMomentumY * (sourceSeconds - physicsTime);
-    }
-    if (!support && this.flightDisplayShift) {
-      const shift = this.flightDisplayShift;
-      if (player.jumpVZ === undefined) shift.landedAt ??= this.clock();
-      const decay =
-        shift.landedAt === undefined
-          ? 1
-          : Math.exp(-Math.max(0, this.clock() - shift.landedAt) / 0.06);
-      position.wx += shift.wx * decay;
-      position.wy += shift.wy * decay;
-    }
-    const wz = support
-      ? offset?.bedFloor && player.collider
-        ? (bedFloorSupport(support, getEntityAABB(position, player.collider)) ??
-          movingSupportZ(support, player))
-        : movingSupportZ(support, player)
-      : (player.prevWz ?? player.wz ?? 0) +
-        ((player.wz ?? 0) - (player.prevWz ?? player.wz ?? 0)) * alpha;
-    const jumpZ =
-      (player.prevJumpZ ?? player.jumpZ ?? 0) +
-      ((player.jumpZ ?? 0) - (player.prevJumpZ ?? player.jumpZ ?? 0)) * alpha;
-    return { ...player, position, prevPosition: position, wz, prevWz: wz, jumpZ, prevJumpZ: jumpZ };
-  }
-
-  private clearSupport(): void {
-    this.supportDisplayShift = null;
-    this.support = null;
-    this.supportOffset = this.prevSupportOffset = null;
-  }
-  private captureSupport(entities: readonly Entity[], landed = false): void {
-    if (!this.predicted || this.noclip || this.predictedMount) {
-      this.flightDisplayShift = null;
-      this.clearSupport();
-      return;
-    }
-    const surface = roofSupport(this.predicted, entities);
-    const support = surface && entities.find((e) => e.id === surface.id);
-    if (!support) {
-      if (this.support) {
-        if (
-          this.predicted.jumpVZ !== undefined &&
-          this.predicted.airMomentumX !== undefined &&
-          this.supportDisplayShift
-        )
-          this.flightDisplayShift = { ...this.supportDisplayShift };
-        this.clearPresentationError();
-      }
-      this.clearSupport();
-      return;
-    }
-    const changed = support.id !== this.support?.id;
-    if (landed && this.poseSourceSeconds !== undefined && this.sourceFrameSeconds !== undefined) {
-      // Flight predicts a future world pose. Once supported, bind walking back
-      // to the newest committed roof using the offset against its future pose.
-      const ahead = Math.max(0, this.poseSourceSeconds - this.sourceFrameSeconds);
-      this.predicted.position.wx -= (support.velocity?.vx ?? 0) * ahead;
-      this.predicted.position.wy -= (support.velocity?.vy ?? 0) * ahead;
-      this.poseSourceSeconds = this.sourceFrameSeconds;
-    }
-    this.support = support;
-    this.supportOffset = roofOffset(
-      this.predicted.position,
-      support,
-      !!this.predicted.collider &&
-        Math.abs(
-          (this.predicted.wz ?? 0) -
-            (bedFloorSupport(
-              support,
-              getEntityAABB(this.predicted.position, this.predicted.collider),
-            ) ?? -Infinity),
-        ) < 0.1,
-    );
-    if (changed) {
-      this.clearPresentationError();
-      this.prevSupportOffset = { ...this.supportOffset };
-    }
-  }
-
-  /** Get the predicted mount entity (or null when not riding). */
-  get mount(): Entity | null {
-    return this.predictedMount && isTrain(this.predictedMount) ? null : this.predictedMount;
-  }
-
-  /** Get the mount entity ID (or null when not riding). */
-  get mountId(): number | null {
-    return this._mountId;
-  }
-
-  /** Get previous predicted position for render interpolation. */
-  get prevPosition(): PositionComponent {
-    return this._prevPosition;
-  }
-
-  /** Get previous predicted jumpZ for render interpolation. */
-  get prevJumpZ(): number {
-    return this._prevJumpZ;
-  }
-
-  /** Get previous predicted wz for render interpolation. */
-  get prevWz(): number {
-    return this._prevWz;
-  }
-
-  /** Get previous driven bearing for render interpolation. */
-  get mountPrevHeading(): number | undefined {
-    return this._mountPrevHeading;
-  }
-
-  /** Get previous mount position for render interpolation. */
-  get mountPrevPosition(): PositionComponent {
-    return this._mountPrevPosition;
-  }
-
-  /** Get the last reconciliation correction (predicted minus server, before replay). */
-  get lastCorrection() {
-    return this._lastCorrection;
-  }
-
-  /** Get the last detailed reconciliation sample (or null before first reconcile). */
-  get lastReconcileDiagnostics(): ReconcileDiagnostics | null {
-    return this._lastReconcileDiagnostics;
-  }
-
-  // ---- Private helpers ----
-
-  private trimInputBuffer(lastProcessedInputSeq: number): void {
-    const firstUnackedIdx = this.inputBuffer.findIndex((i) => i.seq > lastProcessedInputSeq);
-    if (firstUnackedIdx === -1) {
-      this.inputBuffer = [];
-    } else if (firstUnackedIdx > 0) {
-      this.inputBuffer = this.inputBuffer.slice(firstUnackedIdx);
-    }
-    this.inputSeconds = this.inputBuffer.reduce(
-      (sum, input) => sum + (Number.isFinite(input.dt) && input.dt > 0 ? input.dt : 0),
-      0,
-    );
-  }
-
-  private snapshotEntity(entity: Entity): ReconcileStateSnapshot {
-    return {
-      wx: entity.position.wx,
-      wy: entity.position.wy,
-      wz: entity.wz ?? 0,
-      vx: entity.velocity?.vx ?? 0,
-      vy: entity.velocity?.vy ?? 0,
-      jumpVZ: entity.jumpVZ ?? 0,
-      grounded: entity.jumpVZ === undefined,
-    };
-  }
-
-  private collectReplayStats(): ReconcileReplayStats {
-    const currentRevision = this.physics().revision;
-    const count = this.inputBuffer.length;
-    if (count === 0) {
-      return {
-        count: 0,
-        firstSeq: undefined,
-        lastSeq: undefined,
-        dtMin: 0,
-        dtMax: 0,
-        dtAvg: 0,
-        dtSpread: 0,
-        revisions: [],
-        currentRevision,
-        hasMixedRevisions: false,
-        hasRevisionMismatch: false,
-      };
-    }
-
-    let dtMin = Number.POSITIVE_INFINITY;
-    let dtMax = 0;
-    let dtSum = 0;
-    const revisions = new Set<number>();
-    const firstSeq = this.inputBuffer[0]?.seq;
-    const lastSeq = this.inputBuffer[count - 1]?.seq;
-    for (const input of this.inputBuffer) {
-      if (input.dt < dtMin) dtMin = input.dt;
-      if (input.dt > dtMax) dtMax = input.dt;
-      dtSum += input.dt;
-      revisions.add(input.physics.revision);
-    }
-    const revisionList = Array.from(revisions.values()).sort((a, b) => a - b);
-    return {
-      count,
-      firstSeq,
-      lastSeq,
-      dtMin,
-      dtMax,
-      dtAvg: dtSum / count,
-      dtSpread: dtMax - dtMin,
-      revisions: revisionList,
-      currentRevision,
-      hasMixedRevisions: revisionList.length > 1,
-      hasRevisionMismatch: revisionList.some((rev) => rev !== currentRevision),
-    };
-  }
-
-  private inferReconcileCauseTags(
-    predictedBefore: ReconcileStateSnapshot,
-    authoritative: ReconcileStateSnapshot,
-    replay: ReconcileReplayStats,
-    correctionPosErr: number,
-    correctionVelErr: number,
-    correctionJumpVZ: number,
-    expectedInputDt?: number,
-  ): ReconcileCauseTag[] {
-    const tags: ReconcileCauseTag[] = [];
-
-    if (expectedInputDt !== undefined && replay.count > 0) {
-      const dtDelta = Math.abs(replay.dtAvg - expectedInputDt);
-      const dtTolerance = Math.max(0.00025, expectedInputDt * 0.02);
-      if (dtDelta > dtTolerance || replay.dtSpread > dtTolerance) {
-        tags.push("dt_mismatch");
-      }
-    }
-
-    if (replay.count > 0 && correctionPosErr > 0.25 && correctionVelErr > 8) {
-      tags.push("replay_backlog");
-    }
-
-    if (predictedBefore.grounded !== authoritative.grounded) {
-      tags.push("grounded_flip");
-    }
-
-    if (replay.hasMixedRevisions || replay.hasRevisionMismatch) {
-      tags.push("param_mismatch");
-    }
-
-    if (Math.abs(correctionJumpVZ) > 0.2) {
-      tags.push("jump_state");
-    }
-
-    if (correctionVelErr > 12 && correctionPosErr > 0.25) {
-      tags.push("velocity_drift");
-    }
-
-    if (correctionPosErr > 0 && correctionPosErr < 0.2 && correctionVelErr < 0.15) {
-      tags.push("quantization_like");
-    }
-
-    return tags;
-  }
-
-  /**
-   * Apply a single input tick: set velocity from movement, then resolve
-   * collision. Shared between live prediction (update) and replay (reconcile).
-   */
-  private applyInput(
-    movement: Movement,
-    dt: number,
-    world: World,
-    props: readonly Prop[],
-    entities: readonly Entity[],
-    physics: MovementPhysicsParams,
-  ): void {
-    if (!this.predicted || !characterPhysicsReady(physics.characterPhysics ?? 0)) return;
-    if (usesRealmPhysics(physics.characterPhysics)) this.collisionWorld ??= createCollisionWorld();
-    const collisionWorld = this.collisionWorld;
-    collisionWorld?.beginFrame();
-    const stepDts = splitInputStepDurations(dt, MAX_INPUT_STEP_SECONDS);
-    if (stepDts.length === 0) return;
-    const queryEntities = (_aabb: {
-      left: number;
-      top: number;
-      right: number;
-      bottom: number;
-    }): readonly Entity[] =>
-      this.predictionTime === undefined
-        ? entities
-        : this.collisionTimeline.poses(this.predictionTime, entities, this.predicted?.id ?? -1);
-    const queryProps = (_aabb: {
-      left: number;
-      top: number;
-      right: number;
-      bottom: number;
-    }): readonly Prop[] => props;
-    const originalQuery = queryEntities;
-    const collisionEntities = (aabb: Parameters<typeof queryEntities>[0]) =>
-      physics.characterPhysics
-        ? originalQuery(aabb).map((body) => this.pushedBodies.get(body.id) ?? body)
-        : originalQuery(aabb);
-    const sampleSurfaces = createSurfaceSampler({ queryEntities: collisionEntities, queryProps });
-    const getCollision = (tx: number, ty: number) => world.getCollisionIfLoaded(tx, ty);
-    const getHeight = (tx: number, ty: number) => world.getHeightAt(tx, ty);
-    const getTerrainAt = (tx: number, ty: number) => world.getBlendBaseAt(tx, ty);
-    const getRoadAt = (tx: number, ty: number) => world.getRoadAt(tx, ty);
-
-    let landed = false;
-    if (this.predictedMount) {
-      // ── Riding: apply input to mount, derive player position ──
-      const mountExclude = new Set([this.predictedMount.id, this.predicted.id]);
-      const mountCtx = createMovementContext({
-        collisionWorld,
-        geometryVersion: (cx, cy) => {
-          const chunk = world.getChunkIfLoaded(cx, cy);
-          return {
-            identity: chunk,
-            revision: `${chunk?.revision}:${chunk?.visualRevision}:${chunk?.physicsRevision}`,
-          };
-        },
-        getCollision,
-        getHeight,
-        getTerrainAt,
-        getRoadAt,
-        queryEntities,
-        queryProps,
-        movingEntity: this.predictedMount,
-        excludeIds: mountExclude,
-        noclip: this.noclip,
-        deferRoofCarry: true,
-      });
-      for (const stepDt of stepDts) {
-        if (isTrain(this.predictedMount)) continue;
-        if (isVehicle(this.predictedMount)) {
-          const steps = Math.max(1, Math.ceil(stepDt * 60));
-          for (let i = 0; i < steps; i++) {
-            const collider = this.predictedMount.collider;
-            if (!collider) break;
-            const pushes: VehiclePush[] = [];
-            const bounds = getEntityAABB(this.predictedMount.position, collider);
-            if (
-              this.predictedMount.towTargetId !== undefined ||
-              this.predictedMount.transportLoadId !== undefined ||
-              this.predictedMount.transportedBy !== undefined
-            ) {
-              bounds.left -= 240;
-              bounds.right += 240;
-              bounds.top -= 240;
-              bounds.bottom += 240;
-            }
-            const bodies = queryEntities(bounds).map(
-              (body) => this.pushedBodies.get(body.id) ?? body,
-            );
-            const towPlan: { before: Entity; after: Entity }[] = [];
-            const next = drivenCarPose(
-              this.predictedMount,
-              movement,
-              stepDt / steps,
-              world,
-              props,
-              bodies,
-              collisionWorld
-                ? {
-                    props: queryProps,
-                    resolveCarMotion: (before, desired, elapsed, planned) =>
-                      controlledCarMotion(
-                        before,
-                        desired,
-                        elapsed,
-                        world,
-                        props,
-                        bodies,
-                        physics,
-                        collisionWorld,
-                        planned,
-                      ),
-                  }
-                : undefined,
-              pushes,
-              undefined,
-              false,
-              towPlan,
-            );
-            if (!next) {
-              this.predictedMount.velocity = { vx: 0, vy: 0 };
-              if (this.predictedMount.sprite) this.predictedMount.sprite.moving = false;
-              break;
-            }
-            for (const push of pushes)
-              this.pushedBodies.set(push.entity.id, {
-                ...push.entity,
-                ...(push.roadkill ? { collider: null } : {}),
-                position: push.position,
-                wz: push.z,
-                ...((push.entity.jumpZ ?? 0) <= 0 ? { groundZ: push.z } : {}),
-              });
-            for (const tow of towPlan) this.pushedBodies.set(tow.before.id, tow.after);
-            this.predictedMount = next;
-          }
-          continue;
-        }
-        if (collisionWorld) {
-          collisionWorld.reject("mounted animal controller");
-          continue;
-        }
-        stepMountFromInput(
-          this.predictedMount,
-          movement,
-          stepDt,
-          mountCtx,
-          getHeight,
-          sampleSurfaces,
-          this.predicted,
-          this.physicsMult(),
-        );
-        if (this.predictionTime !== undefined) this.predictionTime += stepDt;
-      }
-
-      // Derive player position from mount + offset
-      this.predicted.position.wx = this.predictedMount.position.wx + this.mountOffsetX;
-      this.predicted.position.wy = this.predictedMount.position.wy + this.mountOffsetY;
-      // Derive player wz from mount surface + ride offset
-      if (this.predictedMount.wz !== undefined && this.predicted.jumpZ !== undefined) {
-        this.predicted.wz =
-          this.predictedMount.wz +
-          this.predicted.jumpZ +
-          (isBoat(this.predictedMount) ? BOAT_SEAT_Z : 0);
-      }
-    } else {
-      // ── Normal: apply friction + acceleration from input ──
-      if (this.support) this.poseSourceSeconds = this.sourceFrameSeconds;
-      const playerExclude = new Set([this.predicted.id]);
-      const playerCtx = createMovementContext({
-        collisionWorld,
-        geometryVersion: (cx, cy) => {
-          const chunk = world.getChunkIfLoaded(cx, cy);
-          return {
-            identity: chunk,
-            revision: `${chunk?.revision}:${chunk?.visualRevision}:${chunk?.physicsRevision}`,
-          };
-        },
-        getCollision,
-        getHeight,
-        getTerrainAt,
-        getRoadAt,
-        queryEntities: collisionEntities,
-        queryProps,
-        movingEntity: this.predicted,
-        excludeIds: playerExclude,
-        motionBudget: new CharacterMotionBudget(),
-        pushBody: (_before, after) => this.pushedBodies.set(after.id, after),
-        noclip: this.noclip,
-        deferRoofCarry: true,
-      });
-      let nextState = {
-        jumpConsumed: this.jumpConsumed,
-        lastJumpHeld: this.lastJumpHeld,
-      };
-      const heldInput =
-        movement.jumpPressed === undefined ? movement : { ...movement, jumpPressed: false };
-      for (let i = 0; i < stepDts.length; i++) {
-        const stepResult = stepPlayerFromInput(
-          this.predicted,
-          i === 0 ? movement : heldInput,
-          stepDts[i]!,
-          playerCtx,
-          getHeight,
-          sampleSurfaces,
-          nextState,
-          physics,
-          this.physicsMult(),
-        );
-        nextState = stepResult.jumpState;
-        landed ||= stepResult.outcome.landed;
-        if (this.poseSourceSeconds !== undefined) this.poseSourceSeconds += stepDts[i] ?? 0;
-        if (this.predictionTime !== undefined) this.predictionTime += stepDts[i] ?? 0;
-      }
-      this.jumpConsumed = nextState.jumpConsumed;
-      this.lastJumpHeld = nextState.lastJumpHeld;
-    }
-    this.captureSupport(entities, landed);
-    this.collisionWorld?.endFrame();
-  }
-
-  private clonePlayer(serverPlayer: Entity): Entity {
-    const clone: Entity = {
-      id: serverPlayer.id,
-      type: serverPlayer.type,
-      position: {
-        wx: serverPlayer.position.wx,
-        wy: serverPlayer.position.wy,
+      position: { wx: player.position.wx + error.x, wy: player.position.wy + error.y },
+      prevPosition: {
+        wx: (player.prevPosition ?? player.position).wx + previous.x,
+        wy: (player.prevPosition ?? player.position).wy + previous.y,
       },
-      velocity: serverPlayer.velocity
-        ? { vx: serverPlayer.velocity.vx, vy: serverPlayer.velocity.vy }
-        : null,
-      sprite: serverPlayer.sprite ? { ...serverPlayer.sprite } : null,
-      collider: serverPlayer.collider ? { ...serverPlayer.collider } : null,
-      wanderAI: serverPlayer.wanderAI ? { ...serverPlayer.wanderAI } : null,
+      wz: (player.wz ?? 0) + error.z,
+      prevWz: (player.prevWz ?? player.wz ?? 0) + previous.z,
     };
-    if (serverPlayer.vehicleHeading !== undefined)
-      clone.vehicleHeading = serverPlayer.vehicleHeading;
-    if (serverPlayer.emergencyState !== undefined)
-      clone.emergencyState = serverPlayer.emergencyState;
-    if (serverPlayer.paintSchemeId !== undefined) clone.paintSchemeId = serverPlayer.paintSchemeId;
-    for (const key of [
-      "vehicleBedTilt",
-      "vehicleBedTarget",
-      "towTargetId",
-      "towedBy",
-      "vehicleRamp",
-      "transportLoadId",
-      "transportedBy",
-    ] as const)
-      if (serverPlayer[key] !== undefined) clone[key] = serverPlayer[key];
-    if (serverPlayer.vehicleBed) clone.vehicleBed = true;
-    if (serverPlayer.playerModel !== undefined) clone.playerModel = serverPlayer.playerModel;
-    if (serverPlayer.sortOffsetY !== undefined) clone.sortOffsetY = serverPlayer.sortOffsetY;
-    if (serverPlayer.jumpZ !== undefined) clone.jumpZ = serverPlayer.jumpZ;
-    if (serverPlayer.jumpVZ !== undefined) clone.jumpVZ = serverPlayer.jumpVZ;
-    if (serverPlayer.airMomentumX !== undefined) clone.airMomentumX = serverPlayer.airMomentumX;
-    if (serverPlayer.airMomentumY !== undefined) clone.airMomentumY = serverPlayer.airMomentumY;
-    if (serverPlayer.wz !== undefined) clone.wz = serverPlayer.wz;
-    if (serverPlayer.parentId !== undefined) clone.parentId = serverPlayer.parentId;
-    if (serverPlayer.localOffsetX !== undefined) clone.localOffsetX = serverPlayer.localOffsetX;
-    if (serverPlayer.localOffsetY !== undefined) clone.localOffsetY = serverPlayer.localOffsetY;
-    return clone;
+  }
+  get mount() {
+    return this.predictedMount;
+  }
+  get mountId() {
+    return this.predictedMount?.id ?? null;
+  }
+  get prevPosition(): PositionComponent {
+    return this.predicted?.prevPosition ?? { wx: 0, wy: 0 };
+  }
+  get prevWz() {
+    return this.predicted?.prevWz ?? 0;
+  }
+  get prevJumpZ() {
+    return this.predicted?.prevJumpZ ?? 0;
+  }
+  get mountPrevHeading() {
+    return this.predictedMount?.prevVehicleHeading;
+  }
+  get mountPrevPosition() {
+    return this.predictedMount?.prevPosition ?? { wx: 0, wy: 0 };
+  }
+  get lastCorrection() {
+    return this.correction;
+  }
+  get lastReconcileDiagnostics() {
+    return this.diagnostics;
+  }
+  get recoveryDiagnostics(): PredictionRecoveryDiagnostics {
+    return {
+      status: this.status,
+      retainedInputs: this.inputHistory.length,
+      retainedSeconds: this.inputHistory.length * PHYSICS_DT,
+      discardedThroughSeq: this.discardedThroughSeq,
+      replayStepsThisTick: this.lastReplaySteps,
+      replayAck: this.replay?.request.ack,
+    };
   }
 }

@@ -11,7 +11,7 @@ export interface ControlCommand extends Movement {
   dtMs?: number;
 }
 const NEUTRAL: Movement = { dx: 0, dy: 0, jump: false, sprinting: false };
-const STALE_TICKS = 15;
+export const CONTROL_HOLD_TICKS = 15;
 
 /** Network arrivals update held controls; only shared physics ticks add travel.
  * A burst can replace held axes, but cannot add integration time or lose a jump edge.
@@ -26,12 +26,12 @@ export class PlayerControls {
     this.held = { ...NEUTRAL };
     this.receivedAt = -Infinity;
   }
-  admit(queue: readonly ControlCommand[], tick: number): { movement: Movement; ack: number } {
+  admit(queue: readonly ControlCommand[], tick: number) {
     let jumpPressed = false;
     for (const command of queue) {
       if (command.seq <= this.sequence) continue;
       jumpPressed ||= command.jumpPressed === true || (command.jump && !this.held.jump);
-      const length = Math.max(1, Math.hypot(command.dx, command.dy));
+      const length = command.relativeDriving ? 1 : Math.max(1, Math.hypot(command.dx, command.dy));
       this.held = {
         ...command,
         dx: command.dx / length,
@@ -41,8 +41,12 @@ export class PlayerControls {
       this.sequence = command.seq;
       this.receivedAt = tick;
     }
-    if (tick - this.receivedAt >= STALE_TICKS) this.held = { ...NEUTRAL };
-    return { movement: { ...this.held, jumpPressed }, ack: this.sequence };
+    if (tick - this.receivedAt >= CONTROL_HOLD_TICKS) this.held = { ...NEUTRAL };
+    return {
+      movement: { ...this.held, jumpPressed },
+      ack: this.sequence,
+      expiresIn: Math.max(0, CONTROL_HOLD_TICKS - (tick - this.receivedAt)),
+    };
   }
 }
 

@@ -26,11 +26,14 @@ The current authority checkpoint removes Realm's per-command integration and
 EntityManager's separate collision/ground/separation phase. Players, NPCs, balls
 and basic cars now share `PhysicsScene` through ordinary ScenarioSession/Realm
 startup; AI supplies intent and readback owns poses. Native contact, input, AI,
-lifecycle, car save/reload and ball lifetime checks pass. **Client prediction still
-uses the old implementation**, so this is not a ready playable reset. Bounded numerical body state now travels on normal frames (128-body cap, explicit
-overflow, scene epoch and common physics tick); the old predictor does not consume
-it yet. Bounded replay, remaining peripheral writers and legacy deletion, Worker/P2P,
-Chromebook evidence and review remain. See 205 for exact test dispositions/evidence.
+lifecycle, car save/reload and ball lifetime checks pass. Normal prediction now
+uses the same shared kernel with bounded numerical snapshots (128-body cap,
+explicit overflow, epoch, motor deadlines and common physics tick). Fixed-tick
+replay replaces the old per-command solver and duplicate carry policies. Native
+two-client delay/contact presentation, recovery and authored-geometry checks pass.
+The reset is **not ready for delivery yet**: remaining peripheral writers/old-engine
+deletion, experimental-lab alignment, ordinary Worker/P2P/browser qualification,
+Chromebook measurements and final review remain. See 205 for exact evidence.
 
 ## Historical replacement direction and early decision (201)
 

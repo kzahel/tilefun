@@ -36,9 +36,18 @@ export function compileCollisionGeometry(
     .sort((a, b) => a.id - b.id);
   // Partition at authored excavation edges as well as tile edges. Ground is
   // a solid base; elevated slabs retain empty space below their underside.
+  // Terrain ends at a slab's underside. A coplanar terrain cap and slab top
+  // otherwise produce internal side contacts at tile boundaries.
   const cuts = props.flatMap((prop) =>
     (prop.walls ?? (prop.collider ? [prop.collider] : [])).flatMap((c) =>
-      c.surface?.excavation ? [{ patch: c.surface, bounds: getEntityAABB(prop.position, c) }] : [],
+      c.surface?.excavation
+        ? [
+            {
+              patch: { ...c.surface, z: c.surface.z - c.surface.thickness },
+              bounds: getEntityAABB(prop.position, c),
+            },
+          ]
+        : [],
     ),
   );
   const water = new Map<number, number>();

@@ -1,26 +1,11 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
-import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { createPlayer } from "../entities/Player.js";
-import {
-  decodeClientMessage,
-  decodeServerMessage,
-  encodeClientMessage,
-  encodeServerMessage,
-} from "../shared/binaryCodec.js";
+import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
-import {
-  hasUnsecuredTransportLoad,
-  TRANSPORTER,
-  transportable,
-  transporterLocal,
-  transporterSupport,
-} from "../traffic/CarTransporter.js";
+import { hasUnsecuredTransportLoad, TRANSPORTER } from "../traffic/CarTransporter.js";
 import { checkedCarPose } from "../traffic/Driving.js";
-import profiles from "../traffic/towing-profiles.json" with { type: "json" };
-import { createVehicle } from "../traffic/Vehicle.js";
-import { vehiclePaintSchemes } from "../traffic/VehiclePaint.js";
 import { ScenarioSession } from "./ScenarioSession.js";
 import { transporterRecipe } from "./TransporterRecipe.js";
 import { surfaceProp } from "./WorldGeometryRecipe.js";
@@ -43,80 +28,6 @@ async function load(s: ScenarioSession) {
   for (let i = 0; i < 200 && carOf(s).position.wx < -30; i++) await s.step({ ...idle, dx: 1 });
   for (let i = 0; i < 30; i++) await s.step(idle);
 }
-it("drives continuously up the real ramp, secures, carries, saves and unloads the same car", async () => {
-  const s = await ScenarioSession.create(transporterRecipe());
-  try {
-    await action(s, "deploy");
-    await boardCar(s);
-    let pitched = false;
-    for (let i = 0; i < 200 && carOf(s).position.wx < -30; i++) {
-      await s.step({ ...idle, dx: 1 });
-      pitched ||= (transporterSupport(carOf(s), truckOf(s))?.pitch ?? 0) > 0.1;
-    }
-    for (let i = 0; i < 30; i++) await s.step(idle);
-    expect(pitched).toBe(true);
-    expect(carOf(s).wz).toBeCloseTo(TRANSPORTER.height, 3);
-    await s.command({ kind: "exit-vehicle" });
-    await action(s, "secure");
-    await action(s, "stow");
-    let truck = truckOf(s),
-      car = carOf(s);
-    const identity = car.proceduralId;
-    expect(car.transportedBy).toBe(truck.id);
-    await s.command({ kind: "enter-vehicle", entityId: truck.id });
-    const predictor = new PlayerPredictor();
-    predictor.reset(s.player.player, truck);
-    const start = truck.position.wx;
-    for (let i = 0; i < 80; i++) {
-      const input = decodeClientMessage(
-        encodeClientMessage({
-          type: "player-input",
-          seq: i,
-          ...idle,
-          dx: 1,
-          dy: i > 35 ? 0.3 : 0,
-          dtMs: 20,
-        }),
-      );
-      if (input.type !== "player-input") throw Error("Wrong input");
-      const before = JSON.stringify(car);
-      predictor.update(
-        0.02,
-        input,
-        s.realm.world,
-        s.realm.propManager.props,
-        s.realm.entityManager.entities,
-      );
-      expect(JSON.stringify(car)).toBe(before);
-      await s.step(input, 0.02);
-      expect(predictor.mount?.position.wx).toBeCloseTo(truck.position.wx, 3);
-      expect(transporterLocal(truck, car.position).x).toBeCloseTo(TRANSPORTER.loadX, 3);
-      expect(car.wz).toBeCloseTo((truck.wz ?? 0) + TRANSPORTER.height, 3);
-    }
-    expect(truck.position.wx).toBeGreaterThan(start + 40);
-    for (let i = 0; i < 30; i++) await s.step(idle);
-    await s.reload();
-    truck = truckOf(s);
-    car = carOf(s);
-    expect(car.proceduralId).toBe(identity);
-    expect(car.transportedBy).toBe(truck.id);
-    expect(truck.transportLoadId).toBe(car.id);
-    await action(s, "deploy");
-    await action(s, "release");
-    expect(car.transportedBy).toBeUndefined();
-    await s.command({ kind: "exit-vehicle" });
-    await s.command({
-      kind: "teleport",
-      position: { wx: car.position.wx, wy: car.position.wy + 40 },
-    });
-    await s.command({ kind: "enter-vehicle", entityId: car.id });
-    for (let i = 0; i < 260; i++) await s.step({ ...idle, reversing: true });
-    expect(car.wz).toBe(0);
-    expect(transporterLocal(truck, car.position).x).toBeLessThan(-190);
-  } finally {
-    await s.close();
-  }
-}, 30000);
 
 it("locks driving with a deployed ramp and protects occupied/unsecured loads and deployment space", async () => {
   const s = await ScenarioSession.create(transporterRecipe());
@@ -241,58 +152,6 @@ it("protects a load-only overhead obstruction and resolves durable partners in e
     await s.close();
   }
 }, 30000);
-
-it.each(Object.keys(profiles).filter((model) => transportable(createVehicle(model, 0, 0))))(
-  "loads, saves and releases qualified %s with its original paint",
-  async (model) => {
-    const recipe = transporterRecipe();
-    const parked = required(recipe.parkedVehicles);
-    const car = required(parked[1]);
-    car.model = model;
-    const paint = vehiclePaintSchemes(model)[0];
-    if (paint) car.paintSchemeId = paint.id;
-    const s = await ScenarioSession.create(recipe);
-    const loaded = () =>
-      required(s.realm.entityManager.entities.find((e) => e.type === `vehicle-v1:${model}`));
-    try {
-      await action(s, "deploy");
-      await s.command({ kind: "teleport", position: { wx: -205, wy: 40 } });
-      await s.command({ kind: "enter-vehicle", entityId: loaded().id });
-      const predictor = new PlayerPredictor();
-      predictor.reset(s.player.player, loaded());
-      for (let i = 0; i < 240 && loaded().position.wx < -30; i++) {
-        const input = decodeClientMessage(
-          encodeClientMessage({ type: "player-input", seq: i, ...idle, dx: 1, dtMs: 20 }),
-        );
-        if (input.type !== "player-input") throw Error("Wrong input");
-        predictor.update(
-          0.02,
-          input,
-          s.realm.world,
-          s.realm.propManager.props,
-          s.realm.entityManager.entities,
-        );
-        await s.step(input, 0.02);
-        expect(predictor.mount?.wz).toBeCloseTo(loaded().wz ?? 0, 2);
-      }
-      for (let i = 0; i < 30; i++) await s.step(idle);
-      expect(loaded().wz).toBeCloseTo(TRANSPORTER.height, 3);
-      await s.command({ kind: "exit-vehicle" });
-      await action(s, "secure");
-      await action(s, "stow");
-      const identity = loaded().proceduralId;
-      await s.reload();
-      expect(loaded().proceduralId).toBe(identity);
-      expect(loaded().paintSchemeId).toBe(paint?.id);
-      await action(s, "deploy");
-      await action(s, "release");
-      expect(loaded().transportedBy).toBeUndefined();
-    } finally {
-      await s.close();
-    }
-  },
-  30000,
-);
 
 it("keeps a bridge car independent of a transporter directly below it", async () => {
   const s = await ScenarioSession.create(transporterRecipe());

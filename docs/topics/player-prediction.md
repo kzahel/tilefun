@@ -1,5 +1,26 @@
 # Player prediction and moving contacts
 
+## Active shared-physics reset (205)
+
+The normal `PlayerPredictor` now restores/replays the same fixed 60Hz `PhysicsScene`
+as Realm. Ordinary frames carry a bounded local body set, common physics tick,
+epoch, motor targets and control deadline. The acknowledged input anchors local
+input ticks; packet duration never adds integration time. Replay retains at most
+120 inputs and performs at most eight steps/2ms per client update, holding committed
+poses while unfinished. Missing history or omitted bodies explicitly holds/rebases;
+there is no legacy fallback. Local contacts share a physics tick and one display
+transform; idle observers retain buffered coherent scenes. Unknown future remote
+input still causes bounded correction and is not a bit-exact prediction guarantee.
+
+[205](../tactical/205-physics-reset.md) owns current evidence and remaining work.
+Native shared movement/contact, two-client delay/reversal, head support/jump,
+animation, history recovery, overflow/epoch fences and authored geometry checks
+pass. Normal Worker/P2P/browser/device qualification, peripheral disposition and
+old-engine deletion are still in progress. Earlier mode/rate/carry evidence below
+is historical and does not define a compatibility matrix for this reset.
+
+## Historical integration and presentation work
+
 [197](../tactical/197-opt-in-game-character-physics.md) integrates the opt-in
 Rapier character solver into the ordinary PlayerPredictor. Retained inputs keep
 their hull/backend and physics parameters; unready WASM holds prediction until it
@@ -36,17 +57,15 @@ The alternate adapter uses scratch replay and bounded nearby collision proxies.
 Dynamic pushing remains unqualified; [physics engine](physics-engine.md) routes it.
 
 Topic: player-prediction
-Status: shared camera recovery, snapshot-anchored reload pacing and idle airborne
-support travel verified; local predicted animation and bounded backlog recovery
-delivered. Varying moving-contact acceptance remains next.
-Updated: 2026-10-18.
+Status: shared default prediction implemented; reset qualification/deletion in progress.
+Updated: 2026-11-02.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
 timelines across the game and embedded labs. [Multiplayer networking](multiplayer-networking.md)
 owns transport/replication delivery; [vehicles](vehicles.md) and [trains](trains.md)
 own their autonomous motion and service behavior.
 
-## Current status
+## Historical behavior before 205
 
 Gentle driven-car contact (2026-10-18):
 [135](../tactical/135-vehicle-horns-speeds-and-pushing.md) uses the same per-model

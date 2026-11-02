@@ -295,96 +295,14 @@ binary-replica/predictor and camera fixture at 30/60Hz authority/120Hz presentat
 Sixteen four-second delayed-input/snapshot, turn/release traces must hash identically.
 [126](../../docs/tactical/126-driving-collision-neighborhoods.md) owns scope and results.
 
-## Render and authority rates
+## Shared physics reset
 
-`npx tsx scripts/instrumentation/prediction-rates.ts --output=/tmp/prediction-rates.json`
-extends six representative native contact/roof scenes through production
-`GameLoop.externalTick`, shared interpolation and binary replication. Profiles
-cover 60/120Hz presentation, 30/60Hz authority, live rate transitions, timed delay
-and deliberately independent command rates. Every trace repeats in a fresh
-session. `--case=free-walk --profile=switch60-30-60-render120` isolates the shared
-loop's negative-alpha reproduction. The deterministic lane does not draw pixels.
-
-The train browser probe also accepts `--server-hz=30|60|alternate` via the existing
-server CVar and `--render-hz=120` for measured external-clock drawing. Use `--headed`
-without a render override to measure native rAF; do not assume display cadence.
-[Rate evidence](../../docs/research/prediction-rate-reproductions.md) records actual
-native 120Hz Worker captures, Canvas/GPU runs, commands and measurement limits.
-No gameplay fix is implemented.
-
-## Moving contact and car/train roofs
-
-`npx tsx scripts/instrumentation/car-driving-prediction.ts --output=/tmp/tilefun-car-driving-prediction.json`
-characterizes inside-car driving on native clear flat ground at 30/60Hz authority
-and controlled 120Hz presentation. Regular inputs, one-tick late inputs, late
-snapshots and constant 50ms delay each way repeat entire traces in fresh sessions.
-`--assert-continuous` checks correction and step uniformity; it passes after the
-shared command-time fix. Its importable `car-driving-prediction-case.ts` fixture
-also runs in the unit suite, including delayed diagonal turns and release braking.
-It does not draw pixels or measure native display cadence.
-
-`node scripts/instrumentation/car-driving-browser.mjs --output=/tmp/tilefun-car-driving-browser-canvas60.json`
-observes ordinary keyboard driving through real Worker authority in an isolated
-fresh regional world, without timing/input injection. Add `--renderer=gpu`,
-`--server-hz=30` or `--headed`. It uses bundled full Chromium, isolated Workshop
-data/browser storage and closes its browser/server. Run captures sequentially
-without concurrent tests/profilers. Cruise filtering excludes hard stops, but
-cannot exclude every contact; this is characterization, not broad driving
-acceptance. [Investigation and shared fix](../../docs/research/car-driving-prediction-jitter.md).
-Use `--assert-fixed` to gate cruise replay correction and single-tick motion
-without acknowledgement at 0.01px; the generated-world cruise filter remains a
-scoped control, not acceptance of every terrain/contact trajectory.
-
-`npx tsx scripts/instrumentation/moving-contact.ts --output=/tmp/moving-contact.json`
-runs ten native production scenes under five controlled input/delivery schedules.
-Every scene runs twice in fresh sessions and rejects differing complete trace
-hashes. It also checks that walking really encounters a constraint and that roof
-fixtures retain support at cruise speed. Only fixture data and clocks are controlled;
-native AI, collider flags, carry logic, binary replication and prediction are unchanged.
-
-Use `--case=person-away --profile=delay50`, `--case=cow-still --profile=lockstep`,
-`--case=car-roof --profile=uneven` or `--case=train-roof --profile=uneven` for focused
-reproductions. Other cases/profiles and the measured baseline are in
-[moving-contact evidence](../../docs/research/moving-contact-reproductions.md).
-JSON retains actual post-replay shifts, acknowledgements, geometry and
-authoritative passenger offsets. This is characterization, not a fixed-behavior
-test or a browser presentation measurement. Gameplay changes remain on hold.
-
-## Train roof prediction
-
-`npx tsx scripts/instrumentation/train-roof-prediction.ts --output=/tmp/train-clock.json`
-characterizes a constant-speed train passenger with independently scheduled
-commands/server ticks using production Realm, replication, codec and predictor.
-It includes both train body representations and idle/walking ground controls.
-
-`node scripts/instrumentation/train-roof-browser.mjs --renderer=canvas --output=/tmp/train-browser.json`
-captures ordinary keyboard boarding in a fresh seed 2026 world through the real
-Worker. Use `--renderer=gpu`, `--delay=50` (milliseconds each way), or `--headed`
-for other lanes. It owns an isolated dev origin, temporary data and bundled full
-Chromium, and closes both server and browser. Hooks observe without changing
-simulation or prediction. Reports distinguish post-replay corrections from raw
-backlog lead and measure displayed rider position relative to the carriage.
-See [evidence and proposed fix](../../docs/research/train-roof-prediction-jitter.md).
-Use `--assert-fixed` for roof alignment, `--assert-timing` for consumed authority
-cadence and `--assert-presentation` for steady straight-motion step errors. The last
-check uses the actual GameLoop/rAF timestamp, separately recording post-render
-capture time, and compares world/camera travel against 192px/s × elapsed time after
-one second of continuous cruise. It requires at least 60 steady steps, world error
-≤0.05px, camera error ≤0.1px and no backwards camera frames.
-`--server-hz=alternate --headed --renderer=gpu` exercises 60→30→60Hz at native refresh.
-These checks establish the scoped straight-motion contract, not arbitrary motion
-or whole-machine frame pacing. See [current presentation evidence](../../docs/research/camera-basics-reproductions.md#shared-presentation-fix).
-
-## Rider-free camera timing
-
-`npx tsx scripts/instrumentation/camera-basics.ts --output=/tmp/camera-basics.json`
-records deterministic train-locked/train-smoothed and fast-player/noclip traces.
-Production client math runs on explicit times; no browser or renderer starts.
-Delivery delays and absent render callbacks are injected separately. Known-speed
-motion and equal-time uninterrupted controls distinguish missing frames from extra
-camera errors. `--assert-continuous` now passes through the shared timestamped
-presentation/camera owner. Long-pause local simulation debt is characterized separately.
-See [scope, evidence and next work](../../docs/research/camera-basics-reproductions.md).
+The old variable-rate, per-command movement, moving-roof and noclip prediction
+CLIs were retired by [205](../../docs/tactical/205-physics-reset.md). Their captured
+research remains historical evidence. Current physics uses one fixed 60Hz step;
+focused native coverage is `src/client/SharedPrediction.test.ts` and
+`src/server/SharedPhysics.test.ts`. Browser and device qualification remains part
+of 205; older capture assertions are not acceptance gates for the new solver.
 
 ## Sleeping NPC separation
 
@@ -509,42 +427,6 @@ Each owns an isolated Vite origin and bundled Chromium and closes both on exit.
 V8 sampling is not an allocation census or a frame-pacing measurement. Compare
 work counts, hashes, cache counters and source revisions alongside sampled bytes.
 See [renderer completion](../../docs/tactical/034-renderer-completion.md).
-
-
-## Airborne support momentum
-
-`npx tsx scripts/instrumentation/roof-camera-jump.ts --assert-momentum` checks the
-full native authority flight contract, including preserved Quake-air controls.
-Its legacy `--assert-baseline` retains the historical momentum-loss expectation,
-and its camera lanes intentionally retain the old untimed consumer. Current
-camera continuity uses the separate timestamped presentation CLIs above.
-
-Add `--jump-momentum` to `train-roof-browser.mjs` with a fixed 30/60Hz server rate
-to run ordinary-keyboard next-carriage and midair-reversal flights. It requires
-20 airborne samples per flight, retained departure velocity, next-roof landing,
-forward/backward steering and takeoff step error ≤3.5px. Use native headed full
-Chromium for actual 120Hz display evidence. Roof-offset/steady-idle assertions
-are separate lanes: walking/jumping intentionally changes the passenger offset.
-[Contracts, evidence and limits](../../docs/research/airborne-support-momentum.md).
-
-Use `--idle-jump` for two jumps with no XY input on an unchanged cruising train.
-The lane asserts server landing offset drift ≤0.02px and airborne displayed
-relative drift ≤0.1px, in addition to velocity and same-roof landing. Ordinary
-keyboard boarding waits for play-mode acknowledgement and approaches the body
-before jumping; flight starts after one second at full cruise so sampled history
-has cleared acceleration. No physics or player-position override is used. Native headed
-captures complement deterministic Realm input-batch and 120Hz presentation
-regressions in `src/client/IdleSupportJump.test.ts`.
-[Idle travel evidence](../../docs/research/idle-support-jump.md).
-
-## Saved train reload pacing
-
-Add `--reload-pacing --headed` to `train-roof-browser.mjs` for a normal page reload
-on a saved moving roof ride, followed by an isolated production clock-reset control.
-The lane leaves native rAF and authority timers intact, records raw sampled clocks
-and borrowed poses, and accepts `--assert-presentation` / `--output=...`.
-It does not claim a real hidden-tab lifecycle test: automated pages are forced
-visible in the measured setup. [Evidence and rerun](../../docs/research/train-refresh-pacing.md).
 
 
 ## Collision broad-phase scaling

@@ -24,6 +24,8 @@ export interface PhysicsBodyState {
   normalY: number;
   normalZ: number;
   supportId?: number;
+  /** Exclusive physics tick deadline for a network-controlled motor. */
+  controlUntil?: number;
 }
 export interface PhysicsState {
   epoch: number;

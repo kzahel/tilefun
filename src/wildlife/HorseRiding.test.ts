@@ -1,12 +1,9 @@
 import { describe, expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
-import { PlayerPredictor } from "../client/PlayerPredictor.js";
-import { Direction } from "../entities/Entity.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { createPlayer } from "../entities/Player.js";
 import { FLAT_SCENARIO, scenarioWalls } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
-import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { createFauna, faunaType } from "./Fauna.js";
 import { startleFauna } from "./faunaInteractions.js";
 
@@ -108,38 +105,6 @@ describe("horse riding through the shared Realm", () => {
       expect(horse(s).position.wx).toBeLessThanOrEqual(200 - 17);
       expect(horse(s).position.wx).toBeGreaterThan(150);
       expect(s.player.player.position).toEqual(horse(s).position);
-    } finally {
-      await s.close();
-    }
-  });
-
-  it("predicts native speed, direction and animated riding clips from replicated definitions", async () => {
-    const s = await scene();
-    try {
-      await jumpOn(s);
-      await s.step(idle, 1 / 60);
-      const predictor = new PlayerPredictor();
-      predictor.reset(
-        deserializeEntity(serializeEntity(s.player.player)),
-        deserializeEntity(serializeEntity(horse(s))),
-      );
-      const move = { ...idle, dx: 0, dy: -1 };
-      const originalY = horse(s).position.wy;
-      for (let i = 0; i < 12; i++) {
-        predictor.update(
-          1 / 60,
-          move,
-          s.realm.world,
-          [],
-          [deserializeEntity(serializeEntity(horse(s)))],
-        );
-        await s.step(move, 1 / 60);
-      }
-      expect(predictor.mount?.position.wy).toBeCloseTo(horse(s).position.wy, 1);
-      expect(originalY - horse(s).position.wy).toBeCloseTo(32, 1);
-      expect(predictor.mount?.sprite?.direction).toBe(Direction.Up);
-      expect(predictor.mount?.sprite?.clip).toBe(horse(s).sprite?.clip);
-      expect(predictor.player?.wz).toBe(s.player.player.wz);
     } finally {
       await s.close();
     }

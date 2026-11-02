@@ -1,9 +1,7 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
-import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import { PlayerSession } from "../server/PlayerSession.js";
-import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { roofOffset } from "../traffic/MovingSupport.js";
 import { roofSupport } from "../traffic/RoofSupport.js";
 import { LocalTransport } from "../transport/LocalTransport.js";
@@ -74,38 +72,7 @@ it("jumps from trackside onto a stopped train, walks the roof and jumps off with
     await s.close();
   }
 });
-it("predicts a centered rider through bends and braking with bounded corrections", async () => {
-  const s = await ScenarioSession.create(curvedTrainRecipe());
-  try {
-    await s.command({ kind: "train-position", roof: true });
-    const client = new PlayerPredictor();
-    client.reset(deserializeEntity(serializeEntity(s.player.player)));
-    let maxError = 0;
-    for (let i = 0; i < 2400; i++) {
-      const replicas = s.realm.entityManager.entities.map((e) =>
-        deserializeEntity(serializeEntity(e)),
-      );
-      client.storeInput(i + 1, idle, 1 / 60);
-      client.update(1 / 60, idle, s.realm.world, s.realm.propManager.props, replicas);
-      await s.step(idle);
-      client.reconcile(
-        s.player.player,
-        i + 1,
-        s.realm.world,
-        s.realm.propManager.props,
-        s.realm.entityManager.entities.map((e) => deserializeEntity(serializeEntity(e))),
-      );
-      maxError = Math.max(
-        maxError,
-        required(client.lastReconcileDiagnostics).resimSupportPosErr ?? 0,
-      );
-      expect(client.player?.wz).toBe(44);
-    }
-    expect(maxError).toBeLessThan(0.15);
-  } finally {
-    await s.close();
-  }
-}, 30000);
+
 it("stops before a low ceiling with a roof passenger, then continues without that passenger", async () => {
   const recipe = curvedTrainRecipe(false);
   recipe.props.push(

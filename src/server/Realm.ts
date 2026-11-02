@@ -740,6 +740,7 @@ export class Realm {
       );
     const movementPhysics = this.options.physics?.() ?? getMovementPhysicsParams();
     const controls = new Map<number, import("../input/ActionManager.js").Movement>();
+    const controlTicks = new Map<number, number>();
     for (const session of this.sessions.values()) {
       if (this.options.simulationOwner) continue;
       const blocked =
@@ -770,6 +771,7 @@ export class Realm {
       )
         this.dismountPlayer(session);
       controls.set(session.player.id, admitted.movement);
+      controlTicks.set(session.player.id, admitted.expiresIn);
     }
 
     const activeSessions = [...this.sessions.values()].filter(
@@ -1025,9 +1027,12 @@ export class Realm {
             session.gameplaySession.mountId === null
               ? undefined
               : this.entityManager.byId.get(session.gameplaySession.mountId);
-          if (vehicle) intents.set(vehicle.id, vehicleMotionIntent(vehicle, movement));
-          else if (mount) intents.set(mount.id, playerMotionIntent(movement));
-          else intents.set(session.player.id, playerMotionIntent(movement));
+          const controlled = vehicle ?? mount ?? session.player;
+          intents.set(controlled.id, {
+            ...(vehicle ? vehicleMotionIntent(vehicle, movement) : playerMotionIntent(movement)),
+            controlUntil:
+              (this.physicsScene?.physicsTick ?? 0) + (controlTicks.get(session.player.id) ?? 0),
+          });
           // Facing/animation is intent-derived; readback publishes physical velocity.
           if (!vehicle) updatePlayerSpriteFromInput(session.player, movement);
         }

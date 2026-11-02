@@ -21,7 +21,6 @@ import {
   setTimeScale,
 } from "../physics/PlayerMovement.js";
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
-import { interpolateHeading } from "../rendering/PresentationTimeline.js";
 import type { GameServer } from "../server/GameServer.js";
 import { applyEntityDelta } from "../shared/entityDelta.js";
 import type {
@@ -211,30 +210,7 @@ export class RemoteStateView implements ClientStateView {
       domain: "remote",
     };
     const entities = this.presentation.sample(this._entities, now, paused);
-    const player = this._predictor?.samplePresentationPlayer(
-      alpha,
-      entities,
-      this.presentation.sampledTime,
-    );
-    const mount = this._predictor?.mount;
-    this.presentedEntities = entities.map((e) => {
-      if (e.id === this._playerEntityId && player) return player;
-      if (mount && e.id === mount.id)
-        return {
-          ...mount,
-          ...(mount.vehicleHeading === undefined
-            ? {}
-            : {
-                vehicleHeading: interpolateHeading(
-                  this._predictor?.mountPrevHeading ?? mount.vehicleHeading,
-                  mount.vehicleHeading,
-                  alpha,
-                ),
-              }),
-          prevPosition: this._predictor?.mountPrevPosition ?? mount.position,
-        };
-      return e;
-    });
+    this.presentedEntities = this._predictor?.presentEntities(alpha, entities) ?? entities;
   }
   endPresentation(): void {
     this.presentedEntities = null;
@@ -362,6 +338,13 @@ export class RemoteStateView implements ClientStateView {
 
   /** Apply a per-tick frame message (entity delta protocol). */
   applyFrame(msg: FrameMessage, receivedAt = performance.now() / 1000): void {
+    if (
+      this._physicsState &&
+      msg.physics &&
+      (msg.physics.epoch < this._physicsState.epoch ||
+        (msg.physics.epoch === this._physicsState.epoch && msg.serverTick < this._serverTick))
+    )
+      return;
     const extrapolationSamples = this._lastExtrapolationSamples;
     this._lastExtrapolationSamples = new Map<number, ExtrapolationSample>();
 

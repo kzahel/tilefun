@@ -108,17 +108,8 @@ export class PlayScene implements GameScene {
   /** Likely true mismatch count (resim drift or no-replay correction over threshold). */
   private reconcileNotable = 0;
   /** Raw correction count over threshold (includes expected backlog lead corrections). */
-  private reconcileCorrectionNotable = 0;
   private reconcilePosErrSum = 0;
   private reconcilePosErrMax = 0;
-  private reconcileResimErrSum = 0;
-  private reconcileResimErrMax = 0;
-  private reconcileResimNotable = 0;
-  private reconcileCauseCounts = new Map<string, number>();
-  private reconcileSamplesNoReplay = 0;
-  private reconcileNotableNoReplay = 0;
-  private reconcileSamplesWithReplay = 0;
-  private reconcileNotableWithReplay = 0;
   private nextReconcileLogAtMs = 0;
   private jumpPressLatched = false;
   private occupiedId: number | undefined;
@@ -424,8 +415,6 @@ export class PlayScene implements GameScene {
       const remoteView = gc.stateView as RemoteStateView;
 
       if (this.predictor) {
-        this.predictor.noclip = gc.debugPanel.noclip;
-
         // Reconcile BEFORE storing current input — replay rebuilds prediction
         // from server state + unacked inputs from previous frames only.
         // Storing current input first would cause it to be replayed AND
@@ -451,23 +440,19 @@ export class PlayScene implements GameScene {
                 `[tilefun:play] predictor entity ID mismatch: predicted=${this.predictor.player.id} server=${serverPlayer.id} — forcing reset`,
               );
               this.predictor.reset(serverPlayer, serverMount);
-            } else {
-              this.predictor.reconcile(
-                serverPlayer,
-                remoteView.lastProcessedInputSeq,
-                gc.stateView.world,
-                gc.stateView.props,
-                remoteView.serverEntities,
-                remoteView.mountEntityId,
-                {
-                  expectedInputDt: (remoteView.tickMs / 1000) * getTimeScale(),
-                  serverTick: remoteView.serverTick,
-                  ...(remoteView.simulationTime !== undefined
-                    ? { simulationTime: remoteView.simulationTime }
-                    : {}),
-                },
-              );
             }
+            this.predictor.reconcile(
+              serverPlayer,
+              remoteView.lastProcessedInputSeq,
+              gc.stateView.world,
+              gc.stateView.props,
+              remoteView.serverEntities,
+              remoteView.mountEntityId,
+              {
+                serverTick: remoteView.serverTick,
+                ...(remoteView.physicsState ? { physics: remoteView.physicsState } : {}),
+              },
+            );
             this.maybeLogReconcile(gc, remoteView);
           }
         }
@@ -690,58 +675,14 @@ export class PlayScene implements GameScene {
   }
 
   private maybeLogReconcile(gc: GameContext, remoteView: RemoteStateView): void {
-    const enabled = gc.console.cvars.get("cl_log_reconcile")?.get() === true;
-    if (!enabled) return;
-
-    const correction = remoteView.predictionCorrection;
-    if (!correction) return;
-
-    const threshold = Number(gc.console.cvars.get("cl_reconcile_log_threshold")?.get() ?? 0.5);
-    const intervalMs = Number(gc.console.cvars.get("cl_reconcile_log_interval_ms")?.get() ?? 1000);
-    const posErr = Math.hypot(correction.wx, correction.wy, correction.wz);
+    if (gc.console.cvars.get("cl_log_reconcile")?.get() !== true) return;
     const details = remoteView.predictionDiagnostics;
-    const resimPosErr = details?.resimPosErr ?? 0;
-    const replayCount = details?.replayCount;
-    const correctionNotable = posErr >= threshold;
-    const actionableNotable = replayCount === 0 && resimPosErr >= threshold;
-    if (replayCount === 0) {
-      this.reconcileSamplesNoReplay++;
-    } else if ((replayCount ?? 0) > 0) {
-      this.reconcileSamplesWithReplay++;
-    }
-
+    if (!details) return;
+    const threshold = Number(gc.console.cvars.get("cl_reconcile_log_threshold")?.get() ?? 0.5);
     this.reconcileSamples++;
-    this.reconcilePosErrSum += posErr;
-    if (posErr > this.reconcilePosErrMax) this.reconcilePosErrMax = posErr;
-    this.reconcileResimErrSum += resimPosErr;
-    if (resimPosErr > this.reconcileResimErrMax) this.reconcileResimErrMax = resimPosErr;
-    if (actionableNotable) this.reconcileNotable++;
-    if (correctionNotable) {
-      this.reconcileCorrectionNotable++;
-      if (resimPosErr >= threshold) this.reconcileResimNotable++;
-      if (replayCount === 0) {
-        this.reconcileNotableNoReplay++;
-      } else if ((replayCount ?? 0) > 0) {
-        this.reconcileNotableWithReplay++;
-      }
-      if (details) {
-        for (const tag of details.causeTags) {
-          this.reconcileCauseCounts.set(tag, (this.reconcileCauseCounts.get(tag) ?? 0) + 1);
-        }
-        const tagLabel = details.causeTags.length > 0 ? details.causeTags.join(",") : "none";
-        const replaySeq =
-          details.replayFirstSeq !== undefined && details.replayLastSeq !== undefined
-            ? `${details.replayFirstSeq}-${details.replayLastSeq}`
-            : "none";
-        const expectedDt =
-          details.expectedInputDt !== undefined ? details.expectedInputDt.toFixed(6) : "n/a";
-        const p = details.predictedBefore;
-        const a = details.authoritative;
-        console.log(
-          `[tilefun:reconcile:sample] tick=${remoteView.serverTick} ack=${remoteView.lastProcessedInputSeq} mode=${details.mode} posErr=${details.correctionPosErr.toFixed(3)} velErr=${details.correctionVelErr.toFixed(3)} resimPosErr=${details.resimPosErr.toFixed(3)} resimVelErr=${details.resimVelErr.toFixed(3)} dPos=(${correction.wx.toFixed(3)},${correction.wy.toFixed(3)},${correction.wz.toFixed(3)}) dVel=(${correction.vx.toFixed(3)},${correction.vy.toFixed(3)}) dJumpVZ=${correction.jumpVZ.toFixed(3)} replay=${details.replayCount} replaySeq=${replaySeq} dtReplay=${details.replayDtAvg.toFixed(6)}[${details.replayDtMin.toFixed(6)},${details.replayDtMax.toFixed(6)}] dtExpected=${expectedDt} revs=${details.replayPhysicsRevisions.join("|") || "none"} curRev=${details.currentPhysicsRevision} pred=(${p.wx.toFixed(2)},${p.wy.toFixed(2)},wz=${p.wz.toFixed(2)},vx=${p.vx.toFixed(2)},vy=${p.vy.toFixed(2)},jvz=${p.jumpVZ.toFixed(2)},g=${p.grounded ? 1 : 0}) auth=(${a.wx.toFixed(2)},${a.wy.toFixed(2)},wz=${a.wz.toFixed(2)},vx=${a.vx.toFixed(2)},vy=${a.vy.toFixed(2)},jvz=${a.jumpVZ.toFixed(2)},g=${a.grounded ? 1 : 0}) cause=${tagLabel}`,
-        );
-      }
-    }
+    this.reconcilePosErrSum += details.resimPosErr;
+    this.reconcilePosErrMax = Math.max(this.reconcilePosErrMax, details.resimPosErr);
+    if (details.resimPosErr >= threshold) this.reconcileNotable++;
     remoteView.setReconcileStats({
       samples: this.reconcileSamples,
       notable: this.reconcileNotable,
@@ -749,56 +690,13 @@ export class PlayScene implements GameScene {
       maxPosErr: this.reconcilePosErrMax,
       threshold,
     });
-
-    const nowMs = performance.now();
-    if (nowMs < this.nextReconcileLogAtMs) return;
-
-    if (this.reconcileSamples > 0) {
-      const avgPosErr = this.reconcilePosErrSum / this.reconcileSamples;
-      const avgResimErr = this.reconcileResimErrSum / this.reconcileSamples;
-      const notablePct = (this.reconcileNotable / this.reconcileSamples) * 100;
-      const correctionNotablePct = (this.reconcileCorrectionNotable / this.reconcileSamples) * 100;
-      const resimNotablePct = (this.reconcileResimNotable / this.reconcileSamples) * 100;
-      const noReplayPct =
-        this.reconcileSamplesNoReplay > 0
-          ? (this.reconcileNotableNoReplay / this.reconcileSamplesNoReplay) * 100
-          : 0;
-      const withReplayPct =
-        this.reconcileSamplesWithReplay > 0
-          ? (this.reconcileNotableWithReplay / this.reconcileSamplesWithReplay) * 100
-          : 0;
-      const causeSummary =
-        this.reconcileCauseCounts.size > 0
-          ? Array.from(this.reconcileCauseCounts.entries())
-              .sort((a, b) => b[1] - a[1])
-              .map(([tag, count]) => `${tag}:${count}`)
-              .join(",")
-          : "none";
-      console.log(
-        `[tilefun:reconcile] tick=${remoteView.serverTick} ack=${remoteView.lastProcessedInputSeq} samples=${this.reconcileSamples} notable=${this.reconcileNotable}(${notablePct.toFixed(1)}%) correctionNotable=${this.reconcileCorrectionNotable}(${correctionNotablePct.toFixed(1)}%) avgPosErr=${avgPosErr.toFixed(3)} maxPosErr=${this.reconcilePosErrMax.toFixed(3)} avgResimErr=${avgResimErr.toFixed(3)} maxResimErr=${this.reconcileResimErrMax.toFixed(3)} resimNotable=${this.reconcileResimNotable}(${resimNotablePct.toFixed(1)}%) threshold=${threshold.toFixed(3)} correctionReplay0=${this.reconcileNotableNoReplay}/${this.reconcileSamplesNoReplay}(${noReplayPct.toFixed(1)}%) correctionReplayN=${this.reconcileNotableWithReplay}/${this.reconcileSamplesWithReplay}(${withReplayPct.toFixed(1)}%) causes=${causeSummary}`,
-      );
-    }
-    this.reconcileSamples = 0;
-    this.reconcileNotable = 0;
-    this.reconcileCorrectionNotable = 0;
-    this.reconcilePosErrSum = 0;
-    this.reconcilePosErrMax = 0;
-    this.reconcileResimErrSum = 0;
-    this.reconcileResimErrMax = 0;
-    this.reconcileResimNotable = 0;
-    this.reconcileCauseCounts.clear();
-    this.reconcileSamplesNoReplay = 0;
-    this.reconcileNotableNoReplay = 0;
-    this.reconcileSamplesWithReplay = 0;
-    this.reconcileNotableWithReplay = 0;
-    remoteView.setReconcileStats({
-      samples: 0,
-      notable: 0,
-      avgPosErr: 0,
-      maxPosErr: 0,
-      threshold,
-    });
-    this.nextReconcileLogAtMs = nowMs + intervalMs;
+    const now = performance.now();
+    if (now < this.nextReconcileLogAtMs) return;
+    console.log(
+      `[tilefun:reconcile] epoch=${details.epoch} tick=${details.physicsTick} ack=${details.ackSeq} bodies=${details.bodies} omitted=${details.omitted} replay=${details.replayCount} replayMs=${details.replayMs.toFixed(2)} pastError=${details.pastTickError?.toFixed(3) ?? "unavailable"} currentCorrection=${details.resimPosErr.toFixed(3)} status=${details.status}`,
+    );
+    this.nextReconcileLogAtMs =
+      now + Number(gc.console.cvars.get("cl_reconcile_log_interval_ms")?.get() ?? 1000);
   }
 
   private bindZoomActions(gc: GameContext): void {

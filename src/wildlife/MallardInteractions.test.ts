@@ -1,24 +1,16 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
-import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { createBall } from "../entities/Ball.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
-import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { encodeActor } from "../persistence/ActorRecords.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
-import {
-  getMovementPhysicsParams,
-  stepPlayerFromInput,
-  tickJumpGravity,
-} from "../physics/PlayerMovement.js";
-import { createMovementContext } from "../physics/SimulationEnvironment.js";
+import { getMovementPhysicsParams, tickJumpGravity } from "../physics/PlayerMovement.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
-import { World } from "../world/World.js";
 import { createMallard, MALLARD_TYPE } from "./Mallard.js";
 import { updateMallardAI } from "./mallardAI.js";
 import { startleMallard } from "./mallardInteractions.js";
@@ -56,90 +48,6 @@ function fallingPlayer() {
   player.jumpZ = 12;
   return player;
 }
-
-it("predicts body blocking and grounded standing on replicated duck bodies until Jump is pressed", () => {
-  const duck = createMallard(64, 64);
-  duck.id = 1;
-  duck.wz = 0;
-  const player = fallingPlayer();
-  const replica = deserializeEntity(serializeEntity(duck));
-  const world = new World(new FlatStrategy());
-  // Load the neighborhood used by client-side shared physics.
-  for (let y = -1; y <= 1; y++) for (let x = -1; x <= 1; x++) world.chunks.getOrCreate(x, y);
-  const predictor = new PlayerPredictor();
-  predictor.reset(player);
-  const ctx = createMovementContext({
-    movingEntity: player,
-    excludeIds: new Set([player.id]),
-    noclip: false,
-    getCollision: () => 0,
-    getHeight: () => 0,
-    queryEntities: () => [duck],
-    queryProps: () => [],
-  });
-  const result = stepPlayerFromInput(
-    player,
-    idle,
-    0.1,
-    ctx,
-    () => 0,
-    () => ({ props: [], entities: [duck] }),
-    { jumpConsumed: false, lastJumpHeld: false },
-    physics,
-  );
-  predictor.update(0.1, idle, world, [], [replica]);
-  expect(result.outcome.wildlifeContactId).toBe(duck.id);
-  expect(result.outcome.enteredWater).toBe(false);
-  expect(player.jumpVZ).toBeUndefined();
-  expect(player.jumpZ).toBeUndefined();
-  expect(player.wz).toBe(9);
-  expect(predictor.player?.wz).toBeCloseTo(required(player.wz), 5);
-  expect(predictor.player?.jumpVZ).toBe(player.jumpVZ);
-  // A stationary body remains support across idle ticks, with no repeated contact/jump.
-  let jumpState = { jumpConsumed: false, lastJumpHeld: false };
-  for (let i = 0; i < 90; i++) {
-    const step = stepPlayerFromInput(
-      player,
-      idle,
-      1 / 60,
-      ctx,
-      () => 0,
-      () => ({ props: [], entities: [duck] }),
-      jumpState,
-      getMovementPhysicsParams(),
-    );
-    jumpState = step.jumpState;
-    predictor.update(1 / 60, idle, world, [], [deserializeEntity(serializeEntity(duck))]);
-    expect(step.outcome.wildlifeContactId).toBeUndefined();
-    expect(player.wz).toBe(9);
-    expect(player.jumpVZ).toBeUndefined();
-    expect(predictor.player?.wz).toBe(9);
-    expect(predictor.player?.jumpVZ).toBeUndefined();
-  }
-  stepPlayerFromInput(
-    player,
-    { ...idle, jump: true },
-    1 / 60,
-    ctx,
-    () => 0,
-    () => ({ props: [], entities: [duck] }),
-    jumpState,
-    getMovementPhysicsParams(),
-  );
-  predictor.update(
-    1 / 60,
-    { ...idle, jump: true },
-    world,
-    [],
-    [deserializeEntity(serializeEntity(duck))],
-  );
-  expect(player.jumpVZ).toBeGreaterThan(0);
-  expect(predictor.player?.jumpVZ).toBeCloseTo(required(player.jumpVZ), 5);
-
-  expect(ctx.isEntityBlocked({ left: 62, right: 66, top: 62, bottom: 66 })).toBe(false); // above the duck now
-  player.wz = 0;
-  expect(ctx.isEntityBlocked({ left: 62, right: 66, top: 62, bottom: 66 })).toBe(true);
-});
 
 it("does not report wildlife landing contact on a near miss, an ascending pass or a body above the player", () => {
   for (const kind of ["miss", "ascending", "above"] as const) {

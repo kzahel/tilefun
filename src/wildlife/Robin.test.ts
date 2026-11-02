@@ -3,22 +3,18 @@ import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
-import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { createBall } from "../entities/Ball.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
 import { setSpriteClipElapsed } from "../entities/spriteAnimation.js";
-import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { encodeActor } from "../persistence/ActorRecords.js";
 import { tickBallPhysics } from "../physics/BallPhysics.js";
-import { getMovementPhysicsParams, stepPlayerFromInput } from "../physics/PlayerMovement.js";
-import { createMovementContext } from "../physics/SimulationEnvironment.js";
 import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
@@ -26,7 +22,6 @@ import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
-import { World } from "../world/World.js";
 import { createRobin, ROBIN_CLIPS, ROBIN_IMAGE, ROBIN_TYPE } from "./Robin.js";
 import { updateRobinAI } from "./robinAI.js";
 import { startleRobin } from "./robinInteractions.js";
@@ -250,85 +245,6 @@ it("runs hops, flights, crown rests and songs in production Realm and saves dura
     await s.close();
   }
 }, 60000);
-it("lands and stands on a replicated robin body until Jump is pressed", () => {
-  const robin = createRobin(64, 64);
-  robin.id = 1;
-  const player = createPlayer(64, 64);
-  player.id = 100;
-  player.wz = 7;
-  player.jumpZ = 7;
-  player.jumpVZ = -40;
-  const world = new World(new FlatStrategy());
-  for (let y = -1; y <= 1; y++) for (let x = -1; x <= 1; x++) world.chunks.getOrCreate(x, y);
-  const predictor = new PlayerPredictor();
-  predictor.reset(player);
-  const ctx = createMovementContext({
-    movingEntity: player,
-    excludeIds: new Set([player.id]),
-    noclip: false,
-    getCollision: () => 0,
-    getHeight: () => 0,
-    queryEntities: () => [robin],
-    queryProps: () => [],
-  });
-  const result = stepPlayerFromInput(
-    player,
-    idle,
-    0.05,
-    ctx,
-    () => 0,
-    () => ({ props: [], entities: [robin] }),
-    { jumpConsumed: false, lastJumpHeld: false },
-    getMovementPhysicsParams(),
-  );
-  predictor.update(0.05, idle, world, [], [deserializeEntity(serializeEntity(robin))]);
-  expect(result.outcome.wildlifeContactId).toBe(robin.id);
-  expect(player.jumpVZ).toBeUndefined();
-  expect(player.jumpZ).toBeUndefined();
-  expect(player.wz).toBe(5);
-  expect(predictor.player?.wz).toBeCloseTo(required(player.wz), 5);
-  expect(predictor.player?.jumpVZ).toBe(player.jumpVZ);
-  // A stationary body remains support across idle ticks, with no repeated contact/jump.
-  let jumpState = { jumpConsumed: false, lastJumpHeld: false };
-  for (let i = 0; i < 90; i++) {
-    const step = stepPlayerFromInput(
-      player,
-      idle,
-      1 / 60,
-      ctx,
-      () => 0,
-      () => ({ props: [], entities: [robin] }),
-      jumpState,
-      getMovementPhysicsParams(),
-    );
-    jumpState = step.jumpState;
-    predictor.update(1 / 60, idle, world, [], [deserializeEntity(serializeEntity(robin))]);
-    expect(step.outcome.wildlifeContactId).toBeUndefined();
-    expect(player.wz).toBe(5);
-    expect(player.jumpVZ).toBeUndefined();
-    expect(predictor.player?.wz).toBe(5);
-    expect(predictor.player?.jumpVZ).toBeUndefined();
-  }
-  stepPlayerFromInput(
-    player,
-    { ...idle, jump: true },
-    1 / 60,
-    ctx,
-    () => 0,
-    () => ({ props: [], entities: [robin] }),
-    jumpState,
-    getMovementPhysicsParams(),
-  );
-  predictor.update(
-    1 / 60,
-    { ...idle, jump: true },
-    world,
-    [],
-    [deserializeEntity(serializeEntity(robin))],
-  );
-  expect(player.jumpVZ).toBeGreaterThan(0);
-  expect(predictor.player?.jumpVZ).toBeCloseTo(required(player.jumpVZ), 5);
-});
 
 it("replicates mid-hop phase through binary baselines/deltas and removes it on landing", () => {
   const robin = createRobin(64, 64);

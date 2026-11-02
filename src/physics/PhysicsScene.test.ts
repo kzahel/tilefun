@@ -272,3 +272,38 @@ it("bounds local snapshots, exposes omitted bodies and changes epochs on scene r
   visible.delete(1);
   expect(a.snapshotAround(1, visible).omitted).toBeGreaterThan(0);
 });
+
+it("restores network control deadlines without refreshing them during replay", async () => {
+  const s = await scene(),
+    player = createPlayer(0, 32);
+  player.id = 1;
+  s.synchronize([player]);
+  const ground = geometry();
+  s.step(idle, ground);
+  const deadline = s.physicsTick + 2,
+    held = new Map([[1, { vx: 64, vy: 0, controlUntil: deadline }]]);
+  const start = player.position.wx;
+  for (let i = 0; i < 5; i++) s.step(held, ground);
+  expect(player.position.wx - start).toBeCloseTo(128 / 60, 1);
+  expect(Math.abs(player.velocity?.vx ?? Infinity)).toBeLessThan(0.1);
+  expect(s.snapshot().bodies[0]?.controlUntil).toBe(deadline);
+});
+
+it("applies the sole gravity setting to ordinary shared bodies", async () => {
+  const zero = await scene(),
+    doubled = await scene(),
+    a = createPlayer(0, 32),
+    b = createPlayer(0, 32);
+  a.id = b.id = 1;
+  a.wz = b.wz = 100;
+  a.jumpVZ = b.jumpVZ = 0;
+  zero.synchronize([a]);
+  doubled.synchronize([b]);
+  const ground = geometry();
+  for (let i = 0; i < 10; i++) {
+    zero.step(idle, ground, 0);
+    doubled.step(idle, ground, 2);
+  }
+  expect(a.wz).toBeCloseTo(100, 2);
+  expect(b.wz).toBeLessThan(90);
+});

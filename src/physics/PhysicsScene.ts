@@ -31,6 +31,7 @@ export interface MotionIntent {
   /** Prescribed flight/platform altitude; still integrated in the shared scene. */
   altitude?: number;
   heading?: number;
+  controlUntil?: number;
 }
 export type { PhysicsBodyKind, PhysicsBodyState, PhysicsState } from "./PhysicsState.js";
 
@@ -98,6 +99,21 @@ export class PhysicsScene {
   static async create() {
     await initializePhysics();
     return new PhysicsScene();
+  }
+  get physicsTick() {
+    return this.tick;
+  }
+  /** Reset a private scene between worlds, including geometry/origin ownership. */
+  clear() {
+    for (const entry of [...this.bodies.values()]) this.remove(entry);
+    for (const section of this.sections.values())
+      for (const collider of section.colliders) this.world.removeCollider(collider, false);
+    this.sections.clear();
+    this.contacts.clear();
+    this.origin.x = this.origin.y = this.origin.z = 0;
+    this.originInitialized = false;
+    this.tick = 0;
+    this.epoch = nextSceneEpoch++;
   }
   get diagnostics() {
     return {
@@ -334,7 +350,13 @@ export class PhysicsScene {
     for (const [id, entry] of this.bodies) supportVelocities.set(id, entry.body.linvel());
     for (const [id, entry] of this.bodies) {
       if (entry.kind === "fixed" || entry.kind === "loose") continue;
-      const input = intents.get(id) ?? { vx: 0, vy: 0 };
+      const submitted = intents.get(id) ?? { vx: 0, vy: 0 };
+      if (submitted.controlUntil === undefined) delete entry.state.controlUntil;
+      else entry.state.controlUntil = submitted.controlUntil;
+      const input =
+        submitted.controlUntil !== undefined && this.tick >= submitted.controlUntil
+          ? { vx: 0, vy: 0, jump: false }
+          : submitted;
       entry.state.desiredVx = input.vx;
       entry.state.desiredVy = input.vy;
       if (input.altitude === undefined) delete entry.state.altitude;
@@ -370,9 +392,12 @@ export class PhysicsScene {
         },
         true,
       );
-      if (entry.kind === "vehicle" && input.heading !== undefined) {
+      if (entry.kind === "vehicle") {
         const angle = entry.state.heading,
-          delta = Math.atan2(Math.sin(input.heading - angle), Math.cos(input.heading - angle));
+          delta =
+            input.heading === undefined
+              ? 0
+              : Math.atan2(Math.sin(input.heading - angle), Math.cos(input.heading - angle));
         entry.body.setAngvel(
           { x: 0, y: -Math.max(-3, Math.min(3, delta / PHYSICS_DT)), z: 0 },
           true,
@@ -473,6 +498,7 @@ export class PhysicsScene {
     }
     state.groundZ = entity.groundZ ?? state.z;
     if (entry.kind === "vehicle") {
+      entity.prevVehicleHeading = entity.vehicleHeading ?? state.heading;
       entity.vehicleHeading = state.heading;
       const x = Math.cos(state.heading),
         y = Math.sin(state.heading);
@@ -521,7 +547,10 @@ export class PhysicsScene {
     for (const [id, entry] of this.bodies) {
       const half =
         Math.hypot(entry.entity.collider?.width ?? 0, entry.entity.collider?.height ?? 0) / 2;
-      const distance = Math.hypot(entry.state.x - anchor.state.x, entry.state.y - anchor.state.y);
+      const distance = Math.hypot(
+        entry.entity.position.wx - anchor.entity.position.wx,
+        entry.entity.position.wy - anchor.entity.position.wy,
+      );
       if (distance <= PREDICTION_RADIUS + half || required.has(id))
         candidates.push({ id, distance });
     }
@@ -540,16 +569,38 @@ export class PhysicsScene {
       epoch: this.epoch,
       tick: this.tick,
       omitted: candidates.length - selected.size,
-      bodies: [...selected.values()].map((entry) => ({ ...entry.state })),
+      bodies: [...selected.values()].map((entry) => this.copyBodyState(entry)),
     };
   }
 
+  private copyBodyState(entry: Body): PhysicsBodyState {
+    const state = { ...entry.state },
+      entity = entry.entity;
+    const moved =
+      entity.position.wx !== state.x ||
+      entity.position.wy !== state.y ||
+      (entity.wz ?? 0) !== state.z;
+    if (moved) {
+      state.x = entity.position.wx;
+      state.y = entity.position.wy;
+      state.z = entity.wz ?? 0;
+      state.groundZ = entity.groundZ ?? state.z;
+      state.grounded = entity.jumpVZ === undefined;
+      state.normalX = state.normalZ = 0;
+      state.normalY = 1;
+      delete state.supportId;
+    }
+    state.vx = entity.velocity?.vx ?? state.vx;
+    state.vy = entity.velocity?.vy ?? state.vy;
+    state.vz = entity.jumpVZ ?? (moved && state.grounded ? 0 : state.vz);
+    return state;
+  }
   snapshot(): PhysicsState {
     return {
       epoch: this.epoch,
       omitted: 0,
       tick: this.tick,
-      bodies: [...this.bodies.values()].map((entry) => ({ ...entry.state })),
+      bodies: [...this.bodies.values()].map((entry) => this.copyBodyState(entry)),
     };
   }
   /** Restore body/motor state at an authoritative physics tick; no hidden step. */
@@ -577,6 +628,10 @@ export class PhysicsScene {
       entry.body.setAngvel({ x: 0, y: 0, z: 0 }, true);
       entry.state = { ...state };
       // Publish only state supplied by the snapshot, without inventing contacts.
+      entry.entity.prevPosition = { wx: state.x, wy: state.y };
+      entry.entity.prevWz = state.z;
+      if (entry.kind === "vehicle")
+        entry.entity.vehicleHeading = entry.entity.prevVehicleHeading = state.heading;
       entry.entity.position.wx = state.x;
       entry.entity.position.wy = state.y;
       entry.entity.wz = state.z;

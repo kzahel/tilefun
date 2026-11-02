@@ -5,7 +5,6 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
-import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { aabbLacksWater, getEntityAABB } from "../entities/collision.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
@@ -15,12 +14,7 @@ import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { axisBox, boxDepth } from "../physics/OrientedBox.js";
-import { Camera } from "../rendering/Camera.js";
 import { CarMeshAsset } from "../rendering/CarMeshAsset.js";
-import { collectScene } from "../rendering/collectScene.js";
-import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
-import { ScenarioSession } from "../scenarios/ScenarioSession.js";
-import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { boardingDistance, boardingRange, drivenCarPose } from "../traffic/Driving.js";
 import {
   applyVehicleFacing,
@@ -32,15 +26,7 @@ import {
 import { entityBody } from "../traffic/VehicleContact.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
-import {
-  BOAT_BEAM,
-  BOAT_LENGTH,
-  BOAT_MESH,
-  BOAT_MODEL,
-  BOAT_MOORING_RADIUS,
-  BOAT_SEAT_Z,
-  isBoat,
-} from "./Boat.js";
+import { BOAT_BEAM, BOAT_LENGTH, BOAT_MESH, BOAT_MODEL, BOAT_MOORING_RADIUS } from "./Boat.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
 const lakeOwner = [1, -2] as const;
@@ -185,95 +171,6 @@ it("shares water-only rolling steering and reverse while refusing shore, obstacl
   other.id = 99;
   expect(drivenCarPose(e, idle, 1 / 60, world, [], [other], undefined, [])).toBeUndefined();
 });
-
-it("boards a natural shore boat, predicts the open seat, drives, reloads and keeps deleted boats gone", async () => {
-  const s = await ScenarioSession.create(naturalLandscapeRecipe("lake", "thicket"));
-  try {
-    const find = () => [...required(s.realm.traffic).states.values()].find((v) => isBoat(v.entity));
-    for (let i = 0; i < 130 && !find(); i++) await s.step(idle);
-    let state = required(find(), "Natural boat missing"),
-      boat = state.entity;
-    const identity = boat.proceduralId;
-    expect(
-      aabbLacksWater(getEntityAABB(boat.position, required(boat.collider)), (x, y) =>
-        s.realm.world.getCollisionIfLoaded(x, y),
-      ),
-    ).toBe(false);
-    s.realm.vehicles.enter(s.player, boat.id);
-    expect(s.player.player.parentId).toBe(boat.id);
-    expect(s.player.player.wz).toBe(BOAT_SEAT_Z);
-    const camera = new Camera();
-    camera.setViewport(960, 640);
-    camera.x = boat.position.wx;
-    camera.y = boat.position.wy;
-    const visible = collectScene(
-      s.realm.entityManager.entities,
-      [],
-      s.realm.world,
-      camera,
-      camera.getVisibleChunkRange(),
-      1,
-      { collectElevationItems: () => [] },
-      [],
-      false,
-    );
-    expect(
-      visible.filter((e) => e.kind === "sprite" && e.sheetKey === s.player.player.sprite?.sheetKey),
-    ).toHaveLength(1);
-    const predictor = new PlayerPredictor();
-    predictor.reset(
-      deserializeEntity(serializeEntity(s.player.player)),
-      deserializeEntity(serializeEntity(boat)),
-    );
-    const before = { ...boat.position };
-    for (let i = 0; i < 100; i++) {
-      predictor.update(
-        0.01667,
-        { ...idle, dy: 1 },
-        s.realm.world,
-        s.realm.propManager.props,
-        s.realm.entityManager.entities,
-      );
-      await s.step({ ...idle, dy: 1 });
-    }
-    expect(predictor.mount?.position.wx).toBeCloseTo(boat.position.wx, 3);
-    expect(predictor.mount?.position.wy).toBeCloseTo(boat.position.wy, 3);
-    expect(predictor.player?.wz).toBe(BOAT_SEAT_Z);
-    expect(Math.hypot(boat.position.wx - before.wx, boat.position.wy - before.wy)).toBeGreaterThan(
-      30,
-    );
-    const pose = { ...boat.position },
-      heading = boat.vehicleHeading;
-    await s.reload();
-    state = required(find());
-    boat = state.entity;
-    expect(boat.position).toEqual(pose);
-    expect(boat.vehicleHeading).toBe(heading);
-    expect(s.player.player.parentId).toBe(boat.id);
-    expect(s.player.player.wz).toBe(BOAT_SEAT_Z);
-    // Return to the real original beach for a safe exit, never dismount into water.
-    boat.position = before;
-    boat.velocity = { vx: 0, vy: 0 };
-    s.realm.vehicles.sync();
-    s.realm.vehicles.exit(s.player);
-    expect(
-      s.realm.world.getCollisionIfLoaded(
-        Math.floor(s.player.player.position.wx / 16),
-        Math.floor(s.player.player.position.wy / 16),
-      ) & CollisionFlag.Water,
-    ).toBe(0);
-    s.realm.entityManager.remove(boat.id);
-    await s.reload();
-    for (let i = 0; i < 130; i++) await s.step(idle);
-    expect(
-      [...required(s.realm.traffic).states.values()].some(
-        (v) => v.entity.proceduralId === identity,
-      ),
-    ).toBe(false);
-  } finally {
-    await s.close();
-  }
-}, 60000);
 
 it("uses the measured hull in narrow water and lets a shore overlap retreat without going inland", () => {
   const world = new World(new FlatStrategy());

@@ -2,7 +2,6 @@ import { RemoteStateView } from "../client/ClientStateView.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { predictInput } from "../client/predictInput.js";
 import type { Movement } from "../input/ActionManager.js";
-import { prepareCharacterPhysics } from "../physics/CharacterPhysics.js";
 import {
   decodeServerMessage,
   encodeClientMessage,
@@ -63,6 +62,7 @@ export class ScenarioClient {
   private clockChanges = 0;
   private running = false;
   private resetReplica = false;
+  private receivedFrame = false;
   private closed = false;
   private loaded = false;
   private failure: Error | undefined;
@@ -74,10 +74,7 @@ export class ScenarioClient {
       throw new Error("Rapier recipes require PhysicsLabClient prediction");
     }
     const physics = scenarioPhysics(recipe.physics);
-    this.predictor = new PlayerPredictor(
-      () => physics,
-      () => 1,
-    );
+    this.predictor = new PlayerPredictor(() => physics.gravityScale);
     this.view.setPredictor(this.predictor);
     this.worker.onmessage = (event: MessageEvent<ChannelEnvelope<ScenarioPacket>>) => {
       try {
@@ -91,7 +88,7 @@ export class ScenarioClient {
     this.worker.onmessageerror = () =>
       this.fail(new Error("Could not decode scenario Worker message"));
     this.ready = Promise.all([
-      prepareCharacterPhysics(physics.characterPhysics ?? 0),
+      this.predictor.ready,
       this.request({ kind: "open", recipe, mode: "realtime" }),
     ]).then(() => {
       this.loaded = true;
@@ -124,6 +121,10 @@ export class ScenarioClient {
     if (this.closed || this.failure) return;
     try {
       this.channel.pump((packet) => this.consume(packet));
+      if (this.receivedFrame) {
+        this.receivedFrame = false;
+        this.synchronizePrediction();
+      }
     } catch (error) {
       this.fail(error);
     }
@@ -134,6 +135,7 @@ export class ScenarioClient {
       this.resetReplica = true;
     } else if (packet.type === "frame") {
       const message = decodeServerMessage(packet.buffer);
+      if (message.type === "frame") this.receivedFrame = true;
       if (message.type === "vehicle-horn") this.onHorn?.(message);
       // Lab settings stay scoped; never change the page's global CVars.
       if (
@@ -156,33 +158,37 @@ export class ScenarioClient {
       this.parking = response.parking;
       if (response.physicsDiagnostics) this.physicsDiagnostics = response.physicsDiagnostics;
       this.clock = response.clock;
-      const player = this.view.serverPlayerEntity;
-      if (player.id !== -1) {
-        applyScenarioAppearance(player, this.recipe.player);
-        if (this.resetReplica || !this.predictor.player || this.predictor.player.id !== player.id)
-          this.predictor.reset(
-            player,
-            this.view.serverEntities.find((e) => e.id === player.parentId),
-          );
-        else
-          this.predictor.reconcile(
-            player,
-            this.view.lastProcessedInputSeq,
-            this.view.world,
-            this.view.props,
-            this.view.serverEntities,
-            this.view.mountEntityId,
-            this.view.simulationTime !== undefined
-              ? {
-                  simulationTime: this.view.simulationTime,
-                  expectedInputDt: this.view.tickMs / 1000,
-                }
-              : undefined,
-          );
-      }
-      this.resetReplica = false;
+      this.synchronizePrediction();
       pending?.resolve();
     } else throw new Error("Unexpected scenario authority packet");
+  }
+  private synchronizePrediction(reset = false) {
+    const player = this.view.serverPlayerEntity;
+    if (player.id === -1) return;
+    applyScenarioAppearance(player, this.recipe.player);
+    if (
+      reset ||
+      this.resetReplica ||
+      !this.predictor.player ||
+      this.predictor.player.id !== player.id
+    )
+      this.predictor.reset(
+        player,
+        this.view.serverEntities.find((e) => e.id === player.parentId),
+      );
+    this.predictor.reconcile(
+      player,
+      this.view.lastProcessedInputSeq,
+      this.view.world,
+      this.view.props,
+      this.view.serverEntities,
+      this.view.mountEntityId,
+      {
+        serverTick: this.view.serverTick,
+        ...(this.view.physicsState ? { physics: this.view.physicsState } : {}),
+      },
+    );
+    this.resetReplica = false;
   }
   private fail(reason: unknown) {
     if (this.failure) return;
@@ -232,10 +238,7 @@ export class ScenarioClient {
       .then(() => this.request({ kind: "clock", running }))
       .then(() => {
         this.view.resetPresentationClock(true);
-        this.predictor.reset(
-          this.view.serverPlayerEntity,
-          this.view.serverEntities.find((e) => e.id === this.view.serverPlayerEntity.parentId),
-        );
+        this.synchronizePrediction(true);
       })
       .catch((error) => this.fail(error))
       .finally(() => {
@@ -281,10 +284,7 @@ export class ScenarioClient {
     try {
       await this.ready;
       await this.request({ kind: "command", command });
-      this.predictor.reset(
-        this.view.serverPlayerEntity,
-        this.view.serverEntities.find((e) => e.id === this.view.serverPlayerEntity.parentId),
-      );
+      this.synchronizePrediction(true);
     } finally {
       this.controls--;
     }
@@ -298,7 +298,7 @@ export class ScenarioClient {
       await this.request({ kind: "step", input, dt: 1 / 60, range });
       this.seq = Math.max(this.seq, this.view.lastProcessedInputSeq);
       this.view.resetPresentationClock(true);
-      this.predictor.reset(this.view.serverPlayerEntity);
+      this.synchronizePrediction(true);
     } finally {
       this.controls--;
     }
@@ -310,10 +310,7 @@ export class ScenarioClient {
       await this.ready;
       await this.request({ kind: reset ? "reset" : "reload" });
       this.seq = 0;
-      this.predictor.reset(
-        this.view.serverPlayerEntity,
-        this.view.serverEntities.find((e) => e.id === this.view.serverPlayerEntity.parentId),
-      );
+      this.synchronizePrediction(true);
     } finally {
       this.controls--;
     }

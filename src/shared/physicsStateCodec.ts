@@ -21,7 +21,7 @@ const FIELDS = [
   "altitude",
   "desiredHeading",
 ] as const;
-const BODY_BYTES = 81;
+const BODY_BYTES = 85;
 const HEADER_BYTES = 14;
 const NONE = 0xffff_ffff;
 
@@ -55,6 +55,8 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
     view.setUint32(offset, uint(body.id), true);
     offset += 4;
     view.setUint32(offset, body.supportId === undefined ? NONE : uint(body.supportId), true);
+    offset += 4;
+    view.setUint32(offset, body.controlUntil === undefined ? NONE : uint(body.controlUntil), true);
     offset += 4;
     const kind = KINDS.indexOf(body.kind);
     if (kind < 0) throw Error("Invalid physics body kind");
@@ -101,6 +103,8 @@ export function readPhysicsState(
     offset += 4;
     const supportId = view.getUint32(offset, true);
     offset += 4;
+    const controlUntil = view.getUint32(offset, true);
+    offset += 4;
     const flags = view.getUint8(offset++),
       kind = KINDS[flags & 3];
     if (flags & 0xc0 || !kind || ids.has(id)) throw Error("Invalid physics body flags/identity");
@@ -125,6 +129,7 @@ export function readPhysicsState(
       normalZ: 0,
     };
     if (supportId !== NONE) body.supportId = supportId;
+    if (controlUntil !== NONE) body.controlUntil = controlUntil;
     for (const field of POSITIONS) {
       body[field] = finite(view.getFloat64(offset, true));
       offset += 8;

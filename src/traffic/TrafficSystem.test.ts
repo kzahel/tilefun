@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
-import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { Direction } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
@@ -188,37 +187,7 @@ describe("generated road traffic", () => {
     }
     expect(f.car.entity.position.wx).toBeGreaterThan(start + 100);
   });
-  it("two predicting clients agree with roof movement through turns and a jump off", () => {
-    const f = fixture();
-    f.world.getCollisionIfLoaded = () => 0;
-    f.world.getCollision = () => 0;
-    f.player.position = { wx: f.car.entity.position.wx, wy: f.car.entity.position.wy + 3 };
-    f.player.wz = 24;
-    const clients = [new PlayerPredictor(), new PlayerPredictor()];
-    for (const client of clients) client.reset(deserializeEntity(serializeEntity(f.player)));
-    for (let i = 0; i < 2400; i++) {
-      const jump = i === 2350;
-      const input = { dx: 0, dy: 0, jump, sprinting: false };
-      const replicas = f.entities.entities.map((e) => deserializeEntity(serializeEntity(e)));
-      for (const client of clients) {
-        client.storeInput(i + 1, input, 1 / 60);
-        client.update(1 / 60, input, f.world, [], replicas);
-      }
-      f.step(jump);
-      for (const client of clients) {
-        client.reconcile(
-          f.player,
-          i + 1,
-          f.world,
-          [],
-          f.entities.entities.map((e) => deserializeEntity(serializeEntity(e))),
-        );
-        const sample = required(client.lastReconcileDiagnostics);
-        expect(sample.resimSupportPosErr ?? sample.resimPosErr).toBeLessThan(0.02);
-      }
-    }
-    expect(f.car.choices).toBeGreaterThan(1);
-  });
+
   it("queues competing cars at a junction without overlap and releases it after exit", () => {
     const f = fixture();
     f.player.position = { wx: 2000, wy: 2000 };

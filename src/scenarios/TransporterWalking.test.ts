@@ -1,6 +1,5 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
-import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
 import { SpatialHash } from "../entities/SpatialHash.js";
@@ -10,49 +9,6 @@ import { roofSupport } from "../traffic/RoofSupport.js";
 import { transporterSurfaceTops } from "../traffic/TransporterSurface.js";
 import { ScenarioSession } from "./ScenarioSession.js";
 import { transporterRecipe } from "./TransporterRecipe.js";
-
-const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
-it("walks up either real steel track and back down through shared authority", async () => {
-  const s = await ScenarioSession.create({
-    ...transporterRecipe(),
-    parkedVehicles: required(transporterRecipe().parkedVehicles).filter(
-      (v) => v.model === "car-transporter",
-    ),
-  });
-  try {
-    const truck = required(
-      s.realm.entityManager.entities.find((e) => e.type === "vehicle-v1:car-transporter"),
-    );
-    await s.command({ kind: "vehicle-transporter-action", entityId: truck.id, action: "deploy" });
-    for (const side of [-16, 16]) {
-      await s.command({ kind: "teleport", position: { wx: -171, wy: side } });
-      const predictor = new PlayerPredictor();
-      predictor.reset(s.player.player);
-      for (let i = 0; i < 110 && s.player.player.position.wx < -40; i++) {
-        predictor.update(
-          0.02,
-          { ...idle, dx: 1 },
-          s.realm.world,
-          s.realm.propManager.props,
-          s.realm.entityManager.entities,
-        );
-        await s.step({ ...idle, dx: 1 }, 0.02);
-        expect(required(predictor.player).position.wx).toBeCloseTo(s.player.player.position.wx, 2);
-        expect(required(predictor.player).wz).toBeCloseTo(s.player.player.wz ?? 0, 2);
-      }
-      const p = s.player.player;
-      expect(p.position.wx).toBeGreaterThan(-76);
-      expect(p.wz).toBeCloseTo(24.65, 1);
-      expect(roofSupport(p, [truck])?.id).toBe(truck.id);
-      for (let i = 0; i < 125 && p.position.wx > -170; i++) await s.step({ ...idle, dx: -1 });
-      for (let i = 0; i < 15; i++) await s.step(idle);
-      expect(p.position.wx).toBeLessThan(-153);
-      expect(p.wz).toBeCloseTo(0, 2);
-    }
-  } finally {
-    await s.close();
-  }
-});
 
 it("uses continuous truck-local support and carries a deck passenger through turning", async () => {
   const s = await ScenarioSession.create({

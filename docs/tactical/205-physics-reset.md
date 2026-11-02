@@ -226,3 +226,73 @@ All three TypeScript projects pass. Source lint has no introduced diagnostics (t
 existing binary entity codec still has its pre-existing non-null-assertion warnings).
 The ordinary old client predictor does not consume this state yet; replacement and
 latency/presentation qualification are next, with no readiness marker at this checkpoint.
+
+### Checkpoint 3c — shared default client prediction and contact presentation
+
+Replaced the 1,790-line per-command predictor with the ordinary shared kernel,
+bounded numeric restore/replay and one local tick clock. An acknowledged input
+anchors local input ticks to the snapshot's physics tick. Neither command duration
+nor packet count adds authority integration time. Both ordinary PlayScene and
+ScenarioClient consume normal frame physics; ScenarioClient now reconciles live
+frames between control responses too. Client copies remain private and immutable
+replicas are never moved by prediction.
+
+History is capped at 120 input ticks (two seconds). Replay runs at most eight
+steps/2ms per client update, with one whole physics step as the smallest work unit;
+partially replayed poses are not published. A newer snapshot covering the pending
+suffix supersedes unfinished work. Missing history or snapshot overflow explicitly
+holds/rebases instead of falling through to another solver or omitting colliders.
+The server's 15-tick control deadline is retained in body state and replay, so
+restoring a snapshot cannot refresh abandoned controls. The additional uint32 makes
+each wire body **85 bytes** and the current frame tag **0x0b**; prior tags reject.
+Local diagonal prediction uses the same normalized input retained for replay.
+
+Nearby contacts share a physics tick and one rigid display correction. Idle
+observers keep buffered coherent scenes; local input, physical pushing/flight and
+support activate the predicted contact component. Render interpolation uses the
+same previous physics tick for the local player and its neighbors, including after
+replay; it does not mix the last published player pose with a neighbor's last
+physics step. Camera/root correction uses that same transform. Local animation
+advances once per live input tick even when that update performs replay. Diagnostics
+separate matching-past-tick error from current-pose rebase distance, and retain
+body/overflow/replay/work/recovery counters without old parameter-revision causes.
+Unknown future remote/AI inputs remain uncertain; this is not a bit-exact guarantee.
+
+The garage traversal checks exposed actual duplicate geometry: excavated terrain
+reached the slab's top, producing coplanar terrain/slab contacts and tile-boundary
+kicks. Terrain now ends at the authored slab underside, leaving its surface to the
+slab collider. The speculative extra support-normal ray was removed after this
+actual geometry fix passed the original traversal checks without it. Geometry
+assertions retain traversal, headroom, reload, fall and underpass outcomes, with
+small rigid-body tolerances instead of legacy exact snap coordinates.
+
+Test dispositions: retired 15 whole legacy predictor/rate/carry test files, 24
+additional predictor-specific declarations in mixed files, and 14 obsolete matrix
+CLIs/helpers. Kept standalone replica presentation, content/habitat/identity,
+serialization and unrelated lifecycle cases in the mixed files. Removed commands
+are no longer advertised by the diagnostics README. Basic outcomes are covered by
+the shared default rather than compatibility constructors or old collision APIs.
+
+Validation at this checkpoint:
+
+- **89 focused native checks pass** across ten files: shared authority/core/input,
+  normal frame codec/replication, private prediction, standalone remote presentation,
+  ramps/bridges/headroom/underpasses, excavation and reload. The ten new prediction
+  cases cover coupled push/reversal with ordered delay/jitter, two real Realm
+  sessions/views at fractional rendering, NPC head support/fresh jump, replay/history
+  bounds, overflow/epoch fences, animation, replica immutability and basic diagonal
+  car prediction/derived seat.
+- All three TypeScript projects pass; changed-source lint has no introduced errors
+  or warnings (existing entity-codec non-null warnings remain).
+- `art:catalog`, `workshop:manifest` and production build pass. Only generated
+  inventories/fingerprints changed; no asset/review pixels or approvals changed.
+- The ordinary production **GPU/full-Chromium Worker** input-recovery case passes:
+  three edit/play replacements, forward movement, release convergence and strictly
+  increasing submitted sequences. This is one actual browser boundary, not delayed
+  WebRTC, all peripherals, Chromebook performance or broad visual qualification.
+
+Still incomplete: delete unused old engines/dispatch/internal timing schemas and
+remaining peripheral pose writers; align/retire experimental labs and unsupported
+controls; complete ordinary delayed P2P, streaming/device/performance and requested
+final review. No dev-ready marker yet. The clean shared default does not justify
+keeping dormant legacy implementations or declaring the reset complete.

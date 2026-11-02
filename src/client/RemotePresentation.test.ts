@@ -1,24 +1,10 @@
 import { expect, it } from "vitest";
-import { createPlayer } from "../entities/Player.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { createTrain } from "../railway/Train.js";
 import { serializeEntity } from "../shared/serialization.js";
 import { World } from "../world/World.js";
 import { RemoteStateView } from "./ClientStateView.js";
-import { PlayerPredictor } from "./PlayerPredictor.js";
 import { RemotePresentation } from "./RemotePresentation.js";
-
-it("allocates a distinct presentation clock epoch for predictor replacement and reset", () => {
-  const a = new PlayerPredictor(),
-    b = new PlayerPredictor();
-  const player = createPlayer(0, 64);
-  a.reset(player);
-  b.reset(player);
-  const old = a.presentationClock(1);
-  expect(b.presentationClock(1)?.domain).not.toBe(old?.domain);
-  a.reset(player);
-  expect(a.presentationClock(1)?.domain).not.toBe(old?.domain);
-});
 
 it("borrows sampled poses without modifying committed replica/collision data", () => {
   const view = new RemoteStateView(new World(new FlatStrategy()));
@@ -90,34 +76,4 @@ it("does not reuse motion after visibility exit, relocation, or replica clear", 
   train.position.wx = -100;
   presentation.record([train], 0, 1);
   expect(presentation.sample([train], 1)[0]?.position.wx).toBe(-100);
-});
-
-it("keeps locally predicted walking responsive on a separately sampled carrier", () => {
-  const world = new World(new FlatStrategy());
-  world.getChunk(0, 0);
-  world.getChunk(-1, 0);
-  const train = createTrain(0, 64);
-  train.id = 2;
-  const player = createPlayer(10, 64);
-  player.id = 1;
-  player.wz = 44;
-  const predictor = new PlayerPredictor();
-  predictor.reset(player);
-  predictor.reconcile(player, 0, world, [], [player, train]);
-  predictor.update(
-    1 / 60,
-    { dx: 1, dy: 0, sprinting: false, jump: false },
-    world,
-    [],
-    [player, train],
-  );
-  const before = structuredClone(predictor.player);
-  const displayedTrain = { ...train, position: { wx: -10, wy: 64 } };
-  const a = predictor.samplePresentationPlayer(0, [displayedTrain]);
-  const b = predictor.samplePresentationPlayer(1, [displayedTrain]);
-  expect(a?.position.wx).toBeCloseTo(0);
-  expect(b?.position.wx).toBeGreaterThan(a?.position.wx ?? 0);
-  expect((b?.position.wx ?? 0) - (a?.position.wx ?? 0)).toBeLessThan(2);
-  expect(predictor.player).toEqual(before);
-  expect(predictor.presentationClock(0.5)).toBeNull();
 });

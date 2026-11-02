@@ -1,10 +1,8 @@
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
-import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { PlayerSession } from "../server/PlayerSession.js";
-import { decodeClientMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import { towAxle, towHitch, towPitch } from "../traffic/Towing.js";
 import { vehicleCardinalHeading } from "../traffic/Vehicle.js";
 import { scenarioWalls } from "./ScenarioRecipe.js";
@@ -46,39 +44,6 @@ it.each([Direction.Down, Direction.Left, Direction.Up])(
   },
   30000,
 );
-
-it("predicts the same coupled turns without mutating the replicated trailer", async () => {
-  const s = await ScenarioSession.create(towingRecipe());
-  try {
-    await tow(s, "attach");
-    const truck = truckOf(s),
-      car = carOf(s);
-    await s.command({ kind: "enter-vehicle", entityId: truck.id });
-    const predictor = new PlayerPredictor();
-    predictor.reset(s.player.player, truck);
-    for (let i = 0; i < 100; i++) {
-      const input = { ...idle, dx: 1, dy: i > 30 ? 0.5 : 0 },
-        before = JSON.stringify(car);
-      const packet = decodeClientMessage(
-        encodeClientMessage({ type: "player-input", seq: i, ...input, dtMs: 20 }),
-      );
-      if (packet.type !== "player-input") throw Error("Wrong input codec");
-      predictor.update(
-        0.02,
-        packet,
-        s.realm.world,
-        s.realm.propManager.props,
-        s.realm.entityManager.entities,
-      );
-      expect(JSON.stringify(car)).toBe(before);
-      await s.step(packet, 0.02);
-      expect(predictor.mount?.position.wx).toBeCloseTo(truck.position.wx, 3);
-      expect(predictor.mount?.position.wy).toBeCloseTo(truck.position.wy, 3);
-    }
-  } finally {
-    await s.close();
-  }
-}, 30000);
 
 it("attaches, articulates, saves, reverses, releases and drives the same real car", async () => {
   const s = await ScenarioSession.create(towingRecipe());

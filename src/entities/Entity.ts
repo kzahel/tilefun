@@ -126,6 +126,8 @@ export interface Entity {
   emergencyState?: number;
   /** Driven-car nose angle in world radians, retained while parked. */
   vehicleHeading?: number;
+  /** Previous shared-step orientation for rendering. */
+  prevVehicleHeading?: number;
   /** Stable, model-scoped coachwork choice; absent preserves the original paint. */
   paintSchemeId?: string;
   /** Qualified source-derived hollow-bed profile; enabled for normal dump trucks. */

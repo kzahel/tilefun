@@ -1,17 +1,19 @@
 # Client/server architecture
 
-Current implementation map, checked 2026-10-25. The
+Current implementation map, updated 2026-11-02 during reset 205. The
 [original extraction plan](archive/client-server-extraction-plan.md) is archived;
 its shared-memory local mode and “future” multiplayer phases are historical.
 
 ## Runtime ownership
 
-[197](tactical/197-opt-in-game-character-physics.md) adds optional on-foot Rapier
-character contacts inside the existing authority/prediction steps. The Worker
-loads its own WASM before selecting the mode; clients lazy-load separate private
-instances. `sync-cvars` carries the authoritative optional character mode (omission
-means legacy). Input history retains its mode for replay. There is no extra physics
-Worker, shared memory or general dynamic-world ownership change.
+[205](tactical/205-physics-reset.md) replaces ordinary Realm integration with one
+fixed 60Hz `PhysicsScene` step. Players/NPCs submit intent; physics owns poses.
+Normal prediction uses the same kernel in a private bounded scene, with numerical
+body snapshots at explicit ticks and epochs. Authority and prediction have separate
+WASM instances/memory; there is no additional physics Worker or shared-memory
+requirement. Only gravity remains exposed as physics tuning. Old peripheral/lab
+engines and internal schemas are still being deleted; this checkpoint is not the
+completed reset or browser/device qualification.
 
 [191](tactical/191-cooperative-physics-laboratory.md) extends the experimental
 physics reference to two real Realm sessions, separate client replicas and full
@@ -26,7 +28,7 @@ GameServer worlds omit this owner and retain the behavior described below.
 | Owner | Responsibility |
 | --- | --- |
 | [GameClient](../src/client/GameClient.ts) | Browser input, scenes, rendering and client state view |
-| [PlayerPredictor](../src/client/PlayerPredictor.ts) | Local player/mount prediction and input replay reconciliation |
+| [PlayerPredictor](../src/client/PlayerPredictor.ts) | Bounded coupled-body prediction and fixed-tick input replay |
 | [GameServer](../src/server/GameServer.ts) | Connections, world management and active realms |
 | [Realm](../src/server/Realm.ts) | Simulation, editing, generated residency and persistence |
 | [RealmReplicator](../src/server/RealmReplicator.ts) | Per-client baselines and frame/sync message construction |
@@ -54,7 +56,7 @@ path still exists for specialized callers/tests; it is not the default launcher.
 All timed GameServer hosts use ServerLoop's monotonic fixed-step deadlines.
 Integer timer rounding and callback work do not accumulate simulation drift;
 short late wakes catch up, long stalls bound overdue debt to 250ms, and stop/resume
-or rate changes start a fresh schedule. Interactive embedded scenarios now use the
+start a fresh schedule; configurable legacy rate APIs are being retired by 205. Interactive embedded scenarios now use the
 same ServerLoop and OrderedWorkerChannel. Their temporary Realm host separates
 input admission from ticks and uses ordinary streaming readiness policy. Explicit
 ScenarioSession steps remain available for headless tests and paused inspection.
@@ -62,18 +64,13 @@ See [embedded labs](topics/embedded-engine-labs.md) for lifecycle and parity lim
 
 ## Transport and requests
 
-Vehicle paint identity adds one optional dictionary byte to entity baselines and
-nullable deltas. Frame tag 0x08 adds nullable uint32 towing links after 0x07 tipping angles and
-0x06 qualified bed geometry. Matching endpoints are required; earlier tags are rejected. The authority validates each
-scheme against its model, and local mount prediction preserves the replicated
-choice. [Vehicle paints](vehicle-paint-variants.md) owns the complete contract.
-The [bed prototype](vehicle-bed-prototype.md) owns its plain physical profile,
-replicated flag, persistent traffic state and relative occupant support height.
-Normal dump trucks now set that flag, including old saved records. The ordinary
-`vehicle-bed-action` request returns `vehicle-controlled` or `request-error` after
-authority validates proximity, stopped motion, actor ownership, ready space and
-clearance. Loose cargo remains ordinary actors with no seat parent; moving support
-and bed contacts are shared engine code. See [165](tactical/165-truck-bed-gameplay.md).
+Frame tag `0x0b` carries normal entity baselines/deltas plus the bounded numerical
+physics state, including the motor's exclusive input deadline. Earlier frame tags
+reject and matching endpoint builds are required. Position coordinates retain
+Float64 precision in the physics payload. Nullable equipment fields remain
+transitional until the explicit peripheral cleanup in 205; they do not select
+an alternate collision authority. [Vehicle paints](vehicle-paint-variants.md) owns
+paint identity, which is independent of the physics reset.
 
 [Transport interfaces](../src/transport/Transport.ts) separate hosts from the
 shared protocol. Worker traffic is ordered binary data with bounded batches and
