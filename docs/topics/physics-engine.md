@@ -45,6 +45,14 @@ costs, and dynamic contacts may increase work. No Chromebook gain is established
 
 ## Opt-in game characters (197)
 
+[198](../tactical/198-character-support-and-jumping.md) fixes rider walking feeding
+sideways pushes into the supporting character, and blocked push guards arresting
+jumps. Side eligibility uses vertical side extents (capsule caps remain support),
+side responses/guards preserve vertical intent, and actual ceiling events cancel
+upward velocity. Native support queries avoid solved-motor velocity feedback.
+The cooperative lab adds **Walk across player shoulders** and **Jump against pinned
+player** scripts shared with native replay tests.
+
 [197](../tactical/197-opt-in-game-character-physics.md) adds an experimental on-foot
 backend to ordinary Worker authority and PlayerPredictor. Start the game with
 `?physics=rapier&hull=box` or `hull=capsule`; authority can switch with

@@ -40,7 +40,11 @@ test("normal game opts into box/capsule contacts, synchronizes settings and retu
   await expect.poll(async () => (await state()).mode).toBe(1);
   expect((await state()).box).toEqual({ width: 10, height: 6, physicalHeight: 12 });
   // Remove random fixture animals through normal editing before measuring input.
-  if (!(await state()).editor) await page.keyboard.press("Tab");
+  const selectMode = async (name: "Edit" | "Play") => {
+    await page.getByTestId("main-menu-toggle").click();
+    await page.getByRole("button", { name, exact: true }).click();
+  };
+  if (!(await state()).editor) await selectMode("Edit");
   await expect.poll(async () => (await state()).editor).toBe(true);
   await page.evaluate(() => {
     const game = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
@@ -48,7 +52,7 @@ test("normal game opts into box/capsule contacts, synchronizes settings and retu
       if (actor.type !== "player")
         game.transport.send({ type: "edit-delete-entity", entityId: actor.id });
   });
-  await page.keyboard.press("Tab");
+  await selectMode("Play");
   await expect.poll(async () => (await state()).editor).toBe(false);
   const before = await state();
   await page.keyboard.down("d");

@@ -14,7 +14,11 @@ import { CharacterMotionBudget } from "../CharacterMotionBudget.js";
 import type { CharacterMotionBackend, CharacterMotionSource } from "../CharacterPhysics.js";
 import type { MovementPhysicsParams } from "../PlayerMovement.js";
 import { surfaceZAt } from "../SurfacePatch.js";
-import { shareCharacterContact } from "./CharacterContact.js";
+import {
+  characterSidesOverlap,
+  guardCharacterSideContact,
+  shareCharacterContact,
+} from "./CharacterContact.js";
 import { characterShape, PHYSICS_PIXELS_PER_METRE as SCALE } from "./CharacterShape.js";
 import { clippedTerrainVertices } from "./ClippedTerrain.js";
 import { initRapier } from "./RapierWorld.js";
@@ -263,7 +267,10 @@ class GameCharacterPhysics implements CharacterMotionBackend {
             aabbsOverlap(bounds, getEntityAABB(other.position, other.collider)),
         )
         .sort((a, b) => a.id - b.id);
-      const actors = new Map<number, { entity: Entity; collider: RAPIER.Collider }>();
+      const actors = new Map<
+        number,
+        { entity: Entity; collider: RAPIER.Collider; sideHalfHeight: number }
+      >();
       for (const other of bodies) {
         const shape = characterShape(
           other,
@@ -271,6 +278,7 @@ class GameCharacterPhysics implements CharacterMotionBackend {
         );
         actors.set(other.id, {
           entity: other,
+          sideHalfHeight: shape.sideHalfHeight,
           collider: add(
             shape.descriptor.setTranslation(
               shape.center.x - origin.x,
@@ -295,11 +303,21 @@ class GameCharacterPhysics implements CharacterMotionBackend {
       controller.setMinSlopeSlideAngle(wasAirborne ? 0 : Math.PI / 3);
       controller.setApplyImpulsesToDynamicBodies(false);
       world.step();
-      let target: { entity: Entity; collider: RAPIER.Collider } | undefined;
+      let target: { entity: Entity; collider: RAPIER.Collider; sideHalfHeight: number } | undefined;
       let firstImpact = Infinity;
       if (source.pushBody)
         for (const actor of actors.values())
-          if (actor.entity.type === "player" && actor.entity.jumpVZ === undefined) {
+          if (
+            actor.entity.type === "player" &&
+            actor.entity.jumpVZ === undefined &&
+            characterSidesOverlap(
+              character.translation().y,
+              hull.sideHalfHeight,
+              actor.collider.translation().y,
+              actor.sideHalfHeight,
+              SKIN,
+            )
+          ) {
             const hit = character.castCollider(
               desired,
               actor.collider,
@@ -381,6 +399,7 @@ class GameCharacterPhysics implements CharacterMotionBackend {
         [...actors.values()].find((actor) => actor.collider.handle === support?.collider.handle)
           ?.entity.id;
       let queryGrounded = false;
+      let hitCeiling = false;
       const query = (collider: RAPIER.Collider, move: RAPIER.Vector, exclude?: RAPIER.Collider) => {
         const mover = movingActor(collider);
         if (mover?.jumpVZ === undefined) controller.enableSnapToGround(STEP_UP_THRESHOLD / SCALE);
@@ -398,7 +417,12 @@ class GameCharacterPhysics implements CharacterMotionBackend {
         // reaches it. Landing effects require contact at the resolved endpoint.
         const support = move.y <= 0 ? supportAt(collider, resolved, exclude) : null;
         queryGrounded = !!support;
-        if (collider.handle === character.handle) supportId = supportActorId(support);
+        if (collider.handle === character.handle) {
+          supportId = supportActorId(support);
+          hitCeiling = false;
+          for (let i = 0; i < controller.numComputedCollisions(); i++)
+            if ((controller.computedCollision(i)?.normal1.y ?? 0) < -0.5) hitCeiling = true;
+        }
         return resolved;
       };
       const clearEndpoint = (collider: RAPIER.Collider, delta: RAPIER.Vector) => {
@@ -457,27 +481,30 @@ class GameCharacterPhysics implements CharacterMotionBackend {
         move = query(character, move);
         grounded = queryGrounded;
         const guard = character.castCollider(move, actor.collider, received, SKIN / 2, 1, false);
-        // An already touching pair with equal proposals is not a new impact.
-        // f32 cast normals/tolerances can report TOI zero for parallel travel.
-        const closing = guard
-          ? (move.x - received.x) * guard.normal1.x +
-            (move.y - received.y) * guard.normal1.y +
-            (move.z - received.z) * guard.normal1.z
-          : 0;
-        if (guard && closing > 1e-6) {
-          const fraction = Math.max(0, guard.time_of_impact - 0.001);
-          for (const delta of [move, received]) {
-            delta.x *= fraction;
-            delta.y *= fraction;
-            delta.z *= fraction;
-          }
-        }
+        if (guard) guardCharacterSideContact(move, received, guard.normal1, guard.time_of_impact);
+        const endpoint = (collider: RAPIER.Collider, delta: RAPIER.Vector) => {
+          const p = collider.translation();
+          return { x: p.x + delta.x, y: p.y + delta.y, z: p.z + delta.z };
+        };
+        const pairOverlap = character.shape.intersectsShape(
+          endpoint(character, move),
+          character.rotation(),
+          actor.collider.shape,
+          endpoint(actor.collider, received),
+          actor.collider.rotation(),
+        );
         // Net autostep movement is not necessarily a straight safe prefix.
         // A conservative pair guard must not commit an endpoint inside terrain.
-        if (!clearEndpoint(character, move) || !clearEndpoint(actor.collider, received)) {
-          move = { x: 0, y: 0, z: 0 };
+        if (
+          pairOverlap ||
+          !clearEndpoint(character, move) ||
+          !clearEndpoint(actor.collider, received)
+        ) {
+          // Retry the ordinary engine query with the peer as an obstacle.
+          // Cancelling a horizontal push must not also cancel vertical travel.
+          target = undefined;
+          move = query(character, desired);
           received.x = received.y = received.z = 0;
-          query(character, move);
           grounded = queryGrounded;
         }
         // Pair guards can shorten or cancel autostep. Commit support metadata
@@ -518,7 +545,7 @@ class GameCharacterPhysics implements CharacterMotionBackend {
         entity.groundZ = entity.wz;
         entity.jumpZ = 0;
       } else {
-        entity.jumpVZ = move.y < desired.y - 1e-5 && vertical > 0 ? 0 : vertical;
+        entity.jumpVZ = hitCeiling && vertical > 0 ? 0 : vertical;
         // Actual landing is a KCC contact, not legacy surface integration.
         const ray = world.castRay(
           new RAPIER.Ray(

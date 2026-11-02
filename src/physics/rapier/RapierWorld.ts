@@ -9,7 +9,13 @@ import {
   physicsStart,
   slabVertices,
 } from "./BridgeFixture.js";
-import { shareCharacterContact } from "./CharacterContact.js";
+import {
+  characterSidesOverlap,
+  constrainCharacterAscent,
+  guardCharacterCapContact,
+  guardCharacterSideContact,
+  shareCharacterContact,
+} from "./CharacterContact.js";
 import { POSE_STRIDE } from "./PhysicsProtocol.js";
 
 let initialization: Promise<void> | undefined;
@@ -192,6 +198,12 @@ export class RapierWorld {
         state,
         this.guest.motor,
       );
+      this.finalizeCharacterContact(
+        playerMove.movement,
+        guestMove.movement,
+        state,
+        this.guest.motor,
+      );
       this.commitCharacterMovement(this.guest.body, guestMove.movement);
     }
     this.verticalSpeed = state.verticalSpeed;
@@ -236,21 +248,51 @@ export class RapierWorld {
     controller: RAPIER.KinematicCharacterController,
     collider: RAPIER.Collider,
     movement: RAPIER.Vector,
+    includePlayers = false,
   ) {
     // Rapier's KCC inherits both normal and tangential kinematic velocity.
     // That is correct for prescribed lifts, but feeds motion between motors.
     // Actor/actor contacts use the relative sweep below, on the same colliders.
-    controller.computeColliderMovement(
-      collider,
-      movement,
-      undefined,
-      undefined,
-      this.guest
-        ? (other) =>
-            other.handle !== this.playerCollider.handle &&
-            other.handle !== this.guest?.collider.handle
-        : undefined,
-    );
+    const peer = this.guest
+      ? collider.handle === this.playerCollider.handle
+        ? this.guest
+        : { body: this.player, collider: this.playerCollider }
+      : undefined;
+    const sideOverlap =
+      peer &&
+      characterSidesOverlap(
+        collider.translation().y,
+        PLAYER_HALF_HEIGHT,
+        peer.collider.translation().y,
+        PLAYER_HALF_HEIGHT,
+        CHARACTER_SKIN,
+      );
+    const abovePeer = peer && collider.translation().y > peer.collider.translation().y;
+    const includePeer =
+      includePlayers || (!sideOverlap && (abovePeer ? movement.y <= 0 : movement.y > 0));
+    // Controlled supports are queried as stationary geometry. Previous solved
+    // motor velocity must not feed back into another motor through KCC carry.
+    const velocity = peer && includePeer ? { ...peer.body.linvel() } : undefined;
+    if (velocity && peer) peer.body.setLinvel({ x: 0, y: 0, z: 0 }, false);
+    try {
+      controller.computeColliderMovement(
+        collider,
+        movement,
+        undefined,
+        undefined,
+        peer
+          ? (other) =>
+              other.handle !== collider.handle &&
+              (includePeer || other.handle !== peer.collider.handle)
+          : undefined,
+      );
+    } finally {
+      if (velocity && peer) peer.body.setLinvel(velocity, false);
+    }
+    const resolved = controller.computedMovement();
+    if (peer && abovePeer && !sideOverlap && movement.y > 0 && !includePlayers)
+      constrainCharacterAscent(collider, peer.collider, resolved, CHARACTER_SKIN);
+    return resolved;
   }
 
   private resolveCharacterContact(
@@ -260,6 +302,16 @@ export class RapierWorld {
     secondState: PhysicsMotorState,
   ) {
     if (!this.guest) return;
+    if (
+      !characterSidesOverlap(
+        this.playerCollider.translation().y,
+        PLAYER_HALF_HEIGHT,
+        this.guest.collider.translation().y,
+        PLAYER_HALF_HEIGHT,
+        CHARACTER_SKIN,
+      )
+    )
+      return;
     const hit = this.playerCollider.castCollider(
       first,
       this.guest.collider,
@@ -271,6 +323,22 @@ export class RapierWorld {
     if (!hit) return;
     // Collider-cast normals are local. Controlled capsules stay unrotated.
     const n = hit.normal1;
+    if (Math.abs(n.y) >= 0.5) {
+      // Support/ceiling contacts belong to the native controller, not the
+      // horizontal push transaction. Query without inherited motor velocity.
+      for (const [controller, collider, move, state] of [
+        [this.controller, this.playerCollider, first, firstState],
+        [this.guest.controller, this.guest.collider, second, secondState],
+      ] as const) {
+        Object.assign(move, this.queryCharacterMovement(controller, collider, move, true));
+        state.grounded = state.verticalSpeed <= 0 && controller.computedGrounded();
+        if (state.grounded && state.verticalSpeed < 0) state.verticalSpeed = 0;
+        for (let i = 0; i < controller.numComputedCollisions(); i++)
+          if ((controller.computedCollision(i)?.normal1.y ?? 0) < -0.5 && state.verticalSpeed > 0)
+            state.verticalSpeed = 0;
+      }
+      return;
+    }
     const response = shareCharacterContact(
       first,
       second,
@@ -279,17 +347,6 @@ export class RapierWorld {
       PHYSICS_WALK_SPEED * PHYSICS_DT,
     );
     if (!response) return;
-    const { firstIn, secondIn } = response;
-    if (n.y < -0.5 && firstIn > 0) {
-      firstState.grounded = true;
-      firstState.verticalSpeed = 0;
-    }
-    if (n.y > 0.5 && secondIn > 0) {
-      secondState.grounded = true;
-      secondState.verticalSpeed = 0;
-    }
-    if (n.y > 0.5 && firstState.verticalSpeed > 0) firstState.verticalSpeed = 0;
-    if (n.y < -0.5 && secondState.verticalSpeed > 0) secondState.verticalSpeed = 0;
 
     // Sliding along an actor can point into adjacent terrain. Recheck the
     // environment without applying a second set of dynamic-body impulses.
@@ -298,32 +355,114 @@ export class RapierWorld {
       [this.guest.controller, this.guest.collider, second],
     ] as const) {
       controller.setApplyImpulsesToDynamicBodies(false);
-      this.queryCharacterMovement(controller, collider, move);
-      Object.assign(move, controller.computedMovement());
+      Object.assign(move, this.queryCharacterMovement(controller, collider, move));
       controller.setApplyImpulsesToDynamicBodies(true);
     }
-    // A terrain clip can change relative motion again. This final conservative
-    // guard only shortens both paths, so neither wall nor actor is crossed.
-    const guard = this.playerCollider.castCollider(
-      first,
-      this.guest.collider,
-      second,
-      CHARACTER_SKIN / 2,
-      1,
-      false,
-    );
-    if (guard) {
+  }
+
+  /** Runs after every pair path, including separated cores and ascent sweeps. */
+  private finalizeCharacterContact(
+    first: RAPIER.Vector,
+    second: RAPIER.Vector,
+    firstState: PhysicsMotorState,
+    secondState: PhysicsMotorState,
+  ) {
+    const guest = this.guest;
+    if (!guest) return;
+    const constrainPair = () => {
+      const hit = this.playerCollider.castCollider(
+        first,
+        guest.collider,
+        second,
+        CHARACTER_SKIN / 2,
+        1,
+        false,
+      );
+      if (!hit) return;
+      const n = hit.normal1;
       const closing =
-        (first.x - second.x) * guard.normal1.x +
-        (first.y - second.y) * guard.normal1.y +
-        (first.z - second.z) * guard.normal1.z;
-      if (closing > 1e-6) {
-        const fraction = Math.max(0, guard.time_of_impact - 0.001);
-        for (const move of [first, second]) {
-          move.x *= fraction;
-          move.y *= fraction;
-          move.z *= fraction;
+        (first.x - second.x) * n.x + (first.y - second.y) * n.y + (first.z - second.z) * n.z;
+      if (closing <= 1e-6) return;
+      if (
+        characterSidesOverlap(
+          this.playerCollider.translation().y,
+          PLAYER_HALF_HEIGHT,
+          guest.collider.translation().y,
+          PLAYER_HALF_HEIGHT,
+          CHARACTER_SKIN,
+        ) &&
+        Math.abs(n.y) < 0.5
+      )
+        guardCharacterSideContact(first, second, n, hit.time_of_impact);
+      else {
+        const beforeFirst = first.y,
+          beforeSecond = second.y;
+        guardCharacterCapContact(first, second, n, hit.time_of_impact);
+        if (first.y !== beforeFirst) {
+          if (n.y < -0.5 && beforeFirst < 0) {
+            firstState.grounded = true;
+            firstState.verticalSpeed = 0;
+          }
+          if (n.y > 0.5 && beforeFirst > 0) firstState.verticalSpeed = 0;
         }
+        if (second.y !== beforeSecond) {
+          if (n.y > 0.5 && beforeSecond < 0) {
+            secondState.grounded = true;
+            secondState.verticalSpeed = 0;
+          }
+          if (n.y < -0.5 && beforeSecond > 0) secondState.verticalSpeed = 0;
+        }
+      }
+    };
+    constrainPair();
+    const endpoint = (collider: RAPIER.Collider, move: RAPIER.Vector) => {
+      const p = collider.translation();
+      return { x: p.x + move.x, y: p.y + move.y, z: p.z + move.z };
+    };
+    const clear = (collider: RAPIER.Collider, move: RAPIER.Vector) =>
+      !this.world.intersectionWithShape(
+        endpoint(collider, move),
+        collider.rotation(),
+        collider.shape,
+        undefined,
+        undefined,
+        collider,
+        undefined,
+        (other) =>
+          other.handle !== this.playerCollider.handle && other.handle !== guest.collider.handle,
+      );
+    const overlap = () =>
+      this.playerCollider.shape.intersectsShape(
+        endpoint(this.playerCollider, first),
+        this.playerCollider.rotation(),
+        guest.collider.shape,
+        endpoint(guest.collider, second),
+        guest.collider.rotation(),
+      );
+    const invalid = () =>
+      overlap() || !clear(this.playerCollider, first) || !clear(guest.collider, second);
+    if (invalid()) {
+      // A horizontal shortening of net autostep movement is not necessarily a
+      // safe terrain path. Cancel the shove and query vertical travel normally.
+      for (const [controller, collider, move, state] of [
+        [this.controller, this.playerCollider, first, firstState],
+        [guest.controller, guest.collider, second, secondState],
+      ] as const) {
+        Object.assign(
+          move,
+          this.queryCharacterMovement(controller, collider, { x: 0, y: move.y, z: 0 }, true),
+        );
+        state.grounded = state.verticalSpeed <= 0 && controller.computedGrounded();
+        if (state.grounded && state.verticalSpeed < 0) state.verticalSpeed = 0;
+        for (let i = 0; i < controller.numComputedCollisions(); i++)
+          if ((controller.computedCollision(i)?.normal1.y ?? 0) < -0.5 && state.verticalSpeed > 0)
+            state.verticalSpeed = 0;
+      }
+      constrainPair();
+      if (invalid()) {
+        // Initial-overlap recovery is not qualified. Keep the pre-step poses
+        // rather than commit an endpoint still inside terrain or another actor.
+        first.x = first.y = first.z = second.x = second.y = second.z = 0;
       }
     }
   }
@@ -351,13 +490,12 @@ export class RapierWorld {
       z = rawZ / magnitude;
     // Publish prescribed support velocities before querying character motion;
     // Rapier resolves moving contacts without a platform-specific carry rule.
-    this.queryCharacterMovement(controller, collider, {
+    const move = this.queryCharacterMovement(controller, collider, {
       x: x * PHYSICS_WALK_SPEED * PHYSICS_DT,
       y: state.verticalSpeed * PHYSICS_DT,
       z: z * PHYSICS_WALK_SPEED * PHYSICS_DT,
     });
-    const move = controller.computedMovement();
-    state.grounded = controller.computedGrounded();
+    state.grounded = state.verticalSpeed <= 0 && controller.computedGrounded();
     let support: RAPIER.RigidBody | null = null;
     if (state.grounded)
       for (let i = 0; i < controller.numComputedCollisions(); i++) {
@@ -365,8 +503,9 @@ export class RapierWorld {
         if (contact && contact.normal1.y > 0.5) support = contact.collider?.parent() ?? null;
       }
     if (state.grounded && state.verticalSpeed < 0) state.verticalSpeed = 0;
-    if (move.y < state.verticalSpeed * PHYSICS_DT - 0.001 && state.verticalSpeed > 0)
-      state.verticalSpeed = 0;
+    if (state.verticalSpeed > 0)
+      for (let i = 0; i < controller.numComputedCollisions(); i++)
+        if ((controller.computedCollision(i)?.normal1.y ?? 0) < -0.5) state.verticalSpeed = 0;
     return { movement: move, support };
   }
 

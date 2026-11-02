@@ -21,6 +21,7 @@ function fixture(
   props: Prop[] = [],
   x = 0,
   collision: (x: number, y: number) => number = () => 0,
+  pushing = true,
 ) {
   const player = createPlayer(x, 32);
   player.id = 1;
@@ -36,9 +37,13 @@ function fixture(
     movingEntity: player,
     excludeIds: new Set([player.id]),
     noclip: false,
-    pushBody: (before, after) => {
-      Object.assign(before, after);
-    },
+    ...(pushing
+      ? {
+          pushBody(before: Entity, after: Entity) {
+            Object.assign(before, after);
+          },
+        }
+      : {}),
   });
   const sample = createSurfaceSampler({ queryEntities, queryProps });
   let state = { jumpConsumed: false, lastJumpHeld: false };
@@ -145,6 +150,82 @@ it("pushes an idle player without storing received motion as its input velocity"
   for (let tick = 0; tick < 60; tick++) game.step();
   expect(other.position.wx).toBeCloseTo(settled, 1);
 });
+
+it.each([1, 2] as const)(
+  "keeps a walked-on player's input-independent position fixed (hull=%s)",
+  (mode) => {
+    const game = fixture(mode);
+    const peer = createPlayer(0, 32);
+    peer.id = 2;
+    game.entities.push(peer);
+    game.player.wz = 12;
+    for (let tick = 0; tick < 90; tick++) game.step({ ...idle, dx: 1 });
+    expect(Math.hypot(peer.position.wx, peer.position.wy - 32)).toBeLessThan(0.01);
+    expect(game.player.position.wx).toBeGreaterThan(40);
+    expect(game.player.wz).toBeCloseTo(0, 1);
+  },
+);
+
+it.each([1, 2] as const)(
+  "preserves an ascending jump while pressing into a player (hull=%s)",
+  (mode) => {
+    const peaks: number[] = [];
+    for (const contact of ["free", "native", "push", "pinned"] as const) {
+      const game = fixture(
+        mode,
+        contact === "pinned" ? [wall(mode === 1 ? 23.04 : 17.04)] : [],
+        0,
+        () => 0,
+        contact !== "native",
+      );
+      if (contact !== "free") {
+        const peer = createPlayer(mode === 1 ? 10.04 : 6.04, 32);
+        peer.id = 2;
+        game.entities.push(peer);
+      }
+      let peak = 0;
+      for (let tick = 0; tick < 60; tick++) {
+        game.step({ ...idle, dx: 1, jump: tick < 30 });
+        peak = Math.max(peak, game.player.wz ?? 0);
+        const peer = game.entities[1];
+        if (peer) {
+          const a = characterShape(game.player, mode === 1 ? "box" : "capsule"),
+            b = characterShape(peer, mode === 1 ? "box" : "capsule");
+          const rotation = { x: 0, y: 0, z: 0, w: 1 };
+          const contact = a.descriptor.shape.contactShape(
+            a.center,
+            rotation,
+            b.descriptor.shape,
+            b.center,
+            rotation,
+            0.1,
+          );
+          expect(contact?.distance ?? 1).toBeGreaterThan(-0.001);
+        }
+      }
+      peaks.push(peak);
+    }
+    for (const peak of peaks.slice(1)) expect(peak).toBeGreaterThan((peaks[0] ?? 0) - 0.3);
+  },
+);
+
+it.each([1, 2] as const)(
+  "still stops upward movement at a player's actual underside (hull=%s)",
+  (mode) => {
+    const game = fixture(mode),
+      peer = createPlayer(0, 32);
+    peer.id = 2;
+    peer.wz = 24;
+    game.entities.push(peer);
+    let peak = 0;
+    for (let tick = 0; tick < 60; tick++) {
+      game.step({ ...idle, jump: tick < 30 });
+      peak = Math.max(peak, game.player.wz ?? 0);
+    }
+    expect(peak).toBeGreaterThan(10);
+    expect(peak).toBeLessThan(12.1);
+  },
+);
 
 function slab(id: number, left: number, width: number, z: number, riseX = 0): Prop {
   return {

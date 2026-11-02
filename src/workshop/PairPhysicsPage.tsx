@@ -7,6 +7,7 @@ import {
   PAIR_SCENARIOS,
   type PairScenario,
   type PhysicsSeat,
+  pairObstacles,
 } from "../physics/rapier/PhysicsScenarios.js";
 import { PhysicsViewport } from "../physics/rapier/PhysicsViewport.js";
 import { initRapier } from "../physics/rapier/RapierWorld.js";
@@ -41,8 +42,8 @@ export default function PairPhysicsPage() {
     if (!elements[0] || !elements[1]) return;
     for (const element of elements) if (element) element.dataset.generation = String(revision);
     const views = [
-      new PhysicsViewport(elements[0], 2, true),
-      new PhysicsViewport(elements[1], 2, true),
+      new PhysicsViewport(elements[0], 2, true, pairObstacles(scene)),
+      new PhysicsViewport(elements[1], 2, true, pairObstacles(scene)),
     ] as const;
     for (const view of views) view.setZoom(1.8);
     views[0].canvas.setAttribute("aria-label", "Host view. WASD or arrows move, Space jumps.");

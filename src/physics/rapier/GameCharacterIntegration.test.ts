@@ -13,6 +13,58 @@ import { getMovementPhysicsParams, stepPlayerFromInput } from "../PlayerMovement
 import { createMovementContext, createSurfaceSampler } from "../SimulationEnvironment.js";
 
 const idle: Movement = { dx: 0, dy: 0, jump: false, sprinting: false };
+it("does not transfer rider walking to a supporting player when both motors are processed", async () => {
+  await prepareCharacterPhysics(1);
+  for (const mode of [1, 2] as const)
+    for (const riderFirst of [false, true]) {
+      const base = createPlayer(0, 32),
+        rider = createPlayer(mode === 1 ? -4 : -5.6, 32);
+      base.id = 1;
+      rider.id = 2;
+      rider.wz = mode === 1 ? 12 : 6 + Math.sqrt(36 - 5.6 ** 2) + 0.05;
+      const actors = [base, rider],
+        budget = new CharacterMotionBudget();
+      const source = {
+        getCollision: () => 0,
+        getHeight: () => 0,
+        queryEntities: () => actors,
+        queryProps: () => [],
+        noclip: false,
+        motionBudget: budget,
+        pushBody: (before: typeof base, after: typeof base) => Object.assign(before, after),
+      };
+      const contexts = actors.map((movingEntity) =>
+        createMovementContext({ ...source, movingEntity, excludeIds: new Set([movingEntity.id]) }),
+      );
+      const states = [
+        { jumpConsumed: false, lastJumpHeld: false },
+        { jumpConsumed: false, lastJumpHeld: false },
+      ];
+      const sample = createSurfaceSampler(source),
+        physics = { ...getMovementPhysicsParams(), characterPhysics: mode };
+      for (let tick = 0; tick < 20; tick++) {
+        budget.clear();
+        for (const seat of riderFirst ? [1, 0] : [0, 1]) {
+          const actor = actors[seat],
+            ctx = contexts[seat],
+            state = states[seat];
+          if (!actor || !ctx || !state) throw Error("Missing actor");
+          states[seat] = stepPlayerFromInput(
+            actor,
+            seat === 1 ? { ...idle, dx: 1 } : idle,
+            1 / 60,
+            ctx,
+            () => 0,
+            sample,
+            state,
+            physics,
+          ).jumpState;
+        }
+      }
+      expect(Math.hypot(base.position.wx, base.position.wy - 32)).toBeLessThan(0.01);
+      expect(rider.position.wx).toBeGreaterThan(mode === 1 ? 3 : 0);
+    }
+});
 it("preserves actual horse landing and authority mounting side effects", async () => {
   const player = createPlayer(32, 32),
     horse = createFauna("horse", 32, 32);

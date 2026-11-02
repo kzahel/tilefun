@@ -1,7 +1,14 @@
 import RAPIER from "@dimforge/rapier3d-compat";
 import { beforeAll, describe, expect, it } from "vitest";
-import { BRIDGE_HEIGHT, PLAYER_FOOT_OFFSET, slabVertices } from "./BridgeFixture.js";
+import {
+  BRIDGE_HEIGHT,
+  PLAYER_FOOT_OFFSET,
+  PLAYER_HALF_HEIGHT,
+  PLAYER_RADIUS,
+  slabVertices,
+} from "./BridgeFixture.js";
 import { POSE_STRIDE } from "./PhysicsProtocol.js";
+import { pairInput, setupPair } from "./PhysicsScenarios.js";
 import { initRapier, PHYSICS_DT, PHYSICS_WALK_SPEED, RapierWorld } from "./RapierWorld.js";
 
 beforeAll(initRapier);
@@ -11,6 +18,136 @@ function step(world: RapierWorld, frames: number, input = idle) {
 }
 
 describe("experimental shared Rapier backend", () => {
+  it("resolves simultaneous rising/falling cap approaches before committing either motor", () => {
+    const world = new RapierWorld(2, 0);
+    try {
+      step(world, 30);
+      const y = world.motorFor(0).y;
+      world.configurePair(
+        [
+          { x: -15, y, z: 0 },
+          { x: -15, y: y + 2 * PLAYER_FOOT_OFFSET + 0.18, z: 0 },
+        ],
+        null,
+      );
+      const snapshot = world.snapshot();
+      Object.assign(snapshot.motors[0] ?? {}, { grounded: true, verticalSpeed: 0 });
+      Object.assign(snapshot.motors[1] ?? {}, { grounded: false, verticalSpeed: -5.7 });
+      world.restoreFull(snapshot);
+      world.step({ ...idle, jump: true });
+      const lower = world.motorFor(0),
+        upper = world.motorFor(1);
+      expect(upper.y - lower.y).toBeGreaterThan(2 * PLAYER_FOOT_OFFSET - 0.001);
+    } finally {
+      world.dispose();
+    }
+  });
+  it("validates ascent-clipped endpoints beneath a sloped ceiling", () => {
+    const world = new RapierWorld(2, 0);
+    try {
+      step(world, 30);
+      const lowerY = world.motorFor(0).y,
+        upperY = lowerY + 0.96;
+      const underside = upperY + PLAYER_HALF_HEIGHT + PLAYER_RADIUS * Math.sqrt(5) + 0.02;
+      const desc = RAPIER.ColliderDesc.convexHull(
+        slabVertices({
+          id: "ceiling",
+          x: -15.5,
+          y: 0,
+          z: 0,
+          width: 2,
+          depth: 4,
+          low: underside - 2 + 0.1,
+          high: underside + 2 + 0.1,
+          thickness: 0.1,
+          color: 0,
+        }),
+      );
+      if (!desc) throw Error("Invalid ceiling");
+      const ceiling = world.world.createCollider(desc.setTranslation(-15.5, 0, 0));
+      const handle = ceiling.handle;
+      world.world.step();
+      world.configurePair(
+        [
+          { x: -15.5, y: upperY, z: 0 },
+          { x: -15, y: lowerY, z: 0 },
+        ],
+        null,
+      );
+      const snapshot = world.snapshot();
+      Object.assign(snapshot.motors[0] ?? {}, { grounded: false, verticalSpeed: 6 });
+      Object.assign(snapshot.motors[1] ?? {}, { grounded: true, verticalSpeed: 0 });
+      world.restoreFull(snapshot);
+      world.step({ ...idle, x: 1 });
+      const player = world.player.collider(0),
+        roof = world.world.getCollider(handle);
+      const contact = player.shape.contactShape(
+        player.translation(),
+        player.rotation(),
+        roof.shape,
+        roof.translation(),
+        roof.rotation(),
+        0.1,
+      );
+      expect(contact?.distance ?? 1).toBeGreaterThan(-0.0001);
+    } finally {
+      world.dispose();
+    }
+  });
+  it("lets a rider cross a controlled player's shoulder without steering the supporting player", () => {
+    for (const rider of [0, 1] as const) {
+      const world = new RapierWorld(2, 0);
+      try {
+        step(world, 30);
+        const lower = { x: -15, y: world.motorFor(0).y, z: 0 },
+          upper = { ...lower, x: -15.5, y: lower.y + 0.7 + Math.sqrt(0.56 ** 2 - 0.5 ** 2) + 0.02 };
+        world.configurePair(rider === 0 ? [upper, lower] : [lower, upper], null);
+        const start = world.motorFor(rider === 0 ? 1 : 0);
+        for (let tick = 0; tick < 20; tick++)
+          world.step(
+            rider === 0 ? { ...idle, x: 1 } : idle,
+            rider === 1 ? { ...idle, x: 1 } : idle,
+          );
+        const end = world.motorFor(rider === 0 ? 1 : 0);
+        expect(Math.hypot(end.x - start.x, end.z - start.z)).toBeLessThan(0.002);
+        expect(world.motorFor(rider).y).toBeGreaterThan(start.y + 0.7);
+      } finally {
+        world.dispose();
+      }
+    }
+  });
+  it("preserves jump height while continuing to walk into a controlled player", () => {
+    const peaks: number[] = [];
+    for (const contact of [true, false]) {
+      const world = new RapierWorld(2, 0);
+      try {
+        if (contact) setupPair(world, "player-jump");
+        else
+          world.configurePair(
+            [
+              { x: -15, y: 0.67, z: 0 },
+              { x: -5, y: 0.67, z: 0 },
+            ],
+            null,
+          );
+        let peak = 0;
+        for (let tick = 1; tick <= 150; tick++) {
+          world.step(pairInput("player-jump", 0, tick));
+          peak = Math.max(peak, world.motorFor(0).y);
+          const a = world.motorFor(0),
+            b = world.motorFor(1);
+          const verticalGap = Math.max(0, Math.abs(a.y - b.y) - 2 * PLAYER_HALF_HEIGHT);
+          expect(Math.hypot(a.x - b.x, a.z - b.z, verticalGap)).toBeGreaterThan(
+            2 * PLAYER_RADIUS - 0.001,
+          );
+        }
+        peaks.push(peak);
+      } finally {
+        world.dispose();
+      }
+    }
+    expect(peaks[0]).toBeGreaterThan((peaks[1] ?? 0) - 0.02);
+  });
   it.each([
     { name: "head-on push into idle player", offset: 0, opposed: false },
     { name: "head-on simultaneous", offset: 0, opposed: true },

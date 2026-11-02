@@ -18,6 +18,7 @@ export function characterShape(entity: Entity, hull: CharacterHull) {
   const radius = Math.min(half.x, half.y, half.z);
   return {
     half,
+    sideHalfHeight: hull === "capsule" ? Math.max(0, half.y - radius) : half.y,
     center: {
       x: (bounds.left + bounds.right) / 2 / PHYSICS_PIXELS_PER_METRE,
       y: (entity.wz ?? 0) / PHYSICS_PIXELS_PER_METRE + half.y,

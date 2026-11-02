@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import {
   bridgeFixture,
+  type PhysicsShape,
   PLAYER_HALF_HEIGHT,
   PLAYER_RADIUS,
   SLAB_INDICES,
@@ -40,6 +41,7 @@ export class PhysicsViewport {
     private readonly element: HTMLElement,
     sections: number,
     private readonly pair = false,
+    extraShapes: readonly PhysicsShape[] = [],
   ) {
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 1.5));
@@ -67,7 +69,7 @@ export class PhysicsViewport {
     const light = new THREE.DirectionalLight(0xffe2b0, 2.5);
     light.position.set(-8, 20, 10);
     this.scene.add(light);
-    for (const shape of bridgeFixture(sections)) {
+    for (const shape of [...bridgeFixture(sections), ...extraShapes]) {
       const geometry = new THREE.BufferGeometry();
       geometry.setAttribute("position", new THREE.BufferAttribute(slabVertices(shape), 3));
       geometry.setIndex(SLAB_INDICES);

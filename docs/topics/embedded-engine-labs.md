@@ -1,5 +1,11 @@
 # Embedded engine labs
 
+[198](../tactical/198-character-support-and-jumping.md) keeps the ordinary opt-in
+backend and cooperative lab aligned on horizontal-only character pushes, support
+classification and actual ceiling handling. Two additional shared scripts expose
+walking across shoulders and jumping against a pinned player; snapshot replay and
+delayed Realm checks consume the same inputs as the visual lab.
+
 [197](../tactical/197-opt-in-game-character-physics.md) adds an opt-in **Character
 contacts** selector to the World Geometry deck fixture. Fixed box and capsule use
 the same character backend as the ordinary game launcher, with normal Realm,

@@ -205,6 +205,20 @@ test("two predicted views share a Worker Realm, step scripts, accept either seat
     path: test.info().outputPath("players-pushing-released.png"),
     fullPage: true,
   });
+  for (const [name, tick, capture, tolerance] of [
+    ["Walk across player shoulders", 38, "walking-on-shoulders.png", 0.002],
+    ["Jump against pinned player", 63, "jumping-beside-pinned-player.png", 0.02],
+  ] as const) {
+    await page.getByRole("button", { name: "Pause", exact: true }).click();
+    await page.getByRole("button", { name, exact: true }).click();
+    await expect(host).toHaveAttribute("data-ready", "true");
+    await page.getByRole("button", { name: "Replay script", exact: true }).click();
+    await expect.poll(() => value(0, "tick")).toBe(0);
+    await page.getByRole("button", { name: "Resume", exact: true }).click();
+    await expect.poll(() => value(0, "tick")).toBeGreaterThan(tick);
+    expect(Math.abs((await value(1, "authority-x")) + 15)).toBeLessThan(tolerance);
+    await page.screenshot({ path: test.info().outputPath(capture), fullPage: true });
+  }
   await page.getByRole("link", { name: "All tools", exact: true }).click();
   await expect(views).toHaveCount(0);
   await expect
