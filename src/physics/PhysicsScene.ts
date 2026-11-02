@@ -42,6 +42,11 @@ export interface PhysicsBodyState {
   heading: number;
   jumpHeld: boolean;
   grounded: boolean;
+  groundZ: number;
+  desiredVx: number;
+  desiredVy: number;
+  altitude?: number;
+  desiredHeading?: number;
   normalX: number;
   normalY: number;
   normalZ: number;
@@ -213,6 +218,9 @@ export class PhysicsScene {
             heading: entity.vehicleHeading ?? 0,
             jumpHeld: !!((entity.jumpInputState ?? 0) & 2),
             grounded: entity.jumpVZ === undefined,
+            groundZ: entity.groundZ ?? entity.wz ?? 0,
+            desiredVx: 0,
+            desiredVy: 0,
             normalX: 0,
             normalY: 1,
             normalZ: 0,
@@ -326,6 +334,12 @@ export class PhysicsScene {
     for (const [id, entry] of this.bodies) {
       if (entry.kind === "fixed" || entry.kind === "loose") continue;
       const input = intents.get(id) ?? { vx: 0, vy: 0 };
+      entry.state.desiredVx = input.vx;
+      entry.state.desiredVy = input.vy;
+      if (input.altitude === undefined) delete entry.state.altitude;
+      else entry.state.altitude = input.altitude;
+      if (input.heading === undefined) delete entry.state.desiredHeading;
+      else entry.state.desiredHeading = input.heading;
       const velocity = entry.body.linvel();
       const support =
         entry.state.supportId === undefined
@@ -383,7 +397,7 @@ export class PhysicsScene {
     state.vy = v.z * SCALE;
     state.vz = v.y * SCALE;
     state.heading = -2 * Math.atan2(q.y, q.w);
-    state.grounded = false;
+    state.grounded = entry.kind === "fixed";
     delete state.supportId;
     this.world.contactPairsWith(entry.collider, (other) => {
       this.world.contactPair(entry.collider, other, (manifold, flipped) => {
@@ -432,6 +446,7 @@ export class PhysicsScene {
       entity.groundZ = hit ? state.z + 0.16 - hit.timeOfImpact * SCALE : state.z;
       entity.jumpZ = Math.max(0, state.z - entity.groundZ);
     }
+    state.groundZ = entity.groundZ ?? state.z;
     if (entry.kind === "vehicle") entity.vehicleHeading = state.heading;
     entity.jumpInputState = state.jumpHeld ? 3 : 0;
   }
@@ -467,6 +482,9 @@ export class PhysicsScene {
       entry.entity.position.wx = state.x;
       entry.entity.position.wy = state.y;
       entry.entity.wz = state.z;
+      entry.entity.groundZ = state.groundZ;
+      entry.entity.jumpZ = Math.max(0, state.z - state.groundZ);
+      entry.entity.jumpInputState = state.jumpHeld ? 3 : 0;
       if (entry.entity.velocity) {
         entry.entity.velocity.vx = state.vx;
         entry.entity.velocity.vy = state.vy;

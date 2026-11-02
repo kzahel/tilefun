@@ -22,4 +22,9 @@ it("holds through a short input gap, expires on simulation time and cannot repla
   expect(controls.admit([], 3).movement.dx).toBe(1);
   expect(controls.admit([], 16).movement.dx).toBe(0);
   expect(controls.admit([command], 17).movement.dx).toBe(0);
+  controls.reset(20);
+  expect(controls.admit([{ ...command, seq: 19 }], 18)).toMatchObject({
+    ack: 20,
+    movement: { dx: 0 },
+  });
 });

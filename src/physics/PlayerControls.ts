@@ -17,7 +17,8 @@ export class PlayerControls {
   private receivedAt = -Infinity;
   private sequence = 0;
 
-  reset() {
+  reset(ack = this.sequence) {
+    this.sequence = Math.max(this.sequence, ack);
     this.held = { ...NEUTRAL };
     this.receivedAt = -Infinity;
   }

@@ -137,3 +137,9 @@ The scene tests use real body interaction, persistent 96-NPC stepping, pushing a
 release, head standing/walking, side jumping/held-edge suppression, edited walls,
 ramp-to-deck/underpass traversal and snapshot restore. This is still a native core;
 ordinary Realm/prediction wiring and deletion of transitional engines are next.
+
+Snapshot state also retains desired horizontal control, prescribed altitude/heading,
+ground/support normals and derived ground height so private replay can resume a
+coupled scene rather than infer control from contact velocity. Input resets retain
+the acknowledged sequence fence. The nine focused new tests and three typecheck
+projects pass after these state additions.
