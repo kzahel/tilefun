@@ -1,15 +1,15 @@
 # Distinct animal behaviors and interactions
 
 Topic: wildlife-behaviors
-Status: nine batches implemented. Twenty-nine entries have targeted automation
-verification: twenty-seven distinct signatures and two inherited cat coats. Batch
-174 final animal automation is verified; broad-suite evidence is recorded in the
-tactical. Human review remains pending.
+Status: shared physics reset 205 reopens climbing/perching verification for
+capuchin and the three cat coats. Twenty-five entries retain targeted automation
+verification; four are in progress. Historical batch 174 broad-suite evidence
+remains in its tactical. Human review remains pending.
 Outline audit covers all 206 entries: five action-painter discontinuities and
 136 entries using an automatic outward border. [187](../tactical/187-shared-wildlife-finishing.md)
 replaces 137 complete banks with one explicit finishing policy per animal;
 new exact art remains pending human review.
-Updated: 2026-10-24.
+Updated: 2026-11-03.
 
 Owner wants every animal to have recognizable behavior, with suitable animation
 where needed, starting with land and air animals. The completed 196-entry art
@@ -20,6 +20,30 @@ owns the proposed behavior campaign, completion criteria and delivery sequence.
 
 The [animal sound audit and plan](wildlife-audio.md) tracks audible coverage
 separately. An animation named bleat/call does not establish that sound plays.
+
+## Shared physics reset
+
+[205](../tactical/205-physics-reset.md) replaces per-character movement with one
+shared Rapier step. AI and species trajectories now write a common transient
+`motionIntent` (horizontal velocity and optional altitude); they do not commit
+body height or velocity and require no capture/undo shim. Readback owns actual
+poses. Spawn/release impulses, explicit marker placement and derived held/cached
+attachments remain separate lifecycle operations.
+
+Growing sources, nests, caches, lodges, dust and hoards are anchored nonblocking
+markers. Ordinary loose food and toys remain physical. This prevents the shared
+solver from displacing the resource a forager is trying to reach. Raccoon food
+conservation, renewal, ordinary carrying and cat ground toy play pass their
+retained native checks. Throwing starts outside the player hull and uses the same
+Rapier world for spawn clearance; low throws have the new physical range.
+
+The old capuchin/cat climb route can hit the actual canopy collider. A blocked
+prescribed climb now cancels and releases its claim rather than teleporting through
+the canopy or driving indefinitely. A physically reachable crown/perch route is
+deferred beyond the reset's basic movement baseline. The four affected ledger
+entries are reopened; their previous successful-climb proof is historical. Asset
+pixels and human art-review states are unchanged. Core motion/contacts, grounded
+work, marker identity and conservation replace exact old cycle/rate assertions.
 
 ## What counts
 

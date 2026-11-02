@@ -32,7 +32,7 @@ export function restoreDeerPose(deer: Entity): void {
 }
 /** One alarm through alert, escape and recovery; preserve any already committed walk. */
 export function startleDeer(deer: Entity, from: PositionComponent): boolean {
-  deer.desiredVelocity ??= { vx: 0, vy: 0 };
+  deer.motionIntent ??= { vx: 0, vy: 0 };
   const ai = deer.deer;
   if (!ai || ai.alarmFrom || ai.state === "recover") return false;
   ai.alarmFrom = { ...from };
@@ -40,19 +40,19 @@ export function startleDeer(deer: Entity, from: PositionComponent): boolean {
   if (!ai.motion) {
     ai.state = "startle";
     ai.timer = 0.4;
-    if (deer.desiredVelocity) deer.desiredVelocity.vx = deer.desiredVelocity.vy = 0;
+    if (deer.motionIntent) deer.motionIntent.vx = deer.motionIntent.vy = 0;
     restoreDeerPose(deer);
   }
   return true;
 }
 /** Fixed-speed grounded movement. Collision always owns actual XY; no catch-up teleport. */
 export function prepareDeerTravel(deer: Entity, dt: number): void {
-  deer.desiredVelocity ??= { vx: 0, vy: 0 };
+  deer.motionIntent ??= { vx: 0, vy: 0 };
   const ai = deer.deer,
     motion = ai?.motion;
-  if (!ai || !motion || !deer.desiredVelocity || dt <= 0) return;
+  if (!ai || !motion || !deer.motionIntent || dt <= 0) return;
   if (motion.workPaused) {
-    deer.desiredVelocity.vx = deer.desiredVelocity.vy = 0;
+    deer.motionIntent.vx = deer.motionIntent.vy = 0;
     return;
   }
   motion.elapsed = Math.min(motion.duration, motion.elapsed + dt);
@@ -60,11 +60,11 @@ export function prepareDeerTravel(deer: Entity, dt: number): void {
     dy = ai.target.wy - deer.position.wy;
   const distance = Math.hypot(dx, dy);
   const speed = Math.min(motion.escaping ? DEER_FLEE_SPEED : DEER_WALK_SPEED, distance / dt);
-  deer.desiredVelocity.vx = distance > 0.001 ? (dx / distance) * speed : 0;
-  deer.desiredVelocity.vy = distance > 0.001 ? (dy / distance) * speed : 0;
+  deer.motionIntent.vx = distance > 0.001 ? (dx / distance) * speed : 0;
+  deer.motionIntent.vy = distance > 0.001 ? (dy / distance) * speed : 0;
 }
 export function settleDeer(deer: Entity): void {
-  deer.desiredVelocity ??= { vx: 0, vy: 0 };
+  deer.motionIntent ??= { vx: 0, vy: 0 };
   const ai = deer.deer;
   if (!ai) return;
   const alarm = !!ai.alarmFrom,
@@ -73,7 +73,7 @@ export function settleDeer(deer: Entity): void {
   ai.timer = queued ? 0.4 : alarm ? 3 : 0.8;
   delete ai.motion;
   if (!queued) delete ai.alarmFrom;
-  if (deer.desiredVelocity) deer.desiredVelocity.vx = deer.desiredVelocity.vy = 0;
+  if (deer.motionIntent) deer.motionIntent.vx = deer.motionIntent.vy = 0;
   if (deer.wanderAI) deer.wanderAI.state = alarm ? "scared" : "idle";
   restoreDeerPose(deer);
 }

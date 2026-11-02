@@ -23,20 +23,11 @@ import {
 export interface PhysicsGeometry extends CollisionGeometrySource {
   geometryVersion(cx: number, cy: number): { identity: unknown; revision: string | number };
 }
-export interface MotionIntent {
-  vx: number;
-  vy: number;
-  jump?: boolean;
-  jumpPressed?: boolean;
-  /** Prescribed flight/platform altitude; still integrated in the shared scene. */
-  altitude?: number;
-  heading?: number;
-  controlUntil?: number;
-}
 export type { PhysicsBodyKind, PhysicsBodyState, PhysicsState } from "./PhysicsState.js";
 
 import {
   MAX_PREDICTION_BODIES,
+  type MotionIntent,
   type PhysicsBodyKind,
   type PhysicsBodyState,
   type PhysicsState,
@@ -65,7 +56,19 @@ interface Section {
 
 export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
   if (entity.type.startsWith("vehicle-v1:")) return "vehicle";
-  if (entity.type === "ball" || entity.workItem) return "loose";
+  if (entity.type === "ball") return "loose";
+  if (entity.workItem) {
+    const item = entity.workItem;
+    // Food sources and storage sites are anchored gameplay markers. Collected
+    // loose food/toys participate in the same scene as characters.
+    if (
+      item.growth ||
+      item.cachedIn ||
+      ["nest", "cache", "lodge", "dust", "hoard"].includes(item.kind)
+    )
+      return "fixed";
+    return "loose";
+  }
   if (entity.type === "player" || entity.wanderAI || entity.routeAI || entity.resident)
     return "character";
   return "fixed";
@@ -522,6 +525,21 @@ export class PhysicsScene {
       if (entity.sprite) entity.sprite.moving = Math.hypot(state.vx, state.vy) > 1;
     }
     entity.jumpInputState = state.jumpHeld ? 3 : 0;
+  }
+
+  /** Spawn clearance is a read-only query of this same collision authority. */
+  canPlaceSphere(x: number, y: number, z: number, radius: number, excludeId?: number): boolean {
+    return (
+      this.world.intersectionWithShape(
+        { x: x / SCALE - this.origin.x, y: (z + radius) / SCALE, z: y / SCALE - this.origin.z },
+        { x: 0, y: 0, z: 0, w: 1 },
+        new RAPIER.Ball(radius / SCALE),
+        undefined,
+        undefined,
+        undefined,
+        excludeId === undefined ? undefined : this.bodies.get(excludeId)?.body,
+      ) === null
+    );
   }
 
   contactIds(id: number): ReadonlySet<number> | undefined {

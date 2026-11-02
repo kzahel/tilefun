@@ -4,7 +4,7 @@ import type { Movement } from "../input/ActionManager.js";
 import { vehicleNoseHeading } from "../traffic/Vehicle.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import { PHYSICS_DT } from "./PhysicsDefaults.js";
-import type { MotionIntent } from "./PhysicsScene.js";
+import type { MotionIntent } from "./PhysicsState.js";
 
 export interface ControlCommand extends Movement {
   seq: number;

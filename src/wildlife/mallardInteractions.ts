@@ -31,40 +31,42 @@ export function restoreMallardPose(duck: Entity): void {
 
 /** Authority-only reaction; a single alarm lasts through flight and settling. */
 export function startleMallard(duck: Entity, from: PositionComponent): boolean {
-  duck.desiredVelocity ??= { vx: 0, vy: 0 };
+  duck.motionIntent ??= { vx: 0, vy: 0 };
   const ai = duck.mallard;
   if (!ai || ai.state === "startle" || ai.state === "flight" || ai.state === "recover")
     return false;
   ai.state = "startle";
   ai.timer = 0.64;
   ai.alarmFrom = { ...from };
-  if (duck.desiredVelocity) duck.desiredVelocity.vx = duck.desiredVelocity.vy = 0;
+  if (duck.motionIntent) duck.motionIntent.vx = duck.motionIntent.vy = 0;
   if (duck.wanderAI) duck.wanderAI.state = "scared";
   if (duck.sprite) duck.sprite.moving = false;
   setSpriteClip(duck, 4);
   return true;
 }
 
-/** Physics-time flight arc. Ordinary EntityManager collision still owns XY movement. */
+/** Flight trajectory intent; the shared step owns both XY and height. */
 export function prepareMallardFlight(duck: Entity, dt: number): void {
-  duck.desiredVelocity ??= { vx: 0, vy: 0 };
+  duck.motionIntent ??= { vx: 0, vy: 0 };
   const ai = duck.mallard,
     flight = ai?.flight;
-  if (ai?.state !== "flight" || !flight || !duck.desiredVelocity) return;
+  if (ai?.state !== "flight" || !flight || !duck.motionIntent) return;
   const remaining = Math.max(0, flight.duration - flight.elapsed);
   const fraction = Math.min(1, dt / Math.max(0.0001, remaining));
-  duck.desiredVelocity.vx = ((ai.target.wx - duck.position.wx) * fraction) / dt;
-  duck.desiredVelocity.vy = ((ai.target.wy - duck.position.wy) * fraction) / dt;
+  duck.motionIntent.vx = ((ai.target.wx - duck.position.wx) * fraction) / dt;
+  duck.motionIntent.vy = ((ai.target.wy - duck.position.wy) * fraction) / dt;
   flight.elapsed = Math.min(flight.duration, flight.elapsed + dt);
   const t = flight.elapsed / flight.duration;
-  duck.wz = flight.startZ + (flight.endZ - flight.startZ) * t + Math.sin(Math.PI * t) * 34;
+  duck.motionIntent.altitude =
+    flight.startZ + (flight.endZ - flight.startZ) * t + Math.sin(Math.PI * t) * 34;
   duck.jumpZ = Math.sin(Math.PI * t) * 34;
   duck.noShadow = false;
 }
 
 /** Settle at the actual collision-resolved position, never teleport to a blocked target. */
 export function settleMallard(duck: Entity, _groundZ: number, water: boolean): void {
-  duck.desiredVelocity ??= { vx: 0, vy: 0 };
+  duck.motionIntent ??= { vx: 0, vy: 0 };
+  delete duck.motionIntent.altitude;
   const ai = duck.mallard;
   if (!ai) return;
   ai.state = "recover";
@@ -74,7 +76,7 @@ export function settleMallard(duck: Entity, _groundZ: number, water: boolean): v
 
   delete duck.jumpZ;
   duck.noShadow = water;
-  if (duck.desiredVelocity) duck.desiredVelocity.vx = duck.desiredVelocity.vy = 0;
+  if (duck.motionIntent) duck.motionIntent.vx = duck.motionIntent.vy = 0;
   if (duck.sprite) duck.sprite.moving = false;
   setSpriteClip(duck, 0);
 }

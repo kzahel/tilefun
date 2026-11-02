@@ -15,9 +15,9 @@ export function updateFrogAI(
   players: readonly PositionComponent[],
   planning?: AiPlanningScheduler,
 ): void {
-  frog.desiredVelocity ??= { vx: 0, vy: 0 };
+  frog.motionIntent ??= { vx: 0, vy: 0 };
   const ai = frog.frog,
-    velocity = frog.desiredVelocity,
+    velocity = frog.motionIntent,
     sprite = frog.sprite;
   if (!ai || !velocity || !sprite) return;
   const random = () => {

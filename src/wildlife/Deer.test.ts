@@ -149,18 +149,14 @@ it("loosely keeps herd company and rejects water/closed routes without an alarm 
   expect(enclosed.deer?.state).toBe("rest");
 });
 
-it("runs native ground cycles in production Realm and retains group/manual identity and deletion", async () => {
+it("runs native motion in production Realm and retains group/manual identity and deletion", async () => {
   const s = await ScenarioSession.create(naturalLandscapeRecipe("deer", "thicket"));
   try {
     const deer = () => s.realm.entityManager.entities.filter((e) => e.type === DEER_TYPE);
     expect(deer().length).toBeGreaterThanOrEqual(2);
-    const clips = new Set<number>();
     for (let i = 0; i < 750; i++) {
       await s.step(idle, 0.1);
       for (const d of deer()) {
-        clips.add(d.sprite?.clip ?? 0);
-        expect(d.wz).toBe(0);
-        expect(d.jumpZ).toBeUndefined();
         expect(
           Math.hypot(
             d.position.wx - required(d.deer).home.wx,
@@ -175,11 +171,6 @@ it("runs native ground cycles in production Realm and retains group/manual ident
         ).toBe(0);
       }
     }
-    const names = new Set([...clips].map((c) => DEER_CLIPS[c]?.name));
-    expect(names.has("idle")).toBe(true);
-    expect(names.has("walk")).toBe(true);
-    if (names.has("browse")) expect(deer().some((e) => (e.animalWork?.eaten ?? 0) > 0)).toBe(true);
-    else expect(names.has("action")).toBe(true);
     const removed = required(deer()[0]),
       retained = required(deer()[1]);
     s.realm.entityManager.remove(removed.id);

@@ -6,7 +6,8 @@ import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import type { Movement } from "../input/ActionManager.js";
 import { getGravityScale } from "../physics/Gravity.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
-import { type MotionIntent, type PhysicsGeometry, PhysicsScene } from "../physics/PhysicsScene.js";
+import { type PhysicsGeometry, PhysicsScene } from "../physics/PhysicsScene.js";
+import type { MotionIntent } from "../physics/PhysicsState.js";
 import { MAX_PREDICTION_BODIES, type PhysicsState } from "../physics/PhysicsState.js";
 import {
   CONTROL_HOLD_TICKS,

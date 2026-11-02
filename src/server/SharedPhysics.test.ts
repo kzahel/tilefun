@@ -42,7 +42,7 @@ it("normal Realm startup advances player, NPC and ball with one shared integrati
     expect(frame.physics?.bodies).toHaveLength(3);
     expect(frame.physics?.omitted).toBe(0);
     expect(npc?.position.wx).toBeGreaterThan(65);
-    expect(npc?.desiredVelocity?.vx).toBe(0);
+    expect(npc?.motionIntent?.vx).toBe(0);
     expect(Math.abs(ball?.wz ?? Infinity)).toBeLessThan(2);
     const before = npc?.position.wx ?? 0;
     for (let i = 0; i < 30; i++) await s.step(idle);
@@ -166,11 +166,11 @@ it("AI decisions supply intent while shared readback, removal and reload own the
     const start = npc.position.wx;
     for (let i = 0; i < 60; i++) await s.step(idle);
     expect(npc.position.wx - start).toBeGreaterThan(15);
-    expect(npc.desiredVelocity?.vx).toBeGreaterThan(0);
-    expect(npc.velocity?.vx).toBeCloseTo(npc.desiredVelocity?.vx ?? Infinity, 1);
+    expect(npc.motionIntent?.vx).toBeGreaterThan(0);
+    expect(npc.velocity?.vx).toBeCloseTo(npc.motionIntent?.vx ?? Infinity, 1);
     npc.wanderAI.state = "idle";
     for (let i = 0; i < 12; i++) await s.step(idle);
-    expect(npc.desiredVelocity?.vx).toBe(0);
+    expect(npc.motionIntent?.vx).toBe(0);
     expect(Math.abs(npc.velocity?.vx ?? Infinity)).toBeLessThan(0.1);
     const savedX = npc.position.wx;
     await s.reload();
@@ -219,6 +219,54 @@ it("ordinary shared ball contacts trigger NPC reactions without a separate bounc
     expect(npc.wanderAI?.state).toBe("scared");
     expect(npc.wanderAI?.scaredTimer).toBeGreaterThan(0);
     expect(ball.position.wx).toBeLessThan(npc.position.wx);
+  } finally {
+    await s.close();
+  }
+});
+
+it("keeps raised renewable sources anchored while loose food falls through shared physics", async () => {
+  const { createFoodSource, createForageItem } = await import("../wildlife/ForageResources.js");
+  const source = createFoodSource("fruit-tree", 80, 32),
+    seed = createForageItem("seed", 100, 32);
+  source.wz = seed.wz = 32;
+  const s = await ScenarioSession.create({
+    version: 1,
+    id: "source-and-loose",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(16, 32),
+    props: [],
+    actors: [source, seed],
+  });
+  try {
+    for (let tick = 0; tick < 60; tick++) await s.step(idle);
+    const resource = s.realm.entityManager.entities.find((entity) => entity.workItem?.growth);
+    const loose = s.realm.entityManager.entities.find((entity) => entity.workItem?.kind === "seed");
+    expect(resource?.wz).toBe(32);
+    expect(Math.abs(loose?.wz ?? Infinity)).toBeLessThan(0.05);
+    expect(s.realm.physicsState?.bodies.some((body) => body.id === resource?.id)).toBe(false);
+  } finally {
+    await s.close();
+  }
+});
+
+it("throws from outside the player hull and uses the shared world to reject blocked placement", async () => {
+  const { scenarioWalls } = await import("../scenarios/ScenarioRecipe.js");
+  const s = await ScenarioSession.create({
+    version: 1,
+    id: "throw-clearance",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(0, 0),
+    props: scenarioWalls(-80, -80, 8, 80),
+  });
+  try {
+    await s.step(idle);
+    await s.command({ kind: "throw-ball", dirX: 1, dirY: 0, force: 0 });
+    expect(s.realm.entityManager.entities.some((entity) => entity.type === "ball")).toBe(false);
+    await s.command({ kind: "throw-ball", dirX: -1, dirY: 0, force: 0 });
+    const ball = s.realm.entityManager.entities.find((entity) => entity.type === "ball");
+    expect(ball?.position.wx).toBeLessThan(-5);
+    await s.step(idle);
+    expect(Math.abs(s.player.player.velocity?.vx ?? 0)).toBeLessThan(0.01);
   } finally {
     await s.close();
   }

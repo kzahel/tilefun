@@ -4,7 +4,13 @@ Topic: wildlife
 Status: all 196 roster animals implemented and available in the animated lab.
 New exact art remains pending human review; specialist behavior limits are
 recorded in the individual checkpoints.
-Updated: 2026-10-25.
+Updated: 2026-11-03.
+
+Physics reset [205](../tactical/205-physics-reset.md) moves AI trajectories into
+the shared physics intent contract. Anchored resources stay fixed; loose food/toys
+remain physical. The [behavior topic](wildlife-behaviors.md#shared-physics-reset)
+records current evidence and reopened capuchin/cat climbing verification. Earlier
+full-climb automation is historical; no art pixels or human approvals change.
 
 [Shared finishing correction 187](../tactical/187-shared-wildlife-finishing.md)
 audits all 206 active entries and introduces 137 complete `finish-v1` banks.

@@ -395,3 +395,59 @@ equipment/rail behavior and controls, then finish residency/streaming and the
 post-cleanup browser checks, Chromebook CPU/render comparison and requested final
 review. The basic P2P check above is evidence, not complete gameplay qualification.
 No readiness marker.
+
+
+### Checkpoint 4c — common AI intent and physical resource roles (2026-11-03)
+
+All ordinary AI producers now share transient `motionIntent`, defined as data in
+PhysicsState. Species flight/hop and woodland climb targets supply altitude without
+writing body height. Removed EntityManager's save/restore-height shim: collecting
+intent does not mutate physical poses. Actual velocity remains shared readback;
+spawns, explicit launches/drops and derived held/cached attachments are lifecycle
+operations. The remaining wildlife position writers were checked against those
+roles. No second integration or per-species physics backend is added.
+
+Separated anchored nonblocking resource/site markers from loose food/toy bodies.
+Previously every work item was dynamic, so foragers could push their cache away
+and canopy crops fell. Anchored markers keep their authored height while loose
+food falls in the shared scene. Real throws now start beyond the player hull;
+spawn clearance queries the same Rapier world and rejects a hand blocked by a wall.
+This avoids creating a projectile inside its thrower, without another collision
+solver or thrower-only physics mode. Low throw range now follows the fixed physical
+preset; the real hit fixture stages its target within that range.
+
+A real canopy can block the old climbing route. Prescribed climb tasks now time
+out, release claims/altitude and fall normally when their support is removed.
+Full crown/perch traversal is explicitly deferred beyond the basic reset baseline;
+no teleport or canopy collision exception preserves it. Reopened AI/integration/
+validation for capuchin and the three cat coats in the behavior ledger; pending
+human art-review states and pixel banks stay unchanged. Ground cat toy play,
+raccoon cache/conservation, source renewal and held-item identity remain covered.
+
+Retired the all-profile x input/idle wildlife landing matrix. Three shared contact
+roles retain mounting, defense and ordinary startle/persisted-identity behavior;
+profile/asset/data checks remain. Retained real source/carry/toy tests with fixed
+60Hz helper time and physical tolerances. Removed assertions that every deer sits
+at exact zero height or every authored animation cycle occurs in an incidental
+number of physics steps. Replaced successful-through-canopy choreography with a
+blocked-climb/cancellation/reload outcome and anchored natural crop checks.
+
+The initial widened audit passed 1,255 of 1,270 checks and exposed physical-zero,
+old duration/cycle assumptions and the resource/climb issues above. The focused
+post-fix run passes **74 checks across ten files**, including shared scene/prediction,
+ordinary authority, normal two-session Worker host and retained wildlife behavior.
+All three TypeScript projects pass. Changed-source lint has no new diagnostics;
+behavior-ledger freshness checks pass. Catalog generation, the 2,119-candidate
+Workshop manifest and production build pass. Both full-Chromium follow-ups pass:
+the ordinary two-session Worker lab (including controller/touch and replacement
+fences) and GPU Worker repeated edit/play input recovery. These checks retain
+prior P2P evidence without claiming post-vehicle-cleanup or device qualification. The reset is still active: remove old vehicle/
+equipment solvers and controls, unused manual scenario timing parameters, then
+finish residency/streaming, Chromebook measurements and final review/readiness.
+
+
+The committed behavior ledger/report and current production-table behavior summary
+were refreshed from canonical data. The historical `node scripts/wildlife/status.mjs`
+runner cannot rebuild this checkout's old campaign queue because ignored
+`data/wildlife-campaign-v2/progress.json` is absent. Its retained historical sections
+were preserved; no campaign/session state or human approvals were invented.

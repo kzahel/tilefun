@@ -25,7 +25,7 @@ export function restoreRabbitPose(rabbit: Entity): void {
 }
 /** One alarm per escape; preserve an airborne trajectory and recover before another. */
 export function startleRabbit(rabbit: Entity, from: PositionComponent): boolean {
-  rabbit.desiredVelocity ??= { vx: 0, vy: 0 };
+  rabbit.motionIntent ??= { vx: 0, vy: 0 };
   const ai = rabbit.rabbit;
   if (!ai || ai.alarmFrom || ai.state === "recover") return false;
   ai.alarmFrom = { ...from };
@@ -33,32 +33,33 @@ export function startleRabbit(rabbit: Entity, from: PositionComponent): boolean 
   if (ai.state !== "hop") {
     ai.state = "startle";
     ai.timer = 0.15;
-    if (rabbit.desiredVelocity) rabbit.desiredVelocity.vx = rabbit.desiredVelocity.vy = 0;
+    if (rabbit.motionIntent) rabbit.motionIntent.vx = rabbit.motionIntent.vy = 0;
     restoreRabbitPose(rabbit);
   }
   return true;
 }
 export function prepareRabbitHop(rabbit: Entity, dt: number): void {
-  rabbit.desiredVelocity ??= { vx: 0, vy: 0 };
+  rabbit.motionIntent ??= { vx: 0, vy: 0 };
   const ai = rabbit.rabbit,
     hop = ai?.hop;
-  if (ai?.state !== "hop" || !hop || !rabbit.desiredVelocity || dt <= 0) return;
+  if (ai?.state !== "hop" || !hop || !rabbit.motionIntent || dt <= 0) return;
   const old = hop.elapsed;
   hop.elapsed = Math.min(RABBIT_HOP_DURATION, old + dt);
   const moveEnd = Math.min(LANDING, hop.elapsed);
   const moveStart = Math.max(PUSH_OFF, old);
   const fraction = Math.max(0, moveEnd - moveStart) / Math.max(0.0001, LANDING - moveStart);
-  rabbit.desiredVelocity.vx = ((ai.target.wx - rabbit.position.wx) * fraction) / dt;
-  rabbit.desiredVelocity.vy = ((ai.target.wy - rabbit.position.wy) * fraction) / dt;
+  rabbit.motionIntent.vx = ((ai.target.wx - rabbit.position.wx) * fraction) / dt;
+  rabbit.motionIntent.vy = ((ai.target.wy - rabbit.position.wy) * fraction) / dt;
   const t = Math.max(0, Math.min(1, (hop.elapsed - PUSH_OFF) / (LANDING - PUSH_OFF)));
   const height = Math.sin(Math.PI * t) * 10;
-  rabbit.wz = hop.startZ + (hop.endZ - hop.startZ) * t + height;
+  rabbit.motionIntent.altitude = hop.startZ + (hop.endZ - hop.startZ) * t + height;
   rabbit.jumpZ = height;
   rabbit.noShadow = false;
 }
 /** Actual collision-resolved ground/XY win, including obstacles edited mid-hop. */
 export function settleRabbit(rabbit: Entity, _groundZ: number): void {
-  rabbit.desiredVelocity ??= { vx: 0, vy: 0 };
+  rabbit.motionIntent ??= { vx: 0, vy: 0 };
+  delete rabbit.motionIntent.altitude;
   const ai = rabbit.rabbit;
   if (!ai) return;
   const alarm = !!ai.alarmFrom;
@@ -69,7 +70,7 @@ export function settleRabbit(rabbit: Entity, _groundZ: number): void {
   if (!queuedEscape) delete ai.alarmFrom;
 
   delete rabbit.jumpZ;
-  if (rabbit.desiredVelocity) rabbit.desiredVelocity.vx = rabbit.desiredVelocity.vy = 0;
+  if (rabbit.motionIntent) rabbit.motionIntent.vx = rabbit.motionIntent.vy = 0;
   if (rabbit.wanderAI) rabbit.wanderAI.state = alarm ? "scared" : "idle";
   restoreRabbitPose(rabbit);
 }

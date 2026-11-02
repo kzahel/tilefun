@@ -60,7 +60,7 @@ export class EntityManager {
   /** Add an entity to the world. Assigns a unique id. */
   spawn(entity: Entity): Entity {
     this.beforeSpawn?.(entity);
-    if (entity.velocity) entity.desiredVelocity ??= { vx: 0, vy: 0 };
+    if (entity.velocity) entity.motionIntent ??= { vx: 0, vy: 0 };
     entity.id = this.nextId++;
     this.entities.push(entity);
     this.byId.set(entity.id, entity);
@@ -87,10 +87,9 @@ export class EntityManager {
     dt: number,
     getCollision: (x: number, y: number) => number,
   ) {
-    const intents = new Map<number, import("../physics/PhysicsScene.js").MotionIntent>();
+    const intents = new Map<number, import("../physics/PhysicsState.js").MotionIntent>();
     for (const entity of active) {
       if (this.byId.get(entity.id) !== entity || entity.parentId !== undefined) continue;
-      const oldZ = entity.wz;
       if (entity.mallard?.state === "flight") prepareMallardFlight(entity, dt);
       if (entity.deer?.motion) prepareDeerTravel(entity, dt);
       if (entity.fauna)
@@ -106,18 +105,7 @@ export class EntityManager {
       if (entity.robin?.motion) prepareRobinMotion(entity, dt);
       if (entity.rabbit?.state === "hop") prepareRabbitHop(entity, dt);
       if (entity.frog?.state === "hop") prepareFrogHop(entity, dt);
-      const velocity = entity.desiredVelocity;
-      const targetZ = entity.wz;
-      if (oldZ === undefined) delete entity.wz;
-      else entity.wz = oldZ;
-      if (!velocity) continue;
-      const intent: import("../physics/PhysicsScene.js").MotionIntent = {
-        vx: velocity.vx,
-        vy: velocity.vy,
-      };
-      // Existing authored travel curves become a vertical target for the shared motor.
-      if (targetZ !== oldZ && targetZ !== undefined) intent.altitude = targetZ;
-      intents.set(entity.id, intent);
+      if (entity.motionIntent) intents.set(entity.id, { ...entity.motionIntent });
     }
     return intents;
   }
@@ -132,7 +120,7 @@ export class EntityManager {
     for (const e of active) {
       // Ordinary wanderers reverse their next intent when a wall blocks travel.
       // Specialized species retain their own decision/arrival policies.
-      const wanted = Math.hypot(e.desiredVelocity?.vx ?? 0, e.desiredVelocity?.vy ?? 0);
+      const wanted = Math.hypot(e.motionIntent?.vx ?? 0, e.motionIntent?.vy ?? 0);
       if (
         e.wanderAI &&
         !e.fauna &&

@@ -1,7 +1,7 @@
 # General 3D physics backend
 
 Status: autonomous reset active; shared authority/prediction and labs use one Rapier kernel; peripheral cleanup/qualification in progress.
-Updated: 2026-11-02.
+Updated: 2026-11-03.
 
 Owns the physics-backend replacement direction. [World geometry](world-geometry.md)
 owns authoring semantics; [prediction](player-prediction.md) owns input replay;
@@ -39,10 +39,17 @@ PlayerPredictor per pane. Scenario recipes retain only scoped gravity; normal
 input wire tag `0x81` has eight bytes and no duration field. The frame tag remains
 `0x0b`. Matching updated client/server builds are required.
 
+Species and work trajectories now submit the same data-only `motionIntent`;
+they no longer write/undo physical body height. Anchored crops/sites are nonblocking
+markers; loose food/toys use the shared world. Spawn clearance for throws queries
+that same world. Physically blocked old tree-climb routes cancel and release their
+claims; complete crown/perch traversal is explicitly deferred, with verification
+reopened in the wildlife behavior ledger.
+
 Basic ordinary GPU Worker edit/play recovery, NPC push/prediction and actual
 P2P reversal/convergence checks pass, alongside the normal two-session lab's
 input/fence/reload/teardown checks. The reset is **not ready for delivery yet**:
-old vehicle/equipment collision and peripheral AI pose writers still require
+old vehicle/equipment collision paths and controls still require
 simplification/removal, followed by residency/streaming and post-cleanup browser/
 device qualification, Chromebook measurements and final review. Useful
 lab scenarios now exercise the game kernel, but lab acceptance alone does not

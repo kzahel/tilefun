@@ -8,14 +8,14 @@ import { tickAllAI } from "./tickAllAI.js";
 describe("tickAllAI", () => {
   it("preserves motion and AI state when a decision is not scheduled", () => {
     const far = createChicken(9999, 0);
-    far.desiredVelocity = { vx: 30, vy: 30 };
+    far.motionIntent = { vx: 30, vy: 30 };
     far.id = 1;
 
     const timer = far.wanderAI?.timer;
     const tickDts = new Map<Entity, number>();
     tickAllAI([far], [{ wx: 0, wy: 0 }], tickDts, Math.random);
 
-    expect(far.desiredVelocity).toEqual({ vx: 30, vy: 30 });
+    expect(far.motionIntent).toEqual({ vx: 30, vy: 30 });
     expect(far.wanderAI?.timer).toBe(timer);
   });
 
@@ -44,7 +44,7 @@ describe("tickAllAI", () => {
     // Ghost should be chasing (within its chase range of 80)
     expect(ghost.wanderAI?.state).toBe("chasing");
     // Should be moving toward player (negative vx)
-    expect(ghost.desiredVelocity?.vx).toBeLessThan(0);
+    expect(ghost.motionIntent?.vx).toBeLessThan(0);
   });
 
   it("does not crash with entities that have no wanderAI", () => {

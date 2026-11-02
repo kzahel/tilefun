@@ -63,9 +63,9 @@ export function applyBallImpact(
     ai.hostile = false;
     other.tags?.delete("hostile");
     ai.state = "idle";
-    if (other.desiredVelocity) {
-      other.desiredVelocity.vx = 0;
-      other.desiredVelocity.vy = 0;
+    if (other.motionIntent) {
+      other.motionIntent.vx = 0;
+      other.motionIntent.vy = 0;
     }
     entityManager.spawn(createGem(other.position.wx, other.position.wy));
   } else if (other.predator) {

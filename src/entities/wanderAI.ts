@@ -12,9 +12,9 @@ export function updateWanderAI(
   random: () => number,
   planning?: AiPlanningScheduler,
 ): void {
-  entity.desiredVelocity ??= { vx: 0, vy: 0 };
+  entity.motionIntent ??= { vx: 0, vy: 0 };
   const ai = entity.wanderAI;
-  const vel = entity.desiredVelocity;
+  const vel = entity.motionIntent;
   if (!ai || !vel) return;
 
   // --- Scared state: frantic movement after being hit by a ball ---
@@ -126,9 +126,9 @@ export function updateBehaviorAI(
   buddies?: readonly Entity[],
   planning?: AiPlanningScheduler,
 ): void {
-  entity.desiredVelocity ??= { vx: 0, vy: 0 };
+  entity.motionIntent ??= { vx: 0, vy: 0 };
   const ai = entity.wanderAI;
-  const vel = entity.desiredVelocity;
+  const vel = entity.motionIntent;
   if (!ai || !vel) return;
 
   // --- Scared overrides chase/follow — delegate to wander (which handles scared) ---

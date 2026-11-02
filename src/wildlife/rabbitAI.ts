@@ -14,9 +14,9 @@ export function updateRabbitAI(
   players: readonly PositionComponent[],
   planning?: AiPlanningScheduler,
 ): void {
-  rabbit.desiredVelocity ??= { vx: 0, vy: 0 };
+  rabbit.motionIntent ??= { vx: 0, vy: 0 };
   const ai = rabbit.rabbit,
-    velocity = rabbit.desiredVelocity;
+    velocity = rabbit.motionIntent;
   if (!ai || !velocity || !rabbit.sprite) return;
   const random = () => {
     ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;

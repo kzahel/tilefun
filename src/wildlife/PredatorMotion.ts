@@ -44,13 +44,13 @@ export function restorePredatorPose(e: Entity): void {
 export function predatorFlightZ(start: number, end: number, t: number, lift: number): number {
   return start + (end - start) * t + Math.sin(Math.PI * t) * lift;
 }
-/** Collision owns XY. This only supplies a bounded velocity and the committed arc. */
+/** Supply a bounded velocity and altitude target for the shared step. */
 export function preparePredatorFlight(e: Entity, dt: number): void {
-  e.desiredVelocity ??= { vx: 0, vy: 0 };
+  e.motionIntent ??= { vx: 0, vy: 0 };
   const ai = e.predator,
     f = ai?.flight,
     speed = predatorProfile(e.type)?.chaseSpeed;
-  if (!ai || !f || !speed || !e.desiredVelocity || dt <= 0) return;
+  if (!ai || !f || !speed || !e.motionIntent || dt <= 0) return;
   f.elapsed = Math.min(f.duration, f.elapsed + dt);
   const t = f.elapsed / f.duration,
     target = {
@@ -61,10 +61,10 @@ export function preparePredatorFlight(e: Entity, dt: number): void {
     dy = target.wy - e.position.wy,
     d = Math.hypot(dx, dy);
   const step = Math.min(speed, d / dt);
-  e.desiredVelocity.vx = d > 0.001 ? (dx / d) * step : 0;
-  e.desiredVelocity.vy = d > 0.001 ? (dy / d) * step : 0;
+  e.motionIntent.vx = d > 0.001 ? (dx / d) * step : 0;
+  e.motionIntent.vy = d > 0.001 ? (dy / d) * step : 0;
   f.previousZ = e.wz ?? f.startZ;
-  e.wz = predatorFlightZ(f.startZ, f.endZ, t, f.lift);
+  e.motionIntent.altitude = predatorFlightZ(f.startZ, f.endZ, t, f.lift);
   e.jumpZ = Math.sin(Math.PI * t) * f.lift;
   if (e.sprite && d > 0.001) {
     ai.facing = directionFromVelocity(dx, dy);
@@ -73,7 +73,8 @@ export function preparePredatorFlight(e: Entity, dt: number): void {
   restorePredatorPose(e);
 }
 export function settlePredatorFlight(e: Entity, groundZ: number): void {
-  e.desiredVelocity ??= { vx: 0, vy: 0 };
+  e.motionIntent ??= { vx: 0, vy: 0 };
+  delete e.motionIntent.altitude;
   const ai = e.predator,
     f = ai?.flight;
   if (!ai || !f) return;
@@ -89,6 +90,6 @@ export function settlePredatorFlight(e: Entity, groundZ: number): void {
     delete ai.huntElapsed;
     delete ai.aim;
   }
-  if (e.desiredVelocity) e.desiredVelocity.vx = e.desiredVelocity.vy = 0;
+  if (e.motionIntent) e.motionIntent.vx = e.motionIntent.vy = 0;
   restorePredatorPose(e);
 }

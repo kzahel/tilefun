@@ -142,7 +142,7 @@ it("retains immediate alarms, exact timers and live following/chasing despite ex
   }
   expect(required(animals[0]?.fauna).timer).toBeCloseTo(0.4 - 1 / 60);
   expect(hostile.wanderAI?.state).toBe("chasing");
-  expect(hostile.desiredVelocity?.vx).toBeGreaterThan(0);
+  expect(hostile.motionIntent?.vx).toBeGreaterThan(0);
   players[players.length - 2] = { wx: 60, wy: 2560 };
   tickAllAI(
     all,
@@ -153,7 +153,7 @@ it("retains immediate alarms, exact timers and live following/chasing despite ex
     1,
     new AiPlanningScheduler(),
   );
-  expect(follower.desiredVelocity?.vx).toBeGreaterThan(0);
+  expect(follower.motionIntent?.vx).toBeGreaterThan(0);
 });
 
 it("runs generic ambient decisions through distance cadence while keeping route steering live", () => {
@@ -187,7 +187,7 @@ it("runs generic ambient decisions through distance cadence while keeping route 
   );
   expect(chicken.wanderAI?.state).toBe("idle");
   expect(draws).toBe(0);
-  expect(route.desiredVelocity?.vx).toBeGreaterThan(0);
+  expect(route.motionIntent?.vx).toBeGreaterThan(0);
   for (let tick = 1; tick < 18; tick++)
     tickAllAI(
       [chicken, route],

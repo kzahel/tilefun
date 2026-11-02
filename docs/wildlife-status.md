@@ -16,9 +16,9 @@
 
 ## Distinct animal behaviors
 
-29/206 entries game/lab verified; 0 in progress. Inherited coat entries count as coverage, not additional distinct mechanics. Human behavior/art review remains separate.
+25/206 entries game/lab verified; 4 in progress. Physics reset 205 reopens capuchin and three cat coats for physically reachable crown/perch traversal; ground toy play and blocked-climb cancellation remain verified. Inherited coat entries count as coverage, not additional distinct mechanics. Human behavior/art review remains separate.
 
-[Current behavior ledger and progress](wildlife-behavior-status.md) · [Planning and completion rules](topics/wildlife-behaviors.md)
+[Current behavior ledger and progress](wildlife-behavior-status.md) · [Planning and completion rules](topics/wildlife-behaviors.md) · [Physics reset](tactical/205-physics-reset.md)
 
 ## Latest autonomous completion run
 

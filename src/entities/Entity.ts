@@ -166,8 +166,8 @@ export interface Entity {
   /** Adjusts the Y used for depth sorting (negative = sort as if higher/behind). */
   sortOffsetY?: number;
   velocity: VelocityComponent | null;
-  /** Gameplay/AI wish velocity; physics readback never overwrites it. Not persisted. */
-  desiredVelocity?: VelocityComponent;
+  /** Transient gameplay movement/trajectory target; the shared step owns the pose. */
+  motionIntent?: import("../physics/PhysicsState.js").MotionIntent;
   sprite: SpriteComponent | null;
   collider: ColliderComponent | null;
   wanderAI: WanderAIComponent | null;

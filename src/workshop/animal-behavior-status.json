@@ -10,9 +10,9 @@
   },
   "cat": {
     "phase": "land",
-    "ai": "verified",
+    "ai": "in-progress",
     "animation": "verified",
-    "validation": "verified",
+    "validation": "in-progress",
     "description": "Crouch and stalk a ball, physically pounce and bat it, then climb to a tree rest.",
     "scene": "behavior-cat",
     "review": "pending"
@@ -712,9 +712,9 @@
   },
   "capuchin-monkey": {
     "phase": "land",
-    "ai": "verified",
+    "ai": "in-progress",
     "animation": "verified",
-    "validation": "verified",
+    "validation": "in-progress",
     "description": "Climb a real tree, pick finite fruit, eat on its crown and descend.",
     "scene": "behavior-capuchin",
     "review": "pending"
@@ -1342,18 +1342,18 @@
   },
   "cat-ginger": {
     "phase": "land",
-    "ai": "verified",
+    "ai": "in-progress",
     "animation": "verified",
-    "validation": "verified",
+    "validation": "in-progress",
     "description": "Inherit cat toy play and tree rests with the ginger coatâ€™s own action atlas.",
     "scene": "behavior-cat-ginger",
     "review": "pending"
   },
   "cat-black": {
     "phase": "land",
-    "ai": "verified",
+    "ai": "in-progress",
     "animation": "verified",
-    "validation": "verified",
+    "validation": "in-progress",
     "description": "Inherit cat toy play and tree rests with the black coatâ€™s own action atlas.",
     "scene": "behavior-cat-black",
     "review": "pending"

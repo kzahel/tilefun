@@ -8,10 +8,10 @@ Generated from [the canonical ledger](../art-source/wildlife-v2/behavior-campaig
 | --- | --- | --- | --- | --- | --- |
 | audit | 177 | 0 | 0 | 29 | 0 |
 | design | 177 | 0 | 0 | 29 | 0 |
-| ai | 177 | 0 | 0 | 29 | 0 |
+| ai | 177 | 0 | 4 | 25 | 0 |
 | animation | 177 | 0 | 0 | 29 | 0 |
-| integration | 177 | 0 | 0 | 29 | 0 |
-| validation | 177 | 0 | 0 | 29 | 0 |
+| integration | 177 | 0 | 4 | 25 | 0 |
+| validation | 177 | 0 | 4 | 25 | 0 |
 
 Phase assignment: unclassified: 177; land: 23; air: 5; amphibious: 1; aquatic: 0.
 
@@ -25,7 +25,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Animal | Phase | Audit | Design | AI | Animation | Integration | Validation | Next action |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Red fox (fox) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new retained action bank; audit the next land/air trio after authorization. |
-| Cat (cat) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
+| Cat (cat) | land | verified | verified | in-progress | verified | in-progress | in-progress | Physics reset 205: ground toy play and blocked-climb cancellation use shared physics. Qualify a physically reachable crown/perch route before restoring complete climbing/perching verification; retain historical 161 evidence and pending human art review. |
 | Dog (dog) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and new action bank; then audit the next land/air batch. |
 | Pasture cow (cow) | land | verified | verified | verified | verified | verified | verified | Human review of the shared behavior demonstration and exact retained action bank. |
 | Sheep (sheep) | land | verified | verified | verified | verified | verified | verified | Human review of the shared behavior demonstration and exact retained action bank. |
@@ -103,7 +103,7 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Atlantic puffin (atlantic-puffin) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Chimpanzee (chimpanzee) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Orangutan (orangutan) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Capuchin monkey (capuchin-monkey) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
+| Capuchin monkey (capuchin-monkey) | land | verified | verified | in-progress | verified | in-progress | in-progress | Physics reset 205: ground toy play and blocked-climb cancellation use shared physics. Qualify a physically reachable crown/perch route before restoring complete climbing/perching verification; retain historical 161 evidence and pending human art review. |
 | Ring-tailed lemur (ring-tailed-lemur) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Mandrill (mandrill) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Proboscis monkey (proboscis-monkey) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
@@ -173,8 +173,8 @@ Requested ideas are proposals, not completed designs: dog ball fetching, crow ob
 | Stag beetle (stag-beetle) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Grasshopper (grasshopper) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Cricket (cricket) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
-| Ginger tabby (cat-ginger) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
-| Black cat (cat-black) | land | verified | verified | verified | verified | verified | verified | Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187. |
+| Ginger tabby (cat-ginger) | land | verified | verified | in-progress | verified | in-progress | in-progress | Physics reset 205: ground toy play and blocked-climb cancellation use shared physics. Qualify a physically reachable crown/perch route before restoring complete climbing/perching verification; retain historical 161 evidence and pending human art review. |
+| Black cat (cat-black) | land | verified | verified | in-progress | verified | in-progress | in-progress | Physics reset 205: ground toy play and blocked-climb cancellation use shared physics. Qualify a physically reachable crown/perch route before restoring complete climbing/perching verification; retain historical 161 evidence and pending human art review. |
 | Golden retriever (dog-golden) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Pointed-ear shepherd (dog-shepherd) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |
 | Panther (panther) | unclassified | not-audited | not-audited | not-audited | not-audited | not-audited | not-audited | Audit existing behavior and assign phase; specify a signature mechanic. |

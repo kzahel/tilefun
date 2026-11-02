@@ -16,9 +16,9 @@ export function updateRobinAI(
   budget?: RobinWorkBudget,
   planning?: AiPlanningScheduler,
 ): void {
-  bird.desiredVelocity ??= { vx: 0, vy: 0 };
+  bird.motionIntent ??= { vx: 0, vy: 0 };
   const ai = bird.robin,
-    velocity = bird.desiredVelocity;
+    velocity = bird.motionIntent;
   if (!ai || !velocity || !bird.sprite) return;
   const random = () => {
     ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;

@@ -53,7 +53,7 @@ export class WoodlandWork {
     t.state = state;
     t.elapsed = 0;
     if (!a.fauna?.motion) {
-      if (a.velocity) a.velocity.vx = a.velocity.vy = 0;
+      if (a.motionIntent) a.motionIntent.vx = a.motionIntent.vy = 0;
       if (
         a.wanderAI &&
         !a.fauna?.alarmFrom &&
@@ -78,6 +78,7 @@ export class WoodlandWork {
     if (a.animalWork) delete a.animalWork.targetId;
   }
   private cancel(a: Entity, delay = 3) {
+    if (a.motionIntent) delete a.motionIntent.altitude;
     this.release(a);
     this.work.drop(a);
     const t = a.animalWork;
@@ -161,7 +162,7 @@ export class WoodlandWork {
     if (t.tree && !c.ready(t.tree, 64)) {
       // Freeze the committed grip while adjacent support scopes are unavailable.
       t.elapsed = priorElapsed;
-      if (a.velocity) a.velocity.vx = a.velocity.vy = 0;
+      if (a.motionIntent) a.motionIntent.vx = a.motionIntent.vy = 0;
       return true;
     }
     if (t.tree && t.climbZ !== undefined && t.state === "idle") {
@@ -196,15 +197,25 @@ export class WoodlandWork {
         this.cancel(a);
         return false;
       }
+      if (
+        t.elapsed > duration + 1 &&
+        (Math.abs((a.wz ?? 0) - point.z) > 3 || gap(a.position, point) > 3)
+      ) {
+        // A real canopy/wall can block a prescribed climb. Abandon the task;
+        // never teleport through it or keep an unreachable motor alive forever.
+        this.cancel(a, 10);
+        return false;
+      }
       t.climbZ = point.z;
-      a.wz = point.z;
-      if (a.velocity) {
-        a.velocity.vx = (point.wx - a.position.wx) / Math.max(dt, 0.001);
-        a.velocity.vy = (point.wy - a.position.wy) / Math.max(dt, 0.001);
+      a.motionIntent ??= { vx: 0, vy: 0 };
+      a.motionIntent.altitude = point.z;
+      if (a.motionIntent) {
+        a.motionIntent.vx = (point.wx - a.position.wx) / Math.max(dt, 0.001);
+        a.motionIntent.vy = (point.wy - a.position.wy) / Math.max(dt, 0.001);
       }
       restoreAnimalWorkPose(a);
       if (f >= 1 && gap(a.position, point) < 1) {
-        if (a.velocity) a.velocity.vx = a.velocity.vy = 0;
+        if (a.motionIntent) a.motionIntent.vx = a.motionIntent.vy = 0;
         if (down) {
           this.cancel(a, 10);
           return false;

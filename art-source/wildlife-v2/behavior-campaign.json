@@ -1,8 +1,8 @@
 {
   "version": 1,
   "id": "wildlife-distinct-behaviors",
-  "updated": "2026-10-24",
-  "state": "nine-batches-automation-verified",
+  "updated": "2026-11-03",
+  "state": "physics-reset-requalification",
   "scope": "All current animal entries; land and air first, amphibious scope explicit, aquatic later.",
   "topic": "docs/topics/wildlife-behaviors.md",
   "ideas": [
@@ -130,10 +130,10 @@
       "progress": {
         "audit": "verified",
         "design": "verified",
-        "ai": "verified",
+        "ai": "in-progress",
         "animation": "verified",
-        "integration": "verified",
-        "validation": "verified"
+        "integration": "in-progress",
+        "validation": "in-progress"
       },
       "humanReview": {
         "behavior": "pending",
@@ -191,11 +191,15 @@
         {
           "area": "animation",
           "ref": "art-source/wildlife-v2/cat/finish-v1/receipt.json"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/205-physics-reset.md"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
-      "updatedUtc": "2026-10-20T14:07:29.399361+00:00"
+      "nextAction": "Physics reset 205: ground toy play and blocked-climb cancellation use shared physics. Qualify a physically reachable crown/perch route before restoring complete climbing/perching verification; retain historical 161 evidence and pending human art review.",
+      "updatedUtc": "2026-11-03T00:00:00Z"
     },
     "dog": {
       "name": "Dog",
@@ -3768,10 +3772,10 @@
       "progress": {
         "audit": "verified",
         "design": "verified",
-        "ai": "verified",
+        "ai": "in-progress",
         "animation": "verified",
-        "integration": "verified",
-        "validation": "verified"
+        "integration": "in-progress",
+        "validation": "in-progress"
       },
       "humanReview": {
         "behavior": "pending",
@@ -3829,11 +3833,15 @@
         {
           "area": "animation",
           "ref": "art-source/wildlife-v2/capuchin-monkey/finish-v1/receipt.json"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/205-physics-reset.md"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
-      "updatedUtc": "2026-10-20T14:07:29.399343+00:00"
+      "nextAction": "Physics reset 205: ground toy play and blocked-climb cancellation use shared physics. Qualify a physically reachable crown/perch route before restoring complete climbing/perching verification; retain historical 161 evidence and pending human art review.",
+      "updatedUtc": "2026-11-03T00:00:00Z"
     },
     "ring-tailed-lemur": {
       "name": "Ring-tailed lemur",
@@ -6527,10 +6535,10 @@
       "progress": {
         "audit": "verified",
         "design": "verified",
-        "ai": "verified",
+        "ai": "in-progress",
         "animation": "verified",
-        "integration": "verified",
-        "validation": "verified"
+        "integration": "in-progress",
+        "validation": "in-progress"
       },
       "humanReview": {
         "behavior": "pending",
@@ -6548,7 +6556,7 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the ginger coat\u00e2\u20ac\u2122s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the ginger coatâ€™s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-ginger",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
@@ -6588,11 +6596,15 @@
         {
           "area": "animation",
           "ref": "art-source/wildlife-v2/cat-ginger/finish-v1/receipt.json"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/205-physics-reset.md"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
-      "updatedUtc": "2026-10-20T14:07:29.399363+00:00"
+      "nextAction": "Physics reset 205: ground toy play and blocked-climb cancellation use shared physics. Qualify a physically reachable crown/perch route before restoring complete climbing/perching verification; retain historical 161 evidence and pending human art review.",
+      "updatedUtc": "2026-11-03T00:00:00Z"
     },
     "cat-black": {
       "name": "Black cat",
@@ -6610,10 +6622,10 @@
       "progress": {
         "audit": "verified",
         "design": "verified",
-        "ai": "verified",
+        "ai": "in-progress",
         "animation": "verified",
-        "integration": "verified",
-        "validation": "verified"
+        "integration": "in-progress",
+        "validation": "in-progress"
       },
       "humanReview": {
         "behavior": "pending",
@@ -6631,7 +6643,7 @@
         ]
       },
       "plan": {
-        "signature": "Inherit cat toy play and tree rests with the black coat\u00e2\u20ac\u2122s own action atlas.",
+        "signature": "Inherit cat toy play and tree rests with the black coatâ€™s own action atlas.",
         "trigger": "Suitable nearby ordinary tree, finite stock/cache or loose ball.",
         "scenario": "behavior-cat-black",
         "tactical": "docs/tactical/161-climbing-raids-and-play.md",
@@ -6671,11 +6683,15 @@
         {
           "area": "animation",
           "ref": "art-source/wildlife-v2/cat-black/finish-v1/receipt.json"
+        },
+        {
+          "area": "validation",
+          "ref": "docs/tactical/205-physics-reset.md"
         }
       ],
       "notRequiredReasons": {},
-      "nextAction": "Human review of the behavior demonstration and corrected whole-bank paint in finishing batch 187.",
-      "updatedUtc": "2026-10-20T14:07:29.399364+00:00"
+      "nextAction": "Physics reset 205: ground toy play and blocked-climb cancellation use shared physics. Qualify a physically reachable crown/perch route before restoring complete climbing/perching verification; retain historical 161 evidence and pending human art review.",
+      "updatedUtc": "2026-11-03T00:00:00Z"
     },
     "dog-golden": {
       "name": "Golden retriever",

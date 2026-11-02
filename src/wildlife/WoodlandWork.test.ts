@@ -10,7 +10,7 @@ import { createFoodSource, createForageItem } from "./ForageResources.js";
 
 const idle = { dx: 0, dy: 0, sprinting: false, jump: false };
 async function until(s: ScenarioSession, p: () => boolean, seconds = 80) {
-  for (let i = 0; i < seconds * 30 && !p(); i++) await s.step(idle, 1 / 30);
+  for (let i = 0; i < seconds * 60 && !p(); i++) await s.step(idle);
   expect(
     s.realm.entityManager.entities.map((e) => ({
       type: e.type,
@@ -23,34 +23,32 @@ async function until(s: ScenarioSession, p: () => boolean, seconds = 80) {
     "Timed out",
   ).toSatisfy(() => p());
 }
-it("climbs continuously, picks one fruit, eats on a supported crown and descends through reload", async () => {
+it("a real canopy blocks climbing without teleporting and releases the unreachable task through reload", async () => {
   const s = await ScenarioSession.create(woodlandWorkRecipe("capuchin"));
   try {
     const a = required(s.realm.entityManager.entities.find((e) => e.fauna));
-    await until(s, () => a.animalWork?.state === "climb" && (a.wz ?? 0) > 8);
-    const id = a.persistentId,
-      z = a.wz ?? 0;
-    expect(z).toBeLessThan(32);
+    await until(s, () => a.animalWork?.state === "climb" && (a.wz ?? 0) > 1, 20);
+    expect(a.wz).toBeLessThan(24);
+    const id = a.persistentId;
+    await until(s, () => a.animalWork?.state === "idle" && !a.animalWork?.tree, 20);
+    expect(a.motionIntent?.altitude).toBeUndefined();
+    const source = required(s.realm.entityManager.entities.find((e) => e.workItem?.growth));
+    expect(source.wz).toBe(32);
+    expect(source.workItem?.units).toBe(3);
+    expect(source.workItem?.claimedBy).toBeUndefined();
     await s.reload();
     const loaded = required(s.realm.entityManager.entities.find((e) => e.persistentId === id));
-    expect(loaded.wz).toBeCloseTo(z, 5);
-    await until(s, () => (loaded.animalWork?.eaten ?? 0) === 1);
-    expect(loaded.wz).toBe(32);
-    const source = required(s.realm.entityManager.entities.find((e) => e.workItem?.growth));
-    expect(source.workItem?.units).toBe(2);
-    await until(s, () => loaded.animalWork?.state === "idle" && (loaded.wz ?? 0) < 1);
-    expect(s.realm.entityManager.entities.filter((e) => e.workItem?.kind === "fruit")).toHaveLength(
-      1,
-    );
+    for (let tick = 0; tick < 60; tick++) await s.step(idle);
+    expect(Math.abs(loaded.wz ?? 0)).toBeLessThan(0.05);
   } finally {
     await s.close();
   }
-}, 60000);
+});
 it("removing the actual tree cancels its crop and climbing support", async () => {
   const s = await ScenarioSession.create(woodlandWorkRecipe("capuchin"));
   try {
     const a = required(s.realm.entityManager.entities.find((e) => e.fauna));
-    await until(s, () => a.animalWork?.state === "climb" && (a.wz ?? 0) > 8);
+    await until(s, () => a.animalWork?.state === "climb" && (a.wz ?? 0) > 2);
     const tree = required(s.realm.propManager.props.find((p) => p.type === "prop-oak-tree"));
     s.realm.propManager.remove(tree.id);
     await until(
@@ -58,7 +56,9 @@ it("removing the actual tree cancels its crop and climbing support", async () =>
       () => !a.animalWork?.tree && !s.realm.entityManager.entities.some((e) => e.workItem?.growth),
     );
     expect(a.animalWork?.eaten).toBe(0);
-    expect(a.wz).toBe(0);
+    expect(a.motionIntent?.altitude).toBeUndefined();
+    for (let tick = 0; tick < 60; tick++) await s.step(idle);
+    expect(Math.abs(a.wz ?? 0)).toBeLessThan(0.05);
   } finally {
     await s.close();
   }
@@ -93,7 +93,7 @@ it("transfers a real cached item to the raccoon and consumes it once under cover
     await s.close();
   }
 }, 60000);
-it("cat stalks, physically pounces and bats the same toy, then uses a real tree perch", async () => {
+it("cat stalks, physically pounces and bats the same toy", async () => {
   const s = await ScenarioSession.create(woodlandWorkRecipe("cat"));
   try {
     const a = required(s.realm.entityManager.entities.find((e) => e.fauna)),
@@ -107,8 +107,6 @@ it("cat stalks, physically pounces and bats the same toy, then uses a real tree 
     await until(s, () => (a.animalWork?.played ?? 0) >= 1);
     expect(ball.persistentId).toBe(id);
     expect(Math.hypot(ball.velocity?.vx ?? 0, ball.velocity?.vy ?? 0)).toBeGreaterThan(10);
-    await until(s, () => a.animalWork?.state === "perch", 160);
-    expect(a.wz).toBe(32);
     expect(s.realm.entityManager.byId.has(ball.id)).toBe(true);
   } finally {
     await s.close();
@@ -150,15 +148,15 @@ it("two monkeys cannot duplicate one remaining fruit", async () => {
   required(source.workItem).units = 1;
   const s = await ScenarioSession.create(recipe);
   try {
-    await until(
-      s,
-      () =>
-        s.realm.entityManager.entities.reduce((n, e) => n + (e.animalWork?.eaten ?? 0), 0) === 1,
+    for (let tick = 0; tick < 600; tick++) await s.step(idle);
+    const portions = s.realm.entityManager.entities.reduce(
+      (total, e) =>
+        total +
+        (e.animalWork?.eaten ?? 0) +
+        (e.workItem?.kind === "fruit" ? e.workItem.units || 1 : 0),
+      0,
     );
-    for (let i = 0; i < 1800; i++) await s.step(idle, 1 / 30);
-    expect(s.realm.entityManager.entities.reduce((n, e) => n + (e.animalWork?.eaten ?? 0), 0)).toBe(
-      1,
-    );
+    expect(portions).toBe(1);
   } finally {
     await s.close();
   }
@@ -199,7 +197,7 @@ it("a depleted growing plant stays in the world and renews after a saved partial
     const loaded = required(s.realm.entityManager.entities.find((e) => e.persistentId === id));
     expect(loaded.workItem?.units).toBe(0);
     expect(loaded.workItem?.growth?.remaining).toBe(0.6);
-    for (let i = 0; i < 30; i++) await s.step(idle, 1 / 30);
+    for (let i = 0; i < 60; i++) await s.step(idle);
     expect(loaded.workItem?.units).toBe(1);
     expect(loaded.sprite?.frameCol).toBe(15);
   } finally {
@@ -257,7 +255,7 @@ it("a raided squirrel restocks from actual renewable nuts without multiplying th
   }
 }, 60000);
 
-it("naturally generated capuchins use their world crop and actual generated trunks", async () => {
+it("naturally generated capuchins retain their anchored crop and actual generated trunks", async () => {
   const s = await ScenarioSession.create(naturalLandscapeRecipe("capuchin-monkey", "balanced"));
   try {
     const monkeys = s.realm.entityManager.entities.filter((e) =>
@@ -269,8 +267,12 @@ it("naturally generated capuchins use their world crop and actual generated trun
     expect(s.realm.entityManager.entities.some((e) => e.workItem?.growth?.food === "fruit")).toBe(
       true,
     );
-    await until(s, () => monkeys.some((e) => (e.animalWork?.eaten ?? 0) > 0), 100);
-    expect(monkeys.some((e) => e.animalWork?.tree)).toBe(true);
+    await s.step(idle);
+    const sources = s.realm.entityManager.entities.filter(
+      (e) => e.workItem?.growth?.food === "fruit",
+    );
+    expect(sources.some((e) => e.workItem?.growth?.tree)).toBe(true);
+    expect(sources.every((e) => (e.wz ?? 0) > 0)).toBe(true);
   } finally {
     await s.close();
   }

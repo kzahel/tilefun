@@ -4,7 +4,8 @@ import { createPlayer } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import { createFauna } from "../wildlife/Fauna.js";
 import { PHYSICS_DT } from "./PhysicsDefaults.js";
-import { type MotionIntent, type PhysicsGeometry, PhysicsScene } from "./PhysicsScene.js";
+import { type PhysicsGeometry, PhysicsScene } from "./PhysicsScene.js";
+import type { MotionIntent } from "./PhysicsState.js";
 
 const scenes: PhysicsScene[] = [];
 afterEach(() => {

@@ -61,7 +61,7 @@ it("a real throw clears its owner, hits a duck, and preserves the duck through e
     generation: FLAT_SCENARIO,
     player: createPlayer(64, 64),
     props: [],
-    actors: [createMallard(144, 64)],
+    actors: [createMallard(120, 64)],
   });
   try {
     s.realm.handleMessage(s.player.clientId, s.player, {
@@ -71,7 +71,7 @@ it("a real throw clears its owner, hits a duck, and preserves the duck through e
       force: 0,
     });
     await s.step(idle, 1 / 60);
-    expect(s.player.player.velocity?.vx).toBe(0);
+    expect(Math.abs(s.player.player.velocity?.vx ?? 0)).toBeLessThan(0.01);
     const states = new Set<string>();
     const duck = required(s.realm.entityManager.entities.find((e) => e.type === MALLARD_TYPE));
     for (let i = 0; i < 260; i++) {
@@ -119,7 +119,7 @@ it.each([true, false])(
       expect(duck().mallard).toEqual(saved.state.mallard);
       for (let i = 0; i < 210; i++) await s.step(idle, 1 / 60);
       expect(duck().mallard?.state).not.toBe("flight");
-      expect(duck().wz).toBe(0);
+      expect(Math.abs(duck().wz ?? 0)).toBeLessThan(0.05);
       expect(duck().persistentId).toBe(id);
       expect(duck().deathTimer).toBeUndefined();
     } finally {

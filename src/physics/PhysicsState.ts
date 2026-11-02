@@ -1,3 +1,13 @@
+export interface MotionIntent {
+  vx: number;
+  vy: number;
+  jump?: boolean;
+  jumpPressed?: boolean;
+  /** Prescribed flight/platform altitude; still integrated in the shared scene. */
+  altitude?: number;
+  heading?: number;
+  controlUntil?: number;
+}
 /** Bounded numerical replay state; no WASM world or gameplay objects on the wire. */
 export const MAX_PREDICTION_BODIES = 128;
 export const PREDICTION_RADIUS = 160;

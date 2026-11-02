@@ -1446,7 +1446,27 @@ export class Realm {
             Math.hypot(e.position.wx - player.position.wx, e.position.wy - player.position.wy) < 36,
         );
         const ball = reusable ?? createBall(player.position.wx, player.position.wy);
-        ball.position = { ...player.position };
+        // Start beyond the fixed player hull instead of spawning a physical
+        // projectile inside its thrower. A blocked hand cannot create a body in a wall.
+        const radius = (ball.collider?.width ?? 4) / 2;
+        const dx = Math.cos(baseAngle),
+          dy = Math.sin(baseAngle),
+          c = player.collider;
+        const reach = c
+          ? Math.min(
+              (c.width / 2 + radius + 0.1) / Math.max(1e-6, Math.abs(dx)),
+              (c.height / 2 + radius + 0.1) / Math.max(1e-6, Math.abs(dy)),
+            )
+          : radius + 1;
+        const x = player.position.wx + (c?.offsetX ?? 0) + dx * reach;
+        const y = player.position.wy + (c?.offsetY ?? 0) - (c?.height ?? 0) / 2 + dy * reach;
+        const z = (player.wz ?? 0) + 8;
+        if (this.physicsScene && !this.physicsScene.canPlaceSphere(x, y, z, radius, reusable?.id))
+          break;
+        ball.position = {
+          wx: x - (ball.collider?.offsetX ?? 0),
+          wy: y - (ball.collider?.offsetY ?? 0) + (ball.collider?.height ?? 4) / 2,
+        };
         const order = ball.workItem?.ballOrder;
         ball.workItem = {
           ...freshBallWork(owner, player.position),
@@ -1456,7 +1476,7 @@ export class Realm {
         delete ball.deathTimer;
         ball.ballThrowerId = player.id;
         ball.velocity = { vx: Math.cos(baseAngle) * xySpeed, vy: Math.sin(baseAngle) * xySpeed };
-        ball.wz = (player.wz ?? 0) + 8; // throw from chest height
+        ball.wz = z;
         ball.jumpVZ = zSpeed;
         ball.jumpZ = 8;
         if (!reusable) this.entityManager.spawn(ball);

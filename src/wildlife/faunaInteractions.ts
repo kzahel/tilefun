@@ -43,7 +43,7 @@ export function restoreFaunaPose(animal: Entity): void {
 }
 /** One alarm through alert, escape and recovery; preserve any already committed walk. */
 export function startleFauna(animal: Entity, from: PositionComponent): boolean {
-  animal.desiredVelocity ??= { vx: 0, vy: 0 };
+  animal.motionIntent ??= { vx: 0, vy: 0 };
   const ai = animal.fauna;
   if (!ai || animal.wanderAI?.state === "ridden" || ai.alarmFrom || ai.state === "recover")
     return false;
@@ -53,7 +53,7 @@ export function startleFauna(animal: Entity, from: PositionComponent): boolean {
     ai.state = "startle";
     ai.actionElapsed = 0;
     ai.timer = 0.4;
-    if (animal.desiredVelocity) animal.desiredVelocity.vx = animal.desiredVelocity.vy = 0;
+    if (animal.motionIntent) animal.motionIntent.vx = animal.motionIntent.vy = 0;
     restoreFaunaPose(animal);
   }
   return true;
@@ -64,6 +64,7 @@ export function setFaunaRidden(animal: Entity, ridden: boolean): void {
   const ai = animal.fauna;
   if (!ai) return;
   delete ai.motion;
+  if (animal.motionIntent) delete animal.motionIntent.altitude;
   delete ai.actionElapsed;
   delete ai.alarmFrom;
   ai.state = "rest";
@@ -80,13 +81,13 @@ export function setFaunaRidden(animal: Entity, ridden: boolean): void {
 }
 /** Fixed-speed grounded movement. Collision always owns actual XY; no catch-up teleport. */
 export function prepareFaunaTravel(animal: Entity, dt: number): void {
-  animal.desiredVelocity ??= { vx: 0, vy: 0 };
+  animal.motionIntent ??= { vx: 0, vy: 0 };
   const ai = animal.fauna,
     p = faunaProfile(animal.type),
     motion = ai?.motion;
-  if (!ai || !motion || !p || !animal.desiredVelocity || dt <= 0) return;
+  if (!ai || !motion || !p || !animal.motionIntent || dt <= 0) return;
   if (motion.workPaused) {
-    animal.desiredVelocity.vx = animal.desiredVelocity.vy = 0;
+    animal.motionIntent.vx = animal.motionIntent.vy = 0;
     return;
   }
   const old = motion.elapsed;
@@ -98,17 +99,18 @@ export function prepareFaunaTravel(animal: Entity, dt: number): void {
     const start = Math.max(push, old),
       end = Math.min(land, motion.elapsed);
     const fraction = Math.max(0, end - start) / Math.max(0.0001, land - start);
-    animal.desiredVelocity.vx = ((ai.target.wx - animal.position.wx) * fraction) / dt;
-    animal.desiredVelocity.vy = ((ai.target.wy - animal.position.wy) * fraction) / dt;
+    animal.motionIntent.vx = ((ai.target.wx - animal.position.wx) * fraction) / dt;
+    animal.motionIntent.vy = ((ai.target.wy - animal.position.wy) * fraction) / dt;
     const t = Math.max(0, Math.min(1, (motion.elapsed - push) / (land - push)));
     const height = Math.sin(Math.PI * t) * (motion.lift ?? p.hop.height);
-    animal.wz = (motion.startZ ?? 0) + ((motion.endZ ?? 0) - (motion.startZ ?? 0)) * t + height;
+    animal.motionIntent.altitude =
+      (motion.startZ ?? 0) + ((motion.endZ ?? 0) - (motion.startZ ?? 0)) * t + height;
     animal.jumpZ = height;
     return;
   }
   if (animal.animalWork?.state === "pounce" || animal.animalWork?.state === "hop") {
     const t = motion.elapsed / motion.duration;
-    animal.wz =
+    animal.motionIntent.altitude =
       (motion.startZ ?? 0) +
       ((motion.endZ ?? 0) - (motion.startZ ?? 0)) * t +
       Math.sin(Math.PI * t) * (motion.lift ?? 0);
@@ -122,11 +124,12 @@ export function prepareFaunaTravel(animal: Entity, dt: number): void {
       (motion.escaping ? 2 : 1),
     distance / dt,
   );
-  animal.desiredVelocity.vx = distance > 0.001 ? (dx / distance) * speed : 0;
-  animal.desiredVelocity.vy = distance > 0.001 ? (dy / distance) * speed : 0;
+  animal.motionIntent.vx = distance > 0.001 ? (dx / distance) * speed : 0;
+  animal.motionIntent.vy = distance > 0.001 ? (dy / distance) * speed : 0;
 }
 export function settleFauna(animal: Entity, _groundZ?: number): void {
-  animal.desiredVelocity ??= { vx: 0, vy: 0 };
+  animal.motionIntent ??= { vx: 0, vy: 0 };
+  delete animal.motionIntent.altitude;
   const ai = animal.fauna;
   if (!ai) return;
   const alarm = !!ai.alarmFrom,
@@ -140,7 +143,7 @@ export function settleFauna(animal: Entity, _groundZ?: number): void {
   }
   delete ai.motion;
   if (!queued) delete ai.alarmFrom;
-  if (animal.desiredVelocity) animal.desiredVelocity.vx = animal.desiredVelocity.vy = 0;
+  if (animal.motionIntent) animal.motionIntent.vx = animal.motionIntent.vy = 0;
   if (animal.wanderAI) animal.wanderAI.state = alarm ? "scared" : "idle";
   restoreFaunaPose(animal);
 }
