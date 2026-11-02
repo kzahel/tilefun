@@ -1,6 +1,6 @@
 # Rapier replacement and early decision sequence
 
-Status: owner-approved direction; implementation not started, 2026-11-02.
+Status: owner-approved; slices 1–3 authorized and in progress, 2026-11-02.
 Parent sequencing plan. Owner: [physics engine](../topics/physics-engine.md).
 
 ## Outcome and scope
@@ -177,8 +177,7 @@ Broader traffic and articulated vehicle dynamics follow only after this proof.
 
 ## Current checkpoint
 
-This change records the plan only. No new backend mode, persistent ordinary-game
-physics world, benchmark results, cutover decision or deletion is implemented.
-Documentation validation: diff review and `git diff --check`; no runtime tests are
-needed for this planning change. Next implementation is slice 1, with a first
-performance smoke before expanding the contact matrix.
+The owner authorized implementation through the early decision, with incremental
+commits. [202](202-persistent-realm-collision-proof.md) records execution, baseline,
+checks and remaining gaps. Default cutover/deletion and dynamic-car expansion are
+later slices; no qualification decision has been reached yet.
