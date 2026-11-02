@@ -1,5 +1,9 @@
 # Embedded engine labs
 
+[199](../tactical/199-idle-player-head-support.md) adds **Land and stand on player**
+to the cooperative reference, including raw falling/resting, exact replay and
+delayed Realm checks. It accompanies the ordinary game's idle capsule-support fix.
+
 [198](../tactical/198-character-support-and-jumping.md) keeps the ordinary opt-in
 backend and cooperative lab aligned on horizontal-only character pushes, support
 classification and actual ceiling handling. Two additional shared scripts expose

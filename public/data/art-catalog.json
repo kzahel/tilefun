@@ -35491,6 +35491,14 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:368"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/rapier/GameCharacterPhysics.ts:369"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/rendering/PlayerPresentation.ts:9"
         },
         {

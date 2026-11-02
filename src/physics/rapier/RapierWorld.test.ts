@@ -18,6 +18,60 @@ function step(world: RapierWorld, frames: number, input = idle) {
 }
 
 describe("experimental shared Rapier backend", () => {
+  it("lands from a moving approach without kicking the supporting player away", () => {
+    for (const rider of [0, 1] as const)
+      for (const [offset, walk] of [
+        [-1, 15],
+        [-1.3, 20],
+      ] as const) {
+        const world = new RapierWorld(2, 0);
+        try {
+          step(world, 30);
+          const y = world.motorFor(0).y;
+          const lower = { x: -15, y, z: 0 },
+            upper = { x: -15 + offset, y: y + 2 * PLAYER_FOOT_OFFSET + 0.8, z: 0 };
+          world.configurePair(rider === 0 ? [upper, lower] : [lower, upper], null);
+          let drift = 0;
+          for (let tick = 0; tick < 180; tick++) {
+            const input = tick < walk ? { ...idle, x: 1 } : idle;
+            world.step(rider === 0 ? input : idle, rider === 1 ? input : idle);
+            const body = world.motorFor(rider === 0 ? 1 : 0);
+            drift = Math.max(drift, Math.hypot(body.x + 15, body.z));
+          }
+          expect(drift).toBeLessThan(0.002);
+          expect(world.motorFor(rider).y - world.motorFor(rider === 0 ? 1 : 0).y).toBeGreaterThan(
+            1.2,
+          );
+        } finally {
+          world.dispose();
+        }
+      }
+  });
+  it("lands and rests on a player's head without displacing the supporting player", () => {
+    for (const rider of [0, 1] as const)
+      for (const offset of [0, 0.15]) {
+        const world = new RapierWorld(2, 0);
+        try {
+          step(world, 30);
+          const lower = { x: -15, y: world.motorFor(0).y, z: 0 };
+          const upper = { x: lower.x + offset, y: lower.y + 2 * PLAYER_FOOT_OFFSET + 0.8, z: 0 };
+          world.configurePair(rider === 0 ? [upper, lower] : [lower, upper], null);
+          let drift = 0,
+            minHeight = Infinity;
+          for (let tick = 0; tick < 180; tick++) {
+            world.step(idle, idle);
+            const support = world.motorFor(rider === 0 ? 1 : 0),
+              top = world.motorFor(rider);
+            drift = Math.max(drift, Math.hypot(support.x - lower.x, support.z - lower.z));
+            if (tick > 60) minHeight = Math.min(minHeight, top.y - support.y);
+          }
+          expect(drift).toBeLessThan(0.002);
+          expect(minHeight).toBeGreaterThan(1.2);
+        } finally {
+          world.dispose();
+        }
+      }
+  });
   it("resolves simultaneous rising/falling cap approaches before committing either motor", () => {
     const world = new RapierWorld(2, 0);
     try {

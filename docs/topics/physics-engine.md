@@ -45,6 +45,13 @@ costs, and dynamic contacts may increase work. No Chromebook gain is established
 
 ## Opt-in game characters (197)
 
+[199](../tactical/199-idle-player-head-support.md) fixes the ordinary capsule backend's
+idle lower motor moving sideways to clear an overhead rider after landing. Idle
+nonascending support queries ignore that separated overhead player; horizontal/upward
+intent retains obstacle checks. Full falling-and-resting regressions cover both game
+hulls and motor orders. **Land and stand on player** exposes the reference through
+the cooperative lab's shared script/replay path.
+
 [198](../tactical/198-character-support-and-jumping.md) fixes rider walking feeding
 sideways pushes into the supporting character, and blocked push guards arresting
 jumps. Side eligibility uses vertical side extents (capsule caps remain support),

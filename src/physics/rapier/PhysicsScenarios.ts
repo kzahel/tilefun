@@ -14,6 +14,7 @@ export type PairScenario =
   | "player-glance"
   | "player-push"
   | "player-stack"
+  | "player-land"
   | "player-jump";
 export const PAIR_SCENARIOS: { id: PairScenario; name: string }[] = [
   { id: "push", name: "Push while watched" },
@@ -21,6 +22,7 @@ export const PAIR_SCENARIOS: { id: PairScenario; name: string }[] = [
   { id: "push-player", name: "Push into player" },
   { id: "player-push", name: "Players pushing / release" },
   { id: "player-stack", name: "Walk across player shoulders" },
+  { id: "player-land", name: "Land and stand on player" },
   { id: "player-jump", name: "Jump against pinned player" },
   { id: "player-head-on", name: "Players head-on" },
   { id: "player-glance", name: "Players glancing / release" },
@@ -51,36 +53,42 @@ export function pairObstacles(scene: PairScenario): PhysicsShape[] {
 export function setupPair(world: RapierWorld, scene: PairScenario) {
   const y = PLAYER_FOOT_OFFSET + 0.04;
   world.configurePair(
-    scene === "player-stack"
+    scene === "player-land"
       ? [
-          { x: -15, y: y + 2 * PLAYER_FOOT_OFFSET + 0.02, z: 0 },
+          { x: -14.95, y: y + 2 * PLAYER_FOOT_OFFSET + 0.8, z: 0 },
           { x: -15, y, z: 0 },
         ]
-      : scene === "player-jump"
+      : scene === "player-stack"
         ? [
-            { x: -15.58, y, z: 0 },
+            { x: -15, y: y + 2 * PLAYER_FOOT_OFFSET + 0.02, z: 0 },
             { x: -15, y, z: 0 },
           ]
-        : scene === "lift"
+        : scene === "player-jump"
           ? [
-              { x: -3.65, y: y + 0.2, z: 6.5 },
-              { x: -2.35, y: y + 0.2, z: 6.5 },
+              { x: -15.58, y, z: 0 },
+              { x: -15, y, z: 0 },
             ]
-          : scene === "player-head-on" || scene === "player-glance" || scene === "player-push"
+          : scene === "lift"
             ? [
-                { x: -16, y, z: 0 },
-                { x: -14, y, z: scene === "player-glance" ? 0.1 : 0 },
+                { x: -3.65, y: y + 0.2, z: 6.5 },
+                { x: -2.35, y: y + 0.2, z: 6.5 },
               ]
-            : [
-                { x: -14, y, z: 0 },
-                { x: scene === "push-player" ? -11 : -10, y, z: 0 },
-              ],
+            : scene === "player-head-on" || scene === "player-glance" || scene === "player-push"
+              ? [
+                  { x: -16, y, z: 0 },
+                  { x: -14, y, z: scene === "player-glance" ? 0.1 : 0 },
+                ]
+              : [
+                  { x: -14, y, z: 0 },
+                  { x: scene === "push-player" ? -11 : -10, y, z: 0 },
+                ],
     scene === "lift" ||
       scene === "start-stop" ||
       scene === "player-head-on" ||
       scene === "player-glance" ||
       scene === "player-push" ||
       scene === "player-stack" ||
+      scene === "player-land" ||
       scene === "player-jump"
       ? null
       : { x: -12.5, y: 0.42, z: 0 },
@@ -93,6 +101,7 @@ export function setupPair(world: RapierWorld, scene: PairScenario) {
 }
 /** Tick-addressed inputs, shared by visual playback and native tests. */
 export function pairInput(scene: PairScenario, seat: PhysicsSeat, tick: number): PhysicsInput {
+  if (scene === "player-land") return NEUTRAL;
   if (scene === "player-stack" || scene === "player-jump")
     return seat === 0 && tick >= 30 && tick < 90
       ? { x: 1, z: 0, jump: scene === "player-jump" && tick >= 45 && tick < 60 }

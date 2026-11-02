@@ -206,6 +206,7 @@ test("two predicted views share a Worker Realm, step scripts, accept either seat
     fullPage: true,
   });
   for (const [name, tick, capture, tolerance] of [
+    ["Land and stand on player", 120, "landing-on-player.png", 0.002],
     ["Walk across player shoulders", 38, "walking-on-shoulders.png", 0.002],
     ["Jump against pinned player", 63, "jumping-beside-pinned-player.png", 0.02],
   ] as const) {

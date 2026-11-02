@@ -14,6 +14,7 @@ it.each([
   "player-push",
   "player-stack",
   "player-jump",
+  "player-land",
 ] as const)("restores and exactly replays both motors and contacts in %s", (scene) => {
   const authority = new RapierWorld(2, 0),
     replay = new RapierWorld(2, 0);

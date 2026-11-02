@@ -332,18 +332,46 @@ class GameCharacterPhysics implements CharacterMotionBackend {
             }
           }
       let supportId: number | undefined;
+      const actorByCollider = new Map(
+        [...actors.values()].map((actor) => [
+          actor.collider.handle,
+          { ...actor, centerY: actor.collider.translation().y },
+        ]),
+      );
       const movingActor = (collider: RAPIER.Collider) =>
         collider.handle === character.handle
           ? entity
-          : [...actors.values()].find((actor) => actor.collider.handle === collider.handle)?.entity;
-      const filter = (collider: RAPIER.Collider, exclude?: RAPIER.Collider) => {
+          : actorByCollider.get(collider.handle)?.entity;
+      const filter = (
+        collider: RAPIER.Collider,
+        exclude?: RAPIER.Collider,
+        intent?: RAPIER.Vector,
+      ) => {
         const mover = movingActor(collider);
+        const moverY = collider.translation().y;
+        const sideHalf =
+          collider.handle === character.handle
+            ? hull.sideHalfHeight
+            : actorByCollider.get(collider.handle)?.sideHalfHeight;
         return (other: RAPIER.Collider) => {
           if (
             other.handle === character.handle ||
             other.handle === collider.handle ||
             other.handle === exclude?.handle ||
             (collider.handle === character.handle && other.handle === target?.collider.handle)
+          )
+            return false;
+          const peer = actorByCollider.get(other.handle);
+          // An idle lower motor must not manufacture sideways motion to clear
+          // its rider. Upward or horizontal intent still queries that obstacle.
+          if (
+            mover?.type === "player" &&
+            peer?.entity.type === "player" &&
+            sideHalf !== undefined &&
+            (intent?.y ?? 0) <= 0 &&
+            Math.hypot(intent?.x ?? 0, intent?.z ?? 0) < 1e-8 &&
+            peer.centerY > moverY &&
+            !characterSidesOverlap(moverY, sideHalf, peer.centerY, peer.sideHalfHeight, SKIN)
           )
             return false;
           if (
@@ -410,7 +438,7 @@ class GameCharacterPhysics implements CharacterMotionBackend {
           move,
           undefined,
           undefined,
-          filter(collider, exclude),
+          filter(collider, exclude, move),
         );
         const resolved = controller.computedMovement();
         // KCC's grounded flag can anticipate support before the requested fall
@@ -435,7 +463,7 @@ class GameCharacterPhysics implements CharacterMotionBackend {
           undefined,
           collider,
           undefined,
-          filter(collider),
+          filter(collider, undefined, delta),
         );
       };
       let move = query(character, desired);
