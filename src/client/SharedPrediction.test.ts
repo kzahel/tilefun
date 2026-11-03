@@ -365,6 +365,49 @@ it("keeps a touching player and car coherent without lifting them off solved sup
   expect(car?.wz).toBeCloseTo(actualCar?.wz ?? Infinity, 2);
 });
 
+it.each([18, 25])(
+  "does not pull a stationary NPC toward an approaching player after a client stall at tick %i",
+  async (stall) => {
+    const npc = createChicken(80, 100);
+    if (npc.wanderAI) npc.wanderAI.timer = 1000;
+    const f = await setup({
+      version: 1,
+      id: "first-npc-contact",
+      generation: FLAT_SCENARIO,
+      player: createPlayer(40, 100),
+      props: [],
+      actors: [npc],
+    });
+    const npcId = f.view.serverEntities.find((e) => e.type === "chicken")?.id;
+    const shown = (alpha = 1) => f.predictor.presentEntities(alpha, f.view.serverEntities);
+    let previous = shown().find((e) => e.id === npcId)?.position.wx ?? Infinity;
+    for (let tick = 1; tick <= 90; tick++) {
+      const seq = tick + 1,
+        movement = { ...idle, dx: 1 };
+      f.input(seq, movement);
+      f.s.input(encodeClientMessage({ type: "player-input", seq, ...movement }));
+      f.s.tick();
+      // Worker authority continues held movement while the main thread stalls.
+      if (tick === stall) for (let i = 0; i < 8; i++) f.s.tick();
+      if (tick % 3 === 0) f.receive(f.s.frames());
+      for (const alpha of [0, 0.5, 1]) {
+        const displayed = shown(alpha),
+          target = displayed.find((e) => e.id === npcId),
+          player = displayed.find((e) => e.id === f.s.player.player.id);
+        expect(target).toBeDefined();
+        expect(player).toBeDefined();
+        const x = target?.position.wx ?? -Infinity;
+        expect(x - previous).toBeGreaterThanOrEqual(-0.01);
+        expect(x).toBeGreaterThanOrEqual(79.99);
+        // The same rigid correction keeps the solved contact gap intact.
+        expect(x - (player?.position.wx ?? Infinity)).toBeGreaterThan(9.4);
+        previous = x;
+      }
+    }
+    expect(previous).toBeGreaterThan(95); // Pushing remains effective.
+  },
+);
+
 it("keeps a delayed second player's contact component coherent at render fractions while the host reverses", async () => {
   const f = await setup();
   for (const e of [...f.s.realm.entityManager.entities])

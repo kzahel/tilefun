@@ -1,6 +1,17 @@
 # Player prediction and moving contacts
 
-## Open: first-contact car display snap (2026-11-03)
+## First-contact display anchor (210)
+
+[210](../tactical/210-first-contact-display-anchor.md) fixes the reproduced inward
+NPC snap when a client stall leaves a player-only display correction at first
+contact. A newly contacted actor anchors the group's shared correction; subsequent
+reconciliation uses that anchor's own displacement. Its interpolation interval
+starts at the previous pose, so fractional render samples do not rewind a static
+NPC toward the player. The physical push and solved relative geometry remain.
+Contact geometry takes precedence over the incompatible old player-only offset.
+49 focused native tests pass; production qualification is in progress.
+
+### Original car observation
 
 Owner reports a small jump when first pushing a car. A native ordinary
 ScenarioSession/PlayerPredictor reproduction with an eight-tick authority stall
@@ -10,9 +21,8 @@ pushing remains smooth. `presentEntities` abruptly applies the player's residual
 horizontal display correction when the car joins the solved contact component;
 the previously unconnected car had no such offset. Existing tests check connected
 poses and pre-contact isolation, but do not check continuity across that transition.
-Next: preserve display continuity when contact membership/source changes while
-maintaining coherent contact geometry; keep physical pushing unchanged. This is
-an investigation result, not a delivered fix or a physical-device reproduction.
+210 addresses this finding alongside the NPC report. This original investigation
+is native evidence, not a physical-device reproduction.
 
 [209](../tactical/209-car-driving-and-autonomous-traffic.md) restores rolling car
 controls in the shared kernel. Snapshots include target drive speed and steering;

@@ -126,6 +126,8 @@ export class PlayerPredictor {
   private activeUntil = -Infinity;
   private correction = { wx: 0, wy: 0, wz: 0, vx: 0, vy: 0, jumpVZ: 0 };
   private displayError = { x: 0, y: 0, z: 0, at: 0 };
+  private correctionAnchor: number | undefined;
+  private correctionMembers = new Set<number>();
   private readonly lastPresentation = new Map<number, Entity>();
   private diagnostics: ReconcileDiagnostics | null = null;
 
@@ -175,6 +177,8 @@ export class PlayerPredictor {
     this.stateHistory.clear();
     this.clockEpoch = {};
     this.displayError = { x: 0, y: 0, z: 0, at: this.clock() };
+    this.correctionAnchor = undefined;
+    this.correctionMembers.clear();
     this.lastPresentation.clear();
     this.activeUntil = -Infinity;
     this.diagnostics = null;
@@ -193,6 +197,8 @@ export class PlayerPredictor {
     this.geometry = this.geometryWorld = this.geometryProps = undefined;
     this.stateHistory.clear();
     this.retiredEpochs.clear();
+    this.correctionAnchor = undefined;
+    this.correctionMembers.clear();
     this.lastPresentation.clear();
     this.status = "waiting";
   }
@@ -322,6 +328,8 @@ export class PlayerPredictor {
       this.predicted = clone(request.player);
       this.predictedMount = request.entities.find((e) => e.id === request.player.parentId) ?? null;
       this.published.clear();
+      this.correctionAnchor = undefined;
+      this.correctionMembers.clear();
       this.status = state.omitted ? "overflow" : missing ? "waiting" : "history-gap";
       this.diagnostics = {
         ackSeq: request.ack,
@@ -400,6 +408,9 @@ export class PlayerPredictor {
     this.replay = undefined;
     this.status = "ready";
     this.appliedInputTick = this.inputTick;
+    const beforeBodies = this.published,
+      beforeMembers = this.correctionMembers,
+      oldError = this.error();
     this.publish(job.request.player);
     const after = this.predicted;
     if (!after) return;
@@ -411,11 +422,23 @@ export class PlayerPredictor {
       vy: (job.before.velocity?.vy ?? 0) - (after.velocity?.vy ?? 0),
       jumpVZ: (job.before.jumpVZ ?? 0) - (after.jumpVZ ?? 0),
     };
-    const oldError = this.error();
+    // Rebase the shared display transform around the contact anchor, not always
+    // the player. Otherwise an unmoving NPC inherits unrelated player error.
+    const anchor = this.correctionAnchor ?? after.id,
+      anchorBefore = beforeBodies.get(anchor),
+      anchorAfter = this.published.get(anchor),
+      joining = !beforeMembers.has(anchor),
+      retained = joining ? { x: 0, y: 0, z: 0 } : oldError;
+    // A new anchor's whole interpolation interval must begin at its old pose;
+    // preserving only the end would pull it backward at fractional renders.
+    const target = joining
+        ? (anchorAfter?.prevPosition ?? anchorAfter?.position)
+        : anchorAfter?.position,
+      targetZ = joining ? (anchorAfter?.prevWz ?? anchorAfter?.wz) : anchorAfter?.wz;
     const offset = {
-      x: this.correction.wx + oldError.x,
-      y: this.correction.wy + oldError.y,
-      z: this.correction.wz + oldError.z,
+      x: (anchorBefore && target ? anchorBefore.position.wx - target.wx : 0) + retained.x,
+      y: (anchorBefore && target ? anchorBefore.position.wy - target.wy : 0) + retained.y,
+      z: (anchorBefore && anchorAfter ? (anchorBefore.wz ?? 0) - (targetZ ?? 0) : 0) + retained.z,
     };
     this.displayError = {
       ...(Math.hypot(offset.x, offset.y, offset.z) < 32 ? offset : { x: 0, y: 0, z: 0 }),
@@ -483,6 +506,25 @@ export class PlayerPredictor {
     this.predicted.prevJumpZ = body?.prevJumpZ ?? this.predicted.jumpZ ?? 0;
     this.predictedMount = parent ? clone(parent) : null;
     this.published = new Map([...this.bodies].map(([id, e]) => [id, clone(e)]));
+    const root = this.predicted.parentId ?? this.predicted.id,
+      touching = this.touchingIds(),
+      incoming = [...touching].find(
+        (id) => id !== root && id !== this.predicted?.id && !this.correctionMembers.has(id),
+      );
+    // A newly touched actor was drawn without the player's correction. Anchor
+    // the merged group there instead of pulling that actor toward the player.
+    if (incoming !== undefined) {
+      this.correctionAnchor = incoming;
+      this.displayError = { x: 0, y: 0, z: 0, at: this.clock() };
+    } else if (
+      this.correctionAnchor === undefined ||
+      !touching.has(this.correctionAnchor) ||
+      !this.published.has(this.correctionAnchor)
+    ) {
+      this.correctionAnchor =
+        [...touching].find((id) => id !== root && id !== this.predicted?.id) ?? root;
+    }
+    this.correctionMembers = touching;
     if (this.scene) {
       this.stateHistory.set(this.scene.physicsTick, clone(this.predicted));
       while (this.stateHistory.size > MAX_HISTORY) {
@@ -537,6 +579,13 @@ export class PlayerPredictor {
           this.scene?.bodyState(anchor ?? -1)?.supportId !== undefined))
     );
   }
+  private touchingIds(): Set<number> {
+    const player = this.predicted;
+    const touching = new Set<number>(player ? [player.parentId ?? player.id, player.id] : []);
+    for (const id of touching)
+      for (const neighbor of this.scene?.contactIds(id) ?? []) touching.add(neighbor);
+    return touching;
+  }
   presentationClock(presentationSeconds: number): CameraPresentationTime | null {
     if (!this.active || !this.scene) return null;
     // Reconciliation may rebase the simulation tick in either direction. The
@@ -572,9 +621,7 @@ export class PlayerPredictor {
     }
     for (const id of component)
       for (const neighbor of scene.contactIds(id) ?? []) component.add(neighbor);
-    const touching = new Set<number>([root, player.id]);
-    for (const id of touching)
-      for (const neighbor of scene.contactIds(id) ?? []) touching.add(neighbor);
+    const touching = this.correctionMembers;
     const error = this.error();
     // A correction must not lift an entire contact stack off its solved floor.
     let floorSupported = false;

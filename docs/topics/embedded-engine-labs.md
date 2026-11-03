@@ -1,5 +1,10 @@
 # Embedded engine labs
 
+[210](../tactical/210-first-contact-display-anchor.md) changes the shared predictor's
+contact correction anchor for game and lab consumers. Stationary contacted actors
+no longer inherit unrelated player offsets; native stalled-client/fractional-render
+checks own the transition behavior. No page-specific collision or smoothing path.
+
 [209](../tactical/209-car-driving-and-autonomous-traffic.md) restores Workshop's
 Driving and traffic tool using a data-only road/crossing fixture in World Geometry.
 Canonical LaneGraph, Realm planning, shared motor and normal Worker frames own NPC
