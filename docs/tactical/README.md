@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [206 Realm phases and physical edits](206-realm-phases-and-physical-edits.md) | Active: explicit tick phases and physical edit APIs after205; preserve behavior and commit slices |
 | [205 Physics reset](205-physics-reset.md) | Delivered: shared 60Hz default/prediction, gravity-only tuning, legacy deletion; 4,545 native/seven browser checks, Chromebook evidence and Sol review; crowd headroom remains |
 | [204 Unified physics architecture audit](204-unified-physics-architecture-audit.md) | Audit complete; owner prefers one default configuration and simplification/removal of old permutations; shared time/body/prediction first, full equipment compatibility no longer a baseline requirement; implementation not started |
 | [203 Physics churn and simplified models](203-physics-copy-and-model-comparison.md) | Native comparison delivered: descriptor caching alone does not help; per-actor refresh/neighborhood costs remain; naive batching fails contacts; production unchanged |

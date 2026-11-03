@@ -1,6 +1,5 @@
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
-import { TerrainId } from "../autotile/TerrainId.js";
 import { applyPlayerModel } from "../characters/PlayerModels.js";
 import {
   CHUNK_SIZE_PX,
@@ -24,7 +23,7 @@ import {
   aabbsOverlap,
   getEntityAABB,
 } from "../entities/collision.js";
-import type { Entity, PositionComponent } from "../entities/Entity.js";
+import type { Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { findWalkableSpawn, spawnInitialChickens } from "../entities/EntitySpawner.js";
@@ -42,6 +41,7 @@ import { NaturalStrategy } from "../generation/regional/NaturalStrategy.js";
 import { regionalStart } from "../generation/regional/RegionalSpawn.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
+import type { Movement } from "../input/ActionManager.js";
 import { buildingDoor } from "../interiors/BuildingDoors.js";
 import {
   furnitureAsset,
@@ -61,7 +61,7 @@ import {
 import { withInteriorGems } from "../interiors/InteriorGems.js";
 import { updateResident } from "../interiors/ResidentBehavior.js";
 import { TreeBrushEditor } from "../patterns/TreeBrushEditor.js";
-import { actorScope, durableId } from "../persistence/ActorRecords.js";
+import { actorScope } from "../persistence/ActorRecords.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import { PERSISTENCE_BUDGET } from "../persistence/PersistenceBudget.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
@@ -80,22 +80,18 @@ import { RailwayStrategy } from "../railway/RailwayStrategy.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import { VehicleRegistry, type VehicleSource } from "../traffic/VehicleRegistry.js";
 import type { IServerTransport } from "../transport/Transport.js";
+import type { WorkContext } from "../wildlife/AnimalWorkSystem.js";
 import { AnimalWorkSystem } from "../wildlife/AnimalWorkSystem.js";
-import { browsingRocks } from "../wildlife/BrowsingRocks.js";
 import { startleDeer } from "../wildlife/deerInteractions.js";
-import { createFierceDen, denForPredator } from "../wildlife/FierceDens.js";
 import { tickFoodSources } from "../wildlife/FoodGrowth.js";
 import { freshBallWork } from "../wildlife/ForageResources.js";
 import { setFaunaRidden, startleFauna } from "../wildlife/faunaInteractions.js";
 import { startleFrog } from "../wildlife/frogInteractions.js";
-import type { WildlifeEnvironment } from "../wildlife/mallardAI.js";
 import { startleMallard } from "../wildlife/mallardInteractions.js";
 import { OwnedBalls } from "../wildlife/OwnedBalls.js";
 import { resolvePredatorCatches, startlePredator } from "../wildlife/predatorAI.js";
 import { startleRabbit } from "../wildlife/rabbitInteractions.js";
 import { startleRobin } from "../wildlife/robinInteractions.js";
-import { robinTreePerches } from "../wildlife/robinPerches.js";
-import { climbTrees } from "../wildlife/TreeClimbing.js";
 import {
   type PendingWildlifeRespawn,
   tickWildlifeRespawns,
@@ -114,6 +110,7 @@ import { RealmActivity } from "./RealmActivity.js";
 import { RealmPropActivity } from "./RealmPropActivity.js";
 import { RealmReplicator } from "./RealmReplicator.js";
 import { RealmStreaming } from "./RealmStreaming.js";
+import { createRealmWorkContext } from "./RealmWildlife.js";
 import { safeArrival } from "./SafeArrival.js";
 import { tickAllAI } from "./tickAllAI.js";
 import { VehicleControl } from "./VehicleControl.js";
@@ -641,6 +638,35 @@ export class Realm {
   ): void {
     dt = PHYSICS_DT;
     this.tickCounter++;
+    const storagePaused = this.prepareTick(transport, dormantClientIds, globalStoragePaused);
+    const gravity = this.options.gravity?.() ?? getGravityScale();
+    const { controls, controlTicks } = this.admitControls(storagePaused, dormantClientIds);
+
+    const activeSessions = [...this.sessions.values()].filter(
+      (s) =>
+        !storagePaused &&
+        !s.debugPaused &&
+        !s.transitioning &&
+        Date.now() >= s.doorArrivalUntil &&
+        !s.retired &&
+        !dormantClientIds.has(s.clientId) &&
+        this.sessionSupported(s, dt),
+    );
+    if (activeSessions.length > 0 || (!storagePaused && this.backgroundResidents.size > 0))
+      this.simulate(activeSessions, controls, controlTicks, storagePaused, gravity);
+
+    this.updateSpawners(activeSessions, storagePaused, dormantClientIds);
+    for (const session of activeSessions) this.savePlayerData(session);
+    this.worldAPI.advanceTime(dt);
+
+    this.publishState(transport, dormantClientIds, broadcasting);
+  }
+
+  private prepareTick(
+    transport: IServerTransport,
+    dormantClientIds: ReadonlySet<string>,
+    globalStoragePaused: boolean,
+  ) {
     const storagePaused = globalStoragePaused || (this.saveManager?.pressured ?? false);
     if (storagePaused) this.saveManager?.flush();
     for (const session of this.sessions.values()) {
@@ -673,8 +699,11 @@ export class Realm {
             ),
           ),
       );
-    const gravity = this.options.gravity?.() ?? getGravityScale();
-    const controls = new Map<number, import("../input/ActionManager.js").Movement>();
+    return storagePaused;
+  }
+
+  private admitControls(storagePaused: boolean, dormantClientIds: ReadonlySet<string>) {
+    const controls = new Map<number, Movement>();
     const controlTicks = new Map<number, number>();
     for (const session of this.sessions.values()) {
       const blocked =
@@ -685,7 +714,7 @@ export class Realm {
         session.retired ||
         dormantClientIds.has(session.clientId) ||
         Date.now() < session.doorArrivalUntil ||
-        !this.sessionSupported(session, dt);
+        !this.sessionSupported(session, PHYSICS_DT);
       if (blocked) {
         session.lastProcessedInputSeq =
           session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
@@ -708,372 +737,249 @@ export class Realm {
       controlTicks.set(session.player.id, admitted.expiresIn);
     }
 
-    const activeSessions = [...this.sessions.values()].filter(
-      (s) =>
-        !storagePaused &&
-        !s.debugPaused &&
-        !s.transitioning &&
-        Date.now() >= s.doorArrivalUntil &&
-        !s.retired &&
-        !dormantClientIds.has(s.clientId) &&
-        this.sessionSupported(s, dt),
-    );
-    if (activeSessions.length > 0 || (!storagePaused && this.backgroundResidents.size > 0)) {
-      const stepDt = PHYSICS_DT;
-      const getHeight = (x: number, y: number) => this.world.getHeightAt(x, y);
-      const players = activeSessions.map((s) => s.player);
-      {
-        // Merge entity tick tiers across all active sessions' visible ranges.
-        const entityTickDts = this.computeEntityTickDtsMulti(activeSessions, stepDt);
-        if (!storagePaused)
-          for (const e of this.backgroundResidents)
-            if (!this.streaming || this.streaming.supported(e, stepDt))
-              entityTickDts.set(e, stepDt);
-        for (const [e] of entityTickDts) if (e.resident?.transferring) entityTickDts.delete(e);
-        for (const session of this.sessions.values()) {
-          if (session.transitioning || session.retired || Date.now() < session.doorArrivalUntil)
-            entityTickDts.delete(session.player);
-        }
+    return { controls, controlTicks };
+  }
 
-        // AI: pass nearest player position per entity (for chase/follow)
-        const playerPositions = activeSessions.map((s) => s.player.position);
-        const active = [...entityTickDts.keys()];
-        const decisions = this.decisionDts(entityTickDts, stepDt);
-        this.entityManager.simulationEntities = active;
-        this.propManager.simulationProps = this.streaming
-          ? this.propActivity.select(this.propManager, this.streaming)
-          : this.propManager.props;
-        const workPlayers = activeSessions.map((session) => ({
-          identity: session.profileId || session.clientId,
-          entity: session.player,
-        }));
-        const workReady = (point: PositionComponent, radius: number) => {
-          const range = {
-            minCx: Math.floor((point.wx - radius) / 256),
-            maxCx: Math.floor((point.wx + radius) / 256),
-            minCy: Math.floor((point.wy - radius) / 256),
-            maxCy: Math.floor((point.wy + radius) / 256),
-          };
-          if (this.streaming) return this.streaming.rangeReady(range);
-          for (let cy = range.minCy; cy <= range.maxCy; cy++)
-            for (let cx = range.minCx; cx <= range.maxCx; cx++)
-              if (!this.world.getChunkIfLoaded(cx, cy)) return false;
-          return true;
-        };
-        const wildlifeEnvironment: WildlifeEnvironment = {
-          huntCandidates: (hunter, radius) =>
-            this.entityManager.spatialHash
-              .queryRange(
-                Math.floor((hunter.position.wx - radius) / 256),
-                Math.floor((hunter.position.wy - radius) / 256),
-                Math.floor((hunter.position.wx + radius) / 256),
-                Math.floor((hunter.position.wy + radius) / 256),
-              )
-              .filter(
-                (e) =>
-                  entityTickDts.has(e) &&
-                  !e.workItem &&
-                  Math.hypot(
-                    e.position.wx - hunter.position.wx,
-                    e.position.wy - hunter.position.wy,
-                  ) <= radius,
-              ),
-          animalWork: (animal, elapsed, planning) =>
-            this.animalWork.update(
-              animal,
-              elapsed,
-              {
-                environment: wildlifeEnvironment,
-                players: workPlayers,
-                ready: workReady,
-              },
-              planning,
-            ),
-          ensurePredatorDen: (animal) => {
-            const ai = animal.predator,
-              spec = denForPredator(animal.type);
-            if (!ai || !spec || ai.denPlaced) return;
-            // A manually created hunter can already be mid-pursuit. Add its solid
-            // perch after that hunt, rather than embedding a rock under its feet.
-            if (spec.collider && ai.targetId) return;
-            ai.denId ??= `wildlife:den:${animal.naturalSpawnId ?? animal.proceduralId ?? durableId(animal)}`;
-            if (
-              !this.propManager.props.some(
-                (p) => p.persistentId === ai.denId || p.proceduralId === ai.denId,
-              )
-            ) {
-              const prop = createFierceDen(spec, ai.home.wx, ai.home.wy);
-              if (spec.collider) {
-                const box = getEntityAABB(prop.position, spec.collider);
-                if (
-                  this.entityManager.entities.some(
-                    (other) =>
-                      other !== animal &&
-                      other.collider &&
-                      other.collider.solid !== false &&
-                      aabbsOverlap(box, getEntityAABB(other.position, other.collider)),
-                  ) ||
-                  this.propManager.props.some((other) =>
-                    aabbOverlapsPropWalls(box, other.position, other, 0, 24),
-                  )
-                )
-                  return;
-              }
-              prop.persistentId = ai.denId;
-              this.propManager.add(prop);
-              if (
-                spec.collider?.walkableTop &&
-                Math.hypot(animal.position.wx - ai.home.wx, animal.position.wy - ai.home.wy) < 4 &&
-                !ai.flight
-              ) {
-                animal.wz =
-                  getSurfaceZ(ai.home.wx, ai.home.wy, getHeight) + (spec.collider.zHeight ?? 0);
-                ai.state = "perch";
-                ai.timer = 1.5;
-                ai.elapsed = 0;
-              }
-            }
-            ai.denPlaced = true;
-          },
-          predatorPerches: (home, radius) =>
-            this.propManager
-              .getPropsInChunkRange(
-                Math.floor((home.wx - radius) / 256),
-                Math.floor((home.wy - radius) / 256),
-                Math.floor((home.wx + radius) / 256),
-                Math.floor((home.wy + radius) / 256),
-              )
-              .flatMap((prop) => {
-                const surface =
-                  prop.type === "prop-griffin-perch"
-                    ? prop.collider
-                    : ["prop-oak-tree", "prop-palm-tree"].includes(prop.type)
-                      ? prop.walls?.find(
-                          (w) => w.walkableTop && w.passable && w.width >= 34 && w.height >= 22,
-                        )
-                      : undefined;
-                return surface?.walkableTop && surface.zHeight !== undefined
-                  ? [
-                      {
-                        wx: prop.position.wx + surface.offsetX,
-                        wy: prop.position.wy + surface.offsetY,
-                        z:
-                          getSurfaceZ(prop.position.wx, prop.position.wy, getHeight) +
-                          (surface.zBase ?? 0) +
-                          surface.zHeight,
-                      },
-                    ]
-                  : [];
-              }),
-          climbTrees: (home, radius) =>
-            climbTrees(
-              this.propManager.getPropsInChunkRange(
-                Math.floor((home.wx - radius) / 256),
-                Math.floor((home.wy - radius) / 256),
-                Math.floor((home.wx + radius) / 256),
-                Math.floor((home.wy + radius) / 256),
-              ),
-              (p) => getSurfaceZ(p.wx, p.wy, getHeight),
-            ),
-          browsingRocks: (home, radius) =>
-            browsingRocks(
-              this.propManager.getPropsInChunkRange(
-                Math.floor((home.wx - radius) / 256),
-                Math.floor((home.wy - radius) / 256),
-                Math.floor((home.wx + radius) / 256),
-                Math.floor((home.wy + radius) / 256),
-              ),
-              (p) => getSurfaceZ(p.wx, p.wy, getHeight),
-            ),
-          perches: (home, radius) =>
-            robinTreePerches(
-              this.propManager.getPropsInChunkRange(
-                Math.floor((home.wx - radius) / 256),
-                Math.floor((home.wy - radius) / 256),
-                Math.floor((home.wx + radius) / 256),
-                Math.floor((home.wy + radius) / 256),
-              ),
-            ),
-          surfaceZ: (p) => getSurfaceZ(p.wx, p.wy, getHeight),
-          isWater: (p) =>
-            (this.world.getCollisionIfLoaded(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) &
-              CollisionFlag.Water) !==
-            0,
-          isDeepWater: (p) =>
-            this.world.getBlendBaseAt(Math.floor(p.wx / 16), Math.floor(p.wy / 16)) ===
-            TerrainId.DeepWater,
-          canOccupy: (entity, p) => {
-            if (!entity.collider) return false;
-            const box = getEntityAABB(p, entity.collider);
-            if (
-              aabbOverlapsSolid(
-                box,
-                (tx, ty) => this.world.getCollisionIfLoaded(tx, ty),
-                CollisionFlag.Solid,
-              )
-            )
-              return false;
-            return !this.propManager
-              .getPropsNearPosition(p, entity.collider)
-              .some((prop) =>
-                aabbOverlapsPropWalls(
-                  box,
-                  prop.position,
-                  prop,
-                  entity.wz ?? 0,
-                  entity.collider?.physicalHeight ?? 9,
-                ),
-              );
-          },
-        };
-        const aiTiming = performanceMetrics.start();
-        tickAllAI(
-          active,
-          playerPositions,
-          decisions,
-          this.options.random ?? Math.random,
-          wildlifeEnvironment,
-          this.robinTurn++,
-          this.aiPlanning,
-        );
-        performanceMetrics.end("realm.ai", aiTiming);
-
-        for (const [entity, elapsed] of entityTickDts)
-          if (entity.resident && entity.wanderAI?.state !== "scared")
-            updateResident(entity, elapsed, (p) => this.residentCanOccupy(entity, p, true), active);
-
-        // â”€â”€ TickService.preSimulation â”€â”€
-        this.worldAPI.tick.firePre(stepDt);
-
-        const collisionTiming = performanceMetrics.start();
-        const intents = this.entityManager.collectMotionIntents(active, stepDt, (x, y) =>
-          this.world.getCollisionIfLoaded(x, y),
-        );
-        const wasAirborne = new Set(players.filter((p) => p.jumpVZ !== undefined).map((p) => p.id));
-        for (const session of activeSessions) {
-          const movement = controls.get(session.player.id);
-          if (!movement) continue;
-          const vehicle = this.vehicles.get(session);
-          const mount =
-            session.gameplaySession.mountId === null
-              ? undefined
-              : this.entityManager.byId.get(session.gameplaySession.mountId);
-          const controlled = vehicle ?? mount ?? session.player;
-          intents.set(controlled.id, {
-            ...(vehicle ? vehicleMotionIntent(vehicle, movement) : playerMotionIntent(movement)),
-            controlUntil:
-              (this.physicsScene?.physicsTick ?? 0) + (controlTicks.get(session.player.id) ?? 0),
-          });
-          // Facing/animation is intent-derived; readback publishes physical velocity.
-          if (!vehicle) updatePlayerSpriteFromInput(session.player, movement);
-        }
-        const participants = active.filter(
-          (e) => this.entityManager.byId.get(e.id) === e && !e.tags?.has("passage"),
-        );
-        const scene = this.physicsScene;
-        if (!scene) throw Error("Realm physics is not initialized");
-        this.physicsParticipants = participants;
-        scene.synchronize(participants);
-        scene.step(
-          intents,
-          {
-            getCollision: (x, y) => this.world.getCollisionIfLoaded(x, y),
-            getHeight: (x, y) => this.world.getHeightAt(x, y),
-            queryProps: (bounds) =>
-              this.propManager.getPropsInChunkRange(
-                Math.floor(bounds.left / 256),
-                Math.floor(bounds.top / 256),
-                Math.floor(bounds.right / 256),
-                Math.floor(bounds.bottom / 256),
-              ),
-            geometryVersion: this.geometryVersion,
-          },
-          gravity,
-        );
-        this.entityManager.finishPhysics(participants, players, stepDt, (x, y) =>
-          this.world.getCollisionIfLoaded(x, y),
-        );
-        for (const session of activeSessions) {
-          const p = session.player;
-          this.updateLastSafePosition(session);
-          const supportId = scene.bodyState(p.id)?.supportId;
-          const support = this.entityManager.byId.get(supportId ?? -1);
-          this.handlePlayerStepOutcome(
-            session,
-            {
-              landed: wasAirborne.has(p.id) && p.jumpVZ === undefined,
-              groundZ: p.groundZ ?? 0,
-              enteredWater: p.jumpVZ === undefined && this.isEntityOnWater(p),
-              endedGrounded: p.jumpVZ === undefined,
-              ...(support?.fauna ||
-              support?.predator ||
-              support?.deer ||
-              support?.robin ||
-              support?.rabbit ||
-              support?.frog ||
-              support?.mallard
-                ? { wildlifeContactId: support.id }
-                : {}),
-            },
-            getHeight,
-          );
-        }
-        performanceMetrics.end("realm.entityPhysics", collisionTiming);
-
-        tickWildlifeRespawns(this.entityManager, stepDt, wildlifeEnvironment, playerPositions);
-        resolvePredatorCatches(this.entityManager, active, wildlifeEnvironment, playerPositions);
-        this.animalWork.resolveCatches(active, {
-          environment: wildlifeEnvironment,
-          players: workPlayers,
-          ready: workReady,
-        });
-
-        // Route/parking clocks no longer own poses. Persist shared readback for cars.
-        for (const e of participants) {
-          const car = this.vehicleRegistry?.states.get(e.id);
-          if (!car) continue;
-          if (
-            e.position.wx !== e.prevPosition?.wx ||
-            e.position.wy !== e.prevPosition?.wy ||
-            e.wz !== e.prevWz ||
-            e.vehicleHeading !== e.prevVehicleHeading
-          )
-            this.vehicleRegistry?.onChange?.(car, false);
-        }
-        this.vehicles.sync();
-
-        tickFoodSources(this.entityManager, entityTickDts, wildlifeEnvironment, workReady);
-
-        // Contacts trigger gameplay; they never run another ball integration.
-        tickSharedBallGameplay(this.entityManager, participants, scene, (x, y) =>
-          this.world.getCollisionIfLoaded(x, y),
-        );
-        this.animalWork.syncAll(active);
-        this.ownedBalls.sync(active);
-
-        for (const entity of entityTickDts.keys()) {
-          if (
-            entity.wanderAI ||
-            entity.routeAI ||
-            entity.velocity ||
-            entity.deathTimer !== undefined
-          )
-            this.records?.changed(entity);
-        }
-
-        // â”€â”€ TickService.postSimulation â”€â”€
-        this.worldAPI.tick.firePost(stepDt);
-
-        // â”€â”€ TagService removal detection â”€â”€
-        this.worldAPI.tags.tick();
-
-        // â”€â”€ OverlapService detection â”€â”€
-        this.worldAPI.overlap.tick();
-        this.entityManager.simulationEntities = undefined;
-        this.propManager.simulationProps = undefined;
-      }
+  private selectSimulationEntities(
+    activeSessions: readonly PlayerSession[],
+    storagePaused: boolean,
+  ) {
+    // Merge entity tick tiers across all active sessions' visible ranges.
+    const entityTickDts = this.computeEntityTickDtsMulti(activeSessions, PHYSICS_DT);
+    if (!storagePaused)
+      for (const e of this.backgroundResidents)
+        if (!this.streaming || this.streaming.supported(e, PHYSICS_DT))
+          entityTickDts.set(e, PHYSICS_DT);
+    for (const [e] of entityTickDts) if (e.resident?.transferring) entityTickDts.delete(e);
+    for (const session of this.sessions.values()) {
+      if (session.transitioning || session.retired || Date.now() < session.doorArrivalUntil)
+        entityTickDts.delete(session.player);
     }
 
+    return entityTickDts;
+  }
+
+  /** Ordered simulation phases; only advancePhysics integrates the world. */
+  private simulate(
+    activeSessions: readonly PlayerSession[],
+    controls: ReadonlyMap<number, Movement>,
+    controlTicks: ReadonlyMap<number, number>,
+    storagePaused: boolean,
+    gravity: number,
+  ) {
+    const stepDt = PHYSICS_DT;
+    const entityTickDts = this.selectSimulationEntities(activeSessions, storagePaused);
+    const active = [...entityTickDts.keys()];
+    const decisions = this.decisionDts(entityTickDts, stepDt);
+    this.entityManager.simulationEntities = active;
+    this.propManager.simulationProps = this.streaming
+      ? this.propActivity.select(this.propManager, this.streaming)
+      : this.propManager.props;
+    try {
+      const work = createRealmWorkContext(this, entityTickDts, activeSessions);
+      this.updateDecisions(active, activeSessions, entityTickDts, decisions, work);
+      this.worldAPI.tick.firePre(stepDt);
+      const timing = performanceMetrics.start();
+      const { scene, participants, wasAirborne } = this.advancePhysics(
+        active,
+        activeSessions,
+        controls,
+        controlTicks,
+        gravity,
+      );
+      this.finishPhysics(participants, activeSessions, wasAirborne, scene);
+      performanceMetrics.end("realm.entityPhysics", timing);
+      this.resolveSimulationGameplay(active, participants, entityTickDts, work, scene);
+    } finally {
+      this.entityManager.simulationEntities = undefined;
+      this.propManager.simulationProps = undefined;
+    }
+  }
+
+  private updateDecisions(
+    active: Entity[],
+    activeSessions: readonly PlayerSession[],
+    entityTickDts: ReadonlyMap<Entity, number>,
+    decisions: ReadonlyMap<Entity, number>,
+    work: WorkContext,
+  ) {
+    const playerPositions = activeSessions.map((s) => s.player.position);
+    const wildlifeEnvironment = work.environment;
+    const aiTiming = performanceMetrics.start();
+    tickAllAI(
+      active,
+      playerPositions,
+      decisions,
+      this.options.random ?? Math.random,
+      wildlifeEnvironment,
+      this.robinTurn++,
+      this.aiPlanning,
+    );
+    performanceMetrics.end("realm.ai", aiTiming);
+
+    for (const [entity, elapsed] of entityTickDts)
+      if (entity.resident && entity.wanderAI?.state !== "scared")
+        updateResident(entity, elapsed, (p) => this.residentCanOccupy(entity, p, true), active);
+  }
+
+  private advancePhysics(
+    active: Entity[],
+    activeSessions: readonly PlayerSession[],
+    controls: ReadonlyMap<number, Movement>,
+    controlTicks: ReadonlyMap<number, number>,
+    gravity: number,
+  ) {
+    const players = activeSessions.map((s) => s.player);
+    const intents = this.entityManager.collectMotionIntents(active, PHYSICS_DT, (x, y) =>
+      this.world.getCollisionIfLoaded(x, y),
+    );
+    const wasAirborne = new Set(players.filter((p) => p.jumpVZ !== undefined).map((p) => p.id));
+    for (const session of activeSessions) {
+      const movement = controls.get(session.player.id);
+      if (!movement) continue;
+      const vehicle = this.vehicles.get(session);
+      const mount =
+        session.gameplaySession.mountId === null
+          ? undefined
+          : this.entityManager.byId.get(session.gameplaySession.mountId);
+      const controlled = vehicle ?? mount ?? session.player;
+      intents.set(controlled.id, {
+        ...(vehicle ? vehicleMotionIntent(vehicle, movement) : playerMotionIntent(movement)),
+        controlUntil:
+          (this.physicsScene?.physicsTick ?? 0) + (controlTicks.get(session.player.id) ?? 0),
+      });
+      // Facing/animation is intent-derived; readback publishes physical velocity.
+      if (!vehicle) updatePlayerSpriteFromInput(session.player, movement);
+    }
+    const participants = active.filter(
+      (e) => this.entityManager.byId.get(e.id) === e && !e.tags?.has("passage"),
+    );
+    const scene = this.physicsScene;
+    if (!scene) throw Error("Realm physics is not initialized");
+    this.physicsParticipants = participants;
+    scene.synchronize(participants);
+    scene.step(
+      intents,
+      {
+        getCollision: (x, y) => this.world.getCollisionIfLoaded(x, y),
+        getHeight: (x, y) => this.world.getHeightAt(x, y),
+        queryProps: (bounds) =>
+          this.propManager.getPropsInChunkRange(
+            Math.floor(bounds.left / 256),
+            Math.floor(bounds.top / 256),
+            Math.floor(bounds.right / 256),
+            Math.floor(bounds.bottom / 256),
+          ),
+        geometryVersion: this.geometryVersion,
+      },
+      gravity,
+    );
+    return { scene, participants, wasAirborne };
+  }
+
+  private finishPhysics(
+    participants: Entity[],
+    activeSessions: readonly PlayerSession[],
+    wasAirborne: ReadonlySet<number>,
+    scene: PhysicsScene,
+  ) {
+    const stepDt = PHYSICS_DT;
+    const players = activeSessions.map((s) => s.player);
+    const getHeight = (x: number, y: number) => this.world.getHeightAt(x, y);
+    this.entityManager.finishPhysics(participants, players, stepDt, (x, y) =>
+      this.world.getCollisionIfLoaded(x, y),
+    );
+    for (const session of activeSessions) {
+      const p = session.player;
+      this.updateLastSafePosition(session);
+      const supportId = scene.bodyState(p.id)?.supportId;
+      const support = this.entityManager.byId.get(supportId ?? -1);
+      this.handlePlayerStepOutcome(
+        session,
+        {
+          landed: wasAirborne.has(p.id) && p.jumpVZ === undefined,
+          groundZ: p.groundZ ?? 0,
+          enteredWater: p.jumpVZ === undefined && this.isEntityOnWater(p),
+          endedGrounded: p.jumpVZ === undefined,
+          ...(support?.fauna ||
+          support?.predator ||
+          support?.deer ||
+          support?.robin ||
+          support?.rabbit ||
+          support?.frog ||
+          support?.mallard
+            ? { wildlifeContactId: support.id }
+            : {}),
+        },
+        getHeight,
+      );
+    }
+  }
+
+  private resolveSimulationGameplay(
+    active: Entity[],
+    participants: Entity[],
+    entityTickDts: ReadonlyMap<Entity, number>,
+    work: WorkContext,
+    scene: PhysicsScene,
+  ) {
+    const stepDt = PHYSICS_DT;
+    const wildlifeEnvironment = work.environment;
+    const workPlayers = work.players;
+    const workReady = work.ready;
+    const playerPositions = workPlayers.map((p) => p.entity.position);
+    tickWildlifeRespawns(this.entityManager, stepDt, wildlifeEnvironment, playerPositions);
+    resolvePredatorCatches(this.entityManager, active, wildlifeEnvironment, playerPositions);
+    this.animalWork.resolveCatches(active, {
+      environment: wildlifeEnvironment,
+      players: workPlayers,
+      ready: workReady,
+    });
+
+    // Route/parking clocks no longer own poses. Persist shared readback for cars.
+    for (const e of participants) {
+      const car = this.vehicleRegistry?.states.get(e.id);
+      if (!car) continue;
+      if (
+        e.position.wx !== e.prevPosition?.wx ||
+        e.position.wy !== e.prevPosition?.wy ||
+        e.wz !== e.prevWz ||
+        e.vehicleHeading !== e.prevVehicleHeading
+      )
+        this.vehicleRegistry?.onChange?.(car, false);
+    }
+    this.vehicles.sync();
+
+    tickFoodSources(this.entityManager, entityTickDts, wildlifeEnvironment, workReady);
+
+    // Contacts trigger gameplay; they never run another ball integration.
+    tickSharedBallGameplay(this.entityManager, participants, scene, (x, y) =>
+      this.world.getCollisionIfLoaded(x, y),
+    );
+    this.animalWork.syncAll(active);
+    this.ownedBalls.sync(active);
+
+    for (const entity of entityTickDts.keys()) {
+      if (entity.wanderAI || entity.routeAI || entity.velocity || entity.deathTimer !== undefined)
+        this.records?.changed(entity);
+    }
+
+    // â”€â”€ TickService.postSimulation â”€â”€
+    this.worldAPI.tick.firePost(stepDt);
+
+    // â”€â”€ TagService removal detection â”€â”€
+    this.worldAPI.tags.tick();
+
+    // â”€â”€ OverlapService detection â”€â”€
+    this.worldAPI.overlap.tick();
+  }
+
+  private updateSpawners(
+    activeSessions: readonly PlayerSession[],
+    storagePaused: boolean,
+    dormantClientIds: ReadonlySet<string>,
+  ) {
+    const dt = PHYSICS_DT;
     // â”€â”€ Phase 3: Spawners (per-session, near each player) â”€â”€
     for (const session of this.sessions.values()) {
       if (
@@ -1127,9 +1033,13 @@ export class Realm {
         : this.propManager.props;
       this.tentSpawner.update(dt, this.propManager, this.entityManager, activeProps);
     }
-    for (const session of activeSessions) this.savePlayerData(session);
-    this.worldAPI.advanceTime(dt);
+  }
 
+  private publishState(
+    transport: IServerTransport,
+    dormantClientIds: ReadonlySet<string>,
+    broadcasting: boolean,
+  ) {
     for (const horn of this.vehicles.takeHorns()) {
       for (const session of this.sessions.values())
         if (
