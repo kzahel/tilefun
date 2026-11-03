@@ -1,6 +1,6 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
-import { bedFramePoint, bedGateAngle, DUMP_BED } from "../traffic/VehicleBed.js";
 import type { Camera } from "./Camera.js";
+import { bedFramePoint, bedGateAngle, DUMP_BED } from "./DumpBedPose.js";
 import triangles from "./dump-truck-v2-fallback.json" with { type: "json" };
 import type { RasterSurface } from "./RasterSurface.js";
 import type { SpriteItem } from "./SceneItem.js";

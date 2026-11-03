@@ -1,4 +1,5 @@
 import { afterEach, expect, it } from "vitest";
+import { createBall } from "../entities/Ball.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
@@ -307,4 +308,33 @@ it("applies the sole gravity setting to ordinary shared bodies", async () => {
   }
   expect(a.wz).toBeCloseTo(100, 2);
   expect(b.wz).toBeLessThan(90);
+});
+
+it("wakes a sleeping loose body when its edited support is removed", async () => {
+  const s = await scene(),
+    ball = createBall(32, 32);
+  ball.id = 1;
+  ball.wz = 24;
+  let elevated = true,
+    revision = 0;
+  const base = geometry();
+  const source: PhysicsGeometry = {
+    ...base,
+    getHeight: () => (elevated ? 2 : 0),
+    geometryVersion: () => ({ identity: base, revision }),
+  };
+  for (let i = 0; i < 600; i++) {
+    s.synchronize([ball]);
+    s.step(idle, source);
+  }
+  expect(s.world.bodies.getAll()[0]?.isSleeping()).toBe(true);
+  expect(ball.wz).toBeCloseTo(16, 0);
+  elevated = false;
+  revision++;
+  for (let i = 0; i < 120; i++) {
+    s.synchronize([ball]);
+    s.step(idle, source);
+  }
+  expect(Math.abs(ball.wz ?? Infinity)).toBeLessThan(0.2);
+  expect(s.diagnostics.bodyCreates).toBe(1);
 });

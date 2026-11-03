@@ -14,7 +14,6 @@ describe("PlayerSession", () => {
     expect(session.cameraY).toBe(0);
     expect(session.cameraZoom).toBe(1);
     expect(session.debugPaused).toBe(false);
-    expect(session.debugNoclip).toBe(false);
     expect(session.gameplaySession.gemsCollected).toBe(0);
     expect(session.gameplaySession.invincibilityTimer).toBe(0);
     expect(session.gameplaySession.knockbackVx).toBe(0);

@@ -5,26 +5,12 @@ import { Direction, type Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { terrainBaseZ } from "../physics/TerrainExcavation.js";
 import {
-  isTransporter,
-  supportingTransporter,
-  TRANSPORTER,
-  transporterWorld,
-} from "../traffic/CarTransporter.js";
-import {
   hasVehicleLights,
   isWarningVehicle,
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
-import { hasMovingRoof, roofSupport } from "../traffic/RoofSupport.js";
-import { presentedTowPosition, towMeshOffset, towPitch } from "../traffic/Towing.js";
-import {
-  bedGateAngle,
-  bedHeading,
-  bedTilt,
-  bedVisualOwner,
-  hasDetailedVehicleSurface,
-} from "../traffic/VehicleBed.js";
-import { gradeRoofOffset, vehicleGroundPose } from "../traffic/VehicleGroundPose.js";
+import { roofSupport } from "../traffic/RoofSupport.js";
+import { isVehicle } from "../traffic/Vehicle.js";
 import { isDrivable } from "../traffic/VehicleSeats.js";
 import { faunaProfile } from "../wildlife/Fauna.js";
 import { isCarryable } from "../wildlife/ForageResources.js";
@@ -42,7 +28,6 @@ import {
   trainMeshHeading,
 } from "./EntityMeshPose.js";
 import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBladeRenderer.js";
-import { meshGradePoint } from "./MeshGradePose.js";
 import { vehicleMeshRadius, yawOrientation } from "./MeshPresentation.js";
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { SceneFrame } from "./SceneFrame.js";
@@ -109,43 +94,7 @@ export function collectScene(
   const hasExcavations = planarProps.some((p) =>
     (p.walls ?? (p.collider ? [p.collider] : [])).some((c) => c.surface?.excavation),
   );
-  const movingRoofs = entities.filter(hasMovingRoof);
-  const transporters = entities.filter(isTransporter);
-  const gradeProps = props.filter((p) =>
-    (p.walls ?? (p.collider ? [p.collider] : [])).some((c) => c.surface || c.walkableTop),
-  );
-  const groundPoses = new Map<number, ReturnType<typeof vehicleGroundPose>>();
-  const groundPoseFor = (entity: Entity) => {
-    if (supportingTransporter(entity, transporters)) return undefined;
-    if (!groundPoses.has(entity.id)) {
-      const displayed = {
-        ...entity,
-        position: interpolatePosition(entity.position, entity.prevPosition, alpha),
-        wz: interpolateWz(entity, alpha) ?? 0,
-      };
-      const height = (x: number, y: number) => world.getHeightAt(x, y);
-      let ground = vehicleGroundPose(displayed, height, gradeProps, entityHeading(entity));
-      // Traffic can have a continuous displayed heading without a physical yaw.
-      // Only grade-supported cars need this early evaluation; flat offscreen cars
-      // retain the collector's existing lazy presentation/culling behavior.
-      if (ground && frame) {
-        const mesh = frame.meshPoses.evaluate(entity, poseTime, displayed.position);
-        const heading = mesh
-          ? 2 * Math.atan2(mesh.orientation[2], mesh.orientation[3])
-          : ground.heading;
-        if (Math.abs(heading - ground.heading) > 1e-8)
-          ground = vehicleGroundPose(displayed, height, gradeProps, heading);
-      }
-      groundPoses.set(entity.id, ground);
-    }
-    return groundPoses.get(entity.id);
-  };
-  const towSprites = entities.some((e) => e.towTargetId !== undefined || isTransporter(e))
-    ? new Map<number, SpriteItem>()
-    : undefined;
-  const bedSprites = movingRoofs.some(hasDetailedVehicleSurface)
-    ? new Map<number, SpriteItem>()
-    : undefined;
+  const movingRoofs = entities.filter(isVehicle);
   const vehicleSurfaces = movingRoofs.flatMap((e) =>
     e.collider
       ? [
@@ -169,25 +118,7 @@ export function collectScene(
   // --- Entities ---
   for (const e of entities) {
     if (!e.sprite || (e.parentId !== undefined && insideParents.has(e.parentId))) continue;
-    let pos = interpolatePosition(e.position, e.prevPosition, alpha);
-    if (e.towedBy !== undefined) {
-      const truck = entities.find((t) => t.id === e.towedBy && t.towTargetId === e.id);
-      if (truck)
-        pos = presentedTowPosition(
-          e,
-          truck,
-          interpolatePosition(truck.position, truck.prevPosition, alpha),
-        );
-    }
-
-    if (e.transportedBy !== undefined) {
-      const truck = entities.find((t) => t.id === e.transportedBy);
-      if (truck)
-        pos = transporterWorld(
-          { ...truck, position: interpolatePosition(truck.position, truck.prevPosition, alpha) },
-          TRANSPORTER.loadX,
-        );
-    }
+    const pos = interpolatePosition(e.position, e.prevPosition, alpha);
     // Compute Z offset in world pixels
     let zOffset: number;
     const displayedWz = interpolateWz(e, alpha);
@@ -207,70 +138,26 @@ export function collectScene(
     // extends below their ground-center anchor. Preserve conservative mesh
     // bounds as well, so either the mesh or its sprite fallback can enter view.
     const effectiveWy = pos.wy - zOffset;
-    const supportId = !hasMovingRoof(e) ? roofSupport(e, movingRoofs)?.id : undefined;
+    const supportId = !isVehicle(e) ? roofSupport(e, movingRoofs)?.id : undefined;
     const support =
       supportId === undefined ? undefined : movingRoofs.find((e) => e.id === supportId);
     const supportMesh = support ? authoredVehicleForType(support.type ?? "") : undefined;
-    const supportGround = support ? groundPoseFor(support) : undefined;
-    const supportPosition = support
-      ? interpolatePosition(support.position, support.prevPosition, alpha)
-      : undefined;
     const meshRoofSupport: SpriteItem["meshRoofSupport"] =
       supportMesh && support?.collider
         ? {
             assetId: supportMesh.assetId,
             heightDelta:
               (support.collider.physicalHeight ?? 0) *
-                (1 - vehicleMeshHeightScale(supportMesh.vehicle)) -
-              (supportGround && supportPosition
-                ? gradeRoofOffset(
-                    supportGround,
-                    supportGround.heading,
-                    pos.wx - supportPosition.wx,
-                    pos.wy - supportPosition.wy,
-                    (support.collider.physicalHeight ?? 0) *
-                      vehicleMeshHeightScale(supportMesh.vehicle),
-                  )
-                : 0),
+              (1 - vehicleMeshHeightScale(supportMesh.vehicle)),
           }
         : undefined;
-    const carrierId =
-      support?.towedBy ??
-      support?.transportedBy ??
-      (support ? supportingTransporter(support, transporters)?.truck.id : undefined);
-    const carrier =
-      carrierId === undefined ? undefined : movingRoofs.find((e) => e.id === carrierId);
-    const carrierGround = carrier ? groundPoseFor(carrier) : undefined;
-    const carrierMesh = carrier ? authoredVehicleForType(carrier.type) : undefined;
-    if (meshRoofSupport && carrierMesh) meshRoofSupport.ownerAssetId = carrierMesh.assetId;
-    if (meshRoofSupport && carrier && carrierGround && carrierMesh) {
-      const origin = interpolatePosition(carrier.position, carrier.prevPosition, alpha),
-        baseZ = interpolateWz(carrier, alpha) ?? 0;
-      const point = meshGradePoint(
-        {
-          assetId: carrierMesh.assetId,
-          radius: 0,
-          orientation: yawOrientation(carrierGround.heading),
-          gradePitch: carrierGround.pitch,
-          gradeRoll: carrierGround.roll,
-          gradeOffsetZ: carrierGround.offsetZ,
-        },
-        pos.wx - origin.wx,
-        pos.wy - origin.wy,
-        zOffset - meshRoofSupport.heightDelta - baseZ,
-      );
-      meshRoofSupport.offsetX = origin.wx + point.x - pos.wx;
-      meshRoofSupport.offsetY = origin.wy + point.y - pos.wy;
-      meshRoofSupport.heightDelta = zOffset - baseZ - point.z;
-    }
     const remains = isRoadkill(e.type);
     const scaleY = remains ? ROADKILL_SCALE_Y : 1;
     const drawOffsetY = (e.sprite.drawOffsetY ?? 0) * scaleY;
     const spriteBottom = effectiveWy + drawOffsetY;
     const meshAsset = frame ? frame.meshPoses.assetFor(e) : meshAssetFor(e);
-    const ground = meshAsset ? groundPoseFor(e) : undefined;
     const meshRadius = meshAsset
-      ? vehicleMeshRadius(meshAsset) + Math.abs(ground?.offsetZ ?? 0)
+      ? vehicleMeshRadius(meshAsset)
       : e.type.startsWith("train-curve-proof-v1")
         ? 96
         : 0;
@@ -352,29 +239,9 @@ export function collectScene(
               authoredTrainForType(e.type) ? trainMeshHeading(e) : entityHeading(e),
             ),
             radius: meshRadius,
-            bedTilt: bedTilt(e),
-            bedGateAngle: bedGateAngle(e),
-            towActive: e.towTargetId !== undefined,
-            towPitch: towPitch(e),
-            towOffsetX: towMeshOffset(e).x,
-            towOffsetZ: towMeshOffset(e).z,
           }
         : undefined);
-    const grade = supportingTransporter(e, transporters);
-    const mesh = baseMesh
-      ? {
-          ...baseMesh,
-          transportRamp: e.vehicleRamp === 1,
-          gradePitch: grade?.pitch ?? ground?.pitch ?? 0,
-          ...(ground
-            ? {
-                gradeRoll: ground.roll,
-                gradeOffsetZ: ground.offsetZ,
-                radius: Math.ceil(baseMesh.radius + Math.abs(ground.offsetZ)),
-              }
-            : {}),
-        }
-      : undefined;
+    const mesh = baseMesh;
     const spriteItem = {
       ...(mesh ? { mesh } : {}),
       ...(meshRoofSupport ? { meshRoofSupport } : {}),
@@ -436,8 +303,6 @@ export function collectScene(
       flashHidden: e.flashHidden ?? false,
     } satisfies SpriteItem;
     items.push(spriteItem);
-    bedSprites?.set(e.id, spriteItem);
-    towSprites?.set(e.id, spriteItem);
     if (visibleGrass && isVehicleSprite(e.type)) grassVehicles.push(spriteItem);
 
     const ghost = ghostByEntityId?.get(e.id);
@@ -575,55 +440,6 @@ export function collectScene(
     items.push(p);
   }
 
-  if (bedSprites) {
-    const grouped = new Set<SpriteItem>();
-    for (const actor of entities) {
-      if (actor.type !== "player" && !isCarryable(actor)) continue;
-      const owner = bedVisualOwner(actor, movingRoofs);
-      const body = owner && bedSprites.get(owner.id),
-        content = bedSprites.get(actor.id);
-      if (!body || !content) continue;
-      body.bedGroup ??= {
-        heading: bedHeading(owner),
-        tilt: bedTilt(owner),
-        ...(isTransporter(owner)
-          ? { vehicle: "transporter" as const, ramp: owner.vehicleRamp === 1 }
-          : {}),
-        contents: [],
-      };
-      if (roofSupport(actor, movingRoofs)?.id === owner.id) {
-        content.meshBedSupport = true;
-        // Detailed floors/cab roofs use a full mesh-only foot transform below.
-        // Their fallback must retain the authoritative, unpitched bed datum.
-        delete content.meshRoofSupport;
-      }
-      content.hasShadow = false;
-      body.bedGroup.contents.push(content);
-      grouped.add(content);
-    }
-    for (let i = items.length - 1; i >= 0; i--)
-      if (grouped.has(items[i] as SpriteItem)) items.splice(i, 1);
-  }
-  if (towSprites) {
-    const grouped = new Set<SpriteItem>();
-    for (const truck of entities) {
-      const loadId =
-        truck.towTargetId ??
-        truck.transportLoadId ??
-        (isTransporter(truck)
-          ? entities.find((e) => supportingTransporter(e, transporters)?.truck.id === truck.id)?.id
-          : undefined);
-      if (loadId === undefined) continue;
-      const body = towSprites.get(truck.id),
-        car = towSprites.get(loadId);
-      if (body && car) {
-        body.towGroup = car;
-        grouped.add(car);
-      }
-    }
-    for (let i = items.length - 1; i >= 0; i--)
-      if (grouped.has(items[i] as SpriteItem)) items.splice(i, 1);
-  }
   // Sort by pre-computed sort key for correct depth ordering
   items.sort((a, b) => a.sortKey - b.sortKey);
 

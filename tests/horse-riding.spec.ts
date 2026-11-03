@@ -44,7 +44,7 @@ for (const renderer of ["canvas", "gpu"]) {
       // Stage a stationary horse inside its alarm radius. Automation may take
       // longer than the real jump approach while leaving the editor.
       g.debugPanel.paused = true;
-      g.transport.send({ type: "set-debug", paused: true, noclip: false });
+      g.transport.send({ type: "set-debug", paused: true });
       // Flat worlds seed random solid chickens; keep the riding path clear.
       for (const entity of g.stateView.entities)
         if (entity.type === "chicken")

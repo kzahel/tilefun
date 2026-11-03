@@ -97,7 +97,7 @@ export interface GameContext {
   flushServer(): void;
   sendRequest<R extends RequestMessage>(msg: R): Promise<RequestResponse<R>>;
   sendVisibleRange(force?: boolean): void;
-  sendDebugState(paused: boolean, noclip: boolean, force?: boolean): void;
+  sendDebugState(paused: boolean, force?: boolean): void;
 }
 
 /**

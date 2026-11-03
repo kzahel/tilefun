@@ -6,7 +6,7 @@ import {
 } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
-import { getSurfaceZ, resolveGroundZForTracking } from "../physics/surfaceHeight.js";
+import { getSurfaceZ, placementGroundZ } from "../physics/surfaceHeight.js";
 import type { VehicleHornMessage } from "../shared/protocol.js";
 import {
   hasVehicleLights,
@@ -119,8 +119,7 @@ export class VehicleControl {
     p.localOffsetX = p.localOffsetY = 0;
     p.jumpZ = 0;
     delete p.jumpVZ;
-    delete p.airMomentumX;
-    delete p.airMomentumY;
+
     p.collider = null;
     p.velocity = { vx: 0, vy: 0 };
     session.gameplaySession.mountId = id;
@@ -245,12 +244,7 @@ export class VehicleControl {
         )
           continue;
         const props = r.propManager.getPropsNearPosition(probe.position, collider);
-        const z = resolveGroundZForTracking(
-          probe,
-          (tx, ty) => r.world.getHeightAt(tx, ty),
-          props,
-          [],
-        );
+        const z = placementGroundZ(probe, (tx, ty) => r.world.getHeightAt(tx, ty), props);
         if (
           Math.abs(z - (vehicle.wz ?? 0)) > 16 ||
           props.some((p) =>

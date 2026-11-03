@@ -41,7 +41,7 @@ for (const p of PREDATOR_PROFILES.filter((p) =>
     await page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
       g.debugPanel.paused = true;
-      g.transport.send({ type: "set-debug", paused: true, noclip: false });
+      g.transport.send({ type: "set-debug", paused: true });
     });
     if (p.expansion?.habitat === "deep")
       await page.evaluate(async () => {
@@ -91,7 +91,7 @@ for (const p of PREDATOR_PROFILES.filter((p) =>
     await page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
       g.debugPanel.paused = true;
-      g.transport.send({ type: "set-debug", paused: true, noclip: false });
+      g.transport.send({ type: "set-debug", paused: true });
     });
     await expect.poll(async () => (await animals()).length).toBe(original.length);
   });

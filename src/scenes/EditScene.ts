@@ -99,11 +99,10 @@ export class EditScene implements GameScene {
     }
 
     if (gc.serialized) {
-      gc.sendDebugState(gc.debugPanel.paused, gc.debugPanel.noclip);
+      gc.sendDebugState(gc.debugPanel.paused);
     } else if (gc.server) {
       const session = gc.server.getLocalSession();
       session.debugPaused = gc.debugPanel.paused;
-      session.debugNoclip = gc.debugPanel.noclip;
     }
 
     // Sync right-click unpaint and live entity/prop refs into editor mode

@@ -134,7 +134,7 @@ async function enter(page: Page, worldId: string) {
         worldId,
         arrival: { x: 0, y: 0, generation },
       });
-      game.transport.send({ type: "set-debug", paused: true, noclip: false });
+      game.transport.send({ type: "set-debug", paused: true });
     },
     { worldId, generation },
   );

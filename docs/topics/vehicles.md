@@ -13,8 +13,8 @@ existing collection; obsolete routes and coupling metadata are discarded. Models
 paints, approved pixels and static layout planners remain unchanged.
 
 New suspension/full tumbling and dynamic vehicle orientation are follow-on work.
-Remaining obsolete presentation/query helpers still need deletion before reset
-completion. The old feature descriptions below are historical, not current promises.
+Duplicate articulated collision/ground/carry helpers have been deleted; retained
+equipment math is render-only. Collision inspection reads shared body dimensions. The old feature descriptions below are historical, not current promises.
 
 
 [175](../tactical/175-vehicle-depot-and-walkable-ramps.md) adds city speedway infield

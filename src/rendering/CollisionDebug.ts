@@ -1,18 +1,10 @@
-import { DEFAULT_PHYSICAL_HEIGHT } from "../config/constants.js";
 import { type AABB, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { physicsBodyDimensions, physicsBodyKind } from "../physics/PhysicsBodies.js";
 import { surfaceZAt } from "../physics/SurfacePatch.js";
-import { supportingTransporter, TRANSPORTER, transporterWorld } from "../traffic/CarTransporter.js";
-import { hasMovingRoof } from "../traffic/RoofSupport.js";
-import { presentedTowPosition } from "../traffic/Towing.js";
-import { isTransporterSurface, transporterSolids } from "../traffic/TransporterSurface.js";
-import { bedPartVertices, bedQueryBounds, DUMP_BED, hasVehicleBed } from "../traffic/VehicleBed.js";
-import { entityBody } from "../traffic/VehicleContact.js";
-import { vehicleGroundPose } from "../traffic/VehicleGroundPose.js";
 import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
-import { entityHeading } from "./EntityMeshPose.js";
 import type { OverlayFrame } from "./OverlayFrame.js";
 import { projectWorld } from "./Projection.js";
 
@@ -20,13 +12,13 @@ import { projectWorld } from "./Projection.js";
 export const COLLISION_LAYERS = {
   driving: {
     color: "#ff7373",
-    label: "Driving bodies",
-    hint: "Rotated boxes used when driving cars.",
+    label: "Vehicle bodies",
+    hint: "Shared upright vehicle hull bounds.",
   },
   walking: {
     color: "#ffb454",
-    label: "Walking obstacles",
-    hint: "Vehicle parts and prop walls that block a person.",
+    label: "Static geometry",
+    hint: "Static prop walls, ramps and slabs.",
   },
   actors: {
     color: "#66baff",
@@ -36,7 +28,7 @@ export const COLLISION_LAYERS = {
   support: {
     color: "#64ff8a",
     label: "Standing surfaces",
-    hint: "Where feet can stand; green dots mark measured tyre contacts used to tilt 3D vehicles.",
+    hint: "Top bounds of the shared bodies and authored surfaces.",
   },
   bounds: {
     color: "#abb6c4",
@@ -92,72 +84,62 @@ function prism(b: AABB, low: number, high: number): CollisionPoint[] {
   return [low, high].flatMap((z) => corners(b).map(([x, y]) => ({ x, y, z })));
 }
 
-/** Read-only geometry from the same helpers used by movement and support queries.
- * Driving and on-foot geometry deliberately remain separate, even on one vehicle.
- */
+/** Outer body bounds from the same dimensions and yaw as the shared scene. */
 export function entityCollisionDebugShapes(e: Entity): CollisionDebugShape[] {
-  // Replicas restore static colliders from type definitions, even for drivers.
-  // Parented actors follow their carrier instead of owning independent movement.
-  if (!e.collider || e.collider.solid === false || e.parentId !== undefined) return [];
-  const bounds = getEntityAABB(e.position, e.collider),
+  if (
+    !e.collider ||
+    e.parentId !== undefined ||
+    (e.collider.solid === false && physicsBodyKind(e) !== "loose")
+  )
+    return [];
+  const d = physicsBodyDimensions(e),
     low = e.wz ?? 0,
-    high = low + (e.collider.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT);
-  const shapes: CollisionDebugShape[] = [];
-  const add = (layer: CollisionLayer, name: string, vertices: readonly CollisionPoint[]) =>
-    shapes.push({ layer, name, vertices });
-  if (e.type.startsWith("vehicle-v1:")) {
-    const b = entityBody(e),
-      c = Math.cos(b.angle),
-      s = Math.sin(b.angle);
-    const vertices = [b.low, b.high].flatMap((z) =>
-      [
-        [-1, -1],
-        [1, -1],
-        [1, 1],
-        [-1, 1],
-      ].map(([x = 0, y = 0]) => ({
-        x: b.x + x * b.halfLength * c - y * b.halfWidth * s,
-        y: b.y + x * b.halfLength * s + y * b.halfWidth * c,
-        z,
-      })),
-    );
-    add("driving", "driving body", vertices);
-  }
-  let parts: { name: string; vertices: readonly CollisionPoint[] }[];
-  if (hasVehicleBed(e))
-    parts = DUMP_BED.parts.map((p) => ({ name: p.name, vertices: bedPartVertices(e, p) }));
-  else if (isTransporterSurface(e))
-    parts = transporterSolids(e).map((vertices, i) => ({
-      name:
-        ["deck", "cab", "cab guard", "left guide", "right guide", "left ramp", "right ramp"][i] ??
-        "part",
-      vertices,
-    }));
-  else
-    parts = [
-      { name: hasMovingRoof(e) ? "walking body" : "body", vertices: prism(bounds, low, high) },
-    ];
-  for (const p of parts) {
-    add(hasMovingRoof(e) ? "walking" : "actors", p.name, p.vertices);
-    if (e.collider.physicalHeight !== undefined)
-      add("support", `${p.name} top`, p.vertices.slice(4));
-  }
-  add(
-    "bounds",
-    "search bounds",
-    prism(hasVehicleBed(e) || isTransporterSurface(e) ? bedQueryBounds(e) : bounds, low, low),
+    high = low + d.height;
+  const cx = e.position.wx + d.offsetX,
+    cy = e.position.wy + d.offsetY;
+  const c = Math.cos(d.yaw),
+    s = Math.sin(d.yaw);
+  const vertices = [low, high].flatMap((z) =>
+    [
+      [-1, -1],
+      [1, -1],
+      [1, 1],
+      [-1, 1],
+    ].map(([x = 0, y = 0]) => ({
+      x: cx + ((x * d.width) / 2) * c - ((y * d.depth) / 2) * s,
+      y: cy + ((x * d.width) / 2) * s + ((y * d.depth) / 2) * c,
+      z,
+    })),
   );
-  if (e.sprite && !hasMovingRoof(e)) {
-    const s = e.sprite,
+  const vehicle = e.type.startsWith("vehicle-v1:");
+  const shapes: CollisionDebugShape[] = [
+    {
+      layer: vehicle ? "driving" : "actors",
+      name: e.type === "ball" ? "ball bounds" : "body",
+      vertices,
+    },
+  ];
+  shapes.push({ layer: "support", name: "body top", vertices: vertices.slice(4) });
+  shapes.push({
+    layer: "bounds",
+    name: "search bounds",
+    vertices: prism(getEntityAABB(e.position, e.collider), low, low),
+  });
+  if (e.sprite && !vehicle) {
+    const sprite = e.sprite,
       x = e.position.wx,
       y = e.position.wy,
-      z = low - (s.drawOffsetY ?? 0);
-    add("sprites", "sprite plane", [
-      { x: x - s.spriteWidth / 2, y, z },
-      { x: x + s.spriteWidth / 2, y, z },
-      { x: x + s.spriteWidth / 2, y, z: z + s.spriteHeight },
-      { x: x - s.spriteWidth / 2, y, z: z + s.spriteHeight },
-    ]);
+      z = low - (sprite.drawOffsetY ?? 0);
+    shapes.push({
+      layer: "sprites",
+      name: "sprite plane",
+      vertices: [
+        { x: x - sprite.spriteWidth / 2, y, z },
+        { x: x + sprite.spriteWidth / 2, y, z },
+        { x: x + sprite.spriteWidth / 2, y, z: z + sprite.spriteHeight },
+        { x: x - sprite.spriteWidth / 2, y, z: z + sprite.spriteHeight },
+      ],
+    });
   }
   return shapes;
 }
@@ -209,26 +191,12 @@ export function propCollisionDebugShapes(p: Prop): CollisionDebugShape[] {
 }
 
 /** Match the scene's displayed XY/Z without changing authoritative objects. */
-export function collisionDebugPose(e: Entity, entities: readonly Entity[], alpha: number): Entity {
-  let position = interpolatePosition(e.position, e.prevPosition, alpha);
-  if (e.towedBy !== undefined) {
-    const truck = entities.find((t) => t.id === e.towedBy && t.towTargetId === e.id);
-    if (truck)
-      position = presentedTowPosition(
-        e,
-        truck,
-        interpolatePosition(truck.position, truck.prevPosition, alpha),
-      );
-  }
-  if (e.transportedBy !== undefined) {
-    const truck = entities.find((t) => t.id === e.transportedBy);
-    if (truck)
-      position = transporterWorld(
-        { ...truck, position: interpolatePosition(truck.position, truck.prevPosition, alpha) },
-        TRANSPORTER.loadX,
-      );
-  }
-  return { ...e, position, wz: interpolateWz(e, alpha) ?? 0 };
+export function collisionDebugPose(e: Entity, alpha: number): Entity {
+  return {
+    ...e,
+    position: interpolatePosition(e.position, e.prevPosition, alpha),
+    wz: interpolateWz(e, alpha) ?? 0,
+  };
 }
 
 export function drawCollisionDebug(
@@ -239,9 +207,8 @@ export function drawCollisionDebug(
   observer: Entity,
   options: CollisionDebugOptions,
   alpha = 1,
-  getHeight: (x: number, y: number) => number = () => 0,
 ): void {
-  const focus = collisionDebugPose(observer, entities, alpha).position;
+  const focus = collisionDebugPose(observer, alpha).position;
   const labels: { x: number; y: number; width: number }[] = [];
   function draw(owner: { type: string; id: number }, shapes: CollisionDebugShape[]) {
     for (const shape of shapes) {
@@ -305,47 +272,15 @@ export function drawCollisionDebug(
       }
     }
   }
-  for (const e of entities)
-    draw(e, entityCollisionDebugShapes(collisionDebugPose(e, entities, alpha)));
+  for (const e of entities) draw(e, entityCollisionDebugShapes(collisionDebugPose(e, alpha)));
   for (const p of props) draw(p, propCollisionDebugShapes(p));
-  if (options.layers.support)
-    for (const entity of entities) {
-      if (supportingTransporter(entity, entities)) continue;
-      const e = collisionDebugPose(entity, entities, alpha);
-      const ground = vehicleGroundPose(e, getHeight, props, entityHeading(e));
-      for (const wheel of ground?.contacts ?? []) {
-        if (
-          options.nearbyOnly &&
-          (Math.abs(wheel.x - focus.wx) > 180 || Math.abs(wheel.y - focus.wy) > 180)
-        )
-          continue;
-        const p = projectWorld(camera, wheel.x, wheel.y, wheel.z);
-        if (p.sx < 0 || p.sy < 0 || p.sx > camera.viewportWidth || p.sy > camera.viewportHeight)
-          continue;
-        const dot = frame.next("circle");
-        dot.x = p.sx;
-        dot.y = p.sy;
-        dot.width = 3;
-        dot.fill = COLLISION_LAYERS.support.color;
-        const floor = projectWorld(camera, wheel.x, wheel.y, wheel.surfaceZ);
-        frame.line(p.sx, p.sy, floor.sx, floor.sy, COLLISION_LAYERS.support.color);
-        if (options.labels)
-          frame.label(
-            `#${e.id} wheel ${wheel.name}`,
-            p.sx + 5,
-            p.sy + 10,
-            COLLISION_LAYERS.support.color,
-            "10px monospace",
-          );
-      }
-    }
   if (
     options.layers.actors &&
     observer.parentId === undefined &&
     observer.collider?.solid !== false &&
     observer.collider
   ) {
-    const e = collisionDebugPose(observer, entities, alpha),
+    const e = collisionDebugPose(observer, alpha),
       p = projectWorld(camera, e.position.wx, e.position.wy, e.wz ?? 0);
     frame.line(p.sx - 4, p.sy, p.sx + 4, p.sy, "#ffffff");
     frame.line(p.sx, p.sy - 4, p.sx, p.sy + 4, "#ffffff");

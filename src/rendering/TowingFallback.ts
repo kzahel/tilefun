@@ -1,9 +1,9 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
-import { TOW, towFrontOffset, towProfile } from "../traffic/Towing.js";
 import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
 import type { Camera } from "./Camera.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import type { SpriteItem } from "./SceneItem.js";
+import { TOW, towFrontOffset, towProfile } from "./TowingPose.js";
 import frames from "./towing-fallbacks.json" with { type: "json" };
 
 /** Retained exact posed cardinal captures; every eligible paint keeps its identity.

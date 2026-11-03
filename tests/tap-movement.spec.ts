@@ -322,7 +322,7 @@ for (const renderer of ["canvas", "gpu"]) {
     await page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
       g.debugPanel.paused = true;
-      g.transport.send({ type: "set-debug", paused: true, noclip: false });
+      g.transport.send({ type: "set-debug", paused: true });
       for (const e of g.stateView.entities)
         if (e.type === "chicken") g.transport.send({ type: "edit-delete-entity", entityId: e.id });
     });

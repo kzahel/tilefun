@@ -1,8 +1,6 @@
 import { Direction, type Entity } from "../entities/Entity.js";
 import { emergencyEnabled } from "../traffic/EmergencyVehicle.js";
-import { towMeshOffset, towPitch, towProfile } from "../traffic/Towing.js";
 import { isVehicle } from "../traffic/Vehicle.js";
-import { bedGateAngle, bedTilt } from "../traffic/VehicleBed.js";
 import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForType } from "./AuthoredVehicleMeshes.js";
 import { COMPACT_CAR_MESH, type MeshInstance, vehicleMeshRadius } from "./MeshPresentation.js";
@@ -19,13 +17,6 @@ interface Pose {
     wheelTravel: number;
     emergencyEnabled?: boolean;
     presentationTime?: number;
-    bedTilt?: number;
-    bedGateAngle?: number;
-    transportRamp?: boolean;
-    towActive?: boolean;
-    towPitch?: number;
-    towOffsetX?: number;
-    towOffsetZ?: number;
   };
 }
 export function meshAssetFor(
@@ -95,11 +86,6 @@ export class EntityMeshPose {
     if (!assetId) return undefined;
     const train = this.authoredTrains && !!authoredTrainForType(entity.type);
     const target = train ? trainMeshHeading(entity) : entityHeading(entity);
-    const rear = entity.towedBy !== undefined ? (towProfile(entity)?.rear ?? 0) : 0;
-    position = {
-      wx: position.wx + rear * Math.cos(target),
-      wy: position.wy + rear * Math.sin(target),
-    };
     let pose = this.poses.get(entity.id);
     if (!pose || pose.instance.assetId !== assetId) {
       const orientation: [number, number, number, number] = [
@@ -131,8 +117,7 @@ export class EntityMeshPose {
       // rather than spinning wheels through an unseen displacement.
       const distance = Math.hypot(dx, dy);
       if (elapsed > 0 && elapsed <= 0.25 && distance <= 32) {
-        if (entity.transportedBy === undefined)
-          pose.travel += dx * Math.cos(target) + dy * Math.sin(target);
+        pose.travel += dx * Math.cos(target) + dy * Math.sin(target);
         if (distance > 0.001 && !train) {
           const moving =
             entity.velocity && Math.hypot(entity.velocity.vx, entity.velocity.vy) > 0.01;
@@ -171,14 +156,6 @@ export class EntityMeshPose {
     if (entity.paintSchemeId === undefined) delete pose.instance.paintSchemeId;
     else pose.instance.paintSchemeId = entity.paintSchemeId;
     pose.instance.presentationTime = time;
-    pose.instance.bedTilt = bedTilt(entity);
-    pose.instance.bedGateAngle = bedGateAngle(entity);
-    pose.instance.transportRamp = entity.vehicleRamp === 1;
-    pose.instance.towActive = entity.towTargetId !== undefined;
-    pose.instance.towPitch = towPitch(entity);
-    const offset = towMeshOffset(entity);
-    pose.instance.towOffsetX = offset.x;
-    pose.instance.towOffsetZ = offset.z;
     return pose.instance;
   }
   clear() {

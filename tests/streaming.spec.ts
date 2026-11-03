@@ -33,8 +33,7 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
   // turn it into a collision/timing lottery at the starting road intersection.
   await page.evaluate(() => {
     const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-    g.debugPanel.noclip = true;
-    g.transport.send({ type: "set-debug", paused: false, noclip: true });
+    g.transport.send({ type: "set-debug", paused: false });
   });
   const sample = (direction: number) =>
     page.evaluate(async (direction) => {

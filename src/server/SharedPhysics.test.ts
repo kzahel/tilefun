@@ -271,3 +271,101 @@ it("throws from outside the player hull and uses the shared world to reject bloc
     await s.close();
   }
 });
+
+it("replication preserves the admitted physics set instead of activating distant residents", async () => {
+  const s = await open();
+  try {
+    const { createFauna } = await import("../wildlife/Fauna.js");
+    await s.realm.ensureReady({ minCx: 9, maxCx: 9, minCy: 0, maxCy: 0 });
+    const far = s.realm.entityManager.spawn(createFauna("dog", 9 * 256, 32));
+    s.player.visibleRange = { minCx: -1, maxCx: 1, minCy: -1, maxCy: 1 };
+    await s.step(idle);
+    expect(s.realm.entityManager.byId.has(far.id)).toBe(true);
+    expect(s.realm.physicsState?.bodies.some((b) => b.id === far.id)).toBe(false);
+    const before = s.realm.collisionDiagnostics;
+    for (let i = 0; i < 3; i++) s.realm.replicate(s.player.clientId);
+    expect(s.realm.collisionDiagnostics).toEqual(before);
+    expect(s.realm.physicsState?.bodies.some((b) => b.id === far.id)).toBe(false);
+    await s.step(idle);
+    expect(s.realm.collisionDiagnostics?.bodyCreates).toBe(before?.bodyCreates);
+  } finally {
+    await s.close();
+  }
+});
+
+it("respawns grounded walking into water without requiring a jump landing", async () => {
+  const s = await ScenarioSession.create({
+    version: 1,
+    id: "walk-water",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(16, 32),
+    props: [],
+  });
+  try {
+    const { CollisionFlag } = await import("../world/TileRegistry.js");
+    s.realm.world.getCollisionIfLoaded = (tx) => (tx >= 2 ? CollisionFlag.Water : 0);
+    for (let i = 0; i < 60; i++) await s.step({ ...idle, dx: 1 });
+    expect(s.player.player.position.wx).toBeLessThan(32);
+    expect(s.player.gameplaySession.invincibilityTimer).toBeGreaterThan(0);
+  } finally {
+    await s.close();
+  }
+});
+
+it("lands and stands on a bridge above water without a water respawn", async () => {
+  const { CollisionFlag } = await import("../world/TileRegistry.js");
+  const s = await ScenarioSession.create({
+    version: 1,
+    id: "bridge-water",
+    generation: FLAT_SCENARIO,
+    player: { ...createPlayer(48, 32), wz: 16 },
+    props: [
+      {
+        id: 99,
+        type: "deck",
+        isProp: true,
+        position: { wx: 64, wy: 32 },
+        sprite: {} as import("../entities/Prop.js").Prop["sprite"],
+        walls: null,
+        collider: {
+          width: 128,
+          height: 48,
+          offsetX: 0,
+          offsetY: 24,
+          zBase: 14,
+          zHeight: 2,
+          walkableTop: true,
+        },
+      },
+    ],
+  });
+  try {
+    s.realm.world.getCollisionIfLoaded = () => CollisionFlag.Water;
+    for (let i = 0; i < 30; i++) await s.step(idle);
+    await s.step({ ...idle, jump: true });
+    for (let i = 0; i < 100; i++) await s.step(idle);
+    expect(s.player.player.wz).toBeCloseTo(16, 1);
+    expect(s.player.player.position.wx).toBeCloseTo(48, 1);
+    expect(s.player.gameplaySession.invincibilityTimer).toBe(0);
+    await s.reload();
+    s.realm.world.getCollisionIfLoaded = () => CollisionFlag.Water;
+    // A saved bridge arrival must recover at its support height, not at water Z.
+    expect(s.player.gameplaySession.lastSafePosition?.wz).toBeCloseTo(16, 1);
+    await s.command({ kind: "teleport", position: { wx: 160, wy: 32 }, z: 0 });
+    await s.step(idle);
+    expect(s.player.player.wz).toBeCloseTo(16, 1);
+    expect(s.player.player.position.wx).toBeCloseTo(48, 1);
+
+    // Saving over water in midair must retain the earlier supported bridge pose.
+    await s.command({ kind: "teleport", position: { wx: 160, wy: 32 }, z: 40 });
+    await s.step(idle);
+    expect(s.player.player.jumpVZ).toBeDefined();
+    await s.reload();
+    s.realm.world.getCollisionIfLoaded = () => CollisionFlag.Water;
+    for (let i = 0; i < 60; i++) await s.step(idle);
+    expect(s.player.player.position.wx).toBeCloseTo(48, 1);
+    expect(s.player.player.wz).toBeCloseTo(16, 1);
+  } finally {
+    await s.close();
+  }
+});

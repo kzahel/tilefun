@@ -7,7 +7,6 @@ import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import type { Spritesheet } from "../assets/Spritesheet.js";
-import { TRANSPORTER } from "../traffic/CarTransporter.js";
 import { TRANSPORTER_EXPECTATIONS as expected } from "../traffic/Transporter.fixture.js";
 import { createVehicle } from "../traffic/Vehicle.js";
 import { Camera } from "./Camera.js";
@@ -16,6 +15,7 @@ import { yawOrientation } from "./MeshPresentation.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import type { SpriteItem } from "./SceneItem.js";
 import { drawTransporterFallback } from "./TransporterFallback.js";
+import { TRANSPORTER } from "./TransporterPose.js";
 
 it("qualifies the real ramp endpoints, fixed body, all four rolling tires and absolute reset", async () => {
   const bytes = readFileSync("public/assets/models/vehicles/car-transporter-v2.glb");

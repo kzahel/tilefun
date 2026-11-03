@@ -1,6 +1,6 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
-import { bedOccludesPoint } from "../traffic/VehicleBed.js";
 import type { Camera } from "./Camera.js";
+import { bedOccludesPoint } from "./DumpBedPose.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import type { SpriteItem } from "./SceneItem.js";
 

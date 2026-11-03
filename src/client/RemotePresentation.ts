@@ -36,7 +36,6 @@ export class RemotePresentation {
           y: e.position.wy,
           z: e.wz ?? 0,
           jumpZ: e.jumpZ ?? 0,
-          ...(e.vehicleBed ? { vehicleBedTilt: e.vehicleBedTilt ?? 0 } : {}),
           ...(e.vehicleHeading === undefined ? {} : { vehicleHeading: e.vehicleHeading }),
         }),
       );
@@ -65,7 +64,6 @@ export class RemotePresentation {
         ...(e.vehicleHeading === undefined
           ? {}
           : { vehicleHeading: pose.vehicleHeading ?? e.vehicleHeading }),
-        ...(e.vehicleBed ? { vehicleBedTilt: pose.vehicleBedTilt ?? e.vehicleBedTilt ?? 0 } : {}),
         position,
         prevPosition: position,
         ...(e.wz === undefined ? {} : { wz: pose.z, prevWz: pose.z }),

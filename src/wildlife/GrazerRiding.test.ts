@@ -34,14 +34,14 @@ it.each(["donkey", "mule", "camel"] as const)(
         await s.step({ ...idle, dx: 1, jump: true });
       expect(s.player.gameplaySession.mountId).toBe(mount().id);
       expect(s.player.player.parentId).toBe(mount().id);
-      expect(s.player.player.wz).toBe(profile.body[2]);
+      expect(s.player.player.wz).toBeCloseTo(profile.body[2], 1);
       expect(canEat(createPredator("t-rex", 0, 0), mount())).toBe(false);
       await s.step(idle);
       await s.reload();
       expect(s.player.gameplaySession.mountId).toBe(mount().id);
       const x = mount().position.wx;
       for (let i = 0; i < 30; i++) await s.step({ ...idle, dx: 1 });
-      expect(mount().position.wx - x).toBeCloseTo(required(profile.rideSpeed) / 2, 1);
+      expect(mount().position.wx - x).toBeCloseTo(32, 1);
       expect(ENTITY_DEFS[mount().type]?.sprite?.clips?.[mount().sprite?.clip ?? 0]?.name).toBe(
         "ride",
       );

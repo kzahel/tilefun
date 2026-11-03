@@ -15,8 +15,8 @@ export interface GameplaySession {
   mountId: number | null;
   /** Entity ID of last dismounted mount — prevents immediate re-mount on landing. */
   lastDismountedId: number | null;
-  /** Position saved while grounded on non-water. Used for water-landing respawn. */
-  lastSafePosition: { wx: number; wy: number } | null;
+  /** Supported pose saved away from the water surface, including bridge height. */
+  lastSafePosition: { wx: number; wy: number; wz?: number } | null;
 }
 
 export class PlayerSession {
@@ -87,7 +87,6 @@ export class PlayerSession {
 
   /** Debug state (set by client). */
   debugPaused = false;
-  debugNoclip = false;
 
   constructor(clientId: string, player?: Entity) {
     this.clientId = clientId;

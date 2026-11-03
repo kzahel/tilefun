@@ -101,7 +101,7 @@ const clientSamples: Array<[string, ClientMessage]> = [
   ["edit-clear-terrain", { type: "edit-clear-terrain", terrainId: 2 }],
   ["edit-clear-roads", { type: "edit-clear-roads" }],
   ["set-editor-mode", { type: "set-editor-mode", enabled: true }],
-  ["set-debug", { type: "set-debug", paused: false, noclip: false }],
+  ["set-debug", { type: "set-debug", paused: false }],
   ["visible-range", { type: "visible-range", minCx: -3, minCy: -3, maxCx: 3, maxCy: 3 }],
   ["flush", { type: "flush" }],
   ["invalidate-all-chunks", { type: "invalidate-all-chunks" }],

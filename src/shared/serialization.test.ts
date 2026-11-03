@@ -492,8 +492,6 @@ describe("immutable snapshot reuse", () => {
         "jumpZ",
         "jumpVZ",
         "wz",
-        "airMomentumX",
-        "airMomentumY",
         "jumpInputState",
         "parentId",
         "localOffsetX",

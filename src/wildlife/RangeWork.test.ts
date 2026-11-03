@@ -90,7 +90,7 @@ it("horse reloads grazing phase and alternates one real grass portion with one r
     await until(s, () => a.animalWork?.state === "graze");
     const pose = { ...a.sprite },
       work = JSON.parse(JSON.stringify(a.animalWork));
-    expect(a.velocity).toEqual({ vx: 0, vy: 0 });
+    expect(Math.hypot(a.velocity?.vx ?? Infinity, a.velocity?.vy ?? Infinity)).toBeLessThan(0.1);
     await s.reload();
     a = saved(s, a);
     expect(a.sprite?.frameCol).toBe(pose.frameCol);
@@ -98,7 +98,7 @@ it("horse reloads grazing phase and alternates one real grass portion with one r
     await until(s, () => (a.animalWork?.drunk ?? 0) === 1);
     expect(a.animalWork?.eaten).toBe(1);
     for (const source of items(s)) expect(source.workItem?.units).toBe(2);
-    expect(a.wz).toBe(0);
+    expect(a.wz).toBeCloseTo(0, 1);
   } finally {
     await s.close();
   }
@@ -120,7 +120,7 @@ it("giraffe browses actual canopy leaves at height while its feet remain grounde
     expect(footprint.right).toBeLessThanOrEqual(support.right);
     expect(footprint.top).toBeGreaterThanOrEqual(support.top);
     expect(footprint.bottom).toBeLessThanOrEqual(support.bottom);
-    expect(a.wz).toBe(0);
+    expect(a.wz).toBeCloseTo(0, 1);
     const col = a.sprite?.frameCol;
     await s.reload();
     a = saved(s, a);

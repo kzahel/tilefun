@@ -1,15 +1,11 @@
 import RAPIER from "@dimforge/rapier3d-compat";
-import {
-  CHUNK_SIZE_PX,
-  DEFAULT_PHYSICAL_HEIGHT,
-  JUMP_GRAVITY,
-  JUMP_VELOCITY,
-} from "../config/constants.js";
+import { CHUNK_SIZE_PX, JUMP_GRAVITY, JUMP_VELOCITY } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { Direction } from "../entities/Entity.js";
-import { applyVehicleFacing, vehicleBodySize, vehicleNoseHeading } from "../traffic/Vehicle.js";
+import { applyVehicleFacing } from "../traffic/Vehicle.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
+import { physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
 import {
   initializePhysics,
   PHYSICS_DT,
@@ -52,26 +48,6 @@ interface Section {
   identity: unknown;
   revision: string | number;
   colliders: RAPIER.Collider[];
-}
-
-export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
-  if (entity.type.startsWith("vehicle-v1:")) return "vehicle";
-  if (entity.type === "ball") return "loose";
-  if (entity.workItem) {
-    const item = entity.workItem;
-    // Food sources and storage sites are anchored gameplay markers. Collected
-    // loose food/toys participate in the same scene as characters.
-    if (
-      item.growth ||
-      item.cachedIn ||
-      ["nest", "cache", "lodge", "dust", "hoard"].includes(item.kind)
-    )
-      return "fixed";
-    return "loose";
-  }
-  if (entity.type === "player" || entity.wanderAI || entity.routeAI || entity.resident)
-    return "character";
-  return "fixed";
 }
 
 /** Shared fixed-step body simulation. No input queue, AI, renderer or transport.
@@ -153,19 +129,19 @@ export class PhysicsScene {
       if (!c || entity.parentId !== undefined || (c.solid === false && kind !== "loose")) continue;
       if (present.has(entity.id)) throw Error(`Duplicate physics body ${entity.id}`);
       present.add(entity.id);
-      const vehicleSize = kind === "vehicle" ? vehicleBodySize(entity.type, 0) : undefined;
-      const width = vehicleSize?.width ?? c.width,
-        height = vehicleSize?.height ?? c.height;
-      const signature = `${kind}:${width}:${height}:${c.physicalHeight}:${kind === "vehicle" ? 0 : c.offsetX}:${kind === "vehicle" ? 0 : c.offsetY}`;
+      const dimensions = physicsBodyDimensions(entity);
+      const width = dimensions.width,
+        height = dimensions.depth;
+      const signature = `${kind}:${width}:${height}:${dimensions.height}:${dimensions.offsetX}:${dimensions.offsetY}`;
       let entry = this.bodies.get(entity.id);
       if (entry && entry.signature !== signature) {
         this.remove(entry);
         entry = undefined;
       }
       if (!entry) {
-        const halfY = (c.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT) / 2 / SCALE;
-        const offsetX = kind === "vehicle" ? 0 : c.offsetX / SCALE,
-          offsetY = kind === "vehicle" ? 0 : (c.offsetY - c.height / 2) / SCALE;
+        const halfY = dimensions.height / 2 / SCALE;
+        const offsetX = dimensions.offsetX / SCALE,
+          offsetY = dimensions.offsetY / SCALE;
         const desc =
           kind === "fixed"
             ? RAPIER.RigidBodyDesc.fixed()
@@ -176,7 +152,7 @@ export class PhysicsScene {
           entity.position.wy / SCALE + offsetY - this.origin.z,
         );
         if (kind === "vehicle") {
-          const angle = vehicleNoseHeading(entity);
+          const angle = dimensions.yaw;
           desc.setRotation({ x: 0, y: -Math.sin(angle / 2), z: 0, w: Math.cos(angle / 2) });
         }
         if (kind !== "loose") desc.enabledRotations(false, kind === "vehicle", false);
@@ -228,7 +204,7 @@ export class PhysicsScene {
             vx: entity.velocity?.vx ?? 0,
             vy: entity.velocity?.vy ?? 0,
             vz: entity.jumpVZ ?? 0,
-            heading: kind === "vehicle" ? vehicleNoseHeading(entity) : 0,
+            heading: kind === "vehicle" ? dimensions.yaw : 0,
             jumpHeld: !!((entity.jumpInputState ?? 0) & 2),
             grounded: entity.jumpVZ === undefined,
             groundZ: entity.groundZ ?? entity.wz ?? 0,
@@ -387,9 +363,14 @@ export class PhysicsScene {
       let vertical = entry.state.grounded
         ? -(entry.state.normalX * x + entry.state.normalZ * z) / Math.max(0.5, entry.state.normalY)
         : velocity.y;
-      if (input.altitude !== undefined)
-        vertical = (input.altitude / SCALE + entry.halfY - entry.body.translation().y) / PHYSICS_DT;
-      else if (jump && entry.state.grounded) {
+      if (input.altitude !== undefined) {
+        // A prescribed landing may meet a loose body or an edited higher floor.
+        // Do not keep driving through solved support: the solver would accumulate
+        // an upward separation velocity that launches the actor on motor release.
+        if (!entry.state.grounded || input.altitude > entry.state.groundZ + 0.15)
+          vertical =
+            (input.altitude / SCALE + entry.halfY - entry.body.translation().y) / PHYSICS_DT;
+      } else if (jump && entry.state.grounded) {
         vertical = JUMP_VELOCITY / SCALE;
         entry.state.grounded = false;
         delete entry.state.supportId;
@@ -462,7 +443,8 @@ export class PhysicsScene {
           ) * factor;
         // Ignore small solver separation velocities; a requested jump is far
         // above this threshold and immediately leaves support.
-        if (ny < -0.5 && touching && separating < 0.25) {
+        const landingMotor = state.altitude !== undefined && state.altitude <= state.z + 0.15;
+        if (ny < -0.5 && touching && (separating < 0.25 || landingMotor)) {
           // At a ramp/deck seam both support manifolds may exist. Keep the
           // rising tangent instead of letting contact iteration order flatten it.
           if (state.grounded && -ny >= state.normalY) return;

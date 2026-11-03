@@ -38,7 +38,6 @@
     "streaming:bench": "node scripts/benchmark-streaming.mjs",
     "streaming:matrix": "node scripts/benchmark-streaming-matrix.mjs",
     "test:streaming": "node --test scripts/streaming-matrix.test.mjs",
-    "vehicle-collision:bench": "node scripts/benchmark-vehicle-collision.mjs",
     "desktop:build": "npm run build && node scripts/build-desktop.mjs",
     "desktop:build:linux": "npm run build && node scripts/build-desktop.mjs --linux",
     "deck:doctor": "node scripts/steam-deck.mjs doctor",

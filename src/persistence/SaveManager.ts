@@ -37,13 +37,15 @@ export interface InspectionState extends SavedMeta {
 }
 
 export interface SavedPlayerData {
+  /** Last supported respawn pose, independent of the current airborne pose. */
+  lastSafePosition?: { wx: number; wy: number; wz?: number } | null;
   driving?: { identity: string; exit: { wx: number; wy: number } | null };
   /** Absolute vertical pose, preserving which stacked space the player occupies. */
   wz?: number;
   groundZ?: number;
   jumpVZ?: number;
-  /** Preserve total and passive XY motion only for an airborne save. */
-  airborneVelocity?: { vx: number; vy: number; momentumX?: number; momentumY?: number };
+  /** Preserve physical XY velocity for an airborne save. */
+  airborneVelocity?: { vx: number; vy: number };
   mount?: { id: string; offsetX: number; offsetY: number; wz: number; jumpZ: number };
   returnLocation?: import("../server/PlayerSession.js").PlayerSession["returnLocation"];
   gemsCollected: number;

@@ -33,7 +33,6 @@ export class DebugPanel {
   private readonly terrainPacingSelect: HTMLSelectElement;
   private readonly zoomSlider: HTMLInputElement;
   private readonly zoomLabel: HTMLSpanElement;
-  private readonly noclipCheckbox: HTMLInputElement;
   private readonly observerCheckbox: HTMLInputElement;
   private readonly baseModeBtn: HTMLButtonElement;
   private readonly convexCheckbox: HTMLInputElement;
@@ -200,15 +199,6 @@ export class DebugPanel {
     observerHint.style.cssText = "color: #999; font-size: 11px;";
     observerRow.append(observerLbl, this.observerCheckbox, observerHint);
 
-    // Noclip checkbox
-    const noclipRow = document.createElement("div");
-    noclipRow.style.cssText = ROW_STYLE;
-    const noclipLbl = document.createElement("label");
-    noclipLbl.textContent = "Noclip";
-    this.noclipCheckbox = document.createElement("input");
-    this.noclipCheckbox.type = "checkbox";
-    noclipRow.append(noclipLbl, this.noclipCheckbox);
-
     // Base selection mode toggle
     const baseModeRow = document.createElement("div");
     baseModeRow.style.cssText = ROW_STYLE;
@@ -270,7 +260,6 @@ export class DebugPanel {
       pacingRow,
       pacingHint,
       observerRow,
-      noclipRow,
       pauseRow,
       show3dRow,
       baseModeRow,
@@ -355,10 +344,6 @@ export class DebugPanel {
     this.terrainPacingSelect.dispatchEvent(new Event("change"));
   }
 
-  get noclip(): boolean {
-    return this.noclipCheckbox.checked;
-  }
-
   get observer(): boolean {
     return this.observerCheckbox.checked;
   }
@@ -384,10 +369,6 @@ export class DebugPanel {
     const actual = this.zoom;
     this.zoomLabel.textContent = `${actual.toFixed(2)}x`;
     this.zoomPreset.value = ZOOM_PRESETS.some((p) => p.zoom === actual) ? String(actual) : "custom";
-  }
-
-  setNoclip(value: boolean): void {
-    this.noclipCheckbox.checked = value;
   }
 
   setPaused(value: boolean): void {

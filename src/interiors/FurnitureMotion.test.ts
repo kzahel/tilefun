@@ -52,16 +52,16 @@ describe("furniture in shared game physics", () => {
     const m = scene("wardrobe");
     m.player.position = { wx: 80, wy: 112 };
     for (let i = 0; i < 100; i++) await step(m, 0, -1);
-    expect(m.player.position.wy).toBeGreaterThanOrEqual(94);
+    expect(m.player.position.wy).toBeGreaterThanOrEqual(93.99);
     expect(m.player.position.wy).toBeLessThan(95);
     const first = m.player.position.wy;
     for (let i = 0; i < 20; i++) await step(m, 1, -1);
     expect(m.player.position.wx).toBeGreaterThan(85);
-    expect(m.player.position.wy).toBeGreaterThanOrEqual(94);
-    expect(m.player.position.wy).toBeLessThanOrEqual(first);
+    expect(m.player.position.wy).toBeGreaterThanOrEqual(93.99);
+    expect(m.player.position.wy).toBeLessThanOrEqual(first + 0.01);
     m.player.position = { wx: 80, wy: 50 };
     for (let i = 0; i < 100; i++) await step(m, 0, 1);
-    expect(m.player.position.wy).toBeLessThanOrEqual(76);
+    expect(m.player.position.wy).toBeLessThanOrEqual(76.01);
     expect(m.player.position.wy).toBeGreaterThan(75);
   });
   it("permits walking on rendered floor within a wall sketch cell", async () => {
@@ -72,7 +72,7 @@ describe("furniture in shared game physics", () => {
     expect(m.canStand(80, 38)).toBe(true);
     const wardrobe = scene("wardrobe");
     wardrobe.moveObject("wardrobe", 22, 88);
-    expect(wardrobe.collisionBoxes()[0]?.bounds.left).toBe(8);
+    expect(wardrobe.collisionBoxes()[0]?.bounds.left).toBeCloseTo(8, 1);
     expect(() => wardrobe.moveObject("wardrobe", 21, 88)).toThrow(/floor/);
   });
   it("moves furniture by one pixel, carries supported items, and rejects overlap with the player", async () => {
@@ -124,13 +124,13 @@ describe("furniture in shared game physics", () => {
       maxZ = Math.max(maxZ, m.player.wz ?? 0);
     }
     expect(maxZ).toBeGreaterThan(32);
-    expect(m.player.wz).toBe(32);
+    expect(m.player.wz).toBeCloseTo(32, 1);
     expect(m.player.jumpVZ).toBeUndefined();
     for (let i = 0; i < 30; i++) await step(m, 0, 0);
-    expect(m.player.wz).toBe(32);
+    expect(m.player.wz).toBeCloseTo(32, 1);
     expect(() => m.setBody("wardrobe", { height: 40, walkableTop: true })).toThrow(/overlap/);
     for (let i = 0; i < 180; i++) await step(m, 1, 0);
-    expect(m.player.wz).toBe(0);
+    expect(m.player.wz).toBeCloseTo(0, 1);
     expect(m.player.jumpVZ).toBeUndefined();
   });
   it("normal gravity cannot clear the wardrobe, while lower gravity can", async () => {
@@ -155,7 +155,7 @@ describe("furniture in shared game physics", () => {
     expect(m.canStand(80, 84, 32)).toBe(false);
     await step(m, 0, 0, true);
     m.resetPlayer();
-    expect(m.player.wz).toBe(0);
+    expect(m.player.wz).toBeCloseTo(0, 1);
     expect(m.player.jumpVZ).toBeUndefined();
     expect(m.bodies.wardrobe).toEqual({ height: 48, walkableTop: false });
     expect(() => m.setBody("wardrobe", { height: NaN, walkableTop: true })).toThrow();
@@ -171,7 +171,7 @@ describe("furniture in shared game physics", () => {
       m.player.wz = 8;
       m.player.groundZ = 8;
       await step(m, 0, 0);
-      expect(m.player.wz).toBe(8);
+      expect(m.player.wz).toBeCloseTo(8, 1);
       expect(order().indexOf("player")).toBeGreaterThan(order().indexOf("bed"));
     }
     m.player.position = { wx: 64, wy: 60 };

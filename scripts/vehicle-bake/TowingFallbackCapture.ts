@@ -7,8 +7,8 @@ import {
 import { loadCarMesh } from "../../src/rendering/CarMeshAsset.js";
 import { setCarMeshProjection } from "../../src/rendering/CarMeshProjection.js";
 import { CarPixelOutline } from "../../src/rendering/CarPixelOutline.js";
+import { towMeshOffset, towPitch } from "../../src/rendering/TowingPose.js";
 import { VehiclePaintResources } from "../../src/rendering/VehiclePaintResources.js";
-import { towMeshOffset, towPitch } from "../../src/traffic/Towing.js";
 import profiles from "../../src/traffic/towing-profiles.json" with { type: "json" };
 import { vehiclePaintSchemes } from "../../src/traffic/VehiclePaint.js";
 

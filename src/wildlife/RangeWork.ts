@@ -57,7 +57,7 @@ export class RangeWork {
     t.state = state;
     t.elapsed = 0;
     if (!a.fauna?.motion) {
-      if (a.velocity) a.velocity.vx = a.velocity.vy = 0;
+      a.motionIntent = { vx: 0, vy: 0 };
       if (a.wanderAI) a.wanderAI.state = "idle";
       restoreFaunaPose(a);
     }
@@ -183,7 +183,7 @@ export class RangeWork {
     ) {
       t.elapsed = prior;
       if (ai.motion) ai.motion.workPaused = true;
-      if (a.velocity) a.velocity.vx = a.velocity.vy = 0;
+      a.motionIntent = { vx: 0, vy: 0 };
       return true;
     }
     if (ai.motion) delete ai.motion.workPaused;

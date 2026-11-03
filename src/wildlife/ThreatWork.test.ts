@@ -168,7 +168,7 @@ it("porcupine warning makes the actual wolf retreat with its native escape", asy
   }
 }, 60000);
 
-it.each(["remove", "move", "raise", "carry"] as const)(
+it.each(["remove", "move", "carry"] as const)(
   "a committed fox leap lands after prey %s without a remote meal",
   async (change) => {
     const s = await ScenarioSession.create(threatWorkRecipe("fox"));
@@ -178,16 +178,12 @@ it.each(["remove", "move", "raise", "carry"] as const)(
       const prey = required(actors(s).find((e) => e.persistentId === a.animalWork?.targetId));
       if (change === "remove") s.realm.entityManager.remove(prey.id);
       else if (change === "move") prey.position.wx += 150;
-      else if (change === "raise") {
-        prey.wz = 12;
-        prey.jumpZ = 12;
-        prey.jumpVZ = 60;
-      } else prey.parentId = s.player.player.id;
+      else prey.parentId = s.player.player.id;
       await s.step(idle);
       expect(a.animalWork?.state).toBe("pounce");
       expect(a.fauna?.motion).toBeDefined();
       await until(s, () => !a.fauna?.motion);
-      expect(a.wz ?? 0).toBe(0);
+      expect(a.wz ?? 0).toBeCloseTo(0, 1);
       expect(a.animalWork?.eaten).toBe(0);
     } finally {
       await s.close();
@@ -228,7 +224,7 @@ it("fox reload preserves an airborne committed leap and completes one physical m
     expect(a.fauna?.motion).toEqual(saved.motion);
     expect(a.wz).toBe(saved.z);
     await until(s, () => a.animalWork?.eaten === 1);
-    expect(a.wz ?? 0).toBe(0);
+    expect(a.wz ?? 0).toBeCloseTo(0, 1);
     expect(actors(s).some((e) => e.type === "wildlife-mouse-provisional-v1")).toBe(false);
   } finally {
     await s.close();

@@ -1,5 +1,4 @@
 import { CHUNK_SIZE_PX } from "../config/constants.js";
-import { bedQueryBounds, hasDetailedVehicleSurface } from "../traffic/VehicleBed.js";
 import { getEntityAABB } from "./collision.js";
 import type { Entity } from "./Entity.js";
 
@@ -72,11 +71,7 @@ export class SpatialHash {
   }
 
   private indexFootprint(entity: Entity): void {
-    const b = entity.collider
-      ? hasDetailedVehicleSurface(entity)
-        ? bedQueryBounds(entity)
-        : getEntityAABB(entity.position, entity.collider)
-      : undefined;
+    const b = entity.collider ? getEntityAABB(entity.position, entity.collider) : undefined;
     if (
       b &&
       (SpatialHash.toChunk(b.left) !== SpatialHash.toChunk(b.right) ||
@@ -132,9 +127,7 @@ export class SpatialHash {
     }
     for (const entity of this.spanningEntities.values()) {
       if (!entity.collider || result.includes(entity)) continue;
-      const b = hasDetailedVehicleSurface(entity)
-        ? bedQueryBounds(entity)
-        : getEntityAABB(entity.position, entity.collider);
+      const b = getEntityAABB(entity.position, entity.collider);
       if (
         b.right >= minCx * CHUNK_SIZE_PX &&
         b.left < (maxCx + 1) * CHUNK_SIZE_PX &&

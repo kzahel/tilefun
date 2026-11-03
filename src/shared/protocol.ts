@@ -127,7 +127,7 @@ export type ClientMessage =
   | { type: "edit-clear-terrain"; terrainId: number }
   | { type: "edit-clear-roads" }
   | { type: "set-editor-mode"; enabled: boolean }
-  | { type: "set-debug"; paused: boolean; noclip: boolean }
+  | { type: "set-debug"; paused: boolean }
   | {
       type: "visible-range";
       minCx: number;
@@ -206,8 +206,7 @@ export interface EntitySnapshot {
   jumpZ?: number;
   jumpVZ?: number;
   /** Passive XY departure velocity while airborne; total velocity includes it. */
-  airMomentumX?: number;
-  airMomentumY?: number;
+
   /** Authoritative jump-button latch: bit 0 consumed, bit 1 held. */
   jumpInputState?: number;
   /** Emergency lights enabled and selected siren style; see EmergencyVehicle. */
@@ -215,16 +214,11 @@ export interface EntitySnapshot {
   /** Driven-car nose angle in world radians, retained while parked. */
   vehicleHeading?: number;
   paintSchemeId?: string;
-  vehicleBed?: true;
+
   /** Hinged dump bed angle/target in radians; authority owns the clock. */
-  vehicleBedTilt?: number;
-  vehicleBedTarget?: number;
+
   /** Runtime towing links; zero means durable partner is not resident yet. */
-  towTargetId?: number;
-  vehicleRamp?: number;
-  transportLoadId?: number;
-  transportedBy?: number;
-  towedBy?: number;
+
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

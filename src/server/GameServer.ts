@@ -97,8 +97,7 @@ export class GameServer {
       });
       if (session.realmId !== realm.currentWorldId || session.retired) return;
       realm.vehicles.exit(session, true);
-      delete session.player.airMomentumX;
-      delete session.player.airMomentumY;
+
       session.player.position = { wx, wy };
       realm.savePlayerData(session);
     };

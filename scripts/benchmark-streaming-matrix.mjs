@@ -135,7 +135,6 @@ try {
     const command = [
       "scripts/benchmark-streaming.mjs",
       "--zoom-motion",
-      "--noclip",
       `--zooms=${config.zooms}`,
       `--movement-seconds=${config.movementSeconds}`,
       `--settle-seconds=${config.settleSeconds}`,

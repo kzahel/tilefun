@@ -32,7 +32,7 @@ it("waits in its web until small prey approaches, then warns and scuttles", () =
   updatePredatorAI(spider, 0.3, open, [spider, rabbit], []);
   updatePredatorAI(spider, 0.1, open, [spider, rabbit], []);
   expect(spider.predator?.state).toBe("chase");
-  expect(Math.hypot(spider.velocity?.vx ?? 0, spider.velocity?.vy ?? 0)).toBe(48);
+  expect(Math.hypot(spider.motionIntent?.vx ?? 0, spider.motionIntent?.vy ?? 0)).toBe(48);
 });
 it("owns one persistent floor web, returns to ambush and never creates manual prey", async () => {
   const spider = createPredator("giant-spider", 120, 64);

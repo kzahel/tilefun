@@ -70,11 +70,7 @@ export function vehicleNoseHeading(entity: {
 }): number {
   return entity.vehicleHeading ?? vehicleCardinalHeading(entity.sprite?.direction);
 }
-export function vehicleBodySize(
-  type: string,
-  heading: number,
-  towed = false,
-): { width: number; height: number } {
+export function vehicleBodySize(type: string, heading: number): { width: number; height: number } {
   const body = rollingBodies.get(type);
   if (!body) throw Error(`Unknown vehicle body ${type}`);
   const cos = Math.abs(Math.cos(heading)),
@@ -82,7 +78,7 @@ export function vehicleBodySize(
   // Exact cardinal dimensions avoid microscopic overlap between adjacent lanes.
   const c = cos < 1e-6 ? 0 : cos > 1 - 1e-6 ? 1 : cos;
   const s = sin < 1e-6 ? 0 : sin > 1 - 1e-6 ? 1 : sin;
-  const length = body.length + (towed ? 24 : 0);
+  const length = body.length;
   return { width: length * c + body.breadth * s, height: length * s + body.breadth * c };
 }
 const roofSizes = new Map(
@@ -152,14 +148,13 @@ export function applyVehicleFacing(
   const { width, height } = vehicleBodySize(
     entity.type,
     entity.vehicleHeading ?? vehicleCardinalHeading(direction),
-    entity.towedBy !== undefined,
   );
   entity.collider = {
     offsetX: 0,
     offsetY: height / 2,
     width,
     height,
-    physicalHeight: c.zHeight + (entity.towedBy !== undefined ? 12 : 0),
+    physicalHeight: c.zHeight,
     clientSolid: true,
   };
   entity.sortOffsetY = view.metadata.depthOffset - (c.offsetY - c.height / 2);
@@ -203,7 +198,6 @@ export function createVehicle(
   const entity: Entity = {
     id: 0,
     type,
-    ...(model === "dump-truck" ? { vehicleBed: true as const } : {}),
     ...(paintSchemeId === undefined ? {} : { paintSchemeId }),
     position: { wx, wy },
     velocity: { vx: 0, vy: 0 },

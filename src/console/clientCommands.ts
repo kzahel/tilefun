@@ -4,20 +4,6 @@ import type { ConsoleEngine } from "./ConsoleEngine.js";
 
 export function registerClientCommands(engine: ConsoleEngine, gc: GameContext): void {
   engine.commands.register({
-    name: "noclip",
-    description: "Toggle fly-through-walls mode",
-    args: [],
-    category: "cl",
-    execute: (_args, out) => {
-      const current = gc.debugPanel.noclip;
-      // Toggle by programmatically clicking the checkbox
-      // We set the internal state directly through the debug panel
-      gc.debugPanel.setNoclip(!current);
-      out(`Noclip: ${!current ? "ON" : "OFF"}`);
-    },
-  });
-
-  engine.commands.register({
     name: "invisibility",
     description: "Toggle entity-ignore-player mode (entities won't chase/follow)",
     args: [],

@@ -95,7 +95,7 @@ export class ForestWork {
     t.state = state;
     t.elapsed = 0;
     if (!native(a)?.motion) {
-      if (a.velocity) a.velocity.vx = a.velocity.vy = 0;
+      a.motionIntent = { vx: 0, vy: 0 };
       if (a.wanderAI && !native(a)?.alarmFrom) a.wanderAI.state = "idle";
       if (a.deer) restoreDeerPose(a);
       else restoreFaunaPose(a);
@@ -683,7 +683,7 @@ export class ForestWork {
           (t.sourcePosition && !c.ready(t.sourcePosition, 96))))
     ) {
       if (ai.motion) ai.motion.workPaused = true;
-      if (a.velocity) a.velocity.vx = a.velocity.vy = 0;
+      a.motionIntent = { vx: 0, vy: 0 };
       return true;
     }
     if (ai.motion) delete ai.motion.workPaused;

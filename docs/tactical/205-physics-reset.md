@@ -537,3 +537,80 @@ No promoted assets, source pixels or review approvals changed. This remains an
 unfinished reset checkpoint: no dev-ready marker and no Chromebook performance
 claim. Continue the remaining helper/residency/edit cleanup, then the device gate
 and requested final review.
+
+### Checkpoint 4c — delete duplicate collision and pose descriptions
+
+Removed the maintained CollisionIndex, per-axis/separation implementation,
+air-momentum module, dynamic support/carry/vehicle ground fitting and old towing,
+transporter/cargo/contact recovery helpers. Read-only terrain/prop admission queries
+remain; moving body support/landing exclusively belongs to PhysicsScene. Shared body
+shape dimensions also drive CollisionDebug. Scene collection no longer reconstructs
+coupled equipment poses or fits cosmetic car grades independently of simulation.
+Frozen equipment art inspection retains pure pose/occlusion math under rendering;
+no approved art pixels or immutable source recipes were rewritten.
+
+Retired equipment and extra airborne momentum fields were removed from ordinary
+entities, saves, replication/deltas and the binary frame format. Frame tag is now
+0x0c, rejecting older tags; matching builds are required. Generic baseline/delta,
+all-entity type boundary and airborne save/travel coverage remains. Removed tests
+for old collision algorithms, retired equipment physics and synthetic AABB/OBB
+comparisons together with their unused solver/CLI. Pure frozen-art registration
+and normal culling/index/lifecycle tests remain. Heading-only car changes are now
+dirty for persistence as well as translations.
+
+A new real shared-world regression settles a loose ball for 600 ticks, proves it
+is asleep, lowers its supporting terrain, and proves it falls to the new floor
+without recreating its body. Existing Rapier removal/update semantics pass this
+check without adding another wake/correction policy. The initial focused run passed
+251 checks; the added support test passes after correcting the fixture's expected
+height (elevation units are 8px). Broad native and final build/device checks follow.
+
+Qualification repairs: task phase changes now stop `motionIntent` instead of
+rewriting solved velocity. Altitude motors recognize solved landing support and
+stop driving through higher floors/loose bodies, avoiding a separation-velocity
+launch on release; ordinary rabbit feeding/reload/eviction regressions now pass.
+Mounted animals use ordinary shared character speed, and their visible ride/sprint
+clips are selected from solved movement. Rendering above prop tops tolerates the
+shared solver's subpixel resting separation.
+
+The requested Sol 6.1 high read-only review through Yep Anywhere found publication
+admitting every resident body, a dead Noclip control, and water entry/bridge-height
+errors. Publication now preserves the last admitted set plus controlled bodies;
+a regression proves repeated publication neither activates distant residents nor
+recreates their bodies. Noclip UI/console/protocol/diagnostic consumers are removed.
+Water response runs for grounded entry as well as landings, recognizes support
+height above water and restores the saved supported respawn height after bridge
+reload. The expanded game authority/prediction/save/seat run passes 79 checks.
+Final reviewer follow-up, build/device gates are still in progress at this entry.
+
+The broad native audit initially passed 4,484/4,702 cases. Retired per-species
+minimum-throw/ricochet matrices now exercise four distinct motion families; a hit
+need not reverse the ball on world X. Shared raptor flight lifecycle runs on one
+representative, with all species' catch eligibility/data still checked. Fixed-clock
+respawn persistence uses a short saved countdown (delay bounds remain separately
+covered). Server transport fixtures now await actual asynchronous world/physics
+startup with disposable memory stores. Numerical pose assertions retain bounded
+contact tolerances instead of exact old snaps. Raised unsupported prey is allowed
+to fall; it is not a promise of hovering. Ordinary settled/mounted/static/furniture,
+claims, interruption/reload and body lifecycle checks remain. Dense preview queries
+that exceed the existing 128-actor adapter cap explicitly reject; no generation
+output or cap was changed. Repeated full-suite verification follows on stable source.
+
+All seven production full-Chromium browser boundaries pass after cleanup: ordinary
+Worker NPC/prediction, actual delayed P2P reversal/convergence, two-seat lab
+fences/reload, Worker client stalls/lifecycle, GPU context/resize/teardown, garage
+ramp/seat save and mobile editor placement/driving/save/delete. The later bridge
+respawn-height repair also has the focused 79-check authority/save/prediction run.
+Catalog, all 2,119 candidate identities and build passed before that bounded repair;
+final inventories/build are being regenerated on the finished source.
+
+Final source review used the explicitly requested `gpt-6.1-sol` with high effort,
+read-only plan mode through Yep Anywhere on localhost:3400. Model/effort were
+verified from session metadata. Follow-up reviews closed publication membership,
+Noclip, water entry, saved bridge recovery and airborne respawn-history findings.
+Supported respawn XYZ is now saved independently of the current airborne pose;
+old airborne-water saves without that history use the existing bounded arrival
+search before player registration. The reviewer reports **no remaining actionable
+findings** on this source and ran no tests or writes. The expanded focused run
+passes **87 native checks across six files**. Final stable-source suite, bundle
+and physical device comparison are separate gates recorded next.

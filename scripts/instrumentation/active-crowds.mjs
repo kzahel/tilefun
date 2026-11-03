@@ -68,12 +68,13 @@ for (const [population, placement] of cases.filter(
     for (const [owner, key, name] of [
       [realm, "computeEntityTickDtsMulti", "selection"],
       [realm, "decisionDts", "decisions"],
-      [realm.entityManager, "update", "physics"],
+      [realm.physicsScene, "step", "physics"],
       [realm.streaming, "update", "streaming"],
       [realm.records, "changed", "dirty-marking"],
       [realm.worldAPI.tick, "firePre", "pre-hooks"],
     ]) {
       const fn = owner[key];
+      if (typeof fn !== "function") throw Error(`Missing phase ${name}`);
       owner[key] = function (...args) {
         const t = performance.now();
         if (name === "pre-hooks" && aiStarted) {

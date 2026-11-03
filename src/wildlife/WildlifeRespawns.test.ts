@@ -118,12 +118,15 @@ it("saves pending countdowns and atomically replaces their records with distant 
     await session.step({ dx: 0, dy: 0, jump: false, sprinting: false }, range);
     const queue = () => session.realm.entityManager.wildlifeRespawns;
     expect(queue().size).toBe(1);
+    // Randomized delay bounds are covered above. This lifecycle proof only needs
+    // a short persisted countdown through actual fixed Realm ticks.
+    for (const job of queue().values()) job.remaining = 0.1;
     const saved = structuredClone([...queue().values()]);
     await session.reload();
     expect([...queue().values()]).toEqual(saved);
     expect(session.realm.entityManager.entities.some((e) => e.deer)).toBe(false);
     // Step the real Realm clock through the complete delay on loaded terrain.
-    for (let i = 0; i < 3700 && queue().size; i++)
+    for (let i = 0; i < 120 && queue().size; i++)
       await session.step({ dx: 0, dy: 0, jump: false, sprinting: false }, range);
     expect(queue().size).toBe(0);
     const replacement = required(session.realm.entityManager.entities.find((e) => e.deer));

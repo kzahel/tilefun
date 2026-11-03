@@ -61,20 +61,12 @@ export function serializeEntity(e: Entity): EntitySnapshot {
   if (e.noShadow !== undefined) result.noShadow = e.noShadow;
   if (e.deathTimer !== undefined) result.deathTimer = e.deathTimer;
   if (e.jumpZ !== undefined) result.jumpZ = e.jumpZ;
-  if (e.airMomentumX !== undefined) result.airMomentumX = e.airMomentumX;
+
   if (e.jumpInputState !== undefined) result.jumpInputState = e.jumpInputState;
   if (e.emergencyState !== undefined) result.emergencyState = e.emergencyState;
   if (e.vehicleHeading !== undefined) result.vehicleHeading = e.vehicleHeading;
   if (e.paintSchemeId !== undefined) result.paintSchemeId = e.paintSchemeId;
-  if (e.vehicleBed) result.vehicleBed = true;
-  if (e.vehicleBedTilt !== undefined) result.vehicleBedTilt = e.vehicleBedTilt;
-  if (e.vehicleRamp !== undefined) result.vehicleRamp = e.vehicleRamp;
-  if (e.transportLoadId !== undefined) result.transportLoadId = e.transportLoadId;
-  if (e.transportedBy !== undefined) result.transportedBy = e.transportedBy;
-  if (e.towTargetId !== undefined) result.towTargetId = e.towTargetId;
-  if (e.towedBy !== undefined) result.towedBy = e.towedBy;
-  if (e.vehicleBedTarget !== undefined) result.vehicleBedTarget = e.vehicleBedTarget;
-  if (e.airMomentumY !== undefined) result.airMomentumY = e.airMomentumY;
+
   if (e.jumpVZ !== undefined) result.jumpVZ = e.jumpVZ;
   if (e.wz !== undefined) result.wz = e.wz;
   if (e.parentId !== undefined) result.parentId = e.parentId;
@@ -99,20 +91,10 @@ function entitySnapshotMatches(e: Entity, s: EntitySnapshot): boolean {
     e.deathTimer !== s.deathTimer ||
     e.jumpZ !== s.jumpZ ||
     e.jumpVZ !== s.jumpVZ ||
-    e.airMomentumX !== s.airMomentumX ||
-    e.airMomentumY !== s.airMomentumY ||
     e.jumpInputState !== s.jumpInputState ||
     e.emergencyState !== s.emergencyState ||
     e.vehicleHeading !== s.vehicleHeading ||
     e.paintSchemeId !== s.paintSchemeId ||
-    e.vehicleBed !== s.vehicleBed ||
-    e.vehicleBedTilt !== s.vehicleBedTilt ||
-    e.vehicleRamp !== s.vehicleRamp ||
-    e.transportLoadId !== s.transportLoadId ||
-    e.transportedBy !== s.transportedBy ||
-    e.towTargetId !== s.towTargetId ||
-    e.towedBy !== s.towedBy ||
-    e.vehicleBedTarget !== s.vehicleBedTarget ||
     e.wz !== s.wz ||
     e.parentId !== s.parentId ||
     e.localOffsetX !== s.localOffsetX ||
@@ -231,20 +213,12 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.noShadow !== undefined) result.noShadow = s.noShadow;
   if (s.deathTimer !== undefined) result.deathTimer = s.deathTimer;
   if (s.jumpZ !== undefined) result.jumpZ = s.jumpZ;
-  if (s.airMomentumX !== undefined) result.airMomentumX = s.airMomentumX;
+
   if (s.jumpInputState !== undefined) result.jumpInputState = s.jumpInputState;
   if (s.emergencyState !== undefined) result.emergencyState = s.emergencyState;
   if (s.vehicleHeading !== undefined) result.vehicleHeading = s.vehicleHeading;
   if (s.paintSchemeId !== undefined) result.paintSchemeId = s.paintSchemeId;
-  if (s.vehicleBed) result.vehicleBed = true;
-  if (s.vehicleBedTilt !== undefined) result.vehicleBedTilt = s.vehicleBedTilt;
-  if (s.vehicleRamp !== undefined) result.vehicleRamp = s.vehicleRamp;
-  if (s.transportLoadId !== undefined) result.transportLoadId = s.transportLoadId;
-  if (s.transportedBy !== undefined) result.transportedBy = s.transportedBy;
-  if (s.towTargetId !== undefined) result.towTargetId = s.towTargetId;
-  if (s.towedBy !== undefined) result.towedBy = s.towedBy;
-  if (s.vehicleBedTarget !== undefined) result.vehicleBedTarget = s.vehicleBedTarget;
-  if (s.airMomentumY !== undefined) result.airMomentumY = s.airMomentumY;
+
   if (s.jumpVZ !== undefined) result.jumpVZ = s.jumpVZ;
   if (s.wz !== undefined) result.wz = s.wz;
   if (s.parentId !== undefined) result.parentId = s.parentId;

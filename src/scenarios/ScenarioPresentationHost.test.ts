@@ -262,7 +262,6 @@ it("uses the moving diagnostic camera for streaming as well as drawing", async (
   expect(mocks.submitInput).toHaveBeenCalled();
   expect(mocks.submitInput).toHaveBeenLastCalledWith(
     expect.anything(),
-    expect.any(Number),
     expect.objectContaining({ minCx: 18 }),
   );
   host.dispose();

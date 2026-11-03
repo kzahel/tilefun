@@ -26,7 +26,7 @@ for (const pair of MANUAL_PREY_PAIRS.filter((p) => p.prey === "person1"))
         const p = g.stateView.playerEntity.position;
         g.transport.send({ type: "set-player-model", requestId: 731, model: "person1" });
         g.debugPanel.paused = true;
-        g.transport.send({ type: "set-debug", paused: true, noclip: false });
+        g.transport.send({ type: "set-debug", paused: true });
         // Isolate meal provenance from unrelated starter-world prey.
         for (const e of g.stateView.entities)
           if (e.id !== g.stateView.playerEntity.id)
@@ -51,7 +51,7 @@ for (const pair of MANUAL_PREY_PAIRS.filter((p) => p.prey === "person1"))
     await page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
       g.debugPanel.paused = false;
-      g.transport.send({ type: "set-debug", paused: false, noclip: false });
+      g.transport.send({ type: "set-debug", paused: false });
     });
     await expect.poll(population, { timeout: 20000 }).toEqual({ prey: 0, hunter: 1 });
     expect(

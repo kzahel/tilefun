@@ -136,61 +136,10 @@ Android guide. It opens/closes owned tabs on the native context and clears only
 the isolated localhost origin; disconnecting leaves user Chrome running. Movement
 is driven through CDP keyboard commands, not a touch-input benchmark.
 
-`node scripts/instrumentation/mobile-authority.mjs --output=/tmp/tilefun-mobile-authority`
-captures 15 seconds of native Worker/renderer/IndexedDB stationary countryside per
-control. It defaults to baseline, decision-only visibility, full hidden-wildlife
-sleep, no-AI and baseline. `--controls=baseline,query-cache,sleep-hidden-cache,baseline`
-tests query caching separately. `--scenes=dog` selects the fresh thicket arrival;
-`--seconds=15` controls sampling. The same `--cdp`/`--port` arguments attach the phone;
-`--android-device-cli="$ANDROID_DEVICE_CLI"` adds thermal readings. Remove only the
-task's owned USB routes after the run. With no CDP endpoint it uses bundled Chromium.
-Coarse visible chunks, a one-chunk sleep margin and proximity/parent exceptions
-are diagnostic controls, not production activation policy. They do not establish
-safe movement, persistence, wake or multiplayer behavior. Raw host IDs remain in
-the temporary report; commit only sanitized summaries.
-`--robin-reference=PATH` substitutes only the supplied pre-change `robinAI.ts`
-inside this diagnostic Vite server for an original/optimized comparison. The
-reference must be from the same checkout's companion modules. For a full earlier
-policy comparison, also supply `--realm-reference=PATH` and `--ai-reference=PATH`
-with matching earlier `Realm.ts` and `tickAllAI.ts`. The default baseline means the
-current production policy, not the historical runtime. Add `--motion=walk` to
-hold Right through the normal input path; reports include initial/final position
-and maximum displacement so a blocked walk is distinguishable from traversal.
-It is a keyboard-driven movement control, not touch acceptance. For a matched
-membership comparison, run the same probe against a frozen pre-change archive
-and current source, sequentially without validation during sampling. See
-[090](../../docs/tactical/090-incremental-simulation-membership.md).
-The probe times prop admission through the cached selector when available and the
-original filter otherwise. `--realm-reference=PATH` can isolate the earlier Realm
-admission policy against the same companion modules;
-[091](../../docs/tactical/091-static-prop-admission.md) records that comparison.
-Add `--physics-profile=true --worker-cpu=true` for optional authority physics
-subphases, query/candidate counts, zero-displacement NPC counts and a 1,000µs
-sampled CPU profile of only the owned Worker. Raw `.cpuprofile` files stay local;
-report CPU source names are sanitized. Timings are captured before profiler export,
-which can pause the Worker. Deep timings/query wrappers and sampling add overhead;
-use separate shallow controls for ordinary timing. Source markers fail closed if
-the phase structure changes. [092](../../docs/tactical/092-authority-physics-profile.md)
-owns the measurement boundary and results.
-`--entity-reference=PATH` substitutes a frozen EntityManager against the same
-companion modules. Deep physics profiling also times ground-phase prop/entity
-queries and counts `repeatedRanges`, resetting its range set at every ground pass.
-These wrappers add overhead; compare with matching deep probes, and keep shallow
-controls for ordinary timing. `--ground-profile=true` alone adds only a ground-phase
-timer pair per EntityManager update, with no per-query/subphase wrappers. [107](../../docs/tactical/107-ground-query-reuse.md)
-owns the ground-query comparison.
-`--collision-reference=PATH` substitutes a frozen collision module in the isolated
-probe server for original-policy comparisons. The report records the control;
-hold companion modules and input conditions fixed. [093](../../docs/tactical/093-identical-collision-probes.md)
-owns the identical-probe comparison.
-`--interest-reference=PATH` substitutes the original interest manager while
-keeping companion modules fixed. The probe measures `interest-demand` separately
-from the enclosing streaming update; [094](../../docs/tactical/094-interest-demand-cache.md)
-owns its cache comparison.
-
-Keep Chrome in the
-foreground on the phone; background debugging can stall or stop. Startup failures
-inside the capture retain page errors and body text in `failure.json`.
+The old mobile-authority substitution/control profiler was retired with the
+per-actor integrator by [205](../../docs/tactical/205-physics-reset.md). Its earlier
+measurements remain historical evidence. Use `benchmark-realm-physics-browser.mjs`
+for current ordinary Worker/render measurements and matched frozen-build comparisons.
 
 `node --import tsx scripts/instrumentation/robin-search.mjs --reference=PATH --output=/tmp/tilefun-robin-search-parity`
 compares 480 observed-actor decisions against explicitly supplied original source,
@@ -296,16 +245,6 @@ research remains historical evidence. Current physics uses one fixed 60Hz step;
 focused native coverage is `src/client/SharedPrediction.test.ts` and
 `src/server/SharedPhysics.test.ts`. Browser and device qualification remains part
 of 205; older capture assertions are not acceptance gates for the new solver.
-
-## Sleeping NPC separation
-
-Run `npx tsx scripts/instrumentation/entity-separation.ts` from the repository
-root. It compares ungated separation with an empty tick selection over 400
-coincident NPCs, with five warmup and 30 measured passes. Solid terrain keeps
-the control fixture stationary. It asserts that sleeping NPCs make no tile
-collision queries and reports median pass time; this isolates separation and
-does not measure whole-server cost or gameplay FPS. See
-[Tactical 018](../../docs/tactical/018-tick-aware-npc-separation.md).
 
 ## Grass cache retention
 
@@ -427,45 +366,9 @@ The old per-actor collision broad-phase CLI was retired with its integrator by
 [115](../../docs/tactical/115-collision-broad-phase.md); current crowd probes use
 ordinary shared Realm stepping through `active-crowds.mjs`.
 
-## Rotated vehicle collision demand
+## Retired vehicle collision prototype
 
-`npm run vehicle-collision:bench -- --output=/tmp/tilefun-vehicle-collision`
-compares diagnostic cardinal AABB and yaw OBB bodies through the native entity
-SpatialHash. It runs 64 prescribed motion steps against sparse/dense obstacles,
-nearby cars and two rotating roof occupant clearance probes. Counts default to
-1/8/32/128; 128 exceeds the current gameplay traffic cap and is a stress case.
-Use `--counts=1,32 --samples=12` for a smaller selection. Authority-shaped work
-checks all cars in a dedicated Worker; the main-thread lane checks one controlled
-car six times per step while refreshing nearby proxies once. This models replay
-demand, not the production PlayerPredictor or an actual Realm tick.
-
-Both policies use identical motion, occupant positions and sweep subdivisions;
-collision verdicts do not change routes. The AABB control uses nearest-cardinal
-56x20 dimensions, not the complete approved per-view vehicle bank or facing
-hysteresis. The OBB uses a diagnostic four-axis SAT test plus vertical intervals.
-The native index uses enclosing XY boxes. Every probe counts all nearby candidates
-and tests all overlapping candidates (no early exit). Static obstacles are entity
-proxies, not the production prop index. Indexing/geometry/probe counts and checksums
-are retained. Independent polygon and brute-force tests protect the prototype.
-
-Run timing probes sequentially without competing tests/profilers. Three warmup
-traces precede adaptive calibration; both policies use the same cycles until the
-faster reaches 25ms (up to 1,024 traces). Twelve measured pairs alternate A/B then
-B/A. Reported percentiles are batch-amortized milliseconds per trace step, not
-server tick p95. Raw batch durations, timer precision, idle display cadence,
-source hashes and hardware context make limits visible. No timing threshold is
-asserted. Display calibration does not normalize CPU/GPU hardware capacity.
-
-Use `--cdp="$PHONE_CDP_URL" --port="$PHONE_HTTP_PORT" --device="model / OS"`
-for the physical phone after Machine Control discovery and task-owned ADB routes.
-`--android-device-cli="$ANDROID_DEVICE_CLI"` records temperature/thermal status.
-The runner closes its Worker/tab, disconnects from CDP and closes its Vite server;
-it writes no browser storage and leaves the user's phone Chrome running. Restore
-the prior foreground app and remove only task-owned USB routes afterward.
-With no CDP endpoint it uses bundled full Chromium, reaped on completion.
-
-The fixture has no gameplay consumer and measures no solver, AI, actual prediction,
-networking, streaming, rendering, mesh geometry or full-game headroom. Discrete
-4px sweep sampling includes rotation-only motion but is not CCD; oversized motion
-fails rather than silently reducing samples. [096](../../docs/tactical/096-rotated-vehicle-collision-benchmark.md)
-owns device results and the next shared-engine integration slice.
+The synthetic AABB/OBB comparison and swept-box helper were retired by 205.
+They have no gameplay consumer after the shared Rapier reset. Historical
+[096](../../docs/tactical/096-rotated-vehicle-collision-benchmark.md) evidence is
+preserved; current validation exercises real shared body contacts.

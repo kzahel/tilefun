@@ -517,7 +517,7 @@ export class GameClient {
           }
           this.reloadCamera = null;
           this.gcSendVisibleRange(true);
-          this.gcSendDebugState(this.debugPanel.paused, this.debugPanel.noclip, true);
+          this.gcSendDebugState(this.debugPanel.paused, true);
           this.lobbyRealmList = null;
         } else if (msg.type === "realm-list") {
           // Skip unsolicited-broadcast handling when this is a response to
@@ -1365,11 +1365,11 @@ export class GameClient {
   }
 
   /** Send debug flags to server when changed (serialized mode). */
-  private gcSendDebugState(paused: boolean, noclip: boolean, force = false): void {
-    const key = `${paused ? 1 : 0}${noclip ? 1 : 0}`;
+  private gcSendDebugState(paused: boolean, force = false): void {
+    const key = `${paused ? 1 : 0}`;
     if (!force && key === this.lastDebugStateKey) return;
     this.lastDebugStateKey = key;
-    this.transport.send({ type: "set-debug", paused, noclip });
+    this.transport.send({ type: "set-debug", paused });
   }
 
   // ---- GameContext construction ----
@@ -1456,8 +1456,7 @@ export class GameClient {
       flushServer: () => this.gcFlushServer(),
       sendRequest: <R extends RequestMessage>(msg: R) => this.gcSendRequest(msg),
       sendVisibleRange: (force?: boolean) => this.gcSendVisibleRange(force),
-      sendDebugState: (paused: boolean, noclip: boolean, force?: boolean) =>
-        this.gcSendDebugState(paused, noclip, force),
+      sendDebugState: (paused: boolean, force?: boolean) => this.gcSendDebugState(paused, force),
     };
   }
 

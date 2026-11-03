@@ -44,9 +44,9 @@ it("reads durable old traffic poses as independent bodies and rejects a malforme
     expect(e.wz).toBe(12);
     expect(e.velocity).toEqual({ vx: 3, vy: 0 });
     expect(e.persistentId).toBe("old-truck");
-    expect(e.towTargetId).toBeUndefined();
-    expect(e.vehicleBedTilt).toBeUndefined();
-    expect(e.vehicleRamp).toBeUndefined();
+    expect(e).not.toHaveProperty("towTargetId");
+    expect(e).not.toHaveProperty("vehicleBedTilt");
+    expect(e).not.toHaveProperty("vehicleRamp");
     registry.restore([old]);
     expect(registry.states.size).toBe(1);
     expect(() => registry.restore([{ ...old, persistentId: "conflicting-owner" }])).toThrow(

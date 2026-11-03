@@ -36,8 +36,8 @@ persistent per-character adapters, full-world lab engines/predictors and their
 alternate Realm owner. The two-pane co-op lab now uses ordinary ScenarioSession,
 independently clocked ScenarioWorkerHost, normal binary frames and one private
 PlayerPredictor per pane. Scenario recipes retain only scoped gravity; normal
-input wire tag `0x81` has eight bytes and no duration field. The frame tag remains
-`0x0b`. Matching updated client/server builds are required.
+input wire tag `0x81` has eight bytes and no duration field. The frame tag is
+`0x0c`; retired air-momentum/equipment fields are no longer replicated. Matching updated client/server builds are required.
 
 Species and work trajectories now submit the same data-only `motionIntent`;
 they no longer write/undo physical body height. Anchored crops/sites are nonblocking
@@ -50,9 +50,10 @@ Basic ordinary GPU Worker edit/play recovery, NPC push/prediction and actual
 P2P reversal/convergence checks pass, alongside the normal two-session lab's
 input/fence/reload/teardown checks. The reset is **not ready for delivery yet**:
 the old vehicle traffic/equipment/parking/rail services and controls have been
-removed; obsolete presentation/query helpers still need deletion, followed by
-residency/streaming and post-cleanup browser/
-device qualification, Chromebook measurements and final review. Useful
+removed, as are duplicate collision/ground/support/grade helpers. Render-only
+equipment poses preserve frozen asset inspection. Edited terrain wakes sleeping
+loose bodies correctly. Remaining gates are broad lifecycle/streaming and post-cleanup
+browser/device qualification, Chromebook measurements and final review. Useful
 lab scenarios now exercise the game kernel, but lab acceptance alone does not
 establish complete cutover. See 205 for exact evidence.
 

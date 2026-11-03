@@ -48,7 +48,6 @@ const uncachedImageSizes = process.argv.includes("--uncached-image-sizes");
 if (uncachedImageSizes && (renderer !== "gpu" || process.env.TILEFUN_DEV_URL))
   throw Error("--uncached-image-sizes requires GPU and the isolated benchmark server");
 const meshes = process.argv.includes("--meshes");
-const noclip = process.argv.includes("--noclip");
 const headed = process.argv.includes("--headed");
 const instrumentation = !process.argv.includes("--no-metrics");
 const output = option("output", path.join(os.tmpdir(), "tilefun-streaming"));
@@ -145,7 +144,6 @@ const report = {
   ...(zoomMotion ? { motionZooms, movementSeconds, settleSeconds, warmSeconds } : {}),
   catchupFrames,
   sprintFrames,
-  noclip,
   renderer,
   meshes,
   cpuRate,
@@ -258,8 +256,6 @@ try {
       (value) => document.querySelector("#game").__game.debugPanel.setTerrainPacing(value),
       terrainPacing,
     );
-    if (noclip)
-      await page.evaluate(() => document.querySelector("#game").__game.debugPanel.setNoclip(true));
     if (terrainRowBudget)
       await page.evaluate((rowBudget) => {
         const renderer = document.querySelector("#game").__game.renderer;

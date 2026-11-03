@@ -1,21 +1,22 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it } from "vitest";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import { GameServer } from "./GameServer.js";
 import { browserServerDependencies } from "./hosts/browser.js";
 
-function createTestServer() {
-  const transport = new LocalTransport();
-  const server = new GameServer(transport.serverSide, browserServerDependencies());
-  server.start();
+import { memoryServer } from "./test/MemoryServer.js";
 
-  // Manually create a session by triggering connect
-  transport.triggerConnect();
-
-  return { server, transport };
+const servers: GameServer[] = [];
+afterEach(async () => {
+  for (const s of servers.splice(0)) await s.destroy();
+});
+async function createTestServer() {
+  const result = await memoryServer();
+  servers.push(result.server);
+  return result;
 }
 
-describe("GameServer", () => {
-  it("construction creates World, EntityManager, PropManager", () => {
+describe("GameServer", async () => {
+  it("construction creates World, EntityManager, PropManager", async () => {
     const transport = new LocalTransport();
     const server = new GameServer(transport.serverSide, browserServerDependencies());
 
@@ -24,8 +25,8 @@ describe("GameServer", () => {
     expect(server.propManager).toBeDefined();
   });
 
-  it("triggerConnect creates a PlayerSession", () => {
-    const { server } = createTestServer();
+  it("triggerConnect creates a PlayerSession", async () => {
+    const { server } = await createTestServer();
     const session = server.getLocalSession();
 
     expect(session).toBeDefined();
@@ -34,8 +35,8 @@ describe("GameServer", () => {
     expect(session.player.type).toBe("player");
   });
 
-  it("tick with player-input updates player velocity", () => {
-    const { server, transport } = createTestServer();
+  it("tick with player-input updates player velocity", async () => {
+    const { server, transport } = await createTestServer();
 
     // Need to be in play mode for input to apply
     const session = server.getLocalSession();
@@ -59,8 +60,8 @@ describe("GameServer", () => {
     expect(player.velocity?.vx).toBeGreaterThan(0);
   });
 
-  it("tick with edit-spawn creates an entity", () => {
-    const { server, transport } = createTestServer();
+  it("tick with edit-spawn creates an entity", async () => {
+    const { server, transport } = await createTestServer();
     const initialCount = server.entityManager.entities.length;
 
     transport.clientSide.send({
@@ -77,8 +78,8 @@ describe("GameServer", () => {
     expect(chicken?.position.wy).toBe(100);
   });
 
-  it("tick with edit-delete-entity removes entity", () => {
-    const { server, transport } = createTestServer();
+  it("tick with edit-delete-entity removes entity", async () => {
+    const { server, transport } = await createTestServer();
 
     // Spawn and then delete
     transport.clientSide.send({
@@ -100,8 +101,8 @@ describe("GameServer", () => {
     expect(server.entityManager.entities.find((e) => e.type === "chicken")).toBeUndefined();
   });
 
-  it("edit-delete-entity does not remove the player", () => {
-    const { server, transport } = createTestServer();
+  it("edit-delete-entity does not remove the player", async () => {
+    const { server, transport } = await createTestServer();
     const session = server.getLocalSession();
     const playerId = session.player.id;
 
@@ -114,8 +115,8 @@ describe("GameServer", () => {
     expect(server.entityManager.entities.find((e) => e.id === playerId)).toBeDefined();
   });
 
-  it("player-interact toggles following on nearby befriendable entity", () => {
-    const { server, transport } = createTestServer();
+  it("player-interact toggles following on nearby befriendable entity", async () => {
+    const { server, transport } = await createTestServer();
 
     // Spawn a chicken near the interact point
     transport.clientSide.send({
@@ -148,8 +149,8 @@ describe("GameServer", () => {
     expect(chicken?.wanderAI?.following).toBe(false);
   });
 
-  it("set-editor-mode updates session state", () => {
-    const { server, transport } = createTestServer();
+  it("set-editor-mode updates session state", async () => {
+    const { server, transport } = await createTestServer();
     const session = server.getLocalSession();
 
     expect(session.editorEnabled).toBe(true);
@@ -163,9 +164,9 @@ describe("GameServer", () => {
   });
 });
 
-describe("pattern commands", () => {
-  it("returns validation and history status on the real transport and requires editor mode", () => {
-    const { server, transport } = createTestServer();
+describe("pattern commands", async () => {
+  it("returns validation and history status on the real transport and requires editor mode", async () => {
+    const { server, transport } = await createTestServer();
     const messages: import("../shared/protocol.js").ServerMessage[] = [];
     transport.clientSide.onMessage((m) => messages.push(m));
     transport.clientSide.send({
@@ -174,6 +175,7 @@ describe("pattern commands", () => {
       end: { x: 110, y: 102 },
       erase: false,
     });
+    await server.settle();
     expect(server.propManager.props.filter((p) => p.type.startsWith("pattern:"))).toHaveLength(1);
     expect(messages.at(-1)).toEqual({
       type: "pattern-edit-status",
@@ -182,8 +184,11 @@ describe("pattern commands", () => {
       canRedo: false,
     });
     transport.clientSide.send({ type: "edit-pattern-history", direction: "undo" });
+    await server.settle();
     expect(server.propManager.props.filter((p) => p.type.startsWith("pattern:"))).toHaveLength(0);
     transport.clientSide.send({ type: "edit-pattern-history", direction: "redo" });
+    await server.settle();
+    await server.settle();
     expect(server.propManager.props.filter((p) => p.type.startsWith("pattern:"))).toHaveLength(1);
     transport.clientSide.send({ type: "set-editor-mode", enabled: false });
     transport.clientSide.send({
@@ -196,6 +201,7 @@ describe("pattern commands", () => {
       type: "pattern-edit-status",
       error: expect.stringContaining("editor"),
     });
+    await server.settle();
     expect(server.propManager.props.filter((p) => p.type.startsWith("pattern:"))).toHaveLength(1);
     server.destroy();
   });
@@ -204,11 +210,10 @@ describe("pattern commands", () => {
 it.each(["global", "recipient"])(
   "continues simulation under %s replication backpressure and preserves the next baseline",
   async (scope) => {
-    const { server, transport } = createTestServer();
+    const { server, transport } = await createTestServer();
     await server.settle();
     const session = server.getLocalSession();
     session.editorEnabled = false;
-    session.debugNoclip = true;
     server.broadcasting = true;
     let writable = false;
     transport.serverSide.canSend = (id) =>

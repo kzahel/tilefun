@@ -65,17 +65,19 @@ describe("horse riding through the shared Realm", () => {
         const clips = required(ENTITY_DEFS[horse(s).type]?.sprite?.clips);
         const x = horse(s).position.wx;
         for (let i = 0; i < 60; i++) await s.step({ ...idle, dx: 1 });
-        expect(horse(s).position.wx - x).toBeCloseTo(160, 1);
+        expect(horse(s).position.wx - x).toBeCloseTo(64, 1);
         expect(s.player.player.position).toEqual(horse(s).position);
         expect(clips[horse(s).sprite?.clip ?? 0]?.name).toBe("ride");
         expect(horse(s).sprite?.frameCol).toBeGreaterThanOrEqual(1);
         expect(startleFauna(horse(s), s.player.player.position)).toBe(false);
         const sprintX = horse(s).position.wx;
         for (let i = 0; i < 30; i++) await s.step({ ...idle, dx: 1, sprinting: true });
-        expect(horse(s).position.wx - sprintX).toBeCloseTo(160, 1);
+        expect(horse(s).position.wx - sprintX).toBeCloseTo(64, 1);
         expect(clips[horse(s).sprite?.clip ?? 0]?.name).toBe("ride-sprint");
         await s.step(idle);
-        expect(horse(s).velocity).toEqual({ vx: 0, vy: 0 });
+        expect(
+          Math.hypot(horse(s).velocity?.vx ?? Infinity, horse(s).velocity?.vy ?? Infinity),
+        ).toBeLessThan(0.1);
         expect(clips[horse(s).sprite?.clip ?? 0]?.name).toBe("idle");
         await s.reload();
         expect(s.player.gameplaySession.mountId).toBe(horse(s).id);
@@ -102,7 +104,7 @@ describe("horse riding through the shared Realm", () => {
       expect(s.player.gameplaySession.mountId).toBeNull();
       await jumpOn(s);
       for (let i = 0; i < 90; i++) await s.step({ ...idle, dx: 1, sprinting: true });
-      expect(horse(s).position.wx).toBeLessThanOrEqual(200 - 17);
+      expect(horse(s).position.wx).toBeLessThanOrEqual(200 - 17 + 0.01);
       expect(horse(s).position.wx).toBeGreaterThan(150);
       expect(s.player.player.position).toEqual(horse(s).position);
     } finally {

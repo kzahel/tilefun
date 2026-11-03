@@ -1,5 +1,10 @@
 import { prepareDeerTravel, settleDeer } from "../wildlife/deerInteractions.js";
-import { prepareFaunaTravel, settleFauna, syncFaunaWater } from "../wildlife/faunaInteractions.js";
+import {
+  prepareFaunaTravel,
+  restoreFaunaPose,
+  settleFauna,
+  syncFaunaWater,
+} from "../wildlife/faunaInteractions.js";
 import { FROG_HOP_DURATION, prepareFrogHop, settleFrog } from "../wildlife/frogInteractions.js";
 import { prepareMallardFlight, settleMallard } from "../wildlife/mallardInteractions.js";
 import { preparePredatorFlight, settlePredatorFlight } from "../wildlife/PredatorMotion.js";
@@ -10,7 +15,6 @@ import {
 } from "../wildlife/rabbitInteractions.js";
 import { prepareRobinMotion, settleRobin } from "../wildlife/robinInteractions.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
-import { CollisionIndex } from "./CollisionIndex.js";
 import type { Entity } from "./Entity.js";
 import { SpatialHash } from "./SpatialHash.js";
 import { setSpriteClipElapsed, tickSpriteAnimation } from "./spriteAnimation.js";
@@ -40,7 +44,6 @@ export class EntityManager {
   }
   readonly byId = new Map<number, Entity>();
   readonly spatialHash = new SpatialHash();
-  readonly collisionIndex = new CollisionIndex();
   private nextId = 1;
 
   /** Optional hook for TagServiceImpl to receive tag change notifications. */
@@ -66,7 +69,6 @@ export class EntityManager {
     this.byId.set(entity.id, entity);
     this.spatialHash.insert(entity);
     this.onSpawn?.(entity);
-    this.collisionIndex.update(entity);
     return entity;
   }
 
@@ -77,7 +79,6 @@ export class EntityManager {
     this.entities.push(entity);
     this.byId.set(entity.id, entity);
     this.spatialHash.insert(entity);
-    this.collisionIndex.update(entity);
     this.nextId = Math.max(this.nextId, entity.id + 1);
   }
 
@@ -151,6 +152,7 @@ export class EntityManager {
     }
     this.resolveParentedPositions(players, active);
     for (const entity of active) {
+      if (entity.fauna && entity.wanderAI?.state === "ridden") restoreFaunaPose(entity);
       this.spatialHash.update(entity);
       if (entity.fauna?.motion || entity.fauna?.actionElapsed !== undefined)
         setSpriteClipElapsed(
@@ -232,7 +234,6 @@ export class EntityManager {
     const entity = this.entities[idx];
     if (entity) {
       this.spatialHash.remove(entity);
-      this.collisionIndex.remove(entity);
       this.onDespawn?.(entity, persist);
       for (const listener of this.removalListeners) listener(entity, persist);
       if (persist) this.onRemove?.(entity);

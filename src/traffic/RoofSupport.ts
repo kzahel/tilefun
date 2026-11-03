@@ -1,35 +1,16 @@
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
-import type { EntitySurface } from "../physics/surfaceHeight.js";
-import { isTrain } from "../railway/Train.js";
 import { isVehicle } from "./Vehicle.js";
-import { entitySupportTops, hasDetailedVehicleSurface } from "./VehicleBed.js";
 
-/** Autonomous solid moving roofs; passengers walk/jump rather than steer a mount. */
-export function hasMovingRoof(e: { type?: string }): boolean {
-  return isVehicle(e) || isTrain(e);
-}
-
-export function vehicleRoofBounds(e: EntitySurface) {
-  // Every solid part of the body must support feet at its top plane. A smaller
-  // roof let walkers fall inside the hood/trunk and become trapped by side collision.
-  if (!e.collider) throw new Error("Vehicle has no collider");
-  return getEntityAABB(e.position, e.collider);
-}
-export function roofSupport(
-  entity: Entity,
-  entities: readonly EntitySurface[],
-): EntitySurface | undefined {
-  if (entity.jumpVZ !== undefined || !entity.collider) return undefined;
-  const box = getEntityAABB(entity.position, entity.collider);
-  return entities.find(
+export function roofSupport(actor: Entity, vehicles: readonly Entity[]): Entity | undefined {
+  if (actor.jumpVZ !== undefined || !actor.collider) return;
+  const feet = getEntityAABB(actor.position, actor.collider);
+  return vehicles.find(
     (e) =>
-      hasMovingRoof(e) &&
-      e.id !== entity.id &&
+      e.id !== actor.id &&
+      isVehicle(e) &&
       e.collider &&
-      (hasDetailedVehicleSurface(e)
-        ? entitySupportTops(e, box).some((z) => Math.abs((entity.wz ?? 0) - z) < 0.1)
-        : Math.abs((entity.wz ?? 0) - (e.wz ?? 0) - (e.collider.physicalHeight ?? 0)) < 0.1 &&
-          aabbsOverlap(box, vehicleRoofBounds(e))),
+      Math.abs((actor.wz ?? 0) - (e.wz ?? 0) - (e.collider.physicalHeight ?? 0)) < 0.25 &&
+      aabbsOverlap(feet, getEntityAABB(e.position, e.collider)),
   );
 }

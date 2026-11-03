@@ -70,7 +70,7 @@ export class MeadowWork {
     a.animalWork.state = state;
     a.animalWork.elapsed = 0;
     if (!moving(a)) {
-      if (a.velocity) a.velocity.vx = a.velocity.vy = 0;
+      a.motionIntent = { vx: 0, vy: 0 };
       if (
         a.wanderAI &&
         !native(a)?.alarmFrom &&

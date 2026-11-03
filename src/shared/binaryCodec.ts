@@ -2,7 +2,7 @@
  * Binary protocol codec — replaces JSON.stringify/parse for hot-path messages.
  *
  * Message type tags:
- *   0x0B = FrameMessage (u16 entity types, vehicle paint, opt-in bed geometry) (server→client)
+ *   0x0C = FrameMessage (shared bodies; no retired equipment/momentum fields) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
  *   0x81 = fixed-tick player-input (client→server)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
@@ -27,7 +27,7 @@ import type {
 
 // ---- Message type tags ----
 
-const TAG_FRAME = 0x0b;
+const TAG_FRAME = 0x0c;
 const TAG_SYNC_CHUNKS = 0x03;
 const TAG_PLAYER_INPUT = 0x81;
 const TAG_JSON = 0xff;
@@ -52,13 +52,11 @@ const BIT_WZ = 8;
 const BIT_PARENT_ID = 9;
 const BIT_LOCAL_OFFSET_X = 10;
 const BIT_LOCAL_OFFSET_Y = 11;
-const BIT_AIR_MOMENTUM_Y = 13;
-const BIT_JUMP_INPUT_STATE = 14;
-const BIT_EMERGENCY_STATE = 15;
-const BIT_VEHICLE_HEADING = 16;
-const BIT_VEHICLE_PAINT = 17;
-const BIT_VEHICLE_BED = 18;
-const BIT_AIR_MOMENTUM_X = 12;
+
+const BIT_JUMP_INPUT_STATE = 12;
+const BIT_EMERGENCY_STATE = 13;
+const BIT_VEHICLE_HEADING = 14;
+const BIT_VEHICLE_PAINT = 15;
 
 // ---- TextEncoder/Decoder for JSON fallback ----
 
@@ -77,7 +75,7 @@ export function decodeServerMessage(buf: ArrayBuffer): ServerMessage {
   const view = new DataView(buf);
   const tag = view.getUint8(0);
   if (tag === TAG_FRAME) return decodeFrameMessage(view, buf);
-  if (tag === 0x01 || (tag >= 0x04 && tag <= 0x0a))
+  if (tag === 0x01 || (tag >= 0x04 && tag <= 0x0b))
     throw new Error("Legacy entity frame: matching updated client and server builds are required");
   if (tag === TAG_SYNC_CHUNKS) return decodeSyncChunksMessage(view, buf);
   if (tag === TAG_JSON) return decodeJsonFallback(buf) as ServerMessage;
@@ -272,20 +270,11 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   if (snap.parentId !== undefined) mask |= 1 << BIT_PARENT_ID;
   if (snap.localOffsetX !== undefined) mask |= 1 << BIT_LOCAL_OFFSET_X;
   if (snap.localOffsetY !== undefined) mask |= 1 << BIT_LOCAL_OFFSET_Y;
-  if (snap.airMomentumX !== undefined) mask |= 1 << BIT_AIR_MOMENTUM_X;
-  if (snap.airMomentumY !== undefined) mask |= 1 << BIT_AIR_MOMENTUM_Y;
+
   if (snap.jumpInputState !== undefined) mask |= 1 << BIT_JUMP_INPUT_STATE;
   if (snap.emergencyState !== undefined) mask |= 1 << BIT_EMERGENCY_STATE;
   if (snap.vehicleHeading !== undefined) mask |= 1 << BIT_VEHICLE_HEADING;
   if (snap.paintSchemeId !== undefined) mask |= 1 << BIT_VEHICLE_PAINT;
-  if (snap.vehicleBed) mask |= 1 << BIT_VEHICLE_BED;
-  if (snap.vehicleBedTilt !== undefined) mask |= 1 << 19;
-  if (snap.vehicleBedTarget !== undefined) mask |= 1 << 20;
-  if (snap.towTargetId !== undefined) mask |= 1 << 21;
-  if (snap.towedBy !== undefined) mask |= 1 << 22;
-  if (snap.vehicleRamp !== undefined) mask |= 1 << 23;
-  if (snap.transportLoadId !== undefined) mask |= 1 << 24;
-  if (snap.transportedBy !== undefined) mask |= 1 << 25;
 
   view.setUint32(off, mask, true);
   off += 4;
@@ -344,14 +333,6 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
     off += 4;
   }
 
-  if (snap.airMomentumX !== undefined) {
-    view.setFloat32(off, snap.airMomentumX, true);
-    off += 4;
-  }
-  if (snap.airMomentumY !== undefined) {
-    view.setFloat32(off, snap.airMomentumY, true);
-    off += 4;
-  }
   if (snap.jumpInputState !== undefined) {
     view.setFloat32(off, snap.jumpInputState, true);
     off += 4;
@@ -362,22 +343,7 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
     off += 4;
   }
   if (snap.paintSchemeId !== undefined) view.setUint8(off++, paintWireIndex(snap.paintSchemeId));
-  for (const key of ["vehicleBedTilt", "vehicleBedTarget"] as const)
-    if (snap[key] !== undefined) {
-      view.setFloat32(off, snap[key], true);
-      off += 4;
-    }
-  for (const key of [
-    "towTargetId",
-    "towedBy",
-    "vehicleRamp",
-    "transportLoadId",
-    "transportedBy",
-  ] as const)
-    if (snap[key] !== undefined) {
-      view.setUint32(off, snap[key], true);
-      off += 4;
-    }
+
   return off;
 }
 
@@ -465,14 +431,6 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
     off += 4;
   }
 
-  if (mask & (1 << BIT_AIR_MOMENTUM_X)) {
-    snap.airMomentumX = view.getFloat32(off, true);
-    off += 4;
-  }
-  if (mask & (1 << BIT_AIR_MOMENTUM_Y)) {
-    snap.airMomentumY = view.getFloat32(off, true);
-    off += 4;
-  }
   if (mask & (1 << BIT_JUMP_INPUT_STATE)) {
     snap.jumpInputState = view.getFloat32(off, true);
     off += 4;
@@ -483,26 +441,7 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
     off += 4;
   }
   if (mask & (1 << BIT_VEHICLE_PAINT)) snap.paintSchemeId = paintFromWire(view.getUint8(off++));
-  if (mask & (1 << BIT_VEHICLE_BED)) snap.vehicleBed = true;
-  for (const [key, bit] of [
-    ["vehicleBedTilt", 19],
-    ["vehicleBedTarget", 20],
-  ] as const)
-    if (mask & (1 << bit)) {
-      snap[key] = view.getFloat32(off, true);
-      off += 4;
-    }
-  for (const [key, bit] of [
-    ["towTargetId", 21],
-    ["towedBy", 22],
-    ["vehicleRamp", 23],
-    ["transportLoadId", 24],
-    ["transportedBy", 25],
-  ] as const)
-    if (mask & (1 << bit)) {
-      snap[key] = view.getUint32(off, true);
-      off += 4;
-    }
+
   return [snap, off];
 }
 
@@ -517,28 +456,7 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
   let changeMask = 0;
   let nullMask = 0;
 
-  if (delta.position !== undefined) changeMask |= 1 << BIT_VELOCITY; // wait no, position is bit 0 in baseline but...
-
-  // Delta doesn't have 'type' so the bitmask maps differently than baseline.
-  // Actually let me reconsider: for deltas, bit 0 = position (not velocity).
-  // Baseline has position as a required field, so it doesn't need a bit.
-  // But for deltas, position is optional. So the bitmask layout MUST differ.
-  //
-  // Let me use the SAME bitmask bit assignments, but add a bit for position:
-  // Actually the plan says same bitmask. Let me re-read...
-  // Plan says: "Same bitmask layout as EntitySnapshot (bits 0-11)"
-  // But EntitySnapshot uses bits 0-11 where bit 0 = velocity.
-  // In baseline, position is ALWAYS present (no bit needed).
-  // In delta, position is optional and needs a bit.
-  //
-  // Solution: use a DIFFERENT bit assignment for deltas that includes position at bit 0.
-  // delta bit 0 = position
-  // delta bits 1-12 = same as baseline bits 0-11
-
-  // I'll define delta-specific bit offsets.
-  changeMask = 0;
-  nullMask = 0;
-
+  // Deltas include optional position at bit zero.
   if (delta.position !== undefined) changeMask |= 1 << 0;
   if (delta.velocity !== undefined) {
     changeMask |= 1 << 1;
@@ -589,47 +507,23 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
     if (delta.localOffsetY === null) nullMask |= 1 << 12;
   }
 
-  if (delta.airMomentumX !== undefined) {
-    changeMask |= 1 << 13;
-    if (delta.airMomentumX === null) nullMask |= 1 << 13;
-  }
-  if (delta.airMomentumY !== undefined) {
-    changeMask |= 1 << 14;
-    if (delta.airMomentumY === null) nullMask |= 1 << 14;
-  }
   if (delta.jumpInputState !== undefined) {
-    changeMask |= 1 << 15;
-    if (delta.jumpInputState === null) nullMask |= 1 << 15;
+    changeMask |= 1 << 13;
+    if (delta.jumpInputState === null) nullMask |= 1 << 13;
   }
   if (delta.emergencyState !== undefined) {
-    changeMask |= 1 << 16;
-    if (delta.emergencyState === null) nullMask |= 1 << 16;
+    changeMask |= 1 << 14;
+    if (delta.emergencyState === null) nullMask |= 1 << 14;
   }
   if (delta.vehicleHeading !== undefined) {
-    changeMask |= 1 << 17;
-    if (delta.vehicleHeading === null) nullMask |= 1 << 17;
+    changeMask |= 1 << 15;
+    if (delta.vehicleHeading === null) nullMask |= 1 << 15;
   }
   if (delta.paintSchemeId !== undefined) {
-    changeMask |= 1 << 18;
-    if (delta.paintSchemeId === null) nullMask |= 1 << 18;
+    changeMask |= 1 << 16;
+    if (delta.paintSchemeId === null) nullMask |= 1 << 16;
   }
-  if (delta.vehicleBed !== undefined) {
-    changeMask |= 1 << 19;
-    if (delta.vehicleBed === null) nullMask |= 1 << 19;
-  }
-  for (const [key, bit] of [
-    ["vehicleBedTilt", 20],
-    ["vehicleBedTarget", 21],
-    ["towTargetId", 22],
-    ["towedBy", 23],
-    ["vehicleRamp", 24],
-    ["transportLoadId", 25],
-    ["transportedBy", 26],
-  ] as const)
-    if (delta[key] !== undefined) {
-      changeMask |= 1 << bit;
-      if (delta[key] === null) nullMask |= 1 << bit;
-    }
+
   view.setUint32(off, changeMask, true);
   off += 4;
   view.setUint32(off, nullMask, true);
@@ -700,46 +594,18 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
   }
 
   if (changeMask & (1 << 13) && !(nullMask & (1 << 13))) {
-    view.setFloat32(off, delta.airMomentumX as number, true);
-    off += 4;
-  }
-  if (changeMask & (1 << 14) && !(nullMask & (1 << 14))) {
-    view.setFloat32(off, delta.airMomentumY as number, true);
-    off += 4;
-  }
-  if (changeMask & (1 << 15) && !(nullMask & (1 << 15))) {
     view.setFloat32(off, delta.jumpInputState as number, true);
     off += 4;
   }
-  if (changeMask & (1 << 16) && !(nullMask & (1 << 16)))
+  if (changeMask & (1 << 14) && !(nullMask & (1 << 14)))
     view.setUint8(off++, delta.emergencyState as number);
-  if (changeMask & (1 << 17) && !(nullMask & (1 << 17))) {
+  if (changeMask & (1 << 15) && !(nullMask & (1 << 15))) {
     view.setFloat32(off, delta.vehicleHeading as number, true);
     off += 4;
   }
-  if (changeMask & (1 << 18) && !(nullMask & (1 << 18)))
+  if (changeMask & (1 << 16) && !(nullMask & (1 << 16)))
     view.setUint8(off++, paintWireIndex(delta.paintSchemeId as string));
-  for (const [key, bit] of [
-    ["vehicleBedTilt", 20],
-    ["vehicleBedTarget", 21],
-    ["towTargetId", 22],
-    ["towedBy", 23],
-    ["vehicleRamp", 24],
-    ["transportLoadId", 25],
-    ["transportedBy", 26],
-  ] as const)
-    if (changeMask & (1 << bit) && !(nullMask & (1 << bit))) {
-      if (
-        key === "towTargetId" ||
-        key === "towedBy" ||
-        key === "vehicleRamp" ||
-        key === "transportLoadId" ||
-        key === "transportedBy"
-      )
-        view.setUint32(off, delta[key] as number, true);
-      else view.setFloat32(off, delta[key] as number, true);
-      off += 4;
-    }
+
   return off;
 }
 
@@ -888,61 +754,24 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
   }
 
   if (changeMask & (1 << 13)) {
-    if (nullMask & (1 << 13)) delta.airMomentumX = null;
-    else {
-      delta.airMomentumX = view.getFloat32(off, true);
-      off += 4;
-    }
-  }
-  if (changeMask & (1 << 14)) {
-    if (nullMask & (1 << 14)) delta.airMomentumY = null;
-    else {
-      delta.airMomentumY = view.getFloat32(off, true);
-      off += 4;
-    }
-  }
-  if (changeMask & (1 << 15)) {
-    if (nullMask & (1 << 15)) delta.jumpInputState = null;
+    if (nullMask & (1 << 13)) delta.jumpInputState = null;
     else {
       delta.jumpInputState = view.getFloat32(off, true);
       off += 4;
     }
   }
-  if (changeMask & (1 << 16))
-    delta.emergencyState = nullMask & (1 << 16) ? null : view.getUint8(off++);
-  if (changeMask & (1 << 17)) {
-    if (nullMask & (1 << 17)) delta.vehicleHeading = null;
+  if (changeMask & (1 << 14))
+    delta.emergencyState = nullMask & (1 << 14) ? null : view.getUint8(off++);
+  if (changeMask & (1 << 15)) {
+    if (nullMask & (1 << 15)) delta.vehicleHeading = null;
     else {
       delta.vehicleHeading = view.getFloat32(off, true);
       off += 4;
     }
   }
-  if (changeMask & (1 << 18))
-    delta.paintSchemeId = nullMask & (1 << 18) ? null : paintFromWire(view.getUint8(off++));
-  if (changeMask & (1 << 19)) delta.vehicleBed = nullMask & (1 << 19) ? null : true;
-  for (const [key, bit] of [
-    ["vehicleBedTilt", 20],
-    ["vehicleBedTarget", 21],
-    ["towTargetId", 22],
-    ["towedBy", 23],
-    ["vehicleRamp", 24],
-    ["transportLoadId", 25],
-    ["transportedBy", 26],
-  ] as const)
-    if (changeMask & (1 << bit)) {
-      if (nullMask & (1 << bit)) delta[key] = null;
-      else {
-        delta[key] =
-          key === "towTargetId" ||
-          key === "towedBy" ||
-          key === "vehicleRamp" ||
-          key === "transportLoadId" ||
-          key === "transportedBy"
-            ? view.getUint32(off, true)
-            : view.getFloat32(off, true);
-        off += 4;
-      }
-    }
+  if (changeMask & (1 << 16))
+    delta.paintSchemeId = nullMask & (1 << 16) ? null : paintFromWire(view.getUint8(off++));
+
   return [delta, off];
 }
 

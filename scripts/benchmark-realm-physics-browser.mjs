@@ -10,7 +10,9 @@ const option = (name, fallback) =>
   process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const output = option("output", path.join(os.tmpdir(), "tilefun-realm-physics"));
 const counts = option("counts", "0,24,96,384").split(",").map(Number);
-const modes = option("modes", "legacy,rapier").split(",");
+// A comparison uses separate immutable bundles, never a dormant game backend.
+const referenceBase = option("reference-base", "");
+const lanes = referenceBase ? ["reference-legacy", "shared"] : ["shared"];
 const renderer = option("renderer", "gpu");
 if (!["canvas", "gpu"].includes(renderer)) throw Error("Renderer must be canvas or gpu");
 const trials = Number(option("trials", "2")),
@@ -18,8 +20,7 @@ const trials = Number(option("trials", "2")),
   warmup = Number(option("warmup", "4"));
 if (
   counts.some((n) => !Number.isInteger(n) || n < 0 || n > 384) ||
-  ![seconds, warmup, trials].every((n) => Number.isFinite(n) && n > 0 && n <= 30) ||
-  modes.some((m) => !["legacy", "rapier"].includes(m))
+  ![seconds, warmup, trials].every((n) => Number.isFinite(n) && n > 0 && n <= 30)
 )
   throw Error("Invalid workload options");
 const base = option("base", "http://localhost:4174/tilefun/");
@@ -44,6 +45,7 @@ const report = {
   seconds,
   warmup,
   trials,
+  referenceRevision: referenceBase ? option("reference-revision", "unspecified") : undefined,
   cases: [],
 };
 await mkdir(output, { recursive: true });
@@ -64,15 +66,15 @@ let failed = false;
 try {
   for (let trial = 0; trial < trials; trial++)
     for (const population of counts)
-      for (const mode of trial % 2 ? [...modes].reverse() : modes) {
+      for (const mode of trial % 2 ? [...lanes].reverse() : lanes) {
         const page = await context.newPage(),
           errors = [];
         page.on("pageerror", (e) => errors.push(String(e)));
         try {
-          const url = new URL("workshop.html", base);
+          const url = new URL("workshop.html", mode === "shared" ? base : referenceBase);
           url.searchParams.set("geometry", "realm");
           url.searchParams.set("crowd", String(population));
-          url.searchParams.set("physics", mode === "rapier" ? "rapier-world" : "legacy");
+          if (mode === "reference-legacy") url.searchParams.set("physics", "legacy");
           url.searchParams.set("renderer", renderer);
           url.hash = "/tool/world-geometry";
           await page.goto(url.href, { waitUntil: "domcontentloaded" });

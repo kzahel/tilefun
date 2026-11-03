@@ -108,7 +108,7 @@ describe("explicit creature food web", () => {
     updatePredatorAI(rex, 0.8, open, [rex, panther], []);
     expect(rex.predator?.state).toBe("chase");
     updatePredatorAI(rex, 0.1, open, [rex, panther], []);
-    expect(Math.hypot(rex.velocity?.vx ?? 0, rex.velocity?.vy ?? 0)).toBe(88);
+    expect(Math.hypot(rex.motionIntent?.vx ?? 0, rex.motionIntent?.vy ?? 0)).toBe(88);
     updatePredatorAI(rex, 4.6, open, [rex, panther], []);
     expect(rex.predator?.state).toBe("rest");
     expect(rex.predator?.targetId).toBeUndefined();

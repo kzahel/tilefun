@@ -131,16 +131,11 @@ export interface Entity {
   /** Stable, model-scoped coachwork choice; absent preserves the original paint. */
   paintSchemeId?: string;
   /** Qualified source-derived hollow-bed profile; enabled for normal dump trucks. */
-  vehicleBed?: true;
+
   /** Hinged dump bed angle/target in radians; authority owns the clock. */
-  vehicleBedTilt?: number;
-  vehicleBedTarget?: number;
+
   /** Runtime towing links; zero means durable partner is not resident yet. */
-  towTargetId?: number;
-  vehicleRamp?: number;
-  transportLoadId?: number;
-  transportedBy?: number;
-  towedBy?: number;
+
   mallard?: MallardBehavior;
   frog?: FrogBehavior;
   rabbit?: RabbitBehavior;
@@ -192,8 +187,7 @@ export interface Entity {
   /** Vertical velocity in world px/s, positive = up. */
   jumpVZ?: number;
   /** Passive XY departure velocity while airborne; total velocity includes it. */
-  airMomentumX?: number;
-  airMomentumY?: number;
+
   /** Authoritative jump-button latch: bit 0 consumed, bit 1 held. */
   jumpInputState?: number;
   /** Absolute Z position in world pixels (0 = world floor). */

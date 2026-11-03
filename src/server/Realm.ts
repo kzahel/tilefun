@@ -4,6 +4,7 @@ import { TerrainId } from "../autotile/TerrainId.js";
 import { applyPlayerModel } from "../characters/PlayerModels.js";
 import {
   CHUNK_SIZE_PX,
+  ELEVATION_PX,
   JUMP_VELOCITY,
   MAX_AUTOTILE_CHUNKS_PER_UPDATE,
   MAX_CHUNK_LOADS_PER_UPDATE,
@@ -113,6 +114,7 @@ import { RealmActivity } from "./RealmActivity.js";
 import { RealmPropActivity } from "./RealmPropActivity.js";
 import { RealmReplicator } from "./RealmReplicator.js";
 import { RealmStreaming } from "./RealmStreaming.js";
+import { safeArrival } from "./SafeArrival.js";
 import { tickAllAI } from "./tickAllAI.js";
 import { VehicleControl } from "./VehicleControl.js";
 import { isWildlife, WildlifeActivity } from "./WildlifeActivity.js";
@@ -137,6 +139,7 @@ export interface RealmOptions {
 
 export class Realm {
   private physicsScene: PhysicsScene | undefined;
+  private physicsParticipants: Entity[] = [];
   get collisionDiagnostics() {
     return this.physicsScene?.diagnostics ?? null;
   }
@@ -316,9 +319,8 @@ export class Realm {
    */
   idleSince: number | null = null;
 
-  /** Server tick rate in Hz (set by GameServer from sv_tickrate CVar). */
+  /** Server tick rate in Hz (fixed by the shared physics clock). */
   readonly tickRate = TICK_RATE;
-  /** Physics substeps per command tick. */
 
   private readonly mods: Mod[];
   private modTeardowns = new Map<string, Unsubscribe>();
@@ -410,17 +412,31 @@ export class Realm {
         const motion = saved.airborneVelocity;
         if (motion && Number.isFinite(motion.vx) && Number.isFinite(motion.vy)) {
           player.velocity = { vx: motion.vx, vy: motion.vy };
-          if (motion.momentumX !== undefined && Number.isFinite(motion.momentumX))
-            player.airMomentumX = motion.momentumX;
-          if (motion.momentumY !== undefined && Number.isFinite(motion.momentumY))
-            player.airMomentumY = motion.momentumY;
         }
         player.jumpZ = saved.wz - (player.groundZ ?? saved.wz);
       }
     }
     applyPlayerModel(player, session.playerModel);
+    const savedSafe = saved?.lastSafePosition;
+    let respawn =
+      savedSafe && [savedSafe.wx, savedSafe.wy, savedSafe.wz ?? 0].every(Number.isFinite)
+        ? { ...savedSafe }
+        : {
+            wx: spawnX,
+            wy: spawnY,
+            wz: player.wz ?? getSurfaceZ(spawnX, spawnY, (x, y) => this.world.getHeightAt(x, y)),
+          };
+    if (!savedSafe && player.jumpVZ !== undefined && this.isEntityOnWater({ ...player, wz: 0 })) {
+      // Old airborne records have no supported history. Use the existing bounded
+      // admission search instead of making the airborne position a respawn loop.
+      const dry = await safeArrival(this, {
+        x: spawnX / TILE_SIZE,
+        y: spawnY / TILE_SIZE,
+        generation: this.generation,
+      });
+      respawn = { ...dry, wz: getSurfaceZ(dry.wx, dry.wy, (x, y) => this.world.getHeightAt(x, y)) };
+    }
     this.entityManager.spawn(player);
-
     session.player = player;
     session.gameplaySession = {
       player,
@@ -430,7 +446,7 @@ export class Realm {
       knockbackVy: 0,
       mountId: null,
       lastDismountedId: null,
-      lastSafePosition: { wx: spawnX, wy: spawnY },
+      lastSafePosition: respawn,
     };
     const mounted = saved?.mount ? this.records?.byId.get(saved.mount.id) : undefined;
     if (mounted && !("isProp" in mounted) && saved?.mount) {
@@ -569,6 +585,9 @@ export class Realm {
           }
         : {}),
       ...(this.interior ? { returnLocation: session.returnLocation } : {}),
+      lastSafePosition: session.gameplaySession.lastSafePosition
+        ? { ...session.gameplaySession.lastSafePosition }
+        : null,
       gemsCollected: session.gameplaySession.gemsCollected,
       x: session.player.position.wx,
       y: session.player.position.wy,
@@ -582,12 +601,6 @@ export class Realm {
               ? {
                   airborneVelocity: {
                     ...session.player.velocity,
-                    ...(session.player.airMomentumX === undefined
-                      ? {}
-                      : { momentumX: session.player.airMomentumX }),
-                    ...(session.player.airMomentumY === undefined
-                      ? {}
-                      : { momentumY: session.player.airMomentumY }),
                   },
                 }
               : {}),
@@ -959,6 +972,7 @@ export class Realm {
         );
         const scene = this.physicsScene;
         if (!scene) throw Error("Realm physics is not initialized");
+        this.physicsParticipants = participants;
         scene.synchronize(participants);
         scene.step(
           intents,
@@ -1021,7 +1035,8 @@ export class Realm {
           if (
             e.position.wx !== e.prevPosition?.wx ||
             e.position.wy !== e.prevPosition?.wy ||
-            e.wz !== e.prevWz
+            e.wz !== e.prevWz ||
+            e.vehicleHeading !== e.prevVehicleHeading
           )
             this.vehicleRegistry?.onChange?.(car, false);
         }
@@ -1155,8 +1170,18 @@ export class Realm {
     // A paused/manual publication may follow boarding, exit or an explicit edit
     // before the next clock tick. Refresh membership/edits without integrating,
     // so entity baselines and numerical physics describe the same bodies.
+    const admitted = new Map(this.physicsParticipants.map((e) => [e.id, e]));
+    for (const session of this.sessions.values()) {
+      if (session.retired || session.transitioning) continue;
+      for (const e of [
+        session.player,
+        this.vehicles.get(session),
+        this.entityManager.byId.get(session.gameplaySession.mountId ?? -1),
+      ])
+        if (e) admitted.set(e.id, e);
+    }
     scene?.synchronize(
-      this.entityManager.queryEntities.filter(
+      [...admitted.values()].filter(
         (e) => this.entityManager.byId.get(e.id) === e && !e.tags?.has("passage"),
       ),
     );
@@ -1498,8 +1523,7 @@ export class Realm {
           session.lastProcessedInputSeq =
             session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
           session.inputQueue.length = 0;
-          delete session.player.airMomentumX;
-          delete session.player.airMomentumY;
+
           session.player.velocity = { vx: 0, vy: 0 };
         }
         break;
@@ -1516,11 +1540,6 @@ export class Realm {
 
       case "set-debug":
         session.debugPaused = msg.paused;
-        session.debugNoclip = msg.noclip;
-        if (msg.noclip) {
-          delete session.player.airMomentumX;
-          delete session.player.airMomentumY;
-        }
         break;
 
       case "visible-range":
@@ -1567,6 +1586,7 @@ export class Realm {
 
     this.physicsScene?.dispose();
     this.physicsScene = await PhysicsScene.create();
+    this.physicsParticipants = [];
 
     // Create fresh world state with the correct generation strategy
     this.interior = worldMeta.interior ?? null;
@@ -1892,6 +1912,7 @@ export class Realm {
     if (this.saveManager === saves) this.saveManager = null;
     this.physicsScene?.dispose();
     this.physicsScene = undefined;
+    this.physicsParticipants = [];
     for (const teardown of this.modTeardowns.values()) teardown();
     this.modTeardowns.clear();
     for (const entity of [...this.entityManager.entities])
@@ -1994,8 +2015,7 @@ export class Realm {
       const rideHeight = entity.collider.physicalHeight ?? 10;
       player.wz = (entity.wz ?? 0) + rideHeight;
       player.jumpZ = rideHeight;
-      delete player.airMomentumX;
-      delete player.airMomentumY;
+
       Reflect.set(player, "jumpVZ", undefined);
       player.noShadow = true; // cow's shadow is bigger
       if (entity.wanderAI) {
@@ -2023,7 +2043,7 @@ export class Realm {
 
   // ---- Private ----
 
-  /** Save respawn-safe location while the player is grounded on non-water. */
+  /** Save a supported respawn pose above dry ground or an elevated deck. */
   private updateLastSafePosition(session: PlayerSession): void {
     const p = session.player;
     if (p.jumpVZ !== undefined) return;
@@ -2031,6 +2051,7 @@ export class Realm {
     session.gameplaySession.lastSafePosition = {
       wx: p.position.wx,
       wy: p.position.wy,
+      wz: p.wz ?? 0,
     };
   }
 
@@ -2045,7 +2066,7 @@ export class Realm {
     },
     getHeight: (tx: number, ty: number) => number,
   ): void {
-    if (!outcome.landed) return;
+    if (!outcome.landed && !outcome.enteredWater) return;
     const p = session.player;
     if (outcome.wildlifeContactId !== undefined) {
       const animal = this.entityManager.byId.get(outcome.wildlifeContactId);
@@ -2073,11 +2094,10 @@ export class Realm {
       if (safe) {
         p.position.wx = safe.wx;
         p.position.wy = safe.wy;
-        p.wz = getSurfaceZ(safe.wx, safe.wy, getHeight);
+        p.wz = safe.wz ?? getSurfaceZ(safe.wx, safe.wy, getHeight);
         p.groundZ = p.wz;
       }
-      delete p.airMomentumX;
-      delete p.airMomentumY;
+
       Reflect.set(p, "jumpVZ", undefined);
       Reflect.set(p, "jumpZ", undefined);
       // Brief invincibility flash so the respawn is visible.
@@ -2095,7 +2115,10 @@ export class Realm {
   private isEntityOnWater(entity: Entity): boolean {
     const tx = Math.floor(entity.position.wx / TILE_SIZE);
     const ty = Math.floor(entity.position.wy / TILE_SIZE);
-    return (this.world.getCollisionIfLoaded(tx, ty) & CollisionFlag.Water) !== 0;
+    return (
+      (this.world.getCollisionIfLoaded(tx, ty) & CollisionFlag.Water) !== 0 &&
+      (entity.wz ?? 0) <= this.world.getHeightAt(tx, ty) * ELEVATION_PX + 0.15
+    );
   }
 
   /** Build per-tick frame + on-change sync events for a specific client. */

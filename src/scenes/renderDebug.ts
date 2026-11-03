@@ -97,7 +97,6 @@ export function renderDebugOverlay(gc: GameContext, alpha = 1): void {
         observer,
         gc.debugPanel.collision,
         alpha,
-        (x, y) => stateView.world.getHeightAt(x, y),
       );
       gc.renderer.submit(camera, { kind: "overlay", items: overlay.items });
     } finally {

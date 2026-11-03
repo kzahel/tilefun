@@ -182,15 +182,9 @@ describe("EntitySnapshot binary codec", () => {
       deathTimer: 2.5,
       jumpZ: 10,
       jumpVZ: -5,
-      airMomentumX: 192.5,
-      airMomentumY: -36.25,
       jumpInputState: 3,
       emergencyState: 5,
       vehicleHeading: Math.fround(-2.13),
-      vehicleBedTilt: Math.fround(0.42),
-      vehicleBedTarget: Math.fround(0.8),
-      towTargetId: 0xfedcba98,
-      towedBy: 0xfedcba97,
       wz: 16,
       parentId: 7,
       localOffsetX: 3.5,
@@ -220,15 +214,9 @@ describe("EntitySnapshot binary codec", () => {
     expect(result.deathTimer).toBeCloseTo(2.5, 2);
     expect(result.jumpZ).toBeCloseTo(10, 2);
     expect(result.jumpVZ).toBeCloseTo(-5, 2);
-    expect(result.airMomentumX).toBe(192.5);
-    expect(result.airMomentumY).toBe(-36.25);
     expect(result.jumpInputState).toBe(3);
     expect(result.emergencyState).toBe(5);
     expect(result.vehicleHeading).toBe(Math.fround(-2.13));
-    expect(result.vehicleBedTilt).toBe(Math.fround(0.42));
-    expect(result.vehicleBedTarget).toBe(Math.fround(0.8));
-    expect(result.towTargetId).toBe(0xfedcba98);
-    expect(result.towedBy).toBe(0xfedcba97);
     expect(result.wz).toBeCloseTo(16, 2);
     expect(result.parentId).toBe(7);
     expect(result.localOffsetX).toBeCloseTo(3.5, 2);
@@ -281,7 +269,7 @@ describe("EntitySnapshot binary codec", () => {
       entityExits: [12, 13],
     };
     const bytes = encodeServerMessage(msg);
-    expect(new DataView(bytes).getUint8(0)).toBe(0x0b);
+    expect(new DataView(bytes).getUint8(0)).toBe(0x0c);
     expect(roundtripServer(msg)).toEqual(msg);
   });
 
@@ -292,7 +280,7 @@ describe("EntitySnapshot binary codec", () => {
       lastProcessedInputSeq: 0,
       playerEntityId: 1,
     });
-    for (const tag of [0x01, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a]) {
+    for (const tag of [0x01, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b]) {
       new DataView(bytes).setUint8(0, tag);
       expect(() => decodeServerMessage(bytes)).toThrow("matching updated client and server");
     }
@@ -511,8 +499,6 @@ describe("EntityDelta binary codec", () => {
       deathTimer: null,
       jumpZ: null,
       jumpVZ: null,
-      airMomentumX: null,
-      airMomentumY: null,
       jumpInputState: null,
       wz: null,
       parentId: null,
@@ -533,8 +519,6 @@ describe("EntityDelta binary codec", () => {
     expect(result.deathTimer).toBeNull();
     expect(result.jumpZ).toBeNull();
     expect(result.jumpVZ).toBeNull();
-    expect(result.airMomentumX).toBeNull();
-    expect(result.airMomentumY).toBeNull();
     expect(result.jumpInputState).toBeNull();
     expect(result.wz).toBeNull();
     expect(result.parentId).toBeNull();
@@ -550,15 +534,9 @@ describe("EntityDelta binary codec", () => {
       deathTimer: 1.5,
       jumpZ: 10,
       jumpVZ: -5,
-      airMomentumX: 192.5,
-      airMomentumY: -36.25,
       jumpInputState: 3,
       emergencyState: 5,
       vehicleHeading: Math.fround(-2.13),
-      vehicleBedTilt: Math.fround(0.42),
-      vehicleBedTarget: Math.fround(0.8),
-      towTargetId: 0xfedcba98,
-      towedBy: 0xfedcba97,
       wz: 16,
       parentId: 7,
       localOffsetX: 3.5,
@@ -578,15 +556,9 @@ describe("EntityDelta binary codec", () => {
     expect(result.deathTimer).toBeCloseTo(1.5, 2);
     expect(result.jumpZ).toBeCloseTo(10, 2);
     expect(result.jumpVZ).toBeCloseTo(-5, 2);
-    expect(result.airMomentumX).toBe(192.5);
-    expect(result.airMomentumY).toBe(-36.25);
     expect(result.jumpInputState).toBe(3);
     expect(result.emergencyState).toBe(5);
     expect(result.vehicleHeading).toBe(Math.fround(-2.13));
-    expect(result.vehicleBedTilt).toBe(Math.fround(0.42));
-    expect(result.vehicleBedTarget).toBe(Math.fround(0.8));
-    expect(result.towTargetId).toBe(0xfedcba98);
-    expect(result.towedBy).toBe(0xfedcba97);
     expect(result.wz).toBeCloseTo(16, 2);
     expect(result.parentId).toBe(7);
     expect(result.localOffsetX).toBeCloseTo(3.5, 2);

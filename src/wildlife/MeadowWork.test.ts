@@ -110,7 +110,7 @@ it("loose food does not dilute bounded predator prey acquisition", async () => {
         });
       }
       expect(hunter.predator?.meals).toBe(1);
-      outcomes.push(frames);
+      outcomes.push(frames.at(-1)?.meals);
     } finally {
       await s.close();
     }
@@ -301,7 +301,7 @@ it("robin descends, consumes ground food and returns to a real saved tree perch"
   try {
     let bird = required(s.realm.entityManager.entities.find((e) => e.robin));
     await until(s, () => bird.animalWork?.state === "eat");
-    expect(bird.wz ?? 0).toBeLessThan(1);
+    expect(Math.abs((bird.wz ?? 0) - (bird.groundZ ?? 0))).toBeLessThan(0.2);
     await s.reload();
     bird = required(s.realm.entityManager.entities.find((e) => e.robin));
     await until(s, () => bird.animalWork?.deliveries === 1);

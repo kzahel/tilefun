@@ -116,7 +116,6 @@ try {
     await page.evaluate(
       ({ kind, ms }) => {
         const g = document.querySelector("#game").__game;
-        g.debugPanel.setNoclip(true);
         if (kind === "tx-delay")
           g.netEmulatedTransport.setConfig({
             enabled: true,
@@ -220,7 +219,7 @@ try {
         test.maxRetainedSeconds > 8.000001
       )
         throw Error(`${test.kind}/${test.ms}: recovery budget exceeded`);
-      // Movement is continuously rightward in this flat noclip control. Main
+      // Movement is continuously rightward in this flat-world control. Main
       // stalls are a rendering control; >8s cases characterize overflow recovery.
       if (test.kind !== "main" && test.ms <= 8000 && test.minDx < -0.05)
         throw Error(`${test.kind}/${test.ms}: backward prediction step ${test.minDx}`);

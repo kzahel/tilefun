@@ -1,4 +1,6 @@
+import { PLAYER_SPEED } from "../config/constants.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
+import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { setSpriteClip, setSpriteClipElapsed } from "../entities/spriteAnimation.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 
@@ -7,10 +9,13 @@ export function restoreFaunaPose(animal: Entity): void {
   const ai = animal.fauna,
     p = faunaProfile(animal.type);
   if (!ai || !animal.sprite || !p) return;
-  animal.sprite.moving = !!ai.motion;
-  if (ai.motion) {
-    const dx = ai.target.wx - animal.position.wx,
-      dy = ai.target.wy - animal.position.wy;
+  const ridden = animal.wanderAI?.state === "ridden";
+  animal.sprite.moving = ridden
+    ? Math.hypot(animal.velocity?.vx ?? 0, animal.velocity?.vy ?? 0) > 1
+    : !!ai.motion;
+  if (ai.motion || (ridden && animal.sprite.moving)) {
+    const dx = ridden ? (animal.velocity?.vx ?? 0) : ai.target.wx - animal.position.wx,
+      dy = ridden ? (animal.velocity?.vy ?? 0) : ai.target.wy - animal.position.wy;
     animal.sprite.direction = p.sideways
       ? directionFromVelocity(dy, -dx)
       : directionFromVelocity(dx, dy);
@@ -21,15 +26,25 @@ export function restoreFaunaPose(animal: Entity): void {
   const named = (name: string) => p.clips.findIndex((c) => c.name === name);
   setSpriteClip(
     animal,
-    ai.state === "travel"
-      ? swim
-        ? named("swim")
-        : 1
-      : ai.state === "flee"
-        ? named(swim ? "flee-swim" : "flee")
-        : ai.state === "action" || ai.state === "startle"
-          ? named("action")
-          : 0,
+    ridden
+      ? animal.sprite.moving
+        ? ENTITY_DEFS[animal.type]?.sprite?.clips?.findIndex(
+            (c) =>
+              c.name ===
+              (Math.hypot(animal.velocity?.vx ?? 0, animal.velocity?.vy ?? 0) > PLAYER_SPEED * 1.5
+                ? "ride-sprint"
+                : "ride"),
+          )
+        : 0
+      : ai.state === "travel"
+        ? swim
+          ? named("swim")
+          : 1
+        : ai.state === "flee"
+          ? named(swim ? "flee-swim" : "flee")
+          : ai.state === "action" || ai.state === "startle"
+            ? named("action")
+            : 0,
   );
   animal.noShadow = !!ai.water;
   setSpriteClipElapsed(

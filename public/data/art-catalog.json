@@ -9557,7 +9557,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:835"
+          "source": "src/server/Realm.ts:848"
         },
         {
           "system": "Gameplay",
@@ -10485,7 +10485,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:837"
+          "source": "src/server/Realm.ts:850"
         },
         {
           "system": "Gameplay",
@@ -10615,7 +10615,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:837"
+          "source": "src/server/Realm.ts:850"
         },
         {
           "system": "Gameplay",
@@ -29759,7 +29759,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:835"
+          "source": "src/server/Realm.ts:848"
         },
         {
           "system": "Gameplay",
@@ -33437,7 +33437,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:807"
+          "source": "src/scenes/PlayScene.ts:806"
         },
         {
           "system": "Gameplay",
@@ -33493,7 +33493,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:807"
+          "source": "src/scenes/PlayScene.ts:806"
         },
         {
           "system": "Gameplay",
@@ -33545,7 +33545,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:807"
+          "source": "src/scenes/PlayScene.ts:806"
         },
         {
           "system": "Gameplay",
@@ -34577,15 +34577,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:387"
+          "source": "src/rendering/collectScene.ts:254"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:397"
+          "source": "src/rendering/collectScene.ts:264"
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Vehicle.ts:125"
+          "source": "src/traffic/Vehicle.ts:121"
         }
       ]
     },
@@ -35119,7 +35119,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Towing.ts:6"
+          "source": "src/rendering/TowingPose.ts:5"
         }
       ]
     },
@@ -35182,10 +35182,6 @@
         {
           "system": "Gameplay",
           "source": "src/rendering/VehicleBedPresentation.ts:13"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/traffic/VehicleBed.ts:218"
         }
       ]
     },
@@ -35315,11 +35311,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/VehicleBedPresentation.ts:12"
+          "source": "src/rendering/TransporterPose.ts:8"
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/CarTransporter.ts:9"
+          "source": "src/rendering/VehicleBedPresentation.ts:12"
         }
       ]
     },
@@ -35451,15 +35447,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:72"
+          "source": "src/physics/PhysicsBodies.ts:20"
         },
         {
           "system": "Gameplay",
           "source": "src/rendering/PlayerPresentation.ts:9"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:581"
         },
         {
           "system": "Gameplay",
@@ -35479,11 +35471,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/EntityHandle.ts:170"
+          "source": "src/server/EntityHandle.ts:169"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/EntityHandle.ts:170"
+          "source": "src/server/EntityHandle.ts:169"
         },
         {
           "system": "Gameplay",
@@ -35499,23 +35491,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:301"
+          "source": "src/server/Realm.ts:304"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1261"
+          "source": "src/server/Realm.ts:1286"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1465"
+          "source": "src/server/Realm.ts:1490"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2120"
+          "source": "src/server/Realm.ts:2143"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2333"
+          "source": "src/server/Realm.ts:2356"
         },
         {
           "system": "Gameplay",
@@ -35531,15 +35523,15 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/server/test/MemoryServer.ts:55"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/shared/serialization.ts:32"
         },
         {
           "system": "Gameplay",
-          "source": "src/shared/serialization.ts:145"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/traffic/VehicleCargo.ts:21"
+          "source": "src/shared/serialization.ts:127"
         },
         {
           "system": "Gameplay",
@@ -36587,7 +36579,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/ActorRecords.ts:141"
+          "source": "src/persistence/ActorRecords.ts:139"
         },
         {
           "system": "Gameplay",
@@ -36599,27 +36591,31 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:59"
+          "source": "src/physics/PhysicsBodies.ts:7"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:200"
+          "source": "src/physics/PhysicsScene.ts:176"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:207"
+          "source": "src/physics/PhysicsScene.ts:183"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/rendering/CollisionDebug.ts:118"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:724"
+          "source": "src/scenes/PlayScene.ts:723"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1356"
+          "source": "src/server/Realm.ts:1381"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2297"
+          "source": "src/server/Realm.ts:2320"
         },
         {
           "system": "Gameplay",
@@ -37473,7 +37469,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:837"
+          "source": "src/server/Realm.ts:850"
         },
         {
           "system": "Gameplay",
@@ -37607,7 +37603,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:837"
+          "source": "src/server/Realm.ts:850"
         },
         {
           "system": "Gameplay",

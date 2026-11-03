@@ -596,11 +596,11 @@ export class RemoteStateView implements ClientStateView {
   get mountEntityId(): number | undefined {
     return this._mountEntityId;
   }
-  /** Server tick rate in Hz (synced from sv_tickrate CVar). */
+  /** Server tick rate in Hz (fixed by the shared physics clock). */
   get tickRate(): number {
     return TICK_RATE;
   }
-  /** Server command tick interval in ms (synced from sv_tick_ms CVar). */
+  /** Server command tick interval in ms (fixed by the shared physics clock). */
   get tickMs(): number {
     return 1000 / TICK_RATE;
   }

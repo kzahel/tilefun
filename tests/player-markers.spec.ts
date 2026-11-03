@@ -161,7 +161,7 @@ for (const renderer of ["canvas", "gpu"]) {
               worldId,
               arrival: { x: 0, y: 0, generation },
             });
-            g.transport.send({ type: "set-debug", paused: false, noclip: true });
+            g.transport.send({ type: "set-debug", paused: false });
           },
           { worldId, generation },
         );

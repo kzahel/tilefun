@@ -1030,7 +1030,7 @@ renderer fidelity limitation rather than another performance task.
 
 [096](../tactical/096-rotated-vehicle-collision-benchmark.md) owns the isolated
 cardinal-AABB versus continuous-yaw OBB benchmark and device results.
-`npm run vehicle-collision:bench` runs identical prescribed motion and sweep
+The now-retired `vehicle-collision:bench` ran identical prescribed motion and sweep
 sampling in a dedicated Worker and a six-replay main-thread demand lane. It
 uses native SpatialHash candidate queries with diagnostic shape/roof clearance
 math. Sparse obstacles, dense tight turns and two roof-local occupants cover
@@ -1054,3 +1054,7 @@ sweeps are not continuous collision detection and can miss sufficiently thin
 obstacles. Gameplay retains cardinal collision and cosmetic mesh orientation.
 Next: integrate one yaw-body prototype through shared authority/prediction,
 including turn clearance and roof support, then measure whole-game device cost.
+
+The 205 reset retires that synthetic prototype and its unused swept-box solver.
+Current vehicle contacts use the shared Rapier scene; historical timings above
+are not performance evidence for the shared default.

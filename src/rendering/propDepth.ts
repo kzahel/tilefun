@@ -141,7 +141,7 @@ export function depthAboveProps(
   if (!footprint) return baseDepth;
   let depth = baseDepth;
   for (const surface of surfaces)
-    if (feetZ >= surface.topZ && aabbsOverlap(footprint, surface.bounds))
+    if (feetZ >= surface.topZ - 0.15 && aabbsOverlap(footprint, surface.bounds))
       depth = Math.max(depth, surface.depth + 0.001);
   return depth;
 }

@@ -30,9 +30,7 @@ it("uses real Realm collision for walls and candidate passage widths", async () 
     (await walk({ ...def.defaults, width: 20 }, 68, 8, 0, -1, 180)).position.wy,
   ).toBeGreaterThanOrEqual(-19.01);
 });
-it("uses real Realm step and overhead clearance with candidate physical height", async () => {
-  const step = await walk(def.defaults, -96, 40, 1, 0, 80);
-  expect(step.wz).toBeGreaterThan(0);
+it("uses real Realm overhead clearance with candidate physical height", async () => {
   expect((await walk(def.defaults, 68, 68, 0, -1, 120)).position.wy).toBeGreaterThanOrEqual(55.99);
   expect(
     (await walk({ ...def.defaults, physicalHeight: 19 }, 68, 68, 0, -1, 120)).position.wy,

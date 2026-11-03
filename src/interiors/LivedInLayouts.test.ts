@@ -120,6 +120,6 @@ describe("lived-in first-visit interiors", () => {
     expect(e.velocity).toEqual({ vx: 0, vy: 0 });
     expect(e.position).toEqual(before);
     updateResident(e, 2.1, () => true, actors);
-    expect(Math.hypot(required(e.velocity).vx, required(e.velocity).vy)).toBeGreaterThan(0);
+    expect(Math.hypot(required(e.motionIntent).vx, required(e.motionIntent).vy)).toBeGreaterThan(0);
   });
 });

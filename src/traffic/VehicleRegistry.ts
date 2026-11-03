@@ -10,7 +10,7 @@ import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import type { DepotVehicle } from "../generation/regional/VehicleDepotPlanner.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
-import { resolveGroundZForTracking } from "../physics/surfaceHeight.js";
+import { placementGroundZ } from "../physics/surfaceHeight.js";
 import { generateUUID } from "../shared/uuid.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -104,13 +104,7 @@ export class VehicleRegistry {
         if (!this.world.getChunkIfLoaded(cx, cy)) return;
     // Read-only admission queries choose a spawn; they never integrate a body.
     entity.wz = entity.groundZ =
-      z ??
-      resolveGroundZForTracking(
-        entity,
-        (x, y) => this.world.getHeightAt(x, y),
-        this.props.props,
-        [],
-      );
+      z ?? placementGroundZ(entity, (x, y) => this.world.getHeightAt(x, y), this.props.props);
     if (
       aabbOverlapsSolid(
         bounds,

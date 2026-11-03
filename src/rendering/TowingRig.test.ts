@@ -9,13 +9,9 @@ import captureRecipe from "../../art-source/vehicle-bake/towing-fallbacks/v2/rec
   type: "json",
 };
 import { required } from "../art/ArtCatalog.js";
-import { Direction } from "../entities/Entity.js";
-import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
-import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
-import { TOW, towMeshOffset, towPitch } from "../traffic/Towing.js";
 import profiles from "../traffic/towing-profiles.json" with { type: "json" };
-import { createVehicle } from "../traffic/Vehicle.js";
 import { CarMeshAsset } from "./CarMeshAsset.js";
+import { TOW, towMeshOffset, towPitch } from "./TowingPose.js";
 import frames from "./towing-fallbacks.json" with { type: "json" };
 
 it("keeps every captured lift/car view inside its native frame, including fully extended down", () => {
@@ -47,25 +43,6 @@ it("keeps every captured lift/car view inside its native frame, including fully 
         }
     expect(clipped, `${path} native frame edge`).toEqual([]);
   }
-});
-
-it("hydrates pending and resident towing links, then clears them without a stale collider", () => {
-  const car = createVehicle("beetle", 0, 0, Direction.Right),
-    before = serializeEntity(car);
-  const h = required(required(car.collider).physicalHeight);
-  car.towedBy = 0;
-  const pending = deserializeEntity(serializeEntity(car));
-  expect(pending.towedBy).toBe(0);
-  expect(required(pending.collider).physicalHeight).toBe(h + 12);
-  car.towedBy = 0xfedcba98;
-  const attached = serializeEntity(car),
-    copy = deserializeEntity(before);
-  applyEntityDelta(copy, required(diffEntitySnapshots(before, attached)));
-  expect(copy.towedBy).toBe(car.towedBy);
-  expect(required(copy.collider).physicalHeight).toBe(h + 12);
-  applyEntityDelta(copy, required(diffEntitySnapshots(attached, before)));
-  expect(copy.towedBy).toBeUndefined();
-  expect(required(copy.collider).physicalHeight).toBe(h);
 });
 
 async function load(path: string, lateral = 1, heightScale = 1) {
