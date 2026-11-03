@@ -37,3 +37,28 @@ Realm lifecycle, transport, scenario Worker and representative wildlife work).
 All three TypeScript projects and focused lint pass. No new extraction-only tests
 were added. Final inventories, browser/execution qualification and readiness wait
 for the physical-edit slice so they exercise the finished source.
+
+## Slice2 — explicit physical edits and coherent admission
+
+PhysicalEdits names pose changes preserving motion, stopped teleports, horizontal/
+vertical velocity edits, complete launches and collider replacement. Scripts,
+ordinary ball throws, travel/water recovery, vehicle enter/exit, lab teleports,
+resource drops, wildlife toy launches and den placement use the shared helpers.
+Bootstrap/restore and derived attachments retain their separate lifecycle owners.
+Admission remains synchronous at PhysicsScene.synchronize; no command queue,
+extra integration or engine configuration was introduced.
+
+Scene admission now updates physical bodies and their cached numerical state
+at the same boundary, invalidating stale support/contact associations on edits.
+Snapshot copying is a read of admitted state rather than merging cached state with
+later entity fields. A paused launch therefore publishes its airborne velocity
+and support state together. Contact invalidation visits the edited body's neighbors,
+not the complete contact map. Shape signatures still own one rebuild per change.
+
+Two focused shared-world regressions cover stopped relocation plus launch before
+the next integration, contact-neighborhood isolation, immutable previous captures,
+one-time launch velocity, and collider replace/remove/re-admit without advancing.
+The existing coverage plus those cases passes280 native checks across18 files;
+all three TypeScript projects pass. A final focused core rerun covers local contact
+invalidation. Runtime review fingerprints include the extracted/new shared modules.
+Final artifact/browser/streaming qualification follows before readiness.

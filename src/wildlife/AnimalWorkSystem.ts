@@ -1,6 +1,7 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { durableId } from "../persistence/ActorRecords.js";
+import { setHorizontalVelocity, teleportBody } from "../physics/PhysicalEdits.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import type { AnimalWork, FoodKind } from "./AnimalWork.js";
 import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
@@ -101,11 +102,9 @@ export class AnimalWorkSystem {
     delete item.parentId;
     delete item.localOffsetX;
     delete item.localOffsetY;
-    delete item.jumpZ;
-    delete item.jumpVZ;
-    item.wz = animal.groundZ ?? 0;
+    teleportBody(item, { ...item.position, wz: animal.groundZ ?? 0 });
     if (item.workItem) delete item.workItem.claimedBy;
-    if (item.velocity) item.velocity = { vx: 0, vy: 0 };
+    if (item.velocity) setHorizontalVelocity(item, { vx: 0, vy: 0 });
     item.noShadow = false;
     if (item.type === "ball" && !item.workItem?.owner) item.deathTimer = 35;
   }
@@ -274,7 +273,7 @@ export class AnimalWorkSystem {
     delete item.jumpVZ;
     delete item.deathTimer;
     delete item.ballThrowerId;
-    if (item.velocity) item.velocity = { vx: 0, vy: 0 };
+    if (item.velocity) setHorizontalVelocity(item, { vx: 0, vy: 0 });
     item.noShadow = true;
     task.heldId = durableId(item);
     this.sync(animal);

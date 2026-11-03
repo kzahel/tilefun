@@ -219,42 +219,59 @@ export class PhysicsScene {
         this.colliderIds.set(collider.handle, entity.id);
         this.metrics.bodyCreates++;
       } else {
-        // Spawn/teleport/editor APIs may explicitly change the published entity.
-        // Ordinary movement leaves it at the last readback and does not re-upload.
-        const s = entry.state;
-        if (entity.position.wx !== s.x || entity.position.wy !== s.y || (entity.wz ?? 0) !== s.z) {
-          entry.body.setTranslation(
-            {
-              x: entity.position.wx / SCALE + entry.offsetX - this.origin.x,
-              y: (entity.wz ?? 0) / SCALE + entry.halfY,
-              z: entity.position.wy / SCALE + entry.offsetY - this.origin.z,
-            },
-            true,
-          );
-          s.grounded = entity.jumpVZ === undefined;
-        }
-        // Explicit throws/launches or script velocity changes are admitted once.
-        // AI and controls use intent and never overwrite this readback velocity.
-        if (
-          (entity.velocity?.vx ?? 0) !== s.vx ||
-          (entity.velocity?.vy ?? 0) !== s.vy ||
-          (entity.jumpVZ !== undefined && entity.jumpVZ !== s.vz)
-        ) {
-          entry.body.setLinvel(
-            {
-              x: (entity.velocity?.vx ?? 0) / SCALE,
-              y: (entity.jumpVZ ?? 0) / SCALE,
-              z: (entity.velocity?.vy ?? 0) / SCALE,
-            },
-            true,
-          );
-          s.grounded = entity.jumpVZ === undefined;
-        }
         entry.entity = entity;
+        this.admitEntityEdits(entry);
       }
     }
     for (const [id, body] of this.bodies) if (!present.has(id)) this.remove(body);
   }
+  /** Commit explicit entity edits without integrating. Publication uses the same
+   * boundary, so a paused teleport/launch cannot mix new entities with old bodies. */
+  private admitEntityEdits(entry: Body) {
+    const entity = entry.entity,
+      s = entry.state;
+    const moved =
+      entity.position.wx !== s.x || entity.position.wy !== s.y || (entity.wz ?? 0) !== s.z;
+    const velocityChanged =
+      (entity.velocity?.vx ?? 0) !== s.vx ||
+      (entity.velocity?.vy ?? 0) !== s.vy ||
+      (entity.jumpVZ !== undefined && entity.jumpVZ !== s.vz);
+    const grounded = entity.jumpVZ === undefined;
+    if (!moved && !velocityChanged && grounded === s.grounded) return;
+    if (moved)
+      entry.body.setTranslation(
+        {
+          x: entity.position.wx / SCALE + entry.offsetX - this.origin.x,
+          y: (entity.wz ?? 0) / SCALE + entry.halfY,
+          z: entity.position.wy / SCALE + entry.offsetY - this.origin.z,
+        },
+        true,
+      );
+    if (velocityChanged || grounded !== s.grounded)
+      entry.body.setLinvel(
+        {
+          x: (entity.velocity?.vx ?? 0) / SCALE,
+          y: (entity.jumpVZ ?? 0) / SCALE,
+          z: (entity.velocity?.vy ?? 0) / SCALE,
+        },
+        true,
+      );
+    s.x = entity.position.wx;
+    s.y = entity.position.wy;
+    s.z = entity.wz ?? 0;
+    s.vx = entity.velocity?.vx ?? 0;
+    s.vy = entity.velocity?.vy ?? 0;
+    s.vz = entity.jumpVZ ?? 0;
+    s.grounded = grounded;
+    s.groundZ = entity.groundZ ?? s.z;
+    s.normalX = s.normalZ = 0;
+    s.normalY = 1;
+    delete s.supportId;
+    for (const neighbor of this.contacts.get(entity.id) ?? [])
+      this.contacts.get(neighbor)?.delete(entity.id);
+    this.contacts.delete(entity.id);
+  }
+
   private remove(entry: Body) {
     this.colliderIds.delete(entry.collider.handle);
     this.world.removeRigidBody(entry.body);
@@ -599,26 +616,7 @@ export class PhysicsScene {
   }
 
   private copyBodyState(entry: Body): PhysicsBodyState {
-    const state = { ...entry.state },
-      entity = entry.entity;
-    const moved =
-      entity.position.wx !== state.x ||
-      entity.position.wy !== state.y ||
-      (entity.wz ?? 0) !== state.z;
-    if (moved) {
-      state.x = entity.position.wx;
-      state.y = entity.position.wy;
-      state.z = entity.wz ?? 0;
-      state.groundZ = entity.groundZ ?? state.z;
-      state.grounded = entity.jumpVZ === undefined;
-      state.normalX = state.normalZ = 0;
-      state.normalY = 1;
-      delete state.supportId;
-    }
-    state.vx = entity.velocity?.vx ?? state.vx;
-    state.vy = entity.velocity?.vy ?? state.vy;
-    state.vz = entity.jumpVZ ?? (moved && state.grounded ? 0 : state.vz);
-    return state;
+    return { ...entry.state };
   }
   snapshot(): PhysicsState {
     return {

@@ -7,6 +7,7 @@ import {
 } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { durableId } from "../persistence/ActorRecords.js";
+import { setBodyPose } from "../physics/PhysicalEdits.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import type { WorkContext } from "../wildlife/AnimalWorkSystem.js";
 import { browsingRocks } from "../wildlife/BrowsingRocks.js";
@@ -106,7 +107,9 @@ export function createRealmWorkContext(
           Math.hypot(animal.position.wx - ai.home.wx, animal.position.wy - ai.home.wy) < 4 &&
           !ai.flight
         ) {
-          animal.wz = getSurfaceZ(ai.home.wx, ai.home.wy, getHeight) + (spec.collider.zHeight ?? 0);
+          setBodyPose(animal, {
+            wz: getSurfaceZ(ai.home.wx, ai.home.wy, getHeight) + (spec.collider.zHeight ?? 0),
+          });
           ai.state = "perch";
           ai.timer = 1.5;
           ai.elapsed = 0;

@@ -1,5 +1,6 @@
 import { CHUNK_SIZE_PX, ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import type { SavedPlayerData } from "../persistence/SaveManager.js";
+import { teleportBody } from "../physics/PhysicalEdits.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { type Arrival, safeArrival } from "./SafeArrival.js";
@@ -79,17 +80,14 @@ export class RealmTransitions {
         if (returnLocation !== undefined) session.returnLocation = returnLocation;
         session.inputQueue = [];
         if (position) {
-          session.player.position = position;
-          // Explicit travel leaves any saved moving-roof support behind.
-          session.player.wz =
-            target.world.getHeightAt(
-              Math.floor(position.wx / TILE_SIZE),
-              Math.floor(position.wy / TILE_SIZE),
-            ) * ELEVATION_PX;
-          session.player.groundZ = session.player.wz;
-
-          delete session.player.jumpVZ;
-          delete session.player.jumpZ;
+          teleportBody(session.player, {
+            ...position,
+            wz:
+              target.world.getHeightAt(
+                Math.floor(position.wx / TILE_SIZE),
+                Math.floor(position.wy / TILE_SIZE),
+              ) * ELEVATION_PX,
+          });
           session.cameraX = position.wx;
           session.cameraY = position.wy;
           session.gameplaySession.lastSafePosition = position;

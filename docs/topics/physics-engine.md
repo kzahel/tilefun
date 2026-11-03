@@ -12,9 +12,15 @@ owns authoring semantics; [prediction](player-prediction.md) owns input replay;
 ## Current cleanup (206)
 
 [206](../tactical/206-realm-phases-and-physical-edits.md) makes Realm tick phases
-and physical edits explicit while preserving205 behavior. The first slices name
+and physical edits explicit while preserving205 behavior. The delivered slices name
 ordered execution phases and centralize teleport/launch/collider changes; prediction
 presentation separation and broader AI consolidation follow later.
+
+Runtime edits use `physics/PhysicalEdits`: relocations, stopped teleports, launches
+and collider replacement. Scene synchronization admits body and cached snapshot
+state together; captures do not merge pending entity edits into old body state.
+Realm.tick orchestrates named phases, and RealmWildlife binds planning/task queries.
+Transient simulation views are scoped with finally. No extra scheduler or step is added.
 
 ## Delivered reset (205)
 

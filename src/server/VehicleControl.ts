@@ -6,6 +6,11 @@ import {
 } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
+import {
+  replaceBodyCollider,
+  setHorizontalVelocity,
+  teleportBody,
+} from "../physics/PhysicalEdits.js";
 import { getSurfaceZ, placementGroundZ } from "../physics/surfaceHeight.js";
 import type { VehicleHornMessage } from "../shared/protocol.js";
 import {
@@ -88,8 +93,7 @@ export class VehicleControl {
     reference.wz = getSurfaceZ(position.wx, position.wy, (x, y) => r.world.getHeightAt(x, y));
     const placement = this.exitPlacement(reference, reference);
     if (!placement) throw Error("No clear place to restore the driver on foot.");
-    session.player.position = placement.position;
-    session.player.wz = session.player.groundZ = placement.wz;
+    teleportBody(session.player, { ...placement.position, wz: placement.wz });
     session.gameplaySession.lastSafePosition = { ...placement.position };
     r.entityManager.spatialHash.update(session.player);
   }
@@ -120,8 +124,8 @@ export class VehicleControl {
     p.jumpZ = 0;
     delete p.jumpVZ;
 
-    p.collider = null;
-    p.velocity = { vx: 0, vy: 0 };
+    replaceBodyCollider(p, null);
+    setHorizontalVelocity(p, { vx: 0, vy: 0 });
     session.gameplaySession.mountId = id;
     session.lastProcessedInputSeq = session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
     session.inputQueue = [];
@@ -165,18 +169,16 @@ export class VehicleControl {
     delete p.parentId;
     delete p.localOffsetX;
     delete p.localOffsetY;
-    p.collider = createPlayer(0, 0).collider;
-    if (placement) {
-      p.position = placement.position;
-      p.wz = p.groundZ = placement.wz;
-    } else {
-      p.position = { ...(session.gameplaySession.lastSafePosition ?? vehicle.position) };
-      p.wz = p.groundZ = 0;
-    }
-    p.prevPosition = { ...p.position };
-    p.jumpZ = 0;
-    delete p.jumpVZ;
-    p.velocity = { vx: 0, vy: 0 };
+    replaceBodyCollider(p, createPlayer(0, 0).collider);
+    teleportBody(
+      p,
+      placement
+        ? { ...placement.position, wz: placement.wz }
+        : {
+            ...(session.gameplaySession.lastSafePosition ?? vehicle.position),
+            wz: 0,
+          },
+    );
     session.gameplaySession.mountId = null;
     session.gameplaySession.lastDismountedId = vehicle.id;
     session.gameplaySession.lastSafePosition = { ...p.position };

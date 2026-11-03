@@ -1,6 +1,11 @@
 import { TILE_SIZE } from "../config/constants.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
+import {
+  setBodyPose,
+  setHorizontalVelocity,
+  setVerticalVelocity,
+} from "../physics/PhysicalEdits.js";
 import type { GameplaySession } from "./PlayerSession.js";
 
 const EMPTY_SET: ReadonlySet<string> = new Set();
@@ -40,8 +45,7 @@ export class EntityHandle {
     if (this.entityManager.canPlace?.(wx, wy) === false)
       throw new Error("Position is outside ready terrain.");
 
-    this.entity.position.wx = wx;
-    this.entity.position.wy = wy;
+    setBodyPose(this.entity, { wx, wy });
   }
 
   // --- Jump / Z velocity ---
@@ -52,7 +56,7 @@ export class EntityHandle {
 
   setJumpVZ(vz: number): void {
     if (!this.alive) return;
-    this.entity.jumpVZ = vz;
+    setVerticalVelocity(this.entity, vz);
   }
 
   // --- Velocity ---
@@ -69,17 +73,12 @@ export class EntityHandle {
 
   setVelocity(vx: number, vy: number): void {
     if (!this.alive) return;
-    if (this.entity.velocity) {
-      this.entity.velocity.vx = vx;
-      this.entity.velocity.vy = vy;
-    } else {
-      this.entity.velocity = { vx, vy };
-    }
+    setHorizontalVelocity(this.entity, { vx, vy });
   }
 
   clearVelocity(): void {
     if (!this.alive) return;
-    this.entity.velocity = null;
+    setHorizontalVelocity(this.entity, null);
   }
 
   // --- Tile position (derived) ---

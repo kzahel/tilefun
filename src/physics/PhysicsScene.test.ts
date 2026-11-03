@@ -4,6 +4,7 @@ import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import { createFauna } from "../wildlife/Fauna.js";
+import { launchBody, replaceBodyCollider, teleportBody } from "./PhysicalEdits.js";
 import { PHYSICS_DT } from "./PhysicsDefaults.js";
 import { type PhysicsGeometry, PhysicsScene } from "./PhysicsScene.js";
 import type { MotionIntent } from "./PhysicsState.js";
@@ -337,4 +338,67 @@ it("wakes a sleeping loose body when its edited support is removed", async () =>
   }
   expect(Math.abs(ball.wz ?? Infinity)).toBeLessThan(0.2);
   expect(s.diagnostics.bodyCreates).toBe(1);
+});
+
+it("admits a paused teleport and launch coherently without integrating or retaining old contacts", async () => {
+  const s = await scene(),
+    a = createPlayer(0, 32),
+    b = createPlayer(9, 32);
+  a.id = 1;
+  b.id = 2;
+  const actors = [a, b],
+    ground = geometry();
+  for (let i = 0; i < 30; i++) {
+    s.synchronize(actors);
+    s.step(idle, ground);
+  }
+  expect(s.contactIds(a.id)?.has(b.id)).toBe(true);
+  const before = s.snapshot(),
+    steps = s.diagnostics.worldSteps;
+  teleportBody(a, { wx: 400, wy: 32, wz: 20 });
+  launchBody(a, { vx: 3, vy: -2, vz: 60 });
+  // Captures read admitted state, never a mixture of pending entity edits.
+  expect(s.snapshot()).toEqual(before);
+  s.synchronize(actors);
+  const local = s.snapshotAround(a.id, new Set([a.id, b.id]));
+  expect(local.bodies.map((body) => body.id)).toEqual([a.id]);
+  expect(local.bodies[0]).toMatchObject({
+    x: 400,
+    y: 32,
+    z: 20,
+    vx: 3,
+    vy: -2,
+    vz: 60,
+    grounded: false,
+  });
+  expect(s.diagnostics.worldSteps).toBe(steps);
+  expect(a.prevPosition).toEqual(a.position);
+  s.step(idle, ground);
+  expect(a.wz).toBeGreaterThan(20);
+  const velocity = a.jumpVZ ?? Infinity;
+  s.synchronize(actors);
+  s.step(idle, ground);
+  expect(a.jumpVZ).toBeLessThan(velocity);
+});
+
+it("admits collider replacement and removal without advancing the scene", async () => {
+  const s = await scene(),
+    a = createPlayer(0, 32);
+  a.id = 1;
+  const original = a.collider;
+  if (!original) throw Error("Missing player collider");
+  s.synchronize([a]);
+  replaceBodyCollider(a, { ...original, width: 20 });
+  s.synchronize([a]);
+  expect(s.diagnostics.bodyCreates).toBe(2);
+  expect(s.world.colliders.getAll()[0]?.shape).toMatchObject({
+    halfExtents: { x: expect.closeTo(20 / 32, 1) },
+  });
+  replaceBodyCollider(a, null);
+  s.synchronize([a]);
+  expect(s.snapshot().bodies).toHaveLength(0);
+  replaceBodyCollider(a, original);
+  s.synchronize([a]);
+  expect(s.snapshot().bodies.map((b) => b.id)).toEqual([1]);
+  expect(s.diagnostics.worldSteps).toBe(0);
 });

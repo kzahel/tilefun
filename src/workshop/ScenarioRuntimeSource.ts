@@ -1,6 +1,8 @@
 import predictor from "../client/PlayerPredictor.ts?raw";
 import movement from "../entities/EntityManager.ts?raw";
 import gravity from "../physics/Gravity.ts?raw";
+import physicalEdits from "../physics/PhysicalEdits.ts?raw";
+import physicsBodies from "../physics/PhysicsBodies.ts?raw";
 import physicsDefaults from "../physics/PhysicsDefaults.ts?raw";
 import physics from "../physics/PhysicsScene.ts?raw";
 import physicsState from "../physics/PhysicsState.ts?raw";
@@ -15,6 +17,7 @@ import session from "../scenarios/ScenarioSession.ts?raw";
 import worker from "../scenarios/ScenarioWorkerHost.ts?raw";
 import entry from "../scenarios/scenario.worker.ts?raw";
 import realm from "../server/Realm.ts?raw";
+import realmWildlife from "../server/RealmWildlife.ts?raw";
 import clock from "../server/ServerLoop.ts?raw";
 import physicsCodec from "../shared/physicsStateCodec.ts?raw";
 import channel from "../transport/OrderedWorkerChannel.ts?raw";
@@ -30,6 +33,9 @@ import wildlifeRespawns from "../wildlife/WildlifeRespawns.ts?raw";
 export const scenarioRuntimeSource = {
   physics,
   physicsState,
+  physicalEdits,
+  physicsBodies,
+  realmWildlife,
   physicsDefaults,
   gravity,
   controls,

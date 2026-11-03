@@ -2,6 +2,7 @@ import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
+import { launchBody, setBodyPose } from "../physics/PhysicalEdits.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import type { AnimalWork } from "./AnimalWork.js";
 import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
@@ -280,11 +281,10 @@ export class WoodlandWork {
         dy = 0;
       }
       const d = Math.hypot(dx, dy);
-      target.velocity = { vx: (dx / d) * 55, vy: (dy / d) * 55 };
+      launchBody(target, { vx: (dx / d) * 55, vy: (dy / d) * 55, vz: 25 });
       target.ballThrowerId = a.id;
-      target.jumpVZ = 25;
       target.jumpZ = 0.1;
-      target.wz = (a.wz ?? 0) + 0.1;
+      setBodyPose(target, { wz: (a.wz ?? 0) + 0.1 });
       t.played = (t.played ?? 0) + 1;
       this.release(a);
       this.enter(a, "rest");

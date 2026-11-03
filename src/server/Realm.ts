@@ -72,6 +72,13 @@ import { VehicleRecords } from "../persistence/VehicleRecords.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { tickSharedBallGameplay } from "../physics/BallGameplay.js";
 import { getGravityScale } from "../physics/Gravity.js";
+import {
+  launchBody,
+  setBodyPose,
+  setHorizontalVelocity,
+  setVerticalVelocity,
+  teleportBody,
+} from "../physics/PhysicalEdits.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { PhysicsScene } from "../physics/PhysicsScene.js";
 import { playerMotionIntent, vehicleMotionIntent } from "../physics/PlayerControls.js";
@@ -1312,10 +1319,11 @@ export class Realm {
         const z = (player.wz ?? 0) + 8;
         if (this.physicsScene && !this.physicsScene.canPlaceSphere(x, y, z, radius, reusable?.id))
           break;
-        ball.position = {
+        const position = {
           wx: x - (ball.collider?.offsetX ?? 0),
           wy: y - (ball.collider?.offsetY ?? 0) + (ball.collider?.height ?? 4) / 2,
         };
+        setBodyPose(ball, position);
         const order = ball.workItem?.ballOrder;
         ball.workItem = {
           ...freshBallWork(owner, player.position),
@@ -1324,9 +1332,12 @@ export class Realm {
         if (!this.ownedBalls.admit(owner, ball)) break;
         delete ball.deathTimer;
         ball.ballThrowerId = player.id;
-        ball.velocity = { vx: Math.cos(baseAngle) * xySpeed, vy: Math.sin(baseAngle) * xySpeed };
-        ball.wz = z;
-        ball.jumpVZ = zSpeed;
+        setBodyPose(ball, { wz: z });
+        launchBody(ball, {
+          vx: Math.cos(baseAngle) * xySpeed,
+          vy: Math.sin(baseAngle) * xySpeed,
+          vz: zSpeed,
+        });
         ball.jumpZ = 8;
         if (!reusable) this.entityManager.spawn(ball);
         break;
@@ -1434,7 +1445,7 @@ export class Realm {
             session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
           session.inputQueue.length = 0;
 
-          session.player.velocity = { vx: 0, vy: 0 };
+          setHorizontalVelocity(session.player, { vx: 0, vy: 0 });
         }
         break;
 
@@ -1873,7 +1884,7 @@ export class Realm {
 
     // Hop off from riding height â€” wz is already tracked by resolveParentedPositions
     session.player.jumpZ = (session.player.wz ?? 0) - (session.player.groundZ ?? 0);
-    session.player.jumpVZ = JUMP_VELOCITY * 0.5;
+    setVerticalVelocity(session.player, JUMP_VELOCITY * 0.5);
     delete session.player.noShadow;
   }
 
@@ -2002,14 +2013,15 @@ export class Realm {
     if (outcome.enteredWater) {
       const safe = session.gameplaySession.lastSafePosition;
       if (safe) {
-        p.position.wx = safe.wx;
-        p.position.wy = safe.wy;
-        p.wz = safe.wz ?? getSurfaceZ(safe.wx, safe.wy, getHeight);
-        p.groundZ = p.wz;
+        teleportBody(p, {
+          wx: safe.wx,
+          wy: safe.wy,
+          wz: safe.wz ?? getSurfaceZ(safe.wx, safe.wy, getHeight),
+        });
+      } else {
+        delete p.jumpVZ;
+        delete p.jumpZ;
       }
-
-      Reflect.set(p, "jumpVZ", undefined);
-      Reflect.set(p, "jumpZ", undefined);
       // Brief invincibility flash so the respawn is visible.
       session.gameplaySession.invincibilityTimer = 0.75;
       return;

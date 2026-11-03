@@ -5,6 +5,7 @@ import type { Movement } from "../input/ActionManager.js";
 import type { IWorldRegistry, WorldMeta } from "../persistence/IWorldRegistry.js";
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
+import { replaceBodyCollider, teleportBody } from "../physics/PhysicalEdits.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { validateSurfacePatch } from "../physics/SurfacePatch.js";
 import { validateExcavations } from "../physics/TerrainExcavation.js";
@@ -136,7 +137,7 @@ export class ScenarioSession {
     this.player.player.wanderAI = null;
     delete this.player.player.routeAI;
     applyScenarioAppearance(this.player.player, this.recipe.player);
-    if (this.realm.vehicles.get(this.player)) this.player.player.collider = null;
+    if (this.realm.vehicles.get(this.player)) replaceBodyCollider(this.player.player, null);
     await this.ready();
     if (fresh) {
       for (const area of this.recipe.roads ?? []) {
@@ -335,11 +336,7 @@ export class ScenarioSession {
           throw Error("Invalid teleport");
         if (this.realm.vehicles.get(this.player)) this.realm.vehicles.exit(this.player, true);
         const p = this.player.player;
-        p.position = { ...command.position };
-        p.wz = p.groundZ = command.z ?? 0;
-        p.velocity = { vx: 0, vy: 0 };
-        delete p.jumpVZ;
-        delete p.jumpZ;
+        teleportBody(p, { ...command.position, wz: command.z ?? 0 });
         this.player.controls.reset(this.player.lastProcessedInputSeq);
         this.realm.entityManager.spatialHash.update(p);
         await this.ready();
