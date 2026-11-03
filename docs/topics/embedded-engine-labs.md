@@ -1,5 +1,10 @@
 # Embedded engine labs
 
+[212](../tactical/212-matched-physics-tick-prediction.md) keeps game/lab replay on a
+committed physics horizon, compares corrections at matching ticks and coalesces
+overdue local controls with jump edges intact. The common predictor retains the
+same replay slice budget, private scratch world and first-contact anchor.
+
 [210](../tactical/210-first-contact-display-anchor.md) changes the shared predictor's
 contact correction anchor for game and lab consumers. Stationary contacted actors
 no longer inherit unrelated player offsets; native stalled-client/fractional-render

@@ -1,5 +1,5 @@
 // Isolated ordinary-Worker movement capture on empty flat terrain.
-// Baseline versus a diagnostic replay-before-new-input control. Raw traces stay local.
+// Two fresh production sessions exercise independent Worker/render phases; no runtime patches.
 // Run: node scripts/instrumentation/movement-pacing.mjs --output=/tmp/tilefun-pacing
 import { execFileSync } from "node:child_process";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
@@ -40,7 +40,7 @@ try {
   await server.listen();
   const base = `http://127.0.0.1:${server.httpServer.address().port}/tilefun/`;
   browser = await chromium.launch({ headless: true, channel: "chromium" });
-  for (const mode of ["baseline", "matched-replay"]) {
+  for (const mode of ["production", "production-repeat"]) {
     const context = await browser.newContext({ viewport: { width: 1280, height: 900 } });
     const page = await context.newPage();
     const errors = [];
@@ -60,31 +60,13 @@ try {
         if (e.type !== "player") g.transport.send({ type: "edit-delete-entity", entityId: e.id });
     });
     await page.getByRole("button", { name: "Exit editor", exact: true }).click();
-    await page.evaluate((mode) => {
+    await page.evaluate(() => {
       const g = document.querySelector("#game").__game;
 
       window.__movementProbe = { rows: [], enabled: false };
       let presented, camera;
       const begin = g.remoteView.beginPresentation;
       g.remoteView.beginPresentation = function (...args) {
-        const predictor = this._predictor;
-        // Diagnostic only: finish the old target before appending a new input.
-        // An extra update can spend a second replay slice; this is not the runtime fix.
-        if (mode === "matched-replay" && predictor && !predictor.__matchedProbe) {
-          predictor.__matchedProbe = true;
-          const store = predictor.storeInput;
-          predictor.storeInput = function (...input) {
-            if (this.replay)
-              this.update(
-                0,
-                { dx: 0, dy: 0, jump: false, sprinting: false },
-                g.stateView.world,
-                g.stateView.props,
-                g.remoteView.serverEntities,
-              );
-            return store.apply(this, input);
-          };
-        }
         begin.apply(this, args);
         const e = this.presentedPlayerEntity;
         presented = { x: e.position.wx, y: e.position.wy, z: e.wz ?? 0 };
@@ -137,7 +119,7 @@ try {
           scale,
         });
       };
-    }, mode);
+    });
     async function sample(name, warm = 45) {
       await page.evaluate(async (count) => {
         for (let i = 0; i < count; i++) await new Promise(requestAnimationFrame);

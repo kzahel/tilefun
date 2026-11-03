@@ -68,7 +68,14 @@ async function setup(recipe?: ScenarioRecipe) {
     now += PHYSICS_DT;
     predictInput(predictor, seq, movement, dt, view.world, view.props, view.serverEntities);
   }
-  return { s, view, predictor, receive, input };
+  return {
+    s,
+    view,
+    predictor,
+    receive,
+    input,
+    advanceClock: (seconds: number) => (now += seconds),
+  };
 }
 
 it("uses the ordinary shared kernel to predict contacts, with a fixed tick independent of command duration", async () => {
@@ -103,6 +110,109 @@ it("keeps sub-tick presentation continuous when an acknowledgement needs no repl
     .presentEntities(0.25, f.view.serverEntities)
     .find((e) => e.id === f.s.player.player.id);
   expect(after?.position.wx).toBeCloseTo(before?.position.wx ?? Infinity, 3);
+});
+
+it.each(["walk", "run", "car"])(
+  "%s does not smooth a new input as an error while finishing older replay",
+  async (kind) => {
+    const f = await setup({
+      version: 1,
+      id: "matched-replay-tick",
+      generation: FLAT_SCENARIO,
+      player: kind === "car" ? createPlayer(20, 64) : createPlayer(100, 100),
+      props: [],
+      ...(kind === "car"
+        ? { parkedVehicles: [{ name: "car", model: "compact-1", wx: 64, wy: 64, facing: 3 }] }
+        : {}),
+    });
+    if (kind === "car") {
+      await f.s.command({ kind: "enter-vehicle", entityId: f.s.handles.car ?? -1 });
+      f.receive(f.s.frames());
+    }
+    const movement = { ...idle, dx: 1, sprinting: kind === "run" };
+    const pending: ArrayBuffer[][] = [];
+    let previous: number | undefined;
+    for (let seq = 2; seq <= 90; seq++) {
+      if (pending.length >= 2) {
+        const frames = pending.shift();
+        if (frames) f.receive(frames);
+        expect(f.predictor.recoveryDiagnostics.status).toBe("replaying");
+      }
+      f.input(seq, movement);
+      f.advanceClock((seq % 4) * 0.001); // Uneven callback cost must not modulate movement.
+      const shown = f.predictor
+        .presentEntities(0.35, f.view.serverEntities)
+        .find((e) => e.id === f.s.player.player.id);
+      const x = shown?.position.wx ?? Infinity;
+      if (seq > 45) {
+        expect(f.predictor.lastReconcileDiagnostics?.resimPosErr).toBeLessThan(0.002);
+        expect(f.predictor.lastReconcileDiagnostics?.comparisonInputTick).toBe(seq - 2);
+        expect(f.predictor.lastReconcileDiagnostics?.comparisonPhysicsTick).toBe(seq - 1);
+        const speed = kind === "car" ? 112 : kind === "run" ? 128 : 64;
+        expect(x - (previous ?? 0)).toBeCloseTo(speed * PHYSICS_DT, 2);
+      }
+      previous = x;
+      // Authority still steps every tick while packets arrive in 0/2 batches.
+      if (seq % 2 === 0) f.s.input(encodeClientMessage({ type: "player-input", seq, ...movement }));
+      f.s.tick();
+      pending.push(f.s.frames());
+    }
+  },
+);
+
+it("compares the committed tick once while new input extends a sliced replay", async () => {
+  const f = await setup({
+    version: 1,
+    id: "matched-sliced-replay",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(100, 100),
+    props: [],
+  });
+  const movement = { ...idle, dx: 1 };
+  const delayedFrames = f.s.frames();
+  for (let seq = 2; seq <= 61; seq++) f.input(seq, movement);
+  const before = f.predictor.player?.position.wx ?? Infinity;
+  const committed = f.predictor.presentEntities(0.5, f.view.serverEntities);
+  f.receive(delayedFrames);
+  let appended = 0;
+  while (f.predictor.recoveryDiagnostics.status === "replaying" && appended < 40) {
+    expect(f.predictor.presentEntities(0.25, f.view.serverEntities)).toEqual(committed);
+    f.input(62 + appended++, movement);
+    expect(f.predictor.recoveryDiagnostics.replayStepsThisTick).toBeLessThanOrEqual(8);
+  }
+  expect(appended).toBeGreaterThan(1);
+  expect(f.predictor.recoveryDiagnostics.status).toBe("ready");
+  expect(f.predictor.lastReconcileDiagnostics?.resimPosErr).toBeLessThan(0.002);
+  expect(f.predictor.lastReconcileDiagnostics?.comparisonInputTick).toBe(60);
+  expect(f.predictor.lastReconcileDiagnostics?.comparisonPhysicsTick).toBe(61);
+  expect((f.predictor.player?.position.wx ?? 0) - before).toBeCloseTo(
+    appended * 64 * PHYSICS_DT,
+    2,
+  );
+});
+
+it("coalesces overdue inputs without losing a jump when authority overtakes the client", async () => {
+  const f = await setup({
+    version: 1,
+    id: "overtaken-jump",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(100, 100),
+    props: [],
+  });
+  f.input(2, idle);
+  f.s.input(encodeClientMessage({ type: "player-input", seq: 2, ...idle }));
+  f.s.tick();
+  f.input(3, { ...idle, jump: true });
+  f.input(4, idle);
+  for (let i = 0; i < 3; i++) f.s.tick();
+  f.receive(f.s.frames());
+  expect(f.predictor.recoveryDiagnostics.status).toBe("replaying");
+  f.input(5, idle);
+  expect(f.predictor.recoveryDiagnostics.status).toBe("ready");
+  expect(f.predictor.player?.jumpVZ).toBeGreaterThan(0);
+  expect(f.predictor.player?.wz).toBeGreaterThan(1);
+  expect(f.predictor.recoveryDiagnostics.replayStepsThisTick).toBeLessThanOrEqual(8);
+  expect(f.predictor.lastReconcileDiagnostics?.comparisonPhysicsTick).toBeUndefined();
 });
 
 it("keeps camera time advancing when batched controls rebase prediction to an earlier tick", async () => {
@@ -267,15 +377,17 @@ it("caps replay slices and accepts a snapshot that covers the pending suffix", a
   expect(f.predictor.presentEntities(0.25, f.view.serverEntities)).toEqual(committed);
   f.predictor.update(PHYSICS_DT, idle, f.view.world, f.view.props, f.view.serverEntities);
   expect(f.predictor.recoveryDiagnostics.replayStepsThisTick).toBeLessThanOrEqual(8);
+  f.input(81, { ...idle, dx: 1 });
   f.s.realm.handleMessage(f.s.player.clientId, f.s.player, {
     type: "player-input",
-    seq: 80,
+    seq: 81,
     ...idle,
   });
   f.s.tick();
   f.receive(f.s.frames());
   expect(f.predictor.recoveryDiagnostics.status).toBe("ready");
   expect(f.predictor.recoveryDiagnostics.retainedInputs).toBe(0);
+  expect(f.predictor.lastReconcileDiagnostics?.comparisonInputTick).toBeUndefined();
   expect(f.predictor.player?.position.wx).toBeCloseTo(f.s.player.player.position.wx, 2);
 });
 
@@ -310,20 +422,16 @@ it("does not transfer a player's display correction to a nearby car or NPC befor
   });
   const car = f.view.serverEntities.find((e) => e.type === "vehicle-v1:compact-1");
   if (!car) throw Error("Missing car");
-  // Several controls arrive together: authority admits the latest walking
-  // control while the client has already predicted the earlier jump.
+  // The jump has not reached authority; only the later walking command has.
   for (let seq = 2; seq <= 9; seq++) {
     const movement = { ...idle, dx: 1, jump: seq === 2 };
     f.input(seq, movement);
-    f.s.realm.handleMessage(f.s.player.clientId, f.s.player, {
-      type: "player-input",
-      seq,
-      ...movement,
-    });
   }
+  f.s.input(encodeClientMessage({ type: "player-input", seq: 9, ...idle, dx: 1 }));
   expect(f.predictor.player?.wz).toBeGreaterThan(5);
   f.s.tick();
   f.receive(f.s.frames());
+  f.predictor.update(PHYSICS_DT, idle, f.view.world, f.view.props, f.view.serverEntities);
   expect(f.predictor.lastReconcileDiagnostics?.resimPosErr).toBeGreaterThan(5);
   const shown = f.predictor.presentEntities(1, f.view.serverEntities);
   for (const type of [car.type, "chicken"]) {
@@ -347,14 +455,11 @@ it("keeps a touching player and car coherent without lifting them off solved sup
   for (let seq = 2; seq <= 9; seq++) {
     const movement = { ...idle, dx: 1, jump: seq === 2 };
     f.input(seq, movement);
-    f.s.realm.handleMessage(f.s.player.clientId, f.s.player, {
-      type: "player-input",
-      seq,
-      ...movement,
-    });
   }
+  f.s.input(encodeClientMessage({ type: "player-input", seq: 9, ...idle, dx: 1 }));
   f.s.tick();
   f.receive(f.s.frames());
+  f.predictor.update(PHYSICS_DT, idle, f.view.world, f.view.props, f.view.serverEntities);
   const shown = f.predictor.presentEntities(1, f.view.serverEntities);
   const player = shown.find((e) => e.id === f.s.player.player.id);
   const car = shown.find((e) => e.type === "vehicle-v1:compact-1");

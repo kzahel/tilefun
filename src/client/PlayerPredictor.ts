@@ -48,8 +48,11 @@ export interface ReconcileDiagnostics {
   replayMs: number;
   /** Agreement at the same past tick; absent if that tick was not retained. */
   pastTickError: number | undefined;
-  /** Current-pose correction after restoring and replaying, not past-tick error. */
+  /** Correction at the last committed physics tick, excluding subsequently queued movement. */
   resimPosErr: number;
+  /** Input tick of the committed pose; absent if its physics tick cannot be compared. */
+  comparisonInputTick: number | undefined;
+  comparisonPhysicsTick: number | undefined;
   status: PredictionRecoveryDiagnostics["status"];
 }
 interface Request {
@@ -62,12 +65,36 @@ interface Request {
 }
 interface Replay {
   request: Request;
-  nextInputTick: number;
+  physicsInputOffset: number;
+  inputIndex: number;
+  jumpHeld: boolean;
+  heldMovement?: Movement;
   steps: number;
   ms: number;
   before: Entity;
+  beforeInputTick: number;
+  beforePhysicsTick: number;
+  comparison?: { player: Entity; bodies: Map<number, ReplayPose> };
   pastError: number | undefined;
   inputs: StoredInput[];
+}
+interface ReplayPose {
+  x: number;
+  y: number;
+  z: number;
+  prevX: number;
+  prevY: number;
+  prevZ: number;
+}
+function replayPose(entity: Entity): ReplayPose {
+  return {
+    x: entity.position.wx,
+    y: entity.position.wy,
+    z: entity.wz ?? 0,
+    prevX: entity.prevPosition?.wx ?? entity.position.wx,
+    prevY: entity.prevPosition?.wy ?? entity.position.wy,
+    prevZ: entity.prevWz ?? entity.wz ?? 0,
+  };
 }
 function clone(entity: Entity): Entity {
   return {
@@ -100,6 +127,7 @@ export class PlayerPredictor {
   private predictedMount: Entity | null = null;
   private bodies = new Map<number, Entity>();
   private published = new Map<number, Entity>();
+  private publishedPhysicsTick: number | undefined;
   private motorIntents = new Map<number, MotionIntent>();
   private inputHistory: StoredInput[] = [];
   private inputTick = 0;
@@ -161,6 +189,7 @@ export class PlayerPredictor {
     this.riderLift = (player.wz ?? 0) - (mount?.wz ?? 0);
     this.bodies.clear();
     this.published.clear();
+    this.publishedPhysicsTick = undefined;
     this.motorIntents.clear();
     this.inputHistory = [];
     this.inputTick =
@@ -191,6 +220,7 @@ export class PlayerPredictor {
     this.predicted = this.predictedMount = null;
     this.bodies.clear();
     this.published.clear();
+    this.publishedPhysicsTick = undefined;
     this.motorIntents.clear();
     this.inputHistory = [];
     this.queued = this.replay = undefined;
@@ -328,6 +358,7 @@ export class PlayerPredictor {
       this.predicted = clone(request.player);
       this.predictedMount = request.entities.find((e) => e.id === request.player.parentId) ?? null;
       this.published.clear();
+      this.publishedPhysicsTick = undefined;
       this.correctionAnchor = undefined;
       this.correctionMembers.clear();
       this.status = state.omitted ? "overflow" : missing ? "waiting" : "history-gap";
@@ -341,11 +372,15 @@ export class PlayerPredictor {
         replayMs: 0,
         pastTickError: undefined,
         resimPosErr: 0,
+        comparisonInputTick: undefined,
+        comparisonPhysicsTick: undefined,
         status: this.status,
       };
       return;
     }
     const before = clone(this.predicted),
+      beforePhysicsTick = this.publishedPhysicsTick ?? state.tick,
+      overdue = this.inputHistory.some((input) => input.tick <= this.appliedInputTick),
       past = this.stateHistory.get(state.tick);
     const pastError = past ? distance(past, request.player) : undefined;
     this.bindGeometry(request.world, request.props);
@@ -370,15 +405,60 @@ export class PlayerPredictor {
     );
     this.replay = {
       request,
-      nextInputTick: this.ackInputTick + 1,
+      // Keep the committed physics horizon advancing once per local input tick.
+      // A repeated/jumping packet acknowledgement must not add/remove a world tick.
+      // Authority covering an unpublished suffix is an explicit recovery fence.
+      physicsInputOffset:
+        this.ackInputTick > this.appliedInputTick
+          ? state.tick - this.ackInputTick
+          : Math.max(beforePhysicsTick, state.tick + Number(overdue)) - this.appliedInputTick,
+      inputIndex: 0,
+      jumpHeld: state.bodies.find((body) => body.id === anchorId)?.jumpHeld ?? false,
       steps: 0,
       ms: 0,
       before,
+      beforeInputTick: this.appliedInputTick,
+      beforePhysicsTick,
       pastError,
       inputs: [...this.inputHistory],
     };
     this.status = "replaying";
-    if (this.replay.nextInputTick > this.inputTick) this.drainReplay();
+    if (scene.physicsTick === beforePhysicsTick) this.captureReplayComparison(this.replay);
+    if (scene.physicsTick >= this.replayTarget(this.replay)) this.drainReplay();
+  }
+  private replayTarget(job: Replay): number {
+    return Math.max(job.request.state.tick, this.inputTick + job.physicsInputOffset);
+  }
+  private replayStep(job: Replay) {
+    const scene = this.scene;
+    if (!scene || !this.geometry) return;
+    const inputTick = scene.physicsTick + 1 - job.physicsInputOffset;
+    let movement = job.heldMovement,
+      jumpPressed = false;
+    for (;;) {
+      const input = job.inputs[job.inputIndex];
+      if (!input || input.tick > inputTick) break;
+      movement = input.movement;
+      jumpPressed ||= movement.jumpPressed === true || (movement.jump && !job.jumpHeld);
+      job.jumpHeld = movement.jump;
+      job.inputIndex++;
+    }
+    if (movement) {
+      // Coalesce overdue axes, retaining jump edges just like authority admission.
+      job.heldMovement = { ...movement, jumpPressed: false };
+      this.step({ ...movement, jumpPressed }, job.request.player);
+    } else {
+      // No new local command is due: continue the snapshot's held motor targets.
+      scene.step(this.motorIntents, this.geometry, this.gravity());
+    }
+  }
+  private captureReplayComparison(job: Replay) {
+    // These are JS readback poses, not another world capture or simulation step.
+    // Freeze them once at the physics tick represented by the committed display.
+    job.comparison = {
+      player: this.samplePlayer(job.request.player),
+      bodies: new Map([...this.bodies].map(([id, entity]) => [id, replayPose(entity)])),
+    };
   }
   private drainReplay() {
     const job = this.replay,
@@ -387,24 +467,18 @@ export class PlayerPredictor {
     const start = performance.now();
     let steps = 0;
     while (
-      job.nextInputTick <= this.inputTick &&
+      scene.physicsTick < this.replayTarget(job) &&
       steps < REPLAY_STEPS_PER_UPDATE &&
       (steps === 0 || performance.now() - start < REPLAY_MS_PER_UPDATE)
     ) {
-      const sample = job.inputs.find((input) => input.tick === job.nextInputTick);
-      if (!sample) {
-        this.status = "history-gap";
-        this.replay = undefined;
-        return;
-      }
-      this.step(sample.movement, job.request.player);
-      job.nextInputTick++;
+      this.replayStep(job);
+      if (scene.physicsTick === job.beforePhysicsTick) this.captureReplayComparison(job);
       job.steps++;
       steps++;
     }
     this.lastReplaySteps += steps;
     job.ms += performance.now() - start;
-    if (job.nextInputTick <= this.inputTick) return;
+    if (scene.physicsTick < this.replayTarget(job)) return;
     this.replay = undefined;
     this.status = "ready";
     this.appliedInputTick = this.inputTick;
@@ -414,31 +488,42 @@ export class PlayerPredictor {
     this.publish(job.request.player);
     const after = this.predicted;
     if (!after) return;
-    this.correction = {
-      wx: job.before.position.wx - after.position.wx,
-      wy: job.before.position.wy - after.position.wy,
-      wz: (job.before.wz ?? 0) - (after.wz ?? 0),
-      vx: (job.before.velocity?.vx ?? 0) - (after.velocity?.vx ?? 0),
-      vy: (job.before.velocity?.vy ?? 0) - (after.velocity?.vy ?? 0),
-      jumpVZ: (job.before.jumpVZ ?? 0) - (after.jumpVZ ?? 0),
-    };
+    const compared = job.comparison?.player;
+    this.correction = compared
+      ? {
+          wx: job.before.position.wx - compared.position.wx,
+          wy: job.before.position.wy - compared.position.wy,
+          wz: (job.before.wz ?? 0) - (compared.wz ?? 0),
+          vx: (job.before.velocity?.vx ?? 0) - (compared.velocity?.vx ?? 0),
+          vy: (job.before.velocity?.vy ?? 0) - (compared.velocity?.vy ?? 0),
+          jumpVZ: (job.before.jumpVZ ?? 0) - (compared.jumpVZ ?? 0),
+        }
+      : { wx: 0, wy: 0, wz: 0, vx: 0, vy: 0, jumpVZ: 0 };
     // Rebase the shared display transform around the contact anchor, not always
     // the player. Otherwise an unmoving NPC inherits unrelated player error.
     const anchor = this.correctionAnchor ?? after.id,
       anchorBefore = beforeBodies.get(anchor),
-      anchorAfter = this.published.get(anchor),
       joining = !beforeMembers.has(anchor),
       retained = joining ? { x: 0, y: 0, z: 0 } : oldError;
+    const currentAnchor = this.published.get(anchor),
+      anchorAfter =
+        job.comparison?.bodies.get(anchor) ??
+        (joining && currentAnchor ? replayPose(currentAnchor) : undefined);
     // A new anchor's whole interpolation interval must begin at its old pose;
     // preserving only the end would pull it backward at fractional renders.
-    const target = joining
-        ? (anchorAfter?.prevPosition ?? anchorAfter?.position)
-        : anchorAfter?.position,
-      targetZ = joining ? (anchorAfter?.prevWz ?? anchorAfter?.wz) : anchorAfter?.wz;
     const offset = {
-      x: (anchorBefore && target ? anchorBefore.position.wx - target.wx : 0) + retained.x,
-      y: (anchorBefore && target ? anchorBefore.position.wy - target.wy : 0) + retained.y,
-      z: (anchorBefore && anchorAfter ? (anchorBefore.wz ?? 0) - (targetZ ?? 0) : 0) + retained.z,
+      x:
+        (anchorBefore && anchorAfter
+          ? anchorBefore.position.wx - (joining ? anchorAfter.prevX : anchorAfter.x)
+          : 0) + retained.x,
+      y:
+        (anchorBefore && anchorAfter
+          ? anchorBefore.position.wy - (joining ? anchorAfter.prevY : anchorAfter.y)
+          : 0) + retained.y,
+      z:
+        (anchorBefore && anchorAfter
+          ? (anchorBefore.wz ?? 0) - (joining ? anchorAfter.prevZ : anchorAfter.z)
+          : 0) + retained.z,
     };
     this.displayError = {
       ...(Math.hypot(offset.x, offset.y, offset.z) < 32 ? offset : { x: 0, y: 0, z: 0 }),
@@ -453,7 +538,9 @@ export class PlayerPredictor {
       replayCount: job.steps,
       replayMs: job.ms,
       pastTickError: job.pastError,
-      resimPosErr: distance(job.before, after),
+      resimPosErr: compared ? distance(job.before, compared) : 0,
+      comparisonInputTick: compared ? job.beforeInputTick : undefined,
+      comparisonPhysicsTick: compared ? job.beforePhysicsTick : undefined,
       status: this.status,
     };
   }
@@ -472,18 +559,23 @@ export class PlayerPredictor {
     scene.step(this.motorIntents, this.geometry, this.gravity());
     updatePlayerSpriteFromInput(this.bodies.get(player.id) ?? player, movement);
   }
+  private samplePlayer(authority: Entity): Entity {
+    const player = clone(this.bodies.get(authority.id) ?? authority);
+    const parent = this.bodies.get(authority.parentId ?? -1);
+    if (parent) {
+      player.position = {
+        wx: parent.position.wx + (authority.localOffsetX ?? 0),
+        wy: parent.position.wy + (authority.localOffsetY ?? 0),
+      };
+      player.wz = (parent.wz ?? 0) + this.riderLift;
+    }
+    return player;
+  }
   private publish(authority: Entity) {
     const previous = this.predicted;
     const body = this.bodies.get(authority.id);
     const parent = this.bodies.get(authority.parentId ?? -1);
-    this.predicted = body ? clone(body) : clone(authority);
-    if (parent) {
-      this.predicted.position = {
-        wx: parent.position.wx + (authority.localOffsetX ?? 0),
-        wy: parent.position.wy + (authority.localOffsetY ?? 0),
-      };
-      this.predicted.wz = (parent.wz ?? 0) + this.riderLift;
-    }
+    this.predicted = this.samplePlayer(authority);
     if (
       previous?.sprite &&
       this.predicted.sprite &&
@@ -506,6 +598,7 @@ export class PlayerPredictor {
     this.predicted.prevJumpZ = body?.prevJumpZ ?? this.predicted.jumpZ ?? 0;
     this.predictedMount = parent ? clone(parent) : null;
     this.published = new Map([...this.bodies].map(([id, e]) => [id, clone(e)]));
+    this.publishedPhysicsTick = this.scene?.physicsTick;
     const root = this.predicted.parentId ?? this.predicted.id,
       touching = this.touchingIds(),
       incoming = [...touching].find(

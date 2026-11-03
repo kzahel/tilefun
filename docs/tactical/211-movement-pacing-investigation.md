@@ -1,6 +1,6 @@
 # Movement pacing investigation
 
-Status: reproduced and explained; production fix is not implemented.
+Status: investigation complete; runtime repair implemented in [212](212-matched-physics-tick-prediction.md).
 Updated: 2026-11-03.
 
 Owner reports uneven walking, running and driving on desktop/laptop, including
@@ -23,6 +23,8 @@ Reproduce with:
 node scripts/instrumentation/movement-pacing.mjs --output=/tmp/tilefun-movement-pacing
 ```
 
+At investigation revision `05cde03f`, this command ran baseline/control. After 212
+the current runner observes two fresh unmodified production sessions instead.
 The runner owns isolated Vite/data and bundled full Chromium, closes both and
 keeps raw timelines outside Git. The compact [numerical evidence](../benchmarks/211-movement-pacing-investigation.json)
 contains exploratory and portable-command confirmation captures. Measurements use
@@ -87,6 +89,7 @@ variable callback times and constant movement. Qualify zero false correction and
 steady fractional presentation, then ordinary Worker/P2P, contact, driving and
 actual display pacing. Consider pixel-grid presentation separately afterward.
 
-Validation for this investigation: diagnostic Node syntax check and focused lint
+Validation at investigation checkpoint `05cde03f`: diagnostic Node syntax check and focused lint
 pass; both six-case captures complete without page errors. No game-source or asset
-files change, so builds/full tests and a development-ready signal are unnecessary.
+files changed at that checkpoint, so builds/full tests and a development-ready
+signal were unnecessary. Runtime delivery qualification belongs to 212.

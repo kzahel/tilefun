@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [212 Matched physics tick prediction](212-matched-physics-tick-prediction.md) | Implemented: fixed-clock replay horizon and like-for-like corrections; 56 native checks pass, production qualification in progress |
 | [211 Movement pacing investigation](211-movement-pacing-investigation.md) | Reproduced: replay compares different input ticks; isolated walk/run/car control removes false corrections; runtime repair pending, pixel-grid wobble separate |
 | [210 First-contact display anchor](210-first-contact-display-anchor.md) | Delivered: stationary NPCs anchor first-contact corrections; 49 native/five Worker/P2P browser checks, build and streaming readiness pass; owner device playtest next |
 | [209 Car driving and autonomous traffic](209-car-driving-and-autonomous-traffic.md) | Delivered: shared rolling motor, bounded road traffic and persistence; 116 native/five Worker/P2P browser checks, build and streaming readiness pass; owner playtest next |

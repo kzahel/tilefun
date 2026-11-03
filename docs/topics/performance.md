@@ -5,7 +5,9 @@ desktop clear-ground movement jitter with steady frame delivery. A replay compar
 includes a newly appended legitimate input tick, generating false display corrections
 for walking/running/driving. The isolated matched-target control removes nearly all
 steady speed modulation. A smaller one-screen-pixel camera-rounding effect remains
-separate. This is investigation evidence; the runtime repair is still to implement.
+separate. [212](../tactical/212-matched-physics-tick-prediction.md) implements matching
+physics-tick corrections and a fixed-clock prediction horizon; 56 native checks
+pass, with production qualification in progress.
 
 [208](../tactical/208-ground-seams-and-movement-pacing.md) reproduces running/car
 presentation blips with steady 16.8ms browser frame p99 in a throttled GPU run.
