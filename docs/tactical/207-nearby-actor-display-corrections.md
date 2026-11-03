@@ -1,6 +1,6 @@
 # Nearby actor display corrections
 
-Status: implementation/native checks complete; delivery qualification in progress.
+Status: delivered and qualified; separate subpixel terrain seam bob remains.
 Updated: 2026-11-03.
 
 The owner observed cars and NPCs shifting/floating as player bounds approach.
@@ -41,7 +41,10 @@ has only existing binary codec non-null assertion warnings.
 A native flat-floor reproduction pushing a dog across coplanar section edges
 still reaches about 0.59px of actual height bob. This is separate from the larger
 proximity display transfer. Away from section seams the sampled cardinal and
-glancing pushes stay essentially at floor height. Removing the rounded bevel
+glancing pushes stay essentially at floor height. Reproduce with a player at
+(0,57), a dog at (0,32), flat height-zero geometry, 60 idle ticks, 180 ticks of
+player intent (0,-64), then 120 idle ticks, synchronizing before each 60Hz step.
+Removing the rounded bevel
 eliminates the bob but blocks flat-floor NPC traversal and the garage ramp.
 Contact skin, smaller prediction distance and bevel changes did not provide a
 regression-free replacement. These experiments were reverted; collision settings
@@ -50,5 +53,12 @@ than masking height or introducing another collision resolver.
 
 ## Delivery
 
-Production build/inventories, affected Worker/P2P/lab/car browser checks and
-streaming readiness are pending. Mark development readiness only after they pass.
+Implementation checkpoint: `e86f93ad`. Production build, art catalog and all
+2,119 Workshop identities pass. Generated manifest changes contain only runtime
+fingerprints; art pixels and review decisions are unchanged. All four full
+Chromium boundaries pass: ordinary Worker NPC contacts/prediction, delayed P2P
+reversal convergence, two-session lab control/fences/reload, and car ramp/seat
+reload. Streaming readiness passes, with no final missing/incomplete/stale terrain
+in the recorded walking, sprinting and reversal scenarios. This is a correctness
+qualification, not a new performance comparison. Commit delivery records and
+mark development readiness last; the running game receives the fix on Save and reload.

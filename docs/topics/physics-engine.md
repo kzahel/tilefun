@@ -18,6 +18,8 @@ Numerical captures now include bounded solved pairs, restored without stepping.
 Physics shapes, motors and solver settings are unchanged. A separate native
 coplanar terrain section-edge bob of about 0.59px remains; shape/margin experiments
 regressed traversal and were reverted. Investigate terrain internal edges next.
+93 focused native checks, four production Worker/P2P/lab/car browser cases,
+typechecks, inventories/build and streaming readiness pass.
 
 ## Delivered cleanup (206)
 

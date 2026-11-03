@@ -12,7 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
-| [207 Nearby actor display corrections](207-nearby-actor-display-corrections.md) | Implementation/native checks complete: proximity no longer transfers player correction; solved contacts survive restore; delivery qualification pending; subpixel terrain seam bob remains separate |
+| [207 Nearby actor display corrections](207-nearby-actor-display-corrections.md) | Delivered: proximity no longer transfers player correction; solved contacts survive restore; 93 native/four browser checks, build and streaming readiness pass; subpixel terrain seam bob remains separate |
 | [206 Realm phases and physical edits](206-realm-phases-and-physical-edits.md) | Delivered: named Realm phases, explicit physical edits/coherent snapshots; 280 native/four browser checks and execution readiness pass |
 | [205 Physics reset](205-physics-reset.md) | Delivered: shared 60Hz default/prediction, gravity-only tuning, legacy deletion; 4,545 native/seven browser checks, Chromebook evidence and Sol review; crowd headroom remains |
 | [204 Unified physics architecture audit](204-unified-physics-architecture-audit.md) | Audit complete; owner prefers one default configuration and simplification/removal of old permutations; shared time/body/prediction first, full equipment compatibility no longer a baseline requirement; implementation not started |
