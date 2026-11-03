@@ -1,0 +1,441 @@
+{
+  "date": "2026-11-03",
+  "implementationRevision": "11478ac21c32076789f155a344e279215d0dbc4b",
+  "baselineRevision": "2c8019d3",
+  "scope": "Two native four-minute closed-grid diagnostic runs with 16 ordinary autonomous cars. Identical road layout, observer off-road at (0,0), no parked blockers. Simulated ticks, with readiness fences before stepping; no GPU, network or physical-device timing. Timing rings retain the latest 512 phase samples; inclusive phases overlap. Sequential captures, not a controlled speed benchmark.",
+  "rootCause": "A wide corner finishes beyond the next lane start. Sampling continuation from lane distance zero aims backward into the bend and can cause an oncoming collision/motor fight. Continue from the actual projected join.",
+  "before": {
+    "cars": 16,
+    "finalTick": 14400,
+    "completedRoutes": 154,
+    "progressingInFinalMinute": 2,
+    "perCar": [
+      {
+        "id": 2,
+        "finalChoices": 10,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 3,
+        "finalChoices": 4,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 4,
+        "finalChoices": 12,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 5,
+        "finalChoices": 8,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 6,
+        "finalChoices": 12,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 7,
+        "finalChoices": 10,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 8,
+        "finalChoices": 18,
+        "choicesInFinalMinute": 3
+      },
+      {
+        "id": 9,
+        "finalChoices": 11,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 10,
+        "finalChoices": 4,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 11,
+        "finalChoices": 15,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 12,
+        "finalChoices": 6,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 13,
+        "finalChoices": 4,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 14,
+        "finalChoices": 4,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 15,
+        "finalChoices": 11,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 16,
+        "finalChoices": 5,
+        "choicesInFinalMinute": 0
+      },
+      {
+        "id": 17,
+        "finalChoices": 20,
+        "choicesInFinalMinute": 5
+      }
+    ],
+    "inclusiveTimings": {
+      "server.generate": {
+        "count": 181,
+        "totalMs": 0.09899600000002806,
+        "maxMs": 0.022165999999998576,
+        "retained": 181,
+        "p50Ms": 0.0002499999999940883,
+        "p95Ms": 0.0012920000000065102,
+        "p99Ms": 0.005542000000019698
+      },
+      "server.autotile": {
+        "count": 28823,
+        "totalMs": 30.660142000071886,
+        "maxMs": 4.268999999999977,
+        "retained": 512,
+        "p50Ms": 0.0006250000005820766,
+        "p95Ms": 0.0010419999998703133,
+        "p99Ms": 0.001458000002457993
+      },
+      "realm.ai": {
+        "count": 14400,
+        "totalMs": 9.232487000123683,
+        "maxMs": 0.25454199999967386,
+        "retained": 512,
+        "p50Ms": 0.000375000003259629,
+        "p95Ms": 0.0007499999992433004,
+        "p99Ms": 0.0012499999975261744
+      },
+      "realm.traffic": {
+        "count": 14400,
+        "totalMs": 354.6010470000012,
+        "maxMs": 2.8600839999999152,
+        "retained": 512,
+        "p50Ms": 0.01937499999985448,
+        "p95Ms": 0.03545800000210875,
+        "p99Ms": 0.07195900000078836
+      },
+      "realm.entityPhysics": {
+        "count": 14400,
+        "totalMs": 2386.9565069999126,
+        "maxMs": 35.278625000000005,
+        "retained": 512,
+        "p50Ms": 0.11320899999918765,
+        "p95Ms": 0.1681669999998121,
+        "p99Ms": 0.33858300000065356
+      },
+      "realm.tick": {
+        "count": 14400,
+        "totalMs": 14505.788146000164,
+        "maxMs": 37.277083999999974,
+        "retained": 512,
+        "p50Ms": 0.8217919999988226,
+        "p95Ms": 1.4310830000031274,
+        "p99Ms": 1.6132499999985157
+      }
+    }
+  },
+  "afterJoinFix": {
+    "cars": 16,
+    "finalTick": 14400,
+    "completedRoutes": 297,
+    "progressingInFinalMinute": 16,
+    "perCar": [
+      {
+        "id": 2,
+        "finalChoices": 17,
+        "choicesInFinalMinute": 3
+      },
+      {
+        "id": 3,
+        "finalChoices": 15,
+        "choicesInFinalMinute": 2
+      },
+      {
+        "id": 4,
+        "finalChoices": 19,
+        "choicesInFinalMinute": 5
+      },
+      {
+        "id": 5,
+        "finalChoices": 20,
+        "choicesInFinalMinute": 4
+      },
+      {
+        "id": 6,
+        "finalChoices": 19,
+        "choicesInFinalMinute": 5
+      },
+      {
+        "id": 7,
+        "finalChoices": 19,
+        "choicesInFinalMinute": 6
+      },
+      {
+        "id": 8,
+        "finalChoices": 18,
+        "choicesInFinalMinute": 3
+      },
+      {
+        "id": 9,
+        "finalChoices": 17,
+        "choicesInFinalMinute": 4
+      },
+      {
+        "id": 10,
+        "finalChoices": 19,
+        "choicesInFinalMinute": 4
+      },
+      {
+        "id": 11,
+        "finalChoices": 22,
+        "choicesInFinalMinute": 6
+      },
+      {
+        "id": 12,
+        "finalChoices": 19,
+        "choicesInFinalMinute": 5
+      },
+      {
+        "id": 13,
+        "finalChoices": 19,
+        "choicesInFinalMinute": 4
+      },
+      {
+        "id": 14,
+        "finalChoices": 17,
+        "choicesInFinalMinute": 5
+      },
+      {
+        "id": 15,
+        "finalChoices": 20,
+        "choicesInFinalMinute": 4
+      },
+      {
+        "id": 16,
+        "finalChoices": 19,
+        "choicesInFinalMinute": 4
+      },
+      {
+        "id": 17,
+        "finalChoices": 18,
+        "choicesInFinalMinute": 5
+      }
+    ],
+    "inclusiveTimings": {
+      "server.generate": {
+        "count": 181,
+        "totalMs": 0.08179699999993773,
+        "maxMs": 0.016124999999988177,
+        "retained": 181,
+        "p50Ms": 0.00025000000002251,
+        "p95Ms": 0.0007919999999899119,
+        "p99Ms": 0.004250000000013188
+      },
+      "server.autotile": {
+        "count": 28823,
+        "totalMs": 28.210506999878675,
+        "maxMs": 3.8092910000000018,
+        "retained": 512,
+        "p50Ms": 0.0006250000005820766,
+        "p95Ms": 0.0011249999988649506,
+        "p99Ms": 0.0015000000021245796
+      },
+      "realm.ai": {
+        "count": 14400,
+        "totalMs": 9.277780999895839,
+        "maxMs": 0.2648749999989377,
+        "retained": 512,
+        "p50Ms": 0.0003329999999550637,
+        "p95Ms": 0.0008330000018759165,
+        "p99Ms": 0.0011249999988649506
+      },
+      "realm.traffic": {
+        "count": 14400,
+        "totalMs": 329.7426330000614,
+        "maxMs": 1.2305000000014843,
+        "retained": 512,
+        "p50Ms": 0.01804199999969569,
+        "p95Ms": 0.04508399999758694,
+        "p99Ms": 0.06754200000068522
+      },
+      "realm.entityPhysics": {
+        "count": 14400,
+        "totalMs": 2519.874795000209,
+        "maxMs": 34.58729199999996,
+        "retained": 512,
+        "p50Ms": 0.13724999999976717,
+        "p95Ms": 0.4654999999984284,
+        "p99Ms": 0.633957999998529
+      },
+      "realm.tick": {
+        "count": 14400,
+        "totalMs": 14318.137233000161,
+        "maxMs": 36.45079199999998,
+        "retained": 512,
+        "p50Ms": 0.8438330000026326,
+        "p95Ms": 1.4972090000010212,
+        "p99Ms": 1.7914579999996931
+      }
+    }
+  },
+  "interpretation": "All cars progress after the join fix in this reproduction. Real blockers, unsupported endpoints, other gridlocks and the reported phone frame drops are not ruled out. Current canonical fixture additionally prefers continuing roads over dead-end spurs.",
+  "canonicalFinal": {
+    "date": "2026-11-03T18:52:01.632Z",
+    "node": "v24.22.1",
+    "cpu": "Apple M4 Pro",
+    "scope": "Preloaded ordinary Realm, fixed manual clock; no browser, rendering, network or device timing. Four simulated minutes, samples every ten seconds; inclusive phases overlap.",
+    "cars": 16,
+    "completedRoutes": 297,
+    "progressingInFinalMinute": 16,
+    "inclusiveTimings": {
+      "realm.ai": {
+        "count": 14400,
+        "totalMs": 7.9709420000261275,
+        "maxMs": 0.28758300000004056,
+        "retained": 512,
+        "p50Ms": 0.00029200000017226557,
+        "p95Ms": 0.00037500000007639755,
+        "p99Ms": 0.0006659999999101274
+      },
+      "realm.traffic": {
+        "count": 14400,
+        "totalMs": 284.21107800002414,
+        "maxMs": 1.061667,
+        "retained": 512,
+        "p50Ms": 0.016999999999825377,
+        "p95Ms": 0.023374999999759893,
+        "p99Ms": 0.030958000000282482
+      },
+      "realm.entityPhysics": {
+        "count": 14400,
+        "totalMs": 2391.2377829999764,
+        "maxMs": 35.990999999999985,
+        "retained": 512,
+        "p50Ms": 0.1369169999998121,
+        "p95Ms": 0.45737499999995634,
+        "p99Ms": 0.5996660000000702
+      },
+      "realm.tick": {
+        "count": 14400,
+        "totalMs": 3057.6033859999693,
+        "maxMs": 38.044624999999996,
+        "retained": 512,
+        "p50Ms": 0.1768329999999878,
+        "p95Ms": 0.508082999999715,
+        "p99Ms": 0.6509999999998399
+      }
+    },
+    "collision": {
+      "worldSteps": 14400,
+      "bodyCreates": 17,
+      "geometryBuilds": 693,
+      "geometryRebuilds": 760,
+      "geometryBuildMs": 0.411750000000211,
+      "geometryParts": 37,
+      "supportQueries": 0,
+      "wheelQueries": 748984,
+      "wheelNarrowQueries": 287,
+      "stepMs": 0.11341700000002675,
+      "tick": 14400,
+      "bodies": 17,
+      "sections": 37,
+      "colliders": 18
+    }
+  },
+  "attribution": {
+    "date": "2026-11-03T18:58:11.290Z",
+    "node": "v24.22.1",
+    "cpu": "Apple M4 Pro",
+    "scope": "Preloaded ordinary Realm, fixed manual clock; no browser, rendering, network or device timing. Four simulated minutes, samples every ten seconds; inclusive phases overlap.",
+    "cars": 16,
+    "completedRoutes": 297,
+    "progressingInFinalMinute": 16,
+    "inclusiveTimings": {
+      "realm.ai": {
+        "count": 14400,
+        "totalMs": 8.263361000016715,
+        "maxMs": 0.12316599999999767,
+        "retained": 512,
+        "p50Ms": 0.00029200000017226557,
+        "p95Ms": 0.0005419999997684499,
+        "p99Ms": 0.0012499999997999112
+      },
+      "realm.traffic": {
+        "count": 14400,
+        "totalMs": 297.4059799999893,
+        "maxMs": 2.8252500000000964,
+        "retained": 512,
+        "p50Ms": 0.016916999999921245,
+        "p95Ms": 0.02804199999991397,
+        "p99Ms": 0.05583299999989322
+      },
+      "realm.entityPhysics": {
+        "count": 14400,
+        "totalMs": 2476.0960390000223,
+        "maxMs": 36.744,
+        "retained": 512,
+        "p50Ms": 0.13879099999985556,
+        "p95Ms": 0.4837080000002061,
+        "p99Ms": 0.6140410000002703
+      },
+      "realm.tick": {
+        "count": 14400,
+        "totalMs": 3180.9193759999744,
+        "maxMs": 38.82654199999999,
+        "retained": 512,
+        "p50Ms": 0.17933300000004238,
+        "p95Ms": 0.5309999999999491,
+        "p99Ms": 0.6985420000000886
+      }
+    },
+    "collision": {
+      "worldSteps": 14400,
+      "bodyCreates": 17,
+      "geometryBuilds": 693,
+      "geometryRebuilds": 760,
+      "geometryBuildMs": 0.4249590000003991,
+      "geometryParts": 37,
+      "supportQueries": 0,
+      "wheelQueries": 748984,
+      "wheelNarrowQueries": 287,
+      "stepMs": 0.5906669999999394,
+      "tick": 14400,
+      "bodies": 17,
+      "sections": 37,
+      "colliders": 18
+    },
+    "method": "Diagnostic overhead includes two timer reads and one small counter snapshot per tick; bounded GC events and the first 20 ticks over 8ms. Aggregated phase percentiles alone do not attribute a spike.",
+    "slowTicks": [
+      {
+        "tick": 1,
+        "at": 251.949542,
+        "ms": 38.85025000000002,
+        "stepMs": 33.14345900000001,
+        "geometryBuildMs": 5.325832999999989,
+        "newSections": 37,
+        "rebuilds": 1,
+        "newBodies": 17,
+        "gc": []
+      }
+    ],
+    "gcCaptured": 128,
+    "gcCaptureLimit": 128,
+    "gcCaptureComplete": false,
+    "maxCapturedGcMs": 1.2725830078125,
+    "interpretation": "The first tick took 38.85ms while adding 17 bodies and 37 sections. Geometry compilation accounts for 5.33ms of that tick; further setup is not split here. No captured GC overlaps this initial tick. GC is bounded to the first 128 events, so this is not a complete whole-run GC trace or phone attribution."
+  }
+}

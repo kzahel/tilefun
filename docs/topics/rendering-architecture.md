@@ -1,5 +1,14 @@
 # Rendering architecture and backend separation
 
+[218](../tactical/218-traffic-and-rail-gameplay-recovery.md) replaces repeated
+mixed-car scratch resizing with exact-size color/depth pairs in a 16MiB / 16-entry
+LRU. Immediate scratch composition, native resolution, outlines and depth stay
+unchanged; completed-pose images keep their separate existing budget. Mesh disable,
+context recovery, expiry and teardown release the pairs. GPU stats expose pool
+counts/bytes/hits/evictions. The production mixed-traffic capture drops from about
+27 texture creations per frame to two over eight seconds; physical-phone FPS
+confirmation remains open.
+
 [217](../tactical/217-surface-projected-shadows-and-effects.md) adds shared finite
 surface receivers and conforming cartoon decals. Character ovals and oriented
 vehicle footprints split across ramps/decks and use actual ready-mesh roof

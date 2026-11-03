@@ -74,8 +74,8 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   } finally {
     await page.keyboard.up("ArrowRight");
   }
-  await expect(call).toBeVisible();
-  await page.keyboard.press("e");
+  // The first recall provides eight seconds to board. Approach leaves bench
+  // range, so do not request a redundant recall from beside the carriage.
   await page.keyboard.down("ArrowDown");
   await page.keyboard.down("Space");
   try {

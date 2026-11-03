@@ -1,5 +1,18 @@
 # Streaming and gameplay performance
 
+[218](../tactical/218-traffic-and-rail-gameplay-recovery.md) reproduces a sustained
+traffic jam from wide-turn lookahead pointing backward into the bend. The corrected
+join keeps all 16 cars progressing in the final simulated minute. Separate WebGL
+counters expose mixed-car scratch-target churn: 12,930 texture / 6,465 framebuffer
+creations over 481 frames. Exact-size bounded reuse reduces that to 2 / 1 over
+482 frames, with unchanged native pixels/depth. Both desktop captures retain
+16.8ms frame p99 and about 60Hz Worker progress; no physical-phone FPS gain is
+established. A native attribution lane finds one initial 38.85ms tick while adding
+17 bodies and 37 terrain sections (5.33ms geometry compile, no overlapping recorded
+GC); the remainder of initial setup is unsplit. Final streaming readiness passes.
+Affected-phone confirmation remains open because the Android test targets were
+not connected. Linked receipts own measurement scopes, budgets and next work.
+
 [217](../tactical/217-surface-projected-shadows-and-effects.md) adds conforming
 cartoon shadows and contact effects. Native collection means rise from 0.100 to
 0.564ms for 96 characters, and from about 0.26 to 1.82–1.94ms with 32 roof cars.

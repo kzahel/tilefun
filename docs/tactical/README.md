@@ -12,7 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
-| [218 Traffic and rail recovery](218-traffic-and-rail-gameplay-recovery.md) | In progress: traffic attribution/jams, shared contextual jump and station-service recovery |
+| [218 Traffic and rail recovery](218-traffic-and-rail-gameplay-recovery.md) | Delivered for review: wide-turn jam fix, train/nearby-jump recovery and bounded GPU target reuse; phone FPS confirmation open |
 | [217 Surface shadows and effects](217-surface-projected-shadows-and-effects.md) | Ready for owner feel review: shared finite receivers, conforming cartoon footprints and contact effects; native/Chromium/device and bounded performance evidence recorded |
 | [216 Dynamic 3D vehicles](216-dynamic-3d-vehicles.md) | Ready for owner feel review: shared depth, dynamic chassis/suspension, replay/save and recovery; device frame-budget limits recorded |
 | [215 Coherent world raster](215-coherent-world-raster.md) | Delivered: coherent scenery and fractional actors; 125 native/25 browser checks, Canvas/GPU/Chromebook pixel gates, build and streaming readiness; headless-shell limits recorded |

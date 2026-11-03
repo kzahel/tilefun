@@ -5,7 +5,7 @@ arcade jump assistance in the common scene: a new grounded player jump within
 24px of a rideable vehicle/train roof rises enough to clear that roof by 6px,
 limited to a 60px rise. Away from these bodies the ordinary impulse is unchanged.
 Authority and replay use the same solved body state and policy; no separate mode
-or console tuning matrix returns. Full delivery qualification is in progress.
+or console tuning matrix returns. Native, production Worker/P2P and game/lab delivery checks pass; 218 records evidence and remaining phone confirmation.
 
 [216](../tactical/216-dynamic-3d-vehicles.md) adds freely rotating land vehicles with authored axle suspension/tire impulses before the same single world step. Frame 0x11 retains full rotation/angular/sleep state; ordinary replicas and records retain orientation. Direct same-world collider wheel queries avoid a previous-step query warm-up during replay. 311 focused native and 31 distinct production browser checks pass across the affected shared-engine contracts; owner vehicle feel review is next.
 

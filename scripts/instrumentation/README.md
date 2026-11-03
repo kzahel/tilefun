@@ -379,7 +379,9 @@ preserved; current validation exercises real shared body contacts.
 `node --import tsx scripts/instrumentation/traffic-progress.ts /tmp/traffic-progress.json`
 runs four simulated minutes in the preloaded ordinary crowded-grid Realm. It
 records per-car position/route progress and inclusive traffic/physics/tick timings,
-without GPU/network/device claims. The corresponding native regression requires
+without GPU/network/device claims. Bounded slow-tick records include body/geometry
+counter changes and up to 128 GC events; this attribution instrumentation adds
+small timer/counter overhead. The corresponding native regression requires
 progress from every car in the final minute; a fast three-car lap is insufficient.
 
 `node scripts/benchmark-realm-physics-browser.mjs --fixture=traffic-crowd --renderer=gpu --meshes --cpu=4 --trials=1 --seconds=8 --warmup=5 --base=http://localhost:4174/tilefun/ --output=/tmp/traffic-browser`
@@ -388,3 +390,8 @@ for a sprite comparison. Captures include observed car counts, main-frame tails,
 Worker timings and start/end clock diagnostics. CPU emulation is a desktop stress
 lane, never physical-phone evidence. The normal `realm` crowd fixture/defaults and
 owned-tab physical CDP route remain available. See tactical 218 for checkpoints.
+
+Add `--allocations` to the browser command for WebGL texture/framebuffer creation
+and disposal counters. It wraps GL entry points only in owned diagnostic tabs;
+those counters are not GPU elapsed-time measurements. Tactical 218 compares the
+mixed-size scratch-target baseline with exact-size pooled targets.

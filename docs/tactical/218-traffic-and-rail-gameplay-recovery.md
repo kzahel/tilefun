@@ -1,6 +1,6 @@
 # Traffic performance, rail service and contextual jump recovery
 
-Status: investigation and implementation in progress; authorized 2026-11-03.
+Status: delivered fixes and ready for owner review; affected-phone performance confirmation remains open. Authorized 2026-11-03.
 Owners: [performance](../topics/performance.md), [vehicles](../topics/vehicles.md),
 [trains](../topics/trains.md), [physics](../topics/physics-engine.md).
 
@@ -9,7 +9,7 @@ Owners: [performance](../topics/performance.md), [vehicles](../topics/vehicles.m
 The owner reports large phone frame drops around traffic, possible authority lag,
 traffic jams, missing station train calling and missing nearby-vehicle high jumps.
 Train services/calling were deliberately deferred by reset 205; the retained tracks,
-stations and approved banks remain. The shared jump currently has one fixed impulse.
+stations and approved banks remain. At the start of this work the shared jump had one fixed impulse.
 
 1. Reproduce crowded road traffic over sustained runs; separate route decisions,
    physics/authority time, prediction and rendering. Keep sparse controls and actual
@@ -102,4 +102,65 @@ Exact-size scratch color/depth pairs now reuse native resolutions through a
 before reuse; completed pose images remain separately bounded. Disabling meshes,
 context recovery and disposal clear the pool. No pose quantization, reduced
 resolution, wheel-animation change or rendering-quality mode is introduced.
-Pixel/depth and allocation checks follow before final readiness.
+Pixel/depth checks pass. The final eight-second capture creates only two textures
+and one framebuffer over 482 frames, compared with 12,930 textures and 6,465
+framebuffers over 481 frames before the pool. Scratch creates stay at three pairs
+throughout the final window, with no evictions and a 1,474,560-byte scratch working
+set. Finished-pose images remain separately bounded. Both runs retain 16.8ms frame
+p99 and roughly 60Hz authority, so no desktop FPS gain or affected-phone FPS gain
+is claimed.
+
+
+## Final evidence and limits
+
+- 189 selected kernel, protocol, prediction, traffic, service and host tests pass
+  across 14 files, with one worker for the wall-clock-budgeted replay cases.
+  Another 54 rendering resource checks pass across four files, including exact-size
+  pair reuse, byte/entry LRU bounds, expiry and disposal. All three TypeScript
+  projects pass. Focused lint has no errors; existing non-null assertion warnings
+  in the legacy codec/test files remain.
+- 33 distinct production full-Chromium cases pass across the affected runs:
+  24 GPU raster/depth/cache/recovery checks, four vehicle geometry/traffic/effects
+  checks, two train game/lab checks, two co-op physics checks and ordinary P2P Worker
+  hosting. The pool's final 28-case render/vehicle selection passes. The train
+  boarding fixture uses the initial eight-second recall dwell; it no longer asks
+  for a redundant second recall after walking away from the bench.
+- Normal builds and the regenerated inventories pass, including 2,121 candidate
+  identities in normal Chromium at retina scale. Approved art and geometry source
+  assets are unchanged. Final GPU/meshes CPU-rate-4 streaming readiness passes all
+  six stages with zero final missing, incomplete or stale terrain.
+
+[Traffic progress and native attribution](../benchmarks/218-traffic-progress-comparison.json)
+retains the four-minute before/after join reproduction and the current canonical
+run. Every one of 16 cars progresses during the final minute; route completions
+rise from 154 to 297 in the diagnostic comparison. The separate attribution lane
+records one initial 38.85ms tick adding 17 bodies and 37 sections. Geometry compile
+accounts for 5.33ms; remaining setup is not split further. No recorded GC overlaps
+that initial tick; GC capture is bounded, not a complete whole-run trace.
+
+[GPU allocation receipt](../benchmarks/218-traffic-gpu-allocations.json) records
+before/after WebGL allocation counters on the same crowded fixture, with 12 visible
+cars, two nearby predicted bodies, five-second warmup and eight-second measurement.
+It records the large allocation reduction and the scratch-memory budget, with
+ordinary depth/color preserved by the independent geometry oracle. This establishes
+resource reuse; it does not establish physical-phone frame-time improvement.
+
+[Final streaming receipt](../benchmarks/218-traffic-rail-streaming.json) owns the
+six ready stages, frame/render tails and hardware/run metadata. The Android targets
+were disconnected, so the owner's actual phone slowdown remains unconfirmed.
+Desktop CPU throttling does not replace that device capture.
+
+## Review and next work
+
+- [Ordinary game](https://tilefun.graehlarts.com/tilefun/): **Save and reload**;
+  co-op host and guests must all load the new frame format.
+- [Station](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=train&renderer=gpu&meshes#/tool/world-geometry):
+  call beside the bench using touch / E / Interact, then jump onto the waiting train.
+  The bench preset and paused save/reload stay in the generated fixture.
+- [Crowded traffic](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=traffic-crowd&renderer=gpu&meshes#/tool/world-geometry):
+  inspect the sustained grid with the same motor, physics and planner as the game.
+
+Next: owner retests the affected phone scene after reload. If frame drops remain,
+capture actual phone main/Worker timing during traffic arrival/streaming, including
+cold setup and GPU allocation counters. This slice does not restore inside train
+driving/manual whistles or claim to solve every possible traffic gridlock.
