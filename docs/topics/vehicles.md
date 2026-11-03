@@ -1,6 +1,6 @@
 # Vehicles: shared physics baseline
 
-Status: rolling vehicle motor and ordinary autonomous road traffic restored and locally qualified in 209; ready for owner playtesting.
+Status: rolling vehicle motor and ordinary autonomous road traffic restored and locally qualified in 209; owner playtest positive, driving-audio follow-up delivered.
 Updated: 2026-11-03.
 
 [209](../tactical/209-car-driving-and-autonomous-traffic.md) restores shared rolling
@@ -21,8 +21,9 @@ ScenarioSession/Worker/Realm and motor, with pause/save/reload and visible NPC c
 Qualification: 116 focused native checks, five production Worker/P2P/vehicle browser
 cases, all typechecks, focused lint, production build and GPU/meshes streaming
 readiness with 4× CPU throttling pass. This does not establish physical-phone
-performance. Next is owner playtesting of rolling turns, reversing and traffic
-queues. Reload host and guests together for the updated numerical frame format.
+performance. The owner reports driving looks good; the subsequent seated-footstep
+fix and engine follow-up are recorded below. Reload host and guests together for
+the updated numerical frame format.
 
 Parking visitors/racers, wheel-lift towing, transporter
 apparatus and tipping-bed/cargo controls are deferred. Their old motion services
@@ -513,6 +514,19 @@ smoothly stays between 0.025 and 0.06 before the shared master/Idea ducking, wel
 below the horn. There is one reusable looping voice, with a short fade at entry,
 exit, pause, editing, menus, blocked input, blur and page hiding. It respects audio
 unlock/suspension. Automatic traffic, trains and boats do not add this car loop.
+
+2026-11-03 driving-audio follow-up: attached players/actors no longer produce
+footsteps, jump or landing audio from their movement animation. Their gait history
+is discarded while attached, so getting out resumes normal walking without a false
+landing. Nearby pedestrians remain audible. The synthesized purr includes gentle
+upper harmonics for small speakers. World Geometry / Driving and traffic restores
+the shared engine path with an explicit **Enable engine sounds** gesture; pause,
+mute, focus loss, hidden pages, scene replacement and teardown release its voice.
+Eight focused native audio checks, all three typechecks, focused lint and the
+production build pass. Two browser boundaries verify real Worker driving without
+footsteps, resumed walking, audible synthesized samples, menu/focus/exit silence,
+and lab unlock/pause/mute/context closure. Next: listen on the family's phones and
+Chromebooks to judge the purr's level; device speaker balance remains subjective.
 
 `CarEngineAudio` synthesizes and caches the original periodic low harmonics; it
 needs no new sound files or authority messages. Main gameplay and the Traffic

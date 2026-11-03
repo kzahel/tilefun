@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
+import { AudioManager } from "../audio/AudioManager.js";
 import { locateSurfaceSpace } from "../physics/TerrainExcavation.js";
 import {
   describeSurfaceSupport,
@@ -21,6 +22,7 @@ import {
 } from "../scenarios/VehicleGeometryRecipe.js";
 import { GEOMETRY_STARTS, worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
+import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import DeferredVehiclePage from "./DeferredVehiclePage.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
 
@@ -49,6 +51,10 @@ function GeometryFixtures({ initial }: { initial: string }) {
   const canvas = useRef<GeometryCanvas>(null),
     scene = useRef<ScenarioPresentationHost | null>(null);
   const keys = useRef(new Set<string>());
+  const audio = useRef<AudioManager | null>(null),
+    audioFocused = useRef(true);
+  const [sounds, setSounds] = useState(false);
+  useEffect(() => () => audio.current?.dispose(), []);
   const [fixture, setFixture] = useState(initial),
     [restart, setRestart] = useState(0);
   const [vehicleModel, setVehicleModel] = useState(() => {
@@ -60,8 +66,8 @@ function GeometryFixtures({ initial }: { initial: string }) {
   const [visibility, setVisibility] = useState<SurfaceVisibility>("auto");
   const [status, setStatus] = useState("Loading scene…"),
     [error, setError] = useState("");
-  const settings = useRef({ paused, visibility });
-  settings.current = { paused, visibility };
+  const settings = useRef({ paused, visibility, sounds });
+  settings.current = { paused, visibility, sounds };
   const garage = fixture === "garage" || fixture === "car-garage";
   const vehicle = fixture.startsWith("car-");
   const generatedIndex = GENERATED_CROSSINGS.findIndex((c) => fixture === `generated-${c.seed}`);
@@ -141,6 +147,13 @@ function GeometryFixtures({ initial }: { initial: string }) {
       onFrame: (h) => {
         const p = h.session.view.playerEntity,
           server = h.session.view.serverPlayerEntity;
+        audio.current?.updateCarEngine(
+          occupiedVehicle(p, h.session.view.entities),
+          settings.current.sounds &&
+            !settings.current.paused &&
+            !document.hidden &&
+            audioFocused.current,
+        );
         c.dataset.playerX = String(p.position.wx);
         c.dataset.playerY = String(p.position.wy);
         c.dataset.playerZ = String(p.wz ?? 0);
@@ -180,6 +193,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
         }
       },
       onError: (reason) => {
+        audio.current?.stopCarEngine();
         delete c.dataset.ready;
         if (alive) setError(String(reason));
       },
@@ -194,8 +208,21 @@ function GeometryFixtures({ initial }: { initial: string }) {
       .catch((reason) => {
         if (alive) setError(String(reason));
       });
-    const release = () => keys.current.clear();
+    const release = () => {
+      keys.current.clear();
+      audioFocused.current = false;
+      audio.current?.stopCarEngine();
+    };
+    const focus = () => {
+      audioFocused.current = true;
+    };
+    const visibilityChange = () => {
+      if (document.hidden) release();
+      else focus();
+    };
     window.addEventListener("blur", release);
+    window.addEventListener("focus", focus);
+    document.addEventListener("visibilitychange", visibilityChange);
     return () => {
       alive = false;
       delete c.dataset.ready;
@@ -204,7 +231,10 @@ function GeometryFixtures({ initial }: { initial: string }) {
       host.dispose();
       scene.current = null;
       keys.current.clear();
+      audio.current?.stopCarEngine();
       window.removeEventListener("blur", release);
+      window.removeEventListener("focus", focus);
+      document.removeEventListener("visibilitychange", visibilityChange);
     };
   }, [recipe, restart, generated, fixture, vehicle]);
   const touch = (key: string) => ({
@@ -262,6 +292,18 @@ function GeometryFixtures({ initial }: { initial: string }) {
         </label>
       )}
       <div className="actions">
+        <button
+          type="button"
+          aria-pressed={sounds}
+          onClick={() => {
+            audio.current ??= new AudioManager();
+            if (!sounds) audio.current.tryResume();
+            else audio.current.stopCarEngine();
+            setSounds(!sounds);
+          }}
+        >
+          {sounds ? "Mute engine sounds" : "Enable engine sounds"}
+        </button>
         {Object.entries(starts).map(([name, start]) => (
           <button
             key={name}

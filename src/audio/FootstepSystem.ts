@@ -82,7 +82,9 @@ export class FootstepSystem {
     const liveIds = new Set<number>();
 
     for (const entity of entities) {
-      if (!entity.sprite || !hasFootsteps(entity.type)) continue;
+      // Seated/carried actors still receive movement animation intent. Their
+      // parent supplies locomotion; discard gait/jump history until they get off.
+      if (entity.parentId !== undefined || !entity.sprite || !hasFootsteps(entity.type)) continue;
 
       liveIds.add(entity.id);
       let state = this.states.get(entity.id);

@@ -105,3 +105,20 @@ Next: owner playtest rolling turns, reversing and road queues in the game and
 Existing sessions need Save and reload; host and guests must use matching frame
 versions. Dead-end lanes stop rather than performing three-point turns. Racing,
 shopping trips, suspension/full tumbling and articulated equipment remain deferred.
+
+## Owner playtest follow-up: driving audio
+
+Owner reports driving looks good, but footsteps remain audible while seated.
+FootstepSystem now excludes attached actors and discards their gait/airborne
+history, preserving nearby pedestrians and normal walking after exit. The existing
+quiet local-driver engine gains gentle upper harmonics for small speakers; the
+rebuilt World Geometry / Driving and traffic host restores the common AudioManager
+path with gesture unlock and normal pause/focus/visibility/teardown cleanup.
+
+Eight focused native audio checks, all three typechecks, focused lint and production
+build pass. Two real Chromium audio boundaries pass: Worker driving/footsteps/
+walking/menu/focus/exit and lab gesture/pause/mute/context disposal. The lab test
+counts closed contexts as released: closing Web Audio does not have to deliver a
+future scheduled source-ended event. Art catalog is unchanged; Workshop's input
+digest refreshes with identical candidate identities/fingerprints. No simulation,
+network payload or extra audio files are introduced. Device listening is next.

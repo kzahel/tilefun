@@ -63,7 +63,13 @@ export class CarEngineAudio {
       const firing =
         0.86 + 0.1 * Math.sin(2 * Math.PI * 12 * t) + 0.04 * Math.sin(2 * Math.PI * 7 * t);
       data[i] =
-        firing * (0.45 * Math.sin(phase) + 0.16 * Math.sin(phase * 2) + 0.08 * Math.sin(phase * 3));
+        firing *
+        (0.45 * Math.sin(phase) +
+          0.16 * Math.sin(phase * 2) +
+          0.08 * Math.sin(phase * 3) +
+          // A little upper body remains audible on small phone speakers.
+          0.06 * Math.sin(phase * 4) +
+          0.035 * Math.sin(phase * 5));
     }
     return buffer;
   }

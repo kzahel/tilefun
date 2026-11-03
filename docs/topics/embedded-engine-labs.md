@@ -6,6 +6,10 @@ Canonical LaneGraph, Realm planning, shared motor and normal Worker frames own N
 motion; the page only observes/controls. Native road geometry fixtures supply a
 bounded generated-lane source, and normal regional worlds use their existing source.
 Pause/reload and NPC motion are exposed through the shared presentation host.
+World Geometry / Driving and traffic also calls the common AudioManager engine
+after **Enable engine sounds**, observing the occupied car and actual velocity.
+Pause/mute/focus/visibility and scene teardown release audio; there is no separate
+lab engine synthesizer or audio-driven simulation.
 
 [208](../tactical/208-ground-seams-and-movement-pacing.md) keeps game/lab static
 geometry in the same welded compound and preserves previous numerical poses at
