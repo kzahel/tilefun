@@ -1,5 +1,19 @@
 # Player prediction and moving contacts
 
+## Open: first-contact car display snap (2026-11-03)
+
+Owner reports a small jump when first pushing a car. A native ordinary
+ScenarioSession/PlayerPredictor reproduction with an eight-tick authority stall
+before contact keeps actual car motion below 0.121px/tick, but its first displayed
+step is 1.189px: physical x=100.120 is shown at x=101.189. Steady synchronized
+pushing remains smooth. `presentEntities` abruptly applies the player's residual
+horizontal display correction when the car joins the solved contact component;
+the previously unconnected car had no such offset. Existing tests check connected
+poses and pre-contact isolation, but do not check continuity across that transition.
+Next: preserve display continuity when contact membership/source changes while
+maintaining coherent contact geometry; keep physical pushing unchanged. This is
+an investigation result, not a delivered fix or a physical-device reproduction.
+
 [209](../tactical/209-car-driving-and-autonomous-traffic.md) restores rolling car
 controls in the shared kernel. Snapshots include target drive speed and steering;
 replay uses the same grounded traction motor for local driving and held remote
