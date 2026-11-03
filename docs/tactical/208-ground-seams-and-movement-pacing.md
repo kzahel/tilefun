@@ -1,6 +1,6 @@
 # Ground seams and movement pacing
 
-Status: implementation/native and diagnostic qualification complete; production delivery pending.
+Status: delivered and qualified; physical-phone confirmation remains outstanding.
 Updated: 2026-11-03.
 
 Owner request: fix the 207 terrain bob and investigate running/driving pacing
@@ -82,7 +82,20 @@ does not reproduce a physical handset's CPU/GPU/thermal limits.
 
 ## Qualification
 
-107 focused native checks in eight files and focused lint pass. All TypeScript
-projects, updated inventories/build, affected production browser boundaries and
-the final streaming readiness check must pass before development readiness.
-Commit implementation first, then delivery evidence/inventories and mark ready last.
+Implementation checkpoint: `90623337`. All 107 focused native checks in eight
+files, focused lint and all three TypeScript projects pass. Art catalog and all
+2,119 Workshop identities validate, and the production build passes. Generated
+inventory changes are source-line references, runtime fingerprints and their
+input digest; art pixels and approval decisions are unchanged.
+
+All four full-Chromium production boundaries pass: ordinary Worker NPC contacts
+and prediction, actual delayed P2P reversal convergence, two-session lab controls/
+pause/reload, and car garage ramp traversal with saved seat. The final committed
+GPU/meshes/touch/CPU-rate-4 streaming readiness run also passes: walking, sprinting
+and reversal retain 16.8ms frame p99, zero camera clock regressions, zero held-camera
+samples while the player moves, and no missing/incomplete/stale visible terrain.
+The evidence artifact retains that final verification separately from the first
+before/after capture. This is not physical-phone qualification or a guarantee of
+zero heavy-scene stalls. Commit delivery records/inventories, then mark development
+readiness last. Next verify the owner's phone/browser and profile complex static
+geometry updates if it still shows movement holds.

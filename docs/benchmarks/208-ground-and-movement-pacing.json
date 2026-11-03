@@ -154,6 +154,56 @@
           "finalStale": 0
         }
       ]
+    },
+    "finalCommittedVerification": {
+      "revision": "90623337",
+      "samples": [
+        {
+          "name": "walk",
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000109
+          },
+          "cameraClockRegressions": 0,
+          "cameraHeldWhilePlayerMoves": 0,
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "sprint",
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000291
+          },
+          "cameraClockRegressions": 0,
+          "cameraHeldWhilePlayerMoves": 0,
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "reverse",
+          "frames": {
+            "count": 300,
+            "p50": 16.700000000000728,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000291
+          },
+          "cameraClockRegressions": 0,
+          "cameraHeldWhilePlayerMoves": 0,
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        }
+      ]
     }
   },
   "car": {
@@ -236,6 +286,54 @@
         "rebuildMs": [24.374874999999975, 25.84775000000002, 25.95283299999994],
         "p95": 2.8619169999999485
       }
-    ]
+    ],
+    "independentBoxesControl": {
+      "revision": "ef70c6c3",
+      "measurement": "full physics step on rebuild ticks (includes integration); initialization excluded, first case is cold/JIT-sensitive",
+      "samples": [
+        {
+          "pattern": "flat",
+          "count": 24,
+          "parts": 6,
+          "rebuildMs": [28.205750000000023, 1.4525409999999965, 1.183334000000002],
+          "p95": 0.46949999999998226
+        },
+        {
+          "pattern": "flat",
+          "count": 96,
+          "parts": 6,
+          "rebuildMs": [1.816958999999997, 1.2435409999999933, 1.1634579999999914],
+          "p95": 0.5335420000000113
+        },
+        {
+          "pattern": "flat",
+          "count": 384,
+          "parts": 9,
+          "rebuildMs": [3.029291999999998, 2.073582999999985, 2.2693329999999605],
+          "p95": 1.4629170000000045
+        },
+        {
+          "pattern": "checker",
+          "count": 24,
+          "parts": 1536,
+          "rebuildMs": [5.239125000000058, 4.8856250000000045, 3.5829579999999623],
+          "p95": 0.6011250000000246
+        },
+        {
+          "pattern": "checker",
+          "count": 96,
+          "parts": 1536,
+          "rebuildMs": [4.869416000000001, 4.9867080000000215, 5.163667000000032],
+          "p95": 1.6327499999999873
+        },
+        {
+          "pattern": "checker",
+          "count": 384,
+          "parts": 2304,
+          "rebuildMs": [11.567457999999988, 9.974749999999972, 9.429666999999995],
+          "p95": 3.63149999999996
+        }
+      ]
+    }
   }
 }

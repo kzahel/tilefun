@@ -48,7 +48,7 @@ scheduling and cold-entry presentation remaining as separate performance work.
 Wildlife sleep, shared bounded planning across all native families and ambient
 wander, local predicted animation, bounded unchanged car image reuse and ordered
 multi-texture GPU batches are delivered.
-Updated: 2026-10-25.
+Updated: 2026-11-03.
 
 Owns current performance direction and the limits of the evidence.
 [Rendering architecture](rendering-architecture.md) owns the desired backend

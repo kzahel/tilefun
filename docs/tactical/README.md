@@ -12,7 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
-| [208 Ground seams and movement pacing](208-ground-seams-and-movement-pacing.md) | Implementation/native diagnostics complete: welded static seams, monotonic camera time, retained previous poses and committed replay presentation; phone qualification and production delivery pending |
+| [208 Ground seams and movement pacing](208-ground-seams-and-movement-pacing.md) | Delivered: welded static seams, monotonic camera time, retained previous poses and committed replay presentation; 107 native/four browser checks, build and throttled streaming pass; physical-phone confirmation remains |
 | [207 Nearby actor display corrections](207-nearby-actor-display-corrections.md) | Delivered: proximity no longer transfers player correction; solved contacts survive restore; 93 native/four browser checks, build and streaming readiness pass; subpixel terrain seam bob remains separate |
 | [206 Realm phases and physical edits](206-realm-phases-and-physical-edits.md) | Delivered: named Realm phases, explicit physical edits/coherent snapshots; 280 native/four browser checks and execution readiness pass |
 | [205 Physics reset](205-physics-reset.md) | Delivered: shared 60Hz default/prediction, gravity-only tuning, legacy deletion; 4,545 native/seven browser checks, Chromebook evidence and Sol review; crowd headroom remains |

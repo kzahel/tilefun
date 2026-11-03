@@ -1,6 +1,6 @@
 # Client/server architecture
 
-Current implementation map, updated 2026-11-03 after reset 205. The
+Current implementation map, updated 2026-11-03 after reset 205 and pacing fix 208. The
 [original extraction plan](archive/client-server-extraction-plan.md) is archived;
 its shared-memory local mode and “future” multiplayer phases are historical.
 

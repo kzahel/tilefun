@@ -9,7 +9,7 @@ owns authoring semantics; [prediction](player-prediction.md) owns input replay;
 [189](../tactical/189-rapier-physics-prototype.md) owns the first bounded experiment;
 [190](../tactical/190-rapier-prediction-and-realm-proof.md) owns prediction/Realm integration.
 
-## Nearby actor display correction (207)
+## Ground seams and movement pacing (208)
 
 [208](../tactical/208-ground-seams-and-movement-pacing.md) resolves the remaining
 terrain seam bob with a cached, welded static compound and the engine's internal
@@ -18,6 +18,11 @@ compound support, real cliffs, solid queries and ramps are covered. Aggregate
 rebuilds occur on geometry/residency changes; highly fragmented terrain has a
 remaining cold/edit rebuild cost, recorded in 208. Previous fixed-tick XYZ now
 travels with numerical snapshots for continuous interpolation through restore.
+107 native checks, four production Worker/P2P/lab/car browser cases, all typechecks,
+inventories/build and throttled streaming readiness pass; physical-phone
+confirmation remains.
+
+## Nearby actor display correction (207)
 
 [207](../tactical/207-nearby-actor-display-corrections.md) fixes player display
 correction transferring to unconnected nearby cars/NPCs. Only solved contact
