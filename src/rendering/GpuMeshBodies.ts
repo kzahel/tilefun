@@ -272,13 +272,10 @@ export class GpuMeshBodies {
     const anchor = projectWorld(camera, item.wx, item.wy, item.zOffset);
     surface.save();
     surface.globalAlpha = item.alpha ?? 1;
-    surface.drawTexture(
-      texture,
-      anchor.sx - radius * camera.scale,
-      anchor.sy - radius * camera.scale,
-      radius * 2 * camera.scale,
-      radius * 2 * camera.scale,
-    );
+    const subpixel = camera.worldRaster && item.subpixel;
+    surface.imageSmoothingEnabled = !!subpixel;
+    const size = subpixel ? Math.round(radius * 2 * camera.scale) : radius * 2 * camera.scale;
+    surface.drawTexture(texture, anchor.sx - size / 2, anchor.sy - size / 2, size, size);
     if (immediate) surface.flush();
     surface.restore();
     this.draws++;

@@ -675,7 +675,11 @@ export class GameClient {
         this.time.alpha = alpha;
         this.time.presentationSeconds = presentationSeconds;
         this.renderHost.beginFrame();
-        this.scenes.render(alpha);
+        try {
+          this.scenes.render(alpha);
+        } finally {
+          this.renderHost.endWorld();
+        }
         if (this.initDone && (this.startupWorldReady || this.scenes.has(MenuScene)))
           finishStartup();
         if (this.initDone) {
@@ -1412,6 +1416,8 @@ export class GameClient {
       get renderer() {
         return client.renderer;
       },
+      beginWorld: () => client.renderHost.beginWorld(client.camera),
+      endWorld: () => client.renderHost.endWorld(),
       sceneFrame: this.sceneFrame,
       audioManager: this.audioManager,
       editorMode: this.editorMode,

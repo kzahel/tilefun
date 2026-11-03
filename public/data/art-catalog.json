@@ -29315,7 +29315,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:319"
+          "source": "src/rendering/RendererLab.ts:320"
         }
       ]
     },
@@ -29333,7 +29333,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:320"
+          "source": "src/rendering/RendererLab.ts:321"
         }
       ]
     },
@@ -29359,7 +29359,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/TransporterFallback.ts:24"
+          "source": "src/rendering/TransporterFallback.ts:25"
         }
       ]
     },
@@ -29385,7 +29385,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/TowingFallback.ts:30"
+          "source": "src/rendering/TowingFallback.ts:31"
         }
       ]
     },
@@ -29411,7 +29411,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/TowingFallback.ts:30"
+          "source": "src/rendering/TowingFallback.ts:31"
         }
       ]
     },
@@ -29437,7 +29437,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/DumpTruckFallback.ts:28"
+          "source": "src/rendering/DumpTruckFallback.ts:29"
         }
       ]
     },
@@ -33437,7 +33437,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:806"
+          "source": "src/scenes/PlayScene.ts:809"
         },
         {
           "system": "Gameplay",
@@ -33493,7 +33493,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:806"
+          "source": "src/scenes/PlayScene.ts:809"
         },
         {
           "system": "Gameplay",
@@ -33545,7 +33545,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:806"
+          "source": "src/scenes/PlayScene.ts:809"
         },
         {
           "system": "Gameplay",
@@ -33691,7 +33691,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/CurveTrainPresentation.ts:16"
+          "source": "src/rendering/CurveTrainPresentation.ts:17"
         }
       ]
     },
@@ -33859,19 +33859,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:205"
+          "source": "src/rendering/RendererLab.ts:206"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:273"
+          "source": "src/rendering/RendererLab.ts:274"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:277"
+          "source": "src/rendering/RendererLab.ts:278"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:281"
+          "source": "src/rendering/RendererLab.ts:282"
         }
       ]
     },
@@ -35177,7 +35177,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/DumpTruckFallback.ts:55"
+          "source": "src/rendering/DumpTruckFallback.ts:56"
         },
         {
           "system": "Gameplay",
@@ -36607,7 +36607,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:723"
+          "source": "src/scenes/PlayScene.ts:726"
         },
         {
           "system": "Gameplay",
@@ -38155,19 +38155,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RasterRenderBackend.ts:156"
+          "source": "src/rendering/RasterRenderBackend.ts:234"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:210"
+          "source": "src/rendering/RendererLab.ts:211"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:214"
+          "source": "src/rendering/RendererLab.ts:215"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:355"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:356"
         },
         {
           "system": "Editor",

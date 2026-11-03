@@ -19,9 +19,12 @@ import type {
 import { type TerrainDrawOptions, TerrainFrame } from "./TerrainFrame.js";
 import type { TerrainRenderWorld } from "./TerrainPresentation.js";
 import { TileRenderer } from "./TileRenderer.js";
+import { WORLD_RASTER_PAD } from "./WorldRasterFrame.js";
 
 /** Canvas resources and projection helpers never escape through RenderBackend. */
 export class RasterRenderBackend implements RenderBackend {
+  /** Hosts enable this; immutable reference adapters retain their original pixels. */
+  worldRaster = false;
   protected readonly camera = new Camera();
   private readonly terrainFrame = new TerrainFrame();
   assets: SpriteCatalog;
@@ -69,7 +72,9 @@ export class RasterRenderBackend implements RenderBackend {
     camera.y = view.y;
     camera.zoom = view.zoom;
     camera.pixelSnap = view.pixelSnap ?? false;
-    camera.setViewport(view.viewportWidth, view.viewportHeight);
+    camera.worldRaster = this.worldRaster;
+    const pad = this.worldRaster ? WORLD_RASTER_PAD * 2 : 0;
+    camera.setViewport(view.viewportWidth + pad, view.viewportHeight + pad);
     return camera;
   }
 
@@ -107,7 +112,22 @@ export class RasterRenderBackend implements RenderBackend {
     options?: TerrainDrawOptions,
   ) {
     this.assertLive();
-    return this.terrainFrame.collect(view, world, this.terrain, visible, options);
+    const draws = this.terrainFrame.collect(
+      this.setView(view),
+      world,
+      this.terrain,
+      visible,
+      options,
+    );
+    if (this.worldRaster) {
+      const edge = options?.overscanPixels ?? 1;
+      for (const draw of draws) {
+        draw.width -= edge;
+        draw.height -= edge;
+        draw.edgePixels = edge;
+      }
+    }
+    return draws;
   }
 
   collectElevationItems(world: TerrainRenderWorld, visible: ChunkRange) {
@@ -127,35 +147,94 @@ export class RasterRenderBackend implements RenderBackend {
           ctx.save();
           try {
             ctx.translate(origin.sx, origin.sy);
-            ctx.scale(camera.scale, camera.scale);
-            this.interior.draw(ctx, pass.draws, this.sheets, this.terrain);
+            if (!this.worldRaster) ctx.scale(camera.scale, camera.scale);
+            this.interior.draw(
+              ctx,
+              pass.draws,
+              this.sheets,
+              this.terrain,
+              this.worldRaster ? camera.scale : undefined,
+            );
           } finally {
             ctx.restore();
           }
         }
         break;
       case "overlay":
+        ctx.save();
+        if (this.worldRaster) ctx.translate(WORLD_RASTER_PAD, WORLD_RASTER_PAD);
         this.drawOverlay(pass);
+        ctx.restore();
         break;
       case "clear":
         ctx.fillStyle = pass.color;
-        ctx.fillRect(0, 0, view.viewportWidth, view.viewportHeight);
+        ctx.fillRect(0, 0, camera.viewportWidth, camera.viewportHeight);
         break;
       case "terrain":
         for (const draw of pass.draws) {
           const image = this.terrain.resolveTerrainResource(draw.resource);
-          if (image) ctx.drawImage(image, draw.x, draw.y, draw.width, draw.height);
+          if (image) {
+            if (this.worldRaster && ctx.drawStableImage) {
+              const raster = image as OffscreenCanvas;
+              ctx.drawStableImage(
+                image,
+                0,
+                0,
+                raster.width,
+                raster.height,
+                draw.x,
+                draw.y,
+                draw.width,
+                draw.height,
+              );
+            } else ctx.drawImage(image, draw.x, draw.y, draw.width, draw.height);
+            const edge = draw.edgePixels ?? 0;
+            if (edge) {
+              const w = (image as OffscreenCanvas).width,
+                h = (image as OffscreenCanvas).height;
+              ctx.drawImage(image, w - 1, 0, 1, h, draw.x + draw.width, draw.y, edge, draw.height);
+              ctx.drawImage(image, 0, h - 1, w, 1, draw.x, draw.y + draw.height, draw.width, edge);
+              ctx.drawImage(
+                image,
+                w - 1,
+                h - 1,
+                1,
+                1,
+                draw.x + draw.width,
+                draw.y + draw.height,
+                edge,
+                edge,
+              );
+            }
+          }
         }
         break;
       case "scene":
+        ctx.save();
+        // Clip rectangles are already projected in the logical aligned viewport.
+        // Bodies use the padded backend camera; translate clips without moving bodies twice.
+        if (this.worldRaster && pass.clipRects) {
+          ctx.beginPath();
+          for (const r of pass.clipRects)
+            ctx.rect(r.x + WORLD_RASTER_PAD, r.y + WORLD_RASTER_PAD, r.width, r.height);
+          ctx.clip();
+        }
         drawScenePass2D(
           ctx,
           camera,
-          pass,
+          this.worldRaster && pass.clipRects
+            ? {
+                kind: "scene",
+                items: pass.items,
+                order: pass.order,
+                pixelExactShadows: pass.pixelExactShadows ?? false,
+              }
+            : pass,
           this.sheets,
           this.sheets.get("grass-blades"),
           this.terrain,
         );
+        ctx.restore();
         break;
     }
   }

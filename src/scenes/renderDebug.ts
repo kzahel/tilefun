@@ -2,6 +2,7 @@ import { TILE_SIZE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { drawOverlayGeometry } from "../rendering/CanvasOverlayRenderer.js";
 import { drawCollisionDebug } from "../rendering/CollisionDebug.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
@@ -98,7 +99,7 @@ export function renderDebugOverlay(gc: GameContext, alpha = 1): void {
         gc.debugPanel.collision,
         alpha,
       );
-      gc.renderer.submit(camera, { kind: "overlay", items: overlay.items });
+      drawOverlayGeometry(ctx, overlay.items, new Map());
     } finally {
       overlay.release();
     }

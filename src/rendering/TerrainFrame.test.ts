@@ -21,7 +21,7 @@ it("places opaque resources without graphics, reuses records, and culls before l
   const draws = frame.collect(view, world, resources, visible);
   expect(calls).toEqual([-1, 0, 1]); // touching edges retained, far chunks culled
   expect(draws.map((d) => ({ ...d }))).toEqual(
-    [-256, 0, 256].map((x) => ({ resource: 7, x, y: 0, width: 257, height: 257 })),
+    [-256, 0, 256].map((x) => ({ resource: 7, x, y: 0, width: 257, height: 257, edgePixels: 0 })),
   );
   const center = draws[1];
   const snapshot = structuredClone(draws);

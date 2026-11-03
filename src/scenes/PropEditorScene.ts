@@ -233,6 +233,7 @@ export class PropEditorScene implements GameScene {
   render(alpha: number, gc: GameContext): void {
     gc.camera.applyInterpolation(alpha);
     const { ctx, camera } = gc;
+    gc.beginWorld?.();
     gc.renderer.submit(camera, { kind: "clear", color: "#5a8a32" });
     const overlays = gc.sceneFrame.overlays;
     overlays.begin();
@@ -261,6 +262,7 @@ export class PropEditorScene implements GameScene {
       overlays.release();
     }
 
+    gc.endWorld?.();
     drawCollisionBoxes(ctx, camera, [], this.props);
 
     // Highlight selected prop

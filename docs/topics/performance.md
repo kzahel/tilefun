@@ -1,5 +1,13 @@
 # Streaming and gameplay performance
 
+[215](../tactical/215-coherent-world-raster.md) measures the coherent-world repair
+on a physical Chromebook. One retained RGBA8 target/fullscreen pass replaces per-layer
+fractional camera phases; actor filtering retains ordered batching. Sparse render
+means add about 0.14ms; crowded balanced repeats overlap the baseline CPU range and
+retain 16.8ms frame p99. One initial crowded outlier remains explicitly recorded.
+Desktop GPU/meshes CPU-rate-4 streaming readiness passes; linked evidence bounds
+device, scene, raster-memory and thermal claims.
+
 [213](../tactical/213-continuous-camera-projection.md) reproduces the remaining
 screen-space camera wobble at actual sprite/mesh draw destinations. Continuous
 projection removes the extra rounding offset: steady walk/run draws stay fixed,

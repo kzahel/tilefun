@@ -1,5 +1,6 @@
 import type { GameAssets } from "../assets/GameAssets.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
+import type { Camera } from "./Camera.js";
 import type { RenderBackend } from "./RenderFrame.js";
 
 /** Browser composition only. A GPU host may provide a separate 2D UI overlay;
@@ -18,6 +19,9 @@ export interface RenderHost {
   resize(width: number, height: number): void;
   /** Clear a separate UI overlay before scene rendering, if this host has one. */
   beginFrame(): void;
+  /** World collection and drawing share one aligned frame; finish before HUD. */
+  beginWorld(camera: Camera): void;
+  endWorld(): void;
   /** Snapshot of world plus Canvas UI. An owned target may be reused for live XR uploads. */
   captureFrame?(target?: HTMLCanvasElement): HTMLCanvasElement;
   dispose(): void;

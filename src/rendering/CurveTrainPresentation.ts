@@ -1,5 +1,6 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import { curveTrainView } from "../railway/CurveTrain.js";
+import { drawActorImage } from "./ActorRaster.js";
 import type { Camera } from "./Camera.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import type { SpriteItem } from "./SceneItem.js";
@@ -21,14 +22,17 @@ export function drawCurveTrain(
   );
   ctx.save();
   ctx.globalAlpha = item.alpha ?? 1;
-  ctx.drawImage(
+  drawActorImage(
+    ctx,
+    camera,
+    item,
     sheet.image,
     view.x,
     view.y,
     view.width,
     view.height,
-    Math.floor(p.sx),
-    Math.floor(p.sy),
+    p.sx,
+    p.sy,
     view.width * camera.scale,
     view.height * camera.scale,
   );

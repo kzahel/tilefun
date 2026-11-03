@@ -20,7 +20,7 @@ test("adjacent sprites have no gaps or overlaps at fractional scales on either b
   expect(reports.filter((report) => report.mismatches !== 0)).toEqual([]);
 });
 
-test("stationary terrain, props and grass stay rigid while the camera settles", async ({
+test("world composition keeps scenery rigid and followed actors steady on both backends", async ({
   page,
 }) => {
   await page.goto("/tilefun/renderer-lab.html");
@@ -36,6 +36,34 @@ test("stationary terrain, props and grass stay rigid while the camera settles", 
   expect(reports.filter((report) => report.mismatches !== 0 || report.movedFrames === 0)).toEqual(
     [],
   );
+  const composed = await page.evaluate(() =>
+    (
+      window as unknown as {
+        rendererLab: {
+          probeWorldRegistration(): {
+            relativeRange: number;
+            elevationRange: number;
+            actorXRange: number;
+            actorYRange: number;
+            bleed: number;
+            actorParityError: number;
+          }[];
+        };
+      }
+    ).rendererLab.probeWorldRegistration(),
+  );
+  expect(composed).toHaveLength(20);
+  expect(
+    composed.filter(
+      (r) =>
+        r.relativeRange > 0.03 ||
+        r.elevationRange > 0.03 ||
+        r.actorXRange > 0.03 ||
+        r.actorYRange > 0.03 ||
+        r.bleed > 1 ||
+        r.actorParityError > 2,
+    ),
+  ).toEqual([]);
 });
 
 test("GPU consumes the Canvas scene with retained textures and union clips", async ({ page }) => {
@@ -951,7 +979,7 @@ test("GPU indexed batches preserve quad order, capacity boundaries and upload ac
   });
   expect(result.maxError).toBeLessThanOrEqual(1);
   expect(result.draws).toBe(3);
-  expect(result.uploaded).toBe(4101 * 4 * 9 * 4);
+  expect(result.uploaded).toBe(4101 * 4 * 13 * 4);
 });
 
 test("shared grass LOD fades consistently in Canvas and GPU and returns at ordinary zoom", async ({

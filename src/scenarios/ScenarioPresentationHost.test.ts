@@ -148,6 +148,8 @@ it("keeps diagnostic framing through ticks/commands and submits overlays around 
     resize: mocks.resize,
     dispose: mocks.dispose,
     beginFrame: vi.fn(),
+    beginWorld: vi.fn(),
+    endWorld: vi.fn(),
     renderer: {
       assets: new Map(),
       submit: (_view: unknown, pass: RenderPass) => {
@@ -189,6 +191,8 @@ it("cycles a presentation-only pose while authority is paused, then restores the
     resize: mocks.resize,
     dispose: mocks.dispose,
     beginFrame: vi.fn(),
+    beginWorld: vi.fn(),
+    endWorld: vi.fn(),
     renderer: { assets: new Map(), submit: vi.fn() },
   });
   const host = new ScenarioPresentationHost({} as HTMLCanvasElement, {} as ScenarioRecipe, {

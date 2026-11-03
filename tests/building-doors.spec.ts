@@ -4,6 +4,10 @@ import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPla
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { exteriorDoors } from "../src/interiors/BuildingDoors.js";
 
+// These paths exercise the production GPU world composition and door presentation.
+// Full Chromium supplies the same rendering path as gameplay/device qualification.
+test.use({ channel: "chromium" });
+
 for (const kind of ["butcher", "condo-bay"]) {
   test(`${kind}: walk between entrances, exit at the selected door and reload indoors`, async ({
     page,

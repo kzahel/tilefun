@@ -4,6 +4,9 @@ Status: reproduced and investigated; compositor recommendation is provisional,
 with no playable renderer change delivered.
 Updated: 2026-11-03.
 
+Follow-up: [215](215-coherent-world-raster.md) implements the common composition
+and fractional-actor repair. The investigation/control evidence below is historical.
+
 Owner observes trees and the stopped player shifting a pixel relative to terrain
 after movement. This follows the continuous-camera change in 213. Preserve both
 static-world registration and the steady followed-actor behavior; toggling the

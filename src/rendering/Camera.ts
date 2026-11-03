@@ -14,6 +14,8 @@ export class Camera {
   zoom = 1;
   /** Gameplay opts in; immutable reference adapters retain their original projection. */
   pixelSnap = false;
+  /** Backend-only: actor images retain fractional placement within the raster frame. */
+  worldRaster = false;
 
   /** True until the first follow() call, so the camera snaps instead of lerping. */
   private firstFollow = true;
@@ -158,8 +160,9 @@ export class Camera {
     maxCx: number;
     maxCy: number;
   } {
-    const topLeft = this.screenToWorld(0, 0);
-    const bottomRight = this.screenToWorld(this.viewportWidth, this.viewportHeight);
+    const guard = this.worldRaster ? 3 : 0;
+    const topLeft = this.screenToWorld(-guard, -guard);
+    const bottomRight = this.screenToWorld(this.viewportWidth + guard, this.viewportHeight + guard);
 
     return {
       minCx: Math.floor(topLeft.wx / CHUNK_SIZE_PX),

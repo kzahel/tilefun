@@ -10,8 +10,26 @@ import controls from "../physics/PlayerControls.ts?raw";
 import clippedTerrain from "../physics/rapier/ClippedTerrain.ts?raw";
 import collisionGeometry from "../physics/rapier/CollisionGeometry.ts?raw";
 import vehicleMotor from "../physics/VehicleMotor.ts?raw";
+import actorRaster from "../rendering/ActorRaster.ts?raw";
+import cameraRaster from "../rendering/Camera.ts?raw";
+import spriteRaster from "../rendering/Canvas2DRenderer.ts?raw";
+import interiorRaster from "../rendering/CanvasInteriorResources.ts?raw";
+import canvasBackend from "../rendering/CanvasRenderBackend.ts?raw";
+import canvasHost from "../rendering/CanvasRenderHost.ts?raw";
+import curveSprite from "../rendering/CurveTrainPresentation.ts?raw";
+import sceneCollection from "../rendering/collectScene.ts?raw";
+import dumpSprite from "../rendering/DumpTruckFallback.ts?raw";
+import gpuBodies from "../rendering/GpuMeshBodies.ts?raw";
+import gpuRaster from "../rendering/GpuRasterSurface.ts?raw";
+import gpuHost from "../rendering/GpuRenderHost.ts?raw";
 import presentationSettings from "../rendering/PresentationSettings.ts?raw";
 import projection from "../rendering/Projection.ts?raw";
+import rasterBackend from "../rendering/RasterRenderBackend.ts?raw";
+import subpixelImages from "../rendering/SubpixelImages.ts?raw";
+import terrainPlacement from "../rendering/TerrainFrame.ts?raw";
+import towingSprite from "../rendering/TowingFallback.ts?raw";
+import transporterSprite from "../rendering/TransporterFallback.ts?raw";
+import worldRaster from "../rendering/WorldRasterFrame.ts?raw";
 import client from "../scenarios/ScenarioClient.ts?raw";
 import presentation from "../scenarios/ScenarioPresentationHost.ts?raw";
 import protocol from "../scenarios/ScenarioProtocol.ts?raw";
@@ -52,6 +70,24 @@ export const scenarioRuntimeSource = {
   predictor,
   presentationSettings,
   projection,
+  cameraRaster,
+  sceneCollection,
+  curveSprite,
+  transporterSprite,
+  towingSprite,
+  dumpSprite,
+  interiorRaster,
+  worldRaster,
+  rasterBackend,
+  canvasHost,
+  canvasBackend,
+  gpuHost,
+  gpuRaster,
+  gpuBodies,
+  spriteRaster,
+  terrainPlacement,
+  subpixelImages,
+  actorRaster,
   physicsCodec,
   replica,
   collisionGeometry,

@@ -65,28 +65,64 @@ export class CanvasInteriorResources {
     draws: readonly InteriorDraw[],
     sheets: Map<string, Spritesheet>,
     terrain?: CanvasTerrainSource,
+    screenScale?: number,
   ): void {
+    const scale = screenScale ?? 1;
+    this.nativeCamera.zoom = scale / PIXEL_SCALE;
+    this.nativeCamera.worldRaster = screenScale !== undefined;
+    const drawImage = (
+      image: CanvasImageSource,
+      sx: number,
+      sy: number,
+      sw: number,
+      sh: number,
+      x: number,
+      y: number,
+      w: number,
+      h: number,
+    ) => {
+      const draw = (screenScale !== undefined ? ctx.drawStableImage : undefined) ?? ctx.drawImage;
+      const dx = screenScale === undefined ? x : Math.floor(x * scale),
+        dy = screenScale === undefined ? y : Math.floor(y * scale),
+        dw = screenScale === undefined ? w : Math.floor((x + w) * scale) - dx,
+        dh = screenScale === undefined ? h : Math.floor((y + h) * scale) - dy;
+      draw.call(ctx, image, sx, sy, sw, sh, dx, dy, dw, dh);
+    };
     ctx.save();
     try {
       ctx.imageSmoothingEnabled = false;
       for (const draw of draws)
         switch (draw.kind) {
           case "layer":
-            ctx.drawImage(this.layers[draw.layer], 0, 0);
+            {
+              const image = this.layers[draw.layer];
+              drawImage(image, 0, 0, image.width, image.height, 0, 0, image.width, image.height);
+            }
             break;
           case "wall-band": {
             const image = this.bands.get(draw.row);
-            if (image) ctx.drawImage(image, 0, draw.y);
+            if (image)
+              drawImage(
+                image,
+                0,
+                0,
+                image.width,
+                image.height,
+                0,
+                draw.y,
+                image.width,
+                image.height,
+              );
             break;
           }
           case "furniture":
-            ctx.drawImage(this.atlas, ...draw.src, draw.x, draw.y, draw.width, draw.height);
+            drawImage(this.atlas, ...draw.src, draw.x, draw.y, draw.width, draw.height);
             break;
           case "scene":
             if (draw.item) {
               ctx.save();
               try {
-                ctx.translate(0, draw.offsetY);
+                ctx.translate(0, draw.offsetY * scale);
                 drawSceneEntry2D(
                   ctx,
                   this.nativeCamera,

@@ -329,6 +329,7 @@ export class ScenarioPresentationHost {
         ? view.entities.map((entity) => (entity.id === player.id ? this.presentedPlayer : entity))
         : view.entities;
       this.host.beginFrame();
+      this.host.beginWorld(this.camera);
       renderer.submit(this.camera, { kind: "clear", color: this.options.background ?? "#cbd5c3" });
       const range = this.camera.getVisibleChunkRange();
       if (!this.options.interior && this.options.terrain !== false)
@@ -373,6 +374,7 @@ export class ScenarioPresentationHost {
           this.options.pixelExactShadows ?? false,
         );
       this.drawOverlay(this.options.overlay);
+      this.host.endWorld();
       this.options.uiOverlay?.(this.host.uiContext, this);
       this.renderX = this.camera.x;
       this.renderY = this.camera.y;
@@ -380,6 +382,7 @@ export class ScenarioPresentationHost {
     } catch (error) {
       this.fail(error);
     } finally {
+      this.host?.endWorld();
       this.frame.release();
       this.overlays.release();
       this.camera.restoreActual();

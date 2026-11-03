@@ -135,12 +135,14 @@ function drawOneShadow(
     return;
   }
   ctx.save();
+  const subpixel = camera.worldRaster && item.subpixel && !pixelExactShadows;
+  if (subpixel) ctx.imageSmoothingEnabled = true;
   ctx.globalAlpha = 0.3;
   ctx.fillStyle = "#000";
   ctx.beginPath();
   ctx.ellipse(
-    Math.floor(feetScreen.sx),
-    Math.floor(feetScreen.sy - terrainOffset),
+    subpixel ? feetScreen.sx : Math.floor(feetScreen.sx),
+    subpixel ? feetScreen.sy - terrainOffset : Math.floor(feetScreen.sy - terrainOffset),
     shadowW / 2,
     shadowH / 2,
     0,
@@ -222,12 +224,22 @@ function drawSprite(
   const screen = camera.worldToScreen(wx - halfW, bottom - item.spriteHeight * (item.scaleY ?? 1));
   const end = camera.worldToScreen(wx + halfW, bottom);
   const region = sheet.getRegion(item.frameCol, item.frameRow);
-  const dx = Math.floor(screen.sx);
-  const dy = Math.floor(screen.sy);
+  const subpixel = camera.worldRaster && item.subpixel && ctx.drawSubpixelImage;
   // Snap shared edges, not an origin plus a fractional size. Otherwise adjoining
   // pieces (forest repeats, facades) leave gaps or overlap at non-integral zoom.
-  const destW = Math.floor(end.sx) - dx;
-  const destH = Math.floor(end.sy) - dy;
+  // Quantize actor dimensions directly, then pin the foot anchor. Subtracting
+  // projected edges can change half-pixel ties through floating-point cancellation.
+  const destW = subpixel
+    ? Math.max(1, Math.round(item.spriteWidth * camera.scale))
+    : Math.floor(end.sx) - Math.floor(screen.sx);
+  const destH = subpixel
+    ? Math.max(1, Math.round(item.spriteHeight * (item.scaleY ?? 1) * camera.scale))
+    : Math.floor(end.sy) - Math.floor(screen.sy);
+  const dx = subpixel ? end.sx - halfW * camera.scale - destW / 2 : Math.floor(screen.sx);
+  const dy = subpixel ? end.sy - destH : Math.floor(screen.sy);
+  const drawImage =
+    (subpixel ? ctx.drawSubpixelImage : camera.worldRaster ? ctx.drawStableImage : undefined) ??
+    ctx.drawImage;
 
   ctx.save();
   if (item.alpha !== undefined) {
@@ -236,7 +248,8 @@ function drawSprite(
 
   if (item.flipX) {
     ctx.scale(-1, 1);
-    ctx.drawImage(
+    drawImage.call(
+      ctx,
       sheet.image,
       region.x,
       region.y,
@@ -248,7 +261,8 @@ function drawSprite(
       destH,
     );
   } else {
-    ctx.drawImage(
+    drawImage.call(
+      ctx,
       sheet.image,
       region.x,
       region.y,
@@ -299,42 +313,56 @@ function drawElevation(
   const tileSx = Math.round(screen.sx);
   const tileSy = Math.round(screen.sy);
   const cliffH = item.height * ELEVATION_PX * camera.scale;
+  const end = camera.worldToScreen(item.wx + TILE_SIZE, item.wy + TILE_SIZE);
+  const raised = camera.worldToScreen(item.wx, item.wy - item.height * ELEVATION_PX);
+  const w = camera.worldRaster ? Math.round(end.sx) - tileSx : tileScreenSize;
+  const surfaceY = camera.worldRaster ? Math.round(raised.sy) : tileSy - cliffH;
+  const surfaceH = camera.worldRaster
+    ? Math.round(raised.sy + tileScreenSize) - surfaceY
+    : tileScreenSize;
+  const cliffY = camera.worldRaster
+    ? Math.round(raised.sy + tileScreenSize)
+    : tileSy + tileScreenSize - cliffH;
+  const faceH = camera.worldRaster ? Math.round(end.sy) - cliffY : cliffH;
+  const drawImage = (camera.worldRaster ? ctx.drawStableImage : undefined) ?? ctx.drawImage;
 
   if (item.phase === "surface") {
     // Elevated tile shifted up
-    ctx.drawImage(
+    drawImage.call(
+      ctx,
       image,
       item.srcX,
       item.srcY,
       TILE_SIZE,
       TILE_SIZE,
       tileSx,
-      tileSy - cliffH,
-      tileScreenSize,
-      tileScreenSize,
+      surfaceY,
+      w,
+      surfaceH,
     );
     // Subtle darken on elevated surface so it reads as raised
     ctx.globalAlpha = 0.12;
     ctx.fillStyle = "#000";
-    ctx.fillRect(tileSx, tileSy - cliffH, tileScreenSize, tileScreenSize);
+    ctx.fillRect(tileSx, surfaceY, w, surfaceH);
     ctx.globalAlpha = 1;
   } else {
     // Cliff face: stretch bottom 1px row downward
-    ctx.drawImage(
+    drawImage.call(
+      ctx,
       image,
       item.srcX,
       item.srcY + TILE_SIZE - 1,
       TILE_SIZE,
       1,
       tileSx,
-      tileSy + tileScreenSize - cliffH,
-      tileScreenSize,
-      cliffH,
+      cliffY,
+      w,
+      faceH,
     );
     // Darken the cliff face
     ctx.globalAlpha = 0.35;
     ctx.fillStyle = "#000";
-    ctx.fillRect(tileSx, tileSy + tileScreenSize - cliffH, tileScreenSize, cliffH);
+    ctx.fillRect(tileSx, cliffY, w, faceH);
     ctx.globalAlpha = 1;
   }
 }

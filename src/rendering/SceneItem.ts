@@ -40,6 +40,8 @@ export interface SpriteItem {
   emergencyForward?: number;
   emergencyHeading?: number;
   kind: "sprite";
+  /** Actor-owned image, including at rest; static adjoining prop pieces keep shared edges. */
+  subpixel?: boolean;
   sortKey: number;
   /** Interpolated world position (feet = bottom-center). */
   wx: number;

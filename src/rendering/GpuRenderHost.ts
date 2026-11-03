@@ -1,6 +1,7 @@
 import { createCanvasRenderHost } from "./CanvasRenderHost.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
 import type { RenderHost } from "./RenderHost.js";
+import { WorldRasterFrame } from "./WorldRasterFrame.js";
 
 /** The original canvas retains input and UI; the world canvas is a sibling below it. */
 export function createGpuRenderHost(
@@ -23,6 +24,9 @@ export function createGpuRenderHost(
     return createCanvasRenderHost(canvas);
   }
   renderer.meshes.setEnabled(options?.meshes ?? new URLSearchParams(location.search).has("meshes"));
+  renderer.worldRaster = true;
+  renderer.surface.enableWorldComposition();
+  const frame = new WorldRasterFrame();
   const uiContext = canvas.getContext("2d");
   if (!uiContext) {
     renderer.dispose();
@@ -72,6 +76,13 @@ export function createGpuRenderHost(
       uiContext.clearRect(0, 0, canvas.width, canvas.height);
       renderer.beginFrame();
     },
+    beginWorld(camera) {
+      frame.begin(camera);
+    },
+    endWorld() {
+      const offset = frame.end();
+      if (offset) renderer.surface.presentWorld(offset.x, offset.y);
+    },
     captureFrame(target) {
       if (disposed || renderer.surface.lost) throw Error("Graphics are unavailable for capture");
       renderer.surface.flush();
@@ -89,6 +100,7 @@ export function createGpuRenderHost(
     dispose() {
       if (disposed) return;
       disposed = true;
+      frame.end();
       observer.disconnect();
       world.removeEventListener("webglcontextlost", lost);
       world.removeEventListener("webglcontextrestored", restored);

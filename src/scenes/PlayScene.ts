@@ -590,9 +590,11 @@ export class PlayScene implements GameScene {
       const shown = view?.presentedPlayerEntity ?? gc.stateView.playerEntity;
       gc.tapMovement?.captureView(gc.camera, Math.max(0, (shown.wz ?? 0) - (shown.jumpZ ?? 0)));
 
+      gc.beginWorld?.();
       renderWorld(gc);
       const particleItems = this.particles.collectItems();
       renderEntities(gc, alpha, particleItems);
+      gc.endWorld?.();
       drawPlayerMarkers(gc, alpha);
       gc.chatHUD.render(gc.ctx);
       renderDebugOverlay(gc, alpha);
@@ -603,6 +605,7 @@ export class PlayScene implements GameScene {
         gc.touchButtons.draw(gc.ctx);
       }
     } finally {
+      gc.endWorld?.();
       gc.camera.restoreActual();
       view?.endPresentation();
     }

@@ -1,4 +1,5 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
+import { drawActorImage } from "./ActorRaster.js";
 import type { Camera } from "./Camera.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import type { SpriteItem } from "./SceneItem.js";
@@ -31,14 +32,17 @@ export function drawTransporterFallback(
   const screen = camera.worldToScreen(item.wx - size / 2, item.wy - item.zOffset - size / 2);
   ctx.save();
   ctx.globalAlpha = item.alpha ?? 1;
-  ctx.drawImage(
+  drawActorImage(
+    ctx,
+    camera,
+    item,
     sheet.image,
     col * size,
     item.mesh.transportRamp ? size : 0,
     size,
     size,
-    Math.floor(screen.sx),
-    Math.floor(screen.sy),
+    screen.sx,
+    screen.sy,
     size * camera.scale,
     size * camera.scale,
   );

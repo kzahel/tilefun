@@ -22,6 +22,18 @@ export type RasterSurface = Pick<
   | "fillStyle"
   | "imageSmoothingEnabled"
 > & {
+  drawStableImage?: NonNullable<RasterSurface["drawSubpixelImage"]>;
+  drawSubpixelImage?: (
+    image: CanvasImageSource,
+    sx: number,
+    sy: number,
+    sw: number,
+    sh: number,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+  ) => void;
   meshBody?: (camera: Camera, item: SpriteItem) => boolean;
   meshReady?: ReadonlySet<string>;
   pixelShadow?: (cx: number, cy: number, rx: number, ry: number) => void;

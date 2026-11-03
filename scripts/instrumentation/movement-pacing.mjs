@@ -64,7 +64,11 @@ try {
       const g = document.querySelector("#game").__game;
 
       window.__movementProbe = { rows: [], enabled: false };
-      let presented, camera, renderedDraw, terrainDraw;
+      let presented,
+        camera,
+        renderedDraw,
+        terrainDraw,
+        worldOffset = { x: 0, y: 0 };
       const collectTerrain = g.renderer.collectTerrain;
       g.renderer.collectTerrain = function (...args) {
         const draws = collectTerrain.apply(this, args);
@@ -72,6 +76,15 @@ try {
         return draws;
       };
       const surface = g.renderer.surface;
+      if (surface.presentWorld) {
+        const present = surface.presentWorld;
+        surface.presentWorld = function (x, y) {
+          const padX = (this.worldTarget.width - this.canvas.width) / 2;
+          const padY = (this.worldTarget.height - this.canvas.height) / 2;
+          worldOffset = { x: x - padX, y: y - padY };
+          return present.call(this, x, y);
+        };
+      }
       const drawImage = surface.drawImage;
       surface.drawImage = function (image, ...args) {
         const player = g.stateView.playerEntity;
@@ -112,6 +125,7 @@ try {
       callbacks.render = (alpha, time) => {
         const start = performance.now();
         renderedDraw = undefined;
+        worldOffset = { x: 0, y: 0 };
         render(alpha, time);
         if (!window.__movementProbe.enabled) return;
         const p = g.remoteView._predictor,
@@ -121,6 +135,18 @@ try {
           tx = g.camera.pixelSnap
             ? Math.round(g.camera.viewportWidth / 2 - camera.x * scale)
             : g.camera.viewportWidth / 2 - camera.x * scale;
+        if (renderedDraw)
+          renderedDraw = {
+            ...renderedDraw,
+            x: renderedDraw.x + worldOffset.x,
+            y: renderedDraw.y + worldOffset.y,
+          };
+        if (terrainDraw)
+          terrainDraw = {
+            ...terrainDraw,
+            x: terrainDraw.x + worldOffset.x,
+            y: terrainDraw.y + worldOffset.y,
+          };
         window.__movementProbe.rows.push({
           time,
           alpha,
@@ -130,6 +156,7 @@ try {
           camera,
           renderedDraw,
           terrainDraw,
+          worldOffset,
           raw: {
             x: player.position.wx,
             y: player.position.wy,

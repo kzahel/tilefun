@@ -55,6 +55,9 @@ export interface GameContext {
   readonly transport: IClientTransport;
   readonly spriteCatalog: SpriteCatalog;
   readonly renderer: RenderBackend;
+  /** Browser composition boundary; headless scene fixtures may omit graphics. */
+  beginWorld?(): void;
+  endWorld?(): void;
   readonly sceneFrame: SceneFrame;
   readonly audioManager: AudioManager;
 

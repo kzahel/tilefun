@@ -29,6 +29,8 @@ export interface TerrainDraw {
   y: number;
   width: number;
   height: number;
+  /** Extrude the last source texel beyond the true scaled extent; never stretch the image. */
+  edgePixels?: number;
 }
 
 /** Semantic batches, consumed in submission order. All storage is borrowed

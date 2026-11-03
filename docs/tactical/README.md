@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [215 Coherent world raster](215-coherent-world-raster.md) | Delivered: coherent scenery and fractional actors; 125 native/25 browser checks, Canvas/GPU/Chromebook pixel gates, build and streaming readiness; headless-shell limits recorded |
 | [214 World registration](214-world-registration.md) | Reproduced: 1px prop/terrain and stopped-player displacement on Canvas/GPU; independent raster placement and 213 coverage gap identified; shared-composition proof is provisional, runtime unchanged |
 | [213 Continuous camera projection](213-continuous-camera-projection.md) | Delivered: measured sprite/car wobble removed; 39 native/eight browser checks, pixel seam probes, build and streaming readiness pass; owner playtest next |
 | [212 Matched physics tick prediction](212-matched-physics-tick-prediction.md) | Delivered: steady walk/run/car pacing in two production sessions; 56 native/five Worker/P2P browser checks, build and streaming readiness pass; pixel-grid wobble separate |

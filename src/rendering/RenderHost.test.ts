@@ -83,6 +83,7 @@ it("preserves resources across resize, invalidates explicitly, and disposes with
 });
 
 it("connects Canvas recovery at composition and detaches listeners on disposal", () => {
+  vi.stubGlobal("OffscreenCanvas", Surface);
   const surface = new Surface();
   const host = createCanvasRenderHost(surface as unknown as HTMLCanvasElement);
   expect(host.uiContext).toBe(surface.ctx);

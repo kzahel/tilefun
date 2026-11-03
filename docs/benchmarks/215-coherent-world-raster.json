@@ -1,0 +1,1094 @@
+{
+  "version": 1,
+  "date": "2026-11-03",
+  "referenceRevision": "88f4ed60",
+  "implementation": "215 working renderer implementation; source committed with this record.",
+  "scope": "One padded world frame, one fractional present, actor screen-pixel filtering, stable sampling; no physics or prediction changes.",
+  "registration": {
+    "method": "Actual Canvas/GPU hosts and captures. Five zooms, two world regions, seven camera phases; two groups exercise indoor actors. Hostile atlas neighbor and crop across a 1024px texture page; UI marker stays fixed. Intensity centroids use 8-bit readbacks; acceptance 0.03px, color parity <=2 channels. The final fixture includes raised terrain and an odd-width actor to exercise half-pixel dimension ties.",
+    "local": {
+      "browser": "153.0.8010.12",
+      "groups": [
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": -1,
+          "zoom": 0.4,
+          "relativeRange": 0.010087255502185144,
+          "elevationRange": 0.007712045603454953,
+          "actorXRange": 0.00023399879307817173,
+          "actorYRange": 0.004088821015557187,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": true,
+          "cx": -1,
+          "zoom": 0.5,
+          "relativeRange": 0.009922064170439171,
+          "elevationRange": 0.00659674388299436,
+          "actorXRange": 0.003983605047437777,
+          "actorYRange": 0.004144791378848822,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": -1,
+          "zoom": 0.8,
+          "relativeRange": 0.010249916638741752,
+          "elevationRange": 0.006008810819736254,
+          "actorXRange": 0.00415691084805303,
+          "actorYRange": 0.004242017448405022,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": -1,
+          "zoom": 1,
+          "relativeRange": 0.008583916863074137,
+          "elevationRange": 0.011224184456295916,
+          "actorXRange": 0.004329974001507253,
+          "actorYRange": 0.004258700928915005,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": -1,
+          "zoom": 1.3,
+          "relativeRange": 0.010222063856929253,
+          "elevationRange": 0.014251777745471372,
+          "actorXRange": 0.004329004328951669,
+          "actorYRange": 0.004257455451920578,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.4,
+          "relativeRange": 0.010526315789491036,
+          "elevationRange": 0.007620247075976749,
+          "actorXRange": 0.00034180149498297396,
+          "actorYRange": 0.004150348530743031,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.5,
+          "relativeRange": 0.009922064170439171,
+          "elevationRange": 0.00659674388299436,
+          "actorXRange": 0.003983605047437777,
+          "actorYRange": 0.004144791378848822,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.8,
+          "relativeRange": 0.009970401624570968,
+          "elevationRange": 0.005717827346217064,
+          "actorXRange": 0.004157359241730774,
+          "actorYRange": 0.004300530657928903,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": 0,
+          "zoom": 1,
+          "relativeRange": 0.008583916863074137,
+          "elevationRange": 0.011224184456295916,
+          "actorXRange": 0.004329974001507253,
+          "actorYRange": 0.004258700928915005,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": 0,
+          "zoom": 1.3,
+          "relativeRange": 0.01012768536966746,
+          "elevationRange": 0.012348420395937865,
+          "actorXRange": 0.004294668821216874,
+          "actorYRange": 0.004257450538432295,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": -1,
+          "zoom": 0.4,
+          "relativeRange": 0.010087255502185144,
+          "elevationRange": 0.007712045603454953,
+          "actorXRange": 0.00011390853933335165,
+          "actorYRange": 0.00409497812012205,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": true,
+          "cx": -1,
+          "zoom": 0.5,
+          "relativeRange": 0.009954460323911007,
+          "elevationRange": 0.006510122689519449,
+          "actorXRange": 0.003983605047437777,
+          "actorYRange": 0.004144791378848822,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": -1,
+          "zoom": 0.8,
+          "relativeRange": 0.010249916638741752,
+          "elevationRange": 0.006008810819736254,
+          "actorXRange": 0.00415691084805303,
+          "actorYRange": 0.004242017448405022,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": -1,
+          "zoom": 1,
+          "relativeRange": 0.008583916863074137,
+          "elevationRange": 0.011224184456295916,
+          "actorXRange": 0.004419191919168952,
+          "actorYRange": 0.004281490288292389,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": -1,
+          "zoom": 1.3,
+          "relativeRange": 0.010222063856929253,
+          "elevationRange": 0.014251777745471372,
+          "actorXRange": 0.004294094232591306,
+          "actorYRange": 0.004275629976689288,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.4,
+          "relativeRange": 0.010526315789491036,
+          "elevationRange": 0.007620247075976749,
+          "actorXRange": 0.00034180149498297396,
+          "actorYRange": 0.004150348530743031,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.5,
+          "relativeRange": 0.009954460323911007,
+          "elevationRange": 0.006510122689519449,
+          "actorXRange": 0.003983605047437777,
+          "actorYRange": 0.004144791378848822,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.8,
+          "relativeRange": 0.009970401624570968,
+          "elevationRange": 0.005717827346217064,
+          "actorXRange": 0.004157359241730774,
+          "actorYRange": 0.004300530657928903,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": 0,
+          "zoom": 1,
+          "relativeRange": 0.008583916863074137,
+          "elevationRange": 0.011224184456295916,
+          "actorXRange": 0.004419191919168952,
+          "actorYRange": 0.004281490288292389,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": 0,
+          "zoom": 1.3,
+          "relativeRange": 0.01012768536966746,
+          "elevationRange": 0.012348420395937865,
+          "actorXRange": 0.004294668821216874,
+          "actorYRange": 0.004257450538432295,
+          "bleed": 0,
+          "actorParityError": 1
+        }
+      ],
+      "errors": []
+    },
+    "physicalChromebook": {
+      "browser": "150.0.7871.256",
+      "groups": [
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": -1,
+          "zoom": 0.4,
+          "relativeRange": 0.010087255502185144,
+          "elevationRange": 0.003777083558020422,
+          "actorXRange": 0.00033561686080929576,
+          "actorYRange": 0.00011084153356932802,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": true,
+          "cx": -1,
+          "zoom": 0.5,
+          "relativeRange": 0.009219900417861027,
+          "elevationRange": 0.006178972519705894,
+          "actorXRange": 0.003983605047437777,
+          "actorYRange": 0.00004797193832928315,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": -1,
+          "zoom": 0.8,
+          "relativeRange": 0.009677450335146887,
+          "elevationRange": 0.005325645400432677,
+          "actorXRange": 0.0042135628012260895,
+          "actorYRange": 0.004242017448405022,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": -1,
+          "zoom": 1,
+          "relativeRange": 0.01955940566864456,
+          "elevationRange": 0.011689886829685747,
+          "actorXRange": 0.004419191919168952,
+          "actorYRange": 0.004258705036704669,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": -1,
+          "zoom": 1.3,
+          "relativeRange": 0.010218230561832797,
+          "elevationRange": 0.014285590760550804,
+          "actorXRange": 0.004294094232591306,
+          "actorYRange": 0.004275629976689288,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.4,
+          "relativeRange": 0.010526315789491036,
+          "elevationRange": 0.004857822636779474,
+          "actorXRange": 0.00024020997057050408,
+          "actorYRange": 0.00011700220255761451,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.5,
+          "relativeRange": 0.009219900417861027,
+          "elevationRange": 0.006178972519705894,
+          "actorXRange": 0.003983605047437777,
+          "actorYRange": 0.00004797193832928315,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.8,
+          "relativeRange": 0.009970401624570968,
+          "elevationRange": 0.005741344149072347,
+          "actorXRange": 0.004157359241730774,
+          "actorYRange": 0.004329004329008512,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": 0,
+          "zoom": 1,
+          "relativeRange": 0.01955940566864456,
+          "elevationRange": 0.011689886829685747,
+          "actorXRange": 0.004419191919168952,
+          "actorYRange": 0.004258705036704669,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "canvas",
+          "interior": false,
+          "cx": 0,
+          "zoom": 1.3,
+          "relativeRange": 0.010222405967056147,
+          "elevationRange": 0.012562124018586474,
+          "actorXRange": 0.004329004328951669,
+          "actorYRange": 0.004257450538432295,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": -1,
+          "zoom": 0.4,
+          "relativeRange": 0.010087255502185144,
+          "elevationRange": 0.003777083558020422,
+          "actorXRange": 0.0023975902614665756,
+          "actorYRange": 0.0023897826976053693,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": true,
+          "cx": -1,
+          "zoom": 0.5,
+          "relativeRange": 0.007048095249444941,
+          "elevationRange": 0.004113306648775961,
+          "actorXRange": 0.005870227166781206,
+          "actorYRange": 0.00004797193832928315,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": -1,
+          "zoom": 0.8,
+          "relativeRange": 0.009677450335146887,
+          "elevationRange": 0.005325645400432677,
+          "actorXRange": 0.0042135628012260895,
+          "actorYRange": 0.004242017448405022,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": -1,
+          "zoom": 1,
+          "relativeRange": 0.01955940566864456,
+          "elevationRange": 0.011689886829685747,
+          "actorXRange": 0.00437506994035175,
+          "actorYRange": 0.004235915677327284,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": -1,
+          "zoom": 1.3,
+          "relativeRange": 0.010218230561832797,
+          "elevationRange": 0.014285590760550804,
+          "actorXRange": 0.004294094232591306,
+          "actorYRange": 0.004275629976689288,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.4,
+          "relativeRange": 0.010526315789491036,
+          "elevationRange": 0.004857822636779474,
+          "actorXRange": 0.0022902697450604137,
+          "actorYRange": 0.0023282047503130343,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.5,
+          "relativeRange": 0.007048095249444941,
+          "elevationRange": 0.004113306648775961,
+          "actorXRange": 0.005870227166781206,
+          "actorYRange": 0.00004797193832928315,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": 0,
+          "zoom": 0.8,
+          "relativeRange": 0.009970401624570968,
+          "elevationRange": 0.005741344149072347,
+          "actorXRange": 0.004157359241730774,
+          "actorYRange": 0.004329004329008512,
+          "bleed": 0,
+          "actorParityError": 0
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": 0,
+          "zoom": 1,
+          "relativeRange": 0.01955940566864456,
+          "elevationRange": 0.011689886829685747,
+          "actorXRange": 0.00437506994035175,
+          "actorYRange": 0.004235915677327284,
+          "bleed": 0,
+          "actorParityError": 1
+        },
+        {
+          "mode": "gpu",
+          "interior": false,
+          "cx": 0,
+          "zoom": 1.3,
+          "relativeRange": 0.010222405967056147,
+          "elevationRange": 0.012562124018586474,
+          "actorXRange": 0.004329004328951669,
+          "actorYRange": 0.004257450538432295,
+          "bleed": 0,
+          "actorParityError": 0
+        }
+      ],
+      "errors": []
+    }
+  },
+  "movement": {
+    "method": "Ordinary GPU/mesh Worker game. Actual presentWorld offsets are observed, not reconstructed. Stop qualification uses the maximal final suffix with exactly fixed displayed XY, excluding legitimate release/reconciliation travel. Steady stages discard 30 of 240 frames.",
+    "cases": [
+      {
+        "session": "production",
+        "stage": "walk",
+        "frames": 210,
+        "drawXRangePx": 0.008860614773084308,
+        "pageErrors": []
+      },
+      {
+        "session": "production",
+        "stage": "stop",
+        "frames": 223,
+        "stationaryFrom": 17,
+        "relativeTerrainRangePx": 0,
+        "drawXRangePx": 4.077609344478105,
+        "pageErrors": []
+      },
+      {
+        "session": "production",
+        "stage": "run",
+        "frames": 210,
+        "drawXRangePx": 0.016048501701334317,
+        "pageErrors": []
+      },
+      {
+        "session": "production",
+        "stage": "car",
+        "frames": 210,
+        "drawXRangePx": 0.0006285996146289108,
+        "pageErrors": []
+      },
+      {
+        "session": "production-repeat",
+        "stage": "walk",
+        "frames": 210,
+        "drawXRangePx": 0.011007466579371794,
+        "pageErrors": []
+      },
+      {
+        "session": "production-repeat",
+        "stage": "stop",
+        "frames": 222,
+        "stationaryFrom": 18,
+        "relativeTerrainRangePx": 0,
+        "drawXRangePx": 3.675229002707283,
+        "pageErrors": []
+      },
+      {
+        "session": "production-repeat",
+        "stage": "run",
+        "frames": 210,
+        "drawXRangePx": 0.016125530047474967,
+        "pageErrors": []
+      },
+      {
+        "session": "production-repeat",
+        "stage": "car",
+        "frames": 210,
+        "drawXRangePx": 0.0006741487777617294,
+        "pageErrors": []
+      }
+    ]
+  },
+  "performance": {
+    "method": "Dedicated physical ChromeOS browser, owned tabs/SSH forwards/isolated Vite origins. Before restores 88f4ed60 runtime modules through a pre-transform; both lanes retain the same shared physics and assets. Identical render timing hooks, no CPU throttle. Existing driver reference-legacy label is renamed before here. Balanced initial/repeat orders; intermediate and final delivery pairs remain separate. Final delivery source enables consistent sampling for all composed static images, including rescaled furniture. GPU timings are not isolated. This is a 960x640 lab, not a sustained all-scene/thermal guarantee.",
+    "initial": {
+      "browser": "150.0.7871.256",
+      "referenceRevision": "88f4ed60",
+      "warmupSeconds": 3,
+      "sampleSeconds": 6,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 4,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 800,
+          "height": 1200
+        },
+        "pixelRatio": 2
+      },
+      "cases": [
+        {
+          "trial": 0,
+          "population": 0,
+          "lane": "before",
+          "frames": {
+            "count": 364,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000291,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 364,
+            "meanMs": 3.8112637354777408,
+            "p95Ms": 5.5,
+            "p99Ms": 7.399999976158142
+          },
+          "worldTargetBytes": 0,
+          "uploads": 18,
+          "pageErrors": []
+        },
+        {
+          "trial": 0,
+          "population": 0,
+          "lane": "composed",
+          "frames": {
+            "count": 364,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000291,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 364,
+            "meanMs": 3.9425824183029134,
+            "p95Ms": 5.5,
+            "p99Ms": 6.699999928474426
+          },
+          "worldTargetBytes": 2483264,
+          "uploads": 16,
+          "pageErrors": []
+        },
+        {
+          "trial": 0,
+          "population": 96,
+          "lane": "before",
+          "frames": {
+            "count": 374,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000291,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 374,
+            "meanMs": 2.4000000026136794,
+            "p95Ms": 3.700000047683716,
+            "p99Ms": 4.699999928474426
+          },
+          "worldTargetBytes": 0,
+          "uploads": 23,
+          "pageErrors": []
+        },
+        {
+          "trial": 0,
+          "population": 96,
+          "lane": "composed",
+          "frames": {
+            "count": 374,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000291,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 374,
+            "meanMs": 2.9010695161666464,
+            "p95Ms": 4.899999976158142,
+            "p99Ms": 9.399999976158142
+          },
+          "worldTargetBytes": 2483264,
+          "uploads": 23,
+          "pageErrors": []
+        },
+        {
+          "trial": 1,
+          "population": 0,
+          "lane": "composed",
+          "frames": {
+            "count": 378,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 378,
+            "meanMs": 3.5595238070008617,
+            "p95Ms": 5.399999976158142,
+            "p99Ms": 7
+          },
+          "worldTargetBytes": 2483264,
+          "uploads": 17,
+          "pageErrors": []
+        },
+        {
+          "trial": 1,
+          "population": 0,
+          "lane": "before",
+          "frames": {
+            "count": 372,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 372,
+            "meanMs": 3.421236555742961,
+            "p95Ms": 4.899999976158142,
+            "p99Ms": 6.200000047683716
+          },
+          "worldTargetBytes": 0,
+          "uploads": 17,
+          "pageErrors": []
+        },
+        {
+          "trial": 1,
+          "population": 96,
+          "lane": "composed",
+          "frames": {
+            "count": 354,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 33.399999999999636,
+            "max": 50,
+            "over25ms": 7,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 354,
+            "meanMs": 4.399717513787544,
+            "p95Ms": 11.300000071525574,
+            "p99Ms": 12.900000095367432
+          },
+          "worldTargetBytes": 2483264,
+          "uploads": 24,
+          "pageErrors": []
+        },
+        {
+          "trial": 1,
+          "population": 96,
+          "lane": "before",
+          "frames": {
+            "count": 367,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000291,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 367,
+            "meanMs": 2.4594005476226597,
+            "p95Ms": 3.799999952316284,
+            "p99Ms": 5.200000047683716
+          },
+          "worldTargetBytes": 0,
+          "uploads": 22,
+          "pageErrors": []
+        }
+      ]
+    },
+    "crowdedRepeat": {
+      "browser": "150.0.7871.256",
+      "referenceRevision": "88f4ed60",
+      "warmupSeconds": 4,
+      "sampleSeconds": 8,
+      "device": {
+        "renderer": "gpu",
+        "userAgent": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+        "cores": 4,
+        "memoryGiB": 8,
+        "viewport": {
+          "width": 800,
+          "height": 1200
+        },
+        "pixelRatio": 2
+      },
+      "cases": [
+        {
+          "trial": 0,
+          "population": 96,
+          "lane": "before",
+          "frames": {
+            "count": 483,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000291,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 483,
+            "meanMs": 2.3855072420329533,
+            "p95Ms": 3.600000023841858,
+            "p99Ms": 4
+          },
+          "worldTargetBytes": 0,
+          "uploads": 20,
+          "pageErrors": []
+        },
+        {
+          "trial": 0,
+          "population": 96,
+          "lane": "composed",
+          "frames": {
+            "count": 492,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000291,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 492,
+            "meanMs": 2.823170730738136,
+            "p95Ms": 4.399999976158142,
+            "p99Ms": 5.300000071525574
+          },
+          "worldTargetBytes": 2483264,
+          "uploads": 22,
+          "pageErrors": []
+        },
+        {
+          "trial": 1,
+          "population": 96,
+          "lane": "composed",
+          "frames": {
+            "count": 486,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000291,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 486,
+            "meanMs": 2.654938268318098,
+            "p95Ms": 3.799999952316284,
+            "p99Ms": 4.900000095367432
+          },
+          "worldTargetBytes": 2483264,
+          "uploads": 19,
+          "pageErrors": []
+        },
+        {
+          "trial": 1,
+          "population": 96,
+          "lane": "before",
+          "frames": {
+            "count": 484,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 484,
+            "meanMs": 3.2652892576268884,
+            "p95Ms": 4,
+            "p99Ms": 4.399999976158142
+          },
+          "worldTargetBytes": 0,
+          "uploads": 22,
+          "pageErrors": []
+        }
+      ]
+    },
+    "limit": "Initial composed crowded trial 1 has seven >25ms intervals, p99 33.4ms/max50ms with a simultaneous Worker slowdown. Both balanced crowded repeats and their controls have none; retain the outlier, do not infer a constant renderer cost or an all-device guarantee. The final normal-scale pair has seven slow intervals in before and one in composed; keep both, with no speedup/constant-overhead claim. The final delivery pair records 2.39ms before versus 2.67ms composed render mean, with 16.8ms frame p99 and zero >25ms intervals in both lanes.",
+    "intermediateNormalScalePair": {
+      "browser": "150.0.7871.256",
+      "warmupSeconds": 4,
+      "sampleSeconds": 8,
+      "cases": [
+        {
+          "population": 96,
+          "lane": "before",
+          "frames": {
+            "count": 474,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 33.30000000000291,
+            "max": 50.099999999998545,
+            "over25ms": 7,
+            "over50ms": 1
+          },
+          "renderCpu": {
+            "count": 474,
+            "meanMs": 3.316244726694083,
+            "p95Ms": 4.899999976158142
+          },
+          "worldTargetBytes": 0,
+          "pageErrors": []
+        },
+        {
+          "population": 96,
+          "lane": "composed",
+          "frames": {
+            "count": 489,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 33.29999999999927,
+            "over25ms": 1,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 489,
+            "meanMs": 2.6550102204632906,
+            "p95Ms": 4
+          },
+          "worldTargetBytes": 2483264,
+          "pageErrors": []
+        }
+      ]
+    },
+    "deliveryPair": {
+      "browser": "150.0.7871.256",
+      "warmupSeconds": 4,
+      "sampleSeconds": 8,
+      "cases": [
+        {
+          "population": 96,
+          "lane": "before",
+          "frames": {
+            "count": 482,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 482,
+            "meanMs": 2.389626558143568,
+            "p95Ms": 3.799999952316284
+          },
+          "worldTargetBytes": 0,
+          "pageErrors": []
+        },
+        {
+          "population": 96,
+          "lane": "composed",
+          "frames": {
+            "count": 482,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000291,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "renderCpu": {
+            "count": 482,
+            "meanMs": 2.6690871369294604,
+            "p95Ms": 4.100000023841858
+          },
+          "worldTargetBytes": 2483264,
+          "pageErrors": []
+        }
+      ]
+    }
+  },
+  "streaming": {
+    "renderer": "gpu",
+    "meshes": true,
+    "cpuRate": 4,
+    "fixtures": [
+      {
+        "version": "current",
+        "failures": [],
+        "samples": [
+          {
+            "name": "cold",
+            "frames": {
+              "count": 120,
+              "p50": 16.699999999999818,
+              "p95": 16.799999999999272,
+              "p99": 16.799999999999272,
+              "max": 16.800000000000182
+            },
+            "finalIncomplete": 0,
+            "missingDataFrames": 0,
+            "staleCacheFrames": 0
+          },
+          {
+            "name": "standing",
+            "frames": {
+              "count": 120,
+              "p50": 16.69999999999891,
+              "p95": 16.700000000000728,
+              "p99": 16.80000000000109,
+              "max": 16.80000000000109
+            },
+            "finalIncomplete": 0,
+            "missingDataFrames": 0,
+            "staleCacheFrames": 0
+          },
+          {
+            "name": "walk",
+            "frames": {
+              "count": 180,
+              "p50": 16.69999999999891,
+              "p95": 16.799999999999272,
+              "p99": 16.80000000000109,
+              "max": 16.80000000000109
+            },
+            "finalIncomplete": 0,
+            "missingDataFrames": 0,
+            "staleCacheFrames": 0
+          },
+          {
+            "name": "sprint",
+            "frames": {
+              "count": 300,
+              "p50": 16.69999999999891,
+              "p95": 16.700000000000728,
+              "p99": 16.80000000000291,
+              "max": 16.80000000000291
+            },
+            "finalIncomplete": 0,
+            "missingDataFrames": 0,
+            "staleCacheFrames": 0
+          },
+          {
+            "name": "reverse",
+            "frames": {
+              "count": 300,
+              "p50": 16.69999999999709,
+              "p95": 16.700000000000728,
+              "p99": 16.80000000000291,
+              "max": 16.80000000000291
+            },
+            "finalIncomplete": 0,
+            "missingDataFrames": 0,
+            "staleCacheFrames": 0
+          },
+          {
+            "name": "zoom-out",
+            "frames": {
+              "count": 180,
+              "p50": 16.69999999999709,
+              "p95": 16.799999999999272,
+              "p99": 16.80000000000291,
+              "max": 16.80000000000291
+            },
+            "finalIncomplete": 0,
+            "missingDataFrames": 0,
+            "staleCacheFrames": 0
+          }
+        ]
+      }
+    ]
+  },
+  "headlessDiagnostic": {
+    "scope": "Earlier headless-shell diagnostic before final odd-width/raised-terrain additions. Not the primary pixel-qualification browser. Strict full-Chromium thresholds were not widened.",
+    "browser": "153.0.8010.12",
+    "maxStaticRangePx": 0.018069814959943642,
+    "maxActorRangePx": 0.06742701663341677,
+    "maxActorChannelParityError": 30,
+    "indoorInput": "Production headless-shell stalls coalesced 75ms down/up pulses. JS draw submission measured around 0.5ms; external presentation cost not isolated. Full Chromium before/after controls and final production case pass without movement/time assertion changes."
+  },
+  "validation": {
+    "native": {
+      "files": 9,
+      "passed": 125
+    },
+    "typescriptProjects": 3,
+    "productionBrowser": {
+      "passed": 25,
+      "browser": "bundled full Chromium",
+      "scope": "GPU renderer suite, ordinary Worker car/road traffic and butcher indoor walk/reload"
+    },
+    "build": true,
+    "catalog": true,
+    "workshopCandidates": 2120,
+    "streamingReadiness": true
+  }
+}

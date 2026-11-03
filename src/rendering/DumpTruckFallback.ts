@@ -1,4 +1,5 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
+import { drawActorImage } from "./ActorRaster.js";
 import type { Camera } from "./Camera.js";
 import { bedFramePoint, bedGateAngle, DUMP_BED } from "./DumpBedPose.js";
 import triangles from "./dump-truck-v2-fallback.json" with { type: "json" };
@@ -174,10 +175,17 @@ export function drawDumpTruckFallback(
   const anchor = camera.worldToScreen(item.wx, item.wy - item.zOffset);
   ctx.save();
   ctx.globalAlpha = item.alpha ?? 1;
-  ctx.drawImage(
+  drawActorImage(
+    ctx,
+    camera,
+    item,
     output,
-    Math.floor(anchor.sx - half * camera.scale),
-    Math.floor(anchor.sy - half * camera.scale),
+    0,
+    0,
+    size,
+    size,
+    anchor.sx - half * camera.scale,
+    anchor.sy - half * camera.scale,
     size * camera.scale,
     size * camera.scale,
   );

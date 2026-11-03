@@ -285,6 +285,7 @@ export function collectScene(
           }
         : {}),
       kind: "sprite",
+      subpixel: true,
       sortKey,
       wx: pos.wx,
       wy: pos.wy,

@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { type RasterSurface, rasterRevision } from "./RasterSurface.js";
+import { SubpixelImages } from "./SubpixelImages.js";
+import { WORLD_RASTER_PAD } from "./WorldRasterFrame.js";
 
 type Rect = { x: number; y: number; width: number; height: number };
 type State = {
@@ -10,6 +12,7 @@ type State = {
   e: number;
   f: number;
   globalAlpha: number;
+  imageSmoothingEnabled: boolean;
   fillStyle: string | CanvasGradient | CanvasPattern;
   clips: Rect[] | null;
 };
@@ -26,7 +29,7 @@ interface Page {
 }
 const PAGE = 1024;
 const QUADS = 2048;
-const STRIDE = 9;
+const STRIDE = 13;
 const TEXTURES = 8;
 const CORNERS = [0, 1, 2, 0, 2, 3];
 const WHITE = [1, 1, 1, 1];
@@ -52,12 +55,30 @@ export class GpuRasterSurface implements RasterSurface {
   private readonly material: THREE.ShaderMaterial;
   private readonly mesh: THREE.Mesh;
   private readonly white: THREE.DataTexture;
+  private worldTarget?: THREE.WebGLRenderTarget;
+  private readonly presentScene = new THREE.Scene();
+  private readonly presentGeometry = new THREE.PlaneGeometry(2, 2);
+  private readonly presentMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      image: { value: null },
+      viewport: { value: new THREE.Vector2() },
+      offset: { value: new THREE.Vector2() },
+      targetSize: { value: new THREE.Vector2() },
+    },
+    vertexShader: "varying vec2 uv0; void main(){uv0=uv;gl_Position=vec4(position.xy,0.,1.);}",
+    fragmentShader: `uniform sampler2D image; uniform vec2 viewport,offset,targetSize; varying vec2 uv0;
+      void main(){gl_FragColor=texture2D(image,(uv0*viewport+offset)/targetSize);}`,
+    depthTest: false,
+    depthWrite: false,
+    blending: THREE.NoBlending,
+  });
   private texture: THREE.Texture | null = null;
   private textureSlot = 0;
   private readonly batchTextures: THREE.Texture[] = [];
   private count = 0;
   private frame = 0;
   private readonly pages = new Map<CanvasImageSource, Page[]>();
+  private readonly actorCrops = new SubpixelImages();
   // Decoded images cannot change asynchronously during synchronous submission.
   // Read their DOM dimensions once per frame, retaining only weak source keys.
   // Dynamic canvas sources continue through size() on every call.
@@ -97,6 +118,8 @@ export class GpuRasterSurface implements RasterSurface {
     textures: 0,
     recoveries: 0,
     batchTextureLimit: 1,
+    worldTargetBytes: 0,
+    worldComposites: 0,
   };
 
   constructor(canvas: HTMLCanvasElement) {
@@ -113,6 +136,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.white = new THREE.DataTexture(new Uint8Array([255, 255, 255, 255]), 1, 1);
     this.white.needsUpdate = true;
     const uniforms: Record<string, THREE.IUniform> = {};
+    uniforms.stableRaster = { value: false };
     for (let i = 0; i < TEXTURES; i++) {
       uniforms[`image${i || ""}`] = { value: this.white };
       uniforms[`encode${i || ""}`] = { value: false };
@@ -120,10 +144,10 @@ export class GpuRasterSurface implements RasterSurface {
     // Raw sampled bytes are already display sRGB; no lighting or tone mapping.
     this.material = new THREE.ShaderMaterial({
       uniforms,
-      vertexShader: `attribute vec2 point; attribute vec2 tex; attribute vec4 tint;
+      vertexShader: `attribute vec2 point; attribute vec2 tex; attribute vec4 tint; attribute vec4 bounds;
         attribute float imageSlot; varying float slot0;
-        varying vec2 uv0; varying vec4 color0;
-        void main(){slot0=imageSlot;uv0=tex;color0=tint;gl_Position=projectionMatrix*vec4(point,0.,1.);}`,
+        varying vec2 uv0; varying vec4 color0; varying vec4 bounds0;
+        void main(){slot0=imageSlot;uv0=tex;color0=tint;bounds0=bounds;gl_Position=projectionMatrix*vec4(point,0.,1.);}`,
       fragmentShader: rasterFragmentShader(1),
       side: THREE.DoubleSide,
       transparent: true,
@@ -148,9 +172,13 @@ export class GpuRasterSurface implements RasterSurface {
       "imageSlot",
       new THREE.InterleavedBufferAttribute(this.buffer, 1, 8),
     );
+    this.geometry.setAttribute("bounds", new THREE.InterleavedBufferAttribute(this.buffer, 4, 9));
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.frustumCulled = false;
     this.scene.add(this.mesh);
+    const present = new THREE.Mesh(this.presentGeometry, this.presentMaterial);
+    present.frustumCulled = false;
+    this.presentScene.add(present);
     this.scratch.width = this.scratch.height = 1;
     const ctx = this.scratch.getContext("2d", { willReadFrequently: true });
     if (!ctx) throw Error("Color parser unavailable");
@@ -161,9 +189,38 @@ export class GpuRasterSurface implements RasterSurface {
   resize(width: number, height: number) {
     this.flush();
     this.renderer.setSize(width, height, false);
-    this.camera.right = width;
-    this.camera.bottom = height;
+    const pad = this.worldTarget ? WORLD_RASTER_PAD * 2 : 0;
+    this.worldTarget?.setSize(width + pad, height + pad);
+    this.stats.worldTargetBytes = this.worldTarget ? (width + pad) * (height + pad) * 4 : 0;
+    this.camera.right = width + pad;
+    this.camera.bottom = height + pad;
     this.camera.updateProjectionMatrix();
+  }
+  enableWorldComposition() {
+    const stable = this.material.uniforms.stableRaster;
+    if (stable) stable.value = true;
+    this.worldTarget = new THREE.WebGLRenderTarget(1, 1, {
+      depthBuffer: false,
+      minFilter: THREE.LinearFilter,
+      magFilter: THREE.LinearFilter,
+    });
+    this.resize(this.canvas.width, this.canvas.height);
+  }
+  presentWorld(x: number, y: number) {
+    if (!this.worldTarget || this.lost || this.disposed) return;
+    this.flush();
+    const u = this.presentMaterial.uniforms;
+    if (!u.image || !u.viewport || !u.targetSize || !u.offset)
+      throw Error("World composite uniforms missing");
+    u.image.value = this.worldTarget.texture;
+    u.viewport.value.set(this.canvas.width, this.canvas.height);
+    u.targetSize.value.set(this.worldTarget.width, this.worldTarget.height);
+    u.offset.value.set(WORLD_RASTER_PAD - x, WORLD_RASTER_PAD + y);
+    this.renderer.setRenderTarget(null);
+    this.renderer.setScissorTest(false);
+    this.renderer.render(this.presentScene, this.camera);
+    this.stats.drawCalls++;
+    this.stats.worldComposites++;
   }
   get transformScale() {
     return Math.hypot(this.a, this.b);
@@ -190,6 +247,11 @@ export class GpuRasterSurface implements RasterSurface {
     this.texture = null;
     this.batchTextures.length = 0;
     this.renderer.setScissorTest(false);
+    if (this.worldTarget) {
+      this.renderer.setRenderTarget(null);
+      this.renderer.clear();
+    }
+    this.renderer.setRenderTarget(this.worldTarget ?? null);
     this.renderer.clear();
     // LRU cache has both an age limit and a byte budget. Current-frame textures
     // are never retired mid-command; excess residency is collected next frame.
@@ -231,6 +293,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.pages.clear();
     this.imageSizes = new WeakMap();
     this.ellipses.clear();
+    this.actorCrops.clear();
     this.stats.textureBytes = 0;
     this.stats.textures = 0;
   }
@@ -245,6 +308,9 @@ export class GpuRasterSurface implements RasterSurface {
     this.geometry.dispose();
     this.material.dispose();
     this.white.dispose();
+    this.worldTarget?.dispose();
+    this.presentGeometry.dispose();
+    this.presentMaterial.dispose();
     this.renderer.dispose();
     this.renderer.forceContextLoss();
     this.disposed = true;
@@ -262,6 +328,7 @@ export class GpuRasterSurface implements RasterSurface {
     state.e = this.e;
     state.f = this.f;
     state.globalAlpha = this.globalAlpha;
+    state.imageSmoothingEnabled = this.imageSmoothingEnabled;
     state.fillStyle = this.fillStyle;
     state.clips = this.clips;
     this.depth++;
@@ -277,6 +344,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.e = s.e;
     this.f = s.f;
     this.globalAlpha = s.globalAlpha;
+    this.imageSmoothingEnabled = s.imageSmoothingEnabled;
     this.fillStyle = s.fillStyle;
     this.clips = s.clips;
   }
@@ -339,11 +407,13 @@ export class GpuRasterSurface implements RasterSurface {
       cy = this.d * y + this.f,
       sx = Math.abs(this.a) * rx,
       sy = Math.abs(this.d) * ry;
-    const left = Math.floor(cx - sx) - 1,
-      top = Math.floor(cy - sy) - 1;
-    const width = Math.ceil(cx + sx) - left + 1,
-      height = Math.ceil(cy + sy) - top + 1;
-    const key = `${cx - left}:${cy - top}:${sx}:${sy}:${String(this.fillStyle)}`;
+    const left = this.imageSmoothingEnabled ? cx - sx - 1 : Math.floor(cx - sx) - 1,
+      top = this.imageSmoothingEnabled ? cy - sy - 1 : Math.floor(cy - sy) - 1;
+    const width = Math.ceil(this.imageSmoothingEnabled ? sx * 2 + 2 : cx + sx - left + 1),
+      height = Math.ceil(this.imageSmoothingEnabled ? sy * 2 + 2 : cy + sy - top + 1);
+    const localX = this.imageSmoothingEnabled ? sx + 1 : cx - left,
+      localY = this.imageSmoothingEnabled ? sy + 1 : cy - top;
+    const key = `${localX}:${localY}:${sx}:${sy}:${String(this.fillStyle)}`;
     let image = this.ellipses.get(key);
     if (!image) {
       if (this.ellipses.size >= 128) this.ellipses.delete(this.ellipses.keys().next().value ?? "");
@@ -354,7 +424,7 @@ export class GpuRasterSurface implements RasterSurface {
       if (!ctx) throw Error("Ellipse canvas unavailable");
       ctx.fillStyle = this.fillStyle;
       ctx.beginPath();
-      ctx.ellipse(cx - left, cy - top, sx, sy, 0, 0, Math.PI * 2);
+      ctx.ellipse(localX, localY, sx, sy, 0, 0, Math.PI * 2);
       ctx.fill();
       this.ellipses.set(key, image);
     }
@@ -507,6 +577,42 @@ export class GpuRasterSurface implements RasterSurface {
   drawTexture(texture: THREE.Texture, x: number, y: number, w: number, h: number) {
     this.quad(texture, x, y, w, h, 0, 1, 1, -1, WHITE);
   }
+  drawSubpixelImage(
+    image: CanvasImageSource,
+    sx: number,
+    sy: number,
+    sw: number,
+    sh: number,
+    x: number,
+    y: number,
+    width: number,
+    height: number,
+  ) {
+    // Page seams are not sprite edges: filtering two translucent page halves
+    // with source-over would darken their overlap. Isolate crossing atlas crops.
+    if (
+      Math.floor(sx / PAGE) !== Math.floor((sx + sw - 1) / PAGE) ||
+      Math.floor(sy / PAGE) !== Math.floor((sy + sh - 1) / PAGE)
+    ) {
+      image = this.actorCrops.get(image, sx, sy, sw, sh, sw, sh);
+      sx = 1;
+      sy = 1;
+    }
+    const smooth = this.imageSmoothingEnabled;
+    this.imageSmoothingEnabled = true;
+    this.drawImage(
+      image,
+      sx,
+      sy,
+      sw,
+      sh,
+      x,
+      y,
+      Math.max(1, Math.round(width)),
+      Math.max(1, Math.round(height)),
+    );
+    this.imageSmoothingEnabled = smooth;
+  }
   private quad(
     texture: THREE.Texture,
     x: number,
@@ -520,6 +626,24 @@ export class GpuRasterSurface implements RasterSurface {
     color: readonly number[],
   ) {
     if (this.lost || this.disposed) return;
+    const minU = Math.min(u, u + uw),
+      minV = Math.min(v, v + vh),
+      maxU = Math.max(u, u + uw),
+      maxV = Math.max(v, v + vh);
+    const smooth = this.imageSmoothingEnabled && texture !== this.white;
+    if (smooth) {
+      // One output pixel of transparent guard coverage, independent of native texel size.
+      const du = uw / w,
+        dv = vh / h;
+      x -= 1;
+      y -= 1;
+      w += 2;
+      h += 2;
+      u -= du;
+      v -= dv;
+      uw += du * 2;
+      vh += dv * 2;
+    }
     if (this.count + 4 > QUADS * 4) this.flush();
     let slot = this.texture === texture ? this.textureSlot : this.batchTextures.indexOf(texture);
     if (slot < 0) {
@@ -543,7 +667,11 @@ export class GpuRasterSurface implements RasterSurface {
       this.vertices[i + 5] = color[1] ?? 1;
       this.vertices[i + 6] = color[2] ?? 1;
       this.vertices[i + 7] = (color[3] ?? 1) * this.globalAlpha;
-      this.vertices[i + 8] = slot;
+      this.vertices[i + 8] = slot + (smooth ? 0.25 : 0);
+      this.vertices[i + 9] = minU;
+      this.vertices[i + 10] = minV;
+      this.vertices[i + 11] = maxU;
+      this.vertices[i + 12] = maxV;
     }
   }
   flush() {
@@ -570,7 +698,12 @@ export class GpuRasterSurface implements RasterSurface {
     if (this.clips) {
       this.renderer.setScissorTest(true);
       for (const r of this.clips) {
-        this.renderer.setScissor(r.x, this.canvas.height - r.y - r.height, r.width, r.height);
+        this.renderer.setScissor(
+          r.x,
+          (this.worldTarget?.height ?? this.canvas.height) - r.y - r.height,
+          r.width,
+          r.height,
+        );
         this.renderer.render(this.scene, this.camera);
         this.stats.drawCalls++;
       }
@@ -589,9 +722,22 @@ export class GpuRasterSurface implements RasterSurface {
 function rasterFragmentShader(limit: number) {
   const encode =
     "c.rgb=mix(12.92*c.rgb,1.055*pow(c.rgb,vec3(1./2.4))-.055,step(vec3(.0031308),c.rgb));";
-  if (limit === 1)
-    return `uniform sampler2D image; uniform bool encode; varying vec2 uv0; varying vec4 color0;
-    void main(){vec4 c=texture2D(image,uv0)*color0;if(encode)${encode}gl_FragColor=vec4(c.rgb*c.a,c.a);}`;
+  const filter = `varying vec4 bounds0; uniform bool stableRaster;
+    vec4 nearestSample(sampler2D image,vec2 uv){
+      vec2 dim=vec2(textureSize(image,0));uv=(floor(uv*dim+.0001)+.5)/dim;
+      return texture2D(image,uv);
+    }
+    vec4 pointSample(sampler2D image, vec2 uv, bool e){
+      if(any(lessThan(uv,bounds0.xy))||any(greaterThanEqual(uv,bounds0.zw)))return vec4(0.);
+      vec4 c=nearestSample(image,uv);if(e){${encode}}return vec4(c.rgb*c.a,c.a);
+    }
+    vec4 sampleImage(sampler2D image,bool e){
+      vec2 stepUV=max(fwidth(uv0),vec2(.00000001));
+      vec2 p=(uv0-bounds0.xy)/stepUV-.5;
+      vec2 f=fract(p), lo=bounds0.xy+(floor(p)+.5)*stepUV;
+      return mix(mix(pointSample(image,lo,e),pointSample(image,lo+vec2(stepUV.x,0.),e),f.x),
+        mix(pointSample(image,lo+vec2(0.,stepUV.y),e),pointSample(image,lo+stepUV,e),f.x),f.y);
+    }`;
   const declarations = Array.from(
     { length: limit },
     (_, i) => `uniform sampler2D image${i || ""}; uniform bool encode${i || ""};`,
@@ -599,10 +745,22 @@ function rasterFragmentShader(limit: number) {
   const branches = Array.from(
     { length: limit },
     (_, i) =>
-      `${i ? "else " : ""}${i < limit - 1 ? `if(slot0<${i + 0.5})` : ""}{c=texture2D(image${i || ""},uv0)*color0;e=encode${i || ""};}`,
+      `${i ? "else " : ""}${i < limit - 1 ? `if(slot0<${i + 0.5})` : ""}{c=sampleImage(image${i || ""},encode${i || ""});}`,
+  ).join("\n");
+  // Keep the common opaque/static path as direct sampling, outside the actor
+  // filtering helper. This also avoids sampler-function cost on software GPUs.
+  const rawBranches = Array.from(
+    { length: limit },
+    (_, i) =>
+      `${i ? "else " : ""}${i < limit - 1 ? `if(slot0<${i + 0.5})` : ""}{
+      vec2 uv=uv0;if(stableRaster){vec2 dim=vec2(textureSize(image${i || ""},0));uv=(floor(uv*dim+.0001)+.5)/dim;}
+      c=texture2D(image${i || ""},uv);e=encode${i || ""};}`,
   ).join("\n");
   return `${declarations} varying vec2 uv0; varying vec4 color0; varying float slot0;
-    void main(){vec4 c;bool e;${branches}if(e)${encode}gl_FragColor=vec4(c.rgb*c.a,c.a);}`;
+    ${filter}
+    void main(){vec4 c;if(fract(slot0)<.1){bool e;${rawBranches}if(e){${encode}}
+      c*=color0;gl_FragColor=vec4(c.rgb*c.a,c.a);return;}
+      ${branches}gl_FragColor=vec4(c.rgb*color0.rgb*color0.a,c.a*color0.a);}`;
 }
 
 /** Rectangle union, partitioned into disjoint strips so translucent pixels blend once. */

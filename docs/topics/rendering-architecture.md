@@ -1,13 +1,13 @@
 # Rendering architecture and backend separation
 
-[214](../tactical/214-world-registration.md) reproduces a regression from 213:
-continuous projection plus independent terrain/sprite raster rounding lets stationary
-props and the stopped player shift by 1px relative to terrain as the camera settles.
-Both Canvas/GPU reproduce it; matching floor functions alone still fails. The prior
-static rigidity check retained snapped projection and missed the new default.
-The current runtime remains continuous. Next prove coherent world composition and
-fractional moving-actor placement together, with explicit sampling and device-cost
-qualification; the stationary-only prototype is not a delivered repair.
+[215](../tactical/215-coherent-world-raster.md) repairs the registration regression
+reproduced in [214](../tactical/214-world-registration.md). Production hosts collect
+and render the world in one aligned, padded frame, then apply fractional camera
+translation once before HUD. Actors retain fractional screen-pixel placement inside
+the frame, including indoors and at rest. Logical follow/picking remain continuous.
+Actual Canvas/GPU and physical Chromebook pixels qualify static registration and
+followed-actor stability together. Stable sampling, crop isolation and terrain edge
+extrusion address sampling ties/atlas seams; the linked record owns costs and limits.
 
 [213](../tactical/213-continuous-camera-projection.md) removes independent integer
 camera-translation rounding from default gameplay/lab projection. Continuous
@@ -126,8 +126,9 @@ unchanged; [trains](trains.md) records owner acceptance and the remaining join l
   the same builder.
 - Gameplay, interactive labs and reference cameras default to continuous projection.
   `Projection` shares the same translation across terrain, sprites, grass, mesh
-  anchors, overlays and picking, but primitive raster rounding still differs;
-  shared projection alone does not guarantee final pixel registration (214).
+  anchors, overlays and picking. Production RenderHost scopes aligned projection
+  during world collection/drawing and presents its fractional remainder once (215);
+  shared projection alone did not guarantee final pixel registration (214).
   The earlier grid-locked prototype remains an
   explicit `?pixelsnap=1` comparison through `RenderView.pixelSnap`; its independent
   translation rounding caused the followed actor's one-pixel oscillation (213).

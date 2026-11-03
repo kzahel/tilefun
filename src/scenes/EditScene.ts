@@ -289,6 +289,7 @@ export class EditScene implements GameScene {
 
   render(alpha: number, gc: GameContext): void {
     gc.camera.applyInterpolation(alpha);
+    gc.beginWorld?.();
     renderWorld(gc);
 
     // Editor overlays (grid + cursor highlight + elevation tint) — drawn between terrain and entities
@@ -313,6 +314,7 @@ export class EditScene implements GameScene {
     }
 
     if (!gc.stateView.interior) renderEntities(gc, alpha);
+    gc.endWorld?.();
     drawPlayerMarkers(gc, alpha);
     renderDebugOverlay(gc, alpha);
     render3DDebug(gc);
