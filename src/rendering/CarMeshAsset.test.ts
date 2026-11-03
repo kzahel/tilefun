@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { expect, it, vi } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { CarMeshAsset } from "./CarMeshAsset.js";
+import { poseOrientation } from "./MeshPresentation.js";
 
 function fixture() {
   const scene = new THREE.Group();
@@ -76,6 +77,33 @@ it("keeps fitted tire contacts on the ground through diagonal yaw and absolute w
       expect(shadow.getWorldPosition(new THREE.Vector3()).z).toBeCloseTo(-0.01);
     }
   }
+  asset.dispose();
+});
+
+it("keeps authored physical height rigid through tumbling and restores legacy review registration", () => {
+  const { scene } = fixture();
+  const asset = new CarMeshAsset(scene, 1.3, { heightScale: 0.631, contactShadow: true });
+  const height = () => {
+    asset.object.updateMatrixWorld(true);
+    return scene
+      .localToWorld(new THREE.Vector3(0, 24, 0))
+      .distanceTo(scene.localToWorld(new THREE.Vector3()));
+  };
+  expect(height()).toBeCloseTo(24 * 0.631);
+  asset.setPhysical(true);
+  for (const pose of [
+    [0, 0, 0],
+    [0, 0, Math.PI / 2],
+    [0, Math.PI / 2, 0],
+    [0.7, -0.6, 1.1],
+  ]) {
+    asset.object.quaternion.set(...poseOrientation(pose[0] ?? 0, pose[1] ?? 0, pose[2] ?? 0));
+    expect(height()).toBeCloseTo(24);
+  }
+  expect(required(asset.object.getObjectByName("Game-contact-shadow")).visible).toBe(false);
+  asset.setPhysical(false);
+  expect(height()).toBeCloseTo(24 * 0.631);
+  expect(required(asset.object.getObjectByName("Game-contact-shadow")).visible).toBe(true);
   asset.dispose();
 });
 

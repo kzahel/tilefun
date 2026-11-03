@@ -2,7 +2,7 @@ import { isBoat } from "../boats/Boat.js";
 import type { ClientStateView } from "../client/ClientStateView.js";
 import { actionHint, inputHint } from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
-import type { CarDrivingStyle } from "../traffic/CarControls.js";
+import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
 import { isVehicleOverturned } from "../traffic/Vehicle.js";
 import {
   boardingDistance,
@@ -49,7 +49,7 @@ export class VehicleControl {
     allowed: boolean,
     locked: boolean,
     movementMode: TouchMovementMode = "joystick",
-    carDriving: CarDrivingStyle = "direction",
+    carDriving: CarDrivingStyle = DEFAULT_CAR_DRIVING,
   ): boolean {
     const p = view.playerEntity,
       entities = view.entities,

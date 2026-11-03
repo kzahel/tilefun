@@ -266,5 +266,188 @@
     "Sprint retained one 133.2ms frame, despite 16.8ms p99. Readiness is not a no-stutter guarantee.",
     "Final targets now include depth; source color/depth pairs remain within the 16 MiB body-image budget.",
     "No phone or all-device performance claim."
-  ]
+  ],
+  "ownerFeelFollowup": {
+    "revision": "a57f083e43c66148882c902f5aca8cc0b44597a8",
+    "dirty": true,
+    "date": "2026-11-03T16:02:58.499Z",
+    "platform": "darwin 25.6.0 arm64",
+    "cpu": "Apple M4 Pro",
+    "cpuRate": 4,
+    "renderer": "gpu",
+    "meshes": true,
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "scope": "Default manual steering and authored physical vehicle height; readiness only, no matched performance comparison.",
+    "assertReady": "passed",
+    "samples": [
+      {
+        "name": "cold",
+        "frames": {
+          "count": 120,
+          "p50": 16.69999999999891,
+          "p95": 16.700000000000728,
+          "p99": 16.80000000000109,
+          "max": 33.30000000000018
+        },
+        "renderMs": {
+          "count": 121,
+          "p50": 6.800000190734863,
+          "p95": 10.300000190734863,
+          "p99": 11.100000143051147,
+          "max": 17.799999952316284
+        },
+        "updateMs": {
+          "count": 122,
+          "p50": 2.799999952316284,
+          "p95": 4.099999904632568,
+          "p99": 4.5,
+          "max": 4.5
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "standing",
+        "frames": {
+          "count": 120,
+          "p50": 16.69999999999891,
+          "p95": 16.799999999999272,
+          "p99": 16.80000000000109,
+          "max": 16.80000000000109
+        },
+        "renderMs": {
+          "count": 121,
+          "p50": 4.5,
+          "p95": 6.200000047683716,
+          "p99": 7.099999904632568,
+          "max": 7.8999998569488525
+        },
+        "updateMs": {
+          "count": 121,
+          "p50": 2.5,
+          "p95": 3.5999999046325684,
+          "p99": 3.9000000953674316,
+          "max": 4.1000001430511475
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "walk",
+        "frames": {
+          "count": 180,
+          "p50": 16.69999999999891,
+          "p95": 16.700000000000728,
+          "p99": 16.80000000000109,
+          "max": 16.80000000000109
+        },
+        "renderMs": {
+          "count": 181,
+          "p50": 4.099999904632568,
+          "p95": 5.700000047683716,
+          "p99": 6.699999809265137,
+          "max": 6.900000095367432
+        },
+        "updateMs": {
+          "count": 181,
+          "p50": 2.3999998569488525,
+          "p95": 3.3999998569488525,
+          "p99": 4.099999904632568,
+          "max": 5.299999952316284
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "sprint",
+        "frames": {
+          "count": 300,
+          "p50": 16.69999999999891,
+          "p95": 16.700000000000728,
+          "p99": 16.80000000000109,
+          "max": 16.80000000000291
+        },
+        "renderMs": {
+          "count": 301,
+          "p50": 3.799999952316284,
+          "p95": 6.900000095367432,
+          "p99": 8.099999904632568,
+          "max": 9.299999952316284
+        },
+        "updateMs": {
+          "count": 301,
+          "p50": 2.1000001430511475,
+          "p95": 3.299999952316284,
+          "p99": 3.9000000953674316,
+          "max": 4.099999904632568
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "reverse",
+        "frames": {
+          "count": 300,
+          "p50": 16.69999999999709,
+          "p95": 16.700000000000728,
+          "p99": 16.80000000000291,
+          "max": 283.3999999999978
+        },
+        "renderMs": {
+          "count": 301,
+          "p50": 3.6000001430511475,
+          "p95": 6.400000095367432,
+          "p99": 7.599999904632568,
+          "max": 270.60000014305115
+        },
+        "updateMs": {
+          "count": 315,
+          "p50": 2.1999998092651367,
+          "p95": 3.299999952316284,
+          "p99": 4,
+          "max": 5.099999904632568
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "zoom-out",
+        "frames": {
+          "count": 180,
+          "p50": 16.700000000000728,
+          "p95": 16.799999999999272,
+          "p99": 16.799999999999272,
+          "max": 16.80000000000291
+        },
+        "renderMs": {
+          "count": 181,
+          "p50": 5.699999809265137,
+          "p95": 8,
+          "p99": 8.599999904632568,
+          "max": 9.100000143051147
+        },
+        "updateMs": {
+          "count": 181,
+          "p50": 2.0999999046325684,
+          "p95": 3,
+          "p99": 3.5999999046325684,
+          "max": 5.1000001430511475
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      }
+    ],
+    "limits": [
+      "Frame p99 remains 16.8ms, with one 283.4ms reverse-stage frame. This is not a no-stutter guarantee."
+    ]
+  }
 }

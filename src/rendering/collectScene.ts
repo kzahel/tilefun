@@ -149,9 +149,10 @@ export function collectScene(
       (!support.bodyRotation || rotateBodyVector(support.bodyRotation, 0, 0, 1).z > 0.995)
         ? {
             assetId: supportMesh.assetId,
-            heightDelta:
-              (support.collider.physicalHeight ?? 0) *
-              (1 - vehicleMeshHeightScale(supportMesh.vehicle)),
+            heightDelta: support.bodyRotation
+              ? 0
+              : (support.collider.physicalHeight ?? 0) *
+                (1 - vehicleMeshHeightScale(supportMesh.vehicle)),
           }
         : undefined;
     const remains = isRoadkill(e.type);

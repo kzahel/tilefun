@@ -60,8 +60,8 @@ or credentials in this repository.
   View map; Menu pause. In editing, Y opens controller tools, left stick pans,
   right stick positions the cursor, RT places/paints and LT erases.
   The same screen cursor reaches DOM tools and map controls: A/RT selects, with
-  UI holds consumed until release. Cars reverse automatically for rearward aim;
-  Options also offers relative throttle/steering. LT/R remains a compatibility
+  UI holds consumed until release. Cars default to forward/reverse throttle and
+  relative left/right steering. Options retains directional aim with automatic reverse. LT/R remains a compatibility
   override. D-pad Up/L toggles vehicle
   lights and D-pad Right/K changes siren style. Jump/Throw retain their meanings.
   Named on-screen paddles and interaction prompts follow the last input source.

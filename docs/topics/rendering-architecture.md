@@ -1,7 +1,12 @@
 # Rendering architecture and backend separation
 
-[216](../tactical/216-dynamic-3d-vehicles.md) delivers qualified shared GPU world depth without discarding per-vehicle image reuse: cached color/depth pairs, world-relative depth conversion, upright sprite planes and surface top/front equations. Physical cars use separate ground shadows. No CPU depth readback is added to gameplay; the existing coherent final world composition remains. The independent common-geometry depth oracle matches all 3,590 sampled vehicle-overlap pixels across behind/above/rolled poses, including cache reuse and reversed draw order.
+[216](../tactical/216-dynamic-3d-vehicles.md) delivers qualified shared GPU world depth without discarding per-vehicle image reuse: cached color/depth pairs, world-relative depth conversion, upright sprite planes and surface top/front equations. Physical cars use separate ground shadows. No CPU depth readback is added to gameplay; the existing coherent final world composition remains. The independent common-geometry depth oracle qualifies behind/above/rolled vehicle overlaps, including cache reuse and reversed draw order.
 
+216 owner feel follow-up: physical vehicle resources bypass the old per-model
+sprite-height compression (compact-1 was 0.631×); pitch/roll expose authored solid
+proportions. The shared oblique x,y−z camera remains fixed, so normal edge-on
+foreshortening remains. Legacy review instances restore their prior height fit on
+every draw; physical roof riders no longer inherit its presentation offset.
 
 [215](../tactical/215-coherent-world-raster.md) repairs the registration regression
 reproduced in [214](../tactical/214-world-registration.md). Production hosts collect

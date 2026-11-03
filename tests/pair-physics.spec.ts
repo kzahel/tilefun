@@ -115,7 +115,7 @@ test("delayed guest drives a fully rotating car seen by both ordinary client vie
   await guest.focus();
   await page.keyboard.press("e");
   await expect(guest).not.toHaveAttribute("data-mount", "");
-  await page.keyboard.down("ArrowRight");
+  await page.keyboard.down("ArrowUp");
   try {
     await expect
       .poll(async () => Number(await host.getAttribute("data-car-z")))
@@ -124,7 +124,7 @@ test("delayed guest drives a fully rotating car seen by both ordinary client vie
       .poll(async () => Number(await guest.getAttribute("data-car-z")))
       .toBeGreaterThan(12);
   } finally {
-    await page.keyboard.up("ArrowRight");
+    await page.keyboard.up("ArrowUp");
   }
   await page.waitForTimeout(1200);
   await page.getByRole("button", { name: "Pause", exact: true }).click();

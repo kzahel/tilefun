@@ -1,5 +1,5 @@
 import type { TouchMovementMode } from "../input/TapMovement.js";
-import type { CarDrivingStyle } from "../traffic/CarControls.js";
+import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
 import { activateMenu, deactivateMenu } from "./MenuNavigation.js";
 import "./OptionsDialog.css";
 
@@ -117,7 +117,7 @@ export class OptionsDialog {
     mode: TouchMovementMode,
     opener: HTMLElement | null,
     pinchZoom: boolean,
-    carDriving: CarDrivingStyle = "direction",
+    carDriving: CarDrivingStyle = DEFAULT_CAR_DRIVING,
   ): void {
     this.opener = opener;
     this.status.textContent = "";

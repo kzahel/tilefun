@@ -65,10 +65,11 @@ export function vehicleMotionIntent(vehicle: Entity, movement: Movement): Motion
   const base = vehiclePerformance(vehicle.type).speed;
   const maxSpeed = base * (movement.sprinting ? 1.5 : 1);
   if (movement.relativeDriving) {
+    const throttle = movement.reversing ? 1 : movement.dy;
     return {
       vx: 0,
       vy: 0,
-      driveSpeed: -movement.dy * (movement.dy > 0 ? base * 0.5 : maxSpeed),
+      driveSpeed: -throttle * (throttle > 0 ? base * 0.5 : maxSpeed),
       steering: movement.dx,
     };
   }

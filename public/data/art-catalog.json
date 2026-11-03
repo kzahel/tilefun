@@ -34577,11 +34577,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:260"
+          "source": "src/rendering/collectScene.ts:261"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:270"
+          "source": "src/rendering/collectScene.ts:271"
         },
         {
           "system": "Gameplay",
@@ -38167,7 +38167,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:363"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:368"
         },
         {
           "system": "Editor",

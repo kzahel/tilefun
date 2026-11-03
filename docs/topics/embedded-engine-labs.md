@@ -1,6 +1,6 @@
 # Embedded engine labs
 
-[216](../tactical/216-dynamic-3d-vehicles.md) adds the shared car-dynamics handling course and a vehicle case in the two-client physics lab. Native Worker seats/recovery, full quaternion presentation and the normal shared physics scene own behavior; the collider viewport reads the same rotated body/static geometry. Production browser checks qualify delayed guest driving, pause/reload/seat ownership, full rotation preservation, compact/truck recovery and Worker teardown. Owner feel review is next.
+[216](../tactical/216-dynamic-3d-vehicles.md) adds the shared car-dynamics handling course and a vehicle case in the two-client physics lab. Native Worker seats/recovery, full quaternion presentation and the normal shared physics scene own behavior; the collider viewport reads the same rotated body/static geometry. Production browser checks qualify delayed guest driving, pause/reload/seat ownership, full rotation preservation, compact/truck recovery and Worker teardown. Owner feel review is next. The follow-up defaults manual car controls to forward/reverse and left/right steering in both presentation and two-client labs; scripted inputs keep their explicit world-space contract.
 
 
 [215](../tactical/215-coherent-world-raster.md) gives game and ScenarioPresentationHost

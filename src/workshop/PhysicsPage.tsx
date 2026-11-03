@@ -14,6 +14,7 @@ import {
   coopScript,
 } from "../scenarios/CoopRecipe.js";
 import { ScenarioClient } from "../scenarios/ScenarioClient.js";
+import { manualCarMovement } from "../traffic/CarControls.js";
 import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { PhysicsViewport } from "./PhysicsViewport.js";
 import "./physics.css";
@@ -91,7 +92,7 @@ export default function PhysicsPage() {
       const k = keys.current,
         pad = controllerInput.movement;
       const canvasFocused = document.activeElement === a || document.activeElement === b;
-      return {
+      const movement = {
         ...COOP_IDLE,
         dx:
           Number(k.has("ArrowRight") || k.has("KeyD")) -
@@ -105,6 +106,10 @@ export default function PhysicsPage() {
         sprinting: k.has("ShiftLeft") || (canvasFocused && pad.sprinting),
         reversing: k.has("KeyR"),
       };
+      const replica = state.current.seat ? session.guest : session.host;
+      return replica && occupiedVehicle(replica.view.playerEntity, replica.view.entities)
+        ? manualCarMovement(movement)
+        : movement;
     }
     const loop = new GameLoop({
       update() {
@@ -411,7 +416,7 @@ export default function PhysicsPage() {
         WASD / arrows + Space. Controller: left stick + A; LB switches player; Menu opens controls;
         D-pad navigates; A confirms; B returns to play. Touch controls move the selected player.
         {scene === "vehicle" &&
-          " Enter the car before driving. Both panes follow it; switch player to try the guest controls under latency. "}
+          " Enter the car before driving. ↑/W forward, ↓/S reverse, ←/→ or A/D steer. Both panes follow it; switch player to try the guest controls under latency. "}
       </p>
       {error && <p role="alert">{error}</p>}
       <output className="physics-stats">{status}</output>

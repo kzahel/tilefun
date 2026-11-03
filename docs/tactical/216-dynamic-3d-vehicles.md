@@ -137,3 +137,43 @@ rollovers and the relative feel of the compact and truck. Tune shared defaults
 from that feedback before detailed wheel suspension/steering animation or
 articulated cargo/equipment. Device frame-cost isolation remains a performance
 follow-up; do not describe this checkpoint as an all-device performance signoff.
+
+## Owner feel follow-up: controls and flattened tumbles
+
+Owner feedback requests relative left/right steering by default and reports cars
+looking flattened during non-yaw rotation. Manual game controls and both engine
+labs now default to Up/W forward, Down/S reverse, Left/Right or A/D steering.
+Existing explicit directional preferences and tap/held world destinations retain
+their meaning; scripted simulation inputs are unchanged. R/LT still overrides
+reverse, including relative mode. UI hints agree with the admitted controls.
+
+A rendered compact comparison reproduces the shape issue: legacy sprite matching
+scales model height by 0.631 before rotation (12.75px fitted geometry versus 20.2px
+authored height). Roll makes that compressed volume apparent. Physical residents
+now bypass this fit, with rigid authored dimensions through pitch/roll/yaw.
+The same shared resource restores its legacy fit for nonphysical review draws;
+immutable source assets are untouched. Physical roof riders no longer receive the
+legacy fitted-height offset. The fixed x,y−z camera still legitimately makes some
+orientations edge-on; this change does not silently give cars a separate lens.
+
+Follow-up qualification: 189 distinct native checks across eight files pass,
+including a new actual-collider pushing/contact test (transient penetration bounded
+by one tick of approach travel; settled penetration below 0.25 world pixel).
+Eight selected production full-Chromium cases pass: Canvas/GPU default and saved
+controls, taps, dynamic car pushing, both Worker lab boundaries, delayed guest
+car driving, ramp rotation/reload/recovery and the independent depth oracle.
+All three TypeScript projects, focused lint (one existing non-null warning),
+regenerated inventories and production build pass. The older browser contact
+expectation was obsolete after dynamic chassis: pushing no longer guarantees zero
+speed, and overlapping projected XY envelopes do not prove 3D penetration. That
+browser check now owns the input/push/stop flow; native collider queries own the
+bounded separation check.
+
+The refreshed streaming receipt passes all six GPU/meshes CPU-rate-4 readiness
+stages, with 16.8ms frame p99 and one 283.4ms reverse-stage frame. The physical
+Chromebook repeats the bridge drive with ArrowUp under the new default, reaches
+48.48px elevation, descends, and reports ready prediction with zero resimulation
+position error. Its short frame p50/p95/p99 is 16.7/33.4/33.4ms. Both receipts
+retain the initial runs and explicit measurement limits; these unpaired smoke
+runs do not demonstrate a device performance improvement. Ready for the next owner
+handling/rollover review.

@@ -11,6 +11,7 @@ import {
 import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
 import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { presentInterior } from "../interiors/presentInterior.js";
+import { isTrain } from "../railway/Train.js";
 import { Camera } from "../rendering/Camera.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { presentTerrain } from "../rendering/OutdoorPresentation.js";
@@ -22,6 +23,7 @@ import type { RendererMode, RenderHost } from "../rendering/RenderHost.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
+import { manualCarMovement } from "../traffic/CarControls.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
 import { ScenarioClient } from "./ScenarioClient.js";
@@ -255,8 +257,11 @@ export class ScenarioPresentationHost {
               reversing: raw.reversing || controllerInput.held.has("reverse"),
             }
           : raw;
-      const input = occupiedVehicle(this.session.view.playerEntity, this.session.view.entities)
-        ? { ...merged, jump: false }
+      const vehicle = occupiedVehicle(this.session.view.playerEntity, this.session.view.entities);
+      const input = vehicle
+        ? isTrain(vehicle)
+          ? { ...merged, jump: false }
+          : manualCarMovement(merged)
         : merged;
       this.interpolate = this.session.submitInput(input, this.camera.getVisibleChunkRange());
       if (this.interpolate) {

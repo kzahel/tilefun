@@ -5,6 +5,7 @@ import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { createVehicle } from "../traffic/Vehicle.js";
 import { rotateBodyVector } from "./BodyRotation.js";
+import { PHYSICS_DT, PHYSICS_PIXELS_PER_METRE } from "./PhysicsDefaults.js";
 import { type PhysicsGeometry, PhysicsScene } from "./PhysicsScene.js";
 
 const scenes: PhysicsScene[] = [];
@@ -51,6 +52,47 @@ it("climbs with actual chassis pitch and crosses onto the level deck", async () 
   expect(car.position.wx).toBeGreaterThan(150);
   expect(scene.diagnostics.worldSteps).toBe(150);
   expect(scene.diagnostics.bodyCreates).toBe(1);
+});
+
+it("pushes a parked chassis with bounded actual contact penetration and brakes after release", async () => {
+  const scene = await create();
+  const cars = [0, 100].map((x, i) => ({
+    ...createVehicle("compact-1", x, 0, Direction.Right),
+    id: i + 1,
+  }));
+  const flat = { ...geometry, queryProps: () => [] };
+  let deepest = 0,
+    settledDepth = 0,
+    contacts = 0;
+  for (let tick = 0; tick < 360; tick++) {
+    scene.synchronize(cars);
+    scene.step(
+      new Map([[1, { vx: 0, vy: 0, driveSpeed: tick < 180 ? 112 : 0, steering: 0 }]]),
+      flat,
+    );
+    const colliders: Parameters<typeof scene.world.contactPair>[0][] = [];
+    scene.world.forEachCollider((c) => {
+      if (c.parent()?.isDynamic()) colliders.push(c);
+    });
+    const [a, b] = colliders;
+    // Query current collider transforms; the solver manifold describes its
+    // incident pose and can retain pre-solve penetration after integration.
+    const contact = a && b ? a.contactCollider(b, 0.01) : undefined;
+    if (contact) {
+      contacts++;
+      deepest = Math.max(deepest, -contact.distance * PHYSICS_PIXELS_PER_METRE);
+      if (tick > 330)
+        settledDepth = Math.max(settledDepth, -contact.distance * PHYSICS_PIXELS_PER_METRE);
+    }
+  }
+  expect(contacts).toBeGreaterThan(0);
+  // A discrete impact may compress within one tick of approach travel; resting
+  // contact must converge below a quarter world pixel, without passing through.
+  expect(deepest).toBeLessThan(112 * PHYSICS_DT);
+  expect(settledDepth).toBeLessThan(0.25);
+  expect(cars[1]?.position.wx).toBeGreaterThan(110);
+  expect(cars[0]?.position.wx).toBeLessThan(cars[1]?.position.wx ?? 0);
+  expect(Math.hypot(cars[0]?.velocity?.vx ?? 0, cars[0]?.velocity?.vy ?? 0)).toBeLessThan(0.1);
 });
 
 it("tips an unsupported truck and retains full rotation/momentum through wire restore and replay", async () => {

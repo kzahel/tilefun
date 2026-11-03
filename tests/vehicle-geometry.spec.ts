@@ -16,11 +16,11 @@ test("ordinary Worker car controls traverse a rendered ramp and retain the saved
   await page.getByRole("button", { name: /^Drive car/ }).click();
   await expect(page.getByRole("button", { name: /^Get out/ })).toBeVisible();
   await c.focus();
-  await page.keyboard.down("ArrowRight");
+  await page.keyboard.down("ArrowUp");
   try {
     await expect.poll(async () => Number(await c.getAttribute("data-car-z"))).toBeLessThan(-12);
   } finally {
-    await page.keyboard.up("ArrowRight");
+    await page.keyboard.up("ArrowUp");
   }
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   let last = "",
@@ -121,7 +121,7 @@ test("3D vehicle course preserves ramp rotation on reload and recovers cars and 
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await page.getByRole("button", { name: /^Drive car/ }).click();
   await canvas.focus();
-  await page.keyboard.down("ArrowRight");
+  await page.keyboard.down("ArrowUp");
   try {
     await expect
       .poll(async () => Number(await canvas.getAttribute("data-car-z")))
@@ -130,7 +130,7 @@ test("3D vehicle course preserves ramp rotation on reload and recovers cars and 
       .poll(async () => Number(await canvas.getAttribute("data-car-up")))
       .toBeLessThan(0.995);
   } finally {
-    await page.keyboard.up("ArrowRight");
+    await page.keyboard.up("ArrowUp");
   }
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   let previous = "",

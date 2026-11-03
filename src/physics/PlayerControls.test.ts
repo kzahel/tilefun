@@ -1,5 +1,23 @@
 import { expect, it } from "vitest";
-import { PlayerControls, playerMotionIntent } from "./PlayerControls.js";
+import { carDrivingStyle, manualCarMovement } from "../traffic/CarControls.js";
+import { createVehicle } from "../traffic/Vehicle.js";
+import { PlayerControls, playerMotionIntent, vehicleMotionIntent } from "./PlayerControls.js";
+
+it("defaults manual cars to independent throttle/steering and preserves saved directional preference", () => {
+  const car = createVehicle("compact-1", 0, 0);
+  const input = manualCarMovement({ dx: 1, dy: -1, jump: true, sprinting: false });
+  expect(carDrivingStyle(undefined)).toBe("steering");
+  expect(carDrivingStyle("direction")).toBe("direction");
+  const controls = new PlayerControls();
+  const { movement } = controls.admit([{ ...input, seq: 1 }], 1);
+  expect(vehicleMotionIntent(car, movement)).toMatchObject({ driveSpeed: 112, steering: 1 });
+  expect(movement.jump).toBe(false);
+  expect(vehicleMotionIntent(car, { ...movement, dy: 0 }).driveSpeed).toBeCloseTo(0);
+  expect(vehicleMotionIntent(car, { ...movement, reversing: true })).toMatchObject({
+    driveSpeed: -56,
+    steering: 1,
+  });
+});
 
 it("coalesces burst axes, preserves a press/release jump edge at one fixed tick", () => {
   const controls = new PlayerControls();

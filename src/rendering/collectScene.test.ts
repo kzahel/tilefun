@@ -16,6 +16,37 @@ import { SceneFrame } from "./SceneFrame.js";
 const world = { getHeightAt: () => 0, getChunkIfLoaded: () => undefined, getRoadAt: () => 0 };
 const terrain = { collectElevationItems: () => [] };
 
+it("keeps physical roof riders at their world height while legacy fitted meshes retain their offset", () => {
+  const car = createVehicle("compact-1", 200, 150, Direction.Right);
+  car.id = 1;
+  car.wz = 0;
+  const rider = createPlayer(200, 150);
+  rider.wz = car.collider?.physicalHeight ?? 24;
+  const camera = new Camera();
+  camera.setViewport(600, 400);
+  camera.snapTo(200, 150);
+  const sample = () =>
+    collectScene(
+      [car, rider],
+      [],
+      world,
+      camera,
+      camera.getVisibleChunkRange(),
+      1,
+      terrain,
+      [],
+      false,
+    ).find((item) => item.kind === "sprite" && item.sheetKey === "player");
+  const legacy = sample();
+  if (legacy?.kind !== "sprite") throw Error("Missing rider");
+  expect(legacy.meshRoofSupport?.heightDelta).toBeGreaterThan(0);
+  car.bodyRotation = [0, 0, 0, 1];
+  const physical = sample();
+  if (physical?.kind !== "sprite") throw Error("Missing rider");
+  expect(physical.meshRoofSupport?.heightDelta).toBe(0);
+  expect(physical.zOffset).toBe(rider.wz);
+});
+
 function collect(entity: Entity, alpha = 1, zoom = 1 / 3, frame?: SceneFrame, height = 0) {
   const camera = new Camera();
   camera.zoom = zoom;

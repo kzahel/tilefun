@@ -32,7 +32,11 @@ import { createCanvasRenderHost } from "../rendering/CanvasRenderHost.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
-import { type CarDrivingStyle, carDrivingStyle } from "../traffic/CarControls.js";
+import {
+  type CarDrivingStyle,
+  carDrivingStyle,
+  DEFAULT_CAR_DRIVING,
+} from "../traffic/CarControls.js";
 import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 import { finishStartup, showStartupAssets, showStartupStage } from "../ui/StartupProgress.js";
 import { requestSessionNavigation } from "../ui/sessionNavigation.js";
@@ -186,7 +190,7 @@ export class GameClient {
   private focusPaused = false;
   private lastTouchAt = -Infinity;
   private movementMode: TouchMovementMode = "joystick";
-  private carDriving: CarDrivingStyle = "direction";
+  private carDriving: CarDrivingStyle = DEFAULT_CAR_DRIVING;
   private debugPanel: DebugPanel;
   private editorMode: EditorMode;
   private editorModel: EditorModel;

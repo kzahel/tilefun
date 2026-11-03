@@ -13,29 +13,18 @@ const state = (page: Page) =>
     const other = g.remoteView.serverEntities.find(
       (e) => e.type.startsWith("vehicle-v1:") && e.id !== car?.id,
     );
-    const overlap =
-      car?.collider && other?.collider
-        ? {
-            x:
-              (car.collider.width + other.collider.width) / 2 -
-              Math.abs(car.position.wx - other.position.wx),
-            y:
-              (car.collider.height + other.collider.height) / 2 -
-              Math.abs(car.position.wy - other.position.wy),
-          }
-        : { x: 0, y: 0 };
     return {
       parent: p.parentId,
       x: car?.position.wx ?? 0,
       y: car?.position.wy ?? 0,
       heading: car?.vehicleHeading ?? 0,
       speed: Math.hypot(car?.velocity?.vx ?? 0, car?.velocity?.vy ?? 0),
-      overlap,
+      otherX: other?.position.wx ?? 0,
     };
   });
 
 for (const renderer of ["canvas", "gpu&meshes"])
-  test(`saved car controls, keyboard steering, automatic reverse taps and solid car contact (${renderer})`, async ({
+  test(`saved car controls, keyboard steering, automatic reverse taps and dynamic car pushing (${renderer})`, async ({
     page,
   }, testInfo) => {
     test.setTimeout(60_000);
@@ -91,8 +80,7 @@ for (const renderer of ["canvas", "gpu&meshes"])
     await expect.poll(async () => (await state(page)).parent).toBeDefined();
     await page.locator('button[aria-label="Options"]').click();
     await page.getByRole("button", { name: "Tap to move", exact: true }).click();
-    await page.getByLabel("Car controls", { exact: true }).selectOption("steering");
-    await expect(page.getByRole("status").filter({ hasText: "Car controls saved" })).toBeVisible();
+    await expect(page.getByLabel("Car controls", { exact: true })).toHaveValue("steering");
     await page.getByRole("button", { name: "Back to game", exact: true }).click();
     const start = await state(page);
     await page.keyboard.down("ArrowUp");
@@ -135,12 +123,18 @@ for (const renderer of ["canvas", "gpu&meshes"])
     await page.getByLabel("Car controls", { exact: true }).selectOption("direction");
     await expect(page.getByRole("status").filter({ hasText: "Car controls saved" })).toBeVisible();
     await page.getByRole("button", { name: "Back to game", exact: true }).click();
+    const parkedX = (await state(page)).otherX;
     await page.keyboard.down("ArrowRight");
     await expect.poll(async () => (await state(page)).x).toBeGreaterThan(75);
-    await expect.poll(async () => (await state(page)).speed).toBeLessThan(0.1);
+    // Both cars are dynamic: contact pushes the parked chassis instead of acting
+    // as an immovable wall. Releasing the throttle must still bring us to rest.
+    await expect.poll(async () => (await state(page)).otherX).toBeGreaterThan(parkedX + 6);
     await page.keyboard.up("ArrowRight");
+    await expect.poll(async () => (await state(page)).speed).toBeLessThan(0.1);
     const contact = await state(page);
-    expect(Math.min(contact.overlap.x, contact.overlap.y)).toBeLessThanOrEqual(0.01);
+    // Full rotating shape separation belongs to native physics tests; an XY
+    // envelope overlap is not penetration. Here verify the input/contact flow.
+    expect(contact.x).toBeLessThan(contact.otherX);
     await page.screenshot({ path: testInfo.outputPath("car-contact.png") });
     await page.keyboard.down("ArrowLeft");
     await expect.poll(async () => (await state(page)).x).toBeLessThan(contact.x - 12);

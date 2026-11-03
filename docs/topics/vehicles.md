@@ -1,6 +1,6 @@
 # Vehicles: shared physics baseline
 
-[216](../tactical/216-dynamic-3d-vehicles.md) delivers freely rotating land-vehicle chassis, authored axle suspension/traction, full replay/save state, shared depth and recovery. Game and labs share the default controller; native/browser qualification passes; owner feel review is next. The physical Chromebook course works, with 16.7/33.4/50ms frame p50/p95/p99 in a short development run. Boats retain their upright watercraft behavior.
+[216](../tactical/216-dynamic-3d-vehicles.md) delivers freely rotating land-vehicle chassis, authored axle suspension/traction, full replay/save state, shared depth and recovery. Game and labs share the default controller; native/browser qualification passes; owner feel review is next. The physical Chromebook course works, with 16.7/33.4/33.4ms frame p50/p95/p99 in the latest short development smoke; this is not a matched performance comparison. Boats retain their upright watercraft behavior.
 
 
 Status: dynamic land-vehicle chassis and shared depth delivered in 216; ready for owner feel review. Shared road traffic and driving audio remain.
@@ -419,8 +419,8 @@ existing motion owners. Game, web, Deck and embedded labs share the same rules.
 ## Configurable controls and automatic reverse
 
 [154](../tactical/154-car-controls-and-contact.md) adds per-player **Options →
-Car controls**: **Point where to drive** (default), or **Forward / reverse and
-steer**. The choice applies to keys, controller and joystick. In steering mode,
+Car controls**: **Forward / reverse and steer** (default), or **Point where to
+drive**. The choice applies to keys, controller and joystick. In steering mode,
 Up drives forward, Down reverses and Left/Right turn relative to the car; steering
 at rest does not pivot or start driving. Tap and held world destinations always
 aim in world space, independently of the manual preference.
@@ -436,7 +436,11 @@ Relative input uses bit 4 of the existing player-command flags. Authority and
 prediction interpret it against their own admitted/replayed pose; a client never
 pre-rotates axes against an out-of-date presentation heading. The preference is
 local profile data, not durable vehicle state. Trains retain rail-axis controls.
-Traffic inspection exposes the same style selector through ordinary ScenarioClient.
+Manual vehicle input in embedded labs uses this default too; scripted world-direction
+inputs remain explicit. Existing saved directional preferences remain readable.
+216 owner feel feedback also removes the old sprite-height compression from physical
+meshes: full rotations now retain authored body proportions, with legacy review
+registration and its fitted roof-rider offset restricted to nonphysical views.
 
 ## Body contact and recovery
 

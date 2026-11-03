@@ -282,8 +282,9 @@ function GeometryFixtures({ initial }: { initial: string }) {
         {fixture === "traffic"
           ? "Watch road cars follow lanes and wait at crossings, or drive the parked car beside the sidewalk. "
           : "Walk ramps, cross bridges, pass underneath and drive freely rotating cars. "}
-        Arrows/WASD move, Space jumps, E enters or leaves a nearby car, R reverses. Touch and
-        controller use the same controls. F / D-pad down rights an overturned car.
+        Arrows/WASD move, Space jumps, E enters or leaves a nearby car. Driving: ↑/W forward, ↓/S
+        reverse, ←/→ or A/D steer. R also reverses. Touch and controller use the same controls. F /
+        D-pad down rights an overturned car.
         {fixture === "car-dynamics" &&
           " Main lane: bridge ascent/descent. South: jump ramp. North: narrow tipping ledge and overlapping cars. "}
         Specialized equipment and train services are deferred.

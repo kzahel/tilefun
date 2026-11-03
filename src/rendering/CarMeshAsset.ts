@@ -6,7 +6,7 @@ import { batchVehicleGeometry } from "./VehicleGeometryBatches.js";
 
 export interface CarMeshAssetOptions {
   batch?: boolean;
-  /** Fixed game-local Z registration. Applied after rigid wheel pose, before yaw. */
+  /** Legacy sprite-height registration. Physical residents retain authored height. */
   heightScale?: number;
   /** Ground-plane contact cue; native sprite fallback already contains its shadow. */
   contactShadow?: boolean;
@@ -17,11 +17,14 @@ export interface CarMeshAssetOptions {
 /** Retained vehicle resources, shared by game and labs. The outer group owns the
  * entity pose; the inner group converts GLB +Y-up/-X-forward to game +Z-up/+X.
  * Ground origin and wheel rig are authored. Fixed lateral and optional vertical
- * registrations fit the game-camera silhouette around Z=0 before entity yaw.
- * Direct authoring callers keep native height; the world projection stays fixed.
+ * registrations fit the old sprite silhouette around Z=0 before entity yaw.
+ * Physical residents and direct authoring callers keep native height, so pitch
+ * and roll reveal a solid body rather than the old vertically compressed shape.
  */
 export class CarMeshAsset {
   readonly object = new THREE.Group();
+  private readonly registered = new THREE.Group();
+  private readonly spriteHeightScale: number;
   private readonly resources = new Set<{ dispose(): void }>();
   private readonly bitmaps = new Set<ImageBitmap>();
   private readonly wheels: {
@@ -55,6 +58,7 @@ export class CarMeshAsset {
     rest: THREE.Quaternion;
   }[] = [];
   constructor(scene: THREE.Group, lateralScale = 1.3, options?: CarMeshAssetOptions) {
+    this.spriteHeightScale = options?.heightScale ?? 1;
     let meshes = 0;
     scene.traverse((node) => {
       if (!(node instanceof THREE.Mesh)) return;
@@ -269,9 +273,9 @@ export class CarMeshAsset {
       const normalized = new THREE.Group();
       normalized.rotation.set(Math.PI / 2, 0, Math.PI, "ZYX");
       normalized.add(scene);
-      const registered = new THREE.Group();
+      const registered = this.registered;
       registered.scale.y = lateralScale;
-      registered.scale.z = options?.heightScale ?? 1;
+      registered.scale.z = this.spriteHeightScale;
       registered.add(normalized);
       this.object.add(registered);
       // A land-contact oval makes the open hull appear suspended above water.
@@ -314,6 +318,7 @@ export class CarMeshAsset {
   }
   /** Absolute pose per draw: a shared resource never carries another car's phase. */
   setPhysical(value: boolean) {
+    this.registered.scale.z = value ? 1 : this.spriteHeightScale;
     const shadow = this.object.getObjectByName("Game-contact-shadow");
     if (shadow) shadow.visible = !value;
   }

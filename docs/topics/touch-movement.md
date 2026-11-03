@@ -83,7 +83,8 @@ Lights/Style actions. Hints reflect the most recently used keyboard/controller;
 touch uses action names. Nearby interactions use the same Y/E prompt on web/Deck
 and sit clear of the paddles. Lights use L/D-pad Up and style K/D-pad Right,
 independently of Jump/Throw. Directional aiming behind the car automatically reverses at half base speed;
-Options also offers relative forward/reverse/steering controls for manual input.
+Manual controls default to forward/reverse and left/right steering; Options retains
+directional aiming as an explicit choice.
 Tap/hold destinations keep world-direction aiming with either manual preference.
 The separate Reverse paddle is removed; R/LT remain compatible. See
 [vehicles](vehicles.md#configurable-controls-and-automatic-reverse).

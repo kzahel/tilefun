@@ -200,5 +200,74 @@
     "Frame p50 16.7ms, p95 33.4ms, p99 50ms: functional readiness does not establish a steady 60fps Chromebook budget.",
     "This course contains three cars and bridge geometry, not a dense NPC/traffic stress scene.",
     "No phone, thermal or all-model qualification."
-  ]
+  ],
+  "ownerFeelFollowup": {
+    "date": "2026-11-03",
+    "revision": "a57f083e43c66148882c902f5aca8cc0b44597a8",
+    "dirty": true,
+    "scope": "Same live-development course after default manual steering and authored physical height; ArrowUp for six seconds, then release for two. Owned tab closed.",
+    "device": {
+      "ua": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+      "cores": 8,
+      "memory": 8,
+      "viewport": [
+        1600,
+        721
+      ],
+      "dpr": 2.4000000953674316
+    },
+    "frames": {
+      "count": 387,
+      "p50": 16.700000000000728,
+      "p95": 33.399999999999636,
+      "p99": 33.400000000001455,
+      "max": 33.5
+    },
+    "maxZ": 48.47789444311438,
+    "minUp": 0.9620133969933994,
+    "final": {
+      "renderer": "gpu",
+      "gpuDevice": "ready",
+      "ready": "true",
+      "playerX": "372.11108175408884",
+      "playerY": "0.7579143638480949",
+      "playerZ": "0.1405072161104286",
+      "serverZ": "0.14050722122192383",
+      "support": "ground",
+      "space": "outside",
+      "serverSpace": "outside",
+      "visibility": "auto",
+      "courseRoute": "drive",
+      "generatedSeed": "",
+      "bridgeX": "0",
+      "bridgeY": "0",
+      "surfaceCount": "6",
+      "carX": "372.111083984375",
+      "carY": "0.7579143643379211",
+      "carZ": "0.14050722122192383",
+      "carModel": "compact-1",
+      "carUp": "0.9999525153968803",
+      "carRotation": "[0.000002055470886887045,-0.004872606831548508,0.0006592145918531064,0.999987911494215]",
+      "trafficCount": "2",
+      "trafficX": "-240.0218505859375",
+      "trafficY": "-160"
+    },
+    "prediction": {
+      "ackSeq": 617,
+      "physicsTick": 640,
+      "epoch": 1,
+      "bodies": 1,
+      "omitted": 0,
+      "replayCount": 4,
+      "replayMs": 0.29999998211860657,
+      "pastTickError": 2.230292067833166e-06,
+      "resimPosErr": 0,
+      "comparisonInputTick": 597,
+      "comparisonPhysicsTick": 643,
+      "status": "ready"
+    },
+    "limits": [
+      "Short functional smoke; not a controlled before/after or dense-traffic performance measurement."
+    ]
+  }
 }
