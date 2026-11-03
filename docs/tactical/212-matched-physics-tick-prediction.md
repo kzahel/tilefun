@@ -1,6 +1,6 @@
 # Matched physics tick prediction
 
-Status: implemented; focused native checks pass, production qualification in progress.
+Status: delivered and locally qualified; owner playtest next.
 Updated: 2026-11-03.
 
 Owner approved repairing [211's pacing investigation](211-movement-pacing-investigation.md).
@@ -55,5 +55,28 @@ The car pacing fixture uses the established clear (64,64) placement. An initial
 run had zero car travel. That separate native contact observation remains for
 follow-up, rather than relaxing the pacing test's speed/correction tolerances.
 
-Production pacing capture, build/inventories, focused Worker/P2P browser checks and
-streaming readiness follow. Commit delivery evidence and mark readiness last.
+## Production qualification
+
+Implementation checkpoint: `ed28ae4e`. The [bounded pacing evidence](../benchmarks/212-matched-physics-tick-pacing.json)
+records two fresh ordinary production sessions, with no predictor monkeypatches.
+All six walk/run/car captures have 16.8ms frame p99 and no page errors. Steady
+displayed speeds are 63.999–64.001, about 127.998 and about 112.002 world px/s in
+both sessions; every sampled interval advances one predicted physics tick. False
+same-tick correction is below 0.0002px. The previous one-tick error is eliminated.
+
+All three TypeScript projects, focused lint and Node syntax check pass. Five
+production full-Chromium boundaries pass: ordinary Worker NPC contacts/prediction,
+delayed P2P convergence after reversal, two-session lab lifecycle, car ramp/seat
+reload and traffic pause/reload/teardown. Production build and all 2,120 Workshop
+identities pass. Art catalog is unchanged; Workshop changes only 1,024 runtime
+fingerprints and input digest, with no new candidate identities or art pixels.
+
+GPU/meshes streaming readiness with 4× CPU throttling also passes. Walk/sprint/
+reverse retain 16.8ms frame p99 and zero final missing/incomplete/stale terrain.
+Steady correction medians are near zero; genuine contact/input-transition corrections
+remain, including the reversed-input boundary. These are desktop captures, not a
+new physical-device qualification.
+
+Next: owner Save and reload, then compare walking/running/driving on the original
+desktop. Roughly one screen pixel of integer-camera grid wobble remains separate.
+Commit evidence/inventories and mark development readiness last.

@@ -1,0 +1,305 @@
+{
+  "version": 1,
+  "date": "2026-11-03",
+  "implementationCommit": "ed28ae4e8fda208b5cd61f842e6ecb53fa402d6c",
+  "captureBaseRevision": "05cde03f5c2ee4077c16d595b67f06fe289fe4d2",
+  "captureWorkingTreeIncludedFix": true,
+  "note": "Capture includes the 212 runtime repair in the working tree before its checkpoint commit. Behavior matches implementationCommit; captureBaseRevision alone does not identify the tested source.",
+  "browser": "153.0.8010.12",
+  "renderer": "gpu",
+  "meshes": true,
+  "cpuRate": 1,
+  "headless": true,
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "command": "node scripts/instrumentation/movement-pacing.mjs --output=/tmp/tilefun-212-final-pacing",
+  "method": "240 renders per stage after warmup; omit first 30 samples; presented-X difference divided by monotonic presentation time. Both sessions use production prediction with no control patch.",
+  "cases": [
+    {
+      "session": "production",
+      "movement": "walk",
+      "renderSamples": 210,
+      "frameMs": {
+        "count": 209,
+        "min": 16.5,
+        "median": 16.7,
+        "mean": 16.66555,
+        "stddev": 0.05754,
+        "p99": 16.8,
+        "max": 16.8
+      },
+      "displayedSpeedWorldPxPerSecond": {
+        "count": 209,
+        "min": 63.999023,
+        "median": 63.999023,
+        "mean": 63.999418,
+        "stddev": 0.000749,
+        "p99": 64.000854,
+        "max": 64.000854
+      },
+      "sameCommittedTickErrorPx": {
+        "count": 210,
+        "min": 0,
+        "median": 0.0,
+        "mean": 4e-6,
+        "stddev": 1.1e-5,
+        "p99": 5.1e-5,
+        "max": 5.3e-5
+      },
+      "physicsTickAdvanceCounts": {
+        "1": 209
+      },
+      "screenXRangePx": 0.8526606445313973,
+      "unsnappedPairedScreenXRangePx": 0.012649699992380192,
+      "errors": []
+    },
+    {
+      "session": "production",
+      "movement": "run",
+      "renderSamples": 210,
+      "frameMs": {
+        "count": 209,
+        "min": 16.5,
+        "median": 16.7,
+        "mean": 16.666029,
+        "stddev": 0.057408,
+        "p99": 16.8,
+        "max": 16.8
+      },
+      "displayedSpeedWorldPxPerSecond": {
+        "count": 209,
+        "min": 127.998047,
+        "median": 127.998047,
+        "mean": 127.998047,
+        "stddev": 0.0,
+        "p99": 127.998047,
+        "max": 127.998047
+      },
+      "sameCommittedTickErrorPx": {
+        "count": 210,
+        "min": 0,
+        "median": 0.0,
+        "mean": 6e-6,
+        "stddev": 1.2e-5,
+        "p99": 4.6e-5,
+        "max": 5.2e-5
+      },
+      "physicsTickAdvanceCounts": {
+        "1": 209
+      },
+      "screenXRangePx": 0.99853515625,
+      "unsnappedPairedScreenXRangePx": 0.010419694284905745,
+      "errors": []
+    },
+    {
+      "session": "production",
+      "movement": "car",
+      "renderSamples": 210,
+      "frameMs": {
+        "count": 209,
+        "min": 16.6,
+        "median": 16.7,
+        "mean": 16.666029,
+        "stddev": 0.053078,
+        "p99": 16.8,
+        "max": 16.8
+      },
+      "displayedSpeedWorldPxPerSecond": {
+        "count": 209,
+        "min": 112.001953,
+        "median": 112.001953,
+        "mean": 112.001953,
+        "stddev": 0.0,
+        "p99": 112.001953,
+        "max": 112.001953
+      },
+      "sameCommittedTickErrorPx": {
+        "count": 210,
+        "min": 0,
+        "median": 2e-6,
+        "mean": 7e-6,
+        "stddev": 1.7e-5,
+        "p99": 5.1e-5,
+        "max": 0.000197
+      },
+      "physicsTickAdvanceCounts": {
+        "1": 209
+      },
+      "screenXRangePx": 0.8679521484368706,
+      "unsnappedPairedScreenXRangePx": 0.0006204715780313563,
+      "errors": []
+    },
+    {
+      "session": "production-repeat",
+      "movement": "walk",
+      "renderSamples": 210,
+      "frameMs": {
+        "count": 209,
+        "min": 16.5,
+        "median": 16.7,
+        "mean": 16.666029,
+        "stddev": 0.060651,
+        "p99": 16.8,
+        "max": 16.8
+      },
+      "displayedSpeedWorldPxPerSecond": {
+        "count": 209,
+        "min": 63.999023,
+        "median": 63.999023,
+        "mean": 63.999414,
+        "stddev": 0.000747,
+        "p99": 64.000854,
+        "max": 64.000854
+      },
+      "sameCommittedTickErrorPx": {
+        "count": 210,
+        "min": 0,
+        "median": 0.0,
+        "mean": 4e-6,
+        "stddev": 1.1e-5,
+        "p99": 4.6e-5,
+        "max": 5.6e-5
+      },
+      "physicsTickAdvanceCounts": {
+        "1": 209
+      },
+      "screenXRangePx": 0.8511481164703127,
+      "unsnappedPairedScreenXRangePx": 0.01181917764984064,
+      "errors": []
+    },
+    {
+      "session": "production-repeat",
+      "movement": "run",
+      "renderSamples": 210,
+      "frameMs": {
+        "count": 209,
+        "min": 16.5,
+        "median": 16.7,
+        "mean": 16.666507,
+        "stddev": 0.05892,
+        "p99": 16.8,
+        "max": 16.8
+      },
+      "displayedSpeedWorldPxPerSecond": {
+        "count": 209,
+        "min": 127.998047,
+        "median": 127.998047,
+        "mean": 127.998047,
+        "stddev": 0.0,
+        "p99": 127.998047,
+        "max": 127.998047
+      },
+      "sameCommittedTickErrorPx": {
+        "count": 210,
+        "min": 0,
+        "median": 0.0,
+        "mean": 6e-6,
+        "stddev": 1.2e-5,
+        "p99": 5.3e-5,
+        "max": 6.9e-5
+      },
+      "physicsTickAdvanceCounts": {
+        "1": 209
+      },
+      "screenXRangePx": 0.9197812499996871,
+      "unsnappedPairedScreenXRangePx": 0.010997788878285064,
+      "errors": []
+    },
+    {
+      "session": "production-repeat",
+      "movement": "car",
+      "renderSamples": 210,
+      "frameMs": {
+        "count": 209,
+        "min": 16.5,
+        "median": 16.7,
+        "mean": 16.666029,
+        "stddev": 0.056569,
+        "p99": 16.8,
+        "max": 16.8
+      },
+      "displayedSpeedWorldPxPerSecond": {
+        "count": 209,
+        "min": 112.001953,
+        "median": 112.001953,
+        "mean": 112.001953,
+        "stddev": 0.0,
+        "p99": 112.001953,
+        "max": 112.001953
+      },
+      "sameCommittedTickErrorPx": {
+        "count": 210,
+        "min": 0,
+        "median": 3e-6,
+        "mean": 9e-6,
+        "stddev": 1.4e-5,
+        "p99": 5.6e-5,
+        "max": 7.1e-5
+      },
+      "physicsTickAdvanceCounts": {
+        "1": 209
+      },
+      "screenXRangePx": 0.9922177734379147,
+      "unsnappedPairedScreenXRangePx": 0.0006732974989063223,
+      "errors": []
+    }
+  ],
+  "limits": [
+    "Short desktop full-Chromium capture, not physical-phone qualification.",
+    "Integer camera translation retains approximately one screen pixel of grid wobble; it is separate from world-space pacing.",
+    "Native tests additionally force repeated/jumping acknowledgements, sliced replay and overdue jump-edge coalescing."
+  ],
+  "streamingQualification": {
+    "renderer": "gpu",
+    "meshes": true,
+    "cpuRate": 4,
+    "command": "npm run streaming:bench -- --assert-ready --renderer=gpu --meshes --cpu=4 --frame-timeline",
+    "assertReadyPassed": true,
+    "samples": [
+      {
+        "name": "walk",
+        "frameP99Ms": 16.80000000000109,
+        "correctionPx": {
+          "count": 181,
+          "p50": 2.685571258607621e-5,
+          "p95": 0.05496788266679741,
+          "p99": 0.06394220321750065,
+          "max": 1.0666504007358932
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "sprint",
+        "frameP99Ms": 16.80000000000291,
+        "correctionPx": {
+          "count": 301,
+          "p50": 7.724761962890625e-5,
+          "p95": 0.00022792816162109375,
+          "p99": 0.0004286766052246094,
+          "max": 0.000492095947265625
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "reverse",
+        "frameP99Ms": 16.799999999999272,
+        "correctionPx": {
+          "count": 300,
+          "p50": 5.626678466796875e-5,
+          "p95": 0.00026607513427734375,
+          "p99": 0.0006165504455566406,
+          "max": 4.266723633111883
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      }
+    ]
+  }
+}

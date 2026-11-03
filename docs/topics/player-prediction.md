@@ -12,7 +12,10 @@ browser-only matched-target control nearly eliminates it.
 physics tick inside bounded replay and advances the prediction horizon from local
 fixed ticks, independently of packet acknowledgement cadence. Overdue controls
 coalesce with retained jump edges; genuine corrections and contact anchors remain.
-56 focused native tests pass; production qualification is in progress.
+56 focused native tests, five production Worker/P2P/lab/vehicle browser checks,
+all typechecks, lint, build/inventories and throttled streaming readiness pass.
+Two fresh production pacing sessions retain nearly constant walk/run/car speed
+and near-zero false correction. Next: owner desktop comparison after Save and reload.
 Integer camera translation adds a separate roughly one-screen-pixel wobble and
 needs its own presentation decision rather than a blind removal of layer snapping.
 

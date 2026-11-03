@@ -6,8 +6,9 @@ includes a newly appended legitimate input tick, generating false display correc
 for walking/running/driving. The isolated matched-target control removes nearly all
 steady speed modulation. A smaller one-screen-pixel camera-rounding effect remains
 separate. [212](../tactical/212-matched-physics-tick-prediction.md) implements matching
-physics-tick corrections and a fixed-clock prediction horizon; 56 native checks
-pass, with production qualification in progress.
+physics-tick corrections and a fixed-clock prediction horizon. Two fresh production
+sessions measure nearly constant walk/run/car speed at 16.8ms frame p99; 56 native
+checks, five Worker/P2P browser cases, build and throttled streaming readiness pass.
 
 [208](../tactical/208-ground-seams-and-movement-pacing.md) reproduces running/car
 presentation blips with steady 16.8ms browser frame p99 in a throttled GPU run.
