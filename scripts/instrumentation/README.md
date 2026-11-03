@@ -5,6 +5,22 @@ The per-character adapter/model comparison CLI was retired by
 semantic limits remain in [203](../../docs/tactical/203-physics-copy-and-model-comparison.md).
 Current authority/prediction scenarios exercise the shared default kernel.
 
+## Current racetrack movement attribution
+
+`node scripts/benchmark-streaming.mjs --scene=racetrack --renderer=gpu --meshes --cpu=4 --output=/tmp/tilefun-racetrack`
+uses the current ordinary game Worker and persistence with a fresh seed-2026 venue.
+An existing local-authority `tp` command stages the player on the clear northern
+infield lane, because ordinary arrival avoids the reserved venue. Every sampled
+walk/sprint/reversal uses normal input. Default `--scene=city` is unchanged.
+Add `--zoom-motion --zooms=1 --movement-seconds=10 --profile-stage=motion` for a
+separate CPU attribution lane. Profiling and desktop CPU emulation do not qualify
+physical-phone FPS; reports distinguish authority ticks, client update, rendering,
+acknowledgements, corrections and readiness. See [219](../../docs/tactical/219-vehicle-contact-and-train-continuity.md).
+
+The older `city-audit` / `city-course` helpers below describe pre-reset traffic
+owners; they need migration before use on current shared-physics driving. Do not
+interpret missing legacy helper methods as a current game timing result.
+
 ## Elevated surface overlays and actual venue driving
 
 `node scripts/instrumentation/fused-outline-composite.mjs --probe=surface --output=/tmp/tilefun-surface-overlays`

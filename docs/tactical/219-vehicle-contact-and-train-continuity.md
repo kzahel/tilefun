@@ -1,6 +1,6 @@
 # Vehicle contact, train continuity and speedway stutter
 
-Status: in progress. Owner feedback 2026-11-03.
+Status: contact/train repairs qualified for owner review; phone stutter remains open and equipment migration remains a follow-on. Owner feedback 2026-11-03.
 Owners: [vehicles](../topics/vehicles.md), [trains](../topics/trains.md),
 [player prediction](../topics/player-prediction.md), [performance](../topics/performance.md).
 
@@ -51,3 +51,53 @@ Dump equipment was not restored in this repair. The next restoration slice shoul
 be one truck: a chassis-local bed and gate with shared Rapier articulated shapes,
 normal authority/controller/touch actions, cargo/rider discharge and replay/save.
 Existing render-only rigs alone are not safe to advertise as working machinery.
+
+## Racetrack attribution and limits
+
+The current streaming CLI now accepts `--scene=racetrack`. It derives the venue
+from the generated seed, requests ordinary local-authority `tp` setup on the
+clear northern infield lane, then measures normal input with the real game
+Worker, IndexedDB, prediction and GPU meshes. Default city traversal is unchanged.
+The older city-audit helpers still address deleted traffic owners; the README
+now marks that limitation instead of using them as current-game evidence.
+
+[Portable receipts](../benchmarks/219-racetrack-attribution.json) retain two lanes:
+ordinary southern-grandstand arrival/traversal/overview, and an explicit infield
+walk with separate CPU profiling. Normal-view frames remain 16.8ms p99 in both
+4× CDP desktop runs. Authority progress stays around 60Hz, with sampled warm tick
+p99 roughly 1–4.4ms; this does not reproduce sustained server backlog. The southern
+overview has 33.4ms frame p99 and 50ms maximum, render CPU p99 22ms and authority
+tick p99 about 1.7ms. That sampled stage is rendering-limited, not proof of the
+owner's phone cause. Both loaded venue areas have zero final missing/incomplete/
+stale terrain in the retained stages. A native initial tick still takes about
+45ms admitting 56 bodies and 38 geometry sections; warm percentiles do not solve
+that cold cost. No unmeasured physics/AI/rendering quality reduction was made.
+
+Both configured Android phones report not connected; the unavailable-status
+adapter also raises an unrelated NameError. No phone timing, temperature, FPS
+improvement or cause is claimed. Fresh race lanes remain excluded from automatic
+population after reset 205: there is currently no restored racing service, so it
+cannot be attributed as a running race-AI bottleneck in this fresh venue. Normal
+road traffic, depot bodies and spectators still use ordinary shared owners.
+
+## Qualification
+
+- 106 native checks across nine kernel, chassis, jump, railway, prediction and
+  wire/traffic files pass with one worker. The two new hop/consist regressions
+  fail against the pre-fix implementation; the parked-car presentation test now
+  settles its initial suspension before comparing distinct prediction ticks.
+- All three TypeScript projects pass. Focused lint has no errors; the binary
+  codec files retain their 26 existing non-null-assertion warnings.
+- Nine production full-Chromium cases pass: Canvas/GPU driving and contact,
+  actual delayed P2P, two-session lab replacement/teardown and rotated vehicle,
+  ordinary Worker NPC contacts, station touch/keyboard/reload, and a cruise-speed
+  train jump/landing with less than 3px relative drift.
+- Art catalog, 2,121 Workshop identities (normal Chromium/retina; 139 compiler
+  exclusions), generated manifest and production build pass. Approved art assets
+  were not changed. Final GPU/meshes streaming `--assert-ready` at 4× CDP CPU passes all six city traversal stages, with zero final missing/incomplete/stale terrain.
+
+Next: owner review of car contact and train jumping; capture the affected phone
+on the same venue if stutter remains, separating cold setup, replay and rendering.
+Restore one dump truck's articulated bed/tailgate/cargo through the same world
+before expanding to towing and transporter mechanisms. The truck action buttons
+remain unavailable until that physical/authority slice is delivered.

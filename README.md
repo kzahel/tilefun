@@ -64,10 +64,11 @@ saves first. Online play requires signaling and a working peer connection.
 D-pad/stick focus, A select, B back and an on-screen text keyboard cover game
 menus and editor tools. **Save and quit** flushes the authority before closing.
 The right-stick cursor also selects visible tools and map controls with A or RT.
-Vehicle equipment (tow, cargo and dump bed) opens through **B / Q / Actions**,
-with D-pad/stick selection, A confirmation and B back. Named action paddles show
-the current keyboard/controller hints; vehicle controls
-never reuse Jump and Throw. Touch maps support two-finger pan and zoom.
+Vehicle equipment actions (tow, cargo, dump bed and transporter ramp) are currently
+unavailable after the shared-physics reset. The retained models/rigs need matching
+articulated collision and authority before those controls return. Current driving,
+recovery and jumping retain keyboard, controller and touch controls. Touch maps
+support two-finger pan and zoom.
 Browser saves and packaged saves are separate. See
 [Steam Deck and menus](docs/topics/steam-deck-and-menus.md) for runtime, installation
 and acceptance details.
@@ -76,8 +77,8 @@ and acceptance details.
 
 City speedways now have a **Vehicle depot** in the infield: a transporter, tow
 truck, dump truck, cars and a practice bridge. Look for the **orange truck icon**
-and named destination button in **Map · G / controller View**. Transporter steel
-ramps and decks support ordinary walking and standing passengers.
+and named destination button in **Map · G / controller View**. The practice bridge
+supports ordinary walking and driving; vehicle equipment controls remain deferred.
 [Depot controls and generation](docs/vehicle-depot.md).
 
 Regional worlds now include large wildlife lakes with an explorer motorboat
@@ -130,7 +131,10 @@ menu, travel and focus changes cancel the hold, requiring a fresh finger-down.
 See [touch movement](docs/topics/touch-movement.md) and [tap movement and Options](docs/tactical/086-tap-to-move-and-options.md)
 for the behavior and remaining device trial.
 
-**Car transporter** in Edit → Vehicles has working loading equipment. Open **Actions (B / Q / touch)** to deploy the ramp, drive a passenger car aboard, get out and secure it, then stow the ramp before driving the truck. Stop, deploy and release to reverse the same car off. See [operation and authoring](docs/vehicle-transporter.md).
+**Car transporter and dump truck** models remain in Edit → Vehicles and the depot.
+Loading ramps, securing cargo and tipping/unloading controls await migration to the
+shared physics world. [Current vehicle status](docs/topics/vehicles.md) owns this gap;
+the older [transporter guide](docs/vehicle-transporter.md) describes the retired workflow.
 
 **Edit → Vehicles** lets you choose any of the 45 vehicles and click/tap clear dry
 ground to place it parked, including in existing worlds without roads. **Vehicles

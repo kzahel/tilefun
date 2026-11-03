@@ -50,6 +50,7 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
         carX: middle?.position.wx ?? 0,
         carY: middle?.position.wy ?? 0,
         count: cars.length,
+        speed: Math.hypot(middle?.velocity?.vx ?? 0, middle?.velocity?.vy ?? 0),
       };
     });
   const call = page.getByRole("button", { name: /^Call train/ });
@@ -98,6 +99,22 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
     .poll(async () => (await state()).carX, { timeout: 15000 })
     .toBeGreaterThan(onRoof.carX + 20);
   expect((await state()).x).toBeGreaterThan(onRoof.x + 15);
+  // Exercise the actual Worker/input/prediction flight boundary at cruise speed.
+  await expect.poll(async () => (await state()).speed, { timeout: 10000 }).toBeGreaterThan(191);
+  const takeoff = await state();
+  await page.keyboard.press("Space", { delay: 60 });
+  await expect.poll(async () => (await state()).z, { intervals: [20] }).toBeGreaterThan(50);
+  await expect
+    .poll(
+      async () => {
+        const p = await state();
+        return !p.air && p.z > 43 && p.z < 45;
+      },
+      { intervals: [30] },
+    )
+    .toBe(true);
+  const landing = await state();
+  expect(Math.abs(landing.x - landing.carX - (takeoff.x - takeoff.carX))).toBeLessThan(3);
   await page.screenshot({
     path: test.info().outputPath("restored-train-roof.png"),
     fullPage: true,

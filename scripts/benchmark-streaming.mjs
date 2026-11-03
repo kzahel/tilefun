@@ -17,6 +17,8 @@ const option = (key, fallback) =>
     ?.split("=")
     .slice(1)
     .join("=") ?? fallback;
+const scene = option("scene", "city");
+if (!["city", "racetrack"].includes(scene)) throw Error("--scene must be city or racetrack");
 const renderer = option("renderer", "canvas");
 if (!["canvas", "gpu"].includes(renderer)) throw Error("--renderer must be canvas or gpu");
 const terrainPacing = option("terrain-pacing", "throughput");
@@ -139,6 +141,7 @@ const report = {
   instrumentation,
   ...(uncachedImageSizes ? { diagnosticUncachedImageSizes: true } : {}),
   terrainPacing,
+  scene,
   zoomSweep,
   zoomMotion,
   ...(zoomMotion ? { motionZooms, movementSeconds, settleSeconds, warmSeconds } : {}),
@@ -221,13 +224,30 @@ try {
     const thermalsBefore = androidCli
       ? await waitForAndroidCool(androidCli, maxBatteryC, cooldownSeconds, cooldownAbort.signal)
       : undefined;
-    const arrival = await page.evaluate(async (version) => {
-      const { createDescriptor } = await import("/tilefun/src/generation/GenerationDescriptor.ts");
-      const generation = createDescriptor("regional", 2026);
-      if (version !== "current" && version !== generation.version)
-        throw Error("Retired generator: use --versions=current");
-      return { x: 300, y: 519, generation };
-    }, version);
+    const arrival = await page.evaluate(
+      async ({ version, scene }) => {
+        const { createDescriptor } = await import(
+          "/tilefun/src/generation/GenerationDescriptor.ts"
+        );
+        const generation = createDescriptor("regional", 2026);
+        if (version !== "current" && version !== generation.version)
+          throw Error("Retired generator: use --versions=current");
+        if (scene === "racetrack") {
+          const { RacetrackSource } = await import(
+            "/tilefun/src/generation/regional/RacetrackPlanner.ts"
+          );
+          const { regionalWorld } = await import(
+            "/tilefun/src/generation/regional/WorldDescriptor.ts"
+          );
+          const track = new RacetrackSource(regionalWorld(2026)).owner(0, 0);
+          if (!track) throw Error("Missing generated racetrack");
+          // Clear northern infield lane beside the ordinary vehicle depot.
+          return { x: track.center.x - 27, y: track.center.y - 11, generation };
+        }
+        return { x: 300, y: 519, generation };
+      },
+      { version, scene },
+    );
     await page.goto(
       `${origin}/?nogamepad&renderer=${renderer}&${meshes ? "meshes&" : ""}${instrumentation ? "perf&" : ""}generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
@@ -252,6 +272,24 @@ try {
         Math.hypot(p.wx / 16 - arrival.x, p.wy / 16 - arrival.y) <= 46
       );
     }, arrival);
+    if (scene === "racetrack") {
+      // The regular arrival policy chooses a clear point outside the reserved
+      // venue. Stage this diagnostic through the existing local-authority command;
+      // all measured input, physics, persistence and rendering remain ordinary.
+      await page.evaluate(async (arrival) => {
+        const g = document.querySelector("#game").__game;
+        const result = await g.gcSendRequest({
+          type: "rcon",
+          requestId: g.nextRequestId++,
+          command: `tp ${arrival.x * 16} ${arrival.y * 16}`,
+        });
+        if (result.error) throw Error(result.output.join("\n"));
+      }, arrival);
+      await page.waitForFunction((arrival) => {
+        const p = document.querySelector("#game").__game.remoteView.serverPlayerEntity.position;
+        return Math.hypot(p.wx - arrival.x * 16, p.wy - arrival.y * 16) < 1;
+      }, arrival);
+    }
     await page.evaluate(
       (value) => document.querySelector("#game").__game.debugPanel.setTerrainPacing(value),
       terrainPacing,

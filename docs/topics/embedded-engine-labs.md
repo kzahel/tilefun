@@ -1,5 +1,12 @@
 # Embedded engine labs
 
+[219](../tactical/219-vehicle-contact-and-train-continuity.md) repairs ordinary
+shared chassis settling, carrier jump momentum and coherent full-consist display.
+Game and labs inherit the same owners; no page-specific physics or smoothing is
+introduced. The current streaming diagnostic adds a real-game racetrack course;
+older pre-reset city-audit driving helpers require migration before use.
+
+
 [218](../tactical/218-traffic-and-rail-gameplay-recovery.md) adds the ordinary
 **train** station and **traffic-crowd** grid fixtures to World geometry. Train
 recall and jump assistance share game authority, physics and input controls.

@@ -1,5 +1,15 @@
 # Streaming and gameplay performance
 
+[219](../tactical/219-vehicle-contact-and-train-continuity.md) adds current real-game
+racetrack attribution to the ordinary streaming CLI. Grandstand and infield normal
+view walking/sprinting keep 16.8ms frame p99 in the desktop 4× CDP lane; no sustained
+authority backlog is reproduced. A southern overview zoom reaches 33.4ms frame p99
+and 50ms max, with rendering CPU p99 22ms versus tick p99 about 1.7ms. Cold native
+admission still spikes (~45ms / 56 bodies / 38 sections); warm percentiles do not
+prove that cost fixed. Configured Android phones remain disconnected. These
+receipts do not establish the cause of the owner's phone stutter or its resolution.
+
+
 [218](../tactical/218-traffic-and-rail-gameplay-recovery.md) reproduces a sustained
 traffic jam from wide-turn lookahead pointing backward into the bend. The corrected
 join keeps all 16 cars progressing in the final simulated minute. Separate WebGL

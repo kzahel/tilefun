@@ -1,0 +1,1326 @@
+{
+  "schema": 1,
+  "date": "2026-11-03T19:40:24.549198+00:00",
+  "revision": "c0c3b28fe10b4535952222f2631747bfed4496a4",
+  "scope": "Seed-2026 real game Worker/IndexedDB/GPU meshes, bundled full Chromium on Apple M4 Pro. CDP CPU rate 4 is desktop emulation, not phone qualification. No timing comparison or speedup claim. Inclusive diagnostic timers overlap.",
+  "runs": [
+    {
+      "label": "southern grandstand: ordinary arrival and six traversal/zoom stages",
+      "browser": "153.0.8010.12",
+      "cpu": "Apple M4 Pro",
+      "cpuRate": 4,
+      "renderer": "gpu",
+      "meshes": true,
+      "stages": [
+        {
+          "name": "cold",
+          "elapsedMs": 1999.8999999999996,
+          "before": {
+            "wx": 7392,
+            "wy": 7872
+          },
+          "after": {
+            "wx": 7392,
+            "wy": 7872
+          },
+          "travelledPx": 0,
+          "frames": {
+            "count": 120,
+            "p50": 16.699999999999818,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 3.9000000953674316,
+            "p95": 7.200000047683716,
+            "p99": 7.799999952316284,
+            "max": 7.8999998569488525
+          },
+          "updateMs": {
+            "count": 121,
+            "p50": 2.6999998092651367,
+            "p95": 4.5,
+            "p99": 5,
+            "max": 8.200000047683716
+          },
+          "inputAckMs": {
+            "count": 119,
+            "p50": 39.40000009536743,
+            "p95": 43,
+            "p99": 44.89999985694885,
+            "max": 45.39999985694885
+          },
+          "predictionCorrectionPx": {
+            "count": 121,
+            "p50": 4.00543212890625e-05,
+            "p95": 0.0005183219909667969,
+            "p99": 0.0005183219909667969,
+            "max": 0.0006175041198730469
+          },
+          "authorityTimings": {
+            "realm.ai": {
+              "count": 123,
+              "totalMs": 9.300000190734863,
+              "maxMs": 0.20000004768371582,
+              "retained": 123,
+              "p50Ms": 0.09999990463256836,
+              "p95Ms": 0.20000004768371582,
+              "p99Ms": 0.20000004768371582
+            },
+            "realm.entityPhysics": {
+              "count": 123,
+              "totalMs": 112.00000095367432,
+              "maxMs": 3.799999952316284,
+              "retained": 123,
+              "p50Ms": 0.6999998092651367,
+              "p95Ms": 2.8000001907348633,
+              "p99Ms": 3.299999952316284
+            },
+            "server.replication": {
+              "count": 123,
+              "totalMs": 22.800000429153442,
+              "maxMs": 0.39999985694885254,
+              "retained": 123,
+              "p50Ms": 0.20000004768371582,
+              "p95Ms": 0.2999999523162842,
+              "p99Ms": 0.3000001907348633
+            },
+            "server.tick": {
+              "count": 123,
+              "totalMs": 209.99999856948853,
+              "maxMs": 4.799999952316284,
+              "retained": 123,
+              "p50Ms": 1.4000000953674316,
+              "p95Ms": 3.799999952316284,
+              "p99Ms": 4.400000095367432
+            }
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "standing",
+          "elapsedMs": 1999.8999999999996,
+          "before": {
+            "wx": 7392,
+            "wy": 7872
+          },
+          "after": {
+            "wx": 7392,
+            "wy": 7872
+          },
+          "travelledPx": 0,
+          "frames": {
+            "count": 120,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 121,
+            "p50": 3.4000000953674316,
+            "p95": 4.099999904632568,
+            "p99": 4.300000190734863,
+            "max": 4.700000047683716
+          },
+          "updateMs": {
+            "count": 121,
+            "p50": 2.3999998569488525,
+            "p95": 3.200000047683716,
+            "p99": 3.3999998569488525,
+            "max": 5.800000190734863
+          },
+          "inputAckMs": {
+            "count": 118,
+            "p50": 55.200000047683716,
+            "p95": 57.299999952316284,
+            "p99": 58.5,
+            "max": 59.09999990463257
+          },
+          "predictionCorrectionPx": {
+            "count": 121,
+            "p50": 1.0013580322265625e-05,
+            "p95": 7.867813110351562e-05,
+            "p99": 9.298324584960938e-05,
+            "max": 9.298324584960938e-05
+          },
+          "authorityTimings": {
+            "realm.ai": {
+              "count": 123,
+              "totalMs": 9.099997997283936,
+              "maxMs": 0.39999985694885254,
+              "retained": 123,
+              "p50Ms": 0.09999990463256836,
+              "p95Ms": 0.10000014305114746,
+              "p99Ms": 0.2999999523162842
+            },
+            "realm.entityPhysics": {
+              "count": 123,
+              "totalMs": 57.30000162124634,
+              "maxMs": 1.2999999523162842,
+              "retained": 123,
+              "p50Ms": 0.5,
+              "p95Ms": 0.6000001430511475,
+              "p99Ms": 0.7000000476837158
+            },
+            "server.replication": {
+              "count": 123,
+              "totalMs": 16.90000057220459,
+              "maxMs": 0.2999999523162842,
+              "retained": 123,
+              "p50Ms": 0.10000014305114746,
+              "p95Ms": 0.20000004768371582,
+              "p99Ms": 0.20000004768371582
+            },
+            "server.tick": {
+              "count": 123,
+              "totalMs": 136.9000005722046,
+              "maxMs": 2.200000047683716,
+              "retained": 123,
+              "p50Ms": 1.0999999046325684,
+              "p95Ms": 1.4000000953674316,
+              "p99Ms": 1.6000001430511475
+            }
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "walk",
+          "elapsedMs": 2999.8999999999996,
+          "before": {
+            "wx": 7389.8671875,
+            "wy": 7872
+          },
+          "after": {
+            "wx": 7195.078125,
+            "wy": 7872
+          },
+          "travelledPx": 193.72265625,
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 3.0999999046325684,
+            "p95": 5.1000001430511475,
+            "p99": 6,
+            "max": 6.6000001430511475
+          },
+          "updateMs": {
+            "count": 181,
+            "p50": 2.200000047683716,
+            "p95": 2.8999998569488525,
+            "p99": 4.300000190734863,
+            "max": 4.5
+          },
+          "inputAckMs": {
+            "count": 178,
+            "p50": 54.90000009536743,
+            "p95": 57.30000019073486,
+            "p99": 57.90000009536743,
+            "max": 58.700000047683716
+          },
+          "predictionCorrectionPx": {
+            "count": 181,
+            "p50": 0.00390625,
+            "p95": 0.003937124265731938,
+            "p99": 0.007815565210739148,
+            "max": 1.0703125001301175
+          },
+          "authorityTimings": {
+            "realm.ai": {
+              "count": 183,
+              "totalMs": 11.100001096725464,
+              "maxMs": 0.20000004768371582,
+              "retained": 183,
+              "p50Ms": 0.09999990463256836,
+              "p95Ms": 0.10000014305114746,
+              "p99Ms": 0.20000004768371582
+            },
+            "realm.entityPhysics": {
+              "count": 183,
+              "totalMs": 67.20000004768372,
+              "maxMs": 0.5999999046325684,
+              "retained": 183,
+              "p50Ms": 0.39999985694885254,
+              "p95Ms": 0.5,
+              "p99Ms": 0.5
+            },
+            "server.replication": {
+              "count": 183,
+              "totalMs": 20.700001001358032,
+              "maxMs": 0.2999999523162842,
+              "retained": 183,
+              "p50Ms": 0.10000014305114746,
+              "p95Ms": 0.20000004768371582,
+              "p99Ms": 0.20000004768371582
+            },
+            "server.tick": {
+              "count": 183,
+              "totalMs": 169.60000133514404,
+              "maxMs": 1.2999999523162842,
+              "retained": 183,
+              "p50Ms": 0.9000000953674316,
+              "p95Ms": 1.0999999046325684,
+              "p99Ms": 1.1999998092651367
+            }
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "sprint",
+          "elapsedMs": 2999.7999999999993,
+          "before": {
+            "wx": 7188.662109375,
+            "wy": 7872
+          },
+          "after": {
+            "wx": 6801.55078125,
+            "wy": 7872
+          },
+          "travelledPx": 384.9736328125,
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 3.0999999046325684,
+            "p95": 5.5,
+            "p99": 6.599999904632568,
+            "max": 7.299999952316284
+          },
+          "updateMs": {
+            "count": 181,
+            "p50": 2,
+            "p95": 3.200000047683716,
+            "p99": 4.400000095367432,
+            "max": 5
+          },
+          "inputAckMs": {
+            "count": 178,
+            "p50": 55.09999990463257,
+            "p95": 57.799999952316284,
+            "p99": 58.59999990463257,
+            "max": 58.700000047683716
+          },
+          "predictionCorrectionPx": {
+            "count": 181,
+            "p50": 0.0009770244431558937,
+            "p95": 0.0011275387068017666,
+            "p99": 0.004882839415148226,
+            "max": 1.0664062510448593
+          },
+          "authorityTimings": {
+            "realm.ai": {
+              "count": 183,
+              "totalMs": 7.3000006675720215,
+              "maxMs": 0.10000014305114746,
+              "retained": 183,
+              "p50Ms": 0,
+              "p95Ms": 0.10000014305114746,
+              "p99Ms": 0.10000014305114746
+            },
+            "realm.entityPhysics": {
+              "count": 183,
+              "totalMs": 89.60000038146973,
+              "maxMs": 2.5,
+              "retained": 183,
+              "p50Ms": 0.40000009536743164,
+              "p95Ms": 1,
+              "p99Ms": 2.299999952316284
+            },
+            "server.replication": {
+              "count": 183,
+              "totalMs": 24.399999141693115,
+              "maxMs": 0.3000001907348633,
+              "retained": 183,
+              "p50Ms": 0.10000014305114746,
+              "p95Ms": 0.20000004768371582,
+              "p99Ms": 0.3000001907348633
+            },
+            "server.tick": {
+              "count": 183,
+              "totalMs": 189.60000109672546,
+              "maxMs": 3.4000000953674316,
+              "retained": 183,
+              "p50Ms": 0.9000000953674316,
+              "p95Ms": 1.7000000476837158,
+              "p99Ms": 3.299999952316284
+            }
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "reverse",
+          "elapsedMs": 4999.800000000003,
+          "before": {
+            "wx": 6801.5546875,
+            "wy": 7872
+          },
+          "after": {
+            "wx": 7447.7998046875,
+            "wy": 7872
+          },
+          "travelledPx": 644.1103515625,
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999709,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 301,
+            "p50": 3.200000047683716,
+            "p95": 4.700000047683716,
+            "p99": 6.200000047683716,
+            "max": 6.400000095367432
+          },
+          "updateMs": {
+            "count": 301,
+            "p50": 2,
+            "p95": 3.200000047683716,
+            "p99": 4.299999952316284,
+            "max": 4.5
+          },
+          "inputAckMs": {
+            "count": 296,
+            "p50": 38.60000014305115,
+            "p95": 56.200000047683716,
+            "p99": 57.700000047683716,
+            "max": 57.90000009536743
+          },
+          "predictionCorrectionPx": {
+            "count": 299,
+            "p50": 0.0009772705141605606,
+            "p95": 0.001107609684558359,
+            "p99": 0.004882825911026657,
+            "max": 4.266601564399549
+          },
+          "authorityTimings": {
+            "realm.ai": {
+              "count": 303,
+              "totalMs": 15.299996852874756,
+              "maxMs": 0.3000001907348633,
+              "retained": 303,
+              "p50Ms": 0,
+              "p95Ms": 0.10000014305114746,
+              "p99Ms": 0.20000004768371582
+            },
+            "realm.entityPhysics": {
+              "count": 303,
+              "totalMs": 178,
+              "maxMs": 3.9000000953674316,
+              "retained": 303,
+              "p50Ms": 0.5,
+              "p95Ms": 1.2999999523162842,
+              "p99Ms": 2.4000000953674316
+            },
+            "server.replication": {
+              "count": 303,
+              "totalMs": 41.799999713897705,
+              "maxMs": 0.39999985694885254,
+              "retained": 303,
+              "p50Ms": 0.10000014305114746,
+              "p95Ms": 0.20000004768371582,
+              "p99Ms": 0.2999999523162842
+            },
+            "server.tick": {
+              "count": 303,
+              "totalMs": 355.59999895095825,
+              "maxMs": 5.299999952316284,
+              "retained": 303,
+              "p50Ms": 1.0999999046325684,
+              "p95Ms": 1.7999999523162842,
+              "p99Ms": 3.4000000953674316
+            }
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "zoom-out",
+          "elapsedMs": 3116.5,
+          "before": {
+            "wx": 7454.1953125,
+            "wy": 7872
+          },
+          "after": {
+            "wx": 7454.1953125,
+            "wy": 7872
+          },
+          "travelledPx": 0,
+          "frames": {
+            "count": 180,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 33.400000000001455,
+            "max": 50
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 9.5,
+            "p95": 16.40000009536743,
+            "p99": 22,
+            "max": 24
+          },
+          "updateMs": {
+            "count": 190,
+            "p50": 1.8000001907348633,
+            "p95": 2.5,
+            "p99": 2.9000000953674316,
+            "max": 4
+          },
+          "inputAckMs": {
+            "count": 177,
+            "p50": 44.299999952316284,
+            "p95": 80.10000014305115,
+            "p99": 100.5,
+            "max": 114.79999995231628
+          },
+          "predictionCorrectionPx": {
+            "count": 179,
+            "p50": 2.193450927734375e-05,
+            "p95": 2.765655517578125e-05,
+            "p99": 8.440017700195312e-05,
+            "max": 0.000125885009765625
+          },
+          "authorityTimings": {
+            "realm.ai": {
+              "count": 193,
+              "totalMs": 15.700000524520874,
+              "maxMs": 0.2999999523162842,
+              "retained": 193,
+              "p50Ms": 0.09999990463256836,
+              "p95Ms": 0.20000004768371582,
+              "p99Ms": 0.20000004768371582
+            },
+            "realm.entityPhysics": {
+              "count": 193,
+              "totalMs": 79.59999775886536,
+              "maxMs": 1.7999999523162842,
+              "retained": 193,
+              "p50Ms": 0.39999985694885254,
+              "p95Ms": 0.6000001430511475,
+              "p99Ms": 0.8000001907348633
+            },
+            "server.replication": {
+              "count": 193,
+              "totalMs": 29.59999942779541,
+              "maxMs": 0.8999998569488525,
+              "retained": 193,
+              "p50Ms": 0.10000014305114746,
+              "p95Ms": 0.20000004768371582,
+              "p99Ms": 0.40000009536743164
+            },
+            "server.tick": {
+              "count": 193,
+              "totalMs": 212.80000042915344,
+              "maxMs": 3.4000000953674316,
+              "retained": 193,
+              "p50Ms": 1.0999999046325684,
+              "p95Ms": 1.5,
+              "p99Ms": 1.6999998092651367
+            }
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        }
+      ],
+      "arrival": {
+        "x": 462,
+        "y": 492,
+        "generation": {
+          "type": "regional",
+          "version": "regional-v13",
+          "seed": 2026,
+          "preset": "temperate-v1"
+        }
+      },
+      "errors": [],
+      "failures": [],
+      "captureRevision": "318da4be3436f4b69492988ec853921fe6eefafe",
+      "captureDirty": true,
+      "provenance": "Core fixes were present as uncommitted source during capture, subsequently committed as c0c3b28f; this is one current implementation, not a before/after comparison."
+    },
+    {
+      "label": "clear northern infield: explicit tp setup, then ordinary input, profiled motion",
+      "browser": "153.0.8010.12",
+      "cpu": "Apple M4 Pro",
+      "cpuRate": 4,
+      "renderer": "gpu",
+      "meshes": true,
+      "stages": [
+        {
+          "name": "entry-catchup",
+          "elapsedMs": 1483.2000000000007,
+          "before": {
+            "wx": 6960,
+            "wy": 7104
+          },
+          "after": {
+            "wx": 6960,
+            "wy": 7104
+          },
+          "travelledPx": 0,
+          "frames": {
+            "count": 89,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.800000000000182,
+            "max": 16.800000000000182
+          },
+          "renderMs": {
+            "count": 90,
+            "p50": 5.299999952316284,
+            "p95": 9.5,
+            "p99": 10.200000047683716,
+            "max": 10.200000047683716
+          },
+          "updateMs": {
+            "count": 90,
+            "p50": 1.6000001430511475,
+            "p95": 2.6000001430511475,
+            "p99": 3.3000001907348633,
+            "max": 3.3000001907348633
+          },
+          "inputAckMs": {
+            "count": 87,
+            "p50": 40.5,
+            "p95": 43.299999952316284,
+            "p99": 45.5,
+            "max": 45.5
+          },
+          "predictionCorrectionPx": {
+            "count": 90,
+            "p50": 4.57763671875e-05,
+            "p95": 0.00013399124145507812,
+            "p99": 0.000583648681640625,
+            "max": 0.000583648681640625
+          },
+          "authorityTimings": {
+            "realm.ai": {
+              "count": 91,
+              "totalMs": 4.799999237060547,
+              "maxMs": 0.2999999523162842,
+              "retained": 91,
+              "p50Ms": 0,
+              "p95Ms": 0.10000014305114746,
+              "p99Ms": 0.2999999523162842
+            },
+            "realm.entityPhysics": {
+              "count": 91,
+              "totalMs": 94.80000138282776,
+              "maxMs": 3.3999998569488525,
+              "retained": 91,
+              "p50Ms": 0.7000000476837158,
+              "p95Ms": 3.1000001430511475,
+              "p99Ms": 3.3999998569488525
+            },
+            "server.replication": {
+              "count": 91,
+              "totalMs": 14.600000381469727,
+              "maxMs": 0.2999999523162842,
+              "retained": 91,
+              "p50Ms": 0.20000004768371582,
+              "p95Ms": 0.2999999523162842,
+              "p99Ms": 0.2999999523162842
+            },
+            "server.tick": {
+              "count": 91,
+              "totalMs": 158.69999957084656,
+              "maxMs": 4.299999952316284,
+              "retained": 91,
+              "p50Ms": 1.4000000953674316,
+              "p95Ms": 4,
+              "p99Ms": 4.299999952316284
+            }
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "stationary",
+          "elapsedMs": 2983.199999999999,
+          "before": {
+            "wx": 6960,
+            "wy": 7104
+          },
+          "after": {
+            "wx": 6960,
+            "wy": 7104
+          },
+          "travelledPx": 0,
+          "frames": {
+            "count": 179,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "renderMs": {
+            "count": 180,
+            "p50": 4.1000001430511475,
+            "p95": 5.200000047683716,
+            "p99": 5.700000047683716,
+            "max": 5.900000095367432
+          },
+          "updateMs": {
+            "count": 180,
+            "p50": 1.4000000953674316,
+            "p95": 2,
+            "p99": 2.5999999046325684,
+            "max": 2.9000000953674316
+          },
+          "inputAckMs": {
+            "count": 178,
+            "p50": 38.5,
+            "p95": 40.799999952316284,
+            "p99": 41.799999952316284,
+            "max": 42.700000047683716
+          },
+          "predictionCorrectionPx": {
+            "count": 180,
+            "p50": 1.33514404296875e-05,
+            "p95": 9.775161743164062e-05,
+            "p99": 0.00010919570922851562,
+            "max": 0.00010919570922851562
+          },
+          "authorityTimings": {
+            "realm.ai": {
+              "count": 182,
+              "totalMs": 8.799999475479126,
+              "maxMs": 0.20000004768371582,
+              "retained": 182,
+              "p50Ms": 0,
+              "p95Ms": 0.10000014305114746,
+              "p99Ms": 0.20000004768371582
+            },
+            "realm.entityPhysics": {
+              "count": 182,
+              "totalMs": 106.30000185966492,
+              "maxMs": 1.7000000476837158,
+              "retained": 182,
+              "p50Ms": 0.5999999046325684,
+              "p95Ms": 0.7999999523162842,
+              "p99Ms": 1.6999998092651367
+            },
+            "server.replication": {
+              "count": 182,
+              "totalMs": 24.300000429153442,
+              "maxMs": 0.2999999523162842,
+              "retained": 182,
+              "p50Ms": 0.10000014305114746,
+              "p95Ms": 0.20000004768371582,
+              "p99Ms": 0.20000004768371582
+            },
+            "server.tick": {
+              "count": 182,
+              "totalMs": 206.09999871253967,
+              "maxMs": 2.299999952316284,
+              "retained": 182,
+              "p50Ms": 1.1000001430511475,
+              "p95Ms": 1.3999998569488525,
+              "p99Ms": 2.299999952316284
+            }
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "motion",
+          "elapsedMs": 9999.600000000002,
+          "before": {
+            "wx": 6927.9931640625,
+            "wy": 7104
+          },
+          "after": {
+            "wx": 5648.31298828125,
+            "wy": 7104
+          },
+          "travelledPx": 1279.68017578125,
+          "frames": {
+            "count": 600,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000291
+          },
+          "renderMs": {
+            "count": 601,
+            "p50": 2.8999998569488525,
+            "p95": 5.299999952316284,
+            "p99": 6.5,
+            "max": 9.299999952316284
+          },
+          "updateMs": {
+            "count": 601,
+            "p50": 1.9000000953674316,
+            "p95": 2.9000000953674316,
+            "p99": 4,
+            "max": 7.400000095367432
+          },
+          "inputAckMs": {
+            "count": 597,
+            "p50": 38,
+            "p95": 41,
+            "p99": 43.40000009536743,
+            "max": 46.09999990463257
+          },
+          "predictionCorrectionPx": {
+            "count": 599,
+            "p50": 0.0019531438591910847,
+            "p95": 0.0029296974340906196,
+            "p99": 0.002965677655635918,
+            "max": 2.1337890625104423
+          },
+          "authorityTimings": {
+            "realm.ai": {
+              "count": 603,
+              "totalMs": 25.000001192092896,
+              "maxMs": 0.20000004768371582,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.10000014305114746,
+              "p99Ms": 0.10000014305114746
+            },
+            "realm.entityPhysics": {
+              "count": 603,
+              "totalMs": 319.89999985694885,
+              "maxMs": 3.299999952316284,
+              "retained": 512,
+              "p50Ms": 0.40000009536743164,
+              "p95Ms": 1,
+              "p99Ms": 2
+            },
+            "server.replication": {
+              "count": 603,
+              "totalMs": 59.99999785423279,
+              "maxMs": 0.39999985694885254,
+              "retained": 512,
+              "p50Ms": 0.09999990463256836,
+              "p95Ms": 0.20000004768371582,
+              "p99Ms": 0.20000004768371582
+            },
+            "server.tick": {
+              "count": 603,
+              "totalMs": 580.0000054836273,
+              "maxMs": 4.200000047683716,
+              "retained": 512,
+              "p50Ms": 0.7999999523162842,
+              "p95Ms": 1.4000000953674316,
+              "p99Ms": 2.6000001430511475
+            }
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0,
+          "profile": {
+            "totals": {
+              "submit:clear": {
+                "calls": 608,
+                "ms": 121.69999837875366,
+                "items": 0
+              },
+              "prepareTerrain": {
+                "calls": 608,
+                "ms": 149.69999742507935,
+                "items": 0
+              },
+              "collectTerrain": {
+                "calls": 608,
+                "ms": 9.699999809265137,
+                "items": 0
+              },
+              "submit:terrain": {
+                "calls": 608,
+                "ms": 58.80000066757202,
+                "items": 3236
+              },
+              "collectElevationItems": {
+                "calls": 608,
+                "ms": 9.799999952316284,
+                "items": 0
+              },
+              "submit:scene": {
+                "calls": 608,
+                "ms": 525.9000010490417,
+                "items": 143621
+              },
+              "submit:overlay": {
+                "calls": 369,
+                "ms": 4.799999952316284,
+                "items": 45387
+              }
+            },
+            "uploads": {
+              "canvas:256x256:creation": {
+                "count": 10,
+                "bytes": 2621440
+              },
+              "sheet:person15:creation": {
+                "count": 1,
+                "bytes": 49152
+              },
+              "sheet:person16:creation": {
+                "count": 1,
+                "bytes": 49152
+              },
+              "sheet:person17:creation": {
+                "count": 1,
+                "bytes": 49152
+              },
+              "sheet:vehicle-v1:car-13:creation": {
+                "count": 1,
+                "bytes": 688128
+              },
+              "sheet:vehicle-v1:sedan-12:creation": {
+                "count": 1,
+                "bytes": 688128
+              },
+              "sheet:me-complete:creation": {
+                "count": 2,
+                "bytes": 8388608
+              },
+              "sheet:person5:creation": {
+                "count": 1,
+                "bytes": 49152
+              }
+            },
+            "evictions": {
+              "canvas:256x256": 10,
+              "sheet:me-complete": 1,
+              "sheet:vehicle-v1:car-13": 1,
+              "sheet:vehicle-v1:sedan-12": 1,
+              "sheet:person15": 1,
+              "sheet:person16": 1,
+              "sheet:person17": 1
+            },
+            "cpu": [
+              {
+                "functionName": "browser/benchmark:(idle)",
+                "selfMs": 6001.352
+              },
+              {
+                "functionName": "browser/benchmark:(program)",
+                "selfMs": 1512.235
+              },
+              {
+                "functionName": "/src/assets/SpriteCatalog.ts:spriteRegion",
+                "selfMs": 170.688
+              },
+              {
+                "functionName": "/src/rendering/collectScene.ts:collectScene",
+                "selfMs": 128.89
+              },
+              {
+                "functionName": "browser/benchmark:drawImage",
+                "selfMs": 85.903
+              },
+              {
+                "functionName": "browser/benchmark:wasm-function[2664]",
+                "selfMs": 83.126
+              },
+              {
+                "functionName": "/src/input/TouchButtons.ts:getPositions",
+                "selfMs": 57.299
+              },
+              {
+                "functionName": "browser/benchmark:wasm-function[30]",
+                "selfMs": 54.128
+              },
+              {
+                "functionName": "/src/rendering/GpuRasterSurface.ts:quad",
+                "selfMs": 52.647
+              },
+              {
+                "functionName": "/src/rendering/presentSurfaceScene.ts:presentSurfaceScene",
+                "selfMs": 49.476
+              },
+              {
+                "functionName": "/src/physics/PhysicsScene.ts:step",
+                "selfMs": 47.827
+              },
+              {
+                "functionName": "/src/rendering/Canvas2DRenderer.ts:drawSceneEntry2D",
+                "selfMs": 46.552
+              },
+              {
+                "functionName": "browser/benchmark:postMessage",
+                "selfMs": 42.013
+              },
+              {
+                "functionName": "/src/rendering/SurfaceReceivers.ts:project",
+                "selfMs": 37.972
+              },
+              {
+                "functionName": "/src/ui/VehicleControl.ts:update",
+                "selfMs": 35.644
+              },
+              {
+                "functionName": "browser/benchmark:now",
+                "selfMs": 35.59
+              },
+              {
+                "functionName": "/src/transport/WorkerClientTransport.ts:WorkerClientTransport.worker.onmessage",
+                "selfMs": 35.518
+              },
+              {
+                "functionName": "/src/rendering/SurfaceReceivers.ts:SurfaceReceivers",
+                "selfMs": 33.881
+              },
+              {
+                "functionName": "/src/rendering/GpuRasterSurface.ts:drawImage",
+                "selfMs": 32.9
+              },
+              {
+                "functionName": "/src/rendering/SurfaceReceivers.ts:add",
+                "selfMs": 30.345
+              },
+              {
+                "functionName": "browser/benchmark:(anonymous)",
+                "selfMs": 29.539
+              },
+              {
+                "functionName": "/src/rendering/GrassBladeRenderer.ts:appendGrassBladeItems",
+                "selfMs": 27.879
+              },
+              {
+                "functionName": "browser/benchmark:(garbage collector)",
+                "selfMs": 26.655
+              },
+              {
+                "functionName": "/src/physics/PhysicsScene.ts:prepareGeometry",
+                "selfMs": 25.482
+              },
+              {
+                "functionName": "browser/benchmark:setProgram",
+                "selfMs": 23.48
+              },
+              {
+                "functionName": "/src/input/TouchButtons.ts:draw",
+                "selfMs": 22.428
+              },
+              {
+                "functionName": "browser/benchmark:WebGLRenderer.render",
+                "selfMs": 22.372
+              },
+              {
+                "functionName": "/src/rendering/Canvas2DRenderer.ts:drawGrass",
+                "selfMs": 21.948
+              },
+              {
+                "functionName": "/src/client/RemotePresentation.ts:(anonymous)",
+                "selfMs": 21.703
+              },
+              {
+                "functionName": "/src/rendering/GpuRasterSurface.ts:flush",
+                "selfMs": 21.434
+              }
+            ]
+          }
+        },
+        {
+          "name": "recovery-catchup",
+          "elapsedMs": 983.1999999999971,
+          "before": {
+            "wx": 5635.5166015625,
+            "wy": 7104
+          },
+          "after": {
+            "wx": 5661.1171875,
+            "wy": 7104
+          },
+          "travelledPx": 25.599609375,
+          "frames": {
+            "count": 59,
+            "p50": 16.700000000000728,
+            "p95": 16.700000000000728,
+            "p99": 16.700000000000728,
+            "max": 16.700000000000728
+          },
+          "renderMs": {
+            "count": 60,
+            "p50": 2.1999998092651367,
+            "p95": 3,
+            "p99": 3.299999952316284,
+            "max": 3.299999952316284
+          },
+          "updateMs": {
+            "count": 60,
+            "p50": 1.6000001430511475,
+            "p95": 2.299999952316284,
+            "p99": 3.299999952316284,
+            "max": 3.299999952316284
+          },
+          "inputAckMs": {
+            "count": 57,
+            "p50": 38.69999980926514,
+            "p95": 55.200000047683716,
+            "p99": 55.90000009536743,
+            "max": 55.90000009536743
+          },
+          "predictionCorrectionPx": {
+            "count": 60,
+            "p50": 0,
+            "p95": 0.0009772346835615333,
+            "p99": 25.59960938719331,
+            "max": 25.59960938719331
+          },
+          "authorityTimings": {
+            "realm.ai": {
+              "count": 62,
+              "totalMs": 2.200000286102295,
+              "maxMs": 0.10000014305114746,
+              "retained": 62,
+              "p50Ms": 0,
+              "p95Ms": 0.10000014305114746,
+              "p99Ms": 0.10000014305114746
+            },
+            "realm.entityPhysics": {
+              "count": 62,
+              "totalMs": 21.600000381469727,
+              "maxMs": 0.6000001430511475,
+              "retained": 62,
+              "p50Ms": 0.39999985694885254,
+              "p95Ms": 0.40000009536743164,
+              "p99Ms": 0.6000001430511475
+            },
+            "server.replication": {
+              "count": 62,
+              "totalMs": 5.799999952316284,
+              "maxMs": 0.20000004768371582,
+              "retained": 62,
+              "p50Ms": 0.09999990463256836,
+              "p95Ms": 0.19999980926513672,
+              "p99Ms": 0.20000004768371582
+            },
+            "server.tick": {
+              "count": 62,
+              "totalMs": 41.299999713897705,
+              "maxMs": 1,
+              "retained": 62,
+              "p50Ms": 0.6999998092651367,
+              "p95Ms": 0.7999999523162842,
+              "p99Ms": 1
+            }
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "recovery-warm",
+          "elapsedMs": 2999.9000000000015,
+          "before": {
+            "wx": 5661.1171875,
+            "wy": 7104
+          },
+          "after": {
+            "wx": 5661.1171875,
+            "wy": 7104
+          },
+          "travelledPx": 0,
+          "frames": {
+            "count": 180,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.799999999999272,
+            "max": 16.799999999999272
+          },
+          "renderMs": {
+            "count": 181,
+            "p50": 2.5,
+            "p95": 3.3999998569488525,
+            "p99": 4.3999998569488525,
+            "max": 4.700000047683716
+          },
+          "updateMs": {
+            "count": 181,
+            "p50": 1.7999999523162842,
+            "p95": 2.299999952316284,
+            "p99": 2.6000001430511475,
+            "max": 2.700000047683716
+          },
+          "inputAckMs": {
+            "count": 178,
+            "p50": 37.40000009536743,
+            "p95": 51.59999990463257,
+            "p99": 54.90000009536743,
+            "max": 56.10000014305115
+          },
+          "predictionCorrectionPx": {
+            "count": 181,
+            "p50": 2.384185791015625e-06,
+            "p95": 8.58306884765625e-06,
+            "p99": 9.5367431640625e-06,
+            "max": 9.5367431640625e-06
+          },
+          "authorityTimings": {
+            "realm.ai": {
+              "count": 183,
+              "totalMs": 7.299998760223389,
+              "maxMs": 0.20000004768371582,
+              "retained": 183,
+              "p50Ms": 0,
+              "p95Ms": 0.10000014305114746,
+              "p99Ms": 0.20000004768371582
+            },
+            "realm.entityPhysics": {
+              "count": 183,
+              "totalMs": 63.00000238418579,
+              "maxMs": 0.9000000953674316,
+              "retained": 183,
+              "p50Ms": 0.3000001907348633,
+              "p95Ms": 0.5,
+              "p99Ms": 0.8000001907348633
+            },
+            "server.replication": {
+              "count": 183,
+              "totalMs": 16.299999713897705,
+              "maxMs": 0.20000004768371582,
+              "retained": 183,
+              "p50Ms": 0.09999990463256836,
+              "p95Ms": 0.20000004768371582,
+              "p99Ms": 0.20000004768371582
+            },
+            "server.tick": {
+              "count": 183,
+              "totalMs": 125.80000138282776,
+              "maxMs": 1.3000001907348633,
+              "retained": 183,
+              "p50Ms": 0.7000000476837158,
+              "p95Ms": 0.9000000953674316,
+              "p99Ms": 1.1999998092651367
+            }
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        }
+      ],
+      "arrival": {
+        "x": 435,
+        "y": 444,
+        "generation": {
+          "type": "regional",
+          "version": "regional-v13",
+          "seed": 2026,
+          "preset": "temperate-v1"
+        }
+      },
+      "errors": [],
+      "failures": [],
+      "captureRevision": "318da4be3436f4b69492988ec853921fe6eefafe",
+      "captureDirty": true,
+      "provenance": "Core fixes were present as uncommitted source during capture, subsequently committed as c0c3b28f; this is one current implementation, not a before/after comparison."
+    }
+  ],
+  "native": {
+    "scope": "1200 manually clocked ordinary Realm ticks, initial geometry/body admission included; no GPU/network/scheduler/device claim. Percentile ring retains the final 512 values; max/total cover all samples.",
+    "timings": {
+      "server.generate": {
+        "count": 170,
+        "totalMs": 246.641579000001,
+        "maxMs": 17.201750000000004,
+        "retained": 170,
+        "p50Ms": 1.3121250000000373,
+        "p95Ms": 1.6960830000000442,
+        "p99Ms": 10.105457999999999
+      },
+      "server.autotile": {
+        "count": 5,
+        "totalMs": 6.493749000000037,
+        "maxMs": 3.3902909999999906,
+        "retained": 5,
+        "p50Ms": 0.005167000000028565,
+        "p95Ms": 3.3902909999999906,
+        "p99Ms": 3.3902909999999906
+      },
+      "realm.ai": {
+        "count": 1200,
+        "totalMs": 46.983074999999644,
+        "maxMs": 0.8817500000000109,
+        "retained": 512,
+        "p50Ms": 0.027833000000100583,
+        "p95Ms": 0.04529199999979028,
+        "p99Ms": 0.07470799999987321
+      },
+      "realm.entityPhysics": {
+        "count": 1200,
+        "totalMs": 361.6009600000016,
+        "maxMs": 41.21462500000007,
+        "retained": 512,
+        "p50Ms": 0.21441699999991215,
+        "p95Ms": 0.2528339999998934,
+        "p99Ms": 0.4001670000000104
+      },
+      "realm.tick": {
+        "count": 1200,
+        "totalMs": 625.4616779999989,
+        "maxMs": 45.055791,
+        "retained": 512,
+        "p50Ms": 0.3963749999998072,
+        "p95Ms": 0.514417000000094,
+        "p99Ms": 0.6477919999999813
+      }
+    },
+    "spikes": [
+      {
+        "i": 0,
+        "ms": 45.07995900000003,
+        "newBodies": 56,
+        "sections": 38,
+        "rebuilds": 1,
+        "stepMs": 37.81608399999993
+      }
+    ],
+    "collision": {
+      "worldSteps": 1200,
+      "bodyCreates": 56,
+      "geometryBuilds": 38,
+      "geometryRebuilds": 3,
+      "geometryBuildMs": 0.8306249999999409,
+      "geometryParts": 70,
+      "supportQueries": 953,
+      "wheelQueries": 1902,
+      "wheelNarrowQueries": 0,
+      "stepMs": 0.14133300000003146,
+      "tick": 1200,
+      "bodies": 44,
+      "sections": 26,
+      "colliders": 45
+    },
+    "cars": 10,
+    "autonomousCars": 4
+  },
+  "findings": [
+    "Normal-view walking/sprinting at both sampled venue areas kept 16.8ms frame p99; Worker tick progress remained about 60Hz. No sustained server backlog reproduced.",
+    "The southern overview zoom stage reached 33.4ms frame p99 / 50ms max, with render CPU p99 22ms versus authority tick p99 about 1.7ms. This identifies a rendering-limited sampled stage, not the reported phone bottleneck.",
+    "Native initial tick was about 45ms while admitting 56 bodies and 38 sections; warm tick p99 below 1ms on this desktop. Cold spikes remain a device performance concern.",
+    "Fresh racing lanes are intentionally excluded from current autonomous traffic population; generated racing service has not been restored after reset 205. Current venue traffic and spectators still run ordinary shared owners.",
+    "Both configured Android targets reported the handheld not connected; their unavailable-status adapter also raised an unrelated NameError. No physical-phone sample obtained."
+  ]
+}
