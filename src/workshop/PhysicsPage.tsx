@@ -152,6 +152,11 @@ export default function PhysicsPage() {
             canvas.dataset.tick = String(replica?.view.physicsState?.tick ?? 0);
             canvas.dataset.epoch = String(replica?.view.physicsState?.epoch ?? 0);
             canvas.dataset.ack = String(replica?.view.lastProcessedInputSeq ?? 0);
+            canvas.dataset.mount = String(player?.parentId ?? "");
+            const car = replica?.view.serverEntities.find((e) => e.type.startsWith("vehicle-v1:"));
+            canvas.dataset.carX = String(car?.position.wx ?? 0);
+            canvas.dataset.carZ = String(car?.wz ?? 0);
+            canvas.dataset.carRotation = JSON.stringify(car?.bodyRotation ?? null);
           }
           if (now - lastStatus > 0.25) {
             lastStatus = now;

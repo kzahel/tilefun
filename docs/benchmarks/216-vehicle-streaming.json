@@ -1,0 +1,270 @@
+{
+  "revision": "4c908c61577325f2f32e364dc0ae469b06640ce0",
+  "dirty": true,
+  "date": "2026-11-03T15:44:26.317Z",
+  "platform": "darwin 25.6.0 arm64",
+  "cpu": "Apple M4 Pro",
+  "browser": "153.0.8010.12",
+  "cpuRate": 4,
+  "renderer": "gpu",
+  "meshes": true,
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "scope": "Isolated production GPU/meshes streaming readiness; desktop CPU throttling is not Chromebook timing. One run, no whole-render baseline comparison.",
+  "assertReady": "passed",
+  "samples": [
+    {
+      "name": "cold",
+      "elapsedMs": 1999.7999999999993,
+      "travelledPx": 0,
+      "frames": {
+        "count": 120,
+        "p50": 16.69999999999891,
+        "p95": 16.800000000000182,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109
+      },
+      "renderMs": {
+        "count": 121,
+        "p50": 4.700000047683716,
+        "p95": 8.900000095367432,
+        "p99": 10.5,
+        "max": 13.700000047683716
+      },
+      "updateMs": {
+        "count": 121,
+        "p50": 2.4000000953674316,
+        "p95": 4,
+        "p99": 4.5,
+        "max": 6.599999904632568
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 11,
+      "incompleteCacheFrames": 10,
+      "framesOver25Ms": 0,
+      "framesOver50Ms": 0
+    },
+    {
+      "name": "standing",
+      "elapsedMs": 2000,
+      "travelledPx": 0,
+      "frames": {
+        "count": 120,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109
+      },
+      "renderMs": {
+        "count": 121,
+        "p50": 3.299999952316284,
+        "p95": 4.5,
+        "p99": 4.799999952316284,
+        "max": 4.900000095367432
+      },
+      "updateMs": {
+        "count": 121,
+        "p50": 2.0999999046325684,
+        "p95": 2.9000000953674316,
+        "p99": 3.3999998569488525,
+        "max": 3.6999998092651367
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 1,
+      "incompleteCacheFrames": 0,
+      "framesOver25Ms": 0,
+      "framesOver50Ms": 0
+    },
+    {
+      "name": "walk",
+      "elapsedMs": 2999.8999999999996,
+      "travelledPx": 187.97906927064597,
+      "frames": {
+        "count": 180,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109
+      },
+      "renderMs": {
+        "count": 181,
+        "p50": 4.299999952316284,
+        "p95": 5.299999952316284,
+        "p99": 6,
+        "max": 6
+      },
+      "updateMs": {
+        "count": 181,
+        "p50": 2.5,
+        "p95": 3.5,
+        "p99": 4.5,
+        "max": 5.400000095367432
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 1,
+      "incompleteCacheFrames": 0,
+      "framesOver25Ms": 0,
+      "framesOver50Ms": 0
+    },
+    {
+      "name": "sprint",
+      "elapsedMs": 5116.4,
+      "travelledPx": 680.5313873291016,
+      "frames": {
+        "count": 300,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.799999999999272,
+        "max": 133.1999999999971
+      },
+      "renderMs": {
+        "count": 301,
+        "p50": 3.9000000953674316,
+        "p95": 6.400000095367432,
+        "p99": 7.599999904632568,
+        "max": 7.700000047683716
+      },
+      "updateMs": {
+        "count": 308,
+        "p50": 1.9000000953674316,
+        "p95": 3.0999999046325684,
+        "p99": 4.299999952316284,
+        "max": 4.5
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 1,
+      "incompleteCacheFrames": 0,
+      "framesOver25Ms": 1,
+      "framesOver50Ms": 1
+    },
+    {
+      "name": "reverse",
+      "elapsedMs": 4999.700000000001,
+      "travelledPx": 627.4073048988669,
+      "frames": {
+        "count": 300,
+        "p50": 16.700000000000728,
+        "p95": 16.799999999999272,
+        "p99": 16.799999999999272,
+        "max": 16.80000000000291
+      },
+      "renderMs": {
+        "count": 301,
+        "p50": 3.4000000953674316,
+        "p95": 5.3999998569488525,
+        "p99": 6.400000095367432,
+        "max": 7.6000001430511475
+      },
+      "updateMs": {
+        "count": 301,
+        "p50": 2,
+        "p95": 2.700000047683716,
+        "p99": 3.4000000953674316,
+        "max": 3.700000047683716
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 1,
+      "incompleteCacheFrames": 0,
+      "framesOver25Ms": 0,
+      "framesOver50Ms": 0
+    },
+    {
+      "name": "zoom-out",
+      "elapsedMs": 2999.9000000000015,
+      "travelledPx": 0,
+      "frames": {
+        "count": 180,
+        "p50": 16.700000000000728,
+        "p95": 16.700000000000728,
+        "p99": 16.799999999999272,
+        "max": 16.80000000000291
+      },
+      "renderMs": {
+        "count": 181,
+        "p50": 5,
+        "p95": 6.8999998569488525,
+        "p99": 8.399999856948853,
+        "max": 8.899999856948853
+      },
+      "updateMs": {
+        "count": 181,
+        "p50": 2,
+        "p95": 2.799999952316284,
+        "p99": 4.1000001430511475,
+        "max": 4.199999809265137
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 1,
+      "incompleteCacheFrames": 0,
+      "framesOver25Ms": 0,
+      "framesOver50Ms": 0
+    }
+  ],
+  "limits": [
+    "Sprint retained one 133.2ms frame, despite 16.8ms p99. Readiness is not a no-stutter guarantee.",
+    "Final targets now include depth; source color/depth pairs remain within the 16 MiB body-image budget.",
+    "No phone or all-device performance claim."
+  ]
+}

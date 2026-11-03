@@ -1,0 +1,204 @@
+{
+  "date": "2026-11-03",
+  "revision": "4c908c61577325f2f32e364dc0ae469b06640ce0",
+  "source": "Live development course through the public Caddy URL, existing physical ChromeOS browser; owned CDP tab closed after measurement.",
+  "device": {
+    "ua": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "cores": 8,
+    "memory": 8,
+    "viewport": [
+      1600,
+      721
+    ],
+    "dpr": 2.4000000953674316
+  },
+  "initial": {
+    "renderer": "gpu",
+    "gpuDevice": "ready",
+    "ready": "true",
+    "playerX": "-280",
+    "playerY": "38",
+    "playerZ": "-0.00020647048950195312",
+    "serverZ": "-0.0007233619689941406",
+    "support": "ground",
+    "space": "outside",
+    "serverSpace": "outside",
+    "visibility": "auto",
+    "courseRoute": "drive",
+    "generatedSeed": "",
+    "bridgeX": "0",
+    "bridgeY": "0",
+    "surfaceCount": "6",
+    "carX": "-280",
+    "carY": "0",
+    "carZ": "0",
+    "carModel": "compact-1",
+    "carUp": "1",
+    "carRotation": "[0,0,0,1]",
+    "trafficCount": "2",
+    "trafficX": "-240",
+    "trafficY": "-160"
+  },
+  "course": {
+    "dataset": {
+      "renderer": "gpu",
+      "gpuDevice": "ready",
+      "ready": "true",
+      "playerX": "369.1054798301243",
+      "playerY": "0.059377823129135344",
+      "playerZ": "0.14183081113949036",
+      "serverZ": "0.14183081686496735",
+      "support": "ground",
+      "space": "outside",
+      "serverSpace": "outside",
+      "visibility": "auto",
+      "courseRoute": "drive",
+      "generatedSeed": "",
+      "bridgeX": "0",
+      "bridgeY": "0",
+      "surfaceCount": "6",
+      "carX": "369.10546875",
+      "carY": "0.059377823024988174",
+      "carZ": "0.14183081686496735",
+      "carModel": "compact-1",
+      "carUp": "0.9999542725430484",
+      "carRotation": "[2.6889644434346164e-7,-0.00478160312065662,-7.481047603967328e-8,0.9999885680704148]",
+      "trafficCount": "2",
+      "trafficX": "-240.0218505859375",
+      "trafficY": "-160"
+    },
+    "frames": {
+      "count": 380,
+      "p50": 16.700000000000728,
+      "p95": 33.399999999999636,
+      "p99": 50,
+      "max": 50.100000000000364
+    },
+    "maxZ": 48.45827160652706,
+    "minUp": 0.9619729252117183,
+    "scene": {
+      "terrain": {
+        "resident": 42,
+        "schedulerRecordsCreated": 54,
+        "queuedJobs": 0,
+        "building": 0,
+        "pending": 0,
+        "oldestMs": 0,
+        "rowsLastFrame": 0,
+        "surfaceBytes": 11010048,
+        "gpu": {
+          "uploads": 381,
+          "uploadedBytes": 17814612,
+          "vertexUploadedBytes": 189011520,
+          "drawCalls": 6124,
+          "frames": 468,
+          "textureBytes": 6373188,
+          "textures": 59,
+          "recoveries": 0,
+          "batchTextureLimit": 8,
+          "worldTargetBytes": 4966528,
+          "worldComposites": 468,
+          "overlayRasterBuilds": 6,
+          "overlayRasterHits": 2584,
+          "overlayRasterCulls": 218,
+          "overlayRasterBytes": 863932,
+          "overlayRasterCount": 6,
+          "meshDraws": 1120,
+          "vehicleBedDraws": 0,
+          "meshDrawCalls": 4029,
+          "meshImageHits": 694,
+          "meshImageMisses": 426,
+          "meshImageCount": 2,
+          "meshImageBytes": 262144,
+          "meshState": "ready",
+          "meshAsset": "compact-1-authored-v7",
+          "meshParts": 55,
+          "ambulanceState": "ready",
+          "ambulanceParts": 56,
+          "fireTruckState": "ready",
+          "fireTruckParts": 49,
+          "vehicleAssets": {
+            "compact-1-authored-v7": {
+              "state": "ready",
+              "meshes": 55,
+              "drawMeshes": 8,
+              "error": null
+            },
+            "ambulance-authored-v3": {
+              "state": "ready",
+              "meshes": 56,
+              "drawMeshes": 15,
+              "error": null
+            },
+            "fire-truck-ladder-1-authored-v2": {
+              "state": "ready",
+              "meshes": 49,
+              "drawMeshes": 10,
+              "error": null
+            },
+            "dump-truck-authored-v2": {
+              "state": "ready",
+              "meshes": 11,
+              "drawMeshes": 11,
+              "error": null
+            }
+          },
+          "vehiclePaints": {},
+          "vehiclePaintDraws": 0,
+          "vehiclePaintFallbacks": 0,
+          "targetBytes": 524288
+        }
+      },
+      "alpha": 0.6839999992846891,
+      "steps": 610,
+      "authority": {
+        "clock": {
+          "mode": "realtime",
+          "running": true,
+          "ticks": 632
+        },
+        "channel": {
+          "queued": 0,
+          "queuedBytes": 0,
+          "inFlight": 1,
+          "inFlightBytes": 8,
+          "incoming": 2,
+          "oldestIncomingMs": 1.4000000059604645,
+          "highWaterBytes": 56,
+          "highWaterCount": 7
+        }
+      },
+      "cameraX": 369.1052796282948,
+      "cameraY": 0.05937782136000907,
+      "cameraTime": 17.1255,
+      "prediction": {
+        "ackSeq": 607,
+        "physicsTick": 632,
+        "epoch": 1,
+        "bodies": 1,
+        "omitted": 0,
+        "replayCount": 4,
+        "replayMs": 0.30000001192092896,
+        "pastTickError": 1.1080125775167634e-05,
+        "resimPosErr": 0,
+        "comparisonInputTick": 597,
+        "comparisonPhysicsTick": 635,
+        "status": "ready"
+      },
+      "pixelSnap": false,
+      "carMeshOverride": false,
+      "meshEligibleVehicleTypes": [
+        "vehicle-v1:dump-truck",
+        "vehicle-v1:compact-1"
+      ],
+      "meshDraws": 1120,
+      "bedMeshDraws": 0
+    }
+  },
+  "limits": [
+    "One short live-development functional run, no matched before/after device comparison.",
+    "Frame p50 16.7ms, p95 33.4ms, p99 50ms: functional readiness does not establish a steady 60fps Chromebook budget.",
+    "This course contains three cars and bridge geometry, not a dense NPC/traffic stress scene.",
+    "No phone, thermal or all-model qualification."
+  ]
+}

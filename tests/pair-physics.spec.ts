@@ -99,3 +99,62 @@ test("ordinary two-session Worker lab routes either seat, fences delayed frames,
     .toBe(0);
   expect(errors).toEqual([]);
 });
+
+test("delayed guest drives a fully rotating car seen by both ordinary client views", async ({
+  page,
+}) => {
+  test.setTimeout(60000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/tilefun/workshop.html?scene=vehicle#/tool/physics");
+  const host = page.getByLabel("Host physics view"),
+    guest = page.getByLabel("Guest physics view");
+  await expect(host).toHaveAttribute("data-ready", "true");
+  await expect(guest).toHaveAttribute("data-ready", "true");
+  await page.getByRole("button", { name: "Guest RTT 200ms", exact: true }).click();
+  await guest.focus();
+  await page.keyboard.press("e");
+  await expect(guest).not.toHaveAttribute("data-mount", "");
+  await page.keyboard.down("ArrowRight");
+  try {
+    await expect
+      .poll(async () => Number(await host.getAttribute("data-car-z")))
+      .toBeGreaterThan(12);
+    await expect
+      .poll(async () => Number(await guest.getAttribute("data-car-z")))
+      .toBeGreaterThan(12);
+  } finally {
+    await page.keyboard.up("ArrowRight");
+  }
+  await page.waitForTimeout(1200);
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await expect
+    .poll(async () =>
+      Math.abs(
+        Number(await host.getAttribute("data-car-x")) -
+          Number(await guest.getAttribute("data-car-x")),
+      ),
+    )
+    .toBeLessThan(0.05);
+  const rotations = await Promise.all(
+    [host, guest].map(
+      async (c) => JSON.parse((await c.getAttribute("data-car-rotation")) ?? "null") as number[],
+    ),
+  );
+  expect(
+    Math.abs(
+      (rotations[0] ?? []).reduce((sum, value, i) => sum + value * (rotations[1]?.[i] ?? 0), 0),
+    ),
+  ).toBeCloseTo(1, 3);
+  const epoch = await host.getAttribute("data-epoch");
+  await page.getByRole("button", { name: "Save / reload", exact: true }).click();
+  await expect(host).not.toHaveAttribute("data-epoch", epoch ?? "");
+  await expect(guest).toHaveAttribute("data-ready", "true");
+  await expect(guest).not.toHaveAttribute("data-mount", "");
+  await page.screenshot({ path: test.info().outputPath("two-client-vehicle.png"), fullPage: true });
+  await page.getByRole("link", { name: "All tools", exact: true }).click();
+  await expect
+    .poll(() => page.workers().filter((w) => w.url().includes("scenario.worker")).length)
+    .toBe(0);
+  expect(errors).toEqual([]);
+});

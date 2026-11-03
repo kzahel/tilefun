@@ -1,9 +1,9 @@
 # Vehicles: shared physics baseline
 
-[216](../tactical/216-dynamic-3d-vehicles.md) is implementing freely rotating land-vehicle chassis, authored axle suspension/traction, full replay/save state, shared depth and recovery. Game and labs share the default controller; qualification and the owner feel review are pending. Boats retain their upright watercraft behavior.
+[216](../tactical/216-dynamic-3d-vehicles.md) delivers freely rotating land-vehicle chassis, authored axle suspension/traction, full replay/save state, shared depth and recovery. Game and labs share the default controller; native/browser qualification passes; owner feel review is next. The physical Chromebook course works, with 16.7/33.4/50ms frame p50/p95/p99 in a short development run. Boats retain their upright watercraft behavior.
 
 
-Status: rolling vehicle motor and ordinary autonomous road traffic restored and locally qualified in 209; owner playtest positive, driving-audio follow-up delivered.
+Status: dynamic land-vehicle chassis and shared depth delivered in 216; ready for owner feel review. Shared road traffic and driving audio remain.
 Updated: 2026-11-03.
 
 [209](../tactical/209-car-driving-and-autonomous-traffic.md) restores shared rolling
@@ -34,7 +34,7 @@ and authority/UI commands are removed. Saved traffic poses remain readable in th
 existing collection; obsolete legacy routes/coupling remain discarded. Models,
 paints, approved pixels and static layout planners remain unchanged.
 
-New suspension/full tumbling and dynamic vehicle orientation are follow-on work.
+216 now supplies suspension, full tumbling and dynamic vehicle orientation.
 Duplicate articulated collision/ground/carry helpers have been deleted; retained
 equipment math is render-only. Collision inspection reads shared body dimensions. The old feature descriptions below are historical, not current promises.
 

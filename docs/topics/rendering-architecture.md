@@ -1,6 +1,6 @@
 # Rendering architecture and backend separation
 
-[216](../tactical/216-dynamic-3d-vehicles.md) is qualifying shared GPU world depth without discarding per-vehicle image reuse: cached color/depth pairs, world-relative depth conversion, upright sprite planes and surface top/front equations. Physical cars use separate ground shadows. No CPU depth readback is added to gameplay; the existing coherent final world composition remains.
+[216](../tactical/216-dynamic-3d-vehicles.md) delivers qualified shared GPU world depth without discarding per-vehicle image reuse: cached color/depth pairs, world-relative depth conversion, upright sprite planes and surface top/front equations. Physical cars use separate ground shadows. No CPU depth readback is added to gameplay; the existing coherent final world composition remains. The independent common-geometry depth oracle matches all 3,590 sampled vehicle-overlap pixels across behind/above/rolled poses, including cache reuse and reversed draw order.
 
 
 [215](../tactical/215-coherent-world-raster.md) repairs the registration regression
@@ -25,7 +25,7 @@ Reset [205](../tactical/205-physics-reset.md) makes shared physics poses authori
 for scene collection and collision inspection. Runtime car ground fitting and
 articulated carry/equipment reconstruction are deleted; retained equipment pose
 math is render-only for frozen asset inspection. CollisionDebug reads the same
-body dimensions as Rapier. New full car orientation/suspension is deferred.
+body dimensions as Rapier. 216 now supplies full car orientation/suspension.
 
 Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated

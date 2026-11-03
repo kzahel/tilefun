@@ -1,5 +1,15 @@
 # Streaming and gameplay performance
 
+[216](../tactical/216-dynamic-3d-vehicles.md) adds suspension/full rotation and shared
+world depth. An alternating native comparison at 96 NPCs + 32 driving cars measures
+0.358 → 0.500ms mean synchronize/step; parked fleets sleep and remain comparable.
+GPU/meshes CPU-rate-4 streaming readiness passes, retaining a single 133.2ms sprint
+frame despite 16.8ms p99. A physical Chromebook completes the bridge course, but
+its short development run records 16.7/33.4/50ms frame p50/p95/p99. This is ready
+for handling review, with device frame-cost isolation still pending; no matched
+whole-render, crowded-device or phone improvement is claimed. Linked receipts own
+scene, build and measurement limits.
+
 [215](../tactical/215-coherent-world-raster.md) measures the coherent-world repair
 on a physical Chromebook. One retained RGBA8 target/fullscreen pass replaces per-layer
 fractional camera phases; actor filtering retains ordered batching. Sparse render

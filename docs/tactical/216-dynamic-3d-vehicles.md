@@ -1,6 +1,6 @@
 # Dynamic 3D vehicles and coherent depth
 
-Status: implementation in progress; owner authorized 2026-11-03.
+Status: implemented and qualified for owner feel review, 2026-11-03; owner acceptance pending.
 Owners: [vehicles](../topics/vehicles.md), [physics](../topics/physics-engine.md),
 [rendering](../topics/rendering-architecture.md), [embedded labs](../topics/embedded-engine-labs.md).
 
@@ -78,8 +78,7 @@ budget with eight bytes per pixel; no per-frame CPU image/depth readback is adde
 The new production probe compares normal/cache/reversed draw order against actual
 vehicle geometry rendered in one common target, preserving source double-sided
 faces in its independent object-ID oracle. Three representative poses agree at
-all sampled overlap pixels. Browser/device and broader lifecycle qualification
-are still in progress; this checkpoint is not marked ready.
+all sampled overlap pixels. The completed delivery qualification and device limits are recorded below.
 
 Review surfaces: World geometry's car-dynamics fixture offers bridge ascent/
 descent, a lower passage, jump ramp and tipping ledge with ordinary model selection.
@@ -89,10 +88,14 @@ nearby-authorized support/clearance-checked recovery; ordinary exit remains.
 Wheel meshes retain the existing travel animation; independent suspension/steering
 articulation is polish beyond the first handling decision.
 
-Native checkpoint: 154 focused checks across 14 files and all three TypeScript
-projects pass; production inventories/build pass (2,121 Workshop identities,
-including normal Chromium retina verification). Full selected browser delivery
-checks and throttled streaming/per-device evidence remain before readiness.
+Delivery qualification: 311 focused native checks across 22 files, 31 distinct
+production full-Chromium browser cases, all three TypeScript projects, focused
+lint, inventories/build and GPU/meshes CPU-rate-4 streaming readiness pass
+(2,121 Workshop identities, including normal Chromium retina verification).
+Browser cases cover GPU context/resource recovery, the independent depth oracle,
+Worker/P2P, bridge/garage traversal, course rotation through save/reload, compact
+and truck recovery, and a delayed guest driving the shared car with matching
+ordinary replicas and seat persistence. Lab teardown releases its Workers.
 
 The [native comparison](../benchmarks/216-vehicle-physics.json) alternates three
 runs against exact pre-feature PhysicsScene source from d2e6eaf4, without retaining
@@ -102,3 +105,35 @@ all 32 cars and measure 0.213 → 0.196ms mean. This excludes AI/render/network 
 is not Chromebook timing. The initial driving implementation measured 1.112ms;
 reusing one body query pose per tick removed repeated per-wheel/neighbour WASM
 translation reads. Its initial receipt is retained inside the comparison.
+
+## Feel-review handoff and limits
+
+The [car dynamics course](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=car-dynamics&renderer=gpu&meshes#/tool/world-geometry)
+provides drive/passage/jump/ledge/recover starts and a model selector. Start with
+compact-1, then dump-truck. Drive car / E / Y enters; arrows or normal controls
+drive. F / D-pad down / Right car recovers a nearby settled overturned vehicle
+with a valid upright clearance. Existing game sessions must Save and reload;
+host and guests need the same updated binary frame version.
+
+The [two-client vehicle case](https://tilefun.graehlarts.com/tilefun/workshop.html?scene=vehicle#/tool/physics)
+uses ordinary prediction and configurable guest delay, including seat ownership;
+its shaded collider view intentionally displays physical shapes, not final art.
+
+[Streaming evidence](../benchmarks/216-vehicle-streaming.json): all six GPU/meshes
+CPU-rate-4 stages finish with zero missing, incomplete or stale terrain. Frame p99
+is 16.8ms in each stage; sprint retains one 133.2ms frame. Readiness is not a
+no-stutter guarantee, and this is not a matched renderer-cost comparison.
+
+[Physical Chromebook course](../benchmarks/216-chromebook-vehicle-course.json):
+Chrome 150, eight logical cores, 8GiB, 1600×721 CSS viewport at DPR 2.4. A compact
+car climbs the 48px bridge, tilts (minimum up component 0.962), crosses and descends;
+its final prediction is ready with zero reported resimulation position error.
+The short live-development run records frame p50/p95/p99 of 16.7/33.4/50ms. This
+proves functional device delivery, not steady 60fps or a before/after budget.
+There is no new phone, thermal or crowded-device qualification.
+
+Next decision: owner reviews ramp transitions, braking/steering, jump landings,
+rollovers and the relative feel of the compact and truck. Tune shared defaults
+from that feedback before detailed wheel suspension/steering animation or
+articulated cargo/equipment. Device frame-cost isolation remains a performance
+follow-up; do not describe this checkpoint as an all-device performance signoff.

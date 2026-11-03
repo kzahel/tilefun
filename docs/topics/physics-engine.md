@@ -1,6 +1,6 @@
 # General 3D physics backend
 
-[216](../tactical/216-dynamic-3d-vehicles.md) adds freely rotating land vehicles with authored axle suspension/tire impulses before the same single world step. Frame 0x11 retains full rotation/angular/sleep state; ordinary replicas and records retain orientation. Direct same-world collider wheel queries avoid a previous-step query warm-up during replay. Qualification is in progress.
+[216](../tactical/216-dynamic-3d-vehicles.md) adds freely rotating land vehicles with authored axle suspension/tire impulses before the same single world step. Frame 0x11 retains full rotation/angular/sleep state; ordinary replicas and records retain orientation. Direct same-world collider wheel queries avoid a previous-step query warm-up during replay. 311 focused native and 31 distinct production browser checks pass across the affected shared-engine contracts; owner vehicle feel review is next.
 
 
 Status: shared Rapier default delivered and qualified; legacy solvers/options deleted.
@@ -16,9 +16,9 @@ owns authoring semantics; [prediction](player-prediction.md) owns input replay;
 
 [209](../tactical/209-car-driving-and-autonomous-traffic.md) adds a shared grounded
 traction motor with signed speed, acceleration/braking, reverse, lateral grip and
-rolling steering. Airborne momentum and upright shapes remain. Players and bounded
+rolling steering. Airborne momentum remains; 216 replaces upright land-vehicle shapes with full dynamic orientation. Players and bounded
 road planning supply intent to the same single world step; no route code writes
-physical poses. Numerical replay retains speed/steering targets and previous yaw using frame 0x10.
+physical poses. Numerical replay retains speed/steering targets and previous yaw using the then-current frame 0x10; 216 advances it to 0x11.
 The vehicle topic owns traffic population, persistence and takeover policy.
 
 ## Ground seams and movement pacing (208)
