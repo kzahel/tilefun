@@ -1,6 +1,6 @@
 # Car driving and autonomous traffic
 
-Status: authorized, implementation in progress.
+Status: delivered and locally qualified; ready for owner playtesting.
 Updated: 2026-11-03.
 
 Owner approved the investigation proposal: restore car locomotion and ordinary
@@ -71,3 +71,37 @@ Final wire tag is 0x10, with 109-byte numerical bodies; the two motor fields and
 previous heading add 12 bytes to the 208 payload. This avoids renewed rotation
 pacing as rolling steering becomes visible. The existing rendered-car replay
 check now covers its intermediate heading as well as XYZ.
+
+## Delivery qualification
+
+Committed checkpoints: `28667730` delivers the shared motor; `27e8f03d` restores
+road traffic, persistence and the shared Worker fixture. The final focused run
+passes 116 native checks across 12 files, all three TypeScript projects and
+focused lint. Native coverage includes continuous circulation, queued crossings,
+occupied-junction reload, following/resume, ground-level spawning beneath a deck,
+legacy lane reacquisition, takeover/off-road parking and prediction/codec behavior.
+
+Five production full-Chromium browser cases pass: ordinary Worker NPC/prediction,
+delayed P2P convergence, two-session lab lifecycle, driving a ramp with saved seat,
+and moving traffic with pause/save/reload/resume and Worker teardown. The Workshop
+view was also visually inspected. Art catalog and Workshop inventories were
+regenerated; all 2,120 candidate identities verify in Chromium at retina scale.
+Changes are runtime fingerprints, source references, traffic descriptions and one
+interactive traffic candidate; promoted art pixels remain unchanged.
+
+The production build passes under the project's Node 24 version. An initial run
+under the shell's Node 27 alpha failed in pngjs's legacy zlib constructor before
+compilation; using Node 24 resolves that toolchain incompatibility without source
+changes.
+
+GPU/meshes streaming readiness passes with 4× CPU throttling and traffic enabled.
+Walk/sprint/reverse have zero final missing, incomplete or stale terrain, with
+17/18/17 visible entities. This desktop Chromium run is a readiness check, not a
+phone-performance or legacy-performance comparison. Benchmark command:
+`npm run streaming:bench -- --assert-ready --renderer=gpu --meshes --cpu=4`.
+
+Next: owner playtest rolling turns, reversing and road queues in the game and
+[Driving and traffic](https://tilefun.graehlarts.com/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic).
+Existing sessions need Save and reload; host and guests must use matching frame
+versions. Dead-end lanes stop rather than performing three-point turns. Racing,
+shopping trips, suspension/full tumbling and articulated equipment remain deferred.

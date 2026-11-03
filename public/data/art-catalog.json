@@ -35455,19 +35455,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:74"
+          "source": "src/scenarios/ScenarioSession.ts:87"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:76"
+          "source": "src/scenarios/ScenarioSession.ts:89"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:135"
+          "source": "src/scenarios/ScenarioSession.ts:150"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:214"
+          "source": "src/scenarios/ScenarioSession.ts:229"
         },
         {
           "system": "Gameplay",
@@ -35495,19 +35495,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1203"
+          "source": "src/server/Realm.ts:1208"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1411"
+          "source": "src/server/Realm.ts:1416"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2065"
+          "source": "src/server/Realm.ts:2070"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2278"
+          "source": "src/server/Realm.ts:2283"
         },
         {
           "system": "Gameplay",
@@ -36595,11 +36595,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:181"
+          "source": "src/physics/PhysicsScene.ts:182"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:188"
+          "source": "src/physics/PhysicsScene.ts:189"
         },
         {
           "system": "Gameplay",
@@ -36611,11 +36611,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1298"
+          "source": "src/server/Realm.ts:1303"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2242"
+          "source": "src/server/Realm.ts:2247"
         },
         {
           "system": "Gameplay",

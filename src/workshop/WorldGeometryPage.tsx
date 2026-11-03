@@ -222,9 +222,11 @@ function GeometryFixtures({ initial }: { initial: string }) {
       <p className="eyebrow">SHARED GAME PHYSICS</p>
       <h1>{fixture === "traffic" ? "Driving and traffic" : "World geometry lab"}</h1>
       <p>
-        Walk ramps, cross bridges, pass underneath and drive ordinary upright cars. Arrows/WASD
-        move, Space jumps, E enters or leaves a nearby car, R reverses. Touch and controller use the
-        same controls. Specialized equipment and train services are deferred.
+        {fixture === "traffic"
+          ? "Watch road cars follow lanes and wait at crossings, or drive the parked car beside the sidewalk. "
+          : "Walk ramps, cross bridges, pass underneath and drive ordinary upright cars. "}
+        Arrows/WASD move, Space jumps, E enters or leaves a nearby car, R reverses. Touch and
+        controller use the same controls. Specialized equipment and train services are deferred.
       </p>
       <label>
         Fixture{" "}

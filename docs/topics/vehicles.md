@@ -1,6 +1,6 @@
 # Vehicles: shared physics baseline
 
-Status: rolling vehicle motor and ordinary autonomous road traffic restored in 209; production qualification in progress.
+Status: rolling vehicle motor and ordinary autonomous road traffic restored and locally qualified in 209; ready for owner playtesting.
 Updated: 2026-11-03.
 
 [209](../tactical/209-car-driving-and-autonomous-traffic.md) restores shared rolling
@@ -17,6 +17,12 @@ registry. Mode/route state persists, old road identities reacquire nearby lanes,
 and player takeover/road release/off-road parking share ordinary lifecycle ownership.
 Generated depots remain parked. Workshop → Driving and traffic uses the same
 ScenarioSession/Worker/Realm and motor, with pause/save/reload and visible NPC cars.
+
+Qualification: 116 focused native checks, five production Worker/P2P/vehicle browser
+cases, all typechecks, focused lint, production build and GPU/meshes streaming
+readiness with 4× CPU throttling pass. This does not establish physical-phone
+performance. Next is owner playtesting of rolling turns, reversing and traffic
+queues. Reload host and guests together for the updated numerical frame format.
 
 Parking visitors/racers, wheel-lift towing, transporter
 apparatus and tipping-bed/cargo controls are deferred. Their old motion services
