@@ -2,6 +2,7 @@ import predictor from "../client/PlayerPredictor.ts?raw";
 import movement from "../entities/EntityManager.ts?raw";
 import bodyRotation from "../physics/BodyRotation.ts?raw";
 import gravity from "../physics/Gravity.ts?raw";
+import jumpAssist from "../physics/JumpAssist.ts?raw";
 import physicalEdits from "../physics/PhysicalEdits.ts?raw";
 import physicsBodies from "../physics/PhysicsBodies.ts?raw";
 import physicsDefaults from "../physics/PhysicsDefaults.ts?raw";
@@ -72,6 +73,7 @@ export const scenarioRuntimeSource = {
   realmWildlife,
   physicsDefaults,
   gravity,
+  jumpAssist,
   controls,
   vehicleMotor,
   roadTraffic,

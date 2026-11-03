@@ -1,6 +1,6 @@
 import RAPIER from "@dimforge/rapier3d-compat";
 import { isBoat } from "../boats/Boat.js";
-import { CHUNK_SIZE_PX, JUMP_GRAVITY, JUMP_VELOCITY } from "../config/constants.js";
+import { CHUNK_SIZE_PX, JUMP_GRAVITY } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { Direction } from "../entities/Entity.js";
@@ -13,6 +13,7 @@ import {
   worldRotation,
   yawRotation,
 } from "./BodyRotation.js";
+import { assistedJumpVelocity } from "./JumpAssist.js";
 import { teleportBody } from "./PhysicalEdits.js";
 import { physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
 import {
@@ -534,7 +535,8 @@ export class PhysicsScene {
           vertical =
             (input.altitude / SCALE + entry.halfY - entry.body.translation().y) / PHYSICS_DT;
       } else if (jump && entry.state.grounded) {
-        vertical = JUMP_VELOCITY / SCALE;
+        vertical =
+          assistedJumpVelocity(entry.entity, entry.state, this.bodies.values(), gravity) / SCALE;
         entry.state.grounded = false;
         delete entry.state.supportId;
       }
