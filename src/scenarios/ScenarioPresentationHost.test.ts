@@ -222,11 +222,12 @@ it("cycles a presentation-only pose while authority is paused, then restores the
     expect.anything(),
     1,
     expect.anything(),
-    [],
+    expect.objectContaining({ collectItems: expect.any(Function) }),
     false,
     undefined,
     undefined,
     expect.anything(),
+    { observer: player, visibility: "auto" },
   );
   cycle = false;
   vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(start + 3100);

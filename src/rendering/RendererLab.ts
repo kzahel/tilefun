@@ -17,6 +17,7 @@ import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import { SceneFrame } from "./SceneFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
 import { probeSpriteSeams } from "./SpriteSeamProbe.js";
+import { probeSurfaceDecals } from "./SurfaceDecalProbe.js";
 import { probeVehicleDepth } from "./VehicleDepthProbe.js";
 import { probeWorldRegistration } from "./WorldRegistrationProbe.js";
 
@@ -371,6 +372,7 @@ const lab = {
   probeCameraStability,
   probeWorldRegistration,
   probeVehicleDepth,
+  probeSurfaceDecals,
 };
 (window as unknown as { rendererLab: typeof lab }).rendererLab = lab;
 const controls = required(document.querySelector<HTMLElement>("#controls"));

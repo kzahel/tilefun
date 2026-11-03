@@ -1,8 +1,8 @@
 import type { GameContext } from "../core/GameScene.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { presentTerrain } from "../rendering/OutdoorPresentation.js";
+import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
 import { presentSurfaceScene } from "../rendering/presentSurfaceScene.js";
-import type { ParticleItem } from "../rendering/SceneItem.js";
 import { renderInterior } from "./renderInterior.js";
 
 /**
@@ -32,7 +32,11 @@ export function renderWorld(gc: GameContext): void {
  * Called after any scene-specific overlays (editor grid, etc.).
  * Collects a renderer-agnostic SceneItem[], then draws via Canvas2D backend.
  */
-export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: ParticleItem[]): void {
+export function renderEntities(
+  gc: GameContext,
+  alpha = 1,
+  extraParticles?: ParticlePresentation,
+): void {
   const { camera, stateView, renderer } = gc;
   if (gc.spriteCatalog.size === 0) return;
 
@@ -55,6 +59,7 @@ export function renderEntities(gc: GameContext, alpha = 1, extraParticles?: Part
     undefined,
     undefined,
     gc.sceneFrame,
+    { observer: stateView.playerEntity, visibility: "auto" },
   );
 
   gc.doorPresentation?.appendOverlays(items, gc.realmId ?? null);

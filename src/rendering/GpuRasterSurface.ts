@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import type { DecalVertex } from "./ProjectedDecals.js";
 import { type RasterSurface, rasterRevision } from "./RasterSurface.js";
 import { SubpixelImages } from "./SubpixelImages.js";
 import { WORLD_RASTER_PAD } from "./WorldRasterFrame.js";
@@ -77,9 +78,19 @@ export class GpuRasterSurface implements RasterSurface {
   private readonly batchTextures: THREE.Texture[] = [];
   private readonly batchDepthTextures: (THREE.Texture | null)[] = [];
   private depthEnabled = false;
+  private decals: {
+    image: CanvasImageSource;
+    polygons: DecalVertex[][];
+    depth: [number, number, number];
+    alpha: number;
+    color: string;
+    clips: Rect[] | null;
+    casterId?: number | undefined;
+  }[] = [];
   worldDepth = false;
   private readonly depthPlane = [0, 0, 0, 0];
   private readonly depthFront = [0, 0, 0];
+  private depthXBounds: readonly number[] | undefined;
   private count = 0;
   private frame = 0;
   private readonly pages = new Map<CanvasImageSource, Page[]>();
@@ -111,6 +122,7 @@ export class GpuRasterSurface implements RasterSurface {
   imageSmoothingEnabled = false;
   meshBody?: NonNullable<RasterSurface["meshBody"]>;
   meshReady?: ReadonlySet<string>;
+  meshCasters?: ReadonlySet<number>;
   lost = false;
   disposed = false;
   readonly stats = {
@@ -223,6 +235,7 @@ export class GpuRasterSurface implements RasterSurface {
   presentWorld(x: number, y: number) {
     if (!this.worldTarget || this.lost || this.disposed) return;
     this.flush();
+    this.drawDecals();
     const u = this.presentMaterial.uniforms;
     if (!u.image || !u.viewport || !u.targetSize || !u.offset)
       throw Error("World composite uniforms missing");
@@ -235,6 +248,82 @@ export class GpuRasterSurface implements RasterSurface {
     this.renderer.render(this.presentScene, this.camera);
     this.stats.drawCalls++;
     this.stats.worldComposites++;
+  }
+  /** Non-world overlays must remain above the completed shadow blend. */
+  finishDecals() {
+    this.flush();
+    this.drawDecals();
+  }
+  /** A pass may borrow its vertices only until submit returns. Keep screen-space
+   * copies; the late blend sees the finished world's depth and never writes it. */
+  projectedDecal = (
+    image: CanvasImageSource,
+    polygons: readonly (readonly DecalVertex[])[],
+    depth: readonly [number, number, number],
+    alpha: number,
+    color: string,
+    casterId?: number,
+  ) => {
+    const det = this.a * this.d - this.b * this.c;
+    if (!this.worldTarget || Math.abs(det) < 1e-8) return;
+    const a = (depth[0] * this.d - depth[1] * this.b) / det;
+    const b = (depth[1] * this.a - depth[0] * this.c) / det;
+    this.decals.push({
+      image,
+      alpha,
+      color,
+      // Room painter prepasses precede bodies; outdoor late blends can verify
+      // the actual representation selected, including pending paint fallbacks.
+      casterId: this.worldDepth ? casterId : undefined,
+      depth: [a, b, depth[2] - a * this.e - b * this.f],
+      polygons: polygons.map((p) =>
+        p.map((v) => ({
+          x: this.a * v.x + this.c * v.y + this.e,
+          y: this.b * v.x + this.d * v.y + this.f,
+          u: v.u,
+          v: v.v,
+        })),
+      ),
+      clips: this.clips,
+    });
+    if (!this.worldDepth) {
+      this.flush();
+      this.drawDecals();
+    }
+  };
+  private drawDecals() {
+    if (!this.decals.length) return;
+    this.save();
+    const oldClips = this.clips;
+    this.a = this.d = 1;
+    this.b = this.c = this.e = this.f = 0;
+    this.imageSmoothingEnabled = false;
+    this.setDepthPlane(0, 0, 0);
+    this.material.depthWrite = false;
+    for (const job of this.decals) {
+      if (job.casterId !== undefined && !this.meshCasters?.has(job.casterId)) continue;
+      if (this.clips !== job.clips) {
+        this.flush();
+        this.clips = job.clips;
+      }
+      this.setDepthPlane(...job.depth);
+      this.globalAlpha = job.alpha;
+      this.fillStyle = job.color;
+      const page = this.page(job.image, 0, 0, size(job.image));
+      for (const polygon of job.polygons)
+        for (let i = 1; i + 1 < polygon.length; i++) {
+          const a = polygon[0],
+            b = polygon[i],
+            c = polygon[i + 1];
+          if (a && b && c)
+            this.quad(page.texture, 0, 0, 0, 0, 0, 0, 1, 1, this.color(), null, [a, b, c, c]);
+        }
+    }
+    this.flush();
+    this.decals.length = 0;
+    this.clips = oldClips;
+    this.setDepthPlane();
+    this.restore();
   }
   get transformScale() {
     return Math.hypot(this.a, this.b);
@@ -255,6 +344,7 @@ export class GpuRasterSurface implements RasterSurface {
   beginFrame() {
     if (this.disposed) throw Error("Renderer is disposed");
     if (this.lost) return;
+    this.decals.length = 0;
     this.frame++;
     this.stats.frames++;
     this.count = 0;
@@ -297,6 +387,7 @@ export class GpuRasterSurface implements RasterSurface {
     for (const page of [...pages]) this.remove(page);
   }
   clearResources() {
+    this.decals.length = 0;
     this.count = 0;
     this.texture = null;
     this.batchTextures.length = 0;
@@ -592,6 +683,7 @@ export class GpuRasterSurface implements RasterSurface {
   }
   /** Depth equations are in final padded screen pixels. Primitive changes remain batched. */
   setDepthPlane(a?: number, b = 0, c = 0) {
+    this.depthXBounds = undefined;
     const enabled = this.worldDepth && a !== undefined;
     if (enabled !== this.depthEnabled) {
       this.flush();
@@ -604,9 +696,10 @@ export class GpuRasterSurface implements RasterSurface {
     this.depthPlane[2] = c;
     this.depthPlane[3] = 0;
   }
-  setDepthSurface(top: readonly number[], front: readonly number[]) {
+  setDepthSurface(top: readonly number[], front: readonly number[], xBounds?: readonly number[]) {
     this.setDepthPlane(top[0] ?? 0, top[1] ?? 0, top[2] ?? 0);
     for (let i = 0; i < 3; i++) this.depthFront[i] = front[i] ?? 0;
+    this.depthXBounds = xBounds;
   }
   drawDepthTexture(
     texture: THREE.Texture,
@@ -672,13 +765,61 @@ export class GpuRasterSurface implements RasterSurface {
     vh: number,
     color: readonly number[],
     sourceDepth: THREE.Texture | null = null,
+    points?: readonly DecalVertex[],
   ) {
     if (this.lost || this.disposed) return;
+    // Surface raster outlines extend half a pixel beyond their finite source.
+    // Split only those edge strips, clamping depth to the actual edge instead
+    // of extrapolating a ramp into its adjoining deck. Batches/stride stay shared.
+    const bounds = this.depthXBounds;
+    if (bounds && !points && !this.b && !this.c && this.a > 0 && w > 0) {
+      const left = this.a * x + this.e,
+        right = left + this.a * w;
+      const lo = bounds[0] ?? left,
+        hi = bounds[1] ?? right;
+      const cuts = [left, ...[lo, hi].filter((p) => p > left && p < right), right];
+      const a = this.depthPlane[0] ?? 0,
+        c = this.depthPlane[2] ?? 0;
+      const fa = this.depthFront[0] ?? 0,
+        fc = this.depthFront[2] ?? 0;
+      this.depthXBounds = undefined;
+      for (let i = 0; i + 1 < cuts.length; i++) {
+        const start = cuts[i] ?? left,
+          end = cuts[i + 1] ?? right,
+          center = (start + end) / 2;
+        const edge = center < lo ? lo : center > hi ? hi : undefined;
+        this.depthPlane[0] = edge === undefined ? a : 0;
+        this.depthPlane[2] = edge === undefined ? c : c + a * edge;
+        this.depthFront[0] = edge === undefined ? fa : 0;
+        this.depthFront[2] = edge === undefined ? fc : fc + fa * edge;
+        const f = (start - left) / (right - left),
+          portion = (end - start) / (right - left);
+        this.quad(
+          texture,
+          x + w * f,
+          y,
+          w * portion,
+          h,
+          u + uw * f,
+          v,
+          uw * portion,
+          vh,
+          color,
+          sourceDepth,
+        );
+      }
+      this.depthPlane[0] = a;
+      this.depthPlane[2] = c;
+      this.depthFront[0] = fa;
+      this.depthFront[2] = fc;
+      this.depthXBounds = bounds;
+      return;
+    }
     const minU = Math.min(u, u + uw),
       minV = Math.min(v, v + vh),
       maxU = Math.max(u, u + uw),
       maxV = Math.max(v, v + vh);
-    const smooth = this.imageSmoothingEnabled && texture !== this.white;
+    const smooth = !points && this.imageSmoothingEnabled && texture !== this.white;
     if (smooth) {
       // One output pixel of transparent guard coverage, independent of native texel size.
       const du = uw / w,
@@ -708,10 +849,11 @@ export class GpuRasterSurface implements RasterSurface {
       const px = x + (right ? w : 0),
         py = y + (bottom ? h : 0),
         i = this.count++ * STRIDE;
-      this.vertices[i] = this.a * px + this.c * py + this.e;
-      this.vertices[i + 1] = this.b * px + this.d * py + this.f;
-      this.vertices[i + 2] = u + (right ? uw : 0);
-      this.vertices[i + 3] = v + (bottom ? vh : 0);
+      const point = points?.[corner];
+      this.vertices[i] = point ? point.x : this.a * px + this.c * py + this.e;
+      this.vertices[i + 1] = point ? point.y : this.b * px + this.d * py + this.f;
+      this.vertices[i + 2] = point ? point.u : u + (right ? uw : 0);
+      this.vertices[i + 3] = point ? 1 - point.v : v + (bottom ? vh : 0);
       this.vertices[i + 4] = color[0] ?? 1;
       this.vertices[i + 5] = color[1] ?? 1;
       this.vertices[i + 6] = color[2] ?? 1;

@@ -1,5 +1,12 @@
 # Terrain heights, slopes and stacked spaces
 
+[217](../tactical/217-surface-projected-shadows-and-effects.md) uses the same finite
+surface/excavation definitions for read-only shadow and effect receivers. Projection
+selects the highest valid lower surface, partitions at ramp/deck/ledge boundaries,
+and excludes the caster and overhead decks. Moving mesh roofs use retained visual
+triangles; physical body dimensions confirm landing timing independently of visual
+roof calibration. No new authoritative world or simulation step is introduced.
+
 [Reset 205](../tactical/205-physics-reset.md) delivers common static terrain/prop
 geometry and ordinary ramps, bridge tops/undersides and finite furniture in one
 shared Rapier scene. Sections cache by geometry revision; edited support wakes

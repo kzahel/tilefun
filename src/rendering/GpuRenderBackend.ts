@@ -30,6 +30,9 @@ const overlayFields: (keyof OverlayDraw)[] = [
   "alpha",
 ];
 export class GpuRenderBackend extends RasterRenderBackend {
+  meshSurfaceGeometry(assetId: string) {
+    return this.meshes.surfaceGeometry(assetId);
+  }
   readonly surface: GpuRasterSurface;
   readonly meshes: GpuMeshBodies;
   private readonly surfaceOverlays: GpuOverlayResources;
@@ -45,6 +48,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
     this.meshes = new GpuMeshBodies(surface);
     surface.meshBody = (camera, item) => this.meshes.draw(camera, item, this.sheets);
     surface.meshReady = this.meshes.ready;
+    surface.meshCasters = this.meshes.shadowCasters;
     const ctx = this.overlay.getContext("2d");
     if (!ctx) throw Error("Overlay surface unavailable");
     this.overlayContext = ctx;
@@ -58,7 +62,10 @@ export class GpuRenderBackend extends RasterRenderBackend {
   override submit(view: RenderView, pass: RenderPass) {
     if (this.surface.disposed) throw Error("Renderer is disposed");
     if (this.surface.lost) return;
-    this.surface.worldDepth = this.worldRaster;
+    // Cached room walls/furniture retain their explicit painter ordering; they
+    // do not yet publish world-depth surfaces. Their decals draw in that order.
+    this.surface.worldDepth = this.worldRaster && pass.kind !== "interior";
+    if (pass.kind === "overlay" && !pass.worldDepth) this.surface.finishDecals();
     this.surface.setDepthPlane();
     super.submit(view, pass);
     this.surface.flush();
@@ -73,7 +80,11 @@ export class GpuRenderBackend extends RasterRenderBackend {
         p[1],
         p[2] - pad * (p[0] + p[1]),
       ];
-      this.surface.setDepthSurface(shifted(pass.worldDepth.top), shifted(pass.worldDepth.front));
+      this.surface.setDepthSurface(
+        shifted(pass.worldDepth.top),
+        shifted(pass.worldDepth.front),
+        pass.worldDepth.xBounds?.map((x) => x + pad),
+      );
     }
     if (pass.cacheKey) {
       const image = this.surfaceOverlays.get(

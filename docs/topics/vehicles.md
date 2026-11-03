@@ -1,5 +1,12 @@
 # Vehicles: shared physics baseline
 
+[217](../tactical/217-surface-projected-shadows-and-effects.md) replaces ready-mesh
+car ovals with soft oriented chassis footprints, including pitch/roll dimensions.
+Actual retained mesh triangles receive shadows and landing dust on roofs; contact
+rings stay attached in body-local coordinates. Baked sprite fallback shadows remain
+part of their existing art. Directional lighting and true caster silhouettes are
+separate follow-on work.
+
 [216](../tactical/216-dynamic-3d-vehicles.md) delivers freely rotating land-vehicle chassis, authored axle suspension/traction, full replay/save state, shared depth and recovery. Game and labs share the default controller; native/browser qualification passes; owner feel review is next. The physical Chromebook course works, with 16.7/33.4/33.4ms frame p50/p95/p99 in the latest short development smoke; this is not a matched performance comparison. Boats retain their upright watercraft behavior.
 
 

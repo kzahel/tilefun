@@ -36,10 +36,14 @@ export function surfaceWorldDepth(
     1 / s / r,
     0.5 - (2 * bounds.bottom - camera.y + origin.sy / s) / r,
   ];
-  return { top, front };
+  const xBounds: [number, number] = [
+    projectWorld(camera, bounds.left, 0).sx,
+    projectWorld(camera, bounds.right, 0).sx,
+  ];
+  return { top, front, xBounds };
 }
 export function sceneDepth(ctx: RasterSurface, camera: Camera, item: SceneItem, shadow: boolean) {
-  if (!ctx.setDepthPlane) return;
+  if (!ctx.setDepthPlane || item.kind === "decal") return;
   let y = item.wy,
     z = 0,
     horizontal = shadow;

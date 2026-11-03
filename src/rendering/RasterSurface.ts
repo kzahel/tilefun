@@ -1,4 +1,5 @@
 import type { Camera } from "./Camera.js";
+import type { DecalVertex } from "./ProjectedDecals.js";
 import type { SpriteItem } from "./SceneItem.js";
 /** Drawing-side compatibility surface. Image resources stay behind RenderBackend;
  * this is not a presentation/world contract or a general Canvas emulation API.
@@ -22,6 +23,14 @@ export type RasterSurface = Pick<
   | "fillStyle"
   | "imageSmoothingEnabled"
 > & {
+  projectedDecal?: (
+    image: CanvasImageSource,
+    polygons: readonly (readonly DecalVertex[])[],
+    depth: readonly [number, number, number],
+    alpha: number,
+    color: string,
+    casterId?: number,
+  ) => void;
   setDepthPlane?: (a?: number, b?: number, c?: number) => void;
   drawStableImage?: NonNullable<RasterSurface["drawSubpixelImage"]>;
   drawSubpixelImage?: (
@@ -37,6 +46,7 @@ export type RasterSurface = Pick<
   ) => void;
   meshBody?: (camera: Camera, item: SpriteItem) => boolean;
   meshReady?: ReadonlySet<string>;
+  meshCasters?: ReadonlySet<number>;
   pixelShadow?: (cx: number, cy: number, rx: number, ry: number) => void;
 };
 

@@ -30,10 +30,13 @@ import {
 } from "./EntityMeshPose.js";
 import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBladeRenderer.js";
 import { vehicleMeshRadius, yawOrientation } from "./MeshPresentation.js";
+import type { ParticlePresentation } from "./ParticleSystem.js";
+import { shadowFootprint, surfaceDecals } from "./ProjectedDecals.js";
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { SceneFrame } from "./SceneFrame.js";
-import type { ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
+import type { SceneItem, SpriteItem } from "./SceneItem.js";
 import { surfaceShadowZ } from "./SurfacePresentation.js";
+import { type ReceiverOptions, SurfaceReceivers } from "./SurfaceReceivers.js";
 import type { TerrainPresentation } from "./TerrainPresentation.js";
 import { grassDepthUnderVehicles, isVehicleSprite } from "./VehicleGrassDepth.js";
 
@@ -69,16 +72,23 @@ export function collectScene(
   visible: ChunkRange,
   alpha: number,
   terrain: TerrainPresentation,
-  particles: ParticleItem[],
+  particles: ParticlePresentation,
   hasGrass: boolean,
   extrapolationGhosts?: readonly ExtrapolationGhostItem[],
   drawProps?: ReadonlySet<number>,
   frame?: SceneFrame,
+  receiverOptions: ReceiverOptions = {},
 ): SceneItem[] {
   const grassAlpha = hasGrass ? grassOpacity(camera.zoom) : 0;
   const visibleGrass = grassAlpha > 0;
   const items = frame ? frame.begin(visibleGrass) : [];
   const grassVehicles: SpriteItem[] = [];
+  const receivers = camera.worldRaster
+    ? new SurfaceReceivers(world, props, entities, alpha, {
+        ...receiverOptions,
+        mesh: terrain.meshSurfaceGeometry?.bind(terrain),
+      })
+    : undefined;
   const ghostByEntityId =
     extrapolationGhosts && extrapolationGhosts.length > 0
       ? new Map(extrapolationGhosts.map((g) => [g.entityId, g]))
@@ -209,7 +219,7 @@ export function collectScene(
         ? terrainBaseZ(getEntityAABB(pos, col), (tx, ty) => world.getHeightAt(tx, ty), planarProps)
         : world.getHeightAt(shadowTx, shadowTy) * ELEVATION_PX;
     const shadowTerrainZ =
-      col && planarProps.length
+      !receivers && col && planarProps.length
         ? surfaceShadowZ(planarProps, getEntityAABB(pos, col), zOffset, terrainZ)
         : terrainZ;
 
@@ -251,6 +261,7 @@ export function collectScene(
     const spriteItem = {
       ...(mesh ? { mesh } : {}),
       ...(meshGroundShadow ? { meshGroundShadow: true } : {}),
+      ...(meshGroundShadow && receivers ? { shadowCasterId: e.id } : {}),
       ...(meshRoofSupport ? { meshRoofSupport } : {}),
       ...(hasVehicleLights(e) && vehicleLightState(e) & 1
         ? {
@@ -311,6 +322,23 @@ export function collectScene(
       flashHidden: e.flashHidden ?? false,
     } satisfies SpriteItem;
     items.push(spriteItem);
+    if (receivers && hasShadow && col && (!meshGroundShadow || spriteItem.mesh)) {
+      spriteItem.hasShadow = false;
+      const mesh = spriteItem.mesh
+        ? terrain.meshSurfaceGeometry?.(spriteItem.mesh.assetId)
+        : undefined;
+      const footprint = shadowFootprint(e, pos.wx, pos.wy, mesh);
+      items.push(
+        ...surfaceDecals(
+          receivers.project(footprint, zOffset, e.id),
+          meshGroundShadow ? "vehicle" : "oval",
+          0.28,
+          "#000",
+          meshGroundShadow ? spriteItem.mesh?.assetId : undefined,
+          meshGroundShadow ? e.id : undefined,
+        ),
+      );
+    }
     if (visibleGrass && isVehicleSprite(e.type)) grassVehicles.push(spriteItem);
 
     const ghost = ghostByEntityId?.get(e.id);
@@ -444,9 +472,11 @@ export function collectScene(
   }
 
   // --- Particles ---
-  for (const p of particles) {
+  for (const p of Array.isArray(particles) ? particles : particles.collectItems(receivers)) {
     items.push(p);
   }
+
+  if (frame && receivers) Object.assign(frame.receiverStats, receivers.diagnostics);
 
   // Sort by pre-computed sort key for correct depth ordering
   items.sort((a, b) => a.sortKey - b.sortKey);

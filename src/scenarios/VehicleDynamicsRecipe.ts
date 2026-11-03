@@ -10,6 +10,8 @@ export const DYNAMICS_STARTS = {
   jump: { position: { wx: -224, wy: 198 }, z: 0 },
   ledge: { position: { wx: -128, wy: -162 }, z: 0 },
   recover: { position: { wx: -280, wy: 38 }, z: 0 },
+  ramp: { position: { wx: -80, wy: 0 }, z: 28 },
+  roof: { position: { wx: -280, wy: 0 }, z: 24 },
 };
 /** Playable review course; every ramp/deck/car uses normal Realm owners. */
 export function vehicleDynamicsRecipe(
@@ -18,14 +20,16 @@ export function vehicleDynamicsRecipe(
 ): ScenarioRecipe {
   const start = DYNAMICS_STARTS[route];
   const car =
-    route === "passage"
-      ? { wx: 80, wy: 120, facing: Direction.Up }
-      : { wx: start.position.wx, wy: start.position.wy - 38, facing: Direction.Right };
+    route === "ramp" || route === "roof"
+      ? { wx: -280, wy: 0, facing: Direction.Right }
+      : route === "passage"
+        ? { wx: 80, wy: 120, facing: Direction.Up }
+        : { wx: start.position.wx, wy: start.position.wy - 38, facing: Direction.Right };
   return {
     version: 1,
     id: "vehicle-dynamics-v1",
     generation: FLAT_SCENARIO,
-    player: createPlayer(start.position.wx, start.position.wy),
+    player: { ...createPlayer(start.position.wx, start.position.wy), wz: start.z },
     measurePhysics: true,
     props: [
       surfaceProp(

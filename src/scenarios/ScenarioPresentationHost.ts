@@ -16,6 +16,7 @@ import { Camera } from "../rendering/Camera.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { presentTerrain } from "../rendering/OutdoorPresentation.js";
 import { OverlayFrame } from "../rendering/OverlayFrame.js";
+import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { cameraPixelSnap, type TerrainPacing } from "../rendering/PresentationSettings.js";
 import { presentSurfaceScene } from "../rendering/presentSurfaceScene.js";
@@ -220,6 +221,8 @@ export class ScenarioPresentationHost {
     }
   };
 
+  private readonly effects = new ParticleSystem();
+
   private update(dt: number) {
     if (this.disposed || document.hidden) return;
     try {
@@ -238,6 +241,8 @@ export class ScenarioPresentationHost {
     this.vehicleControl?.update(this.session.view, true, this.paused);
     if (this.paused) return;
     this.lightSeconds += dt;
+    this.effects.observePlayer(this.session.view.playerEntity);
+    this.effects.update(dt);
     try {
       this.camera.zoom = this.options.settings().zoom;
       this.camera.savePrev();
@@ -362,13 +367,14 @@ export class ScenarioPresentationHost {
         range,
         this.alpha,
         renderer,
-        [],
+        this.effects,
         !this.options.interior &&
           this.options.terrain !== false &&
           renderer.assets.has("grass-blades"),
         undefined,
         this.options.interior?.drawProps,
         this.frame,
+        { observer: player, visibility: this.options.surfaceVisibility?.() ?? "auto" },
       );
       const interior = this.options.interior;
       if (interior)
@@ -455,9 +461,15 @@ export class ScenarioPresentationHost {
 
   getDiagnostics() {
     const terrain = this.host?.renderer.getDiagnostics();
+    const playerBody = this.session.view.physicsState?.bodies.find(
+      (body) => body.id === this.session.view.playerEntity.id,
+    );
     return {
       terrain,
       alpha: this.alpha,
+      effects: this.effects.diagnostics,
+      receivers: this.frame.receiverStats,
+      playerGrounded: playerBody?.grounded ?? false,
       steps: this.steps,
       authority: this.session.getDiagnostics(),
       cameraX: this.renderX,
@@ -512,6 +524,7 @@ export class ScenarioPresentationHost {
     this.host?.dispose();
     this.host = undefined;
     this.frame.clear();
+    this.effects.clear();
     this.options.interior?.presentation.clear();
     this.displayedPlayer = undefined;
     this.overlays.clear();

@@ -37,6 +37,7 @@ export class GpuMeshBodies {
     [FIRE_TRUCK_MESH, this.fireTruck],
   ]);
   readonly ready = new Set<string>();
+  readonly shadowCasters = new Set<number>();
   private readonly scene = new THREE.Scene();
   private readonly camera = new THREE.Camera();
   private readonly target = new THREE.WebGLRenderTarget(1, 1, { depthBuffer: true });
@@ -100,8 +101,14 @@ export class GpuMeshBodies {
       ]),
     );
   }
+  surfaceGeometry(assetId: string) {
+    return this.enabled && this.ready.has(assetId)
+      ? this.slots.get(assetId)?.value?.surfaceGeometry
+      : undefined;
+  }
   /** Called once before submissions; promise completions only become visible here. */
   beginFrame() {
+    this.shadowCasters.clear();
     this.images.beginFrame();
     this.paints.beginFrame();
     this.ready.clear();
@@ -152,6 +159,7 @@ export class GpuMeshBodies {
         !this.deferCachedImages,
       );
       if (paintTexture) this.paintDraws++;
+      if (item.shadowCasterId !== undefined) this.shadowCasters.add(item.shadowCasterId);
       return true;
     }
     const { surface } = this,
@@ -267,6 +275,7 @@ export class GpuMeshBodies {
       this.scene.remove(this.contents.group);
     }
     this.composite(camera, item, texture, radius, depth);
+    if (item.shadowCasterId !== undefined) this.shadowCasters.add(item.shadowCasterId);
     if (item.bedGroup) this.bedDraws++;
     if (paintTexture) this.paintDraws++;
     return true;

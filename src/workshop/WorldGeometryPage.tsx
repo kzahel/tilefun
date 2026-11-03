@@ -72,7 +72,14 @@ function GeometryFixtures({ initial }: { initial: string }) {
     const model = new URLSearchParams(location.search).get("vehicle") ?? "compact-1";
     return VEHICLE_MODELS.includes(model) ? model : "compact-1";
   });
-  const [route, setRoute] = useState<keyof typeof DYNAMICS_STARTS>("drive");
+  const [route, setRoute] = useState<keyof typeof DYNAMICS_STARTS>(() => {
+    const route = new URLSearchParams(location.search).get("route");
+    return (
+      (Object.keys(DYNAMICS_STARTS).find((key) => key === route) as
+        | keyof typeof DYNAMICS_STARTS
+        | undefined) ?? "drive"
+    );
+  });
   const [reverse, setReverse] = useState(false),
     [paused, setPaused] = useState(false);
   const [visibility, setVisibility] = useState<SurfaceVisibility>("auto");
@@ -286,7 +293,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
         reverse, ←/→ or A/D steer. R also reverses. Touch and controller use the same controls. F /
         D-pad down rights an overturned car.
         {fixture === "car-dynamics" &&
-          " Main lane: bridge ascent/descent. South: jump ramp. North: narrow tipping ledge and overlapping cars. "}
+          " Main lane: bridge ascent/descent. South: jump ramp. North: narrow tipping ledge and overlapping cars. Ramp and roof starts let you jump in place to inspect shadows and landing dust. "}
         Specialized equipment and train services are deferred.
       </p>
       <label>

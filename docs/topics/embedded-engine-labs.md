@@ -1,5 +1,13 @@
 # Embedded engine labs
 
+[217](../tactical/217-surface-projected-shadows-and-effects.md) shares the receiver,
+decal and contact-effect implementation between PlayScene and ScenarioPresentationHost.
+The car-dynamics course adds **ramp** and **roof** starts: press Space / controller A
+or the touch Jump control to inspect ordinary landings. Diagnostics expose source/
+triangle/query/fragment counts, grounded state and the last contact point/normal;
+captures do not advance effect lifetimes. The collider-only co-op viewport retains
+its physical inspection role. Geometry, prediction and authority remain shared.
+
 [216](../tactical/216-dynamic-3d-vehicles.md) adds the shared car-dynamics handling course and a vehicle case in the two-client physics lab. Native Worker seats/recovery, full quaternion presentation and the normal shared physics scene own behavior; the collider viewport reads the same rotated body/static geometry. Production browser checks qualify delayed guest driving, pause/reload/seat ownership, full rotation preservation, compact/truck recovery and Worker teardown. Owner feel review is next. The follow-up defaults manual car controls to forward/reverse and left/right steering in both presentation and two-client labs; scripted inputs keep their explicit world-space contract.
 
 

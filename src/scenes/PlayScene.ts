@@ -56,8 +56,6 @@ const SPLASH_KEYS = [
   "impact_soft_heavy_003",
   "impact_soft_heavy_004",
 ];
-/** Distance threshold to distinguish water-respawn teleport from normal landing. */
-const WATER_RESPAWN_DIST_SQ = 32 * 32;
 
 /** Soft impact keys used for ball-hits-entity sound. */
 const BALL_HIT_KEYS = [
@@ -80,12 +78,10 @@ export class PlayScene implements GameScene {
   private prevInvincibilityTimer = 0;
   private zoomUnsubs: (() => void)[] = [];
   private particles = new ParticleSystem();
+  private effectsRealmId: string | null | undefined;
   private footsteps: FootstepSystem | null = null;
   private ambient: AmbientSystem | null = null;
-  private wasAirborne = false;
   /** Player position last frame while airborne (for detecting water-respawn teleport). */
-  private lastAirborneWx = 0;
-  private lastAirborneWy = 0;
   private prevGemsCollected = 0;
   /** Entity IDs that have been seen with deathTimer (to detect ghost death onset). */
   private dyingEntities = new Set<number>();
@@ -97,7 +93,7 @@ export class PlayScene implements GameScene {
   private throwChargeTime = 0;
   private wasThrowHeld = false;
   /** Track ball entity positions for water-splash effect on removal. */
-  private ballPositions = new Map<number, { wx: number; wy: number }>();
+  private ballPositions = new Map<number, { wx: number; wy: number; wz: number }>();
   /** Ball IDs that had a deathTimer last frame (despawning, not water-killed). */
   private ballDying: Set<number> | undefined;
   /** Previous wander AI state per entity ID (for detecting scared transitions). */
@@ -116,6 +112,7 @@ export class PlayScene implements GameScene {
   private jumpPressUnsub: (() => void) | null = null;
 
   onEnter(gc: GameContext): void {
+    this.particles.clear();
     // Attach touch buttons before joystick so button claims are processed first
     gc.touchButtons.attach();
     gc.touchPinch?.attach();
@@ -165,6 +162,7 @@ export class PlayScene implements GameScene {
   }
 
   onExit(gc: GameContext): void {
+    this.particles.clear();
     this.stopMovement(gc);
     gc.touchPinch?.detach();
     gc.touchTap?.detach();
@@ -214,6 +212,10 @@ export class PlayScene implements GameScene {
   }
 
   update(dt: number, gc: GameContext): void {
+    if (this.effectsRealmId !== gc.realmId) {
+      this.particles.clear();
+      this.effectsRealmId = gc.realmId;
+    }
     // Save camera state for render interpolation
     gc.camera.savePrev();
 
@@ -531,25 +533,9 @@ export class PlayScene implements GameScene {
     gc.camera.updateShake();
     gc.chatHUD.update(dt);
 
-    // Detect player landing (jumpVZ transitions from defined → undefined)
-    const player = gc.stateView.playerEntity;
-    const airborne = player.jumpVZ !== undefined;
-    if (this.wasAirborne && !airborne) {
-      // If position teleported far, it was a water-respawn — splash at the old position
-      const dx = player.position.wx - this.lastAirborneWx;
-      const dy = player.position.wy - this.lastAirborneWy;
-      if (dx * dx + dy * dy > WATER_RESPAWN_DIST_SQ) {
-        this.particles.spawnWaterSplash(this.lastAirborneWx, this.lastAirborneWy);
-        playRandomSound(gc, SPLASH_KEYS, 0.45, 0.6 + Math.random() * 0.15);
-      } else {
-        this.particles.spawnLandingDust(player.position.wx, player.position.wy);
-      }
-    }
-    if (airborne) {
-      this.lastAirborneWx = player.position.wx;
-      this.lastAirborneWy = player.position.wy;
-    }
-    this.wasAirborne = airborne;
+    // Cosmetic transitions and contact placement are shared with embedded labs.
+    if (this.particles.observePlayer(gc.stateView.playerEntity))
+      playRandomSound(gc, SPLASH_KEYS, 0.45, 0.6 + Math.random() * 0.15);
 
     // Detect ball removal — spawn water splash if it disappeared over water
     this.detectBallSplashes(gc);
@@ -566,7 +552,7 @@ export class PlayScene implements GameScene {
     // Hostile entities emit red wisps
     for (const e of gc.stateView.entities) {
       if (e.wanderAI?.hostile && e.deathTimer === undefined) {
-        this.particles.spawnHostileWisp(e.position.wx, e.position.wy);
+        this.particles.spawnHostileWisp(e.position.wx, e.position.wy, e.wz ?? 0);
       }
     }
 
@@ -592,8 +578,7 @@ export class PlayScene implements GameScene {
 
       gc.beginWorld?.();
       renderWorld(gc);
-      const particleItems = this.particles.collectItems();
-      renderEntities(gc, alpha, particleItems);
+      renderEntities(gc, alpha, this.particles);
       gc.endWorld?.();
       drawPlayerMarkers(gc, alpha);
       gc.chatHUD.render(gc.ctx);
@@ -725,14 +710,14 @@ export class PlayScene implements GameScene {
     for (const e of gc.stateView.entities) {
       if (e.type !== "ball") continue;
       liveBalls.set(e.id, e.deathTimer !== undefined);
-      this.ballPositions.set(e.id, { wx: e.position.wx, wy: e.position.wy });
+      this.ballPositions.set(e.id, { wx: e.position.wx, wy: e.position.wy, wz: e.wz ?? 0 });
     }
     // Check for balls that disappeared — splash only if they weren't despawning
     // (water removal is instant with no deathTimer; stopped balls fade via deathTimer)
     for (const [id, pos] of this.ballPositions) {
       if (liveBalls.has(id)) continue;
       if (!this.ballDying?.has(id)) {
-        this.particles.spawnWaterSplash(pos.wx, pos.wy, 0.4);
+        this.particles.spawnWaterSplash(pos.wx, pos.wy, 0.4, pos.wz);
         playRandomSound(gc, SPLASH_KEYS, 0.3, 0.8 + Math.random() * 0.3);
       }
       this.ballPositions.delete(id);
@@ -762,7 +747,7 @@ export class PlayScene implements GameScene {
 
       // Stomp effect: player is airborne and close → cloud puff
       if (airborne && dist < 32) {
-        this.particles.spawnStompCloud(e.position.wx, e.position.wy);
+        this.particles.spawnStompCloud(e.position.wx, e.position.wy, e.wz ?? 0);
       }
 
       if (dist > GHOST_DEATH_MAX_DISTANCE) continue;

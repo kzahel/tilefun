@@ -16,6 +16,7 @@ export class SceneFrame {
   presentationTime = 0;
   readonly meshPoses: EntityMeshPose;
   readonly overlays = new OverlayFrame();
+  readonly receiverStats = { sources: 0, meshTriangles: 0, queries: 0, fragments: 0 };
   readonly drawOrder: number[] = [];
   readonly items: SceneItem[] = [];
   readonly grass = new GrassFrameBuffer();

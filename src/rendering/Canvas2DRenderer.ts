@@ -4,6 +4,7 @@ import type { Camera } from "./Camera.js";
 import { drawCurveTrain } from "./CurveTrainPresentation.js";
 import { drawDumpTruckFallback } from "./DumpTruckFallback.js";
 import { GRASS_ANCHOR_X, GRASS_ANCHOR_Y } from "./GrassBladeRenderer.js";
+import { drawSurfaceDecal } from "./ProjectedDecals.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import type { ElevationItem, GrassItem, ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
@@ -94,6 +95,9 @@ export function drawSceneEntry2D(
     return;
   }
   switch (item.kind) {
+    case "decal":
+      drawSurfaceDecal(ctx, camera, item);
+      break;
     case "sprite":
       drawSprite(ctx, camera, item, sheets);
       break;

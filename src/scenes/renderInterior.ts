@@ -8,10 +8,14 @@ import { compileGameplayRoom, initialRoom } from "../interiors/GameplayRoom.js";
 import { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { presentInterior } from "../interiors/presentInterior.js";
 import { collectScene } from "../rendering/collectScene.js";
-import type { ParticleItem } from "../rendering/SceneItem.js";
+import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
 
 /** Same wall/furniture renderer; actors come from the production scene collector. */
-export function renderInterior(gc: GameContext, alpha: number, particles: ParticleItem[]): void {
+export function renderInterior(
+  gc: GameContext,
+  alpha: number,
+  particles: ParticlePresentation,
+): void {
   const identity = gc.stateView.interior;
   if (!identity) return;
   if (!gc.spriteCatalog.has("modern-interiors")) return;

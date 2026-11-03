@@ -1,4 +1,6 @@
 import type { MeshInstance } from "./MeshPresentation.js";
+import type { DecalMask } from "./ProjectedDecals.js";
+import type { Plane, SurfaceVertex } from "./SurfaceReceivers.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
 
 /**
@@ -7,7 +9,7 @@ import type { TerrainResourceId } from "./TerrainPresentation.js";
  * The renderer backend (Canvas2D, WebGL, etc.) projects to screen.
  */
 
-export type SceneItem = SpriteItem | ElevationItem | GrassItem | ParticleItem;
+export type SceneItem = SpriteItem | ElevationItem | GrassItem | ParticleItem | DecalItem;
 
 export interface SpriteItem {
   /** A coupled car shares the tow truck depth target; fallbacks draw the same pair. */
@@ -23,6 +25,8 @@ export interface SpriteItem {
   };
   /** Optional representation; all sprite fields remain the complete fallback. */
   mesh?: MeshInstance;
+  /** Ready mesh actually drawn this frame; prevents a second shadow on sprite fallbacks. */
+  shadowCasterId?: number;
   /** Sprite rider's visual attachment, applied only while its supporting mesh is ready. */
   meshRoofSupport?: {
     assetId: string;
@@ -122,4 +126,21 @@ export interface ParticleItem {
   color: string;
   /** Opacity 0-1. */
   alpha: number;
+}
+
+/** Finite receiver-local pieces, carrying world positions and stable mask UVs. */
+export interface DecalItem {
+  kind: "decal";
+  sortKey: number;
+  wx: number;
+  wy: number;
+  z: number;
+  receiverId: string;
+  plane: Plane;
+  polygons: SurfaceVertex[][];
+  mask: DecalMask;
+  alpha: number;
+  color: string;
+  meshAssetId?: string;
+  meshCasterId?: number;
 }

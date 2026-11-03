@@ -24,10 +24,14 @@ import dumpSprite from "../rendering/DumpTruckFallback.ts?raw";
 import gpuBodies from "../rendering/GpuMeshBodies.ts?raw";
 import gpuRaster from "../rendering/GpuRasterSurface.ts?raw";
 import gpuHost from "../rendering/GpuRenderHost.ts?raw";
+import particleEffects from "../rendering/ParticleSystem.ts?raw";
 import presentationSettings from "../rendering/PresentationSettings.ts?raw";
+import projectedDecals from "../rendering/ProjectedDecals.ts?raw";
 import projection from "../rendering/Projection.ts?raw";
 import rasterBackend from "../rendering/RasterRenderBackend.ts?raw";
 import subpixelImages from "../rendering/SubpixelImages.ts?raw";
+import surfaceMeshIndex from "../rendering/SurfaceMeshIndex.ts?raw";
+import surfaceReceivers from "../rendering/SurfaceReceivers.ts?raw";
 import terrainPlacement from "../rendering/TerrainFrame.ts?raw";
 import towingSprite from "../rendering/TowingFallback.ts?raw";
 import transporterSprite from "../rendering/TransporterFallback.ts?raw";
@@ -75,6 +79,10 @@ export const scenarioRuntimeSource = {
   vehicleRegistry,
   predictor,
   presentationSettings,
+  particleEffects,
+  projectedDecals,
+  surfaceReceivers,
+  surfaceMeshIndex,
   projection,
   cameraRaster,
   sceneCollection,

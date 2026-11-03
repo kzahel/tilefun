@@ -1076,3 +1076,37 @@ test("production vehicle depth matches common 3D geometry through ordering, tilt
     expect(result.oracleErrors).toBe(0);
   }
 });
+
+test("surface decals follow ramps, split at crests and blend over real mesh roofs without shadowing foreground bodies", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const report = await page.evaluate(() =>
+    (
+      window as unknown as {
+        rendererLab: {
+          probeSurfaceDecals: typeof import("../src/rendering/SurfaceDecalProbe.js").probeSurfaceDecals;
+        };
+      }
+    ).rendererLab.probeSurfaceDecals(),
+  );
+  for (const row of report.report)
+    for (const sample of row.samples) {
+      if (row.name === "under") expect(sample.shadowed).toEqual(sample.baseline);
+      else
+        for (let i = 0; i < 3; i++) {
+          const before = sample.baseline[i] ?? 0,
+            after = sample.shadowed[i] ?? 0;
+          expect(after / before).toBeCloseTo(0.72, 1);
+        }
+    }
+  expect(report.protectedPixels).toBeGreaterThan(500);
+  expect(report.occlusionErrors).toBe(0);
+  expect(report.overlaySample).toEqual([255, 0, 170]);
+  expect(report.fallbackShadowErrors).toBe(0);
+  expect(report.roof.height).toBeGreaterThan(15);
+  expect(report.roof.height).toBeLessThan(24);
+  for (let i = 0; i < 3; i++)
+    expect((report.roof.shadowed[i] ?? 0) / (report.roof.baseline[i] ?? 1)).toBeCloseTo(0.72, 1);
+});

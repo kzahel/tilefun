@@ -52,6 +52,8 @@ export type RenderPass =
       readonly worldDepth?: {
         top: readonly [number, number, number];
         front: readonly [number, number, number];
+        /** Painted outlines/strip overscan inherit finite edge depth. */
+        xBounds?: readonly [number, number];
       };
     }
   | { readonly kind: "clear"; readonly color: string }
@@ -115,6 +117,7 @@ export function collectSceneOrder(items: readonly SceneItem[], order: number[]):
   order.length = 0;
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
+    if (item?.kind === "decal" && item.z <= 0) order.push(i);
     if (item?.kind === "sprite" && item.hasShadow && !item.flashHidden && item.shadowTerrainZ <= 0)
       order.push(-i - 1);
   }
@@ -122,7 +125,7 @@ export function collectSceneOrder(items: readonly SceneItem[], order: number[]):
     const item = items[i];
     if (item?.kind === "sprite" && item.hasShadow && !item.flashHidden && item.shadowTerrainZ > 0)
       order.push(-i - 1);
-    order.push(i);
+    if (item?.kind !== "decal" || item.z > 0) order.push(i);
   }
   return order;
 }

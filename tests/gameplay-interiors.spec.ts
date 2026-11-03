@@ -4,6 +4,8 @@ import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPla
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { stopLocalWorld } from "./helpers/local-world.js";
 
+test.use({ channel: "chromium" });
+
 const source = new DenseDistrictSource(regionalWorld(2026), true);
 for (const kind of ["apartment", "shop"] as const)
   test(`enters and returns from the shared ${kind} interior`, async ({ page }) => {

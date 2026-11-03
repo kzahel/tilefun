@@ -29315,7 +29315,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:321"
+          "source": "src/rendering/RendererLab.ts:322"
         }
       ]
     },
@@ -29333,7 +29333,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:322"
+          "source": "src/rendering/RendererLab.ts:323"
         }
       ]
     },
@@ -33437,7 +33437,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:809"
+          "source": "src/scenes/PlayScene.ts:794"
         },
         {
           "system": "Gameplay",
@@ -33493,7 +33493,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:809"
+          "source": "src/scenes/PlayScene.ts:794"
         },
         {
           "system": "Gameplay",
@@ -33545,7 +33545,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:809"
+          "source": "src/scenes/PlayScene.ts:794"
         },
         {
           "system": "Gameplay",
@@ -33859,19 +33859,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:207"
+          "source": "src/rendering/RendererLab.ts:208"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:275"
+          "source": "src/rendering/RendererLab.ts:276"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:279"
+          "source": "src/rendering/RendererLab.ts:280"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:283"
+          "source": "src/rendering/RendererLab.ts:284"
         }
       ]
     },
@@ -34577,11 +34577,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:261"
+          "source": "src/rendering/collectScene.ts:272"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:271"
+          "source": "src/rendering/collectScene.ts:282"
         },
         {
           "system": "Gameplay",
@@ -36607,7 +36607,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:726"
+          "source": "src/scenes/PlayScene.ts:711"
         },
         {
           "system": "Gameplay",
@@ -38159,19 +38159,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:212"
+          "source": "src/rendering/RendererLab.ts:213"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:216"
+          "source": "src/rendering/RendererLab.ts:217"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:368"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:373"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:54"
+          "source": "src/scenes/renderWorld.ts:58"
         },
         {
           "system": "Gameplay",

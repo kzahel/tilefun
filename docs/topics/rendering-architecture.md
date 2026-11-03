@@ -1,5 +1,20 @@
 # Rendering architecture and backend separation
 
+[217](../tactical/217-surface-projected-shadows-and-effects.md) adds shared finite
+surface receivers and conforming cartoon decals. Character ovals and oriented
+vehicle footprints split across ramps/decks and use actual ready-mesh roof
+triangles. A retained local triangle index bounds moving-mesh queries. GPU decals
+blend over completed world color with depth testing and no depth writes; finite
+surface-outline depth clamps repair ramp/deck seam holes. Room caches retain
+explicit painter ordering, and non-world overlays finish above the decal blend.
+Contact effects carry world Z/normal; attached marks follow body-local coordinates,
+while released dust inherits linear support motion. Landing detection confirms
+nearby physical support and a genuine clearance episode before placing its effect
+on visible geometry, tolerating transient prediction flags without spawning
+mid-air or repeated stationary dust. Full lighting/shadow
+maps and projected caster silhouettes remain follow-ons; sprite fallback baked
+shadows and immutable review art remain. Qualification is recorded in 217.
+
 [216](../tactical/216-dynamic-3d-vehicles.md) delivers qualified shared GPU world depth without discarding per-vehicle image reuse: cached color/depth pairs, world-relative depth conversion, upright sprite planes and surface top/front equations. Physical cars use separate ground shadows. No CPU depth readback is added to gameplay; the existing coherent final world composition remains. The independent common-geometry depth oracle qualifies behind/above/rolled vehicle overlaps, including cache reuse and reversed draw order.
 
 216 owner feel follow-up: physical vehicle resources bypass the old per-model

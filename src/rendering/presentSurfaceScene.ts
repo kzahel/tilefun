@@ -12,6 +12,7 @@ import {
   type SurfaceVisibility,
   surfaceVisibility,
 } from "./SurfacePresentation.js";
+import { planeZ } from "./SurfaceReceivers.js";
 import { surfaceWorldDepth } from "./WorldDepth.js";
 
 /** Stable painter constraints for bounded planar slabs. Each actor is ordered
@@ -37,9 +38,18 @@ export function surfaceSceneOrder(
   for (const [j, { patch, bounds }] of patches.entries()) {
     if (!surfaceVisibility(patch, bounds, observer, mode, alpha)) continue;
     for (const [i, item] of items.entries()) {
-      if (item.kind !== "sprite") continue;
-      const left = Math.max(bounds.left, item.wx - item.spriteWidth / 2);
-      const right = Math.min(bounds.right, item.wx + item.spriteWidth / 2);
+      if (item.kind !== "sprite" && item.kind !== "decal" && item.kind !== "particle") continue;
+      const vertices = item.kind === "decal" ? item.polygons.flat() : undefined;
+      const halfWidth =
+        item.kind === "sprite" ? item.spriteWidth / 2 : item.kind === "particle" ? item.size : 0;
+      const left = Math.max(
+        bounds.left,
+        vertices ? Math.min(...vertices.map((v) => v.x)) : item.wx - halfWidth,
+      );
+      const right = Math.min(
+        bounds.right,
+        vertices ? Math.max(...vertices.map((v) => v.x)) : item.wx + halfWidth,
+      );
       if (left >= right) continue;
       const north = Math.min(
         ...[left, right].map((x) => bounds.top - surfaceZAt(patch, bounds, x, bounds.top)),
@@ -48,8 +58,23 @@ export function surfaceSceneOrder(
         Math.max(
           ...[left, right].map((x) => bounds.bottom - surfaceZAt(patch, bounds, x, bounds.bottom)),
         ) + patch.thickness;
-      const bottom = item.wy - item.zOffset + item.drawOffsetY;
-      if (bottom <= north || bottom - item.spriteHeight * (item.scaleY ?? 1) >= south) continue;
+      const z = item.kind === "sprite" ? item.zOffset : item.z;
+      const bottom =
+        vertices && item.kind === "decal"
+          ? Math.max(...vertices.map((v) => v.y - planeZ(item.plane, v.x, v.y)))
+          : item.wy -
+            z +
+            (item.kind === "sprite" ? item.drawOffsetY : item.kind === "particle" ? item.size : 0);
+      const highest =
+        vertices && item.kind === "decal"
+          ? Math.min(...vertices.map((v) => v.y - planeZ(item.plane, v.x, v.y)))
+          : bottom -
+            (item.kind === "sprite"
+              ? item.spriteHeight * (item.scaleY ?? 1)
+              : item.kind === "particle"
+                ? item.size * 2
+                : 0);
+      if (bottom <= north || highest >= south) continue;
       const top = nearbySurfaceTop(patch, bounds, {
         left: item.wx,
         right: item.wx,
@@ -57,7 +82,7 @@ export function surfaceSceneOrder(
         bottom: item.wy,
       });
       const slab = items.length + j;
-      const [from, to] = item.zOffset < top - 1 ? [i, slab] : [slab, i];
+      const [from, to] = z < top - 1 ? [i, slab] : [slab, i];
       edges[from]?.add(to);
       degree[to] = (degree[to] ?? 0) + 1;
     }

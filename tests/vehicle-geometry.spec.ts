@@ -187,3 +187,62 @@ test("3D vehicle course preserves ramp rotation on reload and recovers cars and 
   await expect.poll(() => page.workers().length).toBe(0);
   expect(errors).toEqual([]);
 });
+
+test("ordinary ramp and mesh-roof landings share projected contact effects", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto(
+    "/tilefun/workshop.html?geometry=car-dynamics&route=ramp&renderer=gpu&meshes#/tool/world-geometry",
+  );
+  const canvas = page.getByLabel("World geometry scene");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  await expect(canvas).toHaveAttribute("data-course-route", "ramp");
+  const diagnostics = () => canvas.evaluate((c: GeometryCanvas) => c.__presentationDiagnostics?.());
+  const jump = async () => {
+    await expect.poll(async () => (await diagnostics())?.playerGrounded).toBe(true);
+    // A newly spawned roof rider may make its initial contact before this test
+    // starts. Wait for that cosmetic burst to expire, then observe a new jump.
+    await expect
+      .poll(async () => {
+        const e = (await diagnostics())?.effects;
+        return (e?.particles ?? 0) + (e?.marks ?? 0) + (e?.pending ?? 0);
+      })
+      .toBe(0);
+    const z = Number(await canvas.getAttribute("data-player-z"));
+    await canvas.focus();
+    await page.keyboard.down("Space");
+    try {
+      await expect
+        .poll(async () => Number(await canvas.getAttribute("data-player-z")), { intervals: [30] })
+        .toBeGreaterThan(z + 5);
+    } finally {
+      await page.keyboard.up("Space");
+    }
+    await expect
+      .poll(async () => (await diagnostics())?.effects.marks ?? 0, { intervals: [30] })
+      .toBeGreaterThan(0);
+  };
+  await jump();
+  const ramp = (await diagnostics())?.effects.lastContact;
+  expect(ramp?.receiverId).toBe("ascent");
+  expect(ramp?.point[2]).toBeGreaterThan(25);
+  expect(ramp?.normal[0]).toBeLessThan(-0.1);
+  await page.getByRole("button", { name: "roof", exact: true }).click();
+  await expect(canvas).toHaveAttribute("data-course-route", "roof");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  await expect
+    .poll(async () => (await diagnostics())?.receivers.meshTriangles ?? 0)
+    .toBeGreaterThan(0);
+  await jump();
+  const roof = (await diagnostics())?.effects.lastContact;
+  expect(roof?.receiverId).toMatch(/^body:/);
+  expect(roof?.point[2]).toBeGreaterThan(18);
+  expect(roof?.point[2]).toBeLessThan(24);
+  await page.screenshot({
+    path: test.info().outputPath("surface-contact-effects.png"),
+    fullPage: true,
+  });
+  await page.getByRole("link", { name: "All tools", exact: true }).click();
+  await expect.poll(() => page.workers().length).toBe(0);
+  expect(errors).toEqual([]);
+});

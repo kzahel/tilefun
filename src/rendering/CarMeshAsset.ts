@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { COMPACT_CAR_GLB } from "./CarMeshDefinition.js";
+import type { Point3, SurfaceMesh } from "./SurfaceReceivers.js";
 import { VehicleEmergencyLights } from "./VehicleEmergencyLights.js";
 import { batchVehicleGeometry } from "./VehicleGeometryBatches.js";
 
@@ -38,6 +39,7 @@ export class CarMeshAsset {
   readonly meshCount: number;
   /** Compiled draw meshes; meshCount retains the authored source-part count. */
   readonly drawMeshCount: number;
+  readonly surfaceGeometry: SurfaceMesh;
   private lights?: VehicleEmergencyLights;
   private propeller?: THREE.Object3D;
   private propellerRest?: THREE.Quaternion;
@@ -278,6 +280,40 @@ export class CarMeshAsset {
       registered.scale.z = this.spriteHeightScale;
       registered.add(normalized);
       this.object.add(registered);
+      // Plain native geometry is retained once for read-only visual receivers.
+      // No image/depth readback, wheel-phase sampling or per-frame GLB traversal.
+      registered.scale.z = 1;
+      this.object.updateMatrixWorld(true);
+      const triangles: [Point3, Point3, Point3][] = [];
+      const point = new THREE.Vector3();
+      const min = new THREE.Vector3(Infinity, Infinity, Infinity);
+      const max = new THREE.Vector3(-Infinity, -Infinity, -Infinity);
+      scene.traverse((node) => {
+        if (!(node instanceof THREE.Mesh)) return;
+        for (let parent: THREE.Object3D | null = node; parent; parent = parent.parent)
+          if (!parent.visible) return;
+        const materials = Array.isArray(node.material) ? node.material : [node.material];
+        if (materials.every((material) => !material.visible || material.opacity === 0)) return;
+        const vertices = node.geometry.getAttribute("position"),
+          index = node.geometry.index;
+        if (!vertices) return;
+        for (let i = 0; i < (index?.count ?? vertices.count); i += 3) {
+          const triangle: Point3[] = [];
+          for (let j = 0; j < 3; j++) {
+            point
+              .fromBufferAttribute(vertices, index ? index.getX(i + j) : i + j)
+              .applyMatrix4(node.matrixWorld);
+            min.min(point);
+            max.max(point);
+            triangle.push([point.x, point.y, point.z]);
+          }
+          const [a, b, c] = triangle;
+          if (a && b && c) triangles.push([a, b, c]);
+        }
+      });
+      this.surfaceGeometry = { triangles, min: [min.x, min.y, min.z], max: [max.x, max.y, max.z] };
+      registered.scale.z = this.spriteHeightScale;
+      this.object.updateMatrixWorld(true);
       // A land-contact oval makes the open hull appear suspended above water.
       // Watercraft retain their authored waterline without a car ground shadow.
       if (options?.contactShadow && boat?.userData.tilefun_watercraft !== 1) {
