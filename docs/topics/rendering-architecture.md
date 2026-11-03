@@ -1,5 +1,14 @@
 # Rendering architecture and backend separation
 
+[214](../tactical/214-world-registration.md) reproduces a regression from 213:
+continuous projection plus independent terrain/sprite raster rounding lets stationary
+props and the stopped player shift by 1px relative to terrain as the camera settles.
+Both Canvas/GPU reproduce it; matching floor functions alone still fails. The prior
+static rigidity check retained snapped projection and missed the new default.
+The current runtime remains continuous. Next prove coherent world composition and
+fractional moving-actor placement together, with explicit sampling and device-cost
+qualification; the stationary-only prototype is not a delivered repair.
+
 [213](../tactical/213-continuous-camera-projection.md) removes independent integer
 camera-translation rounding from default gameplay/lab projection. Continuous
 projection keeps the followed actor steady on screen; shared raster-edge rounding,
@@ -117,7 +126,9 @@ unchanged; [trains](trains.md) records owner acceptance and the remaining join l
   the same builder.
 - Gameplay, interactive labs and reference cameras default to continuous projection.
   `Projection` shares the same translation across terrain, sprites, grass, mesh
-  anchors, overlays and picking. The earlier grid-locked prototype remains an
+  anchors, overlays and picking, but primitive raster rounding still differs;
+  shared projection alone does not guarantee final pixel registration (214).
+  The earlier grid-locked prototype remains an
   explicit `?pixelsnap=1` comparison through `RenderView.pixelSnap`; its independent
   translation rounding caused the followed actor's one-pixel oscillation (213).
 - `collectScene`, `collectSceneOrder`, grass frames and prop-depth metadata own

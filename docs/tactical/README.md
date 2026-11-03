@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [214 World registration](214-world-registration.md) | Reproduced: 1px prop/terrain and stopped-player displacement on Canvas/GPU; independent raster placement and 213 coverage gap identified; shared-composition proof is provisional, runtime unchanged |
 | [213 Continuous camera projection](213-continuous-camera-projection.md) | Delivered: measured sprite/car wobble removed; 39 native/eight browser checks, pixel seam probes, build and streaming readiness pass; owner playtest next |
 | [212 Matched physics tick prediction](212-matched-physics-tick-prediction.md) | Delivered: steady walk/run/car pacing in two production sessions; 56 native/five Worker/P2P browser checks, build and streaming readiness pass; pixel-grid wobble separate |
 | [211 Movement pacing investigation](211-movement-pacing-investigation.md) | Reproduced: replay compares different input ticks; isolated walk/run/car control removes false corrections; runtime repair pending, pixel-grid wobble separate |

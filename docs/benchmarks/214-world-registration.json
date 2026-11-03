@@ -1,0 +1,337 @@
+{
+  "version": 1,
+  "date": "2026-11-03",
+  "runtimeRevision": "5cad3fd00c55bd1175c1a972d304c27c4789db8f",
+  "browser": "153.0.8010.12",
+  "headless": true,
+  "scope": "Desktop bundled full Chromium; GPU game with ordinary Worker, Canvas/GPU static fixtures. Investigation only, no playable change.",
+  "registration": {
+    "method": "CameraStabilityProbe real cached terrain and solid-color sprite/frozen grass. Horizontal intensity centroids compare the first prop with a separate terrain landmark. Five zooms, two world regions, two backends, seven camera phases per group. Integer-threshold bboxes are also reported; they are not a valid rigidity criterion under filtered translation.",
+    "controls": "uniform-floor changes TerrainFrame origin rounding only inside an isolated Vite transform. world-composite applies one smoothed Canvas blit to the already-snapped readback; this is a stationary-image proof, not a production compositor or a moving-actor/performance qualification.",
+    "cases": [
+      {
+        "mode": "current",
+        "pixelSnap": false,
+        "groups": 20,
+        "frames": 140,
+        "sourceIntegerTranslationMismatchesMax": 1857,
+        "relativeCentroidRangePxMax": 1,
+        "thresholdBoundingBoxRangePxMax": 1,
+        "byZoom": [
+          {
+            "zoom": 0.4,
+            "relativeCentroidRangePxMax": 1
+          },
+          {
+            "zoom": 0.5,
+            "relativeCentroidRangePxMax": 1
+          },
+          {
+            "zoom": 0.8,
+            "relativeCentroidRangePxMax": 1
+          },
+          {
+            "zoom": 1,
+            "relativeCentroidRangePxMax": 1
+          },
+          {
+            "zoom": 1.3,
+            "relativeCentroidRangePxMax": 0.5
+          }
+        ]
+      },
+      {
+        "mode": "current",
+        "pixelSnap": true,
+        "groups": 20,
+        "frames": 140,
+        "sourceIntegerTranslationMismatchesMax": 0,
+        "relativeCentroidRangePxMax": 0,
+        "thresholdBoundingBoxRangePxMax": 0,
+        "byZoom": [
+          {
+            "zoom": 0.4,
+            "relativeCentroidRangePxMax": 0
+          },
+          {
+            "zoom": 0.5,
+            "relativeCentroidRangePxMax": 0
+          },
+          {
+            "zoom": 0.8,
+            "relativeCentroidRangePxMax": 0
+          },
+          {
+            "zoom": 1,
+            "relativeCentroidRangePxMax": 0
+          },
+          {
+            "zoom": 1.3,
+            "relativeCentroidRangePxMax": 0
+          }
+        ]
+      },
+      {
+        "mode": "uniform-floor",
+        "pixelSnap": false,
+        "groups": 20,
+        "frames": 140,
+        "sourceIntegerTranslationMismatchesMax": 1465,
+        "relativeCentroidRangePxMax": 1,
+        "thresholdBoundingBoxRangePxMax": 1,
+        "byZoom": [
+          {
+            "zoom": 0.4,
+            "relativeCentroidRangePxMax": 1
+          },
+          {
+            "zoom": 0.5,
+            "relativeCentroidRangePxMax": 1
+          },
+          {
+            "zoom": 0.8,
+            "relativeCentroidRangePxMax": 1
+          },
+          {
+            "zoom": 1,
+            "relativeCentroidRangePxMax": 1
+          },
+          {
+            "zoom": 1.3,
+            "relativeCentroidRangePxMax": 0.5
+          }
+        ]
+      },
+      {
+        "mode": "world-composite",
+        "pixelSnap": true,
+        "groups": 20,
+        "frames": 140,
+        "sourceIntegerTranslationMismatchesMax": 0,
+        "relativeCentroidRangePxMax": 0.010298459413789374,
+        "thresholdBoundingBoxRangePxMax": 1,
+        "byZoom": [
+          {
+            "zoom": 0.4,
+            "relativeCentroidRangePxMax": 0.009537734788011676
+          },
+          {
+            "zoom": 0.5,
+            "relativeCentroidRangePxMax": 0.009767081838020886
+          },
+          {
+            "zoom": 0.8,
+            "relativeCentroidRangePxMax": 0.010045007596829691
+          },
+          {
+            "zoom": 1,
+            "relativeCentroidRangePxMax": 0.010131581445705251
+          },
+          {
+            "zoom": 1.3,
+            "relativeCentroidRangePxMax": 0.010298459413789374
+          }
+        ]
+      }
+    ]
+  },
+  "game": {
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "renderer": "gpu",
+    "meshes": true,
+    "method": "Read-only production draw/presentation hooks. Stop captures start immediately on release; steady movement summaries discard the first 30 of 240 frames. Terrain draw identity stays unchanged throughout each stop. Horizontal relative draw is player sprite left minus first terrain image left; a constant chunk-local landmark adds only a constant.",
+    "cases": [
+      {
+        "session": "production",
+        "stage": "walk",
+        "capturedFrames": 240,
+        "summaryFrames": 210,
+        "pageErrors": [],
+        "presentedWorldXRange": 222.9163746528157,
+        "actualDrawXRangePx": 0
+      },
+      {
+        "session": "production",
+        "stage": "stop",
+        "capturedFrames": 240,
+        "summaryFrames": 240,
+        "pageErrors": [],
+        "presentedWorldXRange": 0,
+        "actualDrawXRangePx": 28,
+        "presentedWorldYRange": 0,
+        "presentedWorldZRange": 0.00007636779792522929,
+        "relativeTerrainDrawXRangePx": 1,
+        "terrainResourceCount": 1,
+        "relativeChanges": [
+          {
+            "frame": 0,
+            "worldX": 306.13140869140625,
+            "cameraX": 296.6607954135702,
+            "spriteLeft": 644,
+            "terrainLeft": -250,
+            "relativeX": 894
+          },
+          {
+            "frame": 10,
+            "worldX": 306.13140869140625,
+            "cameraX": 302.827818048185,
+            "spriteLeft": 625,
+            "terrainLeft": -268,
+            "relativeX": 893
+          },
+          {
+            "frame": 12,
+            "worldX": 306.13140869140625,
+            "cameraX": 303.4549363408011,
+            "spriteLeft": 624,
+            "terrainLeft": -270,
+            "relativeX": 894
+          },
+          {
+            "frame": 33,
+            "worldX": 306.13140869140625,
+            "cameraX": 305.806354795858,
+            "spriteLeft": 616,
+            "terrainLeft": -277,
+            "relativeX": 893
+          },
+          {
+            "frame": 34,
+            "worldX": 306.13140869140625,
+            "cameraX": 305.8387368671831,
+            "spriteLeft": 616,
+            "terrainLeft": -278,
+            "relativeX": 894
+          }
+        ]
+      },
+      {
+        "session": "production",
+        "stage": "run",
+        "capturedFrames": 240,
+        "summaryFrames": 210,
+        "pageErrors": [],
+        "presentedWorldXRange": 445.85559667968766,
+        "actualDrawXRangePx": 0
+      },
+      {
+        "session": "production",
+        "stage": "car",
+        "capturedFrames": 240,
+        "summaryFrames": 210,
+        "pageErrors": [],
+        "presentedWorldXRange": 390.1252031250001,
+        "actualDrawXRangePx": 0.0007084504163685779
+      },
+      {
+        "session": "production-repeat",
+        "stage": "walk",
+        "capturedFrames": 240,
+        "summaryFrames": 210,
+        "pageErrors": [],
+        "presentedWorldXRange": 222.92275161737132,
+        "actualDrawXRangePx": 0
+      },
+      {
+        "session": "production-repeat",
+        "stage": "stop",
+        "capturedFrames": 240,
+        "summaryFrames": 240,
+        "pageErrors": [],
+        "presentedWorldXRange": 0,
+        "actualDrawXRangePx": 29,
+        "presentedWorldYRange": 0,
+        "presentedWorldZRange": 0.00012878570578468479,
+        "relativeTerrainDrawXRangePx": 1,
+        "terrainResourceCount": 1,
+        "relativeChanges": [
+          {
+            "frame": 0,
+            "worldX": 308.26470947265625,
+            "cameraX": 298.54487761898525,
+            "spriteLeft": 645,
+            "terrainLeft": -256,
+            "relativeX": 901
+          },
+          {
+            "frame": 2,
+            "worldX": 308.26470947265625,
+            "cameraX": 300.39496301234783,
+            "spriteLeft": 639,
+            "terrainLeft": -261,
+            "relativeX": 900
+          },
+          {
+            "frame": 3,
+            "worldX": 308.26470947265625,
+            "cameraX": 301.18342999012157,
+            "spriteLeft": 637,
+            "terrainLeft": -264,
+            "relativeX": 901
+          },
+          {
+            "frame": 6,
+            "worldX": 308.26470947265625,
+            "cameraX": 303.10245672988844,
+            "spriteLeft": 631,
+            "terrainLeft": -269,
+            "relativeX": 900
+          },
+          {
+            "frame": 10,
+            "worldX": 308.26470947265625,
+            "cameraX": 304.8763277424097,
+            "spriteLeft": 626,
+            "terrainLeft": -275,
+            "relativeX": 901
+          },
+          {
+            "frame": 13,
+            "worldX": 308.26470947265625,
+            "cameraX": 305.7945791913065,
+            "spriteLeft": 623,
+            "terrainLeft": -277,
+            "relativeX": 900
+          },
+          {
+            "frame": 22,
+            "worldX": 308.26470947265625,
+            "cameraX": 307.20184741128907,
+            "spriteLeft": 619,
+            "terrainLeft": -282,
+            "relativeX": 901
+          },
+          {
+            "frame": 23,
+            "worldX": 308.26470947265625,
+            "cameraX": 307.30833516684044,
+            "spriteLeft": 618,
+            "terrainLeft": -282,
+            "relativeX": 900
+          }
+        ]
+      },
+      {
+        "session": "production-repeat",
+        "stage": "run",
+        "capturedFrames": 240,
+        "summaryFrames": 210,
+        "pageErrors": [],
+        "presentedWorldXRange": 445.842796875,
+        "actualDrawXRangePx": 0
+      },
+      {
+        "session": "production-repeat",
+        "stage": "car",
+        "capturedFrames": 240,
+        "summaryFrames": 210,
+        "pageErrors": [],
+        "presentedWorldXRange": 390.12520312499964,
+        "actualDrawXRangePx": 0.0006549744225594623
+      }
+    ]
+  }
+}

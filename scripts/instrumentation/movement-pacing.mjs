@@ -64,7 +64,13 @@ try {
       const g = document.querySelector("#game").__game;
 
       window.__movementProbe = { rows: [], enabled: false };
-      let presented, camera, renderedDraw;
+      let presented, camera, renderedDraw, terrainDraw;
+      const collectTerrain = g.renderer.collectTerrain;
+      g.renderer.collectTerrain = function (...args) {
+        const draws = collectTerrain.apply(this, args);
+        terrainDraw = draws[0] ? { ...draws[0] } : undefined;
+        return draws;
+      };
       const surface = g.renderer.surface;
       const drawImage = surface.drawImage;
       surface.drawImage = function (image, ...args) {
@@ -123,6 +129,7 @@ try {
           presented,
           camera,
           renderedDraw,
+          terrainDraw,
           raw: {
             x: player.position.wx,
             y: player.position.wy,
@@ -183,6 +190,10 @@ try {
     }
     await page.keyboard.down("d");
     await sample("walk");
+    await page.keyboard.up("d");
+    // Capture immediately: the world/player can be stationary while follow settles.
+    await sample("stop", 0);
+    await page.keyboard.down("d");
     await page.keyboard.down("Shift");
     await sample("run");
     await page.keyboard.up("Shift");

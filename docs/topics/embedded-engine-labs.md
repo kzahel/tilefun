@@ -1,5 +1,12 @@
 # Embedded engine labs
 
+[214](../tactical/214-world-registration.md) finds that shared continuous projection
+still permits different final raster phases for terrain, sprites and mesh bodies.
+The Canvas/GPU static-world probe reproduces 1px relative shifts; the ordinary game
+also reproduces it for a stopped player during camera settling. A future common
+composition boundary must cover game, scenario hosts, Edit/interiors, UI and captures;
+no lab-specific camera workaround or playable fix is introduced by this investigation.
+
 [213](../tactical/213-continuous-camera-projection.md) defaults both GameClient and
 ScenarioPresentationHost to continuous camera projection, retaining shared-edge
 raster alignment and inverse picking. The old grid-lock comparison is explicit

@@ -3,6 +3,12 @@
 Status: delivered and locally qualified; owner playtest next.
 Updated: 2026-11-03.
 
+Follow-up: [214](214-world-registration.md) reproduces a stationary-world registration
+regression under the new default. The static rigidity probe below retained snapped
+projection and did not qualify that default. Moving-actor results remain valid;
+the combined static/moving raster contract needs repair. Runtime policy is unchanged
+at the investigation checkpoint.
+
 Owner asks to reproduce and fix the remaining camera wobble noted in 211/212.
 Preserve shared rendering/picking, pixel-art source banks, cached surfaces and
 Canvas/GPU alignment. No simulation or prediction change is needed.
