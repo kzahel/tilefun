@@ -20,6 +20,7 @@ export interface ScenarioRecipe {
     model: string;
     name?: string;
     z?: number;
+    rotation?: import("../physics/BodyRotation.js").BodyRotation;
     paintSchemeId?: string;
     wx: number;
     wy: number;

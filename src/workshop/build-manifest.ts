@@ -75,6 +75,7 @@ try {
     await buildWorldGeometryCandidate("crossing"),
     await buildWorldGeometryCandidate("car-bridge"),
     await buildWorldGeometryCandidate("car-garage"),
+    await buildWorldGeometryCandidate("car-dynamics"),
     await buildWorldGeometryCandidate("traffic"),
     await buildWorldGeometryCandidate("train-grades"),
     await buildTruckBedCandidate(),

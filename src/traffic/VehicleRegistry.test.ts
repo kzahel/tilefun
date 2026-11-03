@@ -84,3 +84,30 @@ it("resumes a falling vehicle through a durable reload without resetting its ver
     await s.close();
   }
 });
+
+it("saves and reloads an overturned vehicle's orientation and angular momentum", async () => {
+  const s = await ScenarioSession.create({
+    version: 1,
+    id: "rotated-vehicle-record",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(0, 0),
+    props: [],
+  });
+  try {
+    const registry = required(s.realm.vehicleRegistry),
+      state = required(registry.place("compact-1", 96, 0));
+    state.entity.bodyRotation = [0.5, 0.5, 0.5, 0.5];
+    state.entity.bodyAngularVelocity = [1, -2, 3];
+    const saved = registry.snapshot(state);
+    registry.onChange?.(state, false);
+    await s.reload();
+    const restored = required([...required(s.realm.vehicleRegistry).states.values()][0]).entity;
+    expect(restored.bodyRotation).toEqual(saved.bodyRotation);
+    expect(restored.bodyAngularVelocity).toEqual([1, -2, 3]);
+    expect(() =>
+      registry.restore([{ ...saved, identity: "bad-rotation", bodyRotation: [0, 0, 0, 0] }]),
+    ).toThrow(/Invalid/);
+  } finally {
+    await s.close();
+  }
+});

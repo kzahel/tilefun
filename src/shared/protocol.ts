@@ -7,6 +7,7 @@ import type {
 } from "../generation/GenerationDescriptor.js";
 import type { FacadePiece } from "../generation/regional/BuildingRecipes.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
+import type { BodyRotation } from "../physics/BodyRotation.js";
 import type { RailPath } from "../railway/RailPath.js";
 import type { Arrival } from "../server/SafeArrival.js";
 import type { EntityDelta } from "./entityDelta.js";
@@ -39,6 +40,7 @@ export type ClientMessage =
   | { type: "vehicle-horn"; active: boolean }
   | { type: "enter-vehicle"; requestId: number; entityId: number }
   | { type: "exit-vehicle"; requestId: number }
+  | { type: "recover-vehicle"; requestId: number; entityId: number }
   | {
       type: "edit-room";
       roomId: string;
@@ -213,6 +215,7 @@ export interface EntitySnapshot {
   emergencyState?: number;
   /** Driven-car nose angle in world radians, retained while parked. */
   vehicleHeading?: number;
+  bodyRotation?: BodyRotation;
   paintSchemeId?: string;
 
   /** Hinged dump bed angle/target in radians; authority owns the clock. */

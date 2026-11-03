@@ -4,6 +4,7 @@ import { updatePlayerSpriteFromInput } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import type { Movement } from "../input/ActionManager.js";
+import { interpolateRotation } from "../physics/BodyRotation.js";
 import { getGravityScale } from "../physics/Gravity.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { type PhysicsGeometry, PhysicsScene } from "../physics/PhysicsScene.js";
@@ -748,6 +749,16 @@ export class PlayerPredictor {
         prevPosition: position,
         wz: z,
         prevWz: z,
+        ...(predicted.bodyRotation
+          ? (() => {
+              const bodyRotation = interpolateRotation(
+                predicted.prevBodyRotation ?? predicted.bodyRotation,
+                predicted.bodyRotation,
+                alpha,
+              );
+              return { bodyRotation, prevBodyRotation: bodyRotation };
+            })()
+          : {}),
         ...(predicted.vehicleHeading === undefined
           ? {}
           : {

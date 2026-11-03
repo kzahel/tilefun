@@ -7,6 +7,7 @@ import type { OverlayDraw } from "./OverlayFrame.js";
 import { RasterRenderBackend } from "./RasterRenderBackend.js";
 import { touchRaster } from "./RasterSurface.js";
 import type { RenderPass, RenderView } from "./RenderFrame.js";
+import { WORLD_RASTER_PAD } from "./WorldRasterFrame.js";
 
 /** GPU draw adapter with shared terrain, interior and scene preparation. */
 const overlayFields: (keyof OverlayDraw)[] = [
@@ -57,11 +58,23 @@ export class GpuRenderBackend extends RasterRenderBackend {
   override submit(view: RenderView, pass: RenderPass) {
     if (this.surface.disposed) throw Error("Renderer is disposed");
     if (this.surface.lost) return;
+    this.surface.worldDepth = this.worldRaster;
+    this.surface.setDepthPlane();
     super.submit(view, pass);
     this.surface.flush();
+    this.surface.setDepthPlane();
   }
   protected override drawOverlay(pass: Extract<RenderPass, { kind: "overlay" }>) {
     if (!pass.items.length) return;
+    if (pass.worldDepth) {
+      const pad = this.worldRaster ? WORLD_RASTER_PAD : 0;
+      const shifted = (p: readonly [number, number, number]) => [
+        p[0],
+        p[1],
+        p[2] - pad * (p[0] + p[1]),
+      ];
+      this.surface.setDepthSurface(shifted(pass.worldDepth.top), shifted(pass.worldDepth.front));
+    }
     if (pass.cacheKey) {
       const image = this.surfaceOverlays.get(
         pass.cacheKey,

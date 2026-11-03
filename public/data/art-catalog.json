@@ -29315,7 +29315,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:320"
+          "source": "src/rendering/RendererLab.ts:321"
         }
       ]
     },
@@ -29333,7 +29333,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:321"
+          "source": "src/rendering/RendererLab.ts:322"
         }
       ]
     },
@@ -33859,19 +33859,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:206"
+          "source": "src/rendering/RendererLab.ts:207"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:274"
+          "source": "src/rendering/RendererLab.ts:275"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:278"
+          "source": "src/rendering/RendererLab.ts:279"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:282"
+          "source": "src/rendering/RendererLab.ts:283"
         }
       ]
     },
@@ -34577,15 +34577,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:254"
+          "source": "src/rendering/collectScene.ts:260"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:264"
+          "source": "src/rendering/collectScene.ts:270"
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Vehicle.ts:121"
+          "source": "src/traffic/Vehicle.ts:122"
         }
       ]
     },
@@ -35463,11 +35463,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:150"
+          "source": "src/scenarios/ScenarioSession.ts:154"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:229"
+          "source": "src/scenarios/ScenarioSession.ts:237"
         },
         {
           "system": "Gameplay",
@@ -35491,23 +35491,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:308"
+          "source": "src/server/Realm.ts:313"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1208"
+          "source": "src/server/Realm.ts:1214"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1416"
+          "source": "src/server/Realm.ts:1422"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2070"
+          "source": "src/server/Realm.ts:2076"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2283"
+          "source": "src/server/Realm.ts:2289"
         },
         {
           "system": "Gameplay",
@@ -35527,11 +35527,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/shared/serialization.ts:32"
+          "source": "src/shared/serialization.ts:33"
         },
         {
           "system": "Gameplay",
-          "source": "src/shared/serialization.ts:127"
+          "source": "src/shared/serialization.ts:130"
         },
         {
           "system": "Gameplay",
@@ -36595,15 +36595,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:182"
+          "source": "src/physics/PhysicsScene.ts:201"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:189"
+          "source": "src/physics/PhysicsScene.ts:214"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/CollisionDebug.ts:118"
+          "source": "src/rendering/CollisionDebug.ts:117"
         },
         {
           "system": "Editor",
@@ -36611,11 +36611,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1303"
+          "source": "src/server/Realm.ts:1309"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2247"
+          "source": "src/server/Realm.ts:2253"
         },
         {
           "system": "Gameplay",
@@ -38159,15 +38159,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:211"
+          "source": "src/rendering/RendererLab.ts:212"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:215"
+          "source": "src/rendering/RendererLab.ts:216"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:356"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:363"
         },
         {
           "system": "Editor",

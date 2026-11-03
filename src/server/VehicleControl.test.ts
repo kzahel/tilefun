@@ -30,7 +30,7 @@ it("normalizes diagonals, retains off-road cars through exit and reload, and res
     for (let i = 0; i < 60; i++) await s.step({ ...idle, dx: 1, dy: -1 });
     expect(
       Math.hypot(car.entity.velocity?.vx ?? 0, car.entity.velocity?.vy ?? 0),
-    ).toBeLessThanOrEqual(112.001);
+    ).toBeLessThanOrEqual(112 * 1.02); // Tire slip can add lateral speed; diagonal input must not multiply propulsion.
     expect(car.entity.position.wy).toBeLessThan(initial.wy - 30);
     const savedHeading = car.entity.vehicleHeading;
     await s.reload();
@@ -44,11 +44,18 @@ it("normalizes diagonals, retains off-road cars through exit and reload, and res
     expect(s.realm.vehicles.get(s.player)?.id).toBe(car.entity.id);
     expect(s.player.player.collider).toBeNull();
     for (let i = 0; i < 110; i++) await s.step({ ...idle, dy: -1 });
-    const parked = { ...car.entity.position };
-    const parkedHeading = car.entity.vehicleHeading;
+    const released = { ...car.entity.position };
     s.realm.vehicles.exit(s.player);
     for (let i = 0; i < 60; i++) await s.step(idle);
-    expect(car.entity.position).toEqual(parked);
+    expect(
+      Math.hypot(car.entity.position.wx - released.wx, car.entity.position.wy - released.wy),
+    ).toBeLessThan(25);
+    const parked = { ...car.entity.position },
+      parkedHeading = car.entity.vehicleHeading;
+    for (let i = 0; i < 60; i++) await s.step(idle);
+    expect(
+      Math.hypot(car.entity.position.wx - parked.wx, car.entity.position.wy - parked.wy),
+    ).toBeLessThan(0.05);
     await s.reload();
     const restored = [...(s.realm.vehicleRegistry?.states.values() ?? [])].find(
       (c) => c.entity.proceduralId === car.entity.proceduralId,
@@ -300,6 +307,26 @@ it("sustains a held horn, releases immediately, and expires abandoned holds", as
     s.player.editorEnabled = true;
     s.realm.vehicles.honk(s.player, true);
     expect(s.realm.vehicles.takeHorns()).toEqual([]);
+  } finally {
+    await s.close();
+  }
+});
+
+it("allows a nearby player to right a settled overturned car through shared physics", async () => {
+  const s = await ScenarioSession.create(recipe());
+  try {
+    const car = required(s.realm.vehicleRegistry?.states.get(required(s.handles.car)));
+    car.entity.bodyRotation = [1, 0, 0, 0];
+    car.entity.wz = 30;
+    for (let i = 0; i < 180; i++) await s.step(idle);
+    const other = new PlayerSession("far-away", createPlayer(1000, 1000));
+    other.editorEnabled = false;
+    expect(() => s.realm.vehicles.recover(other, car.entity.id)).toThrow(/Stand beside/);
+    await s.command({ kind: "recover-vehicle", entityId: car.entity.id });
+    expect(car.entity.bodyRotation?.[3]).toBeCloseTo(1, 3);
+    expect(car.entity.bodyAngularVelocity).toEqual([0, 0, 0]);
+    for (let i = 0; i < 60; i++) await s.step(idle);
+    expect(Math.abs(car.entity.wz ?? Infinity)).toBeLessThan(0.5);
   } finally {
     await s.close();
   }

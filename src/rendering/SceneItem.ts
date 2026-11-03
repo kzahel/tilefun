@@ -61,6 +61,8 @@ export interface SpriteItem {
   drawOffsetY: number;
   /** Whether to draw a ground shadow. */
   hasShadow: boolean;
+  /** Physical mesh uses a separate ground shadow; baked sprite fallbacks already contain theirs. */
+  meshGroundShadow?: boolean;
   /** World Y of entity feet (for shadow placement). */
   shadowFeetWy: number;
   /** Shadow width in world pixels. */

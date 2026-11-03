@@ -104,6 +104,10 @@ export class ScenarioSession {
       throw error;
     }
   }
+  private requireGuest() {
+    if (!this.guest) throw Error("No guest in this scenario");
+    return this.guest;
+  }
   private async open(fresh: boolean) {
     const meta: WorldMeta = {
       id: "scenario",
@@ -203,6 +207,10 @@ export class ScenarioSession {
           fixture.z,
         );
         if (!state) throw Error("Blocked parked scenario vehicle");
+        if (fixture.rotation) {
+          state.entity.bodyRotation = [...fixture.rotation];
+          this.realm.vehicleRegistry?.onChange?.(state, false);
+        }
         if (fixture.name) {
           this.handles[fixture.name] = state.entity.id;
           if (state.entity.proceduralId) this.identities[fixture.name] = state.entity.proceduralId;
@@ -338,10 +346,19 @@ export class ScenarioSession {
         this.realm.vehicles.emergency(this.player, command.action);
         return;
       case "enter-vehicle":
-        this.realm.vehicles.enter(this.player, command.entityId);
+        this.realm.vehicles.enter(
+          command.seat === 1 ? this.requireGuest() : this.player,
+          command.entityId,
+        );
         return;
+      case "recover-vehicle":
+        this.realm.vehicles.recover(
+          command.seat === 1 ? this.requireGuest() : this.player,
+          command.entityId,
+        );
+        break;
       case "exit-vehicle":
-        this.realm.vehicles.exit(this.player);
+        this.realm.vehicles.exit(command.seat === 1 ? this.requireGuest() : this.player);
         return;
       case "view-range":
         await this.ready(command.range);

@@ -614,6 +614,10 @@ export class GameClient {
       this.clearPlayInput();
       return this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
     });
+    this.actions.on("vehicle_recover", () => {
+      if (this.scenes.current instanceof PlayScene && !this.playInputBlocked)
+        this.vehicleControl.activateRecovery();
+    });
     this.actions.on("enter_place", () => {
       if (!(this.scenes.current instanceof PlayScene) || this.playInputBlocked) return;
       if (!this.vehicleControl.activate()) this.doorControl.activate();

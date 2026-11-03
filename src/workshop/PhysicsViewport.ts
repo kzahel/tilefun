@@ -1,6 +1,9 @@
 import * as THREE from "three";
-import { DEFAULT_PHYSICAL_HEIGHT } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
+import type { Prop } from "../entities/Prop.js";
+import { rapierRotation, rotateBodyVector, yawRotation } from "../physics/BodyRotation.js";
+import { physicsBodyDimensions } from "../physics/PhysicsBodies.js";
+import { propCollisionDebugShapes } from "../rendering/CollisionDebug.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
 import type { ScenarioReplica } from "../scenarios/ScenarioReplica.js";
 
@@ -12,6 +15,12 @@ export class PhysicsViewport {
   private grid = new THREE.GridHelper(512, 32, 0x64826a, 0x8eaa8a);
   private meshes = new Map<number, THREE.Mesh>();
   private geometry = new THREE.BoxGeometry(1, 1, 1);
+  private props: readonly Prop[] | undefined;
+  private readonly surfaces: THREE.Mesh[] = [];
+  private readonly surfaceMaterial = new THREE.MeshLambertMaterial({
+    color: 0x657780,
+    side: THREE.DoubleSide,
+  });
   private materials = [0x5c9cdd, 0xe2a65c, 0x929ca1].map(
     (color) => new THREE.MeshLambertMaterial({ color }),
   );
@@ -49,6 +58,35 @@ export class PhysicsViewport {
     const view = replica.view;
     view.beginPresentation(now, alpha, paused);
     const seen = new Set<number>();
+    const props = view.props;
+    if (props !== this.props) {
+      for (const mesh of this.surfaces) {
+        this.scene.remove(mesh);
+        mesh.geometry.dispose();
+      }
+      this.surfaces.length = 0;
+      this.props = props;
+      for (const prop of props)
+        for (const shape of propCollisionDebugShapes(prop)) {
+          if (shape.layer !== "walking" || shape.vertices.length !== 8) continue;
+          const geometry = new THREE.BufferGeometry();
+          geometry.setAttribute(
+            "position",
+            new THREE.Float32BufferAttribute(
+              shape.vertices.flatMap((p) => [p.x, p.z, p.y]),
+              3,
+            ),
+          );
+          geometry.setIndex([
+            0, 1, 2, 0, 2, 3, 4, 6, 5, 4, 7, 6, 0, 4, 5, 0, 5, 1, 1, 5, 6, 1, 6, 2, 2, 6, 7, 2, 7,
+            3, 3, 7, 4, 3, 4, 0,
+          ]);
+          geometry.computeVertexNormals();
+          const mesh = new THREE.Mesh(geometry, this.surfaceMaterial);
+          this.scene.add(mesh);
+          this.surfaces.push(mesh);
+        }
+    }
     try {
       for (const entity of view.entities) {
         if (!entity.collider || entity.parentId !== undefined) continue;
@@ -72,6 +110,14 @@ export class PhysicsViewport {
           this.scene.remove(mesh);
           this.meshes.delete(id);
         }
+      const driver = view.entities.find(
+        (e) => (e.id === hostId || e.id === guestId) && e.parentId !== undefined,
+      );
+      const vehicle = driver && view.entities.find((e) => e.id === driver.parentId);
+      const x = vehicle?.position.wx ?? 0,
+        y = vehicle?.position.wy ?? 0;
+      this.camera.position.set(x + 180, 240, y + 260);
+      this.camera.lookAt(x, 0, y);
       this.renderer.render(this.scene, this.camera);
     } finally {
       view.endPresentation();
@@ -81,15 +127,22 @@ export class PhysicsViewport {
     const c = entity.collider;
     if (!c) return;
     const p = interpolatePosition(entity.position, entity.prevPosition, alpha),
-      h = c.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT;
-    mesh.scale.set(c.width, h, c.height);
+      d = physicsBodyDimensions(entity);
+    const rotation = entity.bodyRotation ?? yawRotation(d.yaw),
+      clearance = entity.bodyRotation ? Math.min(4, d.height * 0.22) : 0;
+    const center = rotateBodyVector(rotation, 0, 0, (d.height + clearance) / 2);
+    mesh.scale.set(d.width, d.height - clearance, d.depth);
+    const q = rapierRotation(rotation);
+    mesh.quaternion.set(q.x, q.y, q.z, q.w);
     mesh.position.set(
-      p.wx + c.offsetX,
-      (interpolateWz(entity, alpha) ?? 0) + h / 2,
-      p.wy + c.offsetY - c.height / 2,
+      p.wx + d.offsetX + center.x,
+      (interpolateWz(entity, alpha) ?? 0) + center.z,
+      p.wy + d.offsetY + center.y,
     );
   }
   dispose() {
+    for (const mesh of this.surfaces) mesh.geometry.dispose();
+    this.surfaceMaterial.dispose();
     this.geometry.dispose();
     for (const material of this.materials) material.dispose();
     this.meshes.clear();

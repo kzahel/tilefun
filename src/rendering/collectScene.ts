@@ -3,6 +3,7 @@ import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { rotateBodyVector } from "../physics/BodyRotation.js";
 import { terrainBaseZ } from "../physics/TerrainExcavation.js";
 import {
   hasVehicleLights,
@@ -143,7 +144,9 @@ export function collectScene(
       supportId === undefined ? undefined : movingRoofs.find((e) => e.id === supportId);
     const supportMesh = support ? authoredVehicleForType(support.type ?? "") : undefined;
     const meshRoofSupport: SpriteItem["meshRoofSupport"] =
-      supportMesh && support?.collider
+      supportMesh &&
+      support?.collider &&
+      (!support.bodyRotation || rotateBodyVector(support.bodyRotation, 0, 0, 1).z > 0.995)
         ? {
             assetId: supportMesh.assetId,
             heightDelta:
@@ -192,10 +195,12 @@ export function collectScene(
       e.parentId === undefined || !isCarryable(e)
         ? undefined
         : entities.find((p) => p.id === e.parentId && faunaProfile(p.type));
-    const hasShadow = !boatParent && !e.flashHidden && !e.noShadow;
+    const meshGroundShadow = !!e.bodyRotation && isVehicle(e) && !isBoat(e);
+    const hasShadow = !boatParent && !e.flashHidden && (!e.noShadow || meshGroundShadow);
     const col = e.collider;
     const shadowWidth = col ? col.width : e.sprite.spriteWidth * 0.6;
-    const shadowFeetWy = pos.wy + (col ? col.offsetY : (e.sortOffsetY ?? 0));
+    const shadowFeetWy =
+      pos.wy + (col ? col.offsetY - (meshGroundShadow ? col.height / 2 : 0) : (e.sortOffsetY ?? 0));
     const shadowTx = Math.floor(pos.wx / TILE_SIZE);
     const shadowTy = Math.floor(pos.wy / TILE_SIZE);
     const terrainZ =
@@ -244,6 +249,7 @@ export function collectScene(
     const mesh = baseMesh;
     const spriteItem = {
       ...(mesh ? { mesh } : {}),
+      ...(meshGroundShadow ? { meshGroundShadow: true } : {}),
       ...(meshRoofSupport ? { meshRoofSupport } : {}),
       ...(hasVehicleLights(e) && vehicleLightState(e) & 1
         ? {

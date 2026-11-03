@@ -979,7 +979,7 @@ test("GPU indexed batches preserve quad order, capacity boundaries and upload ac
   });
   expect(result.maxError).toBeLessThanOrEqual(1);
   expect(result.draws).toBe(3);
-  expect(result.uploaded).toBe(4101 * 4 * 13 * 4);
+  expect(result.uploaded).toBe(4101 * 4 * 20 * 4);
 });
 
 test("shared grass LOD fades consistently in Canvas and GPU and returns at ordinary zoom", async ({
@@ -1042,4 +1042,37 @@ test("missing authored GLB keeps the complete sprite body", async ({ page }) => 
     ).rendererLab.setMesh(true),
   );
   expect(result).toMatchObject({ meshState: "failed", meshDraws: 0, mismatches: 0 });
+});
+
+test("production vehicle depth matches common 3D geometry through ordering, tilt and cached reuse", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const report = await page.evaluate(() =>
+    (
+      window as unknown as {
+        rendererLab: {
+          probeVehicleDepth: () => Promise<{
+            reports: {
+              pose: string;
+              overlap: number;
+              orderErrors: number;
+              cacheErrors: number;
+              oracleErrors: number;
+            }[];
+            imageHits: number;
+          }>;
+        };
+      }
+    ).rendererLab.probeVehicleDepth(),
+  );
+  expect(report.imageHits).toBeGreaterThan(0);
+  expect(report.reports).toHaveLength(3);
+  for (const result of report.reports) {
+    expect(result.overlap).toBeGreaterThan(20);
+    expect(result.orderErrors).toBe(0);
+    expect(result.cacheErrors).toBe(0);
+    expect(result.oracleErrors).toBe(0);
+  }
 });

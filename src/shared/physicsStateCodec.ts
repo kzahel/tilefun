@@ -1,3 +1,4 @@
+import { yawRotation } from "../physics/BodyRotation.js";
 import {
   MAX_PREDICTION_BODIES,
   type PhysicsBodyKind,
@@ -39,7 +40,9 @@ export function physicsStateBytes(state?: PhysicsState): number {
   return (
     1 +
     (state
-      ? HEADER_BYTES + state.bodies.length * BODY_BYTES + state.contacts.length * CONTACT_BYTES
+      ? HEADER_BYTES +
+        state.bodies.reduce((bytes, b) => bytes + BODY_BYTES + (b.kind === "vehicle" ? 45 : 0), 0) +
+        state.contacts.length * CONTACT_BYTES
       : 0)
   );
 }
@@ -100,6 +103,17 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
     for (const field of FIELDS) {
       view.setFloat32(offset, finite(Math.fround(body[field] ?? 0)), true);
       offset += 4;
+    }
+    if (body.kind === "vehicle") {
+      view.setUint8(offset++, body.sleeping ? 1 : 0);
+      for (const value of [
+        ...(body.rotation ?? yawRotation(body.heading)),
+        ...(body.prevRotation ?? body.rotation ?? yawRotation(body.prevHeading)),
+        ...(body.angularVelocity ?? [0, 0, 0]),
+      ]) {
+        view.setFloat32(offset, finite(Math.fround(value)), true);
+        offset += 4;
+      }
     }
   }
   const pairs = new Set<string>();
@@ -195,6 +209,20 @@ export function readPhysicsState(
       )
         continue;
       body[field] = value;
+    }
+    if (kind === "vehicle") {
+      if (offset + 45 > view.byteLength) throw Error("Invalid physics vehicle length");
+      const sleeping = view.getUint8(offset++);
+      if (sleeping > 1) throw Error("Invalid physics sleeping flag");
+      body.sleeping = !!sleeping;
+      const read = () => {
+        const value = finite(view.getFloat32(offset, true));
+        offset += 4;
+        return value;
+      };
+      body.rotation = [read(), read(), read(), read()];
+      body.prevRotation = [read(), read(), read(), read()];
+      body.angularVelocity = [read(), read(), read()];
     }
     bodies.push(body);
   }

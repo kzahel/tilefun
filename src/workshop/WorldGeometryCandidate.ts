@@ -7,6 +7,7 @@ import { generatedCrossingRecipe } from "../scenarios/GeneratedCrossingRecipe.js
 import { railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { roadTrafficRecipe } from "../scenarios/RoadTrafficRecipe.js";
 import { undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
+import { vehicleDynamicsRecipe } from "../scenarios/VehicleDynamicsRecipe.js";
 import { vehicleGeometryRecipe } from "../scenarios/VehicleGeometryRecipe.js";
 import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import vehicles from "../traffic/VehicleRegistry.ts?raw";
@@ -20,6 +21,7 @@ export async function buildWorldGeometryCandidate(
     | "crossing"
     | "car-bridge"
     | "car-garage"
+    | "car-dynamics"
     | "train-grades"
     | "traffic" = "deck",
 ): Promise<WorkshopCandidate> {
@@ -29,15 +31,17 @@ export async function buildWorldGeometryCandidate(
   const garage = fixture === "garage" || fixture === "car-garage",
     vehicle = fixture.startsWith("car-");
   const recipe =
-    fixture === "traffic"
-      ? roadTrafficRecipe()
-      : vehicle
-        ? vehicleGeometryRecipe(garage)
-        : fixture === "crossing"
-          ? railCrossingRecipe()
-          : garage
-            ? undergroundGarageRecipe()
-            : worldGeometryRecipe();
+    fixture === "car-dynamics"
+      ? vehicleDynamicsRecipe()
+      : fixture === "traffic"
+        ? roadTrafficRecipe()
+        : vehicle
+          ? vehicleGeometryRecipe(garage)
+          : fixture === "crossing"
+            ? railCrossingRecipe()
+            : garage
+              ? undergroundGarageRecipe()
+              : worldGeometryRecipe();
   const id =
     fixture === "traffic"
       ? "geometry:road-traffic-v1"
@@ -63,7 +67,7 @@ export async function buildWorldGeometryCandidate(
               ? "Underground garage and street"
               : "Ramp, deck and lower passage",
     prompt:
-      "Inspect traversal, support, headroom, underpass and save/reload against the ordinary shared game kernel. Cars are independently controlled upright bodies. Schematic geometry; no art promotion.",
+      "Inspect traversal, support, headroom, underpass and save/reload against the ordinary shared game kernel. Cars are independently controlled freely rotating chassis with suspension. Schematic geometry; no art promotion.",
     url,
     fingerprint: await fingerprint(recipe),
     excluded: "Interactive engine experiment; not an immutable art approval snapshot.",

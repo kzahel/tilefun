@@ -1,5 +1,8 @@
 # General 3D physics backend
 
+[216](../tactical/216-dynamic-3d-vehicles.md) adds freely rotating land vehicles with authored axle suspension/tire impulses before the same single world step. Frame 0x11 retains full rotation/angular/sleep state; ordinary replicas and records retain orientation. Direct same-world collider wheel queries avoid a previous-step query warm-up during replay. Qualification is in progress.
+
+
 Status: shared Rapier default delivered and qualified; legacy solvers/options deleted.
 Updated: 2026-11-03.
 

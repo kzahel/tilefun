@@ -34,7 +34,7 @@ it("invalidates every local rig/paint input, ignoring an inactive light clock", 
 });
 
 it("admits recurring poses across frames and disposes on budget eviction, age and reset", () => {
-  const cache = new CarBodyImageCache(8 * 8 * 4 * 2, 2);
+  const cache = new CarBodyImageCache(8 * 8 * 8 * 2, 2);
   cache.beginFrame();
   expect(cache.get("a")).toBeUndefined();
   expect(cache.admit("a", 8)).toBeUndefined();
@@ -51,7 +51,7 @@ it("admits recurring poses across frames and disposes on budget eviction, age an
   if (!c) throw Error("Expected admission");
   const disposeC = vi.spyOn(c, "dispose");
   expect(cache.get("b")).toBeUndefined();
-  expect(cache.bytes).toBe(512);
+  expect(cache.bytes).toBe(1024);
   expect(disposeA).not.toHaveBeenCalled();
   cache.clear();
   expect(disposeA).toHaveBeenCalledOnce();

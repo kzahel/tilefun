@@ -32,6 +32,7 @@ export type ActionName =
   | "reverse"
   | "vehicle_lights"
   | "vehicle_style"
+  | "vehicle_recover"
   | "zoom_0"
   | "zoom_1"
   | "zoom_2"
@@ -82,6 +83,7 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   { action: "reverse", keys: ["r", "R"] },
   { action: "vehicle_lights", keys: ["l", "L"] },
   { action: "vehicle_style", keys: ["k", "K"] },
+  { action: "vehicle_recover", keys: ["f", "F"] },
   { action: "enter_place", keys: ["e", "E"] },
   // Play mode zoom presets
   { action: "zoom_0", keys: ["0"] },

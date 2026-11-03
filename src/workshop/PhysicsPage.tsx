@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { GameLoop } from "../core/GameLoop.js";
 import type { Movement } from "../input/ActionManager.js";
 import {
@@ -14,6 +14,7 @@ import {
   coopScript,
 } from "../scenarios/CoopRecipe.js";
 import { ScenarioClient } from "../scenarios/ScenarioClient.js";
+import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { PhysicsViewport } from "./PhysicsViewport.js";
 import "./physics.css";
 
@@ -23,7 +24,10 @@ export default function PhysicsPage() {
     right = useRef<HTMLCanvasElement>(null);
   const client = useRef<ScenarioClient | null>(null),
     keys = useRef(new Set<string>());
-  const [scene, setScene] = useState<CoopCase>("push"),
+  const [scene, setScene] = useState<CoopCase>(() => {
+      const value = new URLSearchParams(location.search).get("scene");
+      return COOP_CASES.find((scene) => scene === value) ?? "push";
+    }),
     [seat, setSeat] = useState<0 | 1>(0);
   const [paused, setPaused] = useState(false),
     [script, setScript] = useState(false),
@@ -32,6 +36,33 @@ export default function PhysicsPage() {
     [status, setStatus] = useState("Loading shared physics…");
   const state = useRef({ seat, paused, script, rtt });
   state.current = { seat, paused, script, rtt };
+  const vehicleAction = useCallback(async (recover = false) => {
+    const session = client.current,
+      seat = state.current.seat;
+    if (!session || state.current.paused) return;
+    const view = (seat === 1 ? session.guest : session.host)?.view;
+    if (!view) return;
+    const player = view.playerEntity,
+      occupied = occupiedVehicle(player, view.entities);
+    const car =
+      occupied ??
+      view.entities
+        .filter(isDrivable)
+        .filter((e) => boardingDistance(player, e) <= 32)
+        .sort((a, b) => boardingDistance(player, a) - boardingDistance(player, b))[0];
+    if (!car) throw Error("Stand beside the car first.");
+    await session.command(
+      recover
+        ? { kind: "recover-vehicle", entityId: car.id, seat }
+        : occupied
+          ? { kind: "exit-vehicle", seat }
+          : { kind: "enter-vehicle", entityId: car.id, seat },
+    );
+  }, []);
+  const control = useCallback((action: () => Promise<unknown>) => {
+    setError("");
+    void action().catch((reason) => setError(String(reason)));
+  }, []);
   useEffect(() => {
     client.current?.setNetwork(rtt, rtt ? 20 : 0);
   }, [rtt]);
@@ -71,6 +102,8 @@ export default function PhysicsPage() {
           Number(k.has("ArrowUp") || k.has("KeyW")) +
           (canvasFocused ? pad.dy : 0),
         jump: k.has("Space") || (canvasFocused && pad.jump),
+        sprinting: k.has("ShiftLeft") || (canvasFocused && pad.sprinting),
+        reversing: k.has("KeyR"),
       };
     }
     const loop = new GameLoop({
@@ -146,6 +179,14 @@ export default function PhysicsPage() {
     const pad = (event: Event) => {
       const command = (event as CustomEvent<ControllerCommand>).detail;
       const focused = document.activeElement;
+      if (
+        scene === "vehicle" &&
+        (focused === a || focused === b) &&
+        (command === "interact" || command === "down")
+      ) {
+        control(() => vehicleAction(command === "down"));
+        return;
+      }
       if (command === "menu")
         root.current?.querySelector<HTMLButtonElement>(".physics-actions button")?.focus();
       else if (command === "back") (state.current.seat ? b : a).focus();
@@ -190,11 +231,7 @@ export default function PhysicsPage() {
       clear();
       if (client.current === session) client.current = null;
     };
-  }, [scene]);
-  const control = (action: () => Promise<unknown>) => {
-    setError("");
-    void action().catch((reason) => setError(String(reason)));
-  };
+  }, [scene, control, vehicleAction]);
   const touch = (key: string, label: string) => (
     <button
       type="button"
@@ -312,6 +349,11 @@ export default function PhysicsPage() {
                 onBlur={() => keys.current.clear()}
                 onPointerDown={(event) => event.currentTarget.focus()}
                 onKeyDown={(event) => {
+                  if (scene === "vehicle" && (event.code === "KeyE" || event.code === "KeyF")) {
+                    event.preventDefault();
+                    if (!event.repeat) control(() => vehicleAction(event.code === "KeyF"));
+                    return;
+                  }
                   if (
                     [
                       "KeyW",
@@ -323,6 +365,8 @@ export default function PhysicsPage() {
                       "ArrowLeft",
                       "ArrowRight",
                       "Space",
+                      "KeyR",
+                      "ShiftLeft",
                     ].includes(event.code)
                   ) {
                     event.preventDefault();
@@ -335,6 +379,20 @@ export default function PhysicsPage() {
           </div>
         ))}
       </div>
+      {scene === "vehicle" && (
+        <div className="physics-actions">
+          <button type="button" disabled={paused} onClick={() => control(() => vehicleAction())}>
+            Enter / leave car · E / Y
+          </button>
+          <button
+            type="button"
+            disabled={paused}
+            onClick={() => control(() => vehicleAction(true))}
+          >
+            Right car · F / D↓
+          </button>
+        </div>
+      )}
       <div className="physics-touch pair-touch">
         <div>
           {touch("ArrowLeft", "←")}
@@ -347,6 +405,8 @@ export default function PhysicsPage() {
       <p className="physics-hints">
         WASD / arrows + Space. Controller: left stick + A; LB switches player; Menu opens controls;
         D-pad navigates; A confirms; B returns to play. Touch controls move the selected player.
+        {scene === "vehicle" &&
+          " Enter the car before driving. Both panes follow it; switch player to try the guest controls under latency. "}
       </p>
       {error && <p role="alert">{error}</p>}
       <output className="physics-stats">{status}</output>

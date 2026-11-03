@@ -9,6 +9,7 @@ import {
   setSpriteClipElapsed,
   tickSpriteAnimation,
 } from "../entities/spriteAnimation.js";
+import { rotationsEqual } from "../physics/BodyRotation.js";
 import { applyCurveTrainFacing } from "../railway/CurveTrain.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 import type { Chunk } from "../world/Chunk.js";
@@ -65,6 +66,7 @@ export function serializeEntity(e: Entity): EntitySnapshot {
   if (e.jumpInputState !== undefined) result.jumpInputState = e.jumpInputState;
   if (e.emergencyState !== undefined) result.emergencyState = e.emergencyState;
   if (e.vehicleHeading !== undefined) result.vehicleHeading = e.vehicleHeading;
+  if (e.bodyRotation) result.bodyRotation = [...e.bodyRotation];
   if (e.paintSchemeId !== undefined) result.paintSchemeId = e.paintSchemeId;
 
   if (e.jumpVZ !== undefined) result.jumpVZ = e.jumpVZ;
@@ -94,6 +96,7 @@ function entitySnapshotMatches(e: Entity, s: EntitySnapshot): boolean {
     e.jumpInputState !== s.jumpInputState ||
     e.emergencyState !== s.emergencyState ||
     e.vehicleHeading !== s.vehicleHeading ||
+    !rotationsEqual(e.bodyRotation, s.bodyRotation) ||
     e.paintSchemeId !== s.paintSchemeId ||
     e.wz !== s.wz ||
     e.parentId !== s.parentId ||
@@ -217,6 +220,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.jumpInputState !== undefined) result.jumpInputState = s.jumpInputState;
   if (s.emergencyState !== undefined) result.emergencyState = s.emergencyState;
   if (s.vehicleHeading !== undefined) result.vehicleHeading = s.vehicleHeading;
+  if (s.bodyRotation) result.bodyRotation = [...s.bodyRotation];
   if (s.paintSchemeId !== undefined) result.paintSchemeId = s.paintSchemeId;
 
   if (s.jumpVZ !== undefined) result.jumpVZ = s.jumpVZ;

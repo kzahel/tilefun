@@ -1,10 +1,19 @@
 import RAPIER from "@dimforge/rapier3d-compat";
+import { isBoat } from "../boats/Boat.js";
 import { CHUNK_SIZE_PX, JUMP_GRAVITY, JUMP_VELOCITY } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { Direction } from "../entities/Entity.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
+import {
+  rapierRotation,
+  rotateBodyVector,
+  rotationsEqual,
+  worldRotation,
+  yawRotation,
+} from "./BodyRotation.js";
+import { teleportBody } from "./PhysicalEdits.js";
 import { physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
 import {
   initializePhysics,
@@ -15,6 +24,7 @@ import {
   type CollisionGeometrySource,
   compileCollisionGeometry,
 } from "./rapier/CollisionGeometry.js";
+import { VehicleChassis, type WheelContact } from "./VehicleChassis.js";
 import { vehicleMotor } from "./VehicleMotor.js";
 
 export interface PhysicsGeometry extends CollisionGeometrySource {
@@ -44,6 +54,9 @@ interface Body {
   offsetY: number;
   state: PhysicsBodyState;
   incomingVelocity: RAPIER.Vector;
+  chassis?: VehicleChassis;
+  queryRadius: number;
+  queryCenter: RAPIER.Vector;
 }
 interface Section {
   identity: unknown;
@@ -74,6 +87,8 @@ export class PhysicsScene {
     geometryBuildMs: 0,
     geometryParts: 0,
     supportQueries: 0,
+    wheelQueries: 0,
+    wheelNarrowQueries: 0,
     stepMs: 0,
   };
 
@@ -146,6 +161,9 @@ export class PhysicsScene {
       }
       if (!entry) {
         const halfY = dimensions.height / 2 / SCALE;
+        const car = kind === "vehicle" && !isBoat(entity);
+        const rotation = entity.bodyRotation ?? yawRotation(dimensions.yaw);
+        const center = rotateBodyVector(rotation, 0, 0, halfY);
         const offsetX = dimensions.offsetX / SCALE,
           offsetY = dimensions.offsetY / SCALE;
         const desc =
@@ -153,15 +171,15 @@ export class PhysicsScene {
             ? RAPIER.RigidBodyDesc.fixed()
             : RAPIER.RigidBodyDesc.dynamic().setCcdEnabled(true);
         desc.setTranslation(
-          entity.position.wx / SCALE + offsetX - this.origin.x,
-          (entity.wz ?? 0) / SCALE + halfY,
-          entity.position.wy / SCALE + offsetY - this.origin.z,
+          entity.position.wx / SCALE + offsetX + center.x - this.origin.x,
+          (entity.wz ?? 0) / SCALE + center.z,
+          entity.position.wy / SCALE + offsetY + center.y - this.origin.z,
         );
         if (kind === "vehicle") {
-          const angle = dimensions.yaw;
-          desc.setRotation({ x: 0, y: -Math.sin(angle / 2), z: 0, w: Math.cos(angle / 2) });
+          desc.setRotation(rapierRotation(rotation));
         }
-        if (kind !== "loose") desc.enabledRotations(false, kind === "vehicle", false);
+        if (car) desc.setAngularDamping(0.35);
+        else if (kind !== "loose") desc.enabledRotations(false, kind === "vehicle", false);
         else desc.lockRotations().setLinearDamping(1.5);
         const body = this.world.createRigidBody(desc);
         body.setLinvel(
@@ -178,16 +196,23 @@ export class PhysicsScene {
         // the bottom edge clears adjacent ramp/slab seams. CCD resolves actual
         // travel instead of soft-CCD's premature face constraint at the seam.
         const bevel = Math.min(0.01, hx / 4, halfY / 4, hz / 4);
+        const clearance = car ? Math.min(4, dimensions.height * 0.22) / SCALE : 0;
         const shape =
           entity.type === "ball"
             ? RAPIER.ColliderDesc.ball(Math.min(hx, hz, halfY))
             : kind === "character" || kind === "vehicle"
-              ? RAPIER.ColliderDesc.roundCuboid(hx - bevel, halfY - bevel, hz - bevel, bevel)
+              ? RAPIER.ColliderDesc.roundCuboid(
+                  hx - bevel,
+                  halfY - clearance / 2 - bevel,
+                  hz - bevel,
+                  bevel,
+                )
               : RAPIER.ColliderDesc.cuboid(hx, halfY, hz);
         shape
-          .setFriction(kind === "loose" ? 0.5 : 0)
+          .setTranslation(0, clearance / 2, 0)
+          .setFriction(car ? 0.4 : kind === "loose" ? 0.5 : 0)
           .setRestitution(entity.type === "ball" ? 0.55 : 0);
-        if (kind === "character" || kind === "vehicle")
+        if (kind === "character" || (kind === "vehicle" && !car))
           shape.setFrictionCombineRule(RAPIER.CoefficientCombineRule.Min);
         shape.setMass(kind === "vehicle" ? 8 : kind === "loose" ? 0.2 : 1);
         const collider = this.world.createCollider(shape, body);
@@ -201,6 +226,8 @@ export class PhysicsScene {
           offsetX,
           offsetY,
           incomingVelocity: { x: 0, y: 0, z: 0 },
+          queryRadius: Math.hypot(hx, halfY, hz) + 0.1,
+          queryCenter: body.translation(),
           state: {
             id: entity.id,
             kind,
@@ -215,6 +242,13 @@ export class PhysicsScene {
             vz: entity.jumpVZ ?? 0,
             heading: kind === "vehicle" ? dimensions.yaw : 0,
             prevHeading: kind === "vehicle" ? dimensions.yaw : 0,
+            ...(kind === "vehicle"
+              ? {
+                  rotation,
+                  prevRotation: rotation,
+                  angularVelocity: entity.bodyAngularVelocity ?? ([0, 0, 0] as const),
+                }
+              : {}),
             jumpHeld: !!((entity.jumpInputState ?? 0) & 2),
             grounded: entity.jumpVZ === undefined,
             groundZ: entity.groundZ ?? entity.wz ?? 0,
@@ -225,6 +259,12 @@ export class PhysicsScene {
             normalZ: 0,
           },
         };
+        if (car)
+          entry.chassis = new VehicleChassis(body, entity.type, width, height, dimensions.height);
+        if (entity.bodyAngularVelocity) {
+          const [x, y, z] = entity.bodyAngularVelocity;
+          body.setAngvel({ x: -x, y: -z, z: -y }, true);
+        }
         this.bodies.set(entity.id, entry);
         this.colliderIds.set(collider.handle, entity.id);
         this.metrics.bodyCreates++;
@@ -247,13 +287,26 @@ export class PhysicsScene {
       (entity.velocity?.vy ?? 0) !== s.vy ||
       (entity.jumpVZ !== undefined && entity.jumpVZ !== s.vz);
     const grounded = entity.jumpVZ === undefined;
-    if (!moved && !velocityChanged && grounded === s.grounded) return;
-    if (moved)
+    const rotated =
+      entry.kind === "vehicle" &&
+      !!entity.bodyRotation &&
+      !rotationsEqual(entity.bodyRotation, s.rotation);
+    if (!moved && !rotated && !velocityChanged && grounded === s.grounded) return;
+    const rotation = entity.bodyRotation ?? s.rotation ?? yawRotation(s.heading);
+    const center = rotateBodyVector(rotation, 0, 0, entry.halfY);
+    if (rotated) {
+      entry.body.setRotation(rapierRotation(rotation), true);
+      const [x, y, z] = entity.bodyAngularVelocity ?? [0, 0, 0];
+      entry.body.setAngvel({ x: -x, y: -z, z: -y }, true);
+      s.rotation = s.prevRotation = rotation;
+      s.angularVelocity = entity.bodyAngularVelocity ?? [0, 0, 0];
+    }
+    if (moved || rotated)
       entry.body.setTranslation(
         {
-          x: entity.position.wx / SCALE + entry.offsetX - this.origin.x,
-          y: (entity.wz ?? 0) / SCALE + entry.halfY,
-          z: entity.position.wy / SCALE + entry.offsetY - this.origin.z,
+          x: entity.position.wx / SCALE + entry.offsetX + center.x - this.origin.x,
+          y: (entity.wz ?? 0) / SCALE + center.z,
+          z: entity.position.wy / SCALE + entry.offsetY + center.y - this.origin.z,
         },
         true,
       );
@@ -368,12 +421,56 @@ export class PhysicsScene {
     this.metrics.geometryBuildMs = performance.now() - started;
   }
 
+  private wheelContact(
+    origin: RAPIER.Vector,
+    direction: RAPIER.Vector,
+    length: number,
+    owner: Body,
+  ): WheelContact | undefined {
+    this.metrics.wheelQueries++;
+    const ray = new RAPIER.Ray(origin, direction);
+    const ground = this.staticGeometry?.castRayAndGetNormal(ray, length, true);
+    let hit: WheelContact | undefined = ground
+      ? { distance: ground.timeOfImpact, normal: ground.normal }
+      : undefined;
+    // Cheap bounding spheres reject distant residents before entering WASM. Direct
+    // collider queries stay correct on the FIRST tick and after arbitrary restores.
+    for (const other of this.bodies.values()) {
+      if (other === owner) continue;
+      const p = other.queryCenter,
+        dx = p.x - origin.x,
+        dy = p.y - origin.y,
+        dz = p.z - origin.z;
+      const t = Math.max(
+        0,
+        Math.min(length, dx * direction.x + dy * direction.y + dz * direction.z),
+      );
+      if (
+        (dx - direction.x * t) ** 2 + (dy - direction.y * t) ** 2 + (dz - direction.z * t) ** 2 >
+        other.queryRadius ** 2
+      )
+        continue;
+      this.metrics.wheelNarrowQueries++;
+      const contact = other.collider.castRayAndGetNormal(ray, hit?.distance ?? length, true);
+      if (contact && (!hit || contact.timeOfImpact < hit.distance))
+        hit = {
+          distance: contact.timeOfImpact,
+          normal: contact.normal,
+          body: other.body,
+          id: other.entity.id,
+        };
+    }
+    return hit;
+  }
+
   step(intents: ReadonlyMap<number, MotionIntent>, geometry: PhysicsGeometry, gravity = 1) {
     if (this.disposed) throw Error("Physics scene is disposed");
     const started = performance.now();
     this.prepareGeometry(geometry);
+    this.world.propagateModifiedBodyPositionsToColliders();
     this.world.gravity = { x: 0, y: (-JUMP_GRAVITY * gravity) / SCALE, z: 0 };
     // Read support motion before changing any motors: actor order cannot change it.
+    const vehicleInputs: { entry: Body; input: MotionIntent }[] = [];
     const supportVelocities = new Map<number, RAPIER.Vector>();
     for (const [id, entry] of this.bodies) supportVelocities.set(id, entry.body.linvel());
     for (const [id, entry] of this.bodies) {
@@ -400,6 +497,10 @@ export class PhysicsScene {
       else entry.state.desiredDriveSpeed = input.driveSpeed;
       if (input.steering === undefined) delete entry.state.desiredSteering;
       else entry.state.desiredSteering = input.steering;
+      if (entry.chassis) {
+        vehicleInputs.push({ entry, input });
+        continue;
+      }
       const velocity = entry.body.linvel();
       const support =
         entry.state.supportId === undefined
@@ -448,6 +549,32 @@ export class PhysicsScene {
       if (drive?.yawRate !== undefined)
         entry.body.setAngvel({ x: 0, y: -drive.yawRate, z: 0 }, true);
     }
+    // A body's pose is immutable during preparation. Read it once, rather than
+    // crossing JS/WASM again for every wheel/neighbour pair. Parked fleets skip it.
+    if (
+      vehicleInputs.some(
+        ({ entry, input }) => !entry.body.isSleeping() || (input.driveSpeed ?? 0) !== 0,
+      )
+    )
+      for (const entry of this.bodies.values()) entry.queryCenter = entry.body.translation();
+    // All chassis read the same pre-impulse state, including dynamic supports.
+    const prepared = vehicleInputs.map(({ entry, input }) => ({
+      entry,
+      impulses:
+        entry.chassis?.prepare(
+          input,
+          entry.state.heading,
+          (origin, direction, length) => this.wheelContact(origin, direction, length, entry),
+          Math.abs(entry.state.z - entry.state.prevZ) < 0.01,
+        ) ?? [],
+    }));
+    for (const { entry, impulses } of prepared)
+      for (const { point, impulse, support } of impulses) {
+        entry.body.applyImpulseAtPoint(impulse, point, false);
+        if (support?.isDynamic())
+          support.applyImpulseAtPoint({ x: -impulse.x, y: -impulse.y, z: -impulse.z }, point, true);
+      }
+    for (const { entry } of prepared) entry.incomingVelocity = entry.body.linvel();
     this.world.step();
     this.contacts.clear();
     this.tick++;
@@ -461,19 +588,29 @@ export class PhysicsScene {
       v = entry.body.linvel(),
       q = entry.body.rotation();
     const state = entry.state;
+    const rotation = worldRotation(q);
+    const center = rotateBodyVector(rotation, 0, 0, entry.halfY);
+    if (entry.kind === "vehicle") {
+      state.sleeping = entry.body.isSleeping();
+      state.prevRotation = state.rotation ?? rotation;
+      state.rotation = rotation;
+      const angular = entry.body.angvel();
+      state.angularVelocity = [-angular.x, -angular.z, -angular.y];
+    }
     state.prevX = state.x;
     state.prevY = state.y;
     state.prevZ = state.z;
     state.prevHeading = state.heading;
-    state.x = (p.x + this.origin.x - entry.offsetX) * SCALE;
-    state.y = (p.z + this.origin.z - entry.offsetY) * SCALE;
-    state.z = (p.y - entry.halfY) * SCALE;
+    state.x = (p.x + this.origin.x - entry.offsetX - center.x) * SCALE;
+    state.y = (p.z + this.origin.z - entry.offsetY - center.y) * SCALE;
+    state.z = (p.y - center.z) * SCALE;
     state.vx = v.x * SCALE;
     state.vy = v.z * SCALE;
     state.vz = v.y * SCALE;
-    state.heading = -2 * Math.atan2(q.y, q.w);
-    state.grounded = entry.kind === "fixed";
-    delete state.supportId;
+    const forward = rotateBodyVector(rotation, 1, 0, 0);
+    if (Math.hypot(forward.x, forward.y) > 0.001) state.heading = Math.atan2(forward.y, forward.x);
+    state.grounded = entry.kind === "fixed" || (entry.body.isSleeping() && state.grounded);
+    if (!entry.body.isSleeping()) delete state.supportId;
     this.world.contactPairsWith(entry.collider, (other) => {
       this.world.contactPair(entry.collider, other, (manifold, flipped) => {
         const otherId = this.colliderIds.get(other.handle);
@@ -527,6 +664,24 @@ export class PhysicsScene {
         }
       });
     });
+    if (entry.chassis) {
+      state.grounded ||= entry.chassis.grounded;
+      for (const support of entry.chassis.supports) {
+        state.supportId ??= support;
+        let contacts = this.contacts.get(entry.entity.id);
+        if (!contacts) {
+          contacts = new Set();
+          this.contacts.set(entry.entity.id, contacts);
+        }
+        contacts.add(support);
+        let reverse = this.contacts.get(support);
+        if (!reverse) {
+          reverse = new Set();
+          this.contacts.set(support, reverse);
+        }
+        reverse.add(entry.entity.id);
+      }
+    }
     const entity = entry.entity;
     entity.prevPosition = { ...entity.position };
     entity.prevWz = entity.wz ?? 0;
@@ -557,6 +712,9 @@ export class PhysicsScene {
     }
     state.groundZ = entity.groundZ ?? state.z;
     if (entry.kind === "vehicle") {
+      entity.prevBodyRotation = state.prevRotation ?? rotation;
+      entity.bodyRotation = state.rotation ?? rotation;
+      entity.bodyAngularVelocity = state.angularVelocity ?? [0, 0, 0];
       entity.prevVehicleHeading = entity.vehicleHeading ?? state.heading;
       entity.vehicleHeading = state.heading;
       const x = Math.cos(state.heading),
@@ -574,6 +732,50 @@ export class PhysicsScene {
       if (entity.sprite) entity.sprite.moving = Math.hypot(state.vx, state.vy) > 1;
     }
     entity.jumpInputState = state.jumpHeld ? 3 : 0;
+  }
+
+  /** Explicit recovery uses this same world's support and clearance, never another solver. */
+  recoverVehicle(id: number) {
+    const entry = this.bodies.get(id);
+    if (!entry?.chassis) throw Error("This vehicle cannot be righted.");
+    const p = entry.body.translation(),
+      rotation = yawRotation(entry.state.heading);
+    const hit = this.world.castRay(
+      new RAPIER.Ray({ x: p.x, y: p.y + 0.01, z: p.z }, { x: 0, y: -1, z: 0 }),
+      512,
+      true,
+      undefined,
+      undefined,
+      entry.collider,
+      entry.body,
+    );
+    if (!hit) throw Error("No ground beneath the vehicle.");
+    const floor = p.y + 0.01 - hit.timeOfImpact;
+    const relative = entry.collider.translationWrtParent();
+    const proposed = { x: p.x, y: floor + entry.halfY + 0.02 + (relative?.y ?? 0), z: p.z };
+    if (
+      this.world.intersectionWithShape(
+        proposed,
+        rapierRotation(rotation),
+        entry.collider.shape,
+        undefined,
+        undefined,
+        entry.collider,
+        entry.body,
+      ) !== null
+    )
+      throw Error("There is not enough room to right the vehicle here.");
+    teleportBody(entry.entity, {
+      wx: (p.x + this.origin.x) * SCALE,
+      wy: (p.z + this.origin.z) * SCALE,
+      wz: (floor + 0.02) * SCALE,
+    });
+    entry.entity.bodyRotation = entry.entity.prevBodyRotation = rotation;
+    entry.entity.bodyAngularVelocity = [0, 0, 0];
+    this.admitEntityEdits(entry);
+    entry.body.setAngvel({ x: 0, y: 0, z: 0 }, true);
+    entry.state.angularVelocity = [0, 0, 0];
+    entry.state.sleeping = false;
   }
 
   /** Spawn clearance is a read-only query of this same collision authority. */
@@ -699,25 +901,29 @@ export class PhysicsScene {
       const entry = this.bodies.get(state.id);
       if (!entry || entry.kind !== state.kind)
         throw Error(`Missing or incompatible physics body ${state.id} during restore`);
+      const rotation = state.rotation ?? yawRotation(state.heading);
+      const center = rotateBodyVector(rotation, 0, 0, entry.halfY);
       entry.body.setTranslation(
         {
-          x: state.x / SCALE + entry.offsetX - this.origin.x,
-          y: state.z / SCALE + entry.halfY,
-          z: state.y / SCALE + entry.offsetY - this.origin.z,
+          x: state.x / SCALE + entry.offsetX + center.x - this.origin.x,
+          y: state.z / SCALE + center.z,
+          z: state.y / SCALE + entry.offsetY + center.y - this.origin.z,
         },
         true,
       );
       entry.body.setLinvel({ x: state.vx / SCALE, y: state.vz / SCALE, z: state.vy / SCALE }, true);
-      entry.body.setRotation(
-        { x: 0, y: -Math.sin(state.heading / 2), z: 0, w: Math.cos(state.heading / 2) },
-        true,
-      );
-      entry.body.setAngvel({ x: 0, y: 0, z: 0 }, true);
+      entry.body.setRotation(rapierRotation(rotation), true);
+      const [ax, ay, az] = state.angularVelocity ?? [0, 0, 0];
+      entry.body.setAngvel({ x: -ax, y: -az, z: -ay }, true);
+      if (state.sleeping) entry.body.sleep();
       entry.state = { ...state };
       // Publish state and contact membership supplied by the same snapshot.
       entry.entity.prevPosition = { wx: state.prevX, wy: state.prevY };
       entry.entity.prevWz = state.prevZ;
       if (entry.kind === "vehicle") {
+        entry.entity.bodyRotation = state.rotation ?? rotation;
+        entry.entity.prevBodyRotation = state.prevRotation ?? rotation;
+        entry.entity.bodyAngularVelocity = state.angularVelocity ?? [0, 0, 0];
         entry.entity.vehicleHeading = state.heading;
         entry.entity.prevVehicleHeading = state.prevHeading;
       }

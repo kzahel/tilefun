@@ -11,6 +11,7 @@ import type { TerrainResourceId } from "./TerrainPresentation.js";
 import { drawTowingFallback } from "./TowingFallback.js";
 import { drawTransporterFallback } from "./TransporterFallback.js";
 import { drawBedContentsFallback } from "./VehicleBedPresentation.js";
+import { sceneDepth } from "./WorldDepth.js";
 
 /** Canvas-specific resource resolution stays on the drawing side of the boundary. */
 export interface CanvasTerrainSource {
@@ -87,6 +88,7 @@ export function drawSceneEntry2D(
   terrain?: CanvasTerrainSource,
   shadow = false,
 ): void {
+  sceneDepth(ctx, camera, item, shadow);
   if (shadow) {
     if (item.kind === "sprite") drawOneShadow(ctx, camera, item, pixelExactShadows);
     return;
@@ -117,6 +119,7 @@ function drawOneShadow(
   item: SpriteItem,
   pixelExactShadows: boolean,
 ): void {
+  if (item.meshGroundShadow && (!item.mesh || !ctx.meshReady?.has(item.mesh.assetId))) return;
   const shadowW = item.shadowWidth * camera.scale;
   const shadowH = shadowW * 0.35;
   const terrainOffset = item.shadowTerrainZ * camera.scale;

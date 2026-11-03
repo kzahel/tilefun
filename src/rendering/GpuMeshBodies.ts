@@ -21,6 +21,7 @@ import { projectWorld } from "./Projection.js";
 import { ResourceSlot } from "./ResourceSlot.js";
 import type { SpriteItem } from "./SceneItem.js";
 import { VehiclePaintResources } from "./VehiclePaintResources.js";
+import { WORLD_DEPTH_RANGE } from "./WorldDepth.js";
 
 /** Exact finished-image reuse; dirty bodies and opt-in contents share scratch depth. */
 export class GpuMeshBodies {
@@ -50,6 +51,7 @@ export class GpuMeshBodies {
   /** Diagnostic baseline keeps the old immediate cached-image submission. */
   deferCachedImages = true;
   constructor(private readonly surface: GpuRasterSurface) {
+    this.target.depthTexture = new THREE.DepthTexture(1, 1, THREE.UnsignedIntType);
     this.target.texture.colorSpace = THREE.SRGBColorSpace;
     this.target.texture.magFilter = this.target.texture.minFilter = THREE.NearestFilter;
     this.target.texture.generateMipmaps = false;
@@ -141,7 +143,14 @@ export class GpuMeshBodies {
         : undefined;
     const cached = key === undefined ? undefined : this.images.get(key);
     if (cached) {
-      this.composite(camera, item, cached, Math.ceil(item.mesh.radius), !this.deferCachedImages);
+      this.composite(
+        camera,
+        item,
+        cached,
+        Math.ceil(item.mesh.radius),
+        key === undefined ? undefined : this.images.depth(key),
+        !this.deferCachedImages,
+      );
       if (paintTexture) this.paintDraws++;
       return true;
     }
@@ -171,6 +180,7 @@ export class GpuMeshBodies {
     if (this.target.width !== resolution || this.target.height !== resolution)
       this.target.setSize(resolution, resolution);
     const object = asset.object;
+    asset.setPhysical(!!item.mesh.physical);
     object.quaternion.set(...item.mesh.orientation);
     const yaw = 2 * Math.atan2(item.mesh.orientation[2], item.mesh.orientation[3]);
     if (item.mesh.towPitch || item.mesh.gradePitch)
@@ -231,6 +241,7 @@ export class GpuMeshBodies {
     const alpha = renderer.getClearAlpha();
     const previous = renderer.getRenderTarget();
     let texture = this.target.texture;
+    let depth: THREE.Texture | null = this.target.depthTexture;
     renderer.setScissorTest(false);
     const restorePaint = paintTexture ? this.paints.bind(object, paintTexture) : undefined;
     const restoreChildPaint =
@@ -241,11 +252,10 @@ export class GpuMeshBodies {
       renderer.clear();
       renderer.render(this.scene, this.camera);
       this.drawCalls += renderer.info.render.calls;
-      texture = this.outline.render(
-        renderer,
-        this.target,
-        key === undefined ? undefined : this.images.admit(key, resolution),
-      );
+      const output =
+        (key === undefined ? undefined : this.images.admit(key, resolution)) ?? this.outline.target;
+      texture = this.outline.render(renderer, this.target, output);
+      depth = output.depthTexture;
       this.drawCalls += renderer.info.render.calls;
     } finally {
       restorePaint?.();
@@ -256,7 +266,7 @@ export class GpuMeshBodies {
       this.scene.remove(object);
       this.scene.remove(this.contents.group);
     }
-    this.composite(camera, item, texture, radius);
+    this.composite(camera, item, texture, radius, depth);
     if (item.bedGroup) this.bedDraws++;
     if (paintTexture) this.paintDraws++;
     return true;
@@ -266,6 +276,7 @@ export class GpuMeshBodies {
     item: SpriteItem,
     texture: THREE.Texture,
     radius: number,
+    depth: THREE.Texture | null | undefined,
     immediate = true,
   ) {
     const { surface } = this;
@@ -275,7 +286,18 @@ export class GpuMeshBodies {
     const subpixel = camera.worldRaster && item.subpixel;
     surface.imageSmoothingEnabled = !!subpixel;
     const size = subpixel ? Math.round(radius * 2 * camera.scale) : radius * 2 * camera.scale;
-    surface.drawTexture(texture, anchor.sx - size / 2, anchor.sy - size / 2, size, size);
+    if (depth) {
+      surface.setDepthPlane(0, 0, 0.5 - (item.wy + item.zOffset - camera.y) / WORLD_DEPTH_RANGE);
+      surface.drawDepthTexture(
+        texture,
+        depth,
+        anchor.sx - size / 2,
+        anchor.sy - size / 2,
+        size,
+        size,
+        (8 * radius) / WORLD_DEPTH_RANGE,
+      );
+    } else surface.drawTexture(texture, anchor.sx - size / 2, anchor.sy - size / 2, size, size);
     if (immediate) surface.flush();
     surface.restore();
     this.draws++;
@@ -300,7 +322,7 @@ export class GpuMeshBodies {
     return (
       this.images.bytes +
       this.target.width * this.target.height * 8 +
-      this.outline.target.width * this.outline.target.height * 4
+      this.outline.target.width * this.outline.target.height * 8
     );
   }
 }

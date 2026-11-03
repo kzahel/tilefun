@@ -1450,6 +1450,7 @@ export class GameServer {
     // Global messages handled by GameServer
     switch (msg.type) {
       case "enter-vehicle":
+      case "recover-vehicle":
       case "exit-vehicle": {
         try {
           const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
@@ -1458,6 +1459,9 @@ export class GameServer {
           if (msg.type === "enter-vehicle") {
             if (!Number.isSafeInteger(msg.entityId)) throw Error("Invalid vehicle.");
             realm.vehicles.enter(session, msg.entityId);
+          } else if (msg.type === "recover-vehicle") {
+            if (!Number.isSafeInteger(msg.entityId)) throw Error("Invalid vehicle.");
+            realm.vehicles.recover(session, msg.entityId);
           } else realm.vehicles.exit(session);
           this.transport.send(clientId, { type: "vehicle-controlled", requestId: msg.requestId });
         } catch (error) {

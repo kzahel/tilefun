@@ -1,5 +1,8 @@
 # Rendering architecture and backend separation
 
+[216](../tactical/216-dynamic-3d-vehicles.md) is qualifying shared GPU world depth without discarding per-vehicle image reuse: cached color/depth pairs, world-relative depth conversion, upright sprite planes and surface top/front equations. Physical cars use separate ground shadows. No CPU depth readback is added to gameplay; the existing coherent final world composition remains.
+
+
 [215](../tactical/215-coherent-world-raster.md) repairs the registration regression
 reproduced in [214](../tactical/214-world-registration.md). Production hosts collect
 and render the world in one aligned, padded frame, then apply fractional camera

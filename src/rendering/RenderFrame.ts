@@ -48,6 +48,11 @@ export type RenderPass =
       readonly items: readonly OverlayDraw[];
       /** Stable semantic surface identity; backends may reuse its local raster. */
       readonly cacheKey?: string;
+      /** Affine top/front depth equations in logical screen pixels. */
+      readonly worldDepth?: {
+        top: readonly [number, number, number];
+        front: readonly [number, number, number];
+      };
     }
   | { readonly kind: "clear"; readonly color: string }
   | { readonly kind: "terrain"; readonly draws: readonly TerrainDraw[] }

@@ -107,3 +107,83 @@ test("ordinary road traffic moves through Worker frames, pauses and survives sav
   await expect.poll(() => page.workers().length).toBe(0);
   expect(errors).toEqual([]);
 });
+
+test("3D vehicle course preserves ramp rotation on reload and recovers cars and trucks through shared controls", async ({
+  page,
+}) => {
+  test.setTimeout(90000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto(
+    "/tilefun/workshop.html?geometry=car-dynamics&renderer=gpu&meshes#/tool/world-geometry",
+  );
+  const canvas = page.getByLabel("World geometry scene");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  await page.getByRole("button", { name: /^Drive car/ }).click();
+  await canvas.focus();
+  await page.keyboard.down("ArrowRight");
+  try {
+    await expect
+      .poll(async () => Number(await canvas.getAttribute("data-car-z")))
+      .toBeGreaterThan(24);
+    await expect
+      .poll(async () => Number(await canvas.getAttribute("data-car-up")))
+      .toBeLessThan(0.995);
+  } finally {
+    await page.keyboard.up("ArrowRight");
+  }
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  let previous = "",
+    stable = 0;
+  await expect
+    .poll(
+      async () => {
+        const pose = await canvas.getAttribute("data-car-rotation");
+        stable = pose === previous ? stable + 1 : 0;
+        previous = pose ?? "";
+        return stable;
+      },
+      { intervals: [100] },
+    )
+    .toBeGreaterThanOrEqual(3);
+  const rotation = JSON.parse(previous) as number[];
+  await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+  await expect(canvas).toHaveAttribute("data-reload-count", "1");
+  const restored = JSON.parse(
+    (await canvas.getAttribute("data-car-rotation")) ?? "null",
+  ) as number[];
+  expect(
+    Math.abs(rotation.reduce((sum, value, index) => sum + value * (restored[index] ?? 0), 0)),
+  ).toBeCloseTo(1, 3);
+  await page.getByRole("button", { name: "recover", exact: true }).click();
+  await expect(canvas).toHaveAttribute("data-course-route", "recover");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  await expect
+    .poll(async () => Number(await canvas.getAttribute("data-car-up")))
+    .toBeLessThan(-0.9);
+  await expect(page.getByRole("button", { name: /^Right car/ })).toBeVisible();
+  await page.waitForTimeout(600);
+  await canvas.focus();
+  await page.keyboard.press("f");
+  await expect
+    .poll(async () => Number(await canvas.getAttribute("data-car-up")))
+    .toBeGreaterThan(0.99);
+  await expect(page.getByRole("button", { name: /^Right car/ })).toBeHidden();
+  await page.getByLabel("Vehicle model").selectOption("dump-truck");
+  await expect(canvas).toHaveAttribute("data-car-model", "dump-truck");
+  await expect
+    .poll(async () => Number(await canvas.getAttribute("data-car-up")))
+    .toBeLessThan(-0.9);
+  await page.waitForTimeout(600);
+  await page.getByRole("button", { name: /^Right car/ }).click();
+  await expect
+    .poll(async () => Number(await canvas.getAttribute("data-car-up")))
+    .toBeGreaterThan(0.99);
+  await page.screenshot({
+    path: test.info().outputPath("dynamic-vehicle-course.png"),
+    fullPage: true,
+  });
+  await page.getByRole("link", { name: "All tools", exact: true }).click();
+  await expect.poll(() => page.workers().length).toBe(0);
+  expect(errors).toEqual([]);
+});

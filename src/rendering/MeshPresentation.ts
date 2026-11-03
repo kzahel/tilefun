@@ -5,6 +5,8 @@ import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
 export interface MeshInstance {
   readonly assetId: string;
   readonly paintSchemeId?: string;
+  /** Pose comes from the shared freely rotating body, not cosmetic grade fitting. */
+  readonly physical?: boolean;
   readonly orientation: readonly [number, number, number, number];
   /** Conservative sphere, in world pixels, enclosing every supported pose. */
   readonly radius: number;

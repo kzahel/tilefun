@@ -51,3 +51,44 @@ it("transmits continuous heading baselines and deltas, invalidates snapshot reus
     expect(replica.vehicleHeading).toBe(state);
   }
 });
+
+it("replicates full body rotations outside the bounded physics snapshot, including removal", () => {
+  const car = createVehicle("compact-1", 0, 0, Direction.Right);
+  car.id = 8;
+  car.bodyRotation = [0, 0, 0, 1];
+  const before = serializeEntity(car);
+  const baseline = decodeServerMessage(
+    encodeServerMessage({
+      type: "frame",
+      serverTick: 1,
+      lastProcessedInputSeq: 0,
+      playerEntityId: 1,
+      entityBaselines: [before],
+    }),
+  );
+  if (baseline.type !== "frame" || !baseline.entityBaselines?.[0]) throw Error("Missing baseline");
+  const replica = deserializeEntity(baseline.entityBaselines[0]);
+  expect(replica.bodyRotation).toEqual([0, 0, 0, 1]);
+  for (const rotation of [[0.5, 0.5, 0.5, 0.5] as const, undefined]) {
+    const previous = serializeEntity(car);
+    if (rotation) car.bodyRotation = rotation;
+    else delete car.bodyRotation;
+    const next = reuseEntitySnapshot(car, previous);
+    expect(next).not.toBe(previous);
+    const delta = diffEntitySnapshots(previous, next);
+    if (!delta) throw Error("Missing rotation delta");
+    const frame = decodeServerMessage(
+      encodeServerMessage({
+        type: "frame",
+        serverTick: 2,
+        lastProcessedInputSeq: 0,
+        playerEntityId: 1,
+        entityDeltas: [delta],
+      }),
+    );
+    if (frame.type !== "frame" || !frame.entityDeltas?.[0]) throw Error("Missing delta");
+    applyEntityDelta(replica, frame.entityDeltas[0]);
+    expect(replica.bodyRotation).toEqual(rotation);
+  }
+  expect(before.bodyRotation).toEqual([0, 0, 0, 1]);
+});

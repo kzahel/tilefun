@@ -5,6 +5,7 @@ export type RequestMessage = Extract<ClientMessage, { requestId: number }>;
 const RESPONSES = {
   "enter-vehicle": "vehicle-controlled",
   "exit-vehicle": "vehicle-controlled",
+  "recover-vehicle": "vehicle-controlled",
   "set-player-model": "player-model-set",
   "load-world": "world-loaded",
   "create-world": "world-created",

@@ -142,7 +142,9 @@ export class ScenarioPresentationHost {
         this.command(
           request.type === "enter-vehicle"
             ? { kind: "enter-vehicle", entityId: request.entityId }
-            : { kind: "exit-vehicle" },
+            : request.type === "recover-vehicle"
+              ? { kind: "recover-vehicle", entityId: request.entityId }
+              : { kind: "exit-vehicle" },
         ),
       );
       if (canvas.parentElement) this.vehicleControl.mountEmbedded(canvas.parentElement);
@@ -201,10 +203,15 @@ export class ScenarioPresentationHost {
   private vehiclePad = (event: Event) => {
     if (!this.vehicleInputFocused || event.defaultPrevented || this.paused) return;
     const command = (event as CustomEvent<ControllerCommand>).detail;
+    if (command === "down") this.vehicleControl?.activateRecovery();
     if (command === "interact") this.vehicleControl?.activate();
   };
 
   private vehicleKey = (event: KeyboardEvent) => {
+    if (event.key.toLowerCase() === "f" && this.vehicleControl?.activateRecovery()) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     if (event.key.toLowerCase() === "e" && this.vehicleControl?.activate()) {
       event.preventDefault();
       event.stopPropagation();

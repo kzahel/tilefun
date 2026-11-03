@@ -1,5 +1,8 @@
 # Embedded engine labs
 
+[216](../tactical/216-dynamic-3d-vehicles.md) adds the shared car-dynamics handling course and a vehicle case in the two-client physics lab. Native Worker seats/recovery, full quaternion presentation and the normal shared physics scene own behavior; the collider viewport reads the same rotated body/static geometry. Qualification is in progress.
+
+
 [215](../tactical/215-coherent-world-raster.md) gives game and ScenarioPresentationHost
 the same scoped aligned world frame and one final fractional composition. Both
 restore logical projection before HUD/capture callbacks. Indoor/outdoor actors,

@@ -7,8 +7,9 @@ export type ScenarioCommand =
   | { kind: "throw-ball"; dirX: number; dirY: number; force: number }
   | { kind: "vehicle-horn"; active: boolean }
   | { kind: "vehicle-emergency"; action: "toggle" | "style" }
-  | { kind: "enter-vehicle"; entityId: number }
-  | { kind: "exit-vehicle" }
+  | { kind: "enter-vehicle"; entityId: number; seat?: 0 | 1 }
+  | { kind: "exit-vehicle"; seat?: 0 | 1 }
+  | { kind: "recover-vehicle"; entityId: number; seat?: 0 | 1 }
   | { kind: "view-range"; range: ChunkRange }
   | { kind: "teleport"; position: Entity["position"]; z?: number };
 export type ScenarioRequest = { id: number } & (

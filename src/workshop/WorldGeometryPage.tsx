@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { required } from "../art/ArtCatalog.js";
 import { AudioManager } from "../audio/AudioManager.js";
+import { rotateBodyVector } from "../physics/BodyRotation.js";
 import { locateSurfaceSpace } from "../physics/TerrainExcavation.js";
 import {
   describeSurfaceSupport,
@@ -15,6 +16,7 @@ import { realmPhysicsRecipe } from "../scenarios/RealmPhysicsRecipe.js";
 import { roadTrafficRecipe, TRAFFIC_STARTS } from "../scenarios/RoadTrafficRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { GARAGE_STARTS, undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
+import { DYNAMICS_STARTS, vehicleDynamicsRecipe } from "../scenarios/VehicleDynamicsRecipe.js";
 import {
   VEHICLE_BRIDGE_STARTS,
   VEHICLE_GARAGE_STARTS,
@@ -32,7 +34,16 @@ export type GeometryCanvas = HTMLCanvasElement & {
   ) => Promise<import("../scenarios/ScenarioProtocol.js").ScenarioResponse["physicsDiagnostics"]>;
   __presentationDiagnostics?: () => ReturnType<ScenarioPresentationHost["getDiagnostics"]>;
 };
-const FIXTURES = ["deck", "garage", "crossing", "car-bridge", "car-garage", "realm", "traffic"];
+const FIXTURES = [
+  "deck",
+  "garage",
+  "crossing",
+  "car-bridge",
+  "car-garage",
+  "car-dynamics",
+  "realm",
+  "traffic",
+];
 export default function WorldGeometryPage({
   defaultFixture = "deck",
 }: {
@@ -61,6 +72,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
     const model = new URLSearchParams(location.search).get("vehicle") ?? "compact-1";
     return VEHICLE_MODELS.includes(model) ? model : "compact-1";
   });
+  const [route, setRoute] = useState<keyof typeof DYNAMICS_STARTS>("drive");
   const [reverse, setReverse] = useState(false),
     [paused, setPaused] = useState(false);
   const [visibility, setVisibility] = useState<SurfaceVisibility>("auto");
@@ -78,36 +90,40 @@ function GeometryFixtures({ initial }: { initial: string }) {
   const recipe = useMemo(
     () =>
       generated?.recipe ??
-      (fixture === "traffic"
-        ? roadTrafficRecipe()
-        : fixture === "realm"
-          ? realmPhysicsRecipe(
-              new URLSearchParams(location.search).has("crowd")
-                ? Number(new URLSearchParams(location.search).get("crowd"))
-                : undefined,
-            )
-          : vehicle
-            ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
-            : fixture === "crossing"
-              ? railCrossingRecipe()
-              : garage
-                ? undergroundGarageRecipe()
-                : worldGeometryRecipe()),
-    [generated, fixture, garage, vehicle, reverse, vehicleModel],
+      (fixture === "car-dynamics"
+        ? vehicleDynamicsRecipe(vehicleModel, route)
+        : fixture === "traffic"
+          ? roadTrafficRecipe()
+          : fixture === "realm"
+            ? realmPhysicsRecipe(
+                new URLSearchParams(location.search).has("crowd")
+                  ? Number(new URLSearchParams(location.search).get("crowd"))
+                  : undefined,
+              )
+            : vehicle
+              ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
+              : fixture === "crossing"
+                ? railCrossingRecipe()
+                : garage
+                  ? undergroundGarageRecipe()
+                  : worldGeometryRecipe()),
+    [generated, fixture, garage, vehicle, reverse, vehicleModel, route],
   );
   const starts =
     generated?.starts ??
-    (fixture === "traffic"
-      ? TRAFFIC_STARTS
-      : vehicle
-        ? garage
-          ? VEHICLE_GARAGE_STARTS
-          : VEHICLE_BRIDGE_STARTS
-        : garage
-          ? GARAGE_STARTS
-          : fixture === "crossing"
-            ? CROSSING_STARTS
-            : GEOMETRY_STARTS);
+    (fixture === "car-dynamics"
+      ? DYNAMICS_STARTS
+      : fixture === "traffic"
+        ? TRAFFIC_STARTS
+        : vehicle
+          ? garage
+            ? VEHICLE_GARAGE_STARTS
+            : VEHICLE_BRIDGE_STARTS
+          : garage
+            ? GARAGE_STARTS
+            : fixture === "crossing"
+              ? CROSSING_STARTS
+              : GEOMETRY_STARTS);
   // biome-ignore lint/correctness/useExhaustiveDependencies: restart deliberately replaces the Worker and canvas.
   useEffect(() => {
     const c = required(canvas.current);
@@ -119,7 +135,8 @@ function GeometryFixtures({ initial }: { initial: string }) {
     const host = new ScenarioPresentationHost(c, recipe, {
       width: 960,
       height: 640,
-      terrain: !!generated || fixture === "realm" || fixture === "traffic",
+      terrain:
+        !!generated || fixture === "realm" || fixture === "traffic" || fixture === "car-dynamics",
       ...(vehicle || fixture === "realm"
         ? {}
         : {
@@ -130,7 +147,12 @@ function GeometryFixtures({ initial }: { initial: string }) {
       surfaceVisibility: () => settings.current.visibility,
       settings: () => ({
         paused: settings.current.paused,
-        zoom: generated || fixture === "crossing" || fixture === "traffic" ? 0.225 : 0.625,
+        zoom:
+          fixture === "car-dynamics"
+            ? 0.4
+            : generated || fixture === "crossing" || fixture === "traffic"
+              ? 0.225
+              : 0.625,
         terrainPacing: "throughput",
       }),
       input: () => ({
@@ -162,6 +184,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
         c.dataset.space = locateSurfaceSpace(h.session.view.props, p);
         c.dataset.serverSpace = locateSurfaceSpace(h.session.view.props, server);
         c.dataset.visibility = settings.current.visibility;
+        c.dataset.courseRoute = fixture === "car-dynamics" ? route : "";
         c.dataset.generatedSeed = generated ? String(generated.recipe.generation.seed) : "";
         c.dataset.bridgeX = String((generated?.bridge.x ?? 0) * 16);
         c.dataset.bridgeY = String((generated?.bridge.y ?? 0) * 16);
@@ -176,6 +199,10 @@ function GeometryFixtures({ initial }: { initial: string }) {
           c.dataset.carY = String(car.position.wy);
           c.dataset.carZ = String(car.wz ?? 0);
           c.dataset.carModel = car.type.slice(11);
+          c.dataset.carUp = String(
+            car.bodyRotation ? rotateBodyVector(car.bodyRotation, 0, 0, 1).z : 1,
+          );
+          c.dataset.carRotation = JSON.stringify(car.bodyRotation ?? null);
         }
         const traffic = h.session.view.entities.filter(
           (e) => e.type.startsWith("vehicle-v1:") && e.id !== h.session.handles.car,
@@ -254,9 +281,12 @@ function GeometryFixtures({ initial }: { initial: string }) {
       <p>
         {fixture === "traffic"
           ? "Watch road cars follow lanes and wait at crossings, or drive the parked car beside the sidewalk. "
-          : "Walk ramps, cross bridges, pass underneath and drive ordinary upright cars. "}
+          : "Walk ramps, cross bridges, pass underneath and drive freely rotating cars. "}
         Arrows/WASD move, Space jumps, E enters or leaves a nearby car, R reverses. Touch and
-        controller use the same controls. Specialized equipment and train services are deferred.
+        controller use the same controls. F / D-pad down rights an overturned car.
+        {fixture === "car-dynamics" &&
+          " Main lane: bridge ascent/descent. South: jump ramp. North: narrow tipping ledge and overlapping cars. "}
+        Specialized equipment and train services are deferred.
       </p>
       <label>
         Fixture{" "}
@@ -309,6 +339,11 @@ function GeometryFixtures({ initial }: { initial: string }) {
             key={name}
             type="button"
             onClick={() => {
+              if (fixture === "car-dynamics") {
+                setRoute(name as keyof typeof DYNAMICS_STARTS);
+                setRestart((n) => n + 1);
+                return;
+              }
               void scene.current
                 ?.command({ kind: "teleport", ...start })
                 .catch((e) => setError(String(e)));
@@ -318,7 +353,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
             {name}
           </button>
         ))}
-        {vehicle && (
+        {vehicle && fixture !== "car-dynamics" && (
           <button type="button" onClick={() => setReverse(!reverse)}>
             Opposite direction
           </button>

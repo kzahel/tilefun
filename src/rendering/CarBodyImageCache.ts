@@ -9,6 +9,7 @@ export function carBodyImageKey(
 ) {
   return JSON.stringify([
     mesh.assetId,
+    mesh.physical ?? false,
     assetGeneration,
     paint?.id ?? null,
     paint?.version ?? 0,
@@ -61,9 +62,12 @@ export class CarBodyImageCache {
     this.hits++;
     return entry.target.texture;
   }
+  depth(key: string) {
+    return this.entries.get(key)?.target.depthTexture;
+  }
   /** Caller renders directly into this target, avoiding a copy/readback. */
   admit(key: string, size: number) {
-    const bytes = size * size * 4;
+    const bytes = size * size * 8;
     if (!this.enabled || !this.previous.has(key) || bytes > this.maxBytes) return undefined;
     while (
       this.entries.size &&
@@ -72,7 +76,8 @@ export class CarBodyImageCache {
       const oldest = this.entries.keys().next().value;
       if (oldest !== undefined) this.remove(oldest);
     }
-    const target = new THREE.WebGLRenderTarget(size, size, { depthBuffer: false });
+    const target = new THREE.WebGLRenderTarget(size, size, { depthBuffer: true });
+    target.depthTexture = new THREE.DepthTexture(size, size, THREE.UnsignedIntType);
     target.texture.colorSpace = THREE.SRGBColorSpace;
     target.texture.magFilter = target.texture.minFilter = THREE.NearestFilter;
     target.texture.generateMipmaps = false;
@@ -83,7 +88,7 @@ export class CarBodyImageCache {
   private remove(key: string) {
     const entry = this.entries.get(key);
     if (!entry) return;
-    this.bytes -= entry.target.width * entry.target.height * 4;
+    this.bytes -= entry.target.width * entry.target.height * 8;
     entry.target.dispose();
     this.entries.delete(key);
   }

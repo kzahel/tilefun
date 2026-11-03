@@ -71,6 +71,7 @@ import { SaveManager } from "../persistence/SaveManager.js";
 import { VehicleRecords } from "../persistence/VehicleRecords.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { tickSharedBallGameplay } from "../physics/BallGameplay.js";
+import { rotationsEqual } from "../physics/BodyRotation.js";
 import { getGravityScale } from "../physics/Gravity.js";
 import {
   launchBody,
@@ -143,6 +144,10 @@ export interface RealmOptions {
 
 export class Realm {
   private physicsScene: PhysicsScene | undefined;
+  recoverVehicle(id: number) {
+    if (!this.physicsScene) throw Error("Physics is not ready.");
+    this.physicsScene.recoverVehicle(id);
+  }
   private physicsParticipants: Entity[] = [];
   get collisionDiagnostics() {
     return this.physicsScene?.diagnostics ?? null;
@@ -956,7 +961,8 @@ export class Realm {
         e.position.wx !== e.prevPosition?.wx ||
         e.position.wy !== e.prevPosition?.wy ||
         e.wz !== e.prevWz ||
-        e.vehicleHeading !== e.prevVehicleHeading
+        e.vehicleHeading !== e.prevVehicleHeading ||
+        !rotationsEqual(e.bodyRotation, e.prevBodyRotation)
       )
         this.vehicleRegistry?.onChange?.(car, false);
     }

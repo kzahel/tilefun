@@ -1,3 +1,4 @@
+import type { AngularVelocity, BodyRotation } from "./BodyRotation.js";
 export interface MotionIntent {
   vx: number;
   vy: number;
@@ -30,6 +31,10 @@ export interface PhysicsBodyState {
   vz: number;
   heading: number;
   prevHeading: number;
+  rotation?: BodyRotation;
+  prevRotation?: BodyRotation;
+  angularVelocity?: AngularVelocity;
+  sleeping?: boolean;
   jumpHeld: boolean;
   grounded: boolean;
   groundZ: number;

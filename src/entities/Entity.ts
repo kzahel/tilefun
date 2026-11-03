@@ -1,3 +1,4 @@
+import type { AngularVelocity, BodyRotation } from "../physics/BodyRotation.js";
 import type { AnimalWork, WorkItem } from "../wildlife/AnimalWork.js";
 import type { DeerBehavior } from "../wildlife/Deer.js";
 import type { FaunaBehavior } from "../wildlife/Fauna.js";
@@ -126,6 +127,9 @@ export interface Entity {
   emergencyState?: number;
   /** Driven-car nose angle in world radians, retained while parked. */
   vehicleHeading?: number;
+  bodyRotation?: BodyRotation;
+  prevBodyRotation?: BodyRotation;
+  bodyAngularVelocity?: AngularVelocity;
   /** Previous shared-step orientation for rendering. */
   prevVehicleHeading?: number;
   /** Stable, model-scoped coachwork choice; absent preserves the original paint. */

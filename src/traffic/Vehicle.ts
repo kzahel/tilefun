@@ -2,6 +2,7 @@ import { required } from "../art/ArtCatalog.js";
 import { BOAT_MODEL, BOAT_VIEWS } from "../boats/Boat.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
+import { rotateBodyVector } from "../physics/BodyRotation.js";
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
 import { validVehiclePaint, vehiclePaintSheet } from "./VehiclePaint.js";
 import meshBodies from "./vehicle-body-bounds.json" with { type: "json" };
@@ -130,6 +131,8 @@ export function vehicleView(type: string, direction: Direction) {
   if (!type.startsWith("vehicle-v1:")) return undefined;
   return viewsByKey.get(`${type}:${directions[vehicleFrameDirection(type, direction)]}`);
 }
+export const isVehicleOverturned = (entity: Pick<Entity, "bodyRotation">) =>
+  !!entity.bodyRotation && rotateBodyVector(entity.bodyRotation, 0, 0, 1).z < 0.55;
 export function isVehicle(entity: { type?: string }): boolean {
   return entity.type?.startsWith("vehicle-v1:") === true;
 }
@@ -149,11 +152,21 @@ export function applyVehicleFacing(
     entity.type,
     entity.vehicleHeading ?? vehicleCardinalHeading(direction),
   );
+  let footprint = { width, height, offsetX: 0, offsetY: height / 2 };
+  if (entity.bodyRotation && entity.type !== `vehicle-v1:${BOAT_MODEL}`) {
+    const size = vehicleBodySize(entity.type, 0),
+      q = entity.bodyRotation,
+      h = c.zHeight ?? 16;
+    const x = rotateBodyVector(q, 1, 0, 0),
+      y = rotateBodyVector(q, 0, 1, 0),
+      z = rotateBodyVector(q, 0, 0, 1);
+    const center = rotateBodyVector(q, 0, 0, h / 2);
+    const ex = (Math.abs(x.x) * size.width + Math.abs(y.x) * size.height + Math.abs(z.x) * h) / 2;
+    const ey = (Math.abs(x.y) * size.width + Math.abs(y.y) * size.height + Math.abs(z.y) * h) / 2;
+    footprint = { width: ex * 2, height: ey * 2, offsetX: center.x, offsetY: center.y + ey };
+  }
   entity.collider = {
-    offsetX: 0,
-    offsetY: height / 2,
-    width,
-    height,
+    ...footprint,
     physicalHeight: c.zHeight,
     clientSolid: true,
   };

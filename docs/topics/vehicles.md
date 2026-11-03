@@ -1,5 +1,8 @@
 # Vehicles: shared physics baseline
 
+[216](../tactical/216-dynamic-3d-vehicles.md) is implementing freely rotating land-vehicle chassis, authored axle suspension/traction, full replay/save state, shared depth and recovery. Game and labs share the default controller; qualification and the owner feel review are pending. Boats retain their upright watercraft behavior.
+
+
 Status: rolling vehicle motor and ordinary autonomous road traffic restored and locally qualified in 209; owner playtest positive, driving-audio follow-up delivered.
 Updated: 2026-11-03.
 

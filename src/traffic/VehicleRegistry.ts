@@ -10,6 +10,7 @@ import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
 import type { DepotVehicle } from "../generation/regional/VehicleDepotPlanner.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
+import type { AngularVelocity, BodyRotation } from "../physics/BodyRotation.js";
 import { placementGroundZ } from "../physics/surfaceHeight.js";
 import { generateUUID } from "../shared/uuid.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
@@ -37,6 +38,8 @@ export interface SavedVehicle {
   wz?: number;
   facing?: number;
   vehicleHeading?: number;
+  bodyRotation?: BodyRotation;
+  bodyAngularVelocity?: AngularVelocity;
   vx?: number;
   vy?: number;
   vz?: number;
@@ -183,6 +186,10 @@ export class VehicleRegistry {
       wx: e.position.wx,
       wy: e.position.wy,
       wz: e.wz ?? 0,
+      ...(e.bodyRotation ? { bodyRotation: [...e.bodyRotation] as BodyRotation } : {}),
+      ...(e.bodyAngularVelocity
+        ? { bodyAngularVelocity: [...e.bodyAngularVelocity] as AngularVelocity }
+        : {}),
       facing: e.sprite?.direction ?? Direction.Right,
       vehicleHeading:
         e.vehicleHeading ?? vehicleCardinalHeading(e.sprite?.direction ?? Direction.Right),
@@ -238,7 +245,16 @@ export class VehicleRegistry {
           record.vy ?? 0,
           record.vz ?? 0,
           record.vehicleHeading ?? 0,
+          ...(record.bodyRotation ?? []),
+          ...(record.bodyAngularVelocity ?? []),
         ].every((n) => Number.isFinite(n) && Math.abs(n) <= 2 ** 28) ||
+        (record.bodyRotation !== undefined &&
+          (!Array.isArray(record.bodyRotation) ||
+            record.bodyRotation.length !== 4 ||
+            Math.abs(Math.hypot(...record.bodyRotation) - 1) > 0.01)) ||
+        (record.bodyAngularVelocity !== undefined &&
+          (!Array.isArray(record.bodyAngularVelocity) ||
+            record.bodyAngularVelocity.length !== 3)) ||
         (record.facing !== undefined && ![0, 1, 2, 3].includes(record.facing)) ||
         (record.emergencyState !== undefined &&
           !validVehicleLightState({ type: `vehicle-v1:${record.model}` }, record.emergencyState))
@@ -268,6 +284,8 @@ export class VehicleRegistry {
       entity.wz = entity.groundZ = record.wz ?? 0;
       entity.velocity = { vx: record.vx ?? 0, vy: record.vy ?? 0 };
       if (record.vz) entity.jumpVZ = record.vz;
+      if (record.bodyRotation) entity.bodyRotation = [...record.bodyRotation];
+      if (record.bodyAngularVelocity) entity.bodyAngularVelocity = [...record.bodyAngularVelocity];
       if (record.vehicleHeading !== undefined) entity.vehicleHeading = record.vehicleHeading;
       if (record.emergencyState !== undefined) entity.emergencyState = record.emergencyState;
       applyVehicleFacing(entity);

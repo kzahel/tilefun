@@ -288,7 +288,7 @@ export class CarMeshAsset {
           opacity: 0.2,
           side: THREE.DoubleSide,
           forceSinglePass: true,
-          depthWrite: false,
+          depthWrite: true,
           toneMapped: false,
         });
         const shadow = new THREE.Mesh(geometry, material);
@@ -313,6 +313,10 @@ export class CarMeshAsset {
     }
   }
   /** Absolute pose per draw: a shared resource never carries another car's phase. */
+  setPhysical(value: boolean) {
+    const shadow = this.object.getObjectByName("Game-contact-shadow");
+    if (shadow) shadow.visible = !value;
+  }
   setTravel(distance: number, liftedFront = false) {
     if (this.propeller && this.propellerRest) {
       this.rotation.setFromAxisAngle(new THREE.Vector3(1, 0, 0), distance / 2);

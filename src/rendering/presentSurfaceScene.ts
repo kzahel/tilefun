@@ -12,6 +12,7 @@ import {
   type SurfaceVisibility,
   surfaceVisibility,
 } from "./SurfacePresentation.js";
+import { surfaceWorldDepth } from "./WorldDepth.js";
 
 /** Stable painter constraints for bounded planar slabs. Each actor is ordered
  * against the slab at its own height; only visibility is observer-dependent.
@@ -107,7 +108,18 @@ export function presentSurfaceScene(
       submitRun();
       frame.overlays.begin();
       collectSurfacePresentation(frame.overlays, camera, props, observer, mode, "all", alpha, node);
-      renderer.submit(camera, { kind: "overlay", items: frame.overlays.items, cacheKey: node });
+      const surface = props
+        .flatMap((p) => (p.walls ?? (p.collider ? [p.collider] : [])).map((c) => ({ p, c })))
+        .find(({ c }) => c.surface?.id === node);
+      const worldDepth = surface?.c.surface
+        ? surfaceWorldDepth(camera, surface.p.position, surface.c)
+        : undefined;
+      renderer.submit(camera, {
+        kind: "overlay",
+        items: frame.overlays.items,
+        cacheKey: node,
+        ...(worldDepth ? { worldDepth } : {}),
+      });
     } else {
       const item = items[node];
       if (item?.kind === "sprite" && item.hasShadow && !item.flashHidden) order.push(-node - 1);

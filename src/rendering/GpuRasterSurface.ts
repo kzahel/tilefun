@@ -29,7 +29,7 @@ interface Page {
 }
 const PAGE = 1024;
 const QUADS = 2048;
-const STRIDE = 13;
+const STRIDE = 20;
 const TEXTURES = 8;
 const CORNERS = [0, 1, 2, 0, 2, 3];
 const WHITE = [1, 1, 1, 1];
@@ -75,6 +75,11 @@ export class GpuRasterSurface implements RasterSurface {
   private texture: THREE.Texture | null = null;
   private textureSlot = 0;
   private readonly batchTextures: THREE.Texture[] = [];
+  private readonly batchDepthTextures: (THREE.Texture | null)[] = [];
+  private depthEnabled = false;
+  worldDepth = false;
+  private readonly depthPlane = [0, 0, 0, 0];
+  private readonly depthFront = [0, 0, 0];
   private count = 0;
   private frame = 0;
   private readonly pages = new Map<CanvasImageSource, Page[]>();
@@ -140,14 +145,15 @@ export class GpuRasterSurface implements RasterSurface {
     for (let i = 0; i < TEXTURES; i++) {
       uniforms[`image${i || ""}`] = { value: this.white };
       uniforms[`encode${i || ""}`] = { value: false };
+      uniforms[`depthImage${i}`] = { value: this.white };
     }
     // Raw sampled bytes are already display sRGB; no lighting or tone mapping.
     this.material = new THREE.ShaderMaterial({
       uniforms,
       vertexShader: `attribute vec2 point; attribute vec2 tex; attribute vec4 tint; attribute vec4 bounds;
-        attribute float imageSlot; varying float slot0;
+        attribute float imageSlot; attribute vec4 worldDepth; attribute vec3 frontDepth; varying vec3 depth0; varying float slot0;
         varying vec2 uv0; varying vec4 color0; varying vec4 bounds0;
-        void main(){slot0=imageSlot;uv0=tex;color0=tint;bounds0=bounds;gl_Position=projectionMatrix*vec4(point,0.,1.);}`,
+        void main(){depth0=vec3(dot(worldDepth.xy,point)+worldDepth.z,worldDepth.w,dot(frontDepth.xy,point)+frontDepth.z);slot0=imageSlot;uv0=tex;color0=tint;bounds0=bounds;gl_Position=projectionMatrix*vec4(point,0.,1.);}`,
       fragmentShader: rasterFragmentShader(1),
       side: THREE.DoubleSide,
       transparent: true,
@@ -173,6 +179,14 @@ export class GpuRasterSurface implements RasterSurface {
       new THREE.InterleavedBufferAttribute(this.buffer, 1, 8),
     );
     this.geometry.setAttribute("bounds", new THREE.InterleavedBufferAttribute(this.buffer, 4, 9));
+    this.geometry.setAttribute(
+      "worldDepth",
+      new THREE.InterleavedBufferAttribute(this.buffer, 4, 13),
+    );
+    this.geometry.setAttribute(
+      "frontDepth",
+      new THREE.InterleavedBufferAttribute(this.buffer, 3, 17),
+    );
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.frustumCulled = false;
     this.scene.add(this.mesh);
@@ -191,7 +205,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.renderer.setSize(width, height, false);
     const pad = this.worldTarget ? WORLD_RASTER_PAD * 2 : 0;
     this.worldTarget?.setSize(width + pad, height + pad);
-    this.stats.worldTargetBytes = this.worldTarget ? (width + pad) * (height + pad) * 4 : 0;
+    this.stats.worldTargetBytes = this.worldTarget ? (width + pad) * (height + pad) * 8 : 0;
     this.camera.right = width + pad;
     this.camera.bottom = height + pad;
     this.camera.updateProjectionMatrix();
@@ -200,7 +214,7 @@ export class GpuRasterSurface implements RasterSurface {
     const stable = this.material.uniforms.stableRaster;
     if (stable) stable.value = true;
     this.worldTarget = new THREE.WebGLRenderTarget(1, 1, {
-      depthBuffer: false,
+      depthBuffer: true,
       minFilter: THREE.LinearFilter,
       magFilter: THREE.LinearFilter,
     });
@@ -246,6 +260,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.count = 0;
     this.texture = null;
     this.batchTextures.length = 0;
+    this.batchDepthTextures.length = 0;
     this.renderer.setScissorTest(false);
     if (this.worldTarget) {
       this.renderer.setRenderTarget(null);
@@ -285,6 +300,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.count = 0;
     this.texture = null;
     this.batchTextures.length = 0;
+    this.batchDepthTextures.length = 0;
     for (let i = 0; i < TEXTURES; i++) {
       const image = this.material.uniforms[`image${i || ""}`];
       if (image) image.value = this.white;
@@ -574,6 +590,37 @@ export class GpuRasterSurface implements RasterSurface {
     page.used = this.frame;
     return page;
   }
+  /** Depth equations are in final padded screen pixels. Primitive changes remain batched. */
+  setDepthPlane(a?: number, b = 0, c = 0) {
+    const enabled = this.worldDepth && a !== undefined;
+    if (enabled !== this.depthEnabled) {
+      this.flush();
+      this.depthEnabled = enabled;
+      this.material.depthTest = this.material.depthWrite = enabled;
+    }
+    this.depthFront.fill(0);
+    this.depthPlane[0] = a ?? 0;
+    this.depthPlane[1] = b;
+    this.depthPlane[2] = c;
+    this.depthPlane[3] = 0;
+  }
+  setDepthSurface(top: readonly number[], front: readonly number[]) {
+    this.setDepthPlane(top[0] ?? 0, top[1] ?? 0, top[2] ?? 0);
+    for (let i = 0; i < 3; i++) this.depthFront[i] = front[i] ?? 0;
+  }
+  drawDepthTexture(
+    texture: THREE.Texture,
+    depth: THREE.Texture,
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    range: number,
+  ) {
+    this.depthPlane[3] = range;
+    this.quad(texture, x, y, w, h, 0, 1, 1, -1, WHITE, depth);
+    this.depthPlane[3] = 0;
+  }
   drawTexture(texture: THREE.Texture, x: number, y: number, w: number, h: number) {
     this.quad(texture, x, y, w, h, 0, 1, 1, -1, WHITE);
   }
@@ -624,6 +671,7 @@ export class GpuRasterSurface implements RasterSurface {
     uw: number,
     vh: number,
     color: readonly number[],
+    sourceDepth: THREE.Texture | null = null,
   ) {
     if (this.lost || this.disposed) return;
     const minU = Math.min(u, u + uw),
@@ -650,6 +698,7 @@ export class GpuRasterSurface implements RasterSurface {
       if (this.batchTextures.length === this.stats.batchTextureLimit) this.flush();
       slot = this.batchTextures.length;
       this.batchTextures.push(texture);
+      this.batchDepthTextures.push(sourceDepth);
     }
     this.texture = texture;
     this.textureSlot = slot;
@@ -672,6 +721,8 @@ export class GpuRasterSurface implements RasterSurface {
       this.vertices[i + 10] = minV;
       this.vertices[i + 11] = maxU;
       this.vertices[i + 12] = maxV;
+      for (let j = 0; j < 4; j++) this.vertices[i + 13 + j] = this.depthPlane[j] ?? 0;
+      for (let j = 0; j < 3; j++) this.vertices[i + 17 + j] = this.depthFront[j] ?? 0;
     }
   }
   flush() {
@@ -679,6 +730,7 @@ export class GpuRasterSurface implements RasterSurface {
     if (this.lost || this.disposed) {
       this.count = 0;
       this.batchTextures.length = 0;
+      this.batchDepthTextures.length = 0;
       this.texture = null;
       return;
     }
@@ -694,6 +746,8 @@ export class GpuRasterSurface implements RasterSurface {
       if (uniform) uniform.value = texture;
       const encode = this.material.uniforms[`encode${i || ""}`];
       if (encode) encode.value = texture.colorSpace === THREE.SRGBColorSpace;
+      const depth = this.material.uniforms[`depthImage${i}`];
+      if (depth) depth.value = this.batchDepthTextures[i] ?? this.white;
     }
     if (this.clips) {
       this.renderer.setScissorTest(true);
@@ -714,6 +768,7 @@ export class GpuRasterSurface implements RasterSurface {
     }
     this.count = 0;
     this.batchTextures.length = 0;
+    this.batchDepthTextures.length = 0;
     this.texture = null;
   }
 }
@@ -740,7 +795,7 @@ function rasterFragmentShader(limit: number) {
     }`;
   const declarations = Array.from(
     { length: limit },
-    (_, i) => `uniform sampler2D image${i || ""}; uniform bool encode${i || ""};`,
+    (_, i) => `uniform sampler2D image${i || ""}, depthImage${i}; uniform bool encode${i || ""};`,
   ).join("\n");
   const branches = Array.from(
     { length: limit },
@@ -756,11 +811,17 @@ function rasterFragmentShader(limit: number) {
       vec2 uv=uv0;if(stableRaster){vec2 dim=vec2(textureSize(image${i || ""},0));uv=(floor(uv*dim+.0001)+.5)/dim;}
       c=texture2D(image${i || ""},uv);e=encode${i || ""};}`,
   ).join("\n");
-  return `${declarations} varying vec2 uv0; varying vec4 color0; varying float slot0;
+  const depths = Array.from(
+    { length: limit },
+    (_, i) =>
+      `${i ? "else " : ""}${i < limit - 1 ? `if(slot0<${i + 0.5})` : ""}{d=nearestSample(depthImage${i},clamp(uv0,bounds0.xy,bounds0.zw)).r;}`,
+  ).join("\n");
+  return `${declarations} varying vec3 depth0; varying vec2 uv0; varying vec4 color0; varying float slot0;
     ${filter}
-    void main(){vec4 c;if(fract(slot0)<.1){bool e;${rawBranches}if(e){${encode}}
-      c*=color0;gl_FragColor=vec4(c.rgb*c.a,c.a);return;}
-      ${branches}gl_FragColor=vec4(c.rgb*color0.rgb*color0.a,c.a*color0.a);}`;
+    void main(){gl_FragDepth=max(depth0.x,depth0.z);if(depth0.y!=0.){float d;${depths}gl_FragDepth+=depth0.y*(d-.5);}
+      vec4 c;if(fract(slot0)<.1){bool e;${rawBranches}if(e){${encode}}
+      c*=color0;if(c.a<.001)discard;gl_FragColor=vec4(c.rgb*c.a,c.a);return;}
+      ${branches}if(c.a*color0.a<.001)discard;gl_FragColor=vec4(c.rgb*color0.rgb*color0.a,c.a*color0.a);}`;
 }
 
 /** Rectangle union, partitioned into disjoint strips so translucent pixels blend once. */

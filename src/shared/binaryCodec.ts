@@ -2,7 +2,7 @@
  * Binary protocol codec — replaces JSON.stringify/parse for hot-path messages.
  *
  * Message type tags:
- *   0x10 = FrameMessage (vehicle motors, angular history and solved pairs) (server→client)
+ *   0x11 = FrameMessage (full vehicle rotation, momentum and solved pairs) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
  *   0x81 = fixed-tick player-input (client→server)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
@@ -27,7 +27,7 @@ import type {
 
 // ---- Message type tags ----
 
-const TAG_FRAME = 0x10;
+const TAG_FRAME = 0x11;
 const TAG_SYNC_CHUNKS = 0x03;
 const TAG_PLAYER_INPUT = 0x81;
 const TAG_JSON = 0xff;
@@ -57,6 +57,7 @@ const BIT_JUMP_INPUT_STATE = 12;
 const BIT_EMERGENCY_STATE = 13;
 const BIT_VEHICLE_HEADING = 14;
 const BIT_VEHICLE_PAINT = 15;
+const BIT_BODY_ROTATION = 16;
 
 // ---- TextEncoder/Decoder for JSON fallback ----
 
@@ -75,7 +76,7 @@ export function decodeServerMessage(buf: ArrayBuffer): ServerMessage {
   const view = new DataView(buf);
   const tag = view.getUint8(0);
   if (tag === TAG_FRAME) return decodeFrameMessage(view, buf);
-  if (tag === 0x01 || (tag >= 0x04 && tag <= 0x0b))
+  if (tag === 0x01 || (tag >= 0x04 && tag <= 0x10))
     throw new Error("Legacy entity frame: matching updated client and server builds are required");
   if (tag === TAG_SYNC_CHUNKS) return decodeSyncChunksMessage(view, buf);
   if (tag === TAG_JSON) return decodeJsonFallback(buf) as ServerMessage;
@@ -116,8 +117,8 @@ function decodeJsonFallback(buf: ArrayBuffer): unknown {
 
 const FRAME_HEADER_SIZE = 27; // tag + tick/input/player + Float64 simulation time + counts
 // Fixed header, velocity, full sprite/AI, booleans, eleven 32-bit fields and lights.
-const MAX_BASELINE_SIZE = 18 + 8 + 8 + 3 + 2 + 18 * 4 + 2;
-const MAX_DELTA_SIZE = 12 + 8 + 8 + 8 + 3 + 2 + 18 * 4 + 2;
+const MAX_BASELINE_SIZE = 18 + 8 + 8 + 3 + 2 + 22 * 4 + 2;
+const MAX_DELTA_SIZE = 12 + 8 + 8 + 8 + 3 + 2 + 22 * 4 + 2;
 
 function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
   const baselines = msg.entityBaselines ?? [];
@@ -276,6 +277,7 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   if (snap.vehicleHeading !== undefined) mask |= 1 << BIT_VEHICLE_HEADING;
   if (snap.paintSchemeId !== undefined) mask |= 1 << BIT_VEHICLE_PAINT;
 
+  if (snap.bodyRotation) mask |= 1 << BIT_BODY_ROTATION;
   view.setUint32(off, mask, true);
   off += 4;
 
@@ -343,6 +345,11 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
     off += 4;
   }
   if (snap.paintSchemeId !== undefined) view.setUint8(off++, paintWireIndex(snap.paintSchemeId));
+  if (snap.bodyRotation)
+    for (const value of snap.bodyRotation) {
+      view.setFloat32(off, value, true);
+      off += 4;
+    }
 
   return off;
 }
@@ -442,6 +449,15 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
   }
   if (mask & (1 << BIT_VEHICLE_PAINT)) snap.paintSchemeId = paintFromWire(view.getUint8(off++));
 
+  if (mask & (1 << BIT_BODY_ROTATION)) {
+    snap.bodyRotation = [
+      view.getFloat32(off, true),
+      view.getFloat32(off + 4, true),
+      view.getFloat32(off + 8, true),
+      view.getFloat32(off + 12, true),
+    ];
+    off += 16;
+  }
   return [snap, off];
 }
 
@@ -524,6 +540,10 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
     if (delta.paintSchemeId === null) nullMask |= 1 << 16;
   }
 
+  if (delta.bodyRotation !== undefined) {
+    changeMask |= 1 << 17;
+    if (delta.bodyRotation === null) nullMask |= 1 << 17;
+  }
   view.setUint32(off, changeMask, true);
   off += 4;
   view.setUint32(off, nullMask, true);
@@ -606,6 +626,11 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
   if (changeMask & (1 << 16) && !(nullMask & (1 << 16)))
     view.setUint8(off++, paintWireIndex(delta.paintSchemeId as string));
 
+  if (delta.bodyRotation)
+    for (const value of delta.bodyRotation) {
+      view.setFloat32(off, value, true);
+      off += 4;
+    }
   return off;
 }
 
@@ -772,6 +797,18 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
   if (changeMask & (1 << 16))
     delta.paintSchemeId = nullMask & (1 << 16) ? null : paintFromWire(view.getUint8(off++));
 
+  if (changeMask & (1 << 17)) {
+    if (nullMask & (1 << 17)) delta.bodyRotation = null;
+    else {
+      delta.bodyRotation = [
+        view.getFloat32(off, true),
+        view.getFloat32(off + 4, true),
+        view.getFloat32(off + 8, true),
+        view.getFloat32(off + 12, true),
+      ];
+      off += 16;
+    }
+  }
   return [delta, off];
 }
 

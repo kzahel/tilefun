@@ -22,6 +22,7 @@ export type RasterSurface = Pick<
   | "fillStyle"
   | "imageSmoothingEnabled"
 > & {
+  setDepthPlane?: (a?: number, b?: number, c?: number) => void;
   drawStableImage?: NonNullable<RasterSurface["drawSubpixelImage"]>;
   drawSubpixelImage?: (
     image: CanvasImageSource,

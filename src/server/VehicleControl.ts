@@ -1,3 +1,4 @@
+import { isBoat } from "../boats/Boat.js";
 import {
   aabbOverlapsPropWalls,
   aabbOverlapsSolid,
@@ -18,8 +19,9 @@ import {
   isWarningVehicle,
   nextVehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
+import { isVehicleOverturned } from "../traffic/Vehicle.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
-import { boardingDistance, isDrivable } from "../traffic/VehicleSeats.js";
+import { boardingDistance, isDrivable, vehicleVerticalDistance } from "../traffic/VehicleSeats.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { HORN_STARTLE_COOLDOWN, HORN_STARTLE_RADIUS, reactToHorn } from "./HornReaction.js";
 import type { PlayerSession } from "./PlayerSession.js";
@@ -133,6 +135,31 @@ export class VehicleControl {
     this.drivers.set(p.id, { session, vehicle });
     this.sync();
     r.savePlayerData(session);
+  }
+  recover(session: PlayerSession, id: number) {
+    const car = this.realm.vehicleRegistry?.states.get(id),
+      vehicle = car?.entity;
+    if (
+      !car ||
+      !vehicle ||
+      isBoat(vehicle) ||
+      !isVehicleOverturned(vehicle) ||
+      session.editorEnabled ||
+      session.transitioning ||
+      session.retired ||
+      (car.driverId !== undefined && car.driverId !== session.player.id) ||
+      (this.get(session) !== vehicle &&
+        (boardingDistance(session.player, vehicle) > 32 ||
+          vehicleVerticalDistance(session.player, vehicle) > 16))
+    )
+      throw Error("Stand beside an overturned vehicle to right it.");
+    if (Math.hypot(vehicle.velocity?.vx ?? 0, vehicle.velocity?.vy ?? 0, vehicle.jumpVZ ?? 0) > 8)
+      throw Error("Wait for the vehicle to settle.");
+    if (this.get(session) === vehicle) this.stop(session);
+    this.realm.recoverVehicle(id);
+    this.realm.entityManager.spatialHash.update(vehicle);
+    this.realm.vehicleRegistry?.onChange?.(car, false);
+    this.sync();
   }
   emergency(session: PlayerSession, action: "toggle" | "style"): void {
     const vehicle = this.get(session);

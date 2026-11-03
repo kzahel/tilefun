@@ -11,6 +11,7 @@ import { CollisionFlag } from "../world/TileRegistry.js";
 import { type Lane, type LaneGraph, nextLanes, type Path, samplePath } from "./LaneGraph.js";
 import { roadTurn } from "./RoadTurn.js";
 import {
+  isVehicleOverturned,
   TRAFFIC_MODELS,
   vehicleNoseHeading,
   vehicleRoadWidth,
@@ -225,6 +226,10 @@ export class RoadTraffic {
     for (const e of active) {
       const state = r.states.get(e.id);
       if (!state?.autonomous || state.driverId !== undefined) continue;
+      if (isVehicleOverturned(e)) {
+        intents.set(e.id, { vx: 0, vy: 0, driveSpeed: 0 });
+        continue;
+      }
       const graph = r.source.trafficNetwork(e.position.wx, e.position.wy);
       const lane =
         (state.route && graph.lanes.get(state.route.laneId)) || this.acquire(state, graph);

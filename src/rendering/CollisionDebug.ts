@@ -1,6 +1,7 @@
 import { type AABB, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { rotateBodyVector, yawRotation } from "../physics/BodyRotation.js";
 import { physicsBodyDimensions, physicsBodyKind } from "../physics/PhysicsBodies.js";
 import { surfaceZAt } from "../physics/SurfacePatch.js";
 import type { Camera } from "./Camera.js";
@@ -93,23 +94,21 @@ export function entityCollisionDebugShapes(e: Entity): CollisionDebugShape[] {
   )
     return [];
   const d = physicsBodyDimensions(e),
-    low = e.wz ?? 0,
-    high = low + d.height;
+    low = e.wz ?? 0;
   const cx = e.position.wx + d.offsetX,
     cy = e.position.wy + d.offsetY;
-  const c = Math.cos(d.yaw),
-    s = Math.sin(d.yaw);
-  const vertices = [low, high].flatMap((z) =>
+  const rotation = e.bodyRotation ?? yawRotation(d.yaw);
+  const clearance = e.bodyRotation ? Math.min(4, d.height * 0.22) : 0;
+  const vertices = [clearance, d.height].flatMap((z) =>
     [
       [-1, -1],
       [1, -1],
       [1, 1],
       [-1, 1],
-    ].map(([x = 0, y = 0]) => ({
-      x: cx + ((x * d.width) / 2) * c - ((y * d.depth) / 2) * s,
-      y: cy + ((x * d.width) / 2) * s + ((y * d.depth) / 2) * c,
-      z,
-    })),
+    ].map(([x = 0, y = 0]) => {
+      const point = rotateBodyVector(rotation, (x * d.width) / 2, (y * d.depth) / 2, z);
+      return { x: cx + point.x, y: cy + point.y, z: low + point.z };
+    }),
   );
   const vehicle = e.type.startsWith("vehicle-v1:");
   const shapes: CollisionDebugShape[] = [

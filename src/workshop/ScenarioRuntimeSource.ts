@@ -1,5 +1,6 @@
 import predictor from "../client/PlayerPredictor.ts?raw";
 import movement from "../entities/EntityManager.ts?raw";
+import bodyRotation from "../physics/BodyRotation.ts?raw";
 import gravity from "../physics/Gravity.ts?raw";
 import physicalEdits from "../physics/PhysicalEdits.ts?raw";
 import physicsBodies from "../physics/PhysicsBodies.ts?raw";
@@ -9,6 +10,7 @@ import physicsState from "../physics/PhysicsState.ts?raw";
 import controls from "../physics/PlayerControls.ts?raw";
 import clippedTerrain from "../physics/rapier/ClippedTerrain.ts?raw";
 import collisionGeometry from "../physics/rapier/CollisionGeometry.ts?raw";
+import vehicleChassis from "../physics/VehicleChassis.ts?raw";
 import vehicleMotor from "../physics/VehicleMotor.ts?raw";
 import actorRaster from "../rendering/ActorRaster.ts?raw";
 import cameraRaster from "../rendering/Camera.ts?raw";
@@ -29,6 +31,7 @@ import subpixelImages from "../rendering/SubpixelImages.ts?raw";
 import terrainPlacement from "../rendering/TerrainFrame.ts?raw";
 import towingSprite from "../rendering/TowingFallback.ts?raw";
 import transporterSprite from "../rendering/TransporterFallback.ts?raw";
+import worldDepth from "../rendering/WorldDepth.ts?raw";
 import worldRaster from "../rendering/WorldRasterFrame.ts?raw";
 import client from "../scenarios/ScenarioClient.ts?raw";
 import presentation from "../scenarios/ScenarioPresentationHost.ts?raw";
@@ -55,6 +58,9 @@ import wildlifeRespawns from "../wildlife/WildlifeRespawns.ts?raw";
 
 /** Live behavior reviews include host timing/transport, not just recipe/physics. */
 export const scenarioRuntimeSource = {
+  vehicleChassis,
+  bodyRotation,
+  worldDepth,
   physics,
   physicsState,
   physicalEdits,

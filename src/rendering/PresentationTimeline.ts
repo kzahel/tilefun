@@ -1,3 +1,4 @@
+import { type BodyRotation, interpolateRotation } from "../physics/BodyRotation.js";
 /** Pure presentation math. Times are seconds; no clocks or simulation entities. */
 export interface MotionSample {
   time: number;
@@ -6,6 +7,7 @@ export interface MotionSample {
   z: number;
   jumpZ: number;
   vehicleHeading?: number;
+  bodyRotation?: BodyRotation;
 }
 /** Shortest arc, including the -pi/pi seam; also used for local predicted poses. */
 export function interpolateHeading(a: number, b: number, fraction: number): number {
@@ -61,6 +63,9 @@ export function sampleMotion(
     y: a.y + (b.y - a.y) * f,
     z: a.z + (b.z - a.z) * f,
     jumpZ: a.jumpZ + (b.jumpZ - a.jumpZ) * f,
+    ...(b.bodyRotation
+      ? { bodyRotation: interpolateRotation(a.bodyRotation ?? b.bodyRotation, b.bodyRotation, f) }
+      : {}),
 
     ...(b.vehicleHeading === undefined
       ? {}

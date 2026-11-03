@@ -4,6 +4,7 @@ import {
   setSpriteClipElapsed,
   tickSpriteAnimation,
 } from "../entities/spriteAnimation.js";
+import { type BodyRotation, rotationsEqual } from "../physics/BodyRotation.js";
 import { applyCurveTrainFacing } from "../railway/CurveTrain.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 /**
@@ -38,6 +39,7 @@ export interface EntityDelta {
   jumpInputState?: number | null;
   emergencyState?: number | null;
   vehicleHeading?: number | null;
+  bodyRotation?: BodyRotation | null;
   paintSchemeId?: string | null;
 
   wz?: number | null;
@@ -97,6 +99,8 @@ export function diffEntitySnapshots(
   diffOptionalNum("jumpInputState", prev, curr, ensure);
   diffOptionalNum("emergencyState", prev, curr, ensure);
   diffOptionalNum("vehicleHeading", prev, curr, ensure);
+  if (!rotationsEqual(prev.bodyRotation, curr.bodyRotation))
+    ensure().bodyRotation = curr.bodyRotation ?? null;
 
   if (prev.paintSchemeId !== curr.paintSchemeId)
     ensure().paintSchemeId = curr.paintSchemeId ?? null;
@@ -319,6 +323,8 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
   applyOptionalNum(entity, delta, "jumpInputState");
   applyOptionalNum(entity, delta, "emergencyState");
   applyOptionalNum(entity, delta, "vehicleHeading");
+  if (delta.bodyRotation === null) delete entity.bodyRotation;
+  else if (delta.bodyRotation) entity.bodyRotation = [...delta.bodyRotation];
 
   if (delta.paintSchemeId === null) delete entity.paintSchemeId;
   else if (delta.paintSchemeId !== undefined) entity.paintSchemeId = delta.paintSchemeId;

@@ -27,7 +27,8 @@ it("rolls into a perpendicular turn instead of strafing or pivoting at rest", as
     expect(Math.abs(vehicleNoseHeading(car))).toBeLessThan(0.001);
     step({ ...idle, dy: -1 });
     expect(car.velocity?.vx).toBeGreaterThan(3);
-    expect(Math.abs(car.velocity?.vy ?? Infinity)).toBeLessThan(0.01);
+    // Tire forces can start the turn immediately, but cannot redirect travel sideways.
+    expect(Math.abs((car.velocity?.vy ?? Infinity) / (car.velocity?.vx ?? 0))).toBeLessThan(0.05);
     for (let i = 0; i < 120; i++) step({ ...idle, dy: -1 });
     expect(Math.abs(vehicleNoseHeading(car) + Math.PI / 2)).toBeLessThan(0.06);
     expect(car.position.wx).toBeGreaterThan(120);
