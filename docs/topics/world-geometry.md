@@ -1,9 +1,12 @@
 # Terrain heights, slopes and stacked spaces
 
-[General 3D physics backend](physics-engine.md) records the provisional 2026-11-01
-Rapier/WASM direction, [189](../tactical/189-rapier-physics-prototype.md)'s bounded
-prototype and [190](../tactical/190-rapier-prediction-and-realm-proof.md)'s predicted
-temporary Realm. Existing gameplay geometry remains in place pending qualification.
+[Reset 205](../tactical/205-physics-reset.md) delivers common static terrain/prop
+geometry and ordinary ramps, bridge tops/undersides and finite furniture in one
+shared Rapier scene. Sections cache by geometry revision; edited support wakes
+sleeping loose bodies. Read-only placement/planning queries do not own movement.
+Vehicle/rail articulated and cosmetic grade solvers are deleted; basic upright
+cars traverse ordinary ramp/deck geometry, while rail services remain deferred.
+Historical proof descriptions below are not current service promises.
 
 Topic: world-geometry
 Status: deck, garage, crossing and car grade proofs accepted; train grades accepted; first generated road bridge accepted; curved train labs and rideable generated city links delivered. Broader terrain authoring and interior integration remain open.

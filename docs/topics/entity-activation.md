@@ -12,6 +12,14 @@ Owns simulation activity, actor persistence/residency and the cost of distant en
 boundaries. Single-player authority runs in a browser Worker using the shared
 server implementation, so moving work to that Worker does not eliminate it.
 
+## Shared physics ownership (205)
+
+[205](../tactical/205-physics-reset.md) separates decision cadence from physical
+integration. Admitted players/NPCs/loose bodies share the fixed 60Hz step; distant
+resident actors remain frozen outside the scene. Publication retains that admitted
+set and controlled bodies, so it cannot repeatedly recreate inactive residents.
+AI decisions can still be throttled without giving each body another physics clock.
+
 ## Selected direction
 
 The 2026-10-03 request authorizes a new save format without existing-world

@@ -1,6 +1,6 @@
 # Embedded engine labs
 
-Active reset [205](../tactical/205-physics-reset.md): ordinary Realm authority now
+Delivered reset [205](../tactical/205-physics-reset.md): ordinary Realm authority now
 uses one shared `PhysicsScene` step, including ordinary ScenarioSession consumers.
 Ordinary ScenarioClient prediction now uses the same shared kernel and reconciles
 live frames between control responses. The standalone prototype worlds, alternate Realm simulation owner,
@@ -16,8 +16,9 @@ Scenario recipes now expose only scoped gravity, and World Geometry uses the sha
 default with no backend selector. Read-only Three.js collider meshes belong to the
 co-op diagnostic presentation; they do not implement another physics world. Older
 mode-specific evidence below is historical. Specialized vehicle/equipment and rail
-labs still need explicit disposition during 205; no lab establishes completion of
-the reset.
+services are deferred; their old executable pages now explain that disposition.
+Current car-garage/car-bridge/realm fixtures use normal basic driving. Reset 205
+records ordinary Worker/P2P, lifecycle, device qualification and measurement limits.
 
 [202](../tactical/202-persistent-realm-collision-proof.md) adds **Realm physics
 replacement proof** to World Geometry. It stages ordinary NPCs, a ball and a parked

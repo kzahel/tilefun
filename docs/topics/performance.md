@@ -1,18 +1,28 @@
 # Streaming and gameplay performance
 
-Active shared-physics reset [205](../tactical/205-physics-reset.md) replaces the
-per-character engines. The native `active-crowds` runner now measures only the
-shared default; it has no backend selector. New device qualification must compare
-the current default against a frozen old production bundle, not two URL flags that
-now select the same engine. The previous browser benchmark driver still needs
-alignment before it can provide that comparison. No new Chromebook result yet.
+Shared-physics reset [205](../tactical/205-physics-reset.md) is delivered. One fixed
+60Hz scene replaces per-character integration, with bounded common prediction and
+legacy deletion. Physical Chromebook GPU qualification compares clean `21758ffd`
+against the frozen 202 legacy bundle, using separate origins and reversing lane
+order. At 96 nearby NPCs Worker tick p95 is 15.4–16.1ms versus 18.5–18.6ms legacy;
+at 384 it is 25.1–25.5ms versus29.1–31.5ms, still only about 51Hz authority.
+Sparse/24-NPC ranges overlap; this is a usable default, not a solved crowd budget.
+
+[Raw device data](../benchmarks/205-chromebook-shared-physics-gpu.json) includes
+Worker CPU occupancy, observed tick rate and main frames. This compares full builds:
+lab presentation and gameplay changed, so it is not an engine-only speedup claim.
+Current normal terrain is cached; the frozen lab used its earlier schematic
+presentation. Both main-frame tails stay near 16.7ms even when authority slows.
+Next measure/profile 96-NPC tail headroom and moving-player/multiclient replay.
+`benchmark-realm-physics-browser.mjs` supports `--base` and `--reference-base`;
+`active-crowds.mjs` runs only the current shared default, with no backend selector.
 
 Historical replacement qualification (2026-11-02) is tracked in
 [202](../tactical/202-persistent-realm-collision-proof.md). Its final paired physical
 Chromebook GPU and Canvas data fails the proposed cutover
 budget despite mostly smooth main-thread frames. At 384 active nearby NPCs GPU
 Worker tick p95 is 118–126ms versus legacy 31–32ms; smaller cohorts also regress.
-The decision is no default cutover. Reconsider per-NPC motor/query/refresh cost
+The historical 202 decision was no default cutover;205 supersedes it. Reconsider per-NPC motor/query/refresh cost
 before compatibility migration; raw captures and measurement limits live in 202.
 The native [203 comparison](../tactical/203-physics-copy-and-model-comparison.md)
 finds descriptor caching alone insufficient and large headroom in simpler

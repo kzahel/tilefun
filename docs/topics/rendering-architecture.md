@@ -1,5 +1,11 @@
 # Rendering architecture and backend separation
 
+Reset [205](../tactical/205-physics-reset.md) makes shared physics poses authoritative
+for scene collection and collision inspection. Runtime car ground fitting and
+articulated carry/equipment reconstruction are deleted; retained equipment pose
+math is render-only for frozen asset inspection. CollisionDebug reads the same
+body dimensions as Rapier. New full car orientation/suspension is deferred.
+
 Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated
 desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-car presentation delivered;

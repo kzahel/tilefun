@@ -1,6 +1,6 @@
 # Vehicles: shared physics baseline
 
-Status: reset 205 active; basic upright driving, seats, paint/lights and durable poses use the shared Rapier scene.
+Status: reset 205 delivered; basic upright driving, seats, paint/lights and durable poses use the shared Rapier scene.
 Updated: 2026-11-03.
 
 [205](../tactical/205-physics-reset.md) supersedes the delivered-motion contracts below.

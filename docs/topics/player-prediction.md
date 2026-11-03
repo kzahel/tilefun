@@ -1,6 +1,6 @@
 # Player prediction and moving contacts
 
-## Active shared-physics reset (205)
+## Shared-physics default (205)
 
 The normal `PlayerPredictor` now restores/replays the same fixed 60Hz `PhysicsScene`
 as Realm. Ordinary frames carry a bounded local body set, common physics tick,
@@ -16,8 +16,8 @@ input still causes bounded correction and is not a bit-exact prediction guarante
 [205](../tactical/205-physics-reset.md) owns current evidence and remaining work.
 Native shared movement/contact, two-client delay/reversal, head support/jump,
 animation, history recovery, overflow/epoch fences and authored geometry checks
-pass. Normal Worker/P2P/browser/device qualification, peripheral disposition and
-vehicle/equipment solver deletion are still in progress. The co-op lab now uses
+pass. Normal Worker/delayed P2P/lifecycle and device qualification are recorded in 205;
+old vehicle/equipment solvers are deleted, with their specialized behavior deferred. The co-op lab now uses
 ordinary binary frames and one normal private predictor per pane; its old alternate
 replay engines are deleted. Earlier mode/rate/carry evidence below
 is historical and does not define a compatibility matrix for this reset.
@@ -60,8 +60,8 @@ The alternate adapter uses scratch replay and bounded nearby collision proxies.
 Dynamic pushing remains unqualified; [physics engine](physics-engine.md) routes it.
 
 Topic: player-prediction
-Status: shared default prediction implemented; reset qualification/deletion in progress.
-Updated: 2026-11-02.
+Status: shared default prediction delivered; bounded replay and ordinary Worker/P2P qualified.
+Updated: 2026-11-03.
 
 Owns player prediction/reconciliation, moving-entity contact and moving-support
 timelines across the game and embedded labs. [Multiplayer networking](multiplayer-networking.md)

@@ -1,6 +1,6 @@
 # Physics reset: one default shared simulation
 
-Status: active autonomous implementation, 2026-11-02.
+Status: delivered shared default and legacy deletion, qualified 2026-11-03.
 Owner: [physics engine](../topics/physics-engine.md).
 Supersedes the implementation scope of [201](201-rapier-cutover-sequence.md) and
 [204](204-unified-physics-architecture-audit.md); keeps their evidence/history.
@@ -614,3 +614,74 @@ search before player registration. The reviewer reports **no remaining actionabl
 findings** on this source and ran no tests or writes. The expanded focused run
 passes **87 native checks across six files**. Final stable-source suite, bundle
 and physical device comparison are separate gates recorded next.
+
+### Final qualification and decision — 2026-11-03
+
+**Proceed with the shared default.** The legacy solvers and runtime selection
+matrix are deleted, normal browser/Worker/P2P play uses the common fixed 60Hz kernel,
+and basic interactions/save/edit/lifecycle are qualified. This completes the reset;
+it does not claim performance is solved or restore deferred machinery/services.
+
+| Nearby NPCs | Frozen legacy tick p95 | Shared default tick p95 | Shared observed authority |
+| --- | --- | --- | --- |
+| 0 | 1.7–2.5ms | 2.0–2.1ms | 59.8–59.9Hz |
+| 24 | 6.9–9.7ms | 7.7–8.2ms | 59.8Hz |
+| 96 | 18.5–18.6ms | 15.4–16.1ms | 59.9–60.0Hz |
+| 384 | 29.1–31.5ms | 25.1–25.5ms | 50.8–51.2Hz |
+
+Same physical Chromebook (Chrome 150, eight logical cores, device-memory bucket
+8GiB, CSS 1600×721, DPR 2.4), two trials per population/build, four-second warmup and
+six-second samples. Source checkpoint `21758ffd` was clean. Reference is the frozen
+202 `b6532310` production bundle; lanes run sequentially and reverse order in trial
+two. All 16 cases have no page errors. Shared body creation remains population + 1;
+world-step count equals physics tick count. The 384-NPC device capture was visually
+inspected. Only owned tabs/tunnels/preview servers were used; device Chrome and the
+live development server remain running.
+
+This is an end-to-end build comparison, **not isolated Rapier cost**: frozen lab
+presentation uses its earlier static grid/camera while current uses normal cached
+terrain/player follow, and gameplay/AI have deliberately changed. Identical seeded
+crowd placement and 60Hz target remain; main-thread frame p95 stays around 16.7–16.8ms
+in both builds, which conceals the stress-case authority slowdown. Two short trials
+on one device do not qualify all devices, long thermal behavior, natural content,
+moving-player replay or multiplayer capacity.
+
+At 96 NPCs, shared authority keeps approximately 60Hz with tick p95 15.4–16.1ms versus
+18.5–18.6ms legacy, but leaves little tail margin. At 24 the ranges overlap;
+sparse physics adds a small absolute cost. At 384, shared improves 29–32ms legacy
+to 25–26ms and approximately 51Hz, still over budget. Worker busy time is about 39%
+versus 51% legacy at 96; both saturate around 96–99% at 384. The old 202 per-character
+Rapier proof’s 118–126ms at 384 remains historical, not a matched third lane here.
+
+Raw data and exact measurement limits:
+[205 Chromebook GPU](../benchmarks/205-chromebook-shared-physics-gpu.json).
+The driver accepts separate bundle origins (`--base`/`--reference-base`) rather
+than bringing a retired engine flag back into the game. Reproduce with counts
+0,24,96,384, trials 2, warmup 4, seconds 6 and renderer GPU on the dedicated device.
+
+Final stable-source evidence:
+
+- **4,545 native tests pass across 334 files**. Three TypeScript projects pass.
+  Focused save/authority/prediction/vehicle coverage additionally passes 87 checks.
+- **Seven full-Chromium production cases pass** on the finished bundle: ordinary
+  Worker NPCs/prediction, actual delayed P2P, two-seat lab, client-stall/lifecycle,
+  GPU context/resize, car garage/ramp/seat reload and mobile placement/save/delete.
+- Art catalog (856 sheets/1,398 source uses), all 2,119 Workshop candidate identities,
+  manifest and production build pass. No promoted pixels or review approvals changed.
+- `npm run streaming:bench -- --assert-ready` passes on final source: walk 192px,
+  sprint/reverse 640px, no missing/incomplete/stale visible terrain. Timing under
+  qualification load is not device performance evidence.
+- Requested Sol 6.1 high source review has no remaining actionable findings after
+  fixes. Behavior ledger freshness passes; the historical wildlife production
+  queue remains unavailable without its ignored progress file, as recorded above.
+
+Completion retains keyboard/touch/controller, TypeScript gameplay, browser-first
+WASM, Worker authority and bounded client prediction. Cars remain upright;
+suspension/tumbling, autonomous traffic, parking visitors, rail services and
+articulated equipment are explicitly deferred. Native species decisions survive;
+complete tree-climbing/perching routes previously reopened remain unverified.
+
+Next: playtest the simplified baseline, profile 96-NPC AI/replication/contact tails,
+then add fully oriented vehicle bodies/render poses through this same scene.
+Final documentation/evidence is committed separately; `dev:ready` is the final
+local delivery action after source/document writes and verification.

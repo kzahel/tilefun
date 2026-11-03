@@ -1,6 +1,6 @@
 # Client/server architecture
 
-Current implementation map, updated 2026-11-02 during reset 205. The
+Current implementation map, updated 2026-11-03 after reset 205. The
 [original extraction plan](archive/client-server-extraction-plan.md) is archived;
 its shared-memory local mode and “future” multiplayer phases are historical.
 
@@ -11,19 +11,12 @@ fixed 60Hz `PhysicsScene` step. Players/NPCs submit intent; physics owns poses.
 Normal prediction uses the same kernel in a private bounded scene, with numerical
 body snapshots at explicit ticks and epochs. Authority and prediction have separate
 WASM instances/memory; there is no additional physics Worker or shared-memory
-requirement. Only gravity remains exposed as physics tuning. Old peripheral/lab
-engines and internal schemas are still being deleted; this checkpoint is not the
-completed reset or browser/device qualification.
-
-[191](tactical/191-cooperative-physics-laboratory.md) extends the experimental
-physics reference to two real Realm sessions, separate client replicas and full
-small-world dynamic-body replay. Its shared scenario coordinator clock permits
-repeatable pause/step; it does not replace independently scheduled game hosting.
-
-[190](tactical/190-rapier-prediction-and-realm-proof.md) adds an explicit temporary
-Realm simulation owner for a Rapier backend proof. It reuses input/acknowledgment,
-replication and Worker transport, with alternate local physics prediction. Ordinary
-GameServer worlds omit this owner and retain the behavior described below.
+requirement. Only gravity remains exposed as physics tuning. Old physics engines,
+backend selectors, variable command timing and specialized vehicle services are
+deleted. [205](tactical/205-physics-reset.md) records native, ordinary Worker/delayed
+P2P, lifecycle and physical Chromebook qualification and explicit deferrals.
+Earlier190/191 experimental simulation owners are historical; the co-op lab now
+uses normal ScenarioSession/Worker authority and one normal predictor per pane.
 
 | Owner | Responsibility |
 | --- | --- |

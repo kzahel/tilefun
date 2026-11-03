@@ -1,6 +1,6 @@
 # General 3D physics backend
 
-Status: autonomous reset active; shared authority/prediction and labs use one Rapier kernel; peripheral cleanup/qualification in progress.
+Status: shared Rapier default delivered and qualified; legacy solvers/options deleted.
 Updated: 2026-11-03.
 
 Owns the physics-backend replacement direction. [World geometry](world-geometry.md)
@@ -9,7 +9,7 @@ owns authoring semantics; [prediction](player-prediction.md) owns input replay;
 [189](../tactical/189-rapier-physics-prototype.md) owns the first bounded experiment;
 [190](../tactical/190-rapier-prediction-and-realm-proof.md) owns prediction/Realm integration.
 
-## Active reset (205)
+## Delivered reset (205)
 
 The owner authorized [205](../tactical/205-physics-reset.md): purge optional physics
 paths/commands and obsolete compatibility tests, retain gravity as the only exposed
@@ -17,9 +17,9 @@ physics tuning option, one fixed 60Hz shared Rapier tick, and the same bounded l
 prediction kernel. Exact old feel and full peripheral compatibility are not required.
 Simplify or explicitly retire peripheral pose writers; do not retain another solver
 behind a flag. Keep browser/Worker/P2P, content, renderer and controller/touch access.
-Implementation proceeds autonomously with checkpoint commits, focused validation,
-actual Chromebook evidence and final review. The reset is not complete until the
-normal default is shared physics and old solvers/dispatch are deleted. Prior plans
+Checkpoint commits, focused validation, actual Chromebook evidence and final
+review are recorded in 205. Normal startup uses shared physics, and old solvers
+and dispatch are deleted. Prior plans
 and measurements below are history/reference, not a compatibility checklist.
 
 The current authority checkpoint removes Realm's per-command integration and
@@ -46,16 +46,19 @@ that same world. Physically blocked old tree-climb routes cancel and release the
 claims; complete crown/perch traversal is explicitly deferred, with verification
 reopened in the wildlife behavior ledger.
 
-Basic ordinary GPU Worker edit/play recovery, NPC push/prediction and actual
-P2P reversal/convergence checks pass, alongside the normal two-session lab's
-input/fence/reload/teardown checks. The reset is **not ready for delivery yet**:
-the old vehicle traffic/equipment/parking/rail services and controls have been
-removed, as are duplicate collision/ground/support/grade helpers. Render-only
-equipment poses preserve frozen asset inspection. Edited terrain wakes sleeping
-loose bodies correctly. Remaining gates are broad lifecycle/streaming and post-cleanup
-browser/device qualification, Chromebook measurements and final review. Useful
-lab scenarios now exercise the game kernel, but lab acceptance alone does not
-establish complete cutover. See 205 for exact evidence.
+Normal GPU Worker play, actual delayed P2P, saves/edits/lifecycle, head support,
+push/release, ramps/bridges, loose objects and basic driving are qualified. All 4,545
+native tests and seven production browser boundaries pass, with fresh inventories,
+build and streaming readiness. Requested Sol 6.1 high review has no remaining
+findings. Publication retains admitted bodies; it does not activate distant residents.
+Supported respawn XYZ is persisted separately from current airborne pose.
+
+Physical Chromebook 96-NPC tick p95 is 15.4–16.1ms versus 18.5–18.6ms legacy.
+384-NPC stress remains over budget at 25–26ms/about 51Hz. Keep the simplified default
+and profile crowd tails; no alternate solver is retained. The captured full-build
+comparison has rendering/gameplay differences, recorded in 205, and does not isolate
+Rapier speed. Cars remain upright: tumbling/suspension and deferred traffic, rail,
+parking/equipment services are future work through the same world. Models/art remain.
 
 ## Historical replacement direction and early decision (201)
 
