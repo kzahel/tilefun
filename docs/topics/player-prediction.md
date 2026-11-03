@@ -1,5 +1,17 @@
 # Player prediction and moving contacts
 
+## Open: steady movement pacing (211)
+
+[211](../tactical/211-movement-pacing-investigation.md) reproduces desktop clear-ground
+jitter in walking, running and driving despite steady 16.8ms frame p99. Replay starts
+before the next input but finishes after including it; the old pose is compared
+against an extra legitimate movement tick. Same-past-tick agreement remains near
+zero, while repeated false corrections introduce visible speed modulation. A
+browser-only matched-target control nearly eliminates it. Repair the comparison
+within the existing bounded replay; the production fix is not yet implemented.
+Integer camera translation adds a separate roughly one-screen-pixel wobble and
+needs its own presentation decision rather than a blind removal of layer snapping.
+
 ## First-contact display anchor (210)
 
 [210](../tactical/210-first-contact-display-anchor.md) fixes the reproduced inward

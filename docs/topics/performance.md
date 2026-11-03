@@ -1,5 +1,12 @@
 # Streaming and gameplay performance
 
+[211](../tactical/211-movement-pacing-investigation.md) reproduces the owner's
+desktop clear-ground movement jitter with steady frame delivery. A replay comparison
+includes a newly appended legitimate input tick, generating false display corrections
+for walking/running/driving. The isolated matched-target control removes nearly all
+steady speed modulation. A smaller one-screen-pixel camera-rounding effect remains
+separate. This is investigation evidence; the runtime repair is still to implement.
+
 [208](../tactical/208-ground-seams-and-movement-pacing.md) reproduces running/car
 presentation blips with steady 16.8ms browser frame p99 in a throttled GPU run.
 Camera clock rebases, collapsed zero-replay interpolation and buffered fallback

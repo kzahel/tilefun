@@ -1,0 +1,534 @@
+{
+  "version": 1,
+  "date": "2026-11-03",
+  "runtimeRevision": "626a3c0e31ffeb720a7c7069569d2e15d929e860",
+  "status": "Investigation: matched-replay is a diagnostic control, not a delivered runtime fix.",
+  "environment": {
+    "platform": "darwin 25.6.0 arm64",
+    "cpu": "Apple M4 Pro",
+    "browser": "153.0.8010.12",
+    "renderer": "gpu",
+    "meshes": true,
+    "cpuRate": 1,
+    "headed": false
+  },
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "fixture": "Ordinary Worker game, empty flat grass, no NPCs; rightward walk/run/compact-car driving.",
+  "method": {
+    "captureCommand": "node scripts/instrumentation/movement-pacing.mjs --output=/tmp/tilefun-movement-pacing",
+    "samplesPerCase": 240,
+    "discardLeadingRenderSamples": 30,
+    "speedFormula": "difference of actual presented X divided by difference of monotonic presentationSeconds",
+    "sameFramesWithoutCameraSnap": "Offline paired projection of identical presented poses/camera; no simulation or clock change.",
+    "control": "Drain the existing replay before storing the next input. This may spend another replay slice, so it is a causal experiment, not a production solution."
+  },
+  "captures": [
+    {
+      "name": "exploratory",
+      "cases": [
+        {
+          "mode": "baseline",
+          "movement": "walk",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.666029,
+            "stddev": 0.061434,
+            "min": 16.5,
+            "median": 16.7,
+            "p95": 16.8,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 63.995628,
+            "stddev": 3.23983,
+            "min": 56.031665,
+            "median": 63.692157,
+            "p95": 70.177111,
+            "max": 72.088978
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 1.066657,
+            "stddev": 0.104094,
+            "min": 1.9e-5,
+            "median": 1.06665,
+            "p95": 1.066681,
+            "max": 2.133301
+          },
+          "samePastTickErrorMaxPx": 0.00013780593872070312,
+          "horizontalDisplayOffsetMedianPx": -4.348593936294829,
+          "screenXRangePx": 1.412734203375635,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 0.7921678159440262,
+          "predictionTickAdvanceCounts": {
+            "1": 207,
+            "2": 1,
+            "0": 1
+          },
+          "pageErrors": []
+        },
+        {
+          "mode": "baseline",
+          "movement": "run",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.666029,
+            "stddev": 0.055716,
+            "min": 16.5,
+            "median": 16.7,
+            "p95": 16.7,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 128.002954,
+            "stddev": 6.970724,
+            "min": 112.148492,
+            "median": 127.582631,
+            "p95": 141.209381,
+            "max": 154.851845
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 2.133301,
+            "stddev": 0.208189,
+            "min": 1e-6,
+            "median": 2.133301,
+            "p95": 2.133301,
+            "max": 4.266602
+          },
+          "samePastTickErrorMaxPx": 7.200241088867188e-5,
+          "horizontalDisplayOffsetMedianPx": -8.71360185600767,
+          "screenXRangePx": 2.424966893713645,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 2.105274150950436,
+          "predictionTickAdvanceCounts": {
+            "1": 207,
+            "2": 1,
+            "0": 1
+          },
+          "pageErrors": []
+        },
+        {
+          "mode": "baseline",
+          "movement": "car",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.666507,
+            "stddev": 0.052931,
+            "min": 16.6,
+            "median": 16.7,
+            "p95": 16.7,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 111.97489,
+            "stddev": 7.212658,
+            "min": 98.837691,
+            "median": 111.363573,
+            "p95": 123.878802,
+            "max": 149.759282
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 1.866699,
+            "stddev": 0.182171,
+            "min": 5e-6,
+            "median": 1.866699,
+            "p95": 1.866699,
+            "max": 3.733398
+          },
+          "samePastTickErrorMaxPx": 6.008148193359375e-5,
+          "horizontalDisplayOffsetMedianPx": -7.586397846364774,
+          "screenXRangePx": 2.9551821055874825,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 2.1267132586772277,
+          "predictionTickAdvanceCounts": {
+            "1": 207,
+            "2": 1,
+            "0": 1
+          },
+          "pageErrors": []
+        },
+        {
+          "mode": "matched-replay",
+          "movement": "walk",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.666029,
+            "stddev": 0.059052,
+            "min": 16.5,
+            "median": 16.7,
+            "p95": 16.8,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 63.999407,
+            "stddev": 0.000743,
+            "min": 63.999023,
+            "median": 63.999023,
+            "p95": 64.000854,
+            "max": 64.000854
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 5e-6,
+            "stddev": 1.2e-5,
+            "min": 0,
+            "median": 0.0,
+            "p95": 3.8e-5,
+            "max": 5.3e-5
+          },
+          "samePastTickErrorMaxPx": 8.0108642578125e-5,
+          "horizontalDisplayOffsetMedianPx": 0.0,
+          "screenXRangePx": 0.8520368041999973,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 0.01010630937651058,
+          "predictionTickAdvanceCounts": {
+            "1": 209
+          },
+          "pageErrors": []
+        },
+        {
+          "mode": "matched-replay",
+          "movement": "run",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.666507,
+            "stddev": 0.056431,
+            "min": 16.5,
+            "median": 16.7,
+            "p95": 16.7,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 127.998047,
+            "stddev": 0.0,
+            "min": 127.998047,
+            "median": 127.998047,
+            "p95": 127.998047,
+            "max": 127.998047
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 4e-6,
+            "stddev": 1e-5,
+            "min": 0,
+            "median": 0.0,
+            "p95": 3e-5,
+            "max": 5.1e-5
+          },
+          "samePastTickErrorMaxPx": 7.104873657226562e-5,
+          "horizontalDisplayOffsetMedianPx": 9.778509830767129e-23,
+          "screenXRangePx": 0.9970703125004547,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 0.010432217712491365,
+          "predictionTickAdvanceCounts": {
+            "1": 209
+          },
+          "pageErrors": []
+        },
+        {
+          "mode": "matched-replay",
+          "movement": "car",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.666029,
+            "stddev": 0.059052,
+            "min": 16.5,
+            "median": 16.7,
+            "p95": 16.8,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 112.001953,
+            "stddev": 0.0,
+            "min": 112.001953,
+            "median": 112.001953,
+            "p95": 112.001953,
+            "max": 112.001953
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 1.2e-5,
+            "stddev": 1.6e-5,
+            "min": 0,
+            "median": 4e-6,
+            "p95": 4.3e-5,
+            "max": 6e-5
+          },
+          "samePastTickErrorMaxPx": 7.915496826171875e-5,
+          "horizontalDisplayOffsetMedianPx": 0.0,
+          "screenXRangePx": 0.9989931640629948,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 0.0005942029383732006,
+          "predictionTickAdvanceCounts": {
+            "1": 209
+          },
+          "pageErrors": []
+        }
+      ]
+    },
+    {
+      "name": "portable-command-confirmation",
+      "cases": [
+        {
+          "mode": "baseline",
+          "movement": "walk",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.66555,
+            "stddev": 0.05322,
+            "min": 16.6,
+            "median": 16.7,
+            "p95": 16.7,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 64.002847,
+            "stddev": 3.676391,
+            "min": 56.372843,
+            "median": 63.711911,
+            "p95": 70.062633,
+            "max": 71.30232
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 1.066657,
+            "stddev": 1.2e-5,
+            "min": 1.06665,
+            "median": 1.06665,
+            "p95": 1.066681,
+            "max": 1.066681
+          },
+          "samePastTickErrorMaxPx": 0.00011682510375976562,
+          "horizontalDisplayOffsetMedianPx": -4.367488463150876,
+          "screenXRangePx": 1.383677343301656,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 0.5117419393981208,
+          "predictionTickAdvanceCounts": {
+            "1": 209
+          },
+          "pageErrors": []
+        },
+        {
+          "mode": "baseline",
+          "movement": "run",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.666029,
+            "stddev": 0.053972,
+            "min": 16.6,
+            "median": 16.7,
+            "p95": 16.7,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 128.03067,
+            "stddev": 7.07917,
+            "min": 113.431747,
+            "median": 127.506301,
+            "p95": 139.066573,
+            "max": 143.723542
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 2.133301,
+            "stddev": 0.0,
+            "min": 2.133301,
+            "median": 2.133301,
+            "p95": 2.133301,
+            "max": 2.133301
+          },
+          "samePastTickErrorMaxPx": 6.341934204101562e-5,
+          "horizontalDisplayOffsetMedianPx": -8.73418722494117,
+          "screenXRangePx": 1.7607385576288834,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 1.0510096962116222,
+          "predictionTickAdvanceCounts": {
+            "1": 209
+          },
+          "pageErrors": []
+        },
+        {
+          "mode": "baseline",
+          "movement": "car",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.666029,
+            "stddev": 0.057408,
+            "min": 16.5,
+            "median": 16.7,
+            "p95": 16.7,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 112.002451,
+            "stddev": 6.594427,
+            "min": 90.505951,
+            "median": 111.517389,
+            "p95": 123.596417,
+            "max": 128.364884
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 1.866699,
+            "stddev": 0.182169,
+            "min": 4e-5,
+            "median": 1.866699,
+            "p95": 1.866699,
+            "max": 3.733398
+          },
+          "samePastTickErrorMaxPx": 8.678436279296875e-5,
+          "horizontalDisplayOffsetMedianPx": -7.589593432468348,
+          "screenXRangePx": 2.2209467294414935,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 1.5184170204754537,
+          "predictionTickAdvanceCounts": {
+            "1": 207,
+            "2": 1,
+            "0": 1
+          },
+          "pageErrors": []
+        },
+        {
+          "mode": "matched-replay",
+          "movement": "walk",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.66555,
+            "stddev": 0.056702,
+            "min": 16.5,
+            "median": 16.7,
+            "p95": 16.7,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 63.999411,
+            "stddev": 0.000744,
+            "min": 63.999023,
+            "median": 63.999023,
+            "p95": 64.000854,
+            "max": 64.000854
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 5e-6,
+            "stddev": 1.2e-5,
+            "min": 0,
+            "median": 0.0,
+            "p95": 3.8e-5,
+            "max": 5.3e-5
+          },
+          "samePastTickErrorMaxPx": 8.0108642578125e-5,
+          "horizontalDisplayOffsetMedianPx": 0.0,
+          "screenXRangePx": 0.8519282226562837,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 0.010612914710009136,
+          "predictionTickAdvanceCounts": {
+            "1": 209
+          },
+          "pageErrors": []
+        },
+        {
+          "mode": "matched-replay",
+          "movement": "run",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.666029,
+            "stddev": 0.052168,
+            "min": 16.6,
+            "median": 16.7,
+            "p95": 16.7,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 127.998047,
+            "stddev": 0.0,
+            "min": 127.998047,
+            "median": 127.998047,
+            "p95": 127.998047,
+            "max": 127.998047
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 4e-6,
+            "stddev": 1e-5,
+            "min": 0,
+            "median": 0.0,
+            "p95": 3e-5,
+            "max": 5.1e-5
+          },
+          "samePastTickErrorMaxPx": 7.104873657226562e-5,
+          "horizontalDisplayOffsetMedianPx": 0.0,
+          "screenXRangePx": 0.99853515625,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 0.010686536915159195,
+          "predictionTickAdvanceCounts": {
+            "1": 209
+          },
+          "pageErrors": []
+        },
+        {
+          "mode": "matched-replay",
+          "movement": "car",
+          "renderSamples": 210,
+          "frameIntervalMs": {
+            "count": 209,
+            "mean": 16.666029,
+            "stddev": 0.054851,
+            "min": 16.5,
+            "median": 16.7,
+            "p95": 16.7,
+            "max": 16.8
+          },
+          "displayedSpeedWorldPxPerSecond": {
+            "count": 209,
+            "mean": 112.001953,
+            "stddev": 0.0,
+            "min": 112.001953,
+            "median": 112.001953,
+            "p95": 112.001953,
+            "max": 112.001953
+          },
+          "resimErrorPx": {
+            "count": 210,
+            "mean": 1.2e-5,
+            "stddev": 1.7e-5,
+            "min": 0,
+            "median": 5e-6,
+            "p95": 4.4e-5,
+            "max": 0.000113
+          },
+          "samePastTickErrorMaxPx": 0.00015163421630859375,
+          "horizontalDisplayOffsetMedianPx": -9.471354080845695e-29,
+          "screenXRangePx": 0.99368261718746,
+          "sameFramesWithoutCameraSnapScreenXRangePx": 0.0005962114103112981,
+          "predictionTickAdvanceCounts": {
+            "1": 209
+          },
+          "pageErrors": []
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Headless bundled full Chromium on desktop, no CPU throttling; not a physical-phone or Chromebook measurement.",
+    "Fresh contexts and independent Worker scheduling phases; ranges are short-run observations, not universal limits.",
+    "No runtime physics, prediction, rendering or wire change has been delivered.",
+    "A production repair must preserve the existing replay budget, new contact anchors, input coalescing and interpolation."
+  ]
+}

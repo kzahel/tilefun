@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [211 Movement pacing investigation](211-movement-pacing-investigation.md) | Reproduced: replay compares different input ticks; isolated walk/run/car control removes false corrections; runtime repair pending, pixel-grid wobble separate |
 | [210 First-contact display anchor](210-first-contact-display-anchor.md) | Delivered: stationary NPCs anchor first-contact corrections; 49 native/five Worker/P2P browser checks, build and streaming readiness pass; owner device playtest next |
 | [209 Car driving and autonomous traffic](209-car-driving-and-autonomous-traffic.md) | Delivered: shared rolling motor, bounded road traffic and persistence; 116 native/five Worker/P2P browser checks, build and streaming readiness pass; owner playtest next |
 | [208 Ground seams and movement pacing](208-ground-seams-and-movement-pacing.md) | Delivered: welded static seams, monotonic camera time, retained previous poses and committed replay presentation; 107 native/four browser checks, build and throttled streaming pass; physical-phone confirmation remains |
