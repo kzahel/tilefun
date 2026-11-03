@@ -1,0 +1,271 @@
+{
+  "revision": "1634f6f6b62271ed61f3535fe79e05e57adbd5f2",
+  "dirty": true,
+  "date": "2026-11-03T17:18:30.887Z",
+  "platform": "darwin 25.6.0 arm64",
+  "cpu": "Apple M4 Pro",
+  "browser": "153.0.8010.12",
+  "cpuRate": 4,
+  "renderer": "gpu",
+  "meshes": true,
+  "viewport": {
+    "width": 1280,
+    "height": 900
+  },
+  "headed": false,
+  "input": "keyboard",
+  "instrumentation": true,
+  "terrainPacing": "throughput",
+  "scope": "Isolated GPU/meshes streaming readiness, live source served by the benchmark runner. Desktop CPU throttling is not Chromebook timing. One final run; no matched whole-render baseline.",
+  "assertReady": "passed",
+  "samples": [
+    {
+      "name": "cold",
+      "elapsedMs": 2016.6000000000004,
+      "travelledPx": 0,
+      "frames": {
+        "count": 120,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.800000000000182,
+        "max": 33.30000000000018
+      },
+      "renderMs": {
+        "count": 121,
+        "p50": 5.5,
+        "p95": 9.400000095367432,
+        "p99": 12.399999856948853,
+        "max": 16
+      },
+      "updateMs": {
+        "count": 122,
+        "p50": 2.700000047683716,
+        "p95": 4,
+        "p99": 4.900000095367432,
+        "max": 5.799999952316284
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 16,
+      "incompleteCacheFrames": 15,
+      "framesOver25Ms": 1,
+      "framesOver50Ms": 0
+    },
+    {
+      "name": "standing",
+      "elapsedMs": 1999.8999999999996,
+      "travelledPx": 0,
+      "frames": {
+        "count": 120,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109
+      },
+      "renderMs": {
+        "count": 121,
+        "p50": 3.6999998092651367,
+        "p95": 4.799999952316284,
+        "p99": 5.200000047683716,
+        "max": 6.1000001430511475
+      },
+      "updateMs": {
+        "count": 121,
+        "p50": 2.5,
+        "p95": 3.299999952316284,
+        "p99": 3.700000047683716,
+        "max": 4.300000190734863
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 1,
+      "incompleteCacheFrames": 0,
+      "framesOver25Ms": 0,
+      "framesOver50Ms": 0
+    },
+    {
+      "name": "walk",
+      "elapsedMs": 3016.6000000000004,
+      "travelledPx": 189.66543961590602,
+      "frames": {
+        "count": 180,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 33.30000000000109
+      },
+      "renderMs": {
+        "count": 181,
+        "p50": 3.8999998569488525,
+        "p95": 4.599999904632568,
+        "p99": 5.1000001430511475,
+        "max": 28.200000047683716
+      },
+      "updateMs": {
+        "count": 182,
+        "p50": 2.5,
+        "p95": 3.299999952316284,
+        "p99": 4.400000095367432,
+        "max": 6.299999952316284
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 1,
+      "incompleteCacheFrames": 0,
+      "framesOver25Ms": 1,
+      "framesOver50Ms": 0
+    },
+    {
+      "name": "sprint",
+      "elapsedMs": 4999.799999999999,
+      "travelledPx": 641.0646362304688,
+      "frames": {
+        "count": 300,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000291
+      },
+      "renderMs": {
+        "count": 301,
+        "p50": 3.799999952316284,
+        "p95": 6.599999904632568,
+        "p99": 7.800000190734863,
+        "max": 8.900000095367432
+      },
+      "updateMs": {
+        "count": 301,
+        "p50": 2.299999952316284,
+        "p95": 3.0999999046325684,
+        "p99": 4.099999904632568,
+        "max": 4.699999809265137
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 1,
+      "incompleteCacheFrames": 0,
+      "framesOver25Ms": 0,
+      "framesOver50Ms": 0
+    },
+    {
+      "name": "reverse",
+      "elapsedMs": 4999.9000000000015,
+      "travelledPx": 639.9978027345387,
+      "frames": {
+        "count": 300,
+        "p50": 16.700000000000728,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000291,
+        "max": 16.80000000000291
+      },
+      "renderMs": {
+        "count": 301,
+        "p50": 3.3999998569488525,
+        "p95": 5.799999952316284,
+        "p99": 6.3999998569488525,
+        "max": 6.700000047683716
+      },
+      "updateMs": {
+        "count": 301,
+        "p50": 2.0999999046325684,
+        "p95": 2.9000000953674316,
+        "p99": 3.6999998092651367,
+        "max": 4
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 1,
+      "incompleteCacheFrames": 0,
+      "framesOver25Ms": 0,
+      "framesOver50Ms": 0
+    },
+    {
+      "name": "zoom-out",
+      "elapsedMs": 2999.9000000000015,
+      "travelledPx": 0,
+      "frames": {
+        "count": 180,
+        "p50": 16.700000000000728,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000291,
+        "max": 16.80000000000291
+      },
+      "renderMs": {
+        "count": 181,
+        "p50": 4.6000001430511475,
+        "p95": 7.299999952316284,
+        "p99": 8.700000047683716,
+        "max": 8.900000095367432
+      },
+      "updateMs": {
+        "count": 181,
+        "p50": 2.0999999046325684,
+        "p95": 2.5,
+        "p99": 2.9000000953674316,
+        "max": 4.599999904632568
+      },
+      "longTasksMs": {
+        "count": 0,
+        "p50": 0,
+        "p95": 0,
+        "p99": 0,
+        "max": 0
+      },
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0,
+      "staleCacheFrames": 0,
+      "firstReadyFrame": 1,
+      "incompleteCacheFrames": 0,
+      "framesOver25Ms": 0,
+      "framesOver50Ms": 0
+    }
+  ],
+  "errors": [],
+  "failures": []
+}

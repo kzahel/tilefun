@@ -12,7 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
-| [217 Surface shadows and effects](217-surface-projected-shadows-and-effects.md) | In progress: shared finite receivers, conforming cartoon footprints and contact-height effects |
+| [217 Surface shadows and effects](217-surface-projected-shadows-and-effects.md) | Ready for owner feel review: shared finite receivers, conforming cartoon footprints and contact effects; native/Chromium/device and bounded performance evidence recorded |
 | [216 Dynamic 3D vehicles](216-dynamic-3d-vehicles.md) | Ready for owner feel review: shared depth, dynamic chassis/suspension, replay/save and recovery; device frame-budget limits recorded |
 | [215 Coherent world raster](215-coherent-world-raster.md) | Delivered: coherent scenery and fractional actors; 125 native/25 browser checks, Canvas/GPU/Chromebook pixel gates, build and streaming readiness; headless-shell limits recorded |
 | [214 World registration](214-world-registration.md) | Reproduced: 1px prop/terrain and stopped-player displacement on Canvas/GPU; independent raster placement and 213 coverage gap identified; shared-composition proof is provisional, runtime unchanged |

@@ -1,0 +1,105 @@
+{
+  "date": "2026-11-03",
+  "baseRevision": "1634f6f6b62271ed61f3535fe79e05e57adbd5f2",
+  "dirty": true,
+  "scope": "Short live-development functional smoke through the public Caddy URL in an existing physical ChromeOS browser. Each owned CDP tab closed. Not a controlled before/after, crowded-device benchmark, phone test or thermal qualification.",
+  "checkpoint": "Drive captured after receiver indexing and projected blend; contacts captured after physical-support confirmation. Final stationary support-flag dust suppression is qualified separately by native regression and production browser.",
+  "device": {
+    "ua": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
+    "cores": 8,
+    "memory": 8,
+    "viewport": [
+      1600,
+      721
+    ],
+    "dpr": 2.4000000953674316
+  },
+  "drive": {
+    "frames": {
+      "count": 386,
+      "p50": 16.700000000000728,
+      "p95": 33.399999999999636,
+      "p99": 50,
+      "max": 50
+    },
+    "maxZ": 48.47905253475976,
+    "minUp": 0.9619485043182818
+  },
+  "driveGpu": {
+    "recoveries": 0,
+    "overlayRasterBuilds": 6,
+    "overlayRasterCount": 6,
+    "overlayRasterBytes": 863932,
+    "meshDraws": 1123,
+    "meshDrawCalls": 4578
+  },
+  "contacts": [
+    {
+      "contactCase": "ramp",
+      "before": 28,
+      "peak": 50.873046875,
+      "landing": {
+        "z": 28.791484832763672,
+        "effects": {
+          "particles": 10,
+          "pending": 0,
+          "marks": 1,
+          "lastContact": {
+            "receiverId": "ascent",
+            "point": [
+              -81.49609375,
+              0,
+              27.6259765625
+            ],
+            "normal": [
+              -0.24253562503633297,
+              0,
+              0.9701425001453319
+            ]
+          }
+        },
+        "receivers": {
+          "sources": 10,
+          "meshTriangles": 0,
+          "queries": 10,
+          "fragments": 59
+        },
+        "grounded": true
+      }
+    },
+    {
+      "contactCase": "roof",
+      "before": 24,
+      "peak": 46.07826232910156,
+      "landing": {
+        "z": 23.863157272338867,
+        "effects": {
+          "particles": 10,
+          "pending": 0,
+          "marks": 1,
+          "lastContact": {
+            "receiverId": "body:2:272",
+            "point": [
+              -280.033203125,
+              0.05463075637817383,
+              19.855823554912597
+            ],
+            "normal": [
+              -0.006726356105083678,
+              -0.011236135591582142,
+              0.9999142490186422
+            ]
+          }
+        },
+        "receivers": {
+          "sources": 10,
+          "meshTriangles": 10,
+          "queries": 10,
+          "fragments": 68
+        },
+        "grounded": true
+      }
+    }
+  ],
+  "interpretation": "Ramp dust follows its sloped visible receiver. Roof landing occurs near the 24px physical proxy and emits at the actual presented roof near 19.86px. Drive frame intervals include 33.4\u201350ms frames; no claim of locked 60fps."
+}

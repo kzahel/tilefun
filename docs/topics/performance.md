@@ -1,5 +1,16 @@
 # Streaming and gameplay performance
 
+[217](../tactical/217-surface-projected-shadows-and-effects.md) adds conforming
+cartoon shadows and contact effects. Native collection means rise from 0.100 to
+0.564ms for 96 characters, and from about 0.26 to 1.82–1.94ms with 32 roof cars.
+A retained triangle index cuts the initial 8.23–9.53ms roof prototype to that
+range, transforming 192–320 rather than 26,944 triangles per frame. This is scene
+preparation on M4 Pro, not whole-frame or Chromebook timing. GPU/meshes CPU-rate-4
+streaming readiness passes all six stages with 16.8ms frame p99; cold/walk each
+retain a 33.3ms maximum frame. The short physical Chromebook ramp/roof smoke
+passes, with driving p50/p95/p99 16.7/33.4/50ms. Linked receipts retain scene and
+checkpoint limits; crowded-device and matched whole-render costs remain unmeasured.
+
 [216](../tactical/216-dynamic-3d-vehicles.md) adds suspension/full rotation and shared
 world depth. An alternating native comparison at 96 NPCs + 32 driving cars measures
 0.358 → 0.500ms mean synchronize/step; parked fleets sleep and remain comparable.

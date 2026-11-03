@@ -1,0 +1,867 @@
+{
+  "dirty": true,
+  "scope": "Native scene collection only, no GPU, Worker AI, networking or physical-device timing. Alternating lanes; current shared code's immutable-reference collector retains the prior scalar-shadow preparation. Each crowded-roof fixture deliberately includes 32 roof riders, with 64 other nearby actors.",
+  "method": "Three alternating trials; 60 warmup and 120 measured collections per lane. Same current shared collector with immutable-reference scalar-shadow lane, not a checkout of the entire old renderer. Real compact GLB decoded once; no GPU work.",
+  "interpretation": "Surface preparation costs more than the prior simple ellipses. The retained local triangle index greatly reduces the initial all-triangle implementation. These timings do not establish whole-frame gains or Chromebook capacity.",
+  "initialAllTrianglePrototype": {
+    "date": "2026-11-03T16:34:18.784Z",
+    "scope": "Native scene collection only, no GPU, Worker AI, networking or physical-device timing. Alternating lanes; current shared code's immutable-reference collector retains the prior scalar-shadow preparation. Each crowded-roof fixture deliberately includes 32 roof riders, with 64 other nearby actors.",
+    "cases": [
+      {
+        "name": "96-characters",
+        "trial": 0,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.14257676666666771,
+          "p95": 0.15812499999998408,
+          "p99": 0.22124999999999773,
+          "max": 0.23329200000000583
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters",
+        "trial": 0,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.6284094333333343,
+          "p95": 0.7479999999999905,
+          "p99": 0.907416000000012,
+          "max": 2.8781249999999545
+        },
+        "receivers": {
+          "sources": 96,
+          "meshTriangles": 0,
+          "queries": 192,
+          "fragments": 288
+        }
+      },
+      {
+        "name": "96-characters",
+        "trial": 1,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.576932958333335,
+          "p95": 0.6547090000000253,
+          "p99": 0.694041000000027,
+          "max": 0.6972919999999476
+        },
+        "receivers": {
+          "sources": 96,
+          "meshTriangles": 0,
+          "queries": 192,
+          "fragments": 288
+        }
+      },
+      {
+        "name": "96-characters",
+        "trial": 1,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.13196459999999915,
+          "p95": 0.14929200000000264,
+          "p99": 0.23383300000000418,
+          "max": 0.2932920000000081
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters",
+        "trial": 2,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.016418375000001127,
+          "p95": 0.016916000000037457,
+          "p99": 0.022334000000000742,
+          "max": 0.1469579999999837
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters",
+        "trial": 2,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.42205971666666453,
+          "p95": 0.49049999999999727,
+          "p99": 0.520249999999919,
+          "max": 0.5245830000000069
+        },
+        "receivers": {
+          "sources": 96,
+          "meshTriangles": 0,
+          "queries": 192,
+          "fragments": 288
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 0,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.26294959999999984,
+          "p95": 0.287166999999954,
+          "p99": 0.32158300000003237,
+          "max": 0.5057500000000346
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 0,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 8.16799443333333,
+          "p95": 9.696750000000065,
+          "p99": 11.792000000000144,
+          "max": 12.608915999999908
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 26944,
+          "queries": 256,
+          "fragments": 724
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 1,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 8.146977116666653,
+          "p95": 10.375,
+          "p99": 11.54770899999994,
+          "max": 11.75583400000005
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 26944,
+          "queries": 256,
+          "fragments": 724
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 1,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.2606725333333619,
+          "p95": 0.28337499999997817,
+          "p99": 0.5109170000000631,
+          "max": 1.4980829999999514
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 2,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.24957264999997808,
+          "p95": 0.25566699999990306,
+          "p99": 0.26608299999998053,
+          "max": 0.7303329999999733
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 2,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 8.36519649166665,
+          "p95": 10.557208000000173,
+          "p99": 10.965707999999722,
+          "max": 11.347834000000148
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 26944,
+          "queries": 256,
+          "fragments": 724
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 0,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.270646949999923,
+          "p95": 0.30545899999924586,
+          "p99": 0.33995799999956944,
+          "max": 0.3405000000002474
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 0,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 9.373961408333336,
+          "p95": 11.587916999999834,
+          "p99": 12.598042000000532,
+          "max": 12.640667000000576
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 26944,
+          "queries": 256,
+          "fragments": 849
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 1,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 9.599533699999999,
+          "p95": 11.606416000000536,
+          "p99": 13.737374999998792,
+          "max": 14.037707999999839
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 26944,
+          "queries": 256,
+          "fragments": 849
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 1,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.24929926666677601,
+          "p95": 0.2507079999995767,
+          "p99": 0.3016250000000582,
+          "max": 1.0585420000006707
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 2,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.24319403333335382,
+          "p95": 0.2511670000003505,
+          "p99": 0.28608300000087183,
+          "max": 0.6537079999998241
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 2,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 9.611075350000071,
+          "p95": 12.569250000000466,
+          "p99": 13.016125000000102,
+          "max": 14.54858299999978
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 26944,
+          "queries": 256,
+          "fragments": 849
+        }
+      }
+    ]
+  },
+  "indexedFinal": {
+    "date": "2026-11-03T17:19:03.129Z",
+    "cpu": "Apple M4 Pro",
+    "platform": "darwin 25.6.0 arm64",
+    "scope": "Native scene collection only, no GPU, Worker AI, networking or physical-device timing. Alternating lanes; current shared code's immutable-reference collector retains the prior scalar-shadow preparation. Each crowded-roof fixture deliberately includes 32 roof riders, with 64 other nearby actors.",
+    "cases": [
+      {
+        "name": "96-characters",
+        "trial": 0,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.15082570833333264,
+          "p95": 0.17966599999999744,
+          "p99": 0.25541599999999676,
+          "max": 0.29974999999998886
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters",
+        "trial": 0,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.6244971999999956,
+          "p95": 0.7975419999999644,
+          "p99": 0.8444169999999644,
+          "max": 0.8676249999999754
+        },
+        "receivers": {
+          "sources": 96,
+          "meshTriangles": 0,
+          "queries": 192,
+          "fragments": 288
+        }
+      },
+      {
+        "name": "96-characters",
+        "trial": 1,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.6194180250000031,
+          "p95": 0.7859579999999937,
+          "p99": 0.8397909999999911,
+          "max": 1.482167000000004
+        },
+        "receivers": {
+          "sources": 96,
+          "meshTriangles": 0,
+          "queries": 192,
+          "fragments": 288
+        }
+      },
+      {
+        "name": "96-characters",
+        "trial": 1,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.1307558916666641,
+          "p95": 0.15287499999999454,
+          "p99": 0.24004100000001927,
+          "max": 0.3079999999999927
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters",
+        "trial": 2,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.017035424999994574,
+          "p95": 0.016707999999994172,
+          "p99": 0.021292000000016742,
+          "max": 0.16533300000003237
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters",
+        "trial": 2,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.4478520666666583,
+          "p95": 0.6502500000000282,
+          "p99": 0.6587500000000546,
+          "max": 0.6909580000000233
+        },
+        "receivers": {
+          "sources": 96,
+          "meshTriangles": 0,
+          "queries": 192,
+          "fragments": 288
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 0,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.2714524583333343,
+          "p95": 0.3007920000000013,
+          "p99": 0.3331670000000031,
+          "max": 0.4812080000000378
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 0,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 2.0223812666666694,
+          "p95": 2.522874999999999,
+          "p99": 3.4982080000000906,
+          "max": 5.168374999999969
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 320,
+          "queries": 256,
+          "fragments": 724
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 1,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 1.9086809250000063,
+          "p95": 2.454542000000174,
+          "p99": 2.707208000000037,
+          "max": 2.8453750000001037
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 320,
+          "queries": 256,
+          "fragments": 724
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 1,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.25440280000000065,
+          "p95": 0.28912500000001273,
+          "p99": 0.3157089999999698,
+          "max": 0.6411669999999958
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 2,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.2610176999999946,
+          "p95": 0.28787499999998545,
+          "p99": 0.3139169999999467,
+          "max": 0.5256669999998849
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-parked-roofs",
+        "trial": 2,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 1.8990173833333206,
+          "p95": 2.441291999999976,
+          "p99": 2.537458000000015,
+          "max": 2.6663750000000164
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 320,
+          "queries": 256,
+          "fragments": 724
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 0,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.26866564999999887,
+          "p95": 0.27262500000006185,
+          "p99": 0.2851250000001073,
+          "max": 0.29070899999987887
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 0,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 1.8191305083333456,
+          "p95": 2.3602089999999407,
+          "p99": 2.51299999999992,
+          "max": 2.513958999999886
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 192,
+          "queries": 256,
+          "fragments": 849
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 1,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 1.8120413083333158,
+          "p95": 2.2123750000000655,
+          "p99": 2.3417500000000473,
+          "max": 2.368249999999989
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 192,
+          "queries": 256,
+          "fragments": 849
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 1,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.2607034833333425,
+          "p95": 0.2967910000002121,
+          "p99": 0.31379199999992125,
+          "max": 0.32383400000026086
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 2,
+        "mode": "previous-height-ellipse-collection",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 0.2528385250000156,
+          "p95": 0.2568340000002536,
+          "p99": 0.2632499999999709,
+          "max": 0.5144580000001042
+        },
+        "receivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        }
+      },
+      {
+        "name": "96-characters-32-moving-roofs",
+        "trial": 2,
+        "mode": "surface-receivers",
+        "collectionMs": {
+          "samples": 120,
+          "mean": 1.8285392333333712,
+          "p95": 2.3210410000001502,
+          "p99": 2.6563340000002427,
+          "max": 3.479707999999846
+        },
+        "receivers": {
+          "sources": 128,
+          "meshTriangles": 192,
+          "queries": 256,
+          "fragments": 849
+        }
+      }
+    ]
+  },
+  "initialSummary": [
+    {
+      "name": "96-characters",
+      "mode": "previous-height-ellipse-collection",
+      "meanMs": 0.09698658055555599,
+      "trialP99Ms": [
+        0.22124999999999773,
+        0.23383300000000418,
+        0.022334000000000742
+      ],
+      "receivers": {
+        "sources": 0,
+        "meshTriangles": 0,
+        "queries": 0,
+        "fragments": 0
+      }
+    },
+    {
+      "name": "96-characters",
+      "mode": "surface-receivers",
+      "meanMs": 0.5424673694444446,
+      "trialP99Ms": [
+        0.907416000000012,
+        0.694041000000027,
+        0.520249999999919
+      ],
+      "receivers": {
+        "sources": 96,
+        "meshTriangles": 0,
+        "queries": 192,
+        "fragments": 288
+      }
+    },
+    {
+      "name": "96-characters-32-parked-roofs",
+      "mode": "previous-height-ellipse-collection",
+      "meanMs": 0.2577315944444466,
+      "trialP99Ms": [
+        0.32158300000003237,
+        0.5109170000000631,
+        0.26608299999998053
+      ],
+      "receivers": {
+        "sources": 0,
+        "meshTriangles": 0,
+        "queries": 0,
+        "fragments": 0
+      }
+    },
+    {
+      "name": "96-characters-32-parked-roofs",
+      "mode": "surface-receivers",
+      "meanMs": 8.226722680555545,
+      "trialP99Ms": [
+        11.792000000000144,
+        11.54770899999994,
+        10.965707999999722
+      ],
+      "receivers": {
+        "sources": 128,
+        "meshTriangles": 26944,
+        "queries": 256,
+        "fragments": 724
+      }
+    },
+    {
+      "name": "96-characters-32-moving-roofs",
+      "mode": "previous-height-ellipse-collection",
+      "meanMs": 0.25438008333335094,
+      "trialP99Ms": [
+        0.33995799999956944,
+        0.3016250000000582,
+        0.28608300000087183
+      ],
+      "receivers": {
+        "sources": 0,
+        "meshTriangles": 0,
+        "queries": 0,
+        "fragments": 0
+      }
+    },
+    {
+      "name": "96-characters-32-moving-roofs",
+      "mode": "surface-receivers",
+      "meanMs": 9.528190152777801,
+      "trialP99Ms": [
+        12.598042000000532,
+        13.737374999998792,
+        13.016125000000102
+      ],
+      "receivers": {
+        "sources": 128,
+        "meshTriangles": 26944,
+        "queries": 256,
+        "fragments": 849
+      }
+    }
+  ],
+  "finalSummary": [
+    {
+      "name": "96-characters",
+      "mode": "previous-height-ellipse-collection",
+      "meanMs": 0.09953900833333044,
+      "trialP99Ms": [
+        0.25541599999999676,
+        0.24004100000001927,
+        0.021292000000016742
+      ],
+      "receivers": {
+        "sources": 0,
+        "meshTriangles": 0,
+        "queries": 0,
+        "fragments": 0
+      }
+    },
+    {
+      "name": "96-characters",
+      "mode": "surface-receivers",
+      "meanMs": 0.5639224305555524,
+      "trialP99Ms": [
+        0.8444169999999644,
+        0.8397909999999911,
+        0.6587500000000546
+      ],
+      "receivers": {
+        "sources": 96,
+        "meshTriangles": 0,
+        "queries": 192,
+        "fragments": 288
+      }
+    },
+    {
+      "name": "96-characters-32-parked-roofs",
+      "mode": "previous-height-ellipse-collection",
+      "meanMs": 0.26229098611110985,
+      "trialP99Ms": [
+        0.3331670000000031,
+        0.3157089999999698,
+        0.3139169999999467
+      ],
+      "receivers": {
+        "sources": 0,
+        "meshTriangles": 0,
+        "queries": 0,
+        "fragments": 0
+      }
+    },
+    {
+      "name": "96-characters-32-parked-roofs",
+      "mode": "surface-receivers",
+      "meanMs": 1.9433598583333322,
+      "trialP99Ms": [
+        3.4982080000000906,
+        2.707208000000037,
+        2.537458000000015
+      ],
+      "receivers": {
+        "sources": 128,
+        "meshTriangles": 320,
+        "queries": 256,
+        "fragments": 724
+      }
+    },
+    {
+      "name": "96-characters-32-moving-roofs",
+      "mode": "previous-height-ellipse-collection",
+      "meanMs": 0.260735886111119,
+      "trialP99Ms": [
+        0.2851250000001073,
+        0.31379199999992125,
+        0.2632499999999709
+      ],
+      "receivers": {
+        "sources": 0,
+        "meshTriangles": 0,
+        "queries": 0,
+        "fragments": 0
+      }
+    },
+    {
+      "name": "96-characters-32-moving-roofs",
+      "mode": "surface-receivers",
+      "meanMs": 1.8199036833333444,
+      "trialP99Ms": [
+        2.51299999999992,
+        2.3417500000000473,
+        2.6563340000002427
+      ],
+      "receivers": {
+        "sources": 128,
+        "meshTriangles": 192,
+        "queries": 256,
+        "fragments": 849
+      }
+    }
+  ],
+  "implementationRevision": "a1942c10a967caeb01ea1387c378ffad333747b4",
+  "initialBaseRevision": "1634f6f6b62271ed61f3535fe79e05e57adbd5f2",
+  "checkpoint": "Final native collection ran against the committed implementation; only delivery documentation/receipts remained dirty. Initial prototype was uncommitted over initialBaseRevision."
+}
