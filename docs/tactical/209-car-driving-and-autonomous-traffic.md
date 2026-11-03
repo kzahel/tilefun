@@ -27,3 +27,14 @@ pivoting; VehicleRegistry retained parked/saved bodies but no autonomous driver.
 
 No old collision solver, extra physics step, model option matrix, suspension/
 tumbling, parking visitors or articulated equipment is part of this slice.
+
+## Shared motor checkpoint
+
+The grounded traction motor uses retained acceleration/turning-radius data,
+signed rolling speed, lateral grip and progressive braking. Direction aiming
+selects reverse behind the nose; relative controls supply steering/throttle.
+Airborne cars keep physical momentum. Shared numerical motor intent adds two
+float32 fields and frame tag 0x0f; authority and client replay share the motor.
+80 focused motor/kernel/prediction/garage/bridge/codec checks pass, including
+perpendicular driving without initial strafe, no stationary pivot, braking through
+zero into reverse, release and airborne traction. Traffic integration follows.

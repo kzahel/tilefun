@@ -34,6 +34,8 @@ const body: PhysicsBodyState = {
   controlUntil: 1015,
   altitude: 24,
   desiredHeading: -0.75,
+  desiredDriveSpeed: -56,
+  desiredSteering: 0.5,
 };
 const state: PhysicsState = { epoch: 42, tick: 1001, omitted: 3, bodies: [body], contacts: [] };
 function frame(physics: PhysicsState): FrameMessage {
@@ -42,7 +44,7 @@ function frame(physics: PhysicsState): FrameMessage {
 it("ordinary binary frames retain one common physics tick, motor/support state and precise world coordinates", () => {
   const wire = encodeServerMessage(frame(state));
   expect(decodeServerMessage(wire)).toEqual(frame(state));
-  expect(wire.byteLength).toBe(27 + 1 + 16 + 97);
+  expect(wire.byteLength).toBe(27 + 1 + 16 + 105);
   const minimal = { ...state, bodies: [{ ...body, kind: "loose" as const }] };
   delete minimal.bodies[0]?.altitude;
   delete minimal.bodies[0]?.desiredHeading;
@@ -74,7 +76,7 @@ it("round-trips bounded solved pairs and rejects duplicate or unknown contact id
   };
   const wire = encodeServerMessage(frame(coupled));
   expect(decodeServerMessage(wire)).toEqual(frame(coupled));
-  expect(wire.byteLength).toBe(27 + 1 + 16 + 2 * 97 + 8);
+  expect(wire.byteLength).toBe(27 + 1 + 16 + 2 * 105 + 8);
   expect(() =>
     encodeServerMessage(
       frame({

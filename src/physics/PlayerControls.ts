@@ -3,8 +3,8 @@ import type { Entity } from "../entities/Entity.js";
 import type { Movement } from "../input/ActionManager.js";
 import { vehicleNoseHeading } from "../traffic/Vehicle.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
-import { PHYSICS_DT } from "./PhysicsDefaults.js";
 import type { MotionIntent } from "./PhysicsState.js";
+import { angleDifference } from "./VehicleMotor.js";
 
 export interface ControlCommand extends Movement {
   seq: number;
@@ -61,19 +61,35 @@ export function playerMotionIntent(movement: Movement): MotionIntent {
 
 /** Input mapping only; the scene owns all vehicle motion and collision. */
 export function vehicleMotionIntent(vehicle: Entity, movement: Movement): MotionIntent {
-  let heading = vehicleNoseHeading(vehicle);
-  const maxSpeed = vehiclePerformance(vehicle.type).speed * (movement.sprinting ? 1.5 : 1);
+  const heading = vehicleNoseHeading(vehicle);
+  const base = vehiclePerformance(vehicle.type).speed;
+  const maxSpeed = base * (movement.sprinting ? 1.5 : 1);
   if (movement.relativeDriving) {
-    heading += movement.dx * 2.5 * PHYSICS_DT;
-    const speed = -movement.dy * maxSpeed;
-    return { vx: Math.cos(heading) * speed, vy: Math.sin(heading) * speed, heading };
+    return {
+      vx: 0,
+      vy: 0,
+      driveSpeed: -movement.dy * (movement.dy > 0 ? base * 0.5 : maxSpeed),
+      steering: movement.dx,
+    };
   }
   if (movement.reversing)
     return {
-      vx: -Math.cos(heading) * maxSpeed * 0.5,
-      vy: -Math.sin(heading) * maxSpeed * 0.5,
-      heading,
+      vx: 0,
+      vy: 0,
+      driveSpeed: -base * 0.5,
     };
-  if (movement.dx || movement.dy) heading = Math.atan2(movement.dy, movement.dx);
-  return { vx: movement.dx * maxSpeed, vy: movement.dy * maxSpeed, heading };
+  const strength = Math.min(1, Math.hypot(movement.dx, movement.dy));
+  if (!strength) return { vx: 0, vy: 0, driveSpeed: 0 };
+  const aim = Math.atan2(movement.dy, movement.dx);
+  const rolling =
+    (vehicle.velocity?.vx ?? 0) * Math.cos(heading) +
+    (vehicle.velocity?.vy ?? 0) * Math.sin(heading);
+  const reverse =
+    Math.abs(angleDifference(aim, heading)) > (rolling < -1 ? Math.PI / 2 : (Math.PI * 2) / 3);
+  return {
+    vx: 0,
+    vy: 0,
+    driveSpeed: strength * (reverse ? -base * 0.5 : maxSpeed),
+    heading: aim + (reverse ? Math.PI : 0),
+  };
 }

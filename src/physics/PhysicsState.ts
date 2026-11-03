@@ -6,6 +6,8 @@ export interface MotionIntent {
   /** Prescribed flight/platform altitude; still integrated in the shared scene. */
   altitude?: number;
   heading?: number;
+  driveSpeed?: number;
+  steering?: number;
   controlUntil?: number;
 }
 /** Bounded numerical replay state; no WASM world or gameplay objects on the wire. */
@@ -34,6 +36,8 @@ export interface PhysicsBodyState {
   desiredVy: number;
   altitude?: number;
   desiredHeading?: number;
+  desiredDriveSpeed?: number;
+  desiredSteering?: number;
   normalX: number;
   normalY: number;
   normalZ: number;

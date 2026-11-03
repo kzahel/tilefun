@@ -21,8 +21,10 @@ const FIELDS = [
   "normalZ",
   "altitude",
   "desiredHeading",
+  "desiredDriveSpeed",
+  "desiredSteering",
 ] as const;
-const BODY_BYTES = 97;
+const BODY_BYTES = 105;
 const HEADER_BYTES = 16;
 const CONTACT_BYTES = 8;
 const MAX_CONTACTS = (MAX_PREDICTION_BODIES * (MAX_PREDICTION_BODIES - 1)) / 2;
@@ -78,7 +80,9 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
         (body.jumpHeld ? 4 : 0) |
         (body.grounded ? 8 : 0) |
         (body.altitude === undefined ? 0 : 16) |
-        (body.desiredHeading === undefined ? 0 : 32),
+        (body.desiredHeading === undefined ? 0 : 32) |
+        (body.desiredDriveSpeed === undefined ? 0 : 64) |
+        (body.desiredSteering === undefined ? 0 : 128),
     );
     for (const field of POSITIONS) {
       view.setFloat64(offset, finite(body[field]), true);
@@ -142,7 +146,7 @@ export function readPhysicsState(
     offset += 4;
     const flags = view.getUint8(offset++),
       kind = KINDS[flags & 3];
-    if (flags & 0xc0 || !kind || ids.has(id)) throw Error("Invalid physics body flags/identity");
+    if (!kind || ids.has(id)) throw Error("Invalid physics body flags/identity");
     ids.add(id);
     const body: PhysicsBodyState = {
       id,
@@ -181,7 +185,12 @@ export function readPhysicsState(
     for (const field of FIELDS) {
       const value = finite(view.getFloat32(offset, true));
       offset += 4;
-      if ((field === "altitude" && !(flags & 16)) || (field === "desiredHeading" && !(flags & 32)))
+      if (
+        (field === "altitude" && !(flags & 16)) ||
+        (field === "desiredHeading" && !(flags & 32)) ||
+        (field === "desiredDriveSpeed" && !(flags & 64)) ||
+        (field === "desiredSteering" && !(flags & 128))
+      )
         continue;
       body[field] = value;
     }

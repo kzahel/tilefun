@@ -355,6 +355,8 @@ export class PlayerPredictor {
           ...(body.controlUntil === undefined ? {} : { controlUntil: body.controlUntil }),
           ...(body.altitude === undefined ? {} : { altitude: body.altitude }),
           ...(body.desiredHeading === undefined ? {} : { heading: body.desiredHeading }),
+          ...(body.desiredDriveSpeed === undefined ? {} : { driveSpeed: body.desiredDriveSpeed }),
+          ...(body.desiredSteering === undefined ? {} : { steering: body.desiredSteering }),
         },
       ]),
     );

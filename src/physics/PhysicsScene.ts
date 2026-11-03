@@ -15,6 +15,7 @@ import {
   type CollisionGeometrySource,
   compileCollisionGeometry,
 } from "./rapier/CollisionGeometry.js";
+import { vehicleMotor } from "./VehicleMotor.js";
 
 export interface PhysicsGeometry extends CollisionGeometrySource {
   geometryVersion(cx: number, cy: number): { identity: unknown; revision: string | number };
@@ -393,6 +394,10 @@ export class PhysicsScene {
       else entry.state.altitude = input.altitude;
       if (input.heading === undefined) delete entry.state.desiredHeading;
       else entry.state.desiredHeading = input.heading;
+      if (input.driveSpeed === undefined) delete entry.state.desiredDriveSpeed;
+      else entry.state.desiredDriveSpeed = input.driveSpeed;
+      if (input.steering === undefined) delete entry.state.desiredSteering;
+      else entry.state.desiredSteering = input.steering;
       const velocity = entry.body.linvel();
       const support =
         entry.state.supportId === undefined
@@ -400,8 +405,19 @@ export class PhysicsScene {
           : supportVelocities.get(entry.state.supportId);
       const jump = input.jumpPressed || (input.jump && !entry.state.jumpHeld);
       entry.state.jumpHeld = input.jump ?? false;
-      const x = input.vx / SCALE + (support?.x ?? 0),
-        z = input.vy / SCALE + (support?.z ?? 0);
+      const drive =
+        entry.kind === "vehicle"
+          ? vehicleMotor(
+              entry.entity.type,
+              entry.state.heading,
+              (velocity.x - (support?.x ?? 0)) * SCALE,
+              (velocity.z - (support?.z ?? 0)) * SCALE,
+              entry.state.grounded,
+              input,
+            )
+          : undefined;
+      const x = (drive?.vx ?? input.vx) / SCALE + (support?.x ?? 0),
+        z = (drive?.vy ?? input.vy) / SCALE + (support?.z ?? 0);
       // A grounded motor follows the support tangent. Keeping last tick's tiny
       // downward velocity makes a fixed box snag at a ramp/deck junction.
       let vertical = entry.state.grounded
@@ -421,23 +437,14 @@ export class PhysicsScene {
       }
       entry.body.setLinvel(
         {
-          x: input.vx / SCALE + (support?.x ?? 0),
+          x,
           y: vertical,
-          z: input.vy / SCALE + (support?.z ?? 0),
+          z,
         },
         true,
       );
-      if (entry.kind === "vehicle") {
-        const angle = entry.state.heading,
-          delta =
-            input.heading === undefined
-              ? 0
-              : Math.atan2(Math.sin(input.heading - angle), Math.cos(input.heading - angle));
-        entry.body.setAngvel(
-          { x: 0, y: -Math.max(-3, Math.min(3, delta / PHYSICS_DT)), z: 0 },
-          true,
-        );
-      }
+      if (drive?.yawRate !== undefined)
+        entry.body.setAngvel({ x: 0, y: -drive.yawRate, z: 0 }, true);
     }
     this.world.step();
     this.contacts.clear();
