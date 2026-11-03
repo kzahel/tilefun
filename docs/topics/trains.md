@@ -1,5 +1,14 @@
 # Generated railways and retained train assets
 
+[219](../tactical/219-vehicle-contact-and-train-continuity.md) keeps a ridden
+consist on one predicted presentation timeline/correction, including carriages
+outside immediate player proximity. Shared character motors retain departure
+support velocity through flight, with ordinary air steering; later train
+acceleration is not inherited. Same-world side contacts consume blocked inherited
+motion and explicit relocation clears it. Frame `0x13` carries this replay state;
+reload co-op endpoints together.
+
+
 Status: generated autonomous services, station recall and shared-physics roof riding restored in 218; inside driving/manual whistle remain deferred.
 Updated: 2026-11-03.
 

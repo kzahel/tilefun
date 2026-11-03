@@ -1,6 +1,7 @@
 import { afterEach, expect, it } from "vitest";
 import { required } from "../art/ArtCatalog.js";
 import { Direction } from "../entities/Entity.js";
+import { createPlayer } from "../entities/Player.js";
 import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { createVehicle } from "../traffic/Vehicle.js";
@@ -184,5 +185,31 @@ it("rights an overturned car on the same floor and lets the parked suspension sl
     scene.step(new Map(), geometry);
   }
   expect(Math.abs(car.wz ?? Infinity)).toBeLessThan(0.5);
+  expect(scene.bodyState(1)?.sleeping).toBe(true);
+});
+
+it("settles after a player approaches and releases a side push without repeated suspension hops", async () => {
+  const scene = await create(),
+    car = createVehicle("compact-1", 0, 0, Direction.Right),
+    player = createPlayer(0, 100),
+    flat = { ...geometry, queryProps: () => [] };
+  car.id = 1;
+  player.id = 2;
+  const actors = [car, player];
+  for (let tick = 0; tick < 120; tick++) {
+    scene.synchronize(actors);
+    scene.step(new Map(), flat);
+  }
+  let low = Infinity,
+    high = -Infinity;
+  for (let tick = 0; tick < 720; tick++) {
+    scene.synchronize(actors);
+    scene.step(new Map([[2, { vx: 0, vy: tick < 90 ? -64 : 0 }]]), flat);
+    const z = car.wz ?? 0;
+    low = Math.min(low, z);
+    high = Math.max(high, z);
+  }
+  expect(car.position.wy).toBeLessThan(-1); // Actual side pushing still works.
+  expect(high - low).toBeLessThan(0.5);
   expect(scene.bodyState(1)?.sleeping).toBe(true);
 });

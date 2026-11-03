@@ -676,9 +676,24 @@ export class PlayerPredictor {
   private touchingIds(): Set<number> {
     const player = this.predicted;
     const touching = new Set<number>(player ? [player.parentId ?? player.id, player.id] : []);
-    for (const id of touching)
-      for (const neighbor of this.scene?.contactIds(id) ?? []) touching.add(neighbor);
+    this.expandCoherentMembers(touching);
     return touching;
+  }
+  /** A prescribed group shares both predicted time and correction. Proximity alone
+   * still cannot transfer a player's correction to unrelated parked bodies. */
+  private expandCoherentMembers(members: Set<number>) {
+    const groups = new Map<number, number[]>();
+    for (const e of this.published.values()) {
+      if (e.physicsGroupId === undefined) continue;
+      const ids = groups.get(e.physicsGroupId) ?? [];
+      ids.push(e.id);
+      groups.set(e.physicsGroupId, ids);
+    }
+    for (const id of members) {
+      for (const neighbor of this.scene?.contactIds(id) ?? []) members.add(neighbor);
+      const group = this.published.get(id)?.physicsGroupId;
+      if (group !== undefined) for (const member of groups.get(group) ?? []) members.add(member);
+    }
   }
   presentationClock(presentationSeconds: number): CameraPresentationTime | null {
     if (!this.active || !this.scene) return null;
@@ -713,8 +728,7 @@ export class PlayerPredictor {
         if (Math.hypot(dx, dy) <= 24) component.add(entity.id);
       }
     }
-    for (const id of component)
-      for (const neighbor of scene.contactIds(id) ?? []) component.add(neighbor);
+    this.expandCoherentMembers(component);
     const touching = this.correctionMembers;
     const error = this.error();
     // A correction must not lift an entire contact stack off its solved floor.

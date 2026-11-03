@@ -1,5 +1,12 @@
 # General 3D physics backend
 
+[219](../tactical/219-vehicle-contact-and-train-continuity.md) removes the chassis
+manual-sleep shortcut and preserves departure support velocity across airborne
+motor ticks. Rapier owns settling/sleeping; the single common step and normal
+suspension/ramp/tumbling behavior remain. Numerical frame `0x13` includes the two
+horizontal inherited-velocity components and is incompatible with older peers.
+
+
 [218](../tactical/218-traffic-and-rail-gameplay-recovery.md) restores contextual
 arcade jump assistance in the common scene: a new grounded player jump within
 24px of a rideable vehicle/train roof rises enough to clear that roof by 6px,

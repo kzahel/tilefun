@@ -25,8 +25,10 @@ const FIELDS = [
   "desiredHeading",
   "desiredDriveSpeed",
   "desiredSteering",
+  "inheritedVx",
+  "inheritedVy",
 ] as const;
-const BODY_BYTES = 109;
+const BODY_BYTES = 117;
 const HEADER_BYTES = 16;
 const CONTACT_BYTES = 8;
 const MAX_CONTACTS = (MAX_PREDICTION_BODIES * (MAX_PREDICTION_BODIES - 1)) / 2;
@@ -202,6 +204,7 @@ export function readPhysicsState(
       const value = finite(view.getFloat32(offset, true));
       offset += 4;
       if (
+        ((field === "inheritedVx" || field === "inheritedVy") && value === 0) ||
         (field === "altitude" && !(flags & 16)) ||
         (field === "desiredHeading" && !(flags & 32)) ||
         (field === "desiredDriveSpeed" && !(flags & 64)) ||

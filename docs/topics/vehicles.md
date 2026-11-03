@@ -1,5 +1,13 @@
 # Vehicles: shared physics baseline
 
+[219](../tactical/219-vehicle-contact-and-train-continuity.md) removes premature
+manual chassis sleeping: it discarded spring impulses/velocity before equilibrium,
+allowing nearby contacts to restart a multi-pixel dip/hop. Ordinary Rapier island
+sleeping retains suspension settling and parked efficiency. Dump/tailgate, cargo,
+tow and transporter controls are still retired, not missing due to touch layout;
+restoring them requires articulated collision/authority in the shared world.
+
+
 [218](../tactical/218-traffic-and-rail-gameplay-recovery.md) fixes wider-turn
 lookahead joining behind the actual outgoing point, which could steer traffic
 across oncoming lanes and leave a permanent jam. Route choice prefers a continuing

@@ -345,6 +345,8 @@ export class PhysicsScene {
     s.normalX = s.normalZ = 0;
     s.normalY = 1;
     delete s.supportId;
+    delete s.inheritedVx;
+    delete s.inheritedVy;
     for (const neighbor of this.contacts.get(entity.id) ?? [])
       this.contacts.get(neighbor)?.delete(entity.id);
     this.contacts.delete(entity.id);
@@ -612,8 +614,14 @@ export class PhysicsScene {
               input,
             )
           : undefined;
-      const x = (drive?.vx ?? input.vx) / SCALE + (support?.x ?? 0),
-        z = (drive?.vy ?? input.vy) / SCALE + (support?.z ?? 0);
+      if (entry.state.grounded) {
+        if (support?.x) entry.state.inheritedVx = support.x * SCALE;
+        else delete entry.state.inheritedVx;
+        if (support?.z) entry.state.inheritedVy = support.z * SCALE;
+        else delete entry.state.inheritedVy;
+      }
+      const x = ((drive?.vx ?? input.vx) + (entry.state.inheritedVx ?? 0)) / SCALE,
+        z = ((drive?.vy ?? input.vy) + (entry.state.inheritedVy ?? 0)) / SCALE;
       // A grounded motor follows the support tangent. Keeping last tick's tiny
       // downward velocity makes a fixed box snag at a ramp/deck junction.
       let vertical = entry.state.grounded
@@ -628,7 +636,8 @@ export class PhysicsScene {
             (input.altitude / SCALE + entry.halfY - entry.body.translation().y) / PHYSICS_DT;
       } else if (jump && entry.state.grounded) {
         vertical =
-          assistedJumpVelocity(entry.entity, entry.state, this.bodies.values(), gravity) / SCALE;
+          assistedJumpVelocity(entry.entity, entry.state, this.bodies.values(), gravity) / SCALE +
+          (support?.y ?? 0);
         entry.state.grounded = false;
         delete entry.state.supportId;
       }
@@ -655,11 +664,8 @@ export class PhysicsScene {
     const prepared = vehicleInputs.map(({ entry, input }) => ({
       entry,
       impulses:
-        entry.chassis?.prepare(
-          input,
-          entry.state.heading,
-          (origin, direction, length) => this.wheelContact(origin, direction, length, entry),
-          Math.abs(entry.state.z - entry.state.prevZ) < 0.01,
+        entry.chassis?.prepare(input, entry.state.heading, (origin, direction, length) =>
+          this.wheelContact(origin, direction, length, entry),
         ) ?? [],
     }));
     for (const { entry, impulses } of prepared)
@@ -738,6 +744,20 @@ export class PhysicsScene {
         const normal = manifold.normal(),
           factor = flipped ? -1 : 1;
         const ny = normal.y * factor;
+        if (touching && Math.abs(ny) < 0.5) {
+          // A wall consumes inherited flight momentum; it must not reappear
+          // after the motor walks clear of the obstacle on a later air tick.
+          const nx = normal.x * factor,
+            nz = normal.z * factor;
+          const into = (state.inheritedVx ?? 0) * nx + (state.inheritedVy ?? 0) * nz;
+          const horizontal = nx * nx + nz * nz;
+          if (into > 0 && horizontal > 0) {
+            state.inheritedVx = (state.inheritedVx ?? 0) - (into * nx) / horizontal;
+            state.inheritedVy = (state.inheritedVy ?? 0) - (into * nz) / horizontal;
+            if (Math.abs(state.inheritedVx) < 0.001) delete state.inheritedVx;
+            if (Math.abs(state.inheritedVy) < 0.001) delete state.inheritedVy;
+          }
+        }
         const supportVelocity = other.parent()?.linvel();
         const separating =
           -(

@@ -4,6 +4,7 @@ import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
 import type { Movement } from "../input/ActionManager.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
+import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { PlayerSession } from "../server/PlayerSession.js";
@@ -421,6 +422,10 @@ it("does not transfer a player's display correction to a nearby car or NPC befor
     actors: [npc],
     parkedVehicles: [{ model: "compact-1", wx: 100, wy: 100, facing: 3 }],
   });
+  // Establish the stationary parked state before testing presentation correction,
+  // rather than comparing different ticks of the initial suspension settling.
+  for (let tick = 0; tick < 120; tick++) f.s.tick();
+  f.receive(f.s.frames());
   const car = f.view.serverEntities.find((e) => e.type === "vehicle-v1:compact-1");
   if (!car) throw Error("Missing car");
   // The jump has not reached authority; only the later walking command has.
@@ -672,4 +677,24 @@ it("publishes coherent seat membership without advancing a manual physics tick",
   expect(f.view.physicsState?.bodies.some((b) => b.id === f.view.serverPlayerEntity.id)).toBe(true);
   expect(f.predictor.recoveryDiagnostics.status).toBe("ready");
   expect(f.s.realm.collisionDiagnostics?.worldSteps).toBe(before);
+});
+
+it("presents a ridden consist at one predicted time including distant uncontacted carriages", async () => {
+  const f = await setup(cityTrainRecipe());
+  const cars = f.view.serverEntities.filter((e) => e.physicsGroupId !== undefined);
+  const middle = cars.find((e) => e.id === e.physicsGroupId);
+  if (!middle || cars.length !== 3) throw Error("Missing generated service");
+  await f.s.command({ kind: "teleport", position: middle.position, z: 44 });
+  await f.s.step(idle);
+  f.receive(f.s.frames());
+  f.input(2, idle);
+  const buffered = structuredClone(f.view.serverEntities);
+  for (const c of buffered) if (c.physicsGroupId !== undefined) c.position.wx -= 24;
+  for (const alpha of [0.25, 0.75, 1]) {
+    const shown = f.predictor.presentEntities(alpha, buffered);
+    for (const original of cars) {
+      const c = shown.find((e) => e.id === original.id);
+      expect(c?.position.wx).toBeCloseTo(original.position.wx, 2);
+    }
+  }
 });

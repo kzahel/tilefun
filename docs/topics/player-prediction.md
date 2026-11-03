@@ -1,5 +1,13 @@
 # Player prediction and moving contacts
 
+[219](../tactical/219-vehicle-contact-and-train-continuity.md) expands both active
+presentation membership and solved correction membership through replicated
+`physicsGroupId`. A train's distant carriage cannot remain buffered while its
+ridden carriage is predicted. Unrelated nearby bodies still do not inherit a
+player correction. Retained departure support velocity is part of numerical
+frame `0x13`, so midflight replay does not lose or double carrier momentum.
+
+
 ## Steady movement pacing (211/212)
 
 [211](../tactical/211-movement-pacing-investigation.md) reproduces desktop clear-ground

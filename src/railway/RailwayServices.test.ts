@@ -3,8 +3,10 @@ import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
 import { PhysicsScene } from "../physics/PhysicsScene.js";
+import type { MotionIntent } from "../physics/PhysicsState.js";
 import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
@@ -217,5 +219,113 @@ it("replicates coherent carriage groups and replays the entire consist without p
   } finally {
     authority.dispose();
     client.dispose();
+  }
+});
+
+it("retains train departure momentum through a jump, steering, wire replay and landing", async () => {
+  const scene = await PhysicsScene.create(),
+    replay = await PhysicsScene.create();
+  const train = createTrain(0, 32),
+    player = createPlayer(0, 32);
+  train.id = 1;
+  player.id = 2;
+  player.wz = 44;
+  const actors = [train, player];
+  const moving = new Map([[1, { vx: 96, vy: 0, altitude: 0, heading: 0 }]]);
+  try {
+    for (let tick = 0; tick < 30; tick++) {
+      scene.synchronize(actors);
+      scene.step(moving, ground);
+    }
+    const relative = player.position.wx - train.position.wx;
+    scene.step(
+      new Map<number, MotionIntent>([...moving, [2, { vx: 0, vy: 0, jump: true }]]),
+      ground,
+    );
+    const frame = decodeServerMessage(
+      encodeServerMessage({
+        type: "frame",
+        serverTick: 31,
+        lastProcessedInputSeq: 0,
+        playerEntityId: 2,
+        entityBaselines: actors.map(serializeEntity),
+        physics: scene.snapshot(),
+      }),
+    );
+    if (frame.type !== "frame") throw Error("Missing frame");
+    replay.synchronize(required(frame.entityBaselines).map(deserializeEntity));
+    replay.restore(required(frame.physics));
+    for (let tick = 0; tick < 20; tick++) {
+      // Train accelerates after departure; airborne momentum stays at takeoff speed.
+      const intents = new Map([
+        [1, { vx: 144, vy: 0, altitude: 0, heading: 0 }],
+        [2, { vx: 24, vy: 0 }],
+      ]);
+      scene.step(intents, ground);
+      replay.step(intents, ground);
+      expect(player.velocity?.vx).toBeCloseTo(120, 2);
+      expect(replay.bodyState(2)?.x).toBeCloseTo(player.position.wx, 3);
+    }
+    expect(player.wz).toBeGreaterThan(50);
+    // Match the original support speed, release steering and land back on the roof.
+    for (let tick = 0; tick < 60; tick++) scene.step(moving, ground);
+    expect(scene.bodyState(2)?.grounded).toBe(true);
+    expect(scene.bodyState(2)?.supportId).toBe(1);
+    expect(player.position.wx - train.position.wx).toBeCloseTo(relative - 8, 0);
+    scene.step(new Map(), ground);
+    expect(player.velocity?.vx).toBeCloseTo(0, 2);
+    expect(scene.bodyState(2)?.inheritedVx).toBeUndefined();
+  } finally {
+    scene.dispose();
+    replay.dispose();
+  }
+});
+
+it("consumes inherited flight motion at an elevated wall and clears it on explicit relocation", async () => {
+  const scene = await PhysicsScene.create(),
+    train = createTrain(0, 32),
+    player = createPlayer(0, 32);
+  train.id = 1;
+  player.id = 2;
+  player.wz = 44;
+  const actors = [train, player];
+  const moving = new Map([[1, { vx: 96, vy: 0, altitude: 0, heading: 0 }]]);
+  try {
+    for (let tick = 0; tick < 30; tick++) {
+      scene.synchronize(actors);
+      scene.step(moving, ground);
+    }
+    scene.step(
+      new Map<number, MotionIntent>([...moving, [2, { vx: 0, vy: 0, jump: true }]]),
+      ground,
+    );
+    const wall = surfaceProp(
+      { left: player.position.wx + 12, right: player.position.wx + 28, top: 0, bottom: 64 },
+      {
+        id: "overhead-wall",
+        spaceId: "upper",
+        z: 100,
+        riseX: 0,
+        riseY: 0,
+        thickness: 44,
+        connectsTo: [],
+      },
+    );
+    const geometry = {
+      ...ground,
+      queryProps: () => [wall],
+      geometryVersion: () => ({ identity: wall, revision: 0 }),
+    };
+    for (let tick = 0; tick < 12; tick++) scene.step(moving, geometry);
+    expect(scene.bodyState(2)?.grounded).toBe(false);
+    expect(scene.bodyState(2)?.inheritedVx).toBeUndefined();
+    expect(player.velocity?.vx).toBeCloseTo(0, 2);
+    teleportBody(player, { wx: 1000, wy: 32, wz: 100 });
+    scene.synchronize(actors);
+    scene.step(moving, ground);
+    expect(player.velocity?.vx).toBeCloseTo(0, 2);
+    expect(scene.bodyState(2)?.inheritedVx).toBeUndefined();
+  } finally {
+    scene.dispose();
   }
 });

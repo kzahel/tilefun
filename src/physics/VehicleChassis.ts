@@ -71,7 +71,7 @@ export class VehicleChassis {
       z: p.y / SCALE,
     }));
   }
-  prepare(input: MotionIntent, heading: number, query: WheelQuery, settled = false) {
+  prepare(input: MotionIntent, heading: number, query: WheelQuery) {
     const target = input.driveSpeed ?? 0;
     if (this.body.isSleeping() && target === 0) return [];
     if (target !== 0) this.body.wakeUp();
@@ -147,19 +147,6 @@ export class VehicleChassis {
       impulses.push({ point, impulse, ...(hit.body ? { support: hit.body } : {}) });
       this.grounded = true;
       if (hit.id !== undefined) this.supports.add(hit.id);
-    }
-    if (
-      target === 0 &&
-      impulses.length === this.connections.length &&
-      !impulses.some((i) => i.support?.isDynamic()) &&
-      settled &&
-      Math.hypot(velocity.x, velocity.z) < 0.06 &&
-      Math.hypot(angular.x, angular.y, angular.z) < 0.2
-    ) {
-      this.body.setLinvel({ x: 0, y: 0, z: 0 }, false);
-      this.body.setAngvel({ x: 0, y: 0, z: 0 }, false);
-      this.body.sleep();
-      return [];
     }
     return impulses;
   }

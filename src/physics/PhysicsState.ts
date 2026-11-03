@@ -48,6 +48,9 @@ export interface PhysicsBodyState {
   normalY: number;
   normalZ: number;
   supportId?: number;
+  /** Horizontal support velocity captured at departure, independent of later carrier motion. */
+  inheritedVx?: number;
+  inheritedVy?: number;
   /** Exclusive physics tick deadline for a network-controlled motor. */
   controlUntil?: number;
 }
