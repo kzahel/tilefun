@@ -129,19 +129,23 @@ function GeometryFixtures({ initial }: { initial: string }) {
   );
   const starts =
     generated?.starts ??
-    (fixture === "car-dynamics"
-      ? DYNAMICS_STARTS
-      : fixture === "traffic"
-        ? TRAFFIC_STARTS
-        : vehicle
-          ? garage
-            ? VEHICLE_GARAGE_STARTS
-            : VEHICLE_BRIDGE_STARTS
-          : garage
-            ? GARAGE_STARTS
-            : fixture === "crossing"
-              ? CROSSING_STARTS
-              : GEOMETRY_STARTS);
+    (fixture === "train"
+      ? { bench: { position: recipe.player.position, z: 0 } }
+      : fixture === "traffic-crowd"
+        ? { sidewalk: { position: recipe.player.position, z: 0 } }
+        : fixture === "car-dynamics"
+          ? DYNAMICS_STARTS
+          : fixture === "traffic"
+            ? TRAFFIC_STARTS
+            : vehicle
+              ? garage
+                ? VEHICLE_GARAGE_STARTS
+                : VEHICLE_BRIDGE_STARTS
+              : garage
+                ? GARAGE_STARTS
+                : fixture === "crossing"
+                  ? CROSSING_STARTS
+                  : GEOMETRY_STARTS);
   // biome-ignore lint/correctness/useExhaustiveDependencies: restart deliberately replaces the Worker and canvas.
   useEffect(() => {
     const c = required(canvas.current);

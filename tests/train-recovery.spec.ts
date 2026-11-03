@@ -106,3 +106,32 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   await page.goto("about:blank");
   await expect.poll(() => page.workers().length).toBe(0);
 });
+
+test("embedded station keeps its bench start, paused reload and shared recall controls", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto("/tilefun/workshop.html?geometry=train&renderer=gpu&meshes#/tool/world-geometry");
+  const canvas = page.getByLabel("World geometry scene");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  const call = page.getByRole("button", { name: /^Call train/ });
+  await expect(call).toBeVisible();
+  await call.tap();
+  await expect(page.getByText("Poof! Your train is here.", { exact: true })).toBeVisible();
+  const x = Number(await canvas.getAttribute("data-player-x"));
+  expect(Math.abs(x)).toBeGreaterThan(1000);
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+  await expect(canvas).toHaveAttribute("data-reload-count", "1");
+  expect(Number(await canvas.getAttribute("data-player-x"))).toBeCloseTo(x, 1);
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await page.getByRole("button", { name: "bench", exact: true }).click();
+  await expect(call).toBeVisible();
+  await canvas.focus();
+  await page.keyboard.press("e");
+  await expect(page.getByText("Poof! Your train is here.", { exact: true })).toBeVisible();
+  await page.getByRole("link", { name: "All tools", exact: true }).click();
+  await expect.poll(() => page.workers().length).toBe(0);
+  expect(errors).toEqual([]);
+});
