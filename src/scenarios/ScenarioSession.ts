@@ -17,6 +17,7 @@ import {
   encodeClientMessage,
   encodeServerMessage,
 } from "../shared/binaryCodec.js";
+import { buildLaneGraph } from "../traffic/LaneGraph.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioCommand } from "./ScenarioProtocol.js";
@@ -51,6 +52,18 @@ export class ScenarioSession {
   private seq = 0;
   private closed = false;
   private constructor(readonly recipe: ScenarioRecipe) {
+    if (
+      (recipe.trafficRoads?.length ?? 0) > 64 ||
+      recipe.trafficRoads?.some(
+        (s) =>
+          ![s.a.x, s.a.y, s.b.x, s.b.y, s.width].every(Number.isSafeInteger) ||
+          s.width < 2 ||
+          s.width > 64 ||
+          (s.a.x !== s.b.x && s.a.y !== s.b.y) ||
+          [s.a.x, s.a.y, s.b.x, s.b.y].some((n) => Math.abs(n) > 8192),
+      )
+    )
+      throw Error("Invalid traffic road fixture");
     if (recipe.version !== 1) throw Error("Unsupported scenario recipe");
     if ((recipe.actors?.length ?? 0) > 1024 || (recipe.parkedVehicles?.length ?? 0) > 256)
       throw Error("Scenario actor budget exceeded");
@@ -115,7 +128,9 @@ export class ScenarioSession {
       async renameWorld() {},
       async deleteWorld() {},
     };
+    const graph = this.recipe.trafficRoads ? buildLaneGraph(this.recipe.trafficRoads) : undefined;
     this.realm = new Realm([baseGameMod], {
+      ...(graph ? { vehicleSource: { trafficNetwork: () => graph } } : {}),
       gravity: () => this.gravity,
       ambientSpawns: false,
       ...(this.recipe.landscape ? { landscape: this.recipe.landscape } : {}),

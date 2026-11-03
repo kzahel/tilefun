@@ -9,6 +9,15 @@ owns authoring semantics; [prediction](player-prediction.md) owns input replay;
 [189](../tactical/189-rapier-physics-prototype.md) owns the first bounded experiment;
 [190](../tactical/190-rapier-prediction-and-realm-proof.md) owns prediction/Realm integration.
 
+## Rolling cars and ordinary traffic (209)
+
+[209](../tactical/209-car-driving-and-autonomous-traffic.md) adds a shared grounded
+traction motor with signed speed, acceleration/braking, reverse, lateral grip and
+rolling steering. Airborne momentum and upright shapes remain. Players and bounded
+road planning supply intent to the same single world step; no route code writes
+physical poses. Numerical replay retains speed/steering targets and previous yaw using frame 0x10.
+The vehicle topic owns traffic population, persistence and takeover policy.
+
 ## Ground seams and movement pacing (208)
 
 [208](../tactical/208-ground-seams-and-movement-pacing.md) resolves the remaining

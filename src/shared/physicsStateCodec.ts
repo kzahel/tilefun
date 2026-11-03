@@ -13,6 +13,7 @@ const FIELDS = [
   "vy",
   "vz",
   "heading",
+  "prevHeading",
   "groundZ",
   "desiredVx",
   "desiredVy",
@@ -24,7 +25,7 @@ const FIELDS = [
   "desiredDriveSpeed",
   "desiredSteering",
 ] as const;
-const BODY_BYTES = 105;
+const BODY_BYTES = 109;
 const HEADER_BYTES = 16;
 const CONTACT_BYTES = 8;
 const MAX_CONTACTS = (MAX_PREDICTION_BODIES * (MAX_PREDICTION_BODIES - 1)) / 2;
@@ -163,6 +164,7 @@ export function readPhysicsState(
       vy: 0,
       vz: 0,
       heading: 0,
+      prevHeading: 0,
       groundZ: 0,
       desiredVx: 0,
       desiredVy: 0,

@@ -495,6 +495,7 @@ it("predicts normalized basic car steering and derives its seat from the same bo
       .find((e) => e.id === car.id);
     expect(after?.position.wx).toBeCloseTo(before?.position.wx ?? Infinity, 2);
     expect(after?.position.wy).toBeCloseTo(before?.position.wy ?? Infinity, 2);
+    expect(after?.vehicleHeading).toBeCloseTo(before?.vehicleHeading ?? Infinity, 2);
   }
   expect(car.position.wx).toBeGreaterThan(120);
 });

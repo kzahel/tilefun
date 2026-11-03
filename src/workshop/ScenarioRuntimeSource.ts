@@ -9,6 +9,7 @@ import physicsState from "../physics/PhysicsState.ts?raw";
 import controls from "../physics/PlayerControls.ts?raw";
 import clippedTerrain from "../physics/rapier/ClippedTerrain.ts?raw";
 import collisionGeometry from "../physics/rapier/CollisionGeometry.ts?raw";
+import vehicleMotor from "../physics/VehicleMotor.ts?raw";
 import client from "../scenarios/ScenarioClient.ts?raw";
 import presentation from "../scenarios/ScenarioPresentationHost.ts?raw";
 import protocol from "../scenarios/ScenarioProtocol.ts?raw";
@@ -20,6 +21,9 @@ import realm from "../server/Realm.ts?raw";
 import realmWildlife from "../server/RealmWildlife.ts?raw";
 import clock from "../server/ServerLoop.ts?raw";
 import physicsCodec from "../shared/physicsStateCodec.ts?raw";
+import roadTraffic from "../traffic/RoadTraffic.ts?raw";
+import roadTurn from "../traffic/RoadTurn.ts?raw";
+import vehicleRegistry from "../traffic/VehicleRegistry.ts?raw";
 import channel from "../transport/OrderedWorkerChannel.ts?raw";
 import fierceProfiles from "../wildlife/FierceCreatures.ts?raw";
 import fierceDens from "../wildlife/FierceDens.ts?raw";
@@ -39,6 +43,10 @@ export const scenarioRuntimeSource = {
   physicsDefaults,
   gravity,
   controls,
+  vehicleMotor,
+  roadTraffic,
+  roadTurn,
+  vehicleRegistry,
   predictor,
   physicsCodec,
   replica,

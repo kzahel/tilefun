@@ -1,5 +1,12 @@
 # Embedded engine labs
 
+[209](../tactical/209-car-driving-and-autonomous-traffic.md) restores Workshop's
+Driving and traffic tool using a data-only road/crossing fixture in World Geometry.
+Canonical LaneGraph, Realm planning, shared motor and normal Worker frames own NPC
+motion; the page only observes/controls. Native road geometry fixtures supply a
+bounded generated-lane source, and normal regional worlds use their existing source.
+Pause/reload and NPC motion are exposed through the shared presentation host.
+
 [208](../tactical/208-ground-seams-and-movement-pacing.md) keeps game/lab static
 geometry in the same welded compound and preserves previous numerical poses at
 restore. Both consumers use monotonic camera time and committed presentation

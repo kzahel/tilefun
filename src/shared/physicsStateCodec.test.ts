@@ -22,6 +22,7 @@ const body: PhysicsBodyState = {
   vy: -16.25,
   vz: 48,
   heading: 1.5,
+  prevHeading: 1.25,
   groundZ: 2.5,
   jumpHeld: true,
   grounded: false,
@@ -44,7 +45,7 @@ function frame(physics: PhysicsState): FrameMessage {
 it("ordinary binary frames retain one common physics tick, motor/support state and precise world coordinates", () => {
   const wire = encodeServerMessage(frame(state));
   expect(decodeServerMessage(wire)).toEqual(frame(state));
-  expect(wire.byteLength).toBe(27 + 1 + 16 + 105);
+  expect(wire.byteLength).toBe(27 + 1 + 16 + 109);
   const minimal = { ...state, bodies: [{ ...body, kind: "loose" as const }] };
   delete minimal.bodies[0]?.altitude;
   delete minimal.bodies[0]?.desiredHeading;
@@ -76,7 +77,7 @@ it("round-trips bounded solved pairs and rejects duplicate or unknown contact id
   };
   const wire = encodeServerMessage(frame(coupled));
   expect(decodeServerMessage(wire)).toEqual(frame(coupled));
-  expect(wire.byteLength).toBe(27 + 1 + 16 + 2 * 105 + 8);
+  expect(wire.byteLength).toBe(27 + 1 + 16 + 2 * 109 + 8);
   expect(() =>
     encodeServerMessage(
       frame({

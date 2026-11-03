@@ -971,7 +971,7 @@ function ToolPage() {
       </AuthGate>
     );
   if (tool.id === "car-projection") return <CarProjectionPage />;
-  if (tool.id === "traffic") return <WorldGeometryPage defaultFixture="realm" />;
+  if (tool.id === "traffic") return <WorldGeometryPage defaultFixture="traffic" />;
   if (tool.id === "world-geometry") return <WorldGeometryPage />;
   if (tool.id === "physics") return <PhysicsPage />;
   if (tool.id === "vehicles")

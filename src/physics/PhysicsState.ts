@@ -29,6 +29,7 @@ export interface PhysicsBodyState {
   vy: number;
   vz: number;
   heading: number;
+  prevHeading: number;
   jumpHeld: boolean;
   grounded: boolean;
   groundZ: number;

@@ -214,6 +214,7 @@ export class PhysicsScene {
             vy: entity.velocity?.vy ?? 0,
             vz: entity.jumpVZ ?? 0,
             heading: kind === "vehicle" ? dimensions.yaw : 0,
+            prevHeading: kind === "vehicle" ? dimensions.yaw : 0,
             jumpHeld: !!((entity.jumpInputState ?? 0) & 2),
             grounded: entity.jumpVZ === undefined,
             groundZ: entity.groundZ ?? entity.wz ?? 0,
@@ -272,6 +273,7 @@ export class PhysicsScene {
       s.prevX = s.x;
       s.prevY = s.y;
       s.prevZ = s.z;
+      s.prevHeading = s.heading;
     }
     s.vx = entity.velocity?.vx ?? 0;
     s.vy = entity.velocity?.vy ?? 0;
@@ -462,6 +464,7 @@ export class PhysicsScene {
     state.prevX = state.x;
     state.prevY = state.y;
     state.prevZ = state.z;
+    state.prevHeading = state.heading;
     state.x = (p.x + this.origin.x - entry.offsetX) * SCALE;
     state.y = (p.z + this.origin.z - entry.offsetY) * SCALE;
     state.z = (p.y - entry.halfY) * SCALE;
@@ -714,8 +717,10 @@ export class PhysicsScene {
       // Publish state and contact membership supplied by the same snapshot.
       entry.entity.prevPosition = { wx: state.prevX, wy: state.prevY };
       entry.entity.prevWz = state.prevZ;
-      if (entry.kind === "vehicle")
-        entry.entity.vehicleHeading = entry.entity.prevVehicleHeading = state.heading;
+      if (entry.kind === "vehicle") {
+        entry.entity.vehicleHeading = state.heading;
+        entry.entity.prevVehicleHeading = state.prevHeading;
+      }
       entry.entity.position.wx = state.x;
       entry.entity.position.wy = state.y;
       entry.entity.wz = state.z;

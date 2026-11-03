@@ -1,5 +1,11 @@
 # Player prediction and moving contacts
 
+[209](../tactical/209-car-driving-and-autonomous-traffic.md) restores rolling car
+controls in the shared kernel. Snapshots include target drive speed and steering;
+replay uses the same grounded traction motor for local driving and held remote
+traffic intent. Road decisions remain authoritative, with the common control
+expiry bounding unknown future NPC commands. No second collision engine or clock.
+
 ## Movement pacing (208)
 
 [208](../tactical/208-ground-seams-and-movement-pacing.md) reproduces camera

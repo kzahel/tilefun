@@ -29,6 +29,8 @@ export interface ScenarioRecipe {
   /** Bounded Worker timings, sampled on explicit diagnostics requests. */
   measurePhysics?: boolean;
   roads?: { left: number; right: number; top: number; bottom: number }[];
+  /** Canonical generated-lane input for ordinary road traffic fixtures. Tile units. */
+  trafficRoads?: import("../traffic/LaneGraph.js").RoadSegment[];
 }
 export const FLAT_SCENARIO = {
   type: "flat",

@@ -1,15 +1,27 @@
 # Vehicles: shared physics baseline
 
-Status: reset 205 delivered; basic upright driving, seats, paint/lights and durable poses use the shared Rapier scene.
+Status: rolling vehicle motor and ordinary autonomous road traffic restored in 209; production qualification in progress.
 Updated: 2026-11-03.
 
-[205](../tactical/205-physics-reset.md) supersedes the delivered-motion contracts below.
-Cars are independent upright bodies driven by ordinary input; a registry owns only
-placement, identity, depot population and saved poses. Generated depots remain;
-autonomous road traffic, parking visitors/racers, wheel-lift towing, transporter
+[209](../tactical/209-car-driving-and-autonomous-traffic.md) restores shared rolling
+driving and ordinary road traffic after reset 205. Players and road planners supply
+one motor with target speed/steering; acceleration/braking, reverse, grip and rolling
+yaw use solved body state inside the single Rapier step. Parked steering cannot
+pivot a car; airborne cars retain momentum. Authority/prediction use identical motors.
+Directional aim and relative controls remain available through normal input.
+
+Sparse deterministic road population, following, junction reservations and route
+progress use retained lane data without writing poses. Road-compatible models are
+selected by width/turning radius; at most 32 autonomous cars are populated per loaded
+registry. Mode/route state persists, old road identities reacquire nearby lanes,
+and player takeover/road release/off-road parking share ordinary lifecycle ownership.
+Generated depots remain parked. Workshop → Driving and traffic uses the same
+ScenarioSession/Worker/Realm and motor, with pause/save/reload and visible NPC cars.
+
+Parking visitors/racers, wheel-lift towing, transporter
 apparatus and tipping-bed/cargo controls are deferred. Their old motion services
 and authority/UI commands are removed. Saved traffic poses remain readable in the
-existing collection; obsolete routes and coupling metadata are discarded. Models,
+existing collection; obsolete legacy routes/coupling remain discarded. Models,
 paints, approved pixels and static layout planners remain unchanged.
 
 New suspension/full tumbling and dynamic vehicle orientation are follow-on work.

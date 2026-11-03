@@ -13,7 +13,11 @@ proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
 
 ## Shared physics frame layout
 
-Current frame tag is `0x0e`. [208](../tactical/208-ground-seams-and-movement-pacing.md)
+Current frame tag is `0x10`. [209](../tactical/209-car-driving-and-autonomous-traffic.md)
+adds target drive speed/steering (two optional float32 motor fields, eight bytes
+per numerical body) for shared car/traffic replay, plus previous heading (four
+bytes) to retain angular interpolation through acknowledgement.
+[208](../tactical/208-ground-seams-and-movement-pacing.md)
 adds previous fixed-tick XYZ as three float32 displacements (12 bytes/body), retaining
 float64 current coordinates and interpolation through zero-replay acknowledgement.
 [207](../tactical/207-nearby-actor-display-corrections.md)

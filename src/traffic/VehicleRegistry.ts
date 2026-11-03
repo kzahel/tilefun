@@ -16,6 +16,8 @@ import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
 import { validVehicleLightState } from "./EmergencyVehicle.js";
+import type { LaneGraph } from "./LaneGraph.js";
+import { RoadTraffic, type TrafficRoute } from "./RoadTraffic.js";
 import {
   applyVehicleFacing,
   createVehicle,
@@ -42,18 +44,24 @@ export interface SavedVehicle {
   emergencyState?: number;
   persistentId?: string;
   originScope?: string;
+  autonomous?: boolean;
+  route?: TrafficRoute;
 }
 export interface VehicleState {
   entity: Entity;
   driverId?: number;
+  autonomous: boolean;
+  route?: TrafficRoute;
 }
 export interface VehicleSource {
   depotVehicles?(cx: number, cy: number): readonly DepotVehicle[];
+  trafficNetwork?(wx: number, wy: number): LaneGraph;
 }
 
 /** Lifecycle and persistence only. The shared scene owns every integration and contact. */
 export class VehicleRegistry {
   readonly states = new Map<number, VehicleState>();
+  readonly traffic = new RoadTraffic(this);
   onChange?: (state: VehicleState, destroyed: boolean) => void;
   onRestore?: (state: VehicleState, record: SavedVehicle) => void;
   canSpawn: (identity: string, wx: number, wy: number) => boolean = () => true;
@@ -131,14 +139,13 @@ export class VehicleRegistry {
       return;
     entity.proceduralId = identity;
     this.entities.spawn(entity);
-    const state = { entity };
+    const state: VehicleState = { entity, autonomous: false };
     this.states.set(entity.id, state);
     this.onChange?.(state, false);
     return state;
   }
   /** Generated depot models keep their durable identities/tombstones. */
   populate(ranges: readonly ChunkRange[]) {
-    if (!this.source.depotVehicles) return;
     const seen = new Set<string>();
     for (const range of ranges)
       for (let cy = range.minCy; cy <= range.maxCy; cy++)
@@ -146,7 +153,7 @@ export class VehicleRegistry {
           const key = `${cx},${cy}`;
           if (seen.has(key)) continue;
           seen.add(key);
-          for (const p of this.source.depotVehicles(cx, cy)) {
+          for (const p of this.source.depotVehicles?.(cx, cy) ?? []) {
             if (this.states.size >= 1024) return;
             if (
               [...this.states.values()].some((s) => s.entity.proceduralId === p.identity) ||
@@ -156,14 +163,18 @@ export class VehicleRegistry {
             this.place(p.model, p.wx, p.wy, p.facing, undefined, p.identity);
           }
         }
+    this.traffic.populate(ranges);
   }
   takeControl(state: VehicleState, playerId: number) {
     state.driverId = playerId;
+    delete state.route;
+    this.onChange?.(state, false);
   }
   releaseControl(state: VehicleState) {
     delete state.driverId;
+    this.onChange?.(state, false);
   }
-  snapshot({ entity: e }: VehicleState): SavedVehicle {
+  snapshot({ entity: e, autonomous, route }: VehicleState): SavedVehicle {
     if (!e.proceduralId) throw Error("Vehicle identity is missing");
     return {
       version: 2,
@@ -178,6 +189,8 @@ export class VehicleRegistry {
       vx: e.velocity?.vx ?? 0,
       vy: e.velocity?.vy ?? 0,
       vz: e.jumpVZ ?? 0,
+      autonomous,
+      ...(route ? { route: { ...route } } : {}),
       ...(e.paintSchemeId === undefined ? {} : { paintSchemeId: e.paintSchemeId }),
       ...(e.emergencyState === undefined ? {} : { emergencyState: e.emergencyState }),
     };
@@ -206,6 +219,17 @@ export class VehicleRegistry {
         identities.has(record.identity) ||
         !DRIVABLE_MODELS.includes(record.model) ||
         !validVehiclePaint(record.model, record.paintSchemeId) ||
+        (record.autonomous !== undefined && typeof record.autonomous !== "boolean") ||
+        (record.route !== undefined &&
+          (!record.route ||
+            typeof record.route.laneId !== "string" ||
+            record.route.laneId.length > 512 ||
+            !Number.isSafeInteger(record.route.choices) ||
+            record.route.choices < 0 ||
+            record.route.choices > 0xffff_ffff ||
+            (record.route.nextId !== undefined &&
+              (typeof record.route.nextId !== "string" || record.route.nextId.length > 512)) ||
+            (record.route.turning !== undefined && typeof record.route.turning !== "boolean"))) ||
         ![
           record.wx,
           record.wy,
@@ -248,7 +272,11 @@ export class VehicleRegistry {
       if (record.emergencyState !== undefined) entity.emergencyState = record.emergencyState;
       applyVehicleFacing(entity);
       this.entities.spawn(entity);
-      const state = { entity };
+      const state: VehicleState = {
+        entity,
+        autonomous: record.autonomous ?? record.identity.startsWith("traffic-v1:"),
+        ...(record.route ? { route: { ...record.route } } : {}),
+      };
       this.states.set(entity.id, state);
       this.onRestore?.(state, record);
     }

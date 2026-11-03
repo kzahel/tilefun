@@ -130,9 +130,9 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
   },
   {
     id: "traffic",
-    name: "Basic driving",
+    name: "Driving and traffic",
     description:
-      "Drive ordinary upright cars with the shared physics kernel; test contacts, ramps and reload.",
+      "Inspect ordinary road traffic, junction queues and rolling car steering with shared Worker physics; drive, pause and save/reload.",
     url: "workshop.html#/tool/traffic",
     mode: "source",
   },

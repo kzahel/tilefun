@@ -11,6 +11,7 @@ import {
 } from "../scenarios/GeneratedCrossingRecipe.js";
 import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { realmPhysicsRecipe } from "../scenarios/RealmPhysicsRecipe.js";
+import { roadTrafficRecipe, TRAFFIC_STARTS } from "../scenarios/RoadTrafficRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { GARAGE_STARTS, undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import {
@@ -29,7 +30,7 @@ export type GeometryCanvas = HTMLCanvasElement & {
   ) => Promise<import("../scenarios/ScenarioProtocol.js").ScenarioResponse["physicsDiagnostics"]>;
   __presentationDiagnostics?: () => ReturnType<ScenarioPresentationHost["getDiagnostics"]>;
 };
-const FIXTURES = ["deck", "garage", "crossing", "car-bridge", "car-garage", "realm"];
+const FIXTURES = ["deck", "garage", "crossing", "car-bridge", "car-garage", "realm", "traffic"];
 export default function WorldGeometryPage({
   defaultFixture = "deck",
 }: {
@@ -71,32 +72,36 @@ function GeometryFixtures({ initial }: { initial: string }) {
   const recipe = useMemo(
     () =>
       generated?.recipe ??
-      (fixture === "realm"
-        ? realmPhysicsRecipe(
-            new URLSearchParams(location.search).has("crowd")
-              ? Number(new URLSearchParams(location.search).get("crowd"))
-              : undefined,
-          )
-        : vehicle
-          ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
-          : fixture === "crossing"
-            ? railCrossingRecipe()
-            : garage
-              ? undergroundGarageRecipe()
-              : worldGeometryRecipe()),
+      (fixture === "traffic"
+        ? roadTrafficRecipe()
+        : fixture === "realm"
+          ? realmPhysicsRecipe(
+              new URLSearchParams(location.search).has("crowd")
+                ? Number(new URLSearchParams(location.search).get("crowd"))
+                : undefined,
+            )
+          : vehicle
+            ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
+            : fixture === "crossing"
+              ? railCrossingRecipe()
+              : garage
+                ? undergroundGarageRecipe()
+                : worldGeometryRecipe()),
     [generated, fixture, garage, vehicle, reverse, vehicleModel],
   );
   const starts =
     generated?.starts ??
-    (vehicle
-      ? garage
-        ? VEHICLE_GARAGE_STARTS
-        : VEHICLE_BRIDGE_STARTS
-      : garage
-        ? GARAGE_STARTS
-        : fixture === "crossing"
-          ? CROSSING_STARTS
-          : GEOMETRY_STARTS);
+    (fixture === "traffic"
+      ? TRAFFIC_STARTS
+      : vehicle
+        ? garage
+          ? VEHICLE_GARAGE_STARTS
+          : VEHICLE_BRIDGE_STARTS
+        : garage
+          ? GARAGE_STARTS
+          : fixture === "crossing"
+            ? CROSSING_STARTS
+            : GEOMETRY_STARTS);
   // biome-ignore lint/correctness/useExhaustiveDependencies: restart deliberately replaces the Worker and canvas.
   useEffect(() => {
     const c = required(canvas.current);
@@ -108,7 +113,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
     const host = new ScenarioPresentationHost(c, recipe, {
       width: 960,
       height: 640,
-      terrain: !!generated || fixture === "realm",
+      terrain: !!generated || fixture === "realm" || fixture === "traffic",
       ...(vehicle || fixture === "realm"
         ? {}
         : {
@@ -119,7 +124,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
       surfaceVisibility: () => settings.current.visibility,
       settings: () => ({
         paused: settings.current.paused,
-        zoom: generated || fixture === "crossing" ? 0.225 : 0.625,
+        zoom: generated || fixture === "crossing" || fixture === "traffic" ? 0.225 : 0.625,
         terrainPacing: "throughput",
       }),
       input: () => ({
@@ -158,6 +163,15 @@ function GeometryFixtures({ initial }: { initial: string }) {
           c.dataset.carY = String(car.position.wy);
           c.dataset.carZ = String(car.wz ?? 0);
           c.dataset.carModel = car.type.slice(11);
+        }
+        const traffic = h.session.view.entities.filter(
+          (e) => e.type.startsWith("vehicle-v1:") && e.id !== h.session.handles.car,
+        );
+        c.dataset.trafficCount = String(traffic.length);
+        const sample = traffic[0];
+        if (sample) {
+          c.dataset.trafficX = String(sample.position.wx);
+          c.dataset.trafficY = String(sample.position.wy);
         }
         const next = `Height ${(p.wz ?? 0).toFixed(1)} · ${c.dataset.support} · space ${c.dataset.space}`;
         if (next !== lastStatus && alive) {
@@ -206,7 +220,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
   return (
     <section>
       <p className="eyebrow">SHARED GAME PHYSICS</p>
-      <h1>World geometry lab</h1>
+      <h1>{fixture === "traffic" ? "Driving and traffic" : "World geometry lab"}</h1>
       <p>
         Walk ramps, cross bridges, pass underneath and drive ordinary upright cars. Arrows/WASD
         move, Space jumps, E enters or leaves a nearby car, R reverses. Touch and controller use the

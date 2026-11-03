@@ -58,8 +58,8 @@ See [embedded labs](topics/embedded-engine-labs.md) for lifecycle and parity lim
 
 ## Transport and requests
 
-Frame tag `0x0e` carries normal entity baselines/deltas plus the bounded numerical
-physics state, including previous poses, solved contact pairs and the motor's exclusive input deadline. Earlier frame tags
+Frame tag `0x10` carries normal entity baselines/deltas plus the bounded numerical
+physics state, including previous poses, solved contact pairs, vehicle motor targets and the motor's exclusive input deadline. Earlier frame tags
 reject and matching endpoint builds are required. Position coordinates retain
 Float64 precision in the physics payload; previous positions use float32 displacement
 from that pose. Reset 205 removed retired equipment fields.

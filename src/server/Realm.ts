@@ -841,6 +841,11 @@ export class Realm {
       this.world.getCollisionIfLoaded(x, y),
     );
     const wasAirborne = new Set(players.filter((p) => p.jumpVZ !== undefined).map((p) => p.id));
+    for (const [id, intent] of this.vehicleRegistry?.traffic.plan(
+      active,
+      this.physicsScene?.physicsTick ?? 0,
+    ) ?? [])
+      intents.set(id, intent);
     for (const session of activeSessions) {
       const movement = controls.get(session.player.id);
       if (!movement) continue;
