@@ -269,7 +269,7 @@ describe("EntitySnapshot binary codec", () => {
       entityExits: [12, 13],
     };
     const bytes = encodeServerMessage(msg);
-    expect(new DataView(bytes).getUint8(0)).toBe(0x11);
+    expect(new DataView(bytes).getUint8(0)).toBe(0x12);
     expect(roundtripServer(msg)).toEqual(msg);
   });
 

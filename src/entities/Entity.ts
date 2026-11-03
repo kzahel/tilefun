@@ -128,6 +128,8 @@ export interface Entity {
   /** Driven-car nose angle in world radians, retained while parked. */
   vehicleHeading?: number;
   bodyRotation?: BodyRotation;
+  /** Replicated coherent prescribed-body group; never inferred from private service identity. */
+  physicsGroupId?: number;
   prevBodyRotation?: BodyRotation;
   bodyAngularVelocity?: AngularVelocity;
   /** Previous shared-step orientation for rendering. */

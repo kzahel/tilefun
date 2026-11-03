@@ -1449,6 +1449,32 @@ export class GameServer {
 
     // Global messages handled by GameServer
     switch (msg.type) {
+      case "call-train": {
+        void this.trackOperation(
+          (async () => {
+            const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+            if (
+              !realm?.railways ||
+              session.transitioning ||
+              realm.saveManager?.pressured ||
+              !Number.isSafeInteger(msg.benchId)
+            )
+              throw Error("Train service is unavailable right now.");
+            await realm.railways.call(session, msg.benchId);
+          })(),
+        )
+          .then(() =>
+            this.transport.send(clientId, { type: "vehicle-controlled", requestId: msg.requestId }),
+          )
+          .catch((error) =>
+            this.transport.send(clientId, {
+              type: "request-error",
+              requestId: msg.requestId,
+              message: error instanceof Error ? error.message : String(error),
+            }),
+          );
+        return;
+      }
       case "enter-vehicle":
       case "recover-vehicle":
       case "exit-vehicle": {

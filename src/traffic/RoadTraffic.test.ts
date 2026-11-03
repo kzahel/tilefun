@@ -3,7 +3,7 @@ import { required } from "../art/ArtCatalog.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
-import { roadTrafficRecipe } from "../scenarios/RoadTrafficRecipe.js";
+import { crowdedRoadTrafficRecipe, roadTrafficRecipe } from "../scenarios/RoadTrafficRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { buildLaneGraph, nextLanes } from "./LaneGraph.js";
@@ -266,3 +266,44 @@ it("reconnects a legacy road car inside a junction", async () => {
     await s.close();
   }
 });
+
+it("keeps every car progressing through a sustained crowded grid after wide-turn joins", async () => {
+  const s = await ScenarioSession.create(crowdedRoadTrafficRecipe());
+  const range = { minCx: -5, maxCx: 5, minCy: -5, maxCy: 5 };
+  try {
+    await s.ready(range);
+    const cars = automatic(s);
+    expect(cars.length).toBeGreaterThanOrEqual(12);
+    let tail = new Map<number, number>();
+    for (let tick = 0; tick < 14400; tick++) {
+      s.tick();
+      if (tick === 10799)
+        tail = new Map(automatic(s).map((c) => [c.entity.id, c.route?.choices ?? 0]));
+    }
+    expect(automatic(s)).toHaveLength(cars.length);
+    for (const c of automatic(s))
+      expect((c.route?.choices ?? 0) - (tail.get(c.entity.id) ?? 0)).toBeGreaterThan(0);
+  } finally {
+    await s.close();
+  }
+}, 30000);
+
+it("takes a continuing road instead of feeding a dead-end spur when a through route exists", async () => {
+  const recipe = crowdedRoadTrafficRecipe();
+  recipe.trafficRoads?.push({ a: { x: -16, y: 0 }, b: { x: 0, y: 0 }, width: 8, intercity: false });
+  recipe.roads?.push({ left: -320, right: 64, top: -64, bottom: 64 });
+  const s = await ScenarioSession.create(recipe);
+  try {
+    await s.ready({ minCx: -5, maxCx: 5, minCy: -5, maxCy: 5 });
+    for (let i = 0; i < 3000; i++) {
+      s.tick();
+      expect(
+        automatic(s).some(
+          (c) => c.route?.nextId?.endsWith(">0,0") || c.route?.laneId.endsWith(">0,0"),
+        ),
+      ).toBe(false);
+    }
+  } finally {
+    await s.close();
+  }
+}, 15000);

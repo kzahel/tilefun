@@ -67,6 +67,7 @@ export function serializeEntity(e: Entity): EntitySnapshot {
   if (e.emergencyState !== undefined) result.emergencyState = e.emergencyState;
   if (e.vehicleHeading !== undefined) result.vehicleHeading = e.vehicleHeading;
   if (e.bodyRotation) result.bodyRotation = [...e.bodyRotation];
+  if (e.physicsGroupId !== undefined) result.physicsGroupId = e.physicsGroupId;
   if (e.paintSchemeId !== undefined) result.paintSchemeId = e.paintSchemeId;
 
   if (e.jumpVZ !== undefined) result.jumpVZ = e.jumpVZ;
@@ -96,6 +97,7 @@ function entitySnapshotMatches(e: Entity, s: EntitySnapshot): boolean {
     e.jumpInputState !== s.jumpInputState ||
     e.emergencyState !== s.emergencyState ||
     e.vehicleHeading !== s.vehicleHeading ||
+    e.physicsGroupId !== s.physicsGroupId ||
     !rotationsEqual(e.bodyRotation, s.bodyRotation) ||
     e.paintSchemeId !== s.paintSchemeId ||
     e.wz !== s.wz ||
@@ -221,6 +223,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (s.emergencyState !== undefined) result.emergencyState = s.emergencyState;
   if (s.vehicleHeading !== undefined) result.vehicleHeading = s.vehicleHeading;
   if (s.bodyRotation) result.bodyRotation = [...s.bodyRotation];
+  if (s.physicsGroupId !== undefined) result.physicsGroupId = s.physicsGroupId;
   if (s.paintSchemeId !== undefined) result.paintSchemeId = s.paintSchemeId;
 
   if (s.jumpVZ !== undefined) result.jumpVZ = s.jumpVZ;

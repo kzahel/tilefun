@@ -246,7 +246,9 @@ export class RoadTraffic {
           lane,
           Math.max(vehicleRoadWidth(e.type), vehicleTurningRadius(e.type) * 2),
         ).filter((l) => !l.race);
-        next = choices[hash(`${e.proceduralId}:${state.route.choices}`) % choices.length];
+        const continuing = choices.filter((l) => nextLanes(graph, l).some((n) => !n.race));
+        const viable = continuing.length ? continuing : choices;
+        next = viable[hash(`${e.proceduralId}:${state.route.choices}`) % viable.length];
         if (next) {
           state.route.nextId = next.id;
           r.onChange?.(state, false);
@@ -318,11 +320,18 @@ export class RoadTraffic {
       const rolling = Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0);
       const lookahead = Math.max(24, Math.min(64, 24 + rolling * 0.3));
       let aim = samplePath(c.path, c.progress + lookahead);
-      if (c.progress + lookahead > c.path.length && c.next)
-        aim = samplePath(
-          c.state.route?.turning ? c.next.path : this.corner(c.lane, c.next, e.type).turn,
-          c.progress + lookahead - c.path.length,
-        );
+      if (c.progress + lookahead > c.path.length && c.next) {
+        const continuation = c.state.route?.turning
+          ? c.next.path
+          : this.corner(c.lane, c.next, e.type).turn;
+        const end = c.path.points.at(-1);
+        // Wide turns finish beyond the outgoing lane's nominal start. Starting
+        // its lookahead at zero points BACK into the bend and can steer cars
+        // across oncoming lanes. Continue from the actual join instead.
+        const offset =
+          c.state.route?.turning && end ? projectRoad(continuation, end.x, end.y).progress : 0;
+        aim = samplePath(continuation, offset + c.progress + lookahead - c.path.length);
+      }
       const error = angleDifference(
         Math.atan2(aim.y - e.position.wy, aim.x - e.position.wx),
         vehicleNoseHeading(e),

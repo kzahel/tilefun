@@ -243,7 +243,8 @@ export class ScenarioSession {
       this.handles.host = this.player.player.id;
       this.handles.guest = guest.player.id;
       this.realm.entityManager.spatialHash.update(guest.player);
-      this.realm.tick(PHYSICS_DT, this.transport, false, new Set());
+      // Opening/restoring a paused two-player lab publishes through frames();
+      // it must not advance vehicles or other bodies by a hidden warm-up tick.
     }
   }
   private setViewRange(range?: ChunkRange) {
@@ -344,6 +345,14 @@ export class ScenarioSession {
         return;
       case "vehicle-emergency":
         this.realm.vehicles.emergency(this.player, command.action);
+        return;
+      case "call-train":
+        if (!Number.isSafeInteger(command.benchId) || !this.realm.railways)
+          throw Error("No train service.");
+        await this.realm.railways.call(
+          command.seat === 1 ? this.requireGuest() : this.player,
+          command.benchId,
+        );
         return;
       case "enter-vehicle":
         this.realm.vehicles.enter(

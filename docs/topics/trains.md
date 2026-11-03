@@ -1,14 +1,27 @@
 # Generated railways and retained train assets
 
-Status: train services and driving/recall/roof-carry control are deferred by physics reset 205.
+Status: generated autonomous services, station recall and shared-physics roof riding restored in 218; inside driving/manual whistle remain deferred.
 Updated: 2026-11-03.
 
-[205](../tactical/205-physics-reset.md) deletes the railway motion/passenger service,
-train recall command and corresponding executable lab controls. Static regional
-tracks, stations, bridge geometry, route planning and exact authored train banks
-remain. Retained rail alignment tests exercise geometry and asset data without a
-second simulation. Old train lab bookmarks explain the deferral. Services must
-return through the common physics scene if resumed later.
+[218](../tactical/218-traffic-and-rail-gameplay-recovery.md) restores up to four
+active generated services using approved native train banks. Each carriage is a
+prescribed kinematic resident of the ordinary Rapier scene, using the existing
+vehicle numerical snapshot/replay contract. One shared step integrates all bodies;
+there is no restored railway collision or passenger-carry solver. Route intent,
+eight-second station dwell/reversal, bounded local terrain demand, saved service
+records and deletion tombstones belong to RailwayServices.
+
+Beside a generated station bench, use **Call train / E / Interact**. Recall checks
+current realm/proximity, passengers, destination clearance and readiness again
+after asynchronous preparation. A jumping roof rider also prevents recall. The
+train stops as one consist at blockers, unready terrain or edited-away rail under
+its current/next centers. Character walking/jumping and support velocity use the
+shared kernel. Nearby-train higher jumps return through the common jump assist.
+
+[Try the station](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=train&renderer=gpu&meshes#/tool/world-geometry).
+The new start is beside a bench. Inside driving, manual whistles and older
+specialized rail lab controls have not been revived. Production qualification and
+phone-performance limits are recorded in 218.
 
 The delivery details and validation below describe the earlier implementation.
 

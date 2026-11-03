@@ -104,7 +104,7 @@ export class ScenarioPresentationHost {
       allCars3d: new URLSearchParams(location.search).has("allcars3d"),
       authoredTrains: options.authoredTrains ?? true,
     });
-    this.vehicleControls = !!recipe.parkedVehicles?.length;
+    this.vehicleControls = !!recipe.parkedVehicles?.length || recipe.generation.type === "regional";
     this.session = new ScenarioClient(recipe);
     this.camera.pixelSnap = cameraPixelSnap(new URLSearchParams(location.search));
     this.camera.setViewport(options.width, options.height);
@@ -143,11 +143,13 @@ export class ScenarioPresentationHost {
     if (this.vehicleControls) {
       this.vehicleControl = new VehicleControl((request) =>
         this.command(
-          request.type === "enter-vehicle"
-            ? { kind: "enter-vehicle", entityId: request.entityId }
-            : request.type === "recover-vehicle"
-              ? { kind: "recover-vehicle", entityId: request.entityId }
-              : { kind: "exit-vehicle" },
+          request.type === "call-train"
+            ? { kind: "call-train", benchId: request.benchId }
+            : request.type === "enter-vehicle"
+              ? { kind: "enter-vehicle", entityId: request.entityId }
+              : request.type === "recover-vehicle"
+                ? { kind: "recover-vehicle", entityId: request.entityId }
+                : { kind: "exit-vehicle" },
         ),
       );
       if (canvas.parentElement) this.vehicleControl.mountEmbedded(canvas.parentElement);

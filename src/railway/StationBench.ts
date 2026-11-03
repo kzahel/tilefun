@@ -9,7 +9,7 @@ export function besideStationBench(player: Entity, bench: Prop): boolean {
     !bench.proceduralId?.includes(":bench:") ||
     !bench.collider ||
     player.parentId !== undefined ||
-    (player.wz ?? 0) < 0 ||
+    (player.wz ?? 0) < -0.75 ||
     (player.wz ?? 0) > 16
   )
     return false;

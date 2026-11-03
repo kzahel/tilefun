@@ -7,13 +7,18 @@ import {
   describeSurfaceSupport,
   type SurfaceVisibility,
 } from "../rendering/SurfacePresentation.js";
+import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import {
   GENERATED_CROSSINGS,
   generatedCrossingRecipe,
 } from "../scenarios/GeneratedCrossingRecipe.js";
 import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { realmPhysicsRecipe } from "../scenarios/RealmPhysicsRecipe.js";
-import { roadTrafficRecipe, TRAFFIC_STARTS } from "../scenarios/RoadTrafficRecipe.js";
+import {
+  crowdedRoadTrafficRecipe,
+  roadTrafficRecipe,
+  TRAFFIC_STARTS,
+} from "../scenarios/RoadTrafficRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { GARAGE_STARTS, undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import { DYNAMICS_STARTS, vehicleDynamicsRecipe } from "../scenarios/VehicleDynamicsRecipe.js";
@@ -43,6 +48,8 @@ const FIXTURES = [
   "car-dynamics",
   "realm",
   "traffic",
+  "traffic-crowd",
+  "train",
 ];
 export default function WorldGeometryPage({
   defaultFixture = "deck",
@@ -99,21 +106,25 @@ function GeometryFixtures({ initial }: { initial: string }) {
       generated?.recipe ??
       (fixture === "car-dynamics"
         ? vehicleDynamicsRecipe(vehicleModel, route)
-        : fixture === "traffic"
-          ? roadTrafficRecipe()
-          : fixture === "realm"
-            ? realmPhysicsRecipe(
-                new URLSearchParams(location.search).has("crowd")
-                  ? Number(new URLSearchParams(location.search).get("crowd"))
-                  : undefined,
-              )
-            : vehicle
-              ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
-              : fixture === "crossing"
-                ? railCrossingRecipe()
-                : garage
-                  ? undergroundGarageRecipe()
-                  : worldGeometryRecipe()),
+        : fixture === "train"
+          ? cityTrainRecipe()
+          : fixture === "traffic-crowd"
+            ? crowdedRoadTrafficRecipe()
+            : fixture === "traffic"
+              ? roadTrafficRecipe()
+              : fixture === "realm"
+                ? realmPhysicsRecipe(
+                    new URLSearchParams(location.search).has("crowd")
+                      ? Number(new URLSearchParams(location.search).get("crowd"))
+                      : undefined,
+                  )
+                : vehicle
+                  ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
+                  : fixture === "crossing"
+                    ? railCrossingRecipe()
+                    : garage
+                      ? undergroundGarageRecipe()
+                      : worldGeometryRecipe()),
     [generated, fixture, garage, vehicle, reverse, vehicleModel, route],
   );
   const starts =
@@ -143,8 +154,13 @@ function GeometryFixtures({ initial }: { initial: string }) {
       width: 960,
       height: 640,
       terrain:
-        !!generated || fixture === "realm" || fixture === "traffic" || fixture === "car-dynamics",
-      ...(vehicle || fixture === "realm"
+        !!generated ||
+        fixture === "realm" ||
+        fixture === "traffic" ||
+        fixture === "traffic-crowd" ||
+        fixture === "train" ||
+        fixture === "car-dynamics",
+      ...(vehicle || fixture === "realm" || fixture === "train"
         ? {}
         : {
             fixedCamera: generated
@@ -155,11 +171,13 @@ function GeometryFixtures({ initial }: { initial: string }) {
       settings: () => ({
         paused: settings.current.paused,
         zoom:
-          fixture === "car-dynamics"
-            ? 0.4
-            : generated || fixture === "crossing" || fixture === "traffic"
-              ? 0.225
-              : 0.625,
+          fixture === "traffic-crowd"
+            ? 0.125
+            : fixture === "car-dynamics" || fixture === "train"
+              ? 0.4
+              : generated || fixture === "crossing" || fixture === "traffic"
+                ? 0.225
+                : 0.625,
         terrainPacing: "throughput",
       }),
       input: () => ({
@@ -294,7 +312,8 @@ function GeometryFixtures({ initial }: { initial: string }) {
         D-pad down rights an overturned car.
         {fixture === "car-dynamics" &&
           " Main lane: bridge ascent/descent. South: jump ramp. North: narrow tipping ledge and overlapping cars. Ramp and roof starts let you jump in place to inspect shadows and landing dust. "}
-        Specialized equipment and train services are deferred.
+        At a station bench, E / Interact calls the train; nearby vehicle roofs give a higher jump.
+        Specialized equipment remains deferred.
       </p>
       <label>
         Fixture{" "}

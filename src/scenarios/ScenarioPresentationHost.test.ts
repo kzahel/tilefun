@@ -2,7 +2,15 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import type { GameAssets } from "../assets/GameAssets.js";
 import { createPlayer } from "../entities/Player.js";
 import type { RenderPass } from "../rendering/RenderFrame.js";
-import type { ScenarioRecipe } from "./ScenarioRecipe.js";
+import { FLAT_SCENARIO, type ScenarioRecipe } from "./ScenarioRecipe.js";
+
+const recipe: ScenarioRecipe = {
+  version: 1,
+  id: "presentation-host",
+  generation: FLAT_SCENARIO,
+  player: createPlayer(80, 128),
+  props: [],
+};
 
 const mocks = vi.hoisted(() => ({
   load: vi.fn(),
@@ -86,7 +94,7 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllGlobals());
 
 it("configures full gameplay assets, starts at the fixture and detaches visibility lifecycle", async () => {
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, {} as ScenarioRecipe, options);
+  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, options);
   await host.ready;
   expect(mocks.setAssets).toHaveBeenCalledWith(assets, expect.anything());
   expect(mocks.resize).toHaveBeenCalledWith(960, 600);
@@ -118,7 +126,7 @@ it("closes late asset arrivals without creating a renderer or restarting a dispo
       finish = resolve;
     }),
   );
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, {} as ScenarioRecipe, options);
+  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, options);
   host.dispose();
   finish(assets);
   await host.ready;
@@ -132,7 +140,7 @@ it("releases renderer, assets and Worker if asset configuration fails", async ()
   mocks.setAssets.mockImplementation(() => {
     throw Error("configuration failed");
   });
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, {} as ScenarioRecipe, options);
+  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, options);
   await expect(host.ready).rejects.toThrow("configuration failed");
   expect(mocks.dispose).toHaveBeenCalledTimes(1);
   expect(mocks.close).toHaveBeenCalledWith(assets);
@@ -157,7 +165,7 @@ it("keeps diagnostic framing through ticks/commands and submits overlays around 
       },
     },
   });
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, {} as ScenarioRecipe, {
+  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, {
     ...options,
     fixedCamera: { wx: 0, wy: -32 },
     terrain: false,
@@ -195,7 +203,7 @@ it("cycles a presentation-only pose while authority is paused, then restores the
     endWorld: vi.fn(),
     renderer: { assets: new Map(), submit: vi.fn() },
   });
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, {} as ScenarioRecipe, {
+  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, {
     ...options,
     terrain: false,
     fixedCamera: { wx: 0, wy: -12 },
@@ -239,7 +247,7 @@ it("cycles a presentation-only pose while authority is paused, then restores the
 });
 
 it("resizes before readiness and during use without replacing the Worker", async () => {
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, {} as ScenarioRecipe, options);
+  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, options);
   host.resize(288, 192);
   await host.ready;
   expect(mocks.resize).toHaveBeenLastCalledWith(288, 192);
@@ -253,7 +261,7 @@ it("resizes before readiness and during use without replacing the Worker", async
 
 it("uses the moving diagnostic camera for streaming as well as drawing", async () => {
   let x = 1000;
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, {} as ScenarioRecipe, {
+  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, {
     ...options,
     fixedCamera: () => ({ wx: x, wy: 0 }),
   });

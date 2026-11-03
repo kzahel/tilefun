@@ -40,6 +40,7 @@ export interface EntityDelta {
   emergencyState?: number | null;
   vehicleHeading?: number | null;
   bodyRotation?: BodyRotation | null;
+  physicsGroupId?: number | null;
   paintSchemeId?: string | null;
 
   wz?: number | null;
@@ -99,6 +100,7 @@ export function diffEntitySnapshots(
   diffOptionalNum("jumpInputState", prev, curr, ensure);
   diffOptionalNum("emergencyState", prev, curr, ensure);
   diffOptionalNum("vehicleHeading", prev, curr, ensure);
+  diffOptionalNum("physicsGroupId", prev, curr, ensure);
   if (!rotationsEqual(prev.bodyRotation, curr.bodyRotation))
     ensure().bodyRotation = curr.bodyRotation ?? null;
 
@@ -147,6 +149,7 @@ type OptionalNumField =
   | "jumpInputState"
   | "emergencyState"
   | "vehicleHeading"
+  | "physicsGroupId"
   | "wz"
   | "parentId"
   | "localOffsetX"
@@ -323,6 +326,7 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
   applyOptionalNum(entity, delta, "jumpInputState");
   applyOptionalNum(entity, delta, "emergencyState");
   applyOptionalNum(entity, delta, "vehicleHeading");
+  applyOptionalNum(entity, delta, "physicsGroupId");
   if (delta.bodyRotation === null) delete entity.bodyRotation;
   else if (delta.bodyRotation) entity.bodyRotation = [...delta.bodyRotation];
 

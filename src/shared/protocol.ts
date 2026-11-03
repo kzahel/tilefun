@@ -37,6 +37,7 @@ export type VehicleHornMessage = {
 };
 
 export type ClientMessage =
+  | { type: "call-train"; requestId: number; benchId: number }
   | { type: "vehicle-horn"; active: boolean }
   | { type: "enter-vehicle"; requestId: number; entityId: number }
   | { type: "exit-vehicle"; requestId: number }
@@ -216,6 +217,8 @@ export interface EntitySnapshot {
   /** Driven-car nose angle in world radians, retained while parked. */
   vehicleHeading?: number;
   bodyRotation?: BodyRotation;
+  /** Replicated coherent prescribed-body group; never inferred from private service identity. */
+  physicsGroupId?: number;
   paintSchemeId?: string;
 
   /** Hinged dump bed angle/target in radians; authority owns the clock. */

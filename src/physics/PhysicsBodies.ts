@@ -1,9 +1,11 @@
 import { DEFAULT_PHYSICAL_HEIGHT } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
+import { curveTrainView, isCurveTrain } from "../railway/CurveTrain.js";
+import { isTrain } from "../railway/Train.js";
 import { vehicleBodySize, vehicleNoseHeading } from "../traffic/Vehicle.js";
 import type { PhysicsBodyKind } from "./PhysicsState.js";
 export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
-  if (entity.type.startsWith("vehicle-v1:")) return "vehicle";
+  if (entity.type.startsWith("vehicle-v1:") || isTrain(entity)) return "vehicle";
   if (entity.type === "ball") return "loose";
   if (entity.workItem) {
     const item = entity.workItem;
@@ -28,14 +30,20 @@ export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
 export function physicsBodyDimensions(entity: Entity) {
   const c = entity.collider;
   if (!c) throw Error("Physics body requires a collider");
+  const train = isTrain(entity),
+    curve = isCurveTrain(entity);
   const vehicle = entity.type.startsWith("vehicle-v1:");
   const size = vehicle ? vehicleBodySize(entity.type, 0) : undefined;
   return {
-    width: size?.width ?? c.width,
-    depth: size?.height ?? c.height,
+    width: size?.width ?? (curve ? (curveTrainView(entity.type, 0)?.width ?? c.width) : c.width),
+    depth: size?.height ?? (curve ? 24 : c.height),
     height: c.physicalHeight ?? DEFAULT_PHYSICAL_HEIGHT,
     offsetX: vehicle ? 0 : c.offsetX,
     offsetY: vehicle ? 0 : c.offsetY - c.height / 2,
-    yaw: vehicle ? vehicleNoseHeading(entity) : 0,
+    yaw:
+      vehicle || train
+        ? (entity.vehicleHeading ??
+          (curve ? ((entity.sprite?.frameRow ?? 0) * Math.PI) / 128 : vehicleNoseHeading(entity)))
+        : 0,
   };
 }

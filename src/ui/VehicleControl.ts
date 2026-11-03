@@ -2,6 +2,7 @@ import { isBoat } from "../boats/Boat.js";
 import type { ClientStateView } from "../client/ClientStateView.js";
 import { actionHint, inputHint } from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
+import { nearestStationBench } from "../railway/StationBench.js";
 import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
 import { isVehicleOverturned } from "../traffic/Vehicle.js";
 import {
@@ -12,6 +13,7 @@ import {
 } from "../traffic/VehicleSeats.js";
 
 type VehicleRequest =
+  | { type: "call-train"; benchId: number }
   | { type: "enter-vehicle"; entityId: number }
   | { type: "exit-vehicle" }
   | { type: "recover-vehicle"; entityId: number };
@@ -92,13 +94,16 @@ export class VehicleControl {
     this.recoveryButton.style.display = this.recoveryRequest ? "" : "none";
     this.recoveryButton.disabled = this.busy || locked;
     this.recoveryButton.textContent = `Right car · ${actionHint("vehicle_recover") || "F"}`;
+    const bench = !current && !candidate ? nearestStationBench(p, view.props) : undefined;
     const key = current
       ? `inside:${current.id}`
       : candidate
         ? `near:${candidate.id}`
         : recovery
           ? `recover:${recovery.id}`
-          : "";
+          : bench
+            ? `station:${bench.id}`
+            : "";
     if (key !== this.targetKey) {
       this.status.textContent = "";
       this.error = false;
@@ -110,14 +115,16 @@ export class VehicleControl {
           ? { type: "exit-vehicle" }
           : candidate
             ? { type: "enter-vehicle", entityId: candidate.id }
-            : null
+            : bench
+              ? { type: "call-train", benchId: bench.id }
+              : null
         : null;
     this.root.hidden = !this.request && !this.recoveryRequest;
     this.button.hidden = !this.request;
     this.button.style.display = this.request ? "" : "none";
     this.button.disabled = this.busy || locked;
     const hint = actionHint("enter_place");
-    this.button.textContent = `${current ? "Get out" : "Drive car"}${hint ? ` · ${hint}` : ""}`;
+    this.button.textContent = `${current ? "Get out" : bench ? "Call train" : "Drive car"}${hint ? ` · ${hint}` : ""}`;
     if (current && !this.busy && !this.error)
       this.status.textContent =
         (carDriving === "steering"
@@ -147,6 +154,10 @@ export class VehicleControl {
     this.status.textContent = "";
     const key = this.targetKey;
     void this.send(request)
+      .then(() => {
+        if (request.type === "call-train" && this.targetKey === key)
+          this.status.textContent = "Poof! Your train is here.";
+      })
       .catch((error) => {
         if (this.targetKey === key) {
           this.error = true;

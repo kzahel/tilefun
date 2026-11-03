@@ -9,7 +9,14 @@ import { chromium } from "@playwright/test";
 const option = (name, fallback) =>
   process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const output = option("output", path.join(os.tmpdir(), "tilefun-realm-physics"));
-const counts = option("counts", "0,24,96,384").split(",").map(Number);
+const fixture = option("fixture", "realm");
+if (!["realm", "traffic-crowd"].includes(fixture)) throw Error("Unknown Realm fixture");
+const meshes = process.argv.includes("--meshes");
+const cpuRate = Number(option("cpu", "1"));
+if (!Number.isFinite(cpuRate) || cpuRate < 1 || cpuRate > 16)
+  throw Error("CPU throttle must be 1–16");
+const counts =
+  fixture === "traffic-crowd" ? [0] : option("counts", "0,24,96,384").split(",").map(Number);
 // A comparison uses separate immutable bundles, never a dormant game backend.
 const referenceBase = option("reference-base", "");
 const lanes = referenceBase ? ["reference-legacy", "shared"] : ["shared"];
@@ -25,6 +32,7 @@ if (
   throw Error("Invalid workload options");
 const base = option("base", "http://localhost:4174/tilefun/");
 const cdp = option("cdp", "");
+if (cdp && cpuRate !== 1) throw Error("Physical devices do not use CPU emulation");
 const browser = cdp
   ? await chromium.connectOverCDP(cdp)
   : await chromium.launch({ channel: "chromium" });
@@ -42,6 +50,9 @@ const report = {
   browser: browser.version(),
   lane: cdp ? "dedicated physical browser via CDP" : "bundled full Chromium",
   renderer,
+  fixture,
+  meshes,
+  cpuRate,
   seconds,
   warmup,
   trials,
@@ -72,7 +83,12 @@ try {
         page.on("pageerror", (e) => errors.push(String(e)));
         try {
           const url = new URL("workshop.html", mode === "shared" ? base : referenceBase);
-          url.searchParams.set("geometry", "realm");
+          url.searchParams.set("geometry", fixture);
+          if (meshes) url.searchParams.set("meshes", "");
+          if (cpuRate !== 1) {
+            const session = await context.newCDPSession(page);
+            await session.send("Emulation.setCPUThrottlingRate", { rate: cpuRate });
+          }
           url.searchParams.set("crowd", String(population));
           if (mode === "reference-legacy") url.searchParams.set("physics", "legacy");
           url.searchParams.set("renderer", renderer);
@@ -96,8 +112,10 @@ try {
             return {
               at: performance.now(),
               diagnostics,
+              scene: c.__presentationDiagnostics(),
               device: {
                 renderer: c.dataset.renderer,
+                cars: Number(c.dataset.trafficCount ?? 0),
                 userAgent: navigator.userAgent,
                 cores: navigator.hardwareConcurrency,
                 memoryGiB: navigator.deviceMemory,
@@ -127,6 +145,7 @@ try {
             diagnostics: end.diagnostics,
             frames: summary(end.frames),
             scene: end.scene,
+            startScene: start.scene,
             errors,
           };
           report.cases.push(row);

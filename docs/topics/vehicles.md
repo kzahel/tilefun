@@ -1,5 +1,13 @@
 # Vehicles: shared physics baseline
 
+[218](../tactical/218-traffic-and-rail-gameplay-recovery.md) fixes wider-turn
+lookahead joining behind the actual outgoing point, which could steer traffic
+across oncoming lanes and leave a permanent jam. Route choice prefers a continuing
+road over a dead-end spur when available. A sustained crowded-grid native check
+requires every car to keep completing routes. The shared player jump also gains
+bounded nearby-roof assistance. Phone frame drops remain a separate attribution
+question; desktop evidence is not phone qualification.
+
 [217](../tactical/217-surface-projected-shadows-and-effects.md) replaces ready-mesh
 car ovals with soft oriented chassis footprints, including pitch/roll dimensions.
 Actual retained mesh triangles receive shadows and landing dust on roofs; contact

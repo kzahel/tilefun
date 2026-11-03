@@ -44,3 +44,29 @@ export function roadTrafficRecipe(): ScenarioRecipe {
     ],
   };
 }
+
+/** Sustained closed-grid traffic, using ordinary population and route authority. */
+export function crowdedRoadTrafficRecipe(): ScenarioRecipe {
+  const recipe = roadTrafficRecipe();
+  recipe.player = createPlayer(160, 160);
+  recipe.id = "crowded-road-traffic";
+  recipe.measurePhysics = true;
+  recipe.parkedVehicles = [];
+  recipe.roads = [];
+  recipe.trafficRoads = [];
+  for (const axis of [0, 1])
+    for (const k of [-48, -16, 16, 48]) {
+      recipe.roads.push(
+        axis
+          ? { left: k * 16 - 64, right: k * 16 + 64, top: -832, bottom: 832 }
+          : { left: -832, right: 832, top: k * 16 - 64, bottom: k * 16 + 64 },
+      );
+      recipe.trafficRoads.push({
+        a: axis ? { x: k, y: -48 } : { x: -48, y: k },
+        b: axis ? { x: k, y: 48 } : { x: 48, y: k },
+        width: 8,
+        intercity: false,
+      });
+    }
+  return recipe;
+}

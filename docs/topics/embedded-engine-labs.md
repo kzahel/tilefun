@@ -1,5 +1,13 @@
 # Embedded engine labs
 
+[218](../tactical/218-traffic-and-rail-gameplay-recovery.md) adds the ordinary
+**train** station and **traffic-crowd** grid fixtures to World geometry. Train
+recall and jump assistance share game authority, physics and input controls.
+Opening/restoring a paused two-player ScenarioSession no longer advances a hidden
+warm-up tick; ordinary publication already synchronizes membership without stepping.
+The common Realm browser benchmark accepts the crowded fixture, mesh switch and
+explicit desktop CPU throttling, while rejecting emulation for physical devices.
+
 [217](../tactical/217-surface-projected-shadows-and-effects.md) shares the receiver,
 decal and contact-effect implementation between PlayScene and ScenarioPresentationHost.
 The car-dynamics course adds **ramp** and **roof** starts: press Space / controller A

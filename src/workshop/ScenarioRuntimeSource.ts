@@ -13,6 +13,8 @@ import clippedTerrain from "../physics/rapier/ClippedTerrain.ts?raw";
 import collisionGeometry from "../physics/rapier/CollisionGeometry.ts?raw";
 import vehicleChassis from "../physics/VehicleChassis.ts?raw";
 import vehicleMotor from "../physics/VehicleMotor.ts?raw";
+import railServices from "../railway/RailwayServices.ts?raw";
+import stationBench from "../railway/StationBench.ts?raw";
 import actorRaster from "../rendering/ActorRaster.ts?raw";
 import cameraRaster from "../rendering/Camera.ts?raw";
 import spriteRaster from "../rendering/Canvas2DRenderer.ts?raw";
@@ -48,7 +50,10 @@ import entry from "../scenarios/scenario.worker.ts?raw";
 import realm from "../server/Realm.ts?raw";
 import realmWildlife from "../server/RealmWildlife.ts?raw";
 import clock from "../server/ServerLoop.ts?raw";
+import wireCodec from "../shared/binaryCodec.ts?raw";
+import entityDelta from "../shared/entityDelta.ts?raw";
 import physicsCodec from "../shared/physicsStateCodec.ts?raw";
+import serialization from "../shared/serialization.ts?raw";
 import roadTraffic from "../traffic/RoadTraffic.ts?raw";
 import roadTurn from "../traffic/RoadTurn.ts?raw";
 import vehicleRegistry from "../traffic/VehicleRegistry.ts?raw";
@@ -63,6 +68,8 @@ import wildlifeRespawns from "../wildlife/WildlifeRespawns.ts?raw";
 
 /** Live behavior reviews include host timing/transport, not just recipe/physics. */
 export const scenarioRuntimeSource = {
+  railServices,
+  stationBench,
   vehicleChassis,
   bodyRotation,
   worldDepth,
@@ -105,6 +112,9 @@ export const scenarioRuntimeSource = {
   subpixelImages,
   actorRaster,
   physicsCodec,
+  wireCodec,
+  entityDelta,
+  serialization,
   replica,
   collisionGeometry,
   clippedTerrain,

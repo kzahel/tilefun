@@ -2,7 +2,7 @@
  * Binary protocol codec — replaces JSON.stringify/parse for hot-path messages.
  *
  * Message type tags:
- *   0x11 = FrameMessage (full vehicle rotation, momentum and solved pairs) (server→client)
+ *   0x12 = FrameMessage (vehicle rotation, prescribed groups, momentum and solved pairs) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
  *   0x81 = fixed-tick player-input (client→server)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
@@ -27,7 +27,7 @@ import type {
 
 // ---- Message type tags ----
 
-const TAG_FRAME = 0x11;
+const TAG_FRAME = 0x12;
 const TAG_SYNC_CHUNKS = 0x03;
 const TAG_PLAYER_INPUT = 0x81;
 const TAG_JSON = 0xff;
@@ -58,6 +58,7 @@ const BIT_EMERGENCY_STATE = 13;
 const BIT_VEHICLE_HEADING = 14;
 const BIT_VEHICLE_PAINT = 15;
 const BIT_BODY_ROTATION = 16;
+const BIT_PHYSICS_GROUP = 17;
 
 // ---- TextEncoder/Decoder for JSON fallback ----
 
@@ -117,8 +118,8 @@ function decodeJsonFallback(buf: ArrayBuffer): unknown {
 
 const FRAME_HEADER_SIZE = 27; // tag + tick/input/player + Float64 simulation time + counts
 // Fixed header, velocity, full sprite/AI, booleans, eleven 32-bit fields and lights.
-const MAX_BASELINE_SIZE = 18 + 8 + 8 + 3 + 2 + 22 * 4 + 2;
-const MAX_DELTA_SIZE = 12 + 8 + 8 + 8 + 3 + 2 + 22 * 4 + 2;
+const MAX_BASELINE_SIZE = 18 + 8 + 8 + 3 + 2 + 23 * 4 + 2;
+const MAX_DELTA_SIZE = 12 + 8 + 8 + 8 + 3 + 2 + 23 * 4 + 2;
 
 function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
   const baselines = msg.entityBaselines ?? [];
@@ -278,6 +279,7 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
   if (snap.paintSchemeId !== undefined) mask |= 1 << BIT_VEHICLE_PAINT;
 
   if (snap.bodyRotation) mask |= 1 << BIT_BODY_ROTATION;
+  if (snap.physicsGroupId !== undefined) mask |= 1 << BIT_PHYSICS_GROUP;
   view.setUint32(off, mask, true);
   off += 4;
 
@@ -351,6 +353,10 @@ function writeBaseline(view: DataView, off: number, snap: EntitySnapshot): numbe
       off += 4;
     }
 
+  if (snap.physicsGroupId !== undefined) {
+    view.setUint32(off, snap.physicsGroupId, true);
+    off += 4;
+  }
   return off;
 }
 
@@ -458,6 +464,10 @@ function readBaseline(view: DataView, off: number): [EntitySnapshot, number] {
     ];
     off += 16;
   }
+  if (mask & (1 << BIT_PHYSICS_GROUP)) {
+    snap.physicsGroupId = view.getUint32(off, true);
+    off += 4;
+  }
   return [snap, off];
 }
 
@@ -543,6 +553,10 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
   if (delta.bodyRotation !== undefined) {
     changeMask |= 1 << 17;
     if (delta.bodyRotation === null) nullMask |= 1 << 17;
+  }
+  if (delta.physicsGroupId !== undefined) {
+    changeMask |= 1 << 18;
+    if (delta.physicsGroupId === null) nullMask |= 1 << 18;
   }
   view.setUint32(off, changeMask, true);
   off += 4;
@@ -631,6 +645,10 @@ function writeDelta(view: DataView, off: number, delta: EntityDelta): number {
       view.setFloat32(off, value, true);
       off += 4;
     }
+  if (delta.physicsGroupId !== undefined && delta.physicsGroupId !== null) {
+    view.setUint32(off, delta.physicsGroupId, true);
+    off += 4;
+  }
   return off;
 }
 
@@ -807,6 +825,13 @@ function readDelta(view: DataView, off: number): [EntityDelta, number] {
         view.getFloat32(off + 12, true),
       ];
       off += 16;
+    }
+  }
+  if (changeMask & (1 << 18)) {
+    if (nullMask & (1 << 18)) delta.physicsGroupId = null;
+    else {
+      delta.physicsGroupId = view.getUint32(off, true);
+      off += 4;
     }
   }
   return [delta, off];

@@ -372,3 +372,19 @@ The synthetic AABB/OBB comparison and swept-box helper were retired by 205.
 They have no gameplay consumer after the shared Rapier reset. Historical
 [096](../../docs/tactical/096-rotated-vehicle-collision-benchmark.md) evidence is
 preserved; current validation exercises real shared body contacts.
+
+
+## Sustained road traffic and mobile attribution
+
+`node --import tsx scripts/instrumentation/traffic-progress.ts /tmp/traffic-progress.json`
+runs four simulated minutes in the preloaded ordinary crowded-grid Realm. It
+records per-car position/route progress and inclusive traffic/physics/tick timings,
+without GPU/network/device claims. The corresponding native regression requires
+progress from every car in the final minute; a fast three-car lap is insufficient.
+
+`node scripts/benchmark-realm-physics-browser.mjs --fixture=traffic-crowd --renderer=gpu --meshes --cpu=4 --trials=1 --seconds=8 --warmup=5 --base=http://localhost:4174/tilefun/ --output=/tmp/traffic-browser`
+uses the same Worker/presentation host and bundled full Chromium. Omit `--meshes`
+for a sprite comparison. Captures include observed car counts, main-frame tails,
+Worker timings and start/end clock diagnostics. CPU emulation is a desktop stress
+lane, never physical-phone evidence. The normal `realm` crowd fixture/defaults and
+owned-tab physical CDP route remain available. See tactical 218 for checkpoints.

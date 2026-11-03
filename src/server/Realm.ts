@@ -84,6 +84,7 @@ import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { PhysicsScene } from "../physics/PhysicsScene.js";
 import { playerMotionIntent, vehicleMotionIntent } from "../physics/PlayerControls.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
+import { RailwayServices } from "../railway/RailwayServices.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import { VehicleRegistry, type VehicleSource } from "../traffic/VehicleRegistry.js";
@@ -143,6 +144,26 @@ export interface RealmOptions {
 }
 
 export class Realm {
+  railways: RailwayServices | undefined;
+  canPlaceTrain(
+    cars: readonly Entity[],
+    poses: readonly { x: number; y: number; angle: number }[],
+  ) {
+    return (
+      this.physicsScene?.canPlaceTrain(cars, poses, {
+        getCollision: (x, y) => this.world.getCollisionIfLoaded(x, y),
+        getHeight: (x, y) => this.world.getHeightAt(x, y),
+        queryProps: (b) =>
+          this.propManager.getPropsInChunkRange(
+            Math.floor(b.left / 256),
+            Math.floor(b.top / 256),
+            Math.floor(b.right / 256),
+            Math.floor(b.bottom / 256),
+          ),
+        geometryVersion: this.geometryVersion,
+      }) ?? false
+    );
+  }
   private physicsScene: PhysicsScene | undefined;
   recoverVehicle(id: number) {
     if (!this.physicsScene) throw Error("Physics is not ready.");
@@ -679,6 +700,14 @@ export class Realm {
     dormantClientIds: ReadonlySet<string>,
     globalStoragePaused: boolean,
   ) {
+    if (this.tickCounter % 120 === 1 && this.railways) {
+      const ranges = [...this.sessions.values()]
+        .filter((s) => !s.retired && !s.transitioning)
+        .map((s) => s.visibleRange);
+      void this.railways
+        .prepare(ranges, true)
+        .catch((error) => console.error("Train service preparation failed", error));
+    }
     const storagePaused = globalStoragePaused || (this.saveManager?.pressured ?? false);
     if (storagePaused) this.saveManager?.flush();
     for (const session of this.sessions.values()) {
@@ -762,6 +791,7 @@ export class Realm {
       for (const e of this.backgroundResidents)
         if (!this.streaming || this.streaming.supported(e, PHYSICS_DT))
           entityTickDts.set(e, PHYSICS_DT);
+    for (const car of this.railways?.bodies() ?? []) entityTickDts.set(car, PHYSICS_DT);
     for (const [e] of entityTickDts) if (e.resident?.transferring) entityTickDts.delete(e);
     for (const session of this.sessions.values()) {
       if (session.transitioning || session.retired || Date.now() < session.doorArrivalUntil)
@@ -845,6 +875,7 @@ export class Realm {
     const intents = this.entityManager.collectMotionIntents(active, PHYSICS_DT, (x, y) =>
       this.world.getCollisionIfLoaded(x, y),
     );
+    for (const [id, intent] of this.railways?.plan() ?? []) intents.set(id, intent);
     const wasAirborne = new Set(players.filter((p) => p.jumpVZ !== undefined).map((p) => p.id));
     for (const [id, intent] of this.vehicleRegistry?.traffic.plan(
       active,
@@ -891,6 +922,7 @@ export class Realm {
       },
       gravity,
     );
+    this.railways?.finish();
     return { scene, participants, wasAirborne };
   }
 
@@ -1512,6 +1544,8 @@ export class Realm {
     this.activity.clear();
     this.propActivity.clear();
     // Close previous save manager
+    this.railways?.dispose();
+    this.railways = undefined;
     if (this.saveManager) {
       await this.saveManager.close();
     }
@@ -1703,6 +1737,10 @@ export class Realm {
           around(Math.floor(wx / CHUNK_SIZE_PX), Math.floor(wy / CHUNK_SIZE_PX), 1),
         );
 
+    this.railways =
+      !this.interior && this.generator.terrain instanceof RailwayStrategy
+        ? new RailwayServices(this, this.generator.terrain.railways)
+        : undefined;
     let cameraX = 0;
     let cameraY = 0;
     let cameraZoom = 1;
@@ -1804,6 +1842,7 @@ export class Realm {
     // Publish complete terrain even when authority will stay paused after reload.
     this.world.computeAutotile(this.blendGraph);
     this.vehicleRegistry?.populate([range]);
+    await this.railways?.prepare([range]);
   }
 
   async flushAsync(): Promise<void> {
@@ -1832,6 +1871,8 @@ export class Realm {
 
   /** Teardown mods and close persistence. */
   async destroy(): Promise<void> {
+    this.railways?.dispose();
+    this.railways = undefined;
     await this.mutations.drain();
     await this.streaming?.close();
     const saves = this.saveManager;
