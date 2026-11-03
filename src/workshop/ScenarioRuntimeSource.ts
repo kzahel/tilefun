@@ -10,6 +10,8 @@ import controls from "../physics/PlayerControls.ts?raw";
 import clippedTerrain from "../physics/rapier/ClippedTerrain.ts?raw";
 import collisionGeometry from "../physics/rapier/CollisionGeometry.ts?raw";
 import vehicleMotor from "../physics/VehicleMotor.ts?raw";
+import presentationSettings from "../rendering/PresentationSettings.ts?raw";
+import projection from "../rendering/Projection.ts?raw";
 import client from "../scenarios/ScenarioClient.ts?raw";
 import presentation from "../scenarios/ScenarioPresentationHost.ts?raw";
 import protocol from "../scenarios/ScenarioProtocol.ts?raw";
@@ -48,6 +50,8 @@ export const scenarioRuntimeSource = {
   roadTurn,
   vehicleRegistry,
   predictor,
+  presentationSettings,
+  projection,
   physicsCodec,
   replica,
   collisionGeometry,

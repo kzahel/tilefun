@@ -1,6 +1,6 @@
 # Continuous camera projection
 
-Status: implemented; native and production motion captures pass, raster qualification in progress.
+Status: delivered and locally qualified; owner playtest next.
 Updated: 2026-11-03.
 
 Owner asks to reproduce and fix the remaining camera wobble noted in 211/212.
@@ -44,8 +44,23 @@ and texture resampling remain, especially at fractional zoom.
 
 ## Qualification / next
 
-Build/inventories, existing fractional-scale seam/overlap pixel probes on both
-backends, snapped static-reference stability, default game/lab policy, cached-surface
-reuse, Canvas fallback, car/traffic lifecycle and streaming readiness follow.
-Commit delivery evidence and mark development readiness last. Then owner Save and
-reload and compare steady walking/running/driving on the original desktop.
+Implementation checkpoint: `ea495386`. All eight selected production Chromium
+cases pass: fractional-scale sprite seams (64 pixel reports across Canvas/GPU),
+explicit snapped-reference stability (20 reports), default game/lab camera policy,
+cached-surface reuse, unsupported-WebGL2 Canvas fallback, car ramp/seat reload and
+traffic pause/reload/teardown. The main/lab assertions now require the continuous
+default; frozen explicit snapped probes remain unchanged.
+
+Art catalog and all 2,120 Workshop identities pass; the production build passes.
+The review runtime source now includes presentation settings and projection math,
+so a camera-policy change cannot silently retain the prior review fingerprint.
+After this metadata addition, the manifest/build and shared traffic browser case
+were requalified. Manifest changes are 1,024 runtime fingerprints and input digest;
+there are no new candidates or changed art-bank pixels. Art catalog is unchanged.
+
+GPU/meshes streaming readiness at 4× CPU throttling passes. Walking, sprinting and
+reversal retain 16.8ms frame p99 and zero final missing/incomplete/stale terrain.
+These are desktop captures, not physical-phone qualification.
+
+Next: owner Save and reload and compare steady walking/running/driving on the
+original desktop. Commit delivery evidence and mark development readiness last.

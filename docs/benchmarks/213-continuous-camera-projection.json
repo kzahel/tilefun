@@ -218,5 +218,45 @@
     "The first before/walk sample includes a larger transient camera/player-relative change: total draw range 4px. Its camera-rounding component is isolated separately rather than attributing all movement to snapping.",
     "No pixel art, source imagery, physics, prediction or authority clocks were changed.",
     "Whole-pixel raster edges and nearest-neighbor texture sampling remain; the extra independent camera rounding is removed."
-  ]
+  ],
+  "implementationCommit": "ea495386",
+  "validation": {
+    "nativeChecks": 39,
+    "productionBrowserCases": 8,
+    "spriteSeamPixelReports": 64,
+    "snappedReferenceStabilityReports": 20,
+    "allTypechecksPassed": true,
+    "buildPassed": true,
+    "workshopCandidateIdentities": 2120,
+    "reviewRuntimeInputs": ["PresentationSettings.ts", "Projection.ts"]
+  },
+  "streaming": {
+    "assertReadyPassed": true,
+    "renderer": "gpu",
+    "meshes": true,
+    "cpuRate": 4,
+    "samples": [
+      {
+        "name": "walk",
+        "frameP99Ms": 16.80000000000109,
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "sprint",
+        "frameP99Ms": 16.80000000000109,
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      },
+      {
+        "name": "reverse",
+        "frameP99Ms": 16.799999999999272,
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0
+      }
+    ]
+  }
 }

@@ -78,5 +78,6 @@ remain, including the reversed-input boundary. These are desktop captures, not a
 new physical-device qualification.
 
 Next: owner Save and reload, then compare walking/running/driving on the original
-desktop. Roughly one screen pixel of integer-camera grid wobble remains separate.
+desktop. The separate integer-camera grid wobble is subsequently addressed by
+[213](213-continuous-camera-projection.md).
 Commit evidence/inventories and mark development readiness last.

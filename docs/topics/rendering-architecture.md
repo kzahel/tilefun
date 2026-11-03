@@ -4,8 +4,10 @@
 camera-translation rounding from default gameplay/lab projection. Continuous
 projection keeps the followed actor steady on screen; shared raster-edge rounding,
 terrain overscan and inverse picking remain. `?pixelsnap=1` retains the old comparison.
-Source pixels and reference-camera contracts are unchanged. Native/capture checks
-pass; production raster qualification is in progress.
+Source pixels and reference-camera contracts are unchanged. 39 native checks,
+eight production browser cases (including Canvas/GPU pixel seam probes), all
+typechecks, build/inventories and throttled streaming readiness pass. The review
+runtime fingerprint now includes projection math and settings. Owner playtest next.
 
 Reset [205](../tactical/205-physics-reset.md) makes shared physics poses authoritative
 for scene collection and collision inspection. Runtime car ground fitting and
@@ -18,7 +20,7 @@ Status: complete backend/presentation separation, recording proof and integrated
 desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-car presentation delivered;
 GPU + 3D car is the owner-selected main-game default; Canvas2D remains available and is the unsupported-WebGL2 fallback.
 Bounded unchanged car images and ordered multi-texture GPU batches are delivered.
-Updated: 2026-10-24.
+Updated: 2026-11-03.
 
 [169](../tactical/169-wheel-lift-towing.md) groups a tow truck and its car in one
 shared GPU depth target. Per-draw absolute transforms reset both cached assets;
