@@ -86,7 +86,7 @@ test("default GPU mesh host runs the shared game and retains the input/UI canvas
           (canvas as unknown as { __game: { camera: { pixelSnap: boolean } } }).__game.camera
             .pixelSnap,
       ),
-  ).toBe(true);
+  ).toBe(false);
   await expect(page.locator("canvas[data-renderer=gpu][aria-hidden=true]")).toBeVisible();
   await page.waitForFunction(
     () =>
@@ -473,7 +473,7 @@ test("shared traffic scenario feeds the same GPU mesh path", async ({ page }) =>
   await expect(canvas).toHaveAttribute("data-ready", "true");
   expect(
     await canvas.evaluate((c: GeometryCanvas) => c.__presentationDiagnostics?.().pixelSnap),
-  ).toBe(true);
+  ).toBe(false);
   await expect
     .poll(() =>
       canvas.evaluate((c: GeometryCanvas) => c.__presentationDiagnostics?.().meshDraws ?? 0),

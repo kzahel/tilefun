@@ -1,0 +1,222 @@
+{
+  "version": 1,
+  "date": "2026-11-03",
+  "status": "Runtime policy changed from integer camera translation to continuous projection by default.",
+  "environment": {
+    "browser": "153.0.8010.12",
+    "renderer": "gpu",
+    "meshes": true,
+    "headless": true,
+    "cpuRate": 1,
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    }
+  },
+  "command": "node scripts/instrumentation/movement-pacing.mjs --output=/tmp/tilefun-movement-pacing",
+  "method": "Record real renderer drawImage destinations for the player and drawTexture destinations for the driven car; 240 frames per stage after warmup, discard 30 leading frames. Same-frame continuous projection isolates rounding from any real camera/player motion.",
+  "captures": [
+    {
+      "name": "before",
+      "baseRevision": "bd639701eefab87f1febd34684f62978a5fe18f4",
+      "workingTreeIncludedCaptureHooks": true,
+      "workingTreeIncludedContinuousDefault": false,
+      "cases": [
+        {
+          "session": "production",
+          "movement": "walk",
+          "recordedDraws": 210,
+          "drawKind": "sprite",
+          "pixelSnap": true,
+          "actualDrawXRangePx": 4,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": -1,
+            "max": 1,
+            "peakToPeak": 2
+          },
+          "frameP99Ms": 16.800000000000814,
+          "errors": []
+        },
+        {
+          "session": "production",
+          "movement": "run",
+          "recordedDraws": 210,
+          "drawKind": "sprite",
+          "pixelSnap": true,
+          "actualDrawXRangePx": 1,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": 0,
+            "max": 1,
+            "peakToPeak": 1
+          },
+          "frameP99Ms": 16.800000000001702,
+          "errors": []
+        },
+        {
+          "session": "production",
+          "movement": "car",
+          "recordedDraws": 210,
+          "drawKind": "mesh",
+          "pixelSnap": true,
+          "actualDrawXRangePx": 0.9995419921883695,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": -0.49969460185980097,
+            "max": 0.49949456457011365,
+            "peakToPeak": 0.9991891664299146
+          },
+          "frameP99Ms": 16.799999999999926,
+          "errors": []
+        },
+        {
+          "session": "production-repeat",
+          "movement": "walk",
+          "recordedDraws": 210,
+          "drawKind": "sprite",
+          "pixelSnap": true,
+          "actualDrawXRangePx": 1,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": -1,
+            "max": 0,
+            "peakToPeak": 1
+          },
+          "frameP99Ms": 16.799999999999926,
+          "errors": []
+        },
+        {
+          "session": "production-repeat",
+          "movement": "run",
+          "recordedDraws": 210,
+          "drawKind": "sprite",
+          "pixelSnap": true,
+          "actualDrawXRangePx": 1,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": 0,
+            "max": 1,
+            "peakToPeak": 1
+          },
+          "frameP99Ms": 16.799999999999926,
+          "errors": []
+        },
+        {
+          "session": "production-repeat",
+          "movement": "car",
+          "recordedDraws": 210,
+          "drawKind": "mesh",
+          "pixelSnap": true,
+          "actualDrawXRangePx": 0.9951474609379147,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": -0.49958426209332174,
+            "max": 0.49556319762359635,
+            "peakToPeak": 0.9951474597169181
+          },
+          "frameP99Ms": 16.800000000001702,
+          "errors": []
+        }
+      ]
+    },
+    {
+      "name": "after",
+      "baseRevision": "bd639701eefab87f1febd34684f62978a5fe18f4",
+      "workingTreeIncludedCaptureHooks": true,
+      "workingTreeIncludedContinuousDefault": true,
+      "cases": [
+        {
+          "session": "production",
+          "movement": "walk",
+          "recordedDraws": 210,
+          "drawKind": "sprite",
+          "pixelSnap": false,
+          "actualDrawXRangePx": 0,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": 0,
+            "max": 0,
+            "peakToPeak": 0
+          },
+          "frameP99Ms": 16.799999999999926,
+          "errors": []
+        },
+        {
+          "session": "production",
+          "movement": "run",
+          "recordedDraws": 210,
+          "drawKind": "sprite",
+          "pixelSnap": false,
+          "actualDrawXRangePx": 0,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": 0,
+            "max": 0,
+            "peakToPeak": 0
+          },
+          "frameP99Ms": 16.799999999999926,
+          "errors": []
+        },
+        {
+          "session": "production",
+          "movement": "car",
+          "recordedDraws": 210,
+          "drawKind": "mesh",
+          "pixelSnap": false,
+          "actualDrawXRangePx": 0.0006703108101646649,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": 0.0,
+            "max": 0.0,
+            "peakToPeak": 0.0
+          },
+          "frameP99Ms": 16.80000000000348,
+          "errors": []
+        },
+        {
+          "session": "production-repeat",
+          "movement": "walk",
+          "recordedDraws": 210,
+          "drawKind": "sprite",
+          "pixelSnap": false,
+          "actualDrawXRangePx": 0,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": 0,
+            "max": 0,
+            "peakToPeak": 0
+          },
+          "frameP99Ms": 16.799999999999038,
+          "errors": []
+        },
+        {
+          "session": "production-repeat",
+          "movement": "run",
+          "recordedDraws": 210,
+          "drawKind": "sprite",
+          "pixelSnap": false,
+          "actualDrawXRangePx": 0,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": 0,
+            "max": 0,
+            "peakToPeak": 0
+          },
+          "frameP99Ms": 16.799999999999926,
+          "errors": []
+        },
+        {
+          "session": "production-repeat",
+          "movement": "car",
+          "recordedDraws": 210,
+          "drawKind": "mesh",
+          "pixelSnap": false,
+          "actualDrawXRangePx": 0.0005957187061085278,
+          "cameraRoundingErrorAgainstSameFramesUnsnappedProjectionPx": {
+            "min": 0.0,
+            "max": 0.0,
+            "peakToPeak": 0.0
+          },
+          "frameP99Ms": 16.80000000000348,
+          "errors": []
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Short desktop full-Chromium captures; not physical-phone qualification.",
+    "The first before/walk sample includes a larger transient camera/player-relative change: total draw range 4px. Its camera-rounding component is isolated separately rather than attributing all movement to snapping.",
+    "No pixel art, source imagery, physics, prediction or authority clocks were changed.",
+    "Whole-pixel raster edges and nearest-neighbor texture sampling remain; the extra independent camera rounding is removed."
+  ]
+}

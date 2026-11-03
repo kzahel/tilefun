@@ -1,5 +1,10 @@
 # Embedded engine labs
 
+[213](../tactical/213-continuous-camera-projection.md) defaults both GameClient and
+ScenarioPresentationHost to continuous camera projection, retaining shared-edge
+raster alignment and inverse picking. The old grid-lock comparison is explicit
+`?pixelsnap=1`; lab pages do not implement another camera policy.
+
 [212](../tactical/212-matched-physics-tick-prediction.md) keeps game/lab replay on a
 committed physics horizon, compares corrections at matching ticks and coalesces
 overdue local controls with jump edges intact. The common predictor retains the
@@ -639,12 +644,10 @@ records this extraction and its validation. Shared owners are:
   supply body and camera interpolation together. The lab's -12px framing offset
   is explicit; position commands snap, while ordinary movement interpolates.
 
-  The 2026-10-07 camera raster prototype enables the same `RenderView.pixelSnap`
-  policy in GameClient and ScenarioPresentationHost. Only the final shared screen
-  translation is quantized; follow clocks, displayed world poses, fixed diagnostic
-  framing and prediction remain unchanged. Backend view copying and terrain
-  placement consume that policy; inverse picking follows the displayed projection.
-  `?pixelsnap=0` disables it in either host for visual comparison. Reference adapters
+  The 2026-10-07 camera raster prototype exposed `RenderView.pixelSnap` in both
+  hosts. 213 defaults to continuous projection because independent translation
+  rounding made the followed actor oscillate. `?pixelsnap=1` retains the old
+  grid-lock comparison; inverse picking follows the displayed projection. Reference adapters
   keep the original projection. See [rendering architecture](rendering-architecture.md)
   for placement regression scope, remaining texture-sampling limits and owner acceptance.
 

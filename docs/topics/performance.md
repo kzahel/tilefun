@@ -1,5 +1,11 @@
 # Streaming and gameplay performance
 
+[213](../tactical/213-continuous-camera-projection.md) reproduces the remaining
+screen-space camera wobble at actual sprite/mesh draw destinations. Continuous
+projection removes the extra rounding offset: steady walk/run draws stay fixed,
+and car draw variation falls below 0.001px in both desktop sessions. Raster
+qualification is in progress; physics and prediction are unchanged.
+
 [211](../tactical/211-movement-pacing-investigation.md) reproduces the owner's
 desktop clear-ground movement jitter with steady frame delivery. A replay comparison
 includes a newly appended legitimate input tick, generating false display corrections

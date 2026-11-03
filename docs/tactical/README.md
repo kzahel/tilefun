@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [213 Continuous camera projection](213-continuous-camera-projection.md) | Implemented: default continuous game/lab projection removes measured draw-position wobble; 39 native checks and before/after captures pass, raster qualification in progress |
 | [212 Matched physics tick prediction](212-matched-physics-tick-prediction.md) | Delivered: steady walk/run/car pacing in two production sessions; 56 native/five Worker/P2P browser checks, build and streaming readiness pass; pixel-grid wobble separate |
 | [211 Movement pacing investigation](211-movement-pacing-investigation.md) | Reproduced: replay compares different input ticks; isolated walk/run/car control removes false corrections; runtime repair pending, pixel-grid wobble separate |
 | [210 First-contact display anchor](210-first-contact-display-anchor.md) | Delivered: stationary NPCs anchor first-contact corrections; 49 native/five Worker/P2P browser checks, build and streaming readiness pass; owner device playtest next |

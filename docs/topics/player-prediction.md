@@ -16,8 +16,9 @@ coalesce with retained jump edges; genuine corrections and contact anchors remai
 all typechecks, lint, build/inventories and throttled streaming readiness pass.
 Two fresh production pacing sessions retain nearly constant walk/run/car speed
 and near-zero false correction. Next: owner desktop comparison after Save and reload.
-Integer camera translation adds a separate roughly one-screen-pixel wobble and
-needs its own presentation decision rather than a blind removal of layer snapping.
+[213](../tactical/213-continuous-camera-projection.md) separately removes the
+independent integer-camera translation from the default projection, retaining
+raster-edge alignment and shared picking; it does not change prediction.
 
 ## First-contact display anchor (210)
 

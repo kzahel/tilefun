@@ -11,6 +11,29 @@ it("pins ground, elevated and offset anchors to the existing fixed projection", 
   expect(projectWorld({ ...view, zoom: 0.5 }, 110, 220, 8)).toEqual({ sx: 415, sy: 318 });
 });
 
+it("keeps the followed actor fixed on screen through fractional world and camera travel", () => {
+  for (const zoom of [0.4, 0.8, 1, 1.3]) {
+    const view = {
+      x: -128.13,
+      y: 100.29,
+      zoom,
+      viewportWidth: 411,
+      viewportHeight: 789,
+      pixelSnap: cameraPixelSnap(new URLSearchParams()),
+    };
+    const first = projectWorld(view, view.x + 10, view.y + 4);
+    for (let i = 1; i <= 60; i++) {
+      const phase = (i * 64) / 60;
+      const moved = { ...view, x: view.x + phase, y: view.y - phase };
+      const next = projectWorld(moved, moved.x + 10, moved.y + 4);
+      expect(next.sx).toBeCloseTo(first.sx, 9);
+      expect(next.sy).toBeCloseTo(first.sy, 9);
+      expect(Math.floor(next.sx)).toBe(Math.floor(first.sx));
+      expect(Math.floor(next.sy)).toBe(Math.floor(first.sy));
+    }
+  }
+});
+
 it("keeps stationary geometry rigid through subpixel camera travel and fractional zoom", () => {
   for (const zoom of [0.4, 0.5, 0.8, 1, 1.3]) {
     const view = {
@@ -61,8 +84,9 @@ it("picks against the displayed snapped projection without quantizing camera fol
   }
   expect(camera.x).toBe(-10.25);
   expect(camera.y).toBe(17.5);
-  expect(cameraPixelSnap(new URLSearchParams())).toBe(true);
+  expect(cameraPixelSnap(new URLSearchParams())).toBe(false);
   expect(cameraPixelSnap(new URLSearchParams("pixelsnap=0"))).toBe(false);
+  expect(cameraPixelSnap(new URLSearchParams("pixelsnap=1"))).toBe(true);
 });
 it("shares camera projection and inverts on the requested plane without DPR duplication", () => {
   const camera = new Camera();

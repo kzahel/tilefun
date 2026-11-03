@@ -2,9 +2,9 @@ import type { ActionName } from "../input/ActionMap.js";
 import type { TerrainPreparationOptions } from "./RenderFrame.js";
 import type { TerrainDrawOptions } from "./TerrainFrame.js";
 
-/** Shared gameplay prototype; ?pixelsnap=0 restores the prior camera projection for comparison. */
+/** Continuous gameplay projection; ?pixelsnap=1 retains the old grid-locked comparison. */
 export function cameraPixelSnap(params: URLSearchParams): boolean {
-  return params.get("pixelsnap") !== "0";
+  return params.get("pixelsnap") === "1";
 }
 
 /** Shared by keyboard, controls and benchmark workloads. Keep existing 1–4 bindings. */

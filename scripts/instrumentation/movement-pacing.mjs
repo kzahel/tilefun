@@ -64,7 +64,32 @@ try {
       const g = document.querySelector("#game").__game;
 
       window.__movementProbe = { rows: [], enabled: false };
-      let presented, camera;
+      let presented, camera, renderedDraw;
+      const surface = g.renderer.surface;
+      const drawImage = surface.drawImage;
+      surface.drawImage = function (image, ...args) {
+        const player = g.stateView.playerEntity;
+        if (
+          window.__movementProbe.enabled &&
+          player.parentId === undefined &&
+          image === g.renderer.sheets.get(player.sprite?.sheetKey)?.image &&
+          args.length === 8
+        )
+          renderedDraw = {
+            kind: "sprite",
+            x: args[4],
+            y: args[5],
+            width: args[6],
+            height: args[7],
+          };
+        return drawImage.call(this, image, ...args);
+      };
+      const drawTexture = surface.drawTexture;
+      surface.drawTexture = function (texture, x, y, width, height) {
+        if (window.__movementProbe.enabled && g.stateView.playerEntity.parentId !== undefined)
+          renderedDraw = { kind: "mesh", x, y, width, height };
+        return drawTexture.call(this, texture, x, y, width, height);
+      };
       const begin = g.remoteView.beginPresentation;
       g.remoteView.beginPresentation = function (...args) {
         begin.apply(this, args);
@@ -80,6 +105,7 @@ try {
         render = callbacks.render;
       callbacks.render = (alpha, time) => {
         const start = performance.now();
+        renderedDraw = undefined;
         render(alpha, time);
         if (!window.__movementProbe.enabled) return;
         const p = g.remoteView._predictor,
@@ -96,6 +122,7 @@ try {
           renderMs: performance.now() - start,
           presented,
           camera,
+          renderedDraw,
           raw: {
             x: player.position.wx,
             y: player.position.wy,

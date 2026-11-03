@@ -1,5 +1,12 @@
 # Rendering architecture and backend separation
 
+[213](../tactical/213-continuous-camera-projection.md) removes independent integer
+camera-translation rounding from default gameplay/lab projection. Continuous
+projection keeps the followed actor steady on screen; shared raster-edge rounding,
+terrain overscan and inverse picking remain. `?pixelsnap=1` retains the old comparison.
+Source pixels and reference-camera contracts are unchanged. Native/capture checks
+pass; production raster qualification is in progress.
+
 Reset [205](../tactical/205-physics-reset.md) makes shared physics poses authoritative
 for scene collection and collision inspection. Runtime car ground fitting and
 articulated carry/equipment reconstruction are deleted; retained equipment pose
@@ -106,12 +113,11 @@ unchanged; [trains](trains.md) records owner acceptance and the remaining join l
   view data and a resource-ID lookup. Camera-only movement reuses prepared
   resources and a bounded placement pool. Canvas and the recording backend use
   the same builder.
-- Gameplay and interactive labs opt into a shared pixel-snapped screen translation
-  through `RenderView.pixelSnap`. `Projection` applies that translation to terrain,
-  sprites, grass, mesh anchors, overlays and picking while camera follow remains
-  continuous. `?pixelsnap=0` restores the previous projection for owner comparison.
-  Reference cameras default to the original unsnapped projection, preserving frozen
-  approval inputs. This is a 2026-10-07 prototype awaiting visual acceptance.
+- Gameplay, interactive labs and reference cameras default to continuous projection.
+  `Projection` shares the same translation across terrain, sprites, grass, mesh
+  anchors, overlays and picking. The earlier grid-locked prototype remains an
+  explicit `?pixelsnap=1` comparison through `RenderView.pixelSnap`; its independent
+  translation rounding caused the followed actor's one-pixel oscillation (213).
 - `collectScene`, `collectSceneOrder`, grass frames and prop-depth metadata own
   outdoor interpolation, visibility and shadow/body ordering. Ground shadows
   precede bodies; elevated shadows immediately precede their associated body.
