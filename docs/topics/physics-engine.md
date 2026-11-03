@@ -9,10 +9,10 @@ owns authoring semantics; [prediction](player-prediction.md) owns input replay;
 [189](../tactical/189-rapier-physics-prototype.md) owns the first bounded experiment;
 [190](../tactical/190-rapier-prediction-and-realm-proof.md) owns prediction/Realm integration.
 
-## Current cleanup (206)
+## Delivered cleanup (206)
 
 [206](../tactical/206-realm-phases-and-physical-edits.md) makes Realm tick phases
-and physical edits explicit while preserving205 behavior. The delivered slices name
+and physical edits explicit while preserving 205 behavior. The delivered slices name
 ordered execution phases and centralize teleport/launch/collider changes; prediction
 presentation separation and broader AI consolidation follow later.
 
@@ -21,6 +21,8 @@ and collider replacement. Scene synchronization admits body and cached snapshot
 state together; captures do not merge pending entity edits into old body state.
 Realm.tick orchestrates named phases, and RealmWildlife binds planning/task queries.
 Transient simulation views are scoped with finally. No extra scheduler or step is added.
+280 focused native checks, four production Worker/P2P/lab/vehicle browser cases,
+three typechecks, inventories/build and streaming readiness pass.
 
 ## Delivered reset (205)
 

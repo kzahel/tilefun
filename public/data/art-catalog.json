@@ -9557,7 +9557,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:848"
+          "source": "src/server/RealmWildlife.ts:130"
         },
         {
           "system": "Gameplay",
@@ -10485,7 +10485,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:850"
+          "source": "src/server/RealmWildlife.ts:132"
         },
         {
           "system": "Gameplay",
@@ -10615,7 +10615,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:850"
+          "source": "src/server/RealmWildlife.ts:132"
         },
         {
           "system": "Gameplay",
@@ -29759,7 +29759,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:848"
+          "source": "src/server/RealmWildlife.ts:130"
         },
         {
           "system": "Gameplay",
@@ -35455,27 +35455,27 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:73"
+          "source": "src/scenarios/ScenarioSession.ts:74"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:75"
+          "source": "src/scenarios/ScenarioSession.ts:76"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:134"
+          "source": "src/scenarios/ScenarioSession.ts:135"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:213"
+          "source": "src/scenarios/ScenarioSession.ts:214"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/EntityHandle.ts:169"
+          "source": "src/server/EntityHandle.ts:168"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/EntityHandle.ts:169"
+          "source": "src/server/EntityHandle.ts:168"
         },
         {
           "system": "Gameplay",
@@ -35491,23 +35491,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:304"
+          "source": "src/server/Realm.ts:308"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1286"
+          "source": "src/server/Realm.ts:1203"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1490"
+          "source": "src/server/Realm.ts:1411"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2143"
+          "source": "src/server/Realm.ts:2065"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2356"
+          "source": "src/server/Realm.ts:2278"
         },
         {
           "system": "Gameplay",
@@ -36291,19 +36291,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:38"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/wildlife/AnimalWorkSystem.ts:39"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:146"
+          "source": "src/wildlife/AnimalWorkSystem.ts:40"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:156"
+          "source": "src/wildlife/AnimalWorkSystem.ts:145"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/AnimalWorkSystem.ts:155"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/AnimalWorkSystem.ts:204"
         },
         {
           "system": "Gameplay",
@@ -36311,27 +36315,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:206"
+          "source": "src/wildlife/AnimalWorkSystem.ts:311"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:312"
+          "source": "src/wildlife/AnimalWorkSystem.ts:486"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:487"
+          "source": "src/wildlife/AnimalWorkSystem.ts:531"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:532"
+          "source": "src/wildlife/AnimalWorkSystem.ts:579"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:580"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:589"
+          "source": "src/wildlife/AnimalWorkSystem.ts:588"
         },
         {
           "system": "Gameplay",
@@ -36611,11 +36611,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1381"
+          "source": "src/server/Realm.ts:1298"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2320"
+          "source": "src/server/Realm.ts:2242"
         },
         {
           "system": "Gameplay",
@@ -36627,15 +36627,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:110"
+          "source": "src/wildlife/AnimalWorkSystem.ts:109"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:525"
+          "source": "src/wildlife/AnimalWorkSystem.ts:524"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:586"
+          "source": "src/wildlife/AnimalWorkSystem.ts:585"
         },
         {
           "system": "Gameplay",
@@ -37469,7 +37469,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:850"
+          "source": "src/server/RealmWildlife.ts:132"
         },
         {
           "system": "Gameplay",
@@ -37603,7 +37603,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:850"
+          "source": "src/server/RealmWildlife.ts:132"
         },
         {
           "system": "Gameplay",
