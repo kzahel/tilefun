@@ -9,7 +9,9 @@ reconciliation uses that anchor's own displacement. Its interpolation interval
 starts at the previous pose, so fractional render samples do not rewind a static
 NPC toward the player. The physical push and solved relative geometry remain.
 Contact geometry takes precedence over the incompatible old player-only offset.
-49 focused native tests pass; production qualification is in progress.
+49 focused native tests, five production Worker/P2P/lab/vehicle browser cases,
+typechecks, focused lint, inventories/build and throttled GPU/meshes streaming
+readiness pass. Next: owner device playtest of approach, pushing and release.
 
 ### Original car observation
 

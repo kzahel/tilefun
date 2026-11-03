@@ -1,6 +1,6 @@
 # First-contact display anchor
 
-Status: implemented; native checks pass, production qualification in progress.
+Status: delivered and locally qualified; owner playtest next.
 Updated: 2026-11-03.
 
 Owner reports an unmoving NPC teleports toward/sticks to the approaching player.
@@ -47,4 +47,18 @@ In the tick-18 probe, the first displayed NPC step now matches its +0.467px phys
 push. The tick-25 acknowledgement starts with an outward +0.533px step instead of
 an inward -1.200px step. The earlier car-stall probe's maximum displayed step drops
 from 1.189px to 0.240px, with unchanged maximum physical travel of 0.120px/tick.
-Production browser/build/inventory/streaming qualification follows.
+
+Implementation checkpoint: `0134f91f`. All three TypeScript projects and focused
+lint pass. Five production full-Chromium boundaries pass: ordinary Worker NPC
+contact/prediction, delayed P2P reversal/convergence, two-session Worker lab
+lifecycle, car ramp/seat reload and road traffic pause/reload/teardown. Build and
+all 2,120 Workshop identities pass after inventory regeneration; art catalog stays
+unchanged, and Workshop changes only 1,024 runtime fingerprints plus input digest.
+
+GPU/meshes streaming readiness with 4× CPU throttling passes. Walk/sprint/reverse
+finish with zero missing/incomplete/stale terrain. This is a desktop readiness
+check, not a physical-phone performance claim. No new browser case or simulation
+tick is introduced; the narrow native regression owns the reported transition.
+
+Next: owner Save and reload, then approach stationary NPCs from different sides
+and check first contact, continued pushing and release on the original device.

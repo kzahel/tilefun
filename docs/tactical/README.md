@@ -12,7 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
-| [210 First-contact display anchor](210-first-contact-display-anchor.md) | Implemented: stationary NPCs anchor first-contact corrections; 49 native checks pass, production qualification in progress |
+| [210 First-contact display anchor](210-first-contact-display-anchor.md) | Delivered: stationary NPCs anchor first-contact corrections; 49 native/five Worker/P2P browser checks, build and streaming readiness pass; owner device playtest next |
 | [209 Car driving and autonomous traffic](209-car-driving-and-autonomous-traffic.md) | Delivered: shared rolling motor, bounded road traffic and persistence; 116 native/five Worker/P2P browser checks, build and streaming readiness pass; owner playtest next |
 | [208 Ground seams and movement pacing](208-ground-seams-and-movement-pacing.md) | Delivered: welded static seams, monotonic camera time, retained previous poses and committed replay presentation; 107 native/four browser checks, build and throttled streaming pass; physical-phone confirmation remains |
 | [207 Nearby actor display corrections](207-nearby-actor-display-corrections.md) | Delivered: proximity no longer transfers player correction; solved contacts survive restore; 93 native/four browser checks, build and streaming readiness pass; subpixel terrain seam bob remains separate |
