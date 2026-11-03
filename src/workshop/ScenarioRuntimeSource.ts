@@ -21,6 +21,7 @@ import spriteRaster from "../rendering/Canvas2DRenderer.ts?raw";
 import interiorRaster from "../rendering/CanvasInteriorResources.ts?raw";
 import canvasBackend from "../rendering/CanvasRenderBackend.ts?raw";
 import canvasHost from "../rendering/CanvasRenderHost.ts?raw";
+import carRenderTargets from "../rendering/CarRenderTargets.ts?raw";
 import curveSprite from "../rendering/CurveTrainPresentation.ts?raw";
 import sceneCollection from "../rendering/collectScene.ts?raw";
 import dumpSprite from "../rendering/DumpTruckFallback.ts?raw";
@@ -107,6 +108,7 @@ export const scenarioRuntimeSource = {
   gpuHost,
   gpuRaster,
   gpuBodies,
+  carRenderTargets,
   spriteRaster,
   terrainPlacement,
   subpixelImages,

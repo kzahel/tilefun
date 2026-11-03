@@ -1062,12 +1062,16 @@ test("production vehicle depth matches common 3D geometry through ordering, tilt
               oracleErrors: number;
             }[];
             imageHits: number;
+            targetPool: { pairs: number; creates: number; hits: number; bytes: number };
           }>;
         };
       }
     ).rendererLab.probeVehicleDepth(),
   );
   expect(report.imageHits).toBeGreaterThan(0);
+  expect(report.targetPool).toMatchObject({ pairs: 2, creates: 2 });
+  expect(report.targetPool.hits).toBeGreaterThan(2);
+  expect(report.targetPool.bytes).toBeLessThanOrEqual(16 * 1024 * 1024);
   expect(report.reports).toHaveLength(3);
   for (const result of report.reports) {
     expect(result.overlap).toBeGreaterThan(20);

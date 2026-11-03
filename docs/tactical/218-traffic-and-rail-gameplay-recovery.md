@@ -87,3 +87,19 @@ fence. Blocked prescribed motors publish their stopped targets. A native full
 binary round trip removes private service identities, recreates a client scene
 and proves 90 shared steps match authority for the whole consist and roof rider;
 group removal also round-trips through a nullable delta.
+
+
+## Measured moving-car GPU allocation churn
+
+A separate production WebGL allocation capture after warmup records 12 visible
+cars creating 12,930 textures and 6,465 framebuffers over 481 frames: about
+26.9 textures and 13.4 framebuffers per frame. Different car radii repeatedly
+resized the one raw target and one outline target. This is proven resource churn,
+not proof of the affected phone's frame-rate bottleneck.
+
+Exact-size scratch color/depth pairs now reuse native resolutions through a
+16MiB / 16-entry LRU with unused-frame expiry. Scratch composites still flush
+before reuse; completed pose images remain separately bounded. Disabling meshes,
+context recovery and disposal clear the pool. No pose quantization, reduced
+resolution, wheel-animation change or rendering-quality mode is introduced.
+Pixel/depth and allocation checks follow before final readiness.

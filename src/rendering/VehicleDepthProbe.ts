@@ -179,7 +179,11 @@ export async function probeVehicleDepth() {
         }
       reports.push({ pose, overlap, orderErrors, cacheErrors, oracleErrors });
     }
-    return { reports, imageHits: gpu.meshes.images.hits };
+    return {
+      reports,
+      imageHits: gpu.meshes.images.hits,
+      targetPool: gpu.meshes.targets.diagnostics,
+    };
   } finally {
     gpu.dispose();
     frame.clear();

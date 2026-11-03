@@ -12,6 +12,7 @@ const output = option("output", path.join(os.tmpdir(), "tilefun-realm-physics"))
 const fixture = option("fixture", "realm");
 if (!["realm", "traffic-crowd"].includes(fixture)) throw Error("Unknown Realm fixture");
 const meshes = process.argv.includes("--meshes");
+const allocations = process.argv.includes("--allocations");
 const cpuRate = Number(option("cpu", "1"));
 if (!Number.isFinite(cpuRate) || cpuRate < 1 || cpuRate > 16)
   throw Error("CPU throttle must be 1–16");
@@ -52,6 +53,7 @@ const report = {
   renderer,
   fixture,
   meshes,
+  allocations,
   cpuRate,
   seconds,
   warmup,
@@ -82,6 +84,29 @@ try {
           errors = [];
         page.on("pageerror", (e) => errors.push(String(e)));
         try {
+          if (allocations)
+            await page.addInitScript(() => {
+              const counts = {};
+              window.__tilefunGlAllocations = counts;
+              for (const ctor of [window.WebGLRenderingContext, window.WebGL2RenderingContext])
+                if (ctor)
+                  for (const key of [
+                    "createTexture",
+                    "deleteTexture",
+                    "texImage2D",
+                    "texStorage2D",
+                    "createFramebuffer",
+                    "deleteFramebuffer",
+                    "renderbufferStorage",
+                  ]) {
+                    const original = ctor.prototype[key];
+                    if (!original) continue;
+                    ctor.prototype[key] = function (...args) {
+                      counts[key] = (counts[key] ?? 0) + 1;
+                      return original.apply(this, args);
+                    };
+                  }
+            });
           const url = new URL("workshop.html", mode === "shared" ? base : referenceBase);
           url.searchParams.set("geometry", fixture);
           if (meshes) url.searchParams.set("meshes", "");
@@ -113,6 +138,7 @@ try {
               at: performance.now(),
               diagnostics,
               scene: c.__presentationDiagnostics(),
+              gl: window.__tilefunGlAllocations ? { ...window.__tilefunGlAllocations } : undefined,
               device: {
                 renderer: c.dataset.renderer,
                 cars: Number(c.dataset.trafficCount ?? 0),
@@ -133,6 +159,7 @@ try {
               at: performance.now(),
               diagnostics,
               frames: window.__realmBenchFrames,
+              gl: window.__tilefunGlAllocations ? { ...window.__tilefunGlAllocations } : undefined,
               scene: c.__presentationDiagnostics(),
             };
           });
@@ -146,6 +173,12 @@ try {
             frames: summary(end.frames),
             scene: end.scene,
             startScene: start.scene,
+            glAllocations:
+              start.gl && end.gl
+                ? Object.fromEntries(
+                    Object.keys(end.gl).map((key) => [key, end.gl[key] - (start.gl[key] ?? 0)]),
+                  )
+                : undefined,
             errors,
           };
           report.cases.push(row);

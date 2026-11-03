@@ -157,6 +157,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
         vehiclePaintDraws: this.meshes.paintDraws,
         vehiclePaintFallbacks: this.meshes.paintFallbacks,
         targetBytes: this.meshes.targetBytes,
+        meshTargetPool: this.meshes.targets.diagnostics,
       },
     };
   }

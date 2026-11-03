@@ -8,6 +8,7 @@ import { CarBodyImageCache, carBodyImageKey } from "./CarBodyImageCache.js";
 import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
 import { setCarMeshProjection } from "./CarMeshProjection.js";
 import { CarPixelOutline } from "./CarPixelOutline.js";
+import { CarRenderTargets } from "./CarRenderTargets.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
 import { GpuVehicleContents } from "./GpuVehicleContents.js";
 import { meshBedFoot, meshChildPoint } from "./MeshGradePose.js";
@@ -40,7 +41,7 @@ export class GpuMeshBodies {
   readonly shadowCasters = new Set<number>();
   private readonly scene = new THREE.Scene();
   private readonly camera = new THREE.Camera();
-  private readonly target = new THREE.WebGLRenderTarget(1, 1, { depthBuffer: true });
+  readonly targets = new CarRenderTargets();
   private readonly outline = new CarPixelOutline();
   private readonly clearColor = new THREE.Color();
   private enabled = false;
@@ -51,16 +52,12 @@ export class GpuMeshBodies {
   paintFallbacks = 0;
   /** Diagnostic baseline keeps the old immediate cached-image submission. */
   deferCachedImages = true;
-  constructor(private readonly surface: GpuRasterSurface) {
-    this.target.depthTexture = new THREE.DepthTexture(1, 1, THREE.UnsignedIntType);
-    this.target.texture.colorSpace = THREE.SRGBColorSpace;
-    this.target.texture.magFilter = this.target.texture.minFilter = THREE.NearestFilter;
-    this.target.texture.generateMipmaps = false;
-  }
+  constructor(private readonly surface: GpuRasterSurface) {}
   setEnabled(value: boolean) {
     if (!value) {
       this.surface.flush();
       this.images.clear();
+      this.targets.clear();
     }
     this.enabled = value;
     if (value)
@@ -109,6 +106,7 @@ export class GpuMeshBodies {
   /** Called once before submissions; promise completions only become visible here. */
   beginFrame() {
     this.shadowCasters.clear();
+    this.targets.beginFrame();
     this.images.beginFrame();
     this.paints.beginFrame();
     this.ready.clear();
@@ -185,8 +183,8 @@ export class GpuMeshBodies {
       );
     radius = Math.ceil(radius);
     const resolution = Math.min(1024, Math.max(1, Math.ceil(radius * 2)));
-    if (this.target.width !== resolution || this.target.height !== resolution)
-      this.target.setSize(resolution, resolution);
+    const scratch = this.targets.get(resolution);
+    const target = scratch.source;
     const object = asset.object;
     asset.setPhysical(!!item.mesh.physical);
     object.quaternion.set(...item.mesh.orientation);
@@ -248,21 +246,21 @@ export class GpuMeshBodies {
     renderer.getClearColor(this.clearColor);
     const alpha = renderer.getClearAlpha();
     const previous = renderer.getRenderTarget();
-    let texture = this.target.texture;
-    let depth: THREE.Texture | null = this.target.depthTexture;
+    let texture = target.texture;
+    let depth: THREE.Texture | null = target.depthTexture;
     renderer.setScissorTest(false);
     const restorePaint = paintTexture ? this.paints.bind(object, paintTexture) : undefined;
     const restoreChildPaint =
       childTexture && childAsset ? this.paints.bind(childAsset.object, childTexture) : undefined;
     try {
-      renderer.setRenderTarget(this.target);
+      renderer.setRenderTarget(target);
       renderer.setClearColor(0, 0);
       renderer.clear();
       renderer.render(this.scene, this.camera);
       this.drawCalls += renderer.info.render.calls;
       const output =
-        (key === undefined ? undefined : this.images.admit(key, resolution)) ?? this.outline.target;
-      texture = this.outline.render(renderer, this.target, output);
+        (key === undefined ? undefined : this.images.admit(key, resolution)) ?? scratch.outline;
+      texture = this.outline.render(renderer, target, output);
       depth = output.depthTexture;
       this.drawCalls += renderer.info.render.calls;
     } finally {
@@ -315,7 +313,7 @@ export class GpuMeshBodies {
     this.surface.flush();
     this.images.clear();
     this.outline.recover();
-    this.target.dispose();
+    this.targets.clear();
   }
   dispose() {
     this.surface.flush();
@@ -325,13 +323,9 @@ export class GpuMeshBodies {
     this.ready.clear();
     for (const slot of this.slots.values()) slot.dispose();
     this.outline.dispose();
-    this.target.dispose();
+    this.targets.clear();
   }
   get targetBytes() {
-    return (
-      this.images.bytes +
-      this.target.width * this.target.height * 8 +
-      this.outline.target.width * this.outline.target.height * 8
-    );
+    return this.images.bytes + this.targets.bytes;
   }
 }
