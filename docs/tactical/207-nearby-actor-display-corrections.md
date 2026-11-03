@@ -55,7 +55,7 @@ than masking height or introducing another collision resolver.
 
 Implementation checkpoint: `e86f93ad`. Production build, art catalog and all
 2,119 Workshop identities pass. Generated manifest changes contain only runtime
-fingerprints; art pixels and review decisions are unchanged. All four full
+fingerprints and their input digest; art pixels and review decisions are unchanged. All four full
 Chromium boundaries pass: ordinary Worker NPC contacts/prediction, delayed P2P
 reversal convergence, two-session lab control/fences/reload, and car ramp/seat
 reload. Streaming readiness passes, with no final missing/incomplete/stale terrain
