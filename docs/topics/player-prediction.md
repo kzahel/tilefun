@@ -1,5 +1,15 @@
 # Player prediction and moving contacts
 
+## Nearby actors and solved contact membership (207)
+
+[207](../tactical/207-nearby-actor-display-corrections.md) separates proximity's
+predicted timeline selection from solved contacts' shared display correction.
+The player's correction no longer shifts/lifts unconnected cars or NPCs nearby.
+Supported contact components pin vertical correction to their solved support,
+while actual touching bodies retain one horizontal correction. Snapshots include
+bounded solved body pairs so restore preserves that membership without another
+physics tick. The physics controller and contact response remain unchanged.
+
 ## Shared-physics default (205)
 
 The normal `PlayerPredictor` now restores/replays the same fixed 60Hz `PhysicsScene`

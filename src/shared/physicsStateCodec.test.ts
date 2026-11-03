@@ -32,14 +32,14 @@ const body: PhysicsBodyState = {
   altitude: 24,
   desiredHeading: -0.75,
 };
-const state: PhysicsState = { epoch: 42, tick: 1001, omitted: 3, bodies: [body] };
+const state: PhysicsState = { epoch: 42, tick: 1001, omitted: 3, bodies: [body], contacts: [] };
 function frame(physics: PhysicsState): FrameMessage {
   return { type: "frame", serverTick: 1010, lastProcessedInputSeq: 99, playerEntityId: 7, physics };
 }
 it("ordinary binary frames retain one common physics tick, motor/support state and precise world coordinates", () => {
   const wire = encodeServerMessage(frame(state));
   expect(decodeServerMessage(wire)).toEqual(frame(state));
-  expect(wire.byteLength).toBe(27 + 1 + 14 + 85);
+  expect(wire.byteLength).toBe(27 + 1 + 16 + 85);
   const minimal = { ...state, bodies: [{ ...body, kind: "loose" as const }] };
   delete minimal.bodies[0]?.altitude;
   delete minimal.bodies[0]?.desiredHeading;
@@ -61,6 +61,30 @@ it("rejects oversized, duplicate, nonfinite, truncated and trailing physics stat
   expect(() => decodeServerMessage(extra.buffer)).toThrow(/trailing/);
   new DataView(wire).setUint16(40, MAX_PREDICTION_BODIES + 1, true);
   expect(() => decodeServerMessage(wire)).toThrow(/count/);
+});
+
+it("round-trips bounded solved pairs and rejects duplicate or unknown contact identities", () => {
+  const coupled: PhysicsState = {
+    ...state,
+    bodies: [body, { ...body, id: 11 }],
+    contacts: [[7, 11]],
+  };
+  const wire = encodeServerMessage(frame(coupled));
+  expect(decodeServerMessage(wire)).toEqual(frame(coupled));
+  expect(wire.byteLength).toBe(27 + 1 + 16 + 2 * 85 + 8);
+  expect(() =>
+    encodeServerMessage(
+      frame({
+        ...coupled,
+        contacts: [
+          [7, 11],
+          [7, 11],
+        ],
+      }),
+    ),
+  ).toThrow(/contact/);
+  new DataView(wire).setUint32(wire.byteLength - 4, 99, true);
+  expect(() => decodeServerMessage(wire)).toThrow(/contact/);
 });
 
 it("replicas retain frame physics state and clear it across world resets", () => {

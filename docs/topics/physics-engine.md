@@ -9,6 +9,16 @@ owns authoring semantics; [prediction](player-prediction.md) owns input replay;
 [189](../tactical/189-rapier-physics-prototype.md) owns the first bounded experiment;
 [190](../tactical/190-rapier-prediction-and-realm-proof.md) owns prediction/Realm integration.
 
+## Nearby actor display correction (207)
+
+[207](../tactical/207-nearby-actor-display-corrections.md) fixes player display
+correction transferring to unconnected nearby cars/NPCs. Only solved contact
+members share correction; floor-supported groups cannot be visually lifted.
+Numerical captures now include bounded solved pairs, restored without stepping.
+Physics shapes, motors and solver settings are unchanged. A separate native
+coplanar terrain section-edge bob of about 0.59px remains; shape/margin experiments
+regressed traversal and were reverted. Investigate terrain internal edges next.
+
 ## Delivered cleanup (206)
 
 [206](../tactical/206-realm-phases-and-physical-edits.md) makes Realm tick phases
@@ -52,7 +62,9 @@ alternate Realm owner. The two-pane co-op lab now uses ordinary ScenarioSession,
 independently clocked ScenarioWorkerHost, normal binary frames and one private
 PlayerPredictor per pane. Scenario recipes retain only scoped gravity; normal
 input wire tag `0x81` has eight bytes and no duration field. The frame tag is
-`0x0c`; retired air-momentum/equipment fields are no longer replicated. Matching updated client/server builds are required.
+`0x0c` at reset delivery; 207 adds solved pairs with tag `0x0d`. Retired
+air-momentum/equipment fields are no longer replicated. Matching updated
+client/server builds are required.
 
 Species and work trajectories now submit the same data-only `motionIntent`;
 they no longer write/undo physical body height. Anchored crops/sites are nonblocking

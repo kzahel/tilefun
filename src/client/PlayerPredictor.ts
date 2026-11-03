@@ -536,7 +536,7 @@ export class PlayerPredictor {
     if (!this.active || !this.scene) return null;
     return { time: (this.scene.physicsTick - 1 + alpha) * PHYSICS_DT, domain: this.clockEpoch };
   }
-  /** One rigid display correction and one tick for the local contact component. */
+  /** Nearby bodies share predicted time; only actual contacts share correction. */
   presentEntities(alpha: number, buffered: readonly Entity[]): Entity[] {
     const player = this.predicted,
       scene = this.scene;
@@ -556,20 +556,35 @@ export class PlayerPredictor {
     }
     for (const id of component)
       for (const neighbor of scene.contactIds(id) ?? []) component.add(neighbor);
+    const touching = new Set<number>([root, player.id]);
+    for (const id of touching)
+      for (const neighbor of scene.contactIds(id) ?? []) touching.add(neighbor);
     const error = this.error();
+    // A correction must not lift an entire contact stack off its solved floor.
+    let floorSupported = false;
+    for (const id of touching) {
+      const state = scene.bodyState(id);
+      if (state?.grounded && state.supportId === undefined) {
+        floorSupported = true;
+        break;
+      }
+    }
     return buffered.map((entity) => {
       if (!component.has(entity.id)) return entity;
       const predicted = entity.id === player.id ? player : this.published.get(entity.id);
       if (!predicted) return entity;
+      // Proximity selects a coherent simulation tick, not a physical connection.
+      // Transferring the player's correction here moves parked cars before touch.
+      const corrected = touching.has(entity.id);
       const prev = predicted.prevPosition ?? predicted.position;
       const position = {
-        wx: prev.wx + (predicted.position.wx - prev.wx) * alpha + error.x,
-        wy: prev.wy + (predicted.position.wy - prev.wy) * alpha + error.y,
+        wx: prev.wx + (predicted.position.wx - prev.wx) * alpha + (corrected ? error.x : 0),
+        wy: prev.wy + (predicted.position.wy - prev.wy) * alpha + (corrected ? error.y : 0),
       };
       const z =
         (predicted.prevWz ?? predicted.wz ?? 0) * (1 - alpha) +
         (predicted.wz ?? 0) * alpha +
-        error.z;
+        (corrected && !floorSupported ? error.z : 0);
       return {
         ...predicted,
         sprite: entity.id === player.id ? predicted.sprite : entity.sprite,

@@ -183,6 +183,34 @@ it("uses gravity in the shared scene, including after snapshot restore", async (
   expect(PHYSICS_DT).toBe(1 / 60);
 });
 
+it("restores solved contact membership at the snapshot tick without a hidden step", async () => {
+  const s = await scene(),
+    player = createPlayer(64, 100),
+    npc = createFauna("dog", 80, 100),
+    distant = createPlayer(300, 100),
+    ground = geometry();
+  player.id = 1;
+  npc.id = 2;
+  distant.id = 3;
+  const actors = [player, npc, distant];
+  for (let tick = 0; tick < 30; tick++) {
+    s.synchronize(actors);
+    s.step(new Map([[1, { vx: 64, vy: 0 }]]), ground);
+  }
+  const captured = s.snapshotAround(1, new Set([1, 2, 3]));
+  expect(captured.contacts).toEqual([[1, 2]]);
+  const restored = await scene();
+  restored.synchronize(structuredClone(actors));
+  restored.restore(captured);
+  expect(restored.diagnostics.worldSteps).toBe(0);
+  expect(restored.physicsTick).toBe(captured.tick);
+  expect([...(restored.contactIds(1) ?? [])]).toEqual([2]);
+  expect([...(restored.contactIds(2) ?? [])]).toEqual([1]);
+  expect([...(restored.contactIds(3) ?? [])]).toEqual([]);
+  expect(restored.snapshot().contacts).toEqual(captured.contacts);
+  expect(s.snapshotAround(1, new Set([1])).contacts).toEqual([]);
+});
+
 it("walks up a compiled ramp and retains empty space beneath an elevated deck", async () => {
   const ramp: Prop = {
     id: 100,

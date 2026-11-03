@@ -254,6 +254,75 @@ it("buffers an idle observer's whole scene and gives an active contact component
   expect((npc?.position.wx ?? 0) - (player?.position.wx ?? 0)).toBeLessThan(11);
 });
 
+it("does not transfer a player's display correction to a nearby car or NPC before contact", async () => {
+  const npc = createChicken(48, 116);
+  if (npc.wanderAI) npc.wanderAI.timer = 100;
+  const f = await setup({
+    version: 1,
+    id: "nearby-car-correction",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(48, 100),
+    props: [],
+    actors: [npc],
+    parkedVehicles: [{ model: "compact-1", wx: 100, wy: 100, facing: 3 }],
+  });
+  const car = f.view.serverEntities.find((e) => e.type === "vehicle-v1:compact-1");
+  if (!car) throw Error("Missing car");
+  // Several controls arrive together: authority admits the latest walking
+  // control while the client has already predicted the earlier jump.
+  for (let seq = 2; seq <= 9; seq++) {
+    const movement = { ...idle, dx: 1, jump: seq === 2 };
+    f.input(seq, movement);
+    f.s.realm.handleMessage(f.s.player.clientId, f.s.player, {
+      type: "player-input",
+      seq,
+      ...movement,
+    });
+  }
+  expect(f.predictor.player?.wz).toBeGreaterThan(5);
+  f.s.tick();
+  f.receive(f.s.frames());
+  expect(f.predictor.lastReconcileDiagnostics?.resimPosErr).toBeGreaterThan(5);
+  const shown = f.predictor.presentEntities(1, f.view.serverEntities);
+  for (const type of [car.type, "chicken"]) {
+    const displayed = shown.find((e) => e.type === type);
+    const actual = f.view.serverEntities.find((e) => e.type === type);
+    expect(displayed?.position.wx).toBeCloseTo(actual?.position.wx ?? Infinity, 2);
+    expect(displayed?.position.wy).toBeCloseTo(actual?.position.wy ?? Infinity, 2);
+    expect(displayed?.wz).toBeCloseTo(actual?.wz ?? Infinity, 2);
+  }
+});
+
+it("keeps a touching player and car coherent without lifting them off solved support", async () => {
+  const f = await setup({
+    version: 1,
+    id: "supported-car-correction",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(65.5, 100),
+    props: [],
+    parkedVehicles: [{ model: "compact-1", wx: 100, wy: 100, facing: 3 }],
+  });
+  for (let seq = 2; seq <= 9; seq++) {
+    const movement = { ...idle, dx: 1, jump: seq === 2 };
+    f.input(seq, movement);
+    f.s.realm.handleMessage(f.s.player.clientId, f.s.player, {
+      type: "player-input",
+      seq,
+      ...movement,
+    });
+  }
+  f.s.tick();
+  f.receive(f.s.frames());
+  const shown = f.predictor.presentEntities(1, f.view.serverEntities);
+  const player = shown.find((e) => e.id === f.s.player.player.id);
+  const car = shown.find((e) => e.type === "vehicle-v1:compact-1");
+  expect(f.predictor.lastReconcileDiagnostics?.resimPosErr).toBeGreaterThan(5);
+  expect((car?.position.wx ?? 0) - (player?.position.wx ?? 0)).toBeCloseTo(34.5, 0);
+  expect(player?.wz).toBeCloseTo(f.s.player.player.wz ?? Infinity, 2);
+  const actualCar = f.view.serverEntities.find((e) => e.id === car?.id);
+  expect(car?.wz).toBeCloseTo(actualCar?.wz ?? Infinity, 2);
+});
+
 it("keeps a delayed second player's contact component coherent at render fractions while the host reverses", async () => {
   const f = await setup();
   for (const e of [...f.s.realm.entityManager.entities])

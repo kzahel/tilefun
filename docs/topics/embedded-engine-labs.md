@@ -1,5 +1,11 @@
 # Embedded engine labs
 
+[207](../tactical/207-nearby-actor-display-corrections.md) changes the common
+PlayerPredictor used by game and lab: nearby actors retain predicted time but
+only solved contact members share display correction, and floor support pins its
+vertical component. Ordinary numerical frames retain solved body pairs through
+restore, including zero-replay updates. No lab-specific contact owner is added.
+
 Delivered reset [205](../tactical/205-physics-reset.md): ordinary Realm authority now
 uses one shared `PhysicsScene` step, including ordinary ScenarioSession consumers.
 Ordinary ScenarioClient prediction now uses the same shared kernel and reconciles

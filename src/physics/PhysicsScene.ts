@@ -572,7 +572,8 @@ export class PhysicsScene {
    */
   snapshotAround(anchorId: number, visible: ReadonlySet<number>): PhysicsState {
     const anchor = this.bodies.get(anchorId);
-    if (!anchor) return { epoch: this.epoch, tick: this.tick, omitted: 0, bodies: [] };
+    if (!anchor)
+      return { epoch: this.epoch, tick: this.tick, omitted: 0, bodies: [], contacts: [] };
     const selected = new Map<number, Body>();
     const required = new Set<number>();
     const queue = [anchorId];
@@ -612,7 +613,16 @@ export class PhysicsScene {
       tick: this.tick,
       omitted: candidates.length - selected.size,
       bodies: [...selected.values()].map((entry) => this.copyBodyState(entry)),
+      contacts: this.copyContacts(selected),
     };
+  }
+
+  private copyContacts(selected: ReadonlyMap<number, Body>): [number, number][] {
+    const pairs: [number, number][] = [];
+    for (const id of selected.keys())
+      for (const other of this.contacts.get(id) ?? [])
+        if (id < other && selected.has(other)) pairs.push([id, other]);
+    return pairs;
   }
 
   private copyBodyState(entry: Body): PhysicsBodyState {
@@ -624,6 +634,7 @@ export class PhysicsScene {
       omitted: 0,
       tick: this.tick,
       bodies: [...this.bodies.values()].map((entry) => this.copyBodyState(entry)),
+      contacts: this.copyContacts(this.bodies),
     };
   }
   /** Restore body/motor state at an authoritative physics tick; no hidden step. */
@@ -650,7 +661,7 @@ export class PhysicsScene {
       );
       entry.body.setAngvel({ x: 0, y: 0, z: 0 }, true);
       entry.state = { ...state };
-      // Publish only state supplied by the snapshot, without inventing contacts.
+      // Publish state and contact membership supplied by the same snapshot.
       entry.entity.prevPosition = { wx: state.x, wy: state.y };
       entry.entity.prevWz = state.z;
       if (entry.kind === "vehicle")
@@ -667,6 +678,21 @@ export class PhysicsScene {
       }
       if (state.grounded) delete entry.entity.jumpVZ;
       else entry.entity.jumpVZ = state.vz;
+    }
+    for (const [a, b] of snapshot.contacts) {
+      if (!this.bodies.has(a) || !this.bodies.has(b) || a === b)
+        throw Error("Invalid restored physics contact");
+      for (const [id, other] of [
+        [a, b],
+        [b, a],
+      ] as const) {
+        let neighbors = this.contacts.get(id);
+        if (!neighbors) {
+          neighbors = new Set();
+          this.contacts.set(id, neighbors);
+        }
+        neighbors.add(other);
+      }
     }
   }
 }

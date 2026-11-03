@@ -43,4 +43,6 @@ export interface PhysicsState {
   /** Bodies excluded by the bounded local snapshot. Prediction must not ignore overflow. */
   omitted: number;
   bodies: PhysicsBodyState[];
+  /** Solved body pairs at this tick, restricted to the captured body set. */
+  contacts: [number, number][];
 }

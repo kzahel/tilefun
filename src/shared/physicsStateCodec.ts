@@ -22,13 +22,22 @@ const FIELDS = [
   "desiredHeading",
 ] as const;
 const BODY_BYTES = 85;
-const HEADER_BYTES = 14;
+const HEADER_BYTES = 16;
+const CONTACT_BYTES = 8;
+const MAX_CONTACTS = (MAX_PREDICTION_BODIES * (MAX_PREDICTION_BODIES - 1)) / 2;
 const NONE = 0xffff_ffff;
 
 export function physicsStateBytes(state?: PhysicsState): number {
   if (state && state.bodies.length > MAX_PREDICTION_BODIES)
     throw Error("Physics snapshot exceeds local body limit");
-  return 1 + (state ? HEADER_BYTES + state.bodies.length * BODY_BYTES : 0);
+  if (state && state.contacts.length > MAX_CONTACTS)
+    throw Error("Physics snapshot exceeds contact limit");
+  return (
+    1 +
+    (state
+      ? HEADER_BYTES + state.bodies.length * BODY_BYTES + state.contacts.length * CONTACT_BYTES
+      : 0)
+  );
 }
 function uint(value: number) {
   if (!Number.isInteger(value) || value < 0 || value > NONE) throw Error("Invalid physics integer");
@@ -47,6 +56,8 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
     offset += 4;
   }
   view.setUint16(offset, state.bodies.length, true);
+  offset += 2;
+  view.setUint16(offset, state.contacts.length, true);
   offset += 2;
   const ids = new Set<number>();
   for (const body of state.bodies) {
@@ -77,6 +88,15 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
       offset += 4;
     }
   }
+  const pairs = new Set<string>();
+  for (const [a, b] of state.contacts) {
+    if (!ids.has(a) || !ids.has(b) || a >= b || pairs.has(`${a}:${b}`))
+      throw Error("Invalid physics contact identity");
+    pairs.add(`${a}:${b}`);
+    view.setUint32(offset, uint(a), true);
+    view.setUint32(offset + 4, uint(b), true);
+    offset += CONTACT_BYTES;
+  }
   return offset;
 }
 export function readPhysicsState(
@@ -94,7 +114,13 @@ export function readPhysicsState(
   offset += 4;
   const count = view.getUint16(offset, true);
   offset += 2;
-  if (count > MAX_PREDICTION_BODIES || offset + count * BODY_BYTES > view.byteLength)
+  const contactCount = view.getUint16(offset, true);
+  offset += 2;
+  if (
+    count > MAX_PREDICTION_BODIES ||
+    contactCount > MAX_CONTACTS ||
+    offset + count * BODY_BYTES + contactCount * CONTACT_BYTES > view.byteLength
+  )
     throw Error("Invalid physics snapshot body count/length");
   const bodies: PhysicsBodyState[] = [],
     ids = new Set<number>();
@@ -143,5 +169,16 @@ export function readPhysicsState(
     }
     bodies.push(body);
   }
-  return [{ epoch, tick, omitted, bodies }, offset];
+  const contacts: [number, number][] = [],
+    pairs = new Set<string>();
+  for (let i = 0; i < contactCount; i++) {
+    const a = view.getUint32(offset, true),
+      b = view.getUint32(offset + 4, true);
+    offset += CONTACT_BYTES;
+    if (!ids.has(a) || !ids.has(b) || a >= b || pairs.has(`${a}:${b}`))
+      throw Error("Invalid physics contact identity");
+    pairs.add(`${a}:${b}`);
+    contacts.push([a, b]);
+  }
+  return [{ epoch, tick, omitted, bodies, contacts }, offset];
 }

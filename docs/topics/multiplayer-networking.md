@@ -4,12 +4,21 @@ Topic: multiplayer-networking
 Status: shared Worker authority for browser P2P, independent bounded guest links,
 reliable ordered replication and fragmented snapshots; bounded guest recovery.
 Broader network investigation is deferred.
-Updated: 2026-10-25.
+Updated: 2026-11-03.
 
 Owns ongoing transport/replication decisions and gaps. The
 [architecture guide](../client-server-architecture.md) owns runtime boundaries;
 [network design](../NETWORK-ARCHITECTURE.md) retains channel rationale and future
 proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
+
+## Shared physics frame layout
+
+Current frame tag is `0x0d`. [207](../tactical/207-nearby-actor-display-corrections.md)
+adds solved body contact pairs to bounded numerical physics snapshots so client
+restore retains contact presentation without another simulation tick. Pair count
+costs two bytes per physics snapshot plus eight bytes per unique pair; endpoints
+validate identities and the existing 128-body bound. Hosts and guests require
+matching builds. Earlier frame-layout notes below are historical.
 
 ## Browser P2P Worker authority
 
