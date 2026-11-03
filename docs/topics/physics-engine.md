@@ -11,13 +11,21 @@ owns authoring semantics; [prediction](player-prediction.md) owns input replay;
 
 ## Nearby actor display correction (207)
 
+[208](../tactical/208-ground-seams-and-movement-pacing.md) resolves the remaining
+terrain seam bob with a cached, welded static compound and the engine's internal
+edge correction. Body shapes/motors and one-step ownership remain. Resting
+compound support, real cliffs, solid queries and ramps are covered. Aggregate
+rebuilds occur on geometry/residency changes; highly fragmented terrain has a
+remaining cold/edit rebuild cost, recorded in 208. Previous fixed-tick XYZ now
+travels with numerical snapshots for continuous interpolation through restore.
+
 [207](../tactical/207-nearby-actor-display-corrections.md) fixes player display
 correction transferring to unconnected nearby cars/NPCs. Only solved contact
 members share correction; floor-supported groups cannot be visually lifted.
 Numerical captures now include bounded solved pairs, restored without stepping.
 Physics shapes, motors and solver settings are unchanged. A separate native
-coplanar terrain section-edge bob of about 0.59px remains; shape/margin experiments
-regressed traversal and were reverted. Investigate terrain internal edges next.
+coplanar terrain section-edge bob of about 0.59px was left for 208; shape/margin
+experiments regressed traversal and were reverted.
 93 focused native checks, four production Worker/P2P/lab/car browser cases,
 typechecks, inventories/build and streaming readiness pass.
 

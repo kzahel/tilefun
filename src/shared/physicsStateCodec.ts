@@ -7,6 +7,7 @@ import {
 
 const KINDS: readonly PhysicsBodyKind[] = ["character", "vehicle", "loose", "fixed"];
 const POSITIONS = ["x", "y", "z"] as const;
+const PREVIOUS = ["prevX", "prevY", "prevZ"] as const;
 const FIELDS = [
   "vx",
   "vy",
@@ -21,7 +22,7 @@ const FIELDS = [
   "altitude",
   "desiredHeading",
 ] as const;
-const BODY_BYTES = 85;
+const BODY_BYTES = 97;
 const HEADER_BYTES = 16;
 const CONTACT_BYTES = 8;
 const MAX_CONTACTS = (MAX_PREDICTION_BODIES * (MAX_PREDICTION_BODIES - 1)) / 2;
@@ -83,6 +84,14 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
       view.setFloat64(offset, finite(body[field]), true);
       offset += 8;
     }
+    for (let axis = 0; axis < POSITIONS.length; axis++) {
+      // A one-tick displacement retains precision at large world coordinates
+      // without sending another three absolute float64 positions per body.
+      const field = PREVIOUS[axis] as (typeof PREVIOUS)[number];
+      const position = POSITIONS[axis] as (typeof POSITIONS)[number];
+      view.setFloat32(offset, finite(Math.fround(body[field] - body[position])), true);
+      offset += 4;
+    }
     for (const field of FIELDS) {
       view.setFloat32(offset, finite(Math.fround(body[field] ?? 0)), true);
       offset += 4;
@@ -143,6 +152,9 @@ export function readPhysicsState(
       x: 0,
       y: 0,
       z: 0,
+      prevX: 0,
+      prevY: 0,
+      prevZ: 0,
       vx: 0,
       vy: 0,
       vz: 0,
@@ -159,6 +171,12 @@ export function readPhysicsState(
     for (const field of POSITIONS) {
       body[field] = finite(view.getFloat64(offset, true));
       offset += 8;
+    }
+    for (let axis = 0; axis < POSITIONS.length; axis++) {
+      const field = PREVIOUS[axis] as (typeof PREVIOUS)[number];
+      const position = POSITIONS[axis] as (typeof POSITIONS)[number];
+      body[field] = body[position] + finite(view.getFloat32(offset, true));
+      offset += 4;
     }
     for (const field of FIELDS) {
       const value = finite(view.getFloat32(offset, true));

@@ -1,5 +1,14 @@
 # Streaming and gameplay performance
 
+[208](../tactical/208-ground-seams-and-movement-pacing.md) reproduces running/car
+presentation blips with steady 16.8ms browser frame p99 in a throttled GPU run.
+Camera clock rebases, collapsed zero-replay interpolation and buffered fallback
+during incomplete replay are corrected. The frame-timeline runner now records
+display poses/camera/corrections to distinguish those from missed frames. Actual
+phone qualification remains: configured Android phones were offline. Static seam
+welding has a measured complex-geometry cold/edit rebuild cost; 208 owns the
+data and limits, not a new device-performance claim.
+
 Shared-physics reset [205](../tactical/205-physics-reset.md) is delivered. One fixed
 60Hz scene replaces per-character integration, with bounded common prediction and
 legacy deletion. Physical Chromebook GPU qualification compares clean `21758ffd`

@@ -2,7 +2,7 @@
  * Binary protocol codec — replaces JSON.stringify/parse for hot-path messages.
  *
  * Message type tags:
- *   0x0D = FrameMessage (shared bodies and solved contact pairs) (server→client)
+ *   0x0E = FrameMessage (shared bodies, previous poses and solved pairs) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
  *   0x81 = fixed-tick player-input (client→server)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
@@ -27,7 +27,7 @@ import type {
 
 // ---- Message type tags ----
 
-const TAG_FRAME = 0x0d;
+const TAG_FRAME = 0x0e;
 const TAG_SYNC_CHUNKS = 0x03;
 const TAG_PLAYER_INPUT = 0x81;
 const TAG_JSON = 0xff;

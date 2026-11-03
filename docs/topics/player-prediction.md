@@ -1,5 +1,16 @@
 # Player prediction and moving contacts
 
+## Movement pacing (208)
+
+[208](../tactical/208-ground-seams-and-movement-pacing.md) reproduces camera
+freezes and acknowledgement interpolation jumps despite steady browser frames.
+Camera time now follows monotonic render time, independently of rebased physics
+ticks. Numerical snapshots retain previous XYZ using 12 extra bytes/body on the
+wire. Zero-replay restores retain the interpolation interval. An unfinished replay
+holds the last committed local presentation rather than exposing scratch contacts
+or swapping to older buffered actors; replay budgets remain bounded. Native and
+throttled game/driving evidence pass; actual phone qualification remains.
+
 ## Nearby actors and solved contact membership (207)
 
 [207](../tactical/207-nearby-actor-display-corrections.md) separates proximity's

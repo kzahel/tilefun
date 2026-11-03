@@ -1,0 +1,241 @@
+{
+  "date": "2026-11-03",
+  "scope": "Desktop diagnostic reproduction, not physical-phone qualification",
+  "main": {
+    "renderer": "gpu",
+    "meshes": true,
+    "input": "CDP touch",
+    "viewport": {
+      "width": 1280,
+      "height": 900
+    },
+    "cpuRate": 4,
+    "geometry": "new welded static geometry in both lanes",
+    "lanes": {
+      "before": [
+        {
+          "name": "walk",
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000109,
+            "max": 16.80000000000109
+          },
+          "cameraClockRegressions": 2,
+          "cameraClockAdvancesBelow1ms": 4,
+          "cameraHeldWhilePlayerMoves": 5,
+          "predictionCorrectionPx": {
+            "count": 166,
+            "p50": 1.0666503911775265,
+            "p95": 1.066650404057127,
+            "p99": 2.13330078404466,
+            "max": 2.13330085002249
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "sprint",
+          "frames": {
+            "count": 300,
+            "p50": 16.69999999999891,
+            "p95": 16.799999999999272,
+            "p99": 16.80000000000291,
+            "max": 16.80000000000291
+          },
+          "cameraClockRegressions": 0,
+          "cameraClockAdvancesBelow1ms": 2,
+          "cameraHeldWhilePlayerMoves": 2,
+          "predictionCorrectionPx": {
+            "count": 300,
+            "p50": 2.133331299165988,
+            "p95": 2.1333618173488964,
+            "p99": 2.1333618559112413,
+            "max": 4.266601596343551
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "reverse",
+          "frames": {
+            "count": 300,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000291
+          },
+          "cameraClockRegressions": 0,
+          "cameraClockAdvancesBelow1ms": 0,
+          "cameraHeldWhilePlayerMoves": 0,
+          "predictionCorrectionPx": {
+            "count": 301,
+            "p50": 2.133331298991461,
+            "p95": 2.133361868214568,
+            "p99": 2.1334076228284022,
+            "max": 2.1334228828298287
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        }
+      ],
+      "after": [
+        {
+          "name": "walk",
+          "frames": {
+            "count": 180,
+            "p50": 16.69999999999891,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000109
+          },
+          "cameraClockRegressions": 0,
+          "cameraClockAdvancesBelow1ms": 0,
+          "cameraHeldWhilePlayerMoves": 0,
+          "predictionCorrectionPx": {
+            "count": 181,
+            "p50": 1.0666503911178398,
+            "p95": 1.066650403532632,
+            "p99": 2.13330079862522,
+            "max": 2.133300850143622
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "sprint",
+          "frames": {
+            "count": 300,
+            "p50": 16.700000000000728,
+            "p95": 16.700000000000728,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000291
+          },
+          "cameraClockRegressions": 0,
+          "cameraClockAdvancesBelow1ms": 0,
+          "cameraHeldWhilePlayerMoves": 0,
+          "predictionCorrectionPx": {
+            "count": 301,
+            "p50": 2.1333312991864517,
+            "p95": 2.1333618170510587,
+            "p99": 2.1333618202337505,
+            "max": 4.266723633052971
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        },
+        {
+          "name": "reverse",
+          "frames": {
+            "count": 300,
+            "p50": 16.700000000000728,
+            "p95": 16.799999999999272,
+            "p99": 16.799999999999272,
+            "max": 16.80000000000291
+          },
+          "cameraClockRegressions": 0,
+          "cameraClockAdvancesBelow1ms": 0,
+          "cameraHeldWhilePlayerMoves": 0,
+          "predictionCorrectionPx": {
+            "count": 301,
+            "p50": 2.133331298972223,
+            "p95": 2.1333618805359067,
+            "p99": 2.133422863035294,
+            "max": 4.26660156275071
+          },
+          "finalMissing": 0,
+          "finalIncomplete": 0,
+          "finalStale": 0
+        }
+      ]
+    }
+  },
+  "car": {
+    "viewport": {
+      "width": 844,
+      "height": 390
+    },
+    "pixelRatio": 2,
+    "cpuRate": 4,
+    "input": "keyboard",
+    "fixture": "ordinary Worker car-bridge",
+    "control": "old camera simulation clock, collapsed restored previous poses, and buffered fallback during replay, installed only in the diagnostic browser",
+    "lanes": [
+      {
+        "lane": "legacy-presentation-control",
+        "frames": 180,
+        "frameP99Ms": 16.80000000000109,
+        "cameraClockRegressions": 0,
+        "cameraClockAdvancesBelow1ms": 2,
+        "cameraHeldWhileCarMoves": 2,
+        "backwardFrames": 0,
+        "heldCarFrames": 0,
+        "errors": []
+      },
+      {
+        "lane": "fixed",
+        "frames": 180,
+        "frameP99Ms": 16.80000000000109,
+        "cameraClockRegressions": 0,
+        "cameraClockAdvancesBelow1ms": 0,
+        "cameraHeldWhileCarMoves": 0,
+        "backwardFrames": 0,
+        "heldCarFrames": 2,
+        "errors": []
+      }
+    ]
+  },
+  "geometry": {
+    "method": "native flat/checker scenes, 24/96/384 dogs; 90 ticks; rebuild at ticks 0/30/60; desktop elapsed geometry preparation, not device budget",
+    "samples": [
+      {
+        "pattern": "flat",
+        "count": 24,
+        "parts": 6,
+        "rebuildMs": [1.7274580000000128, 0.7578750000000127, 0.5837920000000167],
+        "p95": 0.49791699999997263
+      },
+      {
+        "pattern": "flat",
+        "count": 96,
+        "parts": 6,
+        "rebuildMs": [0.5810830000000067, 0.7183750000000089, 0.5477500000000077],
+        "p95": 0.5520829999999819
+      },
+      {
+        "pattern": "flat",
+        "count": 384,
+        "parts": 9,
+        "rebuildMs": [0.5413330000000087, 0.32200000000000273, 0.37975000000000136],
+        "p95": 1.323709000000008
+      },
+      {
+        "pattern": "checker",
+        "count": 24,
+        "parts": 1536,
+        "rebuildMs": [18.561459000000013, 17.202583000000004, 17.332250000000045],
+        "p95": 0.3568329999999946
+      },
+      {
+        "pattern": "checker",
+        "count": 96,
+        "parts": 1536,
+        "rebuildMs": [16.119375000000048, 16.656042000000014, 17.02841699999999],
+        "p95": 1.321458000000007
+      },
+      {
+        "pattern": "checker",
+        "count": 384,
+        "parts": 2304,
+        "rebuildMs": [24.374874999999975, 25.84775000000002, 25.95283299999994],
+        "p95": 2.8619169999999485
+      }
+    ]
+  }
+}

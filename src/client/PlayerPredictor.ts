@@ -126,6 +126,7 @@ export class PlayerPredictor {
   private activeUntil = -Infinity;
   private correction = { wx: 0, wy: 0, wz: 0, vx: 0, vy: 0, jumpVZ: 0 };
   private displayError = { x: 0, y: 0, z: 0, at: 0 };
+  private readonly lastPresentation = new Map<number, Entity>();
   private diagnostics: ReconcileDiagnostics | null = null;
 
   constructor(
@@ -174,6 +175,7 @@ export class PlayerPredictor {
     this.stateHistory.clear();
     this.clockEpoch = {};
     this.displayError = { x: 0, y: 0, z: 0, at: this.clock() };
+    this.lastPresentation.clear();
     this.activeUntil = -Infinity;
     this.diagnostics = null;
   }
@@ -191,6 +193,7 @@ export class PlayerPredictor {
     this.geometry = this.geometryWorld = this.geometryProps = undefined;
     this.stateHistory.clear();
     this.retiredEpochs.clear();
+    this.lastPresentation.clear();
     this.status = "waiting";
   }
   storeInput(seq: number, movement: Movement, _dt: number): void {
@@ -532,15 +535,26 @@ export class PlayerPredictor {
           this.scene?.bodyState(anchor ?? -1)?.supportId !== undefined))
     );
   }
-  presentationClock(alpha: number): CameraPresentationTime | null {
+  presentationClock(presentationSeconds: number): CameraPresentationTime | null {
     if (!this.active || !this.scene) return null;
-    return { time: (this.scene.physicsTick - 1 + alpha) * PHYSICS_DT, domain: this.clockEpoch };
+    // Reconciliation may rebase the simulation tick in either direction. The
+    // camera follows the displayed pose on the monotonic render clock instead.
+    return { time: presentationSeconds, domain: this.clockEpoch };
   }
   /** Nearby bodies share predicted time; only actual contacts share correction. */
   presentEntities(alpha: number, buffered: readonly Entity[]): Entity[] {
     const player = this.predicted,
       scene = this.scene;
-    if (!player || !scene || this.status !== "ready" || !this.active) return [...buffered];
+    // The scene is scratch state while replay is sliced across updates. Retain
+    // the last committed contact presentation, never switch to older replicas
+    // or expose partially replayed contacts. Unrelated actors remain buffered.
+    if (this.status === "replaying" && this.lastPresentation.size)
+      return buffered.map((entity) => this.lastPresentation.get(entity.id) ?? entity);
+    if (!player || !scene || this.status !== "ready" || !this.active) {
+      this.lastPresentation.clear();
+      return [...buffered];
+    }
+    this.lastPresentation.clear();
     const root = player.parentId ?? player.id,
       component = new Set<number>([root, player.id]);
     const anchor = this.published.get(root) ?? player;
@@ -585,7 +599,7 @@ export class PlayerPredictor {
         (predicted.prevWz ?? predicted.wz ?? 0) * (1 - alpha) +
         (predicted.wz ?? 0) * alpha +
         (corrected && !floorSupported ? error.z : 0);
-      return {
+      const presented = {
         ...predicted,
         sprite: entity.id === player.id ? predicted.sprite : entity.sprite,
         position,
@@ -602,6 +616,8 @@ export class PlayerPredictor {
               ),
             }),
       };
+      this.lastPresentation.set(entity.id, presented);
+      return presented;
     });
   }
   samplePresentationPlayer(

@@ -83,6 +83,46 @@ it("uses the ordinary shared kernel to predict contacts, with a fixed tick indep
   expect(f.predictor.recoveryDiagnostics.status).toBe("ready");
 });
 
+it("keeps sub-tick presentation continuous when an acknowledgement needs no replay", async () => {
+  const f = await setup({
+    version: 1,
+    id: "ack-interpolation",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(100, 100),
+    props: [],
+  });
+  const movement = { ...idle, dx: 1 };
+  f.input(2, movement);
+  const before = f.predictor
+    .presentEntities(0.25, f.view.serverEntities)
+    .find((e) => e.id === f.s.player.player.id);
+  await f.s.step(movement);
+  f.receive(f.s.frames());
+  expect(f.predictor.lastReconcileDiagnostics?.replayCount).toBe(0);
+  const after = f.predictor
+    .presentEntities(0.25, f.view.serverEntities)
+    .find((e) => e.id === f.s.player.player.id);
+  expect(after?.position.wx).toBeCloseTo(before?.position.wx ?? Infinity, 3);
+});
+
+it("keeps camera time advancing when batched controls rebase prediction to an earlier tick", async () => {
+  const f = await setup();
+  for (let seq = 2; seq <= 5; seq++) f.input(seq, { ...idle, dx: 1 });
+  const before = f.predictor.presentationClock(20);
+  f.s.realm.handleMessage(f.s.player.clientId, f.s.player, {
+    type: "player-input",
+    seq: 5,
+    ...idle,
+    dx: 1,
+  });
+  f.s.tick();
+  f.receive(f.s.frames());
+  const after = f.predictor.presentationClock(20 + PHYSICS_DT);
+  expect(before).not.toBeNull();
+  expect(after?.domain).toBe(before?.domain);
+  expect((after?.time ?? 0) - (before?.time ?? 0)).toBeCloseTo(PHYSICS_DT, 10);
+});
+
 it("reconciles delayed ordered input/snapshots through pushing, reversal, jump and release", async () => {
   const f = await setup();
   const inputs: { at: number; buffer: ArrayBuffer }[] = [],
@@ -220,9 +260,11 @@ it("holds an overflowed scene and rejects stale state across reload instead of d
 it("caps replay slices and accepts a snapshot that covers the pending suffix", async () => {
   const f = await setup();
   for (let seq = 2; seq <= 80; seq++) f.input(seq, { ...idle, dx: 1 });
+  const committed = f.predictor.presentEntities(0.75, f.view.serverEntities);
   f.s.tick();
   f.receive(f.s.frames());
   expect(f.predictor.recoveryDiagnostics.status).toBe("replaying");
+  expect(f.predictor.presentEntities(0.25, f.view.serverEntities)).toEqual(committed);
   f.predictor.update(PHYSICS_DT, idle, f.view.world, f.view.props, f.view.serverEntities);
   expect(f.predictor.recoveryDiagnostics.replayStepsThisTick).toBeLessThanOrEqual(8);
   f.s.realm.handleMessage(f.s.player.clientId, f.s.player, {
@@ -437,6 +479,9 @@ it("predicts normalized basic car steering and derives its seat from the same bo
   for (let i = 0; i < 50; i++) {
     const movement = { ...idle, dx: 1, dy: i < 30 ? 1 : 0 };
     f.input(firstSeq + i, movement);
+    const before = f.predictor
+      .presentEntities(0.25, f.view.serverEntities)
+      .find((e) => e.id === car.id);
     await f.s.step(movement);
     expect(f.predictor.mount?.position.wx).toBeCloseTo(car.position.wx, 1);
     expect(f.predictor.mount?.position.wy).toBeCloseTo(car.position.wy, 1);
@@ -445,6 +490,11 @@ it("predicts normalized basic car steering and derives its seat from the same bo
       2,
     );
     f.receive(f.s.frames());
+    const after = f.predictor
+      .presentEntities(0.25, f.view.serverEntities)
+      .find((e) => e.id === car.id);
+    expect(after?.position.wx).toBeCloseTo(before?.position.wx ?? Infinity, 2);
+    expect(after?.position.wy).toBeCloseTo(before?.position.wy ?? Infinity, 2);
   }
   expect(car.position.wx).toBeGreaterThan(120);
 });

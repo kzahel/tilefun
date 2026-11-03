@@ -19,6 +19,10 @@ export interface PhysicsBodyState {
   x: number;
   y: number;
   z: number;
+  /** Previous fixed-tick pose, including through zero-replay acknowledgements. */
+  prevX: number;
+  prevY: number;
+  prevZ: number;
   vx: number;
   vy: number;
   vz: number;

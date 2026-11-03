@@ -1,5 +1,11 @@
 # Embedded engine labs
 
+[208](../tactical/208-ground-seams-and-movement-pacing.md) keeps game/lab static
+geometry in the same welded compound and preserves previous numerical poses at
+restore. Both consumers use monotonic camera time and committed presentation
+during sliced replay. Scenario diagnostics expose camera time/prediction alongside
+the rendered camera pose for driving investigations. No alternate lab solver.
+
 [207](../tactical/207-nearby-actor-display-corrections.md) changes the common
 PlayerPredictor used by game and lab: nearby actors retain predicted time but
 only solved contact members share display correction, and floor support pins its

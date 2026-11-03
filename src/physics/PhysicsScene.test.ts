@@ -73,6 +73,53 @@ it("pushes an ordinary NPC and stops without retaining a runaway motor velocity"
   expect(Math.abs(npc.velocity?.vx ?? Infinity)).toBeLessThan(0.1);
 });
 
+it("crosses welded flat section seams without lifting a pushed NPC or rebuilding at rest", async () => {
+  const s = await scene(),
+    player = createPlayer(0, 57),
+    npc = createFauna("dog", 0, 32),
+    ground = geometry();
+  player.id = 1;
+  npc.id = 2;
+  const actors = [player, npc];
+  let peak = 0;
+  for (let tick = 0; tick < 360; tick++) {
+    s.synchronize(actors);
+    s.step(tick >= 60 && tick < 240 ? new Map([[1, { vx: 0, vy: -64 }]]) : idle, ground);
+    peak = Math.max(peak, player.wz ?? 0, npc.wz ?? 0);
+  }
+  expect(npc.position.wy).toBeLessThan(-40);
+  expect(peak).toBeLessThan(0.02);
+  expect(s.bodyState(1)?.grounded).toBe(true);
+  expect(s.bodyState(2)?.grounded).toBe(true);
+  const rebuilds = s.diagnostics.geometryRebuilds;
+  for (let tick = 0; tick < 30; tick++) {
+    s.synchronize(actors);
+    s.step(idle, ground);
+  }
+  expect(s.diagnostics.geometryRebuilds).toBe(rebuilds);
+  expect(s.diagnostics.bodyCreates).toBe(2);
+  // Welding retains solid volume, including read-only spawn clearance queries.
+  expect(s.canPlaceSphere(0, -64, -8, 2)).toBe(false);
+});
+
+it("retains a real terrain cliff instead of welding it into an invisible floor", async () => {
+  const s = await scene(),
+    player = createPlayer(-20, 32),
+    ground = { ...geometry(), getHeight: (x: number) => (x < 0 ? 1 : 0) };
+  player.id = 1;
+  player.wz = 16;
+  let airborne = false;
+  for (let tick = 0; tick < 180; tick++) {
+    s.synchronize([player]);
+    s.step(new Map([[1, { vx: 32, vy: 0 }]]), ground);
+    if (player.position.wx > 8 && player.jumpVZ !== undefined) airborne = true;
+  }
+  expect(airborne).toBe(true);
+  expect(player.position.wx).toBeGreaterThan(60);
+  expect(Math.abs(player.wz ?? Infinity)).toBeLessThan(0.02);
+  expect(s.bodyState(1)?.grounded).toBe(true);
+});
+
 it("lands on another body and walking across its head does not drag the lower body", async () => {
   const s = await scene(),
     lower = createPlayer(32, 32),

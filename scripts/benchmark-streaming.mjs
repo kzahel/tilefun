@@ -405,6 +405,23 @@ try {
           const callbacks = game.loop.callbacks,
             render = callbacks.render,
             update = callbacks.update;
+          let presentedPlayer;
+          const beginPresentation = game.stateView.beginPresentation;
+          if (timeline && beginPresentation) {
+            game.stateView.beginPresentation = function (...args) {
+              beginPresentation.apply(this, args);
+              const player = this.presentedPlayerEntity ?? this.playerEntity;
+              presentedPlayer = {
+                x: player.position.wx,
+                y: player.position.wy,
+                z: player.wz ?? 0,
+                clock: this.cameraPresentation.time,
+              };
+            };
+            restores.push(() => {
+              game.stateView.beginPresentation = beginPresentation;
+            });
+          }
           const before = { ...game.stateView.playerEntity.position };
           const sent = new Map(),
             ackTimes = [],
@@ -438,6 +455,20 @@ try {
             if (tracing) for (const key of Object.keys(phases)) phases[key] = 0;
             render(alpha, now);
             const end = performance.now();
+            if (timeline) {
+              renderTimeline.push({
+                startMs: t,
+                endMs: end,
+                alpha,
+                presentationSeconds: now,
+                presentedPlayer,
+                cameraX: game.camera.x,
+                cameraY: game.camera.y,
+                serverTick: game.stateView.serverTick,
+                ack: game.stateView.lastProcessedInputSeq,
+                prediction: game.stateView.predictionDiagnostics,
+              });
+            }
             renders.push(end - t);
             const terrain = game.renderer.getDiagnostics();
             maxTerrainRows = Math.max(maxTerrainRows, terrain.rowsLastFrame);
@@ -445,9 +476,7 @@ try {
             peakPending = Math.max(peakPending, terrain.pending);
             if (tracing) {
               const diagnostics = game.renderer.getDiagnostics?.();
-              renderTimeline.push({
-                startMs: t,
-                endMs: end,
+              Object.assign(renderTimeline[renderTimeline.length - 1], {
                 ...phases,
                 terrainRows: diagnostics?.rowsLastFrame ?? 0,
                 textureUploadedBytes: (gpuStats?.uploadedBytes ?? 0) - previousUpload,
@@ -555,8 +584,8 @@ try {
           const after = game.stateView.playerEntity.position;
           const cadenceMs = summary(frames).p50;
           return {
-            ...(timeline ? { frameTimeline } : {}),
-            ...(tracing ? { renderTimeline, sampleStartMs } : {}),
+            ...(timeline ? { frameTimeline, renderTimeline } : {}),
+            ...(tracing ? { sampleStartMs } : {}),
             before,
             after: { ...after },
             displayCadenceMs,

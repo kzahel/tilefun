@@ -13,7 +13,10 @@ proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
 
 ## Shared physics frame layout
 
-Current frame tag is `0x0d`. [207](../tactical/207-nearby-actor-display-corrections.md)
+Current frame tag is `0x0e`. [208](../tactical/208-ground-seams-and-movement-pacing.md)
+adds previous fixed-tick XYZ as three float32 displacements (12 bytes/body), retaining
+float64 current coordinates and interpolation through zero-replay acknowledgement.
+[207](../tactical/207-nearby-actor-display-corrections.md)
 adds solved body contact pairs to bounded numerical physics snapshots so client
 restore retains contact presentation without another simulation tick. Pair count
 costs two bytes per physics snapshot plus eight bytes per unique pair; endpoints

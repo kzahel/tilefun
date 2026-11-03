@@ -13,19 +13,15 @@ export interface CollisionGeometrySource {
   getHeight(tx: number, ty: number): number;
   queryProps(bounds: AABB): readonly Prop[];
 }
-export type OneWayColliders = Map<
-  number,
-  { bounds: AABB; collider: import("../../entities/Prop.js").PropCollider }
->;
-/** Canonical geometry used by disposable reference queries and persistent sections. */
+/** Canonical solid parts, cached by section and welded by the scene's compound. */
 export function compileCollisionGeometry(
   source: CollisionGeometrySource,
   bounds: AABB,
   origin: RAPIER.Vector,
   low: number,
   high: number,
-  add: (desc: RAPIER.ColliderDesc) => RAPIER.Collider,
 ) {
+  const parts: RAPIER.ColliderDesc[] = [];
   const props = source
     .queryProps(bounds)
     .filter((prop) => {
@@ -50,11 +46,6 @@ export function compileCollisionGeometry(
         : [],
     ),
   );
-  const water = new Map<number, number>();
-  const oneWay = new Map<
-    number,
-    { bounds: AABB; collider: import("../../entities/Prop.js").PropCollider }
-  >();
   const xs = new Set<number>(),
     zs = new Set<number>();
   const minX = Math.floor(bounds.left / TILE_SIZE),
@@ -84,7 +75,7 @@ export function compileCollisionGeometry(
     bottom = Math.max(bottom, low);
     top = Math.min(top, high);
     if (top <= bottom) return;
-    return add(
+    parts.push(
       RAPIER.ColliderDesc.cuboid(
         (b.right - b.left) / 2 / SCALE,
         (top - bottom) / 2 / SCALE,
@@ -114,10 +105,6 @@ export function compileCollisionGeometry(
       const flags = source.getCollision(tx, tz);
       const floor = source.getHeight(tx, tz) * ELEVATION_PX;
       const wall = !!(flags & CollisionFlag.Solid);
-      if (!wall && flags & CollisionFlag.Water) {
-        const barrier = box(b, floor, Math.max(4096, high));
-        if (barrier) water.set(barrier.handle, floor);
-      }
       const cellCuts = wall ? [] : cuts.filter((cut) => aabbsOverlap(cut.bounds, b));
       if (cellCuts.length) {
         const points = clippedTerrainVertices(b, low, Math.min(floor, high), cellCuts);
@@ -131,7 +118,7 @@ export function compileCollisionGeometry(
               ]),
             ),
           );
-          if (descriptor) add(descriptor);
+          if (descriptor) parts.push(descriptor);
         }
         continue;
       }
@@ -183,16 +170,14 @@ export function compileCollisionGeometry(
             );
         const descriptor = RAPIER.ColliderDesc.convexHull(new Float32Array(vertices));
         if (!descriptor) throw Error("Invalid authored surface hull");
-        const collider = add(descriptor);
-        if (c.passable) oneWay.set(collider.handle, { bounds: authored, collider: c });
+        parts.push(descriptor);
       } else {
-        const collider = box(
+        box(
           b,
           c.zBase ?? 0,
           c.zHeight === undefined ? Math.max(4096, high) : (c.zBase ?? 0) + c.zHeight,
         );
-        if (c.passable && collider) oneWay.set(collider.handle, { bounds: authored, collider: c });
       }
     }
-  return { water, oneWay };
+  return parts;
 }

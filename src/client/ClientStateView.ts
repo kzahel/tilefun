@@ -185,7 +185,7 @@ export class RemoteStateView implements ClientStateView {
 
   /** Borrow display-only poses during render; end before simulation/input work. */
   beginPresentation(now: number, alpha: number, paused = false): void {
-    this.cameraPresentation = this._predictor?.presentationClock(alpha) ?? {
+    this.cameraPresentation = this._predictor?.presentationClock(now) ?? {
       time: now,
       domain: "remote",
     };

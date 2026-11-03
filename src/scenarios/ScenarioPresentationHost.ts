@@ -447,6 +447,8 @@ export class ScenarioPresentationHost {
       authority: this.session.getDiagnostics(),
       cameraX: this.renderX,
       cameraY: this.renderY,
+      cameraTime: this.session.view.cameraPresentation.time,
+      prediction: this.session.predictor.lastReconcileDiagnostics,
       pixelSnap: this.camera.pixelSnap,
       carMeshOverride: this.frame.meshPoses.allCars3d,
       meshEligibleVehicleTypes: [

@@ -47,7 +47,7 @@ interface Body {
 interface Section {
   identity: unknown;
   revision: string | number;
-  colliders: RAPIER.Collider[];
+  parts: RAPIER.ColliderDesc[];
 }
 
 /** Shared fixed-step body simulation. No input queue, AI, renderer or transport.
@@ -60,6 +60,7 @@ export class PhysicsScene {
   private readonly colliderIds = new Map<number, number>();
   private readonly contacts = new Map<number, Set<number>>();
   private readonly sections = new Map<string, Section>();
+  private staticGeometry: RAPIER.Collider | undefined;
   private disposed = false;
   private originInitialized = false;
   private tick = 0;
@@ -68,6 +69,9 @@ export class PhysicsScene {
     worldSteps: 0,
     bodyCreates: 0,
     geometryBuilds: 0,
+    geometryRebuilds: 0,
+    geometryBuildMs: 0,
+    geometryParts: 0,
     supportQueries: 0,
     stepMs: 0,
   };
@@ -86,8 +90,9 @@ export class PhysicsScene {
   /** Reset a private scene between worlds, including geometry/origin ownership. */
   clear() {
     for (const entry of [...this.bodies.values()]) this.remove(entry);
-    for (const section of this.sections.values())
-      for (const collider of section.colliders) this.world.removeCollider(collider, false);
+    if (this.staticGeometry) this.world.removeCollider(this.staticGeometry, false);
+    this.staticGeometry = undefined;
+    this.metrics.geometryParts = 0;
     this.sections.clear();
     this.contacts.clear();
     this.origin.x = this.origin.y = this.origin.z = 0;
@@ -201,6 +206,9 @@ export class PhysicsScene {
             x: entity.position.wx,
             y: entity.position.wy,
             z: entity.wz ?? 0,
+            prevX: entity.position.wx,
+            prevY: entity.position.wy,
+            prevZ: entity.wz ?? 0,
             vx: entity.velocity?.vx ?? 0,
             vy: entity.velocity?.vy ?? 0,
             vz: entity.jumpVZ ?? 0,
@@ -259,6 +267,11 @@ export class PhysicsScene {
     s.x = entity.position.wx;
     s.y = entity.position.wy;
     s.z = entity.wz ?? 0;
+    if (moved) {
+      s.prevX = s.x;
+      s.prevY = s.y;
+      s.prevZ = s.z;
+    }
     s.vx = entity.velocity?.vx ?? 0;
     s.vy = entity.velocity?.vy ?? 0;
     s.vz = entity.jumpVZ ?? 0;
@@ -279,6 +292,8 @@ export class PhysicsScene {
   }
 
   private prepareGeometry(source: PhysicsGeometry) {
+    const started = performance.now();
+    let changed = false;
     const needed = new Map<string, { cx: number; cy: number }>();
     for (const entry of this.bodies.values()) {
       const c = entry.entity.collider;
@@ -299,18 +314,16 @@ export class PhysicsScene {
           needed.set(`${cx},${cy}`, { cx, cy });
     }
     if (needed.size > 512) throw Error("Physics section residency exceeds 512 sections");
-    for (const [key, section] of this.sections)
+    for (const key of this.sections.keys())
       if (!needed.has(key)) {
-        for (const c of section.colliders) this.world.removeCollider(c, false);
         this.sections.delete(key);
+        changed = true;
       }
     for (const [key, { cx, cy }] of needed) {
       const version = source.geometryVersion(cx, cy),
         old = this.sections.get(key);
       if (old && old.identity === version.identity && old.revision === version.revision) continue;
-      if (old) for (const c of old.colliders) this.world.removeCollider(c, false);
-      const section: Section = { ...version, colliders: [] };
-      compileCollisionGeometry(
+      const parts = compileCollisionGeometry(
         {
           getHeight: (x, y) => source.getHeight(x, y),
           queryProps: (bounds) => source.queryProps(bounds),
@@ -327,15 +340,29 @@ export class PhysicsScene {
         this.origin,
         -4096,
         4096,
-        (desc) => {
-          const collider = this.world.createCollider(desc);
-          section.colliders.push(collider);
-          return collider;
-        },
       );
-      this.sections.set(key, section);
+      this.sections.set(key, { ...version, parts });
       this.metrics.geometryBuilds++;
+      changed = true;
     }
+    if (!changed) return;
+    const parts = [...this.sections.values()].flatMap((section) => section.parts);
+    this.metrics.geometryParts = parts.length;
+    if (parts.length) {
+      const shape = new RAPIER.Compound(
+        parts.map((part) => part.shape),
+        parts.map((part) => part.translation),
+        parts.map((part) => part.rotation),
+        RAPIER.CompoundFlags.FIX_INTERNAL_EDGES,
+      );
+      if (this.staticGeometry) this.staticGeometry.setShape(shape);
+      else this.staticGeometry = this.world.createCollider(new RAPIER.ColliderDesc(shape));
+    } else if (this.staticGeometry) {
+      this.world.removeCollider(this.staticGeometry, false);
+      this.staticGeometry = undefined;
+    }
+    this.metrics.geometryRebuilds++;
+    this.metrics.geometryBuildMs = performance.now() - started;
   }
 
   step(intents: ReadonlyMap<number, MotionIntent>, geometry: PhysicsGeometry, gravity = 1) {
@@ -425,6 +452,9 @@ export class PhysicsScene {
       v = entry.body.linvel(),
       q = entry.body.rotation();
     const state = entry.state;
+    state.prevX = state.x;
+    state.prevY = state.y;
+    state.prevZ = state.z;
     state.x = (p.x + this.origin.x - entry.offsetX) * SCALE;
     state.y = (p.z + this.origin.z - entry.offsetY) * SCALE;
     state.z = (p.y - entry.halfY) * SCALE;
@@ -440,6 +470,19 @@ export class PhysicsScene {
         // Use the contact constraints Rapier actually solves, including its
         // resting margin. Raw manifold distance can remain positive after sleep.
         const touching = manifold.numSolverContacts() > 0;
+        // Compound edge correction can reduce a part's solver points to zero
+        // while retaining its resting geometric manifold. It still supplies
+        // support, but a distant speculative manifold must not ground a body.
+        let resting = touching;
+        if (!resting && other.handle === this.staticGeometry?.handle)
+          for (let i = 0; i < manifold.numContacts(); i++)
+            if (
+              manifold.contactDist(i) <=
+              this.world.integrationParameters.normalizedAllowedLinearError * this.world.lengthUnit
+            ) {
+              resting = true;
+              break;
+            }
         if (otherId !== undefined && touching) {
           let neighbors = this.contacts.get(entry.entity.id);
           if (!neighbors) {
@@ -461,7 +504,7 @@ export class PhysicsScene {
         // Ignore small solver separation velocities; a requested jump is far
         // above this threshold and immediately leaves support.
         const landingMotor = state.altitude !== undefined && state.altitude <= state.z + 0.15;
-        if (ny < -0.5 && touching && (separating < 0.25 || landingMotor)) {
+        if (ny < -0.5 && resting && (separating < 0.25 || landingMotor)) {
           // At a ramp/deck seam both support manifolds may exist. Keep the
           // rising tangent instead of letting contact iteration order flatten it.
           if (state.grounded && -ny >= state.normalY) return;
@@ -662,8 +705,8 @@ export class PhysicsScene {
       entry.body.setAngvel({ x: 0, y: 0, z: 0 }, true);
       entry.state = { ...state };
       // Publish state and contact membership supplied by the same snapshot.
-      entry.entity.prevPosition = { wx: state.x, wy: state.y };
-      entry.entity.prevWz = state.z;
+      entry.entity.prevPosition = { wx: state.prevX, wy: state.prevY };
+      entry.entity.prevWz = state.prevZ;
       if (entry.kind === "vehicle")
         entry.entity.vehicleHeading = entry.entity.prevVehicleHeading = state.heading;
       entry.entity.position.wx = state.x;
