@@ -48,9 +48,12 @@ The constructible Web Audio mock has a scoped React-rule exception, and the
 furniture suite registers synchronously. Controller browser cases await game
 readiness before menu assertions. The F3 pixel check uses seeded flat terrain
 and the opaque actor-edge color, excluding terrain/UI blues from the layer
-comparison. Keep every existing assertion and the high-severity audit gates.
+comparison, retaining the successful polled frame for each baseline. The gem HUD
+viewport check exits touch-triggered native fullscreen before resizing. Keep
+every existing assertion and the high-severity audit gates.
 Local lint, all three typechecks, build, 71 focused native cases, eleven Worker
-cases and the Worker dry-run pass. Root audit reports five moderate findings in
+cases, the Worker dry-run and all eleven affected browser cases pass. Root audit
+reports five moderate findings in
 the Electron packaging chain and no high/critical findings; Worker audit is clean.
 Hosted CI on the consolidated PR remains the merge gate.
 

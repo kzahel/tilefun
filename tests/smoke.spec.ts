@@ -139,11 +139,22 @@ test("F3 toggles debug overlay", async ({ page }, testInfo) => {
         }
       return count;
     });
-  await expect.poll(bluePixels).toBeGreaterThan(0);
-  const withBodies = await bluePixels();
+  // Keep the successful sample: a fresh capture may belong to another frame.
+  let withBodies = 0;
+  await expect
+    .poll(async () => {
+      withBodies = await bluePixels();
+      return withBodies;
+    })
+    .toBeGreaterThan(0);
   await panel.getByLabel("People & objects", { exact: true }).uncheck();
-  await expect.poll(bluePixels).toBeLessThan(withBodies);
-  const withoutBodies = await bluePixels();
+  let withoutBodies = 0;
+  await expect
+    .poll(async () => {
+      withoutBodies = await bluePixels();
+      return withoutBodies;
+    })
+    .toBeLessThan(withBodies);
   await panel.getByLabel("People & objects", { exact: true }).check();
   await expect.poll(bluePixels).toBeGreaterThan(withoutBodies);
   await testInfo.attach("collision-layers", {
@@ -244,6 +255,10 @@ test.describe("gem HUD", () => {
     });
     await page.getByRole("button", { name: "Exit editor", exact: true }).tap();
     await expect(count).toHaveText("1");
+    // Touch enters native fullscreen; restore the window before viewport resizing.
+    await page.evaluate(async () => {
+      if (document.fullscreenElement) await document.exitFullscreen();
+    });
     for (const viewport of [
       { width: 360, height: 640 },
       { width: 844, height: 390 },
