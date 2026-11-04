@@ -38,6 +38,22 @@ in the historical replay catalog; 48 replay/mesh checks and eleven Worker tests
 plus its dry-run build pass. See [187](../tactical/187-shared-wildlife-finishing.md)
 for delivery evidence. Keep the high-severity gate enabled.
 
+The 2026-11-04 Dependabot consolidation in [PR 14](https://github.com/kzahel/tilefun/pull/14)
+includes the root dependency group, Node 26 type definitions, Worker tooling and
+pinned Actions updates from PRs 5, 7 and 10. Electron retains its own required
+Node 24 types in the lockfile. Biome 2.6 adds Markdown support; Markdown stays
+outside the existing check scope so frozen review/source records are not
+reformatted. Seven benchmark JSON records receive formatting-only repairs.
+The constructible Web Audio mock has a scoped React-rule exception, and the
+furniture suite registers synchronously. Controller browser cases await game
+readiness before menu assertions. The F3 pixel check uses seeded flat terrain
+and the opaque actor-edge color, excluding terrain/UI blues from the layer
+comparison. Keep every existing assertion and the high-severity audit gates.
+Local lint, all three typechecks, build, 71 focused native cases, eleven Worker
+cases and the Worker dry-run pass. Root audit reports five moderate findings in
+the Electron packaging chain and no high/critical findings; Worker audit is clean.
+Hosted CI on the consolidated PR remains the merge gate.
+
 The full browser suite runs at 02:17 UTC daily and through **Actions → CI → Run
 workflow**, using eight independent shards. It collects all failures and retains
 failure traces/screenshots. Only push validation on main deploys; scheduled and

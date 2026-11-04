@@ -16,9 +16,7 @@
           "maxCurrentCorrectionMetres": 0,
           "maxPresentedRemoteStepMetres": 0.00010437624139819293,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -27,9 +25,7 @@
           "maxCurrentCorrectionMetres": 1.2747714511652302,
           "maxPresentedRemoteStepMetres": 1.274771447475481,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -46,9 +42,7 @@
           "maxCurrentCorrectionMetres": 0,
           "maxPresentedRemoteStepMetres": 0.00010437624139819293,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -57,9 +51,7 @@
           "maxCurrentCorrectionMetres": 1.2747714511652302,
           "maxPresentedRemoteStepMetres": 0.24030638696670156,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -76,9 +68,7 @@
           "maxCurrentCorrectionMetres": 0,
           "maxPresentedRemoteStepMetres": 0.01245570182800293,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "buffered"
-          ],
+          "remoteSources": ["buffered"],
           "recoveries": 0
         },
         {
@@ -87,9 +77,7 @@
           "maxCurrentCorrectionMetres": 1.2747714511652302,
           "maxPresentedRemoteStepMetres": 0.07506216232787465,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "buffered"
-          ],
+          "remoteSources": ["buffered"],
           "recoveries": 0
         }
       ]
@@ -106,9 +94,7 @@
           "maxCurrentCorrectionMetres": 0.1753234537286099,
           "maxPresentedRemoteStepMetres": 0.1252324765621866,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -117,9 +103,7 @@
           "maxCurrentCorrectionMetres": 1.3486101507292798,
           "maxPresentedRemoteStepMetres": 1.2736212175217487,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -136,9 +120,7 @@
           "maxCurrentCorrectionMetres": 0.1753234537286099,
           "maxPresentedRemoteStepMetres": 0.08487229040246665,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -147,9 +129,7 @@
           "maxCurrentCorrectionMetres": 1.3486101507292798,
           "maxPresentedRemoteStepMetres": 0.184016246044171,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -166,10 +146,7 @@
           "maxCurrentCorrectionMetres": 0.1753234537286099,
           "maxPresentedRemoteStepMetres": 0.12364487205410177,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "buffered",
-            "predicted"
-          ],
+          "remoteSources": ["buffered", "predicted"],
           "recoveries": 0
         },
         {
@@ -178,10 +155,7 @@
           "maxCurrentCorrectionMetres": 1.3486101507292798,
           "maxPresentedRemoteStepMetres": 0.1840162472934478,
           "finalOffsetMetres": 0,
-          "remoteSources": [
-            "buffered",
-            "predicted"
-          ],
+          "remoteSources": ["buffered", "predicted"],
           "recoveries": 0
         }
       ]

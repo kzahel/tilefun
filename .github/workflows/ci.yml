@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [main]
   schedule:
-    - cron: '17 2 * * *'
+    - cron: "17 2 * * *"
   workflow_dispatch:
 
 # A newer revision replaces validation of the same event/ref. Nightly and manual

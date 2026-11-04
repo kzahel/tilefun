@@ -22,10 +22,7 @@
     {
       "revision": "d5b6ffdb2a21bd3b0c87f5a769a395cac4bcb933",
       "baselineRef": "1093c70c",
-      "baselineFiles": [
-        "src/main.ts",
-        "src/transport/PeerHostTransport.ts"
-      ],
+      "baselineFiles": ["src/main.ts", "src/transport/PeerHostTransport.ts"],
       "dirty": true,
       "date": "2026-10-25T08:31:08.613Z",
       "variant": "before",
@@ -51,9 +48,7 @@
           "inputAckAdvance": 239,
           "entities": 37,
           "chunks": 20,
-          "workers": [
-            "/tilefun/src/server/local-server.worker.ts"
-          ],
+          "workers": ["/tilefun/src/server/local-server.worker.ts"],
           "errors": [],
           "distancePixels": 294.4577,
           "mainServerTick": null
@@ -157,9 +152,7 @@
           "inputAckAdvance": 241,
           "entities": 34,
           "chunks": 20,
-          "workers": [
-            "/tilefun/src/server/local-server.worker.ts"
-          ],
+          "workers": ["/tilefun/src/server/local-server.worker.ts"],
           "errors": [],
           "distancePixels": 295.6839,
           "mainServerTick": null
@@ -185,9 +178,7 @@
           "inputAckAdvance": 241,
           "entities": 37,
           "chunks": 20,
-          "workers": [
-            "/tilefun/src/server/local-server.worker.ts"
-          ],
+          "workers": ["/tilefun/src/server/local-server.worker.ts"],
           "errors": [],
           "distancePixels": 294.4577,
           "mainServerTick": null
@@ -213,9 +204,7 @@
           "inputAckAdvance": 240,
           "entities": 40,
           "chunks": 20,
-          "workers": [
-            "/tilefun/src/server/local-server.worker.ts"
-          ],
+          "workers": ["/tilefun/src/server/local-server.worker.ts"],
           "errors": [],
           "distancePixels": 294.4574,
           "mainServerTick": null
@@ -229,8 +218,6 @@
     "backgroundTicks": 181,
     "localPending": 1,
     "localChannelHighWaterBytes": 456375,
-    "guestChannelHighWaterBytes": [
-      753560
-    ]
+    "guestChannelHighWaterBytes": [753560]
   }
 }

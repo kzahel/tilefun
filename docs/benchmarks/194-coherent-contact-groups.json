@@ -20,9 +20,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 302,
           "remoteDisplayTick": 302,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -35,9 +33,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 310,
           "remoteDisplayTick": 310,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -58,9 +54,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 302,
           "remoteDisplayTick": 302,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -73,9 +67,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 310,
           "remoteDisplayTick": 310,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -96,10 +88,7 @@
           "cubeSource": "buffered",
           "cubeDisplayTick": 298,
           "remoteDisplayTick": 298,
-          "remoteSources": [
-            "buffered",
-            "predicted"
-          ],
+          "remoteSources": ["buffered", "predicted"],
           "recoveries": 0
         },
         {
@@ -112,9 +101,7 @@
           "cubeSource": "buffered",
           "cubeDisplayTick": 290,
           "remoteDisplayTick": 290,
-          "remoteSources": [
-            "buffered"
-          ],
+          "remoteSources": ["buffered"],
           "recoveries": 0
         }
       ]
@@ -135,9 +122,7 @@
           "cubeSource": "absent",
           "cubeDisplayTick": -1,
           "remoteDisplayTick": 302,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -150,9 +135,7 @@
           "cubeSource": "absent",
           "cubeDisplayTick": -1,
           "remoteDisplayTick": 310,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -173,9 +156,7 @@
           "cubeSource": "absent",
           "cubeDisplayTick": -1,
           "remoteDisplayTick": 302,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -188,9 +169,7 @@
           "cubeSource": "absent",
           "cubeDisplayTick": -1,
           "remoteDisplayTick": 310,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -211,9 +190,7 @@
           "cubeSource": "absent",
           "cubeDisplayTick": -1,
           "remoteDisplayTick": 298,
-          "remoteSources": [
-            "buffered"
-          ],
+          "remoteSources": ["buffered"],
           "recoveries": 0
         },
         {
@@ -226,9 +203,7 @@
           "cubeSource": "absent",
           "cubeDisplayTick": -1,
           "remoteDisplayTick": 290,
-          "remoteSources": [
-            "buffered"
-          ],
+          "remoteSources": ["buffered"],
           "recoveries": 0
         }
       ]
@@ -249,9 +224,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 302,
           "remoteDisplayTick": 302,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -264,9 +237,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 310,
           "remoteDisplayTick": 310,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -287,9 +258,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 302,
           "remoteDisplayTick": 302,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -302,9 +271,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 310,
           "remoteDisplayTick": 310,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -325,10 +292,7 @@
           "cubeSource": "buffered",
           "cubeDisplayTick": 298,
           "remoteDisplayTick": 298,
-          "remoteSources": [
-            "buffered",
-            "predicted"
-          ],
+          "remoteSources": ["buffered", "predicted"],
           "recoveries": 0
         },
         {
@@ -341,10 +305,7 @@
           "cubeSource": "buffered",
           "cubeDisplayTick": 290,
           "remoteDisplayTick": 290,
-          "remoteSources": [
-            "buffered",
-            "predicted"
-          ],
+          "remoteSources": ["buffered", "predicted"],
           "recoveries": 0
         }
       ]
@@ -365,9 +326,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 302,
           "remoteDisplayTick": 302,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -380,9 +339,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 310,
           "remoteDisplayTick": 310,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -403,9 +360,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 302,
           "remoteDisplayTick": 302,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         },
         {
@@ -418,9 +373,7 @@
           "cubeSource": "predicted",
           "cubeDisplayTick": 310,
           "remoteDisplayTick": 310,
-          "remoteSources": [
-            "predicted"
-          ],
+          "remoteSources": ["predicted"],
           "recoveries": 0
         }
       ]
@@ -441,10 +394,7 @@
           "cubeSource": "buffered",
           "cubeDisplayTick": 298,
           "remoteDisplayTick": 298,
-          "remoteSources": [
-            "buffered",
-            "predicted"
-          ],
+          "remoteSources": ["buffered", "predicted"],
           "recoveries": 0
         },
         {
@@ -457,9 +407,7 @@
           "cubeSource": "buffered",
           "cubeDisplayTick": 290,
           "remoteDisplayTick": 290,
-          "remoteSources": [
-            "buffered"
-          ],
+          "remoteSources": ["buffered"],
           "recoveries": 0
         }
       ]

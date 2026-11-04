@@ -75,6 +75,7 @@ test.beforeEach(async ({ page }) => {
 test("right-stick cursor selects editor tools and map controls with A and RT", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/tilefun/?desktop=1");
+  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   await expect(page.getByTestId("world-menu")).toBeVisible();
   await press(page, 0);
   // The game defaults to editing for a new profile.
@@ -120,6 +121,7 @@ test("Deck-sized menu, worlds, text keyboard, character and Options are controll
   test.setTimeout(process.env.CI ? 120000 : 30000);
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/tilefun/?desktop=1");
+  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   const menu = page.getByTestId("world-menu");
   await expect(menu).toHaveAttribute("data-page", "home");
   await expect(page.getByRole("button", { name: "Resume", exact: true })).toBeFocused();
@@ -184,6 +186,7 @@ test("multiplayer join, validation, public browse and cancellation use controlle
     }),
   );
   await page.goto("/tilefun/?desktop=1");
+  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   await expect(page.getByTestId("world-menu")).toBeVisible();
   await focusWithPad(page, "Multiplayer");
   await press(page, 0);
@@ -205,6 +208,7 @@ test("controller moves the player, opens the map and edits without leaking held 
   page,
 }) => {
   await page.goto("/tilefun/?desktop=1");
+  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   const menu = page.getByTestId("world-menu");
   await expect(menu).toBeVisible();
   await press(page, 0); // resume
@@ -276,6 +280,7 @@ test("failed saving keeps the session open and the recovery dialog works with B"
   page,
 }) => {
   await page.goto("/tilefun/?desktop=1");
+  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   await expect(page.getByTestId("world-menu")).toBeVisible();
   await page.evaluate(() => {
     const g = (
@@ -304,6 +309,7 @@ test("B opens normal vehicle actions, A confirms and back never leaks driving or
 }, testInfo) => {
   test.setTimeout(60000);
   await page.goto("/tilefun/?desktop=1");
+  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   await expect(page.getByTestId("world-menu")).toBeVisible();
   await press(page, 0);
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");

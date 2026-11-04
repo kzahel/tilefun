@@ -56,6 +56,7 @@ function harness() {
       return source;
     },
   };
+  // biome-ignore lint/correctness/noComponentHookFactories: Constructible Web Audio mock, not a React component.
   vi.stubGlobal("AudioContext", function MockAudioContext() {
     return ctx;
   });

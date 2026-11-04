@@ -86,9 +86,13 @@ test("arrow and WASD input keep the game rendering without console or page error
 });
 
 test("F3 toggles debug overlay", async ({ page }, testInfo) => {
-  await page.goto("/tilefun/");
-  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
-  await page.waitForTimeout(200);
+  // Keep terrain and background colors fixed while measuring collision lines.
+  const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" };
+  await page.goto(`/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}`);
+  await page.getByRole("button", { name: "New World", exact: true }).click();
+  await expect(page.getByTestId("world-menu")).toBeHidden();
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await expect(page.locator("#game")).toHaveAttribute("data-generator", "flat");
 
   // Capture top-left pixels BEFORE debug toggle
   const pixelsBefore = await page.evaluate(() => {
@@ -125,13 +129,11 @@ test("F3 toggles debug overlay", async ({ page }, testInfo) => {
       let count = 0;
       if (data)
         for (let i = 0; i < data.length; i += 4) {
-          // The blue debug body edges, including antialiasing against the ground.
+          // Opaque #66baff actor edges; exclude blue terrain and UI colors.
           if (
-            (data[i] ?? 0) >= 65 &&
-            (data[i] ?? 0) <= 120 &&
-            (data[i + 1] ?? 0) >= 145 &&
-            (data[i + 1] ?? 0) <= 200 &&
-            (data[i + 2] ?? 0) >= 220
+            Math.abs((data[i] ?? 0) - 102) <= 2 &&
+            Math.abs((data[i + 1] ?? 0) - 186) <= 2 &&
+            (data[i + 2] ?? 0) >= 253
           )
             count++;
         }

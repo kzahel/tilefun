@@ -30,7 +30,7 @@ const scene = (id: string) => {
   if (!s) throw new Error("Missing scene");
   return new FurnitureMotion(s.furniture);
 };
-describe("furniture in shared game physics", async () => {
+describe("furniture in shared game physics", () => {
   it("converts ground footprints to game prop colliders without including sprite padding", async () => {
     for (const d of FURNITURE_CATALOG.filter((d) => !d.blocking || FURNITURE_BODIES[d.id])) {
       const c = furnitureCollider(d);
