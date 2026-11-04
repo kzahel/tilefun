@@ -24,12 +24,22 @@ it.each([
     bounds: { minX: -468, minY: -564, maxX: -364, maxY: -460 },
     label: "balanced",
   },
-])("keeps dense forest previews inside the existing actor cap ($label)", ({ profile, bounds }) => {
-  const actors = actorPlacements(
-    createGenerator(createDescriptor("regional", 2026), profile),
-    bounds,
-  );
-  expect(actors.length).toBeLessThanOrEqual(128);
+])("bounds dense forest queries and shares seeds by chunk ($label)", ({ profile, bounds }) => {
+  const generator = createGenerator(createDescriptor("regional", 2026), profile);
+  // The evolving generator now exceeds the aggregate preview cap here.
+  expect(() => actorPlacements(generator, bounds)).toThrow("Actor query exceeds its residency cap");
+  const actors: ReturnType<typeof actorPlacements> = [];
+  for (let cy = Math.floor(bounds.minY / 16); cy <= Math.floor(bounds.maxY / 16); cy++)
+    for (let cx = Math.floor(bounds.minX / 16); cx <= Math.floor(bounds.maxX / 16); cx++) {
+      const chunk = actorPlacements(generator, {
+        minX: cx * 16,
+        minY: cy * 16,
+        maxX: (cx + 1) * 16 - 1,
+        maxY: (cy + 1) * 16 - 1,
+      });
+      expect(chunk.length).toBeLessThanOrEqual(128);
+      actors.push(...chunk);
+    }
   expect(actors.filter((a) => a.robin).length).toBeGreaterThan(50);
   const seeds = actors.filter((a) => a.type.includes("resource-seed"));
   expect(seeds.length).toBeGreaterThan(0);

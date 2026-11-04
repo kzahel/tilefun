@@ -12,6 +12,8 @@ export default defineConfig(full, {
     "vehicle-placement.spec.ts",
     "pwa.spec.ts",
   ],
-  globalTimeout: 10 * 60_000,
+  // Hosted software rendering needed ten minutes for the first 20 passing cases.
+  // Keep per-test/assertion deadlines while allowing all 29 cases to finish.
+  globalTimeout: (process.env.CI ? 20 : 10) * 60_000,
   maxFailures: process.env.CI ? 1 : 0,
 });

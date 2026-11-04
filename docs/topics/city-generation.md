@@ -44,8 +44,11 @@ new natural supplies. No migration or regeneration of promoted art is involved.
 [157](../tactical/159-foraging-and-lookouts.md) adds finite rabbit plants and
 meerkat fruit, plus one shared seed patch per occupied robin chunk. Existing
 animal identities, positions, ordering and ownership pools remain unchanged.
-Sharing seeds keeps the two dense forest inspection regressions below the
-existing 128-actor query cap; actor, persistence and planning caps are unchanged.
+Sharing seeds bounds per-chunk resources; actor, persistence and planning caps
+are unchanged. The 2026-11-04 CI fixtures contain 154/158 actors across their
+full forest bounds, so wide preview queries reject at the existing 128-actor
+cap. Per-chunk queries retain the robin-density and one-seed-patch-per-chunk
+checks without raising that cap.
 Manually placed animals create no food. Ordinary resource tombstones preserve
 consumption, including shared seed patches, through reloads.
 

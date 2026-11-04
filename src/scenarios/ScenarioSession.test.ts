@@ -81,7 +81,9 @@ it("backfills missing track spectators in seeded chunks without duplicating move
   try {
     await s.ready({ minCx: 24, maxCx: 33, minCy: 24, maxCy: 31 });
     const crowd = () =>
-      s.realm.entityManager.entities.filter((e) => e.proceduralId?.includes(":racetrack:"));
+      s.realm.entityManager.entities.filter((e) =>
+        /:racetrack:(?:north-|bend-)?spectator:/.test(e.proceduralId ?? ""),
+      );
     expect(crowd()).toHaveLength(48);
     const [missing, moved, deleted] = crowd();
     if (!missing || !moved || !deleted) throw Error("Missing spectators");

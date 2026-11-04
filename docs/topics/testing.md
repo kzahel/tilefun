@@ -55,6 +55,16 @@ Local lint, all three typechecks, build, 71 focused native cases, eleven Worker
 cases, the Worker dry-run and all eleven affected browser cases pass. Root audit
 reports five moderate findings in
 the Electron packaging chain and no high/critical findings; Worker audit is clean.
+Hosted smoke completed twenty cases without assertion failures before exhausting
+its ten-minute suite budget. The CI-only smoke budget is now twenty minutes;
+individual test/assertion deadlines, serial execution and failure limits stay
+unchanged. All 29 smoke cases pass locally with CI settings in 3.2 minutes.
+The first hosted native run passed 6,900 cases and exposed three stale fixture
+expectations. The spectator persistence test now selects spectator feature IDs
+so two picnic gems do not enter its exact 48/47-person counts. Dense forest
+fixtures assert rejection of oversized aggregate queries, then retain their
+robin-density and seed-sharing checks through bounded per-chunk queries. No
+generator output, runtime caps or gameplay behavior changes.
 Hosted CI on the consolidated PR remains the merge gate.
 
 The full browser suite runs at 02:17 UTC daily and through **Actions → CI → Run
