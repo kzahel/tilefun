@@ -1,5 +1,24 @@
 # Streaming and gameplay performance
 
+## Desktop throttle scope (2026-11-04)
+
+The current streaming runner applies `Emulation.setCPUThrottlingRate` to the page
+only. A bounded probe in bundled full Chromium 153.0.8010.12 on M4 Pro confirms
+that a 20-million-iteration integer loop takes about 21ms on both main thread and
+dedicated Worker at rate 1; at rate 4 it takes about 85ms on main but still 21ms
+in the Worker. Returning to rate 1 restores main-thread cost. Each lane sampled
+three executions; this is throttle-scope evidence, not a game performance result.
+The probe closed its owned test browser afterward.
+
+Earlier 4× CDP receipts therefore stress client/rendering work, not a uniformly
+slower device or a 4× slower server. Their observed authority ticks remain valid
+for that desktop run, but cannot rule out server backlog on weaker hardware.
+Physical-phone/Chromebook measurements, or a separately verified whole-process
+CPU constraint, are needed for that question. Default speedway traversal is a
+short straight infield lane, not a long circuit or the owner's saved world;
+infrequent stalls need a longer ordinary-input route and correlated frame,
+authority/ack, prediction, streaming and GC evidence.
+
 [220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) aligns ready
 terrain replication with the existing two-chunk actor/prop buffer, eliminating
 false private train stops from missing front-carriage terrain on narrow views.

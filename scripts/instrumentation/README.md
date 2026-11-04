@@ -17,6 +17,13 @@ separate CPU attribution lane. Profiling and desktop CPU emulation do not qualif
 physical-phone FPS; reports distinguish authority ticks, client update, rendering,
 acknowledgements, corrections and readiness. See [219](../../docs/tactical/219-vehicle-contact-and-train-continuity.md).
 
+The current `--cpu` setting throttles only the page main thread, not the authority
+Worker. A bundled-Chromium probe confirmed this on 2026-11-04; see the
+[performance topic](../../docs/topics/performance.md#desktop-throttle-scope-2026-11-04).
+Do not interpret `--cpu=4` as a uniformly 4× slower device or server.
+The default venue lane is short and straight; a long perimeter circuit is not
+implemented by this switch alone.
+
 The older `city-audit` / `city-course` helpers below describe pre-reset traffic
 owners; they need migration before use on current shared-physics driving. Do not
 interpret missing legacy helper methods as a current game timing result.
