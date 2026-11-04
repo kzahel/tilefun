@@ -69,4 +69,6 @@ it.each(PREDATOR_PROFILES)(
       await session.close();
     }
   },
+  // Aquatic recipes build and reload a regional habitat; hosted runs can exceed 5s.
+  process.env.CI ? 30_000 : 5_000,
 );

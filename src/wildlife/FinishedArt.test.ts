@@ -50,43 +50,49 @@ it("gives every active animal one whole-bank finishing policy in game and browse
   expect(finishedBank("__proto__")).toBeUndefined();
 });
 
-it("keeps predecessors immutable and every corrected clip on its declared policy", () => {
-  for (const contract of contracts.animals) {
-    expect(hash(`public/${contract.sourceImage}`), contract.id).toBe(contract.sourceSha256);
-    const bank = finishedBank(contract.id);
-    if (!bank) continue;
-    const original = read(`public/${contract.sourceImage.replace("sheet.png", "sprite.json")}`);
-    const metadata = read(`public/${bank.image.replace("sheet.png", "sprite.json")}`);
-    expect(metadata.clips, contract.id).toEqual(original.clips);
-    expect(metadata.anchor).toEqual(original.anchor);
-    expect([metadata.frameWidth, metadata.frameHeight]).toEqual([
-      original.frameWidth,
-      original.frameHeight,
-    ]);
-    expect(metadata.finishing).toMatchObject({
-      policy: contracts.policy,
-      method: contract.policy,
-      contract: bank.identity,
-    });
-    expect(hash(`public/${bank.image}`)).toBe(bank.sha256);
-    expect(metadata.sheetSha256).toBe(bank.sha256);
-    const review = reviews.find(
-      (entry) => entry.animalId === contract.id && entry.revision === bank.revision,
-    );
-    expect(review, `Unregistered correction ${contract.id}`).toBeDefined();
-    expect(review?.sheet.image).toBe(bank.image);
-    expect(review?.sheet.fingerprint).toBe(bank.sha256);
-    const inputs = read(`art-source/wildlife-v2/${contract.id}/${bank.revision}/inputs.json`);
-    for (const [path, expected] of Object.entries(inputs.sha256)) {
-      let actual = inputHashes.get(path);
-      if (!actual) {
-        actual = hash(path);
-        inputHashes.set(path, actual);
+// Hashing every bank and retained input took 53.5s on the hosted filesystem.
+const bankAuditTimeout = process.env.CI ? 120_000 : 30_000;
+it(
+  "keeps predecessors immutable and every corrected clip on its declared policy",
+  () => {
+    for (const contract of contracts.animals) {
+      expect(hash(`public/${contract.sourceImage}`), contract.id).toBe(contract.sourceSha256);
+      const bank = finishedBank(contract.id);
+      if (!bank) continue;
+      const original = read(`public/${contract.sourceImage.replace("sheet.png", "sprite.json")}`);
+      const metadata = read(`public/${bank.image.replace("sheet.png", "sprite.json")}`);
+      expect(metadata.clips, contract.id).toEqual(original.clips);
+      expect(metadata.anchor).toEqual(original.anchor);
+      expect([metadata.frameWidth, metadata.frameHeight]).toEqual([
+        original.frameWidth,
+        original.frameHeight,
+      ]);
+      expect(metadata.finishing).toMatchObject({
+        policy: contracts.policy,
+        method: contract.policy,
+        contract: bank.identity,
+      });
+      expect(hash(`public/${bank.image}`)).toBe(bank.sha256);
+      expect(metadata.sheetSha256).toBe(bank.sha256);
+      const review = reviews.find(
+        (entry) => entry.animalId === contract.id && entry.revision === bank.revision,
+      );
+      expect(review, `Unregistered correction ${contract.id}`).toBeDefined();
+      expect(review?.sheet.image).toBe(bank.image);
+      expect(review?.sheet.fingerprint).toBe(bank.sha256);
+      const inputs = read(`art-source/wildlife-v2/${contract.id}/${bank.revision}/inputs.json`);
+      for (const [path, expected] of Object.entries(inputs.sha256)) {
+        let actual = inputHashes.get(path);
+        if (!actual) {
+          actual = hash(path);
+          inputHashes.set(path, actual);
+        }
+        expect(actual, `${contract.id} retained input ${path}`).toBe(expected);
       }
-      expect(actual, `${contract.id} retained input ${path}`).toBe(expected);
     }
-  }
-}, 30_000);
+  },
+  bankAuditTimeout,
+);
 
 it("preserves all native painted cells for the five corrected action painters", () => {
   for (const contract of contracts.animals.filter((entry) => entry.policy === "retained-parts")) {

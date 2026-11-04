@@ -70,6 +70,13 @@ observed only two render frames during the 350 ms artificial Worker stall. That
 existing isolation check now uses a two-second CI-only stall while retaining
 the four-frame, authority-recovery and channel-cap assertions. This establishes
 thread independence without treating software-GPU speed as a frame-rate target.
+The final browser smoke run passes all 29 cases (10.0 minutes hosted), with
+raster verification green. Its native run passes 6,897 cases but times out five
+aquatic recipe reloads at the default five seconds and the complete art-bank
+integrity audit at thirty seconds (53.5 seconds observed). These two existing
+test owners now use CI-only allowances of thirty seconds per recipe and two
+minutes for the full hash audit; local/global deadlines, the 1,800-step bound,
+all saved-pose/population comparisons and every immutable-input hash stay intact.
 Hosted CI on the consolidated PR remains the merge gate.
 
 The full browser suite runs at 02:17 UTC daily and through **Actions → CI → Run
