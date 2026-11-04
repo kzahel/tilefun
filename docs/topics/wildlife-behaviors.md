@@ -30,8 +30,11 @@ body height or velocity and require no capture/undo shim. Readback owns actual
 poses. Spawn/release impulses, explicit marker placement and derived held/cached
 attachments remain separate lifecycle operations.
 
-Growing sources, nests, caches, lodges, dust and hoards are anchored nonblocking
-markers. Ordinary loose food and toys remain physical. This prevents the shared
+Growing sources, edible greens, ground seeds, nectar/water markers, nests, caches,
+lodges, dust and hoards are anchored nonblocking markers. [220](../tactical/220-world-anchors-shadows-and-jump-transitions.md)
+closes the edible-plant/resource classification gap and audits every source/item
+kind, including replicas without private work state. Actual carryables (twigs,
+fruit, nuts, roots, shiny items) and toys remain physical. This prevents the shared
 solver from displacing the resource a forager is trying to reach. Raccoon food
 conservation, renewal, ordinary carrying and cat ground toy play pass their
 retained native checks. Throwing starts outside the player hull and uses the same

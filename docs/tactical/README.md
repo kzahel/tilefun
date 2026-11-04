@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [220 Anchors, shadows and jump transitions](220-world-anchors-shadows-and-jump-transitions.md) | In progress: anchored resources, crest projection, train display handoffs and one-use buffered jumps |
 | [219 Vehicle contact and train continuity](219-vehicle-contact-and-train-continuity.md) | Qualified contact/train repairs and racetrack attribution; phone stutter open, equipment migration deferred |
 | [218 Traffic and rail recovery](218-traffic-and-rail-gameplay-recovery.md) | Delivered for review: wide-turn jam fix, train/nearby-jump recovery and bounded GPU target reuse; phone FPS confirmation open |
 | [217 Surface shadows and effects](217-surface-projected-shadows-and-effects.md) | Ready for owner feel review: shared finite receivers, conforming cartoon footprints and contact effects; native/Chromium/device and bounded performance evidence recorded |

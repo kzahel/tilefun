@@ -28,7 +28,7 @@ const FIELDS = [
   "inheritedVx",
   "inheritedVy",
 ] as const;
-const BODY_BYTES = 117;
+const BODY_BYTES = 118;
 const HEADER_BYTES = 16;
 const CONTACT_BYTES = 8;
 const MAX_CONTACTS = (MAX_PREDICTION_BODIES * (MAX_PREDICTION_BODIES - 1)) / 2;
@@ -90,6 +90,7 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
         (body.desiredDriveSpeed === undefined ? 0 : 64) |
         (body.desiredSteering === undefined ? 0 : 128),
     );
+    view.setUint8(offset++, body.jumpQueued ? 1 : 0);
     for (const field of POSITIONS) {
       view.setFloat64(offset, finite(body[field]), true);
       offset += 8;
@@ -188,6 +189,9 @@ export function readPhysicsState(
       normalY: 1,
       normalZ: 0,
     };
+    const jumpQueued = view.getUint8(offset++);
+    if (jumpQueued > 1) throw Error("Invalid queued jump flag");
+    if (jumpQueued) body.jumpQueued = true;
     if (supportId !== NONE) body.supportId = supportId;
     if (controlUntil !== NONE) body.controlUntil = controlUntil;
     for (const field of POSITIONS) {

@@ -4,6 +4,7 @@ import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import { createFauna } from "../wildlife/Fauna.js";
+import { createForageItem } from "../wildlife/ForageResources.js";
 import { launchBody, replaceBodyCollider, teleportBody } from "./PhysicalEdits.js";
 import { PHYSICS_DT } from "./PhysicsDefaults.js";
 import { type PhysicsGeometry, PhysicsScene } from "./PhysicsScene.js";
@@ -476,4 +477,25 @@ it("admits collider replacement and removal without advancing the scene", async 
   s.synchronize([a]);
   expect(s.snapshot().bodies.map((b) => b.id)).toEqual([1]);
   expect(s.diagnostics.worldSteps).toBe(0);
+});
+
+it("walks through anchored edible plants without moving them while still pushing loose fruit", async () => {
+  const s = await scene(),
+    player = createPlayer(0, 32),
+    plant = createForageItem("greens", 18, 32),
+    fruit = createForageItem("fruit", 36, 32);
+  const actors = [player, plant, fruit];
+  actors.forEach((e, i) => {
+    e.id = i + 1;
+  });
+  const before = structuredClone(plant.position),
+    ground = geometry();
+  for (let tick = 0; tick < 90; tick++) {
+    s.synchronize(actors);
+    s.step(new Map([[player.id, { vx: 64, vy: 0 }]]), ground);
+  }
+  expect(plant.position).toEqual(before);
+  expect(plant.wz).toBe(0);
+  expect(fruit.position.wx).toBeGreaterThan(50);
+  expect(player.position.wx).toBeGreaterThan(50);
 });

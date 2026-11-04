@@ -1,5 +1,14 @@
 # General 3D physics backend
 
+[220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) anchors all
+noncarryable ground resources/sites, including the editor's Edible plant, seeds,
+nectar and water markers. Actual loose carryables retain the shared physics world.
+A fresh airborne jump press held through landing queues one grounded jump; release
+cancels and consuming it does not rearm the same hold. Frame `0x14` includes this
+one-bit replay state (one byte per body); explicit relocation clears it. Host and
+guests must reload together.
+
+
 [219](../tactical/219-vehicle-contact-and-train-continuity.md) removes the chassis
 manual-sleep shortcut and preserves departure support velocity across airborne
 motor ticks. Rapier owns settling/sleeping; the single common step and normal

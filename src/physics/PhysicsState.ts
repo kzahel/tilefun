@@ -36,6 +36,8 @@ export interface PhysicsBodyState {
   angularVelocity?: AngularVelocity;
   sleeping?: boolean;
   jumpHeld: boolean;
+  /** One airborne press, consumed by the next grounded jump while still held. */
+  jumpQueued?: boolean;
   grounded: boolean;
   groundZ: number;
   desiredVx: number;

@@ -347,6 +347,7 @@ export class PhysicsScene {
     delete s.supportId;
     delete s.inheritedVx;
     delete s.inheritedVy;
+    delete s.jumpQueued;
     for (const neighbor of this.contacts.get(entity.id) ?? [])
       this.contacts.get(neighbor)?.delete(entity.id);
     this.contacts.delete(entity.id);
@@ -601,8 +602,11 @@ export class PhysicsScene {
         entry.state.supportId === undefined
           ? undefined
           : supportVelocities.get(entry.state.supportId);
-      const jump = input.jumpPressed || (input.jump && !entry.state.jumpHeld);
+      const pressed = input.jumpPressed || (input.jump && !entry.state.jumpHeld);
       entry.state.jumpHeld = input.jump ?? false;
+      if (!entry.state.jumpHeld && !input.jumpPressed) delete entry.state.jumpQueued;
+      if (pressed && !entry.state.grounded) entry.state.jumpQueued = true;
+      const jump = pressed || entry.state.jumpQueued;
       const drive =
         entry.kind === "vehicle"
           ? vehicleMotor(
@@ -635,6 +639,7 @@ export class PhysicsScene {
           vertical =
             (input.altitude / SCALE + entry.halfY - entry.body.translation().y) / PHYSICS_DT;
       } else if (jump && entry.state.grounded) {
+        delete entry.state.jumpQueued;
         vertical =
           assistedJumpVelocity(entry.entity, entry.state, this.bodies.values(), gravity) / SCALE +
           (support?.y ?? 0);

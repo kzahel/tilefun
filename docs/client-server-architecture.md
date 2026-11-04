@@ -58,10 +58,10 @@ See [embedded labs](topics/embedded-engine-labs.md) for lifecycle and parity lim
 
 ## Transport and requests
 
-Frame tag `0x13` carries normal entity baselines/deltas plus the bounded numerical
+Frame tag `0x14` carries normal entity baselines/deltas plus the bounded numerical
 physics state. Replicated `physicsGroupId` keeps a train consist coherent in
 bounded selection and private replay; no private service IDs are required. The
-numerical state includes previous poses, full vehicle quaternions/angular velocity/sleep, solved contact pairs, vehicle motor targets, retained takeoff support velocity and the motor's exclusive input deadline. Earlier frame tags
+numerical state includes previous poses, full vehicle quaternions/angular velocity/sleep, solved contact pairs, vehicle motor targets, retained takeoff support velocity, a one-use held jump queue and the motor's exclusive input deadline. Earlier frame tags
 reject and matching endpoint builds are required. Position coordinates retain
 Float64 precision in the physics payload; previous positions use float32 displacement
 from that pose. Reset 205 removed retired equipment fields.

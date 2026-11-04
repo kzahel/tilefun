@@ -3,21 +3,16 @@ import type { Entity } from "../entities/Entity.js";
 import { curveTrainView, isCurveTrain } from "../railway/CurveTrain.js";
 import { isTrain } from "../railway/Train.js";
 import { vehicleBodySize, vehicleNoseHeading } from "../traffic/Vehicle.js";
+import { isCarryable } from "../wildlife/ForageResources.js";
 import type { PhysicsBodyKind } from "./PhysicsState.js";
 export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
   if (entity.type.startsWith("vehicle-v1:") || isTrain(entity)) return "vehicle";
   if (entity.type === "ball") return "loose";
-  if (entity.workItem) {
-    const item = entity.workItem;
-    // Food sources and storage sites are anchored gameplay markers. Collected
-    // loose food/toys participate in the same scene as characters.
-    if (
-      item.growth ||
-      item.cachedIn ||
-      ["nest", "cache", "lodge", "dust", "hoard"].includes(item.kind)
-    )
-      return "fixed";
-    return "loose";
+  if (entity.workItem || entity.type.startsWith("wildlife-resource-")) {
+    // Ground supplies/sites are anchors. Only real carryable items become loose
+    // bodies; type identity also works on replicas without private work state.
+    if (entity.workItem?.growth || entity.workItem?.cachedIn) return "fixed";
+    return isCarryable(entity) ? "loose" : "fixed";
   }
   if (entity.type === "player" || entity.wanderAI || entity.routeAI || entity.resident)
     return "character";
