@@ -64,7 +64,12 @@ expectations. The spectator persistence test now selects spectator feature IDs
 so two picnic gems do not enter its exact 48/47-person counts. Dense forest
 fixtures assert rejection of oversized aggregate queries, then retain their
 robin-density and seed-sharing checks through bounded per-chunk queries. No
-generator output, runtime caps or gameplay behavior changes.
+generator output, runtime caps or gameplay behavior changes. The next hosted
+smoke run passed 25 cases, including the repaired overlay/fullscreen cases, then
+observed only two render frames during the 350 ms artificial Worker stall. That
+existing isolation check now uses a two-second CI-only stall while retaining
+the four-frame, authority-recovery and channel-cap assertions. This establishes
+thread independence without treating software-GPU speed as a frame-rate target.
 Hosted CI on the consolidated PR remains the merge gate.
 
 The full browser suite runs at 02:17 UTC daily and through **Actions → CI → Run

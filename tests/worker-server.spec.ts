@@ -124,23 +124,26 @@ test("single player renders while its authoritative Worker is busy", async ({ pa
   expect(before.transport.transport).toContain("Worker");
   const worker = page.workers().find((w) => w.url().includes("local-server.worker"));
   if (!worker) throw Error("No local authority Worker");
-  const frameTimes = page.evaluate(async () => {
+  // This proves thread independence, not a GPU frame-rate floor. Hosted software
+  // rendering may deliver only two frames during the ordinary 350 ms stall.
+  const busyMs = process.env.CI ? 2000 : 350;
+  const frameTimes = page.evaluate(async (duration) => {
     const times: number[] = [];
-    const until = performance.now() + 700;
+    const until = performance.now() + duration;
     while (performance.now() < until) {
       await new Promise(requestAnimationFrame);
       times.push(Date.now());
     }
     return times;
-  });
+  }, busyMs + 700);
   // Deliberately occupy only the authority's JS thread. No gameplay test command.
-  const stalled = await worker.evaluate(() => {
+  const stalled = await worker.evaluate((duration) => {
     const start = Date.now();
-    while (Date.now() - start < 350) {
+    while (Date.now() - start < duration) {
       /* controlled CPU saturation */
     }
     return { start, end: Date.now() };
-  });
+  }, busyMs);
   const during = (await frameTimes).filter((t) => t > stalled.start && t < stalled.end);
   expect(during.length).toBeGreaterThan(3);
   await expect.poll(async () => (await hostState(page)).tick).toBeGreaterThan(before.tick);
