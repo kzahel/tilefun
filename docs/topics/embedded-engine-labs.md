@@ -1,5 +1,12 @@
 # Embedded engine labs
 
+[220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) shares anchored
+resource classification, held one-use jump buffering, tilted caster projection
+and rider display handoffs through the common game/lab owners. The real GPU decal
+probe includes a tilted car over the ramp crest; it is diagnostic rendering,
+not another simulation or lab-only shadow implementation.
+
+
 [219](../tactical/219-vehicle-contact-and-train-continuity.md) repairs ordinary
 shared chassis settling, carrier jump momentum and coherent full-consist display.
 Game and labs inherit the same owners; no page-specific physics or smoothing is

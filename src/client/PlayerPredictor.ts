@@ -158,6 +158,11 @@ export class PlayerPredictor {
   private correctionAnchor: number | undefined;
   private correctionMembers = new Set<number>();
   private readonly lastPresentation = new Map<number, Entity>();
+  private readonly groupErrors = new Map<number, { x: number; y: number; z: number; at: number }>();
+  private readonly releasedGroups = new Map<
+    number,
+    { x: number; y: number; z: number; at: number }
+  >();
   private diagnostics: ReconcileDiagnostics | null = null;
 
   constructor(
@@ -210,6 +215,8 @@ export class PlayerPredictor {
     this.correctionAnchor = undefined;
     this.correctionMembers.clear();
     this.lastPresentation.clear();
+    this.releasedGroups.clear();
+    this.groupErrors.clear();
     this.activeUntil = -Infinity;
     this.diagnostics = null;
   }
@@ -231,6 +238,8 @@ export class PlayerPredictor {
     this.correctionAnchor = undefined;
     this.correctionMembers.clear();
     this.lastPresentation.clear();
+    this.releasedGroups.clear();
+    this.groupErrors.clear();
     this.status = "waiting";
   }
   storeInput(seq: number, movement: Movement, _dt: number): void {
@@ -487,6 +496,7 @@ export class PlayerPredictor {
       beforeMembers = this.correctionMembers,
       oldError = this.error();
     this.publish(job.request.player);
+    this.reconcileGroupErrors(beforeBodies, job.comparison?.bodies);
     const after = this.predicted;
     if (!after) return;
     const compared = job.comparison?.player;
@@ -507,25 +517,34 @@ export class PlayerPredictor {
       joining = !beforeMembers.has(anchor),
       retained = joining ? { x: 0, y: 0, z: 0 } : oldError;
     const currentAnchor = this.published.get(anchor),
+      comparedAnchor = job.comparison?.bodies.get(anchor),
       anchorAfter =
-        job.comparison?.bodies.get(anchor) ??
-        (joining && currentAnchor ? replayPose(currentAnchor) : undefined);
+        comparedAnchor ?? (joining && currentAnchor ? replayPose(currentAnchor) : undefined),
+      usePrevious = joining && !comparedAnchor;
     // A new anchor's whole interpolation interval must begin at its old pose;
     // preserving only the end would pull it backward at fractional renders.
     const offset = {
       x:
         (anchorBefore && anchorAfter
-          ? anchorBefore.position.wx - (joining ? anchorAfter.prevX : anchorAfter.x)
+          ? anchorBefore.position.wx - (usePrevious ? anchorAfter.prevX : anchorAfter.x)
           : 0) + retained.x,
       y:
         (anchorBefore && anchorAfter
-          ? anchorBefore.position.wy - (joining ? anchorAfter.prevY : anchorAfter.y)
+          ? anchorBefore.position.wy - (usePrevious ? anchorAfter.prevY : anchorAfter.y)
           : 0) + retained.y,
       z:
         (anchorBefore && anchorAfter
-          ? (anchorBefore.wz ?? 0) - (joining ? anchorAfter.prevZ : anchorAfter.z)
+          ? (anchorBefore.wz ?? 0) - (usePrevious ? anchorAfter.prevZ : anchorAfter.z)
           : 0) + retained.z,
     };
+    // A prescribed carrier cannot be pushed by player prediction. Preserve the
+    // rider's own residual through landing instead of transferring it to that
+    // carrier or dropping it when contact ownership changes.
+    if (this.published.get(anchor)?.physicsGroupId !== undefined && compared) {
+      offset.x = job.before.position.wx - compared.position.wx + oldError.x;
+      offset.y = job.before.position.wy - compared.position.wy + oldError.y;
+      offset.z = (job.before.wz ?? 0) - (compared.wz ?? 0) + oldError.z;
+    }
     this.displayError = {
       ...(Math.hypot(offset.x, offset.y, offset.z) < 32 ? offset : { x: 0, y: 0, z: 0 }),
       at: this.clock(),
@@ -609,7 +628,8 @@ export class PlayerPredictor {
     // the merged group there instead of pulling that actor toward the player.
     if (incoming !== undefined) {
       this.correctionAnchor = incoming;
-      this.displayError = { x: 0, y: 0, z: 0, at: this.clock() };
+      if (this.published.get(incoming)?.physicsGroupId === undefined)
+        this.displayError = { x: 0, y: 0, z: 0, at: this.clock() };
     } else if (
       this.correctionAnchor === undefined ||
       !touching.has(this.correctionAnchor) ||
@@ -701,6 +721,106 @@ export class PlayerPredictor {
     // camera follows the displayed pose on the monotonic render clock instead.
     return { time: presentationSeconds, domain: this.clockEpoch };
   }
+  private groupError(id: number) {
+    const error = this.groupErrors.get(id);
+    const decay = error ? Math.exp(-Math.max(0, this.clock() - error.at) / 0.06) : 0;
+    return { x: (error?.x ?? 0) * decay, y: (error?.y ?? 0) * decay, z: (error?.z ?? 0) * decay };
+  }
+  /** Prescribed bodies have their own matching-tick correction, independent of
+   * rider input/contact errors. Every member shares the same group transform. */
+  private reconcileGroupErrors(
+    before: ReadonlyMap<number, Entity>,
+    compared?: ReadonlyMap<number, ReplayPose>,
+  ) {
+    const groups = new Map<number, Entity>();
+    for (const e of this.published.values())
+      if (e.physicsGroupId !== undefined)
+        groups.set(e.physicsGroupId, this.published.get(e.physicsGroupId) ?? e);
+    for (const id of this.groupErrors.keys()) if (!groups.has(id)) this.groupErrors.delete(id);
+    for (const [id, anchor] of groups) {
+      const previous = before.get(anchor.id),
+        matching = compared?.get(anchor.id),
+        retained = this.groupError(id);
+      if (!previous || !matching) {
+        this.groupErrors.delete(id);
+        continue;
+      }
+      const error = {
+        x: previous.position.wx - matching.x + retained.x,
+        y: previous.position.wy - matching.y + retained.y,
+        z: (previous.wz ?? 0) - matching.z + retained.z,
+      };
+      this.groupErrors.set(id, {
+        ...(Math.hypot(error.x, error.y, error.z) < 32 ? error : { x: 0, y: 0, z: 0 }),
+        at: this.clock(),
+      });
+    }
+  }
+  /** A departing prescribed group eases from predicted time back to the remote
+   * buffer as one translation. Sampling its current predicted interval first
+   * avoids losing a tick of real travel at the handoff. No physics pose changes. */
+  private releasePresentationGroups(
+    buffered: readonly Entity[],
+    selected: ReadonlySet<number>,
+    alpha: number,
+  ): readonly Entity[] {
+    let needed = this.releasedGroups.size > 0;
+    if (!needed)
+      for (const e of this.lastPresentation.values())
+        if (e.physicsGroupId !== undefined) {
+          needed = true;
+          break;
+        }
+    if (!needed) return buffered;
+    const now = this.clock(),
+      present = new Set<number>();
+    let released: Entity[] | undefined;
+    for (const [index, e] of buffered.entries()) {
+      const group = e.physicsGroupId;
+      if (group === undefined) continue;
+      present.add(group);
+      if (selected.has(e.id)) {
+        this.releasedGroups.delete(group);
+        continue;
+      }
+      let shift = this.releasedGroups.get(group);
+      const previous = this.lastPresentation.get(e.id),
+        predicted = this.published.get(e.id);
+      if (!shift && previous && predicted) {
+        const p = predicted.prevPosition ?? predicted.position,
+          correction = this.groupError(group);
+        shift = {
+          x: p.wx + (predicted.position.wx - p.wx) * alpha + correction.x - e.position.wx,
+          y: p.wy + (predicted.position.wy - p.wy) * alpha + correction.y - e.position.wy,
+          z:
+            (predicted.prevWz ?? predicted.wz ?? 0) * (1 - alpha) +
+            (predicted.wz ?? 0) * alpha +
+            correction.z -
+            (e.wz ?? 0),
+          at: now,
+        };
+        if (Math.hypot(shift.x, shift.y, shift.z) < 32) this.releasedGroups.set(group, shift);
+        else shift = undefined; // An explicit relocation must remain a relocation.
+      }
+      if (!shift) continue;
+      const t = Math.min(1, Math.max(0, (now - shift.at) / 0.2)),
+        factor = 1 - t * t * (3 - 2 * t);
+      if (!factor) {
+        this.releasedGroups.delete(group);
+        continue;
+      }
+      const position = {
+          wx: e.position.wx + shift.x * factor,
+          wy: e.position.wy + shift.y * factor,
+        },
+        z = (e.wz ?? 0) + shift.z * factor;
+      released ??= [...buffered];
+      released[index] = { ...e, position, prevPosition: position, wz: z, prevWz: z };
+    }
+    for (const id of this.releasedGroups.keys())
+      if (!present.has(id)) this.releasedGroups.delete(id);
+    return released ?? buffered;
+  }
   /** Nearby bodies share predicted time; only actual contacts share correction. */
   presentEntities(alpha: number, buffered: readonly Entity[]): Entity[] {
     const player = this.predicted,
@@ -711,10 +831,10 @@ export class PlayerPredictor {
     if (this.status === "replaying" && this.lastPresentation.size)
       return buffered.map((entity) => this.lastPresentation.get(entity.id) ?? entity);
     if (!player || !scene || this.status !== "ready" || !this.active) {
+      const released = this.releasePresentationGroups(buffered, new Set(), alpha);
       this.lastPresentation.clear();
-      return [...buffered];
+      return [...released];
     }
-    this.lastPresentation.clear();
     const root = player.parentId ?? player.id,
       component = new Set<number>([root, player.id]);
     const anchor = this.published.get(root) ?? player;
@@ -729,6 +849,8 @@ export class PlayerPredictor {
       }
     }
     this.expandCoherentMembers(component);
+    const releasing = this.releasePresentationGroups(buffered, component, alpha);
+    this.lastPresentation.clear();
     const touching = this.correctionMembers;
     const error = this.error();
     // A correction must not lift an entire contact stack off its solved floor.
@@ -740,22 +862,27 @@ export class PlayerPredictor {
         break;
       }
     }
-    return buffered.map((entity) => {
+    return releasing.map((entity) => {
       if (!component.has(entity.id)) return entity;
       const predicted = entity.id === player.id ? player : this.published.get(entity.id);
       if (!predicted) return entity;
       // Proximity selects a coherent simulation tick, not a physical connection.
       // Transferring the player's correction here moves parked cars before touch.
       const corrected = touching.has(entity.id);
+      const groupOffset =
+        predicted.physicsGroupId === undefined
+          ? undefined
+          : this.groupError(predicted.physicsGroupId);
+      const displayOffset = groupOffset ?? (corrected ? error : { x: 0, y: 0, z: 0 });
       const prev = predicted.prevPosition ?? predicted.position;
       const position = {
-        wx: prev.wx + (predicted.position.wx - prev.wx) * alpha + (corrected ? error.x : 0),
-        wy: prev.wy + (predicted.position.wy - prev.wy) * alpha + (corrected ? error.y : 0),
+        wx: prev.wx + (predicted.position.wx - prev.wx) * alpha + displayOffset.x,
+        wy: prev.wy + (predicted.position.wy - prev.wy) * alpha + displayOffset.y,
       };
       const z =
         (predicted.prevWz ?? predicted.wz ?? 0) * (1 - alpha) +
         (predicted.wz ?? 0) * alpha +
-        (corrected && !floorSupported ? error.z : 0);
+        (groupOffset ? groupOffset.z : corrected && !floorSupported ? error.z : 0);
       const presented = {
         ...predicted,
         sprite: entity.id === player.id ? predicted.sprite : entity.sprite,

@@ -1,0 +1,242 @@
+{
+  "schema": 1,
+  "date": "2026-11-04",
+  "scope": "Bounded native and bundled full Chromium regressions on Apple M4 Pro. Production game/Worker and shared embedded consumers. No physical-phone or Chromebook measurement, WAN train qualification or general performance improvement claim.",
+  "source_sha256": {
+    "src/physics/PhysicsBodies.ts": "38979b34a0a58a92351aea2472375ea3f1b7b8e925fcc213ac28cfdd5b422248",
+    "src/physics/PhysicsScene.ts": "2283c1b1e19a83a21ead86eaf9d2494fd3b1e40be31fa2d4a68fceb57d4244a0",
+    "src/shared/physicsStateCodec.ts": "e84cbd112e008adadad0d356a97450b07205ba9dafb674896ac0307d9838d830",
+    "src/rendering/ProjectedDecals.ts": "8868e0daefee576465685d822e1be2048e64fb3a6b81e6a97addb6a95534b849",
+    "src/rendering/SurfaceReceivers.ts": "a77f7c7b489d1c7a0c08c8a6de0bf245c59d495deb458aecd2e2667528e3bd00",
+    "src/client/PlayerPredictor.ts": "6333aea3ca2b58e0d41b0b4cdca388a67a31f1b766567e085e65b9f7eae78e1c",
+    "src/server/RealmReplicator.ts": "6eacdb7ed4b98eee38a8812467fd29375b41775c0e66fd65bb39f6de10d1632f"
+  },
+  "native_evidence": {
+    "resource_audit": "All 14 forage item kinds and 11 source kinds, replica identity and cached carryables; real walk-through anchored greens while pushing loose fruit.",
+    "jump_queue": "One fresh held airborne press consumed once, held takeoff does not repeat, release and relocation cancel; binary midair restore matches ordinary replay.",
+    "shadow": "Tilted finite caster over ramp/deck crest; separate underpass fixture prevents an exposed high end from shadowing an overhead deck above the low end.",
+    "train": "Three-tick delayed ordinary generated-service frames, rejected rider strafe near landing, fractional render samples, landing and side alighting. Previous predictor fails the same scenario.",
+    "terrain_interest": "One-chunk viewport receives 25 ready terrain chunks instead of 9, matching actor/prop buffer. Unchanged deltas, exits and no authority generation verified."
+  },
+  "production_draw_traces": {
+    "method": "Actual submitted middle-car scene X and camera/player poses sampled in test-local renderer wrapper. Cruise expected displacement uses presentationSeconds, not wall time inside submission. Jump, buffered landing jump and side alighting use ordinary keyboard/Worker authority.",
+    "carrier_correction_before_terrain_context_fix": {
+      "samples": 233,
+      "riding_intervals": 145,
+      "cruise_speed_px_s": 192,
+      "max_train_render_travel_residual_px": 5.912987780983386,
+      "max_camera_render_travel_residual_px": 0.07320903854008076,
+      "max_camera_lateral_step_px": 0.0
+    },
+    "terrain_context_fixed_instrumented": {
+      "samples": 231,
+      "riding_intervals": 142,
+      "cruise_speed_px_s": 192,
+      "max_train_render_travel_residual_px": 0.00468931625824176,
+      "max_camera_render_travel_residual_px": 0.07523940502118798,
+      "max_camera_lateral_step_px": 0.0,
+      "max_missing_group_collision_corners": 0,
+      "locally_blocked_authority_cruise_samples": 0
+    },
+    "final_without_private_predictor_probe": {
+      "samples": 230,
+      "riding_intervals": 145,
+      "cruise_speed_px_s": 192,
+      "max_train_render_travel_residual_px": 0.004148380251426609,
+      "max_camera_render_travel_residual_px": 0.07505409415601738,
+      "max_camera_lateral_step_px": 0.023968871901161037
+    }
+  },
+  "browser_evidence": {
+    "gpu_renderer": 24,
+    "worker_pair_realm_train": 6,
+    "result": "All pass. GPU suite includes tilted car crest pixel coverage, surface/depth, resources and recovery. Final six-case run includes delayed co-op and game/lab lifecycle teardown."
+  },
+  "streaming": {
+    "command": "npm run streaming:bench -- --assert-ready --renderer=gpu --meshes --cpu=4",
+    "result": "passed",
+    "environment": {
+      "cpu": "Apple M4 Pro",
+      "browser": "153.0.8010.12",
+      "platform": "darwin 25.6.0 arm64",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "renderer": "gpu",
+      "meshes": true,
+      "cpuRate": 4
+    },
+    "stages": [
+      {
+        "name": "cold",
+        "frames": {
+          "count": 120,
+          "p50": 16.699999999999818,
+          "p95": 16.700000000000728,
+          "p99": 16.799999999999272,
+          "max": 16.80000000000109
+        },
+        "renderMs": {
+          "count": 121,
+          "p50": 4.200000047683716,
+          "p95": 8,
+          "p99": 9.199999809265137,
+          "max": 9.5
+        },
+        "updateMs": {
+          "count": 121,
+          "p50": 2.4000000953674316,
+          "p95": 3.5999999046325684,
+          "p99": 3.9000000953674316,
+          "max": 4.099999904632568
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "maxLoaded": 49
+      },
+      {
+        "name": "standing",
+        "frames": {
+          "count": 120,
+          "p50": 16.69999999999891,
+          "p95": 16.799999999999272,
+          "p99": 16.80000000000109,
+          "max": 16.80000000000109
+        },
+        "renderMs": {
+          "count": 121,
+          "p50": 3.1000001430511475,
+          "p95": 4.599999904632568,
+          "p99": 5.099999904632568,
+          "max": 6.599999904632568
+        },
+        "updateMs": {
+          "count": 121,
+          "p50": 2.0999999046325684,
+          "p95": 2.8000001907348633,
+          "p99": 3.1000001430511475,
+          "max": 3.6000001430511475
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "maxLoaded": 49
+      },
+      {
+        "name": "walk",
+        "frames": {
+          "count": 180,
+          "p50": 16.69999999999891,
+          "p95": 16.700000000000728,
+          "p99": 16.80000000000109,
+          "max": 16.80000000000109
+        },
+        "renderMs": {
+          "count": 181,
+          "p50": 3.0999999046325684,
+          "p95": 4,
+          "p99": 4.299999952316284,
+          "max": 4.799999952316284
+        },
+        "updateMs": {
+          "count": 181,
+          "p50": 1.9000000953674316,
+          "p95": 2.799999952316284,
+          "p99": 3.200000047683716,
+          "max": 3.4000000953674316
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "maxLoaded": 49
+      },
+      {
+        "name": "sprint",
+        "frames": {
+          "count": 300,
+          "p50": 16.69999999999891,
+          "p95": 16.700000000000728,
+          "p99": 16.799999999999272,
+          "max": 16.80000000000109
+        },
+        "renderMs": {
+          "count": 301,
+          "p50": 2.8999998569488525,
+          "p95": 5.299999952316284,
+          "p99": 6.200000047683716,
+          "max": 7.700000047683716
+        },
+        "updateMs": {
+          "count": 301,
+          "p50": 1.5999999046325684,
+          "p95": 2.4000000953674316,
+          "p99": 3.799999952316284,
+          "max": 4.400000095367432
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "maxLoaded": 49
+      },
+      {
+        "name": "reverse",
+        "frames": {
+          "count": 300,
+          "p50": 16.700000000000728,
+          "p95": 16.700000000000728,
+          "p99": 16.80000000000291,
+          "max": 33.29999999999927
+        },
+        "renderMs": {
+          "count": 301,
+          "p50": 2.6000001430511475,
+          "p95": 5.200000047683716,
+          "p99": 6.299999952316284,
+          "max": 32.299999952316284
+        },
+        "updateMs": {
+          "count": 302,
+          "p50": 1.5999999046325684,
+          "p95": 2.299999952316284,
+          "p99": 2.9000000953674316,
+          "max": 3.9000000953674316
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "maxLoaded": 49
+      },
+      {
+        "name": "zoom-out",
+        "frames": {
+          "count": 180,
+          "p50": 16.69999999999709,
+          "p95": 16.700000000000728,
+          "p99": 16.799999999999272,
+          "max": 16.799999999999272
+        },
+        "renderMs": {
+          "count": 181,
+          "p50": 3.700000047683716,
+          "p95": 6.599999904632568,
+          "p99": 7.799999952316284,
+          "max": 7.900000095367432
+        },
+        "updateMs": {
+          "count": 181,
+          "p50": 1.5,
+          "p95": 2.200000047683716,
+          "p99": 2.5,
+          "max": 4.6000001430511475
+        },
+        "finalMissing": 0,
+        "finalIncomplete": 0,
+        "finalStale": 0,
+        "maxLoaded": 56
+      }
+    ],
+    "limits": "One bounded desktop CDP 4x CPU lane. Wider terrain replication increases initial payload/client terrain data; it does not expand activation or allocate out-of-view render caches. No matched bandwidth, mobile FPS or crowd speedup claim."
+  }
+}

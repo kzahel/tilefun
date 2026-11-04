@@ -50,7 +50,8 @@ async function setup(recipe?: ScenarioRecipe) {
   function receive(frames: ArrayBuffer[]) {
     for (const buffer of frames) {
       const msg = decodeServerMessage(buffer);
-      if (msg.type === "frame" || msg.type.startsWith("sync-"))
+      if (msg.type === "frame") view.applyFrame(msg, now);
+      else if (msg.type.startsWith("sync-"))
         view.applyMessage(msg as Parameters<typeof view.applyMessage>[0]);
     }
     if (!predictor.player) predictor.reset(view.serverPlayerEntity);
@@ -76,6 +77,7 @@ async function setup(recipe?: ScenarioRecipe) {
     receive,
     input,
     advanceClock: (seconds: number) => (now += seconds),
+    now: () => now,
   };
 }
 
@@ -697,4 +699,73 @@ it("presents a ridden consist at one predicted time including distant uncontacte
       expect(c?.position.wx).toBeCloseTo(original.position.wx, 2);
     }
   }
+});
+
+it("keeps the train and rider display continuous through delayed takeoff, landing and alighting", async () => {
+  const f = await setup(cityTrainRecipe());
+  f.view.setPredictor(f.predictor);
+  const service = [...(f.s.realm.railways?.services.values() ?? [])][0];
+  const train = service?.cars[1];
+  if (!service || !train) throw Error("Missing service");
+  await f.s.command({ kind: "teleport", position: train.position, z: 44 });
+  service.record.dwell = 0;
+  service.record.speed = 192;
+  f.s.tick();
+  f.receive(f.s.frames());
+  const queued: ArrayBuffer[][] = [];
+  const samples: {
+    tick: number;
+    x: number;
+    px: number;
+    y: number;
+    z: number;
+    error: number;
+    status: string;
+  }[] = [];
+  for (let tick = 0; tick < 240; tick++) {
+    const movement = {
+      ...idle,
+      dx: tick >= 100 && tick < 104 ? 1 : 0,
+      jump: tick === 70 || tick === 150,
+      dy: tick >= 150 && tick < 180 ? 1 : 0,
+    };
+    const seq = tick + 10;
+    f.input(seq, movement);
+    // Rejected/dropped strafe controls force a rider-only reconciliation near
+    // landing; they must never move the prescribed train's display.
+    f.s.input(encodeClientMessage({ type: "player-input", seq, ...movement, dx: 0 }));
+    f.s.tick();
+    queued.push(f.s.frames());
+    if (queued.length > 3) f.receive(queued.shift() ?? []);
+    f.predictor.update(PHYSICS_DT, movement, f.view.world, f.view.props, f.view.serverEntities);
+    for (const alpha of [0.25, 0.75]) {
+      f.view.beginPresentation(f.now() - PHYSICS_DT * (1 - alpha), alpha);
+      const c = f.view.entities.find((e) => e.id === train.id),
+        p = f.view.presentedPlayerEntity;
+      if (!c) throw Error("Missing displayed train");
+      samples.push({
+        tick: tick + alpha,
+        x: c.position.wx,
+        px: p.position.wx,
+        y: p.position.wy,
+        z: p.wz ?? 0,
+        error: f.predictor.lastReconcileDiagnostics?.resimPosErr ?? 0,
+        status: f.predictor.recoveryDiagnostics.status,
+      });
+      f.view.endPresentation();
+    }
+  }
+  const jumps = samples
+    .slice(1)
+    .map((s, i) => ({
+      tick: s.tick,
+      dx: s.x - (samples[i]?.x ?? 0),
+      pdx: s.px - (samples[i]?.px ?? 0),
+      status: s.status,
+    }))
+    .filter(
+      (s) =>
+        s.tick > 40 && (s.dx < 0 || s.dx > 2.2 || (s.tick < 145 && (s.pdx < 0 || s.pdx > 3.2))),
+    );
+  expect(jumps).toHaveLength(0);
 });

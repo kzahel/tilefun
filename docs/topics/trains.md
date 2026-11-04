@@ -1,5 +1,16 @@
 # Generated railways and retained train assets
 
+[220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) removes
+matching-tick landing corrections that counted an extra interval, and smooths
+the full consist's return from predicted time to the remote buffer on departure.
+A held fresh airborne press also queues one landing jump, including on a moving
+roof. The queue is consumed once and replicated in numerical frame 0x14.
+Terrain replication covers the existing actor/prop collision buffer so a leading
+carriage outside a narrow rear rider's render area does not encounter unknown
+terrain in private replay. Prescribed group display corrections remain separate
+from rider errors; the ordinary Worker draw trace covers jump/land/alight.
+
+
 [219](../tactical/219-vehicle-contact-and-train-continuity.md) keeps a ridden
 consist on one predicted presentation timeline/correction, including carriages
 outside immediate player proximity. Shared character motors retain departure

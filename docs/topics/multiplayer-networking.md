@@ -4,7 +4,7 @@ Topic: multiplayer-networking
 Status: shared Worker authority for browser P2P, independent bounded guest links,
 reliable ordered replication and fragmented snapshots; bounded guest recovery.
 Broader network investigation is deferred.
-Updated: 2026-11-03.
+Updated: 2026-11-04.
 
 Owns ongoing transport/replication decisions and gaps. The
 [architecture guide](../client-server-architecture.md) owns runtime boundaries;
@@ -13,7 +13,10 @@ proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
 
 ## Shared physics frame layout
 
-Current frame tag is `0x10`. [209](../tactical/209-car-driving-and-autonomous-traffic.md)
+Current frame tag is `0x14`. [220](../tactical/220-world-anchors-shadows-and-jump-transitions.md)
+adds a validated one-byte, one-use airborne jump queue per numerical body. Intermediate
+vehicle/support layouts are recorded in their owning physics tacticals.
+[209](../tactical/209-car-driving-and-autonomous-traffic.md)
 adds target drive speed/steering (two optional float32 motor fields, eight bytes
 per numerical body) for shared car/traffic replay, plus previous heading (four
 bytes) to retain angular interpolation through acknowledgement.
@@ -139,6 +142,13 @@ The intermittent train check remains separate follow-up work.
   with full baselines for new entities, field deltas for changed entities and
   exit IDs, plus on-change sync messages. It diffs against last-sent state;
   this is not an acknowledged snapshot baseline protocol.
+- Ready terrain covers at least the same two-chunk viewport buffer as actors and
+  props, rather than only the one-chunk rendering buffer. A rear-roof train rider
+  on a narrow viewport otherwise receives the leading carriage without its
+  collision terrain, falsely blocking private replay until the next chunk enters
+  view. This changes replication interest only: it does not generate terrain,
+  expand AI activity, bypass backpressure or allocate extra terrain render images.
+  Chunk revisions and departures retain ordinary delta/exit handling. See 220.
 - [EntityDefs](../../src/entities/EntityDefs.ts) owns static sprite/collider/AI
   metadata. [Serialization](../../src/shared/serialization.ts) carries dynamic
   state and reconstructs full entities; animation frame/timer and AI timer are

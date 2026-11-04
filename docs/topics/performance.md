@@ -1,5 +1,13 @@
 # Streaming and gameplay performance
 
+[220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) aligns ready
+terrain replication with the existing two-chunk actor/prop buffer, eliminating
+false private train stops from missing front-carriage terrain on narrow views.
+This increases bounded initial chunk payload/data without expanding activation
+or out-of-view raster caches. Final GPU/meshes 4× CDP streaming readiness passes
+all six stages, with 16.8ms frame p99 and one 33.3ms maximum. This is desktop
+qualification, with no matched bandwidth, crowd or physical-device gain claimed.
+
 [219](../tactical/219-vehicle-contact-and-train-continuity.md) adds current real-game
 racetrack attribution to the ordinary streaming CLI. Grandstand and infield normal
 view walking/sprinting keep 16.8ms frame p99 in the desktop 4× CDP lane; no sustained

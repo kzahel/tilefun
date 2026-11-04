@@ -1,5 +1,23 @@
 # Player prediction and moving contacts
 
+[220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) repairs two
+rider handoffs. A new contact anchor uses an available matching-tick comparison;
+selecting its previous pose again added a legitimate movement tick as correction.
+Prescribed groups retain their own matching-tick correction rather than inheriting
+rider errors. A landing rider keeps its residual smoothly without moving the
+carrier. A departing group eases as one translation from predicted display to
+the remote buffer over 0.2s, without modifying physics. Large relocations,
+visibility removal and predictor resets retain explicit fences; ordinary frames
+without a released group reuse their existing entity array. Native delayed-frame
+landing/jump-off regressions cover fractional render poses. Frame 0x14 retains
+one-use held airborne jump queues for replay.
+Ready terrain now covers the same two-chunk interest buffer as actors/props:
+otherwise a narrow-view rear-roof rider could receive the front carriage without
+its terrain, falsely stopping private preflight while authority kept moving.
+The production jump/land/alight draw trace measures both train and camera travel
+against the render clock, independently of wall-time submission delays.
+
+
 [219](../tactical/219-vehicle-contact-and-train-continuity.md) expands both active
 presentation membership and solved correction membership through replicated
 `physicsGroupId`. A train's distant carriage cannot remain buffered while its

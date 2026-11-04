@@ -9,6 +9,46 @@ import { World } from "../world/World.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { RealmReplicator } from "./RealmReplicator.js";
 
+it("replicates ready collision terrain throughout actor interest, including narrow viewports", () => {
+  const entityManager = new EntityManager();
+  const player = entityManager.spawn(createPlayer(0, 0));
+  const actor = entityManager.spawn(createChicken(500, 0));
+  const session = new PlayerSession("local", player);
+  // A rear-roof rider on a small viewport can have the leading carriage two
+  // chunks ahead. Unknown terrain there must not falsely stop private replay.
+  session.visibleRange = { minCx: 0, maxCx: 0, minCy: 0, maxCy: 0 };
+  const world = new World(new FlatStrategy());
+  for (let x = -3; x <= 3; x++) for (let y = -3; y <= 3; y++) world.getChunk(x, y);
+  const source = {
+    world,
+    entityManager,
+    propManager: new PropManager(),
+    sessions: new Map([["local", session]]),
+    tickCounter: 1,
+    tickRate: 60,
+    playerNamesRevision: 0,
+    editorCursorsRevision: 0,
+  };
+  const replicator = new RealmReplicator();
+  const messages = replicator.build("local", source);
+  expect((messages[0] as FrameMessage).entityBaselines?.map((e) => e.id)).toContain(actor.id);
+  const terrain = messages.find((m) => m.type === "sync-chunks");
+  if (terrain?.type !== "sync-chunks") throw Error("Missing collision context");
+  expect(terrain.loadedChunkKeys).toHaveLength(25);
+  expect(terrain.loadedChunkKeys).toContain("2,0");
+  expect(terrain.loadedChunkKeys).toContain("-2,-2");
+  expect(terrain.loadedChunkKeys).not.toContain("3,0");
+  expect(terrain.chunkUpdates).toHaveLength(25);
+  expect(replicator.build("local", source).some((m) => m.type === "sync-chunks")).toBe(false);
+  // The wider collision buffer does not create authority terrain or defeat exits.
+  session.visibleRange = { minCx: 3, maxCx: 3, minCy: 0, maxCy: 0 };
+  const moved = replicator.build("local", source).find((m) => m.type === "sync-chunks");
+  if (moved?.type !== "sync-chunks") throw Error("Missing updated interest");
+  expect(moved.loadedChunkKeys).not.toContain("0,0");
+  expect(moved.loadedChunkKeys).not.toContain("4,0");
+  expect([...world.chunks.entries()]).toHaveLength(49);
+});
+
 it("shares unchanged snapshots across clients while observing edits within the same tick", () => {
   const entityManager = new EntityManager();
   const player = entityManager.spawn(createPlayer(0, 0));

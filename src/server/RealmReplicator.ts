@@ -109,10 +109,12 @@ export class RealmReplicator {
     const revisions = delta.chunkRevisions;
 
     // Collect loaded chunk keys and build delta updates.
-    // Only include chunks within this session's visible range (+ RENDER_DISTANCE
-    // buffer) so we don't send chunks loaded for other sessions.
+    // Collision context must cover the same interest as actors/props. A narrow
+    // viewport can include a whole train whose leading carriage is outside the
+    // render buffer; unknown terrain there would falsely block private replay.
+    // Only send already-ready terrain, never load chunks for replication.
     const range = session.visibleRange;
-    const chunkBuf = RENDER_DISTANCE;
+    const chunkBuf = Math.max(RENDER_DISTANCE, BROADCAST_BUFFER_CHUNKS);
     const cMinCx = range.minCx - chunkBuf;
     const cMaxCx = range.maxCx + chunkBuf;
     const cMinCy = range.minCy - chunkBuf;
