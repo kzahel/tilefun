@@ -5,7 +5,8 @@ import { createVehicle } from "../traffic/Vehicle.js";
 import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
-import { surfaceDecals } from "./ProjectedDecals.js";
+import { poseOrientation } from "./MeshPresentation.js";
+import { projectShadow, surfaceDecals } from "./ProjectedDecals.js";
 import { projectWorld } from "./Projection.js";
 import { presentSurfaceScene } from "./presentSurfaceScene.js";
 import { SceneFrame } from "./SceneFrame.js";
@@ -113,6 +114,33 @@ export async function probeSurfaceDecals() {
         })),
       });
     }
+    const crestCar = createVehicle("compact-1", 60, 0);
+    crestCar.id = 99;
+    crestCar.wz = 20;
+    crestCar.bodyRotation = poseOrientation(0, -0.3, 0.1);
+    const carDecals = surfaceDecals(
+      projectShadow(receivers, crestCar, 60, 0, 20, {
+        min: [-20, -10, 0],
+        max: [20, 10, 20],
+        triangles: [],
+      }),
+      "vehicle",
+      0.28,
+    );
+    const crestBefore = pixels([]),
+      crestAfter = pixels(carDecals);
+    report.push({
+      name: "tilted-car-crest",
+      receivers: carDecals.map((d) => d.receiverId),
+      samples: [
+        [56, 1.5, 28],
+        [64, 1.5, 32],
+        [68, 1.5, 32],
+      ].map(([x = 0, y = 0, z = 0]) => ({
+        baseline: sample(crestBefore, x, y, z),
+        shadowed: sample(crestAfter, x, y, z),
+      })),
+    });
     // A solid sprite in front must retain its blue pixels, despite late shadow submission.
     const image = document.createElement("canvas");
     image.width = image.height = 32;

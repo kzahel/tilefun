@@ -4,7 +4,7 @@ import { rotateBodyVector } from "../physics/BodyRotation.js";
 import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { createVehicle } from "../traffic/Vehicle.js";
 import { poseOrientation } from "./MeshPresentation.js";
-import { shadowFootprint } from "./ProjectedDecals.js";
+import { projectShadow, shadowFootprint } from "./ProjectedDecals.js";
 import {
   planeZ,
   polygonArea,
@@ -180,4 +180,54 @@ it("keeps a low ledge receiver when the actor's feet overlap its edge", () => {
   expect(area(pieces)).toBeCloseTo(80);
   expect(pieces.some((p) => p.face.id === "ledge")).toBe(true);
   expect(pieces.some((p) => p.face.id.startsWith("terrain:"))).toBe(true);
+});
+
+it("casts a tilted vehicle across a crest even when its root is below the ramp center", () => {
+  const receivers = new SurfaceReceivers(
+    world,
+    [patch("ramp", 0, 64, 0, 32), patch("deck", 64, 128, 32)],
+    [],
+  );
+  const car = createVehicle("compact-1", 60, 0);
+  car.id = 1;
+  car.wz = 20;
+  car.bodyRotation = poseOrientation(0, -0.3, 0.1);
+  const pieces = projectShadow(receivers, car, 60, 0, 20, roofMesh);
+  expect(pieces.some((p) => p.face.id === "ramp")).toBe(true);
+  expect(pieces.some((p) => p.face.id === "deck")).toBe(true);
+  for (const x of [56, 63.5, 64.5, 68]) {
+    const hits = pieces.filter((p) =>
+      p.vertices.every((a, i) => {
+        const b = p.vertices[(i + 1) % p.vertices.length];
+        return (
+          b &&
+          ((b.x - a.x) * -a.y - (b.y - a.y) * (x - a.x)) * Math.sign(polygonArea(p.vertices)) >=
+            -1e-6
+        );
+      }),
+    );
+    expect(hits.length).toBeGreaterThan(0);
+    expect(hits.every((p) => p.face.id === (x < 64 ? "ramp" : "deck"))).toBe(true);
+  }
+  for (const p of pieces)
+    for (const v of p.vertices) {
+      expect(v.u).toBeGreaterThanOrEqual(-1e-6);
+      expect(v.u).toBeLessThanOrEqual(1 + 1e-6);
+      expect(v.v).toBeGreaterThanOrEqual(-1e-6);
+      expect(v.v).toBeLessThanOrEqual(1 + 1e-6);
+    }
+});
+it("uses the local caster ceiling under a bridge even when the tilted exposed end is higher than its deck", () => {
+  const receivers = new SurfaceReceivers(world, [patch("bridge", 0, 64, 18)], []);
+  const car = createVehicle("compact-1", 0, 0);
+  car.id = 1;
+  car.bodyRotation = poseOrientation(0, 0.5, 0);
+  const mesh = { ...roofMesh, min: [-40, -10, 0] as const, max: [40, 10, 8] as const };
+  const pieces = projectShadow(receivers, car, 0, 0, 7, mesh);
+  // The high end is exposed at negative X. At positive X the body is below
+  // the bridge, so its shadow belongs to the ground rather than the deck.
+  expect(
+    pieces.some((p) => p.face.id.startsWith("terrain:") && p.vertices.some((v) => v.x > 10)),
+  ).toBe(true);
+  expect(pieces.some((p) => p.face.id === "bridge")).toBe(false);
 });

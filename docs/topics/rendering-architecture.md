@@ -1,5 +1,14 @@
 # Rendering architecture and backend separation
 
+[220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) projects
+vehicle shadows from the displayed rotated bounding volume's finite upper faces.
+Using a scalar root height could drop the footprint through a ramp crest to
+terrain. Up to three disjoint caster quads share the existing soft mask; each has
+its own ceiling, preserving underpass shadows even when an exposed end is higher.
+Receiver broadphase bounds use actual polygon vertices rather than extrapolated
+AABB corners. The collector uses the same displayed orientation as the mesh.
+
+
 [218](../tactical/218-traffic-and-rail-gameplay-recovery.md) replaces repeated
 mixed-car scratch resizing with exact-size color/depth pairs in a 16MiB / 16-entry
 LRU. Immediate scratch composition, native resolution, outlines and depth stay

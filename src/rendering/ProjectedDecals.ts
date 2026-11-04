@@ -1,16 +1,19 @@
 import type { Entity } from "../entities/Entity.js";
-import { rotateBodyVector, yawRotation } from "../physics/BodyRotation.js";
+import { type BodyRotation, rotateBodyVector, yawRotation } from "../physics/BodyRotation.js";
 import { physicsBodyDimensions } from "../physics/PhysicsBodies.js";
 import type { Camera } from "./Camera.js";
 import { projectWorld } from "./Projection.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import type { DecalItem } from "./SceneItem.js";
 import {
+  type Point3,
   planeZ,
   polygonBounds,
   type SurfaceFragment,
   type SurfaceMesh,
+  type SurfaceReceivers,
   type SurfaceVertex,
+  upwardSurfaceFace,
 } from "./SurfaceReceivers.js";
 import { WORLD_DEPTH_RANGE } from "./WorldDepth.js";
 
@@ -57,6 +60,7 @@ export function shadowFootprint(
   x: number,
   y: number,
   mesh?: SurfaceMesh,
+  rotation?: BodyRotation,
 ): SurfaceVertex[] {
   const d = physicsBodyDimensions(entity);
   if (!entity.type.startsWith("vehicle-v1:")) {
@@ -71,7 +75,7 @@ export function shadowFootprint(
       { x: cx - rx, y: cy + ry, u: 0, v: 1 },
     ];
   }
-  const q = entity.bodyRotation ?? yawRotation(d.yaw),
+  const q = rotation ?? entity.bodyRotation ?? yawRotation(d.yaw),
     heading = entity.vehicleHeading ?? d.yaw,
     c = Math.cos(heading),
     s = Math.sin(heading);
@@ -98,6 +102,66 @@ export function shadowFootprint(
     [right, bottom, 1, 1],
     [left, bottom, 0, 1],
   ].map(([f = 0, r = 0, u = 0, v = 0]) => ({ x: x + f * c - r * s, y: y + f * s + r * c, u, v }));
+}
+/** Cast downward from the displayed box's upper envelope, rather than its root.
+ * A pitched/rolled root can be below the receiving ramp. Each upward box face
+ * supplies its own finite ceiling, so a taller exposed end cannot cast onto a
+ * bridge above the lower end. At most three disjoint quads share one mask UVs. */
+export function projectShadow(
+  receivers: SurfaceReceivers,
+  entity: Entity,
+  x: number,
+  y: number,
+  z: number,
+  mesh?: SurfaceMesh,
+  rotation?: BodyRotation,
+): SurfaceFragment[] {
+  const footprint = shadowFootprint(entity, x, y, mesh, rotation);
+  if (!entity.type.startsWith("vehicle-v1:")) return receivers.project(footprint, z, entity.id);
+  const d = physicsBodyDimensions(entity),
+    q = rotation ?? entity.bodyRotation ?? yawRotation(d.yaw),
+    min = mesh?.min ?? [-d.width / 2, -d.depth / 2, 0],
+    max = mesh?.max ?? [d.width / 2, d.depth / 2, d.height];
+  const p0 = footprint[0],
+    p1 = footprint[1],
+    p3 = footprint[3];
+  if (!p0 || !p1 || !p3) return [];
+  const ax = p1.x - p0.x,
+    ay = p1.y - p0.y,
+    bx = p3.x - p0.x,
+    by = p3.y - p0.y,
+    det = ax * by - ay * bx;
+  if (Math.abs(det) < 1e-8) return [];
+  const result: SurfaceFragment[] = [];
+  for (const axis of [0, 1, 2])
+    for (const side of [0, 1]) {
+      const a = (axis + 1) % 3,
+        b = (axis + 2) % 3;
+      const points: Point3[] = [
+        [0, 0],
+        [1, 0],
+        [1, 1],
+        [0, 1],
+      ].map(([aa, bb]) => {
+        const local = [0, 0, 0];
+        local[axis] = (side ? max[axis] : min[axis]) ?? 0;
+        local[a] = (aa ? max[a] : min[a]) ?? 0;
+        local[b] = (bb ? max[b] : min[b]) ?? 0;
+        const p = rotateBodyVector(q, local[0] ?? 0, local[1] ?? 0, local[2] ?? 0);
+        return [x + p.x, y + p.y, z + p.z];
+      });
+      if (!side) points.reverse();
+      const face = upwardSurfaceFace("caster", points);
+      if (!face) continue;
+      const polygon = face.polygon.map((p) => ({
+        x: p.x,
+        y: p.y,
+        u: ((p.x - p0.x) * by - (p.y - p0.y) * bx) / det,
+        v: (ax * (p.y - p0.y) - ay * (p.x - p0.x)) / det,
+      }));
+      result.push(...receivers.project(polygon, face.plane, entity.id));
+    }
+  return result;
 }
 /** Group coplanar pieces so native Canvas can clip their union without diagonal seams. */
 export function surfaceDecals(

@@ -143,7 +143,7 @@ function subtract(
 function contains(p: readonly SurfaceVertex[], x: number, y: number) {
   return edges(p).every(([a, b, c]) => a * x + b * y + c >= -EPS);
 }
-function face(
+export function upwardSurfaceFace(
   id: string,
   points: readonly Point3[],
   owner?: Entity,
@@ -289,7 +289,9 @@ export class SurfaceReceivers {
                   [max[0], max[1], max[2]],
                   [min[0], max[1], max[2]],
                 ] as readonly Point3[]);
-              f = face(`body:${entity.id}:${i}`, t.map(toWorld), entity, position) ?? null;
+              f =
+                upwardSurfaceFace(`body:${entity.id}:${i}`, t.map(toWorld), entity, position) ??
+                null;
               cached.set(i, f);
               if (mesh) this.diagnostics.meshTriangles++;
             }
@@ -382,24 +384,28 @@ export class SurfaceReceivers {
     if (!e) return [0, 0, 0];
     return [e.velocity?.vx ?? 0, e.velocity?.vy ?? 0, e.jumpVZ ?? 0];
   }
-  project(polygon: readonly SurfaceVertex[], maxZ: number, exclude?: number): SurfaceFragment[] {
+  project(
+    polygon: readonly SurfaceVertex[],
+    maxZ: number | Plane,
+    exclude?: number,
+  ): SurfaceFragment[] {
     const b = polygonBounds(polygon),
       cx = (b.left + b.right) / 2,
       cy = (b.top + b.bottom) / 2;
-    const support = this.hit(cx, cy, maxZ + 1, exclude);
+    const support = typeof maxZ === "number" ? this.hit(cx, cy, maxZ + 1, exclude) : undefined;
     const ceiling: Plane =
-      support && Math.abs(maxZ - support.point[2]) < 4
-        ? [
-            support.face.plane[0],
-            support.face.plane[1],
-            support.face.plane[2] + Math.max(0, maxZ - support.point[2]) + 1,
-          ]
-        : [0, 0, maxZ + 1];
-    const maxCeiling = planeZ(
-      ceiling,
-      ceiling[0] >= 0 ? b.right : b.left,
-      ceiling[1] >= 0 ? b.bottom : b.top,
-    );
+      typeof maxZ !== "number"
+        ? [maxZ[0], maxZ[1], maxZ[2] + 1]
+        : support && Math.abs(maxZ - support.point[2]) < 4
+          ? [
+              support.face.plane[0],
+              support.face.plane[1],
+              support.face.plane[2] + Math.max(0, maxZ - support.point[2]) + 1,
+            ]
+          : [0, 0, maxZ + 1];
+    // A tilted caster face is not axis aligned: extrapolating its plane to an
+    // AABB corner can invent a huge height outside that finite face.
+    const maxCeiling = Math.max(...polygon.map((v) => planeZ(ceiling, v.x, v.y)));
     const faces = this.candidates(b, exclude, maxCeiling),
       valid: { face: SurfaceFace; polygon: SurfaceVertex[] }[] = [];
     for (const f of faces) {

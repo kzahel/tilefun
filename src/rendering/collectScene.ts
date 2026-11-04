@@ -31,7 +31,7 @@ import {
 import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBladeRenderer.js";
 import { vehicleMeshRadius, yawOrientation } from "./MeshPresentation.js";
 import type { ParticlePresentation } from "./ParticleSystem.js";
-import { shadowFootprint, surfaceDecals } from "./ProjectedDecals.js";
+import { projectShadow, surfaceDecals } from "./ProjectedDecals.js";
 import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { SceneFrame } from "./SceneFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
@@ -327,10 +327,9 @@ export function collectScene(
       const mesh = spriteItem.mesh
         ? terrain.meshSurfaceGeometry?.(spriteItem.mesh.assetId)
         : undefined;
-      const footprint = shadowFootprint(e, pos.wx, pos.wy, mesh);
       items.push(
         ...surfaceDecals(
-          receivers.project(footprint, zOffset, e.id),
+          projectShadow(receivers, e, pos.wx, pos.wy, zOffset, mesh, spriteItem.mesh?.orientation),
           meshGroundShadow ? "vehicle" : "oval",
           0.28,
           "#000",
