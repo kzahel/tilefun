@@ -53,7 +53,7 @@
     "@biomejs/biome": "^2.6.4",
     "@electron/packager": "^20.3.0",
     "@playwright/test": "^1.64.1",
-    "@types/node": "^24.19.0",
+    "@types/node": "^26.6.4",
     "@types/qrcode": "^1.5.6",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
