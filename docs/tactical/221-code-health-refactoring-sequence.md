@@ -714,3 +714,71 @@ init order and the `RealmPhysics` field initializer; a shadowed `location` renam
 in `WorkshopRoutes`. Recorded, not changed: test-only casts in
 `ServerMessageRouter.test.ts`, unpinned door-motion/horn orderings, and no browser
 assertion for the stray-`0` fix.
+
+### Owner decisions applied (2026-11-06)
+
+The owner asked for recommendations favoring simplify/remove and approved them:
+
+- **Workshop identity narrowing** (`43c5fe9b`): engine-driven candidates hash
+  recipe/definition + art + `ENGINE_REVIEW_REVISION` instead of ~130 raw engine
+  sources; `ScenarioRuntimeSource.ts` is deleted. Fingerprints changed once, only
+  in batches without human decisions.
+- **B10** (`ea56fc4b`): console commands act in the rcon sender's realm and session.
+  The forwarding getters stay as test conveniences (~300 test call sites) but now
+  follow the sender.
+- **B9** (`ea56fc4b`): keep one gravity per JS realm; rule documented in
+  [embedded engine labs](../topics/embedded-engine-labs.md).
+- **B8** (`ba075c50`): one interest update per tick; dormant sessions keep their
+  neighbourhood resident without contributing a camera range.
+- **B6** (`ccdb90d8`): clip looping comes only from art banks; `fox.stalk`,
+  `rabbit.eat` and `robin.eat` play once; `red-squirrel.eat` loops via its
+  generator.
+
+### Green baseline record (2026-11-06)
+
+Before: push CI had failed since 2026-11-04 (unit, HTTP and smoke), so Pages had not
+deployed; the nightly full browser run had failed every night since 2026-10-25
+(270 failures on Linux at `e48e0f9a`). Progress per full run: 270 → 196 → 48 → 8.
+After `b4789107`, push CI (check, raster, smoke, Pages deploy) passed end to end.
+
+Root causes fixed in product code:
+
+- GPU raster shader inlined the 4-tap actor filter per texture slot (`b4144ded`);
+  SwiftShader frames were 81–100 ms. Unfiltered batches use a filter-free program
+  (0 differing bytes on Metal and SwiftShader; ~17–24 ms frames) — `12aa2a51`.
+- `PlayerPredictor` replay budget read wall time instead of its injected clock;
+  `RealmStreaming.ensure()` leaked an arrival interest owner per call (~700 live,
+  ~10x slower lab steps) — `4e696c73`.
+- Shared Rapier support velocity carried players on fleeing wildlife — `262eafb0`.
+- `safeArrival` relocated players resting against walls after reload; scenario
+  prop walls were not replicated — `7877d0af`.
+- Furniture lab rejected nudges and lost verdicts over resting-contact error;
+  generated crossings crashed when world cars blocked the staged car — `8004bb70`.
+- Roadkill had no trigger after `8f405aaf`; explorer previews rejected footprints
+  over the 128-actor cap — `dcbb1587`.
+- Console realm (B10) and dormant residency (B8) as above.
+
+Test-side causes: stale expectations after intentional changes (gradual braking,
+relative steering, renamed controls, removed fixtures, Rapier rest heights and
+float32 positions); host-speed dependence (5 s waits → CI expect timeout 15 s,
+fixed sleeps, D-pad auto-repeat during long simulated presses, wall-clock
+budgets); and coverage cost on hosted software WebGL. Coverage policy: behavior,
+DOM and networking flows run on Canvas; duplicate GPU variants without GPU-specific
+assertions were removed; GPU output stays covered by `gpu-renderer.spec.ts`,
+terrain-pacing's upload case, world-geometry cutaway pixels and the Deck default-GPU
+case. Native tests default to a 20 s hang deadline.
+
+Open items:
+
+- `tests/furniture-motion.spec.ts` back-of-bed sprite case is `fixme`: since
+  `b4144ded` actors draw at fractional positions with smoothing (blurrier on the
+  160 px lab canvas). Owner pixel decision: accept smoothing (rewrite the check
+  around visibility) or snap lab actors to whole pixels.
+- Door walk-through rejection on a starved Worker (`validateDoorApproach` checks
+  the lagging server position and the request clears held keys): validate after
+  queued inputs, or keep held input after a rejection. Canvas specs make it rare.
+- Rapier side effects to schedule: an idle player creeps down ramps (~1.2 px/s);
+  a frog hopping against a parked driven car accelerates it backwards; Rapier in
+  the main/Worker bundles raised hosted startup (Worker bundle 1.2 → 5.5 MB,
+  SwiftShader startup 1.85 → 2.9 s).
+- The racetrack `racer:` diagnostics in `NaturalLandscapePage.tsx` are dead code.

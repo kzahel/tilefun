@@ -23,6 +23,13 @@ for broad changes, evidence of wider impact, explicit requests or CI. Broaden
 validation when focused checks expose unresolved concerns; do not repeat passing
 checks without a relevant change or unresolved concern. CI keeps its existing gates.
 
+Hosted CI renders with software WebGL (SwiftShader), where GPU-mode browser
+steps are several times slower. Behavior, DOM and networking specs load
+`renderer=canvas`; keep GPU variants only for cases that assert GPU output
+(`gpu-renderer.spec.ts` compares GPU with Canvas). Playwright assertion waits are
+15 s under CI. Reproduce hosted timing locally with Chromium flags
+`--use-angle=swiftshader --enable-unsafe-swiftshader --disable-gpu`.
+
 Native tests share a 20 s deadline (`vitest.config.ts`) that only catches hangs:
 many open production Realms and run 1–5 s under parallel load, 2–4× longer on
 hosted runners. Don't depend on wall time in assertions; inject clocks (the
