@@ -392,10 +392,14 @@ function sceneDigest(variant: {
     drawProps,
     frame,
   );
+  // Ten significant digits: trig results (grass sway) differ in the last bit
+  // between arm64 and x64 V8 builds; any real regression moves far more digits.
   const json = JSON.stringify({ items, stats: frame?.receiverStats }, (_key, value) =>
-    typeof value === "number" && (Object.is(value, -0) || !Number.isFinite(value))
-      ? `number:${Object.is(value, -0) ? "-0" : value}`
-      : value,
+    typeof value !== "number"
+      ? value
+      : Object.is(value, -0) || !Number.isFinite(value)
+        ? `number:${Object.is(value, -0) ? "-0" : value}`
+        : Number(value.toPrecision(10)),
   );
   const kinds: Record<string, number> = {};
   for (const item of items) kinds[item.kind] = (kinds[item.kind] ?? 0) + 1;
@@ -405,17 +409,17 @@ function sceneDigest(variant: {
 // Digests were recorded against the single-function collector before it was
 // split into stages; any change to item fields, values, key order or draw order fails.
 it.each([
-  [{ frame: false, raster: false, grass: false, garage: false, time: 0 }, "f7b9458ba47c4587"],
+  [{ frame: false, raster: false, grass: false, garage: false, time: 0 }, "3c1cf8d9bdb9f7cf"],
   [
     { frame: true, raster: false, grass: true, garage: false, time: 0.05, zoom: 3 / 8 },
-    "de866475deb395bf",
+    "6606b138107e3fae",
   ],
-  [{ frame: true, raster: true, grass: true, garage: false, time: 0.55 }, "c9ca8cef32132e0a"],
+  [{ frame: true, raster: true, grass: true, garage: false, time: 0.55 }, "6624f76a050ed8f8"],
   [
     { frame: true, raster: true, grass: false, garage: true, time: 0.25, nativeTrains: true },
-    "18f7829d13a48c06",
+    "359b7996bbd7bd0f",
   ],
-  [{ frame: false, raster: true, grass: false, garage: true, time: 0 }, "73c313099e0a7134"],
+  [{ frame: false, raster: true, grass: false, garage: true, time: 0 }, "46e7b9e4d4157002"],
 ] as const)("collects a byte-identical characterization scene %o", (variant, digest) => {
   const result = sceneDigest(variant);
   expect(result.digest).toBe(digest);
