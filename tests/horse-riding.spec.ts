@@ -1,13 +1,12 @@
 import { expect, test } from "@playwright/test";
 import type { GameTestHooks } from "../src/client/GameTestHooks.js";
+import { PLAYER_SPEED } from "../src/config/constants.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { faunaType } from "../src/wildlife/Fauna.js";
 
 test.use({ channel: "chromium" });
 for (const renderer of ["canvas", "gpu"]) {
-  test(`default keyboard jump mounts a fast horse and Jump gets off (${renderer})`, async ({
-    page,
-  }) => {
+  test(`default keyboard jump mounts a horse and Jump gets off (${renderer})`, async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     const generation = createDescriptor("flat", 1);
@@ -91,7 +90,8 @@ for (const renderer of ["canvas", "gpu"]) {
       .poll(async () => (await read()).state, { timeout: 4000, intervals: [30] })
       .toBe("ridden");
     await page.keyboard.up("Space");
-    await expect.poll(async () => (await read()).speed).toBeCloseTo(160, 0);
+    // Mounts use ordinary shared character speed since the 205 physics reset (3faae9e9).
+    await expect.poll(async () => (await read()).speed).toBeCloseTo(PLAYER_SPEED, 0);
     const mounted = await read();
     expect(mounted.parent).toBe(mounted.horse);
     await expect.poll(async () => (await read()).x).toBeGreaterThan(mounted.x + 30);

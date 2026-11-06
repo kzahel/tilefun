@@ -80,7 +80,8 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
       };
     }, FROG_TYPE);
     await page.locator("#game").focus();
-    await page.keyboard.down("ArrowRight");
+    // Cars default to relative steering (f1cd9d28): Up drives the east-facing car forward.
+    await page.keyboard.down("ArrowUp");
     const state = () =>
       page.evaluate(() => {
         const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
@@ -107,7 +108,7 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
       });
     await expect.poll(async () => (await state()).corpse?.type).toBe(`roadkill:${FROG_TYPE}`);
     await expect.poll(async () => (await state()).x).toBeGreaterThan(180);
-    await page.keyboard.up("ArrowRight");
+    await page.keyboard.up("ArrowUp");
     const dead = (await state()).corpse;
     expect(dead).toMatchObject({
       collider: null,

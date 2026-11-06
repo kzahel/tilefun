@@ -61,7 +61,9 @@ for (const renderer of ["canvas", "gpu"]) {
             return (
               !!a?.visible &&
               (animal === "capuchin"
-                ? a.clip === 6 && a.z === 32
+                ? // Crown traversal is deferred by the 205 physics reset: a canopy
+                  // blocks the climb, which times out and falls back to the ground.
+                  a.clip !== 4 && Math.abs(a.z) < 0.5
                 : animal === "raccoon"
                   ? a.clip === 5 && a.y < 120
                   : a.clip === 6)

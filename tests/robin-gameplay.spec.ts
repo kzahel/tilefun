@@ -6,6 +6,15 @@ import { ROBIN_TYPE } from "../src/wildlife/Robin.js";
 import { flushLocalWorld, stopLocalWorld, worldRecords } from "./helpers/local-world.js";
 
 test.use({ channel: "chromium" });
+// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
+// software WebGL slows every page action about eightfold.
+
+// Shared Rapier contacts rest bodies within solver slop of the ground rather
+// than at exact zero, and the landing impact's depenetration can briefly give
+// the player ~20 px/s (frog, measured natively). The removed automatic wildlife
+// bounces (c473f541) launched at 75-95 px/s.
+const grounded = (z: number) => Math.abs(z) < 0.5;
+const MAX_LANDING_VZ = 40;
 for (const renderer of ["canvas", "gpu"]) {
   test(`grove robins fly to crowns, react to landing and reload their flight pose (${renderer})`, async ({
     page,
@@ -61,7 +70,7 @@ for (const renderer of ["canvas", "gpu"]) {
     }
     await page.getByRole("button", { name: "Resume", exact: true }).click();
     await expect
-      .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 0))
+      .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)))
       .toBe(true);
     await expect
       .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 32), { timeout: 15000 })
@@ -77,7 +86,7 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect
       .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 10000 })
       .toBe(true);
-    await expect(c).toHaveAttribute("data-player-max-vz", "0");
+    expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
     expect(errors).toEqual([]);
   });
 }
@@ -86,7 +95,7 @@ test("robin ball contact dispatches client chirps through the live Worker", asyn
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
   await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.getByTestId("world-menu")).toBeHidden();
@@ -131,7 +140,8 @@ test("robin ball contact dispatches client chirps through the live Worker", asyn
                 type: "throw-ball",
                 dirX: f.position.wx - p.wx,
                 dirY: f.position.wy - p.wy,
-                force: 0,
+                // Shared ball physics: a low throw lands ~70 px out (205); reach the target.
+                force: 1,
               });
           }, ROBIN_TYPE);
         return state;
@@ -150,7 +160,7 @@ test("ordinary grove robins support manual creation and durable deletion on worl
   const generation = createDescriptor("regional", 2026);
   const arrival = { x: -163, y: -519, generation };
   await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByPlaceholder("World name...").fill("Durable robin grove");
   await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -203,7 +213,7 @@ test("ordinary grove robins support manual creation and durable deletion on worl
   expect(deleted).toHaveLength(1);
   expect(deleted[0]?.proceduralId).toBeTruthy();
   expect(afterDeletion.some((r) => r.persistentId === manual[0]?.persistentId)).toBe(true);
-  await page.goto("/tilefun/?nogamepad");
+  await page.goto("/tilefun/?nogamepad&renderer=canvas");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(async () => (await robins()).length).toBeGreaterThanOrEqual(2);
   await page.screenshot({ path: "/tmp/tilefun-robins-game.png" });

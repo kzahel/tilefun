@@ -219,6 +219,9 @@ most 7×7 chunks with a one-chunk neighbor halo (81 resident chunks). Detail rad
 is configurable from one to three chunks; map sample budget is 1,024–24,576.
 Sprites and terrain sheets load lazily through the shared renderer. Explorer actors
 are static poses; gameplay simulates routes through the shared server authority.
+Dense forests (robins, seed plants and gems) exceed the 128-actor preview cap over
+a full footprint. The preview then shows whole chunks nearest the view centre
+within that cap; earlier the whole query, terrain included, was rejected.
 
 Approach a marked apartment or shop door to **Enter · E**; **Return to street · E**
 returns through the selected connection. Rooms are stable child instances shared

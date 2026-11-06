@@ -45,7 +45,8 @@ for (const p of AQUATIC_HUNTER_PROFILES.filter((p) => ["shark", "orca"].includes
       await page.getByRole("button", { name: "Pause", exact: true }).click();
       await expect(canvas).toHaveAttribute("data-authority-running", "false");
       const before = await poses();
-      expect(before[0]?.z).toBe(0);
+      // Shared Rapier contacts rest within solver slop, not at exact zero (205).
+      expect(Math.abs(before[0]?.z ?? NaN)).toBeLessThan(0.5);
       const remaining = await fish();
       expect(remaining).toBeLessThan(population);
       await canvas.screenshot({

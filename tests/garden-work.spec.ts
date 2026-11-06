@@ -81,25 +81,45 @@ for (const renderer of ["canvas", "gpu"]) {
                 p.z,
                 p.row,
                 p.screen,
-                all.filter((e) => e !== p).map((e) => [e.id, e.x, e.y, e.z, e.column]),
+                // Only actors drawn inside the sampled crop can change its pixels.
+                all
+                  .filter(
+                    (e) =>
+                      e !== p &&
+                      e.screen.left < p.screen.left + p.screen.width &&
+                      p.screen.left < e.screen.left + e.screen.width &&
+                      e.screen.top < p.screen.top + p.screen.height &&
+                      p.screen.top < e.screen.top + e.screen.height,
+                  )
+                  .map((e) => [e.id, e.x, e.y, e.z, e.column]),
               ])
             : undefined;
         };
         await expect
           .poll(
             async () => {
-              const key = sipKey(await poses());
-              if (!key) return false;
-              const png = PNG.sync.read(await canvas.screenshot()),
-                all = await poses(),
-                p = subject(all);
-              if (!p || sipKey(all) !== key) return false;
-              const crop = spritePixels(png, p, color);
-              if (crop.painted <= 10) return false;
-              const group = samples.get(key) ?? new Set<string>();
-              group.add(crop.pixels);
-              samples.set(key, group);
-              return group.size >= 2;
+              // Fence the Worker for each readback; dispatch avoids pointer
+              // actionability waits on slow hosted software-GPU frames.
+              await page.getByRole("button", { name: "Pause", exact: true }).dispatchEvent("click");
+              await expect(canvas).toHaveAttribute("data-authority-running", "false");
+              try {
+                const key = sipKey(await poses());
+                if (!key) return false;
+                const png = PNG.sync.read(await canvas.screenshot()),
+                  all = await poses(),
+                  p = subject(all);
+                if (!p || sipKey(all) !== key) return false;
+                const crop = spritePixels(png, p, color);
+                if (crop.painted <= 10) return false;
+                const group = samples.get(key) ?? new Set<string>();
+                group.add(crop.pixels);
+                samples.set(key, group);
+                return group.size >= 2;
+              } finally {
+                await page
+                  .getByRole("button", { name: "Resume", exact: true })
+                  .dispatchEvent("click");
+              }
             },
             { timeout: 20000, intervals: [50] },
           )

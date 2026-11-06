@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { actorPlacements } from "../generation/ActorPlacements.js";
+import { actorPlacements, centralActorPlacements } from "../generation/ActorPlacements.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
@@ -28,6 +28,10 @@ it.each([
   const generator = createGenerator(createDescriptor("regional", 2026), profile);
   // The evolving generator now exceeds the aggregate preview cap here.
   expect(() => actorPlacements(generator, bounds)).toThrow("Actor query exceeds its residency cap");
+  // The explorer previews the central chunks' residents within the same cap.
+  const central = centralActorPlacements(generator, bounds);
+  expect(central.length).toBeGreaterThan(64);
+  expect(central.length).toBeLessThanOrEqual(128);
   const actors: ReturnType<typeof actorPlacements> = [];
   for (let cy = Math.floor(bounds.minY / 16); cy <= Math.floor(bounds.maxY / 16); cy++)
     for (let cx = Math.floor(bounds.minX / 16); cx <= Math.floor(bounds.maxX / 16); cx++) {

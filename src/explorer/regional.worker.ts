@@ -2,7 +2,7 @@ import {
   createPreviewGenerator as createGenerator,
   previewOverviewSteps as overviewSteps,
 } from "../art/CityReviewArchive.js";
-import { actorPlacements } from "../generation/ActorPlacements.js";
+import { centralActorPlacements } from "../generation/ActorPlacements.js";
 import { deriveTerrain } from "../generation/deriveTerrain.js";
 import { descriptorKey } from "../generation/GenerationDescriptor.js";
 import { normalizeGeneration } from "../generation/Overview.js";
@@ -106,7 +106,7 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
         }
         const actors = new Map(
           (message.footprint
-            ? actorPlacements(
+            ? centralActorPlacements(
                 createGenerator(normalizeGeneration(message.world), message.landscape),
                 message.footprint,
               )

@@ -112,7 +112,8 @@ for (const renderer of ["canvas", "gpu"]) {
     await page.screenshot({ path: `/tmp/tilefun-natural-pond-${renderer}.png`, fullPage: true });
     await page.getByLabel("Landscape scene").selectOption("train");
     await expect(c).toHaveAttribute("data-ready", "true");
-    await page.getByRole("button", { name: "Ride train roof", exact: true }).click();
+    // The lab's roof-ride control was retired with the 205 vehicle services
+    // (8f405aaf); shared-physics train service still carries the train past the player.
     await expect(c).toHaveAttribute("data-train-x", /\d/);
     const start = Number(await c.getAttribute("data-train-x"));
     await expect

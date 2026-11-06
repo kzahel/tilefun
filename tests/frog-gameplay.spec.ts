@@ -4,6 +4,15 @@ import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { FROG_TYPE } from "../src/wildlife/Frog.js";
 
 test.use({ channel: "chromium" });
+// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
+// software WebGL slows every page action about eightfold.
+
+// Shared Rapier contacts rest bodies within solver slop of the ground rather
+// than at exact zero, and the landing impact's depenetration can briefly give
+// the player ~20 px/s (frog, measured natively). The removed automatic wildlife
+// bounces (c473f541) launched at 75-95 px/s.
+const grounded = (z: number) => Math.abs(z) < 0.5;
+const MAX_LANDING_VZ = 40;
 for (const renderer of ["canvas", "gpu"]) {
   test(`pond frogs physically hop, react to landing and reload their mid-hop pose (${renderer})`, async ({
     page,
@@ -57,7 +66,7 @@ for (const renderer of ["canvas", "gpu"]) {
     }
     await page.getByRole("button", { name: "Resume", exact: true }).click();
     await expect
-      .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 0))
+      .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)))
       .toBe(true);
     const hopOntoFrog = page.getByRole("button", { name: "Hop onto frog", exact: true });
     await expect
@@ -69,7 +78,7 @@ for (const renderer of ["canvas", "gpu"]) {
           // hop's push-off that frog can move away before the player lands;
           // when none qualifies the control does nothing. Try a resting target
           // and let any alarm finish before trying another real landing.
-          const target = frogs.find((f) => f.state !== "scared" && f.z === 0);
+          const target = frogs.find((f) => f.state !== "scared" && grounded(f.z));
           if (!frogs.some((f) => f.state === "scared") && target?.clip === 0)
             await hopOntoFrog.click();
           return false;
@@ -80,7 +89,7 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect
       .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 10000 })
       .toBe(true);
-    await expect(c).toHaveAttribute("data-player-max-vz", "0");
+    expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
     expect(errors).toEqual([]);
   });
 }
@@ -89,7 +98,7 @@ test("frog ball contact dispatches client croaks through the live Worker", async
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
   await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.getByTestId("world-menu")).toBeHidden();
@@ -145,7 +154,8 @@ test("frog ball contact dispatches client croaks through the live Worker", async
                 type: "throw-ball",
                 dirX: f.position.wx - p.wx,
                 dirY: f.position.wy - p.wy,
-                force: 0,
+                // Shared ball physics: a low throw lands ~70 px out (205); reach the target.
+                force: 1,
               });
           }, FROG_TYPE);
         return state;
@@ -164,7 +174,7 @@ test("ordinary pond frogs support manual creation and durable deletion on world 
   const generation = createDescriptor("regional", 2026);
   const arrival = { x: 227, y: -183, generation };
   await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByPlaceholder("World name...").fill("Durable frog pond");
   await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -208,7 +218,7 @@ test("ordinary pond frogs support manual creation and durable deletion on world 
     await host.flush();
     await host.shutdown();
   });
-  await page.goto("/tilefun/?nogamepad");
+  await page.goto("/tilefun/?nogamepad&renderer=canvas");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(async () => (await frogs()).length).toBe(original.length);
   await page.screenshot({ path: "/tmp/tilefun-frogs-game.png" });

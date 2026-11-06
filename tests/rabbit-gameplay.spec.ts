@@ -4,6 +4,15 @@ import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { RABBIT_TYPE } from "../src/wildlife/Rabbit.js";
 
 test.use({ channel: "chromium" });
+// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
+// software WebGL slows every page action about eightfold.
+
+// Shared Rapier contacts rest bodies within solver slop of the ground rather
+// than at exact zero, and the landing impact's depenetration can briefly give
+// the player ~20 px/s (frog, measured natively). The removed automatic wildlife
+// bounces (c473f541) launched at 75-95 px/s.
+const grounded = (z: number) => Math.abs(z) < 0.5;
+const MAX_LANDING_VZ = 40;
 for (const renderer of ["canvas", "gpu"]) {
   test(`meadow rabbits physically hop, react to landing and reload their mid-hop pose (${renderer})`, async ({
     page,
@@ -57,7 +66,7 @@ for (const renderer of ["canvas", "gpu"]) {
     }
     await page.getByRole("button", { name: "Resume", exact: true }).click();
     await expect
-      .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 0))
+      .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)))
       .toBe(true);
     await page.getByRole("button", { name: "Hop onto rabbit", exact: true }).click();
     await expect
@@ -69,7 +78,7 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect
       .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 10000 })
       .toBe(true);
-    await expect(c).toHaveAttribute("data-player-max-vz", "0");
+    expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
     expect(errors).toEqual([]);
   });
 }
@@ -80,7 +89,7 @@ test("ordinary meadow rabbits support manual creation and durable deletion on wo
   const generation = createDescriptor("regional", 2026);
   const arrival = { x: -151, y: -529, generation };
   await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByPlaceholder("World name...").fill("Durable rabbit meadow");
   await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -124,7 +133,7 @@ test("ordinary meadow rabbits support manual creation and durable deletion on wo
     await host.flush();
     await host.shutdown();
   });
-  await page.goto("/tilefun/?nogamepad");
+  await page.goto("/tilefun/?nogamepad&renderer=canvas");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(async () => (await rabbits()).length).toBe(original.length);
   await page.screenshot({ path: "/tmp/tilefun-rabbits-game.png" });

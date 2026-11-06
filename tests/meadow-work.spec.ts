@@ -102,8 +102,9 @@ test("animal browser exposes all behavior demonstrations", async ({ page }) => {
   await expect(page.getByRole("button", { name: "Demonstrate behavior", exact: true })).toHaveCount(
     29,
   );
+  // The 205 physics reset reopened capuchin and the three cat coats (98f97d4a).
   await page.getByLabel("Behavior progress").selectOption("verified");
   await expect(page.getByRole("button", { name: "Demonstrate behavior", exact: true })).toHaveCount(
-    29,
+    25,
   );
 });

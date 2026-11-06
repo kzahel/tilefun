@@ -527,6 +527,16 @@ with their remaining lifetime. Shared game/lab authority, private car prediction
 and Canvas/GPU presentation implement the behavior. Full unit/browser and streaming
 readiness checks pass; 143 records the evidence and missing campaign-status input.
 
+The 205 physics reset (`8f405aaf`) deleted the old swept-push planner, and with it
+every roadkill trigger. On 2026-11-06 the rule returned as post-physics contact
+gameplay (`runOverSmallAnimals`): a driven car or train in shared-scene contact
+with an eligible animal kills it when the vehicle moves at least 16 px/s, also
+relative to the animal. A low animal under a moving chassis counts; a resting car
+never kills. A frog hopping against a parked, driven car can still roll it
+backwards past that speed (a separate physics question, not yet addressed).
+`Roadkill.test.ts` and `roadkill.spec` cover authority, remains, rendering and the
+saved death.
+
 ## Animal browser locomotion correction
 
 The owner reported static dove/cobra previews on 2026-10-19. The browser's

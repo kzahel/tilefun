@@ -3,9 +3,11 @@ import { tickSharedBallGameplay } from "../physics/BallGameplay.js";
 import { rotationsEqual } from "../physics/BodyRotation.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import type { PhysicsScene } from "../physics/PhysicsScene.js";
+import { isTrain } from "../railway/Train.js";
 import type { WorkContext } from "../wildlife/AnimalWorkSystem.js";
 import { tickFoodSources } from "../wildlife/FoodGrowth.js";
 import { resolvePredatorCatches } from "../wildlife/predatorAI.js";
+import { runOverSmallAnimals } from "../wildlife/Roadkill.js";
 import { tickWildlifeRespawns } from "../wildlife/WildlifeRespawns.js";
 import type { Realm } from "./Realm.js";
 
@@ -63,6 +65,13 @@ export function resolveSimulationGameplay(
   // Contacts trigger gameplay; they never run another ball integration.
   tickSharedBallGameplay(realm.entityManager, participants, scene, (x, y) =>
     realm.world.getCollisionIfLoaded(x, y),
+  );
+  runOverSmallAnimals(
+    realm.entityManager,
+    participants.filter(
+      (e) => isTrain(e) || realm.vehicleRegistry?.states.get(e.id)?.driverId !== undefined,
+    ),
+    scene,
   );
   realm.animalWork.syncAll(active);
   realm.ownedBalls.sync(active);

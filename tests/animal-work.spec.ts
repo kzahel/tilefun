@@ -28,18 +28,21 @@ for (const renderer of ["canvas", "gpu"]) {
         JSON.parse((await canvas.getAttribute("data-work-actors")) ?? "[]");
       if (animal === "dog")
         await page.getByRole("button", { name: "Throw ball for dog", exact: true }).click();
-      let carried: Pose | undefined;
       await expect
         .poll(
           async () => {
-            carried = (await actors()).find((p) => p.parent >= 0);
-            return !!carried;
+            if (!(await actors()).some((p) => p.parent >= 0)) return false;
+            // Fence the Worker while carrying: on hosted software GPU a pointer click
+            // waits for stable frames long enough for the carrier to deliver.
+            await page.getByRole("button", { name: "Pause", exact: true }).dispatchEvent("click");
+            await expect(canvas).toHaveAttribute("data-authority-running", "false");
+            if ((await actors()).some((p) => p.parent >= 0)) return true;
+            await page.getByRole("button", { name: "Resume", exact: true }).dispatchEvent("click");
+            return false;
           },
           { timeout: 45_000, intervals: [50] },
         )
         .toBe(true);
-      await page.getByRole("button", { name: "Pause", exact: true }).click();
-      await expect(canvas).toHaveAttribute("data-authority-running", "false");
       const before = await actors(),
         held = before.find((p) => p.parent >= 0);
       expect(held).toBeDefined();

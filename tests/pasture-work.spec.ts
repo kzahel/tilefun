@@ -96,14 +96,15 @@ for (const renderer of ["canvas", "gpu"]) {
               p = subject(all);
             if (!p?.visible) return false;
             return kind === "goat"
-              ? p.clip === 0 && p.z === 8
+              ? // Shared Rapier contacts rest within solver slop of a support (205).
+                p.clip === 0 && Math.abs(p.z - 8) < 0.5
               : kind === "pig"
                 ? p.clip === 7 && all.some((e) => e.parent === p.id && e.visible)
                 : all.some(
                     (e) =>
                       e.type === "wildlife-resource-fruit-v1" &&
                       e.parent < 0 &&
-                      e.z === 0 &&
+                      Math.abs(e.z) < 0.5 &&
                       e.visible,
                   );
           },

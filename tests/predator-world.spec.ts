@@ -6,6 +6,8 @@ import { PREDATOR_PROFILES, predatorType } from "../src/wildlife/Predator.js";
 import { predatorHomes } from "../tests-support/PredatorHomes.fixture.js";
 
 test.use({ channel: "chromium" });
+// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
+// software WebGL slows every page action about eightfold.
 
 // Ground/fierce and deep-water editor/storage paths; all 48 command/identity
 // combinations are exercised in PredatorPlacement.test without Chromium.
@@ -21,7 +23,7 @@ for (const p of PREDATOR_PROFILES.filter((p) =>
     const generation = createDescriptor("regional", 2026);
     const arrival = { x: (spawn.wx - 64) / 16, y: spawn.wy / 16, generation };
     await page.goto(
-      `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByPlaceholder("World name...").fill(`Natural ${p.species}`);
     await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -86,7 +88,7 @@ for (const p of PREDATOR_PROFILES.filter((p) =>
       await host.flush();
       await host.shutdown();
     });
-    await page.goto("/tilefun/?nogamepad");
+    await page.goto("/tilefun/?nogamepad&renderer=canvas");
     await expect(game).toHaveAttribute("data-ready", "true", { timeout: 15000 });
     await page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;

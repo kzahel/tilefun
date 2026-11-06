@@ -1,5 +1,7 @@
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
+import type { EntityManager } from "../entities/EntityManager.js";
+import type { PhysicsScene } from "../physics/PhysicsScene.js";
 import { creatureSpecies } from "./FoodWeb.js";
 
 /** Gameplay class, independent of sprite size, collision bounds and pushing weight. */
@@ -17,6 +19,9 @@ export const SMALL_ANIMAL_SPECIES: ReadonlySet<string> = new Set([
 export const ROADKILL_LIFETIME = 30;
 export const ROADKILL_FADE_SECONDS = 5;
 export const ROADKILL_SCALE_Y = 0.3;
+/** Horizontal px/s, vehicle and relative to the animal: slow travel kills, a
+ * resting vehicle or an animal carried along with it does not. */
+const RUN_OVER_SPEED = 16;
 const PREFIX = "roadkill:";
 export const isRoadkill = (type: string): boolean => type.startsWith(PREFIX);
 export const roadkillType = (type: string): string => `${PREFIX}${type}`;
@@ -64,4 +69,36 @@ export function createRoadkill(animal: Entity): Entity {
     deathTimer: ROADKILL_LIFETIME,
     sprite,
   };
+}
+
+/** Driven cars and trains run over eligible small wildlife on moving body
+ * contact in any direction (143), including a low animal under the chassis.
+ * Followers and attached or ridden animals stay protected. Removal persists the
+ * death; the inert remains replace the body. */
+export function runOverSmallAnimals(
+  manager: EntityManager,
+  vehicles: readonly Entity[],
+  scene: PhysicsScene,
+): void {
+  for (const vehicle of vehicles) {
+    const v = scene.bodyState(vehicle.id);
+    if (!v || Math.hypot(v.vx, v.vy) < RUN_OVER_SPEED) continue;
+    for (const id of scene.contactIds(vehicle.id) ?? []) {
+      const animal = manager.byId.get(id),
+        a = scene.bodyState(id);
+      if (
+        !animal ||
+        !a ||
+        Math.hypot(v.vx - a.vx, v.vy - a.vy) < RUN_OVER_SPEED ||
+        !isSmallAnimal(animal.type) ||
+        animal.deathTimer !== undefined ||
+        animal.parentId !== undefined ||
+        animal.wanderAI?.following ||
+        animal.wanderAI?.state === "ridden"
+      )
+        continue;
+      manager.remove(animal.id);
+      manager.spawn(createRoadkill(animal));
+    }
+  }
 }

@@ -4,13 +4,22 @@ import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { MALLARD_TYPE } from "../src/wildlife/Mallard.js";
 
 test.use({ channel: "chromium" });
+// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
+// software WebGL slows every page action about eightfold.
+
+// Shared Rapier contacts rest bodies within solver slop of the ground rather
+// than at exact zero, and the landing impact's depenetration can briefly give
+// the player ~20 px/s (frog, measured natively). The removed automatic wildlife
+// bounces (c473f541) launched at 75-95 px/s.
+const grounded = (z: number) => Math.abs(z) < 0.5;
+const MAX_LANDING_VZ = 40;
 test("an ordinary game ball throw startles a duck into flight and plays a quack", async ({
   page,
 }) => {
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
   await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.getByTestId("world-menu")).toBeHidden();
@@ -70,7 +79,8 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
                 type: "throw-ball",
                 dirX: d.position.wx - p.wx,
                 dirY: d.position.wy - p.wy,
-                force: 0,
+                // Shared ball physics: a low throw lands ~70 px out (205); reach the target.
+                force: 1,
               });
           }, MALLARD_TYPE);
         return state;
@@ -90,7 +100,7 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
     .toBe(true);
   await page.screenshot({ path: "/tmp/tilefun-duck-ball-flight.png" });
   await expect.poll(async () => (await duck()).state, { timeout: 10000 }).not.toBe("scared");
-  expect((await duck()).z).toBe(0);
+  expect(grounded((await duck()).z)).toBe(true);
 });
 for (const renderer of ["canvas", "gpu"]) {
   test(`duck landing stays grounded and starts a durable escape in the shared pond Worker (${renderer})`, async ({
@@ -121,7 +131,7 @@ for (const renderer of ["canvas", "gpu"]) {
         { intervals: [50] },
       )
       .toBe(true);
-    await expect(c).toHaveAttribute("data-player-max-vz", "0");
+    expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
     await page.getByRole("button", { name: "Pause", exact: true }).click();
     await expect(c).toHaveAttribute("data-authority-running", "false");
     const flying = (await poses()).find((d) => d.clip === 5);
@@ -137,14 +147,14 @@ for (const renderer of ["canvas", "gpu"]) {
       .poll(
         async () => {
           const duck = (await poses()).find((d) => d.id === restored?.id);
-          return !!duck && duck.state !== "scared" && duck.z === 0;
+          return !!duck && duck.state !== "scared" && grounded(duck.z);
         },
         {
           timeout: 10000,
         },
       )
       .toBe(true);
-    expect((await poses()).find((d) => d.id === restored?.id)?.z).toBe(0);
+    expect(grounded((await poses()).find((d) => d.id === restored?.id)?.z ?? NaN)).toBe(true);
     expect(errors).toEqual([]);
   });
   test(`pond ducks animate in the shared Worker lab and survive reload (${renderer})`, async ({
@@ -200,7 +210,7 @@ test("ordinary seeded pond has durable ducks and offers manual creation in Entit
   const generation = createDescriptor("regional", 2026);
   const arrival = { x: 227, y: -183, generation };
   await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByPlaceholder("World name...").fill("Durable duck pond");
   await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -244,7 +254,7 @@ test("ordinary seeded pond has durable ducks and offers manual creation in Entit
     await host.flush();
     await host.shutdown();
   });
-  await page.goto("/tilefun/?nogamepad");
+  await page.goto("/tilefun/?nogamepad&renderer=canvas");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(async () => (await ducks()).length).toBe(original.length);
   await page.screenshot({ path: "/tmp/tilefun-mallard-game.png" });
