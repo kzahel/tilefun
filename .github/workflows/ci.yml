@@ -147,3 +147,7 @@ jobs:
           path: dist
       - id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+        with:
+          # The ~640 MB site can spend over 10 minutes in Pages "syncing_files"
+          # (2026-11-06); storage policy (tactical 221 phase 6) owns its size.
+          timeout: 1800000
