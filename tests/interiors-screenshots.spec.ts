@@ -10,7 +10,8 @@ function dataUrlBytes(dataUrl: string): Buffer {
 async function waitForInteriorsPanel(page: import("@playwright/test").Page, query: string) {
   fs.mkdirSync(CAPTURE_DIR, { recursive: true });
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto(`/tilefun/?panel=interiors&${query}`);
+  // The panel's previews are 2D canvases; keep the game behind it off software WebGL.
+  await page.goto(`/tilefun/?renderer=canvas&panel=interiors&${query}`);
   await page.locator('#game[data-ready="true"]').waitFor({ timeout: 15_000 });
   await expect(page.getByTestId("interior-catalog")).toBeVisible();
   await expect(page.getByTestId("interior-entry-grid").locator("canvas").first()).toBeVisible();

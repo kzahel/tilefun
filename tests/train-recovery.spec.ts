@@ -22,7 +22,9 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   const recipe = cityTrainRecipe();
-  await page.goto("/tilefun/?nogamepad&renderer=gpu&meshes");
+  // Boarding, riding and display continuity are Worker/prediction/presentation behavior.
+  // Canvas keeps the eight-second boarding window reachable on hosted software WebGL.
+  await page.goto("/tilefun/?nogamepad&renderer=canvas");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async (recipe) => {
     const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
@@ -71,35 +73,36 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   await expect(page.getByText("Poof! Your train is here.", { exact: true })).toBeVisible();
   await expect.poll(async () => (await state()).count).toBe(3);
   const start = await state();
-  await page.keyboard.down("ArrowDown");
-  try {
-    await expect
-      .poll(async () => (await state()).y, { intervals: [30] })
-      .toBeGreaterThan(start.carY - 38);
-  } finally {
-    await page.keyboard.up("ArrowDown");
-  }
-  await page.keyboard.down("ArrowRight");
-  try {
-    await expect
-      .poll(async () => (await state()).x, { intervals: [30] })
-      .toBeGreaterThan(start.carX - 193);
-  } finally {
-    await page.keyboard.up("ArrowRight");
-  }
+  // Release keys when the predicted player crosses a threshold, sampled every frame.
+  // Server replicas lag input; releasing on them overshoots the 24px-deep roof.
+  const until = (axis: "x" | "y" | "z", above: number) =>
+    page.waitForFunction(
+      ({ axis, above }) => {
+        const p = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game
+          .stateView.playerEntity;
+        return (axis === "x" ? p.position.wx : axis === "y" ? p.position.wy : (p.wz ?? 0)) > above;
+      },
+      { axis, above },
+      { polling: "raf", timeout: 15_000 },
+    );
+  const hold = async (keys: string[], reached: () => Promise<unknown>) => {
+    for (const key of keys) await page.keyboard.down(key);
+    try {
+      await reached();
+    } finally {
+      for (const key of [...keys].reverse()) await page.keyboard.up(key);
+    }
+  };
+  // The car's north face is at carY - 12; jump assist needs a gap of at most 24px.
+  await hold(["ArrowDown"], () => until("y", start.carY - 34));
+  await hold(["ArrowRight"], () => until("x", start.carX - 193));
   // The first recall provides eight seconds to board. Approach leaves bench
   // range, so do not request a redundant recall from beside the carriage.
-  await page.keyboard.down("ArrowDown");
-  await page.keyboard.down("Space");
-  try {
-    await expect.poll(async () => (await state()).z, { intervals: [30] }).toBeGreaterThan(44);
-    await expect
-      .poll(async () => (await state()).y, { intervals: [30] })
-      .toBeGreaterThan(start.carY - 2);
-  } finally {
-    await page.keyboard.up("Space");
-    await page.keyboard.up("ArrowDown");
-  }
+  // Land near the middle of the roof ([carY - 12, carY + 12]).
+  await hold(["ArrowDown", "Space"], async () => {
+    await until("z", 44);
+    await until("y", start.carY - 2);
+  });
   await expect
     .poll(async () => {
       const p = await state();

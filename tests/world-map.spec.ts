@@ -96,7 +96,8 @@ test("in-game map keeps distant multiplayer players live and long-press travels 
         }
       })
       .toBe(true);
-    const url = "/tilefun/?server=localhost:4195";
+    // Two live games share the runner; map/multiplayer behavior does not need WebGL.
+    const url = "/tilefun/?renderer=canvas&server=localhost:4195";
     const two = await other.newPage();
     for (const p of [page, two]) {
       await p.goto(url);

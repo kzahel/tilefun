@@ -45,7 +45,7 @@ test("approved NPCs place, save and reload in the Worker; player choice persists
   page,
 }) => {
   await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 422)))}`,
+    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 422)))}`,
   );
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await choose(page, "Trail Explorer");
@@ -103,7 +103,7 @@ test("approved NPCs place, save and reload in the Worker; player choice persists
     await host.flush();
     await host.shutdown();
   });
-  await page.goto("/tilefun/?nogamepad");
+  await page.goto("/tilefun/?nogamepad&renderer=canvas");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(() => playerSheet(page)).toBe("character-person-v1");
   await expect.poll(npcTypes).toEqual(expected);

@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Page, test } from "@playwright/test";
 import {
   CURRENT_REGIONAL_VERSION,
   createDescriptor,
@@ -35,16 +35,18 @@ test("new worlds and the explorer default to the newest regional revision", asyn
   await expect(revision).toHaveValue(CURRENT_REGIONAL_VERSION);
 });
 
-test("game creates and reopens every generator with the pinned descriptor in IndexedDB", async ({
-  page,
-}) => {
-  const errors: string[] = [];
-  page.on("pageerror", (error) => errors.push(error.message));
-  test.setTimeout(60_000);
-  for (const choice of ["classic", "island", "flat", "regional"] as const) {
+// Descriptor and IndexedDB checks, not rendering: Canvas, one generator per case.
+for (const choice of ["classic", "island", "flat", "regional"] as const)
+  test(`game creates and reopens ${choice} with the pinned descriptor in IndexedDB`, async ({
+    page,
+  }) => {
+    const errors: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
     const worldType = choice;
     const generation = createDescriptor(choice, 2026);
-    await page.goto(`/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}`);
+    await page.goto(
+      `/tilefun/?renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}`,
+    );
     const canvas = page.locator("#game");
     await expect(canvas).toHaveAttribute("data-ready", "true");
     await expect(page.getByRole("combobox", { name: "World type" })).toHaveValue(worldType);
@@ -76,7 +78,7 @@ test("game creates and reopens every generator with the pinned descriptor in Ind
     expect(meta?.generation).toEqual(generation);
     expect(meta?.seed).toBeUndefined();
     expect(meta?.worldType).toBeUndefined();
-    await page.goto("/tilefun/");
+    await page.goto("/tilefun/?renderer=canvas");
     await expect(canvas).toHaveAttribute("data-ready", "true");
     await expect(canvas).toHaveAttribute("data-generator", worldType);
     await expect(canvas).toHaveAttribute("data-generation", JSON.stringify(generation));
@@ -84,9 +86,8 @@ test("game creates and reopens every generator with the pinned descriptor in Ind
     await expect(
       page.getByText(`${worldType} · seed 2026 · ${generation.version}`, { exact: true }),
     ).toBeVisible();
-  }
-  expect(errors).toEqual([]);
-});
+    expect(errors).toEqual([]);
+  });
 
 test("explorer handoff preserves settings and game reports an invalid seed", async ({ page }) => {
   await page.goto("/tilefun/world-explorer.html");
@@ -102,6 +103,14 @@ test("explorer handoff preserves settings and game reports an invalid seed", asy
   await expect(page.getByTestId("world-menu")).toBeHidden();
   await expect(page.locator("#game")).toHaveAttribute("data-generator", "regional");
 });
+
+/** Follow the explorer's link on Canvas; this flow checks placement and saves, not rendering. */
+async function playHere(page: Page): Promise<void> {
+  const href = await page.getByRole("link", { name: "Play here" }).getAttribute("href");
+  const url = new URL(href ?? "", page.url());
+  url.searchParams.set("renderer", "canvas");
+  await page.goto(url.href);
+}
 
 test("Play here creates at the preview location and saved inspection includes a deleted building", async ({
   page,
@@ -125,7 +134,7 @@ test("Play here creates at the preview location and saved inspection includes a 
     .poll(async () => Number(await app.getAttribute("data-tile-ready")))
     .toBeGreaterThan(0);
   await page.screenshot({ path: "/tmp/tilefun-district-preview.png" });
-  await page.getByRole("link", { name: "Play here" }).click();
+  await playHere(page);
   await page.getByPlaceholder("World name...").fill("Play here district");
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.getByRole("button", { name: "New World", exact: true })).toBeHidden();
@@ -220,7 +229,7 @@ test("Play here creates at the preview location and saved inspection includes a 
     info.featureId,
   );
   await expect(page.getByRole("combobox", { name: "World type" })).toBeDisabled();
-  await page.getByRole("link", { name: "Play here" }).click();
+  await playHere(page);
   await openWorlds(page);
   await page.getByRole("button", { name: "Play Play here district", exact: true }).click();
   await expect(page.getByRole("button", { name: "New World", exact: true })).not.toBeVisible();

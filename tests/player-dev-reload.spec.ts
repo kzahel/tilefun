@@ -7,6 +7,8 @@ import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { buildingDoors } from "../src/interiors/BuildingDoors.js";
 
 // Exercise the actual Vite event (including its awaited lifecycle hook), without editing source.
+// Reload restoration is Worker/session behavior; Canvas keeps unbundled dev loads within
+// hosted software-WebGL budgets.
 test("dev full reload restores the indoor player and scopes the editor camera to its realm", async ({
   page,
 }) => {
@@ -40,7 +42,7 @@ test("dev full reload restores the indoor player and scopes the editor camera to
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(
-      `${origin}?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `${origin}?renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await expect(page.getByTestId("world-menu")).toBeHidden();
@@ -72,7 +74,7 @@ test("dev full reload restores the indoor player and scopes the editor camera to
     await page.keyboard.up("ArrowUp");
     await page.keyboard.press("Tab");
     await page.evaluate(() => {
-      history.replaceState(null, "", "/tilefun/");
+      history.replaceState(null, "", "/tilefun/?renderer=canvas");
       const game = (
         document.querySelector("#game") as unknown as {
           __game: import("../src/client/GameTestHooks.js").GameTestHooks;
@@ -150,7 +152,7 @@ test("dev reload during the guided doorway walk settles into the saved destinati
     };
     const arrival = { x: lot.entrance.x, y: lot.entrance.y + 3, generation };
     await page.goto(
-      `http://127.0.0.1:${address.port}/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `http://127.0.0.1:${address.port}/tilefun/?renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
@@ -190,7 +192,7 @@ test("dev reload during the guided doorway walk settles into the saved destinati
     await page.keyboard.down("ArrowUp");
     await expect(page.locator('[data-door-fade="true"]')).toHaveAttribute("data-stage", "depart");
     await page.keyboard.up("ArrowUp");
-    await page.evaluate(() => history.replaceState(null, "", "/tilefun/"));
+    await page.evaluate(() => history.replaceState(null, "", "/tilefun/?renderer=canvas"));
     const navigation = page.waitForEvent("framenavigated", {
       predicate: (frame) => frame === page.mainFrame(),
     });

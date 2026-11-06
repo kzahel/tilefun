@@ -5,6 +5,10 @@ import { shoppingSceneryPlacements } from "../src/generation/regional/ShoppingSc
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { exteriorDoors } from "../src/interiors/BuildingDoors.js";
 
+// Door traversal and reload are Worker/DOM behavior; the Canvas renderer keeps
+// these long flows within hosted software-WebGL budgets.
+const GAME = "/tilefun/?renderer=canvas";
+
 for (const [kind, type] of [
   ["bakery", "prop-shopping-v1-1"],
   ["ice-cream", "prop-shopping-v1-3"],
@@ -27,7 +31,7 @@ for (const [kind, type] of [
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.goto(
-      `/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `${GAME}&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await expect(page.getByRole("button", { name: "New World", exact: true })).not.toBeVisible();
@@ -92,7 +96,7 @@ for (const [kind, type] of [
     await expect.poll(async () => (await state()).player).toEqual(door.outside);
     await page.getByRole("button", { name: /^Enter shop/ }).click();
     await expect(game).toHaveAttribute("data-interior", /interior-v1/);
-    await page.goto("/tilefun/");
+    await page.goto(GAME);
     await expect(game).toHaveAttribute("data-ready", "true");
     await expect(game).toHaveAttribute("data-interior", /interior-v1/);
     expect((await state()).interior).toEqual(before.interior);

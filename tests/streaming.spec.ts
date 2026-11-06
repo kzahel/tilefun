@@ -13,8 +13,10 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
     y: 519,
     generation,
   };
+  // Terrain preparation is shared by both raster backends (RasterRenderBackend); Canvas
+  // keeps the frame-sampled sprint within hosted software-WebGL budgets.
   await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.getByTestId("world-menu")).toBeHidden();

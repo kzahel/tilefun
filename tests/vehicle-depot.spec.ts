@@ -8,7 +8,9 @@ import type { Camera } from "../src/rendering/Camera.js";
 import type { Chunk } from "../src/world/Chunk.js";
 import { flushLocalWorld, stopLocalWorld } from "./helpers/local-world.js";
 
-test.use({ channel: "chromium", hasTouch: true, viewport: { width: 1280, height: 850 } });
+// Map destinations, parked-car authority and terrain readiness are renderer-independent;
+// Canvas keeps the 0.25 zoom overview within hosted software-WebGL budgets.
+test.use({ hasTouch: true, viewport: { width: 1280, height: 850 } });
 test("generated depot is a named map destination with real parked cars", async ({
   page,
 }, testInfo) => {
@@ -18,7 +20,7 @@ test("generated depot is a named map destination with real parked cars", async (
   const depot = vehicleDepot(track);
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/tilefun/?nogamepad&renderer=gpu&meshes");
+  await page.goto("/tilefun/?nogamepad&renderer=canvas");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 60000 });
   await page.evaluate(
     async ({ arrival, generation }) => {

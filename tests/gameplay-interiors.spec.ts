@@ -4,7 +4,8 @@ import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPla
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { stopLocalWorld } from "./helpers/local-world.js";
 
-test.use({ channel: "chromium" });
+// Interior entry, furniture edits and reopening are Worker/DOM behavior, not GPU output.
+const GAME = "/tilefun/?renderer=canvas";
 
 const source = new DenseDistrictSource(regionalWorld(2026), true);
 for (const kind of ["apartment", "shop"] as const)
@@ -26,7 +27,7 @@ for (const kind of ["apartment", "shop"] as const)
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(
-      `/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `${GAME}&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await expect(page.getByTestId("world-menu")).toBeHidden();
@@ -116,7 +117,7 @@ for (const kind of ["apartment", "shop"] as const)
       await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
       await expect(enter).toBeVisible();
       await stopLocalWorld(page);
-      await page.goto("/tilefun/");
+      await page.goto(GAME);
       await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
       const resume = page.getByRole("button", { name: "Resume", exact: true });
       if (await resume.isVisible()) await resume.click();
@@ -139,7 +140,7 @@ for (const kind of ["apartment", "shop"] as const)
       await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
       // A reload resumes the same interior, including the saved furniture.
       await stopLocalWorld(page);
-      await page.goto("/tilefun/");
+      await page.goto(GAME);
       await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
       const resumeAfterInterior = page.getByRole("button", { name: "Resume", exact: true });
       if (await resumeAfterInterior.isVisible()) await resumeAfterInterior.click();

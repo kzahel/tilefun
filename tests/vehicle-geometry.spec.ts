@@ -209,6 +209,11 @@ test("ordinary ramp and mesh-roof landings share projected contact effects", asy
       })
       .toBe(0);
     const z = Number(await canvas.getAttribute("data-player-z"));
+    // Each projected dust burst replaces lastContact and adds a 0.24 s mark. The
+    // mark can expire between slow round trips; the contact identity persists.
+    await canvas.evaluate((c: GeometryCanvas) =>
+      Reflect.set(c, "contactBeforeJump", c.__presentationDiagnostics?.().effects.lastContact),
+    );
     await canvas.focus();
     await page.keyboard.down("Space");
     try {
@@ -219,8 +224,14 @@ test("ordinary ramp and mesh-roof landings share projected contact effects", asy
       await page.keyboard.up("Space");
     }
     await expect
-      .poll(async () => (await diagnostics())?.effects.marks ?? 0, { intervals: [30] })
-      .toBeGreaterThan(0);
+      .poll(() =>
+        canvas.evaluate(
+          (c: GeometryCanvas) =>
+            c.__presentationDiagnostics?.().effects.lastContact !==
+            Reflect.get(c, "contactBeforeJump"),
+        ),
+      )
+      .toBe(true);
   };
   await jump();
   const ramp = (await diagnostics())?.effects.lastContact;
