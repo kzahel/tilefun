@@ -9,6 +9,8 @@ test.describe.configure({ mode: "parallel" });
 // Fauna/WaterFauna/FaunaBodies/MallardResidency. These fixtures cover distinct
 // browser boundaries: dry walk, ride, hop, pond, shore gait and deep visibility.
 // animal-browser.spec still decodes and animates every roster asset in four views.
+// Motion and persistence carry no GPU-output contract, so they run on Canvas;
+// scene switching below keeps a GPU representative.
 const browserSpecies = new Set(["fox", "horse", "kangaroo", "fish", "penguin", "manta-ray"]);
 // Shared Rapier contacts rest bodies within solver slop of the ground, not at
 // exact zero (205 checkpoint 4c); hops clear 2 px.
@@ -20,148 +22,110 @@ const expectNoBounce = async (c: Locator) =>
 for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species))) {
   const TYPE = faunaType(profile.species);
   const [arrivalX, arrivalY] = profile.inspection;
-  for (const renderer of ["canvas", "gpu"]) {
-    test(`${profile.species} motion, contact and saved phase (${renderer})`, async ({ page }) => {
-      test.setTimeout(
-        Math.max(test.info().timeout, Math.ceil(((4 * profile.step) / profile.speed + 20) * 1000)),
-      );
-      const errors: string[] = [];
-      page.on("pageerror", (e) => errors.push(e.message));
-      await page.goto(
-        `/tilefun/workshop.html?geometry=nature-${profile.species}&landscape=thicket&renderer=${renderer}#/tool/world-geometry`,
-      );
-      const c = page.getByLabel("Natural landscape playground");
-      await expect(c).toHaveAttribute("data-ready", "true");
-      await page.getByLabel("Landscape zoom").selectOption(String(profile.inspectionZoom ?? 0.8));
-      const poses = async () =>
-        (
-          JSON.parse((await c.getAttribute("data-fauna-poses")) ?? "[]") as {
-            visible: boolean;
-            id: number;
-            species: string;
-            x: number;
-            y: number;
-            z: number;
-            clip: number;
-            frame: number;
-            state: string;
-          }[]
-        ).filter((p) => p.species === profile.species);
-      const original = await poses();
-      expect(original.length).toBeGreaterThanOrEqual(profile.group);
-      await expect
-        .poll(
-          async () =>
-            (await poses()).some(
-              (f) =>
-                (f.clip === 1 || (profile.habitat === "shore" && f.clip === 2)) &&
-                (profile.hop ? f.z > 2 : grounded(f.z)) &&
-                f.frame >=
-                  (profile.habitat === "shore" && f.clip === 2
-                    ? (profile.clips[2]?.start ?? 0) + 3
-                    : 4),
-            ),
-          {
-            // Arrival escape/recovery scales with the species' ordinary cadence.
-            timeout: Math.max(12_000, Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000)),
-            intervals: [30],
-          },
-        )
-        .toBe(true);
-      // Pause a routine walk as well as the escape below. This checks saved phase,
-      // rather than assuming the client restarts its walk at frame zero.
-      await page.getByRole("button", { name: "Pause", exact: true }).click();
-      await expect(c).toHaveAttribute("data-authority-running", "false");
-      const before = await poses();
-      if (profile.habitat === "deep") expect(before.every((p) => p.visible)).toBe(true);
-      await page.waitForTimeout(250);
-      expect(await poses()).toEqual(before);
-      await page.evaluate(() => window.scrollTo(0, 0));
-      await page.screenshot({
-        path: `/tmp/tilefun-fauna-${profile.species}-${renderer}.png`,
-        fullPage: true,
-      });
-      await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
-      await expect(c).toHaveAttribute("data-reload-count", "1");
-      const restored = await poses();
-      expect(restored.length).toBe(before.length);
-      for (const f of before) {
-        // Runtime IDs are reassigned on hydration; durable identity is checked in headless residency tests.
-        const r = restored.find((r) => Math.abs(r.x - f.x) < 0.01 && Math.abs(r.y - f.y) < 0.01);
-        expect(r?.x).toBeCloseTo(f.x, 3);
-        expect(r?.y).toBeCloseTo(f.y, 3);
-        expect(r?.z).toBeCloseTo(f.z, 3);
-        expect(r?.frame).toBe(f.frame);
-      }
-      await page.getByRole("button", { name: "Resume", exact: true }).click();
-      await expect
-        // Sample the short native rest phase instead of skipping it between
-        // increasingly sparse polls after a slower pet walk.
-        .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)), {
-          // Resuming a saved walk needs the same movement/authority budget as
-          // initial arrival, including software-rendered CI scheduling delays.
+  test(`${profile.species} motion, contact and saved phase`, async ({ page }) => {
+    test.setTimeout(
+      Math.max(test.info().timeout, Math.ceil(((4 * profile.step) / profile.speed + 20) * 1000)),
+    );
+    const errors: string[] = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    await page.goto(
+      `/tilefun/workshop.html?geometry=nature-${profile.species}&landscape=thicket&renderer=canvas#/tool/world-geometry`,
+    );
+    const c = page.getByLabel("Natural landscape playground");
+    await expect(c).toHaveAttribute("data-ready", "true");
+    await page.getByLabel("Landscape zoom").selectOption(String(profile.inspectionZoom ?? 0.8));
+    const poses = async () =>
+      (
+        JSON.parse((await c.getAttribute("data-fauna-poses")) ?? "[]") as {
+          visible: boolean;
+          id: number;
+          species: string;
+          x: number;
+          y: number;
+          z: number;
+          clip: number;
+          frame: number;
+          state: string;
+        }[]
+      ).filter((p) => p.species === profile.species);
+    const original = await poses();
+    expect(original.length).toBeGreaterThanOrEqual(profile.group);
+    await expect
+      .poll(
+        async () =>
+          (await poses()).some(
+            (f) =>
+              (f.clip === 1 || (profile.habitat === "shore" && f.clip === 2)) &&
+              (profile.hop ? f.z > 2 : grounded(f.z)) &&
+              f.frame >=
+                (profile.habitat === "shore" && f.clip === 2
+                  ? (profile.clips[2]?.start ?? 0) + 3
+                  : 4),
+          ),
+        {
+          // Arrival escape/recovery scales with the species' ordinary cadence.
           timeout: Math.max(12_000, Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000)),
           intervals: [30],
-        })
-        .toBe(true);
-      const hopOnto = page.getByRole("button", { name: `Hop onto ${profile.label}`, exact: true });
-      if (profile.rideSpeed) {
-        let lastHop = -Infinity;
-        await expect
-          .poll(
-            async () => {
-              const animals = await poses();
-              if (animals.some((f) => f.state === "ridden")) return true;
-              const target = animals.find((f) => f.state !== "scared" && grounded(f.z));
-              // A mount can start walking before the falling player reaches its
-              // back. Retry from the ground during rest, without interrupting a
-              // landing already in flight or resetting an active herd alarm.
-              if (
-                !animals.some((f) => f.state === "scared") &&
-                target?.clip === 0 &&
-                grounded(Number(await c.getAttribute("data-player-z"))) &&
-                Date.now() - lastHop >= 1000
-              ) {
-                await hopOnto.click();
-                lastHop = Date.now();
-              }
-              return false;
-            },
-            {
-              timeout: Math.max(12_000, Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000)),
-              intervals: [30],
-            },
-          )
-          .toBe(true);
-        await expectNoBounce(c);
-        await page.screenshot({ path: `/tmp/tilefun-horse-mounted-${renderer}.png` });
-        await page.getByRole("button", { name: "Pause", exact: true }).click();
-        await expect(c).toHaveAttribute("data-authority-running", "false");
-        await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
-        await expect(c).toHaveAttribute("data-reload-count", "2");
-        await expect.poll(async () => (await poses()).some((f) => f.state === "ridden")).toBe(true);
-        expect(errors).toEqual([]);
-        return;
-      }
+        },
+      )
+      .toBe(true);
+    // Pause a routine walk as well as the escape below. This checks saved phase,
+    // rather than assuming the client restarts its walk at frame zero.
+    await page.getByRole("button", { name: "Pause", exact: true }).click();
+    await expect(c).toHaveAttribute("data-authority-running", "false");
+    const before = await poses();
+    if (profile.habitat === "deep") expect(before.every((p) => p.visible)).toBe(true);
+    await page.waitForTimeout(250);
+    expect(await poses()).toEqual(before);
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.screenshot({
+      path: `/tmp/tilefun-fauna-${profile.species}.png`,
+      fullPage: true,
+    });
+    await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+    await expect(c).toHaveAttribute("data-reload-count", "1");
+    const restored = await poses();
+    expect(restored.length).toBe(before.length);
+    for (const f of before) {
+      // Runtime IDs are reassigned on hydration; durable identity is checked in headless residency tests.
+      const r = restored.find((r) => Math.abs(r.x - f.x) < 0.01 && Math.abs(r.y - f.y) < 0.01);
+      expect(r?.x).toBeCloseTo(f.x, 3);
+      expect(r?.y).toBeCloseTo(f.y, 3);
+      expect(r?.z).toBeCloseTo(f.z, 3);
+      expect(r?.frame).toBe(f.frame);
+    }
+    await page.getByRole("button", { name: "Resume", exact: true }).click();
+    await expect
+      // Sample the short native rest phase instead of skipping it between
+      // increasingly sparse polls after a slower pet walk.
+      .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)), {
+        // Resuming a saved walk needs the same movement/authority budget as
+        // initial arrival, including software-rendered CI scheduling delays.
+        timeout: Math.max(12_000, Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000)),
+        intervals: [30],
+      })
+      .toBe(true);
+    const hopOnto = page.getByRole("button", { name: `Hop onto ${profile.label}`, exact: true });
+    if (profile.rideSpeed) {
+      let lastHop = -Infinity;
       await expect
         .poll(
           async () => {
             const animals = await poses();
-            if (
-              animals.some(
-                (f) =>
-                  f.state === "scared" &&
-                  profile.clips[f.clip ?? -1]?.name.startsWith("flee") &&
-                  (profile.hop ? f.z > 2 : grounded(f.z)),
-              )
-            )
-              return true;
-            // The button selects the first grounded, non-scared actor. A flight
-            // can start between observing rest and clicking, so retry an actual
-            // landing once all alarms finish, as in the frog contact check.
+            if (animals.some((f) => f.state === "ridden")) return true;
             const target = animals.find((f) => f.state !== "scared" && grounded(f.z));
-            if (!animals.some((f) => f.state === "scared") && target?.clip === 0)
+            // A mount can start walking before the falling player reaches its
+            // back. Retry from the ground during rest, without interrupting a
+            // landing already in flight or resetting an active herd alarm.
+            if (
+              !animals.some((f) => f.state === "scared") &&
+              target?.clip === 0 &&
+              grounded(Number(await c.getAttribute("data-player-z"))) &&
+              Date.now() - lastHop >= 1000
+            ) {
               await hopOnto.click();
+              lastHop = Date.now();
+            }
             return false;
           },
           {
@@ -170,17 +134,53 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
           },
         )
         .toBe(true);
-      await expect
-        .poll(async () => (await poses()).every((f) => f.state !== "scared"), {
-          // A queued ordinary step, display, escape and recovery scale with body cadence.
-          timeout: Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000),
-          intervals: [30],
-        })
-        .toBe(true);
       await expectNoBounce(c);
+      await page.screenshot({ path: "/tmp/tilefun-horse-mounted.png" });
+      await page.getByRole("button", { name: "Pause", exact: true }).click();
+      await expect(c).toHaveAttribute("data-authority-running", "false");
+      await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+      await expect(c).toHaveAttribute("data-reload-count", "2");
+      await expect.poll(async () => (await poses()).some((f) => f.state === "ridden")).toBe(true);
       expect(errors).toEqual([]);
-    });
-  }
+      return;
+    }
+    await expect
+      .poll(
+        async () => {
+          const animals = await poses();
+          if (
+            animals.some(
+              (f) =>
+                f.state === "scared" &&
+                profile.clips[f.clip ?? -1]?.name.startsWith("flee") &&
+                (profile.hop ? f.z > 2 : grounded(f.z)),
+            )
+          )
+            return true;
+          // The button selects the first grounded, non-scared actor. A flight
+          // can start between observing rest and clicking, so retry an actual
+          // landing once all alarms finish, as in the frog contact check.
+          const target = animals.find((f) => f.state !== "scared" && grounded(f.z));
+          if (!animals.some((f) => f.state === "scared") && target?.clip === 0)
+            await hopOnto.click();
+          return false;
+        },
+        {
+          timeout: Math.max(12_000, Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000)),
+          intervals: [30],
+        },
+      )
+      .toBe(true);
+    await expect
+      .poll(async () => (await poses()).every((f) => f.state !== "scared"), {
+        // A queued ordinary step, display, escape and recovery scale with body cadence.
+        timeout: Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000),
+        intervals: [30],
+      })
+      .toBe(true);
+    await expectNoBounce(c);
+    expect(errors).toEqual([]);
+  });
 
   test(`${profile.species} manual creation and durable deletion on world reopening`, async ({
     page,
@@ -188,7 +188,7 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
     const generation = createDescriptor("regional", 2026);
     const arrival = { x: arrivalX, y: arrivalY, generation };
     await page.goto(
-      `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByPlaceholder("World name...").fill(`Durable ${profile.species} refuge`);
     await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -239,7 +239,7 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
       await host.flush();
       await host.shutdown();
     });
-    await page.goto("/tilefun/?nogamepad");
+    await page.goto("/tilefun/?nogamepad&renderer=canvas");
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await expect.poll(async () => (await deer()).length).toBe(original.length);
     await page.screenshot({ path: `/tmp/tilefun-fauna-${profile.species}-game.png` });

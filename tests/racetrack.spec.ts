@@ -3,45 +3,41 @@ import pngjs from "pngjs";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 
 test.use({ channel: "chromium", viewport: { width: 1440, height: 1100 } });
-for (const renderer of ["canvas", "gpu"]) {
-  // Racing cars are deferred since 8f405aaf retired their motion service; the
-  // speedway keeps its spectators, kerbs and start line.
-  test(`generated speedway has spectators and reloads (${renderer})`, async ({ page }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (e) => errors.push(e.message));
-    await page.goto(
-      // Exact kerb/checker colors need the grid-locked comparison projection;
-      // continuous projection filters the world frame's fractional remainder (b4144ded).
-      `/tilefun/workshop.html?geometry=nature-racetrack&landscape=thicket&pixelsnap=1&renderer=${renderer}#/tool/world-geometry`,
-    );
-    const canvas = page.getByLabel("Natural landscape playground");
-    await expect(canvas).toHaveAttribute("data-ready", "true");
-    await expect
-      .poll(async () => Number(await canvas.getAttribute("data-spectator-count")))
-      .toBe(48);
-    await page.getByRole("button", { name: "Pause", exact: true }).click();
-    await expect(canvas).toHaveAttribute("data-authority-running", "false");
-    await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
-    await expect(canvas).toHaveAttribute("data-reload-count", "1");
-    await expect(canvas).toHaveAttribute("data-terrain-pending", "0");
-    await expect(canvas).toHaveAttribute("data-spectator-count", "48");
-    await page.evaluate(() => scrollTo(0, 0));
-    const pixels = pngjs.PNG.sync.read(
-      await canvas.screenshot({ path: `/tmp/tilefun-racetrack-${renderer}.png` }),
-    );
-    let redKerb = 0,
-      checkers = 0;
-    for (let i = 0; i < pixels.data.length; i += 4) {
-      if (pixels.data[i] === 207 && pixels.data[i + 1] === 69 && pixels.data[i + 2] === 69)
-        redKerb++;
-      if (pixels.data[i] === 38 && pixels.data[i + 1] === 42 && pixels.data[i + 2] === 48)
-        checkers++;
-    }
-    expect(redKerb).toBeGreaterThan(1000);
-    expect(checkers).toBeGreaterThan(100);
-    expect(errors).toEqual([]);
-  });
-}
+// Both backends draw the same Canvas 2D terrain chunk rasters (TileRenderer);
+// GPU upload/sampling parity lives in gpu-renderer and terrain-pacing.
+// Racing cars are deferred since 8f405aaf retired their motion service; the
+// speedway keeps its spectators, kerbs and start line.
+test("generated speedway has spectators and reloads", async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto(
+    // Exact kerb/checker colors need the grid-locked comparison projection;
+    // continuous projection filters the world frame's fractional remainder (b4144ded).
+    `/tilefun/workshop.html?geometry=nature-racetrack&landscape=thicket&pixelsnap=1&renderer=canvas#/tool/world-geometry`,
+  );
+  const canvas = page.getByLabel("Natural landscape playground");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  await expect.poll(async () => Number(await canvas.getAttribute("data-spectator-count"))).toBe(48);
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await expect(canvas).toHaveAttribute("data-authority-running", "false");
+  await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+  await expect(canvas).toHaveAttribute("data-reload-count", "1");
+  await expect(canvas).toHaveAttribute("data-terrain-pending", "0");
+  await expect(canvas).toHaveAttribute("data-spectator-count", "48");
+  await page.evaluate(() => scrollTo(0, 0));
+  const pixels = pngjs.PNG.sync.read(
+    await canvas.screenshot({ path: "/tmp/tilefun-racetrack.png" }),
+  );
+  let redKerb = 0,
+    checkers = 0;
+  for (let i = 0; i < pixels.data.length; i += 4) {
+    if (pixels.data[i] === 207 && pixels.data[i + 1] === 69 && pixels.data[i + 2] === 69) redKerb++;
+    if (pixels.data[i] === 38 && pixels.data[i + 1] === 42 && pixels.data[i + 2] === 48) checkers++;
+  }
+  expect(redKerb).toBeGreaterThan(1000);
+  expect(checkers).toBeGreaterThan(100);
+  expect(errors).toEqual([]);
+});
 
 for (const [name, x, y, spectators] of [
   ["south entrance", 462, 492, 24],

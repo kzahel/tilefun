@@ -15,81 +15,82 @@ test.use({ channel: "chromium" });
 // bounces (c473f541) launched at 75-95 px/s.
 const grounded = (z: number) => Math.abs(z) < 0.5;
 const MAX_LANDING_VZ = 40;
-for (const renderer of ["canvas", "gpu"]) {
-  test(`grove robins fly to crowns, react to landing and reload their flight pose (${renderer})`, async ({
-    page,
-  }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (e) => errors.push(e.message));
-    await page.goto(
-      `/tilefun/workshop.html?geometry=nature-robins&landscape=thicket&renderer=${renderer}#/tool/world-geometry`,
-    );
-    const c = page.getByLabel("Natural landscape playground");
-    await expect(c).toHaveAttribute("data-ready", "true");
-    // Keep the replicated region fixed: hydration reorders runtime actors, so
-    // following the first robin can stream a different grove after reload.
-    await page.getByLabel("Follow selected animal").uncheck();
-    await page.getByLabel("Landscape zoom").selectOption("1.3");
-    const poses = async () =>
-      JSON.parse((await c.getAttribute("data-robin-poses")) ?? "[]") as {
-        id: number;
-        x: number;
-        y: number;
-        z: number;
-        clip: number;
-        frame: number;
-        state: string;
-      }[];
-    const original = await poses();
-    expect(original.length).toBeGreaterThanOrEqual(2);
-    await expect
-      .poll(async () => (await poses()).some((f) => f.clip === 2 && f.z > 20), {
-        intervals: [30],
-        timeout: 15000,
-      })
-      .toBe(true);
-    // Pause a routine flight before the escape below. This checks saved phase,
-    // rather than assuming the client restarts its one-shot at frame zero.
-    await page.getByRole("button", { name: "Pause", exact: true }).click();
-    await expect(c).toHaveAttribute("data-authority-running", "false");
-    const before = await poses();
-    await page.waitForTimeout(250);
-    expect(await poses()).toEqual(before);
-    await page.screenshot({ path: `/tmp/tilefun-robin-grove-${renderer}.png`, fullPage: true });
-    await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
-    await expect(c).toHaveAttribute("data-reload-count", "1");
-    const restored = await poses();
-    expect(restored.length).toBe(before.length);
-    for (const f of before) {
-      // Runtime IDs are reassigned on hydration; durable identity is checked in headless residency tests.
-      const r = restored.find((r) => Math.abs(r.x - f.x) < 0.01 && Math.abs(r.y - f.y) < 0.01);
-      expect(r?.x).toBeCloseTo(f.x, 3);
-      expect(r?.y).toBeCloseTo(f.y, 3);
-      expect(r?.z).toBeCloseTo(f.z, 3);
-      if (f.clip === 1 || f.clip === 2) expect(r?.frame).toBe(f.frame);
-    }
-    await page.getByRole("button", { name: "Resume", exact: true }).click();
-    await expect
-      .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)))
-      .toBe(true);
-    await expect
-      .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 32), { timeout: 15000 })
-      .toBe(true);
-    await page.screenshot({ path: `/tmp/tilefun-robin-perch-${renderer}.png`, fullPage: true });
-    await page.getByRole("button", { name: "Hop onto robin", exact: true }).click();
-    await expect
-      .poll(
-        async () => (await poses()).some((f) => f.state === "scared" && f.clip === 2 && f.z > 3),
-        { intervals: [30] },
-      )
-      .toBe(true);
-    await expect
-      .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 10000 })
-      .toBe(true);
-    expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
-    expect(errors).toEqual([]);
-  });
-}
+test("grove robins fly to crowns, react to landing and reload their flight pose", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto(
+    `/tilefun/workshop.html?geometry=nature-robins&landscape=thicket&renderer=canvas#/tool/world-geometry`,
+  );
+  const c = page.getByLabel("Natural landscape playground");
+  await expect(c).toHaveAttribute("data-ready", "true");
+  // Keep the replicated region fixed: hydration reorders runtime actors, so
+  // following the first robin can stream a different grove after reload.
+  await page.getByLabel("Follow selected animal").uncheck();
+  await page.getByLabel("Landscape zoom").selectOption("1.3");
+  const poses = async () =>
+    JSON.parse((await c.getAttribute("data-robin-poses")) ?? "[]") as {
+      id: number;
+      x: number;
+      y: number;
+      z: number;
+      clip: number;
+      frame: number;
+      state: string;
+    }[];
+  const original = await poses();
+  expect(original.length).toBeGreaterThanOrEqual(2);
+  await expect
+    .poll(async () => (await poses()).some((f) => f.clip === 2 && f.z > 20), {
+      intervals: [30],
+      timeout: 15000,
+    })
+    .toBe(true);
+  // Pause a routine flight before the escape below. This checks saved phase,
+  // rather than assuming the client restarts its one-shot at frame zero.
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await expect(c).toHaveAttribute("data-authority-running", "false");
+  const before = await poses();
+  await page.waitForTimeout(250);
+  expect(await poses()).toEqual(before);
+  await page.screenshot({ path: "/tmp/tilefun-robin-grove.png", fullPage: true });
+  await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+  await expect(c).toHaveAttribute("data-reload-count", "1");
+  const restored = await poses();
+  expect(restored.length).toBe(before.length);
+  for (const f of before) {
+    // Runtime IDs are reassigned on hydration; durable identity is checked in headless residency tests.
+    const r = restored.find((r) => Math.abs(r.x - f.x) < 0.01 && Math.abs(r.y - f.y) < 0.01);
+    // Rapier stores f32 positions relative to an origin chosen from the first
+    // hydrated body; at the grove's |y| ≈ 8600 px one f32 step is 2^-10 px, so a
+    // reload may re-round by one step (CI: -8608.6982421875 → -8608.697265625).
+    expect(r?.x).toBeCloseTo(f.x, 2);
+    expect(r?.y).toBeCloseTo(f.y, 2);
+    expect(r?.z).toBeCloseTo(f.z, 3);
+    if (f.clip === 1 || f.clip === 2) expect(r?.frame).toBe(f.frame);
+  }
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await expect
+    .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)))
+    .toBe(true);
+  await expect
+    .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 32), { timeout: 15000 })
+    .toBe(true);
+  await page.screenshot({ path: "/tmp/tilefun-robin-perch.png", fullPage: true });
+  await page.getByRole("button", { name: "Hop onto robin", exact: true }).click();
+  await expect
+    .poll(
+      async () => (await poses()).some((f) => f.state === "scared" && f.clip === 2 && f.z > 3),
+      { intervals: [30] },
+    )
+    .toBe(true);
+  await expect
+    .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 10000 })
+    .toBe(true);
+  expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
+  expect(errors).toEqual([]);
+});
 
 test("robin ball contact dispatches client chirps through the live Worker", async ({ page }) => {
   const generation = createDescriptor("flat", 1);

@@ -34,10 +34,9 @@ import DeferredVehiclePage from "./DeferredVehiclePage.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
 
 export type GeometryCanvas = HTMLCanvasElement & {
-  __physicsSample?: (
-    reset?: boolean,
-  ) => Promise<import("../scenarios/ScenarioProtocol.js").ScenarioResponse["physicsDiagnostics"]>;
+  __physicsSample?: ScenarioPresentationHost["session"]["samplePhysicsDiagnostics"];
   __presentationDiagnostics?: () => ReturnType<ScenarioPresentationHost["getDiagnostics"]>;
+  __command?: ScenarioPresentationHost["command"]; // Exact placement for browser checks.
 };
 const FIXTURES = [
   "deck",
@@ -257,6 +256,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
     scene.current = host;
     c.__physicsSample = (reset) => host.session.samplePhysicsDiagnostics(reset);
     c.__presentationDiagnostics = () => host.getDiagnostics();
+    c.__command = (command) => host.command(command);
     void host.ready
       .then(() => {
         if (alive) c.dataset.ready = "true";

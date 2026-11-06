@@ -102,107 +102,103 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
   await expect.poll(async () => (await duck()).state, { timeout: 10000 }).not.toBe("scared");
   expect(grounded((await duck()).z)).toBe(true);
 });
-for (const renderer of ["canvas", "gpu"]) {
-  test(`duck landing stays grounded and starts a durable escape in the shared pond Worker (${renderer})`, async ({
-    page,
-  }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (e) => errors.push(e.message));
-    await page.goto(
-      `/tilefun/workshop.html?geometry=nature-pond&landscape=thicket&renderer=${renderer}#/tool/world-geometry`,
-    );
-    const c = page.getByLabel("Natural landscape playground");
-    await expect(c).toHaveAttribute("data-ready", "true");
-    // Keep the complete escape inside the observed pond rather than losing its replica.
-    await page.getByLabel("Landscape zoom").selectOption("0.4");
-    const poses = async () =>
-      JSON.parse((await c.getAttribute("data-wildlife-poses")) ?? "[]") as {
-        id: number;
-        z: number;
-        clip: number;
-        state: string;
-      }[];
-    const original = (await poses()).map((d) => d.id).sort();
-    expect(original.length).toBeGreaterThanOrEqual(2);
-    await page.getByRole("button", { name: "Hop onto duck", exact: true }).click();
-    await expect
-      .poll(
-        async () => (await poses()).some((d) => d.state === "scared" && d.clip === 5 && d.z > 14),
-        { intervals: [50] },
-      )
-      .toBe(true);
-    expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
-    await page.getByRole("button", { name: "Pause", exact: true }).click();
-    await expect(c).toHaveAttribute("data-authority-running", "false");
-    const flying = (await poses()).find((d) => d.clip === 5);
-    expect(flying?.z).toBeGreaterThan(0);
-    await page.screenshot({ path: `/tmp/tilefun-duck-flight-${renderer}.png`, fullPage: true });
-    await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
-    await expect(c).toHaveAttribute("data-reload-count", "1");
-    expect((await poses()).length).toBe(original.length);
-    const restored = (await poses()).find((d) => d.clip === 5);
-    expect(restored?.z).toBeCloseTo(flying?.z ?? 0, 3);
-    await page.getByRole("button", { name: "Resume", exact: true }).click();
-    await expect
-      .poll(
-        async () => {
-          const duck = (await poses()).find((d) => d.id === restored?.id);
-          return !!duck && duck.state !== "scared" && grounded(duck.z);
-        },
-        {
-          timeout: 10000,
-        },
-      )
-      .toBe(true);
-    expect(grounded((await poses()).find((d) => d.id === restored?.id)?.z ?? NaN)).toBe(true);
-    expect(errors).toEqual([]);
-  });
-  test(`pond ducks animate in the shared Worker lab and survive reload (${renderer})`, async ({
-    page,
-  }) => {
-    test.setTimeout(60000);
-    const errors: string[] = [];
-    page.on("pageerror", (e) => errors.push(e.message));
-    await page.goto(
-      `/tilefun/workshop.html?geometry=nature-pond&landscape=thicket&renderer=${renderer}#/tool/world-geometry`,
-    );
-    const c = page.getByLabel("Natural landscape playground");
-    await expect(c).toHaveAttribute("data-ready", "true");
-    await page.getByLabel("Landscape zoom").selectOption("1.3");
-    await expect
-      .poll(async () => Number(await c.getAttribute("data-wildlife-count")))
-      .toBeGreaterThanOrEqual(2);
-    const clips = new Set<number>(),
-      poses = new Set<string>();
-    await expect
-      .poll(
-        async () => {
-          const ducks: { clip: number; frame: number; direction: number }[] = JSON.parse(
-            (await c.getAttribute("data-wildlife-poses")) ?? "[]",
-          );
-          for (const d of ducks) {
-            clips.add(d.clip);
-            poses.add(`${d.clip}:${d.frame}:${d.direction}`);
-          }
-          return clips.has(1) && clips.has(2) && poses.size > 4;
-        },
-        { timeout: 40000, intervals: [160] },
-      )
-      .toBe(true);
-    await page.getByRole("button", { name: "Pause", exact: true }).click();
-    await expect(c).toHaveAttribute("data-authority-running", "false");
-    const frozen = await c.getAttribute("data-wildlife-poses");
-    await page.waitForTimeout(400);
-    expect(await c.getAttribute("data-wildlife-poses")).toBe(frozen);
-    await page.screenshot({ path: `/tmp/tilefun-mallard-pond-${renderer}.png`, fullPage: true });
-    await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
-    await expect(c).toHaveAttribute("data-ready", "true");
-    await expect
-      .poll(async () => Number(await c.getAttribute("data-wildlife-count")))
-      .toBeGreaterThanOrEqual(2);
-    expect(errors).toEqual([]);
-  });
-}
+test("duck landing stays grounded and starts a durable escape in the shared pond Worker", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto(
+    `/tilefun/workshop.html?geometry=nature-pond&landscape=thicket&renderer=canvas#/tool/world-geometry`,
+  );
+  const c = page.getByLabel("Natural landscape playground");
+  await expect(c).toHaveAttribute("data-ready", "true");
+  // Keep the complete escape inside the observed pond rather than losing its replica.
+  await page.getByLabel("Landscape zoom").selectOption("0.4");
+  const poses = async () =>
+    JSON.parse((await c.getAttribute("data-wildlife-poses")) ?? "[]") as {
+      id: number;
+      z: number;
+      clip: number;
+      state: string;
+    }[];
+  const original = (await poses()).map((d) => d.id).sort();
+  expect(original.length).toBeGreaterThanOrEqual(2);
+  await page.getByRole("button", { name: "Hop onto duck", exact: true }).click();
+  await expect
+    .poll(
+      async () => (await poses()).some((d) => d.state === "scared" && d.clip === 5 && d.z > 14),
+      { intervals: [50] },
+    )
+    .toBe(true);
+  expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await expect(c).toHaveAttribute("data-authority-running", "false");
+  const flying = (await poses()).find((d) => d.clip === 5);
+  expect(flying?.z).toBeGreaterThan(0);
+  await page.screenshot({ path: "/tmp/tilefun-duck-flight.png", fullPage: true });
+  await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+  await expect(c).toHaveAttribute("data-reload-count", "1");
+  expect((await poses()).length).toBe(original.length);
+  const restored = (await poses()).find((d) => d.clip === 5);
+  expect(restored?.z).toBeCloseTo(flying?.z ?? 0, 3);
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await expect
+    .poll(
+      async () => {
+        const duck = (await poses()).find((d) => d.id === restored?.id);
+        return !!duck && duck.state !== "scared" && grounded(duck.z);
+      },
+      {
+        timeout: 10000,
+      },
+    )
+    .toBe(true);
+  expect(grounded((await poses()).find((d) => d.id === restored?.id)?.z ?? NaN)).toBe(true);
+  expect(errors).toEqual([]);
+});
+test("pond ducks animate in the shared Worker lab and survive reload", async ({ page }) => {
+  test.setTimeout(60000);
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto(
+    `/tilefun/workshop.html?geometry=nature-pond&landscape=thicket&renderer=canvas#/tool/world-geometry`,
+  );
+  const c = page.getByLabel("Natural landscape playground");
+  await expect(c).toHaveAttribute("data-ready", "true");
+  await page.getByLabel("Landscape zoom").selectOption("1.3");
+  await expect
+    .poll(async () => Number(await c.getAttribute("data-wildlife-count")))
+    .toBeGreaterThanOrEqual(2);
+  const clips = new Set<number>(),
+    poses = new Set<string>();
+  await expect
+    .poll(
+      async () => {
+        const ducks: { clip: number; frame: number; direction: number }[] = JSON.parse(
+          (await c.getAttribute("data-wildlife-poses")) ?? "[]",
+        );
+        for (const d of ducks) {
+          clips.add(d.clip);
+          poses.add(`${d.clip}:${d.frame}:${d.direction}`);
+        }
+        return clips.has(1) && clips.has(2) && poses.size > 4;
+      },
+      { timeout: 40000, intervals: [160] },
+    )
+    .toBe(true);
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await expect(c).toHaveAttribute("data-authority-running", "false");
+  const frozen = await c.getAttribute("data-wildlife-poses");
+  await page.waitForTimeout(400);
+  expect(await c.getAttribute("data-wildlife-poses")).toBe(frozen);
+  await page.screenshot({ path: "/tmp/tilefun-mallard-pond.png", fullPage: true });
+  await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+  await expect(c).toHaveAttribute("data-ready", "true");
+  await expect
+    .poll(async () => Number(await c.getAttribute("data-wildlife-count")))
+    .toBeGreaterThanOrEqual(2);
+  expect(errors).toEqual([]);
+});
 
 test("ordinary seeded pond has durable ducks and offers manual creation in Entities", async ({
   page,

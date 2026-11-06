@@ -1,5 +1,6 @@
 import { expect, type Locator, test } from "@playwright/test";
 import pngjs from "pngjs";
+import type { GeometryCanvas } from "../src/workshop/WorldGeometryPage.js";
 
 test.use({ channel: "chromium" });
 
@@ -140,23 +141,23 @@ for (const backend of ["canvas", "gpu"]) {
       await expect(c).toHaveAttribute("data-visibility", mode);
       return c.screenshot();
     };
-    for (const direction of ["north", "south"]) {
-      await page.getByRole("button", { name: "passage", exact: true }).click();
+    // The south case needs the 12 px band where the body is beneath the deck yet
+    // drawn clear of it; key-hold walking overshoots it on hosted software GPU
+    // (released at y 59, stopped at 76), so place the player exactly.
+    for (const [direction, wy] of [
+      ["north", -88],
+      ["south", 58],
+    ] as const) {
       const resume = page.getByRole("button", { name: "Resume", exact: true });
       if (await resume.isVisible()) await resume.click();
-      await c.focus();
-      const key = direction === "north" ? "ArrowUp" : "ArrowDown";
-      await page.keyboard.down(key);
-      if (direction === "north") {
-        await expect
-          .poll(async () => Number(await c.getAttribute("data-player-y")), { intervals: [25] })
-          .toBeLessThan(-80);
-      } else {
-        await expect
-          .poll(async () => Number(await c.getAttribute("data-player-y")), { intervals: [25] })
-          .toBeGreaterThan(52);
-      }
-      await page.keyboard.up(key);
+      await c.evaluate(
+        (canvas: GeometryCanvas, wy) =>
+          canvas.__command?.({ kind: "teleport", position: { wx: 80, wy }, z: 0 }),
+        wy,
+      );
+      await expect
+        .poll(async () => Number(await c.getAttribute("data-player-y")))
+        .toBeCloseTo(wy, 1);
       await page.getByRole("button", { name: "Pause", exact: true }).click();
       await expectHeight(c, 0);
       const y = Number(await c.getAttribute("data-player-y"));
