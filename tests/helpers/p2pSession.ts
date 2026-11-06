@@ -16,19 +16,24 @@ export interface Wire {
   maxLogical: number;
 }
 export type Canvas = HTMLCanvasElement & { __game: Game };
-export type ProbeWindow = Window & { p2pWire: Wire };
+declare global {
+  interface Window {
+    /** Wire-size probe installed by `installProbe` in P2P sessions. */
+    p2pWire: Wire;
+  }
+}
 
 async function installProbe(page: Page) {
   await page.addInitScript(() => {
     const wire: Wire = { maxSent: 0, sendFailures: 0, maxLogical: 0 };
-    (window as ProbeWindow).p2pWire = wire;
+    window.p2pWire = wire;
     const send = RTCDataChannel.prototype.send;
     RTCDataChannel.prototype.send = function (data) {
       const bytes =
         typeof data === "string" ? data.length : data instanceof Blob ? data.size : data.byteLength;
       wire.maxSent = Math.max(wire.maxSent, bytes);
       try {
-        send.call(this, data);
+        Reflect.apply(send, this, [data]);
       } catch (error) {
         wire.sendFailures++;
         throw error;

@@ -10,13 +10,13 @@ import {
 } from "../art/DenseDistrictShowcase.js";
 import type { OutdoorAsset, OutdoorMetadata } from "../assets/outdoor/OutdoorCatalog.js";
 import { required } from "../shared/required.js";
-import { candidateLabel, ErrorMessage, threadPath } from "./App.js";
 import { AssetThumbnail, OutdoorAssetBrowser } from "./OutdoorAssetBrowser.js";
 import { catalogAssets, useArtNotes, useOutdoorCatalog } from "./OutdoorQueries.js";
 import { PreviewViewport } from "./PreviewViewport.js";
 import { reviewAssets } from "./ReviewAssets.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
 import { primaryScene } from "./SceneReview.js";
+import { candidateLabel, ErrorMessage, threadPath } from "./WorkshopCommon.js";
 import { useInbox } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
 export default function ScenePage() {

@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { faunaType } from "../src/wildlife/Fauna.js";
 
@@ -22,15 +22,15 @@ for (const renderer of ["canvas", "gpu"]) {
       .poll(() =>
         page.evaluate(
           () =>
-            (document.querySelector("#game") as unknown as { __game: GameClient }).__game.stateView
-              .playerEntity.id,
+            (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game
+              .stateView.playerEntity.id,
         ),
       )
       .not.toBe(-1);
     const editing = () =>
       page.evaluate(
         () =>
-          (document.querySelector("#game") as unknown as { __game: GameClient }).__game.stateView
+          (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game.stateView
             .editorEnabled,
       );
     if (!(await editing())) {
@@ -39,11 +39,11 @@ for (const renderer of ["canvas", "gpu"]) {
     }
     await expect.poll(editing).toBe(true);
     await page.evaluate((type) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       if (!g.stateView.editorEnabled) throw new Error("Editor not active");
       // Stage a stationary horse inside its alarm radius. Automation may take
       // longer than the real jump approach while leaving the editor.
-      g.debugPanel.paused = true;
+      g.debugPanel.setPaused(true);
       g.transport.send({ type: "set-debug", paused: true });
       // Flat worlds seed random solid chickens; keep the riding path clear.
       for (const entity of g.stateView.entities)
@@ -55,7 +55,8 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect
       .poll(() =>
         page.evaluate((type) => {
-          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+            .__game;
           return (
             g.stateView.entities.some((e) => e.type === type) &&
             !g.stateView.entities.some((e) => e.type === "chicken")
@@ -67,7 +68,7 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect.poll(editing).toBe(false);
     const read = () =>
       page.evaluate((type) => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         const p = g.stateView.playerEntity;
         const horse = g.stateView.entities.find((e) => e.type === type);
         return {
@@ -81,8 +82,8 @@ for (const renderer of ["canvas", "gpu"]) {
     // Resume and deliver the chord in one browser task, through the normal
     // keyboard handlers. No authority tick can flee before the input is ready.
     await page.evaluate(() => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-      g.debugPanel.paused = false;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+      g.debugPanel.setPaused(false);
       for (const key of [" ", "ArrowRight"])
         window.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
     });

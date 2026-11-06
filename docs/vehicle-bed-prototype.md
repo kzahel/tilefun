@@ -181,31 +181,9 @@ authority. Displayed rider anchors sample the same bed pose as the truck.
    gates. Changed art needs fresh human review; this engine proof creates no art
    approval. Keep all scratch captures and bundles under ignored `data/`.
 
-Capture a self-contained gallery with its own isolated server and full bundled
-Chromium (both close when the command completes):
-
-```sh
-npx tsx scripts/instrumentation/truck-bed-playground.ts --tipping --game
-```
-
-Open `data/3d-investigation/truck-bed/index.html`. It includes center/near-wall
-poses, a jump, all four headings, both sprite fallbacks, loaded cargo and clipping overlays.
-These sample live authority and are diagnostic captures, not immutable approval
-snapshots. A running isolated developer server can instead be supplied with
-`--base-url=http://127.0.0.1:PORT`; that borrowed server is left running.
-Add `--game` to also capture normal desktop/phone gameplay using that same isolated
-server; both test browsers and an owned server close when finished.
-
-To capture actual editor placement, loading, bed walking and phone boarding through
-the normal GameClient/Worker, run this against an isolated dev/preview server. Its
-fresh test browser owns its temporary worlds and closes afterward:
-
-```sh
-npx tsx scripts/instrumentation/truck-bed-game.ts --base-url=http://127.0.0.1:PORT
-```
-
-The desktop/390px touch images and ordinary authority/renderer diagnostics are in
-`data/3d-investigation/truck-bed-gameplay/`.
+The gallery and gameplay capture scripts (`truck-bed-playground.ts`,
+`truck-bed-game.ts`) were removed when bed and cargo controls were retired in
+`8f405aaf`; restore them from history with the feature.
 
 ## Articulated extension contract and remaining limits
 

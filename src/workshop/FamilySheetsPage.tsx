@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router";
-import { ErrorMessage } from "./App.js";
 import { FamilySpriteCanvas, useFamilyImages, useFamilySheets } from "./FamilySheetArt.js";
 import { FamilySheetNote } from "./FamilySheetNote.js";
 import {
@@ -10,6 +9,7 @@ import {
   type FamilySprite,
   familyVariant,
 } from "./FamilySheetTypes.js";
+import { ErrorMessage } from "./WorkshopCommon.js";
 import "./family-sheets.css";
 
 export default function FamilySheetsPage() {

@@ -19,11 +19,13 @@ export function render3DDebug(gc: GameContext): void {
 
   if (show3d && !threeDebug && !threeLoading) {
     threeLoading = true;
-    import("../rendering/ThreeDebugRenderer.js").then(({ ThreeDebugRenderer }) => {
-      threeDebug = new ThreeDebugRenderer(gc.canvas);
-      threeDebug.setEnabled(true);
-      threeLoading = false;
-    });
+    import("../rendering/ThreeDebugRenderer.js")
+      .then(({ ThreeDebugRenderer }) => {
+        threeDebug = new ThreeDebugRenderer(gc.canvas);
+        threeDebug.setEnabled(true);
+        threeLoading = false;
+      })
+      .catch((error) => gc.console.output.printError(String(error)));
     return;
   }
 

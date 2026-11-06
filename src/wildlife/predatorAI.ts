@@ -6,7 +6,7 @@ import { gap } from "../shared/gap.js";
 import { required } from "../shared/required.js";
 import { predatorFlightZ, restorePredatorPose } from "./PredatorMotion.js";
 
-export { restorePredatorPose } from "./PredatorMotion.js";
+export { predatorHabitatAllows } from "./PredatorHabitat.js";
 
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
@@ -17,6 +17,7 @@ import { startleFauna } from "./faunaInteractions.js";
 import { startleFrog } from "./frogInteractions.js";
 import { startleMallard } from "./mallardInteractions.js";
 import { predatorProfile } from "./Predator.js";
+import { predatorHabitatAllows } from "./PredatorHabitat.js";
 import { startleRabbit } from "./rabbitInteractions.js";
 import { startleRobin } from "./robinInteractions.js";
 import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
@@ -96,21 +97,6 @@ function raptorOnPrey(hunter: Entity, prey: Entity): boolean {
     Math.abs((hunter.groundZ ?? -Infinity) - top) < 0.1 &&
     bodyGap(hunter, prey) === 0
   );
-}
-/** Every footprint tile must remain deep water for ocean hunters. Land policy stays dry. */
-export function predatorHabitatAllows(
-  e: Entity,
-  point: PositionComponent,
-  env: WildlifeEnvironment,
-): boolean {
-  if (predatorProfile(e.type)?.expansion?.habitat !== "deep") return !env.isWater(point);
-  if (!e.collider) return false;
-  const a = getEntityAABB(point, e.collider),
-    water = env.isDeepWater ?? env.isWater;
-  for (let ty = Math.floor(a.top / 16); ty <= Math.floor((a.bottom - 0.001) / 16); ty++)
-    for (let tx = Math.floor(a.left / 16); tx <= Math.floor((a.right - 0.001) / 16); tx++)
-      if (!water({ wx: tx * 16 + 8, wy: ty * 16 + 8 })) return false;
-  return true;
 }
 function clearPath(
   e: Entity,

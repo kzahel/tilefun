@@ -13,9 +13,24 @@ behavior; this topic owns the guardrails that keep structure from regressing.
 
 ## Current state
 
-- Biome `recommended` plus unused imports/variables, `useConst` and
-  `noExplicitAny`; TypeScript `strict`, `noUncheckedIndexedAccess` and
-  `exactOptionalPropertyTypes` for `src`.
+- Biome `recommended` plus unused imports/variables, `useConst`,
+  `noExplicitAny`, `noImportCycles` (value imports), `noFloatingPromises`,
+  `useExhaustiveSwitchCases` and `noRestrictedImports` layer boundaries for
+  `shared/` and Worker-authority/simulation directories (explicit allow-list
+  overrides in `biome.json` record the remaining exceptions).
+- TypeScript `strict`, `noUncheckedIndexedAccess`, `exactOptionalPropertyTypes`,
+  `verbatimModuleSyntax`, `noImplicitOverride` and `noImplicitReturns`.
+  `npm run typecheck` covers `src`, the server and Worker projects and
+  `tsconfig.tools.json` (tests, specs, captures, TS scripts, configs).
+- `npm run check` = Biome + `npm run health`: the size/complexity ratchet
+  (`scripts/code-health/ratchet.mjs`; non-test `src` files over 600 lines or with
+  a function above cognitive complexity 25 must stay within
+  `ratchet-baseline.json`) and knip (dead files/exports, unlisted dependencies).
+  knip ignores exports used only in their own file, so "knip clean" means no
+  dead code, not minimal exports.
+  Lower the baseline with `--update` after a split; raising it is a reviewed decision.
+- Browser specs and instrumentation use the typed `GameTestHooks` surface on
+  `canvas.__game` instead of private `GameClient` members.
 - Shared leaf helpers: `shared/required.ts`, `shared/Movement.ts`,
   `shared/Determinism.ts` (`lcgNext`, `positionSeed`, `fnv1a32`) and
   `shared/gap.ts`. GameClient has one mode (transport + `RemoteStateView`); Realm

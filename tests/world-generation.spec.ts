@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import {
+  CURRENT_REGIONAL_VERSION,
   createDescriptor,
-  LATEST_REGIONAL_REVISION,
 } from "../src/generation/GenerationDescriptor.js";
 import { openCreate, openWorlds } from "./helpers/gameMenu.js";
 
@@ -11,7 +11,7 @@ test("new worlds and the explorer default to the newest regional revision", asyn
   const initial = JSON.parse(
     (await page.locator("#game").getAttribute("data-generation")) ?? "null",
   );
-  expect(initial).toMatchObject({ type: "regional", version: LATEST_REGIONAL_REVISION });
+  expect(initial).toMatchObject({ type: "regional", version: CURRENT_REGIONAL_VERSION });
   await openCreate(page);
   const type = page.getByRole("combobox", { name: "World type" });
   const revision = page.getByRole("combobox", { name: "Regional revision" });
@@ -32,7 +32,7 @@ test("new worlds and the explorer default to the newest regional revision", asyn
   );
   await page.goto("/tilefun/world-explorer.html");
   await expect(type).toHaveValue("regional");
-  await expect(revision).toHaveValue(LATEST_REGIONAL_REVISION);
+  await expect(revision).toHaveValue(CURRENT_REGIONAL_VERSION);
 });
 
 test("game creates and reopens every generator with the pinned descriptor in IndexedDB", async ({
@@ -108,7 +108,7 @@ test("Play here creates at the preview location and saved inspection includes a 
 }) => {
   const generation = {
     type: "regional",
-    version: LATEST_REGIONAL_REVISION,
+    version: CURRENT_REGIONAL_VERSION,
     seed: 2026,
     preset: "temperate-v1",
   } as const;
@@ -139,7 +139,7 @@ test("Play here creates at the preview location and saved inspection includes a 
         () =>
           (
             document.querySelector("#game") as unknown as {
-              __game: import("../src/client/GameClient.js").GameClient;
+              __game: import("../src/client/GameTestHooks.js").GameTestHooks;
             }
           ).__game.stateView.props.filter((p) => p.proceduralId && p.type.includes("condo")).length,
       ),
@@ -148,7 +148,7 @@ test("Play here creates at the preview location and saved inspection includes a 
   const info = await page.evaluate(() => {
     const game = (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game;
     const p = game.stateView.playerEntity.position;
@@ -193,7 +193,7 @@ test("Play here creates at the preview location and saved inspection includes a 
         page.evaluate(() => {
           const game = (
             document.querySelector("#game") as unknown as {
-              __game: import("../src/client/GameClient.js").GameClient;
+              __game: import("../src/client/GameTestHooks.js").GameTestHooks;
             }
           ).__game;
           const range = game.camera.getVisibleChunkRange();
@@ -230,7 +230,7 @@ test("Play here creates at the preview location and saved inspection includes a 
         () =>
           (
             document.querySelector("#game") as unknown as {
-              __game: import("../src/client/GameClient.js").GameClient;
+              __game: import("../src/client/GameTestHooks.js").GameTestHooks;
             }
           ).__game.stateView.props.length,
       ),
@@ -239,7 +239,7 @@ test("Play here creates at the preview location and saved inspection includes a 
   const ids = await page.evaluate(() =>
     (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game.stateView.props.map((p) => p.proceduralId),
   );

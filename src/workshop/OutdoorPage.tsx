@@ -11,7 +11,6 @@ import {
   outdoorId,
   parseOutdoorMetadata,
 } from "../assets/outdoor/OutdoorCatalog.js";
-import { ErrorMessage, threadPath } from "./App.js";
 import { AssetThumbnail, OutdoorAssetBrowser } from "./OutdoorAssetBrowser.js";
 import { OutdoorGeometryTest } from "./OutdoorGeometryTest.js";
 import {
@@ -21,6 +20,7 @@ import {
   useArtNotes,
   useOutdoorCatalog,
 } from "./OutdoorQueries.js";
+import { ErrorMessage, threadPath } from "./WorkshopCommon.js";
 import { useSession } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
 

@@ -18,8 +18,6 @@ import type { Camera } from "../rendering/Camera.js";
 import { vehicleView } from "../traffic/Vehicle.js";
 import type { EditorModel } from "./EditorModel.js";
 
-export type { BrushMode, PaintMode, SubgridShape } from "./EditorTypes.js";
-
 interface PendingTileEdit {
   tx: number;
   ty: number;

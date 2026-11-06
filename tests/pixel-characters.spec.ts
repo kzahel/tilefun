@@ -206,7 +206,7 @@ test("touch movement releases cleanly and the small mobile layout fits", async (
   baseURL,
 }) => {
   const context = await browser.newContext({
-    baseURL,
+    ...(baseURL === undefined ? {} : { baseURL }),
     viewport: { width: 360, height: 800 },
     hasTouch: true,
     isMobile: true,

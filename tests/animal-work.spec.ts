@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { Direction } from "../src/entities/Entity.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 
@@ -63,7 +63,7 @@ for (const renderer of ["canvas", "gpu"]) {
     await page.getByTestId("main-menu-toggle").click();
     await page.getByRole("button", { name: "Edit", exact: true }).click();
     await page.evaluate(() => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game,
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game,
         p = g.stateView.playerEntity.position;
       g.transport.send({
         type: "edit-spawn",
@@ -76,14 +76,16 @@ for (const renderer of ["canvas", "gpu"]) {
       .poll(() =>
         page.evaluate(() =>
           (
-            document.querySelector("#game") as unknown as { __game: GameClient }
+            document.querySelector("#game") as unknown as { __game: GameTestHooks }
           ).__game.stateView.entities.some((e) => e.type === "wildlife-dog-provisional-v1"),
         ),
       )
       .toBe(true);
     await page.getByRole("button", { name: "Exit editor", exact: true }).click();
     await page.evaluate(() =>
-      (document.querySelector("#game") as unknown as { __game: GameClient }).__game.transport.send({
+      (
+        document.querySelector("#game") as unknown as { __game: GameTestHooks }
+      ).__game.transport.send({
         type: "throw-ball",
         dirX: 1,
         dirY: 0,
@@ -92,7 +94,7 @@ for (const renderer of ["canvas", "gpu"]) {
     );
     const ball = () =>
       page.evaluate(() => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         const b = g.stateView.entities.find((e) => e.type === "ball"),
           p = g.stateView.playerEntity.position;
         return b
@@ -108,7 +110,7 @@ for (const renderer of ["canvas", "gpu"]) {
         .poll(
           async () => {
             const pose = await page.evaluate(() => {
-              const g = (document.querySelector("#game") as unknown as { __game: GameClient })
+              const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
                 .__game;
               const dog = g.stateView.entities.find(
                 (e) => e.type === "wildlife-dog-provisional-v1",
@@ -149,7 +151,7 @@ for (const renderer of ["canvas", "gpu"]) {
       .poll(
         async () => {
           const b = await ball();
-          return b?.id === id && b.parent < 0 && b.distance < 45;
+          return b !== undefined && b.id === id && b.parent < 0 && b.distance < 45;
         },
         { timeout: 30_000, intervals: [50] },
       )

@@ -50,7 +50,7 @@ test("dev full reload restores the indoor player and scopes the editor camera to
       page.evaluate(() => {
         const game = (
           document.querySelector("#game") as unknown as {
-            __game: import("../src/client/GameClient.js").GameClient;
+            __game: import("../src/client/GameTestHooks.js").GameTestHooks;
           }
         ).__game;
         return {
@@ -75,7 +75,7 @@ test("dev full reload restores the indoor player and scopes the editor camera to
       history.replaceState(null, "", "/tilefun/");
       const game = (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game;
       game.camera.snapTo(112, 96);
@@ -159,7 +159,7 @@ test("dev reload during the guided doorway walk settles into the saved destinati
     await page.waitForFunction(() => {
       const game = (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game;
       const p = game.stateView.playerEntity.position;
@@ -181,7 +181,7 @@ test("dev reload during the guided doorway walk settles into the saved destinati
       (y) =>
         (
           document.querySelector("#game") as unknown as {
-            __game: import("../src/client/GameClient.js").GameClient;
+            __game: import("../src/client/GameTestHooks.js").GameTestHooks;
           }
         ).__game.stateView.playerEntity.position.wy > y,
       lot.entrance.y * 16 + 96,
@@ -205,7 +205,7 @@ test("dev reload during the guided doorway walk settles into the saved destinati
         page.evaluate(() => {
           const game = (
             document.querySelector("#game") as unknown as {
-              __game: import("../src/client/GameClient.js").GameClient;
+              __game: import("../src/client/GameTestHooks.js").GameTestHooks;
             }
           ).__game;
           return (game.stateView as import("../src/client/ClientStateView.js").RemoteStateView)
@@ -216,7 +216,7 @@ test("dev reload during the guided doorway walk settles into the saved destinati
     const result = await page.evaluate(() => {
       const game = (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game;
       return {

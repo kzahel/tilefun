@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { FROG_TYPE } from "../src/wildlife/Frog.js";
 
@@ -97,7 +97,7 @@ test("frog ball contact dispatches client croaks through the live Worker", async
   await page.getByTestId("main-menu-toggle").click();
   await page.getByRole("button", { name: "Edit", exact: true }).click();
   await page.evaluate((type) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const p = g.stateView.playerEntity.position;
     g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + 100, wy: p.wy });
     const canvas = document.querySelector("#game") as HTMLCanvasElement;
@@ -112,7 +112,7 @@ test("frog ball contact dispatches client croaks through the live Worker", async
   }, FROG_TYPE);
   const frog = () =>
     page.evaluate((type) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       const f = g.stateView.entities.find((e) => e.type === type);
       return { exists: !!f, state: f?.wanderAI?.state, z: f?.wz ?? 0, clip: f?.sprite?.clip };
     }, FROG_TYPE);
@@ -124,7 +124,7 @@ test("frog ball contact dispatches client croaks through the live Worker", async
     .poll(() =>
       page.evaluate(() =>
         (
-          document.querySelector("#game") as unknown as { __game: GameClient }
+          document.querySelector("#game") as unknown as { __game: GameTestHooks }
         ).__game.stateView.entities.some((e) => e.type === "ball"),
       ),
     )
@@ -136,7 +136,8 @@ test("frog ball contact dispatches client croaks through the live Worker", async
         const state = (await frog()).state;
         if (state !== "scared")
           await page.evaluate((type) => {
-            const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+            const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+              .__game;
             const p = g.stateView.playerEntity.position,
               f = g.stateView.entities.find((e) => e.type === type);
             if (f)
@@ -171,7 +172,7 @@ test("ordinary pond frogs support manual creation and durable deletion on world 
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const frogs = () =>
     page.evaluate((type) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       return g.stateView.entities
         .filter(
           (e) =>
@@ -190,13 +191,13 @@ test("ordinary pond frogs support manual creation and durable deletion on world 
   await page.locator("#game").click({ position: { x: 300, y: 170 } });
   await expect.poll(async () => (await frogs()).length).toBe(original.length + 1);
   await page.evaluate((id) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     g.transport.send({ type: "edit-delete-entity", entityId: id });
   }, removed.id);
   await expect.poll(async () => (await frogs()).length).toBe(original.length);
   await page.getByRole("button", { name: "Exit editor", exact: true }).click();
   await page.evaluate(async () => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     g.loop.stop();
     const host = g.netEmulatedTransport.base as unknown as {
       setHidden(v: boolean): void;

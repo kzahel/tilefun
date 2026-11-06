@@ -28,7 +28,7 @@ for (const renderer of ["canvas", "gpu"]) {
         page.evaluate(() => {
           const g = (
             document.querySelector("#game") as unknown as {
-              __game: import("../src/client/GameClient.js").GameClient;
+              __game: import("../src/client/GameTestHooks.js").GameTestHooks;
             }
           ).__game;
           return g.stateView.props.filter((p) => p.proceduralId?.startsWith("nature:thicket:"))
@@ -42,7 +42,7 @@ for (const renderer of ["canvas", "gpu"]) {
           page.evaluate(() => {
             const g = (
               document.querySelector("#game") as unknown as {
-                __game: import("../src/client/GameClient.js").GameClient;
+                __game: import("../src/client/GameTestHooks.js").GameTestHooks;
               }
             ).__game;
             const p = g.stateView.playerEntity.position;
@@ -62,7 +62,7 @@ for (const renderer of ["canvas", "gpu"]) {
           page.evaluate(() => {
             const g = (
               document.querySelector("#game") as unknown as {
-                __game: import("../src/client/GameClient.js").GameClient;
+                __game: import("../src/client/GameTestHooks.js").GameTestHooks;
               }
             ).__game;
             const range = g.camera.getVisibleChunkRange();

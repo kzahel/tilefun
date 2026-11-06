@@ -295,5 +295,6 @@ export class VehicleControl {
           continue;
         return { position: probe.position, wz: z };
       }
+    return undefined;
   }
 }

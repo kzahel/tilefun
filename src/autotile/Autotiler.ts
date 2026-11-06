@@ -6,8 +6,6 @@ import { computeTileBlend } from "./computeTileBlend.js";
 import { toBaseTerrainId } from "./TerrainId.js";
 
 export { AutotileBit, canonicalize } from "./bitmask.js";
-export type { BlendLayer, TileBlendResult } from "./computeTileBlend.js";
-export { computeDirectMask, computeTileBlend } from "./computeTileBlend.js";
 
 /** Packed blend layer: (sheetIndex << 16) | (col << 8) | row */
 function packBlend(sheetIndex: number, col: number, row: number): number {

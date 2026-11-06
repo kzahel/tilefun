@@ -104,11 +104,6 @@ for (const v of VARIANT_TABLE) {
   VARIANT_MAP.set(v.id, v);
 }
 
-/** Get the variant definition for an ID, or undefined for base terrain IDs. */
-export function getVariant(id: number): VariantDef | undefined {
-  return VARIANT_MAP.get(id);
-}
-
 /**
  * Base selection strategy for mixed-corner tiles.
  * - "depth": lowest TERRAIN_DEPTH wins (current behavior)

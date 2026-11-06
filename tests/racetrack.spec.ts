@@ -1,5 +1,4 @@
 import { expect, test } from "@playwright/test";
-// @ts-expect-error pngjs has no bundled declarations
 import pngjs from "pngjs";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 
@@ -92,7 +91,7 @@ for (const [name, x, y, spectators] of [
         canvas.evaluate(
           (c, at) => {
             const game = (
-              c as unknown as { __game: import("../src/client/GameClient.js").GameClient }
+              c as unknown as { __game: import("../src/client/GameTestHooks.js").GameTestHooks }
             ).__game;
             return game.stateView.entities.filter(
               (e) =>
@@ -112,7 +111,7 @@ for (const [name, x, y, spectators] of [
       .poll(() =>
         canvas.evaluate((c) => {
           const game = (
-            c as unknown as { __game: import("../src/client/GameClient.js").GameClient }
+            c as unknown as { __game: import("../src/client/GameTestHooks.js").GameTestHooks }
           ).__game;
           return game.stateView.entities.filter(
             (e) =>

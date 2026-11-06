@@ -17,7 +17,7 @@ test("retired browser worlds stay listed and recreate with the same seed in a ne
   const original = await page.evaluate(async () => {
     const game = (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game;
     const id = game.mainMenu.currentWorldId;
@@ -61,7 +61,7 @@ test("retired browser worlds stay listed and recreate with the same seed in a ne
     () =>
       (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game.mainMenu.currentWorldId,
   );

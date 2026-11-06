@@ -30,7 +30,12 @@
         "useConst": "error"
       },
       "suspicious": {
-        "noExplicitAny": "error"
+        "noExplicitAny": "error",
+        "noImportCycles": "error"
+      },
+      "nursery": {
+        "noFloatingPromises": "error",
+        "useExhaustiveSwitchCases": "error"
       }
     }
   },
@@ -101,6 +106,151 @@
       "includes": ["docs/benchmarks/**"],
       "formatter": {
         "enabled": false
+      }
+    },
+    {
+      "includes": ["src/shared/**", "!src/shared/**/*.test.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "**/audio/**",
+                      "**/client/**",
+                      "**/console/**",
+                      "**/explorer/**",
+                      "**/input/**",
+                      "**/rendering/**",
+                      "**/scenarios/**",
+                      "**/scenes/**",
+                      "**/server/**",
+                      "**/ui/**",
+                      "**/workshop/**",
+                      "**/xr/**",
+                      "**/boats/**",
+                      "**/characters/**",
+                      "**/editor/**",
+                      "**/interiors/**",
+                      "**/patterns/**",
+                      "**/railway/**",
+                      "**/rooms/**",
+                      "**/traffic/**",
+                      "**/wildlife/**",
+                      "!../characters/PlayerModels.js",
+                      "!../editor/EditorTypes.js",
+                      "!../railway/CurveTrain.js",
+                      "!../railway/RailPath.js",
+                      "!../traffic/Vehicle.js",
+                      "!../traffic/VehiclePaint.js"
+                    ],
+                    "message": "shared/ is the protocol and utility layer; it must not depend on hosts, presentation or feature directories."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": [
+        "src/autotile/**",
+        "src/boats/**",
+        "src/characters/**",
+        "src/entities/**",
+        "src/game/**",
+        "src/generation/**",
+        "src/interiors/**",
+        "src/patterns/**",
+        "src/persistence/**",
+        "src/physics/**",
+        "src/railway/**",
+        "src/road/**",
+        "src/scripting/**",
+        "src/server/**",
+        "src/traffic/**",
+        "src/wildlife/**",
+        "src/world/**",
+        "src/config/**",
+        "src/mods/**",
+        "src/projection/**",
+        "src/rooms/**",
+        "src/scenarios/**",
+        "src/transport/**",
+        "!**/*.test.ts",
+        "!src/characters/CharacterTestScene.ts",
+        "!src/interiors/playtest/**",
+        "!src/interiors/review/**",
+        "!src/interiors/workbench/**",
+        "!src/interiors/AdvancedSuite.ts",
+        "!src/interiors/ApartmentFloorPlan.ts",
+        "!src/interiors/CachedInteriorRenderer.ts",
+        "!src/interiors/ConnectedRoomGrammar.ts",
+        "!src/interiors/FurnishedInterior.ts",
+        "!src/interiors/FurnitureMotion.ts",
+        "!src/interiors/GenericHomeGeometry.ts",
+        "!src/interiors/InteriorPresentation.ts",
+        "!src/interiors/presentInterior.ts",
+        "!src/patterns/PatternRuntime.ts",
+        "!src/server/testing/**",
+        "!src/server/*Annotations.ts",
+        "!src/server/workshop*.ts",
+        "!src/scenarios/ScenarioPresentationHost.ts",
+        "!src/scenarios/ScenarioReplica.ts"
+      ],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "**/client/**",
+                      "**/rendering/**",
+                      "**/scenes/**",
+                      "**/ui/**",
+                      "**/workshop/**"
+                    ],
+                    "message": "Worker authority and simulation code must not depend on client, rendering, UI or Workshop modules."
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "includes": ["src/interiors/ApartmentFloorPlan.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedImports": {
+              "level": "error",
+              "options": {
+                "patterns": [
+                  {
+                    "group": [
+                      "**/client/**",
+                      "**/rendering/**",
+                      "**/scenes/**",
+                      "**/ui/**",
+                      "**/workshop/**",
+                      "!../rendering/CanvasInteriorMap.js"
+                    ],
+                    "message": "Worker authority and simulation code must not depend on client, rendering, UI or Workshop modules."
+                  }
+                ]
+              }
+            }
+          }
+        }
       }
     }
   ],

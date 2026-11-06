@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { MANUAL_PREY_PAIRS } from "../tests-support/ManualPreyPairs.fixture.js";
 
 test.use({ channel: "chromium" });
@@ -22,10 +22,10 @@ for (const pair of MANUAL_PREY_PAIRS.filter((p) => p.prey === "person1"))
     await page.getByRole("button", { name: "Edit", exact: true }).click();
     await page.evaluate(
       ({ prey, hunter }) => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         const p = g.stateView.playerEntity.position;
         g.transport.send({ type: "set-player-model", requestId: 731, model: "person1" });
-        g.debugPanel.paused = true;
+        g.debugPanel.setPaused(true);
         g.transport.send({ type: "set-debug", paused: true });
         // Isolate meal provenance from unrelated starter-world prey.
         for (const e of g.stateView.entities)
@@ -39,7 +39,8 @@ for (const pair of MANUAL_PREY_PAIRS.filter((p) => p.prey === "person1"))
     const population = () =>
       page.evaluate(
         ({ prey, hunter }) => {
-          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+            .__game;
           return {
             prey: g.stateView.entities.filter((e) => e.type === prey).length,
             hunter: g.stateView.entities.filter((e) => e.type === hunter).length,
@@ -49,19 +50,19 @@ for (const pair of MANUAL_PREY_PAIRS.filter((p) => p.prey === "person1"))
       );
     await expect.poll(population).toEqual({ prey: 1, hunter: 1 });
     await page.evaluate(() => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-      g.debugPanel.paused = false;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+      g.debugPanel.setPaused(false);
       g.transport.send({ type: "set-debug", paused: false });
     });
     await expect.poll(population, { timeout: 20000 }).toEqual({ prey: 0, hunter: 1 });
     expect(
       await page.evaluate(() => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         return { type: g.stateView.playerEntity.type, model: g.stateView.playerEntity.playerModel };
       }),
     ).toEqual({ type: "player", model: "person1" });
     await page.evaluate(async () => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       g.loop.stop();
       const host = g.netEmulatedTransport.base as unknown as {
         setHidden(v: boolean): void;

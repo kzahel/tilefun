@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import type { RenderBackend } from "../src/rendering/RenderFrame.js";
 import { FROG_TYPE } from "../src/wildlife/Frog.js";
 
@@ -20,19 +20,19 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
     await expect(page.getByTestId("world-menu")).toBeHidden();
     const editing = await page.evaluate(
       () =>
-        (document.querySelector("#game") as unknown as { __game: GameClient }).__game.stateView
+        (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game.stateView
           .editorEnabled,
     );
     if (!editing) await page.keyboard.press("Tab");
     await page.evaluate(() => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       for (const e of g.stateView.serverEntities)
         if (e.type !== "player") g.transport.send({ type: "edit-delete-entity", entityId: e.id });
       g.transport.send({ type: "edit-spawn", entityType: "vehicle-v1:compact-1", wx: 100, wy: 0 });
     });
     await page.keyboard.press("Tab");
     await page.evaluate(async () => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       await g.gcSendRequest({ type: "rcon", requestId: g.nextRequestId++, command: "tp 100 -16" });
     });
     await expect(page.getByRole("button", { name: /^Drive car(?: · [EY])?$/ })).toBeVisible();
@@ -40,14 +40,15 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
     await expect
       .poll(() =>
         page.evaluate(() => {
-          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+            .__game;
           return g.stateView.serverPlayerEntity.parentId;
         }),
       )
       .toBeDefined();
     await page.evaluate((type) => {
       const canvas = document.querySelector("#game") as HTMLCanvasElement;
-      const g = (canvas as unknown as { __game: GameClient }).__game;
+      const g = (canvas as unknown as { __game: GameTestHooks }).__game;
       const car = g.stateView.serverEntities.find(
         (e) => e.id === g.stateView.serverPlayerEntity.parentId,
       );
@@ -82,7 +83,7 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
     await page.keyboard.down("ArrowRight");
     const state = () =>
       page.evaluate(() => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         const remains = g.stateView.serverEntities.find((e) => e.type.startsWith("roadkill:"));
         const car = g.stateView.serverEntities.find(
           (e) => e.id === g.stateView.serverPlayerEntity.parentId,
@@ -132,7 +133,7 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
     expect((await state()).corpse?.position).toEqual(dead?.position);
     await page.screenshot({ path: testInfo.outputPath("roadkill.png") });
     await page.evaluate(async () => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       g.loop.stop();
       const host = g.netEmulatedTransport.base as unknown as {
         setHidden(v: boolean): void;

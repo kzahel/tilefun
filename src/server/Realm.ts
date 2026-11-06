@@ -1432,6 +1432,10 @@ export class Realm {
       case "invalidate-all-chunks":
         this.invalidateAllChunks();
         break;
+
+      default:
+        // GameServer handles the remaining message types before delegating here.
+        break;
     }
   }
 

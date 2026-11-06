@@ -9,7 +9,11 @@ checks ran and any material limits in their coverage.
 
 Use `npx vitest run <test-file>` for selected native tests and
 `npx biome check <changed-files>` for supported source files. Run
-`npm run typecheck` when TypeScript contracts are affected. For a browser-dependent
+`npm run typecheck` when TypeScript contracts are affected; it also typechecks
+tests, specs, captures, TS scripts and configs (`tsconfig.tools.json`). Browser
+specs reach the client through `canvas.__game`, typed as `GameTestHooks`
+(`src/client/GameTestHooks.ts`); add members there rather than reading private
+fields. For a browser-dependent
 contract, select the relevant Playwright file and, where useful, `--grep` cases;
 build first only when production output is required. Rendering or integration
 changes do not automatically require the full browser suite.

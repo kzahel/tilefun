@@ -7,7 +7,7 @@ import {
 } from "../assets/ModernInteriorsAtlasIndex.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { AudioManager } from "../audio/AudioManager.js";
-import { buildFootstepManifest } from "../audio/SurfaceType.js";
+import { buildAudioManifest } from "../audio/SurfaceType.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { applyPlayerModel, normalizePlayerModel } from "../characters/PlayerModels.js";
 import { CHUNK_SIZE_PX } from "../config/constants.js";
@@ -40,6 +40,7 @@ import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 import { finishStartup, showStartupAssets, showStartupStage } from "../ui/StartupProgress.js";
 import { requestSessionNavigation } from "../ui/sessionNavigation.js";
 import { DoorPresentation } from "./DoorPresentation.js";
+import type { GameTestHooks } from "./GameTestHooks.js";
 import { type ReloadCamera, readReloadCamera } from "./ReloadCamera.js";
 import "../editor/EditorPanel.css";
 import { InteriorCatalog, type InteriorCatalogRouteState } from "../editor/InteriorCatalog.js";
@@ -74,7 +75,7 @@ import { MenuScene } from "../scenes/MenuScene.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import { PropEditorScene } from "../scenes/PropEditorScene.js";
 import { WorldMapScene } from "../scenes/WorldMapScene.js";
-import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
+import type { Arrival, ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import {
   ACTIVE_PROFILE_KEY,
@@ -130,7 +131,7 @@ export interface GameClientOptions {
   clientId?: string;
 }
 
-export class GameClient {
+export class GameClient implements GameTestHooks {
   private storagePaused = false;
   private storageNotice: HTMLDivElement | undefined;
   private storageNoticeTimer: ReturnType<typeof setTimeout> | undefined;
@@ -155,23 +156,23 @@ export class GameClient {
   }
 
   readonly performanceMetrics = performanceMetrics;
-  private canvas: HTMLCanvasElement;
+  readonly canvas: HTMLCanvasElement;
   private stopIdeaDelivery: (() => void) | undefined;
   private ctx: CanvasRenderingContext2D;
-  private camera: Camera;
-  private loop: GameLoop;
+  readonly camera: Camera;
+  readonly loop: GameLoop;
   private sheets = new Map<string, Spritesheet>();
-  private readonly renderHost: RenderHost;
-  private get renderer(): RenderBackend {
+  readonly renderHost: RenderHost;
+  get renderer(): RenderBackend {
     return this.renderHost.renderer;
   }
   private readonly sceneFrame = new SceneFrame({
     allCars3d: new URLSearchParams(location.search).has("allcars3d"),
   });
   private actions: ActionManager;
-  private touchJoystick: TouchJoystick;
-  private touchButtons: TouchButtons;
-  private readonly tapMovement = new TapMovement();
+  readonly touchJoystick: TouchJoystick;
+  readonly touchButtons: TouchButtons;
+  readonly tapMovement = new TapMovement();
   private touchPinch: TouchPinch;
   private pinchZoom = false;
   private touchTap: TouchTap;
@@ -183,33 +184,33 @@ export class GameClient {
   private lastTouchAt = -Infinity;
   private movementMode: TouchMovementMode = "joystick";
   private carDriving: CarDrivingStyle = DEFAULT_CAR_DRIVING;
-  private debugPanel: DebugPanel;
-  private editorMode: EditorMode;
-  private editorModel: EditorModel;
-  private editorPanel: EditorPanel;
-  private mainMenu: MainMenu;
+  readonly debugPanel: DebugPanel;
+  readonly editorMode: EditorMode;
+  readonly editorModel: EditorModel;
+  readonly editorPanel: EditorPanel;
+  readonly mainMenu: MainMenu;
   private worldMap: WorldMap;
   private mapButton: HTMLButtonElement | null = null;
   private propCatalog: PropCatalog;
   private interiorCatalog: InteriorCatalog;
-  private stateView: RemoteStateView;
-  private transport: IClientTransport;
-  private netEmulatedTransport: NetEmulatedClientTransport;
+  readonly stateView: RemoteStateView;
+  readonly transport: IClientTransport;
+  readonly netEmulatedTransport: NetEmulatedClientTransport;
   private autoJoinRealm: boolean;
   private reloadCamera: ReloadCamera | null;
   private scenes: SceneManager;
-  private time: Time;
-  private consoleEngine: ConsoleEngine;
+  readonly time: Time;
+  readonly consoleEngine: ConsoleEngine;
   private consoleUI: ConsoleUI;
   private chatHUD: ChatHUD;
-  private audioManager: AudioManager;
+  readonly audioManager: AudioManager;
 
   private xrManager = new XRSessionManager();
 
   // Mutable state exposed via GameContext
   private editorButton: HTMLButtonElement | null = null;
   private gemSpriteCanvas: HTMLCanvasElement | null = null;
-  private readonly gemHUD = new GemHUD();
+  readonly gemHUD = new GemHUD();
   private debugEnabled = false;
 
   /** Guard to prevent concurrent toggleMenu() calls from pushing duplicate MenuScenes. */
@@ -217,7 +218,7 @@ export class GameClient {
   /** Last applied tick rate from server (for change detection). */
 
   /** Request/response correlation. */
-  private nextRequestId = 1;
+  nextRequestId = 1;
   private readonly requests: RequestBroker;
 
   private lastVisibleRangeKey: string | null = null;
@@ -231,12 +232,12 @@ export class GameClient {
   private trainTapMovement = new TrainTapMovement();
   private doorPresentation = new DoorPresentation();
   /** True once init() has completed and we're ready to show UI. */
-  private initDone = false;
+  initDone = false;
   private startupWorldReady = false;
   /** Player profile (display name, id). */
-  private profile: NonNullable<GameClientOptions["profile"]> | null = null;
+  readonly profile: NonNullable<GameClientOptions["profile"]> | null = null;
   /** Profile store for listing/creating profiles (Switch Player). */
-  private profileStore: GameClientOptions["profileStore"];
+  readonly profileStore: GameClientOptions["profileStore"];
   /** The client ID used for the server connection (for debug display). */
   private clientId: string;
   private readonly adminToken: string | undefined;
@@ -766,7 +767,7 @@ export class GameClient {
       loadGameAssets(blendGraph, showStartupAssets),
       loadAtlasIndex(),
       loadModernInteriorsAtlasIndex(),
-      this.audioManager.preload(buildFootstepManifest()),
+      this.audioManager.preload(buildAudioManifest()),
     ]);
     showStartupStage(
       "world",
@@ -814,7 +815,7 @@ export class GameClient {
 
     const handoffParams = new URL(location.href).searchParams;
     const handoffWorldId = handoffParams.get("worldId");
-    let handoffArrival: import("../server/SafeArrival.js").Arrival | undefined;
+    let handoffArrival: Arrival | undefined;
     try {
       const raw = handoffParams.get("arrival");
       if (raw) handoffArrival = JSON.parse(raw);
@@ -1199,7 +1200,7 @@ export class GameClient {
   }
 
   /** Send a request and resolve the response with its matching requestId. */
-  private gcSendRequest<R extends RequestMessage>(msg: R): Promise<RequestResponse<R>> {
+  gcSendRequest<R extends RequestMessage>(msg: R): Promise<RequestResponse<R>> {
     if (
       this.adminToken &&
       ["create-world", "recreate-world", "delete-world", "rename-world", "rcon"].includes(msg.type)
@@ -1401,7 +1402,9 @@ export class GameClient {
     };
     hamburger.addEventListener("click", () => {
       if (window.tilefunDesktop) {
-        void this.toggleMenu();
+        void this.toggleMenu().catch((error) =>
+          this.consoleEngine.output.printError(String(error)),
+        );
         return;
       }
       if (panelOpen) closePanel();
@@ -1466,7 +1469,7 @@ export class GameClient {
     menuBtn.style.cssText = MENU_BTN_STYLE;
     menuBtn.addEventListener("click", () => {
       closePanel();
-      this.toggleMenu();
+      void this.toggleMenu().catch((error) => this.consoleEngine.output.printError(String(error)));
     });
 
     const debugBtn = document.createElement("button");

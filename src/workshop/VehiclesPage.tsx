@@ -10,11 +10,11 @@ import {
 } from "../assets/vehicles/VehicleCatalog.js";
 import { drawVehicleDiagram } from "../assets/vehicles/VehicleDiagram.js";
 import { required } from "../shared/required.js";
-import { ErrorMessage } from "./App.js";
 import { AssetThumbnail } from "./OutdoorAssetBrowser.js";
 import { OutdoorGeometryTest } from "./OutdoorGeometryTest.js";
 import { useArtNotes, useOutdoorCatalog } from "./OutdoorQueries.js";
 import { buildVehicleCandidate } from "./VehicleCandidates.js";
+import { ErrorMessage } from "./WorkshopCommon.js";
 import { candidateSummary } from "./WorkshopProjection.js";
 import { useManifest } from "./WorkshopQueries.js";
 import type { CandidateSummary, WorkshopCandidate, WorkshopEvent } from "./WorkshopTypes.js";
@@ -71,7 +71,7 @@ export default function VehiclesPage() {
   const selected = rows.find((c) => c.id === selectedId) ?? visible[0] ?? rows[0];
   function select(c: WorkshopCandidate) {
     useWorkspace.getState().setQueue("vehicles", { ...queue, selected: c.id });
-    navigate(`/tool/vehicles?view=${encodeURIComponent(c.id)}`);
+    void navigate(`/tool/vehicles?view=${encodeURIComponent(c.id)}`);
   }
   if (!manifest.data || !art.data || !notes.data)
     return <ErrorMessage error={manifest.error ?? art.error ?? notes.error} />;
@@ -108,7 +108,7 @@ export default function VehiclesPage() {
       const target = remaining[Math.max(0, currentIndex) % Math.max(1, remaining.length)];
       if (target) {
         next.selected = target.id;
-        navigate(`/tool/vehicles?view=${encodeURIComponent(target.id)}`);
+        void navigate(`/tool/vehicles?view=${encodeURIComponent(target.id)}`);
       }
     }
     useWorkspace.getState().setQueue("vehicles", next);

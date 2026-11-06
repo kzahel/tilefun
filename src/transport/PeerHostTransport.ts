@@ -101,13 +101,13 @@ export class PeerHostTransport {
     // Publish the replacement first so old callbacks cannot detach its authority.
     this.remoteClients.set(clientId, conn);
     if (existing) {
+      // Old connection may already be closing; a failed kick needs no handling.
       try {
-        existing.send(
+        const kicked = existing.send(
           encodeServerMessage({ type: "kicked", reason: "Connected from another tab" }),
         );
-      } catch {
-        // Old connection may already be closing
-      }
+        if (kicked) kicked.catch(() => {});
+      } catch {}
       this.links.get(existing)?.close();
       existing.close();
     }

@@ -1,5 +1,5 @@
 import { expect, type Page, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { projectWorld } from "../src/rendering/Projection.js";
 import type { RenderView } from "../src/rendering/RenderFrame.js";
 import { worldTap } from "./helpers/worldTap.js";
@@ -7,7 +7,7 @@ import { worldTap } from "./helpers/worldTap.js";
 test.use({ channel: "chromium", hasTouch: true, viewport: { width: 600, height: 800 } });
 const state = (page: Page) =>
   page.evaluate(() => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const p = g.stateView.serverPlayerEntity;
     const car = g.stateView.serverEntities.find((e) => e.id === p.parentId);
     const other = g.stateView.serverEntities.find(
@@ -33,7 +33,7 @@ for (const renderer of ["canvas", "gpu&meshes"])
     await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await page.evaluate(async () => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
       const created = await g.gcSendRequest({
         type: "create-world",
@@ -51,7 +51,8 @@ for (const renderer of ["canvas", "gpu&meshes"])
     await expect
       .poll(() =>
         page.evaluate(() => {
-          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+            .__game;
           return (
             Math.abs(g.stateView.serverPlayerEntity.position.wx + 50) < 1 &&
             [-1, 0].every((x) => [-1, 0].every((y) => !!g.stateView.world.getChunkIfLoaded(x, y)))
@@ -60,7 +61,7 @@ for (const renderer of ["canvas", "gpu&meshes"])
       )
       .toBe(true);
     await page.evaluate(() => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       g.transport.send({ type: "set-editor-mode", enabled: true });
       for (const e of g.stateView.serverEntities)
         if (e.type !== "player") g.transport.send({ type: "edit-delete-entity", entityId: e.id });
@@ -71,7 +72,8 @@ for (const renderer of ["canvas", "gpu&meshes"])
     await expect
       .poll(() =>
         page.evaluate(() => {
-          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+            .__game;
           return g.stateView.serverEntities.filter((e) => e.type.startsWith("vehicle-v1:")).length;
         }),
       )
@@ -97,7 +99,7 @@ for (const renderer of ["canvas", "gpu&meshes"])
     const beforeTap = await state(page);
     const pose = await page.evaluate(() => {
       const canvas = document.querySelector("#game") as HTMLCanvasElement;
-      const g = (canvas as unknown as { __game: GameClient }).__game;
+      const g = (canvas as unknown as { __game: GameTestHooks }).__game;
       const car = g.stateView.entities.find((e) => e.id === g.stateView.playerEntity.parentId);
       if (!car) throw Error("Missing car");
       const view = (g.tapMovement as unknown as { view: RenderView }).view;

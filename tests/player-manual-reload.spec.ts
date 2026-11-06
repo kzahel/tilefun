@@ -32,7 +32,7 @@ test("edits and ready markers preserve play; controller reload saves, and save f
       page.evaluate(() => {
         const game = (
           document.querySelector("#game") as unknown as {
-            __game: import("../src/client/GameClient.js").GameClient;
+            __game: import("../src/client/GameTestHooks.js").GameTestHooks;
           }
         ).__game;
         return game.getFaultContext().serverTick;

@@ -1,11 +1,11 @@
 import { expect, type Page, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { flushLocalWorld, stopLocalWorld, worldRecords } from "./helpers/local-world.js";
 
 test.use({ channel: "chromium", hasTouch: true });
 function game(page: Page) {
   return page.evaluate(() => {
-    const gc = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const gc = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     return gc.stateView.serverEntities
       .filter((e) => e.type.startsWith("vehicle-v1:"))
       .map((e) => ({ id: e.id, type: e.type, paint: e.paintSchemeId, sheet: e.sprite?.sheetKey }));
@@ -23,7 +23,7 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
   await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async () => {
-    const gc = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const gc = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
     const created = await gc.gcSendRequest({
       type: "create-world",
@@ -52,7 +52,7 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
   ).toHaveAttribute("aria-pressed", "true");
   const point = await page.evaluate(() => {
     const canvas = document.querySelector("#game") as HTMLCanvasElement;
-    const gc = (canvas as unknown as { __game: GameClient }).__game;
+    const gc = (canvas as unknown as { __game: GameTestHooks }).__game;
     const points = [-160, 0, 160].flatMap((wx) => [-160, 0, 160].map((wy) => ({ wx, wy })));
     const spot = points
       .map((p) => ({
@@ -94,7 +94,7 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
   });
   await page.getByRole("button", { name: "Exit editor", exact: true }).tap();
   const car = await page.evaluate(async () => {
-    const gc = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const gc = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const vehicle = gc.stateView.serverEntities.find((e) => e.type.startsWith("vehicle-v1:"));
     if (!vehicle) throw Error("Missing painted car");
     await gc.gcSendRequest({
@@ -108,7 +108,7 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
   await expect
     .poll(() =>
       page.evaluate(() => {
-        const gc = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const gc = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         const vehicle = gc.stateView.entities.find(
           (e) => e.id === gc.stateView.playerEntity.parentId,
         );
@@ -125,7 +125,7 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
   await expect
     .poll(() =>
       page.evaluate((id) => {
-        const gc = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const gc = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         return gc.stateView.serverEntities.find((e) => e.id === id)?.position.wx ?? 0;
       }, car.id),
     )

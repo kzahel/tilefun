@@ -20,8 +20,6 @@ import {
   createCharacterEntity,
 } from "./CharacterCatalog.js";
 
-export { CHARACTER_TEST_BLOCKS } from "../scenarios/CharacterRecipe.js";
-
 export class CharacterTestScene {
   readonly actor: Entity;
   readonly reference = createPlayer(-105, 6);

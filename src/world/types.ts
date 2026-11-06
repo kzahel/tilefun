@@ -19,11 +19,6 @@ export interface ChunkPos {
 }
 
 /** Canvas-pixel coordinates. */
-export interface ScreenPos {
-  sx: number;
-  sy: number;
-}
-
 /** Convert world-pixel position to tile index. */
 export function worldToTile(wx: number, wy: number): TilePos {
   return {

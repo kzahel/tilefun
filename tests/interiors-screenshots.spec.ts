@@ -2,6 +2,11 @@ import fs from "node:fs";
 import { expect, test } from "@playwright/test";
 
 const CAPTURE_DIR = "test-results/interiors";
+function dataUrlBytes(dataUrl: string): Buffer {
+  const base64 = dataUrl.split(",")[1];
+  if (base64 === undefined) throw new Error("Expected a base64 data URL");
+  return Buffer.from(base64, "base64");
+}
 async function waitForInteriorsPanel(page: import("@playwright/test").Page, query: string) {
   fs.mkdirSync(CAPTURE_DIR, { recursive: true });
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -50,46 +55,31 @@ test("capture Generic Home 1 layer validation", async ({ page }) => {
   const roomPng = await page
     .getByTestId("interior-generated-room")
     .evaluate((canvas) => (canvas as HTMLCanvasElement).toDataURL("image/png"));
-  fs.writeFileSync(
-    `${CAPTURE_DIR}/room-grammar-variants.png`,
-    Buffer.from(roomPng.split(",")[1], "base64"),
-  );
+  fs.writeFileSync(`${CAPTURE_DIR}/room-grammar-variants.png`, dataUrlBytes(roomPng));
 
   const study = page.getByTestId("interior-geometry-study");
   await expect(study).toHaveAttribute("data-visible-differences", "1");
   const studyPng = await study.evaluate((canvas) =>
     (canvas as HTMLCanvasElement).toDataURL("image/png"),
   );
-  fs.writeFileSync(
-    `${CAPTURE_DIR}/generic-home-1-geometry-study.png`,
-    Buffer.from(studyPng.split(",")[1], "base64"),
-  );
+  fs.writeFileSync(`${CAPTURE_DIR}/generic-home-1-geometry-study.png`, dataUrlBytes(studyPng));
 
   const layerStudy = page.getByTestId("interior-layer-study");
   await expect(layerStudy).toHaveAttribute("data-overlap-cells", "2");
   const layerPng = await layerStudy.evaluate((canvas) =>
     (canvas as HTMLCanvasElement).toDataURL("image/png"),
   );
-  fs.writeFileSync(
-    `${CAPTURE_DIR}/generic-home-1-layer-study.png`,
-    Buffer.from(layerPng.split(",")[1], "base64"),
-  );
+  fs.writeFileSync(`${CAPTURE_DIR}/generic-home-1-layer-study.png`, dataUrlBytes(layerPng));
 
   const connectedPng = await page
     .getByTestId("interior-connected-rooms")
     .evaluate((canvas) => (canvas as HTMLCanvasElement).toDataURL("image/png"));
-  fs.writeFileSync(
-    `${CAPTURE_DIR}/connected-room-grammar.png`,
-    Buffer.from(connectedPng.split(",")[1], "base64"),
-  );
+  fs.writeFileSync(`${CAPTURE_DIR}/connected-room-grammar.png`, dataUrlBytes(connectedPng));
 
   const variantPng = await page
     .getByTestId("interior-geometry-variant")
     .evaluate((canvas) => (canvas as HTMLCanvasElement).toDataURL("image/png"));
-  fs.writeFileSync(
-    `${CAPTURE_DIR}/generic-home-1-derived-variation.png`,
-    Buffer.from(variantPng.split(",")[1], "base64"),
-  );
+  fs.writeFileSync(`${CAPTURE_DIR}/generic-home-1-derived-variation.png`, dataUrlBytes(variantPng));
 });
 
 test("capture apartments generated from editable floor plans", async ({ page }) => {
@@ -112,10 +102,7 @@ test("capture apartments generated from editable floor plans", async ({ page }) 
     const data = await page
       .getByTestId("apartment-preview")
       .evaluate((canvas) => (canvas as HTMLCanvasElement).toDataURL("image/png"));
-    fs.writeFileSync(
-      `${CAPTURE_DIR}/${id}-apartment.png`,
-      Buffer.from(data.split(",")[1], "base64"),
-    );
+    fs.writeFileSync(`${CAPTURE_DIR}/${id}-apartment.png`, dataUrlBytes(data));
   }
   const sketch = page.getByTestId("apartment-sketch");
   const canvas = page.getByTestId("apartment-preview");
@@ -128,10 +115,7 @@ test("capture apartments generated from editable floor plans", async ({ page }) 
     (item as HTMLCanvasElement).toDataURL("image/png"),
   );
   expect(custom).not.toBe(previous);
-  fs.writeFileSync(
-    `${CAPTURE_DIR}/custom-apartment.png`,
-    Buffer.from(custom.split(",")[1], "base64"),
-  );
+  fs.writeFileSync(`${CAPTURE_DIR}/custom-apartment.png`, dataUrlBytes(custom));
   await sketch.fill("#####\n#LL+#\n#####");
   await expect(picker).toHaveValue("custom");
   await expect(page.getByTestId("apartment-status")).toContainText("Passage");
@@ -147,9 +131,6 @@ test("capture branched and offset layered suites", async ({ page }) => {
     const data = await canvas.evaluate((item) =>
       (item as HTMLCanvasElement).toDataURL("image/png"),
     );
-    fs.writeFileSync(
-      `${CAPTURE_DIR}/advanced-suite-${id}.png`,
-      Buffer.from(data.split(",")[1], "base64"),
-    );
+    fs.writeFileSync(`${CAPTURE_DIR}/advanced-suite-${id}.png`, dataUrlBytes(data));
   }
 });

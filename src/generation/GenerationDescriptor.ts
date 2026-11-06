@@ -1,6 +1,5 @@
 import { DEFAULT_ROAD_PARAMS, type RoadGenParams } from "./RoadGenerator.js";
 
-export type GeneratorType = "classic" | "flat" | "regional";
 export type GeneratorChoice = "classic" | "island" | "flat" | "regional";
 export type GenerationDescriptor =
   | {
@@ -29,7 +28,6 @@ export const CURRENT_REGIONAL_VERSION = "regional-v13" as const;
 export const REGIONAL_REVISIONS = [
   { version: CURRENT_REGIONAL_VERSION, label: "Current regional" },
 ] as const;
-export const LATEST_REGIONAL_REVISION = CURRENT_REGIONAL_VERSION;
 
 export function isCurrentGeneration(descriptor: GenerationDescriptor): boolean {
   return descriptor.type !== "regional" || descriptor.version === CURRENT_REGIONAL_VERSION;
@@ -152,7 +150,7 @@ export function createDescriptor(
     case "regional":
       return resolveDescriptor({
         type: "regional",
-        version: LATEST_REGIONAL_REVISION,
+        version: CURRENT_REGIONAL_VERSION,
         seed,
         preset: "temperate-v1",
       });

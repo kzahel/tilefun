@@ -1,13 +1,15 @@
 // Native Node wall-time cadence; no world, replica, render or timer substitution.
 import { execFileSync } from "node:child_process";
 import { writeFile } from "node:fs/promises";
+import { TICK_RATE } from "../../src/config/constants.js";
 import { ServerLoop } from "../../src/server/ServerLoop.js";
 
 const results = [];
-for (const hz of [30, 60, 120]) {
+// The authority rate is fixed at TICK_RATE; runtime tick-rate controls were removed.
+for (const hz of [TICK_RATE]) {
   const samples: { atMs: number; dt: number }[] = [];
   const start = performance.now();
-  const loop = new ServerLoop((dt) => samples.push({ atMs: performance.now() - start, dt }), hz);
+  const loop = new ServerLoop((dt) => samples.push({ atMs: performance.now() - start, dt }));
   loop.start();
   try {
     await new Promise((resolve) => setTimeout(resolve, 5000));
@@ -41,7 +43,7 @@ for (const hz of [30, 60, 120]) {
 const report = {
   revision: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
   scope:
-    "Production ServerLoop, native Node timers/monotonic time; 5s per 30/60/120Hz rate; requires fixed physics dt and within one wall-time tick; no browser or world inference",
+    "Production ServerLoop, native Node timers/monotonic time; 5s at the fixed TICK_RATE; requires fixed physics dt and within one wall-time tick; no browser or world inference",
   results,
 };
 const output = process.argv.find((a) => a.startsWith("--output="))?.slice(9);

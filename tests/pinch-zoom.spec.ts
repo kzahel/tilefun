@@ -1,17 +1,5 @@
 import { expect, type Page, test } from "@playwright/test";
-import type { PlayerProfileStore } from "../src/persistence/PlayerProfileStore.js";
-
-type TestGame = {
-  gcSendRequest(message: unknown): Promise<{ meta: { id: string } }>;
-  nextRequestId: number;
-  debugPanel: { zoom: number; setZoom(zoom: number): void };
-  stateView: { playerEntity: { id: number } };
-  touchJoystick: { isActive(): boolean; getMovement(): { dx: number; dy: number } };
-  tapMovement: { target: unknown };
-  touchButtons: { jumpPressed: boolean };
-  profile: { id: string };
-  profileStore: PlayerProfileStore;
-};
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 
 test.use({
   channel: "chromium",
@@ -21,7 +9,7 @@ test.use({
 });
 async function state(page: Page) {
   return page.evaluate(() => {
-    const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     return {
       zoom: g.debugPanel.zoom,
       joystick: g.touchJoystick.isActive(),
@@ -35,8 +23,8 @@ async function start(page: Page, renderer: string) {
   await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async () => {
-    const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
-    const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" };
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+    const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
     const created = await g.gcSendRequest({
       type: "create-world",
       requestId: g.nextRequestId++,
@@ -55,7 +43,7 @@ async function start(page: Page, renderer: string) {
     .poll(() =>
       page.evaluate(
         () =>
-          (document.querySelector("#game") as unknown as { __game: TestGame }).__game.stateView
+          (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game.stateView
             .playerEntity.id,
       ),
     )

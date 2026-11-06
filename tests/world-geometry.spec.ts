@@ -1,5 +1,3 @@
-// @ts-expect-error pngjs has no bundled declarations
-
 import { expect, test } from "@playwright/test";
 import pngjs from "pngjs";
 

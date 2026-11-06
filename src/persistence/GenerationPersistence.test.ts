@@ -4,9 +4,9 @@ import { join } from "node:path";
 import { expect, it } from "vitest";
 import { TerrainId } from "../autotile/TerrainId.js";
 import {
+  CURRENT_REGIONAL_VERSION,
   createDescriptor,
   type GenerationDescriptor,
-  LATEST_REGIONAL_REVISION,
   resolveCreation,
 } from "../generation/GenerationDescriptor.js";
 import { Realm } from "../server/Realm.js";
@@ -84,7 +84,7 @@ it("authority resolves an omitted seed once and a resolved descriptor requires n
     return 17;
   });
   expect(descriptor.seed).toBe(17);
-  expect(descriptor.version).toBe(LATEST_REGIONAL_REVISION);
+  expect(descriptor.version).toBe(CURRENT_REGIONAL_VERSION);
   expect(
     resolveCreation(descriptor, () => {
       calls++;

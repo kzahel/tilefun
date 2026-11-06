@@ -32,7 +32,8 @@ export class NetEmulatedClientTransport implements IClientTransport {
   private closed = false;
   private pendingTimers = new Set<ReturnType<typeof setTimeout>>();
 
-  constructor(private readonly base: IClientTransport) {
+  /** The wrapped transport; exposed read-only for test and instrumentation hooks. */
+  constructor(readonly base: IClientTransport) {
     this.base.onMessage((msg) => this.handleIncoming(msg));
     this.base.onDisconnect?.(() => {
       this.clearPendingTimers();

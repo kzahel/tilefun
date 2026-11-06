@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { DEER_TYPE } from "../src/wildlife/Deer.js";
 
@@ -96,7 +96,7 @@ test("ordinary woodland deer support manual creation and durable deletion on wor
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const deer = () =>
     page.evaluate((type) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       return g.stateView.entities
         .filter(
           (e) =>
@@ -115,13 +115,13 @@ test("ordinary woodland deer support manual creation and durable deletion on wor
   await page.locator("#game").click({ position: { x: 300, y: 170 } });
   await expect.poll(async () => (await deer()).length).toBe(original.length + 1);
   await page.evaluate((id) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     g.transport.send({ type: "edit-delete-entity", entityId: id });
   }, removed.id);
   await expect.poll(async () => (await deer()).length).toBe(original.length);
   await page.getByRole("button", { name: "Exit editor", exact: true }).click();
   await page.evaluate(async () => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     g.loop.stop();
     const host = g.netEmulatedTransport.base as unknown as {
       setHidden(v: boolean): void;

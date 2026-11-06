@@ -184,6 +184,3 @@ export function buildAudioManifest(): { key: string; path: string }[] {
 
   return manifest;
 }
-
-/** @deprecated Use buildAudioManifest() instead. */
-export const buildFootstepManifest = buildAudioManifest;

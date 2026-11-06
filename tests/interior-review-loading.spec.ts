@@ -25,7 +25,7 @@ test("review starts before verification finishes, uses only small sprites, and r
     const create = Document.prototype.createElement;
     Document.prototype.createElement = function (tag: string, options?: ElementCreationOptions) {
       if (tag === "canvas") probe.canvases++;
-      return create.call(this, tag, options);
+      return Reflect.apply(create, this, [tag, options]);
     };
     new MutationObserver(() => {
       const app = document.querySelector<HTMLElement>("#app");

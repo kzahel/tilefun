@@ -1,7 +1,7 @@
 import { Direction } from "../entities/Entity.js";
 import type { ActorPlacement } from "../generation/Generator.js";
 import { buildingDoor } from "./BuildingDoors.js";
-import { type InteriorIdentity, interiorRealmId } from "./GameplayInterior.js";
+import { type InteriorIdentity, interiorRealmId } from "./InteriorIdentity.js";
 import { isLivedIn } from "./LivedInLayouts.js";
 import type { ResidentBehavior, ResidentStop } from "./ResidentBehavior.js";
 

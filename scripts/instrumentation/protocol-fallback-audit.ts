@@ -1,7 +1,12 @@
-import { GameServer } from "../../src/server/GameServer.ts";
-import { encodeClientMessage, encodeServerMessage } from "../../src/shared/binaryCodec.ts";
-import type { ClientMessage, ServerMessage } from "../../src/shared/protocol.ts";
-import type { IServerTransport } from "../../src/transport/Transport.ts";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import { FsWorldRegistry } from "../../src/persistence/FsWorldRegistry.js";
+import { MemoryRecordStore } from "../../src/persistence/MemoryRecordStore.js";
+import { RecordPersistenceStore } from "../../src/persistence/RecordPersistenceStore.js";
+import { GameServer } from "../../src/server/GameServer.js";
+import { encodeClientMessage, encodeServerMessage } from "../../src/shared/binaryCodec.js";
+import type { ClientMessage, ServerMessage } from "../../src/shared/protocol.js";
+import type { IServerTransport } from "../../src/transport/Transport.js";
 
 type SizeStat = { count: number; total: number; min: number; max: number };
 
@@ -92,7 +97,11 @@ const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 async function main(): Promise<void> {
   const t = new HarnessTransport();
-  const s = new GameServer(t);
+  // The audit never calls init(), so the registry is never opened or written.
+  const s = new GameServer(t, {
+    registry: new FsWorldRegistry(join(tmpdir(), "tilefun-protocol-fallback-audit")),
+    createStore: () => new RecordPersistenceStore(new MemoryRecordStore()),
+  });
   s.start();
 
   t.triggerConnect("local");

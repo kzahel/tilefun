@@ -63,6 +63,7 @@ import fierceProfiles from "../wildlife/FierceCreatures.ts?raw";
 import fierceDens from "../wildlife/FierceDens.ts?raw";
 import foodWeb from "../wildlife/FoodWeb.ts?raw";
 import predators from "../wildlife/Predator.ts?raw";
+import predatorHabitat from "../wildlife/PredatorHabitat.ts?raw";
 import predatorMotion from "../wildlife/PredatorMotion.ts?raw";
 import predatorAI from "../wildlife/predatorAI.ts?raw";
 import wildlifeRespawns from "../wildlife/WildlifeRespawns.ts?raw";
@@ -122,6 +123,7 @@ export const scenarioRuntimeSource = {
   clippedTerrain,
   generation,
   predatorAI,
+  predatorHabitat,
   wildlifeRespawns,
   predators,
   predatorMotion,

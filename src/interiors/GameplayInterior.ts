@@ -6,54 +6,28 @@ import type { WorldGenerator } from "../generation/Generator.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
 import { buildLayeredApartmentPlan } from "./ApartmentArchitecture.js";
 import { parseFloorPlan } from "./ApartmentFloorPlan.js";
-import { type BuildingLayout, buildingLayout } from "./BuildingLayouts.js";
+import { buildingLayout } from "./BuildingLayouts.js";
 import { type FurniturePlacement, furnitureDefinition } from "./FurnitureCatalog.js";
 import { compileFurniture } from "./FurnitureLayout.js";
 import { furnitureCollider } from "./FurniturePhysics.js";
 import sources from "./gameplay-furniture-sources.json" with { type: "json" };
 import { indoorResidents } from "./IndoorResidents.js";
+import { exteriorEntrance, type InteriorIdentity, interiorRealmId } from "./InteriorIdentity.js";
 import { dressLivedInMap } from "./LivedInLayouts.js";
+
+export {
+  exteriorEntrance,
+  INTERIOR_ENTRY,
+  type InteriorIdentity,
+  interiorRealmId,
+} from "./InteriorIdentity.js";
 
 export class InvalidInteriorError extends Error {}
 
-export interface InteriorIdentity {
-  readonly version: "interior-v1";
-  readonly parentWorldId: string;
-  readonly featureId: string;
-  readonly buildingType: string;
-  readonly floor: 0;
-  readonly layout?: BuildingLayout;
-  /** Optional explicit connections; absence preserves the original street doorway. */
-  readonly doors?: readonly import("./BuildingDoors.js").BuildingDoor[];
-  readonly returnX: number;
-  readonly returnY: number;
-}
-export const INTERIOR_ENTRY = { wx: 80, wy: 120 };
-export const INTERIOR_EXIT = { wx: 80, wy: 144 };
 export const INTERIOR_DOORWAY = { x: 64, y: 128, width: 32, height: 32 };
 export const INTERIOR_FLOOR = { x: 8, y: 32, width: 144, height: 96 };
 export const FURNITURE_PROP_PREFIX = "prop-interior-furniture:";
 export const INTERIOR_WALL_TYPE = "prop-interior-wall";
-export function exteriorEntrance(
-  prop: Pick<Prop, "type" | "position">,
-): { wx: number; wy: number } | null {
-  const recipe = buildingRecipe(prop.type);
-  if (!recipe && prop.type !== "prop-country-house" && prop.type !== "prop-shed") return null;
-  return {
-    wx: prop.position.wx + (recipe?.entrance.dx ?? 0),
-    wy: prop.position.wy + (recipe?.entrance.dy ?? 8),
-  };
-}
-export function interiorRealmId(parentWorldId: string, featureId: string): string {
-  if (
-    !/^[a-zA-Z0-9-]{1,100}$/.test(parentWorldId) ||
-    !/^(?:settlement:-?\d+:-?\d+:(?:block:\d+:\d+:lot:\d+|shopping:\d+:prop-shopping-v1-(?:1|3|5|7|9|11|13))|farmstead:-?\d+:-?\d+:(?:east|south):(?:house|shed))$/.test(
-      featureId,
-    )
-  )
-    throw new Error("Invalid building identity.");
-  return `interior~${parentWorldId}~${encodeURIComponent(featureId)}~0`;
-}
 export function parseInteriorId(id: string): { parentWorldId: string; featureId: string } | null {
   if (!id.startsWith("interior~")) return null;
   const pieces = id.split("~");

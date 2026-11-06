@@ -8,10 +8,10 @@ import {
   parkingStudy,
 } from "../art/studies/ParkingLotStudy.js";
 import { required } from "../shared/required.js";
-import { ErrorMessage, reviewPath } from "./App.js";
 import DeferredVehiclePage from "./DeferredVehiclePage.js";
 import { PreviewViewport } from "./PreviewViewport.js";
 import { reviewAssets } from "./ReviewAssets.js";
+import { ErrorMessage, reviewPath } from "./WorkshopCommon.js";
 import "./parking.css";
 
 export default function ParkingPage() {

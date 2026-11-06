@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { advancing, type Canvas, type ProbeWindow, session, state } from "./helpers/p2pSession.js";
+import { advancing, type Canvas, session, state } from "./helpers/p2pSession.js";
 
 // Full bundled Chromium exercises native SCTP rather than a mocked channel model.
 test.use({ channel: "chromium" });
@@ -17,10 +17,7 @@ test("large P2P zoom transfers and reconnect baselines remain fragmented and pla
         .conn;
       conn?.on("data", (data) => {
         if (data instanceof ArrayBuffer || ArrayBuffer.isView(data))
-          (window as ProbeWindow).p2pWire.maxLogical = Math.max(
-            (window as ProbeWindow).p2pWire.maxLogical,
-            data.byteLength,
-          );
+          window.p2pWire.maxLogical = Math.max(window.p2pWire.maxLogical, data.byteLength);
       });
     });
     await guest.keyboard.press("1");
@@ -28,9 +25,7 @@ test("large P2P zoom transfers and reconnect baselines remain fragmented and pla
     await expect.poll(async () => (await state(guest)).chunks).toBeGreaterThan(50);
     const limit = (await state(guest)).maxMessageSize;
     expect(limit).toBeGreaterThan(0);
-    await expect
-      .poll(() => guest.evaluate(() => (window as ProbeWindow).p2pWire.maxLogical))
-      .toBeGreaterThan(limit);
+    await expect.poll(() => guest.evaluate(() => window.p2pWire.maxLogical)).toBeGreaterThan(limit);
     await advancing(guest);
     // Close the real native channel, then require fresh authoritative replication.
     await guest.evaluate(() =>
@@ -44,7 +39,7 @@ test("large P2P zoom transfers and reconnect baselines remain fragmented and pla
     await expect.poll(async () => (await state(guest)).chunks).toBeGreaterThan(50);
     await advancing(guest);
     expect((await state(guest)).zoom).toBe(0.25);
-    const wire = await host.evaluate(() => (window as ProbeWindow).p2pWire);
+    const wire = await host.evaluate(() => window.p2pWire);
     expect(wire.sendFailures).toBe(0);
     expect(wire.maxSent).toBeGreaterThan(0);
     expect(wire.maxSent).toBeLessThanOrEqual(limit);

@@ -43,7 +43,7 @@ for (const kind of ["butcher", "condo-bay"]) {
       page.evaluate(() => {
         const game = (
           document.querySelector("#game") as unknown as {
-            __game: import("../src/client/GameClient.js").GameClient;
+            __game: import("../src/client/GameTestHooks.js").GameTestHooks;
           }
         ).__game;
         return {
@@ -133,7 +133,7 @@ for (const kind of ["butcher", "condo-bay"]) {
     await page.waitForFunction(() => {
       const game = (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game;
       const p = game.stateView.playerEntity.position;
@@ -154,7 +154,7 @@ for (const kind of ["butcher", "condo-bay"]) {
     await page.evaluate(() => {
       const game = (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game;
       const probe: {
@@ -191,7 +191,7 @@ for (const kind of ["butcher", "condo-bay"]) {
       (y) =>
         (
           document.querySelector("#game") as unknown as {
-            __game: import("../src/client/GameClient.js").GameClient;
+            __game: import("../src/client/GameTestHooks.js").GameTestHooks;
           }
         ).__game.stateView.playerEntity.position.wy > y,
       door.outside.wy + 64,

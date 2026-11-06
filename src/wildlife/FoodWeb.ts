@@ -704,7 +704,6 @@ export const HUNTING_DIETS = {
     "giant-spider",
   ],
 } as const;
-export type HuntingSpecies = keyof typeof HUNTING_DIETS;
 
 const identities = new Map<string, string>([
   ...FAUNA_PROFILES.map((p) => [faunaType(p.species), p.species] as const),

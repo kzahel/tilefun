@@ -393,3 +393,103 @@ review), the half-removed ghost renderer path, the stale architecture doc,
 orphaned `invalidateAllChunks`/`loadWorld` docs, stripped JSDoc spacing in
 `ClientStateView.ts`, a tautological spec assertion, stale Realm comments and the
 incomplete record; all were repaired.
+
+### Phase 3 record — guardrails
+
+Precondition: `npm run workshop:inbox` still showed 0 approvals and 0 change
+requests on every source-hashed batch.
+
+- TypeScript: `verbatimModuleSyntax` (0 hits), `noImplicitOverride` (2, the
+  Workshop error boundary) and `noImplicitReturns` (7 trailing
+  `return undefined;` on paths that already returned `undefined`) are on in
+  `tsconfig.json` and `worker/tsconfig.json`.
+- `tsconfig.tools.json` typechecks tests, specs, captures, TS scripts and root
+  configs and is part of `npm run typecheck`. It started at 460 errors: 380
+  private `GameClient` reads and ≈80 real drift (B3). Fixed drift includes the
+  `build-art-catalog.ts` readonly rect (output byte-identical), stale
+  `SubgridShape`/`PhysicsCVars`/`ServerLoop`/`ScenarioRecipe`/`Realm.traffic` uses
+  in instrumentation, a crashing `protocol-fallback-audit.ts` (now constructs
+  `GameServer` with current deps; its `join-realm "__default__"` scenario is
+  still stale), impossible comparisons and dead branches for removed vehicle
+  features, and unused `@ts-expect-error`s now that `@types/pngjs` is installed.
+  Four instrumentation scripts for towing/truck beds (retired in `8f405aaf`)
+  could not compile and are deleted; their docs point to history.
+- `GameTestHooks` (`src/client/GameTestHooks.ts`) is the typed `canvas.__game`
+  surface. `GameClient implements` it with those members public (readonly where
+  possible); `exposeGameTestHooks` replaces four `as any` assignments and the
+  runtime value is still the client. 39 specs migrated. Real spec bugs: four
+  specs assigned getter-only `debugPanel.paused`/`zoom` (silently ignored); they
+  now call `setPaused()`/`setZoom()`.
+- Biome: `noImportCycles` (26 → 0: Workshop page helpers moved from `App.tsx` to
+  `WorkshopCommon.tsx`; interiors identity to `InteriorIdentity.ts`;
+  `predatorHabitatAllows` to `PredatorHabitat.ts`, added to
+  `ScenarioRuntimeSource`), `noFloatingPromises` (19 → 0; `main.ts` profile
+  picker failures now reach startup error handling instead of an unhandled
+  rejection; peer `send` promise failures are handled like synchronous throws;
+  menu-open failures from the hamburger/menu buttons now print to the in-game
+  console like the keyboard path instead of reaching the fatal fault overlay),
+  `useExhaustiveSwitchCases` (3 → 0; partial message switches get commented
+  `default: break`), and `noRestrictedImports` boundaries: `shared/` may not
+  import hosts, presentation or feature directories (six allow-listed imports:
+  `PlayerModels`, `EditorTypes`, `CurveTrain`, `RailPath`, `Vehicle`,
+  `VehiclePaint`; `Arrival` moved into `shared/protocol.ts`); Worker-authority and
+  simulation directories (including config, mods, projection, rooms, scenarios
+  and transport) may not import client, rendering, scenes, UI or Workshop
+  (presentation/lab files such as `ScenarioPresentationHost` excluded;
+  `ApartmentFloorPlan.ts` may import only `CanvasInteriorMap`). Patterns are
+  depth-independent (`**/client/**`). Biome does not check inline `import("…")` types, so
+  `shared/localHostProtocol.ts` and inline types in `shared/protocol.ts` escape.
+- Ratchet: `npm run health:ratchet` (`scripts/code-health/ratchet.mjs`, ≈0.4 s)
+  baselines 195 non-test `src` files over 600 lines or with a function above
+  Biome cognitive complexity 25; lines, worst score and over-limit count may not
+  grow, and new files must stay under both limits. Biome's JSON reporter is
+  experimental, so the script exits non-zero if the report shape or message
+  format stops parsing rather than silently reporting zero complexity.
+- knip (`knip.json`, ≈8 s) checks dead files, exports, types, duplicates and
+  unlisted dependencies. Declared the undeclared `esbuild`, `playwright`,
+  `playwright-core` (same range as `@playwright/test`; bump the three together). Removed what it
+  found: 14 unused constants in `config/constants.ts`, `AABB3D` helpers,
+  retired transporter/towing pose helpers, the legacy `artNotesPlugin`/
+  `interiorReviewPlugin` Vite plugins, unused re-exports and types, and the
+  `LATEST_REGIONAL_REVISION`/`buildFootstepManifest` aliases. `npm run check` is
+  now Biome + ratchet + knip, and CI's check step calls it.
+
+Remaining: `StructureGenerator.newIntersectionKeys`, `Overview.countryside` and the
+other phase 2 candidates knip cannot see (structural dead state, duplicated
+helpers); `ApartmentFloorPlan.drawApartmentPlan` could move to its only caller
+(`editor/InteriorCatalog.ts`) to drop the boundary exception; six `shared/`
+allow-list entries; specs that still bypass `GameTestHooks`:
+`fault-reports.spec.ts` (`RequestBroker` privates via a documented `as any`),
+`worker-server.spec.ts` (14 `as any` `__game` reads), `streaming.spec.ts` (2) and
+`tap-movement.spec.ts` (a hand-written shape reading
+`NetEmulatedClientTransport.messageHandler` and `TapMovement.view`/`plane`);
+`GameClient implements GameTestHooks` makes those members public to app code
+too, so app code should not start depending on them; knip's
+`ignoreExportsUsedInFile` hides ≈59 over-exported (not dead) symbols; Biome cognitive-complexity and
+lines-per-function remain ratchets rather than rules.
+
+Validation: `npm run typecheck` (all four projects); `npm run check` (Biome
+warnings only, ratchet, knip); full `npx vitest run` (4,615 passed; the four
+pre-existing failures plus the `SharedPrediction` timing flake); `art:catalog`
+(source-line references moved by the identity/pose edits) and `workshop:manifest`
+(`ScenarioRuntimeSource` now also hashes `PredatorHabitat.ts`) — fingerprints changed only in
+source-hashed batches without human decisions (natural-landscapes 1,008,
+world-geometry 10, character-lab 6, physics-prototype 1); `npm run build`;
+`npm run test:smoke` (22 passed; the three pre-existing failures F3,
+worker-server physics settings and rosso-coupe placement). The four specs whose
+pause/zoom writes now take effect: predator-origins, predator-world and most of
+tap-movement pass; `horse-riding` (mount/speed) and tap-movement "stops at water"
+fail, and the unchanged HEAD versions of both also fail against the same build
+(the tap-movement case now gets further, failing at the later water stop rather
+than the earlier target reset).
+
+Review: an independent Opus 5.5 high review found no blockers. It confirmed the
+moved code is byte-identical, removed exports have no consumers (including
+`/tilefun/src/...` runtime imports in `.mjs` scripts), the `return undefined;` and
+`default:` arms do not change behavior, `canvas.__game` is still the client, and
+the boundary rules fire as intended. It asked for browser evidence on the four
+pause/zoom specs (recorded above), a fail-loud ratchet parser and Windows path
+normalization (done), an honest list of specs that still bypass the hooks, the
+menu-error behavior note, wider and depth-independent boundary patterns (done),
+and documentation of knip's in-file export setting and the Playwright version
+coupling; all were repaired or recorded.

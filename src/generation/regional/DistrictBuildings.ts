@@ -25,4 +25,5 @@ export function districtBuilding(
       },
     };
   }
+  return undefined;
 }

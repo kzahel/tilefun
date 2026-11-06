@@ -1,9 +1,8 @@
 import { appendFile, mkdir, readFile, stat } from "node:fs/promises";
 import type { IncomingMessage, ServerResponse } from "node:http";
 import { join } from "node:path";
-import type { Plugin } from "vite";
 import { parseReviewFeedback, type ReviewFeedback } from "../interiors/review/ReviewFeedback.js";
-import { HttpError, jsonBody, jsonResponse, WorkshopAuth } from "./workshopAuth.js";
+import { HttpError, jsonBody, jsonResponse } from "./workshopAuth.js";
 
 /** Same durable store for development, preview, standalone and Workshop adapters. */
 export class InteriorReviewStore {
@@ -75,37 +74,5 @@ export function interiorReviewHandler(store = new InteriorReviewStore()) {
       );
     }
     return true;
-  };
-}
-/** Legacy plugin remains protected even when used without the Workshop plugin. */
-export function interiorReviewPlugin(
-  directory = process.env.INTERIOR_REVIEW_DIR ?? "data/interior-review",
-): Plugin {
-  const handle = interiorReviewHandler(new InteriorReviewStore(directory)),
-    auth = new WorkshopAuth();
-  const middleware = (req: IncomingMessage, res: ServerResponse, next: () => void) => {
-    if (req.url?.split("?")[0] !== "/tilefun/api/interior-review") {
-      next();
-      return;
-    }
-    void auth
-      .require(req, req.method !== "GET")
-      .then(() => handle(req, res))
-      .catch((error) =>
-        jsonResponse(
-          res,
-          { error: error instanceof Error ? error.message : "Unauthorized" },
-          error instanceof HttpError ? error.status : 500,
-        ),
-      );
-  };
-  return {
-    name: "interior-review",
-    configureServer(server) {
-      server.middlewares.use(middleware);
-    },
-    configurePreviewServer(server) {
-      server.middlewares.use(middleware);
-    },
   };
 }

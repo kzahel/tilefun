@@ -108,4 +108,5 @@ export function curvedCityLine(world: RegionalWorld, line: RailLine): RailLine |
     };
     return { ...line, id: `${line.id}:curved-v1`, bounds, y: stations[0].y, stations, path };
   }
+  return undefined;
 }

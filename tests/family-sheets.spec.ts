@@ -105,7 +105,7 @@ test("all contact sheets fit desktop, tablet and 390px phone with the complete p
         .getByRole("navigation", { name: "Art families" })
         .getByRole("link", { name: family.name, exact: true });
       await tab.click();
-      await ready(page, counts[family.id]);
+      await ready(page, required(counts[family.id], `Missing count for ${family.id}`));
       await expect(tab).toHaveAttribute("aria-current", "page");
       await expect(
         page
@@ -426,7 +426,7 @@ test("tree bases explain their counterparts and dense forests preserve the appro
       [2512, 1600, 128, 112],
       [2512, 1712, 128, 80],
       [2512, 1792, 112, 80],
-    ]) {
+    ] as const) {
       const canvas = document.createElement("canvas");
       canvas.width = 256;
       canvas.height = 192 + height;
@@ -795,13 +795,7 @@ for (const invalid of ["zero", "size"] as const) {
     const family = required(changed.families.find((item) => item.id === "animated-doors"));
     const example = required(family.examples[0]);
     const animation = required(example.animation);
-    if (invalid === "length") animation.frameDurationsMs.pop();
-    if (invalid === "empty") animation.frameDurationsMs = [];
     if (invalid === "zero") animation.frameDurationsMs[0] = 0;
-    if (invalid === "negative") animation.frameDurationsMs[0] = -1;
-    if (invalid === "fractional") animation.frameDurationsMs[0] = 1.5;
-    if (invalid === "non-finite") animation.frameDurationsMs[0] = Number.POSITIVE_INFINITY;
-    if (invalid === "loop") animation.loop = "yes" as unknown as boolean;
     if (invalid === "size") required(example.variants[1]).sprite.size[0] += 1;
     reviseCatalog(changed);
     await page.route("**/data/family-sheets.json", (route) => route.fulfill({ json: changed }));
@@ -868,13 +862,17 @@ test("plant variants preserve native padding and exact piece discussion targets"
     ]),
   });
   const next = required(member.variants.find((v) => v.id !== variant.id));
-  await page.getByRole("combobox", { name: member.variantLabel }).selectOption(next.id);
+  await page
+    .getByRole("combobox", { name: required(member.variantLabel, "Missing variant label") })
+    .selectOption(next.id);
   await expect.poll(() => pixels(canvas)).not.toBe(reference);
   const url = page.url();
   await page.reload();
   await ready(page, 7);
   await expect(page).toHaveURL(url);
-  await expect(page.getByRole("combobox", { name: member.variantLabel })).toHaveValue(next.id);
+  await expect(
+    page.getByRole("combobox", { name: required(member.variantLabel, "Missing variant label") }),
+  ).toHaveValue(next.id);
 });
 
 test("bed blankets remain components and assembled examples follow shadow selection", async ({
@@ -938,7 +936,9 @@ test("fence sheets distinguish required joins, open sections and uncertain garde
   await page.getByRole("button", { name: `${gate.number}. ${gate.label}`, exact: true }).click();
   await expect(page.locator(".family-detail-copy")).toContainText(/standalone.*unresolved/i);
   const warm = required(gate.variants.find((v) => v.recordIds.includes("E05-24")));
-  await page.getByRole("combobox", { name: gate.variantLabel }).selectOption(warm.id);
+  await page
+    .getByRole("combobox", { name: required(gate.variantLabel, "Missing variant label") })
+    .selectOption(warm.id);
   const whole = page.locator(".family-sheet-discussion");
   await whole.getByText("Comment on whole sheet", { exact: true }).click();
   await whole.getByRole("textbox").fill("Discuss the fence set as a whole");
@@ -975,7 +975,9 @@ for (const packet of broadPackets) {
       .getByRole("button", { name: `${varied.number}. ${varied.label}`, exact: true })
       .click();
     const last = required(varied.variants.at(-1));
-    await page.getByRole("combobox", { name: varied.variantLabel }).selectOption(last.id);
+    await page
+      .getByRole("combobox", { name: required(varied.variantLabel, "Missing variant label") })
+      .selectOption(last.id);
     const note = page.locator(".family-piece-discussion");
     await note.getByText("Discuss this piece", { exact: true }).click();
     await note.getByRole("textbox").fill("A correction for this selected appearance");

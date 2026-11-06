@@ -1,0 +1,23 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": [
+    "src/workshop/build-manifest.ts",
+    "src/**/*.worker.ts",
+    "scripts/**/*.{ts,mjs,js}",
+    "tests/**/*.ts",
+    "tests-*/**/*.ts",
+    "captures/**/*.ts",
+    "desktop/**/*.{ts,mjs,js,cjs}"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx}",
+    "scripts/**/*.{ts,mjs,js}",
+    "tests/**/*.ts",
+    "tests-*/**/*.ts",
+    "captures/**/*.ts"
+  ],
+  "ignoreUnresolved": ["^/tilefun/", "^/src/"],
+  "ignoreBinaries": ["wsl"],
+  "ignoreExportsUsedInFile": true,
+  "ignoreDependencies": ["@cloudflare/workers-types"]
+}

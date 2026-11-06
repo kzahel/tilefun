@@ -144,7 +144,7 @@ test("archived dense review hands off to the current station start with a moving
     page.evaluate(() => {
       const g = (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game;
       return g.stateView.entities
@@ -186,7 +186,7 @@ test("dense building edits and actor tombstones survive saved-world inspection a
       page.evaluate((crossing) => {
         const g = (
           document.querySelector("#game") as unknown as {
-            __game: import("../src/client/GameClient.js").GameClient;
+            __game: import("../src/client/GameTestHooks.js").GameTestHooks;
           }
         ).__game;
         return (
@@ -202,7 +202,7 @@ test("dense building edits and actor tombstones survive saved-world inspection a
   const changed = await page.evaluate(async (crossing) => {
     const g = (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game;
     const building = g.stateView.props.find((p) => p.type.startsWith("prop-city-dense-v1-"));
@@ -260,7 +260,7 @@ test("dense building edits and actor tombstones survive saved-world inspection a
       page.evaluate((changed) => {
         const g = (
           document.querySelector("#game") as unknown as {
-            __game: import("../src/client/GameClient.js").GameClient;
+            __game: import("../src/client/GameTestHooks.js").GameTestHooks;
           }
         ).__game;
         const lamp = g.stateView.props.find((p) => p.proceduralId === changed.lampId);

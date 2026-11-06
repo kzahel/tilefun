@@ -54,7 +54,6 @@ const session = await ScenarioSession.create({
   generation: FLAT_SCENARIO,
   player,
   props: [backWall, sideWall],
-  trafficPopulation: false,
 });
 try {
   await session.command({
@@ -65,7 +64,7 @@ try {
   for (const entity of [...session.realm.entityManager.entities])
     if (entity.id !== session.player.player.id)
       session.realm.entityManager.remove(entity.id, false);
-  const traffic = session.realm.traffic;
+  const traffic = session.realm.vehicleRegistry;
   assert.ok(traffic);
   traffic.canSpawn = () => false;
   const dump = traffic.place("dump-truck", 0, 0, Direction.Right);

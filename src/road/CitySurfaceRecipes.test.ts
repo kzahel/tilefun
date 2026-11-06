@@ -1,6 +1,5 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
-// @ts-expect-error pngjs has no bundled declarations
 import { PNG } from "pngjs";
 import { describe, expect, it } from "vitest";
 import { required } from "../shared/required.js";

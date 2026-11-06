@@ -1,17 +1,14 @@
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
 import { aabbOverlapsPropWalls, aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
-import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import { descriptorKey } from "../generation/GenerationDescriptor.js";
 import { INTERIOR_DOORWAY, INTERIOR_FLOOR } from "../interiors/GameplayInterior.js";
+import type { Arrival } from "../shared/protocol.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { Realm } from "./Realm.js";
 
-export interface Arrival {
-  x: number;
-  y: number;
-  generation: GenerationDescriptor;
-}
+export type { Arrival } from "../shared/protocol.js";
+
 /** Bounded terrain + realized prop check before a player leaves the old realm. */
 export async function safeArrival(
   realm: Realm,

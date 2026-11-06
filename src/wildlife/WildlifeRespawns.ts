@@ -14,7 +14,7 @@ import { gap } from "../shared/gap.js";
 import { required } from "../shared/required.js";
 import { faunaHabitatAllows } from "./faunaAI.js";
 import { syncFaunaWater } from "./faunaInteractions.js";
-import { predatorHabitatAllows } from "./predatorAI.js";
+import { predatorHabitatAllows } from "./PredatorHabitat.js";
 import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
 export const WILDLIFE_RESPAWN_SCOPE = "wildlife-respawns";

@@ -9,7 +9,7 @@ import {
   INTERIOR_EXIT,
   type InteriorIdentity,
   interiorRealmId,
-} from "./GameplayInterior.js";
+} from "./InteriorIdentity.js";
 
 export interface BuildingDoor {
   id: string;

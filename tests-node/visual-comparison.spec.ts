@@ -1,6 +1,5 @@
 import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
-// @ts-expect-error pngjs has no bundled declarations
 import pngjs from "pngjs";
 
 const visualOptions = { threshold: 0.01, maxDiffPixels: 0 };
@@ -11,11 +10,11 @@ test("visual comparison tolerates color rounding but rejects missing geometry an
     readFileSync(new URL("../tests/fixtures/interior-approved/profile-arch.png", import.meta.url)),
   );
   // A one-channel rounding difference is harmless, even under a zero-pixel budget.
-  image.data[0] += 1;
+  image.data[0] = (image.data[0] ?? 0) + 1;
   expect(PNG.sync.write(image)).toMatchSnapshot("profile-arch.png", visualOptions);
   // A large color change inside a flat region must still count as a mismatch.
   const offset = (10 * image.width + 10) * 4;
-  const original = image.data[offset];
+  const original = image.data[offset] ?? 0;
   image.data[offset] = 255;
   expect(PNG.sync.write(image)).not.toMatchSnapshot("profile-arch.png", visualOptions);
   image.data[offset] = original;

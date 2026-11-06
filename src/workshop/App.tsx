@@ -19,19 +19,20 @@ import {
   useNavigate,
   useParams,
 } from "react-router";
-import { isCityReviewRun } from "../art/CityReviewRuns.js";
 import { workshopJson } from "./AuthClient.js";
 import { flushLegacyOutboxes, legacyPendingCount } from "./LegacyOutboxes.js";
 import { primaryScene, reviewUnits, scenePath } from "./SceneReview.js";
 import { reviewToolOwnsBatch, WORKSHOP_TOOLS } from "./ToolRegistry.js";
+import {
+  candidateLabel,
+  ErrorMessage,
+  LegacyLink,
+  legacyDestination,
+  reviewPath,
+  threadPath,
+} from "./WorkshopCommon.js";
 import { useInbox, useManifest, useSession } from "./WorkshopQueries.js";
-import type {
-  CandidateSummary,
-  WorkshopActivity,
-  WorkshopManifest,
-  WorkshopSession,
-  WorkshopThread,
-} from "./WorkshopTypes.js";
+import type { WorkshopActivity, WorkshopSession, WorkshopThread } from "./WorkshopTypes.js";
 import { useWorkspace, workshopStorageFailed } from "./WorkspaceStore.js";
 
 const FaultReportsPage = lazy(() => import("./FaultReportsPage.js"));
@@ -48,26 +49,6 @@ const PatternPage = lazy(() => import("./PatternPage.js"));
 const ParkingPage = lazy(() => import("./ParkingPage.js"));
 const OutdoorPage = lazy(() => import("./OutdoorPage.js"));
 const ScenePage = lazy(() => import("./ScenePage.js"));
-export const reviewPath = (id: string) => `/review/${encodeURIComponent(id)}`;
-export const threadPath = (id: string) => `/thread/${encodeURIComponent(id)}`;
-export function candidateLabel(c: CandidateSummary) {
-  return c.state === "changes"
-    ? "Needs changes"
-    : c.state === "changed"
-      ? "Changed · review again"
-      : c.state === "approved"
-        ? "Approved"
-        : c.state === "excluded"
-          ? "Compiler exclusion"
-          : "Unchecked";
-}
-export function ErrorMessage({ error }: { error: unknown }) {
-  return error ? (
-    <p className="notice error" role="alert">
-      {error instanceof Error ? error.message : String(error)}
-    </p>
-  ) : null;
-}
 export function AuthGate({ children }: { children: ReactNode }) {
   const session = useSession(),
     location = useLocation();
@@ -93,11 +74,11 @@ export function AuthGate({ children }: { children: ReactNode }) {
   return children;
 }
 class WorkspaceBoundary extends Component<{ children: ReactNode }, { error: string }> {
-  state = { error: "" };
+  override state = { error: "" };
   static getDerivedStateFromError(error: Error) {
     return { error: error.message };
   }
-  render() {
+  override render() {
     return this.state.error ? (
       <section className="empty">
         <h1>This view could not load.</h1>
@@ -473,7 +454,7 @@ function LoginPage() {
       if (!response.ok) throw new Error(value.error ?? "Login failed");
       queryClient.setQueryData<WorkshopSession>(["session"], value);
       setPassword("");
-      navigate(returnTo, { replace: true });
+      void navigate(returnTo, { replace: true });
     } catch (error) {
       setError(error instanceof Error ? error.message : String(error));
     } finally {
@@ -1033,9 +1014,12 @@ function ReviewTool({ toolId, query }: { toolId: string; query: string }) {
         (p.get("scene") && c.review?.scene === p.get("scene") && p.get("scene") !== "single"),
     );
     if (target)
-      navigate(primaryScene(target) ? scenePath(target) : reviewPath(target.id) + "?show=all", {
-        replace: true,
-      });
+      void navigate(
+        primaryScene(target) ? scenePath(target) : reviewPath(target.id) + "?show=all",
+        {
+          replace: true,
+        },
+      );
   }, [query, candidates, navigate]);
   if (!inbox.data || !manifest.data) return <ErrorMessage error={inbox.error ?? manifest.error} />;
   const tool = WORKSHOP_TOOLS.find((t) => t.id === toolId);
@@ -1068,63 +1052,6 @@ function ReviewTool({ toolId, query }: { toolId: string; query: string }) {
     </>
   );
 }
-export function legacyDestination(url: string, manifest?: WorkshopManifest) {
-  const parsed = new URL(url, `${location.origin}/tilefun/`);
-  if (parsed.origin !== location.origin || !parsed.pathname.startsWith("/tilefun/")) return null;
-  if (parsed.pathname.endsWith("workshop.html") && parsed.hash.startsWith("#/"))
-    return parsed.hash.slice(1);
-  const candidate = manifest?.candidates.find(
-    (c) =>
-      new URL(c.url, location.origin).pathname === parsed.pathname &&
-      (parsed.searchParams.get("case") === c.review?.caseId ||
-        parsed.searchParams.get("case") === c.id ||
-        (c.review?.scene === "single" &&
-          parsed.searchParams.get("prefab") === c.review.prefabIds[0]) ||
-        (["mixed", "residential", "hotel"].includes(c.review?.scene ?? "") &&
-          parsed.searchParams.get("scene") === c.review?.scene)),
-  );
-  if (candidate)
-    return primaryScene(candidate) ? scenePath(candidate) : reviewPath(candidate.id) + "?show=all";
-  const tool = parsed.pathname.endsWith("building-lab.html")
-    ? WORKSHOP_TOOLS.find(
-        (t) =>
-          t.id ===
-          (["surfaces", "road-geometry"].includes(parsed.searchParams.get("run") ?? "")
-            ? "roads"
-            : ["districts", "commercial"].includes(parsed.searchParams.get("run") ?? "") ||
-                isCityReviewRun(parsed.searchParams.get("run") ?? "")
-              ? "districts"
-              : parsed.searchParams.get("run") === "streets"
-                ? "streets"
-                : "buildings"),
-      )
-    : WORKSHOP_TOOLS.find(
-        (t) => new URL(t.url, `${location.origin}/tilefun/`).pathname === parsed.pathname,
-      );
-  if (parsed.pathname.endsWith("tools.html")) return "/tools";
-  return tool && tool.mode !== "link" ? `/tool/${tool.id}${parsed.search}` : null;
-}
-export function LegacyLink({
-  url,
-  children,
-  className,
-}: {
-  url: string;
-  children: ReactNode;
-  className?: string;
-}) {
-  const manifest = useManifest(),
-    destination = legacyDestination(url, manifest.data);
-  return destination ? (
-    <Link className={className} to={destination}>
-      {children}
-    </Link>
-  ) : (
-    <a className={className} href={url}>
-      {children}
-    </a>
-  );
-}
 function ToolAdapter({ toolId, query }: { toolId: string; query: string }) {
   const tool = WORKSHOP_TOOLS.find((t) => t.id === toolId),
     navigate = useNavigate(),
@@ -1149,7 +1076,7 @@ function ToolAdapter({ toolId, query }: { toolId: string; query: string }) {
       const destination = legacyDestination(a.href, manifest.data);
       if (destination) {
         event.preventDefault();
-        navigate(destination);
+        void navigate(destination);
       } else if (a.href.startsWith(location.origin + "/tilefun/")) {
         event.preventDefault();
         location.assign(a.href);

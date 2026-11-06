@@ -105,6 +105,7 @@ export class ThreatWork {
         continue;
       if (dietFor(creatureSpecies(h) ?? "").has(species)) return { point: h.position, actor: h };
     }
+    return undefined;
   }
   private defend(a: Entity, dt: number, c: WorkContext, planning?: AiPlanningScheduler) {
     const t = a.animalWork,

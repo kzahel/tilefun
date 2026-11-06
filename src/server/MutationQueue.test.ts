@@ -49,7 +49,7 @@ it("orders edits behind readiness, bounds queued work, and drains rejected comma
     ),
   ).rejects.toThrow("read failed");
   await queue.drain();
-  queue.run(
+  const last = queue.run(
     true,
     async () => {},
     () => {
@@ -57,4 +57,5 @@ it("orders edits behind readiness, bounds queued work, and drains rejected comma
     },
   );
   expect(applied.at(-1)).toBe(64);
+  await last;
 });

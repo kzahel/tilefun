@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { PREDATOR_PROFILES, predatorType } from "../src/wildlife/Predator.js";
 
@@ -30,7 +30,7 @@ for (const p of PREDATOR_PROFILES.filter((p) =>
     await expect(game).toHaveAttribute("data-ready", "true", { timeout: 15000 });
     const animals = () =>
       page.evaluate((type) => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         return g.stateView.entities
           .filter((e) => e.type === type)
           .map((e) => ({ id: e.id, x: e.position.wx, y: e.position.wy }));
@@ -39,13 +39,13 @@ for (const p of PREDATOR_PROFILES.filter((p) =>
     // This case checks editing and durable deletion. Keep food-web hunts from
     // eating/replacing the exact actor while the placement UI is being exercised.
     await page.evaluate(() => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-      g.debugPanel.paused = true;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+      g.debugPanel.setPaused(true);
       g.transport.send({ type: "set-debug", paused: true });
     });
     if (p.expansion?.habitat === "deep")
       await page.evaluate(async () => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         // A dry-bank arrival places lagoon homes farther away than a land clearing.
         g.debugPanel.setZoom(0.3);
         await new Promise(requestAnimationFrame);
@@ -60,7 +60,7 @@ for (const p of PREDATOR_PROFILES.filter((p) =>
     // Northern fierce habitats can put the home point behind the expanded picker.
     await page.getByRole("button", { name: "Minimize editor tools", exact: true }).click();
     const point = await page.evaluate((home) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       const camera = Reflect.get(g, "camera") as {
         worldToScreen(x: number, y: number): { sx: number; sy: number };
       };
@@ -69,13 +69,13 @@ for (const p of PREDATOR_PROFILES.filter((p) =>
     await game.click({ position: { x: point.sx, y: point.sy } });
     await expect.poll(async () => (await animals()).length).toBe(original.length + 1);
     await page.evaluate((id) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       g.transport.send({ type: "edit-delete-entity", entityId: id });
     }, removed.id);
     await expect.poll(async () => (await animals()).length).toBe(original.length);
     await page.getByRole("button", { name: "Exit editor", exact: true }).click();
     await page.evaluate(async () => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       g.loop.stop();
       const host = g.netEmulatedTransport.base as unknown as {
         setHidden(v: boolean): void;
@@ -89,8 +89,8 @@ for (const p of PREDATOR_PROFILES.filter((p) =>
     await page.goto("/tilefun/?nogamepad");
     await expect(game).toHaveAttribute("data-ready", "true", { timeout: 15000 });
     await page.evaluate(() => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-      g.debugPanel.paused = true;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+      g.debugPanel.setPaused(true);
       g.transport.send({ type: "set-debug", paused: true });
     });
     await expect.poll(async () => (await animals()).length).toBe(original.length);

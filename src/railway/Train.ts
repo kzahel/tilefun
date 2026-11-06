@@ -3,7 +3,6 @@ import type { EntityDef } from "../entities/EntityDefs.js";
 import { required } from "../shared/required.js";
 import bank from "./rail-local-v1.json" with { type: "json" };
 export const TRAIN_TYPE = "train-local-v1";
-export const TRAIN_LENGTH = bank.width;
 export const TRAIN_DEF: EntityDef = {
   sprite: {
     sheetKey: TRAIN_TYPE,

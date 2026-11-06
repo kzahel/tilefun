@@ -115,6 +115,8 @@ export class ScenarioWorkerHost {
               await session.close();
               this.session = undefined;
               break;
+            default:
+              request satisfies never;
           }
         }
         return this.response(request.id, this.session?.frames() ?? []);

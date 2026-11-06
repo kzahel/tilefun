@@ -77,7 +77,10 @@ async function probe(page: Page) {
   await page.addInitScript(() => {
     // Observe real HUD triangle submissions, without replacing the render path.
     const stroke = CanvasRenderingContext2D.prototype.stroke;
-    CanvasRenderingContext2D.prototype.stroke = function (...args: Parameters<typeof stroke>) {
+    CanvasRenderingContext2D.prototype.stroke = function (
+      this: CanvasRenderingContext2D,
+      ...args: [] | [Path2D]
+    ) {
       if (
         this.canvas.id === "game" &&
         this.lineWidth === 3 &&
@@ -92,7 +95,7 @@ async function probe(page: Page) {
           time: performance.now(),
         };
       }
-      return stroke.apply(this, args);
+      Reflect.apply(stroke, this, args);
     };
   });
 }

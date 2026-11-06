@@ -10,6 +10,7 @@ import type { TapMovement } from "../src/input/TapMovement.js";
 import { exteriorDoors } from "../src/interiors/BuildingDoors.js";
 import type { PlayerProfileStore } from "../src/persistence/PlayerProfileStore.js";
 import type { Camera } from "../src/rendering/Camera.js";
+import type { DebugPanel } from "../src/rendering/DebugPanel.js";
 import { projectWorld } from "../src/rendering/Projection.js";
 import type { RenderView } from "../src/rendering/RenderFrame.js";
 import type { ClientMessage, ServerMessage } from "../src/shared/protocol.js";
@@ -22,7 +23,7 @@ type TestGame = {
   tapMovement: Pick<TapMovement, "target" | "resolve"> & { view: RenderView; plane: number };
   camera: Camera;
   touchButtons: { enabled: boolean };
-  debugPanel: { zoom: number; paused: boolean };
+  debugPanel: Pick<DebugPanel, "zoom" | "setPaused" | "setZoom">;
   stateView: {
     invincibilityTimer: number;
     playerEntity: Entity;
@@ -321,7 +322,7 @@ for (const renderer of ["canvas", "gpu"]) {
     // interaction subject, so an unrelated animal cannot claim the water tap.
     await page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
-      g.debugPanel.paused = true;
+      g.debugPanel.setPaused(true);
       g.transport.send({ type: "set-debug", paused: true });
       for (const e of g.stateView.entities)
         if (e.type === "chicken") g.transport.send({ type: "edit-delete-entity", entityId: e.id });
@@ -339,7 +340,7 @@ for (const renderer of ["canvas", "gpu"]) {
       const g = (c as unknown as { __game: TestGame }).__game;
       const p = g.stateView.playerEntity.position;
       g.transport.send({ type: "edit-spawn", entityType: "chicken", wx: p.wx - 35, wy: p.wy });
-      g.debugPanel.paused = true;
+      g.debugPanel.setPaused(true);
       for (let ty = -3; ty <= 3; ty++)
         g.transport.send({
           type: "edit-terrain-tile",
@@ -561,7 +562,7 @@ test("gesture rejection, claimed Jump, resize targeting and menu cancellation us
   expect((await state(page)).target).toBeNull();
   await page.evaluate(() => {
     const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
-    g.debugPanel.zoom = 1.3;
+    g.debugPanel.setZoom(1.3);
   });
   await page.setViewportSize({ width: 800, height: 600 });
   await tapOffset(page, 45);

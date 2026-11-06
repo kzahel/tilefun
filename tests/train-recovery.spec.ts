@@ -1,6 +1,6 @@
 import { writeFile } from "node:fs/promises";
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { cityTrainRecipe } from "../src/scenarios/CityTrainRecipe.js";
 
 type TrainDisplaySample = {
@@ -25,7 +25,7 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   await page.goto("/tilefun/?nogamepad&renderer=gpu&meshes");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async (recipe) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const created = await g.gcSendRequest({
       type: "create-world",
       requestId: g.nextRequestId++,
@@ -46,7 +46,7 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   }, recipe);
   const state = () =>
     page.evaluate(() => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       const p = g.stateView.serverPlayerEntity;
       const cars = g.stateView.serverEntities.filter(
         (e) => e.type.startsWith("train-carriage-v1:") || e.type.startsWith("train-curve-proof-v1"),
@@ -177,7 +177,7 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   await page.keyboard.down("Space");
   const queued = () =>
     page.evaluate(() => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       return (
         g.stateView.physicsState?.bodies.find((b) => b.id === g.stateView.serverPlayerEntity.id)
           ?.jumpQueued ?? false

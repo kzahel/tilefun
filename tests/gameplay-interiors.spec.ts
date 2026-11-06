@@ -41,7 +41,7 @@ for (const kind of ["apartment", "shop"] as const)
           () =>
             (
               document.querySelector("#game") as unknown as {
-                __game: import("../src/client/GameClient.js").GameClient;
+                __game: import("../src/client/GameTestHooks.js").GameTestHooks;
               }
             ).__game.stateView.props.filter((p) => p.type.startsWith("prop-interior-furniture:"))
               .length,
@@ -55,7 +55,7 @@ for (const kind of ["apartment", "shop"] as const)
           () =>
             (
               document.querySelector("#game") as unknown as {
-                __game: import("../src/client/GameClient.js").GameClient;
+                __game: import("../src/client/GameTestHooks.js").GameTestHooks;
               }
             ).__game.stateView.playerEntity,
         );
@@ -75,7 +75,7 @@ for (const kind of ["apartment", "shop"] as const)
       () =>
         (
           document.querySelector("#game") as unknown as {
-            __game: import("../src/client/GameClient.js").GameClient;
+            __game: import("../src/client/GameTestHooks.js").GameTestHooks;
           }
         ).__game.stateView.playerEntity.position,
     );
@@ -89,7 +89,7 @@ for (const kind of ["apartment", "shop"] as const)
         page.evaluate(() => {
           const game = (
             document.querySelector("#game") as unknown as {
-              __game: import("../src/client/GameClient.js").GameClient;
+              __game: import("../src/client/GameTestHooks.js").GameTestHooks;
             }
           ).__game;
           return game.stateView.props.filter((p) => p.type.startsWith("prop-interior-furniture:"))
@@ -99,7 +99,7 @@ for (const kind of ["apartment", "shop"] as const)
       await page.evaluate(() => {
         const game = (
           document.querySelector("#game") as unknown as {
-            __game: import("../src/client/GameClient.js").GameClient;
+            __game: import("../src/client/GameTestHooks.js").GameTestHooks;
           }
         ).__game;
         const bed = game.stateView.props.find((p) => p.proceduralId === "fixture:bed");
@@ -129,7 +129,7 @@ for (const kind of ["apartment", "shop"] as const)
             () =>
               (
                 document.querySelector("#game") as unknown as {
-                  __game: import("../src/client/GameClient.js").GameClient;
+                  __game: import("../src/client/GameTestHooks.js").GameTestHooks;
                 }
               ).__game.stateView.props.find((p) => p.proceduralId === "fixture:bedside")?.position
                 .wx,

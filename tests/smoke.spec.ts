@@ -207,7 +207,7 @@ test.describe("gem HUD", () => {
     await page.evaluate(async () => {
       const g = (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game;
       const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
@@ -247,7 +247,7 @@ test.describe("gem HUD", () => {
     await page.evaluate(() => {
       const g = (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game;
       const p = g.stateView.playerEntity.position;

@@ -1,5 +1,4 @@
 export const MODERN_INTERIORS_SHEET_KEY = "modern-interiors";
-export const MODERN_INTERIORS_ATLAS_PREFIX = "interior:";
 
 export type ModernInteriorsSourceKind =
   | "single"

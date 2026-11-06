@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import type { ActorRecord } from "../src/persistence/ActorRecords.js";
 import { ROBIN_TYPE } from "../src/wildlife/Robin.js";
@@ -94,7 +94,7 @@ test("robin ball contact dispatches client chirps through the live Worker", asyn
   await page.getByTestId("main-menu-toggle").click();
   await page.getByRole("button", { name: "Edit", exact: true }).click();
   await page.evaluate((type) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const p = g.stateView.playerEntity.position;
     g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + 100, wy: p.wy });
     const canvas = document.querySelector("#game") as HTMLCanvasElement;
@@ -109,7 +109,7 @@ test("robin ball contact dispatches client chirps through the live Worker", asyn
   }, ROBIN_TYPE);
   const robin = () =>
     page.evaluate((type) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       const f = g.stateView.entities.find((e) => e.type === type);
       return { exists: !!f, state: f?.wanderAI?.state, z: f?.wz ?? 0, clip: f?.sprite?.clip };
     }, ROBIN_TYPE);
@@ -122,7 +122,8 @@ test("robin ball contact dispatches client chirps through the live Worker", asyn
         const state = (await robin()).state;
         if (state !== "scared")
           await page.evaluate((type) => {
-            const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+            const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+              .__game;
             const p = g.stateView.playerEntity.position,
               f = g.stateView.entities.find((e) => e.type === type);
             if (f)
@@ -157,7 +158,7 @@ test("ordinary grove robins support manual creation and durable deletion on worl
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const robins = () =>
     page.evaluate((type) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       return g.stateView.entities
         .filter(
           (e) =>
@@ -189,7 +190,7 @@ test("ordinary grove robins support manual creation and durable deletion on worl
   const manual = beforeDeletion.filter((r) => !r.proceduralId);
   expect(manual).toHaveLength(1);
   await page.evaluate((id) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     g.transport.send({ type: "edit-delete-entity", entityId: id });
   }, removed.id);
   await expect.poll(async () => (await robins()).some((r) => r.id === removed.id)).toBe(false);

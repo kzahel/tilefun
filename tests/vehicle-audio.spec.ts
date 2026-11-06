@@ -1,5 +1,5 @@
 import { expect, type Page, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 
 test.use({ channel: "chromium" });
@@ -57,7 +57,7 @@ test("Worker driving suppresses footsteps, plays a real engine and silences it a
   await page.getByTestId("main-menu-toggle").click();
   await page.getByRole("button", { name: "Edit", exact: true }).click();
   await page.evaluate(() => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     for (const e of g.stateView.entities)
       if (e.type !== "player") g.transport.send({ type: "edit-delete-entity", entityId: e.id });
     const p = g.stateView.playerEntity.position;
@@ -86,7 +86,7 @@ test("Worker driving suppresses footsteps, plays a real engine and silences it a
   await page.getByRole("button", { name: /^Drive car/ }).click();
   await expect.poll(() => voices(page)).toBe(1);
   const before = await page.evaluate(() => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     return { x: g.stateView.playerEntity.position.wx, steps: window.__carAudio.steps };
   });
   await page.keyboard.down("d");
@@ -94,7 +94,8 @@ test("Worker driving suppresses footsteps, plays a real engine and silences it a
     await expect
       .poll(() =>
         page.evaluate(() => {
-          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+            .__game;
           return g.stateView.playerEntity.position.wx;
         }),
       )

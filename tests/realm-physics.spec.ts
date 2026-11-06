@@ -1,13 +1,13 @@
 import { expect, type Page, test } from "@playwright/test";
 import type { RemoteStateView } from "../src/client/ClientStateView.js";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { session } from "./helpers/p2pSession.js";
 
 test.use({ channel: "chromium" });
 const state = (page: Page) =>
   page.evaluate(() => {
-    const game = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const game = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const view = game.stateView as RemoteStateView;
     return {
       physics: !!view.physicsState,
@@ -44,7 +44,7 @@ test("ordinary Worker game uses persistent NPC contacts and prediction", async (
   const before = await state(page);
   await page.evaluate(
     ({ x, y }) => {
-      const game = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const game = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       for (const actor of game.stateView.entities)
         if (actor.type === "chicken")
           game.transport.send({ type: "edit-delete-entity", entityId: actor.id });
@@ -57,7 +57,7 @@ test("ordinary Worker game uses persistent NPC contacts and prediction", async (
   const npc = (await state(page)).npcs[0];
   if (!npc) throw Error("Missing NPC");
   await page.evaluate(({ wx, wy }) => {
-    const game = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const game = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     game.transport.send({ type: "player-interact", wx, wy });
   }, npc);
   await page.keyboard.down("d");
@@ -84,7 +84,7 @@ test("P2P host and delayed guest use the shared default and converge after rever
       await play(page);
     }
     await guest.evaluate(() => {
-      const game = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const game = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       for (const [key, value] of [
         ["cl_netem_tx_latency_ms", 50],
         ["cl_netem_rx_latency_ms", 50],

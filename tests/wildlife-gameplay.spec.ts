@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { MALLARD_TYPE } from "../src/wildlife/Mallard.js";
 
@@ -18,14 +18,14 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
   await page.getByTestId("main-menu-toggle").click();
   await page.getByRole("button", { name: "Edit", exact: true }).click();
   await page.evaluate((type) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const p = g.stateView.playerEntity.position;
     g.transport.send({ type: "edit-spawn", entityType: type, wx: p.wx + 80, wy: p.wy });
   }, MALLARD_TYPE);
   await expect
     .poll(async () =>
       page.evaluate((type) => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         return g.stateView.entities.some((e) => e.type === type);
       }, MALLARD_TYPE),
     )
@@ -34,7 +34,7 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
   await page.evaluate(() => {
     const g = (
       document.querySelector("#game") as unknown as {
-        __game: GameClient;
+        __game: GameTestHooks;
       }
     ).__game;
     const canvas = document.querySelector("#game") as HTMLCanvasElement;
@@ -49,7 +49,7 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
   });
   const duck = () =>
     page.evaluate((type) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       const d = g.stateView.entities.find((e) => e.type === type);
       return { state: d?.wanderAI?.state, z: d?.wz ?? 0, clip: d?.sprite?.clip };
     }, MALLARD_TYPE);
@@ -61,7 +61,8 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
         const state = (await duck()).state;
         if (state !== "scared")
           await page.evaluate((type) => {
-            const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+            const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+              .__game;
             const p = g.stateView.playerEntity.position;
             const d = g.stateView.entities.find((e) => e.type === type);
             if (d)
@@ -207,7 +208,7 @@ test("ordinary seeded pond has durable ducks and offers manual creation in Entit
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const ducks = () =>
     page.evaluate((type) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       return g.stateView.entities
         .filter(
           (e) =>
@@ -226,13 +227,13 @@ test("ordinary seeded pond has durable ducks and offers manual creation in Entit
   await page.locator("#game").click({ position: { x: 300, y: 170 } });
   await expect.poll(async () => (await ducks()).length).toBe(original.length + 1);
   await page.evaluate((id) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     g.transport.send({ type: "edit-delete-entity", entityId: id });
   }, removed.id);
   await expect.poll(async () => (await ducks()).length).toBe(original.length);
   await page.getByRole("button", { name: "Exit editor", exact: true }).click();
   await page.evaluate(async () => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     g.loop.stop();
     const host = g.netEmulatedTransport.base as unknown as {
       setHidden(v: boolean): void;

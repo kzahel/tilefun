@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 
 // Mouse -> palette selection -> world coordinates -> Worker edit -> replica is
 // distinct from the exhaustive native TerrainEditor/autotile neighborhood rules.
@@ -11,7 +11,7 @@ test("a mouse terrain stroke reaches Worker authority and returns changed terrai
   await page.keyboard.press("Tab");
   await page.locator('button[title*="Shlw/Grass"]').click();
   await page.evaluate(() => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const send = g.transport.send.bind(g.transport);
     const strokes: { tx: number; ty: number; before: number }[] = [];
     Object.assign(window, { terrainStrokes: strokes });
@@ -32,7 +32,7 @@ test("a mouse terrain stroke reaches Worker authority and returns changed terrai
   await expect
     .poll(() =>
       page.evaluate(() => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         const stroke = (
           window as unknown as { terrainStrokes: { tx: number; ty: number; before: number }[] }
         ).terrainStrokes[0];

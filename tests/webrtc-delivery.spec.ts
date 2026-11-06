@@ -4,22 +4,11 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { expect, type Page, test } from "@playwright/test";
 import type { ClientStateView } from "../src/client/ClientStateView.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import type { ClientMessage, FrameMessage } from "../src/shared/protocol.js";
-import type { IClientTransport } from "../src/transport/Transport.js";
 import { installRtcProbe, RTC_FRAME_LAYOUT } from "./helpers/rtc-delivery-probe.js";
 
-interface TestGame {
-  transport: IClientTransport;
-  stateView: ClientStateView;
-  gcSendRequest(message: unknown): Promise<{ meta: { id: string } }>;
-  nextRequestId: number;
-}
-
-declare global {
-  interface HTMLCanvasElement {
-    __game: TestGame;
-  }
-}
+type GameCanvas = HTMLCanvasElement & { __game?: GameTestHooks };
 
 const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
 const PORT = 4194;
@@ -100,7 +89,7 @@ async function open(page: Page) {
   expect(options).toContainEqual({ label: "entities", ordered: false, maxRetransmits: 0 });
   expect(options).toContainEqual({ label: "sync", ordered: true, maxRetransmits: null });
   await page.evaluate(() => {
-    const game = document.querySelector<HTMLCanvasElement>("#game")?.__game;
+    const game = document.querySelector<GameCanvas>("#game")?.__game;
     if (!game) throw new Error("Missing game fixture");
     const view = game.stateView as ClientStateView & { applyFrame(message: FrameMessage): void };
     const apply = view.applyFrame.bind(view);
@@ -112,7 +101,7 @@ async function open(page: Page) {
 }
 async function createWorld(page: Page) {
   return page.evaluate(async (generation) => {
-    const game = document.querySelector<HTMLCanvasElement>("#game")?.__game;
+    const game = document.querySelector<GameCanvas>("#game")?.__game;
     if (!game) throw new Error("Missing game fixture");
     const result = await game.gcSendRequest({
       type: "create-world",
@@ -126,7 +115,7 @@ async function createWorld(page: Page) {
 async function enter(page: Page, worldId: string) {
   await page.evaluate(
     async ({ worldId, generation }) => {
-      const game = document.querySelector<HTMLCanvasElement>("#game")?.__game;
+      const game = document.querySelector<GameCanvas>("#game")?.__game;
       if (!game) throw new Error("Missing game fixture");
       await game.gcSendRequest({
         type: "join-realm",
@@ -142,14 +131,14 @@ async function enter(page: Page, worldId: string) {
 }
 async function send(page: Page, message: ClientMessage) {
   await page.evaluate((message) => {
-    const game = document.querySelector<HTMLCanvasElement>("#game")?.__game;
+    const game = document.querySelector<GameCanvas>("#game")?.__game;
     if (!game) throw new Error("Missing game fixture");
     game.transport.send(message);
   }, message);
 }
 async function chickens(page: Page) {
   return page.evaluate(() => {
-    const game = document.querySelector<HTMLCanvasElement>("#game")?.__game;
+    const game = document.querySelector<GameCanvas>("#game")?.__game;
     if (!game) throw new Error("Missing game fixture");
     return game.stateView.entities
       .filter((e) => e.type === "chicken")

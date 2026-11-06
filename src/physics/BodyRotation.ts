@@ -1,7 +1,6 @@
 /** Game coordinates are X/Y ground and Z up. Rapier uses X/Z ground and Y up. */
 export type BodyRotation = readonly [number, number, number, number];
 export type AngularVelocity = readonly [number, number, number];
-export const IDENTITY_ROTATION: BodyRotation = [0, 0, 0, 1];
 export const yawRotation = (heading: number): BodyRotation => [
   0,
   0,

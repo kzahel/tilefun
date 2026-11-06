@@ -5,7 +5,6 @@ export const BOAT_LENGTH = 72;
 export const BOAT_BEAM = 35;
 /** Leave enough water beside a natural mooring to swing the full hull. */
 export const BOAT_MOORING_RADIUS = Math.ceil(Math.hypot(BOAT_LENGTH, BOAT_BEAM) / 2);
-export const BOAT_SEAT_Z = 8;
 export const BOAT_MESH = {
   vehicle: BOAT_MODEL,
   assetId: "explorer-boat-authored-v1",

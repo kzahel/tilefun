@@ -92,7 +92,9 @@ test("atlas can pan past every edge, zoom there, and select without snapping the
   await expect(page).toHaveURL(/rect=16%2C16%2C16%2C16/);
   expect(await view(canvas)).toEqual(current);
   await page.setViewportSize({ width: 390, height: 844 });
-  await expect.poll(() => canvas.evaluate((node) => node.width)).toBeLessThan(390);
+  await expect
+    .poll(() => canvas.evaluate((node: HTMLCanvasElement) => node.width))
+    .toBeLessThan(390);
   expect(await view(canvas)).toEqual(current);
   await page.getByRole("button", { name: "Clear selection", exact: true }).click();
   expect(await view(canvas)).toEqual(current);

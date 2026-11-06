@@ -33,24 +33,6 @@ export const PLAYER_SPRINT_MULTIPLIER = 2;
 
 // ── Friction & acceleration (QuakeWorld-inspired) ──
 
-/** Base ground friction (QW default: 4, ≥60 = instant stop like pre-friction). */
-export const PLAYER_FRICTION = 100;
-
-/** Ground acceleration (QW default: 10, ≥60 = instant like pre-friction). */
-export const PLAYER_ACCELERATE = 100;
-
-/** Air acceleration (QW default: 0.7 — much lower than ground for limited air control). */
-export const PLAYER_AIR_ACCELERATE = 1;
-
-/** Air wishspeed cap (QW: 30 out of maxspeed 320). Limits per-frame speed gain from air strafing. */
-export const PLAYER_AIR_WISHCAP = 6;
-
-/** Friction uses this as minimum speed for the control term (QW: 100). */
-export const PLAYER_STOP_SPEED = 16;
-
-/** Below this speed, velocity is zeroed (prevents micro-drift). */
-export const PLAYER_STOP_THRESHOLD = 2;
-
 /** Camera smooth-follow lerp factor (per tick at 60Hz). */
 export const CAMERA_LERP = 0.1;
 
@@ -69,9 +51,6 @@ export const WATER_FRAME_COUNT = 4;
 /** Duration of each water animation frame (milliseconds). */
 export const WATER_FRAME_DURATION_MS = 250;
 
-/** Entities beyond this Chebyshev distance from the player are frozen (world pixels). */
-export const ENTITY_ACTIVATION_DISTANCE = CHUNK_SIZE_PX * (UNLOAD_DISTANCE - 1);
-
 /** World-pixel Y-offset per elevation level. */
 export const ELEVATION_PX = 8;
 
@@ -83,9 +62,6 @@ export const JUMP_VELOCITY = 150;
 
 /** Jump gravity in world px/s². */
 export const JUMP_GRAVITY = 500;
-
-/** Velocity multiplier applied when jump button is released while ascending (variable jump height). */
-export const JUMP_CUT_MULTIPLIER = 0.4;
 
 /** Default physical height (world px) for entities missing collider.physicalHeight. */
 export const DEFAULT_PHYSICAL_HEIGHT = 8;
@@ -104,26 +80,8 @@ export const THROW_MAX_SPEED = 300;
 /** Launch angle in radians (30 degrees from horizontal). */
 export const THROW_ANGLE = Math.PI / 6;
 
-/** Gravity for balls in world px/s² (floatier than jump gravity). */
-export const BALL_GRAVITY = 400;
-
-/** Fraction of velocity retained per bounce (vertical and horizontal). */
-export const BOUNCE_RESTITUTION = 0.55;
-
-/** Fraction of horizontal speed retained on ground bounce. */
-export const BOUNCE_FRICTION = 0.75;
-
-/** Minimum vertical speed to keep bouncing (below this the ball stops). */
-export const BOUNCE_STOP_VZ = 15;
-
-/** Speed impulse applied to entities hit by a ball (world px/s). */
-export const BALL_PUSH_SPEED = 60;
-
 /** Seconds before a stopped ball despawns. */
 export const BALL_DESPAWN_TIME = 3.0;
-
-/** Knockback impulse applied to NPC entities hit by a ball (world px/s). */
-export const BALL_SCARE_KNOCKBACK = 120;
 
 /** Seconds an NPC stays scared after being hit by a ball. */
 export const BALL_SCARE_DURATION = 3.0;

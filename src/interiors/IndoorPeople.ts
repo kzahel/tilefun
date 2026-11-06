@@ -2,7 +2,6 @@ import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
 
 export const INDOOR_ROLES = ["reader", "diner", "cleaner", "chef"] as const;
-export type IndoorRole = (typeof INDOOR_ROLES)[number];
 const actionFrames = { reader: 18, diner: 6, cleaner: 17, chef: 6 };
 export const INDOOR_PEOPLE_DEFS: Record<string, EntityDef> = Object.fromEntries(
   INDOOR_ROLES.map((role) => [

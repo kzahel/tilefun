@@ -182,7 +182,7 @@ const usages: ArtUsage[] = [];
 function add(
   id: string,
   sheetId: string,
-  rect: ArtRect,
+  rect: Readonly<ArtRect>,
   label: string,
   kind: ArtUsage["kind"],
   consumers: ArtUsage["consumers"],

@@ -548,13 +548,15 @@ test("shared room and editor passes match the native reference", async ({ page }
   expect(room.mismatches).toBe(0);
   const overlay = await page.evaluate(() =>
     (
-      window as unknown as { rendererLab: { setOverlay(v: boolean): { mismatches: number } } }
+      window as unknown as {
+        rendererLab: { setOverlay(v: boolean): { mismatches: number; maxError: number } };
+      }
     ).rendererLab.setOverlay(true),
   );
   // A staged 8-bit Canvas overlay incurs one additional premultiply/composite
   // rounding step. Only these three antialiased fixture pixels differ by 2.
   expect(overlay.mismatches).toBeLessThanOrEqual(3);
-  expect((overlay as { maxError: number }).maxError).toBeLessThanOrEqual(2);
+  expect(overlay.maxError).toBeLessThanOrEqual(2);
 });
 
 test("separate surface passes reuse local rasters through camera movement", async ({ page }) => {
@@ -768,7 +770,11 @@ test("portable car materials render through WebGPU selection and forced WebGL2",
 test("unavailable WebGL2 leaves a usable Canvas game", async ({ page }) => {
   await page.addInitScript(() => {
     const original = HTMLCanvasElement.prototype.getContext;
-    HTMLCanvasElement.prototype.getContext = function (kind: string, ...args: unknown[]) {
+    HTMLCanvasElement.prototype.getContext = function (
+      this: HTMLCanvasElement,
+      kind: string,
+      ...args: unknown[]
+    ) {
       if (kind === "webgl2") return null;
       return Reflect.apply(original, this, [kind, ...args]);
     } as typeof original;

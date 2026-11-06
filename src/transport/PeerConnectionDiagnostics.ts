@@ -30,11 +30,16 @@ export class PeerConnectionDiagnostics {
     this.lastSentType = type;
     this.lastSentBytes = buffer.byteLength;
     try {
-      this.connection.send(buffer);
+      const sent = this.connection.send(buffer);
+      if (sent) sent.catch((error: unknown) => this.sendFailed(error));
     } catch (error) {
-      this.log("send threw", error);
-      this.connection.close();
+      this.sendFailed(error);
     }
+  }
+
+  private sendFailed(error: unknown): void {
+    this.log("send threw", error);
+    this.connection.close();
   }
 
   log(reason: string, error?: unknown): void {

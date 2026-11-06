@@ -44,7 +44,7 @@ for (const renderer of ["canvas", "gpu"])
       const state = () =>
         page.locator("#game").evaluate((canvas) => {
           const game = (
-            canvas as unknown as { __game: import("../src/client/GameClient.js").GameClient }
+            canvas as unknown as { __game: import("../src/client/GameTestHooks.js").GameTestHooks }
           ).__game;
           return {
             layout: game.stateView.interior?.layout,

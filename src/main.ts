@@ -1,6 +1,7 @@
 import { finishStartup, showStartupStage, suspendStartup } from "./ui/StartupProgress.js";
 import "./ui/Menus.css";
 import { GameClient } from "./client/GameClient.js";
+import { exposeGameTestHooks } from "./client/GameTestHooks.js";
 import { FaultReporter, reportFault, setFaultReporter } from "./diagnostics/FaultReporter.js";
 import { performanceMetrics } from "./diagnostics/PerformanceMetrics.js";
 import { controllerInput } from "./input/ControllerInput.js";
@@ -136,7 +137,7 @@ function showProfilePicker(
   profileStore: PlayerProfileStore,
   profiles: PlayerProfile[],
 ): Promise<PlayerProfile> {
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const picker = new ProfilePicker();
 
     const showPicker = (list: PlayerProfile[]) => {
@@ -146,7 +147,7 @@ function showProfilePicker(
     picker.onSelect = (profile) => {
       if (!profile) {
         // "Back" button pressed from PIN/create screen — re-show list
-        profileStore.listProfiles().then(showPicker);
+        profileStore.listProfiles().then(showPicker).catch(reject);
         return;
       }
       localStorage.setItem(ACTIVE_PROFILE_KEY, profile.id);
@@ -155,11 +156,14 @@ function showProfilePicker(
     };
 
     picker.onCreate = (name) => {
-      profileStore.createProfile(name).then((newProfile) => {
-        localStorage.setItem(ACTIVE_PROFILE_KEY, newProfile.id);
-        picker.hide();
-        resolve(newProfile);
-      });
+      profileStore
+        .createProfile(name)
+        .then((newProfile) => {
+          localStorage.setItem(ACTIVE_PROFILE_KEY, newProfile.id);
+          picker.hide();
+          resolve(newProfile);
+        })
+        .catch(reject);
     };
 
     showPicker(profiles);
@@ -374,8 +378,7 @@ async function start() {
       autoJoinRealm: true,
       clientId: playerId,
     });
-    // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
-    (canvas as any).__game = client;
+    exposeGameTestHooks(canvas, client);
     await client.init();
   } else if (hostP2P) {
     // The shared Worker owns authority; PeerJS only bridges guest binary traffic.
@@ -406,8 +409,7 @@ async function start() {
       roomDirectory,
       clientId: playerId,
     });
-    // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
-    (canvas as any).__game = client;
+    exposeGameTestHooks(canvas, client);
     transport.connect({ profileId: profile.id, displayName: profile.name });
     await client.init();
     startLocalHost(transport);
@@ -464,8 +466,7 @@ async function start() {
         clientId: playerId,
       });
     }
-    // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
-    (canvas as any).__game = client;
+    exposeGameTestHooks(canvas, client);
     await client.init();
   } else {
     // Same authority and replicated client as remote play, on an independent thread.
@@ -479,8 +480,7 @@ async function start() {
       roomDirectory,
       clientId: playerId,
     });
-    // biome-ignore lint/suspicious/noExplicitAny: debug/test hook
-    (canvas as any).__game = client;
+    exposeGameTestHooks(canvas, client);
     await client.init();
     startLocalHost(transport);
   }

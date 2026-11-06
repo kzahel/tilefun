@@ -88,11 +88,8 @@ claimed by the desktop readiness run.
    the real Worker/browser boundary and ordinary game captures. Register the new
    exact interactive candidate; retaining source never invents human approval.
 
-Repeat the isolated capture, including normal game and phone controls:
-
-```
-npx tsx scripts/instrumentation/towing.ts --game --output=data/3d-investigation/towing-NEW
-```
+The capture script (`scripts/instrumentation/towing.ts`) was removed when towing
+controls were retired in `8f405aaf`; restore it from history with the feature.
 
 Next extensions: adjustable dollies for rear-first pickup, heavier recovery loads,
 and trailers. Each needs its own axle/body/authority qualification.

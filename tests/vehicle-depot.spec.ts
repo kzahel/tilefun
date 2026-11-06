@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { RacetrackSource } from "../src/generation/regional/RacetrackPlanner.js";
 import { vehicleDepot } from "../src/generation/regional/VehicleDepotPlanner.js";
@@ -22,7 +22,7 @@ test("generated depot is a named map destination with real parked cars", async (
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 60000 });
   await page.evaluate(
     async ({ arrival, generation }) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       const world = await g.gcSendRequest({
         type: "create-world",
         requestId: g.nextRequestId++,
@@ -42,7 +42,7 @@ test("generated depot is a named map destination with real parked cars", async (
   if (!slot) throw Error("No transporter slot");
   const facts = () =>
     page.evaluate(({ wx, wy }) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       const truck = g.stateView.serverEntities.find(
         (e) =>
           e.type === "vehicle-v1:car-transporter" &&
@@ -50,9 +50,7 @@ test("generated depot is a named map destination with real parked cars", async (
       );
       const p = g.stateView.serverPlayerEntity;
       return {
-        truck: truck
-          ? { id: truck.id, x: truck.position.wx, y: truck.position.wy, ramp: truck.vehicleRamp }
-          : null,
+        truck: truck ? { id: truck.id, x: truck.position.wx, y: truck.position.wy } : null,
         player: { x: p.position.wx, y: p.position.wy, z: p.wz ?? 0 },
       };
     }, slot);
@@ -77,7 +75,7 @@ test("generated depot is a named map destination with real parked cars", async (
     )
     .toBeLessThan(64);
   await page.evaluate(async (center) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     await g.gcSendRequest({
       type: "rcon",
       requestId: g.nextRequestId++,
@@ -89,7 +87,7 @@ test("generated depot is a named map destination with real parked cars", async (
   await expect
     .poll(() =>
       page.evaluate((slots) => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         return slots.filter((slot) =>
           g.stateView.serverEntities.some(
             (e) =>
@@ -104,7 +102,8 @@ test("generated depot is a named map destination with real parked cars", async (
     .poll(
       () =>
         page.evaluate(() => {
-          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+            .__game;
           const camera = Reflect.get(g, "camera") as Camera;
           if (camera.zoom !== 0.25) return false;
           const player = g.stateView.serverPlayerEntity.position;

@@ -21,7 +21,7 @@ async function state(page: Page) {
   return page.evaluate(() => {
     const game = (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game;
     return {
@@ -37,7 +37,7 @@ async function draw(page: Page, from: [number, number], to = from) {
     ({ from, to }) => {
       const game = (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game;
       return {
@@ -78,7 +78,7 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   await page.evaluate(() => {
     const g = (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game;
     g.camera.snapTo(320, 220);
@@ -139,7 +139,7 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   await page.evaluate(() => {
     const game = (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game;
     game.transport.send({ type: "flush" });
@@ -153,7 +153,7 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   await page.evaluate(() => {
     const game = (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game;
     game.transport.send({ type: "flush" });

@@ -185,6 +185,7 @@ export class AnimalWorkSystem {
       task.sitePosition = { ...point };
       return item;
     }
+    return undefined;
   }
   go(
     animal: Entity,

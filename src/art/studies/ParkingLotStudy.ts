@@ -9,7 +9,6 @@ export type {
   ParkingBay,
   ParkingCaseId,
   ParkingRect,
-  ParkingStudy,
 } from "../../generation/regional/ParkingLayout.js";
 export {
   PARKING_CASES,

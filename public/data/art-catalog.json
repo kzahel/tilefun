@@ -10737,7 +10737,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:41"
+          "source": "src/interiors/InteriorIdentity.ts:24"
         },
         {
           "system": "Interiors",
@@ -11255,11 +11255,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:41"
+          "source": "src/interiors/GameplayInterior.ts:69"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:95"
+          "source": "src/interiors/InteriorIdentity.ts:24"
         },
         {
           "system": "Gameplay",
@@ -26771,7 +26771,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:102"
+          "source": "src/interiors/GameplayInterior.ts:76"
         },
         {
           "system": "Interiors",
@@ -26945,11 +26945,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:104"
+          "source": "src/interiors/GameplayInterior.ts:78"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:104"
+          "source": "src/interiors/GameplayInterior.ts:78"
         },
         {
           "system": "Interiors",
@@ -27039,11 +27039,11 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:103"
+          "source": "src/interiors/GameplayInterior.ts:77"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:103"
+          "source": "src/interiors/GameplayInterior.ts:77"
         },
         {
           "system": "Interiors",
@@ -27105,7 +27105,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:91"
+          "source": "src/interiors/GameplayInterior.ts:65"
         },
         {
           "system": "Interiors",
@@ -27199,15 +27199,15 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:92"
+          "source": "src/interiors/GameplayInterior.ts:66"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:92"
+          "source": "src/interiors/GameplayInterior.ts:66"
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:99"
+          "source": "src/interiors/GameplayInterior.ts:73"
         },
         {
           "system": "Interiors",
@@ -27293,7 +27293,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:93"
+          "source": "src/interiors/GameplayInterior.ts:67"
         },
         {
           "system": "Interiors",
@@ -27397,7 +27397,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:97"
+          "source": "src/interiors/GameplayInterior.ts:71"
         },
         {
           "system": "Interiors",
@@ -27443,7 +27443,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:98"
+          "source": "src/interiors/GameplayInterior.ts:72"
         },
         {
           "system": "Interiors",
@@ -33543,7 +33543,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/Train.ts:54"
+          "source": "src/railway/Train.ts:53"
         },
         {
           "system": "Gameplay",
@@ -33573,7 +33573,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/Train.ts:55"
+          "source": "src/railway/Train.ts:54"
         },
         {
           "system": "Gameplay",
@@ -33599,7 +33599,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/Train.ts:57"
+          "source": "src/railway/Train.ts:56"
         },
         {
           "system": "Gameplay",
@@ -33769,7 +33769,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:722"
+          "source": "src/wildlife/FoodWeb.ts:721"
         }
       ]
     },
@@ -35088,10 +35088,6 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/TowingPose.ts:5"
         }
       ]
     },
@@ -35283,7 +35279,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/TransporterPose.ts:8"
+          "source": "src/rendering/TransporterPose.ts:7"
         },
         {
           "system": "Gameplay",
@@ -35339,7 +35335,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/characters/CharacterTestScene.ts:45"
+          "source": "src/characters/CharacterTestScene.ts:43"
         },
         {
           "system": "Gameplay",
@@ -35375,7 +35371,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorMode.ts:93"
+          "source": "src/editor/EditorMode.ts:91"
         },
         {
           "system": "Gameplay",
@@ -35471,11 +35467,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2018"
+          "source": "src/server/Realm.ts:2022"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2139"
+          "source": "src/server/Realm.ts:2143"
         },
         {
           "system": "Gameplay",
@@ -35511,7 +35507,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:753"
+          "source": "src/wildlife/FoodWeb.ts:752"
         },
         {
           "system": "Gameplay",
@@ -35629,7 +35625,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:719"
+          "source": "src/wildlife/FoodWeb.ts:718"
         },
         {
           "system": "Gameplay",
@@ -35779,7 +35775,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:719"
+          "source": "src/wildlife/FoodWeb.ts:718"
         },
         {
           "system": "Gameplay",
@@ -35889,11 +35885,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:719"
+          "source": "src/wildlife/FoodWeb.ts:718"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:723"
+          "source": "src/wildlife/FoodWeb.ts:722"
         },
         {
           "system": "Gameplay",
@@ -35939,7 +35935,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:723"
+          "source": "src/wildlife/FoodWeb.ts:722"
         }
       ]
     },
@@ -35985,7 +35981,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:724"
+          "source": "src/wildlife/FoodWeb.ts:723"
         }
       ]
     },
@@ -36031,7 +36027,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:725"
+          "source": "src/wildlife/FoodWeb.ts:724"
         }
       ]
     },
@@ -36077,7 +36073,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:726"
+          "source": "src/wildlife/FoodWeb.ts:725"
         }
       ]
     },
@@ -36263,31 +36259,31 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:204"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/wildlife/AnimalWorkSystem.ts:205"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:311"
+          "source": "src/wildlife/AnimalWorkSystem.ts:206"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:486"
+          "source": "src/wildlife/AnimalWorkSystem.ts:312"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:531"
+          "source": "src/wildlife/AnimalWorkSystem.ts:487"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:579"
+          "source": "src/wildlife/AnimalWorkSystem.ts:532"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:588"
+          "source": "src/wildlife/AnimalWorkSystem.ts:580"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/AnimalWorkSystem.ts:589"
         },
         {
           "system": "Gameplay",
@@ -36307,7 +36303,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:719"
+          "source": "src/wildlife/FoodWeb.ts:718"
         },
         {
           "system": "Gameplay",
@@ -36369,7 +36365,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FoodWeb.ts:719"
+          "source": "src/wildlife/FoodWeb.ts:718"
         },
         {
           "system": "Gameplay",
@@ -36583,11 +36579,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:524"
+          "source": "src/wildlife/AnimalWorkSystem.ts:525"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:585"
+          "source": "src/wildlife/AnimalWorkSystem.ts:586"
         },
         {
           "system": "Gameplay",
@@ -37705,7 +37701,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/GameplayInterior.ts:41"
+          "source": "src/interiors/InteriorIdentity.ts:24"
         },
         {
           "system": "Interiors",

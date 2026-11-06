@@ -2,10 +2,10 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { Link, useLocation } from "react-router";
 import type { ArtNote } from "../art/ArtNotes.js";
-import { ErrorMessage, threadPath } from "./App.js";
 import { workshopJson } from "./AuthClient.js";
 import { familyNoteEvent, familyNoteTarget } from "./FamilySheetNotes.js";
 import type { FamilyMember, FamilySheet, FamilySheetCatalog } from "./FamilySheetTypes.js";
+import { ErrorMessage, threadPath } from "./WorkshopCommon.js";
 import { useSession } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
 

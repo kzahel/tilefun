@@ -1,0 +1,981 @@
+{
+  "maxLines": 600,
+  "maxComplexity": 25,
+  "files": {
+    "src/art/ArtNotes.ts": {
+      "lines": 297,
+      "worst": 49,
+      "overLimit": 2
+    },
+    "src/art/buildings.ts": {
+      "lines": 1250,
+      "worst": 46,
+      "overLimit": 3
+    },
+    "src/art/DenseDistrictShowcase.ts": {
+      "lines": 428,
+      "worst": 70,
+      "overLimit": 1
+    },
+    "src/art/main.ts": {
+      "lines": 664,
+      "worst": 0,
+      "overLimit": 0
+    },
+    "src/assets/outdoor/OutdoorCatalog.ts": {
+      "lines": 249,
+      "worst": 61,
+      "overLimit": 1
+    },
+    "src/audio/AnimalAudio.ts": {
+      "lines": 336,
+      "worst": 71,
+      "overLimit": 1
+    },
+    "src/audio/AudioManager.ts": {
+      "lines": 513,
+      "worst": 46,
+      "overLimit": 2
+    },
+    "src/audio/CreatureCall.ts": {
+      "lines": 76,
+      "worst": 122,
+      "overLimit": 1
+    },
+    "src/audio/FootstepSystem.ts": {
+      "lines": 297,
+      "worst": 26,
+      "overLimit": 1
+    },
+    "src/autotile/computeTileBlend.ts": {
+      "lines": 226,
+      "worst": 63,
+      "overLimit": 1
+    },
+    "src/autotile/TerrainAdjacency.ts": {
+      "lines": 151,
+      "worst": 41,
+      "overLimit": 1
+    },
+    "src/client/ClientStateView.ts": {
+      "lines": 542,
+      "worst": 35,
+      "overLimit": 1
+    },
+    "src/client/GameClient.ts": {
+      "lines": 1746,
+      "worst": 44,
+      "overLimit": 1
+    },
+    "src/client/PlayerPredictor.ts": {
+      "lines": 983,
+      "worst": 45,
+      "overLimit": 4
+    },
+    "src/editor/collectEditorOverlay.ts": {
+      "lines": 294,
+      "worst": 70,
+      "overLimit": 2
+    },
+    "src/editor/EditorMode.ts": {
+      "lines": 932,
+      "worst": 30,
+      "overLimit": 2
+    },
+    "src/editor/EditorPalettes.ts": {
+      "lines": 213,
+      "worst": 55,
+      "overLimit": 1
+    },
+    "src/editor/EditorPanel.ts": {
+      "lines": 1292,
+      "worst": 49,
+      "overLimit": 3
+    },
+    "src/editor/InteriorCatalog.ts": {
+      "lines": 721,
+      "worst": 0,
+      "overLimit": 0
+    },
+    "src/entities/EntityManager.ts": {
+      "lines": 252,
+      "worst": 47,
+      "overLimit": 2
+    },
+    "src/entities/GemSpawner.ts": {
+      "lines": 140,
+      "worst": 28,
+      "overLimit": 1
+    },
+    "src/entities/PropFactories.ts": {
+      "lines": 778,
+      "worst": 0,
+      "overLimit": 0
+    },
+    "src/entities/wanderAI.ts": {
+      "lines": 226,
+      "worst": 54,
+      "overLimit": 2
+    },
+    "src/explorer/main.ts": {
+      "lines": 797,
+      "worst": 0,
+      "overLimit": 0
+    },
+    "src/explorer/MapRenderer.ts": {
+      "lines": 537,
+      "worst": 158,
+      "overLimit": 1
+    },
+    "src/explorer/regional.worker.ts": {
+      "lines": 179,
+      "worst": 112,
+      "overLimit": 1
+    },
+    "src/explorer/TilePreview.ts": {
+      "lines": 373,
+      "worst": 44,
+      "overLimit": 1
+    },
+    "src/game/base-game.ts": {
+      "lines": 286,
+      "worst": 34,
+      "overLimit": 1
+    },
+    "src/generation/ExplorationGems.ts": {
+      "lines": 144,
+      "worst": 41,
+      "overLimit": 1
+    },
+    "src/generation/Overview.ts": {
+      "lines": 229,
+      "worst": 135,
+      "overLimit": 1
+    },
+    "src/generation/ProceduralActors.ts": {
+      "lines": 106,
+      "worst": 69,
+      "overLimit": 1
+    },
+    "src/generation/ProceduralProps.ts": {
+      "lines": 96,
+      "worst": 29,
+      "overLimit": 1
+    },
+    "src/generation/regional/CityWalkGraph.ts": {
+      "lines": 189,
+      "worst": 43,
+      "overLimit": 1
+    },
+    "src/generation/regional/CommercialDistrictPlanner.ts": {
+      "lines": 230,
+      "worst": 39,
+      "overLimit": 1
+    },
+    "src/generation/regional/DenseDistrictPlanner.ts": {
+      "lines": 447,
+      "worst": 134,
+      "overLimit": 2
+    },
+    "src/generation/regional/DistrictPlanner.ts": {
+      "lines": 207,
+      "worst": 78,
+      "overLimit": 1
+    },
+    "src/generation/regional/DistrictStrategy.ts": {
+      "lines": 222,
+      "worst": 38,
+      "overLimit": 1
+    },
+    "src/generation/regional/FarmsteadPlanner.ts": {
+      "lines": 271,
+      "worst": 64,
+      "overLimit": 1
+    },
+    "src/generation/regional/NaturalLandscape.ts": {
+      "lines": 1610,
+      "worst": 72,
+      "overLimit": 10
+    },
+    "src/generation/regional/NaturalStrategy.ts": {
+      "lines": 168,
+      "worst": 34,
+      "overLimit": 1
+    },
+    "src/generation/regional/ParkingLayout.ts": {
+      "lines": 170,
+      "worst": 71,
+      "overLimit": 2
+    },
+    "src/generation/regional/RacetrackPlanner.ts": {
+      "lines": 250,
+      "worst": 42,
+      "overLimit": 1
+    },
+    "src/generation/regional/RegionalPlanner.ts": {
+      "lines": 359,
+      "worst": 45,
+      "overLimit": 2
+    },
+    "src/generation/RoadGenerator.ts": {
+      "lines": 232,
+      "worst": 68,
+      "overLimit": 1
+    },
+    "src/input/ActionManager.ts": {
+      "lines": 241,
+      "worst": 29,
+      "overLimit": 1
+    },
+    "src/input/ControllerInput.ts": {
+      "lines": 159,
+      "worst": 62,
+      "overLimit": 1
+    },
+    "src/input/ControllerPointer.ts": {
+      "lines": 101,
+      "worst": 35,
+      "overLimit": 1
+    },
+    "src/input/TouchButtons.ts": {
+      "lines": 275,
+      "worst": 35,
+      "overLimit": 1
+    },
+    "src/interiors/AdvancedSuite.ts": {
+      "lines": 401,
+      "worst": 82,
+      "overLimit": 2
+    },
+    "src/interiors/ApartmentArchitecture.ts": {
+      "lines": 610,
+      "worst": 200,
+      "overLimit": 3
+    },
+    "src/interiors/ApartmentFloorPlan.ts": {
+      "lines": 293,
+      "worst": 49,
+      "overLimit": 1
+    },
+    "src/interiors/ApartmentWallAlignment.ts": {
+      "lines": 120,
+      "worst": 45,
+      "overLimit": 1
+    },
+    "src/interiors/ApartmentWallProfiles.ts": {
+      "lines": 376,
+      "worst": 141,
+      "overLimit": 1
+    },
+    "src/interiors/ApartmentWideWalls.ts": {
+      "lines": 206,
+      "worst": 160,
+      "overLimit": 2
+    },
+    "src/interiors/ConnectedRoomGrammar.ts": {
+      "lines": 328,
+      "worst": 67,
+      "overLimit": 2
+    },
+    "src/interiors/FurnitureLayout.ts": {
+      "lines": 190,
+      "worst": 31,
+      "overLimit": 1
+    },
+    "src/interiors/GameplayRoom.ts": {
+      "lines": 390,
+      "worst": 45,
+      "overLimit": 2
+    },
+    "src/interiors/GenericHomeGeometry.ts": {
+      "lines": 528,
+      "worst": 87,
+      "overLimit": 2
+    },
+    "src/interiors/InteriorPresentation.ts": {
+      "lines": 178,
+      "worst": 40,
+      "overLimit": 1
+    },
+    "src/interiors/LivedInLayouts.ts": {
+      "lines": 143,
+      "worst": 36,
+      "overLimit": 1
+    },
+    "src/interiors/playtest/main.ts": {
+      "lines": 877,
+      "worst": 26,
+      "overLimit": 1
+    },
+    "src/interiors/ResidentBehavior.ts": {
+      "lines": 192,
+      "worst": 65,
+      "overLimit": 1
+    },
+    "src/interiors/review/CounterexampleAudit.ts": {
+      "lines": 164,
+      "worst": 32,
+      "overLimit": 2
+    },
+    "src/interiors/review/CounterexampleGenerator.ts": {
+      "lines": 161,
+      "worst": 27,
+      "overLimit": 2
+    },
+    "src/interiors/review/CounterexampleReducer.ts": {
+      "lines": 157,
+      "worst": 39,
+      "overLimit": 1
+    },
+    "src/interiors/review/main.ts": {
+      "lines": 687,
+      "worst": 46,
+      "overLimit": 3
+    },
+    "src/interiors/review/ReviewCases.ts": {
+      "lines": 295,
+      "worst": 219,
+      "overLimit": 1
+    },
+    "src/interiors/review/ReviewFeedback.ts": {
+      "lines": 205,
+      "worst": 57,
+      "overLimit": 1
+    },
+    "src/interiors/RoomGrammar.ts": {
+      "lines": 208,
+      "worst": 78,
+      "overLimit": 1
+    },
+    "src/interiors/workbench/main.ts": {
+      "lines": 903,
+      "worst": 0,
+      "overLimit": 0
+    },
+    "src/main.ts": {
+      "lines": 683,
+      "worst": 34,
+      "overLimit": 1
+    },
+    "src/patterns/PatternRuntime.ts": {
+      "lines": 105,
+      "worst": 36,
+      "overLimit": 1
+    },
+    "src/persistence/ActorRecords.ts": {
+      "lines": 200,
+      "worst": 39,
+      "overLimit": 1
+    },
+    "src/persistence/PersistenceCoordinator.ts": {
+      "lines": 260,
+      "worst": 31,
+      "overLimit": 2
+    },
+    "src/persistence/PlayerProfileStore.ts": {
+      "lines": 137,
+      "worst": 27,
+      "overLimit": 1
+    },
+    "src/persistence/WorldInspection.ts": {
+      "lines": 205,
+      "worst": 61,
+      "overLimit": 1
+    },
+    "src/physics/BallGameplay.ts": {
+      "lines": 95,
+      "worst": 27,
+      "overLimit": 1
+    },
+    "src/physics/PhysicsScene.ts": {
+      "lines": 1155,
+      "worst": 101,
+      "overLimit": 8
+    },
+    "src/physics/rapier/ClippedTerrain.ts": {
+      "lines": 75,
+      "worst": 26,
+      "overLimit": 1
+    },
+    "src/physics/rapier/CollisionGeometry.ts": {
+      "lines": 183,
+      "worst": 117,
+      "overLimit": 1
+    },
+    "src/physics/surfaceHeight.ts": {
+      "lines": 151,
+      "worst": 34,
+      "overLimit": 1
+    },
+    "src/physics/TerrainExcavation.ts": {
+      "lines": 130,
+      "worst": 36,
+      "overLimit": 1
+    },
+    "src/physics/VehicleChassis.ts": {
+      "lines": 153,
+      "worst": 33,
+      "overLimit": 1
+    },
+    "src/projection/CarProxyScene.ts": {
+      "lines": 444,
+      "worst": 27,
+      "overLimit": 1
+    },
+    "src/projection/ProxyTexture.ts": {
+      "lines": 40,
+      "worst": 26,
+      "overLimit": 1
+    },
+    "src/railway/RailwayPlanner.ts": {
+      "lines": 173,
+      "worst": 68,
+      "overLimit": 1
+    },
+    "src/railway/RailwayPreview.ts": {
+      "lines": 518,
+      "worst": 80,
+      "overLimit": 2
+    },
+    "src/rendering/CameraStabilityProbe.ts": {
+      "lines": 157,
+      "worst": 61,
+      "overLimit": 1
+    },
+    "src/rendering/Canvas2DRenderer.ts": {
+      "lines": 412,
+      "worst": 28,
+      "overLimit": 1
+    },
+    "src/rendering/CanvasInteriorMap.ts": {
+      "lines": 117,
+      "worst": 30,
+      "overLimit": 3
+    },
+    "src/rendering/CarMeshAsset.ts": {
+      "lines": 439,
+      "worst": 64,
+      "overLimit": 2
+    },
+    "src/rendering/collectScene.ts": {
+      "lines": 432,
+      "worst": 176,
+      "overLimit": 1
+    },
+    "src/rendering/CollisionDebug.ts": {
+      "lines": 287,
+      "worst": 55,
+      "overLimit": 2
+    },
+    "src/rendering/DebugRenderer.ts": {
+      "lines": 444,
+      "worst": 42,
+      "overLimit": 1
+    },
+    "src/rendering/DumpBedPose.ts": {
+      "lines": 200,
+      "worst": 26,
+      "overLimit": 1
+    },
+    "src/rendering/DumpTruckFallback.ts": {
+      "lines": 194,
+      "worst": 71,
+      "overLimit": 1
+    },
+    "src/rendering/ElevationDescriptorCache.ts": {
+      "lines": 113,
+      "worst": 34,
+      "overLimit": 1
+    },
+    "src/rendering/EntityMeshPose.ts": {
+      "lines": 167,
+      "worst": 42,
+      "overLimit": 1
+    },
+    "src/rendering/GpuMeshBodies.ts": {
+      "lines": 331,
+      "worst": 76,
+      "overLimit": 1
+    },
+    "src/rendering/GpuOverlayResources.ts": {
+      "lines": 150,
+      "worst": 28,
+      "overLimit": 1
+    },
+    "src/rendering/GpuRasterSurface.ts": {
+      "lines": 1011,
+      "worst": 72,
+      "overLimit": 1
+    },
+    "src/rendering/GrassBladeRenderer.ts": {
+      "lines": 248,
+      "worst": 57,
+      "overLimit": 1
+    },
+    "src/rendering/ParticleSystem.ts": {
+      "lines": 325,
+      "worst": 51,
+      "overLimit": 2
+    },
+    "src/rendering/presentSurfaceScene.ts": {
+      "lines": 155,
+      "worst": 75,
+      "overLimit": 1
+    },
+    "src/rendering/propDepth.ts": {
+      "lines": 147,
+      "worst": 29,
+      "overLimit": 1
+    },
+    "src/rendering/RasterRenderBackend.ts": {
+      "lines": 306,
+      "worst": 34,
+      "overLimit": 1
+    },
+    "src/rendering/SelectableRenderHost.ts": {
+      "lines": 105,
+      "worst": 29,
+      "overLimit": 1
+    },
+    "src/rendering/SpriteSeamProbe.ts": {
+      "lines": 114,
+      "worst": 30,
+      "overLimit": 1
+    },
+    "src/rendering/SurfacePresentation.ts": {
+      "lines": 253,
+      "worst": 97,
+      "overLimit": 1
+    },
+    "src/rendering/SurfaceReceivers.ts": {
+      "lines": 521,
+      "worst": 51,
+      "overLimit": 5
+    },
+    "src/rendering/TileRenderer.ts": {
+      "lines": 649,
+      "worst": 124,
+      "overLimit": 2
+    },
+    "src/rendering/VehicleDepthProbe.ts": {
+      "lines": 193,
+      "worst": 59,
+      "overLimit": 1
+    },
+    "src/rendering/VehicleGeometryBatches.ts": {
+      "lines": 132,
+      "worst": 26,
+      "overLimit": 1
+    },
+    "src/rendering/WorldRegistrationProbe.ts": {
+      "lines": 240,
+      "worst": 106,
+      "overLimit": 1
+    },
+    "src/road/CitySurfaceRecipes.ts": {
+      "lines": 512,
+      "worst": 49,
+      "overLimit": 3
+    },
+    "src/scenarios/CoopRecipe.ts": {
+      "lines": 95,
+      "worst": 35,
+      "overLimit": 1
+    },
+    "src/scenarios/NaturalLandscapeRecipe.ts": {
+      "lines": 365,
+      "worst": 105,
+      "overLimit": 1
+    },
+    "src/scenarios/ScenarioPresentationHost.ts": {
+      "lines": 536,
+      "worst": 27,
+      "overLimit": 1
+    },
+    "src/scenarios/ScenarioSession.ts": {
+      "lines": 429,
+      "worst": 66,
+      "overLimit": 1
+    },
+    "src/scenarios/ScenarioWorkerHost.ts": {
+      "lines": 138,
+      "worst": 37,
+      "overLimit": 1
+    },
+    "src/scenes/EditScene.ts": {
+      "lines": 292,
+      "worst": 31,
+      "overLimit": 1
+    },
+    "src/scenes/PlayScene.ts": {
+      "lines": 811,
+      "worst": 128,
+      "overLimit": 2
+    },
+    "src/scenes/PropEditorScene.ts": {
+      "lines": 660,
+      "worst": 32,
+      "overLimit": 1
+    },
+    "src/scripting/OverlapServiceImpl.ts": {
+      "lines": 157,
+      "worst": 81,
+      "overLimit": 1
+    },
+    "src/server/EntityHandle.ts": {
+      "lines": 384,
+      "worst": 28,
+      "overLimit": 1
+    },
+    "src/server/faultReports.ts": {
+      "lines": 130,
+      "worst": 42,
+      "overLimit": 1
+    },
+    "src/server/GameServer.ts": {
+      "lines": 1742,
+      "worst": 67,
+      "overLimit": 4
+    },
+    "src/server/InterestManager.ts": {
+      "lines": 134,
+      "worst": 39,
+      "overLimit": 1
+    },
+    "src/server/outdoorAnnotations.ts": {
+      "lines": 143,
+      "worst": 43,
+      "overLimit": 1
+    },
+    "src/server/playIdeas.ts": {
+      "lines": 203,
+      "worst": 47,
+      "overLimit": 1
+    },
+    "src/server/Realm.ts": {
+      "lines": 2161,
+      "worst": 66,
+      "overLimit": 5
+    },
+    "src/server/RealmActivity.ts": {
+      "lines": 104,
+      "worst": 38,
+      "overLimit": 1
+    },
+    "src/server/RealmPropActivity.ts": {
+      "lines": 90,
+      "worst": 30,
+      "overLimit": 1
+    },
+    "src/server/RealmReplicator.ts": {
+      "lines": 332,
+      "worst": 65,
+      "overLimit": 1
+    },
+    "src/server/RealmStreaming.ts": {
+      "lines": 292,
+      "worst": 31,
+      "overLimit": 1
+    },
+    "src/server/RealmTransitions.ts": {
+      "lines": 125,
+      "worst": 30,
+      "overLimit": 1
+    },
+    "src/server/tickAllAI.ts": {
+      "lines": 161,
+      "worst": 57,
+      "overLimit": 1
+    },
+    "src/server/VehicleControl.ts": {
+      "lines": 300,
+      "worst": 34,
+      "overLimit": 1
+    },
+    "src/server/vitePlugin.ts": {
+      "lines": 121,
+      "worst": 26,
+      "overLimit": 1
+    },
+    "src/server/workshopAuth.ts": {
+      "lines": 283,
+      "worst": 28,
+      "overLimit": 1
+    },
+    "src/server/workshopService.ts": {
+      "lines": 427,
+      "worst": 86,
+      "overLimit": 2
+    },
+    "src/shared/binaryCodec.ts": {
+      "lines": 1259,
+      "worst": 101,
+      "overLimit": 3
+    },
+    "src/shared/entityDelta.ts": {
+      "lines": 361,
+      "worst": 77,
+      "overLimit": 1
+    },
+    "src/shared/physicsStateCodec.ts": {
+      "lines": 248,
+      "worst": 48,
+      "overLimit": 2
+    },
+    "src/shared/serialization.ts": {
+      "lines": 306,
+      "worst": 46,
+      "overLimit": 2
+    },
+    "src/traffic/LaneGraph.ts": {
+      "lines": 216,
+      "worst": 57,
+      "overLimit": 1
+    },
+    "src/traffic/RacetrackLanes.ts": {
+      "lines": 60,
+      "worst": 27,
+      "overLimit": 1
+    },
+    "src/traffic/RoadTraffic.ts": {
+      "lines": 501,
+      "worst": 94,
+      "overLimit": 3
+    },
+    "src/traffic/VehicleRegistry.ts": {
+      "lines": 303,
+      "worst": 28,
+      "overLimit": 2
+    },
+    "src/transport/WorkerClientTransport.ts": {
+      "lines": 383,
+      "worst": 37,
+      "overLimit": 1
+    },
+    "src/ui/DoorControl.ts": {
+      "lines": 125,
+      "worst": 72,
+      "overLimit": 1
+    },
+    "src/ui/MainMenu.ts": {
+      "lines": 466,
+      "worst": 41,
+      "overLimit": 1
+    },
+    "src/ui/VehicleControl.ts": {
+      "lines": 186,
+      "worst": 53,
+      "overLimit": 1
+    },
+    "src/ui/WorldMap.ts": {
+      "lines": 666,
+      "worst": 28,
+      "overLimit": 1
+    },
+    "src/wildlife/AnimalWorkPose.ts": {
+      "lines": 166,
+      "worst": 255,
+      "overLimit": 1
+    },
+    "src/wildlife/AnimalWorkSystem.ts": {
+      "lines": 614,
+      "worst": 175,
+      "overLimit": 2
+    },
+    "src/wildlife/deerAI.ts": {
+      "lines": 137,
+      "worst": 60,
+      "overLimit": 1
+    },
+    "src/wildlife/Fauna.ts": {
+      "lines": 1540,
+      "worst": 0,
+      "overLimit": 0
+    },
+    "src/wildlife/faunaAI.ts": {
+      "lines": 188,
+      "worst": 77,
+      "overLimit": 1
+    },
+    "src/wildlife/faunaInteractions.ts": {
+      "lines": 177,
+      "worst": 41,
+      "overLimit": 1
+    },
+    "src/wildlife/FoodGrowth.ts": {
+      "lines": 63,
+      "worst": 39,
+      "overLimit": 1
+    },
+    "src/wildlife/FoodWeb.ts": {
+      "lines": 772,
+      "worst": 0,
+      "overLimit": 0
+    },
+    "src/wildlife/ForagePlacements.ts": {
+      "lines": 192,
+      "worst": 81,
+      "overLimit": 1
+    },
+    "src/wildlife/ForageResources.ts": {
+      "lines": 249,
+      "worst": 30,
+      "overLimit": 1
+    },
+    "src/wildlife/ForestWork.ts": {
+      "lines": 705,
+      "worst": 85,
+      "overLimit": 4
+    },
+    "src/wildlife/frogAI.ts": {
+      "lines": 175,
+      "worst": 61,
+      "overLimit": 2
+    },
+    "src/wildlife/GardenHabitat.ts": {
+      "lines": 58,
+      "worst": 27,
+      "overLimit": 1
+    },
+    "src/wildlife/GardenWork.ts": {
+      "lines": 314,
+      "worst": 110,
+      "overLimit": 1
+    },
+    "src/wildlife/HerdWork.ts": {
+      "lines": 346,
+      "worst": 110,
+      "overLimit": 2
+    },
+    "src/wildlife/mallardAI.ts": {
+      "lines": 219,
+      "worst": 93,
+      "overLimit": 1
+    },
+    "src/wildlife/MeadowWork.ts": {
+      "lines": 397,
+      "worst": 105,
+      "overLimit": 1
+    },
+    "src/wildlife/PastureHabitat.ts": {
+      "lines": 72,
+      "worst": 40,
+      "overLimit": 1
+    },
+    "src/wildlife/PastureWork.ts": {
+      "lines": 497,
+      "worst": 217,
+      "overLimit": 1
+    },
+    "src/wildlife/predatorAI.ts": {
+      "lines": 524,
+      "worst": 251,
+      "overLimit": 1
+    },
+    "src/wildlife/PredatorMotion.ts": {
+      "lines": 95,
+      "worst": 43,
+      "overLimit": 1
+    },
+    "src/wildlife/rabbitAI.ts": {
+      "lines": 124,
+      "worst": 65,
+      "overLimit": 1
+    },
+    "src/wildlife/RangeWork.ts": {
+      "lines": 387,
+      "worst": 151,
+      "overLimit": 1
+    },
+    "src/wildlife/robinAI.ts": {
+      "lines": 187,
+      "worst": 106,
+      "overLimit": 1
+    },
+    "src/wildlife/ThreatWork.ts": {
+      "lines": 354,
+      "worst": 59,
+      "overLimit": 2
+    },
+    "src/wildlife/WildlifeRespawns.ts": {
+      "lines": 162,
+      "worst": 40,
+      "overLimit": 1
+    },
+    "src/wildlife/WoodlandWork.ts": {
+      "lines": 448,
+      "worst": 227,
+      "overLimit": 1
+    },
+    "src/workshop/AnimalBrowser.tsx": {
+      "lines": 460,
+      "worst": 40,
+      "overLimit": 2
+    },
+    "src/workshop/App.tsx": {
+      "lines": 1111,
+      "worst": 28,
+      "overLimit": 2
+    },
+    "src/workshop/FamilySheetArt.tsx": {
+      "lines": 220,
+      "worst": 83,
+      "overLimit": 1
+    },
+    "src/workshop/NaturalLandscapePage.tsx": {
+      "lines": 1035,
+      "worst": 255,
+      "overLimit": 2
+    },
+    "src/workshop/PatternPage.tsx": {
+      "lines": 635,
+      "worst": 36,
+      "overLimit": 1
+    },
+    "src/workshop/PhysicsPage.tsx": {
+      "lines": 425,
+      "worst": 45,
+      "overLimit": 2
+    },
+    "src/workshop/PhysicsViewport.ts": {
+      "lines": 153,
+      "worst": 41,
+      "overLimit": 1
+    },
+    "src/workshop/ReviewCandidates.ts": {
+      "lines": 269,
+      "worst": 26,
+      "overLimit": 1
+    },
+    "src/workshop/ReviewPage.tsx": {
+      "lines": 718,
+      "worst": 47,
+      "overLimit": 3
+    },
+    "src/workshop/SourcePage.tsx": {
+      "lines": 732,
+      "worst": 40,
+      "overLimit": 1
+    },
+    "src/workshop/WorkshopProjection.ts": {
+      "lines": 174,
+      "worst": 52,
+      "overLimit": 1
+    },
+    "src/workshop/WorldGeometryCandidate.ts": {
+      "lines": 120,
+      "worst": 37,
+      "overLimit": 1
+    },
+    "src/workshop/WorldGeometryPage.tsx": {
+      "lines": 481,
+      "worst": 52,
+      "overLimit": 3
+    },
+    "src/xr/XRSessionManager.ts": {
+      "lines": 344,
+      "worst": 40,
+      "overLimit": 1
+    }
+  }
+}

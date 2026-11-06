@@ -12,9 +12,9 @@ import {
 import { ART_INTENTS, type ArtNote } from "../art/ArtNotes.js";
 import { loadVerifiedArtImage } from "../art/ArtSource.js";
 import { required } from "../shared/required.js";
-import { ErrorMessage, threadPath } from "./App.js";
 import { workshopJson } from "./AuthClient.js";
 import { useOutdoorCatalog } from "./OutdoorQueries.js";
+import { ErrorMessage, threadPath } from "./WorkshopCommon.js";
 import { useSession } from "./WorkshopQueries.js";
 import { legacyValue, useWorkspace } from "./WorkspaceStore.js";
 
@@ -278,7 +278,7 @@ function SourceBrowser({ catalog }: { catalog: ArtCatalog }) {
     // Keep the last acknowledged route until React commits this navigation.
     // A resize during that transition must not refocus the old selection.
     localTarget.current = `${sheet.id}:${rect?.join(",") ?? "sheet"}`;
-    navigate(path, { replace: true });
+    void navigate(path, { replace: true });
   }
   function zoomBy(factor: number) {
     drag.current = null;

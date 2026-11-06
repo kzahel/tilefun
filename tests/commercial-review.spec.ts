@@ -3,17 +3,13 @@ import { expect, test } from "@playwright/test";
 import type { ArtNote } from "../src/art/ArtNotes.js";
 import { COMMERCIAL_REVIEW_CASES } from "../src/art/DenseDistrictShowcase.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
-import {
-  CommercialDistrictSource,
-  commercialDistrictSurfaceAt,
-} from "../src/generation/regional/CommercialDistrictPlanner.js";
+import { CommercialDistrictSource } from "../src/generation/regional/CommercialDistrictPlanner.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 
 const url = "/tilefun/building-lab.html?run=commercial",
   ready = '#app[data-ready="true"]';
 const plan = new CommercialDistrictSource(regionalWorld(2026)).owner(0, 0);
 if (!plan) throw new Error("Missing commercial checkpoint");
-const _bayCell = commercialDistrictSurfaceAt(plan, 319, 514);
 test("commercial batch is indexed, fits phone review and pauses independently", async ({
   page,
 }) => {

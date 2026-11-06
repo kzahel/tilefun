@@ -1,12 +1,12 @@
-import type { WorldMeta } from "../../src/persistence/IWorldRegistry.ts";
-import { encodeClientMessage, encodeServerMessage } from "../../src/shared/binaryCodec.ts";
+import type { WorldMeta } from "../../src/persistence/IWorldRegistry.js";
+import { encodeClientMessage, encodeServerMessage } from "../../src/shared/binaryCodec.js";
 import type {
   ClientMessage,
   PropSnapshot,
   RealmInfo,
   RemoteEditorCursor,
   ServerMessage,
-} from "../../src/shared/protocol.ts";
+} from "../../src/shared/protocol.js";
 
 function sizeClient(msg: ClientMessage): number {
   return encodeClientMessage(msg).byteLength;
@@ -79,7 +79,7 @@ const clientSamples: Array<[string, ClientMessage]> = [
       terrainId: 2,
       paintMode: "positive",
       bridgeDepth: 0,
-      shape: "plus",
+      shape: "cross",
     },
   ],
   [
@@ -159,21 +159,7 @@ const serverSamples: Array<[string, ServerMessage]> = [
     "sync-cvars",
     {
       type: "sync-cvars",
-      cvars: {
-        gravity: 1,
-        friction: 100,
-        accelerate: 100,
-        airAccelerate: 1,
-        airWishCap: 6,
-        stopSpeed: 16,
-        noBunnyHop: false,
-        smallJumps: false,
-        platformerAir: false,
-        timeScale: 1,
-        tickMs: 16.6667,
-        physicsMult: 1,
-        tickRate: 60,
-      },
+      cvars: { gravity: 1 },
     },
   ],
   [

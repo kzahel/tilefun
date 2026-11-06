@@ -1661,6 +1661,9 @@ export class GameServer {
         });
         return;
       }
+      default:
+        // Session- and realm-scoped messages continue below.
+        break;
     }
 
     // set-editor-mode is handled at the GameServer level so it works even

@@ -370,7 +370,7 @@ function changedView(immediate = false): void {
   requestDraw();
   clearTimeout(requestTimer);
   history.replaceState(null, "", explorerUrl(location.href, generation, view, overlays, preview));
-  if (immediate) requestQuery();
+  if (immediate) void requestQuery();
   else requestTimer = window.setTimeout(requestQuery, 60);
 }
 

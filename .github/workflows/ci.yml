@@ -34,7 +34,7 @@ jobs:
             worker/package-lock.json
       - run: npm install --global npm@11.19.0
       - run: npm ci
-      - run: npx biome check .
+      - run: npm run check
       - run: npm ci --prefix worker
       - run: npm audit --audit-level=high
       - run: npm audit --prefix worker --audit-level=high

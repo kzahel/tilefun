@@ -22,7 +22,7 @@ test("new regional world opens at a furnished station with moving native curved 
     page.evaluate(() => {
       const game = (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game;
       return {
@@ -44,7 +44,7 @@ test("new regional world opens at a furnished station with moving native curved 
   await page.evaluate(() => {
     const game = (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game;
     game.debugPanel.setZoom(0.5);
@@ -52,7 +52,7 @@ test("new regional world opens at a furnished station with moving native curved 
   await page.waitForFunction(() => {
     const game = (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game;
     if (game.camera.zoom !== 0.5) return false;

@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
 
 const version = CURRENT_REGIONAL_VERSION;
@@ -32,7 +32,7 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
   // This checks terrain readiness during traversal. Moving traffic must not
   // turn it into a collision/timing lottery at the starting road intersection.
   await page.evaluate(() => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     g.transport.send({ type: "set-debug", paused: false });
   });
   const sample = (direction: number) =>

@@ -505,6 +505,7 @@ export class ForestWork {
       this.manager.spawn(site);
       return site;
     }
+    return undefined;
   }
   private raven(a: Entity, dt: number, c: WorkContext, planning?: AiPlanningScheduler) {
     const t = a.animalWork,

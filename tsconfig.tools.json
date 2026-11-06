@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "types": ["vite/client", "node", "webxr"]
+  },
+  "include": [
+    "src/**/*.d.ts",
+    "tests",
+    "tests-node",
+    "tests-http",
+    "tests-support",
+    "captures",
+    "scripts/**/*.ts",
+    "*.config.ts"
+  ]
+}

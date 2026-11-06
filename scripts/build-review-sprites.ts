@@ -2,7 +2,6 @@
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 // pngjs is also used by the main atlas builder.
-// @ts-expect-error pngjs has no bundled declarations
 import pngjs from "pngjs";
 import { buildLayeredApartmentPlan } from "../src/interiors/ApartmentArchitecture.js";
 import { parseFloorPlan } from "../src/interiors/ApartmentFloorPlan.js";

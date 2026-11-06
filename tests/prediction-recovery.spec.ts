@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import type { RemoteStateView } from "../src/client/ClientStateView.js";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 
 for (const renderer of ["canvas", "gpu"]) {
@@ -14,7 +14,7 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect(page.getByTestId("world-menu")).toBeHidden();
     await expect(page.locator("#game")).toHaveAttribute("data-generator", "flat");
     await page.evaluate(() => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       const seqs: number[] = [];
       const send = g.transport.send.bind(g.transport);
       g.transport.send = (message) => {
@@ -29,7 +29,7 @@ for (const renderer of ["canvas", "gpu"]) {
         .poll(() =>
           page.evaluate(
             () =>
-              (document.querySelector("#game") as unknown as { __game: GameClient }).__game
+              (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game
                 .stateView.editorEnabled,
           ),
         )
@@ -37,7 +37,8 @@ for (const renderer of ["canvas", "gpu"]) {
       if (i === 0) {
         // Random solid chickens can block this flat-world movement fixture.
         await page.evaluate(() => {
-          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+            .__game;
           for (const entity of g.stateView.entities)
             if (entity.type === "chicken")
               g.transport.send({ type: "edit-delete-entity", entityId: entity.id });
@@ -45,7 +46,7 @@ for (const renderer of ["canvas", "gpu"]) {
         await expect
           .poll(() =>
             page.evaluate(() => {
-              const g = (document.querySelector("#game") as unknown as { __game: GameClient })
+              const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
                 .__game;
               return g.stateView.entities.some((e) => e.type === "chicken");
             }),
@@ -58,14 +59,14 @@ for (const renderer of ["canvas", "gpu"]) {
         .poll(() =>
           page.evaluate(
             () =>
-              (document.querySelector("#game") as unknown as { __game: GameClient }).__game
+              (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game
                 .stateView.editorEnabled,
           ),
         )
         .toBe(false);
       const before = await page.evaluate(
         () =>
-          (document.querySelector("#game") as unknown as { __game: GameClient }).__game.stateView
+          (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game.stateView
             .playerEntity.position.wx,
       );
       await page.keyboard.down("ArrowRight");
@@ -74,7 +75,8 @@ for (const renderer of ["canvas", "gpu"]) {
       await expect
         .poll(() =>
           page.evaluate(() => {
-            const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+            const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+              .__game;
             const view = g.stateView as RemoteStateView;
             return Math.abs(view.playerEntity.position.wx - view.serverPlayerEntity.position.wx);
           }),
@@ -82,7 +84,7 @@ for (const renderer of ["canvas", "gpu"]) {
         .toBeLessThan(4);
       const after = await page.evaluate(
         () =>
-          (document.querySelector("#game") as unknown as { __game: GameClient }).__game.stateView
+          (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game.stateView
             .playerEntity.position.wx,
       );
       expect(after).toBeGreaterThan(before + 4);

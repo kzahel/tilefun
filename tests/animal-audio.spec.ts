@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { animalSoundCoverage } from "../src/audio/AnimalVoice.js";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { ANIMAL_BROWSER_ENTRIES } from "../src/workshop/AnimalBrowserData.js";
 
@@ -119,7 +119,7 @@ test("ordinary Worker game plays placed farm voices and stops them at menu/focus
   await page.getByTestId("main-menu-toggle").click();
   await page.getByRole("button", { name: "Edit", exact: true }).click();
   await page.evaluate(() => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const p = g.stateView.playerEntity.position;
     g.transport.send({
       type: "edit-spawn",

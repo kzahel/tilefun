@@ -1,4 +1,3 @@
-import type { Entity } from "../entities/Entity.js";
 import { vehicleNoseHeading } from "../traffic/Vehicle.js";
 import type { EquipmentPose } from "./EquipmentPose.js";
 
@@ -13,17 +12,6 @@ export const TRANSPORTER = {
   toe: -152,
   loadX: -21,
 } as const;
-export function isTransporter(e: Pick<Entity, "type">) {
-  return e.type === TRANSPORTER.type;
-}
-export function transporterLocal(truck: EquipmentPose, position: Entity["position"]) {
-  const h = vehicleNoseHeading(truck),
-    c = Math.cos(h),
-    s = Math.sin(h);
-  const x = position.wx - truck.position.wx,
-    y = position.wy - truck.position.wy;
-  return { x: x * c + y * s, y: -x * s + y * c };
-}
 export function transporterWorld(truck: EquipmentPose, x: number, y = 0) {
   const h = vehicleNoseHeading(truck),
     c = Math.cos(h),

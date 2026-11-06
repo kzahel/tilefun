@@ -621,6 +621,7 @@ async function findUnchecked(): Promise<ReadyCase | undefined> {
     await verifyCase(c);
     if (!excluded.has(c.id) && (!state.uncheckedOnly || !judgment(c))) return c;
   }
+  return undefined;
 }
 async function start(): Promise<void> {
   drawStatus();

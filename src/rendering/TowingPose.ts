@@ -2,7 +2,6 @@ import type { Entity } from "../entities/Entity.js";
 import profiles from "../traffic/towing-profiles.json" with { type: "json" };
 import type { EquipmentPose } from "./EquipmentPose.js";
 
-export const TOW_TRUCK = "vehicle-v1:tow-truck";
 /** World pixels; cradle axle is behind the truck's existing rear bumper. */
 export const TOW = { hitch: -80, lift: 12, maxAngle: (70 * Math.PI) / 180, reach: 24 } as const;
 

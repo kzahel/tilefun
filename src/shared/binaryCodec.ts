@@ -14,7 +14,7 @@ import { PLAYER_MODELS } from "../characters/PlayerModels.js";
 import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
 import { paintFromWire, paintWireIndex } from "../traffic/VehiclePaint.js";
 import type { EntityDelta } from "./entityDelta.js";
-import { ENTITY_TYPE_LIST, ENTITY_TYPE_TO_INDEX, indexToEntityType } from "./entityTypeIndex.js";
+import { ENTITY_TYPE_TO_INDEX, indexToEntityType } from "./entityTypeIndex.js";
 import { physicsStateBytes, readPhysicsState, writePhysicsState } from "./physicsStateCodec.js";
 import type {
   ChunkSnapshot,
@@ -1256,4 +1256,4 @@ export function quantizeAxis(v: number): number {
 
 // ---- Exports for testing ----
 
-export { ENTITY_TYPE_LIST, ENTITY_TYPE_TO_INDEX };
+export { ENTITY_TYPE_TO_INDEX };

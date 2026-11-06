@@ -95,7 +95,7 @@ test("two clients share a persistent interior and cross-origin explorer reads li
       p.evaluate(() => {
         const g = (
           document.querySelector("#game") as unknown as {
-            __game: import("../src/client/GameClient.js").GameClient;
+            __game: import("../src/client/GameTestHooks.js").GameTestHooks;
           }
         ).__game;
         return g.stateView.props.filter((p) => p.type.startsWith("prop-interior-furniture:"))
@@ -106,7 +106,7 @@ test("two clients share a persistent interior and cross-origin explorer reads li
     await page.evaluate(() => {
       const g = (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game;
       const bed = g.stateView.props.find((p) => p.proceduralId === "fixture:bed");

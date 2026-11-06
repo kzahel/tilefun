@@ -1,21 +1,15 @@
 import { expect, type Page, test } from "@playwright/test";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 
 // Use the full Chromium compositor for native touch scrolling, not headless-shell.
 test.use({ channel: "chromium" });
-
-type EditorTestGame = {
-  gcSendRequest(message: unknown): Promise<{ meta: { id: string } }>;
-  nextRequestId: number;
-  stateView: { editorEnabled: boolean; props: { type: string }[] };
-  camera: { x: number; y: number };
-};
 
 async function openEditor(page: Page) {
   await page.goto("/tilefun/");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async () => {
-    const game = (document.querySelector("#game") as unknown as { __game: EditorTestGame }).__game;
-    const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" };
+    const game = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+    const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
     const created = await game.gcSendRequest({
       type: "create-world",
       requestId: game.nextRequestId++,
@@ -36,7 +30,7 @@ async function openEditor(page: Page) {
 
 async function gameState(page: Page) {
   return page.evaluate(() => {
-    const game = (document.querySelector("#game") as unknown as { __game: EditorTestGame }).__game;
+    const game = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     return {
       editing: game.stateView.editorEnabled,
       slides: game.stateView.props.filter((prop) => prop.type === "prop-slide").length,

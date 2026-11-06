@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { AudioManager } from "../audio/AudioManager.js";
 import { FootstepSystem } from "../audio/FootstepSystem.js";
-import { buildFootstepManifest } from "../audio/SurfaceType.js";
+import { buildAudioManifest } from "../audio/SurfaceType.js";
 import { isBoat } from "../boats/Boat.js";
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import {
@@ -859,7 +859,7 @@ export default function NaturalLandscapePage() {
           audio.current ??= new AudioManager();
           if (!sounds) {
             audio.current.tryResume();
-            void audio.current.preload(buildFootstepManifest());
+            void audio.current.preload(buildAudioManifest());
           } else audio.current.stopCreatureCalls();
           setSounds(!sounds);
         }}

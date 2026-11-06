@@ -59,10 +59,8 @@ for (const asset of selection.assets) {
     rect = [...definition.rect];
     const prop = createProp(asset.type, 0, 0);
     if (!prop.sprite) throw Error("Missing runtime sprite");
-    anchor = [
-      prop.sprite.spriteWidth / 2,
-      prop.sprite.spriteHeight - (prop.sprite.drawOffsetY ?? 0),
-    ];
+    // Prop sprites have no draw offset; the anchor is the bottom centre.
+    anchor = [prop.sprite.spriteWidth / 2, prop.sprite.spriteHeight];
     physical = { collider: prop.collider, walls: prop.walls, sortOffsetY: prop.sortOffsetY ?? 0 };
     runtimeEvidence = {
       type: asset.type,

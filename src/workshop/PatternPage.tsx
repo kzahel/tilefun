@@ -21,10 +21,10 @@ import {
 } from "../patterns/PatternDocument.js";
 import { renderPatternDocument } from "../patterns/PatternRuntime.js";
 import { RoadType } from "../road/RoadType.js";
-import { ErrorMessage } from "./App.js";
 import { loadReviewAtlas } from "./InteriorCandidates.js";
 import { TREE_PATTERN_CASES, treeCaseDocument } from "./PatternCandidates.js";
 import { reviewAssets } from "./ReviewAssets.js";
+import { ErrorMessage } from "./WorkshopCommon.js";
 import "./patterns.css";
 
 const STORAGE = "tilefun.pattern-drafts.v1";

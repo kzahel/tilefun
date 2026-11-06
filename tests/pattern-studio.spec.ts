@@ -136,7 +136,7 @@ test("game row brush uses the same compiler, exposes host history and restores a
   const coordinates = await page.evaluate(() => {
     const g = (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game;
     g.camera.snapTo(80, 100);
@@ -153,7 +153,7 @@ test("game row brush uses the same compiler, exposes host history and restores a
     page.evaluate(() =>
       (
         document.querySelector("#game") as unknown as {
-          __game: import("../src/client/GameClient.js").GameClient;
+          __game: import("../src/client/GameTestHooks.js").GameTestHooks;
         }
       ).__game.stateView.props.filter((p) => p.type.startsWith("pattern:")),
     );
@@ -166,7 +166,7 @@ test("game row brush uses the same compiler, exposes host history and restores a
   await page.evaluate(() =>
     (
       document.querySelector("#game") as unknown as {
-        __game: import("../src/client/GameClient.js").GameClient;
+        __game: import("../src/client/GameTestHooks.js").GameTestHooks;
       }
     ).__game.transport.send({ type: "flush" }),
   );

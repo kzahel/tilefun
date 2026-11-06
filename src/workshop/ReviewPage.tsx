@@ -4,7 +4,6 @@ import { reviewContext2D } from "../art/reviewCanvas.js";
 import { reviewCases } from "../interiors/review/ReviewCases.js";
 import { parseReviewPins } from "../interiors/review/ReviewFeedback.js";
 import { required } from "../shared/required.js";
-import { candidateLabel, ErrorMessage, LegacyLink, reviewPath } from "./App.js";
 import {
   interiorFingerprint,
   loadReviewAtlas,
@@ -18,6 +17,7 @@ import { reviewAssets } from "./ReviewAssets.js";
 import { artReviewDefinitions, buildArtCandidate, renderArtCandidate } from "./ReviewCandidates.js";
 import { primaryScene, scenePath } from "./SceneReview.js";
 import { buildWildlifeCandidate, WILDLIFE_REVIEWS } from "./WildlifeCandidates.js";
+import { candidateLabel, ErrorMessage, LegacyLink, reviewPath } from "./WorkshopCommon.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
 import type { CandidateSummary, WorkshopCandidate, WorkshopEvent } from "./WorkshopTypes.js";
 import {
@@ -320,7 +320,7 @@ function ReviewCase({
   }
   function open(candidate: WorkshopCandidate, filter = effectiveFilter) {
     saveQueue({ ...q, filter, selected: candidate.id });
-    navigate(reviewPath(candidate.id) + (filter === "all" ? "?show=all" : ""));
+    void navigate(reviewPath(candidate.id) + (filter === "all" ? "?show=all" : ""));
   }
   function move(direction: number) {
     if (q.paused || visible.length < 2) return;
@@ -362,7 +362,7 @@ function ReviewCase({
         .find((row) => row.id !== c.id && visibleIn(row, effectiveFilter));
       if (next) {
         saveQueue({ ...nextQueue, selected: next.id });
-        navigate(reviewPath(next.id) + (effectiveFilter === "all" ? "?show=all" : ""));
+        void navigate(reviewPath(next.id) + (effectiveFilter === "all" ? "?show=all" : ""));
       }
     }
   }
@@ -388,7 +388,7 @@ function ReviewCase({
       selected: latest.id,
     };
     saveQueue(next);
-    navigate(reviewPath(latest.id));
+    void navigate(reviewPath(latest.id));
   }
   useEffect(() => {
     const key = (event: KeyboardEvent) => {
@@ -456,7 +456,7 @@ function ReviewCase({
               saveQueue({ ...q, filter });
               const first = rows.find((row) => visibleIn(row, filter));
               if (first) open(first, filter);
-              else navigate(reviewPath(c.id) + (filter === "all" ? "?show=all" : ""));
+              else void navigate(reviewPath(c.id) + (filter === "all" ? "?show=all" : ""));
             }}
           >
             <option value="unchecked">Unchecked</option>

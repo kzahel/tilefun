@@ -99,7 +99,7 @@ export function registerClientCommands(engine: ConsoleEngine, gc: GameContext): 
         return;
       }
       out("Fetching public rooms...");
-      dir.listRooms().then((rooms) => {
+      void dir.listRooms().then((rooms) => {
         if (rooms.length === 0) {
           out("No public games found");
           return;

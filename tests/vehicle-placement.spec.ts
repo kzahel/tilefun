@@ -1,10 +1,10 @@
 import { expect, type Page, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { DRIVABLE_MODELS } from "../src/traffic/Vehicle.js";
 
 const vehicles = (page: Page) =>
   page.evaluate(() => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     return g.stateView.serverEntities
       .filter((e) => e.type.startsWith("vehicle-v1:"))
       .map((e) => ({
@@ -19,7 +19,7 @@ async function point(page: Page, wx: number, wy: number) {
   return page.evaluate(
     ({ wx, wy }) => {
       const canvas = document.querySelector("#game") as HTMLCanvasElement;
-      const g = (canvas as unknown as { __game: GameClient }).__game;
+      const g = (canvas as unknown as { __game: GameTestHooks }).__game;
       g.camera.zoom = 1 / 3;
       g.camera.snapTo(wx, wy + 160);
       const p = g.camera.worldToScreen(wx, wy),
@@ -34,7 +34,7 @@ async function point(page: Page, wx: number, wy: number) {
 }
 async function reopen(page: Page, renderer: string) {
   await page.evaluate(async () => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     g.loop.stop();
     const host = g.netEmulatedTransport.base as unknown as {
       setHidden(v: boolean): void;
@@ -66,7 +66,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
   await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async () => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
     const created = await g.gcSendRequest({
       type: "create-world",
@@ -94,7 +94,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
   // Ambient chickens move in flat worlds. Choose a loaded, clear footprint
   // rather than accidentally testing the legitimate body-overlap rejection.
   const ground = await page.evaluate(() => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     const points = [-200, -120, 0, 120, 200].flatMap((wx) =>
       [-200, -120, 0, 120, 200].map((wy) => ({ wx, wy })),
     );
@@ -127,7 +127,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
     touchPoints: [{ ...spot, id: 1 }],
   });
   const preview = await page.evaluate(() => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     return [g.editorMode.cursorWorldX, g.editorMode.cursorWorldY];
   });
   expect(preview[0]).toBeCloseTo(ground.wx, 0);
@@ -142,7 +142,8 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
     await expect
       .poll(() =>
         page.evaluate(() => {
-          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+            .__game;
           const d = g.renderer.getDiagnostics() as {
             gpu?: { vehicleAssets?: Record<string, { state: string; drawMeshes: number }> };
           };
@@ -158,7 +159,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
   await page.getByRole("button", { name: "Exit editor", exact: true }).tap();
   await expect.poll(async () => (await vehicles(page)).length).toBe(1);
   await page.evaluate(async ({ wx, wy }) => {
-    const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     await g.gcSendRequest({
       type: "rcon",
       requestId: g.nextRequestId++,
@@ -169,16 +170,12 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
   await expect
     .poll(() =>
       page.evaluate(() => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
         return g.stateView.serverPlayerEntity.parentId;
       }),
     )
     .toBe(car.id);
   await page.locator("#game").focus();
-  if (model === "ambulance") {
-    await page.keyboard.press("l", { delay: 80 });
-    await expect.poll(async () => (await vehicles(page))[0]?.state).toBe(3);
-  }
   await page.keyboard.down("ArrowRight");
   await expect.poll(async () => (await vehicles(page))[0]?.wx ?? 0).toBeGreaterThan(car.wx + 30);
   await page.keyboard.up("ArrowRight");

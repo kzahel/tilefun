@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import type { GameClient } from "../src/client/GameClient.js";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { FarmsteadSource } from "../src/generation/regional/FarmsteadPlanner.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
@@ -20,7 +20,7 @@ test("farmhouse and tiny outbuilding enter and return through the normal door co
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(
     async ({ generation, x, y }) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       const world = await g.gcSendRequest({
         type: "create-world",
         requestId: g.nextRequestId++,
@@ -40,7 +40,7 @@ test("farmhouse and tiny outbuilding enter and return through the normal door co
     const door = exteriorDoors({ type: prop.propType, position: { wx: prop.wx, wy: prop.wy } })[0];
     if (!door) throw Error("Missing farm door");
     await page.evaluate(async (outside) => {
-      const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+      const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       await g.gcSendRequest({
         type: "rcon",
         requestId: g.nextRequestId++,
@@ -56,7 +56,8 @@ test("farmhouse and tiny outbuilding enter and return through the normal door co
     await expect
       .poll(() =>
         page.evaluate(() => {
-          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+            .__game;
           return g.stateView.interior?.buildingType;
         }),
       )
@@ -68,7 +69,8 @@ test("farmhouse and tiny outbuilding enter and return through the normal door co
     await expect
       .poll(() =>
         page.evaluate(() => {
-          const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
+          const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks })
+            .__game;
           return g.stateView.serverPlayerEntity.position;
         }),
       )
