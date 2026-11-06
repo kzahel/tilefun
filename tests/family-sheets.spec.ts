@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { expect, type Locator, type Page, test } from "@playwright/test";
-import { required } from "../src/art/ArtCatalog.js";
+import { required } from "../src/shared/required.js";
 import { familyCanonicalJSON } from "../src/workshop/FamilySheetArt.js";
 import type { FamilySheetCatalog } from "../src/workshop/FamilySheetTypes.js";
 import type { WorkshopEvent } from "../src/workshop/WorkshopTypes.js";

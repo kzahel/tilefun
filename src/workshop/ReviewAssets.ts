@@ -1,8 +1,9 @@
-import { type ArtCatalog, required } from "../art/ArtCatalog.js";
+import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { loadVerifiedArtImage } from "../art/ArtSource.js";
 import { type GameAssets, loadTerrainAssets } from "../assets/GameAssets.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
+import { required } from "../shared/required.js";
 
 let assetsPromise: Promise<{ assets: GameAssets; catalog: ArtCatalog }> | undefined;
 export async function reviewAssets() {

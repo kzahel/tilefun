@@ -35,9 +35,6 @@ export class EditScene implements GameScene {
     if (gc.editorButton) gc.editorButton.textContent = "Play";
 
     // Tell server we're in editor mode
-    if (!gc.serialized && gc.server) {
-      gc.server.getLocalSession().editorEnabled = true;
-    }
     gc.transport.send({ type: "set-editor-mode", enabled: true });
 
     // Bind editor-specific actions
@@ -91,19 +88,10 @@ export class EditScene implements GameScene {
 
     // Debug panel state
     if (gc.debugPanel.consumeBaseModeChange() || gc.debugPanel.consumeConvexChange()) {
-      if (gc.serialized) {
-        gc.transport.send({ type: "invalidate-all-chunks" });
-      } else if (gc.server) {
-        gc.server.invalidateAllChunks();
-      }
+      gc.transport.send({ type: "invalidate-all-chunks" });
     }
 
-    if (gc.serialized) {
-      gc.sendDebugState(gc.debugPanel.paused);
-    } else if (gc.server) {
-      const session = gc.server.getLocalSession();
-      session.debugPaused = gc.debugPanel.paused;
-    }
+    gc.sendDebugState(gc.debugPanel.paused);
 
     // Sync right-click unpaint and live entity/prop refs into editor mode
     gc.editorModel.setTemporaryUnpaint(gc.editorMode.rightClickUnpaint);
@@ -257,33 +245,14 @@ export class EditScene implements GameScene {
       }
     }
 
-    // Server tick + chunk loading (no camera follow — editor pans manually)
-    if (gc.serialized) {
-      if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
-        const savedZoom = gc.camera.zoom;
-        gc.camera.zoom = 1;
-        gc.sendVisibleRange();
-        gc.camera.zoom = savedZoom;
-      } else {
-        gc.sendVisibleRange();
-      }
-    } else if (gc.server) {
-      const session = gc.server.getLocalSession();
-      session.visibleRange = gc.camera.getVisibleChunkRange();
-      gc.server.tick(dt);
-
-      session.cameraX = gc.camera.x;
-      session.cameraY = gc.camera.y;
-      session.cameraZoom = gc.camera.zoom;
-
-      if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
-        const savedZoom = gc.camera.zoom;
-        gc.camera.zoom = 1;
-        gc.server.updateVisibleChunks(gc.camera.getVisibleChunkRange());
-        gc.camera.zoom = savedZoom;
-      } else {
-        gc.server.updateVisibleChunks(gc.camera.getVisibleChunkRange());
-      }
+    // Chunk loading (no camera follow — editor pans manually)
+    if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
+      const savedZoom = gc.camera.zoom;
+      gc.camera.zoom = 1;
+      gc.sendVisibleRange();
+      gc.camera.zoom = savedZoom;
+    } else {
+      gc.sendVisibleRange();
     }
   }
 

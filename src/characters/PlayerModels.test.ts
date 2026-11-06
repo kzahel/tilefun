@@ -1,12 +1,12 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { createPlayer, updatePlayerFromInput } from "../entities/Player.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import type { FrameMessage } from "../shared/protocol.js";
+import { required } from "../shared/required.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { applyPlayerModel, isPlayerModel, PLAYER_MODELS } from "./PlayerModels.js";
 import { PROMOTED_CHARACTERS } from "./PromotedCharacters.js";

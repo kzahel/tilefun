@@ -1,9 +1,11 @@
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import { launchBody, setBodyPose } from "../physics/PhysicalEdits.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
+import { gap } from "../shared/gap.js";
 import type { AnimalWork } from "./AnimalWork.js";
 import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import type { AnimalWorkSystem, WorkContext } from "./AnimalWorkSystem.js";
@@ -12,7 +14,6 @@ import { createForageItem, restoreWorkItemPose } from "./ForageResources.js";
 import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
 import { type ClimbTree, sameTree, treeClimbPoint } from "./TreeClimbing.js";
 
-const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
 const kindOf = (a: Entity) => {
   const p = faunaProfile(a.type);
   return p?.species === "capuchin-monkey"
@@ -37,10 +38,10 @@ export class WoodlandWork {
     const p = a.position;
     return this.manager.spatialHash
       .queryRange(
-        Math.floor((p.wx - 160) / 256),
-        Math.floor((p.wy - 160) / 256),
-        Math.floor((p.wx + 160) / 256),
-        Math.floor((p.wy + 160) / 256),
+        Math.floor((p.wx - 160) / CHUNK_SIZE_PX),
+        Math.floor((p.wy - 160) / CHUNK_SIZE_PX),
+        Math.floor((p.wx + 160) / CHUNK_SIZE_PX),
+        Math.floor((p.wy + 160) / CHUNK_SIZE_PX),
       )
       .filter((e) => gap(p, e.position) <= 160)
       .sort(

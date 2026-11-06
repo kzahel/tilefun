@@ -17,7 +17,7 @@ const legacyUnreliableFrames = process.argv.includes("--legacy-unreliable");
 const results = [];
 for (const profile of profiles) {
   for (const seed of [42, 2026, 8675309]) {
-    const rig = createReplicationRig();
+    const rig = await createReplicationRig();
     let rng = seed >>> 0;
     const random = () => {
       rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0;
@@ -109,7 +109,7 @@ for (const profile of profiles) {
         convergedAfter120CleanFrames: missing + extra + mismatched === 0,
       });
     } finally {
-      rig.server.destroy();
+      await rig.server.destroy();
     }
   }
 }

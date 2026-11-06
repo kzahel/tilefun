@@ -1,9 +1,9 @@
 import { expect, it, vi } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createChicken } from "../entities/Chicken.js";
 import type { Entity } from "../entities/Entity.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { createRobin } from "../wildlife/Robin.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { RealmActivity } from "./RealmActivity.js";

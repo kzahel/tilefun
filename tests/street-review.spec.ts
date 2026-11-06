@@ -1,9 +1,9 @@
 import { expect, test } from "@playwright/test";
-import { required } from "../src/art/ArtCatalog.js";
 import type { ArtNote } from "../src/art/ArtNotes.js";
 import { STREET_REVIEW_SCENES } from "../src/generation/regional/StreetRecipes.js";
 import { denseCitySurfacePieces } from "../src/road/DenseCitySurface.js";
 import { RoadType } from "../src/road/RoadType.js";
+import { required } from "../src/shared/required.js";
 
 const URL = "/tilefun/building-lab.html?run=streets";
 const ready = '#app[data-ready="true"]';

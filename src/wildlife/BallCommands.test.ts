@@ -1,5 +1,4 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { RemoteStateView } from "../client/ClientStateView.js";
 import { createPlayer } from "../entities/Player.js";
@@ -11,6 +10,7 @@ import {
   encodeClientMessage,
 } from "../shared/binaryCodec.js";
 import type { ClientMessage } from "../shared/protocol.js";
+import { required } from "../shared/required.js";
 import { World } from "../world/World.js";
 import { DEER_TYPE } from "./Deer.js";
 import { FAUNA_PROFILES, faunaType } from "./Fauna.js";

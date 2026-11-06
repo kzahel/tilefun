@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
+import { required } from "../shared/required.js";
 import { CHARACTERS, createCharacterEntity, parseCharacterSettings } from "./CharacterCatalog.js";
 
 describe("character proposals", () => {

@@ -1,10 +1,10 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { Direction } from "../entities/Entity.js";
 import { createPerson1 } from "../entities/Person.js";
 import { createPlayer } from "../entities/Player.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { createFauna } from "../wildlife/Fauna.js";
 import { HORN_STARTLE_RADIUS } from "./HornReaction.js";
 import { PlayerSession } from "./PlayerSession.js";

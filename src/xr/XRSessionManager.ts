@@ -1,7 +1,7 @@
 /// <reference path="./webxr-layers.d.ts" />
 
 import type { GameLoop } from "../core/GameLoop.js";
-import type { Movement } from "../input/ActionManager.js";
+import type { Movement } from "../shared/Movement.js";
 
 /** Virtual screen width in meters. */
 const SCREEN_WIDTH_M = 2.0;

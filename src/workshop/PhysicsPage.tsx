@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { GameLoop } from "../core/GameLoop.js";
-import type { Movement } from "../input/ActionManager.js";
 import {
   CONTROLLER_EVENT,
   type ControllerCommand,
@@ -14,6 +13,7 @@ import {
   coopScript,
 } from "../scenarios/CoopRecipe.js";
 import { ScenarioClient } from "../scenarios/ScenarioClient.js";
+import type { Movement } from "../shared/Movement.js";
 import { manualCarMovement } from "../traffic/CarControls.js";
 import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { PhysicsViewport } from "./PhysicsViewport.js";

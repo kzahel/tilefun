@@ -1,8 +1,8 @@
-import { required } from "../art/ArtCatalog.js";
 import { BOAT_MODEL, BOAT_VIEWS } from "../boats/Boat.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
 import { rotateBodyVector } from "../physics/BodyRotation.js";
+import { required } from "../shared/required.js";
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
 import { validVehiclePaint, vehiclePaintSheet } from "./VehiclePaint.js";
 import meshBodies from "./vehicle-body-bounds.json" with { type: "json" };
@@ -82,19 +82,6 @@ export function vehicleBodySize(type: string, heading: number): { width: number;
   const length = body.length;
   return { width: length * c + body.breadth * s, height: length * s + body.breadth * c };
 }
-const roofSizes = new Map(
-  DRIVABLE_MODELS.map((id) => [
-    id,
-    Math.max(
-      0,
-      Math.min(
-        ...views
-          .filter((v) => v.vehicleId === id)
-          .flatMap((v) => v.metadata.colliders.map((c) => Math.min(c.width, c.height))),
-      ) - 4,
-    ),
-  ]),
-);
 const roadWidths = new Map(
   DRIVABLE_MODELS.map((model) => [
     model,
@@ -230,8 +217,4 @@ export function createVehicle(
   };
   applyVehicleFacing(entity, direction);
   return entity;
-}
-/** Shared, direction-independent safe standing area inside all approved footprints. */
-export function vehicleRoofSize(type: string): number {
-  return roofSizes.get(type.slice(11)) ?? 0;
 }

@@ -1,4 +1,4 @@
-import { type ArtCatalog, required } from "../art/ArtCatalog.js";
+import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { loadVerifiedArtImage, sha256 } from "../art/ArtSource.js";
 import { CHARACTERS, type CharacterDefinition } from "../characters/CharacterCatalog.js";
 import { CharacterTestScene } from "../characters/CharacterTestScene.js";
@@ -10,6 +10,7 @@ import surfaceSource from "../physics/surfaceHeight.ts?raw";
 import scenarioSource from "../scenarios/CharacterRecipe.ts?raw";
 import hostSource from "../scenarios/ScenarioSession.ts?raw";
 import realmSource from "../server/Realm.ts?raw";
+import { required } from "../shared/required.js";
 import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 

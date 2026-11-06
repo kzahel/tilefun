@@ -1,11 +1,11 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { RemoteStateView } from "../client/ClientStateView.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { PropManager } from "../entities/PropManager.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
+import { required } from "../shared/required.js";
 import { applyVehicleFacing, createVehicle } from "../traffic/Vehicle.js";
 import { World } from "../world/World.js";
 import { PlayerSession } from "./PlayerSession.js";

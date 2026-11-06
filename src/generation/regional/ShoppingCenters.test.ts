@@ -1,8 +1,8 @@
 import { expect, it } from "vitest";
-import { required } from "../../art/ArtCatalog.js";
 import { createProp, isPropType } from "../../entities/PropFactories.js";
 import { isCityRoad } from "../../road/DenseCitySurface.js";
 import { isParkingSurface } from "../../road/ParkingSurface.js";
+import { required } from "../../shared/required.js";
 import { buildLaneGraph, generatedSegments } from "../../traffic/LaneGraph.js";
 import { shoppingLot } from "../../traffic/ShoppingCenter.js";
 import { DenseDistrictSource, denseSurfaceAt } from "./DenseDistrictPlanner.js";

@@ -1,7 +1,8 @@
-import { required } from "../art/ArtCatalog.js";
 import type { CreatureCallKind } from "../audio/CreatureCall.js";
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
+import { positionSeed } from "../shared/Determinism.js";
+import { required } from "../shared/required.js";
 import { AQUATIC_HUNTER_PROFILES, type AquaticHunterSpecies } from "./AquaticHunters.js";
 import type { FaunaSpecies } from "./Fauna.js";
 import {
@@ -216,7 +217,7 @@ export function createPredator(species: PredatorSpecies, wx: number, wy: number)
       timer: 1.5,
       elapsed: 0,
       cooldown: 0,
-      randomState: ((Math.floor(wx) * 73856093) ^ (Math.floor(wy) * 19349663) ^ 8137) >>> 0,
+      randomState: positionSeed(wx, wy, 8137),
       meals: 0,
     },
     weight: p.weight,

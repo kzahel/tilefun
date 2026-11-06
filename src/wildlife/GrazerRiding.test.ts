@@ -1,9 +1,9 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { createPlayer } from "../entities/Player.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { createFauna, faunaProfile, faunaType } from "./Fauna.js";
 import { canEat } from "./FoodWeb.js";
 import { createPredator } from "./Predator.js";

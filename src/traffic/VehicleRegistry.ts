@@ -1,4 +1,5 @@
 import { BOAT_MODEL } from "../boats/Boat.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import {
   aabbOverlapsPropWalls,
   aabbOverlapsSolid,
@@ -103,13 +104,13 @@ export class VehicleRegistry {
     if (!c) return;
     const bounds = getEntityAABB(entity.position, c);
     for (
-      let cy = Math.floor(bounds.top / 256);
-      cy <= Math.floor((bounds.bottom - 0.001) / 256);
+      let cy = Math.floor(bounds.top / CHUNK_SIZE_PX);
+      cy <= Math.floor((bounds.bottom - 0.001) / CHUNK_SIZE_PX);
       cy++
     )
       for (
-        let cx = Math.floor(bounds.left / 256);
-        cx <= Math.floor((bounds.right - 0.001) / 256);
+        let cx = Math.floor(bounds.left / CHUNK_SIZE_PX);
+        cx <= Math.floor((bounds.right - 0.001) / CHUNK_SIZE_PX);
         cx++
       )
         if (!this.world.getChunkIfLoaded(cx, cy)) return;

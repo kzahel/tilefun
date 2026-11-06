@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router";
-import { required } from "../art/ArtCatalog.js";
 import { reviewContext2D } from "../art/reviewCanvas.js";
 import {
   drawParkingStudy,
@@ -8,6 +7,7 @@ import {
   PARKING_KIT,
   parkingStudy,
 } from "../art/studies/ParkingLotStudy.js";
+import { required } from "../shared/required.js";
 import { ErrorMessage, reviewPath } from "./App.js";
 import DeferredVehiclePage from "./DeferredVehiclePage.js";
 import { PreviewViewport } from "./PreviewViewport.js";

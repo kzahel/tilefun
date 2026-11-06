@@ -5,7 +5,10 @@ import { PNG } from "pngjs";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
+import { AUTONOMOUS_ORIGINAL_VEHICLES } from "../../tests-support/AutonomousOriginalVehicles.fixture.js";
+import { verifyOriginalWheelGeometryAndTravel } from "../../tests-support/AutonomousOriginalVehicles.test-helper.js";
+import { readRetainedReplayInput } from "../../tests-support/RetainedReplayInputs.test-helper.js";
+import { TRANSPORTER_EXPECTATIONS } from "../../tests-support/Transporter.fixture.js";
 import { SPRITE_MANIFEST } from "../assets/GameAssets.js";
 import { VEHICLE_PALETTE } from "../editor/EditorPalettes.js";
 import { Direction } from "../entities/Entity.js";
@@ -17,12 +20,9 @@ import {
 import { CarMeshAsset } from "../rendering/CarMeshAsset.js";
 import { EntityMeshPose } from "../rendering/EntityMeshPose.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
+import { required } from "../shared/required.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
-import { AUTONOMOUS_ORIGINAL_VEHICLES } from "./AutonomousOriginalVehicles.fixture.js";
-import { verifyOriginalWheelGeometryAndTravel } from "./AutonomousOriginalVehicles.test-helper.js";
 import { ORIGINAL_VEHICLES } from "./OriginalVehicles.js";
-import { readRetainedReplayInput } from "./RetainedReplayInputs.test-helper.js";
-import { TRANSPORTER_EXPECTATIONS } from "./Transporter.fixture.js";
 import {
   applyVehicleFacing,
   createVehicle,

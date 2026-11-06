@@ -68,7 +68,6 @@ export function renderInterior(
     gc.renderer,
     particles,
     false,
-    undefined,
     drawProps,
     gc.sceneFrame,
   );

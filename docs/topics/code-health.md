@@ -16,6 +16,10 @@ behavior; this topic owns the guardrails that keep structure from regressing.
 - Biome `recommended` plus unused imports/variables, `useConst` and
   `noExplicitAny`; TypeScript `strict`, `noUncheckedIndexedAccess` and
   `exactOptionalPropertyTypes` for `src`.
+- Shared leaf helpers: `shared/required.ts`, `shared/Movement.ts`,
+  `shared/Determinism.ts` (`lcgNext`, `positionSeed`, `fnv1a32`) and
+  `shared/gap.ts`. GameClient has one mode (transport + `RemoteStateView`); Realm
+  always streams. Browser specs reach client state through `__game.stateView`.
 - Largest churn hotspots: `server/Realm.ts`, `client/GameClient.ts`,
   `wildlife/Fauna.ts`, `rendering/collectScene.ts`, `server/GameServer.ts`.
 - The dominant cost is shotgun surgery: new species, replicated fields and

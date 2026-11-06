@@ -1,9 +1,9 @@
 import { createHash } from "node:crypto";
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { RoadType } from "../road/RoadType.js";
 import { GENERATED_CROSSINGS } from "../scenarios/GeneratedCrossingRecipe.js";
+import { required } from "../shared/required.js";
 import { World } from "../world/World.js";
 import { RailwayStrategy } from "./RailwayStrategy.js";
 

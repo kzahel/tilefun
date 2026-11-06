@@ -1,7 +1,9 @@
-import { required } from "../art/ArtCatalog.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
+import { lcgNext } from "../shared/Determinism.js";
+import { gap } from "../shared/gap.js";
+import { required } from "../shared/required.js";
 import { predatorFlightZ, restorePredatorPose } from "./PredatorMotion.js";
 
 export { restorePredatorPose } from "./PredatorMotion.js";
@@ -13,18 +15,16 @@ import { startleDeer } from "./deerInteractions.js";
 import { canEat, creatureSpecies } from "./FoodWeb.js";
 import { startleFauna } from "./faunaInteractions.js";
 import { startleFrog } from "./frogInteractions.js";
-import type { WildlifeEnvironment } from "./mallardAI.js";
 import { startleMallard } from "./mallardInteractions.js";
 import { predatorProfile } from "./Predator.js";
 import { startleRabbit } from "./rabbitInteractions.js";
 import { startleRobin } from "./robinInteractions.js";
+import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 import { scheduleWildlifeRespawn } from "./WildlifeRespawns.js";
 
-const distance = (a: PositionComponent, b: PositionComponent) =>
-  Math.hypot(a.wx - b.wx, a.wy - b.wy);
 const random = (e: Entity) => {
   const ai = required(e.predator);
-  ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
+  ai.randomState = lcgNext(ai.randomState);
   return ai.randomState / 4294967296;
 };
 function enter(e: Entity, state: NonNullable<Entity["predator"]>["state"], timer: number) {
@@ -118,7 +118,7 @@ function clearPath(
   env: WildlifeEnvironment,
   planning?: AiPlanningScheduler,
 ): boolean {
-  const steps = Math.max(1, Math.ceil(distance(e.position, to) / 4));
+  const steps = Math.max(1, Math.ceil(gap(e.position, to) / 4));
   if (steps > 48 || (planning && !planning.path(e, steps))) return false;
   for (let i = 1; i <= steps; i++) {
     const p = {
@@ -142,7 +142,7 @@ export function clearPredatorFlight(
   env: WildlifeEnvironment,
   planning?: AiPlanningScheduler,
 ): boolean {
-  const steps = Math.max(1, Math.ceil(distance(e.position, to) / 4));
+  const steps = Math.max(1, Math.ceil(gap(e.position, to) / 4));
   if (steps > 48 || (planning && !planning.path(e, steps))) return false;
   for (let i = 1; i <= steps; i++) {
     const t = i / steps,
@@ -165,7 +165,7 @@ function launchPredatorFlight(
     speed = required(predatorProfile(e.type)).chaseSpeed;
   ai.flight = {
     elapsed: 0,
-    duration: Math.max(0.8, distance(e.position, to) / speed),
+    duration: Math.max(0.8, gap(e.position, to) / speed),
     from: { ...e.position },
     to: { ...to },
     startZ: e.wz ?? 0,
@@ -207,7 +207,7 @@ export function updatePredatorAI(
     ["sleep", "guard"].includes(ai.state) &&
     !ai.warningCooldown
   ) {
-    const visitor = players.find((p) => distance(p, ai.home) < 64);
+    const visitor = players.find((p) => gap(p, ai.home) < 64);
     if (visitor) {
       ai.warningCooldown = 10;
       enter(e, "display", 1.28);
@@ -231,7 +231,7 @@ export function updatePredatorAI(
     }
     if (
       ai.alarmFrom &&
-      (!ai.aim || distance(e.position, ai.aim) < 4) &&
+      (!ai.aim || gap(e.position, ai.aim) < 4) &&
       (!planning || planning.claim(e, true))
     ) {
       const dx = e.position.wx - ai.alarmFrom.wx,
@@ -277,9 +277,9 @@ export function updatePredatorAI(
     (!prey ||
       (ai.huntElapsed ?? ai.elapsed) > 14 ||
       (ai.state === "chase" && ai.elapsed > (fierce?.chargeSeconds ?? 12)) ||
-      distance(e.position, ai.home) > ai.radius ||
-      distance(prey.position, ai.home) > ai.radius ||
-      distance(prey.position, e.position) > (fierce?.sense ?? 180) + 32)
+      gap(e.position, ai.home) > ai.radius ||
+      gap(prey.position, ai.home) > ai.radius ||
+      gap(prey.position, e.position) > (fierce?.sense ?? 180) + 32)
   ) {
     ai.cooldown = Math.max(ai.cooldown, fierce ? 12 : 5);
     enter(e, "rest", 2);
@@ -296,7 +296,7 @@ export function updatePredatorAI(
       if (
         launching &&
         (fierce?.kind === "griffin" || fierce?.kind === "raptor") &&
-        (distance(e.position, prey.position) > 24 ||
+        (gap(e.position, prey.position) > 24 ||
           Math.abs((e.wz ?? 0) - (env.surfaceZ?.(prey.position) ?? 0)) > 4) &&
         clearPredatorFlight(e, prey.position, env.surfaceZ?.(prey.position) ?? 0, env, planning)
       ) {
@@ -312,7 +312,7 @@ export function updatePredatorAI(
   }
   if (prey) {
     if (ai.state !== "stalk") alarmPrey(prey, e.position);
-    const d = distance(e.position, prey.position);
+    const d = gap(e.position, prey.position);
     if (ai.state === "stalk" && (d < 52 || ai.elapsed > 2)) enter(e, "chase", 0);
     if (
       ai.state === "chase" &&
@@ -341,28 +341,26 @@ export function updatePredatorAI(
       const radius = (fierce?.sense ?? 160) + 32;
       const candidates =
         env.huntCandidates?.(e, radius) ??
-        animals.filter((a) => !a.workItem && distance(a.position, e.position) <= radius);
+        animals.filter((a) => !a.workItem && gap(a.position, e.position) <= radius);
       const start = Math.floor(random(e) * Math.max(1, candidates.length));
       for (let i = 0; i < Math.min(24, candidates.length); i++) {
         if (planning && !planning.candidate(e)) break;
         const a = required(candidates[(start + i) % candidates.length]);
-        const d = distance(e.position, a.position);
+        const d = gap(e.position, a.position);
         const ally = a.predator;
         if (
           fierce?.kind === "wolf" &&
           a !== e &&
           a.type === e.type &&
           ally?.targetId &&
-          (ai.packId
-            ? ally.packId === ai.packId
-            : !ally.packId && distance(ai.home, ally.home) < 96)
+          (ai.packId ? ally.packId === ai.packId : !ally.packId && gap(ai.home, ally.home) < 96)
         ) {
           const shared = animals.find((animal) => animal.persistentId === ally.targetId);
           if (
             shared &&
             canEat(e, shared) &&
-            distance(e.position, shared.position) < (fierce?.sense ?? 160) &&
-            distance(shared.position, ai.home) < ai.radius &&
+            gap(e.position, shared.position) < (fierce?.sense ?? 160) &&
+            gap(shared.position, ai.home) < ai.radius &&
             clearPath(e, shared.position, env, planning)
           )
             packTarget = shared;
@@ -370,7 +368,7 @@ export function updatePredatorAI(
         if (
           canEat(e, a) &&
           d < best &&
-          distance(a.position, ai.home) < ai.radius &&
+          gap(a.position, ai.home) < ai.radius &&
           (fierce?.kind === "griffin" || fierce?.kind === "raptor"
             ? clearPredatorFlight(e, a.position, env.surfaceZ?.(a.position) ?? 0, env, planning)
             : clearPath(e, a.position, env, planning))
@@ -401,7 +399,7 @@ export function updatePredatorAI(
           for (let i = 0; i < Math.min(48, candidates.length); i++) {
             if (planning && !planning.candidate(e)) break;
             const animal = required(candidates[(start + i) % candidates.length]);
-            if (canEat(e, animal) && distance(e.position, animal.position) < fierce.displayRadius)
+            if (canEat(e, animal) && gap(e.position, animal.position) < fierce.displayRadius)
               alarmPrey(animal, e.position);
           }
           restorePredatorPose(e);
@@ -426,15 +424,15 @@ export function updatePredatorAI(
     } else if (!ai.targetId && (fierce?.kind === "griffin" || fierce?.kind === "raptor")) {
       const perches = env.predatorPerches?.(ai.home, ai.radius) ?? [];
       const perch = perches
-        .filter((p) => distance(p, ai.home) < ai.radius)
-        .sort((a, b) => distance(a, ai.home) - distance(b, ai.home))[0];
-      if (perch && distance(e.position, perch) < 5 && Math.abs((e.wz ?? 0) - perch.z) < 3)
+        .filter((p) => gap(p, ai.home) < ai.radius)
+        .sort((a, b) => gap(a, ai.home) - gap(b, ai.home))[0];
+      if (perch && gap(e.position, perch) < 5 && Math.abs((e.wz ?? 0) - perch.z) < 3)
         enter(e, "perch", 2);
       else if (perch && clearPredatorFlight(e, perch, perch.z, env, planning))
         launchPredatorFlight(e, perch, perch.z, false);
       else enter(e, "rest", 2);
     } else if (!ai.targetId && (fierce?.kind === "dragon" || fierce?.kind === "spider")) {
-      if (distance(e.position, ai.home) > 5 && clearPath(e, ai.home, env, planning)) {
+      if (gap(e.position, ai.home) > 5 && clearPath(e, ai.home, env, planning)) {
         if (ai.state !== "patrol") enter(e, "patrol", 0.3);
         ai.aim = { ...ai.home };
       } else {
@@ -445,7 +443,7 @@ export function updatePredatorAI(
           fierce.kind === "spider" ? 2 : ai.activity % 3 === 0 ? 5 : 2,
         );
       }
-    } else if (!ai.targetId && (!ai.aim || ai.elapsed > 4 || distance(e.position, ai.aim) < 3)) {
+    } else if (!ai.targetId && (!ai.aim || ai.elapsed > 4 || gap(e.position, ai.aim) < 3)) {
       const angle = random(e) * Math.PI * 2;
       const point = {
         wx: ai.home.wx + Math.cos(angle) * 48,
@@ -453,7 +451,7 @@ export function updatePredatorAI(
       };
       if (
         (!planning || planning.candidate(e)) &&
-        !players.some((p) => distance(p, point) < 24) &&
+        !players.some((p) => gap(p, point) < 24) &&
         clearPath(e, point, env, planning)
       ) {
         enter(e, "patrol", 0.3);

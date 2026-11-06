@@ -27,7 +27,8 @@ import {
   composeCitySurface,
 } from "../road/CitySurfaceRecipes.js";
 import { composeStreetStarterSurface } from "../road/StreetStarterSurface.js";
-import { type ArtCatalog, type ArtRect, required } from "./ArtCatalog.js";
+import { required } from "../shared/required.js";
+import type { ArtCatalog, ArtRect } from "./ArtCatalog.js";
 import { ArtNoteInbox } from "./ArtNoteInbox.js";
 import type { ArtNote, BuildingReview, BuildingVerdict } from "./ArtNotes.js";
 import { loadVerifiedArtImage, sha256 } from "./ArtSource.js";

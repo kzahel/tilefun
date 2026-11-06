@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
+import { required } from "../shared/required.js";
 import { CarMeshAsset } from "./CarMeshAsset.js";
 import { bedFramePoint, bedGateAngle, DUMP_BED } from "./DumpBedPose.js";
 import fallback from "./dump-truck-v2-fallback.json" with { type: "json" };

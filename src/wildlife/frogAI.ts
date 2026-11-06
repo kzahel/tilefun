@@ -1,11 +1,11 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
+import { lcgNext } from "../shared/Determinism.js";
+import { gap } from "../shared/gap.js";
 import { restoreFrogPose, settleFrog, startleFrog } from "./frogInteractions.js";
-import type { WildlifeEnvironment } from "./mallardAI.js";
+import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
-const distance = (a: PositionComponent, b: PositionComponent) =>
-  Math.hypot(a.wx - b.wx, a.wy - b.wy);
 /** Short hops, kick/glide swims and quiet bank rests; all decisions are durable. */
 export function updateFrogAI(
   frog: Entity,
@@ -21,7 +21,7 @@ export function updateFrogAI(
     sprite = frog.sprite;
   if (!ai || !velocity || !sprite) return;
   const random = () => {
-    ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
+    ai.randomState = lcgNext(ai.randomState);
     return ai.randomState / 4294967296;
   };
   const stop = () => {
@@ -38,7 +38,7 @@ export function updateFrogAI(
   };
   // Airborne motion is integrated by physics, even between slower AI decisions.
   if (ai.state === "hop") return;
-  const nearby = players.find((p) => distance(p, frog.position) < 20);
+  const nearby = players.find((p) => gap(p, frog.position) < 20);
   if (nearby && ai.state !== "recover") startleFrog(frog, nearby);
   const chooseMove = (escaping: boolean) => {
     const water = environment.isWater(frog.position);
@@ -46,7 +46,7 @@ export function updateFrogAI(
     let candidate: PositionComponent | undefined;
     const from = ai.alarmFrom ?? frog.position;
     const away =
-      distance(from, frog.position) < 1
+      gap(from, frog.position) < 1
         ? random() * Math.PI * 2
         : Math.atan2(frog.position.wy - from.wy, frog.position.wx - from.wx);
     for (let i = 0; i < 24; i++) {
@@ -60,9 +60,9 @@ export function updateFrogAI(
         wy: frog.position.wy + Math.sin(angle) * length,
       };
       if (
-        distance(point, ai.home) > ai.radius ||
-        players.some((p) => distance(point, p) < 16) ||
-        animals.some((a) => a !== frog && a.collider?.solid && distance(point, a.position) < 12)
+        gap(point, ai.home) > ai.radius ||
+        players.some((p) => gap(point, p) < 16) ||
+        animals.some((a) => a !== frog && a.collider?.solid && gap(point, a.position) < 12)
       )
         continue;
       let clear = true;
@@ -120,10 +120,10 @@ export function updateFrogAI(
     return;
   }
   if (ai.state === "swim") {
-    if (distance(frog.position, ai.last) < 0.1) ai.stuck += dt;
+    if (gap(frog.position, ai.last) < 0.1) ai.stuck += dt;
     else ai.stuck = 0;
     ai.last = { ...frog.position };
-    if (distance(frog.position, ai.target) < 3 || ai.timer <= 0 || ai.stuck > 0.8) {
+    if (gap(frog.position, ai.target) < 3 || ai.timer <= 0 || ai.stuck > 0.8) {
       if (ai.alarmFrom)
         settleFrog(
           frog,

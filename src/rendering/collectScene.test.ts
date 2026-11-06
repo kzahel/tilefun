@@ -63,7 +63,6 @@ function collect(entity: Entity, alpha = 1, zoom = 1 / 3, frame?: SceneFrame, he
     [],
     false,
     undefined,
-    undefined,
     frame,
   );
 }

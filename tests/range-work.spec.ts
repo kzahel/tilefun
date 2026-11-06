@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
 import { PNG } from "pngjs";
-import { required } from "../src/art/ArtCatalog.js";
+import { required } from "../src/shared/required.js";
 
 test.use({ channel: "chromium", deviceScaleFactor: 1 });
 type Pose = {

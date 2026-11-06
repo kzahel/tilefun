@@ -1,5 +1,4 @@
 import { expect, it, vi } from "vitest";
-import { required } from "../../art/ArtCatalog.js";
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../../entities/collision.js";
 import { ENTITY_FACTORIES } from "../../entities/EntityFactories.js";
@@ -8,6 +7,7 @@ import { createProp } from "../../entities/PropFactories.js";
 import { isCityRoad } from "../../road/DenseCitySurface.js";
 import { PARKING_SURFACE_COUNT } from "../../road/ParkingSurface.js";
 import { RoadType } from "../../road/RoadType.js";
+import { required } from "../../shared/required.js";
 import { nextLanes, samplePath } from "../../traffic/LaneGraph.js";
 import { TrafficStrategy } from "../../traffic/TrafficNetwork.js";
 import { vehicleRoadWidth, vehicleView } from "../../traffic/Vehicle.js";

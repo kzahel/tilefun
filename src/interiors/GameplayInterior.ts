@@ -1,4 +1,4 @@
-import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
+import { CHUNK_SIZE, CHUNK_SIZE_PX, TILE_SIZE } from "../config/constants.js";
 import type { Prop, PropCollider } from "../entities/Prop.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
@@ -181,7 +181,7 @@ export function interiorGenerator(identity: InteriorIdentity, seed: number): Wor
     terrain: new FlatStrategy(),
     actors: (cx, cy) =>
       indoorResidents(identity).filter(
-        (p) => Math.floor(p.wx / 256) === cx && Math.floor(p.wy / 256) === cy,
+        (p) => Math.floor(p.wx / CHUNK_SIZE_PX) === cx && Math.floor(p.wy / CHUNK_SIZE_PX) === cy,
       ),
     placements: (cx, cy) => ({
       newIntersectionKeys: [],

@@ -1,7 +1,7 @@
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { createProp } from "../entities/PropFactories.js";
 import { baseGameMod } from "../game/base-game.js";
-import type { Movement } from "../input/ActionManager.js";
 import type { IWorldRegistry, WorldMeta } from "../persistence/IWorldRegistry.js";
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
@@ -17,6 +17,8 @@ import {
   encodeClientMessage,
   encodeServerMessage,
 } from "../shared/binaryCodec.js";
+import { lcgNext } from "../shared/Determinism.js";
+import type { Movement } from "../shared/Movement.js";
 import { buildLaneGraph } from "../traffic/LaneGraph.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
@@ -140,7 +142,7 @@ export class ScenarioSession {
       ...(this.recipe.landscape ? { landscape: this.recipe.landscape } : {}),
       definitions: new Map(this.recipe.props.map((p) => [p.type, p])),
       random: () => {
-        this.randomState = (Math.imul(this.randomState, 1664525) + 1013904223) >>> 0;
+        this.randomState = lcgNext(this.randomState);
         return this.randomState / 4294967296;
       },
     });
@@ -168,10 +170,10 @@ export class ScenarioSession {
         )
           throw Error("Invalid scenario road bounds");
         await this.ready({
-          minCx: Math.floor(area.left / 256),
-          maxCx: Math.floor((area.right - 1) / 256),
-          minCy: Math.floor(area.top / 256),
-          maxCy: Math.floor((area.bottom - 1) / 256),
+          minCx: Math.floor(area.left / CHUNK_SIZE_PX),
+          maxCx: Math.floor((area.right - 1) / CHUNK_SIZE_PX),
+          minCy: Math.floor(area.top / CHUNK_SIZE_PX),
+          maxCy: Math.floor((area.bottom - 1) / CHUNK_SIZE_PX),
         });
         for (let y = area.top / 16; y < area.bottom / 16; y++)
           for (let x = area.left / 16; x < area.right / 16; x++) {
@@ -192,10 +194,10 @@ export class ScenarioSession {
         this.realm.entityManager.spawn(structuredClone(actor));
       for (const fixture of this.recipe.parkedVehicles ?? []) {
         await this.ready({
-          minCx: Math.floor(fixture.wx / 256) - 1,
-          maxCx: Math.floor(fixture.wx / 256) + 1,
-          minCy: Math.floor(fixture.wy / 256) - 1,
-          maxCy: Math.floor(fixture.wy / 256) + 1,
+          minCx: Math.floor(fixture.wx / CHUNK_SIZE_PX) - 1,
+          maxCx: Math.floor(fixture.wx / CHUNK_SIZE_PX) + 1,
+          minCy: Math.floor(fixture.wy / CHUNK_SIZE_PX) - 1,
+          maxCy: Math.floor(fixture.wy / CHUNK_SIZE_PX) + 1,
         });
         const state = this.realm.vehicleRegistry?.place(
           fixture.model,
@@ -257,8 +259,8 @@ export class ScenarioSession {
     )
       throw Error("Invalid scenario view range");
     const p = this.player.player.position,
-      cx = Math.floor(p.wx / 256),
-      cy = Math.floor(p.wy / 256);
+      cx = Math.floor(p.wx / CHUNK_SIZE_PX),
+      cy = Math.floor(p.wy / CHUNK_SIZE_PX);
     const view = range ?? { minCx: cx - 2, maxCx: cx + 2, minCy: cy - 2, maxCy: cy + 2 };
     this.player.visibleRange = {
       minCx: Math.min(view.minCx, cx - 2),

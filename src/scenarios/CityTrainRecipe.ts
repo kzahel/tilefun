@@ -1,8 +1,8 @@
-import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { RailwayPlanner } from "../railway/RailwayPlanner.js";
+import { required } from "../shared/required.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 
 /** Production seeded towns, track, benches and ordinary shared authority. */

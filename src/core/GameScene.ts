@@ -1,6 +1,6 @@
 import type { SpriteCatalog } from "../assets/SpriteCatalog.js";
 import type { AudioManager } from "../audio/AudioManager.js";
-import type { ClientStateView } from "../client/ClientStateView.js";
+import type { RemoteStateView } from "../client/ClientStateView.js";
 import type { DoorPresentation } from "../client/DoorPresentation.js";
 import type { ConsoleEngine } from "../console/ConsoleEngine.js";
 import type { ConsoleUI } from "../console/ConsoleUI.js";
@@ -21,7 +21,6 @@ import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { SceneFrame } from "../rendering/SceneFrame.js";
-import type { GameServer } from "../server/GameServer.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import type { IClientTransport } from "../transport/Transport.js";
@@ -51,7 +50,7 @@ export interface GameContext {
   readonly ctx: CanvasRenderingContext2D;
   readonly camera: Camera;
   readonly actions: ActionManager;
-  readonly stateView: ClientStateView;
+  readonly stateView: RemoteStateView;
   readonly transport: IClientTransport;
   readonly spriteCatalog: SpriteCatalog;
   readonly renderer: RenderBackend;
@@ -74,10 +73,6 @@ export interface GameContext {
   readonly console: ConsoleEngine;
   readonly consoleUI: ConsoleUI;
   readonly chatHUD: ChatHUD;
-
-  // Server access (local mode only, null in serialized)
-  readonly server: GameServer | null;
-  readonly serialized: boolean;
 
   // Scene manager reference (so scenes can push/pop)
   readonly scenes: SceneManager;

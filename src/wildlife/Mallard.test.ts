@@ -1,7 +1,6 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { RemoteStateView } from "../client/ClientStateView.js";
 import { createChicken } from "../entities/Chicken.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
@@ -17,6 +16,7 @@ import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import type { FrameMessage } from "../shared/protocol.js";
+import { required } from "../shared/required.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { World } from "../world/World.js";
 import { createMallard, MALLARD_CLIPS, MALLARD_IMAGE, MALLARD_TYPE } from "./Mallard.js";

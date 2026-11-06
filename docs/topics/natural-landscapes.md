@@ -27,7 +27,7 @@ settlements, other roads and rail; their reservations exclude ponds, forest band
 scattered trunks and competing wildlife homes. Caches are bounded at 64 farm
 owners, and IDs derive from the connection owner/axis. Realized terrain, props
 and animal spawn-chunk ownership are shared by game, explorer and Worker labs.
-The old unused CountrySource woodland loop remains disconnected. No new art,
+The old unused CountrySource woodland loop was deleted (221). No new art,
 generator version or saved-chunk backfill is introduced. Inspect seed 2026 at
 380,897 through **Countryside · connected farmstead**. Final validation is in 083.
 
@@ -134,11 +134,11 @@ or collision geometry.
   terrain-height contract.
 - `createGenerator` composes `RailwayStrategy → TrafficStrategy →
   DenseDistrictStrategy`. Its current props are settlement/transport furnishings.
-  `CountrySource` in `CountrysidePlanner.ts` has no callers in `src`: its farms
-  and woodland loops are not part of the current generator.
-- That unused woodland recipe has moisture-gated 128-tile squares, sparse jittered
+  The uncalled `CountrySource` farm/woodland planner was deleted in 221;
+  `CountrysidePlanner.ts` keeps only the `CountryPlan` explorer type.
+- That woodland recipe had moisture-gated 128-tile squares, sparse jittered
   oak grids, a rectangular trail and picnic furniture. Reconnecting it alone would
-  not supply continuous, irregular natural habitats or scattered meadow trees.
+  not have supplied continuous, irregular natural habitats or scattered meadow trees.
 - Runtime oak/palm props and the outdoor catalog provide starting assets.
   Pattern Studio's `FencedTrees.ts` is a **candidate horizontal fenced row**;
   it is not automatically an approved, arbitrary-shaped wild forest kit.

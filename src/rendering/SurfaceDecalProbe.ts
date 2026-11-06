@@ -206,7 +206,6 @@ export async function probeSurfaceDecals() {
         [],
         false,
         undefined,
-        undefined,
         frame,
       );
       body = items.find((item): item is SpriteItem => item.kind === "sprite");

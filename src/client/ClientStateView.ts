@@ -5,7 +5,6 @@ import type { Prop } from "../entities/Prop.js";
 import { setSpriteClipElapsed, tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import { getGravityScale, setGravityScale } from "../physics/Gravity.js";
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
-import type { GameServer } from "../server/GameServer.js";
 import { applyEntityDelta } from "../shared/entityDelta.js";
 import type {
   BufferedMessage,
@@ -25,21 +24,6 @@ import type { World } from "../world/World.js";
 import type { PlayerPredictor, ReconcileDiagnostics } from "./PlayerPredictor.js";
 import { RemotePresentation } from "./RemotePresentation.js";
 
-export interface ExtrapolationGhost {
-  entityId: number;
-  wx: number;
-  wy: number;
-  wz?: number;
-}
-
-export interface ExtrapolationStats {
-  samples: number;
-  avgPosErr: number;
-  maxPosErr: number;
-  avgLeadMs: number;
-  lastLeadMs: number;
-}
-
 export interface ClientStateView {
   readonly roomState?: import("../interiors/GameplayRoom.js").GameplayRoomState | null;
   readonly interior?: import("../interiors/GameplayInterior.js").InteriorIdentity | null;
@@ -53,15 +37,15 @@ export interface ClientStateView {
   readonly remoteCursors: readonly RemoteEditorCursor[];
   /** Entity ID → display name for player entities. */
   readonly playerNames: Record<number, string>;
-  /** Raw server player position (before client prediction). Undefined in local mode. */
+  /** Raw server player position (before client prediction). */
   readonly serverPlayerPosition?: { wx: number; wy: number; wz?: number } | undefined;
-  /** Last reconciliation correction (predicted - server, before replay). Undefined in local mode. */
+  /** Last reconciliation correction (predicted - server, before replay). */
   readonly predictionCorrection?:
     | { wx: number; wy: number; wz: number; vx: number; vy: number; jumpVZ: number }
     | undefined;
-  /** Last detailed reconciliation sample (serialized mode only). */
+  /** Last detailed reconciliation sample. */
   readonly predictionDiagnostics?: ReconcileDiagnostics | undefined;
-  /** Rolling reconcile stats for debug overlay (serialized mode only). */
+  /** Rolling reconcile stats for debug overlay. */
   readonly reconcileStats?:
     | {
         samples: number;
@@ -71,52 +55,6 @@ export interface ClientStateView {
         threshold: number;
       }
     | undefined;
-  /** Most recent extrapolation-vs-authoritative error sample (debug/shadow mode). */
-  readonly extrapolationStats?: ExtrapolationStats | undefined;
-  /** Sample current remote extrapolation candidates (debug/shadow mode). */
-  getExtrapolationGhosts?(maxSeconds: number): readonly ExtrapolationGhost[];
-}
-
-/**
- * Local-mode state view: returns direct references to GameServer's objects.
- * Zero-copy, zero-overhead.
- */
-export class LocalStateView implements ClientStateView {
-  constructor(private readonly server: GameServer) {}
-
-  get roomState() {
-    return this.server.worldRoomState;
-  }
-  get interior() {
-    return this.server.worldInterior;
-  }
-  get world(): World {
-    return this.server.world;
-  }
-  get entities(): readonly Entity[] {
-    return this.server.entityManager.entities;
-  }
-  get props(): readonly Prop[] {
-    return this.server.propManager.props;
-  }
-  get playerEntity(): Entity {
-    return this.server.getLocalSession().player;
-  }
-  get gemsCollected(): number {
-    return this.server.getLocalSession().gameplaySession.gemsCollected;
-  }
-  get invincibilityTimer(): number {
-    return this.server.getLocalSession().gameplaySession.invincibilityTimer;
-  }
-  get editorEnabled(): boolean {
-    return this.server.getLocalSession().editorEnabled;
-  }
-  get remoteCursors(): readonly RemoteEditorCursor[] {
-    return [];
-  }
-  get playerNames(): Record<number, string> {
-    return {};
-  }
 }
 
 /** Placeholder entity returned before server has sent state. */
@@ -130,12 +68,8 @@ const PLACEHOLDER_ENTITY: Entity = {
   wanderAI: null,
 };
 
-interface ExtrapolationSample extends ExtrapolationGhost {
-  leadMs: number;
-}
-
 /**
- * Serialized-mode state view: maintains a local copy of game state,
+ * Client state view: maintains a local copy of game state,
  * updated from ServerMessage broadcasts. All data has gone through
  * JSON serialization — no shared object references with the server.
  */
@@ -176,9 +110,6 @@ export class RemoteStateView implements ClientStateView {
         threshold: number;
       }
     | undefined;
-  private _lastFrameAppliedAtMs = 0;
-  private _lastExtrapolationSamples = new Map<number, ExtrapolationSample>();
-  private _extrapolationStats: ExtrapolationStats | undefined;
   private presentation = new RemotePresentation();
   private presentedEntities: Entity[] | null = null;
   cameraPresentation: CameraPresentationTime = { time: 0, domain: "remote" };
@@ -325,8 +256,6 @@ export class RemoteStateView implements ClientStateView {
         (msg.physics.epoch === this._physicsState.epoch && msg.serverTick < this._serverTick))
     )
       return;
-    const extrapolationSamples = this._lastExtrapolationSamples;
-    this._lastExtrapolationSamples = new Map<number, ExtrapolationSample>();
 
     // Log state transitions that matter for debugging realm-switch movement bug
     if (msg.playerEntityId !== this._playerEntityId) {
@@ -392,8 +321,6 @@ export class RemoteStateView implements ClientStateView {
       msg.simulationTime ?? (msg.serverTick * (1000 / TICK_RATE)) / 1000,
       receivedAt,
     );
-    this.updateExtrapolationStats(extrapolationSamples);
-    this._lastFrameAppliedAtMs = performance.now();
   }
 
   /** Apply session sync (gems, editor, mount). */
@@ -488,9 +415,6 @@ export class RemoteStateView implements ClientStateView {
     this._pendingStates.length = 0; // Fix: clear stale pending state from old realm
     this._predictor?.clearPredicted();
     this._reconcileStats = undefined;
-    this._lastFrameAppliedAtMs = 0;
-    this._lastExtrapolationSamples.clear();
-    this._extrapolationStats = undefined;
     // Clear all loaded chunks
     for (const [key] of this._world.chunks.entries()) {
       this._world.chunks.remove(key);
@@ -580,9 +504,6 @@ export class RemoteStateView implements ClientStateView {
   get reconcileStats() {
     return this._reconcileStats;
   }
-  get extrapolationStats(): ExtrapolationStats | undefined {
-    return this._extrapolationStats;
-  }
   setReconcileStats(stats: {
     samples: number;
     notable: number;
@@ -610,48 +531,6 @@ export class RemoteStateView implements ClientStateView {
     return this._entities;
   }
 
-  getExtrapolationGhosts(maxSeconds: number): readonly ExtrapolationGhost[] {
-    if (maxSeconds <= 0 || this._lastFrameAppliedAtMs <= 0) {
-      this._lastExtrapolationSamples.clear();
-      return [];
-    }
-
-    const nowMs = performance.now();
-    const rawLeadMs = Math.max(0, nowMs - this._lastFrameAppliedAtMs);
-    const leadMs = Math.min(rawLeadMs, maxSeconds * 1000);
-    if (leadMs <= 0) {
-      this._lastExtrapolationSamples.clear();
-      return [];
-    }
-    const leadSec = leadMs / 1000;
-
-    const ghosts: ExtrapolationGhost[] = [];
-    const samples = new Map<number, ExtrapolationSample>();
-
-    for (const entity of this._entities) {
-      if (entity.id === this._playerEntityId) continue;
-      if (entity.type !== "player") continue;
-      if (!entity.velocity || !entity.sprite) continue;
-      const speedSq =
-        entity.velocity.vx * entity.velocity.vx + entity.velocity.vy * entity.velocity.vy;
-      if (speedSq <= 0.0001) continue;
-
-      const ghost: ExtrapolationGhost = {
-        entityId: entity.id,
-        wx: entity.position.wx + entity.velocity.vx * leadSec,
-        wy: entity.position.wy + entity.velocity.vy * leadSec,
-      };
-      if (entity.wz !== undefined) {
-        ghost.wz = entity.wz + (entity.jumpVZ ?? 0) * leadSec;
-      }
-      ghosts.push(ghost);
-      samples.set(entity.id, { ...ghost, leadMs });
-    }
-
-    this._lastExtrapolationSamples = samples;
-    return ghosts;
-  }
-
   /**
    * Tick sprite animations client-side. Called every client update tick.
    * Replicates the server's EntityManager animation logic (Phase 5 in its tick)
@@ -659,47 +538,5 @@ export class RemoteStateView implements ClientStateView {
    */
   tickAnimations(dt: number): void {
     for (const entity of this._entities) tickSpriteAnimation(entity, dt);
-  }
-
-  private updateExtrapolationStats(samples: ReadonlyMap<number, ExtrapolationSample>): void {
-    if (samples.size === 0) {
-      this._extrapolationStats = undefined;
-      return;
-    }
-
-    let count = 0;
-    let sumErr = 0;
-    let maxErr = 0;
-    let sumLeadMs = 0;
-    let lastLeadMs = 0;
-
-    for (const entity of this._entities) {
-      const sample = samples.get(entity.id);
-      if (!sample) continue;
-
-      const dx = sample.wx - entity.position.wx;
-      const dy = sample.wy - entity.position.wy;
-      const dz = (sample.wz ?? 0) - (entity.wz ?? 0);
-      const err = Math.hypot(dx, dy, dz);
-
-      count++;
-      sumErr += err;
-      maxErr = Math.max(maxErr, err);
-      sumLeadMs += sample.leadMs;
-      lastLeadMs = sample.leadMs;
-    }
-
-    if (count === 0) {
-      this._extrapolationStats = undefined;
-      return;
-    }
-
-    this._extrapolationStats = {
-      samples: count,
-      avgPosErr: sumErr / count,
-      maxPosErr: maxErr,
-      avgLeadMs: sumLeadMs / count,
-      lastLeadMs,
-    };
   }
 }

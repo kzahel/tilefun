@@ -1,7 +1,7 @@
 import { expect, it, vi } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import type { Camera } from "../rendering/Camera.js";
+import { required } from "../shared/required.js";
 import { TileId } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
 import type { AudioManager } from "./AudioManager.js";

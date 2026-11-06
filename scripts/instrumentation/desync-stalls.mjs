@@ -131,14 +131,14 @@ try {
         g.loop.callbacks.render = (a, now) => {
           render(a, now);
           const p = g.stateView.playerEntity,
-            pred = g.remoteView._predictor;
+            pred = g.stateView._predictor;
           samples.push({
             t: performance.now(),
             x: p.position.wx,
             col: p.sprite?.frameCol,
             timer: p.sprite?.animTimer,
             moving: p.sprite?.moving,
-            serverMoving: g.remoteView.serverPlayerEntity.sprite?.moving,
+            serverMoving: g.stateView.serverPlayerEntity.sprite?.moving,
             ack: g.stateView.lastProcessedInputSeq,
             tick: g.stateView.serverTick,
             diag: pred?.lastReconcileDiagnostics,

@@ -1,4 +1,4 @@
-import type { Movement } from "../input/ActionManager.js";
+import type { Movement } from "../shared/Movement.js";
 
 export type CarDrivingStyle = "direction" | "steering";
 export const DEFAULT_CAR_DRIVING: CarDrivingStyle = "steering";

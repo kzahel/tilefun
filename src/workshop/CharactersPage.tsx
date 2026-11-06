@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 import type { ArtCatalog } from "../art/ArtCatalog.js";
-import { required } from "../art/ArtCatalog.js";
 import { latestArtNotes } from "../art/ArtNotes.js";
 import { TileVariants } from "../assets/TileVariants.js";
 import {
@@ -14,6 +13,7 @@ import {
 import { PIXEL_SCALE } from "../config/constants.js";
 import { characterRecipe } from "../scenarios/CharacterRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
+import { required } from "../shared/required.js";
 import { ErrorMessage } from "./App.js";
 import { buildCharacterCandidate } from "./CharacterCandidates.js";
 import { characterGrid, characterOverlay } from "./CharacterPresentation.js";

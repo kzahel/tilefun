@@ -1,5 +1,4 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
 import { PhysicsScene } from "../physics/PhysicsScene.js";
@@ -9,6 +8,7 @@ import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
+import { required } from "../shared/required.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { createTrain, createTrainCarriages, TRAIN_CARRIAGES } from "./Train.js";
 

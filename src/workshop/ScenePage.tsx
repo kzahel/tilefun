@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation, useParams } from "react-router";
 import { type AssetSuggestion, selectedSceneFeatures } from "../art/ArtAnnotations.js";
-import { type ArtRect, required } from "../art/ArtCatalog.js";
+import type { ArtRect } from "../art/ArtCatalog.js";
 import { sha256 } from "../art/ArtSource.js";
 import {
   ALL_DENSE_REVIEW_CASES,
@@ -9,6 +9,7 @@ import {
   drawDenseDistrictShowcase,
 } from "../art/DenseDistrictShowcase.js";
 import type { OutdoorAsset, OutdoorMetadata } from "../assets/outdoor/OutdoorCatalog.js";
+import { required } from "../shared/required.js";
 import { candidateLabel, ErrorMessage, threadPath } from "./App.js";
 import { AssetThumbnail, OutdoorAssetBrowser } from "./OutdoorAssetBrowser.js";
 import { catalogAssets, useArtNotes, useOutdoorCatalog } from "./OutdoorQueries.js";

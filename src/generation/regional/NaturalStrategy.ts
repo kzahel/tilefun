@@ -1,4 +1,5 @@
 import { TerrainId } from "../../autotile/TerrainId.js";
+import { CHUNK_SIZE_PX } from "../../config/constants.js";
 import { RailwayStrategy } from "../../railway/RailwayStrategy.js";
 import { RoadType } from "../../road/RoadType.js";
 import {
@@ -82,7 +83,9 @@ export class NaturalStrategy extends RailwayStrategy {
     return this.racetracks
       .query({ minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 })
       .flatMap((t) => vehicleDepot(t).vehicles)
-      .filter((p) => Math.floor(p.wx / 256) === cx && Math.floor(p.wy / 256) === cy);
+      .filter(
+        (p) => Math.floor(p.wx / CHUNK_SIZE_PX) === cx && Math.floor(p.wy / CHUNK_SIZE_PX) === cy,
+      );
   }
   boats(cx: number, cy: number) {
     return this.nature.boats(cx, cy);
@@ -92,11 +95,15 @@ export class NaturalStrategy extends RailwayStrategy {
     const residents = this.nature.farms
       .query(bounds)
       .flatMap((p) => p.actors)
-      .filter((a) => Math.floor(a.wx / 256) === cx && Math.floor(a.wy / 256) === cy);
+      .filter(
+        (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
+      );
     const pets = this.districts
       .query(bounds)
       .flatMap((p) => settlementPets(p, this.world.seed))
-      .filter((a) => Math.floor(a.wx / 256) === cx && Math.floor(a.wy / 256) === cy);
+      .filter(
+        (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
+      );
     const wildlife = [...this.nature.wildlife(cx, cy), ...raccoonForagers(this.nature, cx, cy)];
     return [
       ...super.actors(cx, cy),
@@ -127,7 +134,9 @@ export class NaturalStrategy extends RailwayStrategy {
     return this.racetracks
       .query(bounds)
       .flatMap((t) => t.actors)
-      .filter((a) => Math.floor(a.wx / 256) === cx && Math.floor(a.wy / 256) === cy);
+      .filter(
+        (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
+      );
   }
   override placements(cx: number, cy: number) {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };

@@ -1,4 +1,3 @@
-import { required } from "../art/ArtCatalog.js";
 import { reviewContext2D } from "../art/reviewCanvas.js";
 import type { GameAssets } from "../assets/GameAssets.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
@@ -13,6 +12,7 @@ import { drawScene2D } from "../rendering/Canvas2DRenderer.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { TileRenderer } from "../rendering/TileRenderer.js";
 import { CHARACTER_TEST_BLOCKS, characterObstacles } from "../scenarios/CharacterRecipe.js";
+import { required } from "../shared/required.js";
 import { World } from "../world/World.js";
 import {
   type CharacterDefinition,

@@ -6,7 +6,7 @@ import {
   parseSceneAnnotation,
   selectedSceneFeatures,
 } from "../art/ArtAnnotations.js";
-import { type ArtCatalog, required, validateRect } from "../art/ArtCatalog.js";
+import { type ArtCatalog, validateRect } from "../art/ArtCatalog.js";
 import { parseArtNote } from "../art/ArtNotes.js";
 import { ALL_DENSE_REVIEW_CASES, denseReviewScene } from "../art/DenseDistrictShowcase.js";
 import {
@@ -15,6 +15,7 @@ import {
   parseOutdoorMetadata,
 } from "../assets/outdoor/OutdoorCatalog.js";
 import { validateVehicleGeometry } from "../assets/vehicles/VehicleCatalog.js";
+import { required } from "../shared/required.js";
 import type { WorkshopCandidate, WorkshopEvent } from "../workshop/WorkshopTypes.js";
 import { HttpError } from "./workshopAuth.js";
 

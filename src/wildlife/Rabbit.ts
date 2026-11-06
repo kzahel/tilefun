@@ -1,5 +1,6 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
+import { positionSeed } from "../shared/Determinism.js";
 
 /** Native pilot travel is retained exactly; behavior-v1 appends feeding poses. */
 export const RABBIT_TYPE = "wildlife-rabbit-v1";
@@ -61,7 +62,7 @@ export function createRabbit(wx: number, wy: number): Entity {
       shelter: { wx, wy },
       state: "rest",
       timer: 2,
-      randomState: ((Math.floor(wx) * 73856093) ^ (Math.floor(wy) * 19349663) ^ 7601) >>> 0,
+      randomState: positionSeed(wx, wy, 7601),
       activity: 0,
       target: { wx, wy },
     },

@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
+import { required } from "../shared/required.js";
 import { teleportBody } from "./PhysicalEdits.js";
 import { PhysicsScene } from "./PhysicsScene.js";
 

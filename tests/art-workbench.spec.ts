@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
-import { type ArtCatalog, required } from "../src/art/ArtCatalog.js";
+import type { ArtCatalog } from "../src/art/ArtCatalog.js";
+import { required } from "../src/shared/required.js";
 
 const catalog = JSON.parse(readFileSync("public/data/art-catalog.json", "utf8")) as ArtCatalog;
 const API = "**/tilefun/api/art-notes",

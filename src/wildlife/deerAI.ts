@@ -1,5 +1,7 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
+import { lcgNext } from "../shared/Determinism.js";
+import { gap } from "../shared/gap.js";
 import {
   DEER_FLEE_SPEED,
   DEER_WALK_SPEED,
@@ -7,10 +9,8 @@ import {
   settleDeer,
   startleDeer,
 } from "./deerInteractions.js";
-import type { WildlifeEnvironment } from "./mallardAI.js";
+import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
-const distance = (a: PositionComponent, b: PositionComponent) =>
-  Math.hypot(a.wx - b.wx, a.wy - b.wy);
 export function updateDeerAI(
   deer: Entity,
   dt: number,
@@ -23,7 +23,7 @@ export function updateDeerAI(
   const ai = deer.deer,
     velocity = deer.motionIntent;
   if (!ai || !velocity || !deer.sprite) return;
-  const nearby = players.find((p) => distance(p, deer.position) < 38);
+  const nearby = players.find((p) => gap(p, deer.position) < 38);
   // Urgent sensing stays live even between planning slots. Avoid building a herd
   // (and calculating every member's distance) on every idle/moving tick.
   const herdAlarm = ai.herdId
@@ -32,7 +32,7 @@ export function updateDeerAI(
           a !== deer &&
           a.deer?.herdId === ai.herdId &&
           a.deer?.alarmFrom &&
-          distance(a.position, deer.position) < 128,
+          gap(a.position, deer.position) < 128,
       )?.deer?.alarmFrom
     : undefined;
   if (ai.state !== "recover" && (nearby || herdAlarm))
@@ -43,7 +43,7 @@ export function updateDeerAI(
   ai.timer -= dt;
   if (ai.timer > 0) return;
   const random = () => {
-    ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
+    ai.randomState = lcgNext(ai.randomState);
     return ai.randomState / 4294967296;
   };
   const rest = () => {
@@ -68,8 +68,7 @@ export function updateDeerAI(
   // Ambient cohesion is sensed only when a goal is actually due and admitted.
   const herd = ai.herdId
     ? animals.filter(
-        (a) =>
-          a !== deer && a.deer?.herdId === ai.herdId && distance(a.position, deer.position) < 128,
+        (a) => a !== deer && a.deer?.herdId === ai.herdId && gap(a.position, deer.position) < 128,
       )
     : [];
   let target: PositionComponent | undefined,
@@ -77,7 +76,7 @@ export function updateDeerAI(
   for (let i = 0; i < 24; i++) {
     if (planning && !planning.candidate(deer)) break;
     const away =
-      distance(from, deer.position) < 1
+      gap(from, deer.position) < 1
         ? random() * Math.PI * 2
         : Math.atan2(deer.position.wy - from.wy, deer.position.wx - from.wx);
     const angle = escaping ? away + (random() - 0.5) * Math.PI : random() * Math.PI * 2;
@@ -86,11 +85,11 @@ export function updateDeerAI(
       wx: deer.position.wx + Math.cos(angle) * length,
       wy: deer.position.wy + Math.sin(angle) * length,
     };
-    const gain = distance(point, from) - distance(deer.position, from);
+    const gain = gap(point, from) - gap(deer.position, from);
     if (
-      distance(point, ai.home) > ai.radius - 12 ||
-      players.some((p) => distance(point, p) < 34) ||
-      animals.some((a) => a !== deer && a.collider?.solid && distance(point, a.position) < 24) ||
+      gap(point, ai.home) > ai.radius - 12 ||
+      players.some((p) => gap(point, p) < 34) ||
+      animals.some((a) => a !== deer && a.collider?.solid && gap(point, a.position) < 24) ||
       (escaping && gain < 12)
     )
       continue;
@@ -113,11 +112,9 @@ export function updateDeerAI(
     }
     if (!clear) continue;
     const cohesion = herd.length
-      ? herd.reduce((sum, a) => sum + distance(point, a.position), 0) / herd.length
-      : distance(point, ai.home);
-    const score = escaping
-      ? gain - distance(point, ai.shelter) * 0.15
-      : random() * 12 - cohesion * 0.12;
+      ? herd.reduce((sum, a) => sum + gap(point, a.position), 0) / herd.length
+      : gap(point, ai.home);
+    const score = escaping ? gain - gap(point, ai.shelter) * 0.15 : random() * 12 - cohesion * 0.12;
     if (score > best) {
       best = score;
       target = point;
@@ -132,8 +129,7 @@ export function updateDeerAI(
   ai.state = escaping ? "flee" : "travel";
   ai.motion = {
     elapsed: 0,
-    duration:
-      distance(target, deer.position) / (escaping ? DEER_FLEE_SPEED : DEER_WALK_SPEED) + 0.15,
+    duration: gap(target, deer.position) / (escaping ? DEER_FLEE_SPEED : DEER_WALK_SPEED) + 0.15,
     escaping,
   };
   if (deer.wanderAI) deer.wanderAI.state = escaping ? "scared" : "walking";

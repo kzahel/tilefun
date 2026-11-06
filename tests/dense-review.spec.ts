@@ -1,11 +1,11 @@
 import { writeFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
-import { required } from "../src/art/ArtCatalog.js";
 import type { ArtNote } from "../src/art/ArtNotes.js";
 import { DENSE_REVIEW_CASES } from "../src/art/DenseDistrictShowcase.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
+import { required } from "../src/shared/required.js";
 
 const url = "/tilefun/building-lab.html?run=districts";
 const ready = '#app[data-ready="true"]';

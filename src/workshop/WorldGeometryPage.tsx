@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { required } from "../art/ArtCatalog.js";
 import { AudioManager } from "../audio/AudioManager.js";
 import { rotateBodyVector } from "../physics/BodyRotation.js";
 import { locateSurfaceSpace } from "../physics/TerrainExcavation.js";
@@ -28,6 +27,7 @@ import {
   vehicleGeometryRecipe,
 } from "../scenarios/VehicleGeometryRecipe.js";
 import { GEOMETRY_STARTS, worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
+import { required } from "../shared/required.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import DeferredVehiclePage from "./DeferredVehiclePage.js";

@@ -1,4 +1,5 @@
 import { TerrainId } from "../autotile/TerrainId.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import {
   aabbOverlapsPropWalls,
   aabbOverlapsSolid,
@@ -12,9 +13,9 @@ import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import type { WorkContext } from "../wildlife/AnimalWorkSystem.js";
 import { browsingRocks } from "../wildlife/BrowsingRocks.js";
 import { createFierceDen, denForPredator } from "../wildlife/FierceDens.js";
-import type { WildlifeEnvironment } from "../wildlife/mallardAI.js";
 import { robinTreePerches } from "../wildlife/robinPerches.js";
 import { climbTrees } from "../wildlife/TreeClimbing.js";
+import type { WildlifeEnvironment } from "../wildlife/WildlifeEnvironment.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
@@ -32,10 +33,10 @@ export function createRealmWorkContext(
   }));
   const workReady = (point: PositionComponent, radius: number) => {
     const range = {
-      minCx: Math.floor((point.wx - radius) / 256),
-      maxCx: Math.floor((point.wx + radius) / 256),
-      minCy: Math.floor((point.wy - radius) / 256),
-      maxCy: Math.floor((point.wy + radius) / 256),
+      minCx: Math.floor((point.wx - radius) / CHUNK_SIZE_PX),
+      maxCx: Math.floor((point.wx + radius) / CHUNK_SIZE_PX),
+      minCy: Math.floor((point.wy - radius) / CHUNK_SIZE_PX),
+      maxCy: Math.floor((point.wy + radius) / CHUNK_SIZE_PX),
     };
     if (realm.streaming) return realm.streaming.rangeReady(range);
     for (let cy = range.minCy; cy <= range.maxCy; cy++)
@@ -47,10 +48,10 @@ export function createRealmWorkContext(
     huntCandidates: (hunter, radius) =>
       realm.entityManager.spatialHash
         .queryRange(
-          Math.floor((hunter.position.wx - radius) / 256),
-          Math.floor((hunter.position.wy - radius) / 256),
-          Math.floor((hunter.position.wx + radius) / 256),
-          Math.floor((hunter.position.wy + radius) / 256),
+          Math.floor((hunter.position.wx - radius) / CHUNK_SIZE_PX),
+          Math.floor((hunter.position.wy - radius) / CHUNK_SIZE_PX),
+          Math.floor((hunter.position.wx + radius) / CHUNK_SIZE_PX),
+          Math.floor((hunter.position.wy + radius) / CHUNK_SIZE_PX),
         )
         .filter(
           (e) =>
@@ -120,10 +121,10 @@ export function createRealmWorkContext(
     predatorPerches: (home, radius) =>
       realm.propManager
         .getPropsInChunkRange(
-          Math.floor((home.wx - radius) / 256),
-          Math.floor((home.wy - radius) / 256),
-          Math.floor((home.wx + radius) / 256),
-          Math.floor((home.wy + radius) / 256),
+          Math.floor((home.wx - radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wy - radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wx + radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wy + radius) / CHUNK_SIZE_PX),
         )
         .flatMap((prop) => {
           const surface =
@@ -150,30 +151,30 @@ export function createRealmWorkContext(
     climbTrees: (home, radius) =>
       climbTrees(
         realm.propManager.getPropsInChunkRange(
-          Math.floor((home.wx - radius) / 256),
-          Math.floor((home.wy - radius) / 256),
-          Math.floor((home.wx + radius) / 256),
-          Math.floor((home.wy + radius) / 256),
+          Math.floor((home.wx - radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wy - radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wx + radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wy + radius) / CHUNK_SIZE_PX),
         ),
         (p) => getSurfaceZ(p.wx, p.wy, getHeight),
       ),
     browsingRocks: (home, radius) =>
       browsingRocks(
         realm.propManager.getPropsInChunkRange(
-          Math.floor((home.wx - radius) / 256),
-          Math.floor((home.wy - radius) / 256),
-          Math.floor((home.wx + radius) / 256),
-          Math.floor((home.wy + radius) / 256),
+          Math.floor((home.wx - radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wy - radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wx + radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wy + radius) / CHUNK_SIZE_PX),
         ),
         (p) => getSurfaceZ(p.wx, p.wy, getHeight),
       ),
     perches: (home, radius) =>
       robinTreePerches(
         realm.propManager.getPropsInChunkRange(
-          Math.floor((home.wx - radius) / 256),
-          Math.floor((home.wy - radius) / 256),
-          Math.floor((home.wx + radius) / 256),
-          Math.floor((home.wy + radius) / 256),
+          Math.floor((home.wx - radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wy - radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wx + radius) / CHUNK_SIZE_PX),
+          Math.floor((home.wy + radius) / CHUNK_SIZE_PX),
         ),
       ),
     surfaceZ: (p) => getSurfaceZ(p.wx, p.wy, getHeight),

@@ -8,9 +8,9 @@ test.use({ channel: "chromium", hasTouch: true, viewport: { width: 600, height: 
 const state = (page: Page) =>
   page.evaluate(() => {
     const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-    const p = g.remoteView.serverPlayerEntity;
-    const car = g.remoteView.serverEntities.find((e) => e.id === p.parentId);
-    const other = g.remoteView.serverEntities.find(
+    const p = g.stateView.serverPlayerEntity;
+    const car = g.stateView.serverEntities.find((e) => e.id === p.parentId);
+    const other = g.stateView.serverEntities.find(
       (e) => e.type.startsWith("vehicle-v1:") && e.id !== car?.id,
     );
     return {
@@ -53,7 +53,7 @@ for (const renderer of ["canvas", "gpu&meshes"])
         page.evaluate(() => {
           const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
           return (
-            Math.abs(g.remoteView.serverPlayerEntity.position.wx + 50) < 1 &&
+            Math.abs(g.stateView.serverPlayerEntity.position.wx + 50) < 1 &&
             [-1, 0].every((x) => [-1, 0].every((y) => !!g.stateView.world.getChunkIfLoaded(x, y)))
           );
         }),
@@ -62,7 +62,7 @@ for (const renderer of ["canvas", "gpu&meshes"])
     await page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
       g.transport.send({ type: "set-editor-mode", enabled: true });
-      for (const e of g.remoteView.serverEntities)
+      for (const e of g.stateView.serverEntities)
         if (e.type !== "player") g.transport.send({ type: "edit-delete-entity", entityId: e.id });
       for (const wx of [0, 140])
         g.transport.send({ type: "edit-spawn", entityType: "vehicle-v1:compact-1", wx, wy: 0 });
@@ -72,7 +72,7 @@ for (const renderer of ["canvas", "gpu&meshes"])
       .poll(() =>
         page.evaluate(() => {
           const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-          return g.remoteView.serverEntities.filter((e) => e.type.startsWith("vehicle-v1:")).length;
+          return g.stateView.serverEntities.filter((e) => e.type.startsWith("vehicle-v1:")).length;
         }),
       )
       .toBe(2);

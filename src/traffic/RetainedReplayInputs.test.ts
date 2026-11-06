@@ -3,7 +3,7 @@ import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { expect, it } from "vitest";
-import { readRetainedReplayInput } from "./RetainedReplayInputs.test-helper.js";
+import { readRetainedReplayInput } from "../../tests-support/RetainedReplayInputs.test-helper.js";
 
 it("preserves historical replay bytes while refusing unregistered or altered substitutes", () => {
   const root = mkdtempSync(join(tmpdir(), "vehicle-replay-input-"));

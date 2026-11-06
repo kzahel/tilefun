@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import { required } from "../art/ArtCatalog.js";
 import { PIXEL_SCALE } from "../config/constants.js";
 import { Direction } from "../entities/Entity.js";
+import { required } from "../shared/required.js";
 import { createVehicle } from "../traffic/Vehicle.js";
 import { authoredVehicleForType, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import { Camera } from "./Camera.js";
@@ -89,7 +89,6 @@ export async function probeVehicleDepth() {
       { collectElevationItems: () => [] },
       [],
       false,
-      undefined,
       undefined,
       frame,
     )

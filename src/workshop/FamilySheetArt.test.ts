@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { afterEach, expect, it, vi } from "vitest";
-import { required } from "../art/ArtCatalog.js";
+import { required } from "../shared/required.js";
 import { familyCanonicalJSON, loadFamilySheetCatalog } from "./FamilySheetArt.js";
 import type { FamilySheetCatalog } from "./FamilySheetTypes.js";
 

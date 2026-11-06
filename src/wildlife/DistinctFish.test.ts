@@ -1,9 +1,9 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { durableId } from "../persistence/ActorRecords.js";
+import { required } from "../shared/required.js";
 import { DISTINCT_FISH_FAUNA_PROFILES, DISTINCT_FISH_HUNTER_PROFILES } from "./DistinctFish.js";
 import { createFauna } from "./Fauna.js";
 import { canEat } from "./FoodWeb.js";

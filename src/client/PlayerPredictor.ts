@@ -3,7 +3,6 @@ import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { updatePlayerSpriteFromInput } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
-import type { Movement } from "../input/ActionManager.js";
 import { interpolateRotation } from "../physics/BodyRotation.js";
 import { getGravityScale } from "../physics/Gravity.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
@@ -17,6 +16,7 @@ import {
 } from "../physics/PlayerControls.js";
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
 import { interpolateHeading } from "../rendering/PresentationTimeline.js";
+import type { Movement } from "../shared/Movement.js";
 import type { World } from "../world/World.js";
 
 const MAX_HISTORY = 120;

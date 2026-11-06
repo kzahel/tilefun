@@ -366,9 +366,8 @@ async function start() {
     };
 
     console.log("[tilefun] Connected to P2P host");
-    client = new GameClient(canvas, peerTransport, null, {
+    client = new GameClient(canvas, peerTransport, {
       renderHostFactory,
-      mode: "serialized",
       profile,
       profileStore,
       roomDirectory,
@@ -400,9 +399,8 @@ async function start() {
     deactivateMenu(overlay.el);
     overlay.el.remove();
     console.log(`[tilefun] Hosting P2P game. Peer ID: ${peerId}`);
-    client = new GameClient(canvas, transport, null, {
+    client = new GameClient(canvas, transport, {
       renderHostFactory,
-      mode: "serialized",
       profile,
       profileStore,
       roomDirectory,
@@ -440,9 +438,8 @@ async function start() {
       });
       await rtcTransport.ready();
       console.log("[tilefun] Connected to server (WebRTC datachannel)");
-      client = new GameClient(canvas, rtcTransport, null, {
+      client = new GameClient(canvas, rtcTransport, {
         renderHostFactory,
-        mode: "serialized",
         profile,
         profileStore,
         roomDirectory,
@@ -458,9 +455,8 @@ async function start() {
       const wsTransport = new WebSocketClientTransport(wsUrl);
       await wsTransport.ready();
       console.log("[tilefun] Connected to server");
-      client = new GameClient(canvas, wsTransport, null, {
+      client = new GameClient(canvas, wsTransport, {
         renderHostFactory,
-        mode: "serialized",
         profile,
         profileStore,
         roomDirectory,
@@ -476,9 +472,8 @@ async function start() {
     const transport = createLocalHost();
     await transport.ready();
     transport.connect({ profileId: profile.id, displayName: profile.name });
-    client = new GameClient(canvas, transport, null, {
+    client = new GameClient(canvas, transport, {
       renderHostFactory,
-      mode: "serialized",
       profile,
       profileStore,
       roomDirectory,

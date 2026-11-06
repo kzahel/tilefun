@@ -28,7 +28,7 @@ import { renderEntities, renderWorld } from "./renderWorld.js";
 /**
  * Play mode scene.
  * Handles: player movement input, camera follow, gem HUD, touch joystick.
- * In serialized mode, runs client-side prediction for the player entity.
+ * Runs client-side prediction for the player entity.
  */
 const HIT_SHAKE_INTENSITY = 6;
 const GHOST_HIT_KEYS = [
@@ -122,9 +122,6 @@ export class PlayScene implements GameScene {
     if (gc.editorButton) gc.editorButton.textContent = "Edit";
 
     // Tell server we're in play mode
-    if (!gc.serialized && gc.server) {
-      gc.server.getLocalSession().editorEnabled = false;
-    }
     gc.transport.send({ type: "set-editor-mode", enabled: false });
 
     // Zoom preset hotkeys
@@ -147,17 +144,15 @@ export class PlayScene implements GameScene {
       () => gc.stateView.playerEntity,
     );
 
-    // Create predictor for serialized mode
-    if (gc.serialized) {
-      this.predictor = new PlayerPredictor();
-      const remoteView = gc.stateView as RemoteStateView;
-      observeInputSequence(gc.transport, remoteView.lastProcessedInputSeq);
-      remoteView.setPredictor(this.predictor);
-      // Initialize from current server state if available
-      const serverPlayer = remoteView.serverPlayerEntity;
-      if (serverPlayer.id !== -1) {
-        this.predictor.reset(serverPlayer);
-      }
+    // Predict the local player against the authoritative replica
+    this.predictor = new PlayerPredictor();
+    const remoteView = gc.stateView;
+    observeInputSequence(gc.transport, remoteView.lastProcessedInputSeq);
+    remoteView.setPredictor(this.predictor);
+    // Initialize from current server state if available
+    const serverPlayer = remoteView.serverPlayerEntity;
+    if (serverPlayer.id !== -1) {
+      this.predictor.reset(serverPlayer);
     }
   }
 
@@ -177,8 +172,8 @@ export class PlayScene implements GameScene {
     this.jumpPressUnsub = null;
     this.jumpPressLatched = false;
     this.lastSampledJumpHeld = false;
-    if (gc.serialized && this.predictor) {
-      (gc.stateView as RemoteStateView).setPredictor(null);
+    if (this.predictor) {
+      gc.stateView.setPredictor(null);
       this.predictor = null;
     }
   }
@@ -196,9 +191,7 @@ export class PlayScene implements GameScene {
     // Re-send editor mode false — after realm switch the server may have a new
     // session that defaults editorEnabled=true
     gc.transport.send({ type: "set-editor-mode", enabled: false });
-    if (gc.serialized && this.predictor) {
-      (gc.stateView as RemoteStateView).setPredictor(this.predictor);
-    }
+    if (this.predictor) gc.stateView.setPredictor(this.predictor);
   }
 
   onPause(gc: GameContext): void {
@@ -222,19 +215,10 @@ export class PlayScene implements GameScene {
     // Debug panel state
     gc.camera.zoom = gc.debugPanel.zoom;
     if (gc.debugPanel.consumeBaseModeChange() || gc.debugPanel.consumeConvexChange()) {
-      if (gc.serialized) {
-        gc.transport.send({ type: "invalidate-all-chunks" });
-      } else if (gc.server) {
-        gc.server.invalidateAllChunks();
-      }
+      gc.transport.send({ type: "invalidate-all-chunks" });
     }
 
-    if (gc.serialized) {
-      gc.sendDebugState(gc.debugPanel.paused);
-    } else if (gc.server) {
-      const session = gc.server.getLocalSession();
-      session.debugPaused = gc.debugPanel.paused;
-    }
+    gc.sendDebugState(gc.debugPanel.paused);
 
     // Update debug panel player info
     if (gc.debugEnabled && gc.profile) {
@@ -409,101 +393,80 @@ export class PlayScene implements GameScene {
     const verticalFollow = gc.console.cvars.get("cl_verticalfollow")?.get() === true;
 
     // Server tick + camera follow + chunk loading
-    if (gc.serialized) {
-      const remoteView = gc.stateView as RemoteStateView;
+    const remoteView = gc.stateView;
 
-      if (this.predictor) {
-        // Reconcile BEFORE storing current input — replay rebuilds prediction
-        // from server state + unacked inputs from previous frames only.
-        // Storing current input first would cause it to be replayed AND
-        // applied in update(), double-moving the player.
-        if (remoteView.stateAppliedThisTick) {
-          const serverPlayer = remoteView.serverPlayerEntity;
-          if (serverPlayer.id !== -1) {
-            if (!this.predictor.player || gc.doorPresentation?.busy) {
-              const serverMount =
-                remoteView.mountEntityId !== undefined
-                  ? remoteView.serverEntities.find((e) => e.id === remoteView.mountEntityId)
-                  : undefined;
-              console.log(
-                `[tilefun:play] predictor.reset — serverPlayer.id=${serverPlayer.id}, pos=(${serverPlayer.position.wx.toFixed(1)}, ${serverPlayer.position.wy.toFixed(1)})`,
-              );
-              this.predictor.reset(serverPlayer, serverMount);
-            } else if (this.predictor.player.id !== serverPlayer.id) {
-              const serverMount =
-                remoteView.mountEntityId !== undefined
-                  ? remoteView.serverEntities.find((e) => e.id === remoteView.mountEntityId)
-                  : undefined;
-              console.log(
-                `[tilefun:play] predictor entity ID mismatch: predicted=${this.predictor.player.id} server=${serverPlayer.id} — forcing reset`,
-              );
-              this.predictor.reset(serverPlayer, serverMount);
-            }
-            this.predictor.reconcile(
-              serverPlayer,
-              remoteView.lastProcessedInputSeq,
-              gc.stateView.world,
-              gc.stateView.props,
-              remoteView.serverEntities,
-              remoteView.mountEntityId,
-              {
-                serverTick: remoteView.serverTick,
-                ...(remoteView.physicsState ? { physics: remoteView.physicsState } : {}),
-              },
+    if (this.predictor) {
+      // Reconcile BEFORE storing current input — replay rebuilds prediction
+      // from server state + unacked inputs from previous frames only.
+      // Storing current input first would cause it to be replayed AND
+      // applied in update(), double-moving the player.
+      if (remoteView.stateAppliedThisTick) {
+        const serverPlayer = remoteView.serverPlayerEntity;
+        if (serverPlayer.id !== -1) {
+          if (!this.predictor.player || gc.doorPresentation?.busy) {
+            const serverMount =
+              remoteView.mountEntityId !== undefined
+                ? remoteView.serverEntities.find((e) => e.id === remoteView.mountEntityId)
+                : undefined;
+            console.log(
+              `[tilefun:play] predictor.reset — serverPlayer.id=${serverPlayer.id}, pos=(${serverPlayer.position.wx.toFixed(1)}, ${serverPlayer.position.wy.toFixed(1)})`,
             );
-            this.maybeLogReconcile(gc, remoteView);
+            this.predictor.reset(serverPlayer, serverMount);
+          } else if (this.predictor.player.id !== serverPlayer.id) {
+            const serverMount =
+              remoteView.mountEntityId !== undefined
+                ? remoteView.serverEntities.find((e) => e.id === remoteView.mountEntityId)
+                : undefined;
+            console.log(
+              `[tilefun:play] predictor entity ID mismatch: predicted=${this.predictor.player.id} server=${serverPlayer.id} — forcing reset`,
+            );
+            this.predictor.reset(serverPlayer, serverMount);
           }
-        }
-
-        // Store current input for future reconciliation, then predict.
-        if (!inputLocked)
-          predictInput(
-            this.predictor,
-            seq,
-            movement,
-            commandDt,
+          this.predictor.reconcile(
+            serverPlayer,
+            remoteView.lastProcessedInputSeq,
             gc.stateView.world,
             gc.stateView.props,
-            gc.stateView.entities,
+            remoteView.serverEntities,
+            remoteView.mountEntityId,
+            {
+              serverTick: remoteView.serverTick,
+              ...(remoteView.physicsState ? { physics: remoteView.physicsState } : {}),
+            },
           );
+          this.maybeLogReconcile(gc, remoteView);
+        }
       }
 
-      // Camera follows predicted player position (stateView.playerEntity
-      // returns the predicted player when predictor is attached).
-      // Skip follow when player is a placeholder (id -1) — e.g. between
-      // world switch and first game-state — so camera.requestSnap() stays
-      // pending until a real player position arrives.
-      const playerEnt = gc.stateView.playerEntity;
-      if (playerEnt.id !== -1) {
-        followPlayer(gc.camera, playerEnt, verticalFollow, 0, this.predictor);
-      }
-      if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
-        const savedZoom = gc.camera.zoom;
-        gc.camera.zoom = 1;
-        gc.sendVisibleRange();
-        gc.camera.zoom = savedZoom;
-      } else {
-        gc.sendVisibleRange();
-      }
-    } else if (gc.server) {
-      const session = gc.server.getLocalSession();
-      session.visibleRange = gc.camera.getVisibleChunkRange();
-      gc.server.tick(dt);
+      // Store current input for future reconciliation, then predict.
+      if (!inputLocked)
+        predictInput(
+          this.predictor,
+          seq,
+          movement,
+          commandDt,
+          gc.stateView.world,
+          gc.stateView.props,
+          gc.stateView.entities,
+        );
+    }
 
-      followPlayer(gc.camera, gc.stateView.playerEntity, verticalFollow);
-
-      session.cameraX = gc.camera.x;
-      session.cameraY = gc.camera.y;
-      session.cameraZoom = gc.camera.zoom;
-
-      if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
-        const savedZoom = gc.camera.zoom;
-        gc.camera.zoom = 1;
-        gc.server.updateVisibleChunks(gc.camera.getVisibleChunkRange());
-        gc.camera.zoom = savedZoom;
-      } else {
-        gc.server.updateVisibleChunks(gc.camera.getVisibleChunkRange());
-      }
+    // Camera follows predicted player position (stateView.playerEntity
+    // returns the predicted player when predictor is attached).
+    // Skip follow when player is a placeholder (id -1) — e.g. between
+    // world switch and first game-state — so camera.requestSnap() stays
+    // pending until a real player position arrives.
+    const playerEnt = gc.stateView.playerEntity;
+    if (playerEnt.id !== -1) {
+      followPlayer(gc.camera, playerEnt, verticalFollow, 0, this.predictor);
+    }
+    if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
+      const savedZoom = gc.camera.zoom;
+      gc.camera.zoom = 1;
+      gc.sendVisibleRange();
+      gc.camera.zoom = savedZoom;
+    } else {
+      gc.sendVisibleRange();
     }
 
     // Detect player hit (invincibility transition 0 → >0) and trigger screen shake + sound.
@@ -560,7 +523,7 @@ export class PlayScene implements GameScene {
   }
 
   render(alpha: number, gc: GameContext): void {
-    const view = gc.serialized ? (gc.stateView as RemoteStateView) : null;
+    const view = gc.stateView;
     view?.beginPresentation(gc.time.presentationSeconds, alpha, gc.debugPanel.paused);
     try {
       beginPlayerPresentation(

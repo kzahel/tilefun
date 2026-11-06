@@ -137,7 +137,6 @@ try {
       [],
       false,
       undefined,
-      undefined,
       frame,
     );
     const objects = items

@@ -1,5 +1,4 @@
 import { getBaseSelectionMode, getForceConvex } from "../autotile/TerrainId.js";
-import type { ExtrapolationStats } from "../client/ClientStateView.js";
 import {
   CHUNK_SIZE,
   DEFAULT_PHYSICAL_HEIGHT,
@@ -47,7 +46,6 @@ export interface DebugInfo {
         threshold: number;
       }
     | undefined;
-  extrapolationStats?: ExtrapolationStats | undefined;
 }
 
 function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
@@ -81,12 +79,6 @@ function drawInfoPanel(ctx: CanvasRenderingContext2D, info: DebugInfo): void {
     const s = info.reconcileStats;
     lines.push(
       `ReconWin: n=${s.samples} notable=${s.notable} avg=${s.avgPosErr.toFixed(3)} max=${s.maxPosErr.toFixed(3)} thr=${s.threshold.toFixed(3)}`,
-    );
-  }
-  if (info.extrapolationStats) {
-    const s = info.extrapolationStats;
-    lines.push(
-      `Extrap: n=${s.samples} avgErr=${s.avgPosErr.toFixed(3)} maxErr=${s.maxPosErr.toFixed(3)} lead=${s.avgLeadMs.toFixed(1)}ms`,
     );
   }
   if (info.playerJumpZ) {

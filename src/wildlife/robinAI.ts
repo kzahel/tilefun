@@ -1,12 +1,12 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
-import type { WildlifeBody, WildlifeEnvironment } from "./mallardAI.js";
+import { lcgNext } from "../shared/Determinism.js";
+import { gap } from "../shared/gap.js";
 import type { RobinPerch } from "./Robin.js";
 import type { RobinWorkBudget } from "./RobinWorkBudget.js";
 import { restoreRobinPose, robinMotionZ, settleRobin, startleRobin } from "./robinInteractions.js";
+import type { WildlifeBody, WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
-const distance = (a: PositionComponent, b: PositionComponent) =>
-  Math.hypot(a.wx - b.wx, a.wy - b.wy);
 export function updateRobinAI(
   bird: Entity,
   dt: number,
@@ -21,7 +21,7 @@ export function updateRobinAI(
     velocity = bird.motionIntent;
   if (!ai || !velocity || !bird.sprite) return;
   const random = () => {
-    ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
+    ai.randomState = lcgNext(ai.randomState);
     return ai.randomState / 4294967296;
   };
   if (ai.motion) return;
@@ -30,7 +30,7 @@ export function updateRobinAI(
   // A distant player cannot alarm either pose, so idle waits need no prop query.
   if (
     ai.timer > dt &&
-    (ai.state === "recover" || !players.some((p) => distance(p, bird.position) < 26))
+    (ai.state === "recover" || !players.some((p) => gap(p, bird.position) < 26))
   ) {
     velocity.vx = velocity.vy = 0;
     ai.timer -= dt;
@@ -40,15 +40,13 @@ export function updateRobinAI(
   let perched = false;
   const sensePerches = () => {
     perches = environment.perches?.(ai.home, ai.radius) ?? [];
-    perched = perches.some(
-      (p) => distance(p, bird.position) < 2 && Math.abs(p.z - (bird.wz ?? 0)) < 1,
-    );
+    perched = perches.some((p) => gap(p, bird.position) < 2 && Math.abs(p.z - (bird.wz ?? 0)) < 1);
   };
-  const nearPlayer = players.some((p) => distance(p, bird.position) < 26);
+  const nearPlayer = players.some((p) => gap(p, bird.position) < 26);
   if (nearPlayer) {
     // Current crowns determine the immediate perched alarm radius.
     sensePerches();
-    const nearby = players.find((p) => distance(p, bird.position) < (perched ? 12 : 26));
+    const nearby = players.find((p) => gap(p, bird.position) < (perched ? 12 : 26));
     if (nearby && ai.state !== "recover") startleRobin(bird, nearby);
   }
   velocity.vx = velocity.vy = 0;
@@ -82,7 +80,7 @@ export function updateRobinAI(
   }
   const flying = escaping || perched || ai.activity % 2 === 0;
   if (budget && !planning) budget.starts--;
-  const near = players.some((p) => distance(p, bird.position) < 192);
+  const near = players.some((p) => gap(p, bird.position) < 192);
   let candidatesLeft = budget ? (near ? 8 : 4) : Infinity;
   let samplesLeft = budget ? (near ? 64 : 32) : Infinity;
   const from = ai.alarmFrom ?? bird.position;
@@ -93,16 +91,14 @@ export function updateRobinAI(
   const candidates: RobinPerch[] =
     flying && !perched
       ? budget
-        ? perches.filter(
-            (p) => distance(p, ai.home) <= ai.radius - 8 && distance(p, bird.position) >= 10,
-          )
+        ? perches.filter((p) => gap(p, ai.home) <= ai.radius - 8 && gap(p, bird.position) >= 10)
         : [...perches]
       : [];
   // Borrowed only for synchronous queries; never write trial heights to the actor.
   const body: WildlifeBody = { collider: bird.collider, wz: bird.wz ?? 0 };
   for (let i = 0; i < 24; i++) {
     const away =
-      distance(from, bird.position) < 1
+      gap(from, bird.position) < 1
         ? random() * Math.PI * 2
         : Math.atan2(bird.position.wy - from.wy, bird.position.wx - from.wx);
     const angle = escaping ? away + (random() - 0.5) * Math.PI : random() * Math.PI * 2;
@@ -116,18 +112,18 @@ export function updateRobinAI(
   for (const p of candidates) {
     if (budget && (candidatesLeft-- <= 0 || budget.candidates <= 0 || budget.samples <= 0)) break;
     if (budget) budget.candidates--;
-    const length = distance(p, bird.position),
-      gain = distance(p, from) - distance(bird.position, from);
+    const length = gap(p, bird.position),
+      gain = gap(p, from) - gap(bird.position, from);
     if (
       length < 10 ||
-      distance(p, ai.home) > ai.radius - 8 ||
+      gap(p, ai.home) > ai.radius - 8 ||
       environment.isWater(p) ||
-      players.some((player) => distance(p, player) < 22) ||
+      players.some((player) => gap(p, player) < 22) ||
       animals.some(
         (a) =>
           a !== bird &&
           a.collider?.solid &&
-          distance(p, a.position) < 12 &&
+          gap(p, a.position) < 12 &&
           Math.abs((a.wz ?? 0) - p.z) < 10,
       ) ||
       (escaping && gain < 10)

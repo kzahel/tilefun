@@ -1,8 +1,8 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createChicken } from "../entities/Chicken.js";
 import type { Entity } from "../entities/Entity.js";
 import { createGhostAngry } from "../entities/Ghost.js";
+import { required } from "../shared/required.js";
 import { createDeer } from "../wildlife/Deer.js";
 import { createFauna, FAUNA_PROFILES } from "../wildlife/Fauna.js";
 import { createFrog } from "../wildlife/Frog.js";

@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { Direction } from "../entities/Entity.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
 import type { FrameMessage } from "../shared/protocol.js";
+import { required } from "../shared/required.js";
 import {
   deserializeEntity,
   reuseEntitySnapshot,

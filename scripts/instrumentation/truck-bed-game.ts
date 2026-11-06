@@ -110,14 +110,12 @@ try {
   const state = () =>
     page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-      const truck = g.remoteView.serverEntities.find((e) => e.type === "vehicle-v1:dump-truck");
-      const cargo = g.remoteView.serverEntities.find(
-        (e) => e.type === "wildlife-resource-fruit-v1",
-      );
+      const truck = g.stateView.serverEntities.find((e) => e.type === "vehicle-v1:dump-truck");
+      const cargo = g.stateView.serverEntities.find((e) => e.type === "wildlife-resource-fruit-v1");
       return {
-        playerZ: g.remoteView.serverPlayerEntity.wz,
-        playerPosition: g.remoteView.serverPlayerEntity.position,
-        parent: g.remoteView.serverPlayerEntity.parentId,
+        playerZ: g.stateView.serverPlayerEntity.wz,
+        playerPosition: g.stateView.serverPlayerEntity.position,
+        parent: g.stateView.serverPlayerEntity.parentId,
         truck: truck && {
           id: truck.id,
           bed: truck.vehicleBed,

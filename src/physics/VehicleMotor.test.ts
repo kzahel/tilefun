@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { Direction } from "../entities/Entity.js";
-import type { Movement } from "../input/ActionManager.js";
+import type { Movement } from "../shared/Movement.js";
 import { createVehicle, vehicleNoseHeading } from "../traffic/Vehicle.js";
 import { PhysicsScene } from "./PhysicsScene.js";
 import { vehicleMotionIntent } from "./PlayerControls.js";

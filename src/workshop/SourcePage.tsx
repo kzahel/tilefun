@@ -6,12 +6,12 @@ import {
   type ArtRect,
   inflateSlices,
   intersects,
-  required,
   snapRegion,
   validateRect,
 } from "../art/ArtCatalog.js";
 import { ART_INTENTS, type ArtNote } from "../art/ArtNotes.js";
 import { loadVerifiedArtImage } from "../art/ArtSource.js";
+import { required } from "../shared/required.js";
 import { ErrorMessage, threadPath } from "./App.js";
 import { workshopJson } from "./AuthClient.js";
 import { useOutdoorCatalog } from "./OutdoorQueries.js";

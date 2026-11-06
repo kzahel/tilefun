@@ -1,11 +1,11 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import { encodeActor } from "../persistence/ActorRecords.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
+import { required } from "../shared/required.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { createMallard, MALLARD_TYPE } from "./Mallard.js";
 import { updateMallardAI } from "./mallardAI.js";

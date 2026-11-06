@@ -43,8 +43,10 @@ single player pauses; hidden P2P keeps authority/guest delivery running and defe
 ordinary local replication until visible again. Browser/OS suspension can still
 interrupt a browser host. See [188](tactical/188-p2p-worker-authority.md).
 Dedicated Node hosting uses the same GameServer/Realm model through
-[standalone.ts](../src/server/standalone.ts). A direct LocalTransport/LocalStateView
-path still exists for specialized callers/tests; it is not the default launcher.
+[standalone.ts](../src/server/standalone.ts). `GameClient` always talks to authority
+through a transport and mirrors it in `RemoteStateView`; an in-process
+`LocalTransport` + `GameServer` pair remains only for Node tests (`memoryServer`,
+the replication harness).
 
 All timed GameServer hosts use ServerLoop's monotonic fixed-step deadlines.
 Integer timer rounding and callback work do not accumulate simulation drift;

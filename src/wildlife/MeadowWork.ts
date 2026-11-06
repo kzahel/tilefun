@@ -1,8 +1,10 @@
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
+import { gap } from "../shared/gap.js";
 import type { AnimalWork } from "./AnimalWork.js";
 import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import type { WorkContext } from "./AnimalWorkSystem.js";
@@ -13,7 +15,6 @@ import { restoreFaunaPose, startleFauna } from "./faunaInteractions.js";
 import { restoreRabbitPose, startleRabbit } from "./rabbitInteractions.js";
 import { restoreRobinPose, robinMotionZ, startleRobin } from "./robinInteractions.js";
 
-const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
 const kindOf = (a: Entity) =>
   a.rabbit
     ? "rabbit"
@@ -38,10 +39,10 @@ export class MeadowWork {
   private nearby(a: Entity, radius: number) {
     return this.manager.spatialHash
       .queryRange(
-        Math.floor((a.position.wx - radius) / 256),
-        Math.floor((a.position.wy - radius) / 256),
-        Math.floor((a.position.wx + radius) / 256),
-        Math.floor((a.position.wy + radius) / 256),
+        Math.floor((a.position.wx - radius) / CHUNK_SIZE_PX),
+        Math.floor((a.position.wy - radius) / CHUNK_SIZE_PX),
+        Math.floor((a.position.wx + radius) / CHUNK_SIZE_PX),
+        Math.floor((a.position.wy + radius) / CHUNK_SIZE_PX),
       )
       .filter((e) => gap(e.position, a.position) <= radius);
   }

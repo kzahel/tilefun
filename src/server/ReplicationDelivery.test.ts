@@ -3,9 +3,9 @@ import type { FrameMessage } from "../shared/protocol.js";
 import { createReplicationRig } from "./testing/ReplicationDeliveryHarness.js";
 import { ReplicationDeliveryQueue } from "./testing/ReplicationDeliveryQueue.js";
 
-let rig: ReturnType<typeof createReplicationRig>;
-beforeEach(() => {
-  rig = createReplicationRig();
+let rig: Awaited<ReturnType<typeof createReplicationRig>>;
+beforeEach(async () => {
+  rig = await createReplicationRig();
 });
 afterEach(() => rig.server.destroy());
 

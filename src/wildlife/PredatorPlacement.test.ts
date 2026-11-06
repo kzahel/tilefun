@@ -1,9 +1,9 @@
 import { expect, it } from "vitest";
 import { predatorHomes } from "../../tests-support/PredatorHomes.fixture.js";
-import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { PREDATOR_PROFILES, predatorType } from "./Predator.js";
 
 it.each(PREDATOR_PROFILES)(

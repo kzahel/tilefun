@@ -1,8 +1,10 @@
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
+import { gap } from "../shared/gap.js";
 import type { AnimalWork } from "./AnimalWork.js";
 import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import type { AnimalWorkSystem, WorkContext } from "./AnimalWorkSystem.js";
@@ -11,7 +13,6 @@ import { faunaProfile } from "./Fauna.js";
 import { forageType, restoreWorkItemPose, sourceType } from "./ForageResources.js";
 import { restoreFaunaPose } from "./faunaInteractions.js";
 
-const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
 const kindOf = (a: Entity) => {
   const species = faunaProfile(a.type)?.species;
   return species === "cow" || species === "sheep" || species === "donkey" ? species : undefined;
@@ -32,10 +33,10 @@ export class HerdWork {
   private nearby(a: Entity) {
     return this.manager.spatialHash
       .queryRange(
-        Math.floor((a.position.wx - 180) / 256),
-        Math.floor((a.position.wy - 180) / 256),
-        Math.floor((a.position.wx + 180) / 256),
-        Math.floor((a.position.wy + 180) / 256),
+        Math.floor((a.position.wx - 180) / CHUNK_SIZE_PX),
+        Math.floor((a.position.wy - 180) / CHUNK_SIZE_PX),
+        Math.floor((a.position.wx + 180) / CHUNK_SIZE_PX),
+        Math.floor((a.position.wy + 180) / CHUNK_SIZE_PX),
       )
       .filter((e) => e !== a && gap(e.position, a.position) < 180)
       .sort(

@@ -1,5 +1,5 @@
 import type { Entity } from "../entities/Entity.js";
-import type { Movement } from "../input/ActionManager.js";
+import type { Movement } from "../shared/Movement.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 export type ScenarioCommand =

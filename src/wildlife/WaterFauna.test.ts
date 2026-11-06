@@ -1,10 +1,10 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
+import { required } from "../shared/required.js";
 import { createFauna, FAUNA_PROFILES, faunaDefinition, faunaType } from "./Fauna.js";
 import { faunaHabitatAllows, updateFaunaAI } from "./faunaAI.js";
 import { startleFauna } from "./faunaInteractions.js";

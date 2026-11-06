@@ -1,4 +1,5 @@
 import { Spritesheet } from "../assets/Spritesheet.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { createLayeredInteriorMap } from "../interiors/LayeredInteriorMap.js";
 import { Chunk } from "../world/Chunk.js";
 import { Camera } from "./Camera.js";
@@ -55,7 +56,7 @@ export function probeWorldRegistration() {
     backend.prepareInterior({ id: 123456, map: createLayeredInteriorMap(1, 1), editable: false });
     try {
       for (const cx of [-1, 0]) {
-        const base = cx * 256,
+        const base = cx * CHUNK_SIZE_PX,
           chunk = new Chunk();
         const range = { minCx: cx, maxCx: cx, minCy: cx, maxCy: cx };
         const world = {
@@ -72,7 +73,7 @@ export function probeWorldRegistration() {
         const paint = ground.getContext("2d");
         if (!paint) throw Error("Probe terrain context unavailable");
         paint.fillStyle = "#184c18";
-        paint.fillRect(0, 0, 256, 256);
+        paint.fillRect(0, 0, CHUNK_SIZE_PX, CHUNK_SIZE_PX);
         paint.fillStyle = "#ff0000";
         paint.fillRect(80, 112, 7, 11);
         touchRaster(ground);

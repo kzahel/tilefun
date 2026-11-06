@@ -233,7 +233,6 @@ it("cycles a presentation-only pose while authority is paused, then restores the
     expect.objectContaining({ collectItems: expect.any(Function) }),
     false,
     undefined,
-    undefined,
     expect.anything(),
     { observer: player, visibility: "auto" },
   );

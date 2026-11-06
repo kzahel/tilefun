@@ -1,4 +1,4 @@
-import type { Entity, PositionComponent } from "../entities/Entity.js";
+import type { PositionComponent } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 
 export interface ClimbTree {
@@ -58,7 +58,4 @@ export function treeClimbPoint(tree: ClimbTree, fraction: number, down: boolean)
     wy: tree.gripY + (tree.wy - tree.gripY) * step,
     z: tree.ground + (tree.z - tree.ground) * Math.min(1, t / 0.8),
   };
-}
-export function controlsTreeHeight(a: Entity) {
-  return !!a.animalWork?.tree && a.animalWork.climbZ !== undefined;
 }

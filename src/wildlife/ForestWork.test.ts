@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { forestWorkRecipe } from "../scenarios/ForestWorkRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import type { WorkContext } from "./AnimalWorkSystem.js";
 import { startleDeer } from "./deerInteractions.js";
 import { createFauna, faunaType } from "./Fauna.js";

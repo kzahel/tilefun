@@ -3,6 +3,7 @@ import type { EntityManager } from "../entities/EntityManager.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import { setHorizontalVelocity, teleportBody } from "../physics/PhysicalEdits.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
+import { gap } from "../shared/gap.js";
 import type { AnimalWork, FoodKind } from "./AnimalWork.js";
 import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import { carrySocket } from "./BehaviorArt.js";
@@ -14,14 +15,13 @@ import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
 import { GardenWork, isGardenWorker } from "./GardenWork.js";
 import { HerdWork, isHerdWorker } from "./HerdWork.js";
 import { isMeadowWorker, MeadowWork } from "./MeadowWork.js";
-import type { WildlifeEnvironment } from "./mallardAI.js";
 import { isPastureWorker, PastureWork } from "./PastureWork.js";
 import { restorePredatorPose } from "./PredatorMotion.js";
 import { isRangeWorker, RangeWork } from "./RangeWork.js";
 import { isThreatWorker, ThreatWork } from "./ThreatWork.js";
+import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 import { isWoodlandWorker, WoodlandWork } from "./WoodlandWork.js";
 
-const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
 export interface WorkPlayer {
   identity: string;
   entity: Entity;

@@ -23,7 +23,6 @@ const sporty: VehiclePerformance = {
 };
 const bus: VehiclePerformance = { speed: 88, acceleration: 120, pushSpeed: 64, pushWeight: 500 };
 const truck: VehiclePerformance = { speed: 80, acceleration: 104, pushSpeed: 72, pushWeight: 600 };
-export const TRAIN_PUSH = { pushSpeed: 80, pushWeight: 1000 };
 export function vehiclePerformance(type: string): VehiclePerformance {
   if (isBoat({ type })) return { speed: 76, acceleration: 64, pushSpeed: 0, pushWeight: 0 };
   const model = type.replace(/^vehicle-v1:/, "");

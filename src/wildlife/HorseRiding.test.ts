@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { createPlayer } from "../entities/Player.js";
 import { FLAT_SCENARIO, scenarioWalls } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { createFauna, faunaType } from "./Fauna.js";
 import { startleFauna } from "./faunaInteractions.js";
 

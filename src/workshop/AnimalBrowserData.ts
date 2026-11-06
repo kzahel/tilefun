@@ -1,7 +1,7 @@
 import ledger from "../../art-source/wildlife-v2/autonomous-140.json" with { type: "json" };
-import { required } from "../art/ArtCatalog.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { NATURAL_CASES } from "../scenarios/NaturalLandscapeRecipe.js";
+import { required } from "../shared/required.js";
 import { DEER_IMAGE, DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaProfile, faunaType } from "../wildlife/Fauna.js";
 import { FROG_IMAGE, FROG_TYPE } from "../wildlife/Frog.js";

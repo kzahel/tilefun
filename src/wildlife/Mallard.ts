@@ -1,5 +1,6 @@
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
+import { positionSeed } from "../shared/Determinism.js";
 
 /** Provisional gameplay use of unchanged drawing-02; not a human art approval. */
 export const MALLARD_TYPE = "wildlife-mallard-v1";
@@ -63,7 +64,7 @@ export function createMallard(wx: number, wy: number): Entity {
       radius: 160,
       state: "rest",
       timer: 2,
-      randomState: ((Math.floor(wx) * 73856093) ^ (Math.floor(wy) * 19349663)) >>> 0,
+      randomState: positionSeed(wx, wy),
       target: { wx, wy },
       last: { wx, wy },
       stuck: 0,

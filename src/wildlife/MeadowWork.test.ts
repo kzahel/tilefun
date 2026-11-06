@@ -1,11 +1,11 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { actorPlacements } from "../generation/ActorPlacements.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
 import { meadowWorkRecipe } from "../scenarios/MeadowWorkRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { createFauna, faunaProfile } from "./Fauna.js";
 import { createForageItem } from "./ForageResources.js";

@@ -27,7 +27,6 @@ import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { captureIdea, type IdeaSnapshot } from "../ideas/captureIdea.js";
 import { ideaToast, startIdeaDelivery } from "../ideas/IdeaDialog.js";
-import { worldCompatibility } from "../persistence/WorldCompatibility.js";
 import { createCanvasRenderHost } from "../rendering/CanvasRenderHost.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
@@ -47,11 +46,7 @@ import { InteriorCatalog, type InteriorCatalogRouteState } from "../editor/Inter
 import { PropCatalog } from "../editor/PropCatalog.js";
 import { isBefriendHit } from "../game/playInteraction.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
-import {
-  descriptorChoice,
-  descriptorFromMetadata,
-  type GenerationDescriptor,
-} from "../generation/GenerationDescriptor.js";
+import { descriptorChoice, type GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import { ActionManager } from "../input/ActionManager.js";
 import { inputHint } from "../input/InputHints.js";
 import {
@@ -67,7 +62,6 @@ import { TouchPinch } from "../input/TouchPinch.js";
 import { TouchTap } from "../input/TouchTap.js";
 import { TrainTapMovement } from "../input/TrainTapMovement.js";
 import { interiorRealmId } from "../interiors/GameplayInterior.js";
-import type { WorldMeta } from "../persistence/WorldRegistry.js";
 import { isTrain } from "../railway/Train.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
@@ -80,7 +74,6 @@ import { MenuScene } from "../scenes/MenuScene.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import { PropEditorScene } from "../scenes/PropEditorScene.js";
 import { WorldMapScene } from "../scenes/WorldMapScene.js";
-import type { GameServer } from "../server/GameServer.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import {
@@ -103,13 +96,12 @@ import { WorldMap } from "../ui/WorldMap.js";
 import { World } from "../world/World.js";
 import { XRSessionManager } from "../xr/XRSessionManager.js";
 import { takeAdminToken } from "./adminToken.js";
-import { type ClientStateView, LocalStateView, RemoteStateView } from "./ClientStateView.js";
+import { RemoteStateView } from "./ClientStateView.js";
 import { RequestBroker } from "./RequestBroker.js";
 
 export interface GameClientOptions {
   /** Platform renderer selection; simulation and presentation stay shared. */
   renderHostFactory?: RenderHostFactory;
-  mode?: "local" | "serialized";
   profile?: {
     id: string;
     name: string;
@@ -200,12 +192,9 @@ export class GameClient {
   private mapButton: HTMLButtonElement | null = null;
   private propCatalog: PropCatalog;
   private interiorCatalog: InteriorCatalog;
-  private stateView: ClientStateView;
-  private remoteView: RemoteStateView | null = null;
+  private stateView: RemoteStateView;
   private transport: IClientTransport;
   private netEmulatedTransport: NetEmulatedClientTransport;
-  private server: GameServer | null;
-  private serialized: boolean;
   private autoJoinRealm: boolean;
   private reloadCamera: ReloadCamera | null;
   private scenes: SceneManager;
@@ -227,12 +216,12 @@ export class GameClient {
   private menuOpening = false;
   /** Last applied tick rate from server (for change detection). */
 
-  /** Request/response correlation for serialized mode. */
+  /** Request/response correlation. */
   private nextRequestId = 1;
   private readonly requests: RequestBroker;
 
   private lastVisibleRangeKey: string | null = null;
-  /** Last debug flag key sent to server (serialized mode). */
+  /** Last debug flag key sent to server. */
   private lastDebugStateKey: string | null = null;
 
   /** Realm list received while in lobby (multiplayer connect flow). */
@@ -252,18 +241,7 @@ export class GameClient {
   private clientId: string;
   private readonly adminToken: string | undefined;
 
-  /** Access the server instance (local mode only). Throws if null (serialized mode). */
-  private get localServer(): GameServer {
-    if (!this.server) throw new Error("No direct server in serialized mode");
-    return this.server;
-  }
-
-  constructor(
-    canvas: HTMLCanvasElement,
-    transport: IClientTransport,
-    server: GameServer | null,
-    options?: GameClientOptions,
-  ) {
+  constructor(canvas: HTMLCanvasElement, transport: IClientTransport, options?: GameClientOptions) {
     const admin = takeAdminToken(new URL(window.location.href));
     this.adminToken = admin.token;
     if (admin.token !== undefined) window.history.replaceState(window.history.state, "", admin.url);
@@ -278,8 +256,6 @@ export class GameClient {
       this.doorPresentation.cancel();
       this.clearPlayInput();
     });
-    this.server = server;
-    this.serialized = options?.mode === "serialized";
     this.autoJoinRealm = options?.autoJoinRealm ?? false;
     this.profile = options?.profile ?? null;
     this.movementMode = touchMovementMode(this.profile?.touchMovement);
@@ -458,138 +434,127 @@ export class GameClient {
       else if (msg.type === "world-loaded" || msg.type === "realm-joined")
         this.editorModel.setPatternStatus({ error: "", canUndo: false, canRedo: false });
     };
-    if (this.serialized) {
-      // Client-side world with no generator (chunks populated from server messages)
-      const clientWorld = new World(new FlatStrategy());
-      const remoteView = new RemoteStateView(clientWorld);
-      this.stateView = remoteView;
-      this.remoteView = remoteView;
+    // Client-side world with no generator (chunks populated from server messages)
+    const clientWorld = new World(new FlatStrategy());
+    const remoteView = new RemoteStateView(clientWorld);
+    this.stateView = remoteView;
 
-      // Send profile identity to server (profileId for persistence, displayName for labels)
-      if (this.profile) {
-        this.transport.send({
-          type: "identify",
-          displayName: this.profile.name,
-          profileId: this.profile.id,
-          playerModel: normalizePlayerModel(this.profile.playerModel),
-        });
-      }
-
-      // Route server messages to RemoteStateView
-      this.transport.onMessage((msg: ServerMessage) => {
-        routePatternStatus(msg);
-        if (msg.type === "door-motion") this.doorPresentation.receive(msg);
-        // Domain-specific handlers first — buffer frame/sync messages for deferred
-        // application during client update tick (prevents async entity
-        // position changes that desync camera and entity interpolation)
-        if (
-          msg.type === "frame" ||
-          msg.type === "sync-room" ||
-          msg.type === "sync-session" ||
-          msg.type === "sync-invincibility" ||
-          msg.type === "sync-chunks" ||
-          msg.type === "sync-props" ||
-          msg.type === "sync-cvars" ||
-          msg.type === "sync-player-names" ||
-          msg.type === "sync-editor-cursors"
-        ) {
-          remoteView.bufferMessage(msg);
-        } else if (msg.type === "world-loaded" || msg.type === "realm-joined") {
-          this.autoJoinRealm = false;
-          if (msg.generation) this.showWorldIdentity(msg.generation);
-          remoteView.interior = msg.interior ?? null;
-          this.canvas.dataset.interior = msg.interior ? JSON.stringify(msg.interior) : "";
-          console.log(
-            `[tilefun:client] ${msg.type} — camera=(${msg.cameraX.toFixed(1)}, ${msg.cameraY.toFixed(1)}), predictor=${remoteView.hasPredictedPlayer}, editorEnabled=${remoteView.editorEnabled}`,
-          );
-          if (msg.worldId) {
-            this.mainMenu.currentWorldId = msg.worldId;
-            sessionStorage.setItem(LAST_WORLD_KEY, msg.interior?.parentWorldId ?? msg.worldId);
-          }
-          remoteView.clear();
-          this.renderer.clear();
-          this.sceneFrame.clear();
-          if (this.reloadCamera && this.reloadCamera.realmId === msg.worldId) {
-            this.camera.snapTo(this.reloadCamera.cameraX, this.reloadCamera.cameraY);
-            this.camera.zoom = this.reloadCamera.zoom;
-          } else {
-            this.camera.snapTo(msg.cameraX, msg.cameraY);
-            this.camera.zoom = msg.cameraZoom;
-            // Snap to player position on next follow() — avoids lerp when
-            // switching worlds where the player position differs from saved camera.
-            this.camera.requestSnap();
-          }
-          this.reloadCamera = null;
-          this.gcSendVisibleRange(true);
-          this.gcSendDebugState(this.debugPanel.paused, true);
-          this.lobbyRealmList = null;
-        } else if (msg.type === "realm-list") {
-          // Skip unsolicited-broadcast handling when this is a response to
-          // a gcSendRequest (e.g. from toggleMenu) — the requestId resolver
-          // below will deliver it to the caller, which pushes MenuScene itself.
-          const isRequestResponse = "requestId" in msg && msg.requestId !== undefined;
-          const playableRealms = msg.realms.filter((realm) => !realm.incompatibleReason);
-          if (this.autoJoinRealm && playableRealms.length > 0) {
-            // Auto-join: prefer the last world this tab was in (survives HMR /
-            // server restart), falling back to the most active realm.
-            const lastWorldId = sessionStorage.getItem(LAST_WORLD_KEY);
-            const target =
-              (lastWorldId && playableRealms.find((r) => r.id === lastWorldId)) ||
-              playableRealms.find((r) => r.playerCount > 0) ||
-              playableRealms[0]!;
-            this.autoJoinRealm = false; // only auto-join once
-            void this.gcSendRequest({
-              type: "join-realm",
-              requestId: this.nextRequestId++,
-              worldId: target.id,
-              resume: true,
-            }).catch((error) => this.mainMenu.showCreationError(String(error)));
-          } else if (!isRequestResponse && this.initDone) {
-            // Unsolicited broadcast — show realm browser immediately
-            if (!this.scenes.has(MenuScene)) {
-              this.scenes.push(new MenuScene(msg.realms));
-            } else {
-              this.mainMenu.show(msg.realms);
-            }
-          } else if (!isRequestResponse) {
-            // Buffer for after init completes
-            this.lobbyRealmList = msg.realms;
-          }
-        } else if (msg.type === "realm-left") {
-          remoteView.interior = null;
-          this.canvas.dataset.interior = "";
-          remoteView.clear();
-          this.renderer.clear();
-          this.sceneFrame.clear();
-        } else if (msg.type === "realm-player-count") {
-          this.mainMenu.updatePlayerCount(msg.worldId, msg.count);
-        } else if (msg.type === "kicked") {
-          console.warn(`[tilefun] Kicked: ${msg.reason}`);
-          this.destroy();
-          const overlay = document.createElement("div");
-          overlay.style.cssText =
-            "position:fixed;inset:0;background:rgba(0,0,0,0.85);color:#fff;display:flex;align-items:center;justify-content:center;font:bold 24px sans-serif;z-index:9999;text-align:center;padding:2em;";
-          overlay.textContent = `Disconnected: ${msg.reason}`;
-          document.body.appendChild(overlay);
-          return;
-        } else if (msg.type === "player-assigned") {
-          console.log(`[tilefun] Player entity assigned: ${msg.entityId}`);
-        } else if (msg.type === "chat") {
-          this.consoleEngine.output.printInfo(`[${msg.sender}] ${msg.text}`);
-          this.chatHUD.addMessage(`[${msg.sender}] ${msg.text}`);
-        }
-
-        this.requests.receive(msg);
-      });
-    } else {
-      if (!server) throw new Error("Local mode requires a GameServer instance");
-      this.stateView = new LocalStateView(server);
-      this.transport.onMessage((message) => {
-        routePatternStatus(message);
-        if (message.type === "door-motion") this.doorPresentation.receive(message);
-        this.requests.receive(message);
+    // Send profile identity to server (profileId for persistence, displayName for labels)
+    if (this.profile) {
+      this.transport.send({
+        type: "identify",
+        displayName: this.profile.name,
+        profileId: this.profile.id,
+        playerModel: normalizePlayerModel(this.profile.playerModel),
       });
     }
+
+    // Route server messages to RemoteStateView
+    this.transport.onMessage((msg: ServerMessage) => {
+      routePatternStatus(msg);
+      if (msg.type === "door-motion") this.doorPresentation.receive(msg);
+      // Domain-specific handlers first — buffer frame/sync messages for deferred
+      // application during client update tick (prevents async entity
+      // position changes that desync camera and entity interpolation)
+      if (
+        msg.type === "frame" ||
+        msg.type === "sync-room" ||
+        msg.type === "sync-session" ||
+        msg.type === "sync-invincibility" ||
+        msg.type === "sync-chunks" ||
+        msg.type === "sync-props" ||
+        msg.type === "sync-cvars" ||
+        msg.type === "sync-player-names" ||
+        msg.type === "sync-editor-cursors"
+      ) {
+        remoteView.bufferMessage(msg);
+      } else if (msg.type === "world-loaded" || msg.type === "realm-joined") {
+        this.autoJoinRealm = false;
+        if (msg.generation) this.showWorldIdentity(msg.generation);
+        remoteView.interior = msg.interior ?? null;
+        this.canvas.dataset.interior = msg.interior ? JSON.stringify(msg.interior) : "";
+        console.log(
+          `[tilefun:client] ${msg.type} — camera=(${msg.cameraX.toFixed(1)}, ${msg.cameraY.toFixed(1)}), predictor=${remoteView.hasPredictedPlayer}, editorEnabled=${remoteView.editorEnabled}`,
+        );
+        if (msg.worldId) {
+          this.mainMenu.currentWorldId = msg.worldId;
+          sessionStorage.setItem(LAST_WORLD_KEY, msg.interior?.parentWorldId ?? msg.worldId);
+        }
+        remoteView.clear();
+        this.renderer.clear();
+        this.sceneFrame.clear();
+        if (this.reloadCamera && this.reloadCamera.realmId === msg.worldId) {
+          this.camera.snapTo(this.reloadCamera.cameraX, this.reloadCamera.cameraY);
+          this.camera.zoom = this.reloadCamera.zoom;
+        } else {
+          this.camera.snapTo(msg.cameraX, msg.cameraY);
+          this.camera.zoom = msg.cameraZoom;
+          // Snap to player position on next follow() — avoids lerp when
+          // switching worlds where the player position differs from saved camera.
+          this.camera.requestSnap();
+        }
+        this.reloadCamera = null;
+        this.gcSendVisibleRange(true);
+        this.gcSendDebugState(this.debugPanel.paused, true);
+        this.lobbyRealmList = null;
+      } else if (msg.type === "realm-list") {
+        // Skip unsolicited-broadcast handling when this is a response to
+        // a gcSendRequest (e.g. from toggleMenu) — the requestId resolver
+        // below will deliver it to the caller, which pushes MenuScene itself.
+        const isRequestResponse = "requestId" in msg && msg.requestId !== undefined;
+        const playableRealms = msg.realms.filter((realm) => !realm.incompatibleReason);
+        if (this.autoJoinRealm && playableRealms.length > 0) {
+          // Auto-join: prefer the last world this tab was in (survives HMR /
+          // server restart), falling back to the most active realm.
+          const lastWorldId = sessionStorage.getItem(LAST_WORLD_KEY);
+          const target =
+            (lastWorldId && playableRealms.find((r) => r.id === lastWorldId)) ||
+            playableRealms.find((r) => r.playerCount > 0) ||
+            playableRealms[0]!;
+          this.autoJoinRealm = false; // only auto-join once
+          void this.gcSendRequest({
+            type: "join-realm",
+            requestId: this.nextRequestId++,
+            worldId: target.id,
+            resume: true,
+          }).catch((error) => this.mainMenu.showCreationError(String(error)));
+        } else if (!isRequestResponse && this.initDone) {
+          // Unsolicited broadcast — show realm browser immediately
+          if (!this.scenes.has(MenuScene)) {
+            this.scenes.push(new MenuScene(msg.realms));
+          } else {
+            this.mainMenu.show(msg.realms);
+          }
+        } else if (!isRequestResponse) {
+          // Buffer for after init completes
+          this.lobbyRealmList = msg.realms;
+        }
+      } else if (msg.type === "realm-left") {
+        remoteView.interior = null;
+        this.canvas.dataset.interior = "";
+        remoteView.clear();
+        this.renderer.clear();
+        this.sceneFrame.clear();
+      } else if (msg.type === "realm-player-count") {
+        this.mainMenu.updatePlayerCount(msg.worldId, msg.count);
+      } else if (msg.type === "kicked") {
+        console.warn(`[tilefun] Kicked: ${msg.reason}`);
+        this.destroy();
+        const overlay = document.createElement("div");
+        overlay.style.cssText =
+          "position:fixed;inset:0;background:rgba(0,0,0,0.85);color:#fff;display:flex;align-items:center;justify-content:center;font:bold 24px sans-serif;z-index:9999;text-align:center;padding:2em;";
+        overlay.textContent = `Disconnected: ${msg.reason}`;
+        document.body.appendChild(overlay);
+        return;
+      } else if (msg.type === "player-assigned") {
+        console.log(`[tilefun] Player entity assigned: ${msg.entityId}`);
+      } else if (msg.type === "chat") {
+        this.consoleEngine.output.printInfo(`[${msg.sender}] ${msg.text}`);
+        this.chatHUD.addMessage(`[${msg.sender}] ${msg.text}`);
+      }
+
+      this.requests.receive(msg);
+    });
 
     this.doorControl = new DoorControl(async (request) => {
       if (this.doorPresentation.busy) return;
@@ -602,16 +567,6 @@ export class GameClient {
       } catch (error) {
         this.doorPresentation.cancel();
         throw error;
-      }
-      if (!this.serialized) {
-        const session = this.localServer.getLocalSession();
-        this.camera.snapTo(session.cameraX, session.cameraY);
-        this.camera.requestSnap();
-        this.mainMenu.currentWorldId = session.realmId;
-        this.showWorldIdentity(this.localServer.worldGeneration);
-        this.canvas.dataset.interior = this.localServer.worldInterior
-          ? JSON.stringify(this.localServer.worldInterior)
-          : "";
       }
     });
     this.vehicleControl = new VehicleControl(async (request) => {
@@ -631,13 +586,13 @@ export class GameClient {
         this.time.elapsed += dt;
         // Apply buffered server state at the start of each client tick so
         // entity position changes are synchronized with camera.savePrev/follow.
-        if (!this.remoteView?.pendingMessageCount) this.transport.pump?.();
-        this.remoteView?.applyPending();
+        if (!this.stateView.pendingMessageCount) this.transport.pump?.();
+        this.stateView.applyPending();
         this.editorModel.setIndoorContext(!!this.stateView.interior);
         // Tick client-side sprite animations (animTimer/frameCol not serialized).
-        this.remoteView?.tickAnimations(dt);
+        this.stateView.tickAnimations(dt);
         this.scenes.update(dt);
-        const p = this.remoteView?.serverPlayerEntity ?? this.stateView.playerEntity;
+        const p = this.stateView.serverPlayerEntity;
         const ready =
           p.id !== -1 &&
           (this.stateView.interior
@@ -793,13 +748,6 @@ export class GameClient {
         if (typeof hmr.zoom === "number") {
           this.debugPanel.setZoom(hmr.zoom);
         }
-        if (
-          !this.serialized &&
-          this.reloadCamera?.realmId === this.localServer.getLocalSession().realmId
-        ) {
-          this.camera.snapTo(this.reloadCamera.cameraX, this.reloadCamera.cameraY);
-          this.reloadCamera = null;
-        }
       } catch {
         this.scenes.push(new PlayScene());
       }
@@ -813,7 +761,7 @@ export class GameClient {
       "Preparing images, sounds and tile data.",
     );
     // Load all assets — BlendGraph is deterministic, construct locally
-    const blendGraph = this.serialized ? new BlendGraph() : this.localServer.blendGraph;
+    const blendGraph = new BlendGraph();
     const [assets] = await Promise.all([
       loadGameAssets(blendGraph, showStartupAssets),
       loadAtlasIndex(),
@@ -861,18 +809,8 @@ export class GameClient {
     this.sheets.set("gem", new Spritesheet(this.gemSpriteCanvas, 16, 16));
     this.renderHost.setAssets(assets, blendGraph);
 
-    if (!this.serialized) {
-      // Apply loaded world camera position (local mode — direct access)
-      const session = this.localServer.getLocalSession();
-      this.camera.x = session.cameraX;
-      this.camera.y = session.cameraY;
-      this.camera.zoom = session.cameraZoom;
-
-      // Initial chunk loading
-      this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
-    }
-    // Serialized mode: camera was already set by "world-loaded" message
-    // sent during onConnect (fires before init() runs)
+    // The camera was already set by the "world-loaded" message sent during
+    // onConnect (fires before init() runs).
 
     const handoffParams = new URL(location.href).searchParams;
     const handoffWorldId = handoffParams.get("worldId");
@@ -891,98 +829,53 @@ export class GameClient {
         if (this.scenes.has(MenuScene)) this.scenes.pop();
         return;
       }
-      if (this.serialized) {
-        // realm-joined handler applies camera + clears state + sends visible range
-        this.gcSendRequest({
-          type: "join-realm",
-          requestId: this.nextRequestId++,
-          worldId: id,
-          ...(handoffWorldId === id && handoffArrival ? { arrival: handoffArrival } : {}),
+      // realm-joined handler applies camera + clears state + sends visible range
+      this.gcSendRequest({
+        type: "join-realm",
+        requestId: this.nextRequestId++,
+        worldId: id,
+        ...(handoffWorldId === id && handoffArrival ? { arrival: handoffArrival } : {}),
+      })
+        .then(() => {
+          if (this.scenes.has(MenuScene)) this.scenes.pop();
         })
-          .then(() => {
-            if (this.scenes.has(MenuScene)) this.scenes.pop();
-          })
-          .catch((error) => this.mainMenu.showCreationError(String(error)));
-      } else {
-        this.localServer
-          .loadWorld(id, handoffWorldId === id ? handoffArrival : undefined)
-          .then((cam) => {
-            this.mainMenu.currentWorldId = id;
-            this.showWorldIdentity(this.localServer.worldGeneration);
-            this.camera.snapTo(cam.cameraX, cam.cameraY);
-            this.camera.zoom = cam.cameraZoom;
-            this.camera.requestSnap();
-            this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
-            if (this.scenes.has(MenuScene)) this.scenes.pop();
-          })
-          .catch((error) => this.mainMenu.showCreationError(String(error)));
-      }
+        .catch((error) => this.mainMenu.showCreationError(String(error)));
     };
     this.mainMenu.onCreate = (name, worldType, seed, generation) => {
-      if (this.serialized) {
-        const msg: ClientMessage & { requestId: number } = {
-          type: "create-world",
-          requestId: this.nextRequestId++,
-          name,
-        };
-        if (worldType !== undefined) msg.worldType = worldType;
-        if (seed !== undefined) msg.seed = seed;
-        if (generation !== undefined) msg.generation = generation;
-        this.gcSendRequest(msg)
-          .then((resp) => {
-            return this.gcSendRequest({
-              type: "join-realm",
-              requestId: this.nextRequestId++,
-              worldId: resp.meta.id,
-              ...(!handoffWorldId && handoffArrival ? { arrival: handoffArrival } : {}),
-            });
-          })
-          .then(() => {
-            if (this.scenes.has(MenuScene)) this.scenes.pop();
-          })
-          .catch((error) => this.mainMenu.showCreationError(String(error)));
-      } else {
-        this.localServer
-          .createWorld(name, worldType, seed, generation)
-          .then((meta) => {
-            return this.localServer
-              .loadWorld(meta.id, !handoffWorldId ? handoffArrival : undefined)
-              .then((cam) => {
-                this.mainMenu.currentWorldId = meta.id;
-                this.showWorldIdentity(this.localServer.worldGeneration);
-                this.camera.snapTo(cam.cameraX, cam.cameraY);
-                this.camera.zoom = cam.cameraZoom;
-                this.camera.requestSnap();
-                this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
-                if (this.scenes.has(MenuScene)) this.scenes.pop();
-              });
-          })
-          .catch((error) => this.mainMenu.showCreationError(String(error)));
-      }
+      const msg: ClientMessage & { requestId: number } = {
+        type: "create-world",
+        requestId: this.nextRequestId++,
+        name,
+      };
+      if (worldType !== undefined) msg.worldType = worldType;
+      if (seed !== undefined) msg.seed = seed;
+      if (generation !== undefined) msg.generation = generation;
+      this.gcSendRequest(msg)
+        .then((resp) => {
+          return this.gcSendRequest({
+            type: "join-realm",
+            requestId: this.nextRequestId++,
+            worldId: resp.meta.id,
+            ...(!handoffWorldId && handoffArrival ? { arrival: handoffArrival } : {}),
+          });
+        })
+        .then(() => {
+          if (this.scenes.has(MenuScene)) this.scenes.pop();
+        })
+        .catch((error) => this.mainMenu.showCreationError(String(error)));
     };
     this.mainMenu.onRecreate = async (id) => {
       try {
-        if (this.serialized) {
-          const response = await this.gcSendRequest({
-            type: "recreate-world",
-            requestId: this.nextRequestId++,
-            worldId: id,
-          });
-          await this.gcSendRequest({
-            type: "join-realm",
-            requestId: this.nextRequestId++,
-            worldId: response.meta.id,
-          });
-        } else {
-          const meta = await this.localServer.recreateWorld(id);
-          const camera = await this.localServer.loadWorld(meta.id);
-          this.mainMenu.currentWorldId = meta.id;
-          this.showWorldIdentity(this.localServer.worldGeneration);
-          this.camera.snapTo(camera.cameraX, camera.cameraY);
-          this.camera.zoom = camera.cameraZoom;
-          this.camera.requestSnap();
-          this.localServer.updateVisibleChunks(this.camera.getVisibleChunkRange());
-        }
+        const response = await this.gcSendRequest({
+          type: "recreate-world",
+          requestId: this.nextRequestId++,
+          worldId: id,
+        });
+        await this.gcSendRequest({
+          type: "join-realm",
+          requestId: this.nextRequestId++,
+          worldId: response.meta.id,
+        });
         if (this.scenes.has(MenuScene)) this.scenes.pop();
       } catch (error) {
         this.mainMenu.showCreationError(String(error));
@@ -990,37 +883,27 @@ export class GameClient {
     };
     this.mainMenu.onDelete = async (id) => {
       try {
-        if (this.serialized) {
-          await this.gcSendRequest({
-            type: "delete-world",
-            requestId: this.nextRequestId++,
-            worldId: id,
-          });
-          const resp = await this.gcSendRequest({
-            type: "list-realms",
-            requestId: this.nextRequestId++,
-          });
-          this.mainMenu.show(resp.realms);
-        } else {
-          await this.localServer.deleteWorld(id);
-          const worlds = await this.localServer.listWorlds();
-          this.mainMenu.show(GameClient.toRealmInfoList(worlds));
-        }
+        await this.gcSendRequest({
+          type: "delete-world",
+          requestId: this.nextRequestId++,
+          worldId: id,
+        });
+        const resp = await this.gcSendRequest({
+          type: "list-realms",
+          requestId: this.nextRequestId++,
+        });
+        this.mainMenu.show(resp.realms);
       } catch (error) {
         this.mainMenu.showCreationError(String(error));
       }
     };
     this.mainMenu.onRename = (id, name) => {
-      if (this.serialized) {
-        void this.gcSendRequest({
-          type: "rename-world",
-          requestId: this.nextRequestId++,
-          worldId: id,
-          name,
-        }).catch((error) => this.mainMenu.showCreationError(String(error)));
-      } else {
-        this.localServer.renameWorld(id, name);
-      }
+      void this.gcSendRequest({
+        type: "rename-world",
+        requestId: this.nextRequestId++,
+        worldId: id,
+        name,
+      }).catch((error) => this.mainMenu.showCreationError(String(error)));
     };
     this.mainMenu.onClose = () => {
       if (this.scenes.has(MenuScene)) this.scenes.pop();
@@ -1061,7 +944,7 @@ export class GameClient {
     this.applyStartupRoute();
 
     document.addEventListener("visibilitychange", () => {
-      if (this.stateView instanceof RemoteStateView) this.stateView.resetPresentationClock();
+      this.stateView.resetPresentationClock();
       this.camera.requestSnap();
       if (document.visibilityState === "hidden") {
         this.gcFlushServer();
@@ -1080,7 +963,6 @@ export class GameClient {
     }
 
     this.loop.start();
-    if (!this.serialized) this.showWorldIdentity(this.localServer.worldGeneration);
     if (
       (new URL(location.href).searchParams.has("generation") ||
         new URL(location.href).searchParams.has("desktop") ||
@@ -1136,7 +1018,7 @@ export class GameClient {
     this.doorPresentation.destroy();
     this.loop.stop();
     this.gcFlushServer();
-    this.remoteView?.setPredictor(null);
+    this.stateView.setPredictor(null);
     this.scenes.clear();
     this.requests.dispose();
     this.transport.close();
@@ -1238,16 +1120,11 @@ export class GameClient {
     this.menuOpening = true;
     try {
       this.gcFlushServer();
-      if (this.serialized) {
-        const resp = await this.gcSendRequest({
-          type: "list-realms",
-          requestId: this.nextRequestId++,
-        });
-        this.scenes.push(new MenuScene(resp.realms));
-      } else {
-        const worlds = await this.localServer.listWorlds();
-        this.scenes.push(new MenuScene(GameClient.toRealmInfoList(worlds)));
-      }
+      const resp = await this.gcSendRequest({
+        type: "list-realms",
+        requestId: this.nextRequestId++,
+      });
+      this.scenes.push(new MenuScene(resp.realms));
     } finally {
       this.menuOpening = false;
     }
@@ -1311,12 +1188,12 @@ export class GameClient {
   getFaultContext(): FaultReport["context"] {
     const p = this.stateView.playerEntity.position;
     return {
-      mode: this.serialized ? "serialized" : "local",
+      mode: "serialized",
       worldId: (this.mainMenu.currentWorldId ?? "").slice(0, 100),
       generation: (this.canvas.dataset.generation ?? "").slice(0, 2000),
       x: p.wx,
       y: p.wy,
-      serverTick: this.remoteView?.serverTick ?? 0,
+      serverTick: this.stateView.serverTick,
       hidden: document.hidden,
     };
   }
@@ -1337,31 +1214,11 @@ export class GameClient {
     this.canvas.dataset.generation = JSON.stringify(generation);
   }
 
-  /** Convert WorldMeta[] to RealmInfo[] (local mode — no player counts). */
-  private static toRealmInfoList(worlds: WorldMeta[]): RealmInfo[] {
-    return worlds.map((w): RealmInfo => {
-      const info: RealmInfo = {
-        id: w.id,
-        name: w.name,
-        playerCount: 0,
-        createdAt: w.createdAt,
-        lastPlayedAt: w.lastPlayedAt,
-      };
-      info.incompatibleReason = worldCompatibility(w);
-      info.generation = descriptorFromMetadata(w);
-      return info;
-    });
-  }
-
   private gcFlushServer(): void {
-    if (this.serialized) {
-      this.transport.send({ type: "flush" });
-    } else {
-      this.localServer.flush();
-    }
+    this.transport.send({ type: "flush" });
   }
 
-  /** Send current visible chunk range to server when changed (serialized mode). */
+  /** Send current visible chunk range to server when changed. */
   private gcSendVisibleRange(force = false): void {
     const range = this.camera.getVisibleChunkRange();
     const key = `${range.minCx},${range.minCy},${range.maxCx},${range.maxCy}`;
@@ -1376,7 +1233,7 @@ export class GameClient {
     });
   }
 
-  /** Send debug flags to server when changed (serialized mode). */
+  /** Send debug flags to server when changed. */
   private gcSendDebugState(paused: boolean, force = false): void {
     const key = `${paused ? 1 : 0}`;
     if (!force && key === this.lastDebugStateKey) return;
@@ -1440,8 +1297,6 @@ export class GameClient {
       console: this.consoleEngine,
       consoleUI: this.consoleUI,
       chatHUD: this.chatHUD,
-      server: this.server,
-      serialized: this.serialized,
       scenes: this.scenes,
       time: this.time,
       clientId: this.clientId,

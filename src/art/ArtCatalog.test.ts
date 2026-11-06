@@ -1,10 +1,10 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
+import { required } from "../shared/required.js";
 import {
   type ArtCatalog,
   inflateSlices,
   intersects,
-  required,
   snapRegion,
   validateRect,
 } from "./ArtCatalog.js";

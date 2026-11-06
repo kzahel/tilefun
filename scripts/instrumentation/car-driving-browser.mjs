@@ -56,7 +56,7 @@ try {
   // requested arrival, not traffic from the launcher's preceding replica.
   await page.waitForFunction(({ x, y }) => {
     const g = document.querySelector("#game")?.__game;
-    const p = g?.remoteView.serverPlayerEntity;
+    const p = g?.stateView.serverPlayerEntity;
     return (
       g?.initDone &&
       p?.id !== -1 &&
@@ -72,20 +72,18 @@ try {
   await page.waitForFunction(() =>
     document
       .querySelector("#game")
-      ?.__game?.remoteView.serverEntities.some((e) => e.type.startsWith("vehicle-v1:")),
+      ?.__game?.stateView.serverEntities.some((e) => e.type.startsWith("vehicle-v1:")),
   );
   if (await page.evaluate(() => document.querySelector("#game").__game.stateView.editorEnabled))
     await page.keyboard.press("Tab");
+  await page.waitForFunction(() => !document.querySelector("#game").__game.stateView.editorEnabled);
   await page.waitForFunction(
-    () => !document.querySelector("#game").__game.remoteView.editorEnabled,
-  );
-  await page.waitForFunction(
-    () => document.querySelector("#game").__game.remoteView._predictor?.player,
+    () => document.querySelector("#game").__game.stateView._predictor?.player,
   );
   await page.evaluate(async () => {
     const g = document.querySelector("#game").__game;
-    const p = g.remoteView.serverPlayerEntity;
-    const car = g.remoteView.serverEntities
+    const p = g.stateView.serverPlayerEntity;
+    const car = g.stateView.serverEntities
       .filter((e) => e.type.startsWith("vehicle-v1:") && e.collider)
       .sort(
         (a, b) =>
@@ -108,13 +106,12 @@ try {
   await enter.click();
   await page.waitForFunction(
     () =>
-      document.querySelector("#game").__game.remoteView.serverPlayerEntity.parentId !== undefined,
+      document.querySelector("#game").__game.stateView.serverPlayerEntity.parentId !== undefined,
   );
   const direction = await page.evaluate(() => {
     const g = document.querySelector("#game").__game;
-    return g.remoteView.serverEntities.find(
-      (e) => e.id === g.remoteView.serverPlayerEntity.parentId,
-    ).sprite.direction;
+    return g.stateView.serverEntities.find((e) => e.id === g.stateView.serverPlayerEntity.parentId)
+      .sprite.direction;
   });
   await page.evaluate(async (hz) => {
     const g = document.querySelector("#game").__game;
@@ -125,14 +122,14 @@ try {
     });
   }, serverHz);
   await page.waitForFunction(
-    (hz) => Math.abs(document.querySelector("#game").__game.remoteView.tickRate - hz) < 0.001,
+    (hz) => Math.abs(document.querySelector("#game").__game.stateView.tickRate - hz) < 0.001,
     serverHz,
   );
   const actualRenderer = await page.getAttribute("#game", "data-renderer");
   if (actualRenderer !== renderer) throw Error(`Requested ${renderer}, got ${actualRenderer}`);
   await page.evaluate(() => {
     const g = document.querySelector("#game").__game,
-      view = g.remoteView;
+      view = g.stateView;
     const predictor = view._predictor;
     const rows = [],
       renders = [];
@@ -219,8 +216,8 @@ try {
         const g = document.querySelector("#game")?.__game;
         return {
           body: document.body.innerText,
-          player: g?.remoteView.serverPlayerEntity,
-          cars: g?.remoteView.serverEntities.filter((e) => e.type.startsWith("vehicle-v1:")),
+          player: g?.stateView.serverPlayerEntity,
+          cars: g?.stateView.serverEntities.filter((e) => e.type.startsWith("vehicle-v1:")),
         };
       })
       .catch(() => null);

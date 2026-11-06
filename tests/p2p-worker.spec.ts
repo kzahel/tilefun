@@ -12,7 +12,6 @@ type HostCanvas = HTMLCanvasElement & {
   __game: {
     netEmulatedTransport: { base: WorkerClientTransport };
     stateView: RemoteStateView;
-    remoteView: RemoteStateView;
     loop: { stop(): void; start(): void };
   };
 };
@@ -119,7 +118,7 @@ test("P2P Worker isolates authority and rendering, serves a hidden host, and sav
       const game = (document.querySelector("#game") as HostCanvas).__game;
       return {
         diagnostics: await game.netEmulatedTransport.base.getDiagnostics(),
-        pending: game.remoteView.pendingMessageCount,
+        pending: game.stateView.pendingMessageCount,
       };
     });
     const initialAuthority = hidden.authority,

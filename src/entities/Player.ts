@@ -4,7 +4,7 @@ import {
   PLAYER_SPRINT_MULTIPLIER,
   PLAYER_SPRITE_SIZE,
 } from "../config/constants.js";
-import type { Movement } from "../input/ActionManager.js";
+import type { Movement } from "../shared/Movement.js";
 import { Direction, type Entity } from "./Entity.js";
 
 const FRAME_COUNT = 4;

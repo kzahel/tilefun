@@ -1,4 +1,5 @@
 import "./art.css";
+import { required } from "../shared/required.js";
 import {
   type ArtCatalog,
   type ArtRect,
@@ -7,7 +8,6 @@ import {
   type ArtUsage,
   inflateSlices,
   intersects,
-  required,
   snapRegion,
   validateRect,
 } from "./ArtCatalog.js";

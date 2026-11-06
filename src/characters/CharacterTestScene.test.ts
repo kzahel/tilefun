@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { characterRecipe } from "../scenarios/CharacterRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { CHARACTERS } from "./CharacterCatalog.js";
 
 const def = required(CHARACTERS[0]);

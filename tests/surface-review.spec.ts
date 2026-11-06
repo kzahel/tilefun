@@ -1,12 +1,12 @@
 import { createHash } from "node:crypto";
 import { expect, test } from "@playwright/test";
-import { required } from "../src/art/ArtCatalog.js";
 import type { ArtNote } from "../src/art/ArtNotes.js";
 import {
   CITY_SURFACE_CASES,
   citySurfaceComposition,
   composeCitySurface,
 } from "../src/road/CitySurfaceRecipes.js";
+import { required } from "../src/shared/required.js";
 import approvedSurfaces from "./fixtures/road-foundation-v1.json" with { type: "json" };
 
 const URL = "/tilefun/building-lab.html?run=surfaces";

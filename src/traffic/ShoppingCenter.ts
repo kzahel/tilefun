@@ -35,24 +35,3 @@ export function shoppingLot(center: ShoppingCenter, model: string): ParkingLot {
     ],
   };
 }
-/** Empty neighboring bays leave the complete driving/walking envelope clear. */
-export const SHOPPING_PARKED_BAYS = [
-  [432, 360],
-  [528, 360],
-  [720, 360],
-  [816, 360],
-  [960, 360],
-  [432, 440],
-  [720, 440],
-  [960, 440],
-  [240, 632],
-  [384, 632],
-  [528, 632],
-  [720, 632],
-  [864, 632],
-  [1008, 632],
-  [240, 712],
-  [528, 712],
-  [720, 712],
-  [1008, 712],
-] as const;

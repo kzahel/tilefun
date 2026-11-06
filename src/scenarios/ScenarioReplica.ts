@@ -2,9 +2,9 @@ import { RemoteStateView } from "../client/ClientStateView.js";
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { predictInput } from "../client/predictInput.js";
 import type { Entity } from "../entities/Entity.js";
-import type { Movement } from "../input/ActionManager.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { quantizeAxis } from "../shared/binaryCodec.js";
+import type { Movement } from "../shared/Movement.js";
 import { World } from "../world/World.js";
 import { applyScenarioAppearance } from "./ScenarioRecipe.js";
 

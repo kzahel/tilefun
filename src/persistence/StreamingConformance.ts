@@ -1,3 +1,4 @@
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { createChicken } from "../entities/Chicken.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createProp } from "../entities/PropFactories.js";
@@ -39,7 +40,7 @@ export async function streamingConformance(create: () => PersistenceStore, dista
       (key, seeded) => {
         if (seeded) return;
         const [cx = 0, cy = 0] = key.split(",").map(Number);
-        const actor = createChicken(cx * 256 + 128, cy * 256 + 128);
+        const actor = createChicken(cx * CHUNK_SIZE_PX + 128, cy * CHUNK_SIZE_PX + 128);
         actor.proceduralId = `origin:${key}`;
         entities.spawn(actor);
         births++;
@@ -122,8 +123,8 @@ export async function streamingConformance(create: () => PersistenceStore, dista
     f.props.move(prop.id, 400, 150);
     prop.spawnTimer = 3.75;
     propId = prop.persistentId;
-    parent.position.wx += 256;
-    child.position.wx += 256;
+    parent.position.wx += CHUNK_SIZE_PX;
+    child.position.wx += CHUNK_SIZE_PX;
     await f.visit(1);
     await f.saves.flushAsync();
   } finally {

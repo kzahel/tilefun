@@ -9557,7 +9557,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmWildlife.ts:130"
+          "source": "src/server/RealmWildlife.ts:131"
         },
         {
           "system": "Gameplay",
@@ -9601,7 +9601,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:131"
+          "source": "src/railway/RailwayStrategy.ts:133"
         }
       ]
     },
@@ -9623,7 +9623,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:132"
+          "source": "src/railway/RailwayStrategy.ts:134"
         },
         {
           "system": "Gameplay",
@@ -9689,7 +9689,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:134"
+          "source": "src/railway/RailwayStrategy.ts:136"
         }
       ]
     },
@@ -9937,10 +9937,6 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:99"
-        },
-        {
-          "system": "World generation",
           "source": "src/generation/regional/FarmsteadPlanner.ts:191"
         }
       ]
@@ -9963,10 +9959,6 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:99"
-        },
-        {
-          "system": "World generation",
           "source": "src/generation/regional/FarmsteadPlanner.ts:191"
         }
       ]
@@ -9986,10 +9978,6 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:160"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:213"
         }
       ]
     },
@@ -10008,10 +9996,6 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:168"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:106"
         }
       ]
     },
@@ -10167,7 +10151,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/PastureHabitat.ts:57"
+          "source": "src/wildlife/PastureHabitat.ts:65"
         }
       ]
     },
@@ -10345,7 +10329,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/StreamingConformance.ts:119"
+          "source": "src/persistence/StreamingConformance.ts:120"
         }
       ]
     },
@@ -10485,11 +10469,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmWildlife.ts:132"
+          "source": "src/server/RealmWildlife.ts:133"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/RangeHabitat.ts:99"
+          "source": "src/wildlife/RangeHabitat.ts:100"
         },
         {
           "system": "Gameplay",
@@ -10551,19 +10535,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:206"
-        },
-        {
-          "system": "World generation",
           "source": "src/generation/regional/DistrictStrategy.ts:212"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1376"
+          "source": "src/generation/regional/NaturalLandscape.ts:1395"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1570"
+          "source": "src/generation/regional/NaturalLandscape.ts:1589"
         },
         {
           "system": "World generation",
@@ -10615,15 +10595,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmWildlife.ts:132"
+          "source": "src/server/RealmWildlife.ts:133"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:46"
+          "source": "src/wildlife/ForagePlacements.ts:47"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/PastureHabitat.ts:57"
+          "source": "src/wildlife/PastureHabitat.ts:65"
         },
         {
           "system": "Gameplay",
@@ -10711,10 +10691,6 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:220"
-        },
-        {
-          "system": "World generation",
           "source": "src/generation/regional/RacetrackPlanner.ts:193"
         },
         {
@@ -10750,10 +10726,6 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:753"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:90"
         },
         {
           "system": "World generation",
@@ -11427,7 +11399,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:133"
+          "source": "src/railway/RailwayStrategy.ts:135"
         }
       ]
     },
@@ -29315,7 +29287,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:322"
+          "source": "src/rendering/RendererLab.ts:321"
         }
       ]
     },
@@ -29333,7 +29305,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:323"
+          "source": "src/rendering/RendererLab.ts:322"
         }
       ]
     },
@@ -29759,7 +29731,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmWildlife.ts:130"
+          "source": "src/server/RealmWildlife.ts:131"
         },
         {
           "system": "Gameplay",
@@ -33437,11 +33409,11 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:794"
+          "source": "src/scenes/PlayScene.ts:757"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Frog.ts:5"
+          "source": "src/wildlife/Frog.ts:6"
         }
       ]
     },
@@ -33467,7 +33439,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Deer.ts:7"
+          "source": "src/wildlife/Deer.ts:8"
         }
       ]
     },
@@ -33493,11 +33465,11 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:794"
+          "source": "src/scenes/PlayScene.ts:757"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Robin.ts:5"
+          "source": "src/wildlife/Robin.ts:6"
         }
       ]
     },
@@ -33519,7 +33491,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Rabbit.ts:5"
+          "source": "src/wildlife/Rabbit.ts:6"
         }
       ]
     },
@@ -33545,11 +33517,11 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:794"
+          "source": "src/scenes/PlayScene.ts:757"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Mallard.ts:5"
+          "source": "src/wildlife/Mallard.ts:6"
         }
       ]
     },
@@ -33863,15 +33835,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:276"
+          "source": "src/rendering/RendererLab.ts:275"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:280"
+          "source": "src/rendering/RendererLab.ts:279"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:284"
+          "source": "src/rendering/RendererLab.ts:283"
         }
       ]
     },
@@ -34577,15 +34549,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:272"
+          "source": "src/rendering/collectScene.ts:260"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:282"
+          "source": "src/rendering/collectScene.ts:270"
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Vehicle.ts:122"
+          "source": "src/traffic/Vehicle.ts:109"
         }
       ]
     },
@@ -35391,11 +35363,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:125"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:633"
+          "source": "src/client/ClientStateView.ts:63"
         },
         {
           "system": "Gameplay",
@@ -35435,11 +35403,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/StreamingConformance.ts:50"
+          "source": "src/persistence/StreamingConformance.ts:51"
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/StreamingConformance.ts:55"
+          "source": "src/persistence/StreamingConformance.ts:56"
         },
         {
           "system": "Gameplay",
@@ -35459,19 +35427,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:87"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/scenarios/ScenarioSession.ts:89"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:154"
+          "source": "src/scenarios/ScenarioSession.ts:91"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:237"
+          "source": "src/scenarios/ScenarioSession.ts:156"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/ScenarioSession.ts:239"
         },
         {
           "system": "Gameplay",
@@ -35495,23 +35463,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:334"
+          "source": "src/server/Realm.ts:335"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1246"
+          "source": "src/server/Realm.ts:1359"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1454"
+          "source": "src/server/Realm.ts:2018"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2117"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/server/Realm.ts:2330"
+          "source": "src/server/Realm.ts:2139"
         },
         {
           "system": "Gameplay",
@@ -35551,7 +35515,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/CharacterCandidates.ts:21"
+          "source": "src/workshop/CharacterCandidates.ts:22"
         }
       ]
     },
@@ -35608,10 +35572,6 @@
           "source": "src/entities/EntityDefs.ts:224"
         },
         {
-          "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:133"
-        },
-        {
           "system": "Gameplay",
           "source": "src/scenarios/GardenWorkRecipe.ts:6"
         },
@@ -35629,11 +35589,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/testing/ReplicationDeliveryHarness.ts:29"
+          "source": "src/server/testing/ReplicationDeliveryHarness.ts:24"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/testing/ReplicationDeliveryHarness.ts:30"
+          "source": "src/server/testing/ReplicationDeliveryHarness.ts:26"
         },
         {
           "system": "Gameplay",
@@ -35645,7 +35605,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:970"
+          "source": "src/wildlife/Fauna.ts:971"
         },
         {
           "system": "Gameplay",
@@ -35673,35 +35633,35 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenHabitat.ts:15"
+          "source": "src/wildlife/GardenHabitat.ts:16"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenHabitat.ts:38"
+          "source": "src/wildlife/GardenHabitat.ts:45"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenHabitat.ts:44"
+          "source": "src/wildlife/GardenHabitat.ts:51"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenWork.ts:16"
+          "source": "src/wildlife/GardenWork.ts:17"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenWork.ts:105"
+          "source": "src/wildlife/GardenWork.ts:106"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenWork.ts:109"
+          "source": "src/wildlife/GardenWork.ts:110"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenWork.ts:265"
+          "source": "src/wildlife/GardenWork.ts:266"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenWork.ts:272"
+          "source": "src/wildlife/GardenWork.ts:273"
         },
         {
           "system": "Gameplay",
@@ -35759,10 +35719,6 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:123"
-        },
-        {
-          "system": "World generation",
           "source": "src/generation/regional/FarmsteadPlanner.ts:198"
         },
         {
@@ -35791,11 +35747,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:41"
+          "source": "src/wildlife/Fauna.ts:42"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:241"
+          "source": "src/wildlife/Fauna.ts:242"
         },
         {
           "system": "Gameplay",
@@ -35827,39 +35783,39 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdHabitat.ts:15"
+          "source": "src/wildlife/HerdHabitat.ts:16"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdHabitat.ts:42"
+          "source": "src/wildlife/HerdHabitat.ts:43"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:17"
+          "source": "src/wildlife/HerdWork.ts:18"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:143"
+          "source": "src/wildlife/HerdWork.ts:144"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:263"
+          "source": "src/wildlife/HerdWork.ts:264"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:278"
+          "source": "src/wildlife/HerdWork.ts:279"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:305"
+          "source": "src/wildlife/HerdWork.ts:306"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:329"
+          "source": "src/wildlife/HerdWork.ts:330"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:339"
+          "source": "src/wildlife/HerdWork.ts:340"
         }
       ]
     },
@@ -36266,10 +36222,6 @@
           "source": "src/entities/EntityDefs.ts:511"
         },
         {
-          "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:236"
-        },
-        {
           "system": "Gameplay",
           "source": "src/scenarios/AnimalWorkRecipe.ts:7"
         },
@@ -36359,15 +36311,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:21"
+          "source": "src/wildlife/ForagePlacements.ts:22"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:29"
+          "source": "src/wildlife/ForagePlacements.ts:30"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:71"
+          "source": "src/wildlife/ForagePlacements.ts:72"
         },
         {
           "system": "Gameplay",
@@ -36611,15 +36563,11 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:711"
+          "source": "src/scenes/PlayScene.ts:674"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1341"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/server/Realm.ts:2294"
+          "source": "src/server/Realm.ts:1246"
         },
         {
           "system": "Gameplay",
@@ -36667,7 +36615,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/WoodlandWork.ts:434"
+          "source": "src/wildlife/WoodlandWork.ts:435"
         }
       ]
     },
@@ -37317,7 +37265,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/StreamingConformance.ts:119"
+          "source": "src/persistence/StreamingConformance.ts:120"
         }
       ]
     },
@@ -37473,11 +37421,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmWildlife.ts:132"
+          "source": "src/server/RealmWildlife.ts:133"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/RangeHabitat.ts:99"
+          "source": "src/wildlife/RangeHabitat.ts:100"
         },
         {
           "system": "Gameplay",
@@ -37543,19 +37491,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:206"
-        },
-        {
-          "system": "World generation",
           "source": "src/generation/regional/DistrictStrategy.ts:212"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1376"
+          "source": "src/generation/regional/NaturalLandscape.ts:1395"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1570"
+          "source": "src/generation/regional/NaturalLandscape.ts:1589"
         },
         {
           "system": "World generation",
@@ -37607,15 +37551,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmWildlife.ts:132"
+          "source": "src/server/RealmWildlife.ts:133"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ForagePlacements.ts:46"
+          "source": "src/wildlife/ForagePlacements.ts:47"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/PastureHabitat.ts:57"
+          "source": "src/wildlife/PastureHabitat.ts:65"
         },
         {
           "system": "Gameplay",
@@ -37711,10 +37655,6 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:220"
-        },
-        {
-          "system": "World generation",
           "source": "src/generation/regional/RacetrackPlanner.ts:193"
         },
         {
@@ -37754,10 +37694,6 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:753"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/CountrysidePlanner.ts:90"
         },
         {
           "system": "World generation",
@@ -38155,7 +38091,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/CameraStabilityProbe.ts:46"
+          "source": "src/rendering/CameraStabilityProbe.ts:47"
         },
         {
           "system": "Gameplay",

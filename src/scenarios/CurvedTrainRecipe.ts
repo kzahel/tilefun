@@ -1,10 +1,10 @@
-import { required } from "../art/ArtCatalog.js";
 import {
   RailAlignment,
   type RailPath,
   type RailSegment,
   segmentLength,
 } from "../railway/RailPath.js";
+import { required } from "../shared/required.js";
 
 const line = (x: number, y: number, endX: number, endY: number): RailSegment => ({
   kind: "line",

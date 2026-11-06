@@ -143,7 +143,6 @@ export function renderDebugOverlay(gc: GameContext, alpha = 1): void {
       serverWz: stateView.serverPlayerPosition?.wz,
       correction: stateView.predictionCorrection,
       reconcileStats: stateView.reconcileStats,
-      extrapolationStats: stateView.extrapolationStats,
     },
     camera.getVisibleChunkRange(),
     {

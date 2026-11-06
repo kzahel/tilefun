@@ -1,6 +1,6 @@
 import { afterEach, expect, it, vi } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
+import { required } from "../shared/required.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { createFrog } from "../wildlife/Frog.js";
 import { createMallard } from "../wildlife/Mallard.js";

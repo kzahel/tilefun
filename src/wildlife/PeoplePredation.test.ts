@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { MANUAL_PREY_PAIRS } from "../../tests-support/ManualPreyPairs.fixture.js";
-import { required } from "../art/ArtCatalog.js";
 import { applyPlayerModel, PLAYER_MODELS } from "../characters/PlayerModels.js";
 import { CHARACTER_FACTORIES } from "../characters/PromotedCharacters.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
@@ -11,6 +10,7 @@ import { ProceduralActors } from "../generation/ProceduralActors.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { canEat } from "./FoodWeb.js";
 import { createPredator, PREDATOR_PROFILES } from "./Predator.js";
 import { resolvePredatorCatches, updatePredatorAI } from "./predatorAI.js";

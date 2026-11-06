@@ -1,3 +1,4 @@
+import type { Movement } from "../shared/Movement.js";
 import type { XRSessionManager } from "../xr/XRSessionManager.js";
 import type { ActionMapConfig, ActionName } from "./ActionMap.js";
 import { DEFAULT_ACTION_MAP } from "./ActionMap.js";
@@ -12,17 +13,6 @@ import type { TouchButtons } from "./TouchButtons.js";
 import type { TouchJoystick } from "./TouchJoystick.js";
 
 const SQRT2_INV = 1 / Math.sqrt(2);
-
-export interface Movement {
-  dx: number;
-  dy: number;
-  sprinting: boolean;
-  jump: boolean;
-  /** Edge-triggered jump press sampled from input events (optional). */
-  jumpPressed?: boolean;
-  reversing?: boolean;
-  relativeDriving?: boolean;
-}
 
 type DiscreteCallback = () => void;
 

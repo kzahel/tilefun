@@ -1,7 +1,9 @@
-import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
+import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
+import { gap } from "../shared/gap.js";
 import type { AnimalWork } from "./AnimalWork.js";
 import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import type { AnimalWorkSystem, WorkContext } from "./AnimalWorkSystem.js";
@@ -10,7 +12,6 @@ import { faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose, sourceType } from "./ForageResources.js";
 import { restoreFaunaPose, startleFauna } from "./faunaInteractions.js";
 
-const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
 function gardenKind(a: Entity) {
   const species = faunaProfile(a.type)?.species;
   return species === "chicken" || species === "bee"
@@ -74,10 +75,10 @@ export class GardenWork {
     const p = a.position;
     return this.manager.spatialHash
       .queryRange(
-        Math.floor((p.wx - 180) / 256),
-        Math.floor((p.wy - 180) / 256),
-        Math.floor((p.wx + 180) / 256),
-        Math.floor((p.wy + 180) / 256),
+        Math.floor((p.wx - 180) / CHUNK_SIZE_PX),
+        Math.floor((p.wy - 180) / CHUNK_SIZE_PX),
+        Math.floor((p.wx + 180) / CHUNK_SIZE_PX),
+        Math.floor((p.wy + 180) / CHUNK_SIZE_PX),
       )
       .filter((e) => gap(e.position, p) < 180);
   }

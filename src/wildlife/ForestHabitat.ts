@@ -1,4 +1,5 @@
 import { TerrainId } from "../autotile/TerrainId.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { ActorPlacement } from "../generation/Generator.js";
 import type { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { DEER_TYPE } from "./Deer.js";
@@ -29,8 +30,8 @@ export function forestSupplies(
       [56, 40],
       [-56, 40],
     ]) {
-      const wx = Math.max(cx * 256 + 16, Math.min(cx * 256 + 240, a.wx + dx)),
-        wy = Math.max(cy * 256 + 16, Math.min(cy * 256 + 240, a.wy + dy));
+      const wx = Math.max(cx * CHUNK_SIZE_PX + 16, Math.min(cx * CHUNK_SIZE_PX + 240, a.wx + dx)),
+        wy = Math.max(cy * CHUNK_SIZE_PX + 16, Math.min(cy * CHUNK_SIZE_PX + 240, a.wy + dy));
       if (
         Math.hypot(wx - a.wx, wy - a.wy) < 20 ||
         points.some((p) => Math.hypot(wx - p.wx, wy - p.wy) < 16) ||

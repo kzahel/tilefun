@@ -5,7 +5,7 @@ import { DRIVABLE_MODELS } from "../src/traffic/Vehicle.js";
 const vehicles = (page: Page) =>
   page.evaluate(() => {
     const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-    return g.remoteView.serverEntities
+    return g.stateView.serverEntities
       .filter((e) => e.type.startsWith("vehicle-v1:"))
       .map((e) => ({
         id: e.id,
@@ -112,7 +112,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
       .map((p) => ({
         ...p,
         clearance: Math.min(
-          ...g.remoteView.serverEntities.map((e) =>
+          ...g.stateView.serverEntities.map((e) =>
             Math.hypot(e.position.wx - p.wx, e.position.wy - p.wy),
           ),
         ),
@@ -170,7 +170,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
     .poll(() =>
       page.evaluate(() => {
         const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-        return g.remoteView.serverPlayerEntity.parentId;
+        return g.stateView.serverPlayerEntity.parentId;
       }),
     )
     .toBe(car.id);

@@ -1,5 +1,5 @@
-import { required } from "../art/ArtCatalog.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
+import { required } from "../shared/required.js";
 import approved from "./approved-v1.json" with { type: "json" };
 import { createCharacterEntity } from "./CharacterCatalog.js";
 

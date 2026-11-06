@@ -1,4 +1,4 @@
-import { required } from "../art/ArtCatalog.js";
+import { required } from "../shared/required.js";
 /** Horizontal alignment in world pixels. Arcs have signed sweeps (screen Y grows south). */
 export type RailSegment =
   | { kind: "line"; x: number; y: number; endX: number; endY: number }

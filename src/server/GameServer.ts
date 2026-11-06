@@ -4,7 +4,7 @@ import {
   isPlayerModel,
   normalizePlayerModel,
 } from "../characters/PlayerModels.js";
-import { TICK_RATE, TILE_SIZE } from "../config/constants.js";
+import { CHUNK_SIZE_PX, TICK_RATE, TILE_SIZE } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import type { Entity } from "../entities/Entity.js";
@@ -90,10 +90,10 @@ export class GameServer {
       throw new Error("Invalid teleport destination.");
     const move = async () => {
       await realm.ensureReady({
-        minCx: Math.floor(wx / 256) - 3,
-        maxCx: Math.floor(wx / 256) + 3,
-        minCy: Math.floor(wy / 256) - 3,
-        maxCy: Math.floor(wy / 256) + 3,
+        minCx: Math.floor(wx / CHUNK_SIZE_PX) - 3,
+        maxCx: Math.floor(wx / CHUNK_SIZE_PX) + 3,
+        minCy: Math.floor(wy / CHUNK_SIZE_PX) - 3,
+        maxCy: Math.floor(wy / CHUNK_SIZE_PX) + 3,
       });
       if (session.realmId !== realm.currentWorldId || session.retired) return;
       realm.vehicles.exit(session, true);
@@ -180,7 +180,7 @@ export class GameServer {
   );
 
   // ── Delegation getters for backward compatibility ──
-  // External code (LocalStateView, tests, serverCommands) accesses these fields.
+  // External code (tests, serverCommands) accesses these fields.
   // They delegate to the default realm.
 
   private get activeRealm(): Realm {
@@ -622,8 +622,8 @@ export class GameServer {
           realm.idleSince = null;
           const owner = `resident:${entity.persistentId}`;
           owners.add(owner);
-          const cx = Math.floor(entity.position.wx / 256),
-            cy = Math.floor(entity.position.wy / 256);
+          const cx = Math.floor(entity.position.wx / CHUNK_SIZE_PX),
+            cy = Math.floor(entity.position.wy / CHUNK_SIZE_PX);
           realm.streaming?.interest.set(owner, [
             {
               range: { minCx: cx - 1, minCy: cy - 1, maxCx: cx + 1, maxCy: cy + 1 },
@@ -670,20 +670,10 @@ export class GameServer {
     const door = buildingDoor(home.interior, r.doorId);
     const destination = r.place === "inside" ? await this.getOrCreateRealm(r.parentRealm) : home;
     const position = destination.interior ? door.arrival : door.outside;
-    const cx = Math.floor(position.wx / 256),
-      cy = Math.floor(position.wy / 256);
+    const cx = Math.floor(position.wx / CHUNK_SIZE_PX),
+      cy = Math.floor(position.wy / CHUNK_SIZE_PX);
     await destination.ensureReady({ minCx: cx - 1, minCy: cy - 1, maxCx: cx + 1, maxCy: cy + 1 });
     await transferResident(source, destination, entity, position);
-  }
-
-  /** Load/unload chunks for the given visible range and compute autotile. */
-  updateVisibleChunks(range: { minCx: number; minCy: number; maxCx: number; maxCy: number }): void {
-    this.activeRealm.updateVisibleChunks(range);
-  }
-
-  /** Mark all chunks for re-render (debug mode changes). */
-  invalidateAllChunks(): void {
-    this.activeRealm.invalidateAllChunks();
   }
 
   /**
@@ -1246,7 +1236,7 @@ export class GameServer {
   }
 
   /**
-   * Public loadWorld for backward compat (used by GameClient in local/non-serialized mode).
+   * Load a world into the default realm (in-process tests only; clients use join-realm).
    * Moves the local player to the target world's realm.
    */
   async loadWorld(

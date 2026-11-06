@@ -95,8 +95,3 @@ export function snapRegion(
     sheet,
   );
 }
-
-export function required<T>(value: T | null | undefined, message = "Missing art source"): T {
-  if (value === undefined || value === null) throw new Error(message);
-  return value;
-}

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
-import { required } from "../art/ArtCatalog.js";
 import type { ArtNote } from "../art/ArtNotes.js";
 import type { OutdoorMetadata } from "../assets/outdoor/OutdoorCatalog.js";
 import {
@@ -10,6 +9,7 @@ import {
   validateVehicleGeometry,
 } from "../assets/vehicles/VehicleCatalog.js";
 import { drawVehicleDiagram } from "../assets/vehicles/VehicleDiagram.js";
+import { required } from "../shared/required.js";
 import { ErrorMessage } from "./App.js";
 import { AssetThumbnail } from "./OutdoorAssetBrowser.js";
 import { OutdoorGeometryTest } from "./OutdoorGeometryTest.js";

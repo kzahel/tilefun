@@ -1,7 +1,7 @@
-import { required } from "../../art/ArtCatalog.js";
 import { sha256 } from "../../art/ArtSource.js";
 import { reviewContext2D } from "../../art/reviewCanvas.js";
 import { drawLayeredInteriorMap } from "../../rendering/CanvasInteriorMap.js";
+import { required } from "../../shared/required.js";
 import { buildLayeredApartmentPlan } from "../ApartmentArchitecture.js";
 import { parseFloorPlan } from "../ApartmentFloorPlan.js";
 import { buildProfileApartmentPlan } from "../ApartmentWallProfiles.js";

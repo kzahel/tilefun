@@ -1,4 +1,5 @@
 import { TerrainId } from "../autotile/TerrainId.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { ActorPlacement } from "../generation/Generator.js";
 import type { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { createFauna, faunaType } from "./Fauna.js";
@@ -37,10 +38,10 @@ export function crowNestTrees(nature: NaturalLandscape, cx: number, cy: number) 
           wy = actor.wy - 52;
         // Include overlapping canopies on both sides of chunk boundaries.
         if (
-          wx + 48 < cx * 256 ||
-          wx - 48 >= (cx + 1) * 256 ||
-          wy + 16 < cy * 256 ||
-          wy - 96 >= (cy + 1) * 256
+          wx + 48 < cx * CHUNK_SIZE_PX ||
+          wx - 48 >= (cx + 1) * CHUNK_SIZE_PX ||
+          wy + 16 < cy * CHUNK_SIZE_PX ||
+          wy - 96 >= (cy + 1) * CHUNK_SIZE_PX
         )
           continue;
         rows.push({ featureId: `${actor.featureId}:nest-tree`, propType: "prop-oak-tree", wx, wy });
@@ -91,8 +92,8 @@ export function foragePlacements(
         featureId: `${actor.featureId}:growing-food`,
         type: sourceType(capuchin ? "fruit-tree" : "nut-tree"),
         // Birth stays in the owning cell; ready support later binds to the actual tree.
-        wx: Math.max(cx * 256 + 4, Math.min(cx * 256 + 252, actor.wx)),
-        wy: Math.max(cy * 256 + 6, Math.min(cy * 256 + 250, actor.wy - 52)),
+        wx: Math.max(cx * CHUNK_SIZE_PX + 4, Math.min(cx * CHUNK_SIZE_PX + 252, actor.wx)),
+        wy: Math.max(cy * CHUNK_SIZE_PX + 6, Math.min(cy * CHUNK_SIZE_PX + 250, actor.wy - 52)),
         route: [],
       });
     if (!crow && !squirrel && !rabbit && !robin && !meerkat) continue;
@@ -107,8 +108,14 @@ export function foragePlacements(
       [0, 56],
       [0, -40],
     ].entries()) {
-      const wx = Math.max(cx * 256 + 12, Math.min(cx * 256 + 244, actor.wx + (offset[0] ?? 0)));
-      const wy = Math.max(cy * 256 + 12, Math.min(cy * 256 + 244, actor.wy + (offset[1] ?? 0)));
+      const wx = Math.max(
+        cx * CHUNK_SIZE_PX + 12,
+        Math.min(cx * CHUNK_SIZE_PX + 244, actor.wx + (offset[0] ?? 0)),
+      );
+      const wy = Math.max(
+        cy * CHUNK_SIZE_PX + 12,
+        Math.min(cy * CHUNK_SIZE_PX + 244, actor.wy + (offset[1] ?? 0)),
+      );
       if (
         ![-4, 4].every((x) =>
           [-4, 4].every((y) =>
@@ -167,7 +174,8 @@ export function raccoonForagers(
         if (actor.type !== faunaType("raccoon") || !actor.featureId.endsWith(":0")) continue;
         const wx = actor.wx + 40,
           wy = actor.wy + 20;
-        if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+        if (Math.floor(wx / CHUNK_SIZE_PX) !== cx || Math.floor(wy / CHUNK_SIZE_PX) !== cy)
+          continue;
         const fauna = createFauna("red-squirrel", wx, wy).fauna;
         if (fauna)
           result.push({

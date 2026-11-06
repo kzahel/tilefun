@@ -1,7 +1,7 @@
 import { TILE_SIZE } from "../config/constants.js";
 import { unprojectPlane } from "../rendering/Projection.js";
 import type { RenderView } from "../rendering/RenderFrame.js";
-import type { Movement } from "./ActionManager.js";
+import type { Movement } from "../shared/Movement.js";
 
 export type TouchMovementMode = "tap" | "hold" | "joystick";
 export function touchMovementMode(value: unknown): TouchMovementMode {

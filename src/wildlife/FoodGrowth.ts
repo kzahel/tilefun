@@ -1,10 +1,10 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
+import { gap } from "../shared/gap.js";
 import { restoreWorkItemPose, sourceType } from "./ForageResources.js";
-import type { WildlifeEnvironment } from "./mallardAI.js";
 import { canopyLeafPoint, sameTree } from "./TreeClimbing.js";
+import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
-const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
 /** No offline catch-up or loose-item spawning. Only admitted, ready sources grow. */
 export function tickFoodSources(
   manager: EntityManager,

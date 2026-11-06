@@ -1,5 +1,5 @@
-import type { Movement } from "../input/ActionManager.js";
 import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
+import type { Movement } from "../shared/Movement.js";
 import type { BufferedMessage, VehicleHornMessage } from "../shared/protocol.js";
 import { type ChannelEnvelope, OrderedWorkerChannel } from "../transport/OrderedWorkerChannel.js";
 import type { ChunkRange } from "../world/ChunkManager.js";

@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { durableId } from "../persistence/ActorRecords.js";
+import { required } from "../shared/required.js";
 import { ANTELOPE_PROFILES } from "./Antelopes.js";
 import { createFauna } from "./Fauna.js";
 import { canEat } from "./FoodWeb.js";

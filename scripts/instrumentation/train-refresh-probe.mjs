@@ -3,7 +3,7 @@ export async function runTrainRefreshProbe(page, origin, renderer, serverHz) {
   const install = () =>
     page.evaluate(() => {
       const game = document.querySelector("#game").__game;
-      const presentation = game.remoteView.presentation;
+      const presentation = game.stateView.presentation;
       const sample = presentation.sample;
       const render = game.loop.callbacks.render;
       const restore = game.camera.restoreActual;
@@ -26,21 +26,21 @@ export async function runTrainRefreshProbe(page, origin, renderer, serverHz) {
               this.clock.sourceOrigin +
               Math.max(0, now - this.clock.localOrigin) * this.rate -
               0.05,
-            playerZ: game.remoteView.serverPlayerEntity.wz,
-            tickRate: game.remoteView.tickRate,
+            playerZ: game.stateView.serverPlayerEntity.wz,
+            tickRate: game.stateView.tickRate,
           };
         return result;
       };
       game.camera.restoreActual = function () {
         camera = { x: this.x, y: this.y };
-        player = { ...game.remoteView.presentedPlayerEntity.position };
+        player = { ...game.stateView.presentedPlayerEntity.position };
         return restore.call(this);
       };
       game.loop.callbacks.render = (alpha, now) => {
         pose = camera = player = undefined;
         render(alpha, now);
         if (pose && camera)
-          frames.push({ ...pose, camera, player, tick: game.remoteView.serverTick });
+          frames.push({ ...pose, camera, player, tick: game.stateView.serverTick });
       };
       window.finishRefreshProbe = () => {
         presentation.sample = sample;
@@ -61,7 +61,7 @@ export async function runTrainRefreshProbe(page, origin, renderer, serverHz) {
   };
   await page.waitForFunction(() => {
     const g = document.querySelector("#game").__game;
-    const car = g.remoteView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
+    const car = g.stateView.serverEntities.find((e) => e.type === "train-curve-proof-v1");
     return car?.velocity?.vx > 191.9;
   });
   const fresh = await collect(4);
@@ -77,7 +77,7 @@ export async function runTrainRefreshProbe(page, origin, renderer, serverHz) {
   await page.reload();
   await page.waitForFunction(() => {
     const g = document.querySelector("#game")?.__game;
-    return g?.initDone && g.remoteView.serverPlayerEntity.wz === 44;
+    return g?.initDone && g.stateView.serverPlayerEntity.wz === 44;
   });
   // Runtime CVars are not necessarily durable. Request the selected stream rate
   // after reopen; presentation uses elapsed simulation time, not tick count.
@@ -91,14 +91,14 @@ export async function runTrainRefreshProbe(page, origin, renderer, serverHz) {
       });
     });
   await page.waitForFunction(
-    (hz) => Math.abs(document.querySelector("#game").__game.remoteView.tickRate - hz) < 0.001,
+    (hz) => Math.abs(document.querySelector("#game").__game.stateView.tickRate - hz) < 0.001,
     Number(serverHz),
   );
   const reloaded = await collect(6);
   // Same presentation reset used by visibilitychange, isolated from browser
   // automation's forced-visible pages. This is a reset control, not a tab-switch test.
   await page.evaluate(() =>
-    document.querySelector("#game").__game.remoteView.resetPresentationClock(),
+    document.querySelector("#game").__game.stateView.resetPresentationClock(),
   );
   const resetControl = await collect(6);
   const summarize = ({ frames, initial }) => {

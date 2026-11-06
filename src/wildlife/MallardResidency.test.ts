@@ -1,5 +1,4 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { PropManager } from "../entities/PropManager.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
@@ -12,6 +11,7 @@ import { SaveManager } from "../persistence/SaveManager.js";
 import { around } from "../server/InterestManager.js";
 import { RealmStreaming } from "../server/RealmStreaming.js";
 import { tickAllAI } from "../server/tickAllAI.js";
+import { required } from "../shared/required.js";
 import { World } from "../world/World.js";
 import { createDeer, DEER_TYPE } from "./Deer.js";
 import { createFauna, FAUNA_PROFILES, faunaType } from "./Fauna.js";

@@ -1,5 +1,4 @@
 import * as THREE from "three";
-import { required } from "../../src/art/ArtCatalog.js";
 import {
   authoredVehicleForType,
   vehicleMeshHeightScale,
@@ -9,6 +8,7 @@ import { setCarMeshProjection } from "../../src/rendering/CarMeshProjection.js";
 import { CarPixelOutline } from "../../src/rendering/CarPixelOutline.js";
 import { towMeshOffset, towPitch } from "../../src/rendering/TowingPose.js";
 import { VehiclePaintResources } from "../../src/rendering/VehiclePaintResources.js";
+import { required } from "../../src/shared/required.js";
 import profiles from "../../src/traffic/towing-profiles.json" with { type: "json" };
 import { vehiclePaintSchemes } from "../../src/traffic/VehiclePaint.js";
 

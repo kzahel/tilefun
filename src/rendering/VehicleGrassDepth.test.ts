@@ -39,7 +39,6 @@ describe("grass stays under every vehicle", () => {
             [],
             true,
             undefined,
-            undefined,
             frame,
           );
           const body = requiredSprite(items);

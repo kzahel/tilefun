@@ -1,9 +1,9 @@
 import { writeFileSync } from "node:fs";
 import { expect, test } from "@playwright/test";
-import { required } from "../src/art/ArtCatalog.js";
 import { CITY_REVIEW_RUNS } from "../src/art/CityReviewRuns.js";
 import { CITY_PLACES_REVIEW_CASES } from "../src/art/DenseDistrictShowcase.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
+import { required } from "../src/shared/required.js";
 
 for (const [run, meta] of Object.entries(CITY_REVIEW_RUNS)) {
   test(`${run} is indexed with exact feedback, phone controls and independent review state`, async ({

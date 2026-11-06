@@ -43,12 +43,12 @@ test("generated depot is a named map destination with real parked cars", async (
   const facts = () =>
     page.evaluate(({ wx, wy }) => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-      const truck = g.remoteView.serverEntities.find(
+      const truck = g.stateView.serverEntities.find(
         (e) =>
           e.type === "vehicle-v1:car-transporter" &&
           Math.hypot(e.position.wx - wx, e.position.wy - wy) < 8,
       );
-      const p = g.remoteView.serverPlayerEntity;
+      const p = g.stateView.serverPlayerEntity;
       return {
         truck: truck
           ? { id: truck.id, x: truck.position.wx, y: truck.position.wy, ramp: truck.vehicleRamp }
@@ -91,7 +91,7 @@ test("generated depot is a named map destination with real parked cars", async (
       page.evaluate((slots) => {
         const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
         return slots.filter((slot) =>
-          g.remoteView.serverEntities.some(
+          g.stateView.serverEntities.some(
             (e) =>
               e.type === `vehicle-v1:${slot.model}` &&
               Math.hypot(e.position.wx - slot.wx, e.position.wy - slot.wy) < 8,
@@ -107,7 +107,7 @@ test("generated depot is a named map destination with real parked cars", async (
           const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
           const camera = Reflect.get(g, "camera") as Camera;
           if (camera.zoom !== 0.25) return false;
-          const player = g.remoteView.serverPlayerEntity.position;
+          const player = g.stateView.serverPlayerEntity.position;
           if (Math.hypot(camera.x - player.wx, camera.y - player.wy) > 0.5) return false;
           const renderer = Reflect.get(g, "renderer") as {
             hasTerrain(c: Chunk): boolean;

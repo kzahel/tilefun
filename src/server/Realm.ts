@@ -6,7 +6,6 @@ import {
   ELEVATION_PX,
   JUMP_VELOCITY,
   MAX_AUTOTILE_CHUNKS_PER_UPDATE,
-  MAX_CHUNK_LOADS_PER_UPDATE,
   THROW_ANGLE,
   THROW_MAX_SPEED,
   THROW_MIN_SPEED,
@@ -41,7 +40,6 @@ import { NaturalStrategy } from "../generation/regional/NaturalStrategy.js";
 import { regionalStart } from "../generation/regional/RegionalSpawn.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
-import type { Movement } from "../input/ActionManager.js";
 import { buildingDoor } from "../interiors/BuildingDoors.js";
 import {
   furnitureAsset,
@@ -66,7 +64,7 @@ import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import { PERSISTENCE_BUDGET } from "../persistence/PersistenceBudget.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import { RealmRecords } from "../persistence/RealmRecords.js";
-import type { InspectionState, SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
+import type { SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import { VehicleRecords } from "../persistence/VehicleRecords.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
@@ -86,6 +84,7 @@ import { playerMotionIntent, vehicleMotionIntent } from "../physics/PlayerContro
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import { RailwayServices } from "../railway/RailwayServices.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
+import type { Movement } from "../shared/Movement.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import { VehicleRegistry, type VehicleSource } from "../traffic/VehicleRegistry.js";
 import type { IServerTransport } from "../transport/Transport.js";
@@ -123,7 +122,6 @@ import { createRealmWorkContext } from "./RealmWildlife.js";
 import { safeArrival } from "./SafeArrival.js";
 import { tickAllAI } from "./tickAllAI.js";
 import { VehicleControl } from "./VehicleControl.js";
-import { isWildlife, WildlifeActivity } from "./WildlifeActivity.js";
 import type { Mod, Unsubscribe } from "./WorldAPI.js";
 import { WorldAPIImpl } from "./WorldAPI.js";
 
@@ -155,10 +153,10 @@ export class Realm {
         getHeight: (x, y) => this.world.getHeightAt(x, y),
         queryProps: (b) =>
           this.propManager.getPropsInChunkRange(
-            Math.floor(b.left / 256),
-            Math.floor(b.top / 256),
-            Math.floor(b.right / 256),
-            Math.floor(b.bottom / 256),
+            Math.floor(b.left / CHUNK_SIZE_PX),
+            Math.floor(b.top / CHUNK_SIZE_PX),
+            Math.floor(b.right / CHUNK_SIZE_PX),
+            Math.floor(b.bottom / CHUNK_SIZE_PX),
           ),
         geometryVersion: this.geometryVersion,
       }) ?? false
@@ -217,11 +215,11 @@ export class Realm {
     };
     check();
     const range = mutationRange(msg, session, this.treeBrush);
-    const ready = !range || !this.streaming || this.streaming.rangeReady(range);
+    const ready = !range || this.requireStreaming().rangeReady(range);
     return this.mutations.run(
       ready,
       async () => {
-        if (range) await this.streaming?.ensure(range);
+        if (range) await this.requireStreaming().ensure(range);
       },
       () => {
         check();
@@ -253,8 +251,6 @@ export class Realm {
   get generation() {
     return this.generator.descriptor;
   }
-  /** Tracks processed road intersections/segments for structure generation. */
-  private processedStructureKeys = new Set<string>();
   private proceduralActors!: ProceduralActors;
   vehicleRegistry: VehicleRegistry | null = null;
   private proceduralProps: ProceduralProps;
@@ -291,7 +287,12 @@ export class Realm {
       })
     )
       return false;
-    if (!this.world.chunks.get(Math.floor(position.wx / 256), Math.floor(position.wy / 256)))
+    if (
+      !this.world.chunks.get(
+        Math.floor(position.wx / CHUNK_SIZE_PX),
+        Math.floor(position.wy / CHUNK_SIZE_PX),
+      )
+    )
       return false;
     if (
       aabbOverlapsSolid(
@@ -355,8 +356,6 @@ export class Realm {
   private readonly mods: Mod[];
   private modTeardowns = new Map<string, Unsubscribe>();
 
-  private static readonly BROADCAST_BUFFER_CHUNKS = 2;
-  private static readonly MID_TICK_BUFFER = 6;
   private static readonly MID_TICK_FRAMES = 4;
 
   constructor(
@@ -428,10 +427,9 @@ export class Realm {
     const camY = saved?.cameraY ?? this.lastLoadedCamera.cameraY;
     const camZoom = saved?.cameraZoom ?? this.lastLoadedCamera.cameraZoom;
 
-    if (this.streaming)
-      await this.ensureReady(
-        around(Math.floor(spawnX / CHUNK_SIZE_PX), Math.floor(spawnY / CHUNK_SIZE_PX), 3),
-      );
+    await this.ensureReady(
+      around(Math.floor(spawnX / CHUNK_SIZE_PX), Math.floor(spawnY / CHUNK_SIZE_PX), 3),
+    );
     const player = createPlayer(spawnX, spawnY);
     if (saved?.wz !== undefined && Number.isFinite(saved.wz)) {
       player.wz = saved.wz;
@@ -531,14 +529,14 @@ export class Realm {
       `[tilefun:realm] addPlayer client=${session.clientId} player.id=${player.id} editorEnabled=${session.editorEnabled} inputQueue=${session.inputQueue.length} worldId=${this.currentWorldId}`,
     );
 
-    // Cancel idle timeout â€” realm is occupied again
+    // Cancel idle timeout — realm is occupied again
     this.idleSince = null;
   }
 
   /**
    * Remove a player from this realm: save per-player data, remove entity,
    * clean up session state.
-   * The session object itself is NOT deleted â€” it stays in GameServer's global map.
+   * The session object itself is NOT deleted — it stays in GameServer's global map.
    */
   removePlayer(clientId: string): void {
     this.treeBrush.forget(clientId);
@@ -641,25 +639,19 @@ export class Realm {
     };
   }
 
-  /** Close persistence if the given worldId matches the currently loaded world. */
-  async closePersistenceIfCurrent(worldId: string): Promise<void> {
-    if (worldId === this.currentWorldId && this.saveManager) {
-      await this.streaming?.close();
-      await this.saveManager.close();
-      this.saveManager = null;
-    }
-  }
-
   private sessionSupported(session: PlayerSession, dt: number): boolean {
-    if (!this.streaming) return true;
-    if (!this.streaming.supported(session.player, dt)) return false;
+    const streaming = this.requireStreaming();
+    if (!streaming.supported(session.player, dt)) return false;
     const parent = this.entityManager.byId.get(session.player.parentId ?? -1);
     return (
-      !parent ||
-      (this.records?.group(parent) ?? [parent]).every((actor) =>
-        this.streaming?.supported(actor, dt),
-      )
+      !parent || streaming.records.group(parent).every((actor) => streaming.supported(actor, dt))
     );
+  }
+
+  /** Every loaded realm streams; only an unloaded realm lacks it. */
+  private requireStreaming(): RealmStreaming {
+    if (!this.streaming) throw new Error("Realm world is not loaded.");
+    return this.streaming;
   }
   /** Run one simulation tick. */
   tick(
@@ -669,6 +661,8 @@ export class Realm {
     dormantClientIds: ReadonlySet<string>,
     globalStoragePaused = false,
   ): void {
+    // Nothing simulates before loadWorld creates the streamed world.
+    if (!this.streaming) return;
     dt = PHYSICS_DT;
     this.tickCounter++;
     const storagePaused = this.prepareTick(transport, dormantClientIds, globalStoragePaused);
@@ -721,21 +715,20 @@ export class Realm {
           : "",
       });
     }
-    if (this.streaming)
-      this.streaming.update(
-        [...this.sessions.values()]
-          .filter((s) => !dormantClientIds.has(s.clientId))
-          .map((s) => s.visibleRange),
-        [...this.sessions.values()].filter((s) => !dormantClientIds.has(s.clientId)),
-      );
+    this.requireStreaming().update(
+      [...this.sessions.values()]
+        .filter((s) => !dormantClientIds.has(s.clientId))
+        .map((s) => s.visibleRange),
+      [...this.sessions.values()].filter((s) => !dormantClientIds.has(s.clientId)),
+    );
     if (this.tickCounter % 120 === 0)
       this.vehicleRegistry?.populate(
         [...this.sessions.values()]
           .filter((s) => !s.retired && !s.transitioning)
           .map((s) =>
             around(
-              Math.floor(s.player.position.wx / 256),
-              Math.floor(s.player.position.wy / 256),
+              Math.floor(s.player.position.wx / CHUNK_SIZE_PX),
+              Math.floor(s.player.position.wy / CHUNK_SIZE_PX),
               2,
             ),
           ),
@@ -789,8 +782,7 @@ export class Realm {
     const entityTickDts = this.computeEntityTickDtsMulti(activeSessions, PHYSICS_DT);
     if (!storagePaused)
       for (const e of this.backgroundResidents)
-        if (!this.streaming || this.streaming.supported(e, PHYSICS_DT))
-          entityTickDts.set(e, PHYSICS_DT);
+        if (this.requireStreaming().supported(e, PHYSICS_DT)) entityTickDts.set(e, PHYSICS_DT);
     for (const car of this.railways?.bodies() ?? []) entityTickDts.set(car, PHYSICS_DT);
     for (const [e] of entityTickDts) if (e.resident?.transferring) entityTickDts.delete(e);
     for (const session of this.sessions.values()) {
@@ -814,9 +806,10 @@ export class Realm {
     const active = [...entityTickDts.keys()];
     const decisions = this.decisionDts(entityTickDts, stepDt);
     this.entityManager.simulationEntities = active;
-    this.propManager.simulationProps = this.streaming
-      ? this.propActivity.select(this.propManager, this.streaming)
-      : this.propManager.props;
+    this.propManager.simulationProps = this.propActivity.select(
+      this.propManager,
+      this.requireStreaming(),
+    );
     try {
       const work = createRealmWorkContext(this, entityTickDts, activeSessions);
       this.updateDecisions(active, activeSessions, entityTickDts, decisions, work);
@@ -913,10 +906,10 @@ export class Realm {
         getHeight: (x, y) => this.world.getHeightAt(x, y),
         queryProps: (bounds) =>
           this.propManager.getPropsInChunkRange(
-            Math.floor(bounds.left / 256),
-            Math.floor(bounds.top / 256),
-            Math.floor(bounds.right / 256),
-            Math.floor(bounds.bottom / 256),
+            Math.floor(bounds.left / CHUNK_SIZE_PX),
+            Math.floor(bounds.top / CHUNK_SIZE_PX),
+            Math.floor(bounds.right / CHUNK_SIZE_PX),
+            Math.floor(bounds.bottom / CHUNK_SIZE_PX),
           ),
         geometryVersion: this.geometryVersion,
       },
@@ -1014,13 +1007,13 @@ export class Realm {
         this.records?.changed(entity);
     }
 
-    // â”€â”€ TickService.postSimulation â”€â”€
+    // ── TickService.postSimulation ──
     this.worldAPI.tick.firePost(stepDt);
 
-    // â”€â”€ TagService removal detection â”€â”€
+    // ── TagService removal detection ──
     this.worldAPI.tags.tick();
 
-    // â”€â”€ OverlapService detection â”€â”€
+    // ── OverlapService detection ──
     this.worldAPI.overlap.tick();
   }
 
@@ -1030,7 +1023,7 @@ export class Realm {
     dormantClientIds: ReadonlySet<string>,
   ) {
     const dt = PHYSICS_DT;
-    // â”€â”€ Phase 3: Spawners (per-session, near each player) â”€â”€
+    // ── Phase 3: Spawners (per-session, near each player) ──
     for (const session of this.sessions.values()) {
       if (
         this.options.ambientSpawns === false ||
@@ -1044,7 +1037,7 @@ export class Realm {
         this.entityManager.entities.length < PERSISTENCE_BUDGET.actors - 100 &&
         !session.editorEnabled &&
         !session.debugPaused &&
-        (!this.streaming || this.streaming.supported(session.player, dt))
+        this.requireStreaming().supported(session.player, dt)
       ) {
         this.gemSpawner.update(
           dt,
@@ -1060,13 +1053,11 @@ export class Realm {
           this.entityManager,
           this.world,
         );
-        const playerRange = this.streaming
-          ? around(
-              Math.floor(session.player.position.wx / CHUNK_SIZE_PX),
-              Math.floor(session.player.position.wy / CHUNK_SIZE_PX),
-              4,
-            )
-          : session.visibleRange;
+        const playerRange = around(
+          Math.floor(session.player.position.wx / CHUNK_SIZE_PX),
+          Math.floor(session.player.position.wy / CHUNK_SIZE_PX),
+          4,
+        );
         this.fishSpawner.update(dt, playerRange, this.entityManager, this.world);
       }
     }
@@ -1078,9 +1069,7 @@ export class Realm {
       this.generation.type !== "regional" &&
       activeSessions.some((session) => !session.editorEnabled)
     ) {
-      const activeProps = this.streaming
-        ? this.propActivity.select(this.propManager, this.streaming)
-        : this.propManager.props;
+      const activeProps = this.propActivity.select(this.propManager, this.requireStreaming());
       this.tentSpawner.update(dt, this.propManager, this.entityManager, activeProps);
     }
   }
@@ -1100,12 +1089,12 @@ export class Realm {
         )
           transport.send(session.clientId, horn);
     }
-    // Broadcast state to all clients (serialized mode)
+    // Broadcast state to all clients
     if (broadcasting) {
       const ranges = [...this.sessions.values()]
         .filter((s) => !dormantClientIds.has(s.clientId))
         .map((s) => s.visibleRange);
-      if (ranges.length || this.streaming) this.updateVisibleChunks(ranges);
+      this.updateVisibleChunks(ranges);
 
       for (const session of this.sessions.values()) {
         if (dormantClientIds.has(session.clientId) || session.transitioning) continue;
@@ -1174,87 +1163,11 @@ export class Realm {
         maxCx: Math.ceil(((this.roomState?.document.width ?? 5) * 32) / CHUNK_SIZE_PX) - 1,
         maxCy: Math.ceil(((this.roomState?.document.height ?? 5) * 32) / CHUNK_SIZE_PX) - 1,
       };
-    if (this.streaming) {
-      this.streaming.update(
-        Array.isArray(range) ? range : [range as ChunkRange],
-        this.sessions.values(),
-      );
-      this.world.computeAutotile(this.blendGraph, MAX_AUTOTILE_CHUNKS_PER_UPDATE);
-      return;
-    }
-    const initialWarmLoad = this.world.chunks.loadedCount === 0;
-    const maxLoads =
-      this.world.chunks.loadedCount === 0 ? Number.POSITIVE_INFINITY : MAX_CHUNK_LOADS_PER_UPDATE;
-    const maxAutotile = initialWarmLoad ? Number.POSITIVE_INFINITY : MAX_AUTOTILE_CHUNKS_PER_UPDATE;
-    const chunksBefore = new Set<string>();
-    if (this.generator.descriptor.type !== "flat") {
-      for (const [key] of this.world.chunks.entries()) {
-        chunksBefore.add(key);
-      }
-    }
-    this.world.updateLoadedChunks(range, maxLoads);
-    this.world.computeAutotile(this.blendGraph, maxAutotile);
-
-    if (this.interior || this.generation.type === "regional") {
-      const placementTiming = performanceMetrics.start();
-      this.proceduralProps.reconcile(
-        this.generator,
-        [...this.world.chunks.entries()].map(([key]) => key),
-      );
-      this.proceduralActors?.reconcile(
-        this.generator,
-        [...this.world.chunks.entries()].map(([key]) => key),
-      );
-      performanceMetrics.end("server.placements", placementTiming);
-      return;
-    }
-    // Generate structures for newly loaded chunks (only for worlds with roads)
-    if (this.generator.descriptor.type !== "flat") {
-      for (const [key] of this.world.chunks.entries()) {
-        if (chunksBefore.has(key)) continue;
-        const commaIdx = key.indexOf(",");
-        const cx = Number(key.slice(0, commaIdx));
-        const cy = Number(key.slice(commaIdx + 1));
-        const { placements, newIntersectionKeys } = this.generator.placements(
-          cx,
-          cy,
-          this.processedStructureKeys,
-        );
-        for (const k of newIntersectionKeys) {
-          this.processedStructureKeys.add(k);
-        }
-        for (const p of placements) {
-          const prop = createProp(p.propType, p.wx, p.wy);
-          this.propManager.add(prop);
-        }
-      }
-    }
-  }
-
-  inspectionState(): InspectionState {
-    return {
-      ...this.proceduralProps.save(),
-      ...(this.vehicleRegistry ? { vehicles: this.vehicleRegistry.save() } : {}),
-      playerX: 0,
-      playerY: 0,
-      cameraX: 0,
-      cameraY: 0,
-      cameraZoom: 1,
-      nextEntityId: 1,
-      entities: [
-        ...this.entityManager.entities
-          .filter((e) => e.type !== "player")
-          .map((e) => ({
-            type: e.type,
-            wx: e.position.wx,
-            wy: e.position.wy,
-            ...(e.proceduralId ? { proceduralId: e.proceduralId } : {}),
-          })),
-        ...this.propManager.props
-          .filter((p) => !p.proceduralId)
-          .map((p) => ({ type: p.type, wx: p.position.wx, wy: p.position.wy })),
-      ],
-    };
+    this.requireStreaming().update(
+      Array.isArray(range) ? range : [range as ChunkRange],
+      this.sessions.values(),
+    );
+    this.world.computeAutotile(this.blendGraph, MAX_AUTOTILE_CHUNKS_PER_UPDATE);
   }
 
   realizeProceduralProps(): void {
@@ -1263,14 +1176,6 @@ export class Realm {
         this.generator,
         [...this.world.chunks.entries()].map(([key]) => key),
       );
-  }
-
-  realizeProceduralActors(): void {
-    if (this.streaming) return;
-    this.proceduralActors?.reconcile(
-      this.generator,
-      [...this.world.chunks.entries()].map(([key]) => key),
-    );
   }
 
   /** Mark all chunks for re-render (debug mode changes). */
@@ -1329,8 +1234,8 @@ export class Realm {
         const player = session.player;
         const speed = THROW_MIN_SPEED + msg.force * (THROW_MAX_SPEED - THROW_MIN_SPEED);
         // Add random jitter so consecutive throws spread out
-        const speedJitter = 1 + ((this.options.random ?? Math.random)() - 0.5) * 0.15; // Â±7.5% speed
-        const angleJitter = ((this.options.random ?? Math.random)() - 0.5) * 0.18; // Â±~5Â° direction
+        const speedJitter = 1 + ((this.options.random ?? Math.random)() - 0.5) * 0.15; // ±7.5% speed
+        const angleJitter = ((this.options.random ?? Math.random)() - 0.5) * 0.18; // ±~5° direction
         const baseAngle = Math.atan2(msg.dirY, msg.dirX) + angleJitter;
         const jitteredSpeed = speed * speedJitter;
         const xySpeed = jitteredSpeed * Math.cos(THROW_ANGLE);
@@ -1513,7 +1418,7 @@ export class Realm {
           maxCx: msg.maxCx,
           maxCy: msg.maxCy,
         };
-        // Don't call updateVisibleChunks here â€” it uses a single session's
+        // Don't call updateVisibleChunks here — it uses a single session's
         // range which unloads chunks that OTHER sessions need, creating
         // invisible collision walls for far-away players. The tick method
         // already computes the union of all sessions' visible ranges and
@@ -1808,7 +1713,6 @@ export class Realm {
     this.baddieSpawner.reset(this.entityManager);
     this.fishSpawner.reset(this.entityManager);
     this.tentSpawner.reset();
-    this.processedStructureKeys.clear();
 
     // Bind save accessors
     this.saveManager.bind(
@@ -1834,10 +1738,7 @@ export class Realm {
   }
 
   async ensureReady(range: ChunkRange): Promise<void> {
-    if (this.streaming) await this.streaming.ensure(range);
-    else
-      for (let cy = range.minCy; cy <= range.maxCy; cy++)
-        for (let cx = range.minCx; cx <= range.maxCx; cx++) this.world.getChunk(cx, cy);
+    await this.requireStreaming().ensure(range);
     // Explicit readiness fences may load chunks after the ordinary budgeted pass.
     // Publish complete terrain even when authority will stay paused after reload.
     this.world.computeAutotile(this.blendGraph);
@@ -1934,7 +1835,7 @@ export class Realm {
       if (mount.sprite) mount.sprite.moving = false;
     }
 
-    // Hop off from riding height â€” wz is already tracked by resolveParentedPositions
+    // Hop off from riding height — wz is already tracked by resolveParentedPositions
     session.player.jumpZ = (session.player.wz ?? 0) - (session.player.groundZ ?? 0);
     setVerticalVelocity(session.player, JUMP_VELOCITY * 0.5);
     delete session.player.noShadow;
@@ -1963,7 +1864,7 @@ export class Realm {
 
     for (const entity of this.entityManager.entities) {
       if (entity.id === player.id) continue;
-      if (entity.id === skipId) continue; // just dismounted â€” don't re-mount
+      if (entity.id === skipId) continue; // just dismounted — don't re-mount
       if (!entity.tags?.has("rideable")) continue;
       // Wildlife mounts require an actual landing on their back, not nearby ground.
       if (entity.fauna && entity.id !== contactId) continue;
@@ -1979,7 +1880,7 @@ export class Realm {
       player.localOffsetX = 0;
       player.localOffsetY = 0;
       // Snap player position to mount immediately (don't wait for
-      // resolveParentedPositions next tick) â€” avoids camera jump
+      // resolveParentedPositions next tick) — avoids camera jump
       player.position.wx = entity.position.wx;
       player.position.wy = entity.position.wy;
       // Visual lift: set wz above mount so the renderer elevates the
@@ -2203,120 +2104,28 @@ export class Realm {
     );
   }
 
-  /**
-   * Compute per-entity tick dts across multiple sessions.
-   * An entity is "near" if it's near ANY player, "mid" if near any mid range, etc.
-   */
+  /** Supported players and active vehicles, plus streamed actors admitted by activity demand. */
   private computeEntityTickDtsMulti(
     sessions: readonly PlayerSession[],
     dt: number,
   ): Map<Entity, number> {
+    const streaming = this.requireStreaming();
     const result = new Map<Entity, number>();
-    if (this.streaming && this.records) {
-      for (const session of sessions)
-        if (this.streaming.supported(session.player, dt)) result.set(session.player, dt);
-      for (const state of this.vehicleRegistry?.states.values() ?? []) {
-        if (
-          this.streaming.demand.get(actorScope(state.entity.position))?.activity &&
-          this.streaming.supported(state.entity, dt)
-        )
-          result.set(state.entity, dt);
-      }
-      return this.activity.select(this.records, this.streaming, sessions, result, dt);
-    }
-    const nearBuf = Realm.BROADCAST_BUFFER_CHUNKS;
-    const midBuf = nearBuf + Realm.MID_TICK_BUFFER;
-
-    // Collect all player entities so we always tick them
-    const playerSet = new Set(sessions.map((s) => s.player));
-
-    for (const entity of this.entityManager.entities) {
-      if (playerSet.has(entity)) {
-        result.set(entity, dt);
-        continue;
-      }
-
-      const cx = Math.floor(entity.position.wx / CHUNK_SIZE_PX);
-      const cy = Math.floor(entity.position.wy / CHUNK_SIZE_PX);
-
-      // Check if entity is near ANY session's visible range
-      let isNear = false;
-      let isMid = false;
-      for (const session of sessions) {
-        const range = session.visibleRange;
-        if (
-          cx >= range.minCx - nearBuf &&
-          cx <= range.maxCx + nearBuf &&
-          cy >= range.minCy - nearBuf &&
-          cy <= range.maxCy + nearBuf
-        ) {
-          isNear = true;
-          break;
-        }
-        if (
-          cx >= range.minCx - midBuf &&
-          cx <= range.maxCx + midBuf &&
-          cy >= range.minCy - midBuf &&
-          cy <= range.maxCy + midBuf
-        ) {
-          isMid = true;
-        }
-      }
-
-      if (isNear) {
-        result.set(entity, dt);
-        entity.tickAccumulator = 0;
-        continue;
-      }
-
-      if (isMid) {
-        result.set(entity, dt);
-        continue;
-      }
-
-      // Far tier: frozen
-      entity.tickAccumulator = 0;
-    }
-
-    return this.selectWildlifeActivity(result, sessions, dt);
-  }
-
-  private selectWildlifeActivity(
-    active: Map<Entity, number>,
-    sessions: readonly PlayerSession[],
-    dt: number,
-  ): Map<Entity, number> {
-    this.wildlifeActivity.advance(dt);
-    const contacts = [...active.keys()].filter(
-      (e) =>
-        !isWildlife(e) &&
-        e.collider?.solid !== false &&
-        (e.type === "ball" || (!!e.velocity && (e.velocity.vx !== 0 || e.velocity.vy !== 0))),
-    );
-    const visited = new Set<Entity>();
-    for (const entity of active.keys()) {
-      if (visited.has(entity)) continue;
-      const group = this.records ? this.records.group(entity) : [entity];
-      for (const member of group) visited.add(member);
-      // Fresh actors need one physics step to establish their grounded pose.
-      // Restored actors already carry that pose; sleeping never reinitializes it.
+    for (const session of sessions)
+      if (streaming.supported(session.player, dt)) result.set(session.player, dt);
+    for (const state of this.vehicleRegistry?.states.values() ?? []) {
       if (
-        group.some((member) => member.wz === undefined) ||
-        this.wildlifeActivity.awake(group, sessions, contacts)
+        streaming.demand.get(actorScope(state.entity.position))?.activity &&
+        streaming.supported(state.entity, dt)
       )
-        continue;
-      for (const member of group) {
-        active.delete(member);
-        member.tickAccumulator = 0;
-      }
+        result.set(state.entity, dt);
     }
-    return active;
+    return this.activity.select(streaming.records, streaming, sessions, result, dt);
   }
 
   private previousActive = new Set<Entity>();
   private readonly activity = new RealmActivity();
   private readonly propActivity = new RealmPropActivity();
-  private readonly wildlifeActivity = new WildlifeActivity();
   private robinTurn = 0;
   private readonly aiPlanning = new AiPlanningScheduler();
   private decisionDts(active: ReadonlyMap<Entity, number>, dt: number): Map<Entity, number> {

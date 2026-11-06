@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
+import { required } from "../shared/required.js";
 import { creatureSpecies } from "../wildlife/FoodWeb.js";
 import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
 import { naturalLandscapeRecipe } from "./NaturalLandscapeRecipe.js";

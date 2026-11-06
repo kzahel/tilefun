@@ -1,4 +1,4 @@
-import { type ArtCatalog, type ArtRect, required } from "../art/ArtCatalog.js";
+import type { ArtCatalog, ArtRect } from "../art/ArtCatalog.js";
 import type { BuildingReview } from "../art/ArtNotes.js";
 import { sha256 } from "../art/ArtSource.js";
 import { buildingCaseKey } from "../art/BuildingReviewQueue.js";
@@ -32,6 +32,7 @@ import {
   composeStreetStarterSurface,
   STREET_STARTER_SURFACE,
 } from "../road/StreetStarterSurface.js";
+import { required } from "../shared/required.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export function streetComposition(scene: StreetScene) {

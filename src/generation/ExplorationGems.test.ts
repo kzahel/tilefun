@@ -1,11 +1,11 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { aabbOverlapsPropWalls } from "../entities/collision.js";
 import { createProp } from "../entities/PropFactories.js";
 import { withLivedInLayout } from "../interiors/BuildingDoors.js";
 import { type InteriorIdentity, interiorGenerator } from "../interiors/GameplayInterior.js";
 import { compileGameplayRoom, initialRoom } from "../interiors/GameplayRoom.js";
 import { withInteriorGems } from "../interiors/InteriorGems.js";
+import { required } from "../shared/required.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import { outdoorGems } from "./ExplorationGems.js";

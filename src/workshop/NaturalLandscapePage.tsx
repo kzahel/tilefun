@@ -4,6 +4,7 @@ import { AudioManager } from "../audio/AudioManager.js";
 import { FootstepSystem } from "../audio/FootstepSystem.js";
 import { buildFootstepManifest } from "../audio/SurfaceType.js";
 import { isBoat } from "../boats/Boat.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import {
   LANDSCAPE_PROFILES,
   landscapeLabel,
@@ -491,8 +492,8 @@ export default function NaturalLandscapePage() {
         c.dataset.terrainPending = String(diagnostics.terrain?.pending ?? -1);
         c.dataset.terrainResident = String(diagnostics.terrain?.resident ?? 0);
         const pos = view.playerEntity.position;
-        const cx = Math.floor(pos.wx / 256),
-          cy = Math.floor(pos.wy / 256);
+        const cx = Math.floor(pos.wx / CHUNK_SIZE_PX),
+          cy = Math.floor(pos.wy / CHUNK_SIZE_PX);
         const chunk = view.world.getChunkIfLoaded(cx, cy);
         const lx = Math.floor(pos.wx / 16) - cx * 16,
           ly = Math.floor(pos.wy / 16) - cy * 16;

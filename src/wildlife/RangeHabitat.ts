@@ -1,4 +1,5 @@
 import { TerrainId } from "../autotile/TerrainId.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { ActorPlacement } from "../generation/Generator.js";
 import type { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { faunaType } from "./Fauna.js";
@@ -28,8 +29,8 @@ function sites(a: ActorPlacement, nature: NaturalLandscape, cx: number, cy: numb
         [0, -64],
       ];
   for (const [dx = 0, dy = 0] of offsets) {
-    const wx = Math.max(cx * 256 + 16, Math.min(cx * 256 + 240, a.wx + dx)),
-      wy = Math.max(cy * 256 + 16, Math.min(cy * 256 + 240, a.wy + dy));
+    const wx = Math.max(cx * CHUNK_SIZE_PX + 16, Math.min(cx * CHUNK_SIZE_PX + 240, a.wx + dx)),
+      wy = Math.max(cy * CHUNK_SIZE_PX + 16, Math.min(cy * CHUNK_SIZE_PX + 240, a.wy + dy));
     if (
       (tree && Math.hypot(wx - a.wx, wy - a.wy) < 64) ||
       points.some((p) => Math.hypot(p.wx - wx, p.wy - wy) < 20) ||
@@ -90,10 +91,10 @@ export function rangeHabitatProps(nature: NaturalLandscape, cx: number, cy: numb
       const point = sites(a, nature, x, y, true)[0];
       if (
         !point ||
-        point.wx + 32 < cx * 256 ||
-        point.wx - 32 >= (cx + 1) * 256 ||
-        point.wy + 16 < cy * 256 ||
-        point.wy - 64 >= (cy + 1) * 256
+        point.wx + 32 < cx * CHUNK_SIZE_PX ||
+        point.wx - 32 >= (cx + 1) * CHUNK_SIZE_PX ||
+        point.wy + 16 < cy * CHUNK_SIZE_PX ||
+        point.wy - 64 >= (cy + 1) * CHUNK_SIZE_PX
       )
         continue;
       rows.push({ featureId: `${a.featureId}:range-tree`, propType: "prop-palm-tree", ...point });

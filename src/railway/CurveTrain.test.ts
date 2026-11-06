@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { curvedTrackPath } from "../scenarios/CurvedTrainRecipe.js";
+import { required } from "../shared/required.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { CURVE_TYPES, createCurveTrain, curveTrainView } from "./CurveTrain.js";
 import { railAlignment } from "./RailPath.js";

@@ -1,4 +1,3 @@
-import { required } from "../art/ArtCatalog.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
@@ -10,10 +9,13 @@ import {
   durableId,
   encodeActor,
 } from "../persistence/ActorRecords.js";
+import { lcgNext } from "../shared/Determinism.js";
+import { gap } from "../shared/gap.js";
+import { required } from "../shared/required.js";
 import { faunaHabitatAllows } from "./faunaAI.js";
 import { syncFaunaWater } from "./faunaInteractions.js";
-import type { WildlifeEnvironment } from "./mallardAI.js";
 import { predatorHabitatAllows } from "./predatorAI.js";
+import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
 export const WILDLIFE_RESPAWN_SCOPE = "wildlife-respawns";
 export const WILDLIFE_RESPAWN_LIMIT = 128;
@@ -28,8 +30,6 @@ export interface PendingWildlifeRespawn {
 function habitat(e: Entity) {
   return e.predator ?? e.fauna ?? e.deer ?? e.rabbit ?? e.mallard ?? e.robin ?? e.frog;
 }
-const distance = (a: PositionComponent, b: PositionComponent) =>
-  Math.hypot(a.wx - b.wx, a.wy - b.wy);
 
 /** A pending birth is an independent durable job, never a hidden live animal. */
 export function scheduleWildlifeRespawn(
@@ -82,7 +82,7 @@ export function tickWildlifeRespawns(
   for (const [id, job] of manager.wildlifeRespawns) {
     if (job.remaining > 0 || budget-- <= 0) continue;
     const random = () => {
-      job.randomState = (Math.imul(job.randomState, 1664525) + 1013904223) >>> 0;
+      job.randomState = lcgNext(job.randomState);
       return job.randomState / 4294967296;
     };
     let spawned = false;
@@ -119,7 +119,7 @@ export function tickWildlifeRespawns(
             wy: Math.max(box.top, Math.min(box.bottom - 0.001, ty * 16 + 8)),
           });
       if (
-        players.some((p) => distance(p, point) < 512) ||
+        players.some((p) => gap(p, point) < 512) ||
         ground.some(
           (p) =>
             manager.canPlace?.(p.wx, p.wy) === false ||

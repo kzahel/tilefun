@@ -1,5 +1,4 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createBall } from "../entities/Ball.js";
 import type { Entity } from "../entities/Entity.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
@@ -8,6 +7,7 @@ import { createGenerator } from "../generation/Generator.js";
 import { animalWorkRecipe } from "../scenarios/AnimalWorkRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { decodeServerMessage } from "../shared/binaryCodec.js";
+import { required } from "../shared/required.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { createFauna } from "./Fauna.js";
 import { freshBallWork } from "./ForageResources.js";

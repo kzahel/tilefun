@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, Navigate, useLocation, useNavigate, useParams } from "react-router";
-import { required } from "../art/ArtCatalog.js";
 import { reviewContext2D } from "../art/reviewCanvas.js";
 import { reviewCases } from "../interiors/review/ReviewCases.js";
 import { parseReviewPins } from "../interiors/review/ReviewFeedback.js";
+import { required } from "../shared/required.js";
 import { candidateLabel, ErrorMessage, LegacyLink, reviewPath } from "./App.js";
 import {
   interiorFingerprint,

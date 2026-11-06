@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { tickAllAI } from "../server/tickAllAI.js";
+import { required } from "../shared/required.js";
 import { createDeer } from "./Deer.js";
 import { updateDeerAI } from "./deerAI.js";
 

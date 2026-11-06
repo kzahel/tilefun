@@ -1,9 +1,9 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createBall } from "../entities/Ball.js";
 import { encodeActor } from "../persistence/ActorRecords.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { woodlandWorkRecipe } from "../scenarios/WoodlandWorkRecipe.js";
+import { required } from "../shared/required.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { freshBallWork } from "./ForageResources.js";
 

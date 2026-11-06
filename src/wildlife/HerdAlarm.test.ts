@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { faunaProfile, faunaType } from "./Fauna.js";
 
 it("a generated buffalo herd shares a landing alarm once and both recover after their committed walks", async () => {

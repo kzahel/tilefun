@@ -1,3 +1,4 @@
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import { actorScope, encodeActor } from "../persistence/ActorRecords.js";
 import { SaveManager } from "../persistence/SaveManager.js";
@@ -39,8 +40,8 @@ export async function transferResident(
     [source, entity.position],
     [destination, position],
   ] as const) {
-    const cx = Math.floor(p.wx / 256),
-      cy = Math.floor(p.wy / 256);
+    const cx = Math.floor(p.wx / CHUNK_SIZE_PX),
+      cy = Math.floor(p.wy / CHUNK_SIZE_PX);
     realm.streaming?.interest.set(lease, [
       {
         range: { minCx: cx - 1, minCy: cy - 1, maxCx: cx + 1, maxCy: cy + 1 },

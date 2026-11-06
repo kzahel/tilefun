@@ -1,4 +1,4 @@
-import { required } from "../art/ArtCatalog.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import { yawRotation } from "../physics/BodyRotation.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
@@ -7,6 +7,7 @@ import type { MotionIntent } from "../physics/PhysicsState.js";
 import { RoadType } from "../road/RoadType.js";
 import type { PlayerSession } from "../server/PlayerSession.js";
 import type { Realm } from "../server/Realm.js";
+import { required } from "../shared/required.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { createCurveTrain, curveOffsets } from "./CurveTrain.js";
 import { carriagePose, nearestRail, type RailPath, railAlignment } from "./RailPath.js";
@@ -86,10 +87,10 @@ export class RailwayServices {
   }
   private range(poses: readonly { x: number; y: number }[]): ChunkRange {
     return {
-      minCx: Math.floor((Math.min(...poses.map((p) => p.x)) - 144) / 256),
-      maxCx: Math.floor((Math.max(...poses.map((p) => p.x)) + 144) / 256),
-      minCy: Math.floor((Math.min(...poses.map((p) => p.y)) - 144) / 256),
-      maxCy: Math.floor((Math.max(...poses.map((p) => p.y)) + 144) / 256),
+      minCx: Math.floor((Math.min(...poses.map((p) => p.x)) - 144) / CHUNK_SIZE_PX),
+      maxCx: Math.floor((Math.max(...poses.map((p) => p.x)) + 144) / CHUNK_SIZE_PX),
+      minCy: Math.floor((Math.min(...poses.map((p) => p.y)) - 144) / CHUNK_SIZE_PX),
+      maxCy: Math.floor((Math.max(...poses.map((p) => p.y)) + 144) / CHUNK_SIZE_PX),
     };
   }
   private poses(s: Pick<RailService, "line" | "path">, distance: number) {

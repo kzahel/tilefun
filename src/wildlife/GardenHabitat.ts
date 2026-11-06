@@ -1,4 +1,5 @@
 import { TerrainId } from "../autotile/TerrainId.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { ActorPlacement } from "../generation/Generator.js";
 import type { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { faunaType } from "./Fauna.js";
@@ -24,8 +25,14 @@ export function gardenSupplies(
       [-40, -12],
       [0, 36],
     ]) {
-      const wx = Math.max(cx * 256 + 12, Math.min(cx * 256 + 244, a.wx + (dx ?? 0))),
-        wy = Math.max(cy * 256 + 12, Math.min(cy * 256 + 244, a.wy + (dy ?? 0)));
+      const wx = Math.max(
+          cx * CHUNK_SIZE_PX + 12,
+          Math.min(cx * CHUNK_SIZE_PX + 244, a.wx + (dx ?? 0)),
+        ),
+        wy = Math.max(
+          cy * CHUNK_SIZE_PX + 12,
+          Math.min(cy * CHUNK_SIZE_PX + 244, a.wy + (dy ?? 0)),
+        );
       if (
         sites.some((p) => Math.hypot(p.wx - wx, p.wy - wy) < 16) ||
         nature.inThicket(wx / 16, wy / 16, 1) ||

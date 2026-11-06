@@ -1,6 +1,6 @@
 import { afterEach, expect, it, vi } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createTrain, createTrainCarriages } from "../railway/Train.js";
+import { required } from "../shared/required.js";
 import { AudioManager } from "./AudioManager.js";
 
 function audioHarness() {

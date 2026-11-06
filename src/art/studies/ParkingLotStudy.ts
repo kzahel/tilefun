@@ -2,7 +2,7 @@ import type { Spritesheet } from "../../assets/Spritesheet.js";
 import { VEHICLE_VIEWS } from "../../assets/vehicles/VehicleCatalog.js";
 import { drawCitySurfacePieces } from "../../rendering/CitySurfaceRenderer.js";
 import type { SurfacePiece } from "../../road/CitySurfaceRecipes.js";
-import { required } from "../ArtCatalog.js";
+import { required } from "../../shared/required.js";
 import { reviewContext2D } from "../reviewCanvas.js";
 
 export type {

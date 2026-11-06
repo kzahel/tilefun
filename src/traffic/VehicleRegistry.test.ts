@@ -1,8 +1,8 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 
 it("reads durable old traffic poses as independent bodies and rejects a malformed batch atomically", async () => {
   const s = await ScenarioSession.create({

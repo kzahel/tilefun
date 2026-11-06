@@ -1,5 +1,5 @@
+import type { Movement } from "../shared/Movement.js";
 import type { XRSessionManager } from "../xr/XRSessionManager.js";
-import type { Movement } from "./ActionManager.js";
 
 import { controllerInput } from "./ControllerInput.js";
 

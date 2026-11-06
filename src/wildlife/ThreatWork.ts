@@ -1,8 +1,11 @@
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
+import { lcgNext } from "../shared/Determinism.js";
+import { gap } from "../shared/gap.js";
 import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import type { AnimalWorkSystem, WorkContext } from "./AnimalWorkSystem.js";
 import { type FaunaBehavior, faunaProfile } from "./Fauna.js";
@@ -11,7 +14,6 @@ import { settleFauna } from "./faunaInteractions.js";
 import { alarmPrey, consumeWildlifePrey } from "./predatorAI.js";
 import { spineDefenseBlocks } from "./SpineDefense.js";
 
-const gap = (a: PositionComponent, b: PositionComponent) => Math.hypot(a.wx - b.wx, a.wy - b.wy);
 const kindOf = (a: Entity) =>
   ["hedgehog", "porcupine", "fox"].find((k) => faunaProfile(a.type)?.species === k) as
     | "hedgehog"
@@ -32,10 +34,10 @@ export class ThreatWork {
   private local(a: Entity) {
     return this.manager.spatialHash
       .queryRange(
-        Math.floor((a.position.wx - 112) / 256),
-        Math.floor((a.position.wy - 112) / 256),
-        Math.floor((a.position.wx + 112) / 256),
-        Math.floor((a.position.wy + 112) / 256),
+        Math.floor((a.position.wx - 112) / CHUNK_SIZE_PX),
+        Math.floor((a.position.wy - 112) / CHUNK_SIZE_PX),
+        Math.floor((a.position.wx + 112) / CHUNK_SIZE_PX),
+        Math.floor((a.position.wy + 112) / CHUNK_SIZE_PX),
       )
       .filter(
         (e) =>
@@ -336,7 +338,7 @@ export class ThreatWork {
       const prey = this.find(t.targetId);
       if (!prey || !c.ready(prey.position, 96)) continue;
       const random = () => {
-        ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
+        ai.randomState = lcgNext(ai.randomState);
         return ai.randomState / 4294967296;
       };
       if (!consumeWildlifePrey(this.manager, a, prey, c.environment, random)) continue;

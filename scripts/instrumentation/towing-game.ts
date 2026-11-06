@@ -87,7 +87,7 @@ try {
   const facts = () =>
     page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game,
-        entities = g.remoteView.serverEntities,
+        entities = g.stateView.serverEntities,
         truck = entities.find((e) => e.type === "vehicle-v1:tow-truck"),
         car = entities.find((e) => e.type === "vehicle-v1:beetle");
       return {
@@ -103,7 +103,7 @@ try {
         car: car
           ? { id: car.id, owner: car.towedBy ?? null, wx: car.position.wx, wy: car.position.wy }
           : null,
-        parent: g.remoteView.serverPlayerEntity.parentId ?? null,
+        parent: g.stateView.serverPlayerEntity.parentId ?? null,
       };
     });
   await expect.poll(async () => !!(await facts()).truck).toBe(true);

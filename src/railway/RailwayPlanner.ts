@@ -1,4 +1,3 @@
-import { required } from "../art/ArtCatalog.js";
 import { pathDistance } from "../generation/regional/PlanGeometry.js";
 import {
   type Bounds,
@@ -10,6 +9,7 @@ import {
   settlementForOwner,
 } from "../generation/regional/RegionalPlanner.js";
 import type { RegionalWorld } from "../generation/regional/WorldDescriptor.js";
+import { required } from "../shared/required.js";
 import { curvedCityLine } from "./CurvedRailPlanner.js";
 import type { RailPath } from "./RailPath.js";
 import type { RailBridge } from "./RoadRailBridge.js";

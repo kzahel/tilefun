@@ -3,13 +3,13 @@ import { readFileSync } from "node:fs";
 // @ts-expect-error pngjs has no bundled declarations
 import { PNG } from "pngjs";
 import { describe, expect, it } from "vitest";
-import { required } from "../../art/ArtCatalog.js";
 import { CommercialDistrictStrategy } from "../../art/studies/CommercialDistrictStrategy.js";
 import { studyGenerator } from "../../art/studies/StudyGenerator.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../../entities/collision.js";
 import { ENTITY_FACTORIES } from "../../entities/EntityFactories.js";
 import { createProp } from "../../entities/PropFactories.js";
 import { commercialSurfacePieces, isCommercialSurface } from "../../road/CommercialCitySurface.js";
+import { required } from "../../shared/required.js";
 import { Chunk } from "../../world/Chunk.js";
 import { World } from "../../world/World.js";
 import { resolveDescriptor } from "../GenerationDescriptor.js";

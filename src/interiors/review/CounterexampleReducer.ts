@@ -1,3 +1,4 @@
+import { fnv1a32 } from "../../shared/Determinism.js";
 import { auditCase } from "./CounterexampleAudit.js";
 import { caseIdentity } from "./CounterexampleGenerator.js";
 import type { ReviewCase } from "./ReviewCases.js";
@@ -13,9 +14,7 @@ export function reductionCost(c: ReviewCase): number {
 function revised(c: ReviewCase, rows: string[][], walls = c.profiles?.walls): ReviewCase {
   const sketch = rows.map((r) => r.join("")).join("\n");
   const next = { ...c, sketch, ...(walls ? { profiles: { walls } } : {}) };
-  let hash = 2166136261;
-  for (const char of caseIdentity(next))
-    hash = Math.imul(hash ^ char.charCodeAt(0), 16777619) >>> 0;
+  const hash = fnv1a32(caseIdentity(next));
   return {
     ...next,
     id: `reduced-${hash.toString(16)}`,

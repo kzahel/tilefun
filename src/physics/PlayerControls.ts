@@ -1,6 +1,6 @@
 import { PLAYER_SPEED, PLAYER_SPRINT_MULTIPLIER } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
-import type { Movement } from "../input/ActionManager.js";
+import type { Movement } from "../shared/Movement.js";
 import { vehicleNoseHeading } from "../traffic/Vehicle.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import type { MotionIntent } from "./PhysicsState.js";

@@ -1,10 +1,10 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { RacetrackSource } from "../generation/regional/RacetrackPlanner.js";
 import { vehicleDepot } from "../generation/regional/VehicleDepotPlanner.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
+import { required } from "../shared/required.js";
 import { ScenarioSession } from "./ScenarioSession.js";
 
 it("populates seven real parked vehicles, drives the bridge and persists moved/deleted identities", async () => {

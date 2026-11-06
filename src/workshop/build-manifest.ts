@@ -1,9 +1,10 @@
-import { type ArtCatalog, required } from "../art/ArtCatalog.js";
+import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { loadVerifiedArtImage } from "../art/ArtSource.js";
 import { PARKING_CASES } from "../art/studies/ParkingLotStudy.js";
 import { closeAssets, loadTerrainAssets } from "../assets/GameAssets.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
+import { required } from "../shared/required.js";
 import { buildAuthoredTrainCandidate } from "./AuthoredTrainCandidate.js";
 import {
   buildAuthoredVehicleCandidates,

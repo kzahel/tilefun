@@ -1,7 +1,6 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { required } from "../../art/ArtCatalog.js";
 import {
   aabbOverlapsPropWalls,
   aabbOverlapsSolid,
@@ -12,6 +11,7 @@ import { createProp } from "../../entities/PropFactories.js";
 import { PropManager } from "../../entities/PropManager.js";
 import { denseCitySurfacePieces } from "../../road/DenseCitySurface.js";
 import { RoadType } from "../../road/RoadType.js";
+import { required } from "../../shared/required.js";
 import { Chunk } from "../../world/Chunk.js";
 import { World } from "../../world/World.js";
 import { CURRENT_REGIONAL_VERSION } from "../GenerationDescriptor.js";

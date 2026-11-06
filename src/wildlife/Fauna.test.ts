@@ -1,7 +1,6 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
 import { createProp } from "../entities/PropFactories.js";
@@ -12,6 +11,7 @@ import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
+import { required } from "../shared/required.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { createFauna, FAUNA_PROFILES, faunaProfile, faunaType } from "./Fauna.js";
 import { updateFaunaAI } from "./faunaAI.js";

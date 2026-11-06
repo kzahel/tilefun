@@ -1,5 +1,5 @@
-import { required } from "../art/ArtCatalog.js";
 import { reviewContext2D } from "../art/reviewCanvas.js";
+import { required } from "../shared/required.js";
 import source from "./RailwaySource.json" with { type: "json" };
 
 export const RAIL_SOURCE = source;

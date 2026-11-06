@@ -6,7 +6,6 @@ import {
   type ArtRect,
   type ArtSheet,
   type ArtUsage,
-  required,
   validateRect,
 } from "../src/art/ArtCatalog.js";
 import {
@@ -40,6 +39,7 @@ import {
 import { denseCitySurfacePieces } from "../src/road/DenseCitySurface.js";
 import { getRoadSheetKey, RoadType } from "../src/road/RoadType.js";
 import { composeStreetStarterSurface } from "../src/road/StreetStarterSurface.js";
+import { required } from "../src/shared/required.js";
 import wildlifeReviews from "../src/wildlife/reviews.json" with { type: "json" };
 import type { WildlifeReview } from "../src/workshop/WildlifeCandidates.js";
 import { getTileDef, registerDefaultTiles, TileId } from "../src/world/TileRegistry.js";

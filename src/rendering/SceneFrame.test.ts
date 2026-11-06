@@ -36,7 +36,6 @@ it("collects override mesh bodies with complete original sprite fallbacks and un
     [],
     false,
     undefined,
-    undefined,
     frame,
   );
   const sprites = items.filter((item) => item.kind === "sprite");
@@ -56,6 +55,7 @@ it("collects override mesh bodies with complete original sprite fallbacks and un
 it("preserves sorted mixed scenes across borrowed frames and releases surface/particle references", () => {
   vi.spyOn(performance, "now").mockReturnValue(750);
   const frame = new SceneFrame();
+  frame.presentationTime = 0.75;
   const chunk = new Chunk();
   chunk.autotileComputed = true;
   chunk.blendBase.fill(TerrainId.Grass);
@@ -98,7 +98,6 @@ it("preserves sorted mixed scenes across borrowed frames and releases surface/pa
       [particle],
       grass,
       undefined,
-      undefined,
       storage,
     );
   const first = collect(frame);
@@ -123,6 +122,7 @@ it("preserves sorted mixed scenes across borrowed frames and releases surface/pa
 it("omits distant grass work and restores full detail through pooled fade transitions", () => {
   vi.spyOn(performance, "now").mockReturnValue(750);
   const frame = new SceneFrame();
+  frame.presentationTime = 0.75;
   const chunk = new Chunk();
   chunk.autotileComputed = true;
   chunk.blendBase.fill(TerrainId.Grass);
@@ -135,20 +135,7 @@ it("omits distant grass work and restores full detail through pooled fade transi
   const terrain = { collectElevationItems: () => [] };
   const collect = (zoom: number, storage?: SceneFrame) => {
     camera.zoom = zoom;
-    return collectScene(
-      [],
-      [],
-      world,
-      camera,
-      range,
-      1,
-      terrain,
-      [],
-      true,
-      undefined,
-      undefined,
-      storage,
-    );
+    return collectScene([], [], world, camera, range, 1, terrain, [], true, undefined, storage);
   };
   const full = structuredClone(collect(0.5, frame));
   expect(full.length).toBeGreaterThan(0);
@@ -176,4 +163,42 @@ it("omits distant grass work and restores full detail through pooled fade transi
   chunk.revision++;
   expect(collect(0.5, frame)).toEqual(full);
   expect(collect(1, frame)).toEqual(full);
+});
+
+it("sways grass on the frame presentation clock so paused presentation stays still", () => {
+  const now = vi.spyOn(performance, "now").mockReturnValue(750);
+  const chunk = new Chunk();
+  chunk.autotileComputed = true;
+  chunk.blendBase.fill(TerrainId.Grass);
+  const world = { getHeightAt: () => 0, getRoadAt: () => 0, getChunkIfLoaded: () => chunk };
+  const camera = new Camera();
+  camera.setViewport(768, 768);
+  camera.snapTo(128, 128);
+  const range = { minCx: 0, maxCx: 0, minCy: 0, maxCy: 0 };
+  const frame = new SceneFrame();
+  const angles = () => {
+    const items = collectScene(
+      [],
+      [],
+      world,
+      camera,
+      range,
+      1,
+      { collectElevationItems: () => [] },
+      [],
+      true,
+      undefined,
+      frame,
+    );
+    const result = items.flatMap((item) => (item.kind === "grass" ? [item.angle] : []));
+    frame.release();
+    return result;
+  };
+  frame.presentationTime = 2;
+  const paused = angles();
+  expect(paused.length).toBeGreaterThan(0);
+  now.mockReturnValue(9_000);
+  expect(angles()).toEqual(paused);
+  frame.presentationTime = 2.4;
+  expect(angles()).not.toEqual(paused);
 });

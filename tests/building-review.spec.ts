@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
-import { required } from "../src/art/ArtCatalog.js";
 import type { ArtNote } from "../src/art/ArtNotes.js";
 import { CITY_BUILDING_PREFABS } from "../src/generation/regional/CityBuildingPrefabs.js";
+import { required } from "../src/shared/required.js";
 
 const candidateCount = CITY_BUILDING_PREFABS.length + 3;
 const URL = "/tilefun/building-lab.html";

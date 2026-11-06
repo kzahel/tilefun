@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs";
 // @ts-expect-error pngjs has no bundled declarations
 import { PNG } from "pngjs";
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
+import { required } from "../shared/required.js";
 import {
   ALL_CITY_SURFACE_CASES,
   CITY_GEOMETRY_CASES,

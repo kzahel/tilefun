@@ -2,7 +2,6 @@ import { closeAssets, type GameAssets, loadGameAssets } from "../assets/GameAsse
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { GameLoop } from "../core/GameLoop.js";
 import type { Entity } from "../entities/Entity.js";
-import type { Movement } from "../input/ActionManager.js";
 import {
   CONTROLLER_EVENT,
   type ControllerCommand,
@@ -24,6 +23,7 @@ import type { RendererMode, RenderHost } from "../rendering/RenderHost.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
+import type { Movement } from "../shared/Movement.js";
 import { manualCarMovement } from "../traffic/CarControls.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
@@ -373,7 +373,6 @@ export class ScenarioPresentationHost {
         !this.options.interior &&
           this.options.terrain !== false &&
           renderer.assets.has("grass-blades"),
-        undefined,
         this.options.interior?.drawProps,
         this.frame,
         { observer: player, visibility: this.options.surfaceVisibility?.() ?? "auto" },

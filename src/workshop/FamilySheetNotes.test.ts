@@ -1,7 +1,7 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { parseArtNote } from "../art/ArtNotes.js";
+import { required } from "../shared/required.js";
 import { familyNoteEvent, familyNoteTarget, familyNoteUrl } from "./FamilySheetNotes.js";
 import type { FamilySheetCatalog } from "./FamilySheetTypes.js";
 

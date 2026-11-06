@@ -1,4 +1,4 @@
-import { ELEVATION_PX } from "../config/constants.js";
+import { CHUNK_SIZE_PX, ELEVATION_PX } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
@@ -89,7 +89,7 @@ export class RoadTraffic {
       for (let cy = range.minCy; cy <= range.maxCy; cy++)
         for (let cx = range.minCx; cx <= range.maxCx; cx++) {
           if (!r.world.getChunkIfLoaded(cx, cy)) continue;
-          const graph = r.source.trafficNetwork(cx * 256 + 128, cy * 256 + 128);
+          const graph = r.source.trafficNetwork(cx * CHUNK_SIZE_PX + 128, cy * CHUNK_SIZE_PX + 128);
           if (graphs.has(graph)) continue;
           graphs.add(graph);
           for (const lane of graph.lanes.values()) {
@@ -97,10 +97,10 @@ export class RoadTraffic {
             if (
               !ranges.some(
                 (a) =>
-                  Math.max(lane.a.x, lane.b.x) + lane.width >= a.minCx * 256 &&
-                  Math.min(lane.a.x, lane.b.x) - lane.width < (a.maxCx + 1) * 256 &&
-                  Math.max(lane.a.y, lane.b.y) + lane.width >= a.minCy * 256 &&
-                  Math.min(lane.a.y, lane.b.y) - lane.width < (a.maxCy + 1) * 256,
+                  Math.max(lane.a.x, lane.b.x) + lane.width >= a.minCx * CHUNK_SIZE_PX &&
+                  Math.min(lane.a.x, lane.b.x) - lane.width < (a.maxCx + 1) * CHUNK_SIZE_PX &&
+                  Math.max(lane.a.y, lane.b.y) + lane.width >= a.minCy * CHUNK_SIZE_PX &&
+                  Math.min(lane.a.y, lane.b.y) - lane.width < (a.maxCy + 1) * CHUNK_SIZE_PX,
               )
             )
               continue;
@@ -120,10 +120,10 @@ export class RoadTraffic {
               if (
                 !ranges.some(
                   (a) =>
-                    p.x >= a.minCx * 256 &&
-                    p.x < (a.maxCx + 1) * 256 &&
-                    p.y >= a.minCy * 256 &&
-                    p.y < (a.maxCy + 1) * 256,
+                    p.x >= a.minCx * CHUNK_SIZE_PX &&
+                    p.x < (a.maxCx + 1) * CHUNK_SIZE_PX &&
+                    p.y >= a.minCy * CHUNK_SIZE_PX &&
+                    p.y < (a.maxCy + 1) * CHUNK_SIZE_PX,
                 )
               )
                 continue;
@@ -368,10 +368,10 @@ export class RoadTraffic {
             return false;
           return !r.props
             .getPropsInChunkRange(
-              Math.floor(b.left / 256),
-              Math.floor(b.top / 256),
-              Math.floor(b.right / 256),
-              Math.floor(b.bottom / 256),
+              Math.floor(b.left / CHUNK_SIZE_PX),
+              Math.floor(b.top / CHUNK_SIZE_PX),
+              Math.floor(b.right / CHUNK_SIZE_PX),
+              Math.floor(b.bottom / CHUNK_SIZE_PX),
             )
             .some((p) =>
               (p.walls ?? (p.collider ? [p.collider] : [])).some(

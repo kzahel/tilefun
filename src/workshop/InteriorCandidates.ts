@@ -2,7 +2,6 @@ import { interiorFingerprint, renderInteriorCandidate } from "../interiors/revie
 
 export { interiorFingerprint, renderInteriorCandidate } from "../interiors/review/ReviewRender.js";
 
-import { required } from "../art/ArtCatalog.js";
 import { sha256 } from "../art/ArtSource.js";
 import { loadModernInteriorsAtlasIndex } from "../assets/ModernInteriorsAtlasIndex.js";
 import { FURNITURE_CATALOG_VERSION } from "../interiors/FurnitureCatalog.js";
@@ -11,6 +10,7 @@ import { motionSceneSignature } from "../interiors/MotionReview.js";
 import spriteIndexUrl from "../interiors/review/assets/review-sprites.json?url";
 import spriteUrl from "../interiors/review/assets/review-sprites.png?url";
 import { REVIEW_STAGES, reviewCases } from "../interiors/review/ReviewCases.js";
+import { required } from "../shared/required.js";
 import type { ReviewBatch, WorkshopCandidate } from "./WorkshopTypes.js";
 
 let atlasPromise: Promise<HTMLImageElement> | undefined;

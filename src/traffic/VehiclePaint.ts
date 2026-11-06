@@ -1,3 +1,4 @@
+import { fnv1a32 } from "../shared/Determinism.js";
 import catalog from "./vehicle-paints-v1.json" with { type: "json" };
 
 export interface VehiclePaintScheme {
@@ -47,10 +48,9 @@ export function vehiclePaintSheet(type: string, id?: string): string {
 export function trafficPaint(type: string, identity: string): string | undefined {
   const family = families[type.replace(/^vehicle-v1:/, "")];
   if (!family) return undefined;
-  let hash = 2166136261;
-  for (const char of `${identity}:paint-v1`)
-    hash = Math.imul(hash ^ char.charCodeAt(0), 16777619) >>> 0;
-  let choice = hash % (family.defaultWeight + family.schemes.reduce((sum, p) => sum + p.weight, 0));
+  let choice =
+    fnv1a32(`${identity}:paint-v1`) %
+    (family.defaultWeight + family.schemes.reduce((sum, p) => sum + p.weight, 0));
   choice -= family.defaultWeight;
   if (choice < 0) return undefined;
   for (const paint of family.schemes) {

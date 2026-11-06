@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { decodeActor, durableId, encodeActor } from "../persistence/ActorRecords.js";
+import { required } from "../shared/required.js";
 import { createDeer } from "./Deer.js";
 import { createFauna, FAUNA_PROFILES } from "./Fauna.js";
 import { canEat, creatureSpecies, FOOD_WEB, HUNTING_DIETS } from "./FoodWeb.js";

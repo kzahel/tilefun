@@ -1,5 +1,4 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createChicken } from "../entities/Chicken.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
@@ -11,6 +10,7 @@ import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RealmRecords } from "../persistence/RealmRecords.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
 import { SaveManager } from "../persistence/SaveManager.js";
+import { required } from "../shared/required.js";
 import { World } from "../world/World.js";
 import { around } from "./InterestManager.js";
 import { PlayerSession } from "./PlayerSession.js";

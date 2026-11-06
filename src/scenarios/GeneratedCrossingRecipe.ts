@@ -1,10 +1,10 @@
-import { required } from "../art/ArtCatalog.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
 import { ROAD_RAIL_BRIDGE } from "../railway/RoadRailBridge.js";
+import { required } from "../shared/required.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 
 export const GENERATED_CROSSINGS = [

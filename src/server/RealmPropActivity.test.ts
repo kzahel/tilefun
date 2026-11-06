@@ -1,11 +1,11 @@
 import { expect, it, vi } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createChicken } from "../entities/Chicken.js";
 import type { Prop } from "../entities/Prop.js";
 import { PropManager } from "../entities/PropManager.js";
 import { actorScope } from "../persistence/ActorRecords.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { RealmPropActivity } from "./RealmPropActivity.js";
 
 const prop = (wx = 32, wy = 32): Prop => ({

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
-import { required } from "../src/art/ArtCatalog.js";
 import type { ArtNote } from "../src/art/ArtNotes.js";
+import { required } from "../src/shared/required.js";
 
 const url = "/tilefun/workshop.html#/tool/character-lab";
 

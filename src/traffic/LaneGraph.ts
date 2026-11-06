@@ -1,8 +1,8 @@
-import { required } from "../art/ArtCatalog.js";
 import type { AABB } from "../entities/collision.js";
 import { Direction } from "../entities/Entity.js";
 import type { DistrictPlan } from "../generation/regional/DistrictPlanner.js";
 import type { Connection, Point } from "../generation/regional/RegionalPlanner.js";
+import { required } from "../shared/required.js";
 
 export interface RoadSegment {
   a: Point;
@@ -208,22 +208,6 @@ export function buildLaneGraph(segments: readonly RoadSegment[]): LaneGraph {
     }
   for (const lanes of outgoing.values()) lanes.sort((a, b) => a.id.localeCompare(b.id));
   return { lanes, outgoing };
-}
-export function turnPath(from: Lane, to: Lane): Path {
-  const a = required(from.path.points.at(-1)),
-    b = required(to.path.points[0]);
-  const control =
-    from.direction === to.direction ? { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 } : from.b;
-  const points: Point[] = [];
-  for (let i = 0; i <= 24; i++) {
-    const t = i / 24,
-      u = 1 - t;
-    points.push({
-      x: u * u * a.x + 2 * u * t * control.x + t * t * b.x,
-      y: u * u * a.y + 2 * u * t * control.y + t * t * b.y,
-    });
-  }
-  return path(points);
 }
 export function nextLanes(graph: LaneGraph, lane: Lane, minimumWidth = 0): Lane[] {
   return (graph.outgoing.get(lane.to) ?? []).filter(

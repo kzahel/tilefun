@@ -1,5 +1,6 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
+import { positionSeed } from "../shared/Determinism.js";
 import { ANTELOPE_PROFILES } from "./Antelopes.js";
 import { behaviorArt } from "./BehaviorArt.js";
 import { BOVID_PROFILES } from "./Bovids.js";
@@ -1521,7 +1522,7 @@ export function createFauna(species: FaunaSpecies, wx: number, wy: number): Enti
       radius: p.radius,
       state: "rest",
       timer: 2,
-      randomState: ((Math.floor(wx) * 73856093) ^ (Math.floor(wy) * 19349663) ^ 8001) >>> 0,
+      randomState: positionSeed(wx, wy, 8001),
       activity: 0,
       target: { wx, wy },
     },

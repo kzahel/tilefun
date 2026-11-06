@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import type { Entity } from "../entities/Entity.js";
 import { Direction } from "../entities/Entity.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import type { Prop } from "../entities/Prop.js";
 import { Chunk } from "../world/Chunk.js";
+import { required } from "./required.js";
 import {
   applyChunkSnapshot,
   deserializeEntity,

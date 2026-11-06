@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
-import { required } from "../../art/ArtCatalog.js";
 import { CityPlacesStrategy } from "../../art/studies/CityPlacesStrategy.js";
 import { studyGenerator } from "../../art/studies/StudyGenerator.js";
+import { required } from "../../shared/required.js";
 import { cityPlacesSurfaceAt } from "./CityPlacesPlanner.js";
 import { walkTrip } from "./CityWalkGraph.js";
 import { regionalWorld } from "./WorldDescriptor.js";

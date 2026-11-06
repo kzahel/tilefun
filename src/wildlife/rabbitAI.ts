@@ -1,10 +1,10 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
-import type { WildlifeEnvironment } from "./mallardAI.js";
+import { lcgNext } from "../shared/Determinism.js";
+import { gap } from "../shared/gap.js";
 import { restoreRabbitPose, settleRabbit, startleRabbit } from "./rabbitInteractions.js";
+import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
-const distance = (a: PositionComponent, b: PositionComponent) =>
-  Math.hypot(a.wx - b.wx, a.wy - b.wy);
 /** Bounded dry-ground hops, quiet action cycles and short escapes toward open cover. */
 export function updateRabbitAI(
   rabbit: Entity,
@@ -19,7 +19,7 @@ export function updateRabbitAI(
     velocity = rabbit.motionIntent;
   if (!ai || !velocity || !rabbit.sprite) return;
   const random = () => {
-    ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
+    ai.randomState = lcgNext(ai.randomState);
     return ai.randomState / 4294967296;
   };
   const rest = () => {
@@ -31,13 +31,13 @@ export function updateRabbitAI(
   };
   // Physics owns the native hop phase between slower authority AI decisions.
   if (ai.state === "hop") return;
-  const nearby = players.find((p) => distance(p, rabbit.position) < 26);
+  const nearby = players.find((p) => gap(p, rabbit.position) < 26);
   if (nearby && ai.state !== "recover") startleRabbit(rabbit, nearby);
   if (environment.animalWork?.(rabbit, dt, planning)) return;
   const chooseHop = (escaping: boolean) => {
     const from = ai.alarmFrom ?? rabbit.position;
     const away =
-      distance(from, rabbit.position) < 1
+      gap(from, rabbit.position) < 1
         ? random() * Math.PI * 2
         : Math.atan2(rabbit.position.wy - from.wy, rabbit.position.wx - from.wx);
     let candidate: PositionComponent | undefined,
@@ -53,9 +53,9 @@ export function updateRabbitAI(
         wy: rabbit.position.wy + Math.sin(angle) * length,
       };
       if (
-        distance(point, ai.home) > ai.radius ||
-        players.some((p) => distance(point, p) < 22) ||
-        animals.some((a) => a !== rabbit && a.collider?.solid && distance(point, a.position) < 14)
+        gap(point, ai.home) > ai.radius ||
+        players.some((p) => gap(point, p) < 22) ||
+        animals.some((a) => a !== rabbit && a.collider?.solid && gap(point, a.position) < 14)
       )
         continue;
       let clear = true;
@@ -78,9 +78,9 @@ export function updateRabbitAI(
       }
       if (!clear) continue;
       // Escape must gain distance from the threat; cover preference cannot reverse it.
-      const gain = distance(point, from) - distance(rabbit.position, from);
+      const gain = gap(point, from) - gap(rabbit.position, from);
       if (escaping && gain < 8) continue;
-      const score = escaping ? gain - distance(point, ai.shelter) * 0.4 : random();
+      const score = escaping ? gain - gap(point, ai.shelter) * 0.4 : random();
       if (score > best) {
         best = score;
         candidate = point;

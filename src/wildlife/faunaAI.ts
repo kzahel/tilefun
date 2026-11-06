@@ -1,5 +1,7 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
+import { lcgNext } from "../shared/Determinism.js";
+import { gap } from "../shared/gap.js";
 import { faunaProfile } from "./Fauna.js";
 import {
   restoreFaunaPose,
@@ -7,10 +9,8 @@ import {
   startleFauna,
   syncFaunaWater,
 } from "./faunaInteractions.js";
-import type { WildlifeEnvironment } from "./mallardAI.js";
+import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
-const distance = (a: PositionComponent, b: PositionComponent) =>
-  Math.hypot(a.wx - b.wx, a.wy - b.wy);
 export function updateFaunaAI(
   animal: Entity,
   dt: number,
@@ -26,7 +26,7 @@ export function updateFaunaAI(
   if (!ai || !velocity || !animal.sprite || !p) return;
   if (animal.wanderAI?.state === "ridden") return;
   syncFaunaWater(animal, environment.isWater(animal.position));
-  const nearby = players.find((player) => distance(player, animal.position) < p.alarmDistance);
+  const nearby = players.find((player) => gap(player, animal.position) < p.alarmDistance);
   const herdAlarm = ai.groupId
     ? animals.find(
         (a) =>
@@ -35,7 +35,7 @@ export function updateFaunaAI(
           // Broadcast the visible alert, not an old escape that can restart a recovered peer.
           a.fauna?.state === "startle" &&
           a.fauna.alarmFrom &&
-          distance(a.position, animal.position) < ai.radius * 1.5,
+          gap(a.position, animal.position) < ai.radius * 1.5,
       )?.fauna?.alarmFrom
     : undefined;
   if (ai.state !== "recover" && (nearby || herdAlarm))
@@ -46,7 +46,7 @@ export function updateFaunaAI(
   ai.timer -= dt;
   if (ai.timer > 0) return;
   const random = () => {
-    ai.randomState = (Math.imul(ai.randomState, 1664525) + 1013904223) >>> 0;
+    ai.randomState = lcgNext(ai.randomState);
     return ai.randomState / 4294967296;
   };
   const rest = () => {
@@ -76,7 +76,7 @@ export function updateFaunaAI(
         (a) =>
           a !== animal &&
           a.fauna?.groupId === ai.groupId &&
-          distance(a.position, animal.position) < ai.radius * 1.5,
+          gap(a.position, animal.position) < ai.radius * 1.5,
       )
     : [];
   const from = ai.alarmFrom ?? animal.position;
@@ -85,7 +85,7 @@ export function updateFaunaAI(
   for (let i = 0; i < 24; i++) {
     if (planning && !planning.candidate(animal)) break;
     const away =
-      distance(from, animal.position) < 1
+      gap(from, animal.position) < 1
         ? random() * Math.PI * 2
         : Math.atan2(animal.position.wy - from.wy, animal.position.wx - from.wx);
     const angle = escaping ? away + (random() - 0.5) * Math.PI : random() * Math.PI * 2;
@@ -94,12 +94,12 @@ export function updateFaunaAI(
       wx: animal.position.wx + Math.cos(angle) * length,
       wy: animal.position.wy + Math.sin(angle) * length,
     };
-    const gain = distance(point, from) - distance(animal.position, from);
+    const gain = gap(point, from) - gap(animal.position, from);
     if (
-      distance(point, ai.home) > ai.radius - p.body[0] / 2 ||
-      players.some((player) => distance(point, player) < p.alarmDistance) ||
+      gap(point, ai.home) > ai.radius - p.body[0] / 2 ||
+      players.some((player) => gap(point, player) < p.alarmDistance) ||
       animals.some(
-        (a) => a !== animal && a.collider?.solid && distance(point, a.position) < p.body[0] + 6,
+        (a) => a !== animal && a.collider?.solid && gap(point, a.position) < p.body[0] + 6,
       ) ||
       (escaping && gain < p.step / 4)
     )
@@ -123,13 +123,13 @@ export function updateFaunaAI(
     }
     if (!clear) continue;
     const cohesion = herd.length
-      ? herd.reduce((sum, a) => sum + distance(point, a.position), 0) / herd.length
-      : distance(point, ai.home);
+      ? herd.reduce((sum, a) => sum + gap(point, a.position), 0) / herd.length
+      : gap(point, ai.home);
     const score = escaping
-      ? gain - distance(point, ai.shelter) * 0.15
+      ? gain - gap(point, ai.shelter) * 0.15
       : random() * 12 -
         cohesion * p.cohesion -
-        (players[0] ? distance(point, players[0]) * p.interest : 0) +
+        (players[0] ? gap(point, players[0]) * p.interest : 0) +
         (p.habitat === "shore" && environment.isWater(point) !== ai.water ? 24 : 0);
     if (score > best) {
       best = score;
@@ -148,7 +148,7 @@ export function updateFaunaAI(
     elapsed: 0,
     duration: p.hop
       ? p.hop.duration * (escaping ? 0.5 : 1)
-      : distance(target, animal.position) / (p.speed * (escaping ? 2 : 1)) + 0.15,
+      : gap(target, animal.position) / (p.speed * (escaping ? 2 : 1)) + 0.15,
     ...(p.hop ? { startZ: animal.wz ?? 0, endZ: environment.surfaceZ?.(target) ?? 0 } : {}),
     escaping,
   };

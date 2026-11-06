@@ -6,7 +6,7 @@ test.use({ channel: "chromium", hasTouch: true });
 function game(page: Page) {
   return page.evaluate(() => {
     const gc = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-    return gc.remoteView.serverEntities
+    return gc.stateView.serverEntities
       .filter((e) => e.type.startsWith("vehicle-v1:"))
       .map((e) => ({ id: e.id, type: e.type, paint: e.paintSchemeId, sheet: e.sprite?.sheetKey }));
   });
@@ -58,7 +58,7 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
       .map((p) => ({
         ...p,
         clearance: Math.min(
-          ...gc.remoteView.serverEntities.map((e) =>
+          ...gc.stateView.serverEntities.map((e) =>
             Math.hypot(e.position.wx - p.wx, e.position.wy - p.wy),
           ),
         ),
@@ -95,7 +95,7 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
   await page.getByRole("button", { name: "Exit editor", exact: true }).tap();
   const car = await page.evaluate(async () => {
     const gc = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-    const vehicle = gc.remoteView.serverEntities.find((e) => e.type.startsWith("vehicle-v1:"));
+    const vehicle = gc.stateView.serverEntities.find((e) => e.type.startsWith("vehicle-v1:"));
     if (!vehicle) throw Error("Missing painted car");
     await gc.gcSendRequest({
       type: "rcon",
@@ -126,7 +126,7 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
     .poll(() =>
       page.evaluate((id) => {
         const gc = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-        return gc.remoteView.serverEntities.find((e) => e.id === id)?.position.wx ?? 0;
+        return gc.stateView.serverEntities.find((e) => e.id === id)?.position.wx ?? 0;
       }, car.id),
     )
     .toBeGreaterThan(car.wx + 30);

@@ -244,7 +244,7 @@ Audit bugs:
 | B4 | Confirmed (narrower: any new note, not every refetch). Fixed: each focus/note target centres once per navigation; clearing the parameter re-arms it. No React DOM test harness exists. |
 | B5 | Confirmed, low impact. Fixed with `useMemo`. |
 | B6 | Confirmed mismatch: only `fox.stalk` changes behavior (JSON `loop:false`, forced to loop); `red-squirrel.eat` lacks a flag. Needs owner decision: honoring JSON would make the fox stalk hold its last frame. Unchanged. |
-| B7 | Confirmed for labs (game presentation time is wall time; scenario labs pause their clock but grass kept swaying). A fix using `frame.presentationTime` was written and reviewed, then withdrawn: `collectScene.ts` source text is hashed into 1,025 Workshop candidate identities (1,008 `nature:*`, 6 `character:*`, 11 geometry diagnostics), so any edit reopens them for human review. Land it with the identity rework in phase 4. |
+| B7 | Confirmed for labs (game presentation time is wall time; scenario labs pause their clock but grass kept swaying). A fix using `frame.presentationTime` was written and reviewed, then withdrawn: `collectScene.ts` source text is hashed into 1,025 Workshop candidate identities (1,008 `nature:*`, 6 `character:*`, 11 geometry diagnostics), so any edit reopens them for human review. Withdrawn here; re-applied in phase 2 once the inbox showed no human decisions on those batches. |
 | B8 | Confirmed inconsistency from `4df2527a`: the second `streaming.update` passes dormant sessions, dropping and re-requesting their chunks each broadcast tick. Needs a decision on dormant residency. Unchanged. |
 | B9 | Confirmed latent, no current impact: labs pass gravity explicitly and must drop `sync-cvars`. Recommended per-view gravity. Unchanged. |
 | B10 | Confirmed: remote console commands act on the local/default realm. Recommended: pass the sender realm into `execServer`. Unchanged. |
@@ -293,3 +293,103 @@ Review: an independent Opus 5.5 high review found no blockers; it caught a vacuo
 when ScenePage parameters clear, a misplaced doc comment, remaining inline copies
 of the error reply, an empty lobby on realm-list failure, and the identity churn
 above. All were repaired or recorded.
+
+### Phase 2 record — delete before splitting
+
+Precondition: `npm run workshop:inbox` on 2026-11-06 still showed 0 approvals
+and 0 change requests on every source-hashed batch (natural-landscapes 1,008
+unchecked, rail-*, authored-trains; world-geometry/physics excluded), so engine
+edits here reopen only unreviewed candidates. Pixel-identity batches (buildings,
+roads, rooms, streets, districts, vehicles) are unaffected by these refactors.
+
+- B7 re-applied: grass sway uses `frame.presentationTime` when a frame is
+  supplied (paused labs stay still; frameless callers keep wall time), with a
+  regression test in `SceneFrame.test.ts`.
+- Local mode removed: `GameClient` takes `(canvas, transport, options)`; the
+  `server`/`mode` arguments, `localServer`, `serialized`, `remoteView` and the
+  local-only menu/world/door branches are gone. `GameContext` loses
+  `server`/`serialized` and types `stateView` as `RemoteStateView`, so PlayScene
+  and EditScene drop their casts and local tick paths. `LocalStateView` and its
+  test are deleted; `ClientStateView` stays as the narrow read interface used by
+  `DoorControl`/`VehicleControl`.
+- Extrapolation ghosts removed: `getExtrapolationGhosts` had no production
+  caller, so the overlay's `Extrap` stats were never populated and
+  `collectScene`'s ghost parameter was always `undefined`. The view sampling,
+  overlay stats, `collectScene` parameter/branch and their tests are gone; every
+  caller drops one positional `undefined`. `GameServer.invalidateAllChunks` lost its
+  last callers with local mode and is deleted.
+- Browser hooks: Playwright specs and instrumentation scripts read
+  `__game.remoteView` (72 sites in 17 files, including `benchmark-streaming.mjs`);
+  they now read `__game.stateView`, the same `RemoteStateView`. The worker-server
+  "no in-page server" assertion became structural and is removed.
+  `docs/client-server-architecture.md` no longer describes a local path.
+- Realm non-streaming branches removed: `ReplicationDeliveryHarness` (the only
+  realm user that skipped `init()`) now uses `memoryServer()`; Realm drops the
+  legacy chunk-loading, structure placement and activity-tier paths and
+  `MAX_CHUNK_LOADS_PER_UPDATE`; `requireStreaming()` guards load-dependent paths
+  and `tick()` returns early for an unloaded realm. B8 (two `streaming.update`
+  calls per tick) is unchanged. `GameServer.updateVisibleChunks` had no caller.
+- Dead code deleted: `railway/RailRoute.ts`, `workshop/CurvedTrainPreview.ts`,
+  `CountrySource` (file keeps the `CountryPlan` type), Realm `inspectionState`,
+  `realizeProceduralActors`, `closePersistenceIfCurrent`, and the exports
+  `canBecomeRoadkill`, `controlsTreeHeight`, `turnPath`, `vehicleRoofSize`,
+  `TRAIN_PUSH`, `SHOPPING_PARKED_BAYS`, `solidOverlaps`/`solidTop`.
+- Moves: `required()` → `shared/required.ts` (175 importers including tests; removes the false
+  `art ↔ X` coupling), `Movement` → `shared/Movement.ts`, `WildlifeEnvironment`
+  and `WildlifeBody` → `wildlife/WildlifeEnvironment.ts` (out of `mallardAI.ts`),
+  four test-only traffic fixtures/helpers → `tests-support/`. Mojibake fixed in
+  13 comment lines.
+- Shared helpers with byte-identical behavior: `shared/Determinism.ts`
+  (`lcgNext` ×11, `positionSeed` ×7, `fnv1a32` ×2, with a test pinning outputs
+  computed from the old inline code) and `shared/gap.ts` (×18, including eight
+  identical `distance` helpers). `CHUNK_SIZE_PX` replaces `256` only where it
+  means chunk pixels. Deliberately left alone because constants or coercions
+  differ: `TrainAudio` (signed LCG), `OrderedLatency` (Park–Miller),
+  `GrassBladeRenderer`/`TileVariants` (no floor/salt), `RailTrackRaster`,
+  `noise`, `RoadGenerator`, `RegionalPlanner`, `NaturalLandscape:327`,
+  `ReviewCases` FNV (review IDs), `RoadTraffic` FNV (`charCodeAt(i)` differs
+  for astral characters), `LaneGraph` (`{x,y}` distance).
+
+Remaining phase 2 candidates, not done: cache eviction ×24, wheel zoom ×4,
+art-notes query ×3, DOM `el`/`$` ×6 and the "two reports pause" rule ×5;
+unreferenced constants and exports (`BALL_*`, `BOUNCE_*`, `PLAYER_*`,
+`ENTITY_ACTIVATION_DISTANCE`, `JUMP_CUT_MULTIPLIER`, `BOAT_SEAT_Z`,
+`IDENTITY_ROTATION`, `MODERN_INTERIORS_ATLAS_PREFIX`, `TOW_TRUCK`,
+`TRAIN_LENGTH`, `artNotesPlugin`, `isTransporter`/`transporterLocal`,
+`AABB3D` helpers) — phase 3's knip run will list them mechanically;
+`StructureGenerator`/`placements(...).newIntersectionKeys` and its `processed`
+set lost their consumer with the legacy Realm structure path (callers pass
+`new Set()`); `Overview.countryside` is always empty, so the explorer's countryside layer is
+dead; `scripts/instrumentation/protocol-fallback-audit.ts` already crashes
+(`new GameServer(t)` lacks deps); `src/workshop/animal-behavior-status.json`
+carries mojibake generated from `art-source/wildlife-v2/behavior-campaign.json`.
+
+Pre-existing unit failures (fail identically on a clean export of `2e80bef9`):
+`VehicleDepot.test.ts` (7874.18 vs 7875.32), `SharedPhysics`,
+`VehiclePlacement`, `VehicleControl`.
+
+Validation: `npm run typecheck`; `npx biome check .` (warnings only, all
+pre-existing); full `npx vitest run` (4,615 passed; the four failures above plus a
+one-off `SharedPrediction` timing flake, which also flakes on `2e80bef9`);
+`ReplicationDelivery.test.ts` and `scripts/instrumentation/replication-delivery.ts`
+(all profiles converge); `art:catalog` (source-line references and the removed
+`CountrySource` usages only) and `workshop:manifest` — fingerprints changed only in
+source-hashed batches with no human decisions (natural-landscapes 1,008,
+world-geometry 10, rail-* 32, physics-prototype 1, character-lab 6); `npm run
+build`; `npm run streaming:bench -- --assert-ready` after the hook migration;
+`npm run test:smoke`. Smoke failures caused by this phase (`remoteView` hooks,
+`g.server`) were fixed and re-run green. Remaining smoke failures predate it: F3
+expects a "Driving bodies" label absent from `src` at `2e80bef9`; the
+worker-server physics case reads `stateView.physicsParameters`, also absent at
+`2e80bef9`; the mobile-editor rosso-coupe car does not drive (same symptom as the
+`VehiclePlacement` unit failure); the local 350 ms busy-Worker frame count is
+frame-rate sensitive (passes with the CI 2 s stall).
+
+Review: an independent Opus 5.5 high review found no remaining blockers. It
+confirmed the dedented GameClient branches are byte-identical, every determinism
+substitution and pinned value, the `CHUNK_SIZE_PX` swaps, the dead-code claims and
+that B8 is unchanged. It flagged the `remoteView` browser hooks (fixed during
+review), the half-removed ghost renderer path, the stale architecture doc,
+orphaned `invalidateAllChunks`/`loadWorld` docs, stripped JSDoc spacing in
+`ClientStateView.ts`, a tautological spec assertion, stale Realm comments and the
+incomplete record; all were repaired.

@@ -1,6 +1,6 @@
-import { required } from "../art/ArtCatalog.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityDef } from "../entities/EntityDefs.js";
+import { required } from "../shared/required.js";
 import { carriagePose, headingFrame, type RailAlignment } from "./RailPath.js";
 import source from "./RailwaySource.json" with { type: "json" };
 

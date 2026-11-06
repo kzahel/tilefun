@@ -1,8 +1,8 @@
 import * as THREE from "three";
-import { required } from "../../../src/art/ArtCatalog.js";
 import { loadCarMesh } from "../../../src/rendering/CarMeshAsset.js";
 import { setCarMeshProjection } from "../../../src/rendering/CarMeshProjection.js";
 import { CarPixelOutline } from "../../../src/rendering/CarPixelOutline.js";
+import { required } from "../../../src/shared/required.js";
 
 export async function captureTransporter() {
   const size = 384,

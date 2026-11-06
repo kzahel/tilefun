@@ -1,11 +1,11 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
 import { crowdedRoadTrafficRecipe, roadTrafficRecipe } from "../scenarios/RoadTrafficRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { buildLaneGraph, nextLanes } from "./LaneGraph.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };

@@ -1,8 +1,8 @@
 import { expect, it } from "vitest";
-import { required } from "../../art/ArtCatalog.js";
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { naturalLandscapeRecipe } from "../../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioSession } from "../../scenarios/ScenarioSession.js";
+import { required } from "../../shared/required.js";
 import { FAUNA_PROFILES, faunaType } from "../../wildlife/Fauna.js";
 import { predatorProfile, predatorType } from "../../wildlife/Predator.js";
 import { TileId } from "../../world/TileRegistry.js";

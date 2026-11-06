@@ -1,6 +1,6 @@
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
-import type { Movement } from "../input/ActionManager.js";
+import type { Movement } from "../shared/Movement.js";
 import { createForageItem } from "../wildlife/ForageResources.js";
 import { FLAT_SCENARIO, type ScenarioRecipe, scenarioWalls } from "./ScenarioRecipe.js";
 import { surfaceProp } from "./WorldGeometryRecipe.js";

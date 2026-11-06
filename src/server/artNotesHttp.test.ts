@@ -4,7 +4,8 @@ import { createServer } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
-import { type ArtCatalog, required } from "../art/ArtCatalog.js";
+import type { ArtCatalog } from "../art/ArtCatalog.js";
+import { required } from "../shared/required.js";
 import { ArtNoteStore, artNotesHandler } from "./artNotesHttp.js";
 
 const catalog = JSON.parse(readFileSync("public/data/art-catalog.json", "utf8")) as ArtCatalog;

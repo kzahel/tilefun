@@ -1,5 +1,5 @@
-import { required } from "../art/ArtCatalog.js";
 import type { Racetrack } from "../generation/regional/RacetrackPlanner.js";
+import { required } from "../shared/required.js";
 import { type Lane, type LaneGraph, path, samplePath } from "./LaneGraph.js";
 
 /** Each quarter has a shared tangent endpoint. Both rings travel clockwise;

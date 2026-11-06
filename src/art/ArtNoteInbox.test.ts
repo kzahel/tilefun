@@ -1,6 +1,7 @@
 import { readFileSync } from "node:fs";
 import { afterEach, expect, it, vi } from "vitest";
-import { type ArtCatalog, required } from "./ArtCatalog.js";
+import { required } from "../shared/required.js";
+import type { ArtCatalog } from "./ArtCatalog.js";
 import { ArtNoteInbox } from "./ArtNoteInbox.js";
 import type { ArtNote } from "./ArtNotes.js";
 

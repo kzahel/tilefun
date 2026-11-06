@@ -202,7 +202,7 @@ export class EntityManager {
         if (e.parentId === undefined || resolved.has(e.id)) continue;
         const parent = byId.get(e.parentId);
         if (!parent) {
-          // Parent removed â€” auto-detach
+          // Parent removed — auto-detach
           Reflect.set(e, "parentId", undefined);
           Reflect.set(e, "localOffsetX", undefined);
           Reflect.set(e, "localOffsetY", undefined);

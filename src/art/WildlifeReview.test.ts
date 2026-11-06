@@ -1,5 +1,6 @@
 import { expect, it } from "vitest";
-import { type ArtCatalog, required } from "./ArtCatalog.js";
+import { required } from "../shared/required.js";
+import type { ArtCatalog } from "./ArtCatalog.js";
 import { parseArtNote } from "./ArtNotes.js";
 
 const catalog: ArtCatalog = {

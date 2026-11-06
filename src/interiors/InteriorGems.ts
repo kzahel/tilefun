@@ -1,3 +1,4 @@
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { aabbOverlapsPropWalls } from "../entities/collision.js";
 import { createProp } from "../entities/PropFactories.js";
 import { gemPlacement, ownsGem } from "../generation/ExplorationGems.js";
@@ -17,8 +18,8 @@ export function withInteriorGems(
   const props = generator.placements(0, 0, new Set()).placements;
   // Fixtures may extend beyond the first chunk in the larger room recipes.
   const fixtures = new Map(props.map((p) => [p.featureId, p]));
-  for (let cy = 0; cy <= Math.floor(room.height / 256); cy++)
-    for (let cx = 0; cx <= Math.floor(room.width / 256); cx++)
+  for (let cy = 0; cy <= Math.floor(room.height / CHUNK_SIZE_PX); cy++)
+    for (let cx = 0; cx <= Math.floor(room.width / CHUNK_SIZE_PX); cx++)
       for (const p of generator.placements(cx, cy, new Set()).placements)
         fixtures.set(p.featureId, p);
   const furniture = [...fixtures.values()].map((p) => createProp(p.propType, p.wx, p.wy));

@@ -26,7 +26,7 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
     if (!editing) await page.keyboard.press("Tab");
     await page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-      for (const e of g.remoteView.serverEntities)
+      for (const e of g.stateView.serverEntities)
         if (e.type !== "player") g.transport.send({ type: "edit-delete-entity", entityId: e.id });
       g.transport.send({ type: "edit-spawn", entityType: "vehicle-v1:compact-1", wx: 100, wy: 0 });
     });
@@ -41,15 +41,15 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
       .poll(() =>
         page.evaluate(() => {
           const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-          return g.remoteView.serverPlayerEntity.parentId;
+          return g.stateView.serverPlayerEntity.parentId;
         }),
       )
       .toBeDefined();
     await page.evaluate((type) => {
       const canvas = document.querySelector("#game") as HTMLCanvasElement;
       const g = (canvas as unknown as { __game: GameClient }).__game;
-      const car = g.remoteView.serverEntities.find(
-        (e) => e.id === g.remoteView.serverPlayerEntity.parentId,
+      const car = g.stateView.serverEntities.find(
+        (e) => e.id === g.stateView.serverPlayerEntity.parentId,
       );
       if (!car?.collider) throw Error("Missing car");
       const c = car.collider;
@@ -83,9 +83,9 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
     const state = () =>
       page.evaluate(() => {
         const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-        const remains = g.remoteView.serverEntities.find((e) => e.type.startsWith("roadkill:"));
-        const car = g.remoteView.serverEntities.find(
-          (e) => e.id === g.remoteView.serverPlayerEntity.parentId,
+        const remains = g.stateView.serverEntities.find((e) => e.type.startsWith("roadkill:"));
+        const car = g.stateView.serverEntities.find(
+          (e) => e.id === g.stateView.serverPlayerEntity.parentId,
         );
         return {
           x: car?.position.wx ?? 0,

@@ -1,9 +1,9 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import { herdWorkRecipe } from "../scenarios/HerdWorkRecipe.js";
 import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import type { WorkContext } from "./AnimalWorkSystem.js";
 import { createFauna, faunaProfile } from "./Fauna.js";
 import { forageType } from "./ForageResources.js";

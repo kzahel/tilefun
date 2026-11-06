@@ -4,11 +4,12 @@ import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
 import { updateDeerAI } from "../wildlife/deerAI.js";
 import { updateFaunaAI } from "../wildlife/faunaAI.js";
 import { updateFrogAI } from "../wildlife/frogAI.js";
-import { updateMallardAI, type WildlifeEnvironment } from "../wildlife/mallardAI.js";
+import { updateMallardAI } from "../wildlife/mallardAI.js";
 import { updatePredatorAI } from "../wildlife/predatorAI.js";
 import { robinWorkBudget } from "../wildlife/RobinWorkBudget.js";
 import { updateRabbitAI } from "../wildlife/rabbitAI.js";
 import { updateRobinAI } from "../wildlife/robinAI.js";
+import type { WildlifeEnvironment } from "../wildlife/WildlifeEnvironment.js";
 import type { AiPlanningScheduler } from "./AiPlanningScheduler.js";
 
 /**

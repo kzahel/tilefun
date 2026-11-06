@@ -1,10 +1,10 @@
-import { required } from "../art/ArtCatalog.js";
 import {
   type OutdoorAsset,
   type OutdoorMetadata,
   outdoorProp,
 } from "../assets/outdoor/OutdoorCatalog.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
+import { required } from "../shared/required.js";
 import { FLAT_SCENARIO, type ScenarioRecipe, scenarioWalls } from "./ScenarioRecipe.js";
 export function outdoorRecipe(asset: OutdoorAsset, metadata: OutdoorMetadata): ScenarioRecipe {
   const width = Math.max(240, asset.rect[2] + 100),

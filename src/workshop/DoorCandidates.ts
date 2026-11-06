@@ -1,8 +1,8 @@
 import type { ArtCatalog } from "../art/ArtCatalog.js";
-import { required } from "../art/ArtCatalog.js";
 import { loadVerifiedArtImage, sha256 } from "../art/ArtSource.js";
 import { reviewContext2D } from "../art/reviewCanvas.js";
 import type { GameAssets } from "../assets/GameAssets.js";
+import { required } from "../shared/required.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export const DOOR_CASES = ["door-butcher-v1-left", "door-butcher-v1-right"];

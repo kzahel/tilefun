@@ -47,8 +47,8 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   const state = () =>
     page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-      const p = g.remoteView.serverPlayerEntity;
-      const cars = g.remoteView.serverEntities.filter(
+      const p = g.stateView.serverPlayerEntity;
+      const cars = g.stateView.serverEntities.filter(
         (e) => e.type.startsWith("train-carriage-v1:") || e.type.startsWith("train-curve-proof-v1"),
       );
       const middle = cars.find(
@@ -118,7 +118,7 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
       __game: {
         renderer: import("../src/rendering/RenderFrame.js").RenderBackend;
         time: { presentationSeconds: number; alpha: number };
-        remoteView: import("../src/client/ClientStateView.js").RemoteStateView;
+        stateView: import("../src/client/ClientStateView.js").RemoteStateView;
       };
       __trainCapture?: {
         stop(): TrainDisplaySample[];
@@ -135,7 +135,7 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
             ["train-carriage-v1:middle", "train-curve-proof-v1"].includes(i.sheetKey),
         );
         if (car?.kind === "sprite" && samples.length < 600) {
-          const p = g.remoteView.presentedPlayerEntity;
+          const p = g.stateView.presentedPlayerEntity;
           samples.push({
             at: performance.now(),
             time: g.time.presentationSeconds * 1000,
@@ -179,7 +179,7 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
     page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
       return (
-        g.remoteView.physicsState?.bodies.find((b) => b.id === g.remoteView.serverPlayerEntity.id)
+        g.stateView.physicsState?.bodies.find((b) => b.id === g.stateView.serverPlayerEntity.id)
           ?.jumpQueued ?? false
       );
     });

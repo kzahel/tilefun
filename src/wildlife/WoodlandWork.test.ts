@@ -1,9 +1,9 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
 import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { woodlandWorkRecipe } from "../scenarios/WoodlandWorkRecipe.js";
+import { required } from "../shared/required.js";
 import { createFauna } from "./Fauna.js";
 import { tickFoodSources } from "./FoodGrowth.js";
 import { createFoodSource, createForageItem } from "./ForageResources.js";

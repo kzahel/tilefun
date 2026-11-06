@@ -203,7 +203,7 @@ export async function sampleCityClient(seconds) {
       maxTravel,
       Math.hypot(p.wx - initialPosition.wx, p.wy - initialPosition.wy),
     );
-    const d = g.remoteView._predictor?.lastReconcileDiagnostics;
+    const d = g.stateView._predictor?.lastReconcileDiagnostics;
     if (d) {
       maxReplay = Math.max(maxReplay, d.replayCount);
       maxResim = Math.max(maxResim, d.resimPosErr);

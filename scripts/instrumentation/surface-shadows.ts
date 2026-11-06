@@ -93,7 +93,6 @@ try {
             [],
             false,
             undefined,
-            undefined,
             frame,
           );
           if (tick >= 60) samples.push(performance.now() - start);

@@ -56,7 +56,7 @@ describe("actor depth over prop tops", () => {
     const { zHeight: _height, ...infinite } = bed.collider;
     expect(propDepthSurfaces([{ ...bed, collider: infinite }])).toEqual([]);
   });
-  it("uses the corrected rule in the live scene collector, including prediction ghosts", () => {
+  it("uses the corrected rule in the live scene collector", () => {
     const p = player(64, 64, 8);
     const camera = new Camera();
     camera.setViewport(800, 600);
@@ -71,10 +71,9 @@ describe("actor depth over prop tops", () => {
       { collectElevationItems: () => [] } as unknown as TileRenderer,
       [],
       false,
-      [{ entityId: p.id, wx: 64, wy: 65, wz: 8 }],
     );
     const sprites = items.filter((i) => i.kind === "sprite");
-    expect(sprites.map((i) => i.sheetKey)).toEqual(["bed", "player", "player"]);
+    expect(sprites.map((i) => i.sheetKey)).toEqual(["bed", "player"]);
     expect(sprites[1]?.zOffset).toBe(8);
   });
 });
@@ -172,7 +171,7 @@ describe("cached prop depth metadata", () => {
     expect(cache.getDiagnostics()).toMatchObject({ residentProps: 0, borrowedSurfaces: 0 });
   });
 
-  it("preserves scene and ghost ordering through edits, filtering, movement and realm reset", () => {
+  it("preserves scene ordering through edits, filtering, movement and realm reset", () => {
     const prop = structuredClone(bed);
     const actor = player(64, 64, 8);
     const frame = new SceneFrame();
@@ -190,7 +189,6 @@ describe("cached prop depth metadata", () => {
         { collectElevationItems: () => [] } as unknown as TileRenderer,
         [],
         false,
-        [{ entityId: actor.id, wx: 64, wy: 65, wz: 8 }],
         new Set<number>(),
         storage,
       );

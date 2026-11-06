@@ -23,16 +23,6 @@ export const roadkillType = (type: string): string => `${PREFIX}${type}`;
 export const isSmallAnimal = (type: string): boolean =>
   SMALL_ANIMAL_SPECIES.has(creatureSpecies({ type }) ?? "");
 
-export function canBecomeRoadkill(entity: Entity): boolean {
-  return (
-    isSmallAnimal(entity.type) &&
-    entity.deathTimer === undefined &&
-    entity.parentId === undefined &&
-    !entity.wanderAI?.following &&
-    entity.wanderAI?.state !== "ridden"
-  );
-}
-
 /** Separate inert actors let ordinary removal persist the original animal's death.
  * They reuse the source sheet, with a fixed first pose and no AI/body/support. */
 export function roadkillDefinition(def: EntityDef): EntityDef {

@@ -244,7 +244,6 @@ const lab = {
       [],
       true,
       undefined,
-      undefined,
       grassFrame,
     );
     // Freeze blade rotation for raster parity; animation is covered by collector tests.

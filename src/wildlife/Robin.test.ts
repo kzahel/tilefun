@@ -1,7 +1,6 @@
 import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
@@ -17,6 +16,7 @@ import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { applyEntityDelta, diffEntitySnapshots } from "../shared/entityDelta.js";
+import { required } from "../shared/required.js";
 import { deserializeEntity, serializeEntity } from "../shared/serialization.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { createRobin, ROBIN_CLIPS, ROBIN_IMAGE, ROBIN_TYPE } from "./Robin.js";

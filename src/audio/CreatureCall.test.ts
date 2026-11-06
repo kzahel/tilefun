@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { required } from "../art/ArtCatalog.js";
+import { required } from "../shared/required.js";
 import { createPredator } from "../wildlife/Predator.js";
 import { animalVoiceForSpecies } from "./AnimalVoice.js";
 import { AudioManager } from "./AudioManager.js";

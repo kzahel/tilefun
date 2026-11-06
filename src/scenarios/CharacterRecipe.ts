@@ -1,4 +1,3 @@
-import { required } from "../art/ArtCatalog.js";
 import {
   type CharacterDefinition,
   type CharacterSettings,
@@ -6,6 +5,7 @@ import {
 } from "../characters/CharacterCatalog.js";
 import { createPlayer } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
+import { required } from "../shared/required.js";
 import { FLAT_SCENARIO, type ScenarioRecipe, scenarioWalls } from "./ScenarioRecipe.js";
 /** Bounded fixture: a wall, 16px passage, three 4px steps, and 20px overhead clearance. */
 export const CHARACTER_TEST_BLOCKS = [

@@ -1,5 +1,5 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
+import { required } from "../shared/required.js";
 import { ScenarioSession } from "./ScenarioSession.js";
 import { vehicleGeometryRecipe } from "./VehicleGeometryRecipe.js";
 

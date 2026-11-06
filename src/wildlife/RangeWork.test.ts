@@ -1,10 +1,10 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
 import { rangeWorkRecipe } from "../scenarios/RangeWorkRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { createFauna } from "./Fauna.js";
 import { tickFoodSources } from "./FoodGrowth.js";
 import { createFoodSource, createForageItem } from "./ForageResources.js";

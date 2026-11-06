@@ -1,11 +1,11 @@
 import type { ArtCatalog } from "../art/ArtCatalog.js";
-import { required } from "../art/ArtCatalog.js";
 import { sha256 } from "../art/ArtSource.js";
 import { drawParkingStudy, parkingCase } from "../art/studies/ParkingLotStudy.js";
 import type { GameAssets } from "../assets/GameAssets.js";
 import { FENCED_TREES } from "../patterns/FencedTrees.js";
 import { applyPatternEdit, type PatternDocument } from "../patterns/PatternDocument.js";
 import { renderPatternDocument } from "../patterns/PatternRuntime.js";
+import { required } from "../shared/required.js";
 import { buildDoorCandidate } from "./DoorCandidates.js";
 import { buildParkingCandidate } from "./ParkingCandidates.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";

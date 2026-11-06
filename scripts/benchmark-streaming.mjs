@@ -286,7 +286,7 @@ try {
         if (result.error) throw Error(result.output.join("\n"));
       }, arrival);
       await page.waitForFunction((arrival) => {
-        const p = document.querySelector("#game").__game.remoteView.serverPlayerEntity.position;
+        const p = document.querySelector("#game").__game.stateView.serverPlayerEntity.position;
         return Math.hypot(p.wx - arrival.x * 16, p.wy - arrival.y * 16) < 1;
       }, arrival);
     }
@@ -563,7 +563,7 @@ try {
             longestGapFrames = Math.max(longestGapFrames, currentGap);
             maxIncomplete = Math.max(maxIncomplete, incomplete);
             maxLoaded = Math.max(maxLoaded, game.stateView.world.chunks.loadedCount);
-            maxBuffered = Math.max(maxBuffered, game.remoteView?.pendingMessageCount ?? 0);
+            maxBuffered = Math.max(maxBuffered, game.stateView?.pendingMessageCount ?? 0);
             const ack = game.stateView.lastProcessedInputSeq;
             maxAckGap = Math.max(maxAckGap, lastSent - ack);
             if (ack !== lastAck) {

@@ -1,3 +1,4 @@
+import { lcgNext } from "../shared/Determinism.js";
 import type { FierceBehaviorProfile } from "../wildlife/FierceCreatures.js";
 import { type SmallAnimalCallKind, smallAnimalCallSamples } from "./SmallAnimalCall.js";
 
@@ -21,7 +22,7 @@ export function creatureCallSamples(kind: CreatureCallKind, sampleRate: number):
   for (let i = 0; i < output.length; i++) {
     const t = i / sampleRate,
       fraction = t / duration;
-    seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+    seed = lcgNext(seed);
     const noise = seed / 2147483648 - 1;
     const pitch =
       kind === "owl"

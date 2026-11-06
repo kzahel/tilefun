@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { createPredator } from "./Predator.js";
 import { clearPredatorFlight, resolvePredatorCatches, startlePredator } from "./predatorAI.js";
 import { createRabbit } from "./Rabbit.js";

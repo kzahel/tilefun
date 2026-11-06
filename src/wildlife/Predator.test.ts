@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import type { Entity } from "../entities/Entity.js";
 import { EntityManager } from "../entities/EntityManager.js";
@@ -10,6 +9,7 @@ import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { decodeActor, durableId, encodeActor } from "../persistence/ActorRecords.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { createDeer } from "./Deer.js";
 import { createFauna } from "./Fauna.js";
 import { dietFor } from "./FoodWeb.js";

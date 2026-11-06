@@ -1,11 +1,12 @@
-import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { createProp } from "../entities/PropFactories.js";
 import { deriveTerrain } from "../generation/deriveTerrain.js";
 import { insideDenseBounds } from "../generation/regional/DenseDistrictPlanner.js";
 import { intersects } from "../generation/regional/RegionalPlanner.js";
 import { RoadType } from "../road/RoadType.js";
+import { required } from "../shared/required.js";
 import { TrafficStrategy } from "../traffic/TrafficNetwork.js";
 import { Chunk } from "../world/Chunk.js";
 import { nearestRail } from "./RailPath.js";
@@ -20,7 +21,8 @@ export class RailwayStrategy extends TrafficStrategy {
     return this.railways
       .query({ minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 })
       .flatMap((l) =>
-        l.path && nearestRail(l.path, cx * 256 + 128, cy * 256 + 128).distance < 320
+        l.path &&
+        nearestRail(l.path, cx * CHUNK_SIZE_PX + 128, cy * CHUNK_SIZE_PX + 128).distance < 320
           ? [l.path]
           : [],
       );

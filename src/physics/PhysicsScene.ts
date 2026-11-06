@@ -385,8 +385,16 @@ export class PhysicsScene {
           needed.set(`${cx},${cy}`, { cx, cy });
     }
     for (const box of extra)
-      for (let cy = Math.floor(box.top / 256); cy <= Math.floor(box.bottom / 256); cy++)
-        for (let cx = Math.floor(box.left / 256); cx <= Math.floor(box.right / 256); cx++)
+      for (
+        let cy = Math.floor(box.top / CHUNK_SIZE_PX);
+        cy <= Math.floor(box.bottom / CHUNK_SIZE_PX);
+        cy++
+      )
+        for (
+          let cx = Math.floor(box.left / CHUNK_SIZE_PX);
+          cx <= Math.floor(box.right / CHUNK_SIZE_PX);
+          cx++
+        )
           needed.set(`${cx},${cy}`, { cx, cy });
     if (needed.size > 512) throw Error("Physics section residency exceeds 512 sections");
     for (const key of this.sections.keys())

@@ -1,9 +1,10 @@
-import { required } from "../../art/ArtCatalog.js";
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { BOAT_MOORING_RADIUS, type BoatPlacement } from "../../boats/Boat.js";
+import { CHUNK_SIZE_PX } from "../../config/constants.js";
 import { FOREST_KITS, FOREST_ROW_STEP, forestRowType } from "../../patterns/ForestThicket.js";
 import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
+import { required } from "../../shared/required.js";
 import {
   AQUATIC_HUNTER_PROFILES,
   type AquaticHunterSpecies,
@@ -252,13 +253,13 @@ export class NaturalLandscape {
             if (old && near(old.bounds, x, y, radius)) valid = false;
           }
         for (
-          let py = Math.floor((y - radius) / 256);
-          py <= Math.floor((y + radius) / 256) && valid;
+          let py = Math.floor((y - radius) / CHUNK_SIZE_PX);
+          py <= Math.floor((y + radius) / CHUNK_SIZE_PX) && valid;
           py++
         )
           for (
-            let px = Math.floor((x - radius) / 256);
-            px <= Math.floor((x + radius) / 256) && valid;
+            let px = Math.floor((x - radius) / CHUNK_SIZE_PX);
+            px <= Math.floor((x + radius) / CHUNK_SIZE_PX) && valid;
             px++
           ) {
             const old = this.originalRefuges.lagoon(px, py);
@@ -289,7 +290,7 @@ export class NaturalLandscape {
       // Terrain collision samples tile centers. Snap the entire northern hull
       // edge inside the first water row, including fractional/negative shores.
       wy = Math.floor(lake.y - lake.ry + 0.5) * 16 + 1 + BOAT_MOORING_RADIUS;
-    return Math.floor(wx / 256) === cx && Math.floor(wy / 256) === cy
+    return Math.floor(wx / CHUNK_SIZE_PX) === cx && Math.floor(wy / CHUNK_SIZE_PX) === cy
       ? [
           {
             identity: `lake-boat:${this.world.seed}:${Math.floor(cx / 32)}:${Math.floor(cy / 32)}`,
@@ -317,7 +318,11 @@ export class NaturalLandscape {
     };
     const add = (species: FaunaSpecies, x: number, y: number, i: number) => {
       const point = { wx: x * 16, wy: y * 16 };
-      if (Math.floor(point.wx / 256) !== cx || Math.floor(point.wy / 256) !== cy) return;
+      if (
+        Math.floor(point.wx / CHUNK_SIZE_PX) !== cx ||
+        Math.floor(point.wy / CHUNK_SIZE_PX) !== cy
+      )
+        return;
       const e = createFauna(species, point.wx, point.wy),
         ai = required(e.fauna);
       ai.home = { ...point };
@@ -383,7 +388,11 @@ export class NaturalLandscape {
     );
     const addHunter = (species: AquaticHunterSpecies, x: number, y: number) => {
       const point = { wx: x * 16, wy: y * 16 };
-      if (Math.floor(point.wx / 256) !== cx || Math.floor(point.wy / 256) !== cy) return;
+      if (
+        Math.floor(point.wx / CHUNK_SIZE_PX) !== cx ||
+        Math.floor(point.wy / CHUNK_SIZE_PX) !== cy
+      )
+        return;
       const p = required(AQUATIC_HUNTER_PROFILES.find((p) => p.species === species));
       if (!deepBody(x, y, p.body)) return;
       const ai = required(createPredator(species, point.wx, point.wy).predator);
@@ -443,8 +452,8 @@ export class NaturalLandscape {
     const h = (salt: number) => valueNoise(cx, cy, this.world.seed + salt);
     let lagoon: NaturalPond | null = null;
     if (h(8201) < 0.22) {
-      const x = cx * 256 + 80 + h(8209) * 96,
-        y = cy * 256 + 80 + h(8211) * 96,
+      const x = cx * CHUNK_SIZE_PX + 80 + h(8209) * 96,
+        y = cy * CHUNK_SIZE_PX + 80 + h(8211) * 96,
         rx = 36,
         ry = 28,
         radius = 48;
@@ -501,7 +510,7 @@ export class NaturalLandscape {
     return false;
   }
   lagoonAt(x: number, y: number) {
-    const pond = this.lagoon(Math.floor(x / 256), Math.floor(y / 256));
+    const pond = this.lagoon(Math.floor(x / CHUNK_SIZE_PX), Math.floor(y / CHUNK_SIZE_PX));
     if (!pond || !near(pond.bounds, x, y, 0.01)) return undefined;
     const radius = Math.hypot((x - pond.x) / pond.rx, (y - pond.y) / pond.ry);
     const edge = 1 + fbm(x / 18, y / 18, this.world.seed + 8221, 2) * 0.08;
@@ -522,7 +531,11 @@ export class NaturalLandscape {
       if (!profile) return;
       const groupId = `${identityPrefix}:${this.world.seed}:${refuge.id}`;
       positions.forEach((point, i) => {
-        if (Math.floor(point.wx / 256) !== cx || Math.floor(point.wy / 256) !== cy) return;
+        if (
+          Math.floor(point.wx / CHUNK_SIZE_PX) !== cx ||
+          Math.floor(point.wy / CHUNK_SIZE_PX) !== cy
+        )
+          return;
         const fauna = createFauna(species, point.wx, point.wy).fauna;
         if (!fauna) throw Error("Missing water fauna behavior");
         fauna.home = { ...home };
@@ -622,7 +635,11 @@ export class NaturalLandscape {
       }
       if (hunter) {
         positions.forEach((point, i) => {
-          if (Math.floor(point.wx / 256) !== cx || Math.floor(point.wy / 256) !== cy) return;
+          if (
+            Math.floor(point.wx / CHUNK_SIZE_PX) !== cx ||
+            Math.floor(point.wy / CHUNK_SIZE_PX) !== cy
+          )
+            return;
           const predator = required(createPredator(hunter.species, point.wx, point.wy).predator);
           predator.home = { ...home };
           predator.randomState =
@@ -679,8 +696,8 @@ export class NaturalLandscape {
           if (
             companion &&
             deep &&
-            Math.floor(point.wx / 256) === cx &&
-            Math.floor(point.wy / 256) === cy
+            Math.floor(point.wx / CHUNK_SIZE_PX) === cx &&
+            Math.floor(point.wy / CHUNK_SIZE_PX) === cy
           ) {
             const predator = required(
               createPredator(companion.species, point.wx, point.wy).predator,
@@ -759,7 +776,7 @@ export class NaturalLandscape {
   /** Reserve an open ring around admitted ponds for wildlife and player access. */
   pondBank(x: number, y: number, clearance = 0): boolean {
     const p = this.pond(Math.floor(x / 128), Math.floor(y / 128));
-    const bay = this.lagoon(Math.floor(x / 256), Math.floor(y / 256));
+    const bay = this.lagoon(Math.floor(x / CHUNK_SIZE_PX), Math.floor(y / CHUNK_SIZE_PX));
     const lake = this.lake(Math.floor(x / 512), Math.floor(y / 512));
     return (
       (!!lake &&
@@ -799,7 +816,7 @@ export class NaturalLandscape {
       const angle = h(7411) * Math.PI * 2 + i * 0.5;
       const wx = (pond.x + Math.cos(angle) * pond.rx * 1.32) * 16;
       const wy = (pond.y + Math.sin(angle) * pond.ry * 1.32) * 16;
-      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+      if (Math.floor(wx / CHUNK_SIZE_PX) !== cx || Math.floor(wy / CHUNK_SIZE_PX) !== cy) continue;
       const duck = createMallard(wx, wy),
         ai = duck.mallard;
       if (!ai) throw new Error("Missing mallard behavior");
@@ -844,7 +861,7 @@ export class NaturalLandscape {
       if (!point) continue;
       occupied.push(point);
       const { wx, wy } = point;
-      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+      if (Math.floor(wx / CHUNK_SIZE_PX) !== cx || Math.floor(wy / CHUNK_SIZE_PX) !== cy) continue;
       const frog = createFrog(wx, wy),
         ai = frog.frog;
       if (!ai) throw new Error("Missing frog behavior");
@@ -982,7 +999,7 @@ export class NaturalLandscape {
     if (!p) return [];
     const wx = (glade.x + 5) * 16,
       wy = (glade.y + 4) * 16;
-    if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) return [];
+    if (Math.floor(wx / CHUNK_SIZE_PX) !== cx || Math.floor(wy / CHUNK_SIZE_PX) !== cy) return [];
     const predator = required(createPredator(p.species, wx, wy).predator);
     predator.home = { wx: glade.x * 16, wy: glade.y * 16 };
     predator.randomState = Math.floor(h(8153) * 4294967296) >>> 0;
@@ -1023,7 +1040,7 @@ export class NaturalLandscape {
     for (const [i, offset] of offsets.entries()) {
       const x = wx + required(offset[0]),
         y = wy + required(offset[1]);
-      if (Math.floor(x / 256) !== cx || Math.floor(y / 256) !== cy) continue;
+      if (Math.floor(x / CHUNK_SIZE_PX) !== cx || Math.floor(y / CHUNK_SIZE_PX) !== cy) continue;
       const predator = required(createPredator(p.species, x, y).predator);
       predator.home = { wx: glade.x * 16, wy: glade.y * 16 };
       if (p.fierce && ["dragon", "griffin", "spider"].includes(p.fierce.kind))
@@ -1048,7 +1065,7 @@ export class NaturalLandscape {
       for (let i = 0; i < 2; i++) {
         const x = wx + 40 + i * 16,
           y = wy + 24 - i * 32;
-        if (Math.floor(x / 256) !== cx || Math.floor(y / 256) !== cy) continue;
+        if (Math.floor(x / CHUNK_SIZE_PX) !== cx || Math.floor(y / CHUNK_SIZE_PX) !== cy) continue;
         const rabbit = required(createRabbit(x, y).rabbit);
         rabbit.home = { wx, wy };
         rabbit.radius = 112;
@@ -1079,7 +1096,7 @@ export class NaturalLandscape {
       const angle = h(7953) * Math.PI * 2 + (i * Math.PI * 2) / count;
       const wx = (glade.x + Math.cos(angle) * 3) * 16,
         wy = (glade.y + Math.sin(angle) * 3) * 16;
-      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+      if (Math.floor(wx / CHUNK_SIZE_PX) !== cx || Math.floor(wy / CHUNK_SIZE_PX) !== cy) continue;
       const ai = createDeer(wx, wy).deer;
       if (!ai) throw new Error("Missing deer behavior");
       ai.home = { wx: glade.x * 16, wy: glade.y * 16 };
@@ -1245,7 +1262,8 @@ export class NaturalLandscape {
         const separation = p.group === 1 ? 0 : Math.max(24, p.body[0] + 8);
         const wx = home.x * 16 + Math.cos(angle) * separation,
           wy = home.y * 16 + Math.sin(angle) * separation;
-        if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+        if (Math.floor(wx / CHUNK_SIZE_PX) !== cx || Math.floor(wy / CHUNK_SIZE_PX) !== cy)
+          continue;
         const fauna = createFauna(p.species, wx, wy).fauna;
         if (!fauna) throw new Error("Missing fauna behavior");
         fauna.home = { wx: home.x * 16, wy: home.y * 16 };
@@ -1274,7 +1292,8 @@ export class NaturalLandscape {
     if (!home || !p) return [];
     const wx = home.x * 16,
       wy = home.y * 16;
-    const own = (x: number, y: number) => Math.floor(x / 256) === cx && Math.floor(y / 256) === cy;
+    const own = (x: number, y: number) =>
+      Math.floor(x / CHUNK_SIZE_PX) === cx && Math.floor(y / CHUNK_SIZE_PX) === cy;
     const actors: ActorPlacement[] = [];
     if (own(wx, wy)) {
       const predator = required(createPredator(p.species, wx, wy).predator);
@@ -1382,7 +1401,7 @@ export class NaturalLandscape {
       const side = valueNoise(gx, gy, this.world.seed + 7803) < 0.5 ? -1 : 1;
       const wx = tree.wx + side * 28,
         wy = tree.wy + 8;
-      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+      if (Math.floor(wx / CHUNK_SIZE_PX) !== cx || Math.floor(wy / CHUNK_SIZE_PX) !== cy) continue;
       if (
         this.reserved(wx / 16, wy / 16, 1) ||
         this.inThicket(wx / 16, wy / 16, 1) ||
@@ -1420,7 +1439,7 @@ export class NaturalLandscape {
       const angle = h(7653) * Math.PI * 2 + (i * Math.PI * 2) / count;
       const wx = (glade.x + Math.cos(angle) * 1.4) * 16;
       const wy = (glade.y + Math.sin(angle) * 1.4) * 16;
-      if (Math.floor(wx / 256) !== cx || Math.floor(wy / 256) !== cy) continue;
+      if (Math.floor(wx / CHUNK_SIZE_PX) !== cx || Math.floor(wy / CHUNK_SIZE_PX) !== cy) continue;
       const ai = createRabbit(wx, wy).rabbit;
       if (!ai) throw new Error("Missing rabbit behavior");
       ai.home = { wx: glade.x * 16, wy: glade.y * 16 };

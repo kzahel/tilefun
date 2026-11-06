@@ -109,8 +109,8 @@ try {
           renderedDraw = { kind: "mesh", x, y, width, height };
         return drawTexture.call(this, texture, x, y, width, height);
       };
-      const begin = g.remoteView.beginPresentation;
-      g.remoteView.beginPresentation = function (...args) {
+      const begin = g.stateView.beginPresentation;
+      g.stateView.beginPresentation = function (...args) {
         begin.apply(this, args);
         const e = this.presentedPlayerEntity;
         presented = { x: e.position.wx, y: e.position.wy, z: e.wz ?? 0 };
@@ -128,7 +128,7 @@ try {
         worldOffset = { x: 0, y: 0 };
         render(alpha, time);
         if (!window.__movementProbe.enabled) return;
-        const p = g.remoteView._predictor,
+        const p = g.stateView._predictor,
           player = g.stateView.playerEntity,
           diag = g.stateView.predictionDiagnostics;
         const scale = g.camera.scale,

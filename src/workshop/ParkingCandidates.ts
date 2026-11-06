@@ -1,10 +1,11 @@
-import { type ArtCatalog, required } from "../art/ArtCatalog.js";
+import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { sha256 } from "../art/ArtSource.js";
 import { reviewContext2D } from "../art/reviewCanvas.js";
 import { drawParkingStudy, parkingCase, parkingStudy } from "../art/studies/ParkingLotStudy.js";
 import renderer from "../art/studies/ParkingLotStudy.ts?raw";
 import type { GameAssets } from "../assets/GameAssets.js";
 import { CITY_SURFACE_SOURCE } from "../road/CitySurfaceRecipes.js";
+import { required } from "../shared/required.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export async function buildParkingCandidate(

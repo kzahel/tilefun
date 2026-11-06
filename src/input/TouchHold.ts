@@ -1,5 +1,5 @@
 import { TILE_SIZE } from "../config/constants.js";
-import type { Movement } from "./ActionManager.js";
+import type { Movement } from "../shared/Movement.js";
 import type { TapTarget } from "./TapMovement.js";
 
 interface Contact {

@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { expect, it, vi } from "vitest";
-import { required } from "../art/ArtCatalog.js";
+import { required } from "../shared/required.js";
 import { CarMeshAsset } from "./CarMeshAsset.js";
 import { poseOrientation } from "./MeshPresentation.js";
 

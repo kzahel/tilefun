@@ -2,7 +2,6 @@ import { afterEach, expect, it } from "vitest";
 import { createChicken } from "../entities/Chicken.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
-import type { Movement } from "../input/ActionManager.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
@@ -14,6 +13,7 @@ import {
   encodeClientMessage,
   encodeServerMessage,
 } from "../shared/binaryCodec.js";
+import type { Movement } from "../shared/Movement.js";
 import { World } from "../world/World.js";
 import { RemoteStateView } from "./ClientStateView.js";
 import { PlayerPredictor } from "./PlayerPredictor.js";

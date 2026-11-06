@@ -8,7 +8,7 @@ import { expect, it } from "vitest";
 import captureRecipe from "../../art-source/vehicle-bake/towing-fallbacks/v2/recipe.json" with {
   type: "json",
 };
-import { required } from "../art/ArtCatalog.js";
+import { required } from "../shared/required.js";
 import profiles from "../traffic/towing-profiles.json" with { type: "json" };
 import { CarMeshAsset } from "./CarMeshAsset.js";
 import { TOW, towMeshOffset, towPitch } from "./TowingPose.js";

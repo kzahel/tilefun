@@ -1,10 +1,10 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { VEHICLE_PALETTE } from "../editor/EditorPalettes.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { required } from "../shared/required.js";
 import { DRIVABLE_MODELS, VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { around } from "./InterestManager.js";

@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { expect } from "vitest";
-import { required } from "../art/ArtCatalog.js";
-import type { CarMeshAsset } from "../rendering/CarMeshAsset.js";
+import type { CarMeshAsset } from "../src/rendering/CarMeshAsset.js";
+import { required } from "../src/shared/required.js";
 
 /** Measure real tire vertices and their world-space travel, independently of
  * the runtime's private wheel list. Mixed axle radii must preserve arc length. */

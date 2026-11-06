@@ -69,7 +69,7 @@ test("farmhouse and tiny outbuilding enter and return through the normal door co
       .poll(() =>
         page.evaluate(() => {
           const g = (document.querySelector("#game") as unknown as { __game: GameClient }).__game;
-          return g.remoteView.serverPlayerEntity.position;
+          return g.stateView.serverPlayerEntity.position;
         }),
       )
       .toEqual(door.outside);

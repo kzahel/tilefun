@@ -1,9 +1,9 @@
 import { afterEach, expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
+import { required } from "../shared/required.js";
 import { createVehicle } from "../traffic/Vehicle.js";
 import { rotateBodyVector } from "./BodyRotation.js";
 import { PHYSICS_DT, PHYSICS_PIXELS_PER_METRE } from "./PhysicsDefaults.js";

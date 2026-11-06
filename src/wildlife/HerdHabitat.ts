@@ -1,4 +1,5 @@
 import { TerrainId } from "../autotile/TerrainId.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { ActorPlacement } from "../generation/Generator.js";
 import type { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { faunaType } from "./Fauna.js";
@@ -23,8 +24,8 @@ export function herdSupplies(
       [56, -24],
       [-56, -24],
     ]) {
-      const wx = Math.max(cx * 256 + 16, Math.min(cx * 256 + 240, a.wx + dx)),
-        wy = Math.max(cy * 256 + 16, Math.min(cy * 256 + 240, a.wy + dy));
+      const wx = Math.max(cx * CHUNK_SIZE_PX + 16, Math.min(cx * CHUNK_SIZE_PX + 240, a.wx + dx)),
+        wy = Math.max(cy * CHUNK_SIZE_PX + 16, Math.min(cy * CHUNK_SIZE_PX + 240, a.wy + dy));
       if (
         Math.hypot(wx - a.wx, wy - a.wy) < 20 ||
         nature.inThicket(wx / 16, wy / 16, 1) ||

@@ -3,7 +3,6 @@ import { readFileSync } from "node:fs";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
@@ -11,6 +10,7 @@ import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { CarMeshAsset } from "../rendering/CarMeshAsset.js";
+import { required } from "../shared/required.js";
 import {
   applyVehicleFacing,
   createVehicle,

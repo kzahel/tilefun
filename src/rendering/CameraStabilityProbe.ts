@@ -1,4 +1,5 @@
 import { Spritesheet } from "../assets/Spritesheet.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { Chunk } from "../world/Chunk.js";
 import { Camera } from "./Camera.js";
 import { CanvasRenderBackend } from "./CanvasRenderBackend.js";
@@ -58,7 +59,7 @@ export function probeCameraStability(pixelSnap = true) {
       ["gpu", gpu, output],
     ] as const) {
       for (const cx of [-1, 0]) {
-        const base = cx * 256;
+        const base = cx * CHUNK_SIZE_PX;
         const range = { minCx: cx, maxCx: cx, minCy: cx, maxCy: cx };
         const world = {
           getChunkIfLoaded: (x: number, y: number) => (x === cx && y === cx ? chunk : undefined),
@@ -70,7 +71,7 @@ export function probeCameraStability(pixelSnap = true) {
         const groundContext = ground?.getContext("2d");
         if (!ground || !groundContext) throw Error("Missing prepared probe terrain");
         groundContext.fillStyle = "#184c18";
-        groundContext.fillRect(0, 0, 256, 256);
+        groundContext.fillRect(0, 0, CHUNK_SIZE_PX, CHUNK_SIZE_PX);
         groundContext.fillStyle = "#ff0000";
         groundContext.fillRect(80, 112, 7, 11);
         touchRaster(ground);

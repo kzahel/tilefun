@@ -1,5 +1,4 @@
 import { expect, it } from "vitest";
-import { required } from "../../art/ArtCatalog.js";
 import { TerrainId } from "../../autotile/TerrainId.js";
 import { aabbOverlapsPropWalls, getEntityAABB } from "../../entities/collision.js";
 import { createProp } from "../../entities/PropFactories.js";
@@ -9,6 +8,7 @@ import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
 import { RoadType } from "../../road/RoadType.js";
 import { naturalLandscapeRecipe } from "../../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioSession } from "../../scenarios/ScenarioSession.js";
+import { required } from "../../shared/required.js";
 import { createFauna, faunaProfile } from "../../wildlife/Fauna.js";
 import { faunaHabitatAllows } from "../../wildlife/faunaAI.js";
 import { Chunk } from "../../world/Chunk.js";

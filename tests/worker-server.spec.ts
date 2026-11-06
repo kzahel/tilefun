@@ -23,7 +23,6 @@ const hostState = (page: Page) =>
     // biome-ignore lint/suspicious/noExplicitAny: test hook
     const g = (document.querySelector("#game") as any).__game;
     return {
-      server: g.server,
       transport: g.transport.getDebugInfo(),
       metrics: await g.transport.getDiagnostics(),
       position: { ...g.stateView.playerEntity.position },
@@ -85,7 +84,7 @@ test("lake travel and rejected open-water travel keep the local Worker, map and 
         page.evaluate(() => {
           // biome-ignore lint/suspicious/noExplicitAny: test hook
           const g = (document.querySelector("#game") as any).__game;
-          const p = g.remoteView.serverPlayerEntity.position;
+          const p = g.stateView.serverPlayerEntity.position;
           return g.stateView.world.getCollision(Math.floor(p.wx / 16), Math.floor(p.wy / 16));
         }),
       )
@@ -120,7 +119,6 @@ test("lake travel and rejected open-water travel keep the local Worker, map and 
 test("single player renders while its authoritative Worker is busy", async ({ page }) => {
   await flatWorld(page);
   const before = await hostState(page);
-  expect(before.server).toBeNull();
   expect(before.transport.transport).toContain("Worker");
   const worker = page.workers().find((w) => w.url().includes("local-server.worker"));
   if (!worker) throw Error("No local authority Worker");
@@ -212,8 +210,8 @@ test("Worker saves player and edits before shutdown and restores them on reopen"
     g.loop.stop();
     host.setHidden(true);
     await host.flush();
-    while (g.remoteView.pendingMessageCount) g.remoteView.applyPending();
-    const position = { ...g.remoteView.serverPlayerEntity.position };
+    while (g.stateView.pendingMessageCount) g.stateView.applyPending();
+    const position = { ...g.stateView.serverPlayerEntity.position };
     await host.shutdown();
     return position;
   });

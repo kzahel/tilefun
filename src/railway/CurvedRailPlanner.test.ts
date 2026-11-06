@@ -1,10 +1,10 @@
 import { expect, it } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { pathDistance } from "../generation/regional/PlanGeometry.js";
 import { connectionForOwner, plannedElevation } from "../generation/regional/RegionalPlanner.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { RoadType } from "../road/RoadType.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
+import { required } from "../shared/required.js";
 import { applyChunkSnapshot, serializeChunk } from "../shared/serialization.js";
 import { Chunk } from "../world/Chunk.js";
 import { World } from "../world/World.js";

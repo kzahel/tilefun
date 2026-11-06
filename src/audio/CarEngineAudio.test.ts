@@ -1,6 +1,6 @@
 import { afterEach, expect, it, vi } from "vitest";
-import { required } from "../art/ArtCatalog.js";
 import { createTrain } from "../railway/Train.js";
+import { required } from "../shared/required.js";
 import { createVehicle } from "../traffic/Vehicle.js";
 import { AudioManager } from "./AudioManager.js";
 

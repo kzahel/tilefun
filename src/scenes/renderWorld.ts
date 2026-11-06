@@ -57,7 +57,6 @@ export function renderEntities(
     extraParticles ?? [],
     gc.spriteCatalog.has("grass-blades"),
     undefined,
-    undefined,
     gc.sceneFrame,
     { observer: stateView.playerEntity, visibility: "auto" },
   );

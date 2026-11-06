@@ -47,13 +47,6 @@ import { grassDepthUnderVehicles, isVehicleSprite } from "./VehicleGrassDepth.js
  */
 const Z_SORT_FACTOR = 1;
 
-interface ExtrapolationGhostItem {
-  entityId: number;
-  wx: number;
-  wy: number;
-  wz?: number;
-}
-
 export { interpolatePosition } from "./EntityInterpolation.js";
 
 /**
@@ -74,7 +67,6 @@ export function collectScene(
   terrain: TerrainPresentation,
   particles: ParticlePresentation,
   hasGrass: boolean,
-  extrapolationGhosts?: readonly ExtrapolationGhostItem[],
   drawProps?: ReadonlySet<number>,
   frame?: SceneFrame,
   receiverOptions: ReceiverOptions = {},
@@ -89,10 +81,6 @@ export function collectScene(
         mesh: terrain.meshSurfaceGeometry?.bind(terrain),
       })
     : undefined;
-  const ghostByEntityId =
-    extrapolationGhosts && extrapolationGhosts.length > 0
-      ? new Map(extrapolationGhosts.map((g) => [g.entityId, g]))
-      : undefined;
 
   // Viewport bounds in world coordinates for culling
   const vpTL = camera.screenToWorld(0, 0);
@@ -339,47 +327,6 @@ export function collectScene(
       );
     }
     if (visibleGrass && isVehicleSprite(e.type)) grassVehicles.push(spriteItem);
-
-    const ghost = ghostByEntityId?.get(e.id);
-    if (ghost && Math.hypot(ghost.wx - pos.wx, ghost.wy - pos.wy) >= 0.25) {
-      let ghostZOffset: number;
-      if (ghost.wz !== undefined) {
-        ghostZOffset = ghost.wz;
-      } else if (e.wz !== undefined) {
-        ghostZOffset = e.wz;
-      } else {
-        const ghostTx = Math.floor(ghost.wx / TILE_SIZE);
-        const ghostTy = Math.floor(ghost.wy / TILE_SIZE);
-        const ghostElevOffset = world.getHeightAt(ghostTx, ghostTy) * ELEVATION_PX;
-        ghostZOffset = ghostElevOffset + (e.jumpZ ?? 0);
-      }
-
-      items.push({
-        kind: "sprite",
-        sortKey: depthAboveProps(
-          ghost.wy + (e.sortOffsetY ?? 0) + (ghost.wz ?? e.wz ?? 0) * Z_SORT_FACTOR,
-          e.collider ? getEntityAABB({ wx: ghost.wx, wy: ghost.wy }, e.collider) : null,
-          ghostZOffset,
-          depthSurfaces,
-        ),
-        wx: ghost.wx,
-        wy: ghost.wy,
-        zOffset: ghostZOffset,
-        sheetKey: e.sprite.sheetKey,
-        frameCol: e.sprite.frameCol,
-        frameRow: e.sprite.frameRow,
-        spriteWidth: e.sprite.spriteWidth,
-        spriteHeight: e.sprite.spriteHeight,
-        flipX: e.sprite.flipX ?? false,
-        drawOffsetY: e.sprite.drawOffsetY ?? 0,
-        hasShadow: false,
-        shadowFeetWy: 0,
-        shadowWidth: 0,
-        shadowTerrainZ: 0,
-        flashHidden: false,
-        alpha: 0.35,
-      } satisfies SpriteItem);
-    }
   }
 
   // --- Props ---
@@ -445,7 +392,8 @@ export function collectScene(
       maxWx: vpBR.wx,
       maxWy: vpBR.wy,
     };
-    const nowSec = performance.now() / 1000;
+    // Share the owner's presentation clock (e.g. paused labs); frameless callers keep wall time.
+    const nowSec = frame ? poseTime : performance.now() / 1000;
     const grassStart = items.length;
     appendGrassBladeItems(
       world,
