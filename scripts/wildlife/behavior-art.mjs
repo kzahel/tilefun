@@ -25,7 +25,11 @@ for (const species of ["dog", "crow", "red-squirrel"]) {
     identity: metadata.identity,
     sha256: metadata.sheetSha256,
     image: `demos/wildlife-v2/${species}/behavior-v1/sheet.png`,
-    clips: metadata.clips,
+    // Pinned sprite metadata predates loop flags; chewing loops while the squirrel eats.
+    clips:
+      species === "red-squirrel"
+        ? { ...metadata.clips, eat: { ...metadata.clips.eat, loop: true } }
+        : metadata.clips,
     sockets,
   };
 }

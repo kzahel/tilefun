@@ -1940,7 +1940,8 @@
       "eat": {
         "start": 57,
         "count": 8,
-        "frameDuration": 100
+        "frameDuration": 100,
+        "loop": true
       }
     },
     "sockets": [

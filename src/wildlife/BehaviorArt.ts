@@ -42,32 +42,8 @@ export function behaviorArt(profile: FaunaProfile): FaunaProfile {
     sha256: bank.sha256,
     clips: [
       ...profile.clips,
-      ...extras.map(([name, clip]) => ({
-        ...clip,
-        name,
-        loop:
-          [
-            "scan",
-            "climb",
-            "eat",
-            "sit",
-            "stalk",
-            "browse",
-            "scratch",
-            "sip",
-            "guard",
-            "graze",
-            "drink",
-            "settle",
-            "ruminate",
-            "bleat",
-            "roll",
-            "display",
-            "curled",
-            "rattle",
-          ].includes(name) ||
-          (profile.species === "beaver" && name === "build"),
-      })),
+      // The art bank's `loop` flag is the only source; absent means play once.
+      ...extras.map(([name, clip]) => ({ ...clip, name, loop: clip.loop ?? false })),
     ],
   };
 }

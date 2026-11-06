@@ -73,6 +73,13 @@ Report animal coverage separately from the number of distinct mechanics.
 
 ## One source of progress
 
+Behavior clip looping comes only from each runtime art bank's `loop` flag
+(`src/wildlife/*-art.json`); an absent flag plays once and holds the last frame.
+Owner decision 2026-11-06 (tactical 221, B6) removed the hard-coded loop-name list:
+`fox.stalk`, `rabbit.eat` and `robin.eat` now follow their `loop:false` banks, and
+`scripts/wildlife/behavior-art.mjs` marks `red-squirrel.eat` as looping because its
+pinned sprite metadata has no flag.
+
 The tracked [behavior ledger](../../art-source/wildlife-v2/behavior-campaign.json)
 is the canonical per-animal audit and plan. It contains all 206 current browser
 entries: all 196 original roster entries plus four pet variants, panther and five
