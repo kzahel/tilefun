@@ -18,7 +18,7 @@ import {
 } from "./BodyRotation.js";
 import { assistedJumpVelocity } from "./JumpAssist.js";
 import { teleportBody } from "./PhysicalEdits.js";
-import { physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
+import { carryingSupportId, physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
 import {
   initializePhysics,
   PHYSICS_DT,
@@ -606,10 +606,9 @@ export class PhysicsScene {
         continue;
       }
       const velocity = entry.body.linvel();
-      const support =
-        entry.state.supportId === undefined
-          ? undefined
-          : supportVelocities.get(entry.state.supportId);
+      const support = supportVelocities.get(
+        carryingSupportId(entry.entity, entry.state.supportId, this.bodies),
+      );
       const pressed = input.jumpPressed || (input.jump && !entry.state.jumpHeld);
       entry.state.jumpHeld = input.jump ?? false;
       if (!entry.state.jumpHeld && !input.jumpPressed) delete entry.state.jumpQueued;

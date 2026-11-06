@@ -1245,6 +1245,11 @@ animal can move out from under them, causing an ordinary fall.
 This supersedes the bounce introduced in 077–079, without changing animal startle,
 ball ricochets, physical hops/flights, durable identity or population policy.
 The rule is shared by prediction, input-driven authority and missing-input gravity.
+Since the shared Rapier step (98f97d4a) gave supported bodies their support's
+velocity, players were carried along on fleeing animals and kept re-startling
+them; `carryingSupportId` (2026-11-06) restores this rule: players never take on a
+`wildlife-*` support's velocity, while predators and other riders still do.
+Resting wildlife reports heights within ±0.5 px of the ground, not exactly 0.
 
 Automatic landing impulses and their species constants are removed for
 ducks, frogs and rabbits. Focused headless checks pass, including sustained idle

@@ -217,7 +217,8 @@ for (const animal of [
           (await poses()).some(
             (p) =>
               p.visible &&
-              (animal.hop ? p.z > 2 : p.z === 0) &&
+              // Shared Rapier contacts rest within solver slop, not at exact zero.
+              (animal.hop ? p.z > 2 : Math.abs(p.z) < 0.5) &&
               before.some((b) => Math.hypot(b.x - p.x, b.y - p.y) > 1),
           ),
         { timeout: 12000, intervals: [30] },

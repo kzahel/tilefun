@@ -5,6 +5,19 @@ import { isTrain } from "../railway/Train.js";
 import { vehicleBodySize, vehicleNoseHeading } from "../traffic/Vehicle.js";
 import { isCarryable } from "../wildlife/ForageResources.js";
 import type { PhysicsBodyKind } from "./PhysicsState.js";
+
+/** The support whose motion carries a rider. Wildlife bodies (animals and their
+ * resources) are ordinary solid support for players: an escaping animal moves out
+ * from under them instead of carrying them. Keyed on replicated types so client
+ * prediction follows the same rule; other riders (e.g. predators) keep carrying. */
+export function carryingSupportId(
+  rider: Entity,
+  supportId: number | undefined,
+  bodies: ReadonlyMap<number, { entity: Entity }>,
+): number {
+  const support = bodies.get(supportId ?? -1)?.entity;
+  return rider.type === "player" && support?.type.startsWith("wildlife-") ? -1 : (supportId ?? -1);
+}
 export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
   if (entity.type.startsWith("vehicle-v1:") || isTrain(entity)) return "vehicle";
   if (entity.type === "ball") return "loose";

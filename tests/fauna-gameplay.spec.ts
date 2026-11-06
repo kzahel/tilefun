@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Locator, test } from "@playwright/test";
 import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { FAUNA_PROFILES, faunaType } from "../src/wildlife/Fauna.js";
@@ -10,6 +10,13 @@ test.describe.configure({ mode: "parallel" });
 // browser boundaries: dry walk, ride, hop, pond, shore gait and deep visibility.
 // animal-browser.spec still decodes and animates every roster asset in four views.
 const browserSpecies = new Set(["fox", "horse", "kangaroo", "fish", "penguin", "manta-ray"]);
+// Shared Rapier contacts rest bodies within solver slop of the ground, not at
+// exact zero (205 checkpoint 4c); hops clear 2 px.
+const grounded = (z: number) => Math.abs(z) < 0.5;
+// Landing on a back may leave one sub-pixel solver depenetration tick
+// (about 12px/s, a 0.14px rise); a bounce would approach the 150px/s jump.
+const expectNoBounce = async (c: Locator) =>
+  expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(20);
 for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species))) {
   const TYPE = faunaType(profile.species);
   const [arrivalX, arrivalY] = profile.inspection;
@@ -48,7 +55,7 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
             (await poses()).some(
               (f) =>
                 (f.clip === 1 || (profile.habitat === "shore" && f.clip === 2)) &&
-                (profile.hop ? f.z > 2 : f.z === 0) &&
+                (profile.hop ? f.z > 2 : grounded(f.z)) &&
                 f.frame >=
                   (profile.habitat === "shore" && f.clip === 2
                     ? (profile.clips[2]?.start ?? 0) + 3
@@ -90,7 +97,7 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
       await expect
         // Sample the short native rest phase instead of skipping it between
         // increasingly sparse polls after a slower pet walk.
-        .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 0), {
+        .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)), {
           // Resuming a saved walk needs the same movement/authority budget as
           // initial arrival, including software-rendered CI scheduling delays.
           timeout: Math.max(12_000, Math.ceil(((2 * profile.step) / profile.speed + 8) * 1000)),
@@ -105,14 +112,14 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
             async () => {
               const animals = await poses();
               if (animals.some((f) => f.state === "ridden")) return true;
-              const target = animals.find((f) => f.state !== "scared" && f.z === 0);
+              const target = animals.find((f) => f.state !== "scared" && grounded(f.z));
               // A mount can start walking before the falling player reaches its
               // back. Retry from the ground during rest, without interrupting a
               // landing already in flight or resetting an active herd alarm.
               if (
                 !animals.some((f) => f.state === "scared") &&
                 target?.clip === 0 &&
-                Number(await c.getAttribute("data-player-z")) === 0 &&
+                grounded(Number(await c.getAttribute("data-player-z"))) &&
                 Date.now() - lastHop >= 1000
               ) {
                 await hopOnto.click();
@@ -126,7 +133,7 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
             },
           )
           .toBe(true);
-        await expect(c).toHaveAttribute("data-player-max-vz", "0");
+        await expectNoBounce(c);
         await page.screenshot({ path: `/tmp/tilefun-horse-mounted-${renderer}.png` });
         await page.getByRole("button", { name: "Pause", exact: true }).click();
         await expect(c).toHaveAttribute("data-authority-running", "false");
@@ -145,14 +152,14 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
                 (f) =>
                   f.state === "scared" &&
                   profile.clips[f.clip ?? -1]?.name.startsWith("flee") &&
-                  (profile.hop ? f.z > 2 : f.z === 0),
+                  (profile.hop ? f.z > 2 : grounded(f.z)),
               )
             )
               return true;
             // The button selects the first grounded, non-scared actor. A flight
             // can start between observing rest and clicking, so retry an actual
             // landing once all alarms finish, as in the frog contact check.
-            const target = animals.find((f) => f.state !== "scared" && f.z === 0);
+            const target = animals.find((f) => f.state !== "scared" && grounded(f.z));
             if (!animals.some((f) => f.state === "scared") && target?.clip === 0)
               await hopOnto.click();
             return false;
@@ -170,7 +177,7 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
           intervals: [30],
         })
         .toBe(true);
-      await expect(c).toHaveAttribute("data-player-max-vz", "0");
+      await expectNoBounce(c);
       expect(errors).toEqual([]);
     });
   }

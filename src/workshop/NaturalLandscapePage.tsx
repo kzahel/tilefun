@@ -836,7 +836,7 @@ export default function NaturalLandscapePage() {
               const h = host.current;
               const target = h?.session.view.entities.find(
                 (e) =>
-                  e.type === animal.type && e.wanderAI?.state !== "scared" && (e.wz ?? 0) === 0,
+                  e.type === animal.type && e.wanderAI?.state !== "scared" && (e.wz ?? 0) < 0.5,
               );
               if (!h || !target) return;
               if (canvas.current) canvas.current.dataset.playerMaxVz = "0";
