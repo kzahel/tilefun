@@ -57,9 +57,9 @@ for (const transport of ["ws", "webrtc"] as const) {
             __game: { consoleEngine: import("../src/console/ConsoleEngine.js").ConsoleEngine };
           }
         ).__game;
-        return game.consoleEngine.rconSend?.("sv_speed 2");
+        return game.consoleEngine.rconSend?.("sv_gravity 2");
       });
-      expect(adminOutput?.join(" ")).toContain("2");
+      expect(adminOutput?.join(" ")).toContain("sv_gravity = 2");
       const visitor = await guest.newPage();
       await visitor.goto(url);
       await expect(visitor.locator("#game")).toHaveAttribute("data-ready", "true");
@@ -70,7 +70,7 @@ for (const transport of ["ws", "webrtc"] as const) {
           }
         ).__game;
         try {
-          await game.consoleEngine.rconSend?.("sv_speed 99");
+          await game.consoleEngine.rconSend?.("sv_gravity 3");
           return "allowed";
         } catch (error) {
           return String(error);
@@ -85,10 +85,10 @@ for (const transport of ["ws", "webrtc"] as const) {
                 __game: { consoleEngine: import("../src/console/ConsoleEngine.js").ConsoleEngine };
               }
             ).__game;
-            return game.consoleEngine.rconSend?.("sv_speed");
+            return game.consoleEngine.rconSend?.("sv_gravity");
           })
         )?.join(" "),
-      ).toContain("2");
+      ).toContain("sv_gravity = 2 ");
     } finally {
       await guest.close();
       if (child && child.exitCode === null) {

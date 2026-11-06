@@ -1,4 +1,4 @@
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { LocalTransport } from "../transport/LocalTransport.js";
 import { GameServer } from "./GameServer.js";
 import { browserServerDependencies } from "./hosts/browser.js";
@@ -161,6 +161,31 @@ describe("GameServer", () => {
     });
 
     expect(session.editorEnabled).toBe(false);
+  });
+});
+
+describe("request failures", () => {
+  it("answers failed world requests with request-error instead of leaving them pending", async () => {
+    const { server, transport } = await createTestServer();
+    const messages: import("../shared/protocol.js").ServerMessage[] = [];
+    transport.clientSide.onMessage((m) => messages.push(m));
+    vi.spyOn(server, "listWorlds").mockRejectedValue(new Error("list failed"));
+    vi.spyOn(server, "renameWorld").mockRejectedValue(new Error("rename failed"));
+
+    transport.clientSide.send({ type: "list-worlds", requestId: 41 });
+    transport.clientSide.send({ type: "rename-world", requestId: 42, worldId: "w", name: "n" });
+    await server.settle();
+
+    expect(messages).toContainEqual({
+      type: "request-error",
+      requestId: 41,
+      message: "list failed",
+    });
+    expect(messages).toContainEqual({
+      type: "request-error",
+      requestId: 42,
+      message: "rename failed",
+    });
   });
 });
 

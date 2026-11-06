@@ -217,3 +217,79 @@ Deferred by the owner on 2026-11-06.
 
 Phase evidence, reviewer findings, repairs, remaining work and commits are
 appended below as each phase completes.
+
+### Phase 1 record — green gates and audit bugs
+
+Context change: during delivery another session rebased local `main` onto the
+remote (Biome 2.6.4) and pushed, which removed the divergence and formatted the
+12 benchmark records. The gate is now kept green structurally:
+
+- Biome skips the hash-pinned or snapshot trees `art-source/` and `public/demos/`
+  wholesale (replacing ≈40 hand-listed paths). Knowingly unlinted as a result: a few
+  hand-maintained gallery viewers (`public/demos/*/gallery.js`, `blender-tiger/demo.js`)
+  and root-level art-source JSON; no `src`, script or test module imports them and no longer formats `docs/benchmarks/**`, whose
+  records are written by scripts. `npm run check` now checks 2,215 files in
+  <1 s instead of 8,953 files in ≈8 s. Stale `demo` entries are removed.
+- `npm run hooks:install` opts a checkout into `scripts/git-hooks/pre-commit`
+  (`biome check --staged`, which reads working-tree contents of staged files).
+  It is not installed automatically.
+
+Audit bugs:
+
+| # | Outcome |
+| --- | --- |
+| B1 | Fixed: `GameServer.requestFailed` answers every failing world/realm request with `request-error` (also reused by create-world, arrival and vehicle control); a failed connect-time realm list logs and sends an empty list. Regression test fails on the old code. |
+| B2 | Fixed: one `resetPaintDedup()` replaces three hand-copied resets; native touch test (fails on the old code) proves separate corner taps no longer connect. |
+| B3 | Deferred to phase 3 (typecheck tools/tests). |
+| B4 | Confirmed (narrower: any new note, not every refetch). Fixed: each focus/note target centres once per navigation; clearing the parameter re-arms it. No React DOM test harness exists. |
+| B5 | Confirmed, low impact. Fixed with `useMemo`. |
+| B6 | Confirmed mismatch: only `fox.stalk` changes behavior (JSON `loop:false`, forced to loop); `red-squirrel.eat` lacks a flag. Needs owner decision: honoring JSON would make the fox stalk hold its last frame. Unchanged. |
+| B7 | Confirmed for labs (game presentation time is wall time; scenario labs pause their clock but grass kept swaying). A fix using `frame.presentationTime` was written and reviewed, then withdrawn: `collectScene.ts` source text is hashed into 1,025 Workshop candidate identities (1,008 `nature:*`, 6 `character:*`, 11 geometry diagnostics), so any edit reopens them for human review. Land it with the identity rework in phase 4. |
+| B8 | Confirmed inconsistency from `4df2527a`: the second `streaming.update` passes dormant sessions, dropping and re-requesting their chunks each broadcast tick. Needs a decision on dormant residency. Unchanged. |
+| B9 | Confirmed latent, no current impact: labs pass gravity explicitly and must drop `sync-cvars`. Recommended per-view gravity. Unchanged. |
+| B10 | Confirmed: remote console commands act on the local/default realm. Recommended: pass the sender realm into `execServer`. Unchanged. |
+| B11 | Refuted: spanning entities are also bucketed by origin cell; `queryRadius` is origin-distance by design. |
+
+Nightly browser triage. The latest scheduled run (`3788ec75`, 2026-11-05) had 45
+failures. Re-running the 25 failing spec files (101 tests) locally on the
+rebased HEAD gave 65 passed / 36 failed, so roughly 10 were fixed by the
+intervening train/physics commits. Remaining failures by cause:
+
+- Test drift (fixed): `server-security.spec.ts` used `sv_speed`, removed by
+  `8fe1c968`; it now uses `sv_gravity` and passes for ws and WebRTC.
+- Wildlife walk/hop phase never observed (13 cases): `fauna-gameplay` fox,
+  horse, kangaroo, fish, penguin, manta-ray (canvas+gpu), deer, frog hop and
+  `range-work` poll for a walk clip at ground height with frame ≥ 4 and never see
+  it. Common cause, likely movement/physics-reset interaction; needs investigation.
+- Ball contact no longer startles small animals (2): robin/frog expect `scared`,
+  observe `idle`.
+- Natural landscape explorer never reaches `data-settled` (3) and the landscape
+  lab cannot find "Ride train roof" (2).
+- World geometry lab: player height 48 not reached and start buttons time out (5).
+- Local 30 s timeouts on long gameplay flows (character placement, room editing,
+  tap-to-water): CI uses 60 s; inconclusive locally.
+- `webrtc-delivery` world-reset ordering (1).
+
+These are behavior regressions or stale expectations across several systems,
+not narrow repairs; they are recorded for a dedicated investigation rather than
+fixed inside this refactoring sequence.
+
+New friction finding, and a constraint on later phases: `workshopInputDigest`
+hashes every non-test `.ts` under `src/` (except `server/` and `workshop/`), so any
+engine edit requires a full `workshop:manifest` render (≈3 minutes, 2,121
+candidates) even when every candidate is byte-identical. Worse, candidate
+identities embed raw source text (`NaturalLandscapeCandidate.ts` and
+`ScenarioRuntimeSource.ts` import `collectScene.ts?raw` and others), so a pure
+refactor of those modules reopens hundreds of candidates for human review.
+Phase 4 must narrow identities to rendered output or explicit recipe inputs
+before phase 5 splits `collectScene` or other hashed engine modules.
+
+Validation: `npm run check` (exit 0), `npm run typecheck`, focused vitest
+(`GameServer`, `EditorMode`, editor and SceneFrame tests), both
+`server-security` Playwright cases, the 25-file nightly re-run above, and
+`art:catalog` + `workshop:manifest` regeneration (digest-only change).
+Review: an independent Opus 5.5 high review found no blockers; it caught a vacuous
+`toContain("2")` assertion (the cvar description contains "2"), a missing re-arm
+when ScenePage parameters clear, a misplaced doc comment, remaining inline copies
+of the error reply, an empty lobby on realm-list failure, and the identity churn
+above. All were repaired or recorded.

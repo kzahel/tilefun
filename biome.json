@@ -10,40 +10,11 @@
       "**",
       "!**/*.md",
       "!dist",
+      "!art-source",
+      "!public/demos",
       "!src/rendering/dump-truck-v2-fallback.json",
-      "!art-source/vehicle-bake/dump-truck/v2",
-      "!art-source/vehicle-bake/tow-truck/v2",
-      "!art-source/vehicle-bake/car-transporter/v2",
-      "!art-source/vehicle-bake/towing-fallbacks/v2",
       "!test-results",
       "!ME complete tileset.tsx",
-      "!public/demos/vehicle-bake/viewer.js",
-      "!public/demos/vehicle-bake/**/raw-viewer.js",
-      "!public/demos/vehicle-bake/**/offline-raw.html",
-      "!public/demos/original-vehicles/**/viewer.js",
-      "!public/demos/vehicle-riders/**/viewer.js",
-      "!public/demos/vehicle-riders/**/offline.html",
-      "!art-source/vehicle-bake/**/scripts/capture.mjs",
-      "!art-source/vehicle-bake/**/recipe-scripts/capture.mjs",
-      "!art-source/vehicle-riders/classic-comparison/v1/helpers/peer-eye-probe.mjs",
-      "!art-source/vehicle-riders/**/viewer.js",
-      "!art-source/vehicle-riders/**/offline.html",
-      "!art-source/wildlife-v2/cat/motion-v2/projection.json",
-      "!art-source/wildlife-v2/dog/motion-v2/projection.json",
-      "!art-source/wildlife-v2/donkey/behavior-v1/projection.json",
-      "!art-source/wildlife-v2/deer/behavior-v1/projection.json",
-      "!art-source/wildlife-v2/peacock/behavior-v1/projection.json",
-      "!art-source/wildlife-v2/raven/behavior-v1/projection.json",
-      "!art-source/wildlife-v2/fox/behavior-v1/projection.json",
-      "!art-source/wildlife-v2/hedgehog/behavior-v1/projection.json",
-      "!art-source/wildlife-v2/porcupine/behavior-v1/projection.json",
-      "!art-source/wildlife-v2/centipede/roster-v3/projection.json",
-      "!art-source/wildlife-v2/millipede/roster-v3/projection.json",
-      "!art-source/wildlife-v2/deer/finish-v1/paint-projection.json",
-      "!art-source/wildlife-v2/cat/finish-v1/paint-projection.json",
-      "!art-source/wildlife-v2/cat-ginger/finish-v1/paint-projection.json",
-      "!art-source/wildlife-v2/cat-black/finish-v1/paint-projection.json",
-      "!art-source/wildlife-v2/donkey/finish-v1/paint-projection.json",
       "!docs/tactical/053-semantic-tileset-map/source-files.json"
     ]
   },
@@ -76,26 +47,6 @@
   },
   "overrides": [
     {
-      "includes": [
-        "public/demos/wildlife-v2/horse/motion-study-v1/playback.js",
-        "public/demos/wildlife-v2/horse/motion-study-v2/playback.js",
-        "public/demos/wildlife-v2/horse/motion-study-v1/index.html",
-        "public/demos/wildlife-v2/horse/motion-study-v2/index.html",
-        "public/demos/original-vehicles/explorer-boat-v1/index.html",
-        "art-source/vehicle-bake/food-truck/v1/independent-visual.mjs"
-      ],
-      "formatter": {
-        "enabled": false
-      },
-      "linter": {
-        "rules": {
-          "a11y": {
-            "useButtonType": "off"
-          }
-        }
-      }
-    },
-    {
       "includes": ["public/data/workshop-manifest.json"],
       "files": {
         "maxSize": 2097152
@@ -103,21 +54,10 @@
     },
     {
       "includes": [
-        "art-source/wildlife-v2/**/*.json",
-        "art-source/vehicle-models/**/*.json",
-        "art-source/train-models/**/*.json",
-        "art-source/vehicle-style-study/**/*.json",
-        "art-source/vehicle-bake/**/*.json",
-        "art-source/vehicle-riders/**/*.json",
         "scripts/vehicle-riders/**/*.json",
         "scripts/vehicle-bake/family-rider-*.json",
         "scripts/vehicle-bake/beetle/*.json",
         "public/assets/models/trains/review/**/*.json",
-        "public/demos/wildlife-v2/**/*.json",
-        "public/demos/vehicle-style-study/**/*.json",
-        "public/demos/vehicle-bake/**/*.json",
-        "public/demos/original-vehicles/**/*.json",
-        "public/demos/vehicle-riders/**/*.json",
         "src/wildlife/reviews.json",
         "src/wildlife/behavior-art.json",
         "src/wildlife/meadow-art.json",
@@ -158,20 +98,7 @@
       }
     },
     {
-      "includes": ["demo/**"],
-      "linter": {
-        "rules": {
-          "style": {
-            "noNonNullAssertion": "off"
-          }
-        }
-      }
-    },
-    {
-      "includes": [
-        "art-source/wildlife-v2/panther/hunt-v1/playback.js",
-        "public/demos/wildlife-v2/panther/hunt-v1/playback.js"
-      ],
+      "includes": ["docs/benchmarks/**"],
       "formatter": {
         "enabled": false
       }

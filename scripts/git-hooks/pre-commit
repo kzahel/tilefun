@@ -1,0 +1,4 @@
+#!/bin/sh
+# Lint and format-check staged files (Biome reads their working-tree contents).
+# Install with `npm run hooks:install`.
+exec npx --no-install biome check --staged --no-errors-on-unmatched --files-ignore-unknown=true

@@ -18,5 +18,5 @@
     "sourceMap": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "demo"]
+  "include": ["src"]
 }

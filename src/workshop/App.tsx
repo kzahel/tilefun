@@ -1,5 +1,14 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Component, lazy, type ReactNode, Suspense, useEffect, useRef, useState } from "react";
+import {
+  Component,
+  lazy,
+  type ReactNode,
+  Suspense,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import {
   Link,
   Navigate,
@@ -1004,10 +1013,15 @@ function ReviewTool({ toolId, query }: { toolId: string; query: string }) {
   const inbox = useInbox(),
     manifest = useManifest(),
     navigate = useNavigate();
-  const candidates =
-    (inbox.data ? reviewUnits(inbox.data.candidates) : undefined)?.filter((c) =>
-      reviewToolOwnsBatch(toolId, c.batchId, manifest.data?.batches),
-    ) ?? [];
+  const batches = manifest.data?.batches;
+  // Stable between query refreshes so URL redirection does not run on every render.
+  const candidates = useMemo(
+    () =>
+      (inbox.data ? reviewUnits(inbox.data.candidates) : undefined)?.filter((c) =>
+        reviewToolOwnsBatch(toolId, c.batchId, batches),
+      ) ?? [],
+    [inbox.data, batches, toolId],
+  );
   useEffect(() => {
     const p = new URLSearchParams(query);
     const target = candidates.find(

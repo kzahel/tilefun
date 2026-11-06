@@ -116,6 +116,16 @@ export class GameServer {
   onLoopError: ((error: unknown) => void) | undefined;
   private readonly pendingOperations = new Set<Promise<unknown>>();
 
+  /** Reply to a failed request so the client's pending request settles. */
+  private requestFailed(clientId: string, requestId: number): (error: unknown) => void {
+    return (error) =>
+      this.transport.send(clientId, {
+        type: "request-error",
+        requestId,
+        message: error instanceof Error ? error.message : String(error),
+      });
+  }
+
   /** Track durable/realm operations without holding ordinary command admission. */
   private trackOperation<T>(operation: Promise<T>): Promise<T> {
     this.pendingOperations.add(operation);
@@ -316,9 +326,14 @@ export class GameServer {
         return;
       }
       if (existingSession && !existingSession.realmId && !existingSession.transitioning) {
-        void this.trackOperation(this.buildRealmList()).then((realms) => {
-          this.transport.send(clientId, { type: "realm-list", realms });
-        });
+        void this.trackOperation(this.buildRealmList())
+          .then((realms) => {
+            this.transport.send(clientId, { type: "realm-list", realms });
+          })
+          .catch((error) => {
+            console.error("[tilefun] realm list failed:", error);
+            this.transport.send(clientId, { type: "realm-list", realms: [] });
+          });
         return;
       }
       if (
@@ -408,9 +423,14 @@ export class GameServer {
         // Multiplayer: start in lobby, send realm list
         console.log(`[tilefun] client connected: ${clientId} as ${session.displayName} (lobby)`);
 
-        this.trackOperation(this.buildRealmList()).then((realms) => {
-          this.transport.send(clientId, { type: "realm-list", realms });
-        });
+        void this.trackOperation(this.buildRealmList())
+          .then((realms) => {
+            this.transport.send(clientId, { type: "realm-list", realms });
+          })
+          .catch((error) => {
+            console.error("[tilefun] realm list failed:", error);
+            this.transport.send(clientId, { type: "realm-list", realms: [] });
+          });
       }
     });
 
@@ -1169,13 +1189,7 @@ export class GameServer {
           cameraZoom: session.cameraZoom,
         });
       })
-      .catch((error) =>
-        this.transport.send(clientId, {
-          type: "request-error",
-          requestId,
-          message: error instanceof Error ? error.message : String(error),
-        }),
-      );
+      .catch(this.requestFailed(clientId, requestId));
   }
 
   /**
@@ -1466,13 +1480,7 @@ export class GameServer {
           .then(() =>
             this.transport.send(clientId, { type: "vehicle-controlled", requestId: msg.requestId }),
           )
-          .catch((error) =>
-            this.transport.send(clientId, {
-              type: "request-error",
-              requestId: msg.requestId,
-              message: error instanceof Error ? error.message : String(error),
-            }),
-          );
+          .catch(this.requestFailed(clientId, msg.requestId));
         return;
       }
       case "enter-vehicle":
@@ -1491,24 +1499,14 @@ export class GameServer {
           } else realm.vehicles.exit(session);
           this.transport.send(clientId, { type: "vehicle-controlled", requestId: msg.requestId });
         } catch (error) {
-          this.transport.send(clientId, {
-            type: "request-error",
-            requestId: msg.requestId,
-            message: error instanceof Error ? error.message : String(error),
-          });
+          this.requestFailed(clientId, msg.requestId)(error);
         }
         return;
       }
       case "get-world-map":
         void this.trackOperation(this.worldMap(session, msg.requestId))
           .then((map) => this.transport.send(clientId, map))
-          .catch((error) =>
-            this.transport.send(clientId, {
-              type: "request-error",
-              requestId: msg.requestId,
-              message: error instanceof Error ? error.message : String(error),
-            }),
-          );
+          .catch(this.requestFailed(clientId, msg.requestId));
         return;
       case "enter-building":
       case "exit-building": {
@@ -1561,13 +1559,15 @@ export class GameServer {
         return;
 
       case "list-realms":
-        void this.trackOperation(this.buildRealmList()).then((realms) =>
-          this.transport.send(clientId, {
-            type: "realm-list",
-            requestId: msg.requestId,
-            realms,
-          }),
-        );
+        void this.trackOperation(this.buildRealmList())
+          .then((realms) =>
+            this.transport.send(clientId, {
+              type: "realm-list",
+              requestId: msg.requestId,
+              realms,
+            }),
+          )
+          .catch(this.requestFailed(clientId, msg.requestId));
         return;
 
       case "leave-realm":
@@ -1603,13 +1603,7 @@ export class GameServer {
               meta,
             });
           })
-          .catch((error) =>
-            this.transport.send(clientId, {
-              type: "request-error",
-              requestId: msg.requestId,
-              message: error instanceof Error ? error.message : String(error),
-            }),
-          );
+          .catch(this.requestFailed(clientId, msg.requestId));
         return;
 
       case "recreate-world":
@@ -1621,13 +1615,7 @@ export class GameServer {
               meta,
             }),
           )
-          .catch((error) =>
-            this.transport.send(clientId, {
-              type: "request-error",
-              requestId: msg.requestId,
-              message: String(error),
-            }),
-          );
+          .catch(this.requestFailed(clientId, msg.requestId));
         return;
 
       case "delete-world":
@@ -1638,32 +1626,30 @@ export class GameServer {
               requestId: msg.requestId,
             });
           })
-          .catch((error) =>
-            this.transport.send(clientId, {
-              type: "request-error",
-              requestId: msg.requestId,
-              message: String(error),
-            }),
-          );
+          .catch(this.requestFailed(clientId, msg.requestId));
         return;
 
       case "list-worlds":
-        this.trackOperation(this.listWorlds()).then((worlds) => {
-          this.transport.send(clientId, {
-            type: "world-list",
-            requestId: msg.requestId,
-            worlds,
-          });
-        });
+        void this.trackOperation(this.listWorlds())
+          .then((worlds) => {
+            this.transport.send(clientId, {
+              type: "world-list",
+              requestId: msg.requestId,
+              worlds,
+            });
+          })
+          .catch(this.requestFailed(clientId, msg.requestId));
         return;
 
       case "rename-world":
-        this.trackOperation(this.renameWorld(msg.worldId, msg.name)).then(() => {
-          this.transport.send(clientId, {
-            type: "world-renamed",
-            requestId: msg.requestId,
-          });
-        });
+        void this.trackOperation(this.renameWorld(msg.worldId, msg.name))
+          .then(() => {
+            this.transport.send(clientId, {
+              type: "world-renamed",
+              requestId: msg.requestId,
+            });
+          })
+          .catch(this.requestFailed(clientId, msg.requestId));
         return;
 
       case "rcon": {

@@ -639,6 +639,16 @@ export class EditorMode {
       this.pendingSubgridEdits.push({ gsx: p.x, gsy: p.y, terrainId: this.model.selectedTerrain });
   }
 
+  /** Start a new stroke: the next paint must not connect to the previous one. */
+  private resetPaintDedup(): void {
+    this.lastPaintedTile.tx = -Infinity;
+    this.lastPaintedTile.ty = -Infinity;
+    this.lastPaintedSubgrid.gsx = -Infinity;
+    this.lastPaintedSubgrid.gsy = -Infinity;
+    this.lastPaintedCorner.gsx = -Infinity;
+    this.lastPaintedCorner.gsy = -Infinity;
+  }
+
   private paintCornerAt(sx: number, sy: number): void {
     const { gsx, gsy } = this.screenToCorner(sx, sy);
     if (gsx === this.lastPaintedCorner.gsx && gsy === this.lastPaintedCorner.gsy) return;
@@ -718,12 +728,7 @@ export class EditorMode {
       this.isPainting = true;
       this.rightClickUnpaint = button === 2;
       this.model.setTemporaryUnpaint(this.rightClickUnpaint);
-      this.lastPaintedTile.tx = -Infinity;
-      this.lastPaintedTile.ty = -Infinity;
-      this.lastPaintedSubgrid.gsx = -Infinity;
-      this.lastPaintedSubgrid.gsy = -Infinity;
-      this.lastPaintedCorner.gsx = -Infinity;
-      this.lastPaintedCorner.gsy = -Infinity;
+      this.resetPaintDedup();
       this.paintAt(sx, sy);
     }
   }
@@ -857,12 +862,7 @@ export class EditorMode {
       this.wasPinching = false;
     } else if (this.activeTouches.size === 1) {
       // 2→1 fingers — reset paint dedup but don't start painting (still part of gesture)
-      this.lastPaintedTile.tx = -Infinity;
-      this.lastPaintedTile.ty = -Infinity;
-      this.lastPaintedSubgrid.gsx = -Infinity;
-      this.lastPaintedSubgrid.gsy = -Infinity;
-      this.lastPaintedCorner.gsx = -Infinity;
-      this.lastPaintedCorner.gsy = -Infinity;
+      this.resetPaintDedup();
     }
   }
 
@@ -891,10 +891,7 @@ export class EditorMode {
         this.spawnPropAt(start.sx, start.sy);
       }
     } else {
-      this.lastPaintedTile.tx = -Infinity;
-      this.lastPaintedTile.ty = -Infinity;
-      this.lastPaintedSubgrid.gsx = -Infinity;
-      this.lastPaintedSubgrid.gsy = -Infinity;
+      this.resetPaintDedup();
       this.paintAt(start.sx, start.sy);
     }
   }

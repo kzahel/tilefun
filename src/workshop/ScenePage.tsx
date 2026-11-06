@@ -127,14 +127,25 @@ function Neighborhood({
     const r = denseReviewScene(c).bounds;
     focusRect([r.minX * 16, r.minY * 16, (r.maxX - r.minX) * 16, (r.maxY - r.minY) * 16], caseId);
   }
+  // Each navigation target centres once; note refreshes only resolve a pending target.
+  const centred = useRef({ focusId: "", noteId: "" });
   // biome-ignore lint/correctness/useExhaustiveDependencies: Only explicit navigation selects a focus; ordinary inbox refresh must not reset the camera.
   useEffect(() => {
-    if (focusId) shortcut(focusId);
-    if (noteId) {
-      const n = notes.find((n) => n.threadId === noteId)?.sceneAnnotation;
-      if (n) focusRect(n.rect, noteId);
+    // Clearing a parameter lets the same target centre again when it is reopened.
+    if (!focusId) centred.current.focusId = "";
+    if (!noteId) centred.current.noteId = "";
+    if (focusId && centred.current.focusId !== focusId) {
+      centred.current.focusId = focusId;
+      shortcut(focusId);
     }
-  }, [focusId, noteId, notes.length]);
+    if (noteId && centred.current.noteId !== noteId) {
+      const n = notes.find((n) => n.threadId === noteId)?.sceneAnnotation;
+      if (n) {
+        centred.current.noteId = noteId;
+        focusRect(n.rect, noteId);
+      }
+    }
+  }, [focusId, noteId, notes]);
   useEffect(() => {
     useWorkspace.getState().setDraft(`region:${key}`, JSON.stringify(selection));
   }, [key, selection]);

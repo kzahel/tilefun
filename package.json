@@ -13,6 +13,7 @@
     "preview": "vite preview",
     "check": "biome check .",
     "check:fix": "biome check --fix .",
+    "hooks:install": "git config core.hooksPath scripts/git-hooks",
     "test": "vitest run && npm run test:node-integration",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
