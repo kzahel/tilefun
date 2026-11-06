@@ -49,6 +49,13 @@ the frame, including indoors and at rest. Logical follow/picking remain continuo
 Actual Canvas/GPU and physical Chromebook pixels qualify static registration and
 followed-actor stability together. Stable sampling, crop isolation and terrain edge
 extrusion address sampling ties/atlas seams; the linked record owns costs and limits.
+Software WebGL (hosted CI's SwiftShader) executes every shader branch for every
+fragment, so the inlined per-slot four-tap filter raised its frames from ~16ms to
+~100ms. Raster batches without filtered actor quads now use a program without the
+filter, and the four taps share one per-slot fetch in a loop (`GpuRasterShader.ts`).
+Replayed game frames remain byte-identical to the previous program on Apple Metal
+and SwiftShader; local SwiftShader frames measure ~17–24ms. Keep tap offsets as
+additions: an equivalent multiply changed edge texels on Metal.
 
 [213](../tactical/213-continuous-camera-projection.md) removes independent integer
 camera-translation rounding from default gameplay/lab projection. Continuous

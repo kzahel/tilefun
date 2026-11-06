@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { rasterFragmentShader } from "./GpuRasterShader.js";
 import type { DecalVertex } from "./ProjectedDecals.js";
 import { type RasterSurface, rasterRevision } from "./RasterSurface.js";
 import { SubpixelImages } from "./SubpixelImages.js";
@@ -54,6 +55,10 @@ export class GpuRasterSurface implements RasterSurface {
     THREE.DynamicDrawUsage,
   );
   private readonly material: THREE.ShaderMaterial;
+  // Batches without filtered actor quads use a program without the filter;
+  // software rasterizers otherwise evaluate it for every fragment. Shared uniforms.
+  private readonly unfiltered: THREE.ShaderMaterial;
+  private filtered = false;
   private readonly mesh: THREE.Mesh;
   private readonly white: THREE.DataTexture;
   private worldTarget?: THREE.WebGLRenderTarget;
@@ -166,7 +171,7 @@ export class GpuRasterSurface implements RasterSurface {
         attribute float imageSlot; attribute vec4 worldDepth; attribute vec3 frontDepth; varying vec3 depth0; varying float slot0;
         varying vec2 uv0; varying vec4 color0; varying vec4 bounds0;
         void main(){depth0=vec3(dot(worldDepth.xy,point)+worldDepth.z,worldDepth.w,dot(frontDepth.xy,point)+frontDepth.z);slot0=imageSlot;uv0=tex;color0=tint;bounds0=bounds;gl_Position=projectionMatrix*vec4(point,0.,1.);}`,
-      fragmentShader: rasterFragmentShader(1),
+      fragmentShader: rasterFragmentShader(1, true),
       side: THREE.DoubleSide,
       transparent: true,
       depthTest: false,
@@ -177,6 +182,9 @@ export class GpuRasterSurface implements RasterSurface {
       blendSrcAlpha: THREE.OneFactor,
       blendDstAlpha: THREE.OneMinusSrcAlphaFactor,
     });
+    this.unfiltered = this.material.clone();
+    this.unfiltered.uniforms = uniforms;
+    this.unfiltered.fragmentShader = rasterFragmentShader(1, false);
     // Keep the original triangle order, but write/upload each corner only once.
     // This immutable 24 KiB index buffer is recreated by Three on context recovery.
     const indices = new Uint16Array(QUADS * 6);
@@ -338,8 +346,9 @@ export class GpuRasterSurface implements RasterSurface {
     if (this.stats.batchTextureLimit === limit) return;
     this.flush();
     this.stats.batchTextureLimit = limit;
-    this.material.fragmentShader = rasterFragmentShader(limit);
-    this.material.needsUpdate = true;
+    this.material.fragmentShader = rasterFragmentShader(limit, true);
+    this.unfiltered.fragmentShader = rasterFragmentShader(limit, false);
+    this.material.needsUpdate = this.unfiltered.needsUpdate = true;
   }
   beginFrame() {
     if (this.disposed) throw Error("Renderer is disposed");
@@ -348,6 +357,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.frame++;
     this.stats.frames++;
     this.count = 0;
+    this.filtered = false;
     this.texture = null;
     this.batchTextures.length = 0;
     this.batchDepthTextures.length = 0;
@@ -389,6 +399,7 @@ export class GpuRasterSurface implements RasterSurface {
   clearResources() {
     this.decals.length = 0;
     this.count = 0;
+    this.filtered = false;
     this.texture = null;
     this.batchTextures.length = 0;
     this.batchDepthTextures.length = 0;
@@ -414,6 +425,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.clearResources();
     this.geometry.dispose();
     this.material.dispose();
+    this.unfiltered.dispose();
     this.white.dispose();
     this.worldTarget?.dispose();
     this.presentGeometry.dispose();
@@ -843,6 +855,7 @@ export class GpuRasterSurface implements RasterSurface {
     }
     this.texture = texture;
     this.textureSlot = slot;
+    this.filtered ||= smooth;
     for (let corner = 0; corner < 4; corner++) {
       const right = corner === 1 || corner === 2,
         bottom = corner >= 2;
@@ -871,6 +884,7 @@ export class GpuRasterSurface implements RasterSurface {
     if (!this.count) return;
     if (this.lost || this.disposed) {
       this.count = 0;
+      this.filtered = false;
       this.batchTextures.length = 0;
       this.batchDepthTextures.length = 0;
       this.texture = null;
@@ -881,6 +895,10 @@ export class GpuRasterSurface implements RasterSurface {
     this.buffer.addUpdateRange(0, this.count * STRIDE);
     this.buffer.needsUpdate = true;
     this.stats.vertexUploadedBytes += this.count * STRIDE * 4;
+    const material = this.filtered ? this.material : this.unfiltered;
+    material.depthTest = this.material.depthTest;
+    material.depthWrite = this.material.depthWrite;
+    this.mesh.material = material;
     const limit = this.stats.batchTextureLimit;
     for (let i = 0; i < limit; i++) {
       const texture = this.batchTextures[i] ?? this.white;
@@ -909,61 +927,11 @@ export class GpuRasterSurface implements RasterSurface {
       this.stats.drawCalls++;
     }
     this.count = 0;
+    this.filtered = false;
     this.batchTextures.length = 0;
     this.batchDepthTextures.length = 0;
     this.texture = null;
   }
-}
-
-/** Constant sampler indices are portable across WebGL2/ANGLE implementations. */
-function rasterFragmentShader(limit: number) {
-  const encode =
-    "c.rgb=mix(12.92*c.rgb,1.055*pow(c.rgb,vec3(1./2.4))-.055,step(vec3(.0031308),c.rgb));";
-  const filter = `varying vec4 bounds0; uniform bool stableRaster;
-    vec4 nearestSample(sampler2D image,vec2 uv){
-      vec2 dim=vec2(textureSize(image,0));uv=(floor(uv*dim+.0001)+.5)/dim;
-      return texture2D(image,uv);
-    }
-    vec4 pointSample(sampler2D image, vec2 uv, bool e){
-      if(any(lessThan(uv,bounds0.xy))||any(greaterThanEqual(uv,bounds0.zw)))return vec4(0.);
-      vec4 c=nearestSample(image,uv);if(e){${encode}}return vec4(c.rgb*c.a,c.a);
-    }
-    vec4 sampleImage(sampler2D image,bool e){
-      vec2 stepUV=max(fwidth(uv0),vec2(.00000001));
-      vec2 p=(uv0-bounds0.xy)/stepUV-.5;
-      vec2 f=fract(p), lo=bounds0.xy+(floor(p)+.5)*stepUV;
-      return mix(mix(pointSample(image,lo,e),pointSample(image,lo+vec2(stepUV.x,0.),e),f.x),
-        mix(pointSample(image,lo+vec2(0.,stepUV.y),e),pointSample(image,lo+stepUV,e),f.x),f.y);
-    }`;
-  const declarations = Array.from(
-    { length: limit },
-    (_, i) => `uniform sampler2D image${i || ""}, depthImage${i}; uniform bool encode${i || ""};`,
-  ).join("\n");
-  const branches = Array.from(
-    { length: limit },
-    (_, i) =>
-      `${i ? "else " : ""}${i < limit - 1 ? `if(slot0<${i + 0.5})` : ""}{c=sampleImage(image${i || ""},encode${i || ""});}`,
-  ).join("\n");
-  // Keep the common opaque/static path as direct sampling, outside the actor
-  // filtering helper. This also avoids sampler-function cost on software GPUs.
-  const rawBranches = Array.from(
-    { length: limit },
-    (_, i) =>
-      `${i ? "else " : ""}${i < limit - 1 ? `if(slot0<${i + 0.5})` : ""}{
-      vec2 uv=uv0;if(stableRaster){vec2 dim=vec2(textureSize(image${i || ""},0));uv=(floor(uv*dim+.0001)+.5)/dim;}
-      c=texture2D(image${i || ""},uv);e=encode${i || ""};}`,
-  ).join("\n");
-  const depths = Array.from(
-    { length: limit },
-    (_, i) =>
-      `${i ? "else " : ""}${i < limit - 1 ? `if(slot0<${i + 0.5})` : ""}{d=nearestSample(depthImage${i},clamp(uv0,bounds0.xy,bounds0.zw)).r;}`,
-  ).join("\n");
-  return `${declarations} varying vec3 depth0; varying vec2 uv0; varying vec4 color0; varying float slot0;
-    ${filter}
-    void main(){gl_FragDepth=max(depth0.x,depth0.z);if(depth0.y!=0.){float d;${depths}gl_FragDepth+=depth0.y*(d-.5);}
-      vec4 c;if(fract(slot0)<.1){bool e;${rawBranches}if(e){${encode}}
-      c*=color0;if(c.a<.001)discard;gl_FragColor=vec4(c.rgb*c.a,c.a);return;}
-      ${branches}if(c.a*color0.a<.001)discard;gl_FragColor=vec4(c.rgb*color0.rgb*color0.a,c.a*color0.a);}`;
 }
 
 /** Rectangle union, partitioned into disjoint strips so translucent pixels blend once. */

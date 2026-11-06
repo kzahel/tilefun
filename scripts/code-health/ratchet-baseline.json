@@ -493,7 +493,7 @@
       "overLimit": 1
     },
     "src/rendering/GpuRasterSurface.ts": {
-      "lines": 1011,
+      "lines": 979,
       "worst": 72,
       "overLimit": 1
     },
@@ -643,7 +643,7 @@
       "overLimit": 1
     },
     "src/server/Realm.ts": {
-      "lines": 1357,
+      "lines": 1353,
       "worst": 0,
       "overLimit": 0
     },
@@ -943,7 +943,7 @@
       "overLimit": 1
     },
     "src/workshop/WorldGeometryCandidate.ts": {
-      "lines": 120,
+      "lines": 110,
       "worst": 37,
       "overLimit": 1
     },
