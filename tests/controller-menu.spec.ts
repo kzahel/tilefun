@@ -11,11 +11,10 @@ async function press(page: Page, button: number) {
   // release as soon as the game emits the command: held directions auto-repeat
   // after 380 ms of wall time, which slow hosted frames would otherwise reach.
   await page.evaluate(async (index) => {
-    const frames = async () => {
-      for (let n = 0; n < 3; n++)
+    const frames = async (count: number) => {
+      for (let n = 0; n < count; n++)
         await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
     };
-    await frames();
     const test = window as unknown as { testPad: Gamepad; onPadCommand?: (() => void) | undefined };
     const release = () => {
       Object.assign(test.testPad.buttons[index] ?? {}, { pressed: false, value: 0 });
@@ -27,10 +26,11 @@ async function press(page: Page, button: number) {
       };
     });
     Object.assign(test.testPad.buttons[index] ?? {}, { pressed: true, value: 1 });
-    await Promise.race([emitted, frames()]);
+    await Promise.race([emitted, frames(3)]);
     test.onPadCommand = undefined;
     release();
-    await frames();
+    // Two frames guarantee one gamepad sample sees the release before the next press.
+    await frames(2);
   }, button);
 }
 async function focusWithPad(page: Page, name: string) {
@@ -136,14 +136,20 @@ test("right-stick cursor selects editor tools and map controls with A and RT", a
   await press(page, 1);
   await expect(map).toBeHidden();
 });
+test("the Deck desktop launch defaults to the GPU renderer", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/tilefun/?desktop=1");
+  await page.locator('#game[data-ready="true"]').waitFor({ timeout: 30_000 });
+  await expect(page.locator("#game")).toHaveAttribute("data-renderer", /gpu/);
+});
 test("Deck-sized menu, worlds, text keyboard, character and Options are controller complete", async ({
   page,
 }) => {
-  // This multi-view flow waits six real render frames for every pad press.
-  // Software GPU CI needs its own budget; individual assertions keep theirs.
+  // Dozens of pad presses each wait for real render frames; menus are DOM, so
+  // this flow runs on Canvas (the default-GPU contract is the case above).
   test.setTimeout(process.env.CI ? 120000 : 30000);
   await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto("/tilefun/?desktop=1");
+  await page.goto(CANVAS_GAME);
   await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   const menu = page.getByTestId("world-menu");
   await expect(menu).toHaveAttribute("data-page", "home");
@@ -173,7 +179,6 @@ test("Deck-sized menu, worlds, text keyboard, character and Options are controll
   await expect(page.getByRole("button", { name: "New World", exact: true })).toBeFocused();
   await press(page, 0);
   await expect(menu).toBeHidden();
-  await expect(page.locator("#game")).toHaveAttribute("data-renderer", /gpu/);
   await press(page, 9);
   await expect(menu).toHaveAttribute("data-page", "home");
   await focusWithPad(page, "Worlds");
