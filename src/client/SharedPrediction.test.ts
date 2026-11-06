@@ -769,3 +769,60 @@ it("keeps the train and rider display continuous through delayed takeoff, landin
     );
   expect(jumps).toHaveLength(0);
 });
+
+it("eases a departing train back to a lagging buffer, including across sliced replay frames", async () => {
+  const f = await setup(cityTrainRecipe());
+  const service = [...(f.s.realm.railways?.services.values() ?? [])][0];
+  const train = service?.cars[1];
+  if (!service || !train) throw Error("Missing service");
+  await f.s.command({ kind: "teleport", position: train.position, z: 44 });
+  service.record.dwell = 0;
+  service.record.speed = 192;
+  f.s.tick();
+  f.receive(f.s.frames());
+  // Hosted CI traces show a starved Worker's remote buffer ~0.2s (40px at
+  // cruise) behind the rider's predicted train when the rider jumps off.
+  const lag = 40,
+    statuses: string[] = [],
+    shown: { x: number; buffered: number }[] = [],
+    late: ArrayBuffer[][] = [];
+  const present = (alpha: number) => {
+    const buffered = f.view.serverEntities.map((e) => {
+      const car = service.cars.find((c) => c.id === e.id);
+      if (!car) return e;
+      const vx = (car.velocity?.vx ?? 0) * PHYSICS_DT;
+      return {
+        ...e,
+        position: { wx: car.position.wx - lag - (1 - alpha) * vx, wy: e.position.wy },
+      };
+    });
+    const c = f.predictor.presentEntities(alpha, buffered).find((e) => e.id === train.id),
+      b = buffered.find((e) => e.id === train.id);
+    if (!c || !b) throw Error("Missing displayed train");
+    statuses.push(f.predictor.recoveryDiagnostics.status);
+    shown.push({ x: c.position.wx, buffered: b.position.wx });
+  };
+  for (let tick = 0; tick < 200; tick++) {
+    const movement = { ...idle, jump: tick === 20, dy: tick >= 20 && tick < 70 ? 1 : 0 };
+    f.input(tick + 10, movement);
+    f.s.input(encodeClientMessage({ type: "player-input", seq: tick + 10, ...movement }));
+    f.s.tick();
+    // A stalled Worker during the handoff then catches up two frames at a
+    // time; replaying its oldest snapshots spans several updates.
+    late.push(f.s.frames());
+    if (tick < 72 || tick >= 84) f.receive(late.splice(0, tick < 72 ? 1 : 2).flat());
+    f.predictor.update(PHYSICS_DT, movement, f.view.world, f.view.props, f.view.serverEntities);
+    f.advanceClock(-0.75 * PHYSICS_DT);
+    present(0.25);
+    f.advanceClock(0.5 * PHYSICS_DT);
+    present(0.75);
+    f.advanceClock(0.25 * PHYSICS_DT);
+  }
+  expect(statuses).toContain("replaying");
+  // Cruise is 1.6px per half tick; the handoff must neither reverse nor stall it.
+  const dx = shown.slice(1).map((s, i) => s.x - (shown[i]?.x ?? 0));
+  expect(Math.min(...dx)).toBeGreaterThan(0.5);
+  expect(Math.max(...dx)).toBeLessThan(2.2);
+  expect(shown[0]?.x).toBeCloseTo((shown[0]?.buffered ?? 0) + lag, 1);
+  expect(shown.at(-1)?.x).toBeCloseTo(shown.at(-1)?.buffered ?? 0, 2);
+});

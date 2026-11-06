@@ -161,7 +161,7 @@ export class PlayerPredictor {
   private readonly groupErrors = new Map<number, { x: number; y: number; z: number; at: number }>();
   private readonly releasedGroups = new Map<
     number,
-    { x: number; y: number; z: number; at: number }
+    { x: number; y: number; z: number; at: number; duration: number }
   >();
   private diagnostics: ReconcileDiagnostics | null = null;
 
@@ -761,16 +761,11 @@ export class PlayerPredictor {
    * avoids losing a tick of real travel at the handoff. No physics pose changes. */
   private releasePresentationGroups(
     buffered: readonly Entity[],
-    selected: ReadonlySet<number>,
+    selected: { has(id: number): boolean },
     alpha: number,
   ): readonly Entity[] {
     let needed = this.releasedGroups.size > 0;
-    if (!needed)
-      for (const e of this.lastPresentation.values())
-        if (e.physicsGroupId !== undefined) {
-          needed = true;
-          break;
-        }
+    for (const e of this.lastPresentation.values()) needed ||= e.physicsGroupId !== undefined;
     if (!needed) return buffered;
     const now = this.clock(),
       present = new Set<number>();
@@ -788,22 +783,24 @@ export class PlayerPredictor {
         predicted = this.published.get(e.id);
       if (!shift && previous && predicted) {
         const p = predicted.prevPosition ?? predicted.position,
-          correction = this.groupError(group);
-        shift = {
-          x: p.wx + (predicted.position.wx - p.wx) * alpha + correction.x - e.position.wx,
-          y: p.wy + (predicted.position.wy - p.wy) * alpha + correction.y - e.position.wy,
-          z:
-            (predicted.prevWz ?? predicted.wz ?? 0) * (1 - alpha) +
-            (predicted.wz ?? 0) * alpha +
-            correction.z -
-            (e.wz ?? 0),
-          at: now,
-        };
-        if (Math.hypot(shift.x, shift.y, shift.z) < 32) this.releasedGroups.set(group, shift);
+          c = this.groupError(group),
+          vx = (predicted.position.wx - p.wx) / PHYSICS_DT,
+          vy = (predicted.position.wy - p.wy) / PHYSICS_DT,
+          x = p.wx + vx * PHYSICS_DT * alpha + c.x - e.position.wx,
+          y = p.wy + vy * PHYSICS_DT * alpha + c.y - e.position.wy,
+          z = (predicted.prevWz ?? predicted.wz ?? 0) * (1 - alpha) + (predicted.wz ?? 0) * alpha,
+          dz = z + c.z - (e.wz ?? 0);
+        // A moving group's buffer trails by its travel over Worker/buffer delays (within
+        // the 2s input history); only the remainder is a relocation. The explained
+        // lead dissolves at no more than half the group's speed.
+        const lead = Math.min(2, Math.max(0, (x * vx + y * vy) / (vx * vx + vy * vy || 1)));
+        shift = { x, y, z: dz, at: now, duration: 0.2 + 3 * lead };
+        if (Math.hypot(x - vx * lead, y - vy * lead, dz) < 32)
+          this.releasedGroups.set(group, shift);
         else shift = undefined; // An explicit relocation must remain a relocation.
       }
       if (!shift) continue;
-      const t = Math.min(1, Math.max(0, (now - shift.at) / 0.2)),
+      const t = Math.min(1, Math.max(0, (now - shift.at) / shift.duration)),
         factor = 1 - t * t * (3 - 2 * t);
       if (!factor) {
         this.releasedGroups.delete(group);
@@ -827,9 +824,12 @@ export class PlayerPredictor {
       scene = this.scene;
     // The scene is scratch state while replay is sliced across updates. Retain
     // the last committed contact presentation, never switch to older replicas
-    // or expose partially replayed contacts. Unrelated actors remain buffered.
+    // or expose partially replayed contacts. Unrelated actors remain buffered;
+    // groups released to the buffer keep easing instead of jumping back.
     if (this.status === "replaying" && this.lastPresentation.size)
-      return buffered.map((entity) => this.lastPresentation.get(entity.id) ?? entity);
+      return this.releasePresentationGroups(buffered, this.lastPresentation, alpha).map(
+        (entity) => this.lastPresentation.get(entity.id) ?? entity,
+      );
     if (!player || !scene || this.status !== "ready" || !this.active) {
       const released = this.releasePresentationGroups(buffered, new Set(), alpha);
       this.lastPresentation.clear();

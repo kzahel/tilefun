@@ -6,7 +6,11 @@ selecting its previous pose again added a legitimate movement tick as correction
 Prescribed groups retain their own matching-tick correction rather than inheriting
 rider errors. A landing rider keeps its residual smoothly without moving the
 carrier. A departing group eases as one translation from predicted display to
-the remote buffer over 0.2s, without modifying physics. Large relocations,
+the remote buffer over 0.2s, without modifying physics. A moving group's lead
+explained by its velocity (a starved Worker left hosted CI's buffer ~40px/0.2s
+behind) is not a relocation: it eases over 0.2s plus three times that lead, so
+the group never drops below half speed, and keeps easing through sliced-replay
+frames. Large relocations,
 visibility removal and predictor resets retain explicit fences; ordinary frames
 without a released group reuse their existing entity array. Native delayed-frame
 landing/jump-off regressions cover fractional render poses. Frame 0x14 retains
