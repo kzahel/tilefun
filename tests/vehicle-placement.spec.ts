@@ -60,7 +60,9 @@ const model = "rosso-coupe",
 test(`place, drive, save and delete ${model} through the mobile editor in a roadless world (${renderer})`, async ({
   page,
 }) => {
-  test.setTimeout(60000);
+  // GPU mesh readiness is the contract here, so this flow (place, drive, two world
+  // reopens) stays on GPU; hosted software WebGL needs ~60 s for it.
+  test.setTimeout(process.env.CI ? 120_000 : 60_000);
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
