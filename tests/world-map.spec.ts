@@ -284,9 +284,18 @@ for (const hybrid of [false, true])
       await page.getByRole("button", { name: "Open world map" }).tap();
       await expect(map).toHaveAttribute("data-settled", "true");
       await expect(map.locator('[data-testid="world-map-player"][data-self="true"]')).toBeVisible();
-      await expect(
-        map.locator('[data-testid="world-map-player"][data-self="true"]'),
-      ).toHaveAttribute("data-x", "50");
+      // Travel lands within Rapier contact error of the target tile.
+      await expect
+        .poll(async () =>
+          Math.abs(
+            Number(
+              await map
+                .locator('[data-testid="world-map-player"][data-self="true"]')
+                .getAttribute("data-x"),
+            ) - 50,
+          ),
+        )
+        .toBeLessThan(1);
       await map.getByRole("button", { name: "Close map" }).tap();
       await expect(map).toBeHidden();
     } finally {

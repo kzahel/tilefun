@@ -782,3 +782,7 @@ Open items:
   the main/Worker bundles raised hosted startup (Worker bundle 1.2 → 5.5 MB,
   SwiftShader startup 1.85 → 2.9 s).
 - The racetrack `racer:` diagnostics in `NaturalLandscapePage.tsx` are dead code.
+- Riding stutter on starved hosts: when a prediction replay spans two updates the
+  train/rider display holds one frame and doubles the next (~3.2 px).
+  `train-recovery.spec.ts` allows a few such hitches but never more than one frame
+  of travel; a fix would advance presentation on its own clock during replays.
