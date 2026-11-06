@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [221 Code health and refactoring sequence](221-code-health-refactoring-sequence.md) | Approved parent sequence: audit findings, green gates/bugs, dead-path deletion, guardrails, registries and hot-region splits; storage policy deferred; [code health](../topics/code-health.md) |
 | [220 Anchors, shadows and jump transitions](220-world-anchors-shadows-and-jump-transitions.md) | Qualified: anchored resources, finite crest shadows, train collision context/display handoffs and one-use queued jumps; owner feel review next |
 | [219 Vehicle contact and train continuity](219-vehicle-contact-and-train-continuity.md) | Qualified contact/train repairs and racetrack attribution; phone stutter open, equipment migration deferred |
 | [218 Traffic and rail recovery](218-traffic-and-rail-gameplay-recovery.md) | Delivered for review: wide-turn jam fix, train/nearby-jump recovery and bounded GPU target reuse; phone FPS confirmation open |

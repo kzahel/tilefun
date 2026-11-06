@@ -20,6 +20,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | --- | --- |
 | [Gem progression](gem-progression.md) | Exploration gems, saved balances and future shop/unlock decisions |
 | [Startup loading](startup-loading.md) | First-paint loading shell, actual asset counts and startup readiness/error stages |
+| [Code health](code-health.md) | Module boundaries, god-file decomposition, lint/typecheck coverage and refactoring sequence |
 | [Testing](testing.md) | Narrowest effective test level, browser-suite audit and staged migration to existing native coverage |
 | [Development reloads](development-reloads.md) | Passive source-change notices, agent readiness marker and player-controlled save/reload |
 | [Steam Deck and menus](steam-deck-and-menus.md) | Linux Electron package, shared submenus, controller input and multiplayer acceptance |
