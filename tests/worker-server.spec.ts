@@ -122,9 +122,20 @@ test("single player renders while its authoritative Worker is busy", async ({ pa
   expect(before.transport.transport).toContain("Worker");
   const worker = page.workers().find((w) => w.url().includes("local-server.worker"));
   if (!worker) throw Error("No local authority Worker");
-  // This proves thread independence, not a GPU frame-rate floor. Hosted software
-  // rendering may deliver only two frames during the ordinary 350 ms stall.
-  const busyMs = process.env.CI ? 2000 : 350;
+  // This proves thread independence, not a frame-rate floor: scale the stall to
+  // this browser's measured render cadence (hosted software WebGL can exceed a
+  // second per frame) so about ten frames are due while the authority spins.
+  const frameMs = await page.evaluate(async () => {
+    const times: number[] = [];
+    for (let n = 0; n < 6; n++) {
+      await new Promise(requestAnimationFrame);
+      times.push(performance.now());
+    }
+    const gaps = times.slice(1).map((t, i) => t - (times[i] ?? t));
+    return gaps.sort((a, b) => a - b)[gaps.length >> 1] ?? 0;
+  });
+  const busyMs = Math.max(350, Math.ceil(frameMs * 10));
+  const observeMs = busyMs + Math.max(700, frameMs * 3);
   const frameTimes = page.evaluate(async (duration) => {
     const times: number[] = [];
     const until = performance.now() + duration;
@@ -133,7 +144,7 @@ test("single player renders while its authoritative Worker is busy", async ({ pa
       times.push(Date.now());
     }
     return times;
-  }, busyMs + 700);
+  }, observeMs);
   // Deliberately occupy only the authority's JS thread. No gameplay test command.
   const stalled = await worker.evaluate((duration) => {
     const start = Date.now();
@@ -241,8 +252,7 @@ test("physics settings replicate across isolated heaps and lifecycle pause resum
     .poll(() =>
       page.evaluate(() => {
         // biome-ignore lint/suspicious/noExplicitAny: test hook
-        return (document.querySelector("#game") as any).__game.stateView.physicsParameters
-          .gravityScale;
+        return (document.querySelector("#game") as any).__game.stateView.gravityScale;
       }),
     )
     .toBe(0.5);

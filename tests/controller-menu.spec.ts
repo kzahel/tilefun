@@ -1,6 +1,10 @@
 import { expect, type Locator, type Page, test } from "@playwright/test";
 
 test.use({ channel: "chromium", hasTouch: true });
+// Pad presses and the right-stick cursor advance per rendered frame. These cases
+// cover controller/DOM routing, not GPU output: hosted software WebGL presents
+// the default GPU world at over a second per frame, so they use Canvas.
+const CANVAS_GAME = "/tilefun/?desktop=1&renderer=canvas";
 
 async function press(page: Page, button: number) {
   // Observe actual render frames so a busy GPU cannot miss a press/release.
@@ -73,7 +77,7 @@ test.beforeEach(async ({ page }) => {
 });
 test("right-stick cursor selects editor tools and map controls with A and RT", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto("/tilefun/?desktop=1");
+  await page.goto(CANVAS_GAME);
   await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   await expect(page.getByTestId("world-menu")).toBeVisible();
   await press(page, 0);
@@ -184,7 +188,7 @@ test("multiplayer join, validation, public browse and cancellation use controlle
       json: [{ peerId: "test-peer", name: "Family game", hostName: "Parent", playerCount: 1 }],
     }),
   );
-  await page.goto("/tilefun/?desktop=1");
+  await page.goto(CANVAS_GAME);
   await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   await expect(page.getByTestId("world-menu")).toBeVisible();
   await focusWithPad(page, "Multiplayer");
@@ -206,7 +210,7 @@ test("multiplayer join, validation, public browse and cancellation use controlle
 test("controller moves the player, opens the map and edits without leaking held input into menus", async ({
   page,
 }) => {
-  await page.goto("/tilefun/?desktop=1");
+  await page.goto(CANVAS_GAME);
   await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   const menu = page.getByTestId("world-menu");
   await expect(menu).toBeVisible();
@@ -278,7 +282,7 @@ test("controller moves the player, opens the map and edits without leaking held 
 test("failed saving keeps the session open and the recovery dialog works with B", async ({
   page,
 }) => {
-  await page.goto("/tilefun/?desktop=1");
+  await page.goto(CANVAS_GAME);
   await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   await expect(page.getByTestId("world-menu")).toBeVisible();
   await page.evaluate(() => {

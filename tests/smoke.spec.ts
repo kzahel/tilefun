@@ -114,7 +114,7 @@ test("F3 toggles debug overlay", async ({ page }, testInfo) => {
   await page.keyboard.press("F3");
   const panel = page.getByLabel("Debug panel", { exact: true });
   await expect(panel).toBeVisible();
-  await expect(panel.getByLabel("Driving bodies", { exact: true })).toBeChecked();
+  await expect(panel.getByLabel("Vehicle bodies", { exact: true })).toBeChecked();
   await expect(panel.getByLabel("Search bounds", { exact: true })).not.toBeChecked();
   await expect(
     panel.getByRole("option", { name: "GPU + 3D car (default)", exact: true }),
@@ -129,13 +129,13 @@ test("F3 toggles debug overlay", async ({ page }, testInfo) => {
       let count = 0;
       if (data)
         for (let i = 0; i < data.length; i += 4) {
-          // Opaque #66baff actor edges; exclude blue terrain and UI colors.
-          if (
-            Math.abs((data[i] ?? 0) - 102) <= 2 &&
-            Math.abs((data[i + 1] ?? 0) - 186) <= 2 &&
-            (data[i + 2] ?? 0) >= 253
-          )
-            count++;
+          // #66baff actor edges are 1px strokes that usually straddle two pixels,
+          // so count strong sky-blue blends rather than the exact opaque color.
+          // The stationary player's box alone gives ~230; grass, HUD and sprites none.
+          const r = data[i] ?? 0,
+            g = data[i + 1] ?? 0,
+            b = data[i + 2] ?? 0;
+          if (b >= 200 && g >= 140 && r <= 140 && b - r >= 90) count++;
         }
       return count;
     });
