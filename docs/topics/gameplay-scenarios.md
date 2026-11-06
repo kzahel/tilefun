@@ -140,7 +140,8 @@ baselines, and restore prediction before accepting further movement.
 ## Review and evidence
 
 The immutable approved art banks and saved human decisions are unchanged.
-Character fingerprints now include recipe and Realm host source. Furniture motion
+Character and other engine-driven scene fingerprints hash recipes, art and
+`ENGINE_REVIEW_REVISION`, not engine source; bump it to reopen their review. Furniture motion
 version 2 reopens earlier behavior approvals; it does not relabel them as approvals
 of the Worker runtime. Presentation version 1 additionally reopens the eleven
 movement cases for the shared clock/interpolation/indoor-rendering migration; prior

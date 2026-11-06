@@ -8,7 +8,6 @@ import {
   RAIL_SOURCE,
   railCase,
 } from "../railway/RailwayPreview.js";
-import rendererSource from "../railway/RailwayPreview.ts?raw";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export const RAIL_SHEET: ArtSheet = {
@@ -51,7 +50,6 @@ export async function buildRailwayCandidate(
         c,
         motion: RAIL_MOTION_REVISION,
         samples: RAIL_SAMPLE_TIMES,
-        rendererSource,
       }),
     ),
   );

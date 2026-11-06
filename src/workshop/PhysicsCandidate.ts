@@ -1,11 +1,6 @@
 import { sha256 } from "../art/ArtSource.js";
-import recipe from "../scenarios/CoopRecipe.ts?raw";
-import latency from "../scenarios/OrderedLatency.ts?raw";
-import replica from "../scenarios/ScenarioReplica.ts?raw";
-import page from "./PhysicsPage.tsx?raw";
-import viewport from "./PhysicsViewport.ts?raw";
-import style from "./physics.css?raw";
-import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
+import { COOP_CASES, coopRecipe } from "../scenarios/CoopRecipe.js";
+import { ENGINE_REVIEW_REVISION } from "./EngineReviewRevision.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export async function buildPhysicsCandidate(): Promise<WorkshopCandidate> {
@@ -21,13 +16,8 @@ export async function buildPhysicsCandidate(): Promise<WorkshopCandidate> {
     fingerprint: await sha256(
       new TextEncoder().encode(
         JSON.stringify({
-          recipe,
-          replica,
-          latency,
-          page,
-          viewport,
-          style,
-          runtime: scenarioRuntimeSource,
+          recipes: COOP_CASES.map(coopRecipe),
+          engine: ENGINE_REVIEW_REVISION,
         }),
       ),
     ),

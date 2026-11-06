@@ -10615,7 +10615,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:80"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:40"
         }
       ]
     },
@@ -35503,7 +35503,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/CharacterCandidates.ts:22"
+          "source": "src/workshop/CharacterCandidates.ts:14"
         }
       ]
     },
@@ -37559,7 +37559,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:80"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:40"
         }
       ]
     },
@@ -38103,7 +38103,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:83"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:43"
         }
       ]
     },

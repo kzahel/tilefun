@@ -317,6 +317,9 @@ install chromium`) and committed runtime art, not the ignored original packs.
 Build and API checks detect changed inputs. A stale registry disables judgments
 and shows candidates as unchecked until regeneration. New rendered
 fingerprints preserve matching approvals and reopen only changed appearances.
+Engine-driven interactive scenes do not hash engine source; their identities
+use recipe/definition, art fingerprints and `ENGINE_REVIEW_REVISION`, bumped
+deliberately to reopen them (see [art review](topics/art-review.md)).
 
 See [the implementation plan](tactical/008-tilefun-workshop-plan.md) and
 [setup/data portability](setup-and-local-data.md). Future city art remains governed

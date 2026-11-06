@@ -840,6 +840,13 @@ terrain preparation or host lifecycle:
    GPU evidence uses bundled full Chromium. Compare matched scenes and report
    device, backend and measurement limits; functional or pixel parity alone does
    not establish frame pacing.
+5. Decide whether the change should reopen review of engine-driven Workshop
+   scenes (natural landscapes, world geometry, physics, character lab, car
+   projection, deferred vehicle labs). Their identities hash recipe/definition,
+   art fingerprints and `ENGINE_REVIEW_REVISION`
+   (`src/workshop/EngineReviewRevision.ts`), not engine source; bump that
+   constant deliberately to reopen them. Older entries in this topic that say
+   fingerprints include Realm or other engine source predate this rule.
 
 Existing entry points include `tests/traffic.spec.ts`, `tests/gpu-renderer.spec.ts`,
 the scenario tests under `src/scenarios/`, and the shared renderer boundary and

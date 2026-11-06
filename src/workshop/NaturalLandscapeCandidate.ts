@@ -1,37 +1,16 @@
 import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { sha256 } from "../art/ArtSource.js";
-import propGeometry from "../entities/PropFactories.ts?raw";
-import districts from "../generation/regional/DenseDistrictPlanner.ts?raw";
-import districtDrawing from "../generation/regional/DenseDistrictStrategy.ts?raw";
-import farms from "../generation/regional/FarmsteadPlanner.ts?raw";
 import {
   LANDSCAPE_PROFILES,
   type LandscapeProfile,
 } from "../generation/regional/NaturalLandscape.js";
-import planner from "../generation/regional/NaturalLandscape.ts?raw";
-import strategy from "../generation/regional/NaturalStrategy.ts?raw";
-import racetrack from "../generation/regional/RacetrackPlanner.ts?raw";
-import base from "../generation/regional/RegionalPlanner.ts?raw";
-import residents from "../generation/regional/ResidentFauna.ts?raw";
-import pets from "../generation/regional/SettlementPets.ts?raw";
-import forestPatterns from "../patterns/ForestThicket.ts?raw";
-import curves from "../railway/CurvedRailPlanner.ts?raw";
-import rail from "../railway/RailwayPlanner.ts?raw";
-import spriteDrawing from "../rendering/Canvas2DRenderer.ts?raw";
-import sceneCollection from "../rendering/collectScene.ts?raw";
-import drawing from "../rendering/RasterRenderBackend.ts?raw";
-import racePaint from "../road/RaceSurface.ts?raw";
 import {
   NATURAL_CASES,
   naturalCase,
   naturalExplorerUrl,
   naturalLandscapeRecipe,
 } from "../scenarios/NaturalLandscapeRecipe.js";
-import recipes from "../scenarios/NaturalLandscapeRecipe.ts?raw";
-import presentation from "../scenarios/ScenarioPresentationHost.ts?raw";
-import raceLanes from "../traffic/RacetrackLanes.ts?raw";
-import traffic from "../traffic/VehicleRegistry.ts?raw";
-import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
+import { ENGINE_REVIEW_REVISION } from "./EngineReviewRevision.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 export async function buildNaturalCandidate(
@@ -55,26 +34,7 @@ export async function buildNaturalCandidate(
       new TextEncoder().encode(
         JSON.stringify({
           recipe: naturalLandscapeRecipe(id, profile),
-          recipes,
-          planner,
-          farms,
-          pets,
-          residents,
-          districts,
-          districtDrawing,
-          strategy,
-          racetrack,
-          ...(id === "racetrack" ? { raceLanes, traffic, racePaint } : {}),
-          base,
-          rail,
-          curves,
-          propGeometry,
-          forestPatterns,
-          presentation,
-          runtime: scenarioRuntimeSource,
-          drawing,
-          spriteDrawing,
-          sceneCollection,
+          engine: ENGINE_REVIEW_REVISION,
           sources: catalog.sheets.filter(
             (s) =>
               s.id === "prop-oak-tree" ||

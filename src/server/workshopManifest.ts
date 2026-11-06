@@ -98,6 +98,7 @@ export async function workshopInputDigest(root = ".") {
     "src/workshop/ToolRegistry.ts",
     "src/workshop/VehicleCandidates.ts",
     "src/workshop/CarProjectionCandidate.ts",
+    "src/workshop/EngineReviewRevision.ts",
     "src/workshop/WorldGeometryCandidate.ts",
     "src/workshop/PhysicsCandidate.ts",
     "src/workshop/PhysicsPage.tsx",

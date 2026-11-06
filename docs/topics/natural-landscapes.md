@@ -226,7 +226,10 @@ Six fixed cases cover meadow, grove, forest, clearing/edge, pond bank and the re
 seed-2026 town railway. Each offers sparse/balanced/lush composition, walking,
 pause, zoom, reset and temporary save/reload; the train case has roof boarding and
 train/player follow. Eighteen distinct candidates appear in the Natural landscapes
-Workshop batch, with exact-source composition fingerprints and shared review notes.
+Workshop batch, with recipe/art composition fingerprints and shared review notes.
+Since 2026-11-06 those fingerprints hash the recipe, source sheets and
+`ENGINE_REVIEW_REVISION` instead of generator/renderer source; earlier notes below
+about source-hashed fingerprints are historical.
 No human verdict was created by implementation or validation.
 
 The [regional overview](https://tilefun.graehlarts.com/tilefun/world-explorer.html?seed=2026&x=-350&y=-450&zoom=1&landscape=balanced)

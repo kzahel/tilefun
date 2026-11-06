@@ -2,16 +2,8 @@ import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { loadVerifiedArtImage, sha256 } from "../art/ArtSource.js";
 import { CHARACTERS, type CharacterDefinition } from "../characters/CharacterCatalog.js";
 import { CharacterTestScene } from "../characters/CharacterTestScene.js";
-import controllerSource from "../characters/CharacterTestScene.ts?raw";
-import collisionSource from "../entities/collision.ts?raw";
-import animationSource from "../entities/spriteAnimation.ts?raw";
-import physicsSource from "../physics/PhysicsScene.ts?raw";
-import surfaceSource from "../physics/surfaceHeight.ts?raw";
-import scenarioSource from "../scenarios/CharacterRecipe.ts?raw";
-import hostSource from "../scenarios/ScenarioSession.ts?raw";
-import realmSource from "../server/Realm.ts?raw";
 import { required } from "../shared/required.js";
-import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
+import { ENGINE_REVIEW_REVISION } from "./EngineReviewRevision.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 
 /** All sixteen poses rendered with production anchoring, shadows and fixture depth. */
@@ -41,19 +33,7 @@ export async function buildCharacterCandidate(def: CharacterDefinition, catalog:
         definition: def,
         source: sheet.fingerprint,
         poses: hashes,
-        runtime: scenarioRuntimeSource,
-        controller: await sha256(
-          new TextEncoder().encode(
-            controllerSource +
-              scenarioSource +
-              realmSource +
-              hostSource +
-              physicsSource +
-              surfaceSource +
-              collisionSource +
-              animationSource,
-          ),
-        ),
+        engine: ENGINE_REVIEW_REVISION,
       }),
     ),
   );

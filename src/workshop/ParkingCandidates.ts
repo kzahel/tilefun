@@ -2,7 +2,6 @@ import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { sha256 } from "../art/ArtSource.js";
 import { reviewContext2D } from "../art/reviewCanvas.js";
 import { drawParkingStudy, parkingCase, parkingStudy } from "../art/studies/ParkingLotStudy.js";
-import renderer from "../art/studies/ParkingLotStudy.ts?raw";
 import type { GameAssets } from "../assets/GameAssets.js";
 import { CITY_SURFACE_SOURCE } from "../road/CitySurfaceRecipes.js";
 import { required } from "../shared/required.js";
@@ -24,7 +23,7 @@ export async function buildParkingCandidate(
     new TextEncoder().encode(`${canvas.width}:${canvas.height}:${await sha256(pixels.data)}`),
   );
   const revision = await sha256(
-    new TextEncoder().encode(JSON.stringify({ plan: parkingStudy(c.id), renderer })),
+    new TextEncoder().encode(JSON.stringify({ plan: parkingStudy(c.id) })),
   );
   const caseId = `parking-v1-${c.id}`,
     candidateId = `pattern:${caseId}`;

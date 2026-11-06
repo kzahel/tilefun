@@ -42,9 +42,11 @@ behavior; this topic owns the guardrails that keep structure from regressing.
   with shared Work plumbing in `wildlife/WorkKit.ts`; Workshop tools in
   `workshop/ToolRegistry.ts` (+ `ToolPages.tsx` for dedicated pages) and natural
   case presentation in `workshop/NaturalCasePresentation.ts`.
-- Workshop candidate identities for source-hashed batches embed raw engine source
-  (`?raw` imports). New files split out of a hashed module must be added to the
-  owning identity's source list, or edits to them will not reopen review.
+- Workshop candidate identities never hash engine source (no `?raw` imports).
+  Engine-driven scenes hash their recipe/definition, art fingerprints and
+  `ENGINE_REVIEW_REVISION` (`workshop/EngineReviewRevision.ts`); bump it
+  deliberately when an engine change should reopen their review. Pixel-identity
+  batches rely on rendered output. Engine modules can be split freely.
 - Hot files are split into collaborators (phase 5 of 221): Realm (`RealmRiding`,
   `RealmPhysics`, `RealmCommands` handler table, `RealmComposition`), GameServer
   (`RealmDirectory`, `SessionRegistry`, `DoorTransitions`), GameClient

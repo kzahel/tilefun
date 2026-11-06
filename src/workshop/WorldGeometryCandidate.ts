@@ -1,8 +1,4 @@
 import { sha256 } from "../art/ArtSource.js";
-import movement from "../physics/PhysicsScene.ts?raw";
-import geometry from "../physics/SurfacePatch.ts?raw";
-import excavation from "../physics/TerrainExcavation.ts?raw";
-import presentation from "../rendering/SurfacePresentation.ts?raw";
 import { generatedCrossingRecipe } from "../scenarios/GeneratedCrossingRecipe.js";
 import { railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { roadTrafficRecipe } from "../scenarios/RoadTrafficRecipe.js";
@@ -10,9 +6,8 @@ import { undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js
 import { vehicleDynamicsRecipe } from "../scenarios/VehicleDynamicsRecipe.js";
 import { vehicleGeometryRecipe } from "../scenarios/VehicleGeometryRecipe.js";
 import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
-import vehicles from "../traffic/VehicleRegistry.ts?raw";
 import { deferredVehicleCandidate } from "./DeferredVehicleCandidate.js";
-import { scenarioRuntimeSource } from "./ScenarioRuntimeSource.js";
+import { ENGINE_REVIEW_REVISION } from "./EngineReviewRevision.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 export async function buildWorldGeometryCandidate(
   fixture:
@@ -78,12 +73,7 @@ async function fingerprint(recipe: unknown) {
     new TextEncoder().encode(
       JSON.stringify({
         recipe,
-        runtime: scenarioRuntimeSource,
-        movement,
-        geometry,
-        excavation,
-        presentation,
-        vehicles,
+        engine: ENGINE_REVIEW_REVISION,
       }),
     ),
   );

@@ -2,7 +2,6 @@ import type { ArtSheet } from "../art/ArtCatalog.js";
 import { loadVerifiedArtImage, sha256 } from "../art/ArtSource.js";
 import { reviewContext2D } from "../art/reviewCanvas.js";
 import definitions from "../wildlife/reviews.json";
-import rendererSource from "./WildlifeCandidates.ts?raw";
 import type { ReviewBatch, WorkshopCandidate } from "./WorkshopTypes.js";
 
 export interface WildlifeReview {
@@ -58,7 +57,7 @@ export async function buildWildlifeCandidate(
   ctx.imageSmoothingEnabled = false;
   ctx.drawImage(scene, 0, 0);
   ctx.drawImage(contact, 0, scene.height);
-  const revision = await sha256(new TextEncoder().encode(JSON.stringify({ d, rendererSource })));
+  const revision = await sha256(new TextEncoder().encode(JSON.stringify({ d })));
   const fingerprint = await sha256(
     new TextEncoder().encode(
       JSON.stringify({

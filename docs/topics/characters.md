@@ -51,7 +51,7 @@ without restarting authority; settings changes rebuild the temporary recipe.
 Pose cycling pauses simulation and overrides only a displayed sprite copy; leaving
 inspection restores the replica's normal pose and clears held input. Hidden views
 stop the clock. `CharacterTestScene` remains a separate static reference renderer
-for source-hashed candidate verification, with no simulation loop.
+for candidate pose-pixel verification, with no simulation loop.
 [Tactical 054](../tactical/054-character-presentation-host.md) records the migration.
 See [Gameplay scenarios](gameplay-scenarios.md).
 
@@ -66,7 +66,8 @@ game's center/bottom convention, not an image bounding box.
 Six zero-event candidates are registered in the global inbox. Candidate identity
 pins source PNG bytes, default settings, sixteen rendered pose/fixture snapshots
 (without platform-dependent text labels)
-and the recipe, Realm host, collision, surface, gravity and animation source.
+and `ENGINE_REVIEW_REVISION`; it no longer hashes recipe, Realm or physics source
+(2026-11-06), so engine edits reopen it only when that constant is bumped.
 The earlier simulation migration changed these behavior identities and reopened review;
 the immutable approved-v1 gameplay bank and saved human decisions remain intact.
 Images are verified before display; stale inventories disable saves.

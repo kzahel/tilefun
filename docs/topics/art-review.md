@@ -54,6 +54,14 @@ Read-only live phone verification confirmed voting with stale broad inputs.
 After render/recipe/input changes run `npm run art:catalog` then
 `npm run workshop:manifest`; build checks both. Do not synthesize approvals.
 
+Candidate identities never hash engine source text. Pixel-identity candidates
+(buildings, rooms, wildlife, railways, parking studies) hash their definitions,
+art fingerprints and rendered output. Interactive engine-driven scenes (natural
+landscapes, world geometry, physics, character lab, car projection, deferred
+vehicle labs) hash their recipe/definition, art fingerprints and
+`ENGINE_REVIEW_REVISION` from `src/workshop/EngineReviewRevision.ts`; bump that
+constant deliberately when an engine change should reopen their review.
+
 Exact canvas fingerprints must use `reviewContext2D` from the **first** context
 acquisition, including intermediate sprite canvases. Default GPU and CPU canvas
 rasterization can disagree despite identical source art; a current manifest digest
@@ -135,8 +143,8 @@ Open [Workshop → Vehicles](https://tilefun.graehlarts.com/tilefun/workshop.htm
 [Railway previews](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/railways)
 registers 32 unapproved source, motion, layout and structure-study candidates.
 [Trains](trains.md) owns scope and the explicit pre-overworld review gate. Moving
-identities pin the source, recipe/motion implementation and deterministic sampled
-frames, with full-Chromium parity. Schematic studies must stay visibly labelled;
+identities pin the source, recipe, `RAIL_MOTION_REVISION` and deterministic
+sampled frames, with full-Chromium parity. Schematic studies must stay visibly labelled;
 their approval does not imply that physics or a complete art kit exists.
 
 ## Characters
