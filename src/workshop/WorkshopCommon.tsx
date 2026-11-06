@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { isCityReviewRun } from "../art/CityReviewRuns.js";
 import { primaryScene, scenePath } from "./SceneReview.js";
 import { WORKSHOP_TOOLS } from "./ToolRegistry.js";
-import { useManifest } from "./WorkshopQueries.js";
+import { useManifest, useSession } from "./WorkshopQueries.js";
 import type { CandidateSummary, WorkshopManifest } from "./WorkshopTypes.js";
 
 export const reviewPath = (id: string) => `/review/${encodeURIComponent(id)}`;
@@ -82,4 +82,28 @@ export function LegacyLink({
       {children}
     </a>
   );
+}
+export function AuthGate({ children }: { children: ReactNode }) {
+  const session = useSession(),
+    location = useLocation();
+  if (session.isPending) return <p role="status">Checking login…</p>;
+  if (session.error) return <ErrorMessage error={session.error} />;
+  if (!session.data?.authenticated)
+    return (
+      <section className="empty">
+        <p className="eyebrow">PRIVATE WORKSPACE</p>
+        <h1>Sign in to your Workshop.</h1>
+        <p>
+          Your reviews and notes are shared across tools. Drafts and pending saves stay in this
+          browser.
+        </p>
+        <Link
+          className="button"
+          to={`/login?returnTo=${encodeURIComponent(location.pathname + location.search)}`}
+        >
+          Sign in
+        </Link>
+      </section>
+    );
+  return children;
 }

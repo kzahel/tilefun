@@ -1,16 +1,14 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { gap } from "../shared/gap.js";
-import type { AnimalWork } from "./AnimalWork.js";
-import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import type { AnimalWorkSystem, WorkContext } from "./AnimalWorkSystem.js";
 import { actionSocket } from "./BehaviorArt.js";
 import { faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose, sourceType } from "./ForageResources.js";
-import { restoreFaunaPose, startleFauna } from "./faunaInteractions.js";
+import { startleFauna } from "./faunaInteractions.js";
+import { enterFaunaWork, freshWork, WorkKit } from "./WorkKit.js";
 
 function gardenKind(a: Entity) {
   const species = faunaProfile(a.type)?.species;
@@ -64,35 +62,16 @@ export function pollinateFlower(
 
 /** Shared saved authority for ground scratching and finite flower visits. */
 export class GardenWork {
+  private readonly kit: WorkKit;
   constructor(
     private readonly manager: EntityManager,
     private readonly work: AnimalWorkSystem,
-  ) {}
-  private find(id?: string) {
-    return id ? this.manager.entities.find((e) => e.persistentId === id) : undefined;
+  ) {
+    this.kit = new WorkKit(manager);
   }
   private nearby(a: Entity) {
     const p = a.position;
-    return this.manager.spatialHash
-      .queryRange(
-        Math.floor((p.wx - 180) / CHUNK_SIZE_PX),
-        Math.floor((p.wy - 180) / CHUNK_SIZE_PX),
-        Math.floor((p.wx + 180) / CHUNK_SIZE_PX),
-        Math.floor((p.wy + 180) / CHUNK_SIZE_PX),
-      )
-      .filter((e) => gap(e.position, p) < 180);
-  }
-  private enter(a: Entity, state: AnimalWork["state"]) {
-    const t = a.animalWork;
-    if (!t) return;
-    t.state = state;
-    t.elapsed = 0;
-    if (!a.fauna?.motion) {
-      a.motionIntent = { vx: 0, vy: 0 };
-      if (a.wanderAI) a.wanderAI.state = "idle";
-      restoreFaunaPose(a);
-    }
-    restoreAnimalWorkPose(a);
+    return this.kit.around(p, 180).filter((e) => gap(e.position, p) < 180);
   }
   private stop(a: Entity, cooldown = 3) {
     this.work.cancel(a, cooldown);
@@ -115,21 +94,13 @@ export class GardenWork {
     const kind = gardenKind(a),
       ai = a.fauna;
     if (!kind || !ai) return false;
-    a.animalWork ??= {
-      kind,
-      state: "idle",
-      elapsed: 0,
-      cooldown: 0,
-      deliveries: 0,
-      eaten: 0,
-      retrieved: 0,
-    };
+    a.animalWork ??= freshWork(kind);
     const t = a.animalWork,
       prior = t.elapsed;
     t.elapsed += dt;
     t.cooldown = Math.max(0, t.cooldown - dt);
-    const target = this.find(t.targetId),
-      held = this.find(t.heldId);
+    const target = this.kit.find(t.targetId),
+      held = this.kit.find(t.heldId);
     if (
       a.parentId !== undefined ||
       a.wanderAI?.following ||
@@ -177,7 +148,7 @@ export class GardenWork {
       }
       if (t.elapsed < (t.state === "peck" ? 0.8 : 1.2)) return true;
       if (t.state === "peck") {
-        this.enter(a, "eat");
+        enterFaunaWork(a, "eat");
         return true;
       }
       delete t.heldId;
@@ -203,7 +174,7 @@ export class GardenWork {
       target.workItem.units--;
       t.uncovered = (t.uncovered ?? 0) + 1;
       restoreWorkItemPose(target);
-      this.enter(a, "peck");
+      enterFaunaWork(a, "peck");
       return true;
     }
     if (t.state === "sip") {
@@ -218,7 +189,7 @@ export class GardenWork {
       restoreWorkItemPose(target);
       if (kind === "hummingbird") {
         t.guardWarned = false;
-        this.enter(a, "guard");
+        enterFaunaWork(a, "guard");
         return true;
       }
       this.stop(a, 1);
@@ -263,7 +234,7 @@ export class GardenWork {
           a.sprite.direction = t.facing;
           a.sprite.frameRow = t.facing;
         }
-        this.enter(a, kind === "chicken" ? "scratch" : "sip");
+        enterFaunaWork(a, kind === "chicken" ? "scratch" : "sip");
       } else if (!this.work.go(a, point, point.z, c, planning)) this.stop(a);
       return true;
     }
@@ -289,7 +260,7 @@ export class GardenWork {
       const item = food.workItem;
       if (!item) continue;
       if (item.claimedBy) {
-        const owner = this.find(item.claimedBy);
+        const owner = this.kit.find(item.claimedBy);
         if (owner?.animalWork?.targetId === food.persistentId) continue;
         delete item.claimedBy;
       }
@@ -304,7 +275,7 @@ export class GardenWork {
         t.targetId = durableId(food);
         t.sitePosition = { ...point, z: standZ };
         t.facing = direction;
-        this.enter(a, "seek");
+        enterFaunaWork(a, "seek");
         return true;
       }
     }

@@ -90,22 +90,19 @@ import { VehicleRegistry, type VehicleSource } from "../traffic/VehicleRegistry.
 import type { IServerTransport } from "../transport/Transport.js";
 import type { WorkContext } from "../wildlife/AnimalWorkSystem.js";
 import { AnimalWorkSystem } from "../wildlife/AnimalWorkSystem.js";
-import { startleDeer } from "../wildlife/deerInteractions.js";
 import { tickFoodSources } from "../wildlife/FoodGrowth.js";
 import { freshBallWork } from "../wildlife/ForageResources.js";
-import { setFaunaRidden, startleFauna } from "../wildlife/faunaInteractions.js";
-import { startleFrog } from "../wildlife/frogInteractions.js";
-import { startleMallard } from "../wildlife/mallardInteractions.js";
+import { setFaunaRidden } from "../wildlife/faunaInteractions.js";
 import { OwnedBalls } from "../wildlife/OwnedBalls.js";
-import { resolvePredatorCatches, startlePredator } from "../wildlife/predatorAI.js";
-import { startleRabbit } from "../wildlife/rabbitInteractions.js";
-import { startleRobin } from "../wildlife/robinInteractions.js";
+import { resolvePredatorCatches } from "../wildlife/predatorAI.js";
+import { isWildlife } from "../wildlife/WildlifeKinds.js";
 import {
   type PendingWildlifeRespawn,
   tickWildlifeRespawns,
   WILDLIFE_RESPAWN_LIMIT,
   WILDLIFE_RESPAWN_SCOPE,
 } from "../wildlife/WildlifeRespawns.js";
+import { startleWildlife } from "../wildlife/WildlifeSpecies.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
@@ -943,15 +940,7 @@ export class Realm {
           groundZ: p.groundZ ?? 0,
           enteredWater: p.jumpVZ === undefined && this.isEntityOnWater(p),
           endedGrounded: p.jumpVZ === undefined,
-          ...(support?.fauna ||
-          support?.predator ||
-          support?.deer ||
-          support?.robin ||
-          support?.rabbit ||
-          support?.frog ||
-          support?.mallard
-            ? { wildlifeContactId: support.id }
-            : {}),
+          ...(support && isWildlife(support) ? { wildlifeContactId: support.id } : {}),
         },
         getHeight,
       );
@@ -1956,13 +1945,8 @@ export class Realm {
             return;
           }
         }
-        if (animal.predator) startlePredator(animal, p.position);
-        else if (animal.fauna) startleFauna(animal, p.position);
-        else if (animal.deer) startleDeer(animal, p.position);
-        else if (animal.robin) startleRobin(animal, p.position);
-        else if (animal.rabbit) startleRabbit(animal, p.position);
-        else if (animal.frog) startleFrog(animal, p.position);
-        else startleMallard(animal, p.position);
+        // The contact id is only recorded for wildlife supports (see finishPhysics).
+        startleWildlife(animal, p.position);
         this.records?.changed(animal);
       }
       return;

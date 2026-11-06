@@ -50,6 +50,14 @@ import {
 } from "../persistence/WorldInspection.js";
 import { WorldStorePool } from "../persistence/WorldStorePool.js";
 import type { ClientMessage, RealmInfo, WorldMapMessage } from "../shared/protocol.js";
+import {
+  isRequest,
+  type RequestMessage,
+  type RequestOf,
+  type RequestType,
+  type ResponsePayload,
+  responseTo,
+} from "../shared/requests.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { Realm } from "./Realm.js";
@@ -69,6 +77,48 @@ const CURSOR_COLORS = [
   "#4dd0e1",
   "#a1887f",
 ];
+
+/** A request's work and reply, answered through `GameServer.respond`. */
+interface RequestContext<R extends RequestMessage> {
+  msg: R;
+  session: PlayerSession;
+  respond<T>(work: () => T | Promise<T>, reply: (value: T) => ResponsePayload<R> | null): void;
+}
+
+const noFields = () => ({});
+const ADMIN_REQUIRED = "Server administration requires an admin token.";
+
+/** Chat shares the RCON channel but carries no administrative capability. */
+function privileged(msg: RequestMessage): boolean {
+  return (
+    msg.type === "create-world" ||
+    msg.type === "recreate-world" ||
+    msg.type === "delete-world" ||
+    msg.type === "rename-world" ||
+    (msg.type === "rcon" &&
+      (typeof msg.command !== "string" || !/^\/?say(?:\s|$)/i.test(msg.command.trim())))
+  );
+}
+
+/** Realm mutations pass storage admission before they apply. */
+function isMutation(msg: ClientMessage): boolean {
+  return (
+    msg.type.startsWith("edit-") ||
+    msg.type === "throw-ball" ||
+    msg.type === "vehicle-emergency" ||
+    msg.type === "vehicle-horn" ||
+    msg.type === "player-interact"
+  );
+}
+
+function adminToken(msg: RequestMessage): string | undefined {
+  return "adminToken" in msg ? msg.adminToken : undefined;
+}
+
+function vehicleId(entityId: number): number {
+  if (!Number.isSafeInteger(entityId)) throw new Error("Invalid vehicle.");
+  return entityId;
+}
 
 export interface GameServerDeps {
   registry: IWorldRegistry;
@@ -117,13 +167,38 @@ export class GameServer {
   private readonly pendingOperations = new Set<Promise<unknown>>();
 
   /** Reply to a failed request so the client's pending request settles. */
-  private requestFailed(clientId: string, requestId: number): (error: unknown) => void {
-    return (error) =>
+  private requestFailed(clientId: string, requestId: number | undefined) {
+    return (error: unknown) =>
       this.transport.send(clientId, {
         type: "request-error",
-        requestId,
+        requestId: requestId ?? 0, // malformed id-less privileged messages
         message: error instanceof Error ? error.message : String(error),
       });
+  }
+
+  /**
+   * Answer one request: `work` runs now; a promise result is tracked and replied to once
+   * it settles, a plain result replies immediately. Every failure answers `request-error`;
+   * a `null` reply sends nothing (the session was replaced mid-request).
+   */
+  private respond<R extends RequestMessage, T>(
+    session: PlayerSession,
+    msg: R,
+    work: () => T | Promise<T>,
+    reply: (value: T) => ResponsePayload<R> | null,
+  ): void {
+    const failed = this.requestFailed(session.clientId, msg.requestId);
+    const send = (value: T) => {
+      const payload = reply(value);
+      if (payload) this.transport.send(session.clientId, responseTo(msg, payload));
+    };
+    try {
+      const result = work();
+      if (result instanceof Promise) void this.trackOperation(result).then(send).catch(failed);
+      else send(result);
+    } catch (error) {
+      failed(error);
+    }
   }
 
   /** Track durable/realm operations without holding ordinary command admission. */
@@ -485,7 +560,9 @@ export class GameServer {
   }
 
   /** A world-scoped roster: never expose other worlds or disconnected sessions. */
-  private async worldMap(session: PlayerSession, requestId: number): Promise<WorldMapMessage> {
+  private async worldMap(
+    session: PlayerSession,
+  ): Promise<ResponsePayload<RequestOf<"get-world-map">>> {
     const current = session.realmId ? this.realms.get(session.realmId) : undefined;
     const worldId = current?.interior?.parentWorldId ?? session.realmId;
     if (!current || !worldId) throw new Error("Join a world before opening the map.");
@@ -514,8 +591,6 @@ export class GameServer {
       });
     }
     return {
-      type: "world-map",
-      requestId,
       worldId,
       name: meta.name,
       generation: descriptorFromMetadata(meta),
@@ -946,7 +1021,6 @@ export class GameServer {
   }
 
   private async enterBuilding(
-    _clientId: string,
     session: PlayerSession,
     featureId: string,
     doorId = "street",
@@ -1013,7 +1087,6 @@ export class GameServer {
   }
 
   private async exitBuilding(
-    _clientId: string,
     session: PlayerSession,
     doorId = "street",
     walkThrough = false,
@@ -1142,12 +1215,7 @@ export class GameServer {
     this.sendDoorMotion(session, "arrive", from, to, overlay, emergence ? DOOR_FADE_MS : undefined);
   }
 
-  private movePlayerToRealm(
-    _clientId: string,
-    session: PlayerSession,
-    worldId: string,
-    arrival?: Arrival,
-  ) {
+  private movePlayerToRealm(session: PlayerSession, worldId: string, arrival?: Arrival) {
     return this.transitions.move(session, async () => ({
       realm: await this.getOrCreateRealm(worldId),
       ...(arrival ? { arrival } : {}),
@@ -1155,31 +1223,25 @@ export class GameServer {
     }));
   }
 
-  private respondToTransition(
-    clientId: string,
-    session: PlayerSession,
-    requestId: number,
-    type: "world-loaded" | "realm-joined",
-    operation: Promise<unknown>,
-  ): void {
-    void this.trackOperation(operation)
-      .then(() => {
-        if (session.retired) return;
-        const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
-        if (!realm) throw new Error("Destination realm unavailable.");
-        this.transport.send(clientId, { type: "player-assigned", entityId: session.player.id });
-        this.transport.send(clientId, {
-          type,
-          requestId,
-          worldId: session.realmId ?? "",
-          generation: realm.generation,
-          interior: realm.interior ?? undefined,
-          cameraX: session.player.position.wx,
-          cameraY: session.player.position.wy,
-          cameraZoom: session.cameraZoom,
-        });
-      })
-      .catch(this.requestFailed(clientId, requestId));
+  /** Reply to a completed realm transition with the arrival the client rebuilds its view from. */
+  private arrival(session: PlayerSession) {
+    return () => {
+      if (session.retired) return null;
+      const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+      if (!realm) throw new Error("Destination realm unavailable.");
+      this.transport.send(session.clientId, {
+        type: "player-assigned",
+        entityId: session.player.id,
+      });
+      return {
+        worldId: session.realmId ?? "",
+        generation: realm.generation,
+        interior: realm.interior ?? undefined,
+        cameraX: session.player.position.wx,
+        cameraY: session.player.position.wy,
+        cameraZoom: session.cameraZoom,
+      };
+    };
   }
 
   /**
@@ -1245,7 +1307,7 @@ export class GameServer {
   ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
     const localSession = this.sessions.get("local");
     if (localSession) {
-      return this.movePlayerToRealm("local", localSession, worldId, arrival);
+      return this.movePlayerToRealm(localSession, worldId, arrival);
     }
     // Fallback: load into default realm (no sessions yet)
     return this.loadWorldIntoDefaultRealm(worldId);
@@ -1285,7 +1347,7 @@ export class GameServer {
     for (const [, realm] of affected)
       for (const session of [...realm.sessions.values()]) {
         if (fallback) {
-          await this.movePlayerToRealm(session.clientId, session, fallback);
+          await this.movePlayerToRealm(session, fallback);
           const target = this.realms.get(fallback);
           this.transport.send(session.clientId, {
             type: "player-assigned",
@@ -1419,251 +1481,167 @@ export class GameServer {
 
   // ---- Private ----
 
+  /** The compiler requires one handler per request type; each answers through `respond`. */
+  private readonly requests: {
+    [K in RequestType]: (request: RequestContext<RequestOf<K>>) => void;
+  } = {
+    "call-train": ({ msg, session, respond }) =>
+      respond(async () => {
+        const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+        if (
+          !realm?.railways ||
+          session.transitioning ||
+          realm.saveManager?.pressured ||
+          !Number.isSafeInteger(msg.benchId)
+        )
+          throw new Error("Train service is unavailable right now.");
+        await realm.railways.call(session, msg.benchId);
+      }, noFields),
+    "enter-vehicle": ({ msg, session, respond }) =>
+      respond(
+        () => this.controlVehicle(session, (v) => v.enter(session, vehicleId(msg.entityId))),
+        noFields,
+      ),
+    "recover-vehicle": ({ msg, session, respond }) =>
+      respond(
+        () => this.controlVehicle(session, (v) => v.recover(session, vehicleId(msg.entityId))),
+        noFields,
+      ),
+    "exit-vehicle": ({ session, respond }) =>
+      respond(() => this.controlVehicle(session, (v) => v.exit(session)), noFields),
+    "set-player-model": ({ msg, session, respond }) =>
+      respond(
+        () => {
+          if (!isPlayerModel(msg.model)) throw new Error("Unknown player model.");
+          session.playerModel = msg.model;
+          if (session.player) applyPlayerModel(session.player, msg.model);
+        },
+        () => ({ model: msg.model }),
+      ),
+    "get-world-map": ({ session, respond }) =>
+      respond(
+        () => this.worldMap(session),
+        (map) => map,
+      ),
+    "load-world": ({ msg, session, respond }) =>
+      respond(
+        () => this.movePlayerToRealm(session, msg.worldId, msg.arrival),
+        this.arrival(session),
+      ),
+    "join-realm": ({ msg, session, respond }) =>
+      respond(
+        () =>
+          msg.resume && !session.realmId
+            ? this.transitions.move(session, () => this.resumeDestination(session, msg.worldId))
+            : this.movePlayerToRealm(session, msg.worldId, msg.arrival),
+        this.arrival(session),
+      ),
+    "enter-building": ({ msg, session, respond }) =>
+      respond(
+        () => this.enterBuilding(session, msg.featureId, msg.doorId, msg.walkThrough),
+        this.arrival(session),
+      ),
+    "exit-building": ({ msg, session, respond }) =>
+      respond(() => this.exitBuilding(session, msg.doorId, msg.walkThrough), this.arrival(session)),
+    "leave-realm": ({ session, respond }) => respond(() => this.leaveRealm(session), noFields),
+    "list-realms": ({ respond }) =>
+      respond(
+        () => this.buildRealmList(),
+        (realms) => ({ realms }),
+      ),
+    "create-world": ({ msg, respond }) =>
+      respond(
+        () => this.createWorld(msg.name, msg.worldType, msg.seed, msg.generation),
+        (meta) => ({ meta }),
+      ),
+    "recreate-world": ({ msg, respond }) =>
+      respond(
+        () => this.recreateWorld(msg.worldId),
+        (meta) => ({ meta }),
+      ),
+    "delete-world": ({ msg, respond }) => respond(() => this.deleteWorld(msg.worldId), noFields),
+    "list-worlds": ({ respond }) =>
+      respond(
+        () => this.listWorlds(),
+        (worlds) => ({ worlds }),
+      ),
+    "rename-world": ({ msg, respond }) =>
+      respond(() => this.renameWorld(msg.worldId, msg.name), noFields),
+    rcon: ({ msg, session, respond }) =>
+      respond(
+        () => this.runRcon(session, msg.command),
+        (output) => ({ output }),
+      ),
+  };
+
+  private handleRequest<K extends RequestType>(
+    type: K,
+    msg: RequestOf<K>,
+    session: PlayerSession,
+  ): void {
+    this.requests[type]({
+      msg,
+      session,
+      respond: (work, reply) => this.respond(session, msg, work, reply),
+    });
+  }
+
+  private controlVehicle(session: PlayerSession, control: (vehicles: Realm["vehicles"]) => void) {
+    const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+    if (!realm || session.transitioning || realm.saveManager?.pressured)
+      throw new Error("Vehicle control is unavailable right now.");
+    control(realm.vehicles);
+  }
+
+  private leaveRealm(session: PlayerSession): void {
+    if (session.transitioning) throw new Error("A realm transition is already running.");
+    if (!session.realmId) return;
+    const leftRealmId = session.realmId;
+    const realm = this.realms.get(leftRealmId);
+    if (realm) {
+      realm.removePlayer(session.clientId);
+      this.tryUnloadRealm(leftRealmId);
+    }
+    this.broadcastRealmPlayerCount(leftRealmId);
+  }
+
+  private runRcon(session: PlayerSession, command: unknown): string[] {
+    if (typeof command !== "string" || command.length > 2048)
+      throw new Error("Invalid console command.");
+    if (!this.serverConsole) return ["Server console not initialized"];
+    this.serverConsole.rconSenderName = session.displayName || session.clientId;
+    try {
+      return this.serverConsole.execServer(command);
+    } finally {
+      this.serverConsole.rconSenderName = null;
+    }
+  }
+
+  private identifyModel(session: PlayerSession, msg: Extract<ClientMessage, { type: "identify" }>) {
+    this.identify(session, msg.profileId, msg.displayName);
+    if (!msg.profileId || session.profileId === msg.profileId) {
+      session.playerModel = normalizePlayerModel(msg.playerModel);
+      if (session.player) applyPlayerModel(session.player, session.playerModel);
+    }
+  }
+
   private handleMessage(clientId: string, msg: ClientMessage): void {
     const session = this.sessions.get(clientId);
     if (!session || session.retired) return;
 
-    // Chat shares the RCON channel but carries no administrative capability.
-    const privileged =
-      msg.type === "create-world" ||
-      msg.type === "recreate-world" ||
-      msg.type === "delete-world" ||
-      msg.type === "rename-world" ||
-      (msg.type === "rcon" &&
-        (typeof msg.command !== "string" || !/^\/?say(?:\s|$)/i.test(msg.command.trim())));
-    if (
-      privileged &&
-      !this.authorizeAdmin(clientId, "adminToken" in msg ? msg.adminToken : undefined)
-    ) {
-      this.transport.send(clientId, {
-        type: "request-error",
-        requestId: "requestId" in msg ? msg.requestId : 0,
-        message: "Server administration requires an admin token.",
-      });
+    if (isRequest(msg)) {
+      if (!privileged(msg) || this.authorizeAdmin(clientId, adminToken(msg)))
+        this.handleRequest(msg.type, msg, session);
+      else this.requestFailed(clientId, msg.requestId)(new Error(ADMIN_REQUIRED));
       return;
     }
-    if (msg.type === "rcon" && (typeof msg.command !== "string" || msg.command.length > 2048)) {
-      this.transport.send(clientId, {
-        type: "request-error",
-        requestId: msg.requestId,
-        message: "Invalid console command.",
-      });
+    if (msg.type === "identify") {
+      this.identifyModel(session, msg);
       return;
     }
-
-    // Global messages handled by GameServer
-    switch (msg.type) {
-      case "call-train": {
-        void this.trackOperation(
-          (async () => {
-            const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
-            if (
-              !realm?.railways ||
-              session.transitioning ||
-              realm.saveManager?.pressured ||
-              !Number.isSafeInteger(msg.benchId)
-            )
-              throw Error("Train service is unavailable right now.");
-            await realm.railways.call(session, msg.benchId);
-          })(),
-        )
-          .then(() =>
-            this.transport.send(clientId, { type: "vehicle-controlled", requestId: msg.requestId }),
-          )
-          .catch(this.requestFailed(clientId, msg.requestId));
-        return;
-      }
-      case "enter-vehicle":
-      case "recover-vehicle":
-      case "exit-vehicle": {
-        try {
-          const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
-          if (!realm || session.transitioning || realm.saveManager?.pressured)
-            throw Error("Vehicle control is unavailable right now.");
-          if (msg.type === "enter-vehicle") {
-            if (!Number.isSafeInteger(msg.entityId)) throw Error("Invalid vehicle.");
-            realm.vehicles.enter(session, msg.entityId);
-          } else if (msg.type === "recover-vehicle") {
-            if (!Number.isSafeInteger(msg.entityId)) throw Error("Invalid vehicle.");
-            realm.vehicles.recover(session, msg.entityId);
-          } else realm.vehicles.exit(session);
-          this.transport.send(clientId, { type: "vehicle-controlled", requestId: msg.requestId });
-        } catch (error) {
-          this.requestFailed(clientId, msg.requestId)(error);
-        }
-        return;
-      }
-      case "get-world-map":
-        void this.trackOperation(this.worldMap(session, msg.requestId))
-          .then((map) => this.transport.send(clientId, map))
-          .catch(this.requestFailed(clientId, msg.requestId));
-        return;
-      case "enter-building":
-      case "exit-building": {
-        const operation =
-          msg.type === "enter-building"
-            ? this.enterBuilding(clientId, session, msg.featureId, msg.doorId, msg.walkThrough)
-            : this.exitBuilding(clientId, session, msg.doorId, msg.walkThrough);
-        this.respondToTransition(clientId, session, msg.requestId, "realm-joined", operation);
-        return;
-      }
-      case "identify":
-        this.identify(session, msg.profileId, msg.displayName);
-        if (!msg.profileId || session.profileId === msg.profileId) {
-          session.playerModel = normalizePlayerModel(msg.playerModel);
-          if (session.player) applyPlayerModel(session.player, session.playerModel);
-        }
-        return;
-      case "set-player-model":
-        if (!isPlayerModel(msg.model)) {
-          this.transport.send(clientId, {
-            type: "request-error",
-            requestId: msg.requestId,
-            message: "Unknown player model.",
-          });
-          return;
-        }
-        session.playerModel = msg.model;
-        if (session.player) applyPlayerModel(session.player, msg.model);
-        this.transport.send(clientId, {
-          type: "player-model-set",
-          requestId: msg.requestId,
-          model: msg.model,
-        });
-        return;
-      case "flush":
-        this.flush();
-        return;
-
-      case "load-world":
-      case "join-realm":
-        this.respondToTransition(
-          clientId,
-          session,
-          msg.requestId,
-          msg.type === "load-world" ? "world-loaded" : "realm-joined",
-          msg.type === "join-realm" && msg.resume && !session.realmId
-            ? this.transitions.move(session, () => this.resumeDestination(session, msg.worldId))
-            : this.movePlayerToRealm(clientId, session, msg.worldId, msg.arrival),
-        );
-        return;
-
-      case "list-realms":
-        void this.trackOperation(this.buildRealmList())
-          .then((realms) =>
-            this.transport.send(clientId, {
-              type: "realm-list",
-              requestId: msg.requestId,
-              realms,
-            }),
-          )
-          .catch(this.requestFailed(clientId, msg.requestId));
-        return;
-
-      case "leave-realm":
-        if (session.transitioning) {
-          this.transport.send(clientId, {
-            type: "request-error",
-            requestId: msg.requestId,
-            message: "A realm transition is already running.",
-          });
-          return;
-        }
-        if (session.realmId) {
-          const leftRealmId = session.realmId;
-          const realm = this.realms.get(leftRealmId);
-          if (realm) {
-            realm.removePlayer(clientId);
-            this.tryUnloadRealm(leftRealmId);
-          }
-          this.broadcastRealmPlayerCount(leftRealmId);
-        }
-        this.transport.send(clientId, {
-          type: "realm-left",
-          requestId: msg.requestId,
-        });
-        return;
-
-      case "create-world":
-        this.trackOperation(this.createWorld(msg.name, msg.worldType, msg.seed, msg.generation))
-          .then((meta) => {
-            this.transport.send(clientId, {
-              type: "world-created",
-              requestId: msg.requestId,
-              meta,
-            });
-          })
-          .catch(this.requestFailed(clientId, msg.requestId));
-        return;
-
-      case "recreate-world":
-        this.trackOperation(this.recreateWorld(msg.worldId))
-          .then((meta) =>
-            this.transport.send(clientId, {
-              type: "world-created",
-              requestId: msg.requestId,
-              meta,
-            }),
-          )
-          .catch(this.requestFailed(clientId, msg.requestId));
-        return;
-
-      case "delete-world":
-        this.trackOperation(this.deleteWorld(msg.worldId))
-          .then(() => {
-            this.transport.send(clientId, {
-              type: "world-deleted",
-              requestId: msg.requestId,
-            });
-          })
-          .catch(this.requestFailed(clientId, msg.requestId));
-        return;
-
-      case "list-worlds":
-        void this.trackOperation(this.listWorlds())
-          .then((worlds) => {
-            this.transport.send(clientId, {
-              type: "world-list",
-              requestId: msg.requestId,
-              worlds,
-            });
-          })
-          .catch(this.requestFailed(clientId, msg.requestId));
-        return;
-
-      case "rename-world":
-        void this.trackOperation(this.renameWorld(msg.worldId, msg.name))
-          .then(() => {
-            this.transport.send(clientId, {
-              type: "world-renamed",
-              requestId: msg.requestId,
-            });
-          })
-          .catch(this.requestFailed(clientId, msg.requestId));
-        return;
-
-      case "rcon": {
-        const output: string[] = [];
-        if (this.serverConsole) {
-          this.serverConsole.rconSenderName = session.displayName || clientId;
-          try {
-            output.push(...this.serverConsole.execServer(msg.command));
-          } finally {
-            this.serverConsole.rconSenderName = null;
-          }
-        } else {
-          output.push("Server console not initialized");
-        }
-        this.transport.send(clientId, {
-          type: "rcon-response",
-          requestId: msg.requestId,
-          output,
-        });
-        return;
-      }
-      default:
-        // Session- and realm-scoped messages continue below.
-        break;
+    if (msg.type === "flush") {
+      this.flush();
+      return;
     }
 
     // set-editor-mode is handled at the GameServer level so it works even
@@ -1716,13 +1694,7 @@ export class GameServer {
       }
       realm.handleMessage(clientId, session, msg);
     };
-    if (
-      msg.type.startsWith("edit-") ||
-      msg.type === "throw-ball" ||
-      msg.type === "vehicle-emergency" ||
-      msg.type === "vehicle-horn" ||
-      msg.type === "player-interact"
-    ) {
+    if (isMutation(msg)) {
       const report = (error: unknown) =>
         this.transport.send(clientId, {
           type: "storage-status",

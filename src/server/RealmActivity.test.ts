@@ -5,9 +5,10 @@ import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { required } from "../shared/required.js";
 import { createRobin } from "../wildlife/Robin.js";
+import { isWildlife } from "../wildlife/WildlifeKinds.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { RealmActivity } from "./RealmActivity.js";
-import { isWildlife, WildlifeActivity } from "./WildlifeActivity.js";
+import { WildlifeActivity } from "./WildlifeActivity.js";
 
 const view = (cx = 0) => ({ minCx: cx, maxCx: cx, minCy: 0, maxCy: 0 });
 async function fixture() {

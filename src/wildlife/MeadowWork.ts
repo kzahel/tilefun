@@ -1,7 +1,5 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
-import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { gap } from "../shared/gap.js";
@@ -14,6 +12,7 @@ import { restoreWorkItemPose } from "./ForageResources.js";
 import { restoreFaunaPose, startleFauna } from "./faunaInteractions.js";
 import { restoreRabbitPose, startleRabbit } from "./rabbitInteractions.js";
 import { restoreRobinPose, robinMotionZ, startleRobin } from "./robinInteractions.js";
+import { faceToward, freshWork, WorkKit } from "./WorkKit.js";
 
 const kindOf = (a: Entity) =>
   a.rabbit
@@ -26,34 +25,21 @@ const kindOf = (a: Entity) =>
 export const isMeadowWorker = (a: Entity) => !!kindOf(a);
 const moving = (a: Entity) => !!(a.rabbit?.hop || a.robin?.motion || a.fauna?.motion);
 const native = (a: Entity) => a.rabbit ?? a.robin ?? a.fauna;
-const face = (a: Entity, p: PositionComponent) => {
-  if (!a.sprite) return;
-  a.sprite.direction = directionFromVelocity(p.wx - a.position.wx, p.wy - a.position.wy);
-  a.sprite.frameRow = a.sprite.direction;
-  if (a.animalWork) a.animalWork.facing = a.sprite.direction;
-};
 
 /** Finite feeding and lookout duties use the same saved work component as carrying. */
 export class MeadowWork {
-  constructor(private readonly manager: EntityManager) {}
-  private nearby(a: Entity, radius: number) {
-    return this.manager.spatialHash
-      .queryRange(
-        Math.floor((a.position.wx - radius) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wy - radius) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wx + radius) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wy + radius) / CHUNK_SIZE_PX),
-      )
-      .filter((e) => gap(e.position, a.position) <= radius);
+  private readonly kit: WorkKit;
+  constructor(private readonly manager: EntityManager) {
+    this.kit = new WorkKit(manager);
   }
-  private find(id?: string) {
-    return id ? this.manager.entities.find((e) => e.persistentId === id) : undefined;
+  private nearby(a: Entity, radius: number) {
+    return this.kit.around(a.position, radius).filter((e) => gap(e.position, a.position) <= radius);
   }
   private availableFood(item: Entity, context: WorkContext): boolean {
     const food = item.workItem;
     if (!food || item.parentId !== undefined) return false;
     if (!food.claimedBy) return true;
-    const owner = this.find(food.claimedBy);
+    const owner = this.kit.find(food.claimedBy);
     const task = owner?.animalWork;
     if (
       item.persistentId &&
@@ -82,14 +68,8 @@ export class MeadowWork {
     }
     restoreAnimalWorkPose(a);
   }
-  private release(a: Entity) {
-    const target = this.find(a.animalWork?.targetId);
-    if (target?.workItem && target.workItem.claimedBy === a.persistentId)
-      delete target.workItem.claimedBy;
-    if (a.animalWork) delete a.animalWork.targetId;
-  }
   private cancel(a: Entity, delay = 3) {
-    this.release(a);
+    this.kit.releaseTarget(a);
     const task = a.animalWork;
     if (!task) return;
     this.enter(a, "idle");
@@ -181,15 +161,7 @@ export class MeadowWork {
     const kind = kindOf(a),
       ai = native(a);
     if (!kind || !ai) return false;
-    a.animalWork ??= {
-      kind,
-      state: "idle",
-      elapsed: 0,
-      cooldown: 0,
-      deliveries: 0,
-      eaten: 0,
-      retrieved: 0,
-    };
+    a.animalWork ??= freshWork(kind);
     const task = a.animalWork;
     task.elapsed += dt;
     task.cooldown = Math.max(0, task.cooldown - dt);
@@ -223,7 +195,7 @@ export class MeadowWork {
           (e) =>
             e.parentId === undefined && !e.wanderAI?.following && e.wanderAI?.state !== "ridden",
         )) {
-          this.release(peer);
+          this.kit.releaseTarget(peer);
           if (peer.animalWork) {
             peer.animalWork.state = "idle";
             peer.animalWork.cooldown = 12;
@@ -254,7 +226,7 @@ export class MeadowWork {
               });
       if (threat) {
         task.threat = { ...threat.position };
-        face(a, threat.position);
+        faceToward(a, threat.position);
         this.enter(a, "alarm");
       } else if (task.elapsed >= 6) {
         task.deliveries++;
@@ -271,7 +243,7 @@ export class MeadowWork {
       this.cancel(a, 1);
       return false;
     }
-    const target = this.find(task.targetId);
+    const target = this.kit.find(task.targetId);
     if (task.state === "eat") {
       if (
         !target?.workItem ||
@@ -286,7 +258,7 @@ export class MeadowWork {
       if (task.elapsed < 1.2) return true;
       target.workItem.units = Math.max(0, (target.workItem.units || 1) - 1);
       task.eaten++;
-      this.release(a);
+      this.kit.releaseTarget(a);
       if (!target.workItem.units && !target.workItem.growth) this.manager.remove(target.id);
       else restoreWorkItemPose(target);
       this.enter(a, kind === "robin" ? "return" : "rest");
@@ -303,7 +275,7 @@ export class MeadowWork {
         return false;
       }
       if (gap(target.position, a.position) < 12 && Math.abs((target.wz ?? 0) - (a.wz ?? 0)) < 4) {
-        face(a, target.position);
+        faceToward(a, target.position);
         this.enter(a, "eat");
         return true;
       }

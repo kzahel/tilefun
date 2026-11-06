@@ -1,7 +1,5 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
-import type { Entity, PositionComponent } from "../entities/Entity.js";
+import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
-import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import { launchBody, setBodyPose } from "../physics/PhysicalEdits.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
@@ -13,6 +11,7 @@ import { type FaunaBehavior, faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose } from "./ForageResources.js";
 import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
 import { type ClimbTree, sameTree, treeClimbPoint } from "./TreeClimbing.js";
+import { faceToward, freshWork, WorkKit } from "./WorkKit.js";
 
 const kindOf = (a: Entity) => {
   const p = faunaProfile(a.type);
@@ -27,27 +26,16 @@ const kindOf = (a: Entity) => {
 export const isWoodlandWorker = (a: Entity) => !!kindOf(a);
 /** One saved state machine for climbing, conserved cache theft and physical toy play. */
 export class WoodlandWork {
+  private readonly kit: WorkKit;
   constructor(
     private manager: EntityManager,
     private work: AnimalWorkSystem,
-  ) {}
-  private find(id?: string) {
-    return id ? this.manager.entities.find((e) => e.persistentId === id) : undefined;
+  ) {
+    this.kit = new WorkKit(manager);
   }
   private nearby(a: Entity) {
     const p = a.position;
-    return this.manager.spatialHash
-      .queryRange(
-        Math.floor((p.wx - 160) / CHUNK_SIZE_PX),
-        Math.floor((p.wy - 160) / CHUNK_SIZE_PX),
-        Math.floor((p.wx + 160) / CHUNK_SIZE_PX),
-        Math.floor((p.wy + 160) / CHUNK_SIZE_PX),
-      )
-      .filter((e) => gap(p, e.position) <= 160)
-      .sort(
-        (x, y) =>
-          gap(x.position, p) - gap(y.position, p) || durableId(x).localeCompare(durableId(y)),
-      );
+    return this.kit.nearest(p, 160, (e) => gap(p, e.position) <= 160);
   }
   private enter(a: Entity, state: AnimalWork["state"]) {
     const t = a.animalWork;
@@ -67,21 +55,9 @@ export class WoodlandWork {
     if (!a.fauna?.motion) restoreFaunaPose(a);
     restoreAnimalWorkPose(a);
   }
-  private face(a: Entity, p: PositionComponent) {
-    if (!a.sprite) return;
-    a.sprite.direction = directionFromVelocity(p.wx - a.position.wx, p.wy - a.position.wy);
-    a.sprite.frameRow = a.sprite.direction;
-    if (a.animalWork) a.animalWork.facing = a.sprite.direction;
-  }
-  private release(a: Entity) {
-    const target = this.find(a.animalWork?.targetId);
-    if (target?.workItem && target.workItem.claimedBy === a.persistentId)
-      delete target.workItem.claimedBy;
-    if (a.animalWork) delete a.animalWork.targetId;
-  }
   private cancel(a: Entity, delay = 3) {
     if (a.motionIntent) delete a.motionIntent.altitude;
-    this.release(a);
+    this.kit.releaseTarget(a);
     this.work.drop(a);
     const t = a.animalWork;
     if (t) {
@@ -97,7 +73,7 @@ export class WoodlandWork {
     const i = e.workItem;
     if (!i || e.parentId !== undefined || !c.ready(e.position, 24)) return false;
     if (i.claimedBy) {
-      const owner = this.find(i.claimedBy);
+      const owner = this.kit.find(i.claimedBy);
       if (
         owner?.animalWork?.targetId === e.persistentId ||
         owner?.animalWork?.heldId === e.persistentId
@@ -113,7 +89,7 @@ export class WoodlandWork {
     t.tree = { ...tree };
     t.climbZ = a.wz ?? 0;
     t.climbFrom = { ...a.position, z: a.wz ?? 0 };
-    this.face(a, { wx: tree.wx, wy: tree.wy });
+    faceToward(a, { wx: tree.wx, wy: tree.wy });
     this.enter(a, down ? "descend" : "climb");
   }
   private supported(t: AnimalWork, c: WorkContext) {
@@ -126,15 +102,7 @@ export class WoodlandWork {
     const kind = kindOf(a),
       ai = a.fauna;
     if (!kind || !ai) return false;
-    a.animalWork ??= {
-      kind,
-      state: "idle",
-      elapsed: 0,
-      cooldown: 0,
-      deliveries: 0,
-      eaten: 0,
-      retrieved: 0,
-    };
+    a.animalWork ??= freshWork(kind);
     const t = a.animalWork;
     const priorElapsed = t.elapsed;
     t.elapsed += dt;
@@ -149,7 +117,7 @@ export class WoodlandWork {
     }
     if (ai.alarmFrom || ["recover", "startle", "flee"].includes(ai.state)) {
       if (t.tree && t.climbZ !== undefined && (a.wz ?? 0) > t.tree.ground + 1) {
-        this.release(a);
+        this.kit.releaseTarget(a);
         this.work.drop(a);
         // Reverse from the actual attained height; no jump to the crown on alarm.
         if (t.state !== "descend") {
@@ -172,7 +140,7 @@ export class WoodlandWork {
       return true;
     }
     if (t.heldId) {
-      const held = this.find(t.heldId);
+      const held = this.kit.find(t.heldId);
       if (!held || held.parentId !== a.id || held.workItem?.claimedBy !== a.persistentId) {
         this.cancel(a);
         return false;
@@ -233,7 +201,7 @@ export class WoodlandWork {
       else this.cancel(a);
       return true;
     }
-    const target = this.find(t.targetId);
+    const target = this.kit.find(t.targetId);
     if (["rest", "perch"].includes(t.state)) {
       if (t.elapsed < (t.state === "perch" ? 6 : 3)) return true;
       if (t.tree) this.startClimb(a, t.tree, true);
@@ -245,7 +213,7 @@ export class WoodlandWork {
     }
     if (t.state === "eat") {
       if (t.elapsed < 2) return true;
-      const held = this.find(t.heldId);
+      const held = this.kit.find(t.heldId);
       if (held?.parentId === a.id) {
         delete t.heldId;
         this.manager.remove(held.id);
@@ -287,7 +255,7 @@ export class WoodlandWork {
       target.jumpZ = 0.1;
       setBodyPose(target, { wz: (a.wz ?? 0) + 0.1 });
       t.played = (t.played ?? 0) + 1;
-      this.release(a);
+      this.kit.releaseTarget(a);
       this.enter(a, "rest");
       return true;
     }
@@ -300,7 +268,7 @@ export class WoodlandWork {
         this.cancel(a);
         return false;
       }
-      this.face(a, target.position);
+      faceToward(a, target.position);
       if (t.elapsed < 1.1) return true;
       if (kind === "capuchin") {
         delete target.workItem.claimedBy;
@@ -309,7 +277,7 @@ export class WoodlandWork {
           else this.cancel(a);
           return true;
         }
-        this.release(a);
+        this.kit.releaseTarget(a);
         this.enter(a, "eat");
         return true;
       }
@@ -329,7 +297,7 @@ export class WoodlandWork {
       target.workItem.contents.shift();
       restoreWorkItemPose(target);
       t.stolen = (t.stolen ?? 0) + 1;
-      this.release(a);
+      this.kit.releaseTarget(a);
       this.enter(a, "return");
       return true;
     }
@@ -357,7 +325,7 @@ export class WoodlandWork {
         if (gap(a.position, target.position) < 12) this.enter(a, "pickup");
         else if (!this.work.go(a, target.position, target.wz ?? 0, c, planning)) this.cancel(a);
       } else {
-        this.face(a, target.position);
+        faceToward(a, target.position);
         const d = gap(a.position, target.position);
         if (d < 30) {
           const travel = Math.max(0, d - 10);

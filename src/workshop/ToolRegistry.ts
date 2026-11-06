@@ -1,7 +1,19 @@
 import { CITY_REVIEW_RUNS } from "../art/CityReviewRuns.js";
 import type { ReviewBatch, WorkshopTool } from "./WorkshopTypes.js";
 
-export const WORKSHOP_TOOLS: WorkshopTool[] = [
+/** One Workshop tool: manifest metadata plus Workshop-only navigation. Custom React pages are
+ * bound by id in `ToolPages.tsx`; other tools open by `mode` (source, review, adapter, link). */
+interface WorkshopToolEntry<Id extends string = string> extends WorkshopTool {
+  id: Id;
+  /** Listed under "Make & explore"; `review` also shows the tool's pending review count. */
+  sidebar?: "link" | "review";
+  /** Inbox "Rooms & furniture" area; other tools' batches are "City & exterior". */
+  area?: "interiors";
+}
+const defineTools = <const Id extends string>(tools: readonly WorkshopToolEntry<Id>[]) => tools;
+
+/** Registry order is the tools index, sidebar and manifest `tools` order. */
+export const WORKSHOP_TOOLS = defineTools([
   {
     id: "physics",
     name: "Co-op physics laboratory",
@@ -9,6 +21,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Two playable clients, dynamic-body replay, shared physics scripts and seeded guest latency. Includes the bridge/scale experiment.",
     url: "workshop.html#/tool/physics",
     mode: "source",
+    sidebar: "link",
   },
   {
     id: "car-transporter",
@@ -63,6 +76,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Big shopping-center parking, smaller town lots and long-bay patterns with native tiles and parked cars.",
     url: "workshop.html#/tool/parking-lab",
     mode: "review",
+    sidebar: "review",
   },
   {
     id: "authored-trains",
@@ -87,6 +101,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Walk a raised deck or descend into an underground garage; inspect shared physics, spaces and cutaway visibility.",
     url: "workshop.html#/tool/world-geometry",
     mode: "source",
+    sidebar: "link",
   },
   {
     id: "renderer-lab",
@@ -103,6 +118,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Orbit a car built from sprite artwork and fitted 3D surfaces. Compare the source view and approved collision box.",
     url: "workshop.html#/tool/car-projection",
     mode: "adapter",
+    sidebar: "link",
   },
   {
     id: "animal-browser",
@@ -127,6 +143,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Review rail patterns, five trains in all four directions, station plans and structure studies for railway expansion.",
     url: "workshop.html#/tool/railways",
     mode: "review",
+    sidebar: "review",
   },
   {
     id: "traffic",
@@ -135,6 +152,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Inspect ordinary road traffic, junction queues and rolling car steering with shared Worker physics; drive, pause and save/reload.",
     url: "workshop.html#/tool/traffic",
     mode: "source",
+    sidebar: "link",
   },
   {
     id: "character-lab",
@@ -143,6 +161,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Walk the six new characters. Tune feet, collision bounds, height, depth and animation; save exact review settings.",
     url: "workshop.html#/tool/character-lab",
     mode: "review",
+    sidebar: "review",
   },
   {
     id: "vehicles",
@@ -151,6 +170,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Review cars, buses and service trucks in four directions. Adjust ground bounds, physical height and placement; walk around each proposal.",
     url: "workshop.html#/tool/vehicles",
     mode: "review",
+    sidebar: "review",
   },
   {
     id: "patterns",
@@ -159,6 +179,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Draw rooms, horizontal fenced trees, terrain and city surfaces on real tiles. Shared semantic rules, gesture previews, history and portable drafts.",
     url: "workshop.html#/tool/patterns",
     mode: "source",
+    sidebar: "review",
   },
   {
     id: "outdoor",
@@ -167,6 +188,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Semantic Modern Exteriors families, atlas coverage, editable placement geometry and shared asset review.",
     url: "workshop.html#/tool/outdoor",
     mode: "source",
+    sidebar: "link",
   },
   {
     id: "art",
@@ -175,6 +197,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "All source sheets, named slices and recorded uses. Select tiles and leave requests.",
     url: "art-workbench.html",
     mode: "source",
+    sidebar: "link",
   },
   {
     id: "families",
@@ -183,6 +206,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Large contact sheets of cabinets, trees and scrapyard pieces, with short descriptions and shared notes.",
     url: "workshop.html#/tool/families?family=cabinets",
     mode: "source",
+    sidebar: "link",
   },
   {
     id: "buildings",
@@ -190,6 +214,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     description: "Apartment, hotel and shop recipes, plus assembled frontage blocks.",
     url: "building-lab.html",
     mode: "review",
+    sidebar: "review",
   },
   {
     id: "roads",
@@ -198,6 +223,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Approved road foundation plus new curved curbs, refuge crossings and parking bays in the Road geometry batch.",
     url: "building-lab.html?run=surfaces",
     mode: "review",
+    sidebar: "review",
   },
   {
     id: "districts",
@@ -206,6 +232,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Real generated streets, buildings, pocket green and walking routes. Explore and play the same world.",
     url: "building-lab.html?run=districts",
     mode: "review",
+    sidebar: "review",
   },
   {
     id: "streets",
@@ -213,6 +240,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     description: "Meters, lamps, bins, seating, parking and a furnished sidewalk.",
     url: "building-lab.html?run=streets",
     mode: "review",
+    sidebar: "review",
   },
   {
     id: "rooms",
@@ -221,6 +249,8 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Architecture, doorway joins, profiles and generated counterexamples. Exact render review with pins.",
     url: "interior-review.html",
     mode: "review",
+    sidebar: "review",
+    area: "interiors",
   },
   {
     id: "motion",
@@ -229,6 +259,8 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Walk, jump and adjust placement and collision. Reviews apply to the exact scene settings.",
     url: "furniture-playtest.html",
     mode: "adapter",
+    sidebar: "review",
+    area: "interiors",
   },
   {
     id: "indoor",
@@ -237,6 +269,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Edit semantic fixtures and atlas overrides. Browser-local documents with JSON export/import.",
     url: "interior-workbench.html",
     mode: "adapter",
+    sidebar: "link",
   },
   {
     id: "explorer",
@@ -245,6 +278,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
       "Choose generation and seed, inspect real tiles, and play here. Explorer judgments remain browser-local.",
     url: "world-explorer.html",
     mode: "adapter",
+    sidebar: "link",
   },
   {
     id: "autotiles",
@@ -252,6 +286,7 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     description: "Compare the 26 Modern Exteriors terrain strips and transitions.",
     url: "assets/tilesets/me-autotile-viewer.html",
     mode: "adapter",
+    sidebar: "link",
   },
   {
     id: "props",
@@ -281,7 +316,16 @@ export const WORKSHOP_TOOLS: WorkshopTool[] = [
     url: "demos/pixel-characters/",
     mode: "adapter",
   },
-];
+]);
+export type WorkshopToolId = (typeof WORKSHOP_TOOLS)[number]["id"];
+/** Manifest form: exactly the shared `WorkshopTool` fields, in their original key order. */
+export const workshopToolMetadata = ({
+  id,
+  name,
+  description,
+  url,
+  mode,
+}: WorkshopTool): WorkshopTool => ({ id, name, description, url, mode });
 export const CITY_BATCHES: ReviewBatch[] = [
   {
     id: "physics-prototype",

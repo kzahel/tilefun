@@ -98,7 +98,7 @@
       "overLimit": 0
     },
     "src/entities/EntityManager.ts": {
-      "lines": 252,
+      "lines": 247,
       "worst": 47,
       "overLimit": 2
     },
@@ -383,7 +383,7 @@
       "overLimit": 1
     },
     "src/physics/BallGameplay.ts": {
-      "lines": 95,
+      "lines": 75,
       "worst": 27,
       "overLimit": 1
     },
@@ -633,9 +633,9 @@
       "overLimit": 1
     },
     "src/server/GameServer.ts": {
-      "lines": 1742,
-      "worst": 67,
-      "overLimit": 4
+      "lines": 1714,
+      "worst": 40,
+      "overLimit": 3
     },
     "src/server/InterestManager.ts": {
       "lines": 134,
@@ -653,9 +653,9 @@
       "overLimit": 1
     },
     "src/server/Realm.ts": {
-      "lines": 2161,
+      "lines": 2145,
       "worst": 66,
-      "overLimit": 5
+      "overLimit": 4
     },
     "src/server/RealmActivity.ts": {
       "lines": 104,
@@ -683,8 +683,8 @@
       "overLimit": 1
     },
     "src/server/tickAllAI.ts": {
-      "lines": 161,
-      "worst": 57,
+      "lines": 140,
+      "worst": 42,
       "overLimit": 1
     },
     "src/server/VehicleControl.ts": {
@@ -707,14 +707,9 @@
       "worst": 86,
       "overLimit": 2
     },
-    "src/shared/binaryCodec.ts": {
-      "lines": 1259,
-      "worst": 101,
-      "overLimit": 3
-    },
     "src/shared/entityDelta.ts": {
-      "lines": 361,
-      "worst": 77,
+      "lines": 171,
+      "worst": 73,
       "overLimit": 1
     },
     "src/shared/physicsStateCodec.ts": {
@@ -723,9 +718,9 @@
       "overLimit": 2
     },
     "src/shared/serialization.ts": {
-      "lines": 306,
-      "worst": 46,
-      "overLimit": 2
+      "lines": 260,
+      "worst": 31,
+      "overLimit": 1
     },
     "src/traffic/LaneGraph.ts": {
       "lines": 216,
@@ -778,8 +773,8 @@
       "overLimit": 1
     },
     "src/wildlife/AnimalWorkSystem.ts": {
-      "lines": 614,
-      "worst": 175,
+      "lines": 603,
+      "worst": 170,
       "overLimit": 2
     },
     "src/wildlife/deerAI.ts": {
@@ -823,7 +818,7 @@
       "overLimit": 1
     },
     "src/wildlife/ForestWork.ts": {
-      "lines": 705,
+      "lines": 675,
       "worst": 85,
       "overLimit": 4
     },
@@ -838,12 +833,12 @@
       "overLimit": 1
     },
     "src/wildlife/GardenWork.ts": {
-      "lines": 314,
+      "lines": 285,
       "worst": 110,
       "overLimit": 1
     },
     "src/wildlife/HerdWork.ts": {
-      "lines": 346,
+      "lines": 305,
       "worst": 110,
       "overLimit": 2
     },
@@ -853,7 +848,7 @@
       "overLimit": 1
     },
     "src/wildlife/MeadowWork.ts": {
-      "lines": 397,
+      "lines": 369,
       "worst": 105,
       "overLimit": 1
     },
@@ -863,7 +858,7 @@
       "overLimit": 1
     },
     "src/wildlife/PastureWork.ts": {
-      "lines": 497,
+      "lines": 450,
       "worst": 217,
       "overLimit": 1
     },
@@ -883,7 +878,7 @@
       "overLimit": 1
     },
     "src/wildlife/RangeWork.ts": {
-      "lines": 387,
+      "lines": 355,
       "worst": 151,
       "overLimit": 1
     },
@@ -893,7 +888,7 @@
       "overLimit": 1
     },
     "src/wildlife/ThreatWork.ts": {
-      "lines": 354,
+      "lines": 331,
       "worst": 59,
       "overLimit": 2
     },
@@ -903,7 +898,7 @@
       "overLimit": 1
     },
     "src/wildlife/WoodlandWork.ts": {
-      "lines": 448,
+      "lines": 416,
       "worst": 227,
       "overLimit": 1
     },
@@ -913,7 +908,7 @@
       "overLimit": 2
     },
     "src/workshop/App.tsx": {
-      "lines": 1111,
+      "lines": 1021,
       "worst": 28,
       "overLimit": 2
     },
@@ -923,8 +918,8 @@
       "overLimit": 1
     },
     "src/workshop/NaturalLandscapePage.tsx": {
-      "lines": 1035,
-      "worst": 255,
+      "lines": 902,
+      "worst": 32,
       "overLimit": 2
     },
     "src/workshop/PatternPage.tsx": {

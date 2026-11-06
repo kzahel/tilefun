@@ -4,7 +4,6 @@ import {
   setSpriteClipElapsed,
   tickSpriteAnimation,
 } from "../entities/spriteAnimation.js";
-import { type BodyRotation, rotationsEqual } from "../physics/BodyRotation.js";
 import { applyCurveTrainFacing } from "../railway/CurveTrain.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 /**
@@ -18,36 +17,11 @@ import { applyVehicleFacing } from "../traffic/Vehicle.js";
  */
 
 import type { Entity } from "../entities/Entity.js";
-import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
+import { applyMirroredFields, diffFields, type EntityDelta } from "./entityFields.js";
 import type { EntitySnapshot } from "./protocol.js";
 
-/** Partial entity update — only changed fields are present. */
-export interface EntityDelta {
-  id: number;
-  position?: { wx: number; wy: number };
-  velocity?: { vx: number; vy: number } | null;
-  spriteState?: SpriteState | null;
-  wanderAIState?: WanderAIState | null;
-  // Entity-level fields (null = field removed):
-  flashHidden?: boolean | null;
-  noShadow?: boolean | null;
-  deathTimer?: number | null;
-  jumpZ?: number | null;
-  jumpVZ?: number | null;
-
-  jumpInputState?: number | null;
-  emergencyState?: number | null;
-  vehicleHeading?: number | null;
-  bodyRotation?: BodyRotation | null;
-  physicsGroupId?: number | null;
-  paintSchemeId?: string | null;
-
-  wz?: number | null;
-  parentId?: number | null;
-  localOffsetX?: number | null;
-  localOffsetY?: number | null;
-}
+export type { EntityDelta } from "./entityFields.js";
 
 // ---- Snapshot diffing (server-side) ----
 
@@ -59,134 +33,8 @@ export function diffEntitySnapshots(
   prev: EntitySnapshot,
   curr: EntitySnapshot,
 ): EntityDelta | null {
-  let delta: EntityDelta | null = null;
-
-  function ensure(): EntityDelta {
-    if (!delta) delta = { id: curr.id };
-    return delta;
-  }
-
-  // Position
-  if (prev.position.wx !== curr.position.wx || prev.position.wy !== curr.position.wy) {
-    ensure().position = curr.position;
-  }
-
-  // Velocity
-  if (prev.velocity === null && curr.velocity === null) {
-    // both null, no change
-  } else if (prev.velocity === null || curr.velocity === null) {
-    ensure().velocity = curr.velocity;
-  } else if (prev.velocity.vx !== curr.velocity.vx || prev.velocity.vy !== curr.velocity.vy) {
-    ensure().velocity = curr.velocity;
-  }
-
-  // SpriteState
-  if (!spriteStatesEqual(prev.spriteState, curr.spriteState)) {
-    ensure().spriteState = curr.spriteState;
-  }
-
-  // WanderAIState
-  if (!wanderAIStatesEqual(prev.wanderAIState, curr.wanderAIState)) {
-    ensure().wanderAIState = curr.wanderAIState;
-  }
-
-  // Entity-level optional fields — use null sentinel for removal
-  diffOptionalBool("flashHidden", prev, curr, ensure);
-  diffOptionalBool("noShadow", prev, curr, ensure);
-  diffOptionalNum("deathTimer", prev, curr, ensure);
-  diffOptionalNum("jumpZ", prev, curr, ensure);
-  diffOptionalNum("jumpVZ", prev, curr, ensure);
-
-  diffOptionalNum("jumpInputState", prev, curr, ensure);
-  diffOptionalNum("emergencyState", prev, curr, ensure);
-  diffOptionalNum("vehicleHeading", prev, curr, ensure);
-  diffOptionalNum("physicsGroupId", prev, curr, ensure);
-  if (!rotationsEqual(prev.bodyRotation, curr.bodyRotation))
-    ensure().bodyRotation = curr.bodyRotation ?? null;
-
-  if (prev.paintSchemeId !== curr.paintSchemeId)
-    ensure().paintSchemeId = curr.paintSchemeId ?? null;
-  diffOptionalNum("wz", prev, curr, ensure);
-  diffOptionalNum("parentId", prev, curr, ensure);
-  diffOptionalNum("localOffsetX", prev, curr, ensure);
-  diffOptionalNum("localOffsetY", prev, curr, ensure);
-
-  return delta;
-}
-
-function spriteStatesEqual(a: SpriteState | null, b: SpriteState | null): boolean {
-  if (a === null && b === null) return true;
-  if (a === null || b === null) return false;
-  return (
-    a.direction === b.direction &&
-    a.moving === b.moving &&
-    a.frameRow === b.frameRow &&
-    a.flipX === b.flipX &&
-    a.frameDuration === b.frameDuration &&
-    a.clip === b.clip &&
-    a.clipElapsedMs === b.clipElapsedMs &&
-    a.model === b.model
-  );
-}
-
-function wanderAIStatesEqual(a: WanderAIState | null, b: WanderAIState | null): boolean {
-  if (a === null && b === null) return true;
-  if (a === null || b === null) return false;
-  return (
-    a.state === b.state &&
-    a.dirX === b.dirX &&
-    a.dirY === b.dirY &&
-    a.following === b.following &&
-    a.befriendable === b.befriendable
-  );
-}
-
-type OptionalBoolField = "flashHidden" | "noShadow";
-type OptionalNumField =
-  | "deathTimer"
-  | "jumpZ"
-  | "jumpVZ"
-  | "jumpInputState"
-  | "emergencyState"
-  | "vehicleHeading"
-  | "physicsGroupId"
-  | "wz"
-  | "parentId"
-  | "localOffsetX"
-  | "localOffsetY";
-
-function diffOptionalBool(
-  field: OptionalBoolField,
-  prev: EntitySnapshot,
-  curr: EntitySnapshot,
-  ensure: () => EntityDelta,
-): void {
-  const pv = prev[field];
-  const cv = curr[field];
-  if (pv === cv) return;
-  if (cv === undefined) {
-    // Field was removed
-    ensure()[field] = null;
-  } else {
-    ensure()[field] = cv;
-  }
-}
-
-function diffOptionalNum(
-  field: OptionalNumField,
-  prev: EntitySnapshot,
-  curr: EntitySnapshot,
-  ensure: () => EntityDelta,
-): void {
-  const pv = prev[field];
-  const cv = curr[field];
-  if (pv === cv) return;
-  if (cv === undefined) {
-    // Field was removed
-    ensure()[field] = null;
-  } else {
-    ensure()[field] = cv;
-  }
+  const moved = prev.position.wx !== curr.position.wx || prev.position.wy !== curr.position.wy;
+  return diffFields(prev, curr, moved ? { id: curr.id, position: curr.position } : null);
 }
 
 // ---- Delta application (client-side) ----
@@ -316,46 +164,8 @@ export function applyEntityDelta(entity: Entity, delta: EntityDelta): void {
       entity.wanderAI.befriendable = delta.wanderAIState.befriendable;
   }
 
-  // Entity-level optional fields: null = remove, value = set
-  applyOptionalBool(entity, delta, "flashHidden");
-  applyOptionalBool(entity, delta, "noShadow");
-  applyOptionalNum(entity, delta, "deathTimer");
-  applyOptionalNum(entity, delta, "jumpZ");
-  applyOptionalNum(entity, delta, "jumpVZ");
-
-  applyOptionalNum(entity, delta, "jumpInputState");
-  applyOptionalNum(entity, delta, "emergencyState");
-  applyOptionalNum(entity, delta, "vehicleHeading");
-  applyOptionalNum(entity, delta, "physicsGroupId");
-  if (delta.bodyRotation === null) delete entity.bodyRotation;
-  else if (delta.bodyRotation) entity.bodyRotation = [...delta.bodyRotation];
-
-  if (delta.paintSchemeId === null) delete entity.paintSchemeId;
-  else if (delta.paintSchemeId !== undefined) entity.paintSchemeId = delta.paintSchemeId;
+  // Optional fields (null = remove); vehicle/train facing runs after them and owns noShadow.
+  applyMirroredFields(entity, delta);
   applyVehicleFacing(entity);
-  applyOptionalNum(entity, delta, "wz");
-  applyOptionalNum(entity, delta, "parentId");
-  applyOptionalNum(entity, delta, "localOffsetX");
-  applyOptionalNum(entity, delta, "localOffsetY");
   applyCurveTrainFacing(entity);
-}
-
-function applyOptionalBool(entity: Entity, delta: EntityDelta, field: OptionalBoolField): void {
-  const value = delta[field];
-  if (value === undefined) return; // unchanged
-  if (value === null) {
-    delete entity[field];
-  } else {
-    entity[field] = value;
-  }
-}
-
-function applyOptionalNum(entity: Entity, delta: EntityDelta, field: OptionalNumField): void {
-  const value = delta[field];
-  if (value === undefined) return; // unchanged
-  if (value === null) {
-    delete entity[field];
-  } else {
-    entity[field] = value;
-  }
 }

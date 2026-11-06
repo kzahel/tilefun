@@ -281,7 +281,14 @@ npm run art:notes -- --status=all
 
 ## Adding review work
 
-`ToolRegistry.ts` defines tools and city batches. `ReviewCandidates.ts` derives
+`ToolRegistry.ts` defines tools (including sidebar placement and inbox area) and
+city batches; App navigation, counts and the manifest tool list derive from it.
+Tools with a dedicated page add one lazy entry in `ToolPages.tsx`. Candidate
+builders run in the ordered `steps` list in `build-manifest.ts`; that order is the
+manifest order. Natural-case zoom, camera, description, guides, renderer and
+mount lists live in `NaturalCasePresentation.ts`. `ToolRegistry.ts` is part of the
+Workshop input digest, so navigation-only registry edits also need
+`npm run workshop:manifest`. `ReviewCandidates.ts` derives
 city cases from actual recipes; `InteriorCandidates.ts` derives room/movement
 cases from existing fixtures. The legacy/native city canvas hash and room
 render/fingerprint helpers are shared. District approval previews draw chunk

@@ -2,13 +2,7 @@ import { BALL_DESPAWN_TIME, BALL_SCARE_DURATION, TILE_SIZE } from "../config/con
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { createGem } from "../entities/Gem.js";
-import { startleDeer } from "../wildlife/deerInteractions.js";
-import { startleFauna } from "../wildlife/faunaInteractions.js";
-import { startleFrog } from "../wildlife/frogInteractions.js";
-import { startleMallard } from "../wildlife/mallardInteractions.js";
-import { startlePredator } from "../wildlife/predatorAI.js";
-import { startleRabbit } from "../wildlife/rabbitInteractions.js";
-import { startleRobin } from "../wildlife/robinInteractions.js";
+import { startleWildlife } from "../wildlife/WildlifeSpecies.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { PhysicsScene } from "./PhysicsScene.js";
 
@@ -68,21 +62,7 @@ export function applyBallImpact(
       other.motionIntent.vy = 0;
     }
     entityManager.spawn(createGem(other.position.wx, other.position.wy));
-  } else if (other.predator) {
-    startlePredator(other, ball.position);
-  } else if (other.fauna) {
-    startleFauna(other, ball.position);
-  } else if (other.deer) {
-    startleDeer(other, ball.position);
-  } else if (other.robin) {
-    startleRobin(other, ball.position);
-  } else if (other.rabbit) {
-    startleRabbit(other, ball.position);
-  } else if (other.frog) {
-    startleFrog(other, ball.position);
-  } else if (other.mallard) {
-    startleMallard(other, ball.position);
-  } else if (ai && !ai.hostile) {
+  } else if (!startleWildlife(other, ball.position) && ai && !ai.hostile) {
     // Scare NPCs (non-hostile entities with wander AI)
     ai.state = "scared";
     ai.scaredTimer = BALL_SCARE_DURATION;

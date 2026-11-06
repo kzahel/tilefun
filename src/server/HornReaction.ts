@@ -1,5 +1,6 @@
 import type { Entity } from "../entities/Entity.js";
 import { alarmPrey } from "../wildlife/predatorAI.js";
+import { isWildlife } from "../wildlife/WildlifeKinds.js";
 
 /** Ten tiles: a nearby startle, rather than the horn's much larger audible range. */
 export const HORN_STARTLE_RADIUS = 160;
@@ -23,15 +24,7 @@ export function reactToHorn(entity: Entity, vehicle: Entity): boolean {
   )
     return false;
   alarmPrey(entity, vehicle.position);
-  if (
-    !entity.predator &&
-    !entity.fauna &&
-    !entity.deer &&
-    !entity.rabbit &&
-    !entity.robin &&
-    !entity.frog &&
-    !entity.mallard
-  ) {
+  if (!isWildlife(entity)) {
     // Keep the outward heading for the whole short escape, without ball-hit zigzags.
     ai.timer = ai.scaredTimer = 2;
     ai.scaredSpeed = ai.speed * 1.5;

@@ -21,6 +21,7 @@ import { isRangeWorker, RangeWork } from "./RangeWork.js";
 import { isThreatWorker, ThreatWork } from "./ThreatWork.js";
 import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 import { isWoodlandWorker, WoodlandWork } from "./WoodlandWork.js";
+import { freshWork, protectedActor, WorkKit, workHomeKey } from "./WorkKit.js";
 
 export interface WorkPlayer {
   identity: string;
@@ -42,28 +43,39 @@ function workerKind(e: Entity): AnimalWork["kind"] | undefined {
         ? "squirrel"
         : undefined;
 }
-const homeKey = (e: Entity) => e.naturalSpawnId ?? e.proceduralId ?? durableId(e);
 const carrying = (e: Entity) => !!e.animalWork?.heldId;
+interface HabitatWork {
+  update(animal: Entity, dt: number, context: WorkContext, planning?: AiPlanningScheduler): boolean;
+}
 
 /** Shared production authority; all durable state lives on ordinary saved actors. */
 export class AnimalWorkSystem {
-  private readonly herd: HerdWork;
   private readonly forest: ForestWork;
   private readonly threats: ThreatWork;
-  private readonly range: RangeWork;
-  private readonly garden: GardenWork;
-  private readonly meadow: MeadowWork;
-  private readonly woodland: WoodlandWork;
-  private readonly pasture: PastureWork;
+  /** Habitat work in dispatch order; the first class that owns an animal runs it. */
+  private readonly habitats: readonly (readonly [(a: Entity) => boolean, HabitatWork])[];
+  private readonly kit: WorkKit;
   constructor(private readonly manager: EntityManager) {
-    this.herd = new HerdWork(manager, this);
+    this.kit = new WorkKit(manager);
+    // Construction order fixes removal-listener order; dispatch order is `habitats`.
+    const herd = new HerdWork(manager, this);
     this.forest = new ForestWork(manager, this);
     this.threats = new ThreatWork(manager, this);
-    this.range = new RangeWork(manager, this);
-    this.garden = new GardenWork(manager, this);
-    this.meadow = new MeadowWork(manager);
-    this.woodland = new WoodlandWork(manager, this);
-    this.pasture = new PastureWork(manager, this);
+    const range = new RangeWork(manager, this);
+    const garden = new GardenWork(manager, this);
+    const meadow = new MeadowWork(manager);
+    const woodland = new WoodlandWork(manager, this);
+    const pasture = new PastureWork(manager, this);
+    this.habitats = [
+      [isThreatWorker, this.threats],
+      [isForestWorker, this.forest],
+      [isHerdWorker, herd],
+      [isRangeWorker, range],
+      [isGardenWorker, garden],
+      [isPastureWorker, pasture],
+      [isWoodlandWorker, woodland],
+      [isMeadowWorker, meadow],
+    ];
     manager.removalListeners.add((removed, destroyed) => {
       if (!destroyed) return; // Residency eviction is not a death or a resource deletion.
       if (removed.animalWork) this.cancel(removed, 3);
@@ -87,16 +99,13 @@ export class AnimalWorkSystem {
       }
     });
   }
-  private find(id: string | undefined): Entity | undefined {
-    return id ? this.manager.entities.find((e) => e.persistentId === id) : undefined;
-  }
   private enter(task: AnimalWork, state: AnimalWork["state"]) {
     task.state = state;
     task.elapsed = 0;
   }
   drop(animal: Entity) {
     const task = animal.animalWork,
-      item = this.find(task?.heldId);
+      item = this.kit.find(task?.heldId);
     if (task) delete task.heldId;
     if (!item || item.workItem?.claimedBy !== animal.persistentId) return;
     delete item.parentId;
@@ -113,10 +122,10 @@ export class AnimalWorkSystem {
     if (!task) return;
     this.forest.releasePartner(animal, cooldown);
     this.drop(animal);
-    const target = this.find(task.targetId);
+    const target = this.kit.find(task.targetId);
     if (target?.workItem && target.workItem.claimedBy === animal.persistentId)
       delete target.workItem.claimedBy;
-    const site = this.find(task.siteId);
+    const site = this.kit.find(task.siteId);
     if (site?.workItem && site.workItem.claimedBy === animal.persistentId)
       delete site.workItem.claimedBy;
     delete task.targetId;
@@ -139,12 +148,12 @@ export class AnimalWorkSystem {
   ): Entity | undefined {
     const task = animal.animalWork;
     if (!task) return;
-    if (task.siteId) return this.find(task.siteId);
+    if (task.siteId) return this.kit.find(task.siteId);
     const ai = animal.fauna;
     if (!ai || !context.ready(ai.home, ai.radius + 32)) return;
     const kind = task.kind === "crow" ? "nest" : "cache";
     const existing = this.manager.entities.find(
-      (e) => e.workItem?.kind === kind && e.workItem.owner === homeKey(animal),
+      (e) => e.workItem?.kind === kind && e.workItem.owner === workHomeKey(animal),
     );
     if (existing) {
       task.siteId = durableId(existing);
@@ -179,7 +188,7 @@ export class AnimalWorkSystem {
         continue;
       const item = createForageItem(kind, point.wx, point.wy);
       item.wz = point.z;
-      if (item.workItem) item.workItem.owner = homeKey(animal);
+      if (item.workItem) item.workItem.owner = workHomeKey(animal);
       this.manager.spawn(item);
       task.siteId = durableId(item);
       task.sitePosition = { ...point };
@@ -286,32 +295,18 @@ export class AnimalWorkSystem {
     context: WorkContext,
     planning?: AiPlanningScheduler,
   ): boolean {
-    if (isThreatWorker(animal)) return this.threats.update(animal, dt, context, planning);
-    if (isForestWorker(animal)) return this.forest.update(animal, dt, context, planning);
-    if (isHerdWorker(animal)) return this.herd.update(animal, dt, context, planning);
-    if (isRangeWorker(animal)) return this.range.update(animal, dt, context, planning);
-    if (isGardenWorker(animal)) return this.garden.update(animal, dt, context, planning);
-    if (isPastureWorker(animal)) return this.pasture.update(animal, dt, context, planning);
-    if (isWoodlandWorker(animal)) return this.woodland.update(animal, dt, context, planning);
-    if (isMeadowWorker(animal)) return this.meadow.update(animal, dt, context, planning);
+    for (const [owns, work] of this.habitats)
+      if (owns(animal)) return work.update(animal, dt, context, planning);
     const kind = workerKind(animal),
       ai = animal.fauna;
     if (!kind || !ai) return false;
-    animal.animalWork ??= {
-      kind,
-      state: "idle",
-      elapsed: 0,
-      cooldown: 0,
-      deliveries: 0,
-      eaten: 0,
-      retrieved: 0,
-    };
+    animal.animalWork ??= freshWork(kind);
     const task = animal.animalWork;
     task.cooldown = Math.max(0, task.cooldown - dt);
     task.elapsed += dt;
     if (kind === "crow" && task.siteId) {
       task.supportCheck = Math.max(0, (task.supportCheck ?? 0) - dt);
-      const site = this.find(task.siteId);
+      const site = this.kit.find(task.siteId);
       if (!task.supportCheck && site && context.ready(site.position, 96)) {
         task.supportCheck = 0.5;
         const supported = context.environment
@@ -329,9 +324,7 @@ export class AnimalWorkSystem {
       }
     }
     if (
-      animal.parentId !== undefined ||
-      animal.wanderAI?.following ||
-      animal.wanderAI?.state === "ridden" ||
+      protectedActor(animal) ||
       ai.alarmFrom ||
       ["flee", "recover", "startle"].includes(ai.state)
     ) {
@@ -351,8 +344,8 @@ export class AnimalWorkSystem {
       }
       return true;
     }
-    const target = this.find(task.targetId),
-      held = this.find(task.heldId);
+    const target = this.kit.find(task.targetId),
+      held = this.kit.find(task.heldId);
     if (
       task.heldId &&
       (!held || held.parentId !== animal.id || held.workItem?.claimedBy !== animal.persistentId)
@@ -370,7 +363,7 @@ export class AnimalWorkSystem {
     }
     if (task.state === "deposit" || task.state === "eat" || task.state === "retrieve") {
       if (task.elapsed < (task.state === "eat" ? 2 : 1.4)) return true;
-      const site = this.find(task.siteId);
+      const site = this.kit.find(task.siteId);
       if (
         task.state === "retrieve" &&
         site?.workItem?.claimedBy &&
@@ -439,7 +432,7 @@ export class AnimalWorkSystem {
         }
         task.returnPosition = { ...player.position };
         if (gap(player.position, animal.position) <= 34) {
-          const returnedBall = this.find(task.heldId);
+          const returnedBall = this.kit.find(task.heldId);
           if (returnedBall?.workItem) returnedBall.workItem.returned = true;
           this.drop(animal);
           settleFauna(animal);
@@ -563,17 +556,13 @@ export class AnimalWorkSystem {
     if (!task || !animal.sprite || (animal.fauna ?? animal.rabbit ?? animal.robin)?.alarmFrom)
       return;
     // Mounted/attached actors can skip their brain update; cancel before posing them.
-    if (
-      animal.parentId !== undefined ||
-      animal.wanderAI?.following ||
-      animal.wanderAI?.state === "ridden"
-    ) {
+    if (protectedActor(animal)) {
       if (task.state !== "idle" || task.heldId || task.targetId) this.cancel(animal, 3);
       return;
     }
     restoreAnimalWorkPose(animal);
     if (!p) return;
-    const item = this.find(task.heldId);
+    const item = this.kit.find(task.heldId);
     if (item) {
       item.flashHidden = false;
       const dir = animal.sprite.direction;

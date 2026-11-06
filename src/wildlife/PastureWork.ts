@@ -1,19 +1,17 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
-import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { gap } from "../shared/gap.js";
 import type { AnimalWork } from "./AnimalWork.js";
-import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import type { AnimalWorkSystem, WorkContext } from "./AnimalWorkSystem.js";
 import { actionSocket } from "./BehaviorArt.js";
 import { type BrowsingRock, sameRock } from "./BrowsingRocks.js";
 import { faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose, sourceType } from "./ForageResources.js";
-import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
+import { settleFauna } from "./faunaInteractions.js";
 import { sameTree } from "./TreeClimbing.js";
+import { enterFaunaWork, faceToward, freshWork, WorkKit } from "./WorkKit.js";
 
 const kindOf = (a: Entity) => {
   const species = faunaProfile(a.type)?.species;
@@ -29,60 +27,23 @@ export const isPastureWorker = (a: Entity) => !!kindOf(a);
 
 /** Finite browsing, rooting and trunk transfers through ordinary saved actors. */
 export class PastureWork {
+  private readonly kit: WorkKit;
   constructor(
     private readonly manager: EntityManager,
     private readonly work: AnimalWorkSystem,
-  ) {}
-  private find(id?: string) {
-    return id ? this.manager.entities.find((e) => e.persistentId === id) : undefined;
+  ) {
+    this.kit = new WorkKit(manager);
   }
   private nearby(a: Entity) {
     const p = a.position;
-    return this.manager.spatialHash
-      .queryRange(
-        Math.floor((p.wx - 180) / CHUNK_SIZE_PX),
-        Math.floor((p.wy - 180) / CHUNK_SIZE_PX),
-        Math.floor((p.wx + 180) / CHUNK_SIZE_PX),
-        Math.floor((p.wy + 180) / CHUNK_SIZE_PX),
-      )
-      .filter((e) => gap(e.position, p) < 180)
-      .sort(
-        (x, y) =>
-          gap(x.position, p) - gap(y.position, p) || durableId(x).localeCompare(durableId(y)),
-      );
+    return this.kit.nearest(p, 180, (e) => gap(e.position, p) < 180);
   }
+  /** Pasture work keeps an alarmed animal's wander state. */
   private enter(a: Entity, state: AnimalWork["state"]) {
-    const t = a.animalWork;
-    if (!t) return;
-    t.state = state;
-    t.elapsed = 0;
-    if (!a.fauna?.motion) {
-      a.motionIntent = { vx: 0, vy: 0 };
-      if (
-        a.wanderAI &&
-        !a.fauna?.alarmFrom &&
-        !["startle", "flee", "recover"].includes(a.fauna?.state ?? "")
-      )
-        a.wanderAI.state = "idle";
-      restoreFaunaPose(a);
-    }
-    restoreAnimalWorkPose(a);
-  }
-  private face(a: Entity, p: PositionComponent, direction?: Direction) {
-    if (!a.sprite || !a.animalWork) return;
-    a.sprite.direction =
-      direction ?? directionFromVelocity(p.wx - a.position.wx, p.wy - a.position.wy);
-    a.sprite.frameRow = a.sprite.direction;
-    a.animalWork.facing = a.sprite.direction;
-  }
-  private release(a: Entity) {
-    const target = this.find(a.animalWork?.targetId);
-    if (target?.workItem && target.workItem.claimedBy === a.persistentId)
-      delete target.workItem.claimedBy;
-    if (a.animalWork) delete a.animalWork.targetId;
+    enterFaunaWork(a, state, true);
   }
   private cancel(a: Entity, cooldown = 3) {
-    this.release(a);
+    this.kit.releaseTarget(a);
     this.work.drop(a);
     const t = a.animalWork;
     if (t) {
@@ -107,7 +68,7 @@ export class PastureWork {
     )
       return false;
     if (item.claimedBy) {
-      const owner = this.find(item.claimedBy);
+      const owner = this.kit.find(item.claimedBy);
       if (
         owner?.animalWork?.targetId === e.persistentId ||
         owner?.animalWork?.heldId === e.persistentId
@@ -161,7 +122,7 @@ export class PastureWork {
       workSpeed: distance / 0.9,
     };
     t.hopDown = down;
-    this.face(a, point);
+    faceToward(a, point);
     this.enter(a, "hop");
     if (a.wanderAI) a.wanderAI.state = "walking";
     return true;
@@ -250,15 +211,7 @@ export class PastureWork {
     const kind = kindOf(a),
       ai = a.fauna;
     if (!kind || !ai) return false;
-    a.animalWork ??= {
-      kind,
-      state: "idle",
-      elapsed: 0,
-      cooldown: 0,
-      deliveries: 0,
-      eaten: 0,
-      retrieved: 0,
-    };
+    a.animalWork ??= freshWork(kind);
     const t = a.animalWork,
       prior = t.elapsed;
     if (t.state === "idle" && !t.heldId) {
@@ -268,8 +221,8 @@ export class PastureWork {
     }
     t.elapsed += dt;
     t.cooldown = Math.max(0, t.cooldown - dt);
-    const target = this.find(t.targetId),
-      held = this.find(t.heldId);
+    const target = this.kit.find(t.targetId),
+      held = this.kit.find(t.heldId);
     if (a.parentId !== undefined || a.wanderAI?.following || a.wanderAI?.state === "ridden") {
       this.cancel(a);
       return false;
@@ -362,14 +315,14 @@ export class PastureWork {
       delete t.heldId;
       this.manager.remove(held.id);
       t.eaten++;
-      this.release(a);
+      this.kit.releaseTarget(a);
       delete t.tree;
       this.enter(a, "rest");
       return true;
     }
     if (t.state === "lower") {
       if (t.elapsed < 0.6) return true;
-      this.release(a);
+      this.kit.releaseTarget(a);
       this.enter(a, "rest");
       return true;
     }
@@ -402,7 +355,7 @@ export class PastureWork {
       }
       if (t.state === "shake") {
         this.shake(a, target, c);
-        this.release(a);
+        this.kit.releaseTarget(a);
         delete t.tree;
         this.enter(a, "rest");
         return true;
@@ -430,7 +383,7 @@ export class PastureWork {
         if (t.rock) {
           if (!this.hop(a, t.rock, t.rock.z, false, c, planning)) this.cancel(a);
         } else if (target) {
-          this.face(a, target.position, t.facing as Direction);
+          faceToward(a, target.position, t.facing as Direction);
           this.enter(
             a,
             kind === "goat"

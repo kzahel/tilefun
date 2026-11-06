@@ -161,6 +161,16 @@ The intermittent train check remains separate follow-up work.
 - [binaryCodec](../../src/shared/binaryCodec.ts) handles frame, player-input and
   chunk binary encoding with JSON envelopes for other message types. Consult
   code/tests for sizes; old JSON bandwidth estimates are historical.
+- Replicated entity fields are declared once in
+  [`ENTITY_FIELDS`](../../src/shared/entityFields.ts) (name, mask bit, wire kind,
+  equality/copy); snapshot/delta encode, decode, diff, apply and serialization
+  iterate it, and [wire kinds](../../src/shared/entityWire.ts) own byte layouts. A new
+  optional (mirrored) field is one table entry plus its `Entity`/`EntitySnapshot`
+  type fields; core fields (velocity, sprite, AI state) also keep hand-written
+  entity mappings in `serialization.ts` and `applyEntityDelta`. Bits and
+  wire order are append-only; the [golden wire test](../../src/shared/entityWireGolden.test.ts)
+  pins exact bytes and decoded shapes and must only change with a deliberate
+  protocol change.
 - [Channel policy](../../src/transport/webrtcChannels.ts) sends all server and
   client gameplay messages over reliable ordered `sync`, including frame
   baselines, field deltas, exits and world/realm transitions. The optional legacy
@@ -187,6 +197,7 @@ The intermittent train check remains separate follow-up work.
 
 Protocol coverage lives in [binary codec tests](../../src/shared/binaryCodec.test.ts),
 [entity delta tests](../../src/shared/entityDelta.test.ts),
+[golden wire bytes](../../src/shared/entityWireGolden.test.ts),
 [replication tests](../../src/server/buildGameState.test.ts),
 [remote state tests](../../src/client/RemoteStateView.test.ts), and
 [channel policy tests](../../src/transport/webrtcChannels.test.ts).

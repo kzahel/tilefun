@@ -1,15 +1,11 @@
 import type { Entity } from "../entities/Entity.js";
 import { updateRouteAI } from "../entities/routeAI.js";
 import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
-import { updateDeerAI } from "../wildlife/deerAI.js";
-import { updateFaunaAI } from "../wildlife/faunaAI.js";
-import { updateFrogAI } from "../wildlife/frogAI.js";
-import { updateMallardAI } from "../wildlife/mallardAI.js";
-import { updatePredatorAI } from "../wildlife/predatorAI.js";
 import { robinWorkBudget } from "../wildlife/RobinWorkBudget.js";
-import { updateRabbitAI } from "../wildlife/rabbitAI.js";
 import { updateRobinAI } from "../wildlife/robinAI.js";
 import type { WildlifeEnvironment } from "../wildlife/WildlifeEnvironment.js";
+import { isWildlife, wildlifeBrain, wildlifeKind } from "../wildlife/WildlifeKinds.js";
+import { WILDLIFE_SPECIES } from "../wildlife/WildlifeSpecies.js";
 import type { AiPlanningScheduler } from "./AiPlanningScheduler.js";
 
 /**
@@ -35,7 +31,8 @@ export function tickAllAI(
   let entries = [...entityTickDts].filter(
     ([e]) =>
       (!e.resident || e.wanderAI?.state === "scared") &&
-      (e.wanderAI || e.fauna || e.deer || e.robin || e.rabbit || e.frog || e.mallard),
+      // Every predator also carries wanderAI, so this admits exactly the old set.
+      (e.wanderAI || isWildlife(e)),
   );
   const budget = planning?.budget ?? robinWorkBudget();
   if (planning) {
@@ -43,14 +40,7 @@ export function tickAllAI(
     let due = false;
     for (const [entity, dt] of entries) {
       planning.advance(entity, dt, playerPositions);
-      const ai =
-        entity.predator ??
-        entity.fauna ??
-        entity.deer ??
-        entity.robin ??
-        entity.rabbit ??
-        entity.frog ??
-        entity.mallard;
+      const ai = wildlifeBrain(entity);
       if (ai) {
         if (
           ai.timer <= dt &&
@@ -74,15 +64,7 @@ export function tickAllAI(
     if (due && entries.length) {
       const priorities = new Map(
         entries.map(([entity]) => {
-          const ai =
-            entity.predator ??
-            entity.fauna ??
-            entity.deer ??
-            entity.robin ??
-            entity.rabbit ??
-            entity.frog ??
-            entity.mallard;
-          return [entity, planning.priority(entity, !!ai?.alarmFrom)] as const;
+          return [entity, planning.priority(entity, !!wildlifeBrain(entity)?.alarmFrom)] as const;
         }),
       );
       const start = robinTurn % entries.length;
@@ -92,22 +74,19 @@ export function tickAllAI(
   }
   const robins: [Entity, number][] = [];
   for (const [entity, dt] of entries) {
-    if (entity.predator && wildlife) {
-      updatePredatorAI(entity, dt, wildlife, entities, playerPositions, planning);
-    } else if (entity.fauna && wildlife) {
-      updateFaunaAI(entity, dt, wildlife, entities, playerPositions, planning);
-    } else if (entity.deer && wildlife) {
-      updateDeerAI(entity, dt, wildlife, entities, playerPositions, planning);
-    } else if (entity.robin && wildlife) {
-      if (planning)
-        updateRobinAI(entity, dt, wildlife, entities, playerPositions, budget, planning);
-      else robins.push([entity, dt]);
-    } else if (entity.rabbit && wildlife) {
-      updateRabbitAI(entity, dt, wildlife, entities, playerPositions, planning);
-    } else if (entity.frog && wildlife) {
-      updateFrogAI(entity, dt, wildlife, entities, playerPositions, planning);
-    } else if (entity.mallard && wildlife) {
-      updateMallardAI(entity, dt, wildlife, entities, playerPositions, planning);
+    const kind = wildlifeKind(entity);
+    if (kind && wildlife) {
+      if (kind === "robin" && !planning) robins.push([entity, dt]);
+      else
+        WILDLIFE_SPECIES[kind].update(
+          entity,
+          dt,
+          wildlife,
+          entities,
+          playerPositions,
+          planning,
+          budget,
+        );
     } else if (entity.wanderAI && entity.wanderAI.state !== "ridden") {
       if (entity.routeAI && !entity.wanderAI.following && entity.wanderAI.state !== "scared") {
         updateRouteAI(entity, dt);

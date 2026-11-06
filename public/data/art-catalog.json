@@ -35447,7 +35447,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/HornReaction.ts:14"
+          "source": "src/server/HornReaction.ts:15"
         },
         {
           "system": "Gameplay",
@@ -35459,19 +35459,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:335"
+          "source": "src/server/Realm.ts:332"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1359"
+          "source": "src/server/Realm.ts:1348"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2022"
+          "source": "src/server/Realm.ts:2006"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2143"
+          "source": "src/server/Realm.ts:2127"
         },
         {
           "system": "Gameplay",
@@ -35495,7 +35495,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/shared/serialization.ts:132"
+          "source": "src/shared/serialization.ts:102"
         },
         {
           "system": "Gameplay",
@@ -35641,23 +35641,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenWork.ts:17"
+          "source": "src/wildlife/GardenWork.ts:15"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenWork.ts:106"
+          "source": "src/wildlife/GardenWork.ts:85"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenWork.ts:110"
+          "source": "src/wildlife/GardenWork.ts:89"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenWork.ts:266"
+          "source": "src/wildlife/GardenWork.ts:237"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/GardenWork.ts:273"
+          "source": "src/wildlife/GardenWork.ts:244"
         },
         {
           "system": "Gameplay",
@@ -35787,31 +35787,31 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:18"
+          "source": "src/wildlife/HerdWork.ts:21"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:144"
+          "source": "src/wildlife/HerdWork.ts:111"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:264"
+          "source": "src/wildlife/HerdWork.ts:223"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:279"
+          "source": "src/wildlife/HerdWork.ts:238"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:306"
+          "source": "src/wildlife/HerdWork.ts:265"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:330"
+          "source": "src/wildlife/HerdWork.ts:289"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/HerdWork.ts:340"
+          "source": "src/wildlife/HerdWork.ts:299"
         }
       ]
     },
@@ -36243,47 +36243,47 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:39"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/wildlife/AnimalWorkSystem.ts:40"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:145"
+          "source": "src/wildlife/AnimalWorkSystem.ts:41"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:155"
+          "source": "src/wildlife/AnimalWorkSystem.ts:154"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:205"
+          "source": "src/wildlife/AnimalWorkSystem.ts:164"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:206"
+          "source": "src/wildlife/AnimalWorkSystem.ts:214"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:312"
+          "source": "src/wildlife/AnimalWorkSystem.ts:215"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:487"
+          "source": "src/wildlife/AnimalWorkSystem.ts:307"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:532"
+          "source": "src/wildlife/AnimalWorkSystem.ts:480"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:580"
+          "source": "src/wildlife/AnimalWorkSystem.ts:525"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:589"
+          "source": "src/wildlife/AnimalWorkSystem.ts:569"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/AnimalWorkSystem.ts:578"
         },
         {
           "system": "Gameplay",
@@ -36535,11 +36535,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallGameplay.ts:23"
+          "source": "src/physics/BallGameplay.ts:17"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallGameplay.ts:42"
+          "source": "src/physics/BallGameplay.ts:36"
         },
         {
           "system": "Gameplay",
@@ -36563,7 +36563,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1246"
+          "source": "src/server/Realm.ts:1235"
         },
         {
           "system": "Gameplay",
@@ -36575,15 +36575,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:109"
+          "source": "src/wildlife/AnimalWorkSystem.ts:118"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:525"
+          "source": "src/wildlife/AnimalWorkSystem.ts:518"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkSystem.ts:586"
+          "source": "src/wildlife/AnimalWorkSystem.ts:575"
         },
         {
           "system": "Gameplay",
@@ -36611,7 +36611,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/WoodlandWork.ts:435"
+          "source": "src/wildlife/WoodlandWork.ts:403"
         }
       ]
     },

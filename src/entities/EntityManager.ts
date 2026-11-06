@@ -14,6 +14,7 @@ import {
   settleRabbit,
 } from "../wildlife/rabbitInteractions.js";
 import { prepareRobinMotion, settleRobin } from "../wildlife/robinInteractions.js";
+import { isWildlife } from "../wildlife/WildlifeKinds.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { Entity } from "./Entity.js";
 import { SpatialHash } from "./SpatialHash.js";
@@ -124,13 +125,7 @@ export class EntityManager {
       const wanted = Math.hypot(e.motionIntent?.vx ?? 0, e.motionIntent?.vy ?? 0);
       if (
         e.wanderAI &&
-        !e.fauna &&
-        !e.mallard &&
-        !e.frog &&
-        !e.rabbit &&
-        !e.deer &&
-        !e.robin &&
-        !e.predator &&
+        !isWildlife(e) &&
         wanted > 1 &&
         Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) < wanted * 0.1
       )

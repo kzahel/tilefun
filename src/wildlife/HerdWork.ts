@@ -1,60 +1,39 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
-import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
+import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
-import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { gap } from "../shared/gap.js";
-import type { AnimalWork } from "./AnimalWork.js";
-import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import type { AnimalWorkSystem, WorkContext } from "./AnimalWorkSystem.js";
 import { actionSocket } from "./BehaviorArt.js";
 import { faunaProfile } from "./Fauna.js";
 import { forageType, restoreWorkItemPose, sourceType } from "./ForageResources.js";
-import { restoreFaunaPose } from "./faunaInteractions.js";
+import {
+  enterFaunaWork,
+  faceToward,
+  freshWork,
+  groundSupported,
+  protectedActor,
+  WorkKit,
+} from "./WorkKit.js";
 
 const kindOf = (a: Entity) => {
   const species = faunaProfile(a.type)?.species;
   return species === "cow" || species === "sheep" || species === "donkey" ? species : undefined;
 };
 export const isHerdWorker = (a: Entity) => !!kindOf(a);
-const protectedActor = (a: Entity) =>
-  a.parentId !== undefined || a.wanderAI?.following || a.wanderAI?.state === "ridden";
+const supported = (e: Entity, c: WorkContext) => groundSupported(e, c, 4);
 
 /** Paid rumination, local flock reunions and supported dust baths in ordinary authority. */
 export class HerdWork {
+  private readonly kit: WorkKit;
   constructor(
-    private readonly manager: EntityManager,
+    manager: EntityManager,
     private readonly work: AnimalWorkSystem,
-  ) {}
-  private find(id?: string) {
-    return id ? this.manager.entities.find((e) => e.persistentId === id) : undefined;
+  ) {
+    this.kit = new WorkKit(manager);
   }
   private nearby(a: Entity) {
-    return this.manager.spatialHash
-      .queryRange(
-        Math.floor((a.position.wx - 180) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wy - 180) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wx + 180) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wy + 180) / CHUNK_SIZE_PX),
-      )
-      .filter((e) => e !== a && gap(e.position, a.position) < 180)
-      .sort(
-        (x, y) =>
-          gap(x.position, a.position) - gap(y.position, a.position) ||
-          durableId(x).localeCompare(durableId(y)),
-      );
-  }
-  private enter(a: Entity, state: AnimalWork["state"]) {
-    if (!a.animalWork) return;
-    a.animalWork.state = state;
-    a.animalWork.elapsed = 0;
-    if (!a.fauna?.motion) {
-      a.motionIntent = { vx: 0, vy: 0 };
-      if (a.wanderAI) a.wanderAI.state = "idle";
-      restoreFaunaPose(a);
-    }
-    restoreAnimalWorkPose(a);
+    return this.kit.nearest(a.position, 180, (e) => e !== a && gap(e.position, a.position) < 180);
   }
   private stop(a: Entity, cooldown = 3) {
     this.work.cancel(a, cooldown);
@@ -63,16 +42,10 @@ export class HerdWork {
       delete a.animalWork.facing;
     }
   }
-  private supported(e: Entity, c: WorkContext) {
-    return (
-      !c.environment.isWater(e.position) &&
-      Math.abs((e.wz ?? 0) - (c.environment.surfaceZ?.(e.position) ?? 0)) <= 4
-    );
-  }
   private clearBath(a: Entity, site: Entity, c: WorkContext) {
     const z = site.wz ?? 0;
     return (
-      this.supported(site, c) &&
+      supported(site, c) &&
       [-20, 0, 20].every((x) =>
         [-20, 0, 20].every((y) => {
           const p = { wx: site.position.wx + x, wy: site.position.wy + y };
@@ -115,12 +88,6 @@ export class HerdWork {
       wy: peers.reduce((sum, e) => sum + e.position.wy, 0) / peers.length,
     };
   }
-  private face(a: Entity, p: PositionComponent) {
-    if (!a.sprite || !a.animalWork) return;
-    const direction = directionFromVelocity(p.wx - a.position.wx, p.wy - a.position.wy);
-    a.animalWork.facing = direction;
-    a.sprite.direction = a.sprite.frameRow = direction;
-  }
   private foodPoint(a: Entity, food: Entity, facing: Direction, c: WorkContext) {
     const socket = actionSocket(a, "graze", -1, facing);
     if (!socket) return;
@@ -132,7 +99,7 @@ export class HerdWork {
     return Math.abs((c.environment.surfaceZ?.(p) ?? z) - z) <= 4 ? { ...p, z } : undefined;
   }
   private available(e: Entity) {
-    const owner = this.find(e.workItem?.claimedBy);
+    const owner = this.kit.find(e.workItem?.claimedBy);
     if (owner && owner.animalWork?.targetId === e.persistentId) return false;
     if (e.workItem) delete e.workItem.claimedBy;
     return !!e.workItem && e.parentId === undefined;
@@ -152,7 +119,7 @@ export class HerdWork {
       if (planning && !planning.candidate(a)) break;
       if (
         !this.available(food) ||
-        !this.supported(food, c) ||
+        !supported(food, c) ||
         !c.ready(food.position, 96) ||
         (!cow && !this.clearBath(a, food, c))
       )
@@ -164,7 +131,7 @@ export class HerdWork {
         if (food.workItem) food.workItem.claimedBy = durableId(a);
         t.sitePosition = p;
         t.facing = cow ? facing : (a.sprite?.direction ?? facing);
-        this.enter(a, "seek");
+        enterFaunaWork(a, "seek");
         return true;
       }
     }
@@ -188,15 +155,15 @@ export class HerdWork {
         this.stop(a);
         return false;
       }
-      this.face(a, center);
+      faceToward(a, center);
       if (t.elapsed < 1.2) return true;
       t.regrouped = (t.regrouped ?? 0) + 1;
       this.stop(a, 8);
       return false;
     }
     if (t.state === "seek" && distance <= 56) {
-      this.face(a, center);
-      this.enter(a, "bleat");
+      faceToward(a, center);
+      enterFaunaWork(a, "bleat");
       return true;
     }
     if (distance <= 56 || t.elapsed > 20) {
@@ -214,28 +181,20 @@ export class HerdWork {
     }
     t.targetId = durableId(leader);
     t.sitePosition = { ...p, z };
-    if (t.state !== "seek") this.enter(a, "seek");
+    if (t.state !== "seek") enterFaunaWork(a, "seek");
     return true;
   }
   update(a: Entity, dt: number, c: WorkContext, planning?: AiPlanningScheduler): boolean {
     const kind = kindOf(a),
       ai = a.fauna;
     if (!kind || !ai) return false;
-    a.animalWork ??= {
-      kind,
-      state: "idle",
-      elapsed: 0,
-      cooldown: 0,
-      deliveries: 0,
-      eaten: 0,
-      retrieved: 0,
-    };
+    a.animalWork ??= freshWork(kind);
     const t = a.animalWork;
     if (protectedActor(a) || ai.alarmFrom || ["startle", "flee", "recover"].includes(ai.state)) {
       if (t.state !== "idle" || t.targetId) this.stop(a);
       return false;
     }
-    const source = this.find(t.targetId);
+    const source = this.kit.find(t.targetId);
     if (
       !c.ready(a.position, 96) ||
       (t.sitePosition && !c.ready(t.sitePosition, 96)) ||
@@ -248,7 +207,7 @@ export class HerdWork {
     if (ai.motion) delete ai.motion.workPaused;
     t.elapsed += dt;
     t.cooldown = Math.max(0, t.cooldown - dt);
-    if (!this.supported(a, c)) {
+    if (!supported(a, c)) {
       this.stop(a);
       return false;
     }
@@ -259,7 +218,7 @@ export class HerdWork {
           : !!source?.workItem &&
             source.parentId === undefined &&
             source.workItem.claimedBy === a.persistentId &&
-            this.supported(source, c) &&
+            supported(source, c) &&
             (kind !== "donkey" || this.clearBath(a, source, c)) &&
             (kind === "cow"
               ? source.type === sourceType("growing-plant")
@@ -284,8 +243,8 @@ export class HerdWork {
       if (t.elapsed < (t.state === "raise" ? 0.75 : t.state === "lie" ? 1.2 : 4.8)) return true;
       if (t.state === "ruminate") {
         t.ruminated = (t.ruminated ?? 0) + 1;
-        this.enter(a, "stand");
-      } else this.enter(a, t.state === "raise" ? "lie" : "ruminate");
+        enterFaunaWork(a, "stand");
+      } else enterFaunaWork(a, t.state === "raise" ? "lie" : "ruminate");
       return true;
     }
     if (kind === "donkey" && (t.state === "lie" || t.state === "roll")) {
@@ -294,12 +253,12 @@ export class HerdWork {
         return false;
       }
       if (t.elapsed < (t.state === "lie" ? 1.2 : 3.6)) return true;
-      if (t.state === "lie") this.enter(a, "roll");
+      if (t.state === "lie") enterFaunaWork(a, "roll");
       else {
         source.workItem.units = Math.min(3, source.workItem.units + 1);
         restoreWorkItemPose(source);
         t.dustBaths = (t.dustBaths ?? 0) + 1;
-        this.enter(a, "stand");
+        enterFaunaWork(a, "stand");
       }
       return true;
     }
@@ -310,7 +269,7 @@ export class HerdWork {
         return false;
       }
       if (t.elapsed < (t.state === "lower" ? 0.75 : 1.2)) return true;
-      if (t.state === "lower") this.enter(a, "graze");
+      if (t.state === "lower") enterFaunaWork(a, "graze");
       else {
         if (source?.workItem) {
           source.workItem.units--;
@@ -320,7 +279,7 @@ export class HerdWork {
         delete t.targetId;
         delete t.sitePosition;
         t.eaten++;
-        this.enter(a, "raise");
+        enterFaunaWork(a, "raise");
       }
       return true;
     }
@@ -328,7 +287,7 @@ export class HerdWork {
     if (planning && !planning.claim(a, false)) return t.state !== "idle";
     if (kind === "sheep") return this.flock(a, c, planning);
     if (kind === "cow" && t.state === "idle" && t.eaten > (t.ruminated ?? 0)) {
-      this.enter(a, "lie");
+      enterFaunaWork(a, "lie");
       return true;
     }
     if (t.state === "seek") {
@@ -337,7 +296,7 @@ export class HerdWork {
         this.stop(a);
         return false;
       }
-      if (gap(a.position, p) <= 1.5) this.enter(a, kind === "cow" ? "lower" : "lie");
+      if (gap(a.position, p) <= 1.5) enterFaunaWork(a, kind === "cow" ? "lower" : "lie");
       else if (!this.work.go(a, p, p.z, c, planning)) this.stop(a);
       return true;
     }

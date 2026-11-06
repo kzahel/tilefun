@@ -1,8 +1,9 @@
 import type { Entity } from "../entities/Entity.js";
 import type { RealmRecords } from "../persistence/RealmRecords.js";
+import { isWildlife } from "../wildlife/WildlifeKinds.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { RealmStreaming } from "./RealmStreaming.js";
-import { isWildlife, WildlifeActivity } from "./WildlifeActivity.js";
+import { WildlifeActivity } from "./WildlifeActivity.js";
 
 /** Incremental demanded attachment membership; wake/readiness decisions remain live. */
 export class RealmActivity {
@@ -38,8 +39,7 @@ export class RealmActivity {
       if (!demand.activity || !streaming.residency.ready(key)) continue;
       if (this.keys[count++] !== key) changed = true;
     }
-    if (count !== this.keys.length) changed = true;
-    if (changed) this.rebuild(records, streaming);
+    if (changed || count !== this.keys.length) this.rebuild(records, streaming);
     this.wildlife.advance(dt);
 
     const admitted = new Set<readonly Entity[]>();

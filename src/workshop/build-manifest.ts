@@ -21,7 +21,7 @@ import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.j
 import { buildPhysicsCandidate } from "./PhysicsCandidate.js";
 import { buildRailwayCandidates } from "./RailwayCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
-import { CITY_BATCHES, WORKSHOP_TOOLS } from "./ToolRegistry.js";
+import { CITY_BATCHES, WORKSHOP_TOOLS, workshopToolMetadata } from "./ToolRegistry.js";
 import { buildTowingCandidate } from "./TowingCandidate.js";
 import { buildTransporterCandidate } from "./TransporterCandidate.js";
 import { buildTruckBedCandidate } from "./TruckBedCandidate.js";
@@ -38,6 +38,20 @@ import {
   buildWorldGeometryCandidate,
 } from "./WorldGeometryCandidate.js";
 
+type Built = WorkshopCandidate | readonly WorkshopCandidate[];
+/** One manifest builder call; a step starts only after the previous step has resolved. */
+type CandidateStep = () => Built | Promise<Built>;
+
+/** Builds one candidate per item, strictly one after another. */
+async function inSequence<T>(
+  items: Iterable<T>,
+  build: (item: T) => Promise<WorkshopCandidate>,
+): Promise<WorkshopCandidate[]> {
+  const built: WorkshopCandidate[] = [];
+  for (const item of items) built.push(await build(item));
+  return built;
+}
+
 const catalog = (await fetch("/tilefun/data/art-catalog.json").then((r) => r.json())) as ArtCatalog;
 const source = required(catalog.sheets.find((s) => s.id === "me-complete"));
 const assets = await loadTerrainAssets(new BlendGraph());
@@ -46,57 +60,63 @@ assets.sheets.set(
   new Spritesheet(await createImageBitmap(await loadVerifiedArtImage(source)), 16, 16),
 );
 try {
-  const canvas = document.createElement("canvas"),
-    candidates: WorkshopCandidate[] = [];
-  for (const definition of artReviewDefinitions())
-    candidates.push(await buildArtCandidate(canvas, definition, assets, catalog));
-  for (const c of TREE_PATTERN_CASES)
-    candidates.push(await buildPatternCandidate(canvas, c.id, assets, catalog));
-  for (const c of PARKING_CASES)
-    candidates.push(await buildPatternCandidate(canvas, `parking-v1-${c.id}`, assets, catalog));
-  for (const id of DOOR_CASES)
-    candidates.push(await buildPatternCandidate(canvas, id, assets, catalog));
-  candidates.push(await buildParkingVisitCandidate());
-  candidates.push(await buildPhysicsCandidate());
-  candidates.push(await buildParkingVisitCandidate(true));
-  candidates.push(...(await buildNaturalCandidates(catalog)));
-  candidates.push(await buildCarProjectionCandidate());
-  candidates.push(...(await buildAuthoredVehicleCandidates()));
-  candidates.push(...(await buildVehicleStyleStudyCandidates()));
-  candidates.push(...(await buildVehicleBakeCandidates()));
-  candidates.push(...(await buildOriginalVehicleCandidates()));
-  candidates.push(
-    await buildVehicleGameFitCandidate("v1"),
-    await buildVehicleGameFitCandidate("v2"),
-  );
-  candidates.push(await buildAuthoredTrainCandidate("v1"), await buildAuthoredTrainCandidate("v3"));
-  candidates.push(
-    await buildWorldGeometryCandidate(),
-    await buildWorldGeometryCandidate("garage"),
-    await buildWorldGeometryCandidate("crossing"),
-    await buildWorldGeometryCandidate("car-bridge"),
-    await buildWorldGeometryCandidate("car-garage"),
-    await buildWorldGeometryCandidate("car-dynamics"),
-    await buildWorldGeometryCandidate("traffic"),
-    await buildWorldGeometryCandidate("train-grades"),
-    await buildTruckBedCandidate(),
-    await buildTowingCandidate(),
-    await buildTransporterCandidate(),
-    await buildCurvedTrainCandidate(true),
-    await buildCurvedTrainCandidate(false),
-    await buildCityTrainCandidate(),
-    ...(await Promise.all([0, 1, 2].map(buildGeneratedCrossingCandidate))),
-  );
-  candidates.push(...(await buildRailwayCandidates()));
-  candidates.push(...(await buildFamilySheetCandidates()));
-  candidates.push(...(await buildInteriorCandidates()));
-  candidates.push(...(await buildCharacterCandidates(catalog)));
-  candidates.push(...(await buildWildlifeCandidates()));
-  candidates.push(...(await buildVehicleCandidates(await loadVerifiedArtImage(source))));
+  const canvas = document.createElement("canvas");
+  // Manifest candidate order is exactly this step order. Add a new tool's builder as one step,
+  // at the end unless an earlier position is intended.
+  const steps: readonly CandidateStep[] = [
+    () =>
+      inSequence(artReviewDefinitions(), (definition) =>
+        buildArtCandidate(canvas, definition, assets, catalog),
+      ),
+    () =>
+      inSequence(TREE_PATTERN_CASES, (c) => buildPatternCandidate(canvas, c.id, assets, catalog)),
+    () =>
+      inSequence(PARKING_CASES, (c) =>
+        buildPatternCandidate(canvas, `parking-v1-${c.id}`, assets, catalog),
+      ),
+    () => inSequence(DOOR_CASES, (id) => buildPatternCandidate(canvas, id, assets, catalog)),
+    () => buildParkingVisitCandidate(),
+    () => buildPhysicsCandidate(),
+    () => buildParkingVisitCandidate(true),
+    () => buildNaturalCandidates(catalog),
+    () => buildCarProjectionCandidate(),
+    () => buildAuthoredVehicleCandidates(),
+    () => buildVehicleStyleStudyCandidates(),
+    () => buildVehicleBakeCandidates(),
+    () => buildOriginalVehicleCandidates(),
+    () => buildVehicleGameFitCandidate("v1"),
+    () => buildVehicleGameFitCandidate("v2"),
+    () => buildAuthoredTrainCandidate("v1"),
+    () => buildAuthoredTrainCandidate("v3"),
+    () => buildWorldGeometryCandidate(),
+    () => buildWorldGeometryCandidate("garage"),
+    () => buildWorldGeometryCandidate("crossing"),
+    () => buildWorldGeometryCandidate("car-bridge"),
+    () => buildWorldGeometryCandidate("car-garage"),
+    () => buildWorldGeometryCandidate("car-dynamics"),
+    () => buildWorldGeometryCandidate("traffic"),
+    () => buildWorldGeometryCandidate("train-grades"),
+    () => buildTruckBedCandidate(),
+    () => buildTowingCandidate(),
+    () => buildTransporterCandidate(),
+    () => buildCurvedTrainCandidate(true),
+    () => buildCurvedTrainCandidate(false),
+    () => buildCityTrainCandidate(),
+    // The three generated crossings render concurrently, as they always have.
+    () => Promise.all([0, 1, 2].map(buildGeneratedCrossingCandidate)),
+    () => buildRailwayCandidates(),
+    () => buildFamilySheetCandidates(),
+    () => buildInteriorCandidates(),
+    () => buildCharacterCandidates(catalog),
+    () => buildWildlifeCandidates(),
+    async () => buildVehicleCandidates(await loadVerifiedArtImage(source)),
+  ];
+  const candidates: WorkshopCandidate[] = [];
+  for (const step of steps) candidates.push(...[await step()].flat());
   Object.assign(window, {
     workshopManifest: {
       version: 1,
-      tools: WORKSHOP_TOOLS,
+      tools: WORKSHOP_TOOLS.map(workshopToolMetadata),
       batches: [
         ...CITY_BATCHES,
         {

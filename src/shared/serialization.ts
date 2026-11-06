@@ -9,10 +9,10 @@ import {
   setSpriteClipElapsed,
   tickSpriteAnimation,
 } from "../entities/spriteAnimation.js";
-import { rotationsEqual } from "../physics/BodyRotation.js";
 import { applyCurveTrainFacing } from "../railway/CurveTrain.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 import type { Chunk } from "../world/Chunk.js";
+import { copyMirroredFields, mirroredFieldsMatch } from "./entityFields.js";
 import type { ChunkSnapshot, EntitySnapshot, PropSnapshot } from "./protocol.js";
 
 // ---- Entity ----
@@ -58,23 +58,7 @@ export function serializeEntity(e: Entity): EntitySnapshot {
     spriteState,
     wanderAIState,
   };
-  if (e.flashHidden !== undefined) result.flashHidden = e.flashHidden;
-  if (e.noShadow !== undefined) result.noShadow = e.noShadow;
-  if (e.deathTimer !== undefined) result.deathTimer = e.deathTimer;
-  if (e.jumpZ !== undefined) result.jumpZ = e.jumpZ;
-
-  if (e.jumpInputState !== undefined) result.jumpInputState = e.jumpInputState;
-  if (e.emergencyState !== undefined) result.emergencyState = e.emergencyState;
-  if (e.vehicleHeading !== undefined) result.vehicleHeading = e.vehicleHeading;
-  if (e.bodyRotation) result.bodyRotation = [...e.bodyRotation];
-  if (e.physicsGroupId !== undefined) result.physicsGroupId = e.physicsGroupId;
-  if (e.paintSchemeId !== undefined) result.paintSchemeId = e.paintSchemeId;
-
-  if (e.jumpVZ !== undefined) result.jumpVZ = e.jumpVZ;
-  if (e.wz !== undefined) result.wz = e.wz;
-  if (e.parentId !== undefined) result.parentId = e.parentId;
-  if (e.localOffsetX !== undefined) result.localOffsetX = e.localOffsetX;
-  if (e.localOffsetY !== undefined) result.localOffsetY = e.localOffsetY;
+  copyMirroredFields(result, e);
   return result;
 }
 
@@ -89,21 +73,7 @@ function entitySnapshotMatches(e: Entity, s: EntitySnapshot): boolean {
     e.type !== s.type ||
     e.position.wx !== s.position.wx ||
     e.position.wy !== s.position.wy ||
-    e.flashHidden !== s.flashHidden ||
-    e.noShadow !== s.noShadow ||
-    e.deathTimer !== s.deathTimer ||
-    e.jumpZ !== s.jumpZ ||
-    e.jumpVZ !== s.jumpVZ ||
-    e.jumpInputState !== s.jumpInputState ||
-    e.emergencyState !== s.emergencyState ||
-    e.vehicleHeading !== s.vehicleHeading ||
-    e.physicsGroupId !== s.physicsGroupId ||
-    !rotationsEqual(e.bodyRotation, s.bodyRotation) ||
-    e.paintSchemeId !== s.paintSchemeId ||
-    e.wz !== s.wz ||
-    e.parentId !== s.parentId ||
-    e.localOffsetX !== s.localOffsetX ||
-    e.localOffsetY !== s.localOffsetY
+    !mirroredFieldsMatch(e, s)
   )
     return false;
   const velocity = e.velocity;
@@ -214,23 +184,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
   if (def?.sortOffsetY !== undefined) result.sortOffsetY = def.sortOffsetY;
   if (def?.weight !== undefined) result.weight = def.weight;
   // Dynamic entity-level fields from snapshot
-  if (s.flashHidden !== undefined) result.flashHidden = s.flashHidden;
-  if (s.noShadow !== undefined) result.noShadow = s.noShadow;
-  if (s.deathTimer !== undefined) result.deathTimer = s.deathTimer;
-  if (s.jumpZ !== undefined) result.jumpZ = s.jumpZ;
-
-  if (s.jumpInputState !== undefined) result.jumpInputState = s.jumpInputState;
-  if (s.emergencyState !== undefined) result.emergencyState = s.emergencyState;
-  if (s.vehicleHeading !== undefined) result.vehicleHeading = s.vehicleHeading;
-  if (s.bodyRotation) result.bodyRotation = [...s.bodyRotation];
-  if (s.physicsGroupId !== undefined) result.physicsGroupId = s.physicsGroupId;
-  if (s.paintSchemeId !== undefined) result.paintSchemeId = s.paintSchemeId;
-
-  if (s.jumpVZ !== undefined) result.jumpVZ = s.jumpVZ;
-  if (s.wz !== undefined) result.wz = s.wz;
-  if (s.parentId !== undefined) result.parentId = s.parentId;
-  if (s.localOffsetX !== undefined) result.localOffsetX = s.localOffsetX;
-  if (s.localOffsetY !== undefined) result.localOffsetY = s.localOffsetY;
+  copyMirroredFields(result, s);
   setSpriteClip(result, s.spriteState?.clip);
   setSpriteClipElapsed(result, s.spriteState?.clipElapsedMs);
   tickSpriteAnimation(result, 0);

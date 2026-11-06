@@ -22,8 +22,10 @@ import {
 import { workshopJson } from "./AuthClient.js";
 import { flushLegacyOutboxes, legacyPendingCount } from "./LegacyOutboxes.js";
 import { primaryScene, reviewUnits, scenePath } from "./SceneReview.js";
+import { TOOL_PAGES } from "./ToolPages.js";
 import { reviewToolOwnsBatch, WORKSHOP_TOOLS } from "./ToolRegistry.js";
 import {
+  AuthGate,
   candidateLabel,
   ErrorMessage,
   LegacyLink,
@@ -38,41 +40,8 @@ import { useWorkspace, workshopStorageFailed } from "./WorkspaceStore.js";
 const FaultReportsPage = lazy(() => import("./FaultReportsPage.js"));
 const PlayIdeasPage = lazy(() => import("./PlayIdeasPage.js"));
 const ReviewPage = lazy(() => import("./ReviewPage.js"));
-const CharactersPage = lazy(() => import("./CharactersPage.js"));
-const CarProjectionPage = lazy(() => import("./CarProjectionPage.js"));
-const WorldGeometryPage = lazy(() => import("./WorldGeometryPage.js"));
-const PhysicsPage = lazy(() => import("./PhysicsPage.js"));
-const VehiclesPage = lazy(() => import("./VehiclesPage.js"));
 const SourcePage = lazy(() => import("./SourcePage.js"));
-const FamilySheetsPage = lazy(() => import("./FamilySheetsPage.js"));
-const PatternPage = lazy(() => import("./PatternPage.js"));
-const ParkingPage = lazy(() => import("./ParkingPage.js"));
-const OutdoorPage = lazy(() => import("./OutdoorPage.js"));
 const ScenePage = lazy(() => import("./ScenePage.js"));
-export function AuthGate({ children }: { children: ReactNode }) {
-  const session = useSession(),
-    location = useLocation();
-  if (session.isPending) return <p role="status">Checking login…</p>;
-  if (session.error) return <ErrorMessage error={session.error} />;
-  if (!session.data?.authenticated)
-    return (
-      <section className="empty">
-        <p className="eyebrow">PRIVATE WORKSPACE</p>
-        <h1>Sign in to your Workshop.</h1>
-        <p>
-          Your reviews and notes are shared across tools. Drafts and pending saves stay in this
-          browser.
-        </p>
-        <Link
-          className="button"
-          to={`/login?returnTo=${encodeURIComponent(location.pathname + location.search)}`}
-        >
-          Sign in
-        </Link>
-      </section>
-    );
-  return children;
-}
 class WorkspaceBoundary extends Component<{ children: ReactNode }, { error: string }> {
   override state = { error: "" };
   static getDerivedStateFromError(error: Error) {
@@ -229,48 +198,10 @@ export function App() {
           <NavLink to="/activity">Activity & history</NavLink>
           <NavLink to="/tools">All tools</NavLink>
           <p className="nav-heading">MAKE & EXPLORE</p>
-          {WORKSHOP_TOOLS.filter((tool) =>
-            [
-              "patterns",
-              "parking-lab",
-              "outdoor",
-              "traffic",
-              "world-geometry",
-              "physics",
-              "railways",
-              "vehicles",
-              "car-projection",
-              "character-lab",
-              "art",
-              "families",
-              "buildings",
-              "roads",
-              "districts",
-              "streets",
-              "rooms",
-              "motion",
-              "indoor",
-              "explorer",
-              "autotiles",
-            ].includes(tool.id),
-          ).map((tool) => (
+          {WORKSHOP_TOOLS.filter((tool) => tool.sidebar).map((tool) => (
             <NavLink key={tool.id} to={`/tool/${tool.id}`}>
               {tool.name}
-              {(["review", "adapter"].includes(tool.mode) || tool.id === "patterns") &&
-              [
-                "patterns",
-                "parking-lab",
-                "traffic",
-                "railways",
-                "vehicles",
-                "character-lab",
-                "buildings",
-                "roads",
-                "districts",
-                "streets",
-                "rooms",
-                "motion",
-              ].includes(tool.id) ? (
+              {tool.sidebar === "review" ? (
                 <span className="nav-count">
                   {(inbox.data ? reviewUnits(inbox.data.candidates) : undefined)?.filter(
                     (c) =>
@@ -520,13 +451,10 @@ function InboxPage() {
   if (inbox.isPending || manifest.isPending) return <p role="status">Loading review batches…</p>;
   if (!inbox.data || !manifest.data) return <ErrorMessage error={inbox.error ?? manifest.error} />;
   const candidates = reviewUnits(inbox.data.candidates),
-    batches = manifest.data.batches.filter(
-      (b) =>
-        area === "all" ||
-        (area === "city"
-          ? !["rooms", "motion"].includes(b.toolId)
-          : ["rooms", "motion"].includes(b.toolId)),
-    );
+    batches = manifest.data.batches.filter((b) => {
+      const interiors = WORKSHOP_TOOLS.find((t) => t.id === b.toolId)?.area === "interiors";
+      return area === "all" || (area === "city" ? !interiors : interiors);
+    });
   const pending = candidates.filter((c) => ["unchecked", "changed"].includes(c.state)).length,
     approved = candidates.filter((c) => c.state === "approved").length,
     changes = candidates.filter((c) => c.state === "changes").length;
@@ -952,26 +880,8 @@ function ToolPage() {
     tool = WORKSHOP_TOOLS.find((t) => t.id === toolId),
     location = useLocation();
   if (!tool) return <Navigate to="/tools" replace />;
-  if (tool.id === "patterns") return <PatternPage />;
-  if (tool.id === "parking-lab") return <ParkingPage />;
-  if (tool.id === "character-lab")
-    return (
-      <AuthGate>
-        <CharactersPage />
-      </AuthGate>
-    );
-  if (tool.id === "car-projection") return <CarProjectionPage />;
-  if (tool.id === "traffic") return <WorldGeometryPage defaultFixture="traffic" />;
-  if (tool.id === "world-geometry") return <WorldGeometryPage />;
-  if (tool.id === "physics") return <PhysicsPage />;
-  if (tool.id === "vehicles")
-    return (
-      <AuthGate>
-        <VehiclesPage />
-      </AuthGate>
-    );
-  if (tool.id === "outdoor") return <OutdoorPage />;
-  if (tool.id === "families") return <FamilySheetsPage />;
+  const page = TOOL_PAGES[tool.id];
+  if (page) return page;
   if (tool.mode === "source") return <SourcePage />;
   if (tool.mode === "review")
     return (

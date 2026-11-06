@@ -493,3 +493,112 @@ normalization (done), an honest list of specs that still bypass the hooks, the
 menu-error behavior note, wider and depth-independent boundary patterns (done),
 and documentation of knip's in-file export setting and the Playwright version
 coupling; all were repaired or recorded.
+
+### Phase 4 record — registries
+
+Precondition: `npm run workshop:inbox` still showed 0 approvals and 0 change
+requests on every source-hashed batch.
+
+- **Requests.** `shared/requests.ts` adds `RequestType`, `RequestOf`,
+  `ResponsePayload`, `isRequest` and `responseTo` (builds `{type, requestId, …}`
+  from the existing `RESPONSES` map). `GameServer` dispatches every request through
+  a handler table typed `{ [K in RequestType]: … }`, so a missing handler or wrong
+  payload fails `tsc`; one `respond()` sends success or `request-error` (sync results
+  still answer before returning, async ones in the same promise chain), and one
+  `arrival()` helper replaces `respondToTransition` for load-world, join-realm and
+  enter/exit-building. Adding a request: protocol union + `RESPONSES` + a 1–5 line
+  compiler-required table entry (before: a 10–15 line switch case that silently fell
+  through to realm dispatch when forgotten). One deliberate change: an `rcon` whose
+  `execServer` throws now answers `request-error` (B1 policy) instead of escaping
+  `handleMessage`. GameServer 1,742 → 1,714 lines, worst complexity 67 → 40.
+- **Entity codec schema.** `shared/entityFields.ts` (`ENTITY_FIELDS`: name, mask
+  bit, wire kind, equality/copy) and `shared/entityWire.ts` (byte layouts) drive
+  snapshot/delta encode, decode, diff, apply, serialize, deserialize and reuse;
+  the compiler rejects a snapshot field without an entry. A new replicated field
+  is one table entry plus its `Entity`/`EntitySnapshot` type fields (before ≈16
+  edits in four files); the four core fields (velocity, sprite, AI state, position
+  header) keep hand-written entity mappings. `entityWireGolden.test.ts`, written against the old code,
+  pins SHA-256 digests of 121 encodings (every field alone and combined, nulls,
+  edge floats, u32 max, unknown AI state, diff/apply round trips); wire bytes are
+  identical. Three codec files 1,926 → 993 lines (1,529 with the new modules); 17
+  non-null assertions and 11 casts removed; `binaryCodec.ts` leaves the ratchet.
+  Cost: table dispatch is ≈20–70 ns slower per entity per operation (300-entity
+  microbenchmark, µs before → after: encode baselines 42 → 59, deltas 31 → 50,
+  decode 10 → 28 / 6 → 15, serialize 52 → 72; diff 124 → 92 is faster).
+  `streaming:bench --assert-ready` still passes. Generated per-field code could
+  recover the difference if a profile ever shows it.
+- **Wildlife.** `wildlife/WildlifeKinds.ts` lists the seven native brain kinds in
+  the old dispatch order (`isWildlife`, `wildlifeKind`, `wildlifeBrain`);
+  `WildlifeSpecies.ts` maps each kind to its AI update and startle
+  (`satisfies Record<WildlifeKind, …>`; `startleWildlife` stops at the first kind,
+  like the old chains). They replace hand-written chains in `tickAllAI`,
+  `WildlifeActivity.isWildlife`, Realm's support-contact list and startle chain,
+  `EntityManager.finishPhysics`, ball contact (`BallGameplay`), horn reactions and
+  AI planning seeds: adding a native kind went from ≈11 places in 7 files to two
+  compiler-checked lines. `AnimalWorkSystem.update` dispatches habitats from an
+  ordered table (construction and listener order unchanged). `WorkKit.ts` holds the
+  Work-class plumbing that was behaviorally identical (find, nearest-first sort
+  with durable-id tiebreak, release, fresh work, home key, protected actor, ground
+  support with per-class tolerance, facing, fauna enter); classes keep their own
+  `stop`/`cancel`, divergent `enter`/`face` and all decision logic. Nine Work files
+  4,063 → 3,789 lines; `tickAllAI` worst 57 → 42. Behavior oracle: wildlife,
+  entity, Realm/activity suites and `Fauna.test.ts` (saved poses/populations)
+  pass unchanged.
+- **Workshop.** Tool entries carry sidebar placement and inbox area; App
+  navigation, counts, inbox filters and the manifest `tools` list derive from
+  `ToolRegistry`; `ToolPages.tsx` binds dedicated pages by typed tool id with the
+  same lazy imports. `build-manifest.ts` runs one ordered `steps` list (call
+  sequence diffed mechanically against the old file). Natural-case zoom, camera,
+  description, guides and mount lists moved from chains in
+  `NaturalLandscapePage.tsx` to `NaturalCasePresentation.ts` (old/new outputs
+  compared for all 252 case ids plus `explore`; behavior scenes must declare a
+  camera and description and cat scenes zoom 1.4, enforced by `satisfies`);
+  `NaturalLandscapeRecipe.ts` is untouched so the
+  recipe JSON in fingerprints is unchanged. App.tsx 1,111 → 1,021 lines;
+  NaturalLandscapePage 1,035 → 902 lines, worst complexity 255 → 32.
+- **Identity coverage.** Code moved out of hashed modules keeps its review
+  coverage: `ScenarioRuntimeSource` now also hashes `entityFields.ts`,
+  `entityWire.ts`, `WildlifeKinds.ts` and `WildlifeSpecies.ts`.
+- **Identity narrowing (phase 1 note) — not done, by decision.** Natural landscape
+  candidates are interactive explorer scenes, so they cannot be fingerprinted by
+  rendered output, and replacing raw-source hashing with an explicit engine
+  revision constant would trade automatic re-review for manual bumps — an owner
+  decision. Until then, phase 5 may split hashed modules only while those batches
+  hold no human decisions, and must add split-out files to the owning identity
+  sources.
+
+Remaining: the `privileged` request list could become a per-entry table flag;
+`protocol.ts` still hand-declares optional `EntitySnapshot` fields (could derive
+from `ENTITY_FIELDS`); wildlife sites with a different check order
+(`predatorAI.alarmPrey`, `WildlifeRespawns.habitat`, EntityManager motion hooks)
+need a one-brain-per-entity guarantee before using the registry;
+`ProceduralActors`/`NaturalLandscape` copy wildlife components by hand; clip lookup
+from art banks is blocked by B6 (`BehaviorArt` loop list disagrees with JSON) and
+by `restoreAnimalWorkPose` state→clip allowlists that differ per species; the Work
+classes' `update` decision logic (complexity 105–227) is unchanged; inline batches
+in `build-manifest.ts` and per-case action buttons in `NaturalLandscapePage.tsx`
+are still hand-listed.
+
+Validation: `npm run typecheck`; `npm run check` (Biome warnings only; ratchet
+tightened for 19 files, none raised; knip clean); full `npx vitest run` (4,619
+passed; the four pre-existing failures plus the `SharedPrediction` flake);
+`art:catalog` + `workshop:manifest` — candidate ids, order, tools and batches
+identical to HEAD; fingerprints changed only in source-hashed batches without
+human decisions (natural-landscapes 1,008, world-geometry 10, character-lab 6,
+physics-prototype 1); `npm run build`; `npm run streaming:bench -- --assert-ready`;
+`npm run test:smoke` (21 passed; the four pre-existing failures: F3, worker-server
+physics settings, rosso-coupe placement, local busy-Worker frame count).
+
+Review: an independent Opus 5.5 high review found no blockers. It re-ran the golden
+test against an exported HEAD (digests are the old codec's bytes), confirmed the
+44 manifest builder calls, natural-case presentation for all cases, sidebar/inbox
+derivations, request reply shapes/timing/privilege checks, wildlife dispatch order
+and every WorkKit extraction, and that ratchet entries only decrease. Repairs: the
+natural-case table lost HEAD's `behavior-*` camera/description and `behavior-cat*`
+zoom prefix fallbacks for future cases — now compiler-required via `satisfies`
+(verified by removing one description); the golden test also pins the decoded
+object shape (null vs absent; digest computed on HEAD); a malformed privileged
+request without an id again answers `requestId: 0`; a comment records that vehicle
+facing runs after mirrored fields. Recorded: `ToolRegistry.ts` is in the Workshop
+input digest, so navigation-only edits need a manifest run; the semantic golden
+path has no vehicle/wander entity (decode/encode digests cover their fields).

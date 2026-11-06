@@ -35,6 +35,16 @@ behavior; this topic owns the guardrails that keep structure from regressing.
   `shared/Determinism.ts` (`lcgNext`, `positionSeed`, `fnv1a32`) and
   `shared/gap.ts`. GameClient has one mode (transport + `RemoteStateView`); Realm
   always streams. Browser specs reach client state through `__game.stateView`.
+- Registries (declare new content once): client requests in `shared/requests.ts`
+  plus the compiler-complete handler table in `GameServer`; replicated entity
+  fields in `shared/entityFields.ts`; native wildlife kinds in
+  `wildlife/WildlifeKinds.ts`/`WildlifeSpecies.ts` (dispatch order is behavior)
+  with shared Work plumbing in `wildlife/WorkKit.ts`; Workshop tools in
+  `workshop/ToolRegistry.ts` (+ `ToolPages.tsx` for dedicated pages) and natural
+  case presentation in `workshop/NaturalCasePresentation.ts`.
+- Workshop candidate identities for source-hashed batches embed raw engine source
+  (`?raw` imports). New files split out of a hashed module must be added to the
+  owning identity's source list, or edits to them will not reopen review.
 - Largest churn hotspots: `server/Realm.ts`, `client/GameClient.ts`,
   `wildlife/Fauna.ts`, `rendering/collectScene.ts`, `server/GameServer.ts`.
 - The dominant cost is shotgun surgery: new species, replicated fields and

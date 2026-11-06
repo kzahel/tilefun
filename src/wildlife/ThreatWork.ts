@@ -1,4 +1,3 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
@@ -13,6 +12,7 @@ import { canEat, creatureSpecies, dietFor } from "./FoodWeb.js";
 import { settleFauna } from "./faunaInteractions.js";
 import { alarmPrey, consumeWildlifePrey } from "./predatorAI.js";
 import { spineDefenseBlocks } from "./SpineDefense.js";
+import { freshWork, groundSupported, WorkKit } from "./WorkKit.js";
 
 const kindOf = (a: Entity) =>
   ["hedgehog", "porcupine", "fox"].find((k) => faunaProfile(a.type)?.species === k) as
@@ -24,37 +24,22 @@ export const isThreatWorker = (a: Entity) => !!kindOf(a);
 
 /** Grounded, saved defenses and actual small-prey ambushes; no alternate lab simulation. */
 export class ThreatWork {
+  private readonly kit: WorkKit;
   constructor(
     private readonly manager: EntityManager,
     private readonly work: AnimalWorkSystem,
-  ) {}
-  private find(id?: string) {
-    return id ? this.manager.entities.find((e) => e.persistentId === id) : undefined;
+  ) {
+    this.kit = new WorkKit(manager);
   }
   private local(a: Entity) {
-    return this.manager.spatialHash
-      .queryRange(
-        Math.floor((a.position.wx - 112) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wy - 112) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wx + 112) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wy + 112) / CHUNK_SIZE_PX),
-      )
-      .filter(
+    return this.kit
+      .nearest(
+        a.position,
+        112,
         (e) =>
           e !== a && !e.workItem && gap(a.position, e.position) < 112 && e.deathTimer === undefined,
       )
-      .sort(
-        (x, y) =>
-          gap(x.position, a.position) - gap(y.position, a.position) ||
-          durableId(x).localeCompare(durableId(y)),
-      )
       .slice(0, 12);
-  }
-  private supported(a: Entity, c: WorkContext) {
-    return (
-      !c.environment.isWater(a.position) &&
-      Math.abs((a.wz ?? 0) - (c.environment.surfaceZ?.(a.position) ?? 0)) <= 1
-    );
   }
   private face(a: Entity, p: PositionComponent, away = false) {
     if (!a.sprite) return;
@@ -192,7 +177,7 @@ export class ThreatWork {
     return (
       c.ready(b.position, 96) &&
       canEat(a, b) &&
-      this.supported(b, c) &&
+      groundSupported(b, c, 1) &&
       (b.jumpZ ?? 0) <= 1 &&
       gap(b.position, a.fauna?.home ?? a.position) < (a.fauna?.radius ?? 0) &&
       Math.abs(
@@ -219,7 +204,7 @@ export class ThreatWork {
       this.stop(a, t.cooldown);
       return false;
     }
-    const prey = this.find(t.targetId);
+    const prey = this.kit.find(t.targetId);
     if (t.state === "pounce") {
       if (ai.motion || t.elapsed < 1.05) return true;
       this.stop(a, 5);
@@ -292,21 +277,13 @@ export class ThreatWork {
     const kind = kindOf(a),
       ai = a.fauna;
     if (!kind || !ai) return false;
-    a.animalWork ??= {
-      kind,
-      state: "idle",
-      elapsed: 0,
-      cooldown: 0,
-      deliveries: 0,
-      eaten: 0,
-      retrieved: 0,
-    };
+    a.animalWork ??= freshWork(kind);
     const t = a.animalWork;
     if (a.parentId !== undefined || a.wanderAI?.following || a.wanderAI?.state === "ridden") {
       this.stop(a);
       return false;
     }
-    const prey = this.find(t.targetId);
+    const prey = this.kit.find(t.targetId);
     if (
       !c.ready(a.position, 96) ||
       (t.state !== "pounce" && prey && !c.ready(prey.position, 96)) ||
@@ -317,7 +294,7 @@ export class ThreatWork {
       return true;
     }
     if (ai.motion) delete ai.motion.workPaused;
-    if (!ai.motion && (!this.supported(a, c) || !c.environment.canOccupy(a, a.position))) {
+    if (!ai.motion && (!groundSupported(a, c, 1) || !c.environment.canOccupy(a, a.position))) {
       this.stop(a);
       return false;
     }
@@ -336,7 +313,7 @@ export class ThreatWork {
         !c.ready(a.position, 96)
       )
         continue;
-      const prey = this.find(t.targetId);
+      const prey = this.kit.find(t.targetId);
       if (!prey || !c.ready(prey.position, 96)) continue;
       const random = () => {
         ai.randomState = lcgNext(ai.randomState);

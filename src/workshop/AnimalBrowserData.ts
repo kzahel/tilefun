@@ -18,6 +18,7 @@ export const ANIMAL_BROWSER_ENTRIES = [
     type: faunaType(p.species),
     image: p.image,
     hunter: false,
+    scene: p.species,
   })),
   ...PREDATOR_PROFILES.map((p) => ({
     id: p.species,
@@ -25,12 +26,42 @@ export const ANIMAL_BROWSER_ENTRIES = [
     type: predatorType(p.species),
     image: `demos/wildlife-v2/${p.species}/${p.revision}/sheet.png`,
     hunter: true,
+    scene: p.species,
   })),
-  { id: "deer", name: "White-tailed deer", type: DEER_TYPE, image: DEER_IMAGE, hunter: false },
-  { id: "frog", name: "Frog", type: FROG_TYPE, image: FROG_IMAGE, hunter: false },
-  { id: "mallard", name: "Mallard duck", type: MALLARD_TYPE, image: MALLARD_IMAGE, hunter: false },
-  { id: "robin", name: "Robin", type: ROBIN_TYPE, image: ROBIN_IMAGE, hunter: false },
-  { id: "rabbit", name: "Rabbit", type: RABBIT_TYPE, image: RABBIT_IMAGE, hunter: false },
+  // Original wildlife lives in shared habitat scenes rather than a scene per species.
+  {
+    id: "deer",
+    name: "White-tailed deer",
+    type: DEER_TYPE,
+    image: DEER_IMAGE,
+    hunter: false,
+    scene: "deer",
+  },
+  { id: "frog", name: "Frog", type: FROG_TYPE, image: FROG_IMAGE, hunter: false, scene: "frogs" },
+  {
+    id: "mallard",
+    name: "Mallard duck",
+    type: MALLARD_TYPE,
+    image: MALLARD_IMAGE,
+    hunter: false,
+    scene: "pond",
+  },
+  {
+    id: "robin",
+    name: "Robin",
+    type: ROBIN_TYPE,
+    image: ROBIN_IMAGE,
+    hunter: false,
+    scene: "robins",
+  },
+  {
+    id: "rabbit",
+    name: "Rabbit",
+    type: RABBIT_TYPE,
+    image: RABBIT_IMAGE,
+    hunter: false,
+    scene: "rabbits",
+  },
 ]
   .map((p) => ({
     ...p,
@@ -39,18 +70,6 @@ export const ANIMAL_BROWSER_ENTRIES = [
       families.get(p.id) ??
       families.get(p.id === "brown-bear" ? "bear" : p.id === "mallard" ? "mallard-duck" : p.id) ??
       (p.id.includes("cat") || p.id.includes("dog") ? "Pets" : "Fierce & fantasy"),
-    scene:
-      p.id === "deer"
-        ? "deer"
-        : p.id === "robin"
-          ? "robins"
-          : p.id === "rabbit"
-            ? "rabbits"
-            : p.id === "frog"
-              ? "frogs"
-              : p.id === "mallard"
-                ? "pond"
-                : p.id,
     sprite: required(ENTITY_DEFS[p.type]?.sprite),
     // Shared wildlife definitions put ordinary travel immediately after idle.
     // Keep species-specific fly/slither/bound/jet/pulse/waddle clips intact.

@@ -1,7 +1,5 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
-import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { gap } from "../shared/gap.js";
@@ -13,6 +11,14 @@ import { DEER_WALK_SPEED, restoreDeerPose, settleDeer } from "./deerInteractions
 import { faunaProfile } from "./Fauna.js";
 import { createForageItem, restoreWorkItemPose, sourceType } from "./ForageResources.js";
 import { restoreFaunaPose } from "./faunaInteractions.js";
+import {
+  faceToward,
+  freshWork,
+  groundSupported,
+  protectedActor,
+  WorkKit,
+  workHomeKey,
+} from "./WorkKit.js";
 
 const native = (a: Entity) => a.deer ?? a.fauna;
 const kindOf = (a: Entity) =>
@@ -23,25 +29,16 @@ const kindOf = (a: Entity) =>
         | "raven"
         | undefined);
 export const isForestWorker = (a: Entity) => !!kindOf(a);
-const protectedActor = (a: Entity) =>
-  a.parentId !== undefined || a.wanderAI?.following || a.wanderAI?.state === "ridden";
-const fresh = (kind: AnimalWork["kind"]): AnimalWork => ({
-  kind,
-  state: "idle",
-  elapsed: 0,
-  cooldown: 0,
-  deliveries: 0,
-  eaten: 0,
-  retrieved: 0,
-});
-const homeKey = (a: Entity) => a.naturalSpawnId ?? a.proceduralId ?? durableId(a);
+const supported = (e: Entity, c: WorkContext) => groundSupported(e, c, 4);
 
 /** Ordinary native travel, finite browse, reciprocal social work and conserved objects. */
 export class ForestWork {
+  private readonly kit: WorkKit;
   constructor(
     private readonly manager: EntityManager,
     private readonly work: AnimalWorkSystem,
   ) {
+    this.kit = new WorkKit(manager);
     manager.removalListeners.add((removed, destroyed) => {
       if (!destroyed) return;
       if (removed.workItem?.kind === "hoard") {
@@ -49,7 +46,7 @@ export class ForestWork {
           if (item.workItem?.cachedIn === removed.persistentId) this.releaseStored(item);
       }
       if (removed.workItem?.cachedIn) {
-        const site = this.find(removed.workItem.cachedIn);
+        const site = this.kit.find(removed.workItem.cachedIn);
         if (site?.workItem) {
           site.workItem.storedIds = (site.workItem.storedIds ?? []).filter(
             (id) => id !== removed.persistentId,
@@ -60,35 +57,8 @@ export class ForestWork {
       }
     });
   }
-  private find(id?: string) {
-    return id ? this.manager.entities.find((e) => e.persistentId === id) : undefined;
-  }
   private nearby(a: Entity) {
-    return this.manager.spatialHash
-      .queryRange(
-        Math.floor((a.position.wx - 180) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wy - 180) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wx + 180) / CHUNK_SIZE_PX),
-        Math.floor((a.position.wy + 180) / CHUNK_SIZE_PX),
-      )
-      .filter((e) => e !== a && gap(e.position, a.position) < 180)
-      .sort(
-        (x, y) =>
-          gap(x.position, a.position) - gap(y.position, a.position) ||
-          durableId(x).localeCompare(durableId(y)),
-      );
-  }
-  private supported(a: Entity, c: WorkContext) {
-    return (
-      !c.environment.isWater(a.position) &&
-      Math.abs((a.wz ?? 0) - (c.environment.surfaceZ?.(a.position) ?? 0)) <= 4
-    );
-  }
-  private face(a: Entity, point: PositionComponent) {
-    if (!a.sprite) return;
-    const facing = directionFromVelocity(point.wx - a.position.wx, point.wy - a.position.wy);
-    a.sprite.direction = a.sprite.frameRow = facing;
-    if (a.animalWork) a.animalWork.facing = facing;
+    return this.kit.nearest(a.position, 180, (e) => e !== a && gap(e.position, a.position) < 180);
   }
   private enter(a: Entity, state: AnimalWork["state"]) {
     const t = a.animalWork;
@@ -164,7 +134,7 @@ export class ForestWork {
   }
   private available(item: Entity) {
     if (!item.workItem || item.parentId !== undefined || item.workItem.cachedIn) return false;
-    const owner = this.find(item.workItem.claimedBy),
+    const owner = this.kit.find(item.workItem.claimedBy),
       t = owner?.animalWork;
     if (t && [t.targetId, t.siteId, t.heldId].includes(item.persistentId)) return false;
     delete item.workItem.claimedBy;
@@ -182,7 +152,7 @@ export class ForestWork {
       }
       if (t.state !== "stamp") {
         this.stop(a, 0);
-        this.face(a, ai.alarmFrom);
+        faceToward(a, ai.alarmFrom);
         this.enter(a, "stamp");
       }
       t.elapsed += dt;
@@ -197,14 +167,14 @@ export class ForestWork {
       if (t.state !== "idle") this.stop(a);
       return false;
     }
-    const food = this.find(t.targetId);
+    const food = this.kit.find(t.targetId);
     if (
       t.targetId &&
       (!food?.workItem ||
         food.type !== sourceType("browse-shrub") ||
         food.parentId !== undefined ||
         food.workItem.claimedBy !== a.persistentId ||
-        !this.supported(food, c))
+        !supported(food, c))
     ) {
       this.stop(a);
       return false;
@@ -262,7 +232,7 @@ export class ForestWork {
         !food.workItem ||
         !c.ready(food.position, 96) ||
         !this.available(food) ||
-        !this.supported(food, c)
+        !supported(food, c)
       )
         continue;
       for (const facing of [Direction.Right, Direction.Left, Direction.Up, Direction.Down]) {
@@ -282,7 +252,7 @@ export class ForestWork {
   }
   private stopPair(a: Entity) {
     const t = a.animalWork,
-      peer = this.find(t?.partnerId);
+      peer = this.kit.find(t?.partnerId);
     if (t) {
       delete t.partnerId;
       delete t.displayLeader;
@@ -296,7 +266,7 @@ export class ForestWork {
   }
   releasePartner(a: Entity, cooldown: number) {
     const t = a.animalWork,
-      peer = this.find(t?.partnerId);
+      peer = this.kit.find(t?.partnerId);
     if (t) {
       delete t.partnerId;
       delete t.displayLeader;
@@ -317,7 +287,7 @@ export class ForestWork {
       !["startle", "flee", "recover"].includes(ai.state) &&
       Math.abs((b.wz ?? 0) - (a.wz ?? 0)) <= 4 &&
       c.ready(b.position, 96) &&
-      this.supported(b, c) &&
+      supported(b, c) &&
       c.environment.canOccupy(b, b.position) &&
       (a.fauna?.groupId
         ? a.fauna.groupId === ai.groupId
@@ -328,7 +298,7 @@ export class ForestWork {
     const t = a.animalWork,
       ai = a.fauna;
     if (!t || !ai) return false;
-    const peer = this.find(t.partnerId),
+    const peer = this.kit.find(t.partnerId),
       p = peer?.animalWork;
     if (t.partnerId) {
       if (
@@ -346,8 +316,8 @@ export class ForestWork {
       if (!t.displayLeader) return true;
       t.elapsed += dt;
       if (ai.motion) return true;
-      this.face(a, peer.position);
-      this.face(peer, a.position);
+      faceToward(a, peer.position);
+      faceToward(peer, a.position);
       if (t.state === "seek") {
         if (t.elapsed > 20) {
           this.stopPair(a);
@@ -402,7 +372,7 @@ export class ForestWork {
         z: peer.wz ?? 0,
       };
       if (!this.go(a, point, c, planning)) continue;
-      peer.animalWork ??= fresh("peacock");
+      peer.animalWork ??= freshWork("peacock");
       t.partnerId = durableId(peer);
       peer.animalWork.partnerId = durableId(a);
       t.displayLeader = true;
@@ -430,7 +400,7 @@ export class ForestWork {
     for (const site of active)
       if (site.workItem?.kind === "hoard") {
         for (const id of site.workItem.storedIds ?? []) {
-          const item = this.find(id);
+          const item = this.kit.find(id);
           if (
             !item?.workItem ||
             item.workItem.cachedIn !== site.persistentId ||
@@ -451,18 +421,18 @@ export class ForestWork {
       t = a.animalWork;
     if (!ai || !t) return;
     if (t.siteId) {
-      const site = this.find(t.siteId);
+      const site = this.kit.find(t.siteId);
       if (!site) return;
       if (
         site.workItem?.kind === "hoard" &&
-        (!site.workItem.owner || site.workItem.owner === homeKey(a))
+        (!site.workItem.owner || site.workItem.owner === workHomeKey(a))
       ) {
-        site.workItem.owner = homeKey(a);
+        site.workItem.owner = workHomeKey(a);
         return site;
       }
       delete t.siteId;
     }
-    const owner = homeKey(a),
+    const owner = workHomeKey(a),
       old = this.manager.entities.find(
         (e) => e.workItem?.kind === "hoard" && e.workItem.owner === owner,
       );
@@ -473,7 +443,7 @@ export class ForestWork {
         !e.workItem.owner &&
         e.parentId === undefined &&
         c.ready(e.position, 96) &&
-        this.supported(e, c) &&
+        supported(e, c) &&
         gap(e.position, ai.home) < ai.radius,
     );
     if (placed?.workItem) {
@@ -511,15 +481,15 @@ export class ForestWork {
     const t = a.animalWork,
       ai = a.fauna;
     if (!t || !ai) return false;
-    const target = this.find(t.targetId),
-      held = this.find(t.heldId),
-      site = this.find(t.siteId);
+    const target = this.kit.find(t.targetId),
+      held = this.kit.find(t.heldId),
+      site = this.kit.find(t.siteId);
     if (
       t.targetId &&
       (target?.workItem?.kind !== "shiny" ||
         !!target.workItem.owner ||
         target.workItem.claimedBy !== a.persistentId ||
-        (!held && (target.parentId !== undefined || !this.supported(target, c))))
+        (!held && (target.parentId !== undefined || !supported(target, c))))
     ) {
       this.stop(a);
       return false;
@@ -528,9 +498,9 @@ export class ForestWork {
       t.state !== "idle" &&
       (site?.workItem?.kind !== "hoard" ||
         site.parentId !== undefined ||
-        site.workItem.owner !== homeKey(a) ||
+        site.workItem.owner !== workHomeKey(a) ||
         site.workItem.claimedBy !== a.persistentId ||
-        !this.supported(site, c) ||
+        !supported(site, c) ||
         !t.sitePosition ||
         !t.returnPosition ||
         gap(site.position, t.returnPosition) > 1)
@@ -631,15 +601,15 @@ export class ForestWork {
         !item.workItem ||
         !c.ready(item.position, 96) ||
         !this.available(item) ||
-        !this.supported(item, c)
+        !supported(item, c)
       )
         continue;
       const cache = this.hoard(a, c, planning);
       if (
         cache?.workItem?.kind !== "hoard" ||
-        cache.workItem.owner !== homeKey(a) ||
+        cache.workItem.owner !== workHomeKey(a) ||
         !c.ready(cache.position, 96) ||
-        !this.supported(cache, c) ||
+        !supported(cache, c) ||
         (cache.workItem.storedIds?.length ?? 0) >= 3
       )
         continue;
@@ -665,16 +635,16 @@ export class ForestWork {
     const kind = kindOf(a),
       ai = native(a);
     if (!kind || !ai) return false;
-    a.animalWork ??= fresh(kind);
+    a.animalWork ??= freshWork(kind);
     const t = a.animalWork;
     if (protectedActor(a)) {
       if (kind === "peacock") this.stopPair(a);
       else this.stop(a);
       return false;
     }
-    const target = this.find(t.targetId),
-      site = this.find(t.siteId),
-      partner = this.find(t.partnerId);
+    const target = this.kit.find(t.targetId),
+      site = this.kit.find(t.siteId),
+      partner = this.kit.find(t.partnerId);
     if (
       !c.ready(a.position, 96) ||
       (t.state !== "idle" &&
@@ -689,7 +659,7 @@ export class ForestWork {
       return true;
     }
     if (ai.motion) delete ai.motion.workPaused;
-    if (!ai.motion && (!this.supported(a, c) || !c.environment.canOccupy(a, a.position))) {
+    if (!ai.motion && (!supported(a, c) || !c.environment.canOccupy(a, a.position))) {
       if (kind === "peacock") this.stopPair(a);
       else this.stop(a);
       return false;

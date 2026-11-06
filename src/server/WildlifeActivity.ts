@@ -1,23 +1,12 @@
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
+import { isWildlife } from "../wildlife/WildlifeKinds.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 
 interface Observer {
   player: Entity;
   visibleRange: ChunkRange;
-}
-
-export function isWildlife(entity: Entity): boolean {
-  return !!(
-    entity.predator ||
-    entity.fauna ||
-    entity.deer ||
-    entity.robin ||
-    entity.rabbit ||
-    entity.frog ||
-    entity.mallard
-  );
 }
 
 /** Simulation interest is narrower than residency. Sleeping never accrues dt. */

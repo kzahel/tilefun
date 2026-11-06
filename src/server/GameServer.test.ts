@@ -187,6 +187,22 @@ describe("request failures", () => {
       message: "rename failed",
     });
   });
+
+  it("answers synchronous requests before returning, including their failures", async () => {
+    const { transport } = await createTestServer();
+    const messages: import("../shared/protocol.js").ServerMessage[] = [];
+    transport.clientSide.onMessage((m) => messages.push(m));
+
+    transport.clientSide.send({ type: "set-player-model", requestId: 51, model: "nobody" });
+    transport.clientSide.send({ type: "set-player-model", requestId: 52, model: "person1" });
+    transport.clientSide.send({ type: "rcon", requestId: 53, command: "x".repeat(2049) });
+
+    expect(messages).toEqual([
+      { type: "request-error", requestId: 51, message: "Unknown player model." },
+      { type: "player-model-set", requestId: 52, model: "person1" },
+      { type: "request-error", requestId: 53, message: "Invalid console command." },
+    ]);
+  });
 });
 
 describe("pattern commands", () => {

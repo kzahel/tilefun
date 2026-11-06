@@ -53,6 +53,8 @@ import realmWildlife from "../server/RealmWildlife.ts?raw";
 import clock from "../server/ServerLoop.ts?raw";
 import wireCodec from "../shared/binaryCodec.ts?raw";
 import entityDelta from "../shared/entityDelta.ts?raw";
+import entityFields from "../shared/entityFields.ts?raw";
+import entityWire from "../shared/entityWire.ts?raw";
 import physicsCodec from "../shared/physicsStateCodec.ts?raw";
 import serialization from "../shared/serialization.ts?raw";
 import roadTraffic from "../traffic/RoadTraffic.ts?raw";
@@ -66,7 +68,9 @@ import predators from "../wildlife/Predator.ts?raw";
 import predatorHabitat from "../wildlife/PredatorHabitat.ts?raw";
 import predatorMotion from "../wildlife/PredatorMotion.ts?raw";
 import predatorAI from "../wildlife/predatorAI.ts?raw";
+import wildlifeKinds from "../wildlife/WildlifeKinds.ts?raw";
 import wildlifeRespawns from "../wildlife/WildlifeRespawns.ts?raw";
+import wildlifeSpecies from "../wildlife/WildlifeSpecies.ts?raw";
 
 /** Live behavior reviews include host timing/transport, not just recipe/physics. */
 export const scenarioRuntimeSource = {
@@ -117,6 +121,8 @@ export const scenarioRuntimeSource = {
   physicsCodec,
   wireCodec,
   entityDelta,
+  entityFields,
+  entityWire,
   serialization,
   replica,
   collisionGeometry,
@@ -125,6 +131,8 @@ export const scenarioRuntimeSource = {
   predatorAI,
   predatorHabitat,
   wildlifeRespawns,
+  wildlifeKinds,
+  wildlifeSpecies,
   predators,
   predatorMotion,
   fierceProfiles,

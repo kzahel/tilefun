@@ -1,5 +1,6 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { RobinWorkBudget } from "../wildlife/RobinWorkBudget.js";
+import { wildlifeBrain } from "../wildlife/WildlifeKinds.js";
 
 interface Clock {
   elapsed: number;
@@ -40,16 +41,7 @@ export class AiPlanningScheduler {
         : clock.near;
     const period = near ? 0.1 : 0.3;
     if (!clock) {
-      const seed =
-        (
-          entity.predator ??
-          entity.fauna ??
-          entity.deer ??
-          entity.robin ??
-          entity.rabbit ??
-          entity.frog ??
-          entity.mallard
-        )?.randomState ?? entity.id;
+      const seed = wildlifeBrain(entity)?.randomState ?? entity.id;
       clock = {
         elapsed: ((seed % 6) * period) / 6,
         due: false,

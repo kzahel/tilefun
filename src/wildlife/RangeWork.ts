@@ -1,11 +1,8 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { gap } from "../shared/gap.js";
-import type { AnimalWork } from "./AnimalWork.js";
-import { restoreAnimalWorkPose } from "./AnimalWorkPose.js";
 import type { AnimalWorkSystem, WorkContext } from "./AnimalWorkSystem.js";
 import { actionSocket } from "./BehaviorArt.js";
 import { faunaProfile } from "./Fauna.js";
@@ -15,8 +12,8 @@ import {
   restoreWorkItemPose,
   sourceType,
 } from "./ForageResources.js";
-import { restoreFaunaPose } from "./faunaInteractions.js";
 import { canopyLeafPoint, sameTree } from "./TreeClimbing.js";
+import { enterFaunaWork, freshWork, WorkKit } from "./WorkKit.js";
 
 const kindOf = (a: Entity) => {
   const species = faunaProfile(a.type)?.species;
@@ -26,43 +23,22 @@ export const isRangeWorker = (a: Entity) => !!kindOf(a);
 
 /** Ground feeding, real canopy support and conserved branch construction. */
 export class RangeWork {
+  private readonly kit: WorkKit;
   constructor(
     private readonly manager: EntityManager,
     private readonly work: AnimalWorkSystem,
-  ) {}
-  private find(id?: string) {
-    return id ? this.manager.entities.find((e) => e.persistentId === id) : undefined;
+  ) {
+    this.kit = new WorkKit(manager);
   }
   private nearby(a: Entity) {
     const p = a.position;
-    return this.manager.spatialHash
-      .queryRange(
-        Math.floor((p.wx - 180) / CHUNK_SIZE_PX),
-        Math.floor((p.wy - 180) / CHUNK_SIZE_PX),
-        Math.floor((p.wx + 180) / CHUNK_SIZE_PX),
-        Math.floor((p.wy + 180) / CHUNK_SIZE_PX),
-      )
-      .filter(
-        (e) =>
-          gap(e.position, p) < 180 &&
-          gap(e.position, a.fauna?.home ?? p) < (a.fauna?.radius ?? 0) + 48,
-      )
-      .sort(
-        (x, y) =>
-          gap(x.position, p) - gap(y.position, p) || durableId(x).localeCompare(durableId(y)),
-      );
-  }
-  private enter(a: Entity, state: AnimalWork["state"]) {
-    const t = a.animalWork;
-    if (!t) return;
-    t.state = state;
-    t.elapsed = 0;
-    if (!a.fauna?.motion) {
-      a.motionIntent = { vx: 0, vy: 0 };
-      if (a.wanderAI) a.wanderAI.state = "idle";
-      restoreFaunaPose(a);
-    }
-    restoreAnimalWorkPose(a);
+    return this.kit.nearest(
+      p,
+      180,
+      (e) =>
+        gap(e.position, p) < 180 &&
+        gap(e.position, a.fauna?.home ?? p) < (a.fauna?.radius ?? 0) + 48,
+    );
   }
   private stop(a: Entity, cooldown = 3) {
     this.work.cancel(a, cooldown);
@@ -78,7 +54,7 @@ export class RangeWork {
     const item = e.workItem;
     if (!item || e.parentId !== undefined || !c.ready(e.position, 96)) return false;
     if (item.claimedBy && item.claimedBy !== owner?.persistentId) {
-      const actor = this.find(item.claimedBy);
+      const actor = this.kit.find(item.claimedBy);
       if (
         actor?.animalWork &&
         [actor.animalWork.targetId, actor.animalWork.siteId, actor.animalWork.heldId].includes(
@@ -148,22 +124,14 @@ export class RangeWork {
     const kind = kindOf(a),
       ai = a.fauna;
     if (!kind || !ai) return false;
-    a.animalWork ??= {
-      kind,
-      state: "idle",
-      elapsed: 0,
-      cooldown: 0,
-      deliveries: 0,
-      eaten: 0,
-      retrieved: 0,
-    };
+    a.animalWork ??= freshWork(kind);
     const t = a.animalWork,
       prior = t.elapsed;
     t.elapsed += dt;
     t.cooldown = Math.max(0, t.cooldown - dt);
-    const food = this.find(t.targetId),
-      site = this.find(t.siteId),
-      held = this.find(t.heldId);
+    const food = this.kit.find(t.targetId),
+      site = this.kit.find(t.siteId),
+      held = this.kit.find(t.heldId);
     if (
       a.parentId !== undefined ||
       a.wanderAI?.following ||
@@ -235,7 +203,7 @@ export class RangeWork {
           this.stop(a);
           return false;
         }
-        if (gap(a.position, point) <= 1.5) this.enter(a, "build");
+        if (gap(a.position, point) <= 1.5) enterFaunaWork(a, "build");
         else if (!this.work.go(a, point, point.z, c, planning)) this.stop(a);
         return true;
       }
@@ -249,7 +217,7 @@ export class RangeWork {
       site.workItem.units++;
       t.deliveries++;
       restoreWorkItemPose(site);
-      this.enter(a, "settle");
+      enterFaunaWork(a, "settle");
       return true;
     }
     const action =
@@ -267,7 +235,7 @@ export class RangeWork {
       }
       if (t.state === "lower" || t.state === "reach") {
         if (t.elapsed < (kind === "horse" ? 0.75 : 1.2)) return true;
-        this.enter(a, action);
+        enterFaunaWork(a, action);
         return true;
       }
       if (t.elapsed < (kind === "beaver" ? 1 : kind === "horse" && action === "graze" ? 1.2 : 1.6))
@@ -303,14 +271,14 @@ export class RangeWork {
           this.stop(a);
           return false;
         }
-        this.enter(a, "return");
+        enterFaunaWork(a, "return");
         return true;
       }
       food.workItem.units--;
       if (action === "drink") t.drunk = (t.drunk ?? 0) + 1;
       else t.eaten++;
       restoreWorkItemPose(food);
-      this.enter(a, kind === "horse" ? "raise" : "lower");
+      enterFaunaWork(a, kind === "horse" ? "raise" : "lower");
       return true;
     }
     if (t.state === "idle" && t.cooldown) return false;
@@ -322,7 +290,7 @@ export class RangeWork {
         return false;
       }
       if (gap(a.position, point) <= 1.5)
-        this.enter(a, kind === "horse" ? "lower" : kind === "giraffe" ? "reach" : "pickup");
+        enterFaunaWork(a, kind === "horse" ? "lower" : kind === "giraffe" ? "reach" : "pickup");
       else if (!this.work.go(a, point, point.z, c, planning)) this.stop(a);
       return true;
     }
@@ -378,7 +346,7 @@ export class RangeWork {
         lodge.workItem.claimedBy = durableId(a);
         t.siteId = durableId(lodge);
       }
-      this.enter(a, "seek");
+      enterFaunaWork(a, "seek");
       return true;
     }
     t.cooldown = 2;
