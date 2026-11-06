@@ -142,17 +142,17 @@ test("standalone binary WebSocket administration rejects guests and preserves th
           }),
         );
       });
-    expect(await command(admin, 1, "sv_speed 2", adminToken)).toMatchObject({
+    expect(await command(admin, 1, "sv_gravity 2", adminToken)).toMatchObject({
       type: "rcon-response",
       output: expect.arrayContaining([expect.stringContaining("2")]),
     });
-    expect(await command(guest, 2, "sv_speed 99")).toMatchObject({
+    expect(await command(guest, 2, "sv_gravity 99")).toMatchObject({
       type: "request-error",
       message: expect.stringContaining("requires an admin token"),
     });
-    expect(await command(admin, 3, "sv_speed", adminToken)).toMatchObject({
+    expect(await command(admin, 3, "sv_gravity", adminToken)).toMatchObject({
       type: "rcon-response",
-      output: expect.arrayContaining([expect.stringContaining("2")]),
+      output: expect.arrayContaining([expect.stringContaining("sv_gravity = 2")]),
     });
   } finally {
     for (const socket of sockets) socket.terminate();

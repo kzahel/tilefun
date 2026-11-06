@@ -7,7 +7,9 @@ test.use({ channel: "chromium", hasTouch: true });
 const CANVAS_GAME = "/tilefun/?desktop=1&renderer=canvas";
 
 async function press(page: Page, button: number) {
-  // Observe actual render frames so a busy GPU cannot miss a press/release.
+  // Observe actual render frames so a busy GPU cannot miss a press/release, and
+  // release as soon as the game emits the command: held directions auto-repeat
+  // after 380 ms of wall time, which slow hosted frames would otherwise reach.
   await page.evaluate(async (index) => {
     const frames = async () => {
       for (let n = 0; n < 3; n++)
@@ -15,9 +17,22 @@ async function press(page: Page, button: number) {
     };
     await frames();
     const gp = (window as unknown as { testPad: Gamepad }).testPad;
+    const release = () => {
+      Object.assign(gp.buttons[index] ?? {}, { pressed: false, value: 0 });
+    };
+    const emitted = new Promise<void>((resolve) =>
+      addEventListener(
+        "tilefun-controller",
+        () => {
+          release();
+          resolve();
+        },
+        { once: true },
+      ),
+    );
     Object.assign(gp.buttons[index] ?? {}, { pressed: true, value: 1 });
-    await frames();
-    Object.assign(gp.buttons[index] ?? {}, { pressed: false, value: 0 });
+    await Promise.race([emitted, frames()]);
+    release();
     await frames();
   }, button);
 }
