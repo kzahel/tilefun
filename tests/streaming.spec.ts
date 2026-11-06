@@ -44,32 +44,44 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
         missing = 0,
         maxSurfaces = 0;
       const visited = new Set<string>();
+      // Inspect the exact range that prepared the last frame's caches. The
+      // presented camera follows continuously in presentation time, so it can
+      // differ by a chunk column from the simulation camera's interpolation.
+      // biome-ignore lint/suspicious/noExplicitAny: diagnostic hook
+      let prepared: any;
+      const prepare = g.renderer.prepareTerrain;
+      // biome-ignore lint/suspicious/noExplicitAny: diagnostic hook
+      g.renderer.prepareTerrain = function (this: unknown, ...args: any[]) {
+        prepared = args[2];
+        return prepare.apply(this, args);
+      };
       // Keep minimum display coverage and require actual travel, bounded by
       // elapsed time rather than a frame count that varies with refresh rate.
       const deadline = performance.now() + 20_000;
-      for (let i = 0; performance.now() < deadline; i++) {
-        await new Promise(requestAnimationFrame);
-        // PlayScene restores the simulation camera after rendering. Inspect
-        // the same interpolated view that prepared the last frame's caches;
-        // its halo can be a column wider at a chunk boundary.
-        g.camera.applyInterpolation(g.time.alpha);
-        const range = g.camera.getVisibleChunkRange();
-        g.camera.restoreActual();
-        for (let cy = range.minCy; cy <= range.maxCy; cy++)
-          for (let cx = range.minCx; cx <= range.maxCx; cx++) {
-            visited.add(`${cx},${cy}`);
-            const chunk = g.stateView.world.getChunkIfLoaded(cx, cy);
-            if (!chunk) missing++;
-            else if (!g.renderer.hasTerrain(chunk)) incomplete++;
-          }
-        const d = g.renderer.getDiagnostics();
-        const haloArea = (range.maxCx - range.minCx + 3) * (range.maxCy - range.minCy + 3);
-        if (d.resident > haloArea || d.rowsLastFrame > 128)
-          throw Error(
-            `Preparation exceeded its work/residency bound: ${JSON.stringify({ range, haloArea, ...d })}`,
-          );
-        maxSurfaces = Math.max(maxSurfaces, d.surfaceBytes);
-        if (i >= 209 && direction * (g.stateView.playerEntity.position.wx - x) > 450) break;
+      try {
+        for (let i = 0; performance.now() < deadline; i++) {
+          prepared = undefined;
+          await new Promise(requestAnimationFrame);
+          const range = prepared;
+          if (!range) continue;
+          for (let cy = range.minCy; cy <= range.maxCy; cy++)
+            for (let cx = range.minCx; cx <= range.maxCx; cx++) {
+              visited.add(`${cx},${cy}`);
+              const chunk = g.stateView.world.getChunkIfLoaded(cx, cy);
+              if (!chunk) missing++;
+              else if (!g.renderer.hasTerrain(chunk)) incomplete++;
+            }
+          const d = g.renderer.getDiagnostics();
+          const haloArea = (range.maxCx - range.minCx + 3) * (range.maxCy - range.minCy + 3);
+          if (d.resident > haloArea || d.rowsLastFrame > 128)
+            throw Error(
+              `Preparation exceeded its work/residency bound: ${JSON.stringify({ range, haloArea, ...d })}`,
+            );
+          maxSurfaces = Math.max(maxSurfaces, d.surfaceBytes);
+          if (i >= 209 && direction * (g.stateView.playerEntity.position.wx - x) > 450) break;
+        }
+      } finally {
+        g.renderer.prepareTerrain = prepare;
       }
       return {
         dx: g.stateView.playerEntity.position.wx - x,

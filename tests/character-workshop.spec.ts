@@ -34,7 +34,11 @@ test("character lab lists six candidates and exercises movement, grounding, anim
   await page.keyboard.down("Space");
   await expect.poll(async () => Number(await canvas.getAttribute("data-z"))).toBeGreaterThan(0);
   await page.keyboard.up("Space");
-  await expect(canvas).toHaveAttribute("data-z", "0");
+  // Shared Rapier contacts rest within solver slop of the ground (about -0.001),
+  // not at exact zero.
+  await expect
+    .poll(async () => Math.abs(Number(await canvas.getAttribute("data-z"))))
+    .toBeLessThan(0.01);
   await page.getByLabel("Sprite vertical offset").fill("7");
   await page.getByLabel("Ground width", { exact: true }).fill("12");
   await page.getByLabel("Character feedback").fill("Check the feet with a 7px offset.");

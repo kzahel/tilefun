@@ -199,7 +199,7 @@ export function deserializeEntity(s: EntitySnapshot): Entity {
 export function serializeProp(p: Prop): PropSnapshot {
   return {
     ...(p.sortOffsetY === undefined ? {} : { sortOffsetY: p.sortOffsetY }),
-    ...(p.type === "prop-interior-wall" && p.walls
+    ...((p.type === "prop-interior-wall" || p.type.startsWith("scenario-prop-")) && p.walls
       ? { walls: p.walls.map((w) => ({ ...w })) }
       : {}),
     ...(p.proceduralId ? { proceduralId: p.proceduralId } : {}),

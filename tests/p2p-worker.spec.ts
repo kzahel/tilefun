@@ -48,25 +48,43 @@ test("P2P Worker isolates authority and rendering, serves a hidden host, and sav
         else post.call(scope, message, transfer);
       };
       const samples: { at: number; ticks: number }[] = [];
+      // Sample until the page finishes its stall; separate evaluate calls can
+      // start far apart on a slow host, so the threads synchronize directly.
+      const channel = new BroadcastChannel("p2p-worker-main-stall");
+      let done = false;
+      channel.onmessage = () => {
+        done = true;
+      };
       try {
-        const until = Date.now() + 800;
-        while (Date.now() < until) {
+        const until = Date.now() + 20_000;
+        while (!done && Date.now() < until) {
+          // Repeat: the page may not be listening yet.
+          channel.postMessage("sampling");
           scope.dispatchEvent(new MessageEvent("message", { data: { kind: "probe", id: -1 } }));
           samples.push({ at: Date.now(), ticks });
           await new Promise((resolve) => setTimeout(resolve, 20));
         }
         return samples;
       } finally {
+        channel.close();
         scope.postMessage = post;
       }
     });
     const mainStall = await host.evaluate(async () => {
+      const channel = new BroadcastChannel("p2p-worker-main-stall");
+      await new Promise((resolve) => {
+        channel.onmessage = resolve;
+      });
       await new Promise((resolve) => setTimeout(resolve, 100));
       const start = Date.now();
       while (Date.now() - start < 350) {
         /* controlled main-thread stall */
       }
-      return { start, end: Date.now() };
+      const end = Date.now();
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      channel.postMessage("done");
+      channel.close();
+      return { start, end };
     });
     const duringMainStall = (await authoritySamples).filter(
       (sample) => sample.at > mainStall.start + 20 && sample.at < mainStall.end - 20,
@@ -78,20 +96,35 @@ test("P2P Worker isolates authority and rendering, serves a hidden host, and sav
     expect(last.ticks - first.ticks).toBeGreaterThan(8);
 
     const renderSamples = host.evaluate(async () => {
+      const channel = new BroadcastChannel("p2p-worker-authority-stall");
+      let done = false;
+      channel.onmessage = () => {
+        done = true;
+      };
       const times: number[] = [],
-        until = Date.now() + 700;
-      while (Date.now() < until) {
+        until = Date.now() + 20_000;
+      while (!done && Date.now() < until) {
+        channel.postMessage("rendering");
         await new Promise(requestAnimationFrame);
         times.push(Date.now());
       }
+      channel.close();
       return times;
     });
-    const authorityStall = await worker.evaluate(() => {
+    const authorityStall = await worker.evaluate(async () => {
+      const channel = new BroadcastChannel("p2p-worker-authority-stall");
+      await new Promise((resolve) => {
+        channel.onmessage = resolve;
+      });
       const start = Date.now();
       while (Date.now() - start < 350) {
         /* controlled authority-thread stall */
       }
-      return { start, end: Date.now() };
+      const end = Date.now();
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      channel.postMessage("done");
+      channel.close();
+      return { start, end };
     });
     const renderedDuringStall = (await renderSamples).filter(
       (time) => time > authorityStall.start && time < authorityStall.end,

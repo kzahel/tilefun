@@ -47,7 +47,8 @@ for (const transport of ["ws", "webrtc"] as const) {
           }
         })
         .toBe(true);
-      const url = `/tilefun/?server=localhost:${transport === "ws" ? "4192" : "4193"}&transport=${transport}`;
+      // Two clients test credentials, not GPU output; Canvas avoids software-GPU load.
+      const url = `/tilefun/?renderer=canvas&server=localhost:${transport === "ws" ? "4192" : "4193"}&transport=${transport}`;
       await page.goto(`${url}#adminToken=${token}`);
       await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
       expect(new URL(page.url()).hash).toBe("");

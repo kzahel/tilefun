@@ -9,6 +9,14 @@ import type { Realm } from "./Realm.js";
 
 export type { Arrival } from "../shared/protocol.js";
 
+/**
+ * Shared physics settles resting contacts within its allowed linear error
+ * (1 mm, 0.016px), so a player saved against a wall can overlap it slightly
+ * (for example 165.99991 against a 166px edge). Resume that pose exactly
+ * rather than relocating it a tile away.
+ */
+const CONTACT_TOLERANCE = 1 / 32;
+
 /** Bounded terrain + realized prop check before a player leaves the old realm. */
 export async function safeArrival(
   realm: Realm,
@@ -39,7 +47,13 @@ export async function safeArrival(
   if (!collider) throw new Error("Player collider unavailable.");
   const test = (x: number, y: number) => {
     const position = { wx: x * TILE_SIZE, wy: y * TILE_SIZE };
-    const aabb = getEntityAABB(position, collider);
+    const box = getEntityAABB(position, collider);
+    const aabb = {
+      left: box.left + CONTACT_TOLERANCE,
+      top: box.top + CONTACT_TOLERANCE,
+      right: box.right - CONTACT_TOLERANCE,
+      bottom: box.bottom - CONTACT_TOLERANCE,
+    };
     if (realm.interior) {
       const floor = INTERIOR_FLOOR;
       const inside =

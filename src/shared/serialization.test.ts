@@ -286,6 +286,16 @@ describe("Prop serialization", () => {
     // walls are not in the snapshot — they come from the definition
     expect(result.walls).toHaveLength(7);
   });
+
+  // Like edited room walls, lab-scoped scenario props have no global type definition;
+  // clients need their exact walls for prediction.
+  it("carries lab-scoped scenario prop walls that clients cannot reconstruct", () => {
+    const prop = makeFullProp();
+    prop.type = "scenario-prop-0";
+    prop.walls = [{ offsetX: 0, offsetY: -2, width: 44, height: 12, zHeight: 18 }];
+    const result = deserializeProp(JSON.parse(JSON.stringify(serializeProp(prop))));
+    expect(result.walls).toEqual(prop.walls);
+  });
 });
 
 describe("Chunk serialization", () => {

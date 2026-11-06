@@ -1,5 +1,6 @@
 import type { Page } from "@playwright/test";
 import { encodeServerMessage } from "../../src/shared/binaryCodec.js";
+import { physicsStateBytes } from "../../src/shared/physicsStateCodec.js";
 
 const emptyFrame = encodeServerMessage({
   type: "frame",
@@ -9,7 +10,8 @@ const emptyFrame = encodeServerMessage({
 });
 export const RTC_FRAME_LAYOUT = {
   frameTag: new DataView(emptyFrame).getUint8(0),
-  frameHeaderSize: emptyFrame.byteLength,
+  // The entity counts end the fixed header; an optional physics section follows.
+  frameHeaderSize: emptyFrame.byteLength - physicsStateBytes(),
 };
 
 export interface RtcProbe {
