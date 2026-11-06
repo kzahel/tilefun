@@ -45,8 +45,16 @@ behavior; this topic owns the guardrails that keep structure from regressing.
 - Workshop candidate identities for source-hashed batches embed raw engine source
   (`?raw` imports). New files split out of a hashed module must be added to the
   owning identity's source list, or edits to them will not reopen review.
-- Largest churn hotspots: `server/Realm.ts`, `client/GameClient.ts`,
-  `wildlife/Fauna.ts`, `rendering/collectScene.ts`, `server/GameServer.ts`.
+- Hot files are split into collaborators (phase 5 of 221): Realm (`RealmRiding`,
+  `RealmPhysics`, `RealmCommands` handler table, `RealmComposition`), GameServer
+  (`RealmDirectory`, `SessionRegistry`, `DoorTransitions`), GameClient
+  (`ServerMessageRouter` with a compiler-complete switch, `PlayInputController`,
+  `WorldSessionActions`, `GameMenuChrome`), `collectScene` stages in
+  `rendering/scene/`, Workshop App routes/chrome and EditorPanel sections. Add new
+  behavior to the collaborator that owns it rather than the composition root.
+- Largest remaining hotspots: `wildlife/Fauna.ts` and the Work `update` methods,
+  `generation/regional/NaturalLandscape.ts`, `client/PlayerPredictor.ts`,
+  `scenes/PlayScene.ts`, `physics/PhysicsScene.ts`.
 - The dominant cost is shotgun surgery: new species, replicated fields and
   Workshop tools are added by hand in many central lists. Prefer registries and
   schemas that let new content be declared in one place over splitting files alone.

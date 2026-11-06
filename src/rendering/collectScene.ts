@@ -1,53 +1,22 @@
-import { isBoat } from "../boats/Boat.js";
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
-import { getEntityAABB } from "../entities/collision.js";
-import { Direction, type Entity } from "../entities/Entity.js";
+import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
-import { rotateBodyVector } from "../physics/BodyRotation.js";
-import { terrainBaseZ } from "../physics/TerrainExcavation.js";
-import {
-  hasVehicleLights,
-  isWarningVehicle,
-  vehicleLightState,
-} from "../traffic/EmergencyVehicle.js";
-import { roofSupport } from "../traffic/RoofSupport.js";
-import { isVehicle } from "../traffic/Vehicle.js";
-import { isDrivable } from "../traffic/VehicleSeats.js";
-import { faunaProfile } from "../wildlife/Fauna.js";
-import { isCarryable } from "../wildlife/ForageResources.js";
-import { isRoadkill, ROADKILL_FADE_SECONDS, ROADKILL_SCALE_Y } from "../wildlife/Roadkill.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
-import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
-import { authoredVehicleForType, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import type { Camera } from "./Camera.js";
-import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
-import {
-  entityFacingHeading,
-  entityHeading,
-  meshAssetFor,
-  trainMeshHeading,
-} from "./EntityMeshPose.js";
 import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBladeRenderer.js";
-import { vehicleMeshRadius, yawOrientation } from "./MeshPresentation.js";
 import type { ParticlePresentation } from "./ParticleSystem.js";
-import { projectShadow, surfaceDecals } from "./ProjectedDecals.js";
-import { depthAboveProps, propDepthSurfaces } from "./propDepth.js";
 import type { SceneFrame } from "./SceneFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
-import { surfaceShadowZ } from "./SurfacePresentation.js";
 import { type ReceiverOptions, SurfaceReceivers } from "./SurfaceReceivers.js";
+import { collectEntitySprites, entityDepth } from "./scene/EntitySprites.js";
+import { type CullBounds, cullBounds, outsideView } from "./scene/SceneCull.js";
 import type { TerrainPresentation } from "./TerrainPresentation.js";
 import { grassDepthUnderVehicles, isVehicleSprite } from "./VehicleGrassDepth.js";
 
-/**
- * Interpolation factor for Z_SORT_FACTOR:
- * Baseline Y+Z ordering. Explicit prop-top overlap below handles long, low
- * surfaces that this heuristic alone cannot order correctly.
- */
-const Z_SORT_FACTOR = 1;
-
 export { interpolatePosition } from "./EntityInterpolation.js";
+
+type SceneWorld = Pick<World, "getHeightAt" | "getChunkIfLoaded" | "getRoadAt">;
 
 /**
  * Collect, cull, interpolate, and Y-sort all visible scene items.
@@ -55,12 +24,14 @@ export { interpolatePosition } from "./EntityInterpolation.js";
  * borrowed until its next collection; consume synchronously and release after drawing.
  *
  * This is the "scene graph" step — it computes what needs to be drawn
- * and where in world-space, without any Canvas2D-specific code.
+ * and where in world-space, without any Canvas2D-specific code. Stages append in
+ * a fixed order (actors, props, grass, elevation, particles); the stable sort
+ * keeps that order between equal keys, so it is part of the drawn output.
  */
 export function collectScene(
   entities: readonly Entity[],
   props: readonly Prop[],
-  world: Pick<World, "getHeightAt" | "getChunkIfLoaded" | "getRoadAt">,
+  world: SceneWorld,
   camera: Camera,
   visible: ChunkRange,
   alpha: number,
@@ -74,7 +45,7 @@ export function collectScene(
   const grassAlpha = hasGrass ? grassOpacity(camera.zoom) : 0;
   const visibleGrass = grassAlpha > 0;
   const items = frame ? frame.begin(visibleGrass) : [];
-  const grassVehicles: SpriteItem[] = [];
+  const grassVehicles = visibleGrass ? ([] as SpriteItem[]) : undefined;
   const receivers = camera.worldRaster
     ? new SurfaceReceivers(world, props, entities, alpha, {
         ...receiverOptions,
@@ -85,265 +56,72 @@ export function collectScene(
   // Viewport bounds in world coordinates for culling
   const vpTL = camera.screenToWorld(0, 0);
   const vpBR = camera.screenToWorld(camera.viewportWidth, camera.viewportHeight);
-  // Small margin for rendering effects not captured by sprite bounds
-  const M = 16;
-
-  const propSurfaces = frame ? frame.propDepth.collect(props) : propDepthSurfaces(props);
-  const planarProps = props.filter((p) => p.collider?.surface || p.walls?.some((c) => c.surface));
-  const hasExcavations = planarProps.some((p) =>
-    (p.walls ?? (p.collider ? [p.collider] : [])).some((c) => c.surface?.excavation),
-  );
-  const movingRoofs = entities.filter(isVehicle);
-  const vehicleSurfaces = movingRoofs.flatMap((e) =>
-    e.collider
-      ? [
-          {
-            bounds: getEntityAABB(e.position, e.collider),
-            topZ: (e.wz ?? 0) + (e.collider.physicalHeight ?? 0),
-            depth: e.position.wy + (e.sortOffsetY ?? 0),
-          },
-        ]
-      : [],
-  );
-  const depthSurfaces = vehicleSurfaces.length
-    ? [...propSurfaces, ...vehicleSurfaces]
-    : propSurfaces;
-
+  const cull = cullBounds(vpTL, vpBR);
+  const depth = entityDepth(entities, props, frame);
   const poseTime = frame?.presentationTime ?? 0;
   frame?.meshPoses.retain(entities);
-  const insideParents = new Set(
-    entities.filter((e) => isDrivable(e) && !isBoat(e)).map((e) => e.id),
-  );
-  // --- Entities ---
-  for (const e of entities) {
-    if (!e.sprite || (e.parentId !== undefined && insideParents.has(e.parentId))) continue;
-    const pos = interpolatePosition(e.position, e.prevPosition, alpha);
-    // Compute Z offset in world pixels
-    let zOffset: number;
-    const displayedWz = interpolateWz(e, alpha);
-    if (displayedWz !== undefined) {
-      zOffset = displayedWz;
-    } else {
-      const tx = Math.floor(pos.wx / TILE_SIZE);
-      const ty = Math.floor(pos.wy / TILE_SIZE);
-      const elevOffset = world.getHeightAt(tx, ty) * ELEVATION_PX;
-      const curJumpZ = e.jumpZ ?? 0;
-      const lerpedJumpZ =
-        e.prevJumpZ !== undefined ? e.prevJumpZ + (curJumpZ - e.prevJumpZ) * alpha : curJumpZ;
-      zOffset = elevOffset + lerpedJumpZ;
-    }
-
-    // Match the displayed sprite rectangle, including vehicles whose artwork
-    // extends below their ground-center anchor. Preserve conservative mesh
-    // bounds as well, so either the mesh or its sprite fallback can enter view.
-    const effectiveWy = pos.wy - zOffset;
-    const supportId = !isVehicle(e) ? roofSupport(e, movingRoofs)?.id : undefined;
-    const support =
-      supportId === undefined ? undefined : movingRoofs.find((e) => e.id === supportId);
-    const supportMesh = support ? authoredVehicleForType(support.type ?? "") : undefined;
-    const meshRoofSupport: SpriteItem["meshRoofSupport"] =
-      supportMesh &&
-      support?.collider &&
-      (!support.bodyRotation || rotateBodyVector(support.bodyRotation, 0, 0, 1).z > 0.995)
-        ? {
-            assetId: supportMesh.assetId,
-            heightDelta: support.bodyRotation
-              ? 0
-              : (support.collider.physicalHeight ?? 0) *
-                (1 - vehicleMeshHeightScale(supportMesh.vehicle)),
-          }
-        : undefined;
-    const remains = isRoadkill(e.type);
-    const scaleY = remains ? ROADKILL_SCALE_Y : 1;
-    const drawOffsetY = (e.sprite.drawOffsetY ?? 0) * scaleY;
-    const spriteBottom = effectiveWy + drawOffsetY;
-    const meshAsset = frame ? frame.meshPoses.assetFor(e) : meshAssetFor(e);
-    const meshRadius = meshAsset
-      ? vehicleMeshRadius(meshAsset)
-      : e.type.startsWith("train-curve-proof-v1")
-        ? 96
-        : 0;
-    const halfW =
-      Math.max(e.sprite.spriteWidth / 2, meshRadius) + Math.abs(meshRoofSupport?.offsetX ?? 0);
-    let top = meshRadius
-      ? Math.min(
-          spriteBottom - e.sprite.spriteHeight * scaleY,
-          effectiveWy - meshRadius * Math.SQRT2,
-        )
-      : spriteBottom - e.sprite.spriteHeight * scaleY;
-    let bottom = meshRadius
-      ? Math.max(spriteBottom, effectiveWy + meshRadius * Math.SQRT2)
-      : spriteBottom + (meshRoofSupport?.heightDelta ?? 0);
-    if (meshRoofSupport) {
-      const shift = (meshRoofSupport.offsetY ?? 0) + meshRoofSupport.heightDelta;
-      top = Math.min(top, spriteBottom - e.sprite.spriteHeight * scaleY + shift);
-      bottom = Math.max(bottom, spriteBottom, spriteBottom + shift);
-    }
-    if (
-      pos.wx + halfW < vpTL.wx - M ||
-      pos.wx - halfW > vpBR.wx + M ||
-      bottom < vpTL.wy - M ||
-      top > vpBR.wy + M
-    )
-      continue;
-
-    // Shadow parameters
-    const boatParent =
-      e.parentId === undefined ? undefined : entities.find((p) => p.id === e.parentId && isBoat(p));
-    const carryingParent =
-      e.parentId === undefined || !isCarryable(e)
-        ? undefined
-        : entities.find((p) => p.id === e.parentId && faunaProfile(p.type));
-    const meshGroundShadow = !!e.bodyRotation && isVehicle(e) && !isBoat(e);
-    const hasShadow = !boatParent && !e.flashHidden && (!e.noShadow || meshGroundShadow);
-    const col = e.collider;
-    const shadowWidth = col ? col.width : e.sprite.spriteWidth * 0.6;
-    const shadowFeetWy =
-      pos.wy + (col ? col.offsetY - (meshGroundShadow ? col.height / 2 : 0) : (e.sortOffsetY ?? 0));
-    const shadowTx = Math.floor(pos.wx / TILE_SIZE);
-    const shadowTy = Math.floor(pos.wy / TILE_SIZE);
-    const terrainZ =
-      col && hasExcavations
-        ? terrainBaseZ(getEntityAABB(pos, col), (tx, ty) => world.getHeightAt(tx, ty), planarProps)
-        : world.getHeightAt(shadowTx, shadowTy) * ELEVATION_PX;
-    const shadowTerrainZ =
-      !receivers && col && planarProps.length
-        ? surfaceShadowZ(planarProps, getEntityAABB(pos, col), zOffset, terrainZ)
-        : terrainZ;
-
-    // Sort key
-    const sortKey = carryingParent
-      ? depthAboveProps(
-          interpolatePosition(carryingParent.position, carryingParent.prevPosition, alpha).wy +
-            (carryingParent.sortOffsetY ?? 0) +
-            (carryingParent.wz ?? 0) * Z_SORT_FACTOR,
-          carryingParent.collider
-            ? getEntityAABB(carryingParent.position, carryingParent.collider)
-            : null,
-          interpolateWz(carryingParent, alpha) ?? 0,
-          depthSurfaces,
-        ) + (carryingParent.sprite?.direction === Direction.Up ? -0.1 : 0.1)
-      : boatParent
-        ? interpolatePosition(boatParent.position, boatParent.prevPosition, alpha).wy +
-          (boatParent.sortOffsetY ?? 0) +
-          0.1
-        : depthAboveProps(
-            pos.wy + (e.sortOffsetY ?? 0) + (e.wz ?? 0) * Z_SORT_FACTOR,
-            e.collider ? getEntityAABB(pos, e.collider) : null,
-            zOffset,
-            depthSurfaces,
-          );
-
-    const baseMesh =
-      frame?.meshPoses.evaluate(e, poseTime, pos) ??
-      (meshAsset
-        ? {
-            assetId: meshAsset,
-            orientation: yawOrientation(
-              authoredTrainForType(e.type) ? trainMeshHeading(e) : entityHeading(e),
-            ),
-            radius: meshRadius,
-          }
-        : undefined);
-    const mesh = baseMesh;
-    const spriteItem = {
-      ...(mesh ? { mesh } : {}),
-      ...(meshGroundShadow ? { meshGroundShadow: true } : {}),
-      ...(meshGroundShadow && receivers ? { shadowCasterId: e.id } : {}),
-      ...(meshRoofSupport ? { meshRoofSupport } : {}),
-      ...(hasVehicleLights(e) && vehicleLightState(e) & 1
-        ? {
-            emergencyHeight: e.type.startsWith("vehicle-v1:fire-truck-ladder-")
-              ? 28
-              : isWarningVehicle(e)
-                ? 42
-                : e.type === "vehicle-v1:police-car"
-                  ? 22
-                  : 40,
-            emergencyForward: e.type.startsWith("vehicle-v1:fire-truck-ladder-")
-              ? 64
-              : isWarningVehicle(e)
-                ? 44
-                : 0,
-            emergencyColors: isWarningVehicle(e)
-              ? (["#ffd37a", "#ffd37a"] as const)
-              : e.type === "vehicle-v1:police-car"
-                ? (["#ff7979", "#79dfff"] as const)
-                : (["#79dfff", "#79dfff"] as const),
-            ...(isWarningVehicle(e) ? { emergencySide: 0 } : {}),
-            emergencyHeading: entityFacingHeading(e),
-            emergencyFlash:
-              poseTime % 1 < 0.12 || (poseTime % 1 >= 0.2 && poseTime % 1 < 0.32)
-                ? 1
-                : poseTime % 1 >= 0.5 &&
-                    (poseTime % 1 < 0.62 || (poseTime % 1 >= 0.7 && poseTime % 1 < 0.82))
-                  ? 2
-                  : 0,
-          }
-        : {}),
-      ...(remains
-        ? {
-            scaleY,
-            alpha: Math.max(
-              0,
-              Math.min(1, (e.deathTimer ?? ROADKILL_FADE_SECONDS) / ROADKILL_FADE_SECONDS),
-            ),
-          }
-        : {}),
-      kind: "sprite",
-      subpixel: true,
-      sortKey,
-      wx: pos.wx,
-      wy: pos.wy,
-      zOffset,
-      sheetKey: e.sprite.sheetKey,
-      frameCol: e.sprite.frameCol,
-      frameRow: e.sprite.frameRow,
-      spriteWidth: e.sprite.spriteWidth,
-      spriteHeight: e.sprite.spriteHeight,
-      flipX: e.sprite.flipX ?? false,
-      drawOffsetY,
-      hasShadow,
-      shadowFeetWy,
-      shadowWidth,
-      shadowTerrainZ,
-      flashHidden: e.flashHidden ?? false,
-    } satisfies SpriteItem;
-    items.push(spriteItem);
-    if (receivers && hasShadow && col && (!meshGroundShadow || spriteItem.mesh)) {
-      spriteItem.hasShadow = false;
-      const mesh = spriteItem.mesh
-        ? terrain.meshSurfaceGeometry?.(spriteItem.mesh.assetId)
-        : undefined;
-      items.push(
-        ...surfaceDecals(
-          projectShadow(receivers, e, pos.wx, pos.wy, zOffset, mesh, spriteItem.mesh?.orientation),
-          meshGroundShadow ? "vehicle" : "oval",
-          0.28,
-          "#000",
-          meshGroundShadow ? spriteItem.mesh?.assetId : undefined,
-          meshGroundShadow ? e.id : undefined,
-        ),
-      );
-    }
-    if (visibleGrass && isVehicleSprite(e.type)) grassVehicles.push(spriteItem);
+  collectEntitySprites({
+    entities,
+    world,
+    alpha,
+    terrain,
+    frame,
+    receivers,
+    cull,
+    depth,
+    poseTime,
+    items,
+    grassVehicles,
+  });
+  collectPropSprites(props, drawProps, world, cull, items, grassVehicles);
+  if (grassVehicles) {
+    // Share the owner's presentation clock (e.g. paused labs); frameless callers keep wall time.
+    const nowSec = frame ? poseTime : performance.now() / 1000;
+    const viewport = { minWx: vpTL.wx, minWy: vpTL.wy, maxWx: vpBR.wx, maxWy: vpBR.wy };
+    const grassStart = items.length;
+    appendGrassBladeItems(
+      world,
+      entities,
+      visible,
+      viewport,
+      nowSec,
+      frame?.grass ?? new GrassFrameBuffer(),
+      items,
+      grassAlpha === 1 ? undefined : grassAlpha,
+    );
+    keepGrassUnderVehicles(items, grassStart, grassVehicles);
   }
 
-  // --- Props ---
+  // --- Elevation tiles ---
+  for (const elev of terrain.collectElevationItems(world, visible)) items.push(elev);
+  // --- Particles ---
+  for (const p of Array.isArray(particles) ? particles : particles.collectItems(receivers)) {
+    items.push(p);
+  }
+
+  if (frame && receivers) Object.assign(frame.receiverStats, receivers.diagnostics);
+
+  // Sort by pre-computed sort key for correct depth ordering
+  items.sort((a, b) => a.sortKey - b.sortKey);
+
+  return items;
+}
+
+/** Props have no interpolation, no Z beyond terrain, and no shadows. */
+function collectPropSprites(
+  props: readonly Prop[],
+  drawProps: ReadonlySet<number> | undefined,
+  world: Pick<World, "getHeightAt">,
+  cull: CullBounds,
+  items: SceneItem[],
+  grassVehicles: SpriteItem[] | undefined,
+): void {
   for (const p of props) {
     if (drawProps && !drawProps.has(p.id)) continue;
     const sw = p.sprite.spriteWidth;
     const sh = p.sprite.spriteHeight;
-    const halfW = sw / 2;
-    if (
-      p.position.wx + halfW < vpTL.wx - M ||
-      p.position.wx - halfW > vpBR.wx + M ||
-      p.position.wy < vpTL.wy - M ||
-      p.position.wy - sh > vpBR.wy + M
-    )
-      continue;
+    if (outsideView(cull, p.position.wx, sw / 2, p.position.wy - sh, p.position.wy)) continue;
 
-    // Props have no interpolation, no Z, no shadows
     const tx = Math.floor(p.position.wx / TILE_SIZE);
     const ty = Math.floor(p.position.wy / TILE_SIZE);
     const elevOffset = world.getHeightAt(tx, ty) * ELEVATION_PX;
@@ -367,6 +145,7 @@ export function collectScene(
       shadowTerrainZ: 0,
       flashHidden: false,
     } satisfies SpriteItem;
+    const vehicle = grassVehicles && isVehicleSprite(p.type) ? grassVehicles : undefined;
     if (p.sprite.parts) {
       for (const part of p.sprite.parts) {
         const partItem = {
@@ -376,57 +155,23 @@ export function collectScene(
           wy: p.position.wy + part.dy,
         };
         items.push(partItem);
-        if (visibleGrass && isVehicleSprite(p.type)) grassVehicles.push(partItem);
+        vehicle?.push(partItem);
       }
     } else {
       items.push(baseItem);
-      if (visibleGrass && isVehicleSprite(p.type)) grassVehicles.push(baseItem);
+      vehicle?.push(baseItem);
     }
   }
+}
 
-  // --- Grass blades ---
-  if (visibleGrass) {
-    const viewport = {
-      minWx: vpTL.wx,
-      minWy: vpTL.wy,
-      maxWx: vpBR.wx,
-      maxWy: vpBR.wy,
-    };
-    // Share the owner's presentation clock (e.g. paused labs); frameless callers keep wall time.
-    const nowSec = frame ? poseTime : performance.now() / 1000;
-    const grassStart = items.length;
-    appendGrassBladeItems(
-      world,
-      entities,
-      visible,
-      viewport,
-      nowSec,
-      frame?.grass ?? new GrassFrameBuffer(),
-      items,
-      grassAlpha === 1 ? undefined : grassAlpha,
-    );
-    if (grassVehicles.length)
-      for (let i = grassStart; i < items.length; i++) {
-        const item = items[i];
-        if (item?.kind === "grass") grassDepthUnderVehicles(item, grassVehicles);
-      }
+function keepGrassUnderVehicles(
+  items: readonly SceneItem[],
+  grassStart: number,
+  grassVehicles: readonly SpriteItem[],
+): void {
+  if (!grassVehicles.length) return;
+  for (let i = grassStart; i < items.length; i++) {
+    const item = items[i];
+    if (item?.kind === "grass") grassDepthUnderVehicles(item, grassVehicles);
   }
-
-  // --- Elevation tiles ---
-  const elevItems = terrain.collectElevationItems(world, visible);
-  for (const elev of elevItems) {
-    items.push(elev);
-  }
-
-  // --- Particles ---
-  for (const p of Array.isArray(particles) ? particles : particles.collectItems(receivers)) {
-    items.push(p);
-  }
-
-  if (frame && receivers) Object.assign(frame.receiverStats, receivers.diagnostics);
-
-  // Sort by pre-computed sort key for correct depth ordering
-  items.sort((a, b) => a.sortKey - b.sortKey);
-
-  return items;
 }

@@ -3,19 +3,13 @@ import { TerrainAdjacency } from "../autotile/TerrainAdjacency.js";
 import { applyPlayerModel } from "../characters/PlayerModels.js";
 import {
   CHUNK_SIZE_PX,
-  ELEVATION_PX,
-  JUMP_VELOCITY,
   MAX_AUTOTILE_CHUNKS_PER_UPDATE,
-  THROW_ANGLE,
-  THROW_MAX_SPEED,
-  THROW_MIN_SPEED,
   TICK_RATE,
   TILE_SIZE,
 } from "../config/constants.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { TerrainEditor } from "../editor/TerrainEditor.js";
 import { BaddieSpawner } from "../entities/BaddieSpawner.js";
-import { createBall } from "../entities/Ball.js";
 import {
   aabbOverlapsPropWalls,
   aabbOverlapsSolid,
@@ -23,13 +17,12 @@ import {
   getEntityAABB,
 } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
-import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { findWalkableSpawn, spawnInitialChickens } from "../entities/EntitySpawner.js";
 import { FishSpawner } from "../entities/FishSpawner.js";
 import { GemSpawner } from "../entities/GemSpawner.js";
-import { createPlayer, updatePlayerSpriteFromInput } from "../entities/Player.js";
-import { createProp, isPropType } from "../entities/PropFactories.js";
+import { createPlayer } from "../entities/Player.js";
+import { createProp } from "../entities/PropFactories.js";
 import { PropManager } from "../entities/PropManager.js";
 import { TentSpawner } from "../entities/TentSpawner.js";
 import { descriptorFromMetadata } from "../generation/GenerationDescriptor.js";
@@ -42,18 +35,14 @@ import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { TerrainStrategy } from "../generation/TerrainStrategy.js";
 import { buildingDoor } from "../interiors/BuildingDoors.js";
 import {
-  furnitureAsset,
   INTERIOR_WALL_TYPE,
   type InteriorIdentity,
-  InvalidInteriorError,
   interiorGenerator,
 } from "../interiors/GameplayInterior.js";
 import {
   compileGameplayRoom,
   GameplayRoomEditor,
   type GameplayRoomState,
-  initialRoom,
-  parseGameplayRoom,
   validateRoomOccupancy,
 } from "../interiors/GameplayRoom.js";
 import { withInteriorGems } from "../interiors/InteriorGems.js";
@@ -68,20 +57,8 @@ import type { SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import { VehicleRecords } from "../persistence/VehicleRecords.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
-import { tickSharedBallGameplay } from "../physics/BallGameplay.js";
-import { rotationsEqual } from "../physics/BodyRotation.js";
 import { getGravityScale } from "../physics/Gravity.js";
-import {
-  launchBody,
-  setBodyPose,
-  setHorizontalVelocity,
-  setVerticalVelocity,
-  teleportBody,
-} from "../physics/PhysicalEdits.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
-import { PhysicsScene } from "../physics/PhysicsScene.js";
-import { playerMotionIntent, vehicleMotionIntent } from "../physics/PlayerControls.js";
-import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import { RailwayServices } from "../railway/RailwayServices.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
 import type { Movement } from "../shared/Movement.js";
@@ -90,19 +67,7 @@ import { VehicleRegistry, type VehicleSource } from "../traffic/VehicleRegistry.
 import type { IServerTransport } from "../transport/Transport.js";
 import type { WorkContext } from "../wildlife/AnimalWorkSystem.js";
 import { AnimalWorkSystem } from "../wildlife/AnimalWorkSystem.js";
-import { tickFoodSources } from "../wildlife/FoodGrowth.js";
-import { freshBallWork } from "../wildlife/ForageResources.js";
-import { setFaunaRidden } from "../wildlife/faunaInteractions.js";
 import { OwnedBalls } from "../wildlife/OwnedBalls.js";
-import { resolvePredatorCatches } from "../wildlife/predatorAI.js";
-import { isWildlife } from "../wildlife/WildlifeKinds.js";
-import {
-  type PendingWildlifeRespawn,
-  tickWildlifeRespawns,
-  WILDLIFE_RESPAWN_LIMIT,
-  WILDLIFE_RESPAWN_SCOPE,
-} from "../wildlife/WildlifeRespawns.js";
-import { startleWildlife } from "../wildlife/WildlifeSpecies.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
@@ -112,11 +77,28 @@ import { MutationQueue } from "./MutationQueue.js";
 import { mutationRange } from "./MutationRange.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import { RealmActivity } from "./RealmActivity.js";
+import { handleRealmCommand, type RealmCommandContext } from "./RealmCommands.js";
+import {
+  asInvalidInterior,
+  checkSavedInterior,
+  installCapacityGuards,
+  installTrafficGuard,
+  loadWildlifeReturns,
+  savedRoomState,
+} from "./RealmComposition.js";
+import { RealmPhysics } from "./RealmPhysics.js";
+import {
+  dryRespawn,
+  restoreDriving,
+  restoreSavedBody,
+  savedRespawn,
+} from "./RealmPlayerRestore.js";
 import { RealmPropActivity } from "./RealmPropActivity.js";
 import { RealmReplicator } from "./RealmReplicator.js";
+import { dismountPlayer, restoreSavedMount } from "./RealmRiding.js";
+import { resolveSimulationGameplay } from "./RealmSimulation.js";
 import { RealmStreaming } from "./RealmStreaming.js";
 import { createRealmWorkContext } from "./RealmWildlife.js";
-import { safeArrival } from "./SafeArrival.js";
 import { tickAllAI } from "./tickAllAI.js";
 import { VehicleControl } from "./VehicleControl.js";
 import type { Mod, Unsubscribe } from "./WorldAPI.js";
@@ -140,44 +122,26 @@ export interface RealmOptions {
 
 export class Realm {
   railways: RailwayServices | undefined;
+  private readonly physics = new RealmPhysics(this); // Stores `this` only; reads no Realm state.
   canPlaceTrain(
     cars: readonly Entity[],
     poses: readonly { x: number; y: number; angle: number }[],
   ) {
-    return (
-      this.physicsScene?.canPlaceTrain(cars, poses, {
-        getCollision: (x, y) => this.world.getCollisionIfLoaded(x, y),
-        getHeight: (x, y) => this.world.getHeightAt(x, y),
-        queryProps: (b) =>
-          this.propManager.getPropsInChunkRange(
-            Math.floor(b.left / CHUNK_SIZE_PX),
-            Math.floor(b.top / CHUNK_SIZE_PX),
-            Math.floor(b.right / CHUNK_SIZE_PX),
-            Math.floor(b.bottom / CHUNK_SIZE_PX),
-          ),
-        geometryVersion: this.geometryVersion,
-      }) ?? false
-    );
+    return this.physics.canPlaceTrain(cars, poses);
   }
-  private physicsScene: PhysicsScene | undefined;
+  /** The shared physics scene once a world is loaded. */
+  get physicsScene() {
+    return this.physics.scene;
+  }
   recoverVehicle(id: number) {
-    if (!this.physicsScene) throw Error("Physics is not ready.");
-    this.physicsScene.recoverVehicle(id);
+    this.physics.recoverVehicle(id);
   }
-  private physicsParticipants: Entity[] = [];
   get collisionDiagnostics() {
     return this.physicsScene?.diagnostics ?? null;
   }
   get physicsState() {
     return this.physicsScene?.snapshot();
   }
-  private geometryVersion = (cx: number, cy: number) => {
-    const chunk = this.world.getChunkIfLoaded(cx, cy);
-    return {
-      identity: chunk,
-      revision: `${chunk?.revision}:${chunk?.visualRevision}:${chunk?.physicsRevision}:${this.propManager.revision}`,
-    };
-  };
   get persistenceDiagnostics() {
     return {
       realmId: this.currentWorldId,
@@ -428,39 +392,10 @@ export class Realm {
       around(Math.floor(spawnX / CHUNK_SIZE_PX), Math.floor(spawnY / CHUNK_SIZE_PX), 3),
     );
     const player = createPlayer(spawnX, spawnY);
-    if (saved?.wz !== undefined && Number.isFinite(saved.wz)) {
-      player.wz = saved.wz;
-      player.groundZ =
-        saved.groundZ !== undefined && Number.isFinite(saved.groundZ) ? saved.groundZ : saved.wz;
-      if (saved.jumpVZ !== undefined && Number.isFinite(saved.jumpVZ)) {
-        player.jumpVZ = saved.jumpVZ;
-        const motion = saved.airborneVelocity;
-        if (motion && Number.isFinite(motion.vx) && Number.isFinite(motion.vy)) {
-          player.velocity = { vx: motion.vx, vy: motion.vy };
-        }
-        player.jumpZ = saved.wz - (player.groundZ ?? saved.wz);
-      }
-    }
+    restoreSavedBody(player, saved);
     applyPlayerModel(player, session.playerModel);
-    const savedSafe = saved?.lastSafePosition;
-    let respawn =
-      savedSafe && [savedSafe.wx, savedSafe.wy, savedSafe.wz ?? 0].every(Number.isFinite)
-        ? { ...savedSafe }
-        : {
-            wx: spawnX,
-            wy: spawnY,
-            wz: player.wz ?? getSurfaceZ(spawnX, spawnY, (x, y) => this.world.getHeightAt(x, y)),
-          };
-    if (!savedSafe && player.jumpVZ !== undefined && this.isEntityOnWater({ ...player, wz: 0 })) {
-      // Old airborne records have no supported history. Use the existing bounded
-      // admission search instead of making the airborne position a respawn loop.
-      const dry = await safeArrival(this, {
-        x: spawnX / TILE_SIZE,
-        y: spawnY / TILE_SIZE,
-        generation: this.generation,
-      });
-      respawn = { ...dry, wz: getSurfaceZ(dry.wx, dry.wy, (x, y) => this.world.getHeightAt(x, y)) };
-    }
+    const respawn =
+      savedRespawn(this, player, saved, spawnX, spawnY) ?? (await dryRespawn(this, spawnX, spawnY));
     this.entityManager.spawn(player);
     session.player = player;
     session.gameplaySession = {
@@ -473,22 +408,7 @@ export class Realm {
       lastDismountedId: null,
       lastSafePosition: respawn,
     };
-    const mounted = saved?.mount ? this.records?.byId.get(saved.mount.id) : undefined;
-    if (mounted && !("isProp" in mounted) && saved?.mount) {
-      player.parentId = mounted.id;
-      player.localOffsetX = saved.mount.offsetX;
-      player.localOffsetY = saved.mount.offsetY;
-      player.position = {
-        wx: mounted.position.wx + saved.mount.offsetX,
-        wy: mounted.position.wy + saved.mount.offsetY,
-      };
-      player.wz = saved.mount.wz;
-      player.jumpZ = saved.mount.jumpZ;
-      session.gameplaySession.mountId = mounted.id;
-      if (mounted.wanderAI) mounted.wanderAI.state = "ridden";
-      setFaunaRidden(mounted, true);
-      player.noShadow = true;
-    }
+    restoreSavedMount(this, session, saved);
     session.cameraX = camX;
     session.cameraY = camY;
     session.cameraZoom = camZoom;
@@ -505,20 +425,10 @@ export class Realm {
     };
 
     this.sessions.set(session.clientId, session);
-    if (saved?.driving) {
-      const vehicle = this.entityManager.entities.find(
-        (e) => e.proceduralId === saved.driving?.identity,
-      );
-      const exit = saved.driving.exit;
-      const fallback =
-        exit && Number.isFinite(exit.wx) && Number.isFinite(exit.wy)
-          ? exit
-          : { wx: spawnX, wy: spawnY };
-      if (vehicle && this.vehicles.available(vehicle.id)) {
-        session.gameplaySession.lastSafePosition = { ...fallback };
-        this.vehicles.enter(session, vehicle.id, true);
-      } else await this.vehicles.restoreOnFoot(session, fallback);
-    }
+    const onFoot = saved?.driving
+      ? restoreDriving(this, session, saved.driving, spawnX, spawnY)
+      : undefined;
+    if (onFoot) await onFoot;
     this.clearClientRevisions(session.clientId);
     this.playerNamesRevision++;
 
@@ -543,7 +453,7 @@ export class Realm {
 
     // Auto-dismount before removing player
     if (session.gameplaySession.mountId !== null) {
-      this.dismountPlayer(session);
+      dismountPlayer(this, session);
     }
 
     // Preserve a fallback arrival even when the last player leaves this realm.
@@ -763,7 +673,7 @@ export class Realm {
         session.gameplaySession.mountId !== null &&
         admitted.movement.jumpPressed
       )
-        this.dismountPlayer(session);
+        dismountPlayer(this, session);
       controls.set(session.player.id, admitted.movement);
       controlTicks.set(session.player.id, admitted.expiresIn);
     }
@@ -812,16 +722,16 @@ export class Realm {
       this.updateDecisions(active, activeSessions, entityTickDts, decisions, work);
       this.worldAPI.tick.firePre(stepDt);
       const timing = performanceMetrics.start();
-      const { scene, participants, wasAirborne } = this.advancePhysics(
+      const { scene, participants, wasAirborne } = this.physics.step(
         active,
         activeSessions,
         controls,
         controlTicks,
         gravity,
       );
-      this.finishPhysics(participants, activeSessions, wasAirborne, scene);
+      this.physics.finish(participants, activeSessions, wasAirborne, scene);
       performanceMetrics.end("realm.entityPhysics", timing);
-      this.resolveSimulationGameplay(active, participants, entityTickDts, work, scene);
+      resolveSimulationGameplay(this, active, participants, entityTickDts, work, scene);
     } finally {
       this.entityManager.simulationEntities = undefined;
       this.propManager.simulationProps = undefined;
@@ -852,158 +762,6 @@ export class Realm {
     for (const [entity, elapsed] of entityTickDts)
       if (entity.resident && entity.wanderAI?.state !== "scared")
         updateResident(entity, elapsed, (p) => this.residentCanOccupy(entity, p, true), active);
-  }
-
-  private advancePhysics(
-    active: Entity[],
-    activeSessions: readonly PlayerSession[],
-    controls: ReadonlyMap<number, Movement>,
-    controlTicks: ReadonlyMap<number, number>,
-    gravity: number,
-  ) {
-    const players = activeSessions.map((s) => s.player);
-    const intents = this.entityManager.collectMotionIntents(active, PHYSICS_DT, (x, y) =>
-      this.world.getCollisionIfLoaded(x, y),
-    );
-    for (const [id, intent] of this.railways?.plan() ?? []) intents.set(id, intent);
-    const wasAirborne = new Set(players.filter((p) => p.jumpVZ !== undefined).map((p) => p.id));
-    for (const [id, intent] of this.vehicleRegistry?.traffic.plan(
-      active,
-      this.physicsScene?.physicsTick ?? 0,
-    ) ?? [])
-      intents.set(id, intent);
-    for (const session of activeSessions) {
-      const movement = controls.get(session.player.id);
-      if (!movement) continue;
-      const vehicle = this.vehicles.get(session);
-      const mount =
-        session.gameplaySession.mountId === null
-          ? undefined
-          : this.entityManager.byId.get(session.gameplaySession.mountId);
-      const controlled = vehicle ?? mount ?? session.player;
-      intents.set(controlled.id, {
-        ...(vehicle ? vehicleMotionIntent(vehicle, movement) : playerMotionIntent(movement)),
-        controlUntil:
-          (this.physicsScene?.physicsTick ?? 0) + (controlTicks.get(session.player.id) ?? 0),
-      });
-      // Facing/animation is intent-derived; readback publishes physical velocity.
-      if (!vehicle) updatePlayerSpriteFromInput(session.player, movement);
-    }
-    const participants = active.filter(
-      (e) => this.entityManager.byId.get(e.id) === e && !e.tags?.has("passage"),
-    );
-    const scene = this.physicsScene;
-    if (!scene) throw Error("Realm physics is not initialized");
-    this.physicsParticipants = participants;
-    scene.synchronize(participants);
-    scene.step(
-      intents,
-      {
-        getCollision: (x, y) => this.world.getCollisionIfLoaded(x, y),
-        getHeight: (x, y) => this.world.getHeightAt(x, y),
-        queryProps: (bounds) =>
-          this.propManager.getPropsInChunkRange(
-            Math.floor(bounds.left / CHUNK_SIZE_PX),
-            Math.floor(bounds.top / CHUNK_SIZE_PX),
-            Math.floor(bounds.right / CHUNK_SIZE_PX),
-            Math.floor(bounds.bottom / CHUNK_SIZE_PX),
-          ),
-        geometryVersion: this.geometryVersion,
-      },
-      gravity,
-    );
-    this.railways?.finish();
-    return { scene, participants, wasAirborne };
-  }
-
-  private finishPhysics(
-    participants: Entity[],
-    activeSessions: readonly PlayerSession[],
-    wasAirborne: ReadonlySet<number>,
-    scene: PhysicsScene,
-  ) {
-    const stepDt = PHYSICS_DT;
-    const players = activeSessions.map((s) => s.player);
-    const getHeight = (x: number, y: number) => this.world.getHeightAt(x, y);
-    this.entityManager.finishPhysics(participants, players, stepDt, (x, y) =>
-      this.world.getCollisionIfLoaded(x, y),
-    );
-    for (const session of activeSessions) {
-      const p = session.player;
-      this.updateLastSafePosition(session);
-      const supportId = scene.bodyState(p.id)?.supportId;
-      const support = this.entityManager.byId.get(supportId ?? -1);
-      this.handlePlayerStepOutcome(
-        session,
-        {
-          landed: wasAirborne.has(p.id) && p.jumpVZ === undefined,
-          groundZ: p.groundZ ?? 0,
-          enteredWater: p.jumpVZ === undefined && this.isEntityOnWater(p),
-          endedGrounded: p.jumpVZ === undefined,
-          ...(support && isWildlife(support) ? { wildlifeContactId: support.id } : {}),
-        },
-        getHeight,
-      );
-    }
-  }
-
-  private resolveSimulationGameplay(
-    active: Entity[],
-    participants: Entity[],
-    entityTickDts: ReadonlyMap<Entity, number>,
-    work: WorkContext,
-    scene: PhysicsScene,
-  ) {
-    const stepDt = PHYSICS_DT;
-    const wildlifeEnvironment = work.environment;
-    const workPlayers = work.players;
-    const workReady = work.ready;
-    const playerPositions = workPlayers.map((p) => p.entity.position);
-    tickWildlifeRespawns(this.entityManager, stepDt, wildlifeEnvironment, playerPositions);
-    resolvePredatorCatches(this.entityManager, active, wildlifeEnvironment, playerPositions);
-    this.animalWork.resolveCatches(active, {
-      environment: wildlifeEnvironment,
-      players: workPlayers,
-      ready: workReady,
-    });
-
-    // Route/parking clocks no longer own poses. Persist shared readback for cars.
-    for (const e of participants) {
-      const car = this.vehicleRegistry?.states.get(e.id);
-      if (!car) continue;
-      if (
-        e.position.wx !== e.prevPosition?.wx ||
-        e.position.wy !== e.prevPosition?.wy ||
-        e.wz !== e.prevWz ||
-        e.vehicleHeading !== e.prevVehicleHeading ||
-        !rotationsEqual(e.bodyRotation, e.prevBodyRotation)
-      )
-        this.vehicleRegistry?.onChange?.(car, false);
-    }
-    this.vehicles.sync();
-
-    tickFoodSources(this.entityManager, entityTickDts, wildlifeEnvironment, workReady);
-
-    // Contacts trigger gameplay; they never run another ball integration.
-    tickSharedBallGameplay(this.entityManager, participants, scene, (x, y) =>
-      this.world.getCollisionIfLoaded(x, y),
-    );
-    this.animalWork.syncAll(active);
-    this.ownedBalls.sync(active);
-
-    for (const entity of entityTickDts.keys()) {
-      if (entity.wanderAI || entity.routeAI || entity.velocity || entity.deathTimer !== undefined)
-        this.records?.changed(entity);
-    }
-
-    // ── TickService.postSimulation ──
-    this.worldAPI.tick.firePost(stepDt);
-
-    // ── TagService removal detection ──
-    this.worldAPI.tags.tick();
-
-    // ── OverlapService detection ──
-    this.worldAPI.overlap.tick();
   }
 
   private updateSpawners(
@@ -1105,24 +863,7 @@ export class Realm {
       session.player.jumpInputState =
         (session.jumpConsumed ? 1 : 0) | (session.lastJumpHeld ? 2 : 0);
     const scene = this.physicsScene;
-    // A paused/manual publication may follow boarding, exit or an explicit edit
-    // before the next clock tick. Refresh membership/edits without integrating,
-    // so entity baselines and numerical physics describe the same bodies.
-    const admitted = new Map(this.physicsParticipants.map((e) => [e.id, e]));
-    for (const session of this.sessions.values()) {
-      if (session.retired || session.transitioning) continue;
-      for (const e of [
-        session.player,
-        this.vehicles.get(session),
-        this.entityManager.byId.get(session.gameplaySession.mountId ?? -1),
-      ])
-        if (e) admitted.set(e.id, e);
-    }
-    scene?.synchronize(
-      [...admitted.values()].filter(
-        (e) => this.entityManager.byId.get(e.id) === e && !e.tags?.has("passage"),
-      ),
-    );
+    this.physics.synchronizeForPublication(this.sessions.values());
     return this.replication.build(clientId, {
       roomState: this.roomState,
       world: this.world,
@@ -1174,259 +915,17 @@ export class Realm {
 
   /** Handle a realm-scoped client message. */
   handleMessage(_clientId: string, session: PlayerSession, msg: ClientMessage): void {
-    if (
-      this.interior &&
-      [
-        "edit-terrain-tile",
-        "edit-terrain-subgrid",
-        "edit-terrain-corner",
-        "edit-road",
-        "edit-elevation",
-        "edit-clear-terrain",
-        "edit-clear-roads",
-      ].includes(msg.type)
-    )
-      return;
-    switch (msg.type) {
-      case "player-input":
-        session.doorIntent = { dx: msg.dx, dy: msg.dy, at: Date.now() };
-        if (session.editorEnabled) {
-          session.lastProcessedInputSeq = msg.seq;
-          break;
-        }
-        session.inputQueue.push({
-          dx: msg.dx,
-          dy: msg.dy,
-          sprinting: msg.sprinting,
-          jump: msg.jump,
-          ...(msg.reversing === true ? { reversing: true } : {}),
-          ...(msg.relativeDriving === true ? { relativeDriving: true } : {}),
-          seq: msg.seq,
-          ...(msg.jumpPressed !== undefined ? { jumpPressed: msg.jumpPressed } : {}),
-        });
-        break;
-
-      case "player-interact":
-        this.worldAPI.events.emit("player-interact", { wx: msg.wx, wy: msg.wy });
-        break;
-
-      case "vehicle-horn": {
-        this.vehicles.honk(session, msg.active);
-        break;
-      }
-      case "vehicle-emergency": {
-        this.vehicles.emergency(session, msg.action);
-        break;
-      }
-      case "throw-ball": {
-        if (this.vehicles.get(session)) break;
-        const player = session.player;
-        const speed = THROW_MIN_SPEED + msg.force * (THROW_MAX_SPEED - THROW_MIN_SPEED);
-        // Add random jitter so consecutive throws spread out
-        const speedJitter = 1 + ((this.options.random ?? Math.random)() - 0.5) * 0.15; // ±7.5% speed
-        const angleJitter = ((this.options.random ?? Math.random)() - 0.5) * 0.18; // ±~5° direction
-        const baseAngle = Math.atan2(msg.dirY, msg.dirX) + angleJitter;
-        const jitteredSpeed = speed * speedJitter;
-        const xySpeed = jitteredSpeed * Math.cos(THROW_ANGLE);
-        const zSpeed = jitteredSpeed * Math.sin(THROW_ANGLE);
-        const owner = session.profileId || session.clientId;
-        const reusable = this.entityManager.entities.find(
-          (e) =>
-            e.type === "ball" &&
-            e.workItem?.returned &&
-            e.workItem.owner === owner &&
-            e.parentId === undefined &&
-            Math.hypot(e.position.wx - player.position.wx, e.position.wy - player.position.wy) < 36,
-        );
-        const ball = reusable ?? createBall(player.position.wx, player.position.wy);
-        // Start beyond the fixed player hull instead of spawning a physical
-        // projectile inside its thrower. A blocked hand cannot create a body in a wall.
-        const radius = (ball.collider?.width ?? 4) / 2;
-        const dx = Math.cos(baseAngle),
-          dy = Math.sin(baseAngle),
-          c = player.collider;
-        const reach = c
-          ? Math.min(
-              (c.width / 2 + radius + 0.1) / Math.max(1e-6, Math.abs(dx)),
-              (c.height / 2 + radius + 0.1) / Math.max(1e-6, Math.abs(dy)),
-            )
-          : radius + 1;
-        const x = player.position.wx + (c?.offsetX ?? 0) + dx * reach;
-        const y = player.position.wy + (c?.offsetY ?? 0) - (c?.height ?? 0) / 2 + dy * reach;
-        const z = (player.wz ?? 0) + 8;
-        if (this.physicsScene && !this.physicsScene.canPlaceSphere(x, y, z, radius, reusable?.id))
-          break;
-        const position = {
-          wx: x - (ball.collider?.offsetX ?? 0),
-          wy: y - (ball.collider?.offsetY ?? 0) + (ball.collider?.height ?? 4) / 2,
-        };
-        setBodyPose(ball, position);
-        const order = ball.workItem?.ballOrder;
-        ball.workItem = {
-          ...freshBallWork(owner, player.position),
-          ...(order !== undefined ? { ballOrder: order } : {}),
-        };
-        if (!this.ownedBalls.admit(owner, ball)) break;
-        delete ball.deathTimer;
-        ball.ballThrowerId = player.id;
-        setBodyPose(ball, { wz: z });
-        launchBody(ball, {
-          vx: Math.cos(baseAngle) * xySpeed,
-          vy: Math.sin(baseAngle) * xySpeed,
-          vz: zSpeed,
-        });
-        ball.jumpZ = 8;
-        if (!reusable) this.entityManager.spawn(ball);
-        break;
-      }
-
-      case "edit-terrain-tile":
-        this.terrainEditor.applyTileEdit(
-          msg.tx,
-          msg.ty,
-          msg.terrainId,
-          msg.paintMode,
-          msg.bridgeDepth,
-        );
-        break;
-
-      case "edit-terrain-subgrid":
-        this.terrainEditor.applySubgridEdit(
-          msg.gsx,
-          msg.gsy,
-          msg.terrainId,
-          msg.paintMode,
-          msg.bridgeDepth,
-          msg.shape,
-        );
-        break;
-
-      case "edit-terrain-corner":
-        this.terrainEditor.applyCornerEdit(
-          msg.gsx,
-          msg.gsy,
-          msg.terrainId,
-          msg.paintMode,
-          msg.bridgeDepth,
-        );
-        break;
-
-      case "edit-road":
-        this.terrainEditor.applyRoadEdit(msg.tx, msg.ty, msg.roadType, msg.paintMode);
-        break;
-
-      case "edit-elevation":
-        this.terrainEditor.applyElevationEdit(msg.tx, msg.ty, msg.height, msg.gridSize);
-        break;
-
-      case "edit-spawn":
-        if (msg.entityType.startsWith("vehicle-v1:") && !session.editorEnabled) break;
-        this.handleSpawn(msg.entityType, msg.wx, msg.wy, msg.paintSchemeId);
-        break;
-
-      case "edit-delete-entity":
-        if (msg.entityId !== session.player.id) {
-          this.entityManager.remove(msg.entityId);
-          this.saveManager?.markMetaDirty();
-        }
-        break;
-
-      case "edit-move-prop":
-        if (this.interior) {
-          const prop = this.propManager.props.find((p) => p.id === msg.propId);
-          if (!prop || prop.type === INTERIOR_WALL_TYPE) break;
-          if (!this.roomState) break;
-          const room = this.roomGeometry;
-          if (!room) break;
-          try {
-            const proposed = this.propManager.props.map((p) =>
-              p.id === msg.propId ? { ...p, position: { wx: msg.wx, wy: msg.wy } } : p,
-            );
-            validateRoomOccupancy(
-              room,
-              proposed,
-              this.entityManager.entities.filter((e) => e.type === "player" || e.resident),
-            );
-          } catch {
-            break;
-          }
-        }
-        this.propManager.move(msg.propId, msg.wx, msg.wy);
-        break;
-
-      case "edit-delete-prop":
-        if (this.propManager.props.find((p) => p.id === msg.propId)?.type === INTERIOR_WALL_TYPE)
-          break;
-        this.propManager.remove(msg.propId);
-        this.saveManager?.markMetaDirty();
-        break;
-
-      case "edit-clear-terrain":
-        this.terrainEditor.clearAllTerrain(msg.terrainId);
-        break;
-
-      case "edit-clear-roads":
-        this.terrainEditor.clearAllRoads();
-        break;
-
-      case "set-editor-mode":
-        session.editorEnabled = msg.enabled;
-        if (!msg.enabled) session.editorCursor = null;
-        this.editorCursorsRevision++;
-        // Auto-dismount when entering editor mode
-        if (msg.enabled && session.gameplaySession.mountId !== null) {
-          this.dismountPlayer(session);
-        }
-        if (msg.enabled) {
-          session.lastProcessedInputSeq =
-            session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
-          session.inputQueue.length = 0;
-
-          setHorizontalVelocity(session.player, { vx: 0, vy: 0 });
-        }
-        break;
-
-      case "editor-cursor":
-        session.editorCursor = {
-          tileX: msg.tileX,
-          tileY: msg.tileY,
-          editorTab: msg.editorTab,
-          brushMode: msg.brushMode,
-        };
-        this.editorCursorsRevision++;
-        break;
-
-      case "set-debug":
-        session.debugPaused = msg.paused;
-        break;
-
-      case "visible-range":
-        session.visibleRange = {
-          minCx: msg.minCx,
-          minCy: msg.minCy,
-          maxCx: msg.maxCx,
-          maxCy: msg.maxCy,
-        };
-        // Don't call updateVisibleChunks here — it uses a single session's
-        // range which unloads chunks that OTHER sessions need, creating
-        // invisible collision walls for far-away players. The tick method
-        // already computes the union of all sessions' visible ranges and
-        // calls updateVisibleChunks with that.
-        break;
-
-      case "flush":
-        this.flush();
-        break;
-
-      case "invalidate-all-chunks":
-        this.invalidateAllChunks();
-        break;
-
-      default:
-        // GameServer handles the remaining message types before delegating here.
-        break;
-    }
+    handleRealmCommand(this.commandContext, session, msg);
   }
+
+  private readonly commandContext: RealmCommandContext = {
+    realm: this,
+    random: () => (this.options.random ?? Math.random)(),
+    roomGeometry: () => this.roomGeometry,
+    editorCursorsChanged: () => {
+      this.editorCursorsRevision++;
+    },
+  };
 
   async loadWorld(
     worldId: string,
@@ -1437,6 +936,62 @@ export class Realm {
     const worldMeta = overrideMeta ?? (await registry.getWorld(worldId));
     if (!worldMeta) throw new Error("World not found.");
     descriptorFromMetadata(worldMeta); // Reject unsupported identity before replacing live state.
+    await this.closeLoadedWorld();
+    await this.physics.reset();
+    this.composeWorld(worldMeta);
+
+    // Open persistence for this world
+    const { saveManager, records } = this.openPersistence(createStore(worldId));
+    await saveManager.open();
+    this.ownedBalls = new OwnedBalls(this.entityManager, saveManager);
+    await this.ownedBalls.load();
+    records.acceptsRecord = (record) => this.ownedBalls.accepts(record);
+    const savedMeta = await saveManager.loadMeta();
+    await loadWildlifeReturns(this, saveManager, this.entityManager);
+    this.restoreInterior(worldMeta, savedMeta);
+    // Bind save accessors
+    saveManager.bind(
+      (key) => this.world.chunks.getChunkDataByKey(key),
+      () => this.buildSaveMeta(),
+    );
+    this.proceduralProps.managed = true;
+    this.streaming = this.createStreaming(records, saveManager);
+    installTrafficGuard(this);
+
+    this.railways =
+      !this.interior && this.generator.terrain instanceof RailwayStrategy
+        ? new RailwayServices(this, this.generator.terrain.railways)
+        : undefined;
+
+    console.log(
+      `[tilefun] loadWorld ${worldId}: lazy world-container records, meta=${!!savedMeta}`,
+    );
+    const { cameraX, cameraY, cameraZoom, playerX, playerY } =
+      await this.loadedPlacement(savedMeta);
+    this.gemSpawner.reset(this.entityManager);
+    this.baddieSpawner.reset(this.entityManager);
+    this.fishSpawner.reset(this.entityManager);
+    this.tentSpawner.reset();
+
+    saveManager.markMetaDirty();
+    this.currentWorldId = worldId;
+    await registry.updateLastPlayed(this.interior?.parentWorldId ?? worldId);
+
+    // Store loaded positions for addPlayer() to use
+    this.lastLoadedCamera = { cameraX, cameraY, cameraZoom };
+    this.lastLoadedPlayerPos = { wx: playerX, wy: playerY };
+    await this.ensureReady(
+      around(Math.floor(playerX / CHUNK_SIZE_PX), Math.floor(playerY / CHUNK_SIZE_PX), 3),
+    );
+
+    // Reset per-client delta tracking so all data gets re-sent
+    this.replication.clear();
+
+    return { cameraX, cameraY, cameraZoom };
+  }
+
+  /** Stop streaming, services and persistence of the previously loaded world. */
+  private async closeLoadedWorld(): Promise<void> {
     await this.streaming?.close();
     this.streaming = null;
     this.activity.clear();
@@ -1447,12 +1002,10 @@ export class Realm {
     if (this.saveManager) {
       await this.saveManager.close();
     }
+  }
 
-    this.physicsScene?.dispose();
-    this.physicsScene = await PhysicsScene.create();
-    this.physicsParticipants = [];
-
-    // Create fresh world state with the correct generation strategy
+  /** Create fresh world state with the correct generation strategy. */
+  private composeWorld(worldMeta: WorldMeta): void {
     this.interior = worldMeta.interior ?? null;
     this.roomEditor = null;
     this.roomGeometry = null;
@@ -1480,45 +1033,24 @@ export class Realm {
       this.proceduralProps.deleted,
       () => this.saveManager?.markMetaDirty(),
     );
+  }
 
-    // Open persistence for this world
-    const store = createStore(worldId);
-    this.saveManager = new SaveManager(store);
-    this.records = new RealmRecords(
+  /** Attach records, capacity guards, editors and mods to the composed world. */
+  private openPersistence(store: PersistenceStore) {
+    const saveManager = new SaveManager(store);
+    this.saveManager = saveManager;
+    const records = new RealmRecords(
       this.entityManager,
       this.propManager,
-      this.saveManager,
+      saveManager,
       this.options.definitions,
     );
+    this.records = records;
     this.entityManager.removalListeners.add((entity) => {
       this.previousActive.delete(entity);
       this.activity.invalidate();
     });
-    this.entityManager.canPlace = (wx, wy) =>
-      Number.isFinite(wx) &&
-      Number.isFinite(wy) &&
-      !!this.world.chunks.get(Math.floor(wx / CHUNK_SIZE_PX), Math.floor(wy / CHUNK_SIZE_PX));
-    this.entityManager.canSpawn = (entity) =>
-      this.entityManager.entities.length < PERSISTENCE_BUDGET.actors &&
-      !this.saveManager?.pressured &&
-      this.entityManager.canPlace?.(entity.position.wx, entity.position.wy) !== false;
-    this.propManager.canAdd = (prop) =>
-      this.propManager.props.length < PERSISTENCE_BUDGET.props &&
-      !this.saveManager?.pressured &&
-      this.entityManager.canPlace?.(prop.position.wx, prop.position.wy) !== false;
-    this.entityManager.beforeSpawn = (entity) => {
-      if (
-        !this.records?.isHydrating &&
-        this.entityManager.canPlace?.(entity.position.wx, entity.position.wy) === false
-      )
-        throw new Error("Cannot spawn outside ready terrain.");
-      if (this.entityManager.entities.length >= PERSISTENCE_BUDGET.actors)
-        throw new Error("Local actor limit reached.");
-    };
-    this.propManager.beforeAdd = () => {
-      if (this.propManager.props.length >= PERSISTENCE_BUDGET.props)
-        throw new Error("Local prop limit reached.");
-    };
+    installCapacityGuards(this);
     this.proceduralActors.persistent = true;
     this.proceduralActors.canGenerate = (id) => !this.records?.features.has(id);
     this.terrainEditor = new TerrainEditor(
@@ -1528,72 +1060,33 @@ export class Realm {
     );
     this.worldAPI = this.createWorldAPI();
     this.registerMods();
+    return { saveManager, records };
+  }
 
-    await this.saveManager.open();
-    this.ownedBalls = new OwnedBalls(this.entityManager, this.saveManager);
-    await this.ownedBalls.load();
-    this.records.acceptsRecord = (record) => this.ownedBalls.accepts(record);
-    const savedMeta = await this.saveManager.loadMeta();
-    const returns = await this.saveManager.loadRecords("meta", WILDLIFE_RESPAWN_SCOPE);
-    if (returns.size > WILDLIFE_RESPAWN_LIMIT)
-      throw new Error("Wildlife return queue exceeds its limit.");
-    for (const [key, value] of returns) {
-      const job = value as PendingWildlifeRespawn;
-      if (
-        !key.startsWith("wildlife-respawn:") ||
-        !job.actor?.state.naturalSpawnId ||
-        !Number.isFinite(job.remaining) ||
-        job.remaining < 0
-      )
-        throw new Error("Invalid wildlife return record.");
-      this.entityManager.wildlifeRespawns.set(job.actor.persistentId, job);
-    }
-    this.entityManager.onWildlifeRespawnChanged = (id, job) => {
-      const key = `wildlife-respawn:${id}`;
-      this.saveManager?.markRecordDirty("meta", key, () => ({
-        collection: "meta",
-        key,
-        scope: WILDLIFE_RESPAWN_SCOPE,
-        ...(job ? { value: structuredClone(job) } : { value: null, deleted: true }),
-      }));
-    };
-    if (
-      this.interior &&
-      savedMeta?.interior &&
-      (savedMeta.interior.version !== this.interior.version ||
-        savedMeta.interior.featureId !== this.interior.featureId ||
-        savedMeta.interior.parentWorldId !== this.interior.parentWorldId ||
-        savedMeta.interior.floor !== this.interior.floor)
-    )
-      throw new InvalidInteriorError("Unsupported saved interior identity.");
+  /** A previously visited room owns its identity, layout and connections. */
+  private restoreInterior(worldMeta: WorldMeta, savedMeta: SavedMeta | null): void {
+    checkSavedInterior(this.interior, savedMeta?.interior);
     if (this.interior && savedMeta?.interior) {
-      // A previously visited room owns its identity, layout and connections.
       this.interior = savedMeta.interior;
       this.generator = interiorGenerator(this.interior, descriptorFromMetadata(worldMeta).seed);
     }
-    if (this.interior) {
-      try {
-        const state = savedMeta?.roomPlan
-          ? parseGameplayRoom(savedMeta.roomPlan)
-          : initialRoom(this.interior);
-        this.generator = withInteriorGems(this.generator, this.interior, state);
-      } catch (error) {
-        throw new InvalidInteriorError("Saved interior geometry is invalid.", { cause: error });
-      }
-    }
-    this.saveManager.bind(
-      (key) => this.world.chunks.getChunkDataByKey(key),
-      () => this.buildSaveMeta(),
-    );
-    this.proceduralProps.managed = true;
+    const interior = this.interior;
+    if (interior)
+      asInvalidInterior(() => {
+        const state = savedRoomState(interior, savedMeta);
+        this.generator = withInteriorGems(this.generator, interior, state);
+      });
+  }
+
+  private createStreaming(records: RealmRecords, saveManager: SaveManager): RealmStreaming {
     const trafficRecords = this.vehicleRegistry
-      ? new VehicleRecords(this.vehicleRegistry, this.records, this.saveManager)
+      ? new VehicleRecords(this.vehicleRegistry, records, saveManager)
       : undefined;
-    this.streaming = new RealmStreaming(
+    return new RealmStreaming(
       this.world,
-      this.records,
+      records,
       this.propManager,
-      this.saveManager,
+      saveManager,
       (features) => {
         for (const feature of features) {
           if (feature.deleted) this.proceduralProps.deleted.add(feature.id);
@@ -1607,127 +1100,85 @@ export class Realm {
           this.proceduralProps.edits.delete(feature.id);
         }
       },
-      (key, seeded) => {
-        this.proceduralProps.forget(key);
-        if (this.interior || this.generation.type === "regional") {
-          this.proceduralProps.reconcile(this.generator, [key]);
-        } else if (!seeded && this.generation.type !== "flat") {
-          const [cx = 0, cy = 0] = key.split(",").map(Number);
-          for (const placement of this.generator.placements(cx, cy, new Set()).placements) {
-            if (actorScope({ wx: placement.wx, wy: placement.wy }) !== key) continue;
-            this.propManager.add(createProp(placement.propType, placement.wx, placement.wy));
-          }
-        }
-        // Exploration gems and track additions also populate visited chunks. Stable
-        // origin records suppress moved/deleted finds; other populations seed once.
-        if (!seeded || this.interior || this.generation.type === "regional")
-          this.proceduralActors.reconcile(this.generator, [key], seeded);
-      },
+      (key, seeded) => this.populateChunk(key, seeded),
       trafficRecords,
     );
+  }
 
-    if (this.vehicleRegistry)
-      this.vehicleRegistry.canSpawn = (id, wx, wy) =>
-        !this.records?.features.has(id) &&
-        !this.saveManager?.pressured &&
-        this.entityManager.entities.length < PERSISTENCE_BUDGET.actors - 16 &&
-        !!this.streaming?.rangeReady(
-          around(Math.floor(wx / CHUNK_SIZE_PX), Math.floor(wy / CHUNK_SIZE_PX), 1),
-        );
-
-    this.railways =
-      !this.interior && this.generator.terrain instanceof RailwayStrategy
-        ? new RailwayServices(this, this.generator.terrain.railways)
-        : undefined;
-    let cameraX = 0;
-    let cameraY = 0;
-    let cameraZoom = 1;
-    let playerX = 0;
-    let playerY = 0;
-
-    console.log(
-      `[tilefun] loadWorld ${worldId}: lazy world-container records, meta=${!!savedMeta}`,
-    );
-    if (savedMeta) {
-      cameraX = savedMeta.cameraX;
-      cameraY = savedMeta.cameraY;
-      cameraZoom = savedMeta.cameraZoom;
-      playerX = savedMeta.playerX;
-      playerY = savedMeta.playerY;
-      this.lastLoadedGems = savedMeta.gemsCollected ?? 0;
-    } else {
-      this.lastLoadedGems = 0;
-      // Find a walkable spawn point using a temporary entity
-      const start =
-        this.generation.type === "regional"
-          ? ((this.generator.terrain instanceof RailwayStrategy
-              ? this.generator.terrain.railways.start()
-              : undefined) ?? regionalStart(regionalWorld(this.generation.seed)))
-          : { x: 0, y: 0 };
-      const tempPlayer = createPlayer(start.x * TILE_SIZE, start.y * TILE_SIZE);
-      await this.ensureReady(
-        around(
-          Math.floor(tempPlayer.position.wx / CHUNK_SIZE_PX),
-          Math.floor(tempPlayer.position.wy / CHUNK_SIZE_PX),
-          3,
-        ),
-      );
-      findWalkableSpawn(tempPlayer, this.world);
-      playerX = tempPlayer.position.wx;
-      playerY = tempPlayer.position.wy;
-      if (this.generation.type === "regional") {
-        cameraX = playerX;
-        cameraY = playerY;
+  private populateChunk(key: string, seeded: boolean): void {
+    this.proceduralProps.forget(key);
+    if (this.interior || this.generation.type === "regional") {
+      this.proceduralProps.reconcile(this.generator, [key]);
+    } else if (!seeded && this.generation.type !== "flat") {
+      const [cx = 0, cy = 0] = key.split(",").map(Number);
+      for (const placement of this.generator.placements(cx, cy, new Set()).placements) {
+        if (actorScope({ wx: placement.wx, wy: placement.wy }) !== key) continue;
+        this.propManager.add(createProp(placement.propType, placement.wx, placement.wy));
       }
-      if (
-        this.options.ambientSpawns !== false &&
-        !this.interior &&
-        !(this.generation.type === "regional")
-      )
-        spawnInitialChickens(5, this.world, this.entityManager, 0, 0);
     }
+    // Exploration gems and track additions also populate visited chunks. Stable
+    // origin records suppress moved/deleted finds; other populations seed once.
+    if (!seeded || this.interior || this.generation.type === "regional")
+      this.proceduralActors.reconcile(this.generator, [key], seeded);
+  }
 
-    if (this.interior) {
-      playerX = buildingDoor(this.interior).arrival.wx;
-      playerY = buildingDoor(this.interior).arrival.wy;
-      cameraX = playerX;
-      cameraY = playerY;
-      try {
-        const state = savedMeta?.roomPlan
-          ? parseGameplayRoom(savedMeta.roomPlan)
-          : initialRoom(this.interior);
+  /** Saved or freshly found arrival and camera; interiors arrive at their door. */
+  private async loadedPlacement(savedMeta: SavedMeta | null) {
+    this.lastLoadedGems = savedMeta?.gemsCollected ?? 0;
+    const placement = savedMeta
+      ? {
+          cameraX: savedMeta.cameraX,
+          cameraY: savedMeta.cameraY,
+          cameraZoom: savedMeta.cameraZoom,
+          playerX: savedMeta.playerX,
+          playerY: savedMeta.playerY,
+        }
+      : await this.firstPlacement();
+    const interior = this.interior;
+    if (interior) {
+      placement.playerX = buildingDoor(interior).arrival.wx;
+      placement.playerY = buildingDoor(interior).arrival.wy;
+      placement.cameraX = placement.playerX;
+      placement.cameraY = placement.playerY;
+      asInvalidInterior(() => {
+        const state = savedRoomState(interior, savedMeta);
         this.installRoom(state);
         this.roomEditor = new GameplayRoomEditor(state, (next) => this.installRoom(next));
-      } catch (error) {
-        throw new InvalidInteriorError("Saved interior geometry is invalid.", { cause: error });
-      }
+      });
     }
-    this.gemSpawner.reset(this.entityManager);
-    this.baddieSpawner.reset(this.entityManager);
-    this.fishSpawner.reset(this.entityManager);
-    this.tentSpawner.reset();
+    return placement;
+  }
 
-    // Bind save accessors
-    this.saveManager.bind(
-      (key) => this.world.chunks.getChunkDataByKey(key),
-      () => this.buildSaveMeta(),
-    );
-
-    this.saveManager.markMetaDirty();
-    this.currentWorldId = worldId;
-    await registry.updateLastPlayed(this.interior?.parentWorldId ?? worldId);
-
-    // Store loaded positions for addPlayer() to use
-    this.lastLoadedCamera = { cameraX, cameraY, cameraZoom };
-    this.lastLoadedPlayerPos = { wx: playerX, wy: playerY };
+  /** Find a walkable spawn point for a world without saved metadata. */
+  private async firstPlacement() {
+    // Find a walkable spawn point using a temporary entity
+    const start =
+      this.generation.type === "regional"
+        ? ((this.generator.terrain instanceof RailwayStrategy
+            ? this.generator.terrain.railways.start()
+            : undefined) ?? regionalStart(regionalWorld(this.generation.seed)))
+        : { x: 0, y: 0 };
+    const tempPlayer = createPlayer(start.x * TILE_SIZE, start.y * TILE_SIZE);
     await this.ensureReady(
-      around(Math.floor(playerX / CHUNK_SIZE_PX), Math.floor(playerY / CHUNK_SIZE_PX), 3),
+      around(
+        Math.floor(tempPlayer.position.wx / CHUNK_SIZE_PX),
+        Math.floor(tempPlayer.position.wy / CHUNK_SIZE_PX),
+        3,
+      ),
     );
-
-    // Reset per-client delta tracking so all data gets re-sent
-    this.replication.clear();
-
-    return { cameraX, cameraY, cameraZoom };
+    findWalkableSpawn(tempPlayer, this.world);
+    const playerX = tempPlayer.position.wx;
+    const playerY = tempPlayer.position.wy;
+    const regional = this.generation.type === "regional";
+    if (this.options.ambientSpawns !== false && !this.interior && !regional)
+      spawnInitialChickens(5, this.world, this.entityManager, 0, 0);
+    return {
+      cameraX: regional ? playerX : 0,
+      cameraY: regional ? playerY : 0,
+      cameraZoom: 1,
+      playerX,
+      playerY,
+    };
   }
 
   async ensureReady(range: ChunkRange): Promise<void> {
@@ -1777,9 +1228,7 @@ export class Realm {
       throw error;
     }
     if (this.saveManager === saves) this.saveManager = null;
-    this.physicsScene?.dispose();
-    this.physicsScene = undefined;
-    this.physicsParticipants = [];
+    this.physics.dispose();
     for (const teardown of this.modTeardowns.values()) teardown();
     this.modTeardowns.clear();
     for (const entity of [...this.entityManager.entities])
@@ -1791,243 +1240,6 @@ export class Realm {
     this.activity.clear();
     this.propActivity.clear();
     this.replication.clear();
-  }
-
-  // ---- Riding helpers ----
-
-  /** Dismount the player from their current mount. */
-  private dismountPlayer(session: PlayerSession): void {
-    if (this.vehicles.get(session)) {
-      this.vehicles.exit(session, true);
-      return;
-    }
-    const mountId = session.gameplaySession.mountId;
-    if (mountId === null) return;
-
-    const mount = this.entityManager.entities.find((e) => e.id === mountId);
-
-    // Clear parent relationship
-    Reflect.set(session.player, "parentId", undefined);
-    Reflect.set(session.player, "localOffsetX", undefined);
-    Reflect.set(session.player, "localOffsetY", undefined);
-    session.gameplaySession.lastDismountedId = mountId;
-    session.gameplaySession.mountId = null;
-
-    // Dismount at current position (player was parented to mount)
-    if (mount) {
-      setFaunaRidden(mount, false);
-      // Restore mount AI
-      if (mount.wanderAI) {
-        mount.wanderAI.state = "idle";
-        mount.wanderAI.timer = 1.0;
-      }
-      if (mount.velocity) {
-        mount.velocity.vx = 0;
-        mount.velocity.vy = 0;
-      }
-      if (mount.sprite) mount.sprite.moving = false;
-    }
-
-    // Hop off from riding height — wz is already tracked by resolveParentedPositions
-    session.player.jumpZ = (session.player.wz ?? 0) - (session.player.groundZ ?? 0);
-    setVerticalVelocity(session.player, JUMP_VELOCITY * 0.5);
-    delete session.player.noShadow;
-  }
-
-  /** Check for rideable entities under the player on landing; mount if found. */
-  private tryMountOnLanding(session: PlayerSession, contactId?: number): void {
-    const player = session.player;
-    if (!player.collider) return;
-
-    // Use an expanded AABB for mount detection. The 3D collision system prevents
-    // the player from passing through the cow during jumps (Z-ranges overlap on
-    // the ground), so the player lands adjacent to the cow rather than overlapping.
-    // Expanding by a few pixels detects nearby rideable entities on landing.
-    const MOUNT_MARGIN = 4;
-    const playerBox = getEntityAABB(player.position, player.collider);
-    const expandedBox = {
-      left: playerBox.left - MOUNT_MARGIN,
-      top: playerBox.top - MOUNT_MARGIN,
-      right: playerBox.right + MOUNT_MARGIN,
-      bottom: playerBox.bottom + MOUNT_MARGIN,
-    };
-
-    const skipId = session.gameplaySession.lastDismountedId;
-    session.gameplaySession.lastDismountedId = null;
-
-    for (const entity of this.entityManager.entities) {
-      if (entity.id === player.id) continue;
-      if (entity.id === skipId) continue; // just dismounted — don't re-mount
-      if (!entity.tags?.has("rideable")) continue;
-      // Wildlife mounts require an actual landing on their back, not nearby ground.
-      if (entity.fauna && entity.id !== contactId) continue;
-      if (entity.wanderAI?.state === "ridden") continue; // already ridden
-      if (!entity.collider) continue;
-
-      const entityBox = getEntityAABB(entity.position, entity.collider);
-      if (!aabbsOverlap(expandedBox, entityBox)) continue;
-
-      // Mount!
-      session.gameplaySession.mountId = entity.id;
-      player.parentId = entity.id;
-      player.localOffsetX = 0;
-      player.localOffsetY = 0;
-      // Snap player position to mount immediately (don't wait for
-      // resolveParentedPositions next tick) — avoids camera jump
-      player.position.wx = entity.position.wx;
-      player.position.wy = entity.position.wy;
-      // Visual lift: set wz above mount so the renderer elevates the
-      // player onto the mount's back. Use the mount's wz (not player.groundZ
-      // which may include the cow's own walkable surface height, double-counting).
-      const rideHeight = entity.collider.physicalHeight ?? 10;
-      player.wz = (entity.wz ?? 0) + rideHeight;
-      player.jumpZ = rideHeight;
-
-      Reflect.set(player, "jumpVZ", undefined);
-      player.noShadow = true; // cow's shadow is bigger
-      if (entity.wanderAI) {
-        entity.wanderAI.state = "ridden";
-        entity.wanderAI.following = false;
-      }
-      setFaunaRidden(entity, true);
-      if (entity.velocity) {
-        entity.velocity.vx = 0;
-        entity.velocity.vy = 0;
-      }
-      if (player.velocity) {
-        player.velocity.vx = 0;
-        player.velocity.vy = 0;
-      }
-      // Reset player sprite to idle so the walking animation doesn't persist
-      if (player.sprite) {
-        player.sprite.moving = false;
-        player.sprite.frameCol = 0;
-        player.sprite.animTimer = 0;
-      }
-      break;
-    }
-  }
-
-  // ---- Private ----
-
-  /** Save a supported respawn pose above dry ground or an elevated deck. */
-  private updateLastSafePosition(session: PlayerSession): void {
-    const p = session.player;
-    if (p.jumpVZ !== undefined) return;
-    if (this.isEntityOnWater(p)) return;
-    session.gameplaySession.lastSafePosition = {
-      wx: p.position.wx,
-      wy: p.position.wy,
-      wz: p.wz ?? 0,
-    };
-  }
-
-  private handlePlayerStepOutcome(
-    session: PlayerSession,
-    outcome: {
-      landed: boolean;
-      enteredWater: boolean;
-      endedGrounded: boolean;
-      groundZ: number;
-      wildlifeContactId?: number;
-    },
-    getHeight: (tx: number, ty: number) => number,
-  ): void {
-    if (!outcome.landed && !outcome.enteredWater) return;
-    const p = session.player;
-    if (outcome.wildlifeContactId !== undefined) {
-      const animal = this.entityManager.byId.get(outcome.wildlifeContactId);
-      if (animal) {
-        if (session.gameplaySession.mountId === null && animal.tags?.has("rideable")) {
-          this.tryMountOnLanding(session, animal.id);
-          if (session.gameplaySession.mountId !== null) {
-            this.records?.changed(animal);
-            return;
-          }
-        }
-        // The contact id is only recorded for wildlife supports (see finishPhysics).
-        startleWildlife(animal, p.position);
-        this.records?.changed(animal);
-      }
-      return;
-    }
-    if (outcome.enteredWater) {
-      const safe = session.gameplaySession.lastSafePosition;
-      if (safe) {
-        teleportBody(p, {
-          wx: safe.wx,
-          wy: safe.wy,
-          wz: safe.wz ?? getSurfaceZ(safe.wx, safe.wy, getHeight),
-        });
-      } else {
-        delete p.jumpVZ;
-        delete p.jumpZ;
-      }
-      // Brief invincibility flash so the respawn is visible.
-      session.gameplaySession.invincibilityTimer = 0.75;
-      return;
-    }
-
-    if (!outcome.endedGrounded) return;
-
-    if (session.gameplaySession.mountId === null) {
-      this.tryMountOnLanding(session);
-    }
-  }
-
-  private isEntityOnWater(entity: Entity): boolean {
-    const tx = Math.floor(entity.position.wx / TILE_SIZE);
-    const ty = Math.floor(entity.position.wy / TILE_SIZE);
-    return (
-      (this.world.getCollisionIfLoaded(tx, ty) & CollisionFlag.Water) !== 0 &&
-      (entity.wz ?? 0) <= this.world.getHeightAt(tx, ty) * ELEVATION_PX + 0.15
-    );
-  }
-
-  /** Build per-tick frame + on-change sync events for a specific client. */
-  private handleSpawn(entityType: string, wx: number, wy: number, paintSchemeId?: string): void {
-    let changed = false;
-    if (this.interior && (!furnitureAsset(entityType) || !this.roomState)) return;
-    if (entityType.startsWith("vehicle-v1:")) {
-      changed = !!this.vehicleRegistry?.place(
-        entityType.slice(11),
-        wx,
-        wy,
-        undefined,
-        paintSchemeId,
-      );
-    } else if (isPropType(entityType)) {
-      const prop = createProp(entityType, wx, wy);
-      if (this.interior && this.roomGeometry) {
-        try {
-          validateRoomOccupancy(
-            this.roomGeometry,
-            [...this.propManager.props, prop],
-            this.entityManager.entities.filter((e) => e.type === "player" || e.resident),
-          );
-        } catch {
-          return;
-        }
-      }
-      // Skip if the new prop's collider would overlap an existing prop
-      if (
-        prop.collider &&
-        this.propManager.overlapsAnyProp(getEntityAABB(prop.position, prop.collider))
-      ) {
-        return;
-      }
-      this.propManager.add(prop);
-      changed = true;
-    } else {
-      const factory = ENTITY_FACTORIES[entityType];
-      if (factory) {
-        this.entityManager.spawn(factory(wx, wy));
-        changed = true;
-      }
-    }
-    if (changed) {
-      this.saveManager?.markMetaDirty();
-    }
   }
 
   private buildSaveMeta(): SavedMeta {

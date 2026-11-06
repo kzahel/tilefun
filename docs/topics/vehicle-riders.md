@@ -177,7 +177,8 @@ measurements. Four identities now have source pilots; 23 appearances still lack
 seated source, and normal occupancy remains unqualified for all 27.
 
 Code entry points: `src/characters/PlayerModels.ts`,
-`src/characters/CharacterCatalog.ts`, `src/rendering/collectScene.ts`,
+`src/characters/CharacterCatalog.ts`, `src/rendering/collectScene.ts` (actor sprites in
+`src/rendering/scene/EntitySprites.ts`),
 `src/rendering/EntityMeshPose.ts`, `src/rendering/GpuMeshBodies.ts`,
 `src/server/VehicleControl.ts`, `src/client/PlayerPredictor.ts`,
 `src/traffic/TrafficSystem.ts` and `src/traffic/RoofSupport.ts`.

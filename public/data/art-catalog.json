@@ -26751,7 +26751,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:380"
+          "source": "src/editor/EditorPlacementPalettes.ts:24"
         },
         {
           "system": "Interiors",
@@ -26901,7 +26901,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:382"
+          "source": "src/editor/EditorPlacementPalettes.ts:26"
         },
         {
           "system": "Interiors",
@@ -27007,7 +27007,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:381"
+          "source": "src/editor/EditorPlacementPalettes.ts:25"
         },
         {
           "system": "Interiors",
@@ -27077,7 +27077,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:383"
+          "source": "src/editor/EditorPlacementPalettes.ts:27"
         },
         {
           "system": "Interiors",
@@ -27151,7 +27151,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:384"
+          "source": "src/editor/EditorPlacementPalettes.ts:28"
         },
         {
           "system": "Interiors",
@@ -27265,7 +27265,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:385"
+          "source": "src/editor/EditorPlacementPalettes.ts:29"
         },
         {
           "system": "Interiors",
@@ -27381,7 +27381,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:386"
+          "source": "src/editor/EditorPlacementPalettes.ts:30"
         },
         {
           "system": "Interiors",
@@ -27427,7 +27427,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/editor/EditorPanel.ts:387"
+          "source": "src/editor/EditorPlacementPalettes.ts:31"
         },
         {
           "system": "Interiors",
@@ -34549,11 +34549,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:260"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/collectScene.ts:270"
+          "source": "src/rendering/scene/EntitySprites.ts:402"
         },
         {
           "system": "Gameplay",
@@ -35459,19 +35455,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:332"
+          "source": "src/server/Realm.ts:296"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1348"
+          "source": "src/server/Realm.ts:1339"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:2006"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/server/Realm.ts:2127"
+          "source": "src/server/RealmCommands.ts:225"
         },
         {
           "system": "Gameplay",
@@ -36563,11 +36555,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1235"
+          "source": "src/server/RealmActivity.ts:51"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmActivity.ts:51"
+          "source": "src/server/RealmCommands.ts:268"
         },
         {
           "system": "Gameplay",

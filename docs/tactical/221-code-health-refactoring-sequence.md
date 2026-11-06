@@ -602,3 +602,115 @@ request without an id again answers `requestId: 0`; a comment records that vehic
 facing runs after mirrored fields. Recorded: `ToolRegistry.ts` is in the Workshop
 input digest, so navigation-only edits need a manifest run; the semantic golden
 path has no vehicle/wander entity (decode/encode digests cover their fields).
+
+### Phase 5 record — split hot regions
+
+Precondition: `npm run workshop:inbox` still showed 0 approvals and 0 change
+requests on every source-hashed batch. All splits are moves: tick, send, effect,
+listener and draw order, RNG draws and wire bytes are unchanged; new files stay
+under the ratchet limits (≤600 lines, every function ≤25 cognitive complexity),
+so large functions were decomposed into ordered helpers as they moved.
+
+| File | Lines | Worst complexity | Over-limit functions | New collaborators |
+| --- | --- | --- | --- | --- |
+| `server/Realm.ts` | 2,145 → 1,357 | 66 → 21 | 4 → 0 | `RealmRiding`, `RealmPhysics`, `RealmCommands`, `RealmComposition`, `RealmPlayerRestore`, `RealmSimulation` |
+| `server/GameServer.ts` | 1,714 → 1,019 | 40 → 25 | 3 → 0 | `RealmDirectory`, `SessionRegistry`, `DoorTransitions`, `ResumeDestination`, `ResidentTraffic` |
+| `client/GameClient.ts` | 1,746 → 982 | 44 → <15 | 1 → 0 | `ServerMessageRouter`, `PlayInputController`, `WorldSessionActions`, `GameMenuChrome`, `ClientConsoleBindings` |
+| `rendering/collectScene.ts` | 432 → 177 | 176 → 17 | 1 → 0 | `rendering/scene/EntitySprites`, `scene/SceneCull` |
+| `workshop/App.tsx` | 1,021 → 71 | 28 → <15 | 2 → 0 | `WorkshopChrome`, `WorkshopRoutes`, `ToolRoutes`, `InboxPage`, `RequestPages`, `LoginPage`, `WorkshopSync` |
+| `editor/EditorPanel.ts` | 1,292 → 300 | 49 → 20 | 3 → 0 | `EditorPanelWidgets`, `EditorBrushTools`, `EditorTerrainPalettes`, `EditorPlacementPalettes`, `EditorPatternPalette`, `EditorElevationPalette` |
+
+- **Realm.** Riding (mount on landing, dismount, step outcomes, last safe
+  position, saved mount) and physics stepping (`RealmPhysics` owns the scene,
+  participants, geometry version and environment builder; Realm keeps thin
+  delegates and a `physicsScene` getter used by the throw-ball command and the
+  active-crowds instrumentation) moved out. `handleMessage` became a
+  compiler-complete handler table (`{ [K in RealmCommandType]: … }`) over a narrow
+  context, dispatched like the GameServer request table. `loadWorld` is a sequence
+  of named steps; a second, identical `saveManager.bind` call was removed. Both B8
+  `streaming.update` calls are unchanged. `computeEntityTickDtsMulti`/`decisionDts`
+  stay on Realm because instrumentation scripts patch them there.
+- **GameServer.** The request table stays the only dispatch path; handlers delegate
+  to the new modules. Reply shapes, error texts, `player-assigned` before arrival,
+  sync-reply timing, admin checks, operation tracking and B10 forwarding getters are
+  unchanged. The duplicated `player-assigned` + `world-loaded` pair is one helper.
+  Resume fallbacks gain a few microtask hops (same effect order), as do Realm's
+  saved-world placement in `loadWorld` and the rare airborne-over-water respawn;
+  ticks are macrotasks, so no interleaving changes. `enter-building` reads the
+  return world id before awaiting the interior realm (differs only if the default
+  realm reloads during that await).
+- **GameClient.** Incoming messages route through one `switch` ending in
+  `msg satisfies never`, so a new server message type needs a routing decision
+  (reply-only types are listed explicitly). GameClient is the composition root with
+  small adapters; every `GameTestHooks`/`__game` member keeps its name and meaning
+  (`touchJoystick`, `touchButtons`, `tapMovement` are the controller's instances).
+  `ServerMessageRouter.test.ts` pins realm-entry effect order, reload camera,
+  buffering and auto-join. Two stateless menu elements are now created at
+  construction; `OptionsDialog.css` loads after `WorldMap.css` (disjoint selectors).
+- **collectScene.** Stage functions run in the original order; the three per-entity
+  linear `find`s (roof support, boat parent, carrying parent) use first-match Maps
+  built once per call. A Node characterization test digests the full collected
+  output for five variants of a scene that reaches every stage and the reachable
+  branches (culling on each edge and mesh bounds, riders on a yawed bus, planar
+  shadows, duplicate ids, carried-item depth, emergency lights, native trains,
+  partial grass opacity); digests are computed on an exported HEAD. It kills 58 of
+  62 single-line mutants of the moved code; the four survivors are equivalent with
+  current data (roof-support shift terms, a decal guard unreachable in raster mode).
+- **Workshop App and EditorPanel.** App is the shell (state, effects in the same
+  order, layout); routes, chrome, inbox, request and login pages are their own
+  modules with identical nav, counts, filters and lazy boundaries. EditorPanel
+  composes per-section modules; a temporary fake-DOM harness compared 7,774
+  snapshots (tree, styles, attributes, listeners, canvas draws) across tabs, both
+  interior and outdoor models and every button with zero differences. The three
+  Clear-confirm copies are one helper.
+- **Bugs fixed.** `GameServer.rejoin` tracked `transitionDone.then(reconnect)`
+  without `.catch`, so a throwing reconnect was silently swallowed — now logged.
+  The Workshop save status rendered a stray `0` when the native outbox was empty
+  (`length && …`). Biome's floating-promise inference newly flagged two un-awaited
+  `server.destroy()` calls in `GameServer.test.ts` (now awaited) and a false
+  positive in `RealmTransitions.move` caused by a shadowed `resolve` (renamed).
+- **Identity coverage.** `ScenarioRuntimeSource` hashes the six Realm modules and
+  the two `rendering/scene` modules (which also covers character-lab and natural
+  candidates through the runtime digest). `city-audit.mjs` and
+  `shared-world-depth.mjs` provenance lists include them too.
+
+Remaining: Realm, GameServer and GameClient are still over 600 lines (mostly
+composition: constructors, adapters, `publishState`, `playerData`, `simulate`,
+`updateDecisions`; the Realm constructor still duplicates `composeWorld`'s manager
+setup); GameServer `handleMessage` (25) and room/pattern edit routing could move
+next; `RoofSupport.roofSupport` and `propDepth.depthAboveProps` still scan all
+vehicles/surfaces per actor; `scripts/instrumentation/city-audit.mjs` patches Realm
+source strings that no longer matched before this phase, and
+`city-audit-profile.mjs` reads `realm.traffic`/`realm.railway` and probes
+`entityManager.update`, none of which existed at HEAD either. Not started: NaturalLandscape (needs a characterization digest first),
+`rendering/` subfolders beyond `scene/`, PlayerPredictor/PlayScene, and
+PhysicsScene (last, behind parity tests).
+
+Validation: `npm run typecheck`; `npm run check` (ratchet tightened for 6 files,
+three leave the baseline, none raised; knip clean); full `npx vitest run` (4,626
+passed; the four pre-existing failures plus `SharedPrediction` flakes, 24/24 alone);
+`art:catalog` + `workshop:manifest` — candidate ids, order and batches identical to
+HEAD; fingerprints changed only in source-hashed batches without human decisions
+(natural-landscapes 1,008, world-geometry 10, character-lab 6, physics-prototype 1);
+the art catalog changed only consumer source references (EditorPanel,
+collectScene, Realm; two duplicate references merged); `npm run build`;
+`npm run streaming:bench -- --assert-ready`; `npm run test:smoke` (21 passed; the
+four pre-existing failures); focused Playwright (tap-movement, pinch-zoom,
+car-controls, controller-menu, mobile-editor, editor-paint, world-map, play-ideas,
+interiors, p2p-menu, realm-physics, tools-index, workshop, workshop-standalone):
+65 passed; the pre-existing tap-movement "stops at water" failure in both modes.
+
+Review: an independent Opus 5.5 high review found no blockers and confirmed every
+split as a faithful move (22 Realm handler keys vs the old cases, the redundant
+`saveManager.bind`, reply shapes and timing, router effect order, `__game` member
+identity, first-match Maps, 7,911 EditorPanel DOM snapshots, lazy boundaries, no
+value-import cycles, identity coverage through the runtime digest). Repairs: the
+collectScene characterization fixture was extended (mutant kills 39 → 58 of 62;
+digests re-verified on HEAD); `RenderingBoundary.test.ts` now also guards
+`rendering/scene/*`; record wording for the art-catalog diff, the rejoin bug
+(swallowed, not unhandled) and the added Realm/door await points; RealmBrowser test
+casts use `RealmDirectory`; comments for the router, the `startupMenuRequested`
+init order and the `RealmPhysics` field initializer; a shadowed `location` renamed
+in `WorkshopRoutes`. Recorded, not changed: test-only casts in
+`ServerMessageRouter.test.ts`, unpinned door-motion/horn orderings, and no browser
+assertion for the stray-`0` fix.

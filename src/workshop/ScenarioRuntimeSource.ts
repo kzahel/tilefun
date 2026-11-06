@@ -36,6 +36,8 @@ import rasterBackend from "../rendering/RasterRenderBackend.ts?raw";
 import subpixelImages from "../rendering/SubpixelImages.ts?raw";
 import surfaceMeshIndex from "../rendering/SurfaceMeshIndex.ts?raw";
 import surfaceReceivers from "../rendering/SurfaceReceivers.ts?raw";
+import entitySprites from "../rendering/scene/EntitySprites.ts?raw";
+import sceneCull from "../rendering/scene/SceneCull.ts?raw";
 import terrainPlacement from "../rendering/TerrainFrame.ts?raw";
 import towingSprite from "../rendering/TowingFallback.ts?raw";
 import transporterSprite from "../rendering/TransporterFallback.ts?raw";
@@ -49,6 +51,12 @@ import session from "../scenarios/ScenarioSession.ts?raw";
 import worker from "../scenarios/ScenarioWorkerHost.ts?raw";
 import entry from "../scenarios/scenario.worker.ts?raw";
 import realm from "../server/Realm.ts?raw";
+import realmCommands from "../server/RealmCommands.ts?raw";
+import realmComposition from "../server/RealmComposition.ts?raw";
+import realmPhysics from "../server/RealmPhysics.ts?raw";
+import realmPlayerRestore from "../server/RealmPlayerRestore.ts?raw";
+import realmRiding from "../server/RealmRiding.ts?raw";
+import realmSimulation from "../server/RealmSimulation.ts?raw";
 import realmWildlife from "../server/RealmWildlife.ts?raw";
 import clock from "../server/ServerLoop.ts?raw";
 import wireCodec from "../shared/binaryCodec.ts?raw";
@@ -101,6 +109,8 @@ export const scenarioRuntimeSource = {
   projection,
   cameraRaster,
   sceneCollection,
+  entitySprites,
+  sceneCull,
   curveSprite,
   transporterSprite,
   towingSprite,
@@ -140,6 +150,12 @@ export const scenarioRuntimeSource = {
   foodWeb,
   movement,
   realm,
+  realmCommands,
+  realmComposition,
+  realmPhysics,
+  realmPlayerRestore,
+  realmRiding,
+  realmSimulation,
   client,
   presentation,
   protocol,

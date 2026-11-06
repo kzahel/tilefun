@@ -7,38 +7,15 @@ import {
 import { CHUNK_SIZE_PX, TICK_RATE, TILE_SIZE } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
-import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
-import { baseGameMod } from "../game/base-game.js";
 import {
-  createDescriptor,
   descriptorFromMetadata,
-  descriptorKey,
   type GenerationRequest,
   resolveCreation,
 } from "../generation/GenerationDescriptor.js";
-import { createGenerator } from "../generation/Generator.js";
-import { districtBuilding } from "../generation/regional/DistrictBuildings.js";
-import { DistrictStrategy } from "../generation/regional/DistrictStrategy.js";
-import { FarmsteadSource } from "../generation/regional/FarmsteadPlanner.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
-import { buildingDoor, exteriorDoors, withLivedInLayout } from "../interiors/BuildingDoors.js";
-import {
-  atDoorThreshold,
-  DOOR_FADE_MS,
-  DOOR_WALK_MS,
-  type DoorMotion,
-  exteriorDoorWalkAnchor,
-  towardDoor,
-} from "../interiors/DoorTraversal.js";
-import {
-  exteriorEntrance,
-  type InteriorIdentity,
-  InvalidInteriorError,
-  interiorRealmId,
-  parseInteriorId,
-} from "../interiors/GameplayInterior.js";
+import { parseInteriorId } from "../interiors/GameplayInterior.js";
 import type { IWorldRegistry, WorldMeta, WorldType } from "../persistence/IWorldRegistry.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import { PLAYER_LOCATIONS_STORE, PlayerLocationStore } from "../persistence/PlayerLocationStore.js";
@@ -49,7 +26,7 @@ import {
   validateInspection,
 } from "../persistence/WorldInspection.js";
 import { WorldStorePool } from "../persistence/WorldStorePool.js";
-import type { ClientMessage, RealmInfo, WorldMapMessage } from "../shared/protocol.js";
+import type { ClientMessage, WorldMapMessage } from "../shared/protocol.js";
 import {
   isRequest,
   type RequestMessage,
@@ -58,25 +35,18 @@ import {
   type ResponsePayload,
   responseTo,
 } from "../shared/requests.js";
-import type { IServerTransport } from "../transport/Transport.js";
-import { PlayerSession } from "./PlayerSession.js";
-import { Realm } from "./Realm.js";
-import { type RealmDestination, RealmTransitions } from "./RealmTransitions.js";
-import { transferResident } from "./ResidentTransfer.js";
-import { type Arrival, safeArrival } from "./SafeArrival.js";
+import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
+import { DoorTransitions } from "./DoorTransitions.js";
+import type { PlayerSession } from "./PlayerSession.js";
+import type { Realm } from "./Realm.js";
+import { RealmDirectory } from "./RealmDirectory.js";
+import { RealmTransitions } from "./RealmTransitions.js";
+import { ResidentTraffic } from "./ResidentTraffic.js";
+import { resumeDestination } from "./ResumeDestination.js";
+import type { Arrival } from "./SafeArrival.js";
 import { ServerLoop } from "./ServerLoop.js";
+import { SessionRegistry } from "./SessionRegistry.js";
 import type { WorldAPIImpl } from "./WorldAPI.js";
-
-const CURSOR_COLORS = [
-  "#4fc3f7",
-  "#ff8a65",
-  "#81c784",
-  "#ba68c8",
-  "#fff176",
-  "#f06292",
-  "#4dd0e1",
-  "#a1887f",
-];
 
 /** A request's work and reply, answered through `GameServer.respond`. */
 interface RequestContext<R extends RequestMessage> {
@@ -217,13 +187,11 @@ export class GameServer {
   }
 
   /** All active realms, keyed by worldId. */
-  private readonly realms = new Map<string, Realm>();
-  private readonly retiringRealms = new Map<string, Promise<void>>();
-  private readonly loadingRealms = new Map<string, Promise<Realm>>();
-  /** The default realm's worldId (set during init, used for new connections). */
-  private defaultRealmId: string | null = null;
+  private readonly realms: RealmDirectory;
   /** Master session list — every connected player, regardless of realm. */
-  private readonly sessions = new Map<string, PlayerSession>();
+  private readonly sessions: SessionRegistry;
+  private readonly residents: ResidentTraffic;
+  private readonly doors: DoorTransitions;
   private readonly transport: IServerTransport;
   private readonly registry: IWorldRegistry;
   private readonly createStore: (worldId: string) => PersistenceStore;
@@ -234,20 +202,13 @@ export class GameServer {
   private checkpointPending = false;
   /** When true, server broadcasts game state to clients after each tick. */
   broadcasting = false;
-  /** Monotonic player number, incremented on each connect. */
-  private nextPlayerNumber = 1;
-  /** Sessions that disconnected but may reconnect within the grace period. */
-  private dormantSessions = new Map<string, ReturnType<typeof setTimeout>>();
-  private static readonly DORMANT_TIMEOUT_MS = 60_000;
-  /** How long an empty (non-default) realm stays loaded before being destroyed. */
-  private static readonly REALM_IDLE_TIMEOUT_MS = 5 * 60 * 1000;
   private serverConsole: ConsoleEngine | null = null;
   private readonly transitions = new RealmTransitions(
     (id) => this.realms.get(id),
     (session, realm) => this.saveLocation(session, realm),
     (oldId, newId) => {
       if (oldId) {
-        this.tryUnloadRealm(oldId);
+        this.realms.tryUnload(oldId);
         this.broadcastRealmPlayerCount(oldId);
       }
       if (newId !== oldId) this.broadcastRealmPlayerCount(newId);
@@ -259,7 +220,7 @@ export class GameServer {
   // They delegate to the default realm.
 
   private get activeRealm(): Realm {
-    const selectedId = this.sessions.get("local")?.realmId ?? this.defaultRealmId;
+    const selectedId = this.sessions.get("local")?.realmId ?? this.realms.defaultRealmId;
     const realm = selectedId ? this.realms.get(selectedId) : undefined;
     if (!realm) throw new Error("No active realm");
     return realm;
@@ -297,12 +258,27 @@ export class GameServer {
     this.registry = deps.registry;
     const stores = new WorldStorePool(deps.createStore);
     this.createStore = (id) => stores.realm(id, parseInteriorId(id)?.parentWorldId ?? id);
-    // Create a default realm (will be loaded with a world in init() or loadWorld())
-    const defaultRealm = new Realm([baseGameMod]);
-    // Use a sentinel key until a real world is loaded
-    defaultRealm.currentWorldId = "__default__";
-    this.realms.set("__default__", defaultRealm);
-    this.defaultRealmId = "__default__";
+    const track = <T>(operation: Promise<T>) => this.trackOperation(operation);
+    const reportStorageFailure = (error: unknown) => this.reportStorageFailure(error);
+    this.realms = new RealmDirectory({
+      registry: this.registry,
+      createStore: this.createStore,
+      track,
+      reportStorageFailure,
+    });
+    this.sessions = new SessionRegistry({
+      transport,
+      realms: this.realms,
+      track,
+      saveLocation: (session, realm) => this.saveLocation(session, realm),
+    });
+    this.residents = new ResidentTraffic({ realms: this.realms, track, reportStorageFailure });
+    this.doors = new DoorTransitions({
+      realms: this.realms,
+      sessions: this.sessions,
+      transport,
+      transitions: this.transitions,
+    });
   }
 
   async inspectWorld(
@@ -383,169 +359,103 @@ export class GameServer {
       this.handleMessage(clientId, msg);
     });
 
-    this.transport.onConnect((clientId, identity) => {
-      // Cancel any dormant cleanup timer for this clientId
-      const dormantTimer = this.dormantSessions.get(clientId);
-      if (dormantTimer) {
-        clearTimeout(dormantTimer);
-        this.dormantSessions.delete(clientId);
-      }
-
-      // Reconnection: reuse existing session and player entity
-      const existingSession = this.sessions.get(clientId);
-      if (existingSession?.retired) {
-        this.transport.send(clientId, {
-          type: "kicked",
-          reason: "This player connection is being replaced.",
-        });
-        return;
-      }
-      if (existingSession && !existingSession.realmId && !existingSession.transitioning) {
-        void this.trackOperation(this.buildRealmList())
-          .then((realms) => {
-            this.transport.send(clientId, { type: "realm-list", realms });
-          })
-          .catch((error) => {
-            console.error("[tilefun] realm list failed:", error);
-            this.transport.send(clientId, { type: "realm-list", realms: [] });
-          });
-        return;
-      }
-      if (
-        existingSession &&
-        !existingSession.retired &&
-        (existingSession.realmId || existingSession.transitioning)
-      ) {
-        const reconnect = () => {
-          if (existingSession.retired) return;
-          const realm = this.realms.get(existingSession.realmId ?? "");
-          if (!realm) return;
-          existingSession.lastProcessedInputSeq = 0;
-          existingSession.controls.reset(0);
-          existingSession.inputQueue = [];
-          this.transport.send(clientId, {
-            type: "player-assigned",
-            entityId: existingSession.player.id,
-          });
-          this.transport.send(clientId, {
-            type: "world-loaded",
-            generation: realm.generation,
-            ...(realm.interior ? { interior: realm.interior } : {}),
-            ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
-            cameraX: existingSession.player.position.wx,
-            cameraY: existingSession.player.position.wy,
-            cameraZoom: existingSession.cameraZoom,
-          });
-          realm.clearClientRevisions(clientId);
-        };
-        if (existingSession.transitioning)
-          void this.trackOperation(existingSession.transitionDone.then(reconnect));
-        else reconnect();
-        return;
-      }
-
-      // New connection: create session
-      const session = new PlayerSession(clientId);
-      const num = this.nextPlayerNumber++;
-      session.playerNumber = num;
-      session.displayName = identity?.displayName ?? `Player ${num}`;
-      if (identity) session.profileId = identity.profileId;
-      session.cursorColor = CURSOR_COLORS[(num - 1) % CURSOR_COLORS.length] ?? "#ffffff";
-
-      // Add to global sessions map
-      this.sessions.set(clientId, session);
-      if (identity) this.identify(session, identity.profileId, identity.displayName);
-
-      if (clientId === "local") {
-        // Single-player: auto-join default realm immediately
-        const realm = this.activeRealm;
-        const joining = this.locations
-          ? this.transitions.move(session, () =>
-              this.resumeDestination(session, realm.currentWorldId ?? ""),
-            )
-          : realm.addPlayer(session);
-        this.trackOperation<unknown>(joining)
-          .then(() => {
-            if (session.retired) return;
-            const realm = this.realms.get(session.realmId ?? "");
-            if (!realm) throw new Error("Player destination unavailable.");
-            console.log(
-              `[tilefun] local client connected as ${session.displayName} (${realm.sessions.size} in realm)`,
-            );
-
-            this.transport.send(clientId, {
-              type: "player-assigned",
-              entityId: session.player.id,
-            });
-            this.transport.send(clientId, {
-              type: "world-loaded",
-              generation: realm.generation,
-              ...(realm.interior ? { interior: realm.interior } : {}),
-              ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
-              cameraX: session.player.position.wx,
-              cameraY: session.player.position.wy,
-              cameraZoom: session.cameraZoom,
-            });
-          })
-          .catch((error) => {
-            this.onLoopError?.(error);
-            this.transport.send(clientId, {
-              type: "kicked",
-              reason: `Could not restore player: ${String(error)}`,
-            });
-          });
-      } else {
-        // Multiplayer: start in lobby, send realm list
-        console.log(`[tilefun] client connected: ${clientId} as ${session.displayName} (lobby)`);
-
-        void this.trackOperation(this.buildRealmList())
-          .then((realms) => {
-            this.transport.send(clientId, { type: "realm-list", realms });
-          })
-          .catch((error) => {
-            console.error("[tilefun] realm list failed:", error);
-            this.transport.send(clientId, { type: "realm-list", realms: [] });
-          });
-      }
-    });
+    this.transport.onConnect((clientId, identity) => this.connect(clientId, identity));
 
     this.transport.onDisconnect((clientId) => {
-      if (clientId === "local") return;
+      if (this.sessions.disconnect(clientId)) this.flush();
+    });
+  }
 
-      const session = this.sessions.get(clientId);
-      if (!session) return;
-
-      // Zero velocity so the dormant player entity doesn't drift
-      if (session.player?.velocity) {
-        session.player.velocity.vx = 0;
-        session.player.velocity.vy = 0;
-      }
-
+  private connect(clientId: string, identity?: ConnectionIdentity): void {
+    const admission = this.sessions.admit(clientId, identity);
+    if (admission.kind === "retired")
+      this.transport.send(clientId, {
+        type: "kicked",
+        reason: "This player connection is being replaced.",
+      });
+    else if (admission.kind === "lobby") this.sendRealmList(clientId);
+    else if (admission.kind === "rejoin") this.rejoin(admission.session);
+    else if (clientId === "local")
+      // Single-player: auto-join default realm immediately
+      this.joinLocal(admission.session);
+    else {
+      // Multiplayer: start in lobby, send realm list
       console.log(
-        `[tilefun] client disconnected: ${clientId} (${session.displayName}), dormant for ${GameServer.DORMANT_TIMEOUT_MS / 1000}s`,
+        `[tilefun] client connected: ${clientId} as ${admission.session.displayName} (lobby)`,
       );
+      this.sendRealmList(clientId);
+    }
+  }
 
-      // Keep session alive for a grace period to allow reconnection (e.g. page refresh)
-      const timer = setTimeout(() => {
-        this.dormantSessions.delete(clientId);
-        const s = this.sessions.get(clientId);
-        if (s) {
-          // Remove from whatever realm the session is in
-          if (s.realmId) {
-            const realm = this.realms.get(s.realmId);
-            if (realm) {
-              const realmId = s.realmId;
-              realm.removePlayer(clientId);
-              this.tryUnloadRealm(realmId);
-            }
-          }
-          this.sessions.delete(clientId);
-          console.log(`[tilefun] dormant session expired: ${clientId} (${s.displayName})`);
-        }
-      }, GameServer.DORMANT_TIMEOUT_MS);
+  private sendRealmList(clientId: string): void {
+    void this.trackOperation(this.realms.realmList())
+      .then((realms) => {
+        this.transport.send(clientId, { type: "realm-list", realms });
+      })
+      .catch((error) => {
+        console.error("[tilefun] realm list failed:", error);
+        this.transport.send(clientId, { type: "realm-list", realms: [] });
+      });
+  }
 
-      this.dormantSessions.set(clientId, timer);
-      this.flush();
+  /** Reconnection: reuse the existing session and player entity once any transfer settles. */
+  private rejoin(session: PlayerSession): void {
+    const reconnect = () => {
+      if (session.retired) return;
+      const realm = this.realms.get(session.realmId ?? "");
+      if (!realm) return;
+      session.lastProcessedInputSeq = 0;
+      session.controls.reset(0);
+      session.inputQueue = [];
+      this.sendWorldLoaded(session, realm);
+      realm.clearClientRevisions(session.clientId);
+    };
+    if (!session.transitioning) reconnect();
+    else
+      void this.trackOperation(session.transitionDone.then(reconnect)).catch((error) =>
+        console.error("[tilefun] reconnect after transition failed:", error),
+      );
+  }
+
+  private joinLocal(session: PlayerSession): void {
+    const realm = this.activeRealm;
+    const joining = this.locations
+      ? this.transitions.move(session, () =>
+          this.resumeDestination(session, realm.currentWorldId ?? ""),
+        )
+      : realm.addPlayer(session);
+    this.trackOperation<unknown>(joining)
+      .then(() => {
+        if (session.retired) return;
+        const realm = this.realms.get(session.realmId ?? "");
+        if (!realm) throw new Error("Player destination unavailable.");
+        console.log(
+          `[tilefun] local client connected as ${session.displayName} (${realm.sessions.size} in realm)`,
+        );
+        this.sendWorldLoaded(session, realm);
+      })
+      .catch((error) => {
+        this.onLoopError?.(error);
+        this.transport.send(session.clientId, {
+          type: "kicked",
+          reason: `Could not restore player: ${String(error)}`,
+        });
+      });
+  }
+
+  private sendWorldLoaded(session: PlayerSession, realm: Realm): void {
+    this.transport.send(session.clientId, {
+      type: "player-assigned",
+      entityId: session.player.id,
+    });
+    this.transport.send(session.clientId, {
+      type: "world-loaded",
+      generation: realm.generation,
+      ...(realm.interior ? { interior: realm.interior } : {}),
+      ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
+      cameraX: session.player.position.wx,
+      cameraY: session.player.position.wy,
+      cameraZoom: session.cameraZoom,
     });
   }
 
@@ -556,7 +466,7 @@ export class GameServer {
 
   /** Check if a session is dormant (disconnected, awaiting reconnect). */
   isDormant(clientId: string): boolean {
-    return this.dormantSessions.has(clientId);
+    return this.sessions.isDormant(clientId);
   }
 
   /** A world-scoped roster: never expose other worlds or disconnected sessions. */
@@ -635,8 +545,8 @@ export class GameServer {
   tick(dt: number): void {
     const timing = performanceMetrics.start();
     dt = 1 / TICK_RATE;
-    const dormantIds = new Set(this.dormantSessions.keys());
-    this.prepareResidentActivity(dormantIds);
+    const dormantIds = this.sessions.dormantIds();
+    this.residents.prepare(dormantIds);
     for (const realm of this.realms.values()) {
       realm.tick(
         dt,
@@ -646,7 +556,7 @@ export class GameServer {
         this.locations?.pressured ?? false,
       );
     }
-    this.crossResidentDoors();
+    this.residents.crossDoors();
     if (this.locations && !this.checkpointPending && Date.now() - this.lastCheckpoint >= 5000) {
       this.lastCheckpoint = Date.now();
       this.checkpointPending = true;
@@ -657,160 +567,15 @@ export class GameServer {
         });
     }
     this.completedTicks++;
-    this.checkIdleRealms();
+    this.realms.checkIdle(this.residents.moving);
     performanceMetrics.end("server.tick", timing);
   }
 
-  private readonly residentTransfers = new Map<string, Promise<void>>();
-
-  /** Only visited interiors near an awake street player, or a visitor whose
-   * home is occupied, receive background work. Never simulate a whole city's homes. */
-  private prepareResidentActivity(dormant: ReadonlySet<string>): void {
-    const awake = (realm: Realm) =>
-      [...realm.sessions.values()].some(
-        (s) => !dormant.has(s.clientId) && !s.debugPaused && !s.transitioning && !s.retired,
-      );
-    let nearbyRooms = 0;
-    for (const realm of this.realms.values()) {
-      realm.backgroundResidents.clear();
-      const owners = new Set<string>();
-      const parent = realm.interior ? this.realms.get(realm.interior.parentWorldId) : undefined;
-      const door = realm.interior ? buildingDoor(realm.interior).outside : undefined;
-      const nearby =
-        parent &&
-        door &&
-        nearbyRooms < 4 &&
-        [...parent.sessions.values()].some(
-          (s) =>
-            !dormant.has(s.clientId) &&
-            !s.debugPaused &&
-            !s.retired &&
-            Math.hypot(s.player.position.wx - door.wx, s.player.position.wy - door.wy) < 384,
-        );
-      if (nearby) nearbyRooms++;
-      for (const entity of realm.entityManager.entities) {
-        const r = entity.resident;
-        if (!r) continue;
-        const home = this.realms.get(r.homeRealm);
-        if (nearby || (r.place === "outside" && home && awake(home))) {
-          realm.backgroundResidents.add(entity);
-          realm.idleSince = null;
-          const owner = `resident:${entity.persistentId}`;
-          owners.add(owner);
-          const cx = Math.floor(entity.position.wx / CHUNK_SIZE_PX),
-            cy = Math.floor(entity.position.wy / CHUNK_SIZE_PX);
-          realm.streaming?.interest.set(owner, [
-            {
-              range: { minCx: cx - 1, minCy: cy - 1, maxCx: cx + 1, maxCy: cy + 1 },
-              activity: 0,
-              reason: "dependency",
-            },
-          ]);
-        }
-      }
-      realm.streaming?.interest.retainOwners(owners, "resident:");
-      if (!realm.sessions.size && !realm.backgroundResidents.size && realm.idleSince === null)
-        realm.idleSince = Date.now();
-    }
-  }
-
-  private crossResidentDoors(): void {
-    for (const realm of this.realms.values())
-      for (const entity of realm.entityManager.entities) {
-        const r = entity.resident,
-          id = entity.persistentId;
-        if (!r || !id || r.phase !== "transfer" || this.residentTransfers.has(id)) continue;
-        const crossing = this.moveResident(realm, entity)
-          .catch((error) => {
-            // An occupied/deleted doorway leaves the same resident waiting at its source.
-            if (entity.resident) {
-              delete entity.resident.transferring;
-              entity.resident.phase = "act";
-              entity.resident.elapsed = -2;
-            }
-            if (realm.saveManager?.pressured) this.reportStorageFailure(error);
-          })
-          .finally(() => this.residentTransfers.delete(id));
-        this.residentTransfers.set(id, crossing);
-        void this.trackOperation(crossing);
-      }
-  }
-
-  private async moveResident(source: Realm, entity: Entity): Promise<void> {
-    const r = entity.resident;
-    if (!r) throw new Error("Missing resident behavior");
-    r.transferring = true;
-    const home = await this.getOrCreateRealm(r.homeRealm);
-    if (!home.interior) throw new Error("Resident home is unavailable");
-    const door = buildingDoor(home.interior, r.doorId);
-    const destination = r.place === "inside" ? await this.getOrCreateRealm(r.parentRealm) : home;
-    const position = destination.interior ? door.arrival : door.outside;
-    const cx = Math.floor(position.wx / CHUNK_SIZE_PX),
-      cy = Math.floor(position.wy / CHUNK_SIZE_PX);
-    await destination.ensureReady({ minCx: cx - 1, minCy: cy - 1, maxCx: cx + 1, maxCy: cy + 1 });
-    await transferResident(source, destination, entity, position);
-  }
-
-  /**
-   * Get or create a realm for the given worldId.
-   * If a realm is already loaded for this world, returns it.
-   * Otherwise, creates a new Realm and loads the world into it.
-   */
-  private async getOrCreateRealm(worldId: string): Promise<Realm> {
-    const retiring = this.retiringRealms.get(worldId);
-    if (retiring) await retiring;
-    const existing = this.realms.get(worldId);
-    if (existing) {
-      if (!existing.sessions.size) existing.idleSince = Date.now();
-      return existing;
-    }
-
-    const pending = this.loadingRealms.get(worldId);
-    if (pending) return pending;
-    const loading = (async () => {
-      const realm = new Realm([baseGameMod]);
-      try {
-        await realm.loadWorld(
-          worldId,
-          this.registry,
-          this.createStore,
-          await this.realmMetadata(worldId),
-        );
-        realm.idleSince = Date.now();
-        this.realms.set(worldId, realm);
-        return realm;
-      } catch (error) {
-        await realm.destroy();
-        throw error;
-      }
-    })();
-    this.loadingRealms.set(worldId, loading);
-    try {
-      return await loading;
-    } finally {
-      this.loadingRealms.delete(worldId);
-    }
-  }
-
-  /**
-   * Load a world into the default realm (used during init and for backward compat).
-   * Re-keys the realm in the map from its old key to the new worldId.
-   */
-  private async loadWorldIntoDefaultRealm(
+  /** Load a world into the default realm (used during init and for backward compat). */
+  private loadWorldIntoDefaultRealm(
     worldId: string,
   ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
-    await this.realmMetadata(worldId);
-    const realm = this.activeRealm;
-
-    // Re-key in the realms map
-    if (this.defaultRealmId && this.defaultRealmId !== worldId) {
-      this.realms.delete(this.defaultRealmId);
-    }
-    this.realms.set(worldId, realm);
-    this.defaultRealmId = worldId;
-
-    const cam = await realm.loadWorld(worldId, this.registry, this.createStore);
-    return cam;
+    return this.realms.loadIntoDefault(worldId, () => this.activeRealm);
   }
 
   private async saveLocation(session: PlayerSession, realm: Realm): Promise<void> {
@@ -824,400 +589,17 @@ export class GameServer {
     });
   }
 
-  /** Takeovers serialize behind the old connection's transfer before reading its location. */
-  private identify(session: PlayerSession, profileId?: string, displayName?: string): void {
-    if (profileId) {
-      if (session.profileId && session.profileId !== profileId) {
-        this.transport.send(session.clientId, {
-          type: "kicked",
-          reason: "Reconnect to change player profile.",
-        });
-        return;
-      }
-      session.profileId = profileId;
-      const replaced = [...this.sessions.values()].filter(
-        (other) => other !== session && other.profileId === profileId && !other.retired,
-      );
-      for (const other of replaced) other.retired = true;
-      if (replaced.length)
-        session.identityReady = this.trackOperation(
-          (async () => {
-            try {
-              for (const other of replaced) {
-                await other.identityReady;
-                await other.transitionDone;
-                const realm = this.realms.get(other.realmId ?? "");
-                if (realm) {
-                  await realm.flushAsync();
-                  await this.saveLocation(other, realm);
-                  realm.removePlayer(other.clientId);
-                }
-                if (this.sessions.get(other.clientId) === other)
-                  this.sessions.delete(other.clientId);
-                const timer = this.dormantSessions.get(other.clientId);
-                if (timer) clearTimeout(timer);
-                this.dormantSessions.delete(other.clientId);
-                this.transport.send(other.clientId, {
-                  type: "kicked",
-                  reason: "Logged in from another connection",
-                });
-              }
-            } catch (error) {
-              // Save failure must leave the old live player usable, not silently evict it.
-              for (const other of replaced)
-                if (this.sessions.get(other.clientId) === other) other.retired = false;
-              session.retired = true;
-              if (this.sessions.get(session.clientId) === session)
-                this.sessions.delete(session.clientId);
-              this.transport.send(session.clientId, {
-                type: "kicked",
-                reason: "Could not save the previous connection. Try again.",
-              });
-              throw error;
-            }
-          })(),
-        );
-    }
-    if (
-      displayName &&
-      ![...this.sessions.values()].some(
-        (other) => other !== session && !other.retired && other.displayName === displayName,
-      )
-    )
-      session.displayName = displayName;
-  }
-
-  private async resumeDestination(
-    session: PlayerSession,
-    fallbackId: string,
-  ): Promise<RealmDestination> {
-    const saved = await this.locations?.load(session.profileId || session.clientId);
-    if (saved) {
-      let meta: WorldMeta | undefined;
-      try {
-        meta = await this.realmMetadata(saved.realmId);
-      } catch (error) {
-        console.warn("[tilefun] Saved player destination is unavailable", error);
-      }
-      if (
-        meta &&
-        (meta.interior?.parentWorldId ?? meta.id) === saved.parentWorldId &&
-        descriptorKey(descriptorFromMetadata(meta)) === descriptorKey(saved.generation)
-      ) {
-        let realm: Realm | undefined;
-        try {
-          realm = await this.getOrCreateRealm(saved.realmId);
-        } catch (error) {
-          if (!(error instanceof InvalidInteriorError)) throw error;
-          console.warn("[tilefun] Saved interior is invalid", error);
-        }
-        if (realm)
-          try {
-            const arrival = {
-              x: saved.player.x / TILE_SIZE,
-              y: saved.player.y / TILE_SIZE,
-              generation: realm.generation,
-            };
-            const position = await safeArrival(realm, arrival);
-            const exact = position.wx === saved.player.x && position.wy === saved.player.y;
-            return {
-              realm,
-              allowInterior: true,
-              // Resume exact saved progress, including moving-roof support. A relocated
-              // fallback is explicit ground travel and must discard that old support.
-              ...(exact ? {} : { arrival }),
-              savedPlayer: saved.player,
-              returnLocation: saved.player.returnLocation ?? null,
-            };
-          } catch (error) {
-            console.warn("[tilefun] Saved player position is invalid", error);
-          }
-      }
-      // A removed/invalid interior falls back to its parent, never another player's latest world.
-      const savedParent = await this.registry.getWorld(saved.parentWorldId);
-      if (savedParent && !worldCompatibility(savedParent)) {
-        const realm = await this.getOrCreateRealm(saved.parentWorldId);
-        const fallback = saved.player.returnLocation;
-        if (fallback?.worldId === saved.parentWorldId) {
-          try {
-            await safeArrival(realm, fallback);
-            return { realm, arrival: fallback, returnLocation: null };
-          } catch {
-            /* Use the parent's saved visit if its old doorway is no longer safe. */
-          }
-        }
-        return { realm, returnLocation: null };
-      }
-    }
-    return { realm: await this.getOrCreateRealm(fallbackId), returnLocation: null };
-  }
-
-  private async realmMetadata(worldId: string): Promise<WorldMeta | undefined> {
-    const known = await this.registry.getWorld(worldId);
-    if (known) {
-      if (worldCompatibility(known)) throw new Error(worldCompatibility(known));
-      return known;
-    }
-    const parsed = parseInteriorId(worldId);
-    if (!parsed) return undefined;
-    const parent = await this.registry.getWorld(parsed.parentWorldId);
-    if (!parent) throw new Error("Parent world not found.");
-    if (worldCompatibility(parent)) throw new Error(worldCompatibility(parent));
-    const generation = descriptorFromMetadata(parent);
-    if (generation.type !== "regional")
-      throw new Error("This generator has no enterable building plans.");
-    const terrain = createGenerator(generation).terrain;
-    if (!(terrain instanceof DistrictStrategy))
-      throw new Error("World has no enterable districts.");
-    const farm = /^farmstead:(-?\d+):(-?\d+):(east|south):(?:house|shed)$/.exec(parsed.featureId);
-    const lot = (() => {
-      if (farm) {
-        const plan = new FarmsteadSource(terrain.world).owner(
-          Number(farm[1]),
-          Number(farm[2]),
-          farm[3] as "east" | "south",
-        );
-        const prop = plan?.props.find((p) => p.featureId === parsed.featureId);
-        const entrance =
-          prop &&
-          exteriorEntrance({
-            type: prop.propType,
-            position: { wx: prop.wx, wy: prop.wy },
-          });
-        return prop && entrance
-          ? {
-              buildingType: prop.propType,
-              anchor: { x: prop.wx / TILE_SIZE, y: prop.wy / TILE_SIZE },
-              entrance: { x: entrance.wx / TILE_SIZE, y: entrance.wy / TILE_SIZE },
-            }
-          : undefined;
-      }
-      const match = /^settlement:(-?\d+):(-?\d+):/.exec(parsed.featureId);
-      if (!match) throw new Error("Invalid building owner.");
-      return districtBuilding(
-        terrain.districts.owner(Number(match[1]), Number(match[2])),
-        parsed.featureId,
-      );
-    })();
-    if (!lot) throw new Error("Building is absent from the generated plan.");
-    const interior: InteriorIdentity = withLivedInLayout(
-      {
-        version: "interior-v1",
-        ...parsed,
-        buildingType: lot.buildingType,
-        floor: 0,
-        returnX: lot.entrance.x,
-        returnY: lot.entrance.y,
-      },
-      { wx: lot.anchor.x * TILE_SIZE, wy: lot.anchor.y * TILE_SIZE },
+  private resumeDestination(session: PlayerSession, fallbackId: string) {
+    return resumeDestination(
+      { locations: this.locations, registry: this.registry, realms: this.realms },
+      session,
+      fallbackId,
     );
-    return {
-      ...parent,
-      id: worldId,
-      name: lot.buildingType,
-      generation: createDescriptor("flat", generation.seed),
-      interior,
-    };
-  }
-
-  private async enterBuilding(
-    session: PlayerSession,
-    featureId: string,
-    doorId = "street",
-    walkThrough = false,
-  ): Promise<void> {
-    let overlay: DoorMotion["overlay"];
-    await this.transitions.move(session, async () => {
-      const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
-      if (!realm || realm.interior || !realm.currentWorldId)
-        throw new Error("No exterior world selected.");
-      realm.realizeProceduralProps();
-      const prop = realm.propManager.props.find((p) => p.proceduralId === featureId);
-      if (!prop || !exteriorEntrance(prop)) throw new Error("Building is unavailable.");
-      if (walkThrough) {
-        const threshold = exteriorDoors(prop).find((d) => d.id === doorId)?.outside;
-        if (!threshold) throw new Error("Unknown building door.");
-        this.validateDoorApproach(session, threshold, true);
-      }
-      const destination = await this.getOrCreateRealm(
-        interiorRealmId(realm.currentWorldId, featureId),
-      );
-      if (!destination.interior) throw new Error("Building interior unavailable.");
-      // Older rooms keep their single physical exit. A newly discoverable facade
-      // door can still enter that saved room through its original landing.
-      const legacyAlias =
-        !destination.interior.layout &&
-        !destination.interior.doors?.some((door) => door.id === doorId) &&
-        exteriorDoors(prop).some((door) => door.id === doorId);
-      const connection = buildingDoor(destination.interior, legacyAlias ? "street" : doorId);
-      const door =
-        exteriorDoors(prop).find((door) => door.id === doorId)?.outside ?? connection.outside;
-      if (
-        Math.hypot(session.player.position.wx - door.wx, session.player.position.wy - door.wy) >
-          32 ||
-        (session.player.wz ?? 0) > 8
-      )
-        throw new Error("Stand near the building entrance to enter.");
-      if (walkThrough) {
-        if (prop.type.includes("butcher"))
-          overlay = { kind: "butcher", wx: door.wx, wy: prop.position.wy };
-      }
-      return {
-        ...(walkThrough
-          ? {
-              beforeTransfer: () => this.departDoor(session, exteriorDoorWalkAnchor(door), overlay),
-            }
-          : {}),
-        realm: destination,
-        allowInterior: true,
-        arrival: {
-          x: connection.arrival.wx / TILE_SIZE,
-          y: connection.arrival.wy / TILE_SIZE,
-          generation: destination.generation,
-        },
-        returnLocation: {
-          worldId: realm.currentWorldId,
-          x: door.wx / 16,
-          y: door.wy / 16,
-          generation: realm.generation,
-        },
-      };
-    });
-    if (walkThrough) this.arriveDoor(session, true);
-  }
-
-  private async exitBuilding(
-    session: PlayerSession,
-    doorId = "street",
-    walkThrough = false,
-  ): Promise<void> {
-    let overlay: DoorMotion["overlay"];
-    let emergence: DoorMotion["from"] | undefined;
-    await this.transitions.move(session, async () => {
-      const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
-      if (!realm?.interior) throw new Error("You are not in an interior.");
-      const connection = buildingDoor(realm.interior, doorId);
-      if (
-        Math.hypot(
-          session.player.position.wx - connection.inside.wx,
-          session.player.position.wy - connection.inside.wy,
-        ) > 40
-      )
-        throw new Error("Return to the interior doorway to leave.");
-      if (walkThrough) this.validateDoorApproach(session, connection.inside, false);
-      const parent = await this.getOrCreateRealm(realm.interior.parentWorldId);
-      parent.realizeProceduralProps();
-      const prop = parent.propManager.props.find(
-        (p) => p.proceduralId === realm.interior?.featureId,
-      );
-      const outside =
-        (prop ? exteriorDoors(prop).find((door) => door.id === doorId)?.outside : undefined) ??
-        connection.outside;
-      emergence = exteriorDoorWalkAnchor(outside);
-      const position = {
-        worldId: connection.outsideRealmId,
-        x: outside.wx / TILE_SIZE,
-        y: outside.wy / TILE_SIZE,
-        generation: parent.generation,
-      };
-      return {
-        ...(walkThrough
-          ? {
-              beforeTransfer: () => {
-                // SafeArrival has now loaded the outdoor chunks. The facade may
-                // have been evicted while everyone was inside the building.
-                const facade = parent.propManager.props.find(
-                  (p) => p.proceduralId === realm.interior?.featureId,
-                );
-                if (facade?.type.includes("butcher"))
-                  overlay = { kind: "butcher", wx: outside.wx, wy: facade.position.wy };
-                return this.departDoor(session, {
-                  wx: connection.inside.wx,
-                  wy: connection.inside.wy + 16,
-                });
-              },
-            }
-          : {}),
-        realm: await this.getOrCreateRealm(position.worldId),
-        arrival: position,
-        returnLocation: null,
-      };
-    });
-    if (walkThrough) this.arriveDoor(session, false, overlay, emergence);
-  }
-
-  private validateDoorApproach(
-    session: PlayerSession,
-    door: { wx: number; wy: number },
-    entering: boolean,
-  ) {
-    if (
-      session.editorEnabled ||
-      session.gameplaySession.mountId !== null ||
-      Date.now() < session.doorArrivalUntil ||
-      (session.player.wz ?? 0) > 1 ||
-      Date.now() - session.doorIntent.at > 500 ||
-      !towardDoor(session.doorIntent.dx, session.doorIntent.dy, entering) ||
-      // Allow one tile of prediction lead along the approach, never sideways.
-      !atDoorThreshold(session.player.position, door, entering, TILE_SIZE)
-    )
-      throw new Error("Walk toward the doorway to enter.");
-  }
-  private sendDoorMotion(
-    session: PlayerSession,
-    phase: DoorMotion["phase"],
-    from: DoorMotion["from"],
-    to: DoorMotion["to"],
-    overlay?: DoorMotion["overlay"],
-    revealMs?: number,
-  ) {
-    for (const recipient of this.sessions.values()) {
-      if (recipient.realmId !== session.realmId || recipient.retired) continue;
-      this.transport.send(recipient.clientId, {
-        type: "door-motion",
-        phase,
-        actorId: session.player.id,
-        actorClientId: session.clientId,
-        realmId: session.realmId ?? "",
-        self: recipient === session,
-        from,
-        to,
-        duration: DOOR_WALK_MS,
-        ...(revealMs && recipient === session ? { revealMs } : {}),
-        ...(overlay ? { overlay } : {}),
-      });
-    }
-  }
-  private async departDoor(
-    session: PlayerSession,
-    to: DoorMotion["to"],
-    overlay?: DoorMotion["overlay"],
-  ) {
-    const from = { ...session.player.position };
-    session.player.velocity = { vx: 0, vy: 0 };
-    session.inputQueue = [];
-    this.sendDoorMotion(session, "depart", from, to, overlay);
-    // Presentation only: durable authority remains at the collision-checked source.
-    // This bounded wait also settles during dev reload/shutdown; it needs no simulation ticks.
-    await new Promise((resolve) => setTimeout(resolve, DOOR_WALK_MS + DOOR_FADE_MS));
-  }
-  private arriveDoor(
-    session: PlayerSession,
-    entering: boolean,
-    overlay?: DoorMotion["overlay"],
-    emergence?: DoorMotion["from"],
-  ) {
-    const to = { ...session.player.position };
-    const from = emergence ?? { wx: to.wx, wy: to.wy + (entering ? 16 : -16) };
-    session.doorArrivalUntil = Date.now() + DOOR_WALK_MS + DOOR_FADE_MS;
-    session.inputQueue = [];
-    session.player.velocity = { vx: 0, vy: 0 };
-    this.sendDoorMotion(session, "arrive", from, to, overlay, emergence ? DOOR_FADE_MS : undefined);
   }
 
   private movePlayerToRealm(session: PlayerSession, worldId: string, arrival?: Arrival) {
     return this.transitions.move(session, async () => ({
-      realm: await this.getOrCreateRealm(worldId),
+      realm: await this.realms.getOrCreate(worldId),
       ...(arrival ? { arrival } : {}),
       returnLocation: null,
     }));
@@ -1242,59 +624,6 @@ export class GameServer {
         cameraZoom: session.cameraZoom,
       };
     };
-  }
-
-  /**
-   * Mark a non-default realm as idle when it has no players.
-   * The realm stays loaded for REALM_IDLE_TIMEOUT_MS to allow quick rejoin.
-   * Actual cleanup happens in checkIdleRealms() during tick().
-   */
-  private tryUnloadRealm(worldId: string): void {
-    if (worldId === this.defaultRealmId) return;
-    const realm = this.realms.get(worldId);
-    if (!realm || realm.sessions.size > 0) return;
-
-    // Realm.removePlayer already sets idleSince — just log for visibility
-    console.log(
-      `[tilefun] realm idle, will unload in ${GameServer.REALM_IDLE_TIMEOUT_MS / 1000}s: ${worldId}`,
-    );
-  }
-
-  /**
-   * Check all non-default realms for idle timeout expiration and destroy them.
-   * Called from tick().
-   */
-  private checkIdleRealms(): void {
-    const now = Date.now();
-    for (const [worldId, realm] of this.realms) {
-      if (worldId === this.defaultRealmId) continue;
-      if (realm.idleSince === null) continue;
-      if (
-        this.residentTransfers.size ||
-        realm.backgroundResidents.size ||
-        [...realm.entityManager.entities].some((e) => e.resident?.transferring)
-      )
-        continue;
-      if (now - realm.idleSince >= GameServer.REALM_IDLE_TIMEOUT_MS) {
-        console.log(`[tilefun] unloading idle realm: ${worldId}`);
-        realm.idleSince = null;
-        const retiring = (async () => {
-          try {
-            await realm.flushAsync();
-            if (realm.sessions.size) return;
-            await realm.destroy();
-            this.realms.delete(worldId);
-          } catch (error) {
-            realm.idleSince = Date.now();
-            throw error;
-          }
-        })();
-        this.retiringRealms.set(worldId, retiring);
-        void this.trackOperation(retiring.finally(() => this.retiringRealms.delete(worldId))).catch(
-          (error) => this.reportStorageFailure(error),
-        );
-      }
-    }
   }
 
   /**
@@ -1340,8 +669,8 @@ export class GameServer {
       ([key, realm]) => key === id || realm.interior?.parentWorldId === id,
     );
     const fallback =
-      this.defaultRealmId && this.defaultRealmId !== id
-        ? this.defaultRealmId
+      this.realms.defaultRealmId && this.realms.defaultRealmId !== id
+        ? this.realms.defaultRealmId
         : ((await this.registry.listWorlds()).find((w) => w.id !== id && !worldCompatibility(w))
             ?.id ?? null);
     for (const [, realm] of affected)
@@ -1371,7 +700,7 @@ export class GameServer {
       await realm.destroy();
       this.realms.delete(key);
     }
-    if (this.defaultRealmId === id) this.defaultRealmId = fallback;
+    if (this.realms.defaultRealmId === id) this.realms.defaultRealmId = fallback;
     await this.registry.deleteWorld(id);
   }
 
@@ -1383,41 +712,18 @@ export class GameServer {
     await this.registry.renameWorld(id, name);
   }
 
-  /** Build a RealmInfo list: all registered worlds with live player counts. */
-  private async buildRealmList(): Promise<RealmInfo[]> {
-    const worlds = await this.registry.listWorlds();
-    return worlds.map((w): RealmInfo => {
-      const info: RealmInfo = {
-        id: w.id,
-        name: w.name,
-        playerCount: this.realms.get(w.id)?.sessions.size ?? 0,
-        createdAt: w.createdAt,
-        lastPlayedAt: w.lastPlayedAt,
-      };
-      info.incompatibleReason = worldCompatibility(w);
-      info.generation = descriptorFromMetadata(w);
-      return info;
-    });
-  }
-
   /** Broadcast realm-player-count to all connected non-dormant clients. */
   private broadcastRealmPlayerCount(worldId: string): void {
     const realm = this.realms.get(worldId);
     const count = realm?.sessions.size ?? 0;
-    const dormantIds = new Set(this.dormantSessions.keys());
-    for (const [cid] of this.sessions) {
-      if (dormantIds.has(cid)) continue;
+    for (const cid of this.sessions.awakeClientIds())
       this.transport.send(cid, { type: "realm-player-count", worldId, count });
-    }
   }
 
   /** Broadcast a chat message to all connected (non-dormant) clients. */
   broadcastChat(sender: string, text: string): void {
-    const dormantIds = new Set(this.dormantSessions.keys());
-    for (const [cid] of this.sessions) {
-      if (dormantIds.has(cid)) continue;
+    for (const cid of this.sessions.awakeClientIds())
       this.transport.send(cid, { type: "chat", sender, text });
-    }
   }
 
   async flushAsync(): Promise<void> {
@@ -1459,8 +765,7 @@ export class GameServer {
 
   async destroy(): Promise<void> {
     this.stopLoop();
-    for (const timer of this.dormantSessions.values()) clearTimeout(timer);
-    this.dormantSessions.clear();
+    this.sessions.clearDormant();
     await this.settle();
     const realms = [...this.realms.values()];
     await Promise.all(realms.map((realm) => realm.streaming?.close()));
@@ -1470,7 +775,7 @@ export class GameServer {
       for (const realm of realms) realm.streaming?.resume();
       throw error;
     }
-    for (const [id, realm] of this.realms) {
+    for (const [id, realm] of this.realms.entries()) {
       await realm.destroy();
       this.realms.delete(id);
     }
@@ -1538,15 +843,15 @@ export class GameServer {
       ),
     "enter-building": ({ msg, session, respond }) =>
       respond(
-        () => this.enterBuilding(session, msg.featureId, msg.doorId, msg.walkThrough),
+        () => this.doors.enter(session, msg.featureId, msg.doorId, msg.walkThrough),
         this.arrival(session),
       ),
     "exit-building": ({ msg, session, respond }) =>
-      respond(() => this.exitBuilding(session, msg.doorId, msg.walkThrough), this.arrival(session)),
+      respond(() => this.doors.exit(session, msg.doorId, msg.walkThrough), this.arrival(session)),
     "leave-realm": ({ session, respond }) => respond(() => this.leaveRealm(session), noFields),
     "list-realms": ({ respond }) =>
       respond(
-        () => this.buildRealmList(),
+        () => this.realms.realmList(),
         (realms) => ({ realms }),
       ),
     "create-world": ({ msg, respond }) =>
@@ -1600,7 +905,7 @@ export class GameServer {
     const realm = this.realms.get(leftRealmId);
     if (realm) {
       realm.removePlayer(session.clientId);
-      this.tryUnloadRealm(leftRealmId);
+      this.realms.tryUnload(leftRealmId);
     }
     this.broadcastRealmPlayerCount(leftRealmId);
   }
@@ -1618,7 +923,7 @@ export class GameServer {
   }
 
   private identifyModel(session: PlayerSession, msg: Extract<ClientMessage, { type: "identify" }>) {
-    this.identify(session, msg.profileId, msg.displayName);
+    this.sessions.identify(session, msg.profileId, msg.displayName);
     if (!msg.profileId || session.profileId === msg.profileId) {
       session.playerModel = normalizePlayerModel(msg.playerModel);
       if (session.player) applyPlayerModel(session.player, session.playerModel);

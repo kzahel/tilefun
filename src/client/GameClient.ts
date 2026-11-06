@@ -1,5 +1,5 @@
 import { loadAtlasIndex } from "../assets/AtlasIndex.js";
-import { loadGameAssets } from "../assets/GameAssets.js";
+import { type GameAssets, loadGameAssets } from "../assets/GameAssets.js";
 import { generateGemSprite } from "../assets/GemSpriteGenerator.js";
 import {
   loadModernInteriorsAtlasIndex,
@@ -9,13 +9,10 @@ import { Spritesheet } from "../assets/Spritesheet.js";
 import { AudioManager } from "../audio/AudioManager.js";
 import { buildAudioManifest } from "../audio/SurfaceType.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
-import { applyPlayerModel, normalizePlayerModel } from "../characters/PlayerModels.js";
+import { normalizePlayerModel } from "../characters/PlayerModels.js";
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { ConsoleUI } from "../console/ConsoleUI.js";
-import { registerClientCommands } from "../console/clientCommands.js";
-import { registerClientCVars } from "../console/clientCVars.js";
-import { registerServerCommandStubs } from "../console/serverCommandStubs.js";
 import { GameLoop } from "../core/GameLoop.js";
 import type { GameContext } from "../core/GameScene.js";
 import { SceneManager } from "../core/SceneManager.js";
@@ -25,45 +22,27 @@ import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { EditorMode } from "../editor/EditorMode.js";
 import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
-import { captureIdea, type IdeaSnapshot } from "../ideas/captureIdea.js";
-import { ideaToast, startIdeaDelivery } from "../ideas/IdeaDialog.js";
+import { startIdeaDelivery } from "../ideas/IdeaDialog.js";
 import { createCanvasRenderHost } from "../rendering/CanvasRenderHost.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
-import {
-  type CarDrivingStyle,
-  carDrivingStyle,
-  DEFAULT_CAR_DRIVING,
-} from "../traffic/CarControls.js";
-import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
+import { type CarDrivingStyle, carDrivingStyle } from "../traffic/CarControls.js";
 import { finishStartup, showStartupAssets, showStartupStage } from "../ui/StartupProgress.js";
-import { requestSessionNavigation } from "../ui/sessionNavigation.js";
 import { DoorPresentation } from "./DoorPresentation.js";
 import type { GameTestHooks } from "./GameTestHooks.js";
-import { type ReloadCamera, readReloadCamera } from "./ReloadCamera.js";
+import { readReloadCamera } from "./ReloadCamera.js";
 import "../editor/EditorPanel.css";
 import { InteriorCatalog, type InteriorCatalogRouteState } from "../editor/InteriorCatalog.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
-import { isBefriendHit } from "../game/playInteraction.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { descriptorChoice, type GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import { ActionManager } from "../input/ActionManager.js";
-import { inputHint } from "../input/InputHints.js";
-import {
-  TapMovement,
-  type TapTarget,
-  type TouchMovementMode,
-  touchMovementMode,
-} from "../input/TapMovement.js";
-import { TouchButtons } from "../input/TouchButtons.js";
-import { TouchHold } from "../input/TouchHold.js";
-import { TouchJoystick } from "../input/TouchJoystick.js";
-import { TouchPinch } from "../input/TouchPinch.js";
-import { TouchTap } from "../input/TouchTap.js";
-import { TrainTapMovement } from "../input/TrainTapMovement.js";
+import type { TapMovement, TouchMovementMode } from "../input/TapMovement.js";
+import { touchMovementMode } from "../input/TapMovement.js";
+import type { TouchButtons } from "../input/TouchButtons.js";
+import type { TouchJoystick } from "../input/TouchJoystick.js";
 import { interiorRealmId } from "../interiors/GameplayInterior.js";
-import { isTrain } from "../railway/Train.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
 import { cameraPixelSnap } from "../rendering/PresentationSettings.js";
@@ -73,32 +52,27 @@ import { EditScene } from "../scenes/EditScene.js";
 import { InteriorCatalogScene } from "../scenes/InteriorCatalogScene.js";
 import { MenuScene } from "../scenes/MenuScene.js";
 import { PlayScene } from "../scenes/PlayScene.js";
-import { PropEditorScene } from "../scenes/PropEditorScene.js";
 import { WorldMapScene } from "../scenes/WorldMapScene.js";
-import type { Arrival, ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
-import {
-  ACTIVE_PROFILE_KEY,
-  HMR_KEY,
-  LAST_WORLD_KEY,
-  TAB_SESSION_KEY,
-} from "../shared/storageKeys.js";
-import { occupiedVehicle } from "../traffic/VehicleSeats.js";
+import { HMR_KEY } from "../shared/storageKeys.js";
 import { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransport.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { ChatHUD } from "../ui/ChatHUD.js";
 import { DoorControl } from "../ui/DoorControl.js";
 import { GemHUD } from "../ui/GemHUD.js";
 import { MainMenu } from "../ui/MainMenu.js";
-import { OptionsDialog } from "../ui/OptionsDialog.js";
-import { ProfilePicker } from "../ui/ProfilePicker.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
 import { WorldMap } from "../ui/WorldMap.js";
 import { World } from "../world/World.js";
 import { XRSessionManager } from "../xr/XRSessionManager.js";
 import { takeAdminToken } from "./adminToken.js";
+import { registerClientConsole } from "./ClientConsoleBindings.js";
 import { RemoteStateView } from "./ClientStateView.js";
+import { GameMenuChrome, type MenuChromeHost } from "./GameMenuChrome.js";
+import { PlayInputController, type PlayInputHost } from "./PlayInputController.js";
 import { RequestBroker } from "./RequestBroker.js";
+import { type ServerMessageHost, ServerMessageRouter } from "./ServerMessageRouter.js";
+import { WorldSessionActions, type WorldSessionHost } from "./WorldSessionActions.js";
 
 export interface GameClientOptions {
   /** Platform renderer selection; simulation and presentation stay shared. */
@@ -131,30 +105,13 @@ export interface GameClientOptions {
   clientId?: string;
 }
 
+/**
+ * Browser client composition: owns the render host, transport, scenes and UI
+ * components, and wires play input ({@link PlayInputController}), server
+ * message routing ({@link ServerMessageRouter}), world/session operations
+ * ({@link WorldSessionActions}) and menu chrome ({@link GameMenuChrome}).
+ */
 export class GameClient implements GameTestHooks {
-  private storagePaused = false;
-  private storageNotice: HTMLDivElement | undefined;
-  private storageNoticeTimer: ReturnType<typeof setTimeout> | undefined;
-  private showStorageStatus(message: string, paused: boolean): void {
-    this.storagePaused = paused;
-    clearTimeout(this.storageNoticeTimer);
-    if (!message) {
-      this.storageNotice?.remove();
-      this.storageNotice = undefined;
-      return;
-    }
-    const notice = this.storageNotice ?? document.createElement("div");
-    notice.dataset.testid = "storage-status";
-    notice.setAttribute("role", "status");
-    notice.style.cssText =
-      "position:fixed;top:12px;left:50%;transform:translateX(-50%);z-index:10000;background:#312619;color:#fff;padding:12px 20px;border:1px solid #edbd73;border-radius:8px;max-width:85vw;text-align:center;font:16px sans-serif;pointer-events:none";
-    notice.textContent = message;
-    document.body.append(notice);
-    this.storageNotice = notice;
-    if (!paused)
-      this.storageNoticeTimer = setTimeout(() => this.showStorageStatus("", false), 6000);
-  }
-
   readonly performanceMetrics = performanceMetrics;
   readonly canvas: HTMLCanvasElement;
   private stopIdeaDelivery: (() => void) | undefined;
@@ -170,34 +127,24 @@ export class GameClient implements GameTestHooks {
     allCars3d: new URLSearchParams(location.search).has("allcars3d"),
   });
   private actions: ActionManager;
+  private readonly playInput: PlayInputController;
   readonly touchJoystick: TouchJoystick;
   readonly touchButtons: TouchButtons;
-  readonly tapMovement = new TapMovement();
-  private touchPinch: TouchPinch;
-  private pinchZoom = false;
-  private touchTap: TouchTap;
-  private touchHold: TouchHold;
-  private optionsDialog: OptionsDialog;
-  private optionsButton: HTMLButtonElement | null = null;
-  private hamburgerOpen = false;
-  private focusPaused = false;
-  private lastTouchAt = -Infinity;
-  private movementMode: TouchMovementMode = "joystick";
-  private carDriving: CarDrivingStyle = DEFAULT_CAR_DRIVING;
+  readonly tapMovement: TapMovement;
+  private readonly chrome: GameMenuChrome;
+  private readonly session: WorldSessionActions;
+  private readonly router: ServerMessageRouter;
   readonly debugPanel: DebugPanel;
   readonly editorMode: EditorMode;
   readonly editorModel: EditorModel;
   readonly editorPanel: EditorPanel;
   readonly mainMenu: MainMenu;
   private worldMap: WorldMap;
-  private mapButton: HTMLButtonElement | null = null;
   private propCatalog: PropCatalog;
   private interiorCatalog: InteriorCatalog;
   readonly stateView: RemoteStateView;
   readonly transport: IClientTransport;
   readonly netEmulatedTransport: NetEmulatedClientTransport;
-  private autoJoinRealm: boolean;
-  private reloadCamera: ReloadCamera | null;
   private scenes: SceneManager;
   readonly time: Time;
   readonly consoleEngine: ConsoleEngine;
@@ -208,28 +155,16 @@ export class GameClient implements GameTestHooks {
   private xrManager = new XRSessionManager();
 
   // Mutable state exposed via GameContext
-  private editorButton: HTMLButtonElement | null = null;
   private gemSpriteCanvas: HTMLCanvasElement | null = null;
   readonly gemHUD = new GemHUD();
   private debugEnabled = false;
-
-  /** Guard to prevent concurrent toggleMenu() calls from pushing duplicate MenuScenes. */
-  private menuOpening = false;
-  /** Last applied tick rate from server (for change detection). */
 
   /** Request/response correlation. */
   nextRequestId = 1;
   private readonly requests: RequestBroker;
 
-  private lastVisibleRangeKey: string | null = null;
-  /** Last debug flag key sent to server. */
-  private lastDebugStateKey: string | null = null;
-
-  /** Realm list received while in lobby (multiplayer connect flow). */
-  private lobbyRealmList: RealmInfo[] | null = null;
   private doorControl: DoorControl;
   private vehicleControl: VehicleControl;
-  private trainTapMovement = new TrainTapMovement();
   private doorPresentation = new DoorPresentation();
   /** True once init() has completed and we're ready to show UI. */
   initDone = false;
@@ -255,14 +190,19 @@ export class GameClient implements GameTestHooks {
     this.transport.onDisconnect?.(() => {
       this.requests.disconnect();
       this.doorPresentation.cancel();
-      this.clearPlayInput();
+      this.playInput.clearPlayInput();
     });
-    this.autoJoinRealm = options?.autoJoinRealm ?? false;
+    const autoJoinRealm = options?.autoJoinRealm ?? false;
     this.profile = options?.profile ?? null;
-    this.movementMode = touchMovementMode(this.profile?.touchMovement);
-    this.pinchZoom = this.profile?.pinchZoom === true;
-    this.carDriving = carDrivingStyle(this.profile?.carDriving);
-    this.reloadCamera = readReloadCamera(sessionStorage.getItem(HMR_KEY), this.profile?.id ?? null);
+    const inputSettings = {
+      movementMode: touchMovementMode(this.profile?.touchMovement),
+      pinchZoom: this.profile?.pinchZoom === true,
+      carDriving: carDrivingStyle(this.profile?.carDriving),
+    };
+    const reloadCamera = readReloadCamera(
+      sessionStorage.getItem(HMR_KEY),
+      this.profile?.id ?? null,
+    );
     this.profileStore = options?.profileStore;
     this.clientId = options?.clientId ?? "local";
     this.camera = new Camera();
@@ -271,53 +211,17 @@ export class GameClient implements GameTestHooks {
     if (new URLSearchParams(window.location.search).has("nogamepad")) {
       this.actions.disableGamepad();
     }
-    this.touchJoystick = new TouchJoystick(canvas);
-    this.touchButtons = new TouchButtons(canvas);
-    this.touchTap = new TouchTap(
+    this.playInput = new PlayInputController(
       canvas,
-      this.touchButtons.claimedTouches,
-      (x, y) =>
-        (this.movementMode !== "tap" && this.movementMode !== "hold") ||
-        this.playInputBlocked ||
-        this.storagePaused ||
-        this.doorPresentation.busy
-          ? null
-          : this.resolveDriveTap(x, y),
-      (target) => this.onDestinationTap(target),
+      this.actions,
+      this.playInputHost(),
+      inputSettings,
     );
-    this.touchHold = new TouchHold(canvas, this.touchButtons.claimedTouches, (x, y) =>
-      this.movementMode !== "hold" ||
-      !(this.scenes.current instanceof PlayScene) ||
-      this.playInputBlocked ||
-      this.storagePaused ||
-      this.doorPresentation.busy
-        ? null
-        : this.resolveDriveTap(x, y),
-    );
-    this.touchJoystick.enabled = this.movementMode === "joystick";
-    // Let joystick skip touches claimed by on-screen buttons
-    this.touchJoystick.claimedTouches = this.touchButtons.claimedTouches;
-    this.actions.setTouchJoystick(this.touchJoystick);
-    this.actions.setTouchButtons(this.touchButtons);
+    this.touchJoystick = this.playInput.touchJoystick;
+    this.touchButtons = this.playInput.touchButtons;
+    this.tapMovement = this.playInput.tapMovement;
     this.actions.setXRManager(this.xrManager);
     this.debugPanel = new DebugPanel();
-    this.touchPinch = new TouchPinch(
-      canvas,
-      this.touchButtons.claimedTouches,
-      () =>
-        this.pinchZoom &&
-        this.scenes?.current instanceof PlayScene &&
-        !this.playInputBlocked &&
-        !this.storagePaused &&
-        !this.doorPresentation.busy,
-      () => {
-        const { dx, dy } = this.touchJoystick.getMovement();
-        return dx !== 0 || dy !== 0;
-      },
-      () => this.debugPanel.zoom,
-      (zoom) => this.debugPanel.setZoom(zoom),
-      () => this.clearPlayInput(),
-    );
     if (this.renderHost.rendererControl)
       this.debugPanel.setRendererControl(this.renderHost.rendererControl);
     this.editorModel = new EditorModel();
@@ -325,35 +229,8 @@ export class GameClient implements GameTestHooks {
     this.editorPanel = new EditorPanel(this.editorModel);
     this.editorModel.onExitEditor = () => this.toggleEditor();
     this.mainMenu = new MainMenu();
-    this.optionsDialog = new OptionsDialog(
-      async (mode) => {
-        this.clearPlayInput();
-        this.movementMode = mode;
-        this.touchJoystick.enabled = mode === "joystick";
-        if (this.profile) this.profile.touchMovement = mode;
-        if (!this.profile || !this.profileStore?.updateProfile)
-          throw new Error("No profile storage");
-        await this.profileStore.updateProfile(this.profile.id, { touchMovement: mode });
-      },
-      () => this.clearPlayInput(),
-      async (enabled) => {
-        this.clearPlayInput();
-        this.pinchZoom = enabled;
-        if (this.profile) this.profile.pinchZoom = enabled;
-        if (!this.profile || !this.profileStore?.updateProfile)
-          throw new Error("No profile storage");
-        await this.profileStore.updateProfile(this.profile.id, { pinchZoom: enabled });
-      },
-      async (style) => {
-        this.clearPlayInput();
-        this.carDriving = style;
-        if (this.profile) this.profile.carDriving = style;
-        if (!this.profile || !this.profileStore?.updateProfile)
-          throw new Error("No profile storage");
-        await this.profileStore.updateProfile(this.profile.id, { carDriving: style });
-      },
-    );
-    this.mainMenu.onOptions = (opener) => this.openOptions(opener);
+    this.chrome = new GameMenuChrome(this.chromeHost(), this.playInput);
+    this.mainMenu.onOptions = (opener) => this.chrome.openOptions(opener);
     this.mainMenu.onBuild = () => this.toggleEditor();
     this.worldMap = new WorldMap({
       snapshot: () =>
@@ -414,31 +291,9 @@ export class GameClient implements GameTestHooks {
           : { type: "edit-pattern-history", direction },
       );
     };
-    const routePatternStatus = (msg: ServerMessage) => {
-      if (
-        msg.type === "vehicle-horn" &&
-        this.scenes.current instanceof PlayScene &&
-        !this.playInputBlocked &&
-        !this.storagePaused &&
-        !this.doorPresentation.busy
-      )
-        this.audioManager.playVehicleHorn(msg, this.stateView.playerEntity.position);
-      if (
-        msg.type === "world-loaded" ||
-        msg.type === "realm-joined" ||
-        (msg.type === "door-motion" && msg.self)
-      )
-        this.clearPlayInput();
-      if (msg.type === "storage-status") this.showStorageStatus(msg.message, msg.paused);
-      if (msg.type === "pattern-edit-status" || msg.type === "room-edit-status")
-        this.editorModel.setPatternStatus(msg);
-      else if (msg.type === "world-loaded" || msg.type === "realm-joined")
-        this.editorModel.setPatternStatus({ error: "", canUndo: false, canRedo: false });
-    };
     // Client-side world with no generator (chunks populated from server messages)
     const clientWorld = new World(new FlatStrategy());
-    const remoteView = new RemoteStateView(clientWorld);
-    this.stateView = remoteView;
+    this.stateView = new RemoteStateView(clientWorld);
 
     // Send profile identity to server (profileId for persistence, displayName for labels)
     if (this.profile) {
@@ -450,118 +305,17 @@ export class GameClient implements GameTestHooks {
       });
     }
 
-    // Route server messages to RemoteStateView
-    this.transport.onMessage((msg: ServerMessage) => {
-      routePatternStatus(msg);
-      if (msg.type === "door-motion") this.doorPresentation.receive(msg);
-      // Domain-specific handlers first — buffer frame/sync messages for deferred
-      // application during client update tick (prevents async entity
-      // position changes that desync camera and entity interpolation)
-      if (
-        msg.type === "frame" ||
-        msg.type === "sync-room" ||
-        msg.type === "sync-session" ||
-        msg.type === "sync-invincibility" ||
-        msg.type === "sync-chunks" ||
-        msg.type === "sync-props" ||
-        msg.type === "sync-cvars" ||
-        msg.type === "sync-player-names" ||
-        msg.type === "sync-editor-cursors"
-      ) {
-        remoteView.bufferMessage(msg);
-      } else if (msg.type === "world-loaded" || msg.type === "realm-joined") {
-        this.autoJoinRealm = false;
-        if (msg.generation) this.showWorldIdentity(msg.generation);
-        remoteView.interior = msg.interior ?? null;
-        this.canvas.dataset.interior = msg.interior ? JSON.stringify(msg.interior) : "";
-        console.log(
-          `[tilefun:client] ${msg.type} — camera=(${msg.cameraX.toFixed(1)}, ${msg.cameraY.toFixed(1)}), predictor=${remoteView.hasPredictedPlayer}, editorEnabled=${remoteView.editorEnabled}`,
-        );
-        if (msg.worldId) {
-          this.mainMenu.currentWorldId = msg.worldId;
-          sessionStorage.setItem(LAST_WORLD_KEY, msg.interior?.parentWorldId ?? msg.worldId);
-        }
-        remoteView.clear();
-        this.renderer.clear();
-        this.sceneFrame.clear();
-        if (this.reloadCamera && this.reloadCamera.realmId === msg.worldId) {
-          this.camera.snapTo(this.reloadCamera.cameraX, this.reloadCamera.cameraY);
-          this.camera.zoom = this.reloadCamera.zoom;
-        } else {
-          this.camera.snapTo(msg.cameraX, msg.cameraY);
-          this.camera.zoom = msg.cameraZoom;
-          // Snap to player position on next follow() — avoids lerp when
-          // switching worlds where the player position differs from saved camera.
-          this.camera.requestSnap();
-        }
-        this.reloadCamera = null;
-        this.gcSendVisibleRange(true);
-        this.gcSendDebugState(this.debugPanel.paused, true);
-        this.lobbyRealmList = null;
-      } else if (msg.type === "realm-list") {
-        // Skip unsolicited-broadcast handling when this is a response to
-        // a gcSendRequest (e.g. from toggleMenu) — the requestId resolver
-        // below will deliver it to the caller, which pushes MenuScene itself.
-        const isRequestResponse = "requestId" in msg && msg.requestId !== undefined;
-        const playableRealms = msg.realms.filter((realm) => !realm.incompatibleReason);
-        if (this.autoJoinRealm && playableRealms.length > 0) {
-          // Auto-join: prefer the last world this tab was in (survives HMR /
-          // server restart), falling back to the most active realm.
-          const lastWorldId = sessionStorage.getItem(LAST_WORLD_KEY);
-          const target =
-            (lastWorldId && playableRealms.find((r) => r.id === lastWorldId)) ||
-            playableRealms.find((r) => r.playerCount > 0) ||
-            playableRealms[0]!;
-          this.autoJoinRealm = false; // only auto-join once
-          void this.gcSendRequest({
-            type: "join-realm",
-            requestId: this.nextRequestId++,
-            worldId: target.id,
-            resume: true,
-          }).catch((error) => this.mainMenu.showCreationError(String(error)));
-        } else if (!isRequestResponse && this.initDone) {
-          // Unsolicited broadcast — show realm browser immediately
-          if (!this.scenes.has(MenuScene)) {
-            this.scenes.push(new MenuScene(msg.realms));
-          } else {
-            this.mainMenu.show(msg.realms);
-          }
-        } else if (!isRequestResponse) {
-          // Buffer for after init completes
-          this.lobbyRealmList = msg.realms;
-        }
-      } else if (msg.type === "realm-left") {
-        remoteView.interior = null;
-        this.canvas.dataset.interior = "";
-        remoteView.clear();
-        this.renderer.clear();
-        this.sceneFrame.clear();
-      } else if (msg.type === "realm-player-count") {
-        this.mainMenu.updatePlayerCount(msg.worldId, msg.count);
-      } else if (msg.type === "kicked") {
-        console.warn(`[tilefun] Kicked: ${msg.reason}`);
-        this.destroy();
-        const overlay = document.createElement("div");
-        overlay.style.cssText =
-          "position:fixed;inset:0;background:rgba(0,0,0,0.85);color:#fff;display:flex;align-items:center;justify-content:center;font:bold 24px sans-serif;z-index:9999;text-align:center;padding:2em;";
-        overlay.textContent = `Disconnected: ${msg.reason}`;
-        document.body.appendChild(overlay);
-        return;
-      } else if (msg.type === "player-assigned") {
-        console.log(`[tilefun] Player entity assigned: ${msg.entityId}`);
-      } else if (msg.type === "chat") {
-        this.consoleEngine.output.printInfo(`[${msg.sender}] ${msg.text}`);
-        this.chatHUD.addMessage(`[${msg.sender}] ${msg.text}`);
-      }
-
-      this.requests.receive(msg);
-    });
+    this.session = new WorldSessionActions(this.sessionHost());
+    // Route server messages to RemoteStateView and the client UI
+    const router = new ServerMessageRouter(this.messageHost(), { autoJoinRealm, reloadCamera });
+    this.router = router;
+    this.transport.onMessage((msg) => router.route(msg));
 
     this.doorControl = new DoorControl(async (request) => {
       if (this.doorPresentation.busy) return;
       // Authority validates a walking approach against the last directional input.
       // Queue that request before neutral input; the busy presentation locks the next tick.
-      this.clearPlayInput(!request.walkThrough);
+      this.playInput.clearPlayInput(!request.walkThrough);
       if (request.walkThrough) this.doorPresentation.begin();
       try {
         await this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
@@ -571,87 +325,20 @@ export class GameClient implements GameTestHooks {
       }
     });
     this.vehicleControl = new VehicleControl(async (request) => {
-      this.clearPlayInput();
+      this.playInput.clearPlayInput();
       return this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
     });
     this.actions.on("vehicle_recover", () => {
-      if (this.scenes.current instanceof PlayScene && !this.playInputBlocked)
+      if (this.scenes.current instanceof PlayScene && !this.playInput.inputBlocked)
         this.vehicleControl.activateRecovery();
     });
     this.actions.on("enter_place", () => {
-      if (!(this.scenes.current instanceof PlayScene) || this.playInputBlocked) return;
+      if (!(this.scenes.current instanceof PlayScene) || this.playInput.inputBlocked) return;
       if (!this.vehicleControl.activate()) this.doorControl.activate();
     });
     this.loop = new GameLoop({
-      update: (dt) => {
-        this.time.elapsed += dt;
-        // Apply buffered server state at the start of each client tick so
-        // entity position changes are synchronized with camera.savePrev/follow.
-        if (!this.stateView.pendingMessageCount) this.transport.pump?.();
-        this.stateView.applyPending();
-        this.editorModel.setIndoorContext(!!this.stateView.interior);
-        // Tick client-side sprite animations (animTimer/frameCol not serialized).
-        this.stateView.tickAnimations(dt);
-        this.scenes.update(dt);
-        const p = this.stateView.serverPlayerEntity;
-        const ready =
-          p.id !== -1 &&
-          (this.stateView.interior
-            ? !!this.stateView.roomState
-            : this.renderer.isTerrainReady(
-                this.stateView.world.chunks.get(
-                  Math.floor(p.position.wx / CHUNK_SIZE_PX),
-                  Math.floor(p.position.wy / CHUNK_SIZE_PX),
-                ),
-              ));
-        if (this.initDone && ready) this.startupWorldReady = true;
-        this.doorPresentation.update(this.mainMenu.currentWorldId, ready);
-        if (this.mapButton) {
-          const hint = inputHint("G", "View");
-          const label = `Map${hint ? ` · ${hint}` : ""}`;
-          if (this.mapButton.textContent !== label) this.mapButton.textContent = label;
-        }
-        const vehiclePrompt = this.vehicleControl.update(
-          this.stateView,
-          this.initDone && ready && this.scenes.current instanceof PlayScene,
-          this.doorPresentation.busy || this.playUIBlocked || this.storagePaused,
-          this.movementMode,
-          this.carDriving,
-        );
-        this.doorControl.update(
-          this.stateView,
-          !vehiclePrompt &&
-            this.initDone &&
-            ready &&
-            !this.scenes.has(WorldMapScene) &&
-            !this.scenes.has(IdeaScene) &&
-            !this.scenes.has(MenuScene) &&
-            !this.scenes.has(CatalogScene) &&
-            !this.scenes.has(InteriorCatalogScene),
-          this.scenes.current instanceof PlayScene
-            ? this.scenes.current.lastMovement
-            : this.actions.getMovement(),
-          dt,
-          this.doorPresentation.busy || this.playInputBlocked,
-        );
-      },
-      render: (alpha, presentationSeconds) => {
-        this.time.alpha = alpha;
-        this.time.presentationSeconds = presentationSeconds;
-        this.renderHost.beginFrame();
-        try {
-          this.scenes.render(alpha);
-        } finally {
-          this.renderHost.endWorld();
-        }
-        if (this.initDone && (this.startupWorldReady || this.scenes.has(MenuScene)))
-          finishStartup();
-        if (this.initDone) {
-          let buddies = 0;
-          for (const entity of this.stateView.entities) if (entity.wanderAI?.following) buddies++;
-          this.gemHUD.update(this.stateView.gemsCollected, buddies);
-        }
-      },
+      update: (dt) => this.update(dt),
+      render: (alpha, presentationSeconds) => this.render(alpha, presentationSeconds),
     });
   }
 
@@ -667,16 +354,10 @@ export class GameClient implements GameTestHooks {
         e.preventDefault();
       }
     });
-    this.createEditorButton();
-    window.addEventListener("blur", this.onInputBlur);
-    window.addEventListener("focus", this.onInputFocus);
-    document.addEventListener("visibilitychange", this.onInputVisibility);
-    this.canvas.addEventListener("touchstart", this.noteTouch, { capture: true, passive: true });
-    this.canvas.addEventListener("touchend", this.noteTouch, { capture: true, passive: true });
-    this.canvas.addEventListener("touchcancel", this.noteTouch, { capture: true, passive: true });
+    this.chrome.mount();
+    this.playInput.attachFocusListeners();
     this.stopIdeaDelivery = startIdeaDelivery();
-    this.canvas.addEventListener("click", (e) => this.onPlayClick(e));
-    this.touchJoystick.onTap = (clientX, clientY) => this.onPlayTap(clientX, clientY);
+    this.playInput.attachPlayClicks();
     this.actions.attach();
     this.bindActions();
 
@@ -696,65 +377,9 @@ export class GameClient implements GameTestHooks {
     // Build GameContext and wire it into the scene manager
     const gc = this.buildGameContext();
     this.scenes.setContext(gc);
-
     // Register console cvars and commands
-    const clientCVars = registerClientCVars(this.consoleEngine);
-    registerClientCommands(this.consoleEngine, gc);
-    registerServerCommandStubs(this.consoleEngine);
-
-    const applyNetEmulationConfig = () => {
-      this.netEmulatedTransport.setConfig({
-        enabled: clientCVars.cl_netem.get(),
-        txLossPct: clientCVars.cl_netem_tx_loss_pct.get(),
-        rxLossPct: clientCVars.cl_netem_rx_loss_pct.get(),
-        txLatencyMs: clientCVars.cl_netem_tx_latency_ms.get(),
-        rxLatencyMs: clientCVars.cl_netem_rx_latency_ms.get(),
-        txJitterMs: clientCVars.cl_netem_tx_jitter_ms.get(),
-        rxJitterMs: clientCVars.cl_netem_rx_jitter_ms.get(),
-      });
-    };
-    applyNetEmulationConfig();
-    clientCVars.cl_netem.onChange(applyNetEmulationConfig);
-    clientCVars.cl_netem_tx_loss_pct.onChange(applyNetEmulationConfig);
-    clientCVars.cl_netem_rx_loss_pct.onChange(applyNetEmulationConfig);
-    clientCVars.cl_netem_tx_latency_ms.onChange(applyNetEmulationConfig);
-    clientCVars.cl_netem_rx_latency_ms.onChange(applyNetEmulationConfig);
-    clientCVars.cl_netem_tx_jitter_ms.onChange(applyNetEmulationConfig);
-    clientCVars.cl_netem_rx_jitter_ms.onChange(applyNetEmulationConfig);
-
-    // Wire r_pixelscale cvar to camera zoom
-    clientCVars.r_pixelscale.onChange((val) => {
-      this.camera.zoom = val;
-    });
-
-    // Wire r_show3d to debug panel checkbox (bidirectional)
-    clientCVars.r_show3d.onChange((val) => {
-      this.debugPanel.show3d = val;
-    });
-    this.debugPanel.onShow3dChange((checked) => {
-      clientCVars.r_show3d.set(checked);
-    });
-
-    // Start in play mode (or restore edit mode from HMR state)
-    const hmrJson = sessionStorage.getItem(HMR_KEY);
-    if (hmrJson) {
-      sessionStorage.removeItem(HMR_KEY);
-      try {
-        const hmr = JSON.parse(hmrJson);
-        this.scenes.push(hmr.isEditMode ? new EditScene() : new PlayScene());
-        if (hmr.debugEnabled) {
-          this.debugEnabled = true;
-          this.debugPanel.visible = true;
-        }
-        if (typeof hmr.zoom === "number") {
-          this.debugPanel.setZoom(hmr.zoom);
-        }
-      } catch {
-        this.scenes.push(new PlayScene());
-      }
-    } else {
-      this.scenes.push(new PlayScene());
-    }
+    registerClientConsole(gc, this.netEmulatedTransport);
+    this.pushStartScene();
 
     showStartupStage(
       "assets",
@@ -774,28 +399,67 @@ export class GameClient implements GameTestHooks {
       "Preparing your world…",
       "Loading nearby scenery and placing your player.",
     );
+    this.applyAssets(assets, blendGraph);
+
+    // The camera was already set by the "world-loaded" message sent during
+    // onConnect (fires before init() runs).
+
+    // Set up menu callbacks
+    this.session.bindMainMenu();
+
+    this.applyStartupRoute();
+
+    document.addEventListener("visibilitychange", () => {
+      this.stateView.resetPresentationClock();
+      this.camera.requestSnap();
+      if (document.visibilityState === "hidden") {
+        this.session.flushServer();
+      }
+    });
+    window.addEventListener("beforeunload", () => {
+      this.session.flushServer();
+    });
+
+    this.initDone = true;
+
+    // If we received a realm-list while connecting (multiplayer lobby), show it now
+    const lobbyRealmList = this.router.takeLobbyRealmList();
+    if (lobbyRealmList) this.scenes.push(new MenuScene(lobbyRealmList));
+
+    this.loop.start();
+    if (this.session.startupMenuRequested && !this.scenes.has(MenuScene))
+      await this.session.toggleMenu();
+    this.canvas.dataset.ready = "true";
+  }
+
+  /** Start in play mode (or restore edit mode from HMR state). */
+  private pushStartScene(): void {
+    const hmrJson = sessionStorage.getItem(HMR_KEY);
+    if (hmrJson) {
+      sessionStorage.removeItem(HMR_KEY);
+      try {
+        const hmr = JSON.parse(hmrJson);
+        this.scenes.push(hmr.isEditMode ? new EditScene() : new PlayScene());
+        if (hmr.debugEnabled) {
+          this.debugEnabled = true;
+          this.debugPanel.visible = true;
+        }
+        if (typeof hmr.zoom === "number") {
+          this.debugPanel.setZoom(hmr.zoom);
+        }
+      } catch {
+        this.scenes.push(new PlayScene());
+      }
+    } else {
+      this.scenes.push(new PlayScene());
+    }
+  }
+
+  /** Hand loaded sheets to the menus, editor, catalogs and render host. */
+  private applyAssets(assets: GameAssets, blendGraph: BlendGraph): void {
     this.sheets = assets.sheets;
     this.mainMenu.characterPicker.setAssets(this.sheets, this.profile?.playerModel);
-    this.mainMenu.characterPicker.onSelect = async (model) => {
-      const previous = normalizePlayerModel(this.profile?.playerModel);
-      // Persist before acknowledging the UI; restore the preference if authority rejects it.
-      if (this.profile && this.profileStore?.updateProfile)
-        await this.profileStore.updateProfile(this.profile.id, { playerModel: model });
-      try {
-        await this.gcSendRequest({
-          type: "set-player-model",
-          requestId: this.nextRequestId++,
-          model,
-        });
-      } catch (error) {
-        if (this.profile && this.profileStore?.updateProfile)
-          await this.profileStore.updateProfile(this.profile.id, { playerModel: previous });
-        throw error;
-      }
-      if (this.profile) this.profile.playerModel = model;
-      // The menu pauses replica application; reflect the accepted appearance immediately.
-      applyPlayerModel(this.stateView.playerEntity, model);
-    };
+    this.session.bindCharacterPicker();
     this.editorPanel.setAssets(assets.sheets, assets.blendSheets, blendGraph);
     const meComplete = assets.sheets.get("me-complete");
     if (meComplete) this.propCatalog.setImage(meComplete.image);
@@ -809,169 +473,80 @@ export class GameClient implements GameTestHooks {
     this.gemHUD.setIcon(this.gemSpriteCanvas);
     this.sheets.set("gem", new Spritesheet(this.gemSpriteCanvas, 16, 16));
     this.renderHost.setAssets(assets, blendGraph);
+  }
 
-    // The camera was already set by the "world-loaded" message sent during
-    // onConnect (fires before init() runs).
+  private update(dt: number): void {
+    this.time.elapsed += dt;
+    // Apply buffered server state at the start of each client tick so
+    // entity position changes are synchronized with camera.savePrev/follow.
+    if (!this.stateView.pendingMessageCount) this.transport.pump?.();
+    this.stateView.applyPending();
+    this.editorModel.setIndoorContext(!!this.stateView.interior);
+    // Tick client-side sprite animations (animTimer/frameCol not serialized).
+    this.stateView.tickAnimations(dt);
+    this.scenes.update(dt);
+    const ready = this.playerWorldReady();
+    if (this.initDone && ready) this.startupWorldReady = true;
+    this.doorPresentation.update(this.mainMenu.currentWorldId, ready);
+    this.chrome.updateMapHint();
+    this.updatePlaceControls(dt, ready);
+  }
 
-    const handoffParams = new URL(location.href).searchParams;
-    const handoffWorldId = handoffParams.get("worldId");
-    let handoffArrival: Arrival | undefined;
+  /** The player exists and its room or terrain chunk is presentable. */
+  private playerWorldReady(): boolean {
+    const p = this.stateView.serverPlayerEntity;
+    return (
+      p.id !== -1 &&
+      (this.stateView.interior
+        ? !!this.stateView.roomState
+        : this.renderer.isTerrainReady(
+            this.stateView.world.chunks.get(
+              Math.floor(p.position.wx / CHUNK_SIZE_PX),
+              Math.floor(p.position.wy / CHUNK_SIZE_PX),
+            ),
+          ))
+    );
+  }
+
+  /** Vehicle prompts take precedence over door prompts. */
+  private updatePlaceControls(dt: number, ready: boolean): void {
+    const vehiclePrompt = this.vehicleControl.update(
+      this.stateView,
+      this.initDone && ready && this.scenes.current instanceof PlayScene,
+      this.doorPresentation.busy || this.playInput.uiBlocked || this.chrome.storagePaused,
+      this.playInput.movementMode,
+      this.playInput.carDriving,
+    );
+    this.doorControl.update(
+      this.stateView,
+      !vehiclePrompt &&
+        this.initDone &&
+        ready &&
+        !this.scenes.has(IdeaScene) &&
+        !this.overlayOpen(),
+      this.scenes.current instanceof PlayScene
+        ? this.scenes.current.lastMovement
+        : this.actions.getMovement(),
+      dt,
+      this.doorPresentation.busy || this.playInput.inputBlocked,
+    );
+  }
+
+  private render(alpha: number, presentationSeconds: number): void {
+    this.time.alpha = alpha;
+    this.time.presentationSeconds = presentationSeconds;
+    this.renderHost.beginFrame();
     try {
-      const raw = handoffParams.get("arrival");
-      if (raw) handoffArrival = JSON.parse(raw);
-    } catch {
-      this.mainMenu.showCreationError("Invalid explorer arrival.");
+      this.scenes.render(alpha);
+    } finally {
+      this.renderHost.endWorld();
     }
-
-    // Set up menu callbacks
-    this.mainMenu.onSelect = (id) => {
-      // Already on this world — just close the menu
-      if (this.mainMenu.currentWorldId === id && !handoffArrival) {
-        if (this.scenes.has(MenuScene)) this.scenes.pop();
-        return;
-      }
-      // realm-joined handler applies camera + clears state + sends visible range
-      this.gcSendRequest({
-        type: "join-realm",
-        requestId: this.nextRequestId++,
-        worldId: id,
-        ...(handoffWorldId === id && handoffArrival ? { arrival: handoffArrival } : {}),
-      })
-        .then(() => {
-          if (this.scenes.has(MenuScene)) this.scenes.pop();
-        })
-        .catch((error) => this.mainMenu.showCreationError(String(error)));
-    };
-    this.mainMenu.onCreate = (name, worldType, seed, generation) => {
-      const msg: ClientMessage & { requestId: number } = {
-        type: "create-world",
-        requestId: this.nextRequestId++,
-        name,
-      };
-      if (worldType !== undefined) msg.worldType = worldType;
-      if (seed !== undefined) msg.seed = seed;
-      if (generation !== undefined) msg.generation = generation;
-      this.gcSendRequest(msg)
-        .then((resp) => {
-          return this.gcSendRequest({
-            type: "join-realm",
-            requestId: this.nextRequestId++,
-            worldId: resp.meta.id,
-            ...(!handoffWorldId && handoffArrival ? { arrival: handoffArrival } : {}),
-          });
-        })
-        .then(() => {
-          if (this.scenes.has(MenuScene)) this.scenes.pop();
-        })
-        .catch((error) => this.mainMenu.showCreationError(String(error)));
-    };
-    this.mainMenu.onRecreate = async (id) => {
-      try {
-        const response = await this.gcSendRequest({
-          type: "recreate-world",
-          requestId: this.nextRequestId++,
-          worldId: id,
-        });
-        await this.gcSendRequest({
-          type: "join-realm",
-          requestId: this.nextRequestId++,
-          worldId: response.meta.id,
-        });
-        if (this.scenes.has(MenuScene)) this.scenes.pop();
-      } catch (error) {
-        this.mainMenu.showCreationError(String(error));
-      }
-    };
-    this.mainMenu.onDelete = async (id) => {
-      try {
-        await this.gcSendRequest({
-          type: "delete-world",
-          requestId: this.nextRequestId++,
-          worldId: id,
-        });
-        const resp = await this.gcSendRequest({
-          type: "list-realms",
-          requestId: this.nextRequestId++,
-        });
-        this.mainMenu.show(resp.realms);
-      } catch (error) {
-        this.mainMenu.showCreationError(String(error));
-      }
-    };
-    this.mainMenu.onRename = (id, name) => {
-      void this.gcSendRequest({
-        type: "rename-world",
-        requestId: this.nextRequestId++,
-        worldId: id,
-        name,
-      }).catch((error) => this.mainMenu.showCreationError(String(error)));
-    };
-    this.mainMenu.onClose = () => {
-      if (this.scenes.has(MenuScene)) this.scenes.pop();
-    };
-    this.mainMenu.onSwitchProfile = () => {
-      if (!this.profileStore) return;
-      const picker = new ProfilePicker();
-      picker.onCancel = () => picker.hide();
-      const store = this.profileStore;
-
-      const showList = () => {
-        store.listProfiles().then((profiles) => picker.show(profiles));
-      };
-
-      picker.onSelect = (profile) => {
-        if (!profile) {
-          // "Back" pressed from PIN/create screen — re-show list
-          showList();
-          return;
-        }
-        // Save selected profile, clear tab session, reload with new identity
-        localStorage.setItem(ACTIVE_PROFILE_KEY, profile.id);
-        sessionStorage.removeItem(TAB_SESSION_KEY);
-        requestSessionNavigation(location.href);
-      };
-
-      picker.onCreate = (name) => {
-        store.createProfile(name).then((newProfile) => {
-          localStorage.setItem(ACTIVE_PROFILE_KEY, newProfile.id);
-          sessionStorage.removeItem(TAB_SESSION_KEY);
-          requestSessionNavigation(location.href);
-        });
-      };
-
-      showList();
-    };
-
-    this.applyStartupRoute();
-
-    document.addEventListener("visibilitychange", () => {
-      this.stateView.resetPresentationClock();
-      this.camera.requestSnap();
-      if (document.visibilityState === "hidden") {
-        this.gcFlushServer();
-      }
-    });
-    window.addEventListener("beforeunload", () => {
-      this.gcFlushServer();
-    });
-
-    this.initDone = true;
-
-    // If we received a realm-list while connecting (multiplayer lobby), show it now
-    if (this.lobbyRealmList) {
-      this.scenes.push(new MenuScene(this.lobbyRealmList));
-      this.lobbyRealmList = null;
+    if (this.initDone && (this.startupWorldReady || this.scenes.has(MenuScene))) finishStartup();
+    if (this.initDone) {
+      let buddies = 0;
+      for (const entity of this.stateView.entities) if (entity.wanderAI?.following) buddies++;
+      this.gemHUD.update(this.stateView.gemsCollected, buddies);
     }
-
-    this.loop.start();
-    if (
-      (new URL(location.href).searchParams.has("generation") ||
-        new URL(location.href).searchParams.has("desktop") ||
-        handoffWorldId) &&
-      !this.scenes.has(MenuScene)
-    )
-      await this.toggleMenu();
-    this.canvas.dataset.ready = "true";
   }
 
   /** Update the passive development action without changing menu focus. */
@@ -999,17 +574,12 @@ export class GameClient implements GameTestHooks {
   }
 
   destroy(): void {
-    this.clearPlayInput();
-    this.optionsDialog.destroy();
+    this.playInput.clearPlayInput();
+    this.chrome.optionsDialog.destroy();
     this.gemHUD.destroy();
-    this.optionsButton?.remove();
-    window.removeEventListener("blur", this.onInputBlur);
-    window.removeEventListener("focus", this.onInputFocus);
-    document.removeEventListener("visibilitychange", this.onInputVisibility);
-    this.canvas.removeEventListener("touchstart", this.noteTouch, true);
-    this.canvas.removeEventListener("touchend", this.noteTouch, true);
-    this.canvas.removeEventListener("touchcancel", this.noteTouch, true);
-    this.showStorageStatus("", false);
+    this.chrome.optionsButton?.remove();
+    this.playInput.detachFocusListeners();
+    this.chrome.showStorageStatus("", false);
     this.stopIdeaDelivery?.();
     this.renderHost.dispose();
     this.debugPanel.destroy();
@@ -1018,19 +588,29 @@ export class GameClient implements GameTestHooks {
     this.vehicleControl.destroy();
     this.doorPresentation.destroy();
     this.loop.stop();
-    this.gcFlushServer();
+    this.session.flushServer();
     this.stateView.setPredictor(null);
     this.scenes.clear();
     this.requests.dispose();
     this.transport.close();
     this.worldMap.destroy();
-    this.mapButton?.remove();
+    this.chrome.mapButton?.remove();
     this.actions.detach();
     this.consoleUI.destroy();
     this.mainMenu.destroy();
   }
 
   // ---- Actions ----
+
+  /** World map, menu, catalog or interior catalog overlays block world shortcuts. */
+  private overlayOpen(): boolean {
+    return (
+      this.scenes.has(WorldMapScene) ||
+      this.scenes.has(MenuScene) ||
+      this.scenes.has(CatalogScene) ||
+      this.scenes.has(InteriorCatalogScene)
+    );
+  }
 
   private bindActions(): void {
     this.actions.on("toggle_world_map", () => this.toggleWorldMap());
@@ -1050,52 +630,35 @@ export class GameClient implements GameTestHooks {
       if (this.scenes.has(MenuScene)) {
         this.scenes.pop();
       } else {
-        void this.toggleMenu().catch((error) =>
-          this.consoleEngine.output.printError(String(error)),
-        );
+        void this.session
+          .toggleMenu()
+          .catch((error) => this.consoleEngine.output.printError(String(error)));
       }
     });
     this.actions.on("toggle_debug", () => {
-      if (
-        this.scenes.has(WorldMapScene) ||
-        this.scenes.has(MenuScene) ||
-        this.scenes.has(CatalogScene) ||
-        this.scenes.has(InteriorCatalogScene)
-      ) {
-        return;
-      }
-      this.debugEnabled = !this.debugEnabled;
-      this.debugPanel.visible = this.debugEnabled;
+      if (this.overlayOpen()) return;
+      this.toggleDebug();
     });
     this.actions.on("toggle_editor", () => {
-      if (
-        this.scenes.has(WorldMapScene) ||
-        this.scenes.has(MenuScene) ||
-        this.scenes.has(CatalogScene) ||
-        this.scenes.has(InteriorCatalogScene)
-      ) {
-        return;
-      }
+      if (this.overlayOpen()) return;
       this.toggleEditor();
     });
     this.actions.on("toggle_console", () => {
       this.consoleUI.toggle();
     });
     this.actions.on("toggle_base_mode", () => {
-      if (
-        this.scenes.has(WorldMapScene) ||
-        this.scenes.has(MenuScene) ||
-        this.scenes.has(CatalogScene) ||
-        this.scenes.has(InteriorCatalogScene)
-      ) {
-        return;
-      }
+      if (this.overlayOpen()) return;
       if (this.debugEnabled) this.debugPanel.toggleBaseMode();
     });
   }
 
+  private toggleDebug(): void {
+    this.debugEnabled = !this.debugEnabled;
+    this.debugPanel.visible = this.debugEnabled;
+  }
+
   private toggleEditor(): void {
-    if (this.doorPresentation.busy || this.optionsDialog.visible) return;
+    if (this.doorPresentation.busy || this.chrome.optionsDialog.visible) return;
     if (this.scenes.current instanceof EditScene) {
       this.scenes.replace(new PlayScene());
     } else {
@@ -1104,7 +667,7 @@ export class GameClient implements GameTestHooks {
   }
 
   private toggleWorldMap(): void {
-    if (this.doorPresentation.busy || this.optionsDialog.visible) return;
+    if (this.doorPresentation.busy || this.chrome.optionsDialog.visible) return;
     if (this.scenes.current instanceof WorldMapScene) {
       this.scenes.pop();
       return;
@@ -1114,26 +677,9 @@ export class GameClient implements GameTestHooks {
     this.scenes.push(new WorldMapScene(this.worldMap));
   }
 
-  private async toggleMenu(): Promise<void> {
-    if (this.doorPresentation.busy || this.optionsDialog.visible) return;
-    this.clearPlayInput();
-    if (this.menuOpening) return;
-    this.menuOpening = true;
-    try {
-      this.gcFlushServer();
-      const resp = await this.gcSendRequest({
-        type: "list-realms",
-        requestId: this.nextRequestId++,
-      });
-      this.scenes.push(new MenuScene(resp.realms));
-    } finally {
-      this.menuOpening = false;
-    }
-  }
-
   private applyStartupRoute(): void {
     const params = new URLSearchParams(window.location.search);
-    this.interiorCatalog.setRouteState(this.readInteriorRouteState(params));
+    this.interiorCatalog.setRouteState(readInteriorRouteState(params));
 
     const debug = params.get("debug");
     if (debug === "1" || debug === "true") {
@@ -1147,40 +693,6 @@ export class GameClient implements GameTestHooks {
     } else if (panel === "props" || panel === "catalog") {
       if (!this.scenes.has(CatalogScene)) this.scenes.push(new CatalogScene());
     }
-  }
-
-  private readInteriorRouteState(params: URLSearchParams): InteriorCatalogRouteState {
-    const state: InteriorCatalogRouteState = {};
-    const search = params.get("interiorSearch") ?? params.get("search");
-    if (search !== null) state.search = search;
-
-    const sourceKind = params.get("interiorSource");
-    if (
-      sourceKind === "" ||
-      sourceKind === "home_design_layer" ||
-      sourceKind === "room_builder_tile" ||
-      sourceKind === "room_builder_sheet" ||
-      sourceKind === "single"
-    ) {
-      state.sourceKind = sourceKind;
-    }
-
-    const category = params.get("interiorCategory");
-    if (category !== null) state.category = category;
-
-    const variant = params.get("interiorVariant");
-    if (
-      variant === "" ||
-      variant === "normal" ||
-      variant === "shadowless" ||
-      variant === "black-shadow"
-    ) {
-      state.variant = variant;
-    }
-
-    const design = params.get("interiorDesign");
-    if (design !== null) state.design = design;
-    return state;
   }
 
   // ---- Helpers (also exposed via GameContext) ----
@@ -1215,31 +727,124 @@ export class GameClient implements GameTestHooks {
     this.canvas.dataset.generation = JSON.stringify(generation);
   }
 
-  private gcFlushServer(): void {
-    this.transport.send({ type: "flush" });
+  // ---- Collaborator hosts (getters read the client lazily) ----
+
+  private playInputHost(): PlayInputHost {
+    const client = this;
+    return {
+      get currentScene() {
+        return client.scenes?.current;
+      },
+      get stateView() {
+        return client.stateView;
+      },
+      camera: this.camera,
+      transport: this.transport,
+      get audioManager() {
+        return client.audioManager;
+      },
+      get doorBusy() {
+        return client.doorPresentation.busy;
+      },
+      get storagePaused() {
+        return client.chrome.storagePaused;
+      },
+      get menuOpen() {
+        return client.chrome.menuOpen;
+      },
+      get zoom() {
+        return client.debugPanel.zoom;
+      },
+      set zoom(zoom: number) {
+        client.debugPanel.setZoom(zoom);
+      },
+    };
   }
 
-  /** Send current visible chunk range to server when changed. */
-  private gcSendVisibleRange(force = false): void {
-    const range = this.camera.getVisibleChunkRange();
-    const key = `${range.minCx},${range.minCy},${range.maxCx},${range.maxCy}`;
-    if (!force && key === this.lastVisibleRangeKey) return;
-    this.lastVisibleRangeKey = key;
-    this.transport.send({
-      type: "visible-range",
-      minCx: range.minCx,
-      minCy: range.minCy,
-      maxCx: range.maxCx,
-      maxCy: range.maxCy,
-    });
+  private sessionHost(): WorldSessionHost {
+    const client = this;
+    return {
+      transport: this.transport,
+      camera: this.camera,
+      scenes: this.scenes,
+      mainMenu: this.mainMenu,
+      stateView: this.stateView,
+      profile: this.profile,
+      profileStore: this.profileStore,
+      get menuBlocked() {
+        return client.doorPresentation.busy || client.chrome.optionsDialog.visible;
+      },
+      clearPlayInput: () => this.playInput.clearPlayInput(),
+      sendRequest: (msg) => this.gcSendRequest(msg),
+      takeRequestId: () => this.nextRequestId++,
+    };
   }
 
-  /** Send debug flags to server when changed. */
-  private gcSendDebugState(paused: boolean, force = false): void {
-    const key = `${paused ? 1 : 0}`;
-    if (!force && key === this.lastDebugStateKey) return;
-    this.lastDebugStateKey = key;
-    this.transport.send({ type: "set-debug", paused });
+  private chromeHost(): MenuChromeHost {
+    const client = this;
+    return {
+      canvas: this.canvas,
+      renderHost: this.renderHost,
+      get loop() {
+        return client.loop;
+      },
+      get stateView() {
+        return client.stateView;
+      },
+      mainMenu: this.mainMenu,
+      get scenes() {
+        return client.scenes;
+      },
+      get consoleEngine() {
+        return client.consoleEngine;
+      },
+      xrManager: this.xrManager,
+      profile: this.profile,
+      profileStore: this.profileStore,
+      get doorBusy() {
+        return client.doorPresentation.busy;
+      },
+      toggleMenu: () => this.session.toggleMenu(),
+      toggleWorldMap: () => this.toggleWorldMap(),
+      toggleEditor: () => this.toggleEditor(),
+      toggleDebug: () => this.toggleDebug(),
+    };
+  }
+
+  private messageHost(): ServerMessageHost {
+    const client = this;
+    return {
+      stateView: this.stateView,
+      canvas: this.canvas,
+      camera: this.camera,
+      get renderer() {
+        return client.renderer;
+      },
+      sceneFrame: this.sceneFrame,
+      scenes: this.scenes,
+      mainMenu: this.mainMenu,
+      editorModel: this.editorModel,
+      audioManager: this.audioManager,
+      doorPresentation: this.doorPresentation,
+      consoleEngine: this.consoleEngine,
+      chatHUD: this.chatHUD,
+      requests: this.requests,
+      get debugPaused() {
+        return client.debugPanel.paused;
+      },
+      get initDone() {
+        return client.initDone;
+      },
+      playActive: () => this.playInput.playActive(),
+      clearPlayInput: () => this.playInput.clearPlayInput(),
+      showStorageStatus: (message, paused) => this.chrome.showStorageStatus(message, paused),
+      showWorldIdentity: (generation) => this.showWorldIdentity(generation),
+      sendVisibleRange: (force) => this.session.sendVisibleRange(force),
+      sendDebugState: (paused, force) => this.session.sendDebugState(paused, force),
+      sendRequest: (msg) => this.gcSendRequest(msg),
+      takeRequestId: () => this.nextRequestId++,
+      destroy: () => this.destroy(),
+    };
   }
 
   // ---- GameContext construction ----
@@ -1248,28 +853,29 @@ export class GameClient implements GameTestHooks {
     // Use a proxy-like object so mutable fields (debugEnabled, gemSpriteCanvas, editorButton)
     // always reflect the latest value from GameClient.
     const client = this;
+    const input = this.playInput;
     return {
       doorPresentation: this.doorPresentation,
       get realmId() {
         return client.mainMenu.currentWorldId;
       },
       get storagePaused() {
-        return client.storagePaused;
+        return client.chrome.storagePaused;
       },
       get inputBlocked() {
-        return client.playInputBlocked;
+        return input.inputBlocked;
       },
       get touchMovement() {
-        return client.movementMode;
+        return input.movementMode;
       },
       get carDriving() {
-        return client.carDriving;
+        return input.carDriving;
       },
-      tapMovement: this.tapMovement,
-      trainTapMovement: this.trainTapMovement,
-      touchPinch: this.touchPinch,
-      touchTap: this.touchTap,
-      touchHold: this.touchHold,
+      tapMovement: input.tapMovement,
+      trainTapMovement: input.trainTapMovement,
+      touchPinch: input.touchPinch,
+      touchTap: input.touchTap,
+      touchHold: input.touchHold,
       canvas: this.canvas,
       ctx: this.ctx,
       camera: this.camera,
@@ -1315,304 +921,23 @@ export class GameClient implements GameTestHooks {
         client.debugEnabled = v;
       },
       get editorButton() {
-        return client.editorButton;
+        return client.chrome.editorButton;
       },
       set editorButton(v) {
-        client.editorButton = v;
+        client.chrome.editorButton = v;
       },
       get xrActive() {
         return client.xrManager.active;
       },
-      flushServer: () => this.gcFlushServer(),
+      flushServer: () => this.session.flushServer(),
       sendRequest: <R extends RequestMessage>(msg: R) => this.gcSendRequest(msg),
-      sendVisibleRange: (force?: boolean) => this.gcSendVisibleRange(force),
-      sendDebugState: (paused: boolean, force?: boolean) => this.gcSendDebugState(paused, force),
+      sendVisibleRange: (force?: boolean) => this.session.sendVisibleRange(force),
+      sendDebugState: (paused: boolean, force?: boolean) =>
+        this.session.sendDebugState(paused, force),
     };
   }
 
   // ---- UI ----
-
-  private createEditorButton(): void {
-    const MENU_BTN_STYLE = `
-      font: bold 14px monospace; padding: 10px 16px;
-      background: none; color: #fff; border: none;
-      cursor: pointer; user-select: none; text-align: left;
-      width: 100%;
-    `;
-
-    // Backdrop overlay (click to close)
-    const backdrop = document.createElement("div");
-    backdrop.style.cssText =
-      "position: fixed; inset: 0; z-index: 180; background: rgba(0,0,0,0.3); display: none;";
-    backdrop.addEventListener("click", () => closePanel());
-
-    // Slide-in panel
-    const panel = document.createElement("div");
-    panel.style.cssText = `
-      position: fixed; top: 0; left: 0; bottom: 0; width: 200px;
-      background: rgba(0,0,0,0.85); z-index: 190;
-      display: flex; flex-direction: column; padding: 60px 8px 8px;
-      transform: translateX(-100%); transition: transform 0.2s ease-out;
-    `;
-    panel.inert = true;
-
-    // Hamburger button
-    const hamburger = document.createElement("button");
-    hamburger.textContent = "\u2630";
-    hamburger.setAttribute("data-testid", "main-menu-toggle");
-    hamburger.style.cssText = `
-      position: fixed; top: 8px; left: 8px; z-index: 200;
-      width: 44px; height: 44px; font-size: 24px;
-      background: rgba(0,0,0,0.6); color: #fff;
-      border: 1px solid #888; border-radius: 4px;
-      cursor: pointer; user-select: none; line-height: 1;
-    `;
-
-    panel.inert = true;
-    let panelOpen = false;
-    let ideaSnapshot: IdeaSnapshot | undefined;
-    const openPanel = () => {
-      panel.inert = false;
-      this.clearPlayInput();
-      this.hamburgerOpen = true;
-      try {
-        const position = this.stateView.playerEntity.position;
-        ideaSnapshot = captureIdea(
-          this.renderHost.captureFrame?.() ?? this.canvas,
-          this.mainMenu.currentWorldId ?? "",
-          position.wx,
-          position.wy,
-        );
-      } catch {
-        ideaSnapshot = undefined;
-      }
-      activateMenu(panel, closePanel);
-      panelOpen = true;
-      backdrop.style.display = "";
-      panel.style.transform = "translateX(0)";
-    };
-    const closePanel = () => {
-      deactivateMenu(panel);
-      panel.inert = true;
-      this.hamburgerOpen = false;
-      this.clearPlayInput();
-      panelOpen = false;
-      backdrop.style.display = "none";
-      panel.style.transform = "translateX(-100%)";
-    };
-    hamburger.addEventListener("click", () => {
-      if (window.tilefunDesktop) {
-        void this.toggleMenu().catch((error) =>
-          this.consoleEngine.output.printError(String(error)),
-        );
-        return;
-      }
-      if (panelOpen) closePanel();
-      else openPanel();
-    });
-
-    const gear = document.createElement("button");
-    gear.textContent = "⚙";
-    gear.setAttribute("aria-label", "Options");
-    gear.style.cssText =
-      "position:fixed;top:max(8px,env(safe-area-inset-top));left:calc(max(8px,env(safe-area-inset-left)) + 52px);z-index:200;width:48px;height:48px;font:26px system-ui;color:white;background:#243a32;border:1px solid #9ab59c;border-radius:8px;cursor:pointer;";
-    gear.onclick = () => {
-      closePanel();
-      this.openOptions(gear);
-    };
-    document.body.append(gear);
-    this.optionsButton = gear;
-
-    const mapBtn = document.createElement("button");
-    mapBtn.textContent = "Map · G";
-    mapBtn.setAttribute("aria-label", "Open world map");
-    mapBtn.setAttribute("data-testid", "open-world-map");
-    mapBtn.style.cssText =
-      "position:fixed;top:8px;right:8px;z-index:90;min-height:44px;padding:8px 14px;color:#fff;background:#243a32;border:1px solid #9ab59c;border-radius:6px;font:14px system-ui;cursor:pointer;";
-    mapBtn.onclick = () => {
-      closePanel();
-      this.toggleWorldMap();
-    };
-    document.body.append(mapBtn);
-    this.mapButton = mapBtn;
-
-    // Menu items
-    const optionsBtn = document.createElement("button");
-    optionsBtn.textContent = "Options";
-    optionsBtn.style.cssText = `${MENU_BTN_STYLE} min-height:48px;`;
-    optionsBtn.onclick = () => {
-      closePanel();
-      this.openOptions(hamburger);
-    };
-    const ideaBtn = document.createElement("button");
-    ideaBtn.textContent = "💡 Idea";
-    ideaBtn.style.cssText = MENU_BTN_STYLE;
-    ideaBtn.onclick = () => {
-      closePanel();
-      if (!ideaSnapshot) {
-        ideaToast("Couldn't take a game picture. Open the menu and try again.");
-        return;
-      }
-      this.scenes.push(new IdeaScene(ideaSnapshot));
-    };
-    const editBtn = document.createElement("button");
-    editBtn.textContent = "Play";
-    editBtn.style.cssText = MENU_BTN_STYLE;
-    editBtn.addEventListener("click", () => {
-      closePanel();
-      this.toggleEditor();
-    });
-    this.editorButton = editBtn;
-
-    const menuBtn = document.createElement("button");
-    menuBtn.textContent = "Menu";
-    menuBtn.style.cssText = MENU_BTN_STYLE;
-    menuBtn.addEventListener("click", () => {
-      closePanel();
-      void this.toggleMenu().catch((error) => this.consoleEngine.output.printError(String(error)));
-    });
-
-    const debugBtn = document.createElement("button");
-    debugBtn.textContent = "Debug";
-    debugBtn.style.cssText = MENU_BTN_STYLE;
-    debugBtn.addEventListener("click", () => {
-      closePanel();
-      this.debugEnabled = !this.debugEnabled;
-      this.debugPanel.visible = this.debugEnabled;
-    });
-
-    const propEditorBtn = document.createElement("button");
-    propEditorBtn.textContent = "Prop Editor";
-    propEditorBtn.style.cssText = MENU_BTN_STYLE;
-    propEditorBtn.addEventListener("click", () => {
-      closePanel();
-      if (this.scenes.has(PropEditorScene)) {
-        this.scenes.pop();
-      } else {
-        this.scenes.push(new PropEditorScene());
-      }
-    });
-
-    const interiorsBtn = document.createElement("button");
-    interiorsBtn.textContent = "Interiors";
-    interiorsBtn.style.cssText = MENU_BTN_STYLE;
-    interiorsBtn.setAttribute("data-testid", "open-interiors-catalog");
-    interiorsBtn.addEventListener("click", () => {
-      closePanel();
-      if (this.scenes.has(InteriorCatalogScene)) {
-        this.scenes.pop();
-      } else {
-        this.scenes.push(new InteriorCatalogScene());
-      }
-    });
-
-    const workbenchBtn = document.createElement("button");
-    workbenchBtn.textContent = "Indoor Workbench";
-    workbenchBtn.style.cssText = MENU_BTN_STYLE;
-    workbenchBtn.setAttribute("data-testid", "open-indoor-workbench");
-    workbenchBtn.addEventListener("click", () => {
-      window.location.href = "interior-workbench.html";
-    });
-
-    const toolsLink = document.createElement("a");
-    toolsLink.href = `${import.meta.env.BASE_URL}workshop.html`;
-    toolsLink.textContent = "Tilefun Workshop";
-    toolsLink.setAttribute("data-testid", "open-tools-index");
-    toolsLink.style.cssText = `${MENU_BTN_STYLE} display: block; text-decoration: none;`;
-    panel.append(
-      optionsBtn,
-      ideaBtn,
-      editBtn,
-      menuBtn,
-      toolsLink,
-      debugBtn,
-      propEditorBtn,
-      interiorsBtn,
-      workbenchBtn,
-    );
-
-    // Add "Enter VR" button if WebXR immersive-vr is supported (Quest, etc.)
-    const vrBtn = document.createElement("button");
-    vrBtn.textContent = "VR (checking...)";
-    vrBtn.style.cssText = `${MENU_BTN_STYLE} color: #666;`;
-    vrBtn.disabled = true;
-    // Always show on Quest UA even if feature detection hasn't resolved yet
-    const isQuestUA = /Quest/i.test(navigator.userAgent);
-    if (isQuestUA) {
-      panel.appendChild(vrBtn);
-    }
-    XRSessionManager.isSupported().then(
-      (supported) => {
-        if (!supported) {
-          if (isQuestUA) {
-            vrBtn.textContent = "VR (not supported)";
-            console.warn(
-              "[tilefun:xr] Quest UA detected but immersive-vr not supported. navigator.xr =",
-              navigator.xr,
-            );
-          }
-          return;
-        }
-        vrBtn.textContent = "Enter VR";
-        vrBtn.style.color = "#4fc3f7";
-        vrBtn.disabled = false;
-        if (!isQuestUA) panel.appendChild(vrBtn);
-      },
-      (err) => {
-        console.error("[tilefun:xr] isSupported check failed:", err);
-        if (isQuestUA) vrBtn.textContent = "VR (error)";
-      },
-    );
-    vrBtn.addEventListener("click", () => {
-      closePanel();
-      if (this.xrManager.active) {
-        this.xrManager.exitVR();
-      } else {
-        const frameTarget = document.createElement("canvas");
-        this.xrManager
-          .enterVR(
-            this.canvas,
-            this.loop,
-            () => this.renderHost.captureFrame?.(frameTarget) ?? this.canvas,
-          )
-          .catch((err) => {
-            console.error("[tilefun:xr] Failed to enter VR:", err);
-            vrBtn.textContent = "VR (failed)";
-            vrBtn.style.color = "#f66";
-          });
-      }
-    });
-    this.xrManager.onSessionEnd = () => {
-      vrBtn.textContent = "Enter VR";
-      vrBtn.style.color = "#4fc3f7";
-    };
-
-    this.mainMenu.setTools([
-      {
-        label: "Idea",
-        run: () => {
-          this.mainMenu.onClose?.();
-          openPanel();
-          ideaBtn.click();
-        },
-      },
-      {
-        label: "Debug",
-        run: () => {
-          this.mainMenu.onClose?.();
-          debugBtn.click();
-        },
-      },
-      {
-        label: "Interiors",
-        run: () => {
-          this.mainMenu.onClose?.();
-          interiorsBtn.click();
-        },
-      },
-    ]);
-    document.body.append(backdrop, panel, hamburger);
-  }
 
   private resize(): void {
     // Use the canvas's actual displayed size (respects split-screen CSS when 3D view is active)
@@ -1620,127 +945,38 @@ export class GameClient implements GameTestHooks {
     this.renderHost.resize(Math.round(rect.width), Math.round(rect.height));
     this.camera.setViewport(this.canvas.width, this.canvas.height);
   }
+}
 
-  /** Handle click in play mode (desktop). */
-  private onPlayClick(e: MouseEvent): void {
-    if (
-      performance.now() - this.lastTouchAt < 1000 ||
-      this.playInputBlocked ||
-      this.storagePaused ||
-      this.doorPresentation.busy
-    )
-      return;
-    if (!(this.scenes.current instanceof PlayScene)) return;
-    if (this.movementMode === "tap" || this.movementMode === "hold") {
-      const target = this.resolveDriveTap(e.clientX, e.clientY);
-      if (target) this.onDestinationTap(target);
-      return;
-    }
-    const rect = this.canvas.getBoundingClientRect();
-    const sx = (e.clientX - rect.left) * (this.canvas.width / rect.width);
-    const sy = (e.clientY - rect.top) * (this.canvas.height / rect.height);
-    const world = this.camera.screenToWorld(sx, sy);
-    this.transport.send({
-      type: "player-interact",
-      wx: world.wx,
-      wy: world.wy,
-    });
+function readInteriorRouteState(params: URLSearchParams): InteriorCatalogRouteState {
+  const state: InteriorCatalogRouteState = {};
+  const search = params.get("interiorSearch") ?? params.get("search");
+  if (search !== null) state.search = search;
+
+  const sourceKind = params.get("interiorSource");
+  if (
+    sourceKind === "" ||
+    sourceKind === "home_design_layer" ||
+    sourceKind === "room_builder_tile" ||
+    sourceKind === "room_builder_sheet" ||
+    sourceKind === "single"
+  ) {
+    state.sourceKind = sourceKind;
   }
 
-  /** Handle tap in play mode (mobile). */
-  private resolveDriveTap(x: number, y: number): TapTarget | null {
-    const target = this.tapMovement.resolve(this.canvas, x, y);
-    const vehicle = occupiedVehicle(this.stateView.playerEntity, this.stateView.entities);
-    if (!target || !vehicle || !isTrain(vehicle)) return target;
-    const rect = this.canvas.getBoundingClientRect();
-    return { ...target, screenSide: x < rect.left + rect.width / 2 ? -1 : 1 };
-  }
-  private onPlayTap(clientX: number, clientY: number): void {
-    if (this.playInputBlocked || this.storagePaused || this.doorPresentation.busy) return;
-    if (!(this.scenes.current instanceof PlayScene)) return;
-    const rect = this.canvas.getBoundingClientRect();
-    const sx = (clientX - rect.left) * (this.canvas.width / rect.width);
-    const sy = (clientY - rect.top) * (this.canvas.height / rect.height);
-    const world = this.camera.screenToWorld(sx, sy);
-    this.transport.send({
-      type: "player-interact",
-      wx: world.wx,
-      wy: world.wy,
-    });
+  const category = params.get("interiorCategory");
+  if (category !== null) state.category = category;
+
+  const variant = params.get("interiorVariant");
+  if (
+    variant === "" ||
+    variant === "normal" ||
+    variant === "shadowless" ||
+    variant === "black-shadow"
+  ) {
+    state.variant = variant;
   }
 
-  private get playInputBlocked(): boolean {
-    return this.playUIBlocked;
-  }
-  private get playUIBlocked(): boolean {
-    return this.hamburgerOpen || this.optionsDialog.visible || this.focusPaused || document.hidden;
-  }
-  private clearPlayInput(sendNeutral = true): void {
-    this.audioManager.stopSirens();
-    this.audioManager.stopTrains();
-    this.audioManager.stopCarEngine();
-    this.audioManager.stopHorns();
-    if (this.scenes?.current instanceof PlayScene)
-      this.transport.send({ type: "vehicle-horn", active: false });
-    if (sendNeutral && this.scenes?.current instanceof PlayScene)
-      this.scenes.current.cancelInput(this.transport);
-    this.tapMovement.cancel();
-    this.trainTapMovement.cancel();
-    this.touchPinch.reset();
-    this.touchTap.reset();
-    this.touchHold.reset();
-    this.touchJoystick.reset();
-    this.touchButtons.reset();
-    this.actions.clearHeld();
-  }
-  private openOptions(opener: HTMLElement): void {
-    if (this.doorPresentation.busy) return;
-    this.clearPlayInput();
-    this.optionsDialog.show(this.movementMode, opener, this.pinchZoom, this.carDriving);
-  }
-  private onInputBlur = (): void => {
-    this.focusPaused = true;
-    this.clearPlayInput();
-  };
-  private onInputFocus = (): void => {
-    this.focusPaused = false;
-  };
-  private onInputVisibility = (): void => {
-    if (document.hidden) this.clearPlayInput();
-  };
-  private noteTouch = (): void => {
-    this.lastTouchAt = performance.now();
-  };
-  private onDestinationTap(target: TapTarget): void {
-    if (
-      !(this.scenes.current instanceof PlayScene) ||
-      (this.movementMode !== "tap" && this.movementMode !== "hold") ||
-      this.playInputBlocked ||
-      this.storagePaused ||
-      this.doorPresentation.busy
-    )
-      return;
-    const vehicle = occupiedVehicle(this.stateView.playerEntity, this.stateView.entities);
-    if (vehicle && isTrain(vehicle)) {
-      if (this.movementMode === "hold") return;
-      this.tapMovement.cancel();
-      this.trainTapMovement.tap(target.screenSide ?? 1);
-      return;
-    }
-    const eligible =
-      !vehicle &&
-      this.stateView.entities.some((e) =>
-        isBefriendHit(
-          target.wx,
-          target.wy,
-          e.position.wx,
-          e.position.wy,
-          e.wanderAI?.befriendable === true,
-        ),
-      );
-    if (eligible) {
-      this.tapMovement.cancel();
-      this.transport.send({ type: "player-interact", wx: target.wx, wy: target.wy });
-    } else if (this.movementMode === "tap") this.tapMovement.setTarget(target);
-  }
+  const design = params.get("interiorDesign");
+  if (design !== null) state.design = design;
+  return state;
 }

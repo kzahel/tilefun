@@ -161,6 +161,12 @@ for (const file of [
 report.sourcesSHA256 = {};
 for (const file of [
   "src/server/Realm.ts",
+  "src/server/RealmCommands.ts",
+  "src/server/RealmComposition.ts",
+  "src/server/RealmPhysics.ts",
+  "src/server/RealmPlayerRestore.ts",
+  "src/server/RealmRiding.ts",
+  "src/server/RealmSimulation.ts",
   "src/server/RealmActivity.ts",
   "src/entities/EntityManager.ts",
   "src/traffic/TrafficSystem.ts",
@@ -182,6 +188,8 @@ for (const file of [
   "src/rendering/TileRenderer.ts",
   "src/rendering/RasterRenderBackend.ts",
   "src/rendering/collectScene.ts",
+  "src/rendering/scene/EntitySprites.ts",
+  "src/rendering/scene/SceneCull.ts",
   "src/scenarios/NaturalLandscapeRecipe.ts",
   "src/generation/regional/DenseDistrictPlanner.ts",
 ])

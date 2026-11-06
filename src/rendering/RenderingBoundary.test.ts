@@ -20,6 +20,8 @@ const neutral = [
   "rendering/OverlayFrame.ts",
   "rendering/ElevationDescriptorCache.ts",
   "rendering/collectScene.ts",
+  "rendering/scene/EntitySprites.ts",
+  "rendering/scene/SceneCull.ts",
   "rendering/GrassBladeRenderer.ts",
   "rendering/GrassFrameBuffer.ts",
   "rendering/propDepth.ts",

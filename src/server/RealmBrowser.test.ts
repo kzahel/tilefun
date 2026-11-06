@@ -1254,7 +1254,7 @@ describe("durable player location", () => {
         else expect(sessions[0]?.realmId).toMatch(/^interior~/);
         expect(setup.transport.messagesOfType("local", "kicked")).toHaveLength(1);
         const realms = (
-          setup.server as unknown as { realms: Map<string, import("./Realm.js").Realm> }
+          setup.server as unknown as { realms: import("./RealmDirectory.js").RealmDirectory }
         ).realms;
         expect([...realms.values()].flatMap((r) => [...r.sessions.values()])).toEqual(sessions);
         expect(
@@ -1837,7 +1837,10 @@ it("restaurant visitor walks out and returns with one durable identity while the
       server.tick(1 / 30);
       if (i % 30 === 0) {
         await server.settle();
-        const realms = Reflect.get(server, "realms") as Map<string, import("./Realm.js").Realm>;
+        const realms = Reflect.get(
+          server,
+          "realms",
+        ) as import("./RealmDirectory.js").RealmDirectory;
         const owners = [...realms.values()].flatMap((realm) =>
           realm.entityManager.entities
             .filter((e) => e.persistentId === persistentId)

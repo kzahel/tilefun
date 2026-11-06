@@ -1,0 +1,83 @@
+import type { Entity } from "../entities/Entity.js";
+import { tickSharedBallGameplay } from "../physics/BallGameplay.js";
+import { rotationsEqual } from "../physics/BodyRotation.js";
+import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
+import type { PhysicsScene } from "../physics/PhysicsScene.js";
+import type { WorkContext } from "../wildlife/AnimalWorkSystem.js";
+import { tickFoodSources } from "../wildlife/FoodGrowth.js";
+import { resolvePredatorCatches } from "../wildlife/predatorAI.js";
+import { tickWildlifeRespawns } from "../wildlife/WildlifeRespawns.js";
+import type { Realm } from "./Realm.js";
+
+type GameplayRealm = Pick<
+  Realm,
+  | "entityManager"
+  | "animalWork"
+  | "vehicleRegistry"
+  | "vehicles"
+  | "world"
+  | "ownedBalls"
+  | "records"
+  | "worldAPI"
+>;
+
+/** Post-physics gameplay: catches, car persistence, food, ball contacts and mod hooks. */
+export function resolveSimulationGameplay(
+  realm: GameplayRealm,
+  active: Entity[],
+  participants: Entity[],
+  entityTickDts: ReadonlyMap<Entity, number>,
+  work: WorkContext,
+  scene: PhysicsScene,
+) {
+  const stepDt = PHYSICS_DT;
+  const wildlifeEnvironment = work.environment;
+  const workPlayers = work.players;
+  const workReady = work.ready;
+  const playerPositions = workPlayers.map((p) => p.entity.position);
+  tickWildlifeRespawns(realm.entityManager, stepDt, wildlifeEnvironment, playerPositions);
+  resolvePredatorCatches(realm.entityManager, active, wildlifeEnvironment, playerPositions);
+  realm.animalWork.resolveCatches(active, {
+    environment: wildlifeEnvironment,
+    players: workPlayers,
+    ready: workReady,
+  });
+
+  // Route/parking clocks no longer own poses. Persist shared readback for cars.
+  for (const e of participants) {
+    const car = realm.vehicleRegistry?.states.get(e.id);
+    if (!car) continue;
+    if (
+      e.position.wx !== e.prevPosition?.wx ||
+      e.position.wy !== e.prevPosition?.wy ||
+      e.wz !== e.prevWz ||
+      e.vehicleHeading !== e.prevVehicleHeading ||
+      !rotationsEqual(e.bodyRotation, e.prevBodyRotation)
+    )
+      realm.vehicleRegistry?.onChange?.(car, false);
+  }
+  realm.vehicles.sync();
+
+  tickFoodSources(realm.entityManager, entityTickDts, wildlifeEnvironment, workReady);
+
+  // Contacts trigger gameplay; they never run another ball integration.
+  tickSharedBallGameplay(realm.entityManager, participants, scene, (x, y) =>
+    realm.world.getCollisionIfLoaded(x, y),
+  );
+  realm.animalWork.syncAll(active);
+  realm.ownedBalls.sync(active);
+
+  for (const entity of entityTickDts.keys()) {
+    if (entity.wanderAI || entity.routeAI || entity.velocity || entity.deathTimer !== undefined)
+      realm.records?.changed(entity);
+  }
+
+  // ── TickService.postSimulation ──
+  realm.worldAPI.tick.firePost(stepDt);
+
+  // ── TagService removal detection ──
+  realm.worldAPI.tags.tick();
+
+  // ── OverlapService detection ──
+  realm.worldAPI.overlap.tick();
+}

@@ -63,9 +63,9 @@
       "overLimit": 1
     },
     "src/client/GameClient.ts": {
-      "lines": 1746,
-      "worst": 44,
-      "overLimit": 1
+      "lines": 982,
+      "worst": 0,
+      "overLimit": 0
     },
     "src/client/PlayerPredictor.ts": {
       "lines": 983,
@@ -86,11 +86,6 @@
       "lines": 213,
       "worst": 55,
       "overLimit": 1
-    },
-    "src/editor/EditorPanel.ts": {
-      "lines": 1292,
-      "worst": 49,
-      "overLimit": 3
     },
     "src/editor/InteriorCatalog.ts": {
       "lines": 721,
@@ -457,11 +452,6 @@
       "worst": 64,
       "overLimit": 2
     },
-    "src/rendering/collectScene.ts": {
-      "lines": 432,
-      "worst": 176,
-      "overLimit": 1
-    },
     "src/rendering/CollisionDebug.ts": {
       "lines": 287,
       "worst": 55,
@@ -633,9 +623,9 @@
       "overLimit": 1
     },
     "src/server/GameServer.ts": {
-      "lines": 1714,
-      "worst": 40,
-      "overLimit": 3
+      "lines": 1019,
+      "worst": 0,
+      "overLimit": 0
     },
     "src/server/InterestManager.ts": {
       "lines": 134,
@@ -653,9 +643,9 @@
       "overLimit": 1
     },
     "src/server/Realm.ts": {
-      "lines": 2145,
-      "worst": 66,
-      "overLimit": 4
+      "lines": 1357,
+      "worst": 0,
+      "overLimit": 0
     },
     "src/server/RealmActivity.ts": {
       "lines": 104,
@@ -905,11 +895,6 @@
     "src/workshop/AnimalBrowser.tsx": {
       "lines": 460,
       "worst": 40,
-      "overLimit": 2
-    },
-    "src/workshop/App.tsx": {
-      "lines": 1021,
-      "worst": 28,
       "overLimit": 2
     },
     "src/workshop/FamilySheetArt.tsx": {

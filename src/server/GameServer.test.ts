@@ -244,7 +244,7 @@ describe("pattern commands", () => {
     });
     await server.settle();
     expect(server.propManager.props.filter((p) => p.type.startsWith("pattern:"))).toHaveLength(1);
-    server.destroy();
+    await server.destroy();
   });
 });
 
@@ -281,6 +281,6 @@ it.each(["global", "recipient"])(
         frame.entityBaselines?.some((entity) => entity.id === session.player.id),
     ).toBe(true);
     expect(server.completedTicks).toBe(2);
-    server.destroy();
+    await server.destroy();
   },
 );

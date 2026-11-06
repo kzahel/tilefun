@@ -255,6 +255,8 @@ try {
     "src/rendering/CarMeshProjection.ts",
     "src/rendering/CarMeshAsset.ts",
     "src/rendering/collectScene.ts",
+    "src/rendering/scene/EntitySprites.ts",
+    "src/rendering/scene/SceneCull.ts",
     ...vehicleAssets.map((asset) => `public/${asset.path}`),
     "public/demos/pixel-characters/person-32.png",
     "public/demos/pixel-characters/cat-32.png",

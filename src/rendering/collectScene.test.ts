@@ -1,16 +1,28 @@
+import { createHash } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { PNG } from "pngjs";
 import { expect, it } from "vitest";
+import { TerrainId } from "../autotile/TerrainId.js";
+import { BOAT_MODEL } from "../boats/Boat.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
+import { createProp } from "../entities/PropFactories.js";
 import { createCurveTrain } from "../railway/CurveTrain.js";
 import { RailAlignment } from "../railway/RailPath.js";
 import { curvedTrackPath } from "../scenarios/CurvedTrainRecipe.js";
+import { undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
+import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import { createVehicle, VEHICLE_MODELS } from "../traffic/Vehicle.js";
+import { createFauna } from "../wildlife/Fauna.js";
+import { createForageItem } from "../wildlife/ForageResources.js";
+import { createRoadkill } from "../wildlife/Roadkill.js";
+import { Chunk } from "../world/Chunk.js";
 import { authoredVehicleForType } from "./AuthoredVehicleMeshes.js";
 import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
 import { SceneFrame } from "./SceneFrame.js";
+import type { ElevationItem, ParticleItem } from "./SceneItem.js";
+import type { TerrainResourceId } from "./TerrainPresentation.js";
 
 const world = { getHeightAt: () => 0, getChunkIfLoaded: () => undefined, getRoadAt: () => 0 };
 const terrain = { collectElevationItems: () => [] };
@@ -216,3 +228,198 @@ it.each(["police-car", "garbage-truck-green", "garbage-truck-orange", "fire-truc
     expect(collect(car, 1, 1 / 3, frame)[0]).not.toHaveProperty("emergencyFlash");
   },
 );
+
+/** Characterization fixture: one scene that reaches every collection stage (roof
+ * riders, hidden drivers, boat passengers, carried items, roadkill, warning lights,
+ * legacy jumps, trains, culling, planar/excavated props, prop parts, grass,
+ * receivers, elevation and particles). Duplicate entity ids pin `find` semantics. */
+function characterizationScene(garage: boolean) {
+  const entities: Entity[] = [];
+  const add = (e: Entity, id: number) => {
+    e.id = id;
+    entities.push(e);
+    return e;
+  };
+  const car = add(createVehicle("compact-1", 200, 150, Direction.Right), 1);
+  car.wz = 0;
+  const rider = add(createPlayer(200, 150), 2);
+  rider.wz = car.collider?.physicalHeight ?? 24;
+  add(createPlayer(205, 150), 3).parentId = 1;
+  add(createPlayer(60, 60), 4); // Same id as the boat, but not a boat.
+  const boat = add(createVehicle(BOAT_MODEL, 90, 260, Direction.Left), 4);
+  boat.prevPosition = { wx: 80, wy: 255 };
+  add(createPlayer(92, 258), 5).parentId = 4;
+  const fox = add(createFauna("fox", 320, 120), 6);
+  fox.prevPosition = { wx: 316, wy: 118 };
+  fox.wz = 6; // Carried items follow the parent's interpolated depth and height.
+  fox.prevWz = 2;
+  add(createForageItem("twig", 322, 118), 7).parentId = 6;
+  const cat = add(createFauna("cat", 140, 60), 8);
+  if (cat.sprite) cat.sprite.direction = Direction.Up;
+  add(createForageItem("fruit", 140, 58), 9).parentId = 8;
+  const remains = add(createRoadkill(createFauna("dog", 260, 210)), 10);
+  remains.deathTimer = 2;
+  for (const [i, model] of ["police-car", "fire-truck-ladder-2", "garbage-truck-green"].entries()) {
+    add(createVehicle(model, 40 + i * 140, 330, Direction.Down), 11 + i).emergencyState = 1;
+  }
+  const jumper = add(createPlayer(300, 40), 14);
+  delete jumper.wz;
+  jumper.prevJumpZ = 2;
+  jumper.jumpZ = 10;
+  add(createPlayer(5000, 5000), 15);
+  const tilted = add(createVehicle("bus-2", 360, 260, Direction.Up), 16);
+  tilted.bodyRotation = [0, 0, 0.2, Math.sqrt(1 - 0.04)];
+  const path = curvedTrackPath();
+  const train = path ? createCurveTrain(new RailAlignment(path), 900)[2] : undefined;
+  if (train) {
+    train.position = { wx: 100, wy: 180 };
+    train.prevPosition = { ...train.position };
+    add(train, 17);
+  }
+  for (const [i, feet] of [0, 48, -48].entries())
+    add(createPlayer(-20 + i * 60, 8), 20 + i).wz = feet;
+  // The view culls x < 50.67, x > 349.33, y < 34 and y > 266 (16px margin included).
+  // One sprite just beyond each remaining edge; mesh spheres that alone reach inside.
+  for (const [i, [wx, wy]] of (
+    [
+      [358, 150],
+      [200, 30],
+      [200, 283],
+    ] as const
+  ).entries())
+    add(createPlayer(wx, wy), 30 + i).wz = 0;
+  add(createVehicle("compact-1", 200, -50), 33).wz = 0; // r*sqrt2 below the top edge
+  const ambulance = add(createVehicle("ambulance", 200, 420, Direction.Down), 34);
+  ambulance.wz = 0; // r*sqrt2 above the bottom edge, default light height
+  ambulance.emergencyState = 1;
+  const native = path ? createCurveTrain(new RailAlignment(path), 900)[0] : undefined;
+  if (native) {
+    // With native trains only the 96px fallback sphere (not 95) keeps this carriage.
+    native.position = { wx: 200, wy: 401 };
+    native.prevPosition = { ...native.position };
+    add(native, 35);
+  }
+  // Roof rider on the yawed bus: an upright rotated support with no fitted offset,
+  // and a vehicle depth surface in front of the rider's own Y+Z depth.
+  add(createPlayer(345, 210), 36).wz = 40;
+  // A duplicate boat id: passengers resolve to the first boat. The fruit-carrying
+  // cat stands on this deck behind the hull's depth.
+  const dock = add(createVehicle(BOAT_MODEL, 300, 200, Direction.Up), 4);
+  dock.wz = 0;
+  cat.position = { wx: 300, wy: 175 };
+  cat.prevPosition = { ...cat.position };
+  cat.wz = 16;
+  cat.prevWz = 16;
+  add(createPlayer(325, 125), 37).parentId = 6; // Not carryable: ordinary depth.
+  // Non-raster planar shadow: a car parked on the raised deck.
+  add(createVehicle("compact-1", 120, 50, Direction.Right), 38).wz = 48;
+  const recipe = garage ? undergroundGarageRecipe() : worldGeometryRecipe();
+  const parked = createProp("prop-city-street-v1-car-east", 250, 60);
+  parked.id = 100;
+  parked.sortOffsetY = 6;
+  const parted = createProp("prop-city-commercial-v1-car-west", 120, 120);
+  parted.id = 101;
+  parted.sprite.parts = [
+    { frameCol: 1, frameRow: 2, spriteWidth: 16, spriteHeight: 16, dx: -8, dy: 0 },
+    { frameCol: 3, frameRow: 4, spriteWidth: 16, spriteHeight: 16, dx: 8, dy: -4 },
+  ];
+  const hidden = createProp("prop-city-street-v1-car-east", 210, 90);
+  hidden.id = 102;
+  const props = [...recipe.props.map((p, i) => ({ ...p, id: 200 + i })), parked, parted, hidden];
+  return { entities, props, drawProps: new Set(props.map((p) => p.id).filter((id) => id !== 102)) };
+}
+
+const grassChunk = new Chunk();
+grassChunk.blendBase.fill(TerrainId.Grass);
+grassChunk.autotileComputed = true;
+
+function sceneDigest(variant: {
+  frame: boolean;
+  raster: boolean;
+  grass: boolean;
+  garage: boolean;
+  time: number;
+  /** Partial grass opacity below zoom 1/2; the world view stays the same. */
+  zoom?: number;
+  nativeTrains?: boolean;
+}) {
+  const { entities, props, drawProps } = characterizationScene(variant.garage);
+  const camera = new Camera();
+  const zoom = variant.zoom ?? 1 / 2;
+  camera.zoom = zoom;
+  camera.setViewport(800 * zoom, 600 * zoom);
+  camera.snapTo(200, 150);
+  camera.worldRaster = variant.raster;
+  const frame = variant.frame
+    ? new SceneFrame({ authoredTrains: !variant.nativeTrains })
+    : undefined;
+  if (frame) frame.presentationTime = variant.time;
+  const elevation: ElevationItem = {
+    kind: "elevation",
+    sortKey: 150,
+    phase: "cliff",
+    wx: 192,
+    wy: 144,
+    terrainResource: 7 as TerrainResourceId,
+    srcX: 0,
+    srcY: 16,
+    height: 1,
+  };
+  const particle: ParticleItem = {
+    kind: "particle",
+    sortKey: 150,
+    wx: 200,
+    wy: 150,
+    z: 4,
+    size: 2,
+    color: "#fff",
+    alpha: 0.5,
+  };
+  const items = collectScene(
+    entities,
+    props,
+    {
+      getHeightAt: (tx: number, ty: number) => ((tx + ty) & 1) * (variant.garage ? 0 : 1),
+      getChunkIfLoaded: () => (variant.grass ? grassChunk : undefined),
+      getRoadAt: () => 0,
+    },
+    camera,
+    { minCx: -1, maxCx: 1, minCy: -1, maxCy: 1 },
+    0.5,
+    { collectElevationItems: () => [elevation] },
+    variant.raster ? { collectItems: () => [particle] } : [particle],
+    variant.grass,
+    drawProps,
+    frame,
+  );
+  const json = JSON.stringify({ items, stats: frame?.receiverStats }, (_key, value) =>
+    typeof value === "number" && (Object.is(value, -0) || !Number.isFinite(value))
+      ? `number:${Object.is(value, -0) ? "-0" : value}`
+      : value,
+  );
+  const kinds: Record<string, number> = {};
+  for (const item of items) kinds[item.kind] = (kinds[item.kind] ?? 0) + 1;
+  return { kinds, digest: createHash("sha256").update(json).digest("hex").slice(0, 16) };
+}
+
+// Digests were recorded against the single-function collector before it was
+// split into stages; any change to item fields, values, key order or draw order fails.
+it.each([
+  [{ frame: false, raster: false, grass: false, garage: false, time: 0 }, "f7b9458ba47c4587"],
+  [
+    { frame: true, raster: false, grass: true, garage: false, time: 0.05, zoom: 3 / 8 },
+    "de866475deb395bf",
+  ],
+  [{ frame: true, raster: true, grass: true, garage: false, time: 0.55 }, "c9ca8cef32132e0a"],
+  [
+    { frame: true, raster: true, grass: false, garage: true, time: 0.25, nativeTrains: true },
+    "18f7829d13a48c06",
+  ],
+  [{ frame: false, raster: true, grass: false, garage: true, time: 0 }, "73c313099e0a7134"],
+] as const)("collects a byte-identical characterization scene %o", (variant, digest) => {
+  const result = sceneDigest(variant);
+  expect(result.digest).toBe(digest);
+  expect(result.kinds.sprite).toBeGreaterThan(20);
+  if (variant.grass) expect(result.kinds.grass).toBeGreaterThan(0);
+  if (variant.raster) expect(result.kinds.decal).toBeGreaterThan(0);
+});

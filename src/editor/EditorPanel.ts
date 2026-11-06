@@ -1,29 +1,27 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
-import { MAX_ELEVATION } from "../config/constants.js";
-import { Direction } from "../entities/Entity.js";
-import { ENTITY_DEFS } from "../entities/EntityDefs.js";
-import { getPropSheetInfo, PROP_PALETTE } from "../entities/PropFactories.js";
-import { RoadType } from "../road/RoadType.js";
-import { vehicleFrameDirection, vehicleView } from "../traffic/Vehicle.js";
-import { originalPaintSwatches, vehiclePaintSchemes } from "../traffic/VehiclePaint.js";
+import { PROP_PALETTE } from "../entities/PropFactories.js";
 import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
+import { EditorBrushTools } from "./EditorBrushTools.js";
+import { EditorElevationPalette } from "./EditorElevationPalette.js";
 import type { EditorModel } from "./EditorModel.js";
 import {
   ALL_TABS,
   type EditorTab,
-  ELEVATION_COLORS,
-  ELEVATION_GRID_SIZES,
   ENTITY_PALETTE,
   NATURAL_SHEET_PALETTE,
-  type PaletteEntry,
   ROAD_PALETTE,
-  type RoadPaletteEntry,
   STRUCTURE_PALETTE,
-  TERRAIN_TABS,
   VEHICLE_PALETTE,
 } from "./EditorPalettes.js";
-import type { BrushMode, PaintMode } from "./EditorTypes.js";
+import type { EditorSection, EditorSectionHost } from "./EditorPanelWidgets.js";
+import { EditorPatternPalette } from "./EditorPatternPalette.js";
+import {
+  EditorEntityPalette,
+  EditorPropPalette,
+  EditorVehiclePalette,
+} from "./EditorPlacementPalettes.js";
+import { EditorTerrainPalettes } from "./EditorTerrainPalettes.js";
 
 export type { EditorTab };
 
@@ -36,21 +34,38 @@ const PANEL_STYLE = `
   flex-direction: column;
 `;
 
-const BTN_STYLE = `
-  height: 44px; border: 2px solid #888; border-radius: 4px;
-  background: #444; color: #fff; font: bold 10px monospace;
-  cursor: pointer; padding: 0 10px;
-`;
-
 const TAB_STYLE = `
   padding: 10px 14px; border: none; border-radius: 6px 6px 0 0;
   font: bold 12px monospace; cursor: pointer; min-height: 44px;
   display: flex; align-items: center; gap: 5px; flex: 0 0 auto; white-space: nowrap;
 `;
 
-const ROW_STYLE =
-  "display: flex; flex-wrap: wrap; gap: 4px; align-items: center; padding: 8px 12px;";
+const TAB_ICONS: Record<EditorTab, string> = {
+  natural: "\ud83c\udf3f",
+  road: "\ud83d\udee3\ufe0f",
+  structure: "\ud83c\udfd7\ufe0f",
+  entities: "\ud83d\udc25",
+  vehicles: "🚗",
+  props: "\ud83c\udf32",
+  elevation: "\u26f0\ufe0f",
+  patterns: "▥",
+};
 
+const TAB_LABELS: Record<EditorTab, string> = {
+  natural: "Natural",
+  road: "Road",
+  structure: "Structure",
+  entities: "Entities",
+  vehicles: "Vehicles",
+  props: "Props",
+  elevation: "Elevation",
+  patterns: "Patterns",
+};
+
+/**
+ * Bottom editor tray: header (selection/minimize, Play), category tabs and a
+ * scrolling palette area composed from per-tab sections.
+ */
 export class EditorPanel {
   readonly el: HTMLDivElement;
   private readonly container: HTMLDivElement;
@@ -62,36 +77,12 @@ export class EditorPanel {
   private minimized = false;
   private displayedTab: EditorTab | null = null;
   private readonly tabButtons: Map<EditorTab, HTMLButtonElement> = new Map();
-  private readonly toolRow: HTMLDivElement;
-  private readonly naturalRow: HTMLDivElement;
-  private readonly roadRow: HTMLDivElement;
-  private readonly structureRow: HTMLDivElement;
-  private readonly entityRow: HTMLDivElement;
-  private readonly vehicleRow: HTMLDivElement;
-  private readonly vehiclePaintRow: HTMLDivElement;
-  private vehiclePaintSelection = "";
-  private readonly vehicleButtons: HTMLButtonElement[] = [];
-  private readonly elevationRow: HTMLDivElement;
-  private readonly elevationHeightButtons: HTMLButtonElement[] = [];
-  private readonly elevationGridButtons: HTMLButtonElement[] = [];
-  /** Structure terrain buttons with their entries, for selection highlighting. */
-  private readonly terrainButtons: { btn: HTMLButtonElement; entry: PaletteEntry }[] = [];
-  private readonly naturalPaletteButtons: HTMLButtonElement[] = [];
-  private readonly autoButtons: HTMLButtonElement[] = [];
-  private readonly terrainWrappers: HTMLDivElement[] = [];
-  private readonly entityButtons: HTMLButtonElement[] = [];
-  private readonly roomRow: HTMLDivElement;
-  private readonly roomButtons: { button: HTMLButtonElement; value: string; rectangle: boolean }[] =
-    [];
-  private readonly indoorProps: HTMLDivElement;
-  private readonly patternRow: HTMLDivElement;
-  private readonly patternStatus: HTMLSpanElement;
-  private readonly patternUndo: HTMLButtonElement;
-  private readonly patternRedo: HTMLButtonElement;
-  private readonly propsRow: HTMLDivElement;
-  private readonly propButtons: HTMLButtonElement[] = [];
-  private readonly deleteButtons: HTMLButtonElement[] = [];
-  private readonly brushModeButtons: Map<BrushMode, HTMLButtonElement> = new Map();
+  private readonly terrain: EditorTerrainPalettes;
+  private readonly entities: EditorEntityPalette;
+  private readonly vehicles: EditorVehiclePalette;
+  private readonly props: EditorPropPalette;
+  /** Palette sections in scroll-area order. */
+  private readonly sections: readonly EditorSection[];
   private controllerOpen = false;
   toggleController(): void {
     if (!this.visible) return;
@@ -105,13 +96,6 @@ export class EditorPanel {
       });
     } else deactivateMenu(this.container);
   }
-  private readonly bridgeButton: HTMLButtonElement;
-  private readonly subgridSeparator: HTMLDivElement;
-  private readonly sizeLabel: HTMLSpanElement;
-  private readonly bridgeLabel: HTMLSpanElement;
-  private readonly brushSizeButton: HTMLButtonElement;
-  private readonly paintModeButtons: Map<PaintMode, HTMLButtonElement> = new Map();
-  private readonly roadButtons: { btn: HTMLButtonElement; entry: RoadPaletteEntry }[] = [];
 
   constructor(model: EditorModel) {
     this.model = model;
@@ -147,35 +131,42 @@ export class EditorPanel {
     header.append(this.collapseArrow, play);
     this.container.appendChild(header);
 
-    // --- Tab bar ---
+    this.tabBar = this.buildTabBar();
+    this.container.appendChild(this.tabBar);
+    this.paletteScroll = document.createElement("div");
+    this.paletteScroll.className = "editor-palette-scroll";
+    this.paletteScroll.dataset.testid = "editor-palette-scroll";
+    this.container.appendChild(this.paletteScroll);
+
+    const host: EditorSectionHost = { model, sync: () => this.syncFromModel() };
+    this.terrain = new EditorTerrainPalettes(host);
+    this.entities = new EditorEntityPalette(host);
+    this.vehicles = new EditorVehiclePalette(host);
+    this.props = new EditorPropPalette(host);
+    this.sections = [
+      new EditorBrushTools(host),
+      this.terrain,
+      this.entities,
+      this.vehicles,
+      this.props,
+      new EditorPatternPalette(host),
+      new EditorElevationPalette(host),
+    ];
+    for (const section of this.sections) this.paletteScroll.append(...section.rows);
+
+    // Initial sync
+    this.syncFromModel();
+    document.body.appendChild(this.container);
+  }
+
+  private buildTabBar(): HTMLDivElement {
     const tabBar = document.createElement("div");
-    this.tabBar = tabBar;
     tabBar.className = "editor-tabs";
     tabBar.dataset.testid = "editor-tabs";
     tabBar.setAttribute("aria-label", "Editor categories");
     for (const tab of ALL_TABS) {
       const btn = document.createElement("button");
       btn.style.cssText = TAB_STYLE;
-      const TAB_ICONS: Record<EditorTab, string> = {
-        natural: "\ud83c\udf3f",
-        road: "\ud83d\udee3\ufe0f",
-        structure: "\ud83c\udfd7\ufe0f",
-        entities: "\ud83d\udc25",
-        vehicles: "🚗",
-        props: "\ud83c\udf32",
-        elevation: "\u26f0\ufe0f",
-        patterns: "▥",
-      };
-      const TAB_LABELS: Record<EditorTab, string> = {
-        natural: "Natural",
-        road: "Road",
-        structure: "Structure",
-        entities: "Entities",
-        vehicles: "Vehicles",
-        props: "Props",
-        elevation: "Elevation",
-        patterns: "Patterns",
-      };
       const icon = document.createElement("span");
       icon.style.fontSize = "15px";
       icon.textContent = TAB_ICONS[tab];
@@ -186,374 +177,30 @@ export class EditorPanel {
       tabBar.appendChild(btn);
       this.tabButtons.set(tab, btn);
     }
-    this.container.appendChild(tabBar);
-    this.paletteScroll = document.createElement("div");
-    this.paletteScroll.className = "editor-palette-scroll";
-    this.paletteScroll.dataset.testid = "editor-palette-scroll";
-    this.container.appendChild(this.paletteScroll);
-
-    // --- Shared tool row (visible for all terrain tabs) ---
-    this.toolRow = document.createElement("div");
-    this.toolRow.style.cssText = ROW_STYLE;
-
-    this.toolRow.appendChild(this.makeLabel("Brush"));
-    const brushModes: { mode: BrushMode; label: string; key: string }[] = [
-      { mode: "tile", label: "\u25a0", key: "M" },
-      { mode: "subgrid", label: "\u229e", key: "M" },
-      { mode: "corner", label: "\u25c7", key: "M" },
-      { mode: "cross", label: "\u271a", key: "M" },
-      { mode: "x", label: "\u2716", key: "M" },
-    ];
-    for (const { mode, label, key } of brushModes) {
-      const btn = document.createElement("button");
-      btn.style.cssText = BTN_STYLE;
-      btn.style.fontSize = "16px";
-      btn.textContent = label;
-      btn.title = `${mode} brush (${key})`;
-      btn.addEventListener("click", () => this.model.setBrushMode(mode));
-      this.toolRow.appendChild(btn);
-      this.brushModeButtons.set(mode, btn);
-    }
-
-    // Paint mode buttons: Positive / Unpaint
-    this.toolRow.appendChild(this.makeSeparator());
-    this.toolRow.appendChild(this.makeLabel("Paint"));
-    const paintModes: {
-      mode: PaintMode;
-      label: string;
-      key: string;
-    }[] = [
-      { mode: "positive", label: "+", key: "Z" },
-      { mode: "unpaint", label: "\u00d7", key: "C" },
-    ];
-    for (const { mode, label, key } of paintModes) {
-      const btn = document.createElement("button");
-      btn.style.cssText = BTN_STYLE;
-      btn.textContent = label;
-      btn.title = `${mode} mode (${key})`;
-      btn.addEventListener("click", () => this.model.setPaintMode(mode));
-      this.toolRow.appendChild(btn);
-      this.paintModeButtons.set(mode, btn);
-    }
-    this.subgridSeparator = this.makeSeparator();
-    this.toolRow.appendChild(this.subgridSeparator);
-    this.sizeLabel = this.makeLabel("Size");
-    this.toolRow.appendChild(this.sizeLabel);
-
-    this.brushSizeButton = document.createElement("button");
-    this.brushSizeButton.style.cssText = BTN_STYLE;
-    this.brushSizeButton.title = "Subgrid brush shape (S)";
-    this.brushSizeButton.addEventListener("click", () => this.model.cycleBrushShape());
-    this.toolRow.appendChild(this.brushSizeButton);
-
-    this.bridgeLabel = this.makeLabel("Bridge");
-    this.toolRow.appendChild(this.bridgeLabel);
-    this.bridgeButton = document.createElement("button");
-    this.bridgeButton.style.cssText = BTN_STYLE;
-    this.bridgeButton.title = "Bridge depth: auto-insert transitions (B)";
-    this.bridgeButton.addEventListener("click", () => this.model.cycleBridgeDepth());
-    this.toolRow.appendChild(this.bridgeButton);
-
-    this.paletteScroll.appendChild(this.toolRow);
-
-    // --- Terrain palette rows ---
-    this.naturalRow = this.buildNaturalRow();
-    this.paletteScroll.appendChild(this.naturalRow);
-
-    this.roadRow = this.buildRoadRow();
-    this.paletteScroll.appendChild(this.roadRow);
-
-    this.structureRow = this.buildTerrainRow(STRUCTURE_PALETTE);
-    this.paletteScroll.appendChild(this.structureRow);
-
-    // --- Entity row ---
-    this.entityRow = document.createElement("div");
-    this.entityRow.style.cssText = ROW_STYLE;
-
-    for (const entry of ENTITY_PALETTE) {
-      const btn = document.createElement("button");
-      btn.className = "editor-entity-button";
-      btn.type = "button";
-      btn.style.background = entry.color;
-      this.appendEntityLabel(btn, entry.label);
-      btn.title = `Place ${entry.label} (click map)`;
-      btn.setAttribute("aria-label", btn.title);
-      btn.addEventListener("click", () => {
-        this.model.selectedEntityType = entry.type;
-        this.model.deleteMode = false;
-        this.syncFromModel();
-      });
-      this.entityButtons.push(btn);
-      this.entityRow.appendChild(btn);
-    }
-
-    this.entityRow.appendChild(this.makeSeparator());
-    this.entityRow.appendChild(this.buildDeleteButton());
-
-    this.paletteScroll.appendChild(this.entityRow);
-
-    // --- Parked vehicles ---
-    this.vehicleRow = document.createElement("div");
-    this.vehicleRow.style.cssText = ROW_STYLE;
-    this.vehicleRow.setAttribute("role", "group");
-    this.vehicleRow.setAttribute("aria-label", "Vehicle picker");
-    for (const entry of VEHICLE_PALETTE) {
-      const button = document.createElement("button");
-      button.style.cssText = `${BTN_STYLE}width: 96px; height: 78px; padding: 2px; flex-direction: column;`;
-      button.textContent = entry.label;
-      button.title = `Place ${entry.label} (click map)`;
-      button.setAttribute("aria-label", entry.label);
-      button.onclick = () => {
-        this.model.selectedVehicleType = entry.type;
-        this.model.selectedVehiclePaint = undefined;
-        this.model.deleteMode = false;
-        this.syncFromModel();
-      };
-      this.vehicleButtons.push(button);
-      this.vehicleRow.append(button);
-    }
-    this.vehicleRow.append(this.makeSeparator(), this.buildDeleteButton());
-    this.paletteScroll.append(this.vehicleRow);
-    this.vehiclePaintRow = document.createElement("div");
-    this.vehiclePaintRow.style.cssText = `${ROW_STYLE}position: sticky; top: 0; z-index: 2; background: #20242b; border-bottom: 1px solid #667;`;
-    this.vehiclePaintRow.setAttribute("role", "group");
-    this.vehiclePaintRow.setAttribute("aria-label", "Vehicle paint");
-    this.paletteScroll.insertBefore(this.vehiclePaintRow, this.vehicleRow);
-
-    // --- Props row ---
-    this.propsRow = document.createElement("div");
-    this.propsRow.style.cssText = ROW_STYLE;
-
-    let lastCategory = "";
-    for (const entry of PROP_PALETTE) {
-      if (entry.category !== lastCategory) {
-        if (lastCategory !== "") this.propsRow.appendChild(this.makeSeparator());
-        const catLabel =
-          entry.category === "nature"
-            ? "Nature"
-            : entry.category === "building"
-              ? "Buildings"
-              : "Playground";
-        this.propsRow.appendChild(this.makeLabel(catLabel));
-        lastCategory = entry.category;
-      }
-      const btn = document.createElement("button");
-      btn.style.cssText = `
-        width: 64px; height: 44px; border: 2px solid #555; border-radius: 4px;
-        background: ${entry.color}; color: #fff; font: bold 9px monospace;
-        cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-        display: flex; align-items: center; justify-content: center;
-      `;
-      btn.textContent = entry.label;
-      btn.title = `Place ${entry.label} (click map)`;
-      btn.setAttribute("aria-label", btn.title);
-      btn.addEventListener("click", () => {
-        this.model.selectedPropType = entry.type;
-        this.model.deleteMode = false;
-        this.syncFromModel();
-      });
-      this.propButtons.push(btn);
-      this.propsRow.appendChild(btn);
-    }
-
-    this.propsRow.appendChild(this.makeSeparator());
-
-    const browseBtn = document.createElement("button");
-    browseBtn.style.cssText = `
-      width: 80px; height: 44px; border: 2px solid #8cf; border-radius: 4px;
-      background: rgba(100,160,255,0.15); color: #8cf; font: bold 10px monospace;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-    `;
-    browseBtn.textContent = "Atlas...";
-    browseBtn.title = "Browse 4800+ sprites from Modern Exteriors";
-    browseBtn.addEventListener("click", () => this.model.onOpenCatalog?.());
-    this.propsRow.appendChild(browseBtn);
-
-    this.propsRow.appendChild(this.makeSeparator());
-    this.propsRow.appendChild(this.buildDeleteButton());
-
-    this.paletteScroll.appendChild(this.propsRow);
-
-    this.indoorProps = document.createElement("div");
-    this.indoorProps.style.cssText = ROW_STYLE;
-    for (const asset of [
-      "single-bed",
-      "side-table",
-      "dresser",
-      "worktable",
-      "stool",
-      "potted-tree",
-      "fireplace",
-      "log-rack",
-    ]) {
-      const button = document.createElement("button");
-      button.textContent = asset;
-      button.dataset.furnitureType = `prop-interior-furniture:${asset}`;
-      button.style.cssText = BTN_STYLE;
-      button.onclick = () => {
-        this.model.selectedPropType = `prop-interior-furniture:${asset}`;
-        this.model.deleteMode = false;
-        this.syncFromModel();
-      };
-      this.indoorProps.appendChild(button);
-    }
-    this.indoorProps.appendChild(this.buildDeleteButton());
-    this.paletteScroll.appendChild(this.indoorProps);
-    this.roomRow = document.createElement("div");
-    this.roomRow.style.cssText = ROW_STYLE;
-    for (const [label, value, rectangle] of [
-      ["Floor", "L", false],
-      ["Kitchen floor", "K", false],
-      ["Wall", "#", false],
-      ["Door", "+", false],
-      ["Room rectangle", "L", true],
-    ] as const) {
-      const button = document.createElement("button");
-      button.textContent = label;
-      button.style.cssText = BTN_STYLE;
-      button.onclick = () => {
-        this.model.roomValue = value;
-        this.model.roomRectangle = rectangle;
-        this.model.setPaintMode("positive");
-      };
-      this.roomButtons.push({ button, value, rectangle });
-      this.roomRow.appendChild(button);
-    }
-    this.paletteScroll.appendChild(this.roomRow);
-    this.patternRow = document.createElement("div");
-    this.patternRow.style.cssText = ROW_STYLE;
-    const patternLabel = this.makeLabel("Fenced trees v1 · candidate");
-    patternLabel.dataset.patternLabel = "true";
-    this.patternRow.appendChild(patternLabel);
-    const erase = document.createElement("button");
-    erase.textContent = "Paint / erase";
-    erase.style.cssText = BTN_STYLE;
-    erase.onclick = () =>
-      this.model.setPaintMode(this.model.paintMode === "positive" ? "unpaint" : "positive");
-    this.patternRow.appendChild(erase);
-    this.patternUndo = document.createElement("button");
-    this.patternUndo.textContent = "Undo row stroke";
-    this.patternUndo.style.cssText = BTN_STYLE;
-    this.patternUndo.onclick = () => this.model.onPatternHistory?.("undo");
-    this.patternRow.appendChild(this.patternUndo);
-    this.patternRedo = document.createElement("button");
-    this.patternRedo.textContent = "Redo row stroke";
-    this.patternRedo.style.cssText = BTN_STYLE;
-    this.patternRedo.onclick = () => this.model.onPatternHistory?.("redo");
-    this.patternRow.appendChild(this.patternRedo);
-    const studio = document.createElement("a");
-    studio.href = "/tilefun/workshop.html#/tool/patterns?family=fenced-trees-v1";
-    studio.textContent = "Pattern studio ↗";
-    studio.style.color = "#8cf";
-    this.patternRow.appendChild(studio);
-    this.patternStatus = document.createElement("span");
-    this.patternStatus.setAttribute("role", "status");
-    this.patternRow.appendChild(this.patternStatus);
-    this.paletteScroll.appendChild(this.patternRow);
-    // --- Elevation row ---
-    this.elevationRow = document.createElement("div");
-    this.elevationRow.style.cssText = ROW_STYLE;
-
-    this.elevationRow.appendChild(this.makeLabel("Height"));
-    for (let h = 0; h <= MAX_ELEVATION; h++) {
-      const btn = document.createElement("button");
-      btn.style.cssText = BTN_STYLE;
-      btn.style.width = "44px";
-      btn.style.background = ELEVATION_COLORS[h] ?? "#888";
-      btn.textContent = `${h}`;
-      btn.title = h === 0 ? "Flatten (height 0)" : `Set height ${h}`;
-      const height = h;
-      btn.addEventListener("click", () => {
-        this.model.selectedElevation = height;
-        this.syncFromModel();
-      });
-      this.elevationHeightButtons.push(btn);
-      this.elevationRow.appendChild(btn);
-    }
-
-    this.elevationRow.appendChild(this.makeSeparator());
-    this.elevationRow.appendChild(this.makeLabel("Grid"));
-    for (const size of ELEVATION_GRID_SIZES) {
-      const btn = document.createElement("button");
-      btn.style.cssText = BTN_STYLE;
-      btn.style.width = "44px";
-      btn.textContent = `${size}x${size}`;
-      btn.title = `Paint ${size}x${size} tile area`;
-      btn.addEventListener("click", () => {
-        this.model.elevationGridSize = size;
-        this.syncFromModel();
-      });
-      this.elevationGridButtons.push(btn);
-      this.elevationRow.appendChild(btn);
-    }
-
-    this.elevationRow.appendChild(this.makeSeparator());
-    const elevHint = document.createElement("span");
-    elevHint.style.cssText = "font: 10px monospace; color: #aaa;";
-    elevHint.textContent = "Click: set height / Right-click: flatten";
-    this.elevationRow.appendChild(elevHint);
-
-    this.paletteScroll.appendChild(this.elevationRow);
-
-    // Initial sync
-    this.syncFromModel();
-    document.body.appendChild(this.container);
+    return tabBar;
   }
 
   /** Synchronize all DOM state from the model. */
   private syncFromModel(): void {
-    this.patternRow.style.display = this.model.editorTab === "patterns" ? "flex" : "none";
-    this.roomRow.style.display =
-      this.model.indoor && this.model.editorTab === "patterns" ? "flex" : "none";
-    this.indoorProps.style.display =
-      this.model.indoor && this.model.editorTab === "props" ? "flex" : "none";
-    for (const button of this.indoorProps.querySelectorAll<HTMLButtonElement>(
-      "[data-furniture-type]",
-    ))
-      button.style.borderColor =
-        button.dataset.furnitureType === this.model.selectedPropType ? "#8cf" : "#888";
-    for (const [tab, button] of this.tabButtons) {
-      if (tab === "patterns" && button.lastChild)
-        button.lastChild.textContent = this.model.indoor ? "Rooms" : "Patterns";
-    }
-    for (const { button, value, rectangle } of this.roomButtons)
-      button.style.borderColor =
-        this.model.roomValue === value && this.model.roomRectangle === rectangle ? "#8cf" : "#888";
-    const label = this.patternRow.querySelector<HTMLElement>("[data-pattern-label]");
-    if (label)
-      label.textContent = this.model.indoor
-        ? "Live room · 32px grid"
-        : "Fenced trees v1 · candidate";
-    this.patternUndo.textContent = this.model.indoor ? "Undo room stroke" : "Undo row stroke";
-    this.patternRedo.textContent = this.model.indoor ? "Redo room stroke" : "Redo row stroke";
-    const studio = this.patternRow.querySelector<HTMLAnchorElement>("a");
-    if (studio)
-      studio.href = `/tilefun/workshop.html#/tool/patterns?family=${this.model.indoor ? "rooms-v1" : "fenced-trees-v1"}`;
-    this.patternStatus.textContent =
-      this.model.patternError ||
-      (this.model.indoor
-        ? `${this.model.paintMode === "unpaint" ? "Erase" : "Draw"}: drag on the room. Right click erases; Shift/middle drag pans. Street entrance is protected. Move furniture clear before changing its floor.`
-        : `${this.model.paintMode === "unpaint" ? "Erase" : "Paint"}: drag a horizontal row (4–128 cells). Right click erases. Fence faces south.`);
-    this.patternStatus.style.color = this.model.patternError ? "#ffa090" : "#ccc";
-    this.patternUndo.disabled = !this.model.patternCanUndo;
-    this.patternRedo.disabled = !this.model.patternCanRedo;
     this.updateTabDisplay();
-    this.updateBrushModeButtons();
-    this.updatePaintModeButtons();
-    this.updateSubgridToolVisibility();
-    this.updateBrushSizeButton();
-    this.updateBridgeButton();
-    this.updateTerrainSelection();
-    this.updateRoadSelection();
-    this.updateEntitySelection();
-    this.updatePropSelection();
-    this.updateElevationSelection();
-    this.updateDeleteButtons();
+    for (const section of this.sections) section.sync();
     this.updateTray();
     if (this.displayedTab !== this.model.editorTab) {
       this.displayedTab = this.model.editorTab;
       this.paletteScroll.scrollTop = 0;
       this.revealSelectedTab();
+    }
+  }
+
+  private updateTabDisplay(): void {
+    const active = "background: #555; color: #fff;";
+    const inactive = "background: #222; color: #888;";
+    for (const [tab, btn] of this.tabButtons) {
+      if (tab === "patterns" && btn.lastChild)
+        btn.lastChild.textContent = this.model.indoor ? "Rooms" : "Patterns";
+      btn.style.cssText = TAB_STYLE + (tab === this.model.editorTab ? active : inactive);
+      btn.style.display =
+        !this.model.indoor || tab === "patterns" || tab === "props" ? "flex" : "none";
     }
   }
 
@@ -621,271 +268,6 @@ export class EditorPanel {
       this.tabBar.scrollLeft += Math.ceil(selected.right - row.right + 8);
   }
 
-  private buildTerrainRow(palette: PaletteEntry[]): HTMLDivElement {
-    const row = document.createElement("div");
-    row.style.cssText = ROW_STYLE;
-
-    // Auto (smudge) button — always visible
-    const autoBtn = document.createElement("button");
-    autoBtn.style.cssText = `
-      width: 44px; height: 44px; border: 2px solid #555; border-radius: 4px;
-      background: #556; color: #cdf; font: bold 9px monospace;
-      cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-      display: flex; align-items: center; justify-content: center;
-    `;
-    autoBtn.textContent = "Auto";
-    autoBtn.title = "Smudge: L-click grows, R-click shrinks";
-    autoBtn.addEventListener("click", () => {
-      this.model.selectedTerrain = null;
-      this.model.selectedNaturalIndex = -1;
-      this.syncFromModel();
-    });
-    row.appendChild(autoBtn);
-    this.autoButtons.push(autoBtn);
-
-    // Wrapper for terrain-specific elements (hidden when Auto selected)
-    const wrapper = document.createElement("div");
-    wrapper.style.display = "contents";
-    this.terrainWrappers.push(wrapper);
-
-    for (const entry of palette) {
-      const btn = document.createElement("button");
-      btn.style.cssText = `
-        width: 44px; height: 44px; border: 2px solid #555; border-radius: 4px;
-        background: ${entry.color}; color: #fff; font: bold 9px monospace;
-        cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-        display: flex; align-items: center; justify-content: center;
-      `;
-      btn.textContent = entry.label;
-      btn.title = entry.label;
-      btn.addEventListener("click", () => {
-        this.model.selectedTerrain = entry.terrainId;
-        this.model.selectedNaturalIndex = -1;
-        this.syncFromModel();
-      });
-      this.terrainButtons.push({ btn, entry });
-      wrapper.appendChild(btn);
-    }
-
-    wrapper.appendChild(this.makeSeparator());
-
-    const clearBtn = document.createElement("button");
-    clearBtn.style.cssText = `
-      height: 44px; border: 2px solid #555; border-radius: 4px;
-      background: #333; color: #fff; font: bold 10px monospace;
-      cursor: pointer; padding: 0 12px;
-    `;
-    clearBtn.textContent = "Clear";
-    clearBtn.title = "Fill all chunks with selected terrain";
-    let confirmTimer = 0;
-    clearBtn.addEventListener("click", () => {
-      if (clearBtn.dataset.confirm === "1") {
-        this.model.requestClear();
-        clearBtn.textContent = "Clear";
-        clearBtn.style.borderColor = "#555";
-        clearBtn.style.background = "#333";
-        delete clearBtn.dataset.confirm;
-        window.clearTimeout(confirmTimer);
-      } else {
-        clearBtn.dataset.confirm = "1";
-        clearBtn.textContent = "Sure?";
-        clearBtn.style.borderColor = "#f55";
-        clearBtn.style.background = "#633";
-        confirmTimer = window.setTimeout(() => {
-          clearBtn.textContent = "Clear";
-          clearBtn.style.borderColor = "#555";
-          clearBtn.style.background = "#333";
-          delete clearBtn.dataset.confirm;
-        }, 2000);
-      }
-    });
-    wrapper.appendChild(clearBtn);
-
-    row.appendChild(wrapper);
-    return row;
-  }
-
-  private buildNaturalRow(): HTMLDivElement {
-    const row = document.createElement("div");
-    row.style.cssText = ROW_STYLE;
-
-    // Auto (smudge) button
-    const autoBtn = document.createElement("button");
-    autoBtn.style.cssText = `
-      width: 44px; height: 44px; border: 2px solid #555; border-radius: 4px;
-      background: #556; color: #cdf; font: bold 9px monospace;
-      cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-      display: flex; align-items: center; justify-content: center;
-    `;
-    autoBtn.textContent = "Auto";
-    autoBtn.title = "Smudge: L-click grows, R-click shrinks";
-    autoBtn.addEventListener("click", () => {
-      this.model.selectedTerrain = null;
-      this.model.selectedNaturalIndex = -1;
-      this.syncFromModel();
-    });
-    row.appendChild(autoBtn);
-    this.autoButtons.push(autoBtn);
-
-    const wrapper = document.createElement("div");
-    wrapper.style.display = "contents";
-    this.terrainWrappers.push(wrapper);
-
-    for (let i = 0; i < NATURAL_SHEET_PALETTE.length; i++) {
-      const entry = NATURAL_SHEET_PALETTE[i] as (typeof NATURAL_SHEET_PALETTE)[number];
-      const btn = document.createElement("button");
-      btn.style.cssText = `
-        width: 44px; height: 44px; border: 2px solid #555; border-radius: 4px;
-        background: #444; color: #fff; font: bold 9px monospace;
-        cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-        display: flex; align-items: center; justify-content: center;
-      `;
-      btn.textContent = entry.label;
-      btn.title = `${entry.sheetKey}: ${entry.label}`;
-      const idx = i;
-      btn.addEventListener("click", () => {
-        this.model.selectedTerrain = entry.storedValue;
-        this.model.selectedNaturalIndex = idx;
-        this.syncFromModel();
-      });
-      this.naturalPaletteButtons.push(btn);
-      wrapper.appendChild(btn);
-    }
-
-    wrapper.appendChild(this.makeSeparator());
-
-    const clearBtn = document.createElement("button");
-    clearBtn.style.cssText = `
-      height: 44px; border: 2px solid #555; border-radius: 4px;
-      background: #333; color: #fff; font: bold 10px monospace;
-      cursor: pointer; padding: 0 12px;
-    `;
-    clearBtn.textContent = "Clear";
-    clearBtn.title = "Fill all chunks with selected terrain";
-    let confirmTimer = 0;
-    clearBtn.addEventListener("click", () => {
-      if (clearBtn.dataset.confirm === "1") {
-        this.model.requestClear();
-        clearBtn.textContent = "Clear";
-        clearBtn.style.borderColor = "#555";
-        clearBtn.style.background = "#333";
-        delete clearBtn.dataset.confirm;
-        window.clearTimeout(confirmTimer);
-      } else {
-        clearBtn.dataset.confirm = "1";
-        clearBtn.textContent = "Sure?";
-        clearBtn.style.borderColor = "#f55";
-        clearBtn.style.background = "#633";
-        confirmTimer = window.setTimeout(() => {
-          clearBtn.textContent = "Clear";
-          clearBtn.style.borderColor = "#555";
-          clearBtn.style.background = "#333";
-          delete clearBtn.dataset.confirm;
-        }, 2000);
-      }
-    });
-    wrapper.appendChild(clearBtn);
-
-    row.appendChild(wrapper);
-    return row;
-  }
-
-  private buildRoadRow(): HTMLDivElement {
-    const row = document.createElement("div");
-    row.style.cssText = ROW_STYLE;
-
-    for (const entry of ROAD_PALETTE) {
-      const btn = document.createElement("button");
-      btn.style.cssText = `
-        width: 44px; height: 44px; border: 2px solid #555; border-radius: 4px;
-        background: ${entry.color}; color: #fff; font: bold 9px monospace;
-        cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.8);
-        display: flex; align-items: center; justify-content: center;
-      `;
-      btn.textContent = entry.label;
-      btn.title = entry.label;
-      btn.addEventListener("click", () => {
-        this.model.selectedRoadType = entry.roadType;
-        this.syncFromModel();
-      });
-      this.roadButtons.push({ btn, entry });
-      row.appendChild(btn);
-    }
-
-    row.appendChild(this.makeSeparator());
-
-    const clearBtn = document.createElement("button");
-    clearBtn.style.cssText = `
-      height: 44px; border: 2px solid #555; border-radius: 4px;
-      background: #333; color: #fff; font: bold 10px monospace;
-      cursor: pointer; padding: 0 12px;
-    `;
-    clearBtn.textContent = "Clear";
-    clearBtn.title = "Clear all roads";
-    let confirmTimer = 0;
-    clearBtn.addEventListener("click", () => {
-      if (clearBtn.dataset.confirm === "1") {
-        this.model.requestRoadClear();
-        clearBtn.textContent = "Clear";
-        clearBtn.style.borderColor = "#555";
-        clearBtn.style.background = "#333";
-        delete clearBtn.dataset.confirm;
-        window.clearTimeout(confirmTimer);
-      } else {
-        clearBtn.dataset.confirm = "1";
-        clearBtn.textContent = "Sure?";
-        clearBtn.style.borderColor = "#f55";
-        clearBtn.style.background = "#633";
-        confirmTimer = window.setTimeout(() => {
-          clearBtn.textContent = "Clear";
-          clearBtn.style.borderColor = "#555";
-          clearBtn.style.background = "#333";
-          delete clearBtn.dataset.confirm;
-        }, 2000);
-      }
-    });
-    row.appendChild(clearBtn);
-
-    return row;
-  }
-
-  private makeSeparator(): HTMLDivElement {
-    const sep = document.createElement("div");
-    sep.style.cssText = "width: 1px; height: 32px; background: #555; margin: 0 4px;";
-    return sep;
-  }
-
-  private buildDeleteButton(): HTMLButtonElement {
-    const btn = document.createElement("button");
-    btn.style.cssText = `
-      height: 44px; border: 2px solid #555; border-radius: 4px;
-      background: #444; color: #fff; font: bold 10px monospace;
-      cursor: pointer; padding: 0 12px;
-    `;
-    btn.textContent = "Delete";
-    btn.title = "Toggle delete mode (tap to remove)";
-    btn.addEventListener("click", () => {
-      this.model.deleteMode = !this.model.deleteMode;
-      this.syncFromModel();
-    });
-    this.deleteButtons.push(btn);
-    return btn;
-  }
-
-  private updateDeleteButtons(): void {
-    for (const btn of this.deleteButtons) {
-      btn.style.borderColor = this.model.deleteMode ? "#f55" : "#555";
-      btn.style.background = this.model.deleteMode ? "#633" : "#444";
-    }
-  }
-
-  private makeLabel(text: string): HTMLSpanElement {
-    const lbl = document.createElement("span");
-    lbl.style.cssText = "font: 9px monospace; color: #888; margin-right: 2px;";
-    lbl.textContent = text;
-    return lbl;
-  }
-
   get visible(): boolean {
     return this.container.style.display !== "none";
   }
@@ -903,390 +285,16 @@ export class EditorPanel {
     }
   }
 
-  private updateTabDisplay(): void {
-    const active = "background: #555; color: #fff;";
-    const inactive = "background: #222; color: #888;";
-    for (const [tab, btn] of this.tabButtons) {
-      btn.style.cssText = TAB_STYLE + (tab === this.model.editorTab ? active : inactive);
-      btn.style.display =
-        !this.model.indoor || tab === "patterns" || tab === "props" ? "flex" : "none";
-    }
-    // Road tab uses tile-only painting — hide tool row (brush modes, subgrid tools)
-    const isTerrainTab = TERRAIN_TABS.includes(this.model.editorTab);
-    const isRoad = this.model.editorTab === "road";
-    this.toolRow.style.display = isTerrainTab && !isRoad ? "flex" : "none";
-    this.naturalRow.style.display = this.model.editorTab === "natural" ? "flex" : "none";
-    this.roadRow.style.display = isRoad ? "flex" : "none";
-    this.structureRow.style.display = this.model.editorTab === "structure" ? "flex" : "none";
-    this.entityRow.style.display = this.model.editorTab === "entities" ? "flex" : "none";
-    this.vehicleRow.style.display = this.model.editorTab === "vehicles" ? "flex" : "none";
-    this.propsRow.style.display =
-      !this.model.indoor && this.model.editorTab === "props" ? "flex" : "none";
-    this.elevationRow.style.display = this.model.editorTab === "elevation" ? "flex" : "none";
-  }
-
-  private updateBrushModeButtons(): void {
-    for (const [mode, btn] of this.brushModeButtons) {
-      const isActive = mode === this.model.brushMode;
-      btn.style.borderColor = isActive ? "#fff" : "#555";
-      btn.style.background = isActive ? "#555" : "#444";
-    }
-  }
-
-  private updateSubgridToolVisibility(): void {
-    const showSize = this.model.brushMode === "subgrid" || this.model.brushMode === "corner";
-    const showBridge = true;
-    const sizeD = showSize ? "" : "none";
-    this.sizeLabel.style.display = sizeD;
-    this.brushSizeButton.style.display = sizeD;
-    this.subgridSeparator.style.display = showBridge ? "" : "none";
-    this.bridgeLabel.style.display = showBridge ? "" : "none";
-    this.bridgeButton.style.display = showBridge ? "" : "none";
-  }
-
-  private updatePaintModeButtons(): void {
-    const colors: Record<PaintMode, string> = {
-      positive: "#4a4",
-      unpaint: "#f55",
-    };
-    const effective = this.model.effectivePaintMode;
-    for (const [mode, btn] of this.paintModeButtons) {
-      const isActive = mode === effective;
-      btn.style.borderColor = isActive ? colors[mode] : "#555";
-      btn.style.background = isActive ? "#555" : "#444";
-    }
-  }
-
-  private updateBrushSizeButton(): void {
-    const shape = this.model.subgridShape;
-    const label = shape === 1 ? "1x1" : `${shape}x${shape}`;
-    this.brushSizeButton.textContent = label;
-    this.brushSizeButton.style.borderColor = shape !== 1 ? "#a4f" : "#888";
-  }
-
-  private updateBridgeButton(): void {
-    const depth = this.model.bridgeDepth;
-    const label = depth === 0 ? "B:Off" : `B:${depth}`;
-    this.bridgeButton.textContent = label;
-    this.bridgeButton.style.borderColor = depth > 0 ? "#4a9" : "#888";
-  }
-
-  private updateTerrainSelection(): void {
-    const isAuto = this.model.selectedTerrain === null;
-    // Natural palette buttons: highlight by palette index (handles duplicate stored values)
-    for (let i = 0; i < this.naturalPaletteButtons.length; i++) {
-      const btn = this.naturalPaletteButtons[i];
-      if (!btn) continue;
-      const isActive = i === this.model.selectedNaturalIndex;
-      btn.style.borderColor = isActive ? "#fff" : "#555";
-      btn.style.boxShadow = isActive ? "0 0 6px rgba(255,255,255,0.5)" : "none";
-    }
-    // Structure buttons: highlight by terrainId (only when no natural selection)
-    for (const { btn, entry } of this.terrainButtons) {
-      const isActive =
-        entry.terrainId === this.model.selectedTerrain && this.model.selectedNaturalIndex === -1;
-      btn.style.borderColor = isActive ? "#fff" : "#555";
-      btn.style.boxShadow = isActive ? "0 0 6px rgba(255,255,255,0.5)" : "none";
-    }
-    for (const btn of this.autoButtons) {
-      btn.style.borderColor = isAuto ? "#fff" : "#555";
-      btn.style.boxShadow = isAuto ? "0 0 6px rgba(255,255,255,0.5)" : "none";
-    }
-    for (const wrapper of this.terrainWrappers) {
-      wrapper.style.display = "contents";
-    }
-  }
-
-  private updateRoadSelection(): void {
-    for (const { btn, entry } of this.roadButtons) {
-      btn.style.borderColor = entry.roadType === this.model.selectedRoadType ? "#fff" : "#555";
-      btn.style.boxShadow =
-        entry.roadType === this.model.selectedRoadType ? "0 0 6px rgba(255,255,255,0.5)" : "none";
-    }
-  }
-
-  private updateEntitySelection(): void {
-    const paints = vehiclePaintSchemes(this.model.selectedVehicleType);
-    this.vehiclePaintRow.style.display =
-      this.model.editorTab === "vehicles" && !this.model.deleteMode && paints.length
-        ? "flex"
-        : "none";
-    const key = this.model.selectedVehicleType;
-    if (key !== this.vehiclePaintSelection) {
-      this.vehiclePaintSelection = key;
-      this.vehiclePaintRow.replaceChildren(this.makeLabel("Paint"));
-      for (const paint of [
-        {
-          id: "",
-          name: "Original",
-          swatches: originalPaintSwatches(this.model.selectedVehicleType),
-        },
-        ...paints,
-      ]) {
-        const button = document.createElement("button");
-        button.type = "button";
-        button.dataset.paintId = paint.id;
-        button.setAttribute("aria-label", `Paint: ${paint.name}`);
-        button.setAttribute(
-          "aria-pressed",
-          String((this.model.selectedVehiclePaint ?? "") === paint.id),
-        );
-        button.title = paint.name;
-        const colors = paint.swatches.map((rgb) => `rgb(${rgb.join(",")})`);
-        button.style.cssText = `${BTN_STYLE}min-width: 72px; background: linear-gradient(135deg, ${colors[0]} 50%, ${colors.at(-1)} 50%); text-shadow: 0 1px 3px #000, 0 0 4px #000;`;
-        button.style.borderColor =
-          (this.model.selectedVehiclePaint ?? "") === paint.id ? "#fff" : "#888";
-        button.textContent = paint.name;
-        button.onclick = () => {
-          this.model.selectedVehiclePaint = paint.id || undefined;
-          this.syncFromModel();
-        };
-        this.vehiclePaintRow.append(button);
-      }
-    }
-    for (const button of this.vehiclePaintRow.querySelectorAll("button")) {
-      const selected = button.dataset.paintId === (this.model.selectedVehiclePaint ?? "");
-      button.setAttribute("aria-pressed", String(selected));
-      button.style.borderColor = selected ? "#fff" : "#888";
-    }
-    for (const [index, entry] of VEHICLE_PALETTE.entries()) {
-      const button = this.vehicleButtons[index];
-      if (button)
-        button.style.borderColor = entry.type === this.model.selectedVehicleType ? "#fff" : "#888";
-    }
-    for (let i = 0; i < ENTITY_PALETTE.length; i++) {
-      const btn = this.entityButtons[i];
-      const entry = ENTITY_PALETTE[i];
-      if (btn && entry) {
-        btn.style.borderColor = entry.type === this.model.selectedEntityType ? "#fff" : "#555";
-        btn.style.boxShadow =
-          entry.type === this.model.selectedEntityType ? "0 0 6px rgba(255,255,255,0.5)" : "none";
-      }
-    }
-  }
-
-  private updatePropSelection(): void {
-    for (let i = 0; i < PROP_PALETTE.length; i++) {
-      const btn = this.propButtons[i];
-      const entry = PROP_PALETTE[i];
-      if (btn && entry) {
-        btn.style.borderColor = entry.type === this.model.selectedPropType ? "#fff" : "#555";
-        btn.style.boxShadow =
-          entry.type === this.model.selectedPropType ? "0 0 6px rgba(255,255,255,0.5)" : "none";
-      }
-    }
-  }
-
-  private updateElevationSelection(): void {
-    for (let i = 0; i < this.elevationHeightButtons.length; i++) {
-      const btn = this.elevationHeightButtons[i];
-      if (!btn) continue;
-      const isActive = i === this.model.selectedElevation;
-      btn.style.borderColor = isActive ? "#fff" : "#555";
-      btn.style.boxShadow = isActive ? "0 0 6px rgba(255,255,255,0.5)" : "none";
-    }
-    for (let i = 0; i < this.elevationGridButtons.length; i++) {
-      const btn = this.elevationGridButtons[i];
-      if (!btn) continue;
-      const isActive = ELEVATION_GRID_SIZES[i] === this.model.elevationGridSize;
-      btn.style.borderColor = isActive ? "#fff" : "#555";
-      btn.style.boxShadow = isActive ? "0 0 6px rgba(255,255,255,0.5)" : "none";
-    }
-  }
-
   /** Render actual tile/sprite graphics into preview buttons once assets are loaded. */
   setAssets(
     sheets: Map<string, Spritesheet>,
     blendSheets: Spritesheet[],
     blendGraph: BlendGraph,
   ): void {
-    // Natural sheet buttons: draw primary fill from blend sheet
-    for (let i = 0; i < NATURAL_SHEET_PALETTE.length; i++) {
-      const btn = this.naturalPaletteButtons[i];
-      const entry = NATURAL_SHEET_PALETTE[i];
-      if (!btn || !entry) continue;
-      const sheetIdx = blendGraph.allSheets.findIndex((s) => s.sheetKey === entry.sheetKey);
-      if (sheetIdx >= 0) {
-        const sheet = blendSheets[sheetIdx];
-        if (sheet) {
-          // (5,2) = mask 55 (N+W+E+NW+NE): top ~2/3 primary, bottom 1/3 secondary
-          this.renderPreviewCanvas(btn, sheet, 5, 2, 44, 44);
-        }
-      }
-    }
-
-    // Structure buttons: draw base fill tile
-    for (const { btn, entry } of this.terrainButtons) {
-      const fill = blendGraph.getBaseFill(entry.terrainId);
-      const sheet = fill ? blendSheets[fill.sheetIndex] : undefined;
-      if (fill && sheet) {
-        this.renderPreviewCanvas(btn, sheet, fill.col, fill.row, 44, 44);
-      }
-    }
-
-    // Fit the visible creature, not the transparent animation/anchor margins.
-    for (let i = 0; i < ENTITY_PALETTE.length; i++) {
-      const btn = this.entityButtons[i];
-      const entry = ENTITY_PALETTE[i];
-      if (!btn || !entry) continue;
-      const sprite = ENTITY_DEFS[entry.type]?.sprite;
-      const sheet = sheets.get(sprite?.sheetKey ?? entry.type);
-      if (sheet) {
-        const facing = entry.previewRow ?? Direction.Down;
-        const row = facing < sheet.rows ? facing : 0;
-        const col = sprite?.clips?.[0]?.start ?? 0;
-        this.renderPreviewCanvas(
-          btn,
-          sheet,
-          col,
-          row,
-          84,
-          52,
-          this.entityPreviewRegion(sheet, row, col),
-        );
-        btn.style.background = "#4b5563";
-        this.appendEntityLabel(btn, entry.label);
-      }
-    }
-
-    for (const [index, entry] of VEHICLE_PALETTE.entries()) {
-      const button = this.vehicleButtons[index],
-        sheet = sheets.get(entry.type);
-      const view = vehicleView(entry.type, Direction.Right),
-        collider = view?.metadata.colliders[0];
-      if (!button || !sheet || !view || !collider) continue;
-      const frame = sheet.getRegion(0, vehicleFrameDirection(entry.type, Direction.Right));
-      this.renderPreviewCanvas(button, sheet, 0, 0, 92, 48, {
-        x: frame.x + 96 - (view.metadata.anchor[0] ?? 0) - collider.offsetX,
-        y: frame.y + 144 - (view.metadata.anchor[1] ?? 0) - collider.offsetY + collider.height / 2,
-        width: view.rect[2] ?? 1,
-        height: view.rect[3] ?? 1,
-      });
-      const label = document.createElement("span");
-      label.textContent = entry.label;
-      label.style.cssText = "font-size: 10px; line-height: 12px; pointer-events: none;";
-      button.append(label);
-    }
-
-    // Prop buttons: draw sprite preview from the prop's own sheet
-    for (let i = 0; i < PROP_PALETTE.length; i++) {
-      const btn = this.propButtons[i];
-      const entry = PROP_PALETTE[i];
-      if (!btn || !entry) continue;
-      const info = getPropSheetInfo(entry.type);
-      if (!info) continue;
-      const sheet = sheets.get(info.sheetKey);
-      if (sheet) {
-        this.renderPreviewCanvas(btn, sheet, info.col, info.row, 64, 44);
-      }
-    }
-
-    // Road buttons: draw road tile from me-complete
-    const roadSheet = sheets.get("me21");
-    if (roadSheet) {
-      for (const { btn, entry } of this.roadButtons) {
-        // Road base fills: Asphalt=(1,0), Sidewalk/Lines use colored fallback
-        if (entry.roadType === RoadType.Asphalt) {
-          this.renderPreviewCanvas(btn, roadSheet, 1, 0, 44, 44);
-        }
-      }
-    }
-  }
-
-  private appendEntityLabel(button: HTMLButtonElement, label: string): void {
-    button.querySelector(".editor-entity-name")?.remove();
-    const caption = document.createElement("span");
-    caption.className = "editor-entity-name";
-    caption.textContent = label;
-    caption.setAttribute("aria-hidden", "true");
-    button.append(caption);
-  }
-
-  /** Find visible pixels in the initial pose without changing the gameplay sheet. */
-  private entityPreviewRegion(
-    sheet: Spritesheet,
-    row: number,
-    col = 0,
-  ): ReturnType<Spritesheet["getRegion"]> {
-    const region = sheet.getRegion(col, row);
-    const frame = document.createElement("canvas");
-    frame.width = region.width;
-    frame.height = region.height;
-    const ctx = frame.getContext("2d", { willReadFrequently: true });
-    if (!ctx) return region;
-    ctx.drawImage(
-      sheet.image,
-      region.x,
-      region.y,
-      region.width,
-      region.height,
-      0,
-      0,
-      frame.width,
-      frame.height,
-    );
-    const pixels = ctx.getImageData(0, 0, frame.width, frame.height).data;
-    let left = frame.width;
-    let top = frame.height;
-    let right = -1;
-    let bottom = -1;
-    for (let y = 0; y < frame.height; y++) {
-      for (let x = 0; x < frame.width; x++) {
-        if (!pixels[(y * frame.width + x) * 4 + 3]) continue;
-        left = Math.min(left, x);
-        top = Math.min(top, y);
-        right = Math.max(right, x);
-        bottom = Math.max(bottom, y);
-      }
-    }
-    return right < left
-      ? region
-      : {
-          x: region.x + left,
-          y: region.y + top,
-          width: right - left + 1,
-          height: bottom - top + 1,
-        };
-  }
-
-  /** Draw a spritesheet tile into a canvas inside a button. */
-  private renderPreviewCanvas(
-    btn: HTMLButtonElement,
-    sheet: Spritesheet,
-    col: number,
-    row: number,
-    btnW: number,
-    btnH: number,
-    source?: { x: number; y: number; width: number; height: number },
-  ): void {
-    const canvas = document.createElement("canvas");
-    const pad = 4; // account for border
-    const cw = btnW - pad;
-    const ch = btnH - pad;
-    canvas.width = cw;
-    canvas.height = ch;
-    canvas.style.cssText = "pointer-events: none; image-rendering: pixelated;";
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-    ctx.imageSmoothingEnabled = false;
-
-    const region = source ?? sheet.getRegion(col, row);
-    // Scale sprite to fit canvas, centered
-    const scaleX = cw / region.width;
-    const scaleY = ch / region.height;
-    const scale = Math.min(scaleX, scaleY);
-    const dw = region.width * scale;
-    const dh = region.height * scale;
-    const dx = (cw - dw) / 2;
-    const dy = (ch - dh) / 2;
-
-    ctx.drawImage(sheet.image, region.x, region.y, region.width, region.height, dx, dy, dw, dh);
-
-    btn.textContent = "";
-    btn.style.background = "transparent";
-    btn.style.display = "flex";
-    btn.style.alignItems = "center";
-    btn.style.justifyContent = "center";
-    btn.appendChild(canvas);
+    this.terrain.setBlendAssets(blendSheets, blendGraph);
+    this.entities.setAssets(sheets);
+    this.vehicles.setAssets(sheets);
+    this.props.setAssets(sheets);
+    this.terrain.setRoadAssets(sheets);
   }
 }

@@ -27,8 +27,8 @@ export class RealmTransitions {
     if (session.retired) throw new Error("This player connection was replaced.");
     session.transitioning = true;
     let finish!: () => void;
-    session.transitionDone = new Promise<void>((resolve) => {
-      finish = resolve;
+    session.transitionDone = new Promise<void>((done) => {
+      finish = done;
     });
     try {
       await session.identityReady;
