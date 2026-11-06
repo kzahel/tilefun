@@ -6,10 +6,7 @@
     "ua": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
     "cores": 8,
     "memory": 8,
-    "viewport": [
-      1600,
-      721
-    ],
+    "viewport": [1600, 721],
     "dpr": 2.4000000953674316
   },
   "initial": {
@@ -179,7 +176,7 @@
         "omitted": 0,
         "replayCount": 4,
         "replayMs": 0.30000001192092896,
-        "pastTickError": 1.1080125775167634e-05,
+        "pastTickError": 1.1080125775167634e-5,
         "resimPosErr": 0,
         "comparisonInputTick": 597,
         "comparisonPhysicsTick": 635,
@@ -187,10 +184,7 @@
       },
       "pixelSnap": false,
       "carMeshOverride": false,
-      "meshEligibleVehicleTypes": [
-        "vehicle-v1:dump-truck",
-        "vehicle-v1:compact-1"
-      ],
+      "meshEligibleVehicleTypes": ["vehicle-v1:dump-truck", "vehicle-v1:compact-1"],
       "meshDraws": 1120,
       "bedMeshDraws": 0
     }
@@ -210,10 +204,7 @@
       "ua": "Mozilla/5.0 (X11; CrOS x86_64 14541.0.0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
       "cores": 8,
       "memory": 8,
-      "viewport": [
-        1600,
-        721
-      ],
+      "viewport": [1600, 721],
       "dpr": 2.4000000953674316
     },
     "frames": {
@@ -260,7 +251,7 @@
       "omitted": 0,
       "replayCount": 4,
       "replayMs": 0.29999998211860657,
-      "pastTickError": 2.230292067833166e-06,
+      "pastTickError": 2.230292067833166e-6,
       "resimPosErr": 0,
       "comparisonInputTick": 597,
       "comparisonPhysicsTick": 643,

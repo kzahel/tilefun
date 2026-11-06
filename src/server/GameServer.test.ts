@@ -15,7 +15,7 @@ async function createTestServer() {
   return result;
 }
 
-describe("GameServer", async () => {
+describe("GameServer", () => {
   it("construction creates World, EntityManager, PropManager", async () => {
     const transport = new LocalTransport();
     const server = new GameServer(transport.serverSide, browserServerDependencies());
@@ -164,7 +164,7 @@ describe("GameServer", async () => {
   });
 });
 
-describe("pattern commands", async () => {
+describe("pattern commands", () => {
   it("returns validation and history status on the real transport and requires editor mode", async () => {
     const { server, transport } = await createTestServer();
     const messages: import("../shared/protocol.js").ServerMessage[] = [];

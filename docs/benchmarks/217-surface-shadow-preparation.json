@@ -670,11 +670,7 @@
       "name": "96-characters",
       "mode": "previous-height-ellipse-collection",
       "meanMs": 0.09698658055555599,
-      "trialP99Ms": [
-        0.22124999999999773,
-        0.23383300000000418,
-        0.022334000000000742
-      ],
+      "trialP99Ms": [0.22124999999999773, 0.23383300000000418, 0.022334000000000742],
       "receivers": {
         "sources": 0,
         "meshTriangles": 0,
@@ -686,11 +682,7 @@
       "name": "96-characters",
       "mode": "surface-receivers",
       "meanMs": 0.5424673694444446,
-      "trialP99Ms": [
-        0.907416000000012,
-        0.694041000000027,
-        0.520249999999919
-      ],
+      "trialP99Ms": [0.907416000000012, 0.694041000000027, 0.520249999999919],
       "receivers": {
         "sources": 96,
         "meshTriangles": 0,
@@ -702,11 +694,7 @@
       "name": "96-characters-32-parked-roofs",
       "mode": "previous-height-ellipse-collection",
       "meanMs": 0.2577315944444466,
-      "trialP99Ms": [
-        0.32158300000003237,
-        0.5109170000000631,
-        0.26608299999998053
-      ],
+      "trialP99Ms": [0.32158300000003237, 0.5109170000000631, 0.26608299999998053],
       "receivers": {
         "sources": 0,
         "meshTriangles": 0,
@@ -718,11 +706,7 @@
       "name": "96-characters-32-parked-roofs",
       "mode": "surface-receivers",
       "meanMs": 8.226722680555545,
-      "trialP99Ms": [
-        11.792000000000144,
-        11.54770899999994,
-        10.965707999999722
-      ],
+      "trialP99Ms": [11.792000000000144, 11.54770899999994, 10.965707999999722],
       "receivers": {
         "sources": 128,
         "meshTriangles": 26944,
@@ -734,11 +718,7 @@
       "name": "96-characters-32-moving-roofs",
       "mode": "previous-height-ellipse-collection",
       "meanMs": 0.25438008333335094,
-      "trialP99Ms": [
-        0.33995799999956944,
-        0.3016250000000582,
-        0.28608300000087183
-      ],
+      "trialP99Ms": [0.33995799999956944, 0.3016250000000582, 0.28608300000087183],
       "receivers": {
         "sources": 0,
         "meshTriangles": 0,
@@ -750,11 +730,7 @@
       "name": "96-characters-32-moving-roofs",
       "mode": "surface-receivers",
       "meanMs": 9.528190152777801,
-      "trialP99Ms": [
-        12.598042000000532,
-        13.737374999998792,
-        13.016125000000102
-      ],
+      "trialP99Ms": [12.598042000000532, 13.737374999998792, 13.016125000000102],
       "receivers": {
         "sources": 128,
         "meshTriangles": 26944,
@@ -768,11 +744,7 @@
       "name": "96-characters",
       "mode": "previous-height-ellipse-collection",
       "meanMs": 0.09953900833333044,
-      "trialP99Ms": [
-        0.25541599999999676,
-        0.24004100000001927,
-        0.021292000000016742
-      ],
+      "trialP99Ms": [0.25541599999999676, 0.24004100000001927, 0.021292000000016742],
       "receivers": {
         "sources": 0,
         "meshTriangles": 0,
@@ -784,11 +756,7 @@
       "name": "96-characters",
       "mode": "surface-receivers",
       "meanMs": 0.5639224305555524,
-      "trialP99Ms": [
-        0.8444169999999644,
-        0.8397909999999911,
-        0.6587500000000546
-      ],
+      "trialP99Ms": [0.8444169999999644, 0.8397909999999911, 0.6587500000000546],
       "receivers": {
         "sources": 96,
         "meshTriangles": 0,
@@ -800,11 +768,7 @@
       "name": "96-characters-32-parked-roofs",
       "mode": "previous-height-ellipse-collection",
       "meanMs": 0.26229098611110985,
-      "trialP99Ms": [
-        0.3331670000000031,
-        0.3157089999999698,
-        0.3139169999999467
-      ],
+      "trialP99Ms": [0.3331670000000031, 0.3157089999999698, 0.3139169999999467],
       "receivers": {
         "sources": 0,
         "meshTriangles": 0,
@@ -816,11 +780,7 @@
       "name": "96-characters-32-parked-roofs",
       "mode": "surface-receivers",
       "meanMs": 1.9433598583333322,
-      "trialP99Ms": [
-        3.4982080000000906,
-        2.707208000000037,
-        2.537458000000015
-      ],
+      "trialP99Ms": [3.4982080000000906, 2.707208000000037, 2.537458000000015],
       "receivers": {
         "sources": 128,
         "meshTriangles": 320,
@@ -832,11 +792,7 @@
       "name": "96-characters-32-moving-roofs",
       "mode": "previous-height-ellipse-collection",
       "meanMs": 0.260735886111119,
-      "trialP99Ms": [
-        0.2851250000001073,
-        0.31379199999992125,
-        0.2632499999999709
-      ],
+      "trialP99Ms": [0.2851250000001073, 0.31379199999992125, 0.2632499999999709],
       "receivers": {
         "sources": 0,
         "meshTriangles": 0,
@@ -848,11 +804,7 @@
       "name": "96-characters-32-moving-roofs",
       "mode": "surface-receivers",
       "meanMs": 1.8199036833333444,
-      "trialP99Ms": [
-        2.51299999999992,
-        2.3417500000000473,
-        2.6563340000002427
-      ],
+      "trialP99Ms": [2.51299999999992, 2.3417500000000473, 2.6563340000002427],
       "receivers": {
         "sources": 128,
         "meshTriangles": 192,

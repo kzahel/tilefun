@@ -64,7 +64,7 @@ function tickAndGetFrame(server: GameServer, messages: ServerMessage[], dt = 1 /
   return frames[0]!;
 }
 
-describe("buildMessages entity delta protocol", async () => {
+describe("buildMessages entity delta protocol", () => {
   it("first tick sends player entity as baseline", async () => {
     const { server, messages } = await createBroadcastingServer();
     const frame = tickAndGetFrame(server, messages);
@@ -215,7 +215,7 @@ describe("buildMessages entity delta protocol", async () => {
   });
 });
 
-describe("buildMessages sync events", async () => {
+describe("buildMessages sync events", () => {
   it("first tick sends all sync events (sentinels force first send)", async () => {
     const { server, messages } = await createBroadcastingServer();
     const tickMsgs = tickAndGetMessages(server, messages);
@@ -325,7 +325,7 @@ describe("buildMessages sync events", async () => {
   });
 });
 
-describe("buildMessages chunk deltas", async () => {
+describe("buildMessages chunk deltas", () => {
   it("first tick includes chunk data for visible range", async () => {
     const { server, messages } = await createBroadcastingServer();
     const tickMsgs = tickAndGetMessages(server, messages);
