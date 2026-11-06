@@ -5,7 +5,9 @@ import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 test.use({ channel: "chromium" });
 
 async function openEditor(page: Page) {
-  await page.goto("/tilefun/");
+  // Editor layout, touch scrolling and placement are DOM/input contracts; hosted
+  // software WebGL made each touch step several times slower on the GPU world.
+  await page.goto("/tilefun/?renderer=canvas");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async () => {
     const game = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
