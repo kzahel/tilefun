@@ -47,7 +47,9 @@ it("populates seven real parked vehicles, drives the bridge and persists moved/d
     expect(peak).toBeGreaterThan(47);
     expect(peak).toBeLessThan(80);
     expect(sport.position.wx).toBeGreaterThan((depot.center.x + 26) * 16);
-    for (let i = 0; i < 20; i++) await s.step(idle, range);
+    // The shared motor brakes progressively; park before exiting.
+    for (let i = 0; i < 90; i++) await s.step(idle, range);
+    expect(Math.hypot(sport.velocity?.vx ?? 0, sport.velocity?.vy ?? 0)).toBeLessThan(0.05);
     await s.command({ kind: "exit-vehicle" });
     const movedX = sport.position.wx;
     const deleted = required(

@@ -94,11 +94,17 @@ it("drives, persists its inside seat and lights, and remains parked after exit a
     ).toBeLessThan(0.05);
     expect(state.entity.emergencyState).toBe(3);
     expect(s.player.player.parentId).toBe(state.entity.id);
+    // The restored car keeps its rolling speed; the shared motor brakes progressively.
+    for (let i = 0; i < 60; i++) await s.step(idle);
+    expect(Math.hypot(state.entity.velocity?.vx ?? 0, state.entity.velocity?.vy ?? 0)).toBeLessThan(
+      0.05,
+    );
+    const parked = { ...state.entity.position };
     s.realm.vehicles.exit(s.player);
     for (let i = 0; i < 90; i++) await s.step(idle);
 
     expect(
-      Math.hypot(state.entity.position.wx - position.wx, state.entity.position.wy - position.wy),
+      Math.hypot(state.entity.position.wx - parked.wx, state.entity.position.wy - parked.wy),
     ).toBeLessThan(0.05);
     await s.reload();
     state = required(
@@ -107,7 +113,7 @@ it("drives, persists its inside seat and lights, and remains parked after exit a
       ),
     );
     expect(
-      Math.hypot(state.entity.position.wx - position.wx, state.entity.position.wy - position.wy),
+      Math.hypot(state.entity.position.wx - parked.wx, state.entity.position.wy - parked.wy),
     ).toBeLessThan(0.05);
     s.realm.entityManager.remove(state.entity.id);
     await s.reload();

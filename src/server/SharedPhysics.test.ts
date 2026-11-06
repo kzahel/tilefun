@@ -227,20 +227,20 @@ it("ordinary shared ball contacts trigger NPC reactions without a separate bounc
 it("keeps raised renewable sources anchored while loose food falls through shared physics", async () => {
   const { createFoodSource, createForageItem } = await import("../wildlife/ForageResources.js");
   const source = createFoodSource("fruit-tree", 80, 32),
-    seed = createForageItem("seed", 100, 32);
-  source.wz = seed.wz = 32;
+    fruit = createForageItem("fruit", 100, 32);
+  source.wz = fruit.wz = 32;
   const s = await ScenarioSession.create({
     version: 1,
     id: "source-and-loose",
     generation: FLAT_SCENARIO,
     player: createPlayer(16, 32),
     props: [],
-    actors: [source, seed],
+    actors: [source, fruit],
   });
   try {
     for (let tick = 0; tick < 60; tick++) await s.step(idle);
     const resource = s.realm.entityManager.entities.find((entity) => entity.workItem?.growth);
-    const loose = s.realm.entityManager.entities.find((entity) => entity.workItem?.kind === "seed");
+    const loose = s.realm.entityManager.entities.find((entity) => entity.type === fruit.type);
     expect(resource?.wz).toBe(32);
     expect(Math.abs(loose?.wz ?? Infinity)).toBeLessThan(0.05);
     expect(s.realm.physicsState?.bodies.some((body) => body.id === resource?.id)).toBe(false);

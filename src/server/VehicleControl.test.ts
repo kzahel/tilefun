@@ -56,11 +56,13 @@ it("normalizes diagonals, retains off-road cars through exit and reload, and res
     expect(
       Math.hypot(car.entity.position.wx - parked.wx, car.entity.position.wy - parked.wy),
     ).toBeLessThan(0.05);
+    // Rapier island sleeping may still settle the suspension by sub-pixel amounts.
+    const saved = { ...car.entity.position };
     await s.reload();
     const restored = [...(s.realm.vehicleRegistry?.states.values() ?? [])].find(
       (c) => c.entity.proceduralId === car.entity.proceduralId,
     );
-    expect(restored?.entity.position).toEqual(parked);
+    expect(restored?.entity.position).toEqual(saved);
     expect(restored?.entity.vehicleHeading).toBeCloseTo(parkedHeading ?? 0, 3);
   } finally {
     await s.close();

@@ -176,9 +176,10 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
     )
     .toBe(car.id);
   await page.locator("#game").focus();
-  await page.keyboard.down("ArrowRight");
+  // Cars default to relative steering: Up is throttle along the placed right-facing nose.
+  await page.keyboard.down("ArrowUp");
   await expect.poll(async () => (await vehicles(page))[0]?.wx ?? 0).toBeGreaterThan(car.wx + 30);
-  await page.keyboard.up("ArrowRight");
+  await page.keyboard.up("ArrowUp");
   await reopen(page, renderer);
   await expect.poll(async () => (await vehicles(page))[0]?.type).toBe(`vehicle-v1:${model}`);
 
