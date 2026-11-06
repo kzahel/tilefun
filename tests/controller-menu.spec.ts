@@ -16,22 +16,19 @@ async function press(page: Page, button: number) {
         await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
     };
     await frames();
-    const gp = (window as unknown as { testPad: Gamepad }).testPad;
+    const test = window as unknown as { testPad: Gamepad; onPadCommand?: (() => void) | undefined };
     const release = () => {
-      Object.assign(gp.buttons[index] ?? {}, { pressed: false, value: 0 });
+      Object.assign(test.testPad.buttons[index] ?? {}, { pressed: false, value: 0 });
     };
-    const emitted = new Promise<void>((resolve) =>
-      addEventListener(
-        "tilefun-controller",
-        () => {
-          release();
-          resolve();
-        },
-        { once: true },
-      ),
-    );
-    Object.assign(gp.buttons[index] ?? {}, { pressed: true, value: 1 });
+    const emitted = new Promise<void>((resolve) => {
+      test.onPadCommand = () => {
+        release();
+        resolve();
+      };
+    });
+    Object.assign(test.testPad.buttons[index] ?? {}, { pressed: true, value: 1 });
     await Promise.race([emitted, frames()]);
+    test.onPadCommand = undefined;
     release();
     await frames();
   }, button);
@@ -88,6 +85,14 @@ test.beforeEach(async ({ page }) => {
     };
     Object.assign(window, { testPad: pad });
     Object.defineProperty(navigator, "getGamepads", { value: () => [pad] });
+    // Menus stop controller events in a capture listener, so observe the dispatch
+    // itself; press() releases synchronously before the next gamepad sample.
+    const dispatch = window.dispatchEvent.bind(window);
+    window.dispatchEvent = (event: Event) => {
+      if (event.type === "tilefun-controller")
+        (window as unknown as { onPadCommand?: () => void }).onPadCommand?.();
+      return dispatch(event);
+    };
   });
 });
 test("right-stick cursor selects editor tools and map controls with A and RT", async ({ page }) => {
