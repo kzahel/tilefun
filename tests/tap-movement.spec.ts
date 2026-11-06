@@ -367,6 +367,12 @@ for (const renderer of ["canvas", "gpu"]) {
         }),
       )
       .toBe(1);
+    // Debug pause also holds players in the shared physics step (48941eab).
+    await page.evaluate(() =>
+      (
+        document.querySelector("#game") as unknown as { __game: TestGame }
+      ).__game.debugPanel.setPaused(false),
+    );
     await page.getByTestId("main-menu-toggle").tap();
     await page.getByRole("button", { name: "Play", exact: true }).tap();
     const waterTap = await point(page, 65);

@@ -95,6 +95,12 @@ export const MOTION_SCENES = [
 
 export { furnitureCollider } from "./FurniturePhysics.js";
 
+/** Shared physics rests a body within its contact error, slightly inside the floor,
+ * top or wall it touches. Placement checks accept that contact as touching. */
+const RESTING_CONTACT = 0.01;
+/** Height for reports and floor checks; feedback validation requires it to be ≥ 0. */
+export const restingZ = (z = 0) => Math.max(0, Math.round(z * 100) / 100);
+
 export class FurnitureMotion {
   readonly plan = parseFloorPlan(MOTION_SKETCH);
   readonly map = buildLayeredApartmentPlan(this.plan);
@@ -153,10 +159,16 @@ export class FurnitureMotion {
   canStand(x: number, y: number, z = 0): boolean {
     const c = this.player.collider;
     if (!c) return false;
+    const box = getEntityAABB({ wx: x, wy: y }, c);
     return !this.context.isPropBlocked(
-      getEntityAABB({ wx: x, wy: y }, c),
-      z,
-      c.physicalHeight ?? 12,
+      {
+        left: box.left + RESTING_CONTACT,
+        top: box.top + RESTING_CONTACT,
+        right: box.right - RESTING_CONTACT,
+        bottom: box.bottom - RESTING_CONTACT,
+      },
+      z + RESTING_CONTACT,
+      (c.physicalHeight ?? 12) - 2 * RESTING_CONTACT,
     );
   }
   playerBounds(): AABB {

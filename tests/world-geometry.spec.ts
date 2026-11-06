@@ -1,7 +1,13 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Locator, test } from "@playwright/test";
 import pngjs from "pngjs";
 
 test.use({ channel: "chromium" });
+
+// Rapier rests bodies within its allowed contact error, so a supported height
+// differs from the surface by a small fraction of a pixel.
+const expectHeight = (c: Locator, z: number, attribute = "data-player-z") =>
+  expect.poll(async () => Number(await c.getAttribute(attribute))).toBeCloseTo(z, 2);
+
 for (const backend of ["canvas", "gpu"]) {
   test(`geometry lab uses real Worker movement, cutaways and reload (${backend})`, async ({
     page,
@@ -15,12 +21,12 @@ for (const backend of ["canvas", "gpu"]) {
     await page.keyboard.down("ArrowRight");
     await expect(c).toHaveAttribute("data-support", "deck", { timeout: 8000 });
     await page.keyboard.up("ArrowRight");
-    await expect(c).toHaveAttribute("data-player-z", "48");
-    await expect(c).toHaveAttribute("data-server-z", "48");
+    await expectHeight(c, 48);
+    await expectHeight(c, 48, "data-server-z");
     await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
-    await expect(c).toHaveAttribute("data-player-z", "48");
-    await page.getByRole("button", { name: "Start at passage", exact: true }).click();
-    await expect(c).toHaveAttribute("data-player-z", "0");
+    await expectHeight(c, 48);
+    await page.getByRole("button", { name: "passage", exact: true }).click();
+    await expectHeight(c, 0);
     await c.focus();
     await page.keyboard.down("Space");
     await expect
@@ -28,15 +34,15 @@ for (const backend of ["canvas", "gpu"]) {
       .toBeGreaterThan(15);
     expect(Number(await c.getAttribute("data-player-z"))).toBeLessThanOrEqual(28.001);
     await page.keyboard.up("Space");
-    await expect(c).toHaveAttribute("data-player-z", "0");
+    await expectHeight(c, 0);
     await page.getByRole("button", { name: "Pause", exact: true }).click();
     await page.getByLabel("Visible surfaces").selectOption("lower");
     await expect(c).toHaveAttribute("data-visibility", "lower");
-    expect(await c.getAttribute("data-player-z")).toBe("0");
+    expect(Number(await c.getAttribute("data-player-z"))).toBeCloseTo(0, 2);
     await page.screenshot({ path: `/tmp/tilefun-geometry-${backend}-cutaway.png`, fullPage: true });
     await page.getByLabel("Visible surfaces").selectOption("all");
     await expect(c).toHaveAttribute("data-visibility", "all");
-    expect(await c.getAttribute("data-player-z")).toBe("0");
+    expect(Number(await c.getAttribute("data-player-z"))).toBeCloseTo(0, 2);
     await page.screenshot({ path: `/tmp/tilefun-geometry-${backend}-all.png`, fullPage: true });
     await page.getByRole("button", { name: "Reset scene", exact: true }).click();
     await expect(c).toHaveAttribute("data-ready", "true");
@@ -79,7 +85,7 @@ test.describe("phone controls", () => {
     }
     const cdp = await page.context().newCDPSession(page);
     for (const end of ["touchEnd", "touchCancel"] as const) {
-      await page.getByRole("button", { name: "Start at ramp", exact: true }).tap();
+      await page.getByRole("button", { name: "ramp", exact: true }).tap();
       await expect(c).toHaveAttribute("data-player-x", "-216");
       await right.scrollIntoViewIfNeeded();
       const box = await right.boundingBox();
@@ -95,14 +101,25 @@ test.describe("phone controls", () => {
       expect(await page.evaluate(() => window.getSelection()?.toString())).toBe("");
       await cdp.send("Input.dispatchTouchEvent", { type: end, touchPoints: [] });
       // Allow ordinary deceleration, then check that input is no longer held.
-      await page.waitForTimeout(500);
-      const stoppedX = Number(await c.getAttribute("data-player-x"));
+      // An idle body creeps down this ramp at about 1px/s in shared physics;
+      // a held control walks tens of pixels per second.
+      let stoppedX = Number.NaN;
+      await expect
+        .poll(
+          async () => {
+            const previous = stoppedX;
+            stoppedX = Number(await c.getAttribute("data-player-x"));
+            return Math.abs(stoppedX - previous) < 0.5;
+          },
+          { intervals: [100] },
+        )
+        .toBe(true);
       await page.waitForTimeout(250);
-      expect(Number(await c.getAttribute("data-player-x"))).toBeCloseTo(stoppedX, 1);
+      expect(Math.abs(Number(await c.getAttribute("data-player-x")) - stoppedX)).toBeLessThan(1);
     }
     await cdp.detach();
-    await page.getByRole("button", { name: "Start at deck", exact: true }).tap();
-    await expect(c).toHaveAttribute("data-player-z", "48");
+    await page.getByRole("button", { name: "deck", exact: true }).tap();
+    await expectHeight(c, 48);
     await page.getByRole("button", { name: "Pause", exact: true }).focus();
     await page.keyboard.press("Enter");
     await expect(page.getByRole("button", { name: "Resume", exact: true })).toBeVisible();
@@ -124,7 +141,7 @@ for (const backend of ["canvas", "gpu"]) {
       return c.screenshot();
     };
     for (const direction of ["north", "south"]) {
-      await page.getByRole("button", { name: "Start at passage", exact: true }).click();
+      await page.getByRole("button", { name: "passage", exact: true }).click();
       const resume = page.getByRole("button", { name: "Resume", exact: true });
       if (await resume.isVisible()) await resume.click();
       await c.focus();
@@ -141,7 +158,7 @@ for (const backend of ["canvas", "gpu"]) {
       }
       await page.keyboard.up(key);
       await page.getByRole("button", { name: "Pause", exact: true }).click();
-      await expect(c).toHaveAttribute("data-player-z", "0");
+      await expectHeight(c, 0);
       const y = Number(await c.getAttribute("data-player-y"));
       const all = await capture("all");
       const automatic = await capture("auto");

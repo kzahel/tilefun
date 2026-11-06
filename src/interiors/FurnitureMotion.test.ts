@@ -147,6 +147,15 @@ describe("furniture in shared game physics", () => {
     expect(await peak(1)).toBeLessThan(32);
     expect(await peak(0.25)).toBeGreaterThan(64);
   }, 20000);
+  it("treats resting solver contact as touching, not overlap, for placement edits", () => {
+    const m = scene("wardrobe");
+    // Where shared physics rests the player against the wardrobe front.
+    m.player.position = { wx: 80, wy: 93.999 };
+    m.player.wz = -0.0008;
+    expect(() => m.moveObject("wardrobe", 81, 88)).not.toThrow();
+    m.player.position = { wx: 80, wy: 93.5 };
+    expect(() => m.moveObject("wardrobe", 82, 88)).toThrow(/overlap/);
+  });
   it("height edits alter Z collision and reset clears airborne state", async () => {
     const m = scene("wardrobe");
     expect(m.canStand(80, 84, 31)).toBe(false);

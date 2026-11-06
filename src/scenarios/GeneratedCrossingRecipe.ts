@@ -41,6 +41,8 @@ export function generatedCrossingRecipe(index = 0, reverse = false) {
         wx: x,
         wy: y + (reverse ? -548 : 548),
         facing: reverse ? Direction.Down : Direction.Up,
+        // The world's own parked/traffic cars may occupy the staged lane spot.
+        backUp: 160,
       },
     ],
   };

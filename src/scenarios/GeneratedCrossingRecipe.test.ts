@@ -2,7 +2,7 @@ import { expect, it } from "vitest";
 import { createProp } from "../entities/PropFactories.js";
 import { decodeActor, encodeActor } from "../persistence/ActorRecords.js";
 import { bridgePlacements, ROAD_RAIL_BRIDGE } from "../railway/RoadRailBridge.js";
-import { generatedCrossingRecipe } from "./GeneratedCrossingRecipe.js";
+import { GENERATED_CROSSINGS, generatedCrossingRecipe } from "./GeneratedCrossingRecipe.js";
 import { ScenarioSession } from "./ScenarioSession.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
@@ -41,4 +41,12 @@ it("walks both generated approaches and restores the observer below the same dec
   } finally {
     await s.close();
   }
+}, 15000);
+
+it("stages the drivable car beside every generated crossing in both directions", async () => {
+  for (let index = 0; index < GENERATED_CROSSINGS.length; index++)
+    for (const reverse of [false, true]) {
+      const s = await ScenarioSession.create(generatedCrossingRecipe(index, reverse).recipe);
+      await s.close();
+    }
 }, 15000);

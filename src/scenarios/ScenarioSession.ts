@@ -23,7 +23,12 @@ import { buildLaneGraph } from "../traffic/LaneGraph.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioCommand } from "./ScenarioProtocol.js";
-import { applyScenarioAppearance, type ScenarioRecipe, scenarioGravity } from "./ScenarioRecipe.js";
+import {
+  applyScenarioAppearance,
+  parkScenarioVehicle,
+  type ScenarioRecipe,
+  scenarioGravity,
+} from "./ScenarioRecipe.js";
 
 /** A temporary ordinary Realm with memory persistence. No alternate physics or clock. */
 export class ScenarioSession {
@@ -199,15 +204,7 @@ export class ScenarioSession {
           minCy: Math.floor(fixture.wy / CHUNK_SIZE_PX) - 1,
           maxCy: Math.floor(fixture.wy / CHUNK_SIZE_PX) + 1,
         });
-        const state = this.realm.vehicleRegistry?.place(
-          fixture.model,
-          fixture.wx,
-          fixture.wy,
-          fixture.facing,
-          fixture.paintSchemeId,
-          undefined,
-          fixture.z,
-        );
+        const state = parkScenarioVehicle(this.realm.vehicleRegistry, fixture);
         if (!state) throw Error("Blocked parked scenario vehicle");
         if (fixture.rotation) {
           state.entity.bodyRotation = [...fixture.rotation];

@@ -4,49 +4,27 @@ import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 
 test.use({ channel: "chromium", viewport: { width: 1440, height: 1100 } });
 for (const renderer of ["canvas", "gpu"]) {
-  test(`generated speedway has racing cars, spectators and saved motion (${renderer})`, async ({
-    page,
-  }) => {
+  // Racing cars are deferred since 8f405aaf retired their motion service; the
+  // speedway keeps its spectators, kerbs and start line.
+  test(`generated speedway has spectators and reloads (${renderer})`, async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.goto(
-      `/tilefun/workshop.html?geometry=nature-racetrack&landscape=thicket&renderer=${renderer}#/tool/world-geometry`,
+      // Exact kerb/checker colors need the grid-locked comparison projection;
+      // continuous projection filters the world frame's fractional remainder (b4144ded).
+      `/tilefun/workshop.html?geometry=nature-racetrack&landscape=thicket&pixelsnap=1&renderer=${renderer}#/tool/world-geometry`,
     );
     const canvas = page.getByLabel("Natural landscape playground");
     await expect(canvas).toHaveAttribute("data-ready", "true");
-    type Pose = { id: number; key: string; x: number; y: number; vx: number; vy: number };
-    const poses = async () =>
-      JSON.parse((await canvas.getAttribute("data-racer-poses")) ?? "[]") as Pose[];
-    await expect.poll(async () => (await poses()).length).toBe(8);
     await expect
       .poll(async () => Number(await canvas.getAttribute("data-spectator-count")))
       .toBe(48);
-    await expect
-      .poll(async () => (await poses()).filter((p) => Math.hypot(p.vx, p.vy) > 50).length, {
-        timeout: 15000,
-      })
-      .toBe(8);
-    const before = await poses();
-    await expect
-      .poll(async () => {
-        const after = await poses();
-        return before.every((p) =>
-          after.some((q) => p.id === q.id && Math.hypot(q.x - p.x, q.y - p.y) > 30),
-        );
-      })
-      .toBe(true);
     await page.getByRole("button", { name: "Pause", exact: true }).click();
     await expect(canvas).toHaveAttribute("data-authority-running", "false");
-    const frozen = await poses();
     await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
     await expect(canvas).toHaveAttribute("data-reload-count", "1");
     await expect(canvas).toHaveAttribute("data-terrain-pending", "0");
-    const restored = await poses();
-    expect(restored).toHaveLength(frozen.length);
-    for (const p of frozen)
-      expect(restored.some((q) => q.key === p.key && Math.hypot(q.x - p.x, q.y - p.y) < 0.01)).toBe(
-        true,
-      );
+    await expect(canvas).toHaveAttribute("data-spectator-count", "48");
     await page.evaluate(() => scrollTo(0, 0));
     const pixels = pngjs.PNG.sync.read(
       await canvas.screenshot({ path: `/tmp/tilefun-racetrack-${renderer}.png` }),
@@ -61,10 +39,6 @@ for (const renderer of ["canvas", "gpu"]) {
     }
     expect(redKerb).toBeGreaterThan(1000);
     expect(checkers).toBeGreaterThan(100);
-    await page.getByRole("button", { name: "Resume", exact: true }).click();
-    await expect
-      .poll(async () => (await poses()).some((p) => Math.hypot(p.vx, p.vy) > 50))
-      .toBe(true);
     expect(errors).toEqual([]);
   });
 }
@@ -107,20 +81,6 @@ for (const [name, x, y, spectators] of [
     await canvas.screenshot({
       path: `/tmp/tilefun-racetrack-crowd-${name.replaceAll(" ", "-")}.png`,
     });
-    await expect
-      .poll(() =>
-        canvas.evaluate((c) => {
-          const game = (
-            c as unknown as { __game: import("../src/client/GameTestHooks.js").GameTestHooks }
-          ).__game;
-          return game.stateView.entities.filter(
-            (e) =>
-              /^vehicle-v1:car-2[1-6]$/.test(e.type) &&
-              Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) > 10,
-          ).length;
-        }),
-      )
-      .toBeGreaterThan(0);
   });
 
 for (const phone of [false, true])

@@ -1,11 +1,15 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Locator, test } from "@playwright/test";
 
 test.use({ channel: "chromium" });
+
+// Rapier rests bodies within its allowed contact error, so a supported height
+// differs from the surface by a small fraction of a pixel.
+const expectHeight = (c: Locator, z: number) =>
+  expect.poll(async () => Number(await c.getAttribute("data-player-z"))).toBeCloseTo(z, 2);
+
 for (const renderer of ["canvas", "gpu"]) {
-  test(`generated bridge supports traversal, moving traffic and reload (${renderer})`, async ({
-    page,
-  }) => {
-    test.setTimeout(60000);
+  // The staged car is parked since 8f405aaf; generated traffic is not part of this lab.
+  test(`generated bridge supports traversal and reload (${renderer})`, async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.goto(
@@ -15,62 +19,38 @@ for (const renderer of ["canvas", "gpu"]) {
     await expect(c).toHaveAttribute("data-ready", "true");
     await expect(c).toHaveAttribute("data-generated-seed", "100");
     await expect(c).toHaveAttribute("data-surface-count", "3");
-    await expect
-      .poll(async () => Number(await c.getAttribute("data-car-z")), { timeout: 12000 })
-      .toBeGreaterThan(12);
-    await page.getByRole("button", { name: "Pause", exact: true }).click();
-    let last = "",
-      stable = 0;
-    await expect
-      .poll(
-        async () => {
-          const z = (await c.getAttribute("data-car-z")) ?? "";
-          stable = z === last ? stable + 1 : 0;
-          last = z;
-          return stable;
-        },
-        { intervals: [100] },
-      )
-      .toBeGreaterThanOrEqual(3);
     await page.screenshot({
       path: `/tmp/tilefun-generated-crossing-${renderer}.png`,
       fullPage: true,
     });
     await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
     await expect(c).toHaveAttribute("data-reload-count", "1");
-    await expect(c).toHaveAttribute("data-car-z", last);
     await expect(c).toHaveAttribute("data-surface-count", "3");
-    await page.getByRole("button", { name: "Resume", exact: true }).click();
     await c.focus();
     await page.keyboard.down("ArrowUp");
-    await expect(c).toHaveAttribute("data-player-z", "96", { timeout: 10000 });
+    // Walking speed covers the 950px crossing in about 15 s of simulated time:
+    // about 7 s up to the deck and 8 s over and down the far ramp.
+    await expect
+      .poll(async () => Number(await c.getAttribute("data-player-z")), { timeout: 15_000 })
+      .toBeCloseTo(96, 2);
     await expect
       .poll(
         async () =>
           Number(await c.getAttribute("data-player-y")) -
           Number(await c.getAttribute("data-bridge-y")),
-        { timeout: 7000 },
+        { timeout: 15_000 },
       )
       .toBeLessThan(-468);
     await page.keyboard.up("ArrowUp");
-    await expect(c).toHaveAttribute("data-player-z", "0");
-    await expect
-      .poll(
-        async () =>
-          Number(await c.getAttribute("data-car-y")) -
-          Number(await c.getAttribute("data-bridge-y")),
-        { timeout: 15000 },
-      )
-      .toBeLessThan(-478);
-    await expect(c).toHaveAttribute("data-car-z", "0");
-    await page.getByRole("button", { name: "Start at bridge", exact: true }).click();
-    await expect(c).toHaveAttribute("data-player-z", "96");
+    await expectHeight(c, 0);
+    await page.getByRole("button", { name: "bridge", exact: true }).click();
+    await expectHeight(c, 96);
     await page.screenshot({
       path: `/tmp/tilefun-generated-bridge-above-${renderer}.png`,
       fullPage: true,
     });
-    await page.getByRole("button", { name: "Start at trackside", exact: true }).click();
-    await expect(c).toHaveAttribute("data-player-z", "0");
+    await page.getByRole("button", { name: "trackside", exact: true }).click();
+    await expectHeight(c, 0);
     await page.getByRole("button", { name: "Pause", exact: true }).click();
     await page.getByRole("link", { name: "All tools", exact: true }).click();
     await expect.poll(() => page.workers().length).toBe(0);

@@ -1,6 +1,7 @@
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
+import type { VehicleRegistry } from "../traffic/VehicleRegistry.js";
 
 /** Data only: the Realm owns all updates, collisions, AI and persistence. */
 export interface ScenarioRecipe {
@@ -16,22 +17,54 @@ export interface ScenarioRecipe {
   nativeProps?: { type: string; wx: number; wy: number }[];
   actors?: Entity[];
   /** Native parked bodies use durable VehicleRecords, just like editor placement. */
-  parkedVehicles?: {
-    model: string;
-    name?: string;
-    z?: number;
-    rotation?: import("../physics/BodyRotation.js").BodyRotation;
-    paintSchemeId?: string;
-    wx: number;
-    wy: number;
-    facing: import("../entities/Entity.js").Direction;
-  }[];
+  parkedVehicles?: ParkedScenarioVehicle[];
   gravity?: number;
   /** Bounded Worker timings, sampled on explicit diagnostics requests. */
   measurePhysics?: boolean;
   roads?: { left: number; right: number; top: number; bottom: number }[];
   /** Canonical generated-lane input for ordinary road traffic fixtures. Tile units. */
   trafficRoads?: import("../traffic/LaneGraph.js").RoadSegment[];
+}
+export interface ParkedScenarioVehicle {
+  model: string;
+  name?: string;
+  z?: number;
+  rotation?: import("../physics/BodyRotation.js").BodyRotation;
+  paintSchemeId?: string;
+  wx: number;
+  wy: number;
+  facing: import("../entities/Entity.js").Direction;
+  /** Pixels the car may back up, opposite its facing, in 16px steps when a
+   * generated world's own vehicle occupies the staged pose. */
+  backUp?: number;
+}
+/** Places a parked fixture, backing it up along its lane when allowed. */
+export function parkScenarioVehicle(
+  registry: VehicleRegistry | null,
+  fixture: ParkedScenarioVehicle,
+) {
+  // Direction order: Down, Up, Left, Right; backing up reverses the facing.
+  const [bx, by] = (
+    [
+      [0, -1],
+      [0, 1],
+      [1, 0],
+      [-1, 0],
+    ] as const
+  )[fixture.facing];
+  for (let back = 0; back <= (fixture.backUp ?? 0); back += 16) {
+    const state = registry?.place(
+      fixture.model,
+      fixture.wx + bx * back,
+      fixture.wy + by * back,
+      fixture.facing,
+      fixture.paintSchemeId,
+      undefined,
+      fixture.z,
+    );
+    if (state) return state;
+  }
+  return undefined;
 }
 export const FLAT_SCENARIO = {
   type: "flat",

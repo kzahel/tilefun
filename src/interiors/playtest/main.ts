@@ -17,7 +17,7 @@ import { ScenarioPresentationHost } from "../../scenarios/ScenarioPresentationHo
 import { SignInRequired, workshopFetch } from "../../workshop/AuthClient.js";
 import { FURNITURE_CATALOG_VERSION, type FurniturePlacement } from "../FurnitureCatalog.js";
 import { furnitureDrawOrder, furnitureSignature } from "../FurnitureLayout.js";
-import { FurnitureMotion, MOTION_SCENES, MOTION_SKETCH } from "../FurnitureMotion.js";
+import { FurnitureMotion, MOTION_SCENES, MOTION_SKETCH, restingZ } from "../FurnitureMotion.js";
 import { FURNITURE_PHYSICS_VERSION, type FurnitureBodies } from "../FurniturePhysics.js";
 import { InteriorPresentation } from "../InteriorPresentation.js";
 import { motionSceneSignature, motionVerdict, nextUncheckedScene } from "../MotionReview.js";
@@ -425,7 +425,7 @@ el("circle").onclick = () => {
     return;
   }
   clearInput();
-  if ((model.player.wz ?? 0) > 0 || model.player.jumpVZ !== undefined) {
+  if (restingZ(model.player.wz) > 0 || model.player.jumpVZ !== undefined) {
     status("Reset the player to the floor before starting the automatic walk.");
     return;
   }
@@ -637,7 +637,7 @@ function draw(ctx: CanvasRenderingContext2D, host: ScenarioPresentationHost) {
   canvas.dataset.airborne = String(p.jumpVZ !== undefined);
   canvas.dataset.circling = String(circling);
   el("position").textContent =
-    `Player feet: ${p.position.wx.toFixed(1)}, ${p.position.wy.toFixed(1)} · Height: ${(p.wz ?? 0).toFixed(1)}px · ${p.jumpVZ !== undefined ? "Airborne" : (p.wz ?? 0) > 0 ? "On object" : "On floor"}`;
+    `Player feet: ${p.position.wx.toFixed(1)}, ${p.position.wy.toFixed(1)} · Height: ${(p.wz ?? 0).toFixed(1)}px · ${p.jumpVZ !== undefined ? "Airborne" : restingZ(p.wz) > 0 ? "On object" : "On floor"}`;
 }
 function autoVector(): [number, number] {
   if (!path.length) {
@@ -747,8 +747,8 @@ async function submit(verdict: "good" | "wrong") {
     const playtest = {
       playerX: model.player.position.wx,
       playerY: model.player.position.wy,
-      playerZ: model.player.wz ?? 0,
-      groundZ: model.player.groundZ ?? 0,
+      playerZ: restingZ(model.player.wz),
+      groundZ: restingZ(model.player.groundZ),
       ...(model.player.jumpVZ !== undefined ? { jumpVZ: model.player.jumpVZ } : {}),
       bodies: structuredClone(model.bodies),
       gravityScale: model.gravityScale,

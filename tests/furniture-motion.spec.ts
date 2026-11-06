@@ -1,6 +1,11 @@
-import { expect, test } from "@playwright/test";
+import { expect, type Locator, test } from "@playwright/test";
 import { FurnitureMotion, MOTION_SCENES } from "../src/interiors/FurnitureMotion.js";
 import { motionSceneSignature } from "../src/interiors/MotionReview.js";
+
+// Shared physics rests the player within its allowed contact error, so a
+// supported height differs from the surface by a small fraction of a pixel.
+const expectHeight = (room: Locator, z: number) =>
+  expect.poll(async () => Number(await room.getAttribute("data-player-z"))).toBeCloseTo(z, 2);
 
 test("shared movement stops at furniture, supports precise placement, and saves a reproducible report", async ({
   page,
@@ -83,11 +88,23 @@ test("direction controls release and dragging selects actual sprite pixels", asy
   await page.mouse.down();
   await page.waitForTimeout(200);
   await page.mouse.up();
-  await page.waitForTimeout(150);
-  const x = await page.locator("#room").getAttribute("data-player-x");
-  expect(Number(x)).toBeGreaterThan(85);
-  await page.waitForTimeout(100);
-  expect(await page.locator("#room").getAttribute("data-player-x")).toBe(x);
+  // Wait until the released walk settles; a held control would instead walk
+  // on to the far wall.
+  let x = Number.NaN;
+  await expect
+    .poll(
+      async () => {
+        const previous = x;
+        x = Number(await page.locator("#room").getAttribute("data-player-x"));
+        return Math.abs(x - previous) < 0.001;
+      },
+      { intervals: [100] },
+    )
+    .toBe(true);
+  expect(x).toBeGreaterThan(85);
+  expect(x).toBeLessThan(120);
+  await page.waitForTimeout(200);
+  expect(Number(await page.locator("#room").getAttribute("data-player-x"))).toBeCloseTo(x, 2);
   await page.locator("#mode").selectOption("place");
   const canvas = page.locator("#room");
   await canvas.evaluate((el) => el.scrollIntoView({ block: "center" }));
@@ -135,7 +152,7 @@ test("jumps onto tall furniture, records good verdicts, and reopens changed phys
   await page.keyboard.up("ArrowUp");
   await expect(canvas).toHaveAttribute("data-airborne", "false");
   await page.keyboard.up("Space");
-  await expect(canvas).toHaveAttribute("data-player-z", "32");
+  await expectHeight(canvas, 32);
   await expect(page.locator("#position")).toContainText("On object");
   await page.locator("#good").click();
   await expect(page.locator("#scene")).not.toHaveValue("wardrobe");
@@ -190,7 +207,7 @@ test("phone jump control releases on cancellation and high jumps stay in view", 
   await jump.dispatchEvent("pointercancel", { pointerId: 1 });
   await page.mouse.up();
   await expect(page.locator("#room")).toHaveAttribute("data-airborne", "false", { timeout: 8000 });
-  await expect(page.locator("#room")).toHaveAttribute("data-player-z", "0");
+  await expectHeight(page.locator("#room"), 0);
   await expect(page.locator("#room")).toHaveAttribute("data-view-offset-y", "0");
 });
 
@@ -296,13 +313,14 @@ test("the full player sprite remains visible at the back of the bed after landin
   await page.waitForFunction(() => Number(document.getElementById("room")?.dataset.playerY) < 66);
   await page.keyboard.up("ArrowUp");
   await page.keyboard.up("Space");
-  await expect(canvas).toHaveAttribute("data-player-z", "8");
+  await expectHeight(canvas, 8);
   await expect(canvas).toHaveAttribute("data-airborne", "false");
   await page.waitForTimeout(150); // Idle animation returns to frame zero.
   const pixels = await canvas.evaluate(async (el) => {
     const c = el as HTMLCanvasElement;
     const x = Math.floor(Number(c.dataset.playerX) - 8);
-    const y = Math.floor(Number(c.dataset.playerY) - Number(c.dataset.playerZ) - 16);
+    // The bed top is 8px; the resting height differs only by solver contact error.
+    const y = Math.floor(Number(c.dataset.playerY) - Math.round(Number(c.dataset.playerZ)) - 16);
     const source = new Image();
     source.src = "/tilefun/assets/sprites/player.png";
     await source.decode();

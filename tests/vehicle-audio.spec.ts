@@ -89,7 +89,8 @@ test("Worker driving suppresses footsteps, plays a real engine and silences it a
     const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     return { x: g.stateView.playerEntity.position.wx, steps: window.__carAudio.steps };
   });
-  await page.keyboard.down("d");
+  // Cars default to relative steering (f1cd9d28): W/Up drives forward, D steers.
+  await page.keyboard.down("w");
   try {
     await expect
       .poll(() =>
@@ -101,7 +102,7 @@ test("Worker driving suppresses footsteps, plays a real engine and silences it a
       )
       .toBeGreaterThan(before.x + 40);
   } finally {
-    await page.keyboard.up("d");
+    await page.keyboard.up("w");
   }
   expect(await page.evaluate(() => window.__carAudio.steps)).toBe(before.steps);
   expect(await page.evaluate(() => window.__carAudio.started)).toBe(1);

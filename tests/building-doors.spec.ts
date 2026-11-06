@@ -61,13 +61,17 @@ for (const kind of ["butcher", "condo-bay"]) {
     await page.screenshot({ path: `/tmp/tilefun-building-${kind}-interior.png` });
     // Traverse the shared hall with real input and collision; no teleporting across walls.
     // Use released input pulses so a slow screenshot/replica round trip cannot
-    // leave movement held past the doorway and hide its contextual action.
+    // leave movement held past the doorway and hide its contextual action. Each
+    // pulse covers at most half the remaining distance at walking speed (~60px/s),
+    // so slow hosts need few round trips without overshooting.
     await expect
       .poll(
         async () => {
           const delta = exit.arrival.wx - (await state()).player.wx;
           if (Math.abs(delta) < 15) return true;
-          await page.keyboard.press(delta > 0 ? "ArrowRight" : "ArrowLeft", { delay: 75 });
+          await page.keyboard.press(delta > 0 ? "ArrowRight" : "ArrowLeft", {
+            delay: Math.max(75, Math.min(1000, (Math.abs(delta) / 60) * 500)),
+          });
           return false;
         },
         { timeout: 15000, intervals: [50] },
