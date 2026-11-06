@@ -4,6 +4,9 @@ export default defineConfig({
   testDir: "./tests",
   globalSetup: "./tests/workshop-setup.ts",
   timeout: process.env.CI ? 60_000 : 30_000,
+  // Hosted runners reach data-ready in ~5 s (atlas decoding plus software WebGL);
+  // scale assertion waits with the test timeout instead of per-call overrides.
+  expect: { timeout: process.env.CI ? 15_000 : 5_000 },
   // Canvas-heavy labs and full Chromium compete for CPU/GPU with the live game.
   // Bound concurrency so readiness assertions exercise behavior, not contention.
   // Hosted CI uses software GPU rendering; two full Chromium workers can
