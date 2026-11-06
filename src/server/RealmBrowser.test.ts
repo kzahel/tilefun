@@ -1,4 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import {
   CURRENT_REGIONAL_VERSION,
   createDescriptor,
@@ -493,6 +494,36 @@ describe("Realm browser protocol", () => {
     const realmList = transport.messagesOfType("player-1", "realm-list");
     expect(realmList).toHaveLength(0);
   });
+});
+
+it("keeps a dormant player's neighbourhood resident on every tick", async () => {
+  const { server, transport } = await createTestSetup();
+  try {
+    transport.connect("player-1");
+    await new Promise((r) => setTimeout(r, 10));
+    const worldId = firstRealmId(transport, "player-1");
+    transport.clientSend("player-1", { type: "join-realm", requestId: 1, worldId });
+    await vi.waitFor(() =>
+      expect(transport.messagesOfType("player-1", "realm-joined")).toHaveLength(1),
+    );
+    const realm = [...(server as unknown as { realms: RealmDirectory }).realms.values()].find((r) =>
+      r.sessions.has("player-1"),
+    );
+    const player = realm?.sessions.get("player-1")?.player;
+    if (!realm?.streaming || !player) throw new Error("Player realm not found");
+    const key = `${Math.floor(player.position.wx / CHUNK_SIZE_PX)},${Math.floor(player.position.wy / CHUNK_SIZE_PX)}`;
+    server.tick(1 / 60);
+    transport.disconnect("player-1");
+    const release = vi.spyOn(realm.streaming.interest, "release");
+    // One interest update per tick: the dormant owner is never dropped and re-requested.
+    for (let i = 0; i < 4; i++) {
+      server.tick(1 / 60);
+      expect(realm.streaming.interest.demand(Date.now() + 5_000).has(key)).toBe(true);
+    }
+    expect(release.mock.calls.filter(([owner]) => owner === "player:player-1")).toEqual([]);
+  } finally {
+    await server.destroy();
+  }
 });
 
 describe("versioned world creation protocol", () => {

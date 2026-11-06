@@ -622,11 +622,12 @@ export class Realm {
           : "",
       });
     }
-    this.requireStreaming().update(
+    // One interest update per tick: dormant sessions keep their own neighbourhood
+    // resident for reconnects but contribute no viewer range.
+    this.updateVisibleChunks(
       [...this.sessions.values()]
         .filter((s) => !dormantClientIds.has(s.clientId))
         .map((s) => s.visibleRange),
-      [...this.sessions.values()].filter((s) => !dormantClientIds.has(s.clientId)),
     );
     if (this.tickCounter % 120 === 0)
       this.vehicleRegistry?.populate(
@@ -838,11 +839,6 @@ export class Realm {
     }
     // Broadcast state to all clients
     if (broadcasting) {
-      const ranges = [...this.sessions.values()]
-        .filter((s) => !dormantClientIds.has(s.clientId))
-        .map((s) => s.visibleRange);
-      this.updateVisibleChunks(ranges);
-
       for (const session of this.sessions.values()) {
         if (dormantClientIds.has(session.clientId) || session.transitioning) continue;
         // Check before building: replication advances this client's last-sent baseline.

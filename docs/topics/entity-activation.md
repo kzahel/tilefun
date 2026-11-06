@@ -56,6 +56,10 @@ terrain, actor/prop records and origin overrides before publishing a chunk.
 Player tickets request full AI decisions within 2 chunks, reduced decisions
 within 4 and collision support within 5. Camera tickets add residency without
 activating distant AI. Distant players contribute a union of neighborhoods.
+Realm updates interest once per tick (owner decision 2026-11-06, B8): a dormant
+session (disconnected, held 60 s for reconnect) keeps its player tickets so its
+body's neighbourhood stays resident, but contributes no camera range. Arrival
+leases are one per range, released when `ensure()` settles.
 
 [094](../tactical/094-interest-demand-cache.md) caches the sorted demand assembled
 from ordered ticket values. `set` owns a snapshot; resubmit changed ticket/range
