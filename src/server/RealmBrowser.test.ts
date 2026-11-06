@@ -15,6 +15,7 @@ import { getGravityScale } from "../physics/Gravity.js";
 import type { ClientMessage, RealmInfo, ServerMessage } from "../shared/protocol.js";
 import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
 import { GameServer } from "./GameServer.js";
+import type { RealmDirectory } from "./RealmDirectory.js";
 
 // ---- Test helpers ----
 
@@ -972,6 +973,36 @@ describe("in-game world map", () => {
       await server.destroy();
     }
   });
+});
+
+it("console commands act in the sender's realm, not the default realm", async () => {
+  const { server, transport, registry } = await createTestSetup();
+  try {
+    const second = await registry.createWorld("Second World", "flat");
+    transport.connect("local");
+    transport.connect("guest");
+    await new Promise((r) => setTimeout(r, 10));
+    transport.clientSend("guest", { type: "join-realm", requestId: 1, worldId: second.id });
+    await vi.waitFor(() =>
+      expect(transport.messagesOfType("guest", "realm-joined")).toHaveLength(1),
+    );
+    const realmOf = (id: string) =>
+      [...(server as unknown as { realms: RealmDirectory }).realms.values()].find((realm) =>
+        realm.sessions.has(id),
+      );
+    const chickens = (id: string) =>
+      realmOf(id)?.entityManager.entities.filter((e) => e.type === "chicken").length;
+    const [local, guest] = [chickens("local") ?? 0, chickens("guest") ?? 0];
+    transport.clientSend("guest", { type: "rcon", requestId: 2, command: "spawn chicken 3" });
+    expect(chickens("guest")).toBe(guest + 3);
+    expect(chickens("local")).toBe(local);
+    transport.clientSend("guest", { type: "rcon", requestId: 3, command: "say Hi" });
+    expect(transport.messagesOfType("guest", "rcon-response").at(-1)?.output.join(" ")).toMatch(
+      /\[Player \d+\] Hi/,
+    );
+  } finally {
+    await server.destroy();
+  }
 });
 
 it("remote administration requires authorization while ordinary chat and realm browsing remain available", async () => {

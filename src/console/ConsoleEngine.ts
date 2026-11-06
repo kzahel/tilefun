@@ -18,9 +18,6 @@ export class ConsoleEngine {
    */
   rconSend: ((command: string) => Promise<string[]>) | null = null;
 
-  /** Set by the rcon handler before execServer() so commands can identify the caller. */
-  rconSenderName: string | null = null;
-
   constructor() {
     this.registerBuiltins();
   }

@@ -1,4 +1,5 @@
-/** The sole replicated physics tuning value. Each JS realm owns its copy. */
+/** The sole replicated physics tuning value. Each JS realm (Worker, page) owns one copy;
+ * views sharing a page share it (see docs/topics/embedded-engine-labs.md). */
 let gravityScale = 1;
 let revision = 0;
 export function getGravityScale() {

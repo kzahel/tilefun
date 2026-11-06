@@ -203,6 +203,7 @@ export class GameServer {
   /** When true, server broadcasts game state to clients after each tick. */
   broadcasting = false;
   private serverConsole: ConsoleEngine | null = null;
+  rconSender: PlayerSession | null = null; // Console commands act where the sender is.
   private readonly transitions = new RealmTransitions(
     (id) => this.realms.get(id),
     (session, realm) => this.saveLocation(session, realm),
@@ -215,13 +216,12 @@ export class GameServer {
     },
   );
 
-  // ── Delegation getters for backward compatibility ──
-  // External code (tests, serverCommands) accesses these fields.
-  // They delegate to the default realm.
+  // ── Delegation getters: the rcon sender's realm, else the local/default realm ──
 
   private get activeRealm(): Realm {
-    const selectedId = this.sessions.get("local")?.realmId ?? this.realms.defaultRealmId;
-    const realm = selectedId ? this.realms.get(selectedId) : undefined;
+    const id =
+      (this.rconSender ?? this.sessions.get("local"))?.realmId ?? this.realms.defaultRealmId;
+    const realm = id ? this.realms.get(id) : undefined;
     if (!realm) throw new Error("No active realm");
     return realm;
   }
@@ -329,7 +329,7 @@ export class GameServer {
 
   /** Get the first player session (for single-player commands). */
   getFirstSession(): PlayerSession | undefined {
-    return this.activeRealm.getFirstSession();
+    return this.rconSender ?? this.activeRealm.getFirstSession();
   }
 
   async init(): Promise<void> {
@@ -914,11 +914,11 @@ export class GameServer {
     if (typeof command !== "string" || command.length > 2048)
       throw new Error("Invalid console command.");
     if (!this.serverConsole) return ["Server console not initialized"];
-    this.serverConsole.rconSenderName = session.displayName || session.clientId;
+    this.rconSender = session;
     try {
       return this.serverConsole.execServer(command);
     } finally {
-      this.serverConsole.rconSenderName = null;
+      this.rconSender = null;
     }
   }
 

@@ -632,6 +632,11 @@ interpolation, preparation, invalidation and disposal are part of the contract.
   graphics resources. Reset, tool changes, resize, late asset arrival and teardown
   must respect engine ownership rules. Temporary persistence stays isolated from
   player worlds; candidate settings stay session-scoped.
+- Gravity is one value per JS realm (`physics/Gravity.ts`): the Worker authority
+  and each page own a copy, and `RemoteStateView` applies replicated `sync-cvars`.
+  A page hosting several scenario views therefore shares one gravity; scenario
+  recipes set it explicitly and `ScenarioClient` ignores `sync-cvars`. Owner
+  decision 2026-11-06 (B9): keep this rule rather than add per-view gravity.
 
 Lab-specific responsibilities are fixture selection, DOM controls, viewport and
 camera intent, diagnostic overlays and review actions. Static art diagrams,

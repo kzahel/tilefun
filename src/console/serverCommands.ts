@@ -217,7 +217,8 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
         out("Usage: say <message>");
         return;
       }
-      const sender = engine.rconSenderName ?? "Server";
+      const from = server.rconSender;
+      const sender = from ? from.displayName || from.clientId : "Server";
       server.broadcastChat(sender, text);
       out(`[${sender}] ${text}`);
     },
