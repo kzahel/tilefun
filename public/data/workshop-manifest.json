@@ -16701,7 +16701,7 @@
       "name": "Generated road bridge · seed 100",
       "prompt": "Walk both generated approaches and underneath, or drive the staged car. Static regional geometry and normal shared physics; train services are deferred.",
       "url": "/tilefun/workshop.html?geometry=generated-100#/tool/world-geometry",
-      "fingerprint": "b6dadb5d9ae2813cd4c41f6acaeddaa9bd4da57bf3e683bd94a80d084ffbfad7",
+      "fingerprint": "d2edc558339f73bce3eec45d129cb4dd01ee3c9500e3757ea40f74cd24d9bde3",
       "excluded": "Interactive generated-world experiment; no immutable art promotion."
     },
     {
@@ -16711,7 +16711,7 @@
       "name": "Generated road bridge · seed 42",
       "prompt": "Walk both generated approaches and underneath, or drive the staged car. Static regional geometry and normal shared physics; train services are deferred.",
       "url": "/tilefun/workshop.html?geometry=generated-42#/tool/world-geometry",
-      "fingerprint": "c480282895714c4c39da67b1330b332d4dd7095e74df194539ff92f84800e699",
+      "fingerprint": "ac19dd4bb486927b84987fe1fa73781fb0f1a3c62c84994f6b90e32aeb6492d3",
       "excluded": "Interactive generated-world experiment; no immutable art promotion."
     },
     {
@@ -16721,7 +16721,7 @@
       "name": "Generated road bridge · seed 3",
       "prompt": "Walk both generated approaches and underneath, or drive the staged car. Static regional geometry and normal shared physics; train services are deferred.",
       "url": "/tilefun/workshop.html?geometry=generated-3#/tool/world-geometry",
-      "fingerprint": "e06145fb56b8fef74be07b01b6b7a4cf29550cd8f5a9fe78fa26102760675127",
+      "fingerprint": "9dd7c1c69401aaa6cf09c7598ae0e8f9683e49f71a0c85a3da1be9d63fa8246e",
       "excluded": "Interactive generated-world experiment; no immutable art promotion."
     },
     {
@@ -56178,5 +56178,5 @@
       }
     }
   ],
-  "inputDigest": "dcc3bbf9f29dce30388173826b2b8b4adbd8a607e454cb45f14ba9e838b10ade"
+  "inputDigest": "391ceeca303ac35bcc302a535ae963c5eeba462eefe4c29a9911708bceb90777"
 }

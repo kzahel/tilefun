@@ -35411,7 +35411,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsBodies.ts:17"
+          "source": "src/physics/PhysicsBodies.ts:19"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/PhysicsBodies.ts:30"
         },
         {
           "system": "Gameplay",
@@ -35419,19 +35423,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:89"
+          "source": "src/scenarios/ScenarioSession.ts:94"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:91"
+          "source": "src/scenarios/ScenarioSession.ts:96"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:156"
+          "source": "src/scenarios/ScenarioSession.ts:161"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:239"
+          "source": "src/scenarios/ScenarioSession.ts:236"
         },
         {
           "system": "Gameplay",
@@ -35653,7 +35657,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Roadkill.ts:11"
+          "source": "src/wildlife/Roadkill.ts:13"
         }
       ]
     },
@@ -35885,7 +35889,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Roadkill.ts:12"
+          "source": "src/wildlife/Roadkill.ts:14"
         }
       ]
     },
@@ -36311,7 +36315,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Roadkill.ts:13"
+          "source": "src/wildlife/Roadkill.ts:15"
         }
       ]
     },
@@ -36361,7 +36365,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Roadkill.ts:14"
+          "source": "src/wildlife/Roadkill.ts:16"
         }
       ]
     },
@@ -36535,7 +36539,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsBodies.ts:10"
+          "source": "src/physics/PhysicsBodies.ts:23"
         },
         {
           "system": "Gameplay",

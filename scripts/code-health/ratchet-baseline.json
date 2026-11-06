@@ -299,8 +299,8 @@
     },
     "src/interiors/playtest/main.ts": {
       "lines": 877,
-      "worst": 26,
-      "overLimit": 1
+      "worst": 0,
+      "overLimit": 0
     },
     "src/interiors/ResidentBehavior.ts": {
       "lines": 192,
@@ -383,8 +383,8 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 1155,
-      "worst": 101,
+      "lines": 1154,
+      "worst": 100,
       "overLimit": 8
     },
     "src/physics/rapier/ClippedTerrain.ts": {
@@ -583,7 +583,7 @@
       "overLimit": 1
     },
     "src/scenarios/ScenarioSession.ts": {
-      "lines": 429,
+      "lines": 426,
       "worst": 66,
       "overLimit": 1
     },
