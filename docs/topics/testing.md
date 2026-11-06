@@ -23,6 +23,11 @@ for broad changes, evidence of wider impact, explicit requests or CI. Broaden
 validation when focused checks expose unresolved concerns; do not repeat passing
 checks without a relevant change or unresolved concern. CI keeps its existing gates.
 
+Native tests share a 20 s deadline (`vitest.config.ts`) that only catches hangs:
+many open production Realms and run 1–5 s under parallel load, 2–4× longer on
+hosted runners. Don't depend on wall time in assertions; inject clocks (the
+predictor's replay budget reads its injected clock) instead of raising deadlines.
+
 ## CI and deployment
 
 [186](../tactical/186-ci-reliability-and-deployment-gate.md) owns the 2026-10-23

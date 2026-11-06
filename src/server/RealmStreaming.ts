@@ -234,13 +234,13 @@ export class RealmStreaming {
     this.pump();
     try {
       await this.residency.settle();
-      for (let cy = range.minCy; cy <= range.maxCy; cy++)
-        for (let cx = range.minCx; cx <= range.maxCx; cx++)
-          if (!this.residency.ready(`${cx},${cy}`))
-            throw new Error("World data is not ready.", { cause: this.residency.error });
+      if (!this.rangeReady(range))
+        throw new Error("World data is not ready.", { cause: this.residency.error });
     } finally {
-      // Brief handoff lease bridges async arrival to the session's next demand update.
-      this.interest.set(owner, [
+      // Per-range handoff lease bridges arrival to the next demand without per-call growth.
+      const lease = `lease:${range.minCx},${range.minCy},${range.maxCx},${range.maxCy}`;
+      this.interest.release(owner);
+      this.interest.set(lease, [
         { range, activity: 0, reason: "arrival", expires: Date.now() + 1000 },
       ]);
     }

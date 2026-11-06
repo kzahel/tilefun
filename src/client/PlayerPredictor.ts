@@ -21,7 +21,7 @@ import type { World } from "../world/World.js";
 
 const MAX_HISTORY = 120;
 const REPLAY_STEPS_PER_UPDATE = 8;
-const REPLAY_MS_PER_UPDATE = 2;
+const REPLAY_MS_PER_UPDATE = 2; // Injected clock: simulated time slices by step count alone.
 export interface StoredInput {
   seq: number;
   tick: number;
@@ -474,12 +474,12 @@ export class PlayerPredictor {
     const job = this.replay,
       scene = this.scene;
     if (!job || !scene || !this.geometry) return;
-    const start = performance.now();
+    const start = this.clock() * 1000;
     let steps = 0;
     while (
       scene.physicsTick < this.replayTarget(job) &&
       steps < REPLAY_STEPS_PER_UPDATE &&
-      (steps === 0 || performance.now() - start < REPLAY_MS_PER_UPDATE)
+      (steps === 0 || this.clock() * 1000 - start < REPLAY_MS_PER_UPDATE)
     ) {
       this.replayStep(job);
       if (scene.physicsTick === job.beforePhysicsTick) this.captureReplayComparison(job);
@@ -487,7 +487,7 @@ export class PlayerPredictor {
       steps++;
     }
     this.lastReplaySteps += steps;
-    job.ms += performance.now() - start;
+    job.ms += this.clock() * 1000 - start;
     if (scene.physicsTick < this.replayTarget(job)) return;
     this.replay = undefined;
     this.status = "ready";
