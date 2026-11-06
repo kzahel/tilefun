@@ -10,7 +10,8 @@ type Pose = {
   clip: number;
   visible: boolean;
 };
-for (const renderer of ["canvas", "gpu"]) {
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
+for (const renderer of ["canvas"]) {
   for (const animal of ["rabbit", "robin", "meerkat"]) {
     test(`${animal} production behavior and reload (${renderer})`, async ({ page }) => {
       test.setTimeout(90_000);

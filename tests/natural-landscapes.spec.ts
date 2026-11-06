@@ -78,7 +78,8 @@ for (const renderer of ["canvas", "gpu"]) {
     await page.screenshot({ path: `/tmp/tilefun-default-forest-ready-${renderer}.png` });
   });
 }
-for (const renderer of ["canvas", "gpu"]) {
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
+for (const renderer of ["canvas"]) {
   test(`landscape lab shares Worker trees, walking, reload and train travel (${renderer})`, async ({
     page,
   }) => {
@@ -130,7 +131,8 @@ for (const renderer of ["canvas", "gpu"]) {
     expect(errors).toEqual([]);
   });
 }
-for (const renderer of ["canvas", "gpu"]) {
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
+for (const renderer of ["canvas"]) {
   test(`native forest patterns render and block the player (${renderer})`, async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));

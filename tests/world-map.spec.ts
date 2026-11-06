@@ -151,7 +151,10 @@ test("in-game map keeps distant multiplayer players live and long-press travels 
     await page.waitForTimeout(750);
     await page.mouse.up();
     await expect(map).toBeVisible();
-    await expect(self).toHaveAttribute("data-x", String(originalX));
+    // Resting Rapier bodies drift by ~1e-6 px; travel would move whole tiles.
+    await expect
+      .poll(async () => Number(await self.getAttribute("data-x")))
+      .toBeCloseTo(originalX, 2);
     await map.getByRole("button", { name: "Find me" }).click();
     await expect(map).toHaveAttribute("data-settled", "true");
     const centerX = Number(await map.getAttribute("data-x"));

@@ -5,7 +5,8 @@ import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { faunaType } from "../src/wildlife/Fauna.js";
 
 test.use({ channel: "chromium" });
-for (const renderer of ["canvas", "gpu"]) {
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
+for (const renderer of ["canvas"]) {
   test(`default keyboard jump mounts a horse and Jump gets off (${renderer})`, async ({ page }) => {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
