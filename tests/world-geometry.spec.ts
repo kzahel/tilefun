@@ -10,7 +10,9 @@ const expectHeight = (c: Locator, z: number, attribute = "data-player-z") =>
   expect.poll(async () => Number(await c.getAttribute(attribute))).toBeCloseTo(z, 2);
 
 for (const backend of ["canvas", "gpu"]) {
-  test(`geometry lab uses real Worker movement, cutaways and reload (${backend})`, async ({
+  // The Canvas case is in smoke while 226 moves lab input onto the game.
+  const tag = backend === "canvas" ? ["@smoke"] : [];
+  test(`geometry lab uses real Worker movement, cutaways and reload (${backend})`, { tag }, async ({
     page,
   }) => {
     const errors: string[] = [];

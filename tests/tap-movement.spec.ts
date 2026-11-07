@@ -545,9 +545,10 @@ test("reload remembers each local player's choice and storage failures retain th
   );
 });
 
-test("gesture rejection, claimed Jump, resize targeting and menu cancellation use the real input path", async ({
-  page,
-}) => {
+// In smoke while 226 scopes touch controls to views.
+test("gesture rejection, claimed Jump, resize targeting and menu cancellation use the real input path", {
+  tag: "@smoke",
+}, async ({ page }) => {
   await start(page);
   const session = await page.context().newCDPSession(page);
   const location = await point(page, 50);

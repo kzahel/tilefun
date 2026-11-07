@@ -20,7 +20,7 @@ import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { cameraPixelSnap, type TerrainPacing } from "../rendering/PresentationSettings.js";
 import { presentSurfaceScene } from "../rendering/presentSurfaceScene.js";
-import type { RendererMode, RenderHost } from "../rendering/RenderHost.js";
+import type { RenderHost } from "../rendering/RenderHost.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
@@ -35,7 +35,6 @@ import type { ScenarioRecipe } from "./ScenarioRecipe.js";
 export interface ScenarioPresentationOptions {
   width: number;
   height: number;
-  cameraOffsetY?: number;
   /** Fixed diagnostic framing; otherwise use production player follow. */
   fixedCamera?:
     | { wx: number; wy: number }
@@ -54,8 +53,6 @@ export interface ScenarioPresentationOptions {
   terrain?: boolean;
   pixelExactShadows?: boolean;
   background?: string;
-  /** Use the reviewed train models by default; false retains a native-art comparison. */
-  authoredTrains?: boolean;
   /** Four-direction sprite inspection: pauses authority and overrides only the displayed pose. */
   poseCycle?(): { fps: number; frameCount: number } | undefined;
   surfaceVisibility?(): SurfaceVisibility;
@@ -102,7 +99,6 @@ export class ScenarioPresentationHost {
   ) {
     this.frame = new SceneFrame({
       allCars3d: new URLSearchParams(location.search).has("allcars3d"),
-      authoredTrains: options.authoredTrains ?? true,
     });
     this.vehicleControls = !!recipe.parkedVehicles?.length || recipe.generation.type === "regional";
     this.session = new ScenarioClient(recipe);
@@ -183,7 +179,7 @@ export class ScenarioPresentationHost {
   private snapCamera() {
     const p = this.session.view.playerEntity.position;
     const fixed = this.fixedCamera(1);
-    this.camera.snapTo(fixed?.wx ?? p.wx, fixed?.wy ?? p.wy + (this.options.cameraOffsetY ?? 0));
+    this.camera.snapTo(fixed?.wx ?? p.wx, fixed?.wy ?? p.wy);
     this.interpolate = false;
   }
 
@@ -266,7 +262,7 @@ export class ScenarioPresentationHost {
             this.camera,
             this.session.view.playerEntity,
             false,
-            this.options.cameraOffsetY,
+            0,
             this.session.predictor,
           );
       }
@@ -303,7 +299,7 @@ export class ScenarioPresentationHost {
           this.alpha,
           undefined,
           false,
-          this.options.cameraOffsetY,
+          0,
           view.cameraPresentation,
         );
       // Camera inspection while paused still needs streamed chunks and replicas,
@@ -404,24 +400,6 @@ export class ScenarioPresentationHost {
     this.render(1);
     if (!this.host) throw new Error("Presentation failed during capture");
     return this.host.captureFrame?.() ?? this.canvas;
-  }
-
-  /** Keep the Worker, world and controlled player while replacing the backend. */
-  async selectRenderer(mode: RendererMode) {
-    if (!this.host?.rendererControl) throw new Error("Renderer selection unavailable");
-    return this.host.rendererControl.select(mode);
-  }
-  async step() {
-    if (!this.options.settings().paused) throw new Error("Pause before stepping");
-    this.controls++;
-    this.syncAuthority();
-    try {
-      await this.session.step(this.options.input(), this.camera.getVisibleChunkRange());
-      this.interpolate = false;
-    } finally {
-      this.controls--;
-      this.syncAuthority();
-    }
   }
 
   /** Resize presentation without restarting the Worker or changing its world. */

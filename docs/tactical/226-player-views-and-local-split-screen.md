@@ -1,9 +1,10 @@
 # Player views and local split screen
 
-Status: direction agreed; research needed before phasing. No implementation
-started. The sequence below is provisional; the research questions decide it.
-Updated 2026-11-07 for seats on one device session, online seats and the
-first-person view requirements from 229.
+Status: phasing set 2026-11-07 after four read-only research reviews (input
+and labs, rendering and performance, authority and prediction, testing and
+decomposition); slice 0 (safety net) in progress. Updated 2026-11-07 for seats
+on one device session, online seats and the first-person view requirements
+from 229.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
 pinch zoom or movement mode). Rather than give labs another copy, make the game
@@ -69,7 +70,8 @@ Owners: [embedded engine labs](../topics/embedded-engine-labs.md),
 - **Page shell (one per page):** menus, profiles, world registry,
   rooms/hosting, startup progress, fault reporting, fullscreen. Workshop pages
   use a minimal shell.
-- **Device session (one per page/device):** one connection to the authority,
+- **Device session (one per simulated device; normally one per page):** the
+  two-pane physics lab hosts two on one page. One connection to the authority,
   one world replica (`ClientStateView`) and one predictor. The connection
   carries several seats, like controller ports.
 - **Local player / seat (one per person):** input set, settings, the player's
@@ -110,9 +112,12 @@ Owners: [embedded engine labs](../topics/embedded-engine-labs.md),
   non-rectangular regions (e.g. a diagonal split line), so dynamic split does
   not need a new renderer contract later.
 - **Authority:** the normal `LocalServerRuntime`. A connection is bound to
-  one player session per seat. Input messages carry a seat; frames list a
-  controlled entity and an input acknowledgement per seat; streaming covers the
-  union of the seats' areas. (The lab protocol already has `seat: 0 | 1`.)
+  one player session per seat. One input packet per device tick carries every
+  local seat's movement under one sequence number; frames list a controlled
+  entity per seat and one input acknowledgement per (connection, realm) stream;
+  streaming covers the union of the seats' areas as a list of rectangles. (The
+  lab protocol's `seat: 0 | 1` routes to separate replicas, so it is not
+  precedent for this.)
   The same applies online: two local players joining a remote world use one
   connection with two seats. A recipe-world authority built from
   `ScenarioSession` staging serves Workshop labs.
@@ -203,81 +208,192 @@ views are not hard-wired to the top-down camera:
   `WebGLRenderer`). Showcase: one player top-down beside another in first person.
 - Per-view HUD: a crosshair, and no world-anchored markers in 3D views.
 
-## Research questions (decide the phasing)
+## Research results (2026-11-07)
 
-1. Multi-viewport rendering: can one Canvas/GPU host draw 2–4 regions
-   (including a diagonal split) within budget on a Chromebook and the Steam Deck?
-   Can one of them be a 229 first-person viewport sharing the same renderer?
-2. Multi-seat prediction: can one predictor replay several controlled bodies
-   with acceptable corrections and cost?
-3. Server seats: how much of `Realm`, `SessionRegistry`, the replicator,
-   `RealmStreaming` camera tickets, dormancy and door/realm travel assumes one
-   session per connection?
-4. Realm divergence: per-realm replicas on a device, or party travel? This is
-   partly a product question (do split-screen players go indoors separately?).
-5. Seat identity: guests of the host profile, or chosen profiles?
-6. `GameClient` decomposition: which UI and globals are per page, per device
-   session, per seat and per view?
-7. Fast feedback: which native/headless harnesses can exercise several seats
-   and views without a browser? Examples: two seats in `ScenarioSession`,
-   predictor replay with two controlled bodies, multi-region render probes.
-   Which few browser checks remain necessary?
-8. Phasing: what is the smallest first slice that delivers something visible
-   (e.g. game controls in the car labs, or two keyboard players in fixed split
-   screen) while keeping later phases open?
+Four read-only reviews answered the original research questions from code
+(references as of `1ae31f5a`). Device measurements remain open (slice 1b).
 
-## Provisional sequence
+- **Rendering.** The renderer already draws in view-local coordinates
+  (`RasterRenderBackend.setView`); the remaining single-view assumptions are
+  specific:
+  - `TileRenderer.prepareTerrain` evicts every chunk outside its call's range,
+    budgets per call and derives lookahead from the previous call. Per-view
+    calls would re-raster every view every frame.
+  - Caches count frames at `beginFrame`: the GPU texture LRU, car-image
+    admission (same pose in the previous frame) and the mesh ready set.
+  - `GpuOverlayResources` is keyed by surface ID and reuses only
+    integer-shifted builds, so views at different zooms or with different
+    cutaway observers alternate and rebuild every frame.
+  - `EntityMeshPose` is view-owned and resamples after a visibility gap; per-view
+    copies would disagree on wheels and heading. A mesh car in two views renders
+    twice per frame without a same-frame image memo. The backend holds one
+    interior resource.
+  - A diagonal split needs no stencil: a half-plane mask in the GPU present
+    shader or a Canvas path clip. Each diagonal view's bounds cover nearly the
+    whole canvas, so collection and fill cost about 2× a full screen.
+  - Cost follows per-view zoom. A 2×2 split on a 1280×800 Deck at zoom 1 shows
+    about 13×8 tiles per view; at zoom 0.5 each view covers a full single view
+    (about 4× collection, terrain and grass).
+  - Baselines: no Deck frame-rate receipt exists. The Chromebook single-view
+    driving receipt is already 16.7/33.4/50 ms p50/p95/p99 (216/217), and
+    prediction shares the main thread.
+- **Multi-seat prediction.** `PlayerPredictor` holds one predicted body and
+  mount, rider lift, display error/correction anchor, state history, replay
+  latches, one motor intent, one `active` gate and one presentation component.
+  An `omitted` body holds the whole predictor; the 128-body budget is shared.
+  Replay aligns all bodies to one acknowledged input tick. `CoopRecipe` already
+  scripts push, opposed, glance, head, reverse and vehicle cases with both seats
+  inside `PREDICTION_RADIUS`, so the spike needs no server change. Baseline: two
+  predictors in `SharedPrediction.test.ts` (`maxCorrection < 16`).
+- **Server seats.** The authority already simulates and tickets several sessions
+  per realm (session-keyed `Realm.sessions`, camera-ticket union, per-session
+  admission, `player:${id}` tickets, per-session wildlife wake). Connection
+  coupling is in routing and replication: `SessionRegistry` keys,
+  `GameServer.handleMessage`, `LocalServerRuntime.send`, one stream per session
+  in `Realm.publishState`, `RealmReplicator.build` (one range, ack, player and
+  physics anchor) and the wire format (input has no seat). Estimate: 500–700
+  server/codec lines across about ten files.
+- **Realms and identity.** Realm divergence is cheap on the server (`realmId`
+  per session) and expensive on the client (`enterRealm` clears the state view,
+  renderer and scene frame). `identify` evicts other sessions with the same
+  profile and sends `kicked`, which through seat routing would kick the device.
+  Guest seats skip takeover and persist under their session id. New
+  `PlayerSession`s default to `editorEnabled = true`.
+- **Decomposition.** Most DOM mounts are per page. The hard parts are non-DOM
+  single-seat state: `RemoteStateView` (one player id, ack, mount, gems,
+  invincibility), the visible range from one camera, one audio listener,
+  world-map travel moving the connection, `MenuNavigation`'s global focus stack,
+  the `controllerInput` single active pad (also used by the lab host and
+  `EditorMode`), the `InputHints` last source and `location`/storage reads.
+  Estimate: two to three slices.
+- **Harnesses.** `memoryServer`, `LocalServerRuntime` with
+  `WorkerClientTransport`, `RemoteStateView` + `PlayerPredictor` + codec,
+  `ActionManager.pressKey`, fake-canvas touch controls and `RecordingBackend`
+  already run in Node. Before slice 0 no test ran `PlayScene.update` or
+  `PlayInputController`, and the smoke keyboard case checked pixels, not
+  movement. Do not add jsdom/happy-dom: `MenuNavigation` decides visibility
+  from `getClientRects`.
+- **Labs.** Labs need the device session and view plus a recipe-world
+  authority, not seats or split screen. Six pages hold about 460 lines of
+  private input, and `ScenarioPresentationHost` about 55 lines of vehicle input
+  with a third composition (`CarControls`, `ScenarioReplica`) lacking horn,
+  siren, throw and jump-press edges. The five shell modules
+  (`ScenarioPresentationHost`, `ScenarioClient`, `ScenarioWorkerHost`,
+  `ScenarioReplica`, `scenario.worker`) are about 1,100 lines at `1ae31f5a`, plus
+  68 lines of delay emulation (`OrderedLatency`) and about 610 lines of shell
+  tests. The two-pane physics lab is two replicas with a delayed guest link and a
+  three.js collider view: two device sessions on one page, not two views.
 
-Each phase keeps the single-player game unchanged unless the phase delivers
-a visible feature.
+## Corrections to the target architecture
 
-1. **Input ownership.**
-   - Per-player input sets, the device router, `code`-based bindings and the
-     shared composition step moved out of `PlayScene`.
-   - Joystick and buttons scoped to a view rect.
-   - Node tests pin current single-player behavior, two simultaneous keyboard
-     schemes, pad assignment and touch routing by region.
-   - Interim lab adapter: `ScenarioPresentationHost` uses one input set, which
-     gives labs the game's on-screen controls early.
-2. **Multi-viewport rendering spike (can run in parallel with 1).**
-   - Draw N cameras into regions of one Canvas/GPU host, including cached
-     terrain cells, elevated-surface overlays and mesh vehicles.
-   - Check that regions can change size every frame, and that a
-     non-rectangular clip (a diagonal split) is feasible on both backends.
-   - Measure 2 and 4 views on a Chromebook and the Steam Deck before
-     committing to layouts.
-3. **Multi-seat prediction spike (gate for phase 5, can run in parallel).**
-   - Two controlled bodies with independent inputs in one `PlayerPredictor`
-     replay, using a native harness.
-   - Cases: walking into and pushing each other, both riding one car, one
-     driving while the other walks, and a simple distance leash.
-   - Measure correction size and replay cost per added seat against the
-     existing contact-presentation and matched-tick prediction tests
-     (207–212).
-   - Decide multi-seat prediction or the rejected fallback before phase 5.
-4. **Device session, seat and view extraction.** Split `GameClient` into the
-   page shell, device session, seat and view, with a camera-policy interface
-   (follow one player is the only policy delivered). Per-view UI mounts in a
-   container. The game still has one seat and one view.
-5. **Seats on the authority.**
-   - Seat-tagged input, per-seat controlled entity and input acknowledgement,
-     one player session per seat, and union streaming.
-   - Multi-seat prediction from the phase 3 result.
-   - Join flow: a player presses A on an unassigned pad, or Enter with an
-     unclaimed keyboard scheme.
-   - Identity per seat (guest or profile: see decisions below).
-   - Shared pause/menu policy and one audio mix.
-6. **Split screen in the game.** Layout switching, per-view HUD/prompts,
-   controller/keyboard hints per player, and performance gates for 2 and 4
-   players.
-7. **Labs onto views.**
-   - Recipe-world authority plus instrument plugins.
-   - Car pages first, then characters, interiors, outdoor and natural landscape.
-   - The two-pane physics lab becomes two views with network emulation.
-   - Then delete `ScenarioPresentationHost`, `ScenarioClient`, the scenario
-     Worker and the per-page input code.
-   - `ScenarioSession` stays as the headless test harness and recipe-world
-     opener.
+- **One input timeline per device.** One sequence number per device tick; each
+  input packet carries every local seat's movement; frames carry one
+  acknowledgement per (connection, realm) stream. Per-seat acknowledgements are a
+  test assertion, not a protocol field. `PlayScene.cancelInput` (an extra,
+  off-cadence sequence) and locked input skipping `storeInput` become neutral
+  input for that seat, so the shared timeline keeps advancing.
+- **Interest is a list of rectangles per connection** for visible ranges,
+  replicator filters and a multi-anchor physics snapshot, never a bounding box.
+- **Frames and views are separate render steps.** One `beginFrame` per display
+  frame, then `beginView(region, camera)`/`endView()` per view; regions never go
+  through `resize()`. Terrain is prepared once per frame over all view ranges
+  with one budget, then collected per view. Mesh poses and presentation belong
+  to the device session. Overlay caches key on zoom and observer state.
+- **Input composition is wider than `PlayScene.update`:** E/F place controls
+  (`VehicleControl`, `DoorControl`), door walk-through from `lastMovement`,
+  click/tap interaction and `cancelInput`. Touch controls scoped to a view rect
+  must map CSS to canvas pixels (lab canvases are 960×640 shown at 100% width).
+- **Keyboard routing.** A focus rule per page shell (the game listens on
+  `window`; Workshop form fields keep their keys), one owner for global keys
+  (Escape, Tab, F3, console, zoom digits) when two schemes are active, and a
+  real-keyboard rollover check.
+- **Party travel** (if chosen) needs a follow path that skips the walk-through
+  approach check, safe arrival per seat, rollback when one transfer fails, one
+  realm-entered message per device, and startup pulling extra seats into seat
+  0's realm.
+- **Pause** is per session today (`debugPaused`). A device pause sets every seat
+  and never pauses another device.
+- **Isolation between seats.** A crowded seat must not stall the others
+  (per-seat required set); an idle local seat stays on predicted time while
+  another seat pushes it.
+
+## Phasing
+
+Prove the two uncertain parts first (multi-seat prediction and multi-view render
+cost) behind a safety net; the remaining work is refactoring of known shape that
+can proceed in parallel. Each slice fixes its exit list before work starts, gets
+one independent review, fixes confirmed findings and commits. Work outside the
+exit list goes to the next slice's backlog. Spikes are time-boxed and end in a
+recorded decision. Device performance runs are owner checkpoints.
+
+0. **Safety net (no behavior change).**
+   - Characterize single-player input before code moves: a Node harness runs the
+     real `PlayScene` and `PlayInputController` with a fake `GameContext` and a
+     recording transport.
+   - A shrink-only allow-list of files importing the lab shell.
+   - Delete unused `ScenarioPresentationHost` options.
+   - One touch case and one lab case join the smoke suite for this sequence.
+1. **Spikes (parallel, separate worktrees).**
+   - **1a, multi-seat prediction (Node only, no server change).** One predictor
+     fed only by `ScenarioSession` seat 0's stream over `COOP_CASES`; both seats
+     share one sequence with delayed inputs and frames. Measure per-seat maximum
+     correction and past-tick error, contact gap at render fractions, status,
+     replay steps/ms against one seat, convergence, and the two-predictor
+     comparison. A guest beyond the prediction radius records why a
+     multi-anchor snapshot is needed. Go: corrections no worse than two
+     predictors and replay within its budget.
+   - **1b, multi-view render.** `?views=1|2|4|diag` in the real game: view 0
+     follows the player, others follow NPCs or fixed offsets (no seats or
+     input). Adds `beginView`/`endView`, a reused world target, union terrain
+     preparation and shared presentation/mesh poses. An in-page
+     `__viewBench({views, seconds})` reports frame-interval percentiles,
+     intervals over 25 ms, render CPU, uploads, overlay builds, mesh-image
+     misses, terrain pending, texture bytes and heap; the existing benches gain
+     `--views`. Take the Deck baseline first, then measure production builds at
+     zoom 0.5 and 0.75 on the Chromebook and Deck.
+   - **Render go/no-go.** Two views meet the single-view contract (p99 ≤16.8 ms,
+     at most 0.5% of intervals over 25 ms, render CPU p95 ≤8 ms; driving no
+     worse than the same-run one-view baseline). Four views: p95 ≤16.8 ms, p99
+     ≤33.4 ms, at most 2% over 25 ms, render CPU p95 ≤11 ms; otherwise retest
+     with a fallback ladder (grass, shadow receivers, halo, sprite mesh cars,
+     particles). Warm: uploads per frame no more than one view, no overlay
+     builds, terrain pending zero in every view, texture bytes under 64 MiB
+     without LRU churn, no GL allocations while regions resize, flat heap over
+     60 s.
+   - Owner checkpoint: results, zoom policy and layouts.
+2. **Input ownership.** Pure per-seat composition (including place controls)
+   with one sequence per device tick, view-rect touch, pad assignment by index,
+   the keyboard focus rule and two schemes. The interim lab adapter stays under
+   about 50 lines: labs get the game's controls, `ScenarioSession.input` accepts
+   horn/siren/throw, and the physics lab runs two input sets. The same slice
+   deletes page-private lab input and the host's vehicle input.
+3. **Device session and view** with the camera-policy interface, a recipe-world
+   authority (a `LocalAuthority` over `ScenarioSession` staging) and the view
+   plugin surface (follow camera, admin teleport/clock/reset, per-frame
+   diagnostics hook). `GameTestHooks` stays compatible. A Biome
+   `noRestrictedGlobals` override (`window`, `document`, `location`, storage,
+   `navigator`) covers the new session/seat/view directory. Exit: the
+   WorldGeometry car fixtures run on the game view.
+4. **Parallel work.**
+   - **4a, labs one at a time:** the rest of WorldGeometry, Outdoor,
+     Characters, Interiors, NaturalLandscape (pose cycle, interior presenter
+     and custom cameras as view plugins). Decide `ENGINE_REVIEW_REVISION` per
+     lab when pixels or framing change. Delete `ScenarioPresentationHost` when
+     its last consumer moves.
+   - **4b, server seats (separate code):** `connectionId`/`seat` on
+     `PlayerSession` (seat 0 keeps the bare connection id), streams per
+     (connection, realm), seat-tagged messages, multi-rectangle interest and
+     multi-anchor snapshots, join/leave-seat, travel policy, guest identities
+     and device pause, proven end to end on `memoryServer`.
+5. **Production multi-seat prediction and split screen in the game.** Join
+   flow, layouts, per-view HUD and prompts, per-player hints, the audio listener
+   policy and device performance gates.
+6. **Physics lab as two device sessions**, then delete `ScenarioClient`,
+   `ScenarioWorkerHost`, the scenario Worker entry, `ScenarioReplica`, delay
+   emulation and `ScenarioSession`'s guest path.
+
+Lab code is deleted in slices 2, 4a and 6 rather than in one final phase.
+`ScenarioSession` stays as the headless harness and recipe-world opener.
 
 ### Later: shared-screen modes (separate tacticals)
 
@@ -296,20 +412,30 @@ a visible feature.
 
 ## Lab policy during this sequence
 
-Labs keep running at their current capability through phase 6. Shared changes
-supply only minimal adapters (the input set, render host API changes). Lab-only
-features may regress temporarily when preserving them would block a phase.
-Record each regression here and in the embedded engine labs topic, and resolve
-it in phase 7 rather than by maintaining both shells.
+Labs keep their current capability until they move onto the game view (slice 3
+onward). Shared changes supply only minimal adapters (the input set, render
+host API changes). Lab-only features may regress temporarily when preserving
+them would block a slice. Record each regression here and in the embedded
+engine labs topic, and resolve it in that lab's migration slice rather than by
+maintaining both shells. The shell import allow-list only shrinks.
 
 ## Decisions
 
-- Open: who are local players 2–4? Guests of the host profile, or chosen
-  profiles with their own saved settings?
+- Open: zoom per layout. Proposed: measure 0.5 and 0.75 in slice 1b and decide
+  on readability and cost.
+- Open: who are local players 2–4? Proposed: guests of the host profile, with a
+  seat-tagged `identify` so chosen profiles can follow.
+- Open: do split-screen players go indoors separately? Proposed: party travel,
+  keeping `realmId` per seat so per-realm replicas remain possible.
 - Open: does split screen pause everyone when one player opens the menu
   (proposed: yes), and which player controls a menu (proposed: the opener)?
+- Proposed: the two-pane physics lab becomes two device sessions on one page.
 - Decided: make the game modular and embeddable rather than extend the lab
-  shell; labs may regress temporarily and move onto views last.
+  shell; labs may regress temporarily. Owner, 2026-11-07: labs move once the
+  device session and view exist (slice 3), not after split screen.
+- Decided (owner, 2026-11-07): the slice phasing above, each slice reviewed by
+  an independent Opus 5.5 high-effort session through Yep Anywhere before
+  commit.
 - Decided: seats on one device session (one connection, one replica, one
   predictor), including online; one connection per local player is the
   fallback only.
@@ -320,8 +446,80 @@ it in phase 7 rather than by maintaining both shells.
 
 ## Validation approach
 
-- Phase 1 behavior is Node-tested at the composition/router level. Browser
-  coverage is one focused check that a view-scoped joystick and buttons drive
-  a player, plus one check with two keyboard schemes in two views (phase 6).
-- Rendering phases follow the rendering topic's Canvas/GPU pixel and
-  `streaming:bench` requirements, with device measurements for 2 and 4 views.
+- **Characterization first.** Slice 0 pins current single-player input on the
+  pre-refactor code. Later slices keep those tests passing or explain each
+  intended difference in the slice record.
+- **Native tests own** composition, bindings, the router, pad assignment,
+  touch-rect mapping, layout maths, prediction, server seats, terrain
+  preparation across views, cache keying, and paired listener add/remove on
+  session/view teardown.
+- **Browser boundaries (only these):** two keyboard schemes with real
+  `KeyboardEvent.code`; the joystick in a canvas that does not fill the window
+  (CDP touch); per-backend region pixels including the diagonal; Options focus
+  returning to the opening view; two-seat Worker save/reload; two mocked pads in
+  split screen. Physical pad mapping is a Deck acceptance check, since
+  Playwright mocks `navigator.getGamepads`. Playwright serves `vite preview` of
+  `dist/`, so build before browser reruns.
+- **Per-slice review checklist:** characterization unchanged or differences
+  explained; the replaced path deleted in the same slice; seat-0 shortcuts
+  (`playerEntity`, `seats[0]`, `views[0]`) do not grow outside an allow-list;
+  every mount and listener has a removal; the code-health ratchet does not grow;
+  `art:catalog` and `workshop:manifest` regenerated after render/input changes;
+  `streaming:bench -- --assert-ready` after streaming changes.
+- **Performance** gates are defined in slice 1b and repeated on devices in
+  slice 5.
+
+## Progress
+
+- 2026-11-07: research reviews complete; phasing, corrections and decisions
+  recorded above.
+- 2026-11-07, slice 0 (safety net, no behavior change):
+  - `src/scenes/playInputCharacterization.test.ts` runs the real `PlayScene`,
+    `PlayInputController`, `ActionManager`, controller input, touch controls,
+    tap movement and `Camera` with a fake `GameContext` (canvas shown at half
+    CSS size with an offset) and a recording transport. Twenty-three cases pin:
+    - keyboard movement (quantized axes, sprint, diagonal normalization, reverse
+      only in cars) and the jump press latch;
+    - storage/door/menu locks (neutral input on the shared sequence, no
+      prediction, held keys kept, `lastMovement` zero);
+    - blur and `visibilitychange` clearing held input with an extra neutral
+      command;
+    - steering versus direction cars, the horn refresh (about 0.2 s; every 13th
+      tick today), siren/style press edges ignoring keys held while boarding,
+      warning-vehicle beacons, throw force/direction;
+    - joystick, gamepad stick and A, and tap movement; boarding and hits
+      cancelling destinations; pause; editor mode on enter/resume; zoom hotkeys
+      bound only while playing; desktop click interaction with CSS-to-canvas
+      mapping and the post-touch click window; camera follow.
+
+    Seeding single-line faults into `PlayScene` and `PlayInputController` in an
+    isolated worktree: all twenty behavioral faults fail the suite. Removing
+    `PlayScene`'s camera placeholder guard is equivalent (`followPlayer` already
+    ignores id −1). Two assertions are expected to change in slice 2 by design:
+    locked ticks become stored neutral input, and `lastMovement` moves into
+    per-seat composition.
+  - Still unpinned, to characterize at the start of slice 2 before they move:
+    E/F place controls (`VehicleControl`, `DoorControl` and
+    `GameClient.updatePlaceControls`, which have no unit tests), hold movement
+    mode, befriend taps and tap-mode clicks, and XR input.
+  - `src/scenarios/LabShellConsumers.test.ts` fixes the twelve files in `src`,
+    `tests` and `scripts` that import the lab shell (any import form, including
+    `?worker` URLs and `vi.mock`); the list may only shrink. Indirect use through
+    an allowed file stays a review item.
+  - Removed unused `ScenarioPresentationHost` options: `step()`,
+    `selectRenderer()`, `cameraOffsetY` and `authoredTrains` (the default).
+  - Smoke gains two `@smoke`-tagged cases through a second project: real touch
+    gestures/Jump/resize targeting (`tap-movement.spec.ts`) and the Canvas
+    WorldGeometry lab Worker movement/reload case (28 smoke cases).
+  - Finding for slice 2: since `8f405aaf` (2026-11-03) `occupiedVehicle` returns
+    only `vehicle-v1:` entities, so `PlayScene`'s train branches (train tap,
+    `isTrain(vehicle)` steering exceptions) and `TrainTapMovement` are
+    unreachable; inside train driving is deferred in the trains topic. Delete
+    them in slice 2 unless inside driving returns first.
+  - The Shift stuck-key defect was fixed separately by `1ae31f5a` (code-based
+    bindings with tests), so slice 0 adds no test for it.
+  - Review: an independent Opus 5.5 high-effort session through Yep Anywhere
+    found two blocking gaps (the boarding siren case was vacuous; the hidden-page
+    case skipped `visibilitychange`). Both were fixed and verified by seeded
+    faults, then ACCEPT. Its claim that `ScenarioClient.step()` was dead was
+    withdrawn (the physics lab's Step button uses it).

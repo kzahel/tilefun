@@ -60,7 +60,7 @@ See [embedded labs](topics/embedded-engine-labs.md) for lifecycle and parity lim
 
 ## Transport and requests
 
-Frame tag `0x14` carries normal entity baselines/deltas plus the bounded numerical
+Frame tag `0x16` carries normal entity baselines/deltas plus the bounded numerical
 physics state. Replicated `physicsGroupId` keeps a train consist coherent in
 bounded selection and private replay; no private service IDs are required. The
 numerical state includes previous poses, full vehicle quaternions/angular velocity/sleep, solved contact pairs, vehicle motor targets, retained takeoff support velocity, a one-use held jump queue and the motor's exclusive input deadline. Earlier frame tags
@@ -183,9 +183,8 @@ the original tap implementation.
 
 - Authority, transfers and requests: GameServer, RealmBrowser and RequestBroker
   tests beside their implementations.
-- Movement: [physics parity](../src/physics/physicsParity.test.ts),
-  [netcode parity](../src/server/NetcodeParityBaseline.test.ts) and
-  [input queue prediction](../src/server/InputQueuePrediction.test.ts).
+- Movement and prediction: [shared prediction](../src/client/SharedPrediction.test.ts)
+  and [player controls](../src/physics/PlayerControls.test.ts).
 - Worker lifecycle and streaming: [performance](topics/performance.md).
 - Hosting authorization: [server access](SERVER-SECURITY.md).
 

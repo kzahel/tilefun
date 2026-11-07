@@ -13,7 +13,7 @@ the group never drops below half speed, and keeps easing through sliced-replay
 frames. Large relocations,
 visibility removal and predictor resets retain explicit fences; ordinary frames
 without a released group reuse their existing entity array. Native delayed-frame
-landing/jump-off regressions cover fractional render poses. Frame 0x14 retains
+landing/jump-off regressions cover fractional render poses. The frame (tag `0x16`) retains
 one-use held airborne jump queues for replay.
 Ready terrain now covers the same two-chunk interest buffer as actors/props:
 otherwise a narrow-view rear-roof rider could receive the front carriage without
@@ -26,8 +26,8 @@ against the render clock, independently of wall-time submission delays.
 presentation membership and solved correction membership through replicated
 `physicsGroupId`. A train's distant carriage cannot remain buffered while its
 ridden carriage is predicted. Unrelated nearby bodies still do not inherit a
-player correction. Retained departure support velocity is part of numerical
-frame `0x13`, so midflight replay does not lose or double carrier momentum.
+player correction. Retained departure support velocity is part of the numerical
+frame payload, so midflight replay does not lose or double carrier momentum.
 
 
 ## Steady movement pacing (211/212)

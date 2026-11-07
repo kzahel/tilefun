@@ -44,9 +44,12 @@ and timed out under full-suite load) and keeps its 30 s CI allowance.
 [186](../tactical/186-ci-reliability-and-deployment-gate.md) owns the 2026-10-23
 repair and simplification. Pushes and PRs require lint, types, all native and
 HTTP/WS tests, dependency audits, the production build, raster verification, and
-27 existing browser cases selected by `playwright.smoke.config.ts`. These cover
-launch/pixels, keyboard/controller/touch controls, Worker lifecycle and saves,
-mobile editing, vehicle driving/persistence, multiplayer and launcher assets.
+the browser cases selected by `playwright.smoke.config.ts` (28 on 2026-11-07).
+These cover launch/pixels, keyboard/controller/touch controls, Worker lifecycle
+and saves, mobile editing, vehicle driving/persistence, multiplayer and launcher
+assets. Whole smoke files run in the `chromium` project; single cases from larger
+files carry an `@smoke` tag and run in `chromium-tagged` (tactical 226 adds real
+touch gestures and the WorldGeometry lab Worker for its input migration).
 Run them with `npm run test:smoke`; no browser tests are deleted.
 
 CI layout (2026-11-07): `check` runs lint, typecheck, audits, Worker checks, build

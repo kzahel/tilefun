@@ -69,7 +69,6 @@ const assets = { sheets: new Map(), blendSheets: [], variants: {} } as unknown a
 const options = {
   width: 960,
   height: 600,
-  cameraOffsetY: -12,
   input: () => ({ dx: 0, dy: 0, jump: false, sprinting: false }),
   settings: () => ({ zoom: 0.75, paused: false, terrainPacing: "throughput" as const }),
   onError: vi.fn(),
@@ -98,7 +97,7 @@ it("configures full gameplay assets, starts at the fixture and detaches visibili
   await host.ready;
   expect(mocks.setAssets).toHaveBeenCalledWith(assets, expect.anything());
   expect(mocks.resize).toHaveBeenCalledWith(960, 600);
-  expect([host.camera.x, host.camera.y]).toEqual([80, 148]);
+  expect([host.camera.x, host.camera.y]).toEqual([80, 160]);
   expect(requestAnimationFrame).toHaveBeenCalledTimes(1);
   expect(mocks.setRunning).toHaveBeenLastCalledWith(true);
   Object.defineProperty(document, "hidden", { value: true, configurable: true });
