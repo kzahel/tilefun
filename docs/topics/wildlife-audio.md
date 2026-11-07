@@ -187,6 +187,12 @@ Keep browser gesture unlock and the lab's explicit opt-in. Add **Audition voice*
 and audio coverage filters to Animal Browser during implementation, with ordinary
 controller/keyboard/touch activation and useful silent/missing explanations.
 
+Footsteps follow the gait: clip-animated actors (predators) take cadence from the
+active `walk`/`chase` clip, not their placeholder base sprite (`frameCount: 1`,
+which produced a ~20 Hz buzz while patrolling after meals). Non-gait clips (feed,
+display, sleep, flight) and stalled actors with no realized velocity are silent,
+and an 80 ms floor guards any other definition mismatch (`FootstepSystem.test.ts`).
+
 Use native tests for profile coverage, correct voice selection (especially owl),
 transition deduplication, cooldowns, distance and cleanup. A narrow real Chromium
 audio test should exercise gesture unlock and actual rendered signal through the

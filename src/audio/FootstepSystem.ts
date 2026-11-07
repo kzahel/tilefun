@@ -1,6 +1,7 @@
 import type { AABB } from "../entities/collision.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
+import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import type { Prop } from "../entities/Prop.js";
 import { getMaterialForPropType } from "../entities/PropFactories.js";
 import type { Camera } from "../rendering/Camera.js";
@@ -52,6 +53,31 @@ const DEFAULT_WEIGHT = 70;
 const MIN_WEIGHT_FACTOR = 0.08;
 /** Maximum weight factor (heavy creatures don't clip). */
 const MAX_WEIGHT_FACTOR = 1.5;
+
+/** Named clips whose frames are a gait. Feed, display, sleep and flight stay silent. */
+const LOCOMOTION_CLIPS = new Set(["walk", "chase", "run", "hop"]);
+/** Clip actors (predators) report AI intent as `moving`; require realized travel. */
+const MIN_CLIP_STEP_SPEED = 2;
+/** Guard against definitions whose timing would turn steps into a buzz. */
+const MIN_STEP_INTERVAL_MS = 80;
+
+/**
+ * Milliseconds between foot contacts (half a gait cycle), or undefined when the
+ * actor is not walking. Clip-animated sprites keep placeholder base timing
+ * (frameCount 1), so their cadence must come from the active clip.
+ */
+function stepIntervalMs(entity: Entity): number | undefined {
+  const sprite = entity.sprite;
+  if (!sprite?.moving) return undefined;
+  if (sprite.clip !== undefined) {
+    const clip = ENTITY_DEFS[entity.type]?.sprite?.clips?.[sprite.clip];
+    if (!clip || !LOCOMOTION_CLIPS.has(clip.name)) return undefined;
+    const v = entity.velocity;
+    if (!v || Math.hypot(v.vx, v.vy) < MIN_CLIP_STEP_SPEED) return undefined;
+    return Math.max(MIN_STEP_INTERVAL_MS, (clip.frameDuration * clip.count) / 2);
+  }
+  return Math.max(MIN_STEP_INTERVAL_MS, (sprite.frameDuration * sprite.frameCount) / 2);
+}
 
 /** Compute a volume/pitch multiplier from entity weight. sqrt curve feels natural. */
 function weightFactor(weight: number): number {
@@ -112,14 +138,12 @@ export class FootstepSystem {
         continue;
       }
 
-      if (!entity.sprite.moving) {
+      const halfCycleMs = stepIntervalMs(entity);
+      if (halfCycleMs === undefined) {
         state.walkTimer = 0;
         state.wasMoving = false;
         continue;
       }
-
-      // Half walk cycle = one footstep (2 foot contacts per full cycle)
-      const halfCycleMs = (entity.sprite.frameDuration * entity.sprite.frameCount) / 2;
 
       if (!state.wasMoving) {
         // Just started moving — play immediately
