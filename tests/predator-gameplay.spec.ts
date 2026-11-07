@@ -4,10 +4,11 @@ import { PREDATOR_PROFILES } from "../src/wildlife/Predator.js";
 test.use({ channel: "chromium" });
 // Exact per-species recipe/pose parity: PredatorRecipe.test. Retain real
 // Worker pause/reload publication for ground, flight, web and swoop paths.
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
 for (const p of PREDATOR_PROFILES.filter((p) =>
   ["tiger", "griffin", "giant-spider", "owl"].includes(p.species),
 ))
-  for (const renderer of ["canvas", "gpu"]) {
+  for (const renderer of ["canvas"]) {
     test(`${p.species} hunts and reloads its meal in the shared Worker lab (${renderer})`, async ({
       page,
     }) => {

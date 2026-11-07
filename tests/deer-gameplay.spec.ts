@@ -13,7 +13,8 @@ test.use({ channel: "chromium" });
 // bounces (c473f541) launched at 75-95 px/s.
 const grounded = (z: number) => Math.abs(z) < 0.5;
 const MAX_LANDING_VZ = 40;
-for (const renderer of ["canvas", "gpu"]) {
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
+for (const renderer of ["canvas"]) {
   test(`woodland deer walk, react to landing and reload their walking pose (${renderer})`, async ({
     page,
   }) => {

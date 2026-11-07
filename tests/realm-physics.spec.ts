@@ -30,8 +30,9 @@ async function play(page: Page) {
 }
 
 test("ordinary Worker game uses persistent NPC contacts and prediction", async ({ page }) => {
+  // Physics contacts and prediction, not rendering: Canvas keeps hosted runs fast.
   await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 2026)))}`,
+    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 2026)))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");

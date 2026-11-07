@@ -15,7 +15,8 @@ type Pose = {
   visible: boolean;
   screen: { left: number; top: number; width: number; height: number };
 };
-for (const renderer of ["canvas", "gpu"]) {
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
+for (const renderer of ["canvas"]) {
   test(`new pasture action pixels, trunk/root attachments and saved poses use the real Worker (${renderer})`, async ({
     page,
   }) => {

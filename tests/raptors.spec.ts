@@ -2,8 +2,9 @@ import { expect, test } from "@playwright/test";
 import { RAPTOR_PROFILES } from "../src/wildlife/Raptors.js";
 
 test.use({ channel: "chromium" });
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
 for (const animal of RAPTOR_PROFILES)
-  for (const renderer of ["canvas", "gpu"]) {
+  for (const renderer of ["canvas"]) {
     test(`${animal.species} browser action, visible swoop and durable meal (${renderer})`, async ({
       page,
     }) => {

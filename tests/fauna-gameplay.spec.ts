@@ -246,7 +246,9 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
   });
 }
 
-for (const renderer of ["canvas", "gpu"])
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
+
+for (const renderer of ["canvas"])
   test(`wildlife scene switching keeps native framing (${renderer})`, async ({ page }) => {
     await page.goto(
       `/tilefun/workshop.html?geometry=nature-fox&landscape=thicket&renderer=${renderer}#/tool/world-geometry`,

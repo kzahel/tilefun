@@ -13,7 +13,8 @@ type Pose = {
   parent: number;
   clip: number;
 };
-for (const renderer of ["canvas", "gpu"]) {
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
+for (const renderer of ["canvas"]) {
   for (const animal of ["dog", "crow", "squirrel"]) {
     test(`${animal} real work, carried object and reload (${renderer})`, async ({ page }) => {
       test.setTimeout(150_000);

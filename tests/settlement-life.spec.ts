@@ -7,7 +7,8 @@ const petFamilies = new Map<string, string>(
 
 test.use({ channel: "chromium" });
 test.describe.configure({ mode: "parallel" });
-for (const renderer of ["canvas", "gpu"]) {
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
+for (const renderer of ["canvas"]) {
   test(`connected farmstead contains farmhouse, crops and durable pasture (${renderer})`, async ({
     page,
   }) => {

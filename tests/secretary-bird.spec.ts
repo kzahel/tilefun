@@ -1,7 +1,8 @@
 import { expect, test } from "@playwright/test";
 
 test.use({ channel: "chromium" });
-for (const renderer of ["canvas", "gpu"])
+// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
+for (const renderer of ["canvas"])
   test(`secretary-bird catches a cobra and reloads its natural meal (${renderer})`, async ({
     page,
   }) => {
