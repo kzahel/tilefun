@@ -777,9 +777,11 @@ Open items:
   and requires ≥95% of the sprite's fully covered pixels to match the idle frame
   smoothed at the same offset; a scratch build drawing the player behind the bed
   scored 0.72–0.79 and failed.
-- Door walk-through rejection on a starved Worker (`validateDoorApproach` checks
-  the lagging server position and the request clears held keys): validate after
-  queued inputs, or keep held input after a rejection. Canvas specs make it rare.
+- Resolved (`c63052a1`): door walk-throughs on a starved Worker were rejected
+  because the client requested traversal from its prediction while authority
+  lagged; the client now waits until authority is within the server's one-tile
+  allowance (server check unchanged).
+- Train riding stutter (below): owner leaves it as a bounded, host-speed artefact.
 - Rapier side effects to schedule: an idle player creeps down ramps (~1.2 px/s);
   a frog hopping against a parked driven car accelerates it backwards; Rapier in
   the main/Worker bundles raised hosted startup (Worker bundle 1.2 → 5.5 MB,
