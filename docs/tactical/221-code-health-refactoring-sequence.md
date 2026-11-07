@@ -786,3 +786,18 @@ Open items:
   train/rider display holds one frame and doubles the next (~3.2 px).
   `train-recovery.spec.ts` allows a few such hitches but never more than one frame
   of travel; a fix would advance presentation on its own clock during replays.
+
+### CI time (2026-11-07)
+
+Push CI took ~14 min (serial `npm test` 8.7 min inside `check`) and the full run
+~35–50 min (8 per-file shards of 6–32 min, one worker each). Changes: native tests
+in a three-way `vitest --shard` job; per-species matrices (Fauna 513 cases, 110 s
+locally; PredatorPlacement, MallardResidency, NaturalHunters, OriginalVehicles,
+RealmBrowser, AquaticHunters, PredatorRecipe) split into `Name.partN.test.ts`
+files over shared `tests-support/*.suite.ts` bodies with deterministic slices (same
+1,309 test names); smoke in two shards; the full suite in 12 shards with
+`fullyParallel` on CI; behavior cases off the hosted GPU path. Result: push CI
+~9–10 min including deploy, full run ~17 min, local `npx vitest run` ~66 s.
+Remaining cost: every job spends ~1.5 min checking out the 2.6 GB asset tree
+(storage policy, phase 6) and ~1 min installing Chromium/dependencies; vitest
+shards balance by file count, not duration.
