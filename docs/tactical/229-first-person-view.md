@@ -13,8 +13,9 @@ Owners: [rendering architecture](../topics/rendering-architecture.md),
 
 ## Try it
 
-- **V** toggles it in play, or open **☰ → Debug → First-person view**. Add
-  `?view=fps` to start in first person. Console: `r_firstperson 1`.
+- Gear (⚙) → **Options → First-person view (experiment)**, saved per player like
+  the car controls. **V** toggles it for the session. `?view=fps` or the console
+  (`r_firstperson 1`) also turn it on.
 - Requires the GPU renderer (the default). Legacy Canvas keeps the fixed view.
 - Look: click the game to lock the pointer, then move the mouse (Esc releases).
   A controller's right stick also looks. WASD, the left stick and the touch
@@ -103,6 +104,24 @@ RenderBackend (unchanged)          FirstPersonView (own Three.js renderer/canvas
   range covers the fog radius. It becomes a view-owned interest radius.
 - A separate WebGL context and canvas between the GPU world canvas and the UI
   canvas, with its own vehicle assets. It should share the host renderer.
+
+### Owner feedback, 2026-11-07
+
+- The toggle belongs with the player options, not Debug: it moved to the Options
+  dialog and the player profile (`PlayerProfile.firstPerson`).
+- WASD was wrong on the owner's keyboard layout, and boarding with E failed for the
+  same reason (the physical E key types another character there). Gameplay now
+  binds physical keys (`KeyboardEvent.code`), ahead of 226 phase 1, and hints show
+  each key's unshifted label on the player's layout (Keyboard Map API, else learned
+  from plain presses). Labs follow the same positions: shared vehicle keys and the
+  Natural Landscape, Outdoor Geometry and Characters movement keys (`usKey`). The console closes
+  on the physical key that opens it. Ctrl/⌘ chords never trigger gameplay keys (and
+  releasing ⌘ clears held keys, since macOS drops their keyups); editor undo still
+  follows the typed character, as operating systems do.
+- V switches first person until reload; the Options checkbox saves the choice.
+- A second review pass (same session) found seven issues in this follow-up (lab
+  keys, shifted label learning, focus under the sticky Back button, Ctrl/⌘ chords,
+  concurrent option saves, the V/saved-state note, console close key); all fixed.
 
 ## Requirements recorded in 226
 

@@ -86,6 +86,7 @@ export interface GameClientOptions {
     touchMovement?: TouchMovementMode;
     pinchZoom?: boolean;
     carDriving?: CarDrivingStyle;
+    firstPerson?: boolean;
   };
   profileStore?: {
     listProfiles(): Promise<{ id: string; name: string; pin: string | null; createdAt: number }[]>;
@@ -97,6 +98,7 @@ export interface GameClientOptions {
         touchMovement?: TouchMovementMode;
         pinchZoom?: boolean;
         carDriving?: CarDrivingStyle;
+        firstPerson?: boolean;
       },
     ): Promise<void>;
   };
@@ -385,6 +387,7 @@ export class GameClient implements GameTestHooks {
     this.scenes.setContext(gc);
     // Register console cvars and commands
     registerClientConsole(gc, this.netEmulatedTransport);
+    if (this.profile?.firstPerson) this.consoleEngine.cvars.get("r_firstperson")?.set(true);
     this.pushStartScene();
 
     showStartupStage(

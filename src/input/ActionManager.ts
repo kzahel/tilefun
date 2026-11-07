@@ -9,6 +9,7 @@ import {
   controllerInput,
 } from "./ControllerInput.js";
 import { GamepadPoller } from "./GamepadPoller.js";
+import { eventCode } from "./KeyLabels.js";
 import type { TouchButtons } from "./TouchButtons.js";
 import type { TouchJoystick } from "./TouchJoystick.js";
 
@@ -185,7 +186,7 @@ export class ActionManager {
     };
   }
 
-  // --- Testing helpers ---
+  // --- Testing helpers (physical `KeyboardEvent.code` values, e.g. "KeyW") ---
 
   pressKey(key: string): void {
     if (this.keysDown.has(key)) return; // ignore repeat
@@ -200,19 +201,18 @@ export class ActionManager {
   // --- Internal handlers ---
 
   private onKeyDown = (e: KeyboardEvent): void => {
-    // preventDefault for all bound keys to prevent browser defaults
-    // (Tab focus, F3 dev tools, Space scroll, etc.)
-    // Safe because DOM UI elements use stopPropagation.
-    if (this.boundKeys.has(e.key)) {
-      e.preventDefault();
-    }
-    if (this.keysDown.has(e.key)) return; // ignore repeat
-    this.keysDown.add(e.key);
-    this.fireActionsForKey(e.key);
+    if (e.ctrlKey || e.metaKey) return; // OS/browser shortcuts are not gameplay keys
+    const key = eventCode(e); // physical position: layout- and Shift-independent
+    // Bound keys skip browser defaults (Tab, F3, Space scroll); DOM UI stops propagation.
+    if (this.boundKeys.has(key)) e.preventDefault();
+    if (this.keysDown.has(key)) return; // ignore repeat
+    this.keysDown.add(key);
+    this.fireActionsForKey(key);
   };
 
   private onKeyUp = (e: KeyboardEvent): void => {
-    this.keysDown.delete(e.key);
+    // macOS sends no keyup for keys released while ⌘ was held.
+    e.key === "Meta" ? this.keysDown.clear() : this.keysDown.delete(eventCode(e));
   };
 
   private onController = (event: Event): void => {

@@ -38,7 +38,6 @@ export class DebugPanel {
   private readonly convexCheckbox: HTMLInputElement;
   private readonly pauseCheckbox: HTMLInputElement;
   private readonly show3dCheckbox: HTMLInputElement;
-  private readonly firstPersonCheckbox: HTMLInputElement;
   private pendingBaseMode = false;
   private pendingConvex = false;
 
@@ -255,19 +254,6 @@ export class DebugPanel {
     show3dHint.style.cssText = "color: #999; font-size: 11px;";
     show3dRow.append(show3dLbl, this.show3dCheckbox, show3dHint);
 
-    // Experimental first-person play view (tactical 229)
-    const firstPersonRow = document.createElement("div");
-    firstPersonRow.style.cssText = ROW_STYLE;
-    const firstPersonLbl = document.createElement("label");
-    firstPersonLbl.textContent = "First-person view";
-    this.firstPersonCheckbox = document.createElement("input");
-    this.firstPersonCheckbox.type = "checkbox";
-    firstPersonLbl.append(this.firstPersonCheckbox);
-    const firstPersonHint = document.createElement("span");
-    firstPersonHint.textContent = "experiment · V · GPU renderer";
-    firstPersonHint.style.cssText = "color: #999; font-size: 11px;";
-    firstPersonRow.append(firstPersonLbl, firstPersonHint);
-
     this.container.append(
       presetRow,
       zoomRow,
@@ -275,7 +261,6 @@ export class DebugPanel {
       pacingHint,
       observerRow,
       pauseRow,
-      firstPersonRow,
       show3dRow,
       baseModeRow,
       convexRow,
@@ -374,18 +359,6 @@ export class DebugPanel {
 
   set show3d(value: boolean) {
     this.show3dCheckbox.checked = value;
-  }
-
-  get firstPerson(): boolean {
-    return this.firstPersonCheckbox.checked;
-  }
-
-  set firstPerson(value: boolean) {
-    this.firstPersonCheckbox.checked = value;
-  }
-
-  onFirstPersonChange(cb: (checked: boolean) => void): void {
-    this.firstPersonCheckbox.addEventListener("change", () => cb(this.firstPersonCheckbox.checked));
   }
 
   onShow3dChange(cb: (checked: boolean) => void): void {

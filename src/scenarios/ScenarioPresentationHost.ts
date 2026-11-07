@@ -7,6 +7,7 @@ import {
   type ControllerCommand,
   controllerInput,
 } from "../input/ControllerInput.js";
+import { eventCode } from "../input/KeyLabels.js";
 import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
 import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { presentInterior } from "../interiors/presentInterior.js";
@@ -202,11 +203,9 @@ export class ScenarioPresentationHost {
   };
 
   private vehicleKey = (event: KeyboardEvent) => {
-    if (event.key.toLowerCase() === "f" && this.vehicleControl?.activateEquipment()) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-    if (event.key.toLowerCase() === "e" && this.vehicleControl?.activate()) {
+    const vc = this.vehicleControl,
+      code = eventCode(event); // physical keys, as in the game and its hints
+    if ((code === "KeyF" && vc?.activateEquipment()) || (code === "KeyE" && vc?.activate())) {
       event.preventDefault();
       event.stopPropagation();
     }

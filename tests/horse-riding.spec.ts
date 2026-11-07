@@ -84,8 +84,12 @@ for (const renderer of ["canvas"]) {
     await page.evaluate(() => {
       const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       g.debugPanel.setPaused(false);
-      for (const key of [" ", "ArrowRight"])
-        window.dispatchEvent(new KeyboardEvent("keydown", { key, bubbles: true }));
+      // Gameplay binds physical keys (KeyboardEvent.code).
+      for (const [key, code] of [
+        [" ", "Space"],
+        ["ArrowRight", "ArrowRight"],
+      ] as const)
+        window.dispatchEvent(new KeyboardEvent("keydown", { key, code, bubbles: true }));
     });
     await expect
       .poll(async () => (await read()).state, { timeout: 4000, intervals: [30] })

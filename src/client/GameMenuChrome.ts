@@ -3,7 +3,7 @@ import type { GameLoop } from "../core/GameLoop.js";
 import type { SceneManager } from "../core/SceneManager.js";
 import { captureIdea, type IdeaSnapshot } from "../ideas/captureIdea.js";
 import { ideaToast } from "../ideas/IdeaDialog.js";
-import { inputHint } from "../input/InputHints.js";
+import { inputHint, keyboardHint } from "../input/InputHints.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
 import { InteriorCatalogScene } from "../scenes/InteriorCatalogScene.js";
@@ -94,6 +94,12 @@ export class GameMenuChrome {
         if (host.profile) host.profile.carDriving = style;
         await this.saveProfile({ carDriving: style });
       },
+      async (enabled) => {
+        // The cvar owns the live state (V key, console, ?view=fps); the profile remembers it.
+        host.consoleEngine.cvars.get("r_firstperson")?.set(enabled);
+        if (host.profile) host.profile.firstPerson = enabled;
+        await this.saveProfile({ firstPerson: enabled });
+      },
     );
   }
 
@@ -135,13 +141,14 @@ export class GameMenuChrome {
       opener,
       this.playInput.pinchZoom,
       this.playInput.carDriving,
+      this.host.consoleEngine.cvars.get("r_firstperson")?.get() === true,
     );
   }
 
   /** Keep the map button's controller/keyboard hint current. */
   updateMapHint(): void {
     if (!this.mapButton) return;
-    const hint = inputHint("G", "View");
+    const hint = inputHint(keyboardHint("toggle_world_map"), "View");
     const label = `Map${hint ? ` · ${hint}` : ""}`;
     if (this.mapButton.textContent !== label) this.mapButton.textContent = label;
   }

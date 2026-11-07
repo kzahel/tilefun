@@ -4,6 +4,8 @@
   width: min(440px, calc(100vw - 24px));
   max-height: calc(100dvh - 24px);
   overflow-y: auto;
+  /* Focus scrolling stops above the sticky Back button. */
+  scroll-padding-bottom: 72px;
   padding: 20px;
   border: 2px solid #9ab59c;
   border-radius: 16px;
@@ -105,8 +107,15 @@
   flex-shrink: 0;
   accent-color: #fce5a1;
 }
-#options-pinch-help {
+#options-pinch-help,
+#options-view-help {
   font-size: 14px;
+}
+/* Back stays reachable on short phone screens however long the options grow. */
+.options-back {
+  position: sticky;
+  bottom: 0;
+  box-shadow: 0 -10px 12px #243a32;
 }
 
 @media (min-width: 600px) and (max-height: 450px) {

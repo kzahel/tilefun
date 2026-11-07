@@ -14,7 +14,7 @@ describe("ActionManager", () => {
       throwing = vi.fn();
     actions.on("enter_place", context);
     actions.on("throw", throwing);
-    actions.pressKey("e");
+    actions.pressKey("KeyE");
     expect(context).toHaveBeenCalledOnce();
     expect(throwing).not.toHaveBeenCalled();
     expect(actions.getMovement().jump).toBe(false);
@@ -55,19 +55,19 @@ describe("ActionManager", () => {
 
   it("supports WASD keys", () => {
     const actions = new ActionManager();
-    actions.pressKey("d");
+    actions.pressKey("KeyD");
     expect(actions.getMovement().dx).toBe(1);
-    actions.releaseKey("d");
+    actions.releaseKey("KeyD");
 
-    actions.pressKey("a");
+    actions.pressKey("KeyA");
     expect(actions.getMovement().dx).toBe(-1);
-    actions.releaseKey("a");
+    actions.releaseKey("KeyA");
 
-    actions.pressKey("w");
+    actions.pressKey("KeyW");
     expect(actions.getMovement().dy).toBe(-1);
-    actions.releaseKey("w");
+    actions.releaseKey("KeyW");
 
-    actions.pressKey("s");
+    actions.pressKey("KeyS");
     expect(actions.getMovement().dy).toBe(1);
   });
 
@@ -106,9 +106,9 @@ describe("ActionManager", () => {
   it("reports sprinting when Shift is held", () => {
     const actions = new ActionManager();
     expect(actions.getMovement().sprinting).toBe(false);
-    actions.pressKey("Shift");
+    actions.pressKey("ShiftLeft");
     expect(actions.getMovement().sprinting).toBe(true);
-    actions.releaseKey("Shift");
+    actions.releaseKey("ShiftLeft");
     expect(actions.getMovement().sprinting).toBe(false);
   });
 
@@ -143,16 +143,16 @@ describe("ActionManager", () => {
 
   it("returns correct pan direction", () => {
     const actions = new ActionManager();
-    actions.pressKey("a");
+    actions.pressKey("KeyA");
     expect(actions.getPanDirection().dx).toBe(-1);
-    actions.releaseKey("a");
-    actions.pressKey("d");
+    actions.releaseKey("KeyA");
+    actions.pressKey("KeyD");
     expect(actions.getPanDirection().dx).toBe(1);
-    actions.releaseKey("d");
-    actions.pressKey("w");
+    actions.releaseKey("KeyD");
+    actions.pressKey("KeyW");
     expect(actions.getPanDirection().dy).toBe(-1);
-    actions.releaseKey("w");
-    actions.pressKey("s");
+    actions.releaseKey("KeyW");
+    actions.pressKey("KeyS");
     expect(actions.getPanDirection().dy).toBe(1);
   });
 
@@ -161,9 +161,9 @@ describe("ActionManager", () => {
   it("isHeld returns true for held actions", () => {
     const actions = new ActionManager();
     expect(actions.isHeld("pan_modifier")).toBe(false);
-    actions.pressKey(" ");
+    actions.pressKey("Space");
     expect(actions.isHeld("pan_modifier")).toBe(true);
-    actions.releaseKey(" ");
+    actions.releaseKey("Space");
     expect(actions.isHeld("pan_modifier")).toBe(false);
   });
 
@@ -214,8 +214,8 @@ describe("ActionManager", () => {
     const panCb = vi.fn();
     actions.on("move_down", moveCb);
     actions.on("pan_down", panCb);
-    // "s" maps to both move_down and pan_down
-    actions.pressKey("s");
+    // KeyS maps to both move_down and pan_down
+    actions.pressKey("KeyS");
     expect(moveCb).toHaveBeenCalledTimes(1);
     expect(panCb).toHaveBeenCalledTimes(1);
   });
@@ -232,8 +232,8 @@ describe("ActionManager", () => {
     expect(cb).toHaveBeenCalledTimes(1);
     actions.releaseKey("Tab");
 
-    // Rebind to "e"
-    const newConfig: ActionMapConfig = [{ action: "toggle_editor", keys: ["e"] }];
+    // Rebind to KeyE
+    const newConfig: ActionMapConfig = [{ action: "toggle_editor", keys: ["KeyE"] }];
     actions.setConfig(newConfig);
 
     // Tab no longer fires
@@ -241,43 +241,94 @@ describe("ActionManager", () => {
     expect(cb).toHaveBeenCalledTimes(1);
     actions.releaseKey("Tab");
 
-    // "e" fires
-    actions.pressKey("e");
+    // KeyE fires
+    actions.pressKey("KeyE");
     expect(cb).toHaveBeenCalledTimes(2);
   });
 
   it("setConfig updates movement bindings", () => {
     const actions = new ActionManager();
     const config: ActionMapConfig = [
-      { action: "move_up", keys: ["i"] },
-      { action: "move_down", keys: ["k"] },
-      { action: "move_left", keys: ["j"] },
-      { action: "move_right", keys: ["l"] },
-      { action: "sprint", keys: ["Shift"] },
+      { action: "move_up", keys: ["KeyI"] },
+      { action: "move_down", keys: ["KeyK"] },
+      { action: "move_left", keys: ["KeyJ"] },
+      { action: "move_right", keys: ["KeyL"] },
+      { action: "sprint", keys: ["ShiftLeft"] },
     ];
     actions.setConfig(config);
 
-    actions.pressKey("i");
+    actions.pressKey("KeyI");
     expect(actions.getMovement().dy).toBe(-1);
-    actions.releaseKey("i");
+    actions.releaseKey("KeyI");
 
     // Old keys no longer work
-    actions.pressKey("w");
+    actions.pressKey("KeyW");
     expect(actions.getMovement().dy).toBe(0);
   });
 });
 
 it("latches a complete horn tap between simulation frames and clears pending input", () => {
   const actions = new ActionManager();
-  actions.pressKey(" ");
+  actions.pressKey("Space");
   expect(actions.isHeld("honk")).toBe(true);
   expect(actions.getMovement().jump).toBe(true); // Space still jumps on foot.
-  actions.releaseKey(" ");
+  actions.releaseKey("Space");
   expect(actions.getMovement().jump).toBe(false);
   expect(actions.isHeld("honk")).toBe(false);
   expect(actions.consumeHornPress()).toBe(true);
   expect(actions.consumeHornPress()).toBe(false);
-  actions.pressKey("H");
+  actions.pressKey("KeyH");
   actions.clearHeld();
   expect(actions.consumeHornPress()).toBe(false);
+});
+
+describe("physical key bindings", () => {
+  type KeyHandler = (event: Pick<KeyboardEvent, "code" | "key" | "preventDefault">) => void;
+  const keyEvent = (code: string, key: string) => ({ code, key, preventDefault() {} });
+  const handlers = (actions: ActionManager) =>
+    actions as unknown as { onKeyDown: KeyHandler; onKeyUp: KeyHandler };
+
+  it("keeps WASD and E at their positions on another layout (Dvorak)", () => {
+    const actions = new ActionManager();
+    const enter = vi.fn();
+    actions.on("enter_place", enter);
+    const { onKeyDown, onKeyUp } = handlers(actions);
+    // Dvorak types "," on the W key and "." on the E key.
+    onKeyDown(keyEvent("KeyW", ","));
+    expect(actions.getMovement().dy).toBe(-1);
+    onKeyUp(keyEvent("KeyW", ","));
+    expect(actions.getMovement().dy).toBe(0);
+    onKeyDown(keyEvent("KeyE", "."));
+    expect(enter).toHaveBeenCalledOnce();
+    // The key that types "w" on Dvorak sits on QWERTY's comma and does not move.
+    onKeyDown(keyEvent("Comma", "w"));
+    expect(actions.getMovement().dy).toBe(0);
+  });
+
+  it("releases a key pressed before Shift changed its character", () => {
+    const actions = new ActionManager();
+    const { onKeyDown, onKeyUp } = handlers(actions);
+    onKeyDown(keyEvent("KeyD", "d"));
+    onKeyUp(keyEvent("KeyD", "D"));
+    expect(actions.getMovement().dx).toBe(0);
+  });
+
+  it("ignores Ctrl/⌘ shortcuts and releases keys when ⌘ is released (macOS)", () => {
+    const actions = new ActionManager();
+    const { onKeyDown, onKeyUp } = handlers(actions);
+    // AZERTY Ctrl+Z is the physical W key: undo must not walk.
+    onKeyDown({ ...keyEvent("KeyW", "z"), ctrlKey: true } as KeyboardEvent);
+    expect(actions.getMovement().dy).toBe(0);
+    onKeyDown(keyEvent("KeyD", "d"));
+    // macOS sends no keyup for D when it is released while ⌘ is held.
+    onKeyUp(keyEvent("MetaLeft", "Meta"));
+    expect(actions.getMovement().dx).toBe(0);
+  });
+
+  it("falls back to the typed character when a virtual keyboard sends no code", () => {
+    const actions = new ActionManager();
+    const { onKeyDown } = handlers(actions);
+    onKeyDown(keyEvent("", "a"));
+    expect(actions.getMovement().dx).toBe(-1);
+  });
 });

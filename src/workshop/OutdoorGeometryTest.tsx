@@ -9,6 +9,7 @@ import { Spritesheet } from "../assets/Spritesheet.js";
 import { TileVariants } from "../assets/TileVariants.js";
 import { PIXEL_SCALE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
+import { usKey } from "../input/KeyLabels.js";
 import type { Camera } from "../rendering/Camera.js";
 import { interpolatePosition } from "../rendering/collectScene.js";
 import type { OverlayFrame } from "../rendering/OverlayFrame.js";
@@ -69,14 +70,16 @@ export function OutdoorGeometryTest({
     const down = (e: KeyboardEvent) => {
       if (canvas.current !== document.activeElement) return;
       if (
-        ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(e.key)
+        ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(
+          usKey(e),
+        )
       ) {
-        keys.current.add(e.key);
+        keys.current.add(usKey(e));
         e.preventDefault();
         e.stopPropagation();
       }
     };
-    const up = (e: KeyboardEvent) => keys.current.delete(e.key);
+    const up = (e: KeyboardEvent) => keys.current.delete(usKey(e));
     window.addEventListener("keydown", down);
     window.addEventListener("keyup", up);
 

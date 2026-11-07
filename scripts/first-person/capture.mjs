@@ -44,7 +44,7 @@ try {
     return { x: 300, y: 519, generation: createDescriptor("regional", 2026) };
   });
   await page.goto(
-    `${origin}/?nogamepad&renderer=gpu&meshes&view=fps&generation=${encodeURIComponent(
+    `${origin}/?nogamepad&renderer=gpu&meshes&generation=${encodeURIComponent(
       JSON.stringify(arrival.generation),
     )}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
@@ -65,6 +65,10 @@ try {
       return g.gcSendRequest({ type: "rcon", requestId: g.nextRequestId++, command });
     }, command);
   for (const command of (option("rcon", "") || "").split(";").filter(Boolean)) await rcon(command);
+  // Turn first person on the way a player does: gear → Options → First-person view.
+  await page.locator(`button[aria-label="Options"]`).click();
+  await page.getByRole("checkbox", { name: "First-person view (experiment)" }).check();
+  await page.getByRole("button", { name: "Back to game" }).click();
   await page.waitForTimeout(Number(option("settle", "6000")));
   const shoot = async (name, setup) => {
     if (setup) await game(setup);
@@ -119,8 +123,27 @@ try {
     await walk(Math.PI / 2, "w", 700),
     await walk(0, "d", 700),
   ];
-  // Board the nearest car and look at the chase camera, parked and then driving.
-  await page.keyboard.press("e");
+  // Another layout: Dvorak types "," on the W key and "." on the E key. Bindings
+  // follow physical keys (KeyboardEvent.code), so these still walk and board.
+  const layoutKey = (type, code, key) =>
+    page.evaluate(
+      ([type, code, key]) =>
+        window.dispatchEvent(new KeyboardEvent(type, { code, key, bubbles: true })),
+      [type, code, key],
+    );
+  await game(`(() => { document.querySelector("#game").__game.firstPerson.look.yaw = 0; })()`);
+  const dvorakStart = await position();
+  await layoutKey("keydown", "KeyW", ",");
+  await page.waitForTimeout(700);
+  await layoutKey("keyup", "KeyW", ",");
+  await page.waitForTimeout(400);
+  const dvorakEnd = await position();
+  report.dvorakWalk = { dx: dvorakEnd.wx - dvorakStart.wx, dy: dvorakEnd.wy - dvorakStart.wy };
+  await rcon(`tp ${dvorakStart.wx} ${dvorakStart.wy}`);
+  await page.waitForTimeout(600);
+  // Board the nearest car with the Dvorak E key and look at the chase camera.
+  await layoutKey("keydown", "KeyE", ".");
+  await layoutKey("keyup", "KeyE", ".");
   await page.waitForTimeout(1500);
   report.driving = await game(() => {
     const g = document.querySelector("#game").__game;

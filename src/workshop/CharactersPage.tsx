@@ -11,6 +11,7 @@ import {
   parseCharacterSettings,
 } from "../characters/CharacterCatalog.js";
 import { PIXEL_SCALE } from "../config/constants.js";
+import { usKey } from "../input/KeyLabels.js";
 import { characterRecipe } from "../scenarios/CharacterRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { required } from "../shared/required.js";
@@ -219,7 +220,7 @@ function CharacterInspector({
       pointers.current.clear();
     };
     release();
-    const up = (e: KeyboardEvent) => keys.current.delete(e.key.toLowerCase());
+    const up = (e: KeyboardEvent) => keys.current.delete(usKey(e).toLowerCase());
     window.addEventListener("keyup", up);
     window.addEventListener("blur", release);
     document.addEventListener("visibilitychange", release);
@@ -339,7 +340,7 @@ function CharacterInspector({
               tabIndex={0}
               aria-label="Character movement test"
               onKeyDown={(e) => {
-                const k = e.key.toLowerCase();
+                const k = usKey(e).toLowerCase(); // physical position, like the game
                 if (
                   [
                     "arrowup",

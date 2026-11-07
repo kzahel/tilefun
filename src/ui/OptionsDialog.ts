@@ -1,3 +1,4 @@
+import { keyLabel } from "../input/KeyLabels.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
 import { activateMenu, deactivateMenu } from "./MenuNavigation.js";
@@ -12,11 +13,15 @@ export class OptionsDialog {
   private pinch = document.createElement("input");
   private saving = false;
   private carStyle = document.createElement("select");
+  private firstPerson = document.createElement("input");
+  private firstPersonHelp = document.createElement("p");
+  private controls = document.createElement("p");
   constructor(
     private select: (mode: TouchMovementMode) => Promise<void>,
     private closed: () => void,
     private selectPinch: (enabled: boolean) => Promise<void>,
     private selectCar: (style: CarDrivingStyle) => Promise<void>,
+    private selectFirstPerson: (enabled: boolean) => Promise<void>,
   ) {
     const d = this.dialog;
     d.className = "options-dialog";
@@ -28,9 +33,6 @@ export class OptionsDialog {
     title.textContent = "Options";
     const close = this.button("Close", () => this.hide());
     header.append(title, close);
-    const controls = document.createElement("p");
-    controls.textContent =
-      "A / Space Jump · X / B Throw · Y / E Interact · RT / Shift Fast · RB / H Horn · D-pad ↑ / L Lights · D-pad → / K Siren style. LB / Tab Build–Play · View / G Map · Menu / Escape Pause. Right stick moves the cursor over the world and tools; A or RT selects. In menus: A Select · B Back. While building: RT Paint · LT Erase · Y Tools.";
 
     const heading = document.createElement("h2");
     heading.textContent = "Movement";
@@ -78,12 +80,23 @@ export class OptionsDialog {
     this.carStyle.onchange = () => {
       void this.chooseCar();
     };
+    const view = document.createElement("label");
+    view.className = "options-pinch";
+    this.firstPerson.type = "checkbox";
+    this.firstPerson.setAttribute("aria-describedby", "options-view-help");
+    this.firstPerson.onchange = () => {
+      void this.chooseFirstPerson();
+    };
+    view.append(this.firstPerson, "First-person view (experiment)");
+    this.firstPersonHelp.id = "options-view-help";
     const drivingHelp = document.createElement("p");
     drivingHelp.id = "options-driving-help";
     drivingHelp.textContent =
       "Point behind to reverse. Steering: ↑ forward, ↓ reverse, ←/→ steer. Taps always aim.";
     this.status.setAttribute("role", "status");
     this.status.className = "options-status";
+    const back = this.button("Back to game", () => this.hide());
+    back.className = "options-back";
     d.append(
       header,
       heading,
@@ -93,13 +106,15 @@ export class OptionsDialog {
       drivingHelp,
       zoom,
       pinchHelp,
+      view,
+      this.firstPersonHelp,
       this.status,
-      this.button("Back to game", () => this.hide()),
+      back,
     );
     const controlHelp = document.createElement("details");
     const controlSummary = document.createElement("summary");
     controlSummary.textContent = "Controller controls";
-    controlHelp.append(controlSummary, controls);
+    controlHelp.append(controlSummary, this.controls);
     d.append(controlHelp);
     d.addEventListener("cancel", (e) => {
       e.preventDefault();
@@ -118,12 +133,18 @@ export class OptionsDialog {
     opener: HTMLElement | null,
     pinchZoom: boolean,
     carDriving: CarDrivingStyle = DEFAULT_CAR_DRIVING,
+    firstPerson = false,
   ): void {
     this.opener = opener;
     this.status.textContent = "";
     this.setMode(mode);
     this.pinch.checked = pinchZoom;
     this.carStyle.value = carDriving;
+    this.firstPerson.checked = firstPerson;
+    // Key labels follow the player's layout, which may be learned during play.
+    const k = keyLabel;
+    this.firstPersonHelp.textContent = `Look by clicking the world, then moving the mouse, or with the right stick. ${k("KeyV")} switches it until you reload; this box is the saved choice.`;
+    this.controls.textContent = `A / ${k("Space")} Jump · X / ${k("KeyB")} Throw · Y / ${k("KeyE")} Interact · RT / Shift Fast · RB / ${k("KeyH")} Horn · D-pad ↑ / ${k("KeyL")} Lights · D-pad → / ${k("KeyK")} Siren style. LB / Tab Build–Play · View / ${k("KeyG")} Map · Menu / Escape Pause. Right stick moves the cursor over the world and tools (in first person it looks around); A or RT selects. In menus: A Select · B Back. While building: RT Paint · LT Erase · Y Tools.`;
     if (!this.visible) this.dialog.showModal();
     activateMenu(this.dialog, () => this.hide(), false);
     this.cards.find((c) => c.dataset.mode === mode)?.focus();
@@ -159,6 +180,7 @@ export class OptionsDialog {
     if (this.saving) return;
     this.saving = true;
     this.carStyle.disabled = true;
+    this.firstPerson.disabled = true;
     this.setMode(mode);
     for (const c of this.cards) c.disabled = true;
     this.pinch.disabled = true;
@@ -170,6 +192,7 @@ export class OptionsDialog {
     } finally {
       this.saving = false;
       this.carStyle.disabled = false;
+      this.firstPerson.disabled = false;
       for (const c of this.cards) c.disabled = false;
       this.pinch.disabled = false;
       if (this.visible) this.cards.find((c) => c.dataset.mode === mode)?.focus();
@@ -179,6 +202,7 @@ export class OptionsDialog {
     if (this.saving) return;
     this.saving = true;
     this.carStyle.disabled = true;
+    this.firstPerson.disabled = true;
     this.pinch.disabled = true;
     for (const c of this.cards) c.disabled = true;
     try {
@@ -189,15 +213,38 @@ export class OptionsDialog {
     } finally {
       this.saving = false;
       this.carStyle.disabled = false;
+      this.firstPerson.disabled = false;
       this.pinch.disabled = false;
       for (const c of this.cards) c.disabled = false;
       if (this.visible) this.pinch.focus();
+    }
+  }
+  private async chooseFirstPerson(): Promise<void> {
+    if (this.saving) return;
+    this.saving = true;
+    this.carStyle.disabled = true;
+    this.firstPerson.disabled = true;
+    this.pinch.disabled = true;
+    for (const c of this.cards) c.disabled = true;
+    try {
+      await this.selectFirstPerson(this.firstPerson.checked);
+      this.status.textContent = "View saved for this player.";
+    } catch {
+      this.status.textContent = "You can use this choice now, but it could not be remembered.";
+    } finally {
+      this.saving = false;
+      this.carStyle.disabled = false;
+      this.firstPerson.disabled = false;
+      this.pinch.disabled = false;
+      for (const c of this.cards) c.disabled = false;
+      if (this.visible) this.firstPerson.focus();
     }
   }
   private async chooseCar(): Promise<void> {
     if (this.saving) return;
     this.saving = true;
     this.carStyle.disabled = true;
+    this.firstPerson.disabled = true;
     this.pinch.disabled = true;
     for (const c of this.cards) c.disabled = true;
     try {
@@ -208,6 +255,7 @@ export class OptionsDialog {
     } finally {
       this.saving = false;
       this.carStyle.disabled = false;
+      this.firstPerson.disabled = false;
       this.pinch.disabled = false;
       for (const c of this.cards) c.disabled = false;
       if (this.visible) this.carStyle.focus();

@@ -11,7 +11,21 @@ export interface PlayerProfile {
   touchMovement?: TouchMovementMode;
   pinchZoom?: boolean;
   carDriving?: CarDrivingStyle;
+  /** Experimental first-person play view (tactical 229). */
+  firstPerson?: boolean;
 }
+
+/** Fields players change after creation; undefined leaves a field unchanged. */
+const UPDATABLE_FIELDS = [
+  "name",
+  "pin",
+  "playerModel",
+  "touchMovement",
+  "pinchZoom",
+  "carDriving",
+  "firstPerson",
+] as const;
+type ProfileUpdates = Partial<Pick<PlayerProfile, (typeof UPDATABLE_FIELDS)[number]>>;
 
 const PROFILE_DB = "tilefun-profiles";
 const PROFILE_VERSION = 1;
@@ -91,15 +105,7 @@ export class PlayerProfileStore {
     });
   }
 
-  async updateProfile(
-    id: string,
-    updates: Partial<
-      Pick<
-        PlayerProfile,
-        "name" | "pin" | "playerModel" | "touchMovement" | "pinchZoom" | "carDriving"
-      >
-    >,
-  ): Promise<void> {
+  async updateProfile(id: string, updates: ProfileUpdates): Promise<void> {
     const db = this.db;
     if (!db) throw new Error("Profile store is not open");
     return new Promise((resolve, reject) => {
@@ -109,12 +115,8 @@ export class PlayerProfileStore {
       req.onsuccess = () => {
         const profile = req.result as PlayerProfile | undefined;
         if (profile) {
-          if (updates.name !== undefined) profile.name = updates.name;
-          if (updates.pin !== undefined) profile.pin = updates.pin;
-          if (updates.playerModel !== undefined) profile.playerModel = updates.playerModel;
-          if (updates.touchMovement !== undefined) profile.touchMovement = updates.touchMovement;
-          if (updates.pinchZoom !== undefined) profile.pinchZoom = updates.pinchZoom;
-          if (updates.carDriving !== undefined) profile.carDriving = updates.carDriving;
+          for (const field of UPDATABLE_FIELDS)
+            if (updates[field] !== undefined) Object.assign(profile, { [field]: updates[field] });
           store.put(profile);
         }
       };

@@ -1,3 +1,4 @@
+import { eventCode } from "../input/KeyLabels.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
 import type { OutputLine } from "./ConsoleOutput.js";
 
@@ -149,6 +150,12 @@ export class ConsoleUI {
   }
 
   private handleKey(e: KeyboardEvent): void {
+    // Close on the same physical key that opens the console (any layout).
+    if (eventCode(e) === "Backquote") {
+      e.preventDefault();
+      this.hide();
+      return;
+    }
     switch (e.key) {
       case "Enter":
         e.preventDefault();

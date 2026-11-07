@@ -1,6 +1,6 @@
 import type { ClientStateView } from "../client/ClientStateView.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
-import { inputHint } from "../input/InputHints.js";
+import { inputHint, keyboardHint } from "../input/InputHints.js";
 import { buildingDoors, exteriorDoors } from "../interiors/BuildingDoors.js";
 import { DoorApproach, doorwayReached, towardDoor } from "../interiors/DoorTraversal.js";
 
@@ -102,7 +102,7 @@ export class DoorControl {
     )
       this.activate(true);
     this.button.hidden = !this.request;
-    const hint = inputHint("E", "Y");
+    const hint = inputHint(keyboardHint("enter_place"), "Y");
     label = label.replace(" · E", hint ? ` · ${hint}` : "");
     if (this.button.textContent !== label) this.button.textContent = label;
     this.button.disabled = this.busy || locked;

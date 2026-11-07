@@ -43,7 +43,9 @@ export type ActionName =
   | "toggle_base_mode"
   | "toggle_console";
 
-/** Maps one action to one or more keys (KeyboardEvent.key values). */
+/** Maps one action to one or more physical keys (`KeyboardEvent.code` values, e.g.
+ * "KeyW"), so bindings keep their positions on every keyboard layout. Hints show
+ * each key's label on the player's layout (see KeyLabels). */
 export interface ActionBinding {
   action: ActionName;
   keys: string[];
@@ -51,49 +53,51 @@ export interface ActionBinding {
 
 export type ActionMapConfig = ActionBinding[];
 
+const SHIFT = ["ShiftLeft", "ShiftRight"];
+
 export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   // Global
   { action: "toggle_menu", keys: ["Escape"] },
-  { action: "toggle_world_map", keys: ["g", "G"] },
+  { action: "toggle_world_map", keys: ["KeyG"] },
   { action: "toggle_debug", keys: ["F3"] },
-  { action: "toggle_console", keys: ["`"] },
+  { action: "toggle_console", keys: ["Backquote"] },
   { action: "toggle_editor", keys: ["Tab"] },
   // Play mode movement
-  { action: "move_up", keys: ["w", "ArrowUp"] },
-  { action: "move_down", keys: ["s", "ArrowDown"] },
-  { action: "move_left", keys: ["a", "ArrowLeft"] },
-  { action: "move_right", keys: ["d", "ArrowRight"] },
-  { action: "sprint", keys: ["Shift"] },
-  { action: "jump", keys: [" "] },
+  { action: "move_up", keys: ["KeyW", "ArrowUp"] },
+  { action: "move_down", keys: ["KeyS", "ArrowDown"] },
+  { action: "move_left", keys: ["KeyA", "ArrowLeft"] },
+  { action: "move_right", keys: ["KeyD", "ArrowRight"] },
+  { action: "sprint", keys: SHIFT },
+  { action: "jump", keys: ["Space"] },
   // Editor camera pan (same physical keys, different action context)
-  { action: "pan_up", keys: ["w", "ArrowUp"] },
-  { action: "pan_down", keys: ["s", "ArrowDown"] },
-  { action: "pan_left", keys: ["a", "ArrowLeft"] },
-  { action: "pan_right", keys: ["d", "ArrowRight"] },
-  { action: "pan_modifier", keys: [" "] },
+  { action: "pan_up", keys: ["KeyW", "ArrowUp"] },
+  { action: "pan_down", keys: ["KeyS", "ArrowDown"] },
+  { action: "pan_left", keys: ["KeyA", "ArrowLeft"] },
+  { action: "pan_right", keys: ["KeyD", "ArrowRight"] },
+  { action: "pan_modifier", keys: ["Space"] },
   // Editor shortcuts
-  { action: "toggle_paint_mode", keys: ["m", "M"] },
-  { action: "cycle_bridge_depth", keys: ["b", "B"] },
-  { action: "cycle_brush_shape", keys: ["s", "S"] },
-  { action: "paint_positive", keys: ["z"] },
-  { action: "paint_unpaint", keys: ["c"] },
-  { action: "toggle_tab", keys: ["t", "T"] },
+  { action: "toggle_paint_mode", keys: ["KeyM"] },
+  { action: "cycle_bridge_depth", keys: ["KeyB"] },
+  { action: "cycle_brush_shape", keys: ["KeyS"] },
+  { action: "paint_positive", keys: ["KeyZ"] },
+  { action: "paint_unpaint", keys: ["KeyC"] },
+  { action: "toggle_tab", keys: ["KeyT"] },
   // Play mode actions
-  { action: "throw", keys: ["b"] },
-  { action: "honk", keys: [" ", "h", "H"] },
-  { action: "reverse", keys: ["r", "R"] },
-  { action: "vehicle_lights", keys: ["l", "L"] },
-  { action: "vehicle_style", keys: ["k", "K"] },
-  { action: "vehicle_recover", keys: ["f", "F"] },
-  { action: "enter_place", keys: ["e", "E"] },
+  { action: "throw", keys: ["KeyB"] },
+  { action: "honk", keys: ["Space", "KeyH"] },
+  { action: "reverse", keys: ["KeyR"] },
+  { action: "vehicle_lights", keys: ["KeyL"] },
+  { action: "vehicle_style", keys: ["KeyK"] },
+  { action: "vehicle_recover", keys: ["KeyF"] },
+  { action: "enter_place", keys: ["KeyE"] },
   // Play mode zoom presets
-  { action: "zoom_0", keys: ["0"] },
-  { action: "zoom_1", keys: ["1"] },
-  { action: "zoom_2", keys: ["2"] },
-  { action: "zoom_3", keys: ["3"] },
-  { action: "zoom_4", keys: ["4"] },
+  { action: "zoom_0", keys: ["Digit0"] },
+  { action: "zoom_1", keys: ["Digit1"] },
+  { action: "zoom_2", keys: ["Digit2"] },
+  { action: "zoom_3", keys: ["Digit3"] },
+  { action: "zoom_4", keys: ["Digit4"] },
   // Experimental first-person view (tactical 229)
-  { action: "toggle_first_person", keys: ["v", "V"] },
+  { action: "toggle_first_person", keys: ["KeyV"] },
   // Debug
-  { action: "toggle_base_mode", keys: ["d", "D"] },
+  { action: "toggle_base_mode", keys: ["KeyD"] },
 ];

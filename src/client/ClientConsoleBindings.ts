@@ -51,14 +51,11 @@ export function registerClientConsole(
     clientCVars.r_show3d.set(checked);
   });
 
-  // Experimental first-person view (tactical 229): cvar, debug checkbox, V key and ?view=fps.
+  // Experimental first-person view (tactical 229): Options (saved per player), V key,
+  // console and ?view=fps all set this cvar.
   clientCVars.r_firstperson.onChange((val) => {
-    gc.debugPanel.firstPerson = val;
     const sprite = gc.stateView.playerEntity.sprite;
     gc.firstPerson?.setActive(val, sprite ? directionHeading(sprite.direction) : undefined);
-  });
-  gc.debugPanel.onFirstPersonChange((checked) => {
-    clientCVars.r_firstperson.set(checked);
   });
   if (new URLSearchParams(location.search).get("view") === "fps")
     clientCVars.r_firstperson.set(true);

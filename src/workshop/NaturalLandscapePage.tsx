@@ -10,6 +10,14 @@ import {
   landscapeLabel,
   landscapeProfile,
 } from "../generation/regional/NaturalLandscape.js";
+import { usKey } from "../input/KeyLabels.js";
+
+/** Physical keys the playground handles, named by their US-layout values. */
+const LAB_KEYS = new Set([
+  " ",
+  ..."ArrowLeft ArrowRight ArrowUp ArrowDown w a s d r Shift".split(" "),
+]);
+
 import { CURVE_TRAIN } from "../railway/CurveTrain.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
 import {
@@ -757,26 +765,12 @@ export default function NaturalLandscapePage() {
           aria-label="Natural landscape playground"
           style={{ width: "100%", height: "100%", touchAction: "none" }}
           onKeyDown={(e) => {
-            if (
-              [
-                "ArrowLeft",
-                "ArrowRight",
-                "ArrowUp",
-                "ArrowDown",
-                " ",
-                "w",
-                "a",
-                "s",
-                "d",
-                "r",
-                "Shift",
-              ].includes(e.key)
-            ) {
+            if (LAB_KEYS.has(usKey(e))) {
               e.preventDefault();
-              keys.current.add(e.key);
+              keys.current.add(usKey(e));
             }
           }}
-          onKeyUp={(e) => keys.current.delete(e.key)}
+          onKeyUp={(e) => keys.current.delete(usKey(e))}
           onBlur={() => keys.current.clear()}
         />
       </div>

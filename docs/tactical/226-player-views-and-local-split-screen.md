@@ -47,9 +47,12 @@ Owners: [embedded engine labs](../topics/embedded-engine-labs.md),
   screen (`clientX`) coordinates. `TouchButtons` lays out in CSS pixels but draws
   in canvas pixels. That is only correct for a full-window canvas whose
   resolution equals its CSS size.
-- **Keyboard bindings use `KeyboardEvent.key`.** They cannot distinguish left
-  and right modifiers, and they depend on the keyboard layout. Shift changes
-  `w` to `W`, so a keyup can probably leave a stuck key (unverified).
+- **Keyboard bindings used `KeyboardEvent.key`.** Resolved early during 229
+  (owner request, 2026-11-07): `DEFAULT_ACTION_MAP` binds `KeyboardEvent.code`,
+  so WASD keeps its positions on every layout and Shift cannot change a held key.
+  Hints label each physical key with what it types on the player's layout
+  (`KeyLabels.ts`: Keyboard Map API where available, otherwise learned from presses).
+  Two simultaneous schemes and per-seat ownership remain phase 1 work.
 - **Seams that already exist:**
   - `GameClient` takes its connection to the authority (`IClientTransport`)
     as a constructor argument.

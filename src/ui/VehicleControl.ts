@@ -1,5 +1,5 @@
 import type { ClientStateView } from "../client/ClientStateView.js";
-import { actionHint, inputHint } from "../input/InputHints.js";
+import { actionHint, inputHint, movementKeysHint } from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { nearestStationBench } from "../railway/StationBench.js";
 import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
@@ -95,7 +95,7 @@ export class VehicleControl {
         (carDriving === "steering"
           ? inputHint("↑/↓ Forward/Reverse · ←/→ Steer", "Stick ↑/↓ Forward/Reverse · ←/→ Steer")
           : inputHint(
-              "WASD / arrows · aim behind to reverse",
+              `${movementKeysHint()} / arrows · aim behind to reverse`,
               "Left stick · aim behind to reverse",
             )) ||
         (movementMode === "hold"
