@@ -74,7 +74,8 @@ export function definePredatorRecipeSuite(partFileUrl: string): void {
         await session.close();
       }
     },
-    // Aquatic recipes build and reload a regional habitat; hosted runs can exceed 5s.
-    process.env.CI ? 30_000 : 5_000,
+    // Aquatic recipes build and reload a regional habitat (~2 s alone, more under
+    // full-suite load). Locally use the shared hang deadline; hosted runs need more.
+    process.env.CI ? 30_000 : undefined,
   );
 }

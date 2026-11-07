@@ -35,6 +35,9 @@ Native tests share a 20 s deadline (`vitest.config.ts`) that only catches hangs:
 many open production Realms and run 1–5 s under parallel load, 2–4× longer on
 hosted runners. Don't depend on wall time in assertions; inject clocks (the
 predictor's replay budget reads its injected clock) instead of raising deadlines.
+Per-test overrides may only raise this deadline: the 2026-11-07 predator recipe
+suite dropped its stale local 5 s override (aquatic cases take about 2 s alone
+and timed out under full-suite load) and keeps its 30 s CI allowance.
 
 ## CI and deployment
 

@@ -1,5 +1,3 @@
-/// <reference path="./webxr-layers.d.ts" />
-
 import type { GameLoop } from "../core/GameLoop.js";
 import type { Movement } from "../shared/Movement.js";
 

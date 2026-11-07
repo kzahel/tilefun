@@ -152,8 +152,7 @@ export function surfaceFadeOpacity(
   }
   const dt = time - entry.time;
   entry.time = time;
-  const step =
-    dt < 0 || dt > 0.5 ? 1 : (dt / REVEAL_FADE_SECONDS) * (1 - REVEAL_OPACITY);
+  const step = dt < 0 || dt > 0.5 ? 1 : (dt / REVEAL_FADE_SECONDS) * (1 - REVEAL_OPACITY);
   entry.opacity =
     entry.opacity < target
       ? Math.min(target, entry.opacity + step)
