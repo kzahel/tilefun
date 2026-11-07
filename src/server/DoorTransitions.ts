@@ -3,6 +3,7 @@ import type { Prop } from "../entities/Prop.js";
 import { buildingDoor, exteriorDoors } from "../interiors/BuildingDoors.js";
 import {
   atDoorThreshold,
+  DOOR_APPROACH_LEAD,
   DOOR_FADE_MS,
   DOOR_WALK_MS,
   type DoorMotion,
@@ -182,8 +183,8 @@ export class DoorTransitions {
       (session.player.wz ?? 0) > 1 ||
       Date.now() - session.doorIntent.at > 500 ||
       !towardDoor(session.doorIntent.dx, session.doorIntent.dy, entering) ||
-      // Allow one tile of prediction lead along the approach, never sideways.
-      !atDoorThreshold(session.player.position, door, entering, TILE_SIZE)
+      // Clients wait for this same lead before requesting (doorwayReached).
+      !atDoorThreshold(session.player.position, door, entering, DOOR_APPROACH_LEAD)
     )
       throw new Error("Walk toward the doorway to enter.");
   }

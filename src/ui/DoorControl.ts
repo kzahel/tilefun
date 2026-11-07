@@ -2,7 +2,7 @@ import type { ClientStateView } from "../client/ClientStateView.js";
 import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
 import { inputHint } from "../input/InputHints.js";
 import { buildingDoors, exteriorDoors } from "../interiors/BuildingDoors.js";
-import { atDoorThreshold, DoorApproach, towardDoor } from "../interiors/DoorTraversal.js";
+import { DoorApproach, doorwayReached, towardDoor } from "../interiors/DoorTraversal.js";
 
 type DoorRequest =
   | { type: "enter-building"; featureId: string; doorId?: string; walkThrough?: boolean }
@@ -58,7 +58,7 @@ export class DoorControl {
         if (door) {
           this.request = { type: "exit-building", doorId: door.id };
           label = "Return to street · E";
-          if (atDoorThreshold(p, door.inside, false)) threshold = door.id;
+          if (doorwayReached(view, door.inside, false)) threshold = door.id;
         }
       } else if ((view.playerEntity.wz ?? 0) <= 8) {
         let best = 32;
@@ -70,7 +70,7 @@ export class DoorControl {
             if (distance <= 32) nearby.push(key);
             if (distance > best) continue;
             best = distance;
-            threshold = atDoorThreshold(p, door.outside, true) ? key : null;
+            threshold = doorwayReached(view, door.outside, true) ? key : null;
             this.request = {
               type: "enter-building",
               featureId: prop.proceduralId,

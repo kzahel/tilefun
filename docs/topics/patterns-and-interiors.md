@@ -234,8 +234,16 @@ crossing. E/the button remain available for explicit interaction.
 
 The existing building/door connection selects the shared interior and exact exit.
 The server validates grounded, unmounted play-mode movement and proximity (allowing
-one tile of prediction lead along the approach, never sideways), prepares
-the destination and saves the source, then broadcasts a 400ms cosmetic walk and
+one tile of prediction lead along the approach, never sideways; `DOOR_APPROACH_LEAD`).
+The client requests a walk-through only when `doorwayReached` holds: the predicted
+player is at the threshold and the latest authoritative pose is grounded within that
+same lead. A starved or lagging authority (hosted CI Worker stalls) therefore keeps
+the player walking until its own pose arrives instead of rejecting with "Walk toward
+the doorway". Deferring server validation until queued inputs are acknowledged would
+not help: queued controls replace held axes without adding stalled travel time, and
+the client's neutral input follows the request. `DoorTransitions.test.ts` covers a
+starved authority. The server then prepares the destination and saves the source,
+then broadcasts a 400ms cosmetic walk and
 waits 180ms for the local fade. Authority stays at the safe source throughout that
 walk. Only the existing transactional realm transfer changes the saved location.
 After commit, clients wait for the destination player/room baseline (or outdoor

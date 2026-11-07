@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { atDoorThreshold, DoorApproach, towardDoor } from "./DoorTraversal.js";
+import { atDoorThreshold, DoorApproach, doorwayReached, towardDoor } from "./DoorTraversal.js";
 
 describe("deliberate door approaches", () => {
   it("requires entering the narrow threshold in the correct direction", () => {
@@ -13,6 +13,20 @@ describe("deliberate door approaches", () => {
     expect(towardDoor(0, 1, true)).toBe(false);
     expect(towardDoor(0, -1, true)).toBe(true);
     expect(towardDoor(0, 1, false)).toBe(true);
+  });
+  it("waits for a grounded authority within one tile along the approach", () => {
+    const door = { wx: 100, wy: 200 };
+    const at = (wx: number, wy: number, wz = 0) => ({
+      playerEntity: { position: { wx: 100, wy: 205 } },
+      serverPlayerPosition: { wx, wy, wz },
+    });
+    expect(doorwayReached({ playerEntity: { position: { wx: 100, wy: 205 } } }, door, true)).toBe(
+      true,
+    );
+    expect(doorwayReached(at(100, 228), door, true)).toBe(true);
+    expect(doorwayReached(at(100, 247), door, true)).toBe(false);
+    expect(doorwayReached(at(110, 228), door, true)).toBe(false);
+    expect(doorwayReached(at(100, 228, 4), door, true)).toBe(false);
   });
   it("does not enter on spawn or reload, and re-arms only after leaving the doorway", () => {
     const approach = new DoorApproach();

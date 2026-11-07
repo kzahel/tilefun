@@ -1,3 +1,4 @@
+import { TILE_SIZE } from "../config/constants.js";
 import type { PositionComponent } from "../entities/Entity.js";
 
 export const DOOR_WALK_MS = 400;
@@ -29,6 +30,28 @@ export function atDoorThreshold(
 ) {
   const forward = entering ? door.wy - position.wy : position.wy - door.wy;
   return Math.abs(position.wx - door.wx) <= 8 && forward >= -12 - approachSlack && forward <= 12;
+}
+/** Authority accepts a walking approach up to one tile behind the threshold, never sideways. */
+export const DOOR_APPROACH_LEAD = TILE_SIZE;
+/**
+ * A guided walk-through starts only when the predicted player is at the threshold and the
+ * latest authoritative pose is grounded within the authority's approach lead. A starved or
+ * lagging authority keeps the player walking until it catches up instead of rejecting.
+ */
+export function doorwayReached(
+  view: {
+    playerEntity: { position: PositionComponent };
+    serverPlayerPosition?: (PositionComponent & { wz?: number }) | undefined;
+  },
+  door: PositionComponent,
+  entering: boolean,
+) {
+  const authority = view.serverPlayerPosition;
+  return (
+    atDoorThreshold(view.playerEntity.position, door, entering) &&
+    (authority?.wz ?? 0) <= 1 &&
+    atDoorThreshold(authority ?? view.playerEntity.position, door, entering, DOOR_APPROACH_LEAD)
+  );
 }
 export function towardDoor(dx: number, dy: number, entering: boolean) {
   return (
