@@ -9,7 +9,8 @@ for (const mode of ["canvas", "gpu"]) {
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(
-      `/tilefun/workshop.html${mode === "gpu" ? "?renderer=gpu&meshes" : ""}#/tool/outdoor?asset=me:1952:128:48:32`,
+      // Labs default to GPU + 3D car since 29a5989d; Canvas needs the legacy override.
+      `/tilefun/workshop.html?renderer=${mode === "gpu" ? "gpu&meshes" : "legacy-canvas"}#/tool/outdoor?asset=me:1952:128:48:32`,
     );
     const toggle = page.getByText("Placement & collision geometry", { exact: true });
     await toggle.click();

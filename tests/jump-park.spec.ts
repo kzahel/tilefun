@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 import type { GeometryCanvas } from "../src/workshop/WorldGeometryPage.js";
 
 test.use({ channel: "chromium" });
+type PeakCanvas = GeometryCanvas & { __peakCarZ?: number };
 test("jump park opens on the default 3D mesh renderer and launches a boosted car", async ({
   page,
 }) => {
@@ -19,13 +20,23 @@ test("jump park opens on the default 3D mesh renderer and launches a boosted car
       c.evaluate((canvas: GeometryCanvas) => canvas.__presentationDiagnostics?.().meshDraws ?? 0),
     )
     .toBeGreaterThan(0);
+  // Airtime above the threshold is well under a second; record every published
+  // frame's height in the page instead of sampling it from the test runner.
+  await c.evaluate((canvas: PeakCanvas) => {
+    canvas.__peakCarZ = 0;
+    new MutationObserver(() => {
+      canvas.__peakCarZ = Math.max(canvas.__peakCarZ ?? 0, Number(canvas.dataset.carZ));
+    }).observe(canvas, { attributeFilter: ["data-car-z"] });
+  });
   await c.focus();
   await page.keyboard.down("Shift");
   await page.keyboard.down("ArrowUp");
   try {
     // The kicker lip tops out at 48px; a boosted rally hatchback flies well above it.
     await expect
-      .poll(async () => Number(await c.getAttribute("data-car-z")), { timeout: 30000 })
+      .poll(() => c.evaluate((canvas: PeakCanvas) => canvas.__peakCarZ ?? 0), {
+        timeout: 30000,
+      })
       .toBeGreaterThan(70);
   } finally {
     await page.keyboard.up("ArrowUp");

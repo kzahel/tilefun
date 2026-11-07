@@ -308,7 +308,7 @@ test("tow truck and car transporter work through the shared equipment control", 
   );
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
-  await expect(canvas).toHaveAttribute("data-renderer", "gpu");
+  await expect(canvas).toHaveAttribute("data-renderer", "canvas");
   await expect(page.getByRole("button", { name: /^Attach car/ })).toBeVisible();
   await canvas.focus();
   await page.keyboard.press("f");

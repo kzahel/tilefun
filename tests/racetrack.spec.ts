@@ -7,6 +7,9 @@ test.use({ channel: "chromium", viewport: { width: 1440, height: 1100 } });
 // GPU upload/sampling parity lives in gpu-renderer and terrain-pacing.
 // Racing cars are deferred since 8f405aaf retired their motion service; the
 // speedway keeps its spectators, kerbs and start line.
+// The ordinary-game cases check generated content and the DOM/2D world map, not
+// GPU output, so they use Canvas: the default GPU world at 1440×1100 starves the
+// page under hosted software WebGL (each map step took seconds).
 test("generated speedway has spectators and reloads", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -47,6 +50,7 @@ for (const [name, x, y, spectators] of [
   test(`ordinary game shows spectators at the ${name}`, async ({ page }) => {
     const generation = createDescriptor("regional", 2026);
     const params = new URLSearchParams({
+      renderer: "canvas",
       new: "1",
       generation: JSON.stringify(generation),
       arrival: JSON.stringify({ x, y, generation }),
@@ -86,6 +90,7 @@ for (const phone of [false, true])
     if (phone) await page.setViewportSize({ width: 390, height: 844 });
     const generation = createDescriptor("regional", 2026);
     const params = new URLSearchParams({
+      renderer: "canvas",
       new: "1",
       generation: JSON.stringify(generation),
       arrival: JSON.stringify({ x: 300, y: 519, generation }),
