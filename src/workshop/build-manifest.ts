@@ -94,6 +94,7 @@ try {
     () => buildWorldGeometryCandidate("car-bridge"),
     () => buildWorldGeometryCandidate("car-garage"),
     () => buildWorldGeometryCandidate("car-dynamics"),
+    () => buildWorldGeometryCandidate("car-jumps"),
     () => buildWorldGeometryCandidate("traffic"),
     () => buildWorldGeometryCandidate("train-grades"),
     () => buildTruckBedCandidate(),

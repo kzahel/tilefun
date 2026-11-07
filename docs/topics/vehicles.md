@@ -70,6 +70,10 @@ Duplicate articulated collision/ground/carry helpers have been deleted; retained
 equipment math is render-only. Collision inspection reads shared body dimensions. The old feature descriptions below are historical, not current promises.
 
 
+[223](../tactical/223-jump-park-and-race-tunes.md) adds the `car-jumps` Workshop jump
+park and per-model Shift boosts (`VehiclePerformance.boost`, default 1.5). Six approved
+original models carry race tunes up to 540px/s boosted; road traffic cruise is unchanged.
+
 [175](../tactical/175-vehicle-depot-and-walkable-ramps.md) adds city speedway infield
 vehicle depots: seven saved parked vehicles, loading/recovery lanes and a small
 drive-over/under bridge. Named orange-truck map markers and controller-accessible

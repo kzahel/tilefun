@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [223 Jump park and race tunes](223-jump-park-and-race-tunes.md) | Lab delivered for play review: five-lane car jump park (curved kicker, sky lip, double, tabletop, rollers) and per-model boosts for six race-tuned original cars; generated venue next |
 | [222 Shared-physics dump bed](222-shared-physics-dump-bed.md) | Delivered for owner play review: hollow compound body, scene-owned tilt clock with drive lock and obstruction, replicated/saved angles, rider carry through turns and kept cargo; native/browser/build pass |
 | [221 Code health and refactoring sequence](221-code-health-refactoring-sequence.md) | Approved parent sequence: audit findings, green gates/bugs, dead-path deletion, guardrails, registries and hot-region splits; storage policy deferred; [code health](../topics/code-health.md) |
 | [220 Anchors, shadows and jump transitions](220-world-anchors-shadows-and-jump-transitions.md) | Qualified: anchored resources, finite crest shadows, train collision context/display handoffs and one-use queued jumps; owner feel review next |

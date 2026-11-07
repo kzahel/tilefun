@@ -46,3 +46,14 @@ it("holds through a short input gap, expires on simulation time and cannot repla
     movement: { dx: 0 },
   });
 });
+
+it("boosts race-tuned cars harder than the ordinary shared multiplier", () => {
+  const boosted = manualCarMovement({ dx: 0, dy: -1, jump: false, sprinting: true });
+  expect(vehicleMotionIntent(createVehicle("compact-1", 0, 0), boosted).driveSpeed).toBe(168);
+  expect(vehicleMotionIntent(createVehicle("rally-hatchback", 0, 0), boosted).driveSpeed).toBe(450);
+  // Reverse stays at half the unboosted speed.
+  expect(
+    vehicleMotionIntent(createVehicle("rally-hatchback", 0, 0), { ...boosted, reversing: true })
+      .driveSpeed,
+  ).toBe(-100);
+});

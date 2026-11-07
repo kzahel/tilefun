@@ -1,5 +1,9 @@
 # Embedded engine labs
 
+[223](../tactical/223-jump-park-and-race-tunes.md) adds the World Geometry `car-jumps`
+fixture: data-only jump profiles on ordinary surface patches and the shared Realm,
+seating the driver through the normal enter-vehicle command. No lab-only physics.
+
 [220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) shares anchored
 resource classification, held one-use jump buffering, tilted caster projection
 and rider display handoffs through the common game/lab owners. The real GPU decal

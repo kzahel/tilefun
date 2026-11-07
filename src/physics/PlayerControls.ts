@@ -2,7 +2,7 @@ import { PLAYER_SPEED, PLAYER_SPRINT_MULTIPLIER } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Movement } from "../shared/Movement.js";
 import { vehicleNoseHeading } from "../traffic/Vehicle.js";
-import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
+import { DEFAULT_BOOST, vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import type { MotionIntent } from "./PhysicsState.js";
 import { angleDifference } from "./VehicleMotor.js";
 
@@ -62,8 +62,9 @@ export function playerMotionIntent(movement: Movement): MotionIntent {
 /** Input mapping only; the scene owns all vehicle motion and collision. */
 export function vehicleMotionIntent(vehicle: Entity, movement: Movement): MotionIntent {
   const heading = vehicleNoseHeading(vehicle);
-  const base = vehiclePerformance(vehicle.type).speed;
-  const maxSpeed = base * (movement.sprinting ? 1.5 : 1);
+  const performance = vehiclePerformance(vehicle.type);
+  const base = performance.speed;
+  const maxSpeed = base * (movement.sprinting ? (performance.boost ?? DEFAULT_BOOST) : 1);
   if (movement.relativeDriving) {
     const throttle = movement.reversing ? 1 : movement.dy;
     return {

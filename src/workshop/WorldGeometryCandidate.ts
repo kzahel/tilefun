@@ -1,5 +1,6 @@
 import { sha256 } from "../art/ArtSource.js";
 import { generatedCrossingRecipe } from "../scenarios/GeneratedCrossingRecipe.js";
+import { jumpParkRecipe } from "../scenarios/JumpParkRecipe.js";
 import { railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { roadTrafficRecipe } from "../scenarios/RoadTrafficRecipe.js";
 import { undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
@@ -17,6 +18,7 @@ export async function buildWorldGeometryCandidate(
     | "car-bridge"
     | "car-garage"
     | "car-dynamics"
+    | "car-jumps"
     | "train-grades"
     | "traffic" = "deck",
 ): Promise<WorkshopCandidate> {
@@ -28,15 +30,17 @@ export async function buildWorldGeometryCandidate(
   const recipe =
     fixture === "car-dynamics"
       ? vehicleDynamicsRecipe()
-      : fixture === "traffic"
-        ? roadTrafficRecipe()
-        : vehicle
-          ? vehicleGeometryRecipe(garage)
-          : fixture === "crossing"
-            ? railCrossingRecipe()
-            : garage
-              ? undergroundGarageRecipe()
-              : worldGeometryRecipe();
+      : fixture === "car-jumps"
+        ? jumpParkRecipe()
+        : fixture === "traffic"
+          ? roadTrafficRecipe()
+          : vehicle
+            ? vehicleGeometryRecipe(garage)
+            : fixture === "crossing"
+              ? railCrossingRecipe()
+              : garage
+                ? undergroundGarageRecipe()
+                : worldGeometryRecipe();
   const id =
     fixture === "traffic"
       ? "geometry:road-traffic-v1"
@@ -54,15 +58,19 @@ export async function buildWorldGeometryCandidate(
     name:
       fixture === "traffic"
         ? "Rolling driving and ordinary road traffic"
-        : vehicle
-          ? `Basic driving · ${fixture}`
-          : fixture === "crossing"
-            ? "Road bridge and level underpass"
-            : garage
-              ? "Underground garage and street"
-              : "Ramp, deck and lower passage",
+        : fixture === "car-jumps"
+          ? "Jump park: curved kicker, sky lip, double, tabletop and rollers"
+          : vehicle
+            ? `Basic driving · ${fixture}`
+            : fixture === "crossing"
+              ? "Road bridge and level underpass"
+              : garage
+                ? "Underground garage and street"
+                : "Ramp, deck and lower passage",
     prompt:
-      "Inspect traversal, support, headroom, underpass and save/reload against the ordinary shared game kernel. Cars are independently controlled freely rotating chassis with suspension. Schematic geometry; no art promotion.",
+      fixture === "car-jumps"
+        ? "Drive each jump lane at full boost in race-tuned and ordinary cars: judge air height, lip shape, landings and boost speed. Ordinary shared physics; schematic geometry, no art promotion."
+        : "Inspect traversal, support, headroom, underpass and save/reload against the ordinary shared game kernel. Cars are independently controlled freely rotating chassis with suspension. Schematic geometry; no art promotion.",
     url,
     fingerprint: await fingerprint(recipe),
     excluded: "Interactive engine experiment; not an immutable art approval snapshot.",

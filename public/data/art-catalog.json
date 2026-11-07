@@ -35331,7 +35331,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/FootstepSystem.ts:32"
+          "source": "src/audio/FootstepSystem.ts:33"
         },
         {
           "system": "Gameplay",
@@ -35549,7 +35549,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/FootstepSystem.ts:34"
+          "source": "src/audio/FootstepSystem.ts:35"
         },
         {
           "system": "Editor",
@@ -35699,7 +35699,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/audio/FootstepSystem.ts:35"
+          "source": "src/audio/FootstepSystem.ts:36"
         },
         {
           "system": "Editor",

@@ -16615,6 +16615,16 @@
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
+      "id": "geometry:car-jumps-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "Jump park: curved kicker, sky lip, double, tabletop and rollers",
+      "prompt": "Drive each jump lane at full boost in race-tuned and ordinary cars: judge air height, lip shape, landings and boost speed. Ordinary shared physics; schematic geometry, no art promotion.",
+      "url": "/tilefun/workshop.html?geometry=car-jumps#/tool/world-geometry",
+      "fingerprint": "6fac1ecec709932a2ef1cfb06c6a9db4c8957bf6faf7c143a4c4695ef3720765",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
       "id": "geometry:road-traffic-v1",
       "batchId": "world-geometry",
       "kind": "geometry",
@@ -56178,5 +56188,5 @@
       }
     }
   ],
-  "inputDigest": "f3e372b6ca1b8cec35eb12bf3554fe267176ca8b08d29fa3fbaf361ad9858b74"
+  "inputDigest": "8a4942782fd0e2824d29aaefe11045adff354a9a6da9a10661256e0584143111"
 }

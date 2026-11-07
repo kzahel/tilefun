@@ -1,7 +1,7 @@
 import { isBoat } from "../boats/Boat.js";
 import type { Entity } from "../entities/Entity.js";
 import { isVehicle } from "../traffic/Vehicle.js";
-import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
+import { DEFAULT_BOOST, vehiclePerformance } from "../traffic/VehiclePerformance.js";
 
 type EngineVoice = { id: number; source: AudioBufferSourceNode; gain: GainNode };
 
@@ -39,7 +39,8 @@ export class CarEngineAudio {
     }
     const speed = Math.hypot(car.velocity?.vx ?? 0, car.velocity?.vy ?? 0);
     const performance = vehiclePerformance(car.type);
-    const rolling = Number.isFinite(speed) ? Math.min(1, speed / (performance.speed * 1.6)) : 0;
+    const top = performance.speed * ((performance.boost ?? DEFAULT_BOOST) + 0.1);
+    const rolling = Number.isFinite(speed) ? Math.min(1, speed / top) : 0;
     const base = performance.pushWeight >= 500 ? 0.7 : 0.85;
     this.voice.source.playbackRate.setTargetAtTime(base + rolling, this.ctx.currentTime, 0.12);
     this.voice.gain.gain.setTargetAtTime(0.025 + 0.035 * rolling, this.ctx.currentTime, 0.08);
