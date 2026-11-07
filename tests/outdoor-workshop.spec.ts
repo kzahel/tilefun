@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import type { ArtNote } from "../src/art/ArtNotes.js";
 
-const workshop = "/tilefun/workshop.html";
+const workshop = "/tilefun/workshop.html?renderer=legacy-canvas";
 test("outdoor catalog bounds DOM, saves exact corrections and runs production movement geometry", async ({
   page,
 }) => {

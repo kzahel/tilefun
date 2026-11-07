@@ -176,8 +176,6 @@ function GeometryFixtures({ initial }: { initial: string }) {
     const host = new ScenarioPresentationHost(c, recipe, {
       width: 960,
       height: 640,
-      // The dynamics course reviews 3D chassis; use the game's default mesh renderer.
-      ...(fixture === "car-dynamics" || ambient ? { defaultRenderer: "gpu-mesh" as const } : {}),
       terrain:
         !!generated ||
         fixture === "realm" ||

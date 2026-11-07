@@ -280,12 +280,7 @@ window.tilefunDesktop?.onPrepareQuit(() => {
 
 async function start() {
   showStartupStage("graphics", "Preparing graphics…", "Setting up the game renderer.");
-  const renderHostFactory = await selectableRenderHostFactory(
-    new URLSearchParams(location.search),
-    {
-      defaultMode: "gpu-mesh",
-    },
-  );
+  const renderHostFactory = await selectableRenderHostFactory(new URLSearchParams(location.search));
   await import.meta.hot?.data.localShutdown;
   // Resolve player profile first
   showStartupStage("profile", "Loading your player…", "Opening saved profiles and preferences.");

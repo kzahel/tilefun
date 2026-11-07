@@ -274,8 +274,9 @@ export class DebugPanel {
     row.append("Renderer");
     const select = document.createElement("select");
     select.setAttribute("aria-label", "Renderer");
+    // Canvas sprites are a legacy override, offered only once already selected.
     for (const [value, label] of [
-      ["canvas", "Canvas sprites"],
+      ...(control.mode === "canvas" ? ([["canvas", "Legacy canvas sprites"]] as const) : []),
       ["gpu", "GPU sprites"],
       ["gpu-mesh", "GPU + 3D car (default)"],
     ] as const) {

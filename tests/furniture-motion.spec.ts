@@ -21,7 +21,7 @@ test("shared movement stops at furniture, supports precise placement, and saves 
     await route.fulfill({ status: offline ? 503 : 200, json: { saved: !offline } });
   });
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/tilefun/furniture-playtest.html?scene=wardrobe");
+  await page.goto("/tilefun/furniture-playtest.html?renderer=legacy-canvas&scene=wardrobe");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   const canvas = page.locator("#room");
   await canvas.focus();
@@ -65,7 +65,7 @@ test.describe("automatic walk and phone layout representatives", () => {
       page.on("pageerror", (e) => errors.push(e.message));
       await page.route("**/api/interior-review", (r) => r.fulfill({ json: [] }));
       await page.setViewportSize({ width: 390, height: 844 });
-      await page.goto(`/tilefun/furniture-playtest.html?scene=${scene.id}`);
+      await page.goto(`/tilefun/furniture-playtest.html?renderer=legacy-canvas&scene=${scene.id}`);
       await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
       await page.locator("#circle").click();
       await expect(page.locator("#status")).toContainText("Walk complete", { timeout: 20000 });
@@ -78,7 +78,7 @@ test.describe("automatic walk and phone layout representatives", () => {
 
 test("direction controls release and dragging selects actual sprite pixels", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/tilefun/furniture-playtest.html?scene=worktable");
+  await page.goto("/tilefun/furniture-playtest.html?renderer=legacy-canvas&scene=worktable");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   const right = page.getByRole("button", { name: "Walk right", exact: true });
   await right.evaluate((el) => el.scrollIntoView({ block: "center" }));
@@ -135,7 +135,7 @@ test("jumps onto tall furniture, records good verdicts, and reopens changed phys
     await route.fulfill({ json: { saved: true } });
   });
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/tilefun/furniture-playtest.html?scene=wardrobe");
+  await page.goto("/tilefun/furniture-playtest.html?renderer=legacy-canvas&scene=wardrobe");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   const canvas = page.locator("#room");
   await page.locator("#gravity").selectOption("0.25");
@@ -192,7 +192,7 @@ test("jumps onto tall furniture, records good verdicts, and reopens changed phys
 test("phone jump control releases on cancellation and high jumps stay in view", async ({
   page,
 }) => {
-  await page.goto("/tilefun/furniture-playtest.html?scene=wardrobe");
+  await page.goto("/tilefun/furniture-playtest.html?renderer=legacy-canvas&scene=wardrobe");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await page.locator("#gravity").selectOption("0.1");
   const jump = page.locator("#jump");
@@ -255,7 +255,7 @@ test("approval advances past checked sets offline and finishes the new batch wit
     posts.push(r.request().postDataJSON());
     await r.fulfill({ status: offline ? 503 : 200, json: { saved: !offline } });
   });
-  await page.goto("/tilefun/furniture-playtest.html?scene=next");
+  await page.goto("/tilefun/furniture-playtest.html?renderer=legacy-canvas&scene=next");
   await expect(page.locator("#scene")).toHaveValue("bedside");
   await expect(page.locator("#review-counts")).toHaveText("8 unchecked · 3 approved · 0 reported");
   await page.locator("#good").click();
@@ -303,7 +303,7 @@ test.fixme("the full player sprite remains visible at the back of the bed after 
   page,
 }, testInfo) => {
   await page.route("**/api/interior-review", (r) => r.fulfill({ json: [] }));
-  await page.goto("/tilefun/furniture-playtest.html?scene=bedside");
+  await page.goto("/tilefun/furniture-playtest.html?renderer=legacy-canvas&scene=bedside");
   const canvas = page.locator("#room");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await page.locator("#collisions").uncheck();
@@ -366,7 +366,7 @@ test("replacing the initial furniture Worker does not abort review startup", asy
       }
     };
   });
-  await page.goto("/tilefun/furniture-playtest.html?scene=wardrobe");
+  await page.goto("/tilefun/furniture-playtest.html?renderer=legacy-canvas&scene=wardrobe");
   await expect(page.locator("#height")).toHaveValue("32");
   await expect(page.locator('#app[data-ready="true"]')).toHaveCount(0);
   await page.locator("#physics-controls summary").click();

@@ -41,7 +41,9 @@ for (const renderer of ["canvas"])
   });
 
 test("secretary-bird browser action opens its real hunting scene", async ({ page }) => {
-  await page.goto("/tilefun/workshop.html?geometry=nature-tiger#/tool/world-geometry");
+  await page.goto(
+    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=nature-tiger#/tool/world-geometry",
+  );
   await page.getByLabel("Find animal", { exact: true }).fill("Secretary bird");
   const card = page.locator('[data-animal="secretary-bird"]'),
     preview = card.locator("canvas");

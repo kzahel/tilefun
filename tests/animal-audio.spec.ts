@@ -26,7 +26,9 @@ test("recorded voices decode, render audible samples, audition by keyboard and f
       else start.call(this, when, offset, duration);
     };
   });
-  await page.goto("/tilefun/workshop.html?geometry=nature-behavior-dog#/tool/world-geometry");
+  await page.goto(
+    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=nature-behavior-dog#/tool/world-geometry",
+  );
   await page.getByLabel("Animal sound coverage", { exact: true }).selectOption("recorded");
   const results = page.getByRole("region", { name: "Animal results" });
   await expect(results.locator("article")).toHaveCount(coverageCount("recorded"));

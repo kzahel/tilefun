@@ -3,19 +3,22 @@ import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { createCanvasRenderHost } from "./CanvasRenderHost.js";
 import type { RendererMode, RenderHost, RenderHostFactory } from "./RenderHost.js";
 
+/** Game and labs default to the GPU renderer with 3D vehicle meshes. Canvas
+ * sprites are legacy: only `?renderer=legacy-canvas` (or its older `canvas`
+ * alias) selects them, apart from the automatic no-WebGL fallback. */
+export function requestedRenderer(params: URLSearchParams): RendererMode {
+  const requested = params.get("renderer");
+  if (requested === "legacy-canvas" || requested === "canvas") return "canvas";
+  if (requested === "gpu" && !params.has("meshes")) return "gpu";
+  return "gpu-mesh";
+}
+
 /** Browser composition owns backend changes; the same client/Worker keeps running. */
 export async function selectableRenderHostFactory(
   params: URLSearchParams,
-  options?: { embedded?: boolean; defaultMode?: RendererMode },
+  options?: { embedded?: boolean },
 ): Promise<RenderHostFactory> {
-  const initial: RendererMode =
-    params.get("renderer") === "gpu"
-      ? params.has("meshes")
-        ? "gpu-mesh"
-        : "gpu"
-      : params.get("renderer") === "canvas"
-        ? "canvas"
-        : (options?.defaultMode ?? "canvas");
+  const initial = requestedRenderer(params);
   let createGpu =
     initial === "canvas" ? undefined : (await import("./GpuRenderHost.js")).createGpuRenderHost;
   return (canvas) => {
@@ -62,7 +65,7 @@ export async function selectableRenderHostFactory(
             const url = new URL(location.href);
             url.searchParams.delete("renderer");
             url.searchParams.delete("meshes");
-            url.searchParams.set("renderer", mode === "canvas" ? "canvas" : "gpu");
+            url.searchParams.set("renderer", mode === "canvas" ? "legacy-canvas" : "gpu");
             if (mode === "gpu-mesh") url.searchParams.set("meshes", "");
             history.replaceState(history.state, "", url);
             return mode;

@@ -25,7 +25,8 @@ checks without a relevant change or unresolved concern. CI keeps its existing ga
 
 Hosted CI renders with software WebGL (SwiftShader), where GPU-mode browser
 steps are several times slower. Behavior, DOM and networking specs load
-`renderer=canvas`; keep GPU variants only for cases that assert GPU output
+`renderer=canvas` (game) or `renderer=legacy-canvas` (labs, whose default is now
+GPU + 3D car); keep GPU variants only for cases that assert GPU output
 (`gpu-renderer.spec.ts` compares GPU with Canvas). Playwright assertion waits are
 15 s under CI. Reproduce hosted timing locally with Chromium flags
 `--use-angle=swiftshader --enable-unsafe-swiftshader --disable-gpu`.

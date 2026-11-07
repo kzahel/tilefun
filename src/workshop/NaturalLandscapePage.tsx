@@ -131,9 +131,8 @@ export default function NaturalLandscapePage() {
     setError("");
     setPaused(false);
     keys.current.clear();
-    const { renderer, camera } = presentation;
+    const { camera } = presentation;
     const h = new ScenarioPresentationHost(c, recipe, {
-      ...(renderer ? { defaultRenderer: renderer } : {}),
       width: 960,
       height: 640,
       terrain: true,

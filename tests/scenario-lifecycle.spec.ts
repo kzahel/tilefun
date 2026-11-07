@@ -5,7 +5,7 @@ test("lab navigation and tuning dispose Worker sessions without creating saved w
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/tilefun/workshop.html");
+  await page.goto("/tilefun/workshop.html?renderer=legacy-canvas");
   const databases = await page.evaluate(async () =>
     (await indexedDB.databases()).map((db) => db.name).sort(),
   );

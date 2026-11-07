@@ -88,7 +88,9 @@ for (const renderer of ["canvas", "gpu"]) {
 test.describe("garage on a phone", () => {
   test.use({ hasTouch: true, viewport: { width: 390, height: 844 } });
   test("level controls fit and switch spaces with touch", async ({ page }) => {
-    await page.goto("/tilefun/workshop.html?geometry=garage#/tool/world-geometry");
+    await page.goto(
+      "/tilefun/workshop.html?renderer=legacy-canvas&geometry=garage#/tool/world-geometry",
+    );
     const canvas = page.getByLabel("World geometry scene");
     await expect(canvas).toHaveAttribute("data-ready", "true");
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(

@@ -98,7 +98,9 @@ for (const renderer of ["canvas"]) {
 }
 
 test("animal browser exposes all behavior demonstrations", async ({ page }) => {
-  await page.goto("/tilefun/workshop.html?geometry=nature-behavior-rabbit#/tool/world-geometry");
+  await page.goto(
+    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=nature-behavior-rabbit#/tool/world-geometry",
+  );
   await page.getByLabel("Behavior progress").selectOption("demonstrations");
   await expect(page.getByRole("button", { name: "Demonstrate behavior", exact: true })).toHaveCount(
     29,

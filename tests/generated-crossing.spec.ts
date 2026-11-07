@@ -60,7 +60,9 @@ for (const renderer of ["canvas", "gpu"]) {
 
 test("seeded crossings are selectable and fit phone review", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/tilefun/workshop.html?geometry=generated-42#/tool/world-geometry");
+  await page.goto(
+    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=generated-42#/tool/world-geometry",
+  );
   const c = page.getByLabel("World geometry scene");
   for (const seed of [42, 3]) {
     await page.getByLabel("Geometry fixture").selectOption(`generated-${seed}`);

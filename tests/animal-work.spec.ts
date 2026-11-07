@@ -169,7 +169,9 @@ for (const renderer of ["canvas"]) {
 test("Animal Browser filters behavior demonstrations and opens the selected activity", async ({
   page,
 }) => {
-  await page.goto("/tilefun/workshop.html?geometry=nature-behavior-dog#/tool/world-geometry");
+  await page.goto(
+    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=nature-behavior-dog#/tool/world-geometry",
+  );
   await page.getByLabel("Behavior progress", { exact: true }).selectOption("demonstrations");
   const results = page.getByRole("region", { name: "Animal results" });
   await expect(results.locator("article")).toHaveCount(29);

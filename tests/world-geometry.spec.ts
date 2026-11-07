@@ -60,7 +60,7 @@ test.describe("phone controls", () => {
   test("geometry controls suppress long-press defaults and release touch input", async ({
     page,
   }) => {
-    await page.goto("/tilefun/workshop.html#/tool/world-geometry");
+    await page.goto("/tilefun/workshop.html?renderer=legacy-canvas#/tool/world-geometry");
     const c = page.getByLabel("World geometry scene");
     await expect(c).toHaveAttribute("data-ready", "true");
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(

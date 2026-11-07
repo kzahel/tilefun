@@ -303,7 +303,9 @@ test("tow truck and car transporter work through the shared equipment control", 
   test.setTimeout(90000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/tilefun/workshop.html?geometry=car-dynamics&route=tow#/tool/world-geometry");
+  await page.goto(
+    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=car-dynamics&route=tow#/tool/world-geometry",
+  );
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await expect(canvas).toHaveAttribute("data-renderer", "gpu");

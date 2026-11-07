@@ -8,7 +8,7 @@ const manifest = JSON.parse(
   readFileSync("public/data/workshop-manifest.json", "utf8"),
 ) as WorkshopManifest;
 const vehicleUrl = (id: string) =>
-  `/tilefun/workshop.html#/tool/vehicles?view=${encodeURIComponent(id)}`;
+  `/tilefun/workshop.html?renderer=legacy-canvas#/tool/vehicles?view=${encodeURIComponent(id)}`;
 
 test("normal Chromium can review every vehicle with the registered appearance", async ({
   page,

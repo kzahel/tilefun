@@ -18,7 +18,6 @@ interface NaturalCasePresentation {
   description?: string;
   /** Controls and context paragraph replacing the default seed/location line. */
   guide?: string;
-  renderer?: "gpu-mesh";
   /** Wildlife the player can hop onto (fauna cases use their own species). */
   mounts?: readonly { type: string; label: string }[];
 }
@@ -212,13 +211,11 @@ const PRESENTATION = {
   },
   lake: {
     zoom: 0.4,
-    renderer: "gpu-mesh",
     guide:
       "Large wildlife lake · E beside the motorboat to board; Arrows/WASD steer, R reverses. Return beside a clear shore to get out. Fish schools and varied water animals use the same AI as the game.",
   },
   racetrack: {
     zoom: 0.13,
-    renderer: "gpu-mesh",
     guide:
       "City outskirts speedway · Eight cars race around the oval. Walk to the spectator seating, picnic area or track; cars stop for people. Use Arrows/WASD to walk, Space to jump, and E beside a stopped car to drive.",
   },

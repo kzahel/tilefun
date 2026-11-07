@@ -75,9 +75,11 @@ body dimensions as Rapier. 216 now supplies full car orientation/suspension.
 Topic: rendering-architecture
 Status: complete backend/presentation separation, recording proof and integrated
 desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-car presentation delivered;
-GPU + 3D car is the owner-selected main-game default; Canvas2D remains available and is the unsupported-WebGL2 fallback.
+GPU + 3D car is the owner-selected default for the game and every embedded lab;
+Canvas2D sprites are legacy, selected only by `?renderer=legacy-canvas` (older
+alias `canvas`) or the unsupported-WebGL2 fallback.
 Bounded unchanged car images and ordered multi-texture GPU batches are delivered.
-Updated: 2026-11-03.
+Updated: 2026-11-07.
 
 [169](../tactical/169-wheel-lift-towing.md) groups a tow truck and its car in one
 shared GPU depth target. Per-draw absolute transforms reset both cached assets;
@@ -143,9 +145,10 @@ eviction, resize, recovery and teardown. It does not decide depth/shadow order.
 
 `GameClientOptions.renderHostFactory` is the production selection point.
 `RenderHost` supplies the backend, asset configuration, viewport lifecycle and an
-independent HUD/touch/debug context. Main-game startup selects GPU + 3D car unless
-the URL explicitly chooses Canvas or GPU sprites. Embedded scenario labs retain
-their Canvas reference default and can select the same GPU paths explicitly. The GPU host
+independent HUD/touch/debug context. `requestedRenderer` gives the game and every
+ScenarioPresentationHost lab GPU + 3D car unless the URL chooses GPU sprites
+(`?renderer=gpu`) or legacy Canvas (`?renderer=legacy-canvas`). Pages cannot set
+a Canvas default (owner decision, 2026-11-07). The GPU host
 supplies a separate UI overlay and composes it for feedback capture. This works
 without changing physics, generation, editing or
 presentation policy. GameClient asset loading, procedural sprite creation and
@@ -318,7 +321,7 @@ particle, prop and overlay references; retained pools have explicit bounds.
 | Indoor review/reference | Explicit native Canvas surfaces using shared furniture/room ordering. `CachedInteriorRenderer` consumes `InteriorPresentation`; uncached drawing remains the independent parity reference |
 | Pattern room/atlas previews and tree source composition | Native asset/pattern reference rasterization, separate from gameplay presentation; pattern terrain uses the backend |
 | HUD, touch controls, menus, prop selection/collision diagnostics | Independent platform UI/debug surface; Canvas is permitted here and not exposed to neutral frame builders |
-| GPU gameplay and diagnostics | Main game defaults to GPU + 3D car; `?renderer=canvas` selects Canvas, `?renderer=gpu` selects sprites, and `&meshes` enables the car; renderer lab shares its body adapter |
+| GPU gameplay and diagnostics | Game and labs default to GPU + 3D car; `?renderer=legacy-canvas` selects legacy Canvas, `?renderer=gpu` selects sprites; renderer lab shares its body adapter |
 | Asset loaders and `Canvas*` / `TileRenderer` internals | Concrete source decoding, rasterization and resource ownership; not presentation policy |
 
 `TileRenderer` is now an internal Canvas terrain preparation/resource component.
@@ -820,12 +823,12 @@ Depth is local to a body: arbitrary interpenetrating objects are not supported.
 Missing/loading/failed assets retain the sprite. A generation-checked resource
 slot prevents late async publication after replacement or disposal.
 
-In the game, open **☰ → Debug → Renderer** (or press **F3**). Choose Canvas,
-GPU sprites, or GPU + 3D car. The selector switches live and updates only the
+In the game, open **☰ → Debug → Renderer** (or press **F3**). Choose GPU sprites
+or GPU + 3D car; Legacy canvas appears only when it is already selected. The selector switches live and updates only the
 renderer/mesh URL parameters, so refreshing retains the choice, including explicit
-`renderer=canvas`. The owner selected GPU + 3D car as the main-game default on
-2026-10-11; this selection does not establish human art approval or a new performance
-claim. Embedded labs retain their Canvas reference default. The separate
+`renderer=legacy-canvas`. The owner selected GPU + 3D car as the main-game default on
+2026-10-11 and for embedded labs on 2026-11-07; this selection does not establish
+human art approval or a new performance claim. The separate
 **3D View** control still opens collision/debug geometry.
 
 `SelectableRenderHost` owns replacement between frames, reusing loaded assets and
@@ -836,8 +839,8 @@ a disposed backend. A module-load failure leaves the current renderer running;
 unavailable WebGL2 construction selects Canvas. The selector is disabled while
 loading, and disposal prevents a late import from creating another host.
 
-Direct links support `?renderer=canvas` for Canvas, `?renderer=gpu` for sprites and
-`?renderer=gpu&meshes` for the experimental car.
+Direct links support `?renderer=legacy-canvas` (or `canvas`) for legacy Canvas and
+`?renderer=gpu` for GPU sprites; no parameter or `?renderer=gpu&meshes` selects the 3D car.
 The [renderer comparison tool](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/renderer-lab)
 exercises the same body adapter, pose and fallback. Its WebGPU/forced-WebGL2
 buttons probe portable geometry/materials, not the gameplay sprite shader.
