@@ -12,6 +12,9 @@ export default defineConfig({
   // Hosted CI uses software GPU rendering; two full Chromium workers can
   // starve the authority Worker and miss short-lived gameplay phases.
   workers: process.env.CI ? 1 : 2,
+  // CI shards split per test rather than per file, so long specs don't pile into
+  // one shard; with one worker per shard, tests still run one at a time.
+  fullyParallel: !!process.env.CI,
   // Full nightly/manual runs collect all failures instead of abandoning a shard.
   globalTimeout: process.env.CI ? 45 * 60_000 : 0,
   reporter: [["list"], ["html", { open: "never" }]],

@@ -45,6 +45,12 @@ launch/pixels, keyboard/controller/touch controls, Worker lifecycle and saves,
 mobile editing, vehicle driving/persistence, multiplayer and launcher assets.
 Run them with `npm run test:smoke`; no browser tests are deleted.
 
+CI layout (2026-11-07): `check` runs lint, typecheck, audits, Worker checks, build
+and HTTP/Node integration; `unit` runs `vitest --shard=i/3` on three runners
+(vitest balances by file, so split per-species matrices into short files); smoke
+runs in two shards; the nightly/manual full suite runs in twelve shards with
+`fullyParallel` on CI so long spec files spread across shards (one worker each).
+
 The 2026-10-24 wildlife delivery follow-up patches Electron to 44.9.1 and
 transitive body-parser to 1.20.9 after the existing dependency audit gate fails.
 Worker Miniflare pins vulnerable Undici 7.29.1; a scoped `miniflare.undici`
