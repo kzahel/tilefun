@@ -1,0 +1,1141 @@
+{
+  "spike": "226/1b split-screen render cost",
+  "revision": "8676e7069d3f3b2c6effcc7996edbe09fc8d4950",
+  "dirty": true,
+  "date": "2026-11-07T19:35:14.536Z",
+  "device": "Steam Deck (packaged Electron 44, Gamescope)",
+  "renderer": "gpu-mesh",
+  "build": "production (vite build)",
+  "fallback": "sprite-cars",
+  "protocol": {
+    "warmupSeconds": 4,
+    "sampleSeconds": 8,
+    "repeats": 2,
+    "zooms": [
+      0.5,
+      0.75
+    ],
+    "layouts": [
+      "1",
+      "2",
+      "4",
+      "diag"
+    ],
+    "scenes": [
+      "racetrack"
+    ]
+  },
+  "runs": [
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 0,
+      "layout": "1",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 1,
+      "zoom": 0.5,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 720,
+        "mean": 11.110833333333332,
+        "p50": 11.099999999998545,
+        "p95": 11.200000000000728,
+        "p99": 11.200000000000728,
+        "max": 11.30000000000291
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 721,
+        "mean": 5.960887656035612,
+        "p50": 5.7999999998137355,
+        "p95": 7.800000000745058,
+        "p99": 9.399999999441206,
+        "max": 10.200000000186265
+      },
+      "uploadsPerFrame": 0.015277777777777777,
+      "uploadedBytesPerFrame": 5531.966666666666,
+      "uploadFrames": 7,
+      "drawCallsPerFrame": 7.997222222222222,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 240,
+      "maxTerrainRows": 8,
+      "maxPending": 5,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0
+      ],
+      "textureBytesMax": 12495312,
+      "texturesMax": 28,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 11,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 83113268,
+      "travelledPx": 479.2635632849779
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 0,
+      "layout": "2",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 2,
+      "zoom": 0.5,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 716,
+        "mean": 11.173044692737433,
+        "p50": 11.099999999998545,
+        "p95": 11.200000000004366,
+        "p99": 11.200000000004366,
+        "max": 33.900000000001455
+      },
+      "over25": 1,
+      "over25Pct": 0.13966480446927373,
+      "over50": 0,
+      "renderMs": {
+        "count": 717,
+        "mean": 6.767364016743156,
+        "p50": 6.5,
+        "p95": 8.700000000186265,
+        "p99": 10.100000000558794,
+        "max": 16.5
+      },
+      "uploadsPerFrame": 0.023743016759776536,
+      "uploadedBytesPerFrame": 14095.731843575419,
+      "uploadFrames": 7,
+      "drawCallsPerFrame": 14.432960893854748,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 288,
+      "maxTerrainRows": 15,
+      "maxPending": 6,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0
+      ],
+      "textureBytesMax": 19376592,
+      "texturesMax": 36,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 17,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 67823337,
+      "travelledPx": 506.543512669754
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 0,
+      "layout": "4",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 4,
+      "zoom": 0.5,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 715,
+        "mean": 11.188671328671331,
+        "p50": 11.099999999998545,
+        "p95": 11.200000000004366,
+        "p99": 11.299999999995634,
+        "max": 24.10000000000582
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 716,
+        "mean": 7.807402234641554,
+        "p50": 7.599999999627471,
+        "p95": 9.5,
+        "p99": 11,
+        "max": 23.799999999813735
+      },
+      "uploadsPerFrame": 0.022377622377622378,
+      "uploadedBytesPerFrame": 11915.636363636364,
+      "uploadFrames": 8,
+      "drawCallsPerFrame": 23.71188811188811,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 192,
+      "maxTerrainRows": 19,
+      "maxPending": 6,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "textureBytesMax": 19251792,
+      "texturesMax": 40,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 16,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 76088429,
+      "travelledPx": 507.1300137339062
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 0,
+      "layout": "diag",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 2,
+      "zoom": 0.5,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 715,
+        "mean": 11.188531468531473,
+        "p50": 11.099999999998545,
+        "p95": 11.200000000004366,
+        "p99": 11.30000000000291,
+        "max": 22.39999999999418
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 716,
+        "mean": 7.928351955295816,
+        "p50": 7.800000000745058,
+        "p95": 10,
+        "p99": 10.800000000745058,
+        "max": 19.40000000037253
+      },
+      "uploadsPerFrame": 0.006993006993006993,
+      "uploadedBytesPerFrame": 3024.7384615384617,
+      "uploadFrames": 3,
+      "drawCallsPerFrame": 19.506293706293707,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 80,
+      "maxTerrainRows": 10,
+      "maxPending": 5,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0
+      ],
+      "textureBytesMax": 18164176,
+      "texturesMax": 33,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 5,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 97035935,
+      "travelledPx": 483.6925606811803
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 1,
+      "layout": "diag",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 2,
+      "zoom": 0.5,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 718,
+        "mean": 11.15752089136491,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.200000000011642,
+        "max": 22.30000000000291
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 719,
+        "mean": 7.488595271209755,
+        "p50": 7.400000000372529,
+        "p95": 9,
+        "p99": 10.700000000186265,
+        "max": 12.200000000186265
+      },
+      "uploadsPerFrame": 0.012534818941504178,
+      "uploadedBytesPerFrame": 5065.8050139275765,
+      "uploadFrames": 5,
+      "drawCallsPerFrame": 19.738161559888578,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 160,
+      "maxTerrainRows": 13,
+      "maxPending": 5,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0
+      ],
+      "textureBytesMax": 18164176,
+      "texturesMax": 33,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 9,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 75338334,
+      "travelledPx": 508.49279495367745
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 1,
+      "layout": "4",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 4,
+      "zoom": 0.5,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 715,
+        "mean": 11.188531468531473,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.200000000011642,
+        "max": 33.30000000000291
+      },
+      "over25": 1,
+      "over25Pct": 0.13986013986013987,
+      "over50": 0,
+      "renderMs": {
+        "count": 716,
+        "mean": 7.925279329620645,
+        "p50": 7.7000000001862645,
+        "p95": 9.700000000186265,
+        "p99": 11.699999999254942,
+        "max": 26.700000000186265
+      },
+      "uploadsPerFrame": 0.02097902097902098,
+      "uploadedBytesPerFrame": 10953.21958041958,
+      "uploadFrames": 7,
+      "drawCallsPerFrame": 23.674125874125874,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 192,
+      "maxTerrainRows": 16,
+      "maxPending": 6,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "textureBytesMax": 18563664,
+      "texturesMax": 39,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 15,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 75103956,
+      "travelledPx": 505.2124969518912
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 1,
+      "layout": "2",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 2,
+      "zoom": 0.5,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 717,
+        "mean": 11.157880055788002,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.200000000011642,
+        "max": 22.29999999998836
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 718,
+        "mean": 6.674094707541645,
+        "p50": 6.5,
+        "p95": 8.5,
+        "p99": 10,
+        "max": 22
+      },
+      "uploadsPerFrame": 0.02092050209205021,
+      "uploadedBytesPerFrame": 12156.60808926081,
+      "uploadFrames": 6,
+      "drawCallsPerFrame": 14.444909344490934,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 241,
+      "maxTerrainRows": 15,
+      "maxPending": 6,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0
+      ],
+      "textureBytesMax": 17639888,
+      "texturesMax": 33,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 15,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 78222863,
+      "travelledPx": 504.3231771444077
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 1,
+      "layout": "1",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 1,
+      "zoom": 0.5,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 717,
+        "mean": 11.157461645746157,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.30000000000291,
+        "max": 22.30000000000291
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 718,
+        "mean": 5.974094707514925,
+        "p50": 5.8999999994412065,
+        "p95": 7.7999999998137355,
+        "p99": 9,
+        "max": 14
+      },
+      "uploadsPerFrame": 0.016736401673640166,
+      "uploadedBytesPerFrame": 6514.845188284519,
+      "uploadFrames": 8,
+      "drawCallsPerFrame": 7.882845188284519,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 160,
+      "maxTerrainRows": 8,
+      "maxPending": 5,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0
+      ],
+      "textureBytesMax": 13183440,
+      "texturesMax": 29,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 12,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 81568903,
+      "travelledPx": 506.63083347302705
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 0,
+      "layout": "1",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 1,
+      "zoom": 0.75,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 719,
+        "mean": 11.126564673157162,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.299999999988358,
+        "max": 22.19999999999709
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 720,
+        "mean": 4.198333333320139,
+        "p50": 4.2000000001862645,
+        "p95": 5.7999999998137355,
+        "p99": 6.400000000372529,
+        "max": 10.5
+      },
+      "uploadsPerFrame": 0.009735744089012517,
+      "uploadedBytesPerFrame": 4080.9123783031987,
+      "uploadFrames": 4,
+      "drawCallsPerFrame": 6.350486787204451,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 80,
+      "maxTerrainRows": 7,
+      "maxPending": 5,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0
+      ],
+      "textureBytesMax": 10537376,
+      "texturesMax": 22,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 7,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 78578204,
+      "travelledPx": 482.71859938535823
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 0,
+      "layout": "2",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 2,
+      "zoom": 0.75,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 717,
+        "mean": 11.157461645746157,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.200000000011642,
+        "max": 22.29999999998836
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 718,
+        "mean": 5.547632311977975,
+        "p50": 5.2999999998137355,
+        "p95": 7.5,
+        "p99": 9.300000000745058,
+        "max": 23.5
+      },
+      "uploadsPerFrame": 0.012552301255230125,
+      "uploadedBytesPerFrame": 4823.5202231520225,
+      "uploadFrames": 6,
+      "drawCallsPerFrame": 11.762900976290098,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 256,
+      "maxTerrainRows": 9,
+      "maxPending": 5,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0
+      ],
+      "textureBytesMax": 11194944,
+      "texturesMax": 22,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 9,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 88788626,
+      "travelledPx": 485.8781950931168
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 0,
+      "layout": "4",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 4,
+      "zoom": 0.75,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 719,
+        "mean": 11.12642559109874,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.200000000011642,
+        "max": 22.099999999976717
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 720,
+        "mean": 7.510694444429181,
+        "p50": 7.3999999994412065,
+        "p95": 9.400000000372529,
+        "p99": 10.700000000186265,
+        "max": 13.400000000372529
+      },
+      "uploadsPerFrame": 0.013908205841446454,
+      "uploadedBytesPerFrame": 6015.82197496523,
+      "uploadFrames": 8,
+      "drawCallsPerFrame": 18.84979137691238,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 160,
+      "maxTerrainRows": 9,
+      "maxPending": 4,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "textureBytesMax": 12092416,
+      "texturesMax": 24,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 10,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 87358035,
+      "travelledPx": 504.31938700121793
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 0,
+      "layout": "diag",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 2,
+      "zoom": 0.75,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 720,
+        "mean": 11.110833333333357,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.200000000011642,
+        "max": 11.39999999999418
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 721,
+        "mean": 5.6307905686879725,
+        "p50": 5.400000000372529,
+        "p95": 7.2000000001862645,
+        "p99": 8,
+        "max": 9.899999999441206
+      },
+      "uploadsPerFrame": 0.016666666666666666,
+      "uploadedBytesPerFrame": 6124.666666666667,
+      "uploadFrames": 8,
+      "drawCallsPerFrame": 14.755555555555556,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 160,
+      "maxTerrainRows": 9,
+      "maxPending": 5,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0
+      ],
+      "textureBytesMax": 11817536,
+      "texturesMax": 26,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 12,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 93934348,
+      "travelledPx": 485.0560812958813
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 1,
+      "layout": "diag",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 2,
+      "zoom": 0.75,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 720,
+        "mean": 11.110833333333357,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.200000000011642,
+        "max": 12.700000000011642
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 721,
+        "mean": 5.529819694864363,
+        "p50": 5.2999999998137355,
+        "p95": 7.2000000001862645,
+        "p99": 8.200000000186265,
+        "max": 9.599999999627471
+      },
+      "uploadsPerFrame": 0.015277777777777777,
+      "uploadedBytesPerFrame": 4214.622222222222,
+      "uploadFrames": 7,
+      "drawCallsPerFrame": 15.45,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 193,
+      "maxTerrainRows": 9,
+      "maxPending": 5,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0
+      ],
+      "textureBytesMax": 11817536,
+      "texturesMax": 26,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 11,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 80420914,
+      "travelledPx": 504.3193606754865
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 1,
+      "layout": "4",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 4,
+      "zoom": 0.75,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 715,
+        "mean": 11.188391608391624,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.299999999988358,
+        "max": 25.099999999976717
+      },
+      "over25": 1,
+      "over25Pct": 0.13986013986013987,
+      "over50": 0,
+      "renderMs": {
+        "count": 716,
+        "mean": 7.727653631303126,
+        "p50": 7.7000000001862645,
+        "p95": 9.799999999813735,
+        "p99": 11.5,
+        "max": 23.700000000186265
+      },
+      "uploadsPerFrame": 0.013986013986013986,
+      "uploadedBytesPerFrame": 6049.476923076923,
+      "uploadFrames": 8,
+      "drawCallsPerFrame": 18.848951048951047,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 160,
+      "maxTerrainRows": 9,
+      "maxPending": 4,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "textureBytesMax": 12092416,
+      "texturesMax": 24,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 10,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 71734657,
+      "travelledPx": 506.53565735666865
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 1,
+      "layout": "2",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 2,
+      "zoom": 0.75,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 718,
+        "mean": 11.141782729804998,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.200000000011642,
+        "max": 20.89999999999418
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 719,
+        "mean": 5.1977746870734,
+        "p50": 5,
+        "p95": 6.8999999994412065,
+        "p99": 8.600000000558794,
+        "max": 20.300000000745058
+      },
+      "uploadsPerFrame": 0.012534818941504178,
+      "uploadedBytesPerFrame": 4816.802228412256,
+      "uploadFrames": 6,
+      "drawCallsPerFrame": 11.884401114206128,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 160,
+      "maxTerrainRows": 9,
+      "maxPending": 5,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0,
+        0
+      ],
+      "textureBytesMax": 11194944,
+      "texturesMax": 22,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 9,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 66628127,
+      "travelledPx": 505.55717159350144
+    },
+    {
+      "scene": "racetrack",
+      "arrival": {
+        "x": 435,
+        "y": 444
+      },
+      "repeat": 1,
+      "layout": "1",
+      "fallback": {
+        "meshes": false
+      },
+      "views": 1,
+      "zoom": 0.75,
+      "motion": "drive",
+      "canvas": {
+        "width": 1280,
+        "height": 800
+      },
+      "frames": {
+        "count": 719,
+        "mean": 11.12642559109874,
+        "p50": 11.10000000000582,
+        "p95": 11.200000000011642,
+        "p99": 11.200000000011642,
+        "max": 22.20000000001164
+      },
+      "over25": 0,
+      "over25Pct": 0,
+      "over50": 0,
+      "renderMs": {
+        "count": 720,
+        "mean": 3.9716666666920193,
+        "p50": 3.7000000001862645,
+        "p95": 5.5,
+        "p99": 7.2000000001862645,
+        "max": 20.399999999441206
+      },
+      "uploadsPerFrame": 0.013908205841446454,
+      "uploadedBytesPerFrame": 5174.69819193324,
+      "uploadFrames": 5,
+      "drawCallsPerFrame": 6.570236439499305,
+      "overlayBuilds": 0,
+      "meshImageMisses": 0,
+      "meshImageHits": 0,
+      "meshDrawsPerFrame": 0,
+      "terrainRows": 160,
+      "maxTerrainRows": 10,
+      "maxPending": 5,
+      "viewIncompleteFrames": [],
+      "viewMissingFrames": [],
+      "indoorFrames": 0,
+      "viewMaxIncomplete": [
+        0
+      ],
+      "textureBytesMax": 11225504,
+      "texturesMax": 23,
+      "meshTargetBytes": 0,
+      "glCreations": {
+        "createTexture": 10,
+        "createFramebuffer": 0,
+        "createRenderbuffer": 0,
+        "createBuffer": 0
+      },
+      "regionChanges": 0,
+      "heapBytes": 63335389,
+      "travelledPx": 504.68220654424624
+    }
+  ],
+  "browser": "152.0.7977.167",
+  "display": {
+    "viewport": {
+      "width": 1280,
+      "height": 800
+    },
+    "devicePixelRatio": 1,
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Tilefun/0.1.0 Chrome/152.0.7977.167 Electron/44.9.1 Safari/537.36",
+    "renderer": "gpu",
+    "gpu": "ANGLE (AMD, AMD Custom GPU 0932 (radeonsi vangogh ACO), OpenGL 4.6)"
+  },
+  "thermals": [
+    {
+      "scene": "racetrack",
+      "before": "acpitz=55000 k10temp=55250 amdgpu=53000 bat=75% ac=1",
+      "after": "acpitz=57000 k10temp=57875 amdgpu=55000 bat=75% ac=1"
+    }
+  ],
+  "errors": []
+}

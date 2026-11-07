@@ -584,3 +584,130 @@ maintaining both shells. The shell import allow-list only shrinks.
     seat ids, key collisions and the per-step map were fixed (`SeatInputs.test.ts`
     covers departure and jump edges); the rest are the limits above.
     Re-review: ACCEPT.
+- 2026-11-07, slice 1b (multi-view render spike; code kept off main at tag
+  `spike-226-1b`, commit `9cea3260`; only this entry and the receipts merged):
+  - **Result (Steam Deck): cadence go, render CPU open.** Frame cadence holds
+    the 90 Hz panel in every layout and zoom except 4-view and diagonal mesh
+    driving at zoom 0.5 (p95 22.3 ms), which sprite cars restore. The
+    render-CPU gate as written (two views ≤8 ms and no worse than one view
+    when driving; four views ≤11 ms) passes only in the city at 0.75, city 2-
+    and 4-view at 0.5, and 4-view driving with sprite cars; one view driving at
+    0.5 already takes 9.0 ms. Owner checkpoint: rebase the
+    render-CPU limits for the 90 Hz panel's 11.1 ms frame or treat those cells
+    as fails that need the car-image memo and fallbacks. Chromebook: not
+    measured (see limits); its gate stays open for slice 5.
+  - Built: `?views=1|2|4|diag|sweep` in the real game (GPU + 3D mesh default).
+    View 0 follows the player; spectator cameras sit at fixed offsets within
+    about one screen. `RenderHost.beginView(camera, region)`/`endView()` reuse
+    the GPU world target (per-view clear, region viewport or half-plane mask in
+    the present shader; Canvas path clip); one `beginFrame` per display frame.
+    `TileRenderer.prepareTerrainViews` prepares the union of every view's halo
+    once per frame with one budget and per-view lookahead; views then collect
+    only. Scene frame, mesh poses and particles are shared. The server gets the
+    bounding box of the view ranges. `__viewBench({views, seconds, zoom,
+    motion, fallback})` switches layouts live and reports cadence, render CPU,
+    uploads, overlay builds, mesh-image misses, terrain rows/pending and
+    missing data per view, texture bytes, GL object creation and heap.
+    `scripts/benchmark-views.ts` drives it on a production build (local preview,
+    packaged Deck Electron or Chromebook Chrome over CDP);
+    `scripts/summarize-views.mjs` prints the table below (both on the tag).
+  - Native tests (on the tag): union preparation keeps two distant views
+    resident, does no warm work and spends one shared row budget on both visible gaps
+    (`TerrainPreparation.test.ts`); 2/4/diagonal frames draw N world passes with
+    no warm uploads and every view's chunks resident (`SplitViews.test.ts` on
+    `RecordingBackend`; per-view preparation seeded as a fault fails it);
+    layouts tile odd canvases exactly with complementary diagonal halves. No
+    browser pixel test was added; screenshots were checked by eye.
+  - Protocol: production build in the packaged Electron 44 app on the Deck
+    (1280×800, DPR 1, Gamescope, AC, saves isolated), city sprint walk and
+    racetrack drive (bounded back-and-forth so repeats stay outdoors), zoom 0.5
+    and 0.75, 10 s unrecorded priming, 4 s warmup, 8 s samples, two repeats in
+    reversed layout order, 60 s cool-down per scene (k10temp 54→61 °C).
+    The Deck panel runs at **90 Hz** (11.1 ms); a 22.2 ms interval is one missed
+    vsync and stays under the 25 ms count.
+    Receipts: [Deck](../benchmarks/226-split-views-steam-deck.json),
+    [sprite cars](../benchmarks/226-split-views-steam-deck-sprite-cars.json),
+    [sprite cars, no grass](../benchmarks/226-split-views-steam-deck-sprite-cars-no-grass.json).
+    They record `e12ad12c` and `8676e706` with uncommitted edits; the tagged
+    tree is believed to match what was measured but was not re-run.
+  - Results (worst of two repeats; render = `GameClient.render` CPU p95;
+    ratio = render p95 over the same repeat's one view). Gate = cadence /
+    render CPU against the written thresholds; the diagonal uses the two-view
+    gate:
+
+    | scene, zoom | views | frame p50/p95/p99 ms | >25 ms | render p95 ms (ratio) | gate |
+    |---|---|---|---|---|---|
+    | city 0.5 | 1 | 11.1/11.2/11.2 | 0% | 6.0 | baseline |
+    | city 0.5 | 2 / sweep | 11.1/11.2/11.2 | 0% | 7.1 (1.40) / 7.5 (1.50) | pass / pass |
+    | city 0.5 | 4 | 11.1/11.2/11.2 | 0% | 9.9 (1.84) | pass / pass |
+    | city 0.5 | diag | 11.1/11.2/11.6 | 0.28% | 10.1 (2.00) | pass / fail (> 8) |
+    | city 0.75 | 1 / 2 / 4 / diag / sweep | 11.1/11.2/≤11.3 | 0% | 4.7 / 5.4 / 5.9 / 6.2 / 5.7 | pass / pass |
+    | drive 0.5 | 1 | 11.1/11.2/11.3 | 0% | 9.0 | baseline (> 8 ms alone) |
+    | drive 0.5 | 2 / sweep | 11.1/11.2/11.4 | ≤0.14% | 9.4 (1.09) / 9.8 (1.14) | pass / fail (> baseline) |
+    | drive 0.5 | 4 | 11.1/22.3/22.4 | 0.17% | 13.2 (1.51) | fail / fail |
+    | drive 0.5 | diag | 11.1/22.3/22.3 | 0.16% | 12.5 (1.45) | fail / fail |
+    | drive 0.75 | 1 | 11.1/11.2/11.2 | 0% | 6.6 | baseline |
+    | drive 0.75 | 2 / diag / sweep | 11.1/11.2/≤11.6 | ≤0.14% | 8.8 / 8.4 / 9.6 | pass / fail (> 8, > baseline) |
+    | drive 0.75 | 4 | 11.1/11.2/22.2 | 0.14% | 11.3 (1.71) | pass / fail (> 11) |
+    | drive 0.5, sprite cars | 1 / 2 / 4 / diag | 11.1/11.2/≤11.3 | ≤0.14% | 7.8 / 8.7 / 9.7 / 10.0 | pass / 4-view pass only |
+    | drive 0.5, sprite cars, no grass | 1 / 2 / 4 / diag | 11.1/11.2/≤11.3 | 0% | 5.2 / 7.5 / 9.7 / 8.7 | pass / 4-view pass only |
+
+  - Warm checks: overlay builds 0 in every split sample (one in a one-view
+    sample); no view ever had visible chunks loaded but unready, though terrain
+    preparation still ran (rows 240–320 for one view, 384 for four, 767–825 for
+    sweep; maximum pending 5–6 in every run); texture bytes ≤ 27.6 MiB with no
+    LRU churn. Uploads per frame were 0.008–0.032 against 0.011–0.026 for one
+    view: most split cells exceed the written "no more than one view" check
+    (up to 2.2×, four-view driving at 0.5: 0.024 vs 0.011). First-seen sprite
+    pages over the larger area are a plausible cause, not measured. `sweep` resized regions every frame (≈700 distinct
+    regions per 8 s) with no framebuffer creation in the city; its texture
+    creations equal its sprite uploads. Driving creates textures/framebuffers in
+    every layout, including one view (car-image admission targets). 60 s of
+    four views in the city: heap 56–88 MiB sawtooth, floor flat, frame p99
+    11.3 ms. Mesh-image misses rise from 6.2/frame (one view) to 12.6 (four)
+    and 14.6 (diagonal) while driving: moving mesh cars re-render per view.
+  - The fallback ladder stopped after one pass: sprite cars alone restore
+    four-view and diagonal driving cadence at zoom 0.5. Shadow receivers, halo
+    and particles were not needed or tested; grass removal mainly lowers the
+    one-view cost.
+  - Review (Yep Anywhere, Opus 5.5 high): CHANGES REQUESTED for merging the
+    branch; recommended merging only this entry and the receipts with the gate
+    verdicts and warm wording corrected (done here; two re-review rounds
+    tightened the render-CPU and upload verdicts, then ACCEPT). Single-view
+    rendering was verified unchanged without `?views`. Before slice 3 harvests
+    the code:
+    split views share one `SceneFrame`, so a view that does not draw a roof or
+    slab deletes its fade record and the fade over the player restarts every
+    frame (`presentSurfaceScene.ts`/`SurfacePresentation.ts`; inferred from
+    code, not seen at runtime) — keep fade state per view or prune once per
+    display frame. Also: the per-view fallback when a backend lacks
+    `prepareTerrainViews` evicts other views' chunks (throw instead), the
+    raster backend ignores `scope: "visible"`, layouts are rebuilt every frame,
+    the Canvas path does not clear its 2 px padding between views and was not
+    measured, the bench forces mesh cars on, and nothing tests the GPU
+    region/mask present math.
+  - Keep for slice 3: `beginView`/`endView` and the world-target reuse with
+    region/mask present (`GpuRasterSurface.beginView`, `presentWorld(region,
+    mask)`, Canvas clip), `prepareTerrainViews` (TileRenderer, backends,
+    `RecordingBackend`) with its tests, `layoutViews` and the shared-frame
+    render loop shape (`renderSplitViews`). Throwaway: the module-level active
+    view set, `splitFallback`, fixed spectator offsets, the visible-range
+    bounding box, the `PlayScene` branch, prototype-chained view contexts and
+    `__viewBench` wiring (keep the bench idea as a lab/diagnostic plugin).
+  - Limits: Chromebook not measured. The first attempt walked through a door
+    (indoor samples) and its rerun could not start: the ChromeOS browser was
+    swapping (8 GB, ~7 GB swap) at ~95% CPU, and DevTools stopped answering. The
+    owner's session was not restarted. One device and one session per scene;
+    driving is one depot car on a short segment, not a lap or the 96 crowd lab.
+    Per-view HUD, markers and prompts are not drawn. Spectator views are cameras,
+    not seats, so there is no second predicted player or seat input. The server
+    range is one bounding box (fine within one screen; slice 4b replaces it with
+    a list of rectangles). Motion is a back-and-forth under one 256 px chunk
+    (about 500 px of travel per 8 s driving, 1,030 px walking), so the warm
+    checks never cover entering new chunks with several views on one shared
+    budget. Diagonal views collect and fill about two full screens. Render CPU excludes GPU time. The absolute 8 ms single-view render
+    budget already fails on the Deck when driving at zoom 0.5 with one view.
+  - Next: a same-frame car-image memo (frame-scoped targets reused by later
+    views) before slice 5, re-measure four-view/diagonal mesh driving at 0.5,
+    and measure the Chromebook when it is healthy. Owner checkpoint: zoom
+    policy (0.75 for 3–4 players) and layouts.

@@ -1,5 +1,19 @@
 # Streaming and gameplay performance
 
+## Split-screen render cost on the Steam Deck (2026-11-07)
+
+[226](../tactical/226-player-views-and-local-split-screen.md) slice 1b gives the
+first Deck frame-rate receipts (packaged Electron, 1280×800, 90 Hz panel). One
+view holds the 11.1 ms cadence walking and driving; render CPU p95 is 6.0 ms
+walking and 9.0 ms driving at zoom 0.5. Two views hold cadence everywhere. Four
+views and the diagonal miss vsyncs only when driving at 0.5 (p95 22.3 ms),
+because moving mesh cars re-render per view; sprite cars restore cadence. Render
+CPU exceeds the written split-screen budgets in most driving layouts and the city
+diagonal at 0.5; whether to rebase those budgets for the 90 Hz frame is an owner
+decision. Warm split frames leave no visible terrain unready and add no overlay
+builds or texture churn, but the bench never crossed into new chunks. Chromebook
+split-screen cost is unmeasured. The 226 progress entry owns the table and limits.
+
 ## Desktop throttle scope (2026-11-04)
 
 The current streaming runner applies `Emulation.setCPUThrottlingRate` to the page
