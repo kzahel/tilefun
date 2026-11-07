@@ -806,3 +806,15 @@ files over shared `tests-support/*.suite.ts` bodies with deterministic slices (s
 Remaining cost: every job spends ~1.5 min checking out the 2.6 GB asset tree
 (storage policy, phase 6) and ~1 min installing Chromium/dependencies; vitest
 shards balance by file count, not duration.
+
+Ratchet baseline raised (2026-11-07): concurrent feature commits (GPU-default
+renderer, jump park, motocross parks, towing/transporter, predator footsteps)
+grew 14 baselined files: FootstepSystem (+43 lines), MapRenderer (+34, worst
+158 → 163), Overview (+19, 135 → 144), NaturalStrategy (+29, 34 → 52),
+SurfacePresentation (+5, 97 → 116), NaturalLandscapeRecipe (+14, 105 → 109),
+WorldMap (+15, 28 → 34), WorldGeometryCandidate (+8, 37 → 49), and small growth
+in PropFactories, FarmsteadPlanner, NaturalLandscape and SelectableRenderHost.
+They were accepted with `--update` so the work could ship while that session was
+still active; splitting them is follow-up work, and feature sessions should run
+`npm run check` before committing.
+

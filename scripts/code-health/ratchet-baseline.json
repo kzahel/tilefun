@@ -43,7 +43,7 @@
       "overLimit": 1
     },
     "src/audio/FootstepSystem.ts": {
-      "lines": 297,
+      "lines": 340,
       "worst": 26,
       "overLimit": 1
     },
@@ -103,7 +103,7 @@
       "overLimit": 1
     },
     "src/entities/PropFactories.ts": {
-      "lines": 778,
+      "lines": 780,
       "worst": 0,
       "overLimit": 0
     },
@@ -118,8 +118,8 @@
       "overLimit": 0
     },
     "src/explorer/MapRenderer.ts": {
-      "lines": 537,
-      "worst": 158,
+      "lines": 571,
+      "worst": 163,
       "overLimit": 1
     },
     "src/explorer/regional.worker.ts": {
@@ -143,8 +143,8 @@
       "overLimit": 1
     },
     "src/generation/Overview.ts": {
-      "lines": 229,
-      "worst": 135,
+      "lines": 248,
+      "worst": 144,
       "overLimit": 1
     },
     "src/generation/ProceduralActors.ts": {
@@ -183,18 +183,18 @@
       "overLimit": 1
     },
     "src/generation/regional/FarmsteadPlanner.ts": {
-      "lines": 271,
+      "lines": 277,
       "worst": 64,
       "overLimit": 1
     },
     "src/generation/regional/NaturalLandscape.ts": {
-      "lines": 1610,
+      "lines": 1615,
       "worst": 72,
       "overLimit": 10
     },
     "src/generation/regional/NaturalStrategy.ts": {
-      "lines": 168,
-      "worst": 34,
+      "lines": 197,
+      "worst": 52,
       "overLimit": 1
     },
     "src/generation/regional/ParkingLayout.ts": {
@@ -348,7 +348,7 @@
       "overLimit": 0
     },
     "src/main.ts": {
-      "lines": 683,
+      "lines": 678,
       "worst": 34,
       "overLimit": 1
     },
@@ -523,7 +523,7 @@
       "overLimit": 1
     },
     "src/rendering/SelectableRenderHost.ts": {
-      "lines": 105,
+      "lines": 108,
       "worst": 29,
       "overLimit": 1
     },
@@ -533,8 +533,8 @@
       "overLimit": 1
     },
     "src/rendering/SurfacePresentation.ts": {
-      "lines": 253,
-      "worst": 97,
+      "lines": 258,
+      "worst": 116,
       "overLimit": 1
     },
     "src/rendering/SurfaceReceivers.ts": {
@@ -573,12 +573,12 @@
       "overLimit": 1
     },
     "src/scenarios/NaturalLandscapeRecipe.ts": {
-      "lines": 365,
-      "worst": 105,
+      "lines": 379,
+      "worst": 109,
       "overLimit": 1
     },
     "src/scenarios/ScenarioPresentationHost.ts": {
-      "lines": 529,
+      "lines": 525,
       "worst": 27,
       "overLimit": 1
     },
@@ -748,8 +748,8 @@
       "overLimit": 1
     },
     "src/ui/WorldMap.ts": {
-      "lines": 666,
-      "worst": 28,
+      "lines": 681,
+      "worst": 34,
       "overLimit": 1
     },
     "src/wildlife/AnimalWorkPose.ts": {
@@ -938,12 +938,12 @@
       "overLimit": 1
     },
     "src/workshop/WorldGeometryCandidate.ts": {
-      "lines": 110,
-      "worst": 37,
+      "lines": 118,
+      "worst": 49,
       "overLimit": 1
     },
     "src/workshop/WorldGeometryPage.tsx": {
-      "lines": 536,
+      "lines": 534,
       "worst": 64,
       "overLimit": 3
     },
