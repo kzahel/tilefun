@@ -10,7 +10,7 @@ test.use({ channel: "chromium" });
 // software WebGL slows every page action about eightfold.
 
 // Ground/fierce and deep-water editor/storage paths; all 48 command/identity
-// combinations are exercised in PredatorPlacement.test without Chromium.
+// combinations are exercised in PredatorPlacement.part*.test without Chromium.
 for (const p of PREDATOR_PROFILES.filter((p) =>
   ["tiger", "giant-spider", "shark"].includes(p.species),
 )) {

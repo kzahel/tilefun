@@ -113,6 +113,16 @@ production Realm samples and habitat generation are the next native performance
 target. Keep semantic coverage while measuring fixture reuse or distribution;
 do not add more browser shards to address a native test bottleneck.
 
+Vitest parallelizes and shards native tests by file, so long per-species matrices
+are split into sibling `Name.partN.test.ts` files. Each part calls a suite module in
+`tests-support/*.suite.ts` with its `import.meta.url`; `testPart` takes a
+deterministic round-robin slice sized by the number of sibling part files, so every
+case runs exactly once and a numbering gap fails collection. Non-matrix tests stay
+in `Name.test.ts`. Fauna, Mallard residency, natural/aquatic hunters, predator
+placement/recipes, original vehicles and the realm browser were split this way;
+under full local load no native file now exceeds about 21 s (previously 110 s).
+Add a part file, not a larger per-file timeout, when a matrix grows past that.
+
 ## Coverage and test scope
 
 [169](../tactical/169-wheel-lift-towing.md) adds one distinct Worker/browser towing

@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import { PREDATOR_PROFILES } from "../src/wildlife/Predator.js";
 
 test.use({ channel: "chromium" });
-// Exact per-species recipe/pose parity: PredatorRecipe.test. Retain real
+// Exact per-species recipe/pose parity: PredatorRecipe.part*.test. Retain real
 // Worker pause/reload publication for ground, flight, web and swoop paths.
 // Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
 for (const p of PREDATOR_PROFILES.filter((p) =>
