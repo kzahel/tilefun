@@ -894,12 +894,7 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
     size: 96,
     anchor: [48, 72],
     inspection: [1569, 1512],
-    clips: [
-      { name: "idle", start: 0, count: 1, frameDuration: 100, loop: true },
-      { name: "walk", start: 1, count: 32, frameDuration: 70, loop: true },
-      { name: "action", start: 33, count: 16, frameDuration: 50, loop: false },
-      { name: "flee", start: 1, count: 32, frameDuration: 35, loop: true },
-    ],
+    clips: standardClips("walk", 70, 16, 50),
     body: [34, 18, 44],
     speed: 10,
     radius: 128,

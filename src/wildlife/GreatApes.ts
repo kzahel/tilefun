@@ -1,4 +1,5 @@
 import type { FaunaProfile } from "./Fauna.js";
+import { standardClips } from "./FaunaClips.js";
 
 /** Grounded great apes; climbing and brachiation are not part of this gait. */
 export const GREAT_APE_PROFILES: readonly FaunaProfile[] = [
@@ -11,36 +12,7 @@ export const GREAT_APE_PROFILES: readonly FaunaProfile[] = [
     size: 96,
     anchor: [48, 72],
     inspection: [103, -870],
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "walk",
-        start: 1,
-        count: 32,
-        frameDuration: 35.0,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 16,
-        frameDuration: 50,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 17.5,
-        loop: true,
-      },
-    ],
+    clips: standardClips("walk", 35, 16, 50),
     body: [14, 10, 24],
     speed: 14,
     radius: 144,
@@ -60,36 +32,7 @@ export const GREAT_APE_PROFILES: readonly FaunaProfile[] = [
     size: 96,
     anchor: [48, 72],
     inspection: [732, -28],
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "walk",
-        start: 1,
-        count: 32,
-        frameDuration: 50.0,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 16,
-        frameDuration: 50,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 25.0,
-        loop: true,
-      },
-    ],
+    clips: standardClips("walk", 50, 16, 50),
     body: [18, 12, 28],
     speed: 11.2,
     radius: 144,
