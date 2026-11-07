@@ -10,6 +10,29 @@ import {
 import { PHYSICS_DT, PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
 import type { MotionIntent, PhysicsBodyState } from "./PhysicsState.js";
 
+/** Hollow/articulated chassis keep the ordinary chassis box's mass distribution:
+ * their parts define contact only, and moving equipment does not move the centre
+ * of mass. Half extents in metres, in the collider frame. */
+export function setChassisBoxMass(
+  desc: RAPIER.ColliderDesc,
+  hx: number,
+  halfHeight: number,
+  hz: number,
+  mass: number,
+) {
+  const b = halfHeight;
+  desc.setMassProperties(
+    mass,
+    { x: 0, y: 0, z: 0 },
+    {
+      x: (mass / 3) * (b * b + hz * hz),
+      y: (mass / 3) * (hx * hx + hz * hz),
+      z: (mass / 3) * (hx * hx + b * b),
+    },
+    { x: 0, y: 0, z: 0, w: 1 },
+  );
+}
+
 /** The hollow, articulated dump-truck body in the shared world. One compound
  * collider follows the tub angle; the scene's fixed step owns the angle clock, so
  * authority and numerical replay pose the same parts at the same tick. */
@@ -47,22 +70,6 @@ export class DumpBedBody {
 
   colliderDesc() {
     return new RAPIER.ColliderDesc(this.compound(this.shapeTilt));
-  }
-
-  /** Keep the ordinary chassis box's mass distribution: the hollow parts define
-   * contact only, and raising the tub does not move the centre of mass. */
-  setMass(desc: RAPIER.ColliderDesc, hx: number, hz: number, mass: number) {
-    const b = this.halfY - this.clearance / 2;
-    desc.setMassProperties(
-      mass,
-      { x: 0, y: 0, z: 0 },
-      {
-        x: (mass / 3) * (b * b + hz * hz),
-        y: (mass / 3) * (hx * hx + hz * hz),
-        z: (mass / 3) * (hx * hx + b * b),
-      },
-      { x: 0, y: 0, z: 0, w: 1 },
-    );
   }
 
   initialState(entity: Entity): Pick<PhysicsBodyState, "bedTilt" | "bedTarget"> {

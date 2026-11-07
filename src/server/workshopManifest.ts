@@ -105,6 +105,7 @@ export async function workshopInputDigest(root = ".") {
     "src/workshop/PhysicsViewport.ts",
     "src/workshop/physics.css",
     "src/workshop/TruckBedCandidate.ts",
+    "src/workshop/EquipmentCandidate.ts",
     "src/workshop/TransporterCandidate.ts",
     "src/rendering/TransporterPose.ts",
     "src/rendering/TransporterFallback.ts",

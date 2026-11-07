@@ -10,7 +10,7 @@ import { DUMP_BED, hasDumpBed } from "../traffic/DumpBed.js";
 import { boardingDistance } from "../traffic/VehicleSeats.js";
 import { createFauna } from "../wildlife/Fauna.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
-import { controlDumpBed } from "./DumpBedControl.js";
+import { runEquipment } from "./EquipmentControl.js";
 import { HORN_STARTLE_RADIUS } from "./HornReaction.js";
 import { PlayerSession } from "./PlayerSession.js";
 
@@ -413,8 +413,8 @@ it("tips and lowers a dump bed through ordinary requests, locks driving and surv
     const tip = { entityId: truck.id, action: "tip" as const };
     const far = new PlayerSession("far-away", createPlayer(1000, 1000));
     far.editorEnabled = false;
-    expect(() => controlDumpBed(s.realm.vehicles, far, tip)).toThrow(/Stand beside/);
-    await s.command({ kind: "vehicle-bed", entityId: truck.id, action: "tip" });
+    expect(() => runEquipment(s.realm.vehicles, far, tip)).toThrow(/Stand beside/);
+    await s.command({ kind: "vehicle-equipment", entityId: truck.id, action: "tip" });
     expect(truck.vehicleBedTarget).toBeCloseTo(DUMP_BED.maxTilt, 5);
     for (let i = 0; i < 60; i++) await s.step(idle);
     const partial = required(truck.vehicleBedTilt);
@@ -433,14 +433,14 @@ it("tips and lowers a dump bed through ordinary requests, locks driving and surv
     const start = { ...truck.position };
     for (let i = 0; i < 60; i++) await s.step({ ...idle, dx: 1 });
     expect(Math.hypot(truck.position.wx - start.wx, truck.position.wy - start.wy)).toBeLessThan(1);
-    await s.command({ kind: "vehicle-bed", entityId: truck.id, action: "lower" });
+    await s.command({ kind: "vehicle-equipment", entityId: truck.id, action: "lower" });
     for (let i = 0; i < 240; i++) await s.step(idle);
     expect(truck.vehicleBedTilt).toBeUndefined();
     for (let i = 0; i < 60; i++) await s.step({ ...idle, dx: 1 });
     expect(truck.position.wx - start.wx).toBeGreaterThan(10);
-    expect(() =>
-      controlDumpBed(s.realm.vehicles, s.player, { ...tip, entityId: truck.id }),
-    ).toThrow(/stop/);
+    expect(() => runEquipment(s.realm.vehicles, s.player, { ...tip, entityId: truck.id })).toThrow(
+      /stop/,
+    );
   } finally {
     await s.close();
   }

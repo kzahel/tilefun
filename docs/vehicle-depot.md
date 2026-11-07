@@ -1,5 +1,7 @@
 # Vehicle depot
 
+> **Current (2026-11-07):** depot equipment works again through the shared equipment button ([222](tactical/222-shared-physics-dump-bed.md), [224](tactical/224-shared-physics-towing-and-transporter.md)); references below to the Actions menu are history.
+
 Eligible city speedways in the current regional generator have a **Vehicle depot**
 inside the oval. Open **Map · G / controller View**, find the orange truck icon,
 select the named depot button and choose **Travel to selected point**. Touch,

@@ -6,9 +6,8 @@ export default function DeferredVehiclePage() {
     <section>
       <h1>Vehicle equipment and services</h1>
       <p>
-        Towing, transporter apparatus, boats and train services are deferred during the physics
-        reset. Vehicle models and static layout studies remain available. The dump-truck bed is
-        playable again in the vehicle dynamics course.
+        This old lab address has moved. The dump bed, tow truck and car transporter are playable in
+        the vehicle dynamics course (bed, tow and transport starts) and in the game.
       </p>
       <p>
         <Link to="/tool/traffic">Open basic driving</Link> ·{" "}

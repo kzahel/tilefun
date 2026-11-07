@@ -9,7 +9,7 @@ const RESPONSES = {
   "enter-vehicle": "vehicle-controlled",
   "exit-vehicle": "vehicle-controlled",
   "recover-vehicle": "vehicle-controlled",
-  "vehicle-bed": "vehicle-controlled",
+  "vehicle-equipment": "vehicle-controlled",
   "set-player-model": "player-model-set",
   "load-world": "world-loaded",
   "create-world": "world-created",

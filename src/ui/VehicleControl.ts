@@ -3,9 +3,8 @@ import { actionHint, inputHint } from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { nearestStationBench } from "../railway/StationBench.js";
 import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
-import { isVehicleOverturned } from "../traffic/Vehicle.js";
-import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/VehicleSeats.js";
-import { type EquipmentRequest, equipmentPrompt } from "./VehicleEquipment.js";
+import { occupiedVehicle } from "../traffic/VehicleSeats.js";
+import { driveCandidate, type EquipmentRequest, equipmentPrompt } from "./VehicleEquipment.js";
 
 type VehicleRequest =
   | { type: "call-train"; benchId: number }
@@ -52,19 +51,7 @@ export class VehicleControl {
     const p = view.playerEntity,
       entities = view.entities,
       current = occupiedVehicle(p, entities);
-    const candidate =
-      current ??
-      entities
-        .filter(
-          (e) =>
-            isDrivable(e) &&
-            !isVehicleOverturned(e) &&
-            !entities.some((other) => other.parentId === e.id) &&
-            Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) <= 3 &&
-            Math.abs((e.wz ?? 0) - (p.wz ?? 0)) <= 12 &&
-            boardingDistance(p, e) <= 32,
-        )
-        .sort((a, b) => boardingDistance(p, a) - boardingDistance(p, b) || a.id - b.id)[0];
+    const candidate = current ?? driveCandidate(p, entities);
     const equipment = equipmentPrompt(view, allowed);
     this.equipment = equipment;
     this.equipmentButton.hidden = !equipment;

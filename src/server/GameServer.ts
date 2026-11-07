@@ -37,7 +37,7 @@ import {
 } from "../shared/requests.js";
 import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
 import { DoorTransitions } from "./DoorTransitions.js";
-import { controlDumpBed } from "./DumpBedControl.js";
+import { runEquipment } from "./EquipmentControl.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { RealmDirectory } from "./RealmDirectory.js";
@@ -813,8 +813,8 @@ export class GameServer {
         () => this.controlVehicle(session, (v) => v.recover(session, vehicleId(msg.entityId))),
         noFields,
       ),
-    "vehicle-bed": ({ msg, session, respond }) =>
-      respond(() => this.controlVehicle(session, (v) => controlDumpBed(v, session, msg)), noFields),
+    "vehicle-equipment": ({ msg, session, respond }) =>
+      respond(() => this.controlVehicle(session, (v) => runEquipment(v, session, msg)), noFields),
     "exit-vehicle": ({ session, respond }) =>
       respond(() => this.controlVehicle(session, (v) => v.exit(session)), noFields),
     "set-player-model": ({ msg, session, respond }) =>

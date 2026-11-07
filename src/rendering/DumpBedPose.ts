@@ -6,7 +6,6 @@ import {
   clampBedTilt,
   DUMP_BED,
   gateAngleForTilt,
-  hasDumpBed,
   pitchAbout,
 } from "../traffic/DumpBed.js";
 import type { EquipmentPose } from "./EquipmentPose.js";
@@ -18,13 +17,6 @@ export function bedTilt(e: EquipmentPose): number {
 }
 export function bedGateAngle(e: EquipmentPose): number {
   return gateAngleForTilt(bedTilt(e));
-}
-
-/** The articulated tub and tailgate pose for a dump truck's mesh; empty otherwise. */
-export function dumpBedMeshPose(entity: { type: string; vehicleBedTilt?: number }) {
-  if (!hasDumpBed(entity)) return {};
-  const tilt = clampBedTilt(entity.vehicleBedTilt);
-  return { bedTilt: tilt, bedGateAngle: gateAngleForTilt(tilt) };
 }
 
 export function bedFramePoint(e: EquipmentPose, x: number, y: number, z = DUMP_BED.floorZ) {

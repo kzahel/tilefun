@@ -1,6 +1,7 @@
 import { createBall } from "../entities/Ball.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
+import { TOW, towAnchors } from "../traffic/Towing.js";
 import { createVehicle } from "../traffic/Vehicle.js";
 import { FLAT_SCENARIO, type ScenarioRecipe, scenarioWalls } from "./ScenarioRecipe.js";
 import { surfaceProp } from "./WorldGeometryRecipe.js";
@@ -14,7 +15,27 @@ export const DYNAMICS_STARTS = {
   ramp: { position: { wx: -80, wy: 0 }, z: 28 },
   roof: { position: { wx: -280, wy: 0 }, z: 24 },
   bed: { position: { wx: -250, wy: -126 }, z: 0 },
+  tow: { position: { wx: 300, wy: 186 }, z: 0 },
+  transport: { position: { wx: 150, wy: 270 }, z: 0 },
 };
+/** Equipment yard (south-east): a tow truck backed up to a compact car's front
+ * wheels, and a car transporter with a beetle parked behind its ramp. */
+function equipmentYard(route: keyof typeof DYNAMICS_STARTS) {
+  if (route !== "tow" && route !== "transport") return [];
+  const front = towAnchors({ type: "vehicle-v1:compact-1" }).car.x;
+  return [
+    { name: "tow-truck", model: "tow-truck", wx: 340, wy: 160, facing: Direction.Right },
+    {
+      name: "tow-car",
+      model: "compact-1",
+      wx: 340 + TOW.hitch - front - 4,
+      wy: 160,
+      facing: Direction.Right,
+    },
+    { name: "transporter", model: "car-transporter", wx: 400, wy: 240, facing: Direction.Right },
+    { name: "beetle", model: "beetle", wx: 150, wy: 240, facing: Direction.Right },
+  ];
+}
 /** Loose balls resting in the parked dump truck's bed for the tipping start. */
 function bedCargo() {
   return [
@@ -30,7 +51,11 @@ export function vehicleDynamicsRecipe(
 ): ScenarioRecipe {
   const start = DYNAMICS_STARTS[route];
   const car =
-    route === "ramp" || route === "roof" || route === "bed"
+    route === "ramp" ||
+    route === "roof" ||
+    route === "bed" ||
+    route === "tow" ||
+    route === "transport"
       ? { wx: -280, wy: 0, facing: Direction.Right }
       : route === "passage"
         ? { wx: 80, wy: 120, facing: Direction.Up }
@@ -127,6 +152,7 @@ export function vehicleDynamicsRecipe(
       },
       { name: "truck", model: "dump-truck", wx: -240, wy: -160, facing: Direction.Right },
       { name: "overlap-car", model: "compact-1", wx: -200, wy: -216, facing: Direction.Down },
+      ...equipmentYard(route),
     ],
   };
 }

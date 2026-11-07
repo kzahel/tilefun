@@ -16649,9 +16649,9 @@
       "batchId": "world-geometry",
       "kind": "geometry",
       "name": "Tipping dump-truck bed",
-      "prompt": "Jump into the hollow bed, ride while driving and turning, then Tip bed / Lower bed (F, D-pad down or touch). Balls should stay inside while driving and roll out of the open tailgate when tipped. Shared game physics; existing v2 truck model; no art promotion.",
+      "prompt": "Jump into the hollow bed, ride while driving and turning, then Tip bed / Lower bed (F, D-pad down or touch). Balls should stay inside while driving and roll out of the open tailgate when tipped. Shared game physics and existing models; no art promotion.",
       "url": "/tilefun/workshop.html?geometry=car-dynamics&route=bed#/tool/world-geometry",
-      "fingerprint": "03797abc6ff71d8f5804a1c229062939fb89cf33921617b4691a0392a00d5a8d",
+      "fingerprint": "2248cb4e789f4b4874534c40f8644213ced72f48cc70e2f2bc4b19f9191afa30",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -16659,20 +16659,20 @@
       "batchId": "world-geometry",
       "kind": "geometry",
       "name": "Wheel-lift tow truck",
-      "prompt": "Historical specialized vehicle simulation, deferred during physics reset 205. Models and static studies remain; basic driving uses the common game kernel.",
-      "url": "/tilefun/workshop.html?geometry=towing#/tool/world-geometry",
-      "excluded": "Deferred interactive feature; no current physics qualification or art approval.",
-      "fingerprint": "94918aca1145a4f30c98f84597951e20f008e8d9fc945934e9f5d8b2c2733597"
+      "prompt": "Attach car (F, D-pad down or touch) lifts the parked compact's front wheels; drive, turn and reverse, then Release car. Shared game physics and existing models; no art promotion.",
+      "url": "/tilefun/workshop.html?geometry=car-dynamics&route=tow#/tool/world-geometry",
+      "fingerprint": "267afe4e52bb93ed77cb8574e4187c83399320992460917ac601dc9053d7fae1",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
       "id": "geometry:car-transporter-v2",
       "batchId": "world-geometry",
       "kind": "geometry",
       "name": "Single-car transporter",
-      "prompt": "Historical specialized vehicle simulation, deferred during physics reset 205. Models and static studies remain; basic driving uses the common game kernel.",
-      "url": "/tilefun/workshop.html?geometry=transporter#/tool/world-geometry",
-      "excluded": "Deferred interactive feature; no current physics qualification or art approval.",
-      "fingerprint": "dab95799a1c4f76e81cf0504d8c58a2ce753e11f086ef15585db0c4ecdddadef"
+      "prompt": "Deploy ramp, drive the beetle up onto the deck, get out and Stow ramp to secure it; drive the transporter, then Deploy ramp and reverse the beetle down. Walk up the ramp on foot too. Shared game physics and existing models; no art promotion.",
+      "url": "/tilefun/workshop.html?geometry=car-dynamics&route=transport#/tool/world-geometry",
+      "fingerprint": "c3709f3fa589490866c3eca78015e0d99d2dda8becdb7bbfe605f6a91ed659e2",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
       "id": "geometry:train-loop-v1",
@@ -56188,5 +56188,5 @@
       }
     }
   ],
-  "inputDigest": "8a4942782fd0e2824d29aaefe11045adff354a9a6da9a10661256e0584143111"
+  "inputDigest": "8b0ab75221233974fdd0f98a42989bb5425f49ea9b1b85e5c9ddff8fd388d60f"
 }

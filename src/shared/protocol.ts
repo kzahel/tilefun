@@ -48,7 +48,12 @@ export type ClientMessage =
   | { type: "enter-vehicle"; requestId: number; entityId: number }
   | { type: "exit-vehicle"; requestId: number }
   | { type: "recover-vehicle"; requestId: number; entityId: number }
-  | { type: "vehicle-bed"; requestId: number; entityId: number; action: "tip" | "lower" }
+  | {
+      type: "vehicle-equipment";
+      requestId: number;
+      entityId: number;
+      action: import("../traffic/VehicleEquipment.js").EquipmentAction;
+    }
   | {
       type: "edit-room";
       roomId: string;
@@ -231,6 +236,11 @@ export interface EntitySnapshot {
   /** Hinged dump bed angle/target in radians; the shared physics step owns the clock. */
   vehicleBedTilt?: number;
   vehicleBedTarget?: number;
+  towTargetId?: number;
+  towedBy?: number;
+  vehicleRamp?: number;
+  transportLoadId?: number;
+  transportedBy?: number;
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

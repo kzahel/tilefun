@@ -2,7 +2,10 @@ import { isBoat } from "../boats/Boat.js";
 import type { ClientStateView } from "../client/ClientStateView.js";
 import type { Entity } from "../entities/Entity.js";
 import { hasDumpBed } from "../traffic/DumpBed.js";
+import { isTowTruck, towCandidate } from "../traffic/Towing.js";
+import { boardingHeightLimit, isTransporter } from "../traffic/Transporter.js";
 import { isVehicleOverturned } from "../traffic/Vehicle.js";
+import { EQUIPMENT_LABELS, type EquipmentAction } from "../traffic/VehicleEquipment.js";
 import {
   boardingDistance,
   isDrivable,
@@ -12,7 +15,7 @@ import {
 
 export type EquipmentRequest =
   | { type: "recover-vehicle"; entityId: number }
-  | { type: "vehicle-bed"; entityId: number; action: "tip" | "lower" };
+  | { type: "vehicle-equipment"; entityId: number; action: EquipmentAction };
 
 function nearest(
   player: Entity,
@@ -31,8 +34,35 @@ function nearest(
     .sort((a, b) => boardingDistance(player, a) - boardingDistance(player, b) || a.id - b.id)[0];
 }
 
-/** The one contextual equipment action: right an overturned car, otherwise tip or
- * lower a stopped dump bed for its driver or a person beside or inside the bed. */
+/** The nearest stopped, upright, empty vehicle the player can get into. Cars held
+ * by a tow truck or transporter stay closed; a car on a deck is reached from the ground. */
+export function driveCandidate(player: Entity, entities: readonly Entity[]): Entity | undefined {
+  return entities
+    .filter(
+      (e) =>
+        isDrivable(e) &&
+        !isVehicleOverturned(e) &&
+        (e.towedBy ?? e.transportedBy) === undefined &&
+        !entities.some((other) => other.parentId === e.id) &&
+        Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) <= 3 &&
+        Math.abs((e.wz ?? 0) - (player.wz ?? 0)) <= boardingHeightLimit(e, entities) &&
+        boardingDistance(player, e) <= 32,
+    )
+    .sort((a, b) => boardingDistance(player, a) - boardingDistance(player, b) || a.id - b.id)[0];
+}
+
+const hasEquipment = (e: Entity) => hasDumpBed(e) || isTowTruck(e) || isTransporter(e);
+
+/** The next useful action for one stopped equipment vehicle, if any. */
+function equipmentAction(truck: Entity, entities: readonly Entity[]): EquipmentAction | undefined {
+  if (hasDumpBed(truck)) return (truck.vehicleBedTarget ?? 0) > 0 ? "lower" : "tip";
+  if (isTransporter(truck)) return truck.vehicleRamp === 1 ? "stow" : "deploy";
+  if (truck.towTargetId !== undefined) return "release";
+  return towCandidate(truck, entities) ? "attach" : undefined;
+}
+
+/** The one contextual equipment action: right an overturned car; otherwise the
+ * next dump-bed, tow or transporter action for its driver or a person beside it. */
 export function equipmentPrompt(
   view: Pick<ClientStateView, "playerEntity" | "entities" | "editorEnabled">,
   allowed: boolean,
@@ -46,16 +76,17 @@ export function equipmentPrompt(
     nearest(player, entities, (e) => isDrivable(e) && !isBoat(e) && isVehicleOverturned(e), 16);
   if (recovery && !isBoat(recovery) && isVehicleOverturned(recovery))
     return { request: { type: "recover-vehicle", entityId: recovery.id }, label: "Right car" };
-  const bed = current
+  const truck = current
     ? current
     : player.parentId === undefined && player.jumpVZ === undefined
-      ? nearest(player, entities, (e) => hasDumpBed(e) && !isVehicleOverturned(e), 64)
+      ? nearest(player, entities, (e) => hasEquipment(e) && !isVehicleOverturned(e), 64)
       : undefined;
-  if (!bed || !hasDumpBed(bed) || Math.hypot(bed.velocity?.vx ?? 0, bed.velocity?.vy ?? 0) > 3)
-    return null;
-  const lowering = (bed.vehicleBedTarget ?? 0) > 0;
-  return {
-    request: { type: "vehicle-bed", entityId: bed.id, action: lowering ? "lower" : "tip" },
-    label: lowering ? "Lower bed" : "Tip bed",
-  };
+  if (!truck || Math.hypot(truck.velocity?.vx ?? 0, truck.velocity?.vy ?? 0) > 3) return null;
+  const action = equipmentAction(truck, entities);
+  return action
+    ? {
+        request: { type: "vehicle-equipment", entityId: truck.id, action },
+        label: EQUIPMENT_LABELS[action],
+      }
+    : null;
 }

@@ -296,3 +296,40 @@ test("dump bed tips and lowers through the shared touch/keyboard control and dis
   await expect(page.getByRole("button", { name: /^Tip bed/ })).toBeVisible();
   expect(errors).toEqual([]);
 });
+
+test("tow truck and car transporter work through the shared equipment control", async ({
+  page,
+}) => {
+  test.setTimeout(90000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/tilefun/workshop.html?geometry=car-dynamics&route=tow#/tool/world-geometry");
+  const canvas = page.getByLabel("World geometry scene");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  await expect(canvas).toHaveAttribute("data-renderer", "gpu");
+  await expect(page.getByRole("button", { name: /^Attach car/ })).toBeVisible();
+  await canvas.focus();
+  await page.keyboard.press("f");
+  await expect(canvas).toHaveAttribute("data-tow-linked", "true");
+  await expect(page.getByRole("button", { name: /^Release car/ })).toBeVisible();
+  await canvas.screenshot({ path: test.info().outputPath("tow-attached.png") });
+  await page.getByRole("button", { name: /^Release car/ }).click();
+  await expect(canvas).toHaveAttribute("data-tow-linked", "false");
+
+  await page.getByRole("button", { name: "transport", exact: true }).click();
+  await expect(canvas).toHaveAttribute("data-course-route", "transport");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  await page.evaluate(() =>
+    (
+      document.querySelector("[aria-label='World geometry scene']") as unknown as {
+        __command: (c: unknown) => Promise<void>;
+      }
+    ).__command({ kind: "teleport", position: { wx: 340, wy: 274 } }),
+  );
+  await page.getByRole("button", { name: /^Deploy ramp/ }).click();
+  await expect(canvas).toHaveAttribute("data-ramp-deployed", "true");
+  await canvas.screenshot({ path: test.info().outputPath("transporter-ramp.png") });
+  await page.getByRole("button", { name: /^Stow ramp/ }).click();
+  await expect(canvas).toHaveAttribute("data-ramp-deployed", "false");
+  expect(errors).toEqual([]);
+});

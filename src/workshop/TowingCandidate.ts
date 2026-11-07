@@ -1,9 +1,9 @@
-import { deferredVehicleCandidate } from "./DeferredVehicleCandidate.js";
+import { equipmentCandidate } from "./EquipmentCandidate.js";
 export function buildTowingCandidate() {
-  return deferredVehicleCandidate(
+  return equipmentCandidate(
     "geometry:wheel-lift-towing-v1",
     "Wheel-lift tow truck",
-    "/tilefun/workshop.html?geometry=towing#/tool/world-geometry",
-    "world-geometry",
+    "tow",
+    "Attach car (F, D-pad down or touch) lifts the parked compact's front wheels; drive, turn and reverse, then Release car.",
   );
 }

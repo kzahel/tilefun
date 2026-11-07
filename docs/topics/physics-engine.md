@@ -1,5 +1,11 @@
 # General 3D physics backend
 
+[224](../tactical/224-shared-physics-towing-and-transporter.md) adds joints:
+replicated tow/carry links become Rapier spherical/fixed impulse joints
+(`VehicleCouplings`) with contacts disabled between each pair. A deployed
+transporter ramp holds its truck as a fixed body. Body construction lives in
+`SceneBody.ts`. Frame `0x16`.
+
 [222](../tactical/222-shared-physics-dump-bed.md) adds the first articulated shared
 body: the dump truck's collider is a compound of posed convex parts, rebuilt as
 `bedTilt` steps toward `bedTarget` inside `PhysicsScene.step`. Static

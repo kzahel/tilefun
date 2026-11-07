@@ -71,7 +71,8 @@ export class VehicleChassis {
       z: p.y / SCALE,
     }));
   }
-  prepare(input: MotionIntent, heading: number, query: WheelQuery) {
+  /** @param coast free-rolling wheels (a towed car): no braking, lateral grip only. */
+  prepare(input: MotionIntent, heading: number, query: WheelQuery, coast = false) {
     const target = input.driveSpeed ?? 0;
     if (this.body.isSleeping() && target === 0) return [];
     if (target !== 0) this.body.wakeUp();
@@ -130,7 +131,7 @@ export class VehicleChassis {
       // Rear-wheel propulsion; front wheels steer through lateral tire contact.
       const drive = !this.front[i] ? engine / this.drivenWheels : 0;
       const brake =
-        target === 0
+        target === 0 && !coast
           ? clamp(
               (-dot(relative, longitudinal) * mass) / (2 * this.connections.length) / PHYSICS_DT,
               (mass * acceleration) / SCALE / this.connections.length,

@@ -6,6 +6,7 @@ import { PhysicsScene } from "../physics/PhysicsScene.js";
 import type { MotionIntent } from "../physics/PhysicsState.js";
 import { playerMotionIntent, vehicleMotionIntent } from "../physics/PlayerControls.js";
 import type { Movement } from "../shared/Movement.js";
+import { vehicleLinks } from "../traffic/VehicleLinks.js";
 import { isWildlife } from "../wildlife/WildlifeKinds.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
@@ -118,6 +119,8 @@ export class RealmPhysics {
     const scene = this.scene;
     if (!scene) throw Error("Realm physics is not initialized");
     this.participants = participants;
+    // Couplings publish resident partner IDs before the scene builds their joints.
+    if (this.realm.vehicleRegistry) vehicleLinks(this.realm.vehicleRegistry).tick();
     scene.synchronize(participants);
     scene.step(intents, this.environment(), gravity);
     this.realm.railways?.finish();

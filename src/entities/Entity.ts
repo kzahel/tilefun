@@ -133,6 +133,15 @@ export interface Entity {
   /** Dump-bed tilt and requested target in radians; the shared physics step owns the clock. */
   vehicleBedTilt?: number;
   vehicleBedTarget?: number;
+  /** Wheel-lift towing partners (tow truck → car, car → tow truck); see Towing. */
+  towTargetId?: number;
+  towedBy?: number;
+  /** Car transporter: 1 while the loading ramp is deployed; secured load partners. */
+  vehicleRamp?: number;
+  transportLoadId?: number;
+  transportedBy?: number;
+  /** Durable coupling by procedural identity; resolved to the runtime IDs above. Server-only. */
+  vehicleLink?: { kind: "tow" | "carry"; lead: boolean; partner: string };
   prevBodyRotation?: BodyRotation;
   bodyAngularVelocity?: AngularVelocity;
   /** Previous shared-step orientation for rendering. */

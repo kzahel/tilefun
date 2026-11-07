@@ -1,5 +1,7 @@
 # Vehicle towing
 
+> **Current (2026-11-07):** [224](tactical/224-shared-physics-towing-and-transporter.md) restores towing in the shared world. Use the equipment button (F, D-pad down or touch) beside or inside the tow truck: Attach car / Release car. The car is held by a physics joint; the Actions menu, cosmetic pose and fallback details below are history.
+
 Working wheel-lift towing is shared by the game and Tow truck playground.
 Open **Actions (B on controller, Q on keyboard)** to choose Attach/Release;
 D-pad/stick chooses, A confirms and B returns. Touch uses the Actions paddle.

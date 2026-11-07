@@ -383,9 +383,9 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 1138,
-      "worst": 96,
-      "overLimit": 8
+      "lines": 1037,
+      "worst": 83,
+      "overLimit": 7
     },
     "src/physics/rapier/ClippedTerrain.ts": {
       "lines": 75,
@@ -408,8 +408,8 @@
       "overLimit": 1
     },
     "src/physics/VehicleChassis.ts": {
-      "lines": 153,
-      "worst": 33,
+      "lines": 154,
+      "worst": 34,
       "overLimit": 1
     },
     "src/projection/CarProxyScene.ts": {
@@ -463,7 +463,7 @@
       "overLimit": 1
     },
     "src/rendering/DumpBedPose.ts": {
-      "lines": 116,
+      "lines": 108,
       "worst": 26,
       "overLimit": 1
     },
@@ -677,11 +677,6 @@
       "worst": 42,
       "overLimit": 1
     },
-    "src/server/VehicleControl.ts": {
-      "lines": 300,
-      "worst": 34,
-      "overLimit": 1
-    },
     "src/server/vitePlugin.ts": {
       "lines": 121,
       "worst": 26,
@@ -728,7 +723,7 @@
       "overLimit": 3
     },
     "src/traffic/VehicleRegistry.ts": {
-      "lines": 300,
+      "lines": 299,
       "worst": 26,
       "overLimit": 1
     },
@@ -748,7 +743,7 @@
       "overLimit": 1
     },
     "src/ui/VehicleControl.ts": {
-      "lines": 164,
+      "lines": 151,
       "worst": 51,
       "overLimit": 1
     },

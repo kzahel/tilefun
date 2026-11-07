@@ -1,9 +1,9 @@
-import { deferredVehicleCandidate } from "./DeferredVehicleCandidate.js";
+import { equipmentCandidate } from "./EquipmentCandidate.js";
 export function buildTransporterCandidate() {
-  return deferredVehicleCandidate(
+  return equipmentCandidate(
     "geometry:car-transporter-v2",
     "Single-car transporter",
-    "/tilefun/workshop.html?geometry=transporter#/tool/world-geometry",
-    "world-geometry",
+    "transport",
+    "Deploy ramp, drive the beetle up onto the deck, get out and Stow ramp to secure it; drive the transporter, then Deploy ramp and reverse the beetle down. Walk up the ramp on foot too.",
   );
 }

@@ -99,6 +99,11 @@ const ENTITY_FIELDS: { readonly [K in FieldKey]: EntityField<K> } = {
   physicsGroupId: { key: "physicsGroupId", bit: 17, wire: U32 },
   vehicleBedTilt: { key: "vehicleBedTilt", bit: 18, wire: F32 },
   vehicleBedTarget: { key: "vehicleBedTarget", bit: 19, wire: F32 },
+  towTargetId: { key: "towTargetId", bit: 20, wire: U32 },
+  towedBy: { key: "towedBy", bit: 21, wire: U32 },
+  vehicleRamp: { key: "vehicleRamp", bit: 22, wire: U8 },
+  transportLoadId: { key: "transportLoadId", bit: 23, wire: U32 },
+  transportedBy: { key: "transportedBy", bit: 24, wire: U32 },
 };
 
 /** Every replicated field in wire order (index === `bit`). */

@@ -10,7 +10,7 @@ import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { validateSurfacePatch } from "../physics/SurfacePatch.js";
 import { validateExcavations } from "../physics/TerrainExcavation.js";
 import { RoadType } from "../road/RoadType.js";
-import { controlDumpBed } from "../server/DumpBedControl.js";
+import { runEquipment } from "../server/EquipmentControl.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
 import {
@@ -349,7 +349,7 @@ export class ScenarioSession {
       case "call-train":
       case "enter-vehicle":
       case "recover-vehicle":
-      case "vehicle-bed":
+      case "vehicle-equipment":
       case "exit-vehicle":
         return this.seatCommand(command);
       case "view-range":
@@ -378,7 +378,7 @@ export class ScenarioSession {
       await this.realm.railways.call(session, command.benchId);
     } else if (command.kind === "enter-vehicle") vehicles.enter(session, command.entityId);
     else if (command.kind === "recover-vehicle") vehicles.recover(session, command.entityId);
-    else if (command.kind === "vehicle-bed") controlDumpBed(vehicles, session, command);
+    else if (command.kind === "vehicle-equipment") runEquipment(vehicles, session, command);
     else vehicles.exit(session);
   }
   frames(): ArrayBuffer[] {

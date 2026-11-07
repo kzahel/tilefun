@@ -1,5 +1,12 @@
 # Vehicles: shared physics baseline
 
+[224](../tactical/224-shared-physics-towing-and-transporter.md) restores wheel-lift
+towing (a spherical joint at the cradle; the car coasts on its rear axle) and the
+car transporter (a deck/ramp compound, an anchored truck while deployed, and a
+car secured by a fixed joint on stow). Couplings persist by identity and replicate
+as runtime IDs. The dump bed, tow truck and transporter share one equipment
+button and request. Depot lanes work again. Racers and parking visitors remain.
+
 [222](../tactical/222-shared-physics-dump-bed.md) restores the dump bed in the
 shared world: a hollow compound body, a tilt clock owned by the physics step
 (stopped trucks only, drive lock while raised, static obstruction holds a step),
@@ -11,9 +18,8 @@ Towing, transporters and parking remain deferred. Owner play review is next.
 [219](../tactical/219-vehicle-contact-and-train-continuity.md) removes premature
 manual chassis sleeping: it discarded spring impulses/velocity before equilibrium,
 allowing nearby contacts to restart a multi-pixel dip/hop. Ordinary Rapier island
-sleeping retains suspension settling and parked efficiency. Tow and transporter
-controls are still retired, not missing due to touch layout; restoring them requires
-articulated collision/authority in the shared world (222 did this for the dump bed).
+sleeping retains suspension settling and parked efficiency. Dump bed (222), tow and
+transporter (224) controls are restored in the shared world.
 
 
 [218](../tactical/218-traffic-and-rail-gameplay-recovery.md) fixes wider-turn
@@ -34,7 +40,7 @@ separate follow-on work.
 [216](../tactical/216-dynamic-3d-vehicles.md) delivers freely rotating land-vehicle chassis, authored axle suspension/traction, full replay/save state, shared depth and recovery. Game and labs share the default controller; native/browser qualification passes; owner feel review is next. The physical Chromebook course works, with 16.7/33.4/33.4ms frame p50/p95/p99 in the latest short development smoke; this is not a matched performance comparison. Boats retain their upright watercraft behavior.
 
 
-Status: dynamic land-vehicle chassis and shared depth delivered in 216; ready for owner feel review. Dump bed restored in 222. Shared road traffic and driving audio remain.
+Status: dynamic land-vehicle chassis and shared depth delivered in 216; ready for owner feel review. Dump bed (222), towing and transporter (224) restored. Shared road traffic and driving audio remain.
 Updated: 2026-11-07.
 
 [209](../tactical/209-car-driving-and-autonomous-traffic.md) restores shared rolling
@@ -59,8 +65,8 @@ performance. The owner reports driving looks good; the subsequent seated-footste
 fix and engine follow-up are recorded below. Reload host and guests together for
 the updated numerical frame format.
 
-Parking visitors/racers, wheel-lift towing and transporter
-apparatus are deferred (the tipping bed and cargo return in 222). Their old motion services
+Parking visitors/racers are deferred (the tipping bed returns in 222; towing and
+the transporter in 224). Their old motion services
 and authority/UI commands are removed. Saved traffic poses remain readable in the
 existing collection; obsolete legacy routes/coupling remain discarded. Models,
 paints, approved pixels and static layout planners remain unchanged.

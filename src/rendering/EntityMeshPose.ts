@@ -3,7 +3,7 @@ import { emergencyEnabled } from "../traffic/EmergencyVehicle.js";
 import { isVehicle } from "../traffic/Vehicle.js";
 import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForType } from "./AuthoredVehicleMeshes.js";
-import { dumpBedMeshPose } from "./DumpBedPose.js";
+import { equipmentMeshPose } from "./EquipmentMeshPose.js";
 import { COMPACT_CAR_MESH, type MeshInstance, vehicleMeshRadius } from "./MeshPresentation.js";
 
 interface Pose {
@@ -150,7 +150,7 @@ export class EntityMeshPose {
     if (entity.bodyRotation) pose.orientation.splice(0, 4, ...entity.bodyRotation);
     pose.instance.physical = !!entity.bodyRotation;
     pose.instance.emergencyEnabled = emergencyEnabled(entity.emergencyState);
-    Object.assign(pose.instance, dumpBedMeshPose(entity));
+    Object.assign(pose.instance, equipmentMeshPose(entity));
     // A pooled presentation ID can change paint without changing its mesh asset.
     if (entity.paintSchemeId === undefined) delete pose.instance.paintSchemeId;
     else pose.instance.paintSchemeId = entity.paintSchemeId;

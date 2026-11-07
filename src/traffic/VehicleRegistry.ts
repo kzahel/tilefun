@@ -17,7 +17,6 @@ import { generateUUID } from "../shared/uuid.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
-import { restoreSavedBed, savedBed, validSavedBed } from "./DumpBed.js";
 import { validVehicleLightState } from "./EmergencyVehicle.js";
 import type { LaneGraph } from "./LaneGraph.js";
 import { RoadTraffic } from "./RoadTraffic.js";
@@ -28,11 +27,12 @@ import {
   DRIVABLE_MODELS,
   vehicleCardinalHeading,
 } from "./Vehicle.js";
+import * as Equipment from "./VehicleEquipmentRecords.js";
 import { validVehiclePaint } from "./VehiclePaint.js";
 
 /** The old traffic collection remains readable, but route/equipment fields have
  * no runtime owner. Saved poses become independent ordinary shared-world bodies. */
-export interface SavedVehicle {
+export interface SavedVehicle extends Equipment.SavedEquipment {
   version?: 2;
   identity: string;
   model: string;
@@ -48,7 +48,6 @@ export interface SavedVehicle {
   vz?: number;
   paintSchemeId?: string;
   emergencyState?: number;
-  bed?: readonly [tilt: number, target: number]; // Dump bed, radians.
   persistentId?: string;
   originScope?: string;
   autonomous?: boolean;
@@ -204,7 +203,7 @@ export class VehicleRegistry {
       ...(route ? { route: { ...route } } : {}),
       ...(e.paintSchemeId === undefined ? {} : { paintSchemeId: e.paintSchemeId }),
       ...(e.emergencyState === undefined ? {} : { emergencyState: e.emergencyState }),
-      ...savedBed(e),
+      ...Equipment.savedEquipment(e),
     };
   }
   save(): SavedVehicle[] {
@@ -254,7 +253,7 @@ export class VehicleRegistry {
         (record.facing !== undefined && ![0, 1, 2, 3].includes(record.facing)) ||
         (record.emergencyState !== undefined &&
           !validVehicleLightState({ type: `vehicle-v1:${record.model}` }, record.emergencyState)) ||
-        !validSavedBed(record.model, record.bed)
+        !Equipment.validSavedEquipment(record.model, record)
       )
         throw Error("Invalid saved vehicle pose, model, paint, lights or bed");
       const existing = [...this.states.values()].find(
@@ -285,7 +284,7 @@ export class VehicleRegistry {
       if (record.bodyAngularVelocity) entity.bodyAngularVelocity = [...record.bodyAngularVelocity];
       if (record.vehicleHeading !== undefined) entity.vehicleHeading = record.vehicleHeading;
       if (record.emergencyState !== undefined) entity.emergencyState = record.emergencyState;
-      restoreSavedBed(entity, record.bed);
+      Equipment.restoreSavedEquipment(entity, record);
       applyVehicleFacing(entity);
       this.entities.spawn(entity);
       const state: VehicleState = {

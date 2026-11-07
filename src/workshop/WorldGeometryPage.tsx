@@ -29,11 +29,11 @@ import {
 } from "../scenarios/VehicleGeometryRecipe.js";
 import { GEOMETRY_STARTS, worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import { required } from "../shared/required.js";
-import { recordDumpBed } from "../traffic/DumpBed.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { RACE_MODELS } from "../traffic/VehiclePerformance.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import DeferredVehiclePage from "./DeferredVehiclePage.js";
+import { recordEquipment } from "./EquipmentDiagnostics.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
 
 export type GeometryCanvas = HTMLCanvasElement & {
@@ -253,7 +253,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
           );
           c.dataset.carRotation = JSON.stringify(car.bodyRotation ?? null);
         }
-        recordDumpBed(c.dataset, h.session.view.entities, h.session.handles.truck);
+        recordEquipment(c.dataset, h.session.view.entities, h.session.handles);
         const traffic = h.session.view.entities.filter(
           (e) => e.type.startsWith("vehicle-v1:") && e.id !== h.session.handles.car,
         );
@@ -350,11 +350,11 @@ function GeometryFixtures({ initial }: { initial: string }) {
             : "Walk ramps, cross bridges, pass underneath and drive freely rotating cars. "}
           Arrows/WASD move, Space jumps, E enters or leaves a nearby car. Driving: ↑/W forward, ↓/S
           reverse, ←/→ or A/D steer. R also reverses. Touch and controller use the same controls. F
-          / D-pad down rights an overturned car or tips a stopped dump-truck bed.
+          / D-pad down rights an overturned car or works stopped equipment (dump bed, tow, ramp).
           {fixture === "car-dynamics" &&
             " Main lane: bridge ascent/descent. South: jump ramp. North: narrow tipping ledge and overlapping cars. Ramp and roof starts let you jump in place to inspect shadows and landing dust. "}
           At a station bench, E / Interact calls the train; nearby vehicle roofs give a higher jump.
-          The bed start loads balls into the dump truck. Towing and transporters remain deferred.
+          Bed, tow and transport starts set up each machine.
         </p>
       )}
       <label>

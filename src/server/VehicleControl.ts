@@ -19,6 +19,7 @@ import {
   isWarningVehicle,
   nextVehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
+import { boardingHeightLimit } from "../traffic/Transporter.js";
 import { isVehicle, isVehicleOverturned } from "../traffic/Vehicle.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import { boardingDistance, isDrivable, vehicleVerticalDistance } from "../traffic/VehicleSeats.js";
@@ -108,6 +109,8 @@ export class VehicleControl {
     if (!vehicle || !isDrivable(vehicle) || !vehicle.collider || !car)
       throw Error("Vehicle unavailable.");
     if (car.driverId !== undefined) throw Error("Someone is already driving.");
+    if (vehicle.towedBy !== undefined || vehicle.transportedBy !== undefined)
+      throw Error("Release this car from its truck first.");
     if (
       !restore &&
       (session.editorEnabled ||
@@ -115,7 +118,8 @@ export class VehicleControl {
         session.retired ||
         session.gameplaySession.mountId !== null ||
         boardingDistance(session.player, vehicle) > 32 ||
-        Math.abs((session.player.wz ?? 0) - (vehicle.wz ?? 0)) > 12)
+        Math.abs((session.player.wz ?? 0) - (vehicle.wz ?? 0)) >
+          boardingHeightLimit(vehicle, r.entityManager.entities))
     )
       throw Error("Stand beside the vehicle to enter.");
     if (!restore && Math.hypot(vehicle.velocity?.vx ?? 0, vehicle.velocity?.vy ?? 0) > 3)

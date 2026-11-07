@@ -1,5 +1,7 @@
 # Single-car transporter
 
+> **Current (2026-11-07):** [224](tactical/224-shared-physics-towing-and-transporter.md) restores the transporter in the shared world. Use the equipment button (F, D-pad down or touch): Deploy ramp, drive a car aboard, get out, Stow ramp (this secures the car); Deploy ramp again releases it. The Actions menu and kinematic details below are history.
+
 The normal **Car transporter** in **Edit → Vehicles** carries one real passenger
 car. It also participates in ordinary eligible road traffic; parked placements
 work in existing roadless worlds. [Vehicles](topics/vehicles.md) owns current
