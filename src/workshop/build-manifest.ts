@@ -19,6 +19,7 @@ import { buildOriginalVehicleCandidates } from "./OriginalVehicleCandidates.js";
 import { buildParkingVisitCandidate } from "./ParkingVisitCandidate.js";
 import { buildPatternCandidate, TREE_PATTERN_CASES } from "./PatternCandidates.js";
 import { buildPhysicsCandidate } from "./PhysicsCandidate.js";
+import { buildRacetrackCandidate } from "./RacetrackCandidate.js";
 import { buildRailwayCandidates } from "./RailwayCandidates.js";
 import { artReviewDefinitions, buildArtCandidate } from "./ReviewCandidates.js";
 import { CITY_BATCHES, WORKSHOP_TOOLS, workshopToolMetadata } from "./ToolRegistry.js";
@@ -100,6 +101,7 @@ try {
     () => buildTruckBedCandidate(),
     () => buildTowingCandidate(),
     () => buildTransporterCandidate(),
+    () => buildRacetrackCandidate(),
     () => buildCurvedTrainCandidate(true),
     () => buildCurvedTrainCandidate(false),
     () => buildCityTrainCandidate(),

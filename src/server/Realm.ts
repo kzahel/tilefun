@@ -63,6 +63,7 @@ import { RailwayServices } from "../railway/RailwayServices.js";
 import { RailwayStrategy } from "../railway/RailwayStrategy.js";
 import type { Movement } from "../shared/Movement.js";
 import type { ClientMessage } from "../shared/protocol.js";
+import { visitShopper } from "../traffic/ShoppingVisits.js";
 import { VehicleRegistry, type VehicleSource } from "../traffic/VehicleRegistry.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { WorkContext } from "../wildlife/AnimalWorkSystem.js";
@@ -1309,13 +1310,15 @@ export class Realm {
     const result = new Map<Entity, number>();
     for (const session of sessions)
       if (streaming.supported(session.player, dt)) result.set(session.player, dt);
-    for (const state of this.vehicleRegistry?.states.values() ?? []) {
-      if (
-        streaming.demand.get(actorScope(state.entity.position))?.activity &&
-        streaming.supported(state.entity, dt)
-      )
-        result.set(state.entity, dt);
-    }
+    // A visiting car's transient shopper walks only while its car is simulated.
+    for (const state of this.vehicleRegistry?.states.values() ?? [])
+      for (const e of [state.entity, visitShopper(state)])
+        if (
+          e &&
+          streaming.demand.get(actorScope(e.position))?.activity &&
+          streaming.supported(e, dt)
+        )
+          result.set(e, dt);
     return this.activity.select(streaming.records, streaming, sessions, result, dt);
   }
 

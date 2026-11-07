@@ -24,6 +24,10 @@ export interface ScenarioRecipe {
   roads?: { left: number; right: number; top: number; bottom: number }[];
   /** Canonical generated-lane input for ordinary road traffic fixtures. Tile units. */
   trafficRoads?: import("../traffic/LaneGraph.js").RoadSegment[];
+  /** Speedway ovals (tile-unit centers) whose two closed rings carry racers. */
+  racetracks?: { id: string; center: { x: number; y: number } }[];
+  /** Shopping centers (world pixels) that passing road compacts may visit. */
+  shoppingCenters?: import("../traffic/ShoppingCenter.js").ShoppingCenter[];
 }
 export interface ParkedScenarioVehicle {
   model: string;
@@ -37,6 +41,8 @@ export interface ParkedScenarioVehicle {
   /** Pixels the car may back up, opposite its facing, in 16px steps when a
    * generated world's own vehicle occupies the staged pose. */
   backUp?: number;
+  /** Starts as ordinary road traffic instead of parked. */
+  autonomous?: true;
 }
 /** Places a parked fixture, backing it up along its lane when allowed. */
 export function parkScenarioVehicle(
@@ -62,7 +68,10 @@ export function parkScenarioVehicle(
       undefined,
       fixture.z,
     );
-    if (state) return state;
+    if (state) {
+      if (fixture.autonomous) state.autonomous = true;
+      return state;
+    }
   }
   return undefined;
 }

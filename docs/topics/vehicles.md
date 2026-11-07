@@ -1,5 +1,10 @@
 # Vehicles: shared physics baseline
 
+[225](../tactical/225-speedway-racers-and-shopping-visits.md) restores speedway racers
+(a durable grid lapping both rings) and shopping visits (a passing road compact
+parks, its shopper walks in and back, and the car rejoins the boulevard). With
+222/224, every behavior retired by 205/209 is back on the shared world.
+
 [224](../tactical/224-shared-physics-towing-and-transporter.md) restores wheel-lift
 towing (a spherical joint at the cradle; the car coasts on its rear axle) and the
 car transporter (a deck/ramp compound, an anchored truck while deployed, and a
@@ -40,7 +45,7 @@ separate follow-on work.
 [216](../tactical/216-dynamic-3d-vehicles.md) delivers freely rotating land-vehicle chassis, authored axle suspension/traction, full replay/save state, shared depth and recovery. Game and labs share the default controller; native/browser qualification passes; owner feel review is next. The physical Chromebook course works, with 16.7/33.4/33.4ms frame p50/p95/p99 in the latest short development smoke; this is not a matched performance comparison. Boats retain their upright watercraft behavior.
 
 
-Status: dynamic land-vehicle chassis and shared depth delivered in 216; ready for owner feel review. Dump bed (222), towing and transporter (224) restored. Shared road traffic and driving audio remain.
+Status: dynamic land-vehicle chassis and shared depth delivered in 216; ready for owner feel review. Dump bed (222), towing and transporter (224), racers and shopping visits (225) restored. Shared road traffic and driving audio remain.
 Updated: 2026-11-07.
 
 [209](../tactical/209-car-driving-and-autonomous-traffic.md) restores shared rolling
@@ -65,8 +70,8 @@ performance. The owner reports driving looks good; the subsequent seated-footste
 fix and engine follow-up are recorded below. Reload host and guests together for
 the updated numerical frame format.
 
-Parking visitors/racers are deferred (the tipping bed returns in 222; towing and
-the transporter in 224). Their old motion services
+Parking visitors and racers return in 225 (the tipping bed in 222; towing and the
+transporter in 224). Their old motion services
 and authority/UI commands are removed. Saved traffic poses remain readable in the
 existing collection; obsolete legacy routes/coupling remain discarded. Models,
 paints, approved pixels and static layout planners remain unchanged.

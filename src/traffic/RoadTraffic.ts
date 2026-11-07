@@ -3,13 +3,17 @@ import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
 import { physicsBodyDimensions } from "../physics/PhysicsBodies.js";
+import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import type { MotionIntent } from "../physics/PhysicsState.js";
 import { CONTROL_HOLD_TICKS } from "../physics/PlayerControls.js";
 import { angleDifference } from "../physics/VehicleMotor.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { type Lane, type LaneGraph, nextLanes, type Path, samplePath } from "./LaneGraph.js";
+import { planRacer, populateRacers } from "./RaceTraffic.js";
+import { projectRoad } from "./RoadProjection.js";
 import { roadTurn } from "./RoadTurn.js";
+import { planShoppingVisit } from "./ShoppingVisits.js";
 import {
   isVehicleOverturned,
   TRAFFIC_MODELS,
@@ -25,28 +29,6 @@ const hash = (text: string) => {
   for (let i = 0; i < text.length; i++) n = Math.imul(n ^ text.charCodeAt(i), 16777619);
   return n >>> 0;
 };
-/** Project actual solved travel onto a route; route progress never moves a body. */
-export function projectRoad(p: Path, x: number, y: number) {
-  let distance = Infinity,
-    progress = 0,
-    heading = 0;
-  for (let i = 1; i < p.points.length; i++) {
-    const a = p.points[i - 1],
-      b = p.points[i];
-    if (!a || !b) continue;
-    const dx = b.x - a.x,
-      dy = b.y - a.y,
-      length2 = dx * dx + dy * dy;
-    const t = length2 ? Math.max(0, Math.min(1, ((x - a.x) * dx + (y - a.y) * dy) / length2)) : 0;
-    const d = Math.hypot(x - a.x - t * dx, y - a.y - t * dy);
-    if (d < distance) {
-      distance = d;
-      progress = (p.distances[i - 1] ?? 0) + t * Math.sqrt(length2);
-      heading = Math.atan2(dy, dx);
-    }
-  }
-  return { distance, progress, heading };
-}
 
 /** Bounded road decisions only. Cars share the same physical motor as players. */
 export class RoadTraffic {
@@ -86,6 +68,7 @@ export class RoadTraffic {
           const graph = r.source.trafficNetwork(cx * CHUNK_SIZE_PX + 128, cy * CHUNK_SIZE_PX + 128);
           if (graphs.has(graph)) continue;
           graphs.add(graph);
+          populateRacers(r, graph, ranges, identities);
           for (const lane of graph.lanes.values()) {
             if (lane.race) continue;
             if (
@@ -224,6 +207,14 @@ export class RoadTraffic {
         intents.set(e.id, { vx: 0, vy: 0, driveSpeed: 0 });
         continue;
       }
+      const size = physicsBodyDimensions(e);
+      const follow = (speed: number) =>
+        this.followingSpeed(e, speed, size.width / 2, size.depth / 2);
+      const shopping = planShoppingVisit(r, state, PHYSICS_DT, physicsTick, follow);
+      if (shopping) {
+        intents.set(e.id, shopping);
+        continue;
+      }
       const graph = r.source.trafficNetwork(e.position.wx, e.position.wy);
       const lane =
         (state.route && graph.lanes.get(state.route.laneId)) || this.acquire(state, graph);
@@ -231,6 +222,11 @@ export class RoadTraffic {
         state.autonomous = false;
         delete state.route;
         r.onChange?.(state, false);
+        continue;
+      }
+      const race = planRacer(r, state, lane, graph, physicsTick, this.followingSpeed.bind(this, e));
+      if (race) {
+        intents.set(e.id, race);
         continue;
       }
       let next = state.route.nextId ? graph.lanes.get(state.route.nextId) : undefined;
@@ -251,7 +247,6 @@ export class RoadTraffic {
       const corner = next ? this.corner(lane, next, e.type) : undefined;
       const p = corner ? (state.route.turning ? corner.turn : corner.approach) : lane.path;
       const projection = projectRoad(p, e.position.wx, e.position.wy);
-      const size = physicsBodyDimensions(e);
       candidates.push({
         state,
         lane,

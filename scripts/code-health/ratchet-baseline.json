@@ -584,7 +584,7 @@
     },
     "src/scenarios/ScenarioSession.ts": {
       "lines": 423,
-      "worst": 66,
+      "worst": 65,
       "overLimit": 1
     },
     "src/scenarios/ScenarioWorkerHost.ts": {
@@ -643,7 +643,7 @@
       "overLimit": 1
     },
     "src/server/Realm.ts": {
-      "lines": 1353,
+      "lines": 1356,
       "worst": 0,
       "overLimit": 0
     },
@@ -718,12 +718,12 @@
       "overLimit": 1
     },
     "src/traffic/RoadTraffic.ts": {
-      "lines": 495,
-      "worst": 94,
+      "lines": 490,
+      "worst": 95,
       "overLimit": 3
     },
     "src/traffic/VehicleRegistry.ts": {
-      "lines": 299,
+      "lines": 302,
       "worst": 26,
       "overLimit": 1
     },
@@ -943,8 +943,8 @@
       "overLimit": 1
     },
     "src/workshop/WorldGeometryPage.tsx": {
-      "lines": 483,
-      "worst": 52,
+      "lines": 536,
+      "worst": 64,
       "overLimit": 3
     },
     "src/xr/XRSessionManager.ts": {

@@ -5129,11 +5129,11 @@
       "id": "geometry:parking-visits-v1",
       "batchId": "parking-visits",
       "kind": "geometry",
-      "name": "Parking and shoppers (deferred)",
-      "prompt": "Historical specialized vehicle simulation, deferred during physics reset 205. Models and static studies remain; basic driving uses the common game kernel.",
-      "url": "/tilefun/workshop.html#/tool/parking-lab?play=1",
-      "excluded": "Deferred interactive feature; no current physics qualification or art approval.",
-      "fingerprint": "5fdf25269fbc9c1c0bc2e5232219ebc0685fc205e1c7ea91f3c798efc6dc61a7"
+      "name": "Parking and shoppers",
+      "prompt": "A compact on the boulevard turns into the lot, parks, and its shopper walks into the shop and back before the car rejoins the boulevard. Shared game physics; no art promotion.",
+      "url": "/tilefun/workshop.html?geometry=shopping#/tool/world-geometry",
+      "fingerprint": "424e6be6fba0c3c46c120a53b161e4e44961402032ab22379c5a2a7beed71a3f",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
       "id": "geometry:rapier-physics-v1",
@@ -16672,6 +16672,16 @@
       "prompt": "Deploy ramp, drive the beetle up onto the deck, get out and Stow ramp to secure it; drive the transporter, then Deploy ramp and reverse the beetle down. Walk up the ramp on foot too. Shared game physics and existing models; no art promotion.",
       "url": "/tilefun/workshop.html?geometry=car-dynamics&route=transport#/tool/world-geometry",
       "fingerprint": "c3709f3fa589490866c3eca78015e0d99d2dda8becdb7bbfe605f6a91ed659e2",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
+      "id": "geometry:racetrack-traffic-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "Speedway racers",
+      "prompt": "Eight racers lap two rings of a speedway oval at race speed. Walk onto the track to stop them; drive one off with E. Shared game physics and existing models; no art promotion.",
+      "url": "/tilefun/workshop.html?geometry=racetrack#/tool/world-geometry",
+      "fingerprint": "22730c2651fd959f38b6289f0a556d8433250cb87e9044327cbffff2aafbd428",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -56188,5 +56198,5 @@
       }
     }
   ],
-  "inputDigest": "8b0ab75221233974fdd0f98a42989bb5425f49ea9b1b85e5c9ddff8fd388d60f"
+  "inputDigest": "cefa6cbe62951ff9dc0fed85b887c3e5ca6c05c64cf922af7b7fdb7dda2a8a8e"
 }

@@ -20,7 +20,6 @@ import {
 } from "../shared/binaryCodec.js";
 import { lcgNext } from "../shared/Determinism.js";
 import type { Movement } from "../shared/Movement.js";
-import { buildLaneGraph } from "../traffic/LaneGraph.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioCommand, ScenarioSeatCommand } from "./ScenarioProtocol.js";
@@ -30,6 +29,7 @@ import {
   type ScenarioRecipe,
   scenarioGravity,
 } from "./ScenarioRecipe.js";
+import { scenarioVehicleSource } from "./ScenarioTraffic.js";
 
 /** A temporary ordinary Realm with memory persistence. No alternate physics or clock. */
 export class ScenarioSession {
@@ -140,9 +140,9 @@ export class ScenarioSession {
       async renameWorld() {},
       async deleteWorld() {},
     };
-    const graph = this.recipe.trafficRoads ? buildLaneGraph(this.recipe.trafficRoads) : undefined;
+    const vehicleSource = scenarioVehicleSource(this.recipe);
     this.realm = new Realm([baseGameMod], {
-      ...(graph ? { vehicleSource: { trafficNetwork: () => graph } } : {}),
+      ...(vehicleSource ? { vehicleSource } : {}),
       gravity: () => this.gravity,
       ambientSpawns: false,
       ...(this.recipe.landscape ? { landscape: this.recipe.landscape } : {}),

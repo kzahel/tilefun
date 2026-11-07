@@ -35,6 +35,7 @@ import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import DeferredVehiclePage from "./DeferredVehiclePage.js";
 import { recordEquipment } from "./EquipmentDiagnostics.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
+import { TRAFFIC_FIXTURES } from "./TrafficFixtures.js";
 
 export type GeometryCanvas = HTMLCanvasElement & {
   __physicsSample?: ScenarioPresentationHost["session"]["samplePhysicsDiagnostics"];
@@ -52,6 +53,8 @@ const FIXTURES = [
   "realm",
   "traffic",
   "traffic-crowd",
+  "racetrack",
+  "shopping",
   "train",
 ];
 export default function WorldGeometryPage({
@@ -112,6 +115,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
     () => (generatedIndex < 0 ? undefined : generatedCrossingRecipe(generatedIndex, reverse)),
     [generatedIndex, reverse],
   );
+  const ambient = TRAFFIC_FIXTURES[fixture];
   const recipe = useMemo(
     () =>
       generated?.recipe ??
@@ -137,14 +141,14 @@ function GeometryFixtures({ initial }: { initial: string }) {
                       ? railCrossingRecipe()
                       : garage
                         ? undergroundGarageRecipe()
-                        : worldGeometryRecipe()),
-    [generated, fixture, garage, vehicle, reverse, vehicleModel, route, jumps, lane],
+                        : (ambient?.recipe() ?? worldGeometryRecipe())),
+    [generated, fixture, garage, vehicle, reverse, vehicleModel, route, jumps, lane, ambient],
   );
   const starts =
     generated?.starts ??
     (fixture === "train"
       ? { bench: { position: recipe.player.position, z: 0 } }
-      : fixture === "traffic-crowd"
+      : fixture === "traffic-crowd" || ambient
         ? { sidewalk: { position: recipe.player.position, z: 0 } }
         : fixture === "car-dynamics"
           ? DYNAMICS_STARTS
@@ -173,12 +177,13 @@ function GeometryFixtures({ initial }: { initial: string }) {
       width: 960,
       height: 640,
       // The dynamics course reviews 3D chassis; use the game's default mesh renderer.
-      ...(fixture === "car-dynamics" ? { defaultRenderer: "gpu-mesh" as const } : {}),
+      ...(fixture === "car-dynamics" || ambient ? { defaultRenderer: "gpu-mesh" as const } : {}),
       terrain:
         !!generated ||
         fixture === "realm" ||
         fixture === "traffic" ||
         fixture === "traffic-crowd" ||
+        !!ambient ||
         fixture === "train" ||
         fixture === "car-dynamics" ||
         jumps,
@@ -187,13 +192,14 @@ function GeometryFixtures({ initial }: { initial: string }) {
         : {
             fixedCamera: generated
               ? { wx: generated.bridge.x * 16, wy: generated.bridge.y * 16 - 16 }
-              : { wx: 0, wy: -16 },
+              : (ambient?.camera ?? { wx: 0, wy: -16 }),
           }),
       surfaceVisibility: () => settings.current.visibility,
       settings: () => ({
         paused: settings.current.paused,
         zoom:
-          fixture === "traffic-crowd"
+          ambient?.zoom ??
+          (fixture === "traffic-crowd"
             ? 0.125
             : jumps
               ? 0.25
@@ -201,7 +207,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
                 ? 0.4
                 : generated || fixture === "crossing" || fixture === "traffic"
                   ? 0.225
-                  : 0.625,
+                  : 0.625),
         terrainPacing: "throughput",
       }),
       input: () => ({

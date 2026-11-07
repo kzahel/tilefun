@@ -1,10 +1,10 @@
-import type { Racetrack } from "../generation/regional/RacetrackPlanner.js";
 import { required } from "../shared/required.js";
 import { type Lane, type LaneGraph, path, samplePath } from "./LaneGraph.js";
 
 /** Each quarter has a shared tangent endpoint. Both rings travel clockwise;
  * ordinary road cars have no graph edge into this dedicated racing circuit. */
-export function addRacetrackLanes(graph: LaneGraph, tracks: readonly Racetrack[]): void {
+type Track = { id: string; center: { x: number; y: number } }; // A generated Racetrack suffices.
+export function addRacetrackLanes(graph: LaneGraph, tracks: readonly Track[]): void {
   for (const track of tracks)
     for (let ring = 0; ring < 2; ring++) {
       const radius = ring ? 31 : 25;

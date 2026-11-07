@@ -70,3 +70,50 @@ export function crowdedRoadTrafficRecipe(): ScenarioRecipe {
     }
   return recipe;
 }
+
+/** A speedway oval: two clockwise rings of ordinary sports-car racers. Asphalt
+ * strips approximate the circuit; the rings' own lanes guide the cars. */
+export function racetrackRecipe(): ScenarioRecipe {
+  return {
+    version: 1,
+    id: "racetrack-traffic",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(0, 0),
+    props: [],
+    roads: [
+      { left: -880, top: -560, right: 880, bottom: -336 },
+      { left: -880, top: 336, right: 880, bottom: 560 },
+      { left: -960, top: -560, right: -720, bottom: 560 },
+      { left: 720, top: -560, right: 960, bottom: 560 },
+    ],
+    racetracks: [{ id: "lab-speedway", center: { x: 0, y: 0 } }],
+  };
+}
+
+/** One generated-style shopping center beside a westbound boulevard. Passing road
+ * compacts may turn in, park, send a shopper inside and rejoin the boulevard. */
+export function shoppingRecipe(): ScenarioRecipe {
+  return {
+    version: 1,
+    id: "shopping-visits",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(640, 520),
+    props: [],
+    roads: [
+      { left: -320, top: 576, right: 1600, bottom: 704 },
+      { left: 0, top: 160, right: 1280, bottom: 576 },
+    ],
+    trafficRoads: [{ a: { x: 100, y: 40 }, b: { x: -20, y: 40 }, width: 8, intercity: false }],
+    shoppingCenters: [{ id: "lab-center", wx: 0, wy: 0, roadY: 640 }],
+    parkedVehicles: [
+      {
+        name: "visitor",
+        model: "compact-1",
+        wx: 1480,
+        wy: 608,
+        facing: Direction.Left,
+        autonomous: true,
+      },
+    ],
+  };
+}

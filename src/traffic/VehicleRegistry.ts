@@ -20,6 +20,7 @@ import type { World } from "../world/World.js";
 import { validVehicleLightState } from "./EmergencyVehicle.js";
 import type { LaneGraph } from "./LaneGraph.js";
 import { RoadTraffic } from "./RoadTraffic.js";
+import { restoredShoppingVisit, type ShoppingVisit } from "./ShoppingVisits.js";
 import { type TrafficRoute, validTrafficRoute } from "./TrafficRoute.js";
 import {
   applyVehicleFacing,
@@ -58,6 +59,7 @@ export interface VehicleState {
   driverId?: number;
   autonomous: boolean;
   route?: TrafficRoute;
+  visit?: ShoppingVisit;
 }
 export interface VehicleSource {
   depotVehicles?(cx: number, cy: number): readonly DepotVehicle[];
@@ -180,7 +182,7 @@ export class VehicleRegistry {
     delete state.driverId;
     this.onChange?.(state, false);
   }
-  snapshot({ entity: e, autonomous, route }: VehicleState): SavedVehicle {
+  snapshot({ entity: e, autonomous, route, visit }: VehicleState): SavedVehicle {
     if (!e.proceduralId) throw Error("Vehicle identity is missing");
     return {
       version: 2,
@@ -203,7 +205,7 @@ export class VehicleRegistry {
       ...(route ? { route: { ...route } } : {}),
       ...(e.paintSchemeId === undefined ? {} : { paintSchemeId: e.paintSchemeId }),
       ...(e.emergencyState === undefined ? {} : { emergencyState: e.emergencyState }),
-      ...Equipment.savedEquipment(e),
+      ...Equipment.savedEquipment(e, visit),
     };
   }
   save(): SavedVehicle[] {
@@ -291,6 +293,7 @@ export class VehicleRegistry {
         entity,
         autonomous: record.autonomous ?? record.identity.startsWith("traffic-v1:"),
         ...(record.route ? { route: { ...record.route } } : {}),
+        ...(record.visit ? { visit: restoredShoppingVisit(record.visit) } : {}),
       };
       this.states.set(entity.id, state);
       this.onRestore?.(state, record);

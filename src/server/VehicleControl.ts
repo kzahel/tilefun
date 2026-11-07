@@ -19,6 +19,7 @@ import {
   isWarningVehicle,
   nextVehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
+import { endShoppingVisit } from "../traffic/ShoppingVisits.js";
 import { boardingHeightLimit } from "../traffic/Transporter.js";
 import { isVehicle, isVehicleOverturned } from "../traffic/Vehicle.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
@@ -125,6 +126,7 @@ export class VehicleControl {
     if (!restore && Math.hypot(vehicle.velocity?.vx ?? 0, vehicle.velocity?.vy ?? 0) > 3)
       throw Error("Wait for the vehicle to stop.");
     if (r.saveManager?.pressured) throw Error("Saving is delayed. Please try again shortly.");
+    if (r.vehicleRegistry) endShoppingVisit(r.vehicleRegistry, car);
     r.vehicleRegistry?.takeControl(car, session.player.id);
     const p = session.player;
     const boarded = restore ? undefined : { position: { ...p.position }, wz: p.wz ?? 0 };
