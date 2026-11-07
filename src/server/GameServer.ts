@@ -117,7 +117,7 @@ export class GameServer {
         maxCy: Math.floor(wy / CHUNK_SIZE_PX) + 3,
       });
       if (session.realmId !== realm.currentWorldId || session.retired) return;
-      realm.vehicles.exit(session, true);
+      realm.vehicles.exit(session);
 
       session.player.position = { wx, wy };
       realm.savePlayerData(session);

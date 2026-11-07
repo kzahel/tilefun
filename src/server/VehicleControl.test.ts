@@ -1,4 +1,5 @@
 import { expect, it } from "vitest";
+import { getEntityAABB } from "../entities/collision.js";
 import { Direction } from "../entities/Entity.js";
 import { createPerson1 } from "../entities/Person.js";
 import { createPlayer } from "../entities/Player.js";
@@ -6,7 +7,9 @@ import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { required } from "../shared/required.js";
 import { DUMP_BED, hasDumpBed } from "../traffic/DumpBed.js";
+import { boardingDistance } from "../traffic/VehicleSeats.js";
 import { createFauna } from "../wildlife/Fauna.js";
+import { CollisionFlag } from "../world/TileRegistry.js";
 import { controlDumpBed } from "./DumpBedControl.js";
 import { HORN_STARTLE_RADIUS } from "./HornReaction.js";
 import { PlayerSession } from "./PlayerSession.js";
@@ -70,13 +73,14 @@ it("normalizes diagonals, retains off-road cars through exit and reload, and res
     await s.close();
   }
 });
-it("nudges players at bounded speed and rejects distant boarding and obstructed exits", async () => {
+it("nudges players at bounded speed, rejects distant boarding and exits even when fully boxed in", async () => {
   const s = await ScenarioSession.create(recipe());
   try {
     const car = required(s.realm.vehicleRegistry?.states.get(required(s.handles.car)));
     s.player.player.position.wx -= 1000;
     expect(() => s.realm.vehicles.enter(s.player, car.entity.id)).toThrow(/beside/);
     s.player.player.position = { wx: car.entity.position.wx, wy: car.entity.position.wy - 28 };
+    const boarded = { ...s.player.player.position };
     s.realm.vehicles.enter(s.player, car.entity.id);
     const guest = new PlayerSession("contact-guest");
     await s.realm.addPlayer(guest);
@@ -90,14 +94,73 @@ it("nudges players at bounded speed and rejects distant boarding and obstructed 
     expect(car.entity.position.wx).toBeLessThan(obstacle.position.wx - 25);
     expect(car.entity.velocity?.vx).toBeGreaterThan(0);
     expect(car.entity.velocity?.vx).toBeLessThanOrEqual(112.01);
-    s.realm.world.getCollisionIfLoaded = () => 3;
-    expect(() => s.realm.vehicles.exit(s.player)).toThrow(/No clear place/);
-    expect(s.player.player.parentId).toBe(car.entity.id);
-    s.realm.world.getCollisionIfLoaded = () => 0;
+    // Solid everywhere (even under the roof): return to the boarding spot.
+    const collision = s.realm.world.getCollisionIfLoaded.bind(s.realm.world);
+    s.realm.world.getCollisionIfLoaded = () => CollisionFlag.Solid | CollisionFlag.Water;
+    s.realm.vehicles.exit(s.player);
+    s.realm.world.getCollisionIfLoaded = collision;
+    expect(s.player.player.parentId).toBeUndefined();
+    expect(s.player.player.position).toEqual(boarded);
+    for (let i = 0; i < 60; i++) await s.step(idle);
+    s.realm.vehicles.enter(s.player, car.entity.id, true);
     s.realm.entityManager.remove(car.entity.id);
     s.realm.vehicles.sync();
     expect(s.player.player.parentId).toBeUndefined();
     expect(s.player.player.collider).not.toBeNull();
+  } finally {
+    await s.close();
+  }
+});
+
+it("climbs out onto the roof of a car wedged in water or a ditch, unless something is on the roof", async () => {
+  const s = await ScenarioSession.create(recipe());
+  try {
+    const car = required(s.realm.vehicleRegistry?.states.get(required(s.handles.car)));
+    const roofHeight = required(car.entity.collider?.physicalHeight);
+    const collision = s.realm.world.getCollisionIfLoaded.bind(s.realm.world);
+
+    // Only open ground is diagonally off a corner: step out there, not onto the roof.
+    s.realm.vehicles.enter(s.player, car.entity.id);
+    const b = getEntityAABB(car.entity.position, required(car.entity.collider));
+    s.realm.world.getCollisionIfLoaded = (tx, ty) =>
+      (tx + 1) * 16 <= b.left && (ty + 1) * 16 <= b.top ? 0 : CollisionFlag.Solid;
+    s.realm.vehicles.exit(s.player);
+    s.realm.world.getCollisionIfLoaded = collision;
+    expect(s.player.player.position.wx).toBeLessThan(b.left);
+    expect(s.player.player.position.wy).toBeLessThan(b.top);
+    expect(s.player.player.wz).toBeCloseTo(car.entity.wz ?? 0, 0);
+
+    // Surrounded by water: stand on the roof, and stay there under shared physics.
+    s.realm.vehicles.enter(s.player, car.entity.id);
+    s.realm.world.getCollisionIfLoaded = () => CollisionFlag.Water;
+    s.realm.vehicles.exit(s.player);
+    s.realm.world.getCollisionIfLoaded = collision;
+    const roofZ = (car.entity.wz ?? 0) + roofHeight;
+    expect(s.player.player.parentId).toBeUndefined();
+    expect(s.player.player.wz).toBeCloseTo(roofZ, 3);
+    expect(boardingDistance(s.player.player, car.entity)).toBe(0);
+    for (let i = 0; i < 30; i++) await s.step(idle);
+    expect(s.player.player.wz).toBeCloseTo(roofZ, 0);
+
+    // Sunk in a ditch: level ground is too high to step onto, so use the roof.
+    s.player.player.position = { wx: car.entity.position.wx, wy: car.entity.position.wy - 28 };
+    s.player.player.wz = car.entity.wz ?? 0;
+    s.realm.vehicles.enter(s.player, car.entity.id);
+    car.entity.wz = -40;
+    s.realm.vehicles.exit(s.player);
+    expect(s.player.player.wz).toBeCloseTo(-40 + roofHeight, 3);
+
+    // Something on the roof: fall back to the nearest open ground at any height.
+    s.player.player.position = { wx: car.entity.position.wx, wy: car.entity.position.wy - 28 };
+    s.player.player.wz = car.entity.wz;
+    s.realm.vehicles.enter(s.player, car.entity.id);
+    const rider = s.realm.entityManager.spawn(
+      createPlayer(car.entity.position.wx, car.entity.position.wy),
+    );
+    rider.wz = -40 + roofHeight;
+    s.realm.vehicles.exit(s.player);
+    expect(s.player.player.wz).toBeCloseTo(0, 3);
+    expect(boardingDistance(s.player.player, car.entity)).toBeGreaterThan(0);
   } finally {
     await s.close();
   }

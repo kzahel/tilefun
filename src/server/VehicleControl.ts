@@ -19,7 +19,7 @@ import {
   isWarningVehicle,
   nextVehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
-import { isVehicleOverturned } from "../traffic/Vehicle.js";
+import { isVehicle, isVehicleOverturned } from "../traffic/Vehicle.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import { boardingDistance, isDrivable, vehicleVerticalDistance } from "../traffic/VehicleSeats.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
@@ -35,6 +35,8 @@ export class VehicleControl {
     {
       session: PlayerSession;
       vehicle: Entity;
+      /** Where the driver stood before boarding: the guaranteed way back out. */
+      boarded?: ExitPlacement;
       lastHorn?: number;
       lastHornEvent?: number;
       lastHornStartle?: number;
@@ -121,6 +123,7 @@ export class VehicleControl {
     if (r.saveManager?.pressured) throw Error("Saving is delayed. Please try again shortly.");
     r.vehicleRegistry?.takeControl(car, session.player.id);
     const p = session.player;
+    const boarded = restore ? undefined : { position: { ...p.position }, wz: p.wz ?? 0 };
     p.parentId = id;
     p.localOffsetX = p.localOffsetY = 0;
     p.jumpZ = 0;
@@ -132,7 +135,7 @@ export class VehicleControl {
     session.lastProcessedInputSeq = session.inputQueue.at(-1)?.seq ?? session.lastProcessedInputSeq;
     session.inputQueue = [];
     session.controls.reset(session.lastProcessedInputSeq);
-    this.drivers.set(p.id, { session, vehicle });
+    this.drivers.set(p.id, { session, vehicle, ...(boarded ? { boarded } : {}) });
     this.sync();
     r.savePlayerData(session);
   }
@@ -183,13 +186,19 @@ export class VehicleControl {
     session.inputQueue = [];
     session.controls.reset(session.lastProcessedInputSeq);
   }
-  exit(session: PlayerSession, forced = false): void {
+  exit(session: PlayerSession): void {
     this.honk(session, false);
     const vehicle = this.get(session);
     if (!vehicle) return;
     this.stop(session);
-    const placement = this.exitPlacement(session.player, vehicle);
-    if (!placement && !forced) throw Error("No clear place to get out. Move somewhere open first.");
+    // Getting out always succeeds. With no open ground or clear roof nearby,
+    // return the player to where they boarded, or (after a reload into the
+    // seat) onto the roof regardless.
+    const placement = this.exitPlacement(session.player, vehicle) ??
+      this.drivers.get(session.player.id)?.boarded ?? {
+        position: { ...vehicle.position },
+        wz: (vehicle.wz ?? 0) + (vehicle.collider?.physicalHeight ?? 0),
+      };
     const car = this.realm.vehicleRegistry?.states.get(vehicle.id);
     if (car) this.realm.vehicleRegistry?.releaseControl(car);
     const p = session.player;
@@ -197,15 +206,7 @@ export class VehicleControl {
     delete p.localOffsetX;
     delete p.localOffsetY;
     replaceBodyCollider(p, createPlayer(0, 0).collider);
-    teleportBody(
-      p,
-      placement
-        ? { ...placement.position, wz: placement.wz }
-        : {
-            ...(session.gameplaySession.lastSafePosition ?? vehicle.position),
-            wz: 0,
-          },
-    );
+    teleportBody(p, { ...placement.position, wz: placement.wz });
     session.gameplaySession.mountId = null;
     session.gameplaySession.lastDismountedId = vehicle.id;
     session.gameplaySession.lastSafePosition = { ...p.position };
@@ -219,7 +220,7 @@ export class VehicleControl {
   sync(): void {
     for (const { session, vehicle, lastHorn, honking } of [...this.drivers.values()]) {
       if (!this.realm.entityManager.byId.has(vehicle.id)) {
-        this.exit(session, true);
+        this.exit(session);
         continue;
       }
       if (
@@ -237,64 +238,107 @@ export class VehicleControl {
       this.realm.entityManager.spatialHash.update(p);
     }
   }
-  private exitPlacement(
-    player: Entity,
-    vehicle: Entity,
-  ): { position: Entity["position"]; wz: number } | undefined {
-    const r = this.realm,
-      probe = createPlayer(0, 0),
-      collider = probe.collider;
+  /**
+   * Getting out must not strand a player in a wedged or tipped vehicle. Prefer
+   * level ground beside the body, then its roof (the existing roof-standing
+   * surface) when there is headroom, then any open ground a little further out.
+   */
+  private exitPlacement(player: Entity, vehicle: Entity): ExitPlacement | undefined {
+    const collider = createPlayer(0, 0).collider;
     if (!collider || !vehicle.collider) return;
     const b = getEntityAABB(vehicle.position, vehicle.collider);
-    const x = Math.max(b.left, Math.min(b.right, player.position.wx));
-    const y = Math.max(b.top, Math.min(b.bottom, player.position.wy));
-    for (const gap of [16, 24, 32, 48, 64])
-      for (const [wx, wy] of [
-        [x, b.top - gap],
-        [x, b.bottom + gap],
-        [b.left - gap, y],
-        [b.right + gap, y],
-      ]) {
-        if (wx === undefined || wy === undefined) continue;
-        probe.position = { wx, wy };
-        probe.wz = vehicle.wz ?? 0;
-        const box = getEntityAABB(probe.position, collider);
-        let ready = true;
-        for (let ty = Math.floor(box.top / 16); ty <= Math.floor(box.bottom / 16); ty++)
-          for (let tx = Math.floor(box.left / 16); tx <= Math.floor(box.right / 16); tx++)
-            if (!r.world.getChunkIfLoaded(Math.floor(tx / 16), Math.floor(ty / 16))) ready = false;
-        if (
-          !ready ||
-          aabbOverlapsSolid(
-            box,
-            (tx, ty) => r.world.getCollisionIfLoaded(tx, ty),
-            CollisionFlag.Solid | CollisionFlag.Water,
-          )
-        )
-          continue;
-        const props = r.propManager.getPropsNearPosition(probe.position, collider);
-        const z = placementGroundZ(probe, (tx, ty) => r.world.getHeightAt(tx, ty), props);
-        if (
-          Math.abs(z - (vehicle.wz ?? 0)) > 16 ||
-          props.some((p) =>
-            aabbOverlapsPropWalls(box, p.position, p, z, collider.physicalHeight ?? 16),
-          )
-        )
-          continue;
-        if (
-          r.entityManager.entities.some(
-            (e) =>
-              e.id !== player.id &&
-              e.collider &&
-              e.collider.solid !== false &&
-              (e.wz ?? 0) < z + 16 &&
-              (e.wz ?? 0) + (e.collider.physicalHeight ?? 16) > z &&
-              aabbsOverlap(box, getEntityAABB(e.position, e.collider)),
-          )
-        )
-          continue;
-        return { position: probe.position, wz: z };
-      }
-    return undefined;
+    const vz = vehicle.wz ?? 0;
+    const reach = EXIT_GAPS.at(-1) ?? 0;
+    const near = Math.hypot(b.right - b.left, b.bottom - b.top) / 2 + reach + 32;
+    const cx = (b.left + b.right) / 2,
+      cy = (b.top + b.bottom) / 2;
+    const blockers = this.realm.entityManager.entities.filter(
+      (e) =>
+        e.id !== player.id &&
+        e.id !== vehicle.id &&
+        !!e.collider &&
+        e.collider.solid !== false &&
+        Math.hypot(e.position.wx - cx, e.position.wy - cy) <= near + 64,
+    );
+    const ground = (gaps: readonly number[], level: boolean) => {
+      for (const gap of gaps)
+        for (const [wx, wy] of perimeter(b, gap)) {
+          const placement = this.clearSpot(collider, blockers, { wx, wy }, vz);
+          if (placement && (!level || Math.abs(placement.wz - vz) <= EXIT_STEP)) return placement;
+        }
+      return undefined;
+    };
+    const level = ground(LEVEL_EXIT_GAPS, true);
+    if (level) return level;
+    if (isVehicle(vehicle)) {
+      const roof = this.clearSpot(
+        collider,
+        blockers,
+        { wx: cx, wy: cy },
+        vz + (vehicle.collider.physicalHeight ?? 0),
+        true,
+      );
+      if (roof) return roof;
+    }
+    return ground(EXIT_GAPS, false);
   }
+  /** Ground (or explicit roof height) spot clear of tiles, prop walls and solid bodies. */
+  private clearSpot(
+    collider: NonNullable<Entity["collider"]>,
+    blockers: readonly Entity[],
+    position: Entity["position"],
+    wz: number,
+    roof = false,
+  ): ExitPlacement | undefined {
+    const r = this.realm;
+    const box = getEntityAABB(position, collider);
+    for (let ty = Math.floor(box.top / 16); ty <= Math.floor(box.bottom / 16); ty++)
+      for (let tx = Math.floor(box.left / 16); tx <= Math.floor(box.right / 16); tx++)
+        if (!r.world.getChunkIfLoaded(Math.floor(tx / 16), Math.floor(ty / 16))) return;
+    // A roof spot stands on the vehicle, so water beneath it is irrelevant.
+    const mask = roof ? CollisionFlag.Solid : CollisionFlag.Solid | CollisionFlag.Water;
+    if (aabbOverlapsSolid(box, (tx, ty) => r.world.getCollisionIfLoaded(tx, ty), mask)) return;
+    const props = r.propManager.getPropsNearPosition(position, collider);
+    const z = roof
+      ? wz
+      : placementGroundZ(
+          { position, collider, id: -1, wz },
+          (tx, ty) => r.world.getHeightAt(tx, ty),
+          props,
+        );
+    const height = collider.physicalHeight ?? 16;
+    if (props.some((p) => aabbOverlapsPropWalls(box, p.position, p, z, height))) return;
+    if (
+      blockers.some(
+        (e) =>
+          e.collider &&
+          (e.wz ?? 0) < z + height &&
+          (e.wz ?? 0) + (e.collider.physicalHeight ?? 16) > z &&
+          aabbsOverlap(box, getEntityAABB(e.position, e.collider)),
+      )
+    )
+      return;
+    return { position: { ...position }, wz: z };
+  }
+}
+
+type ExitPlacement = { position: Entity["position"]; wz: number };
+/** Stepping out may change height only as much as an ordinary step. */
+const EXIT_STEP = 16;
+const LEVEL_EXIT_GAPS = [16, 24, 32, 48, 64] as const;
+const EXIT_GAPS = [...LEVEL_EXIT_GAPS, 96, 128] as const;
+
+/** Candidate feet positions around a body footprint, nearest first. */
+function perimeter(b: ReturnType<typeof getEntityAABB>, gap: number): [number, number][] {
+  const left = b.left - gap,
+    right = b.right + gap,
+    top = b.top - gap,
+    bottom = b.bottom + gap;
+  const cx = (b.left + b.right) / 2,
+    cy = (b.top + b.bottom) / 2;
+  const points: [number, number][] = [];
+  const step = 8;
+  for (let x = left; x <= right; x += step) points.push([x, top], [x, bottom]);
+  for (let y = top + step; y < bottom; y += step) points.push([left, y], [right, y]);
+  return points.sort((a, c) => Math.hypot(a[0] - cx, a[1] - cy) - Math.hypot(c[0] - cx, c[1] - cy));
 }

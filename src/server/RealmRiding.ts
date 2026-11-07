@@ -33,7 +33,7 @@ export function dismountPlayer(
   session: PlayerSession,
 ): void {
   if (realm.vehicles.get(session)) {
-    realm.vehicles.exit(session, true);
+    realm.vehicles.exit(session);
     return;
   }
   const mountId = session.gameplaySession.mountId;

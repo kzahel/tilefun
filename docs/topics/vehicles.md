@@ -507,6 +507,19 @@ slabs retain ordinary vertical clearance. Automatic queues leave a full body len
 at junctions and can retreat safely from an obsolete queue gap even before a
 junction owner is chosen. The owner-requested no-new-overlap checks remain enforced.
 
+### Getting out never fails (2026-11-07)
+
+A playtester was trapped in tipped and wedged cars because exits only probed four
+grid-aligned points within ±16px of the car's height. `VehicleControl.exit` now
+tries, in order: level ground (step ±16px) anywhere on the footprint perimeter
+1–4 tiles out, nearest first; the roof (the existing roof-standing surface, with
+headroom checked against prop walls and solid bodies, water beneath ignored);
+open ground at any height up to 8 tiles out; then the in-memory boarding spot (or,
+after a reload into the seat, the roof unconditionally). There is no error path.
+`lastSafePosition` cannot serve as the fallback because physics refreshes it from
+the car every step while driving. `VehicleControl.test.ts` covers the corner-only,
+water-locked, sunken (ditch), occupied-roof and fully solid cases.
+
 ### Rotated body contact fix (2026-10-20)
 
 The owner's red-car screenshot led to a native reproduction: a compact at -60°

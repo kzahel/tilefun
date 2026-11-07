@@ -358,7 +358,7 @@ export class ScenarioSession {
       case "teleport": {
         if (![command.position.wx, command.position.wy, command.z ?? 0].every(Number.isFinite))
           throw Error("Invalid teleport");
-        if (this.realm.vehicles.get(this.player)) this.realm.vehicles.exit(this.player, true);
+        if (this.realm.vehicles.get(this.player)) this.realm.vehicles.exit(this.player);
         const p = this.player.player;
         teleportBody(p, { ...command.position, wz: command.z ?? 0 });
         this.player.controls.reset(this.player.lastProcessedInputSeq);
