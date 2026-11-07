@@ -14,7 +14,7 @@ function overview(seed: number, request: RegionalRequest): OverviewResult {
 }
 it.each([
   [2026, 2, -3],
-  [100, -2, -1],
+  [100, -1, 0],
 ])("maps the production route and both named stops (seed %i)", (seed, cx, cy) => {
   const planner = new RailwayPlanner(regionalWorld(seed)),
     line = planner.owner(cx, cy);

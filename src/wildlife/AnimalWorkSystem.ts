@@ -79,7 +79,7 @@ export class AnimalWorkSystem {
     manager.removalListeners.add((removed, destroyed) => {
       if (!destroyed) return; // Residency eviction is not a death or a resource deletion.
       if (removed.animalWork) this.cancel(removed, 3);
-      for (const animal of manager.entities) {
+      for (const animal of removed.persistentId ? manager.entities : []) {
         const task = animal.animalWork;
         if (!task) continue;
         if (

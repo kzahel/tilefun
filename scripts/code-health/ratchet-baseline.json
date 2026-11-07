@@ -118,8 +118,8 @@
       "overLimit": 0
     },
     "src/explorer/MapRenderer.ts": {
-      "lines": 571,
-      "worst": 163,
+      "lines": 566,
+      "worst": 156,
       "overLimit": 1
     },
     "src/explorer/regional.worker.ts": {
@@ -183,12 +183,12 @@
       "overLimit": 1
     },
     "src/generation/regional/FarmsteadPlanner.ts": {
-      "lines": 277,
+      "lines": 275,
       "worst": 64,
       "overLimit": 1
     },
     "src/generation/regional/NaturalLandscape.ts": {
-      "lines": 1615,
+      "lines": 1613,
       "worst": 72,
       "overLimit": 10
     },
@@ -203,7 +203,7 @@
       "overLimit": 2
     },
     "src/generation/regional/RacetrackPlanner.ts": {
-      "lines": 250,
+      "lines": 246,
       "worst": 42,
       "overLimit": 1
     },
@@ -422,11 +422,6 @@
       "worst": 26,
       "overLimit": 1
     },
-    "src/railway/RailwayPlanner.ts": {
-      "lines": 173,
-      "worst": 68,
-      "overLimit": 1
-    },
     "src/railway/RailwayPreview.ts": {
       "lines": 518,
       "worst": 80,
@@ -533,8 +528,8 @@
       "overLimit": 1
     },
     "src/rendering/SurfacePresentation.ts": {
-      "lines": 258,
-      "worst": 116,
+      "lines": 242,
+      "worst": 76,
       "overLimit": 1
     },
     "src/rendering/SurfaceReceivers.ts": {
@@ -748,7 +743,7 @@
       "overLimit": 1
     },
     "src/ui/WorldMap.ts": {
-      "lines": 681,
+      "lines": 673,
       "worst": 34,
       "overLimit": 1
     },

@@ -160,7 +160,7 @@ export const MARINE_ODDITY_FAUNA_PROFILES: readonly FaunaProfile[] = [
     sha256: "1964209fb2147fa6cb7f35096f25aeee1e542686736f2637971802c3858f3277",
     size: 96,
     anchor: [48, 72],
-    inspection: [25236, 12728],
+    inspection: [44120, 18040],
     inspectionZoom: 0.4,
     clips: [
       {

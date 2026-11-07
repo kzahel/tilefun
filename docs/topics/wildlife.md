@@ -105,7 +105,11 @@ Broad deep basins retain roughly four-tile shallow shores; all lake animals
 require complete deep-water footprints. Existing water refuges and the fixed
 ownership pools remain unchanged; normal shared habitat, hunting and delayed
 natural-only return rules apply. The zebra inspection point
-now uses a valid clearing under the updated current terrain. Exact animal art
+now uses a valid clearing under the updated current terrain. The rail network
+expansion ([228](../tactical/228-rail-network-loops-and-junctions.md)) reserves
+corridors over former homes, so the pigeon, proboscis-monkey, beaver,
+japanese-macaque, koala, starfish, mongoose and jaguar inspection points moved
+to their nearest valid generated groups. Exact animal art
 and completed roster counts remain unchanged.
 
 ## Large predators can eat NPC people

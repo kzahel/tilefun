@@ -9601,7 +9601,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:133"
+          "source": "src/railway/RailwayStrategy.ts:134"
         }
       ]
     },
@@ -9623,7 +9623,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:134"
+          "source": "src/railway/RailwayStrategy.ts:135"
         },
         {
           "system": "Gameplay",
@@ -9681,7 +9681,7 @@
       "consumers": [
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:190"
+          "source": "src/generation/regional/RacetrackPlanner.ts:186"
         },
         {
           "system": "Street starter review (candidate)",
@@ -9689,7 +9689,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:136"
+          "source": "src/railway/RailwayStrategy.ts:137"
         }
       ]
     },
@@ -9937,7 +9937,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:197"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:195"
         }
       ]
     },
@@ -9959,7 +9959,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:197"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:195"
         }
       ]
     },
@@ -10431,11 +10431,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:257"
+          "source": "src/generation/regional/MotocrossPlanner.ts:253"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:191"
+          "source": "src/generation/regional/RacetrackPlanner.ts:187"
         }
       ]
     },
@@ -10543,11 +10543,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1400"
+          "source": "src/generation/regional/NaturalLandscape.ts:1398"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1594"
+          "source": "src/generation/regional/NaturalLandscape.ts:1592"
         },
         {
           "system": "World generation",
@@ -10707,15 +10707,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:256"
+          "source": "src/generation/regional/MotocrossPlanner.ts:252"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:193"
+          "source": "src/generation/regional/RacetrackPlanner.ts:189"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:194"
+          "source": "src/generation/regional/RacetrackPlanner.ts:190"
         },
         {
           "system": "Gameplay",
@@ -10753,7 +10753,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:190"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:188"
         },
         {
           "system": "Interiors",
@@ -11275,7 +11275,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:186"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:184"
         },
         {
           "system": "Interiors",
@@ -11391,7 +11391,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:255"
+          "source": "src/generation/regional/MotocrossPlanner.ts:251"
         },
         {
           "system": "World generation",
@@ -11399,7 +11399,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:189"
+          "source": "src/generation/regional/RacetrackPlanner.ts:185"
         },
         {
           "system": "Street starter review (candidate)",
@@ -11427,7 +11427,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/railway/RailwayStrategy.ts:135"
+          "source": "src/railway/RailwayStrategy.ts:136"
         }
       ]
     },
@@ -11493,7 +11493,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:243"
+          "source": "src/generation/regional/MotocrossPlanner.ts:239"
         },
         {
           "system": "World generation",
@@ -11513,11 +11513,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:143"
+          "source": "src/generation/regional/RacetrackPlanner.ts:139"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:161"
+          "source": "src/generation/regional/RacetrackPlanner.ts:157"
         },
         {
           "system": "World generation",
@@ -35767,11 +35767,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:204"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:202"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:204"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:202"
         },
         {
           "system": "Gameplay",
@@ -37431,11 +37431,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:257"
+          "source": "src/generation/regional/MotocrossPlanner.ts:253"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:191"
+          "source": "src/generation/regional/RacetrackPlanner.ts:187"
         }
       ]
     },
@@ -37551,11 +37551,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1400"
+          "source": "src/generation/regional/NaturalLandscape.ts:1398"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1594"
+          "source": "src/generation/regional/NaturalLandscape.ts:1592"
         },
         {
           "system": "World generation",
@@ -37723,15 +37723,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:256"
+          "source": "src/generation/regional/MotocrossPlanner.ts:252"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:193"
+          "source": "src/generation/regional/RacetrackPlanner.ts:189"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/RacetrackPlanner.ts:194"
+          "source": "src/generation/regional/RacetrackPlanner.ts:190"
         },
         {
           "system": "Gameplay",
@@ -37773,7 +37773,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/FarmsteadPlanner.ts:190"
+          "source": "src/generation/regional/FarmsteadPlanner.ts:188"
         },
         {
           "system": "Interiors",

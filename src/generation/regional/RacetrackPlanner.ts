@@ -116,11 +116,7 @@ export class RacetrackSource {
         for (let px = bounds.minX; px <= bounds.maxX; px += 4)
           if (
             region.connections.some((c) => pathDistance(c.points, px, py) < 12) ||
-            lines.some((l) =>
-              l.path
-                ? nearestRail(l.path, px * 16, py * 16).distance < 12 * 16
-                : px >= l.start - 12 && px <= l.end + 12 && Math.abs(py - l.y) < 12,
-            )
+            lines.some((l) => nearestRail(l.path, px * 16, py * 16).distance < 12 * 16)
           ) {
             valid = false;
             break;

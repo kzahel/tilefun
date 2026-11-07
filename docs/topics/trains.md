@@ -1,5 +1,22 @@
 # Generated railways and retained train assets
 
+[228](../tactical/228-rail-network-loops-and-junctions.md) is the parent plan for
+a wider network, city loops past the speedway, switchable junctions and track
+variety. Phase 1 links every admissible east-neighbour town pair (previously only
+even-column pairs). On the three measured seeds, 62–84 towns per 16×16 regions
+now have a station, up from 10–16. Each link is still its own single-track
+shuttle. Hub towns have a west-facing and an east-facing platform 32 tiles either
+side of the shared access path. Routes are tangent S-bends of any vertical offset.
+Road crossings become 96px road decks over the track in both orientations, drawn
+as height-shaded asphalt (north/south decks cast a ground shadow). Fresh services
+start at the stop nearest the player. Train terrain demand now looks ahead, so
+trains far from players run instead of stalling at chunk edges. Seed 2026 starts
+on Mapleford's east platform (**698,-555**), facing the Oakgrove train on the west
+platform; the Fernstead train departs east. Review the
+[east/west road bridge](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=generated-2026-ew#/tool/world-geometry)
+and [north/south road bridge](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=generated-2026-ns#/tool/world-geometry);
+the new presentation has no Workshop verdict.
+
 [220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) removes
 matching-tick landing corrections that counted an extra interval, and smooths
 the full consist's return from predicted time to the remote buffer on departure.
@@ -20,8 +37,8 @@ motion and explicit relocation clears it. Frame `0x13` carries this replay state
 reload co-op endpoints together.
 
 
-Status: generated autonomous services, station recall and shared-physics roof riding restored in 218; inside driving/manual whistle remain deferred.
-Updated: 2026-11-03.
+Status: regional network (228 phase 1) delivered for play review on top of the 218 services, recall and roof riding; inside driving/manual whistle remain deferred.
+Updated: 2026-11-07.
 
 [218](../tactical/218-traffic-and-rail-gameplay-recovery.md) restores up to four
 active generated services using approved native train banks. Each carriage is a

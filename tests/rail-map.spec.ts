@@ -1,5 +1,21 @@
 import { expect, test } from "@playwright/test";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
+import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
+import { RailwayPlanner } from "../src/railway/RailwayPlanner.js";
+
+// The new-world start platform and its line come from the production planner.
+const planner = new RailwayPlanner(regionalWorld(2026));
+const start = planner.start();
+const line = planner
+  .query({
+    minX: (start?.x ?? 0) - 2,
+    maxX: (start?.x ?? 0) + 2,
+    minY: start?.y ?? 0,
+    maxY: (start?.y ?? 0) + 6,
+  })
+  .find((l) => l.stations[0].x === start?.x);
+if (!line) throw Error("Seed 2026 has no start line");
+const [home, away] = line.stations;
 
 test.use({ channel: "chromium" });
 for (const phone of [false, true]) {
@@ -21,20 +37,20 @@ for (const phone of [false, true]) {
     await page.getByRole("button", { name: "Open world map" }).click();
     const map = page.getByTestId("world-map");
     await expect(map).toHaveAttribute("data-settled", "true");
-    await expect(map).toHaveAttribute("data-rail-lines", "1");
+    expect(Number(await map.getAttribute("data-rail-lines"))).toBeGreaterThanOrEqual(1);
     const stops = map.getByRole("group", { name: "Train stops" });
     await expect(
-      stops.getByRole("button", { name: "Willowhaven station", exact: true }),
+      stops.getByRole("button", { name: `${home.town.name} station`, exact: true }),
     ).toBeVisible();
     await expect(
-      stops.getByRole("button", { name: "Willowbridge station", exact: true }),
+      stops.getByRole("button", { name: `${away.town.name} station`, exact: true }),
     ).toBeVisible();
     await expect(
       map.getByText("Purple dashed lines: railways · ◇: train stops", { exact: true }),
     ).toBeVisible();
-    await stops.getByRole("button", { name: "Willowbridge station", exact: true }).click();
-    await expect(map).toHaveAttribute("data-x", "3422");
-    await expect(map).toHaveAttribute("data-y", "-2658");
+    await stops.getByRole("button", { name: `${away.town.name} station`, exact: true }).click();
+    await expect(map).toHaveAttribute("data-x", String(away.x));
+    await expect(map).toHaveAttribute("data-y", String(away.y));
     await expect(map).toHaveAttribute("data-settled", "true");
     expect(
       await map.getByTestId("world-map-canvas").evaluate((node) => {
@@ -57,7 +73,7 @@ for (const phone of [false, true]) {
     await expect(map).toBeHidden();
     await page.getByRole("button", { name: "Open world map" }).click();
     await expect(
-      stops.getByRole("button", { name: "Willowbridge station", exact: true }),
+      stops.getByRole("button", { name: `${away.town.name} station`, exact: true }),
     ).toBeVisible();
     expect(errors).toEqual([]);
   });

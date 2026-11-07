@@ -58,7 +58,7 @@ export const SMALL_GROUND_HUNTER_PROFILES: readonly NaturalHunterProfile[] = [
       habitat: "open",
       radius: 144,
       group: 1,
-      inspection: [-421, -293],
+      inspection: [863, -1048],
     },
   },
   {

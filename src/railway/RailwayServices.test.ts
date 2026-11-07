@@ -98,8 +98,21 @@ it("recalls the generated station service, travels, persists and rejects an occu
   recipe.guest = createPlayer(recipe.player.position.wx, recipe.player.position.wy);
   const s = await ScenarioSession.create(recipe);
   try {
-    const rails = required(s.realm.railways),
-      service = required([...rails.services.values()][0]);
+    required(s.realm.railways);
+    // Other links (e.g. at the default spawn hub) may also be active; use this platform's.
+    const nearest = () =>
+      required(
+        [...required(s.realm.railways).services.values()].find((v) =>
+          v.line.stations.some(
+            (st) =>
+              Math.hypot(
+                st.x * 16 - recipe.player.position.wx,
+                st.y * 16 - recipe.player.position.wy,
+              ) < 640,
+          ),
+        ),
+      );
+    const service = nearest();
     const bench = required(
       s.realm.propManager.props.find((p) =>
         p.proceduralId?.startsWith(`${service.line.stations[0]?.id}:bench:`),
@@ -129,7 +142,7 @@ it("recalls the generated station service, travels, persists and rejects an occu
     await s.step(idle);
     const distance = service.record.distance;
     await s.reload();
-    const restored = required([...required(s.realm.railways).services.values()][0]);
+    const restored = nearest();
     expect(restored.record.distance).toBeCloseTo(distance, 2);
     const car = required(restored.cars[1]);
     teleportBody(s.player.player, { wx: car.position.wx, wy: car.position.wy, wz: 44 });

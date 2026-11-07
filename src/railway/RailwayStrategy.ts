@@ -13,7 +13,7 @@ import { nearestRail } from "./RailPath.js";
 import { RailwayPlanner } from "./RailwayPlanner.js";
 import { bridgePlacements } from "./RoadRailBridge.js";
 
-/** Reserve stations outside town blocks; admit dry tangent curves or straight services with bounded road bridges. */
+/** Realize planned track, station platforms and road-over-rail bridges in terrain. */
 export class RailwayStrategy extends TrafficStrategy {
   private bridgeNetworks = new WeakSet<object>();
   readonly railways = new RailwayPlanner(this.world);
@@ -21,7 +21,6 @@ export class RailwayStrategy extends TrafficStrategy {
     return this.railways
       .query({ minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 })
       .flatMap((l) =>
-        l.path &&
         nearestRail(l.path, cx * CHUNK_SIZE_PX + 128, cy * CHUNK_SIZE_PX + 128).distance < 320
           ? [l.path]
           : [],
@@ -32,17 +31,24 @@ export class RailwayStrategy extends TrafficStrategy {
     if (this.bridgeNetworks.has(graph)) return graph;
     this.bridgeNetworks.add(graph);
     for (const lane of graph.lanes.values()) {
+      const vertical = lane.a.x === lane.b.x;
+      if (!vertical && lane.a.y !== lane.b.y) continue;
       const bounds = {
         minX: Math.min(lane.a.x, lane.b.x) / 16 - 6,
         maxX: Math.max(lane.a.x, lane.b.x) / 16 + 6,
         minY: Math.min(lane.a.y, lane.b.y) / 16 - 6,
         maxY: Math.max(lane.a.y, lane.b.y) / 16 + 6,
       };
-      if (lane.a.x !== lane.b.x) continue;
+      // Lanes run on the road centerline: x for north/south, y for east/west decks.
       const bridges = this.railways
         .query(bounds)
         .flatMap((line) => line.bridges)
-        .filter((b) => b.x * 16 === lane.a.x && intersects(b.bounds, bounds));
+        .filter(
+          (b) =>
+            (vertical
+              ? b.axis === "south" && b.x * 16 === lane.a.x
+              : b.axis === "east" && b.y * 16 === lane.a.y) && intersects(b.bounds, bounds),
+        );
       if (bridges.length) {
         lane.surfaceFollowing = true;
         lane.requiredSurfaces = bridges.flatMap(bridgePlacements).map((p) => {
@@ -63,22 +69,16 @@ export class RailwayStrategy extends TrafficStrategy {
       maxY: cy * 16 + 17,
     });
     if (!lines.length) return;
+    // Platforms sit inside the track reservation. Track overrides roads (bridges
+    // carry them above); station paving keeps a town road passing between platforms.
     const surface = (x: number, y: number) => {
-      for (const line of lines) {
+      for (const line of lines)
         for (const s of line.stations)
           if (insideDenseBounds(s.platform, x, y) || insideDenseBounds(s.access, x, y))
             return RoadType.CityPavement;
-        if (line.path) {
-          if (nearestRail(line.path, (x + 0.5) * 16, (y + 0.5) * 16).distance <= 112)
-            return RoadType.RailCurveProof;
-        } else if (
-          x >= line.bounds.minX &&
-          x < line.bounds.maxX &&
-          y >= line.y - 1 &&
-          y < line.y + 1
-        )
-          return y < line.y ? RoadType.RailHorizontalTop : RoadType.RailHorizontalBottom;
-      }
+      for (const line of lines)
+        if (nearestRail(line.path, (x + 0.5) * 16, (y + 0.5) * 16).distance <= 112)
+          return RoadType.RailCurveProof;
       return 0;
     };
     for (let sy = 0; sy < Chunk.SUBGRID_SIZE; sy++)
@@ -88,6 +88,7 @@ export class RailwayStrategy extends TrafficStrategy {
     for (let y = 0; y < 16; y++)
       for (let x = 0; x < 16; x++) {
         const road = surface(cx * 16 + x, cy * 16 + y);
+        if (road === RoadType.CityPavement && chunk.getRoad(x, y)) continue;
         if (road) {
           chunk.setRoad(x, y, road);
           chunk.setHeight(x, y, 0);

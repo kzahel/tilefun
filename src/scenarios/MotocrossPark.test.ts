@@ -10,6 +10,10 @@ import { ScenarioSession } from "./ScenarioSession.js";
 it("drives the generated start-line car over the sky lip and double in the real world", async () => {
   const park = required(new MotocrossSource(regionalWorld(2026)).owner(0, 0));
   const s = await ScenarioSession.create(naturalLandscapeRecipe("motocross", "thicket"));
+  // This boosted run is chaotic: a 0.05px start offset already rolls the car on
+  // landing (measured 2026-11-07). Distant rail services (~600 tiles away) only
+  // change shared-solver floating-point order, so keep them out of this jump check.
+  s.realm.railways?.dispose();
   try {
     const north = park.center.y - 20;
     await s.ready({

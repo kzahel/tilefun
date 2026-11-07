@@ -10,6 +10,7 @@ import {
 import { descriptorKey } from "../generation/GenerationDescriptor.js";
 import type { OverviewResult } from "../generation/Overview.js";
 import { type Point, QUERY_LIMITS } from "../generation/regional/RegionalPlanner.js";
+import { townStops } from "../railway/RailwayPlanner.js";
 import type { WorldMapMessage, WorldMapPlayer } from "../shared/protocol.js";
 import { activateMenu, deactivateMenu } from "./MenuNavigation.js";
 import "./WorldMap.css";
@@ -182,6 +183,17 @@ export class WorldMap {
     button.onclick = click;
     return button;
   }
+  /** List button centering the map on `at`; `travel` also makes it the travel target. */
+  private place(label: string, at: Point, travel: boolean, data: Record<string, string>) {
+    const button = this.button(label, () => {
+      this.view.x = at.x;
+      this.view.y = at.y;
+      if (travel) this.target = { ...at };
+      this.changed();
+    });
+    Object.assign(button.dataset, data, { x: String(at.x), y: String(at.y) });
+    return button;
+  }
 
   show(): void {
     this.open = true;
@@ -245,56 +257,36 @@ export class WorldMap {
             if (response.type === "result") {
               this.result = response.result;
               this.stops.replaceChildren();
-              for (const station of (this.result.railways ?? []).flatMap((line) => line.stations)) {
-                const button = this.button(`${station.town.name} station`, () => {
-                  this.view.x = station.x;
-                  this.view.y = station.y;
-                  this.changed();
-                });
-                button.dataset.testid = "world-map-stop";
-                button.dataset.stationId = station.id;
-                button.dataset.x = String(station.x);
-                button.dataset.y = String(station.y);
-                this.stops.append(button);
-              }
+              for (const s of townStops(this.result.railways ?? []))
+                this.stops.append(
+                  this.place(`${s.town.name} station`, s, false, {
+                    testid: "world-map-stop",
+                    stationId: s.id,
+                  }),
+                );
               this.tracks.replaceChildren();
-              for (const track of this.result.racetracks ?? []) {
-                const button = this.button(track.name, () => {
-                  this.view.x = track.center.x;
-                  this.view.y = track.center.y;
-                  this.changed();
-                });
-                button.dataset.testid = "world-map-racetrack";
-                button.dataset.trackId = track.id;
-                this.tracks.append(button);
-              }
-              for (const park of this.result.motocross ?? []) {
-                const button = this.button(park.name, () => {
-                  this.view.x = park.arrival.x;
-                  this.view.y = park.arrival.y;
-                  this.target = { ...park.arrival };
-                  this.changed();
-                });
-                button.dataset.testid = "world-map-motocross";
-                button.dataset.parkId = park.id;
-                button.dataset.x = String(park.arrival.x);
-                button.dataset.y = String(park.arrival.y);
-                this.tracks.append(button);
-              }
+              for (const track of this.result.racetracks ?? [])
+                this.tracks.append(
+                  this.place(track.name, track.center, false, {
+                    testid: "world-map-racetrack",
+                    trackId: track.id,
+                  }),
+                );
+              for (const park of this.result.motocross ?? [])
+                this.tracks.append(
+                  this.place(park.name, park.arrival, true, {
+                    testid: "world-map-motocross",
+                    parkId: park.id,
+                  }),
+                );
               this.depots.replaceChildren();
-              for (const depot of this.result.vehicleDepots ?? []) {
-                const button = this.button(depot.name, () => {
-                  this.view.x = depot.arrival.x;
-                  this.view.y = depot.arrival.y;
-                  this.target = { ...depot.arrival };
-                  this.changed();
-                });
-                button.dataset.testid = "world-map-depot";
-                button.dataset.depotId = depot.id;
-                button.dataset.x = String(depot.arrival.x);
-                button.dataset.y = String(depot.arrival.y);
-                this.depots.append(button);
-              }
+              for (const depot of this.result.vehicleDepots ?? [])
+                this.depots.append(
+                  this.place(depot.name, depot.arrival, true, {
+                    testid: "world-map-depot",
+                    depotId: depot.id,
+                  }),
+                );
               this.root.dataset.vehicleDepots = String(this.result.vehicleDepots?.length ?? 0);
               this.root.dataset.racetracks = String(this.result.racetracks?.length ?? 0);
               this.root.dataset.motocross = String(this.result.motocross?.length ?? 0);

@@ -1,5 +1,8 @@
 import { sha256 } from "../art/ArtSource.js";
-import { generatedCrossingRecipe } from "../scenarios/GeneratedCrossingRecipe.js";
+import {
+  GENERATED_CROSSINGS,
+  generatedCrossingRecipe,
+} from "../scenarios/GeneratedCrossingRecipe.js";
 import { jumpParkRecipe } from "../scenarios/JumpParkRecipe.js";
 import { railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { roadTrafficRecipe } from "../scenarios/RoadTrafficRecipe.js";
@@ -8,6 +11,7 @@ import { undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js
 import { vehicleDynamicsRecipe } from "../scenarios/VehicleDynamicsRecipe.js";
 import { vehicleGeometryRecipe } from "../scenarios/VehicleGeometryRecipe.js";
 import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
+import { required } from "../shared/required.js";
 import { deferredVehicleCandidate } from "./DeferredVehicleCandidate.js";
 import { ENGINE_REVIEW_REVISION } from "./EngineReviewRevision.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
@@ -98,15 +102,15 @@ async function fingerprint(recipe: unknown) {
 }
 export async function buildGeneratedCrossingCandidate(index: number): Promise<WorkshopCandidate> {
   const scene = generatedCrossingRecipe(index),
-    seed = scene.recipe.generation.seed;
+    { key, label } = required(GENERATED_CROSSINGS[index]);
   return {
-    id: `geometry:generated-crossing-${seed}-v1`,
+    id: `geometry:generated-crossing-${key}-v1`,
     batchId: "world-geometry",
     kind: "geometry",
-    name: `Generated road bridge · seed ${seed}`,
+    name: `Generated road bridge · ${label}`,
     prompt:
-      "Walk both generated approaches and underneath, or drive the staged car. Static regional geometry and normal shared physics; train services are deferred.",
-    url: `/tilefun/workshop.html?geometry=generated-${seed}#/tool/world-geometry`,
+      "Walk both generated approaches and underneath, or drive the staged car. Static regional geometry and normal shared physics.",
+    url: `/tilefun/workshop.html?geometry=generated-${key}#/tool/world-geometry`,
     fingerprint: await fingerprint(scene),
     excluded: "Interactive generated-world experiment; no immutable art promotion.",
   };

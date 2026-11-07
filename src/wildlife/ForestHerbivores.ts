@@ -10,7 +10,7 @@ export const FOREST_HERBIVORE_PROFILES: readonly FaunaProfile[] = [
     sha256: "8899a9b7bab6af621e67530c38032dcefbf0e5aa47305ec06c81ba2922604564",
     size: 64,
     anchor: [32, 48],
-    inspection: [218, -540],
+    inspection: [1436, -1496],
     clips: [
       {
         name: "idle",
@@ -108,7 +108,7 @@ export const FOREST_HERBIVORE_PROFILES: readonly FaunaProfile[] = [
     sha256: "b347c16c73220abdea9260e1630f21ef3cfe9d3e9c0532d0a2dd70df08bfc1bf",
     size: 64,
     anchor: [32, 48],
-    inspection: [27, -347],
+    inspection: [487, -1189],
     clips: [
       {
         name: "idle",

@@ -54,7 +54,7 @@ export default function WorldGeometryPage({
   if (initial.startsWith("nature-")) return <NaturalLandscapePage />;
   if (
     !FIXTURES.includes(initial) &&
-    !GENERATED_CROSSINGS.some((c) => initial === `generated-${c.seed}`)
+    !GENERATED_CROSSINGS.some((c) => initial === `generated-${c.key}`)
   )
     return <DeferredVehiclePage />;
   return <GeometryFixtures initial={initial} />;
@@ -98,7 +98,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
   const settings = useRef({ paused, visibility, sounds });
   settings.current = { paused, visibility, sounds };
   const vehicle = fixture.startsWith("car-");
-  const generatedIndex = GENERATED_CROSSINGS.findIndex((c) => fixture === `generated-${c.seed}`);
+  const generatedIndex = GENERATED_CROSSINGS.findIndex((c) => fixture === `generated-${c.key}`);
   const generated = useMemo(
     () => (generatedIndex < 0 ? undefined : generatedCrossingRecipe(generatedIndex, reverse)),
     [generatedIndex, reverse],
@@ -299,7 +299,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
             </option>
           ))}
           {GENERATED_CROSSINGS.map((c) => (
-            <option key={c.seed} value={`generated-${c.seed}`}>
+            <option key={c.key} value={`generated-${c.key}`}>
               {c.label}
             </option>
           ))}

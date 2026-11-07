@@ -157,7 +157,7 @@ export const GROUND_PRIMATE_PROFILES: readonly FaunaProfile[] = [
     sha256: "e76cc9f0805526318117e1e56ff6bc32a325cbb3599ebc95e765d89f3cc5cca3",
     size: 96,
     anchor: [48, 72],
-    inspection: [24, -408],
+    inspection: [2713, -283],
     clips: [
       {
         name: "idle",
@@ -206,7 +206,7 @@ export const GROUND_PRIMATE_PROFILES: readonly FaunaProfile[] = [
     sha256: "8d88989bdcb0c2126b8493271342a9980c1e7a9faaa9b9ce164eae193e302ba7",
     size: 96,
     anchor: [48, 72],
-    inspection: [-856, 348],
+    inspection: [-1696, 616],
     clips: [
       {
         name: "idle",

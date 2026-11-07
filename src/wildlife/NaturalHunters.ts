@@ -151,7 +151,7 @@ export const NATURAL_HUNTER_PROFILES: readonly NaturalHunterProfile[] = [
       habitat: "woodland",
       radius: 176,
       group: 1,
-      inspection: [1320, -664],
+      inspection: [103, -1307],
     },
   },
   {

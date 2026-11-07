@@ -8,11 +8,11 @@ import { World } from "../world/World.js";
 import { RailwayStrategy } from "./RailwayStrategy.js";
 
 for (const c of GENERATED_CROSSINGS) {
-  it(`seed ${c.seed}: deterministic bridge discovery and terrain across every footprint chunk`, () => {
+  it(`${c.label}: deterministic bridge discovery and terrain across every footprint chunk`, () => {
     const a = new RailwayStrategy(regionalWorld(c.seed)),
       b = new RailwayStrategy(regionalWorld(c.seed));
     const line = required(a.railways.owner(c.cx, c.cy)),
-      bridge = required(line.bridges[0]);
+      bridge = required(line.bridges[c.bridge]);
     const chunks: [number, number][] = [];
     for (let y = Math.floor(bridge.bounds.minY / 16); y <= Math.floor(bridge.bounds.maxY / 16); y++)
       for (
@@ -35,13 +35,16 @@ for (const c of GENERATED_CROSSINGS) {
             .digest("hex"),
         );
       }
-      expect(world.getRoadAt(bridge.x, bridge.y)).toBe(RoadType.RailHorizontalBottom);
-      expect(world.getRoadAt(bridge.x, bridge.y - 1)).toBe(RoadType.RailHorizontalTop);
+      // Track under the deck replaces the road cells; the road is carried above.
+      expect(world.getRoadAt(bridge.x, bridge.y)).toBe(RoadType.RailCurveProof);
+      expect(world.getRoadAt(bridge.x - 1, bridge.y - 1)).toBe(RoadType.RailCurveProof);
       expect(world.getHeightAt(bridge.x, bridge.y)).toBe(0);
       return [...result].sort();
     };
     expect(capture(a, chunks)).toEqual(capture(b, [...chunks].reverse()));
-    expect(b.railways.owner(c.cx + 1, c.cy)).toEqual(line);
-    for (const station of line.stations) expect(Math.abs(station.x - bridge.x)).toBeGreaterThan(40);
+    // A different planner reaches the same line from a query around the bridge.
+    expect(b.railways.query(bridge.bounds).find((l) => l.id === line.id)).toEqual(line);
+    for (const station of line.stations)
+      expect(Math.hypot(station.x - bridge.x, station.y - bridge.y)).toBeGreaterThan(40);
   });
 }

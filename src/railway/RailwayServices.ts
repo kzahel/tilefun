@@ -85,12 +85,15 @@ export class RailwayServices {
       }
     );
   }
+  /** Terrain a consist needs: shared-scene support asks for ready chunks across each
+   * carriage's whole collider (up to ~160px wide), beyond a carriage-center halo. */
   private range(poses: readonly { x: number; y: number }[]): ChunkRange {
+    const halo = 224;
     return {
-      minCx: Math.floor((Math.min(...poses.map((p) => p.x)) - 144) / CHUNK_SIZE_PX),
-      maxCx: Math.floor((Math.max(...poses.map((p) => p.x)) + 144) / CHUNK_SIZE_PX),
-      minCy: Math.floor((Math.min(...poses.map((p) => p.y)) - 144) / CHUNK_SIZE_PX),
-      maxCy: Math.floor((Math.max(...poses.map((p) => p.y)) + 144) / CHUNK_SIZE_PX),
+      minCx: Math.floor((Math.min(...poses.map((p) => p.x)) - halo) / CHUNK_SIZE_PX),
+      maxCx: Math.floor((Math.max(...poses.map((p) => p.x)) + halo) / CHUNK_SIZE_PX),
+      minCy: Math.floor((Math.min(...poses.map((p) => p.y)) - halo) / CHUNK_SIZE_PX),
+      maxCy: Math.floor((Math.max(...poses.map((p) => p.y)) + halo) / CHUNK_SIZE_PX),
     };
   }
   private poses(s: Pick<RailService, "line" | "path">, distance: number) {
@@ -133,9 +136,21 @@ export class RailwayServices {
     }
     return false;
   }
+  private near(line: RailRoute, r: ChunkRange): boolean {
+    const half = ((r.maxCx - r.minCx + 1) * CHUNK_SIZE_PX) / 2,
+      halfY = ((r.maxCy - r.minCy + 1) * CHUNK_SIZE_PX) / 2,
+      x = r.minCx * CHUNK_SIZE_PX + half,
+      y = r.minCy * CHUNK_SIZE_PX + halfY,
+      reach = Math.hypot(half, halfY) + 512;
+    return (
+      nearestRail(this.path(line), x, y).distance <= reach ||
+      line.stations.some((st) => Math.hypot(st.x * 16 - x, st.y * 16 - y) <= reach)
+    );
+  }
   async prepare(ranges: readonly ChunkRange[], retire = false) {
     if (this.closed) return;
     const wanted = new Map<string, RailRoute>();
+    // A broad S-bend's bounding box is not interest: require nearby track or a station.
     for (const r of ranges)
       for (const line of this.source.query({
         minX: r.minCx * 16,
@@ -143,7 +158,7 @@ export class RailwayServices {
         minY: r.minCy * 16,
         maxY: (r.maxCy + 1) * 16,
       }))
-        wanted.set(line.id, line);
+        if (this.near(line, r)) wanted.set(line.id, line);
     for (const s of this.services.values())
       if (retire && !wanted.has(s.line.id) && !this.occupied(s)) {
         this.dirty(s);
@@ -155,13 +170,27 @@ export class RailwayServices {
         const pending = this.pending.get(line.id);
         if (pending) return pending;
         if (this.services.size + this.pending.size >= 4) return undefined;
-        const task = this.load(line).finally(() => this.pending.delete(line.id));
+        const task = this.load(line, ranges[0]).finally(() => this.pending.delete(line.id));
         this.pending.set(line.id, task);
         return task;
       }),
     );
   }
-  private async load(line: RailRoute) {
+  /** Index of the stop closest to `r`, so a fresh service starts where it is seen. */
+  private nearestStop(path: RailPath, r: ChunkRange | undefined): number {
+    if (!r) return 0;
+    const a = railAlignment(path),
+      x = ((r.minCx + r.maxCx + 1) / 2) * CHUNK_SIZE_PX,
+      y = ((r.minCy + r.maxCy + 1) / 2) * CHUNK_SIZE_PX;
+    let best = 0;
+    path.stops.forEach((stop, i) => {
+      const p = a.sample(stop.distance),
+        q = a.sample(required(path.stops[best]).distance);
+      if (Math.hypot(p.x - x, p.y - y) < Math.hypot(q.x - x, q.y - y)) best = i;
+    });
+    return best;
+  }
+  private async load(line: RailRoute, near?: ChunkRange) {
     const path = this.path(line),
       a = railAlignment(path),
       pathKey = JSON.stringify(path);
@@ -176,10 +205,11 @@ export class RailwayServices {
     const oldDistance =
       saved?.distance ?? (saved?.x === undefined ? undefined : saved.x - a.sample(0).x);
     const compatible = !saved?.pathKey || saved.pathKey === pathKey;
+    const first = this.nearestStop(path, saved ? undefined : near);
     const distance =
       compatible && oldDistance !== undefined && Number.isFinite(oldDistance)
         ? Math.max(240, Math.min(a.length - 240, oldDistance))
-        : required(path.stops[0]).distance;
+        : required(path.stops[first]).distance;
     const nextStop = saved?.nextStop,
       dwell = saved?.dwell;
     const record: RecordState = {
@@ -192,7 +222,9 @@ export class RailwayServices {
         nextStop >= 0 &&
         nextStop < path.stops.length
           ? nextStop
-          : 1,
+          : first === 0
+            ? 1
+            : 0,
       dwell:
         compatible && dwell !== undefined && Number.isFinite(dwell)
           ? Math.max(0, Math.min(8, dwell))
@@ -220,8 +252,16 @@ export class RailwayServices {
     this.demand(s);
     this.dirty(s);
   }
+  /** Current footprint plus a lookahead toward the next stop. `plan` only moves
+   * once the next poses' terrain is ready, so demanding the present footprint alone
+   * deadlocks at chunk edges whenever no player happens to load the area ahead. */
   private demand(s: RailService) {
-    const poses = this.poses(s, s.record.distance);
+    const stop = required(s.path.stops[s.record.nextStop]).distance,
+      ahead = Math.max(-384, Math.min(384, stop - s.record.distance));
+    const poses = [
+      ...this.poses(s, s.record.distance),
+      ...this.poses(s, s.record.distance + ahead),
+    ];
     this.realm.streaming?.interest.set(`rail-service:${s.line.id}`, [
       { range: this.range(poses), activity: 2, reason: "dependency" },
     ]);

@@ -154,26 +154,21 @@ export class MapRenderer {
     if (overlays.railways) {
       for (const line of result.railways ?? []) {
         ctx.beginPath();
-        if (line.path) {
-          const first = line.path.segments[0];
-          if (!first) continue;
-          const start = segmentPose(first, 0);
-          ctx.moveTo(sx(start.x / 16), sy(start.y / 16));
-          for (const segment of line.path.segments) {
-            if (segment.kind === "line") ctx.lineTo(sx(segment.endX / 16), sy(segment.endY / 16));
-            else
-              ctx.arc(
-                sx(segment.x / 16),
-                sy(segment.y / 16),
-                (segment.radius / 16) * view.zoom,
-                segment.angle,
-                segment.angle + segment.sweep,
-                segment.sweep < 0,
-              );
-          }
-        } else {
-          ctx.moveTo(sx(line.bounds.minX), sy(line.y));
-          ctx.lineTo(sx(line.bounds.maxX), sy(line.y));
+        const first = line.path.segments[0];
+        if (!first) continue;
+        const start = segmentPose(first, 0);
+        ctx.moveTo(sx(start.x / 16), sy(start.y / 16));
+        for (const segment of line.path.segments) {
+          if (segment.kind === "line") ctx.lineTo(sx(segment.endX / 16), sy(segment.endY / 16));
+          else
+            ctx.arc(
+              sx(segment.x / 16),
+              sy(segment.y / 16),
+              (segment.radius / 16) * view.zoom,
+              segment.angle,
+              segment.angle + segment.sweep,
+              segment.sweep < 0,
+            );
         }
         ctx.lineCap = "round";
         ctx.lineJoin = "round";

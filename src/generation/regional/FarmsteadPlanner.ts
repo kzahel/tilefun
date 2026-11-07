@@ -142,9 +142,7 @@ export class FarmsteadSource {
           (l) =>
             l.stations.some((s) => inside(s.platform, px, py, r) || inside(s.access, px, py, r)) ||
             l.bridges.some((b) => inside(b.bounds, px, py, r)) ||
-            (l.path
-              ? nearestRail(l.path, px * 16, py * 16).distance < (7 + r) * 16
-              : px >= l.start - r && px <= l.end + r && Math.abs(py - l.y) < 3 + r),
+            nearestRail(l.path, px * 16, py * 16).distance < (7 + r) * 16,
         );
       const dry = (px: number, py: number) =>
         regionalTerrainForElevation(plannedElevation(this.world, px, py)) === TerrainId.Grass;

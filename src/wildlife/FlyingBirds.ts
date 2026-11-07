@@ -10,7 +10,7 @@ export const FLYING_BIRD_PROFILES: readonly FaunaProfile[] = [
     sha256: "90409d6ac0f04629e22e295339e94642ba73710e9e682d8d4c07c0573067a813",
     size: 64,
     anchor: [32, 48],
-    inspection: [-40, -295],
+    inspection: [-473, -1253],
     clips: [
       {
         name: "idle",

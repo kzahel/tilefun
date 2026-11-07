@@ -61,19 +61,19 @@ for (const renderer of ["canvas", "gpu"]) {
 test("seeded crossings are selectable and fit phone review", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(
-    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=generated-42#/tool/world-geometry",
+    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=generated-2026-ns#/tool/world-geometry",
   );
   const c = page.getByLabel("World geometry scene");
-  for (const seed of [42, 3]) {
-    await page.getByLabel("Geometry fixture").selectOption(`generated-${seed}`);
+  for (const key of ["2026-ns", "2026-ew"]) {
+    await page.getByLabel("Geometry fixture").selectOption(`generated-${key}`);
     await expect(c).toHaveAttribute("data-ready", "true");
-    await expect(c).toHaveAttribute("data-generated-seed", String(seed));
+    await expect(c).toHaveAttribute("data-generated-seed", "2026");
     await expect(c).toHaveAttribute("data-surface-count", "3");
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );
     await page.screenshot({
-      path: `/tmp/tilefun-generated-crossing-phone-${seed}.png`,
+      path: `/tmp/tilefun-generated-crossing-phone-${key}.png`,
       fullPage: true,
     });
   }

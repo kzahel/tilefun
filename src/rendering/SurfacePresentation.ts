@@ -7,6 +7,7 @@ import type { Camera } from "./Camera.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import type { OverlayFrame } from "./OverlayFrame.js";
 import { projectWorld } from "./Projection.js";
+import { drawRoadDeck, isRoadDeck } from "./RoadDeckPresentation.js";
 
 export type SurfaceVisibility = "auto" | "all" | "lower" | "upper";
 
@@ -166,9 +167,12 @@ export function collectSurfacePresentation(
         frame.rect(sx, sy, c.width * camera.scale, c.height * camera.scale, "", "#748b8d");
         continue;
       }
+      if (isRoadDeck(prop.type)) {
+        drawRoadDeck(frame, camera, prop.type, patch, bounds);
+        continue;
+      }
       // Thin strips approximate a projected plane without introducing a separate
       // GPU renderer. All collision queries use the exact plane, not these strips.
-      const depotRoad = prop.type.startsWith("prop-depot-bridge-");
       const dirt = prop.type.startsWith("prop-mx-");
       const step = 2;
       for (let x = bounds.left; x < bounds.right; x += step) {
@@ -185,43 +189,23 @@ export function collectSurfacePresentation(
           north.sy,
           width * camera.scale + 0.5,
           south.sy - north.sy,
-          depotRoad
-            ? "#62676b"
-            : dirt
-              ? patch.riseX || patch.riseY
-                ? "#a8784a"
-                : "#b78a5a"
-              : patch.riseX || patch.riseY
-                ? "#d4ad73"
-                : patch.excavation
-                  ? "#c7cbb9"
-                  : "#98bec6",
+          dirt
+            ? patch.riseX || patch.riseY
+              ? "#a8784a"
+              : "#b78a5a"
+            : patch.riseX || patch.riseY
+              ? "#d4ad73"
+              : patch.excavation
+                ? "#c7cbb9"
+                : "#98bec6",
         );
         frame.rect(
           south.sx,
           south.sy,
           width * camera.scale + 0.5,
           patch.thickness * camera.scale,
-          depotRoad ? "#3d4854" : dirt ? "#6f4b2e" : "#547780",
+          dirt ? "#6f4b2e" : "#547780",
         );
-      }
-      if (depotRoad) {
-        for (const y of [bounds.top + 6, bounds.bottom - 6, (bounds.top + bounds.bottom) / 2]) {
-          const center = y === (bounds.top + bounds.bottom) / 2;
-          for (let x = bounds.left; x < bounds.right; x += center ? 32 : c.width) {
-            const end = Math.min(bounds.right, x + (center ? 16 : c.width));
-            const a = projectWorld(camera, x, y, surfaceZAt(patch, bounds, x, y));
-            const b = projectWorld(camera, end, y, surfaceZAt(patch, bounds, end, y));
-            const mark = frame.next("line");
-            mark.x = a.sx;
-            mark.y = a.sy;
-            mark.width = b.sx;
-            mark.height = b.sy;
-            mark.stroke = center ? "#e5bf59" : "#e0dfd6";
-            mark.lineWidth = Math.max(1, camera.scale);
-          }
-        }
-        continue;
       }
       for (let x = bounds.left; x <= bounds.right; x += 16) {
         const a = projectWorld(camera, x, bounds.top, surfaceZAt(patch, bounds, x, bounds.top));

@@ -210,9 +210,7 @@ export class NaturalLandscape {
         line.bridges.some((b) => near(b.bounds, x, y, r))
       )
         return true;
-      return line.path
-        ? nearestRail(line.path, x * 16, y * 16).distance <= (7 + r) * 16
-        : x >= line.start - r && x <= line.end + r && Math.abs(y - line.y) <= 3 + r;
+      return nearestRail(line.path, x * 16, y * 16).distance <= (7 + r) * 16;
     });
   }
   private dry(x: number, y: number) {

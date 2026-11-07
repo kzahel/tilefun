@@ -87,8 +87,8 @@ resources. The behavior topic owns finite stock and pollen timing.
 The user approved dropping historical playable generator compatibility during active
 development. `CURRENT_REGIONAL_VERSION` in `GenerationDescriptor.ts` is the single
 regional creation/runtime version, currently **regional-v13**. It composes connected dense neighborhoods, gentle road
-traffic and [rideable two-city railways](trains.md): eligible broad curves, shared
-pixel tracks, platforms and straight road crossings. Natural cover now adds
+traffic and [rideable railways linking neighbouring towns](trains.md) (tactical 228): eligible broad curves, shared
+pixel tracks, hub platforms and road bridges over the track. Natural cover now adds
 spatially varied trees, solid patterned forests and ponds on eligible land.
 It does not automatically promote the v7–v10 review candidates. Classic, Island and
 Flat remain distinct simple presets, not historical regional revisions.
