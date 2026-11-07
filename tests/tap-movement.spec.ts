@@ -439,7 +439,8 @@ test("stops at water and preserves animal interaction without duplicate clicks",
     { timeout: 5000 },
   );
   await expect.poll(async () => (await state(page)).target).toBeNull();
-  expect((await state(page)).wx).toBeLessThan(32);
+  // Returned to the last safe ground, which varies with jump timing; water starts at 64.
+  expect((await state(page)).wx).toBeLessThan(48);
   await session.detach();
 });
 

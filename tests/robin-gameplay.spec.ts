@@ -75,7 +75,10 @@ test("grove robins fly to crowns, react to landing and reload their flight pose"
     .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)))
     .toBe(true);
   await expect
-    .poll(async () => (await poses()).some((f) => f.clip === 0 && f.z === 32), { timeout: 15000 })
+    // Perched at the 32 px crown within Rapier contact error.
+    .poll(async () => (await poses()).some((f) => f.clip === 0 && Math.abs(f.z - 32) < 0.5), {
+      timeout: 15000,
+    })
     .toBe(true);
   await page.screenshot({ path: "/tmp/tilefun-robin-perch.png", fullPage: true });
   await page.getByRole("button", { name: "Hop onto robin", exact: true }).click();
