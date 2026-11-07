@@ -1,4 +1,5 @@
 import type { FaunaProfile } from "./Fauna.js";
+import { standardClips } from "./FaunaClips.js";
 import type { NaturalHunterProfile } from "./NaturalHunters.js";
 
 /** Attached walking and feeding appendages, with source-matched authority clocks. */
@@ -13,36 +14,7 @@ export const CRUSTACEAN_FAUNA_PROFILES: readonly FaunaProfile[] = [
     anchor: [48, 72],
     inspection: [-2911, -14161],
     inspectionZoom: 0.4,
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "swim",
-        start: 1,
-        count: 32,
-        frameDuration: 40,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 20.0,
-        loop: true,
-      },
-    ],
+    clips: standardClips("swim", 40),
     body: [22, 14, 10],
     speed: 6,
     radius: 128,
@@ -63,36 +35,7 @@ export const CRUSTACEAN_FAUNA_PROFILES: readonly FaunaProfile[] = [
     anchor: [48, 72],
     inspection: [405, -13672],
     inspectionZoom: 0.4,
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "swim",
-        start: 1,
-        count: 32,
-        frameDuration: 40,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 20.0,
-        loop: true,
-      },
-    ],
+    clips: standardClips("swim", 40),
     body: [18, 10, 10],
     speed: 12,
     radius: 128,

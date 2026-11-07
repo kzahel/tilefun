@@ -1,4 +1,5 @@
 import type { FaunaProfile } from "./Fauna.js";
+import { standardClips } from "./FaunaClips.js";
 
 /** Solitary bamboo foraging with shared native movement and origin-aware replacement. */
 export const PANDA_PROFILE: FaunaProfile = {
@@ -10,36 +11,7 @@ export const PANDA_PROFILE: FaunaProfile = {
   size: 64,
   anchor: [32, 48],
   inspection: [-668, 281],
-  clips: [
-    {
-      name: "idle",
-      start: 0,
-      count: 1,
-      frameDuration: 100,
-      loop: true,
-    },
-    {
-      name: "walk",
-      start: 1,
-      count: 32,
-      frameDuration: 40,
-      loop: true,
-    },
-    {
-      name: "action",
-      start: 33,
-      count: 8,
-      frameDuration: 100,
-      loop: false,
-    },
-    {
-      name: "flee",
-      start: 1,
-      count: 32,
-      frameDuration: 20,
-      loop: true,
-    },
-  ],
+  clips: standardClips("walk", 40),
   body: [28, 14, 27],
   speed: 12,
   radius: 128,

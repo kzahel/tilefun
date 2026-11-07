@@ -1,4 +1,5 @@
 import type { FaunaProfile } from "./Fauna.js";
+import { standardClips } from "./FaunaClips.js";
 
 /** Bounded landing-to-landing corvid/puffin flights; not open-air navigation. */
 export const CONTINUATION_BIRD_PROFILES: readonly FaunaProfile[] = [
@@ -11,36 +12,7 @@ export const CONTINUATION_BIRD_PROFILES: readonly FaunaProfile[] = [
     size: 64,
     anchor: [32, 48],
     inspection: [928, 154],
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "fly",
-        start: 1,
-        count: 32,
-        frameDuration: 25,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 12.5,
-        loop: true,
-      },
-    ],
+    clips: standardClips("fly", 25),
     body: [12, 8, 16],
     speed: 18,
     radius: 112,
@@ -66,36 +38,7 @@ export const CONTINUATION_BIRD_PROFILES: readonly FaunaProfile[] = [
     size: 64,
     anchor: [32, 48],
     inspection: [-290, -349],
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "fly",
-        start: 1,
-        count: 32,
-        frameDuration: 25,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 12.5,
-        loop: true,
-      },
-    ],
+    clips: standardClips("fly", 25),
     body: [10, 7, 14],
     speed: 18,
     radius: 112,
@@ -121,36 +64,7 @@ export const CONTINUATION_BIRD_PROFILES: readonly FaunaProfile[] = [
     size: 64,
     anchor: [32, 48],
     inspection: [-157, 667],
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "fly",
-        start: 1,
-        count: 32,
-        frameDuration: 25,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 12.5,
-        loop: true,
-      },
-    ],
+    clips: standardClips("fly", 25),
     body: [10, 7, 14],
     speed: 14,
     radius: 112,

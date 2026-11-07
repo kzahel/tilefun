@@ -1,4 +1,5 @@
 import type { FaunaProfile } from "./Fauna.js";
+import { standardClips } from "./FaunaClips.js";
 import type { NaturalHunterProfile } from "./NaturalHunters.js";
 
 /** Closed linked bodies, shared source clocks and ordinary habitat authority. */
@@ -12,36 +13,7 @@ export const LEGLESS_FAUNA_PROFILES: readonly FaunaProfile[] = [
     size: 96,
     anchor: [48, 72],
     inspection: [104, -26],
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "crawl",
-        start: 1,
-        count: 32,
-        frameDuration: 60,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 30.0,
-        loop: true,
-      },
-    ],
+    clips: standardClips("crawl", 60),
     body: [8, 6, 8],
     speed: 3,
     radius: 96,
@@ -61,36 +33,7 @@ export const LEGLESS_FAUNA_PROFILES: readonly FaunaProfile[] = [
     size: 96,
     anchor: [48, 72],
     inspection: [-1310, -670],
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "crawl",
-        start: 1,
-        count: 32,
-        frameDuration: 50,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 25.0,
-        loop: true,
-      },
-    ],
+    clips: standardClips("crawl", 50),
     body: [12, 4, 6],
     speed: 4,
     radius: 96,

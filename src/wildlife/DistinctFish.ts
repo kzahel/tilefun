@@ -1,4 +1,5 @@
 import type { FaunaProfile } from "./Fauna.js";
+import { standardClips } from "./FaunaClips.js";
 
 export const DISTINCT_FISH_FAUNA_PROFILES: readonly FaunaProfile[] = [
   {
@@ -11,36 +12,7 @@ export const DISTINCT_FISH_FAUNA_PROFILES: readonly FaunaProfile[] = [
     anchor: [56, 84],
     inspection: [-7314, -1874],
     inspectionZoom: 0.4,
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "swim",
-        start: 1,
-        count: 32,
-        frameDuration: 50,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 25.0,
-        loop: true,
-      },
-    ],
+    clips: standardClips("swim", 50),
     body: [30, 12, 32],
     speed: 10,
     radius: 160,
@@ -61,36 +33,7 @@ export const DISTINCT_FISH_FAUNA_PROFILES: readonly FaunaProfile[] = [
     anchor: [40, 60],
     inspection: [23941, 24678],
     inspectionZoom: 0.4,
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "swim",
-        start: 1,
-        count: 32,
-        frameDuration: 50,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 25.0,
-        loop: true,
-      },
-    ],
+    clips: standardClips("swim", 50),
     body: [18, 12, 14],
     speed: 10,
     radius: 160,

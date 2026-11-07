@@ -1,4 +1,5 @@
 import type { FaunaProfile } from "./Fauna.js";
+import { standardClips } from "./FaunaClips.js";
 
 /** Authored striped coats and single-hump camel anatomy use shared herd behavior. */
 export const PATTERNED_GRAZER_PROFILES: readonly FaunaProfile[] = [
@@ -11,36 +12,7 @@ export const PATTERNED_GRAZER_PROFILES: readonly FaunaProfile[] = [
     size: 64,
     anchor: [32, 48],
     inspection: [1310, 1434],
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "walk",
-        start: 1,
-        count: 32,
-        frameDuration: 60,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 30.0,
-        loop: true,
-      },
-    ],
+    clips: standardClips("walk", 60),
     body: [28, 12, 31],
     speed: 14,
     radius: 144,
@@ -60,36 +32,7 @@ export const PATTERNED_GRAZER_PROFILES: readonly FaunaProfile[] = [
     size: 64,
     anchor: [32, 48],
     inspection: [-1504, -1501],
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "walk",
-        start: 1,
-        count: 32,
-        frameDuration: 60,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 30.0,
-        loop: true,
-      },
-    ],
+    clips: standardClips("walk", 60),
     body: [24, 12, 37],
     speed: 12,
     radius: 144,
@@ -109,36 +52,7 @@ export const PATTERNED_GRAZER_PROFILES: readonly FaunaProfile[] = [
     size: 64,
     anchor: [32, 48],
     inspection: [1319, 1125],
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "walk",
-        start: 1,
-        count: 32,
-        frameDuration: 70,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 35.0,
-        loop: true,
-      },
-    ],
+    clips: standardClips("walk", 70),
     body: [30, 14, 20],
     speed: 10,
     radius: 160,

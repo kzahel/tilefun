@@ -1,4 +1,5 @@
 import type { FaunaProfile } from "./Fauna.js";
+import { standardClips } from "./FaunaClips.js";
 
 /** Friendly biped companions; their original quadruped banks remain unchanged. */
 export const UPRIGHT_COMPANION_PROFILES: readonly FaunaProfile[] = [
@@ -13,36 +14,7 @@ export const UPRIGHT_COMPANION_PROFILES: readonly FaunaProfile[] = [
     anchor: [48, 72],
     inspection: [2017, 2011],
     inspectionZoom: 0.4,
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "walk",
-        start: 1,
-        count: 32,
-        frameDuration: 40,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 20,
-        loop: true,
-      },
-    ],
+    clips: standardClips("walk", 40),
     body: [22, 14, 36],
     speed: 12,
     radius: 128,
@@ -64,36 +36,7 @@ export const UPRIGHT_COMPANION_PROFILES: readonly FaunaProfile[] = [
     anchor: [48, 72],
     inspection: [2009, -615],
     inspectionZoom: 0.4,
-    clips: [
-      {
-        name: "idle",
-        start: 0,
-        count: 1,
-        frameDuration: 100,
-        loop: true,
-      },
-      {
-        name: "walk",
-        start: 1,
-        count: 32,
-        frameDuration: 40,
-        loop: true,
-      },
-      {
-        name: "action",
-        start: 33,
-        count: 8,
-        frameDuration: 100,
-        loop: false,
-      },
-      {
-        name: "flee",
-        start: 1,
-        count: 32,
-        frameDuration: 20,
-        loop: true,
-      },
-    ],
+    clips: standardClips("walk", 40),
     body: [18, 12, 42],
     speed: 10,
     radius: 128,
