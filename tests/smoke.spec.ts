@@ -202,7 +202,8 @@ test.describe("gem HUD", () => {
   test("zero and collected totals remain visible below Map in Play and Edit across screen sizes", async ({
     page,
   }, testInfo) => {
-    await page.goto("/tilefun/?nogamepad");
+    // HUD layout is DOM; the GPU launch contract is covered by the cases above.
+    await page.goto("/tilefun/?nogamepad&renderer=canvas");
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await page.evaluate(async () => {
       const g = (

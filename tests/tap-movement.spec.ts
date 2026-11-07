@@ -421,8 +421,15 @@ test("stops at water and preserves animal interaction without duplicate clicks",
     .not.toBe(0);
   await page.getByTestId("main-menu-toggle").tap();
   await page.getByRole("button", { name: "Play", exact: true }).tap();
-  await tapOffset(page, 65);
-  await expect.poll(async () => (await state(page)).target).not.toBeNull();
+  // A tap made while the menu is still closing on a slow host is swallowed;
+  // tapping the same spot again only re-sets the same target.
+  await expect
+    .poll(async () => {
+      if ((await state(page)).target) return true;
+      await tapOffset(page, 65);
+      return (await state(page)).target !== null;
+    })
+    .toBe(true);
   const session = await page.context().newCDPSession(page);
   await session.send("Input.dispatchTouchEvent", {
     type: "touchStart",

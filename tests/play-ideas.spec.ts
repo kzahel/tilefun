@@ -95,7 +95,8 @@ async function expectMicrophoneReleased(page: Page) {
 }
 
 async function openIdea(page: Page) {
-  await page.goto("/tilefun/");
+  // Idea capture needs a rendered game, not GPU output; Canvas keeps hosted runs fast.
+  await page.goto("/tilefun/?renderer=canvas");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   // Enter a small real world so the attachment is a rendered game, not a menu.
   await page.evaluate(async () => {

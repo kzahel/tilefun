@@ -6,7 +6,7 @@ import { openHome } from "./helpers/gameMenu.js";
 
 async function flatWorld(page: Page) {
   await page.goto(
-    `/tilefun/?perf&nogamepad&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 2026)))}`,
+    `/tilefun/?perf&nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(createDescriptor("flat", 2026)))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.getByTestId("world-menu")).toBeHidden();
@@ -242,7 +242,7 @@ test("Worker saves player and edits before shutdown and restores them on reopen"
     await host.shutdown();
     return position;
   });
-  await page.goto("/tilefun/?nogamepad");
+  await page.goto("/tilefun/?nogamepad&renderer=canvas");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(async () => (await hostState(page)).position.wx).toBeCloseTo(saved.wx, 0);
   await expect
