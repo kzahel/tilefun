@@ -2,7 +2,7 @@ import { expect, it } from "vitest";
 import { rotateBodyVector } from "../physics/BodyRotation.js";
 import { required } from "../shared/required.js";
 import { manualCarMovement } from "../traffic/CarControls.js";
-import { JUMP_FEATURES, type JumpLane, jumpParkRecipe } from "./JumpParkRecipe.js";
+import { JUMP_LANES, type JumpLane, jumpParkRecipe } from "./JumpParkRecipe.js";
 import { ScenarioSession } from "./ScenarioSession.js";
 
 /** Drives the seated car down a lane at full boost, as the lab's ↑ + Shift does. */
@@ -33,7 +33,7 @@ it("launches a boosted race car high off the curved kicker and lands it on its l
   expect(run.peak).toBeGreaterThan(90);
   expect(run.lowestUp).toBeGreaterThan(0.6);
   expect(run.x).toBeGreaterThanOrEqual(1600);
-  expect(Math.abs(run.y - JUMP_FEATURES.kicker.y)).toBeLessThan(32);
+  expect(Math.abs(run.y - JUMP_LANES.kicker)).toBeLessThan(32);
 }, 60_000);
 
 it("lets the slowest race car case the sky jump onto flat ground and keep going", async () => {

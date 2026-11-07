@@ -60,6 +60,6 @@ headless peaks with no page errors.
 1. Owner/child play review of lip shapes, gaps and boost speeds.
 2. Consider gentle airborne pitch levelling if tail-first landings feel harsh;
    that is a shared motor change and needs its own decision.
-3. Generated motocross venue: the city's unused racetrack side or villages,
-   a winding dirt loop using these profiles, plus a dirt surface type.
+3. Generated motocross venue: delivered in
+   [224](224-generated-motocross-parks.md); a dirt surface type remains.
 4. Optional rally/buggy art through art review; streaming check at 540px/s.

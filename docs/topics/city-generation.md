@@ -6,6 +6,11 @@ Updated: 2026-10-21.
 
 ## Current generation policy
 
+[224](../tactical/224-generated-motocross-parks.md) adds a motocross park beside
+each admitting city, opposite its speedway: dirt loop, shared jump-slab props,
+pit/start-line race cars and spectators. Nature and farm planning reserve it like
+the speedway. Use a fresh world; saved terrain is not repainted.
+
 [175](../tactical/175-vehicle-depot-and-walkable-ramps.md) composes a vehicle depot
 inside each admitted speedway's existing dry reserved infield. The racing loop,
 spectators, upstream reservations and wildlife owner pools retain their identity.

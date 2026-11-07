@@ -25,9 +25,11 @@ export async function buildNaturalCandidate(
     kind: "geometry",
     name: `${c.name} · ${profile}`,
     prompt:
-      id === "racetrack"
-        ? "Inspect the generated city-outskirts oval, two racing lanes, checkered start line, red/white kerbs and spectator seating. Cars use ordinary collision, driving, roof riding and saved traffic. This composition is awaiting review."
-        : "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      id === "motocross"
+        ? "Drive the generated city-outskirts motocross park: dirt loop, sky lip, double, curved kicker, tabletop and infield rollers on the shared jump profiles, with race-tuned pit cars. Schematic dirt surfaces; awaiting play review."
+        : id === "racetrack"
+          ? "Inspect the generated city-outskirts oval, two racing lanes, checkered start line, red/white kerbs and spectator seating. Cars use ordinary collision, driving, roof riding and saved traffic. This composition is awaiting review."
+          : "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
     url: `/tilefun/workshop.html?geometry=nature-${id}&landscape=${profile}#/tool/world-geometry`,
     exploreUrl: naturalExplorerUrl(c, profile),
     fingerprint: await sha256(

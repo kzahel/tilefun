@@ -115,7 +115,8 @@ export class WorldMap {
     this.tracks.setAttribute("role", "group");
     this.tracks.setAttribute("aria-label", "Racetracks");
     const trackLegend = document.createElement("small");
-    trackLegend.textContent = "Red ovals / checkered flags: racetracks";
+    trackLegend.textContent =
+      "Red ovals / checkered flags: racetracks · brown loops: motocross parks (select, then Travel)";
     this.depots.className = "world-map-roster";
     this.depots.setAttribute("role", "group");
     this.depots.setAttribute("aria-label", "Vehicle depots");
@@ -267,6 +268,19 @@ export class WorldMap {
                 button.dataset.trackId = track.id;
                 this.tracks.append(button);
               }
+              for (const park of this.result.motocross ?? []) {
+                const button = this.button(park.name, () => {
+                  this.view.x = park.arrival.x;
+                  this.view.y = park.arrival.y;
+                  this.target = { ...park.arrival };
+                  this.changed();
+                });
+                button.dataset.testid = "world-map-motocross";
+                button.dataset.parkId = park.id;
+                button.dataset.x = String(park.arrival.x);
+                button.dataset.y = String(park.arrival.y);
+                this.tracks.append(button);
+              }
               this.depots.replaceChildren();
               for (const depot of this.result.vehicleDepots ?? []) {
                 const button = this.button(depot.name, () => {
@@ -283,6 +297,7 @@ export class WorldMap {
               }
               this.root.dataset.vehicleDepots = String(this.result.vehicleDepots?.length ?? 0);
               this.root.dataset.racetracks = String(this.result.racetracks?.length ?? 0);
+              this.root.dataset.motocross = String(this.result.motocross?.length ?? 0);
               this.root.dataset.railLines = String(this.result.railways?.length ?? 0);
               this.root.dataset.settled = "true";
               this.draw();

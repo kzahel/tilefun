@@ -306,6 +306,33 @@ export class MapRenderer {
             ctx.fillRect(fx + col * 3, fy - 10 + row * 3, 3, 3);
           }
       }
+    if (overlays.roads)
+      for (const park of result.motocross ?? []) {
+        const { x, y } = park.center,
+          half = park.straight,
+          r = 20;
+        ctx.beginPath();
+        park.access.forEach((p, i) => {
+          if (i) ctx.lineTo(sx(p.x), sy(p.y));
+          else ctx.moveTo(sx(p.x), sy(p.y));
+        });
+        ctx.strokeStyle = "#5a6062";
+        ctx.lineWidth = Math.max(2, 6 * view.zoom);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(sx(x - half), sy(y - r));
+        ctx.lineTo(sx(x + half), sy(y - r));
+        ctx.arc(sx(x + half), sy(y), r * view.zoom, -Math.PI / 2, Math.PI / 2);
+        ctx.lineTo(sx(x - half), sy(y + r));
+        ctx.arc(sx(x - half), sy(y), r * view.zoom, Math.PI / 2, Math.PI * 1.5);
+        ctx.closePath();
+        ctx.strokeStyle = "#5d3b20";
+        ctx.lineWidth = Math.max(4, 11 * view.zoom);
+        ctx.stroke();
+        ctx.strokeStyle = "#a8784a";
+        ctx.lineWidth = Math.max(2, 8 * view.zoom);
+        ctx.stroke();
+      }
     const placed: { x: number; y: number; width: number }[] = [];
     if (overlays.settlements) {
       for (const settlement of result.settlements) {
@@ -361,7 +388,14 @@ export class MapRenderer {
       }
     }
     if (overlays.roads)
-      for (const track of result.racetracks ?? []) {
+      for (const track of [
+        ...(result.racetracks ?? []),
+        // Motocross labels sit above the loop's north straight.
+        ...(result.motocross ?? []).map((p) => ({
+          name: p.name,
+          center: { x: p.center.x, y: p.center.y + 8 },
+        })),
+      ]) {
         const x = sx(track.center.x),
           y = sy(track.center.y) - 36 * view.zoom - 14;
         if (x < -80 || x > width + 80 || y < -20 || y > height + 20) continue;

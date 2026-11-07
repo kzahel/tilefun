@@ -25,7 +25,7 @@ import {
   vehicleRoadWidth,
   vehicleTurningRadius,
 } from "../src/traffic/Vehicle.js";
-import { vehiclePerformance } from "../src/traffic/VehiclePerformance.js";
+import { RACE_TUNES, vehiclePerformance } from "../src/traffic/VehiclePerformance.js";
 import meshBodies from "../src/traffic/vehicle-body-bounds.json" with { type: "json" };
 import { AUTONOMOUS_ORIGINAL_VEHICLES } from "./AutonomousOriginalVehicles.fixture.js";
 import { verifyOriginalWheelGeometryAndTravel } from "./AutonomousOriginalVehicles.test-helper.js";
@@ -116,7 +116,10 @@ export function defineOriginalVehicleSuite(partFileUrl: string): void {
       }
       expect(vehicleRoadWidth(type)).toBe(width * 2 + 12);
       expect(vehicleTurningRadius(type)).toBeCloseTo(Math.max(40, length * 0.7));
-      expect(vehiclePerformance(type).speed).toBe(family.performance.speed);
+      // Race tunes (223) deliberately override catalog driving speed.
+      expect(vehiclePerformance(type).speed).toBe(
+        RACE_TUNES[family.model]?.speed ?? family.performance.speed,
+      );
       expect(authoredVehicleForType(type)?.lateralScale).toBe(1);
       expect(vehicleMeshHeightScale(family.model)).toBe(1);
       const car = createVehicle(family.model, 120, 240, Direction.Down);
@@ -267,7 +270,10 @@ export function defineOriginalVehicleSuite(partFileUrl: string): void {
       }
       for (const path of Object.keys(receipt.inputs))
         expect(path).not.toMatch(/^(?:data|test-results)\//);
-      expect(vehiclePerformance(`vehicle-v1:${family.model}`)).toEqual(family.performance);
+      expect(vehiclePerformance(`vehicle-v1:${family.model}`)).toEqual({
+        ...family.performance,
+        ...RACE_TUNES[family.model],
+      });
     },
   );
 }

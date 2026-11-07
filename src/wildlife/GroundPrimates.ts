@@ -10,7 +10,7 @@ export const GROUND_PRIMATE_PROFILES: readonly FaunaProfile[] = [
     sha256: "ca5de436fbf7a9133c302631427c44e4c8b537b7fb8e7e747fa0a30b5e3a4b26",
     size: 96,
     anchor: [48, 72],
-    inspection: [-28, 485],
+    inspection: [-986, 2280],
     clips: [
       {
         name: "idle",

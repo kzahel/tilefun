@@ -85,7 +85,10 @@ export function depotSurface(depot: VehicleDepot, x: number, y: number): number 
 /** Include every intersecting surface footprint, even when its anchor is several
  * chunks away. Stable feature IDs deduplicate these ordinary procedural props. */
 export function depotPlacements(depot: VehicleDepot, bounds: Bounds) {
-  return depot.props.filter((p) => {
+  return intersectingPlacements(depot.props, bounds);
+}
+export function intersectingPlacements(props: readonly FeaturePlacement[], bounds: Bounds) {
+  return props.filter((p) => {
     const prop = createProp(p.propType, p.wx, p.wy);
     const box = prop.collider ? getEntityAABB(prop.position, prop.collider) : undefined;
     return (

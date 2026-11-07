@@ -34,6 +34,7 @@ import { fbm, valueNoise } from "../noise.js";
 import { DenseDistrictSource } from "./DenseDistrictPlanner.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
 import { FarmsteadSource } from "./FarmsteadPlanner.js";
+import { MotocrossSource, motocrossReserved } from "./MotocrossPlanner.js";
 import { pathDistance } from "./PlanGeometry.js";
 import { RacetrackSource, racetrackReserved } from "./RacetrackPlanner.js";
 import {
@@ -128,6 +129,7 @@ export class NaturalLandscape {
   readonly farms: FarmsteadSource;
   private readonly districts: DenseDistrictSource;
   private readonly racetracks: RacetrackSource;
+  private readonly motocross: MotocrossSource;
   private dryRefugePlanner?: NaturalLandscape;
   private reservations = new Map<string, ReturnType<NaturalLandscape["buildReservations"]>>();
   private lakes = new Map<string, NaturalPond | null>();
@@ -151,6 +153,7 @@ export class NaturalLandscape {
     this.farms = new FarmsteadSource(world);
     this.districts = new DenseDistrictSource(world, true);
     this.racetracks = new RacetrackSource(world);
+    this.motocross = new MotocrossSource(world, this.racetracks);
   }
   private buildReservations(cx: number, cy: number) {
     const bounds = {
@@ -179,6 +182,7 @@ export class NaturalLandscape {
       lines: this.railways.query(bounds),
       farms: this.farms.query(bounds),
       tracks: this.racetracks.query(bounds),
+      parks: this.motocross.query(bounds),
     };
   }
   /** r includes the proposed feature's footprint/visual clearance. */
@@ -195,6 +199,7 @@ export class NaturalLandscape {
     }
     if (this.farms.reserved(plans.farms, x, y, r)) return true;
     if (plans.tracks.some((t) => racetrackReserved(t, x, y, r + 4))) return true;
+    if (plans.parks.some((p) => motocrossReserved(p, x, y, r + 4))) return true;
     if (plans.centers.some((b) => near(b, x, y, r + 4))) return true;
     if (plans.region.settlements.some((s) => near(s.bounds, x, y, r + 4))) return true;
     if (plans.region.connections.some((c) => pathDistance(c.points, x, y) <= c.width / 2 + r))

@@ -214,6 +214,11 @@ const PRESENTATION = {
     guide:
       "Large wildlife lake · E beside the motorboat to board; Arrows/WASD steer, R reverses. Return beside a clear shore to get out. Fish schools and varied water animals use the same AI as the game.",
   },
+  motocross: {
+    zoom: 0.25,
+    guide:
+      "City outskirts motocross park · A rally car waits at the north straight's start and five race-tuned cars in the pit row. E beside one to drive; ↑ drives, ←/→ steer, hold Shift / RT / Boost for full speed. North straight (eastbound): sky lip and double. South straight (westbound): curved kicker and tabletop. Infield: rollers.",
+  },
   racetrack: {
     zoom: 0.13,
     guide:

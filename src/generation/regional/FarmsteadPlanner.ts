@@ -6,6 +6,7 @@ import type { ActorPlacement } from "../Generator.js";
 import { edgeHash } from "../RoadGenerator.js";
 import { DenseDistrictSource } from "./DenseDistrictPlanner.js";
 import type { FeaturePlacement } from "./DistrictStrategy.js";
+import { MotocrossSource, motocrossReserved } from "./MotocrossPlanner.js";
 import { pathDistance } from "./PlanGeometry.js";
 import { RacetrackSource, racetrackReserved } from "./RacetrackPlanner.js";
 import {
@@ -43,10 +44,12 @@ export class FarmsteadSource {
   private railways: RailwayPlanner;
   private readonly districts: DenseDistrictSource;
   private readonly racetracks: RacetrackSource;
+  private readonly motocross: MotocrossSource;
   constructor(readonly world: RegionalWorld) {
     this.railways = new RailwayPlanner(world);
     this.districts = new DenseDistrictSource(world, true);
     this.racetracks = new RacetrackSource(world);
+    this.motocross = new MotocrossSource(world, this.racetracks);
   }
   owner(cx: number, cy: number, axis: "east" | "south"): Farmstead | null {
     const key = `${cx}:${cy}:${axis}`;
@@ -133,6 +136,7 @@ export class FarmsteadSource {
         continue;
       const lines = this.railways.query(reservation);
       const tracks = this.racetracks.query(reservation);
+      const parks = this.motocross.query(reservation);
       const blockedRail = (px: number, py: number, r: number) =>
         lines.some(
           (l) =>
@@ -150,7 +154,8 @@ export class FarmsteadSource {
           if (
             !dry(px, py) ||
             blockedRail(px, py, 4) ||
-            tracks.some((t) => racetrackReserved(t, px, py, 4))
+            tracks.some((t) => racetrackReserved(t, px, py, 4)) ||
+            parks.some((p) => motocrossReserved(p, px, py, 4))
           ) {
             valid = false;
             break;
@@ -167,6 +172,7 @@ export class FarmsteadSource {
             if (
               blockedRail(px, py, 4) ||
               tracks.some((t) => racetrackReserved(t, px, py, 4)) ||
+              parks.some((p) => motocrossReserved(p, px, py, 4)) ||
               [-3, 0, 3].some((d) => !dry(px + (a.y !== b.y ? d : 0), py + (a.x !== b.x ? d : 0)))
             )
               valid = false;

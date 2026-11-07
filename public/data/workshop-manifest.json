@@ -11562,8 +11562,8 @@
       "name": "Capuchin monkey · woodland refuge · sparse",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-capuchin-monkey&landscape=sparse#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-28&y=485&landscape=sparse&zoom=0.8",
-      "fingerprint": "2f019d1a203b1aa5ddff59b3a9cd18541193f85525ff8f6f5d817fa667986541"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-986&y=2280&landscape=sparse&zoom=0.8",
+      "fingerprint": "da93c58035e95fbb6021dc7e0620474744e92f014dfa7faa265ccd22d6f31ad5"
     },
     {
       "id": "nature:capuchin-monkey:balanced:v1",
@@ -11572,8 +11572,8 @@
       "name": "Capuchin monkey · woodland refuge · balanced",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-capuchin-monkey&landscape=balanced#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-28&y=485&landscape=balanced&zoom=0.8",
-      "fingerprint": "a6473135ee73cdd05bf412947c4b7547f771b65f8bc3308c9290aa408ea973e6"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-986&y=2280&landscape=balanced&zoom=0.8",
+      "fingerprint": "0bf99e52c1d5f769ae3f1f1b47d1010cda6e7a85e19111569d9f8d26c97a2a09"
     },
     {
       "id": "nature:capuchin-monkey:lush:v1",
@@ -11582,8 +11582,8 @@
       "name": "Capuchin monkey · woodland refuge · lush",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-capuchin-monkey&landscape=lush#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-28&y=485&landscape=lush&zoom=0.8",
-      "fingerprint": "f337416aa742b69720475186af092dad4f30cd5391bc0217f6b8b167e5a92083"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-986&y=2280&landscape=lush&zoom=0.8",
+      "fingerprint": "5b856f1fed4ab351950f41a09955b978fc27003c6c3716dd797b48f9a8f21ba0"
     },
     {
       "id": "nature:capuchin-monkey:thicket:v1",
@@ -11592,8 +11592,8 @@
       "name": "Capuchin monkey · woodland refuge · thicket",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-capuchin-monkey&landscape=thicket#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-28&y=485&landscape=thicket&zoom=0.8",
-      "fingerprint": "764a938ceae1af286a9e19c6981d2d75b514c74204fbdaacda2e822b0036e33f"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=-986&y=2280&landscape=thicket&zoom=0.8",
+      "fingerprint": "f0d8c25da90db1b5dcf6a89b7241ba2a0e1c59ca464d785f39c751ff29793b5d"
     },
     {
       "id": "nature:ring-tailed-lemur:sparse:v1",
@@ -14676,6 +14676,46 @@
       "fingerprint": "cdcdfa8d8eddcb9fd711efd9ff0059e8c901d55bb344f4d30e3b7d0d83a4aafe"
     },
     {
+      "id": "nature:motocross:sparse:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "City outskirts · motocross park · sparse",
+      "prompt": "Drive the generated city-outskirts motocross park: dirt loop, sky lip, double, curved kicker, tabletop and infield rollers on the shared jump profiles, with race-tuned pit cars. Schematic dirt surfaces; awaiting play review.",
+      "url": "/tilefun/workshop.html?geometry=nature-motocross&landscape=sparse#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=8&y=454&landscape=sparse&zoom=0.8",
+      "fingerprint": "ffcfd0e0afec9ffa3f58ef89c16c8400786a7881533d4323d7e7e5d134d745ce"
+    },
+    {
+      "id": "nature:motocross:balanced:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "City outskirts · motocross park · balanced",
+      "prompt": "Drive the generated city-outskirts motocross park: dirt loop, sky lip, double, curved kicker, tabletop and infield rollers on the shared jump profiles, with race-tuned pit cars. Schematic dirt surfaces; awaiting play review.",
+      "url": "/tilefun/workshop.html?geometry=nature-motocross&landscape=balanced#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=8&y=454&landscape=balanced&zoom=0.8",
+      "fingerprint": "07c4b7daa549db6d4013a1f9f1a5cdb991a3b3a4267fa257f4cf3568048e12e4"
+    },
+    {
+      "id": "nature:motocross:lush:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "City outskirts · motocross park · lush",
+      "prompt": "Drive the generated city-outskirts motocross park: dirt loop, sky lip, double, curved kicker, tabletop and infield rollers on the shared jump profiles, with race-tuned pit cars. Schematic dirt surfaces; awaiting play review.",
+      "url": "/tilefun/workshop.html?geometry=nature-motocross&landscape=lush#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=8&y=454&landscape=lush&zoom=0.8",
+      "fingerprint": "a8af404f3afda94ffcac91abbd91f9f8453a26d23af8fb4552bf6a84bfa9e1b8"
+    },
+    {
+      "id": "nature:motocross:thicket:v1",
+      "batchId": "natural-landscapes",
+      "kind": "geometry",
+      "name": "City outskirts · motocross park · thicket",
+      "prompt": "Drive the generated city-outskirts motocross park: dirt loop, sky lip, double, curved kicker, tabletop and infield rollers on the shared jump profiles, with race-tuned pit cars. Schematic dirt surfaces; awaiting play review.",
+      "url": "/tilefun/workshop.html?geometry=nature-motocross&landscape=thicket#/tool/world-geometry",
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=8&y=454&landscape=thicket&zoom=0.8",
+      "fingerprint": "15534788d6f850a54fd29342f31082f6a9983ce57651fcb35b16f4e9a3ed25c6"
+    },
+    {
       "id": "nature:city-pets:sparse:v1",
       "batchId": "natural-landscapes",
       "kind": "geometry",
@@ -16621,7 +16661,7 @@
       "name": "Jump park: curved kicker, sky lip, double, tabletop and rollers",
       "prompt": "Drive each jump lane at full boost in race-tuned and ordinary cars: judge air height, lip shape, landings and boost speed. Ordinary shared physics; schematic geometry, no art promotion.",
       "url": "/tilefun/workshop.html?geometry=car-jumps#/tool/world-geometry",
-      "fingerprint": "6fac1ecec709932a2ef1cfb06c6a9db4c8957bf6faf7c143a4c4695ef3720765",
+      "fingerprint": "d9c05e5953bdb946b896d61cb838dd44f8679e202cde75845c04af94f2bee9fa",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -56198,5 +56238,5 @@
       }
     }
   ],
-  "inputDigest": "81edec60c17b81b165ce8e9f5e2ed7cf9ef0b839393461c65cb61fa4a5e1245b"
+  "inputDigest": "a34df1cf8fbbd0c1e3bdc18773e0c25538a40378ddade56d821d97c2e97ab846"
 }

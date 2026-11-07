@@ -81,6 +81,9 @@ Duplicate articulated collision/ground/carry helpers have been deleted; retained
 equipment math is render-only. Collision inspection reads shared body dimensions. The old feature descriptions below are historical, not current promises.
 
 
+[224](../tactical/224-generated-motocross-parks.md) places those jumps in the world:
+city motocross parks with race-tuned pit cars and a start-line rally hatchback.
+
 [223](../tactical/223-jump-park-and-race-tunes.md) adds the `car-jumps` Workshop jump
 park and per-model Shift boosts (`VehiclePerformance.boost`, default 1.5). Six approved
 original models carry race tunes up to 540px/s boosted; road traffic cruise is unchanged.

@@ -1,4 +1,5 @@
 import { DenseDistrictStrategy } from "../generation/regional/DenseDistrictStrategy.js";
+import { MotocrossSource } from "../generation/regional/MotocrossPlanner.js";
 import { RacetrackSource } from "../generation/regional/RacetrackPlanner.js";
 import {
   type Bounds,
@@ -11,6 +12,7 @@ import { addRacetrackLanes } from "./RacetrackLanes.js";
 /** Current regional composition: connected town plans, terrain and road traffic. */
 export class TrafficStrategy extends DenseDistrictStrategy {
   readonly racetracks = new RacetrackSource(this.world);
+  readonly motocross = new MotocrossSource(this.world, this.racetracks);
   private networks = new Map<string, LaneGraph>();
   constructor(world: ConstructorParameters<typeof DenseDistrictStrategy>[0]) {
     super(world, true);

@@ -14,7 +14,7 @@ export const DEFAULT_BOOST = 1.5;
 /** Jump-park race tunes (223) on approved original models: faster driven top
  * speeds, quicker acceleration and stronger boosts. Road traffic keeps its own
  * capped cruise, and the art/collision catalog is unchanged. */
-const RACE_TUNES: Record<string, Partial<VehiclePerformance>> = {
+export const RACE_TUNES: Readonly<Record<string, Partial<VehiclePerformance>>> = {
   "open-wheel-racer": { speed: 240, acceleration: 460, boost: 2.25 },
   "race-coupe": { speed: 220, acceleration: 420, boost: 2.25 },
   "rally-hatchback": { speed: 200, acceleration: 400, boost: 2.25 },

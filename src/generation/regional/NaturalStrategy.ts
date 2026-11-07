@@ -12,6 +12,12 @@ import { rangeHabitatProps } from "../../wildlife/RangeHabitat.js";
 import type { Chunk } from "../../world/Chunk.js";
 import { deriveTerrain } from "../deriveTerrain.js";
 import { insideDenseBounds } from "./DenseDistrictPlanner.js";
+import {
+  motocrossPlacements,
+  motocrossReserved,
+  motocrossRoad,
+  motocrossTerrain,
+} from "./MotocrossPlanner.js";
 import { type LandscapeProfile, NaturalLandscape } from "./NaturalLandscape.js";
 import { racetrackReserved, racetrackSurface } from "./RacetrackPlanner.js";
 import { settlementPets } from "./SettlementPets.js";
@@ -30,6 +36,7 @@ export class NaturalStrategy extends RailwayStrategy {
     const bounds = { minX: cx * 16 - 1, minY: cy * 16 - 1, maxX: cx * 16 + 17, maxY: cy * 16 + 17 };
     const farms = this.nature.farms.query(bounds);
     const tracks = this.racetracks.query(bounds);
+    const parks = this.motocross.query(bounds);
     let changed = false;
     for (let sy = 0; sy < 33; sy++)
       for (let sx = 0; sx < 33; sx++) {
@@ -37,6 +44,12 @@ export class NaturalStrategy extends RailwayStrategy {
           y = cy * 16 + sy / 2;
         if (tracks.some((t) => racetrackReserved(t, x, y))) {
           chunk.setSubgrid(sx, sy, TerrainId.Grass);
+          changed = true;
+          continue;
+        }
+        const park = parks.find((p) => motocrossReserved(p, x, y));
+        if (park) {
+          chunk.setSubgrid(sx, sy, motocrossTerrain(park, x, y));
           changed = true;
           continue;
         }
@@ -77,15 +90,30 @@ export class NaturalStrategy extends RailwayStrategy {
               chunk.setRoad(lx, ly, surface);
             chunk.setHeight(lx, ly, 0);
           }
+        for (const park of parks)
+          if (motocrossReserved(park, x + 0.5, y + 0.5)) {
+            const surface = motocrossRoad(park, x, y);
+            const existing = chunk.getRoad(lx, ly);
+            // Keep the city's own outbound road where the access road joins it.
+            if (
+              insideDenseBounds(park.bounds, x, y) ||
+              !existing ||
+              ((existing === RoadType.Sidewalk || existing === RoadType.CityPavement) &&
+                surface === RoadType.Asphalt)
+            )
+              chunk.setRoad(lx, ly, surface);
+            chunk.setHeight(lx, ly, 0);
+          }
       }
   }
   depotVehicles(cx: number, cy: number) {
-    return this.racetracks
-      .query({ minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 })
-      .flatMap((t) => vehicleDepot(t).vehicles)
-      .filter(
-        (p) => Math.floor(p.wx / CHUNK_SIZE_PX) === cx && Math.floor(p.wy / CHUNK_SIZE_PX) === cy,
-      );
+    const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
+    return [
+      ...this.racetracks.query(bounds).flatMap((t) => vehicleDepot(t).vehicles),
+      ...this.motocross.query(bounds).flatMap((p) => p.vehicles),
+    ].filter(
+      (p) => Math.floor(p.wx / CHUNK_SIZE_PX) === cx && Math.floor(p.wy / CHUNK_SIZE_PX) === cy,
+    );
   }
   boats(cx: number, cy: number) {
     return this.nature.boats(cx, cy);
@@ -131,12 +159,12 @@ export class NaturalStrategy extends RailwayStrategy {
   }
   spectators(cx: number, cy: number) {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
-    return this.racetracks
-      .query(bounds)
-      .flatMap((t) => t.actors)
-      .filter(
-        (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
-      );
+    return [
+      ...this.racetracks.query(bounds).flatMap((t) => t.actors),
+      ...this.motocross.query(bounds).flatMap((p) => p.actors),
+    ].filter(
+      (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
+    );
   }
   override placements(cx: number, cy: number) {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
@@ -148,6 +176,7 @@ export class NaturalStrategy extends RailwayStrategy {
       ...pastureHabitatProps(this.nature, cx, cy),
       ...rangeHabitatProps(this.nature, cx, cy),
       ...this.racetracks.query(bounds).flatMap((t) => depotPlacements(vehicleDepot(t), bounds)),
+      ...this.motocross.query(bounds).flatMap((p) => motocrossPlacements(p, bounds)),
       ...this.racetracks
         .query({
           minX: bounds.minX - 4,

@@ -169,6 +169,7 @@ export function collectSurfacePresentation(
       // Thin strips approximate a projected plane without introducing a separate
       // GPU renderer. All collision queries use the exact plane, not these strips.
       const depotRoad = prop.type.startsWith("prop-depot-bridge-");
+      const dirt = prop.type.startsWith("prop-mx-");
       const step = 2;
       for (let x = bounds.left; x < bounds.right; x += step) {
         const width = Math.min(step, bounds.right - x);
@@ -186,18 +187,22 @@ export function collectSurfacePresentation(
           south.sy - north.sy,
           depotRoad
             ? "#62676b"
-            : patch.riseX || patch.riseY
-              ? "#d4ad73"
-              : patch.excavation
-                ? "#c7cbb9"
-                : "#98bec6",
+            : dirt
+              ? patch.riseX || patch.riseY
+                ? "#a8784a"
+                : "#b78a5a"
+              : patch.riseX || patch.riseY
+                ? "#d4ad73"
+                : patch.excavation
+                  ? "#c7cbb9"
+                  : "#98bec6",
         );
         frame.rect(
           south.sx,
           south.sy,
           width * camera.scale + 0.5,
           patch.thickness * camera.scale,
-          depotRoad ? "#3d4854" : "#547780",
+          depotRoad ? "#3d4854" : dirt ? "#6f4b2e" : "#547780",
         );
       }
       if (depotRoad) {

@@ -10,6 +10,7 @@ import { OnionStrategy } from "./OnionStrategy.js";
 import type { CountryPlan } from "./regional/CountrysidePlanner.js";
 import { DenseDistrictSource } from "./regional/DenseDistrictPlanner.js";
 import type { DistrictPlan } from "./regional/DistrictPlanner.js";
+import { type MotocrossPark, MotocrossSource } from "./regional/MotocrossPlanner.js";
 import {
   DEFAULT_LANDSCAPE_PROFILE,
   type LandscapeProfile,
@@ -37,6 +38,10 @@ export type OverviewResult = Omit<RegionalResult, "world"> & {
   railways?: RailLine[];
   racetracks?: Pick<Racetrack, "id" | "name" | "center" | "bounds" | "access">[];
   vehicleDepots?: Pick<VehicleDepot, "id" | "name" | "center" | "arrival" | "bounds">[];
+  motocross?: Pick<
+    MotocrossPark,
+    "id" | "name" | "center" | "arrival" | "bounds" | "access" | "straight"
+  >[];
   landscape?: LandscapeProfile;
   ponds?: NaturalPond[];
 };
@@ -92,6 +97,18 @@ export function* overviewSteps(
           });
         }
         result.stats.features += tracks.length * 2;
+      }
+    }
+    const motocross: NonNullable<OverviewResult["motocross"]> = [];
+    if (result.detail === "region") {
+      const parks = yield* new MotocrossSource(regionalWorld(descriptor.seed)).querySteps(
+        request.bounds,
+        request.limits.maxOwners,
+      );
+      if (result.stats.features + parks.length <= request.limits.maxFeatures) {
+        for (const { id, name, center, arrival, bounds, access, straight } of parks)
+          motocross.push({ id, name, center, arrival, bounds, access, straight });
+        result.stats.features += parks.length;
       }
     }
     const source = new DenseDistrictSource(regionalWorld(descriptor.seed), true);
@@ -178,6 +195,7 @@ export function* overviewSteps(
       railways,
       racetracks,
       vehicleDepots,
+      motocross,
       ...(landscape ? { landscape, ponds } : {}),
     };
   }
@@ -224,6 +242,7 @@ export function* overviewSteps(
     railways: [],
     racetracks: [],
     vehicleDepots: [],
+    motocross: [],
     stats: { samples: count, owners: 0, features: 0, detailedChunks: 0 },
   };
 }

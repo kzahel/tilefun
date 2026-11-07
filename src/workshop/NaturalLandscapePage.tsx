@@ -787,6 +787,7 @@ export default function NaturalLandscapePage() {
           ["↓", "ArrowDown"],
           ["→", "ArrowRight"],
           ["Jump", " "],
+          ["Boost", "Shift"],
         ].map(([label, key]) => (
           <button
             type="button"

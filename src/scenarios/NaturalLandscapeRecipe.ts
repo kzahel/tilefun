@@ -3,6 +3,7 @@ import { createPlayer } from "../entities/Player.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { DenseDistrictSource } from "../generation/regional/DenseDistrictPlanner.js";
 import { FarmsteadSource } from "../generation/regional/FarmsteadPlanner.js";
+import { MotocrossSource } from "../generation/regional/MotocrossPlanner.js";
 import {
   type LandscapeProfile,
   NaturalLandscape,
@@ -151,6 +152,7 @@ export const NATURAL_CASES = [
   { id: "village-pets", name: "Village · cats & dogs", seed: 2026, x: 672, y: -592 },
   { id: "city-center", name: "City · dense center & neighborhoods", seed: 2026, x: 300, y: 519 },
   { id: "racetrack", name: "City outskirts · oval speedway", seed: 2026, x: 462, y: 455 },
+  { id: "motocross", name: "City outskirts · motocross park", seed: 2026, x: 8, y: 454 },
   { id: "city-pets", name: "City · cats & dogs", seed: 2026, x: 306, y: 540 },
   { id: "meadow", name: "Meadow · lone trees", seed: 2026, x: 480, y: -512 },
   { id: "grove", name: "Open woodland", seed: 2026, x: -160, y: -512 },
@@ -279,6 +281,18 @@ export function naturalLandscapeRecipe(
       generation: createDescriptor("regional", point.seed),
       landscape: profile,
       player: createPlayer(track.center.x * 16, (track.center.y + 37) * 16),
+      props: [],
+    };
+  }
+  if (!at && id === "motocross") {
+    const park = new MotocrossSource(regionalWorld(point.seed)).owner(0, 0);
+    if (!park) throw Error("Missing generated motocross inspection");
+    return {
+      version: 1,
+      id: `nature-${id}-${profile}-v1`,
+      generation: createDescriptor("regional", point.seed),
+      landscape: profile,
+      player: createPlayer(park.start.x * 16, park.start.y * 16),
       props: [],
     };
   }

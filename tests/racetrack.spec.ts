@@ -114,6 +114,16 @@ for (const phone of [false, true])
         return oval;
       }),
     ).toBeGreaterThan(1000);
+    // The motocross park on the town's other side is listed and targets its pit
+    // row; the narrower phone map around the speedway does not reach it.
+    if (!phone) {
+      await expect(map).toHaveAttribute("data-motocross", "1");
+      const park = map.getByTestId("world-map-motocross");
+      await expect(park).toHaveText(/Motocross park$/);
+      await park.click();
+      await expect(map).toHaveAttribute("data-x", "122");
+      await expect(map).toHaveAttribute("data-y", "501");
+    }
     if (phone)
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
         true,
