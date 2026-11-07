@@ -85,7 +85,9 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
           }, MALLARD_TYPE);
         return state;
       },
-      { timeout: 10000, intervals: [150] },
+      // Each poll is one jittered throw at a wandering duck (~1 in 6 volleys of
+      // 10 s missed under SwiftShader); slow hosts get fewer polls, so allow more.
+      { timeout: 30000, intervals: [150] },
     )
     .toBe("scared");
   await expect(page.locator("#game")).toHaveAttribute("data-quacks", "1");

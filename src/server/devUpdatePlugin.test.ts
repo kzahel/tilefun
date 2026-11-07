@@ -77,24 +77,34 @@ it("streams real watcher changes and marker writes, and cleans up connected stre
     expect(response.headers.get("content-type")).toBe("text/event-stream");
     reader = response.body?.getReader();
     if (!reader) throw new Error("Missing stream");
-    const nextState = async (state: string) => {
+    // Keep one pending read across attempts; a write made while the platform
+    // watcher is still arming can be missed, so each step retries its write.
+    let pending: Promise<ReadableStreamReadResult<Uint8Array>> | undefined;
+    const nextState = async (state: string, act?: (attempt: number) => Promise<void>) => {
       let text = "";
-      while (!text.includes(`"state":"${state}"`)) {
-        const chunk = await reader?.read();
-        if (chunk?.done) throw new Error("Unexpected stream close");
-        text += new TextDecoder().decode(chunk?.value);
+      for (let attempt = 0; attempt < 10; attempt++) {
+        await act?.(attempt);
+        const deadline = Date.now() + 1000;
+        while (Date.now() < deadline || !act) {
+          pending ??= reader?.read();
+          const chunk = await Promise.race([
+            pending,
+            new Promise<undefined>((resolve) => setTimeout(resolve, deadline - Date.now())),
+          ]);
+          if (!chunk) break;
+          pending = undefined;
+          if (chunk.done) throw new Error("Unexpected stream close");
+          text += new TextDecoder().decode(chunk.value);
+          if (text.includes(`"state":"${state}"`)) return;
+        }
       }
+      throw new Error(`No ${state} update`);
     };
     await nextState("changed");
-    // Allow the platform watcher to finish its initial scan before creating files.
-    if (!server.watcher.getWatched()[server.config.root])
-      await new Promise<void>((resolve) => server.watcher.once("ready", resolve));
-    await writeFile(join(root, "src/main.ts"), "export const value = 1;");
-    await nextState("editing");
-    await writeFile(join(root, DEV_READY_MARKER), "done");
-    await nextState("ready");
-    await writeFile(join(root, "src/main.ts"), "export const value = 2;");
-    await nextState("editing");
+    const source = join(root, "src/main.ts");
+    await nextState("editing", (n) => writeFile(source, `export const value = ${n};`));
+    await nextState("ready", (n) => writeFile(join(root, DEV_READY_MARKER), `done ${n}`));
+    await nextState("editing", (n) => writeFile(source, `export const value = ${100 + n};`));
   } finally {
     await server.close();
     await reader?.cancel();
