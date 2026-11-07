@@ -1,9 +1,104 @@
 import type { Entity } from "../entities/Entity.js";
 import { setSpriteClip, setSpriteClipElapsed } from "../entities/spriteAnimation.js";
+import type { AnimalWork } from "./AnimalWork.js";
 import { DEER_CLIPS } from "./Deer.js";
 import { faunaProfile } from "./Fauna.js";
 import { RABBIT_CLIPS } from "./Rabbit.js";
 import { ROBIN_CLIPS } from "./Robin.js";
+
+type Kind = AnimalWork["kind"];
+type State = AnimalWork["state"];
+/** A saved task state restores this clip name; a function decides from the task. */
+type Pose = string | ((task: AnimalWork) => string | undefined);
+const same = (...states: State[]): [State, Pose][] => states.map((s) => [s, s]);
+
+/**
+ * Each working habitat's task kinds and the clip each saved state restores.
+ * States without an entry restore no clip (the AI picks one on its next update).
+ */
+const HABITAT_POSES: readonly { kinds: readonly Kind[]; poses: [State, Pose][] }[] = [
+  {
+    kinds: ["hedgehog", "porcupine", "fox"],
+    poses: same(
+      "curl-in",
+      "curled",
+      "uncurl",
+      "quills",
+      "rattle",
+      "relax",
+      "listen",
+      "stalk",
+      "pounce",
+      "eat",
+    ),
+  },
+  {
+    kinds: ["deer", "peacock", "raven"],
+    poses: same("lower", "browse", "raise", "stamp", "open", "display", "close", "pickup", "bury"),
+  },
+  {
+    kinds: ["cow", "sheep", "donkey"],
+    poses: same("lower", "graze", "raise", "lie", "ruminate", "stand", "bleat", "roll"),
+  },
+  {
+    kinds: ["horse", "giraffe", "beaver"],
+    poses: same("lower", "graze", "drink", "raise", "reach", "browse", "pickup", "build", "settle"),
+  },
+  {
+    kinds: ["chicken", "bee", "hummingbird"],
+    poses: same("scratch", "peck", "eat", "sip", "guard"),
+  },
+  {
+    kinds: ["goat", "pig", "elephant"],
+    poses: same(
+      "rear",
+      "browse",
+      "lower",
+      "hop",
+      "sniff",
+      "root",
+      "pickup",
+      "reach",
+      "curl",
+      "eat",
+      "shake",
+    ),
+  },
+  {
+    kinds: ["capuchin", "raccoon", "cat"],
+    poses: [
+      ...same("stalk", "pounce", "bat", "eat", "pickup"),
+      ["climb", "climb"],
+      ["descend", "climb"],
+      ["perch", "sit"],
+    ],
+  },
+];
+/** Meadow, ground and carrying workers (dog, crow, squirrel, rabbit, robin, meerkat). */
+const OTHER_POSES: [State, Pose][] = [
+  ["scan", (t) => (t.elapsed < 0.6 ? "rear" : "scan")],
+  ["lower", "lower"],
+  ["alarm", "alarm"],
+  ["rest", (t) => (t.kind === "rabbit" ? "action" : t.kind === "dog" ? "release" : undefined)],
+  ["pickup", "pickup"],
+  ["deposit", (t) => (t.kind === "crow" ? "build" : "dig")],
+  ["retrieve", "dig"],
+  ["eat", (t) => (t.kind === "meerkat" ? "action" : "eat")],
+];
+const POSES_BY_KIND = new Map<Kind, ReadonlyMap<State, Pose>>(
+  HABITAT_POSES.flatMap(({ kinds, poses }) => {
+    const table = new Map(poses);
+    return kinds.map((kind) => [kind, table] as const);
+  }),
+);
+const OTHER_TABLE: ReadonlyMap<State, Pose> = new Map(OTHER_POSES);
+
+function poseName(animal: Entity, task: AnimalWork): string | undefined {
+  // A moving fox stalk keeps its live gait instead of a restored pose.
+  if (task.kind === "fox" && task.state === "stalk" && animal.fauna?.motion) return undefined;
+  const pose = (POSES_BY_KIND.get(task.kind) ?? OTHER_TABLE).get(task.state);
+  return typeof pose === "function" ? pose(task) : pose;
+}
 
 /** Restore task clips before the first snapshot after loading a save. */
 export function restoreAnimalWorkPose(animal: Entity): void {
@@ -16,151 +111,32 @@ export function restoreAnimalWorkPose(animal: Entity): void {
       !["hedgehog", "porcupine"].includes(task.kind))
   )
     return;
-  const woodland = task.kind === "capuchin" || task.kind === "raccoon" || task.kind === "cat";
-  const pasture = task.kind === "goat" || task.kind === "pig" || task.kind === "elephant";
-  const garden = ["chicken", "bee", "hummingbird"].includes(task.kind);
-  const range = ["horse", "giraffe", "beaver"].includes(task.kind);
-  const herd = ["cow", "sheep", "donkey"].includes(task.kind);
-  const forest = ["deer", "peacock", "raven"].includes(task.kind);
-  const threat = ["hedgehog", "porcupine", "fox"].includes(task.kind);
-  const name =
-    task.kind === "fox" && task.state === "stalk" && animal.fauna?.motion
-      ? undefined
-      : threat
-        ? [
-            "curl-in",
-            "curled",
-            "uncurl",
-            "quills",
-            "rattle",
-            "relax",
-            "listen",
-            "stalk",
-            "pounce",
-            "eat",
-          ].includes(task.state)
-          ? task.state
-          : undefined
-        : forest
-          ? [
-              "lower",
-              "browse",
-              "raise",
-              "stamp",
-              "open",
-              "display",
-              "close",
-              "pickup",
-              "bury",
-            ].includes(task.state)
-            ? task.state
-            : undefined
-          : herd
-            ? ["lower", "graze", "raise", "lie", "ruminate", "stand", "bleat", "roll"].includes(
-                task.state,
-              )
-              ? task.state
-              : undefined
-            : range
-              ? [
-                  "lower",
-                  "graze",
-                  "drink",
-                  "raise",
-                  "reach",
-                  "browse",
-                  "pickup",
-                  "build",
-                  "settle",
-                ].includes(task.state)
-                ? task.state
-                : undefined
-              : garden
-                ? ["scratch", "peck", "eat", "sip", "guard"].includes(task.state)
-                  ? task.state
-                  : undefined
-                : pasture
-                  ? [
-                      "rear",
-                      "browse",
-                      "lower",
-                      "hop",
-                      "sniff",
-                      "root",
-                      "pickup",
-                      "reach",
-                      "curl",
-                      "eat",
-                      "shake",
-                    ].includes(task.state)
-                    ? task.state
-                    : undefined
-                  : woodland
-                    ? task.state === "climb" || task.state === "descend"
-                      ? "climb"
-                      : task.state === "stalk"
-                        ? "stalk"
-                        : task.state === "pounce"
-                          ? "pounce"
-                          : task.state === "bat"
-                            ? "bat"
-                            : task.state === "perch"
-                              ? "sit"
-                              : task.state === "eat"
-                                ? "eat"
-                                : task.state === "pickup"
-                                  ? "pickup"
-                                  : undefined
-                    : task.state === "scan"
-                      ? task.elapsed < 0.6
-                        ? "rear"
-                        : "scan"
-                      : task.state === "lower"
-                        ? "lower"
-                        : task.state === "alarm"
-                          ? "alarm"
-                          : task.state === "rest" && task.kind === "rabbit"
-                            ? "action"
-                            : task.state === "pickup"
-                              ? "pickup"
-                              : task.state === "deposit"
-                                ? task.kind === "crow"
-                                  ? "build"
-                                  : "dig"
-                                : task.state === "retrieve"
-                                  ? "dig"
-                                  : task.state === "eat"
-                                    ? task.kind === "meerkat"
-                                      ? "action"
-                                      : "eat"
-                                    : task.kind === "dog" && task.state === "rest"
-                                      ? "release"
-                                      : undefined;
-  const clips = animal.deer
+  const name = poseName(animal, task);
+  const index = clipBank(animal)?.findIndex((c) => c.name === name) ?? -1;
+  if (index < 0) return;
+  if (task.facing !== undefined) {
+    animal.sprite.direction = task.facing;
+    animal.sprite.frameRow = task.facing;
+    if (animal.fauna) animal.fauna.facing = task.facing;
+    if (animal.deer) animal.deer.facing = task.facing;
+  }
+  setSpriteClip(animal, index);
+  setSpriteClipElapsed(animal, Math.round(clipSeconds(animal, task) * 1000));
+}
+
+const clipBank = (animal: Entity) =>
+  animal.deer
     ? DEER_CLIPS
     : animal.rabbit
       ? RABBIT_CLIPS
       : animal.robin
         ? ROBIN_CLIPS
         : faunaProfile(animal.type)?.clips;
-  const index = clips?.findIndex((c) => c.name === name) ?? -1;
-  if (index >= 0) {
-    if (task.facing !== undefined) {
-      animal.sprite.direction = task.facing;
-      animal.sprite.frameRow = task.facing;
-      if (animal.fauna) animal.fauna.facing = task.facing;
-      if (animal.deer) animal.deer.facing = task.facing;
-    }
-    setSpriteClip(animal, index);
-    setSpriteClipElapsed(
-      animal,
-      Math.round(
-        (task.state === "pounce" || task.state === "hop"
-          ? (animal.fauna?.motion?.elapsed ?? task.elapsed)
-          : task.state === "scan" && task.elapsed >= 0.6
-            ? task.elapsed - 0.6
-            : task.elapsed) * 1000,
-      ),
-    );
-  }
-}
+
+/** Physical moves resume their live motion; a late scan skips its 0.6 s rear. */
+const clipSeconds = (animal: Entity, task: AnimalWork) =>
+  task.state === "pounce" || task.state === "hop"
+    ? (animal.fauna?.motion?.elapsed ?? task.elapsed)
+    : task.state === "scan" && task.elapsed >= 0.6
+      ? task.elapsed - 0.6
+      : task.elapsed;

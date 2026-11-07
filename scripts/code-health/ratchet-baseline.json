@@ -747,11 +747,6 @@
       "worst": 34,
       "overLimit": 1
     },
-    "src/wildlife/AnimalWorkPose.ts": {
-      "lines": 166,
-      "worst": 255,
-      "overLimit": 1
-    },
     "src/wildlife/AnimalWorkSystem.ts": {
       "lines": 603,
       "worst": 170,
