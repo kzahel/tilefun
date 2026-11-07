@@ -296,10 +296,7 @@ test("approval advances past checked sets offline and finishes the new batch wit
   await expect(page.locator("#circle")).toBeDisabled();
 });
 
-// Fails since b4144ded (actors drawn at fractional positions with smoothing; 2
-// mismatched pixels on CI, 70-112 locally where the landing also varies). Owner
-// pixel decision pending: tactical 221 "Green baseline" open items.
-test.fixme("the full player sprite remains visible at the back of the bed after landing", async ({
+test("the full player sprite remains visible at the back of the bed after landing", async ({
   page,
 }, testInfo) => {
   await page.route("**/api/interior-review", (r) => r.fulfill({ json: [] }));
@@ -307,47 +304,106 @@ test.fixme("the full player sprite remains visible at the back of the bed after 
   const canvas = page.locator("#room");
   await expect(page.locator('#app[data-ready="true"]')).toBeVisible();
   await page.locator("#collisions").uncheck();
+  const scene = MOTION_SCENES.find((s) => s.id === "bedside");
+  const bed = new FurnitureMotion(scene?.furniture ?? [])
+    .collisionBoxes()
+    .find((b) => b.id === "bed");
+  if (!bed) throw new Error("Missing bed");
+  const { left, right, top, bottom } = bed.bounds;
+  const player = () =>
+    canvas.evaluate((el) => {
+      const d = (el as HTMLCanvasElement).dataset;
+      return {
+        x: Number(d.playerX),
+        y: Number(d.playerY),
+        z: Number(d.playerZ),
+        depth: Number(d.playerDepth),
+        airborne: d.airborne === "true",
+      };
+    });
+  // Keys are released on observed positions, then the player is left to come to rest.
+  const settled = async () => {
+    let previous = await player();
+    await expect
+      .poll(
+        async () => {
+          const next = await player();
+          const still =
+            !next.airborne && Math.abs(next.x - previous.x) + Math.abs(next.y - previous.y) < 0.001;
+          previous = next;
+          return still;
+        },
+        { intervals: [100] },
+      )
+      .toBe(true);
+    return previous;
+  };
+  const holdUntil = async (keys: string[], attribute: string, below: number) => {
+    for (const key of keys) await page.keyboard.down(key);
+    await page.waitForFunction(
+      ([attribute, below]) =>
+        Number(document.getElementById("room")?.getAttribute(String(attribute))) < Number(below),
+      [attribute, below] as const,
+    );
+    for (const key of keys) await page.keyboard.up(key);
+  };
   await canvas.focus();
-  await page.keyboard.down("ArrowLeft");
-  await page.waitForFunction(() => Number(document.getElementById("room")?.dataset.playerX) < 64);
-  await page.keyboard.up("ArrowLeft");
+  // Stand in front of the bed's middle, then jump over its front edge to the back half.
+  await holdUntil(["ArrowLeft"], "data-player-x", (left + right) / 2);
+  await holdUntil(["ArrowUp"], "data-player-y", bottom + 10);
+  const front = await settled();
+  expect(front.x).toBeGreaterThan(left + 4);
+  expect(front.x).toBeLessThan(right - 4);
+  expect(front.y).toBeGreaterThan(bottom);
   await page.keyboard.down("Space");
-  await page.keyboard.down("ArrowUp");
-  await page.waitForFunction(() => Number(document.getElementById("room")?.dataset.playerY) < 66);
-  await page.keyboard.up("ArrowUp");
+  await expect.poll(async () => (await player()).z).toBeGreaterThan(bed.height + 1);
+  await holdUntil(["ArrowUp"], "data-player-y", top + 6);
   await page.keyboard.up("Space");
-  await expectHeight(canvas, 8);
-  await expect(canvas).toHaveAttribute("data-airborne", "false");
-  await page.waitForTimeout(150); // Idle animation returns to frame zero.
-  const pixels = await canvas.evaluate(async (el) => {
-    const c = el as HTMLCanvasElement;
-    const x = Math.floor(Number(c.dataset.playerX) - 8);
-    // The bed top is 8px; the resting height differs only by solver contact error.
-    const y = Math.floor(Number(c.dataset.playerY) - Math.round(Number(c.dataset.playerZ)) - 16);
-    const source = new Image();
-    source.src = "/tilefun/assets/sprites/player.png";
-    await source.decode();
-    const expected = document.createElement("canvas");
-    expected.width = 16;
-    expected.height = 16;
-    const ctx = expected.getContext("2d");
-    if (!ctx) throw new Error("Missing context");
-    ctx.drawImage(source, 0, 16, 16, 16, 0, 0, 16, 16); // Idle, facing up.
-    const reference = ctx.getImageData(0, 0, 16, 16).data;
-    const actual = c.getContext("2d")?.getImageData(x, y, 16, 16).data;
-    if (!actual) throw new Error("Missing pixels");
-    let opaque = 0,
-      mismatches = 0;
-    for (let i = 0; i < reference.length; i += 4)
-      if (reference[i + 3] === 255) {
-        opaque++;
-        if ([0, 1, 2, 3].some((k) => reference[i + k] !== actual[i + k])) mismatches++;
-      }
-    return { opaque, mismatches, depth: Number(c.dataset.playerDepth) };
-  });
-  expect(pixels.opaque).toBeGreaterThan(30);
-  expect(pixels.mismatches).toBe(0);
-  expect(pixels.depth).toBeGreaterThan(90);
+  const landed = await settled();
+  expect(landed.x).toBeGreaterThan(left);
+  expect(landed.x).toBeLessThan(right);
+  expect(landed.y).toBeGreaterThan(top);
+  expect(landed.y).toBeLessThan((top + bottom) / 2);
+  await expectHeight(canvas, bed.height);
+  // Feet plus height sort behind the bed's front; support lifts the player above it.
+  expect(landed.depth).toBeGreaterThan(bottom);
+  // Actors draw at fractional positions with smoothing, so compare against the
+  // idle, facing-up frame smoothed at the same offset. Pixels the smoothed frame
+  // covers fully must show the sprite; the bed drawn over it fails most of them.
+  const visible = () =>
+    canvas.evaluate(async (el) => {
+      const c = el as HTMLCanvasElement;
+      const sx = Number(c.dataset.playerX) - 8;
+      const sy =
+        Number(c.dataset.playerY) - Number(c.dataset.playerZ) - 16 + Number(c.dataset.viewOffsetY);
+      const x = Math.floor(sx),
+        y = Math.floor(sy);
+      const source = new Image();
+      source.src = "/tilefun/assets/sprites/player.png";
+      await source.decode();
+      const expected = document.createElement("canvas");
+      expected.width = 18;
+      expected.height = 18;
+      const ctx = expected.getContext("2d");
+      if (!ctx) throw new Error("Missing context");
+      ctx.imageSmoothingEnabled = true;
+      ctx.drawImage(source, 0, 16, 16, 16, sx - x, sy - y, 16, 16);
+      const reference = ctx.getImageData(0, 0, 18, 18).data;
+      const actual = c.getContext("2d")?.getImageData(x, y, 18, 18).data;
+      if (!actual) throw new Error("Missing pixels");
+      let covered = 0,
+        matching = 0;
+      for (let i = 0; i < reference.length; i += 4)
+        if (reference[i + 3] === 255) {
+          covered++;
+          const distance = Math.max(
+            ...[0, 1, 2].map((k) => Math.abs((reference[i + k] ?? 0) - (actual[i + k] ?? 0))),
+          );
+          if (distance <= 32) matching++;
+        }
+      return covered > 100 ? matching / covered : 0;
+    });
+  await expect.poll(visible).toBeGreaterThan(0.95);
   await canvas.screenshot({ path: testInfo.outputPath("standing-on-bed.png") });
 });
 

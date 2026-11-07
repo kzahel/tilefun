@@ -770,10 +770,13 @@ case. Native tests default to a 20 s hang deadline.
 
 Open items:
 
-- `tests/furniture-motion.spec.ts` back-of-bed sprite case is `fixme`: since
-  `b4144ded` actors draw at fractional positions with smoothing (blurrier on the
-  160 px lab canvas). Owner pixel decision: accept smoothing (rewrite the check
-  around visibility) or snap lab actors to whole pixels.
+- Resolved: `tests/furniture-motion.spec.ts` back-of-bed sprite case (was `fixme`
+  since `b4144ded` drew actors at fractional positions with smoothing). Owner
+  decision: the lab follows the game's smoothing. The case now releases keys on
+  observed positions, asserts a landing on the bed's back half at its top height,
+  and requires ≥95% of the sprite's fully covered pixels to match the idle frame
+  smoothed at the same offset; a scratch build drawing the player behind the bed
+  scored 0.72–0.79 and failed.
 - Door walk-through rejection on a starved Worker (`validateDoorApproach` checks
   the lagging server position and the request clears held keys): validate after
   queued inputs, or keep held input after a rejection. Canvas specs make it rare.
