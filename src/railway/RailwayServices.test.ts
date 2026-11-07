@@ -342,3 +342,54 @@ it("consumes inherited flight motion at an elevated wall and clears it on explic
     scene.dispose();
   }
 });
+
+it("freezes and unloads a train outside players' areas and summons it from a far bench", async () => {
+  const recipe = cityTrainRecipe();
+  const s = await ScenarioSession.create(recipe);
+  try {
+    const rails = required(s.realm.railways);
+    const service = required(
+      [...rails.services.values()].find((v) =>
+        v.line.stations.some(
+          (st) =>
+            Math.hypot(
+              st.x * 16 - recipe.player.position.wx,
+              st.y * 16 - recipe.player.position.wy,
+            ) < 640,
+        ),
+      ),
+    );
+    const { line } = service,
+      far = required(line.stations[1]);
+    // Services never add their own terrain demand.
+    const owners = () => [
+      ...(
+        required(s.realm.streaming).interest as unknown as { tickets: Map<string, unknown> }
+      ).tickets.keys(),
+    ];
+    expect(owners().some((o) => o.startsWith("rail-service"))).toBe(false);
+    // At the far platform the train is out of every player's area: saved and removed.
+    await s.command({ kind: "teleport", position: { wx: far.x * 16, wy: (far.y - 3) * 16 }, z: 0 });
+    for (let i = 0; i < 130; i++) await s.step(idle);
+    expect(rails.services.has(line.id)).toBe(false);
+    expect(service.cars.some((c) => s.realm.entityManager.entities.includes(c))).toBe(false);
+    expect(owners().some((o) => o.startsWith("rail-service"))).toBe(false);
+    await s.realm.flushAsync();
+    const frozen = (await s.realm.saveManager?.store.get("railServices", line.id)) as {
+      distance: number;
+    };
+    expect(frozen.distance).toBeCloseTo(service.record.distance, 3);
+    // The bench summons the frozen train straight to this platform.
+    const bench = required(
+      s.realm.propManager.props.find((p) => p.proceduralId?.startsWith(`${far.id}:bench:`)),
+    );
+    teleportBody(s.player.player, { wx: bench.position.wx, wy: bench.position.wy + 20, wz: 0 });
+    await s.step(idle);
+    await s.command({ kind: "call-train", benchId: bench.id });
+    const summoned = required(rails.services.get(line.id));
+    expect(summoned.record.distance).toBe(required(summoned.path.stops[1]).distance);
+    expect(Math.abs(required(summoned.cars[1]).position.wx / 16 - far.x)).toBeLessThan(2);
+  } finally {
+    await s.close();
+  }
+}, 30000);

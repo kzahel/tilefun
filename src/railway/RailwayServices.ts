@@ -1,4 +1,4 @@
-import { CHUNK_SIZE_PX } from "../config/constants.js";
+import { CHUNK_SIZE_PX, RENDER_DISTANCE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import { yawRotation } from "../physics/BodyRotation.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
@@ -14,6 +14,8 @@ import { carriagePose, nearestRail, type RailPath, railAlignment } from "./RailP
 import { besideStationBench } from "./StationBench.js";
 import { createTrainCarriages, TRAIN_CARRIAGES } from "./Train.js";
 
+/** Matches RealmStreaming's simulated (activity 1) player ticket radius, in chunks. */
+const PLAYER_ACTIVE_RADIUS = 4;
 const RAIL_TYPES = new Set<number>([
   RoadType.RailHorizontalTop,
   RoadType.RailHorizontalBottom,
@@ -50,7 +52,7 @@ export interface RailService {
  * other bodies in the one ordinary scene; there is no rail collision/carry solver. */
 export class RailwayServices {
   readonly services = new Map<string, RailService>();
-  private pending = new Map<string, Promise<void>>();
+  private pending = new Map<string, Promise<RailService | undefined>>();
   private closed = false;
   private deleted = new Set<string>();
   constructor(
@@ -86,7 +88,8 @@ export class RailwayServices {
     );
   }
   /** Terrain a consist needs: shared-scene support asks for ready chunks across each
-   * carriage's whole collider (up to ~160px wide), beyond a carriage-center halo. */
+   * carriage's whole collider (up to ~160px wide), beyond a carriage-center halo.
+   * Services never request terrain themselves; players' tickets must already cover it. */
   private range(poses: readonly { x: number; y: number }[]): ChunkRange {
     const halo = 224;
     return {
@@ -112,7 +115,6 @@ export class RailwayServices {
   }
   private remove(s: RailService) {
     s.removing = true;
-    this.realm.streaming?.interest.release(`rail-service:${s.line.id}`);
     for (const car of s.cars) this.realm.entityManager.remove(car.id);
     this.services.delete(s.line.id);
   }
@@ -159,8 +161,13 @@ export class RailwayServices {
         maxY: (r.maxCy + 1) * 16,
       }))
         if (this.near(line, r)) wanted.set(line.id, line);
+    // Outside every player's ticketed area a train is frozen: saved and unloaded.
     for (const s of this.services.values())
-      if (retire && !wanted.has(s.line.id) && !this.occupied(s)) {
+      if (
+        retire &&
+        !this.occupied(s) &&
+        (!wanted.has(s.line.id) || !this.within(this.poses(s, s.record.distance), ranges))
+      ) {
         this.dirty(s);
         this.remove(s);
       }
@@ -170,27 +177,42 @@ export class RailwayServices {
         const pending = this.pending.get(line.id);
         if (pending) return pending;
         if (this.services.size + this.pending.size >= 4) return undefined;
-        const task = this.load(line, ranges[0]).finally(() => this.pending.delete(line.id));
+        const task = this.load(line, ranges).finally(() => this.pending.delete(line.id));
         this.pending.set(line.id, task);
         return task;
       }),
     );
   }
-  /** Index of the stop closest to `r`, so a fresh service starts where it is seen. */
-  private nearestStop(path: RailPath, r: ChunkRange | undefined): number {
-    if (!r) return 0;
-    const a = railAlignment(path),
-      x = ((r.minCx + r.maxCx + 1) / 2) * CHUNK_SIZE_PX,
-      y = ((r.minCy + r.maxCy + 1) / 2) * CHUNK_SIZE_PX;
-    let best = 0;
-    path.stops.forEach((stop, i) => {
-      const p = a.sample(stop.distance),
-        q = a.sample(required(path.stops[best]).distance);
-      if (Math.hypot(p.x - x, p.y - y) < Math.hypot(q.x - x, q.y - y)) best = i;
-    });
-    return best;
+  /** Whether a consist's terrain lies inside a player's ticketed area: an observer
+   * range (visible plus RENDER_DISTANCE) or the simulated radius around a player.
+   * Services never extend chunk demand themselves. */
+  private within(poses: readonly { x: number; y: number }[], ranges: readonly ChunkRange[]) {
+    const f = this.range(poses),
+      d = RENDER_DISTANCE,
+      r = PLAYER_ACTIVE_RADIUS;
+    const areas = [
+      ...ranges.map((v) => [v.minCx - d, v.maxCx + d, v.minCy - d, v.maxCy + d]),
+      ...[...this.realm.sessions.values()]
+        .filter((s) => !s.retired && !s.transitioning)
+        .map(({ player: { position: p } }) => {
+          const cx = Math.floor(p.wx / CHUNK_SIZE_PX),
+            cy = Math.floor(p.wy / CHUNK_SIZE_PX);
+          return [cx - r, cx + r, cy - r, cy + r];
+        }),
+    ];
+    return areas.some(
+      ([minCx = 0, maxCx = 0, minCy = 0, maxCy = 0]) =>
+        f.minCx >= minCx && f.maxCx <= maxCx && f.minCy >= minCy && f.maxCy <= maxCy,
+    );
   }
-  private async load(line: RailRoute, near?: ChunkRange) {
+  /** A fresh service starts at a stop inside a player's area, or not at all. */
+  private visibleStop(s: Pick<RailService, "line" | "path">, ranges: readonly ChunkRange[]) {
+    const i = s.path.stops.findIndex((stop) => this.within(this.poses(s, stop.distance), ranges));
+    return i < 0 ? undefined : i;
+  }
+  /** Spawn a service where it was frozen (or at `stop`, for bench recall) only if
+   * that footprint is inside a player's area; otherwise it stays saved and unloaded. */
+  private async load(line: RailRoute, ranges: readonly ChunkRange[], stop?: number) {
     const path = this.path(line),
       a = railAlignment(path),
       pathKey = JSON.stringify(path);
@@ -205,11 +227,13 @@ export class RailwayServices {
     const oldDistance =
       saved?.distance ?? (saved?.x === undefined ? undefined : saved.x - a.sample(0).x);
     const compatible = !saved?.pathKey || saved.pathKey === pathKey;
-    const first = this.nearestStop(path, saved ? undefined : near);
-    const distance =
-      compatible && oldDistance !== undefined && Number.isFinite(oldDistance)
-        ? Math.max(240, Math.min(a.length - 240, oldDistance))
-        : required(path.stops[first]).distance;
+    const resume =
+      stop === undefined && compatible && oldDistance !== undefined && Number.isFinite(oldDistance);
+    const first = stop ?? (resume ? 0 : this.visibleStop({ line, path }, ranges));
+    if (first === undefined) return;
+    const distance = resume
+      ? Math.max(240, Math.min(a.length - 240, oldDistance))
+      : required(path.stops[first]).distance;
     const nextStop = saved?.nextStop,
       dwell = saved?.dwell;
     const record: RecordState = {
@@ -235,8 +259,10 @@ export class RailwayServices {
     };
     const poses = this.poses({ line, path }, distance),
       range = this.range(poses);
+    if (!this.within(poses, ranges)) return;
+    // Already ticketed by the player; this only waits for those chunks to be ready.
     await this.realm.streaming?.ensure(range);
-    if (this.closed) return;
+    if (this.closed || this.services.has(line.id)) return;
     const cars = line.path
       ? createCurveTrain(a, distance)
       : createTrainCarriages(required(poses[1]).x, required(poses[1]).y, [0, 0, 0]);
@@ -249,22 +275,8 @@ export class RailwayServices {
     });
     for (const car of cars) car.physicsGroupId = required(cars[1]).id;
     this.services.set(line.id, s);
-    this.demand(s);
     this.dirty(s);
-  }
-  /** Current footprint plus a lookahead toward the next stop. `plan` only moves
-   * once the next poses' terrain is ready, so demanding the present footprint alone
-   * deadlocks at chunk edges whenever no player happens to load the area ahead. */
-  private demand(s: RailService) {
-    const stop = required(s.path.stops[s.record.nextStop]).distance,
-      ahead = Math.max(-384, Math.min(384, stop - s.record.distance));
-    const poses = [
-      ...this.poses(s, s.record.distance),
-      ...this.poses(s, s.record.distance + ahead),
-    ];
-    this.realm.streaming?.interest.set(`rail-service:${s.line.id}`, [
-      { range: this.range(poses), activity: 2, reason: "dependency" },
-    ]);
+    return s;
   }
   bodies() {
     return [...this.services.values()].flatMap((s) =>
@@ -276,7 +288,6 @@ export class RailwayServices {
   plan(): Map<number, MotionIntent> {
     const intents = new Map<number, MotionIntent>();
     for (const s of this.services.values()) {
-      this.demand(s);
       let next = s.record.distance;
       const stop = required(s.path.stops[s.record.nextStop]),
         delta = stop.distance - next;
@@ -352,14 +363,21 @@ export class RailwayServices {
       })
       .find((l) => l.stations.some((st) => bench.proceduralId?.startsWith(`${st.id}:bench:`)));
     if (!line) throw Error("This bench has no train service.");
-    await this.prepare([session.visibleRange]);
-    const s = this.services.get(line.id);
-    if (!s) throw Error("This train is unavailable.");
     const index = line.stations.findIndex((st) =>
       bench.proceduralId?.startsWith(`${st.id}:bench:`),
     );
+    await this.prepare([session.visibleRange]);
+    // A frozen train far away is summoned straight to this platform.
+    await this.pending.get(line.id);
+    const s =
+      this.services.get(line.id) ??
+      (this.deleted.has(line.id)
+        ? undefined
+        : ((await this.load(line, [session.visibleRange], index)) ?? this.services.get(line.id)));
+    if (!s) throw Error("This train is unavailable.");
     const distance = required(s.path.stops[index]).distance,
       poses = this.poses(s, distance);
+    if (!this.within(poses, [session.visibleRange])) throw Error("Walk closer to the platform.");
     await this.realm.streaming?.ensure(this.range(poses));
     if (!valid() || this.services.get(line.id) !== s || this.occupied(s))
       throw Error("The train has passengers. Wait until everyone gets off.");
@@ -376,7 +394,6 @@ export class RailwayServices {
     s.record.nextStop = index === 0 ? 1 : 0;
     s.record.dwell = 8;
     s.record.speed = 0;
-    this.demand(s);
     this.dirty(s);
   }
   dispose() {

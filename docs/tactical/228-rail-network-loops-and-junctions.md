@@ -86,12 +86,20 @@ game screenshots of hub stations, both bridge orientations and a long S-curve.
   the projection axis) and cast a ground shadow east of the deck so the raised
   road reads over the track. This replaces the accepted tan/blue schematic and is
   new presentation for review.
-- **Services.** A fresh service starts at the stop nearest the requesting range.
-  Only lines with track or a station near the range are wanted (an S-bend bounding
-  box is not interest). Train terrain demand now covers carriage colliders (224px
-  halo) and a 384px lookahead toward the next stop: previously a train far from
-  players stopped forever at the first chunk edge, because `plan` waits for the
-  next poses' chunks while demand covered only the current footprint.
+- **Services: frozen outside player areas** (owner decision, 2026-11-07, after
+  the first commit briefly gave trains their own look-ahead terrain tickets).
+  Services request no terrain. A train exists only while its footprint (carriage
+  colliders plus a 224px support halo) lies inside a player's ticketed area: an
+  observer ticket (visible range plus `RENDER_DISTANCE`) or the simulated
+  activity-1 radius of 4 chunks around the player. Otherwise it is saved where it stands and
+  its carriages removed. Ridden trains stay with their riders. A fresh service
+  starts at a stop inside a player's area, or not at all. A saved train is
+  restored only where it was frozen. Moving trains stop at the edge of
+  ready terrain and freeze once outside the area. Lines are wanted only with track
+  or a station near the range (an S-bend bounding box is not interest). Bench
+  recall spawns a frozen train directly at that platform, so the bench is how
+  players fetch a distant train. Covered by `RailwayServices.test.ts` (no service
+  tickets, freeze at the far platform, saved distance, far-bench summon).
 - **Cost.** Lines are cached per seed in one bounded module cache (every
   generation planner constructs its own `RailwayPlanner`); a first fit costs
   ~5ms. Scenario creation returns to HEAD timings after warm-up.

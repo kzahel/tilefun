@@ -9,8 +9,9 @@ shuttle. Hub towns have a west-facing and an east-facing platform 32 tiles eithe
 side of the shared access path. Routes are tangent S-bends of any vertical offset.
 Road crossings become 96px road decks over the track in both orientations, drawn
 as height-shaded asphalt (north/south decks cast a ground shadow). Fresh services
-start at the stop nearest the player. Train terrain demand now looks ahead, so
-trains far from players run instead of stalling at chunk edges. Seed 2026 starts
+start at a platform the player can see. Services request no terrain of their own:
+outside every player's area a train is frozen (saved and unloaded) where it stands,
+and a station bench summons it. Seed 2026 starts
 on Mapleford's east platform (**698,-555**), facing the Oakgrove train on the west
 platform; the Fernstead train departs east. Review the
 [east/west road bridge](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=generated-2026-ew#/tool/world-geometry)
