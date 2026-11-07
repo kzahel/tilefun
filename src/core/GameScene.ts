@@ -2,6 +2,7 @@ import type { SpriteCatalog } from "../assets/SpriteCatalog.js";
 import type { AudioManager } from "../audio/AudioManager.js";
 import type { RemoteStateView } from "../client/ClientStateView.js";
 import type { DoorPresentation } from "../client/DoorPresentation.js";
+import type { FirstPersonControl } from "../client/FirstPersonControl.js";
 import type { ConsoleEngine } from "../console/ConsoleEngine.js";
 import type { ConsoleUI } from "../console/ConsoleUI.js";
 import type { EditorMode } from "../editor/EditorMode.js";
@@ -90,6 +91,8 @@ export interface GameContext {
   editorButton: HTMLButtonElement | null;
   /** True while an immersive XR/VR session is active. */
   readonly xrActive: boolean;
+  /** Experimental first-person view and look state (tactical 229). */
+  readonly firstPerson?: FirstPersonControl;
 
   // Helper methods
   flushServer(): void;

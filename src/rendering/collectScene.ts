@@ -59,20 +59,17 @@ export function collectScene(
   const vpTL = camera.screenToWorld(0, 0);
   const vpBR = camera.screenToWorld(camera.viewportWidth, camera.viewportHeight);
   const cull = cullBounds(vpTL, vpBR);
-  const depth = entityDepth(entities, props, frame);
   const poseTime = frame?.presentationTime ?? 0;
-  frame?.meshPoses.retain(entities);
-  collectEntitySprites({
+  collectWorldSprites({
     entities,
+    props,
     world,
     alpha,
-    terrain,
-    frame,
-    receivers,
     cull,
-    depth,
-    poseTime,
     items,
+    frame,
+    terrain,
+    receivers,
     grassVehicles,
   });
   const observer = receiverOptions.observer;
@@ -116,6 +113,47 @@ export function collectScene(
   items.sort((a, b) => a.sortKey - b.sortKey);
 
   return items;
+}
+
+/** Inputs for the view-independent actor stage. */
+export interface WorldSpriteInput {
+  readonly entities: readonly Entity[];
+  /** Depth surfaces only; prop sprites are collected per view. */
+  readonly props: readonly Prop[];
+  readonly world: Pick<World, "getHeightAt">;
+  readonly alpha: number;
+  /** World box: the fixed view's viewport, or the first-person view's draw radius. */
+  readonly cull: CullBounds;
+  readonly items: SceneItem[];
+  readonly frame?: SceneFrame | undefined;
+  readonly terrain?: Pick<TerrainPresentation, "meshSurfaceGeometry"> | undefined;
+  readonly receivers?: SurfaceReceivers | undefined;
+  readonly grassVehicles?: SpriteItem[] | undefined;
+}
+
+/**
+ * Interpolated actor positions, heights, frames and optional mesh poses inside a
+ * world box, appended in entity order. This is the shared world-space presentation
+ * step: the fixed oblique view sorts the result into painter order, and the
+ * first-person view (tactical 229) draws it in perspective. Neither view copies
+ * interpolation, pose or vehicle-grouping policy.
+ */
+export function collectWorldSprites(input: WorldSpriteInput): void {
+  const { entities, frame } = input;
+  frame?.meshPoses.retain(entities);
+  collectEntitySprites({
+    entities,
+    world: input.world,
+    alpha: input.alpha,
+    terrain: input.terrain ?? {},
+    frame,
+    receivers: input.receivers,
+    cull: input.cull,
+    depth: entityDepth(entities, input.props, frame),
+    poseTime: frame?.presentationTime ?? 0,
+    items: input.items,
+    grassVehicles: input.grassVehicles,
+  });
 }
 
 interface RoomObserver {

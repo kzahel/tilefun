@@ -19,6 +19,7 @@ export interface ClientCVars {
   cl_reconcile_log_interval_ms: CVar<number>;
   cl_verticalfollow: CVar<boolean>;
   r_show3d: CVar<boolean>;
+  r_firstperson: CVar<boolean>;
 }
 
 export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
@@ -176,6 +177,14 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "r",
   });
 
+  const r_firstperson = engine.cvars.register<boolean>({
+    name: "r_firstperson",
+    description: "Experimental first-person play view (V toggles; ?view=fps enables)",
+    type: "boolean",
+    defaultValue: false,
+    category: "r",
+  });
+
   return {
     r_showbboxes,
     r_showchunks,
@@ -194,5 +203,6 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     cl_reconcile_log_interval_ms,
     cl_verticalfollow,
     r_show3d,
+    r_firstperson,
   };
 }

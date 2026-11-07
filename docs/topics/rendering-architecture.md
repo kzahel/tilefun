@@ -1,5 +1,13 @@
 # Rendering architecture and backend separation
 
+[229](../tactical/229-first-person-view.md) adds an opt-in first-person view, the
+first non-fixed camera over shared presentation. It is not a `RenderBackend`: it
+consumes `collectWorldSprites` (the actor stage split out of `collectScene`;
+fixed-view output unchanged), replicated chunk layers and prop colliders, and draws
+them with its own Three.js renderer. Vehicle pose composition and loading are shared
+through `AuthoredMeshPose.ts`. The view mirrors game Y once at its scene boundary.
+The integration glue is temporary; 226 owns the view/camera-policy contracts it needs.
+
 [220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) projects
 vehicle shadows from the displayed rotated bounding volume's finite upper faces.
 Using a scalar root height could drop the footprint through a ramp crest to

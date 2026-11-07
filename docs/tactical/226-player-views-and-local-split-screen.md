@@ -2,7 +2,8 @@
 
 Status: direction agreed; research needed before phasing. No implementation
 started. The sequence below is provisional; the research questions decide it.
-Updated 2026-11-07 for seats on one device session and online seats.
+Updated 2026-11-07 for seats on one device session, online seats and the
+first-person view requirements from 229.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
 pinch zoom or movement mode). Rather than give labs another copy, make the game
@@ -182,10 +183,28 @@ rules (a leash is enforced by the authority, so it must know which seats share
 a device). Each seat's player session keeps its body, player tickets, identity
 and realm.
 
+### A second view type: first person (229)
+
+[229](229-first-person-view.md) delivers an experimental first-person view
+with temporary glue that this sequence replaces. Design for it from the start, so
+views are not hard-wired to the top-down camera:
+
+- A camera policy can produce a 3D eye (position, yaw, pitch) as well as x/y/zoom.
+- Input composition takes a movement frame from the seat's view: on foot,
+  movement is camera-relative; vehicle-axis controls (steering cars, trains) stay
+  unturned.
+- A view's streaming/activation interest can be a radius or frustum, not only a
+  screen rectangle (229 currently floors the fixed camera's zoom instead).
+- One render host can mix viewport kinds: a 3D viewport shares the GPU host's
+  Three.js renderer and loaded vehicle assets (`GpuRasterSurface` already owns a
+  `WebGLRenderer`). Showcase: one player top-down beside another in first person.
+- Per-view HUD: a crosshair, and no world-anchored markers in 3D views.
+
 ## Research questions (decide the phasing)
 
 1. Multi-viewport rendering: can one Canvas/GPU host draw 2–4 regions
    (including a diagonal split) within budget on a Chromebook and the Steam Deck?
+   Can one of them be a 229 first-person viewport sharing the same renderer?
 2. Multi-seat prediction: can one predictor replay several controlled bodies
    with acceptable corrections and cost?
 3. Server seats: how much of `Realm`, `SessionRegistry`, the replicator,

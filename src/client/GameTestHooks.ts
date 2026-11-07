@@ -20,6 +20,7 @@ import type { IClientTransport } from "../transport/Transport.js";
 import type { GemHUD } from "../ui/GemHUD.js";
 import type { MainMenu } from "../ui/MainMenu.js";
 import type { RemoteStateView } from "./ClientStateView.js";
+import type { FirstPersonControl } from "./FirstPersonControl.js";
 
 /**
  * The stable surface that Playwright specs and browser instrumentation read
@@ -47,6 +48,8 @@ export interface GameTestHooks {
   getFaultContext(): FaultReport["context"];
 
   readonly debugPanel: DebugPanel;
+  /** Experimental first-person look/view state (tactical 229 captures). */
+  readonly firstPerson: FirstPersonControl;
   readonly mainMenu: MainMenu;
   readonly editorMode: EditorMode;
   readonly editorModel: EditorModel;

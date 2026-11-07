@@ -5,7 +5,6 @@ import { nextInputSequence, observeInputSequence } from "../client/InputSequence
 import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { predictInput } from "../client/predictInput.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
-import { Direction } from "../entities/Entity.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { isTrain } from "../railway/Train.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
@@ -22,6 +21,13 @@ import {
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
+import {
+  drawCrosshair,
+  firstPersonMovement,
+  firstPersonTick,
+  renderFirstPerson,
+} from "./firstPersonPlay.js";
+import { throwDirection } from "./playThrow.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
 import { renderEntities, renderWorld } from "./renderWorld.js";
 
@@ -257,9 +263,15 @@ export class PlayScene implements GameScene {
       gc.tapMovement?.cancel();
       gc.trainTapMovement?.cancel();
     }
-    const manual = inputLocked
-      ? { dx: 0, dy: 0, sprinting: false, jump: false }
-      : gc.actions.getMovement(!(vehicle && !isTrain(vehicle) && gc.carDriving === "steering"));
+    const firstPerson = firstPersonTick(gc, dt, vehicle);
+    const manual = firstPersonMovement(
+      gc,
+      firstPerson,
+      vehicle,
+      inputLocked
+        ? { dx: 0, dy: 0, sprinting: false, jump: false }
+        : gc.actions.getMovement(!(vehicle && !isTrain(vehicle) && gc.carDriving === "steering")),
+    );
     let rawMovement =
       !inputLocked && gc.touchMovement === "tap" && gc.tapMovement
         ? gc.tapMovement.sample(gc.stateView.playerEntity.position, manual, dt, vehicle ? 24 : 0)
@@ -355,36 +367,11 @@ export class PlayScene implements GameScene {
     } else if (this.wasThrowHeld && !inputLocked && !vehicle) {
       // Released — throw the ball
       const force = Math.min(this.throwChargeTime / THROW_CHARGE_DURATION, 1);
-      let dirX = 0;
-      let dirY = 0;
-
-      // Use movement direction if player is moving (supports diagonal joystick)
-      if (movement.dx !== 0 || movement.dy !== 0) {
-        const len = Math.sqrt(movement.dx * movement.dx + movement.dy * movement.dy) || 1;
-        dirX = movement.dx / len;
-        dirY = movement.dy / len;
-      } else {
-        // Stationary — use sprite facing direction
-        const playerSprite = gc.stateView.playerEntity.sprite;
-        if (playerSprite) {
-          switch (playerSprite.direction) {
-            case Direction.Right:
-              dirX = 1;
-              break;
-            case Direction.Left:
-              dirX = -1;
-              break;
-            case Direction.Up:
-              dirY = -1;
-              break;
-            case Direction.Down:
-              dirY = 1;
-              break;
-          }
-        } else {
-          dirY = 1; // fallback: down
-        }
-      }
+      const { dirX, dirY } = throwDirection(
+        movement,
+        gc.stateView.playerEntity.sprite?.direction,
+        firstPerson?.forward(),
+      );
       gc.transport.send({ type: "throw-ball", dirX, dirY, force });
       this.throwChargeTime = 0;
     }
@@ -539,16 +526,20 @@ export class PlayScene implements GameScene {
       const shown = view?.presentedPlayerEntity ?? gc.stateView.playerEntity;
       gc.tapMovement?.captureView(gc.camera, Math.max(0, (shown.wz ?? 0) - (shown.jumpZ ?? 0)));
 
-      gc.beginWorld?.();
-      renderWorld(gc);
-      renderEntities(gc, alpha, this.particles);
-      gc.endWorld?.();
-      drawPlayerMarkers(gc, alpha);
+      const firstPerson = renderFirstPerson(gc, alpha);
+      if (!firstPerson) {
+        gc.beginWorld?.();
+        renderWorld(gc);
+        renderEntities(gc, alpha, this.particles);
+        gc.endWorld?.();
+        drawPlayerMarkers(gc, alpha);
+      }
       gc.chatHUD.render(gc.ctx);
       renderDebugOverlay(gc, alpha);
       render3DDebug(gc);
       if (!gc.xrActive) {
-        this.drawDestination(gc);
+        if (firstPerson) drawCrosshair(gc.ctx, gc.canvas.width, gc.canvas.height);
+        else this.drawDestination(gc);
         gc.touchJoystick.draw(gc.ctx);
         gc.touchButtons.draw(gc.ctx);
       }
@@ -560,6 +551,7 @@ export class PlayScene implements GameScene {
   }
 
   private stopMovement(gc: GameContext): void {
+    gc.firstPerson?.hideView(); // Editor and other opaque scenes draw the fixed view.
     gc.audioManager.stopSirens();
     gc.audioManager.stopTrains();
     gc.audioManager.stopCarEngine();
@@ -654,6 +646,13 @@ export class PlayScene implements GameScene {
         }),
       );
     }
+    // Experimental first-person view (tactical 229); the cvar owns the state.
+    this.zoomUnsubs.push(
+      gc.actions.on("toggle_first_person", () => {
+        const view = gc.console.cvars.get("r_firstperson");
+        view?.set(view.get() !== true);
+      }),
+    );
   }
 
   private unbindZoomActions(): void {

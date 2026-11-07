@@ -38,6 +38,7 @@ export type ActionName =
   | "zoom_2"
   | "zoom_3"
   | "zoom_4"
+  | "toggle_first_person"
   // Debug (discrete)
   | "toggle_base_mode"
   | "toggle_console";
@@ -91,6 +92,8 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   { action: "zoom_2", keys: ["2"] },
   { action: "zoom_3", keys: ["3"] },
   { action: "zoom_4", keys: ["4"] },
+  // Experimental first-person view (tactical 229)
+  { action: "toggle_first_person", keys: ["v", "V"] },
   // Debug
   { action: "toggle_base_mode", keys: ["d", "D"] },
 ];

@@ -2,6 +2,7 @@ import { registerClientCommands } from "../console/clientCommands.js";
 import { registerClientCVars } from "../console/clientCVars.js";
 import { registerServerCommandStubs } from "../console/serverCommandStubs.js";
 import type { GameContext } from "../core/GameScene.js";
+import { directionHeading } from "../rendering/firstperson/FirstPersonCamera.js";
 import type { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransport.js";
 
 /**
@@ -49,4 +50,16 @@ export function registerClientConsole(
   gc.debugPanel.onShow3dChange((checked) => {
     clientCVars.r_show3d.set(checked);
   });
+
+  // Experimental first-person view (tactical 229): cvar, debug checkbox, V key and ?view=fps.
+  clientCVars.r_firstperson.onChange((val) => {
+    gc.debugPanel.firstPerson = val;
+    const sprite = gc.stateView.playerEntity.sprite;
+    gc.firstPerson?.setActive(val, sprite ? directionHeading(sprite.direction) : undefined);
+  });
+  gc.debugPanel.onFirstPersonChange((checked) => {
+    clientCVars.r_firstperson.set(checked);
+  });
+  if (new URLSearchParams(location.search).get("view") === "fps")
+    clientCVars.r_firstperson.set(true);
 }

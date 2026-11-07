@@ -4,6 +4,7 @@ import { PNG } from "pngjs";
 import { expect, it } from "vitest";
 import { TerrainId } from "../autotile/TerrainId.js";
 import { BOAT_MODEL } from "../boats/Boat.js";
+import { createCow } from "../entities/Cow.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
@@ -20,9 +21,9 @@ import { createRoadkill } from "../wildlife/Roadkill.js";
 import { Chunk } from "../world/Chunk.js";
 import { authoredVehicleForType } from "./AuthoredVehicleMeshes.js";
 import { Camera } from "./Camera.js";
-import { collectScene } from "./collectScene.js";
+import { collectScene, collectWorldSprites } from "./collectScene.js";
 import { SceneFrame } from "./SceneFrame.js";
-import type { ElevationItem, ParticleItem } from "./SceneItem.js";
+import type { ElevationItem, ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
 
 const world = { getHeightAt: () => 0, getChunkIfLoaded: () => undefined, getRoadAt: () => 0 };
@@ -409,18 +410,20 @@ function sceneDigest(variant: {
 
 // Digests were recorded against the single-function collector before it was
 // split into stages; any change to item fields, values, key order or draw order fails.
+// 229 re-recorded them for the added `facing` field only: with that key omitted, the
+// shared collectWorldSprites stage reproduced every earlier digest exactly.
 it.each([
-  [{ frame: false, raster: false, grass: false, garage: false, time: 0 }, "3c1cf8d9bdb9f7cf"],
+  [{ frame: false, raster: false, grass: false, garage: false, time: 0 }, "68d24f0b70106eeb"],
   [
     { frame: true, raster: false, grass: true, garage: false, time: 0.05, zoom: 3 / 8 },
-    "6606b138107e3fae",
+    "8989a69863eea5b5",
   ],
-  [{ frame: true, raster: true, grass: true, garage: false, time: 0.55 }, "6624f76a050ed8f8"],
+  [{ frame: true, raster: true, grass: true, garage: false, time: 0.55 }, "44673e385cb54537"],
   [
     { frame: true, raster: true, grass: false, garage: true, time: 0.25, nativeTrains: true },
-    "359b7996bbd7bd0f",
+    "f6798e956d75c830",
   ],
-  [{ frame: false, raster: true, grass: false, garage: true, time: 0 }, "46e7b9e4d4157002"],
+  [{ frame: false, raster: true, grass: false, garage: true, time: 0 }, "3585ef2ea17cb438"],
 ] as const)("collects a byte-identical characterization scene %o", (variant, digest) => {
   const result = sceneDigest(variant);
   expect(result.digest).toBe(digest);
@@ -462,4 +465,27 @@ it("swaps a tree house's outside and inside parts by observer room and keeps flo
   }
   // A player standing on the porch, outside the cabin volume, keeps the roof.
   expect(parts({ ...createPlayer(170, 185), wz: DECK_Z })).toHaveLength(3);
+});
+
+it("marks only four-direction facing rows for views that reselect them (229)", () => {
+  const player = { ...createPlayer(100, 100), id: 1 };
+  if (player.sprite)
+    player.sprite = { ...player.sprite, direction: Direction.Left, frameRow: Direction.Left };
+  const clipPlayer = { ...createPlayer(120, 100), id: 2 };
+  if (clipPlayer.sprite) clipPlayer.sprite = { ...clipPlayer.sprite, clip: 1 };
+  // Single- or two-row sheets match `frameRow === direction` (both 0) by coincidence.
+  const cow = { ...createCow(140, 100), id: 3 };
+  const turningCow = { ...createCow(160, 100), id: 4 };
+  if (turningCow.wanderAI) turningCow.wanderAI = { ...turningCow.wanderAI, directional: true };
+  const items: SceneItem[] = [];
+  collectWorldSprites({
+    entities: [player, clipPlayer, cow, turningCow],
+    props: [],
+    world: { getHeightAt: () => 0 },
+    alpha: 1,
+    cull: { left: 0, right: 400, top: 0, bottom: 400 },
+    items,
+  });
+  const facing = (items as SpriteItem[]).map((item) => item.facing);
+  expect(facing).toEqual([Direction.Left, undefined, undefined, cow.sprite?.direction]);
 });

@@ -1,3 +1,4 @@
+import type { Direction } from "../entities/Entity.js";
 import type { MeshInstance } from "./MeshPresentation.js";
 import type { DecalMask } from "./ProjectedDecals.js";
 import type { Plane, SurfaceVertex } from "./SurfaceReceivers.js";
@@ -61,6 +62,10 @@ export interface SpriteItem {
   sheetKey: string;
   frameCol: number;
   frameRow: number;
+  /** Facing of a four-direction sheet (players, turning wanderers) whose current row
+   * is that facing. Views that see the actor from other sides (first person, 229)
+   * reselect the row; the fixed view ignores it. Absent for every other sprite. */
+  facing?: Direction;
   spriteWidth: number;
   spriteHeight: number;
   /** Destination-only vertical compression; source sheet pixels stay unchanged. */

@@ -63,7 +63,7 @@ export interface EntityStage {
   readonly entities: readonly Entity[];
   readonly world: Pick<World, "getHeightAt">;
   readonly alpha: number;
-  readonly terrain: TerrainPresentation;
+  readonly terrain: Pick<TerrainPresentation, "meshSurfaceGeometry">;
   readonly frame: SceneFrame | undefined;
   readonly receivers: SurfaceReceivers | undefined;
   readonly cull: CullBounds;
@@ -226,6 +226,7 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefine
     sheetKey: e.sprite.sheetKey,
     frameCol: e.sprite.frameCol,
     frameRow: e.sprite.frameRow,
+    ...(facingRows(e) ? { facing: e.sprite.direction } : {}),
     spriteWidth: e.sprite.spriteWidth,
     spriteHeight: e.sprite.spriteHeight,
     flipX: e.sprite.flipX ?? false,
@@ -241,6 +242,17 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefine
     pushShadowDecals(pass, receivers, e, spriteItem, pos, zOffset, meshGroundShadow);
   if (pass.grassVehicles && isVehicleSprite(e.type)) pass.grassVehicles.push(spriteItem);
   return spriteItem;
+}
+
+/** Four-direction sheets whose current row is the facing row: players and turning
+ * wanderers. Single-row sprites (cows, fish, balls) can match by coincidence. */
+function facingRows(e: SpriteEntity): boolean {
+  return (
+    (e.type === "player" || e.wanderAI?.directional === true) &&
+    e.sprite.frameRow === e.sprite.direction &&
+    e.sprite.clip === undefined &&
+    !isVehicle(e)
+  );
 }
 
 function entityMesh(

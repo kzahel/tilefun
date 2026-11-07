@@ -1,11 +1,12 @@
 import * as THREE from "three";
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import { vehiclePaint } from "../traffic/VehiclePaint.js";
+import { applyMeshInstance, loadAuthoredMesh } from "./AuthoredMeshPose.js";
 import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
-import { authoredVehicleForAsset, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
+import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
 import type { Camera } from "./Camera.js";
 import { CarBodyImageCache, carBodyImageKey } from "./CarBodyImageCache.js";
-import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
+import type { CarMeshAsset } from "./CarMeshAsset.js";
 import { setCarMeshProjection } from "./CarMeshProjection.js";
 import { CarPixelOutline } from "./CarPixelOutline.js";
 import { CarRenderTargets } from "./CarRenderTargets.js";
@@ -66,23 +67,15 @@ export class GpuMeshBodies {
   }
   /** Lazy family loads never replace their source sprite before the next frame. */
   private request(assetId: string) {
-    const vehicle = authoredVehicleForAsset(assetId);
-    const definition = vehicle ?? authoredTrainForAsset(assetId);
-    if (!this.enabled || !definition) return undefined;
+    if (!this.enabled || !(authoredVehicleForAsset(assetId) ?? authoredTrainForAsset(assetId)))
+      return undefined;
     let slot = this.slots.get(assetId);
     if (!slot) {
       slot = new ResourceSlot<CarMeshAsset>();
       this.slots.set(assetId, slot);
     }
     if (slot.state === "empty")
-      void slot.load(() =>
-        loadCarMesh(definition.path, definition.lateralScale, {
-          batch: !!vehicle,
-          heightScale: vehicle ? vehicleMeshHeightScale(vehicle.vehicle) : 1,
-          contactShadow: !!vehicle,
-          preserveParts: vehicle?.batchPreserveParts ?? [],
-        }),
-      );
+      void slot.load(() => loadAuthoredMesh(assetId) ?? Promise.reject(Error(assetId)));
     return slot;
   }
   get assetStates() {
@@ -186,30 +179,7 @@ export class GpuMeshBodies {
     const scratch = this.targets.get(resolution);
     const target = scratch.source;
     const object = asset.object;
-    asset.setPhysical(!!item.mesh.physical);
-    object.quaternion.set(...item.mesh.orientation);
-    const yaw = 2 * Math.atan2(item.mesh.orientation[2], item.mesh.orientation[3]);
-    if (item.mesh.towPitch || item.mesh.gradePitch)
-      object.quaternion.multiply(
-        new THREE.Quaternion().setFromAxisAngle(
-          new THREE.Vector3(0, 1, 0),
-          -(item.mesh.towPitch || item.mesh.gradePitch || 0),
-        ),
-      );
-    if (item.mesh.gradeRoll)
-      object.quaternion.multiply(
-        new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), item.mesh.gradeRoll),
-      );
-    object.position.set(
-      (item.mesh.towOffsetX ?? 0) * Math.cos(yaw),
-      (item.mesh.towOffsetX ?? 0) * Math.sin(yaw),
-      (item.mesh.towOffsetZ ?? 0) + (item.mesh.gradeOffsetZ ?? 0),
-    );
-    asset.setTransportRamp(item.mesh.transportRamp ?? false);
-    asset.setTowLift(item.mesh.towActive ?? false);
-    asset.setTravel(item.mesh.wheelTravel ?? 0, !!item.mesh.towPitch);
-    asset.setDumpBed(item.mesh.bedTilt ?? 0, item.mesh.bedGateAngle ?? 0);
-    asset.setEmergency(item.mesh.emergencyEnabled ?? false, item.mesh.presentationTime ?? 0);
+    applyMeshInstance(asset, item.mesh);
     this.scene.add(object);
     if (child?.mesh && childAsset) {
       const mesh = child.mesh,

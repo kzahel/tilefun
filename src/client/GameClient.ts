@@ -33,7 +33,8 @@ import { DoorPresentation } from "./DoorPresentation.js";
 import type { GameTestHooks } from "./GameTestHooks.js";
 import { readReloadCamera } from "./ReloadCamera.js";
 import "../editor/EditorPanel.css";
-import { InteriorCatalog, type InteriorCatalogRouteState } from "../editor/InteriorCatalog.js";
+import { InteriorCatalog } from "../editor/InteriorCatalog.js";
+import { readInteriorRouteState } from "../editor/InteriorCatalogRoute.js";
 import { PropCatalog } from "../editor/PropCatalog.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { descriptorChoice, type GenerationDescriptor } from "../generation/GenerationDescriptor.js";
@@ -68,6 +69,7 @@ import { XRSessionManager } from "../xr/XRSessionManager.js";
 import { takeAdminToken } from "./adminToken.js";
 import { registerClientConsole } from "./ClientConsoleBindings.js";
 import { RemoteStateView } from "./ClientStateView.js";
+import { FirstPersonControl } from "./FirstPersonControl.js";
 import { GameMenuChrome, type MenuChromeHost } from "./GameMenuChrome.js";
 import { PlayInputController, type PlayInputHost } from "./PlayInputController.js";
 import { RequestBroker } from "./RequestBroker.js";
@@ -153,6 +155,10 @@ export class GameClient implements GameTestHooks {
   readonly audioManager: AudioManager;
 
   private xrManager = new XRSessionManager();
+  readonly firstPerson = new FirstPersonControl(
+    () => this.canvas,
+    () => this.sheets,
+  );
 
   // Mutable state exposed via GameContext
   private gemSpriteCanvas: HTMLCanvasElement | null = null;
@@ -581,6 +587,7 @@ export class GameClient implements GameTestHooks {
     this.playInput.detachFocusListeners();
     this.chrome.showStorageStatus("", false);
     this.stopIdeaDelivery?.();
+    this.firstPerson.dispose();
     this.renderHost.dispose();
     this.debugPanel.destroy();
     this.sceneFrame.clear();
@@ -929,6 +936,7 @@ export class GameClient implements GameTestHooks {
       get xrActive() {
         return client.xrManager.active;
       },
+      firstPerson: this.firstPerson,
       flushServer: () => this.session.flushServer(),
       sendRequest: <R extends RequestMessage>(msg: R) => this.gcSendRequest(msg),
       sendVisibleRange: (force?: boolean) => this.session.sendVisibleRange(force),
@@ -945,38 +953,4 @@ export class GameClient implements GameTestHooks {
     this.renderHost.resize(Math.round(rect.width), Math.round(rect.height));
     this.camera.setViewport(this.canvas.width, this.canvas.height);
   }
-}
-
-function readInteriorRouteState(params: URLSearchParams): InteriorCatalogRouteState {
-  const state: InteriorCatalogRouteState = {};
-  const search = params.get("interiorSearch") ?? params.get("search");
-  if (search !== null) state.search = search;
-
-  const sourceKind = params.get("interiorSource");
-  if (
-    sourceKind === "" ||
-    sourceKind === "home_design_layer" ||
-    sourceKind === "room_builder_tile" ||
-    sourceKind === "room_builder_sheet" ||
-    sourceKind === "single"
-  ) {
-    state.sourceKind = sourceKind;
-  }
-
-  const category = params.get("interiorCategory");
-  if (category !== null) state.category = category;
-
-  const variant = params.get("interiorVariant");
-  if (
-    variant === "" ||
-    variant === "normal" ||
-    variant === "shadowless" ||
-    variant === "black-shadow"
-  ) {
-    state.variant = variant;
-  }
-
-  const design = params.get("interiorDesign");
-  if (design !== null) state.design = design;
-  return state;
 }
