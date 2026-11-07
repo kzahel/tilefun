@@ -125,13 +125,21 @@ test("duck landing stays grounded and starts a durable escape in the shared pond
     }[];
   const original = (await poses()).map((d) => d.id).sort();
   expect(original.length).toBeGreaterThanOrEqual(2);
+  // The escape flight is brief; slow hosts poll less often than frames publish,
+  // so record it from every published pose update.
+  await c.evaluate((canvas) => {
+    new MutationObserver(() => {
+      const poses = JSON.parse(canvas.dataset.wildlifePoses ?? "[]") as {
+        state: string;
+        clip: number;
+        z: number;
+      }[];
+      if (poses.some((d) => d.state === "scared" && d.clip === 5 && d.z > 14))
+        canvas.dataset.duckFlew = "true";
+    }).observe(canvas, { attributes: true, attributeFilter: ["data-wildlife-poses"] });
+  });
   await page.getByRole("button", { name: "Hop onto duck", exact: true }).click();
-  await expect
-    .poll(
-      async () => (await poses()).some((d) => d.state === "scared" && d.clip === 5 && d.z > 14),
-      { intervals: [50] },
-    )
-    .toBe(true);
+  await expect(c).toHaveAttribute("data-duck-flew", "true");
   expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await expect(c).toHaveAttribute("data-authority-running", "false");
