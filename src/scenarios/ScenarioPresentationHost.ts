@@ -350,6 +350,7 @@ export class ScenarioPresentationHost {
         );
       this.drawOverlay(this.options.underlay);
       this.frame.presentationTime = this.lightSeconds;
+      this.frame.fadeSeconds = now;
       const items = collectScene(
         entities,
         view.props,

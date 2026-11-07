@@ -10,7 +10,8 @@ import {
   collectSurfacePresentation,
   nearbySurfaceTop,
   type SurfaceVisibility,
-  surfaceVisibility,
+  surfaceDisplay,
+  surfaceFadeOpacity,
 } from "./SurfacePresentation.js";
 import { planeZ } from "./SurfaceReceivers.js";
 import { surfaceWorldDepth } from "./WorldDepth.js";
@@ -36,7 +37,8 @@ export function surfaceSceneOrder(
   const edges = nodes.map(() => new Set<number>()),
     degree = nodes.map(() => 0);
   for (const [j, { patch, bounds }] of patches.entries()) {
-    if (!surfaceVisibility(patch, bounds, observer, mode, alpha)) continue;
+    // A revealed slab keeps its order so it is drawn translucent over the observer.
+    if (surfaceDisplay(patch, bounds, observer, mode, alpha) === "hidden") continue;
     for (const [i, item] of items.entries()) {
       if (item.kind !== "sprite" && item.kind !== "decal" && item.kind !== "particle") continue;
       const vertices = item.kind === "decal" ? item.polygons.flat() : undefined;
@@ -119,9 +121,13 @@ export function presentSurfaceScene(
       order: collectSceneOrder(items, frame.drawOrder),
       pixelExactShadows,
     });
+    frame.surfaceFades.clear();
     return;
   }
   const order = frame.drawOrder;
+  const presented = new Set<string>();
+  // Manual level views are inspection tools: they switch instantly, never fade.
+  if (mode !== "auto") frame.surfaceFades.clear();
   order.length = 0;
   const submitRun = () => {
     if (!order.length) return;
@@ -130,6 +136,7 @@ export function presentSurfaceScene(
   };
   for (const node of surfaceSceneOrder(items, props, observer, mode, alpha)) {
     if (typeof node === "string") {
+      presented.add(node);
       submitRun();
       frame.overlays.begin();
       collectSurfacePresentation(frame.overlays, camera, props, observer, mode, "all", alpha, node);
@@ -139,11 +146,27 @@ export function presentSurfaceScene(
       const worldDepth = surface?.c.surface
         ? surfaceWorldDepth(camera, surface.p.position, surface.c)
         : undefined;
+      const opacity =
+        mode === "auto" && surface?.c.surface
+          ? surfaceFadeOpacity(
+              frame.surfaceFades,
+              node,
+              surfaceDisplay(
+                surface.c.surface,
+                getEntityAABB(surface.p.position, surface.c),
+                observer,
+                mode,
+                alpha,
+              ),
+              frame.fadeSeconds,
+            )
+          : 1;
       renderer.submit(camera, {
         kind: "overlay",
         items: frame.overlays.items,
         cacheKey: node,
         ...(worldDepth ? { worldDepth } : {}),
+        ...(opacity < 1 ? { opacity } : {}),
       });
     } else {
       const item = items[node];
@@ -152,4 +175,5 @@ export function presentSurfaceScene(
     }
   }
   submitRun();
+  for (const id of frame.surfaceFades.keys()) if (!presented.has(id)) frame.surfaceFades.delete(id);
 }

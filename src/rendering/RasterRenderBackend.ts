@@ -240,8 +240,31 @@ export class RasterRenderBackend implements RenderBackend {
   }
 
   protected drawOverlay(pass: Extract<RenderPass, { kind: "overlay" }>): void {
-    drawOverlayGeometry(this.ctx as CanvasRenderingContext2D, pass.items, this.sheets);
+    const ctx = this.ctx as CanvasRenderingContext2D;
+    if (pass.opacity === undefined || pass.opacity >= 1) {
+      drawOverlayGeometry(ctx, pass.items, this.sheets);
+      return;
+    }
+    // Group opacity: compose opaquely with the same transform, then blend once.
+    const { width, height } = ctx.canvas;
+    this.fadeScratch ??= new OffscreenCanvas(width, height);
+    const scratch = this.fadeScratch;
+    if (scratch.width !== width) scratch.width = width;
+    if (scratch.height !== height) scratch.height = height;
+    const layer = scratch.getContext("2d");
+    if (!layer) throw Error("Overlay fade surface unavailable");
+    layer.setTransform(1, 0, 0, 1, 0, 0);
+    layer.clearRect(0, 0, width, height);
+    layer.setTransform(ctx.getTransform());
+    layer.imageSmoothingEnabled = ctx.imageSmoothingEnabled;
+    drawOverlayGeometry(layer as unknown as CanvasRenderingContext2D, pass.items, this.sheets);
+    ctx.save();
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.globalAlpha *= pass.opacity;
+    ctx.drawImage(scratch, 0, 0);
+    ctx.restore();
   }
+  private fadeScratch: OffscreenCanvas | undefined;
 
   /** Source decoding/configuration belongs to platform composition. */
   configureAssets(assets: GameAssets, graph: BlendGraph): void {
@@ -302,5 +325,6 @@ export class RasterRenderBackend implements RenderBackend {
     this.terrain.clear();
     this.terrainFrame.clear();
     this.interior = null;
+    this.fadeScratch = undefined;
   }
 }

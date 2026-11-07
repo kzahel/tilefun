@@ -14,6 +14,8 @@ export class SceneFrame {
   interior: InteriorPresentation | null = null;
   interiorKey = "";
   presentationTime = 0;
+  /** Wall-clock seconds for cosmetic transitions; advances while a lab is paused. */
+  fadeSeconds = 0;
   readonly meshPoses: EntityMeshPose;
   readonly overlays = new OverlayFrame();
   readonly receiverStats = { sources: 0, meshTriangles: 0, queries: 0, fragments: 0 };
@@ -21,6 +23,8 @@ export class SceneFrame {
   readonly items: SceneItem[] = [];
   readonly grass = new GrassFrameBuffer();
   readonly propDepth = new PropDepthCache();
+  /** Observer-local slab fades by surface ID; presentation state only. */
+  readonly surfaceFades = new Map<string, { opacity: number; time: number }>();
 
   constructor(options?: { allCars3d?: boolean; authoredTrains?: boolean }) {
     this.meshPoses = new EntityMeshPose(options?.allCars3d, options?.authoredTrains);
@@ -49,5 +53,6 @@ export class SceneFrame {
     this.interiorKey = "";
     this.grass.clear();
     this.propDepth.clear();
+    this.surfaceFades.clear();
   }
 }

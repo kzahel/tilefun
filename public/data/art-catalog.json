@@ -38183,11 +38183,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:364"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:365"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:58"
+          "source": "src/scenes/renderWorld.ts:59"
         },
         {
           "system": "Gameplay",

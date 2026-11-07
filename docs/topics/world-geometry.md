@@ -151,8 +151,14 @@ lost capture; other buttons retain normal click and keyboard activation.
   Before the feet reach a ramp, ordering uses its nearby edge height rather than
   its distant high end. Shadows retain support across interpolated ramp/deck joins
   and never rise above the displayed feet.
-  Hiding a slab never modifies physics. The first reveal hides a whole patch;
-  overlap uses the sprite frame rather than opaque pixels. It is not a general
+  Revealing or hiding a slab never modifies physics. Automatic reveal (2026-11-07,
+  owner request) keeps the whole patch in painter order and draws it at 45%
+  opacity over the covered actor, easing over 0.15 s of wall-clock time, so the
+  road above stays readable. The backend composes the slab opaquely and blends it
+  once (`opacity` on the overlay pass); per-strip alpha would show seams. Only
+  manual lower/upper views hide a slab (outline) and they switch without fading.
+  A revealed slab still orders sprites and receives shadows from actors on it.
+  Overlap uses the sprite frame rather than opaque pixels. It is not a general
   portal/occlusion algorithm or a polished terrain cutout.
 - Space identity is attached to static surfaces and support is derived from
   footprint/height. Neighbor IDs describe intended joins; they do not yet enforce
@@ -240,8 +246,8 @@ Resolve these questions before choosing a schema:
 ## Visibility and seamless interiors
 
 Player-centered cutaway holes, possibly growing as the player moves farther into
-an occluding surface, remain deferred (2026-10-04). The current whole-patch reveal
-is sufficient for this proof; choosing when a local hole is appropriate needs a
+an occluding surface, remain deferred (2026-10-04). The current translucent
+whole-patch reveal is sufficient for this proof; choosing when a local hole is appropriate needs a
 separate design pass.
 
 Following crossing feedback, automatic reveal requires the observer's head to be

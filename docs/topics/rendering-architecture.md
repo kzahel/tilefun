@@ -121,7 +121,8 @@ including underground spaces and seamless indoor floor transitions. Shared
 presentation should derive observer-specific visibility from physical space and
 connection data; backends consume that result. Visibility selection must not
 change simulation or collision. `SurfacePresentation` now supplies a bounded
-schematic slab view and whole-patch cutaway, shared by outdoor game rendering and
+schematic slab view and translucent whole-patch cutaway (group opacity on the
+overlay pass, honored by Canvas and GPU), shared by outdoor game rendering and
 the scenario host. `presentSurfaceScene` now orders individual sprites against
 overlapping slabs at their own heights, so a lower train remains below a bridge
 when the observer stands on it. General sector visibility, indoor transitions,

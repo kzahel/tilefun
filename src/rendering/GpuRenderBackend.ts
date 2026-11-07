@@ -95,7 +95,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
         this.sheets,
       );
       if (image !== undefined) {
-        if (image) this.surface.drawImage(image.image, image.x, image.y);
+        if (image) this.drawFaded(pass.opacity, image.image, image.x, image.y);
         return;
       }
     }
@@ -119,7 +119,18 @@ export class GpuRenderBackend extends RasterRenderBackend {
       });
       this.overlayValid = true;
     }
-    this.surface.drawImage(this.overlay, 0, 0);
+    this.drawFaded(pass.opacity, this.overlay, 0, 0);
+  }
+  /** Overlay images are composed opaquely first; group opacity blends them once. */
+  private drawFaded(opacity: number | undefined, image: HTMLCanvasElement, x: number, y: number) {
+    if (opacity === undefined || opacity >= 1) {
+      this.surface.drawImage(image, x, y);
+      return;
+    }
+    this.surface.save();
+    this.surface.globalAlpha *= opacity;
+    this.surface.drawImage(image, x, y);
+    this.surface.restore();
   }
   override resize(width: number, height: number) {
     super.resize(width, height);

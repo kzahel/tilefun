@@ -46,6 +46,7 @@ export function renderEntities(
   }
   const visible = camera.getVisibleChunkRange();
   gc.sceneFrame.presentationTime = gc.time?.presentationSeconds ?? 0;
+  gc.sceneFrame.fadeSeconds = gc.sceneFrame.presentationTime;
   const items = collectScene(
     gc.doorPresentation?.entities(stateView.entities, gc.realmId ?? null) ?? stateView.entities,
     stateView.props,

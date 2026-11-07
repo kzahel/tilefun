@@ -184,10 +184,27 @@ for (const backend of ["canvas", "gpu"]) {
             );
           return Buffer.concat(rows);
         };
-        expect(body(automatic).equals(body(lower))).toBe(true);
         expect(body(all).equals(body(lower))).toBe(false);
+        // The revealed deck stays drawn over the player as one translucent group
+        // (REVEAL_OPACITY = 0.45): every pixel is the blend of the opaque deck and
+        // the uncovered player. Per-strip alpha would leave visible seams instead.
+        const hidden = body(lower),
+          opaque = body(all);
         await select.selectOption("auto");
         await expect(c).toHaveAttribute("data-visibility", "auto");
+        await expect
+          .poll(async () => {
+            const revealed = body(await c.screenshot());
+            let worst = 0;
+            for (let i = 0; i < revealed.length; i++) {
+              if (i % 4 === 3) continue;
+              const expected = (hidden[i] ?? 0) * 0.55 + (opaque[i] ?? 0) * 0.45;
+              worst = Math.max(worst, Math.abs((revealed[i] ?? 0) - expected));
+            }
+            return worst;
+          })
+          .toBeLessThanOrEqual(3);
+        expect(body(automatic).equals(body(lower))).toBe(false);
       }
       await c.screenshot({ path: `/tmp/tilefun-geometry-${backend}-${direction}-occlusion.png` });
     }

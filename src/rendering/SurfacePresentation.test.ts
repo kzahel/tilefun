@@ -11,6 +11,10 @@ import { collectScene } from "./collectScene.js";
 import { OverlayFrame } from "./OverlayFrame.js";
 import {
   collectSurfacePresentation,
+  REVEAL_FADE_SECONDS,
+  REVEAL_OPACITY,
+  surfaceDisplay,
+  surfaceFadeOpacity,
   surfacePresentationState,
   surfaceVisibility,
 } from "./SurfacePresentation.js";
@@ -260,4 +264,51 @@ it("retains the elevated shadow across an interpolated ramp/deck join in both di
       expect(sprite.shadowTerrainZ).toBeLessThanOrEqual(sprite.zOffset);
     }
   }
+});
+
+it("reveals an occluding slab in auto mode, but only manual views hide it", () => {
+  const { patch, bounds } = fixture("deck");
+  const covered = createPlayer(80, -80);
+  covered.wz = 0;
+  const clear = createPlayer(80, -140);
+  clear.wz = 0;
+  expect(surfaceDisplay(patch, bounds, covered, "auto")).toBe("reveal");
+  expect(surfaceDisplay(patch, bounds, clear, "auto")).toBe("opaque");
+  expect(surfaceDisplay(patch, bounds, covered, "all")).toBe("opaque");
+  expect(surfaceDisplay(patch, bounds, covered, "lower")).toBe("hidden");
+
+  // The revealed deck is drawn normally; the pass applies its opacity.
+  const camera = new Camera();
+  const frame = new OverlayFrame();
+  const props = worldGeometryRecipe().props;
+  for (const [mode, outlineOnly] of [
+    ["auto", false],
+    ["lower", true],
+  ] as const) {
+    frame.begin();
+    collectSurfacePresentation(frame, camera, props, covered, mode, "all", 1, "deck");
+    expect(frame.items.length === 1 && frame.items[0]?.fill === "").toBe(outlineOnly);
+  }
+});
+
+it("eases a revealed slab to its translucent opacity and back, then forgets it", () => {
+  const fades = new Map<string, { opacity: number; time: number }>();
+  const half = REVEAL_FADE_SECONDS / 2;
+  expect(surfaceFadeOpacity(fades, "deck", "opaque", 0)).toBe(1);
+  expect(fades.size).toBe(0);
+  expect(surfaceFadeOpacity(fades, "deck", "reveal", 0)).toBe(1);
+  const midway = surfaceFadeOpacity(fades, "deck", "reveal", half);
+  expect(midway).toBeCloseTo((1 + REVEAL_OPACITY) / 2, 5);
+  expect(surfaceFadeOpacity(fades, "deck", "reveal", REVEAL_FADE_SECONDS)).toBeCloseTo(
+    REVEAL_OPACITY,
+    5,
+  );
+  expect(surfaceFadeOpacity(fades, "deck", "reveal", 1)).toBe(REVEAL_OPACITY);
+  expect(surfaceFadeOpacity(fades, "deck", "opaque", 1 + half)).toBeCloseTo(midway, 5);
+  expect(surfaceFadeOpacity(fades, "deck", "opaque", 1 + REVEAL_FADE_SECONDS)).toBe(1);
+  expect(fades.size).toBe(0);
+  // Pauses and clock resets settle immediately instead of animating stale time.
+  surfaceFadeOpacity(fades, "deck", "reveal", 5);
+  expect(surfaceFadeOpacity(fades, "deck", "reveal", 2)).toBe(REVEAL_OPACITY);
+  expect(surfaceFadeOpacity(fades, "deck", "opaque", 9)).toBe(1);
 });

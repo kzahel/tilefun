@@ -8,7 +8,7 @@ import type { World } from "../world/World.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import { meshAssetFor } from "./EntityMeshPose.js";
 import { SurfaceMeshIndex } from "./SurfaceMeshIndex.js";
-import { type SurfaceVisibility, surfaceVisibility } from "./SurfacePresentation.js";
+import { type SurfaceVisibility, surfaceDisplay } from "./SurfacePresentation.js";
 
 export type Point3 = readonly [number, number, number];
 export type Plane = readonly [number, number, number]; // z = ax + by + c
@@ -202,7 +202,8 @@ export class SurfaceReceivers {
         if (
           patch &&
           options.observer &&
-          !surfaceVisibility(patch, bounds, options.observer, options.visibility ?? "auto", alpha)
+          surfaceDisplay(patch, bounds, options.observer, options.visibility ?? "auto", alpha) ===
+            "hidden"
         )
           continue;
         if (c.passable && !patch && !c.walkableTop) continue;

@@ -104,6 +104,7 @@ export function surfacePresentationState(
   return { visible: !occluded, above };
 }
 
+/** False when the slab would cover the observer (auto) or a manual view hides it. */
 export function surfaceVisibility(
   patch: SurfacePatch,
   bounds: AABB,
@@ -112,6 +113,54 @@ export function surfaceVisibility(
   alpha = 1,
 ): boolean {
   return surfacePresentationState(patch, bounds, observer, mode, alpha).visible;
+}
+
+/** "reveal" is the automatic cutaway: the slab stays in painter order and is
+ * drawn translucent over the observer. Only manual level views hide a slab. */
+export type SurfaceDisplay = "opaque" | "reveal" | "hidden";
+
+export function surfaceDisplay(
+  patch: SurfacePatch,
+  bounds: AABB,
+  observer: Entity,
+  mode: SurfaceVisibility,
+  alpha = 1,
+): SurfaceDisplay {
+  if (surfaceVisibility(patch, bounds, observer, mode, alpha)) return "opaque";
+  return mode === "auto" ? "reveal" : "hidden";
+}
+
+/** Opacity of a revealed slab: enough to read the road above, light enough to see actors. */
+export const REVEAL_OPACITY = 0.45;
+/** Full opaque↔reveal transition time, so the cutaway eases instead of popping. */
+export const REVEAL_FADE_SECONDS = 0.15;
+
+/** Advance one slab's fade toward its target. Entries are dropped once opaque again.
+ * Large or backward clock steps (pause, reload, new clock) settle immediately. */
+export function surfaceFadeOpacity(
+  fades: Map<string, { opacity: number; time: number }>,
+  id: string,
+  display: SurfaceDisplay,
+  time: number,
+): number {
+  const target = display === "reveal" ? REVEAL_OPACITY : 1;
+  const entry = fades.get(id);
+  if (!entry) {
+    if (target === 1) return 1;
+    fades.set(id, { opacity: 1, time });
+    return 1;
+  }
+  const dt = time - entry.time;
+  entry.time = time;
+  const step =
+    dt < 0 || dt > 0.5 ? 1 : (dt / REVEAL_FADE_SECONDS) * (1 - REVEAL_OPACITY);
+  entry.opacity =
+    entry.opacity < target
+      ? Math.min(target, entry.opacity + step)
+      : Math.max(target, entry.opacity - step);
+  if (entry.opacity < 1 - 1e-6) return entry.opacity;
+  fades.delete(id);
+  return 1;
 }
 
 /** Diagnostic surfaces, using the same fixed projection and backend-neutral overlays
@@ -142,16 +191,17 @@ export function collectSurfacePresentation(
         const roof = (roofProp?.walls ?? (roofProp?.collider ? [roofProp.collider] : [])).find(
           (wall) => wall.surface?.id === patch.excavation?.ceilingId,
         );
+        // A revealed (translucent) roof shows the floor beneath it.
         if (
           roofProp &&
           roof?.surface &&
-          surfaceVisibility(
+          surfaceDisplay(
             roof.surface,
             getEntityAABB(roofProp.position, roof),
             observer,
             mode,
             alpha,
-          ) &&
+          ) === "opaque" &&
           locateSurfaceSpace(props, {
             ...observer,
             position: interpolatePosition(observer.position, observer.prevPosition, alpha),
@@ -160,7 +210,15 @@ export function collectSurfacePresentation(
         )
           continue;
       }
-      const { visible, above } = surfacePresentationState(patch, bounds, observer, mode, alpha);
+      const { visible: opaque, above } = surfacePresentationState(
+        patch,
+        bounds,
+        observer,
+        mode,
+        alpha,
+      );
+      // Auto reveal keeps the slab; its opacity is applied by the pass, not here.
+      const visible = opaque || mode === "auto";
       if (phase !== "all" && (phase === "above") !== (visible && above)) continue;
       const { sx, sy } = projectWorld(camera, bounds.left, bounds.top);
       if (!visible) {

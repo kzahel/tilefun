@@ -48,6 +48,9 @@ export type RenderPass =
       readonly items: readonly OverlayDraw[];
       /** Stable semantic surface identity; backends may reuse its local raster. */
       readonly cacheKey?: string;
+      /** Group opacity: the items compose opaquely, then the result is blended
+       * once, so overlapping strips never double-blend into seams. */
+      readonly opacity?: number;
       /** Affine top/front depth equations in logical screen pixels. */
       readonly worldDepth?: {
         top: readonly [number, number, number];
