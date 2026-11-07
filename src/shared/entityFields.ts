@@ -97,6 +97,8 @@ const ENTITY_FIELDS: { readonly [K in FieldKey]: EntityField<K> } = {
     clone: (q) => [...q],
   },
   physicsGroupId: { key: "physicsGroupId", bit: 17, wire: U32 },
+  vehicleBedTilt: { key: "vehicleBedTilt", bit: 18, wire: F32 },
+  vehicleBedTarget: { key: "vehicleBedTarget", bit: 19, wire: F32 },
 };
 
 /** Every replicated field in wire order (index === `bit`). */

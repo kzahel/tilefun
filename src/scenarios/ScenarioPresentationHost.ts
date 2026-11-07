@@ -141,16 +141,9 @@ export class ScenarioPresentationHost {
     this.host.setAssets(assets, graph);
     this.host.resize(this.camera.viewportWidth, this.camera.viewportHeight);
     if (this.vehicleControls) {
-      this.vehicleControl = new VehicleControl((request) =>
-        this.command(
-          request.type === "call-train"
-            ? { kind: "call-train", benchId: request.benchId }
-            : request.type === "enter-vehicle"
-              ? { kind: "enter-vehicle", entityId: request.entityId }
-              : request.type === "recover-vehicle"
-                ? { kind: "recover-vehicle", entityId: request.entityId }
-                : { kind: "exit-vehicle" },
-        ),
+      // Vehicle requests and scenario commands share their kinds and fields.
+      this.vehicleControl = new VehicleControl(({ type, ...fields }) =>
+        this.command({ kind: type, ...fields } as ScenarioCommand),
       );
       if (canvas.parentElement) this.vehicleControl.mountEmbedded(canvas.parentElement);
       window.addEventListener(CONTROLLER_EVENT, this.vehiclePad);
@@ -208,12 +201,12 @@ export class ScenarioPresentationHost {
   private vehiclePad = (event: Event) => {
     if (!this.vehicleInputFocused || event.defaultPrevented || this.paused) return;
     const command = (event as CustomEvent<ControllerCommand>).detail;
-    if (command === "down") this.vehicleControl?.activateRecovery();
+    if (command === "down") this.vehicleControl?.activateEquipment();
     if (command === "interact") this.vehicleControl?.activate();
   };
 
   private vehicleKey = (event: KeyboardEvent) => {
-    if (event.key.toLowerCase() === "f" && this.vehicleControl?.activateRecovery()) {
+    if (event.key.toLowerCase() === "f" && this.vehicleControl?.activateEquipment()) {
       event.preventDefault();
       event.stopPropagation();
     }

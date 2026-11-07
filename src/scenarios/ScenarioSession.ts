@@ -10,6 +10,7 @@ import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { validateSurfacePatch } from "../physics/SurfacePatch.js";
 import { validateExcavations } from "../physics/TerrainExcavation.js";
 import { RoadType } from "../road/RoadType.js";
+import { controlDumpBed } from "../server/DumpBedControl.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
 import {
@@ -22,7 +23,7 @@ import type { Movement } from "../shared/Movement.js";
 import { buildLaneGraph } from "../traffic/LaneGraph.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
-import type { ScenarioCommand } from "./ScenarioProtocol.js";
+import type { ScenarioCommand, ScenarioSeatCommand } from "./ScenarioProtocol.js";
 import {
   applyScenarioAppearance,
   parkScenarioVehicle,
@@ -346,28 +347,11 @@ export class ScenarioSession {
         this.realm.vehicles.emergency(this.player, command.action);
         return;
       case "call-train":
-        if (!Number.isSafeInteger(command.benchId) || !this.realm.railways)
-          throw Error("No train service.");
-        await this.realm.railways.call(
-          command.seat === 1 ? this.requireGuest() : this.player,
-          command.benchId,
-        );
-        return;
       case "enter-vehicle":
-        this.realm.vehicles.enter(
-          command.seat === 1 ? this.requireGuest() : this.player,
-          command.entityId,
-        );
-        return;
       case "recover-vehicle":
-        this.realm.vehicles.recover(
-          command.seat === 1 ? this.requireGuest() : this.player,
-          command.entityId,
-        );
-        break;
+      case "vehicle-bed":
       case "exit-vehicle":
-        this.realm.vehicles.exit(command.seat === 1 ? this.requireGuest() : this.player);
-        return;
+        return this.seatCommand(command);
       case "view-range":
         await this.ready(command.range);
         return;
@@ -383,6 +367,19 @@ export class ScenarioSession {
         return;
       }
     }
+  }
+  /** Seat-addressed vehicle and train requests, shared by the host and guest panes. */
+  private async seatCommand(command: ScenarioSeatCommand) {
+    const session = command.seat === 1 ? this.requireGuest() : this.player,
+      vehicles = this.realm.vehicles;
+    if (command.kind === "call-train") {
+      if (!Number.isSafeInteger(command.benchId) || !this.realm.railways)
+        throw Error("No train service.");
+      await this.realm.railways.call(session, command.benchId);
+    } else if (command.kind === "enter-vehicle") vehicles.enter(session, command.entityId);
+    else if (command.kind === "recover-vehicle") vehicles.recover(session, command.entityId);
+    else if (command.kind === "vehicle-bed") controlDumpBed(vehicles, session, command);
+    else vehicles.exit(session);
   }
   frames(): ArrayBuffer[] {
     if (this.guest) {

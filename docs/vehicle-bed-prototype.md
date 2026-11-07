@@ -1,5 +1,12 @@
 # Vehicle bed gameplay and extension workflow
 
+> **Current (2026-11-07):** [222](tactical/222-shared-physics-dump-bed.md) restores the
+> bed in the shared Rapier world. Play it at
+> `workshop.html?geometry=car-dynamics&route=bed#/tool/world-geometry` or place a
+> Construction dump truck in the game; F, D-pad down or touch tips and lowers it.
+> The playground, scripted boarding/loading and the solver details below are
+> history from 164–167; the authored part geometry now lives in `src/traffic/DumpBed.ts`.
+
 The articulated dump-bed playground runs the normal scenario Worker, binary replica,
 player prediction, shared scene collector and selectable game renderer. Find
 **Truck bed playground** in Workshop tools, or use

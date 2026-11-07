@@ -2,6 +2,7 @@ import { BALL_DESPAWN_TIME, BALL_SCARE_DURATION, TILE_SIZE } from "../config/con
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { createGem } from "../entities/Gem.js";
+import { hasDumpBed } from "../traffic/DumpBed.js";
 import { startleWildlife } from "../wildlife/WildlifeSpecies.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { PhysicsScene } from "./PhysicsScene.js";
@@ -27,7 +28,12 @@ export function tickSharedBallGameplay(
       manager.remove(ball.id);
       continue;
     }
-    if (!ball.workItem?.owner && state.grounded && Math.hypot(state.vx, state.vy) < 3)
+    if (
+      !keepBedCargo(manager, ball, state.supportId) &&
+      !ball.workItem?.owner &&
+      state.grounded &&
+      Math.hypot(state.vx, state.vy) < 3
+    )
       ball.deathTimer ??= BALL_DESPAWN_TIME;
     if (scene.incomingSpeed(ball.id) < 8) continue;
     for (const id of scene.contactIds(ball.id) ?? []) {
@@ -40,6 +46,14 @@ export function tickSharedBallGameplay(
       applyBallImpact(manager, other, ball, dx / distance, dy / distance);
     }
   }
+}
+
+/** Cargo resting in a dump bed is kept; ordinary cleanup resumes once discharged. */
+function keepBedCargo(manager: EntityManager, ball: Entity, supportId: number | undefined) {
+  const support = supportId === undefined ? undefined : manager.byId.get(supportId);
+  if (!support || !hasDumpBed(support)) return false;
+  delete ball.deathTimer;
+  return true;
 }
 
 /** Gameplay hit reactions after shared physics contacts; no position resolution. */

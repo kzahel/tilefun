@@ -7,6 +7,7 @@ import { Direction } from "../entities/Entity.js";
 import { applyCurveTrainFacing, isCurveTrain } from "../railway/CurveTrain.js";
 import { headingFrame } from "../railway/RailPath.js";
 import { isTrain } from "../railway/Train.js";
+import { hasDumpBed } from "../traffic/DumpBed.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import {
@@ -16,6 +17,7 @@ import {
   worldRotation,
   yawRotation,
 } from "./BodyRotation.js";
+import { DumpBedBody } from "./DumpBedBody.js";
 import { assistedJumpVelocity } from "./JumpAssist.js";
 import { teleportBody } from "./PhysicalEdits.js";
 import { carryingSupportId, physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
@@ -24,10 +26,12 @@ import {
   PHYSICS_DT,
   PHYSICS_PIXELS_PER_METRE as SCALE,
 } from "./PhysicsDefaults.js";
+import { blockedRailGroups, prescribedRailVelocity, railGroup } from "./RailMotion.js";
 import {
   type CollisionGeometrySource,
   compileCollisionGeometry,
 } from "./rapier/CollisionGeometry.js";
+import { type SupportMotion, supportVelocityAt } from "./SupportMotion.js";
 import { VehicleChassis, type WheelContact } from "./VehicleChassis.js";
 import { vehicleMotor } from "./VehicleMotor.js";
 
@@ -59,6 +63,7 @@ interface Body {
   state: PhysicsBodyState;
   incomingVelocity: RAPIER.Vector;
   chassis?: VehicleChassis;
+  bed?: DumpBedBody;
   queryRadius: number;
   queryCenter: RAPIER.Vector;
 }
@@ -203,17 +208,21 @@ export class PhysicsScene {
         // travel instead of soft-CCD's premature face constraint at the seam.
         const bevel = Math.min(0.01, hx / 4, halfY / 4, hz / 4);
         const clearance = car ? Math.min(4, dimensions.height * 0.22) / SCALE : 0;
+        const bed =
+          car && hasDumpBed(entity) ? new DumpBedBody(entity, halfY, clearance) : undefined;
         const shape =
           entity.type === "ball"
             ? RAPIER.ColliderDesc.ball(Math.min(hx, hz, halfY))
-            : kind === "character" || kind === "vehicle"
-              ? RAPIER.ColliderDesc.roundCuboid(
-                  hx - bevel,
-                  halfY - clearance / 2 - bevel,
-                  hz - bevel,
-                  bevel,
-                )
-              : RAPIER.ColliderDesc.cuboid(hx, halfY, hz);
+            : bed
+              ? bed.colliderDesc()
+              : kind === "character" || kind === "vehicle"
+                ? RAPIER.ColliderDesc.roundCuboid(
+                    hx - bevel,
+                    halfY - clearance / 2 - bevel,
+                    hz - bevel,
+                    bevel,
+                  )
+                : RAPIER.ColliderDesc.cuboid(hx, halfY, hz);
         shape
           .setTranslation(0, clearance / 2, 0)
           .setFriction(car ? 0.4 : kind === "loose" ? 0.5 : 0)
@@ -221,6 +230,7 @@ export class PhysicsScene {
         if (kind === "character" || (kind === "vehicle" && !car))
           shape.setFrictionCombineRule(RAPIER.CoefficientCombineRule.Min);
         shape.setMass(kind === "vehicle" ? 8 : kind === "loose" ? 0.2 : 1);
+        bed?.setMass(shape, hx, hz, 8);
         const collider = this.world.createCollider(shape, body);
         entry = {
           entity,
@@ -232,7 +242,9 @@ export class PhysicsScene {
           offsetX,
           offsetY,
           incomingVelocity: { x: 0, y: 0, z: 0 },
-          queryRadius: Math.hypot(hx, halfY, hz) + 0.1,
+          ...(bed ? { bed } : {}),
+          // A raised tub reaches well above the level body envelope.
+          queryRadius: Math.hypot(hx, halfY, hz) + (bed ? 1.5 : 0.1),
           queryCenter: body.translation(),
           state: {
             id: entity.id,
@@ -255,6 +267,7 @@ export class PhysicsScene {
                   angularVelocity: entity.bodyAngularVelocity ?? ([0, 0, 0] as const),
                 }
               : {}),
+            ...bed?.initialState(entity),
             jumpHeld: !!((entity.jumpInputState ?? 0) & 2),
             grounded: entity.jumpVZ === undefined,
             groundZ: entity.groundZ ?? entity.wz ?? 0,
@@ -286,6 +299,7 @@ export class PhysicsScene {
   private admitEntityEdits(entry: Body) {
     const entity = entry.entity,
       s = entry.state;
+    entry.bed?.admit(entity, s, entry.collider);
     const moved =
       entity.position.wx !== s.x || entity.position.wy !== s.y || (entity.wz ?? 0) !== s.z;
     const velocityChanged =
@@ -495,66 +509,33 @@ export class PhysicsScene {
     const started = performance.now();
     this.prepareGeometry(geometry);
     this.world.propagateModifiedBodyPositionsToColliders();
+    for (const e of this.bodies.values())
+      e.bed?.advance(e.state, e.body, e.collider, this.staticGeometry);
     this.world.gravity = { x: 0, y: (-JUMP_GRAVITY * gravity) / SCALE, z: 0 };
-    const blockedRails = new Set<number>();
-    const railGroup = (e: Entity) => e.physicsGroupId ?? e.id;
-    for (const entry of this.bodies.values())
-      if (isTrain(entry.entity)) {
-        const input = intents.get(entry.entity.id);
-        if (!input || (!input.vx && !input.vy)) continue;
-        const d = physicsBodyDimensions(entry.entity),
-          p = entry.body.translation(),
-          q = entry.body.rotation();
-        const shape = new RAPIER.Cuboid(
-          d.width / 2 / SCALE - 0.01,
-          entry.halfY - 0.02,
-          d.depth / 2 / SCALE - 0.01,
-        );
-        const motion = {
-          x: (input.vx * PHYSICS_DT) / SCALE,
-          y: 0,
-          z: (input.vy * PHYSICS_DT) / SCALE,
-        };
-        const group = railGroup(entry.entity);
-        const candidates = [
-          this.staticGeometry,
-          ...[...this.bodies.values()]
-            .filter(
-              (other) =>
-                other !== entry &&
-                !(isTrain(other.entity) && railGroup(other.entity) === group) &&
-                other.state.z < entry.state.z + d.height - 0.5 &&
-                Math.hypot(other.state.x - entry.state.x, other.state.y - entry.state.y) <
-                  d.width + other.queryRadius * SCALE + 8,
-            )
-            .map((other) => other.collider),
-        ];
-        if (
-          candidates.some((c) =>
-            c?.castShape({ x: 0, y: 0, z: 0 }, shape, p, q, motion, 0, 1, false),
-          )
-        )
-          blockedRails.add(group);
-      }
+    const bodies = [...this.bodies.values()];
+    const blockedRails = blockedRailGroups(bodies, this.staticGeometry, intents);
     // Read support motion before changing any motors: actor order cannot change it.
     // Prescribed supports use this tick's admitted trajectory, so riders do not
     // lag a start or slide one extra tick after a station stop.
     const vehicleInputs: { entry: Body; input: MotionIntent }[] = [];
-    const supportVelocities = new Map<number, RAPIER.Vector>();
-    for (const [id, entry] of this.bodies) {
-      if (isTrain(entry.entity)) {
-        const input = intents.get(id);
-        const stopped =
-          !input ||
-          blockedRails.has(railGroup(entry.entity)) ||
-          (input.controlUntil !== undefined && this.tick >= input.controlUntil);
-        supportVelocities.set(id, {
-          x: stopped ? 0 : input.vx / SCALE,
-          y: stopped ? 0 : ((input.altitude ?? entry.state.z) - entry.state.z) / SCALE / PHYSICS_DT,
-          z: stopped ? 0 : input.vy / SCALE,
-        });
-      } else supportVelocities.set(id, entry.body.linvel());
-    }
+    const supports = new Map<number, SupportMotion>();
+    for (const [id, entry] of this.bodies)
+      supports.set(
+        id,
+        isTrain(entry.entity)
+          ? {
+              linear: prescribedRailVelocity(
+                entry.state,
+                intents.get(id),
+                blockedRails.has(railGroup(entry.entity)),
+                this.tick,
+              ),
+            }
+          : {
+              linear: entry.body.linvel(),
+              ...(entry.chassis ? { chassis: entry.body } : {}),
+            },
+      );
     for (const [id, entry] of this.bodies) {
       if (entry.kind === "loose") {
         const v = entry.body.linvel();
@@ -602,12 +583,13 @@ export class PhysicsScene {
         continue;
       }
       if (entry.chassis) {
-        vehicleInputs.push({ entry, input });
+        vehicleInputs.push({ entry, input: DumpBedBody.driveIntent(entry.state, input) });
         continue;
       }
       const velocity = entry.body.linvel();
-      const support = supportVelocities.get(
-        carryingSupportId(entry.entity, entry.state.supportId, this.bodies),
+      const support = supportVelocityAt(
+        supports.get(carryingSupportId(entry.entity, entry.state.supportId, this.bodies)),
+        entry.body.translation(),
       );
       const pressed = input.jumpPressed || (input.jump && !entry.state.jumpHeld);
       entry.state.jumpHeld = input.jump ?? false;
@@ -840,6 +822,7 @@ export class PhysicsScene {
       entity.jumpZ = Math.max(0, state.z - entity.groundZ);
     }
     state.groundZ = entity.groundZ ?? state.z;
+    entry.bed?.publish(entity, state, entry.collider);
     if (entry.kind === "vehicle") {
       entity.prevBodyRotation = state.prevRotation ?? rotation;
       entity.bodyRotation = state.rotation ?? rotation;
@@ -1112,6 +1095,7 @@ export class PhysicsScene {
       entry.body.setAngvel({ x: -ax, y: -az, z: -ay }, true);
       if (state.sleeping) entry.body.sleep();
       entry.state = { ...state };
+      entry.bed?.publish(entry.entity, entry.state, entry.collider);
       // Publish state and contact membership supplied by the same snapshot.
       entry.entity.prevPosition = { wx: state.prevX, wy: state.prevY };
       entry.entity.prevWz = state.prevZ;

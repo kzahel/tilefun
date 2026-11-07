@@ -6,8 +6,9 @@ export default function DeferredVehiclePage() {
     <section>
       <h1>Vehicle equipment and services</h1>
       <p>
-        Towing, tipping beds, transporter apparatus, boats and train services are deferred during
-        the physics reset. Vehicle models and static layout studies remain available.
+        Towing, transporter apparatus, boats and train services are deferred during the physics
+        reset. Vehicle models and static layout studies remain available. The dump-truck bed is
+        playable again in the vehicle dynamics course.
       </p>
       <p>
         <Link to="/tool/traffic">Open basic driving</Link> ·{" "}

@@ -1,5 +1,12 @@
 # General 3D physics backend
 
+[222](../tactical/222-shared-physics-dump-bed.md) adds the first articulated shared
+body: the dump truck's collider is a compound of posed convex parts, rebuilt as
+`bedTilt` steps toward `bedTarget` inside `PhysicsScene.step`. Static
+intersection skips a step and driving is locked while raised. Frame `0x15` adds
+both angles to the vehicle segment. Riders on any chassis now inherit its
+velocity at their own position, including rotation.
+
 [220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) anchors all
 noncarryable ground resources/sites, including the editor's Edible plant, seeds,
 nectar and water markers. Actual loose carryables retain the shared physics world.

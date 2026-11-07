@@ -258,3 +258,41 @@ test("ordinary ramp and mesh-roof landings share projected contact effects", asy
   await expect.poll(() => page.workers().length).toBe(0);
   expect(errors).toEqual([]);
 });
+
+test("dump bed tips and lowers through the shared touch/keyboard control and discharges real cargo", async ({
+  page,
+}) => {
+  test.setTimeout(90000);
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto(
+    "/tilefun/workshop.html?geometry=car-dynamics&route=bed&renderer=gpu&meshes#/tool/world-geometry",
+  );
+  const canvas = page.getByLabel("World geometry scene");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  await expect(canvas).toHaveAttribute("data-course-route", "bed");
+  await expect.poll(async () => Number(await canvas.getAttribute("data-bed-cargo"))).toBe(3);
+  const read = async () =>
+    page.evaluate(() => {
+      const c = document.querySelector<HTMLCanvasElement>("[aria-label='World geometry scene']");
+      const diagnostics = (
+        c as unknown as { __presentationDiagnostics?: () => { bedMeshDraws?: number } }
+      )?.__presentationDiagnostics?.();
+      return diagnostics?.bedMeshDraws ?? 0;
+    });
+  await expect.poll(read).toBeGreaterThan(0);
+  await canvas.screenshot({ path: test.info().outputPath("dump-bed-loaded.png") });
+  await canvas.focus();
+  await page.keyboard.press("f");
+  await expect
+    .poll(async () => Number(await canvas.getAttribute("data-bed-tilt")), { timeout: 15000 })
+    .toBeGreaterThan(0.8);
+  await expect.poll(async () => Number(await canvas.getAttribute("data-bed-cargo"))).toBe(0);
+  await canvas.screenshot({ path: test.info().outputPath("dump-bed-tipped.png") });
+  await page.getByRole("button", { name: /^Lower bed/ }).click();
+  await expect
+    .poll(async () => Number(await canvas.getAttribute("data-bed-tilt")), { timeout: 15000 })
+    .toBe(0);
+  await expect(page.getByRole("button", { name: /^Tip bed/ })).toBeVisible();
+  expect(errors).toEqual([]);
+});

@@ -11,8 +11,14 @@ export type ScenarioCommand =
   | { kind: "enter-vehicle"; entityId: number; seat?: 0 | 1 }
   | { kind: "exit-vehicle"; seat?: 0 | 1 }
   | { kind: "recover-vehicle"; entityId: number; seat?: 0 | 1 }
+  | { kind: "vehicle-bed"; entityId: number; action: "tip" | "lower"; seat?: 0 | 1 }
   | { kind: "view-range"; range: ChunkRange }
   | { kind: "teleport"; position: Entity["position"]; z?: number };
+/** Vehicle and train requests addressed to the host (0) or guest (1) pane. */
+export type ScenarioSeatCommand = Extract<
+  ScenarioCommand,
+  { kind: "call-train" | "enter-vehicle" | "recover-vehicle" | "vehicle-bed" | "exit-vehicle" }
+>;
 export type ScenarioRequest = { id: number } & (
   | { kind: "open"; recipe: ScenarioRecipe; mode?: "manual" | "realtime" }
   | { kind: "clock"; running: boolean }

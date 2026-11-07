@@ -16639,10 +16639,10 @@
       "batchId": "world-geometry",
       "kind": "geometry",
       "name": "Tipping dump-truck bed",
-      "prompt": "Historical specialized vehicle simulation, deferred during physics reset 205. Models and static studies remain; basic driving uses the common game kernel.",
-      "url": "/tilefun/workshop.html?geometry=truck-bed#/tool/world-geometry",
-      "excluded": "Deferred interactive feature; no current physics qualification or art approval.",
-      "fingerprint": "6b6fdd20de980bcb9eacc060c9f69865e50e2a4605666f635488481e15ee2c2c"
+      "prompt": "Jump into the hollow bed, ride while driving and turning, then Tip bed / Lower bed (F, D-pad down or touch). Balls should stay inside while driving and roll out of the open tailgate when tipped. Shared game physics; existing v2 truck model; no art promotion.",
+      "url": "/tilefun/workshop.html?geometry=car-dynamics&route=bed#/tool/world-geometry",
+      "fingerprint": "03797abc6ff71d8f5804a1c229062939fb89cf33921617b4691a0392a00d5a8d",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
       "id": "geometry:wheel-lift-towing-v1",
@@ -56178,5 +56178,5 @@
       }
     }
   ],
-  "inputDigest": "4c5be08488088f485b5d95f86824366456fc7b20f8af9e5186f36863adfece2f"
+  "inputDigest": "f3e372b6ca1b8cec35eb12bf3554fe267176ca8b08d29fa3fbaf361ad9858b74"
 }

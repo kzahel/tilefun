@@ -11,6 +11,9 @@ import { runOverSmallAnimals } from "../wildlife/Roadkill.js";
 import { tickWildlifeRespawns } from "../wildlife/WildlifeRespawns.js";
 import type { Realm } from "./Realm.js";
 
+/** Last bed angle marked durable per vehicle; the step owns the clock, not a command. */
+const persistedBedTilts = new WeakMap<Entity, number>();
+
 type GameplayRealm = Pick<
   Realm,
   | "entityManager"
@@ -54,9 +57,12 @@ export function resolveSimulationGameplay(
       e.position.wy !== e.prevPosition?.wy ||
       e.wz !== e.prevWz ||
       e.vehicleHeading !== e.prevVehicleHeading ||
-      !rotationsEqual(e.bodyRotation, e.prevBodyRotation)
-    )
+      !rotationsEqual(e.bodyRotation, e.prevBodyRotation) ||
+      (persistedBedTilts.get(e) ?? 0) !== (e.vehicleBedTilt ?? 0)
+    ) {
+      persistedBedTilts.set(e, e.vehicleBedTilt ?? 0);
       realm.vehicleRegistry?.onChange?.(car, false);
+    }
   }
   realm.vehicles.sync();
 

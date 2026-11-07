@@ -53,6 +53,9 @@ export interface PhysicsBodyState {
   /** Horizontal support velocity captured at departure, independent of later carrier motion. */
   inheritedVx?: number;
   inheritedVy?: number;
+  /** Dump-bed angle and requested target (radians); advanced only by the shared step. */
+  bedTilt?: number;
+  bedTarget?: number;
   /** Exclusive physics tick deadline for a network-controlled motor. */
   controlUntil?: number;
 }

@@ -330,7 +330,7 @@ export class GameClient implements GameTestHooks {
     });
     this.actions.on("vehicle_recover", () => {
       if (this.scenes.current instanceof PlayScene && !this.playInput.inputBlocked)
-        this.vehicleControl.activateRecovery();
+        this.vehicleControl.activateEquipment();
     });
     this.actions.on("enter_place", () => {
       if (!(this.scenes.current instanceof PlayScene) || this.playInput.inputBlocked) return;

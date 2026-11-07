@@ -5,7 +5,9 @@ import { createPlayer } from "../entities/Player.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { required } from "../shared/required.js";
+import { DUMP_BED, hasDumpBed } from "../traffic/DumpBed.js";
 import { createFauna } from "../wildlife/Fauna.js";
+import { controlDumpBed } from "./DumpBedControl.js";
 import { HORN_STARTLE_RADIUS } from "./HornReaction.js";
 import { PlayerSession } from "./PlayerSession.js";
 
@@ -329,6 +331,53 @@ it("allows a nearby player to right a settled overturned car through shared phys
     expect(car.entity.bodyAngularVelocity).toEqual([0, 0, 0]);
     for (let i = 0; i < 60; i++) await s.step(idle);
     expect(Math.abs(car.entity.wz ?? Infinity)).toBeLessThan(0.5);
+  } finally {
+    await s.close();
+  }
+});
+
+it("tips and lowers a dump bed through ordinary requests, locks driving and survives reload mid-tip", async () => {
+  const s = await ScenarioSession.create({
+    ...recipe(),
+    player: createPlayer(60, -40),
+    parkedVehicles: [
+      { name: "truck", model: "dump-truck", wx: 80, wy: 0, facing: Direction.Right },
+    ],
+  });
+  try {
+    let truck = required(s.realm.vehicleRegistry?.states.get(required(s.handles.truck))).entity;
+    for (let i = 0; i < 30; i++) await s.step(idle);
+    const tip = { entityId: truck.id, action: "tip" as const };
+    const far = new PlayerSession("far-away", createPlayer(1000, 1000));
+    far.editorEnabled = false;
+    expect(() => controlDumpBed(s.realm.vehicles, far, tip)).toThrow(/Stand beside/);
+    await s.command({ kind: "vehicle-bed", entityId: truck.id, action: "tip" });
+    expect(truck.vehicleBedTarget).toBeCloseTo(DUMP_BED.maxTilt, 5);
+    for (let i = 0; i < 60; i++) await s.step(idle);
+    const partial = required(truck.vehicleBedTilt);
+    expect(partial).toBeGreaterThan(0.2);
+    expect(partial).toBeLessThan(DUMP_BED.maxTilt);
+    await s.reload();
+    truck = required(
+      [...(s.realm.vehicleRegistry?.states.values() ?? [])].find((c) => hasDumpBed(c.entity)),
+    ).entity;
+    expect(truck.vehicleBedTilt).toBeGreaterThanOrEqual(partial);
+    expect(truck.vehicleBedTarget).toBeCloseTo(DUMP_BED.maxTilt, 5);
+    for (let i = 0; i < 240; i++) await s.step(idle);
+    expect(truck.vehicleBedTilt).toBe(truck.vehicleBedTarget);
+    // The cab driver may operate the bed, but cannot drive until it is lowered.
+    s.realm.vehicles.enter(s.player, truck.id);
+    const start = { ...truck.position };
+    for (let i = 0; i < 60; i++) await s.step({ ...idle, dx: 1 });
+    expect(Math.hypot(truck.position.wx - start.wx, truck.position.wy - start.wy)).toBeLessThan(1);
+    await s.command({ kind: "vehicle-bed", entityId: truck.id, action: "lower" });
+    for (let i = 0; i < 240; i++) await s.step(idle);
+    expect(truck.vehicleBedTilt).toBeUndefined();
+    for (let i = 0; i < 60; i++) await s.step({ ...idle, dx: 1 });
+    expect(truck.position.wx - start.wx).toBeGreaterThan(10);
+    expect(() =>
+      controlDumpBed(s.realm.vehicles, s.player, { ...tip, entityId: truck.id }),
+    ).toThrow(/stop/);
   } finally {
     await s.close();
   }

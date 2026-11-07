@@ -130,6 +130,9 @@ export interface Entity {
   bodyRotation?: BodyRotation;
   /** Replicated coherent prescribed-body group; never inferred from private service identity. */
   physicsGroupId?: number;
+  /** Dump-bed tilt and requested target in radians; the shared physics step owns the clock. */
+  vehicleBedTilt?: number;
+  vehicleBedTarget?: number;
   prevBodyRotation?: BodyRotation;
   bodyAngularVelocity?: AngularVelocity;
   /** Previous shared-step orientation for rendering. */

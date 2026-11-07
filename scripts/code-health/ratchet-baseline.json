@@ -378,13 +378,13 @@
       "overLimit": 1
     },
     "src/physics/BallGameplay.ts": {
-      "lines": 75,
+      "lines": 89,
       "worst": 27,
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 1154,
-      "worst": 100,
+      "lines": 1138,
+      "worst": 96,
       "overLimit": 8
     },
     "src/physics/rapier/ClippedTerrain.ts": {
@@ -463,7 +463,7 @@
       "overLimit": 1
     },
     "src/rendering/DumpBedPose.ts": {
-      "lines": 200,
+      "lines": 116,
       "worst": 26,
       "overLimit": 1
     },
@@ -478,7 +478,7 @@
       "overLimit": 1
     },
     "src/rendering/EntityMeshPose.ts": {
-      "lines": 167,
+      "lines": 163,
       "worst": 42,
       "overLimit": 1
     },
@@ -578,12 +578,12 @@
       "overLimit": 1
     },
     "src/scenarios/ScenarioPresentationHost.ts": {
-      "lines": 536,
+      "lines": 529,
       "worst": 27,
       "overLimit": 1
     },
     "src/scenarios/ScenarioSession.ts": {
-      "lines": 426,
+      "lines": 423,
       "worst": 66,
       "overLimit": 1
     },
@@ -623,7 +623,7 @@
       "overLimit": 1
     },
     "src/server/GameServer.ts": {
-      "lines": 1019,
+      "lines": 1022,
       "worst": 0,
       "overLimit": 0
     },
@@ -703,7 +703,7 @@
       "overLimit": 1
     },
     "src/shared/physicsStateCodec.ts": {
-      "lines": 248,
+      "lines": 259,
       "worst": 48,
       "overLimit": 2
     },
@@ -723,14 +723,14 @@
       "overLimit": 1
     },
     "src/traffic/RoadTraffic.ts": {
-      "lines": 501,
+      "lines": 495,
       "worst": 94,
       "overLimit": 3
     },
     "src/traffic/VehicleRegistry.ts": {
-      "lines": 303,
-      "worst": 28,
-      "overLimit": 2
+      "lines": 300,
+      "worst": 26,
+      "overLimit": 1
     },
     "src/transport/WorkerClientTransport.ts": {
       "lines": 383,
@@ -748,8 +748,8 @@
       "overLimit": 1
     },
     "src/ui/VehicleControl.ts": {
-      "lines": 186,
-      "worst": 53,
+      "lines": 164,
+      "worst": 51,
       "overLimit": 1
     },
     "src/ui/WorldMap.ts": {
@@ -948,7 +948,7 @@
       "overLimit": 1
     },
     "src/workshop/WorldGeometryPage.tsx": {
-      "lines": 481,
+      "lines": 483,
       "worst": 52,
       "overLimit": 3
     },

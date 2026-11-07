@@ -1,3 +1,4 @@
+import { createBall } from "../entities/Ball.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { createVehicle } from "../traffic/Vehicle.js";
@@ -12,7 +13,16 @@ export const DYNAMICS_STARTS = {
   recover: { position: { wx: -280, wy: 38 }, z: 0 },
   ramp: { position: { wx: -80, wy: 0 }, z: 28 },
   roof: { position: { wx: -280, wy: 0 }, z: 24 },
+  bed: { position: { wx: -250, wy: -126 }, z: 0 },
 };
+/** Loose balls resting in the parked dump truck's bed for the tipping start. */
+function bedCargo() {
+  return [
+    [-262, -156],
+    [-284, -166],
+    [-246, -164],
+  ].map(([wx = 0, wy = 0]) => ({ ...createBall(wx, wy), wz: 30, jumpVZ: 0 }));
+}
 /** Playable review course; every ramp/deck/car uses normal Realm owners. */
 export function vehicleDynamicsRecipe(
   model = "compact-1",
@@ -20,7 +30,7 @@ export function vehicleDynamicsRecipe(
 ): ScenarioRecipe {
   const start = DYNAMICS_STARTS[route];
   const car =
-    route === "ramp" || route === "roof"
+    route === "ramp" || route === "roof" || route === "bed"
       ? { wx: -280, wy: 0, facing: Direction.Right }
       : route === "passage"
         ? { wx: 80, wy: 120, facing: Direction.Up }
@@ -31,6 +41,7 @@ export function vehicleDynamicsRecipe(
     generation: FLAT_SCENARIO,
     player: { ...createPlayer(start.position.wx, start.position.wy), wz: start.z },
     measurePhysics: true,
+    ...(route === "bed" ? { actors: bedCargo() } : {}),
     props: [
       surfaceProp(
         { left: -192, top: -64, right: 0, bottom: 64 },

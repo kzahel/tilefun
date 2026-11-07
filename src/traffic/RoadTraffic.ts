@@ -20,12 +20,6 @@ import {
 import { vehiclePerformance } from "./VehiclePerformance.js";
 import type { VehicleRegistry, VehicleState } from "./VehicleRegistry.js";
 
-export interface TrafficRoute {
-  laneId: string;
-  choices: number;
-  nextId?: string;
-  turning?: boolean;
-}
 const hash = (text: string) => {
   let n = 2166136261;
   for (let i = 0; i < text.length; i++) n = Math.imul(n ^ text.charCodeAt(i), 16777619);

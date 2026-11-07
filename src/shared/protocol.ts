@@ -48,6 +48,7 @@ export type ClientMessage =
   | { type: "enter-vehicle"; requestId: number; entityId: number }
   | { type: "exit-vehicle"; requestId: number }
   | { type: "recover-vehicle"; requestId: number; entityId: number }
+  | { type: "vehicle-bed"; requestId: number; entityId: number; action: "tip" | "lower" }
   | {
       type: "edit-room";
       roomId: string;
@@ -227,10 +228,9 @@ export interface EntitySnapshot {
   physicsGroupId?: number;
   paintSchemeId?: string;
 
-  /** Hinged dump bed angle/target in radians; authority owns the clock. */
-
-  /** Runtime towing links; zero means durable partner is not resident yet. */
-
+  /** Hinged dump bed angle/target in radians; the shared physics step owns the clock. */
+  vehicleBedTilt?: number;
+  vehicleBedTarget?: number;
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

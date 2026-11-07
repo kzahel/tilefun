@@ -1,28 +1,24 @@
-import { isBoat } from "../boats/Boat.js";
 import type { ClientStateView } from "../client/ClientStateView.js";
 import { actionHint, inputHint } from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { nearestStationBench } from "../railway/StationBench.js";
 import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
 import { isVehicleOverturned } from "../traffic/Vehicle.js";
-import {
-  boardingDistance,
-  isDrivable,
-  occupiedVehicle,
-  vehicleVerticalDistance,
-} from "../traffic/VehicleSeats.js";
+import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/VehicleSeats.js";
+import { type EquipmentRequest, equipmentPrompt } from "./VehicleEquipment.js";
 
 type VehicleRequest =
   | { type: "call-train"; benchId: number }
   | { type: "enter-vehicle"; entityId: number }
   | { type: "exit-vehicle" }
-  | { type: "recover-vehicle"; entityId: number };
-/** The one basic land-vehicle interaction, shared by touch, keyboard and controller. */
+  | EquipmentRequest;
+/** Basic land-vehicle interactions, shared by touch, keyboard and controller: the
+ * primary seat button plus one contextual equipment button (right car / dump bed). */
 export class VehicleControl {
   readonly root = document.createElement("div");
   readonly button = document.createElement("button");
-  readonly recoveryButton = document.createElement("button");
-  private recoveryRequest: VehicleRequest | null = null;
+  readonly equipmentButton = document.createElement("button");
+  private equipment: ReturnType<typeof equipmentPrompt> = null;
   private status = document.createElement("p");
   private request: VehicleRequest | null = null;
   private busy = false;
@@ -35,14 +31,14 @@ export class VehicleControl {
       "position:fixed;right:20px;bottom:calc(274px + env(safe-area-inset-bottom));width:64px;min-height:52px;padding:4px;font:13px sans-serif;border-radius:14px;border:1px solid #c5d3b6;color:white;background:#243a32;cursor:pointer";
     this.root.dataset.vehicleControl = "";
     this.button.onclick = () => this.activate();
-    this.recoveryButton.style.cssText = this.button.style.cssText;
-    this.recoveryButton.style.bottom = "calc(336px + env(safe-area-inset-bottom))";
-    this.recoveryButton.onclick = () => this.activateRecovery();
-    this.recoveryButton.hidden = true;
-    this.recoveryButton.style.display = "none";
+    this.equipmentButton.style.cssText = this.button.style.cssText;
+    this.equipmentButton.style.bottom = "calc(336px + env(safe-area-inset-bottom))";
+    this.equipmentButton.onclick = () => this.activateEquipment();
+    this.equipmentButton.hidden = true;
+    this.equipmentButton.style.display = "none";
     this.status.setAttribute("role", "status");
     this.status.style.cssText = "background:#243a32;border-radius:6px;margin:4px 0;padding:4px";
-    this.root.append(this.status, this.button, this.recoveryButton);
+    this.root.append(this.status, this.button, this.equipmentButton);
     this.root.hidden = true;
     document.body.append(this.root);
   }
@@ -69,38 +65,20 @@ export class VehicleControl {
             boardingDistance(p, e) <= 32,
         )
         .sort((a, b) => boardingDistance(p, a) - boardingDistance(p, b) || a.id - b.id)[0];
-    const recovery =
-      current ??
-      entities
-        .filter(
-          (e) =>
-            isDrivable(e) &&
-            !isBoat(e) &&
-            isVehicleOverturned(e) &&
-            !entities.some((other) => other.parentId === e.id) &&
-            boardingDistance(p, e) <= 32 &&
-            vehicleVerticalDistance(p, e) <= 16,
-        )
-        .sort((a, b) => boardingDistance(p, a) - boardingDistance(p, b))[0];
-    this.recoveryRequest =
-      allowed &&
-      !view.editorEnabled &&
-      recovery &&
-      !isBoat(recovery) &&
-      isVehicleOverturned(recovery)
-        ? { type: "recover-vehicle", entityId: recovery.id }
-        : null;
-    this.recoveryButton.hidden = !this.recoveryRequest;
-    this.recoveryButton.style.display = this.recoveryRequest ? "" : "none";
-    this.recoveryButton.disabled = this.busy || locked;
-    this.recoveryButton.textContent = `Right car · ${actionHint("vehicle_recover") || "F"}`;
+    const equipment = equipmentPrompt(view, allowed);
+    this.equipment = equipment;
+    this.equipmentButton.hidden = !equipment;
+    this.equipmentButton.style.display = equipment ? "" : "none";
+    this.equipmentButton.disabled = this.busy || locked;
+    if (equipment)
+      this.equipmentButton.textContent = `${equipment.label} · ${actionHint("vehicle_recover") || "F"}`;
     const bench = !current && !candidate ? nearestStationBench(p, view.props) : undefined;
     const key = current
       ? `inside:${current.id}`
       : candidate
         ? `near:${candidate.id}`
-        : recovery
-          ? `recover:${recovery.id}`
+        : equipment
+          ? `${equipment.request.type}:${equipment.request.entityId}`
           : bench
             ? `station:${bench.id}`
             : "";
@@ -119,7 +97,7 @@ export class VehicleControl {
               ? { type: "call-train", benchId: bench.id }
               : null
         : null;
-    this.root.hidden = !this.request && !this.recoveryRequest;
+    this.root.hidden = !this.request && !equipment;
     this.button.hidden = !this.request;
     this.button.style.display = this.request ? "" : "none";
     this.button.disabled = this.busy || locked;
@@ -140,11 +118,11 @@ export class VehicleControl {
             : carDriving === "steering"
               ? "Joystick ↑/↓ Forward/Reverse · ←/→ Steer"
               : "Drag a direction · aim behind to reverse");
-    return !!this.request || !!this.recoveryRequest;
+    return !!this.request || !!equipment;
   }
-  activateRecovery(): boolean {
-    if (this.recoveryButton.disabled) return !!this.recoveryRequest;
-    return this.activate(this.recoveryRequest);
+  activateEquipment(): boolean {
+    if (this.equipmentButton.disabled) return !!this.equipment;
+    return this.activate(this.equipment?.request ?? null);
   }
   activate(request: VehicleRequest | null = this.request): boolean {
     if (!request) return false;
@@ -172,14 +150,14 @@ export class VehicleControl {
   mountEmbedded(container: HTMLElement) {
     this.root.style.position = "absolute";
     this.root.style.bottom = "24px";
-    this.recoveryButton.style.position = "absolute";
-    this.recoveryButton.style.bottom = "84px";
+    this.equipmentButton.style.position = "absolute";
+    this.equipmentButton.style.bottom = "84px";
     this.button.style.position = "absolute";
     this.button.style.bottom = "24px";
-    container.append(this.root, this.button, this.recoveryButton);
+    container.append(this.root, this.button, this.equipmentButton);
   }
   destroy() {
-    this.recoveryButton.remove();
+    this.equipmentButton.remove();
     this.button.remove();
     this.root.remove();
   }

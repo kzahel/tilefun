@@ -41,7 +41,7 @@ export class VehicleControl {
       honking?: boolean;
     }
   >();
-  constructor(private realm: Realm) {}
+  constructor(readonly realm: Realm) {}
   private horns: VehicleHornMessage[] = [];
   honk(session: PlayerSession, active = true): void {
     const driver = this.drivers.get(session.player.id);

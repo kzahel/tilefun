@@ -34549,7 +34549,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:402"
+          "source": "src/rendering/scene/EntitySprites.ts:437"
         },
         {
           "system": "Gameplay",
@@ -35146,6 +35146,10 @@
         {
           "system": "Gameplay",
           "source": "src/rendering/VehicleBedPresentation.ts:13"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/traffic/DumpBed.ts:73"
         }
       ]
     },
@@ -35423,19 +35427,23 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:94"
+          "source": "src/rendering/scene/EntitySprites.ts:154"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:96"
+          "source": "src/scenarios/ScenarioSession.ts:95"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:161"
+          "source": "src/scenarios/ScenarioSession.ts:97"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:236"
+          "source": "src/scenarios/ScenarioSession.ts:162"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/ScenarioSession.ts:237"
         },
         {
           "system": "Gameplay",
@@ -36531,11 +36539,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallGameplay.ts:17"
+          "source": "src/physics/BallGameplay.ts:18"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BallGameplay.ts:36"
+          "source": "src/physics/BallGameplay.ts:42"
         },
         {
           "system": "Gameplay",
@@ -36543,11 +36551,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:207"
+          "source": "src/physics/PhysicsScene.ts:214"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:220"
+          "source": "src/physics/PhysicsScene.ts:229"
         },
         {
           "system": "Gameplay",
@@ -36564,6 +36572,10 @@
         {
           "system": "Gameplay",
           "source": "src/server/RealmCommands.ts:268"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/traffic/DumpBed.ts:185"
         },
         {
           "system": "Gameplay",
@@ -38099,7 +38111,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:375"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:368"
         },
         {
           "system": "Editor",

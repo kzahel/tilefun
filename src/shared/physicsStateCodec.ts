@@ -29,6 +29,7 @@ const FIELDS = [
   "inheritedVy",
 ] as const;
 const BODY_BYTES = 118;
+const VEHICLE_BYTES = 53; // Sleep, rotations, angular velocity, dump-bed tilt/target.
 const HEADER_BYTES = 16;
 const CONTACT_BYTES = 8;
 const MAX_CONTACTS = (MAX_PREDICTION_BODIES * (MAX_PREDICTION_BODIES - 1)) / 2;
@@ -43,7 +44,10 @@ export function physicsStateBytes(state?: PhysicsState): number {
     1 +
     (state
       ? HEADER_BYTES +
-        state.bodies.reduce((bytes, b) => bytes + BODY_BYTES + (b.kind === "vehicle" ? 45 : 0), 0) +
+        state.bodies.reduce(
+          (bytes, b) => bytes + BODY_BYTES + (b.kind === "vehicle" ? VEHICLE_BYTES : 0),
+          0,
+        ) +
         state.contacts.length * CONTACT_BYTES
       : 0)
   );
@@ -51,6 +55,11 @@ export function physicsStateBytes(state?: PhysicsState): number {
 function uint(value: number) {
   if (!Number.isInteger(value) || value < 0 || value > NONE) throw Error("Invalid physics integer");
   return value;
+}
+const bedAngles = (body: PhysicsBodyState) => [body.bedTilt ?? 0, body.bedTarget ?? 0];
+/** Optional numerical fields are absent when zero, as a level dump bed. */
+function nonzero(values: Record<string, number>) {
+  return Object.fromEntries(Object.entries(values).filter(([, value]) => value !== 0));
 }
 function finite(value: number) {
   if (!Number.isFinite(value)) throw Error("Non-finite physics state");
@@ -113,6 +122,7 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
         ...(body.rotation ?? yawRotation(body.heading)),
         ...(body.prevRotation ?? body.rotation ?? yawRotation(body.prevHeading)),
         ...(body.angularVelocity ?? [0, 0, 0]),
+        ...bedAngles(body),
       ]) {
         view.setFloat32(offset, finite(Math.fround(value)), true);
         offset += 4;
@@ -218,7 +228,7 @@ export function readPhysicsState(
       body[field] = value;
     }
     if (kind === "vehicle") {
-      if (offset + 45 > view.byteLength) throw Error("Invalid physics vehicle length");
+      if (offset + VEHICLE_BYTES > view.byteLength) throw Error("Invalid physics vehicle length");
       const sleeping = view.getUint8(offset++);
       if (sleeping > 1) throw Error("Invalid physics sleeping flag");
       body.sleeping = !!sleeping;
@@ -230,6 +240,7 @@ export function readPhysicsState(
       body.rotation = [read(), read(), read(), read()];
       body.prevRotation = [read(), read(), read(), read()];
       body.angularVelocity = [read(), read(), read()];
+      Object.assign(body, nonzero({ bedTilt: read(), bedTarget: read() }));
     }
     bodies.push(body);
   }

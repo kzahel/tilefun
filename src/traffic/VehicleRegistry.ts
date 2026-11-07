@@ -17,9 +17,11 @@ import { generateUUID } from "../shared/uuid.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
+import { restoreSavedBed, savedBed, validSavedBed } from "./DumpBed.js";
 import { validVehicleLightState } from "./EmergencyVehicle.js";
 import type { LaneGraph } from "./LaneGraph.js";
-import { RoadTraffic, type TrafficRoute } from "./RoadTraffic.js";
+import { RoadTraffic } from "./RoadTraffic.js";
+import { type TrafficRoute, validTrafficRoute } from "./TrafficRoute.js";
 import {
   applyVehicleFacing,
   createVehicle,
@@ -46,6 +48,7 @@ export interface SavedVehicle {
   vz?: number;
   paintSchemeId?: string;
   emergencyState?: number;
+  bed?: readonly [tilt: number, target: number]; // Dump bed, radians.
   persistentId?: string;
   originScope?: string;
   autonomous?: boolean;
@@ -201,6 +204,7 @@ export class VehicleRegistry {
       ...(route ? { route: { ...route } } : {}),
       ...(e.paintSchemeId === undefined ? {} : { paintSchemeId: e.paintSchemeId }),
       ...(e.emergencyState === undefined ? {} : { emergencyState: e.emergencyState }),
+      ...savedBed(e),
     };
   }
   save(): SavedVehicle[] {
@@ -228,16 +232,7 @@ export class VehicleRegistry {
         !DRIVABLE_MODELS.includes(record.model) ||
         !validVehiclePaint(record.model, record.paintSchemeId) ||
         (record.autonomous !== undefined && typeof record.autonomous !== "boolean") ||
-        (record.route !== undefined &&
-          (!record.route ||
-            typeof record.route.laneId !== "string" ||
-            record.route.laneId.length > 512 ||
-            !Number.isSafeInteger(record.route.choices) ||
-            record.route.choices < 0 ||
-            record.route.choices > 0xffff_ffff ||
-            (record.route.nextId !== undefined &&
-              (typeof record.route.nextId !== "string" || record.route.nextId.length > 512)) ||
-            (record.route.turning !== undefined && typeof record.route.turning !== "boolean"))) ||
+        (record.route !== undefined && !validTrafficRoute(record.route)) ||
         ![
           record.wx,
           record.wy,
@@ -258,9 +253,10 @@ export class VehicleRegistry {
             record.bodyAngularVelocity.length !== 3)) ||
         (record.facing !== undefined && ![0, 1, 2, 3].includes(record.facing)) ||
         (record.emergencyState !== undefined &&
-          !validVehicleLightState({ type: `vehicle-v1:${record.model}` }, record.emergencyState))
+          !validVehicleLightState({ type: `vehicle-v1:${record.model}` }, record.emergencyState)) ||
+        !validSavedBed(record.model, record.bed)
       )
-        throw Error("Invalid saved vehicle pose, model, paint or lights");
+        throw Error("Invalid saved vehicle pose, model, paint, lights or bed");
       const existing = [...this.states.values()].find(
         (s) => s.entity.proceduralId === record.identity,
       );
@@ -289,6 +285,7 @@ export class VehicleRegistry {
       if (record.bodyAngularVelocity) entity.bodyAngularVelocity = [...record.bodyAngularVelocity];
       if (record.vehicleHeading !== undefined) entity.vehicleHeading = record.vehicleHeading;
       if (record.emergencyState !== undefined) entity.emergencyState = record.emergencyState;
+      restoreSavedBed(entity, record.bed);
       applyVehicleFacing(entity);
       this.entities.spawn(entity);
       const state: VehicleState = {

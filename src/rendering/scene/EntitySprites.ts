@@ -10,6 +10,7 @@ import {
 import type { Prop } from "../../entities/Prop.js";
 import { rotateBodyVector } from "../../physics/BodyRotation.js";
 import { terrainBaseZ } from "../../physics/TerrainExcavation.js";
+import { clampBedTilt, hasDumpBed, insideDumpBed } from "../../traffic/DumpBed.js";
 import {
   hasVehicleLights,
   isWarningVehicle,
@@ -142,11 +143,44 @@ export function entityDepth(
 /** Cull, interpolate and append every visible actor in entity order. */
 export function collectEntitySprites(stage: EntityStage): void {
   const pass: EntityPass = { ...stage, index: indexEntities(stage) };
+  const beds: { truck: Entity; item: SpriteItem }[] = [];
+  const contents: { actor: Entity; item: SpriteItem }[] = [];
   for (const e of stage.entities) {
     if (!hasSprite(e) || (e.parentId !== undefined && pass.index.insideParents.has(e.parentId)))
       continue;
-    collectEntity(pass, e);
+    const item = collectEntity(pass, e);
+    if (!item) continue;
+    if (hasDumpBed(e)) beds.push({ truck: e, item });
+    else if (e.parentId === undefined && (e.type === "player" || isCarryable(e)))
+      contents.push({ actor: e, item });
   }
+  if (beds.length && contents.length) groupBedContents(stage.items, beds, contents);
+}
+
+/** Bed occupants share the truck's local depth: GPU contents depth-test against
+ * the actual tub triangles and fallbacks clip against its physical parts. */
+function groupBedContents(
+  items: SceneItem[],
+  beds: readonly { truck: Entity; item: SpriteItem }[],
+  contents: readonly { actor: Entity; item: SpriteItem }[],
+) {
+  const grouped = new Set<SceneItem>();
+  for (const { actor, item } of contents) {
+    const owner = beds.find(({ truck }) => insideDumpBed(truck, actor, entityHeading(truck)));
+    if (!owner) continue;
+    owner.item.bedGroup ??= {
+      heading: entityHeading(owner.truck),
+      tilt: clampBedTilt(owner.truck.vehicleBedTilt),
+      contents: [],
+    };
+    item.hasShadow = false;
+    delete item.meshRoofSupport;
+    owner.item.bedGroup.contents.push(item);
+    grouped.add(item);
+  }
+  if (!grouped.size) return;
+  for (let i = items.length - 1; i >= 0; i--)
+    if (grouped.has(items[i] as SceneItem)) items.splice(i, 1);
 }
 
 function hasSprite(e: Entity): e is SpriteEntity {
@@ -168,7 +202,7 @@ function indexEntities({ entities, depth }: EntityStage): EntityIndex {
   };
 }
 
-function collectEntity(pass: EntityPass, e: SpriteEntity): void {
+function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefined {
   const { alpha, frame, receivers, poseTime } = pass;
   const pos = interpolatePosition(e.position, e.prevPosition, alpha);
   const zOffset = entityZOffset(pass, e, pos);
@@ -199,7 +233,7 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): void {
       meshRoofSupport,
     )
   )
-    return;
+    return undefined;
 
   const parents = entityParents(pass.index, e);
   const shadow = entityShadow(pass, e, pos, zOffset, parents);
@@ -236,6 +270,7 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): void {
   if (receivers && hasShadow && e.collider && (!meshGroundShadow || spriteItem.mesh))
     pushShadowDecals(pass, receivers, e, spriteItem, pos, zOffset, meshGroundShadow);
   if (pass.grassVehicles && isVehicleSprite(e.type)) pass.grassVehicles.push(spriteItem);
+  return spriteItem;
 }
 
 function entityMesh(
