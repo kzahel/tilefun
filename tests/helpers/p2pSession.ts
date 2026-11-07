@@ -35,7 +35,9 @@ async function installProbe(page: Page) {
       try {
         Reflect.apply(send, this, [data]);
       } catch (error) {
-        wire.sendFailures++;
+        // Oversized (unfragmented) sends fail on an open channel; a send racing a
+        // deliberate remote close fails while closing and is handled by the transport.
+        if (this.readyState === "open") wire.sendFailures++;
         throw error;
       }
     };
