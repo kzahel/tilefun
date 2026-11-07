@@ -190,6 +190,22 @@ test("Worker saves player and edits before shutdown and restores them on reopen"
   page,
 }) => {
   await flatWorld(page);
+  // The restored pose is compared after the reopened world simulates. Ambient
+  // chickens wandering into the player would legitimately push it before then.
+  await page.evaluate(async () => {
+    // biome-ignore lint/suspicious/noExplicitAny: test hook
+    const g = (document.querySelector("#game") as any).__game;
+    await g.consoleEngine.rconSend("kill_all chicken");
+  });
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        // biome-ignore lint/suspicious/noExplicitAny: test hook
+        const g = (document.querySelector("#game") as any).__game;
+        return g.stateView.entities.filter((e: { type: string }) => e.type === "chicken").length;
+      }),
+    )
+    .toBe(0);
   const start = await hostState(page);
   await page.keyboard.down("ArrowRight");
   await expect
