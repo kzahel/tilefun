@@ -18,6 +18,15 @@ import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
 import { interpolateHeading } from "../rendering/PresentationTimeline.js";
 import type { Movement } from "../shared/Movement.js";
 import type { World } from "../world/World.js";
+import {
+  applySeatIntents,
+  hasMovement,
+  normalizedMovement,
+  normalizedSeats,
+  type SeatMovements,
+  SeatReplay,
+  seatCorrections,
+} from "./SeatInputs.js";
 
 const MAX_HISTORY = 120;
 const REPLAY_STEPS_PER_UPDATE = 8;
@@ -26,6 +35,8 @@ export interface StoredInput {
   seq: number;
   tick: number;
   movement: Movement;
+  /** Co-seats' movement on the same device tick (226). */
+  seats?: SeatMovements;
 }
 export interface ReconcileTiming {
   serverTick?: number;
@@ -55,6 +66,8 @@ export interface ReconcileDiagnostics {
   comparisonInputTick: number | undefined;
   comparisonPhysicsTick: number | undefined;
   status: PredictionRecoveryDiagnostics["status"];
+  /** Co-seat body corrections at the committed tick (226). */
+  seatCorrections?: ReadonlyMap<number, number>;
 }
 interface Request {
   player: Entity;
@@ -78,6 +91,7 @@ interface Replay {
   comparison?: { player: Entity; bodies: Map<number, ReplayPose> };
   pastError: number | undefined;
   inputs: StoredInput[];
+  seats: SeatReplay;
 }
 interface ReplayPose {
   x: number;
@@ -164,6 +178,8 @@ export class PlayerPredictor {
     { x: number; y: number; z: number; at: number; duration: number }
   >();
   private diagnostics: ReconcileDiagnostics | null = null;
+  /** Controlled bodies of the co-seats in the latest stored input (226). */
+  private readonly seatIds = new Set<number>();
 
   constructor(
     private readonly gravity = getGravityScale,
@@ -198,6 +214,7 @@ export class PlayerPredictor {
     this.publishedPhysicsTick = undefined;
     this.motorIntents.clear();
     this.inputHistory = [];
+    this.seatIds.clear();
     this.inputTick =
       this.appliedInputTick =
       this.animationInputTick =
@@ -231,6 +248,7 @@ export class PlayerPredictor {
     this.publishedPhysicsTick = undefined;
     this.motorIntents.clear();
     this.inputHistory = [];
+    this.seatIds.clear();
     this.queued = this.replay = undefined;
     this.geometry = this.geometryWorld = this.geometryProps = undefined;
     this.stateHistory.clear();
@@ -242,19 +260,23 @@ export class PlayerPredictor {
     this.groupErrors.clear();
     this.status = "waiting";
   }
-  storeInput(seq: number, movement: Movement, _dt: number): void {
+  /** `seats` carries every co-seat's movement, idle or not, under the same sequence (226). */
+  storeInput(seq: number, movement: Movement, _dt: number, seats?: SeatMovements): void {
     if (!this.predicted || seq <= Math.max(this.latestSeq, this.receivedAck)) return;
     this.latestSeq = seq;
     this.inputTick++;
-    const length = movement.relativeDriving ? 1 : Math.max(1, Math.hypot(movement.dx, movement.dy));
+    const co = normalizedSeats(seats);
+    this.seatIds.clear();
+    for (const id of co?.keys() ?? []) this.seatIds.add(id);
     this.inputHistory.push({
       seq,
       tick: this.inputTick,
-      movement: { ...movement, dx: movement.dx / length, dy: movement.dy / length },
+      movement: normalizedMovement(movement),
+      ...(co ? { seats: co } : {}),
     });
     const submitted = this.inputHistory[this.inputHistory.length - 1];
     if (this.replay && submitted) this.replay.inputs.push(submitted);
-    if (movement.dx || movement.dy || movement.jump || movement.jumpPressed)
+    if (hasMovement(movement) || [...(co?.values() ?? [])].some(hasMovement))
       this.activeUntil = this.clock() + 0.3;
     while (this.inputHistory.length > MAX_HISTORY) {
       const discarded = this.inputHistory.shift();
@@ -431,6 +453,7 @@ export class PlayerPredictor {
       beforePhysicsTick,
       pastError,
       inputs: [...this.inputHistory],
+      seats: new SeatReplay((id) => state.bodies.find((body) => body.id === id)?.jumpHeld ?? false),
     };
     this.status = "replaying";
     if (scene.physicsTick === beforePhysicsTick) this.captureReplayComparison(this.replay);
@@ -451,12 +474,13 @@ export class PlayerPredictor {
       movement = input.movement;
       jumpPressed ||= movement.jumpPressed === true || (movement.jump && !job.jumpHeld);
       job.jumpHeld = movement.jump;
+      job.seats.consume(input.seats);
       job.inputIndex++;
     }
     if (movement) {
       // Coalesce overdue axes, retaining jump edges just like authority admission.
       job.heldMovement = { ...movement, jumpPressed: false };
-      this.step({ ...movement, jumpPressed }, job.request.player);
+      this.step({ ...movement, jumpPressed }, job.request.player, job.seats.take());
     } else {
       // No new local command is due: continue the snapshot's held motor targets.
       scene.step(this.motorIntents, this.geometry, this.gravity());
@@ -562,13 +586,16 @@ export class PlayerPredictor {
       comparisonInputTick: compared ? job.beforeInputTick : undefined,
       comparisonPhysicsTick: compared ? job.beforePhysicsTick : undefined,
       status: this.status,
+      seatCorrections: seatCorrections(this.seatIds, beforeBodies, job.comparison?.bodies),
     };
   }
-  private step(movement: Movement, player: Entity) {
+  private step(movement: Movement, player: Entity, seats?: SeatMovements) {
     const scene = this.scene;
     if (!scene || !this.geometry) return;
     const controlled = this.bodies.get(player.parentId ?? player.id);
     if (!controlled) return;
+    // Co-seats first so the primary seat's intent wins if a key collides.
+    applySeatIntents(seats, this.bodies, this.motorIntents, scene.physicsTick);
     const intent = controlled.type.startsWith("vehicle-v1:")
       ? vehicleMotionIntent(controlled, movement)
       : playerMotionIntent(movement);
@@ -664,7 +691,7 @@ export class PlayerPredictor {
     else if (this.status === "ready" && this.appliedInputTick < this.inputTick) {
       this.appliedInputTick = this.inputTick;
       const submitted = this.inputHistory[this.inputHistory.length - 1];
-      this.step(submitted?.movement ?? movement, this.predicted);
+      this.step(submitted?.movement ?? movement, this.predicted, submitted?.seats);
       this.publish(this.predicted);
     }
     if (this.animationInputTick < this.inputTick) {
@@ -836,7 +863,7 @@ export class PlayerPredictor {
       return [...released];
     }
     const root = player.parentId ?? player.id,
-      component = new Set<number>([root, player.id]);
+      component = new Set<number>([root, player.id, ...this.seatIds]);
     const anchor = this.published.get(root) ?? player;
     if (anchor.collider) {
       const a = getEntityAABB(anchor.position, anchor.collider);
@@ -966,6 +993,10 @@ export class PlayerPredictor {
   }
   get lastCorrection() {
     return this.correction;
+  }
+  /** Committed predicted body pose and its physics tick (multi-seat diagnostics). */
+  publishedBody(id: number): { tick: number | undefined; body: Entity | undefined } {
+    return { tick: this.publishedPhysicsTick, body: this.published.get(id) };
   }
   get lastReconcileDiagnostics() {
     return this.diagnostics;

@@ -68,7 +68,7 @@
       "overLimit": 0
     },
     "src/client/PlayerPredictor.ts": {
-      "lines": 983,
+      "lines": 1014,
       "worst": 45,
       "overLimit": 4
     },

@@ -436,6 +436,10 @@ maintaining both shells. The shell import allow-list only shrinks.
 - Decided (owner, 2026-11-07): the slice phasing above, each slice reviewed by
   an independent Opus 5.5 high-effort session through Yep Anywhere before
   commit.
+- Decided (owner, 2026-11-07): focus on the basic refactor. Unreachable train
+  driving input is deleted rather than characterized. XR support may be removed
+  entirely where that simplifies input, view or render work; it is not a
+  constraint on this sequence.
 - Decided: seats on one device session (one connection, one replica, one
   predictor), including online; one connection per local player is the
   fallback only.
@@ -501,7 +505,8 @@ maintaining both shells. The shell import allow-list only shrinks.
   - Still unpinned, to characterize at the start of slice 2 before they move:
     E/F place controls (`VehicleControl`, `DoorControl` and
     `GameClient.updatePlaceControls`, which have no unit tests), hold movement
-    mode, befriend taps and tap-mode clicks, and XR input.
+    mode, befriend taps and tap-mode clicks. Train driving and XR input are not
+    characterized (owner decision below).
   - `src/scenarios/LabShellConsumers.test.ts` fixes the twelve files in `src`,
     `tests` and `scripts` that import the lab shell (any import form, including
     `?worker` URLs and `vi.mock`); the list may only shrink. Indirect use through
@@ -523,3 +528,59 @@ maintaining both shells. The shell import allow-list only shrinks.
     case skipped `visibilitychange`). Both were fixed and verified by seeded
     faults, then ACCEPT. Its claim that `ScenarioClient.step()` was dead was
     withdrawn (the physics lab's Step button uses it).
+- 2026-11-07, slice 1a (multi-seat prediction spike): **go**, conditional on
+  multi-anchor physics snapshots (slice 4b).
+  - `PlayerPredictor` gains additive co-seat replay: `storeInput` takes the
+    other local seats' movement keyed by controlled body, replay applies every
+    seat's motor intent on the same tick with per-seat jump edges
+    (`SeatInputs.ts`), co-seat bodies always present at predicted time, and
+    diagnostics report `seatCorrections`. Without co-seats behavior is
+    unchanged (all 16 predictor/replica/state-view test files pass). The
+    ratchet baseline for `PlayerPredictor.ts` rises 983 → 1,014 lines;
+    complexity is unchanged. A seat absent from an input has left: replay stops
+    holding it, and only the latest input's co-seats join the presentation
+    group. The primary seat's intent wins if a co-seat key collides with it.
+  - `src/client/MultiSeatPrediction.test.ts` runs every `COOP_CASES` case
+    against one authority twice with identical deterministic delays (remote:
+    inputs +4–6 ticks, frames +5–7; local: +1/+1): two predictors fed by their
+    own streams (today's shape) versus one predictor fed only by seat 0's
+    stream with both seats in each input. Truth is the authority's physics pose
+    at each tick; each view's first committed pose per tick is compared.
+  - Results (pixels; remote / local):
+
+    | Measure | Two predictors | One predictor |
+    | --- | --- | --- |
+    | Cross-view disagreement about a seat | up to 17.06 / 4.69 | 0 / 0 |
+    | Seat 1 largest correction (push, reverse) | 4.27–4.33 / 1.07–1.09 | 1.07–1.13 / 0.53–0.55 |
+    | Seat 0 largest correction | 7.36 / 2.27 (push) | same or lower |
+    | Other player as shown in a view (push) | 13.98 / 4.69 | 10.68 / 2.41 (= own view) |
+    | Presented collider overlap (push/reverse) | 0.49–0.73 | 0–0.5 |
+    | Replay steps per run (halved by construction: shared acks) | 2,520 / 1,032 | 1,260 / 516 |
+
+    A guest jump under remote delay corrects about 12 px in both shapes;
+    acknowledgements of both seats match every tick when one packet carries
+    both commands. Wall time roughly halves (M-series Node, informational).
+    The comparisons sample predicted ticks only, so the test pins how many are
+    missing: none, except in the vehicle case below.
+  - Limit: a seat outside the primary seat's snapshot is not predicted at all.
+    In the vehicle case the car outruns the walking seat, which then goes
+    unpredicted in its own view for 39 (remote) / 52 (local) of 260 ticks versus
+    0 with two predictors; a guest 400 px away is never predicted. Slice 4b's
+    multi-anchor snapshot (one anchor per seat) is therefore required before
+    slice 5 ships multi-seat prediction.
+  - Not covered: what players see. The harness compares raw committed poses;
+    today each seat's own predictor smooths its own correction, while a co-seat
+    outside the primary's correction group snaps. Presentation activity also
+    follows the primary seat only, so an idle primary can drop a moving co-seat
+    to buffered poses. Also untested: a co-seat driving, seats in different
+    realms, and more than two seats.
+  - Carried into slice 4b/5: measure replay ms with two seats' bodies in one
+    multi-anchor snapshot (the halving above assumes today's body count), make
+    presentation activity and display smoothing per seat, and keep seat ids in
+    step with mounting and leaving.
+  - Review (Yep Anywhere, Opus 5.5 high): CHANGES REQUESTED. Blocking: the
+    correction and overlap assertions passed even if seat 1 was never
+    predicted; fixed by pinning unpredicted ticks. Optional findings on stale
+    seat ids, key collisions and the per-step map were fixed (`SeatInputs.test.ts`
+    covers departure and jump edges); the rest are the limits above.
+    Re-review: ACCEPT.
