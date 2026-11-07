@@ -2,7 +2,9 @@
 
 [227](../tactical/227-tree-house-and-ladders.md) adds the World Geometry `tree-house`
 fixture. Its ladder rule runs inside the shared physics step and its room cutaway
-lives in shared scene collection, so the game and labs behave the same.
+lives in shared scene collection, so the game and labs behave the same. The
+`outskirts-park` fixture adds recipe terrain painting through the ordinary editor
+brush and a follow camera.
 
 [223](../tactical/223-jump-park-and-race-tunes.md) adds the World Geometry `car-jumps`
 fixture: data-only jump profiles on ordinary surface patches and the shared Realm,

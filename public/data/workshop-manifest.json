@@ -16675,6 +16675,16 @@
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
+      "id": "geometry:outskirts-park-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "Outskirts park: campground, fishing dock, tree house and wildlife meadow",
+      "prompt": "Explore the trails: campground with tents, campfire and log seats; pond dock with ducks and frogs; tree house ladder; fenced meadow with deer and rabbits. Judge layout, variety and what kids want to do here. Shared physics; unedited Modern Exteriors crops placed for a lab experiment, not promoted art.",
+      "url": "/tilefun/workshop.html?geometry=outskirts-park#/tool/world-geometry",
+      "fingerprint": "6c220b4c7ba8062c8fa99fa7fa9b1e559a609b93ed8544e50e7856fb07cb4c06",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
       "id": "geometry:road-traffic-v1",
       "batchId": "world-geometry",
       "kind": "geometry",
@@ -56248,5 +56258,5 @@
       }
     }
   ],
-  "inputDigest": "1c40cde5470b41c5874d4596ae97daa7c7c9708044dcd257d98b073217aa7646"
+  "inputDigest": "c424849b17ee297b6068bdd11ba0972e67abd057e7fa52ab77e12993ea9a3760"
 }

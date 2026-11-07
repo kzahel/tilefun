@@ -1,6 +1,7 @@
 # Tree house and ladders
 
-Status: lab delivered for owner/child play review; outskirts nature park not started.
+Status: tree house and outskirts park labs delivered for owner/child play review;
+generated parks not started.
 Owner request, 2026-11-07: more varied outdoor areas at the edge of town —
 tree houses, camping and wildlife spots — prototyped in a lab first. The tree
 house must be climbable and enterable; one floor is enough. Start with a small
@@ -49,6 +50,33 @@ Owners: [world geometry](../topics/world-geometry.md),
   lookup table. Every other fixture, ID, prompt and fingerprint is unchanged.
   The code-health baseline accepts +5 lines in `PhysicsScene` for the ladder hook.
 
+## Outskirts park lab
+
+Owner direction, 2026-11-07: proceed with the nature park ideas.
+Workshop → World geometry → `outskirts-park`
+(`/tilefun/workshop.html?geometry=outskirts-park#/tool/world-geometry`, follow
+camera, optional `&zoom=` for overviews). Data-only `scenarios/OutskirtsParkRecipe.ts`:
+
+- **Entrance and trails.** A "Camping" sign arch over the south trail; dirt trails
+  to a crossroads with a signpost and picnic tables, then west, east and north.
+- **Campground.** Dirt clearing with three tents, the animated campfire, four log
+  seats you can stand on, a hanging cooking pot, lantern, backpack and sleeping
+  bag, and a picnic table.
+- **Fishing pond.** Painted shallow and deep water in a sand shore, a plank dock on
+  a sand jetty (the planks are a floor-depth sprite; stepping off into water uses
+  the usual return-to-shore), two mallards, two frogs, rocks and a bench.
+- **Tree house** from the first lab, beside the campground.
+- **Wildlife meadow.** A 16px grey modular fence (players can hop it; wildlife
+  cannot) around two deer (home radius 64) and three rabbits; a robin perches on
+  an oak by the trail.
+- **Woodland edge.** Existing native forest-thicket rows along the north.
+
+Supporting pieces: `ScenarioRecipe.terrain` paints tiles through the ordinary
+editor brush on a fresh open (`ScenarioTerrain.ts`); `entities/ParkKit.ts` turns
+unedited camping, pier and fence crops into props with colliders; World geometry
+view settings (terrain, camera, zoom) moved into `WorldGeometryFixtures.tsx`.
+Existing species only; no new animal art.
+
 ## Evidence
 
 - `TreeHouseRecipe.test.ts`: jumping at the deck edge never reaches it; the climb
@@ -56,6 +84,10 @@ Owners: [world geometry](../topics/world-geometry.md),
   steps onto the porch, enters the cabin, is stopped by the back wall, reloads
   inside, walks out and climbs down without a fall; client prediction tracks the
   authoritative height every tick; sideways input lets go to the ground.
+- `OutskirtsParkRecipe.test.ts`: painted pond water, trail and dry jetty; the dock
+  walks to its end without a water return; after a minute of simulation every
+  deer and rabbit is still inside the meadow fence (mallards, frogs and rabbits
+  move during it).
 - `collectScene.test.ts`: outside/inside part swap by observer room, porch keeps
   the roof, floor depth carried on the deck band.
 - Playwright Chromium against the dev server (GPU default): ground, climbing in
@@ -77,7 +109,8 @@ Owners: [world geometry](../topics/world-geometry.md),
 1. Owner/child play review of climb speed, hang-on, getting down and the cabin.
 2. Possible polish: keep facing the ladder while descending; draw low cabin
    walls inside; a trapdoor/second ladder variant.
-3. Grow the lab toward the outskirts nature park: campground loop (tents,
-   campfire, picnic tables), fishing pier, wildlife meadow with existing
-   species, trails. Then a generated park beside towns following the motocross
-   planner pattern ([224](224-generated-motocross-parks.md)).
+3. Owner/child review of the outskirts park: layout, variety, what to do there
+   (fishing, campfire interactions, meadow gate). Art review of the camping,
+   dock and fence crops before any world use.
+4. Then a generated park beside towns following the motocross planner pattern
+   ([224](224-generated-motocross-parks.md)), with the tree house as a native prop.

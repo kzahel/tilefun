@@ -4,6 +4,7 @@ import {
   generatedCrossingRecipe,
 } from "../scenarios/GeneratedCrossingRecipe.js";
 import { jumpParkRecipe } from "../scenarios/JumpParkRecipe.js";
+import { outskirtsParkRecipe } from "../scenarios/OutskirtsParkRecipe.js";
 import { railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { roadTrafficRecipe } from "../scenarios/RoadTrafficRecipe.js";
 import { treeHouseRecipe } from "../scenarios/TreeHouseRecipe.js";
@@ -63,6 +64,13 @@ const GEOMETRY_FIXTURES = {
     recipe: () => treeHouseRecipe(),
     prompt:
       "Climb the ladder, hang on, step onto the porch and walk into the cabin; judge climbing speed, the roof cutaway and getting back down. Shared physics; unedited Modern Exteriors crops placed for a lab experiment, not promoted art.",
+  },
+  "outskirts-park": {
+    id: "geometry:outskirts-park-v1",
+    name: "Outskirts park: campground, fishing dock, tree house and wildlife meadow",
+    recipe: () => outskirtsParkRecipe(),
+    prompt:
+      "Explore the trails: campground with tents, campfire and log seats; pond dock with ducks and frogs; tree house ladder; fenced meadow with deer and rabbits. Judge layout, variety and what kids want to do here. Shared physics; unedited Modern Exteriors crops placed for a lab experiment, not promoted art.",
   },
   traffic: {
     id: "geometry:road-traffic-v1",

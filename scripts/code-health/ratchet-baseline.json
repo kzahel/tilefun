@@ -578,7 +578,7 @@
       "overLimit": 1
     },
     "src/scenarios/ScenarioSession.ts": {
-      "lines": 423,
+      "lines": 429,
       "worst": 65,
       "overLimit": 1
     },

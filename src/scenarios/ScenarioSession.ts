@@ -29,6 +29,7 @@ import {
   type ScenarioRecipe,
   scenarioGravity,
 } from "./ScenarioRecipe.js";
+import { paintScenarioTerrain } from "./ScenarioTerrain.js";
 import { scenarioVehicleSource } from "./ScenarioTraffic.js";
 
 /** A temporary ordinary Realm with memory persistence. No alternate physics or clock. */
@@ -193,6 +194,11 @@ export class ScenarioSession {
             this.realm.saveManager?.markChunkDirty(`${cx},${cy}`);
           }
       }
+      await paintScenarioTerrain(
+        this.recipe.terrain,
+        (r) => this.ready(r),
+        this.realm.terrainEditor,
+      );
       for (const prop of this.recipe.props) this.realm.propManager.add(structuredClone(prop));
       for (const prop of this.recipe.nativeProps ?? [])
         this.realm.propManager.add(createProp(prop.type, prop.wx, prop.wy));

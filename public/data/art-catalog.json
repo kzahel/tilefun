@@ -10591,6 +10591,14 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/scenarios/OutskirtsParkRecipe.ts:136"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/OutskirtsParkRecipe.ts:176"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/scenarios/PastureWorkRecipe.ts:24"
         },
         {
@@ -10716,6 +10724,18 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/RacetrackPlanner.ts:190"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/OutskirtsParkRecipe.ts:177"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/OutskirtsParkRecipe.ts:178"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/OutskirtsParkRecipe.ts:179"
         },
         {
           "system": "Gameplay",
@@ -11538,6 +11558,10 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/VehicleDepotPlanner.ts:66"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/OutskirtsParkRecipe.ts:180"
         },
         {
           "system": "Gameplay",
@@ -35479,19 +35503,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:95"
+          "source": "src/scenarios/ScenarioSession.ts:96"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:97"
+          "source": "src/scenarios/ScenarioSession.ts:98"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:162"
+          "source": "src/scenarios/ScenarioSession.ts:163"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:237"
+          "source": "src/scenarios/ScenarioSession.ts:243"
         },
         {
           "system": "Gameplay",
@@ -35649,11 +35673,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkPose.ts:21"
+          "source": "src/wildlife/AnimalWorkPose.ts:48"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:971"
+          "source": "src/wildlife/Fauna.ts:827"
         },
         {
           "system": "Gameplay",
@@ -35791,15 +35815,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkPose.ts:23"
+          "source": "src/wildlife/AnimalWorkPose.ts:40"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:42"
+          "source": "src/wildlife/Fauna.ts:43"
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/Fauna.ts:242"
+          "source": "src/wildlife/Fauna.ts:243"
         },
         {
           "system": "Gameplay",
@@ -35913,7 +35937,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/FlyingBirds.ts:6"
+          "source": "src/wildlife/FlyingBirds.ts:7"
         },
         {
           "system": "Gameplay",
@@ -36291,7 +36315,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/AnimalWorkPose.ts:127"
+          "source": "src/wildlife/AnimalWorkPose.ts:84"
         },
         {
           "system": "Gameplay",
@@ -36339,7 +36363,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/ContinuationBirds.ts:61"
+          "source": "src/wildlife/ContinuationBirds.ts:33"
         },
         {
           "system": "Gameplay",
@@ -37599,6 +37623,14 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/scenarios/OutskirtsParkRecipe.ts:136"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/OutskirtsParkRecipe.ts:176"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/scenarios/PastureWorkRecipe.ts:24"
         },
         {
@@ -37732,6 +37764,18 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/RacetrackPlanner.ts:190"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/OutskirtsParkRecipe.ts:177"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/OutskirtsParkRecipe.ts:178"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/OutskirtsParkRecipe.ts:179"
         },
         {
           "system": "Gameplay",

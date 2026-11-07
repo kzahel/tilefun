@@ -12,7 +12,6 @@ import {
 } from "../scenarios/GeneratedCrossingRecipe.js";
 import { JUMP_STARTS, type JumpLane } from "../scenarios/JumpParkRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
-import { TREE_HOUSE_AT } from "../scenarios/TreeHouseRecipe.js";
 import { DYNAMICS_STARTS } from "../scenarios/VehicleDynamicsRecipe.js";
 import { required } from "../shared/required.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
@@ -22,7 +21,12 @@ import DeferredVehiclePage from "./DeferredVehiclePage.js";
 import { recordEquipment } from "./EquipmentDiagnostics.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
 import { TRAFFIC_FIXTURES } from "./TrafficFixtures.js";
-import { GeometryIntro, geometryRecipe, geometryStarts } from "./WorldGeometryFixtures.js";
+import {
+  GeometryIntro,
+  geometryRecipe,
+  geometryStarts,
+  geometryView,
+} from "./WorldGeometryFixtures.js";
 
 export type GeometryCanvas = HTMLCanvasElement & {
   __physicsSample?: ScenarioPresentationHost["session"]["samplePhysicsDiagnostics"];
@@ -38,6 +42,7 @@ const FIXTURES = [
   "car-dynamics",
   "car-jumps",
   "tree-house",
+  "outskirts-park",
   "realm",
   "traffic",
   "traffic-crowd",
@@ -89,7 +94,6 @@ function GeometryFixtures({ initial }: { initial: string }) {
     );
   });
   const jumps = fixture === "car-jumps";
-  const treeHouse = fixture === "tree-house";
   const [reverse, setReverse] = useState(false),
     [paused, setPaused] = useState(false);
   const [visibility, setVisibility] = useState<SurfaceVisibility>("auto");
@@ -117,44 +121,16 @@ function GeometryFixtures({ initial }: { initial: string }) {
     keys.current.clear();
     setError("");
     setPaused(false);
+    const view = geometryView({ fixture, generated, ambient });
     const host = new ScenarioPresentationHost(c, recipe, {
       width: 960,
       height: 640,
-      terrain:
-        !!generated ||
-        fixture === "realm" ||
-        fixture === "traffic" ||
-        fixture === "traffic-crowd" ||
-        !!ambient ||
-        fixture === "train" ||
-        fixture === "car-dynamics" ||
-        jumps ||
-        treeHouse,
-      ...(vehicle || fixture === "realm" || fixture === "train"
-        ? {}
-        : {
-            fixedCamera: generated
-              ? { wx: generated.bridge.x * 16, wy: generated.bridge.y * 16 - 16 }
-              : treeHouse
-                ? { wx: TREE_HOUSE_AT.wx, wy: TREE_HOUSE_AT.wy - 72 }
-                : (ambient?.camera ?? { wx: 0, wy: -16 }),
-          }),
+      terrain: view.terrain,
+      ...(view.camera ? { fixedCamera: view.camera } : {}),
       surfaceVisibility: () => settings.current.visibility,
       settings: () => ({
         paused: settings.current.paused,
-        zoom:
-          ambient?.zoom ??
-          (fixture === "traffic-crowd"
-            ? 0.125
-            : jumps
-              ? 0.25
-              : treeHouse
-                ? 1
-                : fixture === "car-dynamics" || fixture === "train"
-                  ? 0.4
-                  : generated || fixture === "crossing" || fixture === "traffic"
-                    ? 0.225
-                    : 0.625),
+        zoom: view.zoom,
         terrainPacing: "throughput",
       }),
       input: () => ({

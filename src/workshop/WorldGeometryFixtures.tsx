@@ -1,5 +1,6 @@
 import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import { JUMP_STARTS, type JumpLane, jumpParkRecipe } from "../scenarios/JumpParkRecipe.js";
+import { outskirtsParkRecipe, PARK_STARTS } from "../scenarios/OutskirtsParkRecipe.js";
 import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
 import { realmPhysicsRecipe } from "../scenarios/RealmPhysicsRecipe.js";
 import {
@@ -8,7 +9,7 @@ import {
   TRAFFIC_STARTS,
 } from "../scenarios/RoadTrafficRecipe.js";
 import type { ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
-import { TREE_HOUSE_STARTS, treeHouseRecipe } from "../scenarios/TreeHouseRecipe.js";
+import { TREE_HOUSE_AT, TREE_HOUSE_STARTS, treeHouseRecipe } from "../scenarios/TreeHouseRecipe.js";
 import { GARAGE_STARTS, undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import { DYNAMICS_STARTS, vehicleDynamicsRecipe } from "../scenarios/VehicleDynamicsRecipe.js";
 import {
@@ -22,7 +23,13 @@ import type { TRAFFIC_FIXTURES } from "./TrafficFixtures.js";
 type Start = { position: { wx: number; wy: number }; z: number };
 interface FixtureChoice {
   fixture: string;
-  generated?: { recipe: ScenarioRecipe; starts: Record<string, Start> } | undefined;
+  generated?:
+    | {
+        recipe: ScenarioRecipe;
+        starts: Record<string, Start>;
+        bridge?: { x: number; y: number };
+      }
+    | undefined;
   ambient?: (typeof TRAFFIC_FIXTURES)[string] | undefined;
 }
 
@@ -32,6 +39,7 @@ const STATIC_FIXTURES: Record<
   { recipe: () => ScenarioRecipe; starts?: Record<string, Start> }
 > = {
   "tree-house": { recipe: treeHouseRecipe, starts: TREE_HOUSE_STARTS },
+  "outskirts-park": { recipe: outskirtsParkRecipe, starts: PARK_STARTS },
   crossing: { recipe: railCrossingRecipe, starts: CROSSING_STARTS },
   garage: { recipe: undergroundGarageRecipe, starts: GARAGE_STARTS },
   traffic: { recipe: roadTrafficRecipe, starts: TRAFFIC_STARTS },
@@ -75,7 +83,58 @@ export function geometryStarts(
   return STATIC_FIXTURES[fixture]?.starts ?? GEOMETRY_STARTS;
 }
 
+const TERRAIN_FIXTURES = new Set([
+  "realm",
+  "traffic",
+  "traffic-crowd",
+  "train",
+  "car-dynamics",
+  "car-jumps",
+  "tree-house",
+  "outskirts-park",
+]);
+const FOLLOW_FIXTURES = new Set(["outskirts-park", "realm", "train"]);
+const ZOOMS: Record<string, number> = {
+  "traffic-crowd": 0.125,
+  "car-jumps": 0.25,
+  "tree-house": 1,
+  "outskirts-park": 0.7,
+  "car-dynamics": 0.4,
+  train: 0.4,
+  crossing: 0.225,
+  traffic: 0.225,
+};
+
+/** Terrain, camera and zoom per fixture. `&zoom=` overrides zoom for overview captures. */
+export function geometryView({ fixture, generated, ambient }: FixtureChoice) {
+  const follow = fixture.startsWith("car-") || FOLLOW_FIXTURES.has(fixture);
+  const fixed = generated?.bridge
+    ? { wx: generated.bridge.x * 16, wy: generated.bridge.y * 16 - 16 }
+    : fixture === "tree-house"
+      ? { wx: TREE_HOUSE_AT.wx, wy: TREE_HOUSE_AT.wy - 72 }
+      : (ambient?.camera ?? { wx: 0, wy: -16 });
+  const override = Number(new URLSearchParams(location.search).get("zoom")) || undefined;
+  return {
+    terrain: !!generated || !!ambient || TERRAIN_FIXTURES.has(fixture),
+    camera: follow ? undefined : fixed,
+    zoom: override ?? ambient?.zoom ?? ZOOMS[fixture] ?? (generated ? 0.225 : 0.625),
+  };
+}
+
 export function GeometryIntro({ fixture }: { fixture: string }) {
+  if (fixture === "outskirts-park")
+    return (
+      <>
+        <h1>Outskirts park</h1>
+        <p>
+          Walk in under the camping sign and follow the dirt trails: west to the campground (tents,
+          campfire, log seats you can stand on), east to the fishing pond and its dock, north-west
+          to the tree house ladder, and north-east to the fenced wildlife meadow with deer and
+          rabbits — hop the low fence to visit. Ducks and frogs live at the pond. The buttons jump
+          to each area. Arrows / WASD / D-pad move, Space jumps.
+        </p>
+      </>
+    );
   if (fixture === "tree-house")
     return (
       <>

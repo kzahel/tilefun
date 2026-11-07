@@ -22,6 +22,8 @@ export interface ScenarioRecipe {
   /** Bounded Worker timings, sampled on explicit diagnostics requests. */
   measurePhysics?: boolean;
   roads?: { left: number; right: number; top: number; bottom: number }[];
+  /** Terrain painted through the ordinary editor brush on a fresh open. Tile units. */
+  terrain?: { tx: number; ty: number; terrain: number }[];
   /** Canonical generated-lane input for ordinary road traffic fixtures. Tile units. */
   trafficRoads?: import("../traffic/LaneGraph.js").RoadSegment[];
   /** Speedway ovals (tile-unit centers) whose two closed rings carry racers. */
