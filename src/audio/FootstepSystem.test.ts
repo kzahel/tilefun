@@ -1,4 +1,5 @@
 import { expect, it, vi } from "vitest";
+import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import type { Camera } from "../rendering/Camera.js";
 import { required } from "../shared/required.js";
@@ -13,7 +14,6 @@ it("paces predator steps from the active gait clip and silences non-gait or stal
   const player = createPlayer(0, 0);
   const tiger = createPredator("tiger", 16, 0);
   tiger.id = 1;
-  const ai = required(tiger.predator);
   const playOneShot = vi.fn();
   const footsteps = new FootstepSystem(
     { ready: true, getBuffer: () => ({}), playOneShot } as unknown as AudioManager,
@@ -23,15 +23,19 @@ it("paces predator steps from the active gait clip and silences non-gait or stal
     () => player,
     () => [],
   );
-  const run = (seconds: number) => {
+  const run = (seconds: number, actors = [tiger]) => {
     playOneShot.mockClear();
-    for (let t = 0; t < seconds * 60; t++) footsteps.update(1 / 60, [player, tiger]);
+    for (let t = 0; t < seconds * 60; t++) footsteps.update(1 / 60, [player, ...actors]);
     return playOneShot.mock.calls.length;
   };
-  const pose = (state: NonNullable<typeof tiger.predator>["state"], vx: number) => {
-    ai.state = state;
-    restorePredatorPose(tiger);
-    tiger.velocity = { vx, vy: 0 };
+  const pose = (
+    state: NonNullable<typeof tiger.predator>["state"],
+    vx: number,
+    actor: Entity = tiger,
+  ) => {
+    required(actor.predator).state = state;
+    restorePredatorPose(actor);
+    actor.velocity = { vx, vy: 0 };
   };
 
   // Walk clip: 12 frames x 100ms, so one contact per 600ms (base sprite would give 50ms).
@@ -42,6 +46,15 @@ it("paces predator steps from the active gait clip and silences non-gait or stal
   expect(run(2)).toBe(0);
   pose("patrol", 0);
   expect(run(2)).toBe(0);
+
+  // Legless hunters and raptors never make footsteps, even while walking.
+  const viper = createPredator("gaboon-viper", 16, 0);
+  const hawk = createPredator("hawk", -16, 0);
+  viper.id = 2;
+  hawk.id = 3;
+  pose("patrol", 30, viper);
+  pose("patrol", 30, hawk);
+  expect(run(2, [viper, hawk])).toBe(0);
 });
 
 it("silences attached actors, forgets their gait/airborne history and resumes footsteps on exit", () => {

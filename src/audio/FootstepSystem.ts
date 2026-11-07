@@ -5,6 +5,10 @@ import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import type { Prop } from "../entities/Prop.js";
 import { getMaterialForPropType } from "../entities/PropFactories.js";
 import type { Camera } from "../rendering/Camera.js";
+import {
+  LEGLESS_LAND_HUNTER_PROFILES,
+  LEGLESS_WATER_HUNTER_PROFILES,
+} from "../wildlife/LeglessCreatures.js";
 import { predatorProfile } from "../wildlife/Predator.js";
 import { worldToTile } from "../world/types.js";
 import type { World } from "../world/World.js";
@@ -27,6 +31,21 @@ interface FootstepState {
   wasAirborne: boolean;
 }
 
+const LEGLESS_HUNTERS: ReadonlySet<string> = new Set(
+  [...LEGLESS_LAND_HUNTER_PROFILES, ...LEGLESS_WATER_HUNTER_PROFILES].map((p) => p.species),
+);
+
+/** Walking predators step; swimmers, legless hunters and raptors (owl/eagle/hawk) do not. */
+function predatorHasFootsteps(type: string): boolean {
+  const profile = predatorProfile(type);
+  return (
+    profile !== undefined &&
+    profile.expansion?.habitat !== "deep" &&
+    profile.fierce?.kind !== "raptor" &&
+    !LEGLESS_HUNTERS.has(profile.species)
+  );
+}
+
 /** Entity types that produce footstep sounds. */
 function hasFootsteps(type: string): boolean {
   return (
@@ -34,7 +53,7 @@ function hasFootsteps(type: string): boolean {
     type.startsWith("person") ||
     type === "chicken" ||
     type === "cow" ||
-    (predatorProfile(type) !== undefined && predatorProfile(type)?.expansion?.habitat !== "deep")
+    predatorHasFootsteps(type)
   );
 }
 
