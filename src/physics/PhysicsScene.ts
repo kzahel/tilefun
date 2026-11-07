@@ -17,6 +17,7 @@ import {
 } from "./BodyRotation.js";
 import { DumpBedBody } from "./DumpBedBody.js";
 import { assistedJumpVelocity } from "./JumpAssist.js";
+import { playerClimbIntent } from "./Ladders.js";
 import { teleportBody } from "./PhysicalEdits.js";
 import { carryingSupportId, physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
 import {
@@ -419,13 +420,7 @@ export class PhysicsScene {
         continue;
       }
       if (entry.kind === "fixed") continue;
-      const submitted = intents.get(id) ?? { vx: 0, vy: 0 };
-      if (submitted.controlUntil === undefined) delete entry.state.controlUntil;
-      else entry.state.controlUntil = submitted.controlUntil;
-      const input =
-        submitted.controlUntil !== undefined && this.tick >= submitted.controlUntil
-          ? { vx: 0, vy: 0, jump: false }
-          : submitted;
+      const input = this.motorInput(entry, intents.get(id) ?? { vx: 0, vy: 0 }, geometry);
       entry.state.desiredVx = input.vx;
       entry.state.desiredVy = input.vy;
       if (input.altitude === undefined) delete entry.state.altitude;
@@ -563,6 +558,16 @@ export class PhysicsScene {
     for (const entry of this.bodies.values()) this.readBody(entry);
     for (const pair of this.couplings.pairs()) this.addContact(...pair);
     this.metrics.stepMs = performance.now() - started;
+  }
+
+  /** Expired network control holds still; players may climb ladders. */
+  private motorInput(entry: Body, submitted: MotionIntent, geometry: PhysicsGeometry) {
+    if (submitted.controlUntil === undefined) delete entry.state.controlUntil;
+    else entry.state.controlUntil = submitted.controlUntil;
+    const expired = submitted.controlUntil !== undefined && this.tick >= submitted.controlUntil;
+    const input = expired ? { vx: 0, vy: 0, jump: false } : submitted;
+    if (entry.entity.type !== "player") return input;
+    return playerClimbIntent(input, entry.state, entry.entity.collider, geometry);
   }
 
   private readBody(entry: Body) {

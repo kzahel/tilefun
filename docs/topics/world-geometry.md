@@ -274,6 +274,17 @@ interiors. [Patterns and interiors](patterns-and-interiors.md) owns the current
 per-building/floor realm and door-transition contracts; how to reconcile those
 with continuous connected spaces remains open. No realm migration is selected.
 
+## Ladders and an enterable tree house
+
+[Tactical 227](../tactical/227-tree-house-and-ladders.md) adds passable
+`PropCollider.ladder` columns. The shared physics step turns player intent into
+climbing (north-facing ladders only) using the existing prescribed-altitude
+motor. It also adds a presentation-only `PropCollider.room` volume, whose
+inside/outside sprite parts give a one-floor roof cutaway without a realm
+change. Sprite parts may declare the world-depth plane they depict (`depthDy`
+upright, `depthFloorZ` floor), so actors on raised art decks are not hidden by
+the GPU world raster. Lab: [tree house](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=tree-house#/tool/world-geometry).
+
 ## Next step and evaluation
 
 The user accepted the [train grade proof](../tactical/061-train-grade-proof.md)

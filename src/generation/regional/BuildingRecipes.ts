@@ -12,6 +12,12 @@ export interface FacadePiece {
   dx: number;
   /** Bottom of this piece relative to the building's feet. */
   dy: number;
+  /** World-depth plane relative to the building's feet, when not the piece's bottom. */
+  depthDy?: number;
+  /** World-depth floor height when the piece depicts a horizontal deck. */
+  depthFloorZ?: number;
+  /** Drawn only while the observer is outside / inside the prop's `room` volume. */
+  view?: "outside" | "inside";
 }
 export interface BuildingRecipe {
   type: string;

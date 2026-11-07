@@ -6,28 +6,14 @@ import {
   describeSurfaceSupport,
   type SurfaceVisibility,
 } from "../rendering/SurfacePresentation.js";
-import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import {
   GENERATED_CROSSINGS,
   generatedCrossingRecipe,
 } from "../scenarios/GeneratedCrossingRecipe.js";
-import { JUMP_STARTS, type JumpLane, jumpParkRecipe } from "../scenarios/JumpParkRecipe.js";
-import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
-import { realmPhysicsRecipe } from "../scenarios/RealmPhysicsRecipe.js";
-import {
-  crowdedRoadTrafficRecipe,
-  roadTrafficRecipe,
-  TRAFFIC_STARTS,
-} from "../scenarios/RoadTrafficRecipe.js";
+import { JUMP_STARTS, type JumpLane } from "../scenarios/JumpParkRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
-import { GARAGE_STARTS, undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
-import { DYNAMICS_STARTS, vehicleDynamicsRecipe } from "../scenarios/VehicleDynamicsRecipe.js";
-import {
-  VEHICLE_BRIDGE_STARTS,
-  VEHICLE_GARAGE_STARTS,
-  vehicleGeometryRecipe,
-} from "../scenarios/VehicleGeometryRecipe.js";
-import { GEOMETRY_STARTS, worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
+import { TREE_HOUSE_AT } from "../scenarios/TreeHouseRecipe.js";
+import { DYNAMICS_STARTS } from "../scenarios/VehicleDynamicsRecipe.js";
 import { required } from "../shared/required.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { RACE_MODELS } from "../traffic/VehiclePerformance.js";
@@ -36,6 +22,7 @@ import DeferredVehiclePage from "./DeferredVehiclePage.js";
 import { recordEquipment } from "./EquipmentDiagnostics.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
 import { TRAFFIC_FIXTURES } from "./TrafficFixtures.js";
+import { GeometryIntro, geometryRecipe, geometryStarts } from "./WorldGeometryFixtures.js";
 
 export type GeometryCanvas = HTMLCanvasElement & {
   __physicsSample?: ScenarioPresentationHost["session"]["samplePhysicsDiagnostics"];
@@ -50,6 +37,7 @@ const FIXTURES = [
   "car-garage",
   "car-dynamics",
   "car-jumps",
+  "tree-house",
   "realm",
   "traffic",
   "traffic-crowd",
@@ -101,6 +89,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
     );
   });
   const jumps = fixture === "car-jumps";
+  const treeHouse = fixture === "tree-house";
   const [reverse, setReverse] = useState(false),
     [paused, setPaused] = useState(false);
   const [visibility, setVisibility] = useState<SurfaceVisibility>("auto");
@@ -108,7 +97,6 @@ function GeometryFixtures({ initial }: { initial: string }) {
     [error, setError] = useState("");
   const settings = useRef({ paused, visibility, sounds });
   settings.current = { paused, visibility, sounds };
-  const garage = fixture === "garage" || fixture === "car-garage";
   const vehicle = fixture.startsWith("car-");
   const generatedIndex = GENERATED_CROSSINGS.findIndex((c) => fixture === `generated-${c.seed}`);
   const generated = useMemo(
@@ -117,54 +105,10 @@ function GeometryFixtures({ initial }: { initial: string }) {
   );
   const ambient = TRAFFIC_FIXTURES[fixture];
   const recipe = useMemo(
-    () =>
-      generated?.recipe ??
-      (fixture === "car-dynamics"
-        ? vehicleDynamicsRecipe(vehicleModel, route)
-        : jumps
-          ? jumpParkRecipe(vehicleModel, lane)
-          : fixture === "train"
-            ? cityTrainRecipe()
-            : fixture === "traffic-crowd"
-              ? crowdedRoadTrafficRecipe()
-              : fixture === "traffic"
-                ? roadTrafficRecipe()
-                : fixture === "realm"
-                  ? realmPhysicsRecipe(
-                      new URLSearchParams(location.search).has("crowd")
-                        ? Number(new URLSearchParams(location.search).get("crowd"))
-                        : undefined,
-                    )
-                  : vehicle
-                    ? vehicleGeometryRecipe(garage, reverse, vehicleModel)
-                    : fixture === "crossing"
-                      ? railCrossingRecipe()
-                      : garage
-                        ? undergroundGarageRecipe()
-                        : (ambient?.recipe() ?? worldGeometryRecipe())),
-    [generated, fixture, garage, vehicle, reverse, vehicleModel, route, jumps, lane, ambient],
+    () => geometryRecipe({ fixture, generated, ambient, vehicleModel, route, lane, reverse }),
+    [generated, fixture, reverse, vehicleModel, route, lane, ambient],
   );
-  const starts =
-    generated?.starts ??
-    (fixture === "train"
-      ? { bench: { position: recipe.player.position, z: 0 } }
-      : fixture === "traffic-crowd" || ambient
-        ? { sidewalk: { position: recipe.player.position, z: 0 } }
-        : fixture === "car-dynamics"
-          ? DYNAMICS_STARTS
-          : jumps
-            ? JUMP_STARTS
-            : fixture === "traffic"
-              ? TRAFFIC_STARTS
-              : vehicle
-                ? garage
-                  ? VEHICLE_GARAGE_STARTS
-                  : VEHICLE_BRIDGE_STARTS
-                : garage
-                  ? GARAGE_STARTS
-                  : fixture === "crossing"
-                    ? CROSSING_STARTS
-                    : GEOMETRY_STARTS);
+  const starts = geometryStarts({ fixture, generated, ambient }, recipe);
   // biome-ignore lint/correctness/useExhaustiveDependencies: restart deliberately replaces the Worker and canvas.
   useEffect(() => {
     const c = required(canvas.current);
@@ -184,13 +128,16 @@ function GeometryFixtures({ initial }: { initial: string }) {
         !!ambient ||
         fixture === "train" ||
         fixture === "car-dynamics" ||
-        jumps,
+        jumps ||
+        treeHouse,
       ...(vehicle || fixture === "realm" || fixture === "train"
         ? {}
         : {
             fixedCamera: generated
               ? { wx: generated.bridge.x * 16, wy: generated.bridge.y * 16 - 16 }
-              : (ambient?.camera ?? { wx: 0, wy: -16 }),
+              : treeHouse
+                ? { wx: TREE_HOUSE_AT.wx, wy: TREE_HOUSE_AT.wy - 72 }
+                : (ambient?.camera ?? { wx: 0, wy: -16 }),
           }),
       surfaceVisibility: () => settings.current.visibility,
       settings: () => ({
@@ -201,11 +148,13 @@ function GeometryFixtures({ initial }: { initial: string }) {
             ? 0.125
             : jumps
               ? 0.25
-              : fixture === "car-dynamics" || fixture === "train"
-                ? 0.4
-                : generated || fixture === "crossing" || fixture === "traffic"
-                  ? 0.225
-                  : 0.625),
+              : treeHouse
+                ? 1
+                : fixture === "car-dynamics" || fixture === "train"
+                  ? 0.4
+                  : generated || fixture === "crossing" || fixture === "traffic"
+                    ? 0.225
+                    : 0.625),
         terrainPacing: "throughput",
       }),
       input: () => ({
@@ -336,31 +285,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
   return (
     <section>
       <p className="eyebrow">SHARED GAME PHYSICS</p>
-      <h1>
-        {fixture === "traffic" ? "Driving and traffic" : jumps ? "Jump park" : "World geometry lab"}
-      </h1>
-      {jumps ? (
-        <p>
-          Five jump lanes, west to east: <b>kicker</b> with a curved lip, <b>sky</b> quarter-pipe
-          lip, straight <b>double</b>, long <b>tabletop</b> and <b>rollers</b>. Each lane button
-          restarts seated at its start line. ↑/W drives, ←/→ steer, hold Shift / RT / Boost for full
-          speed. Race-tuned cars are faster and boost harder. F / D-pad down rights an overturned
-          car; E gets out.
-        </p>
-      ) : (
-        <p>
-          {fixture === "traffic"
-            ? "Watch road cars follow lanes and wait at crossings, or drive the parked car beside the sidewalk. "
-            : "Walk ramps, cross bridges, pass underneath and drive freely rotating cars. "}
-          Arrows/WASD move, Space jumps, E enters or leaves a nearby car. Driving: ↑/W forward, ↓/S
-          reverse, ←/→ or A/D steer. R also reverses. Touch and controller use the same controls. F
-          / D-pad down rights an overturned car or works stopped equipment (dump bed, tow, ramp).
-          {fixture === "car-dynamics" &&
-            " Main lane: bridge ascent/descent. South: jump ramp. North: narrow tipping ledge and overlapping cars. Ramp and roof starts let you jump in place to inspect shadows and landing dust. "}
-          At a station bench, E / Interact calls the train; nearby vehicle roofs give a higher jump.
-          Bed, tow and transport starts set up each machine.
-        </p>
-      )}
+      <GeometryIntro fixture={fixture} />
       <label>
         Fixture{" "}
         <select

@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [227 Tree house and ladders](227-tree-house-and-ladders.md) | Lab delivered for owner/child play review: shared-physics ladder climbing, climbable 24px deck and enterable cabin with roof cutaway from unedited ME crops, sprite depth planes for raised decks; nature park next |
 | [226 Player views and local split screen](226-player-views-and-local-split-screen.md) | Direction agreed, research before phasing: per-player input/device router, multi-viewport rendering, one device session with seats and separate views, seats across online devices, up to four-player split screen; shared-screen leash and dynamic split are the long-term goal; labs move last |
 | [225 Speedway racers and shopping visits](225-speedway-racers-and-shopping-visits.md) | Delivered for owner play review: durable racer grid on both speedway rings and one shopping visit per center through ordinary traffic; native/build/lab capture pass |
 | [224 Shared-physics towing and transporter](224-shared-physics-towing-and-transporter.md) | Delivered for owner play review: tow joints, transporter deck/ramp body, secured carry, durable couplings and one equipment control; native/browser/build pass |

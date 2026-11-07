@@ -15,6 +15,12 @@ export interface PropCollider {
   walkableTop?: boolean;
   /** When true, this collider only affects walkable surface height — it does not block movement. */
   passable?: boolean;
+  /** Climbable column from zBase to zBase + zHeight, climbed facing north onto the
+   * walkable exit beside its north edge. Pair with `passable`; it is never solid. */
+  ladder?: true;
+  /** Enclosed room volume from zBase to zBase + zHeight. Presentation only: an
+   * observer inside draws this prop's `inside` sprite parts instead of `outside`. */
+  room?: true;
 }
 
 /**

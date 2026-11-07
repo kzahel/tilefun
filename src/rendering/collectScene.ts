@@ -1,9 +1,11 @@
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
+import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import type { Camera } from "./Camera.js";
+import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBladeRenderer.js";
 import type { ParticlePresentation } from "./ParticleSystem.js";
 import type { SceneFrame } from "./SceneFrame.js";
@@ -73,7 +75,16 @@ export function collectScene(
     items,
     grassVehicles,
   });
-  collectPropSprites(props, drawProps, world, cull, items, grassVehicles);
+  const observer = receiverOptions.observer;
+  collectPropSprites(
+    props,
+    drawProps,
+    world,
+    cull,
+    items,
+    grassVehicles,
+    observer && roomObserver(observer, alpha),
+  );
   if (grassVehicles) {
     // Share the owner's presentation clock (e.g. paused labs); frameless callers keep wall time.
     const nowSec = frame ? poseTime : performance.now() / 1000;
@@ -107,6 +118,41 @@ export function collectScene(
   return items;
 }
 
+interface RoomObserver {
+  wx: number;
+  wy: number;
+  z: number;
+}
+/** The observer's displayed footprint centre and feet height. */
+function roomObserver(observer: Entity, alpha: number): RoomObserver {
+  const p = interpolatePosition(observer.position, observer.prevPosition, alpha);
+  const c = observer.collider;
+  return {
+    wx: p.wx + (c?.offsetX ?? 0),
+    wy: p.wy + (c ? c.offsetY - c.height / 2 : 0),
+    z: interpolateWz(observer, alpha) ?? 0,
+  };
+}
+/** Presentation-only roof cutaway: is the observer within one of the prop's rooms? */
+export function observerInsideRoom(prop: Prop, observer: RoomObserver | undefined): boolean {
+  if (!observer) return false;
+  for (const c of prop.walls ?? []) {
+    if (!c.room || c.zHeight === undefined) continue;
+    const b = getEntityAABB(prop.position, c),
+      base = c.zBase ?? 0;
+    if (
+      observer.wx >= b.left &&
+      observer.wx <= b.right &&
+      observer.wy >= b.top &&
+      observer.wy <= b.bottom &&
+      observer.z >= base - 1 &&
+      observer.z <= base + c.zHeight
+    )
+      return true;
+  }
+  return false;
+}
+
 /** Props have no interpolation, no Z beyond terrain, and no shadows. */
 function collectPropSprites(
   props: readonly Prop[],
@@ -115,6 +161,7 @@ function collectPropSprites(
   cull: CullBounds,
   items: SceneItem[],
   grassVehicles: SpriteItem[] | undefined,
+  observer: RoomObserver | undefined,
 ): void {
   for (const p of props) {
     if (drawProps && !drawProps.has(p.id)) continue;
@@ -146,21 +193,38 @@ function collectPropSprites(
       flashHidden: false,
     } satisfies SpriteItem;
     const vehicle = grassVehicles && isVehicleSprite(p.type) ? grassVehicles : undefined;
-    if (p.sprite.parts) {
-      for (const part of p.sprite.parts) {
-        const partItem = {
-          ...baseItem,
-          ...part,
-          wx: p.position.wx + part.dx,
-          wy: p.position.wy + part.dy,
-        };
-        items.push(partItem);
-        vehicle?.push(partItem);
-      }
-    } else {
+    if (p.sprite.parts)
+      pushPropParts(p, p.sprite.parts, baseItem, elevOffset, observer, items, vehicle);
+    else {
       items.push(baseItem);
       vehicle?.push(baseItem);
     }
+  }
+}
+
+/** Atlas pieces share the prop's depth key; room views and depth planes are per piece. */
+function pushPropParts(
+  p: Prop,
+  parts: NonNullable<Prop["sprite"]["parts"]>,
+  baseItem: SpriteItem,
+  elevOffset: number,
+  observer: RoomObserver | undefined,
+  items: SceneItem[],
+  vehicle: SpriteItem[] | undefined,
+): void {
+  const inside = parts.some((part) => part.view) && observerInsideRoom(p, observer);
+  for (const { view, depthDy, depthFloorZ, ...part } of parts) {
+    if (view && (view === "inside") !== inside) continue;
+    const partItem: SpriteItem = {
+      ...baseItem,
+      ...part,
+      wx: p.position.wx + part.dx,
+      wy: p.position.wy + part.dy,
+    };
+    if (depthDy !== undefined) partItem.depthWy = p.position.wy + depthDy;
+    if (depthFloorZ !== undefined) partItem.depthFloorZ = elevOffset + depthFloorZ;
+    items.push(partItem);
+    vehicle?.push(partItem);
   }
 }
 

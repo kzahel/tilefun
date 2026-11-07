@@ -1,5 +1,9 @@
 # Embedded engine labs
 
+[227](../tactical/227-tree-house-and-ladders.md) adds the World Geometry `tree-house`
+fixture. Its ladder rule runs inside the shared physics step and its room cutaway
+lives in shared scene collection, so the game and labs behave the same.
+
 [223](../tactical/223-jump-park-and-race-tunes.md) adds the World Geometry `car-jumps`
 fixture: data-only jump profiles on ordinary surface patches and the shared Realm,
 seating the driver through the normal enter-vehicle command. No lab-only physics.

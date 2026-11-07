@@ -7,6 +7,7 @@ import { BOAT_MODEL } from "../boats/Boat.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
+import { DECK_Z, treeHouseProp } from "../entities/TreeHouse.js";
 import { createCurveTrain } from "../railway/CurveTrain.js";
 import { RailAlignment } from "../railway/RailPath.js";
 import { curvedTrackPath } from "../scenarios/CurvedTrainRecipe.js";
@@ -426,4 +427,39 @@ it.each([
   expect(result.kinds.sprite).toBeGreaterThan(20);
   if (variant.grass) expect(result.kinds.grass).toBeGreaterThan(0);
   if (variant.raster) expect(result.kinds.decal).toBeGreaterThan(0);
+});
+
+it("swaps a tree house's outside and inside parts by observer room and keeps floor depth", () => {
+  const house = treeHouseProp(200, 200);
+  house.id = 7;
+  const camera = new Camera();
+  camera.setViewport(600, 400);
+  camera.snapTo(200, 150);
+  const parts = (observer: Entity) =>
+    collectScene(
+      [observer],
+      [house],
+      world,
+      camera,
+      camera.getVisibleChunkRange(),
+      1,
+      terrain,
+      [],
+      false,
+      undefined,
+      undefined,
+      { observer },
+    ).filter((item) => item.kind === "sprite" && item.sheetKey === "me-complete");
+  const outside = parts(createPlayer(160, 260));
+  const inside = { ...createPlayer(200, 160), wz: DECK_Z };
+  const room = parts(inside);
+  // Canopy, deck band, ground band; inside: bare deck, three furnishings, ground band.
+  expect(outside).toHaveLength(3);
+  expect(room).toHaveLength(5);
+  for (const items of [outside, room]) {
+    const floor = items.find((item) => item.kind === "sprite" && item.depthFloorZ !== undefined);
+    expect(floor?.kind === "sprite" && floor.depthFloorZ).toBe(DECK_Z);
+  }
+  // A player standing on the porch, outside the cabin volume, keeps the roof.
+  expect(parts({ ...createPlayer(170, 185), wz: DECK_Z })).toHaveLength(3);
 });

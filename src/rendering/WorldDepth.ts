@@ -48,8 +48,9 @@ export function sceneDepth(ctx: RasterSurface, camera: Camera, item: SceneItem, 
     z = 0,
     horizontal = shadow;
   if (item.kind === "sprite") {
-    y = shadow ? item.shadowFeetWy : item.wy;
-    z = shadow ? item.shadowTerrainZ : item.zOffset;
+    y = shadow ? item.shadowFeetWy : (item.depthWy ?? item.wy);
+    z = shadow ? item.shadowTerrainZ : (item.depthFloorZ ?? item.zOffset);
+    horizontal ||= item.depthFloorZ !== undefined;
   } else if (item.kind === "elevation") {
     z = item.height * ELEVATION_PX;
     horizontal = item.phase === "surface";

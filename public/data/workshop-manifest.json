@@ -16665,6 +16665,16 @@
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
+      "id": "geometry:tree-house-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "Tree house: ladder climbing and an enterable cabin",
+      "prompt": "Climb the ladder, hang on, step onto the porch and walk into the cabin; judge climbing speed, the roof cutaway and getting back down. Shared physics; unedited Modern Exteriors crops placed for a lab experiment, not promoted art.",
+      "url": "/tilefun/workshop.html?geometry=tree-house#/tool/world-geometry",
+      "fingerprint": "b2e257e09fae7958dac33f5ae4cf9efeaa9b3362d6631caa0356d404c2bf0656",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
       "id": "geometry:road-traffic-v1",
       "batchId": "world-geometry",
       "kind": "geometry",
@@ -56238,5 +56248,5 @@
       }
     }
   ],
-  "inputDigest": "a34df1cf8fbbd0c1e3bdc18773e0c25538a40378ddade56d821d97c2e97ab846"
+  "inputDigest": "167e88490bec8446510eaa69eca403d2a06fd1faef0f0dd02ab46c59d0d20e4b"
 }

@@ -50,6 +50,11 @@ export interface SpriteItem {
   /** Interpolated world position (feet = bottom-center). */
   wx: number;
   wy: number;
+  /** Upright plane for world depth when the pixels do not stand at `wy`, such as a
+   * prop crop depicting a raised deck. Draw placement and ordering still use `wy`. */
+  depthWy?: number;
+  /** Pixels depict a horizontal floor at this height: world depth uses that plane. */
+  depthFloorZ?: number;
   /** Total visual Z in world pixels (lerped from wz, or terrain+jumpZ for props). */
   zOffset: number;
   /** Sprite sheet key. */

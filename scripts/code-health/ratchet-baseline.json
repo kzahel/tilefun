@@ -383,8 +383,8 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 1037,
-      "worst": 83,
+      "lines": 1042,
+      "worst": 79,
       "overLimit": 7
     },
     "src/physics/rapier/ClippedTerrain.ts": {
@@ -937,15 +937,10 @@
       "worst": 52,
       "overLimit": 1
     },
-    "src/workshop/WorldGeometryCandidate.ts": {
-      "lines": 118,
-      "worst": 49,
-      "overLimit": 1
-    },
     "src/workshop/WorldGeometryPage.tsx": {
-      "lines": 534,
-      "worst": 64,
-      "overLimit": 3
+      "lines": 459,
+      "worst": 33,
+      "overLimit": 2
     },
     "src/xr/XRSessionManager.ts": {
       "lines": 344,
