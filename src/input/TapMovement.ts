@@ -2,6 +2,7 @@ import { TILE_SIZE } from "../config/constants.js";
 import { unprojectPlane } from "../rendering/Projection.js";
 import type { RenderView } from "../rendering/RenderFrame.js";
 import type { Movement } from "../shared/Movement.js";
+import { regionPoint, type ViewRegion } from "./ViewRect.js";
 
 export type TouchMovementMode = "tap" | "hold" | "joystick";
 export function touchMovementMode(value: unknown): TouchMovementMode {
@@ -22,29 +23,38 @@ export class TapMovement {
   private stalled = 0;
   private lastPosition: { wx: number; wy: number } | null = null;
   private view: RenderView | null = null;
+  private region: ViewRegion = { x: 0, y: 0, width: 0, height: 0 };
   private plane = 0;
 
-  captureView(view: RenderView, plane: number): void {
+  /** The view taps resolve through: seat 0's presented camera and its region of the
+   * canvas (canvas pixels). A tap outside the region lands nowhere (226). */
+  captureView(
+    view: { readonly camera: RenderView; readonly region: ViewRegion },
+    plane: number,
+  ): void {
+    const { camera, region } = view;
     this.view = {
-      x: view.x,
-      y: view.y,
-      zoom: view.zoom,
-      viewportWidth: view.viewportWidth,
-      viewportHeight: view.viewportHeight,
-      pixelSnap: view.pixelSnap ?? false,
+      x: camera.x,
+      y: camera.y,
+      zoom: camera.zoom,
+      viewportWidth: camera.viewportWidth,
+      viewportHeight: camera.viewportHeight,
+      pixelSnap: camera.pixelSnap ?? false,
     };
+    this.region = { x: region.x, y: region.y, width: region.width, height: region.height };
     this.plane = plane;
   }
-  resolve(canvas: HTMLCanvasElement, clientX: number, clientY: number): TapTarget | null {
+  /** `anywhere`: a held contact that started in the view keeps steering outside it. */
+  resolve(
+    canvas: HTMLCanvasElement,
+    clientX: number,
+    clientY: number,
+    anywhere = false,
+  ): TapTarget | null {
     if (!this.view) return null;
-    const rect = canvas.getBoundingClientRect();
-    if (!rect.width || !rect.height) return null;
-    const p = unprojectPlane(
-      this.view,
-      ((clientX - rect.left) * this.view.viewportWidth) / rect.width,
-      ((clientY - rect.top) * this.view.viewportHeight) / rect.height,
-      this.plane,
-    );
+    const point = regionPoint(canvas, this.region, clientX, clientY, anywhere);
+    if (!point) return null;
+    const p = unprojectPlane(this.view, point.x, point.y, this.plane);
     return { ...p, wz: this.plane };
   }
   setTarget(target: TapTarget): void {

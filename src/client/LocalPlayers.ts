@@ -147,8 +147,7 @@ export class LocalPlayers implements PadPool {
     if (seat === undefined) return;
     event.preventDefault(); // Firefox's Quick Find would take the joining slash
     // Attached during this keydown, the scheme does not also see the joining press.
-    // Detaching it later resets the shared pad collector, as seat 0's blur does, so
-    // seat 0's pad then waits for its buttons to be released.
+    // It reads no pads, so clearing or detaching it leaves seat 0's pad alone.
     const keys = new ActionManager(seatKeyMap("right"));
     keys.disableGamepad();
     keys.attach();

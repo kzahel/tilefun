@@ -1,6 +1,10 @@
 import type { Movement } from "../shared/Movement.js";
 import type { ActionName } from "./ActionMap.js";
-import { CONTROLLER_HELD_ACTIONS, controllerAxes } from "./ControllerBindings.js";
+import {
+  CONTROLLER_HELD_ACTIONS,
+  controllerActionHint,
+  controllerAxes,
+} from "./ControllerBindings.js";
 import type { SeatActions } from "./SeatInput.js";
 
 /** Buttons a guest pad presses as actions (standard mapping, as seat 0's pad). */
@@ -8,8 +12,9 @@ const PRESSES: Partial<Record<number, PadPress>> = {
   0: "jump",
   3: "enter_place",
   9: "toggle_menu",
+  13: "vehicle_recover",
 };
-export type PadPress = "jump" | "enter_place" | "toggle_menu";
+export type PadPress = "jump" | "enter_place" | "toggle_menu" | "vehicle_recover";
 
 /** The parts of a `Gamepad` a seat reads. */
 export interface PadReading {
@@ -22,8 +27,8 @@ const STILL: Movement = { dx: 0, dy: 0, sprinting: false, jump: false };
 
 /**
  * One guest's pad as a seat's action set (226), polled with the page's pads.
- * Held actions and the stick follow seat 0's pad bindings; jump, enter and menu
- * fire on a fresh press. After joining, a clear or a menu, the pad acts again only
+ * Held actions and the stick follow seat 0's pad bindings; jump, enter, menu and
+ * equipment fire on a fresh press. After joining, a clear or a menu, the pad acts again only
  * once every button is released, so the press that joined does not also jump.
  */
 export class PadActions implements SeatActions {
@@ -86,6 +91,11 @@ export class PadActions implements SeatActions {
     }
     set.add(callback);
     return () => set.delete(callback);
+  }
+
+  /** The pad button for an action, as seat 0's pad hints label it ("Y"). */
+  hint(action: ActionName): string {
+    return controllerActionHint(action);
   }
 
   /** Forget held buttons; the pad acts again once every button is released. */

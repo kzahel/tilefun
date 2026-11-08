@@ -86,6 +86,19 @@ function harness() {
 }
 
 describe("world pinch arbitration", () => {
+  it("in split screen pinches only with fingers in seat 0's region (226)", () => {
+    const outside = harness();
+    outside.pinch.region = { x: 0, y: 0, width: 400, height: 600 };
+    outside.event("touchstart", [outside.touch(1), outside.touch(2, 500)]);
+    outside.event("touchmove", [outside.touch(1), outside.touch(2, 700)]);
+    expect(outside.setZoom).not.toHaveBeenCalled();
+    const inside = harness();
+    inside.pinch.region = { x: 0, y: 0, width: 400, height: 600 };
+    inside.event("touchstart", [inside.touch(1), inside.touch(2, 200)]);
+    inside.event("touchmove", [inside.touch(1), inside.touch(2, 300)]);
+    expect(inside.setZoom).toHaveBeenLastCalledWith(2);
+  });
+
   it("takes over a quick neutral touch, zooms both ways and suppresses release taps/movement", () => {
     const h = harness();
     h.event("touchstart", [h.touch(1)]);

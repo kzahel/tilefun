@@ -88,9 +88,9 @@ function playHarness(options: HarnessOptions = {}) {
     setPredictor: () => {},
   };
   const camera = new Camera();
-  camera.setViewport(800, 600);
   const session = new DeviceSession(view as unknown as RemoteStateView);
   const seatView = new View(followSeat(), camera);
+  seatView.setRegion({ x: 0, y: 0, width: 800, height: 600 }); // the whole canvas
   session.views.push(seatView);
   const audioManager = silentAudio();
   const actions = new ActionManager();
@@ -98,7 +98,7 @@ function playHarness(options: HarnessOptions = {}) {
   const host = {
     currentScene: scene,
     stateView: view as unknown as RemoteStateView,
-    camera,
+    view: seatView,
     transport,
     audioManager: audioManager as never,
     doorBusy: false,
@@ -181,6 +181,7 @@ function playHarness(options: HarnessOptions = {}) {
     view,
     player,
     camera,
+    seatView,
     canvas,
     sent,
     entered,
@@ -641,7 +642,7 @@ function pointerEvent(type: string, init: Record<string, unknown>): Event {
 /** Settle the camera on the player, then record that view for tap/hold resolution. */
 function framePlayer(h: ReturnType<typeof playHarness>): void {
   h.step(120);
-  h.input.tapMovement.captureView(h.camera, 0);
+  h.input.tapMovement.captureView(h.seatView, 0);
   h.take();
 }
 
@@ -842,6 +843,8 @@ function guestDevices(movement = { dx: -1, dy: 0, sprinting: false, jump: false 
     },
     clear: vi.fn(),
     dispose: vi.fn(),
+    on: () => () => {},
+    hint: () => "",
   };
   return devices satisfies SeatInput;
 }
@@ -997,5 +1000,50 @@ describe("split screen on the play path (226 slice 5-ii-a)", () => {
     const layout = vi.spyOn(h.gc.session, "layoutViews");
     h.scene.onExit(h.gc);
     expect(layout).toHaveBeenLastCalledWith(h.canvas.width, h.canvas.height, false);
+  });
+});
+
+describe("seat 0's region on the play path (226 slice 5-ii-b)", () => {
+  /** Two players side by side: seat 0 keeps the left half of the 800×600 canvas. */
+  function leftHalf(options: HarnessOptions = {}) {
+    const h = playHarness(options);
+    h.seatView.setRegion({ x: 0, y: 0, width: 400, height: 600 });
+    framePlayer(h);
+    return h;
+  }
+  /** Client pixels of a canvas pixel (the canvas is shown at half size, offset 10, 20). */
+  const client = (x: number, y: number) => ({ clientX: 10 + x / 2, clientY: 20 + y / 2 });
+
+  it("a click in a guest's region does nothing; one in seat 0's resolves through its view", () => {
+    const h = leftHalf();
+    h.canvas.dispatchEvent(pointerEvent("click", client(600, 300)));
+    expect(h.take()).toEqual([]);
+    h.canvas.dispatchEvent(pointerEvent("click", client(200, 300)));
+    const world = h.camera.screenToWorld(200, 300);
+    expect(h.take()).toEqual([{ type: "player-interact", wx: world.wx, wy: world.wy }]);
+    // Seat 0's view is centred on its player in its own half, not the canvas.
+    expect(world.wx).toBeCloseTo(100, 0);
+  });
+
+  it("taps and holds that start in a guest's region set no destination", () => {
+    const tap = leftHalf({ movementMode: "tap" });
+    tap.canvas.dispatchEvent(pointerEvent("click", client(600, 300)));
+    expect(tap.gc.tapMovement?.target).toBeNull();
+    tap.canvas.dispatchEvent(pointerEvent("click", client(300, 300)));
+    expect(tap.gc.tapMovement?.target?.wx).toBeGreaterThan(100);
+
+    const hold = leftHalf({ movementMode: "hold" });
+    hold.canvas.dispatchEvent(pointerEvent("mousedown", { button: 0, ...client(700, 300) }));
+    hold.step();
+    expect(hold.lastInput()).toMatchObject({ dx: 0, dy: 0 });
+    hold.canvas.dispatchEvent(pointerEvent("mouseup", { button: 0, ...client(700, 300) }));
+    hold.canvas.dispatchEvent(pointerEvent("mousedown", { button: 0, ...client(300, 300) }));
+    hold.step();
+    expect(hold.lastInput()).toMatchObject({ dx: 1, dy: 0 });
+    // A hold that started in seat 0's view keeps steering when it drifts out of it
+    // (as one dragged off an embedded lab's canvas always has).
+    window.dispatchEvent(pointerEvent("mousemove", { buttons: 1, ...client(700, 300) }));
+    hold.step();
+    expect(hold.lastInput()).toMatchObject({ dx: 1, dy: 0 });
   });
 });

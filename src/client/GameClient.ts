@@ -569,25 +569,19 @@ export class GameClient implements GameTestHooks {
   private bindActions(): void {
     this.actions.on("toggle_world_map", () => this.toggleWorldMap());
     this.actions.on("toggle_menu", () => {
-      if (this.scenes.current instanceof WorldMapScene) {
-        this.scenes.pop();
-        return;
-      }
-      if (this.scenes.has(CatalogScene)) {
-        this.scenes.pop();
-        return;
-      }
-      if (this.scenes.has(InteriorCatalogScene)) {
-        this.scenes.pop();
-        return;
-      }
-      if (this.scenes.has(MenuScene)) {
-        this.scenes.pop();
-      } else {
+      // The map, a catalog or the menu closes; otherwise the menu opens.
+      const { scenes } = this;
+      if (
+        scenes.current instanceof WorldMapScene ||
+        scenes.has(CatalogScene) ||
+        scenes.has(InteriorCatalogScene) ||
+        scenes.has(MenuScene)
+      )
+        scenes.pop();
+      else
         void this.session
           .toggleMenu()
           .catch((error) => this.consoleEngine.output.printError(String(error)));
-      }
     });
     this.actions.on("toggle_debug", () => {
       if (this.overlayOpen()) return;
@@ -666,13 +660,13 @@ export class GameClient implements GameTestHooks {
   }
 
   /** Send a request and resolve the response with its matching requestId. */
-  gcSendRequest<R extends RequestMessage>(msg: R): Promise<RequestResponse<R>> {
+  gcSendRequest<R extends RequestMessage>(msg: R, seat = 0): Promise<RequestResponse<R>> {
     if (
       this.adminToken &&
       ["create-world", "recreate-world", "delete-world", "rename-world", "rcon"].includes(msg.type)
     )
       return this.requests.send({ ...msg, adminToken: this.adminToken });
-    return this.requests.send(msg);
+    return this.requests.send(msg, seat);
   }
 
   private showWorldIdentity(generation: GenerationDescriptor): void {
@@ -692,7 +686,7 @@ export class GameClient implements GameTestHooks {
       get stateView() {
         return client.stateView;
       },
-      camera: this.camera,
+      view: this.view,
       transport: this.transport,
       get audioManager() {
         return client.audioManager;
@@ -722,6 +716,8 @@ export class GameClient implements GameTestHooks {
         return client.stateView;
       },
       doorPresentation: this.doorPresentation,
+      session: this.device,
+      canvas: this.canvas,
       get playing() {
         return client.scenes.current instanceof PlayScene;
       },
@@ -745,7 +741,8 @@ export class GameClient implements GameTestHooks {
         return scene instanceof PlayScene ? scene.lastMovement : client.actions.getMovement();
       },
       clearPlayInput: (sendNeutral) => this.playInput.clearPlayInput(sendNeutral),
-      request: (message) => this.gcSendRequest({ ...message, requestId: this.nextRequestId++ }),
+      request: (message, seat) =>
+        this.gcSendRequest({ ...message, requestId: this.nextRequestId++ }, seat),
     };
   }
 

@@ -5,13 +5,12 @@
  * in CSS pixels relative to the canvas, then draw scaled into canvas pixels.
  */
 
-/** A region of the canvas in CSS pixels, relative to its top-left corner. */
-export interface ViewRegion {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
+import type { RenderRegion } from "../rendering/ViewLayout.js";
+
+/** A region of the canvas in CSS pixels, relative to its top-left corner: the
+ * rectangle of a view's `RenderRegion` (canvas pixels) as touch input reads it
+ * (`cssRegion`). */
+export type ViewRegion = Pick<RenderRegion, "x" | "y" | "width" | "height">;
 
 interface CanvasLike {
   width: number;
@@ -47,6 +46,63 @@ export function wholeCanvas(canvas: CanvasLike): ViewRegion {
     width: canvas.clientWidth || canvas.width,
     height: canvas.clientHeight || canvas.height,
   };
+}
+
+/** A view's region (canvas pixels) in CSS pixels of the canvas. */
+export function cssRegion(canvas: CanvasLike, region: ViewRegion): ViewRegion {
+  const scale = canvasScale(canvas);
+  return {
+    x: region.x / scale.x,
+    y: region.y / scale.y,
+    width: region.width / scale.x,
+    height: region.height / scale.y,
+  };
+}
+
+/** A client-space point in canvas pixels relative to a view's region (canvas
+ * pixels), or undefined outside it (unless `anywhere`): where a tap or click lands
+ * in that view. */
+export function regionPoint(
+  canvas: CanvasLike,
+  region: ViewRegion,
+  clientX: number,
+  clientY: number,
+  anywhere = false,
+): { x: number; y: number } | undefined {
+  const rect = canvas.getBoundingClientRect?.();
+  if (rect && (!rect.width || !rect.height)) return undefined;
+  const x = (clientX - (rect?.left ?? 0)) * (rect?.width ? canvas.width / rect.width : 1);
+  const y = (clientY - (rect?.top ?? 0)) * (rect?.height ? canvas.height / rect.height : 1);
+  const local = { x: x - region.x, y: y - region.y };
+  return anywhere || inRegion({ ...region, x: 0, y: 0 }, local) ? local : undefined;
+}
+
+/** A view region's distance from the page's left, right and bottom edges in CSS
+ * pixels: page controls fixed to those edges move inside the view by it. */
+export interface PageInset {
+  left: number;
+  right: number;
+  bottom: number;
+}
+
+export const NO_INSET: PageInset = { left: 0, right: 0, bottom: 0 };
+
+export function pageInset(
+  canvas: CanvasLike,
+  region: ViewRegion,
+  page: { width: number; height: number },
+): PageInset {
+  const rect = canvas.getBoundingClientRect?.();
+  const css = cssRegion(canvas, region);
+  const left = (rect?.left ?? 0) + css.x;
+  const top = (rect?.top ?? 0) + css.y;
+  return { left, right: page.width - left - css.width, bottom: page.height - top - css.height };
+}
+
+/** Move a fixed page control by CSS pixels; none leaves it at its own place. */
+export function shift(element: HTMLElement, x: number, y: number): void {
+  const value = Math.round(x) || Math.round(y) ? `${Math.round(x)}px ${Math.round(y)}px` : "";
+  if (element.style.translate !== value) element.style.translate = value;
 }
 
 export function inRegion(region: ViewRegion, point: { x: number; y: number }): boolean {

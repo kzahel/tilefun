@@ -17,7 +17,9 @@ export class TouchHold {
   constructor(
     private canvas: HTMLCanvasElement,
     private claimed: Set<number>,
-    private resolve: (x: number, y: number) => TapTarget | null,
+    /** A contact's ground point; `held` once it has started, when a point outside
+     * the view it started in still steers (only starts are limited to the view). */
+    private resolve: (x: number, y: number, held?: boolean) => TapTarget | null,
   ) {}
 
   attach(): void {
@@ -62,7 +64,7 @@ export class TouchHold {
     if (!contact) return manual;
     // Resolve every sample against the latest presented view: holding a screen
     // direction keeps walking as the camera follows, rather than arriving at a tap.
-    const target = this.resolve(contact.x, contact.y);
+    const target = this.resolve(contact.x, contact.y, true);
     if (!target) {
       this.reset();
       return manual;

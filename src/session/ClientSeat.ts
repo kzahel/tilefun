@@ -10,6 +10,8 @@ import type { ClientMessage } from "../shared/protocol.js";
 export class ClientSeat {
   /** Replaced when a new play scene starts the seat afresh. */
   composer = new SeatComposer();
+  /** The place prompts a guest's view shows ("Drive car · '"); seat 0's are page controls. */
+  prompts: readonly string[] = [];
   private jumpLatched = false;
   private cancelled = false;
 

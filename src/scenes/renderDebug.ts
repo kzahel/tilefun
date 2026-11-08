@@ -6,6 +6,7 @@ import { drawOverlayGeometry } from "../rendering/CanvasOverlayRenderer.js";
 import { drawCollisionDebug } from "../rendering/CollisionDebug.js";
 import { drawDebugOverlay } from "../rendering/DebugRenderer.js";
 import { CollisionFlag, TileId } from "../world/TileRegistry.js";
+import { inHostView } from "./playViews.js";
 
 // ── 3D debug renderer (lazy-loaded) ──
 
@@ -57,7 +58,8 @@ let currentFps = 0;
 let lastBytesReceived = 0;
 let currentNetKbps = 0;
 
-/** Update FPS counter and render the debug overlay if enabled. */
+/** Update the FPS counter and draw the debug overlay if enabled, inside seat 0's
+ * view (its region in split screen). */
 export function renderDebugOverlay(gc: GameContext, alpha = 1): void {
   // FPS tracking
   frameCount++;
@@ -82,7 +84,16 @@ export function renderDebugOverlay(gc: GameContext, alpha = 1): void {
   const anyCvar = showFps || showBboxes || showChunks || showGrid;
 
   if (!gc.debugEnabled && !anyCvar) return;
+  const flags = { showFps, showBboxes, showChunks, showGrid };
+  inHostView(gc, () => drawDebug(gc, alpha, flags));
+}
 
+function drawDebug(
+  gc: GameContext,
+  alpha: number,
+  flags: { showFps: boolean; showBboxes: boolean; showChunks: boolean; showGrid: boolean },
+): void {
+  const { showFps, showBboxes, showChunks, showGrid } = flags;
   const { ctx, camera, stateView } = gc;
   const entities = stateView.entities;
   const observer =

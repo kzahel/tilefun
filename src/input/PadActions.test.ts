@@ -30,15 +30,17 @@ describe("a guest's pad actions (226)", () => {
     expect(jumps.length).toBe(1);
   });
 
-  it("presses fire on a fresh press: enter, menu and a latched horn", () => {
+  it("presses fire on a fresh press: enter, menu, equipment and a latched horn", () => {
     const actions = new PadActions(2);
     const fired: string[] = [];
-    for (const press of ["enter_place", "toggle_menu"] as const)
+    for (const press of ["enter_place", "toggle_menu", "vehicle_recover"] as const)
       actions.on(press, () => fired.push(press));
     actions.poll(pad(), false);
-    actions.poll(pad([3, 9, 5]), false);
-    actions.poll(pad([3, 9, 5]), false);
-    expect(fired).toEqual(["enter_place", "toggle_menu"]);
+    actions.poll(pad([3, 9, 5, 13]), false);
+    actions.poll(pad([3, 9, 5, 13]), false);
+    expect(fired).toEqual(["enter_place", "toggle_menu", "vehicle_recover"]);
+    // Its prompts label seat 0's pad buttons.
+    expect([actions.hint("enter_place"), actions.hint("vehicle_recover")]).toEqual(["Y", "D↓"]);
     expect([
       actions.isHeld("honk"),
       actions.consumeHornPress(),

@@ -10789,7 +10789,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/ui/DoorControl.ts:82"
+          "source": "src/ui/PlacePrompts.ts:90"
         }
       ]
     },
@@ -11307,7 +11307,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/ui/DoorControl.ts:80"
+          "source": "src/ui/PlacePrompts.ts:89"
         }
       ]
     },
@@ -35431,11 +35431,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LocalPlayers.ts:186"
+          "source": "src/client/LocalPlayers.ts:185"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LocalPlayers.ts:189"
+          "source": "src/client/LocalPlayers.ts:188"
         },
         {
           "system": "Gameplay",
@@ -37865,7 +37865,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/ui/DoorControl.ts:82"
+          "source": "src/ui/PlacePrompts.ts:90"
         }
       ]
     },

@@ -370,7 +370,7 @@ export class PlayScene implements GameScene {
       presentViews(gc, alpha);
 
       const shown = view?.presentedPlayerEntity ?? gc.stateView.playerEntity;
-      gc.tapMovement?.captureView(gc.camera, Math.max(0, (shown.wz ?? 0) - (shown.jumpZ ?? 0)));
+      gc.tapMovement?.captureView(gc.view, Math.max(0, (shown.wz ?? 0) - (shown.jumpZ ?? 0)));
 
       const firstPerson = renderSoloFirstPerson(gc, alpha);
       if (!firstPerson) {

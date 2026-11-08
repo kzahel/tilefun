@@ -1,23 +1,21 @@
-import type { ClientStateView } from "../client/ClientStateView.js";
 import { actionHint, inputHint, movementKeysHint } from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
-import { nearestStationBench } from "../railway/StationBench.js";
+import { type PageInset, shift } from "../input/ViewRect.js";
 import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
-import { occupiedVehicle } from "../traffic/VehicleSeats.js";
-import { driveCandidate, type EquipmentRequest, equipmentPrompt } from "./VehicleEquipment.js";
+import {
+  type PlaceView,
+  type VehicleChoice,
+  type VehicleRequest,
+  vehicleChoice,
+} from "./PlacePrompts.js";
 
-export type VehicleRequest =
-  | { type: "call-train"; benchId: number }
-  | { type: "enter-vehicle"; entityId: number }
-  | { type: "exit-vehicle" }
-  | EquipmentRequest;
 /** Basic land-vehicle interactions, shared by touch, keyboard and controller: the
  * primary seat button plus one contextual equipment button (right car / dump bed). */
 export class VehicleControl {
   readonly root = document.createElement("div");
   readonly button = document.createElement("button");
   readonly equipmentButton = document.createElement("button");
-  private equipment: ReturnType<typeof equipmentPrompt> = null;
+  private equipment: VehicleChoice["equipment"] = null;
   private status = document.createElement("p");
   private request: VehicleRequest | null = null;
   private busy = false;
@@ -42,70 +40,41 @@ export class VehicleControl {
     document.body.append(this.root);
   }
   update(
-    view: ClientStateView,
+    view: PlaceView,
     allowed: boolean,
     locked: boolean,
     movementMode: TouchMovementMode = "joystick",
     carDriving: CarDrivingStyle = DEFAULT_CAR_DRIVING,
   ): boolean {
-    const p = view.playerEntity,
-      entities = view.entities,
-      current = occupiedVehicle(p, entities);
-    const candidate = current ?? driveCandidate(p, entities);
-    const equipment = equipmentPrompt(view, allowed);
+    const choice = vehicleChoice(view, allowed);
+    const { equipment } = choice;
     this.equipment = equipment;
     this.equipmentButton.hidden = !equipment;
     this.equipmentButton.style.display = equipment ? "" : "none";
     this.equipmentButton.disabled = this.busy || locked;
     if (equipment)
       this.equipmentButton.textContent = `${equipment.label} · ${actionHint("vehicle_recover") || "F"}`;
-    const bench = !current && !candidate ? nearestStationBench(p, view.props) : undefined;
-    const key = current
-      ? `inside:${current.id}`
-      : candidate
-        ? `near:${candidate.id}`
-        : equipment
-          ? `${equipment.request.type}:${equipment.request.entityId}`
-          : bench
-            ? `station:${bench.id}`
-            : "";
-    if (key !== this.targetKey) {
+    if (choice.key !== this.targetKey) {
       this.status.textContent = "";
       this.error = false;
-      this.targetKey = key;
+      this.targetKey = choice.key;
     }
-    this.request =
-      allowed && !view.editorEnabled
-        ? current
-          ? { type: "exit-vehicle" }
-          : candidate
-            ? { type: "enter-vehicle", entityId: candidate.id }
-            : bench
-              ? { type: "call-train", benchId: bench.id }
-              : null
-        : null;
+    this.request = choice.request;
     this.root.hidden = !this.request && !equipment;
     this.button.hidden = !this.request;
     this.button.style.display = this.request ? "" : "none";
     this.button.disabled = this.busy || locked;
     const hint = actionHint("enter_place");
-    this.button.textContent = `${current ? "Get out" : bench ? "Call train" : "Drive car"}${hint ? ` · ${hint}` : ""}`;
-    if (current && !this.busy && !this.error)
-      this.status.textContent =
-        (carDriving === "steering"
-          ? inputHint("↑/↓ Forward/Reverse · ←/→ Steer", "Stick ↑/↓ Forward/Reverse · ←/→ Steer")
-          : inputHint(
-              `${movementKeysHint()} / arrows · aim behind to reverse`,
-              "Left stick · aim behind to reverse",
-            )) ||
-        (movementMode === "hold"
-          ? "Hold a direction · aim behind to reverse"
-          : movementMode === "tap"
-            ? "Tap a destination · tap behind to reverse"
-            : carDriving === "steering"
-              ? "Joystick ↑/↓ Forward/Reverse · ←/→ Steer"
-              : "Drag a direction · aim behind to reverse");
+    this.button.textContent = `${choice.label}${hint ? ` · ${hint}` : ""}`;
+    if (choice.inside && !this.busy && !this.error)
+      this.status.textContent = drivingHint(movementMode, carDriving);
     return !!this.request || !!equipment;
+  }
+  /** Seat 0's page controls sit inside its view in split screen. */
+  place(inset: PageInset): void {
+    shift(this.root, inset.left, -inset.bottom);
+    shift(this.button, -inset.right, -inset.bottom);
+    shift(this.equipmentButton, -inset.right, -inset.bottom);
   }
   activateEquipment(): boolean {
     if (this.equipmentButton.disabled) return !!this.equipment;
@@ -148,4 +117,23 @@ export class VehicleControl {
     this.button.remove();
     this.root.remove();
   }
+}
+
+/** How to drive, for the device in use (touch: the chosen movement mode). */
+function drivingHint(movementMode: TouchMovementMode, carDriving: CarDrivingStyle): string {
+  return (
+    (carDriving === "steering"
+      ? inputHint("↑/↓ Forward/Reverse · ←/→ Steer", "Stick ↑/↓ Forward/Reverse · ←/→ Steer")
+      : inputHint(
+          `${movementKeysHint()} / arrows · aim behind to reverse`,
+          "Left stick · aim behind to reverse",
+        )) ||
+    (movementMode === "hold"
+      ? "Hold a direction · aim behind to reverse"
+      : movementMode === "tap"
+        ? "Tap a destination · tap behind to reverse"
+        : carDriving === "steering"
+          ? "Joystick ↑/↓ Forward/Reverse · ←/→ Steer"
+          : "Drag a direction · aim behind to reverse")
+  );
 }

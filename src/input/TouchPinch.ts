@@ -1,3 +1,5 @@
+import { canvasPoint, inRegion, type ViewRegion } from "./ViewRect.js";
+
 const SECOND_FINGER_MS = 200;
 const MOVE_THRESHOLD = 8;
 const MIN_DISTANCE = 20;
@@ -7,6 +9,8 @@ export class TouchPinch {
   private first: { id: number; x: number; y: number; time: number } | null = null;
   private gesture: { ids: number[]; distance: number; zoom: number } | null = null;
   private owned = new Set<number>();
+  /** Only fingers in this region (CSS px of the canvas) pinch; null = whole canvas. */
+  region: ViewRegion | null = null;
 
   constructor(
     private canvas: HTMLCanvasElement,
@@ -41,6 +45,10 @@ export class TouchPinch {
     this.owned.clear();
   }
 
+  private within(t: Touch): boolean {
+    return !this.region || inRegion(this.region, canvasPoint(this.canvas, t.clientX, t.clientY));
+  }
+
   private claim(touches: Touch[]): void {
     for (const t of touches) {
       if (t.target !== this.canvas || this.claimed.has(t.identifier)) continue;
@@ -61,7 +69,9 @@ export class TouchPinch {
     if (
       !this.allowed() ||
       this.joystickMoving() ||
-      touches.some((t) => t.target !== this.canvas || this.claimed.has(t.identifier))
+      touches.some(
+        (t) => t.target !== this.canvas || this.claimed.has(t.identifier) || !this.within(t),
+      )
     ) {
       this.first = null;
       return;

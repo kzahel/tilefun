@@ -1,7 +1,15 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { TouchButtons } from "./TouchButtons.js";
 import { TouchJoystick } from "./TouchJoystick.js";
-import { canvasPoint, canvasScale, viewAt, wholeCanvas } from "./ViewRect.js";
+import {
+  canvasPoint,
+  canvasScale,
+  cssRegion,
+  pageInset,
+  regionPoint,
+  viewAt,
+  wholeCanvas,
+} from "./ViewRect.js";
 
 afterEach(() => vi.unstubAllGlobals());
 
@@ -61,6 +69,22 @@ describe("view rectangles", () => {
     expect(
       viewAt([halves[0], { x: 0, y: 0, width: 480, height: 320 }] as never, { x: 1, y: 1 }),
     ).toBe(1);
+  });
+
+  it("reads a view's render region in CSS pixels, as client points and as page insets (226)", () => {
+    const canvas = labCanvas(); // 960×640 canvas pixels shown at 480×320, at (100, 50)
+    const right = { x: 480, y: 0, width: 480, height: 640 }; // the right half
+    expect(cssRegion(canvas, right)).toEqual({ x: 240, y: 0, width: 240, height: 320 });
+    // A click at CSS (250, 10) of the canvas is canvas pixel (500, 20): 20 into the region.
+    expect(regionPoint(canvas, right, 100 + 250, 50 + 10)).toEqual({ x: 20, y: 20 });
+    expect(regionPoint(canvas, right, 100 + 230, 50 + 10)).toBeUndefined();
+    expect(regionPoint(canvas, right, 100 + 480, 50 + 10)).toBeUndefined();
+    // In a 1000×600 page the right half's box spans CSS x 340..580 and y 50..370.
+    expect(pageInset(canvas, right, { width: 1000, height: 600 })).toEqual({
+      left: 340,
+      right: 420,
+      bottom: 230,
+    });
   });
 
   it("a joystick in a scaled, offset canvas steers by finger travel and draws under the finger", () => {

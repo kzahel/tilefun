@@ -35,6 +35,8 @@ async function join(session: DeviceSession, seat: number) {
     sample: () => ({}) as never,
     clear: () => {},
     dispose: () => {},
+    on: () => () => {},
+    hint: () => "",
   });
 }
 

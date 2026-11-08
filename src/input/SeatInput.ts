@@ -41,15 +41,24 @@ export interface SeatInput {
   clear(): void;
   /** Remove listeners (the seat left). */
   dispose(): void;
+  /** A fresh press of the seat's enter or equipment key (its place controls). */
+  on(action: SeatPlacePress, callback: () => void): () => void;
+  /** The label of the seat's own key or button for an action ("'" or "Y"). */
+  hint(action: ActionName): string;
 }
+
+/** Presses a guest's place controls listen for. */
+export type SeatPlacePress = "enter_place" | "vehicle_recover";
 
 /** The action-set calls a seat reads (an `ActionManager` for one scheme or pad). */
 export interface SeatActions {
   getMovement(normalizeDiagonal: boolean): Movement;
   isHeld(action: ActionName): boolean;
   consumeHornPress(): boolean;
-  on(action: "jump", callback: () => void): () => void;
+  on(action: "jump" | SeatPlacePress, callback: () => void): () => void;
   clearHeld(): void;
+  /** The label of this set's key or button for an action. */
+  hint(action: ActionName): string;
 }
 
 /** A seat's input set over one action set: movement, presses and a latched jump.
@@ -90,5 +99,13 @@ export class ActionSeatInput implements SeatInput {
   dispose(): void {
     this.off();
     this.release?.();
+  }
+
+  on(action: SeatPlacePress, callback: () => void): () => void {
+    return this.actions.on(action, callback);
+  }
+
+  hint(action: ActionName): string {
+    return this.actions.hint(action);
   }
 }

@@ -1,4 +1,5 @@
 import type { GameContext } from "../core/GameScene.js";
+import { cssRegion } from "../input/ViewRect.js";
 import { projectWorld } from "../rendering/Projection.js";
 import { layoutViews } from "../rendering/ViewLayout.js";
 import { seatBody } from "../session/SeatFocus.js";
@@ -22,6 +23,10 @@ export function beginViewTick(gc: GameContext): readonly View[] {
     view.camera.savePrev();
     view.camera.zoom = gc.debugPanel.zoom * view.zoomScale;
   }
+  // Seat 0's touch controls and gestures stay inside its view (the whole canvas alone).
+  const touch = views.length > 1 ? cssRegion(gc.canvas, gc.view.region) : null;
+  gc.touchJoystick.region = gc.touchButtons.region = touch;
+  if (gc.touchPinch) gc.touchPinch.region = touch;
   return views;
 }
 
@@ -116,6 +121,7 @@ export function drawViewOverlays(gc: GameContext, alpha: number): void {
       const own = view.seat === 0 ? gc.stateView.playerEntity.id : seatEntityId(gc, view.seat);
       drawPlayerMarkers({ ctx, camera: view.camera, stateView: gc.stateView }, alpha, own);
       if (split) drawSeatBadge(gc, view);
+      if (view.seat !== 0) drawSeatPrompts(gc, view);
     } finally {
       ctx.restore();
     }
@@ -176,8 +182,58 @@ function drawSeatBadge(gc: GameContext, view: View): void {
   ctx.fillText(count, iconX + 24, top + 16);
 }
 
-/** Seat 0's tap or hold destination, in its view (at the canvas origin in every layout). */
+/** A guest's place prompts at the bottom of its view, nearest the player last
+ * (seat 0's are page controls inside its view). */
+function drawSeatPrompts(gc: GameContext, view: View): void {
+  const lines = gc.session.seats.get(view.seat)?.prompts ?? [];
+  if (!lines.length) return;
+  const { ctx } = gc;
+  ctx.font = "15px system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  const centre = view.region.width / 2;
+  let top = view.region.height - 16 - lines.length * 36;
+  for (const line of lines) {
+    const width = Math.min(view.region.width - 24, ctx.measureText(line).width + 24);
+    ctx.fillStyle = "#243a32ee";
+    ctx.strokeStyle = "#c5d3b6";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.roundRect(centre - width / 2, top, width, 30, 6);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = "#ffffff";
+    ctx.fillText(line, centre, top + 15, width - 16);
+    top += 36;
+  }
+}
+
+/** Draw seat 0's own overlays inside its view's region (clipped in split screen). */
+export function inHostView(gc: GameContext, draw: () => void): void {
+  if (gc.session.views.length < 2) {
+    draw();
+    return;
+  }
+  const { ctx } = gc;
+  const { x, y, width, height } = gc.view.region;
+  ctx.save();
+  try {
+    ctx.beginPath();
+    ctx.rect(x, y, width, height);
+    ctx.clip();
+    ctx.translate(x, y);
+    draw();
+  } finally {
+    ctx.restore();
+  }
+}
+
+/** Seat 0's tap or hold destination, in its view. */
 export function drawTapDestination(gc: GameContext): void {
+  inHostView(gc, () => drawDestination(gc));
+}
+
+function drawDestination(gc: GameContext): void {
   const controller = gc.tapMovement;
   const target = controller?.target ?? (controller?.blockedFade ? controller.blockedTarget : null);
   if (!target) {

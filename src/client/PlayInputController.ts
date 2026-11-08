@@ -8,8 +8,9 @@ import { TouchHold } from "../input/TouchHold.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import { TouchPinch } from "../input/TouchPinch.js";
 import { TouchTap } from "../input/TouchTap.js";
-import type { Camera } from "../rendering/Camera.js";
+import { regionPoint } from "../input/ViewRect.js";
 import { PlayScene } from "../scenes/PlayScene.js";
+import type { View } from "../session/View.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import type { IClientTransport } from "../transport/Transport.js";
@@ -24,7 +25,8 @@ export interface PlayInputHost {
   /** Top scene, or undefined while the client is still constructing. */
   readonly currentScene: GameScene | null | undefined;
   readonly stateView: RemoteStateView;
-  readonly camera: Camera;
+  /** Seat 0's view: clicks and taps outside its region do nothing (226). */
+  readonly view: Pick<View, "camera" | "region">;
   readonly transport: IClientTransport;
   readonly audioManager: AudioManager;
   readonly doorBusy: boolean;
@@ -73,10 +75,10 @@ export class PlayInputController {
           : this.resolveDriveTap(x, y),
       (target) => this.onDestinationTap(target),
     );
-    this.touchHold = new TouchHold(canvas, this.touchButtons.claimedTouches, (x, y) =>
+    this.touchHold = new TouchHold(canvas, this.touchButtons.claimedTouches, (x, y, held) =>
       this.movementMode !== "hold" || !this.inPlayScene || this.gestureBlocked
         ? null
-        : this.resolveDriveTap(x, y),
+        : this.resolveDriveTap(x, y, held),
     );
     this.touchJoystick.enabled = this.movementMode === "joystick";
     // Let joystick skip touches claimed by on-screen buttons
@@ -198,9 +200,10 @@ export class PlayInputController {
     this.interactAt(e.clientX, e.clientY);
   }
 
-  /** The ground point under a tap, click or held contact. */
-  private resolveDriveTap(x: number, y: number): TapTarget | null {
-    return this.tapMovement.resolve(this.canvas, x, y);
+  /** The ground point under a tap, click or held contact (a held one may have left
+   * seat 0's view since it started there). */
+  private resolveDriveTap(x: number, y: number, held = false): TapTarget | null {
+    return this.tapMovement.resolve(this.canvas, x, y, held);
   }
   private onPlayTap(clientX: number, clientY: number): void {
     if (this.gestureBlocked) return;
@@ -208,10 +211,10 @@ export class PlayInputController {
     this.interactAt(clientX, clientY);
   }
   private interactAt(clientX: number, clientY: number): void {
-    const rect = this.canvas.getBoundingClientRect();
-    const sx = (clientX - rect.left) * (this.canvas.width / rect.width);
-    const sy = (clientY - rect.top) * (this.canvas.height / rect.height);
-    const world = this.host.camera.screenToWorld(sx, sy);
+    const { camera, region } = this.host.view;
+    const point = regionPoint(this.canvas, region, clientX, clientY);
+    if (!point) return;
+    const world = camera.screenToWorld(point.x, point.y);
     this.host.transport.send({
       type: "player-interact",
       wx: world.wx,

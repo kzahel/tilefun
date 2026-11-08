@@ -1,6 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 import { ActionManager } from "./ActionManager.js";
 import type { ActionMapConfig } from "./ActionMap.js";
+import { controllerInput } from "./ControllerInput.js";
+import { seatKeyMap } from "./KeyboardSchemes.js";
 import { TouchJoystick } from "./TouchJoystick.js";
 
 function makeCanvas(width = 800, height = 600): HTMLCanvasElement {
@@ -15,6 +17,29 @@ describe("ActionManager", () => {
     actions.on("jump", () => fired.push("jump"));
     actions.trigger("toggle_menu");
     expect(fired).toEqual(["menu"]);
+  });
+
+  it("labels its own keys; a keyboard guest's scheme clears without touching seat 0's pad (226)", () => {
+    const guest = new ActionManager(seatKeyMap("right"));
+    guest.disableGamepad();
+    expect([guest.hint("enter_place"), guest.hint("vehicle_recover"), guest.hint("jump")]).toEqual([
+      "'",
+      ";",
+      "/",
+    ]);
+    expect(new ActionManager().hint("enter_place")).toBe("E");
+    expect(new ActionManager().hint("move_up")).toBe("W"); // the map's first key
+    const reset = vi.spyOn(controllerInput, "reset");
+    try {
+      guest.pressKey("ArrowUp");
+      guest.clearHeld();
+      expect(guest.isHeld("move_up")).toBe(false);
+      expect(reset).not.toHaveBeenCalled();
+      new ActionManager().clearHeld(); // seat 0's set reads pads: the collector resets
+      expect(reset).toHaveBeenCalledOnce();
+    } finally {
+      reset.mockRestore();
+    }
   });
 
   it("dispatches interact without throwing or jumping", () => {

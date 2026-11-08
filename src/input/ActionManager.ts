@@ -8,7 +8,7 @@ import {
   controllerInput,
 } from "./ControllerInput.js";
 import { acceptsGameKey } from "./KeyFocus.js";
-import { eventCode } from "./KeyLabels.js";
+import { eventCode, keyLabel } from "./KeyLabels.js";
 import type { TouchButtons } from "./TouchButtons.js";
 import type { TouchJoystick } from "./TouchJoystick.js";
 
@@ -105,10 +105,18 @@ export class ActionManager {
     this.clearHeld();
   }
 
+  /** Forget held keys. A set that reads pads also resets the shared pad collector; a
+   * keyboard guest's scheme (pads disabled) leaves seat 0's pad alone. */
   clearHeld(): void {
     this.keysDown.clear();
-    controllerInput.reset();
+    if (this.gamepad) controllerInput.reset();
     this.hornPressLatched = false;
+  }
+
+  /** The label of this map's first key for an action, on the player's layout. */
+  hint(action: ActionName): string {
+    const code = this.config.find((binding) => binding.action === action)?.keys[0];
+    return code ? keyLabel(code) : "";
   }
 
   // --- Continuous action polling ---

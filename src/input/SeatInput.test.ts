@@ -1,6 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 import { createVehicle } from "../traffic/Vehicle.js";
+import { ActionManager } from "./ActionManager.js";
 import type { ActionName } from "./ActionMap.js";
+import { seatKeyMap } from "./KeyboardSchemes.js";
 import { ActionSeatInput, NEUTRAL_MOVEMENT, neutralSample, type SeatActions } from "./SeatInput.js";
 
 /** One action set (a keyboard scheme or a pad) as a guest seat reads it. */
@@ -29,6 +31,7 @@ function actions(held: ActionName[] = []) {
     clearHeld: vi.fn(() => {
       held.length = 0;
     }),
+    hint: () => "'",
     press: () => jump?.(),
     honk: () => {
       horn = true;
@@ -76,6 +79,24 @@ describe("ActionSeatInput", () => {
     seat.dispose();
     set.press();
     expect(seat.sample(false, undefined).jumpPressed).toBe(false);
+  });
+});
+
+describe("ActionSeatInput place keys (226)", () => {
+  it("passes its enter and equipment presses and its key labels through from its action set", () => {
+    const keys = new ActionManager(seatKeyMap("right"));
+    keys.disableGamepad();
+    const seat = new ActionSeatInput(keys);
+    const fired: string[] = [];
+    const off = seat.on("enter_place", () => fired.push("enter"));
+    seat.on("vehicle_recover", () => fired.push("equip"));
+    keys.pressKey("Quote");
+    keys.pressKey("Semicolon");
+    off();
+    keys.releaseKey("Quote");
+    keys.pressKey("Quote");
+    expect(fired).toEqual(["enter", "equip"]);
+    expect([seat.hint("enter_place"), seat.hint("vehicle_recover")]).toEqual(["'", ";"]);
   });
 });
 

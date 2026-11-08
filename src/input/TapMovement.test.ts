@@ -85,10 +85,12 @@ describe("tap movement intent", () => {
       viewportWidth: 800,
       viewportHeight: 600,
     };
-    c.captureView(view, 32);
+    c.captureView({ camera: view, region: { x: 0, y: 0, width: 800, height: 600 } }, 32);
     const point = projectWorld(view, 130, 175, 32);
     view.x = 999;
     const canvas = {
+      width: 800,
+      height: 600,
       getBoundingClientRect: () => ({ left: 10, top: 20, width: 400, height: 300 }),
     } as HTMLCanvasElement;
     expect(c.resolve(canvas, 10 + point.sx / 2, 20 + point.sy / 2)).toEqual({
@@ -96,6 +98,45 @@ describe("tap movement intent", () => {
       wy: 175,
       wz: 32,
     });
+  });
+  it("resolves through a split view's region and ignores taps outside it (226)", () => {
+    const c = new TapMovement();
+    // The left half of a 1600×600 canvas shown at half size: the view's viewport is
+    // its region, not the canvas.
+    const camera = { x: 100, y: 150, zoom: 1, viewportWidth: 800, viewportHeight: 600 };
+    const canvas = {
+      width: 1600,
+      height: 600,
+      getBoundingClientRect: () => ({ left: 10, top: 20, width: 800, height: 300 }),
+    } as HTMLCanvasElement;
+    const point = projectWorld(camera, 130, 175, 0);
+    c.captureView({ camera, region: { x: 0, y: 0, width: 800, height: 600 } }, 0);
+    expect(c.resolve(canvas, 10 + point.sx / 2, 20 + point.sy / 2)).toEqual({
+      wx: 130,
+      wy: 175,
+      wz: 0,
+    });
+    expect(c.resolve(canvas, 10 + 400 + point.sx / 2, 20 + point.sy / 2)).toBeNull();
+    // A held contact that started in the view still resolves beyond its edge.
+    // (800 canvas pixels right of the point: beyond the view's right edge.)
+    const beyond = c.resolve(canvas, 10 + 400 + point.sx / 2, 20 + point.sy / 2, true);
+    expect(beyond?.wx).toBeGreaterThan(130 + 800 / 2 / camera.zoom / 2);
+    expect(beyond?.wy).toBeCloseTo(175);
+    // A view in the right half resolves its own region's points.
+    c.captureView({ camera, region: { x: 800, y: 0, width: 800, height: 600 } }, 0);
+    expect(c.resolve(canvas, 10 + 400 + point.sx / 2, 20 + point.sy / 2)).toEqual({
+      wx: 130,
+      wy: 175,
+      wz: 0,
+    });
+    expect(c.resolve(canvas, 10 + point.sx / 2, 20 + point.sy / 2)).toBeNull();
+    // A canvas with no size resolves nothing.
+    c.captureView({ camera, region: { x: 0, y: 0, width: 800, height: 600 } }, 0);
+    const hidden = {
+      ...canvas,
+      getBoundingClientRect: () => ({ left: 0, top: 0, width: 0, height: 0 }),
+    };
+    expect(c.resolve(hidden as HTMLCanvasElement, 10, 20)).toBeNull();
   });
   it("defaults missing or invalid saved preferences to Joystick", () => {
     for (const value of [null, undefined, "other", 1, "joystick"])

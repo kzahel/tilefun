@@ -43,6 +43,20 @@ describe("physical key labels", () => {
     expect(keyLabel("KeyQ")).toBe("A");
   });
 
+  it("labels the right-hand scheme's punctuation keys, following the layout once known (226)", async () => {
+    expect(["Quote", "Semicolon", "Slash", "Period", "Comma"].map(keyLabel)).toEqual([
+      "'",
+      ";",
+      "/",
+      ".",
+      ",",
+    ]);
+    learnKeyLabel(press("Quote", "ù")); // AZERTY
+    expect(keyLabel("Quote")).toBe("Ù");
+    await loadLayoutLabels({ getLayoutMap: async () => new Map([["Semicolon", "m"]]) });
+    expect(keyLabel("Semicolon")).toBe("M");
+  });
+
   it("maps physical keys to US key values for character-named lab input", () => {
     expect(usKey({ code: "KeyW", key: "," })).toBe("w");
     expect(usKey({ code: "Space", key: " " })).toBe(" ");

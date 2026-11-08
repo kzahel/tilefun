@@ -19,6 +19,25 @@ const NAMED: Record<string, string> = {
   ArrowRight: "→",
 };
 
+/** Punctuation keys (the right-hand scheme's among them) on a US layout, used until
+ * the layout map or a press says what they type here. */
+const PUNCTUATION: Record<string, string> = {
+  Quote: "'",
+  Semicolon: ";",
+  Slash: "/",
+  Period: ".",
+  Comma: ",",
+  BracketLeft: "[",
+  BracketRight: "]",
+  Backslash: "\\",
+  Minus: "-",
+  Equal: "=",
+};
+
+/** Codes whose label follows the player's layout. */
+const LAYOUT_CODE =
+  /^(Key[A-Z]|Digit[0-9]|Quote|Semicolon|Slash|Period|Comma|Bracket(Left|Right)|Backslash|Minus|Equal)$/;
+
 /** Unshifted characters per code: from the browser's layout map (authoritative), or
  * learned from plain presses where that API is unavailable. */
 const layoutLabels = new Map<string, string>();
@@ -66,6 +85,8 @@ export function keyLabel(code: string): string {
   if (known) return known;
   const letter = /^Key([A-Z])$/.exec(code)?.[1];
   if (letter) return letter;
+  const punctuation = PUNCTUATION[code];
+  if (punctuation) return punctuation;
   return /^Digit([0-9])$/.exec(code)?.[1] ?? code;
 }
 
@@ -78,7 +99,7 @@ export function learnKeyLabel(
 ): void {
   if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
   if (event.getModifierState?.("AltGraph")) return;
-  if (!/^(Key[A-Z]|Digit[0-9])$/.test(event.code)) return;
+  if (!LAYOUT_CODE.test(event.code)) return;
   if (event.key.length !== 1 || event.key === " ") return;
   learnedLabels.set(event.code, event.key.toUpperCase());
 }
@@ -96,8 +117,7 @@ export async function loadLayoutLabels(
   try {
     const map = await keyboard?.getLayoutMap?.();
     for (const [code, key] of map ?? [])
-      if (/^(Key[A-Z]|Digit[0-9])$/.test(code) && key.length === 1)
-        layoutLabels.set(code, key.toUpperCase());
+      if (LAYOUT_CODE.test(code) && key.length === 1) layoutLabels.set(code, key.toUpperCase());
   } catch {
     // Unsupported or blocked (e.g. a cross-origin frame): observed keys still teach labels.
   }

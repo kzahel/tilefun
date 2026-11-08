@@ -1,4 +1,5 @@
 import { expect, type Page, test } from "@playwright/test";
+import { flushLocalWorld, stopLocalWorld, worldRecords } from "./helpers/local-world.js";
 
 // Split screen (226): real `KeyboardEvent.code` routing for two keyboard schemes, and
 // two mocked standard pads. Input routing and DOM menus, not GPU output, so Canvas.
@@ -66,6 +67,13 @@ test("a second keyboard player joins with Slash and plays the arrows in its own 
     ]);
   await expect.poll(async () => (await snapshot(page)).positions[1]).toBeTruthy();
   await expect(page.getByTestId("gem-hud")).toBeHidden(); // each view draws its own badge
+  // Seat 0's taps resolve through its own view (the left half), not the whole canvas.
+  const tapRegion = () =>
+    page.evaluate(() => {
+      const game = (document.querySelector("#game") as unknown as { __game: Game }).__game;
+      return Reflect.get(Reflect.get(game, "tapMovement"), "region");
+    });
+  await expect.poll(tapRegion).toMatchObject({ x: 0, y: 0, width: 640 });
   // Real physical codes: seat 0 keeps WASD, the guest (joined one tile to its right)
   // has the arrows; they walk apart.
   const apart = await moved(
@@ -207,4 +215,102 @@ test.describe("two pads", () => {
     await expect.poll(async () => (await snapshot(page)).views).toEqual([[0, 0, 1280]]);
     expect(errors).toEqual([]);
   });
+
+  test("Options opened from a guest's pad returns focus to its opener, and the guest keeps the menu", async ({
+    page,
+  }) => {
+    const errors: string[] = [];
+    await startFlatWorld(page, errors);
+    await stick(page, 0, 1, 0);
+    await frames(page, 3);
+    await stick(page, 0, 0, 0);
+    await press(page, 1, 0);
+    await expect.poll(async () => (await snapshot(page)).positions[1]).toBeTruthy();
+    await press(page, 1, 9);
+    const menu = page.getByTestId("world-menu");
+    await expect(menu).toHaveAttribute("data-page", "home");
+    await expect.poll(() => focused(page)).toBe("Resume");
+    for (let i = 0; i < 8 && (await focused(page)) !== "Options"; i++) await press(page, 1, 13);
+    expect(await focused(page)).toBe("Options");
+    await press(page, 1, 0);
+    const options = page.getByTestId("options-dialog");
+    await expect(options).toBeVisible();
+    const inOptions = await focused(page);
+    await press(page, 0, 13); // seat 0's pad does not drive the guest's Options
+    expect(await focused(page)).toBe(inOptions);
+    await press(page, 1, 1); // back closes Options onto its opener
+    await expect(options).toBeHidden();
+    await expect.poll(() => focused(page)).toBe("Options");
+    await press(page, 0, 12);
+    expect(await focused(page)).toBe("Options");
+    await press(page, 1, 12); // the guest still drives the menu
+    expect(await focused(page)).not.toBe("Options");
+    await press(page, 1, 1); // back: the menu closes and both seats play on
+    await expect(menu).toBeHidden();
+    await expect.poll(async () => (await snapshot(page)).views.length).toBe(2);
+    const apart = await moved(
+      page,
+      async () => {
+        await stick(page, 0, 0, 1);
+        await stick(page, 1, 0, -1);
+      },
+      async () => {
+        await stick(page, 0, 0, 0);
+        await stick(page, 1, 0, 0);
+      },
+    );
+    expect(apart[0][1]).toBeGreaterThan(20);
+    expect(apart[1][1]).toBeLessThan(-20);
+    expect(errors).toEqual([]);
+  });
+});
+
+test("the world saves both seats; after a reload seat 0 resumes and a guest joins beside it", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  await startFlatWorld(page, errors);
+  await page.keyboard.press("Slash");
+  await expect.poll(async () => (await snapshot(page)).positions[1]).toBeTruthy();
+  await moved(
+    page,
+    async () => {
+      await page.keyboard.down("KeyA");
+      await page.keyboard.down("ArrowRight");
+    },
+    async () => {
+      await page.keyboard.up("KeyA");
+      await page.keyboard.up("ArrowRight");
+    },
+  );
+  const saved = await snapshot(page);
+  const [hostX = 0, hostY = 0] = saved.positions[0] ?? [];
+  const [guestX = 0, guestY = 0] = saved.positions[1] ?? [];
+  expect(guestX - hostX).toBeGreaterThan(48); // walked apart
+  await flushLocalWorld(page);
+  // Each seat has its own record: the guest's under its host's key, by seat.
+  const players = (await worldRecords(page)).filter((r) => r.collection === "players");
+  const host = players.find((r) => !r.key.includes("#"));
+  const guest = players.find((r) => r.key === `${host?.key}#1`);
+  expect([host?.value, guest?.value]).toMatchObject([
+    { x: expect.closeTo(hostX, -1), y: expect.closeTo(hostY, -1) },
+    { x: expect.closeTo(guestX, -1), y: expect.closeTo(guestY, -1) },
+  ]);
+  await stopLocalWorld(page);
+  await page.goto("/tilefun/?renderer=canvas"); // reopen the saved world, not a new one
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 60000 });
+  await expect.poll(async () => (await snapshot(page)).positions[0]).toBeTruthy();
+  const resumed = await snapshot(page);
+  expect(resumed.seats).toEqual([0]); // guests join again themselves
+  expect(resumed.positions[0]?.[0]).toBeCloseTo(hostX, -1);
+  expect(resumed.positions[0]?.[1]).toBeCloseTo(hostY, -1);
+  await page.keyboard.press("Slash");
+  await expect.poll(async () => (await snapshot(page)).positions[1]).toBeTruthy();
+  const rejoined = await snapshot(page);
+  // Guests follow seat 0 (226): the returning guest plays beside it with its own record.
+  const [x0 = 0, y0 = 0] = rejoined.positions[0] ?? [];
+  const [x1 = 0, y1 = 0] = rejoined.positions[1] ?? [];
+  expect(Math.hypot(x1 - x0, y1 - y0)).toBeLessThan(40);
+  expect(rejoined.views.map((v) => v[0])).toEqual([0, 1]);
+  expect(errors).toEqual([]);
 });

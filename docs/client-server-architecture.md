@@ -92,8 +92,8 @@ are generator-derived metadata, not duplicated durable terrain records.
 
 A connection is a device that can seat up to four local players
 ([226](tactical/226-player-views-and-local-split-screen.md): server side since
-slice 4b-i, client seats and their prediction since 5-i; no player can join one
-in the game until split screen, 5-ii).
+slice 4b-i, client seats and their prediction since 5-i, split screen in the
+game since 5-ii).
 - **Sessions per seat:** each seat has its own `PlayerSession`. Seat 0's id is
   the bare connection id, so single player is unchanged; other seats are
   `connection#n`, and are guests of seat 0 without a profile.
@@ -164,7 +164,11 @@ in the game until split screen, 5-ii).
     menu. [SeatViews](../src/session/SeatViews.ts) gives each seat a view, and a
     guest's camera follows its controlled body
     ([SeatFocus](../src/session/SeatFocus.ts)). Each guest view's visible
-    range goes in its envelope.
+    range goes in its envelope. A guest's place controls
+    ([GuestPlaces](../src/client/GuestPlaces.ts)) read the same vehicle and
+    door choices as seat 0's ([PlacePrompts](../src/ui/PlacePrompts.ts)) for
+    its own body and send its requests in its envelope
+    (`RequestBroker.send(request, seat)`).
 
 [RequestBroker](../src/client/RequestBroker.ts) correlates request IDs with the
 response mapping in [requests.ts](../src/shared/requests.ts), checks response

@@ -84,6 +84,12 @@ or credentials in this repository.
     gems), and partners get location markers. With three players, the empty
     corner says how to join. Edit mode shows seat 0 alone, and first person
     works only while one player plays.
+  - **Places:** a guest's enter key (its scheme's Quote, a pad's Y) gets in or
+    out of the nearest car, calls a train or takes everyone through the nearest
+    door, and its equipment key (Semicolon, a pad's D↓) runs the equipment
+    action. Its prompts show in its own view with its own key or button, on the
+    player's layout. Seat 0's on-screen controls, touch controls, taps and
+    clicks stay inside seat 0's view; a click in a guest's view does nothing.
   - `KeyFocus`: the game page takes keys from the whole window (its DOM UI stops
     what it consumes); an embedded lab takes keys and pads only while focus is
     inside it and not on a form control. A real-keyboard rollover check for two

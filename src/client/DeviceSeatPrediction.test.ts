@@ -49,6 +49,12 @@ class ScriptedInput implements SeatInput {
   }
   clear(): void {}
   dispose(): void {}
+  on(): () => void {
+    return () => {};
+  }
+  hint(): string {
+    return "";
+  }
 }
 
 const walk = (dx: number, dy = 0): Movement => ({ dx, dy, sprinting: false, jump: false });

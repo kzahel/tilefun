@@ -35,6 +35,8 @@ function input(movement: Movement = walk(1), held = false) {
     sample: vi.fn((locked: boolean) => (locked ? neutralSample() : sample(movement))),
     clear: vi.fn(),
     dispose: vi.fn(),
+    on: () => () => {},
+    hint: () => "",
   } satisfies SeatInput;
 }
 

@@ -8,10 +8,12 @@ import { followSeat, View } from "../session/View.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import {
   beginViewTick,
+  drawTapDestination,
   drawViewOverlays,
   endViewTick,
   followGuestViews,
   GuestFeedback,
+  inHostView,
   JOIN_HINT,
   presentViews,
   renderSoloFirstPerson,
@@ -25,6 +27,8 @@ const noInput = {
   sample: () => ({}) as never,
   clear: () => {},
   dispose: () => {},
+  on: () => () => {},
+  hint: () => "",
 };
 
 /** A recording 2D context: text drawn, in canvas pixels after translation. */
@@ -92,6 +96,9 @@ async function playing() {
     transport: { send: (message: ClientMessage) => sent.push(message) },
     gemSpriteCanvas: null,
     firstPerson: { hideView: vi.fn() },
+    touchJoystick: { region: null },
+    touchButtons: { region: null },
+    touchPinch: { region: null },
   } as unknown as GameContext;
   return { gc, session, sent, syncs, recording, replica };
 }
@@ -217,6 +224,59 @@ describe("play's split-screen views (226)", () => {
     drawViewOverlays(gc, 1);
     const hint = recording.texts.find((t) => t.text === JOIN_HINT);
     expect([hint?.x, hint?.y]).toEqual([960, 600]);
+  });
+
+  it("seat 0's touch controls and gestures stay in its region while guests play", async () => {
+    const { gc, session } = await playing();
+    Object.assign(gc.canvas, { clientWidth: 640, clientHeight: 400 }); // half-size CSS box
+    beginViewTick(gc);
+    const half = { x: 0, y: 0, width: 320, height: 400 };
+    expect(gc.touchJoystick.region).toEqual(half);
+    expect(gc.touchButtons.region).toEqual(half);
+    expect(gc.touchPinch?.region).toEqual(half);
+    session.seats.drop(1);
+    beginViewTick(gc);
+    expect([gc.touchJoystick.region, gc.touchButtons.region, gc.touchPinch?.region]).toEqual([
+      null,
+      null,
+      null,
+    ]);
+  });
+
+  it("a guest's place prompts sit at the bottom of its own view", async () => {
+    const { gc, session, recording } = await playing();
+    beginViewTick(gc);
+    const guest = session.seats.get(1);
+    if (guest) guest.prompts = ["Tip bed · ;", "Drive car · '"];
+    drawViewOverlays(gc, 1);
+    const shown = recording.texts.filter((t) => t.text.includes(" · "));
+    expect(shown.map((t) => [t.text, t.x, t.y])).toEqual([
+      ["Tip bed · ;", 960, 800 - 16 - 72 + 15],
+      ["Drive car · '", 960, 800 - 16 - 36 + 15],
+    ]);
+  });
+
+  it("seat 0's own overlays (its tap destination, the debug overlay) are clipped to its view", async () => {
+    const { gc, recording } = await playing();
+    const target = { wx: 100, wy: 100, wz: 0 };
+    Object.assign(gc, { tapMovement: { target, blockedFade: 0 } });
+    (gc.canvas as unknown as { dataset: DOMStringMap }).dataset = {};
+    beginViewTick(gc);
+    drawTapDestination(gc);
+    expect(recording.clips).toEqual([[0, 0, 640, 800]]);
+    const drawn: string[] = [];
+    inHostView(gc, () => drawn.push("debug"));
+    expect(drawn).toEqual(["debug"]);
+    expect(recording.clips).toHaveLength(2);
+    // Drawn in the region's own coordinates (seat 0's region is at the origin in
+    // every layout; a region elsewhere moves its drawing with it).
+    gc.view.setRegion({ x: 100, y: 50, width: 540, height: 750 });
+    inHostView(gc, () => gc.ctx.fillText("here", 0, 0));
+    expect(recording.texts.find((t) => t.text === "here")).toMatchObject({ x: 100, y: 50 });
+    gc.session.seats.drop(1);
+    beginViewTick(gc);
+    inHostView(gc, () => drawn.push("alone"));
+    expect(recording.clips).toHaveLength(3); // one view: the whole canvas, no clip
   });
 
   it("first person only while one seat plays", async () => {

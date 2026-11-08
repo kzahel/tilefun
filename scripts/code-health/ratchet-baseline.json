@@ -707,19 +707,9 @@
       "worst": 37,
       "overLimit": 1
     },
-    "src/ui/DoorControl.ts": {
-      "lines": 125,
-      "worst": 72,
-      "overLimit": 1
-    },
     "src/ui/MainMenu.ts": {
       "lines": 465,
       "worst": 41,
-      "overLimit": 1
-    },
-    "src/ui/VehicleControl.ts": {
-      "lines": 151,
-      "worst": 51,
       "overLimit": 1
     },
     "src/ui/WorldMap.ts": {

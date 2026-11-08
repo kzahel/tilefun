@@ -9,14 +9,17 @@ import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import { ActionManager } from "../input/ActionManager.js";
+import { seatKeyMap } from "../input/KeyboardSchemes.js";
+import { ActionSeatInput } from "../input/SeatInput.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
+import { DeviceSeats } from "../session/DeviceSeats.js";
+import type { View } from "../session/View.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import { createVehicle } from "../traffic/Vehicle.js";
-import type { DoorRequest } from "../ui/DoorControl.js";
-import type { VehicleRequest } from "../ui/VehicleControl.js";
+import type { DoorRequest, VehicleRequest } from "../ui/PlacePrompts.js";
 import type { RemoteStateView } from "./ClientStateView.js";
 import type { DoorPresentation } from "./DoorPresentation.js";
-import { PlaceControls } from "./PlaceControls.js";
+import { PlaceControls, type PlaceControlsHost } from "./PlaceControls.js";
 
 const DT = 1 / 60;
 
@@ -74,9 +77,17 @@ function harness() {
       presentation.busy = false;
     }),
   };
+  const session = {
+    seats: new DeviceSeats(),
+    views: [] as View[],
+    replica: view,
+    prediction: null,
+  };
   const host = {
     stateView: view as unknown as RemoteStateView,
     doorPresentation: presentation as unknown as DoorPresentation,
+    session: session as unknown as PlaceControlsHost["session"],
+    canvas: {} as HTMLCanvasElement,
     playing: true,
     overlayOpen: false,
     inputBlocked: false,
@@ -329,6 +340,87 @@ describe("place controls characterization (pre-226 wiring)", () => {
     await h.settle();
     expect(h.requests.at(-1)).toEqual({ type: "enter-vehicle", entityId: 9 });
     expect(h.host.clearPlayInput).toHaveBeenCalledTimes(2);
+  });
+
+  it("in split screen seat 0's page controls sit inside its view's region (226)", () => {
+    const h = harness();
+    vi.stubGlobal("document", {
+      createElement: element,
+      body: element(),
+      documentElement: { clientWidth: 1280, clientHeight: 800 },
+    });
+    const car = { ...createVehicle("compact-1", 116, 200), id: 7 };
+    h.view.entities = [h.player, car];
+    const style = (el: unknown) => (el as { style: { translate?: string } }).style.translate;
+    h.step();
+    expect(style(h.controls.vehicle.button) ?? "").toBe(""); // one view: its own place
+    // A 2×2 grid on a canvas drawn at half its pixel size: seat 0 has the top left.
+    Object.assign(h.host.canvas, {
+      width: 2560,
+      height: 1600,
+      clientWidth: 1280,
+      clientHeight: 800,
+      getBoundingClientRect: () => ({ left: 0, top: 0, width: 1280, height: 800 }),
+    });
+    const region = (x: number, y: number) => ({
+      seat: 0,
+      region: { x, y, width: 1280, height: 800 },
+    });
+    h.host.session.views.push(region(0, 0) as View, region(1280, 0) as View);
+    h.step();
+    expect(style(h.controls.vehicle.button)).toBe("-640px -400px");
+    expect(style(h.controls.vehicle.equipmentButton)).toBe("-640px -400px");
+    expect(style(h.controls.vehicle.root)).toBe("0px -400px");
+    expect(style(Reflect.get(h.controls.door, "root"))).toBe("0px -400px");
+    h.host.session.views.length = 1;
+    h.step();
+    expect(style(h.controls.vehicle.button)).toBe("");
+  });
+
+  it("labels its keys, shows how to drive once inside, and drops a refusal when the target changes", async () => {
+    const h = harness();
+    const car = { ...createVehicle("compact-1", 116, 200), id: 7 };
+    h.view.entities = [h.player, car];
+    h.step();
+    expect(h.controls.vehicle.button.textContent).toBe("Drive car · E");
+    h.failNext(new Error("taken"));
+    h.press("KeyE");
+    await h.settle();
+    const status = () =>
+      (Reflect.get(h.controls.vehicle, "status") as { textContent: string }).textContent;
+    expect(status()).toBe("Error: taken");
+    h.step();
+    expect(status()).toBe("Error: taken");
+    h.view.entities = [h.player];
+    h.step();
+    expect(status()).toBe("");
+    h.view.entities = [h.player, car];
+    h.player.parentId = 7;
+    h.step();
+    expect(status()).toMatch(/Forward\/Reverse/);
+  });
+
+  it("guests' place controls run with seat 0's: each tick, and released on destroy (226)", async () => {
+    const h = harness();
+    const guest = { ...createPlayer(400, 200), id: 2 };
+    const car = { ...createVehicle("compact-1", 416, 200), id: 7 };
+    h.view.entities = [h.player, guest, car];
+    Object.assign(h.view, { seats: { entities: new Map([[1, 2]]) }, serverEntities: [guest] });
+    const keys = new ActionManager(seatKeyMap("right"));
+    keys.disableGamepad();
+    const seats = h.host.session.seats;
+    const seat = await seats.join(async () => ({}) as never, 1, 1, new ActionSeatInput(keys));
+    h.step();
+    expect(seat.prompts).toEqual(["Drive car · '"]);
+    keys.pressKey("Quote");
+    await h.settle();
+    expect(h.host.request).toHaveBeenLastCalledWith({ type: "enter-vehicle", entityId: 7 }, 1);
+    h.controls.destroy();
+    expect(seat.prompts).toEqual([]);
+    keys.releaseKey("Quote");
+    keys.pressKey("Quote");
+    await h.settle();
+    expect(h.host.request).toHaveBeenCalledTimes(1);
   });
 
   it("destroy removes the E/F subscriptions", async () => {
