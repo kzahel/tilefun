@@ -44,9 +44,10 @@ separate follow-on work.
 
 [216](../tactical/216-dynamic-3d-vehicles.md) delivers freely rotating land-vehicle chassis, authored axle suspension/traction, full replay/save state, shared depth and recovery. Game and labs share the default controller; native/browser qualification passes; owner feel review is next. The physical Chromebook course works, with 16.7/33.4/33.4ms frame p50/p95/p99 in the latest short development smoke; this is not a matched performance comparison. Boats retain their upright watercraft behavior. Fast-car rollover tuning (lowered centre of mass, 1.2 cornering grip, speed-limited full lock) is recorded in 216 and awaits owner feel review.
 
+[231](../tactical/231-vehicle-surfaces-tires-and-drivetrains.md) gives each wheel its surface (pavement, grass, dirt, sand, water) through one shared lookup used by authority and prediction, with no new replicated state. Slick, road and off-road tires scale grip per surface below the pavement ceiling; sand and water add capped drag toward a per-tire fraction of top speed. Models are front-, rear- or all-wheel drive (felt, not shown). Wheels throw coloured spray on loose ground in the game and labs. Owner play review of the Workshop car-surfaces course is next.
 
-Status: dynamic land-vehicle chassis and shared depth delivered in 216; ready for owner feel review. Dump bed (222), towing and transporter (224), racers and shopping visits (225) restored. Shared road traffic and driving audio remain.
-Updated: 2026-11-07.
+Status: dynamic land-vehicle chassis and shared depth delivered in 216; ready for owner feel review. Dump bed (222), towing and transporter (224), racers and shopping visits (225) restored. Surfaces, tires and drivetrains (231) delivered for play review. Shared road traffic and driving audio remain.
+Updated: 2026-11-09.
 
 [209](../tactical/209-car-driving-and-autonomous-traffic.md) restores shared rolling
 driving and ordinary road traffic after reset 205. Players and road planners supply

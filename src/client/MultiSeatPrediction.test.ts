@@ -120,6 +120,8 @@ interface RunResult {
   ms: number;
   acksEqual: boolean;
   guestInHostSnapshot: boolean;
+  /** Host frames whose snapshot omitted seat 1's body. */
+  guestAbsentFrames: number;
 }
 
 /** "unheld" (a control): as "anchored", but seat 1's movement never reaches the predictor. */
@@ -174,6 +176,7 @@ async function run(scene: CoopCase, mode: Mode | "unheld", delays: Delays, guest
     ms: 0,
     acksEqual: true,
     guestInHostSnapshot: true,
+    guestAbsentFrames: 0,
   };
   const recordTruth = (packets: readonly ArrayBuffer[]) => {
     for (const packet of packets) {
@@ -279,7 +282,10 @@ async function run(scene: CoopCase, mode: Mode | "unheld", delays: Delays, guest
       if (second) receive(second, item.guest, now);
       result.ms += performance.now() - t0;
       const bodies = host.view.physicsState?.bodies;
-      if (bodies && !bodies.some((b) => b.id === ids[1])) result.guestInHostSnapshot = false;
+      if (bodies && !bodies.some((b) => b.id === ids[1])) {
+        result.guestInHostSnapshot = false;
+        result.guestAbsentFrames++;
+      }
       observe(host, mode === "two" ? 0 : "both");
       if (second) observe(second, 1);
     }
@@ -356,8 +362,14 @@ describe("multi-seat prediction spike (226 slice 1a)", () => {
       // are missing: none, except while the car carries seat 0 out of range.
       expect(two.seats.map((s) => s.unpredicted)).toEqual([0, 0]);
       expect(one.seats[0].unpredicted).toBe(0);
-      if (scene === "vehicle") expect(one.seats[1].unpredicted).toBeLessThan(TICKS / 4);
-      else expect(one.seats[1].unpredicted).toBe(0);
+      // Seat 1 goes unpredicted only for the frames its body was out of the host
+      // snapshot (within a tick of delivery); how far the car rolls sets that count.
+      if (scene === "vehicle") {
+        // Loose cap from today's 70–72 absent frames: the car pulls away briefly, not all run.
+        expect(one.guestAbsentFrames).toBeGreaterThan(0);
+        expect(one.guestAbsentFrames).toBeLessThan(TICKS / 3);
+        expect(one.seats[1].unpredicted).toBeLessThanOrEqual(one.guestAbsentFrames + 1);
+      } else expect(one.seats[1].unpredicted).toBe(0);
       // One predictor shows each local player identically in every view, and
       // no seat is corrected more than by its own dedicated predictor.
       expect(one.crossView).toBe(0);

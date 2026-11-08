@@ -1,4 +1,5 @@
 import type { Prop } from "../entities/Prop.js";
+import { groundMaterialAt } from "../physics/GroundMaterial.js";
 import type { PhysicsGeometry } from "../physics/PhysicsScene.js";
 import type { World } from "../world/World.js";
 
@@ -34,5 +35,6 @@ export function predictionGeometry(
         revision: `${chunk?.revision}:${chunk?.visualRevision}:${chunk?.physicsRevision}:${propsRevision}`,
       };
     },
+    groundMaterial: (wx, wy, wz) => groundMaterialAt(world, wx, wy, wz),
   };
 }

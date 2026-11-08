@@ -16,6 +16,7 @@ import {
   yawRotation,
 } from "./BodyRotation.js";
 import { DumpBedBody } from "./DumpBedBody.js";
+import type { GroundMaterial } from "./GroundMaterial.js";
 import { assistedJumpVelocity } from "./JumpAssist.js";
 import { playerClimbIntent } from "./Ladders.js";
 import { teleportBody } from "./PhysicalEdits.js";
@@ -38,6 +39,8 @@ import { vehicleMotor } from "./VehicleMotor.js";
 
 export interface PhysicsGeometry extends CollisionGeometrySource {
   geometryVersion(cx: number, cy: number): { identity: unknown; revision: string | number };
+  /** Surface under a static-ground wheel contact (world px); absent means pavement. */
+  groundMaterial?(wx: number, wy: number, wz: number): GroundMaterial;
 }
 export type { PhysicsBodyKind, PhysicsBodyState, PhysicsState } from "./PhysicsState.js";
 
@@ -343,6 +346,7 @@ export class PhysicsScene {
     direction: RAPIER.Vector,
     length: number,
     owner: Body,
+    geometry: PhysicsGeometry,
   ): WheelContact | undefined {
     this.metrics.wheelQueries++;
     const ray = new RAPIER.Ray(origin, direction);
@@ -377,6 +381,13 @@ export class PhysicsScene {
           id: other.entity.id,
         };
     }
+    // Static ground only: other bodies (decks, roofs) drive as pavement.
+    if (hit && !hit.body && geometry.groundMaterial)
+      hit.material = geometry.groundMaterial(
+        (origin.x + direction.x * hit.distance + this.origin.x) * SCALE,
+        (origin.z + direction.z * hit.distance + this.origin.z) * SCALE,
+        (origin.y + direction.y * hit.distance + this.origin.y) * SCALE,
+      );
     return hit;
   }
 
@@ -539,7 +550,8 @@ export class PhysicsScene {
         entry.chassis?.prepare(
           input,
           entry.state.heading,
-          (origin, direction, length) => this.wheelContact(origin, direction, length, entry),
+          (origin, direction, length) =>
+            this.wheelContact(origin, direction, length, entry, geometry),
           this.couplings.towed(entry.entity.id),
         ) ?? [],
     }));

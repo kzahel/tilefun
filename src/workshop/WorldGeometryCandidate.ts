@@ -11,6 +11,7 @@ import { treeHouseRecipe } from "../scenarios/TreeHouseRecipe.js";
 import { undergroundGarageRecipe } from "../scenarios/UndergroundGarageRecipe.js";
 import { vehicleDynamicsRecipe } from "../scenarios/VehicleDynamicsRecipe.js";
 import { vehicleGeometryRecipe } from "../scenarios/VehicleGeometryRecipe.js";
+import { vehicleSurfacesRecipe } from "../scenarios/VehicleSurfacesRecipe.js";
 import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import { required } from "../shared/required.js";
 import { deferredVehicleCandidate } from "./DeferredVehicleCandidate.js";
@@ -50,6 +51,13 @@ const GEOMETRY_FIXTURES = {
     id: "geometry:car-dynamics-v1",
     name: driving("car-dynamics"),
     recipe: () => vehicleDynamicsRecipe(),
+  },
+  "car-surfaces": {
+    id: "geometry:car-surfaces-v1",
+    name: driving("car-surfaces"),
+    recipe: () => vehicleSurfacesRecipe(),
+    prompt:
+      "Drive each parked car from the road onto grass, sand and both dirt fields: judge grip, sliding, how much sand slows each car, and the wheel spray. Rally, jeep and monster truck have off-road tires and all-wheel drive; the race coupe has slicks; the compact is front-drive. Ordinary shared physics; painted terrain, no art promotion.",
   },
   "car-jumps": {
     id: "geometry:car-jumps-v1",

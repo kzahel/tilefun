@@ -33469,7 +33469,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:568"
+          "source": "src/scenes/PlayScene.ts:574"
         },
         {
           "system": "Gameplay",
@@ -33525,7 +33525,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:568"
+          "source": "src/scenes/PlayScene.ts:574"
         },
         {
           "system": "Gameplay",
@@ -33577,7 +33577,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:568"
+          "source": "src/scenes/PlayScene.ts:574"
         },
         {
           "system": "Gameplay",
@@ -35499,7 +35499,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:568"
+          "source": "src/physics/PhysicsScene.ts:580"
         },
         {
           "system": "Gameplay",
@@ -36651,7 +36651,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:485"
+          "source": "src/scenes/PlayScene.ts:491"
         },
         {
           "system": "Gameplay",

@@ -1,7 +1,11 @@
 import { afterEach, expect, it, vi } from "vitest";
+import { TerrainId } from "../autotile/TerrainId.js";
 import { createPlayer } from "../entities/Player.js";
+import { yawRotation } from "../physics/BodyRotation.js";
+import { RoadType } from "../road/RoadType.js";
 import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { createVehicle } from "../traffic/Vehicle.js";
+import { Chunk } from "../world/Chunk.js";
 import { ParticleSystem } from "./ParticleSystem.js";
 import { SurfaceReceivers } from "./SurfaceReceivers.js";
 
@@ -142,4 +146,49 @@ it("does not turn grounded-flag flicker on a roof into repeated landing bursts",
     expect(effects.collectItems(receivers)).toHaveLength(0);
   }
   expect(effects.diagnostics).toEqual({ particles: 0, pending: 0, marks: 0 });
+});
+
+it("throws surface spray from moving vehicles' rear wheels by material, within a budget", () => {
+  const chunk = new Chunk();
+  const ground = {
+    getChunkIfLoaded: (cx: number, cy: number) => (cx === 0 && cy === 0 ? chunk : undefined),
+  };
+  const near = [{ minCx: 0, maxCx: 0, minCy: 0, maxCy: 0 }];
+  const car = (vx: number, vy: number, wz = 0) => ({
+    ...createVehicle("compact-1", 128, 128),
+    id: 7,
+    wz,
+    velocity: { vx, vy },
+    bodyRotation: yawRotation(0),
+  });
+  /** Particles thrown over one second of 60Hz frames. */
+  const second = (material: TerrainId, entities: ReturnType<typeof car>[], views = near) => {
+    chunk.subgrid.fill(material);
+    const particles = new ParticleSystem();
+    for (let i = 0; i < 60; i++) particles.observeVehicles(entities, ground, 1 / 60, views);
+    return particles.count;
+  };
+  expect(second(TerrainId.Sand, [car(100, 0)])).toBeGreaterThan(10);
+  expect(second(TerrainId.DirtWarm, [car(100, 0)])).toBeGreaterThan(10);
+  expect(second(TerrainId.ShallowWater, [car(100, 0)])).toBeGreaterThan(10);
+  // Grass shows only a slide; parked, airborne and paved wheels throw nothing.
+  expect(second(TerrainId.Grass, [car(100, 0)])).toBe(0);
+  expect(second(TerrainId.Grass, [car(100, 60)])).toBeGreaterThan(5);
+  expect(second(TerrainId.Sand, [car(10, 0)])).toBe(0);
+  expect(second(TerrainId.Sand, [car(100, 0, 20)])).toBe(0);
+  // Off-screen cars (beyond a chunk of every view) spend none of the budget.
+  expect(second(TerrainId.Sand, [car(100, 0)], [{ minCx: 5, maxCx: 6, minCy: 5, maxCy: 6 }])).toBe(
+    0,
+  );
+  // A landing squat (rear body point a few px under the ground) still reads sand.
+  expect(second(TerrainId.Sand, [car(100, 0, -3)])).toBeGreaterThan(10);
+  // A crowd of fast cars stays inside the shared particle budget.
+  const crowd = Array.from({ length: 200 }, (_, i) => ({ ...car(300, 0), id: 100 + i }));
+  const crowded = second(TerrainId.Sand, crowd);
+  expect(crowded).toBeGreaterThan(350);
+  expect(crowded).toBeLessThanOrEqual(403);
+  // Road tiles over the sand throw nothing.
+  for (let tx = 0; tx < 16; tx++)
+    for (let ty = 0; ty < 16; ty++) chunk.setRoad(tx, ty, RoadType.CityAsphalt);
+  expect(second(TerrainId.Sand, [car(100, 0)])).toBe(0);
 });

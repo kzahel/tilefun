@@ -1,5 +1,15 @@
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { type AABB, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
+import { rotateBodyVector, yawRotation } from "../physics/BodyRotation.js";
+import {
+  type GroundMaterial,
+  type GroundMaterialSource,
+  groundMaterialAt,
+} from "../physics/GroundMaterial.js";
+import { isVehicle, isVehicleOverturned } from "../traffic/Vehicle.js";
+import contacts from "../traffic/vehicle-ground-contacts.json" with { type: "json" };
+import type { ChunkRange } from "../world/ChunkManager.js";
 import { surfaceDecals } from "./ProjectedDecals.js";
 import type { ParticleItem, SceneItem } from "./SceneItem.js";
 import type {
@@ -33,6 +43,21 @@ interface Burst {
   intensity: number;
   excludeId?: number | undefined;
 }
+/** Material each loose surface throws from a wheel (231). Pavement throws nothing. */
+const SPRAY_COLORS: Readonly<Partial<Record<GroundMaterial, readonly string[]>>> = {
+  dirt: ["#8B6914", "#A0782C", "#6B4F1D", "#C4A265"],
+  sand: ["#E3C98D", "#D8B878", "#EED9A6", "#C9A964"],
+  grass: ["#5E9C3A", "#7DB84A", "#4A7F2C", "#8C6A3A"],
+  water: ["#4488CC", "#66AADD", "#88CCEE", "#FFFFFF"],
+};
+/** Wheel spray never pushes the live particle count past this (device cost unmeasured). */
+const SPRAY_BUDGET = 400;
+/** Body-point height slack (world px) for suspension squat and landings. */
+const SPRAY_LEVEL_TOLERANCE = 4;
+/** Below this ground speed (world px/s) wheels throw nothing. */
+const SPRAY_MIN_SPEED = 24;
+/** Sideways wheel speed (world px/s) that counts as sliding. */
+const SPRAY_SLIP = 30;
 interface Mark {
   center: SurfaceAttachment;
   u: SurfaceAttachment;
@@ -67,6 +92,99 @@ export class ParticleSystem {
   private airborneClearance = false;
   private inFlight = false;
   private landing: { burst: Burst; feet: AABB } | undefined;
+  /** Fractional spray owed per vehicle, so emission rate is frame-rate independent. */
+  private sprayDebt = new Map<number, number>();
+  private readonly sprayIds = new Set<number>();
+  /** Shared game/lab observer: rear wheels on loose ground throw coloured spray —
+   * dirt and sand while rolling, grass only while sliding, water as spray.
+   * Derived from replicated pose/velocity and the shared surface lookup. */
+  observeVehicles(
+    entities: Iterable<Entity>,
+    ground: GroundMaterialSource,
+    dt: number,
+    views: readonly ChunkRange[],
+  ) {
+    this.sprayIds.clear();
+    for (const e of entities) {
+      if (!isVehicle(e) || e.parentId !== undefined || isVehicleOverturned(e)) continue;
+      // Only near a view: off-screen cars must not spend the shared budget.
+      const cx = Math.floor(e.position.wx / CHUNK_SIZE_PX),
+        cy = Math.floor(e.position.wy / CHUNK_SIZE_PX);
+      if (
+        !views.some(
+          (r) => cx >= r.minCx - 1 && cx <= r.maxCx + 1 && cy >= r.minCy - 1 && cy <= r.maxCy + 1,
+        )
+      )
+        continue;
+      const vx = e.velocity?.vx ?? 0,
+        vy = e.velocity?.vy ?? 0,
+        speed = Math.hypot(vx, vy);
+      if (speed < SPRAY_MIN_SPEED) continue;
+      this.sprayIds.add(e.id);
+      const q = e.bodyRotation ?? yawRotation(e.vehicleHeading ?? 0);
+      const side = rotateBodyVector(q, 0, 1, 0);
+      const slip = Math.abs(vx * side.x + vy * side.y);
+      const mounts = contacts[e.type.slice(11) as keyof typeof contacts]?.contacts ?? [];
+      let debt = this.sprayDebt.get(e.id) ?? 0;
+      for (const mount of mounts) {
+        if (!mount.name.startsWith("R")) continue;
+        const offset = rotateBodyVector(q, mount.x, mount.y, 0);
+        const wx = e.position.wx + offset.x,
+          wy = e.position.wy + offset.y,
+          wz = (e.wz ?? 0) + offset.z;
+        // A body point above the wheel rides suspension travel; allow for it.
+        const material = groundMaterialAt(ground, wx, wy, wz, SPRAY_LEVEL_TOLERANCE);
+        const colors = SPRAY_COLORS[material];
+        if (!colors) continue;
+        // Bursts per second from this wheel; grass only shows a slide.
+        const rate =
+          material === "grass"
+            ? slip > SPRAY_SLIP
+              ? slip / SPRAY_SLIP
+              : 0
+            : speed / 16 + slip / SPRAY_SLIP;
+        // A long frame (resume after a hitch) owes at most two bursts, not a blob.
+        debt = Math.min(debt + rate * dt, 2);
+        while (debt >= 1) {
+          debt -= 1;
+          if (this.particles.length < SPRAY_BUDGET) this.spray(wx, wy, wz, colors, -vx, -vy, e.id);
+        }
+      }
+      this.sprayDebt.set(e.id, Math.min(debt, 1));
+    }
+    for (const id of this.sprayDebt.keys()) if (!this.sprayIds.has(id)) this.sprayDebt.delete(id);
+  }
+  /** A few grains thrown up and opposite the car's travel from a wheel. */
+  private spray(
+    wx: number,
+    wy: number,
+    wz: number,
+    colors: readonly string[],
+    backX: number,
+    backY: number,
+    excludeId: number,
+  ) {
+    const count = 2 + Math.floor(Math.random() * 2);
+    for (let i = 0; i < count; i++) {
+      const life = 0.3 + Math.random() * 0.25;
+      const throwBack = 0.25 + Math.random() * 0.2;
+      this.particles.push({
+        wx: wx + (Math.random() - 0.5) * 3,
+        wy: wy + (Math.random() - 0.5) * 3,
+        z: wz + 0.5,
+        previousZ: wz + 0.5,
+        originZ: wz + 0.5,
+        vx: backX * throwBack + (Math.random() - 0.5) * 20,
+        vy: backY * throwBack + (Math.random() - 0.5) * 20,
+        vz: 15 + Math.random() * 25,
+        life,
+        maxLife: life,
+        size: 0.8 + Math.random() * 1.2,
+        color: colors[Math.floor(Math.random() * colors.length)] ?? colors[0] ?? "#fff",
+        excludeId,
+      });
+    }
+  }
   spawnLandingDust(wx: number, wy: number, intensity = 1, wz = 0, excludeId?: number) {
     this.pending.push({ kind: "dust", wx, wy, wz, intensity, excludeId });
   }

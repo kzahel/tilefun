@@ -1,6 +1,7 @@
 import { CHUNK_SIZE_PX, ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import { updatePlayerSpriteFromInput } from "../entities/Player.js";
+import { groundMaterialAt } from "../physics/GroundMaterial.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { PhysicsScene } from "../physics/PhysicsScene.js";
 import type { MotionIntent } from "../physics/PhysicsState.js";
@@ -64,6 +65,8 @@ export class RealmPhysics {
           Math.floor(bounds.bottom / CHUNK_SIZE_PX),
         ),
       geometryVersion: this.geometryVersion,
+      groundMaterial: (wx: number, wy: number, wz: number) =>
+        groundMaterialAt(this.realm.world, wx, wy, wz),
     };
   }
 

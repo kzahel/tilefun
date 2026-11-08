@@ -16655,6 +16655,16 @@
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
+      "id": "geometry:car-surfaces-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "Basic driving · car-surfaces",
+      "prompt": "Drive each parked car from the road onto grass, sand and both dirt fields: judge grip, sliding, how much sand slows each car, and the wheel spray. Rally, jeep and monster truck have off-road tires and all-wheel drive; the race coupe has slicks; the compact is front-drive. Ordinary shared physics; painted terrain, no art promotion.",
+      "url": "/tilefun/workshop.html?geometry=car-surfaces#/tool/world-geometry",
+      "fingerprint": "6c7ba95618540b7da12e38c8b7283c7e4fc57275d3514b63ac12f2ce167a03e6",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
       "id": "geometry:car-jumps-v1",
       "batchId": "world-geometry",
       "kind": "geometry",
@@ -56258,5 +56268,5 @@
       }
     }
   ],
-  "inputDigest": "ddf72a8f8c0f58f81e7c81a123de830c21b2bf78b6cabdb031ce08c79b721d0f"
+  "inputDigest": "2e8d0cb948c4c14e50a23a23258f744f8c7c28e14527f333814b43c02202f5ff"
 }

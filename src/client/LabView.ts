@@ -250,6 +250,9 @@ export class LabView {
     }
     this.lightSeconds += dt;
     this.effects.observePlayer(device.replica.playerEntity);
+    this.effects.observeVehicles(device.replica.entities, device.replica.world, dt, [
+      camera.getVisibleChunkRange(),
+    ]);
     this.effects.update(dt);
     try {
       camera.savePrev();

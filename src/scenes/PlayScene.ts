@@ -340,6 +340,12 @@ export class PlayScene implements GameScene {
     // Cosmetic transitions and contact placement are shared with embedded labs.
     if (this.particles.observePlayer(gc.stateView.playerEntity))
       playRandomSound(gc, SPLASH_KEYS, 0.45, 0.6 + Math.random() * 0.15);
+    this.particles.observeVehicles(
+      gc.stateView.entities,
+      gc.stateView.world,
+      dt,
+      gc.session.views.map((view) => view.camera.getVisibleChunkRange()),
+    );
 
     // Detect ball removal — spawn water splash if it disappeared over water
     this.detectBallSplashes(gc);
