@@ -2,7 +2,9 @@
 
 > Note (2026-11-08): the flat-screen XR mode and `XRSessionManager` described
 > here were removed in [226](../tactical/226-player-views-and-local-split-screen.md)
-> slice 2a. Kept as research history.
+> slice 2a. Kept as research history. The current WebXR plan (headset screen,
+> immersive and tabletop from the 3D scene) is
+> [230](../tactical/230-3d-cameras-stereo-and-webxr.md).
 
 ## Integration checkpoint (2026-10-11)
 

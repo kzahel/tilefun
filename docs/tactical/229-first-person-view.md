@@ -210,5 +210,7 @@ A follow-up pass in the same session confirmed all nine fixes: ACCEPT.
    view and one first-person view.
 4. Retire the old `r_show3d` "Legacy box view" once first person can show collision
    volumes directly.
-5. Later: real VR from the same 3D scene (the flat-screen XR mode was removed in
-   226 slice 2).
+5. View distance, interiors in 3D, orbit/tabletop cameras, stereo output and
+   WebXR from this same scene are planned in
+   [230](230-3d-cameras-stereo-and-webxr.md) (the flat-screen XR mode was removed
+   in 226 slice 2).
