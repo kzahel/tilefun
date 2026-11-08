@@ -8,7 +8,6 @@ export function touchMovementMode(value: unknown): TouchMovementMode {
   return value === "tap" || value === "hold" ? value : "joystick";
 }
 export interface TapTarget {
-  screenSide?: -1 | 1;
   wx: number;
   wy: number;
   wz: number;

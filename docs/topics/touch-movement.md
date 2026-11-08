@@ -50,9 +50,10 @@ finger. Moving an older finger never changes priority. Contacts originating on
 DOM UI or claimed canvas action buttons never enter the movement set.
 
 Cars steer toward the finger, using the existing close-target throttle scaling.
-Trains use left/right screen halves while held and brake on release; they never
-latch or toggle a direction in this mode. Keyboard/gamepad movement cancels the
-hold; Jump/Throw/Sprint can be used while steering on foot. A short completed tap
+The train half-screen hold and tap latch were removed in
+[226](../tactical/226-player-views-and-local-split-screen.md) slice 2 (players
+cannot occupy trains). Keyboard/gamepad movement cancels the hold;
+Jump/Throw/Sprint can be used while steering on foot. A short completed tap
 on a befriendable animal retains the existing interaction on release; ordinary
 releases never create a destination. Mouse-down/drag/release also supports the
 mode, with compatibility mouse input suppressed after touch.

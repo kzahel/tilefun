@@ -127,7 +127,6 @@ function playHarness(options: HarnessOptions = {}) {
       return input.carDriving;
     },
     tapMovement: input.tapMovement,
-    trainTapMovement: input.trainTapMovement,
     touchPinch: input.touchPinch,
     touchTap: input.touchTap,
     touchHold: input.touchHold,
@@ -154,7 +153,6 @@ function playHarness(options: HarnessOptions = {}) {
     profile: null,
     debugEnabled: false,
     editorButton: null,
-    xrActive: false,
     sendVisibleRange: () => visibleRanges.push(1),
     sendDebugState: (paused: boolean) => debugStates.push(paused),
   } as unknown as GameContext;
@@ -601,5 +599,202 @@ describe("play input characterization (pre-226 composition)", () => {
     h.step(120);
     expect(h.camera.x).toBeCloseTo(100, 0);
     expect(h.camera.y).toBeCloseTo(100, 0);
+  });
+});
+
+/** Touch/mouse event stand-in for the canvas listeners. */
+function pointerEvent(type: string, init: Record<string, unknown>): Event {
+  return Object.assign(new Event(type, { cancelable: true }), init);
+}
+
+/** Settle the camera on the player, then record that view for tap/hold resolution. */
+function framePlayer(h: ReturnType<typeof playHarness>): void {
+  h.step(120);
+  h.input.tapMovement.captureView(h.camera, 0);
+  h.take();
+}
+
+/** Client pixels of a ground point (the canvas is shown at half size, offset 10, 20). */
+function at(h: ReturnType<typeof playHarness>, wx: number, wy: number) {
+  const s = h.camera.worldToScreen(wx, wy);
+  return { clientX: 10 + s.sx / 2, clientY: 20 + s.sy / 2 };
+}
+
+function befriendable(wx: number, wy: number): Entity {
+  return {
+    ...createPlayer(wx, wy),
+    id: 5,
+    type: "wildlife-dog-v1",
+    wanderAI: { befriendable: true },
+  } as unknown as Entity;
+}
+
+/** A short touch that drifts `drift` client px right before lifting (taps allow 20). */
+function touchTap(
+  h: ReturnType<typeof playHarness>,
+  point: ReturnType<typeof at>,
+  id = 3,
+  drift = 0,
+) {
+  const finger = { identifier: id, ...point };
+  const lifted = { ...finger, clientX: finger.clientX + drift };
+  h.canvas.dispatchEvent(
+    pointerEvent("touchstart", { touches: [finger], changedTouches: [finger], targetTouches: [] }),
+  );
+  h.canvas.dispatchEvent(
+    pointerEvent("touchend", { touches: [], changedTouches: [lifted], targetTouches: [] }),
+  );
+}
+
+describe("play pointer characterization (226 slice 2, before composition moves)", () => {
+  // The player stands at (100, 100) and the camera is settled on it.
+  it("hold mode walks toward the held point until manual input or a lock releases it", () => {
+    const h = playHarness({ movementMode: "hold" });
+    framePlayer(h);
+    h.canvas.dispatchEvent(pointerEvent("mousedown", { button: 0, ...at(h, 160, 100) }));
+    h.step();
+    expect(h.lastInput()).toMatchObject({ dx: 1, dy: 0, relativeDriving: false });
+    expect(h.scene.lastMovement.dx).toBeCloseTo(1, 6);
+    // Manual input wins and drops the hold.
+    h.actions.pressKey("KeyS");
+    h.step();
+    expect(h.lastInput()).toMatchObject({ dx: 0, dy: 1 });
+    h.actions.releaseKey("KeyS");
+    h.step();
+    expect(h.lastInput()).toMatchObject({ dx: 0, dy: 0 });
+
+    h.canvas.dispatchEvent(pointerEvent("mousedown", { button: 0, ...at(h, 100, 40) }));
+    h.step();
+    expect(h.lastInput()).toMatchObject({ dx: 0, dy: -1 });
+    h.host.storagePaused = true;
+    h.step();
+    h.host.storagePaused = false;
+    h.step();
+    expect(h.lastInput()).toMatchObject({ dx: 0, dy: 0 });
+  });
+
+  it("hold mode in a steering car aims in world space and slows within 24 px", () => {
+    const h = playHarness({ movementMode: "hold", carDriving: "steering" });
+    h.board(car("compact-1"));
+    framePlayer(h);
+    h.canvas.dispatchEvent(pointerEvent("mousedown", { button: 0, ...at(h, 112, 100) }));
+    h.step();
+    expect(h.lastInput()).toMatchObject({
+      dx: quantizeAxis(12 / 24),
+      dy: 0,
+      relativeDriving: false,
+    });
+  });
+
+  it("a tap-mode click sets a destination instead of interacting", () => {
+    const h = playHarness({ movementMode: "tap" });
+    framePlayer(h);
+    h.canvas.dispatchEvent(pointerEvent("click", at(h, 160, 160)));
+    expect(h.take()).toEqual([]);
+    expect(h.gc.tapMovement?.target?.wx).toBeCloseTo(160, 6);
+    expect(h.gc.tapMovement?.target?.wy).toBeCloseTo(160, 6);
+    h.step();
+    expect(h.lastInput()).toMatchObject({
+      dx: quantizeAxis(Math.SQRT1_2),
+      dy: quantizeAxis(Math.SQRT1_2),
+    });
+  });
+
+  it("tapping a befriendable animal on foot befriends it instead of walking there", () => {
+    const h = playHarness({ movementMode: "tap" });
+    h.view.entities = [h.player, befriendable(160, 100)];
+    framePlayer(h);
+    h.gc.tapMovement?.setTarget({ wx: 50, wy: 50, wz: 0 });
+    h.canvas.dispatchEvent(pointerEvent("click", at(h, 170, 100)));
+    expect(h.take()).toEqual([
+      { type: "player-interact", wx: expect.closeTo(170, 6), wy: expect.closeTo(100, 6) },
+    ]);
+    expect(h.gc.tapMovement?.target).toBeNull();
+    // Outside the befriend radius it is an ordinary destination.
+    h.canvas.dispatchEvent(pointerEvent("click", at(h, 190, 100)));
+    expect(h.take()).toEqual([]);
+    expect(h.gc.tapMovement?.target?.wx).toBeCloseTo(190, 6);
+  });
+
+  it("drivers cannot befriend: a tap on the animal becomes a destination", () => {
+    const h = playHarness({ movementMode: "tap" });
+    h.board(car("compact-1"));
+    h.view.entities.push(befriendable(160, 100));
+    framePlayer(h);
+    h.canvas.dispatchEvent(pointerEvent("click", at(h, 160, 100)));
+    expect(h.take()).toEqual([]);
+    expect(h.gc.tapMovement?.target?.wx).toBeCloseTo(160, 6);
+  });
+
+  it("hold mode befriends on a tap but never sets a destination", () => {
+    const h = playHarness({ movementMode: "hold" });
+    h.view.entities = [h.player, befriendable(160, 100)];
+    framePlayer(h);
+    h.canvas.dispatchEvent(pointerEvent("click", at(h, 160, 100)));
+    expect(h.take()).toEqual([
+      { type: "player-interact", wx: expect.closeTo(160, 6), wy: expect.closeTo(100, 6) },
+    ]);
+    h.canvas.dispatchEvent(pointerEvent("click", at(h, 200, 100)));
+    expect(h.take()).toEqual([]);
+    expect(h.gc.tapMovement?.target).toBeNull();
+  });
+
+  it("a completed touch tap in tap mode keeps the destination resolved at touch start", () => {
+    const h = playHarness({ movementMode: "tap" });
+    framePlayer(h);
+    // The finger drifts 12 client px (8 world px) before lifting; the start point wins.
+    touchTap(h, at(h, 40, 100), 3, 12);
+    expect(h.gc.tapMovement?.target?.wx).toBeCloseTo(40, 6);
+    h.step();
+    expect(h.lastInput()).toMatchObject({ dx: -1, dy: 0 });
+    h.canvas.dispatchEvent(pointerEvent("click", at(h, 160, 100)));
+    expect(h.gc.tapMovement?.target?.wx).toBeCloseTo(40, 6);
+  });
+
+  it.each([
+    ["storage pause", (h: ReturnType<typeof playHarness>) => (h.host.storagePaused = true)],
+    ["door transition", (h: ReturnType<typeof playHarness>) => (h.host.doorBusy = true)],
+    ["open menu", (h: ReturnType<typeof playHarness>) => (h.host.menuOpen = true)],
+    ["another scene", (h: ReturnType<typeof playHarness>) => (h.host.currentScene = {} as never)],
+  ])("a %s ignores clicks, destination taps and befriend taps", (_, lock) => {
+    for (const movementMode of ["joystick", "tap", "hold"] as const) {
+      const h = playHarness({ movementMode });
+      h.view.entities = [h.player, befriendable(160, 100)];
+      framePlayer(h);
+      lock(h);
+      h.canvas.dispatchEvent(pointerEvent("click", at(h, 160, 100)));
+      h.canvas.dispatchEvent(pointerEvent("click", at(h, 40, 100)));
+      expect(h.take(), movementMode).toEqual([]);
+      touchTap(h, at(h, 160, 100));
+      touchTap(h, at(h, 40, 100), 4);
+      expect(h.take(), movementMode).toEqual([]);
+      expect(h.gc.tapMovement?.target, movementMode).toBeNull();
+    }
+    // A tap that began before the lock and ends after it is dropped too.
+    const h = playHarness({ movementMode: "tap" });
+    h.view.entities = [h.player, befriendable(160, 100)];
+    framePlayer(h);
+    const finger = { identifier: 5, ...at(h, 160, 100) };
+    h.canvas.dispatchEvent(
+      pointerEvent("touchstart", {
+        touches: [finger],
+        changedTouches: [finger],
+        targetTouches: [],
+      }),
+    );
+    lock(h);
+    h.canvas.dispatchEvent(
+      pointerEvent("touchend", { touches: [], changedTouches: [finger], targetTouches: [] }),
+    );
+    expect(h.take()).toEqual([]);
+  });
+
+  it("a short joystick-mode touch tap interacts at the touched point", () => {
+    const h = playHarness({ movementMode: "joystick" });
+    framePlayer(h);
+    touchTap(h, at(h, 160, 120), 4);
+    expect(h.take()).toEqual([
+      { type: "player-interact", wx: expect.closeTo(160, 6), wy: expect.closeTo(120, 6) },
+    ]);
   });
 });

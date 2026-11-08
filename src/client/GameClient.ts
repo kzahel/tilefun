@@ -59,18 +59,16 @@ import { HMR_KEY } from "../shared/storageKeys.js";
 import { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransport.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { ChatHUD } from "../ui/ChatHUD.js";
-import { DoorControl } from "../ui/DoorControl.js";
 import { GemHUD } from "../ui/GemHUD.js";
 import { MainMenu } from "../ui/MainMenu.js";
-import { VehicleControl } from "../ui/VehicleControl.js";
 import { WorldMap } from "../ui/WorldMap.js";
 import { World } from "../world/World.js";
-import { XRSessionManager } from "../xr/XRSessionManager.js";
 import { takeAdminToken } from "./adminToken.js";
 import { registerClientConsole } from "./ClientConsoleBindings.js";
 import { RemoteStateView } from "./ClientStateView.js";
 import { FirstPersonControl } from "./FirstPersonControl.js";
 import { GameMenuChrome, type MenuChromeHost } from "./GameMenuChrome.js";
+import { PlaceControls, type PlaceControlsHost } from "./PlaceControls.js";
 import { PlayInputController, type PlayInputHost } from "./PlayInputController.js";
 import { RequestBroker } from "./RequestBroker.js";
 import { type ServerMessageHost, ServerMessageRouter } from "./ServerMessageRouter.js";
@@ -156,7 +154,6 @@ export class GameClient implements GameTestHooks {
   private chatHUD: ChatHUD;
   readonly audioManager: AudioManager;
 
-  private xrManager = new XRSessionManager();
   readonly firstPerson = new FirstPersonControl(
     () => this.canvas,
     () => this.sheets,
@@ -171,8 +168,7 @@ export class GameClient implements GameTestHooks {
   nextRequestId = 1;
   private readonly requests: RequestBroker;
 
-  private doorControl: DoorControl;
-  private vehicleControl: VehicleControl;
+  private readonly placeControls: PlaceControls;
   private doorPresentation = new DoorPresentation();
   /** True once init() has completed and we're ready to show UI. */
   initDone = false;
@@ -228,7 +224,6 @@ export class GameClient implements GameTestHooks {
     this.touchJoystick = this.playInput.touchJoystick;
     this.touchButtons = this.playInput.touchButtons;
     this.tapMovement = this.playInput.tapMovement;
-    this.actions.setXRManager(this.xrManager);
     this.debugPanel = new DebugPanel();
     if (this.renderHost.rendererControl)
       this.debugPanel.setRendererControl(this.renderHost.rendererControl);
@@ -319,31 +314,7 @@ export class GameClient implements GameTestHooks {
     this.router = router;
     this.transport.onMessage((msg) => router.route(msg));
 
-    this.doorControl = new DoorControl(async (request) => {
-      if (this.doorPresentation.busy) return;
-      // Authority validates a walking approach against the last directional input.
-      // Queue that request before neutral input; the busy presentation locks the next tick.
-      this.playInput.clearPlayInput(!request.walkThrough);
-      if (request.walkThrough) this.doorPresentation.begin();
-      try {
-        await this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
-      } catch (error) {
-        this.doorPresentation.cancel();
-        throw error;
-      }
-    });
-    this.vehicleControl = new VehicleControl(async (request) => {
-      this.playInput.clearPlayInput();
-      return this.gcSendRequest({ ...request, requestId: this.nextRequestId++ });
-    });
-    this.actions.on("vehicle_recover", () => {
-      if (this.scenes.current instanceof PlayScene && !this.playInput.inputBlocked)
-        this.vehicleControl.activateEquipment();
-    });
-    this.actions.on("enter_place", () => {
-      if (!(this.scenes.current instanceof PlayScene) || this.playInput.inputBlocked) return;
-      if (!this.vehicleControl.activate()) this.doorControl.activate();
-    });
+    this.placeControls = new PlaceControls(this.placeControlsHost(), this.actions);
     this.loop = new GameLoop({
       update: (dt) => this.update(dt),
       render: (alpha, presentationSeconds) => this.render(alpha, presentationSeconds),
@@ -498,7 +469,7 @@ export class GameClient implements GameTestHooks {
     if (this.initDone && ready) this.startupWorldReady = true;
     this.doorPresentation.update(this.mainMenu.currentWorldId, ready);
     this.chrome.updateMapHint();
-    this.updatePlaceControls(dt, ready);
+    this.placeControls.update(dt, this.initDone && ready);
   }
 
   /** The player exists and its room or terrain chunk is presentable. */
@@ -514,30 +485,6 @@ export class GameClient implements GameTestHooks {
               Math.floor(p.position.wy / CHUNK_SIZE_PX),
             ),
           ))
-    );
-  }
-
-  /** Vehicle prompts take precedence over door prompts. */
-  private updatePlaceControls(dt: number, ready: boolean): void {
-    const vehiclePrompt = this.vehicleControl.update(
-      this.stateView,
-      this.initDone && ready && this.scenes.current instanceof PlayScene,
-      this.doorPresentation.busy || this.playInput.uiBlocked || this.chrome.storagePaused,
-      this.playInput.movementMode,
-      this.playInput.carDriving,
-    );
-    this.doorControl.update(
-      this.stateView,
-      !vehiclePrompt &&
-        this.initDone &&
-        ready &&
-        !this.scenes.has(IdeaScene) &&
-        !this.overlayOpen(),
-      this.scenes.current instanceof PlayScene
-        ? this.scenes.current.lastMovement
-        : this.actions.getMovement(),
-      dt,
-      this.doorPresentation.busy || this.playInput.inputBlocked,
     );
   }
 
@@ -594,8 +541,7 @@ export class GameClient implements GameTestHooks {
     this.renderHost.dispose();
     this.debugPanel.destroy();
     this.sceneFrame.clear();
-    this.doorControl.destroy();
-    this.vehicleControl.destroy();
+    this.placeControls.destroy();
     this.doorPresentation.destroy();
     this.loop.stop();
     this.session.flushServer();
@@ -771,6 +717,40 @@ export class GameClient implements GameTestHooks {
     };
   }
 
+  private placeControlsHost(): PlaceControlsHost {
+    const client = this;
+    return {
+      get stateView() {
+        return client.stateView;
+      },
+      doorPresentation: this.doorPresentation,
+      get playing() {
+        return client.scenes.current instanceof PlayScene;
+      },
+      get overlayOpen() {
+        return client.scenes.has(IdeaScene) || client.overlayOpen();
+      },
+      get inputBlocked() {
+        return client.playInput.inputBlocked;
+      },
+      get storagePaused() {
+        return client.chrome.storagePaused;
+      },
+      get movementMode() {
+        return client.playInput.movementMode;
+      },
+      get carDriving() {
+        return client.playInput.carDriving;
+      },
+      get movement() {
+        const scene = client.scenes.current;
+        return scene instanceof PlayScene ? scene.lastMovement : client.actions.getMovement();
+      },
+      clearPlayInput: (sendNeutral) => this.playInput.clearPlayInput(sendNeutral),
+      request: (message) => this.gcSendRequest({ ...message, requestId: this.nextRequestId++ }),
+    };
+  }
+
   private sessionHost(): WorldSessionHost {
     const client = this;
     return {
@@ -795,9 +775,6 @@ export class GameClient implements GameTestHooks {
     return {
       canvas: this.canvas,
       renderHost: this.renderHost,
-      get loop() {
-        return client.loop;
-      },
       get stateView() {
         return client.stateView;
       },
@@ -808,7 +785,6 @@ export class GameClient implements GameTestHooks {
       get consoleEngine() {
         return client.consoleEngine;
       },
-      xrManager: this.xrManager,
       profile: this.profile,
       profileStore: this.profileStore,
       get doorBusy() {
@@ -882,7 +858,6 @@ export class GameClient implements GameTestHooks {
         return input.carDriving;
       },
       tapMovement: input.tapMovement,
-      trainTapMovement: input.trainTapMovement,
       touchPinch: input.touchPinch,
       touchTap: input.touchTap,
       touchHold: input.touchHold,
@@ -935,9 +910,6 @@ export class GameClient implements GameTestHooks {
       },
       set editorButton(v) {
         client.chrome.editorButton = v;
-      },
-      get xrActive() {
-        return client.xrManager.active;
       },
       firstPerson: this.firstPerson,
       flushServer: () => this.session.flushServer(),

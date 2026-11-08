@@ -139,6 +139,14 @@ including co-op with someone already aboard.
 
 ## Player driving
 
+Current state: players cannot occupy trains (`occupiedVehicle` returns only
+`vehicle-v1:` entities since `8f405aaf`), and
+[226](../tactical/226-player-views-and-local-split-screen.md) slice 2 deleted the
+unreachable client train-driving input (half-screen tap latch and hold, the
+Whistle label, train exceptions in steering/reverse). Reinstating inside driving
+needs that input back on the shared per-seat composition. The record below is
+the 087 delivery.
+
 In **Hold to move**, hold the left/right screen half to travel and lift to stop.
 The newest held world finger chooses the side; [touch movement](touch-movement.md)
 owns contact handoff and cancellation. Tap mode retains its latched side taps.

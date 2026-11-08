@@ -11,7 +11,6 @@ import { eventCode } from "../input/KeyLabels.js";
 import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
 import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { presentInterior } from "../interiors/presentInterior.js";
-import { isTrain } from "../railway/Train.js";
 import { Camera } from "../rendering/Camera.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { presentTerrain } from "../rendering/OutdoorPresentation.js";
@@ -249,11 +248,7 @@ export class ScenarioPresentationHost {
             }
           : raw;
       const vehicle = occupiedVehicle(this.session.view.playerEntity, this.session.view.entities);
-      const input = vehicle
-        ? isTrain(vehicle)
-          ? { ...merged, jump: false }
-          : manualCarMovement(merged)
-        : merged;
+      const input = vehicle ? manualCarMovement(merged) : merged;
       this.interpolate = this.session.submitInput(input, this.camera.getVisibleChunkRange());
       if (this.interpolate) {
         this.steps++;

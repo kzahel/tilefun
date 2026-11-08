@@ -156,23 +156,20 @@ test("default GPU mesh host runs the shared game and retains the input/UI canvas
         __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
       }
     ).__game;
-    const target = document.createElement("canvas");
-    const first = game.renderHost.captureFrame?.(target);
-    const second = game.renderHost.captureFrame?.(target);
+    const first = game.renderHost.captureFrame?.();
+    const second = game.renderHost.captureFrame?.();
     return {
       mode: game.renderHost.rendererControl?.mode,
-      reused: first === target && second === target,
-      dimensions: [target.width, target.height],
+      dimensions: [first?.width, first?.height],
       expected: [(canvas as HTMLCanvasElement).width, (canvas as HTMLCanvasElement).height],
-      visible: target
-        .getContext("2d")
-        ?.getImageData(0, 0, target.width, target.height)
+      visible: first
+        ?.getContext("2d")
+        ?.getImageData(0, 0, first.width, first.height)
         .data.some((v) => v !== 0),
-      independentSnapshot: game.renderHost.captureFrame?.() !== target,
+      independentSnapshot: !!first && !!second && first !== second && first !== canvas,
     };
   });
   expect(capture.mode).toBe("gpu-mesh");
-  expect(capture.reused).toBe(true);
   expect(capture.dimensions).toEqual(capture.expected);
   expect(capture.visible).toBe(true);
   expect(capture.independentSnapshot).toBe(true);

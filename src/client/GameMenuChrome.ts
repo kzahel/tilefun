@@ -1,5 +1,4 @@
 import type { ConsoleEngine } from "../console/ConsoleEngine.js";
-import type { GameLoop } from "../core/GameLoop.js";
 import type { SceneManager } from "../core/SceneManager.js";
 import { captureIdea, type IdeaSnapshot } from "../ideas/captureIdea.js";
 import { ideaToast } from "../ideas/IdeaDialog.js";
@@ -11,7 +10,6 @@ import { PropEditorScene } from "../scenes/PropEditorScene.js";
 import type { MainMenu } from "../ui/MainMenu.js";
 import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 import { OptionsDialog } from "../ui/OptionsDialog.js";
-import { XRSessionManager } from "../xr/XRSessionManager.js";
 import type { RemoteStateView } from "./ClientStateView.js";
 import type { GameClientOptions } from "./GameClient.js";
 import type { PlayInputController } from "./PlayInputController.js";
@@ -24,12 +22,10 @@ type ProfileUpdates = Parameters<
 export interface MenuChromeHost {
   readonly canvas: HTMLCanvasElement;
   readonly renderHost: RenderHost;
-  readonly loop: GameLoop;
   readonly stateView: RemoteStateView;
   readonly mainMenu: MainMenu;
   readonly scenes: SceneManager;
   readonly consoleEngine: ConsoleEngine;
-  readonly xrManager: XRSessionManager;
   readonly profile: NonNullable<GameClientOptions["profile"]> | null;
   readonly profileStore: GameClientOptions["profileStore"];
   readonly doorBusy: boolean;
@@ -173,7 +169,6 @@ export class GameMenuChrome {
     this.optionsButton = this.createGearButton();
     this.mapButton = this.createMapButton();
     const items = this.createPanelItems(hamburger);
-    this.createVrButton();
     this.host.mainMenu.setTools([
       {
         label: "Idea",
@@ -379,61 +374,5 @@ export class GameMenuChrome {
       workbenchBtn,
     );
     return { idea: ideaBtn, debug: debugBtn, interiors: interiorsBtn };
-  }
-
-  /** Add "Enter VR" if WebXR immersive-vr is supported (Quest, etc.). */
-  private createVrButton(): void {
-    const panel = this.panel;
-    const vrBtn = menuButton("VR (checking...)", `${MENU_BTN_STYLE} color: #666;`);
-    vrBtn.disabled = true;
-    // Always show on Quest UA even if feature detection hasn't resolved yet
-    const isQuestUA = /Quest/i.test(navigator.userAgent);
-    if (isQuestUA) {
-      panel.appendChild(vrBtn);
-    }
-    XRSessionManager.isSupported().then(
-      (supported) => {
-        if (!supported) {
-          if (isQuestUA) {
-            vrBtn.textContent = "VR (not supported)";
-            console.warn(
-              "[tilefun:xr] Quest UA detected but immersive-vr not supported. navigator.xr =",
-              navigator.xr,
-            );
-          }
-          return;
-        }
-        vrBtn.textContent = "Enter VR";
-        vrBtn.style.color = "#4fc3f7";
-        vrBtn.disabled = false;
-        if (!isQuestUA) panel.appendChild(vrBtn);
-      },
-      (err) => {
-        console.error("[tilefun:xr] isSupported check failed:", err);
-        if (isQuestUA) vrBtn.textContent = "VR (error)";
-      },
-    );
-    vrBtn.addEventListener("click", () => this.toggleVr(vrBtn));
-    this.host.xrManager.onSessionEnd = () => {
-      vrBtn.textContent = "Enter VR";
-      vrBtn.style.color = "#4fc3f7";
-    };
-  }
-
-  private toggleVr(vrBtn: HTMLButtonElement): void {
-    const { xrManager, canvas, loop, renderHost } = this.host;
-    this.closePanel();
-    if (xrManager.active) {
-      xrManager.exitVR();
-    } else {
-      const frameTarget = document.createElement("canvas");
-      xrManager
-        .enterVR(canvas, loop, () => renderHost.captureFrame?.(frameTarget) ?? canvas)
-        .catch((err) => {
-          console.error("[tilefun:xr] Failed to enter VR:", err);
-          vrBtn.textContent = "VR (failed)";
-          vrBtn.style.color = "#f66";
-        });
-    }
   }
 }

@@ -63,7 +63,7 @@
       "overLimit": 1
     },
     "src/client/GameClient.ts": {
-      "lines": 982,
+      "lines": 931,
       "worst": 0,
       "overLimit": 0
     },
@@ -217,11 +217,6 @@
       "worst": 68,
       "overLimit": 1
     },
-    "src/input/ActionManager.ts": {
-      "lines": 241,
-      "worst": 29,
-      "overLimit": 1
-    },
     "src/input/ControllerInput.ts": {
       "lines": 159,
       "worst": 62,
@@ -233,8 +228,8 @@
       "overLimit": 1
     },
     "src/input/TouchButtons.ts": {
-      "lines": 275,
-      "worst": 35,
+      "lines": 267,
+      "worst": 30,
       "overLimit": 1
     },
     "src/interiors/AdvancedSuite.ts": {
@@ -573,7 +568,7 @@
       "overLimit": 1
     },
     "src/scenarios/ScenarioPresentationHost.ts": {
-      "lines": 525,
+      "lines": 498,
       "worst": 27,
       "overLimit": 1
     },
@@ -593,8 +588,8 @@
       "overLimit": 1
     },
     "src/scenes/PlayScene.ts": {
-      "lines": 811,
-      "worst": 128,
+      "lines": 792,
+      "worst": 104,
       "overLimit": 2
     },
     "src/scenes/PropEditorScene.ts": {
@@ -931,11 +926,6 @@
       "lines": 459,
       "worst": 33,
       "overLimit": 2
-    },
-    "src/xr/XRSessionManager.ts": {
-      "lines": 344,
-      "worst": 40,
-      "overLimit": 1
     }
   }
 }

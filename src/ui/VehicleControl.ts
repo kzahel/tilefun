@@ -6,7 +6,7 @@ import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControl
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { driveCandidate, type EquipmentRequest, equipmentPrompt } from "./VehicleEquipment.js";
 
-type VehicleRequest =
+export type VehicleRequest =
   | { type: "call-train"; benchId: number }
   | { type: "enter-vehicle"; entityId: number }
   | { type: "exit-vehicle" }

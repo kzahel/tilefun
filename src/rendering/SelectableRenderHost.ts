@@ -93,8 +93,8 @@ export async function selectableRenderHostFactory(
       endWorld() {
         current.endWorld();
       },
-      captureFrame(target) {
-        return current.captureFrame?.(target) ?? canvas;
+      captureFrame() {
+        return current.captureFrame?.() ?? canvas;
       },
       dispose() {
         if (disposed) return;

@@ -8,8 +8,6 @@ import { TouchHold } from "../input/TouchHold.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
 import { TouchPinch } from "../input/TouchPinch.js";
 import { TouchTap } from "../input/TouchTap.js";
-import { TrainTapMovement } from "../input/TrainTapMovement.js";
-import { isTrain } from "../railway/Train.js";
 import type { Camera } from "../rendering/Camera.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
@@ -50,7 +48,6 @@ export class PlayInputController {
   readonly touchJoystick: TouchJoystick;
   readonly touchButtons: TouchButtons;
   readonly tapMovement = new TapMovement();
-  readonly trainTapMovement = new TrainTapMovement();
   readonly touchTap: TouchTap;
   readonly touchHold: TouchHold;
   readonly touchPinch: TouchPinch;
@@ -181,7 +178,6 @@ export class PlayInputController {
     const scene = this.host.currentScene;
     if (sendNeutral && scene instanceof PlayScene) scene.cancelInput(transport);
     this.tapMovement.cancel();
-    this.trainTapMovement.cancel();
     this.touchPinch.reset();
     this.touchTap.reset();
     this.touchHold.reset();
@@ -202,14 +198,9 @@ export class PlayInputController {
     this.interactAt(e.clientX, e.clientY);
   }
 
-  /** Handle tap in play mode (mobile). */
+  /** The ground point under a tap, click or held contact. */
   private resolveDriveTap(x: number, y: number): TapTarget | null {
-    const { stateView } = this.host;
-    const target = this.tapMovement.resolve(this.canvas, x, y);
-    const vehicle = occupiedVehicle(stateView.playerEntity, stateView.entities);
-    if (!target || !vehicle || !isTrain(vehicle)) return target;
-    const rect = this.canvas.getBoundingClientRect();
-    return { ...target, screenSide: x < rect.left + rect.width / 2 ? -1 : 1 };
+    return this.tapMovement.resolve(this.canvas, x, y);
   }
   private onPlayTap(clientX: number, clientY: number): void {
     if (this.gestureBlocked) return;
@@ -251,12 +242,6 @@ export class PlayInputController {
       return;
     const { stateView } = this.host;
     const vehicle = occupiedVehicle(stateView.playerEntity, stateView.entities);
-    if (vehicle && isTrain(vehicle)) {
-      if (this.movementMode === "hold") return;
-      this.tapMovement.cancel();
-      this.trainTapMovement.tap(target.screenSide ?? 1);
-      return;
-    }
     const eligible =
       !vehicle &&
       stateView.entities.some((e) =>

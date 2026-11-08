@@ -2,9 +2,10 @@
 
 Status: phasing set 2026-11-07 after four read-only research reviews (input
 and labs, rendering and performance, authority and prediction, testing and
-decomposition); slice 0 (safety net) in progress. Updated 2026-11-07 for seats
-on one device session, online seats and the first-person view requirements
-from 229.
+decomposition). Slices 0, 1a and 1b are done; slice 2 (input ownership) is in
+progress as 2a (characterize, delete train and XR input) and 2b (per-seat
+composition and lab input). Updated 2026-11-07 for seats on one device session,
+online seats and the first-person view requirements from 229.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
 pinch zoom or movement mode). Rather than give labs another copy, make the game
@@ -711,3 +712,76 @@ maintaining both shells. The shell import allow-list only shrinks.
     views) before slice 5, re-measure four-view/diagonal mesh driving at 0.5,
     and measure the Chromebook when it is healthy. Owner checkpoint: zoom
     policy (0.75 for 3–4 players) and layouts.
+- 2026-11-08, slice 2a (input ownership, part 1: characterize, then delete train
+  and XR input). Slice 2 was split at its natural seam so each half gets its own
+  review; 2b carries the per-seat composition, schemes, pad and touch routing and
+  the lab adapter.
+  - Characterization added before any composition moves (Node):
+    - `src/client/PlaceControls.test.ts` (11 cases) pins the E/F wiring:
+      vehicle prompts claim E ahead of doors (including while storage pause
+      locks the vehicle button), exit with the same key, F runs equipment
+      beside a dump truck while E still drives, door walk-through only after a
+      fresh approach and 0.1 s of movement toward the door, sideways/backwards
+      never, walk-through requests skip neutral input and begin the door
+      presentation (a failed trip cancels it), E/F act only in play with input
+      unblocked, a busy presentation drops door requests and locks the vehicle
+      button, locks and overlays stop walk-throughs, and teardown removes the
+      subscriptions. The wiring moved verbatim from
+      `GameClient.updatePlaceControls` and its two action handlers into
+      `src/client/PlaceControls.ts` so it can run with the real
+      `VehicleControl`, `DoorControl` and `ActionManager` against a minimal DOM
+      stand-in.
+    - `playInputCharacterization.test.ts` gains pointer cases (35 tests; the
+      original 23 are unchanged apart from two removed harness fields): hold
+      mode walks toward the held point, yields to manual input and is released
+      by a lock; hold in a steering car aims in world space and slows within
+      24 px; tap-mode clicks set a destination instead of interacting; a
+      befriendable animal under a tap is befriended on foot (destination
+      cancelled) but becomes a destination for drivers; hold mode befriends but
+      never sets a destination; a touch tap keeps the destination resolved at
+      touch start even if the finger drifts before lifting, and suppresses the
+      following click; a short joystick-mode touch tap interacts at the point;
+      storage pause, door transition, open menu or another scene drop clicks,
+      destination taps and befriend taps in every movement mode, including a
+      tap that began before the lock.
+    - Seeded single-line faults in `PlayScene`, `PlayInputController`,
+      `TouchTap` and `PlaceControls`: 38 of 38 fail the suites (two cases were
+      tightened after their faults survived a first run). Not pinned: the
+      `GameClient` host getters (which movement the door sees, the overlay
+      set, `playing`); 2b replaces them with the seat's composed movement.
+  - Deleted train driving input (unreachable since `8f405aaf`):
+    `TrainTapMovement`, the train branches in `PlayScene`, `PlayInputController`
+    and `firstPersonPlay`, the half-screen `screenSide` target, the
+    `TouchHold` train mode, the touch **Whistle** label and train exceptions in
+    reverse and steering, and the lab host's train branch. Server train
+    services, calling and roof riding are unchanged. Trains, vehicles and touch
+    movement topics record the removal.
+  - Deleted XR: `src/xr/XRSessionManager` (and its test), the **Enter VR** menu
+    button, `GameContext.xrActive`, the XR gamepad/throw hooks (`GamepadPoller`
+    folded into `ActionManager`), the reusable `captureFrame(target)` parameter
+    (`captureFrame()` always returns an independent snapshot; the GPU browser
+    case asserts that instead of reuse), the `webxr` tsconfig types and the
+    direct `@types/webxr` devDependency (it stays installed through
+    `@types/three`).
+  - Ratchet baselines tightened: `PlayScene` 811 → 792 lines (worst complexity
+    128 → 104), `GameClient` 982 → 931, `TouchButtons` 275 → 267 (35 → 30),
+    `ScenarioPresentationHost` 525 → 498; `ActionManager` and `XRSessionManager`
+    leave the baseline.
+  - Validation: focused vitest (scenes, client, input, core, ui, render hosts,
+    lab host, lab-shell guard), `tsc` for all four configs, Biome, knip,
+    ratchet (only other sessions' `src/rendering` failures), regenerated
+    `art:catalog`/`workshop:manifest` (line references only), production build,
+    Playwright smoke and the edited GPU capture case in bundled Chromium: 27 of
+    28 smoke cases and the GPU case pass. The failing smoke case
+    (`vehicle-placement`, "Get out") is environmental and predates this slice:
+    on this Mac's Dvorak layout Chromium's Keyboard Map labels physical E as
+    ".", so the button reads "Get out · ." and the test's `[EY]` hint pattern
+    fails after reload (before reload a touch source hides the hint).
+  - Review (Yep Anywhere, Opus 5.5 high): ACCEPT, no blocking findings. Optional
+    findings fixed: pointer input under locks and outside play was unpinned
+    (added; a fault in `onDestinationTap`'s lock guard only failed once a lock
+    lands mid-tap), the vehicle button's busy/blocked lock was unpinned, the
+    touch-start claim was not distinguishable from touch end, the `webxr`
+    wording, a stale research reference and a line wrap. The `GameClient` host
+    getters stay a review note until 2b replaces them. Re-review: ACCEPT (it
+    also agreed the smoke failure is the Dvorak hint label, not this slice).

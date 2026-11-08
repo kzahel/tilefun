@@ -14,7 +14,6 @@ function harness() {
     wx: x,
     wy: y,
     wz: 0,
-    screenSide: x < 0 ? (-1 as const) : (1 as const),
   }));
   const hold = new TouchHold(canvas, claimed, resolve);
   hold.attach();
@@ -24,7 +23,7 @@ function harness() {
     Object.assign(e, { changedTouches: changed, touches });
     canvas.dispatchEvent(e);
   };
-  const sample = (manual = idle, train = false) => hold.sample({ wx: 0, wy: 0 }, manual, train);
+  const sample = (manual = idle) => hold.sample({ wx: 0, wy: 0 }, manual);
   return { canvas, win, hold, resolve, claimed, touch, event, sample };
 }
 
@@ -33,7 +32,7 @@ describe("hold movement", () => {
     const h = harness();
     h.event("touchstart", [h.touch(1)]);
     for (let i = 0; i < 120; i++) expect(h.sample().dx).toBe(1);
-    h.resolve.mockReturnValue({ wx: 0, wy: -100, wz: 0, screenSide: 1 });
+    h.resolve.mockReturnValue({ wx: 0, wy: -100, wz: 0 });
     expect(h.sample()).toEqual({ ...idle, dy: -1 });
     h.event("touchend", [h.touch(1)], []);
     expect(h.sample()).toEqual(idle);
@@ -102,18 +101,6 @@ describe("hold movement", () => {
     expect(h.sample()).toEqual(idle);
     h.event("touchmove", [h.touch(1)]);
     expect(h.sample().dx).toBe(1);
-  });
-
-  it("holds train direction until release with newest-finger takeover", () => {
-    const h = harness();
-    h.event("touchstart", [h.touch(1)]);
-    expect(h.sample(idle, true)).toEqual({ ...idle, dx: 1 });
-    h.event("touchstart", [h.touch(2, -1)]);
-    expect(h.sample(idle, true)).toEqual({ ...idle, dx: -1 });
-    h.event("touchend", [h.touch(2)]);
-    expect(h.sample(idle, true).dx).toBe(1);
-    h.event("touchend", [h.touch(1)]);
-    expect(h.sample(idle, true)).toEqual(idle);
   });
 
   it("supports primary mouse holds and window release, suppressing touch compatibility presses", () => {

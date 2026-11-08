@@ -189,9 +189,8 @@ The intermittent train check remains separate follow-up work.
   displayed XY/height, camera projection and zoom on both Canvas and GPU, and
   excludes the local player. Realm departure removes the marker through ordinary
   entity exits; disconnected sessions retain the existing 60-second reconnect
-  grace period before removal. Players in another realm are not tracked. Immersive XR
-  does not draw these flat screen markers; embedded single-player labs have no
-  co-op HUD and retain their shared presentation path.
+  grace period before removal. Players in another realm are not tracked. Embedded
+  single-player labs have no co-op HUD and retain their shared presentation path.
 
 ## Evidence and next work
 

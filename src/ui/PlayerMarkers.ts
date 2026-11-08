@@ -61,10 +61,9 @@ export function collectPlayerMarkers(
 
 /** Platform HUD overlay shared by Canvas and GPU gameplay, including the editor. */
 export function drawPlayerMarkers(
-  gc: Pick<GameContext, "ctx" | "camera" | "stateView" | "xrActive">,
+  gc: Pick<GameContext, "ctx" | "camera" | "stateView">,
   alpha: number,
 ): void {
-  if (gc.xrActive) return;
   const { camera: view, stateView } = gc;
   const markers = collectPlayerMarkers(
     view,

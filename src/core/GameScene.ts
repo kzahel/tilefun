@@ -17,7 +17,6 @@ import type { TouchHold } from "../input/TouchHold.js";
 import type { TouchJoystick } from "../input/TouchJoystick.js";
 import type { TouchPinch } from "../input/TouchPinch.js";
 import type { TouchTap } from "../input/TouchTap.js";
-import type { TrainTapMovement } from "../input/TrainTapMovement.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
@@ -42,7 +41,6 @@ export interface GameContext {
   readonly touchMovement?: TouchMovementMode;
   readonly carDriving?: CarDrivingStyle;
   readonly tapMovement?: TapMovement;
-  readonly trainTapMovement?: TrainTapMovement;
   readonly touchPinch?: TouchPinch;
   readonly touchTap?: TouchTap;
   readonly touchHold?: TouchHold;
@@ -89,8 +87,6 @@ export interface GameContext {
   gemSpriteCanvas: HTMLCanvasElement | null;
   debugEnabled: boolean;
   editorButton: HTMLButtonElement | null;
-  /** True while an immersive XR/VR session is active. */
-  readonly xrActive: boolean;
   /** Experimental first-person view and look state (tactical 229). */
   readonly firstPerson?: FirstPersonControl;
 

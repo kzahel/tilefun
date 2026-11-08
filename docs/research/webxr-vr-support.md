@@ -1,5 +1,9 @@
 # WebXR VR Support — Architecture & Pain Points
 
+> Note (2026-11-08): the flat-screen XR mode and `XRSessionManager` described
+> here were removed in [226](../tactical/226-player-views-and-local-split-screen.md)
+> slice 2a. Kept as research history.
+
 ## Integration checkpoint (2026-10-11)
 
 The main game now defaults to GPU + 3D car. Its world uses a separate WebGL2

@@ -18,7 +18,6 @@ export class TouchButtons {
   enabled = true;
   driving = false;
   emergency = false;
-  train = false;
   warning = false;
   emergencyState = 2;
   private mouseButton: number | null = null;
@@ -56,7 +55,7 @@ export class TouchButtons {
   }
 
   get reversePressed(): boolean {
-    return this.enabled && this.driving && !this.train && !!this.buttons[6]?.pressed;
+    return this.enabled && this.driving && !!this.buttons[6]?.pressed;
   }
   get lightsPressed(): boolean {
     return this.enabled && !!this.buttons[4]?.pressed;
@@ -141,14 +140,7 @@ export class TouchButtons {
       ctx.font = LABEL_FONT;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      const label =
-        i === 3 && this.train
-          ? "Whistle"
-          : i === 4
-            ? this.warning
-              ? "Beacon"
-              : "Siren"
-            : btn.label;
+      const label = i === 4 ? (this.warning ? "Beacon" : "Siren") : btn.label;
       ctx.fillText(label, pos.x, pos.y - 5);
       const actions: ActionName[] = [
         "jump",

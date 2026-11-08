@@ -607,10 +607,10 @@ voice, menu/blur silence, restart and exit alongside normal driving.
 ## Horns, driving personality and gentle contact
 
 [135](../tactical/135-vehicle-horns-speeds-and-pushing.md) adds **Horn / H** on
-screen while driving, including desktop mouse and touch. Trains label it **Whistle**.
+screen while driving, including desktop mouse and touch.
 Hold **Space** while inside a car to honk; **H** remains an alias. Space still
 jumps on foot and pans while editing. While seated, neither jump holds nor jump
-press edges reach movement. Trains use the same horn action for their whistle.
+press edges reach movement.
 The on-screen badge and Traffic playground use the same default key bindings.
 Hold the horn key or screen button to sound continuously; release to stop.
 The horn remains separate from emergency Siren/Style/Beacon controls. Authority

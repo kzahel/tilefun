@@ -1,5 +1,4 @@
 import type { Movement } from "../shared/Movement.js";
-import type { XRSessionManager } from "../xr/XRSessionManager.js";
 import type { ActionMapConfig, ActionName } from "./ActionMap.js";
 import { DEFAULT_ACTION_MAP } from "./ActionMap.js";
 import {
@@ -8,7 +7,6 @@ import {
   type ControllerCommand,
   controllerInput,
 } from "./ControllerInput.js";
-import { GamepadPoller } from "./GamepadPoller.js";
 import { eventCode } from "./KeyLabels.js";
 import type { TouchButtons } from "./TouchButtons.js";
 import type { TouchJoystick } from "./TouchJoystick.js";
@@ -32,7 +30,7 @@ export class ActionManager {
   }
   private touchJoystick: TouchJoystick | null = null;
   private touchButtons: TouchButtons | null = null;
-  private gamepadPoller: GamepadPoller | null = new GamepadPoller();
+  private gamepad = true;
 
   constructor(config?: ActionMapConfig) {
     this.config = config ?? DEFAULT_ACTION_MAP;
@@ -65,11 +63,7 @@ export class ActionManager {
   }
 
   disableGamepad(): void {
-    this.gamepadPoller = null;
-  }
-
-  setXRManager(xr: XRSessionManager): void {
-    if (this.gamepadPoller) this.gamepadPoller.xrManager = xr;
+    this.gamepad = false;
   }
 
   setTouchJoystick(joystick: TouchJoystick): void {
@@ -104,12 +98,7 @@ export class ActionManager {
   // --- Continuous action polling ---
 
   isHeld(action: ActionName): boolean {
-    if (this.gamepadPoller && controllerInput.held.has(action)) return true;
-    // Check XR controller buttons
-    const xr = this.gamepadPoller?.xrManager;
-    if (xr?.active) {
-      if (action === "throw" && xr.throwHeld) return true;
-    }
+    if (this.gamepad && controllerInput.held.has(action)) return true;
     // Check on-screen touch buttons
     if (this.touchButtons) {
       if (action === "jump" && this.touchButtons.jumpPressed) return true;
@@ -149,7 +138,7 @@ export class ActionManager {
     const jump = this.isHeld("jump");
 
     // Merge gamepad: if keyboard is idle, use gamepad stick; always OR sprint
-    const gp = this.gamepadPoller?.poll();
+    const gp = this.gamepad ? controllerInput.movement : undefined;
     if (gp && dx === 0 && dy === 0 && (gp.dx !== 0 || gp.dy !== 0)) {
       return { dx: gp.dx, dy: gp.dy, sprinting: sprinting || gp.sprinting, jump: jump || gp.jump };
     }
@@ -168,7 +157,7 @@ export class ActionManager {
     if (this.isHeld("pan_right")) dx += 1;
     if (this.isHeld("pan_up")) dy -= 1;
     if (this.isHeld("pan_down")) dy += 1;
-    if (this.gamepadPoller && dx === 0 && dy === 0) return controllerInput.movement;
+    if (this.gamepad && dx === 0 && dy === 0) return controllerInput.movement;
     return { dx, dy };
   }
 
@@ -216,7 +205,7 @@ export class ActionManager {
   };
 
   private onController = (event: Event): void => {
-    if (!this.gamepadPoller || event.defaultPrevented) return;
+    if (!this.gamepad || event.defaultPrevented) return;
     const action = CONTROLLER_ACTIONS[(event as CustomEvent<ControllerCommand>).detail];
     if (action) for (const callback of this.listeners.get(action) ?? []) callback();
   };

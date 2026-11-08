@@ -41,7 +41,7 @@ export class GameLoop {
   }
 
   /**
-   * Process one frame from an external time source (e.g. XR session rAF).
+   * Process one frame at `nowMs` (the rAF tick and deterministic tests).
    * Call stop() first to prevent the internal rAF from also ticking.
    */
   externalTick(nowMs: number): void {

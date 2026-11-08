@@ -4,7 +4,7 @@ import { inputHint, keyboardHint } from "../input/InputHints.js";
 import { buildingDoors, exteriorDoors } from "../interiors/BuildingDoors.js";
 import { DoorApproach, doorwayReached, towardDoor } from "../interiors/DoorTraversal.js";
 
-type DoorRequest =
+export type DoorRequest =
   | { type: "enter-building"; featureId: string; doorId?: string; walkThrough?: boolean }
   | { type: "exit-building"; doorId?: string; walkThrough?: boolean };
 /** Small host control; proximity and realm changes remain authoritative. */

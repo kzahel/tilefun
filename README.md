@@ -92,7 +92,7 @@ ambulance, firetrucks and garbage trucks. Models load as needed; sprites remain
 available while loading or if a model cannot load.
 Choose **☰ → Debug → Renderer** (or F3) to switch to GPU sprites.
 `?renderer=legacy-canvas` selects legacy Canvas sprites; unsupported WebGL2 also falls back
-to Canvas. This does not enable the separate 3D collision view or spatial VR.
+to Canvas. This does not enable the separate 3D collision view.
 
 - **Multiplayer** — Peer-to-peer via WebRTC (one browser hosts, others connect via URL — no server needed) or run a zero-dependency dedicated Node server. Parent crafts the world while the kid plays in it
 - **Collaborative editing** — See other players' editor cursors in real time, paint terrain together

@@ -1,7 +1,6 @@
 import type { FirstPersonControl } from "../client/FirstPersonControl.js";
 import type { GameContext } from "../core/GameScene.js";
 import type { Entity } from "../entities/Entity.js";
-import { isTrain } from "../railway/Train.js";
 import { collectWorldSprites } from "../rendering/collectScene.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
 import { entityHeading } from "../rendering/EntityMeshPose.js";
@@ -29,22 +28,21 @@ export function firstPersonTick(
   const control = gc.firstPerson?.drawing ? gc.firstPerson : undefined;
   if (!control) return undefined;
   gc.camera.zoom = Math.min(gc.camera.zoom, FIRST_PERSON_STREAM_ZOOM);
-  control.update(dt, vehicle && !isTrain(vehicle) ? entityHeading(vehicle) : undefined);
+  control.update(dt, vehicle ? entityHeading(vehicle) : undefined);
   gc.tapMovement?.cancel();
-  gc.trainTapMovement?.cancel();
   gc.touchHold?.reset();
   return control;
 }
 
-/** Manual input turned by the camera heading; trains and steering cars keep
- * their own vehicle-relative axes. `control` is firstPersonTick's result. */
+/** Manual input turned by the camera heading; steering cars keep their own
+ * vehicle-relative axes. `control` is firstPersonTick's result. */
 export function firstPersonMovement<T extends { dx: number; dy: number }>(
   gc: GameContext,
   control: FirstPersonControl | undefined,
   vehicle: Entity | undefined,
   input: T,
 ): T {
-  const vehicleAxes = !!vehicle && (isTrain(vehicle) || gc.carDriving === "steering");
+  const vehicleAxes = !!vehicle && gc.carDriving === "steering";
   return control && !vehicleAxes ? control.movement(input) : input;
 }
 

@@ -22,8 +22,8 @@ export interface RenderHost {
   /** World collection and drawing share one aligned frame; finish before HUD. */
   beginWorld(camera: Camera): void;
   endWorld(): void;
-  /** Snapshot of world plus Canvas UI. An owned target may be reused for live XR uploads. */
-  captureFrame?(target?: HTMLCanvasElement): HTMLCanvasElement;
+  /** Independent snapshot of world plus Canvas UI. */
+  captureFrame?(): HTMLCanvasElement;
   dispose(): void;
 }
 export type RenderHostFactory = (canvas: HTMLCanvasElement) => RenderHost;

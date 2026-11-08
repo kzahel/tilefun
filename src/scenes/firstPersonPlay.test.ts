@@ -25,7 +25,6 @@ function setup(carDriving: GameContext["carDriving"] = "steering") {
     carDriving,
     camera: { zoom: 2 },
     tapMovement: { cancel: () => cancelled.tap++ },
-    trainTapMovement: { cancel() {} },
     touchHold: { reset: () => cancelled.hold++ },
   } as unknown as GameContext;
   return { control, gc, cancelled };
@@ -57,15 +56,13 @@ describe("first-person play input", () => {
     expect(firstPersonTick(gc, 1 / 60, undefined)).toBeUndefined();
   });
 
-  it("leaves steering cars and trains on their vehicle axes", () => {
+  it("leaves steering cars on their vehicle axes", () => {
     const { control, gc } = setup("steering");
     control.setActive(true, 0);
     control.markDrawn();
     const car = createVehicle("compact-1", 0, 0, Direction.Right);
     const shown = firstPersonTick(gc, 1 / 60, car);
     expect(firstPersonMovement(gc, shown, car, forward)).toBe(forward);
-    const train = { ...car, type: "train-curve-proof-v1" };
-    expect(firstPersonMovement(gc, shown, train, forward)).toBe(forward);
 
     const direct = setup("direction");
     direct.control.setActive(true, 0);

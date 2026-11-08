@@ -856,12 +856,11 @@ buttons probe portable geometry/materials, not the gameplay sprite shader.
 The older car projection lab remains a source/geometry investigation reference.
 DOM controls and the original Canvas UI/input surface remain in place.
 
-The current mono VR screen uploads a host-composed world plus Canvas HUD frame.
-GPU capture can reuse a caller-owned target, avoiding a new canvas each XR frame;
-ordinary feedback capture still creates an independent snapshot. XR reads the
-frame after the shared game loop ticks and follows live renderer selection.
-HTML menus remain outside that image. Spatial/stereo world rendering remains
-future work; actual headset timing and compatibility still need hardware evidence.
+The mono VR screen (a host-composed world plus Canvas HUD frame uploaded to a
+WebXR layer) was removed in [226](../tactical/226-player-views-and-local-split-screen.md)
+slice 2 to simplify input, views and rendering; `captureFrame()` now always
+returns an independent snapshot. Real VR from the 3D scene remains a later idea
+([229](../tactical/229-first-person-view.md)).
 
 Default-renderer validation (2026-10-11): typechecks, 2,374 unit tests, lint,
 catalog/manifest generation and production builds pass. The 545-check browser

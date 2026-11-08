@@ -6,7 +6,6 @@ import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { predictInput } from "../client/predictInput.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
-import { isTrain } from "../railway/Train.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
@@ -242,7 +241,6 @@ export class PlayScene implements GameScene {
     const vehicle = occupiedVehicle(gc.stateView.playerEntity, gc.stateView.entities);
     if (vehicle?.id !== this.occupiedId) {
       gc.tapMovement?.cancel();
-      gc.trainTapMovement?.cancel();
       gc.touchHold?.reset();
       gc.touchButtons.reset();
       this.occupiedId = vehicle?.id;
@@ -252,7 +250,6 @@ export class PlayScene implements GameScene {
     gc.touchButtons.driving = !!vehicle;
     gc.touchButtons.emergency = !!vehicle && isEmergencyVehicle(vehicle);
     gc.touchButtons.warning = !!vehicle && isWarningVehicle(vehicle);
-    gc.touchButtons.train = !!vehicle && isTrain(vehicle);
     gc.touchButtons.emergencyState = vehicle ? vehicleLightState(vehicle) : 2;
     const inputLocked = gc.storagePaused || gc.doorPresentation?.busy || gc.inputBlocked;
     gc.touchButtons.enabled = !inputLocked;
@@ -261,7 +258,6 @@ export class PlayScene implements GameScene {
     if (inputLocked) {
       gc.touchHold?.reset();
       gc.tapMovement?.cancel();
-      gc.trainTapMovement?.cancel();
     }
     const firstPerson = firstPersonTick(gc, dt, vehicle);
     const manual = firstPersonMovement(
@@ -270,26 +266,16 @@ export class PlayScene implements GameScene {
       vehicle,
       inputLocked
         ? { dx: 0, dy: 0, sprinting: false, jump: false }
-        : gc.actions.getMovement(!(vehicle && !isTrain(vehicle) && gc.carDriving === "steering")),
+        : gc.actions.getMovement(!(vehicle && gc.carDriving === "steering")),
     );
     let rawMovement =
       !inputLocked && gc.touchMovement === "tap" && gc.tapMovement
         ? gc.tapMovement.sample(gc.stateView.playerEntity.position, manual, dt, vehicle ? 24 : 0)
         : manual;
-    if (vehicle && isTrain(vehicle)) {
-      gc.tapMovement?.cancel();
-      if (manual.dx || manual.dy) gc.trainTapMovement?.cancel();
-      if (!manual.dx && !manual.dy && !inputLocked && gc.touchMovement === "tap")
-        rawMovement = { ...rawMovement, dx: gc.trainTapMovement?.direction ?? 0, dy: 0 };
-    }
     if (!inputLocked && gc.touchMovement === "hold")
       rawMovement =
-        gc.touchHold?.sample(
-          gc.stateView.playerEntity.position,
-          manual,
-          !!vehicle && isTrain(vehicle),
-          vehicle ? 24 : 0,
-        ) ?? manual;
+        gc.touchHold?.sample(gc.stateView.playerEntity.position, manual, vehicle ? 24 : 0) ??
+        manual;
     const hornPressed = gc.actions.consumeHornPress();
     const hornHeld = !!vehicle && !inputLocked && (gc.actions.isHeld("honk") || hornPressed);
     this.hornRefresh += dt;
@@ -338,12 +324,11 @@ export class PlayScene implements GameScene {
       sprinting: rawMovement.sprinting,
       jump: rawMovement.jump,
       jumpPressed,
-      reversing: !!vehicle && !isTrain(vehicle) && !inputLocked && gc.actions.isHeld("reverse"),
+      reversing: !!vehicle && !inputLocked && gc.actions.isHeld("reverse"),
       // Tap/hold destinations always aim in world space, even when the manual
       // keyboard/controller/joystick controls use relative car steering.
       relativeDriving:
         !!vehicle &&
-        !isTrain(vehicle) &&
         gc.carDriving === "steering" &&
         (!!manual.dx || !!manual.dy || (gc.touchMovement ?? "joystick") === "joystick"),
     };
@@ -537,12 +522,10 @@ export class PlayScene implements GameScene {
       gc.chatHUD.render(gc.ctx);
       renderDebugOverlay(gc, alpha);
       render3DDebug(gc);
-      if (!gc.xrActive) {
-        if (firstPerson) drawCrosshair(gc.ctx, gc.canvas.width, gc.canvas.height);
-        else this.drawDestination(gc);
-        gc.touchJoystick.draw(gc.ctx);
-        gc.touchButtons.draw(gc.ctx);
-      }
+      if (firstPerson) drawCrosshair(gc.ctx, gc.canvas.width, gc.canvas.height);
+      else this.drawDestination(gc);
+      gc.touchJoystick.draw(gc.ctx);
+      gc.touchButtons.draw(gc.ctx);
     } finally {
       gc.endWorld?.();
       gc.camera.restoreActual();
@@ -563,7 +546,6 @@ export class PlayScene implements GameScene {
     this.emergencyHeld = false;
     this.styleHeld = false;
     gc.tapMovement?.cancel();
-    gc.trainTapMovement?.cancel();
     gc.touchHold?.reset();
     gc.actions.clearHeld();
     this.cancelInput(gc.transport);

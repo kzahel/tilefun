@@ -47,12 +47,7 @@ export class TouchHold {
     this.lastPosition = null;
   }
 
-  sample(
-    position: { wx: number; wy: number },
-    manual: Movement,
-    train = false,
-    slowWithin = 0,
-  ): Movement {
+  sample(position: { wx: number; wy: number }, manual: Movement, slowWithin = 0): Movement {
     if (
       manual.dx ||
       manual.dy ||
@@ -73,7 +68,6 @@ export class TouchHold {
       return manual;
     }
     this.lastPosition = { ...position };
-    if (train) return { ...manual, dx: target.screenSide ?? 1, dy: 0 };
     const dx = target.wx - position.wx;
     const dy = target.wy - position.wy;
     const distance = Math.hypot(dx, dy);

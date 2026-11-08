@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "noEmit": true,
-    "types": ["vite/client", "node", "webxr"]
+    "types": ["vite/client", "node"]
   },
   "include": [
     "src/**/*.d.ts",
