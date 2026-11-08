@@ -3,7 +3,7 @@ import type { SavedPlayerData } from "../persistence/SaveManager.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
-import { type Arrival, safeArrival } from "./SafeArrival.js";
+import { type Arrival, raisedStanding, safeArrival } from "./SafeArrival.js";
 
 export interface RealmDestination {
   realm: Realm;
@@ -11,12 +11,16 @@ export interface RealmDestination {
   arrival?: Arrival;
   /** Also keep the arrival clear of other bodies, such as a host's car beside a guest (226). */
   clearOfBodies?: boolean;
+  /** Arrive beside a seat standing this high on a raised surface (`raisedStanding`, 226). */
+  standingZ?: number | undefined;
   allowInterior?: boolean;
   savedPlayer?: SavedPlayerData;
   returnLocation?: PlayerSession["returnLocation"];
 }
 
 type Point = { wx: number; wy: number };
+/** A checked arrival; a raised surface's height comes with it (226). */
+type Placement = Point & { wz?: number };
 
 /** What a transfer replaces; a failed transfer puts it back. */
 type Previous = Pick<
@@ -97,13 +101,14 @@ function sameWorld(a: Realm, b: Realm): boolean {
   );
 }
 
-/** Put a placed seat at its checked arrival, with its camera and range around it. */
-function arriveAt(session: PlayerSession, target: Realm, position: Point): void {
+/** Put a placed seat at its checked arrival, on the terrain or the raised surface found
+ * there, with its camera and range around it. */
+function arriveAt(session: PlayerSession, target: Realm, position: Placement): void {
   const tx = Math.floor(position.wx / TILE_SIZE),
     ty = Math.floor(position.wy / TILE_SIZE);
   teleportBody(session.player, {
     ...position,
-    wz: target.world.getHeightAt(tx, ty) * ELEVATION_PX,
+    wz: position.wz ?? target.world.getHeightAt(tx, ty) * ELEVATION_PX,
   });
   session.cameraX = position.wx;
   session.cameraY = position.wy;
@@ -185,7 +190,7 @@ export class RealmTransitions {
   private async transfer(
     travellers: readonly Traveller[],
     destination: RealmDestination,
-    lead: Point | undefined,
+    lead: Placement | undefined,
   ): Promise<void> {
     const target = destination.realm;
     const moved: Traveller[] = [];
@@ -206,8 +211,9 @@ export class RealmTransitions {
     }
   }
 
-  /** A follower's arrival: beside the leader, clear of walls, props and placed bodies. */
-  private follow(target: Realm, moved: readonly Traveller[]): Promise<Point> {
+  /** A follower's arrival: beside the leader, clear of walls, props and placed bodies, and on
+   * the raised surface the leader stands on where it extends there. */
+  private follow(target: Realm, moved: readonly Traveller[]): Promise<Placement> {
     const leader = moved[0]?.session;
     if (!leader) throw new Error("A party needs its leader.");
     const [dx, dy] = FOLLOW_OFFSETS[(moved.length - 2) % FOLLOW_OFFSETS.length] ?? [1, 0];
@@ -217,10 +223,15 @@ export class RealmTransitions {
       y: wy / TILE_SIZE + dy,
       generation: target.generation,
     };
-    return safeArrival(target, arrival, { clearOfBodies: true });
+    const standingZ = raisedStanding(target, leader.player);
+    return safeArrival(target, arrival, { clearOfBodies: true, standingZ });
   }
 
-  private async place(t: Traveller, destination: RealmDestination, position: Point | undefined) {
+  private async place(
+    t: Traveller,
+    destination: RealmDestination,
+    position: Placement | undefined,
+  ) {
     const { session, source, previous } = t;
     const target = destination.realm;
     const restored = t.prepared ? { ...t.prepared } : t.prepared;

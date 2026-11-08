@@ -1,20 +1,32 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { TILE_SIZE } from "../config/constants.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
+import { DECK_Z, treeHousePoint, treeHouseProp } from "../entities/TreeHouse.js";
 import { CURRENT_REGIONAL_VERSION } from "../generation/GenerationDescriptor.js";
 import { buildingDoor } from "../interiors/BuildingDoors.js";
 import { exteriorEntrance } from "../interiors/GameplayInterior.js";
 import { PLAYER_LOCATIONS_STORE, PlayerLocationStore } from "../persistence/PlayerLocationStore.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
+import { CollisionFlag } from "../world/TileRegistry.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import { Realm } from "./Realm.js";
-import { join, remote, sessionOf, start, stopDevices, where } from "./test/DeviceHarness.js";
+import {
+  join,
+  play,
+  remote,
+  sessionOf,
+  start,
+  step,
+  stopDevices,
+  where,
+} from "./test/DeviceHarness.js";
 
 // Party travel (226 slice 4b-iii): a device's seats go through doors, between worlds and
 // out to the lobby together, led by whichever seat asks, end to end through the codec.
 
 afterEach(async () => {
   vi.restoreAllMocks();
+  vi.useRealTimers();
   await stopDevices();
 });
 
@@ -305,6 +317,125 @@ describe("party travel", () => {
     expect(transport.seatMessages("local", 1, "realm-left")).toEqual([]);
   });
 
+  it("brings followers and a joining guest onto the deck their leader stands on, and not under it (5-ii-c)", async () => {
+    const device = await start();
+    const { server, transport } = device;
+    // dev-b's device plays by a tree house; the local device keeps the world loaded.
+    const seat0 = await remote(device, "dev-b");
+    const { wx, wy } = seat0.player.position;
+    const feet = { wx: wx + 10 * TILE_SIZE + 8, wy: wy + 40 };
+    server.propManager.add(treeHouseProp(feet.wx, feet.wy));
+    const deck = (x: number, y: number) => treeHousePoint(feet.wx, feet.wy, x, y);
+    const height = (s: PlayerSession) => [s.player.wz, s.player.groundZ];
+    const cabin = deck(64, 136);
+    teleportBody(seat0.player, { ...cabin, wz: DECK_Z });
+
+    // A guest joining beside seat 0 stands on the deck one tile over, not on the ground.
+    const guest = await join(device, 1, "dev-b");
+    if (!guest) throw Error("no guest");
+    expect(where(guest)).toEqual({ wx: cabin.wx + TILE_SIZE, wy: cabin.wy });
+    expect(height(guest)).toEqual([DECK_Z, DECK_Z]);
+    expect(guest.gameplaySession.lastSafePosition).toEqual({ ...where(guest), wz: DECK_Z });
+
+    // The device resumes seat 0's saved place in the cabin: the follower joins it there.
+    const resumeAt = async (place: { wx: number; wy: number }) => {
+      teleportBody(seat0.player, { ...place, wz: DECK_Z });
+      teleportBody(guest.player, { wx: wx - 4 * TILE_SIZE, wy, wz: 0 });
+      await server.flushAsync();
+      transport.send("dev-b", { type: "leave-realm", requestId: 2 });
+      await server.settle();
+      transport.send("dev-b", { type: "join-realm", requestId: 3, worldId: "test", resume: true });
+      await server.settle();
+      expectParty("test", seat0, [guest]);
+      expect([where(seat0), height(seat0)]).toEqual([place, [DECK_Z, DECK_Z]]);
+    };
+    await resumeAt(cabin);
+    expect(where(guest)).toEqual({ wx: cabin.wx + TILE_SIZE, wy: cabin.wy });
+    expect(height(guest)).toEqual([DECK_Z, DECK_Z]);
+
+    // Over water (a pond under the tree house), the deck still carries them.
+    const pond = vi.spyOn(server.world, "getCollision").mockReturnValue(CollisionFlag.Water);
+    await resumeAt(cabin);
+    expect([where(guest), height(guest)]).toEqual([
+      { wx: cabin.wx + TILE_SIZE, wy: cabin.wy },
+      [DECK_Z, DECK_Z],
+    ]);
+    pond.mockRestore();
+
+    // Where the deck ends beside the porch, the follower stands on the ground past its edge.
+    const porch = deck(104, 136);
+    await resumeAt(porch);
+    expect(where(guest)).toEqual({ wx: porch.wx + TILE_SIZE, wy: porch.wy });
+    expect(height(guest)).toEqual([0, 0]);
+    expect(guest.gameplaySession.lastSafePosition).toEqual(where(guest));
+
+    // Seat 0 jumping on the ground by the deck's west edge is not raised: a guest joining
+    // there stays on the ground.
+    transport.send("dev-b", { type: "leave-seat", requestId: 4, seat: 1 });
+    await server.settle();
+    teleportBody(seat0.player, { ...deck(16, 136), wz: 0 });
+    seat0.player.wz = DECK_Z - 2;
+    const jumper = await join(device, 1, "dev-b");
+    expect(jumper && height(jumper)).toEqual([0, 0]);
+  });
+
+  it("lets transfers in progress settle before a deleted world's devices leave (5-ii-c)", async () => {
+    const device = await start({ worlds: ["other"] });
+    const { server, transport, host } = device;
+    const guest = await join(device, 1);
+    const leaver = await remote(device, "dev-b");
+    const leaverGuest = await join(device, 1, "dev-b");
+    const arriver = await remote(device, "dev-c");
+    if (!guest || !leaverGuest) throw Error("no guests");
+    for (const id of ["local", "dev-b"])
+      transport.send(id, { type: "join-realm", requestId: 2, worldId: "other" });
+    await server.settle();
+
+    // dev-b's device is on its way out of "other" and dev-c's on its way in, both held
+    // reading their saved progress, when "other" is deleted.
+    const gates = new Map<string, () => void>();
+    const held = new Map(
+      ["dev-b", "dev-c"].map((id) => [id, new Promise<void>((done) => gates.set(id, done))]),
+    );
+    const prepare = Realm.prototype.preparePlayer;
+    vi.spyOn(Realm.prototype, "preparePlayer").mockImplementation(async function (
+      this: Realm,
+      session,
+    ) {
+      await held.get(session.connectionId);
+      return prepare.call(this, session);
+    });
+    transport.send("dev-b", { type: "join-realm", requestId: 3, worldId: "test" });
+    transport.send("dev-c", { type: "join-realm", requestId: 3, worldId: "other" });
+    await vi.waitFor(() =>
+      expect([leaver, arriver].map((s) => s.transitioning)).toEqual([true, true]),
+    );
+    const deleting = server.deleteWorld("other");
+    const pause = () => new Promise((done) => setTimeout(done, 20));
+    await pause();
+    // Nobody moves while a transfer is in progress, even one not yet in the deleted world.
+    const realmsOf = () => [host, guest, leaver, arriver].map((s) => s.realmId);
+    expect(realmsOf()).toEqual(["other", "other", "other", "test"]);
+    gates.get("dev-b")?.();
+    await pause();
+    expect(realmsOf()).toEqual(["other", "other", "test", "test"]);
+    gates.get("dev-c")?.();
+    // Before, a travelling seat refused its device's move and stopped the deletion.
+    await expect(deleting).resolves.toBeUndefined();
+    await server.settle();
+    expect([host, guest, leaver, leaverGuest, arriver].map((s) => s.realmId)).toEqual(
+      Array(5).fill("test"),
+    );
+    expectParty("test", host, [guest]);
+    expect(transport.messages("local", "world-loaded").at(-1)).toMatchObject({ worldId: "test" });
+    // dev-b finished its own trip, and the deletion did not move it again.
+    expectParty("test", leaver, [leaverGuest]);
+    expect(transport.messages("dev-b", "realm-joined").at(-1)).toMatchObject({ requestId: 3 });
+    expect(transport.messages("dev-b", "world-loaded")).toEqual([]);
+    // dev-c arrived in "other", then moved on with the others.
+    expect(transport.messages("dev-c", "world-loaded").at(-1)).toMatchObject({ worldId: "test" });
+  });
+
   it("seats a guest clear of the car its host drives", async () => {
     const device = await start();
     const { server, transport, host } = device;
@@ -406,32 +537,119 @@ describe("party travel", () => {
   });
 });
 
+/** The device at an apartment's street door in a regional city. */
+async function atApartmentDoor() {
+  const generation = {
+    type: "regional",
+    version: CURRENT_REGIONAL_VERSION,
+    seed: 2026,
+    preset: "temperate-v1",
+  } as const;
+  const device = await start({ worlds: [{ id: "city", generation }] });
+  const { server } = device;
+  await server.loadWorld("city", { x: 300, y: 519, generation });
+  const prop = server.propManager.props.find(
+    (p) => p.type.startsWith("prop-city-dense-v1-condo") && p.proceduralId,
+  );
+  const door = prop && exteriorEntrance(prop);
+  if (!prop?.proceduralId || !door) throw Error("no apartment door");
+  await server.loadWorld("city", { x: door.wx / TILE_SIZE, y: door.wy / TILE_SIZE, generation });
+  return { device, featureId: prop.proceduralId, door };
+}
+
 describe("party travel through building doors", () => {
-  it("lets either seat lead the device through a door, without the leader's door checks for the others", async () => {
-    const generation = {
-      type: "regional",
-      version: CURRENT_REGIONAL_VERSION,
-      seed: 2026,
-      preset: "temperate-v1",
-    } as const;
-    const device = await start({ worlds: [{ id: "city", generation }] });
+  it("walks the leader alone through a door while its follower waits, then holds both until the walk ends (5-ii-c)", async () => {
+    const { device, featureId, door } = await atApartmentDoor();
     const { server, transport, host } = device;
-    await server.loadWorld("city", { x: 300, y: 519, generation });
-    const prop = server.propManager.props.find(
-      (p) => p.type.startsWith("prop-city-dense-v1-condo") && p.proceduralId,
+    transport.send("local", { type: "set-editor-mode", enabled: false });
+    const guest = await join(device, 1);
+    if (!guest) throw Error("no guest");
+    teleportBody(host.player, { ...door, wz: 0 });
+    teleportBody(guest.player, { wx: door.wx + 6 * TILE_SIZE, wy: door.wy + 3 * TILE_SIZE, wz: 0 });
+    const toDoor = () => [
+      { seat: 0, movement: step(0, -1) },
+      { seat: 1, movement: step(1, 0) },
+    ];
+    // Seat 0 walks into the doorway (its approach) and asks to walk through.
+    play(device, "local", 1, 1, toDoor);
+    teleportBody(host.player, { ...door, wz: 0 });
+    const away = where(guest);
+    transport.send("local", { type: "enter-building", requestId: 5, featureId, walkThrough: true });
+
+    // Seat 0 departs alone; the guest's envelope carries a copy, as another player's walk.
+    await vi.waitFor(() => expect(transport.messages("local", "door-motion")).toHaveLength(1));
+    expect(transport.messages("local", "door-motion")[0]).toMatchObject({
+      phase: "depart",
+      self: true,
+      actorClientId: "local",
+    });
+    expect(transport.seatMessages("local", 1, "door-motion")).toEqual([
+      expect.objectContaining({ phase: "depart", self: false, actorClientId: "local" }),
+    ]);
+    // During the walk both seats are travelling, still outside, and the guest's walking
+    // moves nobody.
+    expect([host.transitioning, guest.transitioning, guest.realmId]).toEqual([true, true, "city"]);
+    play(device, "local", 2, 8, toDoor);
+    expect(where(guest)).toEqual(away);
+    await server.settle();
+
+    // Both arrive: the reply and the leader's walk in for seat 0, the guest's new body and
+    // a copy of that walk in its envelope.
+    const inside = transport.messages("local", "realm-joined").at(-1);
+    expect(inside?.requestId).toBe(5);
+    const roomId = inside?.worldId ?? "";
+    expectParty(roomId, host, [guest]);
+    expect(transport.seatMessages("local", 1, "player-assigned").at(-1)?.entityId).toBe(
+      guest.player.id,
     );
-    const door = prop && exteriorEntrance(prop);
-    if (!prop?.proceduralId || !door) throw Error("no apartment door");
-    await server.loadWorld("city", { x: door.wx / TILE_SIZE, y: door.wy / TILE_SIZE, generation });
+    expect(transport.messages("local", "door-motion").at(-1)).toMatchObject({
+      phase: "arrive",
+      self: true,
+    });
+    expect(transport.seatMessages("local", 1, "door-motion").at(-1)).toMatchObject({
+      phase: "arrive",
+      self: false,
+      actorClientId: "local",
+    });
+    // Until the walk in ends, the guest neither moves nor leads the device back out. The
+    // clock stops here, so a slow machine cannot outlast the walk.
+    vi.useFakeTimers({ toFake: ["Date"], now: Date.now() });
+    expect(guest.doorArrivalUntil).toBeGreaterThan(Date.now());
+    const arrived = where(guest);
+    play(device, "local", 9, 12, toDoor);
+    expect(where(guest)).toEqual(arrived);
+    const interior = server.worldInterior;
+    if (!interior) throw Error("no interior");
+    teleportBody(guest.player, { ...buildingDoor(interior, "street").inside, wz: 0 });
+    play(device, "local", 13, 13, () => [
+      { seat: 0, movement: step(0, 0) },
+      { seat: 1, movement: step(0, 1) },
+    ]);
+    transport.send("local", {
+      type: "seat",
+      seat: 1,
+      message: { type: "exit-building", requestId: 6, walkThrough: true },
+    });
+    await server.settle();
+    expect(transport.seatMessages("local", 1, "request-error").at(-1)).toMatchObject({
+      requestId: 6,
+      message: "Walk toward the doorway to enter.",
+    });
+    expect([host.realmId, guest.realmId]).toEqual([roomId, roomId]);
+  });
+
+  it("lets either seat lead the device through a door, without the leader's door checks for the others", async () => {
+    const { device, featureId, door } = await atApartmentDoor();
+    const { server, transport, host } = device;
     const guest = await join(device, 1);
     if (!guest) throw Error("no guest");
     // The guest stands well away from the door; only the leader is checked.
     teleportBody(guest.player, { wx: door.wx + 6 * TILE_SIZE, wy: door.wy + 3 * TILE_SIZE, wz: 0 });
 
-    transport.send("local", { type: "enter-building", requestId: 5, featureId: prop.proceduralId });
+    transport.send("local", { type: "enter-building", requestId: 5, featureId });
     await server.settle();
     const inside = transport.messages("local", "realm-joined").at(-1);
-    expect(inside?.interior?.featureId).toBe(prop.proceduralId);
+    expect(inside?.interior?.featureId).toBe(featureId);
     const roomId = inside?.worldId ?? "";
     expectParty(roomId, host, [guest]);
     expect(guest.returnLocation).toEqual(host.returnLocation);

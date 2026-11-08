@@ -1,4 +1,4 @@
-import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
+import { CHUNK_SIZE, STEP_UP_THRESHOLD, TILE_SIZE } from "../config/constants.js";
 import {
   type AABB,
   aabbOverlapsPropWalls,
@@ -6,9 +6,12 @@ import {
   aabbsOverlap,
   getEntityAABB,
 } from "../entities/collision.js";
+import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
+import type { Prop } from "../entities/Prop.js";
 import { descriptorKey } from "../generation/GenerationDescriptor.js";
 import { INTERIOR_DOORWAY, INTERIOR_FLOOR } from "../interiors/GameplayInterior.js";
+import { getSurfaceZ, getWalkablePropSurfaceZ } from "../physics/surfaceHeight.js";
 import type { Arrival } from "../shared/protocol.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { Realm } from "./Realm.js";
@@ -40,15 +43,77 @@ function bodiesNear(realm: Realm, arrival: Arrival): AABB[] {
   );
 }
 
+const terrainZ = (realm: Pick<Realm, "world">, { wx, wy }: { wx: number; wy: number }) =>
+  getSurfaceZ(wx, wy, (tx, ty) => realm.world.getHeightAt(tx, ty));
+
+/** A body's pose for `raisedStanding`: a live player or a saved one. */
+type Standing = Pick<Entity, "position"> & {
+  wz?: number | undefined;
+  groundZ?: number | undefined;
+};
+
 /**
- * Bounded terrain + realized prop check before a player leaves the old realm. With
- * `clearOfBodies` it also keeps off other bodies, such as a guest's host or its car (226).
+ * The height `body` stands at when it is above the terrain by more than a step (on a deck,
+ * a bridge's top or a tree house), for arrivals there or beside it; undefined on the ground.
+ */
+export function raisedStanding(realm: Pick<Realm, "world">, body: Standing): number | undefined {
+  const z = body.groundZ ?? body.wz ?? 0;
+  return z - terrainZ(realm, body.position) > STEP_UP_THRESHOLD ? z : undefined;
+}
+
+/** A walkable surface within a step of `standingZ` and above the terrain here, else undefined. */
+function raisedSupport(
+  realm: Realm,
+  position: { wx: number; wy: number },
+  box: AABB,
+  standingZ: number,
+  props: readonly Prop[],
+): number | undefined {
+  const top = getWalkablePropSurfaceZ(box, standingZ, props);
+  return top !== undefined && top > terrainZ(realm, position) ? top : undefined;
+}
+
+/** An interior arrival stands on its room's floor or in its doorway. */
+function onInteriorFloor(realm: Realm, aabb: AABB): boolean {
+  if (realm.indoorFloor)
+    return realm.indoorFloor({
+      x: aabb.left,
+      y: aabb.top,
+      width: aabb.right - aabb.left,
+      height: aabb.bottom - aabb.top,
+    });
+  const floor = INTERIOR_FLOOR;
+  const inside =
+    aabb.left >= floor.x &&
+    aabb.right <= floor.x + floor.width &&
+    aabb.top >= floor.y &&
+    aabb.bottom <= floor.y + floor.height;
+  const door = INTERIOR_DOORWAY;
+  const doorway =
+    aabb.left >= door.x &&
+    aabb.right <= door.x + door.width &&
+    aabb.top >= door.y &&
+    aabb.bottom <= door.y + door.height;
+  return inside || doorway;
+}
+
+export interface ArrivalOptions {
+  /** Keep off other bodies, such as a guest's host or its car (226). */
+  clearOfBodies?: boolean | undefined;
+  /** Beside a raised seat (`raisedStanding`): a point on a walkable surface at this height
+   * stands on it, tested at its height; other points stand on the ground (226). */
+  standingZ?: number | undefined;
+}
+
+/**
+ * Bounded terrain + realized prop check before a player leaves the old realm. A point on a
+ * raised surface (`standingZ`) carries its height as `wz`; the ground's is the caller's.
  */
 export async function safeArrival(
   realm: Realm,
   arrival: Arrival,
-  { clearOfBodies = false }: { clearOfBodies?: boolean | undefined } = {},
-): Promise<{ wx: number; wy: number }> {
+  { clearOfBodies = false, standingZ }: ArrivalOptions = {},
+): Promise<{ wx: number; wy: number; wz?: number }> {
   if (
     !Number.isFinite(arrival.x) ||
     !Number.isFinite(arrival.y) ||
@@ -82,47 +147,19 @@ export async function safeArrival(
       right: box.right - CONTACT_TOLERANCE,
       bottom: box.bottom - CONTACT_TOLERANCE,
     };
-    if (realm.interior) {
-      const floor = INTERIOR_FLOOR;
-      const inside =
-        aabb.left >= floor.x &&
-        aabb.right <= floor.x + floor.width &&
-        aabb.top >= floor.y &&
-        aabb.bottom <= floor.y + floor.height;
-      const door = INTERIOR_DOORWAY;
-      const doorway =
-        aabb.left >= door.x &&
-        aabb.right <= door.x + door.width &&
-        aabb.top >= door.y &&
-        aabb.bottom <= door.y + door.height;
-      if (realm.indoorFloor) {
-        if (
-          !realm.indoorFloor({
-            x: aabb.left,
-            y: aabb.top,
-            width: aabb.right - aabb.left,
-            height: aabb.bottom - aabb.top,
-          })
-        )
-          return null;
-      } else if (!inside && !doorway) return null;
-    }
-    if (
-      aabbOverlapsSolid(
-        aabb,
-        (tx, ty) => realm.world.getCollision(tx, ty),
-        CollisionFlag.Solid | CollisionFlag.Water,
-      )
-    )
+    if (realm.interior && !onInteriorFloor(realm, aabb)) return null;
+    const props = realm.propManager.getPropsNearPosition(position, collider);
+    const wz =
+      standingZ === undefined ? undefined : raisedSupport(realm, position, box, standingZ, props);
+    // Water under a raised surface does not matter to a body standing on it.
+    const blocking =
+      wz === undefined ? CollisionFlag.Solid | CollisionFlag.Water : CollisionFlag.Solid;
+    if (aabbOverlapsSolid(aabb, (tx, ty) => realm.world.getCollision(tx, ty), blocking))
       return null;
-    if (
-      realm.propManager
-        .getPropsNearPosition(position, collider)
-        .some((prop) => aabbOverlapsPropWalls(aabb, prop.position, prop, 0, 12))
-    )
+    if (props.some((prop) => aabbOverlapsPropWalls(aabb, prop.position, prop, wz ?? 0, 12)))
       return null;
     if (bodies.some((body) => aabbsOverlap(aabb, body))) return null;
-    return position;
+    return wz === undefined ? position : { ...position, wz };
   };
   const exact = test(arrival.x, arrival.y);
   if (exact) return exact;

@@ -26,6 +26,10 @@ export class DoorPresentation {
     this.deadline = now + 30000;
   }
   receive(event: DoorMotion, now = performance.now()) {
+    // A guest-led walk reaches its device twice: seat 0's copy and the guest's own (226).
+    const own = this.own?.event;
+    if (!event.self && own?.actorClientId === event.actorClientId && own.phase === event.phase)
+      return;
     const motion = { event, start: now };
     this.motions.set(event.actorClientId, motion);
     if (event.self) {

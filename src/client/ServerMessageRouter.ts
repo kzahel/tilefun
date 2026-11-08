@@ -78,6 +78,16 @@ export class ServerMessageRouter {
     return realms;
   }
 
+  /** The connection dropped: pending requests fail, the device stops, and authority keeps
+   * its guests dormant until it seats them again on entering a realm. */
+  disconnected(): void {
+    const { host } = this;
+    host.requests.disconnect();
+    host.doorPresentation.cancel();
+    host.clearPlayInput();
+    host.device.seats.connectionLost();
+  }
+
   route(msg: ServerMessage): void {
     if (!this.apply(msg)) return;
     // A guest's envelope resolves the reply inside it (`routeSeat`).
@@ -200,6 +210,11 @@ export class ServerMessageRouter {
     this.host.sendVisibleRange(true);
     this.host.sendDebugState(this.host.debugPaused, true);
     this.lobbyRealmList = null;
+    const { host } = this;
+    void host.device.seats.reseat(
+      (r) => host.sendRequest(r),
+      () => host.takeRequestId(),
+    );
   }
 
   private placeCamera(msg: RealmEntered): void {

@@ -8,7 +8,7 @@ import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import type { RealmDirectory } from "./RealmDirectory.js";
 import type { RealmDestination } from "./RealmTransitions.js";
-import { safeArrival } from "./SafeArrival.js";
+import { raisedStanding, safeArrival } from "./SafeArrival.js";
 
 export interface ResumeContext {
   locations: PlayerLocationStore | null;
@@ -49,8 +49,11 @@ async function savedDestination(
       y: saved.player.y / TILE_SIZE,
       generation: realm.generation,
     };
-    const position = await safeArrival(realm, arrival);
-    const exact = position.wx === saved.player.x && position.wy === saved.player.y;
+    const { x, y, wz, groundZ } = saved.player;
+    // A player saved on a deck or a bridge's top is checked standing there (226).
+    const standingZ = raisedStanding(realm, { position: { wx: x, wy: y }, wz, groundZ });
+    const position = await safeArrival(realm, arrival, { standingZ });
+    const exact = position.wx === x && position.wy === y;
     return {
       realm,
       allowInterior: true,

@@ -12,10 +12,11 @@ import {
 } from "../interiors/DoorTraversal.js";
 import { exteriorEntrance, interiorRealmId } from "../interiors/GameplayInterior.js";
 import type { IServerTransport } from "../transport/Transport.js";
+import type { DeviceTravel } from "./DeviceTravel.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import type { RealmDirectory } from "./RealmDirectory.js";
-import type { RealmDestination, RealmTransitions } from "./RealmTransitions.js";
+import type { RealmDestination } from "./RealmTransitions.js";
 import type { SessionRegistry } from "./SessionRegistry.js";
 
 export interface DoorTransitionsDeps {
@@ -23,7 +24,7 @@ export interface DoorTransitionsDeps {
   sessions: SessionRegistry;
   transport: IServerTransport;
   /** Party travel: the requesting seat leads its device through the door (226). */
-  transitions: Pick<RealmTransitions, "move">;
+  transitions: Pick<DeviceTravel, "move" | "party">;
 }
 
 type Point = { wx: number; wy: number };
@@ -238,9 +239,13 @@ export class DoorTransitions {
   ) {
     const to = { ...session.player.position };
     const from = emergence ?? { wx: to.wx, wy: to.wy + (entering ? 16 : -16) };
-    session.doorArrivalUntil = Date.now() + DOOR_WALK_MS + DOOR_FADE_MS;
-    session.inputQueue = [];
-    session.player.velocity = { vx: 0, vy: 0 };
+    // The leader alone walks out; its device came through with it, so no seat moves or
+    // leads the way back before the walk ends, as its client holds every seat (226).
+    for (const seat of this.deps.transitions.party(session)) {
+      seat.doorArrivalUntil = Date.now() + DOOR_WALK_MS + DOOR_FADE_MS;
+      seat.inputQueue = [];
+      seat.player.velocity = { vx: 0, vy: 0 };
+    }
     this.sendDoorMotion(session, "arrive", from, to, overlay, emergence ? DOOR_FADE_MS : undefined);
   }
 }

@@ -111,20 +111,26 @@ game since 5-ii).
   - A disconnect makes every seat dormant.
 - **Joining and leaving:** [DeviceConnections](../src/server/DeviceConnections.ts)
   owns the connection lifecycle and `join-seat`/`leave-seat`. A guest arrives
-  beside seat 0, clear of other bodies. A dormant guest whose seat 0 has moved
-  to another realm rejoins beside it.
+  beside seat 0, clear of other bodies, and on the raised surface seat 0 stands
+  on (a deck, a bridge's top) where it extends there. A dormant guest whose
+  seat 0 has moved to another realm rejoins beside it.
 - **Party travel** ([DeviceTravel](../src/server/DeviceTravel.ts)): a device's
   awake seats travel together, led by whichever seat asks.
   - This covers world travel, doors and `leave-realm` (the seats wait in the
     lobby and follow the device into its next realm), and leaving a deleted
     world.
   - The leader alone passes the destination's and the door's checks.
-    The others arrive beside it (`RealmTransitions.moveParty`).
+    The others arrive beside it (`RealmTransitions.moveParty`), on the raised
+    surface it stands on where it extends there.
+  - Through a walk-through door the leader alone walks; every seat waits out
+    its walk out of the door before moving again.
   - Every seat arrives, or every seat goes back where it was.
   - The requesting seat gets the one reply; each other seat gets only its new
     `player-assigned`.
   - A resume from the lobby is the device's saved place, which only seat 0
     keeps, so seat 0 leads it whichever seat asks.
+  - Deleting a world lets transfers in progress settle before each device
+    leaves, so a travelling seat does not stop the deletion.
 - **Replication** ([RealmPublication](../src/server/RealmPublication.ts)): a realm
   sends one stream per connection with a live seat in it. The stream goes
   through that connection's lowest live seat there: bare for seat 0, otherwise
@@ -158,7 +164,9 @@ game since 5-ii).
     its seat, and its own door walk veils the device. A stream through a guest
     alone is ignored, because party travel keeps a device's live seats in one
     realm. A seat the client has not joined moves nothing, and authority sends
-    a dormant guest nothing at all.
+    a dormant guest nothing at all. After the connection drops, the device's
+    next realm entry asks to seat each guest again (`DeviceSeats.reseat`); a
+    guest authority refuses leaves.
   - Split screen: [LocalPlayers](../src/client/LocalPlayers.ts) joins guests
     from a pad or the second keyboard scheme and leaves them from the world
     menu. [SeatViews](../src/session/SeatViews.ts) gives each seat a view, and a
@@ -233,7 +241,9 @@ for in-flight travel. Keep menu and building-door transitions on this shared pat
 and position; per-realm player records remain visit history. Startup restores the
 current location, with validated fallback for unavailable interiors. Exact resume
 retains absolute height and saved moving-roof support; a relocated safe arrival
-or explicit travel resets support to ground. Restoring a train roof first readies
+or explicit travel resets support to ground. A place saved on a walkable surface
+above the terrain (a deck, a bridge's top) is checked standing on it, so it
+resumes exactly rather than being moved to the ground nearby. Restoring a train roof first readies
 the saved service and resolves its stable carriage identity. See the
 [interior topic](topics/patterns-and-interiors.md#player-location-reload-and-building-connections)
 for door identities, reload guarantees and content boundaries.

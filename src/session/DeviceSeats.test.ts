@@ -124,6 +124,78 @@ describe("DeviceSeats", () => {
     for (const d of devices) expect(d.dispose).toHaveBeenCalledOnce();
   });
 
+  it("seats its guests again after a dropped connection, as they joined; a refused one leaves (5-ii-c)", async () => {
+    const seats = new DeviceSeats();
+    const { request, sent } = requester();
+    const kept = input();
+    const refusedInput = input();
+    const kid = await seats.join(request, 1, 1, kept, {
+      displayName: "Kid",
+      playerModel: "person2",
+    });
+    await seats.join(request, 2, 3, refusedInput);
+    const ids = [10, 11];
+    const takeId = () => ids.shift() ?? 0;
+    // A realm entry without a drop asks nothing.
+    await seats.reseat(request, takeId);
+    expect(sent).toHaveLength(2);
+
+    seats.connectionLost();
+    const seen: number[][] = [];
+    seats.onChange(() => seen.push(seats.list().map((s) => s.seat)));
+    const answers = (async (msg: RequestMessage) => {
+      sent.push(msg);
+      if (msg.type === "join-seat" && msg.seat === 3) throw Error("Join a world first.");
+      return { type: "seat-joined", requestId: msg.requestId, seat: 1, entityId: 9 };
+    }) as Requester;
+    await seats.reseat(answers, takeId);
+    expect(sent.slice(2)).toEqual([
+      { type: "join-seat", requestId: 10, seat: 1, displayName: "Kid", playerModel: "person2" },
+      { type: "join-seat", requestId: 11, seat: 3 },
+    ]);
+    // The seated guest keeps its seat and devices; the refused one leaves with its input set.
+    expect(seats.get(1)).toBe(kid);
+    expect(kept.dispose).not.toHaveBeenCalled();
+    expect(seats.get(3)).toBeUndefined();
+    expect(refusedInput.dispose).toHaveBeenCalledOnce();
+    expect(seen).toEqual([[0, 1]]);
+    // Once seated again, later entries ask nothing.
+    await seats.reseat(answers, takeId);
+    expect(sent).toHaveLength(4);
+
+    // A guest whose request fails because the connection dropped again waits for the next
+    // entry.
+    seats.connectionLost();
+    const dropped = (async (msg: RequestMessage) => {
+      sent.push(msg);
+      seats.connectionLost();
+      throw Error("Connection to server closed.");
+    }) as Requester;
+    await seats.reseat(dropped, () => 14);
+    expect(seats.get(1)).toBe(kid);
+    await seats.reseat(request, () => 15);
+    expect(sent.at(-1)).toMatchObject({ type: "join-seat", requestId: 15, seat: 1 });
+    expect(seats.get(1)).toBe(kid);
+
+    // A guest that left while its seat was asked for is not dropped again, nor a new one
+    // that took its number meanwhile.
+    seats.connectionLost();
+    let reseated!: () => void;
+    const held = (async (msg: RequestMessage) => {
+      sent.push(msg);
+      await new Promise<void>((done) => {
+        reseated = done;
+      });
+      throw Error("refused");
+    }) as Requester;
+    const pending = seats.reseat(held, () => 12);
+    seats.drop(1);
+    const newcomer = await seats.join(request, 13, 1, input());
+    reseated();
+    await pending;
+    expect(seats.get(1)).toBe(newcomer);
+  });
+
   it("tells listeners after every join and departure, whatever removed the guest (5-ii)", async () => {
     const seats = new DeviceSeats();
     const { request } = requester();

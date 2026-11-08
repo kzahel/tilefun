@@ -9,7 +9,7 @@ import type { Realm } from "./Realm.js";
 import type { RealmDirectory } from "./RealmDirectory.js";
 import type { RealmTransitions } from "./RealmTransitions.js";
 import { resumeDestination } from "./ResumeDestination.js";
-import type { Arrival } from "./SafeArrival.js";
+import { type Arrival, raisedStanding } from "./SafeArrival.js";
 import type { SessionRegistry } from "./SessionRegistry.js";
 
 export interface DeviceConnectionsDeps {
@@ -97,6 +97,7 @@ export class DeviceConnections {
         realm,
         arrival: beside(host, realm),
         clearOfBodies: true,
+        standingZ: raisedStanding(realm, host.player),
         allowInterior: true,
         returnLocation: host.returnLocation,
       }));

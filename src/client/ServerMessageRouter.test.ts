@@ -33,12 +33,27 @@ function fakeHost() {
     renderer: { clear: log("renderer.clear") },
     device: {
       clearPresentation: log("device.clearPresentation"),
-      seats: { drop: log("seats.drop"), get: (seat: number) => (seat === 2 ? {} : undefined) },
+      seats: {
+        drop: log("seats.drop"),
+        get: (seat: number) => (seat === 2 ? {} : undefined),
+        connectionLost: log("seats.connectionLost"),
+        reseat: (request: (msg: unknown) => unknown, takeId: () => number) => {
+          calls.push("seats.reseat");
+          void request({ type: "join-seat", requestId: takeId(), seat: 2 });
+          return Promise.resolve();
+        },
+      },
     },
-    doorPresentation: { receive: (msg: ServerMessage) => calls.push(`door ${msg.type}`) },
+    doorPresentation: {
+      receive: (msg: ServerMessage) => calls.push(`door ${msg.type}`),
+      cancel: log("door.cancel"),
+    },
     mainMenu: { currentWorldId: null, showCreationError: log("showCreationError") },
     editorModel: { setPatternStatus: log("setPatternStatus") },
-    requests: { receive: (msg: ServerMessage) => calls.push(`receive ${msg.type}`) },
+    requests: {
+      receive: (msg: ServerMessage) => calls.push(`receive ${msg.type}`),
+      disconnect: log("requests.disconnect"),
+    },
     debugPaused: true,
     initDone: false,
     clearPlayInput: log("clearPlayInput"),
@@ -93,6 +108,9 @@ it("enters a realm in the established effect order and resolves the reply last",
     "camera.snapTo [5,6]",
     "sendVisibleRange [true]",
     "sendDebugState [true,true]",
+    // Guests ask to be seated again only after a dropped connection (`DeviceSeats.reseat`).
+    "seats.reseat",
+    `sendRequest ${JSON.stringify({ type: "join-seat", requestId: 7, seat: 2 })}`,
     "receive realm-joined",
   ]);
   expect(host.camera.zoom).toBe(2);
@@ -105,6 +123,18 @@ it("enters a realm in the established effect order and resolves the reply last",
   expect(calls).toContain("camera.snapTo [8,9]");
   expect(calls).toContain("camera.requestSnap");
   expect(host.camera.zoom).toBe(4);
+});
+
+it("fails pending requests, stops the device and marks its guests dormant when the connection drops", () => {
+  const { host, calls } = fakeHost();
+  const router = new ServerMessageRouter(host, { autoJoinRealm: false, reloadCamera: null });
+  router.disconnected();
+  expect(calls).toEqual([
+    "requests.disconnect",
+    "door.cancel",
+    "clearPlayInput",
+    "seats.connectionLost",
+  ]);
 });
 
 it("buffers frame/sync state and tears down on kick without resolving requests", () => {

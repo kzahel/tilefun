@@ -117,18 +117,28 @@ export class DeviceTravel {
   /**
    * Everyone leaves realms that are being deleted: each device's awake seats as one party,
    * to `fallback` with one `world-loaded`, or out to the lobby with one `realm-left`.
-   * Dormant seats move alone.
+   * Dormant seats move alone. Transfers in progress settle first, and again before each
+   * device, so none is refused part-way (226): a party that was leaving is gone, and one
+   * that was arriving moves on.
    */
   async evacuate(realms: readonly Realm[], fallback: string | null): Promise<void> {
     const handled = new Set<PlayerSession>();
-    for (const realm of realms)
-      for (const session of [...realm.sessions.values()]) {
-        if (handled.has(session)) continue;
-        const party = this.leaving(session);
-        for (const seat of party) handled.add(seat);
-        if (fallback) await this.relocate(party, fallback);
-        else this.vacate(party);
+    for (;;) {
+      const travelling = [...this.deps.sessions.values()].filter((s) => s.transitioning);
+      if (travelling.length) {
+        await Promise.all(travelling.map((s) => s.transitionDone));
+        continue;
       }
+      const next = realms
+        .flatMap((realm) => [...realm.sessions.values()])
+        .find((s) => !handled.has(s));
+      if (!next) return;
+      const party = this.leaving(next);
+      for (const seat of party) handled.add(seat);
+      // Synchronously after the check above: no transfer can begin in between.
+      if (fallback) await this.relocate(party, fallback);
+      else this.vacate(party);
+    }
   }
 
   /** The seats that leave with `session`: its awake device behind seat 0, or itself alone. */

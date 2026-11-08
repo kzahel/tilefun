@@ -198,11 +198,7 @@ export class GameClient implements GameTestHooks {
     this.netEmulatedTransport = new NetEmulatedClientTransport(transport);
     this.transport = this.netEmulatedTransport;
     this.requests = new RequestBroker((message) => this.transport.send(message));
-    this.transport.onDisconnect?.(() => {
-      this.requests.disconnect();
-      this.doorPresentation.cancel();
-      this.playInput.clearPlayInput();
-    });
+    this.transport.onDisconnect?.(() => this.router.disconnected());
     const autoJoinRealm = options?.autoJoinRealm ?? false;
     this.profile = options?.profile ?? null;
     const inputSettings = {

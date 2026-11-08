@@ -16,6 +16,9 @@ export interface SeatFrame {
 /** Sends a typed request and resolves with its reply. */
 export type Requester = <R extends RequestMessage>(request: R) => Promise<RequestResponse<R>>;
 
+/** What a guest joined as, asked again when it is seated again. */
+type JoinOptions = { displayName?: string; playerModel?: string };
+
 /** The replica as guest composition reads it. */
 export interface SeatWorld {
   readonly seats: { readonly entities: ReadonlyMap<number, number> };
@@ -28,7 +31,10 @@ export interface SeatWorld {
  */
 export class DeviceSeats {
   private readonly bySeat = new Map<number, ClientSeat>([[0, new ClientSeat(0)]]);
+  private readonly joinedAs = new Map<number, JoinOptions>();
   private readonly listeners = new Set<() => void>();
+  /** The connection dropped since the guests were last seated. */
+  private lost = false;
 
   /** Called after a guest joins or leaves, whatever removed it (views, key maps,
    * pads and menus follow). */
@@ -57,12 +63,13 @@ export class DeviceSeats {
     requestId: number,
     seat: number,
     input: SeatInput,
-    options: { displayName?: string; playerModel?: string } = {},
+    options: JoinOptions = {},
   ): Promise<ClientSeat> {
     if (seat < 1 || this.bySeat.has(seat)) throw new Error("That seat is taken.");
     await request({ type: "join-seat", requestId, seat, ...options });
     const joined = new ClientSeat(seat, input);
     this.bySeat.set(seat, joined);
+    this.joinedAs.set(seat, options);
     for (const listener of this.listeners) listener();
     return joined;
   }
@@ -80,7 +87,38 @@ export class DeviceSeats {
     if (!left) return;
     left.input?.dispose();
     this.bySeat.delete(seat);
+    this.joinedAs.delete(seat);
     for (const listener of this.listeners) listener();
+  }
+
+  /** The connection dropped: authority keeps every seat of the device dormant, and a
+   * guest stays so until its device seats it again (`reseat`). */
+  connectionLost(): void {
+    this.lost = true;
+  }
+
+  /**
+   * The device entered a realm. After a dropped connection, seat each guest again with
+   * the input set, name and character it kept; one authority refuses leaves the device.
+   * Without a drop it sends nothing.
+   */
+  async reseat(request: Requester, takeRequestId: () => number): Promise<void> {
+    if (!this.lost) return;
+    this.lost = false;
+    const guests = this.list().filter((seat) => seat.seat !== 0);
+    await Promise.all(
+      guests.map(async (guest) => {
+        const { seat } = guest;
+        try {
+          const options = this.joinedAs.get(seat);
+          await request({ type: "join-seat", requestId: takeRequestId(), seat, ...options });
+        } catch {
+          // A drop meanwhile leaves the guest for the next entry. Only the guest asked for
+          // leaves: one that left meanwhile, or took the seat again, stays.
+          if (!this.lost && this.bySeat.get(seat) === guest) this.drop(seat);
+        }
+      }),
+    );
   }
 
   /** Forget every guest and release its input set (session teardown). */

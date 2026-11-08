@@ -106,3 +106,40 @@ it("reveals the player at the exterior threshold before walking to the safe land
   expect(presentation.busy).toBe(false);
   expect(actor.position).toEqual(arrival.to);
 });
+
+it("presents a guest-led walk as the device's own, whichever copy reaches it first (5-ii-c)", () => {
+  // Seat 0's channel carries a copy of its guest's walk (not self); the guest's envelope
+  // carries its own (self). Either order shows the guest's own walk out after loading.
+  const arrival: DoorMotion = {
+    ...motion,
+    phase: "arrive",
+    actorClientId: "dev#1",
+    from: { wx: 100, wy: 104 },
+    to: { wx: 100, wy: 120 },
+  };
+  const actor: Entity = {
+    id: 1,
+    type: "player",
+    position: { ...arrival.to },
+    sprite: null,
+    velocity: null,
+    collider: null,
+    wanderAI: null,
+  };
+  for (const copyFirst of [true, false]) {
+    const presentation = new DoorPresentation();
+    const copy = { ...arrival, self: false };
+    if (copyFirst) presentation.receive(copy, 0);
+    presentation.receive(arrival, 0);
+    if (!copyFirst) presentation.receive(copy, 0);
+    // Loading: the veil is down and the guest waits at its landing.
+    presentation.update("street", false, 500);
+    expect(veil.style.opacity).toBe("1");
+    expect(presentation.entities([actor], "street", 500)[0]).toBe(actor);
+    // Loaded: the walk in starts now, not when the copy arrived.
+    presentation.update("street", true, 1000);
+    expect(presentation.entities([actor], "street", 1200)[0]?.position.wy).toBe(112);
+    presentation.update("street", true, 1580);
+    expect(presentation.busy).toBe(false);
+  }
+});
