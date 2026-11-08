@@ -2,8 +2,10 @@
 
 Status: phasing set 2026-11-07 after four read-only research reviews (input
 and labs, rendering and performance, authority and prediction, testing and
-decomposition). Slices 0, 1a, 1b and 2 (input ownership, as 2a and 2b) are
-done; slice 3 (device session and view) is next. Updated 2026-11-07 for seats on one device session,
+decomposition). Slices 0, 1a, 1b, 2 (input ownership, as 2a and 2b), 3a
+(render views) and 3b (device session and view objects) are done; 3c (the
+recipe-world authority and lab view surface, ending with the WorldGeometry car
+fixtures on the game view) is next. Updated 2026-11-07 for seats on one device session,
 online seats and the first-person view requirements from 229.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
