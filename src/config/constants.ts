@@ -88,3 +88,6 @@ export const BALL_SCARE_DURATION = 3.0;
 
 /** Speed multiplier for scared NPC movement. */
 export const BALL_SCARE_SPEED_MULT = 3;
+
+/** Backdrop behind the world and around rooms, shared by the fixed and first-person views. */
+export const VIEW_BACKDROP_CSS = "#1a1a2e";

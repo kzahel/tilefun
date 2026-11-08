@@ -22,7 +22,8 @@ Owners: [rendering architecture](../topics/rendering-architecture.md),
   joystick move relative to where you look. Tap/hold destinations are disabled
   while first person is shown (they would aim through the hidden fixed camera).
 - Driving switches to a chase camera that swings back behind the vehicle 1.5 s
-  after the last manual look. Indoors (interior realms) falls back to the fixed view.
+  after the last manual look. Rooms (interior realms) are drawn too, and Options sets
+  the view distance ([230](230-3d-cameras-stereo-and-webxr.md) slices 1–2).
 
 ## What it draws
 
@@ -73,8 +74,9 @@ RenderBackend (unchanged)          FirstPersonView (own Three.js renderer/canvas
 - **One "drawn in first person" answer per frame.** `FirstPersonControl.drawing`
   is true only after the play view actually drew a first-person frame. Camera-
   relative movement, look input, the streaming zoom floor, tap/hold suppression and
-  click-to-lock all follow it, so every fixed-view fallback (indoors, loading,
-  legacy Canvas, editor, other opaque scenes) keeps ordinary controls. Switching
+  click-to-lock all follow it, so every fixed-view fallback (loading, legacy
+  Canvas, editor, other opaque scenes) keeps ordinary controls. (Indoors was a
+  fallback until 230 slice 2.) Switching
   back to the GPU renderer restores the view without toggling.
 - **Axes.** Content is built in game axes (X east, Y south, Z up). The view mirrors
   Y once in its scene roots so the world is right-handed for Three and east stays on

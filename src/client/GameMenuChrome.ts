@@ -11,6 +11,7 @@ import type { MainMenu } from "../ui/MainMenu.js";
 import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 import { OptionsDialog } from "../ui/OptionsDialog.js";
 import type { RemoteStateView } from "./ClientStateView.js";
+import type { FirstPersonControl } from "./FirstPersonControl.js";
 import type { GameClientOptions } from "./GameClient.js";
 import type { PlayInputController } from "./PlayInputController.js";
 
@@ -26,6 +27,7 @@ export interface MenuChromeHost {
   readonly mainMenu: MainMenu;
   readonly scenes: SceneManager;
   readonly consoleEngine: ConsoleEngine;
+  readonly firstPerson: FirstPersonControl;
   readonly profile: NonNullable<GameClientOptions["profile"]> | null;
   readonly profileStore: GameClientOptions["profileStore"];
   readonly doorBusy: boolean;
@@ -96,6 +98,11 @@ export class GameMenuChrome {
         if (host.profile) host.profile.firstPerson = enabled;
         await this.saveProfile({ firstPerson: enabled });
       },
+      async (distance) => {
+        host.firstPerson.viewDistance = distance;
+        if (host.profile) host.profile.firstPersonViewDistance = distance;
+        await this.saveProfile({ firstPersonViewDistance: distance });
+      },
     );
   }
 
@@ -138,6 +145,7 @@ export class GameMenuChrome {
       this.playInput.pinchZoom,
       this.playInput.carDriving,
       this.host.consoleEngine.cvars.get("r_firstperson")?.get() === true,
+      this.host.firstPerson.viewDistance,
     );
   }
 

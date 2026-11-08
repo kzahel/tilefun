@@ -38263,7 +38263,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:59"
+          "source": "src/scenes/renderWorld.ts:60"
         },
         {
           "system": "Gameplay",

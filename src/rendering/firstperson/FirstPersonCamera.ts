@@ -108,3 +108,20 @@ export function apparentDirection(facing: Direction, viewAngle: number): Directi
       return Direction.Right;
   }
 }
+
+/**
+ * Fog end for this frame: the draw radius, pulled in to the nearest in-reach chunk
+ * that has not arrived, so the world's edge never shows while streaming widens
+ * (230). Pulls in at once; eases back out as chunks arrive.
+ */
+export function nextFogEnd(
+  previous: number | undefined,
+  drawRadius: number,
+  nearestMissing: number | undefined,
+  minimum = 0,
+): number {
+  const target = Math.max(minimum, Math.min(drawRadius, nearestMissing ?? Infinity));
+  if (previous === undefined || target <= previous) return target;
+  const eased = previous + (target - previous) * 0.08;
+  return target - eased < 1 ? target : eased;
+}

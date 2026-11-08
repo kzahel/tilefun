@@ -12,7 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
-| [230 3D cameras, stereo output and WebXR](230-3d-cameras-stereo-and-webxr.md) | Planned, deferred until 226 views: view distance option, interiors in 3D, orbit camera (overhead stereo hybrid, tabletop), SBS output, XR screen/immersive/tabletop; menus by exiting to the browser panel |
+| [230 3D cameras, stereo output and WebXR](230-3d-cameras-stereo-and-webxr.md) | Slices 1–2 delivered for owner play (first-person view distance in Options; rooms drawn in first person); orbit camera (overhead stereo hybrid, tabletop), SBS output and XR screen/immersive/tabletop wait for 226 views; menus by exiting to the browser panel |
 | [229 First-person view](229-first-person-view.md) | Experiment delivered for owner play (Options → First-person view, V, or `?view=fps`; gameplay keys now bind physical positions): flat-coloured terrain, collision-volume props wearing projected artwork, billboard actors, authored vehicle meshes, chase camera when driving; glue folds into 226 |
 | [228 Rail network, loops and junctions](228-rail-network-loops-and-junctions.md) | Parent plan; phase 1 delivered for owner play review: every east-neighbour town pair linked, hub platforms, S-bend fitter, road bridges over track in both orientations, far-train streaming fix; city loops, switches and variety next |
 | [227 Tree house and ladders](227-tree-house-and-ladders.md) | Labs delivered for owner/child play review: shared-physics ladder climbing, climbable/enterable tree house with roof cutaway, sprite depth planes for raised decks, and an outskirts park (campground, fishing dock, fenced wildlife meadow, trails); generated parks next |

@@ -1,3 +1,8 @@
+import {
+  DEFAULT_VIEW_DISTANCE,
+  type FirstPersonViewDistance,
+  viewDistance,
+} from "../config/firstPersonViewDistance.js";
 import { keyLabel } from "../input/KeyLabels.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
@@ -15,6 +20,7 @@ export class OptionsDialog {
   private carStyle = document.createElement("select");
   private firstPerson = document.createElement("input");
   private firstPersonHelp = document.createElement("p");
+  private distance = document.createElement("select");
   private controls = document.createElement("p");
   constructor(
     private select: (mode: TouchMovementMode) => Promise<void>,
@@ -22,6 +28,7 @@ export class OptionsDialog {
     private selectPinch: (enabled: boolean) => Promise<void>,
     private selectCar: (style: CarDrivingStyle) => Promise<void>,
     private selectFirstPerson: (enabled: boolean) => Promise<void>,
+    private selectDistance: (distance: FirstPersonViewDistance) => Promise<void>,
   ) {
     const d = this.dialog;
     d.className = "options-dialog";
@@ -89,6 +96,23 @@ export class OptionsDialog {
     };
     view.append(this.firstPerson, "First-person view (experiment)");
     this.firstPersonHelp.id = "options-view-help";
+    const distance = document.createElement("label");
+    distance.className = "options-driving";
+    distance.append("First-person view distance ", this.distance);
+    this.distance.setAttribute("aria-label", "First-person view distance");
+    for (const [value, text] of [
+      ["near", "Near (fastest)"],
+      ["medium", "Medium"],
+      ["far", "Far (loads more world)"],
+    ] as const) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = text;
+      this.distance.append(option);
+    }
+    this.distance.onchange = () => {
+      void this.chooseDistance();
+    };
     const drivingHelp = document.createElement("p");
     drivingHelp.id = "options-driving-help";
     drivingHelp.textContent =
@@ -108,6 +132,7 @@ export class OptionsDialog {
       pinchHelp,
       view,
       this.firstPersonHelp,
+      distance,
       this.status,
       back,
     );
@@ -134,6 +159,7 @@ export class OptionsDialog {
     pinchZoom: boolean,
     carDriving: CarDrivingStyle = DEFAULT_CAR_DRIVING,
     firstPerson = false,
+    distance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE,
   ): void {
     this.opener = opener;
     this.status.textContent = "";
@@ -141,6 +167,7 @@ export class OptionsDialog {
     this.pinch.checked = pinchZoom;
     this.carStyle.value = carDriving;
     this.firstPerson.checked = firstPerson;
+    this.distance.value = distance;
     // Key labels follow the player's layout, which may be learned during play.
     const k = keyLabel;
     this.firstPersonHelp.textContent = `Look by clicking the world, then moving the mouse, or with the right stick. ${k("KeyV")} switches it until you reload; this box is the saved choice.`;
@@ -176,90 +203,63 @@ export class OptionsDialog {
     }[mode];
     for (const c of this.cards) c.setAttribute("aria-pressed", String(c.dataset.mode === mode));
   }
+  /** Saves one choice with every control disabled meanwhile, then reports and refocuses. */
+  private async save(
+    action: () => Promise<void>,
+    saved: string,
+    focus: () => HTMLElement | undefined,
+  ): Promise<void> {
+    if (this.saving) return;
+    this.saving = true;
+    const controls = [...this.cards, this.pinch, this.carStyle, this.firstPerson, this.distance];
+    for (const c of controls) c.disabled = true;
+    try {
+      await action();
+      this.status.textContent = saved;
+    } catch {
+      this.status.textContent = "You can use this choice now, but it could not be remembered.";
+    } finally {
+      this.saving = false;
+      for (const c of controls) c.disabled = false;
+      if (this.visible) focus()?.focus();
+    }
+  }
   private async choose(mode: TouchMovementMode): Promise<void> {
     if (this.saving) return;
-    this.saving = true;
-    this.carStyle.disabled = true;
-    this.firstPerson.disabled = true;
     this.setMode(mode);
-    for (const c of this.cards) c.disabled = true;
-    this.pinch.disabled = true;
-    try {
-      await this.select(mode);
-      this.status.textContent = "Movement saved for this player.";
-    } catch {
-      this.status.textContent = "You can use this choice now, but it could not be remembered.";
-    } finally {
-      this.saving = false;
-      this.carStyle.disabled = false;
-      this.firstPerson.disabled = false;
-      for (const c of this.cards) c.disabled = false;
-      this.pinch.disabled = false;
-      if (this.visible) this.cards.find((c) => c.dataset.mode === mode)?.focus();
-    }
+    await this.save(
+      () => this.select(mode),
+      "Movement saved for this player.",
+      () => this.cards.find((c) => c.dataset.mode === mode),
+    );
   }
-  private async choosePinch(): Promise<void> {
-    if (this.saving) return;
-    this.saving = true;
-    this.carStyle.disabled = true;
-    this.firstPerson.disabled = true;
-    this.pinch.disabled = true;
-    for (const c of this.cards) c.disabled = true;
-    try {
-      await this.selectPinch(this.pinch.checked);
-      this.status.textContent = "Zoom preference saved for this player.";
-    } catch {
-      this.status.textContent = "You can use this choice now, but it could not be remembered.";
-    } finally {
-      this.saving = false;
-      this.carStyle.disabled = false;
-      this.firstPerson.disabled = false;
-      this.pinch.disabled = false;
-      for (const c of this.cards) c.disabled = false;
-      if (this.visible) this.pinch.focus();
-    }
+  private choosePinch(): Promise<void> {
+    return this.save(
+      () => this.selectPinch(this.pinch.checked),
+      "Zoom preference saved for this player.",
+      () => this.pinch,
+    );
   }
-  private async chooseFirstPerson(): Promise<void> {
-    if (this.saving) return;
-    this.saving = true;
-    this.carStyle.disabled = true;
-    this.firstPerson.disabled = true;
-    this.pinch.disabled = true;
-    for (const c of this.cards) c.disabled = true;
-    try {
-      await this.selectFirstPerson(this.firstPerson.checked);
-      this.status.textContent = "View saved for this player.";
-    } catch {
-      this.status.textContent = "You can use this choice now, but it could not be remembered.";
-    } finally {
-      this.saving = false;
-      this.carStyle.disabled = false;
-      this.firstPerson.disabled = false;
-      this.pinch.disabled = false;
-      for (const c of this.cards) c.disabled = false;
-      if (this.visible) this.firstPerson.focus();
-    }
+  private chooseFirstPerson(): Promise<void> {
+    return this.save(
+      () => this.selectFirstPerson(this.firstPerson.checked),
+      "View saved for this player.",
+      () => this.firstPerson,
+    );
   }
-  private async chooseCar(): Promise<void> {
-    if (this.saving) return;
-    this.saving = true;
-    this.carStyle.disabled = true;
-    this.firstPerson.disabled = true;
-    this.pinch.disabled = true;
-    for (const c of this.cards) c.disabled = true;
-    try {
-      await this.selectCar(this.carStyle.value as CarDrivingStyle);
-      this.status.textContent = "Car controls saved for this player.";
-    } catch {
-      this.status.textContent = "You can use this choice now, but it could not be remembered.";
-    } finally {
-      this.saving = false;
-      this.carStyle.disabled = false;
-      this.firstPerson.disabled = false;
-      this.pinch.disabled = false;
-      for (const c of this.cards) c.disabled = false;
-      if (this.visible) this.carStyle.focus();
-    }
+  private chooseDistance(): Promise<void> {
+    return this.save(
+      () => this.selectDistance(viewDistance(this.distance.value)),
+      "View distance saved for this player.",
+      () => this.distance,
+    );
+  }
+  private chooseCar(): Promise<void> {
+    return this.save(
+      () => this.selectCar(this.carStyle.value as CarDrivingStyle),
+      "Car controls saved for this player.",
+      () => this.carStyle,
+    );
   }
   private fullscreen = (): void => {
     if (this.visible) {

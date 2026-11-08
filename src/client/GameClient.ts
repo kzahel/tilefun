@@ -10,6 +10,7 @@ import { AudioManager } from "../audio/AudioManager.js";
 import { buildAudioManifest } from "../audio/SurfaceType.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { normalizePlayerModel } from "../characters/PlayerModels.js";
+import { type FirstPersonViewDistance, viewDistance } from "../config/firstPersonViewDistance.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { ConsoleUI } from "../console/ConsoleUI.js";
 import { GameLoop } from "../core/GameLoop.js";
@@ -91,19 +92,15 @@ export interface GameClientOptions {
     pinchZoom?: boolean;
     carDriving?: CarDrivingStyle;
     firstPerson?: boolean;
+    firstPersonViewDistance?: FirstPersonViewDistance;
   };
   profileStore?: {
     listProfiles(): Promise<{ id: string; name: string; pin: string | null; createdAt: number }[]>;
     createProfile(name: string): Promise<{ id: string; name: string }>;
+    /** Players update their own settings; identity fields are not updatable here. */
     updateProfile?(
       id: string,
-      updates: {
-        playerModel?: string;
-        touchMovement?: TouchMovementMode;
-        pinchZoom?: boolean;
-        carDriving?: CarDrivingStyle;
-        firstPerson?: boolean;
-      },
+      updates: Partial<Omit<NonNullable<GameClientOptions["profile"]>, "id" | "name">>,
     ): Promise<void>;
   };
   roomDirectory?: import("../rooms/RoomDirectory.js").RoomDirectory;
@@ -368,6 +365,7 @@ export class GameClient implements GameTestHooks {
     this.localPlayers = new LocalPlayers(gc);
     // Register console cvars and commands
     registerClientConsole(gc, this.netEmulatedTransport);
+    this.firstPerson.viewDistance = viewDistance(this.profile?.firstPersonViewDistance);
     if (this.profile?.firstPerson) this.consoleEngine.cvars.get("r_firstperson")?.set(true);
     this.pushStartScene();
 
@@ -776,6 +774,7 @@ export class GameClient implements GameTestHooks {
       get consoleEngine() {
         return client.consoleEngine;
       },
+      firstPerson: this.firstPerson,
       profile: this.profile,
       profileStore: this.profileStore,
       get doorBusy() {

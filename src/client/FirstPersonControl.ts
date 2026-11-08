@@ -1,4 +1,8 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
+import {
+  DEFAULT_VIEW_DISTANCE,
+  type FirstPersonViewDistance,
+} from "../config/firstPersonViewDistance.js";
 import { controllerInput } from "../input/ControllerInput.js";
 import {
   angleDelta,
@@ -27,12 +31,14 @@ const VEHICLE_FOLLOW_DELAY_MS = 1500;
  *
  * `drawing` is the single per-frame answer to "is play shown in first person?".
  * Camera-relative movement, look input, the streaming zoom floor and pointer
- * lock all follow it, so the fixed-view fallbacks (indoors, legacy Canvas,
- * loading, editor) keep ordinary controls.
+ * lock all follow it, so the fixed-view fallbacks (legacy Canvas, loading,
+ * editor) keep ordinary controls. Rooms are drawn in first person too (230).
  */
 export class FirstPersonControl {
   active = false;
   readonly look: FirstPersonLook = { yaw: NORTH_YAW, pitch: 0 };
+  /** Saved per player (Options); sets the fog end and the streamed area. */
+  viewDistance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE;
   /** View-owned presentation storage; first-person mesh poses never share the fixed view's. */
   readonly frame = new SceneFrame({
     allCars3d: new URLSearchParams(location.search).has("allcars3d"),
@@ -165,7 +171,7 @@ export class FirstPersonControl {
     return this.view ? { ...this.view.stats } : undefined;
   }
 
-  /** The fixed view draws instead (editor, indoors, loading, legacy Canvas):
+  /** The fixed view draws instead (editor, loading, legacy Canvas):
    * hide the view and give back ordinary controls and the pointer. */
   hideView(): void {
     this.drawn = false;

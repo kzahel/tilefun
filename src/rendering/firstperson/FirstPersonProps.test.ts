@@ -121,4 +121,27 @@ describe("first-person prop forms", () => {
     appendPropGeometry({ flat: plain, textured: undefined }, prop({}, box(64, 32)), 0x808080, 0);
     expect(plain.vertexCount / 6).toBe(5);
   });
+
+  it("dresses room walls on both sides and colours their ends per wall", () => {
+    const flat = new TriangleWriter();
+    const textured = { positions: [] as number[], uvs: [] as number[] };
+    const wall = prop({}, null, [box(64, 16, { zHeight: 64 })]);
+    const sides: number[] = [];
+    appendPropGeometry({ flat, textured }, wall, 0x808080, 0, undefined, {
+      sideColor: () => {
+        sides.push(1);
+        return 0xff0000;
+      },
+    });
+    expect(textured.positions.length / 18).toBe(2); // south and north
+    expect(flat.vertexCount / 6).toBe(3); // top, east and west in the wall's colour
+    expect(sides).toHaveLength(1);
+    // The north face wears exactly the south face's rows of artwork.
+    const vRows = (face: number) =>
+      new Set(textured.uvs.slice(face * 12, face * 12 + 12).filter((_, i) => i % 2 === 1));
+    expect(vRows(1)).toEqual(vRows(0));
+    const colors = flat.finish().colors;
+    expect(colors[0]).toBeGreaterThan(0);
+    expect(colors[1]).toBe(0); // red, not the prop's grey
+  });
 });

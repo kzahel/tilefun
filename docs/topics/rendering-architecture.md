@@ -7,6 +7,10 @@ fixed-view output unchanged), replicated chunk layers and prop colliders, and dr
 them with its own Three.js renderer. Vehicle pose composition and loading are shared
 through `AuthoredMeshPose.ts`. The view mirrors game Y once at its scene boundary.
 The integration glue is temporary; 226 owns the view/camera-policy contracts it needs.
+[230](../tactical/230-3d-cameras-stereo-and-webxr.md) slices 1–2 add a saved view
+distance that sets the fog end and the hidden fixed camera's streamed area, and draw
+rooms from the fixed view's own room rasters (floor plane, painted wall heights,
+anchor-placed furniture, flat rugs).
 
 [220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) projects
 vehicle shadows from the displayed rotated bounding volume's finite upper faces.

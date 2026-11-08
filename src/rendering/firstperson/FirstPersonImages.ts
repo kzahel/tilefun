@@ -17,7 +17,7 @@ export interface PropImage {
 
 const MAX_PROP_IMAGES = 256;
 
-function pixelTexture(source: TexImageSource): THREE.Texture {
+export function pixelTexture(source: TexImageSource): THREE.Texture {
   const texture = new THREE.Texture(source as THREE.Texture["image"]);
   texture.colorSpace = THREE.SRGBColorSpace;
   texture.magFilter = texture.minFilter = THREE.NearestFilter;
@@ -61,6 +61,52 @@ export class FirstPersonImages {
     const key = `${prop.sprite.sheetKey}|${opaque ? 1 : 0}|${pieces
       .map((p) => `${p.frameCol},${p.frameRow},${p.spriteWidth},${p.spriteHeight},${p.dx},${p.dy}`)
       .join(";")}`;
+    const sheet = this.sheets.get(prop.sprite.sheetKey);
+    if (!sheet && !this.propImages.has(key)) return undefined;
+    const frame = propImageFrame(prop);
+    return this.composed(key, frame, opaque, (ctx) => {
+      if (!sheet) return;
+      for (const p of pieces) {
+        const region = sheet.getRegion(p.frameCol, p.frameRow);
+        ctx.drawImage(
+          sheet.image as CanvasImageSource,
+          region.x,
+          region.y,
+          p.spriteWidth,
+          p.spriteHeight,
+          Math.round(p.dx - p.spriteWidth / 2 - frame.left),
+          Math.round(p.dy - p.spriteHeight - frame.top),
+          p.spriteWidth,
+          p.spriteHeight,
+        );
+      }
+    });
+  }
+
+  /** One rectangle of a loaded sheet's image as artwork with the given frame (interior furniture). */
+  region(
+    sheetKey: string,
+    rect: readonly [number, number, number, number],
+    frame: PropImageFrame,
+    opaque: boolean,
+  ): PropImage | undefined {
+    const key = `${sheetKey}|${opaque ? 1 : 0}|rect:${rect.join(",")}`;
+    const sheet = this.sheets.get(sheetKey);
+    if (!sheet && !this.propImages.has(key)) return undefined;
+    const image = this.composed(key, frame, opaque, (ctx) => {
+      if (sheet) ctx.drawImage(sheet.image as CanvasImageSource, ...rect, 0, 0, rect[2], rect[3]);
+    });
+    // Compositions are keyed by pixels; the caller's frame places them.
+    return image && { ...image, frame };
+  }
+
+  /** Cached composition (least recently used out); `draw` paints it in frame-local pixels. */
+  private composed(
+    key: string,
+    frame: PropImageFrame,
+    opaque: boolean,
+    draw: (ctx: CanvasRenderingContext2D) => void,
+  ): PropImage | undefined {
     const cached = this.propImages.get(key);
     if (cached) {
       // Re-insert so eviction removes the least recently used composition.
@@ -69,29 +115,13 @@ export class FirstPersonImages {
       return cached;
     }
     if (this.disposed) return undefined;
-    const sheet = this.sheets.get(prop.sprite.sheetKey);
-    if (!sheet) return undefined;
-    const frame = propImageFrame(prop);
     const canvas = document.createElement("canvas");
     canvas.width = Math.max(1, frame.width);
     canvas.height = Math.max(1, frame.height);
     const ctx = canvas.getContext("2d", { willReadFrequently: true });
     if (!ctx) return undefined;
     ctx.imageSmoothingEnabled = false;
-    for (const p of pieces) {
-      const region = sheet.getRegion(p.frameCol, p.frameRow);
-      ctx.drawImage(
-        sheet.image as CanvasImageSource,
-        region.x,
-        region.y,
-        p.spriteWidth,
-        p.spriteHeight,
-        Math.round(p.dx - p.spriteWidth / 2 - frame.left),
-        Math.round(p.dy - p.spriteHeight - frame.top),
-        p.spriteWidth,
-        p.spriteHeight,
-      );
-    }
+    draw(ctx);
     const color = averageColor(ctx.getImageData(0, 0, canvas.width, canvas.height).data);
     if (opaque) {
       ctx.globalCompositeOperation = "destination-over";
@@ -122,6 +152,37 @@ export class FirstPersonImages {
     this.sheetTextures.clear();
     this.propImages.clear();
   }
+}
+
+/** Alpha-weighted average colour of a pixel rectangle (clamped to the image);
+ * undefined when it holds no visible pixels. */
+export function regionColor(
+  image: { data: ArrayLike<number>; width: number; height: number },
+  x0: number,
+  y0: number,
+  x1: number,
+  y1: number,
+): number | undefined {
+  const left = Math.max(0, Math.floor(Math.min(x0, x1))),
+    right = Math.min(image.width, Math.ceil(Math.max(x0, x1)));
+  const top = Math.max(0, Math.floor(Math.min(y0, y1))),
+    bottom = Math.min(image.height, Math.ceil(Math.max(y0, y1)));
+  let r = 0,
+    g = 0,
+    b = 0,
+    weight = 0;
+  for (let y = top; y < bottom; y++)
+    for (let x = left; x < right; x++) {
+      const i = (y * image.width + x) * 4;
+      const a = image.data[i + 3] ?? 0;
+      if (a < 16) continue;
+      r += (image.data[i] ?? 0) * a;
+      g += (image.data[i + 1] ?? 0) * a;
+      b += (image.data[i + 2] ?? 0) * a;
+      weight += a;
+    }
+  if (!weight) return undefined;
+  return (Math.round(r / weight) << 16) | (Math.round(g / weight) << 8) | Math.round(b / weight);
 }
 
 /** Alpha-weighted mean of RGBA bytes as an sRGB hex colour. */

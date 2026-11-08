@@ -1,3 +1,4 @@
+import type { FirstPersonViewDistance } from "../config/firstPersonViewDistance.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { generateUUID } from "../shared/uuid.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
@@ -13,6 +14,8 @@ export interface PlayerProfile {
   carDriving?: CarDrivingStyle;
   /** Experimental first-person play view (tactical 229). */
   firstPerson?: boolean;
+  /** First-person fog and streaming distance (tactical 230). */
+  firstPersonViewDistance?: FirstPersonViewDistance;
 }
 
 /** Fields players change after creation; undefined leaves a field unchanged. */
@@ -24,6 +27,7 @@ const UPDATABLE_FIELDS = [
   "pinchZoom",
   "carDriving",
   "firstPerson",
+  "firstPersonViewDistance",
 ] as const;
 type ProfileUpdates = Partial<Pick<PlayerProfile, (typeof UPDATABLE_FIELDS)[number]>>;
 

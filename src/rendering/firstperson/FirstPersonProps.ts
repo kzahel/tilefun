@@ -146,27 +146,49 @@ const FACES = {
   bottom: [0, 1, 2, 3],
 } as const;
 
+/**
+ * Room walls (tactical 230) are seen from both sides: their north faces repeat the
+ * south-face artwork, and tops and east/west faces take a colour sampled from that
+ * solid's artwork instead of the prop's single average colour.
+ */
+export interface RoomShellFaces {
+  sideColor(solid: PropSolid): number;
+}
+
 export function appendPropGeometry(
   out: PropGeometry,
   prop: Prop,
   color: number,
   elevation: number,
   frame = propImageFrame(prop),
+  shell?: RoomShellFaces,
 ): void {
   for (const solid of propSolids(prop, frame)) {
     const corner = (i: number) => solid.corners[i] ?? [0, 0, 0];
-    const flat = (face: readonly number[], shade: number) =>
-      out.flat.quad(face.map(corner), color, shade);
-    const textured = (face: readonly number[], shade: number) => {
+    const sideColor = shell ? shell.sideColor(solid) : color;
+    const flat = (face: readonly number[], shade: number, hex = color) =>
+      out.flat.quad(face.map(corner), hex, shade);
+    /** `artY` projects every corner as if it stood on that row (north faces wear the south art). */
+    const textured = (face: readonly number[], shade: number, artY?: number) => {
       const target = out.textured;
       if (!target) return flat(face, shade);
       const [a, b, c, d] = face.map(corner);
       if (!a || !b || !c || !d) return;
       for (const p of [a, b, c, a, c, d]) {
         target.positions.push(p[0], p[1], p[2]);
-        target.uvs.push(...projectedUv(prop, frame, elevation, p[0], p[1], p[2]));
+        target.uvs.push(...projectedUv(prop, frame, elevation, p[0], artY ?? p[1], p[2]));
       }
     };
+    if (shell && !solid.surface) {
+      // Room art paints caps over the footprint, so a projected top would show the
+      // floor beyond a low wall; tops take the wall's colour instead.
+      flat(FACES.top, FACE_SHADE.top, sideColor);
+      textured(FACES.south, FACE_SHADE.south);
+      textured(FACES.north, FACE_SHADE.north, solid.bounds.bottom);
+      flat(FACES.east, FACE_SHADE.east, sideColor);
+      flat(FACES.west, FACE_SHADE.west, sideColor);
+      continue;
+    }
     if (solid.surface) {
       // Decks and ramps are usually drawn by surface overlays rather than their sprite.
       flat(FACES.top, FACE_SHADE.top);

@@ -1,3 +1,4 @@
+import { VIEW_BACKDROP_CSS } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
 import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
 import { seatEntity } from "../session/SeatFocus.js";
@@ -14,7 +15,7 @@ export function renderWorld(gc: GameContext, prepared = false, view = gc.view): 
   const { stateView } = gc;
   const ready = gc.spriteCatalog.size > 0 && !stateView.interior;
   drawViewTerrain(gc.renderer, view.camera, ready ? stateView.world : undefined, {
-    background: "#1a1a2e",
+    background: VIEW_BACKDROP_CSS,
     pacing: gc.debugPanel.terrainPacing,
     prepared,
   });

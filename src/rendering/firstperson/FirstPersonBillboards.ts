@@ -1,7 +1,9 @@
 import * as THREE from "three";
 import type { Spritesheet } from "../../assets/Spritesheet.js";
+import type { Prop } from "../../entities/Prop.js";
 import type { SpriteItem } from "../SceneItem.js";
 import { apparentDirection, type FirstPersonEye } from "./FirstPersonCamera.js";
+import type { PropImageFrame } from "./FirstPersonProps.js";
 
 /** u0, v0 (top), u1, v1 (bottom) with v counted from the image top. */
 export type UvRect = readonly [number, number, number, number];
@@ -204,4 +206,27 @@ export class BillboardBatches {
     for (const batch of this.batches.values()) batch.dispose();
     this.batches.clear();
   }
+}
+
+/**
+ * An upright card of composed artwork whose frame is relative to the prop's feet:
+ * the frame's row 0 (the prop's anchor row) meets the ground. Outdoor art is
+ * anchored at its bottom centre. Room furniture is anchored at its ground contact
+ * with intentional transparent padding below, which stays under the floor.
+ */
+export function artCard(
+  prop: Prop,
+  frame: PropImageFrame,
+  texture: THREE.Texture,
+  elevation: number,
+): Billboard {
+  return {
+    texture,
+    uv: [0, 0, 1, 1],
+    x: prop.position.wx + frame.left + frame.width / 2,
+    y: prop.position.wy,
+    z: elevation - (frame.top + frame.height),
+    width: frame.width,
+    height: frame.height,
+  };
 }

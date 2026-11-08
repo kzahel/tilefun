@@ -1,9 +1,16 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { FirstPersonControl } from "../client/FirstPersonControl.js";
+import { PIXEL_SCALE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
 import { createVehicle } from "../traffic/Vehicle.js";
-import { firstPersonMovement, firstPersonTick } from "./firstPersonPlay.js";
+import {
+  firstPersonDrawRadius,
+  firstPersonMovement,
+  firstPersonTick,
+  streamedRadius,
+  streamZoomFor,
+} from "./firstPersonPlay.js";
 
 const listeners = () => ({ addEventListener() {}, removeEventListener() {} });
 
@@ -23,7 +30,7 @@ function setup(carDriving: GameContext["carDriving"] = "steering") {
   const gc = {
     firstPerson: control,
     carDriving,
-    camera: { zoom: 2 },
+    camera: { zoom: 2, viewportWidth: 1280, viewportHeight: 720 },
     tapMovement: { cancel: () => cancelled.tap++ },
     touchHold: { reset: () => cancelled.hold++ },
   } as unknown as GameContext;
@@ -49,10 +56,11 @@ describe("first-person play input", () => {
     const turned = firstPersonMovement(gc, shown, undefined, forward);
     expect(turned.dx).toBeCloseTo(1, 9);
     expect(turned.dy).toBeCloseTo(0, 9);
-    expect(gc.camera.zoom).toBe(0.5);
+    // Medium (800 px) on a 720 px tall viewport: zoom out until 800 px is streamed.
+    expect(gc.camera.zoom).toBeCloseTo(720 / (2 * PIXEL_SCALE * 800), 9);
     expect(cancelled).toEqual({ tap: 1, hold: 1 });
 
-    control.hideView(); // e.g. walked indoors or opened the editor
+    control.hideView(); // e.g. opened the editor
     expect(firstPersonTick(gc, 1 / 60, undefined)).toBeUndefined();
   });
 
@@ -79,5 +87,42 @@ describe("first-person play input", () => {
     control.setActive(true, 0);
     expect(control.drawing).toBe(false);
     expect(firstPersonTick(gc, 1 / 60, undefined)).toBeUndefined();
+  });
+
+  it("streams the chosen view distance and never zooms back in", () => {
+    const { control, gc } = setup();
+    control.setActive(true, 0);
+    control.markDrawn();
+    for (const [distance, radius] of [
+      ["near", 400],
+      ["far", 1600],
+    ] as const) {
+      control.viewDistance = distance;
+      gc.camera.zoom = 2;
+      firstPersonTick(gc, 1 / 60, undefined);
+      expect(streamedRadius(gc.camera)).toBeCloseTo(radius, 6);
+    }
+    gc.camera.zoom = 0.01; // already further out than needed: left alone
+    firstPersonTick(gc, 1 / 60, undefined);
+    expect(gc.camera.zoom).toBe(0.01);
+  });
+});
+
+describe("first-person view distance", () => {
+  const camera = { viewportWidth: 1920, viewportHeight: 1080, zoom: 1 };
+
+  it("matches the camera's streamed rectangle, which includes the pixel scale", () => {
+    // Camera.getVisibleChunkRange spans viewport / (PIXEL_SCALE · zoom) world pixels.
+    expect(streamedRadius(camera)).toBeCloseTo(1080 / (2 * PIXEL_SCALE), 9);
+    const zoom = streamZoomFor(800, camera);
+    expect(zoom).toBeDefined();
+    expect(streamedRadius({ ...camera, zoom: zoom ?? 1 })).toBeCloseTo(800, 9);
+    expect(streamZoomFor(800, { ...camera, viewportHeight: 0 })).toBeUndefined();
+  });
+
+  it("fogs at the chosen distance, or earlier while less is streamed", () => {
+    expect(firstPersonDrawRadius(800, { ...camera, zoom: 0.1 })).toBe(800);
+    expect(firstPersonDrawRadius(800, camera)).toBeCloseTo(180, 9);
+    expect(firstPersonDrawRadius(800, { ...camera, zoom: 100 })).toBe(160);
   });
 });

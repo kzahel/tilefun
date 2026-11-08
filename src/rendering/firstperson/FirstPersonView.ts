@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { MODERN_INTERIORS_SHEET_KEY } from "../../assets/ModernInteriorsAtlasIndex.js";
 import type { Spritesheet } from "../../assets/Spritesheet.js";
 import { CHUNK_SIZE, ELEVATION_PX, TILE_SIZE } from "../../config/constants.js";
 import type { Prop } from "../../entities/Prop.js";
@@ -12,18 +13,26 @@ import type { SpriteItem } from "../SceneItem.js";
 import { VehiclePaintResources } from "../VehiclePaintResources.js";
 import {
   actorBillboard,
+  artCard,
   type Billboard,
   BillboardBatches,
   sheetUv,
 } from "./FirstPersonBillboards.js";
-import { cameraRight, type FirstPersonEye, lookDirection } from "./FirstPersonCamera.js";
+import {
+  cameraRight,
+  type FirstPersonEye,
+  lookDirection,
+  nextFogEnd,
+} from "./FirstPersonCamera.js";
 import { FirstPersonImages, type PropImage } from "./FirstPersonImages.js";
+import { type FirstPersonInterior, INTERIOR_BACKGROUND } from "./FirstPersonInterior.js";
 import {
   appendPropGeometry,
   type PropGeometry,
   propForm,
   propImageFrame,
 } from "./FirstPersonProps.js";
+import { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
 import { buildTerrainChunk, type ColoredTriangles, TriangleWriter } from "./FirstPersonTerrain.js";
 
 export type FirstPersonWorld = Pick<World, "getChunkIfLoaded" | "getHeightAt">;
@@ -40,11 +49,15 @@ export interface FirstPersonFrame {
   readonly sprites: readonly SpriteItem[];
   /** Fog end and chunk residency radius in world pixels. */
   readonly drawRadius: number;
+  /** Set inside a room: its floor and walls replace outdoor ground, without fog. */
+  readonly interior?: FirstPersonInterior | undefined;
 }
 
 const SKY = 0x9fd3f0;
 const CHUNK_PX = CHUNK_SIZE * TILE_SIZE;
 const CHUNK_BUILDS_PER_FRAME = 3;
+/** The fog never closes in nearer than this while chunks arrive. */
+const MIN_FOG_END = 96;
 
 type TexturedFaces = NonNullable<PropGeometry["textured"]>;
 
@@ -75,7 +88,7 @@ export function chunksInReach(
   x: number,
   y: number,
   reach: number,
-): { cx: number; cy: number; key: string }[] {
+): { cx: number; cy: number; key: string; distance: number }[] {
   const wanted: { cx: number; cy: number; key: string; distance: number }[] = [];
   const min = (v: number) => Math.floor((v - reach) / CHUNK_PX);
   const max = (v: number) => Math.floor((v + reach) / CHUNK_PX);
@@ -135,7 +148,7 @@ function propElevation(prop: Prop, world: FirstPersonWorld): number {
  */
 export class FirstPersonView {
   readonly canvas: HTMLCanvasElement;
-  readonly stats = { chunks: 0, builds: 0, billboards: 0, cars: 0, calls: 0 };
+  readonly stats = { chunks: 0, builds: 0, billboards: 0, cars: 0, calls: 0, fogEnd: 0 };
   private readonly renderer: THREE.WebGLRenderer;
   private readonly scene = new THREE.Scene();
   private readonly worldRoot = new THREE.Group();
@@ -158,11 +171,14 @@ export class FirstPersonView {
   private realm: string | null | undefined;
   private propsSource: readonly Prop[] | null = null;
   private propsByChunk = new Map<string, { props: Prop[]; signature: string }>();
+  /** Fog end, pulled in while in-reach chunks are still arriving. */
+  private fogEnd: number | undefined;
+  private room: { scene: FirstPersonRoomScene; mesh: THREE.Mesh } | null = null;
   private disposed = false;
 
   constructor(
     private readonly host: HTMLCanvasElement,
-    sheets: ReadonlyMap<string, Spritesheet>,
+    private readonly sheets: ReadonlyMap<string, Spritesheet>,
   ) {
     this.images = new FirstPersonImages(sheets, (texture) => {
       this.faceMaterials.get(texture)?.dispose();
@@ -212,9 +228,10 @@ export class FirstPersonView {
     if (this.disposed) return;
     this.resize();
     if (frame.world !== this.world || frame.realm !== this.realm) this.resetWorld(frame);
+    this.syncRoom(frame.interior);
     if (frame.props !== this.propsSource) this.groupProps(frame.props);
-    this.placeCamera(frame.eye, frame.drawRadius);
     this.updateChunks(frame);
+    this.placeCamera(frame.eye, frame.drawRadius);
     this.paints.beginFrame();
     const ready = new Set<string>();
     for (const [assetId, slot] of this.vehicles) if (slot.state === "ready") ready.add(assetId);
@@ -237,8 +254,9 @@ export class FirstPersonView {
   }
 
   private placeCamera(eye: FirstPersonEye, drawRadius: number): void {
-    this.fog.near = drawRadius * 0.45;
-    this.fog.far = drawRadius;
+    const fogEnd = this.fogEnd ?? drawRadius;
+    this.fog.near = fogEnd * 0.45;
+    this.fog.far = fogEnd;
     this.camera.far = drawRadius + CHUNK_PX;
     this.camera.updateProjectionMatrix();
     const dir = lookDirection(eye.yaw, eye.pitch);
@@ -247,16 +265,57 @@ export class FirstPersonView {
   }
 
   private resetWorld(frame: FirstPersonFrame): void {
-    for (const chunk of this.chunks.values()) this.dropChunk(chunk);
-    this.chunks.clear();
+    this.dropChunks();
     this.world = frame.world;
     this.realm = frame.realm;
     this.propsSource = null;
+    this.fogEnd = undefined;
+  }
+
+  private dropChunks(): void {
+    for (const chunk of this.chunks.values()) this.dropChunk(chunk);
+    this.chunks.clear();
+  }
+
+  /** Entering or leaving a room rebuilds every chunk (outdoor ground is not drawn
+   * indoors). Editing the room keeps the old walls and furniture until each chunk
+   * is rebuilt against the new artwork, so nothing flashes away. */
+  private syncRoom(interior: FirstPersonInterior | undefined): void {
+    const atlas = this.sheets.get(MODERN_INTERIORS_SHEET_KEY)?.image as
+      | CanvasImageSource
+      | undefined;
+    const key = interior && `${interior.key}|${atlas ? "art" : "plain"}`;
+    if (this.room?.scene.key === key) return;
+    if (this.room && interior) {
+      for (const chunk of this.chunks.values()) if (chunk.props) chunk.props.signature = "\0stale";
+    } else this.dropChunks();
+    this.disposeRoom();
+    this.scene.fog = this.carScene.fog = interior ? null : this.fog;
+    this.renderer.setClearColor(interior ? INTERIOR_BACKGROUND : SKY, 1);
+    if (!interior || !key) return;
+    const scene = new FirstPersonRoomScene(interior, key, atlas);
+    scene.adoptShell(this.propsSource);
+    const mesh = texturedMesh(scene.floorFaces(), this.faceMaterial(scene.floor));
+    this.worldRoot.add(mesh);
+    this.room = { scene, mesh };
+  }
+
+  private disposeRoom(): void {
+    const room = this.room;
+    if (!room) return;
+    this.room = null;
+    disposeGroup(room.mesh);
+    for (const texture of [room.scene.floor, room.scene.walls]) {
+      this.faceMaterials.get(texture)?.dispose();
+      this.faceMaterials.delete(texture);
+    }
+    room.scene.dispose();
   }
 
   /** Replicated prop lists are replaced, never mutated, so identity marks a change. */
   private groupProps(props: readonly Prop[]): void {
     this.propsSource = props;
+    this.room?.scene.adoptShell(props);
     this.propsByChunk.clear();
     for (const prop of props) {
       const key = chunkKey(
@@ -277,14 +336,20 @@ export class FirstPersonView {
   private updateChunks(frame: FirstPersonFrame): void {
     const keep = new Set<string>();
     let builds = 0;
-    for (const { cx, cy, key } of chunksInReach(
+    let nearestMissing: number | undefined;
+    for (const { cx, cy, key, distance } of chunksInReach(
       frame.eye.x,
       frame.eye.y,
       frame.drawRadius + CHUNK_PX,
     )) {
       keep.add(key);
+      if (nearestMissing === undefined && !frame.world.getChunkIfLoaded(cx, cy))
+        nearestMissing = distance;
       if (builds < CHUNK_BUILDS_PER_FRAME) builds += this.refreshChunk(frame.world, cx, cy, key);
     }
+    // Rooms have no fog; outdoors the fog hides chunks that have not arrived yet.
+    this.fogEnd = nextFogEnd(this.fogEnd, frame.drawRadius, nearestMissing, MIN_FOG_END);
+    this.stats.fogEnd = Math.round(this.fogEnd);
     for (const [key, chunk] of this.chunks)
       if (!keep.has(key)) {
         this.dropChunk(chunk);
@@ -304,7 +369,7 @@ export class FirstPersonView {
       this.chunks.set(key, scene);
     }
     let builds = 0;
-    if (terrainStale(scene.terrain, chunk)) {
+    if (!this.room && terrainStale(scene.terrain, chunk)) {
       if (scene.terrain) disposeGroup(scene.terrain.mesh);
       scene.terrain = this.buildTerrain(chunk, cx, cy, world);
       this.worldRoot.add(scene.terrain.mesh);
@@ -346,24 +411,39 @@ export class FirstPersonView {
     const group = new THREE.Group();
     const billboards: Billboard[] = [];
     const flat = new TriangleWriter();
-    const textured = new Map<PropImage, TexturedFaces>();
+    const textured = new Map<THREE.Texture, TexturedFaces>();
+    const facesFor = (image: PropImage | undefined) => {
+      if (!image) return undefined;
+      const faces = textured.get(image.texture) ?? { positions: [], uvs: [] };
+      textured.set(image.texture, faces);
+      return faces;
+    };
+    const room = this.room?.scene;
     for (const prop of props) {
       const elevation = propElevation(prop, world);
-      const frame = propImageFrame(prop);
+      if (room?.isShell(prop)) {
+        room.appendShell(prop, elevation, flat, facesFor);
+        continue;
+      }
+      // Room furniture is placed by its anchor; rugs lie on the floor.
+      const furniture = room?.furniture(prop.type, this.images);
+      if (room && furniture && room.appendFlat(prop, furniture, elevation, facesFor)) continue;
+      const frame = furniture?.frame ?? propImageFrame(prop);
       if (propForm(prop, frame) === "billboard") {
-        const billboard = this.propBillboard(prop, elevation);
+        const card = furniture?.image(false);
+        const billboard = furniture
+          ? card && artCard(prop, frame, card.texture, elevation)
+          : this.propBillboard(prop, elevation);
         if (billboard) billboards.push(billboard);
         continue;
       }
-      const image = this.images.prop(prop, true);
-      const faces = image ? (textured.get(image) ?? { positions: [], uvs: [] }) : undefined;
-      if (image && faces) textured.set(image, faces);
+      const image = furniture ? furniture.image(true) : this.images.prop(prop, true);
       const color = image?.color ?? 0x8a8a8a;
-      appendPropGeometry({ flat, textured: faces }, prop, color, elevation, frame);
+      appendPropGeometry({ flat, textured: facesFor(image) }, prop, color, elevation, frame);
     }
     if (flat.vertexCount) group.add(coloredMesh(flat.finish(), this.flatMaterial));
-    for (const [image, faces] of textured)
-      if (faces.positions.length) group.add(texturedMesh(faces, this.faceMaterial(image.texture)));
+    for (const [texture, faces] of textured)
+      if (faces.positions.length) group.add(texturedMesh(faces, this.faceMaterial(texture)));
     return { group, billboards };
   }
 
@@ -382,23 +462,18 @@ export class FirstPersonView {
       };
     }
     const image = this.images.prop(prop, false);
-    if (!image) return undefined;
-    const { frame } = image;
-    return {
-      texture: image.texture,
-      uv: [0, 0, 1, 1],
-      x: prop.position.wx + frame.left + frame.width / 2,
-      y: prop.position.wy,
-      z: elevation - (frame.top + frame.height),
-      width: frame.width,
-      height: frame.height,
-    };
+    return image && artCard(prop, image.frame, image.texture, elevation);
   }
 
   private faceMaterial(texture: THREE.Texture): THREE.MeshBasicMaterial {
     let material = this.faceMaterials.get(texture);
     if (!material) {
-      material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
+      // Opaque compositions have no holes; floor decals (rugs) cut out their padding.
+      material = new THREE.MeshBasicMaterial({
+        map: texture,
+        side: THREE.DoubleSide,
+        alphaTest: 0.5,
+      });
       this.faceMaterials.set(texture, material);
     }
     return material;
@@ -476,8 +551,8 @@ export class FirstPersonView {
     if (this.disposed) return;
     this.disposed = true;
     this.observer.disconnect();
-    for (const chunk of this.chunks.values()) this.dropChunk(chunk);
-    this.chunks.clear();
+    this.dropChunks();
+    this.disposeRoom();
     this.billboards.dispose();
     for (const material of this.faceMaterials.values()) material.dispose();
     this.faceMaterials.clear();
