@@ -109,6 +109,28 @@
       }
     },
     {
+      "includes": ["src/session/**", "!src/session/**/*.test.ts"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noRestrictedGlobals": {
+              "level": "error",
+              "options": {
+                "deniedGlobals": {
+                  "window": "Device sessions, seats and views take explicit options and hosts (226).",
+                  "document": "Device sessions, seats and views take explicit options and hosts (226).",
+                  "location": "Device sessions, seats and views take explicit options, not URL reads (226).",
+                  "localStorage": "Device sessions, seats and views take explicit settings, not storage (226).",
+                  "sessionStorage": "Device sessions, seats and views take explicit settings, not storage (226).",
+                  "navigator": "Device sessions, seats and views get devices from the page shell (226)."
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
       "includes": ["src/shared/**", "!src/shared/**/*.test.ts"],
       "linter": {
         "rules": {

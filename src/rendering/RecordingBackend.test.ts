@@ -52,6 +52,7 @@ it("runs production outdoor/editor/indoor presentation on another backend withou
   const gc = {
     debugPanel: { terrainPacing: "throughput" },
     camera,
+    view: { camera, fades: new Map() },
     renderer: backend,
     spriteCatalog: assets,
     sceneFrame: new SceneFrame(),

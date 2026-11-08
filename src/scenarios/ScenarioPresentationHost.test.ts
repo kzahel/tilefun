@@ -24,6 +24,7 @@ const mocks = vi.hoisted(() => ({
   factory: vi.fn(),
   collect: vi.fn(() => []),
   terrain: vi.fn(),
+  prepareTerrain: vi.fn(),
   submitInput: vi.fn(() => true),
   submitPress: vi.fn(() => true),
   pump: vi.fn(),
@@ -42,31 +43,38 @@ vi.mock("../rendering/SelectableRenderHost.js", () => ({
   selectableRenderHostFactory: async () => mocks.factory,
 }));
 vi.mock("../rendering/collectScene.js", () => ({ collectScene: mocks.collect }));
-vi.mock("../rendering/OutdoorPresentation.js", () => ({ presentTerrain: mocks.terrain }));
-vi.mock("./ScenarioClient.js", () => ({
-  ScenarioClient: class {
-    ready = Promise.resolve();
-    view = {
-      playerEntity: { id: 1, position: { wx: 80, wy: 160 } } as Entity,
-      entities: [] as Entity[],
-      get presentedPlayerEntity() {
-        return this.playerEntity;
-      },
-      props: [],
-      beginPresentation: mocks.beginPresentation,
-      endPresentation: mocks.endPresentation,
-      resetPresentationClock: mocks.resetPresentationClock,
-      cameraPresentation: { time: 0, domain: "remote" },
-    };
-    submitInput = mocks.submitInput;
-    submitPress = mocks.submitPress;
-    pump = mocks.pump;
-    setRunning = mocks.setRunning;
-    getDiagnostics = mocks.diagnostics;
-    command = mocks.command;
-    dispose = mocks.terminate;
-  },
+vi.mock("../rendering/OutdoorPresentation.js", () => ({
+  presentTerrain: mocks.terrain,
+  prepareViewTerrain: mocks.prepareTerrain,
 }));
+vi.mock("./ScenarioClient.js", async () => {
+  const { SceneFrame } = await import("../rendering/SceneFrame.js");
+  return {
+    ScenarioClient: class {
+      ready = Promise.resolve();
+      view = {
+        playerEntity: { id: 1, position: { wx: 80, wy: 160 } } as Entity,
+        entities: [] as Entity[],
+        get presentedPlayerEntity() {
+          return this.playerEntity;
+        },
+        props: [],
+        beginPresentation: mocks.beginPresentation,
+        endPresentation: mocks.endPresentation,
+        resetPresentationClock: mocks.resetPresentationClock,
+        cameraPresentation: { time: 0, domain: "remote" },
+      };
+      device = { replica: this.view, prediction: null, frame: new SceneFrame() };
+      submitInput = mocks.submitInput;
+      submitPress = mocks.submitPress;
+      pump = mocks.pump;
+      setRunning = mocks.setRunning;
+      getDiagnostics = mocks.diagnostics;
+      command = mocks.command;
+      dispose = mocks.terminate;
+    },
+  };
+});
 
 import { ScenarioPresentationHost } from "./ScenarioPresentationHost.js";
 
@@ -162,6 +170,8 @@ it("keeps diagnostic framing through ticks/commands and submits overlays around 
     beginFrame: vi.fn(),
     beginWorld: vi.fn(),
     endWorld: vi.fn(),
+    beginView: vi.fn(),
+    endView: vi.fn(),
     renderer: {
       assets: new Map(),
       submit: (_view: unknown, pass: RenderPass) => {
@@ -205,6 +215,8 @@ it("cycles a presentation-only pose while authority is paused, then restores the
     beginFrame: vi.fn(),
     beginWorld: vi.fn(),
     endWorld: vi.fn(),
+    beginView: vi.fn(),
+    endView: vi.fn(),
     renderer: { assets: new Map(), submit: vi.fn() },
   });
   const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, {
@@ -262,6 +274,39 @@ it("resizes before readiness and during use without replacing the Worker", async
   host.dispose();
 });
 
+it("without a fixed frame, the camera follows the player after each predicted step", async () => {
+  mocks.factory.mockReturnValue({
+    setAssets: mocks.setAssets,
+    resize: mocks.resize,
+    dispose: mocks.dispose,
+    beginFrame: vi.fn(),
+    beginWorld: vi.fn(),
+    endWorld: vi.fn(),
+    beginView: vi.fn(),
+    endView: vi.fn(),
+    renderer: { assets: new Map(), submit: vi.fn() },
+  });
+  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, {
+    ...options,
+    terrain: false,
+  });
+  const player = createPlayer(80, 160);
+  // No presentation clock: render interpolates and restores, so only the tick moves it.
+  Object.assign(host.session.view, {
+    playerEntity: player,
+    entities: [player],
+    cameraPresentation: undefined,
+  });
+  await host.ready;
+  expect(host.camera.x).toBe(80); // snapped to the player
+  player.position.wx = 400;
+  const start = performance.now();
+  vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(start + 17);
+  expect(mocks.submitInput).toHaveBeenCalled();
+  expect(host.camera.x).toBeGreaterThan(80);
+  host.dispose();
+});
+
 it("uses the moving diagnostic camera for streaming as well as drawing", async () => {
   let x = 1000;
   const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, {
@@ -303,6 +348,8 @@ async function gameControlsLab(touchPoints = 0, settings = options.settings) {
     beginFrame: vi.fn(),
     beginWorld: vi.fn(),
     endWorld: vi.fn(),
+    beginView: vi.fn(),
+    endView: vi.fn(),
     renderer: { assets: new Map(), submit: vi.fn() },
   });
   const { input: _scripted, ...gameControls } = options;

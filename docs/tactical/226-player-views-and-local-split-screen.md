@@ -958,3 +958,76 @@ maintaining both shells. The shell import allow-list only shrinks.
     callers today); `RenderRegion` and the input layer's `ViewRegion` should be
     merged when 3b joins them. Not covered by a test: the GPU later-view clear of
     decals and depth (the probe content has neither).
+- 2026-11-08, slice 3b (device session and view objects; game and lab host on
+  them, still one view each). Exit list, all met:
+  - `src/session/` with a Biome `noRestrictedGlobals` override (`window`,
+    `document`, `location`, `localStorage`, `sessionStorage`, `navigator`).
+  - `DeviceSession`: the replica, the shared `SceneFrame`, the prediction
+    lifecycle (start, resume, stop), one `reconcile(reset, mountId)` /
+    `predict(seq, movement, dt, coSeats)` path, seat 0's world readiness (moved
+    out of `GameClient`) and `clearPresentation()`, which the message router
+    calls on every world load and realm exit to clear the frame and every view's
+    slab fades. `PlayScene` and `ScenarioReplica` both use it;
+    their duplicated reset-and-reconcile code was deleted. The two reset-mount
+    policies stay explicit: the game seats a reset on its gameplay mount
+    (`mountEntityId`), labs on the player's parent; unifying them would change
+    game prediction for seated drivers and is left for slice 5.
+  - `View`: camera, region (from `ViewLayouts`), observer-local slab fades (no
+    longer on `SceneFrame`; one-off callers of `presentSurfaceScene` keep none)
+    and a `CameraPolicy` (`followSeat`, `fixedCamera`; `beforeInput` says whether
+    it is placed before the step's input or after the predicted step). `GameClient.camera` is seat
+    0's view camera, so `GameTestHooks` is unchanged; `GameContext` gains
+    `session` and `view` (seat-0 shortcuts `camera`, `stateView`, `sceneFrame`
+    remain).
+  - One outdoor world draw, `drawViewTerrain` + `drawViewScene`, and the frame
+    loop `renderViews` (terrain prepared once over every view's world-frame
+    range, every view ended in `finally`, no camera left in world scope).
+    `PlayScene` renders through it (`renderPlayViews`), EditScene keeps
+    `renderWorld`/`renderEntities` on the same draw, and `ScenarioPresentationHost`
+    lost its own camera follow, terrain and scene-collection code (465 → 454
+    lines, now under the ratchet limits).
+  - Characterization: the 35 play cases and 11 `PlaceControls` cases pass
+    unchanged (the harness gained `session` and `view`); one case was added for
+    reconcile-before-predict and the door-transition reset, which the harness
+    never covered.
+  - Native tests: `DeviceSession` (lifecycle, reset rules, mount choice,
+    co-seat prediction order, readiness, disposal), camera policies, view region,
+    `renderViews` (one preparation with the world-frame ranges, region order,
+    views ended on a throw, scope released when a range or preparation throws),
+    `drawViewScene` (own fades on the shared frame, room hook, release on throw),
+    `renderPlayViews` (one preparation per frame, headless path) and
+    `ScenarioReplica`'s reconcile policy (in `CoopWorker.test.ts`, so the shell
+    import list does not grow). 24 of 24 seeded single-line faults fail
+    the suites (three needed tightened cases and two the new tests first); after
+    the review fixes 28 of 28.
+  - From the 3a review: the view loop ends views in `finally`; the 3a staging
+    exports now have production callers (`prepareViewTerrain`, `ViewLayouts`,
+    `presentTerrain`'s `prepared`) except `VIEW_LAYOUTS`, which was deleted.
+    Deferred to slice 5: per-view look-ahead keyed by view rather than index
+    (view count and order are fixed until split screen), merging `RenderRegion`
+    with the input layer's `ViewRegion` (when touch regions join views), and
+    seat objects (the composer stays in `PlayScene` and `LabInput` until seats
+    gain their own input sets).
+  - Ratchet: `PlayScene` 734 → 653 lines (worst complexity 79 → 50),
+    `GameClient` 931 → 927, `ScenarioPresentationHost` leaves the baseline.
+  - Validation: `tsc` for all four configs, Biome, knip, focused vitest,
+    regenerated inventories, production build, Playwright smoke 28 of 28 and 76
+    game and lab specs (world geometry, embedded geometry rendering, characters,
+    outdoor, natural landscapes, pair physics, furniture motion, interiors, car
+    controls, GPU renderer, player markers, building doors, jump park, vehicle
+    placement, prediction recovery, racetrack).
+  - Review (Yep Anywhere, Opus 5.5 high): CHANGES REQUESTED for one blocking
+    finding: slab fades had moved onto the view but nothing cleared them on a
+    world load or realm exit (previously `sceneFrame.clear()` did), so leaving a
+    building or switching worlds kept a deck's stale fade. Fixed with
+    `DeviceSession.clearPresentation()` from the router (router test updated),
+    and `SceneFrame.surfaceFades` deleted. Optional findings taken: the reconcile
+    mount is a required argument (a lab's undefined parent no longer falls back
+    to the game's mount; PlayScene passes `mountEntityId` and the
+    characterization case pins it), camera policies carry `beforeInput` so labs
+    leaving the host need not repeat the fixed-versus-follow timing, the host's
+    redundant frame clear went, and indoor drawing documents that it still uses
+    seat 0's camera. A new host case pins the follow camera moving after the
+    predicted step. The reviewer verified behaviour preservation for the game
+    and labs otherwise and agreed to keep the two reset-mount rules explicit
+    until slice 5 (the parent rule is the general one).

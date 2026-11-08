@@ -31,6 +31,10 @@ export class ScenarioClient {
   get predictor() {
     return this.host.predictor;
   }
+  /** Seat 0's device session (replica, prediction and shared presentation). */
+  get device() {
+    return this.host.session;
+  }
   private readonly guestInputs = new OrderedLatency<ScenarioPacket>((packet) => {
     try {
       this.channel.send(packet);
@@ -83,10 +87,14 @@ export class ScenarioClient {
   private loaded = false;
   private failure: Error | undefined;
 
-  constructor(readonly recipe: ScenarioRecipe) {
+  constructor(
+    readonly recipe: ScenarioRecipe,
+    options: { allCars3d?: boolean } = {},
+  ) {
     const gravity = scenarioGravity(recipe);
-    this.host = new ScenarioReplica(recipe.player, gravity, recipe.actors);
-    if (recipe.guest) this.guest = new ScenarioReplica(recipe.guest, gravity, recipe.actors);
+    this.host = new ScenarioReplica(recipe.player, gravity, recipe.actors, options);
+    if (recipe.guest)
+      this.guest = new ScenarioReplica(recipe.guest, gravity, recipe.actors, options);
     this.worker.onmessage = (event: MessageEvent<ChannelEnvelope<ScenarioPacket>>) => {
       try {
         this.channel.receive(event.data);

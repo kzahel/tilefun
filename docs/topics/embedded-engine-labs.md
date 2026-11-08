@@ -1,5 +1,21 @@
 # Embedded engine labs
 
+## Device sessions and views (226 slice 3b, 2026-11-08)
+
+Labs and the game now share the device session and view objects in
+`src/session/` (no `window`, `document`, `location`, storage or `navigator`
+there; Biome enforces it). Each `ScenarioReplica` is a `DeviceSession`: the
+game's replica, predictor and reconcile path (resets seat the player on its
+parent, as before) and the device's `SceneFrame`, so the two-pane physics lab
+already holds two device sessions. `ScenarioPresentationHost` draws one `View`
+(camera, region, camera policy: `followSeat` or `fixedCamera` for diagnostic
+framing, per-view slab fades) through the game's `renderViews`,
+`drawViewTerrain` and `drawViewScene`; its private copies of camera follow,
+terrain presentation and scene collection were deleted. Fixed cameras are still
+placed before input and following still waits for the predicted step (the
+policy's `beforeInput`), so lab framing is unchanged. The host keeps its Worker client, lifecycle and options
+until labs move off it (slice 3c onward).
+
 ## Game controls in labs (226 slice 2, 2026-11-08)
 
 [226](../tactical/226-player-views-and-local-split-screen.md) slice 2 gives the

@@ -21,6 +21,9 @@ import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { SceneFrame } from "../rendering/SceneFrame.js";
+import type { RenderRegion } from "../rendering/ViewLayout.js";
+import type { DeviceSession } from "../session/DeviceSession.js";
+import type { View } from "../session/View.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import type { IClientTransport } from "../transport/Transport.js";
@@ -56,6 +59,13 @@ export interface GameContext {
   /** Browser composition boundary; headless scene fixtures may omit graphics. */
   beginWorld?(): void;
   endWorld?(): void;
+  /** One view of a display frame (226; see RenderHost.beginView). */
+  beginView?(camera: Camera, region: RenderRegion): void;
+  endView?(): void;
+  /** The device session (replica, prediction, shared presentation) and seat 0's
+   * view; `camera`, `stateView` and `sceneFrame` are seat-0 shortcuts onto them. */
+  readonly session: DeviceSession;
+  readonly view: View;
   readonly sceneFrame: SceneFrame;
   readonly audioManager: AudioManager;
 

@@ -18,7 +18,6 @@ export interface RenderRegion {
 
 /** Fixed layouts: one view, two side by side, a 2×2 grid, or a diagonal split. */
 export type ViewLayout = "1" | "2" | "4" | "diagonal";
-export const VIEW_LAYOUTS: readonly ViewLayout[] = ["1", "2", "4", "diagonal"];
 
 export interface LayoutView {
   readonly region: RenderRegion;

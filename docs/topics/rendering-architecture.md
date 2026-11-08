@@ -180,9 +180,12 @@ pixel-identical to a single view of that size on both backends (renderer lab
 one time and row budget, any view's on-screen gap first, per-view look-ahead and
 focal rows, and no view evicts another's chunks; each view then presents its
 terrain with `prepared` set. Observer-local slab fades belong to each view
-(`presentSurfaceScene`'s `fades`); the device's `SceneFrame` (mesh poses,
-collection buffers) is shared. No production page draws more than one view yet;
-the device session and view objects come next (slice 3b).
+(`presentSurfaceScene`'s `fades`, cleared with the device's presentation on a
+world load or realm exit); the device's `SceneFrame` (mesh poses, collection
+buffers) is shared. Since slice 3b the game (PlayScene) and the lab
+host draw through `renderViews` over their device session's views
+(`src/session/`), with `drawViewTerrain`/`drawViewScene` as the one outdoor
+world draw; each has one view until split screen (slice 5).
 
 `ScenarioPresentationHost` embeds the same render-host implementations for the
 interactive labs. `PlayerPresentation`, `OutdoorPresentation` and `presentInterior`

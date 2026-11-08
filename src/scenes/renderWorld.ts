@@ -1,80 +1,88 @@
 import type { GameContext } from "../core/GameScene.js";
-import { collectScene } from "../rendering/collectScene.js";
-import { presentTerrain } from "../rendering/OutdoorPresentation.js";
 import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
-import { presentSurfaceScene } from "../rendering/presentSurfaceScene.js";
+import { drawViewScene, drawViewTerrain, renderViews } from "../session/ViewRender.js";
 import { renderInterior } from "./renderInterior.js";
 
 /**
- * Shared world rendering used by both PlayScene and EditScene.
- * Draws: canvas clear, terrain, elevation, entities/props (y-sorted).
+ * The world through the shared view draw (226), used by PlayScene and EditScene:
+ * canvas clear and terrain (`prepared` when a frame of views already prepared
+ * it). Entities follow after scene-specific overlays (editor grid). The view
+ * defaults to seat 0's; observers stay seat 0 until split screen (slice 5).
  */
-export function renderWorld(gc: GameContext): void {
-  const { camera, stateView, renderer } = gc;
-  renderer.submit(camera, { kind: "clear", color: "#1a1a2e" });
-
-  if (gc.spriteCatalog.size === 0) return;
-
-  const visible = camera.getVisibleChunkRange();
-
-  if (stateView.interior) return;
-  // Terrain + autotile + details (baked into chunk cache)
-  presentTerrain(renderer, camera, stateView.world, visible, gc.debugPanel.terrainPacing);
-
-  // Elevation is drawn interleaved with entities via collectScene
-  // (moved from a separate pass so cliffs properly occlude entities behind them)
-
-  return; // Entities drawn after scene-specific overlays (editor grid goes between terrain and entities)
+export function renderWorld(gc: GameContext, prepared = false, view = gc.view): void {
+  const { stateView } = gc;
+  const ready = gc.spriteCatalog.size > 0 && !stateView.interior;
+  drawViewTerrain(gc.renderer, view.camera, ready ? stateView.world : undefined, {
+    background: "#1a1a2e",
+    pacing: gc.debugPanel.terrainPacing,
+    prepared,
+  });
 }
 
 /**
  * Draw y-sorted entities, props, and grass blades on top of terrain.
  * Called after any scene-specific overlays (editor grid, etc.).
- * Collects a renderer-agnostic SceneItem[], then draws via Canvas2D backend.
  */
 export function renderEntities(
   gc: GameContext,
   alpha = 1,
   extraParticles?: ParticlePresentation,
+  view = gc.view,
 ): void {
-  const { camera, stateView, renderer } = gc;
+  const { stateView } = gc;
   if (gc.spriteCatalog.size === 0) return;
-
   if (stateView.interior) {
+    // Rooms still draw with seat 0's camera and frame (one view until slice 5).
     renderInterior(gc, alpha, extraParticles ?? []);
     return;
   }
-  const visible = camera.getVisibleChunkRange();
-  gc.sceneFrame.presentationTime = gc.time?.presentationSeconds ?? 0;
-  gc.sceneFrame.fadeSeconds = gc.sceneFrame.presentationTime;
-  const items = collectScene(
-    gc.doorPresentation?.entities(stateView.entities, gc.realmId ?? null) ?? stateView.entities,
-    stateView.props,
-    stateView.world,
-    camera,
-    visible,
-    alpha,
-    renderer,
-    extraParticles ?? [],
-    gc.spriteCatalog.has("grass-blades"),
-    undefined,
+  const time = gc.time?.presentationSeconds ?? 0;
+  const realm = gc.realmId ?? null;
+  drawViewScene(
+    gc.renderer,
+    view.camera,
     gc.sceneFrame,
-    { observer: stateView.playerEntity, visibility: "auto" },
-  );
-
-  gc.doorPresentation?.appendOverlays(items, gc.realmId ?? null);
-  try {
-    presentSurfaceScene(
-      renderer,
-      camera,
-      gc.sceneFrame,
-      items,
-      stateView.props,
-      stateView.playerEntity,
-      "auto",
+    view.fades,
+    {
+      world: stateView.world,
+      props: stateView.props,
+      entities: gc.doorPresentation?.entities(stateView.entities, realm) ?? stateView.entities,
+      collectObserver: stateView.playerEntity,
+      surfaceObserver: stateView.playerEntity,
+    },
+    {
       alpha,
-    );
-  } finally {
-    gc.sceneFrame.release();
+      particles: extraParticles ?? [],
+      grass: gc.spriteCatalog.has("grass-blades"),
+      visibility: "auto",
+      presentationTime: time,
+      fadeSeconds: time,
+      collected: (items) => gc.doorPresentation?.appendOverlays(items, realm),
+    },
+  );
+}
+
+/** Play's display frame: every view of the device (seat 0's today), with terrain
+ * prepared once. Headless fixtures without graphics draw seat 0's view directly. */
+export function renderPlayViews(
+  gc: GameContext,
+  alpha: number,
+  particles: ParticlePresentation,
+): void {
+  const { beginView, endView } = gc;
+  const draw = (view = gc.view) => {
+    renderWorld(gc, !!beginView, view);
+    renderEntities(gc, alpha, particles, view);
+  };
+  if (!beginView || !endView) {
+    draw();
+    return;
   }
+  const outdoors = gc.spriteCatalog.size > 0 && !gc.stateView.interior;
+  renderViews(
+    { renderer: gc.renderer, beginView, endView },
+    gc.session.views,
+    outdoors ? { world: gc.stateView.world, pacing: gc.debugPanel.terrainPacing } : undefined,
+    draw,
+  );
 }

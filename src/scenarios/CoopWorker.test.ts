@@ -1,4 +1,5 @@
 import { expect, it, vi } from "vitest";
+import { createPlayer } from "../entities/Player.js";
 import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import { COOP_IDLE, coopRecipe } from "./CoopRecipe.js";
 import type { ScenarioResponse } from "./ScenarioProtocol.js";
@@ -82,4 +83,26 @@ it("routes two normal session baselines/deltas, input fences and durable replace
     for (const replica of replicas) replica.dispose();
     vi.useRealTimers();
   }
+});
+
+it("is a device session that seats lab resets on the player's parent", () => {
+  const template = createPlayer(0, 0);
+  const replica = new ScenarioReplica(template, 1);
+  expect(replica.session.prediction).toBe(replica.predictor);
+  const player = { ...createPlayer(4, 5), id: 3, parentId: 9 };
+  vi.spyOn(replica.view, "serverPlayerEntity", "get").mockReturnValue(player);
+  const reconcile = vi.spyOn(replica.session, "reconcile").mockReturnValue(true);
+  replica.synchronize(); // the first frame after a clear resets
+  replica.synchronize();
+  replica.synchronize(true);
+  expect(reconcile.mock.calls).toEqual([
+    [true, 9],
+    [false, 9],
+    [true, 9],
+  ]);
+  replica.clear();
+  replica.synchronize();
+  expect(reconcile).toHaveBeenLastCalledWith(true, 9);
+  replica.dispose();
+  expect(replica.session.prediction).toBeNull();
 });

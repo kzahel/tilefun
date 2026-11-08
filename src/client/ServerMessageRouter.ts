@@ -5,8 +5,8 @@ import type { EditorModel } from "../editor/EditorModel.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
-import type { SceneFrame } from "../rendering/SceneFrame.js";
 import { MenuScene } from "../scenes/MenuScene.js";
+import type { DeviceSession } from "../session/DeviceSession.js";
 import type { RealmInfo, ServerMessage } from "../shared/protocol.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import { LAST_WORLD_KEY } from "../shared/storageKeys.js";
@@ -25,7 +25,8 @@ export interface ServerMessageHost {
   readonly canvas: HTMLCanvasElement;
   readonly camera: Camera;
   readonly renderer: RenderBackend;
-  readonly sceneFrame: SceneFrame;
+  /** Device presentation (scene frame and every view's fades), reset with the realm. */
+  readonly device: Pick<DeviceSession, "clearPresentation">;
   readonly scenes: SceneManager;
   readonly mainMenu: MainMenu;
   readonly editorModel: EditorModel;
@@ -193,7 +194,7 @@ export class ServerMessageRouter {
   private clearPresentation(): void {
     this.host.stateView.clear();
     this.host.renderer.clear();
-    this.host.sceneFrame.clear();
+    this.host.device.clearPresentation();
   }
 
   private leaveRealm(): void {

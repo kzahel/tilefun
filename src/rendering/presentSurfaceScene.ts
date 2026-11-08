@@ -4,7 +4,7 @@ import type { Prop } from "../entities/Prop.js";
 import { surfaceZAt } from "../physics/SurfacePatch.js";
 import type { Camera } from "./Camera.js";
 import { collectSceneOrder, type RenderBackend } from "./RenderFrame.js";
-import type { SceneFrame } from "./SceneFrame.js";
+import type { SceneFrame, SurfaceFades } from "./SceneFrame.js";
 import type { SceneItem } from "./SceneItem.js";
 import {
   collectSurfacePresentation,
@@ -113,7 +113,7 @@ export function presentSurfaceScene(
   mode: SurfaceVisibility,
   alpha: number,
   pixelExactShadows = false,
-  fades = frame.surfaceFades, // Observer-local: each view of a split frame passes its own.
+  fades: SurfaceFades = new Map(), // A view's own; one-off callers keep no fades.
 ) {
   if (!props.some((p) => p.collider?.surface || p.walls?.some((c) => c.surface))) {
     renderer.submit(camera, {

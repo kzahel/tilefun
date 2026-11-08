@@ -30,6 +30,9 @@ const neutral = [
   "interiors/LayeredInteriorMap.ts",
   "editor/collectEditorOverlay.ts",
   "scenes/renderWorld.ts",
+  "session/DeviceSession.ts",
+  "session/View.ts",
+  "session/ViewRender.ts",
   "scenes/renderInterior.ts",
   "world/Chunk.ts",
 ];

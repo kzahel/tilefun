@@ -63,7 +63,7 @@
       "overLimit": 1
     },
     "src/client/GameClient.ts": {
-      "lines": 931,
+      "lines": 927,
       "worst": 0,
       "overLimit": 0
     },
@@ -567,11 +567,6 @@
       "worst": 109,
       "overLimit": 1
     },
-    "src/scenarios/ScenarioPresentationHost.ts": {
-      "lines": 465,
-      "worst": 27,
-      "overLimit": 1
-    },
     "src/scenarios/ScenarioSession.ts": {
       "lines": 423,
       "worst": 65,
@@ -588,8 +583,8 @@
       "overLimit": 1
     },
     "src/scenes/PlayScene.ts": {
-      "lines": 734,
-      "worst": 79,
+      "lines": 653,
+      "worst": 50,
       "overLimit": 2
     },
     "src/scenes/PropEditorScene.ts": {

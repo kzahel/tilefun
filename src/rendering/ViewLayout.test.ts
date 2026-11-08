@@ -4,13 +4,9 @@ import { World } from "../world/World.js";
 import { Camera } from "./Camera.js";
 import { prepareViewTerrain, presentTerrain } from "./OutdoorPresentation.js";
 import { RecordingBackend } from "./testing/RecordingBackend.js";
-import {
-  isWholeCanvas,
-  layoutViews,
-  VIEW_LAYOUTS,
-  type ViewLayout,
-  ViewLayouts,
-} from "./ViewLayout.js";
+import { isWholeCanvas, layoutViews, type ViewLayout, ViewLayouts } from "./ViewLayout.js";
+
+const VIEW_LAYOUTS: readonly ViewLayout[] = ["1", "2", "4", "diagonal"];
 
 describe("view layouts", () => {
   it.each([

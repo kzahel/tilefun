@@ -18,6 +18,8 @@ import { ActionManager } from "../input/ActionManager.js";
 import { controllerInput } from "../input/ControllerInput.js";
 import { Camera } from "../rendering/Camera.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
+import { DeviceSession } from "../session/DeviceSession.js";
+import { followSeat, View } from "../session/View.js";
 import { quantizeAxis } from "../shared/binaryCodec.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import { createVehicle } from "../traffic/Vehicle.js";
@@ -84,6 +86,9 @@ function playHarness(options: HarnessOptions = {}) {
   };
   const camera = new Camera();
   camera.setViewport(800, 600);
+  const session = new DeviceSession(view as unknown as RemoteStateView);
+  const seatView = new View(followSeat(), camera);
+  session.views.push(seatView);
   const audioManager = silentAudio();
   const actions = new ActionManager();
   const scene = new PlayScene();
@@ -132,6 +137,8 @@ function playHarness(options: HarnessOptions = {}) {
     touchHold: input.touchHold,
     canvas,
     camera,
+    session,
+    view: seatView,
     actions,
     stateView: view,
     transport,
@@ -599,6 +606,24 @@ describe("play input characterization (pre-226 composition)", () => {
     h.step(120);
     expect(h.camera.x).toBeCloseTo(100, 0);
     expect(h.camera.y).toBeCloseTo(100, 0);
+  });
+
+  it("reconciles new server state before predicting, resetting during a door transition", () => {
+    const h = playHarness();
+    const reconcile = vi.spyOn(h.gc.session, "reconcile").mockReturnValue(false);
+    const predict = vi.spyOn(h.gc.session, "predict");
+    h.step();
+    expect(reconcile).not.toHaveBeenCalled(); // no new authoritative state this tick
+    h.view.stateAppliedThisTick = true;
+    Object.assign(h.view, { mountEntityId: 5 }); // a reset seats the player on its mount
+    h.step();
+    expect(reconcile).toHaveBeenLastCalledWith(false, 5);
+    expect(reconcile.mock.invocationCallOrder.at(-1)).toBeLessThan(
+      predict.mock.invocationCallOrder.at(-1) ?? 0,
+    );
+    h.host.doorBusy = true;
+    h.step();
+    expect(reconcile).toHaveBeenLastCalledWith(true, 5);
   });
 });
 

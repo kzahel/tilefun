@@ -5,6 +5,9 @@ import { OverlayFrame } from "./OverlayFrame.js";
 import { PropDepthCache } from "./propDepth.js";
 import type { SceneItem } from "./SceneItem.js";
 
+/** Observer-local slab fades by surface ID: each view owns one (226). */
+export type SurfaceFades = Map<string, { opacity: number; time: number }>;
+
 /** One client's synchronous presentation storage, independent of the backend.
  * The list and pooled grass records are borrowed until the next collection.
  * Prop depth metadata stays resident only for the latest collected props.
@@ -23,9 +26,6 @@ export class SceneFrame {
   readonly items: SceneItem[] = [];
   readonly grass = new GrassFrameBuffer();
   readonly propDepth = new PropDepthCache();
-  /** Observer-local slab fades by surface ID for a single view; each view of a
-   * split frame keeps its own (see presentSurfaceScene). Presentation state only. */
-  readonly surfaceFades = new Map<string, { opacity: number; time: number }>();
 
   constructor(options?: { allCars3d?: boolean; authoredTrains?: boolean }) {
     this.meshPoses = new EntityMeshPose(options?.allCars3d, options?.authoredTrains);
@@ -54,6 +54,5 @@ export class SceneFrame {
     this.interiorKey = "";
     this.grass.clear();
     this.propDepth.clear();
-    this.surfaceFades.clear();
   }
 }

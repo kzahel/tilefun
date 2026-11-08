@@ -10,7 +10,6 @@ import { AudioManager } from "../audio/AudioManager.js";
 import { buildAudioManifest } from "../audio/SurfaceType.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { normalizePlayerModel } from "../characters/PlayerModels.js";
-import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { ConsoleUI } from "../console/ConsoleUI.js";
 import { GameLoop } from "../core/GameLoop.js";
@@ -47,13 +46,15 @@ import { interiorRealmId } from "../interiors/GameplayInterior.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
 import { cameraPixelSnap } from "../rendering/PresentationSettings.js";
-import { SceneFrame } from "../rendering/SceneFrame.js";
+import { ViewLayouts } from "../rendering/ViewLayout.js";
 import { CatalogScene } from "../scenes/CatalogScene.js";
 import { EditScene } from "../scenes/EditScene.js";
 import { InteriorCatalogScene } from "../scenes/InteriorCatalogScene.js";
 import { MenuScene } from "../scenes/MenuScene.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import { WorldMapScene } from "../scenes/WorldMapScene.js";
+import { DeviceSession } from "../session/DeviceSession.js";
+import { followSeat, View } from "../session/View.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import { HMR_KEY } from "../shared/storageKeys.js";
 import { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransport.js";
@@ -125,9 +126,10 @@ export class GameClient implements GameTestHooks {
   get renderer(): RenderBackend {
     return this.renderHost.renderer;
   }
-  private readonly sceneFrame = new SceneFrame({
-    allCars3d: new URLSearchParams(location.search).has("allcars3d"),
-  });
+  /** The device session and seat 0's view (226); `camera` is the view's camera. */
+  readonly device: DeviceSession;
+  readonly view: View;
+  private readonly layouts = new ViewLayouts();
   private actions: ActionManager;
   private readonly playInput: PlayInputController;
   readonly touchJoystick: TouchJoystick;
@@ -211,6 +213,8 @@ export class GameClient implements GameTestHooks {
     this.clientId = options?.clientId ?? "local";
     this.camera = new Camera();
     this.camera.pixelSnap = cameraPixelSnap(new URLSearchParams(window.location.search));
+    const verticalFollow = () => this.consoleEngine.cvars.get("cl_verticalfollow")?.get() === true;
+    this.view = new View(followSeat({ verticalFollow }), this.camera);
     this.actions = new ActionManager();
     if (new URLSearchParams(window.location.search).has("nogamepad")) {
       this.actions.disableGamepad();
@@ -297,6 +301,10 @@ export class GameClient implements GameTestHooks {
     // Client-side world with no generator (chunks populated from server messages)
     const clientWorld = new World(new FlatStrategy());
     this.stateView = new RemoteStateView(clientWorld);
+    this.device = new DeviceSession(this.stateView, {
+      allCars3d: new URLSearchParams(location.search).has("allcars3d"),
+    });
+    this.device.views.push(this.view);
 
     // Send profile identity to server (profileId for persistence, displayName for labels)
     if (this.profile) {
@@ -465,27 +473,11 @@ export class GameClient implements GameTestHooks {
     // Tick client-side sprite animations (animTimer/frameCol not serialized).
     this.stateView.tickAnimations(dt);
     this.scenes.update(dt);
-    const ready = this.playerWorldReady();
+    const ready = this.device.seatWorldReady(this.renderer);
     if (this.initDone && ready) this.startupWorldReady = true;
     this.doorPresentation.update(this.mainMenu.currentWorldId, ready);
     this.chrome.updateMapHint();
     this.placeControls.update(dt, this.initDone && ready);
-  }
-
-  /** The player exists and its room or terrain chunk is presentable. */
-  private playerWorldReady(): boolean {
-    const p = this.stateView.serverPlayerEntity;
-    return (
-      p.id !== -1 &&
-      (this.stateView.interior
-        ? !!this.stateView.roomState
-        : this.renderer.isTerrainReady(
-            this.stateView.world.chunks.get(
-              Math.floor(p.position.wx / CHUNK_SIZE_PX),
-              Math.floor(p.position.wy / CHUNK_SIZE_PX),
-            ),
-          ))
-    );
   }
 
   private render(alpha: number, presentationSeconds: number): void {
@@ -540,12 +532,11 @@ export class GameClient implements GameTestHooks {
     this.firstPerson.dispose();
     this.renderHost.dispose();
     this.debugPanel.destroy();
-    this.sceneFrame.clear();
     this.placeControls.destroy();
     this.doorPresentation.destroy();
     this.loop.stop();
     this.session.flushServer();
-    this.stateView.setPredictor(null);
+    this.device.dispose();
     this.scenes.clear();
     this.requests.dispose();
     this.transport.close();
@@ -806,7 +797,7 @@ export class GameClient implements GameTestHooks {
       get renderer() {
         return client.renderer;
       },
-      sceneFrame: this.sceneFrame,
+      device: this.device,
       scenes: this.scenes,
       mainMenu: this.mainMenu,
       editorModel: this.editorModel,
@@ -875,7 +866,11 @@ export class GameClient implements GameTestHooks {
       },
       beginWorld: () => client.renderHost.beginWorld(client.camera),
       endWorld: () => client.renderHost.endWorld(),
-      sceneFrame: this.sceneFrame,
+      beginView: (camera, region) => client.renderHost.beginView(camera, region),
+      endView: () => client.renderHost.endView(),
+      session: this.device,
+      view: this.view,
+      sceneFrame: this.device.frame,
       audioManager: this.audioManager,
       editorMode: this.editorMode,
       editorModel: this.editorModel,
@@ -926,6 +921,7 @@ export class GameClient implements GameTestHooks {
     // Use the canvas's actual displayed size (respects split-screen CSS when 3D view is active)
     const rect = this.canvas.getBoundingClientRect();
     this.renderHost.resize(Math.round(rect.width), Math.round(rect.height));
-    this.camera.setViewport(this.canvas.width, this.canvas.height);
+    const [whole] = this.layouts.get("1", this.canvas.width, this.canvas.height);
+    if (whole) this.view.setRegion(whole.region);
   }
 }

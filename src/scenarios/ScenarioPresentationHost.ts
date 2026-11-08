@@ -6,17 +6,16 @@ import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
 import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { presentInterior } from "../interiors/presentInterior.js";
 import { Camera } from "../rendering/Camera.js";
-import { collectScene } from "../rendering/collectScene.js";
-import { presentTerrain } from "../rendering/OutdoorPresentation.js";
 import { OverlayFrame } from "../rendering/OverlayFrame.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
-import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { cameraPixelSnap, type TerrainPacing } from "../rendering/PresentationSettings.js";
-import { presentSurfaceScene } from "../rendering/presentSurfaceScene.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
-import { SceneFrame } from "../rendering/SceneFrame.js";
+import type { SceneItem } from "../rendering/SceneItem.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
+import { ViewLayouts } from "../rendering/ViewLayout.js";
+import { fixedCamera, followSeat, View } from "../session/View.js";
+import { drawViewScene, drawViewTerrain, renderViews } from "../session/ViewRender.js";
 import type { Movement } from "../shared/Movement.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
 import { LabInput } from "./LabInput.js";
@@ -66,8 +65,10 @@ export interface ScenarioPresentationOptions {
 export class ScenarioPresentationHost {
   readonly session: ScenarioClient;
   readonly camera = new Camera();
+  /** The lab's one view of its device session (226): camera policy and region. */
+  private readonly view: View;
+  private readonly layouts = new ViewLayouts();
   readonly ready: Promise<void>;
-  private readonly frame: SceneFrame;
   private readonly overlays = new OverlayFrame();
   private readonly loop: GameLoop;
   private host: RenderHost | undefined;
@@ -93,13 +94,14 @@ export class ScenarioPresentationHost {
     recipe: ScenarioRecipe,
     private readonly options: ScenarioPresentationOptions,
   ) {
-    this.frame = new SceneFrame({
+    this.vehicleControls = !!recipe.parkedVehicles?.length || recipe.generation.type === "regional";
+    this.session = new ScenarioClient(recipe, {
       allCars3d: new URLSearchParams(location.search).has("allcars3d"),
     });
-    this.vehicleControls = !!recipe.parkedVehicles?.length || recipe.generation.type === "regional";
-    this.session = new ScenarioClient(recipe);
+    const fixed = options.fixedCamera;
+    this.view = new View(fixed ? fixedCamera(fixed) : followSeat(), this.camera);
     this.camera.pixelSnap = cameraPixelSnap(new URLSearchParams(location.search));
-    this.camera.setViewport(options.width, options.height);
+    this.setRegion(options.width, options.height);
     this.camera.zoom = options.settings().zoom;
     this.loop = new GameLoop({
       update: (dt) => this.update(dt),
@@ -177,14 +179,24 @@ export class ScenarioPresentationHost {
 
   private snapCamera() {
     const p = this.session.view.playerEntity.position;
-    const fixed = this.fixedCamera(1);
-    this.camera.snapTo(fixed?.wx ?? p.wx, fixed?.wy ?? p.wy);
+    let x = p.wx,
+      y = p.wy;
+    if (this.view.policy.beforeInput) {
+      this.view.policy.tick(this.camera, this.session.device);
+      ({ x, y } = this.camera);
+    }
+    this.camera.snapTo(x, y);
     this.interpolate = false;
   }
 
-  private fixedCamera(alpha: number, player = this.session.view.playerEntity) {
-    const fixed = this.options.fixedCamera;
-    return typeof fixed === "function" ? fixed(player, alpha) : fixed;
+  /** The device's frame: shared presentation and mesh poses. */
+  private get frame() {
+    return this.session.device.frame;
+  }
+
+  private setRegion(width: number, height: number) {
+    const [whole] = this.layouts.get("1", width, height);
+    if (whole) this.view.setRegion(whole.region);
   }
 
   private readonly effects = new ParticleSystem();
@@ -207,11 +219,8 @@ export class ScenarioPresentationHost {
     try {
       this.camera.zoom = this.options.settings().zoom;
       this.camera.savePrev();
-      const fixed = this.fixedCamera(1);
-      if (fixed) {
-        this.camera.x = fixed.wx;
-        this.camera.y = fixed.wy;
-      }
+      // A fixed camera is placed before input; following waits for the predicted step.
+      if (this.view.policy.beforeInput) this.view.policy.tick(this.camera, this.session.device);
       const scripted = this.options.input?.();
       const tick = scripted ? undefined : this.input?.tick(this.session.view, dt);
       const movement = scripted ?? tick?.movement;
@@ -221,14 +230,7 @@ export class ScenarioPresentationHost {
       for (const press of tick?.after ?? []) this.session.submitPress(press);
       if (this.interpolate) {
         this.steps++;
-        if (!this.options.fixedCamera)
-          followPlayer(
-            this.camera,
-            this.session.view.playerEntity,
-            false,
-            0,
-            this.session.predictor,
-          );
+        if (!this.view.policy.beforeInput) this.view.policy.tick(this.camera, this.session.device);
       }
     } catch (error) {
       this.fail(error);
@@ -249,23 +251,7 @@ export class ScenarioPresentationHost {
     this.alpha = this.paused || !this.interpolate ? 1 : alpha;
     view.beginPresentation(now, this.alpha, this.paused);
     try {
-      if (this.options.fixedCamera) {
-        this.camera.applyInterpolation(this.alpha);
-        const fixed = this.fixedCamera(this.alpha, view.presentedPlayerEntity);
-        if (fixed) {
-          this.camera.x = fixed.wx;
-          this.camera.y = fixed.wy;
-        }
-      } else
-        beginPlayerPresentation(
-          this.camera,
-          view.presentedPlayerEntity,
-          this.alpha,
-          undefined,
-          false,
-          0,
-          view.cameraPresentation,
-        );
+      this.view.policy.present(this.camera, this.session.device, this.alpha);
       // Camera inspection while paused still needs streamed chunks and replicas,
       // but must not advance the simulation clock.
       if (this.options.settings().paused && this.controls === 0) {
@@ -296,53 +282,58 @@ export class ScenarioPresentationHost {
         ? view.entities.map((entity) => (entity.id === player.id ? this.presentedPlayer : entity))
         : view.entities;
       this.host.beginFrame();
-      this.host.beginWorld(this.camera);
-      renderer.submit(this.camera, { kind: "clear", color: this.options.background ?? "#cbd5c3" });
-      const range = this.camera.getVisibleChunkRange();
-      if (!this.options.interior && this.options.terrain !== false)
-        presentTerrain(
-          renderer,
-          this.camera,
-          view.world,
-          range,
-          this.options.settings().terrainPacing,
-        );
-      this.drawOverlay(this.options.underlay);
-      this.frame.presentationTime = this.lightSeconds;
-      this.frame.fadeSeconds = now;
-      const items = collectScene(
-        entities,
-        view.props,
-        view.world,
-        this.camera,
-        range,
-        this.alpha,
-        renderer,
-        this.effects,
-        !this.options.interior &&
-          this.options.terrain !== false &&
-          renderer.assets.has("grass-blades"),
-        this.options.interior?.drawProps,
-        this.frame,
-        { observer: player, visibility: this.options.surfaceVisibility?.() ?? "auto" },
+      const terrain = !this.options.interior && this.options.terrain !== false;
+      const pacing = this.options.settings().terrainPacing;
+      renderViews(
+        this.host,
+        [this.view],
+        terrain ? { world: view.world, pacing } : undefined,
+        () => {
+          drawViewTerrain(renderer, this.camera, terrain ? view.world : undefined, {
+            background: this.options.background ?? "#cbd5c3",
+            pacing,
+            prepared: true,
+          });
+          this.drawOverlay(this.options.underlay);
+          const interior = this.options.interior;
+          drawViewScene(
+            renderer,
+            this.camera,
+            this.frame,
+            this.view.fades,
+            {
+              world: view.world,
+              props: view.props,
+              entities,
+              collectObserver: player,
+              surfaceObserver: view.playerEntity,
+            },
+            {
+              alpha: this.alpha,
+              particles: this.effects,
+              grass: terrain && renderer.assets.has("grass-blades"),
+              visibility: this.options.surfaceVisibility?.() ?? "auto",
+              presentationTime: this.lightSeconds,
+              fadeSeconds: now,
+              pixelExactShadows: this.options.pixelExactShadows ?? false,
+              ...(interior
+                ? {
+                    drawProps: interior.drawProps,
+                    present: (items: readonly SceneItem[]) =>
+                      presentInterior(
+                        renderer,
+                        this.camera,
+                        interior.presentation,
+                        interior.placements,
+                        items,
+                      ),
+                  }
+                : {}),
+            },
+          );
+          this.drawOverlay(this.options.overlay);
+        },
       );
-      const interior = this.options.interior;
-      if (interior)
-        presentInterior(renderer, this.camera, interior.presentation, interior.placements, items);
-      else
-        presentSurfaceScene(
-          renderer,
-          this.camera,
-          this.frame,
-          items,
-          view.props,
-          view.playerEntity,
-          this.options.surfaceVisibility?.() ?? "auto",
-          this.alpha,
-          this.options.pixelExactShadows ?? false,
-        );
-      this.drawOverlay(this.options.overlay);
-      this.host.endWorld();
       this.options.uiOverlay?.(this.host.uiContext, this);
       this.input?.draw(this.host.uiContext);
       this.renderX = this.camera.x;
@@ -351,8 +342,6 @@ export class ScenarioPresentationHost {
     } catch (error) {
       this.fail(error);
     } finally {
-      this.host?.endWorld();
-      this.frame.release();
       this.overlays.release();
       this.camera.restoreActual();
       view.endPresentation();
@@ -370,7 +359,7 @@ export class ScenarioPresentationHost {
   /** Resize presentation without restarting the Worker or changing its world. */
   resize(width: number, height: number) {
     if (this.disposed) return;
-    this.camera.setViewport(width, height);
+    this.setRegion(width, height);
     this.host?.resize(width, height);
   }
 
@@ -453,7 +442,6 @@ export class ScenarioPresentationHost {
     this.input = undefined;
     this.host?.dispose();
     this.host = undefined;
-    this.frame.clear();
     this.effects.clear();
     this.options.interior?.presentation.clear();
     this.displayedPlayer = undefined;
