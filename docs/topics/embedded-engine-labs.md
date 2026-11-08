@@ -34,31 +34,36 @@ the scenario Worker) onto the game's own pieces, one lab at a time:
   `presentationAlpha`). A pose cycle inspects a sprite's four directions: it
   stops the world and draws a copy of the player with the cycled sprite, which
   is also the frame's `presentedPlayer`; the replica's own pose is never
-  written. Pause, a pose cycle, a hidden page and in-flight instruments stop
-  play; the camera's range still streams while paused. A new world clears the
+  written. A room view (`interior`) draws an owned room cache through the shared
+  interior presenter instead of terrain. A lab's own scripted `input` replaces
+  the game's controls. `uiOverlay` draws diagnostic UI on the UI layer under the
+  touch controls, and `captureFrame` draws a fresh report frame without
+  advancing the world. Pause, a pose cycle, a hidden page and in-flight
+  instruments stop play; the camera's range still streams while paused. A new world clears the
   renderer's world caches, as the game router does, and the device
   presentation including the view's slab fades (the old host's labs now clear
   theirs on reset too). `LabView` and the old host draw through the same
   `drawLabFrame` and report the same `labPresentationDiagnostics`
   (`src/client/LabScene.ts`), so the two shells cannot drift while labs move.
 - **Diagnostics:** `RecipeWorldClient.getDiagnostics()` reports the
-  transport's outgoing channel and a live clock. The clock is the authority's
-  ticks from its last answer, advanced by the frames applied since, because a
-  paused world's frames repeat its tick. Browser checks can therefore watch the
+  transport's outgoing channel and a live clock: the running state from the
+  last answer and the applied frames' tick. The realm's tick counter is the
+  authority's clock (both count the same ticks and restart with a new world), and
+  a paused world's frames repeat its tick. Browser checks can therefore watch the
   authority outrun a stalled page (`scenario-scheduling`).
 - **Moved so far:** all of World geometry runs on `LabView`, apart from the
   `nature-*` fixtures, which are Natural landscape's (slices 3c-ii and 4a-i),
-  and so do Outdoor geometry's movement test (4a-ii) and the Character lab
-  (4a-iii).
+  and so do Outdoor geometry's movement test (4a-ii), the Character lab
+  (4a-iii) and the Interiors playtest (4a-iv).
   - The pages drive `LabView` directly. Fixed diagnostic frames use the
     `fixedCamera` policy, and World geometry's per-frame datasets come from
     `src/workshop/GeometryFrame.ts`.
   - None of these pages imports the lab shell.
-  - The Interiors playtest and Natural landscape stay on the old host until
-    their 4a parts.
+  - Natural landscape stays on the old host until its 4a part.
   - Framing is unchanged on every fixture. Outdoor geometry's and the Character
-    lab's idle and settled captures, and the Character lab's pose-mode frames,
-    are pixel-identical to the old host's. World geometry's differ only in
+    lab's idle and settled captures, the Character lab's pose-mode frames, and
+    the Interiors playtest's idle, settled, diagnostic-guide, place-mode and
+    report captures are pixel-identical to the old host's. World geometry's differ only in
     time-dependent content: grass wind, moving traffic and animals, and mesh
     suspension settling. Those differences are within the old host's own
     run-to-run variation, so `ENGINE_REVIEW_REVISION` is unchanged.
@@ -98,9 +103,15 @@ were deleted. The physics lab runs one input set per pane (its canvas's focus
 selects the seat).
 
 Temporary differences, resolved when each lab moves onto the game view:
-- The furniture/interiors playtest keeps its own input through the host's
-  transitional `input` option until slice 4a, because its automatic walk and
-  place mode are lab instruments and its D-pad/Jump button drive the view offset.
+- The furniture/interiors playtest keeps its own input, now through
+  `LabView`'s scripted `input` option (226 slice 4a-iv kept it). Its automatic
+  walk and place mode are lab instruments, and its D-pad and Jump button are
+  the phone review controls. On its room canvas (about 160 px wide, CSS-scaled)
+  the game's floating joystick (120 canvas px across) would cover most of the
+  room while steering, and disabling the touch buttons would leave touch
+  without Jump. Place-mode dragging would need a touch rule, and the game's keys
+  need canvas focus where the page listens on the window. The switch is an open
+  owner decision (226 Decisions).
 - The physics lab's WebGL collider panes cannot draw touch controls: dragging on
   a pane steers its player, but touch has no Jump there until slice 6.
 - Characters' on-screen D-pad is replaced by dragging on the scene.
@@ -865,7 +876,8 @@ verification; it is no longer the interactive scene. The candidate fingerprint
 formula, reference pixels and approved gameplay bank are unchanged. See
 [Tactical 054](../tactical/054-character-presentation-host.md).
 
-Furniture playtest now uses the same host for its production clock, prediction
+Furniture playtest used the same host (until 226 slice 4a-iv moved it to
+`LabView`) for its production clock, prediction
 interpolation, room presentation, Canvas/GPU configuration and resource lifetime.
 `presentInterior` is shared with the game's indoor renderer; `collectScene` supplies
 actors and support-aware ordering while `InteriorPresentation` caches room geometry.

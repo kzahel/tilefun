@@ -3,18 +3,13 @@ import { BlendGraph } from "../autotile/BlendGraph.js";
 import { drawLabFrame, labPresentationDiagnostics } from "../client/LabScene.js";
 import { GameLoop } from "../core/GameLoop.js";
 import type { Entity } from "../entities/Entity.js";
-import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
-import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
-import { presentInterior } from "../interiors/presentInterior.js";
 import { Camera } from "../rendering/Camera.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { cameraPixelSnap, type TerrainPacing } from "../rendering/PresentationSettings.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
-import type { SceneItem } from "../rendering/SceneItem.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
 import { ViewLayouts } from "../rendering/ViewLayout.js";
 import { fixedCamera, followSeat, View } from "../session/View.js";
-import type { Movement } from "../shared/Movement.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
 import { LabInput } from "./LabInput.js";
 import { ScenarioClient } from "./ScenarioClient.js";
@@ -28,22 +23,11 @@ export interface ScenarioPresentationOptions {
   fixedCamera?:
     | { wx: number; wy: number }
     | ((player: Entity, alpha: number) => { wx: number; wy: number });
-  /** Owned room cache. Props still participate in collision/support-aware actor ordering. */
-  interior?: {
-    presentation: InteriorPresentation;
-    placements: readonly FurniturePlacement[];
-    drawProps: ReadonlySet<number>;
-  };
-  /** Diagnostic UI only; world content always goes through the renderer backend. */
-  uiOverlay?(ctx: CanvasRenderingContext2D, host: ScenarioPresentationHost): void;
   /** Owned asset set; disposal closes bitmaps, leaving borrowed HTML images intact. */
   loadAssets?(graph: BlendGraph): Promise<GameAssets>;
   /** Diagnostic fixtures can replace terrain/grass with a background. */
   terrain?: boolean;
   background?: string;
-  /** Transitional: the interiors playtest's own input (automatic walk, place
-   * mode) until its 226 slice 4a migration. Other labs get the game's controls. */
-  input?(): Movement;
   settings(): { paused: boolean; zoom: number; terrainPacing: TerrainPacing };
   onFrame?(host: ScenarioPresentationHost): void;
   onError(error: unknown): void;
@@ -72,14 +56,13 @@ export class ScenarioPresentationHost {
   private steps = 0;
   private pausedViewKey = "";
   private lightSeconds = 0;
-  private displayedPlayer: Entity | undefined;
   private vehicleControl: VehicleControl | undefined;
   private vehicleControls: boolean;
   /** The game's controls on this canvas (226 slice 2). */
   private input: LabInput | undefined;
 
   constructor(
-    private readonly canvas: HTMLCanvasElement,
+    canvas: HTMLCanvasElement,
     recipe: ScenarioRecipe,
     private readonly options: ScenarioPresentationOptions,
   ) {
@@ -128,11 +111,10 @@ export class ScenarioPresentationHost {
       );
       if (canvas.parentElement) this.vehicleControl.mountEmbedded(canvas.parentElement);
     }
-    if (!this.options.input)
-      this.input = new LabInput(canvas, {
-        enter: () => this.vehicleControl?.activate(),
-        recover: () => this.vehicleControl?.activateEquipment(),
-      });
+    this.input = new LabInput(canvas, {
+      enter: () => this.vehicleControl?.activate(),
+      recover: () => this.vehicleControl?.activateEquipment(),
+    });
     this.snapCamera();
     this.visibilityChanged();
   }
@@ -200,13 +182,14 @@ export class ScenarioPresentationHost {
       this.camera.savePrev();
       // A fixed camera is placed before input; following waits for the predicted step.
       if (this.view.policy.beforeInput) this.view.policy.tick(this.camera, this.session.device);
-      const scripted = this.options.input?.();
-      const tick = scripted ? undefined : this.input?.tick(this.session.view, dt);
-      const movement = scripted ?? tick?.movement;
-      if (!movement) return;
-      for (const press of tick?.before ?? []) this.session.submitPress(press);
-      this.interpolate = this.session.submitInput(movement, this.camera.getVisibleChunkRange());
-      for (const press of tick?.after ?? []) this.session.submitPress(press);
+      const tick = this.input?.tick(this.session.view, dt);
+      if (!tick) return;
+      for (const press of tick.before) this.session.submitPress(press);
+      this.interpolate = this.session.submitInput(
+        tick.movement,
+        this.camera.getVisibleChunkRange(),
+      );
+      for (const press of tick.after) this.session.submitPress(press);
       if (this.interpolate) {
         this.steps++;
         if (!this.view.policy.beforeInput) this.view.policy.tick(this.camera, this.session.device);
@@ -224,7 +207,6 @@ export class ScenarioPresentationHost {
       this.fail(error);
       return;
     }
-    const { renderer } = this.host;
     const view = this.session.view;
     this.camera.zoom = this.options.settings().zoom;
     this.alpha = this.paused || !this.interpolate ? 1 : alpha;
@@ -241,11 +223,8 @@ export class ScenarioPresentationHost {
           void this.command({ kind: "view-range", range }).catch((e) => this.fail(e));
         }
       }
-      const player = view.presentedPlayerEntity;
-      this.displayedPlayer = player;
-      const interior = this.options.interior;
       drawLabFrame(this.host, this.view, this.session.device, this.effects, {
-        terrain: !interior && this.options.terrain !== false,
+        terrain: this.options.terrain !== false,
         background: this.options.background ?? "#cbd5c3",
         pacing: this.options.settings().terrainPacing,
         visibility: "auto",
@@ -254,24 +233,8 @@ export class ScenarioPresentationHost {
         presentationTime: this.lightSeconds,
         pixelExactShadows: false,
         entities: view.entities,
-        collectObserver: player,
-        ...(interior
-          ? {
-              room: {
-                drawProps: interior.drawProps,
-                present: (items: readonly SceneItem[]) =>
-                  presentInterior(
-                    renderer,
-                    this.camera,
-                    interior.presentation,
-                    interior.placements,
-                    items,
-                  ),
-              },
-            }
-          : {}),
+        collectObserver: view.presentedPlayerEntity,
       });
-      this.options.uiOverlay?.(this.host.uiContext, this);
       this.input?.draw(this.host.uiContext);
       this.renderX = this.camera.x;
       this.renderY = this.camera.y;
@@ -282,24 +245,6 @@ export class ScenarioPresentationHost {
       this.camera.restoreActual();
       view.endPresentation();
     }
-  }
-
-  /** Fresh, non-advancing report capture, including the GPU world and diagnostic UI. */
-  captureFrame(): HTMLCanvasElement {
-    if (!this.host) throw new Error("Presentation is unavailable for capture");
-    this.render(1);
-    if (!this.host) throw new Error("Presentation failed during capture");
-    return this.host.captureFrame?.() ?? this.canvas;
-  }
-
-  /** Borrowed current display pose. */
-  get presentedPlayer(): Entity {
-    return this.displayedPlayer ?? this.session.view.playerEntity;
-  }
-
-  /** The same sub-tick fraction used by the scene collector this frame. */
-  get presentationAlpha() {
-    return this.alpha;
   }
 
   getDiagnostics() {
@@ -343,8 +288,6 @@ export class ScenarioPresentationHost {
     this.host?.dispose();
     this.host = undefined;
     this.effects.clear();
-    this.options.interior?.presentation.clear();
-    this.displayedPlayer = undefined;
     if (this.assets) closeAssets(this.assets);
     this.assets = undefined;
     this.session.dispose();

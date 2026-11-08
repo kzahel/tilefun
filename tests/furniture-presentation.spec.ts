@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test.use({ channel: "chromium" });
 for (const renderer of ["canvas", "gpu"]) {
-  test(`furniture ${renderer} shares presentation, captures the room and retires old sessions`, async ({
+  test(`furniture ${renderer} lab view shares presentation, captures the room and retires old sessions`, async ({
     page,
   }) => {
     const errors: string[] = [];
@@ -17,8 +17,11 @@ for (const renderer of ["canvas", "gpu"]) {
     const canvas = page.locator("#room");
     await expect(ready).toBeVisible();
     await expect(canvas).toHaveAttribute("data-renderer", renderer);
-    const workers = () => page.workers().filter((w) => w.url().includes("scenario.worker"));
+    // The playtest runs on the game's lab view and the recipe-world Worker (226).
+    const workers = () => page.workers().filter((w) => w.url().includes("recipe-world"));
+    const scenarioWorkers = () => page.workers().filter((w) => w.url().includes("scenario.worker"));
     await expect.poll(() => workers().length).toBe(1);
+    expect(scenarioWorkers()).toEqual([]);
     await canvas.focus();
     await page.keyboard.down("ArrowRight");
     await expect
@@ -49,6 +52,7 @@ for (const renderer of ["canvas", "gpu"]) {
         .toEqual(await canvas.boundingBox().then((b) => [b?.x, b?.y, b?.width, b?.height]));
     }
     expect(workers()[0]).toBe(worker);
+    expect(scenarioWorkers()).toEqual([]); // nor after scene and player rebuilds
     await page.locator("#collisions").uncheck();
     await page.locator("#report").click();
     await expect.poll(() => reports.length).toBe(1);

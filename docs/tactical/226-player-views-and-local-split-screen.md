@@ -6,9 +6,11 @@ decomposition). Slices 0, 1a, 1b, 2 (input ownership, as 2a and 2b), 3a
 (render views), 3b (device session and view objects) and 3c (the recipe-world
 authority, lab client and lab view surface, with the WorldGeometry car fixtures
 on the game view) are done, as are 4a-i (all of World geometry on the game
-view), 4a-ii (Outdoor geometry) and 4a-iii (Characters). The other 4a parts
-(Interiors playtest, Natural landscape) and 4b (server seats) are next. Updated 2026-11-07 for seats on one device session,
-online seats and the first-person view requirements from 229.
+view), 4a-ii (Outdoor geometry), 4a-iii (Characters) and 4a-iv (Interiors
+playtest). The last 4a part (Natural landscape, which deletes the old lab host)
+and 4b (server seats) are next. Updated 2026-11-07 for seats on one device
+session, online seats and the first-person view requirements from 229; progress
+updated 2026-11-08.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
 pinch zoom or movement mode). Rather than give labs another copy, make the game
@@ -434,6 +436,13 @@ maintaining both shells. The shell import allow-list only shrinks.
 - Open: does split screen pause everyone when one player opens the menu
   (proposed: yes), and which player controls a menu (proposed: the opener)?
 - Proposed: the two-pane physics lab becomes two device sessions on one page.
+- Open (owner, raised 2026-11-08 in 4a-iv): should the Interiors playtest move
+  to the game's controls? It keeps its own input (HTML D-pad and Jump button,
+  window keys, automatic walk, place mode) through `LabView`'s scripted option.
+  On its small, CSS-scaled room canvas the game's floating joystick would cover
+  most of the room while steering, touch would have no Jump without the touch
+  buttons, and place-mode dragging would need a touch rule. Proposed: keep it
+  until phone review of the room can be tried with the game's controls.
 - Decided: make the game modular and embeddable rather than extend the lab
   shell; labs may regress temporarily. Owner, 2026-11-07: labs move once the
   device session and view exist (slice 3), not after split screen.
@@ -1267,3 +1276,56 @@ maintaining both shells. The shell import allow-list only shrinks.
       - qualified pixel evidence;
       - the stale topic lines (embedded-labs status line and Character lab paragraph, `gameplay-scenarios`).
     - Re-review: ACCEPT (one wrapping nit, fixed).
+- 2026-11-08, slice 4a-iv exit list (Interiors playtest):
+  - **`LabView` plugins:**
+    - `interior`: a room drawn from its owned cache through `drawLabFrame`'s `room`, with terrain off; props still take part in actor ordering. Disposal clears the room presentation.
+    - Scripted input (`input(): Movement`): when given, the lab creates no game controls. Each played tick sends the function's movement with no presses; paused ticks do not call it.
+    - `uiOverlay(ctx, lab)`: diagnostic UI on the render host's UI layer, drawn just before the controls.
+    - `captureFrame()`: a fresh render that does not advance the world, returning the host's composited capture or the canvas. It throws when there is no renderer or the render failed.
+  - **The Interiors playtest** (`src/interiors/playtest/main.ts`) builds `LabView` with the `fixedCamera` policy and reads the replica's player; the other options are unchanged. It leaves `LabShellConsumers`. Its own input stays, through the scripted option: it is a phone review tool with an HTML pad, automatic walk and place-mode dragging, and moving manual walking onto the game's controls is recorded as later work rather than done here.
+  - **The old host** loses what only the playtest used (`interior`, scripted `input`, `uiOverlay`, `captureFrame`, `presentedPlayer`, `presentationAlpha`) and the matching test setup; Natural landscape uses none of them.
+  - **Tests:**
+    - Node: `LabView` room pass-through and clearing on dispose, scripted input (no game controls, the script's movement sent, nothing while paused), `uiOverlay` before the controls' draw, and `captureFrame` (a fresh frame without a tick, the capture or canvas returned, both failure paths).
+    - Browser: `furniture-presentation` (both renderers; it now expects the recipe-world Worker) and `furniture-motion`.
+  - **Review revision:** `ENGINE_REVIEW_REVISION` is unchanged if a capture against the old host shows identical framing and pixels (idle, settled against furniture, and the report capture).
+  - **Docs:** the embedded-labs and gameplay-scenarios topics.
+- 2026-11-08, slice 4a-iv done (exit list met):
+  - **`LabView` plugins:**
+    - `interior`: the room presentation, its placements and the props it draws itself. The room is drawn through `drawLabFrame`'s `room` (the shared `presentInterior` with the frame's renderer and presented camera), terrain is off under a room, and disposal clears the room presentation, as in the old host.
+    - Scripted input (`input(): Movement`): with it the lab creates no `LabInput`. Each played tick sends the script's movement with no presses; paused and hidden ticks never ask it.
+    - `uiOverlay(ctx, lab)`: diagnostic UI on the render host's UI layer, after every world pass and just before the controls' draw. It reads the frame's `presentedPlayer` and `presentationAlpha`.
+    - `captureFrame()`: a synchronous `render(1)` without a tick (so no input or world step), returning the host's composited capture (GPU) or the canvas. It throws when there is no renderer yet and when the capture's own frame failed (that failure is reported once through `onError` and releases the view).
+  - **The Interiors playtest** builds `LabView` with the `fixedCamera` policy (its interpolated jump headroom unchanged), reads the replica's player, and otherwise passes the same options. It no longer imports the lab shell and left `LabShellConsumers`. Its own input stays through the scripted option (see Carried). Two repeated input resets became `clearInput()` calls, so the page is 872 lines and its ratchet entry dropped from 877.
+  - **The old host lost what only the playtest used:** `interior`, scripted `input`, `uiOverlay`, `captureFrame`, `presentedPlayer` and `presentationAlpha` (352 → 295 lines). Every remaining case of its test now runs the game's controls (a `window`, `navigator` and an event-target canvas in the stubs). Natural landscape uses none of the removed options.
+  - **Tests:**
+    - `LabView`, three new cases:
+      - Scripted input: no game controls are created, ticked, drawn or disposed; game keys do nothing; each played tick sends the script's own movement object (one script call per send) and no presses; the script moves the authority; paused ticks neither ask the script nor send.
+      - `uiOverlay` and `captureFrame`: the hook runs after the frame's last world pass and before the controls' draw, with the UI context, the lab and the frame's presented player. A capture before the renderer exists throws; a capture draws exactly one more frame at alpha 1 with no tick or input and calls `onFrame`; it returns the canvas or the host's composite; a failing capture throws, reports once and releases the view.
+      - The room: the shared presenter gets the lab's renderer, camera, presentation, placements and the frame's items (the player's sprite among them, snapshotted at the call); terrain is off even when requested; no scene pass and no terrain preparation; the room is cleared once on dispose.
+    - Browser: `furniture-presentation` now expects the recipe-world Worker and no scenario Worker, at the start and after scene and player rebuilds.
+  - **Seeded faults:** 20 single-line faults over the new `LabView` code and the guard; all 20 fail the suites. The first run caught 19: passing the canvas instead of the UI context survived, because the recording host's `uiContext` is `{}` and `toMatchObject` treats it as a subset of any object. The case now checks the context by identity.
+  - **Review revision:** `ENGINE_REVIEW_REVISION` is unchanged. A build with a temporary switch (not committed: a copy of the HEAD old host selected by `?oldhost`) captured both hosts on both renderers, four runs each, on the wardrobe scene: idle, settled after walking up into the wardrobe, the collision, sprite-bounds and draw-order guides, place mode with the selection outline, and the report's `captureFrame` PNG. Every pair (old/new, old1/new1, old/old1, new/new1, old/new1) was pixel-identical for all five shots, with identical player, height and view-offset datasets. The old path loaded `scenario.worker`, the new one `recipe-world.worker`. Jumps (view headroom) and the automatic walk were not captured, since they are timing-dependent; `furniture-motion` covers them.
+  - **Found while validating, fixed (4a-i code):** the `RecipeWorldClient` clock case failed about once in four focused runs. Its check that the replica's server tick equals the answer saw 18 against 17. The transport pumps a whole batch before the answer's continuation runs, so frames behind the answer in the same batch are applied with its snapshot. The live clock (the answer's ticks plus the frames' ticks since a base taken after draining) then lagged by those frames until the next answer.
+    - The realm's tick counter is the authority's clock: the realm ticks only in `ScenarioSession.tick()`, reached from the authority's loop tick and from `step`, exactly where the authority counts, and reset and reload open a fresh `Realm`. So the live clock is now the applied frames' tick, with the running state from the last answer, and the base field is gone.
+    - The case pins that the answer and the frames agree after paused steps and after a new world. With the world running, the live clock is never behind the answer and is ahead only by the ticks run since it was asked.
+    - The 3c-i real-time prediction case failed once in about fourteen focused runs and did not reproduce in eight more under extra load; it is unchanged here.
+  - **Validation:**
+    - `npm run typecheck`, Biome on the changed files, knip, the ratchet (only other sessions' `src/rendering` entries fail, as on HEAD; the playtest page's entry is lowered), focused vitest (`src/client`, `src/scenarios`, `src/session`, `src/workshop`, `src/transport`, `src/interiors`: 78 files, 781 tests), the regenerated art catalog and manifest (a source line reference and the input digest), and a production build.
+    - Playwright against that build: `furniture-presentation` (2), `furniture-motion` (9), `natural-landscapes` (6, the old host's last lab), `scenario-lifecycle` and `outdoor-presentation` (2), 20 of 20.
+  - **Validation after the review fixes:** the same checks again (focused vitest three times, 781 tests each; 23 seeded faults, adding three for the clock, all caught), and Playwright against a fresh build: the specs above plus `scenario-scheduling` (which watches the live clock), 21 of 21, and `scenario-scheduling` 5 more repeats.
+  - **Review** (Yep Anywhere, Opus 5.5 high): ACCEPT, no blocking findings. The reviewer confirmed:
+    - parity with the old host for this lab: the room's presenter arguments and camera, terrain off, the clear on dispose, the script's place in the tick (after `savePrev` and the fixed camera), no presses, `presentedPlayer` read only inside the frame, `syncPlayer`'s physics pose, both `captureFrame` call sites, and the lifecycle across restarts;
+    - that the paused-streaming difference (`setVisibleRange` instead of a `view-range` command) is unobservable, since the page pauses only before ready;
+    - that the old host's trim leaves Natural landscape everything it uses;
+    - that the tests use identity checks and are not vacuous;
+    - the `ENGINE_REVIEW_REVISION` evidence;
+    - and the input decision: no cheap conversion exists.
+    - Optional findings taken:
+      - the topic's input rationale made precise;
+      - the open owner decision recorded in Decisions;
+      - the stale status header;
+      - the class comment;
+      - the clock base fixed at the root instead of carried to the transport split.
+    - Re-review: ACCEPT. The reviewer checked the clock invariant independently (the realm's counter changes only in `Realm.tick`, frames carry it, and a new world restarts both). It noted that the running-clock bound assumes the authority is not catching up a tick backlog when asked; if that case flakes on a loaded machine, look there first.
+  - **Carried:**
+    - The playtest's own input (HTML D-pad and Jump button, window keys, automatic walk, place mode) stays, recorded as an open decision above. On its room canvas (about 160 px wide, CSS-scaled) the game's floating joystick (120 canvas px across) would cover most of the room while steering. Without the touch buttons, touch has no Jump. Place-mode dragging would need a touch rule, and the game's keys need canvas focus where the page listens on the window.

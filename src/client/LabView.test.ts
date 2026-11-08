@@ -3,6 +3,7 @@ import type { GameAssets } from "../assets/GameAssets.js";
 import { TICK_RATE } from "../config/constants.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
+import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import type { OverlayFrame } from "../rendering/OverlayFrame.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
 import { RecordingBackend } from "../rendering/testing/RecordingBackend.js";
@@ -11,6 +12,7 @@ import { RecipeWorldAuthority } from "../scenarios/RecipeWorldAuthority.js";
 import { FLAT_SCENARIO, type ScenarioRecipe, scenarioWalls } from "../scenarios/ScenarioRecipe.js";
 import { inProcessWorker } from "../server/testing/InProcessWorker.js";
 import { fixedCamera } from "../session/View.js";
+import type { Movement } from "../shared/Movement.js";
 
 /** What each frame hands the shared lab draw, captured while it is presented. */
 const drawn = vi.hoisted(
@@ -38,6 +40,10 @@ vi.mock("./LabScene.js", async (importOriginal) => {
     },
   };
 });
+
+/** The room view's draws: the shared interior presenter's arguments. */
+const presentInterior = vi.hoisted(() => vi.fn());
+vi.mock("../interiors/presentInterior.js", () => ({ presentInterior }));
 
 import { LabView, type LabViewOptions, type PoseCycle } from "./LabView.js";
 
@@ -104,6 +110,7 @@ beforeEach(() => {
   vi.stubGlobal("cancelAnimationFrame", vi.fn());
   vi.stubGlobal("ImageBitmap", class {});
   removed.mockClear();
+  presentInterior.mockReset();
   drawn.length = 0;
 });
 const labs: LabView[] = [];
@@ -598,6 +605,132 @@ it("resizes the view and its renderer without restarting the world", async () =>
   lab.resize(100, 100);
   expect(host.resize).toHaveBeenCalledTimes(2);
   expect(lab.view.region).toEqual({ x: 0, y: 0, width: 1152, height: 768 });
+});
+
+it("a scripted lab sends its own movement in place of the game's controls", async () => {
+  const controls = {
+    tick: vi.spyOn(LabInput.prototype, "tick"),
+    draw: vi.spyOn(LabInput.prototype, "draw"),
+    dispose: vi.spyOn(LabInput.prototype, "dispose"),
+  };
+  let move: Movement = { dx: 0, dy: 0, sprinting: false, jump: false };
+  const script = vi.fn(() => move);
+  const { lab, settings, frame, key } = open({ input: script });
+  await lab.ready;
+  await until(frame, () => expect(lab.client.clock?.running).toBe(true));
+  const { client } = lab;
+  const submit = vi.spyOn(client, "submitInput");
+  const press = vi.spyOn(client, "submitPress");
+  script.mockClear();
+  // The game's keys do nothing; each played tick sends the script's movement.
+  key("KeyD");
+  key("KeyB");
+  move = { dx: -1, dy: 0, sprinting: false, jump: false };
+  await until(frame, () => expect(client.replica.serverPlayerEntity.position.wx).toBeLessThan(-8));
+  expect(submit.mock.calls.length).toBeGreaterThan(10);
+  expect(script).toHaveBeenCalledTimes(submit.mock.calls.length);
+  expect(submit.mock.calls.every(([movement]) => movement === move)).toBe(true);
+  expect(press).not.toHaveBeenCalled();
+  // Paused ticks do not ask the script.
+  settings.paused = true;
+  await until(frame, () => expect(client.clock?.running).toBe(false));
+  script.mockClear();
+  submit.mockClear();
+  for (let i = 0; i < 5; i++) frame();
+  expect(script).not.toHaveBeenCalled();
+  expect(submit).not.toHaveBeenCalled();
+  lab.dispose();
+  for (const spy of Object.values(controls)) expect(spy).not.toHaveBeenCalled();
+});
+
+it("draws the page's UI over the world and under the controls, and captures a fresh frame", async () => {
+  const draw = vi.spyOn(LabInput.prototype, "draw");
+  let failure: Error | undefined;
+  const seen: { ctx: unknown; lab: LabView; player: Entity; passes: number; draws: number }[] = [];
+  const uiOverlay = vi.fn((ctx: CanvasRenderingContext2D, view: LabView) => {
+    if (failure) throw failure;
+    const { passes } = host.renderer;
+    seen.push({
+      ctx,
+      lab: view,
+      player: view.presentedPlayer,
+      passes: passes.length,
+      draws: drawn.length,
+    });
+  });
+  const { lab, host, frame, key, onFrame, onError } = open({ uiOverlay });
+  expect(() => lab.captureFrame()).toThrow("unavailable for capture"); // no renderer yet
+  await lab.ready;
+  await until(frame, () => expect(lab.client.clock?.running).toBe(true));
+  key("KeyD");
+  for (let i = 0; i < 4; i++) frame();
+  // After the frame's world passes, before the controls, with the frame's player.
+  const order = (spy: { mock: { invocationCallOrder: number[] } }) =>
+    spy.mock.invocationCallOrder.at(-1) ?? Number.NaN;
+  expect(order(uiOverlay)).toBeLessThan(order(draw));
+  const last = seen.at(-1);
+  expect(last?.ctx).toBe(host.uiContext);
+  expect(last?.lab).toBe(lab);
+  expect(last?.draws).toBe(drawn.length);
+  expect(last?.passes).toBe(host.renderer.passes.length);
+  expect(host.renderer.passes.at(-1)?.kind).toBe("scene");
+  expect(last?.player).toBe(drawn.at(-1)?.presented);
+  expect(drawn.at(-1)?.options.room).toBeUndefined();
+  // A capture draws one more frame now, without a tick, at the whole step.
+  const ticks = vi.spyOn(lab.client, "update");
+  const submit = vi.spyOn(lab.client, "submitInput");
+  const frames = drawn.length;
+  onFrame.mockClear();
+  expect(lab.captureFrame()).toBe(canvas); // a host without its own capture
+  expect(drawn.length).toBe(frames + 1);
+  expect(drawn.at(-1)?.options.alpha).toBe(1);
+  expect(seen.at(-1)?.draws).toBe(frames + 1);
+  expect(onFrame).toHaveBeenCalledTimes(1);
+  expect(ticks).not.toHaveBeenCalled();
+  expect(submit).not.toHaveBeenCalled();
+  const composite = {} as HTMLCanvasElement; // the GPU host's world and UI layers
+  Object.assign(host, { captureFrame: vi.fn(() => composite) });
+  expect(lab.captureFrame()).toBe(composite);
+  // A capture whose frame fails reports it once and releases the view.
+  failure = new Error("overlay failed");
+  expect(() => lab.captureFrame()).toThrow("failed during capture");
+  expect(onError).toHaveBeenCalledTimes(1);
+  expect(onError).toHaveBeenCalledWith(failure);
+  expect(host.dispose).toHaveBeenCalledTimes(1);
+  expect(() => lab.captureFrame()).toThrow("unavailable for capture");
+});
+
+it("draws an owned room instead of terrain and clears it on dispose", async () => {
+  const presentation = { clear: vi.fn() } as unknown as InteriorPresentation;
+  const placements = [{ id: "bed", asset: "bed", x: 40, y: 32 }];
+  const drawProps = new Set([3]);
+  // The frame's items, read while presented (the scene frame reuses its list).
+  const kinds: string[][] = [];
+  presentInterior.mockImplementation((...args: unknown[]) => {
+    kinds.push((args[4] as { kind: string }[]).map((item) => item.kind));
+  });
+  const { lab, host, frame } = open({
+    terrain: true,
+    interior: { presentation, placements, drawProps },
+  });
+  await lab.ready;
+  await until(frame, () => expect(presentInterior).toHaveBeenCalled());
+  // The scene's items go to the room's cache, with the frame's camera, in place of the scene pass.
+  const [renderer, camera, room, placed] = presentInterior.mock.calls.at(-1) ?? [];
+  expect(renderer).toBe(host.renderer);
+  expect(camera).toBe(lab.camera);
+  expect(room).toBe(presentation);
+  expect(placed).toBe(placements);
+  expect(kinds.at(-1)).toContain("sprite"); // the player
+  const shown = drawn.at(-1);
+  expect(shown?.options.terrain).toBe(false);
+  expect(shown?.options.room?.drawProps).toBe(drawProps);
+  expect(host.renderer.passes.map((pass) => pass.kind)).not.toContain("scene");
+  expect(host.renderer.preparations).toBe(0);
+  expect(presentation.clear).not.toHaveBeenCalled();
+  lab.dispose();
+  lab.dispose();
+  expect(presentation.clear).toHaveBeenCalledTimes(1);
 });
 
 it("reports an authority failure once and releases the view", async () => {

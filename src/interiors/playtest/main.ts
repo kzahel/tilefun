@@ -4,6 +4,7 @@ import {
 } from "../../assets/ModernInteriorsAtlasIndex.js";
 import { Spritesheet } from "../../assets/Spritesheet.js";
 import { TileVariants } from "../../assets/TileVariants.js";
+import { LabView } from "../../client/LabView.js";
 import {
   PIXEL_SCALE,
   PLAYER_SPEED,
@@ -13,7 +14,7 @@ import {
 import { getEntityAABB } from "../../entities/collision.js";
 import { interpolatePosition, interpolateWz } from "../../rendering/EntityInterpolation.js";
 import { furnitureRecipe } from "../../scenarios/FurnitureRecipe.js";
-import { ScenarioPresentationHost } from "../../scenarios/ScenarioPresentationHost.js";
+import { fixedCamera } from "../../session/View.js";
 import { SignInRequired, workshopFetch } from "../../workshop/AuthClient.js";
 import { FURNITURE_CATALOG_VERSION, type FurniturePlacement } from "../FurnitureCatalog.js";
 import { furnitureDrawOrder, furnitureSignature } from "../FurnitureLayout.js";
@@ -233,10 +234,10 @@ function persist() {
     status("Placement works, but browser storage is full; reload will lose it.");
   }
 }
-let presentation: ScenarioPresentationHost | undefined;
+let presentation: LabView | undefined;
 function syncPlayer() {
   if (!ready || !presentation) return;
-  const next = presentation.session.view.playerEntity;
+  const next = presentation.client.replica.playerEntity;
   Object.assign(model.player, structuredClone(next));
   if (next.jumpVZ === undefined) delete model.player.jumpVZ;
 }
@@ -251,16 +252,16 @@ function restartSimulation() {
   presentation?.dispose();
   const width = model.map.width * 16,
     height = model.map.pixelHeight;
-  const next = new ScenarioPresentationHost(canvas, furnitureRecipe(model), {
+  const next = new LabView(canvas, furnitureRecipe(model), {
     width,
     height,
     terrain: false,
     background: "#171e2a",
-    fixedCamera: (player, fraction) => {
+    camera: fixedCamera((player, fraction) => {
       const p = interpolatePosition(player.position, player.prevPosition, fraction);
       viewOffsetY = Math.max(0, Math.ceil(24 + (interpolateWz(player, fraction) ?? 0) - p.wy));
       return { wx: width / 2, wy: height / 2 - viewOffsetY };
-    },
+    }),
     interior: {
       presentation: new InteriorPresentation(model.map, model.plan, model.placementArea),
       placements: model.furniture,
@@ -297,11 +298,8 @@ function restartSimulation() {
 }
 window.addEventListener("pagehide", () => presentation?.dispose());
 function load(reset = false) {
-  stop();
+  clearInput();
   placementError = "";
-  keys.clear();
-  held = [0, 0];
-  jumpHeld = false;
   const preset = MOTION_SCENES.find((s) => s.id === scene.value) ?? defaultScene();
   model = makeModel(preset.id, reset);
   restartSimulation();
@@ -353,10 +351,7 @@ object.onchange = () => {
   fields();
 };
 mode.onchange = () => {
-  stop();
-  keys.clear();
-  held = [0, 0];
-  jumpHeld = false;
+  clearInput();
   el("placement").hidden = mode.value !== "place";
   el("walk-controls").hidden = mode.value !== "walk";
   canvas.style.cursor = mode.value === "place" ? "grab" : "default";
@@ -528,14 +523,14 @@ canvas.onpointercancel = endDrag;
 canvas.onlostpointercapture = endDrag;
 addEventListener("resize", resize);
 
-function draw(ctx: CanvasRenderingContext2D, host: ScenarioPresentationHost) {
+function draw(ctx: CanvasRenderingContext2D, lab: LabView) {
   if (!ready) return;
   syncPlayer();
-  const source = host.presentedPlayer;
+  const source = lab.presentedPlayer;
   const p = {
     ...source,
-    position: interpolatePosition(source.position, source.prevPosition, host.presentationAlpha),
-    wz: interpolateWz(source, host.presentationAlpha),
+    position: interpolatePosition(source.position, source.prevPosition, lab.presentationAlpha),
+    wz: interpolateWz(source, lab.presentationAlpha),
   };
   ctx.save();
   ctx.translate(0, viewOffsetY);

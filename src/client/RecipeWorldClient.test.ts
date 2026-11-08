@@ -188,10 +188,11 @@ it("reports the authority's clock between answers and the outgoing channel", asy
   expect(client.getDiagnostics().clock).toBeUndefined(); // no answer yet
   await client.ready;
   for (let i = 0; i < 3; i++) await client.step(move(0));
-  expect(client.getDiagnostics().clock).toEqual({ running: false, ticks: 3 });
   // The realm's tick counter is the authority's clock (both restart with a new
-  // world), so a new world's frames count from its start before its answer.
+  // world): the answer and the applied frames agree, and the live clock is theirs.
+  expect(client.clock).toEqual({ running: false, ticks: 3 });
   expect(client.replica.serverTick).toBe(3);
+  expect(client.getDiagnostics().clock).toEqual({ running: false, ticks: 3 });
   await running(client);
   const answered = required(client.clock).ticks;
   // Frames carry the ticks the authority runs between answers.
@@ -211,13 +212,19 @@ it("reports the authority's clock between answers and the outgoing channel", asy
     client.update();
   }
   live = required(client.getDiagnostics().clock).ticks;
+  const asked = performance.now();
   await client.samplePhysicsDiagnostics();
   const elapsed = (performance.now() - cadence) / (1000 / 60);
   const truth = required(client.clock).ticks;
   expect(truth - live).toBeGreaterThanOrEqual(0);
   expect(truth - live).toBeLessThanOrEqual(elapsed + 3);
-  expect(client.getDiagnostics().clock).toEqual({ running: true, ticks: truth });
-  expect(client.replica.serverTick).toBe(truth);
+  // The answer's snapshot is applied, and with it any frames the same pump batch
+  // carried behind the answer (a running world under load): the live clock counts
+  // those too, so it is never behind the answer and ahead only by ticks run since.
+  const after = required(client.getDiagnostics().clock);
+  expect(after.running).toBe(true);
+  expect(after.ticks - truth).toBeGreaterThanOrEqual(0);
+  expect(after.ticks - truth).toBeLessThanOrEqual((performance.now() - asked) / (1000 / 60) + 3);
   // A paused world's streamed frames repeat its tick.
   client.setRunning(false);
   await vi.waitFor(() => expect(client.busy).toBe(false));
@@ -229,8 +236,9 @@ it("reports the authority's clock between answers and the outgoing channel", asy
     expect(client.replica.world.chunks.get(7, 1)).toBeDefined();
   });
   expect(client.getDiagnostics().clock).toEqual(paused);
-  // A new world restarts the clock.
+  // A new world restarts both counts.
   await client.reload(true);
+  expect(client.clock).toEqual({ running: false, ticks: 0 });
   expect(client.getDiagnostics().clock).toEqual({ running: false, ticks: 0 });
   // The client's messages (start, clock changes, admin requests) went through the
   // ordered channel, and none is left queued.

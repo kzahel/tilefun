@@ -21,7 +21,6 @@ const SHELL_AND_GUARD = new Set([
   "src/scenarios/scenario.worker.ts",
 ]);
 const REMAINING_CONSUMERS = [
-  "src/interiors/playtest/main.ts",
   "src/scenarios/CoopWorker.test.ts",
   "src/scenarios/ScenarioPresentationHost.test.ts",
   "src/scenarios/ScenarioScheduling.test.ts",

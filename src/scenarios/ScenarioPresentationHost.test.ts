@@ -82,7 +82,6 @@ const assets = { sheets: new Map(), blendSheets: [], variants: {} } as unknown a
 const options = {
   width: 960,
   height: 600,
-  input: () => ({ dx: 0, dy: 0, jump: false, sprinting: false }),
   settings: () => ({ zoom: 0.75, paused: false, terrainPacing: "throughput" as const }),
   onError: vi.fn(),
 };
@@ -96,6 +95,8 @@ beforeEach(() => {
     dispose: mocks.dispose,
   });
   vi.stubGlobal("document", Object.assign(new EventTarget(), { hidden: false }));
+  vi.stubGlobal("window", new EventTarget());
+  vi.stubGlobal("navigator", { maxTouchPoints: 0 });
   vi.stubGlobal("location", { search: "" });
   vi.stubGlobal(
     "requestAnimationFrame",
@@ -105,8 +106,20 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllGlobals());
 
+/** A 960×600 lab canvas the game's controls can listen on. */
+function labCanvas() {
+  const canvas = Object.assign(new EventTarget(), {
+    tagName: "CANVAS",
+    width: 960,
+    height: 600,
+    contains: (node: unknown) => node === canvas,
+    getBoundingClientRect: () => ({ left: 0, top: 0, width: 960, height: 600 }),
+  });
+  return canvas;
+}
+
 it("configures full gameplay assets, starts at the fixture and detaches visibility lifecycle", async () => {
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, options);
+  const host = new ScenarioPresentationHost(labCanvas() as never, recipe, options);
   await host.ready;
   expect(mocks.setAssets).toHaveBeenCalledWith(assets, expect.anything());
   expect(mocks.resize).toHaveBeenCalledWith(960, 600);
@@ -138,7 +151,7 @@ it("closes late asset arrivals without creating a renderer or restarting a dispo
       finish = resolve;
     }),
   );
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, options);
+  const host = new ScenarioPresentationHost(labCanvas() as never, recipe, options);
   host.dispose();
   finish(assets);
   await host.ready;
@@ -152,7 +165,7 @@ it("releases renderer, assets and Worker if asset configuration fails", async ()
   mocks.setAssets.mockImplementation(() => {
     throw Error("configuration failed");
   });
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, options);
+  const host = new ScenarioPresentationHost(labCanvas() as never, recipe, options);
   await expect(host.ready).rejects.toThrow("configuration failed");
   expect(mocks.dispose).toHaveBeenCalledTimes(1);
   expect(mocks.close).toHaveBeenCalledWith(assets);
@@ -179,7 +192,7 @@ it("keeps diagnostic framing through ticks and commands around the replicated sc
       },
     },
   });
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, {
+  const host = new ScenarioPresentationHost(labCanvas() as never, recipe, {
     ...options,
     fixedCamera: { wx: 0, wy: -32 },
     terrain: false,
@@ -214,7 +227,7 @@ it("without a fixed frame, the camera follows the player after each predicted st
     endView: vi.fn(),
     renderer: { assets: new Map(), submit: vi.fn() },
   });
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, {
+  const host = new ScenarioPresentationHost(labCanvas() as never, recipe, {
     ...options,
     terrain: false,
   });
@@ -237,7 +250,7 @@ it("without a fixed frame, the camera follows the player after each predicted st
 
 it("uses the moving diagnostic camera for streaming as well as drawing", async () => {
   let x = 1000;
-  const host = new ScenarioPresentationHost({} as HTMLCanvasElement, recipe, {
+  const host = new ScenarioPresentationHost(labCanvas() as never, recipe, {
     ...options,
     fixedCamera: () => ({ wx: x, wy: 0 }),
   });
@@ -256,16 +269,10 @@ it("uses the moving diagnostic camera for streaming as well as drawing", async (
   host.dispose();
 });
 
-/** A lab without its own input on a focused 960×600 canvas: the game's controls. */
+/** A lab on a focused 960×600 canvas: the game's controls. */
 async function gameControlsLab(touchPoints = 0, settings = options.settings) {
   const win = new EventTarget();
-  const canvas = Object.assign(new EventTarget(), {
-    tagName: "CANVAS",
-    width: 960,
-    height: 600,
-    contains: (node: unknown) => node === canvas,
-    getBoundingClientRect: () => ({ left: 0, top: 0, width: 960, height: 600 }),
-  });
+  const canvas = labCanvas();
   vi.stubGlobal("window", win);
   vi.stubGlobal("navigator", { maxTouchPoints: touchPoints });
   Object.assign(document, { activeElement: canvas, hasFocus: () => true });
@@ -280,9 +287,8 @@ async function gameControlsLab(touchPoints = 0, settings = options.settings) {
     endView: vi.fn(),
     renderer: { assets: new Map(), submit: vi.fn() },
   });
-  const { input: _scripted, ...gameControls } = options;
   const host = new ScenarioPresentationHost(canvas as never, recipe, {
-    ...gameControls,
+    ...options,
     settings,
     terrain: false,
   });
@@ -300,7 +306,7 @@ async function gameControlsLab(touchPoints = 0, settings = options.settings) {
   return { host, canvas, key, frame };
 }
 
-it("without its own input, a lab plays with the game's controls while its canvas has focus", async () => {
+it("a lab plays with the game's controls while its canvas has focus", async () => {
   const { host, key, frame } = await gameControlsLab();
   key("KeyD");
   key("KeyW", { tagName: "SELECT" }); // a Workshop field keeps its keys

@@ -2,10 +2,14 @@ import { closeAssets, type GameAssets, loadGameAssets } from "../assets/GameAsse
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { GameLoop } from "../core/GameLoop.js";
 import type { Entity } from "../entities/Entity.js";
+import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
+import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
+import { presentInterior } from "../interiors/presentInterior.js";
 import { OverlayFrame } from "../rendering/OverlayFrame.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { cameraPixelSnap, type TerrainPacing } from "../rendering/PresentationSettings.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
+import type { SceneItem } from "../rendering/SceneItem.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import { ViewLayouts } from "../rendering/ViewLayout.js";
@@ -13,6 +17,7 @@ import { LabInput } from "../scenarios/LabInput.js";
 import type { ScenarioCommand } from "../scenarios/ScenarioProtocol.js";
 import type { ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { type CameraPolicy, followSeat, View } from "../session/View.js";
+import type { Movement } from "../shared/Movement.js";
 import type { WorkerEndpoint } from "../transport/WorkerClientTransport.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
 import { drawLabFrame, type LabDiagnostics, labPresentationDiagnostics } from "./LabScene.js";
@@ -31,10 +36,22 @@ export interface LabViewOptions {
   pixelExactShadows?: boolean;
   /** Four-direction sprite inspection: stops the world and cycles only the drawn pose. */
   poseCycle?(): PoseCycle | undefined;
+  /** An owned room cache drawn instead of terrain; its props still take part in
+   * actor ordering. Disposal clears it. */
+  interior?: {
+    presentation: InteriorPresentation;
+    placements: readonly FurniturePlacement[];
+    drawProps: ReadonlySet<number>;
+  };
+  /** The lab's own scripted input (the Interiors playtest's walk, automatic walk
+   * and place mode) in place of the game's controls. */
+  input?(): Movement;
   settings(): { paused: boolean; zoom: number; terrainPacing: TerrainPacing };
   /** Diagnostic drawing in screen space, over the terrain and over the scene. */
   underlay?(frame: OverlayFrame, lab: LabView): void;
   overlay?(frame: OverlayFrame, lab: LabView): void;
+  /** Diagnostic UI on the render host's UI layer, under the touch controls. */
+  uiOverlay?(ctx: CanvasRenderingContext2D, lab: LabView): void;
   /** After each drawn frame: page diagnostics and datasets. */
   onFrame?(lab: LabView): void;
   onError(error: unknown): void;
@@ -63,8 +80,9 @@ function cycledPose(player: Entity, seconds: number, { fps, frameCount }: PoseCy
 /**
  * A Workshop lab on the game's view (226): the recipe world served by the
  * game's Worker runtime (`RecipeWorldClient`), one `View` with its camera
- * policy, the game's controls (`LabInput`, `VehicleControl`), the production
- * clock and the selectable render host. The page owns its DOM controls and a
+ * policy, the game's controls (`LabInput`, `VehicleControl`; a lab with its own
+ * scripted input has no `LabInput`), the production clock and the selectable
+ * render host. The page owns its DOM controls and a
  * positioned wrapper around the canvas.
  */
 export class LabView {
@@ -152,10 +170,11 @@ export class LabView {
       );
       if (this.canvas.parentElement) this.vehicleControl.mountEmbedded(this.canvas.parentElement);
     }
-    this.input = new LabInput(this.canvas, {
-      enter: () => this.vehicleControl?.activate(),
-      recover: () => this.vehicleControl?.activateEquipment(),
-    });
+    if (!this.options.input)
+      this.input = new LabInput(this.canvas, {
+        enter: () => this.vehicleControl?.activate(),
+        recover: () => this.vehicleControl?.activateEquipment(),
+      });
     this.snapCamera();
     this.visibilityChanged();
   }
@@ -237,7 +256,11 @@ export class LabView {
       const { policy } = this.view;
       // A fixed camera is placed before input; following waits for the predicted step.
       if (policy.beforeInput) policy.tick(camera, device);
-      const tick = this.input?.tick(device.replica, dt);
+      // A scripted lab sends its own movement, with no presses.
+      const script = this.options.input;
+      const tick = script
+        ? { before: [], movement: script(), after: [] }
+        : this.input?.tick(device.replica, dt);
       if (!tick) return;
       for (const press of tick.before) client.submitPress(press);
       this.interpolate = client.submitInput(tick.movement, camera.getVisibleChunkRange());
@@ -276,8 +299,9 @@ export class LabView {
         shown === player
           ? replica.entities
           : replica.entities.map((entity) => (entity.id === player.id ? shown : entity));
+      const { interior } = this.options;
       drawLabFrame(host, this.view, device, this.effects, {
-        terrain: this.options.terrain !== false,
+        terrain: !interior && this.options.terrain !== false,
         background: this.options.background ?? "#cbd5c3",
         pacing: settings.terrainPacing,
         visibility: this.options.surfaceVisibility?.() ?? "auto",
@@ -289,7 +313,23 @@ export class LabView {
         collectObserver: shown,
         underlay: () => this.drawOverlay(this.options.underlay),
         overlay: () => this.drawOverlay(this.options.overlay),
+        ...(interior
+          ? {
+              room: {
+                drawProps: interior.drawProps,
+                present: (items: readonly SceneItem[]) =>
+                  presentInterior(
+                    host.renderer,
+                    camera,
+                    interior.presentation,
+                    interior.placements,
+                    items,
+                  ),
+              },
+            }
+          : {}),
       });
+      this.options.uiOverlay?.(host.uiContext, this);
       this.input?.draw(host.uiContext);
       this.renderX = camera.x;
       this.renderY = camera.y;
@@ -302,6 +342,15 @@ export class LabView {
       camera.restoreActual();
       replica.endPresentation();
     }
+  }
+
+  /** A fresh frame that does not advance the world, for a report: the world
+   * (GPU included) and the diagnostic UI. */
+  captureFrame(): HTMLCanvasElement {
+    if (!this.host) throw new Error("The lab view is unavailable for capture");
+    this.render(1);
+    if (!this.host) throw new Error("The lab view failed during capture");
+    return this.host.captureFrame?.() ?? this.canvas;
   }
 
   /** The player as drawn this frame (borrowed), the pose cycle's copy included:
@@ -373,6 +422,7 @@ export class LabView {
     this.host = undefined;
     this.effects.clear();
     this.overlays.clear();
+    this.options.interior?.presentation.clear();
     if (this.assets) closeAssets(this.assets);
     this.assets = undefined;
     this.client.dispose();
