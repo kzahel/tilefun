@@ -1,5 +1,31 @@
 # Embedded engine labs
 
+## Game controls in labs (226 slice 2, 2026-11-08)
+
+[226](../tactical/226-player-views-and-local-split-screen.md) slice 2 gives the
+World geometry, Natural landscape, Characters and Asset movement labs the game's
+controls through the interim `LabInput` adapter (`src/scenarios/LabInput.ts`,
+replaced by the game view in slice 3): the game's key bindings (play keys only,
+so Tab, Escape and digits stay with the Workshop page), standard pads, the touch
+joystick and action buttons on the lab canvas, and the shared `SeatComposer`.
+Labs therefore gain sprint, throw, horn, sirens, reverse and jump press edges,
+and E/F reach the vehicle control. Keys and pads count only while the lab
+canvas has focus; Workshop fields, selects and buttons keep their keys. Touch
+buttons draw only on touch screens, so desktop lab pixels are unchanged.
+Horn, siren and throw presses travel on the seat's ordered input path
+(`ScenarioClient.submitPress` → `ScenarioSession.input`), not as pausing commands.
+Each page's private key sets, HTML arrow buttons and the host's vehicle input
+were deleted. The physics lab runs one input set per pane (its canvas's focus
+selects the seat).
+
+Temporary differences, resolved when each lab moves onto the game view:
+- The furniture/interiors playtest keeps its own input through the host's
+  transitional `input` option until slice 4a, because its automatic walk and
+  place mode are lab instruments and its D-pad/Jump button drive the view offset.
+- The physics lab's WebGL collider panes cannot draw touch controls: dragging on
+  a pane steers its player, but touch has no Jump there until slice 6.
+- Characters' on-screen D-pad is replaced by dragging on the scene.
+
 [227](../tactical/227-tree-house-and-ladders.md) adds the World Geometry `tree-house`
 fixture. Its ladder rule runs inside the shared physics step and its room cutaway
 lives in shared scene collection, so the game and labs behave the same. The
@@ -690,8 +716,9 @@ ownership, not full application parity or a frame-pacing claim. See
 [Tactical 069](../tactical/069-interactive-authority-scheduling.md) for validation.
 
 `ScenarioPresentationHost` owns the migrated labs' client/Worker, production
-`GameLoop`, render host, asset lifetime, camera and frame storage. The lab page supplies
-controls, input, viewport/settings and diagnostic UI. [Tactical 048](../tactical/048-embedded-presentation-host.md)
+`GameLoop`, render host, asset lifetime, camera and frame storage, and (since 226
+slice 2) the game's play controls. The lab page supplies viewport/settings,
+diagnostic controls and UI. [Tactical 048](../tactical/048-embedded-presentation-host.md)
 records this extraction and its validation. Shared owners are:
 
 - `PlayerPresentation`: fixed-tick follow and exponential sub-tick camera
@@ -740,8 +767,8 @@ geometry overlay use backend-neutral `OverlayFrame` commands before/after the
 replicated scene. Player collider outlines use the scene collector's interpolated
 position and predictor history; fixed framing never turns into player follow on
 movement or teleport. The host owns each walker bitmap and releases it on metadata
-changes/unmount; the catalog's borrowed HTML image remains usable. Grid lines,
-fixture selection and DOM input remain lab responsibilities. Closing the geometry
+changes/unmount; the catalog's borrowed HTML image remains usable. Grid lines and
+fixture selection remain lab responsibilities; play input comes from the host. Closing the geometry
 panel stops the clock and disposes its Worker and GPU sibling canvas. See
 [Tactical 050](../tactical/050-outdoor-geometry-presentation.md) for validation.
 

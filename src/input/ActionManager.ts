@@ -7,6 +7,7 @@ import {
   type ControllerCommand,
   controllerInput,
 } from "./ControllerInput.js";
+import { acceptsGameKey } from "./KeyFocus.js";
 import { eventCode } from "./KeyLabels.js";
 import type { TouchButtons } from "./TouchButtons.js";
 import type { TouchJoystick } from "./TouchJoystick.js";
@@ -14,6 +15,12 @@ import type { TouchJoystick } from "./TouchJoystick.js";
 const SQRT2_INV = 1 / Math.sqrt(2);
 
 type DiscreteCallback = () => void;
+
+export interface ActionManagerOptions {
+  /** An embedded lab's root: keys and pads count only while focus is inside it,
+   * never on its form controls (see KeyFocus). The game page passes none. */
+  root?: HTMLElement;
+}
 
 export class ActionManager {
   private config: ActionMapConfig;
@@ -31,10 +38,17 @@ export class ActionManager {
   private touchJoystick: TouchJoystick | null = null;
   private touchButtons: TouchButtons | null = null;
   private gamepad = true;
+  private readonly root: HTMLElement | null;
 
-  constructor(config?: ActionMapConfig) {
+  constructor(config?: ActionMapConfig, options: ActionManagerOptions = {}) {
     this.config = config ?? DEFAULT_ACTION_MAP;
+    this.root = options.root ?? null;
     this.rebuildIndex();
+  }
+
+  /** Pads drive this manager: enabled and, for a lab, focused. */
+  private get padActive(): boolean {
+    return this.gamepad && (!this.root || this.root.contains(document.activeElement));
   }
 
   private rebuildIndex(): void {
@@ -79,6 +93,7 @@ export class ActionManager {
     window.addEventListener("keyup", this.onKeyUp);
     window.addEventListener("blur", this.onBlur);
     window.addEventListener(CONTROLLER_EVENT, this.onController);
+    this.root?.addEventListener("focusout", this.onFocusOut);
   }
 
   detach(): void {
@@ -86,6 +101,7 @@ export class ActionManager {
     window.removeEventListener("keyup", this.onKeyUp);
     window.removeEventListener("blur", this.onBlur);
     window.removeEventListener(CONTROLLER_EVENT, this.onController);
+    this.root?.removeEventListener("focusout", this.onFocusOut);
     this.clearHeld();
   }
 
@@ -98,7 +114,7 @@ export class ActionManager {
   // --- Continuous action polling ---
 
   isHeld(action: ActionName): boolean {
-    if (this.gamepad && controllerInput.held.has(action)) return true;
+    if (this.padActive && controllerInput.held.has(action)) return true;
     // Check on-screen touch buttons
     if (this.touchButtons) {
       if (action === "jump" && this.touchButtons.jumpPressed) return true;
@@ -138,7 +154,7 @@ export class ActionManager {
     const jump = this.isHeld("jump");
 
     // Merge gamepad: if keyboard is idle, use gamepad stick; always OR sprint
-    const gp = this.gamepad ? controllerInput.movement : undefined;
+    const gp = this.padActive ? controllerInput.movement : undefined;
     if (gp && dx === 0 && dy === 0 && (gp.dx !== 0 || gp.dy !== 0)) {
       return { dx: gp.dx, dy: gp.dy, sprinting: sprinting || gp.sprinting, jump: jump || gp.jump };
     }
@@ -157,7 +173,7 @@ export class ActionManager {
     if (this.isHeld("pan_right")) dx += 1;
     if (this.isHeld("pan_up")) dy -= 1;
     if (this.isHeld("pan_down")) dy += 1;
-    if (this.gamepad && dx === 0 && dy === 0) return controllerInput.movement;
+    if (this.padActive && dx === 0 && dy === 0) return controllerInput.movement;
     return { dx, dy };
   }
 
@@ -191,6 +207,7 @@ export class ActionManager {
 
   private onKeyDown = (e: KeyboardEvent): void => {
     if (e.ctrlKey || e.metaKey) return; // OS/browser shortcuts are not gameplay keys
+    if (!acceptsGameKey(e.target, this.root)) return;
     const key = eventCode(e); // physical position: layout- and Shift-independent
     // Bound keys skip browser defaults (Tab, F3, Space scroll); DOM UI stops propagation.
     if (this.boundKeys.has(key)) e.preventDefault();
@@ -205,13 +222,18 @@ export class ActionManager {
   };
 
   private onController = (event: Event): void => {
-    if (!this.gamepad || event.defaultPrevented) return;
+    if (!this.padActive || event.defaultPrevented) return;
     const action = CONTROLLER_ACTIONS[(event as CustomEvent<ControllerCommand>).detail];
     if (action) for (const callback of this.listeners.get(action) ?? []) callback();
   };
 
   private onBlur = (): void => {
     this.clearHeld();
+  };
+
+  /** A lab's held keys release when focus leaves it (the keyup goes elsewhere). */
+  private onFocusOut = (event: FocusEvent): void => {
+    if (!this.root?.contains(event.relatedTarget as Node | null)) this.clearHeld();
   };
 
   private fireActionsForKey(key: string): void {

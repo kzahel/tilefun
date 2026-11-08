@@ -32,6 +32,9 @@ import {
 import { paintScenarioTerrain } from "./ScenarioTerrain.js";
 import { scenarioVehicleSource } from "./ScenarioTraffic.js";
 
+/** Presses composed with a seat's movement (horn, sirens, throw). */
+const SEAT_PRESSES = new Set<string>(["vehicle-horn", "vehicle-emergency", "throw-ball"]);
+
 /** A temporary ordinary Realm with memory persistence. No alternate physics or clock. */
 export class ScenarioSession {
   readonly records = new MemoryRecordStore();
@@ -278,12 +281,15 @@ export class ScenarioSession {
     this.realm.updateVisibleChunks(this.player.visibleRange);
     await this.realm.ensureReady(this.player.visibleRange);
   }
+  /** A seat's ordered play input: movement commands and composed presses (226). */
   input(buffer: ArrayBuffer, range?: ChunkRange, seat: 0 | 1 = 0) {
     if (this.closed) throw Error("Scenario is closed");
     const message = decodeClientMessage(buffer);
-    if (message.type !== "player-input") throw Error("Expected scenario player input");
     const player = seat === 0 ? this.player : this.guest;
     if (!player) throw Error("No guest in this scenario");
+    if (SEAT_PRESSES.has(message.type))
+      return this.realm.handleMessage(player.clientId, player, message);
+    if (message.type !== "player-input") throw Error("Expected scenario player input");
     if (seat === 0) {
       this.setViewRange(range);
       this.seq = Math.max(this.seq, message.seq);
@@ -345,12 +351,6 @@ export class ScenarioSession {
           type: "throw-ball",
           ...command,
         });
-        return;
-      case "vehicle-horn":
-        this.realm.vehicles.honk(this.player, command.active);
-        return;
-      case "vehicle-emergency":
-        this.realm.vehicles.emergency(this.player, command.action);
         return;
       case "call-train":
       case "enter-vehicle":

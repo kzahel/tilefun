@@ -10,6 +10,14 @@ Missing/invalid preferences fall back to Joystick; failed persistence leaves the
 chosen mode usable for the session with feedback in the dialog.
 [086](../tactical/086-tap-to-move-and-options.md) records the original tap slice.
 
+Touch controls in canvases that do not fill the window (226 slice 2):
+`TouchJoystick` and `TouchButtons` lay out, hit-test and steer in CSS pixels
+relative to the canvas and draw scaled into canvas pixels (`ViewRect`), so the
+same controls work in a lab's 960×640 canvas shown at 100% width. Both accept a
+`region` for split screen, and `viewAt` picks the view under a finger. A
+full-window game canvas sized to its CSS box is unchanged. Labs now use these
+controls; joystick taps still report client coordinates.
+
 Shared Options now participates in controller focus/back navigation. The main
 menu uses separate Worlds, Multiplayer and Character pages; the browser sidebar
 and gear shortcut remain. [Steam Deck and menus](steam-deck-and-menus.md) owns

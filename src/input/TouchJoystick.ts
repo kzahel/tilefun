@@ -1,3 +1,5 @@
+import { canvasPoint, inRegion, type ViewRegion, withCssPixels } from "./ViewRect.js";
+
 const BASE_RADIUS = 60;
 const THUMB_RADIUS = 28;
 const DEAD_ZONE = 10;
@@ -7,6 +9,7 @@ const THUMB_ALPHA = 0.4;
 const TAP_MAX_DURATION_MS = 300;
 const TAP_MAX_DISTANCE = 15;
 
+/** Base and thumb are CSS pixels relative to the canvas (see ViewRect). */
 interface JoystickState {
   touchId: number;
   baseX: number;
@@ -14,6 +17,8 @@ interface JoystickState {
   thumbX: number;
   thumbY: number;
   startTime: number;
+  clientX: number;
+  clientY: number;
 }
 
 export class TouchJoystick {
@@ -24,6 +29,8 @@ export class TouchJoystick {
   onTap: ((clientX: number, clientY: number) => void) | null = null;
   /** Touch IDs claimed by other systems (e.g. TouchButtons). Joystick ignores these. */
   claimedTouches: Set<number> | null = null;
+  /** Only touches starting in this region (CSS px of the canvas) steer; null = whole canvas. */
+  region: ViewRegion | null = null;
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
@@ -67,21 +74,26 @@ export class TouchJoystick {
 
   /** Draw the joystick overlay on the canvas. */
   draw(ctx: CanvasRenderingContext2D): void {
-    if (!this.enabled || !this.state) return;
+    const state = this.state;
+    if (!this.enabled || !state) return;
+    withCssPixels(ctx, this.canvas, () => this.drawState(ctx, state));
+  }
+
+  private drawState(ctx: CanvasRenderingContext2D, state: JoystickState): void {
     ctx.save();
 
     // Base circle
     ctx.globalAlpha = BASE_ALPHA;
     ctx.fillStyle = "white";
     ctx.beginPath();
-    ctx.arc(this.state.baseX, this.state.baseY, BASE_RADIUS, 0, Math.PI * 2);
+    ctx.arc(state.baseX, state.baseY, BASE_RADIUS, 0, Math.PI * 2);
     ctx.fill();
 
     // Thumb circle
     ctx.globalAlpha = THUMB_ALPHA;
     ctx.fillStyle = "white";
     ctx.beginPath();
-    ctx.arc(this.state.thumbX, this.state.thumbY, THUMB_RADIUS, 0, Math.PI * 2);
+    ctx.arc(state.thumbX, state.thumbY, THUMB_RADIUS, 0, Math.PI * 2);
     ctx.fill();
 
     ctx.restore();
@@ -96,6 +108,8 @@ export class TouchJoystick {
       thumbX: x,
       thumbY: y,
       startTime: performance.now(),
+      clientX: x,
+      clientY: y,
     };
   }
 
@@ -131,15 +145,18 @@ export class TouchJoystick {
       if (!touch) continue;
       // Skip touches claimed by other systems (e.g. on-screen buttons)
       if (this.claimedTouches?.has(touch.identifier)) continue;
-      if (!this.state) {
+      const at = canvasPoint(this.canvas, touch.clientX, touch.clientY);
+      if (!this.state && (!this.region || inRegion(this.region, at))) {
         // First finger: joystick
         this.state = {
           touchId: touch.identifier,
-          baseX: touch.clientX,
-          baseY: touch.clientY,
-          thumbX: touch.clientX,
-          thumbY: touch.clientY,
+          baseX: at.x,
+          baseY: at.y,
+          thumbX: at.x,
+          thumbY: at.y,
           startTime: performance.now(),
+          clientX: touch.clientX,
+          clientY: touch.clientY,
         };
         e.preventDefault();
       }
@@ -151,7 +168,8 @@ export class TouchJoystick {
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
       if (touch && touch.identifier === this.state.touchId) {
-        this.clampThumb(touch.clientX, touch.clientY);
+        const at = canvasPoint(this.canvas, touch.clientX, touch.clientY);
+        this.clampThumb(at.x, at.y);
         e.preventDefault();
         return;
       }
@@ -165,8 +183,8 @@ export class TouchJoystick {
       if (this.state && touch.identifier === this.state.touchId) {
         // Detect tap: short duration + minimal movement
         const elapsed = performance.now() - this.state.startTime;
-        const dx = touch.clientX - this.state.baseX;
-        const dy = touch.clientY - this.state.baseY;
+        const dx = touch.clientX - this.state.clientX;
+        const dy = touch.clientY - this.state.clientY;
         const moved = Math.hypot(dx, dy);
         if (
           e.type !== "touchcancel" &&
@@ -174,7 +192,7 @@ export class TouchJoystick {
           moved < TAP_MAX_DISTANCE &&
           this.onTap
         ) {
-          this.onTap(this.state.baseX, this.state.baseY);
+          this.onTap(this.state.clientX, this.state.clientY);
         }
         this.state = null;
         e.preventDefault();

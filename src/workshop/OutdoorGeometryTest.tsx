@@ -9,7 +9,6 @@ import { Spritesheet } from "../assets/Spritesheet.js";
 import { TileVariants } from "../assets/TileVariants.js";
 import { PIXEL_SCALE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
-import { usKey } from "../input/KeyLabels.js";
 import type { Camera } from "../rendering/Camera.js";
 import { interpolatePosition } from "../rendering/collectScene.js";
 import type { OverlayFrame } from "../rendering/OverlayFrame.js";
@@ -53,7 +52,6 @@ export function OutdoorGeometryTest({
   image: HTMLImageElement;
 }) {
   const canvas = useRef<HTMLCanvasElement>(null),
-    keys = useRef(new Set<string>()),
     reset = useRef(() => {}),
     [error, setError] = useState("");
   useEffect(() => {
@@ -67,21 +65,6 @@ export function OutdoorGeometryTest({
       delete canvas.current.dataset.playerX;
       delete canvas.current.dataset.playerY;
     }
-    const down = (e: KeyboardEvent) => {
-      if (canvas.current !== document.activeElement) return;
-      if (
-        ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "w", "a", "s", "d", " "].includes(
-          usKey(e),
-        )
-      ) {
-        keys.current.add(usKey(e));
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    };
-    const up = (e: KeyboardEvent) => keys.current.delete(usKey(e));
-    window.addEventListener("keydown", down);
-    window.addEventListener("keyup", up);
 
     const prop = outdoorProp(asset, metadata, 0, 0);
     const width = Math.max(240, asset.rect[2] + 100);
@@ -101,20 +84,6 @@ export function OutdoorGeometryTest({
       pixelExactShadows: true,
       loadAssets: () => geometryAssets(image),
       settings: () => ({ paused: false, zoom: scale / PIXEL_SCALE, terrainPacing: "throughput" }),
-      input: () => {
-        let dx =
-          Number(keys.current.has("ArrowRight") || keys.current.has("d")) -
-          Number(keys.current.has("ArrowLeft") || keys.current.has("a"));
-        let dy =
-          Number(keys.current.has("ArrowDown") || keys.current.has("s")) -
-          Number(keys.current.has("ArrowUp") || keys.current.has("w"));
-        const length = Math.hypot(dx, dy);
-        if (length) {
-          dx /= length;
-          dy /= length;
-        }
-        return { dx, dy, jump: keys.current.has(" "), sprinting: false };
-      },
       underlay: (frame, { camera }) => {
         // Whole grid lines avoid drawing every shared tile edge twice.
         const right = -width + Math.ceil((2 * width) / 16) * 16;
@@ -174,28 +143,17 @@ export function OutdoorGeometryTest({
       })
       .catch(reportError);
     reset.current = () => {
-      keys.current.clear();
       void presentation
         .command({ kind: "teleport", position: { wx: 0, wy: 40 } })
         .catch(reportError);
     };
-    const clearKeys = () => keys.current.clear();
-    window.addEventListener("blur", clearKeys);
-    document.addEventListener("visibilitychange", clearKeys);
     return () => {
       active = false;
       c.dataset.ready = "false";
       reset.current = () => {};
-      keys.current.clear();
       presentation.dispose();
-      window.removeEventListener("keydown", down);
-      window.removeEventListener("keyup", up);
-      window.removeEventListener("blur", clearKeys);
-      document.removeEventListener("visibilitychange", clearKeys);
     };
   }, [asset, metadata, image]);
-  const press = (k: string) => keys.current.add(k),
-    release = (k: string) => keys.current.delete(k);
   return (
     <section className="geometry-test">
       <h3>Walk around this asset</h3>
@@ -204,37 +162,14 @@ export function OutdoorGeometryTest({
           ref={canvas}
           tabIndex={0}
           aria-label="Asset movement test"
-          onBlur={() => keys.current.clear()}
+          style={{ touchAction: "none" }}
         />
       </div>
       <p>
-        Tap the scene, then use arrows / WASD. Blue: image · green: footprint · red: collision ·
-        yellow: anchor · purple: depth.
+        Tap the scene, then use arrows / WASD or a controller; on touch screens drag on it. Blue:
+        image · green: footprint · red: collision · yellow: anchor · purple: depth.
       </p>
       <div className="preview-controls">
-        {(
-          [
-            ["←", "ArrowLeft"],
-            ["↑", "ArrowUp"],
-            ["↓", "ArrowDown"],
-            ["→", "ArrowRight"],
-          ] as const
-        ).map(([label, k]) => (
-          <button
-            key={k}
-            type="button"
-            aria-label={`Walk ${k}`}
-            onPointerDown={(e) => {
-              e.currentTarget.setPointerCapture(e.pointerId);
-              press(k);
-            }}
-            onPointerUp={() => release(k)}
-            onPointerCancel={() => release(k)}
-            onLostPointerCapture={() => release(k)}
-          >
-            {label}
-          </button>
-        ))}
         <button type="button" onClick={() => reset.current()}>
           Reset walker
         </button>

@@ -6,17 +6,17 @@ import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { predictInput } from "../client/predictInput.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
+import {
+  devicePacket,
+  normalizesDiagonal,
+  SeatComposer,
+  seatPresses,
+  vehicleButtons,
+} from "../input/SeatComposer.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { beginPlayerPresentation, followPlayer } from "../rendering/PlayerPresentation.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import { projectWorld } from "../rendering/Projection.js";
-import { quantizeAxis } from "../shared/binaryCodec.js";
-import {
-  hasVehicleLights,
-  isEmergencyVehicle,
-  isWarningVehicle,
-  vehicleLightState,
-} from "../traffic/EmergencyVehicle.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
@@ -26,7 +26,6 @@ import {
   firstPersonTick,
   renderFirstPerson,
 } from "./firstPersonPlay.js";
-import { throwDirection } from "./playThrow.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
 import { renderEntities, renderWorld } from "./renderWorld.js";
 
@@ -73,12 +72,10 @@ const BALL_HIT_KEYS = [
 const BALL_HIT_MAX_DISTANCE = 300;
 const BALL_HIT_VOLUME = 0.4;
 
-/** Max hold time in seconds before throw force reaches 1.0. */
-const THROW_CHARGE_DURATION = 1.0;
-
 export class PlayScene implements GameScene {
   readonly transparent = false;
-  lastMovement = { dx: 0, dy: 0 };
+  /** Seat 0's input composition (tactical 226); other seats join in slice 5. */
+  private readonly seat = new SeatComposer();
   private predictor: PlayerPredictor | null = null;
   private prevInvincibilityTimer = 0;
   private zoomUnsubs: (() => void)[] = [];
@@ -90,13 +87,6 @@ export class PlayScene implements GameScene {
   private prevGemsCollected = 0;
   /** Entity IDs that have been seen with deathTimer (to detect ghost death onset). */
   private dyingEntities = new Set<number>();
-  /** Accumulated throw charge time (seconds). 0 = not charging. */
-  private emergencyHeld = false;
-  private styleHeld = false;
-  private hornHeld = false;
-  private hornRefresh = 0;
-  private throwChargeTime = 0;
-  private wasThrowHeld = false;
   /** Track ball entity positions for water-splash effect on removal. */
   private ballPositions = new Map<number, { wx: number; wy: number; wz: number }>();
   /** Ball IDs that had a deathTimer last frame (despawning, not water-killed). */
@@ -112,9 +102,12 @@ export class PlayScene implements GameScene {
   private reconcilePosErrMax = 0;
   private nextReconcileLogAtMs = 0;
   private jumpPressLatched = false;
-  private occupiedId: number | undefined;
-  private lastSampledJumpHeld = false;
   private jumpPressUnsub: (() => void) | null = null;
+
+  /** Seat 0's unquantized movement last tick (door walk-through reads it). */
+  get lastMovement(): { dx: number; dy: number } {
+    return this.seat.lastMovement;
+  }
 
   onEnter(gc: GameContext): void {
     this.particles.clear();
@@ -176,7 +169,7 @@ export class PlayScene implements GameScene {
     this.jumpPressUnsub?.();
     this.jumpPressUnsub = null;
     this.jumpPressLatched = false;
-    this.lastSampledJumpHeld = false;
+    this.seat.cancel();
     if (this.predictor) {
       gc.stateView.setPredictor(null);
       this.predictor = null;
@@ -236,22 +229,20 @@ export class PlayScene implements GameScene {
       });
     }
 
-    // Player movement input — quantize dx/dy so prediction uses the same
-    // values the server will see after binary decoding (no misprediction drift).
+    // Seat 0's input: devices are sampled here, composed by the shared SeatComposer.
     const vehicle = occupiedVehicle(gc.stateView.playerEntity, gc.stateView.entities);
-    if (vehicle?.id !== this.occupiedId) {
+    const boarded = this.seat.board(
+      vehicle,
+      gc.actions.isHeld("vehicle_lights"),
+      gc.actions.isHeld("vehicle_style"),
+    );
+    if (boarded) {
       gc.tapMovement?.cancel();
       gc.touchHold?.reset();
       gc.touchButtons.reset();
-      this.occupiedId = vehicle?.id;
-      this.emergencyHeld = gc.actions.isHeld("vehicle_lights");
-      this.styleHeld = gc.actions.isHeld("vehicle_style");
     }
-    gc.touchButtons.driving = !!vehicle;
-    gc.touchButtons.emergency = !!vehicle && isEmergencyVehicle(vehicle);
-    gc.touchButtons.warning = !!vehicle && isWarningVehicle(vehicle);
-    gc.touchButtons.emergencyState = vehicle ? vehicleLightState(vehicle) : 2;
-    const inputLocked = gc.storagePaused || gc.doorPresentation?.busy || gc.inputBlocked;
+    Object.assign(gc.touchButtons, vehicleButtons(vehicle));
+    const inputLocked = !!(gc.storagePaused || gc.doorPresentation?.busy || gc.inputBlocked);
     gc.touchButtons.enabled = !inputLocked;
     if (inputLocked) gc.touchButtons.reset();
     gc.touchJoystick.enabled = (gc.touchMovement ?? "joystick") === "joystick" && !inputLocked;
@@ -259,6 +250,7 @@ export class PlayScene implements GameScene {
       gc.touchHold?.reset();
       gc.tapMovement?.cancel();
     }
+    const steering = gc.carDriving === "steering";
     const firstPerson = firstPersonTick(gc, dt, vehicle);
     const manual = firstPersonMovement(
       gc,
@@ -266,35 +258,30 @@ export class PlayScene implements GameScene {
       vehicle,
       inputLocked
         ? { dx: 0, dy: 0, sprinting: false, jump: false }
-        : gc.actions.getMovement(!(vehicle && gc.carDriving === "steering")),
+        : gc.actions.getMovement(normalizesDiagonal(vehicle, steering)),
     );
-    let rawMovement =
+    let steered =
       !inputLocked && gc.touchMovement === "tap" && gc.tapMovement
         ? gc.tapMovement.sample(gc.stateView.playerEntity.position, manual, dt, vehicle ? 24 : 0)
         : manual;
     if (!inputLocked && gc.touchMovement === "hold")
-      rawMovement =
+      steered =
         gc.touchHold?.sample(gc.stateView.playerEntity.position, manual, vehicle ? 24 : 0) ??
         manual;
-    const hornPressed = gc.actions.consumeHornPress();
-    const hornHeld = !!vehicle && !inputLocked && (gc.actions.isHeld("honk") || hornPressed);
-    this.hornRefresh += dt;
-    if (hornHeld !== this.hornHeld || (hornHeld && this.hornRefresh >= 0.2)) {
-      gc.transport.send({ type: "vehicle-horn", active: hornHeld });
-      this.hornRefresh = 0;
-    }
-    this.hornHeld = hornHeld;
+    const tick = this.seat.tick(
+      { manual, steered, ...seatPresses(gc.actions), jumpPressed: this.takeJumpPress() },
+      {
+        vehicle,
+        locked: inputLocked,
+        steering,
+        joystick: (gc.touchMovement ?? "joystick") === "joystick",
+        facing: gc.stateView.playerEntity.sprite?.direction,
+        look: firstPerson?.forward(),
+      },
+      dt,
+    );
+    for (const message of tick.before) gc.transport.send(message);
     if (inputLocked) gc.audioManager.stopHorns();
-    const sirenHeld = !inputLocked && gc.actions.isHeld("vehicle_lights");
-    const styleHeld = !inputLocked && gc.actions.isHeld("vehicle_style");
-    if (vehicle && hasVehicleLights(vehicle)) {
-      if (sirenHeld && !this.emergencyHeld)
-        gc.transport.send({ type: "vehicle-emergency", action: "toggle" });
-      if (isEmergencyVehicle(vehicle) && styleHeld && !this.styleHeld)
-        gc.transport.send({ type: "vehicle-emergency", action: "style" });
-    }
-    this.emergencyHeld = sirenHeld;
-    this.styleHeld = styleHeld;
     gc.audioManager.updateSirens(
       gc.stateView.entities,
       gc.stateView.playerEntity.position,
@@ -314,53 +301,14 @@ export class PlayScene implements GameScene {
       gc.stateView.playerEntity.position,
       !inputLocked && !gc.debugPanel.paused && !document.hidden,
     );
-    if (vehicle) rawMovement = { ...rawMovement, jump: false };
-    this.lastMovement = { dx: rawMovement.dx, dy: rawMovement.dy };
-    const jumpPressed = this.consumeJumpPressed(rawMovement.jump) && !inputLocked && !vehicle;
+    const movement = tick.movement;
     const commandDt = 1 / 60;
-    const movement = {
-      dx: quantizeAxis(rawMovement.dx),
-      dy: quantizeAxis(rawMovement.dy),
-      sprinting: rawMovement.sprinting,
-      jump: rawMovement.jump,
-      jumpPressed,
-      reversing: !!vehicle && !inputLocked && gc.actions.isHeld("reverse"),
-      // Tap/hold destinations always aim in world space, even when the manual
-      // keyboard/controller/joystick controls use relative car steering.
-      relativeDriving:
-        !!vehicle &&
-        gc.carDriving === "steering" &&
-        (!!manual.dx || !!manual.dy || (gc.touchMovement ?? "joystick") === "joystick"),
-    };
     const seq = nextInputSequence(gc.transport);
-    gc.transport.send({
-      type: "player-input",
-      seq,
-      dx: movement.dx,
-      dy: movement.dy,
-      sprinting: movement.sprinting,
-      jump: movement.jump,
-      jumpPressed: movement.jumpPressed,
-      reversing: movement.reversing,
-      relativeDriving: movement.relativeDriving,
-    });
-
-    // Throw charge tracking
-    const throwHeld = !vehicle && !inputLocked && gc.actions.isHeld("throw");
-    if (throwHeld) {
-      this.throwChargeTime += dt;
-    } else if (this.wasThrowHeld && !inputLocked && !vehicle) {
-      // Released — throw the ball
-      const force = Math.min(this.throwChargeTime / THROW_CHARGE_DURATION, 1);
-      const { dirX, dirY } = throwDirection(
-        movement,
-        gc.stateView.playerEntity.sprite?.direction,
-        firstPerson?.forward(),
-      );
-      gc.transport.send({ type: "throw-ball", dirX, dirY, force });
-      this.throwChargeTime = 0;
-    }
-    this.wasThrowHeld = throwHeld;
+    const packet = devicePacket(seq, [
+      { body: vehicle?.id ?? gc.stateView.playerEntity.id, movement },
+    ]);
+    gc.transport.send(packet.input);
+    for (const message of tick.after) gc.transport.send(message);
 
     const verticalFollow = gc.console.cvars.get("cl_verticalfollow")?.get() === true;
 
@@ -420,6 +368,7 @@ export class PlayScene implements GameScene {
           gc.stateView.world,
           gc.stateView.props,
           gc.stateView.entities,
+          packet.coSeats,
         );
     }
 
@@ -541,10 +490,7 @@ export class PlayScene implements GameScene {
     gc.audioManager.stopHorns();
     gc.audioManager.stopCreatureCalls();
     gc.transport.send({ type: "vehicle-horn", active: false });
-    this.hornHeld = false;
-    this.hornRefresh = 0;
-    this.emergencyHeld = false;
-    this.styleHeld = false;
+    this.seat.stop();
     gc.tapMovement?.cancel();
     gc.touchHold?.reset();
     gc.actions.clearHeld();
@@ -552,11 +498,8 @@ export class PlayScene implements GameScene {
   }
 
   cancelInput(transport: IClientTransport): void {
-    this.lastMovement = { dx: 0, dy: 0 };
+    this.seat.cancel();
     this.jumpPressLatched = false;
-    this.lastSampledJumpHeld = false;
-    this.wasThrowHeld = false;
-    this.throwChargeTime = 0;
     transport.send({
       type: "player-input",
       seq: nextInputSequence(transport),
@@ -642,10 +585,9 @@ export class PlayScene implements GameScene {
     this.zoomUnsubs.length = 0;
   }
 
-  private consumeJumpPressed(jumpHeld: boolean): boolean {
-    const pressed = this.jumpPressLatched || (jumpHeld && !this.lastSampledJumpHeld);
+  private takeJumpPress(): boolean {
+    const pressed = this.jumpPressLatched;
     this.jumpPressLatched = false;
-    this.lastSampledJumpHeld = jumpHeld;
     return pressed;
   }
 

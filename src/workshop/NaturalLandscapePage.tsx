@@ -10,13 +10,6 @@ import {
   landscapeLabel,
   landscapeProfile,
 } from "../generation/regional/NaturalLandscape.js";
-import { usKey } from "../input/KeyLabels.js";
-
-/** Physical keys the playground handles, named by their US-layout values. */
-const LAB_KEYS = new Set([
-  " ",
-  ..."ArrowLeft ArrowRight ArrowUp ArrowDown w a s d r Shift".split(" "),
-]);
 
 import { CURVE_TRAIN } from "../railway/CurveTrain.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
@@ -71,8 +64,7 @@ export default function NaturalLandscapePage() {
   const [message, setMessage] = useState("");
   const canvas = useRef<HTMLCanvasElement>(null),
     host = useRef<ScenarioPresentationHost | null>(null);
-  const keys = useRef(new Set<string>()),
-    settings = useRef({ paused, follow, zoom, sounds, watchAnimal });
+  const settings = useRef({ paused, follow, zoom, sounds, watchAnimal });
   settings.current = { paused, follow, zoom, sounds, watchAnimal };
   const custom = caseId === "explore",
     presentation = naturalCasePresentation(caseId);
@@ -138,7 +130,6 @@ export default function NaturalLandscapePage() {
     setReady(false);
     setError("");
     setPaused(false);
-    keys.current.clear();
     const { camera } = presentation;
     const h = new ScenarioPresentationHost(c, recipe, {
       width: 960,
@@ -184,17 +175,6 @@ export default function NaturalLandscapePage() {
         paused: settings.current.paused,
         zoom: settings.current.zoom,
         terrainPacing: "throughput",
-      }),
-      input: () => ({
-        dx:
-          Number(keys.current.has("ArrowRight") || keys.current.has("d")) -
-          Number(keys.current.has("ArrowLeft") || keys.current.has("a")),
-        dy:
-          Number(keys.current.has("ArrowDown") || keys.current.has("s")) -
-          Number(keys.current.has("ArrowUp") || keys.current.has("w")),
-        jump: keys.current.has(" "),
-        sprinting: keys.current.has("Shift"),
-        reversing: keys.current.has("r"),
       }),
       onFrame: (h) => {
         const sound = audio.current,
@@ -483,7 +463,6 @@ export default function NaturalLandscapePage() {
         if (active) setError(String(e));
       });
     const release = () => {
-      keys.current.clear();
       audioFocused.current = false;
       audio.current?.stopCreatureCalls();
     };
@@ -499,7 +478,6 @@ export default function NaturalLandscapePage() {
       footsteps.current = null;
       audioTime.current = 0;
       host.current = null;
-      keys.current.clear();
       delete c.dataset.ready;
       window.removeEventListener("blur", release);
       window.removeEventListener("focus", focus);
@@ -540,16 +518,6 @@ export default function NaturalLandscapePage() {
     useWorkspace.getState().setDraft(noteKey, "");
     setMessage("Review queued for shared save.");
   }
-  const touch = (key: string) => ({
-    onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      e.currentTarget.setPointerCapture(e.pointerId);
-      keys.current.add(key);
-    },
-    onPointerUp: () => keys.current.delete(key),
-    onPointerCancel: () => keys.current.delete(key),
-    onLostPointerCapture: () => keys.current.delete(key),
-  });
   const allowed =
     ready &&
     candidate &&
@@ -764,34 +732,9 @@ export default function NaturalLandscapePage() {
           tabIndex={0}
           aria-label="Natural landscape playground"
           style={{ width: "100%", height: "100%", touchAction: "none" }}
-          onKeyDown={(e) => {
-            if (LAB_KEYS.has(usKey(e))) {
-              e.preventDefault();
-              keys.current.add(usKey(e));
-            }
-          }}
-          onKeyUp={(e) => keys.current.delete(usKey(e))}
-          onBlur={() => keys.current.clear()}
         />
       </div>
       <div className="actions geometry-controls">
-        {[
-          ["←", "ArrowLeft"],
-          ["↑", "ArrowUp"],
-          ["↓", "ArrowDown"],
-          ["→", "ArrowRight"],
-          ["Jump", " "],
-          ["Boost", "Shift"],
-        ].map(([label, key]) => (
-          <button
-            type="button"
-            key={key}
-            {...touch(key ?? "")}
-            onContextMenu={(e) => e.preventDefault()}
-          >
-            {label}
-          </button>
-        ))}
         <button type="button" onClick={() => setPaused(!paused)}>
           {paused ? "Resume" : "Pause"}
         </button>

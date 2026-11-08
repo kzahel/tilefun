@@ -1,5 +1,6 @@
 import type { ActionName } from "./ActionMap.js";
 import { actionHint } from "./InputHints.js";
+import { canvasPoint, type ViewRegion, wholeCanvas, withCssPixels } from "./ViewRect.js";
 
 /** Named action paddles, shared by touch, mouse, keyboard and controller hints. */
 const BTN_RADIUS = 28;
@@ -20,6 +21,7 @@ export class TouchButtons {
   emergency = false;
   warning = false;
   emergencyState = 2;
+  region: ViewRegion | null = null; // layout region in canvas CSS px; null = whole canvas
   private mouseButton: number | null = null;
   private hornPressLatched = false;
   consumeHornPress(): boolean {
@@ -122,7 +124,9 @@ export class TouchButtons {
   /** Touch actions on foot; driving actions also remain available with a mouse. */
   draw(ctx: CanvasRenderingContext2D): void {
     if (!this.enabled) return;
-
+    withCssPixels(ctx, this.canvas, () => this.drawButtons(ctx));
+  }
+  private drawButtons(ctx: CanvasRenderingContext2D): void {
     const positions = this.getPositions();
     for (let i = 0; i < this.buttons.length; i++) {
       const btn = this.buttons[i];
@@ -167,14 +171,13 @@ export class TouchButtons {
     }
   }
 
-  /** Compute button center positions based on current canvas size. */
+  /** Button centers in CSS pixels of the canvas, in the bottom-right of the region. */
   getPositions(): { x: number; y: number }[] {
-    const w = this.canvas.clientWidth || this.canvas.width;
-    const h = this.canvas.clientHeight || this.canvas.height;
+    const region = this.region ?? wholeCanvas(this.canvas);
 
     // A (jump) — bottom-right
-    const aX = w - MARGIN - BTN_RADIUS;
-    const aY = h - MARGIN - BTN_RADIUS;
+    const aX = region.x + region.width - MARGIN - BTN_RADIUS;
+    const aY = region.y + region.height - MARGIN - BTN_RADIUS;
     // R (sprint) — left of A
     const rX = aX - SPACING;
     const rY = aY;
@@ -193,7 +196,7 @@ export class TouchButtons {
     ];
   }
 
-  private hitTest(x: number, y: number): number {
+  private hitTest({ x, y }: { x: number; y: number }): number {
     const positions = this.getPositions();
     for (let i = 0; i < positions.length; i++) {
       const pos = positions[i];
@@ -210,8 +213,7 @@ export class TouchButtons {
   private onBlur = (): void => this.reset();
   private onMouseDown = (event: MouseEvent): void => {
     if (!this.enabled || event.button !== 0) return;
-    const rect = this.canvas.getBoundingClientRect();
-    const index = this.hitTest(event.clientX - rect.left, event.clientY - rect.top);
+    const index = this.hitTest(canvasPoint(this.canvas, event.clientX, event.clientY));
     if (index < 0 || this.buttons[index]?.touchId !== null) return;
     const button = this.buttons[index];
     if (!button) return;
@@ -233,10 +235,7 @@ export class TouchButtons {
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
       if (!touch) continue;
-      const btnIdx = this.hitTest(
-        touch.clientX - (this.canvas.getBoundingClientRect?.().left ?? 0),
-        touch.clientY - (this.canvas.getBoundingClientRect?.().top ?? 0),
-      );
+      const btnIdx = this.hitTest(canvasPoint(this.canvas, touch.clientX, touch.clientY));
       if (btnIdx < 0) continue;
       const btn = this.buttons[btnIdx];
       if (!btn) continue;

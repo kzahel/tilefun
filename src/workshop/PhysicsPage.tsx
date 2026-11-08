@@ -12,9 +12,8 @@ import {
   coopRecipe,
   coopScript,
 } from "../scenarios/CoopRecipe.js";
+import { LabInput } from "../scenarios/LabInput.js";
 import { ScenarioClient } from "../scenarios/ScenarioClient.js";
-import type { Movement } from "../shared/Movement.js";
-import { manualCarMovement } from "../traffic/CarControls.js";
 import { boardingDistance, isDrivable, occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { PhysicsViewport } from "./PhysicsViewport.js";
 import "./physics.css";
@@ -23,8 +22,7 @@ export default function PhysicsPage() {
   const root = useRef<HTMLElement>(null),
     left = useRef<HTMLCanvasElement>(null),
     right = useRef<HTMLCanvasElement>(null);
-  const client = useRef<ScenarioClient | null>(null),
-    keys = useRef(new Set<string>());
+  const client = useRef<ScenarioClient | null>(null);
   const [scene, setScene] = useState<CoopCase>(() => {
       const value = new URLSearchParams(location.search).get("scene");
       return COOP_CASES.find((scene) => scene === value) ?? "push";
@@ -88,45 +86,31 @@ export default function PhysicsPage() {
         /* Failure already displayed. */
       }
     };
-    function manualInput(): Movement {
-      const k = keys.current,
-        pad = controllerInput.movement;
-      const canvasFocused = document.activeElement === a || document.activeElement === b;
-      const movement = {
-        ...COOP_IDLE,
-        dx:
-          Number(k.has("ArrowRight") || k.has("KeyD")) -
-          Number(k.has("ArrowLeft") || k.has("KeyA")) +
-          (canvasFocused ? pad.dx : 0),
-        dy:
-          Number(k.has("ArrowDown") || k.has("KeyS")) -
-          Number(k.has("ArrowUp") || k.has("KeyW")) +
-          (canvasFocused ? pad.dy : 0),
-        jump: k.has("Space") || (canvasFocused && pad.jump),
-        sprinting: k.has("ShiftLeft") || (canvasFocused && pad.sprinting),
-        reversing: k.has("KeyR"),
-      };
-      const replica = state.current.seat ? session.guest : session.host;
-      return replica && occupiedVehicle(replica.view.playerEntity, replica.view.entities)
-        ? manualCarMovement(movement)
-        : movement;
-    }
+    // Two input sets (226 slice 2): each pane's keys, pad and touch drive its own seat
+    // while that pane has focus. The WebGL collider view cannot draw touch buttons.
+    const vehicleKey = (recover: boolean) => () => {
+      if (scene === "vehicle") control(() => vehicleAction(recover));
+    };
+    const inputs = [a, b].map(
+      (canvas) =>
+        new LabInput(canvas, { enter: vehicleKey(false), recover: vehicleKey(true) }, false),
+    );
+    /** One device tick per pane: its own input set, else the scripted or idle seat. */
+    const playSeat = (index: 0 | 1, dt: number) => {
+      const view = (index ? session.guest : session.host)?.view;
+      const played = state.current.script || !view ? undefined : inputs[index]?.tick(view, dt);
+      const idle = state.current.script ? coopScript(scene, tick, index) : COOP_IDLE;
+      for (const press of played?.before ?? []) session.submitPress(press, index);
+      session.submitInput(played?.movement ?? idle, undefined, index);
+      for (const press of played?.after ?? []) session.submitPress(press, index);
+    };
     const loop = new GameLoop({
-      update() {
+      update(dt) {
         try {
           session.pump();
           session.setRunning(!state.current.paused && !document.hidden);
           if (!state.current.paused && !session.busy) {
-            for (const index of [0, 1] as const)
-              session.submitInput(
-                state.current.script
-                  ? coopScript(scene, tick, index)
-                  : index === state.current.seat
-                    ? manualInput()
-                    : COOP_IDLE,
-                undefined,
-                index,
-              );
+            for (const index of [0, 1] as const) playSeat(index, dt);
             tick++;
           }
         } catch (reason) {
@@ -179,9 +163,7 @@ export default function PhysicsPage() {
         }
       },
     });
-    const clear = () => keys.current.clear();
     const visibility = () => {
-      clear();
       loop.stop();
       session.setRunning(false);
       if (!document.hidden && !disposed) loop.start();
@@ -189,14 +171,6 @@ export default function PhysicsPage() {
     const pad = (event: Event) => {
       const command = (event as CustomEvent<ControllerCommand>).detail;
       const focused = document.activeElement;
-      if (
-        scene === "vehicle" &&
-        (focused === a || focused === b) &&
-        (command === "interact" || command === "down")
-      ) {
-        control(() => vehicleAction(command === "down"));
-        return;
-      }
       if (command === "menu")
         root.current?.querySelector<HTMLButtonElement>(".physics-actions button")?.focus();
       else if (command === "back") (state.current.seat ? b : a).focus();
@@ -219,7 +193,6 @@ export default function PhysicsPage() {
     controllerInput.uiActive = () => document.activeElement !== a && document.activeElement !== b;
     controllerInput.start();
     window.addEventListener(CONTROLLER_EVENT, pad);
-    window.addEventListener("blur", clear);
     document.addEventListener("visibilitychange", visibility);
     void session.ready
       .then(() => {
@@ -233,32 +206,14 @@ export default function PhysicsPage() {
       loop.stop();
       session.dispose();
       for (const view of views) view.dispose();
+      for (const input of inputs) input.dispose();
       controllerInput.stop();
       controllerInput.uiActive = () => false;
       window.removeEventListener(CONTROLLER_EVENT, pad);
-      window.removeEventListener("blur", clear);
       document.removeEventListener("visibilitychange", visibility);
-      clear();
       if (client.current === session) client.current = null;
     };
   }, [scene, control, vehicleAction]);
-  const touch = (key: string, label: string) => (
-    <button
-      type="button"
-      onPointerDown={(event) => {
-        event.preventDefault();
-        event.currentTarget.setPointerCapture(event.pointerId);
-        keys.current.add(key);
-      }}
-      onPointerUp={(event) => {
-        keys.current.delete(key);
-        event.currentTarget.releasePointerCapture(event.pointerId);
-      }}
-      onLostPointerCapture={() => keys.current.delete(key)}
-    >
-      {label}
-    </button>
-  );
   return (
     <section className="physics-lab pair-lab" ref={root}>
       <header>
@@ -352,38 +307,9 @@ export default function PhysicsPage() {
                 ref={index ? right : left}
                 tabIndex={0}
                 aria-label={index ? "Guest physics view" : "Host physics view"}
-                onFocus={() => {
-                  keys.current.clear();
-                  setSeat(index);
-                }}
-                onBlur={() => keys.current.clear()}
+                onFocus={() => setSeat(index)}
                 onPointerDown={(event) => event.currentTarget.focus()}
-                onKeyDown={(event) => {
-                  if (scene === "vehicle" && (event.code === "KeyE" || event.code === "KeyF")) {
-                    event.preventDefault();
-                    if (!event.repeat) control(() => vehicleAction(event.code === "KeyF"));
-                    return;
-                  }
-                  if (
-                    [
-                      "KeyW",
-                      "KeyA",
-                      "KeyS",
-                      "KeyD",
-                      "ArrowUp",
-                      "ArrowDown",
-                      "ArrowLeft",
-                      "ArrowRight",
-                      "Space",
-                      "KeyR",
-                      "ShiftLeft",
-                    ].includes(event.code)
-                  ) {
-                    event.preventDefault();
-                    keys.current.add(event.code);
-                  }
-                }}
-                onKeyUp={(event) => keys.current.delete(event.code)}
+                style={{ touchAction: "none" }}
               />
             </div>
           </div>
@@ -403,18 +329,10 @@ export default function PhysicsPage() {
           </button>
         </div>
       )}
-      <div className="physics-touch pair-touch">
-        <div>
-          {touch("ArrowLeft", "←")}
-          {touch("ArrowUp", "↑")}
-          {touch("ArrowDown", "↓")}
-          {touch("ArrowRight", "→")}
-        </div>
-        {touch("Space", "Jump")}
-      </div>
       <p className="physics-hints">
-        WASD / arrows + Space. Controller: left stick + A; LB switches player; Menu opens controls;
-        D-pad navigates; A confirms; B returns to play. Touch controls move the selected player.
+        Focus a pane: WASD / arrows + Space. Controller: left stick + A; LB switches player; Menu
+        opens controls; D-pad navigates; A confirms; B returns to play. Touch: drag on a pane to
+        move its player.
         {scene === "vehicle" &&
           " Enter the car before driving. ↑/W forward, ↓/S reverse, ←/→ or A/D steer. Both panes follow it; switch player to try the guest controls under latency. "}
       </p>

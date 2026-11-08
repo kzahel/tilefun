@@ -2,12 +2,6 @@ import { closeAssets, type GameAssets, loadGameAssets } from "../assets/GameAsse
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { GameLoop } from "../core/GameLoop.js";
 import type { Entity } from "../entities/Entity.js";
-import {
-  CONTROLLER_EVENT,
-  type ControllerCommand,
-  controllerInput,
-} from "../input/ControllerInput.js";
-import { eventCode } from "../input/KeyLabels.js";
 import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
 import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { presentInterior } from "../interiors/presentInterior.js";
@@ -24,9 +18,8 @@ import { SceneFrame } from "../rendering/SceneFrame.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import type { Movement } from "../shared/Movement.js";
-import { manualCarMovement } from "../traffic/CarControls.js";
-import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
+import { LabInput } from "./LabInput.js";
 import { ScenarioClient } from "./ScenarioClient.js";
 import type { ScenarioCommand } from "./ScenarioProtocol.js";
 import type { ScenarioRecipe } from "./ScenarioRecipe.js";
@@ -58,7 +51,9 @@ export interface ScenarioPresentationOptions {
   /** Borrowed frame/camera, consumed synchronously through either renderer backend. */
   underlay?(frame: OverlayFrame, host: ScenarioPresentationHost): void;
   overlay?(frame: OverlayFrame, host: ScenarioPresentationHost): void;
-  input(): Movement;
+  /** Transitional: the interiors playtest's own input (automatic walk, place
+   * mode) until its 226 slice 4a migration. Other labs get the game's controls. */
+  input?(): Movement;
   settings(): { paused: boolean; zoom: number; terrainPacing: TerrainPacing };
   onFrame?(host: ScenarioPresentationHost): void;
   onError(error: unknown): void;
@@ -90,6 +85,8 @@ export class ScenarioPresentationHost {
   private displayedPlayer: Entity | undefined;
   private vehicleControl: VehicleControl | undefined;
   private vehicleControls: boolean;
+  /** The game's controls on this canvas (226 slice 2). */
+  private input: LabInput | undefined;
 
   constructor(
     private readonly canvas: HTMLCanvasElement,
@@ -138,9 +135,12 @@ export class ScenarioPresentationHost {
         this.command({ kind: type, ...fields } as ScenarioCommand),
       );
       if (canvas.parentElement) this.vehicleControl.mountEmbedded(canvas.parentElement);
-      window.addEventListener(CONTROLLER_EVENT, this.vehiclePad);
-      canvas.addEventListener("keydown", this.vehicleKey);
     }
+    if (!this.options.input)
+      this.input = new LabInput(canvas, {
+        enter: () => this.vehicleControl?.activate(),
+        recover: () => this.vehicleControl?.activateEquipment(),
+      });
     this.snapCamera();
     this.visibilityChanged();
   }
@@ -187,25 +187,6 @@ export class ScenarioPresentationHost {
     return typeof fixed === "function" ? fixed(player, alpha) : fixed;
   }
 
-  private get vehicleInputFocused(): boolean {
-    return document.activeElement === this.canvas;
-  }
-  private vehiclePad = (event: Event) => {
-    if (!this.vehicleInputFocused || event.defaultPrevented || this.paused) return;
-    const command = (event as CustomEvent<ControllerCommand>).detail;
-    if (command === "down") this.vehicleControl?.activateEquipment();
-    if (command === "interact") this.vehicleControl?.activate();
-  };
-
-  private vehicleKey = (event: KeyboardEvent) => {
-    const vc = this.vehicleControl,
-      code = eventCode(event); // physical keys, as in the game and its hints
-    if ((code === "KeyF" && vc?.activateEquipment()) || (code === "KeyE" && vc?.activate())) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
-  };
-
   private readonly effects = new ParticleSystem();
 
   private update(dt: number) {
@@ -218,11 +199,6 @@ export class ScenarioPresentationHost {
       return;
     }
     this.poseSeconds = this.options.poseCycle?.() ? this.poseSeconds + dt : 0;
-    if (this.vehicleControls && this.vehicleInputFocused)
-      controllerInput.sample(
-        typeof navigator.getGamepads === "function" ? navigator.getGamepads() : [],
-        performance.now(),
-      );
     this.vehicleControl?.update(this.session.view, true, this.paused);
     if (this.paused) return;
     this.lightSeconds += dt;
@@ -236,20 +212,13 @@ export class ScenarioPresentationHost {
         this.camera.x = fixed.wx;
         this.camera.y = fixed.wy;
       }
-      const raw = this.options.input();
-      const merged =
-        controllerInput.connected && this.vehicleInputFocused && !raw.dx && !raw.dy
-          ? {
-              ...raw,
-              ...controllerInput.movement,
-              jump: raw.jump || controllerInput.movement.jump,
-              sprinting: raw.sprinting || controllerInput.movement.sprinting,
-              reversing: raw.reversing || controllerInput.held.has("reverse"),
-            }
-          : raw;
-      const vehicle = occupiedVehicle(this.session.view.playerEntity, this.session.view.entities);
-      const input = vehicle ? manualCarMovement(merged) : merged;
-      this.interpolate = this.session.submitInput(input, this.camera.getVisibleChunkRange());
+      const scripted = this.options.input?.();
+      const tick = scripted ? undefined : this.input?.tick(this.session.view, dt);
+      const movement = scripted ?? tick?.movement;
+      if (!movement) return;
+      for (const press of tick?.before ?? []) this.session.submitPress(press);
+      this.interpolate = this.session.submitInput(movement, this.camera.getVisibleChunkRange());
+      for (const press of tick?.after ?? []) this.session.submitPress(press);
       if (this.interpolate) {
         this.steps++;
         if (!this.options.fixedCamera)
@@ -375,6 +344,7 @@ export class ScenarioPresentationHost {
       this.drawOverlay(this.options.overlay);
       this.host.endWorld();
       this.options.uiOverlay?.(this.host.uiContext, this);
+      this.input?.draw(this.host.uiContext);
       this.renderX = this.camera.x;
       this.renderY = this.camera.y;
       this.options.onFrame?.(this);
@@ -478,12 +448,9 @@ export class ScenarioPresentationHost {
     this.disposed = true;
     this.loop.stop();
     document.removeEventListener("visibilitychange", this.visibilityChanged);
-    if (this.vehicleControl) {
-      this.vehicleControl.destroy();
-      window.removeEventListener(CONTROLLER_EVENT, this.vehiclePad);
-      controllerInput.reset();
-      this.canvas.removeEventListener("keydown", this.vehicleKey);
-    }
+    this.vehicleControl?.destroy();
+    this.input?.dispose();
+    this.input = undefined;
     this.host?.dispose();
     this.host = undefined;
     this.frame.clear();

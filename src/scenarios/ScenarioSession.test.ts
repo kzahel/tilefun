@@ -1,7 +1,7 @@
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import { RemoteStateView } from "../client/ClientStateView.js";
 import { createPlayer } from "../entities/Player.js";
-import { decodeServerMessage } from "../shared/binaryCodec.js";
+import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import { World } from "../world/World.js";
 import { naturalLandscapeRecipe } from "./NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe, scenarioWalls } from "./ScenarioRecipe.js";
@@ -111,5 +111,27 @@ it("backfills missing track spectators in seeded chunks without duplicating move
     expect(crowd().some((e) => e.proceduralId === ids[2])).toBe(false);
   } finally {
     await s.close();
+  }
+});
+it("takes horn, siren and throw presses on a seat's ordered input path", async () => {
+  const session = await ScenarioSession.create(recipe);
+  try {
+    const honk = vi.spyOn(session.realm.vehicles, "honk");
+    const emergency = vi.spyOn(session.realm.vehicles, "emergency");
+    session.input(encodeClientMessage({ type: "vehicle-horn", active: true }));
+    session.input(encodeClientMessage({ type: "vehicle-emergency", action: "toggle" }));
+    expect(honk).toHaveBeenCalledWith(session.player, true);
+    expect(emergency).toHaveBeenCalledWith(session.player, "toggle");
+    const balls = () => session.realm.entityManager.entities.filter((e) => e.type === "ball");
+    expect(balls()).toHaveLength(0);
+    session.input(encodeClientMessage({ type: "throw-ball", dirX: 1, dirY: 0, force: 1 }));
+    expect(balls()).toHaveLength(1);
+    // Presses never take part in the seat's input sequence.
+    expect(session.player.lastProcessedInputSeq).toBe(0);
+    expect(() =>
+      session.input(encodeClientMessage({ type: "player-interact", wx: 0, wy: 0 })),
+    ).toThrow("Expected scenario player input");
+  } finally {
+    await session.close();
   }
 });

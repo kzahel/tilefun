@@ -33469,7 +33469,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:738"
+          "source": "src/scenes/PlayScene.ts:680"
         },
         {
           "system": "Gameplay",
@@ -33525,7 +33525,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:738"
+          "source": "src/scenes/PlayScene.ts:680"
         },
         {
           "system": "Gameplay",
@@ -33577,7 +33577,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:738"
+          "source": "src/scenes/PlayScene.ts:680"
         },
         {
           "system": "Gameplay",
@@ -35507,19 +35507,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:96"
+          "source": "src/scenarios/ScenarioSession.ts:99"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:98"
+          "source": "src/scenarios/ScenarioSession.ts:101"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:163"
+          "source": "src/scenarios/ScenarioSession.ts:166"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:243"
+          "source": "src/scenarios/ScenarioSession.ts:246"
         },
         {
           "system": "Gameplay",
@@ -36639,7 +36639,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:655"
+          "source": "src/scenes/PlayScene.ts:597"
         },
         {
           "system": "Gameplay",
@@ -38231,7 +38231,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:355"
+          "source": "src/scenarios/ScenarioPresentationHost.ts:324"
         },
         {
           "system": "Editor",

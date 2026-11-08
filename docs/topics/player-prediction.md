@@ -1,5 +1,14 @@
 # Player prediction and moving contacts
 
+[226](../tactical/226-player-views-and-local-split-screen.md) adds additive
+multi-seat replay (slice 1a: `storeInput(seq, movement, dt, seats)` with co-seat
+movement keyed by controlled body) and, in slice 2, the input side of one
+timeline per device: `devicePacket` puts every local seat under one sequence
+(seat 0 is today's `player-input`) and `predictInput` forwards co-seat movement
+to the predictor. The game has one seat until slice 5, so prediction is
+unchanged; locked ticks still skip `storeInput` (storing them as neutral input
+moves to slice 5, when per-seat locks exist).
+
 [220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) repairs two
 rider handoffs. A new contact anchor uses an available matching-tick comparison;
 selecting its previous pose again added a legitimate movement tick as correction.

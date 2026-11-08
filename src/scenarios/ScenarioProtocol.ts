@@ -6,8 +6,6 @@ export type ScenarioCommand =
   | { kind: "call-train"; benchId: number; seat?: 0 | 1 }
   | { kind: "place-entity"; entityType: string; position: Entity["position"] }
   | { kind: "throw-ball"; dirX: number; dirY: number; force: number }
-  | { kind: "vehicle-horn"; active: boolean }
-  | { kind: "vehicle-emergency"; action: "toggle" | "style" }
   | { kind: "enter-vehicle"; entityId: number; seat?: 0 | 1 }
   | { kind: "exit-vehicle"; seat?: 0 | 1 }
   | { kind: "recover-vehicle"; entityId: number; seat?: 0 | 1 }

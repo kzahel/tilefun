@@ -75,13 +75,16 @@ test("character touch controls release, drafts survive reload, and offline revie
   await page.goto(`${url}?character=cat`);
   const canvas = page.getByLabel("Character movement test");
   await expect(canvas).toHaveAttribute("data-ready", "true");
-  const control = page.getByRole("button", { name: "Character Right", exact: true });
-  await control.scrollIntoViewIfNeeded();
-  const box = await control.boundingBox();
+  // The game's joystick: drag right on the scene (the lab's D-pad was removed in 226 slice 2).
+  await canvas.scrollIntoViewIfNeeded();
+  const box = required(await canvas.boundingBox());
   const cdp = await context.newCDPSession(page);
+  await cdp.send("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 1 });
+  const from = { x: box.x + Math.min(box.width, 390 - box.x) / 3, y: box.y + box.height / 2 };
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [from] });
   await cdp.send("Input.dispatchTouchEvent", {
-    type: "touchStart",
-    touchPoints: [{ x: required(box).x + 10, y: required(box).y + 10 }],
+    type: "touchMove",
+    touchPoints: [{ x: from.x + 60, y: from.y }],
   });
   await expect.poll(async () => Number(await canvas.getAttribute("data-x"))).toBeGreaterThan(2);
   await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });

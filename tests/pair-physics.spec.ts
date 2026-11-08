@@ -86,13 +86,21 @@ test("ordinary two-session Worker lab routes either seat, fences delayed frames,
   await padButton(1, true);
   await expect(guest).toBeFocused();
   await padButton(1, false);
+  // Touch: a drag on the guest pane is the game's joystick for that seat (226 slice 2).
   const touchStart = await x(guest);
-  const right = await page.getByRole("button", { name: "→", exact: true }).boundingBox();
-  if (!right) throw Error("Missing touch movement control");
-  await page.mouse.move(right.x + right.width / 2, right.y + right.height / 2);
-  await page.mouse.down();
+  const box = await guest.boundingBox();
+  if (!box) throw Error("Missing guest view");
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 1 });
+  const from = { x: box.x + box.width / 3, y: box.y + box.height / 2 };
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [from] });
+  await cdp.send("Input.dispatchTouchEvent", {
+    type: "touchMove",
+    touchPoints: [{ x: from.x + 60, y: from.y }],
+  });
   await expect.poll(async () => (await x(guest)) - touchStart).toBeGreaterThan(5);
-  await page.mouse.up();
+  await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
+  await cdp.detach();
   await page.goto("/tilefun/workshop.html#/tool/characters");
   await expect
     .poll(() => page.workers().filter((worker) => worker.url().includes("scenario.worker")).length)

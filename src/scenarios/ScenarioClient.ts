@@ -1,3 +1,4 @@
+import type { SeatPress } from "../input/SeatComposer.js";
 import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import type { Movement } from "../shared/Movement.js";
 import type { BufferedMessage, VehicleHornMessage } from "../shared/protocol.js";
@@ -252,24 +253,34 @@ export class ScenarioClient {
     this.schedulePump();
   }
 
+  private get accepting(): boolean {
+    if (this.failure) throw this.failure;
+    return this.loaded && !this.closed && this.running && !this.busy && this.channel.writable;
+  }
+
+  private sendInput(seat: 0 | 1, buffer: ArrayBuffer, range?: ChunkRange): void {
+    const packet: ScenarioPacket = { type: "input", seat, buffer, ...(range ? { range } : {}) };
+    if (seat === 1) this.guestInputs.push(packet, packet.buffer.byteLength);
+    else this.channel.send(packet);
+  }
+
   /** Submit/predict input only. Realm advances on its own ServerLoop cadence. */
   submitInput(input: Movement, range?: ChunkRange, seat: 0 | 1 = 0): boolean {
-    if (this.failure) throw this.failure;
-    if (!this.loaded || this.closed || !this.running || this.busy || !this.channel.writable)
-      return false;
+    if (!this.accepting) return false;
     const replica = seat === 1 ? this.guest : this.host;
     if (!replica) throw Error("No guest in this scenario");
     const movement = replica.normalize(input),
       seq = ++replica.seq;
-    const packet: ScenarioPacket = {
-      type: "input",
-      seat,
-      buffer: encodeClientMessage({ type: "player-input", ...movement, seq }),
-      ...(range ? { range } : {}),
-    };
-    if (seat === 1) this.guestInputs.push(packet, packet.buffer.byteLength);
-    else this.channel.send(packet);
+    this.sendInput(seat, encodeClientMessage({ type: "player-input", ...movement, seq }), range);
     replica.predict(seq, movement);
+    return true;
+  }
+
+  /** A horn, siren or throw press, ordered with the seat's movement commands. */
+  submitPress(message: SeatPress, seat: 0 | 1 = 0): boolean {
+    if (!this.accepting) return false;
+    if (seat === 1 && !this.guest) throw Error("No guest in this scenario");
+    this.sendInput(seat, encodeClientMessage(message));
     return true;
   }
   async command(command: ScenarioCommand) {

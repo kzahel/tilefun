@@ -2,9 +2,8 @@
 
 Status: phasing set 2026-11-07 after four read-only research reviews (input
 and labs, rendering and performance, authority and prediction, testing and
-decomposition). Slices 0, 1a and 1b are done; slice 2 (input ownership) is in
-progress as 2a (characterize, delete train and XR input) and 2b (per-seat
-composition and lab input). Updated 2026-11-07 for seats on one device session,
+decomposition). Slices 0, 1a, 1b and 2 (input ownership, as 2a and 2b) are
+done; slice 3 (device session and view) is next. Updated 2026-11-07 for seats on one device session,
 online seats and the first-person view requirements from 229.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
@@ -785,3 +784,86 @@ maintaining both shells. The shell import allow-list only shrinks.
     wording, a stale research reference and a line wrap. The `GameClient` host
     getters stay a review note until 2b replaces them. Re-review: ACCEPT (it
     also agreed the smoke failure is the Dvorak hint label, not this slice).
+- 2026-11-08, slice 2b (input ownership, part 2: per-seat composition and lab
+  input):
+  - `src/input/SeatComposer.ts` is the pure per-seat composition: locks,
+    vehicle rules (no jump, reverse, relative steering only for manual or
+    joystick input), quantization, the horn refresh, siren/style press edges
+    that ignore keys held while boarding, throw charge and aim, the jump edge
+    and `lastMovement`. It returns the seat's messages around its movement
+    command. `devicePacket` builds one packet per device tick: every seat shares
+    the sequence, seat 0 is today's `player-input` and other seats ride along as
+    `SeatMovements` keyed by controlled body (the vehicle when driving), which
+    `predictInput` now forwards to the slice 1a predictor. `PlayScene` keeps
+    device sampling (keys, pad, joystick, first-person turning, tap/hold
+    destinations) and calls the composer; `lastMovement` is a getter onto it.
+    All characterization (the original 23, slice 2a's pointer cases and
+    `PlaceControls`) passes unchanged.
+  - Pure pieces with Node tests, no split-screen UI yet: `KeyboardSchemes`
+    (one player keeps today's full map; two sharing players get disjoint
+    left/right one-handed schemes, provisional, and the page owns global keys);
+    `KeyFocus`, wired into `ActionManager` through an optional lab `root` (the
+    game page still takes every key; a lab takes keys, pads and pad commands
+    only while focus is inside it and not on a form control, and releases held
+    keys when focus leaves); `PadAssignment` by `Gamepad.index` (one seat: every
+    pad drives it; several: a pad joins the lowest free seat on a press and keeps
+    it until it disconnects); `ViewRect`, used by `TouchJoystick` and
+    `TouchButtons` to lay out and hit-test in canvas CSS pixels and draw scaled,
+    with optional regions and `viewAt` for split screen. The full-window game
+    canvas is unchanged.
+  - Labs: `src/scenarios/LabInput.ts` (about 60 lines of code) gives
+    `ScenarioPresentationHost` labs the game's play keys (Tab, Escape and digits
+    stay with the page), pads, touch joystick and buttons (drawn only on touch
+    screens) and the composer; E/F reach the vehicle control. Presses travel on
+    the seat's ordered input path: `ScenarioClient.submitPress` →
+    `ScenarioSession.input`, which accepts horn, siren and throw (the unused
+    horn/siren `ScenarioCommand` kinds were removed). Deleted: the host's
+    vehicle key/pad handlers, controller sampling and car-input merge, and the
+    private keys, HTML arrow buttons and Characters D-pad of World geometry,
+    Natural landscape, Characters and Asset movement, plus the physics lab's
+    key set and touch arrows. The physics lab runs one `LabInput` per pane.
+  - Deferred, with reasons:
+    - Storing locked ticks as neutral predictor input and replacing the extra
+      `cancelInput` sequence with per-seat neutral input move to slice 5. With
+      one seat every lock is device-wide, and the change alters prediction
+      during doors and menus, so it ships with per-seat locks.
+    - The furniture/interiors playtest keeps its own input through a
+      transitional host `input` option until slice 4a. Its automatic walk and
+      place mode are lab instruments, and its D-pad and Jump button drive the
+      view offset under browser tests.
+    - The page-level pad poller replacing the `controllerInput` singleton is
+      slice 3; the real-keyboard rollover check for two schemes is a slice 5
+      device acceptance item.
+    - `LabShellConsumers` does not shrink: the pages still construct the host.
+  - Lab regressions (recorded in the embedded labs topic): the physics lab's
+    WebGL panes cannot draw touch controls, so touch drags steer but have no
+    Jump until slice 6; the Characters D-pad becomes a drag on the scene.
+  - Ratchet baselines tightened: `PlayScene` 792 → 734 lines (worst complexity
+    104 → 79), `ScenarioPresentationHost` 498 → 465, `PhysicsPage` 425 → 343,
+    `WorldGeometryPage` 459 → 369 (one fewer over-limit function),
+    `NaturalLandscapePage` 902 → 839, `TouchButtons` 267 → 266.
+  - Validation: `tsc` for all four configs, Biome, knip, ratchet (only other
+    sessions' `src/rendering` failures), focused vitest (80 files, 842 tests),
+    38 of 38 seeded single-line faults across the new code fail the suites
+    (five needed added cases first; one exposed a host test whose 25 ms frames
+    sometimes ran two updates), regenerated inventories (line references only),
+    production build, and Playwright in bundled Chromium: smoke 27 of 28 (the
+    same Dvorak hint-label failure as 2a) and all 51 lab and input specs
+    (world geometry including phone joystick touch, pair physics, characters,
+    outdoor, natural landscapes, furniture playtest, vehicle workshop, train
+    recovery, car controls, scenario lifecycle, jump park, tap movement).
+  - Review (Yep Anywhere, Opus 5.5 high): CHANGES REQUESTED for one blocking
+    finding: labs on desktop kept enabled but undrawn touch buttons, so a click
+    near a lab canvas's lower right jumped or threw and blocked canvas focus.
+    Fixed: `LabInput` enables action buttons only on touch screens (rechecked
+    each tick); a host test clicks the Jump position with `maxTouchPoints` 0 and
+    5 and fails if the fix is reverted. Also taken: `devicePacket` rejects two
+    seats controlling the same body, and the host test checks presses precede
+    movement. Left as notes: throws on the press path skip the command path's
+    validation (as in the game's `GameServer` path); a siren or throw press is
+    dropped if the session is briefly not accepting, and a jump pressed while a
+    lab is paused fires on resume; `throwDirection` still lives under
+    `scenes/`; `board()` must precede `tick()` each tick. The reviewer accepted
+    all four deferrals and the adapter's size. After the fix the six lab specs
+    that touch lab canvases were re-run on a fresh build (24 passed).
+    Re-review: ACCEPT.

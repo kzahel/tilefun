@@ -65,6 +65,18 @@ or credentials in this repository.
   override. D-pad Up/L toggles vehicle
   lights and D-pad Right/K changes siren style. Jump/Throw retain their meanings.
   Named on-screen paddles and interaction prompts follow the last input source.
+- Local players (226 slice 2; pure pieces, no split-screen UI until slice 5):
+  `PadAssignment` maps standard pads by `Gamepad.index` — with one seat every pad
+  drives it (today's single active source); with several, a pad joins the lowest
+  free seat on its first button press and keeps it until it disconnects.
+  `KeyboardSchemes` keep one player's full map, or give two sharing players
+  disjoint one-handed schemes (left: WASD, Space, LShift, Q, R, Z, X, F, E;
+  right: arrows, Slash, RShift, Period, Comma, L, K, Semicolon, Quote; provisional)
+  while the page shell owns Escape, map, debug, console, editor, zoom and first
+  person. `KeyFocus`: the game page takes keys from the whole window (its DOM UI
+  stops what it consumes); an embedded lab takes keys and pads only while focus
+  is inside it and not on a form control. A real-keyboard rollover check for two
+  schemes remains a slice 5 device acceptance item.
 - Public invitation links use the hosted game URL, while entering a code/link
   keeps the current installation's origin. P2P needs internet signaling and
   suitable peer connectivity; no new TURN relay is provided.

@@ -3,7 +3,9 @@ import type { Prop } from "../entities/Prop.js";
 import type { Movement } from "../shared/Movement.js";
 import type { World } from "../world/World.js";
 import type { PlayerPredictor } from "./PlayerPredictor.js";
-/** Shared ordering: retain the exact submitted command before predicting it. */
+import type { SeatMovements } from "./SeatInputs.js";
+/** Shared ordering: retain the exact submitted command before predicting it.
+ * `seats` carries the device's other local seats under the same sequence (226). */
 export function predictInput(
   predictor: PlayerPredictor,
   seq: number,
@@ -12,7 +14,8 @@ export function predictInput(
   world: World,
   props: readonly Prop[],
   entities: readonly Entity[],
+  seats?: SeatMovements,
 ) {
-  predictor.storeInput(seq, movement, dt);
+  predictor.storeInput(seq, movement, dt, seats);
   predictor.update(dt, movement, world, props, entities);
 }

@@ -228,8 +228,8 @@
       "overLimit": 1
     },
     "src/input/TouchButtons.ts": {
-      "lines": 267,
-      "worst": 30,
+      "lines": 266,
+      "worst": 29,
       "overLimit": 1
     },
     "src/interiors/AdvancedSuite.ts": {
@@ -568,7 +568,7 @@
       "overLimit": 1
     },
     "src/scenarios/ScenarioPresentationHost.ts": {
-      "lines": 498,
+      "lines": 465,
       "worst": 27,
       "overLimit": 1
     },
@@ -588,8 +588,8 @@
       "overLimit": 1
     },
     "src/scenes/PlayScene.ts": {
-      "lines": 792,
-      "worst": 104,
+      "lines": 734,
+      "worst": 79,
       "overLimit": 2
     },
     "src/scenes/PropEditorScene.ts": {
@@ -883,7 +883,7 @@
       "overLimit": 1
     },
     "src/workshop/NaturalLandscapePage.tsx": {
-      "lines": 902,
+      "lines": 839,
       "worst": 32,
       "overLimit": 2
     },
@@ -893,7 +893,7 @@
       "overLimit": 1
     },
     "src/workshop/PhysicsPage.tsx": {
-      "lines": 425,
+      "lines": 343,
       "worst": 45,
       "overLimit": 2
     },
@@ -923,9 +923,9 @@
       "overLimit": 1
     },
     "src/workshop/WorldGeometryPage.tsx": {
-      "lines": 459,
+      "lines": 369,
       "worst": 33,
-      "overLimit": 2
+      "overLimit": 1
     }
   }
 }

@@ -11,7 +11,6 @@ import {
   parseCharacterSettings,
 } from "../characters/CharacterCatalog.js";
 import { PIXEL_SCALE } from "../config/constants.js";
-import { usKey } from "../input/KeyLabels.js";
 import { characterRecipe } from "../scenarios/CharacterRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 import { required } from "../shared/required.js";
@@ -179,8 +178,6 @@ function CharacterInspector({
   const [verified, setVerified] = useState<Awaited<
     ReturnType<typeof buildCharacterCandidate>
   > | null>(null);
-  const keys = useRef(new Set<string>()),
-    pointers = useRef(new Map<number, string>());
   const latest = useRef({ settings, overlays, zoom, cycle });
   latest.current = { settings, overlays, zoom, cycle };
   const presentation = useRef<ScenarioPresentationHost | null>(null);
@@ -215,15 +212,6 @@ function CharacterInspector({
     setError("");
     setMessage("");
     c.dataset.ready = "false";
-    const release = () => {
-      keys.current.clear();
-      pointers.current.clear();
-    };
-    release();
-    const up = (e: KeyboardEvent) => keys.current.delete(usKey(e).toLowerCase());
-    window.addEventListener("keyup", up);
-    window.addEventListener("blur", release);
-    document.addEventListener("visibilitychange", release);
     const reportError = (e: unknown) => {
       if (active) {
         c.dataset.ready = "false";
@@ -251,19 +239,6 @@ function CharacterInspector({
         zoom: latest.current.zoom / PIXEL_SCALE,
         terrainPacing: "throughput",
       }),
-      input: () => {
-        const held = new Set([...keys.current, ...pointers.current.values()]);
-        return {
-          dx:
-            Number(held.has("arrowright") || held.has("d")) -
-            Number(held.has("arrowleft") || held.has("a")),
-          dy:
-            Number(held.has("arrowdown") || held.has("s")) -
-            Number(held.has("arrowup") || held.has("w")),
-          jump: held.has(" "),
-          sprinting: false,
-        };
-      },
       underlay: characterGrid,
       overlay: (frame, h) => characterOverlay(frame, h, settings, latest.current.overlays),
       onFrame: (h) => {
@@ -292,10 +267,6 @@ function CharacterInspector({
       c.dataset.ready = "false";
       host.dispose();
       presentation.current = null;
-      release();
-      window.removeEventListener("keyup", up);
-      window.removeEventListener("blur", release);
-      document.removeEventListener("visibilitychange", release);
     };
   }, [def, settings, verified]);
   useEffect(() => {
@@ -339,62 +310,17 @@ function CharacterInspector({
               ref={canvas}
               tabIndex={0}
               aria-label="Character movement test"
-              onKeyDown={(e) => {
-                const k = usKey(e).toLowerCase(); // physical position, like the game
-                if (
-                  [
-                    "arrowup",
-                    "arrowdown",
-                    "arrowleft",
-                    "arrowright",
-                    "w",
-                    "a",
-                    "s",
-                    "d",
-                    " ",
-                  ].includes(k)
-                ) {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  keys.current.add(k);
-                }
-              }}
-              onBlur={() => keys.current.clear()}
+              style={{ touchAction: "none" }}
             />
           </div>
           <p>
-            Focus the scene: arrows / WASD to walk, Space to jump. Hold the buttons on touch
-            screens. Grid: 16px.
+            Focus the scene: arrows / WASD or a controller to walk, Space to jump. On touch screens,
+            drag on the scene to walk and use its Jump button. Grid: 16px.
           </p>
           <div className="character-controls">
-            {[
-              ["Left", "arrowleft"],
-              ["Up", "arrowup"],
-              ["Down", "arrowdown"],
-              ["Right", "arrowright"],
-              ["Jump", " "],
-            ].map(([label, k]) => (
-              <button
-                type="button"
-                key={k}
-                aria-label={`Character ${label}`}
-                style={{ touchAction: "none" }}
-                onPointerDown={(e) => {
-                  e.currentTarget.setPointerCapture(e.pointerId);
-                  pointers.current.set(e.pointerId, required(k));
-                }}
-                onPointerUp={(e) => pointers.current.delete(e.pointerId)}
-                onPointerCancel={(e) => pointers.current.delete(e.pointerId)}
-                onLostPointerCapture={(e) => pointers.current.delete(e.pointerId)}
-              >
-                {label}
-              </button>
-            ))}
             <button
               type="button"
               onClick={() => {
-                keys.current.clear();
-                pointers.current.clear();
                 void presentation.current
                   ?.command({ kind: "teleport", position: { wx: 0, wy: 8 } })
                   .catch((e) => setError(String(e)));
@@ -413,16 +339,7 @@ function CharacterInspector({
               Geometry overlays
             </label>
             <label>
-              <input
-                type="checkbox"
-                checked={cycle}
-                onChange={(e) => {
-                  // Leaving inspection never resumes a stale gameplay press.
-                  keys.current.clear();
-                  pointers.current.clear();
-                  setCycle(e.target.checked);
-                }}
-              />{" "}
+              <input type="checkbox" checked={cycle} onChange={(e) => setCycle(e.target.checked)} />{" "}
               Cycle poses in place (pauses movement)
             </label>
             <label>

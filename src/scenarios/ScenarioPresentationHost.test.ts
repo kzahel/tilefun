@@ -1,7 +1,9 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import type { GameAssets } from "../assets/GameAssets.js";
+import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import type { RenderPass } from "../rendering/RenderFrame.js";
+import { createVehicle } from "../traffic/Vehicle.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "./ScenarioRecipe.js";
 
 const recipe: ScenarioRecipe = {
@@ -23,6 +25,7 @@ const mocks = vi.hoisted(() => ({
   collect: vi.fn(() => []),
   terrain: vi.fn(),
   submitInput: vi.fn(() => true),
+  submitPress: vi.fn(() => true),
   pump: vi.fn(),
   setRunning: vi.fn(),
   diagnostics: vi.fn(),
@@ -44,7 +47,8 @@ vi.mock("./ScenarioClient.js", () => ({
   ScenarioClient: class {
     ready = Promise.resolve();
     view = {
-      playerEntity: { position: { wx: 80, wy: 160 } },
+      playerEntity: { id: 1, position: { wx: 80, wy: 160 } } as Entity,
+      entities: [] as Entity[],
       get presentedPlayerEntity() {
         return this.playerEntity;
       },
@@ -55,6 +59,7 @@ vi.mock("./ScenarioClient.js", () => ({
       cameraPresentation: { time: 0, domain: "remote" },
     };
     submitInput = mocks.submitInput;
+    submitPress = mocks.submitPress;
     pump = mocks.pump;
     setRunning = mocks.setRunning;
     getDiagnostics = mocks.diagnostics;
@@ -277,3 +282,120 @@ it("uses the moving diagnostic camera for streaming as well as drawing", async (
   );
   host.dispose();
 });
+
+it("without its own input, a lab plays with the game's controls while its canvas has focus", async () => {
+  const win = new EventTarget();
+  const canvas = Object.assign(new EventTarget(), {
+    tagName: "CANVAS",
+    width: 960,
+    height: 600,
+    contains: (node: unknown) => node === canvas,
+    getBoundingClientRect: () => ({ left: 0, top: 0, width: 960, height: 600 }),
+  });
+  vi.stubGlobal("window", win);
+  vi.stubGlobal("navigator", { maxTouchPoints: 0 });
+  Object.assign(document, { activeElement: canvas, hasFocus: () => true });
+  mocks.factory.mockReturnValue({
+    setAssets: mocks.setAssets,
+    resize: mocks.resize,
+    dispose: mocks.dispose,
+    beginFrame: vi.fn(),
+    beginWorld: vi.fn(),
+    endWorld: vi.fn(),
+    renderer: { assets: new Map(), submit: vi.fn() },
+  });
+  const { input: _scripted, ...gameControls } = options;
+  const host = new ScenarioPresentationHost(canvas as never, recipe, {
+    ...gameControls,
+    terrain: false,
+  });
+  await host.ready;
+  const key = (code: string, target: unknown = canvas) => {
+    const event = Object.assign(new Event("keydown", { cancelable: true }), { code, key: "" });
+    Object.defineProperty(event, "target", { value: target });
+    win.dispatchEvent(event);
+  };
+  let now = performance.now();
+  const tick = () => {
+    now += 17; // exactly one 1/60 s update per frame for the next few frames
+    vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(now);
+  };
+  key("KeyD");
+  key("KeyW", { tagName: "SELECT" }); // a Workshop field keeps its keys
+  tick();
+  expect(mocks.submitInput).toHaveBeenLastCalledWith(
+    expect.objectContaining({ dx: 1, dy: 0, relativeDriving: false }),
+    expect.anything(),
+  );
+  // Seated in a car, the horn rides along with movement as an ordered press.
+  const car = { ...createVehicle("compact-1", 80, 160), id: 7 };
+  host.session.view.playerEntity.parentId = 7;
+  Object.assign(host.session.view, { entities: [host.session.view.playerEntity, car] });
+  key("KeyH");
+  key("KeyW");
+  tick();
+  expect(mocks.submitPress).toHaveBeenCalledWith({ type: "vehicle-horn", active: true });
+  // Presses precede the movement command of the same tick.
+  expect(mocks.submitPress.mock.invocationCallOrder.at(-1)).toBeLessThan(
+    mocks.submitInput.mock.invocationCallOrder.at(-1) ?? 0,
+  );
+  // Steering keeps raw diagonal axes in a car.
+  expect(mocks.submitInput).toHaveBeenLastCalledWith(
+    expect.objectContaining({ dx: 1, dy: -1, jump: false, relativeDriving: true }),
+    expect.anything(),
+  );
+  // A held horn stays on (no release) on the next tick.
+  mocks.submitPress.mockClear();
+  tick();
+  expect(mocks.submitPress).not.toHaveBeenCalledWith({ type: "vehicle-horn", active: false });
+  host.dispose();
+});
+
+it.each([
+  [0, false],
+  [5, true],
+])(
+  "lab touch buttons take mouse clicks only on touch screens (maxTouchPoints %i)",
+  async (points, jumps) => {
+    const win = new EventTarget();
+    const canvas = Object.assign(new EventTarget(), {
+      tagName: "CANVAS",
+      width: 960,
+      height: 600,
+      contains: (node: unknown) => node === canvas,
+      getBoundingClientRect: () => ({ left: 0, top: 0, width: 960, height: 600 }),
+    });
+    vi.stubGlobal("window", win);
+    vi.stubGlobal("navigator", { maxTouchPoints: points });
+    Object.assign(document, { activeElement: canvas, hasFocus: () => true });
+    mocks.factory.mockReturnValue({
+      setAssets: mocks.setAssets,
+      resize: mocks.resize,
+      dispose: mocks.dispose,
+      beginFrame: vi.fn(),
+      beginWorld: vi.fn(),
+      endWorld: vi.fn(),
+      renderer: { assets: new Map(), submit: vi.fn() },
+    });
+    const { input: _scripted, ...gameControls } = options;
+    const host = new ScenarioPresentationHost(canvas as never, recipe, {
+      ...gameControls,
+      terrain: false,
+    });
+    await host.ready;
+    // The Jump button's centre: 960 − 24 − 28, 600 − 24 − 28 (CSS px of the canvas).
+    const press = Object.assign(new Event("mousedown", { cancelable: true }), {
+      button: 0,
+      clientX: 908,
+      clientY: 548,
+    });
+    canvas.dispatchEvent(press);
+    vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(performance.now() + 17);
+    expect(press.defaultPrevented).toBe(jumps);
+    expect(mocks.submitInput).toHaveBeenLastCalledWith(
+      expect.objectContaining({ jump: jumps }),
+      expect.anything(),
+    );
+    host.dispose();
+  },
+);

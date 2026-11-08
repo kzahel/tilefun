@@ -59,7 +59,7 @@ for (const backend of ["canvas", "gpu"]) {
 test.describe("phone controls", () => {
   test.use({ hasTouch: true, viewport: { width: 390, height: 844 } });
 
-  test("geometry controls suppress long-press defaults and release touch input", async ({
+  test("the game's touch joystick on the lab canvas suppresses long-press defaults and releases", async ({
     page,
   }) => {
     await page.goto("/tilefun/workshop.html?renderer=legacy-canvas#/tool/world-geometry");
@@ -68,33 +68,23 @@ test.describe("phone controls", () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
     );
-    const right = page.getByRole("button", { name: "→", exact: true });
-    await right.scrollIntoViewIfNeeded();
-    const buttons = page.locator(".geometry-controls button");
-    for (const button of await buttons.all()) {
-      await expect(button).toHaveCSS("user-select", "none");
-      await expect(button).toHaveCSS("touch-action", "none");
-      // Check the cancelable browser event, including non-movement controls.
-      expect(
-        await button.evaluate((el) =>
-          el.dispatchEvent(
-            new MouseEvent("contextmenu", {
-              bubbles: true,
-              cancelable: true,
-            }),
-          ),
-        ),
-      ).toBe(false);
-    }
+    // The lab's own arrow buttons are gone (226 slice 2); the canvas is the control surface.
+    await expect(page.locator(".geometry-controls")).toHaveCount(0);
+    await expect(c).toHaveCSS("touch-action", "none");
     const cdp = await page.context().newCDPSession(page);
     for (const end of ["touchEnd", "touchCancel"] as const) {
       await page.getByRole("button", { name: "ramp", exact: true }).tap();
       await expect(c).toHaveAttribute("data-player-x", "-216");
-      await right.scrollIntoViewIfNeeded();
-      const box = await right.boundingBox();
-      if (!box) throw new Error("Movement button is not visible");
-      const point = { x: box.x + box.width / 2, y: box.y + box.height / 2 };
-      await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [point] });
+      await c.scrollIntoViewIfNeeded();
+      const box = await c.boundingBox();
+      if (!box) throw new Error("Lab canvas is not visible");
+      // Drag the joystick right from the canvas's left third, then hold there.
+      const start = { x: box.x + box.width / 3, y: box.y + box.height / 2 };
+      await cdp.send("Input.dispatchTouchEvent", { type: "touchStart", touchPoints: [start] });
+      await cdp.send("Input.dispatchTouchEvent", {
+        type: "touchMove",
+        touchPoints: [{ x: start.x + 60, y: start.y }],
+      });
       // Deliberately hold beyond the browser's long-press threshold.
       await page.waitForTimeout(900);
       const heldX = Number(await c.getAttribute("data-player-x"));

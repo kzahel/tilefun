@@ -67,7 +67,6 @@ export default function WorldGeometryPage({
 function GeometryFixtures({ initial }: { initial: string }) {
   const canvas = useRef<GeometryCanvas>(null),
     scene = useRef<ScenarioPresentationHost | null>(null);
-  const keys = useRef(new Set<string>());
   const audio = useRef<AudioManager | null>(null),
     audioFocused = useRef(true);
   const [sounds, setSounds] = useState(false);
@@ -118,7 +117,6 @@ function GeometryFixtures({ initial }: { initial: string }) {
     const c = required(canvas.current);
     let alive = true,
       lastStatus = "";
-    keys.current.clear();
     setError("");
     setPaused(false);
     const view = geometryView({ fixture, generated, ambient });
@@ -132,17 +130,6 @@ function GeometryFixtures({ initial }: { initial: string }) {
         paused: settings.current.paused,
         zoom: view.zoom,
         terrainPacing: "throughput",
-      }),
-      input: () => ({
-        dx:
-          Number(keys.current.has("ArrowRight") || keys.current.has("d")) -
-          Number(keys.current.has("ArrowLeft") || keys.current.has("a")),
-        dy:
-          Number(keys.current.has("ArrowDown") || keys.current.has("s")) -
-          Number(keys.current.has("ArrowUp") || keys.current.has("w")),
-        jump: keys.current.has(" "),
-        sprinting: keys.current.has("Shift"),
-        reversing: keys.current.has("r"),
       }),
       onFrame: (h) => {
         const p = h.session.view.playerEntity,
@@ -220,7 +207,6 @@ function GeometryFixtures({ initial }: { initial: string }) {
         if (alive) setError(String(reason));
       });
     const release = () => {
-      keys.current.clear();
       audioFocused.current = false;
       audio.current?.stopCarEngine();
     };
@@ -241,23 +227,12 @@ function GeometryFixtures({ initial }: { initial: string }) {
       delete c.__presentationDiagnostics;
       host.dispose();
       scene.current = null;
-      keys.current.clear();
       audio.current?.stopCarEngine();
       window.removeEventListener("blur", release);
       window.removeEventListener("focus", focus);
       document.removeEventListener("visibilitychange", visibilityChange);
     };
   }, [recipe, restart, generated, fixture, vehicle]);
-  const touch = (key: string) => ({
-    onPointerDown: (e: React.PointerEvent<HTMLButtonElement>) => {
-      e.preventDefault();
-      e.currentTarget.setPointerCapture(e.pointerId);
-      keys.current.add(key);
-    },
-    onPointerUp: () => keys.current.delete(key),
-    onPointerCancel: () => keys.current.delete(key),
-    onLostPointerCapture: () => keys.current.delete(key),
-  });
   return (
     <section>
       <p className="eyebrow">SHARED GAME PHYSICS</p>
@@ -387,49 +362,8 @@ function GeometryFixtures({ initial }: { initial: string }) {
           aria-label="World geometry scene"
           tabIndex={0}
           style={{ display: "block", width: "100%", touchAction: "none" }}
-          onKeyDown={(e) => {
-            if (
-              [
-                "ArrowUp",
-                "ArrowDown",
-                "ArrowLeft",
-                "ArrowRight",
-                "w",
-                "a",
-                "s",
-                "d",
-                " ",
-                "r",
-                "Shift",
-              ].includes(e.key)
-            ) {
-              e.preventDefault();
-              keys.current.add(e.key);
-            }
-          }}
-          onKeyUp={(e) => keys.current.delete(e.key)}
-          onBlur={() => keys.current.clear()}
         />
       </div>
-      <fieldset className="actions geometry-controls" aria-label="Movement controls">
-        {[
-          ["←", "ArrowLeft"],
-          ["↑", "ArrowUp"],
-          ["↓", "ArrowDown"],
-          ["→", "ArrowRight"],
-          ["Jump", " "],
-          ["Boost", "Shift"],
-        ].map(([label, key]) => (
-          <button
-            key={key}
-            type="button"
-            onContextMenu={(e) => e.preventDefault()}
-            {...touch(key ?? "")}
-          >
-            {label}
-          </button>
-        ))}
-      </fieldset>
     </section>
   );
 }
