@@ -1,4 +1,8 @@
-import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
+import {
+  type ConnectionIdentity,
+  type IServerTransport,
+  isConnectionId,
+} from "../transport/Transport.js";
 import { PlayerSession, seatSessionId } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import type { RealmDirectory } from "./RealmDirectory.js";
@@ -93,16 +97,17 @@ export class SessionRegistry {
     // New connection: create session
     const session = this.create(clientId, identity?.displayName);
     if (identity) {
-      session.profileId = identity.profileId;
-      this.identify(session, identity.profileId, identity.displayName);
+      const profileId = isConnectionId(identity.profileId) ? identity.profileId : undefined;
+      session.profileId = profileId ?? null;
+      this.identify(session, profileId, identity.displayName);
     }
     return { kind: "new", session };
   }
 
   /**
    * Seat a guest of `host`'s device (226): resume its dormant session, else create one.
-   * Guests have no profile, so they never take one over, and start with the host's
-   * editor mode; the caller seats the player in a realm.
+   * Guests have no profile, so they never take one over; their saved data sits under the
+   * host's. A new guest starts with the host's editor mode; the caller seats its player.
    */
   admitGuest(host: PlayerSession, seat: number, displayName?: string) {
     const clientId = seatSessionId(host.connectionId, seat);
@@ -116,6 +121,7 @@ export class SessionRegistry {
       return { kind: "rejoin" as const, session: existing };
     }
     const session = this.create(clientId);
+    session.guestKey = seatSessionId(host.persistId, seat);
     session.editorEnabled = host.editorEnabled;
     this.identify(session, undefined, displayName);
     return { kind: "new" as const, session };
@@ -191,9 +197,13 @@ export class SessionRegistry {
     this.dormantSessions.clear();
   }
 
-  /** Takeovers serialize behind the old connection's transfer before reading its location. */
+  /**
+   * Takeovers serialize behind the old connection's transfer before reading its location.
+   * A profile id holding the seat separator is ignored: it would share a key with another
+   * profile's guest (226).
+   */
   identify(session: PlayerSession, profileId?: string, displayName?: string): void {
-    if (profileId) {
+    if (isConnectionId(profileId)) {
       if (session.profileId && session.profileId !== profileId) {
         this.deps.transport.send(session.clientId, {
           type: "kicked",

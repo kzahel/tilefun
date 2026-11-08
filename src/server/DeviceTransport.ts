@@ -1,6 +1,10 @@
 import type { ClientMessage, SeatMovement, ServerMessage } from "../shared/protocol.js";
-import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
-import { type PlayerSession, SEAT_SEPARATOR, seatAddress } from "./PlayerSession.js";
+import {
+  type ConnectionIdentity,
+  type IServerTransport,
+  isConnectionId,
+} from "../transport/Transport.js";
+import { type PlayerSession, seatAddress } from "./PlayerSession.js";
 import type { SessionRegistry } from "./SessionRegistry.js";
 
 /** Messages that speak for the whole device, so a seat's envelope never carries one. */
@@ -55,10 +59,10 @@ export class DeviceTransport implements IServerTransport {
     });
   }
 
-  /** A connection id holding the seat separator could pose as another device's seat. */
+  /** The raw transports close such ids; one that gets through is kicked and reaches no seat. */
   onConnect(handler: (connectionId: string, identity?: ConnectionIdentity) => void): void {
     this.raw.onConnect((connectionId, identity) => {
-      if (!connectionId.includes(SEAT_SEPARATOR)) handler(connectionId, identity);
+      if (isConnectionId(connectionId)) handler(connectionId, identity);
       else this.raw.send(connectionId, { type: "kicked", reason: "Invalid connection id." });
     });
   }

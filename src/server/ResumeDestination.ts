@@ -92,7 +92,7 @@ export async function resumeDestination(
   session: PlayerSession,
   fallbackId: string,
 ): Promise<RealmDestination> {
-  const saved = await context.locations?.load(session.profileId || session.clientId);
+  const saved = await context.locations?.load(session.persistId);
   if (saved) {
     const realm = await savedRealm(context.realms, saved);
     const destination =

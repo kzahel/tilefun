@@ -1,5 +1,11 @@
 import { CHUNK_SIZE, TILE_SIZE } from "../config/constants.js";
-import { aabbOverlapsPropWalls, aabbOverlapsSolid, getEntityAABB } from "../entities/collision.js";
+import {
+  type AABB,
+  aabbOverlapsPropWalls,
+  aabbOverlapsSolid,
+  aabbsOverlap,
+  getEntityAABB,
+} from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
 import { descriptorKey } from "../generation/GenerationDescriptor.js";
 import { INTERIOR_DOORWAY, INTERIOR_FLOOR } from "../interiors/GameplayInterior.js";
@@ -17,10 +23,31 @@ export type { Arrival } from "../shared/protocol.js";
  */
 const CONTACT_TOLERANCE = 1 / 32;
 
-/** Bounded terrain + realized prop check before a player leaves the old realm. */
+/** The search reaches 32 tiles; a body's centre can sit this far beyond its edge. */
+const BODY_REACH = 33 * TILE_SIZE + 64;
+
+/** Solid bodies a player arriving near `arrival` must keep clear of. */
+function bodiesNear(realm: Realm, arrival: Arrival): AABB[] {
+  const x = arrival.x * TILE_SIZE,
+    y = arrival.y * TILE_SIZE;
+  return realm.entityManager.entities.flatMap((entity) =>
+    entity.collider &&
+    entity.collider.solid !== false &&
+    Math.abs(entity.position.wx - x) < BODY_REACH &&
+    Math.abs(entity.position.wy - y) < BODY_REACH
+      ? [getEntityAABB(entity.position, entity.collider)]
+      : [],
+  );
+}
+
+/**
+ * Bounded terrain + realized prop check before a player leaves the old realm. With
+ * `clearOfBodies` it also keeps off other bodies, such as a guest's host or its car (226).
+ */
 export async function safeArrival(
   realm: Realm,
   arrival: Arrival,
+  { clearOfBodies = false }: { clearOfBodies?: boolean | undefined } = {},
 ): Promise<{ wx: number; wy: number }> {
   if (
     !Number.isFinite(arrival.x) ||
@@ -42,6 +69,7 @@ export async function safeArrival(
     maxCy: cy + radius,
   });
   realm.realizeProceduralProps();
+  const bodies = clearOfBodies ? bodiesNear(realm, arrival) : [];
   const player = createPlayer(0, 0);
   const collider = player.collider;
   if (!collider) throw new Error("Player collider unavailable.");
@@ -93,6 +121,7 @@ export async function safeArrival(
         .some((prop) => aabbOverlapsPropWalls(aabb, prop.position, prop, 0, 12))
     )
       return null;
+    if (bodies.some((body) => aabbsOverlap(aabb, body))) return null;
     return position;
   };
   const exact = test(arrival.x, arrival.y);

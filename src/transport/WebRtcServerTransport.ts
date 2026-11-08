@@ -3,7 +3,7 @@ import type nodeDataChannelImport from "node-datachannel";
 import { type WebSocket, WebSocketServer } from "ws";
 import { decodeClientMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
-import type { IServerTransport } from "./Transport.js";
+import { type IServerTransport, isConnectionId } from "./Transport.js";
 import { classifyDataChannelLabel, routeServerMessageChannel } from "./webrtcChannels.js";
 import {
   fragmentForDataChannel,
@@ -144,7 +144,7 @@ export class WebRtcServerTransport implements IServerTransport {
   private onSignalConnection(ws: WebSocket, req: IncomingMessage): void {
     const url = new URL(req.url ?? "", "http://localhost");
     const uuid = url.searchParams.get("uuid");
-    if (!uuid) {
+    if (!isConnectionId(uuid)) {
       ws.close(4000, "Missing UUID");
       return;
     }

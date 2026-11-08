@@ -8,9 +8,9 @@ authority, lab client and lab view surface, with the WorldGeometry car fixtures
 on the game view) are done, as are 4a-i (all of World geometry on the game
 view), 4a-ii (Outdoor geometry), 4a-iii (Characters), 4a-iv (Interiors
 playtest) and 4a-v (Natural landscape, with the old lab host deleted), which
-completes slice 4a. Slice 4b (server seats) is split into three parts; 4b-i
-(seats on a connection) and 4b-ii (replication per connection and realm) are
-done, and 4b-iii (party travel) is next. Updated 2026-11-07 for seats on one device
+completes slice 4a. Slice 4b (server seats) is complete in three parts: 4b-i
+(seats on a connection), 4b-ii (replication per connection and realm) and
+4b-iii (party travel). Slice 5 (client seats and split screen) is next. Updated 2026-11-07 for seats on one device
 session, online seats and the first-person view requirements from 229; progress
 updated 2026-11-08.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
@@ -431,10 +431,13 @@ maintaining both shells. The shell import allow-list only shrinks.
 
 - Open: zoom per layout. Proposed: measure 0.5 and 0.75 in slice 1b and decide
   on readability and cost.
-- Open: who are local players 2–4? Proposed: guests of the host profile, with a
-  seat-tagged `identify` so chosen profiles can follow.
-- Open: do split-screen players go indoors separately? Proposed: party travel,
-  keeping `realmId` per seat so per-realm replicas remain possible.
+- Decided (autonomous run under the owner's 2026-11-08 instruction to use the
+  proposals; 4b-i): local players 2–4 are guests of the host profile, with a
+  seat-tagged `identify` naming them. Their saved data is keyed under the host's
+  profile and seat (4b-iii). Chosen profiles per seat can follow.
+- Decided (autonomous run, as above; 4b-iii): party travel, keeping `realmId`
+  per seat so per-realm replicas remain possible. Whichever seat asks leads its
+  device through doors and between worlds, and the others follow beside it.
 - Open: does split screen pause everyone when one player opens the menu
   (proposed: yes), and which player controls a menu (proposed: the opener)?
 - Proposed: the two-pane physics lab becomes two device sessions on one page.
@@ -1590,3 +1593,113 @@ maintaining both shells. The shell import allow-list only shrinks.
     - Optional, taken: the slice-5 carried item also covers discarding a replica when its stream ends, and the 4b-i items this part resolves are marked.
     - Optional, declined: also skipping retired seats in the live filter. A retired seat 0 keeps streaming during a takeover save, as at HEAD, and evicted guests are dropped in a microtask.
     - Re-review: ACCEPT. Its one note, a resumed guest's acknowledgement trailing by a tick, is carried to slice 5.
+- 2026-11-08, slice 4b-iii exit list (party travel):
+  - **A device travels together.** Any live seat's travel request leads its device: `join-realm`, `load-world`, `enter-building` and `exit-building` move every awake seat of that connection, and `leave-realm` takes them all to the lobby.
+    - The requesting seat leads. Its destination, door checks and walk-through approach apply to it alone; the other seats follow without them.
+    - A guest no longer travels on its own, so a lone guest in another realm only exists mid-transfer. The per-realm streams of 4b-ii stay, as decided.
+  - **All or none** (`RealmTransitions.moveParty`; `move` is a party of one):
+    - Every seat is checked (not travelling, not replaced), its saved progress is read and its source flushed before any seat leaves.
+    - The seats then move leader first. If any seat's arrival, save or location commit fails, every seat that moved returns to the realm it left with its original body.
+  - **Safe arrival per seat:** followers arrive one tile beside the leader's arrival, each through `safeArrival`, which can now also keep clear of other bodies (the leader, earlier followers, a car). A newly joined guest's arrival beside its host uses the same check (4b-i carried).
+  - **One reply per device:** the leader gets the travel reply and its `player-assigned`; each follower gets only its own `player-assigned`, in its envelope. A deleted world sends one `world-loaded` or `realm-left` per device.
+  - **Startup and return:**
+    - Seats in the lobby after `leave-realm` follow their device into the next realm it joins.
+    - A seat that comes straight back reads its unsaved progress: `SaveManager.loadPlayerData` waits for a save in flight and prefers unwritten player data. The old read could return the previous save, for a single player as well.
+    - A dormant guest whose seat 0 has moved to another realm rejoins beside seat 0, not in place.
+    - Seat 0 still resumes its saved place on connect and rejoin, as today.
+  - **World deletion:** each device with an awake seat in the deleted world moves to the fallback world as one party. Dormant seats move alone, as today.
+  - **Guest persistence:**
+    - Guests save no location, because they always follow seat 0. A resume from the lobby is therefore the device's saved place, and seat 0 leads it whichever seat asks.
+    - Their per-realm player data (gems, mount) is keyed under seat 0's profile and seat (`profile#n`), pinned when the guest is first seated. When seat 0 has no profile it falls back to `connection#n`, as today.
+    - One `persistId` on `PlayerSession` replaces the scattered `profileId || clientId`. Profile ids holding `#` are ignored.
+  - **Refused ids:** the WebSocket, WebRTC and PeerJS server transports close a connection whose id holds the seat separator. `DeviceTransport` still kicks one that gets through.
+  - **Ratchet:** `GameServer.ts` and `Realm.ts` do not grow. Travel, leaving and world evacuation move into a new `DeviceTravel` module. `RealmTransitions` is split into small steps and leaves the baseline.
+  - **Tests** (Node, `memoryServer`/`DeviceHarness`, plus a regional world for doors):
+    - world travel with three guests: one reply, each seat's safe and separate arrival, and the stream through seat 0;
+    - a guest leading a world trip, and door entry and exit led by either seat with the follower away from the door;
+    - rollback when a follower's arrival or a location commit fails;
+    - `leave-realm` and the next join;
+    - a dormant guest pulled beside a moved seat 0;
+    - deleting a world with and without a fallback;
+    - a guest's arrival clear of its host's car;
+    - persistence keys;
+    - the transports' refusals.
+  - **Not in 4b-iii:**
+    - followers' door-walk presentation, because the leader alone walks and the others appear (slice 5);
+    - client seats and split screen (slice 5).
+- 2026-11-08, slice 4b-iii done (exit list met); slice 4b is complete:
+  - **A device travels together** (`src/server/DeviceTravel.ts`):
+    - Any awake seat's `join-realm`, `load-world`, `enter-building` or `exit-building` leads its device. `party(leader)` is the leader, then the connection's other seats that are neither dormant nor replaced.
+    - Only the leader resolves the destination and passes the door and approach checks. The followers come along without them, so a guest at a door can take seat 0 through it from across the room.
+    - `leave-realm` takes every seat to the lobby, and they follow the device into the next realm it joins.
+    - A resume from the lobby is the device's saved place, which only seat 0 keeps. Seat 0 leads it even when a guest asks, and the reply still goes to the guest.
+    - The `GameServer` handlers for world travel, `leave-realm` and world deletion moved into the module, and `DoorTransitions` uses it as its mover. A guest no longer travels alone, so a live guest is only alone in another realm mid-transfer. The per-realm streams of 4b-ii stay, as decided.
+  - **All or none** (`RealmTransitions.moveParty`; `move` is a party of one):
+    - Before any seat leaves, every seat is checked (not travelling, not replaced), its saved progress at the destination is read, and its source is flushed.
+    - The seats then move leader first. If any seat's arrival, the transfer flush or a location commit fails, every moved seat goes back to its realm with its original body, in reverse order.
+    - Single-seat travel keeps HEAD's steps and order. The old 100-line `move` became small steps, and the file leaves the ratchet baseline (it was worst 30).
+  - **Safe arrival per seat:**
+    - Followers arrive one tile right, left or below the leader, in seat order. Each goes through `safeArrival`, whose new `clearOfBodies` refuses positions overlapping solid bodies near the arrival: the leader, earlier followers, a car.
+    - A newly joined guest uses the same check, so it no longer arrives inside the car its host drives (4b-i carried).
+  - **One reply per device:** the leader gets the travel reply and its `player-assigned`; each follower gets only its own `player-assigned`, in its envelope. Player counts go once per world.
+  - **World deletion:** each device with an awake seat in the deleted world leaves as one party, seat 0 leading, with one `world-loaded` (or, without a fallback world, one `realm-left`). Dormant seats move alone, as before.
+  - **Returning seats:**
+    - A dormant guest resumes in place only when it is in seat 0's realm. If seat 0 moved while it was away, it arrives beside seat 0 on seat 0's input sequence.
+    - Seat 0 still resumes its saved place on connect and rejoin.
+    - `SaveManager.loadPlayerData` now waits for a save in flight and prefers unwritten player data. A seat back from the lobby straight away (and a single player doing the same) used to read its previous save.
+  - **Guest persistence:**
+    - `PlayerSession.persistId` replaces the scattered `profileId || clientId` in player data, location resume, ball ownership and work identity.
+    - A guest's key sits under its host's, by seat: `profile#1`, or `connection#1` when seat 0 has no profile, as before.
+      - The key is pinned when the guest is first seated, so a later `identify` cannot orphan its records.
+      - A profile's guests therefore keep their per-realm progress across devices, and remote devices no longer leave one record per device and seat.
+      - Profile ids holding `#` are ignored, so no profile shares a key with another profile's guest.
+    - Guests save no location, because they always follow seat 0.
+  - **Refused ids:** `isConnectionId` (in `src/transport/Transport.ts`, with `SEAT_SEPARATOR`) is checked by the WebSocket, WebRTC and PeerJS server transports, which close such a connection (4b-i carried). `DeviceTransport` still kicks one that gets through.
+  - **Tests:**
+    - `src/server/DeviceTravel.test.ts` (9 cases):
+      - three guests following seat 0 to another world: one reply, each seat's own new body, exact arrivals beside the leader, one count per world, the stream with all four seats, and the device's saved place;
+      - a guest leading the way back, with the reply in its envelope and seat 0's saved place following;
+      - rollback when the second seat's arrival fails and when the location commit fails, then a retry;
+      - `leave-realm` led by a guest; a seat still arriving holding the device's travel; a resume from the lobby where the follower keeps its own progress; a guest's resume led by seat 0 back to seat 0's saved place, with each body announced once;
+      - a dormant guest pulled beside a moved seat 0;
+      - world deletion with a party, an awake device with a dormant guest, a dormant device, and without a fallback;
+      - a guest clear of its host's car, and a party arriving beside the parked car;
+      - persistence keys, no guest locations, each guest's progress back from its own record, a key pinned across a later profile, and a `#` profile id ignored;
+      - doors in a regional world: seat 0 leading in with the guest far from the door, seat 0 refused across the room, and the guest leading out.
+    - `src/transport/ConnectionIds.test.ts` (4 cases): the rule, real WebSocket and WebRTC signaling servers, and PeerJS with a mocked peer.
+    - A `SaveManager` case: unwritten player data, a write in flight or failing, and a save refused before staging.
+    - A `SafeArrival` case: solid bodies avoided only when asked, visual-only ones never.
+    - Two 4b-ii stream cases put a guest alone in another realm through the transitions directly (`strand`), since a guest cannot travel alone any more. The resume case now covers the guest rejoining beside seat 0, in seat 0's stream.
+    - `memoryServer` takes generated worlds, returns its stores, and clears the extra flat worlds' generated chickens, which spawn at random.
+  - **Seeded faults** (isolated worktree): 50 single-line faults over the party transfer, membership, follow path, replies, evacuation, returning guests, body clearance, persistence keys, unsaved reads, profile ids and the transports (`/tmp/tilefun-226-4biii/faults.py`).
+    - 43 fail the suites. Five survived at first and now have cases: seat 0's saved place after a guest-led trip, visual-only bodies, a same-world count, a save refused under pressure, and the WebRTC refusal.
+    - A sixth survivor showed that re-pinning a resumed guest's key would itself orphan its records, so the key is now pinned once.
+    - Seven survive as defensive lines:
+      - replaced seats, which can never be in an awake device's party (two);
+      - a follower arriving from a different realm than its leader, whose flushes, unload hint and counts have no observable effect (four);
+      - the final per-follower reset, which no frame can observe because travelling seats are never streamed.
+  - **Ratchet:**
+    - `GameServer.ts` goes 962 → 902 lines.
+    - `Realm.ts` goes 1,344 → 1,341.
+    - `RealmTransitions.ts` leaves the baseline.
+  - **Validation:**
+    - `npm run typecheck` (four configs), Biome on the changed files, knip.
+    - The ratchet: only other sessions' entries fail.
+    - Focused vitest over `src/server`, `src/shared`, `src/transport`, `src/input`, `src/scenes`, `src/client`, `src/session`, `src/scenarios`, `src/persistence`, `src/console`, `src/physics` and `src/railway`. The one failure is `MultiSeatPrediction.test.ts` (vehicle). It fails identically on a clean HEAD; 600e09d0 changed the chassis, and it passes at 798ee59f. Carried to slice 5.
+    - `art:catalog` then `workshop:manifest` (line references only), and a production build.
+    - Playwright against the build: the smoke config (28), `p2p-worker` and `scenario-lifecycle` (2), `farm-doors` and `worker-server` (6), and the standalone HTTP/WebSocket suite (3).
+    - `streaming:bench` was not run: streaming and publication are unchanged.
+  - **Carried to slice 5:**
+    - Followers' door presentation: the leader alone walks through the door, and the others appear beside it. The walk-through door with followers (the depart wait) has no case yet.
+    - Followers take terrain height, so when the leader resumes on a deck or roof they land on the ground beside it.
+    - A travelling seat in a deleted world's device makes deletion stop part-way, as one travelling player did before; it now covers the whole device.
+    - The client takes a travel reply from any seat's envelope as its device's, and each seat's new body from `player-assigned` or the frame seat list.
+    - The 1a harness's vehicle case (above) needs its car to outrun the walking seat again under the new chassis.
+    - From 4b-ii: per-realm replicas keyed by realm, a resumed guest's acknowledgement trailing a tick, and replicas started over and discarded with their streams.
+  - **Review** (Yep Anywhere, Opus 5.5 high): ACCEPT, no blocking findings. Optional findings taken:
+    - a guest's resume from the lobby now returns the device to seat 0's saved place, with seat 0 leading. Before, it dragged seat 0 to the world's spawn and overwrote that place;
+    - guest keys pinned when first seated, so a later `identify` cannot orphan their records;
+    - profile ids holding `#` ignored;
+    - a harness comment and a restored spy.
+    - Carried: the door walk with followers, followers on a raised leader, and deletion stopping on any travelling seat of the device. These are listed above.
+    - Re-review: ACCEPT. Its two doc nits (the requesting seat gets the reply; the device resume) are applied.

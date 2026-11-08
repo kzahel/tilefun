@@ -28,6 +28,14 @@ export interface ConnectionIdentity {
   displayName: string;
 }
 
+/** Separates a device connection's id from a seat in a seat's session id (226). */
+export const SEAT_SEPARATOR = "#";
+
+/** A connection id names a device, so it may never pose as another device's seat (226). */
+export function isConnectionId(id: unknown): id is string {
+  return typeof id === "string" && id !== "" && !id.includes(SEAT_SEPARATOR);
+}
+
 export interface IServerTransport {
   /** Backpressure: defer replica publication without dropping delta dependencies. */
   canSend?(clientId?: string): boolean;

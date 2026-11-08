@@ -28,7 +28,7 @@ export function createRealmWorkContext(
 ): WorkContext {
   const getHeight = (x: number, y: number) => realm.world.getHeightAt(x, y);
   const workPlayers = sessions.map((session) => ({
-    identity: session.profileId || session.clientId,
+    identity: session.persistId,
     entity: session.player,
   }));
   const workReady = (point: PositionComponent, radius: number) => {

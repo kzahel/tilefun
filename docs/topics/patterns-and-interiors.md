@@ -136,7 +136,9 @@ and an opt-in refresh for old rooms remain follow-up work.
 
 `PlayerLocationStore` owns one durable current-location record per profile
 (falling back to connection ID for legacy callers), separate from each realm's
-saved visit history. It includes the realm, parent world, generator identity and
+saved visit history. Only a device's own seat has one; its local split-screen
+guests follow it and keep their per-realm records under its profile and seat
+([226](../tactical/226-player-views-and-local-split-screen.md)). It includes the realm, parent world, generator identity and
 player position/progress. Solo startup and multiplayer auto-resume restore it;
 explicit world selection still travels normally. Old saves without a location
 record retain the previous startup fallback until the first checkpoint.

@@ -81,19 +81,22 @@ export class DeviceConnections {
     const { kind, session } = this.deps.sessions.admitGuest(host, seat, name);
     if (msg.playerModel !== undefined) session.playerModel = normalizePlayerModel(msg.playerModel);
     session.debugPaused = host.debugPaused;
-    if (kind === "rejoin" && session.realmId) {
+    if (kind === "rejoin") {
       // The returning device's one timeline: seat 0's sequence, not the old connection's.
       resetInput(session, host.lastProcessedInputSeq);
       applyPlayerModel(session.player, session.playerModel);
-      // Its client holds nothing for this seat yet: restart a stream sent through it, or
-      // resend its own session sync in seat 0's.
-      this.deps.realms.get(session.realmId)?.clearClientRevisions(session.clientId);
-      return session;
+      if (session.realmId === host.realmId) {
+        // Its client holds nothing for this seat yet: resend its session sync in seat 0's stream.
+        realm.clearClientRevisions(session.clientId);
+        return session;
+      }
+      // Seat 0 travelled while it was away (party travel, 226): it arrives beside seat 0.
     }
     try {
       await this.deps.transitions.move(session, async () => ({
         realm,
         arrival: beside(host, realm),
+        clearOfBodies: true,
         allowInterior: true,
         returnLocation: host.returnLocation,
       }));

@@ -2,6 +2,7 @@ import Peer, { type DataConnection } from "peerjs";
 import { encodeServerMessage } from "../shared/binaryCodec.js";
 import { PeerConnectionDiagnostics } from "./PeerConnectionDiagnostics.js";
 import { peerOptions } from "./peerOptions.js";
+import { isConnectionId } from "./Transport.js";
 import type { WorkerClientTransport } from "./WorkerClientTransport.js";
 import type { WorkerPeerLink } from "./WorkerPeerLink.js";
 
@@ -90,8 +91,8 @@ export class PeerHostTransport {
 
   private handleConnection(conn: DataConnection): void {
     const clientId = (conn.metadata as { uuid?: string })?.uuid;
-    if (this.closed || typeof clientId !== "string" || !clientId || clientId === "local") {
-      console.error("[tilefun] PeerJS connection without UUID metadata, closing");
+    if (this.closed || !isConnectionId(clientId) || clientId === "local") {
+      console.error("[tilefun] PeerJS connection without a valid UUID, closing");
       conn.close();
       return;
     }

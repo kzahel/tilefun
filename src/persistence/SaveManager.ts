@@ -202,7 +202,15 @@ export class SaveManager {
     return (raw as SavedMeta) ?? null;
   }
 
+  /**
+   * A player's latest progress, including what is not written yet: a player who left this
+   * realm moments ago (to the lobby, with its device's other seats) rejoins as it left.
+   */
   async loadPlayerData(playerId: string): Promise<SavedPlayerData | null> {
+    // A failed save puts its players back among the unsaved ones.
+    await this.pending;
+    const unsaved = this.dirtyPlayers.get(playerId);
+    if (unsaved) return structuredClone(unsaved);
     const raw = await this.store.get(STORE_PLAYERS, playerId);
     return (raw as SavedPlayerData) ?? null;
   }

@@ -369,8 +369,7 @@ export class Realm {
   }
 
   async preparePlayer(session: PlayerSession): Promise<SavedPlayerData | null> {
-    const persistId = session.profileId || session.clientId;
-    return this.saveManager ? this.saveManager.loadPlayerData(persistId) : null;
+    return this.saveManager ? this.saveManager.loadPlayerData(session.persistId) : null;
   }
 
   async addPlayer(session: PlayerSession, prepared?: SavedPlayerData | null): Promise<void> {
@@ -493,9 +492,7 @@ export class Realm {
 
   /** Mark per-player data dirty so it gets persisted on next save tick. */
   savePlayerData(session: PlayerSession): void {
-    if (!this.saveManager) return;
-    const persistId = session.profileId || session.clientId;
-    this.saveManager.markPlayerDirty(persistId, this.playerData(session));
+    this.saveManager?.markPlayerDirty(session.persistId, this.playerData(session));
   }
 
   playerData(session: PlayerSession): SavedPlayerData {

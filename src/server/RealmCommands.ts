@@ -270,7 +270,7 @@ function throwBall(
   const jitteredSpeed = speed * speedJitter;
   const xySpeed = jitteredSpeed * Math.cos(THROW_ANGLE);
   const zSpeed = jitteredSpeed * Math.sin(THROW_ANGLE);
-  const owner = session.profileId || session.clientId;
+  const owner = session.persistId;
   const reusable = realm.entityManager.entities.find(
     (e) =>
       e.type === "ball" &&

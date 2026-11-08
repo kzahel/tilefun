@@ -38,6 +38,7 @@ import {
 import type { IServerTransport } from "../transport/Transport.js";
 import { DeviceConnections } from "./DeviceConnections.js";
 import { DeviceTransport } from "./DeviceTransport.js";
+import { DeviceTravel } from "./DeviceTravel.js";
 import { DoorTransitions } from "./DoorTransitions.js";
 import { runEquipment } from "./EquipmentControl.js";
 import type { PlayerSession } from "./PlayerSession.js";
@@ -45,7 +46,6 @@ import type { Realm } from "./Realm.js";
 import { RealmDirectory } from "./RealmDirectory.js";
 import { RealmTransitions } from "./RealmTransitions.js";
 import { ResidentTraffic } from "./ResidentTraffic.js";
-import { resumeDestination } from "./ResumeDestination.js";
 import type { Arrival } from "./SafeArrival.js";
 import { ServerLoop } from "./ServerLoop.js";
 import { SessionRegistry } from "./SessionRegistry.js";
@@ -207,6 +207,7 @@ export class GameServer {
   /** Master session list — every connected player, regardless of realm. */
   private readonly sessions: SessionRegistry;
   private readonly devices: DeviceConnections;
+  private readonly travel: DeviceTravel;
   private readonly residents: ResidentTraffic;
   private readonly doors: DoorTransitions;
   private readonly transport: IServerTransport;
@@ -224,12 +225,13 @@ export class GameServer {
   private readonly transitions = new RealmTransitions(
     (id) => this.realms.get(id),
     (session, realm) => this.saveLocation(session, realm),
-    (oldId, newId) => {
-      if (oldId) {
+    (oldIds, newId) => {
+      for (const oldId of oldIds) {
+        if (!oldId) continue;
         this.realms.tryUnload(oldId);
         this.broadcastRealmPlayerCount(oldId);
       }
-      if (newId !== oldId) this.broadcastRealmPlayerCount(newId);
+      if (!oldIds.has(newId)) this.broadcastRealmPlayerCount(newId);
     },
   );
 
@@ -278,6 +280,7 @@ export class GameServer {
     this.createStore = (id) => stores.realm(id, parseInteriorId(id)?.parentWorldId ?? id);
     const track = <T>(operation: Promise<T>) => this.trackOperation(operation);
     const reportStorageFailure = (error: unknown) => this.reportStorageFailure(error);
+    const playerCountChanged = (worldId: string) => this.broadcastRealmPlayerCount(worldId);
     this.realms = new RealmDirectory({
       registry: this.registry,
       createStore: this.createStore,
@@ -300,15 +303,21 @@ export class GameServer {
       track,
       activeRealm: () => this.activeRealm,
       fail: (error) => this.onLoopError?.(error),
-      playerCountChanged: (worldId) => this.broadcastRealmPlayerCount(worldId),
+      playerCountChanged,
     });
     this.residents = new ResidentTraffic({ realms: this.realms, track, reportStorageFailure });
-    this.doors = new DoorTransitions({
-      realms: this.realms,
-      sessions: this.sessions,
+    this.travel = new DeviceTravel({
       transport,
+      sessions: this.sessions,
+      realms: this.realms,
       transitions: this.transitions,
+      registry: this.registry,
+      locations: () => this.locations,
+      playerCountChanged,
     });
+    // A seat's door request leads its whole device through the door (226).
+    const { realms, sessions, travel } = this;
+    this.doors = new DoorTransitions({ realms, sessions, transport, transitions: travel });
   }
 
   async inspectWorld(
@@ -515,52 +524,16 @@ export class GameServer {
     return this.realms.loadIntoDefault(worldId, () => this.activeRealm);
   }
 
+  /** Guests follow seat 0, so only a device's own seat keeps a place to resume (226). */
   private async saveLocation(session: PlayerSession, realm: Realm): Promise<void> {
-    if (!this.locations || !session.realmId) return;
-    await this.locations.save(session.profileId || session.clientId, {
+    if (!this.locations || !session.realmId || session.seat !== 0) return;
+    await this.locations.save(session.persistId, {
       version: 1,
       realmId: session.realmId,
       parentWorldId: realm.interior?.parentWorldId ?? session.realmId,
       generation: realm.generation,
       player: realm.playerData(session),
     });
-  }
-
-  private resumeDestination(session: PlayerSession, fallbackId: string) {
-    return resumeDestination(
-      { locations: this.locations, registry: this.registry, realms: this.realms },
-      session,
-      fallbackId,
-    );
-  }
-
-  private movePlayerToRealm(session: PlayerSession, worldId: string, arrival?: Arrival) {
-    return this.transitions.move(session, async () => ({
-      realm: await this.realms.getOrCreate(worldId),
-      ...(arrival ? { arrival } : {}),
-      returnLocation: null,
-    }));
-  }
-
-  /** Reply to a completed realm transition with the arrival the client rebuilds its view from. */
-  private arrival(session: PlayerSession) {
-    return () => {
-      if (session.retired) return null;
-      const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
-      if (!realm) throw new Error("Destination realm unavailable.");
-      this.transport.send(session.clientId, {
-        type: "player-assigned",
-        entityId: session.player.id,
-      });
-      return {
-        worldId: session.realmId ?? "",
-        generation: realm.generation,
-        interior: realm.interior ?? undefined,
-        cameraX: session.player.position.wx,
-        cameraY: session.player.position.wy,
-        cameraZoom: session.cameraZoom,
-      };
-    };
   }
 
   /**
@@ -573,7 +546,7 @@ export class GameServer {
   ): Promise<{ cameraX: number; cameraY: number; cameraZoom: number }> {
     const localSession = this.sessions.get("local");
     if (localSession) {
-      return this.movePlayerToRealm(localSession, worldId, arrival);
+      return this.travel.toWorld(localSession, worldId, arrival);
     }
     // Fallback: load into default realm (no sessions yet)
     return this.loadWorldIntoDefaultRealm(worldId);
@@ -610,28 +583,10 @@ export class GameServer {
         ? this.realms.defaultRealmId
         : ((await this.registry.listWorlds()).find((w) => w.id !== id && !worldCompatibility(w))
             ?.id ?? null);
-    for (const [, realm] of affected)
-      for (const session of [...realm.sessions.values()]) {
-        if (fallback) {
-          await this.movePlayerToRealm(session, fallback);
-          const target = this.realms.get(fallback);
-          this.transport.send(session.clientId, {
-            type: "player-assigned",
-            entityId: session.player.id,
-          });
-          this.transport.send(session.clientId, {
-            type: "world-loaded",
-            worldId: fallback,
-            generation: target?.generation ?? descriptorFromMetadata(),
-            cameraX: session.cameraX,
-            cameraY: session.cameraY,
-            cameraZoom: session.cameraZoom,
-          });
-        } else {
-          realm.removePlayer(session.clientId);
-          this.transport.send(session.clientId, { type: "realm-left", requestId: 0 });
-        }
-      }
+    await this.travel.evacuate(
+      affected.map(([, realm]) => realm),
+      fallback,
+    );
     for (const [key, realm] of affected) {
       await realm.flushAsync();
       await realm.destroy();
@@ -769,25 +724,22 @@ export class GameServer {
       ),
     "load-world": ({ msg, session, respond }) =>
       respond(
-        () => this.movePlayerToRealm(session, msg.worldId, msg.arrival),
-        this.arrival(session),
+        () => this.travel.toWorld(session, msg.worldId, msg.arrival),
+        this.travel.arrived(session),
       ),
     "join-realm": ({ msg, session, respond }) =>
-      respond(
-        () =>
-          msg.resume && !session.realmId
-            ? this.transitions.move(session, () => this.resumeDestination(session, msg.worldId))
-            : this.movePlayerToRealm(session, msg.worldId, msg.arrival),
-        this.arrival(session),
-      ),
+      respond(() => this.travel.joinRealm(session, msg), this.travel.arrived(session)),
     "enter-building": ({ msg, session, respond }) =>
       respond(
         () => this.doors.enter(session, msg.featureId, msg.doorId, msg.walkThrough),
-        this.arrival(session),
+        this.travel.arrived(session),
       ),
     "exit-building": ({ msg, session, respond }) =>
-      respond(() => this.doors.exit(session, msg.doorId, msg.walkThrough), this.arrival(session)),
-    "leave-realm": ({ session, respond }) => respond(() => this.leaveRealm(session), noFields),
+      respond(
+        () => this.doors.exit(session, msg.doorId, msg.walkThrough),
+        this.travel.arrived(session),
+      ),
+    "leave-realm": ({ session, respond }) => respond(() => this.travel.leave(session), noFields),
     "join-seat": ({ msg, session, respond }) =>
       respond(
         () => this.devices.join(session, msg),
@@ -845,18 +797,6 @@ export class GameServer {
     if (!realm || session.transitioning || realm.saveManager?.pressured)
       throw new Error("Vehicle control is unavailable right now.");
     control(realm.vehicles);
-  }
-
-  private leaveRealm(session: PlayerSession): void {
-    if (session.transitioning) throw new Error("A realm transition is already running.");
-    if (!session.realmId) return;
-    const leftRealmId = session.realmId;
-    const realm = this.realms.get(leftRealmId);
-    if (realm) {
-      realm.removePlayer(session.clientId);
-      this.realms.tryUnload(leftRealmId);
-    }
-    this.broadcastRealmPlayerCount(leftRealmId);
   }
 
   private runRcon(session: PlayerSession, command: unknown): string[] {

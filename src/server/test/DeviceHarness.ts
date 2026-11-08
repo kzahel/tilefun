@@ -2,6 +2,8 @@ import type { SeatCommand } from "../../input/SeatComposer.js";
 import { devicePacket } from "../../input/SeatComposer.js";
 import type { GameServer } from "../GameServer.js";
 import { type PlayerSession, seatSessionId } from "../PlayerSession.js";
+import type { RealmDirectory } from "../RealmDirectory.js";
+import type { RealmTransitions } from "../RealmTransitions.js";
 import { MemoryConnections } from "./MemoryConnections.js";
 import { memoryServer } from "./MemoryServer.js";
 
@@ -15,10 +17,10 @@ export async function stopDevices(): Promise<void> {
 }
 
 /** A server whose "local" device connection has joined the test world. */
-export async function start(options?: { worlds?: readonly string[] }) {
-  const { server, transport } = await memoryServer(new MemoryConnections(), options);
+export async function start(options?: Parameters<typeof memoryServer>[1]) {
+  const { server, transport, stores } = await memoryServer(new MemoryConnections(), options);
   servers.push(server);
-  return { server, transport, host: server.getLocalSession() };
+  return { server, transport, stores, host: server.getLocalSession() };
 }
 
 export type Device = Awaited<ReturnType<typeof start>>;
@@ -49,6 +51,21 @@ export async function remote({ server, transport }: Device, id: string) {
   const session = sessionOf(server, id);
   if (!session?.realmId) throw Error(`${id} did not join the world`);
   return session;
+}
+
+/**
+ * Leave a guest alone in another realm. Its device travels together (226), so only a
+ * transfer in progress does that; this moves the one seat through the server's transitions.
+ */
+export async function strand({ server }: Device, guest: PlayerSession, worldId: string) {
+  const { transitions, realms } = server as unknown as {
+    transitions: RealmTransitions;
+    realms: RealmDirectory;
+  };
+  await transitions.move(guest, async () => ({
+    realm: await realms.getOrCreate(worldId),
+    returnLocation: null,
+  }));
 }
 
 export const step = (dx: number, dy: number) => ({ dx, dy, sprinting: false, jump: false });

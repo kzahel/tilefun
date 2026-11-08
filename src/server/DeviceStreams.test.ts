@@ -4,7 +4,7 @@ import { createChicken } from "../entities/Chicken.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
 import type { FrameMessage } from "../shared/protocol.js";
 import type { PlayerSession } from "./PlayerSession.js";
-import { join, play, remote, start, step, stopDevices } from "./test/DeviceHarness.js";
+import { join, play, remote, start, step, stopDevices, strand } from "./test/DeviceHarness.js";
 import { VehicleControl } from "./VehicleControl.js";
 
 // Replication per (connection, realm) (226 slice 4b-ii), end to end through the binary
@@ -139,12 +139,7 @@ describe("replication per connection and realm", () => {
     transport.send("local", { type: "set-editor-mode", enabled: false });
     const guest = await join(device, 1);
     if (!guest) throw Error("no guest");
-    transport.send("local", {
-      type: "seat",
-      seat: 1,
-      message: { type: "join-realm", requestId: 5, worldId: "other" },
-    });
-    await server.settle();
+    await strand(device, guest, "other");
     expect([host.realmId, guest.realmId]).toEqual(["test", "other"]);
     server.broadcasting = true;
     // Entity ids are per realm, so seats in two realms may share one; send raw packets.
@@ -174,9 +169,9 @@ describe("replication per connection and realm", () => {
     expect(transport.seatMessages("local", 1, "sync-chunks").length).toBeGreaterThan(0);
     expect(transport.seatMessages("local", 1, "sync-session")).toHaveLength(1);
 
-    // Seat 0 arrives: the realm's stream moves to it and starts over, carrying both seats.
-    // Nothing streams to a travelling seat: its client has entered neither realm for it,
-    // and its arrival restarts the stream anyway. The guest's own stream carries on.
+    // Seat 0 arrives, its guest following it (226): the realm's stream moves to seat 0 and
+    // starts over, carrying both seats. Nothing streams to a travelling seat: its client has
+    // entered neither realm for it, and its arrival restarts the stream anyway.
     transport.send("local", { type: "join-realm", requestId: 6, worldId: "other" });
     const departed = transport.messages("local", "frame").length;
     let travellingTicks = 0;
@@ -202,18 +197,13 @@ describe("replication per connection and realm", () => {
     expect(transport.seatMessages("local", 1, "frame")).toHaveLength(before.own);
   });
 
-  it("restarts a resumed guest's own stream in its realm, on the device's sequence", async () => {
+  it("brings a dormant guest left in another realm back into seat 0's stream, on the device's sequence", async () => {
     const device = await start({ worlds: ["other"] });
     const { server, transport } = device;
     const seat0 = await remote(device, "dev-b");
     const guest = await join(device, 1, "dev-b");
     if (!guest) throw Error("no guest");
-    transport.send("dev-b", {
-      type: "seat",
-      seat: 1,
-      message: { type: "join-realm", requestId: 5, worldId: "other" },
-    });
-    await server.settle();
+    await strand(device, guest, "other");
     expect([seat0.realmId, guest.realmId]).toEqual(["test", "other"]);
     server.broadcasting = true;
     server.tick(1 / 60);
@@ -228,17 +218,17 @@ describe("replication per connection and realm", () => {
     }
     expect(transport.seatMessages("dev-b", 1, "frame")).toEqual([]);
     expect(await join(device, 1, "dev-b")).toBe(guest);
+    expect(guest.realmId).toBe("test");
     expect(guest.lastProcessedInputSeq).toBe(3);
     server.tick(1 / 60);
-    // The returning client's first frame for that realm is a full one, with the guest's sync.
-    const [first] = transport.seatMessages("dev-b", 1, "frame");
-    expect(first?.lastProcessedInputSeq).toBe(3);
-    expect(first?.entityBaselines?.map((e) => e.id)).toContain(guest.player.id);
-    expect(first?.entityDeltas).toBeUndefined();
+    // The guest arrived beside seat 0, so it rides seat 0's stream with its own sync, and
+    // its old realm's stream has ended.
+    expect(transport.seatMessages("dev-b", 1, "frame")).toEqual([]);
+    const frame = transport.messages("dev-b", "frame").at(-1);
+    expect(frame?.lastProcessedInputSeq).toBe(3);
+    expect(frame?.seats).toEqual(seatList(seat0, guest));
+    expect(frame?.entityBaselines?.map((e) => e.id)).toContain(guest.player.id);
     expect(transport.seatMessages("dev-b", 1, "sync-session")).toHaveLength(1);
-    expect(
-      transport.seatMessages("dev-b", 1, "sync-chunks")[0]?.loadedChunkKeys?.length,
-    ).toBeGreaterThan(0);
   });
 
   it("leaves a dormant guest out of its returning device's stream until it is seated again", async () => {

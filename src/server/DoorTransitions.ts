@@ -22,7 +22,8 @@ export interface DoorTransitionsDeps {
   realms: RealmDirectory;
   sessions: SessionRegistry;
   transport: IServerTransport;
-  transitions: RealmTransitions;
+  /** Party travel: the requesting seat leads its device through the door (226). */
+  transitions: Pick<RealmTransitions, "move">;
 }
 
 type Point = { wx: number; wy: number };

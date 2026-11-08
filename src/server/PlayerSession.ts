@@ -1,5 +1,6 @@
 import type { Entity } from "../entities/Entity.js";
 import { type ControlCommand, PlayerControls } from "../physics/PlayerControls.js";
+import { SEAT_SEPARATOR } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 
 /**
@@ -18,9 +19,6 @@ export interface GameplaySession {
   /** Supported pose saved away from the water surface, including bridge height. */
   lastSafePosition: { wx: number; wy: number; wz?: number } | null;
 }
-
-/** Separates a connection id from its seat in a seat's session id; connection ids never hold it. */
-export const SEAT_SEPARATOR = "#";
 
 /** A seat's session id (226): seat 0 is the bare connection id, so single-player is unchanged. */
 export function seatSessionId(connectionId: string, seat: number): string {
@@ -94,7 +92,17 @@ export class PlayerSession {
 
   /** Stable profile ID for player data persistence (separate from clientId). */
   profileId: string | null = null;
+  /**
+   * A guest's saved-data key (226): its host's, by seat, pinned when the guest is first
+   * seated, so a later `identify` cannot orphan its records. Null for a device's own seat.
+   */
+  guestKey: string | null = null;
   playerModel = "player";
+
+  /** The key of this player's saved data and owned work: its profile, else its connection. */
+  get persistId(): string {
+    return this.guestKey ?? (this.profileId || this.clientId);
+  }
 
   /** Timestamp (ms) when this session was created. */
   connectedAt = Date.now();

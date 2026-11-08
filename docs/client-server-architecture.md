@@ -96,6 +96,11 @@ slice 4b-i; no client seats them yet).
 - **Sessions per seat:** each seat has its own `PlayerSession`. Seat 0's id is
   the bare connection id, so single player is unchanged; other seats are
   `connection#n`, and are guests of seat 0 without a profile.
+  - A guest's per-realm player data is saved under seat 0's profile and seat
+    (`persistId`, for example `profile#1`, pinned when the guest is first
+    seated). Guests save no location, because they always follow seat 0.
+  - Server transports close a connection whose id holds `#`, and profile ids
+    holding it are ignored.
 - **Routing:** [DeviceTransport](../src/server/DeviceTransport.ts) wraps the
   transport `GameServer` receives.
   - A device sends one `player-input` per tick, carrying every seat's movement
@@ -104,7 +109,21 @@ slice 4b-i; no client seats them yet).
   - `set-debug` pauses every seat of that device.
   - A disconnect makes every seat dormant.
 - **Joining and leaving:** [DeviceConnections](../src/server/DeviceConnections.ts)
-  owns the connection lifecycle and `join-seat`/`leave-seat`.
+  owns the connection lifecycle and `join-seat`/`leave-seat`. A guest arrives
+  beside seat 0, clear of other bodies. A dormant guest whose seat 0 has moved
+  to another realm rejoins beside it.
+- **Party travel** ([DeviceTravel](../src/server/DeviceTravel.ts)): a device's
+  awake seats travel together, led by whichever seat asks.
+  - This covers world travel, doors and `leave-realm` (the seats wait in the
+    lobby and follow the device into its next realm), and leaving a deleted
+    world.
+  - The leader alone passes the destination's and the door's checks.
+    The others arrive beside it (`RealmTransitions.moveParty`).
+  - Every seat arrives, or every seat goes back where it was.
+  - The requesting seat gets the one reply; each other seat gets only its new
+    `player-assigned`.
+  - A resume from the lobby is the device's saved place, which only seat 0
+    keeps, so seat 0 leads it whichever seat asks.
 - **Replication** ([RealmPublication](../src/server/RealmPublication.ts)): a realm
   sends one stream per connection with a live seat in it. The stream goes
   through that connection's lowest live seat there: bare for seat 0, otherwise

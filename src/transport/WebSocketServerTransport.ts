@@ -2,7 +2,7 @@ import type { Server as HttpServer, IncomingMessage } from "node:http";
 import { type WebSocket, WebSocketServer } from "ws";
 import { decodeClientMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
-import type { IServerTransport } from "./Transport.js";
+import { type IServerTransport, isConnectionId } from "./Transport.js";
 
 /**
  * WebSocket-backed server transport for Node.js.
@@ -42,8 +42,8 @@ export class WebSocketServerTransport implements IServerTransport {
       // Extract UUID from query params
       const url = new URL(req.url ?? "", "http://localhost");
       const uuid = url.searchParams.get("uuid");
-      if (!uuid) {
-        console.error("[tilefun] WebSocket connection without UUID, closing");
+      if (!isConnectionId(uuid)) {
+        console.error("[tilefun] WebSocket connection without a valid UUID, closing");
         ws.close(4000, "Missing UUID");
         return;
       }

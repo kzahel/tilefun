@@ -608,7 +608,7 @@
       "overLimit": 1
     },
     "src/server/GameServer.ts": {
-      "lines": 962,
+      "lines": 902,
       "worst": 0,
       "overLimit": 0
     },
@@ -628,7 +628,7 @@
       "overLimit": 1
     },
     "src/server/Realm.ts": {
-      "lines": 1344,
+      "lines": 1341,
       "worst": 0,
       "overLimit": 0
     },
@@ -645,11 +645,6 @@
     "src/server/RealmStreaming.ts": {
       "lines": 292,
       "worst": 31,
-      "overLimit": 1
-    },
-    "src/server/RealmTransitions.ts": {
-      "lines": 125,
-      "worst": 30,
       "overLimit": 1
     },
     "src/server/tickAllAI.ts": {

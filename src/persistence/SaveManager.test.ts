@@ -1,8 +1,12 @@
-import { expect, it } from "vitest";
+import { afterEach, expect, it, vi } from "vitest";
 import { MemoryRecordStore } from "./MemoryRecordStore.js";
 import { RecordPersistenceStore } from "./RecordPersistenceStore.js";
 import { SaveManager } from "./SaveManager.js";
 import { WorldStorePool } from "./WorldStorePool.js";
+
+afterEach(() => {
+  vi.restoreAllMocks();
+});
 
 const meta = () => ({ playerX: 0, playerY: 0, cameraX: 0, cameraY: 0, cameraZoom: 1 });
 const dirty = (saves: SaveManager, value: number) =>
@@ -128,4 +132,65 @@ it("coalesces a stable live snapshot without losing mutations across an in-fligh
   delete executor.beforeCommit;
   await saves.close();
   expect((await executor.read("entities", "actor"))?.value).toBe(2);
+});
+
+it("reads a player's progress before it is written, during a write, and after a refused one", async () => {
+  const executor = new MemoryRecordStore(),
+    store = new RecordPersistenceStore(executor),
+    saves = new SaveManager(store);
+  saves.bind(() => undefined, meta);
+  await saves.open();
+  const player = (gemsCollected: number) => ({
+    gemsCollected,
+    x: 16,
+    y: 32,
+    cameraX: 16,
+    cameraY: 32,
+    cameraZoom: 1,
+  });
+  saves.markPlayerDirty("host#1", player(2));
+  const unsaved = await saves.loadPlayerData("host#1");
+  expect(unsaved).toEqual(player(2));
+  expect(await executor.read("players", "host#1")).toBeUndefined();
+
+  let acknowledge = () => {};
+  const blocked = new Promise<void>((resolve) => {
+    acknowledge = resolve;
+  });
+  executor.beforeCommit = () => blocked;
+  saves.markPlayerDirty("host#1", player(3));
+  const flushing = saves.flushAsync();
+  const loading = saves.loadPlayerData("host#1");
+  acknowledge();
+  await flushing;
+  expect(await loading).toEqual(player(3));
+  expect(await saves.loadPlayerData("nobody")).toBeNull();
+
+  // A write that fails puts its players back among the unsaved ones; a read waits for it.
+  let fail = (_error: Error) => {};
+  const writing = new Promise<void>((entered) => {
+    executor.beforeCommit = () =>
+      new Promise<void>((_resolve, reject) => {
+        fail = reject;
+        entered();
+      });
+  });
+  saves.markPlayerDirty("host#1", player(4));
+  saves.flush();
+  await writing;
+  const reading = saves.loadPlayerData("host#1");
+  fail(Error("disk full"));
+  expect(await reading).toEqual(player(4));
+  expect((await executor.read("players", "host#1"))?.value).toEqual(player(3));
+  delete executor.beforeCommit;
+  await saves.flushAsync();
+
+  // A save refused before staging returns its players to the unsaved ones only once its
+  // failure is handled; a read waits for that instead of reading the older record.
+  vi.spyOn(store, "save").mockRejectedValueOnce(Error("Save queue is full"));
+  saves.markPlayerDirty("host#1", player(5));
+  saves.flush();
+  expect(await saves.loadPlayerData("host#1")).toEqual(player(5));
+  await saves.flushAsync();
+  expect((await executor.read("players", "host#1"))?.value).toEqual(player(5));
 });
