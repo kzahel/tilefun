@@ -2,6 +2,7 @@ import { expect, it, vi } from "vitest";
 import { RemoteStateView } from "../client/ClientStateView.js";
 import { createPlayer } from "../entities/Player.js";
 import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
+import type { ClientMessage } from "../shared/protocol.js";
 import { World } from "../world/World.js";
 import { naturalLandscapeRecipe } from "./NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe, scenarioWalls } from "./ScenarioRecipe.js";
@@ -140,6 +141,28 @@ it("takes horn, siren and throw presses on a seat's ordered input path", async (
     expect(() =>
       session.input(encodeClientMessage({ type: "player-interact", wx: 0, wy: 0 })),
     ).toThrow("Expected scenario player input");
+  } finally {
+    await session.close();
+  }
+});
+
+it("takes seat 0's view range with its input, encoded or already decoded", async () => {
+  const session = await ScenarioSession.create(recipe);
+  try {
+    const range = { minCx: -6, minCy: -1, maxCx: -4, maxCy: 1 };
+    const input: ClientMessage = {
+      type: "player-input",
+      seq: 1,
+      dx: 0,
+      dy: 0,
+      jump: false,
+      sprinting: false,
+    };
+    session.input(encodeClientMessage(input), range);
+    // The range always keeps the 5×5 chunks around the player.
+    expect(session.player.visibleRange).toEqual({ minCx: -6, minCy: -2, maxCx: 2, maxCy: 2 });
+    session.accept({ ...input, seq: 2 });
+    expect(session.player.visibleRange).toEqual({ minCx: -2, minCy: -2, maxCx: 2, maxCy: 2 });
   } finally {
     await session.close();
   }

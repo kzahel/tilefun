@@ -1,6 +1,10 @@
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
+import { validateSurfacePatch } from "../physics/SurfacePatch.js";
+import { validateExcavations } from "../physics/TerrainExcavation.js";
+import { quantizeAxis } from "../shared/binaryCodec.js";
+import type { Movement } from "../shared/Movement.js";
 import type { VehicleRegistry } from "../traffic/VehicleRegistry.js";
 
 /** Data only: the Realm owns all updates, collisions, AI and persistence. */
@@ -83,6 +87,45 @@ export const FLAT_SCENARIO = {
   seed: 1,
   preset: "grass",
 } as const;
+/** Check a session's own copy of a recipe and name its props; throws on
+ * fixtures the Realm must not open. */
+export function prepareScenarioRecipe(recipe: ScenarioRecipe): void {
+  if (
+    (recipe.trafficRoads?.length ?? 0) > 64 ||
+    recipe.trafficRoads?.some(
+      (s) =>
+        ![s.a.x, s.a.y, s.b.x, s.b.y, s.width].every(Number.isSafeInteger) ||
+        s.width < 2 ||
+        s.width > 64 ||
+        (s.a.x !== s.b.x && s.a.y !== s.b.y) ||
+        [s.a.x, s.a.y, s.b.x, s.b.y].some((n) => Math.abs(n) > 8192),
+    )
+  )
+    throw Error("Invalid traffic road fixture");
+  if (recipe.version !== 1) throw Error("Unsupported scenario recipe");
+  if ((recipe.actors?.length ?? 0) > 1024 || (recipe.parkedVehicles?.length ?? 0) > 256)
+    throw Error("Scenario actor budget exceeded");
+  recipe.props.forEach((prop, index) => {
+    prop.type = `scenario-prop-${index}`;
+    for (const c of prop.walls ?? (prop.collider ? [prop.collider] : []))
+      if (c.surface) validateSurfacePatch(c.surface, c.width, c.height);
+  });
+  if (
+    (recipe.nativeProps?.length ?? 0) > 128 ||
+    recipe.nativeProps?.some((p) => !Number.isFinite(p.wx) || !Number.isFinite(p.wy))
+  )
+    throw Error("Invalid native scenario props");
+  validateExcavations(recipe.props);
+  const patches = recipe.props
+    .flatMap((p) => p.walls ?? (p.collider ? [p.collider] : []))
+    .flatMap((c) => (c.surface ? [c.surface] : []));
+  const ids = new Set(patches.map((p) => p.id));
+  if (ids.size !== patches.length || patches.some((p) => p.connectsTo.some((id) => !ids.has(id))))
+    throw Error("Invalid surface connections");
+  if (recipe.actors?.some((e) => e.type === "player"))
+    throw Error("Use recipe.player for the controlled actor");
+  if (recipe.guest && recipe.guest.type !== "player") throw Error("Invalid guest player");
+}
 export function scenarioGravity(recipe: ScenarioRecipe): number {
   const gravity = recipe.gravity ?? 1;
   if (!Number.isFinite(gravity) || gravity < 0 || gravity > 10000)
@@ -109,6 +152,25 @@ export function applyScenarioAppearance(entity: Entity, template: Entity): void 
     if (clipElapsedMs === undefined) delete entity.sprite.clipElapsedMs;
     else entity.sprite.clipElapsedMs = clipElapsedMs;
   } else entity.sprite = structuredClone(template.sprite);
+}
+/** Recipe appearances on a lab replica's authoritative entities after each
+ * frame (the wire carries animation state, not recipe sprites or colliders). */
+export function applyRecipeAppearances(
+  replica: { readonly serverPlayerEntity: Entity; readonly serverEntities: readonly Entity[] },
+  player: Entity,
+  actors: readonly Entity[] = [],
+): void {
+  applyScenarioAppearance(replica.serverPlayerEntity, player);
+  for (const entity of replica.serverEntities) {
+    const template = actors.find((actor) => actor.type === entity.type);
+    if (template) applyScenarioAppearance(entity, template);
+  }
+}
+/** A lab seat's command as the authority will see it: at most unit length
+ * (relative driving keeps its axes) and quantized like the wire. */
+export function normalizeLabMovement(input: Movement): Movement {
+  const length = input.relativeDriving ? 1 : Math.max(1, Math.hypot(input.dx, input.dy));
+  return { ...input, dx: quantizeAxis(input.dx / length), dy: quantizeAxis(input.dy / length) };
 }
 /** Invisible ordinary wall props, shared by every bounded fixture. */
 export function scenarioWalls(left: number, top: number, right: number, bottom: number): Prop[] {

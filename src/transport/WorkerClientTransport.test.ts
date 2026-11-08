@@ -1,10 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
 import { RequestBroker } from "../client/RequestBroker.js";
-import { type LocalAuthority, LocalServerRuntime } from "../server/LocalServerRuntime.js";
+import type { LocalAuthority } from "../server/LocalServerRuntime.js";
+import { inProcessWorker } from "../server/testing/InProcessWorker.js";
 import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
-import type { LocalHostBoot, LocalHostPacket } from "../shared/localHostProtocol.js";
 import type { ClientMessage } from "../shared/protocol.js";
-import type { ChannelEnvelope } from "./OrderedWorkerChannel.js";
 import type { IServerTransport } from "./Transport.js";
 import { WorkerClientTransport, type WorkerEndpoint } from "./WorkerClientTransport.js";
 
@@ -42,13 +41,8 @@ function rig(
     completedTicks: 0,
     onLoopError: undefined,
   };
-  const deliver = (data: unknown, transfer: ArrayBuffer[] = []) => {
-    const copied = structuredClone(data, { transfer });
-    queueMicrotask(() => endpoint.onmessage?.({ data: copied } as MessageEvent));
-  };
-  const runtime = new LocalServerRuntime(
-    deliver,
-    (error) => deliver({ kind: "failed", error: String(error) }),
+  // The game Worker's own entry wiring, delivered across a structured-clone boundary.
+  const worker = inProcessWorker(
     (transport) => {
       serverTransport = transport;
       transport.onConnect((id) => events.push(`connect:${id}`));
@@ -59,37 +53,9 @@ function rig(
       });
       return authority;
     },
+    () => events.push("terminate"),
   );
-  const endpoint: WorkerEndpoint = {
-    onmessage: null,
-    onerror: null,
-    onmessageerror: null,
-    postMessage: (data, transfer) => {
-      const message = structuredClone(data, { transfer }) as
-        | LocalHostBoot
-        | ChannelEnvelope<LocalHostPacket>;
-      queueMicrotask(() => {
-        if (message.kind === "init")
-          void runtime.init(message.metrics, message.keepAliveWhenHidden).then(
-            () => deliver({ kind: "ready" }),
-            (error) => runtime.fail(error),
-          );
-        else if (message.kind === "attach-peer")
-          runtime.attachPeer(message.clientId, message.connectionId, message.port, (error) =>
-            deliver({
-              kind: "peer-closed",
-              clientId: message.clientId,
-              connectionId: message.connectionId,
-              ...(error === undefined ? {} : { error: String(error) }),
-            }),
-          );
-        else if (message.kind === "detach-peer")
-          runtime.detachPeer(message.clientId, message.connectionId);
-        else if (message.kind === "batch" || message.kind === "credit") runtime.receive(message);
-      });
-    },
-    terminate: () => events.push("terminate"),
-  };
+  const { endpoint, runtime } = worker;
   const client = new WorkerClientTransport(endpoint, {
     onError: (error) => errors.push(error),
     onFault: (kind, error) => faults.push({ kind, error }),
@@ -97,7 +63,7 @@ function rig(
     keepAliveWhenHidden: options.keepAliveWhenHidden ?? false,
     ...(options.watchdogMs === undefined ? {} : { watchdogMs: options.watchdogMs }),
   });
-  return { client, endpoint, runtime, serverTransport, events, errors, faults, authority };
+  return { client, worker, endpoint, runtime, serverTransport, events, errors, faults, authority };
 }
 
 describe("local server Worker lifecycle", () => {
@@ -280,6 +246,56 @@ describe("local server Worker lifecycle", () => {
     await r.client.shutdown();
   });
 
+  it("orders lab instruments with game messages and answers them without a client pump", async () => {
+    const r = rig();
+    await r.client.ready();
+    r.client.connect();
+    r.client.start(); // From here the game pumps; an admin answer must not wait for it.
+    r.client.send({ type: "set-editor-mode", enabled: true });
+    // The game's authority has no instruments; only a recipe world answers them.
+    await expect(r.client.admin({ kind: "clock", running: true })).rejects.toThrow(
+      "no lab instruments",
+    );
+    expect(r.events).toContain("set-editor-mode");
+    r.authority.admin = async (request) => {
+      r.events.push("admin");
+      return { echo: request };
+    };
+    r.client.send({ type: "visible-range", minCx: 0, minCy: 0, maxCx: 1, maxCy: 1 });
+    await expect(r.client.admin({ kind: "reset" })).resolves.toEqual({ echo: { kind: "reset" } });
+    expect(r.events.slice(-2)).toEqual(["visible-range", "admin"]);
+    // Once answered, delivery is the game's own pump again.
+    const local: string[] = [];
+    r.client.onMessage((message) => local.push(message.type));
+    r.serverTransport.send("local", { type: "chat", sender: "test", text: "later" });
+    await new Promise((resolve) => setTimeout(resolve, 20));
+    expect(local).toEqual([]);
+    r.client.pump();
+    expect(local).toEqual(["chat"]);
+    r.authority.admin = async () => undefined;
+    await expect(r.client.admin({ kind: "reset" })).rejects.toThrow("no lab result");
+    // A request still unanswered when the Worker stops settles rather than hangs.
+    r.authority.admin = () => new Promise(() => {});
+    const unanswered = r.client.admin({ kind: "reset" });
+    await r.client.shutdown();
+    await expect(unanswered).rejects.toThrow("Local server stopped");
+  });
+
+  it("fails the Worker on a second init or an unhandled rejection inside it", async () => {
+    const twice = rig();
+    await twice.client.ready();
+    twice.endpoint.postMessage({ kind: "init", metrics: false }, []);
+    await vi.waitFor(() =>
+      expect(twice.errors[0]?.message).toBe("Duplicate local server initialization"),
+    );
+    expect(twice.events).toContain("terminate");
+    const rejected = rig();
+    await rejected.client.ready();
+    rejected.worker.rejectUnhandled(new Error("lost promise"));
+    await vi.waitFor(() => expect(rejected.errors[0]?.message).toBe("lost promise"));
+    expect(rejected.events).toContain("terminate");
+  });
+
   it("surfaces startup failure and terminates the failed instance", async () => {
     const r = rig({
       init: async () => {
@@ -383,7 +399,6 @@ it("reports repeated residency failures once and retains the latest authority ev
     const r = rig({ watchdogMs: 1000 });
     await r.client.ready();
     r.client.start();
-    await vi.advanceTimersByTimeAsync(250);
     const diagnostics = r.runtime.diagnostics();
     diagnostics.persistence = [
       {
@@ -397,7 +412,9 @@ it("reports repeated residency failures once and retains the latest authority ev
         },
       } as unknown as NonNullable<typeof diagnostics.persistence>[number],
     ];
-    r.endpoint.onmessage?.({ data: { kind: "heartbeat", id: 1, diagnostics } } as MessageEvent);
+    // The Worker answers the watchdog's probe with this evidence.
+    vi.spyOn(r.runtime, "diagnostics").mockReturnValue(diagnostics);
+    await vi.advanceTimersByTimeAsync(250);
     expect(r.faults).toHaveLength(1);
     expect(r.faults[0]?.kind).toBe("chunk-failure");
     expect(r.client.getFaultDiagnostics()).toMatchObject({
@@ -412,7 +429,6 @@ it("reports repeated residency failures once and retains the latest authority ev
       ],
     });
     await vi.advanceTimersByTimeAsync(250);
-    r.endpoint.onmessage?.({ data: { kind: "heartbeat", id: 2, diagnostics } } as MessageEvent);
     expect(r.faults).toHaveLength(1);
     r.endpoint.onerror?.({ message: "test cleanup", preventDefault() {} } as ErrorEvent);
   } finally {

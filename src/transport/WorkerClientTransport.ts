@@ -8,6 +8,11 @@ import type {
   PeerHostPacket,
 } from "../shared/localHostProtocol.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
+import {
+  type LocalHostRequest,
+  LocalHostRequests,
+  type LocalHostResult,
+} from "./LocalHostRequests.js";
 import { LocalServerWatchdog } from "./LocalServerWatchdog.js";
 import { type ChannelEnvelope, OrderedWorkerChannel } from "./OrderedWorkerChannel.js";
 import type { ConnectionIdentity, IClientTransport } from "./Transport.js";
@@ -46,18 +51,12 @@ export class WorkerClientTransport implements IClientTransport {
   private startupTimer: ReturnType<typeof setTimeout>;
   private autoPump = true;
   private pumpTimer: ReturnType<typeof setTimeout> | undefined;
-  private nextId = 1;
   private nextConnectionId = 1;
   private readonly peers = new Map<string, { connectionId: number; link: WorkerPeerLink }>();
   private shutdownPromise: Promise<void> | undefined;
-  private readonly requests = new Map<
-    number,
-    {
-      resolve: (result: LocalHostDiagnostics | undefined) => void;
-      reject: (error: Error) => void;
-      timer: ReturnType<typeof setTimeout>;
-    }
-  >();
+  private readonly requests: LocalHostRequests;
+  /** Outstanding lab admin requests; packets are consumed as they arrive meanwhile. */
+  private admins = 0;
   bytesReceived = 0;
 
   constructor(
@@ -72,6 +71,7 @@ export class WorkerClientTransport implements IClientTransport {
     } = {},
   ) {
     this.watchdog = new LocalServerWatchdog(options.watchdogMs);
+    this.requests = new LocalHostRequests(options.timeoutMs ?? 30000, (error) => this.fail(error));
     this.channel = new OrderedWorkerChannel((message, transfer) =>
       worker.postMessage(message, transfer),
     );
@@ -230,14 +230,8 @@ export class WorkerClientTransport implements IClientTransport {
           const message = decodeServerMessage(packet.buffer);
           performanceMetrics.end("client.decode", start);
           this.messageHandler?.(message);
-        } else if (packet.type === "result") {
-          const request = this.requests.get(packet.id);
-          if (!request) throw Error("Unexpected local server lifecycle response");
-          clearTimeout(request.timer);
-          this.requests.delete(packet.id);
-          if (packet.error) request.reject(new Error(packet.error));
-          else request.resolve(packet.diagnostics);
-        } else throw Error("Unexpected local server packet");
+        } else if (packet.type === "result") this.requests.answer(packet);
+        else throw Error("Unexpected local server packet");
       });
     } catch (error) {
       this.fail(error);
@@ -245,18 +239,33 @@ export class WorkerClientTransport implements IClientTransport {
   }
 
   flush(): Promise<void> {
-    return this.request("flush").then(() => {});
+    return this.request({ type: "flush" }).then(() => {});
+  }
+  /** A lab instrument (226) in order with game messages; its answer follows the
+   * snapshot it describes. Packets are consumed as they arrive until it settles. */
+  async admin(request: unknown): Promise<unknown> {
+    this.admins++;
+    this.schedulePump();
+    try {
+      const { admin } = await this.request({ type: "admin", request });
+      if (admin === undefined) throw Error("Local authority sent no lab result");
+      return admin;
+    } finally {
+      this.admins--;
+    }
   }
   async getDiagnostics() {
     return {
-      authority: this.failure ? undefined : await this.request("diagnostics"),
+      authority: this.failure
+        ? undefined
+        : (await this.request({ type: "diagnostics" })).diagnostics,
       clientChannel: this.channel.diagnostics(),
       state: this.state,
       ...(this.failure ? { error: this.failure.message, stack: this.failure.stack } : {}),
     };
   }
   resetDiagnostics(): Promise<void> {
-    return this.request("reset-diagnostics").then(() => {});
+    return this.request({ type: "reset-diagnostics" }).then(() => {});
   }
 
   shutdown(): Promise<void> {
@@ -267,7 +276,7 @@ export class WorkerClientTransport implements IClientTransport {
       this.state = "stopping";
       this.autoPump = true;
       this.schedulePump();
-      await this.request("shutdown");
+      await this.request({ type: "shutdown" });
       this.state = "stopped";
       this.cleanup();
       this.disconnectHandler?.();
@@ -323,22 +332,12 @@ export class WorkerClientTransport implements IClientTransport {
     }
   }
 
-  private request(
-    type: "flush" | "shutdown" | "diagnostics" | "reset-diagnostics",
-  ): Promise<LocalHostDiagnostics | undefined> {
-    if (this.state !== "ready" && !(this.state === "stopping" && type === "shutdown"))
+  private request(request: LocalHostRequest): Promise<LocalHostResult> {
+    if (this.state !== "ready" && !(this.state === "stopping" && request.type === "shutdown"))
       return Promise.reject(new Error("Local server is not ready"));
-    if (this.requests.size >= 32)
-      return Promise.reject(new Error("Too many local server lifecycle requests"));
-    const id = this.nextId++;
-    return new Promise((resolve, reject) => {
-      const timer = setTimeout(
-        () => this.fail(new Error(`Local server ${type} timed out`)),
-        this.options.timeoutMs ?? 30000,
-      );
-      this.requests.set(id, { resolve, reject, timer });
+    return this.requests.open(request, (packet) => {
       try {
-        this.channel.send({ type, id });
+        this.channel.send(packet);
       } catch (error) {
         this.fail(error);
       }
@@ -346,7 +345,8 @@ export class WorkerClientTransport implements IClientTransport {
   }
 
   private schedulePump(): void {
-    if (!this.autoPump || !this.channel.pending || this.pumpTimer !== undefined) return;
+    if (!(this.autoPump || this.admins) || !this.channel.pending || this.pumpTimer !== undefined)
+      return;
     this.pumpTimer = setTimeout(() => {
       this.pumpTimer = undefined;
       this.pump();
@@ -360,16 +360,12 @@ export class WorkerClientTransport implements IClientTransport {
     this.failure = error;
     this.state = "failed";
     this.rejectStartup(error);
-    for (const request of this.requests.values()) {
-      clearTimeout(request.timer);
-      request.reject(error);
-    }
-    this.requests.clear();
-    this.cleanup();
+    this.cleanup(error);
     this.disconnectHandler?.();
     this.options.onError?.(error);
   }
-  private cleanup(): void {
+  private cleanup(error = new Error("Local server stopped")): void {
+    this.requests.rejectAll(error);
     for (const peer of this.peers.values()) peer.link.close();
     clearTimeout(this.startupTimer);
     clearInterval(this.watchdogTimer);

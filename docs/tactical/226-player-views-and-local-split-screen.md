@@ -3,9 +3,9 @@
 Status: phasing set 2026-11-07 after four read-only research reviews (input
 and labs, rendering and performance, authority and prediction, testing and
 decomposition). Slices 0, 1a, 1b, 2 (input ownership, as 2a and 2b), 3a
-(render views) and 3b (device session and view objects) are done; 3c (the
-recipe-world authority and lab view surface, ending with the WorldGeometry car
-fixtures on the game view) is next. Updated 2026-11-07 for seats on one device session,
+(render views), 3b (device session and view objects) and 3c-i (the recipe-world
+authority and lab client) are done; 3c-ii (the lab view surface, ending with the
+WorldGeometry car fixtures on the game view) is next. Updated 2026-11-07 for seats on one device session,
 online seats and the first-person view requirements from 229.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
@@ -1033,3 +1033,70 @@ maintaining both shells. The shell import allow-list only shrinks.
     predicted step. The reviewer verified behaviour preservation for the game
     and labs otherwise and agreed to keep the two reset-mount rules explicit
     until slice 5 (the parent rule is the general one).
+- 2026-11-08, slice 3c is split: **3c-i** the recipe-world authority and lab
+  client, proven in Node; **3c-ii** the lab view surface with the WorldGeometry
+  car fixtures on it. Owner, 2026-11-08: run 3c, 4a, 4b and 5 autonomously, each
+  part reviewed through Yep Anywhere and committed; the open decisions take the
+  proposals above (recorded under Decisions when first used).
+- 2026-11-08, slice 3c-i exit list:
+  - `RecipeWorldAuthority`: a `LocalAuthority` over `ScenarioSession` staging,
+    served by the game's `LocalServerRuntime` from
+    `src/scenarios/recipe-world.worker.ts` (Worker port wiring shared with the
+    game Worker). Seat 0 is the runtime's `local` connection and speaks the game
+    protocol (`player-input`, horn/siren/throw presses, `visible-range`); frames
+    and syncs leave through the runtime's transport with the game's
+    backpressure. Two-seat recipes are refused (the physics lab keeps the
+    scenario Worker until slice 6).
+  - Lab admin requests: an `admin` packet on the local host channel, ordered
+    with game messages and answered by a result; `GameServer` has no handler, so
+    the runtime refuses them. Open; clock run/pause (a paused lab never advances
+    the realm, while the loop heartbeat keeps the watchdog satisfied); step
+    (paused only); commands (teleport, place entity, enter/exit/recover vehicle,
+    equipment, call train, throw, view range); reset and reload, announced with
+    `world-loaded` so the client clears as on a realm change; diagnostics
+    (timings and collision). Every result follows a full snapshot. A failed
+    open, reset or reload fails the authority.
+  - `RecipeWorldClient`: `WorkerClientTransport`, a `DeviceSession` over
+    `RemoteStateView` and a predictor with the recipe's gravity; state applied
+    at the start of the lab's tick as in `GameClient`; reconcile on the lab
+    parent-mount rule; one sequence per tick through `devicePacket`; presses on
+    the same ordered path; admin calls resolve after their snapshot is applied;
+    dispose shuts the Worker down.
+  - Native tests on an in-process Worker through the real port wiring: input,
+    presses and visible range, admin requests and errors, fences, pause freeze
+    and heartbeat, reset/reload clearing, prediction parity with direct
+    `ScenarioSession` steps, lifecycle (shutdown terminates the Worker, failures
+    surface, the game authority refuses admin).
+  - No page uses it until 3c-ii; `LabShellConsumers` is unchanged and the new
+    code imports no shell module.
+- 2026-11-08, slice 3c-i done (exit list met):
+  - **Authority:** `RecipeWorldAuthority` serves the recipe world through the game runtime.
+    - The Worker port wiring moved into `serveLocalAuthority`, shared by `local-server.worker.ts` and `recipe-world.worker.ts`. The runtime no longer imports `GameServer` itself.
+    - `ScenarioSession` takes an optional link (connection id and transport), so seat 0's messages go straight to the runtime.
+    - Recipe validation moved to `prepareScenarioRecipe`. The lab replica rules (recipe appearances, movement normalization) are shared by both lab clients.
+    - Play is accepted only from `local`, only while the clock runs and only when no instrument is changing the world; otherwise it is dropped, as the client stops sending.
+    - The authority keeps the camera's last range. It streams it while paused and into every new world, teleport and step.
+  - **Admin channel:** `shared/` may not import `scenarios/`, so the `admin` payload is opaque below the lab layer and the authority parses it.
+    - `WorkerClientTransport.admin()` consumes packets while a request is outstanding; after `start()` the game pumps manually.
+    - The request bookkeeping moved to `LocalHostRequests`. Requests still outstanding when the Worker stops now settle instead of hanging.
+  - **Client:** `RecipeWorldClient` lives in `src/client/`, because `scenarios/` may not import client code.
+    - Diagnostics are read beside play.
+    - Work cut short by dispose is not a failure.
+  - **Tests:** native tests on an in-process Worker that uses the real port wiring (`src/server/testing/InProcessWorker.ts`).
+    - The step test shows the authority matching direct `ScenarioSession` steps through the transport. Prediction convergence is proven by a real-time case.
+    - The transport suite now runs through the same wiring, so the Worker entry's probe, duplicate-init and unhandled-rejection paths are covered.
+  - **Seeded faults:** 71 seeded single-line faults; 70 fail the suites, several only after added cases. The survivor drops the client's `sync-cvars` filter, which cannot be observed in-process because the rig shares the page's gravity global.
+  - **Ratchet:** `ScenarioSession` 423 → 406 lines, `WorkerClientTransport` 383 → 379.
+  - **Validation:**
+    - `tsc` for all four configs, Biome on the changed files, knip, focused vitest (88 files, 892 tests), regenerated inventories (line references only) and a production build.
+    - Playwright smoke 28 of 28, plus `scenario-lifecycle`, `scenario-scheduling`, `p2p-worker`, `worker-server`, `jump-park` and `pair-physics`.
+    - `src/wildlife/BallCommands.test.ts` fails on the unchanged base too, as do repo-wide Biome errors in unrelated files.
+  - **Review** (Yep Anywhere, Opus 5.5 high): ACCEPT.
+    - Should-fix taken: a paused lab lost its camera range after reset or teleport.
+    - Optional findings taken: diagnostics no longer block play, the rig moved under `server/testing`, failures after dispose are ignored, outstanding requests settle at shutdown, and the Worker entry's failure paths have tests.
+    - Re-review: CHANGES REQUESTED. The range fix stored a `view-range` command's range before the session validated it, so a refused range failed every later request. The range is now kept only after the session accepts it, with a test.
+    - Second re-review: ACCEPT.
+  - **Carried into 3c-ii:**
+    - Wire visibility as the game does.
+    - Clear the renderer on a new world.
+    - Document the recipe-world Worker and admin channel in the client–server and embedded-labs docs once a page uses them.

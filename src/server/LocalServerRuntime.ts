@@ -1,12 +1,15 @@
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { decodeClientMessage, encodeServerMessage } from "../shared/binaryCodec.js";
-import type { LocalHostDiagnostics, LocalHostPacket } from "../shared/localHostProtocol.js";
+import type {
+  LocalHostBoot,
+  LocalHostDiagnostics,
+  LocalHostPacket,
+} from "../shared/localHostProtocol.js";
 import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import { type ChannelEnvelope, OrderedWorkerChannel } from "../transport/OrderedWorkerChannel.js";
 import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
 import { type PeerPort, WorkerPeerLink } from "../transport/WorkerPeerLink.js";
-import { GameServer } from "./GameServer.js";
-import { browserServerDependencies } from "./hosts/browser.js";
+import type { GameServer } from "./GameServer.js";
 
 export interface LocalAuthority {
   init(): Promise<void>;
@@ -18,6 +21,69 @@ export interface LocalAuthority {
   completedTicks: number;
   readonly persistenceDiagnostics?: GameServer["persistenceDiagnostics"];
   onLoopError: ((error: unknown) => void) | undefined;
+  /** Lab instruments (226): only a recipe-world authority answers them. */
+  admin?(request: unknown): Promise<unknown>;
+}
+
+/** The global scope of a dedicated Worker, as the authority's entry point sees it. */
+export interface LocalAuthorityPort {
+  postMessage(message: unknown, transfer?: ArrayBuffer[]): void;
+  onmessage:
+    | ((event: MessageEvent<LocalHostBoot | ChannelEnvelope<LocalHostPacket>>) => void)
+    | null;
+  addEventListener(
+    type: "unhandledrejection",
+    listener: (event: PromiseRejectionEvent) => void,
+  ): void;
+}
+
+/** A Worker entry point: serve one local authority on the Worker's port. */
+export function serveLocalAuthority(
+  port: LocalAuthorityPort,
+  create: (transport: IServerTransport) => LocalAuthority,
+): LocalServerRuntime {
+  const runtime = new LocalServerRuntime(
+    (message, transfer) => port.postMessage(message, transfer),
+    (error) =>
+      port.postMessage({
+        kind: "failed",
+        error: error instanceof Error ? error.message : String(error),
+        ...(error instanceof Error && error.stack ? { stack: error.stack } : {}),
+      }),
+    create,
+  );
+  let initialized = false;
+  port.onmessage = ({ data }) => {
+    if (data.kind === "init") {
+      if (initialized) {
+        runtime.fail(new Error("Duplicate local server initialization"));
+        return;
+      }
+      initialized = true;
+      void runtime.init(data.metrics, data.keepAliveWhenHidden).then(
+        () => port.postMessage({ kind: "ready" }),
+        (error) => runtime.fail(error),
+      );
+    } else if (data.kind === "attach-peer") {
+      runtime.attachPeer(data.clientId, data.connectionId, data.port, (error) =>
+        port.postMessage({
+          kind: "peer-closed",
+          clientId: data.clientId,
+          connectionId: data.connectionId,
+          ...(error === undefined ? {} : { error: String(error) }),
+        }),
+      );
+    } else if (data.kind === "detach-peer") {
+      runtime.detachPeer(data.clientId, data.connectionId);
+    } else if (data.kind === "probe") {
+      port.postMessage({ kind: "heartbeat", id: data.id, diagnostics: runtime.diagnostics() });
+    } else if (data.kind === "batch" || data.kind === "credit") runtime.receive(data);
+  };
+  port.addEventListener("unhandledrejection", (event) => {
+    event.preventDefault();
+    runtime.fail(event.reason);
+  });
+  return runtime;
 }
 
 /** Owns the local authority lifecycle; the Worker entry point only forwards messages. */
@@ -40,8 +106,7 @@ export class LocalServerRuntime {
   constructor(
     post: (message: ChannelEnvelope<LocalHostPacket>, transfer: ArrayBuffer[]) => void,
     private readonly fatal: (error: unknown) => void,
-    create: (transport: IServerTransport) => LocalAuthority = (transport) =>
-      new GameServer(transport, browserServerDependencies()),
+    create: (transport: IServerTransport) => LocalAuthority,
   ) {
     this.channel = new OrderedWorkerChannel(post);
     const send = (id: string, message: ServerMessage) => {
@@ -217,9 +282,29 @@ export class LocalServerRuntime {
         performanceMetrics.reset();
         this.channel.send({ type: "result", id: packet.id });
         break;
+      case "admin":
+        this.admin(packet.id, packet.request);
+        break;
       case "result":
         throw Error("Unexpected client lifecycle receipt");
     }
+  }
+
+  /** Answer a lab instrument in channel order; a failed authority answers nothing. */
+  private admin(id: number, request: unknown): void {
+    if (!this.server.admin) {
+      this.channel.send({ type: "result", id, error: "This authority has no lab instruments" });
+      return;
+    }
+    void this.server.admin(request).then(
+      (admin) => this.channel.send({ type: "result", id, admin }),
+      (error) =>
+        this.channel.send({
+          type: "result",
+          id,
+          error: error instanceof Error ? error.message : String(error),
+        }),
+    );
   }
 
   diagnostics(): LocalHostDiagnostics {

@@ -35507,19 +35507,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:100"
+          "source": "src/scenarios/ScenarioRecipe.ts:125"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:102"
+          "source": "src/scenarios/ScenarioRecipe.ts:127"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:167"
+          "source": "src/scenarios/ScenarioSession.ts:147"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:247"
+          "source": "src/scenarios/ScenarioSession.ts:227"
         },
         {
           "system": "Gameplay",

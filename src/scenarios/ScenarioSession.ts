@@ -7,8 +7,6 @@ import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
 import { replaceBodyCollider, teleportBody } from "../physics/PhysicalEdits.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
-import { validateSurfacePatch } from "../physics/SurfacePatch.js";
-import { validateExcavations } from "../physics/TerrainExcavation.js";
 import { RoadType } from "../road/RoadType.js";
 import { runEquipment } from "../server/EquipmentControl.js";
 import { PlayerSession } from "../server/PlayerSession.js";
@@ -21,12 +19,14 @@ import {
 } from "../shared/binaryCodec.js";
 import { lcgNext } from "../shared/Determinism.js";
 import type { Movement } from "../shared/Movement.js";
+import type { ClientMessage } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { ScenarioCommand, ScenarioSeatCommand } from "./ScenarioProtocol.js";
 import {
   applyScenarioAppearance,
   parkScenarioVehicle,
+  prepareScenarioRecipe,
   type ScenarioRecipe,
   scenarioGravity,
 } from "./ScenarioRecipe.js";
@@ -35,6 +35,13 @@ import { scenarioVehicleSource } from "./ScenarioTraffic.js";
 
 /** Presses composed with a seat's movement (horn, sirens, throw). */
 const SEAT_PRESSES = new Set<string>(["vehicle-horn", "vehicle-emergency", "throw-ball"]);
+
+/** Where seat 0's server messages go: the session's own buffers (headless tests,
+ * the scenario Worker) or a live connection (the recipe-world authority, 226). */
+export interface ScenarioLink {
+  readonly clientId: string;
+  readonly transport: IServerTransport;
+}
 
 /** A temporary ordinary Realm with memory persistence. No alternate physics or clock. */
 export class ScenarioSession {
@@ -64,51 +71,24 @@ export class ScenarioSession {
   private identities: Record<string, string> = {};
   private seq = 0;
   private closed = false;
-  private constructor(readonly recipe: ScenarioRecipe) {
-    if (
-      (recipe.trafficRoads?.length ?? 0) > 64 ||
-      recipe.trafficRoads?.some(
-        (s) =>
-          ![s.a.x, s.a.y, s.b.x, s.b.y, s.width].every(Number.isSafeInteger) ||
-          s.width < 2 ||
-          s.width > 64 ||
-          (s.a.x !== s.b.x && s.a.y !== s.b.y) ||
-          [s.a.x, s.a.y, s.b.x, s.b.y].some((n) => Math.abs(n) > 8192),
-      )
-    )
-      throw Error("Invalid traffic road fixture");
-    if (recipe.version !== 1) throw Error("Unsupported scenario recipe");
-    if ((recipe.actors?.length ?? 0) > 1024 || (recipe.parkedVehicles?.length ?? 0) > 256)
-      throw Error("Scenario actor budget exceeded");
-    recipe.props.forEach((prop, index) => {
-      prop.type = `scenario-prop-${index}`;
-      for (const c of prop.walls ?? (prop.collider ? [prop.collider] : []))
-        if (c.surface) validateSurfacePatch(c.surface, c.width, c.height);
-    });
-    if (
-      (recipe.nativeProps?.length ?? 0) > 128 ||
-      recipe.nativeProps?.some((p) => !Number.isFinite(p.wx) || !Number.isFinite(p.wy))
-    )
-      throw Error("Invalid native scenario props");
-    validateExcavations(recipe.props);
-    const patches = recipe.props
-      .flatMap((p) => p.walls ?? (p.collider ? [p.collider] : []))
-      .flatMap((c) => (c.surface ? [c.surface] : []));
-    const ids = new Set(patches.map((p) => p.id));
-    if (ids.size !== patches.length || patches.some((p) => p.connectsTo.some((id) => !ids.has(id))))
-      throw Error("Invalid surface connections");
-    if (recipe.actors?.some((e) => e.type === "player"))
-      throw Error("Use recipe.player for the controlled actor");
-    if (recipe.guest && recipe.guest.type !== "player") throw Error("Invalid guest player");
+  /** Seat 0's connection id: the live link's, or a private one. */
+  private readonly clientId: string;
+  private constructor(
+    readonly recipe: ScenarioRecipe,
+    link?: ScenarioLink,
+  ) {
+    if (link) this.transport = link.transport;
+    this.clientId = link?.clientId ?? "scenario-player";
+    prepareScenarioRecipe(recipe);
     this.gravity = scenarioGravity(recipe);
     this.randomState = recipe.generation.seed;
   }
-  static async create(recipe: ScenarioRecipe): Promise<ScenarioSession> {
+  static async create(recipe: ScenarioRecipe, link?: ScenarioLink): Promise<ScenarioSession> {
     if (recipe.measurePhysics) {
       performanceMetrics.enabled = true;
       performanceMetrics.reset();
     }
-    const session = new ScenarioSession(structuredClone(recipe));
+    const session = new ScenarioSession(structuredClone(recipe), link);
     try {
       await session.open(true);
       return session;
@@ -158,7 +138,7 @@ export class ScenarioSession {
       },
     });
     await this.realm.loadWorld(meta.id, registry, () => this.store);
-    this.player = new PlayerSession("scenario-player");
+    this.player = new PlayerSession(this.clientId);
     this.player.editorEnabled = false;
     await this.realm.addPlayer(this.player);
     if (fresh)
@@ -257,7 +237,8 @@ export class ScenarioSession {
       // it must not advance vehicles or other bodies by a hidden warm-up tick.
     }
   }
-  private setViewRange(range?: ChunkRange) {
+  /** Seat 0's interest: the view range around its player (5×5 chunks by default). */
+  setViewRange(range?: ChunkRange) {
     if (
       range &&
       (!Object.values(range).every(Number.isSafeInteger) ||
@@ -284,8 +265,11 @@ export class ScenarioSession {
   }
   /** A seat's ordered play input: movement commands and composed presses (226). */
   input(buffer: ArrayBuffer, range?: ChunkRange, seat: 0 | 1 = 0) {
+    this.accept(decodeClientMessage(buffer), range, seat);
+  }
+  /** The same input already decoded by the caller's connection. */
+  accept(message: ClientMessage, range?: ChunkRange, seat: 0 | 1 = 0) {
     if (this.closed) throw Error("Scenario is closed");
-    const message = decodeClientMessage(buffer);
     const player = seat === 0 ? this.player : this.guest;
     if (!player) throw Error("No guest in this scenario");
     if (SEAT_PRESSES.has(message.type))
@@ -381,16 +365,15 @@ export class ScenarioSession {
     else if (command.kind === "vehicle-equipment") runEquipment(vehicles, session, command);
     else vehicles.exit(session);
   }
+  /** Send a seat's full replication through the session's transport. */
+  publish(session = this.player) {
+    for (const message of this.realm.replicate(session.clientId))
+      this.transport.send(session.clientId, message);
+  }
   frames(): ArrayBuffer[] {
-    if (this.guest) {
-      const packets = this.outgoing.get(this.guest.clientId) ?? [];
-      packets.push(...this.realm.replicate(this.guest.clientId).map(encodeServerMessage));
-      this.outgoing.set(this.guest.clientId, packets);
-    }
-    return [
-      ...this.takeFrames(this.player),
-      ...this.realm.replicate(this.player.clientId).map(encodeServerMessage),
-    ];
+    if (this.guest) this.publish(this.guest);
+    this.publish();
+    return this.takeFrames(this.player);
   }
   async reset() {
     if (this.closed) throw Error("Scenario is closed");

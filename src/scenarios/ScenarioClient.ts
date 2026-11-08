@@ -11,7 +11,7 @@ import type {
   ScenarioRequest,
   ScenarioResponse,
 } from "./ScenarioProtocol.js";
-import { type ScenarioRecipe, scenarioGravity } from "./ScenarioRecipe.js";
+import { normalizeLabMovement, type ScenarioRecipe, scenarioGravity } from "./ScenarioRecipe.js";
 import { ScenarioReplica } from "./ScenarioReplica.js";
 
 type Request = ScenarioRequest extends infer R
@@ -277,7 +277,7 @@ export class ScenarioClient {
     if (!this.accepting) return false;
     const replica = seat === 1 ? this.guest : this.host;
     if (!replica) throw Error("No guest in this scenario");
-    const movement = replica.normalize(input),
+    const movement = normalizeLabMovement(input),
       seq = ++replica.seq;
     this.sendInput(seat, encodeClientMessage({ type: "player-input", ...movement, seq }), range);
     replica.predict(seq, movement);

@@ -568,7 +568,7 @@
       "overLimit": 1
     },
     "src/scenarios/ScenarioSession.ts": {
-      "lines": 423,
+      "lines": 406,
       "worst": 65,
       "overLimit": 1
     },
@@ -713,7 +713,7 @@
       "overLimit": 1
     },
     "src/transport/WorkerClientTransport.ts": {
-      "lines": 383,
+      "lines": 379,
       "worst": 37,
       "overLimit": 1
     },

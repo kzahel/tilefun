@@ -13,7 +13,16 @@ export type LocalHostPacket = { buffer?: ArrayBuffer } & (
   | { type: "start" }
   | { type: "visibility"; hidden: boolean }
   | { type: "flush" | "shutdown" | "diagnostics" | "reset-diagnostics"; id: number }
-  | { type: "result"; id: number; error?: string; diagnostics?: LocalHostDiagnostics }
+  /** A lab instrument (226). Its shape belongs to the recipe-world authority,
+   * the only authority that answers one; this channel only orders it. */
+  | { type: "admin"; id: number; request: unknown }
+  | {
+      type: "result";
+      id: number;
+      error?: string;
+      diagnostics?: LocalHostDiagnostics;
+      admin?: unknown;
+    }
 );
 export interface LocalHostDiagnostics {
   timings: PerformanceSnapshot;
