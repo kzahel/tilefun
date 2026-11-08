@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, expect, expectTypeOf, it, vi } from "vitest";
 import type { ServerMessage } from "../shared/protocol.js";
+import type { RequestMessage } from "../shared/requests.js";
 import { RequestBroker } from "./RequestBroker.js";
 
 beforeEach(() => vi.useFakeTimers());
@@ -7,7 +8,11 @@ afterEach(() => vi.useRealTimers());
 
 it("infers response types and handles synchronous replies without leaking timers", async () => {
   const broker = new RequestBroker((request) =>
-    broker.receive({ type: "realm-list", requestId: request.requestId, realms: [] }),
+    broker.receive({
+      type: "realm-list",
+      requestId: (request as RequestMessage).requestId,
+      realms: [],
+    }),
   );
   const result = broker.send({ type: "list-realms", requestId: 1 });
   expectTypeOf(result).toEqualTypeOf<Promise<Extract<ServerMessage, { type: "realm-list" }>>>();
@@ -82,4 +87,22 @@ it("preserves the first call on duplicate IDs and cleans up transmission failure
   });
   await expect(broken.send({ type: "list-worlds", requestId: 1 })).rejects.toThrow("Send failed");
   expect(vi.getTimerCount()).toBe(0);
+});
+
+it("sends a guest seat's request in its envelope and resolves it from the answer", async () => {
+  const sent: unknown[] = [];
+  const broker = new RequestBroker((message) => sent.push(message));
+  const result = broker.send({ type: "exit-building", requestId: 9 }, 2);
+  expect(sent).toEqual([
+    { type: "seat", seat: 2, message: { type: "exit-building", requestId: 9 } },
+  ]);
+  broker.receive({
+    type: "realm-joined",
+    requestId: 9,
+    worldId: "w",
+    cameraX: 0,
+    cameraY: 0,
+    cameraZoom: 1,
+  });
+  await expect(result).resolves.toMatchObject({ worldId: "w" });
 });

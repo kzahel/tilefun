@@ -37,7 +37,7 @@ export class ScenarioReplica {
     if (player.id === -1) return;
     applyRecipeAppearances(this.view, this.template, this.actors);
     // Lab resets seat the player on its parent (the occupied vehicle or mount).
-    this.session.reconcile(reset || this.resetReplica, player.parentId);
+    this.session.reconcile(reset || this.resetReplica);
     this.resetReplica = false;
   }
   predict(seq: number, movement: Movement) {

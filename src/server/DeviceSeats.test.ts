@@ -103,8 +103,8 @@ describe("server seats on one device connection", () => {
     const guestStart = where(guest);
 
     play(device, "local", 1, 10, () => [
-      { seat: 0, body: host.player.id, movement: step(1, 0) },
-      { seat: 1, body: guest.player.id, movement: step(0, 1) },
+      { seat: 0, movement: step(1, 0) },
+      { seat: 1, movement: step(0, 1) },
     ]);
     // A repeated seat keeps its first movement; a seat nobody plays is ignored.
     for (let seq = 11; seq <= 20; seq++) {
@@ -124,9 +124,9 @@ describe("server seats on one device connection", () => {
     expect([host.lastProcessedInputSeq, guest.lastProcessedInputSeq]).toEqual([20, 20]);
 
     // Seat 1 drops out of the packets: it stops at once and still acknowledges each tick.
-    play(device, "local", 21, 22, () => [{ seat: 0, body: host.player.id, movement: step(1, 0) }]);
+    play(device, "local", 21, 22, () => [{ seat: 0, movement: step(1, 0) }]);
     const stopped = where(guest);
-    play(device, "local", 23, 40, () => [{ seat: 0, body: host.player.id, movement: step(1, 0) }]);
+    play(device, "local", 23, 40, () => [{ seat: 0, movement: step(1, 0) }]);
     expect(guest.player.position.wy).toBeCloseTo(stopped.wy, 3);
     expect(guest.player.position.wx).toBeCloseTo(stopped.wx, 3);
     expect([host.lastProcessedInputSeq, guest.lastProcessedInputSeq]).toEqual([40, 40]);
@@ -282,8 +282,8 @@ describe("server seats on one device connection", () => {
 
     const hostStart = where(host);
     play(device, "local", 1, 10, () => [
-      { seat: 0, body: host.player.id, movement: step(1, 0) },
-      { seat: 1, body: guestBody, movement: step(0, 1) },
+      { seat: 0, movement: step(1, 0) },
+      { seat: 1, movement: step(0, 1) },
     ]);
     expect(host.player.position.wx - hostStart.wx).toBeGreaterThan(5);
     expect(host.lastProcessedInputSeq).toBe(10);
@@ -312,14 +312,11 @@ describe("server seats on one device connection", () => {
       transport.send(
         "local",
         devicePacket(seq, [
-          { seat: 0, body: host.player.id, movement: step(1, 0) },
-          { seat: 1, body: guest.player.id, movement: step(1, 0) },
+          { seat: 0, movement: step(1, 0) },
+          { seat: 1, movement: step(1, 0) },
         ]).input,
       );
-      transport.send(
-        "dev-b",
-        devicePacket(seq, [{ seat: 0, body: other.player.id, movement: step(1, 0) }]).input,
-      );
+      transport.send("dev-b", devicePacket(seq, [{ seat: 0, movement: step(1, 0) }]).input);
       device.server.tick(1 / 60);
     }
     expect(host.player.position.wx).toBeCloseTo(starts[0]?.wx ?? 0, 3);
@@ -335,8 +332,8 @@ describe("server seats on one device connection", () => {
     const unclaimed = await join(device, 2, "dev-b");
     if (!guest || !unclaimed) throw Error("no guests");
     play(device, "dev-b", 1, 5, () => [
-      { seat: 0, body: seat0.player.id, movement: step(1, 0) },
-      { seat: 1, body: guest.player.id, movement: step(1, 0) },
+      { seat: 0, movement: step(1, 0) },
+      { seat: 1, movement: step(1, 0) },
     ]);
     expect(guest.lastProcessedInputSeq).toBe(5);
     const local = await join(device, 1);
@@ -459,8 +456,8 @@ describe("server seats on one device connection", () => {
     transport.send(
       "dev-a",
       devicePacket(1, [
-        { seat: 0, body: 1, movement: step(1, 0) },
-        { seat: 1, body: 2, movement: step(1, 0) },
+        { seat: 0, movement: step(1, 0) },
+        { seat: 1, movement: step(1, 0) },
       ]).input,
     );
     expect(guest.inputQueue).toEqual([]);

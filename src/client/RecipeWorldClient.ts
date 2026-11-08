@@ -137,7 +137,7 @@ export class RecipeWorldClient {
     const movement = normalizeLabMovement(input),
       seq = ++this.seq;
     const { replica } = this;
-    const seat = { seat: 0, body: replica.playerEntity.id, movement };
+    const seat = { seat: 0, movement };
     this.transport.send(devicePacket(seq, [seat]).input);
     replica.tickAnimations(PHYSICS_DT);
     this.device.predict(seq, movement, PHYSICS_DT);
@@ -247,7 +247,7 @@ export class RecipeWorldClient {
     applyRecipeAppearances(replica, this.recipe.player, this.recipe.actors);
     // Lab resets seat the player on its parent (the occupied vehicle or mount);
     // a cleared replica restarts prediction by itself.
-    this.device.reconcile(reset, player.parentId);
+    this.device.reconcile(reset);
   }
 
   /** Keep the first failure for the lab's next call and stop the Worker. */

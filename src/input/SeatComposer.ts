@@ -201,12 +201,10 @@ export class SeatComposer {
   }
 }
 
-/** A seat's command for one device tick, keyed by its controlled body. */
+/** A seat's command for one device tick. */
 export interface SeatCommand {
   /** The seat on the device connection; seat 0 comes first. */
   seat: number;
-  /** The seat's body, or the vehicle it drives (matches `SeatMovements`). */
-  body: number;
   movement: Movement;
 }
 
@@ -226,7 +224,8 @@ function wireMovement(m: Movement) {
 /**
  * One input packet per device tick: every local seat shares `seq`. Seat 0
  * rides in `player-input`'s own fields and the other seats in `seats`; the
- * predictor replays them as co-seat movement keyed by controlled body.
+ * predictor replays them as co-seat movement keyed by seat, resolving each
+ * seat's body from the stream's seat list.
  */
 export function devicePacket(
   seq: number,
@@ -236,8 +235,6 @@ export function devicePacket(
   if (primary?.seat !== 0) throw new Error("A device tick starts with seat 0");
   if (new Set(seats.map((seat) => seat.seat)).size !== seats.length)
     throw new Error("A seat can send one command per device tick");
-  if (new Set(seats.map((seat) => seat.body)).size !== seats.length)
-    throw new Error("Two seats cannot control the same body");
   const input: PlayerInput = {
     type: "player-input",
     seq,
@@ -248,6 +245,6 @@ export function devicePacket(
   };
   return {
     input,
-    coSeats: others.length ? new Map(others.map((seat) => [seat.body, seat.movement])) : undefined,
+    coSeats: others.length ? new Map(others.map((seat) => [seat.seat, seat.movement])) : undefined,
   };
 }

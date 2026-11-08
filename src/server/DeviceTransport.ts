@@ -38,8 +38,11 @@ export class DeviceTransport implements IServerTransport {
     private readonly registry: () => Pick<SessionRegistry, "seats" | "isDormant">,
   ) {}
 
+  /** A dormant guest is seated on no client: it hears nothing until its device seats it
+   * again, so a returned device is never moved or paused by a seat it has not taken back. */
   send(sessionId: string, msg: ServerMessage): void {
     const { connectionId, seat } = seatAddress(sessionId);
+    if (seat !== 0 && this.registry().isDormant(sessionId)) return;
     this.raw.send(connectionId, seat === 0 ? msg : { type: "seat", seat, message: msg });
   }
 

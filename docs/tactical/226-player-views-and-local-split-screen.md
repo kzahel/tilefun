@@ -10,7 +10,9 @@ view), 4a-ii (Outdoor geometry), 4a-iii (Characters), 4a-iv (Interiors
 playtest) and 4a-v (Natural landscape, with the old lab host deleted), which
 completes slice 4a. Slice 4b (server seats) is complete in three parts: 4b-i
 (seats on a connection), 4b-ii (replication per connection and realm) and
-4b-iii (party travel). Slice 5 (client seats and split screen) is next. Updated 2026-11-07 for seats on one device
+4b-iii (party travel). Slice 5 (client seats and split screen) is in three parts:
+5-i (client seats and production multi-seat prediction) is done, and 5-ii (split
+screen in the game) is next. Updated 2026-11-07 for seats on one device
 session, online seats and the first-person view requirements from 229; progress
 updated 2026-11-08.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
@@ -438,6 +440,7 @@ maintaining both shells. The shell import allow-list only shrinks.
 - Decided (autonomous run, as above; 4b-iii): party travel, keeping `realmId`
   per seat so per-realm replicas remain possible. Whichever seat asks leads its
   device through doors and between worlds, and the others follow beside it.
+- Decided (autonomous run, as above; 5-i): the client keeps one replica per device and ignores a stream sent through a guest alone. Party travel keeps a device's live seats in one realm, so such a stream exists only in transit edge cases; per-realm replicas remain possible because `realmId` stays per seat.
 - Open: does split screen pause everyone when one player opens the menu
   (proposed: yes), and which player controls a menu (proposed: the opener)?
 - Proposed: the two-pane physics lab becomes two device sessions on one page.
@@ -1703,3 +1706,101 @@ maintaining both shells. The shell import allow-list only shrinks.
     - a harness comment and a restored spy.
     - Carried: the door walk with followers, followers on a raised leader, and deletion stopping on any travelling seat of the device. These are listed above.
     - Re-review: ACCEPT. Its two doc nits (the requesting seat gets the reply; the device resume) are applied.
+- 2026-11-08, slice 5 is split into three parts, each reviewed and committed on its own: **5-i** client seats and production multi-seat prediction (Node-proven), **5-ii** split screen in the game (join flow, layouts, views, per-view HUD, the browser boundaries), **5-iii** the car-image memo, local performance checks and the final report.
+- 2026-11-08, slice 5-i exit list (client seats and production multi-seat prediction):
+  - **Client seats** (`src/session/`): `DeviceSession.seats` holds seat 0 and joined guests.
+    - A seat owns its composer, its jump latch and a cancel flag. A guest also owns its input set (`SeatInput`), with an adapter over an action set that 5-ii fills with keyboard scheme B or a pad.
+    - `join`/`leave` use `join-seat`/`leave-seat`. A guest's presses go in its envelope.
+    - Seat 0's composer leaves `PlayScene`; a new play scene still starts it fresh.
+  - **One device tick** (`DeviceTick`): every seat's command shares one sequence, and a locked seat's command is neutral.
+    - A seat's cancel (seat 0 hit while walking to a destination) makes that seat's command neutral on the same tick, instead of an extra sequence that would also stop the other seats.
+    - The predictor stores every tick except while authority holds the device still (storage pause, a door transition). Menus and lost focus are now stored as neutral input; the characterization difference is explained.
+    - Device-wide stops (blur, hidden page, pause, exit, menus, travel) still send one immediate neutral packet, now for every seat. It stays unstored: it is off cadence, and a hidden page may not tick again.
+  - **Seat-keyed prediction:**
+    - Co-seat movement is keyed by seat. At each reconcile the predictor resolves each co-seat's controlled body from the replica's seat list (`parentId ?? id`, the authority's rule), so mounting, leaving and realm changes stay in step, and equal ids in two realms cannot collide.
+    - `devicePacket` drops its body keys and the unique-body check.
+  - **Seat list on the client:** `RemoteStateView` keeps the frame seat list (seat 0 alone from `playerEntityId` when it is absent) and each guest's own session sync (gems, invincibility, mount). Both are applied in stream order and cleared with the replica.
+  - **Routing envelopes:**
+    - A guest's travel replies and request answers are the device's. Its own sync goes to its seat, and its own door walk veils the device (party travel).
+    - `kicked` in an envelope drops only that seat. A guest's copies of other actors' door motion are ignored.
+    - A stream through a guest (frames, chunks, props, room, cvars, names, cursors, horns in an envelope) is dropped. Decision: party travel keeps a device's live seats in one realm, so a lone guest stream exists only in transit edge cases. Per-realm replicas remain possible because `realmId` stays per seat.
+  - **Presentation per seat:** activity counts every seat's body, and a co-seat outside seat 0's contact group eases its own correction instead of snapping.
+  - **Reset mount on the parent rule** for the game and labs: `DeviceSession.reconcile(reset)`.
+  - **The 1a harness** vehicle case passes under the new chassis: the walker pauses while the car pulls away.
+  - **Tests** (Node):
+    - seats, the input adapter and envelope routing;
+    - the device tick: shared sequence, neutral locks, per-seat cancel, envelopes, the stop packet;
+    - seat-keyed replay: a mount change, a departure, colliding ids;
+    - per-seat smoothing and activity;
+    - an end-to-end client on `memoryServer` with a guest: one predictor predicting both seats on every tick with equal acknowledgements, a guest driving, a guest-led trip with the reply in its envelope, and the guest leaving;
+    - characterization updates, each explained.
+  - **Ratchet:** `PlayerPredictor`, `ClientStateView`, `PlayScene` and `GameClient` do not grow.
+  - **Not in 5-i:** the join flow, views, layouts and per-seat HUD, guests' real input devices (5-ii); guests re-joining after a remote reconnect.
+- 2026-11-08, slice 5-i done (exit list met):
+  - **Client seats** (`src/session/ClientSeat.ts`, `DeviceSeats.ts`):
+    - `DeviceSession.seats` holds seat 0 and the guests it joins (`join`/`leave` through `join-seat`/`leave-seat`; `drop` when authority removes one).
+    - A seat owns its composer, its jump latch and a cancel flag. A guest also owns its input set: `SeatInput`, with `ActionSeatInput` over one action set (`src/input/SeatInput.ts`), which 5-ii fills with keyboard scheme B or a pad. A guest without devices stands still in every packet rather than leaving it.
+    - A guest's presses go in its envelope (`ClientSeat.address`), and `RequestBroker.send(request, seat)` sends a guest's request there too.
+    - Seat 0's composer and jump latch left `PlayScene`; a new play scene restarts every seat, as a new composer did before.
+    - Session teardown (`DeviceSession.dispose`) releases every guest's input set.
+  - **One device tick** (`src/session/DeviceTick.ts`): `composeDeviceTick` composes every seat and builds one `devicePacket`.
+    - A locked seat samples still movement. A seat's cancel makes its own command still on that tick: seat 0 hit while walking to a destination no longer sends an extra sequence, which would also have stopped the guests (a joined seat missing from a packet stands still).
+    - The predictor stores every tick except while authority holds the device still: a storage pause (authority simulates nothing) or a door transition (it holds the travelling player, and prediction resets). Menus, lost focus and a hidden page are now stored as still input, because authority keeps simulating.
+    - Device-wide stops (lost focus, a hidden page, pausing or leaving play) still send one immediate still packet, now for every seat, with guests' horn releases in their envelopes. It stays unstored: it is off cadence (a second packet in one frame would advance the predictor a tick authority never takes), and a hidden page may not tick again.
+  - **Seat-keyed prediction** (`src/client/SeatInputs.ts`, `CoSeats`):
+    - Co-seat movement is keyed by seat. Each reconcile resolves a co-seat's controlled body from the stream's seat list by the authority's rule (`parentId ?? id`: its vehicle or mount, else its body), and a replay adopts the bodies of the snapshot it restores. A guest boarding a car therefore drives the car in replay as soon as the snapshot shows it seated, and a seat in no frame (another realm) resolves to nothing, so equal entity ids in two realms cannot collide.
+    - `devicePacket` dropped its body keys and the unique-body check.
+    - `PlayerPredictor` only wires `CoSeats` in; its geometry binding moved to `PredictionGeometry.ts` (1,014 → 1,001 lines).
+  - **Seat list on the client** (`src/client/StreamSeats.ts`): the replica keeps the frame seat list (seat 0 alone from `playerEntityId` when absent) and each guest's own session sync (gems, mount, invincibility), buffered in stream order and cleared with the replica. `player-assigned` in a guest's envelope is not needed: the frame seat list names each body. `ClientStateView.ts` 542 → 541 lines.
+  - **Routing envelopes** (`src/client/SeatEnvelope.ts`, exhaustive over server messages, used by `ServerMessageRouter`):
+    - a guest's travel replies, request answers and notices are the device's, so a guest-led trip enters the realm as seat 0's would and resolves the guest's request;
+    - its own sync goes to its seat; its own door walk veils the device (party travel), and its copies of other actors' door motion are ignored;
+    - `kicked` in an envelope drops only that seat;
+    - a seat this client has not joined moves nothing (only its answers resolve), and authority sends a dormant guest nothing (`DeviceTransport.send`). A device back from a remote reconnect that has not seated its guest again can therefore not be moved by that guest's evacuation from a deleted world, or paused by its storage notice;
+    - a stream through the guest alone (frames, chunks, props, room, cvars, names, cursors, horns) is ignored. Decision: party travel keeps a device's live seats in one realm, so such a stream exists only in transit edge cases; the server restarts the stream when its first seat changes, and per-realm replicas remain possible because `realmId` stays per seat.
+  - **Presentation per seat:** a co-seat body is always in the presented group. Activity also counts a co-seat body that is moving, airborne or carried. A co-seat outside seat 0's contact group eases its own correction (same easing and 32 px relocation limit as seat 0's) instead of snapping; inside it, it shares seat 0's.
+  - **Reset mount on the parent rule:** `DeviceSession.reconcile(reset)` seats a reset on the player's parent as the frame shows it, for the game and labs alike. The game used `mountEntityId` from session sync, which can lag or lead the frame; cars, animal mounts and script mounts set both together. A script attachment (`EntityHandle.attach`) can parent a player without a mount: authority then controls the bodiless player (no effect) while prediction drives the parent, as seat 0's step already did.
+  - **Resolved from earlier carried lists:** the 1a items (presentation activity and smoothing per seat, seat ids in step with mounting and leaving), the 2b deferral (locked ticks as still input, the per-seat cancel), the 3b deferral (one reset-mount rule), the 4b-ii items (co-seat bodies keyed by realm, replicas started over and discarded with their streams: the device's replica follows seat 0's stream and is cleared on every realm change; a resumed guest's trailing acknowledgement, since the client reads only the stream's), and the 4b-iii item (replies from any seat's envelope).
+  - **The 1a harness** (`src/client/MultiSeatPrediction.test.ts`):
+    - Its vehicle case passes under 600e09d0's chassis: the car now stops about 159 px from the walker, inside the prediction radius, so the walker pauses while the car pulls away and then catches up (54 of 260 ticks unpredicted with one anchor, remote; none with two).
+    - Co-seat movement is keyed by seat, with the seat list passed. A new control ("unheld") feeds the predictor no movement for seat 1: seat 1's own-view error is then 1.3–2× larger (opposed 15.4 vs 11.6 px remote, 4.7 vs 2.4 local; vehicle 8.8 vs 5.5, 2.2 vs 1.1). Before, the harness also passed when the predictor ignored co-seat input.
+  - **Tests:**
+    - `src/client/DeviceSeatPrediction.test.ts` (4 cases): the real server (`memoryServer`, binary codec) and on the client one replica, one `DeviceSession` and one predictor, frames one tick late:
+      - a guest walking beside a walking seat 0 on one sequence and acknowledgement;
+      - a guest boarding from its envelope and driving;
+      - presentation while seat 0 stands: the guest at its predicted pose ahead of the buffered one, a mispredicted guest easing its own correction, and a guest carried on seat 0's head keeping prediction presented with no input;
+      - a guest-led trip (the reply in its envelope, both seats predicted again with new bodies from the seat list) and the guest leaving.
+      The prediction metric is each predicted guest tick against the authority's pose at the same tick: measured 0; without the guest's movement, 1.07 px walking and 0.07 px driving, so the bound is 0.02.
+    - `src/session/DeviceSeats.test.ts` (8), `src/input/SeatInput.test.ts` (4), and new cases in `SeatInputs.test.ts` (`seatBodies`, `CoSeats`), `RemoteStateView.test.ts`, `ServerMessageRouter.test.ts` and `RequestBroker.test.ts`.
+    - Updated for the new signatures: `DeviceSession.test.ts`, `SeatComposer.test.ts`, `CoopWorker.test.ts`, `RecipeWorldClient.test.ts`, and the server's `DeviceSeats.test.ts` and `DeviceStreams.test.ts`.
+    - Characterization (`playInputCharacterization.test.ts`), intended differences, each commented in the test:
+      - an open menu is stored as still input; a storage pause and a door transition still are not;
+      - the stop packet is a device packet with explicit `jumpPressed`, `reversing` and `relativeDriving: false`;
+      - a hit's own tick is still, with no extra sequence;
+      - `reconcile` has no mount argument.
+  - **Seeded faults** (isolated worktree, `/tmp/tilefun-226-5i/faults.py`): 85 single-line faults over seat bodies, co-seat replay, intents, smoothing and activity, the predictor wiring, the packet, the replica's seats, envelope routing, the broker, client seats, the device tick, the reset rule, the play scene's locks, cancels and stops, and the input-set adapter.
+    - 73 failed the suites at first. Eleven survivors became cases: co-seat normalization; the presentation group, a co-seat's own correction and co-seat activity (no test looked at what the predictor presents); and seven play-scene paths that the single-seat characterization could not see (guests in the tick, guests locked, a guest's throw in its envelope, guests' horn releases on stop, the hit cancel with a key held, a new scene restarting its seats, a cancel forgetting a latched jump). All eleven now fail the suites (`faults2.log`).
+    - One more, freezing the predictor's geometry revision, does not compile (an unused parameter).
+  - **Ratchet:** `PlayerPredictor.ts` 1,014 → 1,001, `ClientStateView.ts` 542 → 541, `PlayScene.ts` 653 → 649 lines (worst 50 → 45). `GameClient.ts` is unchanged.
+  - **Validation:**
+    - `npm run typecheck` (four configs), Biome on the changed files, knip.
+    - The ratchet: only other sessions' entries fail (`src/rendering/*`, `GameClient.ts` 927 → 936, `src/physics/VehicleChassis.ts`).
+    - Focused vitest over `src/server`, `src/shared`, `src/transport`, `src/input`, `src/scenes`, `src/client`, `src/session`, `src/scenarios`, `src/persistence`, `src/console`, `src/physics` and `src/railway`: 153 files, 1,430 tests, all passing; the 1a vehicle case passes again.
+    - `art:catalog` then `workshop:manifest` (line references only), and a production build.
+    - Playwright against the build: the smoke config (28); `p2p-worker`, `scenario-lifecycle`, `farm-doors`, `worker-server`, `car-controls`, `prediction-recovery`, `jump-park` and `building-doors` (18); the standalone HTTP/WebSocket suite (3).
+    - `streaming:bench` was not run: server streaming and publication are unchanged.
+  - **Carried to 5-ii:**
+    - the join flow, guests' real input sets (keyboard scheme B, pads) and one view per seat; `followSeat` for a driving guest follows its vehicle (a seated rider has no body of its own);
+    - a guest riding an animal is drawn at its buffered pose behind its predicted mount (in-car riders are hidden): present a co-seat rider at its predicted parent plus its offset, as `samplePlayer` does for seat 0;
+    - from 3a: per-view look-ahead keyed by view, and merging `RenderRegion` with the input layer's `ViewRegion`;
+    - per-seat HUD (gems and invincibility are on the replica per seat) and hit feedback per view;
+    - followers' door presentation (the leader's walk veils the device; the others appear);
+    - guests re-joining after a remote reconnect (authority keeps them dormant until `join-seat`).
+    - From 4b-iii: followers landing on terrain beside a raised leader; deletion stopping on any travelling seat of a device.
+  - **Carried to 5-iii:** replay time with two seats' bodies in one multi-anchor snapshot in the game (1a; the 4b-ii Node harness found no measurable cost).
+  - **Review** (Yep Anywhere, Opus 5.5 high): ACCEPT, no blocking findings. The reviewer re-ran the affected tests and confirmed every fault survivor is now caught. Optional findings taken:
+    - a dormant guest's messages: authority sends it nothing, and the client lets only joined seats move the device (a deletion case and a router case cover both);
+    - a dispose-all for guests on session teardown;
+    - carried items: the animal rider's presentation and the 3a deferrals (5-ii), replay time with two seats in the game (5-iii); the script-attachment note on the reset rule.
+    - Declined: widening the harness control's 1.25× bound margin (measured 1.33× at the smallest; deterministic).
+    - Re-review: ACCEPT. It confirmed the dormant-guest guard (guests turn dormant only on a disconnect, and `admitGuest` clears dormancy before replying) and the teardown.

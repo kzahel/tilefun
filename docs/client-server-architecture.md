@@ -91,8 +91,9 @@ caches. The authority service uses the same alignment for carriage motion. Paths
 are generator-derived metadata, not duplicated durable terrain records.
 
 A connection is a device that can seat up to four local players
-([226](tactical/226-player-views-and-local-split-screen.md), server side since
-slice 4b-i; no client seats them yet).
+([226](tactical/226-player-views-and-local-split-screen.md): server side since
+slice 4b-i, client seats and their prediction since 5-i; no player can join one
+in the game until split screen, 5-ii).
 - **Sessions per seat:** each seat has its own `PlayerSession`. Seat 0's id is
   the bare connection id, so single player is unchanged; other seats are
   `connection#n`, and are guests of seat 0 without a profile.
@@ -137,6 +138,27 @@ slice 4b-i; no client seats them yet).
   - Each seat's own session sync goes to that seat.
   - The replicator keeps baselines per connection. A new lowest seat starts the
     stream over.
+- **Client seats** ([DeviceSeats](../src/session/DeviceSeats.ts)): the device
+  session holds seat 0 and the guests it has joined. Each seat owns its input
+  composition, and a guest also owns its input set.
+  - One device tick ([DeviceTick](../src/session/DeviceTick.ts)) sends every
+    seat's command under one sequence. A locked seat sends still movement; a
+    seat's cancel stops it on that tick, without an extra sequence.
+  - The predictor stores every tick except while authority holds the device
+    still (a storage pause or a door transition). Device-wide stops (lost focus,
+    a hidden page, pausing play) also send one immediate still packet for every
+    seat; it is off cadence and not stored.
+  - One predictor replays every seat. Co-seat movement is keyed by seat, and
+    each reconcile resolves a co-seat's body from the frame seat list by the
+    authority's rule (its vehicle or mount, else its body), so mounting and
+    realm changes stay in step. A co-seat outside seat 0's contact group eases
+    its own correction.
+  - A guest's envelope ([SeatEnvelope](../src/client/SeatEnvelope.ts)): its
+    travel replies and request answers are the device's, its own sync goes to
+    its seat, and its own door walk veils the device. A stream through a guest
+    alone is ignored, because party travel keeps a device's live seats in one
+    realm. A seat the client has not joined moves nothing, and authority sends
+    a dormant guest nothing at all.
 
 [RequestBroker](../src/client/RequestBroker.ts) correlates request IDs with the
 response mapping in [requests.ts](../src/shared/requests.ts), checks response

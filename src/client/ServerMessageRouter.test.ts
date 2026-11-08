@@ -22,6 +22,7 @@ function fakeHost() {
       editorEnabled: false,
       clear: log("stateView.clear"),
       bufferMessage: (msg: ServerMessage) => calls.push(`buffer ${msg.type}`),
+      bufferSeatSync: (seat: number, msg: ServerMessage) => calls.push(`seat ${seat} ${msg.type}`),
     },
     canvas: { dataset: {} },
     camera: {
@@ -30,7 +31,11 @@ function fakeHost() {
       requestSnap: log("camera.requestSnap"),
     },
     renderer: { clear: log("renderer.clear") },
-    device: { clearPresentation: log("device.clearPresentation") },
+    device: {
+      clearPresentation: log("device.clearPresentation"),
+      seats: { drop: log("seats.drop"), get: (seat: number) => (seat === 2 ? {} : undefined) },
+    },
+    doorPresentation: { receive: (msg: ServerMessage) => calls.push(`door ${msg.type}`) },
     mainMenu: { currentWorldId: null, showCreationError: log("showCreationError") },
     editorModel: { setPatternStatus: log("setPatternStatus") },
     requests: { receive: (msg: ServerMessage) => calls.push(`receive ${msg.type}`) },
@@ -141,4 +146,67 @@ it("holds a lobby realm list until init and auto-joins once", () => {
     `sendRequest ${JSON.stringify({ type: "join-realm", requestId: 7, worldId: "b", resume: true })}`,
   ]);
   expect(auto.takeLobbyRealmList()).toBe(realms);
+});
+
+it("routes a guest's envelope: device replies, its own sync and door walk, its own departure", () => {
+  stubSessionStorage();
+  vi.spyOn(console, "log").mockImplementation(() => {});
+  const { host, calls } = fakeHost();
+  const router = new ServerMessageRouter(host, { autoJoinRealm: false, reloadCamera: null });
+  const guest = (message: ServerMessage): ServerMessage => ({ type: "seat", seat: 2, message });
+  // A guest-led trip's reply is the device's, and resolves the guest's request.
+  router.route(
+    guest({
+      type: "realm-joined",
+      requestId: 3,
+      worldId: "w2",
+      cameraX: 1,
+      cameraY: 2,
+      cameraZoom: 1,
+    }),
+  );
+  expect(calls[0]).toBe("clearPlayInput");
+  expect(calls).toContain("stateView.clear");
+  expect(calls.at(-1)).toBe("receive realm-joined");
+  calls.length = 0;
+  router.route(guest({ type: "request-error", requestId: 4, message: "no" }));
+  router.route(
+    guest({ type: "sync-session", gemsCollected: 2, editorEnabled: false } as ServerMessage),
+  );
+  router.route(
+    guest({ type: "sync-invincibility", startTick: 1, durationTicks: 2 } as ServerMessage),
+  );
+  expect(calls).toEqual([
+    "receive request-error",
+    "seat 2 sync-session",
+    "seat 2 sync-invincibility",
+  ]);
+  // Its own door walk takes the device through; its copies of others' are seat 0's too.
+  calls.length = 0;
+  const door = { type: "door-motion", phase: "depart", self: true } as ServerMessage;
+  router.route(guest(door));
+  router.route(guest({ ...door, self: false } as ServerMessage));
+  expect(calls).toEqual(["clearPlayInput", "door door-motion"]);
+  // A stream through the guest alone, and its body's announcement, are ignored.
+  calls.length = 0;
+  router.route(guest({ type: "frame" } as ServerMessage));
+  router.route(guest({ type: "sync-chunks" } as ServerMessage));
+  router.route(guest({ type: "vehicle-horn" } as ServerMessage));
+  router.route(guest({ type: "player-assigned", entityId: 5 }));
+  expect(calls).toEqual([]);
+  // A guest kicked by authority leaves alone: the device plays on.
+  router.route(guest({ type: "kicked", reason: "bye" }));
+  expect(calls).toEqual(["seats.drop [2]"]);
+  // A seat this client has not joined moves nothing; an answer still resolves.
+  calls.length = 0;
+  const unjoined = (message: ServerMessage): ServerMessage => ({ type: "seat", seat: 3, message });
+  router.route(unjoined({ type: "world-loaded", cameraX: 0, cameraY: 0, cameraZoom: 1 }));
+  router.route(unjoined({ type: "storage-status", paused: true, message: "x" }));
+  router.route(unjoined(door));
+  router.route(unjoined({ type: "request-error", requestId: 5, message: "no" }));
+  expect(calls).toEqual([
+    "receive world-loaded",
+    "receive storage-status",
+    "receive request-error",
+  ]);
 });

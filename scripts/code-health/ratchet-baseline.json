@@ -58,7 +58,7 @@
       "overLimit": 1
     },
     "src/client/ClientStateView.ts": {
-      "lines": 542,
+      "lines": 541,
       "worst": 35,
       "overLimit": 1
     },
@@ -68,7 +68,7 @@
       "overLimit": 0
     },
     "src/client/PlayerPredictor.ts": {
-      "lines": 1014,
+      "lines": 1001,
       "worst": 45,
       "overLimit": 4
     },
@@ -583,8 +583,8 @@
       "overLimit": 1
     },
     "src/scenes/PlayScene.ts": {
-      "lines": 653,
-      "worst": 50,
+      "lines": 649,
+      "worst": 45,
       "overLimit": 2
     },
     "src/scenes/PropEditorScene.ts": {

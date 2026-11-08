@@ -110,7 +110,7 @@ describe("RemoteStateView", () => {
     expect(view.playerEntity.id).toBe(1);
   });
 
-  it("accepts a device stream's seat list without using it yet (226 slice 4b-ii)", () => {
+  it("keeps a device stream's seat list, else seat 0 alone, and each guest's own sync (226)", () => {
     const frame = makeFrame({
       entityBaselines: [makeTestEntity(1, 50, 75), makeTestEntity(2, 100, 200)],
       playerEntityId: 1,
@@ -131,6 +131,36 @@ describe("RemoteStateView", () => {
       expect(view.playerEntity.id).toBe(1);
       expect(view.lastProcessedInputSeq).toBe(4);
     }
+    expect(plain.seats.entities).toEqual(new Map([[0, 1]]));
+    expect(seated.seats.entities).toEqual(
+      new Map([
+        [0, 1],
+        [1, 2],
+      ]),
+    );
+    // A guest's sync applies in order with the stream, apart from seat 0's own.
+    seated.bufferSeatSync(1, {
+      type: "sync-session",
+      gemsCollected: 3,
+      editorEnabled: false,
+      mountEntityId: 2,
+    });
+    seated.bufferSeatSync(1, { type: "sync-invincibility", startTick: 10, durationTicks: 120 });
+    expect(seated.seats.session(1, 0)).toBeUndefined();
+    seated.applyPending();
+    seated.applyFrame({ ...frame, serverTick: 70 });
+    expect(seated.seats.session(1, seated.serverTick)).toEqual({
+      gemsCollected: 3,
+      mountEntityId: 2,
+      invincibility: { startTick: 10, durationTicks: 120 },
+      invincibilityTimer: 1,
+    });
+    expect(seated.seats.session(1, 400)?.invincibilityTimer).toBe(0);
+    expect(seated.gemsCollected).toBe(0);
+    expect(seated.seats.entities).toEqual(new Map([[0, 1]])); // that frame carried no guest
+    seated.clear();
+    expect(seated.seats.session(1, 0)).toBeUndefined();
+    expect(seated.seats.entities).toEqual(new Map());
   });
 
   it("applies entity deltas to existing entities", () => {

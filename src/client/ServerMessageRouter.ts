@@ -16,6 +16,7 @@ import type { RemoteStateView } from "./ClientStateView.js";
 import type { DoorPresentation } from "./DoorPresentation.js";
 import type { ReloadCamera } from "./ReloadCamera.js";
 import type { RequestBroker } from "./RequestBroker.js";
+import { seatRoute } from "./SeatEnvelope.js";
 
 type RealmEntered = Extract<ServerMessage, { type: "world-loaded" | "realm-joined" }>;
 
@@ -25,8 +26,9 @@ export interface ServerMessageHost {
   readonly canvas: HTMLCanvasElement;
   readonly camera: Camera;
   readonly renderer: RenderBackend;
-  /** Device presentation (scene frame and every view's fades), reset with the realm. */
-  readonly device: Pick<DeviceSession, "clearPresentation">;
+  /** Device presentation (scene frame and every view's fades), reset with the realm,
+   * and its local seats. */
+  readonly device: Pick<DeviceSession, "clearPresentation" | "seats">;
   readonly scenes: SceneManager;
   readonly mainMenu: MainMenu;
   readonly editorModel: EditorModel;
@@ -78,7 +80,8 @@ export class ServerMessageRouter {
 
   route(msg: ServerMessage): void {
     if (!this.apply(msg)) return;
-    this.host.requests.receive(msg);
+    // A guest's envelope resolves the reply inside it (`routeSeat`).
+    if (msg.type !== "seat") this.host.requests.receive(msg);
   }
 
   /** Returns false when the client was torn down and no reply may resolve. */
@@ -152,12 +155,30 @@ export class ServerMessageRouter {
       case "seat-joined":
       case "seat-left":
         break;
-      // Another local seat's messages; split screen routes them (226 slice 5).
+      // Another local seat's messages (226).
       case "seat":
-        break;
+        return this.routeSeat(msg.seat, msg.message);
       default:
         msg satisfies never;
     }
+    return true;
+  }
+
+  /** A joined guest's message: the device's replies and notices are handled as seat 0's,
+   * so the guest's request answers resolve here too. A seat this client has not joined
+   * moves nothing. */
+  private routeSeat(seat: number, message: ServerMessage): boolean {
+    const route = seatRoute(message);
+    const joined = !!this.host.device.seats.get(seat);
+    if (route.kind === "device") {
+      if (joined && !this.apply(route.message)) return false;
+      this.host.requests.receive(route.message);
+    } else if (route.kind === "sync") this.host.stateView.bufferSeatSync(seat, route.message);
+    else if (route.kind === "door" && joined) {
+      // Party travel: a guest's door walk takes the whole device through.
+      this.host.clearPlayInput();
+      this.host.doorPresentation.receive(route.message);
+    } else if (route.kind === "left") this.host.device.seats.drop(seat);
     return true;
   }
 

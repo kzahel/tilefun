@@ -1,5 +1,5 @@
 import { faultEvent, reportFault } from "../diagnostics/FaultReporter.js";
-import type { ServerMessage } from "../shared/protocol.js";
+import type { ClientMessage, ServerMessage } from "../shared/protocol.js";
 import {
   isRequestResponse,
   type RequestMessage,
@@ -18,11 +18,12 @@ export class RequestBroker {
   private disposed = false;
 
   constructor(
-    private readonly transmit: (message: RequestMessage) => void,
+    private readonly transmit: (message: ClientMessage) => void,
     private readonly timeoutMs = 30_000,
   ) {}
 
-  send<R extends RequestMessage>(request: R): Promise<RequestResponse<R>> {
+  /** A guest seat's request travels in its envelope, where its answer returns (226). */
+  send<R extends RequestMessage>(request: R, seat = 0): Promise<RequestResponse<R>> {
     if (this.disposed) return Promise.reject(new Error("Game client destroyed."));
     if (this.pending.has(request.requestId))
       return Promise.reject(new Error(`Duplicate request ID: ${request.requestId}`));
@@ -44,7 +45,7 @@ export class RequestBroker {
         },
       });
       try {
-        this.transmit(request);
+        this.transmit(seat === 0 ? request : { type: "seat", seat, message: request });
       } catch (error) {
         this.pending.delete(request.requestId);
         clearTimeout(timer);

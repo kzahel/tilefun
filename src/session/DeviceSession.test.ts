@@ -18,6 +18,7 @@ function replica(player: Entity) {
     world: { name: "world" },
     props: [],
     entities: [player],
+    seats: { entities: new Map([[0, player.id]]) },
     setPredictor: vi.fn(),
   };
 }
@@ -65,7 +66,7 @@ describe("DeviceSession prediction", () => {
     const p = predictor();
     session.startPrediction(p as unknown as PlayerPredictor);
     expect(p.reset).not.toHaveBeenCalled();
-    expect(session.reconcile(true, undefined)).toBe(false);
+    expect(session.reconcile(true)).toBe(false);
     expect(p.reconcile).not.toHaveBeenCalled();
   });
 
@@ -77,30 +78,32 @@ describe("DeviceSession prediction", () => {
     view.serverEntities = [horse, car];
     view.mountEntityId = 5;
     const session = new DeviceSession(view as unknown as RemoteStateView);
-    expect(session.reconcile(false, 5)).toBe(false); // no predictor yet
+    expect(session.reconcile(false)).toBe(false); // no predictor yet
     const p = predictor(player);
     session.startPrediction(p as unknown as PlayerPredictor);
     p.reset.mockClear();
-    expect(session.reconcile(false, 5)).toBe(true);
+    expect(session.reconcile(false)).toBe(true);
     expect(p.reset).not.toHaveBeenCalled();
     expect(p.reconcile).toHaveBeenLastCalledWith(player, 7, view.world, [], [horse, car], 5, {
       serverTick: 40,
+      seats: view.seats.entities,
     });
-    // Asked (a door transition): the game seats a reset on its gameplay mount.
-    session.reconcile(true, view.mountEntityId);
-    expect(p.reset).toHaveBeenLastCalledWith(player, horse);
-    // No mount named means none, never another rule's mount.
-    session.reconcile(true, undefined);
-    expect(p.reset).toHaveBeenLastCalledWith(player, undefined);
-    // A lab names the parent it seats on instead.
-    session.reconcile(true, player.parentId);
+    // Asked (a door transition): a reset seats the player on its parent as the frame
+    // shows it, for the game and labs alike, even while session sync names another mount.
+    session.reconcile(true);
     expect(p.reset).toHaveBeenLastCalledWith(player, car);
+    // No parent: no mount.
+    const { parentId: _parentId, ...walking } = player;
+    view.serverPlayerEntity = walking;
+    session.reconcile(true);
+    expect(p.reset).toHaveBeenLastCalledWith(walking, undefined);
+    view.serverPlayerEntity = player;
     // Another server player, or none predicted yet.
     p.reset.mockClear();
     p.player = { ...player, id: 4 };
-    session.reconcile(false, 5);
+    session.reconcile(false);
     p.player = undefined;
-    session.reconcile(false, 5);
+    session.reconcile(false);
     expect(p.reset).toHaveBeenCalledTimes(2);
   });
 
@@ -111,7 +114,7 @@ describe("DeviceSession prediction", () => {
     session.predict(1, walk, 1 / 60); // no predictor: nothing to do
     const p = predictor(player);
     session.startPrediction(p as unknown as PlayerPredictor);
-    const coSeats = new Map([[70, walk]]);
+    const coSeats = new Map([[1, walk]]); // keyed by seat
     session.predict(2, walk, 1 / 60, coSeats);
     expect(p.storeInput).toHaveBeenCalledWith(2, walk, 1 / 60, coSeats);
     expect(p.update).toHaveBeenCalledWith(1 / 60, walk, view.world, [], [player]);
@@ -132,7 +135,9 @@ describe("DeviceSession prediction", () => {
     expect(views.map((v) => v.fades.size)).toEqual([0, 0]);
     session.startPrediction(predictor() as unknown as PlayerPredictor);
     views[0]?.fades.set("deck", { opacity: 0.6, time: 1 });
+    const seats = vi.spyOn(session.seats, "dispose");
     session.dispose();
+    expect(seats).toHaveBeenCalledOnce(); // guests' input sets released
     expect(view.setPredictor).toHaveBeenLastCalledWith(null);
     expect(clear).toHaveBeenCalledTimes(2);
     expect(views[0]?.fades.size).toBe(0);

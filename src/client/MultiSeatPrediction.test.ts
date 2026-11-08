@@ -46,11 +46,13 @@ afterEach(async () => {
   for (const close of cleanup.splice(0).reverse()) await close();
 });
 
-/** Seat 1 also walks in the vehicle case (one seat drives while the other walks)
- * and jumps after the opposed push, exercising co-seat jump edges. */
+/** Seat 1 also walks in the vehicle case (one seat drives while the other walks,
+ * pauses while the car pulls away, then catches up) and jumps after the opposed
+ * push, exercising co-seat jump edges. */
 function script(scene: CoopCase, tick: number, seat: 0 | 1): Movement {
   const t = tick % 360;
-  if (scene === "vehicle" && seat === 1) return { ...COOP_IDLE, dx: t > 20 && t < 140 ? 1 : 0 };
+  if (scene === "vehicle" && seat === 1)
+    return { ...COOP_IDLE, dx: (t > 20 && t < 100) || (t > 170 && t < 240) ? 1 : 0 };
   if (scene === "opposed" && seat === 1 && t >= 180 && t < 190) return { ...COOP_IDLE, jump: true };
   return coopScript(scene, tick, seat);
 }
@@ -65,7 +67,14 @@ async function client(clock: () => number): Promise<Client> {
   await predictor.ready;
   return { view: new RemoteStateView(new World()), predictor };
 }
-function receive({ view, predictor }: Client, packets: readonly ArrayBuffer[], now: number) {
+/** The guest's seat list entry: the lab guest is its own connection, so the stream
+ * carries no seat list and the harness names seat 1's entity itself. */
+function receive(
+  { view, predictor }: Client,
+  packets: readonly ArrayBuffer[],
+  now: number,
+  seats?: ReadonlyMap<number, number>,
+) {
   for (const packet of packets) {
     const m = decodeServerMessage(packet);
     if (m.type === "frame") view.applyFrame(m, now);
@@ -81,7 +90,11 @@ function receive({ view, predictor }: Client, packets: readonly ArrayBuffer[], n
     view.props,
     view.serverEntities,
     view.mountEntityId,
-    { serverTick: view.serverTick, ...(view.physicsState ? { physics: view.physicsState } : {}) },
+    {
+      serverTick: view.serverTick,
+      ...(view.physicsState ? { physics: view.physicsState } : {}),
+      ...(seats ? { seats } : {}),
+    },
   );
 }
 
@@ -109,7 +122,8 @@ interface RunResult {
   guestInHostSnapshot: boolean;
 }
 
-async function run(scene: CoopCase, mode: Mode, delays: Delays, guestOffset = 0) {
+/** "unheld" (a control): as "anchored", but seat 1's movement never reaches the predictor. */
+async function run(scene: CoopCase, mode: Mode | "unheld", delays: Delays, guestOffset = 0) {
   const recipe = coopRecipe(scene);
   if (recipe.guest && guestOffset) recipe.guest.position.wx += guestOffset;
   const s = await ScenarioSession.create(recipe);
@@ -131,14 +145,15 @@ async function run(scene: CoopCase, mode: Mode, delays: Delays, guestOffset = 0)
     return frame;
   };
   const hostFrames = () =>
-    mode === "anchored"
+    mode === "anchored" || mode === "unheld"
       ? s.realm.replicate(s.player.clientId, [guest]).map((m) => encodeServerMessage(unseated(m)))
       : s.frames();
   let now = 0;
   const clock = () => now;
   const host = await client(clock);
   const second = mode === "two" ? await client(clock) : undefined;
-  receive(host, hostFrames(), now);
+  const seats = mode === "two" ? undefined : new Map([[1, guest.player.id]]);
+  receive(host, hostFrames(), now, seats);
   if (second) receive(second, s.takeGuestFrames(), now);
   else s.takeGuestFrames();
 
@@ -217,7 +232,8 @@ async function run(scene: CoopCase, mode: Mode, delays: Delays, guestOffset = 0)
     const moves: [Movement, Movement] = [script(scene, tick, 0), script(scene, tick, 1)];
     const started = performance.now();
     if (mode !== "two") {
-      host.predictor.storeInput(tick, moves[0], PHYSICS_DT, new Map([[ids[1], moves[1]]]));
+      const coSeats = mode === "unheld" ? undefined : new Map([[1, moves[1]]]);
+      host.predictor.storeInput(tick, moves[0], PHYSICS_DT, coSeats);
       host.predictor.update(PHYSICS_DT, moves[0], host.view.world, host.view.props, []);
     } else if (second) {
       for (const [seat, c] of [host, second].entries()) {
@@ -259,7 +275,7 @@ async function run(scene: CoopCase, mode: Mode, delays: Delays, guestOffset = 0)
       const item = deliveries.shift();
       if (!item) break;
       const t0 = performance.now();
-      receive(host, item.host, now);
+      receive(host, item.host, now, seats);
       if (second) receive(second, item.guest, now);
       result.ms += performance.now() - t0;
       const bodies = host.view.physicsState?.bodies;
@@ -301,7 +317,7 @@ async function run(scene: CoopCase, mode: Mode, delays: Delays, guestOffset = 0)
 }
 
 const round = (n: number) => Math.round(n * 100) / 100;
-function row(scene: string, mode: Mode, delay: string, r: RunResult) {
+function row(scene: string, mode: Mode | "unheld", delay: string, r: RunResult) {
   return {
     scene,
     delay,
@@ -374,6 +390,23 @@ describe("multi-seat prediction spike (226 slice 1a)", () => {
         expect(anchored.seats.map((seat) => seat.unpredicted)).toEqual([0, 0]);
         expect(anchored.crossView).toBe(0);
         expect(anchored.replaySteps).toBeLessThanOrEqual(two.replaySteps * 0.55);
+      }
+    console.table(rows);
+  });
+
+  it("replays seat 1's own movement, keyed by seat: without it seat 1 is further off", async () => {
+    const rows = [];
+    for (const scene of ["opposed", "vehicle"] as const)
+      for (const [delay, delays] of [
+        ["remote", REMOTE],
+        ["local", LOCAL],
+      ] as const) {
+        const anchored = await run(scene, "anchored", delays);
+        const unheld = await run(scene, "unheld", delays);
+        rows.push(row(scene, "anchored", delay, anchored), row(scene, "unheld", delay, unheld));
+        // Matched-tick error in seat 1's own view (its correction is not measured
+        // unheld: only seats in the input are co-seats). Measured 1.3-2x.
+        expect(unheld.seats[1].ownView).toBeGreaterThan(anchored.seats[1].ownView * 1.25);
       }
     console.table(rows);
   });

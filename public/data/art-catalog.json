@@ -33469,7 +33469,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:599"
+          "source": "src/scenes/PlayScene.ts:595"
         },
         {
           "system": "Gameplay",
@@ -33525,7 +33525,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:599"
+          "source": "src/scenes/PlayScene.ts:595"
         },
         {
           "system": "Gameplay",
@@ -33577,7 +33577,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:599"
+          "source": "src/scenes/PlayScene.ts:595"
         },
         {
           "system": "Gameplay",
@@ -35427,7 +35427,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:63"
+          "source": "src/client/ClientStateView.ts:64"
         },
         {
           "system": "Gameplay",
@@ -36643,7 +36643,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:516"
+          "source": "src/scenes/PlayScene.ts:512"
         },
         {
           "system": "Gameplay",

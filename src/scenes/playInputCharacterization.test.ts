@@ -16,8 +16,11 @@ import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { ActionManager } from "../input/ActionManager.js";
 import { controllerInput } from "../input/ControllerInput.js";
+import type { SeatSample } from "../input/SeatComposer.js";
+import { neutralSample, type SeatInput } from "../input/SeatInput.js";
 import { Camera } from "../rendering/Camera.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
+import type { Requester } from "../session/DeviceSeats.js";
 import { DeviceSession } from "../session/DeviceSession.js";
 import { followSeat, View } from "../session/View.js";
 import { quantizeAxis } from "../shared/binaryCodec.js";
@@ -212,6 +215,8 @@ function car(model: string, id = 7): Entity {
 }
 
 const neutral = { dx: 0, dy: 0, sprinting: false, jump: false };
+/** 226 slice 5-i: a stop is one device packet, every seat still with explicit flags. */
+const stillPacket = { ...neutral, jumpPressed: false, reversing: false, relativeDriving: false };
 
 function gamepad(buttons: number[], axes: number[]): Gamepad {
   return {
@@ -296,11 +301,13 @@ describe("play input characterization (pre-226 composition)", () => {
     ]);
   });
 
+  // 226 slice 5-i: a menu or lost focus is stored as neutral input, since authority keeps
+  // simulating; a storage pause or door transition holds the device still and is not.
   it.each([
-    ["storage pause", (h: ReturnType<typeof playHarness>) => (h.host.storagePaused = true)],
-    ["door transition", (h: ReturnType<typeof playHarness>) => (h.host.doorBusy = true)],
-    ["open menu", (h: ReturnType<typeof playHarness>) => (h.host.menuOpen = true)],
-  ])("a %s sends neutral input on the shared sequence without predicting it", (_, lock) => {
+    ["storage pause", (h: ReturnType<typeof playHarness>) => (h.host.storagePaused = true), 1],
+    ["door transition", (h: ReturnType<typeof playHarness>) => (h.host.doorBusy = true), 1],
+    ["open menu", (h: ReturnType<typeof playHarness>) => (h.host.menuOpen = true), 2],
+  ])("a %s sends neutral input on the shared sequence", (_, lock, stored) => {
     const h = playHarness();
     const store = vi.spyOn(PlayerPredictor.prototype, "storeInput");
     h.actions.pressKey("KeyD");
@@ -312,16 +319,16 @@ describe("play input characterization (pre-226 composition)", () => {
     expect(h.lastInput()).toMatchObject({ ...neutral, seq: before + 1, jumpPressed: false });
     // Door walk-through reads lastMovement; it stays still while locked.
     expect(h.scene.lastMovement).toEqual({ dx: 0, dy: 0 });
-    // Slice 2 intends to store locked ticks as neutral input (226 corrections),
-    // which will deliberately change this prediction assertion.
-    expect(store).toHaveBeenCalledTimes(1);
+    expect(store).toHaveBeenCalledTimes(stored);
+    if (stored === 2)
+      expect(store).toHaveBeenLastCalledWith(before + 1, stillPacket, 1 / 60, undefined);
     expect(h.gc.touchButtons.enabled).toBe(false);
     expect(h.gc.touchJoystick.enabled).toBe(false);
     // Locks do not clear held keys: movement resumes when the lock lifts.
     h.host.storagePaused = h.host.doorBusy = h.host.menuOpen = false;
     h.step();
     expect(h.lastInput()).toMatchObject({ dx: 1, seq: before + 2 });
-    expect(store).toHaveBeenCalledTimes(2);
+    expect(store).toHaveBeenCalledTimes(stored + 1);
   });
 
   it("window blur clears held input with an extra neutral command and locks until focus", () => {
@@ -333,7 +340,7 @@ describe("play input characterization (pre-226 composition)", () => {
     window.dispatchEvent(new Event("blur"));
     expect(h.take()).toEqual([
       { type: "vehicle-horn", active: false },
-      { type: "player-input", seq: seq + 1, ...neutral },
+      { type: "player-input", seq: seq + 1, ...stillPacket },
     ]);
     h.step();
     expect(h.lastInput()).toMatchObject({ ...neutral, seq: seq + 2 });
@@ -353,7 +360,7 @@ describe("play input characterization (pre-226 composition)", () => {
     setHidden(true);
     expect(h.take()).toEqual([
       { type: "vehicle-horn", active: false },
-      { type: "player-input", seq: seq + 1, ...neutral },
+      { type: "player-input", seq: seq + 1, ...stillPacket },
     ]);
     expect(h.actions.isHeld("move_left")).toBe(false);
     h.step();
@@ -518,7 +525,9 @@ describe("play input characterization (pre-226 composition)", () => {
     expect(h.gc.tapMovement?.target).toBeNull();
   });
 
-  it("being hit cancels a tap destination with an extra neutral command", () => {
+  // 226 slice 5-i: the hit tick's own command is still, instead of an extra sequence
+  // that would also stop the device's other seats.
+  it("being hit cancels a tap destination with a neutral command on that tick", () => {
     const h = playHarness({ movementMode: "tap" });
     h.gc.tapMovement?.setTarget({ wx: 300, wy: 100, wz: 0 });
     h.step();
@@ -526,10 +535,7 @@ describe("play input characterization (pre-226 composition)", () => {
     h.take();
     h.view.invincibilityTimer = 1;
     h.step();
-    expect(h.inputs().map((m) => ({ seq: m.seq, dx: m.dx }))).toEqual([
-      { seq: seq + 1, dx: 1 },
-      { seq: seq + 2, dx: 0 },
-    ]);
+    expect(h.inputs().map((m) => ({ seq: m.seq, dx: m.dx }))).toEqual([{ seq: seq + 1, dx: 0 }]);
     expect(h.gc.tapMovement?.target).toBeNull();
   });
 
@@ -544,7 +550,7 @@ describe("play input characterization (pre-226 composition)", () => {
     h.scene.onPause(h.gc);
     expect(h.take()).toEqual([
       { type: "vehicle-horn", active: false },
-      { type: "player-input", seq: seq + 1, ...neutral },
+      { type: "player-input", seq: seq + 1, ...stillPacket },
     ]);
     expect(h.actions.isHeld("move_right")).toBe(false);
   });
@@ -615,15 +621,15 @@ describe("play input characterization (pre-226 composition)", () => {
     h.step();
     expect(reconcile).not.toHaveBeenCalled(); // no new authoritative state this tick
     h.view.stateAppliedThisTick = true;
-    Object.assign(h.view, { mountEntityId: 5 }); // a reset seats the player on its mount
     h.step();
-    expect(reconcile).toHaveBeenLastCalledWith(false, 5);
+    // 226 slice 5-i: a reset seats the player on its parent (DeviceSession.test).
+    expect(reconcile).toHaveBeenLastCalledWith(false);
     expect(reconcile.mock.invocationCallOrder.at(-1)).toBeLessThan(
       predict.mock.invocationCallOrder.at(-1) ?? 0,
     );
     h.host.doorBusy = true;
     h.step();
-    expect(reconcile).toHaveBeenLastCalledWith(true, 5);
+    expect(reconcile).toHaveBeenLastCalledWith(true);
   });
 });
 
@@ -821,5 +827,117 @@ describe("play pointer characterization (226 slice 2, before composition moves)"
     expect(h.take()).toEqual([
       { type: "player-interact", wx: expect.closeTo(160, 6), wy: expect.closeTo(120, 6) },
     ]);
+  });
+});
+
+/** A guest's scripted devices: fixed movement, and a throw key it can hold. */
+function guestDevices(movement = { dx: -1, dy: 0, sprinting: false, jump: false }) {
+  const devices = {
+    steering: false,
+    throwing: false,
+    held: () => false,
+    sample(locked: boolean): SeatSample {
+      const presses = { ...neutralSample(), throw: devices.throwing };
+      return locked ? neutralSample(presses) : { ...presses, manual: movement, steered: movement };
+    },
+    clear: vi.fn(),
+    dispose: vi.fn(),
+  };
+  return devices satisfies SeatInput;
+}
+
+/** Seat a guest beside the player, as authority and the frame seat list would. */
+async function seatGuest(h: ReturnType<typeof playHarness>, devices = guestDevices()) {
+  const guest: Entity = { ...createPlayer(140, 100), id: 2 };
+  Object.assign(h.view, {
+    seats: {
+      entities: new Map([
+        [0, 1],
+        [1, 2],
+      ]),
+    },
+    serverEntities: [h.player, guest],
+  });
+  const answer = (async (msg: { requestId: number; seat: number }) => ({
+    type: "seat-joined",
+    requestId: msg.requestId,
+    seat: msg.seat,
+    entityId: 2,
+  })) as unknown as Requester;
+  await h.gc.session.seats.join(answer, 1, 1, devices);
+  return devices;
+}
+
+describe("device seats on the play path (226 slice 5-i)", () => {
+  it("sends a guest's command and presses with seat 0's on one sequence; a lock stills the guest too", async () => {
+    const h = playHarness();
+    const devices = await seatGuest(h);
+    h.actions.pressKey("KeyD");
+    h.step();
+    expect(h.lastInput()).toMatchObject({ dx: 1, seats: [{ seat: 1, dx: -1 }] });
+    h.host.menuOpen = true;
+    h.step();
+    expect(h.lastInput()).toMatchObject({ dx: 0, seats: [{ seat: 1, dx: 0 }] });
+    h.host.menuOpen = false;
+    devices.throwing = true;
+    h.step(10);
+    h.take();
+    devices.throwing = false;
+    h.step();
+    expect(h.take().find((m) => m.type === "seat")).toMatchObject({
+      type: "seat",
+      seat: 1,
+      message: { type: "throw-ball" },
+    });
+  });
+
+  it("pausing play releases every seat's horn and stops every seat at once", async () => {
+    const h = playHarness();
+    const devices = await seatGuest(h);
+    h.step();
+    const seq = h.lastInput().seq;
+    h.take();
+    h.scene.onPause(h.gc);
+    expect(h.take()).toEqual([
+      { type: "vehicle-horn", active: false },
+      { type: "seat", seat: 1, message: { type: "vehicle-horn", active: false } },
+      { type: "player-input", seq: seq + 1, ...stillPacket, seats: [{ seat: 1, ...stillPacket }] },
+    ]);
+    expect(devices.clear).toHaveBeenCalled();
+  });
+
+  it("lost focus forgets a jump latched before it", () => {
+    const h = playHarness();
+    h.actions.pressKey("Space");
+    h.actions.releaseKey("Space");
+    window.dispatchEvent(new Event("blur"));
+    window.dispatchEvent(new Event("focus"));
+    h.step();
+    expect(h.lastInput()).toMatchObject({ jump: false, jumpPressed: false });
+  });
+
+  it("a hit stops a hold-mode walk on that tick even with a key held, then keys move again", () => {
+    const h = playHarness({ movementMode: "hold" });
+    h.actions.pressKey("KeyD");
+    h.step();
+    expect(h.lastInput()).toMatchObject({ dx: 1 });
+    h.view.invincibilityTimer = 1;
+    h.step();
+    expect(h.lastInput()).toMatchObject({ dx: 0 });
+    h.step();
+    expect(h.lastInput()).toMatchObject({ dx: 1 });
+  });
+
+  it("a new play scene starts its seats afresh: keys held while boarding toggle nothing", () => {
+    const h = playHarness();
+    h.board(car("ambulance"));
+    h.step();
+    h.scene.onExit(h.gc);
+    h.actions.pressKey("KeyL");
+    const next = new PlayScene();
+    next.onEnter(h.gc);
+    next.update(DT, h.gc);
+    next.update(DT, h.gc);
+    expect(h.take().filter((m) => m.type === "vehicle-emergency")).toEqual([]);
   });
 });

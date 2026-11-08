@@ -18,14 +18,14 @@ import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
 import { interpolateHeading } from "../rendering/PresentationTimeline.js";
 import type { Movement } from "../shared/Movement.js";
 import type { World } from "../world/World.js";
+import { predictionGeometry } from "./PredictionGeometry.js";
 import {
-  applySeatIntents,
+  CoSeats,
   hasMovement,
   normalizedMovement,
-  normalizedSeats,
   type SeatMovements,
-  SeatReplay,
-  seatCorrections,
+  type SeatReplay,
+  seatBodies,
 } from "./SeatInputs.js";
 
 const MAX_HISTORY = 120;
@@ -41,6 +41,8 @@ export interface StoredInput {
 export interface ReconcileTiming {
   serverTick?: number;
   physics?: PhysicsState;
+  /** The stream's seat list (seat → entity id), from which co-seats' bodies resolve (226). */
+  seats?: ReadonlyMap<number, number>;
 }
 export interface PredictionRecoveryDiagnostics {
   status: "waiting" | "ready" | "replaying" | "history-gap" | "overflow" | "stale";
@@ -76,6 +78,8 @@ interface Request {
   entities: readonly Entity[];
   world: World;
   props: readonly Prop[];
+  /** Each co-seat's controlled body at this snapshot (226). */
+  seatBodies: ReadonlyMap<number, number>;
 }
 interface Replay {
   request: Request;
@@ -178,13 +182,14 @@ export class PlayerPredictor {
     { x: number; y: number; z: number; at: number; duration: number }
   >();
   private diagnostics: ReconcileDiagnostics | null = null;
-  /** Controlled bodies of the co-seats in the latest stored input (226). */
-  private readonly seatIds = new Set<number>();
+  /** The co-seats of the latest stored input and their own display corrections (226). */
+  private readonly coSeats: CoSeats;
 
   constructor(
     private readonly gravity = getGravityScale,
     private readonly clock = () => performance.now() / 1000,
   ) {
+    this.coSeats = new CoSeats(clock);
     void this.ready;
   }
   get ready(): Promise<void> {
@@ -214,7 +219,7 @@ export class PlayerPredictor {
     this.publishedPhysicsTick = undefined;
     this.motorIntents.clear();
     this.inputHistory = [];
-    this.seatIds.clear();
+    this.coSeats.clear();
     this.inputTick =
       this.appliedInputTick =
       this.animationInputTick =
@@ -248,7 +253,7 @@ export class PlayerPredictor {
     this.publishedPhysicsTick = undefined;
     this.motorIntents.clear();
     this.inputHistory = [];
-    this.seatIds.clear();
+    this.coSeats.clear();
     this.queued = this.replay = undefined;
     this.geometry = this.geometryWorld = this.geometryProps = undefined;
     this.stateHistory.clear();
@@ -265,9 +270,7 @@ export class PlayerPredictor {
     if (!this.predicted || seq <= Math.max(this.latestSeq, this.receivedAck)) return;
     this.latestSeq = seq;
     this.inputTick++;
-    const co = normalizedSeats(seats);
-    this.seatIds.clear();
-    for (const id of co?.keys() ?? []) this.seatIds.add(id);
+    const co = this.coSeats.store(seats);
     this.inputHistory.push({
       seq,
       tick: this.inputTick,
@@ -331,6 +334,7 @@ export class PlayerPredictor {
         .map(clone),
       world,
       props,
+      seatBodies: seatBodies(timing?.seats, entities),
     };
     // Retain the parent's replicated seat metadata even though it has no body.
     this.riderLift = (player.wz ?? 0) - (entities.find((e) => e.id === player.parentId)?.wz ?? 0);
@@ -344,32 +348,7 @@ export class PlayerPredictor {
     this.geometryWorld = world;
     this.geometryProps = props;
     this.propsRevision++;
-    this.geometry = {
-      getCollision: (x, y) => world.getCollisionIfLoaded(x, y),
-      getHeight: (x, y) => world.getHeightAt(x, y),
-      queryProps: (bounds) =>
-        props.filter((prop) => {
-          // The common compiler clips exact wall/surface shapes. This is only a
-          // conservative broad filter and includes long authored bridge sections.
-          const c = prop.collider;
-          if (!c || prop.walls?.length) return true;
-          const x = prop.position.wx + c.offsetX,
-            y = prop.position.wy + c.offsetY;
-          return (
-            x + c.width / 2 >= bounds.left &&
-            x - c.width / 2 <= bounds.right &&
-            y + c.height / 2 >= bounds.top &&
-            y - c.height / 2 <= bounds.bottom
-          );
-        }),
-      geometryVersion: (cx, cy) => {
-        const chunk = world.getChunkIfLoaded(cx, cy);
-        return {
-          identity: chunk,
-          revision: `${chunk?.revision}:${chunk?.visualRevision}:${chunk?.physicsRevision}:${this.propsRevision}`,
-        };
-      },
-    };
+    this.geometry = predictionGeometry(world, props, this.propsRevision);
   }
   private startReplay() {
     const request = this.queued,
@@ -453,7 +432,7 @@ export class PlayerPredictor {
       beforePhysicsTick,
       pastError,
       inputs: [...this.inputHistory],
-      seats: new SeatReplay((id) => state.bodies.find((body) => body.id === id)?.jumpHeld ?? false),
+      seats: this.coSeats.replay(request.seatBodies, state.bodies),
     };
     this.status = "replaying";
     if (scene.physicsTick === beforePhysicsTick) this.captureReplayComparison(this.replay);
@@ -521,6 +500,11 @@ export class PlayerPredictor {
       oldError = this.error();
     this.publish(job.request.player);
     this.reconcileGroupErrors(beforeBodies, job.comparison?.bodies);
+    const seatCorrections = this.coSeats.settle(
+      beforeBodies,
+      job.comparison?.bodies,
+      this.correctionMembers,
+    );
     const after = this.predicted;
     if (!after) return;
     const compared = job.comparison?.player;
@@ -586,7 +570,7 @@ export class PlayerPredictor {
       comparisonInputTick: compared ? job.beforeInputTick : undefined,
       comparisonPhysicsTick: compared ? job.beforePhysicsTick : undefined,
       status: this.status,
-      seatCorrections: seatCorrections(this.seatIds, beforeBodies, job.comparison?.bodies),
+      seatCorrections,
     };
   }
   private step(movement: Movement, player: Entity, seats?: SeatMovements) {
@@ -594,8 +578,8 @@ export class PlayerPredictor {
     if (!scene || !this.geometry) return;
     const controlled = this.bodies.get(player.parentId ?? player.id);
     if (!controlled) return;
-    // Co-seats first so the primary seat's intent wins if a key collides.
-    applySeatIntents(seats, this.bodies, this.motorIntents, scene.physicsTick);
+    // Co-seats first so the primary seat's intent wins if a body collides.
+    this.coSeats.intents(seats, this.bodies, this.motorIntents, scene.physicsTick);
     const intent = controlled.type.startsWith("vehicle-v1:")
       ? vehicleMotionIntent(controlled, movement)
       : playerMotionIntent(movement);
@@ -717,7 +701,8 @@ export class PlayerPredictor {
       (!!player &&
         (player.jumpVZ !== undefined ||
           Math.hypot(player.velocity?.vx ?? 0, player.velocity?.vy ?? 0) > 2 ||
-          this.scene?.bodyState(anchor ?? -1)?.supportId !== undefined))
+          this.scene?.bodyState(anchor ?? -1)?.supportId !== undefined)) ||
+      this.coSeats.moving(this.published, this.scene)
     );
   }
   private touchingIds(): Set<number> {
@@ -863,7 +848,7 @@ export class PlayerPredictor {
       return [...released];
     }
     const root = player.parentId ?? player.id,
-      component = new Set<number>([root, player.id, ...this.seatIds]);
+      component = new Set<number>([root, player.id, ...this.coSeats.bodyIds()]);
     const anchor = this.published.get(root) ?? player;
     if (anchor.collider) {
       const a = getEntityAABB(anchor.position, anchor.collider);
@@ -900,7 +885,9 @@ export class PlayerPredictor {
         predicted.physicsGroupId === undefined
           ? undefined
           : this.groupError(predicted.physicsGroupId);
-      const displayOffset = groupOffset ?? (corrected ? error : { x: 0, y: 0, z: 0 });
+      // A co-seat outside the primary's contact group eases its own correction.
+      const seatOffset = corrected ? undefined : this.coSeats.offset(entity.id, scene);
+      const displayOffset = groupOffset ?? seatOffset ?? (corrected ? error : { x: 0, y: 0, z: 0 });
       const prev = predicted.prevPosition ?? predicted.position;
       const position = {
         wx: prev.wx + (predicted.position.wx - prev.wx) * alpha + displayOffset.x,
@@ -909,7 +896,7 @@ export class PlayerPredictor {
       const z =
         (predicted.prevWz ?? predicted.wz ?? 0) * (1 - alpha) +
         (predicted.wz ?? 0) * alpha +
-        (groupOffset ? groupOffset.z : corrected && !floorSupported ? error.z : 0);
+        ((groupOffset ?? seatOffset)?.z ?? (corrected && !floorSupported ? error.z : 0));
       const presented = {
         ...predicted,
         sprite: entity.id === player.id ? predicted.sprite : entity.sprite,

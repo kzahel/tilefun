@@ -23,6 +23,7 @@ import { Chunk } from "../world/Chunk.js";
 import type { World } from "../world/World.js";
 import type { PlayerPredictor, ReconcileDiagnostics } from "./PlayerPredictor.js";
 import { RemotePresentation } from "./RemotePresentation.js";
+import { type BufferedSeatSync, type SeatSyncMessage, StreamSeats } from "./StreamSeats.js";
 
 export interface ClientStateView {
   readonly roomState?: import("../interiors/GameplayRoom.js").GameplayRoomState | null;
@@ -46,15 +47,15 @@ export interface ClientStateView {
   /** Last detailed reconciliation sample. */
   readonly predictionDiagnostics?: ReconcileDiagnostics | undefined;
   /** Rolling reconcile stats for debug overlay. */
-  readonly reconcileStats?:
-    | {
-        samples: number;
-        notable: number;
-        avgPosErr: number;
-        maxPosErr: number;
-        threshold: number;
-      }
-    | undefined;
+  readonly reconcileStats?: ReconcileStats | undefined;
+}
+
+interface ReconcileStats {
+  samples: number;
+  notable: number;
+  avgPosErr: number;
+  maxPosErr: number;
+  threshold: number;
 }
 
 /** Placeholder entity returned before server has sent state. */
@@ -90,7 +91,7 @@ export class RemoteStateView implements ClientStateView {
   private _editorEnabled = true;
   private _remoteCursors: RemoteEditorCursor[] = [];
   private _playerNames: Record<number, string> = {};
-  private _pendingStates: BufferedMessage[] = [];
+  private _pendingStates: (BufferedMessage | BufferedSeatSync)[] = [];
   private _predictor: PlayerPredictor | null = null;
   private _stateAppliedThisTick = false;
   private _serverTick = 0;
@@ -101,15 +102,9 @@ export class RemoteStateView implements ClientStateView {
   }
   private _lastProcessedInputSeq = 0;
   private _mountEntityId: number | undefined = undefined;
-  private _reconcileStats:
-    | {
-        samples: number;
-        notable: number;
-        avgPosErr: number;
-        maxPosErr: number;
-        threshold: number;
-      }
-    | undefined;
+  private _reconcileStats: ReconcileStats | undefined;
+  /** The seats the stream carries and each guest's own session sync (226). */
+  readonly seats = new StreamSeats();
   private presentation = new RemotePresentation();
   private presentedEntities: Entity[] | null = null;
   cameraPresentation: CameraPresentationTime = { time: 0, domain: "remote" };
@@ -193,6 +188,11 @@ export class RemoteStateView implements ClientStateView {
     this._pendingStates.push(msg);
   }
 
+  /** Buffer a guest seat's own session sync, applied in order with the stream (226). */
+  bufferSeatSync(seat: number, message: SeatSyncMessage): void {
+    this._pendingStates.push({ type: "seat", seat, message });
+  }
+
   /** Apply any buffered messages. Call at the start of each client update tick. */
   get pendingMessageCount(): number {
     return this._pendingStates.length;
@@ -215,8 +215,11 @@ export class RemoteStateView implements ClientStateView {
   }
 
   /** Dispatch a buffered message to the appropriate handler. */
-  applyMessage(msg: BufferedMessage): void {
+  applyMessage(msg: BufferedMessage | BufferedSeatSync): void {
     switch (msg.type) {
+      case "seat":
+        this.seats.apply(msg.seat, msg.message);
+        break;
       case "frame":
         this.applyFrame(msg);
         break;
@@ -266,6 +269,7 @@ export class RemoteStateView implements ClientStateView {
 
     // Always-present fields
     this._playerEntityId = msg.playerEntityId;
+    this.seats.frame(msg);
     this._serverTick = msg.serverTick;
     this._simulationTime = msg.simulationTime;
     this._physicsState = msg.physics;
@@ -405,6 +409,7 @@ export class RemoteStateView implements ClientStateView {
     this._entities = [];
     this._props = [];
     this._playerEntityId = -1;
+    this.seats.clear();
     this._gemsCollected = 0;
     this._invincibilityTimer = 0;
     this._invincibilityStartTick = -1;
@@ -504,13 +509,7 @@ export class RemoteStateView implements ClientStateView {
   get reconcileStats() {
     return this._reconcileStats;
   }
-  setReconcileStats(stats: {
-    samples: number;
-    notable: number;
-    avgPosErr: number;
-    maxPosErr: number;
-    threshold: number;
-  }): void {
+  setReconcileStats(stats: ReconcileStats): void {
     this._reconcileStats = stats;
   }
   /** Mount entity ID from the latest server state (undefined when not riding). */

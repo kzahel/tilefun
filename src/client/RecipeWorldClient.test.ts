@@ -100,7 +100,7 @@ it("predicts real-time play on one input timeline and converges on the authority
     await frame();
   }
   expect(sent).toBe(70);
-  expect(reconcile).toHaveBeenCalledWith(false, undefined);
+  expect(reconcile).toHaveBeenCalledWith(false);
   // Diagonals reach the authority at unit length, quantized as on the wire.
   expect(accept).toHaveBeenCalledWith(
     expect.objectContaining({ seq: 1, dx: quantizeAxis(Math.SQRT1_2) }),
@@ -124,7 +124,7 @@ it("resolves a command after its snapshot is applied and restarts prediction the
   expect(client.replica.serverPlayerEntity.position).toEqual({ wx: 64, wy: 32 });
   expect(client.predictor.player?.position).toEqual({ wx: 64, wy: 32 });
   // A fence restarts prediction (a teleport never glides as a correction).
-  expect(reconcile).toHaveBeenLastCalledWith(true, undefined);
+  expect(reconcile).toHaveBeenLastCalledWith(true);
   expect(client.busy).toBe(false);
   await expect(
     client.command({ kind: "teleport", position: { wx: Number.NaN, wy: 0 } }),
@@ -261,8 +261,8 @@ it("sends a driver's horn press on the play path and hears the authority's horn"
   const reconcile = vi.spyOn(client.device, "reconcile");
   await client.command({ kind: "enter-vehicle", entityId: car });
   expect(client.replica.serverPlayerEntity.parentId).toBe(car);
-  // Lab resets seat the predicted player on its parent.
-  expect(reconcile).toHaveBeenLastCalledWith(true, car);
+  // Resets seat the predicted player on its parent.
+  expect(reconcile).toHaveBeenLastCalledWith(true);
   expect(client.predictor.mount?.id).toBe(car);
   await running(client);
   expect(client.submitPress({ type: "vehicle-horn", active: true })).toBe(true);

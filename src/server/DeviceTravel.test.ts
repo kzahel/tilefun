@@ -288,6 +288,8 @@ describe("party travel", () => {
     );
     expect(transport.messages("dev-b", "world-loaded")).toHaveLength(1);
     expect(transport.messages("dev-b", "player-assigned").at(-1)?.entityId).toBe(b.player.id);
+    // A returned device hears nothing for the guest it has not seated again (5-i review).
+    expect(transport.messages("dev-d", "seat")).toEqual([]);
   });
 
   it("sends a device to the lobby once when a deleted world has no fallback", async () => {

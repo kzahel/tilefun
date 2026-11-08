@@ -6,17 +6,21 @@ import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import type { Movement } from "../shared/Movement.js";
+import { DeviceSeats } from "./DeviceSeats.js";
 import type { View } from "./View.js";
 
 /**
  * One simulated device (tactical 226): the world replica of one connection, the
  * predictor that replays its local seats, and the presentation every view of
  * the device shares (scene frame and mesh poses). Normally one per page; the
- * two-pane physics lab holds two. Seat 0 is today's only predicted seat.
+ * two-pane physics lab holds two. One predictor replays every local seat: seat 0
+ * as its primary body and the guests as co-seats from the stream's seat list.
  */
 export class DeviceSession {
   readonly frame: SceneFrame;
   readonly views: View[] = [];
+  /** The device's local players: seat 0 and any guests (226). */
+  readonly seats = new DeviceSeats();
   private predictor: PlayerPredictor | null = null;
 
   constructor(
@@ -55,19 +59,18 @@ export class DeviceSession {
   /**
    * Rebuild prediction from the newest authoritative state: reset when asked
    * (no prediction yet, a door transition, a lab command) or when the server
-   * player changed, then replay unacknowledged inputs. False without a predictor
-   * or server player. `mountId` names the entity a reset seats the player on:
-   * the game passes its gameplay mount, labs the player's parent (slice 5 joins
-   * them on the parent rule).
+   * player changed, then replay unacknowledged inputs with every seat's body
+   * from the stream's seat list. False without a predictor or server player. A
+   * reset seats the player on its parent (vehicle or mount), as the frame shows.
    */
-  reconcile(reset: boolean, mountId: number | undefined): boolean {
+  reconcile(reset: boolean): boolean {
     const { predictor, replica } = this;
     const player = replica.serverPlayerEntity;
     if (!predictor || player.id === -1) return false;
     if (reset || !predictor.player || predictor.player.id !== player.id)
       predictor.reset(
         player,
-        mountId === undefined ? undefined : replica.serverEntities.find((e) => e.id === mountId),
+        replica.serverEntities.find((e) => e.id === player.parentId),
       );
     predictor.reconcile(
       player,
@@ -79,6 +82,7 @@ export class DeviceSession {
       {
         serverTick: replica.serverTick,
         ...(replica.physicsState ? { physics: replica.physicsState } : {}),
+        seats: replica.seats.entities,
       },
     );
     return true;
@@ -95,7 +99,7 @@ export class DeviceSession {
     return terrain.isTerrainReady(replica.world.chunks.get(cx, cy));
   }
 
-  /** Store seat 0's command (with the device's other seats) and predict it. */
+  /** Store seat 0's command (with the other seats' movement by seat) and predict it. */
   predict(seq: number, movement: Movement, dt: number, coSeats?: SeatMovements): void {
     const { predictor, replica } = this;
     if (!predictor) return;
@@ -118,8 +122,9 @@ export class DeviceSession {
     for (const view of this.views) view.fades.clear();
   }
 
-  /** Release presentation and prediction (session teardown). */
+  /** Release presentation, prediction and the guests' input sets (session teardown). */
   dispose(): void {
+    this.seats.dispose();
     this.stopPrediction();
     this.clearPresentation();
     this.views.length = 0;

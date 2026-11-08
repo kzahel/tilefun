@@ -42,8 +42,8 @@ describe("replication per connection and realm", () => {
     const acks: number[][] = [];
     for (let seq = 1; seq <= 6; seq++) {
       play(device, "local", seq, seq, () => [
-        { seat: 0, body: host.player.id, movement: step(1, 0) },
-        { seat: 1, body: guest.player.id, movement: step(0, 1) },
+        { seat: 0, movement: step(1, 0) },
+        { seat: 1, movement: step(0, 1) },
       ]);
       acks.push([host.lastProcessedInputSeq, guest.lastProcessedInputSeq]);
     }
@@ -112,8 +112,8 @@ describe("replication per connection and realm", () => {
     const between = server.entityManager.spawn(createChicken(at(middle).wx + 40, at(middle).wy));
     server.broadcasting = true;
     play(device, "local", 1, 3, () => [
-      { seat: 0, body: host.player.id, movement: step(0, 0) },
-      { seat: 1, body: guest.player.id, movement: step(0, 0) },
+      { seat: 0, movement: step(0, 0) },
+      { seat: 1, movement: step(0, 0) },
     ]);
 
     const frames = transport.messages("local", "frame");

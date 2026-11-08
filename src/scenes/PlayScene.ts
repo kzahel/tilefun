@@ -4,16 +4,12 @@ import type { RemoteStateView } from "../client/ClientStateView.js";
 import { nextInputSequence, observeInputSequence } from "../client/InputSequence.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
-import {
-  devicePacket,
-  normalizesDiagonal,
-  SeatComposer,
-  seatPresses,
-  vehicleButtons,
-} from "../input/SeatComposer.js";
+import { normalizesDiagonal, seatPresses, vehicleButtons } from "../input/SeatComposer.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import { projectWorld } from "../rendering/Projection.js";
+import type { DeviceSeats } from "../session/DeviceSeats.js";
+import { composeDeviceTick } from "../session/DeviceTick.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
@@ -71,8 +67,8 @@ const BALL_HIT_VOLUME = 0.4;
 
 export class PlayScene implements GameScene {
   readonly transparent = false;
-  /** Seat 0's input composition (tactical 226); other seats join in slice 5. */
-  private readonly seat = new SeatComposer();
+  /** The device's local players (226), whose input this scene sends each tick. */
+  private seats: DeviceSeats | null = null;
   private prevInvincibilityTimer = 0;
   private zoomUnsubs: (() => void)[] = [];
   private particles = new ParticleSystem();
@@ -97,12 +93,11 @@ export class PlayScene implements GameScene {
   private reconcilePosErrSum = 0;
   private reconcilePosErrMax = 0;
   private nextReconcileLogAtMs = 0;
-  private jumpPressLatched = false;
   private jumpPressUnsub: (() => void) | null = null;
 
   /** Seat 0's unquantized movement last tick (door walk-through reads it). */
   get lastMovement(): { dx: number; dy: number } {
-    return this.seat.lastMovement;
+    return this.seats?.host.composer.lastMovement ?? { dx: 0, dy: 0 };
   }
 
   onEnter(gc: GameContext): void {
@@ -120,9 +115,11 @@ export class PlayScene implements GameScene {
 
     // Zoom preset hotkeys
     this.bindZoomActions(gc);
-    this.jumpPressUnsub = gc.actions.on("jump", () => {
-      this.jumpPressLatched = true;
-    });
+    // Every seat starts afresh with a new play scene.
+    const seats = gc.session.seats;
+    this.seats = seats;
+    seats.restart();
+    this.jumpPressUnsub = gc.actions.on("jump", () => seats.host.latchJump());
 
     // Audio systems
     this.footsteps = new FootstepSystem(
@@ -157,8 +154,6 @@ export class PlayScene implements GameScene {
     this.dyingEntities.clear();
     this.jumpPressUnsub?.();
     this.jumpPressUnsub = null;
-    this.jumpPressLatched = false;
-    this.seat.cancel();
     gc.session.stopPrediction();
   }
 
@@ -215,9 +210,12 @@ export class PlayScene implements GameScene {
       });
     }
 
-    // Seat 0's input: devices are sampled here, composed by the shared SeatComposer.
+    // One device tick (226): seat 0's devices are sampled here, guests' from their
+    // own input sets, and every seat's command shares the sequence.
+    const seats = gc.session.seats;
+    const host = seats.host;
     const vehicle = occupiedVehicle(gc.stateView.playerEntity, gc.stateView.entities);
-    const boarded = this.seat.board(
+    const boarded = host.composer.board(
       vehicle,
       gc.actions.isHeld("vehicle_lights"),
       gc.actions.isHeld("vehicle_style"),
@@ -228,7 +226,10 @@ export class PlayScene implements GameScene {
       gc.touchButtons.reset();
     }
     Object.assign(gc.touchButtons, vehicleButtons(vehicle));
-    const inputLocked = !!(gc.storagePaused || gc.doorPresentation?.busy || gc.inputBlocked);
+    // Authority holds the device still during a storage pause or a door transition.
+    const doorBusy = !!gc.doorPresentation?.busy;
+    const held = !!gc.storagePaused || doorBusy;
+    const inputLocked = held || !!gc.inputBlocked;
     gc.touchButtons.enabled = !inputLocked;
     if (inputLocked) gc.touchButtons.reset();
     gc.touchJoystick.enabled = (gc.touchMovement ?? "joystick") === "joystick" && !inputLocked;
@@ -236,6 +237,7 @@ export class PlayScene implements GameScene {
       gc.touchHold?.reset();
       gc.tapMovement?.cancel();
     }
+    this.detectHit(gc);
     const steering = gc.carDriving === "steering";
     const firstPerson = firstPersonTick(gc, dt, vehicle);
     const manual = firstPersonMovement(
@@ -254,16 +256,24 @@ export class PlayScene implements GameScene {
       steered =
         gc.touchHold?.sample(gc.stateView.playerEntity.position, manual, vehicle ? 24 : 0) ??
         manual;
-    const tick = this.seat.tick(
-      { manual, steered, ...seatPresses(gc.actions), jumpPressed: this.takeJumpPress() },
-      {
-        vehicle,
-        locked: inputLocked,
-        steering,
-        joystick: (gc.touchMovement ?? "joystick") === "joystick",
-        facing: gc.stateView.playerEntity.sprite?.direction,
-        look: firstPerson?.forward(),
-      },
+    const seq = nextInputSequence(gc.transport);
+    const tick = composeDeviceTick(
+      [
+        {
+          seat: host,
+          sample: { manual, steered, ...seatPresses(gc.actions), jumpPressed: host.takeJump() },
+          situation: {
+            vehicle,
+            locked: inputLocked,
+            steering,
+            joystick: (gc.touchMovement ?? "joystick") === "joystick",
+            facing: gc.stateView.playerEntity.sprite?.direction,
+            look: firstPerson?.forward(),
+          },
+        },
+        ...seats.guestFrames(gc.stateView, inputLocked),
+      ],
+      seq,
       dt,
     );
     for (const message of tick.before) gc.transport.send(message);
@@ -287,13 +297,7 @@ export class PlayScene implements GameScene {
       gc.stateView.playerEntity.position,
       !inputLocked && !gc.debugPanel.paused && !document.hidden,
     );
-    const movement = tick.movement;
-    const commandDt = 1 / 60;
-    const seq = nextInputSequence(gc.transport);
-    const packet = devicePacket(seq, [
-      { seat: 0, body: vehicle?.id ?? gc.stateView.playerEntity.id, movement },
-    ]);
-    gc.transport.send(packet.input);
+    gc.transport.send(tick.input);
     for (const message of tick.after) gc.transport.send(message);
 
     // Prediction, camera follow and chunk loading.
@@ -303,11 +307,10 @@ export class PlayScene implements GameScene {
     // server state + unacked inputs from previous frames only. Storing current
     // input first would replay it AND apply it here, double-moving the player.
     // A door transition resets prediction (226: DeviceSession.reconcile).
-    const doorBusy = !!gc.doorPresentation?.busy;
-    if (remoteView.stateAppliedThisTick && gc.session.reconcile(doorBusy, remoteView.mountEntityId))
+    if (remoteView.stateAppliedThisTick && gc.session.reconcile(doorBusy))
       this.maybeLogReconcile(gc, remoteView);
-    // Store current input for future reconciliation, then predict.
-    if (!inputLocked) gc.session.predict(seq, movement, commandDt, packet.coSeats);
+    // Store the tick (locked seats still) and predict it; a held device stays put.
+    if (!held) gc.session.predict(seq, tick.host.movement, 1 / 60, tick.coSeats);
 
     // Camera follows the predicted player (placeholder id -1 is skipped, so a
     // pending camera.requestSnap() waits for the first real position).
@@ -320,20 +323,6 @@ export class PlayScene implements GameScene {
     } else {
       gc.sendVisibleRange();
     }
-
-    // Detect player hit (invincibility transition 0 → >0) and trigger screen shake + sound.
-    const invTimer = gc.stateView.invincibilityTimer;
-    if (invTimer > 0 && this.prevInvincibilityTimer === 0) {
-      gc.touchTap?.reset();
-      gc.touchHold?.reset();
-      if (gc.touchMovement === "hold" || gc.tapMovement?.target) {
-        gc.tapMovement?.cancel();
-        this.cancelInput(gc.transport);
-      }
-      gc.camera.shake(HIT_SHAKE_INTENSITY);
-      playRandomSound(gc, GHOST_HIT_KEYS, 0.5, 0.9 + Math.random() * 0.15);
-    }
-    this.prevInvincibilityTimer = invTimer;
 
     // Gem pickup sound
     const gems = gc.stateView.gemsCollected;
@@ -401,6 +390,23 @@ export class PlayScene implements GameScene {
     }
   }
 
+  /** Being hit (invincibility 0 → >0) shakes the camera and stops a destination walk:
+   * seat 0's command this tick is still. */
+  private detectHit(gc: GameContext): void {
+    const invTimer = gc.stateView.invincibilityTimer;
+    if (invTimer > 0 && this.prevInvincibilityTimer === 0) {
+      gc.touchTap?.reset();
+      gc.touchHold?.reset();
+      if (gc.touchMovement === "hold" || gc.tapMovement?.target) {
+        gc.tapMovement?.cancel();
+        gc.session.seats.host.cancel();
+      }
+      gc.camera.shake(HIT_SHAKE_INTENSITY);
+      playRandomSound(gc, GHOST_HIT_KEYS, 0.5, 0.9 + Math.random() * 0.15);
+    }
+    this.prevInvincibilityTimer = invTimer;
+  }
+
   private stopMovement(gc: GameContext): void {
     gc.firstPerson?.hideView(); // Editor and other opaque scenes draw the fixed view.
     gc.audioManager.stopSirens();
@@ -409,24 +415,20 @@ export class PlayScene implements GameScene {
     gc.audioManager.stopHorns();
     gc.audioManager.stopCreatureCalls();
     gc.transport.send({ type: "vehicle-horn", active: false });
-    this.seat.stop();
+    for (const release of gc.session.seats.stopHorns()) gc.transport.send(release);
     gc.tapMovement?.cancel();
     gc.touchHold?.reset();
     gc.actions.clearHeld();
     this.cancelInput(gc.transport);
   }
 
+  /** Stop the whole device: every seat's input cleared and one still command for all
+   * seats sent now (off cadence, so prediction does not store it). */
   cancelInput(transport: IClientTransport): void {
-    this.seat.cancel();
-    this.jumpPressLatched = false;
-    transport.send({
-      type: "player-input",
-      seq: nextInputSequence(transport),
-      dx: 0,
-      dy: 0,
-      sprinting: false,
-      jump: false,
-    });
+    const seats = this.seats;
+    if (!seats) return;
+    seats.clear();
+    transport.send(seats.neutralPacket(nextInputSequence(transport)));
   }
 
   private drawDestination(gc: GameContext): void {
@@ -502,12 +504,6 @@ export class PlayScene implements GameScene {
   private unbindZoomActions(): void {
     for (const unsub of this.zoomUnsubs) unsub();
     this.zoomUnsubs.length = 0;
-  }
-
-  private takeJumpPress(): boolean {
-    const pressed = this.jumpPressLatched;
-    this.jumpPressLatched = false;
-    return pressed;
   }
 
   private detectBallSplashes(gc: GameContext): void {

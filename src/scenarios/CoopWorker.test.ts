@@ -96,11 +96,8 @@ it("is a device session that seats lab resets on the player's parent", () => {
   replica.synchronize(); // the first frame after a clear resets
   replica.synchronize();
   replica.synchronize(true);
-  expect(reconcile.mock.calls).toEqual([
-    [true, 9],
-    [false, 9],
-    [true, 9],
-  ]);
+  // The device seats every reset on the player's parent (DeviceSession.test).
+  expect(reconcile.mock.calls).toEqual([[true], [false], [true]]);
   // A reset also clears the device's presentation, its views' slab fades included.
   const view = new View(followSeat());
   replica.session.views.push(view);
@@ -108,7 +105,7 @@ it("is a device session that seats lab resets on the player's parent", () => {
   replica.clear();
   expect(view.fades.size).toBe(0);
   replica.synchronize();
-  expect(reconcile).toHaveBeenLastCalledWith(true, 9);
+  expect(reconcile).toHaveBeenLastCalledWith(true);
   replica.dispose();
   expect(replica.session.prediction).toBeNull();
 });
