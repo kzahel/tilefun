@@ -41,6 +41,8 @@ export class RecipeWorldClient {
   clock: LabAdminResult["clock"] | undefined;
   physicsDiagnostics: LabAdminResult["physics"];
   onHorn: ((message: VehicleHornMessage) => void) | undefined;
+  /** A new world replaced the old one (open, reset, reload): drop world caches. */
+  onWorldLoaded: (() => void) | undefined;
   private readonly transport: WorkerClientTransport;
   private seq = 0;
   private running = false;
@@ -111,6 +113,12 @@ export class RecipeWorldClient {
       });
   }
 
+  /** A hidden page stops the authority's loop and the watchdog, as in the game
+   * (labs also pause the clock). */
+  setHidden(hidden: boolean): void {
+    this.transport.setHidden(hidden);
+  }
+
   /** The area the lab's camera shows; sent when it changes. A paused world
    * streams it for inspection, a running one with the next input. */
   setVisibleRange(range: ChunkRange): void {
@@ -175,7 +183,7 @@ export class RecipeWorldClient {
   dispose(): void {
     if (this.closed) return;
     this.closed = true;
-    this.onHorn = undefined;
+    this.onHorn = this.onWorldLoaded = undefined;
     this.device.dispose();
     void this.transport.shutdown().catch(() => {});
   }
@@ -211,6 +219,7 @@ export class RecipeWorldClient {
       // does. The authority streams the camera's last range into it.
       this.replica.clear();
       this.device.clearPresentation();
+      this.onWorldLoaded?.();
     } else if (message.type === "vehicle-horn") this.onHorn?.(message);
     else if (message.type === "frame" || message.type.startsWith("sync-")) {
       // Prediction takes the recipe's gravity; the page's gravity scale stays put.

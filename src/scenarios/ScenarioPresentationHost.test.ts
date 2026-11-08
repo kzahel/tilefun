@@ -64,7 +64,7 @@ vi.mock("./ScenarioClient.js", async () => {
         resetPresentationClock: mocks.resetPresentationClock,
         cameraPresentation: { time: 0, domain: "remote" },
       };
-      device = { replica: this.view, prediction: null, frame: new SceneFrame() };
+      device = { replica: this.view, prediction: null, frame: new SceneFrame(), views: [] };
       submitInput = mocks.submitInput;
       submitPress = mocks.submitPress;
       pump = mocks.pump;

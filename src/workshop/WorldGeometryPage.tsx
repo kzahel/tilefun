@@ -1,24 +1,28 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AudioManager } from "../audio/AudioManager.js";
-import { rotateBodyVector } from "../physics/BodyRotation.js";
-import { locateSurfaceSpace } from "../physics/TerrainExcavation.js";
-import {
-  describeSurfaceSupport,
-  type SurfaceVisibility,
-} from "../rendering/SurfacePresentation.js";
+import type { LabDiagnostics } from "../client/LabScene.js";
+import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import {
   GENERATED_CROSSINGS,
   generatedCrossingRecipe,
 } from "../scenarios/GeneratedCrossingRecipe.js";
 import { JUMP_STARTS, type JumpLane } from "../scenarios/JumpParkRecipe.js";
 import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
+import type { ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { DYNAMICS_STARTS } from "../scenarios/VehicleDynamicsRecipe.js";
 import { required } from "../shared/required.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { RACE_MODELS } from "../traffic/VehiclePerformance.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import DeferredVehiclePage from "./DeferredVehiclePage.js";
-import { recordEquipment } from "./EquipmentDiagnostics.js";
+import {
+  type GeometrySurface,
+  type GeometrySurfaceOptions,
+  geometryOptions,
+  LAB_VIEW_FIXTURES,
+  labViewSurface,
+  recordGeometryFrame,
+} from "./GeometrySurface.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
 import { TRAFFIC_FIXTURES } from "./TrafficFixtures.js";
 import {
@@ -29,9 +33,9 @@ import {
 } from "./WorldGeometryFixtures.js";
 
 export type GeometryCanvas = HTMLCanvasElement & {
-  __physicsSample?: ScenarioPresentationHost["session"]["samplePhysicsDiagnostics"];
-  __presentationDiagnostics?: () => ReturnType<ScenarioPresentationHost["getDiagnostics"]>;
-  __command?: ScenarioPresentationHost["command"]; // Exact placement for browser checks.
+  __physicsSample?: GeometrySurface["samplePhysicsDiagnostics"];
+  __presentationDiagnostics?: () => LabDiagnostics;
+  __command?: GeometrySurface["command"]; // Exact placement for browser checks.
 };
 const FIXTURES = [
   "deck",
@@ -64,9 +68,36 @@ export default function WorldGeometryPage({
     return <DeferredVehiclePage />;
   return <GeometryFixtures initial={initial} />;
 }
+/** The old lab host, for fixtures that have not moved to the lab view (226 slice 4a). */
+function hostSurface(
+  canvas: HTMLCanvasElement,
+  recipe: ScenarioRecipe,
+  options: GeometrySurfaceOptions,
+): GeometrySurface {
+  const host = new ScenarioPresentationHost(canvas, recipe, {
+    ...geometryOptions(options, () => surface),
+    ...(options.camera ? { fixedCamera: options.camera } : {}),
+  });
+  const { session } = host;
+  const surface: GeometrySurface = {
+    ready: host.ready,
+    get replica() {
+      return session.view;
+    },
+    get handles() {
+      return session.handles;
+    },
+    command: (command) => host.command(command),
+    reload: () => session.reload(),
+    samplePhysicsDiagnostics: (reset) => session.samplePhysicsDiagnostics(reset),
+    getDiagnostics: () => host.getDiagnostics(),
+    dispose: () => host.dispose(),
+  };
+  return surface;
+}
 function GeometryFixtures({ initial }: { initial: string }) {
   const canvas = useRef<GeometryCanvas>(null),
-    scene = useRef<ScenarioPresentationHost | null>(null);
+    scene = useRef<GeometrySurface | null>(null);
   const audio = useRef<AudioManager | null>(null),
     audioFocused = useRef(true);
   const [sounds, setSounds] = useState(false);
@@ -120,65 +151,28 @@ function GeometryFixtures({ initial }: { initial: string }) {
     setError("");
     setPaused(false);
     const view = geometryView({ fixture, generated, ambient });
-    const host = new ScenarioPresentationHost(c, recipe, {
-      width: 960,
-      height: 640,
+    const options: GeometrySurfaceOptions = {
       terrain: view.terrain,
-      ...(view.camera ? { fixedCamera: view.camera } : {}),
-      surfaceVisibility: () => settings.current.visibility,
-      settings: () => ({
-        paused: settings.current.paused,
-        zoom: view.zoom,
-        terrainPacing: "throughput",
-      }),
+      camera: view.camera,
+      zoom: view.zoom,
+      settings: () => settings.current,
       onFrame: (h) => {
-        const p = h.session.view.playerEntity,
-          server = h.session.view.serverPlayerEntity;
+        const p = h.replica.playerEntity;
         audio.current?.updateCarEngine(
-          occupiedVehicle(p, h.session.view.entities),
+          occupiedVehicle(p, h.replica.entities),
           settings.current.sounds &&
             !settings.current.paused &&
             !document.hidden &&
             audioFocused.current,
         );
-        c.dataset.playerX = String(p.position.wx);
-        c.dataset.playerY = String(p.position.wy);
-        c.dataset.playerZ = String(p.wz ?? 0);
-        c.dataset.serverZ = String(server.wz ?? 0);
-        c.dataset.support = describeSurfaceSupport(h.session.view.props, p);
-        c.dataset.space = locateSurfaceSpace(h.session.view.props, p);
-        c.dataset.serverSpace = locateSurfaceSpace(h.session.view.props, server);
-        c.dataset.visibility = settings.current.visibility;
-        c.dataset.courseRoute = fixture === "car-dynamics" ? route : jumps ? lane : "";
-        c.dataset.generatedSeed = generated ? String(generated.recipe.generation.seed) : "";
-        c.dataset.bridgeX = String((generated?.bridge.x ?? 0) * 16);
-        c.dataset.bridgeY = String((generated?.bridge.y ?? 0) * 16);
-        c.dataset.surfaceCount = String(
-          h.session.view.props.filter((p) => p.collider?.surface).length,
-        );
-        const car =
-          h.session.view.entities.find((e) => e.id === h.session.handles.car) ??
-          h.session.view.entities.find((e) => e.type.startsWith("vehicle-v1:"));
-        if (car) {
-          c.dataset.carX = String(car.position.wx);
-          c.dataset.carY = String(car.position.wy);
-          c.dataset.carZ = String(car.wz ?? 0);
-          c.dataset.carModel = car.type.slice(11);
-          c.dataset.carUp = String(
-            car.bodyRotation ? rotateBodyVector(car.bodyRotation, 0, 0, 1).z : 1,
-          );
-          c.dataset.carRotation = JSON.stringify(car.bodyRotation ?? null);
-        }
-        recordEquipment(c.dataset, h.session.view.entities, h.session.handles);
-        const traffic = h.session.view.entities.filter(
-          (e) => e.type.startsWith("vehicle-v1:") && e.id !== h.session.handles.car,
-        );
-        c.dataset.trafficCount = String(traffic.length);
-        const sample = traffic[0];
-        if (sample) {
-          c.dataset.trafficX = String(sample.position.wx);
-          c.dataset.trafficY = String(sample.position.wy);
-        }
+        recordGeometryFrame(c.dataset, h, {
+          visibility: settings.current.visibility,
+          courseRoute: fixture === "car-dynamics" ? route : jumps ? lane : "",
+          generated: generated && {
+            seed: generated.recipe.generation.seed,
+            bridge: generated.bridge,
+          },
+        });
         const next = `Height ${(p.wz ?? 0).toFixed(1)} · ${c.dataset.support} · space ${c.dataset.space}`;
         if (next !== lastStatus && alive) {
           lastStatus = next;
@@ -190,15 +184,20 @@ function GeometryFixtures({ initial }: { initial: string }) {
         delete c.dataset.ready;
         if (alive) setError(String(reason));
       },
-    });
+    };
+    const host = (LAB_VIEW_FIXTURES.has(fixture) ? labViewSurface : hostSurface)(
+      c,
+      recipe,
+      options,
+    );
     scene.current = host;
-    c.__physicsSample = (reset) => host.session.samplePhysicsDiagnostics(reset);
+    c.__physicsSample = (reset) => host.samplePhysicsDiagnostics(reset);
     c.__presentationDiagnostics = () => host.getDiagnostics();
     c.__command = (command) => host.command(command);
     void host.ready
       .then(async () => {
         // The jump park seats the driver at each lane's start line.
-        const car = host.session.handles.car;
+        const car = host.handles.car;
         if (alive && jumps && car !== undefined)
           await host.command({ kind: "enter-vehicle", entityId: car });
         if (alive) c.dataset.ready = "true";
@@ -326,8 +325,8 @@ function GeometryFixtures({ initial }: { initial: string }) {
         <button
           type="button"
           onClick={() => {
-            void scene.current?.session
-              .reload()
+            void scene.current
+              ?.reload()
               .then(() => {
                 const c = canvas.current;
                 if (c) c.dataset.reloadCount = String(Number(c.dataset.reloadCount ?? 0) + 1);

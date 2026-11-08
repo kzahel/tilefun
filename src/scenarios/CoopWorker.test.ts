@@ -1,5 +1,6 @@
 import { expect, it, vi } from "vitest";
 import { createPlayer } from "../entities/Player.js";
+import { followSeat, View } from "../session/View.js";
 import { decodeServerMessage, encodeClientMessage } from "../shared/binaryCodec.js";
 import { COOP_IDLE, coopRecipe } from "./CoopRecipe.js";
 import type { ScenarioResponse } from "./ScenarioProtocol.js";
@@ -100,7 +101,12 @@ it("is a device session that seats lab resets on the player's parent", () => {
     [false, 9],
     [true, 9],
   ]);
+  // A reset also clears the device's presentation, its views' slab fades included.
+  const view = new View(followSeat());
+  replica.session.views.push(view);
+  view.fades.set("deck", { opacity: 0.5, time: 1 });
   replica.clear();
+  expect(view.fades.size).toBe(0);
   replica.synchronize();
   expect(reconcile).toHaveBeenLastCalledWith(true, 9);
   replica.dispose();

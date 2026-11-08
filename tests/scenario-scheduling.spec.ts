@@ -31,7 +31,7 @@ test(`preview authority survives a stalled client and explicit lifecycle fences 
       return (now?.authority.clock?.ticks ?? 0) - beforeTicks - ((now?.steps ?? 0) - before.steps);
     })
     .toBeGreaterThan(10);
-  expect((await diagnostic())?.authority.channel.highWaterCount).toBeLessThan(1024);
+  expect((await diagnostic())?.authority.channel?.highWaterCount).toBeLessThan(1024);
 
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await expect.poll(async () => (await diagnostic())?.authority.clock?.running).toBe(false);

@@ -1,5 +1,47 @@
 # Embedded engine labs
 
+## Labs on the game's Worker runtime (226 slice 3c, 2026-11-08)
+
+Labs are moving off the lab shell (`ScenarioPresentationHost`, `ScenarioClient`,
+the scenario Worker) onto the game's own pieces, one lab at a time:
+
+- **Authority:** `RecipeWorldAuthority` (`src/scenarios/`) stages the recipe
+  with `ScenarioSession` and is served by the game's `LocalServerRuntime` from
+  `recipe-world.worker.ts`, with the same Worker port wiring as the game Worker.
+  The lab is the runtime's `local` connection and speaks the game protocol:
+  `player-input`, horn, siren and throw presses, `visible-range`, frames and
+  syncs with the game's backpressure. Two-seat recipes are refused (the physics
+  lab keeps the scenario Worker until slice 6).
+- **Lab instruments** travel as an opaque `admin` packet on the local host
+  channel, ordered with play: open, clock run/pause, step (paused only),
+  commands (teleport, placement, vehicle entry and recovery, equipment, train
+  calls, view range), reset, reload and physics diagnostics. Each answer follows
+  a full snapshot. Open, reset and reload send the game's `world-loaded`, so the
+  client clears as on a realm change. The game's `GameServer` refuses `admin`.
+  A paused lab never advances the realm; the loop's heartbeat keeps the
+  client's watchdog satisfied, and a hidden page stops the loop as in the game.
+- **Client:** `RecipeWorldClient` (`src/client/`) is the game's
+  `WorkerClientTransport`, a `DeviceSession` over `RemoteStateView` and one
+  predictor with the recipe's gravity. State is applied at the start of each lab
+  tick as in `GameClient`, and resets seat the player on its parent.
+- **View:** `LabView` (`src/client/`) is the lab view surface: one `View` with a
+  camera policy (the game's follow by default), `LabInput`, `VehicleControl`,
+  the production `GameLoop` and the selectable render host. Page plugins: zoom,
+  pause, surface visibility, terrain pacing, a per-frame hook, commands and
+  reload. Pause, a hidden page and in-flight instruments stop play; the camera's
+  range still streams while paused. A new world clears the renderer's world
+  caches, as the game router does, and the device presentation including the
+  view's slab fades (the old host's labs now clear theirs on reset too). `LabView` and the old host draw through the
+  same `drawLabFrame` and report the same `labPresentationDiagnostics`
+  (`src/client/LabScene.ts`), so the two shells cannot drift while labs move.
+- **Moved so far:** World geometry's car fixtures (`car-bridge`, `car-garage`,
+  `car-dynamics`, `car-jumps`) run on `LabView`; the page picks the surface by
+  fixture (`src/workshop/GeometrySurface.ts`). Its other fixtures and the other
+  labs stay on the old host until slice 4a. Framing is unchanged; captures of
+  the car fixtures differ from the old host only in time-dependent content
+  (mesh suspension settling, grass wind), within the old host's own run-to-run
+  variation, so `ENGINE_REVIEW_REVISION` is unchanged.
+
 ## Device sessions and views (226 slice 3b, 2026-11-08)
 
 Labs and the game now share the device session and view objects in

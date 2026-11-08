@@ -14,6 +14,9 @@ test("jump park opens on the default 3D mesh renderer and launches a boosted car
   const c = page.getByLabel("World geometry scene");
   await expect(c).toHaveAttribute("data-ready", "true");
   await expect(c).toHaveAttribute("data-renderer", "gpu");
+  expect(page.workers().map((w) => w.url())).toContainEqual(
+    expect.stringContaining("recipe-world"),
+  );
   await expect(page.getByRole("button", { name: /^Get out/ })).toBeVisible();
   await expect
     .poll(() =>

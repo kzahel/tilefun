@@ -57,6 +57,13 @@ same ServerLoop and OrderedWorkerChannel. Their temporary Realm host separates
 input admission from ticks and uses ordinary streaming readiness policy. Explicit
 ScenarioSession steps remain available for headless tests and paused inspection.
 See [embedded labs](topics/embedded-engine-labs.md) for lifecycle and parity limits.
+Labs moving onto the game view (226) use the game's own Worker host instead:
+`recipe-world.worker.ts` serves a `RecipeWorldAuthority` (recipe staging over
+one Realm) through `LocalServerRuntime`, and the lab connects with
+`WorkerClientTransport` and `RemoteStateView` like the game. Lab instruments
+(clock, step, teleport, reset, reload, diagnostics) are an opaque `admin`
+packet on the local host channel, ordered with play and answered after a full
+snapshot; `GameServer` refuses them.
 
 ## Transport and requests
 

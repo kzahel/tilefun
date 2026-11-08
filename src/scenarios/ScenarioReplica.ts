@@ -26,8 +26,10 @@ export class ScenarioReplica {
   get view(): RemoteStateView {
     return this.session.replica;
   }
+  /** A new world (reset): forget the old one and its presentation, as the game does. */
   clear() {
     this.view.clear();
+    this.session.clearPresentation();
     this.resetReplica = true;
   }
   synchronize(reset = false) {

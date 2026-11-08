@@ -1,5 +1,6 @@
 import { closeAssets, type GameAssets, loadGameAssets } from "../assets/GameAssets.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
+import { drawLabFrame, labPresentationDiagnostics } from "../client/LabScene.js";
 import { GameLoop } from "../core/GameLoop.js";
 import type { Entity } from "../entities/Entity.js";
 import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
@@ -15,7 +16,6 @@ import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.j
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import { ViewLayouts } from "../rendering/ViewLayout.js";
 import { fixedCamera, followSeat, View } from "../session/View.js";
-import { drawViewScene, drawViewTerrain, renderViews } from "../session/ViewRender.js";
 import type { Movement } from "../shared/Movement.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
 import { LabInput } from "./LabInput.js";
@@ -100,6 +100,7 @@ export class ScenarioPresentationHost {
     });
     const fixed = options.fixedCamera;
     this.view = new View(fixed ? fixedCamera(fixed) : followSeat(), this.camera);
+    this.session.device.views.push(this.view);
     this.camera.pixelSnap = cameraPixelSnap(new URLSearchParams(location.search));
     this.setRegion(options.width, options.height);
     this.camera.zoom = options.settings().zoom;
@@ -189,11 +190,6 @@ export class ScenarioPresentationHost {
     this.interpolate = false;
   }
 
-  /** The device's frame: shared presentation and mesh poses. */
-  private get frame() {
-    return this.session.device.frame;
-  }
-
   private setRegion(width: number, height: number) {
     const [whole] = this.layouts.get("1", width, height);
     if (whole) this.view.setRegion(whole.region);
@@ -281,59 +277,36 @@ export class ScenarioPresentationHost {
       const entities = cycle
         ? view.entities.map((entity) => (entity.id === player.id ? this.presentedPlayer : entity))
         : view.entities;
-      this.host.beginFrame();
-      const terrain = !this.options.interior && this.options.terrain !== false;
-      const pacing = this.options.settings().terrainPacing;
-      renderViews(
-        this.host,
-        [this.view],
-        terrain ? { world: view.world, pacing } : undefined,
-        () => {
-          drawViewTerrain(renderer, this.camera, terrain ? view.world : undefined, {
-            background: this.options.background ?? "#cbd5c3",
-            pacing,
-            prepared: true,
-          });
-          this.drawOverlay(this.options.underlay);
-          const interior = this.options.interior;
-          drawViewScene(
-            renderer,
-            this.camera,
-            this.frame,
-            this.view.fades,
-            {
-              world: view.world,
-              props: view.props,
-              entities,
-              collectObserver: player,
-              surfaceObserver: view.playerEntity,
-            },
-            {
-              alpha: this.alpha,
-              particles: this.effects,
-              grass: terrain && renderer.assets.has("grass-blades"),
-              visibility: this.options.surfaceVisibility?.() ?? "auto",
-              presentationTime: this.lightSeconds,
-              fadeSeconds: now,
-              pixelExactShadows: this.options.pixelExactShadows ?? false,
-              ...(interior
-                ? {
-                    drawProps: interior.drawProps,
-                    present: (items: readonly SceneItem[]) =>
-                      presentInterior(
-                        renderer,
-                        this.camera,
-                        interior.presentation,
-                        interior.placements,
-                        items,
-                      ),
-                  }
-                : {}),
-            },
-          );
-          this.drawOverlay(this.options.overlay);
-        },
-      );
+      const interior = this.options.interior;
+      drawLabFrame(this.host, this.view, this.session.device, this.effects, {
+        terrain: !interior && this.options.terrain !== false,
+        background: this.options.background ?? "#cbd5c3",
+        pacing: this.options.settings().terrainPacing,
+        visibility: this.options.surfaceVisibility?.() ?? "auto",
+        alpha: this.alpha,
+        fadeSeconds: now,
+        presentationTime: this.lightSeconds,
+        pixelExactShadows: this.options.pixelExactShadows ?? false,
+        entities,
+        collectObserver: player,
+        ...(interior
+          ? {
+              room: {
+                drawProps: interior.drawProps,
+                present: (items: readonly SceneItem[]) =>
+                  presentInterior(
+                    renderer,
+                    this.camera,
+                    interior.presentation,
+                    interior.placements,
+                    items,
+                  ),
+              },
+            }
+          : {}),
+        underlay: () => this.drawOverlay(this.options.underlay),
+        overlay: () => this.drawOverlay(this.options.overlay),
+      });
       this.options.uiOverlay?.(this.host.uiContext, this);
       this.input?.draw(this.host.uiContext);
       this.renderX = this.camera.x;
@@ -382,36 +355,15 @@ export class ScenarioPresentationHost {
   }
 
   getDiagnostics() {
-    const terrain = this.host?.renderer.getDiagnostics();
-    const playerBody = this.session.view.physicsState?.bodies.find(
-      (body) => body.id === this.session.view.playerEntity.id,
-    );
     return {
-      terrain,
+      ...labPresentationDiagnostics(this.host, this.session.device, this.effects),
       alpha: this.alpha,
-      effects: this.effects.diagnostics,
-      receivers: this.frame.receiverStats,
-      playerGrounded: playerBody?.grounded ?? false,
       steps: this.steps,
       authority: this.session.getDiagnostics(),
       cameraX: this.renderX,
       cameraY: this.renderY,
-      cameraTime: this.session.view.cameraPresentation.time,
       prediction: this.session.predictor.lastReconcileDiagnostics,
       pixelSnap: this.camera.pixelSnap,
-      carMeshOverride: this.frame.meshPoses.allCars3d,
-      meshEligibleVehicleTypes: [
-        ...new Set(
-          this.session.view.entities
-            .filter((entity) => this.frame.meshPoses.assetFor(entity))
-            .map((entity) => entity.type),
-        ),
-      ],
-      // Optional backend diagnostics stay outside presentation policy.
-      meshDraws: (terrain as typeof terrain & { gpu?: { meshDraws: number } })?.gpu?.meshDraws ?? 0,
-      bedMeshDraws:
-        (terrain as typeof terrain & { gpu?: { vehicleBedDraws: number } })?.gpu?.vehicleBedDraws ??
-        0,
     };
   }
 

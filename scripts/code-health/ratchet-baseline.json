@@ -916,11 +916,6 @@
       "lines": 174,
       "worst": 52,
       "overLimit": 1
-    },
-    "src/workshop/WorldGeometryPage.tsx": {
-      "lines": 369,
-      "worst": 33,
-      "overLimit": 1
     }
   }
 }

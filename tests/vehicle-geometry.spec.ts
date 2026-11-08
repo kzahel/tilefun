@@ -13,6 +13,10 @@ test("ordinary Worker car controls traverse a rendered ramp and retain the saved
   );
   const c = page.getByLabel("World geometry scene");
   await expect(c).toHaveAttribute("data-ready", "true");
+  // Car fixtures run on the game's lab view and the recipe-world Worker (226).
+  expect(page.workers().map((w) => w.url())).toContainEqual(
+    expect.stringContaining("recipe-world"),
+  );
   await page.getByRole("button", { name: /^Drive car/ }).click();
   await expect(page.getByRole("button", { name: /^Get out/ })).toBeVisible();
   await c.focus();

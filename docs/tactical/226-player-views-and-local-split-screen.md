@@ -3,9 +3,10 @@
 Status: phasing set 2026-11-07 after four read-only research reviews (input
 and labs, rendering and performance, authority and prediction, testing and
 decomposition). Slices 0, 1a, 1b, 2 (input ownership, as 2a and 2b), 3a
-(render views), 3b (device session and view objects) and 3c-i (the recipe-world
-authority and lab client) are done; 3c-ii (the lab view surface, ending with the
-WorldGeometry car fixtures on the game view) is next. Updated 2026-11-07 for seats on one device session,
+(render views), 3b (device session and view objects) and 3c (the recipe-world
+authority, lab client and lab view surface, with the WorldGeometry car fixtures
+on the game view) are done; 4a (the remaining labs, one per part) and 4b
+(server seats) are next. Updated 2026-11-07 for seats on one device session,
 online seats and the first-person view requirements from 229.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
@@ -1100,3 +1101,53 @@ maintaining both shells. The shell import allow-list only shrinks.
     - Wire visibility as the game does.
     - Clear the renderer on a new world.
     - Document the recipe-world Worker and admin channel in the client–server and embedded-labs docs once a page uses them.
+- 2026-11-08, slice 3c-ii exit list:
+  - **`LabView`** (`src/client/`): the lab view surface. It is built from `RecipeWorldClient`, one `View`, `LabInput`, `renderViews` with `drawViewTerrain` and `drawViewScene`, `VehicleControl`, `GameLoop` and the selectable render host. It imports no lab shell module.
+    - Plugins: the camera policy (default `followSeat`), admin commands and reload, a per-frame hook, surface visibility, zoom, pause and terrain pacing.
+    - A hidden page, a pause or an instrument in flight stops play; the camera's range streams while paused through `setVisibleRange`.
+    - A new world (open, reset, reload) clears the renderer through a client hook, as the game router does, beside the replica and device presentation; the camera snaps to the new world.
+  - **Shared with the old host:** the lab scene draw and the presentation diagnostics move into one module that both use, so the two shells cannot drift while labs migrate.
+  - **World geometry:** the page picks the surface by fixture. `car-bridge`, `car-garage`, `car-dynamics` and `car-jumps` run on `LabView`; the other fixtures stay on the old host until 4a. `LabShellConsumers` is unchanged, because the page still imports the host.
+  - **Tests:**
+    - Node: `LabView` on the real authority through the in-process Worker with a recording render host. Covers the lifecycle and visibility, follow camera and streaming, pause, commands and reload clearing the renderer, failure and disposal.
+    - Browser: `vehicle-geometry` (`car-garage`; `car-dynamics` default, ramp, bed and tow), `jump-park` and the `car-garage` case of `gpu-renderer`. Smoke, `world-geometry` and `scenario-scheduling` also run, for the fixtures that stay on the old host.
+  - **Review revision:** `ENGINE_REVIEW_REVISION` is unchanged if framing and pixels are unchanged; a capture compares the old and new surfaces on `car-garage`.
+  - **Docs:** the client–server and embedded-labs docs describe the recipe-world Worker, the admin channel and `LabView`.
+- 2026-11-08, slice 3c-ii done (exit list met):
+  - **`LabView`** (`src/client/LabView.ts`) is the lab view surface: `RecipeWorldClient`, one `View` (camera policy option, `followSeat` by default), `LabInput`, `VehicleControl`, the production `GameLoop` and the selectable render host, with no lab shell import.
+    - Pause, a hidden page and in-flight client work stop play. Lab commands no longer pause the clock as the old host did: the authority does not tick while an instrument is busy, and the client refuses play meanwhile.
+    - A hidden page also stops the authority's loop through `WorkerClientTransport.setHidden`, as `main.ts` does for the game.
+    - While paused, each tick hands the camera's range to `setVisibleRange` (deduplicated; the authority streams it). This replaces the old host's `view-range` command from `render()`.
+    - Commands and reload snap the camera after their answer. The client's new `onWorldLoaded` hook clears the renderer's world caches on a new world, as the game router does.
+    - The view registers with its device session, so a new world also clears its slab fades. The old host now does the same: its view is registered, and `ScenarioReplica.clear()` (on a reset or reload) clears the device presentation.
+    - Behaviour differences from the old host for these fixtures:
+      - inputs queued before a command apply after it, where the old host's pause discarded them (the client replays them too, so the two agree);
+      - reload snaps the camera and clears the renderer;
+      - a hidden page stops the authority's loop;
+      - as before, a new world does not reset held input or particles (the game router's `clearPlayInput` has no lab counterpart yet).
+  - **Shared with the old host:** `src/client/LabScene.ts` (not `src/session/`, whose files stay free of `RenderHost` types) holds `drawLabFrame` and `labPresentationDiagnostics`. The old host draws and reports through them (453 → 404 lines), so the two shells cannot drift while labs migrate. `LabDiagnostics` is the type both satisfy.
+  - **World geometry:** `src/workshop/GeometrySurface.ts` holds the page's surface interface, the shared options, `labViewSurface`, the fixture set and the per-frame dataset writer (moved from the page). The page keeps the old-host adapter, so it remains the only `LabShellConsumers` entry involved and the list is unchanged. `WorldGeometryPage` leaves the ratchet baseline (369 lines, worst 33 → under the limits).
+  - **Finding:** Rapier's WASM bindings read timing through `window` when one exists, so a bare `EventTarget` stubbed as `window` in Node crashes the authority's physics step. The `LabView` tests give the stub the real `performance`.
+  - **Tests:**
+    - `LabView.test.ts` (11) runs the real authority on the in-process Worker with the real client, input, vehicle control and camera policies; only the render host is a `RecordingBackend` with spies. `LabScene.test.ts` (3) pins the shared draw's option mapping.
+    - Browser: `vehicle-geometry` and `jump-park` now assert that the car fixtures load `recipe-world.worker`.
+    - `CoopWorker.test.ts` covers `ScenarioReplica.clear()` clearing a registered view's fades.
+  - **Seeded faults:** 64 single-line faults over the new code; 61 fail the suites (the first run caught 48, and the gaps became tests). The review fixes added 4 more (both view registrations, the replica's presentation clear, the horn order), all caught. Survivors:
+    - the follow policy's fixed-step tick, which is not observable while a presentation clock writes the actual camera each frame (as in the game);
+    - an early return after a refused input, which `LabView` never reaches because it already excludes the paused and busy states that make the client refuse;
+    - particle ageing, which the browser contact-effects spec catches.
+  - **Review revision:** `ENGINE_REVIEW_REVISION` is unchanged. A build with a temporary switch (not committed) captured both surfaces after pausing:
+    - camera framing was identical on all four car fixtures, and `car-jumps` was pixel-identical;
+    - the remaining differences are time-dependent content (the parked mesh car's suspension settling, the grass wind phase), within the old host's own run-to-run variation (on `car-garage`: 0.51% old against old, 0.31% old against new).
+  - **Validation:**
+    - `npm run typecheck`, Biome on the changed files, knip, the ratchet (only other sessions' `src/rendering` entries fail), focused vitest (166 files, 1,567 tests), regenerated inventories and a production build.
+    - Playwright: `vehicle-geometry` (7), `jump-park`, `world-geometry` (5), `scenario-scheduling`, the `gpu-renderer` `car-garage` case and smoke 28 of 28.
+    - After the review fixes, on a fresh build: those specs plus `furniture-motion` (the old host's room path), `character-presentation` (pose cycle), `pair-physics` and `scenario-lifecycle`, 27 of 27.
+    - One earlier batch had a single `character-presentation` timeout under two-worker load. It then passed 10 of 10 times.
+  - **Review** (Yep Anywhere, Opus 5.5 high): ACCEPT, no blocking findings. It confirmed parity with the old host for the car fixtures, the command fence without a clock pause, the hidden-page ordering, the shared draw and the `ENGINE_REVIEW_REVISION` evidence.
+    - Optional findings taken: register the view so a new world clears its slab fades (both shells), a deterministic horn-order assertion, a busy-lock test separated from the clock change, the behaviour differences above, and a browser re-run of the old host's room path and pose cycle.
+    - Not taken: moving `LabScene.ts` to `src/session/` (the `RenderHost` boundary).
+    - Re-review: ACCEPT.
+  - **Carried into 4a:**
+    - The transport's channel diagnostics in `RecipeWorldClient.getDiagnostics()` for traffic (`scenario-scheduling`), then make `LabDiagnostics.authority.channel` required again.
+    - Plugins the remaining labs need: overlay, underlay and `uiOverlay` hooks; the pose cycle (displayed player, `presentedPlayer`, `presentationAlpha`); the interior room view with its presentation cleared on dispose; `resize` and `captureFrame`; scripted input and `step`; explicit options in place of `location.search` reads.

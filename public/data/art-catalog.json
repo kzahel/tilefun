@@ -38215,6 +38215,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/client/LabScene.ts:73"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/rendering/CameraStabilityProbe.ts:47"
         },
         {
@@ -38228,10 +38232,6 @@
         {
           "system": "Gameplay",
           "source": "src/rendering/RendererLab.ts:218"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/scenarios/ScenarioPresentationHost.ts:314"
         },
         {
           "system": "Editor",
