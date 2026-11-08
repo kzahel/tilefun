@@ -186,11 +186,10 @@ export class WorkerClientTransport implements IClientTransport {
     this.autoPump = false;
     this.channel.send({ type: "start" });
     this.watchdog.reset(performance.now());
-    if (this.watchdogTimer === undefined)
-      this.watchdogTimer = setInterval(
-        () => this.probe(),
-        Math.min(5000, this.watchdog.timeoutMs / 4),
-      );
+    this.watchdogTimer ??= setInterval(
+      () => this.probe(),
+      Math.min(5000, this.watchdog.timeoutMs / 4),
+    );
   }
   setHidden(hidden: boolean): void {
     if (this.state !== "ready") return;
@@ -296,9 +295,12 @@ export class WorkerClientTransport implements IClientTransport {
     return { transport: `Local server Worker (${this.state})` };
   }
 
+  channelDiagnostics() {
+    return this.failureChannel ?? this.channel.diagnostics(); // As it stood at a failure.
+  }
   getFaultDiagnostics(): FaultAuthority {
     const a = this.lastAuthority,
-      channel = this.failureChannel ?? this.channel.diagnostics();
+      channel = this.channelDiagnostics();
     return {
       state: this.state,
       ticks: a?.ticks ?? 0,
@@ -371,9 +373,7 @@ export class WorkerClientTransport implements IClientTransport {
     clearInterval(this.watchdogTimer);
     clearTimeout(this.pumpTimer);
     this.channel.close();
-    this.worker.onmessage = null;
-    this.worker.onerror = null;
-    this.worker.onmessageerror = null;
+    this.worker.onmessage = this.worker.onerror = this.worker.onmessageerror = null;
     this.worker.terminate();
   }
 }

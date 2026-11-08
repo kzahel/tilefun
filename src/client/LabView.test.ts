@@ -368,18 +368,35 @@ it("a diagnostic camera policy frames the lab before input and through commands"
   await lab.ready;
   expect([lab.camera.x, lab.camera.y]).toEqual([0, -32]);
   await until(frame, () => expect(lab.client.clock?.running).toBe(true));
-  const submit = vi.spyOn(lab.client, "submitInput");
+  // Each tick's input finds the camera placed from the pose before it, and
+  // streams what that placement frames (however many ticks a frame runs).
+  const { client } = lab;
+  const submit = client.submitInput.bind(client);
+  const sent: { camera: number; player: number; range: unknown; framed: unknown }[] = [];
+  vi.spyOn(client, "submitInput").mockImplementation((movement, range) => {
+    const player = client.replica.playerEntity.position.wx;
+    sent.push({ camera: lab.camera.x, player, range, framed: lab.camera.getVisibleChunkRange() });
+    return submit(movement, range);
+  });
   key("KeyD");
-  for (let i = 0; i < 6; i++) frame();
-  // Placed from the last tick's pose, before this tick's input; streamed as framed.
-  const framed = lab.camera.getVisibleChunkRange();
-  const placedAt = lab.camera.x;
-  frame();
-  expect(submit).toHaveBeenLastCalledWith(expect.anything(), framed);
-  expect(placedAt).toBeGreaterThan(0);
+  for (let i = 0; i < 7; i++) frame();
+  expect(sent.length).toBeGreaterThanOrEqual(7);
+  for (const tick of sent) {
+    expect(tick.camera).toBe(tick.player);
+    expect(tick.range).toEqual(tick.framed);
+  }
+  expect(sent.at(-1)?.camera).toBeGreaterThan(0);
+  // Nothing places it after the step: it stays a tick behind the walking player.
+  expect(lab.camera.x).toBe(sent.at(-1)?.camera);
+  expect(client.replica.playerEntity.position.wx).toBeGreaterThan(lab.camera.x);
   expect(lab.camera.y).toBe(-32);
+  // Commands snap it from the predicted pose: the teleport plus any input
+  // still to replay (the walk is held through the command).
   await lab.command({ kind: "teleport", position: { wx: 600, wy: 600 } });
-  expect([lab.camera.x, lab.camera.y]).toEqual([600, -32]);
+  expect(lab.camera.x).toBe(client.replica.playerEntity.position.wx);
+  expect(lab.camera.x - 600).toBeGreaterThanOrEqual(0);
+  expect(lab.camera.x - 600).toBeLessThan(16);
+  expect(lab.camera.y).toBe(-32);
   expect(host.renderer.preparations).toBe(0); // no terrain in this lab
 });
 

@@ -34,13 +34,23 @@ the scenario Worker) onto the game's own pieces, one lab at a time:
   view's slab fades (the old host's labs now clear theirs on reset too). `LabView` and the old host draw through the
   same `drawLabFrame` and report the same `labPresentationDiagnostics`
   (`src/client/LabScene.ts`), so the two shells cannot drift while labs move.
-- **Moved so far:** World geometry's car fixtures (`car-bridge`, `car-garage`,
-  `car-dynamics`, `car-jumps`) run on `LabView`; the page picks the surface by
-  fixture (`src/workshop/GeometrySurface.ts`). Its other fixtures and the other
-  labs stay on the old host until slice 4a. Framing is unchanged; captures of
-  the car fixtures differ from the old host only in time-dependent content
-  (mesh suspension settling, grass wind), within the old host's own run-to-run
-  variation, so `ENGINE_REVIEW_REVISION` is unchanged.
+- **Diagnostics:** `RecipeWorldClient.getDiagnostics()` reports the
+  transport's outgoing channel and a live clock. The clock is the authority's
+  ticks from its last answer, advanced by the frames applied since, because a
+  paused world's frames repeat its tick. Browser checks can therefore watch the
+  authority outrun a stalled page (`scenario-scheduling`).
+- **Moved so far:** all of World geometry runs on `LabView`, apart from the
+  `nature-*` fixtures, which are Natural landscape's (slices 3c-ii and 4a-i).
+  - The page drives `LabView` directly. Fixed diagnostic frames use the
+    `fixedCamera` policy, and the per-frame datasets come from
+    `src/workshop/GeometryFrame.ts`.
+  - The page no longer imports the lab shell.
+  - Outdoor geometry, Characters, the Interiors playtest and Natural landscape
+    stay on the old host until their 4a parts.
+  - Framing is unchanged on every fixture. Captures differ from the old host
+    only in time-dependent content: grass wind, moving traffic and animals, and
+    mesh suspension settling. Those differences are within the old host's own
+    run-to-run variation, so `ENGINE_REVIEW_REVISION` is unchanged.
 
 ## Device sessions and views (226 slice 3b, 2026-11-08)
 

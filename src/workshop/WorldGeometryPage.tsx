@@ -1,28 +1,22 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { AudioManager } from "../audio/AudioManager.js";
 import type { LabDiagnostics } from "../client/LabScene.js";
+import { LabView } from "../client/LabView.js";
+import type { RecipeWorldClient } from "../client/RecipeWorldClient.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import {
   GENERATED_CROSSINGS,
   generatedCrossingRecipe,
 } from "../scenarios/GeneratedCrossingRecipe.js";
 import { JUMP_STARTS, type JumpLane } from "../scenarios/JumpParkRecipe.js";
-import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
-import type { ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { DYNAMICS_STARTS } from "../scenarios/VehicleDynamicsRecipe.js";
+import { fixedCamera } from "../session/View.js";
 import { required } from "../shared/required.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { RACE_MODELS } from "../traffic/VehiclePerformance.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import DeferredVehiclePage from "./DeferredVehiclePage.js";
-import {
-  type GeometrySurface,
-  type GeometrySurfaceOptions,
-  geometryOptions,
-  LAB_VIEW_FIXTURES,
-  labViewSurface,
-  recordGeometryFrame,
-} from "./GeometrySurface.js";
+import { recordGeometryFrame } from "./GeometryFrame.js";
 import NaturalLandscapePage from "./NaturalLandscapePage.js";
 import { TRAFFIC_FIXTURES } from "./TrafficFixtures.js";
 import {
@@ -33,9 +27,9 @@ import {
 } from "./WorldGeometryFixtures.js";
 
 export type GeometryCanvas = HTMLCanvasElement & {
-  __physicsSample?: GeometrySurface["samplePhysicsDiagnostics"];
+  __physicsSample?: RecipeWorldClient["samplePhysicsDiagnostics"];
   __presentationDiagnostics?: () => LabDiagnostics;
-  __command?: GeometrySurface["command"]; // Exact placement for browser checks.
+  __command?: LabView["command"]; // Exact placement for browser checks.
 };
 const FIXTURES = [
   "deck",
@@ -68,36 +62,9 @@ export default function WorldGeometryPage({
     return <DeferredVehiclePage />;
   return <GeometryFixtures initial={initial} />;
 }
-/** The old lab host, for fixtures that have not moved to the lab view (226 slice 4a). */
-function hostSurface(
-  canvas: HTMLCanvasElement,
-  recipe: ScenarioRecipe,
-  options: GeometrySurfaceOptions,
-): GeometrySurface {
-  const host = new ScenarioPresentationHost(canvas, recipe, {
-    ...geometryOptions(options, () => surface),
-    ...(options.camera ? { fixedCamera: options.camera } : {}),
-  });
-  const { session } = host;
-  const surface: GeometrySurface = {
-    ready: host.ready,
-    get replica() {
-      return session.view;
-    },
-    get handles() {
-      return session.handles;
-    },
-    command: (command) => host.command(command),
-    reload: () => session.reload(),
-    samplePhysicsDiagnostics: (reset) => session.samplePhysicsDiagnostics(reset),
-    getDiagnostics: () => host.getDiagnostics(),
-    dispose: () => host.dispose(),
-  };
-  return surface;
-}
 function GeometryFixtures({ initial }: { initial: string }) {
   const canvas = useRef<GeometryCanvas>(null),
-    scene = useRef<GeometrySurface | null>(null);
+    scene = useRef<LabView | null>(null);
   const audio = useRef<AudioManager | null>(null),
     audioFocused = useRef(true);
   const [sounds, setSounds] = useState(false);
@@ -151,21 +118,28 @@ function GeometryFixtures({ initial }: { initial: string }) {
     setError("");
     setPaused(false);
     const view = geometryView({ fixture, generated, ambient });
-    const options: GeometrySurfaceOptions = {
+    // The game's lab view: player follow, or a fixed diagnostic frame.
+    const lab = new LabView(c, recipe, {
+      width: 960,
+      height: 640,
       terrain: view.terrain,
-      camera: view.camera,
-      zoom: view.zoom,
-      settings: () => settings.current,
-      onFrame: (h) => {
-        const p = h.replica.playerEntity;
+      ...(view.camera ? { camera: fixedCamera(view.camera) } : {}),
+      surfaceVisibility: () => settings.current.visibility,
+      settings: () => ({
+        paused: settings.current.paused,
+        zoom: view.zoom,
+        terrainPacing: "throughput",
+      }),
+      onFrame: ({ client }) => {
+        const p = client.replica.playerEntity;
         audio.current?.updateCarEngine(
-          occupiedVehicle(p, h.replica.entities),
+          occupiedVehicle(p, client.replica.entities),
           settings.current.sounds &&
             !settings.current.paused &&
             !document.hidden &&
             audioFocused.current,
         );
-        recordGeometryFrame(c.dataset, h, {
+        recordGeometryFrame(c.dataset, client, {
           visibility: settings.current.visibility,
           courseRoute: fixture === "car-dynamics" ? route : jumps ? lane : "",
           generated: generated && {
@@ -184,22 +158,17 @@ function GeometryFixtures({ initial }: { initial: string }) {
         delete c.dataset.ready;
         if (alive) setError(String(reason));
       },
-    };
-    const host = (LAB_VIEW_FIXTURES.has(fixture) ? labViewSurface : hostSurface)(
-      c,
-      recipe,
-      options,
-    );
-    scene.current = host;
-    c.__physicsSample = (reset) => host.samplePhysicsDiagnostics(reset);
-    c.__presentationDiagnostics = () => host.getDiagnostics();
-    c.__command = (command) => host.command(command);
-    void host.ready
+    });
+    scene.current = lab;
+    c.__physicsSample = (reset) => lab.client.samplePhysicsDiagnostics(reset);
+    c.__presentationDiagnostics = () => lab.getDiagnostics();
+    c.__command = (command) => lab.command(command);
+    void lab.ready
       .then(async () => {
         // The jump park seats the driver at each lane's start line.
-        const car = host.handles.car;
+        const car = lab.client.handles.car;
         if (alive && jumps && car !== undefined)
-          await host.command({ kind: "enter-vehicle", entityId: car });
+          await lab.command({ kind: "enter-vehicle", entityId: car });
         if (alive) c.dataset.ready = "true";
       })
       .catch((reason) => {
@@ -224,7 +193,8 @@ function GeometryFixtures({ initial }: { initial: string }) {
       delete c.dataset.ready;
       delete c.__physicsSample;
       delete c.__presentationDiagnostics;
-      host.dispose();
+      delete c.__command;
+      lab.dispose();
       scene.current = null;
       audio.current?.stopCarEngine();
       window.removeEventListener("blur", release);

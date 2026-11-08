@@ -5,8 +5,9 @@ and labs, rendering and performance, authority and prediction, testing and
 decomposition). Slices 0, 1a, 1b, 2 (input ownership, as 2a and 2b), 3a
 (render views), 3b (device session and view objects) and 3c (the recipe-world
 authority, lab client and lab view surface, with the WorldGeometry car fixtures
-on the game view) are done; 4a (the remaining labs, one per part) and 4b
-(server seats) are next. Updated 2026-11-07 for seats on one device session,
+on the game view) are done, as is 4a-i (all of World geometry on the game
+view). The other 4a parts (Outdoor geometry, Characters, Interiors playtest,
+Natural landscape) and 4b (server seats) are next. Updated 2026-11-07 for seats on one device session,
 online seats and the first-person view requirements from 229.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
@@ -1151,3 +1152,45 @@ maintaining both shells. The shell import allow-list only shrinks.
   - **Carried into 4a:**
     - The transport's channel diagnostics in `RecipeWorldClient.getDiagnostics()` for traffic (`scenario-scheduling`), then make `LabDiagnostics.authority.channel` required again.
     - Plugins the remaining labs need: overlay, underlay and `uiOverlay` hooks; the pose cycle (displayed player, `presentedPlayer`, `presentationAlpha`); the interior room view with its presentation cleared on dispose; `resize` and `captureFrame`; scripted input and `step`; explicit options in place of `location.search` reads.
+- 2026-11-08, slice 4a is split into one part per lab, in this order: 4a-i the rest of World geometry, then Outdoor geometry, Characters, Interiors playtest and Natural landscape. `ScenarioPresentationHost` is deleted with its last consumer.
+- 2026-11-08, slice 4a-i exit list (the rest of World geometry):
+  - **Every World geometry fixture on `LabView`:** deck, garage, crossing, tree-house, outskirts-park, realm (with `?crowd=`), traffic, traffic-crowd, racetrack, shopping, train and the generated crossings. Fixed diagnostic frames use the `fixedCamera` policy, as on the old host. The `nature-*` fixtures belong to Natural landscape, a later part.
+  - **The page:** the old-host adapter and the per-fixture choice go. With one surface left, the page drives `LabView` directly, with no adapter interface. The page imports no lab shell module and leaves `LabShellConsumers`.
+  - **Traffic diagnostics:** `RecipeWorldClient.getDiagnostics()` reports the transport's outgoing channel (its high-water marks). It also reports a live clock: the authority's ticks, advanced by the frames applied since its last answer. That lets `scenario-scheduling` watch the authority outrun a stalled client. `LabDiagnostics.authority.channel` becomes required again.
+  - **The realm benchmark's** `__physicsSample` keeps working through the admin diagnostics.
+  - **Tests:**
+    - Node: the live clock (it advances with frames, holds while paused and restarts with a new world) and the channel diagnostics.
+    - Browser, for the moved fixtures: `world-geometry`, `scenario-scheduling`, `scenario-lifecycle`, `embedded-geometry-rendering`, `generated-crossing`, `rail-crossing`, the embedded `train-recovery` case, `underground-garage`, `vehicle-audio`, `vehicle-geometry`, the World geometry cases of `gpu-renderer`, and smoke.
+  - **Review revision:** `ENGINE_REVIEW_REVISION` is unchanged if the framing is identical and the remaining pixel differences are time-dependent. A capture comparison against the old host settles it.
+  - **Docs:** the embedded-labs topic.
+- 2026-11-08, slice 4a-i done (exit list met):
+  - **World geometry is on `LabView`:** every fixture runs on the game's lab view and the recipe-world Worker, apart from `nature-*`, which belongs to Natural landscape. That covers the car fixtures (3c-ii), deck, garage, crossing, tree-house, outskirts-park, realm (`?crowd=`), traffic, traffic-crowd, racetrack, shopping, train and the generated crossings.
+    - The page drives `LabView` directly. The old-host adapter, the per-fixture choice and the adapter interface were deleted. `GeometrySurface.ts` became `GeometryFrame.ts`, which holds only the dataset writer.
+    - The page no longer imports the lab shell and left `LabShellConsumers`.
+  - **Traffic diagnostics:** `RecipeWorldClient.getDiagnostics()` reports the transport's outgoing channel through a new `WorkerClientTransport.channelDiagnostics()` (also used by its fault report). The file stays at its ratchet limit of 379 lines through two equivalent compressions.
+    - It also reports a live clock: the last answer's ticks, advanced by the frames' `serverTick` since that answer arrived. A paused world's streamed frames repeat its tick, and a new world's answer re-bases the clock.
+    - `scenario-scheduling` again sees the authority outrun a stalled page. `LabDiagnostics.authority.channel` is required again, and the spec's `?.` is reverted.
+  - **The realm benchmark's** `__physicsSample` works through the admin diagnostics. A temporary browser check called it with and without reset; both answers returned timings and collision counters.
+  - **Tests:**
+    - `RecipeWorldClient`: a new case covers the live clock (no answer yet, steps, running between answers, close to the authority's own answer at a lab's tick rate, held while paused and streaming, restarted by a new world) and the channel.
+    - `WorkerClientTransport`: the failure case checks the queue snapshot taken at the failure, and the startup-failure case checks that every Worker handler is released.
+    - `LabView` (from 3c-ii): the diagnostic-camera case was sensitive to CPU load, because it assumed one tick per frame. It now checks each input's camera, pose and range as the input is sent, and that the camera stays a tick behind the player after the step.
+  - **Seeded faults:** 13 single-line faults; 12 fail the suites. The first run caught 7 of 12, and the gaps became tests.
+    - A first-draft clamp on the clock was removed: it held the old count while a new world's frames arrived ahead of its answer.
+    - Survivor: taking the clock base from the answer's ticks instead of the frames' server tick. The two are equal while the realm's tick counter equals the authority's ticks, as it does now (reset and reload build a new realm).
+  - **Review revision:** `ENGINE_REVIEW_REVISION` is unchanged. A build with a temporary switch (not committed) captured both hosts on all 14 moved fixtures after pausing.
+    - Camera framing, player position and traffic count were identical on every fixture. Deck, garage and crossing were pixel-identical on every run.
+    - The other differences are time-dependent content (grass wind phase, moving traffic and animals), within each host's run-to-run variation. On tree-house, one old run is pixel-identical to a new one; on shopping, old against old ranges from 0% to 1.35%.
+  - **Validation:**
+    - `npm run typecheck`, Biome on the changed files, knip, the ratchet (only other sessions' `src/rendering` entries fail, as on HEAD), focused vitest (95 files, 926 tests), the regenerated manifest and a production build.
+    - Playwright: `world-geometry` (5), `scenario-scheduling` (plus 5 repeats), `scenario-lifecycle`, `embedded-geometry-rendering`, `generated-crossing` (3), `rail-crossing`, `underground-garage` (3), `vehicle-audio` (2), `vehicle-geometry` (7), `jump-park`, the two `gpu-renderer` traffic cases, the embedded `train-recovery` case, and smoke 28 of 28.
+  - **Review** (Yep Anywhere, Opus 5.5 high): CHANGES REQUESTED, with one blocking item that was a test fix only. The reviewer confirmed the exit list, fixture parity with the old host's deleted adapter, the live clock in every state, the channel quantity, the page cleanup and the `ENGINE_REVIEW_REVISION` evidence.
+    - Blocking: the 3c-ii diagnostic-camera case failed when run on its own, as it did at HEAD. A walk input still in flight replays one tick on top of the teleport, so the case now asserts the camera at the predicted pose within 16 px, like the other command-snap case.
+    - Optional findings taken:
+      - assertions that the frames' server tick equals the authority's ticks;
+      - an accurate channel comment;
+      - a note in the performance topic that realm benchmark captures from before this part are not directly comparable (they ran on the scenario Worker).
+    - Also fixed while re-checking: the clock case's upper bound now allows for frames arriving a batch per pump, so CPU load no longer fails it.
+    - Not taken: a Node test for the moment between a new world's frames and its answer. The in-process rig cannot order that batching, and the invariant assertions cover it.
+    - Re-review: ACCEPT.
+  - **For the next parts:** `WorkerClientTransport` is at its ratchet limit of 379 lines, so its next change must split it.

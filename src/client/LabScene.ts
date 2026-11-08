@@ -84,14 +84,14 @@ export function drawLabFrame(
   });
 }
 
-/** What both lab surfaces report to browser checks. The old host's authority
- * also reports its scenario channel (the traffic scheduling check). */
+/** What both lab surfaces report to browser checks, including the authority's
+ * clock and the outgoing channel (the traffic scheduling check). */
 export type LabDiagnostics = ReturnType<typeof labPresentationDiagnostics> & {
   alpha: number;
   steps: number;
   authority: {
     clock?: { running: boolean; ticks: number } | undefined;
-    channel?: { highWaterCount: number };
+    channel: { highWaterCount: number };
   };
   cameraX: number;
   cameraY: number;

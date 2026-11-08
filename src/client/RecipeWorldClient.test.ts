@@ -183,6 +183,62 @@ it("refuses play while paused or busy and streams what a paused camera inspects"
   await expect(client.step(move(1))).rejects.toThrow("Pause before stepping");
 });
 
+it("reports the authority's clock between answers and the outgoing channel", async () => {
+  const { client } = connect();
+  expect(client.getDiagnostics().clock).toBeUndefined(); // no answer yet
+  await client.ready;
+  for (let i = 0; i < 3; i++) await client.step(move(0));
+  expect(client.getDiagnostics().clock).toEqual({ running: false, ticks: 3 });
+  // The realm's tick counter is the authority's clock (both restart with a new
+  // world), so a new world's frames count from its start before its answer.
+  expect(client.replica.serverTick).toBe(3);
+  await running(client);
+  const answered = required(client.clock).ticks;
+  // Frames carry the ticks the authority runs between answers.
+  let live = 0;
+  await vi.waitFor(() => {
+    client.update();
+    live = required(client.getDiagnostics().clock).ticks;
+    expect(live).toBeGreaterThan(answered + 5);
+  });
+  expect(client.clock?.ticks).toBe(answered);
+  // At a lab's tick cadence, the authority's own answer is never behind and is
+  // ahead only by frames not yet applied: those of the ticks since the lab began
+  // pumping at that cadence (frames arrive a batch per pump).
+  const cadence = performance.now();
+  for (let i = 0; i < 5; i++) {
+    await frame();
+    client.update();
+  }
+  live = required(client.getDiagnostics().clock).ticks;
+  await client.samplePhysicsDiagnostics();
+  const elapsed = (performance.now() - cadence) / (1000 / 60);
+  const truth = required(client.clock).ticks;
+  expect(truth - live).toBeGreaterThanOrEqual(0);
+  expect(truth - live).toBeLessThanOrEqual(elapsed + 3);
+  expect(client.getDiagnostics().clock).toEqual({ running: true, ticks: truth });
+  expect(client.replica.serverTick).toBe(truth);
+  // A paused world's streamed frames repeat its tick.
+  client.setRunning(false);
+  await vi.waitFor(() => expect(client.busy).toBe(false));
+  const paused = client.getDiagnostics().clock;
+  expect(paused).toEqual(client.clock);
+  client.setVisibleRange({ minCx: 6, minCy: 0, maxCx: 7, maxCy: 1 });
+  await vi.waitFor(() => {
+    client.update();
+    expect(client.replica.world.chunks.get(7, 1)).toBeDefined();
+  });
+  expect(client.getDiagnostics().clock).toEqual(paused);
+  // A new world restarts the clock.
+  await client.reload(true);
+  expect(client.getDiagnostics().clock).toEqual({ running: false, ticks: 0 });
+  // The client's messages (start, clock changes, admin requests) went through the
+  // ordered channel, and none is left queued.
+  const { channel } = client.getDiagnostics();
+  expect(channel.highWaterCount).toBeGreaterThan(0);
+  expect(channel.queued).toBe(0);
+});
+
 it("sends a driver's horn press on the play path and hears the authority's horn", async () => {
   const { client } = connect({
     ...recipe,

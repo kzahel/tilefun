@@ -38,7 +38,10 @@ export class RecipeWorldClient {
   readonly ready: Promise<void>;
   /** Named recipe entities from the latest admin answer. */
   handles: Record<string, number> = {};
+  /** The clock as of the latest admin answer. */
   clock: LabAdminResult["clock"] | undefined;
+  /** The frames' server tick when that answer arrived. */
+  private clockTick = 0;
   physicsDiagnostics: LabAdminResult["physics"];
   onHorn: ((message: VehicleHornMessage) => void) | undefined;
   /** A new world replaced the old one (open, reset, reload): drop world caches. */
@@ -175,8 +178,17 @@ export class RecipeWorldClient {
     return this.physicsDiagnostics;
   }
 
+  /** The clock runs on between answers: the authority's ticks advance with the
+   * frames applied since the last one (a paused world's frames repeat its tick,
+   * and a new world's frames count from its start, as its answer will). */
   getDiagnostics() {
-    return { clock: this.clock, bytesReceived: this.transport.bytesReceived };
+    const { clock } = this;
+    const since = this.replica.serverTick - this.clockTick;
+    return {
+      clock: clock && { running: clock.running, ticks: clock.ticks + since },
+      channel: this.transport.channelDiagnostics(),
+      bytesReceived: this.transport.bytesReceived,
+    };
   }
 
   /** Release prediction and presentation; the Worker shuts down behind it. */
@@ -208,6 +220,7 @@ export class RecipeWorldClient {
     while (replica.pendingMessageCount) replica.applyPending();
     this.handles = result.handles;
     this.clock = result.clock;
+    this.clockTick = replica.serverTick;
     if (result.physics) this.physicsDiagnostics = result.physics;
     this.synchronize(reset);
     return result;

@@ -135,6 +135,10 @@ presentation. Both main-frame tails stay near 16.7ms even when authority slows.
 Next measure/profile 96-NPC tail headroom and moving-player/multiclient replay.
 `benchmark-realm-physics-browser.mjs` supports `--base` and `--reference-base`;
 `active-crowds.mjs` runs only the current shared default, with no backend selector.
+Since [226](../tactical/226-player-views-and-local-split-screen.md) slice 4a-i
+(2026-11-08), the benchmark's `realm` and `traffic-crowd` fixtures run on the
+recipe-world Worker, ticked by `LocalServerRuntime`'s loop, instead of the
+scenario Worker. Captures from before then are not directly comparable.
 
 Historical replacement qualification (2026-11-02) is tracked in
 [202](../tactical/202-persistent-realm-collision-proof.md). Its final paired physical

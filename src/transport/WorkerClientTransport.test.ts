@@ -175,6 +175,9 @@ describe("local server Worker lifecycle", () => {
       data: { kind: "failed", error: "authority tick failed", stack },
     } as MessageEvent);
     await rejected;
+    // The outgoing queue as it stood at the failure, not the closed channel's.
+    expect(r.client.channelDiagnostics()).toMatchObject({ queued: 1 });
+    expect(r.client.getFaultDiagnostics().queuedBytes).toBeGreaterThan(0);
     await expect(requests.send({ type: "get-world-map", requestId: 2 })).rejects.toThrow(
       "authority tick failed",
     );
@@ -305,7 +308,12 @@ describe("local server Worker lifecycle", () => {
     await expect(r.client.ready()).rejects.toThrow("storage failed");
     expect(r.events).toContain("terminate");
     expect(r.errors).toHaveLength(1);
-    expect(r.endpoint.onmessage).toBeNull();
+    // Every handler is released with the terminated Worker.
+    expect([r.endpoint.onmessage, r.endpoint.onerror, r.endpoint.onmessageerror]).toEqual([
+      null,
+      null,
+      null,
+    ]);
   });
 
   it("rejects pending lifecycle work on Worker failure", async () => {

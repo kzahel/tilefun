@@ -32,7 +32,6 @@ const REMAINING_CONSUMERS = [
   "src/workshop/OutdoorGeometryTest.tsx",
   "src/workshop/PhysicsPage.tsx",
   "src/workshop/PhysicsViewport.ts",
-  "src/workshop/WorldGeometryPage.tsx",
 ];
 
 function sources(dir: string): string[] {
