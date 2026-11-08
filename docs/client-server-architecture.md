@@ -90,6 +90,24 @@ replicas use these paths with the replicated road mask to bake normal terrain
 caches. The authority service uses the same alignment for carriage motion. Paths
 are generator-derived metadata, not duplicated durable terrain records.
 
+A connection is a device that can seat up to four local players
+([226](tactical/226-player-views-and-local-split-screen.md), server side since
+slice 4b-i; no client seats them yet).
+- **Sessions per seat:** each seat has its own `PlayerSession`. Seat 0's id is
+  the bare connection id, so single player is unchanged; other seats are
+  `connection#n`, and are guests of seat 0 without a profile.
+- **Routing:** [DeviceTransport](../src/server/DeviceTransport.ts) wraps the
+  transport `GameServer` receives.
+  - A device sends one `player-input` per tick, carrying every seat's movement
+    under one sequence. A joined seat missing from it stands still.
+  - Other seats' messages and replies travel in `seat` envelopes.
+  - `set-debug` pauses every seat of that device.
+  - A disconnect makes every seat dormant.
+- **Joining and leaving:** [DeviceConnections](../src/server/DeviceConnections.ts)
+  owns the connection lifecycle and `join-seat`/`leave-seat`.
+- **Replication:** each connection still has one frame stream, seat 0's; the
+  other seats appear in it as entities until 226 slice 4b-ii.
+
 [RequestBroker](../src/client/RequestBroker.ts) correlates request IDs with the
 response mapping in [requests.ts](../src/shared/requests.ts), checks response
 types, times out after 30 seconds and rejects pending calls on disconnect or

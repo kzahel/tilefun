@@ -55,7 +55,6 @@ type RealmCommandType =
   | "edit-clear-roads"
   | "set-editor-mode"
   | "editor-cursor"
-  | "set-debug"
   | "visible-range"
   | "flush"
   | "invalidate-all-chunks";
@@ -177,9 +176,6 @@ const COMMANDS: { [K in RealmCommandType]: RealmCommandHandler<K> } = {
       brushMode: msg.brushMode,
     };
     ctx.editorCursorsChanged();
-  },
-  "set-debug": (_ctx, session, msg) => {
-    session.debugPaused = msg.paused;
   },
   "visible-range": (_ctx, session, msg) => {
     session.visibleRange = {

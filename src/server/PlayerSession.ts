@@ -19,8 +19,29 @@ export interface GameplaySession {
   lastSafePosition: { wx: number; wy: number; wz?: number } | null;
 }
 
+/** Separates a connection id from its seat in a seat's session id; connection ids never hold it. */
+export const SEAT_SEPARATOR = "#";
+
+/** A seat's session id (226): seat 0 is the bare connection id, so single-player is unchanged. */
+export function seatSessionId(connectionId: string, seat: number): string {
+  return seat === 0 ? connectionId : `${connectionId}${SEAT_SEPARATOR}${seat}`;
+}
+
+/** The connection and seat a session id addresses; an id without a seat suffix is seat 0. */
+export function seatAddress(sessionId: string): { connectionId: string; seat: number } {
+  const match = /^(.+)#([1-9]\d*)$/.exec(sessionId);
+  return match?.[1] && match[2]
+    ? { connectionId: match[1], seat: Number(match[2]) }
+    : { connectionId: sessionId, seat: 0 };
+}
+
 export class PlayerSession {
+  /** The session's address: its connection's id for seat 0, `connection#seat` for other seats. */
   readonly clientId: string;
+  /** The device connection this seat plays on; it owns the seat's transport and lifetime. */
+  readonly connectionId: string;
+  /** The seat on that connection; seat 0 is the connection's own player, others are its guests. */
+  readonly seat: number;
   /** Player entity in the current realm. Set by Realm.addPlayer(). */
   player!: Entity;
   editorEnabled = true;
@@ -90,6 +111,7 @@ export class PlayerSession {
 
   constructor(clientId: string, player?: Entity) {
     this.clientId = clientId;
+    ({ connectionId: this.connectionId, seat: this.seat } = seatAddress(clientId));
     if (player) {
       this.player = player;
       this.gameplaySession = {

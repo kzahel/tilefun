@@ -4,7 +4,7 @@
  * Message type tags:
  *   0x16 = FrameMessage (vehicle rotation, equipment and couplings, prescribed groups, momentum and solved pairs) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
- *   0x81 = fixed-tick player-input (client→server)
+ *   0x81 = fixed-tick device input, one packet per device tick (client→server; inputCodec)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
  *
  * All multi-byte values are little-endian. All offsets measured in bytes.
@@ -21,6 +21,7 @@ import {
 } from "./entityFields.js";
 import { ENTITY_TYPE_TO_INDEX, indexToEntityType } from "./entityTypeIndex.js";
 import type { WireCursor } from "./entityWire.js";
+import { decodePlayerInput, encodePlayerInput, TAG_PLAYER_INPUT } from "./inputCodec.js";
 import { physicsStateBytes, readPhysicsState, writePhysicsState } from "./physicsStateCodec.js";
 import type {
   ChunkSnapshot,
@@ -35,7 +36,6 @@ import type {
 
 const TAG_FRAME = 0x16;
 const TAG_SYNC_CHUNKS = 0x03;
-const TAG_PLAYER_INPUT = 0x81;
 const TAG_JSON = 0xff;
 
 // ---- TextEncoder/Decoder for JSON fallback ----
@@ -243,45 +243,6 @@ function readDelta(cursor: WireCursor): EntityDelta {
   cursor.off += 4;
   readDeltaFields(cursor, delta);
   return delta;
-}
-
-// ---- player-input encoding ----
-
-function encodePlayerInput(msg: Extract<ClientMessage, { type: "player-input" }>): ArrayBuffer {
-  const buf = new ArrayBuffer(8);
-  const view = new DataView(buf);
-  view.setUint8(0, TAG_PLAYER_INPUT);
-  view.setUint32(1, msg.seq, true);
-  // Quantize analog [-1,1] to Int8 [-127,127]. 0.8% precision — plenty for a joystick.
-  view.setInt8(5, Math.round(Math.max(-1, Math.min(1, msg.dx)) * 127));
-  view.setInt8(6, Math.round(Math.max(-1, Math.min(1, msg.dy)) * 127));
-  let flags = 0;
-  if (msg.sprinting) flags |= 0x01;
-  if (msg.jump) flags |= 0x02;
-  if (msg.jumpPressed) flags |= 0x04;
-  if (msg.reversing) flags |= 0x08;
-  if (msg.relativeDriving) flags |= 0x10;
-  view.setUint8(7, flags);
-  return buf;
-}
-
-function decodePlayerInput(view: DataView): ClientMessage {
-  if (view.byteLength !== 8) throw Error("Invalid fixed-tick input length");
-  const seq = view.getUint32(1, true);
-  const dx = view.getInt8(5) / 127;
-  const dy = view.getInt8(6) / 127;
-  const flags = view.getUint8(7);
-  return {
-    type: "player-input",
-    seq,
-    dx,
-    dy,
-    sprinting: (flags & 0x01) !== 0,
-    jump: (flags & 0x02) !== 0,
-    ...((flags & 0x04) !== 0 ? { jumpPressed: true } : {}),
-    ...((flags & 0x08) !== 0 ? { reversing: true } : {}),
-    ...((flags & 0x10) !== 0 ? { relativeDriving: true } : {}),
-  };
 }
 
 // ---- SyncChunksMessage encoding ----

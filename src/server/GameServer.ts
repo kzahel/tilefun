@@ -35,7 +35,9 @@ import {
   type ResponsePayload,
   responseTo,
 } from "../shared/requests.js";
-import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
+import type { IServerTransport } from "../transport/Transport.js";
+import { DeviceConnections } from "./DeviceConnections.js";
+import { DeviceTransport } from "./DeviceTransport.js";
 import { DoorTransitions } from "./DoorTransitions.js";
 import { runEquipment } from "./EquipmentControl.js";
 import type { PlayerSession } from "./PlayerSession.js";
@@ -84,6 +86,19 @@ function isMutation(msg: ClientMessage): boolean {
 
 function adminToken(msg: RequestMessage): string | undefined {
   return "adminToken" in msg ? msg.adminToken : undefined;
+}
+
+/**
+ * Editor mode and pause apply at the GameServer level, before the session joins a realm
+ * (the initial PlayScene.onEnter fires before the async addPlayer sets realmId) and while
+ * it travels, so a device pause reaches every seat (226).
+ */
+function applySessionFlags(session: PlayerSession, msg: ClientMessage): void {
+  if (msg.type === "set-editor-mode") {
+    session.editorEnabled = msg.enabled;
+    if (!msg.enabled) session.editorCursor = null;
+  }
+  if (msg.type === "set-debug") session.debugPaused = msg.paused === true;
 }
 
 function vehicleId(entityId: number): number {
@@ -191,6 +206,7 @@ export class GameServer {
   private readonly realms: RealmDirectory;
   /** Master session list — every connected player, regardless of realm. */
   private readonly sessions: SessionRegistry;
+  private readonly devices: DeviceConnections;
   private readonly residents: ResidentTraffic;
   private readonly doors: DoorTransitions;
   private readonly transport: IServerTransport;
@@ -253,7 +269,8 @@ export class GameServer {
     return this.activeRealm.blendGraph;
   }
 
-  constructor(transport: IServerTransport, deps: GameServerDeps) {
+  constructor(connections: IServerTransport, deps: GameServerDeps) {
+    const transport = new DeviceTransport(connections, () => this.sessions);
     this.transport = transport;
     this.authorizeAdmin = deps.authorizeAdmin ?? (() => true);
     this.registry = deps.registry;
@@ -272,6 +289,18 @@ export class GameServer {
       realms: this.realms,
       track,
       saveLocation: (session, realm) => this.saveLocation(session, realm),
+    });
+    this.devices = new DeviceConnections({
+      transport,
+      sessions: this.sessions,
+      realms: this.realms,
+      transitions: this.transitions,
+      registry: this.registry,
+      locations: () => this.locations,
+      track,
+      activeRealm: () => this.activeRealm,
+      fail: (error) => this.onLoopError?.(error),
+      playerCountChanged: (worldId) => this.broadcastRealmPlayerCount(worldId),
     });
     this.residents = new ResidentTraffic({ realms: this.realms, track, reportStorageFailure });
     this.doors = new DoorTransitions({
@@ -360,103 +389,10 @@ export class GameServer {
       this.handleMessage(clientId, msg);
     });
 
-    this.transport.onConnect((clientId, identity) => this.connect(clientId, identity));
+    this.transport.onConnect((clientId, identity) => this.devices.connect(clientId, identity));
 
-    this.transport.onDisconnect((clientId) => {
-      if (this.sessions.disconnect(clientId)) this.flush();
-    });
-  }
-
-  private connect(clientId: string, identity?: ConnectionIdentity): void {
-    const admission = this.sessions.admit(clientId, identity);
-    if (admission.kind === "retired")
-      this.transport.send(clientId, {
-        type: "kicked",
-        reason: "This player connection is being replaced.",
-      });
-    else if (admission.kind === "lobby") this.sendRealmList(clientId);
-    else if (admission.kind === "rejoin") this.rejoin(admission.session);
-    else if (clientId === "local")
-      // Single-player: auto-join default realm immediately
-      this.joinLocal(admission.session);
-    else {
-      // Multiplayer: start in lobby, send realm list
-      console.log(
-        `[tilefun] client connected: ${clientId} as ${admission.session.displayName} (lobby)`,
-      );
-      this.sendRealmList(clientId);
-    }
-  }
-
-  private sendRealmList(clientId: string): void {
-    void this.trackOperation(this.realms.realmList())
-      .then((realms) => {
-        this.transport.send(clientId, { type: "realm-list", realms });
-      })
-      .catch((error) => {
-        console.error("[tilefun] realm list failed:", error);
-        this.transport.send(clientId, { type: "realm-list", realms: [] });
-      });
-  }
-
-  /** Reconnection: reuse the existing session and player entity once any transfer settles. */
-  private rejoin(session: PlayerSession): void {
-    const reconnect = () => {
-      if (session.retired) return;
-      const realm = this.realms.get(session.realmId ?? "");
-      if (!realm) return;
-      session.lastProcessedInputSeq = 0;
-      session.controls.reset(0);
-      session.inputQueue = [];
-      this.sendWorldLoaded(session, realm);
-      realm.clearClientRevisions(session.clientId);
-    };
-    if (!session.transitioning) reconnect();
-    else
-      void this.trackOperation(session.transitionDone.then(reconnect)).catch((error) =>
-        console.error("[tilefun] reconnect after transition failed:", error),
-      );
-  }
-
-  private joinLocal(session: PlayerSession): void {
-    const realm = this.activeRealm;
-    const joining = this.locations
-      ? this.transitions.move(session, () =>
-          this.resumeDestination(session, realm.currentWorldId ?? ""),
-        )
-      : realm.addPlayer(session);
-    this.trackOperation<unknown>(joining)
-      .then(() => {
-        if (session.retired) return;
-        const realm = this.realms.get(session.realmId ?? "");
-        if (!realm) throw new Error("Player destination unavailable.");
-        console.log(
-          `[tilefun] local client connected as ${session.displayName} (${realm.sessions.size} in realm)`,
-        );
-        this.sendWorldLoaded(session, realm);
-      })
-      .catch((error) => {
-        this.onLoopError?.(error);
-        this.transport.send(session.clientId, {
-          type: "kicked",
-          reason: `Could not restore player: ${String(error)}`,
-        });
-      });
-  }
-
-  private sendWorldLoaded(session: PlayerSession, realm: Realm): void {
-    this.transport.send(session.clientId, {
-      type: "player-assigned",
-      entityId: session.player.id,
-    });
-    this.transport.send(session.clientId, {
-      type: "world-loaded",
-      generation: realm.generation,
-      ...(realm.interior ? { interior: realm.interior } : {}),
-      ...(realm.currentWorldId ? { worldId: realm.currentWorldId } : {}),
-      cameraX: session.player.position.wx,
-      cameraY: session.player.position.wy,
-      cameraZoom: session.cameraZoom,
+    this.transport.onDisconnect((connectionId) => {
+      if (this.sessions.disconnect(connectionId)) this.flush();
     });
   }
 
@@ -717,13 +653,13 @@ export class GameServer {
   private broadcastRealmPlayerCount(worldId: string): void {
     const realm = this.realms.get(worldId);
     const count = realm?.sessions.size ?? 0;
-    for (const cid of this.sessions.awakeClientIds())
+    for (const cid of this.sessions.awakeConnectionIds())
       this.transport.send(cid, { type: "realm-player-count", worldId, count });
   }
 
   /** Broadcast a chat message to all connected (non-dormant) clients. */
   broadcastChat(sender: string, text: string): void {
-    for (const cid of this.sessions.awakeClientIds())
+    for (const cid of this.sessions.awakeConnectionIds())
       this.transport.send(cid, { type: "chat", sender, text });
   }
 
@@ -852,6 +788,16 @@ export class GameServer {
     "exit-building": ({ msg, session, respond }) =>
       respond(() => this.doors.exit(session, msg.doorId, msg.walkThrough), this.arrival(session)),
     "leave-realm": ({ session, respond }) => respond(() => this.leaveRealm(session), noFields),
+    "join-seat": ({ msg, session, respond }) =>
+      respond(
+        () => this.devices.join(session, msg),
+        (guest) => ({ seat: guest.seat, entityId: guest.player.id }),
+      ),
+    "leave-seat": ({ msg, session, respond }) =>
+      respond(
+        () => this.devices.leave(session, msg.seat),
+        () => ({ seat: msg.seat }),
+      ),
     "list-realms": ({ respond }) =>
       respond(
         () => this.realms.realmList(),
@@ -952,13 +898,7 @@ export class GameServer {
       return;
     }
 
-    // set-editor-mode is handled at the GameServer level so it works even
-    // before the session has joined a realm (the initial PlayScene.onEnter
-    // fires before the async addPlayer resolves and sets realmId).
-    if (msg.type === "set-editor-mode") {
-      session.editorEnabled = msg.enabled;
-      if (!msg.enabled) session.editorCursor = null;
-    }
+    applySessionFlags(session, msg);
 
     // Realm-scoped messages: find the session's realm and delegate
     if (!session.realmId || session.transitioning) return;

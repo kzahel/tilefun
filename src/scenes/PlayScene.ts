@@ -291,7 +291,7 @@ export class PlayScene implements GameScene {
     const commandDt = 1 / 60;
     const seq = nextInputSequence(gc.transport);
     const packet = devicePacket(seq, [
-      { body: vehicle?.id ?? gc.stateView.playerEntity.id, movement },
+      { seat: 0, body: vehicle?.id ?? gc.stateView.playerEntity.id, movement },
     ]);
     gc.transport.send(packet.input);
     for (const message of tick.after) gc.transport.send(message);

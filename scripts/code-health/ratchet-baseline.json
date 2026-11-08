@@ -608,7 +608,7 @@
       "overLimit": 1
     },
     "src/server/GameServer.ts": {
-      "lines": 1022,
+      "lines": 962,
       "worst": 0,
       "overLimit": 0
     },

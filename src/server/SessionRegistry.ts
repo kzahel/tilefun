@@ -1,5 +1,5 @@
 import type { ConnectionIdentity, IServerTransport } from "../transport/Transport.js";
-import { PlayerSession } from "./PlayerSession.js";
+import { PlayerSession, seatSessionId } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import type { RealmDirectory } from "./RealmDirectory.js";
 
@@ -59,13 +59,20 @@ export class SessionRegistry {
     return new Set(this.dormantSessions.keys());
   }
 
-  /** Every connected, non-dormant client id, in session order. */
-  *awakeClientIds(): Generator<string> {
+  /** Every awake connection's id (its seat 0 session), once per device, in session order. */
+  *awakeConnectionIds(): Generator<string> {
     const dormantIds = this.dormantIds();
-    for (const [cid] of this.sessions) {
-      if (dormantIds.has(cid)) continue;
+    for (const [cid, session] of this.sessions) {
+      if (dormantIds.has(cid) || session.seat !== 0) continue;
       yield cid;
     }
+  }
+
+  /** A device connection's seats, dormant ones included, in seat order (226). */
+  seats(connectionId: string): PlayerSession[] {
+    return [...this.sessions.values()]
+      .filter((session) => session.connectionId === connectionId)
+      .sort((a, b) => a.seat - b.seat);
   }
 
   /** Cancel a dormant cleanup timer, then reuse or create the client's session. */
@@ -84,28 +91,61 @@ export class SessionRegistry {
     if (existing) return { kind: "rejoin", session: existing };
 
     // New connection: create session
-    const session = new PlayerSession(clientId);
-    const num = this.nextPlayerNumber++;
-    session.playerNumber = num;
-    session.displayName = identity?.displayName ?? `Player ${num}`;
-    if (identity) session.profileId = identity.profileId;
-    session.cursorColor = CURSOR_COLORS[(num - 1) % CURSOR_COLORS.length] ?? "#ffffff";
-
-    // Add to global sessions map
-    this.sessions.set(clientId, session);
-    if (identity) this.identify(session, identity.profileId, identity.displayName);
+    const session = this.create(clientId, identity?.displayName);
+    if (identity) {
+      session.profileId = identity.profileId;
+      this.identify(session, identity.profileId, identity.displayName);
+    }
     return { kind: "new", session };
   }
 
   /**
-   * Keep a disconnected remote session alive for a grace period to allow reconnection
-   * (e.g. page refresh). Returns whether a session became dormant.
+   * Seat a guest of `host`'s device (226): resume its dormant session, else create one.
+   * Guests have no profile, so they never take one over, and start with the host's
+   * editor mode; the caller seats the player in a realm.
    */
-  disconnect(clientId: string): boolean {
-    if (clientId === "local") return false;
+  admitGuest(host: PlayerSession, seat: number, displayName?: string) {
+    const clientId = seatSessionId(host.connectionId, seat);
+    const existing = this.sessions.get(clientId);
+    const dormantTimer = this.dormantSessions.get(clientId);
+    if (existing && (!dormantTimer || existing.retired || existing.transitioning))
+      throw new Error(`Player ${seat + 1} is already playing.`);
+    if (existing) {
+      clearTimeout(dormantTimer);
+      this.dormantSessions.delete(clientId);
+      return { kind: "rejoin" as const, session: existing };
+    }
+    const session = this.create(clientId);
+    session.editorEnabled = host.editorEnabled;
+    this.identify(session, undefined, displayName);
+    return { kind: "new" as const, session };
+  }
 
-    const session = this.sessions.get(clientId);
-    if (!session) return false;
+  private create(clientId: string, displayName?: string): PlayerSession {
+    const session = new PlayerSession(clientId);
+    const num = this.nextPlayerNumber++;
+    session.playerNumber = num;
+    session.displayName = displayName ?? `Player ${num}`;
+    session.cursorColor = CURSOR_COLORS[(num - 1) % CURSOR_COLORS.length] ?? "#ffffff";
+    this.sessions.set(clientId, session);
+    return session;
+  }
+
+  /**
+   * Keep a disconnected remote device's seats alive for a grace period to allow
+   * reconnection (e.g. page refresh). Returns whether any seat became dormant.
+   */
+  disconnect(connectionId: string): boolean {
+    if (connectionId === "local") return false;
+    const seats = this.seats(connectionId);
+    for (const session of seats) this.sleep(session);
+    return seats.length > 0;
+  }
+
+  private sleep(session: PlayerSession): void {
+    const clientId = session.clientId;
+    // A guest left dormant across a reconnect keeps its first deadline (and one timer).
+    if (this.dormantSessions.has(clientId)) return;
 
     // Zero velocity so the dormant player entity doesn't drift
     if (session.player?.velocity) {
@@ -119,24 +159,31 @@ export class SessionRegistry {
 
     const timer = setTimeout(() => this.expire(clientId), DORMANT_TIMEOUT_MS);
     this.dormantSessions.set(clientId, timer);
-    return true;
   }
 
   private expire(clientId: string): void {
     this.dormantSessions.delete(clientId);
     const s = this.sessions.get(clientId);
     if (!s) return;
-    // Remove from whatever realm the session is in
-    if (s.realmId) {
-      const realm = this.deps.realms.get(s.realmId);
-      if (realm) {
-        const realmId = s.realmId;
-        realm.removePlayer(clientId);
-        this.deps.realms.tryUnload(realmId);
-      }
-    }
-    this.sessions.delete(clientId);
+    this.drop(s);
     console.log(`[tilefun] dormant session expired: ${clientId} (${s.displayName})`);
+  }
+
+  /** Take a session out of whatever realm it is in and forget it, dormant or not. */
+  drop(session: PlayerSession): void {
+    const realmId = session.realmId;
+    const realm = realmId ? this.deps.realms.get(realmId) : undefined;
+    if (realmId && realm) {
+      realm.removePlayer(session.clientId);
+      this.deps.realms.tryUnload(realmId);
+    }
+    this.forget(session);
+  }
+
+  private forget(session: PlayerSession): void {
+    if (this.sessions.get(session.clientId) === session) this.sessions.delete(session.clientId);
+    clearTimeout(this.dormantSessions.get(session.clientId));
+    this.dormantSessions.delete(session.clientId);
   }
 
   clearDormant(): void {
@@ -191,10 +238,15 @@ export class SessionRegistry {
   }
 
   private evict(other: PlayerSession): void {
-    if (this.sessions.get(other.clientId) === other) this.sessions.delete(other.clientId);
-    const timer = this.dormantSessions.get(other.clientId);
-    if (timer) clearTimeout(timer);
-    this.dormantSessions.delete(other.clientId);
+    // The replaced device's guests leave with it, each once its own travel settles.
+    for (const guest of this.seats(other.connectionId)) {
+      if (guest.seat === 0) continue;
+      guest.retired = true;
+      void this.deps
+        .track(guest.transitionDone.then(() => this.drop(guest)))
+        .catch((error) => console.error("[tilefun] replaced guest cleanup failed:", error));
+    }
+    this.forget(other);
     this.deps.transport.send(other.clientId, {
       type: "kicked",
       reason: "Logged in from another connection",

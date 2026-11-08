@@ -838,9 +838,9 @@ export class Realm {
         )
           transport.send(session.clientId, horn);
     }
-    // Broadcast state to all clients
+    // One stream per connection, its seat 0's (226: other seats ride in it as entities).
     if (broadcasting) {
-      for (const session of this.sessions.values()) {
+      for (const session of [...this.sessions.values()].filter((s) => s.seat === 0)) {
         if (dormantClientIds.has(session.clientId) || session.transitioning) continue;
         // Check before building: replication advances this client's last-sent baseline.
         if (transport.canSend && !transport.canSend(session.clientId)) continue;

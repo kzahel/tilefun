@@ -31,6 +31,23 @@ export interface RealmInfo {
   lastPlayedAt: number;
 }
 
+// ---- Device seats (226) ----
+
+/** Local players one device connection may seat; seat 0 is the connection's own player. */
+export const MAX_SEATS = 4;
+
+/** Another seat's movement in a device's input packet; seat 0's rides in the packet's fields. */
+export interface SeatMovement {
+  seat: number;
+  dx: number;
+  dy: number;
+  sprinting: boolean;
+  jump: boolean;
+  jumpPressed?: boolean;
+  reversing?: boolean;
+  relativeDriving?: boolean;
+}
+
 // ---- Client → Server messages ----
 
 export type VehicleHornMessage = {
@@ -84,6 +101,8 @@ export type ClientMessage =
       jumpPressed?: boolean;
       reversing?: boolean;
       relativeDriving?: boolean;
+      /** Every other joined seat's movement on the same device tick (226). */
+      seats?: SeatMovement[];
     }
   | {
       type: "player-interact";
@@ -189,7 +208,17 @@ export type ClientMessage =
       doorId?: string;
       walkThrough?: boolean;
     }
-  | { type: "exit-building"; requestId: number; doorId?: string; walkThrough?: boolean };
+  | { type: "exit-building"; requestId: number; doorId?: string; walkThrough?: boolean }
+  /** A message from one of the device's other seats (226); seat 0 sends without one. */
+  | { type: "seat"; seat: number; message: ClientMessage }
+  | {
+      type: "join-seat";
+      requestId: number;
+      seat: number;
+      displayName?: string;
+      playerModel?: string;
+    }
+  | { type: "leave-seat"; requestId: number; seat: number };
 
 // ---- Snapshot types for serialized state sync ----
 
@@ -419,4 +448,8 @@ export type ServerMessage =
   | { type: "realm-left"; requestId: number }
   | { type: "player-model-set"; requestId: number; model: string }
   | { type: "realm-player-count"; worldId: string; count: number }
-  | { type: "chat"; sender: string; text: string };
+  | { type: "chat"; sender: string; text: string }
+  /** A message for one of the device's other seats (226); seat 0's arrive without one. */
+  | { type: "seat"; seat: number; message: ServerMessage }
+  | { type: "seat-joined"; requestId: number; seat: number; entityId: number }
+  | { type: "seat-left"; requestId: number; seat: number };

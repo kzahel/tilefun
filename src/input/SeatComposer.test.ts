@@ -189,7 +189,7 @@ describe("SeatComposer", () => {
 describe("devicePacket", () => {
   const walk = { dx: 1, dy: 0, sprinting: false, jump: false };
   it("sends seat 0 as today's player-input with explicit flags", () => {
-    expect(devicePacket(4, [{ body: 1, movement: walk }])).toEqual({
+    expect(devicePacket(4, [{ seat: 0, body: 1, movement: walk }])).toEqual({
       input: {
         type: "player-input",
         seq: 4,
@@ -202,19 +202,29 @@ describe("devicePacket", () => {
     });
   });
 
-  it("puts every other seat under the same sequence, keyed by controlled body", () => {
+  it("carries every other seat under the same sequence, by seat on the wire and by body for replay", () => {
     const drive = { ...walk, dy: -1, relativeDriving: true };
     const packet = devicePacket(9, [
-      { body: 1, movement: walk },
-      { body: 70, movement: drive },
+      { seat: 0, body: 1, movement: walk },
+      { seat: 2, body: 70, movement: drive },
     ]);
     expect(packet.input.seq).toBe(9);
+    expect(packet.input.seats).toEqual([
+      { seat: 2, ...drive, jumpPressed: false, reversing: false, relativeDriving: true },
+    ]);
     expect(packet.coSeats).toEqual(new Map([[70, drive]]));
-    expect(() => devicePacket(1, [])).toThrow();
+    expect(() => devicePacket(1, [])).toThrow("seat 0");
+    expect(() => devicePacket(1, [{ seat: 1, body: 1, movement: walk }])).toThrow("seat 0");
     expect(() =>
       devicePacket(1, [
-        { body: 70, movement: walk },
-        { body: 70, movement: drive },
+        { seat: 0, body: 1, movement: walk },
+        { seat: 0, body: 70, movement: drive },
+      ]),
+    ).toThrow("one command");
+    expect(() =>
+      devicePacket(1, [
+        { seat: 0, body: 70, movement: walk },
+        { seat: 1, body: 70, movement: drive },
       ]),
     ).toThrow("same body");
   });

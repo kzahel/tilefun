@@ -137,7 +137,8 @@ export class RecipeWorldClient {
     const movement = normalizeLabMovement(input),
       seq = ++this.seq;
     const { replica } = this;
-    this.transport.send(devicePacket(seq, [{ body: replica.playerEntity.id, movement }]).input);
+    const seat = { seat: 0, body: replica.playerEntity.id, movement };
+    this.transport.send(devicePacket(seq, [seat]).input);
     replica.tickAnimations(PHYSICS_DT);
     this.device.predict(seq, movement, PHYSICS_DT);
     return true;

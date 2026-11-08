@@ -203,28 +203,16 @@ export class SeatComposer {
 
 /** A seat's command for one device tick, keyed by its controlled body. */
 export interface SeatCommand {
+  /** The seat on the device connection; seat 0 comes first. */
+  seat: number;
   /** The seat's body, or the vehicle it drives (matches `SeatMovements`). */
   body: number;
   movement: Movement;
 }
 
-/**
- * One input packet per device tick: every local seat shares `seq`. Seat 0 is
- * today's `player-input`; until server seats exist (226 slice 4b) the other
- * seats ride along only as the predictor's co-seat movement.
- */
-export function devicePacket(
-  seq: number,
-  seats: readonly SeatCommand[],
-): { input: PlayerInput; coSeats: Map<number, Movement> | undefined } {
-  const [primary, ...others] = seats;
-  if (!primary) throw new Error("A device tick needs at least one seat");
-  if (new Set(seats.map((seat) => seat.body)).size !== seats.length)
-    throw new Error("Two seats cannot control the same body");
-  const m = primary.movement;
-  const input: PlayerInput = {
-    type: "player-input",
-    seq,
+/** A movement's wire fields, with every flag explicit. */
+function wireMovement(m: Movement) {
+  return {
     dx: m.dx,
     dy: m.dy,
     sprinting: m.sprinting,
@@ -232,6 +220,31 @@ export function devicePacket(
     jumpPressed: m.jumpPressed ?? false,
     reversing: m.reversing ?? false,
     relativeDriving: m.relativeDriving ?? false,
+  };
+}
+
+/**
+ * One input packet per device tick: every local seat shares `seq`. Seat 0
+ * rides in `player-input`'s own fields and the other seats in `seats`; the
+ * predictor replays them as co-seat movement keyed by controlled body.
+ */
+export function devicePacket(
+  seq: number,
+  seats: readonly SeatCommand[],
+): { input: PlayerInput; coSeats: Map<number, Movement> | undefined } {
+  const [primary, ...others] = seats;
+  if (primary?.seat !== 0) throw new Error("A device tick starts with seat 0");
+  if (new Set(seats.map((seat) => seat.seat)).size !== seats.length)
+    throw new Error("A seat can send one command per device tick");
+  if (new Set(seats.map((seat) => seat.body)).size !== seats.length)
+    throw new Error("Two seats cannot control the same body");
+  const input: PlayerInput = {
+    type: "player-input",
+    seq,
+    ...wireMovement(primary.movement),
+    ...(others.length
+      ? { seats: others.map(({ seat, movement }) => ({ seat, ...wireMovement(movement) })) }
+      : {}),
   };
   return {
     input,

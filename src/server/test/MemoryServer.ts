@@ -4,10 +4,24 @@ import { MemoryRecordStore } from "../../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../../persistence/RecordPersistenceStore.js";
 import { SAVE_FORMAT } from "../../persistence/SaveFormat.js";
 import { LocalTransport } from "../../transport/LocalTransport.js";
+import type { IServerTransport } from "../../transport/Transport.js";
 import { GameServer } from "../GameServer.js";
 
-/** Normal asynchronous startup, with one disposable flat world and memory storage. */
-export async function memoryServer() {
+/** A server transport whose "local" connection the helper connects after startup. */
+interface MemoryTransport {
+  readonly serverSide: IServerTransport;
+  triggerConnect(): void;
+}
+
+/**
+ * Normal asynchronous startup, with one disposable flat world and memory storage.
+ * Pass `MemoryConnections` for several device connections through the binary codec.
+ */
+export async function memoryServer(): Promise<{ server: GameServer; transport: LocalTransport }>;
+export async function memoryServer<T extends MemoryTransport>(
+  transport: T,
+): Promise<{ server: GameServer; transport: T }>;
+export async function memoryServer(transport: MemoryTransport = new LocalTransport()) {
   const world: WorldMeta = {
     id: "test",
     name: "Test",
@@ -35,7 +49,6 @@ export async function memoryServer() {
     async deleteWorld() {},
   };
   const stores = new Map<string, RecordPersistenceStore>();
-  const transport = new LocalTransport();
   const server = new GameServer(transport.serverSide, {
     registry,
     createStore: (id) => {

@@ -8,7 +8,9 @@ authority, lab client and lab view surface, with the WorldGeometry car fixtures
 on the game view) are done, as are 4a-i (all of World geometry on the game
 view), 4a-ii (Outdoor geometry), 4a-iii (Characters), 4a-iv (Interiors
 playtest) and 4a-v (Natural landscape, with the old lab host deleted), which
-completes slice 4a. 4b (server seats) is next. Updated 2026-11-07 for seats on one device
+completes slice 4a. Slice 4b (server seats) is split into three parts; 4b-i
+(seats on a connection) is done and 4b-ii (replication per connection and realm)
+is next. Updated 2026-11-07 for seats on one device
 session, online seats and the first-person view requirements from 229; progress
 updated 2026-11-08.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
@@ -1369,3 +1371,111 @@ maintaining both shells. The shell import allow-list only shrinks.
   - **Carried:**
     - Paused streaming from the drawn camera (above), if a lab ever changes its framing while paused.
     - No spec pins Natural landscape's watched-animal framing or reads its racer poses; moving the page's framing function into a tested module would cover the first below the browser.
+- 2026-11-08, slice 4b is split into three parts, each reviewed and committed on its own:
+  - **4b-i, seats on a connection:** seat identity, routing, seat-tagged input and messages, joining and leaving as guests, disconnect and device pause.
+  - **4b-ii, replication per (connection, realm):** one stream with one acknowledgement and a seat list, per-seat session sync, interest as the seats' list of rectangles, a multi-anchor physics snapshot, replay time with two seats' bodies, `streaming:bench`.
+  - **4b-iii, party travel:** doors and world travel for all of a device's seats, safe arrival per seat, rollback when one transfer fails, one realm-entered message per device, startup pulling guests into seat 0's realm.
+- 2026-11-08, slice 4b-i exit list (seats on a connection):
+  - **Seat identity:** `PlayerSession` gains `connectionId` and `seat`. Seat 0's session id is the bare connection id, so single-player and every existing caller are unchanged; seat n's is `connection#n` (n = 1–3). Connection ids containing `#` are refused. Server code keeps addressing sessions by id.
+  - **Device routing** (a new module wrapping `GameServer`'s transport):
+    - Sends to a seat's session go to its connection: seat 0 as today, other seats inside a `{type: "seat", seat, message}` envelope.
+    - Incoming envelopes route to that seat's session. Device-level messages (`player-input`, `set-debug`, `join-seat`, `leave-seat`, a nested envelope) are never accepted inside one.
+    - A connection whose seat 0 is gone or retired has no seats.
+  - **Seat-tagged input:**
+    - `player-input` keeps seat 0's movement in its own fields and carries the other seats' movement in `seats` under the same `seq`. On the wire, the 8-byte packet is unchanged and each extra seat adds 4 bytes, in an input codec module moved out of `binaryCodec`.
+    - Every joined seat gets its movement. A joined seat missing from a packet gets neutral input on that sequence, so every seat's acknowledgement advances together. Unknown or repeated seats are dropped.
+    - `devicePacket` takes seat numbers and fills `seats`.
+  - **Joining and leaving:**
+    - `join-seat {seat, displayName?, playerModel?}` admits a guest of seat 0: no profile and never a takeover; it persists under its session id. It arrives beside seat 0, in seat 0's realm, through the ordinary transition path, and the reply is `seat-joined {seat, entityId}`.
+    - A guest starts with seat 0's editor mode and pause.
+    - `leave-seat {seat}` removes it; the reply is `seat-left`.
+    - A seat-tagged `identify` sets a guest's name and model, never its profile.
+  - **Lifecycle:**
+    - The connection lifecycle (connect, rejoin, the local join) moves out of `GameServer` into the device module.
+    - A disconnect makes every seat dormant (the local connection stays as today). A dormant guest resumes when its seat is joined again, or expires.
+    - Connection-wide notices (player counts, chat) go once per connection.
+  - **Device pause:** `set-debug` from a connection pauses every seat of that device, never another device.
+  - **Replication keeps its shape:** a connection keeps one frame stream, seat 0's (its range, acknowledgement and physics anchor). Guests get no stream of their own and appear in it as entities. 4b-ii widens that stream to the seats' union.
+  - **Tests** (Node, end to end on `memoryServer` with a multi-connection memory transport that passes every message through the binary codec):
+    - two seats on one connection, their identity and arrival;
+    - seat-tagged input: each seat moves by its own movement, with equal acknowledgements, and a missing seat stops;
+    - seat-tagged requests and replies;
+    - a seat leaving;
+    - a device disconnect and rejoin;
+    - a device pause leaving another device running;
+    - a guest never taking over a profile, and a takeover stopping the old device's guests;
+    - refused ids and misplaced device messages;
+    - one frame stream per connection;
+    - codec round trips, with the single-seat bytes pinned;
+    - `devicePacket` with seats;
+    - single-player characterization unchanged.
+  - **Ratchet:** `GameServer.ts` and `Realm.ts` do not grow (moving the lifecycle out pays for the seat wiring); new code goes in new modules.
+  - **Not in 4b-i:**
+    - streams per (connection, realm), multi-rectangle interest and multi-anchor physics (4b-ii);
+    - party travel (4b-iii). Until then each seat travels on its own requests, and guests stay put when seat 0 travels;
+    - client seats (slice 5).
+- 2026-11-08, slice 4b-i done (exit list met):
+  - **Seat identity:** `PlayerSession` has `connectionId` and `seat`, parsed from its id: seat 0 is the bare connection id, and seat n is `connection#n`. `seatSessionId` and `seatAddress` live beside it.
+  - **Device routing** (`src/server/DeviceTransport.ts`, wrapping the transport `GameServer` is given):
+    - A send to a seat's session goes to its connection: seat 0 bare, other seats in `{type: "seat", seat, message}`.
+    - Incoming envelopes reach that seat's session. `player-input`, `set-debug`, `join-seat`, `leave-seat` and nested envelopes are never accepted inside one, and an undeliverable request is still answered with a `request-error` in that seat's envelope. Malformed envelopes and seat lists are ignored.
+    - Connection ids holding `#` are refused with `kicked`.
+    - A connection whose seat 0 is gone or retired has no seats, and dormant guests take nothing. `canSend` asks the seat's connection.
+  - **Seat-tagged input:**
+    - `player-input` carries the other seats in `seats` under its `seq`. The codec moved to `src/shared/inputCodec.ts` (`binaryCodec` delegates to it): the 8-byte single-seat packet is unchanged and pinned byte for byte, and each extra seat adds 4 bytes. Seats outside 1–3 and bad lengths are refused both ways.
+    - The router feeds each joined seat its movement, rebuilt field by field from the packet's sequence and the entry's controls (axes clamped like the codec's, only `true` as a pressed flag). A seat entry from the JSON fallback therefore cannot change its type, sequence or profile.
+    - A joined seat missing from the packet gets neutral input on the same sequence, a repeated seat keeps its first entry, and a seat nobody plays is ignored.
+    - `devicePacket` takes seat numbers (seat 0 first, one command per seat) and fills `seats`; `PlayScene` and `RecipeWorldClient` pass seat 0.
+  - **Joining and leaving** (`src/server/DeviceConnections.ts`, with `SessionRegistry.admitGuest`/`drop`):
+    - `join-seat` seats a guest of seat 0 with no profile. It starts with the host's editor mode and pause, arrives one tile beside the host through `RealmTransitions.move` (any realm, interiors included, with the host's return location), and the reply is `seat-joined {seat, entityId}`.
+    - A failed arrival forgets the seat. A dormant guest resumes in place with its input sequence reset.
+    - `leave-seat` drops a guest (`seat-left`, and the player count is broadcast); seat 0 cannot leave.
+    - A seat-tagged `identify` loses its `profileId` in routing, so a guest is named and dressed but never claims or takes over a profile.
+    - A takeover of the host's profile retires the old device's guests and drops each once its travel settles.
+  - **Lifecycle:**
+    - `GameServer`'s connect, rejoin and local join moved into `DeviceConnections` unchanged. `GameServer` keeps only the wiring, the `join-seat`/`leave-seat` handlers and the server-level session flags, and shrinks from 1,022 to 962 lines (ratchet entry lowered).
+    - `SessionRegistry.disconnect` takes the connection: every seat goes dormant, the connection flushes once, and the local connection's seats stay awake. A guest still dormant from an earlier disconnect keeps its first deadline and its one timer.
+    - Player counts and chat go once per connection (`awakeConnectionIds`).
+  - **Device pause:** `set-debug` from a connection reaches every seat of that device. It is now applied at the `GameServer` level, like `set-editor-mode`, so it also reaches a seat that is still arriving or travelling. The realm-level `set-debug` handler is gone.
+  - **Replication:** `Realm.publishState` builds frames only for seat 0 sessions; guests appear in that stream as entities. Horns, storage notices and door motion stay per seat, in envelopes.
+  - **Tests:**
+    - `src/server/DeviceSeats.test.ts` has 13 cases, end to end on `memoryServer` through a new `MemoryConnections` transport (several connections, every message through the binary codec, plus raw JSON-fallback sends):
+      - arrival, identity and validation;
+      - a failed arrival leaving no seat;
+      - per-seat movement on one sequence with equal acknowledgements, a missing seat standing still, and repeated or unknown seats;
+      - hostile and malformed seat entries through the JSON fallback;
+      - envelopes and replies, misplaced device messages, and a guest's identify;
+      - leaving;
+      - a device pause beside a running second device, including a seat still arriving;
+      - disconnect, rejoin, leaving while dormant, and expiry, with the local connection exempt;
+      - a second disconnect before a dormant guest is claimed, keeping its first deadline and leaving no stale timer for a new seat;
+      - a takeover, including messages sent while it saves and a guest still arriving;
+      - a takeover that cannot save, leaving the old device and its guests playing;
+      - refused ids;
+      - one frame stream;
+      - `canSend` mapping.
+    - `src/shared/inputCodec.test.ts` (3 cases) pins the bytes and covers round trips and refusals.
+    - `SeatComposer.test.ts`'s `devicePacket` cases now carry seat numbers.
+  - **Seeded faults** (isolated worktree): 35 faults over the routing, registry, joining, codec, `devicePacket`, `Realm` and `GameServer` changes all fail the suites. One, the player count on leaving, survived at first; the leave case now pins it.
+  - **Validation:**
+    - `npm run typecheck` (four configs), Biome on the changed files, knip.
+    - The ratchet: only other sessions' entries fail, `src/rendering` and `GameClient.ts` as at HEAD.
+    - Focused vitest over `src/server`, `src/shared`, `src/transport`, `src/input`, `src/scenes` (characterization unchanged), `src/client`, `src/session`, `src/scenarios`, `src/persistence` and `src/console`: 127 files, 1,287 tests.
+    - `art:catalog` then `workshop:manifest` (line references only), and a production build.
+    - Playwright against the build, before and after the review fixes: the smoke suite (28, including Worker save/reload and P2P menus), `p2p-worker` and `scenario-lifecycle` (2), and the standalone HTTP/WebSocket suite (3).
+    - `streaming:bench -- --assert-ready` passes (six scenarios; no missing or incomplete frames). It was run because publication changed, although the streaming itself did not.
+  - **Carried into 4b-ii/4b-iii:**
+    - Guests' own session sync (gems, mount, editor mode, invincibility) arrives with the per-connection stream.
+    - A guest's view range is its own `visible-range`, sent in its envelope; 4b-ii makes the stream's interest the seats' rectangles.
+    - Horns near two seats reach the device twice; the per-connection stream should send them once.
+    - Party travel must also cover `leave-realm` and world deletion, which today move or remove each seat on its own.
+    - A guest's arrival ignores other bodies (a driven car beside the host).
+    - 4b-ii keys the stream and its replicator baselines by (connection, realm), replacing `publishState`'s seat-0 filter. Today a guest in a realm without its seat 0 has no stream.
+    - Guests save their location and player data under `connection#n`. For remote devices that leaves one `uuid#n` record per device and seat; settle guest persistence with guest identities in 4b-iii.
+    - A refused `#` connection id is kicked but its raw connection stays open; it reaches no seat.
+  - **Review** (Yep Anywhere, Opus 5.5 high): CHANGES REQUESTED, two blocking findings, both fixed:
+    - **Seat entries:** a seat entry in `player-input` was spread last over the guest's command, so JSON-fallback input could set any type or sequence. Through that, a guest could take over a profile, pause one seat, or acknowledge an arbitrary sequence. The entry is now rebuilt from its controls only; a new case and three faults cover it.
+    - **Refusals:** routing refusals answered bare, where seat 0's requests live. They now answer in the seat's envelope.
+    - Optional, taken: the device pause reaching seats in transit, one flush per disconnect, and tests for leaving while dormant, a guest arriving during a takeover, and a takeover that cannot save. The remaining optional findings are carried above.
+    - Re-review: CHANGES REQUESTED, one new blocking finding, fixed. A device dropping twice before claiming a dormant guest re-armed the guest's dormancy timer, and the stale timer later dropped a newly joined guest with the same id. The guest now keeps its first deadline, and a new case and fault pin it. The spy in the takeover-failure case is restored in `afterEach`.
+    - Second re-review: ACCEPT.

@@ -24,6 +24,8 @@ const RESPONSES = {
   "leave-realm": "realm-left",
   "enter-building": "realm-joined",
   "exit-building": "realm-joined",
+  "join-seat": "seat-joined",
+  "leave-seat": "seat-left",
 } as const satisfies Record<RequestType, ServerMessage["type"]>;
 
 export type RequestResponse<R extends RequestMessage> = Extract<

@@ -149,6 +149,11 @@ export class ServerMessageRouter {
       case "world-renamed":
       case "rcon-response":
       case "player-model-set":
+      case "seat-joined":
+      case "seat-left":
+        break;
+      // Another local seat's messages; split screen routes them (226 slice 5).
+      case "seat":
         break;
       default:
         msg satisfies never;
