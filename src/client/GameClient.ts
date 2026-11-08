@@ -75,6 +75,11 @@ import { RequestBroker } from "./RequestBroker.js";
 import { type ServerMessageHost, ServerMessageRouter } from "./ServerMessageRouter.js";
 import { WorldSessionActions, type WorldSessionHost } from "./WorldSessionActions.js";
 
+/** First-person readiness: the view meshes the loaded chunk directly. */
+const FIRST_PERSON_TERRAIN: Pick<RenderBackend, "isTerrainReady"> = {
+  isTerrainReady: (chunk) => chunk !== undefined,
+};
+
 export interface GameClientOptions {
   /** Platform renderer selection; simulation and presentation stay shared. */
   renderHostFactory?: RenderHostFactory;
@@ -473,7 +478,11 @@ export class GameClient implements GameTestHooks {
     // Tick client-side sprite animations (animTimer/frameCol not serialized).
     this.stateView.tickAnimations(dt);
     this.scenes.update(dt);
-    const ready = this.device.seatWorldReady(this.renderer);
+    // First person builds its ground from chunk data and skips the fixed view's
+    // terrain cache, so a loaded chunk is presentable there.
+    const ready = this.device.seatWorldReady(
+      this.firstPerson.drawing ? FIRST_PERSON_TERRAIN : this.renderer,
+    );
     if (this.initDone && ready) this.startupWorldReady = true;
     this.doorPresentation.update(this.mainMenu.currentWorldId, ready);
     this.chrome.updateMapHint();
