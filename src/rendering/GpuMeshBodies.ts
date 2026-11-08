@@ -96,11 +96,12 @@ export class GpuMeshBodies {
       ? this.slots.get(assetId)?.value?.surfaceGeometry
       : undefined;
   }
-  /** Called once before submissions; promise completions only become visible here. */
-  beginFrame() {
+  /** Called once before submissions; promise completions only become visible here.
+   * `views`: the last display frame's view count, for the same-frame image memo. */
+  beginFrame(views = 1) {
     this.shadowCasters.clear();
     this.targets.beginFrame();
-    this.images.beginFrame();
+    this.images.beginFrame(views);
     this.paints.beginFrame();
     this.ready.clear();
     if (this.enabled)
@@ -296,6 +297,6 @@ export class GpuMeshBodies {
     this.targets.clear();
   }
   get targetBytes() {
-    return this.images.bytes + this.targets.bytes;
+    return this.images.bytes + this.images.frameImages.bytes + this.targets.bytes;
   }
 }

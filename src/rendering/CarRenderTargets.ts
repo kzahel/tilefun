@@ -1,5 +1,15 @@
 import * as THREE from "three";
 
+/** A native-size car image target: sRGB color, nearest filtering and a depth texture. */
+export function carImageTarget(size: number) {
+  const target = new THREE.WebGLRenderTarget(size, size, { depthBuffer: true });
+  target.depthTexture = new THREE.DepthTexture(size, size, THREE.UnsignedIntType);
+  target.texture.colorSpace = THREE.SRGBColorSpace;
+  target.texture.magFilter = target.texture.minFilter = THREE.NearestFilter;
+  target.texture.generateMipmaps = false;
+  return target;
+}
+
 interface Targets {
   source: THREE.WebGLRenderTarget;
   outline: THREE.WebGLRenderTarget;
@@ -42,15 +52,7 @@ export class CarRenderTargets {
       const oldest = this.entries.keys().next().value;
       if (oldest !== undefined) this.remove(oldest);
     }
-    const create = () => {
-      const target = new THREE.WebGLRenderTarget(size, size, { depthBuffer: true });
-      target.depthTexture = new THREE.DepthTexture(size, size, THREE.UnsignedIntType);
-      target.texture.colorSpace = THREE.SRGBColorSpace;
-      target.texture.magFilter = target.texture.minFilter = THREE.NearestFilter;
-      target.texture.generateMipmaps = false;
-      return target;
-    };
-    const pair = { source: create(), outline: create(), frame: this.frame };
+    const pair = { source: carImageTarget(size), outline: carImageTarget(size), frame: this.frame };
     this.entries.set(size, pair);
     this.bytes += bytes;
     this.creates++;

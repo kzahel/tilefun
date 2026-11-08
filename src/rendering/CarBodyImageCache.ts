@@ -1,4 +1,6 @@
-import * as THREE from "three";
+import type * as THREE from "three";
+import { carImageTarget } from "./CarRenderTargets.js";
+import { FrameCarImages } from "./FrameCarImages.js";
 import type { MeshInstance } from "./MeshPresentation.js";
 
 /** Exact local image inputs. World position, camera and composite alpha are external. */
@@ -28,31 +30,42 @@ export function carBodyImageKey(
   ]);
 }
 
-/** Finished native-pixel images; changing poses must recur across frames before admission. */
+/** Finished native-pixel images; changing poses must recur across frames before admission.
+ * With several views, a pose not admitted is kept for the rest of its display frame
+ * (`FrameCarImages`), so later views reuse it. */
 export class CarBodyImageCache {
   private readonly entries = new Map<string, { target: THREE.WebGLRenderTarget; frame: number }>();
+  readonly frameImages = new FrameCarImages();
   private previous = new Set<string>();
   private seen = new Set<string>();
   private frame = 0;
   bytes = 0;
   hits = 0;
   misses = 0;
+  frameHits = 0;
   enabled = true;
   constructor(
     private readonly maxBytes = 16 * 1024 * 1024,
     private readonly maxEntries = 64,
   ) {}
-  beginFrame() {
+  /** `views`: how many views the last display frame drew (the layout, known before drawing). */
+  beginFrame(views = 1) {
     this.frame++;
     this.previous = this.seen;
     this.seen = new Set();
     for (const [key, entry] of this.entries) if (this.frame - entry.frame > 120) this.remove(key);
+    this.frameImages.beginFrame(this.enabled && views > 1);
   }
   get(key: string) {
     if (!this.enabled) return undefined;
     if (this.seen.size < 512) this.seen.add(key);
     const entry = this.entries.get(key);
     if (!entry) {
+      const drawn = this.frameImages.get(key);
+      if (drawn) {
+        this.frameHits++;
+        return drawn.texture;
+      }
       this.misses++;
       return undefined;
     }
@@ -63,12 +76,14 @@ export class CarBodyImageCache {
     return entry.target.texture;
   }
   depth(key: string) {
-    return this.entries.get(key)?.target.depthTexture;
+    return (this.entries.get(key)?.target ?? this.frameImages.get(key))?.depthTexture;
   }
-  /** Caller renders directly into this target, avoiding a copy/readback. */
+  /** Caller renders directly into this target, avoiding a copy/readback. A pose that
+   * did not recur gets this frame's target when several views draw. */
   admit(key: string, size: number) {
     const bytes = size * size * 8;
-    if (!this.enabled || !this.previous.has(key) || bytes > this.maxBytes) return undefined;
+    if (!this.enabled || bytes > this.maxBytes) return undefined;
+    if (!this.previous.has(key)) return this.frameImages.take(key, size);
     while (
       this.entries.size &&
       (this.bytes + bytes > this.maxBytes || this.entries.size >= this.maxEntries)
@@ -76,11 +91,7 @@ export class CarBodyImageCache {
       const oldest = this.entries.keys().next().value;
       if (oldest !== undefined) this.remove(oldest);
     }
-    const target = new THREE.WebGLRenderTarget(size, size, { depthBuffer: true });
-    target.depthTexture = new THREE.DepthTexture(size, size, THREE.UnsignedIntType);
-    target.texture.colorSpace = THREE.SRGBColorSpace;
-    target.texture.magFilter = target.texture.minFilter = THREE.NearestFilter;
-    target.texture.generateMipmaps = false;
+    const target = carImageTarget(size);
     this.entries.set(key, { target, frame: this.frame });
     this.bytes += bytes;
     return target;
@@ -94,6 +105,7 @@ export class CarBodyImageCache {
   }
   clear() {
     for (const key of this.entries.keys()) this.remove(key);
+    this.frameImages.clear();
     this.previous.clear();
     this.seen.clear();
   }

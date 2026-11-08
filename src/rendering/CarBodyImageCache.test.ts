@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { expect, it, vi } from "vitest";
 import { CarBodyImageCache, carBodyImageKey } from "./CarBodyImageCache.js";
+import { FrameCarImages } from "./FrameCarImages.js";
 import type { MeshInstance } from "./MeshPresentation.js";
 
 const mesh: MeshInstance = { assetId: "car", orientation: [0, 0, 0, 1], radius: 80 };
@@ -66,4 +67,38 @@ it("admits recurring poses across frames and disposes on budget eviction, age an
   for (let frame = 0; frame < 121; frame++) cache.beginFrame();
   expect(disposeAged).toHaveBeenCalledOnce();
   expect(cache.size).toBe(0);
+});
+
+it("keeps a moving pose for later views of the same frame from a pool reused across frames (226)", () => {
+  const cache = new CarBodyImageCache();
+  cache.beginFrame(1);
+  expect(cache.admit("a", 8)).toBeUndefined(); // one view: exactly as before
+  cache.beginFrame(2);
+  expect(cache.get("b")).toBeUndefined();
+  const b = cache.admit("b", 8);
+  if (!b) throw Error("Expected a frame image");
+  expect(cache.get("b")).toBe(b.texture); // a later view reuses it
+  expect(cache.depth("b")).toBe(b.depthTexture);
+  const c = cache.admit("c", 8);
+  expect(c).not.toBe(b); // another car never overwrites it
+  expect([cache.misses, cache.frameHits, cache.size]).toEqual([1, 1, 0]);
+  const dispose = vi.spyOn(b, "dispose");
+  cache.beginFrame(2);
+  expect(cache.get("c")).toBeUndefined(); // last frame's images are gone,
+  expect(cache.admit("d", 8)).toBe(b); // their targets reused
+  expect(cache.frameImages.bytes).toBe(2 * 8 * 8 * 8);
+  for (let frame = 0; frame < 121; frame++) cache.beginFrame(1);
+  expect(dispose).toHaveBeenCalledOnce();
+  expect(cache.frameImages.bytes).toBe(0);
+  const small = new FrameCarImages(8 * 8 * 8);
+  small.beginFrame(true);
+  expect(small.take("a", 8)).toBeDefined();
+  expect(small.take("b", 8)).toBeUndefined(); // over budget: scratch, as before
+  cache.beginFrame(2);
+  const e = cache.admit("e", 8);
+  if (!e) throw Error("Expected a frame image");
+  const disposeE = vi.spyOn(e, "dispose");
+  cache.clear();
+  expect(disposeE).toHaveBeenCalledOnce();
+  expect(cache.get("e")).toBeUndefined();
 });

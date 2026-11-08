@@ -66,7 +66,7 @@ export function createGpuRenderHost(
   observer.observe(canvas);
   let region: RenderRegion | undefined;
   const beginView = (camera: Camera, viewRegion?: RenderRegion) => {
-    renderer.surface.beginView();
+    renderer.beginView();
     frame.begin(camera);
     region = viewRegion;
   };

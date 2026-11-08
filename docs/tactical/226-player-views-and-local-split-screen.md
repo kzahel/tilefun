@@ -10,11 +10,10 @@ view), 4a-ii (Outdoor geometry), 4a-iii (Characters), 4a-iv (Interiors
 playtest) and 4a-v (Natural landscape, with the old lab host deleted), which
 completes slice 4a. Slice 4b (server seats) is complete in three parts: 4b-i
 (seats on a connection), 4b-ii (replication per connection and realm) and
-4b-iii (party travel). Slice 5 (client seats and split screen) is in three parts:
-5-i (client seats and production multi-seat prediction), 5-ii-a (split screen:
-joining, views and seat input) and 5-ii-b (guests' place controls, seat 0's
-region, Options focus and save/reload) are done, and slice 5's carried items are
-next. Updated 2026-11-07 for seats on one device session, online seats and the
+4b-iii (party travel). Slice 5 (client seats and split screen) is complete:
+local split screen for up to four players in the game, with the car-image memo
+and local performance checks; Deck and Chromebook runs and a real-keyboard check
+are owner checkpoints (see the last Progress entry). Updated 2026-11-07 for seats on one device session, online seats and the
 first-person view requirements from 229; progress updated 2026-11-08.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
@@ -1920,3 +1919,20 @@ maintaining both shells. The shell import allow-list only shrinks.
   - **Reconnect:** after a dropped connection, the next realm entry seats each guest again with its input set, name and character (`DeviceSeats.reseat`, triggered by `ServerMessageRouter.disconnected` and `enterRealm`); a refused guest leaves. `GameClient.ts` 931 → 927 (its baseline).
   - **Tests:** Node cases in `DeviceTravel.test.ts` (door walk with a follower, tree house deck, deletion during travel), new `src/client/DeviceReconnect.test.ts` (a remote device's guest across a disconnect on `memoryServer`), and cases in `DeviceSeats`, `ServerMessageRouter` and `DoorPresentation` tests. Seeded faults: 39 run, 24 caught (`/tmp/tilefun-226-5iic/faults.log`). Cases were then added for three survivors (a jumping host, a deck over water, a device arriving during deletion), not re-run; the rest are defensive or equivalent lines, plus the `GameClient` disconnect wiring, which has no Node harness.
   - **Validation:** typecheck (four configs), Biome, knip, the ratchet (only other sessions' entries fail), focused vitest over the 14 directories (218 files, 2,008 tests), inventories and build, Playwright `split-screen`, `farm-doors`, `p2p-worker` and `worker-server` (11). No separate review for this commit (owner: wrap up); the last slice-5 step's review covers it.
+- 2026-11-08, slice 5 done (the last step: car-image memo, local performance checks, keyboard check):
+  - **Car-image memo:** a moving car shown in several views was drawn again for every view, every frame. Now the first view's image is kept for the rest of that frame and later views reuse it (`FrameCarImages`, used by `CarBodyImageCache` for poses it does not admit; pooled targets, 8 MiB, a size released after 120 unused frames). It turns on when the last frame drew more than one view (`GpuRenderBackend.beginView` counts them), so one view renders exactly as before. Node case in `CarBodyImageCache.test.ts`; the run below shows the reuse in the real game.
+  - **Local performance run** (not committed; `/tmp/tilefun-226-perf/bench.mjs`, logs `run2.log`): production build, Playwright Chromium on this Mac's Apple M4 Pro GPU (Metal), 1280×800, 60 Hz frames. Player 1 drives a parked car back and forth; Players 2–4 join from the keyboard and two pads beside it, then walk. 8 s samples, two repeats in reversed order with the memo on and off.
+
+    | players | frame p50/p95/p99 ms | render CPU p50/p95 ms | car renders per frame (memo on / off) | replay p50/p95 ms |
+    |---|---|---|---|---|
+    | 1, driving | 16.7/16.7/16.8 | 1.0/1.6–1.7 | 3.5–4.9 (memo off with one view) | 0.1–0.2/0.3–0.4 |
+    | 2, driving | 16.7/16.7–16.8/16.8 | 1.1–1.2/1.5–1.7 | 2.1–3.2 / 2.1–2.6 (the car mostly in one view) | 0.2/0.3 |
+    | 4, driving | 16.7/16.7–16.8/16.8 | 2.0/2.2–2.4 | 2.1–3.2 / 4.3–5.3 (draw calls 16–25 / 35–45) | 0.2/0.4 |
+    | 4, driving, others walking | 16.7/16.7/16.8 | 1.9–2.2/3.4–5.1 | 1.1–1.2 | 0.3/1.0–1.1 (max 1.8, 7–8 predicted bodies) |
+
+    No frame over 25 ms and no page errors. With four views the memo cuts car rendering by 40–50% here (2.1 reused images per frame); render CPU on this machine is too low for the saving to show. Against the 1b gates as written, judged on render-CPU p95 (two views within 8 ms and no worse than one view when driving; four views within 11 ms), every row passes locally, but this Mac is far faster than the Deck, so the Deck and Chromebook gates stay owner checkpoints. Replay with two seats (carried from 1a) costs 0.2–0.3 ms per reconcile; four moving seats stay under 2 ms. Screenshot with the memo on: `/tmp/tilefun-226-perf/four-views-near.png` (every car drawn correctly in every view).
+  - **Keyboard rollover:** synthetic key events cannot show whether a physical keyboard drops keys, so this is an owner check. With two players on one keyboard: Player 1 holds W+D and Left Shift and taps Space; at the same time Player 2 holds ↑+→ and Right Shift and taps `/`. Both should keep running diagonally and both jumps should land. Then tap E and `'` together beside a car. Note any combination that drops a key.
+  - **Validation:** typecheck (four configs), Biome on the changed files, knip, the ratchet (only other sessions' entries fail), vitest `src/rendering` and `src/scenes` (59 files, 549 tests), `art:catalog` then `workshop:manifest` (input digest only) and a production build. Playwright `gpu-renderer`, `split-screen` and `car-projection` (31).
+  - **Review** (Yep Anywhere, Opus 5.5 high, covering this step and `2a0de822`): ACCEPT, no blocking findings. Taken: the table's rounding and body counts, and the gate judged on p95. Noted for later: deletion waits for every travelling seat on the server, not only those touching the deleted world, which could delay a deletion on a busy online server.
+  - **Owner checkpoints:** the 90 Hz render-CPU budget (1b), Deck and Chromebook runs with split screen, whether Chrome on the Deck lists its built-in controls twice, the keyboard rollover check, and the Interiors playtest input question (Decisions).
+  - **Known limitations:** a solo player cannot move seat 0 to another pad without disconnecting the first; guests see no driving hints; in side-by-side views the Map button sits over Player 2's view.

@@ -442,6 +442,11 @@ Only poses recurring across consecutive frames qualify; cargo groups, towed
 pairs and enabled emergency lights bypass reuse. Retention is bounded to
 64 images / 16 MiB and 120 unused frames, with explicit reset/invalidation/
 recovery/disposal cleanup. Each quad retains its original painter position.
+With split-screen views (226), a pose that does not recur is kept for the rest
+of its display frame (`FrameCarImages`: pooled targets, 8 MiB, a size released
+after 120 unused frames), so later views composite it instead of rendering the
+car again. The memo turns on when the previous display frame drew more than one
+view; a single view renders exactly as before.
 The original outline source is retained byte-for-byte in the historical replay
 catalog; no historical art receipt or approved raster is rewritten.
 

@@ -39,6 +39,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
   private readonly overlay = document.createElement("canvas");
   private readonly overlayItems: OverlayDraw[] = [];
   private overlayValid = false;
+  private views = 0;
   private readonly overlayContext: CanvasRenderingContext2D;
   constructor(canvas: HTMLCanvasElement) {
     const surface = new GpuRasterSurface(canvas);
@@ -57,7 +58,13 @@ export class GpuRenderBackend extends RasterRenderBackend {
   }
   beginFrame() {
     this.surface.beginFrame();
-    this.meshes.beginFrame();
+    this.meshes.beginFrame(this.views); // the last display frame's layout
+    this.views = 0;
+  }
+  /** Start another view of this display frame (`RenderHost.beginView`). */
+  beginView() {
+    this.views++;
+    this.surface.beginView();
   }
   override submit(view: RenderView, pass: RenderPass) {
     if (this.surface.disposed) throw Error("Renderer is disposed");
@@ -154,6 +161,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
         meshDrawCalls: this.meshes.drawCalls,
         meshImageHits: this.meshes.images.hits,
         meshImageMisses: this.meshes.images.misses,
+        meshImageFrameHits: this.meshes.images.frameHits,
         meshImageCount: this.meshes.images.size,
         meshImageBytes: this.meshes.images.bytes,
         meshState: this.meshes.car.state,
