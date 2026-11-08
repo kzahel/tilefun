@@ -27,29 +27,35 @@ the scenario Worker) onto the game's own pieces, one lab at a time:
 - **View:** `LabView` (`src/client/`) is the lab view surface: one `View` with a
   camera policy (the game's follow by default), `LabInput`, `VehicleControl`,
   the production `GameLoop` and the selectable render host. Page plugins: zoom,
-  pause, surface visibility, terrain pacing, a per-frame hook, commands and
-  reload. Pause, a hidden page and in-flight instruments stop play; the camera's
-  range still streams while paused. A new world clears the renderer's world
-  caches, as the game router does, and the device presentation including the
-  view's slab fades (the old host's labs now clear theirs on reset too). `LabView` and the old host draw through the
-  same `drawLabFrame` and report the same `labPresentationDiagnostics`
-  (`src/client/LabScene.ts`), so the two shells cannot drift while labs move.
+  pause, surface visibility, terrain pacing, pixel-exact shadows, a per-frame
+  hook, commands and reload, and `underlay`/`overlay` hooks that draw
+  diagnostic `OverlayFrame` geometry over the terrain and over the scene (they
+  read the frame's `presentedPlayer` and `presentationAlpha`). Pause, a hidden
+  page and in-flight instruments stop play; the camera's range still streams
+  while paused. A new world clears the renderer's world caches, as the game
+  router does, and the device presentation including the view's slab fades
+  (the old host's labs now clear theirs on reset too). `LabView` and the old
+  host draw through the same `drawLabFrame` and report the same
+  `labPresentationDiagnostics` (`src/client/LabScene.ts`), so the two shells
+  cannot drift while labs move.
 - **Diagnostics:** `RecipeWorldClient.getDiagnostics()` reports the
   transport's outgoing channel and a live clock. The clock is the authority's
   ticks from its last answer, advanced by the frames applied since, because a
   paused world's frames repeat its tick. Browser checks can therefore watch the
   authority outrun a stalled page (`scenario-scheduling`).
 - **Moved so far:** all of World geometry runs on `LabView`, apart from the
-  `nature-*` fixtures, which are Natural landscape's (slices 3c-ii and 4a-i).
-  - The page drives `LabView` directly. Fixed diagnostic frames use the
-    `fixedCamera` policy, and the per-frame datasets come from
+  `nature-*` fixtures, which are Natural landscape's (slices 3c-ii and 4a-i),
+  and so does Outdoor geometry's movement test (4a-ii).
+  - The pages drive `LabView` directly. Fixed diagnostic frames use the
+    `fixedCamera` policy, and World geometry's per-frame datasets come from
     `src/workshop/GeometryFrame.ts`.
-  - The page no longer imports the lab shell.
-  - Outdoor geometry, Characters, the Interiors playtest and Natural landscape
-    stay on the old host until their 4a parts.
-  - Framing is unchanged on every fixture. Captures differ from the old host
-    only in time-dependent content: grass wind, moving traffic and animals, and
-    mesh suspension settling. Those differences are within the old host's own
+  - Neither page imports the lab shell.
+  - Characters, the Interiors playtest and Natural landscape stay on the old
+    host until their 4a parts.
+  - Framing is unchanged on every fixture. Outdoor geometry's idle and settled
+    captures are pixel-identical to the old host's. World geometry's differ only in
+    time-dependent content: grass wind, moving traffic and animals, and mesh
+    suspension settling. Those differences are within the old host's own
     run-to-run variation, so `ENGINE_REVIEW_REVISION` is unchanged.
 
 ## Device sessions and views (226 slice 3b, 2026-11-08)
@@ -829,9 +835,10 @@ Traffic reset still creates a fresh canvas. Context loss/recovery uses the
 production render host. The [cache investigation](performance.md#traffic-workshop-cache-churn)
 records the earlier competing-preparation failure.
 
-Outdoor Geometry now uses this host with an explicit fixed world camera, no terrain
-or grass, pixel-exact shadows and a scoped asset loader. Its grid underlay and
-geometry overlay use backend-neutral `OverlayFrame` commands before/after the
+Outdoor Geometry used this host until 226 slice 4a-ii moved it to `LabView` with
+the same options and hooks (see the top of this topic): an explicit fixed world
+camera, no terrain or grass, pixel-exact shadows and a scoped asset loader. Its
+grid underlay and geometry overlay use backend-neutral `OverlayFrame` commands before/after the
 replicated scene. Player collider outlines use the scene collector's interpolated
 position and predictor history; fixed framing never turns into player follow on
 movement or teleport. The host owns each walker bitmap and releases it on metadata

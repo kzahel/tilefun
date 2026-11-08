@@ -5,9 +5,9 @@ and labs, rendering and performance, authority and prediction, testing and
 decomposition). Slices 0, 1a, 1b, 2 (input ownership, as 2a and 2b), 3a
 (render views), 3b (device session and view objects) and 3c (the recipe-world
 authority, lab client and lab view surface, with the WorldGeometry car fixtures
-on the game view) are done, as is 4a-i (all of World geometry on the game
-view). The other 4a parts (Outdoor geometry, Characters, Interiors playtest,
-Natural landscape) and 4b (server seats) are next. Updated 2026-11-07 for seats on one device session,
+on the game view) are done, as are 4a-i (all of World geometry on the game
+view) and 4a-ii (Outdoor geometry). The other 4a parts (Characters, Interiors
+playtest, Natural landscape) and 4b (server seats) are next. Updated 2026-11-07 for seats on one device session,
 online seats and the first-person view requirements from 229.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
@@ -1194,3 +1194,31 @@ maintaining both shells. The shell import allow-list only shrinks.
     - Not taken: a Node test for the moment between a new world's frames and its answer. The in-process rig cannot order that batching, and the invariant assertions cover it.
     - Re-review: ACCEPT.
   - **For the next parts:** `WorkerClientTransport` is at its ratchet limit of 379 lines, so its next change must split it.
+- 2026-11-08, slice 4a-ii exit list (Outdoor geometry):
+  - **`LabView` plugins:**
+    - `underlay` and `overlay` hooks that collect diagnostic drawing into one owned `OverlayFrame`, submitted as overlay passes at the old host's points (after the terrain, after the scene). Its items are released after each frame and cleared on dispose.
+    - A `pixelExactShadows` option.
+    - `presentedPlayer` and `presentationAlpha`, which the hooks read (the pose cycle's displayed player comes with Characters).
+  - **The movement test** (`OutdoorGeometryTest`, shown by the Outdoor and Vehicles workshop pages) builds `LabView` directly and leaves `LabShellConsumers`. Its reset is a teleport command, as before.
+  - **Tests:**
+    - Node: the hooks' pass order and contents, nothing submitted for an empty collection, release after each frame, clearing on dispose, and the `pixelExactShadows` mapping.
+    - Browser: `outdoor-presentation` (both renderers; it now expects the recipe-world Worker), the movement case of `outdoor-workshop`, and the walker case of `vehicle-workshop`. (`family-sheets` and `player-dev-reload` do not touch this lab.)
+  - **Review revision:** `ENGINE_REVIEW_REVISION` is unchanged if a capture against the old host shows identical framing and pixels within its run-to-run variation.
+  - **Docs:** the embedded-labs topic.
+- 2026-11-08, slice 4a-ii done (exit list met):
+  - **`LabView` plugins:**
+    - `underlay` and `overlay` hooks collect into one owned `OverlayFrame`. Each is submitted as an overlay pass through `drawLabFrame`'s existing callbacks (after the terrain, after the scene); an empty collection submits nothing. The items are released in the render's `finally` and the frame is cleared on dispose, as in the old host.
+    - A `pixelExactShadows` option (false by default).
+    - `presentedPlayer` (the replica's `presentedPlayerEntity`) and `presentationAlpha` (the frame's alpha). The pose cycle's displayed-player override comes with Characters.
+  - **Outdoor geometry:** `OutdoorGeometryTest` (shown by the Outdoor and Vehicles workshop pages) builds `LabView` with the `fixedCamera` policy and otherwise the same options. It no longer imports the lab shell and left `LabShellConsumers`.
+  - **Tests:**
+    - `LabView`: a new case covers the hooks: pass order and contents, each hook starting from an empty frame, the presented camera (framed from the presented pose, so it differs from the actual one), the presented player and fractional alpha the hooks see, no pass for an empty collection, one owned frame released after each display frame and cleared on dispose, and `pixelExactShadows`. The play case checks that shadows default to not pixel-exact.
+    - Browser: `outdoor-presentation` now expects the recipe-world Worker and no scenario Worker.
+  - **Seeded faults:** 15 single-line faults over the new `LabView` code, the presented camera and the guard; all 15 fail the suites.
+  - **Review revision:** `ENGINE_REVIEW_REVISION` is unchanged. A build with a temporary switch (not committed) captured both hosts on both renderers, four runs each: idle on a small and a large asset, and settled after walking into the small asset's collision. Every comparison, old against new included, was pixel-identical, with matching camera and player datasets.
+  - **Validation:**
+    - `npm run typecheck`, Biome on the changed files, knip, the ratchet (only other sessions' `src/rendering` entries fail, as on HEAD), focused vitest (55 files, 599 tests), the regenerated manifest and a production build.
+    - Playwright: `outdoor-presentation` (2), `outdoor-workshop` (5), `vehicle-workshop` (3), `world-geometry` (5), `jump-park` and `vehicle-geometry` (6), 22 of 22.
+  - **Review** (Yep Anywhere, Opus 5.5 high): ACCEPT, no blocking findings. The reviewer confirmed parity with the old host for this lab: hook timing and camera, the shared frame, the presented player and alpha, the initial zoom, the teleport fence, scoped assets, datasets and cleanup. It also confirmed that reusing the frame is safe on every backend (the raster backend draws at submit, the GPU backend copies).
+    - Optional findings taken: an identity check for the presented player, a camera framed from the presented pose so the check can tell the presented camera from the actual one, the stale `gameplay-scenarios` sentence, doc wording and wrapping, pixel identity qualified as idle and settled, and a spec assertion that no scenario Worker loads, with a current title.
+    - Re-review: ACCEPT.

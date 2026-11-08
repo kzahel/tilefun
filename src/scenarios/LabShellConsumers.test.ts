@@ -29,7 +29,6 @@ const REMAINING_CONSUMERS = [
   "src/workshop/CharacterPresentation.ts",
   "src/workshop/CharactersPage.tsx",
   "src/workshop/NaturalLandscapePage.tsx",
-  "src/workshop/OutdoorGeometryTest.tsx",
   "src/workshop/PhysicsPage.tsx",
   "src/workshop/PhysicsViewport.ts",
 ];

@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test.use({ channel: "chromium" });
 for (const mode of ["canvas", "gpu"]) {
-  test(`outdoor geometry shares the ${mode} host with fixed framing and bounded lifecycle`, async ({
+  test(`outdoor geometry runs on the ${mode} lab view with fixed framing and bounded lifecycle`, async ({
     page,
   }) => {
     test.setTimeout(60000);
@@ -19,9 +19,11 @@ for (const mode of ["canvas", "gpu"]) {
     if (mode === "gpu") await expect(canvas).toHaveAttribute("data-renderer", "gpu");
     await expect(canvas).toHaveAttribute("data-player-y", "40");
     const cameraY = (await canvas.getAttribute("data-camera-y")) ?? "";
+    // The lab runs on the game's lab view and the recipe-world Worker (226).
     const workers = () =>
-      page.workers().filter((worker) => worker.url().includes("scenario.worker")).length;
+      page.workers().filter((worker) => worker.url().includes("recipe-world")).length;
     await expect.poll(workers).toBe(1);
+    expect(page.workers().some((worker) => worker.url().includes("scenario.worker"))).toBe(false);
     await canvas.focus();
     await page.keyboard.down("ArrowUp");
     await expect

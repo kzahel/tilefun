@@ -2,6 +2,7 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import type { GameAssets } from "../assets/GameAssets.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
+import type { OverlayFrame } from "../rendering/OverlayFrame.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
 import { RecordingBackend } from "../rendering/testing/RecordingBackend.js";
 import { LabInput } from "../scenarios/LabInput.js";
@@ -292,7 +293,11 @@ it("plays with the game's controls: predicted steps, a following camera and the 
   const last = drawn.at(-1);
   expect(last?.options.collectObserver).toBe(last?.presented);
   expect(last?.presented).not.toBe(last?.physics);
-  expect(last?.options).toMatchObject({ terrain: true, visibility: "lower" });
+  expect(last?.options).toMatchObject({
+    terrain: true,
+    visibility: "lower",
+    pixelExactShadows: false,
+  });
   expect(last?.options.presentationTime).toBeGreaterThan(0.1);
   // A throw is released after that tick's movement.
   const press = vi.spyOn(lab.client, "submitPress");
@@ -398,6 +403,75 @@ it("a diagnostic camera policy frames the lab before input and through commands"
   expect(lab.camera.x - 600).toBeLessThan(16);
   expect(lab.camera.y).toBe(-32);
   expect(host.renderer.preparations).toBe(0); // no terrain in this lab
+});
+
+it("draws the page's underlay over the terrain and overlay over the scene, then releases them", async () => {
+  const frames: OverlayFrame[] = [];
+  const seen: { lab: LabView; player: unknown; alpha: number; x: number }[] = [];
+  let grid = true;
+  const { lab, host, frame, key } = open({
+    // A framing from the presented pose, so the presented camera is not the actual one.
+    camera: fixedCamera((player) => ({ wx: player.position.wx + 40, wy: -20 })),
+    pixelExactShadows: true,
+    underlay: (overlay) => {
+      frames.push(overlay);
+      if (grid) overlay.line(0, 0, 960, 0, "#afc0ad");
+    },
+    overlay: (overlay, view) => {
+      frames.push(overlay);
+      seen.push({
+        lab: view,
+        player: view.presentedPlayer,
+        alpha: view.presentationAlpha,
+        x: view.camera.x,
+      });
+      overlay.rect(1, 2, 3, 4, "", "#3472aa");
+      overlay.rect(5, 6, 7, 8, "#f4b032");
+    },
+  });
+  await lab.ready;
+  await until(frame, () => expect(lab.client.clock?.running).toBe(true));
+  key("KeyD");
+  for (let i = 0; i < 4; i++) frame();
+  const { passes, views } = host.renderer;
+  /** One frame's passes, each with the camera it was submitted for. */
+  const drawFrame = () => {
+    const start = passes.length;
+    frame();
+    return passes.slice(start).map((pass, i) => ({ pass, view: views[start + i] }));
+  };
+  const walking = drawFrame();
+  expect(walking.map(({ pass }) => pass.kind)).toEqual(["clear", "overlay", "scene", "overlay"]);
+  const [, under, , over] = walking;
+  expect(under?.pass).toMatchObject({ items: [{ kind: "line", width: 960, stroke: "#afc0ad" }] });
+  // Each hook starts from an empty frame.
+  expect(over?.pass).toMatchObject({
+    items: [
+      { kind: "rect", x: 1, height: 4, stroke: "#3472aa" },
+      { kind: "rect", x: 5, height: 8, fill: "#f4b032" },
+    ],
+  });
+  // The hooks see the frame's presented camera, player and sub-tick fraction.
+  const shown = drawn.at(-1);
+  const last = seen.at(-1);
+  expect(last?.lab).toBe(lab);
+  expect(last?.player).toBe(shown?.presented);
+  expect(shown?.presented).not.toBe(shown?.physics);
+  expect(last?.alpha).toBe(shown?.options.alpha);
+  expect(last?.alpha).toBeLessThan(1);
+  expect(last?.x).toBe((shown?.presented.position.wx ?? Number.NaN) + 40);
+  expect(over?.view).toMatchObject({ x: last?.x, y: -20 });
+  expect(shown?.options.pixelExactShadows).toBe(true);
+  // An empty collection submits nothing.
+  grid = false;
+  expect(drawFrame().map(({ pass }) => pass.kind)).toEqual(["clear", "scene", "overlay"]);
+  // One owned frame, released after each display frame and cleared on dispose.
+  const [owned] = frames;
+  expect(new Set(frames)).toEqual(new Set([owned]));
+  expect(owned?.items).toHaveLength(0);
+  const clear = vi.spyOn(owned as OverlayFrame, "clear");
+  lab.dispose();
+  expect(clear).toHaveBeenCalledTimes(1);
 });
 
 it("reports an authority failure once and releases the view", async () => {

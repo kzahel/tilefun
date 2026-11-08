@@ -1,6 +1,8 @@
 import { closeAssets, type GameAssets, loadGameAssets } from "../assets/GameAssets.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { GameLoop } from "../core/GameLoop.js";
+import type { Entity } from "../entities/Entity.js";
+import { OverlayFrame } from "../rendering/OverlayFrame.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { cameraPixelSnap, type TerrainPacing } from "../rendering/PresentationSettings.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
@@ -25,7 +27,12 @@ export interface LabViewOptions {
   terrain?: boolean;
   background?: string;
   surfaceVisibility?(): SurfaceVisibility;
+  /** Shadows at whole source pixels (asset inspection). */
+  pixelExactShadows?: boolean;
   settings(): { paused: boolean; zoom: number; terrainPacing: TerrainPacing };
+  /** Diagnostic drawing in screen space, over the terrain and over the scene. */
+  underlay?(frame: OverlayFrame, lab: LabView): void;
+  overlay?(frame: OverlayFrame, lab: LabView): void;
   /** After each drawn frame: page diagnostics and datasets. */
   onFrame?(lab: LabView): void;
   onError(error: unknown): void;
@@ -49,6 +56,7 @@ export class LabView {
   readonly ready: Promise<void>;
   private readonly layouts = new ViewLayouts();
   private readonly effects = new ParticleSystem();
+  private readonly overlays = new OverlayFrame();
   private readonly loop: GameLoop;
   private readonly vehicleControls: boolean;
   private host: RenderHost | undefined;
@@ -241,9 +249,11 @@ export class LabView {
         alpha: this.alpha,
         fadeSeconds: now,
         presentationTime: this.lightSeconds,
-        pixelExactShadows: false,
+        pixelExactShadows: this.options.pixelExactShadows ?? false,
         entities: replica.entities,
         collectObserver: replica.presentedPlayerEntity,
+        underlay: () => this.drawOverlay(this.options.underlay),
+        overlay: () => this.drawOverlay(this.options.overlay),
       });
       this.input?.draw(host.uiContext);
       this.renderX = camera.x;
@@ -252,9 +262,29 @@ export class LabView {
     } catch (error) {
       this.fail(error);
     } finally {
+      this.overlays.release();
       camera.restoreActual();
       replica.endPresentation();
     }
+  }
+
+  /** The player as drawn this frame (borrowed): the hooks' view of it. */
+  get presentedPlayer(): Entity {
+    return this.client.replica.presentedPlayerEntity;
+  }
+
+  /** The sub-tick fraction the scene was collected at this frame. */
+  get presentationAlpha() {
+    return this.alpha;
+  }
+
+  /** One pass of a hook's drawing, in the presented camera's screen space. */
+  private drawOverlay(collect: LabViewOptions["overlay"]) {
+    if (!collect || !this.host) return;
+    this.overlays.begin();
+    collect(this.overlays, this);
+    if (this.overlays.items.length)
+      this.host.renderer.submit(this.camera, { kind: "overlay", items: this.overlays.items });
   }
 
   getDiagnostics(): LabDiagnostics {
@@ -298,6 +328,7 @@ export class LabView {
     this.host?.dispose();
     this.host = undefined;
     this.effects.clear();
+    this.overlays.clear();
     if (this.assets) closeAssets(this.assets);
     this.assets = undefined;
     this.client.dispose();

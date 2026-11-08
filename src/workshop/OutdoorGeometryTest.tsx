@@ -7,15 +7,16 @@ import {
 } from "../assets/outdoor/OutdoorCatalog.js";
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { TileVariants } from "../assets/TileVariants.js";
+import { LabView } from "../client/LabView.js";
 import { PIXEL_SCALE } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Camera } from "../rendering/Camera.js";
 import { interpolatePosition } from "../rendering/collectScene.js";
 import type { OverlayFrame } from "../rendering/OverlayFrame.js";
 import { outdoorRecipe } from "../scenarios/OutdoorRecipe.js";
-import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
+import { fixedCamera } from "../session/View.js";
 
-/** Each host owns its walker bitmap; the catalog's HTML image is borrowed. */
+/** Each lab owns its walker bitmap; the catalog's HTML image is borrowed. */
 async function geometryAssets(image: HTMLImageElement): Promise<GameAssets> {
   const sheet = new Spritesheet(image, 16, 16);
   const assets: GameAssets = {
@@ -76,10 +77,10 @@ export function OutdoorGeometryTest({
         setError(String(e));
       }
     };
-    const presentation = new ScenarioPresentationHost(c, outdoorRecipe(asset, metadata), {
+    const lab = new LabView(c, outdoorRecipe(asset, metadata), {
       width: Math.ceil(width * scale),
       height: Math.ceil(height * scale),
-      fixedCamera: { wx: 0, wy: -asset.rect[3] / 3 },
+      camera: fixedCamera({ wx: 0, wy: -asset.rect[3] / 3 }),
       terrain: false,
       pixelExactShadows: true,
       loadAssets: () => geometryAssets(image),
@@ -99,8 +100,7 @@ export function OutdoorGeometryTest({
           frame.line(a.sx, a.sy, b.sx, b.sy, "#afc0ad");
         }
       },
-      overlay: (frame, host) => {
-        const { camera } = host;
+      overlay: (frame, { camera, presentedPlayer: player, presentationAlpha }) => {
         const [vx, vy, vw, vh] = asset.visualBounds;
         drawRect(
           frame,
@@ -113,11 +113,10 @@ export function OutdoorGeometryTest({
           const b = getEntityAABB(prop.position, wall);
           drawRect(frame, camera, [b.left, b.top, b.right - b.left, b.bottom - b.top], "#e54c49");
         }
-        const player = host.presentedPlayer;
         const position = interpolatePosition(
           player.position,
           player.prevPosition,
-          host.presentationAlpha,
+          presentationAlpha,
         );
         if (player.collider) {
           const b = getEntityAABB(position, player.collider);
@@ -128,30 +127,28 @@ export function OutdoorGeometryTest({
         const depth = camera.worldToScreen(0, metadata.depthOffset);
         frame.line(depth.sx - 40, depth.sy, depth.sx + 40, depth.sy, "#a84ac2");
       },
-      onFrame: (host) => {
-        const player = host.session.view.playerEntity;
+      onFrame: ({ client, camera }) => {
+        const player = client.replica.playerEntity;
         c.dataset.playerX = String(player.position.wx);
         c.dataset.playerY = String(player.position.wy);
-        c.dataset.cameraX = String(host.camera.x);
-        c.dataset.cameraY = String(host.camera.y);
+        c.dataset.cameraX = String(camera.x);
+        c.dataset.cameraY = String(camera.y);
       },
       onError: reportError,
     });
-    void presentation.ready
+    void lab.ready
       .then(() => {
         if (active) c.dataset.ready = "true";
       })
       .catch(reportError);
     reset.current = () => {
-      void presentation
-        .command({ kind: "teleport", position: { wx: 0, wy: 40 } })
-        .catch(reportError);
+      void lab.command({ kind: "teleport", position: { wx: 0, wy: 40 } }).catch(reportError);
     };
     return () => {
       active = false;
       c.dataset.ready = "false";
       reset.current = () => {};
-      presentation.dispose();
+      lab.dispose();
     };
   }, [asset, metadata, image]);
   return (
