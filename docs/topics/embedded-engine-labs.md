@@ -2,8 +2,10 @@
 
 ## Labs on the game's Worker runtime (226 slice 3c, 2026-11-08)
 
-Labs are moving off the lab shell (`ScenarioPresentationHost`, `ScenarioClient`,
-the scenario Worker) onto the game's own pieces, one lab at a time:
+Every Workshop lab except the two-pane physics lab now runs on the game's own
+pieces. The lab shell's host (`ScenarioPresentationHost`) was deleted with its
+last lab (226 slice 4a-v); the physics lab keeps `ScenarioClient` and the
+scenario Worker until slice 6.
 
 - **Authority:** `RecipeWorldAuthority` (`src/scenarios/`) stages the recipe
   with `ScenarioSession` and is served by the game's `LocalServerRuntime` from
@@ -39,27 +41,27 @@ the scenario Worker) onto the game's own pieces, one lab at a time:
   the game's controls. `uiOverlay` draws diagnostic UI on the UI layer under the
   touch controls, and `captureFrame` draws a fresh report frame without
   advancing the world. Pause, a pose cycle, a hidden page and in-flight
-  instruments stop play; the camera's range still streams while paused. A new world clears the
-  renderer's world caches, as the game router does, and the device
-  presentation including the view's slab fades (the old host's labs now clear
-  theirs on reset too). `LabView` and the old host draw through the same
-  `drawLabFrame` and report the same `labPresentationDiagnostics`
-  (`src/client/LabScene.ts`), so the two shells cannot drift while labs move.
+  instruments stop play (an instrument holds play on the client while the
+  authority keeps running); the camera's range still streams while paused. A
+  new world clears the renderer's world caches, as the game router does, and
+  the device presentation including the view's slab fades. `LabView` draws
+  through `drawLabFrame` and reports `labPresentationDiagnostics`
+  (`src/client/LabScene.ts`).
 - **Diagnostics:** `RecipeWorldClient.getDiagnostics()` reports the
   transport's outgoing channel and a live clock: the running state from the
   last answer and the applied frames' tick. The realm's tick counter is the
   authority's clock (both count the same ticks and restart with a new world), and
   a paused world's frames repeat its tick. Browser checks can therefore watch the
   authority outrun a stalled page (`scenario-scheduling`).
-- **Moved so far:** all of World geometry runs on `LabView`, apart from the
-  `nature-*` fixtures, which are Natural landscape's (slices 3c-ii and 4a-i),
+- **Moved:** all of World geometry runs on `LabView` (slices 3c-ii and 4a-i),
   and so do Outdoor geometry's movement test (4a-ii), the Character lab
-  (4a-iii) and the Interiors playtest (4a-iv).
+  (4a-iii), the Interiors playtest (4a-iv) and Natural landscape, World
+  geometry's `nature-*` fixtures (4a-v).
   - The pages drive `LabView` directly. Fixed diagnostic frames use the
     `fixedCamera` policy, and World geometry's per-frame datasets come from
     `src/workshop/GeometryFrame.ts`.
-  - None of these pages imports the lab shell.
-  - Natural landscape stays on the old host until its 4a part.
+  - No lab page imports the lab shell except the physics lab
+    (`LabShellConsumers`).
   - Framing is unchanged on every fixture. Outdoor geometry's and the Character
     lab's idle and settled captures, the Character lab's pose-mode frames, and
     the Interiors playtest's idle, settled, diagnostic-guide, place-mode and
@@ -774,6 +776,10 @@ Changed review pixels still follow [art review](art-review.md).
 
 ## Current implementation and gaps
 
+Labs on `LabView` reach this Realm through the game's Worker runtime instead
+(see the first section); this section describes the shared staging and the
+physics lab's scenario Worker path.
+
 `ScenarioSession` hosts a production Realm over `MemoryRecordStore` and
 `RecordPersistenceStore`; `ScenarioClient` uses a dedicated scenario Worker,
 binary replicas and `PlayerPredictor`. Interactive authority uses the same
@@ -806,11 +812,12 @@ remain intentional differences. This alignment establishes clock/transport
 ownership, not full application parity or a frame-pacing claim. See
 [Tactical 069](../tactical/069-interactive-authority-scheduling.md) for validation.
 
-`ScenarioPresentationHost` owns the migrated labs' client/Worker, production
-`GameLoop`, render host, asset lifetime, camera and frame storage, and (since 226
-slice 2) the game's play controls. The lab page supplies viewport/settings,
-diagnostic controls and UI. [Tactical 048](../tactical/048-embedded-presentation-host.md)
-records this extraction and its validation. Shared owners are:
+`LabView` (since 226 slice 4a; `ScenarioPresentationHost` before it) owns the
+labs' client/Worker, production `GameLoop`, render host, asset lifetime, camera
+and frame storage, and the game's play controls. The lab page supplies
+viewport/settings, diagnostic controls and UI.
+[Tactical 048](../tactical/048-embedded-presentation-host.md) records the
+original extraction and its validation. Shared owners are:
 
 - `PlayerPresentation`: fixed-tick follow and exponential sub-tick camera
   interpolation, called by both `PlayScene` and the lab. Predictor previous poses

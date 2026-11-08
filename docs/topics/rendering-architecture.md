@@ -155,7 +155,7 @@ eviction, resize, recovery and teardown. It does not decide depth/shadow order.
 `GameClientOptions.renderHostFactory` is the production selection point.
 `RenderHost` supplies the backend, asset configuration, viewport lifecycle and an
 independent HUD/touch/debug context. `requestedRenderer` gives the game and every
-ScenarioPresentationHost lab GPU + 3D car unless the URL chooses GPU sprites
+`LabView` lab GPU + 3D car unless the URL chooses GPU sprites
 (`?renderer=gpu`) or legacy Canvas (`?renderer=legacy-canvas`). Pages cannot set
 a Canvas default (owner decision, 2026-11-07). The GPU host
 supplies a separate UI overlay and composes it for feedback capture. This works
@@ -187,8 +187,8 @@ host draw through `renderViews` over their device session's views
 (`src/session/`), with `drawViewTerrain`/`drawViewScene` as the one outdoor
 world draw; each has one view until split screen (slice 5).
 
-`ScenarioPresentationHost` embeds the same render-host implementations for the
-interactive labs. `PlayerPresentation`, `OutdoorPresentation` and `presentInterior`
+`LabView` (226; `ScenarioPresentationHost` before it) embeds the same
+render-host implementations for the interactive labs. `PlayerPresentation`, `OutdoorPresentation` and `presentInterior`
 share camera interpolation, terrain policy and room submission with gameplay. GPU hosts support an absolute world surface inside a positioned
 lab wrapper, while the input/UI canvas stays in document flow. See
 [embedded engine labs](embedded-engine-labs.md) for lifecycle and migration boundaries.
@@ -349,7 +349,7 @@ particle, prop and overlay references; retained pools have explicit bounds.
 | --- | --- |
 | Play/edit outdoor and indoor rendering | Neutral `renderWorld`, `renderInterior`, scene and overlay builders; `RenderBackend` only |
 | Explorer | Canvas selected in `TilePreview` composition; explicit preparation/submission, ready-chunk clips and lifecycle |
-| Interactive Traffic, Outdoor Geometry, World Geometry, Character lab and furniture playtest | Shared `ScenarioPresentationHost`, production Canvas/GPU hosts and semantic scene/terrain/indoor passes; view-specific controls and diagnostics |
+| Interactive Traffic, Outdoor Geometry, World Geometry, Natural landscape, Character lab and furniture playtest | The game's `LabView`, production Canvas/GPU hosts and semantic scene/terrain/indoor passes; view-specific controls and diagnostics |
 | Building/street/district reviews | Canvas reference presentation at platform entry; shared semantic scene/terrain passes; separate stage/geometry diagnostics remain native |
 | Native character review | Source-hashed `CharacterTestScene.ts` is immutable approval input. Its `drawScene2D` reference adapter consumes the same scene-pass implementation; do not rewrite approved controller bytes merely to rename a call |
 | Indoor review/reference | Explicit native Canvas surfaces using shared furniture/room ordering. `CachedInteriorRenderer` consumes `InteriorPresentation`; uncached drawing remains the independent parity reference |

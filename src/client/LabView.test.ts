@@ -166,9 +166,9 @@ function open(options: Partial<LabViewOptions> = {}, world = recipe) {
   };
   /** A display frame with no fixed update: render only. */
   const redraw = () => vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(now);
-  const key = (code: string, type = "keydown") => {
+  const key = (code: string, type = "keydown", target: unknown = canvas) => {
     const event = Object.assign(new Event(type, { cancelable: true }), { code, key: "" });
-    Object.defineProperty(event, "target", { value: canvas });
+    Object.defineProperty(event, "target", { value: target });
     win.dispatchEvent(event);
   };
   return { lab, worker, host, assets, factory, settings, onError, onFrame, frame, redraw, key };
@@ -272,11 +272,13 @@ it("plays with the game's controls: predicted steps, a following camera and the 
   await until(frame, () => expect(lab.client.clock?.running).toBe(true));
   const submit = vi.spyOn(lab.client, "submitInput");
   key("KeyD");
+  key("KeyW", "keydown", { tagName: "SELECT" }); // a Workshop field keeps its keys
   for (let i = 0; i < 12; i++) frame();
   expect(submit).toHaveBeenCalledWith(
     expect.objectContaining({ dx: 1, dy: 0 }),
     lab.camera.getVisibleChunkRange(),
   );
+  expect(submit.mock.calls.every(([movement]) => movement.dy === 0)).toBe(true);
   const { replica } = lab.client;
   expect(replica.playerEntity.position.wx).toBeGreaterThan(0); // predicted ahead
   expect(lab.camera.x).toBeGreaterThan(0); // follows after the predicted step
@@ -322,8 +324,12 @@ it("streams the camera's range while paused and drops presses made meanwhile", a
   const { lab, settings, frame, key } = open();
   await lab.ready;
   await until(frame, () => expect(lab.client.clock?.running).toBe(true));
+  const press = vi.spyOn(lab.client, "submitPress");
+  key("KeyB"); // a throw charged while playing…
+  frame();
   settings.paused = true;
   await until(frame, () => expect(lab.client.clock?.running).toBe(false));
+  key("KeyB", "keyup"); // …and released while paused
   const range = vi.spyOn(lab.client, "setVisibleRange");
   const submit = vi.spyOn(lab.client, "submitInput");
   const near = lab.camera.getVisibleChunkRange();
@@ -342,6 +348,14 @@ it("streams the camera's range while paused and drops presses made meanwhile", a
   settings.paused = false;
   await until(frame, () => expect(submit).toHaveBeenCalled());
   expect(submit.mock.calls[0]?.[0]).toMatchObject({ jump: false, jumpPressed: false });
+  frame();
+  expect(press).not.toHaveBeenCalledWith(expect.objectContaining({ type: "throw-ball" }));
+  // The same throw while playing is released.
+  key("KeyB");
+  frame();
+  key("KeyB", "keyup");
+  frame();
+  expect(press).toHaveBeenCalledWith(expect.objectContaining({ type: "throw-ball" }));
 });
 
 it("snaps the camera after commands; reload and reset clear the renderer's world caches", async () => {
@@ -758,6 +772,20 @@ it("a refused world never creates a renderer", async () => {
   await vi.waitFor(() => expect(worker.terminated).toBe(1));
 });
 
+it("releases the renderer, assets and Worker when the renderer refuses the assets", async () => {
+  const refusing = recordingHost();
+  refusing.setAssets.mockImplementation(() => {
+    throw Error("configuration failed");
+  });
+  const { lab, worker, assets, onError } = open({ renderHost: () => refusing });
+  await expect(lab.ready).rejects.toThrow("configuration failed");
+  expect(refusing.dispose).toHaveBeenCalledTimes(1);
+  expect(assets.sheets.size).toBe(0);
+  expect(requestAnimationFrame).not.toHaveBeenCalled();
+  expect(onError).not.toHaveBeenCalled(); // the page hears it through `ready`
+  await vi.waitFor(() => expect(worker.terminated).toBe(1));
+});
+
 it("mounts the shared vehicle control for parked cars, enters through a lab command and removes it", async () => {
   const cars: ScenarioRecipe = {
     ...recipe,
@@ -797,6 +825,17 @@ it("mounts the shared vehicle control for parked cars, enters through a lab comm
   const horn = press.mock.invocationCallOrder[0] ?? Infinity;
   expect(submit).toHaveBeenCalled();
   expect(submit.mock.invocationCallOrder.every((order) => order > horn)).toBe(true);
+  // A held horn is not released on the next tick, and steering keeps raw
+  // diagonal axes in a car.
+  press.mockClear();
+  key("KeyW");
+  key("KeyD");
+  frame();
+  expect(press).not.toHaveBeenCalledWith({ type: "vehicle-horn", active: false });
+  expect(submit).toHaveBeenLastCalledWith(
+    expect.objectContaining({ dx: 1, dy: -1, relativeDriving: true }),
+    expect.anything(),
+  );
   key("KeyH", "keyup");
   lab.dispose();
   expect(removed).toHaveBeenCalledTimes(3);

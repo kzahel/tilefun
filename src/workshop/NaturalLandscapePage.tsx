@@ -4,6 +4,7 @@ import { AudioManager } from "../audio/AudioManager.js";
 import { FootstepSystem } from "../audio/FootstepSystem.js";
 import { buildAudioManifest } from "../audio/SurfaceType.js";
 import { isBoat } from "../boats/Boat.js";
+import { LabView } from "../client/LabView.js";
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import {
   LANDSCAPE_PROFILES,
@@ -19,7 +20,7 @@ import {
   naturalExplorerUrl,
   naturalLandscapeRecipe,
 } from "../scenarios/NaturalLandscapeRecipe.js";
-import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
+import { fixedCamera } from "../session/View.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaProfile, faunaType } from "../wildlife/Fauna.js";
 import { FIERCE_DENS } from "../wildlife/FierceDens.js";
@@ -63,7 +64,7 @@ export default function NaturalLandscapePage() {
     [verified, setVerified] = useState("");
   const [message, setMessage] = useState("");
   const canvas = useRef<HTMLCanvasElement>(null),
-    host = useRef<ScenarioPresentationHost | null>(null);
+    host = useRef<LabView | null>(null);
   const settings = useRef({ paused, follow, zoom, sounds, watchAnimal });
   settings.current = { paused, follow, zoom, sounds, watchAnimal };
   const custom = caseId === "explore",
@@ -131,25 +132,25 @@ export default function NaturalLandscapePage() {
     setError("");
     setPaused(false);
     const { camera } = presentation;
-    const h = new ScenarioPresentationHost(c, recipe, {
+    const h = new LabView(c, recipe, {
       width: 960,
       height: 640,
       terrain: true,
-      fixedCamera: (player, alpha) => {
+      camera: fixedCamera((player, alpha) => {
         if (camera) return camera;
-        const train = host.current?.session.view.entities.find((e) => e.type === CURVE_TRAIN);
+        const train = host.current?.client.replica.entities.find((e) => e.type === CURVE_TRAIN);
         const watched = settings.current.watchAnimal
           ? ANIMAL_BROWSER_ENTRIES.find((a) => a.scene === caseId)
           : undefined;
         const animal = watched
-          ? host.current?.session.view.entities.find((e) => e.type === watched.type)
+          ? host.current?.client.replica.entities.find((e) => e.type === watched.type)
           : undefined;
         const target = animal ?? (settings.current.follow && train ? train : player);
         const p = interpolatePosition(target.position, target.prevPosition, alpha);
         const selected = FAUNA_PROFILES.find((p) => p.species === caseId);
         const ray =
           selected?.habitat === "deep"
-            ? host.current?.session.view.entities.find(
+            ? host.current?.client.replica.entities.find(
                 (e) => e.type === faunaType(selected.species),
               )
             : undefined;
@@ -170,7 +171,7 @@ export default function NaturalLandscapePage() {
           wx: p.wx,
           wy: p.wy - (interpolateWz(target, alpha) ?? 0) - (caseId === "racetrack" ? 37 * 16 : 24),
         };
-      },
+      }),
       settings: () => ({
         paused: settings.current.paused,
         zoom: settings.current.zoom,
@@ -178,41 +179,35 @@ export default function NaturalLandscapePage() {
       }),
       onFrame: (h) => {
         const sound = audio.current,
-          viewForAudio = h.session.view;
+          view = h.client.replica;
         if (sound) {
           const enabled =
             settings.current.sounds &&
             !settings.current.paused &&
             !document.hidden &&
             audioFocused.current;
-          sound.updateCreatureCalls(
-            viewForAudio.entities,
-            viewForAudio.playerEntity.position,
-            enabled,
-          );
+          sound.updateCreatureCalls(view.entities, view.playerEntity.position, enabled);
           footsteps.current ??= new FootstepSystem(
             sound,
-            () => h.session.view.world,
+            () => h.client.replica.world,
             () => h.camera,
-            () => h.session.view.playerEntity,
-            () => h.session.view.props,
+            () => h.client.replica.playerEntity,
+            () => h.client.replica.props,
           );
           const now = performance.now();
           if (enabled && audioTime.current)
             footsteps.current.update(
               Math.min(0.1, (now - audioTime.current) / 1000),
-              viewForAudio.entities,
+              view.entities,
             );
           audioTime.current = now;
           c.dataset.creatureCalls = String(sound.creatureAudioDiagnostics.played);
         }
         c.dataset.foodWebActors = JSON.stringify(
-          h.session.view.entities
-            .filter((e) => creatureSpecies(e))
-            .map((e) => ({ id: e.id, type: e.type })),
+          view.entities.filter((e) => creatureSpecies(e)).map((e) => ({ id: e.id, type: e.type })),
         );
         c.dataset.predatorPoses = JSON.stringify(
-          h.session.view.entities
+          view.entities
             .filter((e) => PREDATOR_PROFILES.some((p) => predatorType(p.species) === e.type))
             .map((e) => ({
               id: e.id,
@@ -226,11 +221,11 @@ export default function NaturalLandscapePage() {
             })),
         );
         c.dataset.fierceDens = JSON.stringify(
-          h.session.view.props
+          view.props
             .filter((p) => FIERCE_DENS.some((d) => d.type === p.type))
             .map((p) => ({ type: p.type, x: p.position.wx, y: p.position.wy })),
         );
-        const ducks = h.session.view.entities.filter((e) => e.type === MALLARD_TYPE);
+        const ducks = view.entities.filter((e) => e.type === MALLARD_TYPE);
         c.dataset.wildlifeCount = String(ducks.length);
         c.dataset.wildlifePoses = JSON.stringify(
           ducks.map((e) => ({
@@ -244,7 +239,7 @@ export default function NaturalLandscapePage() {
             state: e.wanderAI?.state,
           })),
         );
-        const frogs = h.session.view.entities.filter((e) => e.type === FROG_TYPE);
+        const frogs = view.entities.filter((e) => e.type === FROG_TYPE);
         c.dataset.frogCount = String(frogs.length);
         c.dataset.frogPoses = JSON.stringify(
           frogs.map((e) => ({
@@ -258,7 +253,7 @@ export default function NaturalLandscapePage() {
             direction: e.sprite?.direction,
           })),
         );
-        const rabbits = h.session.view.entities.filter((e) => e.type === RABBIT_TYPE);
+        const rabbits = view.entities.filter((e) => e.type === RABBIT_TYPE);
         c.dataset.rabbitCount = String(rabbits.length);
         c.dataset.rabbitPoses = JSON.stringify(
           rabbits.map((e) => ({
@@ -272,7 +267,7 @@ export default function NaturalLandscapePage() {
             direction: e.sprite?.direction,
           })),
         );
-        const robins = h.session.view.entities.filter((e) => e.type === ROBIN_TYPE);
+        const robins = view.entities.filter((e) => e.type === ROBIN_TYPE);
         c.dataset.robinCount = String(robins.length);
         c.dataset.robinPoses = JSON.stringify(
           robins.map((e) => ({
@@ -286,7 +281,7 @@ export default function NaturalLandscapePage() {
             direction: e.sprite?.direction,
           })),
         );
-        const fauna = h.session.view.entities.filter((e) => faunaProfile(e.type));
+        const fauna = view.entities.filter((e) => faunaProfile(e.type));
         c.dataset.faunaPoses = JSON.stringify(
           fauna.map((e) => {
             const p = faunaProfile(e.type);
@@ -311,7 +306,7 @@ export default function NaturalLandscapePage() {
             };
           }),
         );
-        const deer = h.session.view.entities.filter((e) => e.type === DEER_TYPE);
+        const deer = view.entities.filter((e) => e.type === DEER_TYPE);
         c.dataset.deerCount = String(deer.length);
         c.dataset.deerPoses = JSON.stringify(
           deer.map((e) => ({
@@ -325,10 +320,9 @@ export default function NaturalLandscapePage() {
             direction: e.sprite?.direction,
           })),
         );
-        const view = h.session.view;
         if (caseId === "racetrack") {
           const racers = new Map(
-            Object.entries(h.session.handles)
+            Object.entries(h.client.handles)
               .filter(([key]) => key.startsWith("racer:"))
               .map(([key, id]) => [id, key]),
           );
@@ -745,8 +739,8 @@ export default function NaturalLandscapePage() {
           type="button"
           disabled={!ready}
           onClick={() => {
-            void host.current?.session
-              .reload()
+            void host.current
+              ?.reload()
               .then(() => {
                 if (canvas.current)
                   canvas.current.dataset.reloadCount = String(
@@ -771,7 +765,7 @@ export default function NaturalLandscapePage() {
             disabled={!ready || paused}
             onClick={() => {
               const h = host.current;
-              const target = h?.session.view.entities.find(
+              const target = h?.client.replica.entities.find(
                 (e) =>
                   e.type === animal.type && e.wanderAI?.state !== "scared" && (e.wz ?? 0) < 0.5,
               );

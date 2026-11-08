@@ -52,9 +52,10 @@ wall props. Recipes contain no update callbacks and need no DOM or image loading
 
 Labs on the game view compose `LabView → RecipeWorldClient → recipe-world
 Worker (LocalServerRuntime serving RecipeWorldAuthority) → ScenarioSession
-staging → Realm`; Natural landscape and the physics lab still use the older
-`ScenarioPresentationHost`/`ScenarioClient → scenario Worker → ScenarioSession →
-Realm` until their 226 parts. The game uses `GameClient` and
+staging → Realm`. Only the two-pane physics lab still uses the older
+`ScenarioClient → scenario Worker → ScenarioSession → Realm`, until 226 slice 6
+(`ScenarioPresentationHost` was deleted with its last lab in slice 4a-v). The
+game uses `GameClient` and
 `LocalServerRuntime`. Both share simulation, streamed world chunks, prediction,
 binary replication, terrain preparation and scene/render backends. Only nearby
 world regions are resident; a generated world is not precomputed into one giant
@@ -76,8 +77,8 @@ from the same recipe. No global entity definitions or physics CVars are modified
 Player recipes disable NPC wander/route controllers. `actors` is for ordinary
 non-player gameplay actors; the controlled participant belongs in `player`.
 
-`ScenarioWorkerHost` orders requests and invokes that same session. `ScenarioClient`
-uses a dedicated Worker, normal binary frames, `RemoteStateView`, the production
+On the physics lab's path, `ScenarioWorkerHost` orders requests and invokes
+that same session. `ScenarioClient` uses a dedicated Worker, normal binary frames, `RemoteStateView`, the production
 predictor and replica animation clock. `predictInput` is shared with `PlayScene`.
 Inputs enter Realm independently of its ServerLoop ticks. Snapshots arrive without
 request/response stepping, through production channel credits and bounded decode.
@@ -87,8 +88,8 @@ explicit controls and manual headless steps wait for complete view readiness.
 [Scheduling delivery](../tactical/069-interactive-authority-scheduling.md) records
 regressions and intentional application-host differences.
 
-Traffic, World Geometry, Outdoor Geometry, Character lab and the furniture
-playtest now run on the game's `LabView` (226), with the production clock,
+Traffic, World Geometry (Natural landscape included), Outdoor Geometry, Character
+lab and the furniture playtest now run on the game's `LabView` (226), with the production clock,
 render host and shared camera/terrain/indoor helpers. [Embedded engine labs](embedded-engine-labs.md)
 tracks the completed migrations and explicit camera/overlay/reference boundaries. Diagnostics,
 placement controls and static review painting remain view responsibilities. FurnitureMotion and CharacterTestScene

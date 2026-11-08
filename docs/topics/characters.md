@@ -44,7 +44,7 @@ X/Y offsets, ground width/depth, physical height, walk speed and animation FPS.
 The test scene now runs a memory-backed Realm in a Worker with the gameplay
 player controller, binary replication and client prediction. Candidate geometry,
 walk speed and animation FPS are scoped to that session. Interactive presentation
-uses `ScenarioPresentationHost`: production fixed clock, interpolation, scene
+uses the game's `LabView` (226 slice 4a-iii): production fixed clock, interpolation, scene
 collection/ordering, selectable Canvas/GPU renderer and owned lifecycle. Fixed
 framing and geometry overlays are explicit diagnostics. Zoom resizes the host
 without restarting authority; settings changes rebuild the temporary recipe.

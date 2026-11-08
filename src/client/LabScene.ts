@@ -33,8 +33,7 @@ export interface LabSceneOptions {
 /**
  * One display frame of a lab's single view (226): terrain prepared for the
  * view, then the device's shared scene with the view's own slab fades. The
- * Worker-backed lab view and the old lab host both draw through it until the
- * old host's last lab moves (slice 4a). The view's camera must be presented.
+ * view's camera must be presented.
  */
 export function drawLabFrame(
   host: RenderHost,
@@ -84,8 +83,8 @@ export function drawLabFrame(
   });
 }
 
-/** What both lab surfaces report to browser checks, including the authority's
- * clock and the outgoing channel (the traffic scheduling check). */
+/** What a lab reports to browser checks, including the authority's clock and
+ * the outgoing channel (the traffic scheduling check). */
 export type LabDiagnostics = ReturnType<typeof labPresentationDiagnostics> & {
   alpha: number;
   steps: number;
@@ -99,7 +98,7 @@ export type LabDiagnostics = ReturnType<typeof labPresentationDiagnostics> & {
   pixelSnap: boolean;
 };
 
-/** Presentation diagnostics both lab surfaces report to their browser checks. */
+/** The presentation part of a lab's diagnostics. */
 export function labPresentationDiagnostics(
   host: RenderHost | undefined,
   device: DeviceSession,

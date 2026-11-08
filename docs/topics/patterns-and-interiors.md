@@ -207,7 +207,7 @@ Rendering evidence and runners are routed through [performance](performance.md).
 Furniture motion now compiles its layouts to ordinary props and runs a memory-backed
 Realm in a Worker through [Gameplay scenarios](gameplay-scenarios.md). The layout
 model keeps placement validation and path targets; it has no private player simulation.
-Interactive presentation uses `ScenarioPresentationHost` and the same `presentInterior`
+Interactive presentation uses the game's `LabView` (226 slice 4a-iv) and the same `presentInterior`
 adapter as gameplay, including actor interpolation, room ordering and Canvas/GPU
 lifecycle. Static approval rendering remains separate and unchanged. Live motion
 review signatures include presentation version 1, reopening the eleven movement

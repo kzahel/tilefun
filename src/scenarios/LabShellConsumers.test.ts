@@ -14,7 +14,6 @@ const SHELL =
   /(?:from\s+|import\s*\(?\s*|new URL\(\s*|vi\.mock\(\s*)["'][^"']*\/(?:ScenarioPresentationHost|ScenarioClient|ScenarioWorkerHost|ScenarioReplica|scenario\.worker)(?:\.js|\.ts)?(?:\?[^"']*)?["']/;
 const SHELL_AND_GUARD = new Set([
   "src/scenarios/LabShellConsumers.test.ts", // this guard's own import samples
-  "src/scenarios/ScenarioPresentationHost.ts",
   "src/scenarios/ScenarioClient.ts",
   "src/scenarios/ScenarioWorkerHost.ts",
   "src/scenarios/ScenarioReplica.ts",
@@ -22,10 +21,8 @@ const SHELL_AND_GUARD = new Set([
 ]);
 const REMAINING_CONSUMERS = [
   "src/scenarios/CoopWorker.test.ts",
-  "src/scenarios/ScenarioPresentationHost.test.ts",
   "src/scenarios/ScenarioScheduling.test.ts",
   "src/scenarios/ScenarioWorkerHost.test.ts",
-  "src/workshop/NaturalLandscapePage.tsx",
   "src/workshop/PhysicsPage.tsx",
   "src/workshop/PhysicsViewport.ts",
 ];

@@ -89,7 +89,12 @@ for (const renderer of ["canvas"]) {
       `/tilefun/workshop.html?geometry=nature-forest&landscape=balanced&renderer=${renderer}#/tool/world-geometry`,
     );
     const c = page.getByLabel("Natural landscape playground");
+    // The game's lab view on the recipe-world Worker; the old lab host is gone.
+    const workers = () => page.workers().filter((w) => w.url().includes("recipe-world"));
+    const scenarioWorkers = () => page.workers().filter((w) => w.url().includes("scenario.worker"));
     await expect(c).toHaveAttribute("data-ready", "true");
+    await expect.poll(() => workers().length).toBe(1);
+    expect(scenarioWorkers()).toEqual([]);
     await expect.poll(async () => Number(await c.getAttribute("data-trees"))).toBeGreaterThan(30);
     const x = Number(await c.getAttribute("data-x"));
     await c.focus();
@@ -126,6 +131,8 @@ for (const renderer of ["canvas"]) {
     await expect(c).toHaveAttribute("data-terrain-pending", "0");
     await c.scrollIntoViewIfNeeded();
     await page.screenshot({ path: `/tmp/tilefun-natural-train-${renderer}.png`, fullPage: true });
+    await expect.poll(() => workers().length).toBe(1); // each scene replaced the last
+    expect(scenarioWorkers()).toEqual([]);
     await page.getByRole("link", { name: "All tools", exact: true }).click();
     await expect.poll(() => page.workers().length).toBe(0);
     expect(errors).toEqual([]);
