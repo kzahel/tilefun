@@ -10,9 +10,10 @@ import {
   type CharacterSettings,
   parseCharacterSettings,
 } from "../characters/CharacterCatalog.js";
+import { LabView } from "../client/LabView.js";
 import { PIXEL_SCALE } from "../config/constants.js";
 import { characterRecipe } from "../scenarios/CharacterRecipe.js";
-import { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
+import { fixedCamera } from "../session/View.js";
 import { required } from "../shared/required.js";
 import { buildCharacterCandidate } from "./CharacterCandidates.js";
 import { characterGrid, characterOverlay } from "./CharacterPresentation.js";
@@ -180,7 +181,7 @@ function CharacterInspector({
   > | null>(null);
   const latest = useRef({ settings, overlays, zoom, cycle });
   latest.current = { settings, overlays, zoom, cycle };
-  const presentation = useRef<ScenarioPresentationHost | null>(null);
+  const presentation = useRef<LabView | null>(null);
   const note = drafts[`note:${key}`] ?? "";
   useEffect(() => {
     useWorkspace.getState().setDraft(key, JSON.stringify(settings));
@@ -219,15 +220,15 @@ function CharacterInspector({
         setError(String(e));
       }
     };
-    const host = new ScenarioPresentationHost(c, characterRecipe(def, settings), {
+    const lab = new LabView(c, characterRecipe(def, settings), {
       width: 288 * latest.current.zoom,
       height: 192 * latest.current.zoom,
-      fixedCamera: { wx: 0, wy: -12 },
+      camera: fixedCamera({ wx: 0, wy: -12 }),
       terrain: false,
       background: "#d4dfcc",
       pixelExactShadows: true,
       loadAssets: async () => ({
-        // Each host owns its map, while verified HTML images/fixture canvases are borrowed.
+        // Each lab owns its map, while verified HTML images/fixture canvases are borrowed.
         sheets: new Map(verified.sheets),
         blendSheets: [],
         variants: new TileVariants(required(verified.sheets.get("player"))),
@@ -240,9 +241,9 @@ function CharacterInspector({
         terrainPacing: "throughput",
       }),
       underlay: characterGrid,
-      overlay: (frame, h) => characterOverlay(frame, h, settings, latest.current.overlays),
-      onFrame: (h) => {
-        const actor = h.presentedPlayer;
+      overlay: (frame, view) => characterOverlay(frame, view, settings, latest.current.overlays),
+      onFrame: (view) => {
+        const actor = view.presentedPlayer;
         const sprite = required(actor.sprite);
         c.dataset.x = String(actor.position.wx);
         c.dataset.y = String(actor.position.wy);
@@ -251,8 +252,8 @@ function CharacterInspector({
         c.dataset.frame = String(sprite.frameCol);
         c.dataset.moving = String(sprite.moving);
         c.dataset.mode = latest.current.cycle ? "poses" : "movement";
-        c.dataset.cameraX = String(h.camera.x);
-        c.dataset.cameraY = String(h.camera.y);
+        c.dataset.cameraX = String(view.camera.x);
+        c.dataset.cameraY = String(view.camera.y);
         if (c.dataset.ready !== "true") {
           c.dataset.ready = "true";
           setReady(true);
@@ -260,12 +261,12 @@ function CharacterInspector({
       },
       onError: reportError,
     });
-    presentation.current = host;
-    void host.ready.catch(reportError);
+    presentation.current = lab;
+    void lab.ready.catch(reportError);
     return () => {
       active = false;
       c.dataset.ready = "false";
-      host.dispose();
+      lab.dispose();
       presentation.current = null;
     };
   }, [def, settings, verified]);

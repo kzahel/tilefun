@@ -26,8 +26,6 @@ const REMAINING_CONSUMERS = [
   "src/scenarios/ScenarioPresentationHost.test.ts",
   "src/scenarios/ScenarioScheduling.test.ts",
   "src/scenarios/ScenarioWorkerHost.test.ts",
-  "src/workshop/CharacterPresentation.ts",
-  "src/workshop/CharactersPage.tsx",
   "src/workshop/NaturalLandscapePage.tsx",
   "src/workshop/PhysicsPage.tsx",
   "src/workshop/PhysicsViewport.ts",

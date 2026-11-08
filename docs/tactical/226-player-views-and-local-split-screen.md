@@ -6,8 +6,8 @@ decomposition). Slices 0, 1a, 1b, 2 (input ownership, as 2a and 2b), 3a
 (render views), 3b (device session and view objects) and 3c (the recipe-world
 authority, lab client and lab view surface, with the WorldGeometry car fixtures
 on the game view) are done, as are 4a-i (all of World geometry on the game
-view) and 4a-ii (Outdoor geometry). The other 4a parts (Characters, Interiors
-playtest, Natural landscape) and 4b (server seats) are next. Updated 2026-11-07 for seats on one device session,
+view), 4a-ii (Outdoor geometry) and 4a-iii (Characters). The other 4a parts
+(Interiors playtest, Natural landscape) and 4b (server seats) are next. Updated 2026-11-07 for seats on one device session,
 online seats and the first-person view requirements from 229.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
 (no on-screen joystick, HTML arrow buttons outside the canvas, no Options such as
@@ -1222,3 +1222,48 @@ maintaining both shells. The shell import allow-list only shrinks.
   - **Review** (Yep Anywhere, Opus 5.5 high): ACCEPT, no blocking findings. The reviewer confirmed parity with the old host for this lab: hook timing and camera, the shared frame, the presented player and alpha, the initial zoom, the teleport fence, scoped assets, datasets and cleanup. It also confirmed that reusing the frame is safe on every backend (the raster backend draws at submit, the GPU backend copies).
     - Optional findings taken: an identity check for the presented player, a camera framed from the presented pose so the check can tell the presented camera from the actual one, the stale `gameplay-scenarios` sentence, doc wording and wrapping, pixel identity qualified as idle and settled, and a spec assertion that no scenario Worker loads, with a current title.
     - Re-review: ACCEPT.
+- 2026-11-08, slice 4a-iii exit list (Characters):
+  - **`LabView` plugins:**
+    - A `poseCycle` option for four-direction sprite inspection. While it returns a cycle, the lab stops the authority, as a pause request does. The cycle's clock advances with each tick, also while paused, and restarts when the cycle is off.
+    - Each frame of a cycle draws a copy of the presented player with the cycled sprite: direction and row change every 2 s, the frame runs at the sheet's rate, and it is drawn as moving. The copy replaces the player in the drawn entities, is the collect observer, and is what `presentedPlayer` returns during that frame. Prediction and the replica are never written.
+    - `resize(width, height)`: the view's region and the render host follow, without restarting the Worker or changing the world.
+  - **The Character lab** (`CharactersPage`, with `characterGrid` and `characterOverlay` in `CharacterPresentation.ts`) builds `LabView` directly; the overlay reads the replica's props. Both files leave `LabShellConsumers`. The reset is a teleport command, as before.
+  - **Tests:**
+    - Node: the pose cycle (the authority stopped and no input sent, the displayed row and frame following the cycle's clock, the substitution in the drawn entities and as observer, `presentedPlayer` during the frame, the replica untouched, a restart from the first pose after the cycle is turned off) and resize (region, host size, same Worker and world).
+    - Browser: `character-presentation` (both renderers; it now expects the recipe-world Worker), `character-workshop` (3), `character-rendering` (2) and `scenario-lifecycle`.
+  - **Review revision:** `ENGINE_REVIEW_REVISION` is unchanged if a capture against the old host shows identical framing and pixels in movement and pose modes.
+  - **Docs:** the embedded-labs and gameplay-scenarios topics.
+- 2026-11-08, slice 4a-iii done (exit list met):
+  - **`LabView` plugins:**
+    - A `poseCycle` option. While it returns a cycle (`PoseCycle`: the sheet's fps and frame count), the lab stops the authority as a pause request does. The cycle's clock advances with each tick, also while paused, and restarts at 0 when the cycle is off.
+    - Each frame of a cycle draws a shallow copy of the presented player with the cycled sprite: direction and row every 2 s, the frame at the sheet's rate, moving. The copy replaces the player (by id) in the drawn entities, is the collect observer, and is what `presentedPlayer` returns to the hooks and `onFrame`. It is released after the frame (the old host kept it), and prediction and the replica are never written.
+    - Two differences from the old host:
+      - **The collect observer.** During a cycle it is the copy, where the old host passed the replica's player. The observer's readers (the scene collector, surface receivers and collision debug) only use fields the copy shares with the original (position, previous position, height, collider, parent), so pixels cannot change.
+      - **Streaming during a cycle.** A cycle is a pause, so it streams the camera's visible range (deduplicated). The old host streamed only on a settings pause.
+    - `resize(width, height)` moves the view's region (the constructor's layout) and the render host without restarting the Worker or changing the world.
+  - **The Character lab:** `CharactersPage` builds `LabView` with the `fixedCamera` policy and otherwise the same options. `characterGrid` and `characterOverlay` take `LabView` and read the replica's props. Both files no longer import the lab shell and left `LabShellConsumers`.
+  - **The old host lost the options no remaining lab uses** (`poseCycle`, `resize`, `pixelExactShadows`, `surfaceVisibility`, `underlay`/`overlay` with its owned `OverlayFrame`), together with their test cases; 405 → 352 lines. `presentedPlayer`, `uiOverlay`, `captureFrame`, `interior` and scripted input stay for the Interiors playtest and Natural landscape.
+  - **Tests:**
+    - `LabView`:
+      - The pose cycle: the authority stopped, no input sent, the server pose held. The drawn copy follows the cycle's clock (rows 0 to 2, all frames) and replaces only the player's slot as observer. Hooks and `onFrame` see it, code outside the frame does not, and the replica's sprite is untouched. With the cycle off the replica's player and array are drawn again and input resumes; turned on again, it starts over.
+      - Resize: before and after the renderer exists, the next frame's view, the same running world, and a no-op after dispose (the region holds).
+    - Browser: `character-presentation` now expects the recipe-world Worker, and no scenario Worker either at the start or after the settings rebuild and character changes.
+  - **Seeded faults:** 19 single-line faults over the new `LabView` code and the guard; all 19 fail the suites.
+  - **Review revision:** `ENGINE_REVIEW_REVISION` is unchanged. A build with a temporary switch (not committed) captured both hosts on both renderers, four runs each: idle, settled after walking into the boundary wall, and about 50 pose-mode shots keyed by the displayed pose. Idle and settled were pixel-identical in every pair, with identical datasets. In pose mode, all 14 poses that each pair of runs shared had a pixel-identical match, old against new included. Pose frames were matched by their displayed pose, and no frames were captured while walking.
+  - **Validation:**
+    - `npm run typecheck`, Biome on the changed files, knip, the ratchet (only other sessions' `src/rendering` entries fail, as on HEAD), focused vitest (78 files, 778 tests, `src/interiors` included), the regenerated manifest and a production build.
+    - Playwright: `character-presentation` (2), `character-workshop` (3), `character-rendering` (2), `scenario-lifecycle`, `outdoor-presentation` (2) and `world-geometry` (5), 15 of 15. After the old host's trim, `character-presentation`, `character-workshop`, `scenario-lifecycle`, `furniture-presentation` and `natural-landscapes` passed again against a fresh build, 14 of 14.
+  - **Review** (Yep Anywhere, Opus 5.5 high): ACCEPT, no blocking findings. The reviewer confirmed:
+    - parity with the old host for this lab: the pause request, the pose clock, the copy's fields and its swap by id, the empty-sprite fallback, and zoom resizing without a Worker restart;
+    - that nothing reads `presentedPlayer` outside a frame, so releasing the copy after each frame changes nothing;
+    - that the copy never writes into prediction or replication;
+    - that the tests are not vacuous and the pose clock's oracle holds under load;
+    - the `ENGINE_REVIEW_REVISION` evidence.
+    - Optional findings taken:
+      - the observer and streaming differences recorded;
+      - a resize check after dispose that fails without the guard;
+      - the old host's unused options deleted now rather than with the host;
+      - the no-scenario-Worker check repeated after rebuilds;
+      - qualified pixel evidence;
+      - the stale topic lines (embedded-labs status line and Character lab paragraph, `gameplay-scenarios`).
+    - Re-review: ACCEPT (one wrapping nit, fixed).

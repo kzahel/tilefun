@@ -29,6 +29,8 @@ export interface LabViewOptions {
   surfaceVisibility?(): SurfaceVisibility;
   /** Shadows at whole source pixels (asset inspection). */
   pixelExactShadows?: boolean;
+  /** Four-direction sprite inspection: stops the world and cycles only the drawn pose. */
+  poseCycle?(): PoseCycle | undefined;
   settings(): { paused: boolean; zoom: number; terrainPacing: TerrainPacing };
   /** Diagnostic drawing in screen space, over the terrain and over the scene. */
   underlay?(frame: OverlayFrame, lab: LabView): void;
@@ -41,6 +43,21 @@ export interface LabViewOptions {
   /** Tests: the render host and the recipe world's Worker. */
   renderHost?: RenderHostFactory;
   worker?: () => WorkerEndpoint;
+}
+
+/** A sprite sheet's walk cycle: its frames and their rate. */
+export interface PoseCycle {
+  fps: number;
+  frameCount: number;
+}
+
+/** The pose cycle's drawn copy: each direction for 2 s, walking at the sheet's rate. */
+function cycledPose(player: Entity, seconds: number, { fps, frameCount }: PoseCycle): Entity {
+  if (!player.sprite) return player;
+  const row = Math.floor(seconds / 2) % 4;
+  const frameCol = Math.floor(seconds * fps) % frameCount;
+  const sprite = { ...player.sprite, direction: row, frameRow: row, frameCol, moving: true };
+  return { ...player, sprite };
 }
 
 /**
@@ -68,6 +85,9 @@ export class LabView {
   private alpha = 1;
   private steps = 0;
   private lightSeconds = 0;
+  private poseSeconds = 0;
+  /** This frame's cycled copy of the presented player (borrowed). */
+  private displayedPlayer: Entity | undefined;
   private renderX = 0;
   private renderY = 0;
 
@@ -87,8 +107,7 @@ export class LabView {
     // A new world clears the device's presentation, this view's slab fades included.
     this.client.device.views.push(this.view);
     this.camera.pixelSnap = cameraPixelSnap(params);
-    const [whole] = this.layouts.get("1", options.width, options.height);
-    if (whole) this.view.setRegion(whole.region);
+    this.setRegion(options.width, options.height);
     this.loop = new GameLoop({
       update: (dt) => this.update(dt),
       render: (alpha, now) => this.render(alpha, now),
@@ -102,6 +121,11 @@ export class LabView {
 
   get camera() {
     return this.view.camera;
+  }
+
+  private setRegion(width: number, height: number) {
+    const [whole] = this.layouts.get("1", width, height);
+    if (whole) this.view.setRegion(whole.region);
   }
 
   private async initialize(params: URLSearchParams) {
@@ -152,7 +176,7 @@ export class LabView {
   };
 
   private get pauseRequested() {
-    return this.options.settings().paused || document.hidden;
+    return this.options.settings().paused || !!this.options.poseCycle?.() || document.hidden;
   }
 
   /** Not playing: paused, hidden, or a lab command or clock change in flight. */
@@ -193,6 +217,8 @@ export class LabView {
       this.fail(error);
       return;
     }
+    // The pose cycle's clock runs while it stops the world.
+    this.poseSeconds = this.options.poseCycle?.() ? this.poseSeconds + dt : 0;
     const { device } = client;
     const paused = this.paused;
     this.vehicleControl?.update(device.replica, true, paused);
@@ -241,6 +267,15 @@ export class LabView {
     replica.beginPresentation(now, this.alpha, this.paused);
     try {
       this.view.policy.present(camera, device, this.alpha);
+      // A pose cycle draws a copy of the presented player; the replica keeps its own.
+      const player = replica.presentedPlayerEntity;
+      const cycle = this.options.poseCycle?.();
+      const shown = cycle ? cycledPose(player, this.poseSeconds, cycle) : player;
+      this.displayedPlayer = shown;
+      const entities =
+        shown === player
+          ? replica.entities
+          : replica.entities.map((entity) => (entity.id === player.id ? shown : entity));
       drawLabFrame(host, this.view, device, this.effects, {
         terrain: this.options.terrain !== false,
         background: this.options.background ?? "#cbd5c3",
@@ -250,8 +285,8 @@ export class LabView {
         fadeSeconds: now,
         presentationTime: this.lightSeconds,
         pixelExactShadows: this.options.pixelExactShadows ?? false,
-        entities: replica.entities,
-        collectObserver: replica.presentedPlayerEntity,
+        entities,
+        collectObserver: shown,
         underlay: () => this.drawOverlay(this.options.underlay),
         overlay: () => this.drawOverlay(this.options.overlay),
       });
@@ -262,15 +297,24 @@ export class LabView {
     } catch (error) {
       this.fail(error);
     } finally {
+      this.displayedPlayer = undefined;
       this.overlays.release();
       camera.restoreActual();
       replica.endPresentation();
     }
   }
 
-  /** The player as drawn this frame (borrowed): the hooks' view of it. */
+  /** The player as drawn this frame (borrowed), the pose cycle's copy included:
+   * the hooks' view of it. */
   get presentedPlayer(): Entity {
-    return this.client.replica.presentedPlayerEntity;
+    return this.displayedPlayer ?? this.client.replica.presentedPlayerEntity;
+  }
+
+  /** The view's size, without restarting the Worker or changing its world. */
+  resize(width: number, height: number) {
+    if (this.disposed) return;
+    this.setRegion(width, height);
+    this.host?.resize(width, height);
   }
 
   /** The sub-tick fraction the scene was collected at this frame. */

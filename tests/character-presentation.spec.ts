@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test.use({ channel: "chromium" });
 for (const renderer of ["canvas", "gpu"]) {
-  test(`character ${renderer} host preserves gameplay, pose inspection and resource lifetime`, async ({
+  test(`character ${renderer} lab view preserves gameplay, pose inspection and resource lifetime`, async ({
     page,
   }) => {
     const errors: string[] = [];
@@ -13,8 +13,11 @@ for (const renderer of ["canvas", "gpu"]) {
     const canvas = page.getByLabel("Character movement test");
     await expect(canvas).toHaveAttribute("data-ready", "true");
     if (renderer === "gpu") await expect(canvas).toHaveAttribute("data-renderer", "gpu");
-    const workers = () => page.workers().filter((w) => w.url().includes("scenario.worker"));
+    // The lab runs on the game's lab view and the recipe-world Worker (226).
+    const workers = () => page.workers().filter((w) => w.url().includes("recipe-world"));
+    const scenarioWorkers = () => page.workers().filter((w) => w.url().includes("scenario.worker"));
     await expect.poll(() => workers().length).toBe(1);
+    expect(scenarioWorkers()).toEqual([]);
     const worker = workers()[0];
     await canvas.focus();
     await page.keyboard.down("ArrowRight");
@@ -74,6 +77,7 @@ for (const renderer of ["canvas", "gpu"]) {
         renderer === "gpu" ? 2 : 1,
       );
     }
+    expect(scenarioWorkers()).toEqual([]); // nor after settings rebuilds and character changes
     await page.getByRole("button", { name: "Toggle tool navigation", exact: true }).click();
     await page.getByRole("link", { name: "All tools", exact: true }).click();
     await expect.poll(() => workers().length).toBe(0);

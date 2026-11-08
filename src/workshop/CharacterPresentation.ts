@@ -1,13 +1,13 @@
 import type { CharacterSettings } from "../characters/CharacterCatalog.js";
+import type { LabView } from "../client/LabView.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Camera } from "../rendering/Camera.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
 import type { OverlayFrame } from "../rendering/OverlayFrame.js";
 import { CHARACTER_TEST_BLOCKS } from "../scenarios/CharacterRecipe.js";
-import type { ScenarioPresentationHost } from "../scenarios/ScenarioPresentationHost.js";
 
-/** Diagnostic geometry only. The host owns time, predicted poses and scene drawing. */
-export function characterGrid(frame: OverlayFrame, { camera }: ScenarioPresentationHost) {
+/** Diagnostic geometry only. The lab view owns time, predicted poses and scene drawing. */
+export function characterGrid(frame: OverlayFrame, { camera }: LabView) {
   for (let y = -112; y <= 96; y += 16) {
     const a = camera.worldToScreen(-144, y),
       b = camera.worldToScreen(144, y);
@@ -35,11 +35,11 @@ function rect(
 
 export function characterOverlay(
   frame: OverlayFrame,
-  host: ScenarioPresentationHost,
+  lab: LabView,
   settings: CharacterSettings,
   showGeometry: boolean,
 ) {
-  const { camera } = host;
+  const { camera } = lab;
   const font = `${4 * camera.scale}px sans-serif`;
   for (const b of CHARACTER_TEST_BLOCKS) {
     const p = camera.worldToScreen(b.x - b.w / 2, b.y + 7);
@@ -48,10 +48,10 @@ export function characterOverlay(
   const r = camera.worldToScreen(-120, 14);
   frame.label("Current player", r.sx, r.sy, "#243529", font);
   if (!showGeometry) return;
-  const actor = host.presentedPlayer;
+  const actor = lab.presentedPlayer;
   if (!actor.collider) return;
-  const position = interpolatePosition(actor.position, actor.prevPosition, host.presentationAlpha);
-  const z = interpolateWz(actor, host.presentationAlpha) ?? 0;
+  const position = interpolatePosition(actor.position, actor.prevPosition, lab.presentationAlpha);
+  const z = interpolateWz(actor, lab.presentationAlpha) ?? 0;
   const box = getEntityAABB(position, actor.collider);
   const s = settings;
   rect(frame, camera, position.wx - 16, position.wy - z - 32 + s.drawOffsetY, 32, 32, "#2675d8");
@@ -63,7 +63,7 @@ export function characterOverlay(
   rect(frame, camera, position.wx - 20, position.wy + s.sortOffsetY, 40, 0, "#9343ae");
   const p = camera.worldToScreen(position.wx, position.wy - z);
   frame.rect(p.sx - 3, p.sy - 3, 6, 6, "#f59d00");
-  for (const prop of host.session.view.props) {
+  for (const prop of lab.client.replica.props) {
     if (!prop.sprite.sheetKey.startsWith("character-test-block-") || !prop.collider) continue;
     const b = getEntityAABB(prop.position, prop.collider);
     rect(frame, camera, b.left, b.top, b.right - b.left, b.bottom - b.top, "#bd4b2d");

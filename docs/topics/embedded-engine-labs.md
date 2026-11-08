@@ -28,16 +28,19 @@ the scenario Worker) onto the game's own pieces, one lab at a time:
   camera policy (the game's follow by default), `LabInput`, `VehicleControl`,
   the production `GameLoop` and the selectable render host. Page plugins: zoom,
   pause, surface visibility, terrain pacing, pixel-exact shadows, a per-frame
-  hook, commands and reload, and `underlay`/`overlay` hooks that draw
-  diagnostic `OverlayFrame` geometry over the terrain and over the scene (they
-  read the frame's `presentedPlayer` and `presentationAlpha`). Pause, a hidden
-  page and in-flight instruments stop play; the camera's range still streams
-  while paused. A new world clears the renderer's world caches, as the game
-  router does, and the device presentation including the view's slab fades
-  (the old host's labs now clear theirs on reset too). `LabView` and the old
-  host draw through the same `drawLabFrame` and report the same
-  `labPresentationDiagnostics` (`src/client/LabScene.ts`), so the two shells
-  cannot drift while labs move.
+  hook, commands and reload, `resize` (the Worker and world stay), and
+  `underlay`/`overlay` hooks that draw diagnostic `OverlayFrame` geometry over
+  the terrain and over the scene (they read the frame's `presentedPlayer` and
+  `presentationAlpha`). A pose cycle inspects a sprite's four directions: it
+  stops the world and draws a copy of the player with the cycled sprite, which
+  is also the frame's `presentedPlayer`; the replica's own pose is never
+  written. Pause, a pose cycle, a hidden page and in-flight instruments stop
+  play; the camera's range still streams while paused. A new world clears the
+  renderer's world caches, as the game router does, and the device
+  presentation including the view's slab fades (the old host's labs now clear
+  theirs on reset too). `LabView` and the old host draw through the same
+  `drawLabFrame` and report the same `labPresentationDiagnostics`
+  (`src/client/LabScene.ts`), so the two shells cannot drift while labs move.
 - **Diagnostics:** `RecipeWorldClient.getDiagnostics()` reports the
   transport's outgoing channel and a live clock. The clock is the authority's
   ticks from its last answer, advanced by the frames applied since, because a
@@ -45,15 +48,17 @@ the scenario Worker) onto the game's own pieces, one lab at a time:
   authority outrun a stalled page (`scenario-scheduling`).
 - **Moved so far:** all of World geometry runs on `LabView`, apart from the
   `nature-*` fixtures, which are Natural landscape's (slices 3c-ii and 4a-i),
-  and so does Outdoor geometry's movement test (4a-ii).
+  and so do Outdoor geometry's movement test (4a-ii) and the Character lab
+  (4a-iii).
   - The pages drive `LabView` directly. Fixed diagnostic frames use the
     `fixedCamera` policy, and World geometry's per-frame datasets come from
     `src/workshop/GeometryFrame.ts`.
-  - Neither page imports the lab shell.
-  - Characters, the Interiors playtest and Natural landscape stay on the old
-    host until their 4a parts.
-  - Framing is unchanged on every fixture. Outdoor geometry's idle and settled
-    captures are pixel-identical to the old host's. World geometry's differ only in
+  - None of these pages imports the lab shell.
+  - The Interiors playtest and Natural landscape stay on the old host until
+    their 4a parts.
+  - Framing is unchanged on every fixture. Outdoor geometry's and the Character
+    lab's idle and settled captures, and the Character lab's pose-mode frames,
+    are pixel-identical to the old host's. World geometry's differ only in
     time-dependent content: grass wind, moving traffic and animals, and mesh
     suspension settling. Those differences are within the old host's own
     run-to-run variation, so `ENGINE_REVIEW_REVISION` is unchanged.
@@ -292,8 +297,9 @@ the generated depot uses ordinary regional planning, saved vehicles and props.
 Topic: embedded-engine-labs
 Status: shared scenario simulation and presentation host delivered for Traffic,
 Outdoor Geometry, World Geometry, Character lab and indoor furniture playtest.
-The identified interactive lab migrations are complete.
-Updated: 2026-10-24.
+The identified interactive lab migrations are complete. Tactical 226 is now
+moving these labs onto the game's `LabView` (see the top of this topic).
+Updated: 2026-11-08.
 
 The F3 collision inspector and Truck bed playground now use the same read-only
 `CollisionDebug` geometry collector, named layer colors and optional shape/height
@@ -847,7 +853,8 @@ fixture selection remain lab responsibilities; play input comes from the host. C
 panel stops the clock and disposes its Worker and GPU sibling canvas. See
 [Tactical 050](../tactical/050-outdoor-geometry-presentation.md) for validation.
 
-Character lab now uses the same host with fixed framing, verified source/fixture
+Character lab used this host until 226 slice 4a-iii moved it to `LabView` (see
+the top of this topic). It has fixed framing, verified source/fixture
 assets, semantic grid/geometry overlays and live viewport resize. Settings rebuild
 only that temporary scenario; zoom leaves the Worker alive. Pose cycling explicitly
 pauses simulation and supplies a display-only sprite copy to the ordinary scene

@@ -1,6 +1,7 @@
 import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import type { GameAssets } from "../assets/GameAssets.js";
-import { Direction } from "../entities/Entity.js";
+import { TICK_RATE } from "../config/constants.js";
+import { Direction, type Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import type { OverlayFrame } from "../rendering/OverlayFrame.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
@@ -18,6 +19,7 @@ const drawn = vi.hoisted(
       options: import("./LabScene.js").LabSceneOptions;
       presented: import("../entities/Entity.js").Entity;
       physics: import("../entities/Entity.js").Entity;
+      entities: readonly import("../entities/Entity.js").Entity[];
     }[],
 );
 vi.mock("./LabScene.js", async (importOriginal) => {
@@ -30,13 +32,14 @@ vi.mock("./LabScene.js", async (importOriginal) => {
         options,
         presented: device.replica.presentedPlayerEntity,
         physics: device.replica.playerEntity,
+        entities: device.replica.entities,
       });
       actual.drawLabFrame(...args);
     },
   };
 });
 
-import { LabView, type LabViewOptions } from "./LabView.js";
+import { LabView, type LabViewOptions, type PoseCycle } from "./LabView.js";
 
 const recipe: ScenarioRecipe = {
   version: 1,
@@ -149,9 +152,9 @@ function open(options: Partial<LabViewOptions> = {}, world = recipe) {
   });
   labs.push(lab);
   let now = performance.now();
-  /** One display frame; the loop runs one fixed update per frame. */
-  const frame = () => {
-    now = Math.max(now + 17, performance.now());
+  /** One display frame; the loop runs one fixed update per 17 ms (at most 0.25 s). */
+  const frame = (ms = 17) => {
+    now = Math.max(now + ms, performance.now());
     vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(now);
   };
   /** A display frame with no fixed update: render only. */
@@ -472,6 +475,129 @@ it("draws the page's underlay over the terrain and overlay over the scene, then 
   const clear = vi.spyOn(owned as OverlayFrame, "clear");
   lab.dispose();
   expect(clear).toHaveBeenCalledTimes(1);
+});
+
+it("a pose cycle stops the world and cycles only the drawn player's sprite", async () => {
+  let cycle: PoseCycle | undefined;
+  const framed: Entity[] = [];
+  const hooked: Entity[] = [];
+  const { lab, frame, key } = open({
+    poseCycle: () => cycle,
+    overlay: (_, view) => {
+      hooked.push(view.presentedPlayer);
+    },
+    onFrame: (view) => {
+      framed.push(view.presentedPlayer);
+    },
+  });
+  await lab.ready;
+  await until(frame, () => expect(lab.client.clock?.running).toBe(true));
+  const { client } = lab;
+  const { replica } = client;
+  // A walk to the right: the replica's player faces right.
+  key("KeyD");
+  await until(frame, () => expect(replica.serverPlayerEntity.position.wx).toBeGreaterThan(8));
+  key("KeyD", "keyup");
+  const submit = vi.spyOn(client, "submitInput");
+  /** The cycle's clock: one fixed step per tick since it was turned on. */
+  const ticks = vi.spyOn(client, "update");
+  const seconds = () => {
+    let total = 0;
+    for (let i = 0; i < ticks.mock.calls.length; i++) total += 1 / TICK_RATE;
+    return total;
+  };
+  cycle = { fps: 8, frameCount: 4 };
+  await until(frame, () => expect(client.clock?.running).toBe(false));
+  const sprite = structuredClone(replica.playerEntity.sprite);
+  const pose = { ...replica.serverPlayerEntity.position };
+  expect(sprite?.direction).toBe(Direction.Right);
+  /** The frame's drawn copy, checked against the replica's presented player. */
+  const cycled = () => {
+    const shown = drawn.at(-1);
+    const copy = shown?.options.collectObserver;
+    if (!shown || !copy?.sprite) throw new Error("no drawn player");
+    expect(copy).not.toBe(shown.presented);
+    expect(copy.id).toBe(shown.presented.id);
+    expect(copy.position).toBe(shown.presented.position);
+    // It stands in for the player among the drawn entities; the rest are the replica's.
+    const slot = shown.entities.indexOf(shown.presented);
+    expect(slot).toBeGreaterThanOrEqual(0);
+    expect(shown.options.entities).toHaveLength(shown.entities.length);
+    shown.options.entities.forEach((entity, i) => {
+      expect(entity).toBe(i === slot ? copy : shown.entities[i]);
+    });
+    // The hooks and the page's frame see it; outside the frame the replica's own.
+    expect(hooked.at(-1)).toBe(copy);
+    expect(framed.at(-1)).toBe(copy);
+    expect(lab.presentedPlayer).not.toBe(copy);
+    return { copy: copy.sprite, replica: shown.presented.sprite };
+  };
+  const rows: number[] = [];
+  const cols = new Set<number>();
+  while (seconds() < 4.5) {
+    frame(100);
+    const elapsed = seconds();
+    const row = Math.floor(elapsed / 2) % 4;
+    const shown = cycled();
+    expect(shown.copy).toMatchObject({ direction: row, frameRow: row, moving: true });
+    expect(shown.copy.frameCol).toBe(Math.floor(elapsed * 8) % 4);
+    // The stopped replica keeps its own sprite.
+    expect(shown.replica).toEqual(sprite);
+    expect(replica.playerEntity.sprite).toEqual(sprite);
+    if (rows.at(-1) !== row) rows.push(row);
+    cols.add(shown.copy.frameCol);
+  }
+  expect(rows).toEqual([0, 1, 2]); // each direction for 2 s
+  expect([...cols].sort()).toEqual([0, 1, 2, 3]);
+  expect(submit).not.toHaveBeenCalled();
+  expect(client.clock?.running).toBe(false);
+  expect(replica.serverPlayerEntity.position).toEqual(pose);
+  // Off: the replica's player is drawn again and the world runs.
+  cycle = undefined;
+  frame();
+  const shown = drawn.at(-1);
+  expect(shown?.options.collectObserver).toBe(shown?.presented);
+  expect(shown?.options.entities).toBe(shown?.entities);
+  expect(framed.at(-1)).toBe(shown?.presented);
+  await until(frame, () => expect(submit).toHaveBeenCalled());
+  // On again, the cycle starts over from the first pose.
+  ticks.mockClear();
+  cycle = { fps: 8, frameCount: 4 };
+  frame();
+  expect(ticks).toHaveBeenCalled();
+  const restarted = seconds();
+  expect(restarted).toBeLessThan(0.5);
+  expect(cycled().copy).toMatchObject({
+    direction: 0,
+    frameRow: 0,
+    frameCol: Math.floor(restarted * 8) % 4,
+  });
+});
+
+it("resizes the view and its renderer without restarting the world", async () => {
+  const { lab, host, worker, frame } = open();
+  lab.resize(576, 384); // before the renderer exists: it opens at the new size
+  await lab.ready;
+  expect(host.resize).toHaveBeenCalledTimes(1);
+  expect(host.resize).toHaveBeenCalledWith(576, 384);
+  await until(frame, () => expect(lab.client.clock?.running).toBe(true));
+  const clear = vi.spyOn(host.renderer, "clear");
+  const pose = { ...lab.client.replica.serverPlayerEntity.position };
+  lab.resize(1152, 768);
+  expect(host.resize).toHaveBeenLastCalledWith(1152, 768);
+  expect(lab.view.region).toEqual({ x: 0, y: 0, width: 1152, height: 768 });
+  expect([lab.camera.viewportWidth, lab.camera.viewportHeight]).toEqual([1152, 768]);
+  frame();
+  expect(host.beginView).toHaveBeenLastCalledWith(lab.camera, lab.view.region);
+  // The same Worker and world, still running.
+  expect(clear).not.toHaveBeenCalled();
+  expect(lab.client.clock?.running).toBe(true);
+  expect(lab.client.replica.serverPlayerEntity.position).toEqual(pose);
+  expect(worker.terminated).toBe(0);
+  lab.dispose();
+  lab.resize(100, 100);
+  expect(host.resize).toHaveBeenCalledTimes(2);
+  expect(lab.view.region).toEqual({ x: 0, y: 0, width: 1152, height: 768 });
 });
 
 it("reports an authority failure once and releases the view", async () => {

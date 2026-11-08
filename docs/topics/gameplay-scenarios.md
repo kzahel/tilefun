@@ -84,9 +84,9 @@ explicit controls and manual headless steps wait for complete view readiness.
 [Scheduling delivery](../tactical/069-interactive-authority-scheduling.md) records
 regressions and intentional application-host differences.
 
-Character lab and the furniture playtest use `ScenarioPresentationHost` with the
-production clock, render host and shared camera/terrain/indoor helpers; Traffic,
-World Geometry and Outdoor Geometry now run on the game's `LabView` (226). [Embedded engine labs](embedded-engine-labs.md)
+The furniture playtest uses `ScenarioPresentationHost` with the production clock,
+render host and shared camera/terrain/indoor helpers; Traffic, World Geometry,
+Outdoor Geometry and Character lab now run on the game's `LabView` (226). [Embedded engine labs](embedded-engine-labs.md)
 tracks the completed migrations and explicit camera/overlay/reference boundaries. Diagnostics,
 placement controls and static review painting remain view responsibilities. FurnitureMotion and CharacterTestScene
 are layout/render models without movement loops. The former synchronous traffic

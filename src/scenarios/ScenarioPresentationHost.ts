@@ -7,13 +7,11 @@ import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
 import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { presentInterior } from "../interiors/presentInterior.js";
 import { Camera } from "../rendering/Camera.js";
-import { OverlayFrame } from "../rendering/OverlayFrame.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { cameraPixelSnap, type TerrainPacing } from "../rendering/PresentationSettings.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
 import type { SceneItem } from "../rendering/SceneItem.js";
 import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
-import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import { ViewLayouts } from "../rendering/ViewLayout.js";
 import { fixedCamera, followSeat, View } from "../session/View.js";
 import type { Movement } from "../shared/Movement.js";
@@ -40,16 +38,9 @@ export interface ScenarioPresentationOptions {
   uiOverlay?(ctx: CanvasRenderingContext2D, host: ScenarioPresentationHost): void;
   /** Owned asset set; disposal closes bitmaps, leaving borrowed HTML images intact. */
   loadAssets?(graph: BlendGraph): Promise<GameAssets>;
-  /** Diagnostic fixtures can replace terrain/grass with a grid. */
+  /** Diagnostic fixtures can replace terrain/grass with a background. */
   terrain?: boolean;
-  pixelExactShadows?: boolean;
   background?: string;
-  /** Four-direction sprite inspection: pauses authority and overrides only the displayed pose. */
-  poseCycle?(): { fps: number; frameCount: number } | undefined;
-  surfaceVisibility?(): SurfaceVisibility;
-  /** Borrowed frame/camera, consumed synchronously through either renderer backend. */
-  underlay?(frame: OverlayFrame, host: ScenarioPresentationHost): void;
-  overlay?(frame: OverlayFrame, host: ScenarioPresentationHost): void;
   /** Transitional: the interiors playtest's own input (automatic walk, place
    * mode) until its 226 slice 4a migration. Other labs get the game's controls. */
   input?(): Movement;
@@ -69,7 +60,6 @@ export class ScenarioPresentationHost {
   private readonly view: View;
   private readonly layouts = new ViewLayouts();
   readonly ready: Promise<void>;
-  private readonly overlays = new OverlayFrame();
   private readonly loop: GameLoop;
   private host: RenderHost | undefined;
   private assets: GameAssets | undefined;
@@ -81,7 +71,6 @@ export class ScenarioPresentationHost {
   private renderY = 0;
   private steps = 0;
   private pausedViewKey = "";
-  private poseSeconds = 0;
   private lightSeconds = 0;
   private displayedPlayer: Entity | undefined;
   private vehicleControl: VehicleControl | undefined;
@@ -162,12 +151,7 @@ export class ScenarioPresentationHost {
   };
 
   private get pauseRequested() {
-    return (
-      this.options.settings().paused ||
-      !!this.options.poseCycle?.() ||
-      document.hidden ||
-      this.controls > 0
-    );
+    return this.options.settings().paused || document.hidden || this.controls > 0;
   }
 
   private get paused() {
@@ -206,7 +190,6 @@ export class ScenarioPresentationHost {
       this.fail(error);
       return;
     }
-    this.poseSeconds = this.options.poseCycle?.() ? this.poseSeconds + dt : 0;
     this.vehicleControl?.update(this.session.view, true, this.paused);
     if (this.paused) return this.input?.skip();
     this.lightSeconds += dt;
@@ -259,35 +242,18 @@ export class ScenarioPresentationHost {
         }
       }
       const player = view.presentedPlayerEntity;
-      const cycle = this.options.poseCycle?.();
-      const row = Math.floor(this.poseSeconds / 2) % 4;
-      this.displayedPlayer =
-        cycle && player.sprite
-          ? {
-              ...player,
-              sprite: {
-                ...player.sprite,
-                direction: row,
-                frameRow: row,
-                frameCol: Math.floor(this.poseSeconds * cycle.fps) % cycle.frameCount,
-                moving: true,
-              },
-            }
-          : player;
-      const entities = cycle
-        ? view.entities.map((entity) => (entity.id === player.id ? this.presentedPlayer : entity))
-        : view.entities;
+      this.displayedPlayer = player;
       const interior = this.options.interior;
       drawLabFrame(this.host, this.view, this.session.device, this.effects, {
         terrain: !interior && this.options.terrain !== false,
         background: this.options.background ?? "#cbd5c3",
         pacing: this.options.settings().terrainPacing,
-        visibility: this.options.surfaceVisibility?.() ?? "auto",
+        visibility: "auto",
         alpha: this.alpha,
         fadeSeconds: now,
         presentationTime: this.lightSeconds,
-        pixelExactShadows: this.options.pixelExactShadows ?? false,
-        entities,
+        pixelExactShadows: false,
+        entities: view.entities,
         collectObserver: player,
         ...(interior
           ? {
@@ -304,8 +270,6 @@ export class ScenarioPresentationHost {
               },
             }
           : {}),
-        underlay: () => this.drawOverlay(this.options.underlay),
-        overlay: () => this.drawOverlay(this.options.overlay),
       });
       this.options.uiOverlay?.(this.host.uiContext, this);
       this.input?.draw(this.host.uiContext);
@@ -315,7 +279,6 @@ export class ScenarioPresentationHost {
     } catch (error) {
       this.fail(error);
     } finally {
-      this.overlays.release();
       this.camera.restoreActual();
       view.endPresentation();
     }
@@ -329,14 +292,7 @@ export class ScenarioPresentationHost {
     return this.host.captureFrame?.() ?? this.canvas;
   }
 
-  /** Resize presentation without restarting the Worker or changing its world. */
-  resize(width: number, height: number) {
-    if (this.disposed) return;
-    this.setRegion(width, height);
-    this.host?.resize(width, height);
-  }
-
-  /** Borrowed current display pose; diagnostic cycling never writes into prediction/replication. */
+  /** Borrowed current display pose. */
   get presentedPlayer(): Entity {
     return this.displayedPlayer ?? this.session.view.playerEntity;
   }
@@ -344,14 +300,6 @@ export class ScenarioPresentationHost {
   /** The same sub-tick fraction used by the scene collector this frame. */
   get presentationAlpha() {
     return this.alpha;
-  }
-
-  private drawOverlay(collect: ScenarioPresentationOptions["overlay"]) {
-    if (!collect || !this.host) return;
-    this.overlays.begin();
-    collect(this.overlays, this);
-    if (this.overlays.items.length)
-      this.host.renderer.submit(this.camera, { kind: "overlay", items: this.overlays.items });
   }
 
   getDiagnostics() {
@@ -397,7 +345,6 @@ export class ScenarioPresentationHost {
     this.effects.clear();
     this.options.interior?.presentation.clear();
     this.displayedPlayer = undefined;
-    this.overlays.clear();
     if (this.assets) closeAssets(this.assets);
     this.assets = undefined;
     this.session.dispose();
