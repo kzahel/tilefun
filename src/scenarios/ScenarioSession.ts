@@ -13,6 +13,7 @@ import { RoadType } from "../road/RoadType.js";
 import { runEquipment } from "../server/EquipmentControl.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
+import { isValidThrow } from "../server/RealmCommands.js";
 import {
   decodeClientMessage,
   encodeClientMessage,
@@ -339,14 +340,7 @@ export class ScenarioSession {
         });
         return;
       case "throw-ball":
-        if (
-          ![command.dirX, command.dirY, command.force].every(Number.isFinite) ||
-          command.force < 0 ||
-          command.force > 1 ||
-          Math.hypot(command.dirX, command.dirY) < 0.001 ||
-          Math.hypot(command.dirX, command.dirY) > 1.001
-        )
-          throw Error("Invalid scenario throw");
+        if (!isValidThrow(command)) throw Error("Invalid scenario throw");
         this.realm.handleMessage(this.player.clientId, this.player, {
           type: "throw-ball",
           ...command,

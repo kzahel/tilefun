@@ -69,6 +69,14 @@ export class LabInput {
     );
   }
 
+  /** A tick the lab did not play (paused, busy or scripted): presses and throw
+   * releases made meanwhile must not fire on resume. */
+  skip(): void {
+    this.jumped = false;
+    this.actions.consumeHornPress();
+    this.seat.dropThrow();
+  }
+
   /** Action buttons exist only on touch screens: never invisible mouse targets, and
    * desktop lab pixels stay unchanged. */
   private get showButtons(): boolean {

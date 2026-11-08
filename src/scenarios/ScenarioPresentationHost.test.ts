@@ -283,7 +283,8 @@ it("uses the moving diagnostic camera for streaming as well as drawing", async (
   host.dispose();
 });
 
-it("without its own input, a lab plays with the game's controls while its canvas has focus", async () => {
+/** A lab without its own input on a focused 960×600 canvas: the game's controls. */
+async function gameControlsLab(touchPoints = 0, settings = options.settings) {
   const win = new EventTarget();
   const canvas = Object.assign(new EventTarget(), {
     tagName: "CANVAS",
@@ -293,7 +294,7 @@ it("without its own input, a lab plays with the game's controls while its canvas
     getBoundingClientRect: () => ({ left: 0, top: 0, width: 960, height: 600 }),
   });
   vi.stubGlobal("window", win);
-  vi.stubGlobal("navigator", { maxTouchPoints: 0 });
+  vi.stubGlobal("navigator", { maxTouchPoints: touchPoints });
   Object.assign(document, { activeElement: canvas, hasFocus: () => true });
   mocks.factory.mockReturnValue({
     setAssets: mocks.setAssets,
@@ -307,22 +308,28 @@ it("without its own input, a lab plays with the game's controls while its canvas
   const { input: _scripted, ...gameControls } = options;
   const host = new ScenarioPresentationHost(canvas as never, recipe, {
     ...gameControls,
+    settings,
     terrain: false,
   });
   await host.ready;
-  const key = (code: string, target: unknown = canvas) => {
-    const event = Object.assign(new Event("keydown", { cancelable: true }), { code, key: "" });
+  const key = (code: string, target: unknown = canvas, type = "keydown") => {
+    const event = Object.assign(new Event(type, { cancelable: true }), { code, key: "" });
     Object.defineProperty(event, "target", { value: target });
     win.dispatchEvent(event);
   };
   let now = performance.now();
-  const tick = () => {
+  const frame = () => {
     now += 17; // exactly one 1/60 s update per frame for the next few frames
     vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(now);
   };
+  return { host, canvas, key, frame };
+}
+
+it("without its own input, a lab plays with the game's controls while its canvas has focus", async () => {
+  const { host, key, frame } = await gameControlsLab();
   key("KeyD");
   key("KeyW", { tagName: "SELECT" }); // a Workshop field keeps its keys
-  tick();
+  frame();
   expect(mocks.submitInput).toHaveBeenLastCalledWith(
     expect.objectContaining({ dx: 1, dy: 0, relativeDriving: false }),
     expect.anything(),
@@ -333,7 +340,7 @@ it("without its own input, a lab plays with the game's controls while its canvas
   Object.assign(host.session.view, { entities: [host.session.view.playerEntity, car] });
   key("KeyH");
   key("KeyW");
-  tick();
+  frame();
   expect(mocks.submitPress).toHaveBeenCalledWith({ type: "vehicle-horn", active: true });
   // Presses precede the movement command of the same tick.
   expect(mocks.submitPress.mock.invocationCallOrder.at(-1)).toBeLessThan(
@@ -346,8 +353,51 @@ it("without its own input, a lab plays with the game's controls while its canvas
   );
   // A held horn stays on (no release) on the next tick.
   mocks.submitPress.mockClear();
-  tick();
+  frame();
   expect(mocks.submitPress).not.toHaveBeenCalledWith({ type: "vehicle-horn", active: false });
+  host.dispose();
+});
+
+it("a jump pressed while the lab is paused does not fire on resume", async () => {
+  let paused = true;
+  const { host, key, frame } = await gameControlsLab(0, () => ({ ...options.settings(), paused }));
+  key("Space");
+  key("Space", undefined, "keyup");
+  frame();
+  expect(mocks.submitInput).not.toHaveBeenCalled();
+  await vi.waitFor(() => expect(mocks.command).toHaveBeenCalled()); // paused camera range
+  await new Promise((resolve) => setTimeout(resolve));
+  paused = false;
+  frame();
+  expect(mocks.submitInput).toHaveBeenLastCalledWith(
+    expect.objectContaining({ jump: false, jumpPressed: false }),
+    expect.anything(),
+  );
+  // The same press while playing jumps.
+  key("Space");
+  key("Space", undefined, "keyup");
+  frame();
+  expect(mocks.submitInput).toHaveBeenLastCalledWith(
+    expect.objectContaining({ jumpPressed: true }),
+    expect.anything(),
+  );
+  // A throw charged before the pause and released during it never throws.
+  key("KeyB");
+  frame();
+  paused = true;
+  key("KeyB", undefined, "keyup");
+  frame();
+  paused = false;
+  frame();
+  frame();
+  expect(mocks.submitPress).not.toHaveBeenCalledWith(
+    expect.objectContaining({ type: "throw-ball" }),
+  );
+  key("KeyB");
+  frame();
+  key("KeyB", undefined, "keyup");
+  frame();
+  expect(mocks.submitPress).toHaveBeenCalledWith(expect.objectContaining({ type: "throw-ball" }));
   host.dispose();
 });
 
@@ -357,32 +407,7 @@ it.each([
 ])(
   "lab touch buttons take mouse clicks only on touch screens (maxTouchPoints %i)",
   async (points, jumps) => {
-    const win = new EventTarget();
-    const canvas = Object.assign(new EventTarget(), {
-      tagName: "CANVAS",
-      width: 960,
-      height: 600,
-      contains: (node: unknown) => node === canvas,
-      getBoundingClientRect: () => ({ left: 0, top: 0, width: 960, height: 600 }),
-    });
-    vi.stubGlobal("window", win);
-    vi.stubGlobal("navigator", { maxTouchPoints: points });
-    Object.assign(document, { activeElement: canvas, hasFocus: () => true });
-    mocks.factory.mockReturnValue({
-      setAssets: mocks.setAssets,
-      resize: mocks.resize,
-      dispose: mocks.dispose,
-      beginFrame: vi.fn(),
-      beginWorld: vi.fn(),
-      endWorld: vi.fn(),
-      renderer: { assets: new Map(), submit: vi.fn() },
-    });
-    const { input: _scripted, ...gameControls } = options;
-    const host = new ScenarioPresentationHost(canvas as never, recipe, {
-      ...gameControls,
-      terrain: false,
-    });
-    await host.ready;
+    const { host, canvas, frame } = await gameControlsLab(points);
     // The Jump button's centre: 960 − 24 − 28, 600 − 24 − 28 (CSS px of the canvas).
     const press = Object.assign(new Event("mousedown", { cancelable: true }), {
       button: 0,
@@ -390,7 +415,7 @@ it.each([
       clientY: 548,
     });
     canvas.dispatchEvent(press);
-    vi.mocked(requestAnimationFrame).mock.calls.at(-1)?.[0]?.(performance.now() + 17);
+    frame();
     expect(press.defaultPrevented).toBe(jumps);
     expect(mocks.submitInput).toHaveBeenLastCalledWith(
       expect.objectContaining({ jump: jumps }),

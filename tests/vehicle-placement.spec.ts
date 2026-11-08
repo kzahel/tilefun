@@ -168,7 +168,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
       command: `tp ${wx} ${wy - 16}`,
     });
   }, car);
-  await page.getByRole("button", { name: /^Drive car(?: · [EY])?$/ }).tap();
+  await page.getByRole("button", { name: /^Drive car(?: · [^\s·]{1,3})?$/ }).tap();
   await expect
     .poll(() =>
       page.evaluate(() => {
@@ -185,8 +185,8 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
   await reopen(page, renderer);
   await expect.poll(async () => (await vehicles(page))[0]?.type).toBe(`vehicle-v1:${model}`);
 
-  await expect(page.getByRole("button", { name: /^Get out(?: · [EY])?$/ })).toBeVisible();
-  await page.getByRole("button", { name: /^Get out(?: · [EY])?$/ }).tap();
+  await expect(page.getByRole("button", { name: /^Get out(?: · [^\s·]{1,3})?$/ })).toBeVisible();
+  await page.getByRole("button", { name: /^Get out(?: · [^\s·]{1,3})?$/ }).tap();
   const parked = (await vehicles(page))[0];
   if (!parked) throw Error("Lost vehicle");
   await page.waitForTimeout(350);

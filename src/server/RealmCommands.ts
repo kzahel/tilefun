@@ -246,13 +246,25 @@ function interiorMoveAllowed(
   return true;
 }
 
+/** A throw with finite values, force 0..1 and a unit direction (every client path). */
+export function isValidThrow(msg: { dirX: number; dirY: number; force: number }): boolean {
+  const length = Math.hypot(msg.dirX, msg.dirY);
+  return (
+    [msg.dirX, msg.dirY, msg.force].every(Number.isFinite) &&
+    msg.force >= 0 &&
+    msg.force <= 1 &&
+    length >= 0.001 &&
+    length <= 1.001
+  );
+}
+
 function throwBall(
   ctx: RealmCommandContext,
   session: PlayerSession,
   msg: RealmCommandOf<"throw-ball">,
 ): void {
   const { realm } = ctx;
-  if (realm.vehicles.get(session)) return;
+  if (!isValidThrow(msg) || realm.vehicles.get(session)) return;
   const player = session.player;
   const speed = THROW_MIN_SPEED + msg.force * (THROW_MAX_SPEED - THROW_MIN_SPEED);
   // Add random jitter so consecutive throws spread out

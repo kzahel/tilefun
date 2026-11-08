@@ -893,7 +893,7 @@
       "overLimit": 1
     },
     "src/workshop/PhysicsPage.tsx": {
-      "lines": 343,
+      "lines": 341,
       "worst": 45,
       "overLimit": 2
     },

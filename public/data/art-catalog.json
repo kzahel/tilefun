@@ -35507,19 +35507,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:99"
+          "source": "src/scenarios/ScenarioSession.ts:100"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:101"
+          "source": "src/scenarios/ScenarioSession.ts:102"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:166"
+          "source": "src/scenarios/ScenarioSession.ts:167"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:246"
+          "source": "src/scenarios/ScenarioSession.ts:247"
         },
         {
           "system": "Gameplay",
@@ -36647,7 +36647,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmCommands.ts:268"
+          "source": "src/server/RealmCommands.ts:280"
         },
         {
           "system": "Gameplay",

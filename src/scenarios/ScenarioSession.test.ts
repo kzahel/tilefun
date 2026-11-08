@@ -124,6 +124,15 @@ it("takes horn, siren and throw presses on a seat's ordered input path", async (
     expect(emergency).toHaveBeenCalledWith(session.player, "toggle");
     const balls = () => session.realm.entityManager.entities.filter((e) => e.type === "ball");
     expect(balls()).toHaveLength(0);
+    // Presses get the command path's throw checks (as in the game's server path).
+    for (const bad of [
+      { dirX: 0, dirY: 0, force: 1 },
+      { dirX: 2, dirY: 0, force: 1 },
+      { dirX: 1, dirY: 0, force: 1.5 },
+      { dirX: 1, dirY: 0, force: -0.1 },
+    ])
+      session.input(encodeClientMessage({ type: "throw-ball", ...bad }));
+    expect(balls()).toHaveLength(0);
     session.input(encodeClientMessage({ type: "throw-ball", dirX: 1, dirY: 0, force: 1 }));
     expect(balls()).toHaveLength(1);
     // Presses never take part in the seat's input sequence.

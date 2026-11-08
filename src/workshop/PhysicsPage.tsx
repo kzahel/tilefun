@@ -99,6 +99,7 @@ export default function PhysicsPage() {
     const playSeat = (index: 0 | 1, dt: number) => {
       const view = (index ? session.guest : session.host)?.view;
       const played = state.current.script || !view ? undefined : inputs[index]?.tick(view, dt);
+      if (!played) inputs[index]?.skip();
       const idle = state.current.script ? coopScript(scene, tick, index) : COOP_IDLE;
       for (const press of played?.before ?? []) session.submitPress(press, index);
       session.submitInput(played?.movement ?? idle, undefined, index);
@@ -112,7 +113,7 @@ export default function PhysicsPage() {
           if (!state.current.paused && !session.busy) {
             for (const index of [0, 1] as const) playSeat(index, dt);
             tick++;
-          }
+          } else for (const input of inputs) input.skip();
         } catch (reason) {
           fail(reason);
         }
@@ -120,7 +121,8 @@ export default function PhysicsPage() {
       render(alpha, now) {
         try {
           for (const index of [0, 1] as const) {
-            const replica = index === 0 ? session.host : session.guest;
+            const replica = index ? session.guest : session.host,
+              canvas = index ? b : a;
             if (replica)
               views[index]?.render(
                 replica,
@@ -130,10 +132,6 @@ export default function PhysicsPage() {
                 session.handles.host ?? -1,
                 session.handles.guest ?? -1,
               );
-          }
-          for (const index of [0, 1] as const) {
-            const replica = index ? session.guest : session.host,
-              canvas = index ? b : a;
             const player = replica?.view.serverPlayerEntity;
             canvas.dataset.ready = String(!!player && player.id !== -1 && !session.busy);
             canvas.dataset.x = String(player?.position.wx ?? 0);

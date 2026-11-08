@@ -35,8 +35,10 @@ for (const renderer of ["canvas", "gpu&meshes"]) {
       const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
       await g.gcSendRequest({ type: "rcon", requestId: g.nextRequestId++, command: "tp 100 -16" });
     });
-    await expect(page.getByRole("button", { name: /^Drive car(?: · [EY])?$/ })).toBeVisible();
-    await page.getByRole("button", { name: /^Drive car(?: · [EY])?$/ }).click();
+    await expect(
+      page.getByRole("button", { name: /^Drive car(?: · [^\s·]{1,3})?$/ }),
+    ).toBeVisible();
+    await page.getByRole("button", { name: /^Drive car(?: · [^\s·]{1,3})?$/ }).click();
     await expect
       .poll(() =>
         page.evaluate(() => {

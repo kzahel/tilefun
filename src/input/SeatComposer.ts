@@ -1,5 +1,4 @@
 import type { Direction, Entity } from "../entities/Entity.js";
-import { throwDirection } from "../scenes/playThrow.js";
 import { quantizeAxis } from "../shared/binaryCodec.js";
 import type { Movement } from "../shared/Movement.js";
 import type { ClientMessage } from "../shared/protocol.js";
@@ -9,6 +8,7 @@ import {
   isWarningVehicle,
   vehicleLightState,
 } from "../traffic/EmergencyVehicle.js";
+import { throwDirection } from "./throwDirection.js";
 
 /** Max hold time in seconds before throw force reaches 1.0. */
 const THROW_CHARGE_DURATION = 1.0;
@@ -109,8 +109,8 @@ export class SeatComposer {
   private throwHeld = false;
   private jumpHeld = false;
 
-  /** Record the occupied vehicle; true when it changed. Keys held while boarding
-   * do not toggle sirens or style until released. */
+  /** Record the occupied vehicle before each `tick`; true when it changed. Keys
+   * held while boarding do not toggle sirens or style until released. */
   board(vehicle: Entity | undefined, lights: boolean, style: boolean): boolean {
     if (vehicle?.id === this.vehicleId) return false;
     this.vehicleId = vehicle?.id;
@@ -177,6 +177,11 @@ export class SeatComposer {
   cancel(): void {
     this.lastMovement = { dx: 0, dy: 0 };
     this.jumpHeld = false;
+    this.dropThrow();
+  }
+
+  /** Forget a charging throw, so a release during skipped ticks never throws. */
+  dropThrow(): void {
     this.throwHeld = false;
     this.throwCharge = 0;
   }

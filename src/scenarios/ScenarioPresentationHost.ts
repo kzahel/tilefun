@@ -200,7 +200,7 @@ export class ScenarioPresentationHost {
     }
     this.poseSeconds = this.options.poseCycle?.() ? this.poseSeconds + dt : 0;
     this.vehicleControl?.update(this.session.view, true, this.paused);
-    if (this.paused) return;
+    if (this.paused) return this.input?.skip();
     this.lightSeconds += dt;
     this.effects.observePlayer(this.session.view.playerEntity);
     this.effects.update(dt);

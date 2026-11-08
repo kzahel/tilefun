@@ -104,7 +104,7 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
     });
     return { id: vehicle.id, wx: vehicle.position.wx };
   });
-  await page.getByRole("button", { name: /^Drive car(?: · [EY])?$/ }).tap();
+  await page.getByRole("button", { name: /^Drive car(?: · [^\s·]{1,3})?$/ }).tap();
   await expect
     .poll(() =>
       page.evaluate(() => {
@@ -139,5 +139,5 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
   await expect
     .poll(() => game(page))
     .toEqual([expect.objectContaining({ paint, sheet: `vehicle-v1:${model}:paint:${paint}` })]);
-  await expect(page.getByRole("button", { name: /^Get out(?: · [EY])?$/ })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Get out(?: · [^\s·]{1,3})?$/ })).toBeVisible();
 });

@@ -867,3 +867,23 @@ maintaining both shells. The shell import allow-list only shrinks.
     all four deferrals and the adapter's size. After the fix the six lab specs
     that touch lab canvases were re-run on a fresh build (24 passed).
     Re-review: ACCEPT.
+- 2026-11-08, cleanup before slice 3 (from the 2b notes):
+  - The car hint tests (`vehicle-placement`, `vehicle-paint-gameplay`,
+    `roadkill`) accept any short key label after "·", so the smoke suite no
+    longer fails on a Dvorak layout where the Keyboard Map labels physical E as
+    ".".
+  - `throwDirection` moved from `src/scenes/playThrow.ts` to
+    `src/input/throwDirection.ts`; `SeatComposer` no longer imports `scenes/`.
+  - Throw validation (finite values, force 0..1, unit direction) is one
+    `isValidThrow` in `RealmCommands`: `throwBall` drops invalid throws on every
+    path (game server, lab presses) and the lab command path still reports them.
+  - `LabInput.skip()` drops jump and horn presses and a charging throw while a
+    lab is paused or busy, or a physics pane is scripted (callers invoke it on
+    ticks they do not play), so they no longer fire on resume.
+    `SeatComposer.board()` documents that it precedes `tick()`.
+  - The spike's `tilefun_viewbench` Devkit title was deleted from the Steam Deck
+    (`steamos-delete`, plus its leftover launch files).
+  - Review (Yep Anywhere, Opus 5.5 high): ACCEPT. Optional findings taken: a
+    throw released during a pause no longer throws on resume, scripted physics
+    panes skip, and the hint pattern allows at most three characters (so a
+    broken label such as `undefined` still fails).

@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { Direction } from "../entities/Entity.js";
-import { throwDirection } from "./playThrow.js";
+import { throwDirection } from "./throwDirection.js";
 
 it("aims along movement, then the first-person look, then the sprite facing", () => {
   expect(throwDirection({ dx: 3, dy: 4 }, Direction.Left, { x: 1, y: 0 })).toEqual({
