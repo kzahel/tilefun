@@ -15,31 +15,37 @@ interface MemoryTransport {
 
 /**
  * Normal asynchronous startup, with one disposable flat world and memory storage.
- * Pass `MemoryConnections` for several device connections through the binary codec.
+ * Pass `MemoryConnections` for several device connections through the binary codec,
+ * and `worlds` for more flat worlds to travel to.
  */
 export async function memoryServer(): Promise<{ server: GameServer; transport: LocalTransport }>;
 export async function memoryServer<T extends MemoryTransport>(
   transport: T,
+  options?: { worlds?: readonly string[] },
 ): Promise<{ server: GameServer; transport: T }>;
-export async function memoryServer(transport: MemoryTransport = new LocalTransport()) {
-  const world: WorldMeta = {
-    id: "test",
-    name: "Test",
+export async function memoryServer(
+  transport: MemoryTransport = new LocalTransport(),
+  { worlds = [] }: { worlds?: readonly string[] } = {},
+) {
+  const flat = (id: string, name: string): WorldMeta => ({
+    id,
+    name,
     worldType: "flat",
     seed: 42,
     createdAt: 0,
     lastPlayedAt: 0,
     saveFormat: SAVE_FORMAT,
     generation: createDescriptor("flat", 42),
-  };
+  });
+  const metas = [flat("test", "Test"), ...worlds.map((id) => flat(id, id))];
   const registry: IWorldRegistry = {
     async open() {},
     close() {},
     async listWorlds() {
-      return [world];
+      return metas;
     },
     async getWorld(id) {
-      return id === world.id ? world : undefined;
+      return metas.find((world) => world.id === id);
     },
     async createWorld() {
       throw Error("Unexpected world creation");

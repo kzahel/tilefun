@@ -31,8 +31,8 @@ it incorrectly describes tick tiers as still wholly pending for today's code.
   Separation buckets only selected NPCs and uses each participant's effective
   dt for pair nudges; player penetration correction remains instantaneous.
 - Spatial queries also serve overlap checks and replication visibility.
-  [RealmReplicator](../src/server/RealmReplicator.ts) includes the controlled player
-  and mount even when outside its ordinary nearby query.
+  [ReplicationInterest](../src/server/ReplicationInterest.ts) includes each seat's
+  player and mount even when outside its ordinary nearby query.
 - [renderWorld](../src/scenes/renderWorld.ts) routes scene rendering; visibility
   filtering and depth ordering are presentation concerns, distinct from authority
   tick eligibility.

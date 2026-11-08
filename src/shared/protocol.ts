@@ -344,6 +344,14 @@ export interface FrameMessage {
   entityBaselines?: EntitySnapshot[];
   entityDeltas?: EntityDelta[];
   entityExits?: number[];
+  /** The entity each seat in this (connection, realm) stream controls, lowest seat first;
+   * present whenever the stream carries a guest (226). `playerEntityId` is the first's. */
+  seats?: FrameSeat[];
+}
+
+export interface FrameSeat {
+  seat: number;
+  entityId: number;
 }
 
 // ---- Sync events (on-change only — future reliable channel) ----

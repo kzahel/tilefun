@@ -95,6 +95,7 @@ import {
   savedRespawn,
 } from "./RealmPlayerRestore.js";
 import { RealmPropActivity } from "./RealmPropActivity.js";
+import { publishStreams, replicationStreams } from "./RealmPublication.js";
 import { RealmReplicator } from "./RealmReplicator.js";
 import { dismountPlayer, restoreSavedMount } from "./RealmRiding.js";
 import { resolveSimulationGameplay } from "./RealmSimulation.js";
@@ -828,57 +829,44 @@ export class Realm {
     dormantClientIds: ReadonlySet<string>,
     broadcasting: boolean,
   ) {
-    for (const horn of this.vehicles.takeHorns()) {
-      for (const session of this.sessions.values())
-        if (
-          !session.transitioning &&
-          !dormantClientIds.has(session.clientId) &&
-          Math.hypot(session.player.position.wx - horn.wx, session.player.position.wy - horn.wy) <
-            750
-        )
-          transport.send(session.clientId, horn);
-    }
-    // One stream per connection, its seat 0's (226: other seats ride in it as entities).
-    if (broadcasting) {
-      for (const session of [...this.sessions.values()].filter((s) => s.seat === 0)) {
-        if (dormantClientIds.has(session.clientId) || session.transitioning) continue;
-        // Check before building: replication advances this client's last-sent baseline.
-        if (transport.canSend && !transport.canSend(session.clientId)) continue;
-        const replicationTiming = performanceMetrics.start();
-        const messages = this.replicate(session.clientId);
-        performanceMetrics.end("server.replication", replicationTiming);
-        for (const msg of messages) {
-          transport.send(session.clientId, msg);
-        }
-      }
-    }
+    // One stream per (connection, realm), through its lowest live seat (226).
+    const streams = replicationStreams(
+      this.sessions.values(),
+      (s) => !s.transitioning && !dormantClientIds.has(s.clientId),
+    );
+    publishStreams(transport, streams, this.vehicles.takeHorns(), broadcasting ? this : undefined);
   }
 
-  /** Shared replication entry point for scheduled and manually stepped hosts. */
-  replicate(clientId: string) {
+  /** Shared replication entry point for scheduled and manually stepped hosts: the stream
+   * sent through `clientId`, with its connection's `others` seats here (226). */
+  replicate(clientId: string, others: readonly PlayerSession[] = []) {
     for (const session of this.sessions.values())
       session.player.jumpInputState =
         (session.jumpConsumed ? 1 : 0) | (session.lastJumpHeld ? 2 : 0);
     const scene = this.physicsScene;
     this.physics.synchronizeForPublication(this.sessions.values());
-    return this.replication.build(clientId, {
-      roomState: this.roomState,
-      world: this.world,
-      entityManager: this.entityManager,
-      propManager: this.propManager,
-      sessions: this.sessions,
-      tickCounter: this.tickCounter,
-      simulationTime: this.worldAPI.time,
-      tickRate: this.tickRate,
-      ...(scene
-        ? {
-            physicsSnapshot: (anchorId: number, visible: ReadonlySet<number>) =>
-              scene.snapshotAround(anchorId, visible),
-          }
-        : {}),
-      playerNamesRevision: this.playerNamesRevision,
-      editorCursorsRevision: this.editorCursorsRevision,
-    });
+    return this.replication.build(
+      clientId,
+      {
+        roomState: this.roomState,
+        world: this.world,
+        entityManager: this.entityManager,
+        propManager: this.propManager,
+        sessions: this.sessions,
+        tickCounter: this.tickCounter,
+        simulationTime: this.worldAPI.time,
+        tickRate: this.tickRate,
+        ...(scene ? { physicsSnapshot: scene.snapshotAround.bind(scene) } : {}),
+        playerNamesRevision: this.playerNamesRevision,
+        editorCursorsRevision: this.editorCursorsRevision,
+      },
+      others,
+    );
+  }
+
+  /** A seat's own session sync when it rides in another seat's stream. */
+  syncSeat(session: PlayerSession) {
+    return this.replication.seatSync(session, this.tickCounter, this.tickRate);
   }
 
   /** Load/unload chunks for the given visible range and compute autotile. */

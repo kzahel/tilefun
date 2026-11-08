@@ -1,4 +1,3 @@
-import { RENDER_DISTANCE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import type { PropManager } from "../entities/PropManager.js";
@@ -11,11 +10,16 @@ import type {
   ServerMessage,
   SyncChunksMessage,
 } from "../shared/protocol.js";
-import { reuseEntitySnapshot, serializeChunk, serializeProp } from "../shared/serialization.js";
+import { reuseEntitySnapshot, serializeProp } from "../shared/serialization.js";
 import type { World } from "../world/World.js";
-import type { PlayerSession } from "./PlayerSession.js";
-
-const BROADCAST_BUFFER_CHUNKS = 2;
+import { type PlayerSession, seatAddress } from "./PlayerSession.js";
+import {
+  interestChunks,
+  interestEntities,
+  interestProps,
+  StreamInterest,
+} from "./ReplicationInterest.js";
+import { createSeatSyncState, type SeatSyncState, seatSync } from "./SeatSync.js";
 
 interface ReplicationSource {
   readonly roomState?: import("../interiors/GameplayRoom.js").GameplayRoomState | null;
@@ -25,8 +29,9 @@ interface ReplicationSource {
   readonly sessions: ReadonlyMap<string, PlayerSession>;
   readonly tickCounter: number;
   readonly simulationTime?: number;
+  /** Prediction context around one anchor per seat in the stream. */
   readonly physicsSnapshot?: (
-    anchorId: number,
+    anchorIds: readonly number[],
     visible: ReadonlySet<number>,
   ) => import("../physics/PhysicsState.js").PhysicsState;
   readonly tickRate: number;
@@ -34,14 +39,15 @@ interface ReplicationSource {
   readonly editorCursorsRevision: number;
 }
 
-/** Per-client delta tracking — stores last-sent values to avoid resending unchanged fields. */
-interface ClientDeltaState {
-  // Scalars — last-sent value (sentinel forces full first send)
-  gemsCollected: number;
-  /** Last observed server-side timer, used to detect invincibility starts/resets. */
-  invincibilityTimer: number;
-  editorEnabled: boolean;
-  mountEntityId: number | null;
+/**
+ * Per-stream delta tracking (226: one stream per connection in a realm) — stores
+ * last-sent values to avoid resending unchanged fields.
+ */
+interface StreamDeltaState {
+  /** The seat the stream goes through; a new one is a new replica on the device. */
+  address: string;
+  /** Each seat's own session sync, by session id. */
+  seats: Map<string, SeatSyncState>;
 
   // Objects — last-sent revision counter
   roomRevision: number;
@@ -61,12 +67,10 @@ interface ClientDeltaState {
   lastSentEntities: Map<number, EntitySnapshot>;
 }
 
-function createClientDeltaState(): ClientDeltaState {
+function createStreamDeltaState(address: string): StreamDeltaState {
   return {
-    gemsCollected: -1,
-    invincibilityTimer: -1,
-    editorEnabled: false, // will differ from true default → forces first send
-    mountEntityId: -2 as number | null, // impossible entity ID → forces first send
+    address,
+    seats: new Map(),
     roomRevision: -2,
     propRevision: -1,
     propRangeKey: "",
@@ -79,193 +83,149 @@ function createClientDeltaState(): ClientDeltaState {
   };
 }
 
-/** Owns per-client baselines and translates live realm state into protocol messages. */
+/** Owns per-stream baselines and translates live realm state into protocol messages. */
 export class RealmReplicator {
-  private readonly clientDeltaStates = new Map<string, ClientDeltaState>();
+  /** One stream per connection with seats in this realm, keyed by connection id. */
+  private readonly streams = new Map<string, StreamDeltaState>();
   // Object identity prevents recycled IDs from borrowing another actor's state.
   // Weak keys release actors after despawn; each build checks live wire values,
   // including edits made between two clients' builds within the same tick.
   private snapshots = new WeakMap<Entity, EntitySnapshot>();
 
+  /**
+   * Force a full re-send for a seat: the whole stream when it goes through that seat (its
+   * replica is cleared with it), otherwise only that seat's own session sync.
+   */
   clearClient(clientId: string): void {
-    this.clientDeltaStates.delete(clientId);
+    const { connectionId } = seatAddress(clientId);
+    const stream = this.streams.get(connectionId);
+    if (stream?.address === clientId) this.streams.delete(connectionId);
+    else stream?.seats.delete(clientId);
   }
 
   clear(): void {
-    this.clientDeltaStates.clear();
+    this.streams.clear();
     this.snapshots = new WeakMap();
   }
 
-  build(clientId: string, source: ReplicationSource): ServerMessage[] {
+  /**
+   * The stream sent through `clientId` (226: its connection's lowest live seat here): the
+   * frame, that seat's own sync and the realm's shared sync. `others` are the connection's
+   * other seats in the stream; their own sync comes from `seatSync`.
+   */
+  build(
+    clientId: string,
+    source: ReplicationSource,
+    others: readonly PlayerSession[] = [],
+  ): ServerMessage[] {
     const session = source.sessions.get(clientId);
     if (!session) throw new Error(`No session for ${clientId}`);
-
-    // Get or create per-client delta state (sentinels force full first send)
-    let delta = this.clientDeltaStates.get(clientId);
-    if (!delta) {
-      delta = createClientDeltaState();
-      this.clientDeltaStates.set(clientId, delta);
-    }
-    const revisions = delta.chunkRevisions;
-
-    // Collect loaded chunk keys and build delta updates.
-    // Collision context must cover the same interest as actors/props. A narrow
-    // viewport can include a whole train whose leading carriage is outside the
-    // render buffer; unknown terrain there would falsely block private replay.
-    // Only send already-ready terrain, never load chunks for replication.
-    const range = session.visibleRange;
-    const chunkBuf = Math.max(RENDER_DISTANCE, BROADCAST_BUFFER_CHUNKS);
-    const cMinCx = range.minCx - chunkBuf;
-    const cMaxCx = range.maxCx + chunkBuf;
-    const cMinCy = range.minCy - chunkBuf;
-    const cMaxCy = range.maxCy + chunkBuf;
-
-    const loadedChunkKeys: string[] = [];
-    const chunkUpdates = [];
-    for (const [key, chunk] of source.world.chunks.entries()) {
-      const commaIdx = key.indexOf(",");
-      const cx = Number(key.slice(0, commaIdx));
-      const cy = Number(key.slice(commaIdx + 1));
-      if (cx < cMinCx || cx > cMaxCx || cy < cMinCy || cy > cMaxCy) continue;
-      loadedChunkKeys.push(key);
-      const lastRev = revisions.get(key) ?? -1;
-      if (chunk.revision > lastRev) {
-        chunkUpdates.push(serializeChunk(cx, cy, chunk));
-        revisions.set(key, chunk.revision);
-      }
-    }
-
-    // Clean up revisions for chunks no longer in this session's range
-    for (const key of revisions.keys()) {
-      const ci = key.indexOf(",");
-      const kcx = Number(key.slice(0, ci));
-      const kcy = Number(key.slice(ci + 1));
-      if (kcx < cMinCx || kcx > cMaxCx || kcy < cMinCy || kcy > cMaxCy) {
-        revisions.delete(key);
-      }
-    }
-
-    // Filter entities to those near the player's viewport
-    const buf = BROADCAST_BUFFER_CHUNKS;
-    const nearbyEntities = source.entityManager.spatialHash.queryRange(
-      range.minCx - buf,
-      range.minCy - buf,
-      range.maxCx + buf,
-      range.maxCy + buf,
+    const seats: [PlayerSession, ...PlayerSession[]] = [session, ...others];
+    const delta = this.stream(session);
+    const interest = new StreamInterest(seats.map((seat) => seat.visibleRange));
+    const nearby = interestEntities(
+      source.entityManager,
+      interest,
+      source.sessions.values(),
+      seats,
     );
-    // Co-op location markers need live players even outside viewport interest.
-    // Sessions are realm-local, so players in other realms remain private.
-    for (const other of source.sessions.values()) {
-      if (!nearbyEntities.includes(other.player)) nearbyEntities.push(other.player);
-    }
-    // Ensure the player entity is always included
-    if (!nearbyEntities.includes(session.player)) {
-      nearbyEntities.push(session.player);
-    }
-    // Ensure the mount entity is always included when riding
-    if (session.gameplaySession.mountId !== null) {
-      const mount = source.entityManager.entities.find(
-        (e) => e.id === session.gameplaySession.mountId,
-      );
-      if (mount && !nearbyEntities.includes(mount)) {
-        nearbyEntities.push(mount);
-      }
-    }
+    const frame = this.frame(seats, source, nearby, delta.lastSentEntities);
+    return [
+      frame,
+      ...this.seatSync(session, source.tickCounter, source.tickRate),
+      ...this.sharedSync(session, source, interest, delta),
+    ];
+  }
 
-    // Entity delta compression: baselines for new, deltas for changed, exits for removed
-    const lastSent = delta.lastSentEntities;
+  /** A seat's own session sync; its stream must have been built this tick. */
+  seatSync(session: PlayerSession, tickCounter: number, tickRate: number): ServerMessage[] {
+    const stream = this.streams.get(session.connectionId);
+    if (!stream) throw Error(`No stream for ${session.clientId}`);
+    let state = stream.seats.get(session.clientId);
+    if (!state) {
+      state = createSeatSyncState();
+      stream.seats.set(session.clientId, state);
+    }
+    return seatSync(session, state, tickCounter, tickRate);
+  }
+
+  private stream(address: PlayerSession): StreamDeltaState {
+    let stream = this.streams.get(address.connectionId);
+    // A different lowest seat is a different replica on the device: start over.
+    if (stream?.address !== address.clientId) {
+      stream = createStreamDeltaState(address.clientId);
+      this.streams.set(address.connectionId, stream);
+    }
+    return stream;
+  }
+
+  /** Entity baselines for new actors, deltas for changed ones and exits for departed ones. */
+  private frame(
+    seats: readonly [PlayerSession, ...PlayerSession[]],
+    source: ReplicationSource,
+    nearby: readonly Entity[],
+    lastSent: Map<number, EntitySnapshot>,
+  ): FrameMessage {
+    const [session] = seats;
     const currentEntityIds = new Set<number>();
     const entityBaselines: EntitySnapshot[] = [];
     const entityDeltas: EntityDelta[] = [];
-
-    for (const entity of nearbyEntities) {
+    for (const entity of nearby) {
       const snapshot = reuseEntitySnapshot(entity, this.snapshots.get(entity));
       this.snapshots.set(entity, snapshot);
       currentEntityIds.add(entity.id);
       const prev = lastSent.get(entity.id);
-      if (!prev) {
-        // New entity — send full baseline
-        entityBaselines.push(snapshot);
-      } else if (prev !== snapshot) {
-        // Known entity — diff and send delta if changed
+      if (!prev) entityBaselines.push(snapshot);
+      else if (prev !== snapshot) {
         const d = diffEntitySnapshots(prev, snapshot);
         if (d) entityDeltas.push(d);
       }
       lastSent.set(entity.id, snapshot);
     }
-
-    // Find entities that left visibility (were in lastSent but not in current nearby set)
     const entityExits: number[] = [];
-    for (const id of lastSent.keys()) {
+    for (const id of lastSent.keys())
       if (!currentEntityIds.has(id)) {
         entityExits.push(id);
         lastSent.delete(id);
       }
-    }
 
-    // -- Build messages array: frame first, then sync events --
-    const messages: ServerMessage[] = [];
-
-    // Frame message (always sent every tick)
     const frame: FrameMessage = {
       type: "frame",
       serverTick: source.tickCounter,
       ...(source.simulationTime !== undefined ? { simulationTime: source.simulationTime } : {}),
+      // One acknowledgement per stream: its seats share the device's input timeline.
       lastProcessedInputSeq: session.lastProcessedInputSeq,
       playerEntityId: session.player.id,
     };
-    const anchor = session.player.parentId ?? session.player.id;
-    if (source.physicsSnapshot) frame.physics = source.physicsSnapshot(anchor, currentEntityIds);
+    if (seats.length > 1 || session.seat !== 0)
+      frame.seats = seats.map((seat) => ({ seat: seat.seat, entityId: seat.player.id }));
+    const anchors = seats.map((seat) => seat.player.parentId ?? seat.player.id);
+    if (source.physicsSnapshot) frame.physics = source.physicsSnapshot(anchors, currentEntityIds);
     if (entityBaselines.length > 0) frame.entityBaselines = entityBaselines;
     if (entityDeltas.length > 0) frame.entityDeltas = entityDeltas;
     if (entityExits.length > 0) frame.entityExits = entityExits;
-    messages.push(frame);
+    return frame;
+  }
 
-    // Sync: session scalars (gems, editor, mount)
-    const gems = session.gameplaySession.gemsCollected;
-    const invTimer = session.gameplaySession.invincibilityTimer;
-    const currentMount = session.gameplaySession.mountId;
-    const sessionDirty =
-      gems !== delta.gemsCollected ||
-      session.editorEnabled !== delta.editorEnabled ||
-      currentMount !== delta.mountEntityId;
-    if (sessionDirty) {
-      messages.push({
-        type: "sync-session",
-        gemsCollected: gems,
-        editorEnabled: session.editorEnabled,
-        mountEntityId: currentMount,
-      });
-      delta.gemsCollected = gems;
-      delta.editorEnabled = session.editorEnabled;
-      delta.mountEntityId = currentMount;
-    }
-
-    // Sync: invincibility event (start/reset only, countdown reconstructed client-side)
-    const invincibilityStarted =
-      invTimer > 0 && (delta.invincibilityTimer <= 0 || invTimer > delta.invincibilityTimer);
-    if (invincibilityStarted) {
-      messages.push({
-        type: "sync-invincibility",
-        startTick: source.tickCounter,
-        durationTicks: Math.max(1, Math.ceil(invTimer * source.tickRate)),
-      });
-    }
-    delta.invincibilityTimer = invTimer;
-
-    // Sync: chunks (keys and/or data)
-    loadedChunkKeys.sort();
-    const keysJoined = loadedChunkKeys.join(";");
+  /** Terrain, room, props, names, editor cursors and cvars, each when it changed. */
+  private sharedSync(
+    session: PlayerSession,
+    source: ReplicationSource,
+    interest: StreamInterest,
+    delta: StreamDeltaState,
+  ): ServerMessage[] {
+    const messages: ServerMessage[] = [];
+    const chunks = interestChunks(source.world, interest, delta.chunkRevisions);
+    chunks.loadedChunkKeys.sort();
+    const keysJoined = chunks.loadedChunkKeys.join(";");
     const chunkKeysDirty = keysJoined !== delta.loadedChunkKeysJoined;
-    if (chunkKeysDirty || chunkUpdates.length > 0) {
+    if (chunkKeysDirty || chunks.chunkUpdates.length > 0) {
       const syncChunks: SyncChunksMessage = { type: "sync-chunks" };
       if (chunkKeysDirty) {
-        syncChunks.loadedChunkKeys = loadedChunkKeys;
+        syncChunks.loadedChunkKeys = chunks.loadedChunkKeys;
         delta.loadedChunkKeysJoined = keysJoined;
       }
-      if (chunkUpdates.length > 0) {
-        syncChunks.chunkUpdates = chunkUpdates;
-      }
+      if (chunks.chunkUpdates.length > 0) syncChunks.chunkUpdates = chunks.chunkUpdates;
       messages.push(syncChunks);
     }
 
@@ -275,58 +235,48 @@ export class RealmReplicator {
       delta.roomRevision = roomRevision;
     }
 
-    // Sync: props
-    const propRangeKey = `${range.minCx - buf},${range.minCy - buf},${range.maxCx + buf},${range.maxCy + buf}`;
-    if (source.propManager.revision !== delta.propRevision || propRangeKey !== delta.propRangeKey) {
-      const nearbyProps = source.propManager.getPropsInChunkRange(
-        range.minCx - buf,
-        range.minCy - buf,
-        range.maxCx + buf,
-        range.maxCy + buf,
-      );
-      messages.push({ type: "sync-props", props: nearbyProps.map(serializeProp) });
+    if (source.propManager.revision !== delta.propRevision || interest.key !== delta.propRangeKey) {
+      const props = interestProps(source.propManager, interest);
+      messages.push({ type: "sync-props", props: props.map(serializeProp) });
       delta.propRevision = source.propManager.revision;
-      delta.propRangeKey = propRangeKey;
+      delta.propRangeKey = interest.key;
     }
 
-    // Sync: playerNames
     if (source.playerNamesRevision !== delta.playerNamesRevision) {
       const playerNames: Record<number, string> = {};
-      for (const [, other] of source.sessions) {
-        playerNames[other.player.id] = other.displayName;
-      }
+      for (const [, other] of source.sessions) playerNames[other.player.id] = other.displayName;
       messages.push({ type: "sync-player-names", playerNames });
       delta.playerNamesRevision = source.playerNamesRevision;
     }
 
-    // Sync: editorCursors
     if (source.editorCursorsRevision !== delta.editorCursorsRevision) {
-      const editorCursors: RemoteEditorCursor[] = [];
-      for (const [otherId, other] of source.sessions) {
-        if (otherId === clientId || !other.editorEnabled || !other.editorCursor) continue;
-        editorCursors.push({
-          displayName: other.displayName,
-          color: other.cursorColor,
-          tileX: other.editorCursor.tileX,
-          tileY: other.editorCursor.tileY,
-          editorTab: other.editorCursor.editorTab,
-          brushMode: other.editorCursor.brushMode,
-        });
-      }
-      messages.push({ type: "sync-editor-cursors", editorCursors });
+      messages.push({ type: "sync-editor-cursors", editorCursors: editorCursors(session, source) });
       delta.editorCursorsRevision = source.editorCursorsRevision;
     }
 
-    // Sync: cvars
     const cvarsRev = getGravityRevision();
     if (cvarsRev !== delta.cvarsRevision) {
-      messages.push({
-        type: "sync-cvars",
-        cvars: { gravity: getGravityScale() },
-      });
+      messages.push({ type: "sync-cvars", cvars: { gravity: getGravityScale() } });
       delta.cvarsRevision = cvarsRev;
     }
-
     return messages;
   }
+}
+
+/** Other devices' editor cursors; a device's own seats are local to it. */
+function editorCursors(session: PlayerSession, source: ReplicationSource): RemoteEditorCursor[] {
+  const cursors: RemoteEditorCursor[] = [];
+  for (const other of source.sessions.values()) {
+    if (other.connectionId === session.connectionId || !other.editorEnabled || !other.editorCursor)
+      continue;
+    cursors.push({
+      displayName: other.displayName,
+      color: other.cursorColor,
+      tileX: other.editorCursor.tileX,
+      tileY: other.editorCursor.tileY,
+      editorTab: other.editorCursor.editorTab,
+      brushMode: other.editorCursor.brushMode,
+    });
+  }
+  return cursors;
 }

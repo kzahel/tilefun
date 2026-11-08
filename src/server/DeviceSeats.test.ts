@@ -1,77 +1,29 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { TILE_SIZE } from "../config/constants.js";
-import { devicePacket, type SeatCommand } from "../input/SeatComposer.js";
+import { devicePacket } from "../input/SeatComposer.js";
 import { DeviceTransport } from "./DeviceTransport.js";
-import type { GameServer } from "./GameServer.js";
-import { type PlayerSession, seatSessionId } from "./PlayerSession.js";
 import { Realm } from "./Realm.js";
+import {
+  join,
+  play,
+  remote,
+  sessionOf,
+  start,
+  step,
+  stopDevices,
+  where,
+} from "./test/DeviceHarness.js";
 import { MemoryConnections } from "./test/MemoryConnections.js";
-import { memoryServer } from "./test/MemoryServer.js";
 
 // Server seats (226 slice 4b-i): several local players on one device connection, end to
 // end through the binary codec. Seat 0 is the connection's own player; the others are
 // its guests.
 
-const servers: GameServer[] = [];
 afterEach(async () => {
   vi.useRealTimers();
   vi.restoreAllMocks();
-  for (const server of servers.splice(0)) await server.destroy();
+  await stopDevices();
 });
-
-async function start() {
-  const { server, transport } = await memoryServer(new MemoryConnections());
-  servers.push(server);
-  return { server, transport, host: server.getLocalSession() };
-}
-
-type Device = Awaited<ReturnType<typeof start>>;
-
-function sessionOf(server: GameServer, id: string): PlayerSession | undefined {
-  return [...server.getSessions()].find((session) => session.clientId === id);
-}
-
-/** Join a guest seat and return its session once the arrival settles. */
-async function join(
-  { server, transport }: Device,
-  seat: number,
-  connection = "local",
-  options: { displayName?: string; playerModel?: string } = {},
-) {
-  transport.send(connection, { type: "join-seat", requestId: 100 + seat, seat, ...options });
-  await server.settle();
-  return sessionOf(server, seatSessionId(connection, seat));
-}
-
-/** A remote device that joined the test world and plays (editor off). */
-async function remote({ server, transport }: Device, id: string) {
-  transport.connect(id);
-  await server.settle();
-  transport.send(id, { type: "join-realm", requestId: 1, worldId: "test" });
-  await server.settle();
-  transport.send(id, { type: "set-editor-mode", enabled: false });
-  const session = sessionOf(server, id);
-  if (!session?.realmId) throw Error(`${id} did not join the world`);
-  return session;
-}
-
-const step = (dx: number, dy: number) => ({ dx, dy, sprinting: false, jump: false });
-
-/** Send one device packet per tick, for sequences `from` through `to`. */
-function play(
-  { server, transport }: Device,
-  connection: string,
-  from: number,
-  to: number,
-  seats: () => SeatCommand[],
-) {
-  for (let seq = from; seq <= to; seq++) {
-    transport.send(connection, devicePacket(seq, seats()).input);
-    server.tick(1 / 60);
-  }
-}
-
-const where = (session: PlayerSession) => ({ ...session.player.position });
 
 describe("server seats on one device connection", () => {
   it("seats a guest of seat 0 beside it, in its realm, without a profile", async () => {
@@ -552,23 +504,6 @@ describe("server seats on one device connection", () => {
     await server.settle();
     expect([...server.getSessions()].map((session) => session.clientId)).toEqual(["local"]);
     expect(await join(device, 1)).toMatchObject({ connectionId: "local", seat: 1 });
-  });
-
-  it("keeps one frame stream per connection; guests ride in seat 0's", async () => {
-    const device = await start();
-    const { server, transport, host } = device;
-    const guest = await join(device, 1);
-    server.broadcasting = true;
-    server.tick(1 / 60);
-    server.tick(1 / 60);
-
-    const frames = transport.messages("local", "frame");
-    expect(frames.length).toBeGreaterThan(0);
-    expect(frames.every((frame) => frame.playerEntityId === host.player.id)).toBe(true);
-    expect(frames.some((f) => f.entityBaselines?.some((e) => e.id === guest?.player.id))).toBe(
-      true,
-    );
-    expect(transport.messages("local", "seat")).toEqual([]);
   });
 
   it("asks the device's connection whether a seat can be sent to", () => {

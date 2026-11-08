@@ -24,7 +24,7 @@ uses normal ScenarioSession/Worker authority and one normal predictor per pane.
 | [PlayerPredictor](../src/client/PlayerPredictor.ts) | Bounded coupled-body prediction and fixed-tick input replay |
 | [GameServer](../src/server/GameServer.ts) | Connections, world management and active realms |
 | [Realm](../src/server/Realm.ts) | Simulation, editing, generated residency and persistence |
-| [RealmReplicator](../src/server/RealmReplicator.ts) | Per-client baselines and frame/sync message construction |
+| [RealmReplicator](../src/server/RealmReplicator.ts) | Per-connection stream baselines and frame/sync message construction |
 | [RealmTransitions](../src/server/RealmTransitions.ts) | Guarded player transfer, persistence recovery and baseline reset |
 | [WorldAPI](../src/server/WorldAPI.ts) | Trusted gameplay API and per-realm services |
 
@@ -105,8 +105,19 @@ slice 4b-i; no client seats them yet).
   - A disconnect makes every seat dormant.
 - **Joining and leaving:** [DeviceConnections](../src/server/DeviceConnections.ts)
   owns the connection lifecycle and `join-seat`/`leave-seat`.
-- **Replication:** each connection still has one frame stream, seat 0's; the
-  other seats appear in it as entities until 226 slice 4b-ii.
+- **Replication** ([RealmPublication](../src/server/RealmPublication.ts)): a realm
+  sends one stream per connection with a live seat in it. The stream goes
+  through that connection's lowest live seat there: bare for seat 0, otherwise
+  in the guest's envelope.
+  - The stream has one acknowledgement.
+  - Its frames list each seat's entity (`seats`) whenever it carries a guest.
+  - Its interest is the seats' visible ranges as a list of rectangles
+    ([ReplicationInterest](../src/server/ReplicationInterest.ts)).
+  - Its physics snapshot is anchored on every seat
+    ([PredictionSelection](../src/physics/PredictionSelection.ts)).
+  - Each seat's own session sync goes to that seat.
+  - The replicator keeps baselines per connection. A new lowest seat starts the
+    stream over.
 
 [RequestBroker](../src/client/RequestBroker.ts) correlates request IDs with the
 response mapping in [requests.ts](../src/shared/requests.ts), checks response

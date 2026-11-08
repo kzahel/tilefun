@@ -21,13 +21,15 @@ import {
   coopScript,
 } from "../scenarios/CoopRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
-import { decodeServerMessage } from "../shared/binaryCodec.js";
+import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import type { Movement } from "../shared/Movement.js";
+import type { ServerMessage } from "../shared/protocol.js";
 import { World } from "../world/World.js";
 import { RemoteStateView } from "./ClientStateView.js";
 import { PlayerPredictor } from "./PlayerPredictor.js";
 
-type Mode = "two" | "one";
+/** "anchored": as "one", but seat 0's stream snapshot is anchored on both seats (4b-ii). */
+type Mode = "two" | "one" | "anchored";
 type Pose = { x: number; y: number; z: number };
 interface Delays {
   input: (tick: number) => number;
@@ -121,11 +123,22 @@ async function run(scene: CoopCase, mode: Mode, delays: Delays, guestOffset = 0)
     await s.command({ kind: "enter-vehicle", entityId: car, seat: 0 });
   }
   s.tick();
+  // The lab guest is its own connection, so only the two-anchor snapshot is borrowed
+  // from a device stream here; its seat list (two seat 0s) stays off the wire.
+  const unseated = (m: ServerMessage): ServerMessage => {
+    if (m.type !== "frame") return m;
+    const { seats: _seats, ...frame } = m;
+    return frame;
+  };
+  const hostFrames = () =>
+    mode === "anchored"
+      ? s.realm.replicate(s.player.clientId, [guest]).map((m) => encodeServerMessage(unseated(m)))
+      : s.frames();
   let now = 0;
   const clock = () => now;
   const host = await client(clock);
   const second = mode === "two" ? await client(clock) : undefined;
-  receive(host, s.frames(), now);
+  receive(host, hostFrames(), now);
   if (second) receive(second, s.takeGuestFrames(), now);
   else s.takeGuestFrames();
 
@@ -203,7 +216,7 @@ async function run(scene: CoopCase, mode: Mode, delays: Delays, guestOffset = 0)
     now += PHYSICS_DT;
     const moves: [Movement, Movement] = [script(scene, tick, 0), script(scene, tick, 1)];
     const started = performance.now();
-    if (mode === "one") {
+    if (mode !== "two") {
       host.predictor.storeInput(tick, moves[0], PHYSICS_DT, new Map([[ids[1], moves[1]]]));
       host.predictor.update(PHYSICS_DT, moves[0], host.view.world, host.view.props, []);
     } else if (second) {
@@ -235,13 +248,13 @@ async function run(scene: CoopCase, mode: Mode, delays: Delays, guestOffset = 0)
       });
     }
     s.tick();
-    const hostFrames = s.frames(),
+    const fromHost = hostFrames(),
       guestFrames = s.takeGuestFrames();
-    recordTruth(hostFrames);
+    recordTruth(fromHost);
     recordTruth(guestFrames);
     result.acksEqual &&= s.player.lastProcessedInputSeq === guest.lastProcessedInputSeq;
     frameAt = Math.max(frameAt, tick + delays.frame(tick));
-    deliveries.push({ at: frameAt, host: hostFrames, guest: guestFrames });
+    deliveries.push({ at: frameAt, host: fromHost, guest: guestFrames });
     while (deliveries[0] && deliveries[0].at <= tick) {
       const item = deliveries.shift();
       if (!item) break;
@@ -251,7 +264,7 @@ async function run(scene: CoopCase, mode: Mode, delays: Delays, guestOffset = 0)
       result.ms += performance.now() - t0;
       const bodies = host.view.physicsState?.bodies;
       if (bodies && !bodies.some((b) => b.id === ids[1])) result.guestInHostSnapshot = false;
-      observe(host, mode === "one" ? "both" : 0);
+      observe(host, mode === "two" ? 0 : "both");
       if (second) observe(second, 1);
     }
     sample(0, host);
@@ -338,6 +351,30 @@ describe("multi-seat prediction spike (226 slice 1a)", () => {
       // One replay serves both seats (by construction: both modes share acks).
       expect(one.replaySteps).toBeLessThanOrEqual(two.replaySteps * 0.55);
     }
+    console.table(rows);
+  });
+
+  it("predicts every seat on every tick from one snapshot anchored on both seats (4b-ii)", async () => {
+    const rows = [];
+    for (const [scene, offset] of [
+      ...COOP_CASES.map((c) => [c, 0] as const),
+      ["push", 400] as const,
+    ])
+      for (const [delay, delays] of [
+        ["remote", REMOTE],
+        ["local", LOCAL],
+      ] as const) {
+        const label = offset ? `${scene}+${offset}px` : scene;
+        const two = await run(scene, "two", delays, offset);
+        const anchored = await run(scene, "anchored", delays, offset);
+        rows.push(row(label, "two", delay, two), row(label, "anchored", delay, anchored));
+        expect(anchored.acksEqual).toBe(true);
+        expect(anchored.guestInHostSnapshot).toBe(true);
+        expect([...anchored.statuses]).toEqual([]);
+        expect(anchored.seats.map((seat) => seat.unpredicted)).toEqual([0, 0]);
+        expect(anchored.crossView).toBe(0);
+        expect(anchored.replaySteps).toBeLessThanOrEqual(two.replaySteps * 0.55);
+      }
     console.table(rows);
   });
 

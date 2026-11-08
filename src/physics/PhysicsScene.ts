@@ -41,14 +41,13 @@ export interface PhysicsGeometry extends CollisionGeometrySource {
 }
 export type { PhysicsBodyKind, PhysicsBodyState, PhysicsState } from "./PhysicsState.js";
 
-import {
-  MAX_PREDICTION_BODIES,
-  type MotionIntent,
-  type PhysicsBodyKind,
-  type PhysicsBodyState,
-  type PhysicsState,
-  PREDICTION_RADIUS,
+import type {
+  MotionIntent,
+  PhysicsBodyKind,
+  PhysicsBodyState,
+  PhysicsState,
 } from "./PhysicsState.js";
+import { selectAround } from "./PredictionSelection.js";
 
 let nextSceneEpoch = 1;
 
@@ -887,68 +886,16 @@ export class PhysicsScene {
     return this.bodies.get(id)?.state;
   }
 
-  /** Keep the anchor's contact graph, then nearby bodies, with an explicit cap.
-   * Reads cached numerical states; never serializes or copies a WASM world.
+  /** Keep each anchor's contact graph, then nearby bodies, with an explicit cap: one
+   * anchor per local seat (226). Reads cached numerical states; never copies a WASM world.
    */
-  snapshotAround(anchorId: number, visible: ReadonlySet<number>): PhysicsState {
-    const anchor = this.bodies.get(anchorId);
-    if (!anchor)
-      return { epoch: this.epoch, tick: this.tick, omitted: 0, bodies: [], contacts: [] };
-    const selected = new Map<number, Body>();
-    const required = new Set<number>();
-    const queue = [anchorId];
-    for (let i = 0; i < queue.length; i++) {
-      const id = queue[i];
-      if (id === undefined || required.has(id) || !this.bodies.has(id)) continue;
-      required.add(id);
-      for (const neighbor of this.contacts.get(id) ?? [])
-        if (!required.has(neighbor)) queue.push(neighbor);
-      const support = this.bodies.get(id)?.state.supportId;
-      if (support !== undefined && !required.has(support)) queue.push(support);
-    }
-    const candidates: { id: number; distance: number }[] = [];
-    const groups = new Set<number>();
-    for (const [id, entry] of this.bodies) {
-      const half =
-        Math.hypot(entry.entity.collider?.width ?? 0, entry.entity.collider?.height ?? 0) / 2;
-      const distance = Math.hypot(
-        entry.entity.position.wx - anchor.entity.position.wx,
-        entry.entity.position.wy - anchor.entity.position.wy,
-      );
-      if (distance <= PREDICTION_RADIUS + half || required.has(id)) {
-        candidates.push({ id, distance });
-        if (entry.entity.physicsGroupId !== undefined) groups.add(entry.entity.physicsGroupId);
-      }
-    }
-    // A prescribed consist is one coherent prediction dependency even when its
-    // distant end lies outside the local radius or has no solved contact pair.
-    if (groups.size) {
-      const candidateIds = new Set(candidates.map((c) => c.id));
-      for (const [id, entry] of this.bodies)
-        if (entry.entity.physicsGroupId !== undefined && groups.has(entry.entity.physicsGroupId)) {
-          required.add(id);
-          if (!candidateIds.has(id))
-            candidates.push({
-              id,
-              distance: Math.hypot(entry.state.x - anchor.state.x, entry.state.y - anchor.state.y),
-            });
-        }
-    }
-    candidates.sort(
-      (a, b) =>
-        Number(required.has(b.id)) - Number(required.has(a.id)) ||
-        a.distance - b.distance ||
-        a.id - b.id,
-    );
-    for (const { id } of candidates)
-      if (visible.has(id) && selected.size < MAX_PREDICTION_BODIES) {
-        const entry = this.bodies.get(id);
-        if (entry) selected.set(id, entry);
-      }
+  snapshotAround(anchors: number | readonly number[], visible: ReadonlySet<number>): PhysicsState {
+    const ids = typeof anchors === "number" ? [anchors] : anchors;
+    const { selected, omitted } = selectAround(this.bodies, this.contacts, ids, visible);
     return {
       epoch: this.epoch,
       tick: this.tick,
-      omitted: candidates.length - selected.size,
+      omitted,
       bodies: [...selected.values()].map((entry) => this.copyBodyState(entry)),
       contacts: this.copyContacts(selected),
     };

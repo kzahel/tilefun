@@ -110,6 +110,29 @@ describe("RemoteStateView", () => {
     expect(view.playerEntity.id).toBe(1);
   });
 
+  it("accepts a device stream's seat list without using it yet (226 slice 4b-ii)", () => {
+    const frame = makeFrame({
+      entityBaselines: [makeTestEntity(1, 50, 75), makeTestEntity(2, 100, 200)],
+      playerEntityId: 1,
+      lastProcessedInputSeq: 4,
+    });
+    const plain = new RemoteStateView(new World(new FlatStrategy()));
+    const seated = new RemoteStateView(new World(new FlatStrategy()));
+    plain.applyFrame(frame);
+    seated.applyFrame({
+      ...frame,
+      seats: [
+        { seat: 0, entityId: 1 },
+        { seat: 1, entityId: 2 },
+      ],
+    });
+    for (const view of [plain, seated]) {
+      expect(view.entities.map((e) => e.id)).toEqual([1, 2]);
+      expect(view.playerEntity.id).toBe(1);
+      expect(view.lastProcessedInputSeq).toBe(4);
+    }
+  });
+
   it("applies entity deltas to existing entities", () => {
     const world = new World(new FlatStrategy());
     const view = new RemoteStateView(world);

@@ -378,9 +378,9 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 1042,
+      "lines": 989,
       "worst": 79,
-      "overLimit": 7
+      "overLimit": 6
     },
     "src/physics/rapier/ClippedTerrain.ts": {
       "lines": 75,
@@ -628,7 +628,7 @@
       "overLimit": 1
     },
     "src/server/Realm.ts": {
-      "lines": 1356,
+      "lines": 1344,
       "worst": 0,
       "overLimit": 0
     },
@@ -640,11 +640,6 @@
     "src/server/RealmPropActivity.ts": {
       "lines": 90,
       "worst": 30,
-      "overLimit": 1
-    },
-    "src/server/RealmReplicator.ts": {
-      "lines": 332,
-      "worst": 65,
       "overLimit": 1
     },
     "src/server/RealmStreaming.ts": {

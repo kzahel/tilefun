@@ -32,9 +32,9 @@ export interface DeviceConnectionsDeps {
 type JoinSeat = Extract<ClientMessage, { type: "join-seat" }>;
 
 /** Clients restart their input sequence on every connection. */
-function resetInput(session: PlayerSession): void {
-  session.lastProcessedInputSeq = 0;
-  session.controls.reset(0);
+function resetInput(session: PlayerSession, seq = 0): void {
+  session.lastProcessedInputSeq = seq;
+  session.controls.reset(seq);
   session.inputQueue = [];
 }
 
@@ -82,8 +82,12 @@ export class DeviceConnections {
     if (msg.playerModel !== undefined) session.playerModel = normalizePlayerModel(msg.playerModel);
     session.debugPaused = host.debugPaused;
     if (kind === "rejoin" && session.realmId) {
-      resetInput(session);
+      // The returning device's one timeline: seat 0's sequence, not the old connection's.
+      resetInput(session, host.lastProcessedInputSeq);
       applyPlayerModel(session.player, session.playerModel);
+      // Its client holds nothing for this seat yet: restart a stream sent through it, or
+      // resend its own session sync in seat 0's.
+      this.deps.realms.get(session.realmId)?.clearClientRevisions(session.clientId);
       return session;
     }
     try {

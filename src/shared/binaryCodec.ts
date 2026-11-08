@@ -2,7 +2,7 @@
  * Binary protocol codec — replaces JSON.stringify/parse for hot-path messages.
  *
  * Message type tags:
- *   0x16 = FrameMessage (vehicle rotation, equipment and couplings, prescribed groups, momentum and solved pairs) (server→client)
+ *   0x16 = FrameMessage (vehicle rotation, equipment and couplings, prescribed groups, momentum and solved pairs; optional seat list) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
  *   0x81 = fixed-tick device input, one packet per device tick (client→server; inputCodec)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
@@ -21,6 +21,7 @@ import {
 } from "./entityFields.js";
 import { ENTITY_TYPE_TO_INDEX, indexToEntityType } from "./entityTypeIndex.js";
 import type { WireCursor } from "./entityWire.js";
+import { frameSeatBytes, readFrameSeats, writeFrameSeats } from "./frameSeatCodec.js";
 import { decodePlayerInput, encodePlayerInput, TAG_PLAYER_INPUT } from "./inputCodec.js";
 import { physicsStateBytes, readPhysicsState, writePhysicsState } from "./physicsStateCodec.js";
 import type {
@@ -108,7 +109,8 @@ function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
     baselines.length * MAX_BASELINE_SIZE +
     deltas.length * MAX_DELTA_SIZE +
     exits.length * 4 +
-    physicsStateBytes(msg.physics);
+    physicsStateBytes(msg.physics) +
+    frameSeatBytes(msg.seats);
 
   const buf = new ArrayBuffer(maxSize);
   const view = new DataView(buf);
@@ -149,6 +151,7 @@ function encodeFrameMessage(msg: FrameMessage): ArrayBuffer {
   }
 
   off = writePhysicsState(view, off, msg.physics);
+  off = writeFrameSeats(view, off, msg.seats);
   return buf.slice(0, off);
 }
 
@@ -202,8 +205,10 @@ function decodeFrameMessage(view: DataView, _buf: ArrayBuffer): FrameMessage {
     msg.entityExits = entityExits;
   }
 
-  const [physics, end] = readPhysicsState(view, off);
+  const [physics, afterPhysics] = readPhysicsState(view, off);
   if (physics) msg.physics = physics;
+  const [seats, end] = readFrameSeats(view, afterPhysics);
+  if (seats) msg.seats = seats;
   if (end !== view.byteLength) throw Error("Unexpected trailing entity frame bytes");
   return msg;
 }

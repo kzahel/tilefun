@@ -9,8 +9,8 @@ on the game view) are done, as are 4a-i (all of World geometry on the game
 view), 4a-ii (Outdoor geometry), 4a-iii (Characters), 4a-iv (Interiors
 playtest) and 4a-v (Natural landscape, with the old lab host deleted), which
 completes slice 4a. Slice 4b (server seats) is split into three parts; 4b-i
-(seats on a connection) is done and 4b-ii (replication per connection and realm)
-is next. Updated 2026-11-07 for seats on one device
+(seats on a connection) and 4b-ii (replication per connection and realm) are
+done, and 4b-iii (party travel) is next. Updated 2026-11-07 for seats on one device
 session, online seats and the first-person view requirements from 229; progress
 updated 2026-11-08.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
@@ -1479,3 +1479,114 @@ maintaining both shells. The shell import allow-list only shrinks.
     - Optional, taken: the device pause reaching seats in transit, one flush per disconnect, and tests for leaving while dormant, a guest arriving during a takeover, and a takeover that cannot save. The remaining optional findings are carried above.
     - Re-review: CHANGES REQUESTED, one new blocking finding, fixed. A device dropping twice before claiming a dormant guest re-armed the guest's dormancy timer, and the stale timer later dropped a newly joined guest with the same id. The guest now keeps its first deadline, and a new case and fault pin it. The spy in the takeover-failure case is restored in `afterEach`.
     - Second re-review: ACCEPT.
+- 2026-11-08, slice 4b-ii exit list (replication per connection and realm):
+  - **One stream per (connection, realm):**
+    - A realm replicates once per connection that has a live seat there (not dormant, not travelling). The stream goes through the connection's lowest live seat in that realm: bare when seat 0 is there, so single player is unchanged, and otherwise in that guest's envelope.
+    - A guest in a realm without its seat 0 gets a stream of its own.
+    - The replicator keys its baselines by connection. A change of the stream's lowest seat starts the stream over. A guest entering or leaving resets only its own session sync.
+  - **One acknowledgement per stream:** the lowest seat's `lastProcessedInputSeq`. Per-seat acknowledgements are asserted equal in tests; this is not a protocol field.
+  - **A seat list in frames:**
+    - `seats: {seat, entityId}[]` whenever a stream carries a guest. `playerEntityId` stays the lowest seat's entity.
+    - In the binary frame codec it is an optional trailing extension. Single-seat bytes are pinned unchanged.
+  - **Per-seat session sync:** `sync-session` (gems, editor mode, mount) and `sync-invincibility` per seat in the stream. Seat 0 sends bare, guests in their envelopes.
+  - **Interest as a list of rectangles:**
+    - Chunks, entities and props cover each seat's visible range, with today's buffers, as a list and never as their bounding box. Each seat's mount is included.
+    - Editor cursors leave out every seat of the stream's own connection.
+  - **Multi-anchor physics snapshot:**
+    - `PhysicsScene.snapshotAround` takes one anchor per seat (its vehicle or its body). It keeps every anchor's required set (contacts, supports, consists) and takes candidates within the radius of any anchor, nearest anchor first, under the same body limit.
+    - With one anchor the result is unchanged. The selection moves into a new module.
+  - **Horns** reach a stream once, through its lowest seat, when any of its seats is in range.
+  - **Replay measurement:** the 1a harness gains a mode with one predictor fed by a two-anchor stream. Record replay steps and time against two predictors, and check that the far guest and the walking seat in the vehicle case are predicted on every tick.
+  - **Client:** decodes and ignores the seat list (slice 5 uses it). Single-player characterization and the existing replication tests are unchanged.
+  - **Tests** (Node, `memoryServer` with `MemoryConnections` and broadcasting on):
+    - two seats in one realm, then in two realms;
+    - streams per connection and their addressing;
+    - acknowledgements and the seat list;
+    - a distant guest's chunks and actors, with nothing between the seats;
+    - per-seat sync in envelopes;
+    - a snapshot with both seats' bodies;
+    - horns once;
+    - codec round trips with the single-seat bytes pinned;
+    - the multi-anchor selection.
+  - **Ratchet:** `Realm.ts`, `RealmReplicator.ts` and `PhysicsScene.ts` do not grow. Interest, seat sync and snapshot selection go into new modules, so `RealmReplicator.build` drops under the complexity limit and its entry is lowered.
+  - **Validation** adds `streaming:bench -- --assert-ready`.
+  - **Not in 4b-ii:**
+    - party travel and guest persistence (4b-iii);
+    - storage notices and door motion, which stay per seat;
+    - client seats, multi-seat prediction and split screen (slice 5).
+- 2026-11-08, slice 4b-ii done (exit list met):
+  - **One stream per (connection, realm)** (`src/server/RealmPublication.ts`):
+    - Each tick a realm groups its live seats (not dormant, not travelling) by connection, lowest seat first, and replicates once per group. The stream goes through its first seat: bare for seat 0, so single player is unchanged, and otherwise in that guest's envelope. A guest in a realm without its seat 0 therefore gets its own stream.
+    - `RealmReplicator` keys its baselines by connection and remembers the seat a stream goes through. A different first seat starts the stream over. `clearClient` restarts the stream when the seat it goes through is reset; for another seat it resets only that seat's session sync, so a guest arriving beside seat 0 adds its body and range without a full resend.
+  - **One acknowledgement:** a frame carries its first seat's `lastProcessedInputSeq`. The tests assert that the seats' own acknowledgements stay equal.
+  - **Seat list:**
+    - `FrameMessage.seats` (`{seat, entityId}`, lowest first) is present whenever a stream carries a guest. `playerEntityId` stays the first seat's entity.
+    - The binary frame codec writes it as an optional trailing extension (`src/shared/frameSeatCodec.ts`: a count, then a seat byte and a 32-bit entity id each, seats ascending and below `MAX_SEATS`). A frame without it keeps its exact bytes, which a test pins.
+  - **Per-seat session sync** (`src/server/SeatSync.ts`): `sync-session` and `sync-invincibility` per seat, with each seat's last-sent state kept in its stream. The first seat's goes with the stream; every other seat's goes to its own session, so a guest's arrives in its envelope.
+  - **Interest as a list of rectangles** (`src/server/ReplicationInterest.ts`):
+    - Terrain, actors and props cover each seat's visible range with today's buffers, as a list and never as a bounding box. The prop key changes when any seat's rectangle does.
+    - Every seat's body and mount are included.
+    - Editor cursors leave out all of the connection's own seats.
+    - The authority side needed nothing: streaming, wildlife wake, spawners, train preparation and tick tiers already read every session's range.
+  - **Multi-anchor physics snapshot** (`src/physics/PredictionSelection.ts`):
+    - `PhysicsScene.snapshotAround` takes one anchor per seat (its vehicle or body). It keeps every anchor's contact and support graph and every consist touched, then the bodies nearest to any anchor, under the one 128-body limit.
+    - With one anchor it selects exactly as before. Missing anchors are skipped.
+    - The selection moved out of `PhysicsScene`.
+  - **Resuming a guest:** a dormant guest seated again resets its baselines in its realm and takes seat 0's input sequence (`DeviceConnections.join`). A stream sent through it starts over; beside seat 0, only its own sync is resent.
+  - **Horns** reach a stream once, through its first seat, when any of its seats is within range.
+  - **Client:** `RemoteStateView` decodes and ignores the seat list. A frame with one applies exactly as one without.
+  - **Replay measurement** (the 1a harness, `src/client/MultiSeatPrediction.test.ts`): a new "anchored" mode feeds one predictor seat 0's stream with a snapshot anchored on both seats. Wall times are M-series Node and informational.
+    - Every case, remote and local, predicts both seats on every tick: no unpredicted ticks and both bodies in every snapshot.
+      - In the vehicle case the walking seat is now predicted throughout. Previously it missed 39 (remote) / 52 (local) of 260 ticks.
+      - A guest 400 px away is predicted throughout. Previously it was never predicted.
+    - Replay steps stay half of two predictors' (1,260 / 516 against 2,520 / 1,032).
+    - Replay and apply time stays about half of two predictors': vehicle 44.3 / 18.3 ms against 85.7 / 37.4 ms, and the 400 px guest 26.3 / 12.1 ms against 40.4 / 17.9 ms. The second seat's bodies cost nothing measurable against the one-anchor run (vehicle 46.0 / 17.8 ms).
+  - **Tests:**
+    - `src/server/DeviceStreams.test.ts` (6 cases, `memoryServer` with `MemoryConnections`, broadcasting on):
+      - one stream through seat 0 with equal acknowledgements, a seat list, both bodies in the snapshot and the guest's own sync in its envelope; another device sees the guest as an entity;
+      - a guest 12 chunks away with its terrain, actors and body in the stream, and nothing from a third device's player between them;
+      - a guest alone in another world with its own stream in its envelope. Nothing streams to seat 0 while it travels there; on arrival the stream restarts bare with both seats;
+      - a guest alone in another world resuming after its device returns: a full first frame and its own sync, on seat 0's sequence;
+      - a dormant guest left out of its returning device's seat list until it is seated again;
+      - a horn heard once.
+    - `src/server/ReplicationStreams.test.ts` (7 cases): the replicator's streams, rectangles, props, resets and acknowledgement; mounts outside every rectangle; editor cursors; grouping; publication and horns.
+    - `src/physics/PredictionSelection.test.ts` (3 cases).
+    - `src/shared/frameSeatCodec.test.ts` (2 cases, with pinned bytes).
+    - A `RemoteStateView` case.
+    - The harness case above.
+    - Supporting changes:
+      - the device helpers moved from `DeviceSeats.test.ts` into `src/server/test/DeviceHarness.ts`, and its frame-stream case moved to `DeviceStreams`;
+      - `memoryServer` takes extra flat `worlds`.
+    - The existing replication, prediction and characterization tests are unchanged.
+  - **Seeded faults** (isolated worktree): 39 faults over the stream grouping, addressing, resets, acknowledgement, seat list, seat sync, rectangles, mounts, cursors, horns, readiness, the selection, the scene, the codec and the resume path. All 39 fail the suites. Two survived at first and now have cases:
+    - each seat's mount outside every rectangle. Nothing tested the mount rule before either; a new case covers it.
+    - a seat travelling between realms being streamed. The old seat-0 code skipped travelling seats untested too; the two-realm case now ticks during seat 0's transfer and expects no frame until it arrives.
+  - **Ratchet:**
+    - `RealmReplicator.ts` leaves the baseline (332 → 282 lines; `build` was 65 and every function is now under the limit).
+    - `PhysicsScene.ts` goes 1,042 → 989 lines with one fewer function over the limit (7 → 6).
+    - `Realm.ts` goes 1,356 → 1,344.
+  - **Validation:**
+    - `npm run typecheck` (four configs), Biome on the changed files, knip.
+    - The ratchet: only other sessions' entries fail, as at HEAD.
+    - Focused vitest over `src/server`, `src/shared`, `src/transport`, `src/input`, `src/scenes`, `src/client`, `src/session`, `src/scenarios`, `src/persistence`, `src/console`, `src/physics` and `src/railway`: 148 files, 1,382 tests.
+    - `art:catalog` then `workshop:manifest` (line references only), and a production build.
+    - `streaming:bench -- --assert-ready`: six scenarios, no missing or incomplete frames.
+    - Playwright against the build: the smoke suite (28), `p2p-worker` and `scenario-lifecycle` (2), and the standalone HTTP/WebSocket suite (3).
+    - After the review fix:
+      - typecheck, Biome and knip;
+      - vitest over `src/server`, `src/shared`, `src/client`, `src/scenarios` and `src/physics` (99 files, 1,077 tests);
+      - the inventories and the build.
+      - Playwright was not re-run, because no browser path seats a guest yet.
+  - **Carried:**
+    - **Slice 5:**
+      - entity ids are per realm, so a device's seats in two realms can share a body id. `devicePacket` refuses that today; the client's per-realm replicas must key co-seat bodies by realm;
+      - a guest resumed while a packet is still queued for seat 0 acknowledges one tick behind it until the next packet; the client reads the stream's acknowledgement;
+      - the client routes enveloped streams to a per-realm replica. It starts a replica over when its stream restarts or moves to another seat, and discards it when the stream ends (a guest leaving a realm it was alone in).
+    - **4b-iii:** party travel, guest persistence, and the remaining 4b-i items (`leave-realm` and world deletion, arrival ignoring bodies, refused `#` connections staying open).
+    - Resolved from 4b-i's carried list: guests' own session sync, a guest's range in the stream's interest, horns sent once, and streams keyed per (connection, realm).
+    - Storage notices and door motion stay per seat.
+  - **Review** (Yep Anywhere, Opus 5.5 high): CHANGES REQUESTED, one blocking finding, fixed:
+    - **Resume:** a dormant guest resuming alone in another realm carried on its old stream with deltas only, because the resume path reset nothing in that realm. It now resets the guest's baselines there and takes seat 0's sequence, so the first frame is full and acknowledges the device's sequence. A new case and two faults cover it.
+    - Optional, taken: the slice-5 carried item also covers discarding a replica when its stream ends, and the 4b-i items this part resolves are marked.
+    - Optional, declined: also skipping retired seats in the live filter. A retired seat 0 keeps streaming during a takeover save, as at HEAD, and evicted guests are dropped in a microtask.
+    - Re-review: ACCEPT. Its one note, a resumed guest's acknowledgement trailing by a tick, is carried to slice 5.

@@ -20,8 +20,8 @@ documentation cleanup; they are not a confirmed current bug list.
 5. [PlayerPredictor](../src/client/PlayerPredictor.ts) predicts the mount and rider,
    reconciles authoritative state and replays unacknowledged input. Compare
    authoritative/predicted state before blaming render interpolation.
-6. [RealmReplicator](../src/server/RealmReplicator.ts) explicitly includes the
-   mount; [serialization](../src/shared/serialization.ts) carries parenting state.
+6. [ReplicationInterest](../src/server/ReplicationInterest.ts) explicitly includes
+   each seat's mount in its stream; [serialization](../src/shared/serialization.ts) carries parenting state.
    The client maintains replica entities and previous/current render state.
 
 ## Reproduce before changing behavior
