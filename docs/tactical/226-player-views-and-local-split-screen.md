@@ -887,3 +887,74 @@ maintaining both shells. The shell import allow-list only shrinks.
     throw released during a pause no longer throws on resume, scripted physics
     panes skip, and the hint pattern allows at most three characters (so a
     broken label such as `undefined` still fails).
+- 2026-11-08, slice 3 plan. Split at its seams, each part reviewed and committed:
+  **3a** render views on main (below); **3b** device session, seat and view
+  objects in a restricted-globals directory with the camera-policy interface,
+  the game made thin over them (`GameTestHooks` and the input characterization
+  unchanged); **3c** the recipe-world authority and view plugin surface, ending
+  with the WorldGeometry car fixtures on the game view. 3b and 3c fix their exit
+  lists before they start.
+- 2026-11-08, slice 3a (render views, harvested from `spike-226-1b` with the 1b
+  review's fixes; the single-view game is unchanged and no page draws two views
+  yet). Exit list, all met:
+  - `RenderHost.beginView(camera, region)`/`endView()` on the Canvas, GPU and
+    selectable hosts; `beginWorld`/`endWorld` are the whole-canvas view through
+    the same code. The GPU world target is reused (a later view clears it) and
+    composed through a GL viewport or a half-plane discard; the composition moved
+    out of `GpuRasterSurface` into `GpuWorldComposition`, with its maths in the
+    pure `worldComposite`. The Canvas host clips to the region or polygon.
+  - `layoutViews` (1, 2, 2×2, diagonal) tiles any canvas exactly, and
+    `ViewLayouts` keeps the same regions until the layout or size changes (1b
+    rebuilt them every frame).
+  - One terrain preparation per frame over every view: `TerrainResidency` (split
+    out of `TileRenderer`, which shrinks 649 → 608 lines) keeps every view's halo,
+    ranks a shared chunk by the view that shows it, uses per-view look-ahead and
+    focal rows, and never evicts another view's chunks. `prepareTerrainViews` is
+    required on every backend (no per-view fallback) and refuses visible-only
+    preparation; `presentTerrain(..., prepared)` lets each view only collect.
+  - Slab fades are per view (`presentSurfaceScene`'s `fades`, defaulting to the
+    `SceneFrame` map for single-view callers), so a view that does not draw a
+    slab no longer restarts another view's fade (1b shared one map).
+  - 1b's Canvas padding note: the clear pass already fills the padded view, and
+    the Canvas host now also clears its world surface before every later view of
+    a frame (as the GPU host clears its target), so a view that leaves pixels
+    transparent never shows the previous view. The bench's forced mesh cars and
+    the rest of the 1b throwaway list were not harvested.
+  - Tests: Node cases for layouts and caching, the composite sampling and
+    half-plane maths, Canvas composition calls, multi-view preparation (shared
+    budget, residency, ranking, focal rows, refusal, disposal), per-view fades and
+    a split frame on `RecordingBackend` (one preparation, N terrain passes, no
+    warm uploads). Browser: renderer lab `probeViewRegions` in
+    `gpu-renderer.spec.ts` renders 2, 4 and diagonal views on both hosts and
+    compares each region with a single view of its size (pixel-identical, worst
+    error 0), then cycles layouts with no textures, framebuffers or renderbuffers
+    created.
+  - Seeded faults: 20 of 20 single-line Node faults and 3 of 3 browser faults
+    (GPU viewport, shader discard sign, Canvas clip) fail the suites; four needed
+    added cases first (duplicate shared jobs, per-view focal row twice, pruning a
+    view's own fades) and one more for the disposed check. The review fixes add
+    two more (the Canvas later-view clear and its per-frame reset), both caught.
+  - Ratchet: `GpuRasterSurface` 979 → 962, `TileRenderer` 649 → 608 (one fewer
+    over-limit function), `SelectableRenderHost` 108 → 104; also the cleanup's
+    `ScenarioSession` 429 → 423 and `PhysicsPage` worst 45 → 38. Two files other
+    sessions had already pushed over baseline grow slightly with this slice:
+    `RasterRenderBackend` +5 (`prepareTerrainViews`) and `presentSurfaceScene`
+    +1 (the `fades` parameter).
+  - Validation: `tsc` for all four configs, Biome, knip, focused vitest (130
+    files, 1,276 tests), regenerated inventories, production build, Playwright
+    `gpu-renderer`, `embedded-geometry-rendering`, `outdoor-presentation`,
+    `world-geometry` and `car-projection` (35 passed) and smoke 28 of 28.
+  - Review (Yep Anywhere, Opus 5.5 high): ACCEPT, no blocking findings; it
+    confirmed single-view equivalence line by line and that the browser probe
+    cannot pass vacuously (reference views use a different target-to-region
+    offset). Optional findings taken: the GPU host restores the GL viewport even
+    if a partial present throws, the Canvas host clears before later views (the
+    two backends now agree for views that leave transparency), a duplicate
+    shared-chunk test removed, and the single-view record releases the caller's
+    range. Left for 3b: the view loop ends views in `finally` (a throw mid-view
+    leaves `WorldRasterFrame` active); per-view look-ahead moves to the View (it
+    is keyed by view index here); 3b must use or delete `prepareViewTerrain`,
+    `ViewLayouts`, `VIEW_LAYOUTS` and `presentTerrain`'s `prepared` (test-only
+    callers today); `RenderRegion` and the input layer's `ViewRegion` should be
+    merged when 3b joins them. Not covered by a test: the GPU later-view clear of
+    decals and depth (the probe content has neither).

@@ -29347,7 +29347,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:321"
+          "source": "src/rendering/RendererLab.ts:322"
         }
       ]
     },
@@ -29365,7 +29365,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:322"
+          "source": "src/rendering/RendererLab.ts:323"
         }
       ]
     },
@@ -33891,19 +33891,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:208"
+          "source": "src/rendering/RendererLab.ts:209"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:275"
+          "source": "src/rendering/RendererLab.ts:276"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:279"
+          "source": "src/rendering/RendererLab.ts:280"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:283"
+          "source": "src/rendering/RendererLab.ts:284"
         },
         {
           "system": "Gameplay",
@@ -38219,15 +38219,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RasterRenderBackend.ts:234"
+          "source": "src/rendering/RasterRenderBackend.ts:239"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:213"
+          "source": "src/rendering/RendererLab.ts:214"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:217"
+          "source": "src/rendering/RendererLab.ts:218"
         },
         {
           "system": "Gameplay",

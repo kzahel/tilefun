@@ -10,6 +10,7 @@ import type {
   TerrainRenderWorld,
   TerrainResourceId,
 } from "./TerrainPresentation.js";
+import type { TerrainPreparationView } from "./TerrainResidency.js";
 
 /** Snapshot-shaped camera input; no graphics objects or projection callbacks. */
 export interface RenderView {
@@ -92,6 +93,13 @@ export interface RenderBackend extends TerrainPresentation {
     view: RenderView,
     world: TerrainRenderWorld,
     visible: ChunkRange,
+    options?: TerrainPreparationOptions,
+  ): void;
+  /** Several views of one display frame (226): prepare their union once with one
+   * budget, then collect per view. Never evicts another view's chunks. */
+  prepareTerrainViews(
+    views: readonly TerrainPreparationView[],
+    world: TerrainRenderWorld,
     options?: TerrainPreparationOptions,
   ): void;
   collectTerrain(

@@ -114,6 +114,46 @@ describe("terrain preparation", () => {
     expect(renderer.getTerrainSurface(replacement)).toBeTruthy();
   });
 
+  it("prepares several views once with one budget and never evicts another view's chunks", () => {
+    const { camera, world } = scene();
+    world.chunks.put(100, 100, new Chunk());
+    const far = { minCx: 100, minCy: 100, maxCx: 100, maxCy: 100 };
+    const other = { x: 100 * 256 + 128, y: 100 * 256 + 128 };
+    const renderer = new TileRenderer();
+    const draw = drawing(renderer);
+    // Separate single-view calls evict each other every frame.
+    renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 1000);
+    const near = world.getChunkIfLoaded(0, 0);
+    renderer.prepareTerrain(other, world, sheets, far, Infinity, 1000);
+    expect(renderer.getTerrainSurface(near)).toBeNull();
+    // One preparation over both views keeps both halos resident; a warm frame does no work.
+    const views = [
+      { view: camera, visible },
+      { view: other, visible: far },
+    ];
+    renderer.prepareTerrainViews(views, world, sheets, { timeBudgetMs: Infinity, rowBudget: 1000 });
+    expect(renderer.getDiagnostics()).toMatchObject({ resident: 10, pending: 0 });
+    draw.mockClear();
+    renderer.prepareTerrainViews(views, world, sheets, { timeBudgetMs: Infinity, rowBudget: 1000 });
+    expect(draw).not.toHaveBeenCalled();
+    expect(renderer.getTerrainSurface(near)).toBeTruthy();
+    expect(renderer.getTerrainSurface(world.getChunkIfLoaded(100, 100))).toBeTruthy();
+    // One shared row budget per frame, every view's visible gap before any halo.
+    renderer.clear();
+    draw.mockClear();
+    renderer.prepareTerrainViews(views, world, sheets, { timeBudgetMs: Infinity, rowBudget: 32 });
+    expect(renderer.getDiagnostics().rowsLastFrame).toBe(32);
+    const built = new Set(draw.mock.calls.map((call) => `${call[1]},${call[2]}`));
+    expect(built).toEqual(new Set(["0,0", "100,100"]));
+    // Each partial build starts at its own view's camera row (row 8 here, row 2 there).
+    renderer.clear();
+    draw.mockClear();
+    other.y = 100 * 256 + 40;
+    renderer.prepareTerrainViews(views, world, sheets, { timeBudgetMs: Infinity, rowBudget: 17 });
+    const rows = draw.mock.calls.map((call) => [call[1], call[2], call[5]]);
+    expect([rows[0], rows[16], rows.length]).toEqual([[0, 0, 8], [100, 100, 2], 17]);
+  });
+
   it("bounds residency when moving and releases surfaces on realm reset", () => {
     const { camera, world } = scene();
     const renderer = new TileRenderer();

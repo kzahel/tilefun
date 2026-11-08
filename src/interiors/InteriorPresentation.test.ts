@@ -103,6 +103,7 @@ describe("neutral interior frames", () => {
       recover() {},
       dispose() {},
       prepareTerrain() {},
+      prepareTerrainViews() {},
       collectTerrain() {
         return [];
       },

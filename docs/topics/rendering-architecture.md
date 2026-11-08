@@ -163,6 +163,27 @@ without changing physics, generation, editing or
 presentation policy. GameClient asset loading, procedural sprite creation and
 platform input/UI wiring remain application composition responsibilities.
 
+**Views ([226](../tactical/226-player-views-and-local-split-screen.md) slice 3a).**
+One display frame can hold several views. `beginFrame` runs once, then each view
+calls `RenderHost.beginView(camera, region)`/`endView()` with a camera whose
+viewport is the region's size; `beginWorld`/`endWorld` are the whole-canvas view
+through the same code. Regions come from `layoutViews` (1, 2 side by side, 2×2,
+or a diagonal half-plane with a matching clip polygon) and never go through
+`resize()`. The GPU host reuses one world target: a later view clears it, draws
+in its top-left corner and composes into its region with a GL viewport or a
+half-plane discard in the present shader (`GpuWorldComposition`, maths in
+`worldComposite`). The Canvas host clears its world surface before later views, clips to the
+region or polygon and draws the matching corner of its padded world surface. A view composed into a region is
+pixel-identical to a single view of that size on both backends (renderer lab
+`probeViewRegions`). Terrain for every view is prepared once per frame
+(`prepareViewTerrain` → `prepareTerrainViews`, scheduled by `TerrainResidency`):
+one time and row budget, any view's on-screen gap first, per-view look-ahead and
+focal rows, and no view evicts another's chunks; each view then presents its
+terrain with `prepared` set. Observer-local slab fades belong to each view
+(`presentSurfaceScene`'s `fades`); the device's `SceneFrame` (mesh poses,
+collection buffers) is shared. No production page draws more than one view yet;
+the device session and view objects come next (slice 3b).
+
 `ScenarioPresentationHost` embeds the same render-host implementations for the
 interactive labs. `PlayerPresentation`, `OutdoorPresentation` and `presentInterior`
 share camera interpolation, terrain policy and room submission with gameplay. GPU hosts support an absolute world surface inside a positioned
@@ -311,8 +332,9 @@ Publishing new imagery retires the old completed handle. Resource caches and
 progressive jobs belong to one backend; another view of the same world is independent.
 
 Normal gameplay retains its existing bounded halo preparation, visible-hole
-priority and time/row budgets. Explorer and native review request explicit
-visible-only row budgets. Viewport resize preserves native static caches. Realm
+priority and time/row budgets (now one budget across all views of a frame).
+Explorer and native review request explicit visible-only row budgets, which are
+single-view only (multi-view preparation refuses them). Viewport resize preserves native static caches. Realm
 reset and context recovery clear terrain and rooms; context restoration triggers
 recovery through the Canvas host. Disposal is idempotent, detaches host listeners
 and rejects further rendering/preparation. Scene-frame release drops actor,

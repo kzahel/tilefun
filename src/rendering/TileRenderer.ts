@@ -6,7 +6,6 @@ import { TerrainId } from "../autotile/TerrainId.js";
 import {
   CHUNK_SIZE,
   MAX_CHUNK_CACHE_ROWS_PER_FRAME,
-  RENDER_DISTANCE,
   TILE_SIZE,
   WATER_FRAME_COUNT,
   WATER_FRAME_DURATION_MS,
@@ -28,14 +27,22 @@ import { drawCitySurfacePieces } from "./CitySurfaceRenderer.js";
 import { ElevationDescriptorCache } from "./ElevationDescriptorCache.js";
 import { drawRailTile } from "./RailTrackRaster.js";
 import { touchRaster } from "./RasterSurface.js";
+import type { TerrainPreparationOptions } from "./RenderFrame.js";
 import type { ElevationItem } from "./SceneItem.js";
 import type {
   TerrainPresentation,
   TerrainRenderWorld,
   TerrainResourceId,
 } from "./TerrainPresentation.js";
+import {
+  type TerrainPreparationView,
+  TerrainResidency,
+  type TerrainSurfaces,
+} from "./TerrainResidency.js";
 
 const CHUNK_NATIVE_PX = CHUNK_SIZE * TILE_SIZE;
+const ORIGIN = { x: 0, y: 0 };
+const NOWHERE = { minCx: 0, minCy: 0, maxCx: -1, maxCy: -1 };
 
 interface CacheBuildState {
   resourceId: TerrainResourceId;
@@ -46,21 +53,6 @@ interface CacheBuildState {
   visualRevision: number;
   assetRevision: number;
   rowOrder: number[];
-}
-
-interface TerrainResident {
-  key: string;
-  cx: number;
-  cy: number;
-  chunk: Chunk;
-  pendingSince: number | null;
-  visited: boolean;
-  priority: number;
-  distance: number;
-}
-
-function compareTerrainJobs(a: TerrainResident, b: TerrainResident): number {
-  return a.priority - b.priority || a.distance - b.distance || a.cy - b.cy || a.cx - b.cx;
 }
 
 /** Compute the current water animation frame index from a timestamp. */
@@ -88,14 +80,16 @@ export class TileRenderer implements TerrainPresentation {
   private readonly partialResources = new Map<TerrainResourceId, OffscreenCanvas>();
   private cacheBuildStates = new Map<string, CacheBuildState>();
 
-  private readonly resident = new Map<string, TerrainResident>();
-  // Jobs borrow resident records only during prepareTerrain; no separate record pool.
-  private readonly terrainJobs: TerrainResident[] = [];
-  private visitStamp = false;
-  private schedulerRecordsCreated = 0;
-  private hasLastCamera = false;
-  private lastCameraX = 0;
-  private lastCameraY = 0;
+  private readonly residency = new TerrainResidency();
+  private readonly surfaces: TerrainSurfaces = {
+    isReady: (chunk, cx, cy) => this.resources.isReady(chunk, cx, cy),
+    hasImage: (chunk) => this.resources.get(chunk) !== null,
+    drop: (chunk, key) => {
+      this.resources.delete(chunk);
+      this.deleteCacheBuildState(key);
+    },
+  };
+  private readonly singleView = [{ view: ORIGIN, visible: NOWHERE }];
   private preparedRows = 0;
 
   constructor(private readonly now: () => number = () => performance.now()) {}
@@ -104,88 +98,53 @@ export class TileRenderer implements TerrainPresentation {
   clear(): void {
     this.resources.clear();
     this.elevation.clear();
-    this.resident.clear();
+    this.residency.clear();
     this.clearCacheBuildStates();
-    this.terrainJobs.length = 0;
-    this.hasLastCamera = false;
     this.preparedRows = 0;
   }
 
-  /** Prepare the loaded camera halo before drawing. Residency is bounded by
-   * (visible width + 2R) * (visible height + 2R), with at most an old surface
-   * plus a replacement surface per chunk. No offscreen terrain is generated.
-   */
+  /** Prepare one camera's loaded halo before drawing (see `prepareTerrainViews`). */
   prepareTerrain(
-    camera: Camera,
+    camera: Pick<Camera, "x" | "y">,
     world: TerrainRenderWorld,
     sheets: Map<string, Spritesheet>,
     visible: ChunkRange,
     timeBudgetMs = 2,
     rowBudget = 128,
   ): void {
+    const [single] = this.singleView;
+    if (!single) throw Error("Missing single-view record");
+    single.view = camera;
+    single.visible = visible;
+    try {
+      this.prepareTerrainViews(this.singleView, world, sheets, { timeBudgetMs, rowBudget });
+    } finally {
+      single.view = ORIGIN;
+      single.visible = NOWHERE;
+    }
+  }
+
+  /** Prepare every view's loaded halo once per display frame, sharing one time and
+   * row budget (see `TerrainResidency` for membership and order). No offscreen
+   * terrain is generated; each chunk holds at most an old surface plus its
+   * replacement. Visible-only preparation evicts outside its range: one view only.
+   */
+  prepareTerrainViews(
+    views: readonly TerrainPreparationView[],
+    world: TerrainRenderWorld,
+    sheets: Map<string, Spritesheet>,
+    { timeBudgetMs = 2, rowBudget = 128, scope = "halo" }: TerrainPreparationOptions = {},
+  ): void {
+    if (scope === "visible") throw Error("Visible-only terrain needs one view");
     const started = this.now();
     const deadline = started + Math.max(0, timeBudgetMs);
-    const dx = this.hasLastCamera ? camera.x - this.lastCameraX : 0;
-    const dy = this.hasLastCamera ? camera.y - this.lastCameraY : 0;
-    const length = Math.hypot(dx, dy);
-    const aheadX = camera.x + (length ? (dx / length) * CHUNK_NATIVE_PX : 0);
-    const aheadY = camera.y + (length ? (dy / length) * CHUNK_NATIVE_PX : 0);
-    this.lastCameraX = camera.x;
-    this.lastCameraY = camera.y;
-    this.hasLastCamera = true;
-    const visited = !this.visitStamp;
-    this.visitStamp = visited;
-    const jobs = this.terrainJobs;
     try {
-      for (let cy = visible.minCy - RENDER_DISTANCE; cy <= visible.maxCy + RENDER_DISTANCE; cy++) {
-        for (
-          let cx = visible.minCx - RENDER_DISTANCE;
-          cx <= visible.maxCx + RENDER_DISTANCE;
-          cx++
-        ) {
-          const chunk = world.getChunkIfLoaded(cx, cy);
-          if (!chunk) continue;
-          const key = `${cx},${cy}`;
-          let entry = this.resident.get(key);
-          if (!entry) {
-            entry = { key, cx, cy, chunk, pendingSince: null, visited, priority: 0, distance: 0 };
-            this.resident.set(key, entry);
-            this.schedulerRecordsCreated++;
-          } else if (entry.chunk !== chunk) {
-            this.resources.delete(entry.chunk);
-            this.deleteCacheBuildState(key);
-            entry.chunk = chunk;
-            entry.pendingSince = null;
-          }
-          entry.visited = visited;
-          const pending = !this.resources.isReady(chunk, cx, cy);
-          entry.pendingSince = pending ? (entry.pendingSince ?? started) : null;
-          if (!pending) continue;
-          const onScreen =
-            cx >= visible.minCx &&
-            cx <= visible.maxCx &&
-            cy >= visible.minCy &&
-            cy <= visible.maxCy;
-          entry.priority = onScreen ? (this.resources.get(chunk) ? 1 : 0) : 2;
-          entry.distance = Math.hypot(
-            (cx + 0.5) * CHUNK_NATIVE_PX - aheadX,
-            (cy + 0.5) * CHUNK_NATIVE_PX - aheadY,
-          );
-          jobs.push(entry);
-        }
-      }
-      for (const entry of this.resident.values()) {
-        if (entry.visited === visited) continue;
-        const key = entry.key;
-        this.resources.delete(entry.chunk);
-        this.resident.delete(key);
-        this.deleteCacheBuildState(key);
-      }
-      this.resources.retainCoordinates(this.resident);
+      const jobs = this.residency.scan(views, world, this.surfaces, started);
+      const resident = this.residency.resident;
+      this.resources.retainCoordinates(resident);
       // Also discard work made through another rendering path before preparation.
       for (const key of this.cacheBuildStates.keys())
-        if (!this.resident.has(key)) this.deleteCacheBuildState(key);
-      jobs.sort(compareTerrainJobs);
+        if (!resident.has(key)) this.deleteCacheBuildState(key);
       let remaining = Math.max(0, Math.floor(rowBudget));
       const initial = remaining;
       const roadAt = (tx: number, ty: number) => world.getRoadAt(tx, ty);
@@ -193,7 +152,7 @@ export class TileRenderer implements TerrainPresentation {
         if (remaining <= 0 || this.now() >= deadline) break;
         const focalRow = Math.max(
           0,
-          Math.min(CHUNK_SIZE - 1, Math.floor((camera.y - job.cy * CHUNK_NATIVE_PX) / TILE_SIZE)),
+          Math.min(CHUNK_SIZE - 1, Math.floor((job.focalY - job.cy * CHUNK_NATIVE_PX) / TILE_SIZE)),
         );
         remaining = this.advanceCacheBuild(
           job.key,
@@ -220,7 +179,7 @@ export class TileRenderer implements TerrainPresentation {
       throw error;
     } finally {
       // Release borrowed chunk references even if cache drawing throws.
-      jobs.length = 0;
+      this.residency.release();
     }
   }
 
@@ -228,16 +187,16 @@ export class TileRenderer implements TerrainPresentation {
     let pending = 0,
       oldestMs = 0,
       surfaces = this.cacheBuildStates.size + this.resources.size;
-    for (const { pendingSince } of this.resident.values()) {
+    for (const { pendingSince } of this.residency.resident.values()) {
       if (pendingSince !== null) {
         pending++;
         oldestMs = Math.max(oldestMs, this.now() - pendingSince);
       }
     }
     return {
-      resident: this.resident.size,
-      schedulerRecordsCreated: this.schedulerRecordsCreated,
-      queuedJobs: this.terrainJobs.length,
+      resident: this.residency.resident.size,
+      schedulerRecordsCreated: this.residency.recordsCreated,
+      queuedJobs: this.residency.jobs.length,
       building: this.cacheBuildStates.size,
       pending,
       oldestMs,
@@ -264,7 +223,7 @@ export class TileRenderer implements TerrainPresentation {
 
   releaseChunk(chunk: Chunk): void {
     this.resources.delete(chunk);
-    for (const [key, entry] of this.resident) if (entry.chunk === chunk) this.resident.delete(key);
+    this.residency.forget(chunk);
     for (const [key, state] of this.cacheBuildStates)
       if (state.chunk === chunk) this.deleteCacheBuildState(key);
   }

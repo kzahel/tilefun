@@ -78,6 +78,35 @@ test("world composition keeps scenery rigid and followed actors steady on both b
   ).toEqual([]);
 });
 
+test("split views compose into their regions on both backends without new GL objects", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const reports = await page.evaluate(() =>
+    (
+      window as unknown as {
+        rendererLab: {
+          probeViewRegions(): {
+            mode: string;
+            layout: string;
+            compared?: number;
+            mismatches?: number;
+            glObjects?: number;
+          }[];
+        };
+      }
+    ).rendererLab.probeViewRegions(),
+  );
+  // Two hosts × (three layouts + one region-resizing run).
+  expect(reports).toHaveLength(8);
+  for (const report of reports)
+    if (report.glObjects === undefined) {
+      expect(report.compared).toBeGreaterThan(30000);
+      expect(report).toMatchObject({ mismatches: 0 });
+    } else expect(report).toMatchObject({ glObjects: 0 });
+});
+
 test("GPU consumes the Canvas scene with retained textures and union clips", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));

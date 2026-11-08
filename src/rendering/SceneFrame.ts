@@ -23,7 +23,8 @@ export class SceneFrame {
   readonly items: SceneItem[] = [];
   readonly grass = new GrassFrameBuffer();
   readonly propDepth = new PropDepthCache();
-  /** Observer-local slab fades by surface ID; presentation state only. */
+  /** Observer-local slab fades by surface ID for a single view; each view of a
+   * split frame keeps its own (see presentSurfaceScene). Presentation state only. */
   readonly surfaceFades = new Map<string, { opacity: number; time: number }>();
 
   constructor(options?: { allCars3d?: boolean; authoredTrains?: boolean }) {

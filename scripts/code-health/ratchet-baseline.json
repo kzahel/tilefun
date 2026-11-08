@@ -483,7 +483,7 @@
       "overLimit": 1
     },
     "src/rendering/GpuRasterSurface.ts": {
-      "lines": 979,
+      "lines": 962,
       "worst": 72,
       "overLimit": 1
     },
@@ -513,7 +513,7 @@
       "overLimit": 1
     },
     "src/rendering/SelectableRenderHost.ts": {
-      "lines": 108,
+      "lines": 104,
       "worst": 29,
       "overLimit": 1
     },
@@ -533,9 +533,9 @@
       "overLimit": 5
     },
     "src/rendering/TileRenderer.ts": {
-      "lines": 649,
+      "lines": 608,
       "worst": 124,
-      "overLimit": 2
+      "overLimit": 1
     },
     "src/rendering/VehicleDepthProbe.ts": {
       "lines": 193,
@@ -573,7 +573,7 @@
       "overLimit": 1
     },
     "src/scenarios/ScenarioSession.ts": {
-      "lines": 429,
+      "lines": 423,
       "worst": 65,
       "overLimit": 1
     },
@@ -894,7 +894,7 @@
     },
     "src/workshop/PhysicsPage.tsx": {
       "lines": 341,
-      "worst": 45,
+      "worst": 38,
       "overLimit": 2
     },
     "src/workshop/PhysicsViewport.ts": {

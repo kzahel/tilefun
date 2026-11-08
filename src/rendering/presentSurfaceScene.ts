@@ -113,6 +113,7 @@ export function presentSurfaceScene(
   mode: SurfaceVisibility,
   alpha: number,
   pixelExactShadows = false,
+  fades = frame.surfaceFades, // Observer-local: each view of a split frame passes its own.
 ) {
   if (!props.some((p) => p.collider?.surface || p.walls?.some((c) => c.surface))) {
     renderer.submit(camera, {
@@ -121,13 +122,13 @@ export function presentSurfaceScene(
       order: collectSceneOrder(items, frame.drawOrder),
       pixelExactShadows,
     });
-    frame.surfaceFades.clear();
+    fades.clear();
     return;
   }
   const order = frame.drawOrder;
   const presented = new Set<string>();
   // Manual level views are inspection tools: they switch instantly, never fade.
-  if (mode !== "auto") frame.surfaceFades.clear();
+  if (mode !== "auto") fades.clear();
   order.length = 0;
   const submitRun = () => {
     if (!order.length) return;
@@ -149,7 +150,7 @@ export function presentSurfaceScene(
       const opacity =
         mode === "auto" && surface?.c.surface
           ? surfaceFadeOpacity(
-              frame.surfaceFades,
+              fades,
               node,
               surfaceDisplay(
                 surface.c.surface,
@@ -175,5 +176,5 @@ export function presentSurfaceScene(
     }
   }
   submitRun();
-  for (const id of frame.surfaceFades.keys()) if (!presented.has(id)) frame.surfaceFades.delete(id);
+  for (const id of fades.keys()) if (!presented.has(id)) fades.delete(id);
 }

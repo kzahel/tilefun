@@ -1,8 +1,10 @@
 import * as THREE from "three";
 import { rasterFragmentShader } from "./GpuRasterShader.js";
+import { GpuWorldComposition } from "./GpuWorldComposition.js";
 import type { DecalVertex } from "./ProjectedDecals.js";
 import { type RasterSurface, rasterRevision } from "./RasterSurface.js";
 import { SubpixelImages } from "./SubpixelImages.js";
+import type { RenderRegion } from "./ViewLayout.js";
 import { WORLD_RASTER_PAD } from "./WorldRasterFrame.js";
 
 type Rect = { x: number; y: number; width: number; height: number };
@@ -61,23 +63,10 @@ export class GpuRasterSurface implements RasterSurface {
   private filtered = false;
   private readonly mesh: THREE.Mesh;
   private readonly white: THREE.DataTexture;
-  private worldTarget?: THREE.WebGLRenderTarget;
-  private readonly presentScene = new THREE.Scene();
-  private readonly presentGeometry = new THREE.PlaneGeometry(2, 2);
-  private readonly presentMaterial = new THREE.ShaderMaterial({
-    uniforms: {
-      image: { value: null },
-      viewport: { value: new THREE.Vector2() },
-      offset: { value: new THREE.Vector2() },
-      targetSize: { value: new THREE.Vector2() },
-    },
-    vertexShader: "varying vec2 uv0; void main(){uv0=uv;gl_Position=vec4(position.xy,0.,1.);}",
-    fragmentShader: `uniform sampler2D image; uniform vec2 viewport,offset,targetSize; varying vec2 uv0;
-      void main(){gl_FragColor=texture2D(image,(uv0*viewport+offset)/targetSize);}`,
-    depthTest: false,
-    depthWrite: false,
-    blending: THREE.NoBlending,
-  });
+  private world?: GpuWorldComposition;
+  private get worldTarget() {
+    return this.world?.target;
+  }
   private texture: THREE.Texture | null = null;
   private textureSlot = 0;
   private readonly batchTextures: THREE.Texture[] = [];
@@ -210,9 +199,6 @@ export class GpuRasterSurface implements RasterSurface {
     this.mesh = new THREE.Mesh(this.geometry, this.material);
     this.mesh.frustumCulled = false;
     this.scene.add(this.mesh);
-    const present = new THREE.Mesh(this.presentGeometry, this.presentMaterial);
-    present.frustumCulled = false;
-    this.presentScene.add(present);
     this.scratch.width = this.scratch.height = 1;
     const ctx = this.scratch.getContext("2d", { willReadFrequently: true });
     if (!ctx) throw Error("Color parser unavailable");
@@ -223,9 +209,8 @@ export class GpuRasterSurface implements RasterSurface {
   resize(width: number, height: number) {
     this.flush();
     this.renderer.setSize(width, height, false);
-    const pad = this.worldTarget ? WORLD_RASTER_PAD * 2 : 0;
-    this.worldTarget?.setSize(width + pad, height + pad);
-    this.stats.worldTargetBytes = this.worldTarget ? (width + pad) * (height + pad) * 8 : 0;
+    const pad = this.world ? WORLD_RASTER_PAD * 2 : 0;
+    this.stats.worldTargetBytes = this.world?.resize(width, height) ?? 0;
     this.camera.right = width + pad;
     this.camera.bottom = height + pad;
     this.camera.updateProjectionMatrix();
@@ -233,27 +218,26 @@ export class GpuRasterSurface implements RasterSurface {
   enableWorldComposition() {
     const stable = this.material.uniforms.stableRaster;
     if (stable) stable.value = true;
-    this.worldTarget = new THREE.WebGLRenderTarget(1, 1, {
-      depthBuffer: true,
-      minFilter: THREE.LinearFilter,
-      magFilter: THREE.LinearFilter,
-    });
+    this.world = new GpuWorldComposition();
     this.resize(this.canvas.width, this.canvas.height);
   }
-  presentWorld(x: number, y: number) {
-    if (!this.worldTarget || this.lost || this.disposed) return;
+  /** Start another view of this display frame in the reused world target; the
+   * first view after beginFrame is already clear. Never reallocates. */
+  beginView() {
+    if (this.disposed) throw Error("Renderer is disposed");
+    if (this.lost || !this.world?.laterView()) return;
+    this.flush();
+    this.decals.length = 0;
+    this.renderer.setRenderTarget(this.world.target);
+    this.renderer.setScissorTest(false);
+    this.renderer.clear();
+  }
+  /** Compose the world target's top-left view into `region` (the whole canvas by default). */
+  presentWorld(x: number, y: number, region?: RenderRegion) {
+    if (!this.world || this.lost || this.disposed) return;
     this.flush();
     this.drawDecals();
-    const u = this.presentMaterial.uniforms;
-    if (!u.image || !u.viewport || !u.targetSize || !u.offset)
-      throw Error("World composite uniforms missing");
-    u.image.value = this.worldTarget.texture;
-    u.viewport.value.set(this.canvas.width, this.canvas.height);
-    u.targetSize.value.set(this.worldTarget.width, this.worldTarget.height);
-    u.offset.value.set(WORLD_RASTER_PAD - x, WORLD_RASTER_PAD + y);
-    this.renderer.setRenderTarget(null);
-    this.renderer.setScissorTest(false);
-    this.renderer.render(this.presentScene, this.camera);
+    this.world.present(this.renderer, this.camera, this.canvas, x, y, region);
     this.stats.drawCalls++;
     this.stats.worldComposites++;
   }
@@ -354,6 +338,7 @@ export class GpuRasterSurface implements RasterSurface {
     if (this.disposed) throw Error("Renderer is disposed");
     if (this.lost) return;
     this.decals.length = 0;
+    this.world?.beginFrame();
     this.frame++;
     this.stats.frames++;
     this.count = 0;
@@ -427,9 +412,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.material.dispose();
     this.unfiltered.dispose();
     this.white.dispose();
-    this.worldTarget?.dispose();
-    this.presentGeometry.dispose();
-    this.presentMaterial.dispose();
+    this.world?.dispose();
     this.renderer.dispose();
     this.renderer.forceContextLoss();
     this.disposed = true;

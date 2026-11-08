@@ -105,6 +105,11 @@ export class RasterRenderBackend implements RenderBackend {
     );
   }
 
+  prepareTerrainViews: RenderBackend["prepareTerrainViews"] = (views, world, options) => {
+    this.assertLive();
+    this.terrain.prepareTerrainViews(views, world, this.sheets, options);
+  };
+
   collectTerrain(
     view: RenderView,
     world: TerrainRenderWorld,

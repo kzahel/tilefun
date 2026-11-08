@@ -6,6 +6,7 @@ import { ElevationDescriptorCache } from "../ElevationDescriptorCache.js";
 import type { RenderBackend, RenderPass, RenderView } from "../RenderFrame.js";
 import { type TerrainDrawOptions, TerrainFrame } from "../TerrainFrame.js";
 import type { TerrainRenderWorld, TerrainResourceId } from "../TerrainPresentation.js";
+import type { TerrainPreparationView } from "../TerrainResidency.js";
 
 let nextId = 1;
 interface Resource {
@@ -26,32 +27,40 @@ export class RecordingBackend implements RenderBackend {
   readonly elevation = new ElevationDescriptorCache();
   readonly resources = new Map<Chunk, Resource>();
   uploads = 0;
+  /** Terrain preparation calls (one per display frame however many views). */
+  preparations = 0;
   assetRevision = 0;
   disposed = false;
   constructor(readonly assets: SpriteCatalog) {}
   private live() {
     if (this.disposed) throw Error("disposed");
   }
-  prepareTerrain(_view: RenderView, world: TerrainRenderWorld, visible: ChunkRange) {
+  prepareTerrain(view: RenderView, world: TerrainRenderWorld, visible: ChunkRange) {
+    this.prepareTerrainViews([{ view, visible }], world);
+  }
+  /** Every view's visible chunks become resident together; others are released. */
+  prepareTerrainViews(views: readonly TerrainPreparationView[], world: TerrainRenderWorld) {
     this.live();
+    this.preparations++;
     const wanted = new Set<Chunk>();
-    for (let cy = visible.minCy; cy <= visible.maxCy; cy++)
-      for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
-        const chunk = world.getChunkIfLoaded(cx, cy);
-        if (!chunk) continue;
-        wanted.add(chunk);
-        const old = this.resources.get(chunk);
-        if (this.isTerrainReady(chunk) && old?.cx === cx && old.cy === cy) continue;
-        this.resources.set(chunk, {
-          id: nextId++ as TerrainResourceId,
-          revision: chunk.revision,
-          visual: chunk.visualRevision,
-          assets: this.assetRevision,
-          cx,
-          cy,
-        });
-        this.uploads++;
-      }
+    for (const { visible } of views)
+      for (let cy = visible.minCy; cy <= visible.maxCy; cy++)
+        for (let cx = visible.minCx; cx <= visible.maxCx; cx++) {
+          const chunk = world.getChunkIfLoaded(cx, cy);
+          if (!chunk) continue;
+          wanted.add(chunk);
+          const old = this.resources.get(chunk);
+          if (this.isTerrainReady(chunk) && old?.cx === cx && old.cy === cy) continue;
+          this.resources.set(chunk, {
+            id: nextId++ as TerrainResourceId,
+            revision: chunk.revision,
+            visual: chunk.visualRevision,
+            assets: this.assetRevision,
+            cx,
+            cy,
+          });
+          this.uploads++;
+        }
     for (const chunk of this.resources.keys()) if (!wanted.has(chunk)) this.releaseChunk(chunk);
   }
   resourceId(chunk: Chunk, cx: number, cy: number) {

@@ -67,6 +67,9 @@ describe("backend-independent frame submission", () => {
       prepareTerrain() {
         passes.push("prepare");
       },
+      prepareTerrainViews() {
+        passes.push("prepare views");
+      },
       collectTerrain() {
         return [];
       },

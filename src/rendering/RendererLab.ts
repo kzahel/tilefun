@@ -19,6 +19,7 @@ import type { SceneItem, SpriteItem } from "./SceneItem.js";
 import { probeSpriteSeams } from "./SpriteSeamProbe.js";
 import { probeSurfaceDecals } from "./SurfaceDecalProbe.js";
 import { probeVehicleDepth } from "./VehicleDepthProbe.js";
+import { probeViewRegions } from "./ViewRegionProbe.js";
 import { probeWorldRegistration } from "./WorldRegistrationProbe.js";
 
 function required<T>(value: T | null | undefined): T {
@@ -372,6 +373,7 @@ const lab = {
   probeWorldRegistration,
   probeVehicleDepth,
   probeSurfaceDecals,
+  probeViewRegions,
 };
 (window as unknown as { rendererLab: typeof lab }).rendererLab = lab;
 const controls = required(document.querySelector<HTMLElement>("#controls"));

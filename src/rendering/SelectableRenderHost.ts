@@ -84,15 +84,11 @@ export async function selectableRenderHostFactory(
         height = h;
         current.resize(w, h);
       },
-      beginFrame() {
-        current.beginFrame();
-      },
-      beginWorld(camera) {
-        current.beginWorld(camera);
-      },
-      endWorld() {
-        current.endWorld();
-      },
+      beginFrame: () => current.beginFrame(),
+      beginWorld: (camera) => current.beginWorld(camera),
+      endWorld: () => current.endWorld(),
+      beginView: (camera, region) => current.beginView(camera, region),
+      endView: () => current.endView(),
       captureFrame() {
         return current.captureFrame?.() ?? canvas;
       },

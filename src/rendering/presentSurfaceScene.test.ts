@@ -107,3 +107,55 @@ it("draws a revealed deck after the covered observer, fading it as one group", (
   expect(present(20 + REVEAL_FADE_SECONDS, player, "all")).toBeUndefined();
   expect(frame.surfaceFades.size).toBe(0);
 });
+
+it("keeps each split view's slab fade while another view of the frame skips the slab", () => {
+  const props = worldGeometryRecipe().props;
+  const player = createPlayer(80, -80);
+  const camera = new Camera();
+  camera.setViewport(960, 640);
+  const items = collectScene(
+    [player],
+    props,
+    { getHeightAt: () => 0 } as unknown as World,
+    camera,
+    { minCx: -2, maxCx: 2, minCy: -2, maxCy: 2 },
+    1,
+    { collectElevationItems: () => [] } as unknown as TerrainPresentation,
+    [],
+    false,
+  );
+  // Both views share one device SceneFrame; the second view shows no surfaces.
+  const frame = new SceneFrame();
+  const frameOf = (
+    seconds: number,
+    own?: [
+      Map<string, { opacity: number; time: number }>,
+      Map<string, { opacity: number; time: number }>,
+    ],
+  ) => {
+    frame.fadeSeconds = seconds;
+    const backend = new RecordingBackend(new Map());
+    presentSurfaceScene(backend, camera, frame, items, props, player, "auto", 1, false, own?.[0]);
+    presentSurfaceScene(backend, camera, frame, [], [], player, "auto", 1, false, own?.[1]);
+    const deck = backend.passes.find((p) => p.kind === "overlay" && p.cacheKey === "deck");
+    return deck?.kind === "overlay" ? deck.opacity : "missing";
+  };
+  const own: [
+    Map<string, { opacity: number; time: number }>,
+    Map<string, { opacity: number; time: number }>,
+  ] = [new Map(), new Map()];
+  expect(frameOf(10, own)).toBeUndefined();
+  expect(frameOf(10 + REVEAL_FADE_SECONDS / 2, own)).toBeCloseTo((1 + REVEAL_OPACITY) / 2, 5);
+  expect(frameOf(10 + REVEAL_FADE_SECONDS, own)).toBeCloseTo(REVEAL_OPACITY, 5);
+  // Sharing one fade map, the second view deletes the record and the fade restarts.
+  expect(frameOf(20)).toBeUndefined();
+  expect(frameOf(20 + REVEAL_FADE_SECONDS / 2)).toBeUndefined();
+  // A view that stops presenting the slab forgets its own fade.
+  const [mine] = own;
+  expect(mine.has("deck")).toBe(true);
+  const surfaces = (p: (typeof props)[number]) => p.walls ?? (p.collider ? [p.collider] : []);
+  const withoutDeck = props.filter((p) => !surfaces(p).some((c) => c.surface?.id === "deck"));
+  const backend = new RecordingBackend(new Map());
+  presentSurfaceScene(backend, camera, frame, items, withoutDeck, player, "auto", 1, false, mine);
+  expect(mine.has("deck")).toBe(false);
+});

@@ -1,6 +1,8 @@
+import type { Camera } from "./Camera.js";
 import { createCanvasRenderHost } from "./CanvasRenderHost.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
 import type { RenderHost } from "./RenderHost.js";
+import type { RenderRegion } from "./ViewLayout.js";
 import { WorldRasterFrame } from "./WorldRasterFrame.js";
 
 /** The original canvas retains input and UI; the world canvas is a sibling below it. */
@@ -62,6 +64,17 @@ export function createGpuRenderHost(
   canvas.dataset.gpuDevice = "ready";
   const observer = new ResizeObserver(align);
   observer.observe(canvas);
+  let region: RenderRegion | undefined;
+  const beginView = (camera: Camera, viewRegion?: RenderRegion) => {
+    renderer.surface.beginView();
+    frame.begin(camera);
+    region = viewRegion;
+  };
+  const endView = () => {
+    const offset = frame.end();
+    if (offset) renderer.surface.presentWorld(offset.x, offset.y, region);
+    region = undefined;
+  };
   return {
     renderer,
     uiContext,
@@ -76,13 +89,10 @@ export function createGpuRenderHost(
       uiContext.clearRect(0, 0, canvas.width, canvas.height);
       renderer.beginFrame();
     },
-    beginWorld(camera) {
-      frame.begin(camera);
-    },
-    endWorld() {
-      const offset = frame.end();
-      if (offset) renderer.surface.presentWorld(offset.x, offset.y);
-    },
+    beginWorld: (camera) => beginView(camera),
+    endWorld: endView,
+    beginView,
+    endView,
     captureFrame() {
       if (disposed || renderer.surface.lost) throw Error("Graphics are unavailable for capture");
       renderer.surface.flush();
