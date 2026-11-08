@@ -69,6 +69,8 @@ export class MainMenu {
   onHostP2P: (() => void) | null = null;
   onBuild: (() => void) | null = null;
   onDevelopmentReload: (() => void) | null = null;
+  /** Adds local guests' buttons to the home page (226: a guest leaves from the menu). */
+  seatActions: (add: (label: string, run: () => void) => void) => void = () => {};
 
   constructor() {
     this.overlay.className = "game-menu";
@@ -227,6 +229,7 @@ export class MainMenu {
           this.onClose?.();
           this.onBuild?.();
         });
+        this.seatActions((label, run) => this.button(label, run));
       }
       this.button("Worlds", () => this.openPage("worlds"));
       this.button("Multiplayer", () => this.openPage("multiplayer"));
@@ -367,11 +370,7 @@ export class MainMenu {
     if (page !== "home") this.button("Back", () => this.back());
     activateMenu(this.overlay, () => this.back());
   }
-  private button(
-    text: string,
-    action: (button: HTMLButtonElement) => void,
-    cls = "",
-  ): HTMLButtonElement {
+  private button(text: string, action: (button: HTMLButtonElement) => void, cls = "") {
     const button = document.createElement("button");
     button.type = "button";
     button.textContent = text;

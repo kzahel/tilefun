@@ -8,6 +8,15 @@ function makeCanvas(width = 800, height = 600): HTMLCanvasElement {
 }
 
 describe("ActionManager", () => {
+  it("triggers an action's listeners as its key would (a guest pad's menu button, 226)", () => {
+    const actions = new ActionManager();
+    const fired: string[] = [];
+    actions.on("toggle_menu", () => fired.push("menu"));
+    actions.on("jump", () => fired.push("jump"));
+    actions.trigger("toggle_menu");
+    expect(fired).toEqual(["menu"]);
+  });
+
   it("dispatches interact without throwing or jumping", () => {
     const actions = new ActionManager();
     const context = vi.fn(),

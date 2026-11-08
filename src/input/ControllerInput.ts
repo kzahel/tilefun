@@ -3,23 +3,20 @@ import {
   CONTROLLER_BUTTONS,
   CONTROLLER_HELD_ACTIONS,
   type ControllerCommand,
+  controllerAxes,
 } from "./ControllerBindings.js";
 import { controllerPointer } from "./ControllerPointer.js";
 import { noteInputSource } from "./InputHints.js";
+import { EVERY_PAD, type PadPool } from "./PadAssignment.js";
 
 export { CONTROLLER_ACTIONS, type ControllerCommand } from "./ControllerBindings.js";
 export const CONTROLLER_EVENT = "tilefun-controller";
 
-export function controllerAxes(x: number, y: number): { dx: number; dy: number } {
-  const magnitude = Math.hypot(x, y);
-  if (magnitude <= 0.18) return { dx: 0, dy: 0 };
-  const scale = Math.min(1, (magnitude - 0.18) / 0.82) / magnitude;
-  return { dx: x * scale, dy: y * scale };
-}
-
 /** Frame-boundary collector. UI consumes semantic commands before gameplay does. */
 export class ControllerInput {
   uiActive: () => boolean = () => false;
+  /** Local seats (226): sees every pad, returns those driving seat 0 and its menus. */
+  seats: PadPool = EVERY_PAD;
   held = new Set<ActionName>();
   rightStick = { dx: 0, dy: 0 };
   erase = false;
@@ -64,7 +61,9 @@ export class ControllerInput {
   };
 
   sample(pads: readonly (Gamepad | null)[], now: number): ControllerCommand[] {
-    const standard = pads.filter((p): p is Gamepad => !!p?.connected && p.mapping === "standard");
+    const ui = this.uiActive();
+    const all = pads.filter((p): p is Gamepad => !!p?.connected && p.mapping === "standard");
+    const standard = this.seats.pool(all, ui, now);
     // Keep one active source until it is idle; two held pads must not fight every frame.
     const meaningful = (p: Gamepad) =>
       p.buttons.some((button) => button.pressed) || p.axes.some((axis) => Math.abs(axis) > 0.35);
@@ -83,7 +82,6 @@ export class ControllerInput {
       this.reset();
       this.source = gp.index;
     }
-    const ui = this.uiActive();
     if (meaningful(gp)) noteInputSource("controller");
     if (ui !== this.wasUI) {
       this.reset();

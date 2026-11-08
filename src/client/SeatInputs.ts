@@ -126,6 +126,37 @@ export class CoSeats {
     );
   }
 
+  /**
+   * Co-seats riding a body presented here (an animal; riders in cars are hidden)
+   * are drawn at that body's presented pose plus their seat offset and lift, as
+   * seat 0's rider is, rather than at their buffered pose behind it. `keep` holds
+   * the poses a replay keeps showing.
+   */
+  presentRiders(
+    presented: Entity[],
+    buffered: readonly Entity[],
+    keep: Map<number, Entity>,
+  ): Entity[] {
+    const bodies = new Set(this.bodyIds());
+    if (!bodies.size) return presented;
+    const shown = new Map(presented.map((entity) => [entity.id, entity]));
+    return presented.map((rider) => {
+      const parentId = rider.parentId;
+      const parent =
+        parentId !== undefined && bodies.has(parentId) ? shown.get(parentId) : undefined;
+      const under = parent && buffered.find((entity) => entity.id === parentId);
+      if (!parent || !under || parent === under) return rider;
+      const position = {
+        wx: parent.position.wx + (rider.localOffsetX ?? 0),
+        wy: parent.position.wy + (rider.localOffsetY ?? 0),
+      };
+      const wz = (parent.wz ?? 0) + (rider.wz ?? 0) - (under.wz ?? 0);
+      const placed = { ...rider, position, prevPosition: position, wz, prevWz: wz };
+      keep.set(rider.id, placed);
+      return placed;
+    });
+  }
+
   /** Set each co-seat's motor intent for the next fixed step. */
   intents(
     seats: SeatMovements | undefined,

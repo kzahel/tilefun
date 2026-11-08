@@ -159,6 +159,12 @@ in the game until split screen, 5-ii).
     alone is ignored, because party travel keeps a device's live seats in one
     realm. A seat the client has not joined moves nothing, and authority sends
     a dormant guest nothing at all.
+  - Split screen: [LocalPlayers](../src/client/LocalPlayers.ts) joins guests
+    from a pad or the second keyboard scheme and leaves them from the world
+    menu. [SeatViews](../src/session/SeatViews.ts) gives each seat a view, and a
+    guest's camera follows its controlled body
+    ([SeatFocus](../src/session/SeatFocus.ts)). Each guest view's visible
+    range goes in its envelope.
 
 [RequestBroker](../src/client/RequestBroker.ts) correlates request IDs with the
 response mapping in [requests.ts](../src/shared/requests.ts), checks response

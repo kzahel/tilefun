@@ -3,14 +3,14 @@ import { ActionManager } from "./ActionManager.js";
 import { DEFAULT_ACTION_MAP } from "./ActionMap.js";
 import { controllerInput } from "./ControllerInput.js";
 import {
+  hostKeyMap,
+  KEYBOARD_JOIN_KEY,
   SEAT_ACTIONS,
   SHARED_PAGE_ACTIONS,
   seatKeyMap,
   seatOnly,
-  sharedPageKeyMap,
 } from "./KeyboardSchemes.js";
 import { acceptsGameKey, ownsKeys } from "./KeyFocus.js";
-import { PadAssignment } from "./PadAssignment.js";
 
 const keysOf = (map: { keys: string[] }[]) => new Set(map.flatMap((b) => b.keys));
 
@@ -39,26 +39,25 @@ describe("keyboard schemes", () => {
       expect(lab.has(key), key).toBe(false);
   });
 
-  it("the page owns global keys, which no seat scheme uses", () => {
-    const page = sharedPageKeyMap();
-    expect(page.map((b) => b.action).sort()).toEqual([...SHARED_PAGE_ACTIONS].sort());
-    const seatKeys = new Set([...keysOf(seatKeyMap("left")), ...keysOf(seatKeyMap("right"))]);
-    for (const key of keysOf(page)) expect(seatKeys.has(key), key).toBe(false);
-    expect(keysOf(page)).toEqual(
-      new Set([
-        "Escape",
-        "KeyG",
-        "F3",
-        "Backquote",
-        "Tab",
-        "Digit0",
-        "Digit1",
-        "Digit2",
-        "Digit3",
-        "Digit4",
-        "KeyV",
-      ]),
-    );
+  it("seat 0 beside a keyboard guest keeps page and editor keys but none of the right hand's", () => {
+    const host = hostKeyMap();
+    const right = keysOf(seatKeyMap("right"));
+    const hostKeys = keysOf(host);
+    for (const key of hostKeys) expect(right.has(key), key).toBe(false);
+    expect(right.has(KEYBOARD_JOIN_KEY)).toBe(true);
+    expect(seatKeyMap("right").find((b) => b.action === "jump")?.keys).toEqual([KEYBOARD_JOIN_KEY]);
+    // Every page action keeps its keys (none of them is on the right hand).
+    const solo = new Map(DEFAULT_ACTION_MAP.map((b) => [b.action, b.keys]));
+    for (const action of SHARED_PAGE_ACTIONS)
+      expect(host.find((b) => b.action === action)?.keys, action).toEqual(solo.get(action));
+    // Editor keys stay; the left scheme's seat keys are added.
+    for (const key of ["KeyM", "KeyB", "KeyT", "KeyC", "KeyQ", "KeyZ", "KeyX", "ShiftLeft"])
+      expect(hostKeys.has(key), key).toBe(true);
+    for (const binding of seatKeyMap("left"))
+      for (const key of binding.keys)
+        expect(host.find((b) => b.action === binding.action)?.keys, binding.action).toContain(key);
+    expect(host.find((b) => b.action === "move_up")?.keys).toEqual(["KeyW"]);
+    expect(host.find((b) => b.action === "pan_left")?.keys).toEqual(["KeyA"]);
   });
 
   it("two managers on one keyboard each move only their own seat", () => {
@@ -161,29 +160,5 @@ describe("lab-scoped action manager", () => {
     controllerInput.sample([pad([1, 0, 0, 0], [3])], 48);
     expect(actions.getMovement().dx).toBe(0);
     expect(entered).toEqual([1]);
-  });
-});
-
-describe("pad assignment", () => {
-  const pad = (index: number, pressed = false, connected = true) => ({ index, pressed, connected });
-
-  it("one seat: every connected pad drives it", () => {
-    const pads = new PadAssignment(1);
-    expect([...pads.update([pad(0), pad(2)])]).toEqual([
-      [0, 0],
-      [2, 0],
-    ]);
-  });
-
-  it("several seats: pads join the lowest free seat on a press and keep it until disconnect", () => {
-    const pads = new PadAssignment(3, new Set([0])); // seat 0 plays on the keyboard
-    pads.update([pad(1), pad(3)]);
-    expect(pads.seatOf(1)).toBeUndefined(); // sticks and idle pads never join
-    pads.update([pad(1), pad(3, true)]);
-    expect(pads.seatOf(3)).toBe(1);
-    pads.update([pad(1, true), pad(3, true), pad(4, true)]);
-    expect([pads.seatOf(1), pads.seatOf(3), pads.seatOf(4)]).toEqual([2, 1, undefined]);
-    pads.update([pad(1), pad(3, false, false), pad(4, true)]);
-    expect([pads.seatOf(3), pads.seatOf(4)]).toEqual([undefined, 1]);
   });
 });

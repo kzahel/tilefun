@@ -21,16 +21,24 @@ function context(graphics: boolean) {
   view.camera.zoom = 1 / 3;
   const beginView = vi.fn();
   const endView = vi.fn();
+  const stateView = {
+    world,
+    entities: [player],
+    props: [],
+    playerEntity: player,
+    interior: null,
+    seats: { entities: new Map([[0, player.id]]) },
+  };
   const gc = {
     debugPanel: { terrainPacing: "throughput" },
     camera: view.camera,
     view,
-    session: { views: [view] },
+    session: { views: [view], replica: stateView },
     renderer: backend,
     spriteCatalog: assets,
     sceneFrame: new SceneFrame(),
     time: { presentationSeconds: 0 },
-    stateView: { world, entities: [player], props: [], playerEntity: player, interior: null },
+    stateView,
     ...(graphics ? { beginView, endView } : {}),
   } as unknown as GameContext;
   return { gc, backend, view, beginView, endView };

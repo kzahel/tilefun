@@ -103,6 +103,8 @@ export interface GameContext {
   // Helper methods
   flushServer(): void;
   sendRequest<R extends RequestMessage>(msg: R): Promise<RequestResponse<R>>;
+  /** A fresh request id for `sendRequest`. */
+  takeRequestId(): number;
   sendVisibleRange(force?: boolean): void;
   sendDebugState(paused: boolean, force?: boolean): void;
 }

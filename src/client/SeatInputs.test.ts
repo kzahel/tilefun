@@ -197,4 +197,44 @@ describe("CoSeats", () => {
     expect(seats.moving(still, scene({ 5: { supportId: 2 } }))).toBe(true);
     expect(seats.moving(new Map(), undefined)).toBe(false);
   });
+
+  it("draws a co-seat riding a presented body at that body's pose plus its seat offset (5-ii)", () => {
+    const seats = new CoSeats(() => 0);
+    seats.store(new Map([[1, move(1)]]));
+    seats.replay(new Map([[1, 30]]), []); // seat 1 controls its mount, body 30
+    const mount: Entity = { ...createPlayer(100, 100), id: 30, wz: 4 };
+    const rider: Entity = {
+      ...createPlayer(98, 92),
+      id: 31,
+      parentId: 30,
+      localOffsetX: -2,
+      localOffsetY: -8,
+      wz: 14,
+    };
+    const stranger: Entity = { ...createPlayer(10, 10), id: 40, parentId: 41 };
+    // A presented body no co-seat controls (seat 0's mount, say) keeps its riders.
+    const other: Entity = { ...createPlayer(60, 60), id: 50 };
+    const otherRider: Entity = { ...createPlayer(60, 50), id: 51, parentId: 50 };
+    const presentedOther = { ...other, position: { wx: 70, wy: 60 } };
+    const presentedMount = { ...mount, position: { wx: 130, wy: 100 }, wz: 6 };
+    const keep = new Map<number, Entity>();
+    const [shownMount, shownRider, shownStranger, , shownOtherRider] = seats.presentRiders(
+      [presentedMount, rider, stranger, presentedOther, otherRider],
+      [mount, rider, stranger, other, otherRider],
+      keep,
+    );
+    expect(shownOtherRider).toBe(otherRider);
+    expect(shownMount).toBe(presentedMount);
+    expect(shownRider).toMatchObject({
+      position: { wx: 128, wy: 92 },
+      prevPosition: { wx: 128, wy: 92 },
+      wz: 16, // the presented mount's height plus the rider's lift (14 - 4)
+    });
+    expect(keep.get(31)).toBe(shownRider);
+    expect(shownStranger).toBe(stranger); // not riding a co-seat body
+    // A mount the predictor does not present (buffered as is) leaves its rider alone.
+    expect(seats.presentRiders([mount, rider], [mount, rider], new Map())[1]).toBe(rider);
+    seats.store(undefined);
+    expect(seats.presentRiders([presentedMount, rider], [mount, rider], new Map())[1]).toBe(rider);
+  });
 });

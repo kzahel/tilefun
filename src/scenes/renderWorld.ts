@@ -1,5 +1,6 @@
 import type { GameContext } from "../core/GameScene.js";
 import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
+import { seatEntity } from "../session/SeatFocus.js";
 import { drawViewScene, drawViewTerrain, renderViews } from "../session/ViewRender.js";
 import { renderInterior } from "./renderInterior.js";
 
@@ -7,7 +8,7 @@ import { renderInterior } from "./renderInterior.js";
  * The world through the shared view draw (226), used by PlayScene and EditScene:
  * canvas clear and terrain (`prepared` when a frame of views already prepared
  * it). Entities follow after scene-specific overlays (editor grid). The view
- * defaults to seat 0's; observers stay seat 0 until split screen (slice 5).
+ * defaults to seat 0's.
  */
 export function renderWorld(gc: GameContext, prepared = false, view = gc.view): void {
   const { stateView } = gc;
@@ -21,7 +22,8 @@ export function renderWorld(gc: GameContext, prepared = false, view = gc.view): 
 
 /**
  * Draw y-sorted entities, props, and grass blades on top of terrain.
- * Called after any scene-specific overlays (editor grid, etc.).
+ * Called after any scene-specific overlays (editor grid, etc.). Cutaways follow
+ * the view's own seat (226).
  */
 export function renderEntities(
   gc: GameContext,
@@ -32,10 +34,11 @@ export function renderEntities(
   const { stateView } = gc;
   if (gc.spriteCatalog.size === 0) return;
   if (stateView.interior) {
-    // Rooms still draw with seat 0's camera and frame (one view until slice 5).
-    renderInterior(gc, alpha, extraParticles ?? []);
+    renderInterior(gc, alpha, extraParticles ?? [], view.camera);
     return;
   }
+  const observer =
+    (view.seat ? seatEntity(gc.session, view.seat) : undefined) ?? stateView.playerEntity;
   const time = gc.time?.presentationSeconds ?? 0;
   const realm = gc.realmId ?? null;
   drawViewScene(
@@ -47,8 +50,8 @@ export function renderEntities(
       world: stateView.world,
       props: stateView.props,
       entities: gc.doorPresentation?.entities(stateView.entities, realm) ?? stateView.entities,
-      collectObserver: stateView.playerEntity,
-      surfaceObserver: stateView.playerEntity,
+      collectObserver: observer,
+      surfaceObserver: observer,
     },
     {
       alpha,
@@ -62,7 +65,7 @@ export function renderEntities(
   );
 }
 
-/** Play's display frame: every view of the device (seat 0's today), with terrain
+/** Play's display frame: every view of the device (one per seat), with terrain
  * prepared once. Headless fixtures without graphics draw seat 0's view directly. */
 export function renderPlayViews(
   gc: GameContext,

@@ -122,6 +122,23 @@ describe("DeviceSeats", () => {
     for (const d of devices) expect(d.dispose).toHaveBeenCalledOnce();
   });
 
+  it("tells listeners after every join and departure, whatever removed the guest (5-ii)", async () => {
+    const seats = new DeviceSeats();
+    const { request } = requester();
+    const seen: number[][] = [];
+    const off = seats.onChange(() => seen.push(seats.list().map((s) => s.seat)));
+    await seats.join(request, 1, 1, input());
+    await seats.join(request, 2, 2, input());
+    await seats.leave(request, 3, 1);
+    seats.drop(2);
+    seats.drop(2); // already gone: no news
+    seats.drop(0);
+    off();
+    await seats.join(request, 4, 3, input());
+    seats.dispose();
+    expect(seen).toEqual([[0, 1], [0, 1, 2], [0, 2], [0]]);
+  });
+
   it("samples each guest from its devices beside its body or vehicle; a device-less guest stands still", async () => {
     const seats = new DeviceSeats();
     const { request } = requester();

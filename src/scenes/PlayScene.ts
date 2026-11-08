@@ -7,18 +7,22 @@ import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { normalizesDiagonal, seatPresses, vehicleButtons } from "../input/SeatComposer.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
-import { projectWorld } from "../rendering/Projection.js";
 import type { DeviceSeats } from "../session/DeviceSeats.js";
 import { composeDeviceTick } from "../session/DeviceTick.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import type { IClientTransport } from "../transport/Transport.js";
-import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
+import { drawCrosshair, firstPersonMovement, firstPersonTick } from "./firstPersonPlay.js";
 import {
-  drawCrosshair,
-  firstPersonMovement,
-  firstPersonTick,
-  renderFirstPerson,
-} from "./firstPersonPlay.js";
+  beginViewTick,
+  drawTapDestination,
+  drawViewOverlays,
+  endViewTick,
+  followGuestViews,
+  GuestFeedback,
+  presentViews,
+  renderSoloFirstPerson,
+  restoreViews,
+} from "./playViews.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
 import { renderPlayViews } from "./renderWorld.js";
 
@@ -70,6 +74,7 @@ export class PlayScene implements GameScene {
   /** The device's local players (226), whose input this scene sends each tick. */
   private seats: DeviceSeats | null = null;
   private prevInvincibilityTimer = 0;
+  private readonly guestFeedback = new GuestFeedback();
   private zoomUnsubs: (() => void)[] = [];
   private particles = new ParticleSystem();
   private effectsRealmId: string | null | undefined;
@@ -155,6 +160,7 @@ export class PlayScene implements GameScene {
     this.jumpPressUnsub?.();
     this.jumpPressUnsub = null;
     gc.session.stopPrediction();
+    gc.session.layoutViews(gc.canvas.width, gc.canvas.height, false); // seat 0 alone outside play
   }
 
   onResume(gc: GameContext): void {
@@ -174,6 +180,7 @@ export class PlayScene implements GameScene {
   }
 
   onPause(gc: GameContext): void {
+    if (gc.session.views.length > 1) gc.sendDebugState(true); // a menu pauses the device (226)
     this.stopMovement(gc);
     gc.touchPinch?.detach();
     gc.touchTap?.detach();
@@ -188,16 +195,13 @@ export class PlayScene implements GameScene {
       this.particles.clear();
       this.effectsRealmId = gc.realmId;
     }
-    // Save camera state for render interpolation
-    gc.camera.savePrev();
-
-    // Debug panel state
-    gc.camera.zoom = gc.debugPanel.zoom;
+    // One view per seat (226); each camera saves its pose for render interpolation.
+    const split = beginViewTick(gc).length > 1;
     if (gc.debugPanel.consumeBaseModeChange() || gc.debugPanel.consumeConvexChange()) {
       gc.transport.send({ type: "invalidate-all-chunks" });
     }
-
-    gc.sendDebugState(gc.debugPanel.paused);
+    // While guests play, whatever blocks the device's input (a menu) pauses it.
+    gc.sendDebugState(gc.debugPanel.paused || (split && !!gc.inputBlocked));
 
     // Update debug panel player info
     if (gc.debugEnabled && gc.profile) {
@@ -315,6 +319,7 @@ export class PlayScene implements GameScene {
     // Camera follows the predicted player (placeholder id -1 is skipped, so a
     // pending camera.requestSnap() waits for the first real position).
     gc.view.policy.tick(gc.camera, gc.session);
+    followGuestViews(gc);
     if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
       const savedZoom = gc.camera.zoom;
       gc.camera.zoom = 1;
@@ -324,17 +329,12 @@ export class PlayScene implements GameScene {
       gc.sendVisibleRange();
     }
 
-    // Gem pickup sound
+    // Gem pickup sound; guests' hits and gems sound too (heard at seat 0).
     const gems = gc.stateView.gemsCollected;
-    if (gems > this.prevGemsCollected && this.prevGemsCollected >= 0) {
-      const buf = gc.audioManager.getBuffer("gem_pickup");
-      if (buf) {
-        gc.audioManager.playOneShot({ buffer: buf, volume: 0.4, pitch: 1 + Math.random() * 0.1 });
-      }
-    }
+    if (gems > this.prevGemsCollected && this.prevGemsCollected >= 0) playGemSound(gc);
     this.prevGemsCollected = gems;
-
-    gc.camera.updateShake();
+    this.guestFeedback.update(gc, (kind) => (kind === "gem" ? playGemSound(gc) : playHitSound(gc)));
+    endViewTick(gc);
     gc.chatHUD.update(dt);
 
     // Cosmetic transitions and contact placement are shared with embedded labs.
@@ -367,25 +367,25 @@ export class PlayScene implements GameScene {
     const view = gc.stateView;
     view?.beginPresentation(gc.time.presentationSeconds, alpha, gc.debugPanel.paused);
     try {
-      gc.view.policy.present(gc.camera, gc.session, alpha);
+      presentViews(gc, alpha);
 
       const shown = view?.presentedPlayerEntity ?? gc.stateView.playerEntity;
       gc.tapMovement?.captureView(gc.camera, Math.max(0, (shown.wz ?? 0) - (shown.jumpZ ?? 0)));
 
-      const firstPerson = renderFirstPerson(gc, alpha);
+      const firstPerson = renderSoloFirstPerson(gc, alpha);
       if (!firstPerson) {
         renderPlayViews(gc, alpha, this.particles);
-        drawPlayerMarkers(gc, alpha);
+        drawViewOverlays(gc, alpha);
       }
       gc.chatHUD.render(gc.ctx);
       renderDebugOverlay(gc, alpha);
       render3DDebug(gc);
       if (firstPerson) drawCrosshair(gc.ctx, gc.canvas.width, gc.canvas.height);
-      else this.drawDestination(gc);
+      else drawTapDestination(gc);
       gc.touchJoystick.draw(gc.ctx);
       gc.touchButtons.draw(gc.ctx);
     } finally {
-      gc.camera.restoreActual();
+      restoreViews(gc);
       view?.endPresentation();
     }
   }
@@ -402,7 +402,7 @@ export class PlayScene implements GameScene {
         gc.session.seats.host.cancel();
       }
       gc.camera.shake(HIT_SHAKE_INTENSITY);
-      playRandomSound(gc, GHOST_HIT_KEYS, 0.5, 0.9 + Math.random() * 0.15);
+      playHitSound(gc);
     }
     this.prevInvincibilityTimer = invTimer;
   }
@@ -429,33 +429,6 @@ export class PlayScene implements GameScene {
     if (!seats) return;
     seats.clear();
     transport.send(seats.neutralPacket(nextInputSequence(transport)));
-  }
-
-  private drawDestination(gc: GameContext): void {
-    const controller = gc.tapMovement;
-    const target =
-      controller?.target ?? (controller?.blockedFade ? controller.blockedTarget : null);
-    if (!target) {
-      delete gc.canvas.dataset.tapDestination;
-      return;
-    }
-    const p = projectWorld(gc.camera, target.wx, target.wy, target.wz);
-    gc.canvas.dataset.tapDestination = JSON.stringify({
-      ...target,
-      ...p,
-      active: !!controller?.target,
-    });
-    const ctx = gc.ctx;
-    ctx.save();
-    ctx.globalAlpha = controller?.target ? 1 : (controller?.blockedFade ?? 0) / 0.4;
-    ctx.strokeStyle = controller?.target ? "#ffe38a" : "#ffb694";
-    ctx.lineWidth = 3;
-    ctx.fillStyle = "rgba(255,227,138,0.25)";
-    ctx.beginPath();
-    ctx.ellipse(p.sx, p.sy, 13, 8, 0, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.stroke();
-    ctx.restore();
   }
 
   private maybeLogReconcile(gc: GameContext, remoteView: RemoteStateView): void {
@@ -636,6 +609,16 @@ export class PlayScene implements GameScene {
       if (!liveIds.has(id)) this.prevWanderStates.delete(id);
     }
   }
+}
+
+function playGemSound(gc: GameContext): void {
+  const buf = gc.audioManager.getBuffer("gem_pickup");
+  if (buf)
+    gc.audioManager.playOneShot({ buffer: buf, volume: 0.4, pitch: 1 + Math.random() * 0.1 });
+}
+
+function playHitSound(gc: GameContext): void {
+  playRandomSound(gc, GHOST_HIT_KEYS, 0.5, 0.9 + Math.random() * 0.15);
 }
 
 /** Play a random sound from a list of keys (non-spatial, centered). */

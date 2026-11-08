@@ -32,3 +32,42 @@ it("queues a chunk two views share once, ranked and focused by the view that sho
   expect(dropped).toEqual(["2,-1", "2,0", "2,1"]);
   expect(residency.resident.size).toBe(9);
 });
+
+it("looks ahead per view object, so views joining or reordering never inherit motion (226)", () => {
+  const residency = new TerrainResidency();
+  const surfaces = { isReady: () => false, hasImage: () => false, drop: vi.fn() };
+  const native = 256;
+  const distanceTo = (key: string) => residency.jobs.find((job) => job.key === key)?.distance;
+  const center = (cx: number) => (cx + 0.5) * native;
+  const moving = { x: 128, y: 128 };
+  const still = { x: 64, y: 128 };
+  residency.scan([{ view: moving, visible: range(0, 0) }], world, surfaces, 0);
+  residency.release();
+  moving.x = 160; // moving right: looks one chunk ahead
+  residency.scan(
+    [
+      { view: still, visible: range(0, 0) }, // a new view now first in the list
+      { view: moving, visible: range(0, 0) },
+    ],
+    world,
+    surfaces,
+    1,
+  );
+  // The new view (first) has no motion of its own: a chunk both show is ranked by the
+  // nearer of the new view's own point and the moving view's look-ahead point.
+  expect(distanceTo("0,1")).toBeCloseTo(
+    Math.min(
+      Math.hypot(center(0) - 64, center(1) - 128),
+      Math.hypot(center(0) - (160 + native), center(1) - 128),
+    ),
+  );
+  residency.release();
+  residency.scan([{ view: moving, visible: range(0, 0) }], world, surfaces, 2);
+  // The moving view alone, unmoved since: no look-ahead now.
+  expect(distanceTo("1,0")).toBeCloseTo(Math.hypot(center(1) - 160, center(0) - 128));
+  residency.release();
+  moving.x = 200;
+  residency.scan([{ view: moving, visible: range(0, 0) }], world, surfaces, 3);
+  expect(distanceTo("1,0")).toBeCloseTo(Math.hypot(center(1) - (200 + native), center(0) - 128));
+  residency.release();
+});

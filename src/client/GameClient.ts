@@ -46,7 +46,6 @@ import { interiorRealmId } from "../interiors/GameplayInterior.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
 import { cameraPixelSnap } from "../rendering/PresentationSettings.js";
-import { ViewLayouts } from "../rendering/ViewLayout.js";
 import { CatalogScene } from "../scenes/CatalogScene.js";
 import { EditScene } from "../scenes/EditScene.js";
 import { InteriorCatalogScene } from "../scenes/InteriorCatalogScene.js";
@@ -69,6 +68,7 @@ import { registerClientConsole } from "./ClientConsoleBindings.js";
 import { RemoteStateView } from "./ClientStateView.js";
 import { FirstPersonControl } from "./FirstPersonControl.js";
 import { GameMenuChrome, type MenuChromeHost } from "./GameMenuChrome.js";
+import { LocalPlayers } from "./LocalPlayers.js";
 import { PlaceControls, type PlaceControlsHost } from "./PlaceControls.js";
 import { PlayInputController, type PlayInputHost } from "./PlayInputController.js";
 import { RequestBroker } from "./RequestBroker.js";
@@ -134,7 +134,7 @@ export class GameClient implements GameTestHooks {
   /** The device session and seat 0's view (226); `camera` is the view's camera. */
   readonly device: DeviceSession;
   readonly view: View;
-  private readonly layouts = new ViewLayouts();
+  private localPlayers: LocalPlayers | null = null;
   private actions: ActionManager;
   private readonly playInput: PlayInputController;
   readonly touchJoystick: TouchJoystick;
@@ -308,8 +308,8 @@ export class GameClient implements GameTestHooks {
     this.stateView = new RemoteStateView(clientWorld);
     this.device = new DeviceSession(this.stateView, {
       allCars3d: new URLSearchParams(location.search).has("allcars3d"),
+      view: this.view,
     });
-    this.device.views.push(this.view);
 
     // Send profile identity to server (profileId for persistence, displayName for labels)
     if (this.profile) {
@@ -369,6 +369,7 @@ export class GameClient implements GameTestHooks {
     // Build GameContext and wire it into the scene manager
     const gc = this.buildGameContext();
     this.scenes.setContext(gc);
+    this.localPlayers = new LocalPlayers(gc);
     // Register console cvars and commands
     registerClientConsole(gc, this.netEmulatedTransport);
     if (this.profile?.firstPerson) this.consoleEngine.cvars.get("r_firstperson")?.set(true);
@@ -499,11 +500,7 @@ export class GameClient implements GameTestHooks {
       this.renderHost.endWorld();
     }
     if (this.initDone && (this.startupWorldReady || this.scenes.has(MenuScene))) finishStartup();
-    if (this.initDone) {
-      let buddies = 0;
-      for (const entity of this.stateView.entities) if (entity.wanderAI?.following) buddies++;
-      this.gemHUD.update(this.stateView.gemsCollected, buddies);
-    }
+    if (this.initDone) this.gemHUD.present(this.stateView, this.device.views.length === 1);
   }
 
   /** Update the passive development action without changing menu focus. */
@@ -542,6 +539,7 @@ export class GameClient implements GameTestHooks {
     this.renderHost.dispose();
     this.debugPanel.destroy();
     this.placeControls.destroy();
+    this.localPlayers?.destroy();
     this.doorPresentation.destroy();
     this.loop.stop();
     this.session.flushServer();
@@ -816,7 +814,7 @@ export class GameClient implements GameTestHooks {
       chatHUD: this.chatHUD,
       requests: this.requests,
       get debugPaused() {
-        return client.debugPanel.paused;
+        return client.debugPanel.paused || !!client.localPlayers?.paused;
       },
       get initDone() {
         return client.initDone;
@@ -918,6 +916,7 @@ export class GameClient implements GameTestHooks {
       firstPerson: this.firstPerson,
       flushServer: () => this.session.flushServer(),
       sendRequest: <R extends RequestMessage>(msg: R) => this.gcSendRequest(msg),
+      takeRequestId: () => this.nextRequestId++,
       sendVisibleRange: (force?: boolean) => this.session.sendVisibleRange(force),
       sendDebugState: (paused: boolean, force?: boolean) =>
         this.session.sendDebugState(paused, force),
@@ -930,7 +929,6 @@ export class GameClient implements GameTestHooks {
     // Use the canvas's actual displayed size (respects split-screen CSS when 3D view is active)
     const rect = this.canvas.getBoundingClientRect();
     this.renderHost.resize(Math.round(rect.width), Math.round(rect.height));
-    const [whole] = this.layouts.get("1", this.canvas.width, this.canvas.height);
-    if (whole) this.view.setRegion(whole.region);
+    this.device.layoutViews(this.canvas.width, this.canvas.height, this.scenes.has(PlayScene));
   }
 }

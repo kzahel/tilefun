@@ -14,6 +14,7 @@ import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
+import type { DeviceSession } from "../session/DeviceSession.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import type { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransport.js";
 import type { IClientTransport } from "../transport/Transport.js";
@@ -40,6 +41,8 @@ export interface GameTestHooks {
   readonly initDone: boolean;
 
   readonly stateView: RemoteStateView;
+  /** The device session: its seats and views (226 split screen). */
+  readonly device: DeviceSession;
   readonly transport: IClientTransport;
   readonly netEmulatedTransport: NetEmulatedClientTransport;
   /** Request correlation counter; callers of `gcSendRequest` take `nextRequestId++`. */

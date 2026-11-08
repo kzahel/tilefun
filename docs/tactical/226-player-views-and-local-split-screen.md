@@ -11,8 +11,9 @@ playtest) and 4a-v (Natural landscape, with the old lab host deleted), which
 completes slice 4a. Slice 4b (server seats) is complete in three parts: 4b-i
 (seats on a connection), 4b-ii (replication per connection and realm) and
 4b-iii (party travel). Slice 5 (client seats and split screen) is in three parts:
-5-i (client seats and production multi-seat prediction) is done, and 5-ii (split
-screen in the game) is next. Updated 2026-11-07 for seats on one device
+5-i (client seats and production multi-seat prediction) and 5-ii-a (split screen:
+joining, views and seat input) are done, and 5-ii-b (per-seat prompts, Options focus,
+save/reload and carried items) is next. Updated 2026-11-07 for seats on one device
 session, online seats and the first-person view requirements from 229; progress
 updated 2026-11-08.
 Owner request, 2026-11-07: Workshop labs show game UI but not game controls
@@ -431,8 +432,10 @@ maintaining both shells. The shell import allow-list only shrinks.
 
 ## Decisions
 
-- Open: zoom per layout. Proposed: measure 0.5 and 0.75 in slice 1b and decide
-  on readability and cost.
+- Decided (autonomous run, as below; 5-ii-a): layouts 1, 2 (side by side) and
+  2×2 (also for 3 players), with views zoomed to 0.75 of the chosen zoom for 3–4
+  players; the diagonal stays available to code. The 1b measurements and the
+  render-CPU budget remain an owner checkpoint.
 - Decided (autonomous run under the owner's 2026-11-08 instruction to use the
   proposals; 4b-i): local players 2–4 are guests of the host profile, with a
   seat-tagged `identify` naming them. Their saved data is keyed under the host's
@@ -441,8 +444,13 @@ maintaining both shells. The shell import allow-list only shrinks.
   per seat so per-realm replicas remain possible. Whichever seat asks leads its
   device through doors and between worlds, and the others follow beside it.
 - Decided (autonomous run, as above; 5-i): the client keeps one replica per device and ignores a stream sent through a guest alone. Party travel keeps a device's live seats in one realm, so such a stream exists only in transit edge cases; per-realm replicas remain possible because `realmId` stays per seat.
-- Open: does split screen pause everyone when one player opens the menu
-  (proposed: yes), and which player controls a menu (proposed: the opener)?
+- Decided (autonomous run, as above; 5-ii-a): while guests play, opening a menu
+  (or losing focus) pauses the whole device and never another device; the opener
+  controls the menu (a guest pad's Menu button drives it alone). One player's
+  menus do not pause, as before.
+- Decided (autonomous run, as above; 5-ii-a): a press on a pad seat 0 does not
+  use, or the second keyboard scheme's action key (`Slash`), joins a seat; a seat
+  leaves from the world menu. Seat 0 keeps the first pad it uses.
 - Proposed: the two-pane physics lab becomes two device sessions on one page.
 - Open (owner, raised 2026-11-08 in 4a-iv): should the Interiors playtest move
   to the game's controls? It keeps its own input (HTML D-pad and Jump button,
@@ -1804,3 +1812,60 @@ maintaining both shells. The shell import allow-list only shrinks.
     - carried items: the animal rider's presentation and the 3a deferrals (5-ii), replay time with two seats in the game (5-iii); the script-attachment note on the reset rule.
     - Declined: widening the harness control's 1.25× bound margin (measured 1.33× at the smallest; deterministic).
     - Re-review: ACCEPT. It confirmed the dormant-guest guard (guests turn dormant only on a disconnect, and `admitGuest` clears dormancy before replying) and the teardown.
+- 2026-11-08, slice 5-ii is split in two, each reviewed and committed on its own: **5-ii-a** joining, views and seat input (below); **5-ii-b** per-seat place controls, prompts and hints, Options focus returning to the opening view, the two-seat Worker save/reload, touch in seat 0's region (merging `RenderRegion` with `ViewRegion`) and the carried items (followers' door presentation, guests re-joining after a remote reconnect, followers beside a raised leader, deletion stopping on any travelling seat).
+- 2026-11-08, slice 5-ii-a exit list (split screen in the game: joining, views and seat input):
+  - **Joining** (a page module over the device session):
+    - Scheme B's action key (`Slash`) joins a keyboard guest playing the right-hand scheme. Seat 0 then keeps every key the right hand does not use, plus the left scheme's own keys, so page and editor keys stay with it; it gets its full map back when the guest leaves.
+    - A button press on a pad other than seat 0's joins a pad guest. Seat 0 keeps the first pad it uses (a button or the stick), as single player does today. A guest's pad keeps its seat until the guest leaves or the pad disconnects (which leaves the seat), and seat 0's controller and menus ignore guest pads.
+    - Joins happen only in play with nothing blocking input. A guest takes the lowest free seat, a name ("Player 2") and a character no other seat uses.
+    - Leaving: one button per guest on the world menu's home page. A pad that left must be released before it can join again.
+  - **Menus** (decided under autonomy): while guests play, the world menu, map, catalogs, Options or lost focus pause the whole device (`set-debug`). The opener controls a menu: a guest pad's Menu button opens the world menu with that pad driving its focus.
+  - **Views:**
+    - One `View` per seat in seat order. `followSeat(seat)`: a guest's camera follows its controlled body (its vehicle or mount, else itself), predicted where the predictor publishes it.
+    - Layouts 1, 2 (side by side) and 2×2 for 3–4 players, whose views zoom to 0.75 of the chosen zoom. Seat 0 alone outside play (edit mode keeps one whole-canvas view). Regions follow resizes, joins and leaves.
+  - **Per-view render:**
+    - Each view's cutaway observer is its own seat. Rooms draw per view with that view's camera.
+    - Player markers per view: partners are marked, the view's own player is not.
+    - Terrain look-ahead is keyed by the view's camera rather than its index (3a deferral).
+    - First person only with one seat.
+  - **Visible ranges:** each guest's view range goes in its envelope.
+  - **HUD and sound:** each guest view shows its player label and gems. A hit shakes that seat's view. Gem pickups and hits sound for every seat. Audio listener policy: spatial sound is heard at seat 0 (one output), and each seat's own feedback plays unspatialized.
+  - **Riders:** a co-seat riding an animal is presented at its predicted mount plus its offset, as seat 0 is (5-i carried).
+  - **Teardown:** a guest's input listeners, its pad and seat 0's key map are released when it leaves, is dropped by authority or the session ends, and the menu's leave buttons follow.
+  - **Tests:** Node for the pad assignment, pad actions, key maps, join and leave flow, layouts and zoom, seat cameras, per-view observers, ranges, markers and look-ahead. Browser (only these): two keyboard schemes with real `KeyboardEvent.code` (join with `Slash`, both seats move in their own views); two mocked pads in split screen (a second pad joins, both move, the guest opens the menu with its Menu button, navigates it and leaves).
+  - **Ratchet:** `PlayScene`, `GameClient` and `PlayerPredictor` do not grow.
+- 2026-11-08, slice 5-ii-a done (exit list met):
+  - **Joining** (`src/client/LocalPlayers.ts`, made by `GameClient` once its game context exists):
+    - `Slash` joins a keyboard guest on the right-hand scheme (`seatKeyMap("right")`). Its `ActionManager` is attached during the joining keydown, so that press does not also jump. Seat 0's map becomes `hostKeyMap()`: the whole map without the right hand's keys, plus the left scheme's own keys (Q throw, Z lights, X style), so every page and editor key stays with seat 0. It gets its own map back when the guest goes, whatever removed it (`DeviceSeats.onChange`). A slash typed into a text field does not join.
+    - Pads (`src/input/PadAssignment.ts`, rewritten): seat 0 claims the first pad it uses, with a button or the stick, so a Deck's own controls stay player 1's. Any other pad's button press asks to join; a joined guest keeps its pad until it leaves or the pad disconnects (which leaves the seat). A refused or departed pad must be released before it asks again. Seat 0's controller ignores every pad but its own once it has one; before that, every pad but guests' and joiners'.
+    - `ControllerInput.seats` (a `PadPool`, `EVERY_PAD` by default for labs and tests) sees every standard pad first and returns those driving seat 0, so assignment and seat 0's sampling happen in the same poll.
+    - A pad guest's input (`src/input/PadActions.ts`) is an action set over its pad with seat 0's pad bindings, polled with the page's pads: held actions, the stick, fresh presses (jump, enter, menu, a latched horn), and nothing until every button is released after joining, a clear or a menu.
+    - Joins happen only in play with nothing blocking input. A guest takes the lowest free seat (two pads pressing in one poll get two seats), the name "Player N" and the first of `person1`–`person4` no other local seat plays. A refused join releases the input set.
+    - Leaving: the world menu's home page has one "Player N leaves" button per guest (`MainMenu.seatActions`). The page refreshes after the guest leaves. A refused leave (travel in progress) keeps the seat and its button, as authority does; a seat whose pad disconnected asks again once a second (ten times) while the same guest holds it, never after teardown, and its release cannot unhook a pad that has meanwhile joined a new seat.
+    - A pad pressed in the poll where seat 0 claims its own (a pad listed twice, two pads pressed at once) must be released before it can ask to join. The joining slash is `preventDefault`ed (Firefox's Quick Find).
+  - **Menus** (decided under autonomy, recorded in Decisions): while guests play, the world menu, map, catalogs, Options or lost focus pause the whole device (`set-debug`, which authority applies to every seat): `PlayScene.onPause` pauses at once, and the play tick sends `paused || (split && inputBlocked)`. One player is unchanged. The opener controls the menu: a guest pad's Menu button runs seat 0's `toggle_menu` listeners (`ActionManager.trigger`) and only that pad drives menu focus until the menu closes or that pad disconnects; a menu seat 0 opens (its keys or pad, or any other way after the guest's menu closed) is seat 0's. The router's forced pause state on a world load includes the device pause (`LocalPlayers.paused`: guests playing, and a scene over play or blocked input), so a realm change under the map or a catalog does not unpause authority.
+  - **Views** (`src/session/SeatViews.ts` on `DeviceSession.layoutViews`, given seat 0's view at construction):
+    - One `View` per seat in seat order; a guest's view is made from seat 0's camera policy (`CameraPolicy.forSeat`) and pixel snapping, starts where seat 0 looks until its guest streams in, and goes with its seat. On a world change (`clearPresentation`) guests' cameras snap to their seat in the new world, as the router places seat 0's.
+    - Layouts 1, 2 (side by side) and 2×2 for 3–4 seats, whose views zoom to 0.75 of the chosen zoom (`View.zoomScale`). Outside play seat 0 is shown alone on the whole canvas (`PlayScene.onExit`; `GameClient.resize` lays out the same way), so the editor keeps one view; guests' views start afresh when play resumes. Regions are kept while nothing changes.
+    - `followSeat({ seat })` (`src/session/SeatFocus.ts`): a guest's camera follows the body it controls by the parent rule (its vehicle or mount, else itself), at the predictor's published pose on ticks and the presented pose in display frames; a seat in no frame keeps its camera.
+  - **Per-view render:**
+    - Each view's cutaway observer is its own seat's entity (seat 0's path unchanged). Rooms draw once per view with that view's camera (`renderInterior(…, camera)`); the room presentation stays shared.
+    - Player markers per view, clipped to its region: partners are marked, the view's own player is not (`drawPlayerMarkers(…, localPlayerId)`).
+    - Terrain look-ahead is keyed by each view's camera object, so a view joining or a reorder never hands one view's motion to another (3a deferral).
+    - First person draws only while one seat plays (`renderSoloFirstPerson`).
+    - With three players the grid's empty corner says how to join.
+  - **Visible ranges:** each guest view's range goes in its envelope when it changes (`View.rangeKey`, cleared by `clearPresentation` on a world change), and none before the guest's body is streamed.
+  - **HUD and sound:** in split screen each view has a badge (name and gems; below the page's map button in the top-right view) and the page's gem panel is hidden (`GemHUD.present`). A guest's hit (from its seat's invincibility sync) shakes its own view and sounds; its gem pickups sound. Audio listener policy: spatial sound (footsteps, ambience, sirens, engines, creature calls) is heard at seat 0, the one listener; each seat's own hit and gem feedback plays unspatialized.
+  - **Riders:** a co-seat riding a body the predictor presents (an animal) is drawn at that body's presented pose plus its seat offset and lift, and kept for replays (`CoSeats.presentRiders`), as seat 0's rider is (5-i carried). In-car riders stay hidden.
+  - **Teardown:** a guest's input set is released when it leaves, is dropped by authority, a join is refused or the session ends: a keyboard scheme detaches its listeners, a pad guest stops being polled (`ActionSeatInput`'s `release`). `LocalPlayers.destroy` (from `GameClient.destroy`, including a kick of seat 0) restores `EVERY_PAD`, removes the join listener and the menu buttons.
+  - **Code moved to make room:** the tap destination overlay moved from `PlayScene` to `playViews.ts`; `controllerAxes` moved to `ControllerBindings.ts`; the unused `PlayerPredictor.samplePresentationPlayer` was deleted. `PlayScene` 649 → 632 lines, `PlayerPredictor` 1,001 → 992, `ControllerInput` 159 → 157, `MainMenu` 466 → 465, `GameClient` 936 → 934 (another session's baseline of 927 still fails).
+  - **Tests:**
+    - Node: `PadAssignment.test.ts` (5), `PadActions.test.ts` (4), `LocalPlayers.test.ts` (keyboard and pad joins and leaves, refusals, the menu opener, disconnects, teardown), `SeatViews.test.ts` (layouts, zoom, lifetimes, guest cameras), `playViews.test.ts` (zoom, guest ranges, feedback, markers and badges, the join hint, first person), `renderWorldSeats.test.ts` (per-view observers and room cameras), new cases in `TerrainResidency.test.ts`, `SeatInputs.test.ts` (riders), `DeviceSeats.test.ts` (`onChange`), `ControllerInput.test.ts` (the pad pool), `ActionManager.test.ts` (`trigger`), `KeyboardSchemes.test.ts` (`hostKeyMap`), and a characterization block "split screen on the play path (226 slice 5-ii-a)" (the device pause, per-view zoom and guest ranges, seat 0 alone outside play). The existing characterization is unchanged.
+    - Browser (`tests/split-screen.spec.ts`, Canvas): two keyboard schemes with real `KeyboardEvent.code` (Slash joins; WASD and the arrows move their own seats in their own views; the arrows no longer move seat 0; the guest leaves from the menu and seat 0 gets the arrows back) and two mocked pads (a second pad joins its own view; the guest's Menu button opens the menu, which seat 0's pad cannot move; the guest's pad reaches "Player 2 leaves" and closes the menu).
+  - **Seeded faults:** 106 single-line faults (`/tmp/tilefun-226-5iia/faults.py`) over pad assignment, pad actions, the controller hook, the key maps, the join flow, seat views, guest cameras, the look-ahead, play views, the device pause, per-view drawing, riders and markers. 87 failed the suites at first (`faults.log`). Cases were added for 16 survivors, which now fail (`faults2.log`): guests' pads before seat 0 has a pad, joins outside play or from other keys, a refused join's listeners, the refused leave (changed to keep the seat), the opener after a menu closes, two pads joining in one poll, guest presentation, `forSeat`, vertical follow, saving, presenting and shaking every view, per-seat badge gems, the predictor's rider wiring, and riders of bodies no co-seat controls. Of the three left, one is equivalent (an assigned pad left pending: every way out of pending also clears it) and two do not compile (an unused binding). After the review fixes, 14 more faults over them (`faults3.log`, `faults4.log`): 12 caught, one does not compile, and one (destroy not clearing retry timers) is masked by the destroyed guard that also stops them.
+  - **Validation:** `npm run typecheck` (four configs), Biome on the changed files, knip (clean), the ratchet (only other sessions' entries fail: `GameClient.ts` 927 → 934, `src/rendering/*`, `VehicleChassis.ts`). Focused vitest over `src/server`, `src/shared`, `src/transport`, `src/input`, `src/scenes`, `src/client`, `src/session`, `src/scenarios`, `src/persistence`, `src/console`, `src/physics`, `src/railway`, `src/ui` and `src/rendering`: 215 files, 1,965 tests, all passing (`RecipeWorldClient`'s convergence case failed once under full parallel load and passes alone, three runs). `art:catalog` then `workshop:manifest` (line references only) and a production build. Playwright against the build: the new `split-screen` (2), `controller-menu`, `player-markers`, `gpu-renderer`, `building-doors`, `car-controls`, `prediction-recovery`, `farm-doors`, `p2p-worker`, `worker-server` and `tap-movement` (60 with the new pair), smoke (28), `scenario-lifecycle`, `jump-park`, `world-geometry`, `embedded-geometry-rendering`, `vehicle-placement` and `gameplay-interiors` (11), the standalone HTTP/WebSocket suite (3). `streaming:bench -- --assert-ready`: every scenario ready (cold, standing, walk, sprint, reverse, zoom-out). A three-player capture on both renderers was checked by eye (2×2 at 0.75, the empty corner, badges and markers).
+  - **Carried to 5-ii-b:** per-seat place controls and prompts (a guest's enter key and Y button do nothing yet), hints per seat device, Options focus returning to the opening view, the two-seat Worker save/reload, touch and pointer in seat 0's region (touch controls and seat 0's debug overlay still cover the whole canvas, and taps, clicks and hold destinations in a guest's region still move seat 0 through seat 0's camera), followers' door presentation, guests re-joining after a remote reconnect, followers beside a raised leader, deletion stopping on any travelling seat.
+  - **Carried to 5-iii (Deck acceptance):** whether Chrome on the Deck lists the built-in controls twice (Steam's virtual pad and the raw device); the first press is covered (a pad pressed while seat 0 claims its own waits for a fresh press), but a second listing's later press would seat Player 2. Known limitation: a solo player cannot move seat 0 to another pad without disconnecting the first (its press joins a guest).
+  - **Review** (Yep Anywhere, Opus 5.5 high): CHANGES REQUESTED for one blocking finding: guests' cameras were not snapped on a world change, so after a party trip a guest's view swept across the map from the old world's coordinates and sent a new range nearly every tick of the sweep. Fixed (`clearPresentation` snaps guests' cameras; a case lands the camera in one tick with one range). Optional findings taken: the opener's pad disconnecting hands the menu back; a lost pad's refused leave is retried and cannot unhook a pad that rejoined; a pad pressed as seat 0 claims its own waits; the router's forced pause keeps the device pause under a scene menu (`LocalPlayers.paused`); the joining slash is `preventDefault`ed; a new guest view starts at seat 0's camera; `PadAssignment.pend` removed; docs wording and the carried pointer item. Recorded for 5-iii: the Deck double-listing check.
+    - Re-review: CHANGES REQUESTED for one new item: the same-poll guard only delayed the second pad's join by a frame. Fixed (the pad must be released first), and the retries were hardened (one timer set cleared on teardown, retries only while the same guest holds the seat).
+    - Second re-review: ACCEPT.

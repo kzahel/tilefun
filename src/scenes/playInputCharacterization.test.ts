@@ -941,3 +941,61 @@ describe("device seats on the play path (226 slice 5-i)", () => {
     expect(h.take().filter((m) => m.type === "vehicle-emergency")).toEqual([]);
   });
 });
+
+describe("split screen on the play path (226 slice 5-ii-a)", () => {
+  async function splitHarness() {
+    const h = playHarness();
+    await seatGuest(h);
+    const guest = (h.view.serverEntities as Entity[])[1] as Entity;
+    h.view.entities = [h.player, guest];
+    Object.assign((h.view as unknown as { seats: object }).seats, { session: () => undefined });
+    const guestView = new View(followSeat({ seat: 1 }), undefined, 1);
+    guestView.setRegion({ x: 400, y: 0, width: 400, height: 600 });
+    h.gc.session.views.push(guestView);
+    return { ...h, guestView };
+  }
+
+  it("a menu pauses the whole device while guests play; one player keeps playing", async () => {
+    const solo = playHarness();
+    solo.host.menuOpen = true;
+    solo.step();
+    expect(solo.debugStates.at(-1)).toBe(false); // unchanged for one player
+    const h = await splitHarness();
+    h.step();
+    expect(h.debugStates.at(-1)).toBe(false);
+    h.host.menuOpen = true;
+    h.step();
+    expect(h.debugStates.at(-1)).toBe(true);
+    h.host.menuOpen = false;
+    h.step();
+    expect(h.debugStates.at(-1)).toBe(false);
+    // The world menu, map or catalogs push over play: the device pauses at once.
+    h.scene.onPause(h.gc);
+    expect(h.debugStates.at(-1)).toBe(true);
+    const before = solo.debugStates.length;
+    solo.scene.onPause(solo.gc);
+    expect(solo.debugStates).toHaveLength(before);
+  });
+
+  it("every view's camera steps at its own zoom; a guest's follows it and sends its range", async () => {
+    const h = await splitHarness();
+    h.guestView.zoomScale = 0.75;
+    (h.gc.debugPanel as { zoom: number }).zoom = 2;
+    h.take();
+    h.step();
+    expect([h.camera.zoom, h.guestView.camera.zoom]).toEqual([2, 1.5]);
+    expect([h.guestView.camera.x, h.guestView.camera.y]).toEqual([140, 100]);
+    const range = h.guestView.camera.getVisibleChunkRange();
+    expect(h.take().filter((m) => m.type === "seat")).toEqual([
+      { type: "seat", seat: 1, message: { type: "visible-range", ...range } },
+    ]);
+    expect(h.visibleRanges.length).toBeGreaterThan(0); // seat 0's range is the page's
+  });
+
+  it("leaving play shows seat 0 alone (the editor keeps one view)", async () => {
+    const h = await splitHarness();
+    const layout = vi.spyOn(h.gc.session, "layoutViews");
+    h.scene.onExit(h.gc);
+    expect(layout).toHaveBeenLastCalledWith(h.canvas.width, h.canvas.height, false);
+  });
+});

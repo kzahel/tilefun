@@ -7,14 +7,17 @@ import {
 import { compileGameplayRoom, initialRoom } from "../interiors/GameplayRoom.js";
 import { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { presentInterior } from "../interiors/presentInterior.js";
+import type { Camera } from "../rendering/Camera.js";
 import { collectScene } from "../rendering/collectScene.js";
 import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
 
-/** Same wall/furniture renderer; actors come from the production scene collector. */
+/** Same wall/furniture renderer; actors come from the production scene collector.
+ * Each split-screen view draws the shared room with its own camera (226). */
 export function renderInterior(
   gc: GameContext,
   alpha: number,
   particles: ParticlePresentation,
+  camera: Camera = gc.camera,
 ): void {
   const identity = gc.stateView.interior;
   if (!identity) return;
@@ -62,8 +65,8 @@ export function renderInterior(
       gc.stateView.entities,
     gc.stateView.props,
     gc.stateView.world,
-    gc.camera,
-    gc.camera.getVisibleChunkRange(),
+    camera,
+    camera.getVisibleChunkRange(),
     alpha,
     gc.renderer,
     particles,
@@ -72,7 +75,7 @@ export function renderInterior(
     gc.sceneFrame,
   );
   try {
-    presentInterior(gc.renderer, gc.camera, presentation, placements, items);
+    presentInterior(gc.renderer, camera, presentation, placements, items);
   } finally {
     frame.release();
   }

@@ -1,3 +1,4 @@
+import type { Entity } from "../entities/Entity.js";
 import "./GemHUD.css";
 
 /** Persistent player progress, independent of scene and world renderer. */
@@ -29,6 +30,18 @@ export class GemHUD {
 
   setIcon(sprite: HTMLCanvasElement): void {
     this.icon.getContext("2d")?.drawImage(sprite, 0, 0, 16, 16, 0, 0, 16, 16);
+  }
+
+  /** Seat 0's gems and following buddies; hidden while split-screen views draw each
+   * seat's own badge (226). */
+  present(state: { gemsCollected: number; entities: readonly Entity[] }, shown: boolean): void {
+    if (!shown) {
+      this.element.hidden = true;
+      return;
+    }
+    let buddies = 0;
+    for (const entity of state.entities) if (entity.wanderAI?.following) buddies++;
+    this.update(state.gemsCollected, buddies);
   }
 
   update(gems: number, buddies: number): void {

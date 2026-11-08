@@ -52,7 +52,8 @@ export interface SeatActions {
   clearHeld(): void;
 }
 
-/** A seat's input set over one action set: movement, presses and a latched jump. */
+/** A seat's input set over one action set: movement, presses and a latched jump.
+ * `release` frees the devices behind it (a keyboard scheme's listeners, a pad). */
 export class ActionSeatInput implements SeatInput {
   private jumped = false;
   private readonly off: () => void;
@@ -60,6 +61,7 @@ export class ActionSeatInput implements SeatInput {
   constructor(
     private readonly actions: SeatActions,
     readonly steering = DEFAULT_CAR_DRIVING === "steering",
+    private readonly release?: () => void,
   ) {
     this.off = actions.on("jump", () => {
       this.jumped = true;
@@ -87,5 +89,6 @@ export class ActionSeatInput implements SeatInput {
 
   dispose(): void {
     this.off();
+    this.release?.();
   }
 }

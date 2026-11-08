@@ -33469,7 +33469,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:595"
+          "source": "src/scenes/PlayScene.ts:568"
         },
         {
           "system": "Gameplay",
@@ -33525,7 +33525,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:595"
+          "source": "src/scenes/PlayScene.ts:568"
         },
         {
           "system": "Gameplay",
@@ -33577,7 +33577,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:595"
+          "source": "src/scenes/PlayScene.ts:568"
         },
         {
           "system": "Gameplay",
@@ -35431,6 +35431,14 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/client/LocalPlayers.ts:186"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/client/LocalPlayers.ts:189"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/console/serverCommands.ts:83"
         },
         {
@@ -36643,7 +36651,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:512"
+          "source": "src/scenes/PlayScene.ts:485"
         },
         {
           "system": "Gameplay",
@@ -36822,6 +36830,10 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/client/LocalPlayers.ts:18"
         }
       ]
     },
@@ -36840,6 +36852,10 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/client/LocalPlayers.ts:18"
         }
       ]
     },
@@ -36858,6 +36874,10 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/client/LocalPlayers.ts:18"
         }
       ]
     },
@@ -36876,6 +36896,10 @@
         {
           "system": "Shared asset loader (registered)",
           "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/client/LocalPlayers.ts:18"
         }
       ]
     },
@@ -38239,7 +38263,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:56"
+          "source": "src/scenes/renderWorld.ts:59"
         },
         {
           "system": "Gameplay",

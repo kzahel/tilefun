@@ -50,8 +50,9 @@ export class TerrainResidency {
   /** Borrowed resident records, sorted by `scan` and valid until `release()`. */
   readonly jobs: TerrainResident[] = [];
   recordsCreated = 0;
-  /** Previous camera per view index: each view looks ahead along its own motion. */
-  private readonly previous: { x: number; y: number }[] = [];
+  /** Previous camera per view (keyed by its camera object, so views joining or
+   * leaving never hand one view's motion to another): each looks ahead along its own. */
+  private readonly previous = new Map<object, { x: number; y: number; seen: boolean }>();
   // Per-scan state: the visit stamp, the scan time and the current view's look-ahead.
   private visited = false;
   private now = 0;
@@ -66,11 +67,11 @@ export class TerrainResidency {
   ): readonly TerrainResident[] {
     this.visited = !this.visited;
     this.now = now;
-    if (this.previous.length > views.length) this.previous.length = views.length;
+    for (const last of this.previous.values()) last.seen = false;
     for (let index = 0; index < views.length; index++) {
       const view = views[index];
       if (!view) continue;
-      this.lookAhead(view.view, index);
+      this.lookAhead(view.view);
       const { visible } = view;
       for (let cy = visible.minCy - RENDER_DISTANCE; cy <= visible.maxCy + RENDER_DISTANCE; cy++)
         for (
@@ -87,6 +88,7 @@ export class TerrainResidency {
           if (chunk) this.visit(chunk, cx, cy, onScreen, view.view.y, surfaces);
         }
     }
+    for (const [key, last] of this.previous) if (!last.seen) this.previous.delete(key);
     for (const entry of this.resident.values()) {
       if (entry.visited === this.visited) continue;
       surfaces.drop(entry.chunk, entry.key);
@@ -97,8 +99,8 @@ export class TerrainResidency {
   }
 
   /** One chunk-native step ahead of the view along its motion since last frame. */
-  private lookAhead(view: TerrainPreparationView["view"], index: number) {
-    const last = this.previous[index];
+  private lookAhead(view: TerrainPreparationView["view"]) {
+    const last = this.previous.get(view);
     const dx = last ? view.x - last.x : 0,
       dy = last ? view.y - last.y : 0;
     const length = Math.hypot(dx, dy);
@@ -107,7 +109,8 @@ export class TerrainResidency {
     if (last) {
       last.x = view.x;
       last.y = view.y;
-    } else this.previous[index] = { x: view.x, y: view.y };
+      last.seen = true;
+    } else this.previous.set(view, { x: view.x, y: view.y, seen: true });
   }
 
   private visit(
@@ -192,6 +195,6 @@ export class TerrainResidency {
   clear(): void {
     this.resident.clear();
     this.jobs.length = 0;
-    this.previous.length = 0;
+    this.previous.clear();
   }
 }

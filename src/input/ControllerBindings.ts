@@ -1,5 +1,13 @@
 import type { ActionName } from "./ActionMap.js";
 
+/** Stick axes with a radial dead zone, rescaled to reach 1 at full deflection. */
+export function controllerAxes(x: number, y: number): { dx: number; dy: number } {
+  const magnitude = Math.hypot(x, y);
+  if (magnitude <= 0.18) return { dx: 0, dy: 0 };
+  const scale = Math.min(1, (magnitude - 0.18) / 0.82) / magnitude;
+  return { dx: x * scale, dy: y * scale };
+}
+
 export type ControllerCommand =
   | "up"
   | "down"

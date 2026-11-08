@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { CONTROLLER_ACTIONS, ControllerInput, controllerAxes } from "./ControllerInput.js";
+import { controllerAxes } from "./ControllerBindings.js";
+import { CONTROLLER_ACTIONS, ControllerInput } from "./ControllerInput.js";
 
 function pad(buttons: number[] = [], axes = [0, 0, 0, 0], index = 0): Gamepad {
   return {
@@ -73,5 +74,23 @@ describe("controller session", () => {
     session.sample([pad(), pad([], [0, 0, 0, 0], 1)], 3);
     session.sample([pad(), pad([], [1, 0, 0, 0], 1)], 4);
     expect(session.movement).toMatchObject({ dx: 1, dy: 0 });
+  });
+  it("local seats see every standard pad first and choose those driving seat 0 (226)", () => {
+    const session = new ControllerInput();
+    const seen: number[][] = [];
+    session.seats = {
+      pool: (pads, ui) => {
+        seen.push(pads.map((p) => p.index));
+        return pads.filter((p) => p.index === (ui ? 1 : 0));
+      },
+    };
+    const unknown = { ...pad([], [0, 0, 0, 0], 2), mapping: "" } as unknown as Gamepad;
+    session.sample([pad(), pad([], [0, 0, 0, 0], 1), unknown], 0);
+    session.sample([pad([], [0, -1, 0, 0]), pad([], [1, 0, 0, 0], 1), unknown], 1);
+    expect(seen[1]).toEqual([0, 1]);
+    expect(session.movement).toMatchObject({ dx: 0, dy: -1 }); // pad 1 is a guest's
+    session.uiActive = () => true;
+    session.sample([pad(), pad([], [0, 0, 0, 0], 1)], 2);
+    expect(session.sample([pad([1]), pad([13], [0, 0, 0, 0], 1)], 3)).toEqual(["down"]);
   });
 });

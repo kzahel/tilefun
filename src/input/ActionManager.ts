@@ -191,6 +191,11 @@ export class ActionManager {
     };
   }
 
+  /** Run an action's listeners as its key would (a guest pad's menu button, 226). */
+  trigger(action: ActionName): void {
+    for (const callback of this.listeners.get(action) ?? []) callback();
+  }
+
   // --- Testing helpers (physical `KeyboardEvent.code` values, e.g. "KeyW") ---
 
   pressKey(key: string): void {

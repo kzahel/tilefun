@@ -2,10 +2,10 @@ import { type ActionMapConfig, type ActionName, DEFAULT_ACTION_MAP } from "./Act
 
 /**
  * Keyboard ownership for local players (tactical 226). One player owning the
- * keyboard keeps today's full map, both WASD and the arrows. When two players
- * share it, each seat gets a one-handed scheme and the page shell owns the global
- * keys (menu, map, console, debug, editor, zoom), so neither seat can open them by
- * accident. Scheme bindings are provisional until split screen ships (slice 5).
+ * keyboard keeps today's full map, both WASD and the arrows. A second player
+ * joins with the right-hand scheme; seat 0 then keeps every key the right hand
+ * does not use, plus the left scheme's own keys (`hostKeyMap`), so the page and
+ * editor keys stay with it and neither scheme can press the other's keys.
  */
 export type KeyboardScheme = "solo" | "left" | "right";
 
@@ -27,7 +27,7 @@ export const SEAT_ACTIONS = [
 ] as const satisfies readonly ActionName[];
 export type SeatAction = (typeof SEAT_ACTIONS)[number];
 
-/** Page-owned actions available while two players share the keyboard. */
+/** Page-owned actions seat 0 keeps while a keyboard guest plays. */
 export const SHARED_PAGE_ACTIONS = [
   "toggle_menu",
   "toggle_world_map",
@@ -41,6 +41,9 @@ export const SHARED_PAGE_ACTIONS = [
   "zoom_4",
   "toggle_first_person",
 ] as const satisfies readonly ActionName[];
+
+/** The key a keyboard guest presses to join: the right-hand scheme's jump. */
+export const KEYBOARD_JOIN_KEY = "Slash";
 
 /** Left hand: WASD with nearby actions. */
 const LEFT: Record<SeatAction, string[]> = {
@@ -94,8 +97,13 @@ export function seatOnly(map: ActionMapConfig): ActionMapConfig {
   return map.filter((binding) => seat.has(binding.action));
 }
 
-/** The page shell's keys while two seats share the keyboard. */
-export function sharedPageKeyMap(): ActionMapConfig {
-  const page = new Set<ActionName>(SHARED_PAGE_ACTIONS);
-  return DEFAULT_ACTION_MAP.filter((binding) => page.has(binding.action));
+/** Seat 0's keys while a keyboard guest plays the right-hand scheme: the whole map
+ * without the right hand's keys, plus the left scheme. */
+export function hostKeyMap(): ActionMapConfig {
+  const right = new Set(Object.values(RIGHT).flat());
+  return DEFAULT_ACTION_MAP.map(({ action, keys }) => {
+    const own = keys.filter((key) => !right.has(key));
+    const left = (LEFT as Partial<Record<ActionName, string[]>>)[action] ?? [];
+    return { action, keys: [...new Set([...own, ...left])] };
+  }).filter((binding) => binding.keys.length > 0);
 }

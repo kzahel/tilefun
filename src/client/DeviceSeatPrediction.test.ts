@@ -264,6 +264,23 @@ describe("multi-seat prediction on the device session (226 slice 5-i)", () => {
     const buffered = d.replica.serverEntities.find((e) => e.id === id);
     expect((published()?.position.wy ?? 0) - (buffered?.position.wy ?? 0)).toBeGreaterThan(0.5);
     expect(presented()?.position.wy).toBeCloseTo(published()?.position.wy ?? Number.NaN, 3);
+    // A rider on the guest's body (as on an animal it rides) is drawn at the body's
+    // presented pose plus its seat offset and lift, not at its buffered pose (5-ii).
+    const body = d.replica.serverEntities.find((e) => e.id === id);
+    const rider = {
+      ...(body as Entity),
+      id: 9_999,
+      parentId: id,
+      localOffsetX: 2,
+      localOffsetY: -6,
+      wz: (body?.wz ?? 0) + 10,
+    };
+    const shown = d.predictor.presentEntities(1, [...d.replica.serverEntities, rider]);
+    const shownBody = shown.find((e) => e.id === id);
+    const shownRider = shown.find((e) => e.id === rider.id);
+    expect(shownRider?.position.wx).toBeCloseTo((shownBody?.position.wx ?? 0) + 2, 3);
+    expect(shownRider?.position.wy).toBeCloseTo((shownBody?.position.wy ?? 0) - 6, 3);
+    expect(shownRider?.wz).toBeCloseTo((shownBody?.wz ?? 0) + 10, 3);
 
     // Mispredicted: the guest walks in prediction but stands for authority. It eases
     // its own correction rather than snapping to the replayed pose.

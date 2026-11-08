@@ -28,6 +28,14 @@ export interface SeatWorld {
  */
 export class DeviceSeats {
   private readonly bySeat = new Map<number, ClientSeat>([[0, new ClientSeat(0)]]);
+  private readonly listeners = new Set<() => void>();
+
+  /** Called after a guest joins or leaves, whatever removed it (views, key maps,
+   * pads and menus follow). */
+  onChange(listener: () => void): () => void {
+    this.listeners.add(listener);
+    return () => this.listeners.delete(listener);
+  }
 
   /** Seat 0, sampled by the play scene. */
   get host(): ClientSeat {
@@ -55,6 +63,7 @@ export class DeviceSeats {
     await request({ type: "join-seat", requestId, seat, ...options });
     const joined = new ClientSeat(seat, input);
     this.bySeat.set(seat, joined);
+    for (const listener of this.listeners) listener();
     return joined;
   }
 
@@ -71,6 +80,7 @@ export class DeviceSeats {
     if (!left) return;
     left.input?.dispose();
     this.bySeat.delete(seat);
+    for (const listener of this.listeners) listener();
   }
 
   /** Forget every guest and release its input set (session teardown). */

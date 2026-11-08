@@ -874,7 +874,7 @@ export class PlayerPredictor {
         break;
       }
     }
-    return releasing.map((entity) => {
+    const presented = releasing.map((entity) => {
       if (!component.has(entity.id)) return entity;
       const predicted = entity.id === player.id ? player : this.published.get(entity.id);
       if (!predicted) return entity;
@@ -927,16 +927,7 @@ export class PlayerPredictor {
       this.lastPresentation.set(entity.id, presented);
       return presented;
     });
-  }
-  samplePresentationPlayer(
-    alpha: number,
-    displayed: readonly Entity[],
-    _sourceSeconds?: number,
-  ): Entity | null {
-    return (
-      this.presentEntities(alpha, displayed).find((e) => e.id === this.predicted?.id) ??
-      this.presentationPlayer
-    );
+    return this.coSeats.presentRiders(presented, buffered, this.lastPresentation);
   }
   get player() {
     return this.predicted;

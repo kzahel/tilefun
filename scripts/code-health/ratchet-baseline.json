@@ -68,7 +68,7 @@
       "overLimit": 0
     },
     "src/client/PlayerPredictor.ts": {
-      "lines": 1001,
+      "lines": 992,
       "worst": 45,
       "overLimit": 4
     },
@@ -218,7 +218,7 @@
       "overLimit": 1
     },
     "src/input/ControllerInput.ts": {
-      "lines": 159,
+      "lines": 157,
       "worst": 62,
       "overLimit": 1
     },
@@ -583,7 +583,7 @@
       "overLimit": 1
     },
     "src/scenes/PlayScene.ts": {
-      "lines": 649,
+      "lines": 632,
       "worst": 45,
       "overLimit": 2
     },
@@ -713,7 +713,7 @@
       "overLimit": 1
     },
     "src/ui/MainMenu.ts": {
-      "lines": 466,
+      "lines": 465,
       "worst": 41,
       "overLimit": 1
     },

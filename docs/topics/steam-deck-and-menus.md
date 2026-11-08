@@ -65,18 +65,29 @@ or credentials in this repository.
   override. D-pad Up/L toggles vehicle
   lights and D-pad Right/K changes siren style. Jump/Throw retain their meanings.
   Named on-screen paddles and interaction prompts follow the last input source.
-- Local players (226 slice 2; pure pieces, no split-screen UI until slice 5):
-  `PadAssignment` maps standard pads by `Gamepad.index` — with one seat every pad
-  drives it (today's single active source); with several, a pad joins the lowest
-  free seat on its first button press and keeps it until it disconnects.
-  `KeyboardSchemes` keep one player's full map, or give two sharing players
-  disjoint one-handed schemes (left: WASD, Space, LShift, Q, R, Z, X, F, E;
-  right: arrows, Slash, RShift, Period, Comma, L, K, Semicolon, Quote; provisional)
-  while the page shell owns Escape, map, debug, console, editor, zoom and first
-  person. `KeyFocus`: the game page takes keys from the whole window (its DOM UI
-  stops what it consumes); an embedded lab takes keys and pads only while focus
-  is inside it and not on a form control. A real-keyboard rollover check for two
-  schemes remains a slice 5 device acceptance item.
+- Local players (226): split screen in the game.
+  - **Joining:** a press on a pad that seat 0 does not use joins Player 2–4
+    (`PadAssignment` by `Gamepad.index`). Seat 0 keeps the first pad it uses
+    (a button or the stick), as single player does, so the Deck's own controls
+    stay player 1's. A guest keeps its pad until it leaves or the pad
+    disconnects, which leaves its seat. Slash (scheme B's jump) joins a
+    keyboard player on the right-hand scheme (arrows, Slash, RShift, Period,
+    Comma, L, K, Semicolon, Quote). Seat 0 then keeps every key the right hand
+    does not use, plus the left scheme's Q, Z and X (`hostKeyMap`). Keyboard and
+    pad co-op: play seat 0 on the pad and join the keyboard player with Slash.
+  - **Menus:** while guests play, a menu, the map, catalogs, Options or lost
+    focus pause the whole device. A guest's Menu button opens the world menu,
+    and only that pad drives it until it closes. The home page has one
+    "Player N leaves" button per guest.
+  - **Views:** layouts 1, 2 (side by side) and 2×2 for 3–4 players, zoomed to
+    0.75 of the chosen zoom. Each view shows its player's badge (name and
+    gems), and partners get location markers. With three players, the empty
+    corner says how to join. Edit mode shows seat 0 alone, and first person
+    works only while one player plays.
+  - `KeyFocus`: the game page takes keys from the whole window (its DOM UI stops
+    what it consumes); an embedded lab takes keys and pads only while focus is
+    inside it and not on a form control. A real-keyboard rollover check for two
+    schemes remains a device acceptance item (226 slice 5-iii).
 - Public invitation links use the hosted game URL, while entering a code/link
   keeps the current installation's origin. P2P needs internet signaling and
   suitable peer connectivity; no new TURN relay is provided.

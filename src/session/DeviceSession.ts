@@ -7,6 +7,7 @@ import type { RenderBackend } from "../rendering/RenderFrame.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import type { Movement } from "../shared/Movement.js";
 import { DeviceSeats } from "./DeviceSeats.js";
+import { SeatViews } from "./SeatViews.js";
 import type { View } from "./View.js";
 
 /**
@@ -22,12 +23,25 @@ export class DeviceSession {
   /** The device's local players: seat 0 and any guests (226). */
   readonly seats = new DeviceSeats();
   private predictor: PlayerPredictor | null = null;
+  /** Split screen: one view per seat, when the device has seat 0's own view. */
+  private readonly seatViews: SeatViews | null;
 
   constructor(
     readonly replica: RemoteStateView,
-    options: { allCars3d?: boolean } = {},
+    options: { allCars3d?: boolean; view?: View } = {},
   ) {
     this.frame = new SceneFrame({ allCars3d: options.allCars3d ?? false });
+    this.seatViews = options.view ? new SeatViews(this.seats, options.view) : null;
+    if (options.view) this.views.push(options.view);
+  }
+
+  /** Lay the views out over the canvas: one per seat in play (226), seat 0's alone
+   * otherwise. Without seat views (labs) the views keep their regions. */
+  layoutViews(width: number, height: number, split: boolean): readonly View[] {
+    if (!this.seatViews) return this.views;
+    const views = this.seatViews.layout(width, height, split);
+    this.views.splice(0, this.views.length, ...views);
+    return views;
   }
 
   /** The active predictor, or null outside play. */
@@ -115,11 +129,17 @@ export class DeviceSession {
     );
   }
 
-  /** Forget presentation state on a world or realm change: the shared frame and
-   * every view's observer-local slab fades. */
+  /** Forget presentation state on a world or realm change: the shared frame,
+   * every view's observer-local slab fades, and guests' sent visible ranges and
+   * camera easing (they snap to their seat in the new world; seat 0's camera is
+   * placed by the message router). */
   clearPresentation(): void {
     this.frame.clear();
-    for (const view of this.views) view.fades.clear();
+    for (const view of this.views) {
+      view.fades.clear();
+      view.rangeKey = undefined;
+      if (view.seat !== 0) view.camera.requestSnap();
+    }
   }
 
   /** Release presentation, prediction and the guests' input sets (session teardown). */
