@@ -177,3 +177,37 @@ position error. Its short frame p50/p95/p99 is 16.7/33.4/33.4ms. Both receipts
 retain the initial runs and explicit measurement limits; these unpaired smoke
 runs do not demonstrate a device performance improvement. Ready for the next owner
 handling/rollover review.
+
+## Owner feel follow-up: fast cars rolling in turns
+
+Owner feedback: faster cars tip over too easily. A flat-ground probe (boosted and
+base top speed, then three seconds of full lock or a 0.4s left/right slalom)
+reproduced it: race coupe, rally hatchback, beach buggy, monster truck, boosted
+go-kart and boosted police car rolled; the rally hatchback, beach buggy and monster
+truck rolled even unboosted. Three causes: the centre of mass sat at the collider's
+geometric centre (about half the body height); 1.5 tire grip exceeded the
+static-rollover threshold for tall, narrow chassis; and full lock was fixed at
+every speed, demanding several g at racing speeds.
+
+Shared defaults now:
+
+- Every wheeled chassis (solid or articulated) uses the chassis box inertia with
+  its centre of mass 0.3 of body height above the base (`CHASSIS_CENTRE_OF_MASS`).
+  This alone removed every rollover in the probe; at 0.35 one model rolled again
+  with 1.5 cornering grip, so it is not sufficient margin by itself.
+- Tire force uses a friction ellipse: 1.5 drive/brake grip (unchanged acceleration)
+  and 1.2 cornering grip (`TIRE_CORNERING_GRIP`). Uniform 1.0 grip would have cut
+  rear-drive racer acceleration by a third and widened fast turns further.
+- Full lock narrows with speed so bicycle-model lateral demand stays at 0.9 of
+  cornering grip (`STEERING_LATERAL_ACCELERATION`). Alone it did not stop rolls
+  (the high centre of mass rolled at about 0.7g from the lock transient), but it
+  stops front tires scrubbing past their grip, so fast turns are tighter than
+  unlimited lock with the same grip.
+
+Result: no rollovers in either probe at base or boosted speed; peak lean is 1–3° at
+full lock. Low-speed turning is essentially unchanged (compact 61px versus 58px
+radius). Boosted racers turn wider by physics: the open-wheel racer at 540px/s
+needs about a 590px radius at roughly 1g. Ramp, ledge-tipping, recovery, dump-bed
+and transporter cases still pass; a new native test keeps a boosted rally hatchback
+upright at full lock (it ended inverted before). Ramp/jump/ledge feel and the
+boosted turning radius need owner review in play.

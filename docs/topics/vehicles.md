@@ -42,7 +42,7 @@ rings stay attached in body-local coordinates. Baked sprite fallback shadows rem
 part of their existing art. Directional lighting and true caster silhouettes are
 separate follow-on work.
 
-[216](../tactical/216-dynamic-3d-vehicles.md) delivers freely rotating land-vehicle chassis, authored axle suspension/traction, full replay/save state, shared depth and recovery. Game and labs share the default controller; native/browser qualification passes; owner feel review is next. The physical Chromebook course works, with 16.7/33.4/33.4ms frame p50/p95/p99 in the latest short development smoke; this is not a matched performance comparison. Boats retain their upright watercraft behavior.
+[216](../tactical/216-dynamic-3d-vehicles.md) delivers freely rotating land-vehicle chassis, authored axle suspension/traction, full replay/save state, shared depth and recovery. Game and labs share the default controller; native/browser qualification passes; owner feel review is next. The physical Chromebook course works, with 16.7/33.4/33.4ms frame p50/p95/p99 in the latest short development smoke; this is not a matched performance comparison. Boats retain their upright watercraft behavior. Fast-car rollover tuning (lowered centre of mass, 1.2 cornering grip, speed-limited full lock) is recorded in 216 and awaits owner feel review.
 
 
 Status: dynamic land-vehicle chassis and shared depth delivered in 216; ready for owner feel review. Dump bed (222), towing and transporter (224), racers and shopping visits (225) restored. Shared road traffic and driving audio remain.

@@ -1,10 +1,18 @@
 import type RAPIER from "@dimforge/rapier3d-compat";
+import { JUMP_GRAVITY } from "../config/constants.js";
 import { vehicleTurningRadius } from "../traffic/Vehicle.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import contacts from "../traffic/vehicle-ground-contacts.json" with { type: "json" };
 import { PHYSICS_DT, PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
 import type { MotionIntent } from "./PhysicsState.js";
 import { angleDifference } from "./VehicleMotor.js";
+
+/** Drive/brake tire friction coefficient (fraction of wheel load). */
+export const TIRE_GRIP = 1.5;
+/** Cornering friction coefficient; below TIRE_GRIP so hard turns slide rather than roll. */
+export const TIRE_CORNERING_GRIP = 1.2;
+/** Full-lock lateral demand at speed (world px/s²), slightly under cornering grip. */
+export const STEERING_LATERAL_ACCELERATION = 0.9 * TIRE_CORNERING_GRIP * JUMP_GRAVITY;
 
 const clamp = (n: number, limit: number) => Math.max(-limit, Math.min(limit, n));
 const dot = (a: RAPIER.Vector, b: RAPIER.Vector) => a.x * b.x + a.y * b.y + a.z * b.z;
@@ -95,7 +103,14 @@ export class VehicleChassis {
       error === undefined
         ? clamp(input.steering ?? 0, 1)
         : clamp((error / 0.7) * Math.sign(speed || target), 1);
-    const angle = steer * Math.atan(this.wheelbase / vehicleTurningRadius(this.type));
+    // Full lock reaches the authored turning radius at low speed; faster, the
+    // angle narrows so the bicycle-model lateral demand v²·tan(a)/wheelbase
+    // stays near tire grip instead of rolling the chassis over.
+    const lock = Math.min(
+      Math.atan(this.wheelbase / vehicleTurningRadius(this.type)),
+      Math.atan((STEERING_LATERAL_ACCELERATION * this.wheelbase) / Math.max(1, speed * speed)),
+    );
+    const angle = steer * lock;
     const impulses: { point: RAPIER.Vector; impulse: RAPIER.Vector; support?: RAPIER.RigidBody }[] =
       [];
     this.grounded = false;
@@ -137,13 +152,14 @@ export class VehicleChassis {
               (mass * acceleration) / SCALE / this.connections.length,
             )
           : 0;
-      let tire = add(
-        mul(longitudinal, drive + brake),
-        mul(lateral, (-dot(relative, lateral) * mass) / (2 * this.connections.length) / PHYSICS_DT),
-      );
-      const force = Math.hypot(tire.x, tire.y, tire.z),
-        capacity = load * 1.5;
-      if (force > capacity) tire = mul(tire, capacity / force);
+      // Friction ellipse: full drive/brake grip, lower cornering grip so a hard
+      // turn slides before the ground-level tire force rolls the chassis.
+      const along = drive + brake,
+        across = (-dot(relative, lateral) * mass) / (2 * this.connections.length) / PHYSICS_DT;
+      const usage =
+        Math.hypot(along / TIRE_GRIP, across / TIRE_CORNERING_GRIP) / Math.max(load, 1e-9);
+      const scale = usage > 1 ? 1 / usage : 1;
+      const tire = add(mul(longitudinal, along * scale), mul(lateral, across * scale));
       const impulse = mul(add(mul(hit.normal, load), tire), PHYSICS_DT);
       impulses.push({ point, impulse, ...(hit.body ? { support: hit.body } : {}) });
       this.grounded = true;

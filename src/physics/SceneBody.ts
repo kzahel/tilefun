@@ -12,6 +12,9 @@ import type { PhysicsBodyKind, PhysicsBodyState } from "./PhysicsState.js";
 import { TransporterBody } from "./TransporterBody.js";
 import { VehicleChassis } from "./VehicleChassis.js";
 
+/** Wheeled chassis centre-of-mass height as a fraction of body height above its base. */
+export const CHASSIS_CENTRE_OF_MASS = 0.3;
+
 /** One admitted body in the shared scene: its Rapier body/collider, cached numerical
  * state, and optional chassis or articulated equipment. */
 export interface SceneBody {
@@ -112,8 +115,18 @@ function colliderDesc(
     .setRestitution(entity.type === "ball" ? 0.55 : 0);
   if (kind === "character" || (kind === "vehicle" && !car))
     shape.setFrictionCombineRule(RAPIER.CoefficientCombineRule.Min);
-  shape.setMass(kind === "vehicle" ? 8 : kind === "loose" ? 0.2 : 1);
-  if (articulated) setChassisBoxMass(shape, hx, halfY - clearance / 2, hz, 8);
+  if (car)
+    // Centre of mass CHASSIS_CENTRE_OF_MASS of the body height above its base
+    // (collider frame is raised by clearance/2), for rollover resistance in turns.
+    setChassisBoxMass(
+      shape,
+      hx,
+      halfY - clearance / 2,
+      hz,
+      8,
+      halfY * (2 * CHASSIS_CENTRE_OF_MASS - 1) - clearance / 2,
+    );
+  else shape.setMass(kind === "vehicle" ? 8 : kind === "loose" ? 0.2 : 1);
   return shape;
 }
 

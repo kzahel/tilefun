@@ -10,20 +10,22 @@ import {
 import { PHYSICS_DT, PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
 import type { MotionIntent, PhysicsBodyState } from "./PhysicsState.js";
 
-/** Hollow/articulated chassis keep the ordinary chassis box's mass distribution:
- * their parts define contact only, and moving equipment does not move the centre
- * of mass. Half extents in metres, in the collider frame. */
+/** Every wheeled chassis, solid or articulated, shares the chassis box's inertia
+ * with a lowered centre of mass (`centreY` in the collider frame): engine, floor
+ * and axles sit low. Articulated parts define contact only, and moving equipment
+ * does not move the centre of mass. Half extents in metres, in the collider frame. */
 export function setChassisBoxMass(
   desc: RAPIER.ColliderDesc,
   hx: number,
   halfHeight: number,
   hz: number,
   mass: number,
+  centreY: number,
 ) {
   const b = halfHeight;
   desc.setMassProperties(
     mass,
-    { x: 0, y: 0, z: 0 },
+    { x: 0, y: centreY, z: 0 },
     {
       x: (mass / 3) * (b * b + hz * hz),
       y: (mass / 3) * (hx * hx + hz * hz),

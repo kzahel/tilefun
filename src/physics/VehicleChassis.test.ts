@@ -5,9 +5,11 @@ import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
 import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import { required } from "../shared/required.js";
 import { createVehicle } from "../traffic/Vehicle.js";
+import { DEFAULT_BOOST, vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import { rotateBodyVector } from "./BodyRotation.js";
 import { PHYSICS_DT, PHYSICS_PIXELS_PER_METRE } from "./PhysicsDefaults.js";
 import { type PhysicsGeometry, PhysicsScene } from "./PhysicsScene.js";
+import { angleDifference } from "./VehicleMotor.js";
 
 const scenes: PhysicsScene[] = [];
 afterEach(() => {
@@ -53,6 +55,31 @@ it("climbs with actual chassis pitch and crosses onto the level deck", async () 
   expect(car.position.wx).toBeGreaterThan(150);
   expect(scene.diagnostics.worldSteps).toBe(150);
   expect(scene.diagnostics.bodyCreates).toBe(1);
+});
+
+it("corners a boosted racer at full lock on the flat without rolling over", async () => {
+  const scene = await create(),
+    car = createVehicle("rally-hatchback", 0, 0, Direction.Right),
+    flat = { ...geometry, queryProps: () => [] };
+  car.id = 1;
+  const { speed, boost = DEFAULT_BOOST } = vehiclePerformance(car.type);
+  let lowestUp = 1,
+    turned = 0,
+    previous = 0;
+  for (let tick = 0; tick < 300; tick++) {
+    scene.synchronize([car]);
+    const steering = tick < 120 ? 0 : 1;
+    scene.step(new Map([[1, { vx: 0, vy: 0, driveSpeed: speed * boost, steering }]]), flat);
+    const state = required(scene.bodyState(1));
+    if (tick >= 120) {
+      lowestUp = Math.min(lowestUp, rotateBodyVector(required(state.rotation), 0, 0, 1).z);
+      turned += Math.abs(angleDifference(state.heading, previous));
+    }
+    previous = state.heading;
+  }
+  // Before the lowered centre of mass, cornering grip and speed-limited lock, it rolled.
+  expect(lowestUp).toBeGreaterThan(0.9);
+  expect(turned).toBeGreaterThan(Math.PI / 2); // Still turns, through a wider arc.
 });
 
 it("pushes a parked chassis with bounded actual contact penetration and brakes after release", async () => {
