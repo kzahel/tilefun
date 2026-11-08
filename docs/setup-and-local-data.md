@@ -207,7 +207,9 @@ are individual records whose status can change and which the owner can delete:
 Vite development, `npm run preview` and standalone Node provide the same
 protected art/interior/Workshop APIs. Static hosting of `dist/` alone provides
 none. Standalone defaults all private directories beneath `DATA_DIR`; Vite uses
-the defaults above. Explicit overrides take precedence.
+the defaults above. Explicit overrides take precedence. Public game servers set
+`TILEFUN_WORKSHOP=off` so standalone serves only the game, world inspection
+and static files; clients already tolerate the missing APIs as on Pages.
 
 Back up `workshop/play-ideas/` too when transferring gameplay suggestions. It contains
 private text and game pictures, with no credentials or audio.

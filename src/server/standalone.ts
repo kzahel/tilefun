@@ -33,6 +33,10 @@ const hasDistDir = existsSync(distDir);
 // The Vite build uses base: "/tilefun/" so all assets are under that path.
 const BASE_PATH = "/tilefun/";
 
+// Public game servers omit the private review APIs (Workshop, art notes, play
+// ideas, fault reports). Static clients already tolerate their absence.
+const workshopEnabled = (process.env.TILEFUN_WORKSHOP ?? "on").toLowerCase() !== "off";
+
 const workshop = new WorkshopService({
   directory: process.env.WORKSHOP_DATA_DIR ?? join(DATA_DIR, "workshop"),
   auth: new WorkshopAuth(process.env.WORKSHOP_AUTH_DIR ?? join(DATA_DIR, "workshop")),
@@ -51,7 +55,7 @@ const workshop = new WorkshopService({
 });
 
 const httpServer = createServer(async (req, res) => {
-  if (await workshop.handle(req, res)) return;
+  if (workshopEnabled && (await workshop.handle(req, res))) return;
   if (await inspectionHttp(server, req, res)) return;
   const url = req.url ?? "/";
 
@@ -86,6 +90,7 @@ server.startLoop();
 httpServer.listen(PORT, () => {
   serverLog(`Server listening on http://localhost:${PORT}`);
   serverLog(`Network transport: ${NET_TRANSPORT}`);
+  if (!workshopEnabled) serverLog("Workshop APIs disabled (TILEFUN_WORKSHOP=off)");
   if (hasDistDir) {
     serverLog(`Serving client at http://localhost:${PORT}${BASE_PATH}`);
   } else {

@@ -41,6 +41,13 @@ limits, and authenticated player identity; the profile/connection UUID is not an
 authentication credential. The world inspection HTTP endpoints remain public and
 read-only so that the explorer can inspect a remote server.
 
+The public play server at `https://play.graehlarts.com/` runs standalone with an
+admin token and `TILEFUN_WORKSHOP=off`, so it exposes no Workshop, art-review,
+play-idea or fault-report APIs. It deploys only main commits whose push CI run
+passed (the GitHub Pages gate) and restarts immediately, disconnecting players
+briefly. Its host setup lives with the operator's machine configuration, not here.
+It has the guest limits above: open editing, no admission control or accounts.
+
 Use Node 24 LTS (`nvm use`) and npm 11.19 or newer for development. Node 22.12+
 and current even-numbered releases are also supported. The Node and WebXR types
 are direct dependencies so typechecking does not depend on incidental packages.
