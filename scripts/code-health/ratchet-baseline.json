@@ -63,7 +63,7 @@
       "overLimit": 1
     },
     "src/client/GameClient.ts": {
-      "lines": 927,
+      "lines": 923,
       "worst": 0,
       "overLimit": 0
     },
@@ -128,8 +128,8 @@
       "overLimit": 1
     },
     "src/explorer/TilePreview.ts": {
-      "lines": 373,
-      "worst": 44,
+      "lines": 429,
+      "worst": 45,
       "overLimit": 1
     },
     "src/game/base-game.ts": {
@@ -293,7 +293,7 @@
       "overLimit": 1
     },
     "src/interiors/playtest/main.ts": {
-      "lines": 872,
+      "lines": 875,
       "worst": 0,
       "overLimit": 0
     },
@@ -343,7 +343,7 @@
       "overLimit": 0
     },
     "src/main.ts": {
-      "lines": 678,
+      "lines": 689,
       "worst": 34,
       "overLimit": 1
     },
@@ -362,11 +362,6 @@
       "worst": 31,
       "overLimit": 2
     },
-    "src/persistence/PlayerProfileStore.ts": {
-      "lines": 137,
-      "worst": 27,
-      "overLimit": 1
-    },
     "src/persistence/WorldInspection.ts": {
       "lines": 205,
       "worst": 61,
@@ -378,7 +373,7 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 989,
+      "lines": 1001,
       "worst": 79,
       "overLimit": 6
     },
@@ -403,8 +398,8 @@
       "overLimit": 1
     },
     "src/physics/VehicleChassis.ts": {
-      "lines": 154,
-      "worst": 34,
+      "lines": 218,
+      "worst": 37,
       "overLimit": 1
     },
     "src/projection/CarProxyScene.ts": {
@@ -423,13 +418,8 @@
       "overLimit": 2
     },
     "src/rendering/CameraStabilityProbe.ts": {
-      "lines": 157,
-      "worst": 61,
-      "overLimit": 1
-    },
-    "src/rendering/Canvas2DRenderer.ts": {
-      "lines": 412,
-      "worst": 28,
+      "lines": 141,
+      "worst": 44,
       "overLimit": 1
     },
     "src/rendering/CanvasInteriorMap.ts": {
@@ -473,8 +463,8 @@
       "overLimit": 1
     },
     "src/rendering/GpuMeshBodies.ts": {
-      "lines": 331,
-      "worst": 76,
+      "lines": 302,
+      "worst": 61,
       "overLimit": 1
     },
     "src/rendering/GpuOverlayResources.ts": {
@@ -483,7 +473,7 @@
       "overLimit": 1
     },
     "src/rendering/GpuRasterSurface.ts": {
-      "lines": 962,
+      "lines": 1011,
       "worst": 72,
       "overLimit": 1
     },
@@ -493,42 +483,32 @@
       "overLimit": 1
     },
     "src/rendering/ParticleSystem.ts": {
-      "lines": 325,
+      "lines": 443,
       "worst": 51,
-      "overLimit": 2
+      "overLimit": 3
     },
     "src/rendering/presentSurfaceScene.ts": {
-      "lines": 155,
-      "worst": 75,
+      "lines": 94,
+      "worst": 26,
       "overLimit": 1
     },
     "src/rendering/propDepth.ts": {
-      "lines": 147,
+      "lines": 151,
       "worst": 29,
       "overLimit": 1
     },
     "src/rendering/RasterRenderBackend.ts": {
-      "lines": 306,
+      "lines": 335,
       "worst": 34,
       "overLimit": 1
     },
-    "src/rendering/SelectableRenderHost.ts": {
-      "lines": 104,
-      "worst": 29,
-      "overLimit": 1
-    },
-    "src/rendering/SpriteSeamProbe.ts": {
-      "lines": 114,
-      "worst": 30,
-      "overLimit": 1
-    },
     "src/rendering/SurfacePresentation.ts": {
-      "lines": 242,
-      "worst": 76,
+      "lines": 299,
+      "worst": 77,
       "overLimit": 1
     },
     "src/rendering/SurfaceReceivers.ts": {
-      "lines": 521,
+      "lines": 522,
       "worst": 51,
       "overLimit": 5
     },
@@ -548,8 +528,8 @@
       "overLimit": 1
     },
     "src/rendering/WorldRegistrationProbe.ts": {
-      "lines": 240,
-      "worst": 106,
+      "lines": 232,
+      "worst": 75,
       "overLimit": 1
     },
     "src/road/CitySurfaceRecipes.ts": {
@@ -583,7 +563,7 @@
       "overLimit": 1
     },
     "src/scenes/PlayScene.ts": {
-      "lines": 632,
+      "lines": 638,
       "worst": 45,
       "overLimit": 2
     },
@@ -628,7 +608,7 @@
       "overLimit": 1
     },
     "src/server/Realm.ts": {
-      "lines": 1341,
+      "lines": 1342,
       "worst": 0,
       "overLimit": 0
     },
@@ -643,7 +623,7 @@
       "overLimit": 1
     },
     "src/server/RealmStreaming.ts": {
-      "lines": 292,
+      "lines": 312,
       "worst": 31,
       "overLimit": 1
     },

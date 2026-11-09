@@ -67,14 +67,14 @@ Playwright uses its own Chromium and an isolated preview on port 4174. Its
 feedback goes under `test-results/`, not the human review inbox. On Linux,
 Chromium may also need the system dependencies installed by
 `npx playwright install --with-deps chromium`.
-With `CI` set, browser tests use one worker and a 60-second per-test deadline:
-hosted software GPU rendering can otherwise starve the simulation Worker.
-Push/PR CI runs `npm run test:smoke`: 27 existing browser cases covering essential
-game, Worker/save, input, editing, vehicle and multiplayer boundaries, with a
-ten-minute suite deadline. The full browser suite runs nightly at 02:17 UTC or
-through **Actions → CI → Run workflow**, using eight independent runners with
-isolated auth/data and a 45-minute per-shard suite deadline. Only push validation
-on main deploys. Superseded runs for the same event/ref are cancelled. See
+Locally, browser tests use four workers with `fullyParallel` and one retry. With
+`CI` set they use one worker, because hosted software GPU rendering can otherwise
+starve the simulation Worker. Both use a 60-second per-test deadline.
+Push/PR CI runs `npm run test:smoke`: launch/pixels, keyboard input, the local
+Worker's lifecycle and saves, and launcher assets. There is no scheduled
+full-suite run. Run the whole suite locally with `npm run test:all`
+(17 minutes on an M4 Pro, 2026-11-09). Only push validation on main deploys, and
+superseded runs for the same event/ref are cancelled. See
 [testing](topics/testing.md#ci-and-deployment) for the current gate and scope.
 Individual assertion deadlines remain explicit. Long
 headless scenario tests have bounded tick counts and separate wall-time allowances for hosted CPUs.
@@ -104,8 +104,7 @@ contact and release together through the shared short-tap helper.
 Review tests wait for intercepted feedback requests before inspecting their
 payloads: optimistic approval counts and pending-save text can appear before
 the request reaches the test route.
-The push/PR browser gate stops at its first failure. Full scheduled/manual and
-local runs collect all failures; failure artifacts include Playwright traces.
+Browser runs collect all failures; CI failure artifacts include Playwright traces.
 The raster verification renders every Workshop candidate in headless-shell and
 full Chromium, checks the committed fingerprints and leaves the manifest intact.
 CI runs it on Ubuntu x64 so CPU-specific blending differences cannot hide behind

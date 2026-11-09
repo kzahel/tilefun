@@ -19,9 +19,20 @@ build first only when production output is required. Rendering or integration
 changes do not automatically require the full browser suite.
 
 Reserve `npm test`, repository-wide `npm run check`, and the full Playwright suite
-for broad changes, evidence of wider impact, explicit requests or CI. Broaden
-validation when focused checks expose unresolved concerns; do not repeat passing
-checks without a relevant change or unresolved concern. CI keeps its existing gates.
+for broad changes, evidence of wider impact, explicit requests or before a push
+that touches shared behavior. Broaden validation when focused checks expose
+unresolved concerns; do not repeat passing checks without a relevant change or
+unresolved concern.
+
+`npm run test:all` is the wide local gate ([233](../tactical/233-fast-ci-and-local-full-suite.md)):
+lint and code health, typechecks, native and Node integration, HTTP integration,
+the build and the full hardware-GPU browser suite. Playwright runs four workers
+with `fullyParallel`, the CI deadlines (60 s per test, 15 s per assertion) and
+one retry, so load flakes are reported as flaky. On the M4 Pro the browser suite
+takes about 15 min (556 cases) and vitest about 1.5 min. Eight workers
+overloaded the machine; measure before raising the count. CI runs only a small
+browser smoke, so run the affected browser files locally, or `test:all` before
+pushing broad changes.
 
 Hosted CI renders with software WebGL (SwiftShader). Since
 [232](../tactical/232-webgl2-only-renderer.md) every spec runs the WebGL2
@@ -47,22 +58,32 @@ and timed out under full-suite load) and keeps its 30 s CI allowance.
 
 ## CI and deployment
 
-[186](../tactical/186-ci-reliability-and-deployment-gate.md) owns the 2026-10-23
-repair and simplification. Pushes and PRs require lint, types, all native and
-HTTP/WS tests, dependency audits, the production build, raster verification, and
-the browser cases selected by `playwright.smoke.config.ts` (28 on 2026-11-07).
-These cover launch/pixels, keyboard/controller/touch controls, Worker lifecycle
-and saves, mobile editing, vehicle driving/persistence, multiplayer and launcher
-assets. Whole smoke files run in the `chromium` project; single cases from larger
-files carry an `@smoke` tag and run in `chromium-tagged` (tactical 226 adds real
-touch gestures and the WorldGeometry lab Worker for its input migration).
-Run them with `npm run test:smoke`; no browser tests are deleted.
+[233](../tactical/233-fast-ci-and-local-full-suite.md) owns the current gate
+(2026-11-09; [186](../tactical/186-ci-reliability-and-deployment-gate.md) holds
+the earlier repair). Pushes and PRs run four parallel jobs, and deploy needs all
+four:
+- `check`: lint, code health, audits, typechecks, Node/Worker/HTTP integration
+  and the build;
+- `unit`: `vitest --shard=i/4` on four runners;
+- `raster`: verification of registered art rasters;
+- `smoke`: one browser job running `smoke.spec.ts`, `worker-server.spec.ts` and
+  `pwa.spec.ts` (launch and pixels, keyboard input, Worker lifecycle and saves,
+  launcher assets).
 
-CI layout (2026-11-07): `check` runs lint, typecheck, audits, Worker checks, build
-and HTTP/Node integration; `unit` runs `vitest --shard=i/3` on three runners
-(vitest balances by file, so split per-species matrices into short files); smoke
-runs in two shards; the nightly/manual full suite runs in twelve shards with
-`fullyParallel` on CI so long spec files spread across shards (one worker each).
+There is no scheduled or sharded full browser run. The remaining browser
+contracts run locally through `npm run test:all`:
+- controller, mobile editing and touch;
+- multiplayer and vehicles;
+- labs, review and GPU parity.
+
+`workflow_dispatch` reruns the push gate without deploying. Each job spends
+about 90 s checking out the 2 GB tree (mostly `art-source/wildlife-v2`
+projection JSON), which unit tests partly read. Keep CI changes to stable,
+browser-dependent boundaries; add coverage below the browser instead.
+
+Code-health ratchet: the 2026-11-09 baseline accepts growth from reviewed
+226/232-era work. Split candidates are `GpuRasterSurface.ts` and
+`PhysicsScene.ts` (both over 1,000 lines) and `ParticleSystem.ts`.
 
 The 2026-10-24 wildlife delivery follow-up patches Electron to 44.9.1 and
 transitive body-parser to 1.20.9 after the existing dependency audit gate fails.
@@ -114,12 +135,9 @@ minutes for the full hash audit; local/global deadlines, the 1,800-step bound,
 all saved-pose/population comparisons and every immutable-input hash stay intact.
 Hosted CI on the consolidated PR remains the merge gate.
 
-The full browser suite runs at 02:17 UTC daily and through **Actions → CI → Run
-workflow**, using eight independent shards. It collects all failures and retains
-failure traces/screenshots. Only push validation on main deploys; scheduled and
-manual runs never deploy. New revisions cancel superseded runs for the same
-event/ref. When full browser validation is warranted, run
-`npm run build && npx playwright test` locally.
+Only push validation on main deploys. New revisions cancel superseded runs for
+the same event/ref. Run full browser validation locally with `npm run test:all`,
+or `npm run build && npx playwright test`.
 
 The old run spent 16.2 minutes in `src/wildlife/Fauna.test.ts` alone; its per-species
 production Realm samples and habitat generation are the next native performance
@@ -224,3 +242,16 @@ browser cases or CI shards. Native tests own diagonal chunk-seam bounds, incline
 contacts, loose actor identities, drive lock and both spatial indexes. The native
 predator recipe save check now compares complete return-queue records by persistent
 actor ID, preserving exact field coverage across record enumeration orders.
+
+[233](../tactical/233-fast-ci-and-local-full-suite.md) moves the animal browser's
+per-species checks below the browser:
+- `AnimalBrowserPreviews.test.ts` checks every sheet's travel clip in all four
+  facings, plus each watched species' action/display clip;
+- `AnimalScenes.partN.test.ts` runs every species' Watch AI scene in
+  `ScenarioSession`, with the `thicket` profile the browser opens.
+
+`tests/animal-browser.spec.ts` keeps eight browser cases: search and layout, one
+preview drawing test, and Watch AI for representative walker, hopper,
+water-animal and hunter scenes.
+Ball-throw tests must send unit directions; authority drops other throws
+(`RealmCommands.isValidThrow`).

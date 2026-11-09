@@ -9,9 +9,7 @@ test.use({ channel: "chromium" });
 const expectHeight = (c: Locator, z: number, attribute = "data-player-z") =>
   expect.poll(async () => Number(await c.getAttribute(attribute))).toBeCloseTo(z, 2);
 
-test(`geometry lab uses real Worker movement, cutaways and reload`, { tag: ["@smoke"] }, async ({
-  page,
-}) => {
+test(`geometry lab uses real Worker movement, cutaways and reload`, async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/tilefun/workshop.html#/tool/world-geometry");
