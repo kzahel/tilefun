@@ -180,8 +180,8 @@ in its top-left corner and composes into its region with a GL viewport or a
 half-plane discard in the present shader (`GpuWorldComposition`, maths in
 `worldComposite`). The Canvas host clears its world surface before later views, clips to the
 region or polygon and draws the matching corner of its padded world surface. A view composed into a region is
-pixel-identical to a single view of that size on both backends (renderer lab
-`probeViewRegions`). Terrain for every view is prepared once per frame
+pixel-identical to a single view of that size (renderer lab
+`probeViewRegions`, GPU host only since 232). Terrain for every view is prepared once per frame
 (`prepareViewTerrain` → `prepareTerrainViews`, scheduled by `TerrainResidency`):
 one time and row budget, any view's on-screen gap first, per-view look-ahead and
 focal rows, and no view evicts another's chunks; each view then presents its
@@ -242,10 +242,11 @@ unchanged; [trains](trains.md) records owner acceptance and the remaining join l
   pieces at fractional zoom. This shared raster rule applies to Canvas and GPU,
   including flipped sprites and visual height offsets. The renderer lab's
   `probeSpriteSeams` checks translucent adjoining pieces (so overlap also fails)
-  at four zooms and four camera positions on both backends.
+  at four zooms and four camera positions.
   `probeCameraStability` additionally checks stationary terrain landmarks,
   fractional prop anchors and frozen grass at five zooms, positive/negative chunk
-  coordinates and an odd viewport on both backends. Solid landmarks isolate layer
+  coordinates and an odd viewport. Since 232 slice 2 these probes, like
+  `probeWorldRegistration` and `probeViewRegions`, run on the GPU only. Solid landmarks isolate layer
   placement: detailed nearest-neighbor textures can still exhibit texel tie
   differences during integer translation, especially at fractional scales. The
   prototype addresses relative positioning; it does not establish complete texel
@@ -267,8 +268,11 @@ unchanged; [trains](trains.md) records owner acceptance and the remaining join l
   callbacks cross the interface. `CanvasInteriorResources` owns raster shells
   and wall bands and consumes the supplied order.
 - `OverlayFrame` and `collectEditorOverlay` emit pooled geometry with explicit
-  style values. Scene clips are rectangle lists in logical viewport pixels.
-  The Canvas implementation preserves the host transform, including explorer DPR.
+  style values. Scene clips are rectangle lists in the camera's viewport pixels
+  (device pixels for the explorer). The GPU snaps clip edges to whole pixels, so
+  strips sharing a fractional edge neither gap nor double-blend.
+  The native raster implementation preserves the host transform. The explorer
+  draws its GPU frame at device pixels and copies it into the map canvas.
 
 Frames are **borrowed synchronously until submission returns**. Preparation,
 eviction, reset and buffer reuse must not overlap consumption. A retaining or
@@ -354,12 +358,12 @@ particle, prop and overlay references; retained pools have explicit bounds.
 | Surface | Boundary / intentional graphics dependency |
 | --- | --- |
 | Play/edit outdoor and indoor rendering | Neutral `renderWorld`, `renderInterior`, scene and overlay builders; `RenderBackend` only |
-| Explorer | Canvas selected in `TilePreview` composition; explicit preparation/submission, ready-chunk clips and lifecycle |
+| Explorer | `TilePreview` draws on an offscreen WebGL2 `GpuRenderBackend` at device pixels (232), copied into the map canvas over the regional map and under the coverage overlay; explicit preparation/submission, ready-chunk clips and lifecycle |
 | Interactive Traffic, Outdoor Geometry, World Geometry, Natural landscape, Character lab and furniture playtest | The game's `LabView`, production Canvas/GPU hosts and semantic scene/terrain/indoor passes; view-specific controls and diagnostics |
-| Building/street/district reviews | Canvas reference presentation at platform entry; shared semantic scene/terrain passes; separate stage/geometry diagnostics remain native |
+| Building/street/district reviews | Native Canvas raster (`CanvasRenderBackend`) at platform entry: approval fingerprints hash these pixels, so they stay off the GPU (232 slice 2); shared semantic scene/terrain passes; separate stage/geometry diagnostics remain native |
 | Native character review | Source-hashed `CharacterTestScene.ts` is immutable approval input. Its `drawScene2D` reference adapter consumes the same scene-pass implementation; do not rewrite approved controller bytes merely to rename a call |
 | Indoor review/reference | Explicit native Canvas surfaces using shared furniture/room ordering. `CachedInteriorRenderer` consumes `InteriorPresentation`; uncached drawing remains the independent parity reference |
-| Pattern room/atlas previews and tree source composition | Native asset/pattern reference rasterization, separate from gameplay presentation; pattern terrain uses the backend |
+| Pattern room/atlas previews and tree source composition | Native asset/pattern reference rasterization, separate from gameplay presentation; pattern terrain uses the native raster backend, whose pixels are the candidate fingerprint (232 slice 2) |
 | HUD, touch controls, menus, prop selection/collision diagnostics | Independent platform UI/debug surface; Canvas is permitted here and not exposed to neutral frame builders |
 | GPU gameplay and diagnostics | Game and labs require WebGL2 and always draw GPU + 3D car (232); renderer lab shares its body adapter |
 | Asset loaders and `Canvas*` / `TileRenderer` internals | Concrete source decoding, rasterization and resource ownership; not presentation policy |
@@ -879,9 +883,29 @@ GPU backend that fails after a successful probe is an ordinary reported fault. G
 **3D View** control still opens collision/debug geometry. GPU sprite vehicles were
 removed on 2026-11-09 (owner: cars are always 3D); sprites remain only for
 loading/failed meshes.
-The [renderer comparison tool](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/renderer-lab)
+The [renderer lab](https://tilefun.graehlarts.com/tilefun/workshop.html#/tool/renderer-lab)
 exercises the same body adapter, pose and fallback. Its WebGPU/forced-WebGL2
 buttons probe portable geometry/materials, not the gameplay sprite shader.
+Since 232 slice 2 the lab has no Canvas reference view. Its checks
+(`RendererLabChecks`, `tests/gpu-renderer.spec.ts`) are GPU invariants and
+explicit expected values:
+- clipped frames match the unclipped frame inside the clip union and the clear
+  color outside;
+- a disabled or failed mesh draws exactly the plain sprite car;
+- non-overlapping grass blades at a LOD alpha blend linearly between full detail
+  and none;
+- smooth shadows keep the pixel-exact shadows' darkening mass and centroid
+  (asserted within 5% and 0.25 px);
+- the editor overlay changes nothing outside its box and blends its fill at the
+  item's alpha;
+- the zoom-1 scene and room frames have recorded color counts and per-color pixel
+  bounds, which also catch mirroring and shifts. These were taken from the GPU
+  while it still matched the Canvas reference exactly, and are checked with a
+  tolerance of 2 per channel.
+
+`histogram()` and `palette()` re-derive these values when a reviewed change
+moves pixels. `probeWorldRegistration` also checks the actor's absolute
+placement.
 The older car projection lab remains a source/geometry investigation reference.
 DOM controls and the original Canvas UI/input surface remain in place.
 

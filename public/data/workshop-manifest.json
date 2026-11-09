@@ -80,8 +80,8 @@
     },
     {
       "id": "renderer-lab",
-      "name": "Renderer comparison",
-      "description": "Compare the shared sprite scene on Canvas and GPU, and inspect experimental mesh bodies.",
+      "name": "Renderer lab",
+      "description": "Check the GPU sprite scene against pixel invariants, and inspect experimental mesh bodies.",
       "url": "renderer-lab.html",
       "mode": "source"
     },
@@ -56268,5 +56268,5 @@
       }
     }
   ],
-  "inputDigest": "3284ab09890bd3e912214c9a84ee472babd68e312d3afcd7a83d8397996706f4"
+  "inputDigest": "348e35c0f1345a5b1f5b5ac815d72157ede1b8328a143a0b8173a60a73ac92b6"
 }

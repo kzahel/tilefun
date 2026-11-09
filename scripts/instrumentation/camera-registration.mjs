@@ -1,4 +1,4 @@
-// Actual Canvas/GPU host composition: static registration and followed actors together.
+// Actual GPU host composition: static registration and followed actors together.
 // Run: node scripts/instrumentation/camera-registration.mjs --output=/tmp/tilefun-registration
 
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
@@ -50,8 +50,9 @@ try {
       r.elevationRange > 0.03 ||
       r.actorXRange > 0.03 ||
       r.actorYRange > 0.03 ||
-      r.bleed > 1 ||
-      r.actorParityError > 2,
+      r.actorXError > 0.03 ||
+      r.actorYError > 0.03 ||
+      r.bleed > 1,
   );
   await writeFile(
     path.join(output, "report.json"),
@@ -64,12 +65,13 @@ try {
       elevationRangeMax: Math.max(...cases.map((r) => r.elevationRange)),
       actorXRangeMax: Math.max(...cases.map((r) => r.actorXRange)),
       actorYRangeMax: Math.max(...cases.map((r) => r.actorYRange)),
-      actorParityErrorMax: Math.max(...cases.map((r) => r.actorParityError)),
+      actorXErrorMax: Math.max(...cases.map((r) => r.actorXError)),
+      actorYErrorMax: Math.max(...cases.map((r) => r.actorYError)),
       failed,
       errors,
     }),
   );
-  if (cases.length !== 20 || failed.length || errors.length)
+  if (cases.length !== 10 || failed.length || errors.length)
     throw Error("World registration qualification failed");
 } finally {
   await browser?.close();

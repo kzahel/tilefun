@@ -340,3 +340,54 @@ test("sustained exact navigation and repeated source changes keep bounded reside
   await page.goto("about:blank");
   await expect.poll(() => page.workers().length).toBe(0);
 });
+
+test.describe("explorer tiles on a 2× display", () => {
+  test.use({ deviceScaleFactor: 2, viewport: { width: 900, height: 700 } });
+  test("the offscreen GPU frame covers the whole map at device pixels and fractional zoom", async ({
+    page,
+  }) => {
+    const errors: string[] = [];
+    page.on("pageerror", (error) => errors.push(error.message));
+    await page.goto(`${explorer}?seed=2026&x=300.4&y=519.3&zoom=27.3&mode=tiles`);
+    const app = page.locator("#app");
+    await expect(app).toHaveAttribute("data-tile-complete", "true");
+    // One 40×40 device-pixel probe in each quadrant. A frame drawn at CSS size
+    // would leave the lower and right quadrants showing the regional map.
+    const sample = () =>
+      page.locator("#map").evaluate((canvas: HTMLCanvasElement) => {
+        const ctx = canvas.getContext("2d");
+        if (!ctx) throw Error("Missing map context");
+        return {
+          size: [canvas.width, canvas.height],
+          probes: [
+            [0.25, 0.25],
+            [0.75, 0.25],
+            [0.25, 0.75],
+            [0.75, 0.75],
+          ].map(([fx = 0, fy = 0]) =>
+            Array.from(
+              ctx.getImageData(
+                Math.floor(canvas.width * fx) - 20,
+                Math.floor(canvas.height * fy) - 20,
+                40,
+                40,
+              ).data,
+            ),
+          ),
+        };
+      });
+    const tiles = await sample();
+    expect(tiles.size[0]).toBeGreaterThan(1200);
+    await page.locator("#display-mode").selectOption("map");
+    await expect(app).toHaveAttribute("data-tile-resident", "0");
+    const map = await sample();
+    for (const [i, probe] of tiles.probes.entries()) {
+      const reference = map.probes[i] ?? [];
+      let changed = 0;
+      for (let p = 0; p < probe.length; p += 4)
+        if ([0, 1, 2].some((c) => probe[p + c] !== reference[p + c])) changed++;
+      expect(changed / (probe.length / 4), `quadrant ${i}`).toBeGreaterThan(0.3);
+    }
+    expect(errors).toEqual([]);
+  });
+});

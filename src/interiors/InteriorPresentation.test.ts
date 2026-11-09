@@ -4,7 +4,7 @@ import { Spritesheet } from "../assets/Spritesheet.js";
 import type { GameContext } from "../core/GameScene.js";
 import { createPlayer } from "../entities/Player.js";
 import { Camera } from "../rendering/Camera.js";
-import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
+import { RasterRenderBackend } from "../rendering/RasterRenderBackend.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import type { SpriteItem } from "../rendering/SceneItem.js";
@@ -186,8 +186,8 @@ describe("neutral interior frames", () => {
       ["modern-interiors", new Spritesheet({ width: 16, height: 16 } as HTMLCanvasElement, 16, 16)],
     ]);
     expect(createSpriteCatalog(sheets).size).toBe(1);
-    const a = new CanvasRenderBackend(ctx, sheets),
-      b = new CanvasRenderBackend(ctx, sheets);
+    const a = new RasterRenderBackend(ctx, sheets),
+      b = new RasterRenderBackend(ctx, sheets);
     // Empty shell isolates resource ownership from atlas loading/raster rules.
     const r = new InteriorPresentation(createLayeredInteriorMap(2, 2), plan, undefined, true);
     const camera = new Camera();

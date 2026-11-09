@@ -957,7 +957,9 @@ export class GpuRasterSurface implements RasterSurface {
   }
 }
 
-/** Rectangle union, partitioned into disjoint strips so translucent pixels blend once. */
+/** Rectangle union, partitioned into disjoint strips so translucent pixels blend once.
+ * Edges snap to whole pixels (a pixel belongs to a rect when its center does), so
+ * scissor strips that share a fractional edge neither gap nor overlap. */
 export function disjointRects(
   rects: readonly Rect[],
   parent: readonly Rect[] | null = null,
@@ -965,10 +967,10 @@ export function disjointRects(
   const input: Rect[] = [];
   for (const r of rects)
     for (const p of parent ?? [r]) {
-      const x = Math.max(r.x, p.x),
-        y = Math.max(r.y, p.y),
-        right = Math.min(r.x + r.width, p.x + p.width),
-        bottom = Math.min(r.y + r.height, p.y + p.height);
+      const x = Math.round(Math.max(r.x, p.x)),
+        y = Math.round(Math.max(r.y, p.y)),
+        right = Math.round(Math.min(r.x + r.width, p.x + p.width)),
+        bottom = Math.round(Math.min(r.y + r.height, p.y + p.height));
       if (right > x && bottom > y) input.push({ x, y, width: right - x, height: bottom - y });
     }
   const xs = [...new Set(input.flatMap((r) => [r.x, r.x + r.width]))].sort((a, b) => a - b),

@@ -1,5 +1,5 @@
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { readdirSync, readFileSync } from "node:fs";
+import { resolve, sep } from "node:path";
 import { expect, it } from "vitest";
 
 // Deliberate ownership boundaries, not a blanket ban on platform/UI composition.
@@ -81,4 +81,22 @@ it("selects the backend in platform composition, not gameplay orchestration", ()
       /import[^;]*(?:TileRenderer|CanvasRenderBackend|Canvas2DRenderer|Spritesheet)/,
     );
   }
+});
+it("keeps the native Canvas raster to fingerprinted review rasters (232)", () => {
+  // Approval fingerprints hash these tools' pixels; everything else draws on the GPU.
+  // `CanvasRenderHost` and its test are slice 3's deletion list.
+  const allowed = [
+    "art/BuildingShowcase.ts",
+    "art/DenseDistrictShowcase.ts",
+    "art/StreetShowcase.ts",
+    "patterns/PatternRuntime.ts",
+    "rendering/CanvasRenderHost.ts",
+    "rendering/RenderHost.test.ts",
+  ];
+  const canvasRenderer = /(?:from |import\()"[^"]*Canvas(?:RenderBackend|RenderHost)\.js"/;
+  const users = readdirSync(resolve("src"), { recursive: true, encoding: "utf8" })
+    .map((path) => path.split(sep).join("/"))
+    .filter((path) => path.endsWith(".ts") && path !== "rendering/CanvasRenderBackend.ts")
+    .filter((path) => canvasRenderer.test(readFileSync(resolve("src", path), "utf8")));
+  expect(users.sort()).toEqual(allowed);
 });

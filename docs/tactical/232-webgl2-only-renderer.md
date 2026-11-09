@@ -1,7 +1,7 @@
 # WebGL2-only renderer
 
 Status: parent plan; planned 2026-11-09, slices 1–4 authorized for autonomous delivery;
-slice 1 delivered 2026-11-09.
+slices 1–2 delivered 2026-11-09.
 Owner direction, 2026-11-09: "having two renderers seems useless"; remove the
 Canvas renderer and its fallback, require WebGL2, then make the GPU-only
 optimizations that Canvas parity blocked. Run tests locally before touching CI.
@@ -115,8 +115,13 @@ reference, grass LOD) and other canvas/gpu parity specs.
 
 ### 3 — Delete the Canvas renderer
 
-- Delete `CanvasRenderHost`, `CanvasRenderBackend` and Canvas-only branches
-  (`worldRaster === false` paths, the `RendererMode` type, Canvas fallback in labs).
+- Delete `CanvasRenderHost` and Canvas-only host branches (the `RendererMode` type,
+  Canvas fallback in labs, `FirstPersonControl`'s non-GPU branch).
+- Keep the native raster that slice 2 kept for fingerprinted review rasters
+  (`CanvasRenderBackend` used by the showcases and `PatternRuntime`). Rename it to
+  say that, or document it as such. Keep the non-world-raster
+  (`worldRaster === false`) drawing path: the review rasters and the
+  standalone GPU backends (explorer, renderer lab, probes) use it.
 - Scripts: drop the `--renderer` option (GPU-only since slice 1) from the streaming
   bench/matrix, realm-physics bench, `city-audit`, `car-driving-browser`, and the
   `renderer` field from `streaming-matrix-lib` plans where it no longer helps.
@@ -196,3 +201,97 @@ cadence, render p50/p95 5.1/8.4 ms).
   files now run on GPU under hosted software WebGL; measure them with the local lane
   against the 20-minute smoke budget (left for the CI step after slice 4's final
   run, per the testing strategy).
+
+### Slice 2 — delivered 2026-11-09
+
+- **Review rasters stay native (decision).**
+  - Kept on the native Canvas raster (`CanvasRenderBackend`): the building, street
+    and dense-district showcases and the pattern candidates. Their approval
+    fingerprints (`renderFingerprint`) hash those pixels; a GPU raster would change
+    every fingerprint and send approved work back to review.
+  - Also kept native, for the same reason: the source-hashed `CharacterTestScene`
+    (`drawScene2D`), the indoor review/workbench rasters (`CanvasInteriorMap`) and
+    `FurnishedInterior`.
+  - `FirstPersonInterior`'s map texture is raster preparation for the GPU, not a
+    renderer.
+  - A boundary test (`RenderingBoundary.test.ts`) allows `CanvasRenderBackend` and
+    `CanvasRenderHost` imports, static or dynamic, only in those review rasters and
+    slice 3's deletion list (`CanvasRenderHost`, `RenderHost.test`). The slice 3
+    bullets now keep this review raster and the non-world-raster drawing path.
+- **Explorer.**
+  - `TilePreview` draws on an offscreen WebGL2 `GpuRenderBackend` at device pixels
+    and copies the frame into the map canvas over the regional map.
+  - The coverage overlay now draws over props and actors too; before, only terrain
+    sat under it.
+  - A WebGL2 or backend failure is remembered once. Tiles then stay off with the
+    message in the diagnostics, and the map stays usable.
+  - Context loss and restore recover the backend and redraw.
+  - A new 2× display test at a fractional zoom checks that the GPU frame covers
+    every quadrant of the map.
+- **GPU clips.** Clip edges now snap to whole pixels (`disjointRects`). Before,
+  Three rounded each scissor's position and size separately, so strips sharing a
+  fractional edge left 1 px gaps or blended a column twice. This was reachable at
+  fractional explorer zooms and in vehicle-bed clips. A unit test covers it.
+- **Renderer lab and probes.**
+  - The lab is now called "Renderer lab" (was "Renderer comparison") and has no
+    Canvas reference.
+  - `probeSpriteSeams`, `probeCameraStability`, `probeWorldRegistration` and
+    `probeViewRegions` run on the GPU only.
+  - `probeWorldRegistration` replaced actor parity with absolute actor placement.
+    The actor's drawn height snaps to whole pixels. Measured: ≤0.005 px on
+    hardware, ≤0.033 px on SwiftShader.
+  - `InteriorPresentation.test` uses the shared `RasterRenderBackend`.
+- **What replaced the Canvas-vs-GPU comparisons.** They became GPU invariants or
+  explicit values (`RendererLabChecks`, with unit tests):
+  - Clip-union consistency, and the unclipped frame has content outside the union.
+  - Disabled and failed meshes fall back to exactly the plain sprite car.
+  - Grass LOD fades linearly on non-overlapping blades; frame digests cover the
+    return to full detail and the hide.
+  - Smooth and pixel-exact shadows agree on darkening mass and centroid. Asserted
+    within 5% and 0.25 px; measured 1.5%/0.05 px on hardware and 1.2%/0.17 px on
+    SwiftShader.
+  - The editor overlay stays inside its box, and its fill blends at the item's
+    alpha.
+  - The zoom-1 scene (8 colors) and room (11 colors) have recorded color counts and
+    per-color pixel bounds, so mirroring and shifts fail too. They were taken from
+    the GPU while it matched Canvas exactly, with a tolerance of 2, and are
+    identical on hardware and ARM SwiftShader.
+  - The car-width registration test compares the mesh with the GPU sprite frame.
+  - The room/overlay test, which failed before slice 1 on both lanes, now passes.
+- **Not changed:** the indexed-batch test's plain Canvas2D reference. It checks
+  `GpuRasterSurface`'s Canvas2D emulation contract, not the Canvas renderer, and
+  slice 4 revisits it.
+- **Known risk:** the recorded counts and bounds are validated only on ARM
+  (hardware and SwiftShader). Hosted CI runs x64 SwiftShader, where
+  nearest-neighbor ties can differ; the lab keeps integer texel scales to avoid
+  them. Check this on the first hosted run.
+- **Review** (Opus 5.5 High, Work-claude pool, bypass). Fixed:
+  - the clip-edge gaps;
+  - mirroring and shifts that the counts alone could not see;
+  - the explorer's retry on failure and its context loss;
+  - absolute actor placement;
+  - slice 3 plan text that contradicted this slice;
+  - missing unit tests for the checks;
+  - checks that broke when lab modes combined;
+  - "group alpha" wording;
+  - Windows path separators and host imports in the boundary test;
+  - disposal and stale comments.
+
+  Not changed: the explorer's terrain memory estimate (CPU only) and the
+  `MAX_VIEWPORT_DIMS` diagnostic.
+- **Checks after the review fixes.**
+  - Hardware GPU: `gpu-renderer`, `world-explorer`, `natural-landscapes`,
+    `vehicle-depot` and `vehicle-geometry` (46 tests) pass. Earlier,
+    `dense-review`, `city-places-review` and `tools-index` passed.
+  - Software-WebGL lane: `gpu-renderer`, `world-explorer`, `vehicle-depot` and
+    `vehicle-geometry` (41 tests, 1.6 min) pass. Earlier, 53 tests including
+    `natural-landscapes`, `dense-review` and `city-places-review` passed.
+  - Also passing:
+    - typecheck, Biome on the touched files, and knip;
+    - 716 related unit tests;
+    - the art catalog and workshop manifest (renderer-lab line references and the
+      tool name only), and the build;
+    - `streaming:bench -- --assert-ready`;
+    - `camera-registration.mjs` (10 groups; actor placement errors ≤0.0043 px).
+  - Code-health ratchet: `TilePreview.ts` grew by 56 lines and its worst function
+    by 1.

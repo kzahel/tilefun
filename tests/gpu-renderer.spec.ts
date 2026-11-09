@@ -3,9 +3,7 @@ import type { GpuRenderBackend } from "../src/rendering/GpuRenderBackend.js";
 import type { GeometryCanvas } from "../src/workshop/WorldGeometryPage.js";
 
 test.use({ channel: "chromium" });
-test("adjacent sprites have no gaps or overlaps at fractional scales on either backend", async ({
-  page,
-}) => {
+test("adjacent sprites have no gaps or overlaps at fractional scales", async ({ page }) => {
   await page.goto("/tilefun/renderer-lab.html");
   await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
   const reports = await page.evaluate(() => {
@@ -16,13 +14,11 @@ test("adjacent sprites have no gaps or overlaps at fractional scales on either b
     ).rendererLab;
     return [...lab.probeSpriteSeams(), ...lab.probeSpriteSeams(true)];
   });
-  expect(reports).toHaveLength(64);
+  expect(reports).toHaveLength(32);
   expect(reports.filter((report) => report.mismatches !== 0)).toEqual([]);
 });
 
-test("world composition keeps scenery rigid and followed actors steady on both backends", async ({
-  page,
-}) => {
+test("world composition keeps scenery rigid and followed actors steady", async ({ page }) => {
   await page.goto("/tilefun/renderer-lab.html");
   await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
   const reports = await page.evaluate(() =>
@@ -32,7 +28,7 @@ test("world composition keeps scenery rigid and followed actors steady on both b
       }
     ).rendererLab.probeCameraStability(),
   );
-  expect(reports).toHaveLength(20);
+  expect(reports).toHaveLength(10);
   expect(reports.filter((report) => report.mismatches !== 0 || report.movedFrames === 0)).toEqual(
     [],
   );
@@ -41,46 +37,44 @@ test("world composition keeps scenery rigid and followed actors steady on both b
       window as unknown as {
         rendererLab: {
           probeWorldRegistration(): {
-            mode: "canvas" | "gpu";
             relativeRange: number;
             elevationRange: number;
             actorXRange: number;
             actorYRange: number;
+            actorXError: number;
+            actorYError: number;
             bleed: number;
-            actorParityError: number;
           }[];
         };
       }
     ).rendererLab.probeWorldRegistration(),
   );
-  expect(composed).toHaveLength(20);
-  // SwiftShader (hosted CI) rasterizes with 4 subpixel bits: a subpixel-placed GPU
-  // actor snaps by up to 1/16px (measured 0.048-0.054px) and its antialiased edges
-  // differ from Canvas coverage by 15-22 levels. Hardware GPUs measure <=0.005px
-  // and parity <=1, so actor precision/parity is asserted at hardware bounds only
-  // there; scenery registration, bleed and Canvas actors keep their bounds everywhere.
+  expect(composed).toHaveLength(10);
+  // SwiftShader (hosted CI) rasterizes with 4 subpixel bits: a subpixel-placed
+  // actor snaps by up to 1/16px (measured 0.032-0.054px, steadiness and absolute
+  // placement). Hardware GPUs measure <=0.005px. Scenery registration and bleed keep
+  // their bounds everywhere.
   const software = await page.evaluate(() => {
     const gl = document.createElement("canvas").getContext("webgl2");
     const info = gl?.getExtension("WEBGL_debug_renderer_info");
     return /SwiftShader/i.test(String(info && gl?.getParameter(info.UNMASKED_RENDERER_WEBGL)));
   });
-  const actorLimit = (mode: string) => (software && mode === "gpu" ? 1 / 16 : 0.03);
+  const actorLimit = software ? 1 / 16 : 0.03;
   expect(
     composed.filter(
       (r) =>
         r.relativeRange > 0.03 ||
         r.elevationRange > 0.03 ||
-        r.actorXRange > actorLimit(r.mode) ||
-        r.actorYRange > actorLimit(r.mode) ||
-        r.bleed > 1 ||
-        (!software && r.actorParityError > 2),
+        r.actorXRange > actorLimit ||
+        r.actorYRange > actorLimit ||
+        r.actorXError > actorLimit ||
+        r.actorYError > actorLimit ||
+        r.bleed > 1,
     ),
   ).toEqual([]);
 });
 
-test("split views compose into their regions on both backends without new GL objects", async ({
-  page,
-}) => {
+test("split views compose into their regions without new GL objects", async ({ page }) => {
   await page.goto("/tilefun/renderer-lab.html");
   await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
   const reports = await page.evaluate(() =>
@@ -88,7 +82,6 @@ test("split views compose into their regions on both backends without new GL obj
       window as unknown as {
         rendererLab: {
           probeViewRegions(): {
-            mode: string;
             layout: string;
             compared?: number;
             mismatches?: number;
@@ -98,8 +91,8 @@ test("split views compose into their regions on both backends without new GL obj
       }
     ).rendererLab.probeViewRegions(),
   );
-  // Two hosts × (three layouts + one region-resizing run).
-  expect(reports).toHaveLength(8);
+  // Three layouts + one region-resizing run.
+  expect(reports).toHaveLength(4);
   for (const report of reports)
     if (report.glObjects === undefined) {
       expect(report.compared).toBeGreaterThan(30000);
@@ -107,35 +100,86 @@ test("split views compose into their regions on both backends without new GL obj
     } else expect(report).toMatchObject({ glObjects: 0 });
 });
 
-test("GPU consumes the Canvas scene with retained textures and union clips", async ({ page }) => {
+type LabReport = Record<string, number> & { uploads: number };
+type RendererLabWindow = {
+  rendererLab: {
+    draw(): LabReport;
+    setClips(value: boolean): LabReport;
+    changeTexture(): LabReport;
+    palette(colors: readonly string[]): {
+      counts: number[];
+      bounds: ([number, number, number, number] | null)[];
+      other: number;
+    };
+  };
+};
+
+/** The lab scene's exact colors and counts at zoom 1 (232): clear, the striped and
+ * orange fixture frames, the shadow, the blue-tinted hole, the half-alpha particle.
+ * Recorded from the GPU when it still matched the Canvas reference exactly. */
+const SCENE_COLORS = [
+  "#243245",
+  "#fa7345",
+  "#246333",
+  "#51be49",
+  "#192330",
+  "#8c579b",
+  "#8e872e",
+  "#f9a82e",
+] as const;
+const SCENE_COUNTS = [83203, 14940, 3744, 3744, 2513, 2304, 108, 36];
+/** Each color's pixel bounds, so a lost flip or a shifted sprite fails too. */
+const SCENE_BOUNDS = [
+  [0, 0, 383, 287],
+  [96, 96, 299, 191],
+  [48, 48, 137, 143],
+  [54, 48, 143, 143],
+  [60, 144, 287, 228],
+  [144, 120, 251, 167],
+  [186, 90, 197, 101],
+  [186, 96, 191, 101],
+];
+
+test("GPU draws the lab scene's expected pixels with retained textures and union clips", async ({
+  page,
+}) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/tilefun/renderer-lab.html");
   await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
-  const report = () =>
-    page
-      .locator("#result")
-      .textContent()
-      .then((text) => JSON.parse(text ?? "{}"));
-  expect((await report()).mismatches).toBe(0);
-  const cold = await report();
-  await page.evaluate(() =>
-    (window as unknown as { rendererLab: { draw(): unknown } }).rendererLab.draw(),
+  expect(
+    await page.evaluate(
+      (colors) => (window as unknown as RendererLabWindow).rendererLab.palette(colors),
+      SCENE_COLORS,
+    ),
+  ).toEqual({ counts: SCENE_COUNTS, bounds: SCENE_BOUNDS, other: 0 });
+  const cold = await page.evaluate(() =>
+    (window as unknown as RendererLabWindow).rendererLab.draw(),
   );
-  expect((await report()).uploads).toBe(cold.uploads);
-  await page.evaluate(() =>
-    (
-      window as unknown as { rendererLab: { setClips(value: boolean): unknown } }
-    ).rendererLab.setClips(true),
+  expect(
+    (await page.evaluate(() => (window as unknown as RendererLabWindow).rendererLab.draw()))
+      .uploads,
+  ).toBe(cold.uploads);
+  // Inside the union of the two clip rectangles the frame matches the unclipped
+  // (shadow-free) frame; outside it is the clear color, where the unclipped frame
+  // has sprite pixels.
+  const clipped = await page.evaluate(() =>
+    (window as unknown as RendererLabWindow).rendererLab.setClips(true),
   );
-  expect((await report()).mismatches).toBe(0);
-  await page.evaluate(() =>
-    (
-      window as unknown as { rendererLab: { changeTexture(): unknown } }
-    ).rendererLab.changeTexture(),
+  expect(clipped.clipErrors).toBe(0);
+  expect(clipped.clipOutsideContent).toBeGreaterThan(1000);
+  const changed = await page.evaluate(() =>
+    (window as unknown as RendererLabWindow).rendererLab.changeTexture(),
   );
-  expect((await report()).uploads).toBe(cold.uploads + 1);
-  expect((await report()).mismatches).toBe(0);
+  expect(changed.uploads).toBe(cold.uploads + 1);
+  expect(changed.clipErrors).toBe(0);
+  // The repainted 8×8 atlas corner (screen x 48–71 at 3× scale) shows on the first
+  // sprite only right of the clip edge at x 70.
+  expect(
+    await page.evaluate(() =>
+      (window as unknown as RendererLabWindow).rendererLab.palette(["#7722dd"]),
+    ),
+  ).toMatchObject({ counts: [48], bounds: [[70, 48, 71, 71]] });
   expect(errors).toEqual([]);
 });
 
@@ -257,7 +301,14 @@ test("optional mesh body rotates, composes in order and falls back atomically", 
   );
   const after = await report();
   expect(after.meshDraws).toBe(before.meshDraws);
-  expect(after.mismatches).toBe(0);
+  // Disabled, the mesh body falls back to exactly the plain sprite car.
+  expect(
+    await page.evaluate(() =>
+      (
+        window as unknown as { rendererLab: { spriteFallbackMatches(): boolean } }
+      ).rendererLab.spriteFallbackMatches(),
+    ),
+  ).toBe(true);
   expect(after.targetBytes).toBeLessThanOrEqual(1024 * 1024 * 8);
 });
 
@@ -485,7 +536,7 @@ test("authored car retains its fixed width registration across headings and zoom
     await lab.setMesh(true);
     const bounds = (id: string) => {
       const canvas = document.querySelector<HTMLCanvasElement>(`#${id}`);
-      if (!canvas) throw Error("Missing comparison canvas");
+      if (!canvas) throw Error("Missing GPU canvas");
       const copy = document.createElement("canvas");
       copy.width = canvas.width;
       copy.height = canvas.height;
@@ -519,7 +570,11 @@ test("authored car retains its fixed width registration across headings and zoom
       for (const yaw of [0, Math.PI / 2, Math.PI, -Math.PI / 2]) {
         lab.setZoom(zoom);
         lab.setYaw(yaw);
-        samples.push({ zoom, yaw, sprite: bounds("reference"), model: bounds("gpu") });
+        // The authored sprite frame at this heading is the registration reference.
+        await lab.setMesh(false);
+        const sprite = bounds("gpu");
+        await lab.setMesh(true);
+        samples.push({ zoom, yaw, sprite, model: bounds("gpu") });
       }
     return samples;
   });
@@ -574,29 +629,69 @@ test("Traffic override selects original non-blue road vehicles without changing 
   ).toBe(true);
 });
 
-test("shared room and editor passes match the native reference", async ({ page }) => {
+test("shared room and editor passes draw their expected pixels", async ({ page }) => {
   await page.goto("/tilefun/renderer-lab.html");
   await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
-  const room = await page.evaluate(() =>
+  await page.evaluate(() =>
     (
-      window as unknown as {
-        rendererLab: { setInterior(v: boolean): Promise<{ mismatches: number }> };
-      }
+      window as unknown as { rendererLab: { setInterior(v: boolean): Promise<unknown> } }
     ).rendererLab.setInterior(true),
   );
-  expect(room.mismatches).toBe(0);
+  // Floor, wall, wall band, furniture and the room's actor at integer scale;
+  // recorded from the GPU when it matched the Canvas reference (232).
+  const room = await page.evaluate(
+    (colors) =>
+      (
+        window as unknown as {
+          rendererLab: {
+            palette(c: readonly string[]): { counts: number[]; bounds: unknown; other: number };
+          };
+        }
+      ).rendererLab.palette(colors),
+    ROOM_COLORS,
+  );
+  expect(room).toEqual({ counts: ROOM_COUNTS, bounds: ROOM_BOUNDS, other: 0 });
   const overlay = await page.evaluate(() =>
     (
       window as unknown as {
-        rendererLab: { setOverlay(v: boolean): { mismatches: number; maxError: number } };
+        rendererLab: {
+          setOverlay(v: boolean): { overlayOutside: number; overlayFillError: number };
+        };
       }
     ).rendererLab.setOverlay(true),
   );
-  // A staged 8-bit Canvas overlay incurs one additional premultiply/composite
-  // rounding step. Only these three antialiased fixture pixels differ by 2.
-  expect(overlay.mismatches).toBeLessThanOrEqual(3);
-  expect(overlay.maxError).toBeLessThanOrEqual(2);
+  // The editor overlay changes nothing outside its stroked box, and its fill is its
+  // color blended over the room at the item's 0.7 alpha.
+  expect(overlay.overlayOutside).toBe(0);
+  expect(overlay.overlayFillError).toBeLessThanOrEqual(2);
 });
+const ROOM_COLORS = [
+  "#243245",
+  "#fa7345",
+  "#a82b52",
+  "#ac7949",
+  "#9c2459",
+  "#3a3a50",
+  "#b48f54",
+  "#8c579b",
+  "#a9454f",
+  "#a5643d",
+  "#a63a50",
+] as const;
+const ROOM_COUNTS = [83952, 7488, 6282, 3663, 2493, 2232, 1557, 1152, 819, 783, 171];
+const ROOM_BOUNDS = [
+  [0, 0, 383, 287],
+  [168, 156, 263, 251],
+  [210, 159, 383, 284],
+  [195, 162, 383, 287],
+  [192, 159, 353, 287],
+  [192, 156, 383, 254],
+  [213, 162, 383, 287],
+  [216, 180, 239, 227],
+  [210, 171, 374, 278],
+  [195, 162, 353, 287],
+  [204, 171, 353, 278],
+];
 
 test("separate surface passes reuse local rasters through camera movement", async ({ page }) => {
   await page.goto("/tilefun/renderer-lab.html");
@@ -729,23 +824,27 @@ test("real graphics loss recovers resources without restarting gameplay", async 
   expect(errors).toEqual([]);
 });
 
-test("smooth shadows preserve final pixel placement at different scales", async ({ page }) => {
+test("smooth shadows keep the pixel-exact shadows' placement at different scales", async ({
+  page,
+}) => {
   await page.goto("/tilefun/renderer-lab.html");
   await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
-  await page.evaluate(() =>
-    (
-      window as unknown as { rendererLab: { setSmoothShadows(v: boolean): unknown } }
-    ).rendererLab.setSmoothShadows(true),
+  const placements = await page.evaluate(() =>
+    [0.5, 1, 1.5].map((zoom) =>
+      (
+        window as unknown as {
+          rendererLab: {
+            shadowPlacement(z: number): { zoom: number; massRatio: number; dx: number; dy: number };
+          };
+        }
+      ).rendererLab.shadowPlacement(zoom),
+    ),
   );
-  for (const zoom of [0.5, 1, 1.5]) {
-    const report = await page.evaluate(
-      (value) =>
-        (
-          window as unknown as { rendererLab: { setZoom(v: number): { maxError: number } } }
-        ).rendererLab.setZoom(value),
-      zoom,
-    );
-    expect(report.maxError).toBeLessThanOrEqual(1);
+  // Darkening mass and centroid. Measured: within 1.5% and 0.05 px on hardware,
+  // 1.2% and 0.17 px on SwiftShader.
+  for (const p of placements) {
+    expect(Math.abs(p.massRatio - 1), `zoom ${p.zoom}`).toBeLessThanOrEqual(0.05);
+    expect(Math.hypot(p.dx, p.dy), `zoom ${p.zoom}`).toBeLessThanOrEqual(0.25);
   }
 });
 
@@ -979,11 +1078,12 @@ test("GPU indexed batches preserve quad order, capacity boundaries and upload ac
   expect(result.uploaded).toBe(4101 * 4 * 20 * 4);
 });
 
-test("shared grass LOD fades consistently in Canvas and GPU and returns at ordinary zoom", async ({
+test("shared grass LOD fades linearly, hides when far and returns at ordinary zoom", async ({
   page,
 }) => {
   await page.goto("/tilefun/renderer-lab.html");
   await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const digests: string[] = [];
   for (const zoom of [1, 0.5, 0.375, 0.251, 0.25, 0.1, 0.375, 1]) {
     const report = await page.evaluate(
       (zoom) =>
@@ -994,8 +1094,8 @@ test("shared grass LOD fades consistently in Canvas and GPU and returns at ordin
                 zoom: number,
                 fixedProjection?: boolean,
               ): Promise<{
-                mismatches: number;
-                maxError: number;
+                fadeError: number;
+                fadeBlades: number;
                 grassCount: number;
                 grassAlpha: number;
               }>;
@@ -1004,7 +1104,15 @@ test("shared grass LOD fades consistently in Canvas and GPU and returns at ordin
         ).rendererLab.setGrassDetail(zoom, true),
       zoom,
     );
-    expect(report.mismatches).toBe(0);
+    digests.push(
+      await page.evaluate(() =>
+        (window as unknown as { rendererLab: { digest(): string } }).rendererLab.digest(),
+      ),
+    );
+    // Separate (non-overlapping) blades at the LOD alpha blend linearly between
+    // full detail and none.
+    expect(report.fadeError).toBeLessThanOrEqual(2);
+    if (report.grassCount) expect(report.fadeBlades).toBeGreaterThan(10);
     if (zoom <= 0.25) expect(report.grassCount).toBe(0);
     else {
       expect(report.grassCount).toBeGreaterThan(0);
@@ -1025,6 +1133,11 @@ test("shared grass LOD fades consistently in Canvas and GPU and returns at ordin
       await page.screenshot({ path: `/tmp/tilefun-059-grass-${zoom}.png` });
     }
   }
+  // Ordinary zoom returns the same frame; hidden grass leaves the same frame as
+  // its near-zero fade.
+  expect(digests[7]).toBe(digests[0]);
+  expect(digests[2]).toBe(digests[6]);
+  expect(digests[4]).toBe(digests[3]);
 });
 
 test("missing authored GLB keeps the complete sprite body", async ({ page }) => {
@@ -1038,7 +1151,14 @@ test("missing authored GLB keeps the complete sprite body", async ({ page }) => 
       window as unknown as { rendererLab: { setMesh(value: boolean): Promise<unknown> } }
     ).rendererLab.setMesh(true),
   );
-  expect(result).toMatchObject({ meshState: "failed", meshDraws: 0, mismatches: 0 });
+  expect(result).toMatchObject({ meshState: "failed", meshDraws: 0 });
+  expect(
+    await page.evaluate(() =>
+      (
+        window as unknown as { rendererLab: { spriteFallbackMatches(): boolean } }
+      ).rendererLab.spriteFallbackMatches(),
+    ),
+  ).toBe(true);
 });
 
 test("production vehicle depth matches common 3D geometry through ordering, tilt and cached reuse", async ({

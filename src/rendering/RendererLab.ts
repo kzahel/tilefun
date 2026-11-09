@@ -7,12 +7,19 @@ import { vehicleFrameDirection } from "../traffic/Vehicle.js";
 import { Chunk } from "../world/Chunk.js";
 import { Camera } from "./Camera.js";
 import { probeCameraStability } from "./CameraStabilityProbe.js";
-import { CanvasRenderBackend } from "./CanvasRenderBackend.js";
 import { collectScene } from "./collectScene.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
 import { COMPACT_CAR_MESH, poseOrientation, yawOrientation } from "./MeshPresentation.js";
 import { OverlayFrame } from "./OverlayFrame.js";
 import { touchRaster } from "./RasterSurface.js";
+import {
+  clipErrors,
+  difference,
+  fadeError,
+  fillError,
+  histogram,
+  paletteCounts,
+} from "./RendererLabChecks.js";
 import { collectSceneOrder, type RenderPass } from "./RenderFrame.js";
 import { SceneFrame } from "./SceneFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
@@ -27,12 +34,13 @@ function required<T>(value: T | null | undefined): T {
   return value;
 }
 
-const reference = required(document.querySelector<HTMLCanvasElement>("#reference"));
 const canvas = required(document.querySelector<HTMLCanvasElement>("#gpu"));
 const result = required(document.querySelector<HTMLElement>("#result"));
-const context = required(reference.getContext("2d", { willReadFrequently: true }));
-const native = new CanvasRenderBackend(context, new Map());
 const gpu = new GpuRenderBackend(canvas);
+const readback = document.createElement("canvas");
+readback.width = 384;
+readback.height = 288;
+const readContext = required(readback.getContext("2d", { willReadFrequently: true }));
 const atlas = document.createElement("canvas");
 atlas.width = 64;
 atlas.height = 32;
@@ -47,7 +55,6 @@ paint.clearRect(40, 8, 8, 8);
 paint.fillStyle = "rgba(30,60,240,.5)";
 paint.fillRect(48, 8, 8, 16);
 const sheets = new Map([["fixture", new Spritesheet(atlas, 32, 32)]]);
-native.setAssets(sheets);
 gpu.setAssets(sheets);
 const view = { x: 0, y: 0, zoom: 1, viewportWidth: 384, viewportHeight: 288 };
 const sprite = (x: number, y: number, col: number): SpriteItem => ({
@@ -75,6 +82,11 @@ const items: SceneItem[] = [
   { ...sprite(20, 24, 1), flipX: true, zOffset: 8 },
   { kind: "particle", wx: 0, wy: 0, z: 16, size: 4, color: "#f8dd17", alpha: 0.5, sortKey: 100 },
 ];
+const CLIPS = [
+  { x: 70, y: 40, width: 140, height: 170 },
+  { x: 140, y: 80, width: 160, height: 170 },
+];
+const OVERLAY = { x: 8, y: 8, width: 90, height: 30, fill: "#175c55", alpha: 0.7 };
 const grassFrame = new SceneFrame();
 let grassItems: SceneItem[] | null = null;
 let clips = false;
@@ -83,41 +95,75 @@ let carMode = false;
 let carSpriteLoaded = false;
 let interior: InteriorContent | null = null;
 let overlayMode = false;
-let smoothShadows = false;
 let foreground = false;
+let frame = new Uint8ClampedArray(0);
 const car = {
   ...sprite(0, 24, 1),
   hasShadow: false,
   mesh: { assetId: COMPACT_CAR_MESH, orientation: yawOrientation(Math.PI), radius: 64 },
 };
 
-function draw() {
+function meshless(): SpriteItem {
+  const { mesh: _mesh, ...plain } = car;
+  return plain;
+}
+
+type FrameOptions = {
+  clips?: boolean;
+  overlay?: boolean;
+  shadows?: boolean;
+  smoothShadows?: boolean;
+  grassAlpha?: number;
+  /** Only blades that do not overlap: overlapping translucent blades do not fade linearly. */
+  separateBlades?: boolean;
+  meshlessCar?: boolean;
+};
+
+function sceneItemsFor(options: FrameOptions): SceneItem[] {
+  let selected =
+    grassItems ??
+    (carMode
+      ? [items[0] as SceneItem, options.meshlessCar ? meshless() : car, items[3] as SceneItem]
+      : items);
+  if (carMode && foreground) selected = [...selected].reverse();
+  if (options.separateBlades) {
+    const kept: SceneItem[] = [];
+    selected = selected.filter((item) => {
+      if (item.kind !== "grass") return true;
+      if (
+        kept.some((other) => Math.abs(other.wx - item.wx) < 16 && Math.abs(other.wy - item.wy) < 16)
+      )
+        return false;
+      kept.push(item);
+      return true;
+    });
+  }
+  if (options.grassAlpha !== undefined) {
+    const alpha = options.grassAlpha;
+    selected = selected.flatMap((item): SceneItem[] =>
+      item.kind !== "grass" ? [item] : alpha > 0 ? [{ ...item, alpha }] : [],
+    );
+  }
+  return options.clips || options.shadows === false
+    ? selected.map((item) => (item.kind === "sprite" ? { ...item, hasShadow: false } : item))
+    : selected;
+}
+
+/** Render one GPU frame and read its pixels back in the same task. */
+function render(options: FrameOptions = {}) {
   gpu.beginFrame();
-  const selectedItems =
-    grassItems ?? (carMode ? [items[0] as SceneItem, car, items[3] as SceneItem] : items);
-  if (carMode && foreground) selectedItems.reverse();
-  const sceneItems = clips
-    ? selectedItems.map((item) => (item.kind === "sprite" ? { ...item, hasShadow: false } : item))
-    : selectedItems;
+  const sceneItems = sceneItemsFor(options);
   const passes: RenderPass[] = [
     { kind: "clear", color: grassItems ? "#638543" : "#243245" },
     {
       kind: "scene",
       items: sceneItems,
       order: collectSceneOrder(sceneItems, []),
-      pixelExactShadows: !smoothShadows,
-      ...(clips
-        ? {
-            clipRects: [
-              { x: 70, y: 40, width: 140, height: 170 },
-              { x: 140, y: 80, width: 160, height: 170 },
-            ],
-          }
-        : {}),
+      pixelExactShadows: !options.smoothShadows,
+      ...(options.clips ? { clipRects: CLIPS } : {}),
     },
   ];
   if (interior) {
-    native.prepareInterior(interior);
     gpu.prepareInterior(interior);
     passes.splice(1, 1, {
       kind: "interior",
@@ -126,8 +172,8 @@ function draw() {
         { kind: "layer", layer: "floor" },
         { kind: "layer", layer: "walls" },
         { kind: "wall-band", row: 0, y: -16 },
-        // Integer texel scaling avoids nearest-neighbor half-texel ties whose
-        // chosen source pixel differs between Canvas and WebGL on x64.
+        // Integer texel scaling avoids nearest-neighbor half-texel ties, which
+        // resolve differently across GPUs and architectures (x64 vs ARM).
         { kind: "furniture", src: [240, 8078, 16, 16], x: 8, y: 8, width: 32, height: 32 },
         {
           kind: "scene",
@@ -138,54 +184,83 @@ function draw() {
       ],
     });
   }
-  if (overlayMode) {
-    const frame = new OverlayFrame();
-    const box = frame.next("rect");
-    Object.assign(box, {
-      x: 8,
-      y: 8,
-      width: 90,
-      height: 30,
-      fill: "#175c55",
+  if (options.overlay) {
+    const overlay = new OverlayFrame();
+    const { fill, alpha, ...bounds } = OVERLAY;
+    Object.assign(overlay.next("rect"), {
+      ...bounds,
+      fill,
       stroke: "#eebb66",
       lineWidth: 2,
-      alpha: 0.7,
+      alpha,
     });
-    const label = frame.next("text");
-    Object.assign(label, {
+    Object.assign(overlay.next("text"), {
       x: 16,
       y: 28,
       text: "GPU test",
       font: "12px sans-serif",
       fill: "white",
     });
-    passes.push({ kind: "overlay", items: frame.items });
+    passes.push({ kind: "overlay", items: overlay.items });
   }
-  for (const pass of passes) {
-    native.submit(view, pass);
-    gpu.submit(view, pass);
+  for (const pass of passes) gpu.submit(view, pass);
+  readContext.clearRect(0, 0, 384, 288);
+  readContext.drawImage(canvas, 0, 0);
+  return { pixels: readContext.getImageData(0, 0, 384, 288).data, sceneItems };
+}
+
+function draw() {
+  const checks: Record<string, number> = {};
+  const clear = grassItems ? "#638543" : "#243245";
+  // Derived frames first, so the displayed GPU canvas and `frame` show the case itself.
+  // Each check compares frames that differ only in the mode it checks.
+  const unclipped = clips ? render({ shadows: false }).pixels : undefined;
+  const clippedAlone = clips && overlayMode ? render({ clips }).pixels : undefined;
+  const plain = overlayMode ? render({ clips }).pixels : undefined;
+  const grassAlpha = grassItems?.find((item) => item.kind === "grass")?.alpha ?? 1;
+  const fade = grassItems
+    ? {
+        frame: render({ separateBlades: true }).pixels,
+        full: render({ separateBlades: true, grassAlpha: 1 }).pixels,
+        none: render({ separateBlades: true, grassAlpha: 0 }).pixels,
+      }
+    : undefined;
+  const { pixels, sceneItems } = render({ clips, overlay: overlayMode });
+  frame = pixels;
+  if (unclipped) {
+    const clip = clipErrors(clippedAlone ?? pixels, unclipped, 384, CLIPS, clear);
+    checks.clipErrors = clip.errors;
+    checks.clipOutsideContent = clip.outsideContent;
   }
-  const output = document.createElement("canvas");
-  output.width = 384;
-  output.height = 288;
-  const ctx = required(output.getContext("2d", { willReadFrequently: true }));
-  ctx.drawImage(canvas, 0, 0);
-  const a = context.getImageData(0, 0, 384, 288).data,
-    b = ctx.getImageData(0, 0, 384, 288).data;
-  let mismatches = 0,
-    maxError = 0;
-  for (let i = 0; i < a.length; i += 4) {
-    let error = 0;
-    for (let c = 0; c < 4; c++)
-      error = Math.max(error, Math.abs((a[i + c] ?? 0) - (b[i + c] ?? 0)));
-    if (error > 1) mismatches++;
-    maxError = Math.max(maxError, error);
+  if (plain) {
+    const { x, y, width, height, fill, alpha } = OVERLAY;
+    // The 2 px stroke straddles the rectangle edge.
+    checks.overlayOutside = difference(pixels, plain, 384, {
+      x: x - 1,
+      y: y - 1,
+      width: width + 2,
+      height: height + 2,
+    }).outside;
+    // Right of the label and inside the stroke: the fill at the item's alpha.
+    checks.overlayFillError = fillError(
+      pixels,
+      plain,
+      384,
+      { x: 76, y: 11, width: 20, height: 24 },
+      fill,
+      alpha,
+    );
+  }
+  if (fade) {
+    checks.fadeError = fadeError(fade.frame, fade.full, fade.none, grassAlpha);
+    checks.fadeBlades = sceneItemsFor({ separateBlades: true }).filter(
+      (item) => item.kind === "grass",
+    ).length;
   }
   const report = {
-    mismatches,
-    maxError,
+    ...checks,
     grassCount: sceneItems.filter((item) => item.kind === "grass").length,
-    grassAlpha: sceneItems.find((item) => item.kind === "grass")?.alpha ?? 1,
+    grassAlpha,
     ...gpu.surface.stats,
     meshDraws: gpu.meshes.draws,
     meshState: gpu.meshes.car.state,
@@ -196,6 +271,26 @@ function draw() {
   result.textContent = JSON.stringify(report, null, 2);
   canvas.dataset.ready = "true";
   return report;
+}
+
+/** Shadow darkening mass and centroid, pixel-exact against smooth, at one zoom. */
+function shadowPlacement(zoom: number) {
+  const previous = view.zoom;
+  view.zoom = zoom;
+  try {
+    const base = render({ shadows: false }).pixels;
+    const exact = difference(render().pixels, base, 384);
+    const smooth = difference(render({ smoothShadows: true }).pixels, base, 384);
+    return {
+      zoom,
+      massRatio: smooth.mass / exact.mass,
+      dx: smooth.x - exact.x,
+      dy: smooth.y - exact.y,
+    };
+  } finally {
+    view.zoom = previous;
+    draw();
+  }
 }
 function setCarHeading(yaw: number) {
   const direction =
@@ -216,7 +311,6 @@ const lab = {
       image.src = `${import.meta.env.BASE_URL}assets/sprites/grass-blades.png`;
       await image.decode();
       sheets.set("grass-blades", new Spritesheet(image, 8, 8));
-      native.addSpriteAssets(sheets);
       gpu.addSpriteAssets(sheets);
     }
     const chunk = new Chunk();
@@ -226,8 +320,7 @@ const lab = {
     camera.snapTo(128, 128);
     camera.setViewport(view.viewportWidth, view.viewportHeight);
     camera.zoom = zoom;
-    // Fixed projection isolates LOD opacity from pre-existing fractional-scale
-    // nearest-neighbor sampling differences between Canvas and WebGL.
+    // Fixed projection keeps the blades' screen layout while LOD opacity changes.
     Object.assign(view, { x: camera.x, y: camera.y, zoom: fixedProjection ? 1 : zoom });
     const world = {
       getHeightAt: () => 0,
@@ -247,7 +340,7 @@ const lab = {
       undefined,
       grassFrame,
     );
-    // Freeze blade rotation for raster parity; animation is covered by collector tests.
+    // Freeze blade rotation; animation is covered by collector tests.
     for (const item of grassItems) if (item.kind === "grass") item.angle = 0;
     grassItems.push(sprite(112, 128, 0), {
       kind: "particle",
@@ -274,7 +367,6 @@ const lab = {
       image.src = `${import.meta.env.BASE_URL}assets/vehicles/compact-1-v1.png`;
       await image.decode();
       sheets.set("vehicle-v1:compact-1", new Spritesheet(image, 192, 224));
-      native.addSpriteAssets(sheets);
       gpu.addSpriteAssets(sheets);
       Object.assign(car, {
         sheetKey: "vehicle-v1:compact-1",
@@ -291,9 +383,23 @@ const lab = {
       await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
     return draw();
   },
-  setSmoothShadows(value: boolean) {
-    smoothShadows = value;
-    return draw();
+  shadowPlacement,
+  /** Expected-color counts of the last drawn frame (see `RendererLabChecks`). */
+  palette: (colors: readonly string[], tolerance?: number) =>
+    paletteCounts(frame, 384, colors, tolerance),
+  histogram: (min?: number) => histogram(frame, min),
+  /** FNV-1a of the last frame, to compare whole frames across steps. */
+  digest() {
+    let hash = 0x811c9dc5;
+    for (const value of frame) hash = Math.imul(hash ^ value, 0x01000193);
+    return (hash >>> 0).toString(16);
+  },
+  /** A disabled mesh body must draw exactly the plain sprite car. */
+  spriteFallbackMatches() {
+    const fallback = frame;
+    const plain = render({ meshlessCar: true }).pixels;
+    draw();
+    return fallback.every((value, i) => value === plain[i]);
   },
   setZoom(value: number) {
     view.zoom = value;
@@ -306,7 +412,6 @@ const lab = {
       image.src = `${import.meta.env.BASE_URL}assets/tilesets/modern-interiors-atlas.png`;
       await image.decode();
       sheets.set("modern-interiors", new Spritesheet(image, 16, 16));
-      native.setAssets(sheets);
       gpu.setAssets(sheets);
       interior = {
         id: 1,
@@ -364,7 +469,6 @@ const lab = {
   },
   dispose() {
     grassFrame.clear();
-    native.dispose();
     gpu.dispose();
   },
   gpu,

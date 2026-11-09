@@ -1,6 +1,5 @@
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { Camera } from "./Camera.js";
-import { createCanvasRenderHost } from "./CanvasRenderHost.js";
 import { createGpuRenderHost } from "./GpuRenderHost.js";
 import type { RasterRenderBackend } from "./RasterRenderBackend.js";
 import type { RenderHost } from "./RenderHost.js";
@@ -11,7 +10,7 @@ const COLORS = ["#184c18", "#4c1818", "#18184c", "#4c4c18"];
 const LAYOUTS: readonly ViewLayout[] = ["2", "4", "diagonal"];
 
 /**
- * Split views on the real Canvas and GPU hosts (226): every view composed into
+ * Split views on the real GPU host (226): every view composed into
  * its region must show exactly what a single view of that size shows (same
  * camera, same sub-pixel offset), with no neighbour bleed at region edges or
  * across the diagonal, and changing regions must not create GL objects.
@@ -36,50 +35,47 @@ export function probeViewRegions() {
     return read.getImageData(0, 0, w, h).data;
   };
   const reports = [];
-  for (const mode of ["canvas", "gpu"] as const) {
-    const host = mode === "canvas" ? createCanvasRenderHost(output) : createGpuRenderHost(output);
-    if (mode === "gpu" && output.dataset.renderer !== "gpu")
-      throw Error("Region probe requires real WebGL");
-    (host.renderer as RasterRenderBackend).setAssets(sheets);
-    const camera = new Camera();
-    try {
-      for (const layout of LAYOUTS) {
-        const views = layoutViews(layout, width, height);
-        // References: each view alone on a canvas of its region's size.
-        const references = views.map((view, i) => {
-          host.resize(view.region.width, view.region.height);
-          host.beginFrame();
-          draw(host, camera, view, i, false);
-          return pixels(host, view.region.width, view.region.height);
-        });
-        host.resize(width, height);
+  const host = createGpuRenderHost(output);
+  if (output.dataset.renderer !== "gpu") throw Error("Region probe requires real WebGL");
+  (host.renderer as RasterRenderBackend).setAssets(sheets);
+  const camera = new Camera();
+  try {
+    for (const layout of LAYOUTS) {
+      const views = layoutViews(layout, width, height);
+      // References: each view alone on a canvas of its region's size.
+      const references = views.map((view, i) => {
+        host.resize(view.region.width, view.region.height);
         host.beginFrame();
-        for (const [i, view] of views.entries()) draw(host, camera, view, i, true);
-        const frame = pixels(host, width, height);
-        let compared = 0,
-          mismatches = 0,
-          worst = 0;
-        for (const [i, { region }] of views.entries()) {
-          const reference = references[i];
-          if (!reference) throw Error("Missing reference view");
-          const result = compareRegion(frame, width, reference, region);
-          compared += result.compared;
-          mismatches += result.mismatches;
-          worst = Math.max(worst, result.worst);
-        }
-        reports.push({ mode, layout, compared, mismatches, worst });
+        draw(host, camera, view, i, false);
+        return pixels(host, view.region.width, view.region.height);
+      });
+      host.resize(width, height);
+      host.beginFrame();
+      for (const [i, view] of views.entries()) draw(host, camera, view, i, true);
+      const frame = pixels(host, width, height);
+      let compared = 0,
+        mismatches = 0,
+        worst = 0;
+      for (const [i, { region }] of views.entries()) {
+        const reference = references[i];
+        if (!reference) throw Error("Missing reference view");
+        const result = compareRegion(frame, width, reference, region);
+        compared += result.compared;
+        mismatches += result.mismatches;
+        worst = Math.max(worst, result.worst);
       }
-      // Changing regions in a running frame loop creates no textures or framebuffers.
-      const created = countGlCreation(output, mode);
-      for (const layout of [...LAYOUTS, ...LAYOUTS]) {
-        host.beginFrame();
-        for (const [i, view] of layoutViews(layout, width, height).entries())
-          draw(host, camera, view, i, true);
-      }
-      reports.push({ mode, layout: "resizing regions", glObjects: created() });
-    } finally {
-      host.dispose();
+      reports.push({ layout, compared, mismatches, worst });
     }
+    // Changing regions in a running frame loop creates no textures or framebuffers.
+    const created = countGlCreation(output);
+    for (const layout of [...LAYOUTS, ...LAYOUTS]) {
+      host.beginFrame();
+      for (const [i, view] of layoutViews(layout, width, height).entries())
+        draw(host, camera, view, i, true);
+    }
+    reports.push({ layout: "resizing regions", glObjects: created() });
+  } finally {
+    host.dispose();
   }
   output.remove();
   return reports;
@@ -136,9 +132,8 @@ function draw(host: RenderHost, camera: Camera, view: LayoutView, i: number, spl
   else host.endWorld();
 }
 
-/** Compare a region of the split frame with its single-view reference. Diagonal
- * edges are antialiased on Canvas, so pixels within 1.5 px of the split line are
- * skipped. */
+/** Compare a region of the split frame with its single-view reference. Pixels
+ * within 1.5 px of a diagonal split line are skipped. */
 function compareRegion(
   frame: Uint8ClampedArray,
   width: number,
@@ -165,9 +160,8 @@ function compareRegion(
   return { compared, mismatches, worst };
 }
 
-/** Count GL object creation on the GPU host's world canvas (none for Canvas). */
-function countGlCreation(output: HTMLCanvasElement, mode: "canvas" | "gpu"): () => number {
-  if (mode === "canvas") return () => 0;
+/** Count GL object creation on the GPU host's world canvas. */
+function countGlCreation(output: HTMLCanvasElement): () => number {
   const world = output.previousElementSibling;
   const gl =
     world instanceof HTMLCanvasElement && world.dataset.renderer === "gpu"

@@ -105,9 +105,9 @@ export const WORKSHOP_TOOLS = defineTools([
   },
   {
     id: "renderer-lab",
-    name: "Renderer comparison",
+    name: "Renderer lab",
     description:
-      "Compare the shared sprite scene on Canvas and GPU, and inspect experimental mesh bodies.",
+      "Check the GPU sprite scene against pixel invariants, and inspect experimental mesh bodies.",
     url: "renderer-lab.html",
     mode: "source",
   },

@@ -1,6 +1,5 @@
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { Camera } from "./Camera.js";
-import { CanvasRenderBackend } from "./CanvasRenderBackend.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
 import type { SpriteItem } from "./SceneItem.js";
 
@@ -13,12 +12,9 @@ export function probeSpriteSeams(pixelSnap = false) {
     canvas.height = 640;
     return canvas;
   };
-  const reference = makeCanvas();
   const canvas = makeCanvas();
   const readback = makeCanvas().getContext("2d", { willReadFrequently: true });
-  const ctx = reference.getContext("2d", { willReadFrequently: true });
-  if (!readback || !ctx) throw Error("Sprite seam probe requires Canvas2D");
-  const native = new CanvasRenderBackend(ctx, new Map());
+  if (!readback) throw Error("Sprite seam probe requires Canvas2D");
   const gpu = new GpuRenderBackend(canvas);
   const source = makeCanvas();
   const paint = source.getContext("2d");
@@ -26,7 +22,6 @@ export function probeSpriteSeams(pixelSnap = false) {
   paint.fillStyle = "#51be49";
   paint.fillRect(0, 0, source.width, source.height);
   const sheets = new Map([["solid", new Spritesheet(source, 16, 16)]]);
-  native.setAssets(sheets);
   gpu.setAssets(sheets);
   const camera = new Camera();
   camera.pixelSnap = pixelSnap;
@@ -82,33 +77,27 @@ export function probeSpriteSeams(pixelSnap = false) {
           top = Math.floor(tl.sy);
         const width = Math.floor(br.sx) - left,
           height = Math.floor(br.sy) - top;
-        for (const [name, backend, image] of [
-          ["canvas", native, reference],
-          ["gpu", gpu, canvas],
-        ] as const) {
-          if (backend === gpu) gpu.beginFrame();
-          backend.submit(view, { kind: "clear", color: "#243245" });
-          backend.submit(view, {
-            kind: "scene",
-            items,
-            order: items.map((_, i) => i),
-            pixelExactShadows: true,
-          });
-          readback.drawImage(image, 0, 0);
-          const data = readback.getImageData(left, top, width, height).data;
-          const sample = (5 * width + 5) * 4;
-          let mismatches = 0;
-          for (let i = 0; i < data.length; i += 4) {
-            if ([0, 1, 2, 3].some((channel) => data[i + channel] !== data[sample + channel]))
-              mismatches++;
-          }
-          reports.push({ renderer: name, zoom, phase, mismatches });
+        gpu.beginFrame();
+        gpu.submit(view, { kind: "clear", color: "#243245" });
+        gpu.submit(view, {
+          kind: "scene",
+          items,
+          order: items.map((_, i) => i),
+          pixelExactShadows: true,
+        });
+        readback.drawImage(canvas, 0, 0);
+        const data = readback.getImageData(left, top, width, height).data;
+        const sample = (5 * width + 5) * 4;
+        let mismatches = 0;
+        for (let i = 0; i < data.length; i += 4) {
+          if ([0, 1, 2, 3].some((channel) => data[i + channel] !== data[sample + channel]))
+            mismatches++;
         }
+        reports.push({ zoom, phase, mismatches });
       }
     }
     return reports;
   } finally {
-    native.dispose();
     gpu.dispose();
   }
 }
