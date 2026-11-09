@@ -49,10 +49,11 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
       // differ by a chunk column from the simulation camera's interpolation.
       // biome-ignore lint/suspicious/noExplicitAny: diagnostic hook
       let prepared: any;
-      const prepare = g.renderer.prepareTerrain;
+      // Frames prepare every view's halo together (226); the game has one view.
+      const prepare = g.renderer.prepareTerrainViews;
       // biome-ignore lint/suspicious/noExplicitAny: diagnostic hook
-      g.renderer.prepareTerrain = function (this: unknown, ...args: any[]) {
-        prepared = args[2];
+      g.renderer.prepareTerrainViews = function (this: unknown, ...args: any[]) {
+        prepared = args[0]?.[0]?.visible;
         return prepare.apply(this, args);
       };
       // Keep minimum display coverage and require actual travel, bounded by
@@ -81,7 +82,7 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
           if (i >= 209 && direction * (g.stateView.playerEntity.position.wx - x) > 450) break;
         }
       } finally {
-        g.renderer.prepareTerrain = prepare;
+        g.renderer.prepareTerrainViews = prepare;
       }
       return {
         dx: g.stateView.playerEntity.position.wx - x,

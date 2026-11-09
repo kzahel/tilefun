@@ -20,6 +20,7 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:smoke": "playwright test --config=playwright.smoke.config.ts",
+    "test:all": "npm run check && npm run typecheck && npm test && npm run test:http-integration && npm run build && playwright test",
     "test:e2e:software-webgl": "playwright test --config=playwright.software-webgl.config.ts",
     "test:e2e:ui": "playwright test --ui",
     "screenshots:interiors": "npm run build && playwright test tests/interiors-screenshots.spec.ts && playwright test --config=playwright.capture.config.ts interiors.spec.ts",

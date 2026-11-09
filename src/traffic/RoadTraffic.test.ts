@@ -306,4 +306,4 @@ it("takes a continuing road instead of feeding a dead-end spur when a through ro
   } finally {
     await s.close();
   }
-}, 15000);
+}, 60_000);

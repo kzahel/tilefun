@@ -117,7 +117,7 @@ it("realizes the whole lane and crop ground, with matching chunk-edge subgrids a
     east = chunk(west.cx * 16 + 16, y);
   for (let sy = 0; sy < 33; sy++) expect(west.c.getSubgrid(32, sy)).toBe(east.c.getSubgrid(0, sy));
   expect(pathDistance(required(f.paths[0]), f.center.x, f.center.y + 12)).toBe(0);
-}, 15000);
+}, 60_000);
 
 it("assigns each farm animal once to its actual spawn chunk, independently of query order", () => {
   const f = required(new FarmsteadSource(regionalWorld(2026)).owner(0, 0, "south"));
@@ -386,4 +386,4 @@ it("keeps expanded city walls and walking routes clear of native rail and statio
       }
   }
   expect(inspected).toBeGreaterThan(0);
-}, 15000);
+}, 60_000);

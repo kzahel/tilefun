@@ -1,40 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { CONTINUATION_BIRD_PROFILES } from "../src/wildlife/ContinuationBirds.js";
-import {
-  CRUSTACEAN_FAUNA_PROFILES,
-  CRUSTACEAN_LAND_HUNTER_PROFILES,
-  CRUSTACEAN_WATER_HUNTER_PROFILES,
-} from "../src/wildlife/Crustaceans.js";
-import {
-  DISTINCT_FISH_FAUNA_PROFILES,
-  DISTINCT_FISH_HUNTER_PROFILES,
-} from "../src/wildlife/DistinctFish.js";
-import {
-  FOREST_HUNTER_PROFILES,
-  FOREST_SPECIALIST_PROFILES,
-} from "../src/wildlife/ForestSpecialists.js";
-import { GREAT_APE_PROFILES } from "../src/wildlife/GreatApes.js";
-import {
-  GROUND_ARTHROPOD_FAUNA_PROFILES,
-  GROUND_ARTHROPOD_HUNTER_PROFILES,
-} from "../src/wildlife/GroundArthropods.js";
-import { GROUND_PRIMATE_PROFILES } from "../src/wildlife/GroundPrimates.js";
-import { GROUND_SPECIALIST_PROFILES } from "../src/wildlife/GroundSpecialists.js";
-import {
-  LEGLESS_FAUNA_PROFILES,
-  LEGLESS_LAND_HUNTER_PROFILES,
-  LEGLESS_WATER_HUNTER_PROFILES,
-} from "../src/wildlife/LeglessCreatures.js";
-import {
-  MARINE_ODDITY_FAUNA_PROFILES,
-  MARINE_ODDITY_HUNTER_PROFILES,
-} from "../src/wildlife/MarineOddities.js";
-import { MORE_MAMMAL_PROFILES } from "../src/wildlife/MoreMammals.js";
-import { REPTILE_HUNTER_PROFILES } from "../src/wildlife/ReptileHunters.js";
-import { SEABIRD_PROFILES } from "../src/wildlife/Seabirds.js";
-import { SHORE_MAMMAL_PROFILES } from "../src/wildlife/ShoreMammals.js";
-import { TALL_BIRD_PROFILES } from "../src/wildlife/TallBirds.js";
-import { UPRIGHT_COMPANION_PROFILES } from "../src/wildlife/UprightCompanions.js";
+import { predatorType } from "../src/wildlife/Predator.js";
 import { ANIMAL_BROWSER_ENTRIES } from "../src/workshop/AnimalBrowserData.js";
 
 test.use({ channel: "chromium" });
@@ -118,21 +83,27 @@ test("mobile animal search fits the viewport and opens a hunting scene", async (
   );
 });
 
-for (const [facing, direction] of ["Front", "Back", "Left", "Right"].entries()) {
-  test(`every animal has a visible animated locomotion preview facing ${direction}`, async ({
-    page,
-  }) => {
-    test.setTimeout(180_000);
-    await page.goto(
-      "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
-    );
-    await page.getByLabel("Preview facing", { exact: true }).selectOption(String(facing));
-    const search = page.getByLabel("Find animal", { exact: true });
-    for (const animal of ANIMAL_BROWSER_ENTRIES) {
-      expect(
-        animal.locomotion?.count,
-        `${animal.name} has an authored travel clip`,
-      ).toBeGreaterThan(1);
+// Exhaustive per-animal checks run in Node: every sheet's travel clip in all four
+// facings (src/workshop/AnimalBrowserPreviews.test.ts) and every species' Watch AI
+// scene (src/wildlife/AnimalScenes.partN.test.ts). These representatives keep the
+// browser boundaries: preview canvas drawing and card -> scene -> camera.
+const entry = (id: string) => {
+  const found = ANIMAL_BROWSER_ENTRIES.find((a) => a.id === id);
+  if (!found) throw Error(`Missing browser entry ${id}`);
+  return found;
+};
+
+test("previews draw animated locomotion for representative sheets in every facing", async ({
+  page,
+}) => {
+  await page.goto(
+    "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
+  );
+  const search = page.getByLabel("Find animal", { exact: true });
+  // Predator, original-wildlife, expansion and hopping sheets.
+  for (const animal of ["tiger", "deer", "sloth", "wallaby"].map(entry))
+    for (const [facing, direction] of ["Front", "Back", "Left", "Right"].entries()) {
+      await page.getByLabel("Preview facing", { exact: true }).selectOption(String(facing));
       await search.fill(animal.name);
       const canvas = page.locator(`[data-animal="${animal.id}"] canvas`);
       await canvas.scrollIntoViewIfNeeded();
@@ -151,7 +122,7 @@ for (const [facing, direction] of ["Front", "Back", "Left", "Right"].entries()) 
           visible: pixels?.some((v, i) => i % 4 === 3 && v > 0),
         };
       });
-      expect(before.visible, `${animal.name} paints visible pixels`).toBe(true);
+      expect(before.visible, `${animal.name} ${direction} paints visible pixels`).toBe(true);
       await expect
         .poll(() => canvas.evaluate((c) => (c as HTMLCanvasElement).toDataURL()), {
           message: `${animal.name} ${direction} travel pixels advance`,
@@ -160,43 +131,27 @@ for (const [facing, direction] of ["Front", "Back", "Left", "Right"].entries()) 
         })
         .not.toBe(before.image);
     }
-  });
-}
+});
 
-for (const animal of [
-  ...CONTINUATION_BIRD_PROFILES,
-  ...GREAT_APE_PROFILES,
-  ...GROUND_PRIMATE_PROFILES,
-  ...DISTINCT_FISH_FAUNA_PROFILES,
-  ...GROUND_SPECIALIST_PROFILES,
-  ...SEABIRD_PROFILES,
-  ...TALL_BIRD_PROFILES,
-  ...FOREST_SPECIALIST_PROFILES,
-  ...MORE_MAMMAL_PROFILES,
-  ...SHORE_MAMMAL_PROFILES,
-  ...LEGLESS_FAUNA_PROFILES,
-  ...GROUND_ARTHROPOD_FAUNA_PROFILES,
-  ...MARINE_ODDITY_FAUNA_PROFILES,
-  ...CRUSTACEAN_FAUNA_PROFILES,
-  ...UPRIGHT_COMPANION_PROFILES,
-]) {
-  test(`${animal.species} opens from the browser as visible moving natural wildlife`, async ({
-    page,
-  }) => {
+// Land walker in a thicket scene, hopper, and water fauna.
+for (const id of ["sloth", "wallaby", "seahorse"]) {
+  const animal = entry(id);
+  const hop = id === "wallaby";
+  test(`${id} opens from the browser as visible moving natural wildlife`, async ({ page }) => {
     await page.goto(
       "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
     );
-    await page.getByLabel("Find animal", { exact: true }).fill(animal.label);
-    const card = page.locator(`[data-animal="${animal.species}"]`);
+    await page.getByLabel("Find animal", { exact: true }).fill(animal.name);
+    const card = page.locator(`[data-animal="${id}"]`);
     await expect(card.locator("canvas")).toHaveAttribute("data-ready", "true");
-    if (!animal.hop) {
+    if (!hop) {
       await page.getByLabel("Preview animation", { exact: true }).selectOption("action");
       await expect(card.locator("canvas")).toHaveAttribute("data-clip", "action");
       const frame = await card.locator("canvas").getAttribute("data-frame");
       await expect.poll(() => card.locator("canvas").getAttribute("data-frame")).not.toBe(frame);
     }
     await card.getByRole("button", { name: "Watch AI", exact: true }).click();
-    await expect(page.getByLabel("Landscape scene", { exact: true })).toHaveValue(animal.species);
+    await expect(page.getByLabel("Landscape scene", { exact: true })).toHaveValue(id);
     const stage = page.getByLabel("Natural landscape playground");
     await expect(stage).toHaveAttribute("data-ready", "true");
     const poses = async () =>
@@ -208,7 +163,7 @@ for (const animal of [
           y: number;
           z: number;
         }[]
-      ).filter((p) => p.species === animal.species);
+      ).filter((p) => p.species === id);
     await expect.poll(async () => (await poses()).some((p) => p.visible)).toBe(true);
     const before = await poses();
     await expect
@@ -218,33 +173,24 @@ for (const animal of [
             (p) =>
               p.visible &&
               // Shared Rapier contacts rest within solver slop, not at exact zero.
-              (animal.hop ? p.z > 2 : Math.abs(p.z) < 0.5) &&
+              (hop ? p.z > 2 : Math.abs(p.z) < 0.5) &&
               before.some((b) => Math.hypot(b.x - p.x, b.y - p.y) > 1),
           ),
         { timeout: 12000, intervals: [30] },
       )
       .toBe(true);
-    await page.screenshot({ path: `data/wildlife-147-${animal.species}-lab.png` });
   });
 }
 
-for (const animal of [
-  ...DISTINCT_FISH_HUNTER_PROFILES,
-  ...REPTILE_HUNTER_PROFILES,
-  ...FOREST_HUNTER_PROFILES,
-  ...LEGLESS_LAND_HUNTER_PROFILES,
-  ...GROUND_ARTHROPOD_HUNTER_PROFILES,
-  ...LEGLESS_WATER_HUNTER_PROFILES,
-  ...MARINE_ODDITY_HUNTER_PROFILES,
-  ...CRUSTACEAN_LAND_HUNTER_PROFILES,
-  ...CRUSTACEAN_WATER_HUNTER_PROFILES,
-]) {
-  test(`${animal.species} browser display opens a real moving shared hunter`, async ({ page }) => {
+// Open-ground and deep-water hunters.
+for (const id of ["komodo-dragon", "swordfish"]) {
+  const animal = entry(id);
+  test(`${id} browser display opens a real moving shared hunter`, async ({ page }) => {
     await page.goto(
       "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
     );
-    await page.getByLabel("Find animal", { exact: true }).fill(animal.label);
-    const card = page.locator(`[data-animal="${animal.species}"]`),
+    await page.getByLabel("Find animal", { exact: true }).fill(animal.name);
+    const card = page.locator(`[data-animal="${id}"]`),
       preview = card.locator("canvas");
     await page.getByLabel("Preview animation", { exact: true }).selectOption("action");
     await expect(preview).toHaveAttribute("data-ready", "true");
@@ -254,7 +200,7 @@ for (const animal of [
     await card.getByRole("button", { name: "Watch AI", exact: true }).click();
     const stage = page.getByLabel("Natural landscape playground");
     await expect(stage).toHaveAttribute("data-ready", "true");
-    await expect(page.getByLabel("Landscape scene", { exact: true })).toHaveValue(animal.species);
+    await expect(page.getByLabel("Landscape scene", { exact: true })).toHaveValue(id);
     const poses = async () =>
       (
         JSON.parse((await stage.getAttribute("data-predator-poses")) ?? "[]") as {
@@ -263,7 +209,7 @@ for (const animal of [
           x: number;
           y: number;
         }[]
-      ).filter((p) => p.type === `wildlife-${animal.species}-predator-v1`);
+      ).filter((p) => p.type === predatorType(id));
     await expect.poll(async () => (await poses()).length).toBe(1);
     const before = await poses();
     await expect
@@ -275,6 +221,5 @@ for (const animal of [
         { timeout: 15000, intervals: [30] },
       )
       .toBe(true);
-    await page.screenshot({ path: `data/wildlife-147-${animal.species}-lab.png` });
   });
 }

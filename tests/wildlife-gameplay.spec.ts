@@ -74,8 +74,11 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
             if (d)
               g.transport.send({
                 type: "throw-ball",
-                dirX: d.position.wx - p.wx,
-                dirY: d.position.wy - p.wy,
+                // Authority drops non-unit throws (RealmCommands.isValidThrow).
+                dirX:
+                  (d.position.wx - p.wx) / Math.hypot(d.position.wx - p.wx, d.position.wy - p.wy),
+                dirY:
+                  (d.position.wy - p.wy) / Math.hypot(d.position.wx - p.wx, d.position.wy - p.wy),
                 // Shared ball physics: a low throw lands ~70 px out (205); reach the target.
                 force: 1,
               });

@@ -139,8 +139,11 @@ test("robin ball contact dispatches client chirps through the live Worker", asyn
             if (f)
               g.transport.send({
                 type: "throw-ball",
-                dirX: f.position.wx - p.wx,
-                dirY: f.position.wy - p.wy,
+                // Authority drops non-unit throws (RealmCommands.isValidThrow).
+                dirX:
+                  (f.position.wx - p.wx) / Math.hypot(f.position.wx - p.wx, f.position.wy - p.wy),
+                dirY:
+                  (f.position.wy - p.wy) / Math.hypot(f.position.wx - p.wx, f.position.wy - p.wy),
                 // Shared ball physics: a low throw lands ~70 px out (205); reach the target.
                 force: 1,
               });

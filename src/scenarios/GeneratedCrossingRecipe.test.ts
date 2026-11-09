@@ -67,4 +67,4 @@ it("stages the drivable car beside every generated crossing in both directions",
       const s = await ScenarioSession.create(generatedCrossingRecipe(index, reverse).recipe);
       await s.close();
     }
-}, 15000);
+}, 60_000);

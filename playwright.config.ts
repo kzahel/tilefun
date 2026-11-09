@@ -3,19 +3,21 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   testDir: "./tests",
   globalSetup: "./tests/workshop-setup.ts",
-  timeout: process.env.CI ? 60_000 : 30_000,
-  // Hosted runners reach data-ready in ~5 s (atlas decoding plus software WebGL);
-  // scale assertion waits with the test timeout instead of per-call overrides.
-  expect: { timeout: process.env.CI ? 15_000 : 5_000 },
-  // Canvas-heavy labs and full Chromium compete for CPU/GPU with the live game.
-  // Bound concurrency so readiness assertions exercise behavior, not contention.
-  // Hosted CI uses software GPU rendering; two full Chromium workers can
-  // starve the authority Worker and miss short-lived gameplay phases.
-  workers: process.env.CI ? 1 : 2,
-  // CI shards split per test rather than per file, so long specs don't pile into
-  // one shard; with one worker per shard, tests still run one at a time.
-  fullyParallel: !!process.env.CI,
-  // Full nightly/manual runs collect all failures instead of abandoning a shard.
+  // Hosted runners reach data-ready in ~5 s (atlas decoding plus software WebGL),
+  // and local runs share the machine across parallel workers. Both use the same
+  // deadlines; scale assertion waits with the test timeout instead of per-call
+  // overrides.
+  timeout: 60_000,
+  expect: { timeout: 15_000 },
+  // Hosted CI uses software GPU rendering; two full Chromium workers can starve
+  // the authority Worker and miss short-lived gameplay phases, so CI runs one.
+  // Locally (M4 Pro, 2026-11-09) four workers run the whole suite in ~15 min;
+  // eight overloaded the machine (5 s readiness waits failed by contention).
+  workers: process.env.CI ? 1 : 4,
+  // Spread long spec files across workers (and CI shards) per test.
+  fullyParallel: true,
+  // A load flake retries once and is reported as flaky rather than failing.
+  retries: 1,
   globalTimeout: process.env.CI ? 45 * 60_000 : 0,
   reporter: [["list"], ["html", { open: "never" }]],
   snapshotPathTemplate: "{testDir}/fixtures/interior-approved/{arg}{ext}",

@@ -7,8 +7,8 @@ import full from "./playwright.config.js";
  * would also run the hardware `chromium` project. */
 export default defineConfig({
   ...full,
-  timeout: 60_000,
-  expect: { ...full.expect, timeout: 15_000 },
+  // SwiftShader rasterizes on the CPU; four workers would compete with it.
+  workers: process.env.CI ? 1 : 2,
   reporter: [["list"], ["json", { outputFile: "test-results/software-webgl.json" }]],
   projects: [
     {
