@@ -46,6 +46,12 @@ export class EntityHandle {
       throw new Error("Position is outside ready terrain.");
 
     setBodyPose(this.entity, { wx, wy });
+    this.mutated();
+  }
+
+  /** Script edits are discrete: save them promptly rather than waiting for the record sweep. */
+  protected mutated(entity = this.entity): void {
+    this.entityManager.onMutation?.(entity);
   }
 
   // --- Jump / Z velocity ---
@@ -57,6 +63,7 @@ export class EntityHandle {
   setJumpVZ(vz: number): void {
     if (!this.alive) return;
     setVerticalVelocity(this.entity, vz);
+    this.mutated();
   }
 
   // --- Velocity ---
@@ -74,11 +81,13 @@ export class EntityHandle {
   setVelocity(vx: number, vy: number): void {
     if (!this.alive) return;
     setHorizontalVelocity(this.entity, { vx, vy });
+    this.mutated();
   }
 
   clearVelocity(): void {
     if (!this.alive) return;
     setHorizontalVelocity(this.entity, null);
+    this.mutated();
   }
 
   // --- Tile position (derived) ---
@@ -196,6 +205,7 @@ export class EntityHandle {
     this.entity.parentId = parentId;
     this.entity.localOffsetX = offsetX;
     this.entity.localOffsetY = offsetY;
+    this.mutated();
   }
 
   clearParent(): void {
@@ -203,7 +213,7 @@ export class EntityHandle {
     Reflect.set(this.entity, "parentId", undefined);
     Reflect.set(this.entity, "localOffsetX", undefined);
     Reflect.set(this.entity, "localOffsetY", undefined);
-    this.entityManager.onMutation?.(this.entity);
+    this.mutated();
   }
 
   // --- AI ---
@@ -215,6 +225,7 @@ export class EntityHandle {
   setAIState(state: "idle" | "walking" | "chasing" | "following" | "ridden" | "scared"): void {
     if (!this.alive || !this.entity.wanderAI) return;
     this.entity.wanderAI.state = state;
+    this.mutated();
   }
 
   get isFollowing(): boolean {
@@ -224,17 +235,20 @@ export class EntityHandle {
   setFollowing(following: boolean): void {
     if (!this.alive || !this.entity.wanderAI) return;
     this.entity.wanderAI.following = following;
+    this.mutated();
   }
 
   setAIDirection(dx: number, dy: number): void {
     if (!this.alive || !this.entity.wanderAI) return;
     this.entity.wanderAI.dirX = dx;
     this.entity.wanderAI.dirY = dy;
+    this.mutated();
   }
 
   setAITimer(seconds: number): void {
     if (!this.alive || !this.entity.wanderAI) return;
     this.entity.wanderAI.timer = seconds;
+    this.mutated();
   }
 
   // --- Lifecycle ---
@@ -262,6 +276,7 @@ export class EntityHandle {
   setDeathTimer(seconds: number): void {
     if (!this.alive) return;
     this.entity.deathTimer = seconds;
+    this.mutated();
   }
 }
 
@@ -339,6 +354,7 @@ export class PlayerHandle extends EntityHandle {
 
     Reflect.set(this.entity, "jumpVZ", undefined);
     this.entity.noShadow = true;
+    this.mutated();
     this.session.mountId = target.id;
     if (target.aiState !== null) target.setAIState("ridden");
     target.setFollowing(false);
@@ -367,7 +383,7 @@ export class PlayerHandle extends EntityHandle {
     Reflect.set(this.entity, "parentId", undefined);
     Reflect.set(this.entity, "localOffsetX", undefined);
     Reflect.set(this.entity, "localOffsetY", undefined);
-    this.entityManager.onMutation?.(this.entity);
+    this.mutated();
     delete this.entity.noShadow;
     this.session.mountId = null;
     if (mountEntity) {
@@ -379,6 +395,7 @@ export class PlayerHandle extends EntityHandle {
         mountEntity.velocity.vx = 0;
         mountEntity.velocity.vy = 0;
       }
+      this.mutated(mountEntity);
     }
   }
 }

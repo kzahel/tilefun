@@ -28,6 +28,8 @@ async function fixture() {
     reference = new WildlifeActivity();
   const bird = (x: number, y = 32) => s.realm.entityManager.spawn({ ...createRobin(x, y), wz: 0 });
   const check = (dt = 1 / 60, sessions: PlayerSession[] = [s.player]) => {
+    // Realm.tick refreshes records membership after each step (tactical 234).
+    records.tick(0);
     // Pre-change policy: readiness for every demanded group, then wildlife sleep.
     const old = new Map<Entity, number>(),
       seen = new Set<number>();

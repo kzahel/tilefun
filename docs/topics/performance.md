@@ -1,5 +1,101 @@
 # Streaming and gameplay performance
 
+## Actor stress: rabbits and parked cars (2026-11-09)
+
+`npm run stress:bench -- --headed --rabbits=100 --cars=20` opens a new seed-2026
+world in isolated Vite and bundled Chromium. It samples each zoom
+(`--zooms=1,0.5,0.25,0.1`, 5 s each) before and after spawning rabbits in a
+field and parked cars in a grid next to the player. It reports:
+- frame cadence and missed frames;
+- render and update cost, and draw calls;
+- Worker `server.tick`, `realm.ai`, `realm.entityPhysics` and replication time.
+
+Spawns go in paced batches of 200 because the Worker channel bounds queued
+messages at 1,024; a larger single burst fails the local transport. Some cars
+land on obstacles and are rejected, so placed counts are lower than requested.
+
+M4 Pro, headed at 120 Hz, 1728×1117. Spawned cars are added to the generated
+traffic already in view.
+
+| Load | Zoom | Frames | Render p50/p95 | Worker tick p50/p95 |
+| --- | --- | --- | --- | --- |
+| baseline | 0.1 | 120 Hz | 2.8 / 4.6 ms | 1.5 / 1.9 ms |
+| 100 rabbits, 16 cars | 1 | 120 Hz | 2.0 / 2.2 ms | 2.8 / 3.1 ms |
+| 100 rabbits, 16 cars | 0.1 | 120 Hz (16/458 missed) | 3.6 / 6.4 ms | 3.9 / 4.5 ms |
+| 500 rabbits, 87 cars | 1 | 120 Hz | 4.0 / 4.6 ms | 14.4 / 19.2 ms |
+| 500 rabbits, 87 cars | 0.25 | ~100 Hz | 8.3 / 10.5 ms | 13.3 / 18.0 ms |
+| 1,000 rabbits, 87 cars | 1 | 120 Hz | 5.5 / 6.7 ms | 21.8 / 26.3 ms |
+| 1,000 rabbits, 87 cars | 0.25 / 0.1 | 60 Hz | 12.0 / 10.6 ms p50 | ~20 / 27 ms |
+
+Pixel 7a (Chrome 156, 60 Hz, landscape 869×303 CSS px, charging; 25.8 → 27.3 °C,
+thermal status 0): `--cdp=http://127.0.0.1:9223 --port=4188` with Chrome's
+DevTools socket forwarded and the port reverse-forwarded (routes removed
+afterwards). In that viewport the New World button sits under the World type
+dropdown, so the runner screenshots the menu and dispatches the click
+(`menuBlocked` in the report).
+
+| Load | Zoom | Frames | Render p50/p95 | Worker tick p50/p95 |
+| --- | --- | --- | --- | --- |
+| baseline | 1 | 60 Hz | 3.0 / 3.9 ms | 4.4 / 6.3 ms |
+| baseline | 0.1 | ~43 Hz (78/215 missed) | 6.1 / 9.5 ms | 3.1 / 4.8 ms |
+| 100 rabbits, 16 cars | 1 | 60 Hz | 3.7 / 5.4 ms | 9.9 / 13.5 ms |
+| 100 rabbits, 16 cars | 0.25 | 60 Hz (10/290 missed) | 7.3 / 11.5 ms | 10.3 / 14.2 ms |
+| 100 rabbits, 16 cars | 0.1 | 30 Hz | 8.1 / 17 ms | 10.8 / 14.3 ms |
+| 300 rabbits, 31 cars | 1 | 60 Hz | 6.7 / 9.2 ms | 27.4 / 38.8 ms |
+| 300 rabbits, 31 cars | 0.25 | ~57 Hz | 11.4 / 14.4 ms | 36.2 / 51.3 ms |
+
+On the phone, ~100 rabbits already uses most of the authority budget, and 300
+runs the simulation at about half speed. At 0.1 the frame interval (33 ms) is
+far above the render callback (8 ms), even with no added actors. That points to
+GPU fill or presentation rather than main-thread JS; a trace has not confirmed
+it yet.
+
+Authority was the first limit. Above ~500 rabbits the tick exceeded its 16.7 ms
+budget, so the simulation ran slower than real time while rendering still held
+120 Hz at 1×. Headless `ScenarioSession` reproduced the cost (500 rabbits and 63
+cars: 15 ms p50; 1,500 and 200: 27 ms, without stalling). A Node CPU profile of
+`Realm.tick` at 500/63 showed where the time went:
+
+| Share | Area |
+| --- | --- |
+| 18% | Persistence dirty tracking: `observeActor` wrapped every durable field in deep Proxies, so each AI, physics and replication read went through a trap and a WeakMap lookup (removed in 234) |
+| 15% | Simulation activity selection (`WildlifeActivity.awake`, per-rabbit AABBs) |
+| 26% | Physics, mostly JS glue (`readBody`, `wheelContact`, `admitEntityEdits`); Rapier's WASM step is ~5% |
+| 18% | AI (rabbit meadow work, gap checks) |
+| 14% | Replication |
+
+Proxies also slowed the code that read through them, beyond their own share.
+
+### After sweep-based persistence (234)
+
+[234](../tactical/234-sweep-based-actor-persistence.md) replaced the Proxies
+with a 10 s round-robin record sweep (actors stay plain objects).
+
+Headless 500 rabbits and 63 cars:
+- tick p50 14.5 → 6.9–7.7 ms, matching the Proxy-free A/B bound;
+- AI 2.3 → 0.8 ms, physics 6 → 3.2–3.6 ms, replication 2 → 1 ms;
+- the per-tick sweep slice costs ~0.04 ms;
+- a full barrier sweep of 1,048 actors (explicit saves only) costs ~5.3 ms.
+
+Browser runs, Worker tick p50/p95:
+
+| Device | Load | Zoom | Before | After | Frames after |
+| --- | --- | --- | --- | --- | --- |
+| M4 Pro, headed | ~430–500 rabbits, 35–63 cars | 1 | 14.4 / 19.2 ms | 4.3–5.0 / 6.3–7.5 ms | 120 Hz |
+| M4 Pro, headed | ~430–500 rabbits, 35–63 cars | 0.25 | 13.3 / 18.0 ms | 4.8–5.5 / 7.3–7.9 ms | ~105 Hz; render 7–9 ms is now the limit |
+| Pixel 7a | 300 rabbits, 28–39 cars | 1 | 27.4 / 38.8 ms | 11.4 / 22.5 ms | 60 Hz |
+| Pixel 7a | 300 rabbits, 28–39 cars | 0.25 | 36.2 / 51.3 ms | 13.8 / 27.4 ms | 60 Hz (5/236 missed) |
+
+The first sample right after spawning hundreds of rabbits runs higher (11 ms
+p50 on the Mac) while they settle. The phone stayed at thermal status 0.
+
+Remaining candidate fixes, in order:
+1. Incremental activity selection.
+2. Batched physics reads.
+
+Zoomed-out rendering of 1,000 rabbits (~11 ms) is the second limit. At 0.1 the
+sprites are 1–2 px, so it is a level-of-detail candidate.
+
 ## City overview at 0.1× (2026-11-09)
 
 Owner report: at 0.1× on an M4 Pro MacBook (default GPU + meshes), frames stuck

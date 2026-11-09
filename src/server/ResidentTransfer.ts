@@ -51,7 +51,8 @@ export async function transferResident(
     ]);
   }
   try {
-    await SaveManager.flushTogether([a, b]);
+    // The resident's own record is written below; no realm-wide sweep is needed.
+    await SaveManager.flushTogether([a, b], { sweep: false });
     if (!destination.residentCanOccupy(entity, position, true))
       throw new Error("Resident doorway is occupied");
     const record = encodeActor(entity);

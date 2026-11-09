@@ -141,8 +141,10 @@ export class RealmStreaming {
           }
         });
       },
-      save: () => saves.flushSnapshot(),
+      // Sweep only the released chunk; changes during the write keep it resident.
+      save: (key) => saves.flushSnapshot({ scope: key }),
       canRelease: (key) =>
+        records.sweepScope(key) &&
         !saves.dirtyInScope(key) &&
         !records.entities.entities.some(
           (e) =>

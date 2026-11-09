@@ -10,7 +10,7 @@ import {
   aabbOverlapsSolid,
   getEntityAABB,
 } from "../../src/entities/collision.ts";
-import { decodeActor, encodeActor, observeActor } from "../../src/persistence/ActorRecords.ts";
+import { decodeActor, encodeActor } from "../../src/persistence/ActorRecords.ts";
 import { getSurfaceZ } from "../../src/physics/surfaceHeight.ts";
 import { naturalLandscapeRecipe } from "../../src/scenarios/NaturalLandscapeRecipe.ts";
 import { ScenarioSession } from "../../src/scenarios/ScenarioSession.ts";
@@ -42,7 +42,6 @@ try {
   const run = (update, record, setup, capture = true) => {
     const bird = decodeActor(record);
     if ("isProp" in bird) throw Error("Expected bird");
-    observeActor(bird, () => {});
     const ai = bird.robin;
     ai.state = setup.state;
     ai.activity = setup.activity;

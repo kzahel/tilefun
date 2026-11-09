@@ -150,10 +150,20 @@ puts/deletes, flush barriers and acknowledged close. Completions distinguish
 success, absence, cancellation/supersession, incompatibility and failure.
 An IO error must never manufacture an empty world.
 
-- Mutating a durable field increments its record revision and marks that record
-  dirty. Do not discover changes by serializing or comparing every entity each
-  frame. Persisted gameplay clocks follow the same rule; generic runtime clocks
-  do not. Coalesce repeated changes to a record within a bounded save interval.
+- Discrete changes mark their record dirty when they happen:
+  - spawn, despawn, edits and scripting mutations;
+  - attachment changes and chunk crossings, found on the next tick.
+
+  Continuous simulation state (motion, AI and gameplay clocks) is found by
+  `RealmRecords`' bounded round-robin sweep. It compares each actor's record
+  string with its last write once per `SWEEP_SECONDS` (10 s). Explicit flush
+  barriers sweep every actor; chunk release sweeps its own scope.
+
+  After a crash, continuous state may be up to ~10 s plus the write debounce
+  behind (owner direction, [234](tactical/234-sweep-based-actor-persistence.md)).
+  Do not serialize or compare every entity each frame, and do not instrument
+  actors with Proxies. Coalesce repeated changes to a record within a bounded save
+  interval.
 - Snapshot revision `r` and immutable payload for a write. Acknowledging `r`
   clears only work through `r`; a mutation to `r+1` remains dirty. Later writes
   cannot be overwritten by a late older completion.

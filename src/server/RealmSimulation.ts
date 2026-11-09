@@ -82,11 +82,7 @@ export function resolveSimulationGameplay(
   realm.animalWork.syncAll(active);
   realm.ownedBalls.sync(active);
 
-  for (const entity of entityTickDts.keys()) {
-    if (entity.wanderAI || entity.routeAI || entity.velocity || entity.deathTimer !== undefined)
-      realm.records?.changed(entity);
-  }
-
+  // Continuous motion/AI state reaches storage through the RealmRecords sweep (234).
   // ── TickService.postSimulation ──
   realm.worldAPI.tick.firePost(stepDt);
 

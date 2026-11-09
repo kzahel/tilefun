@@ -63,34 +63,36 @@ export function durableId(actor: Entity | Prop): string {
   return actor.persistentId;
 }
 
-export function encodeActor(actor: Entity | Prop, parent?: Entity): ActorRecord {
+/** The canonical record string: what is written, and what the save sweep compares. */
+export function actorRecordJson(actor: Entity | Prop, parent?: Entity): string {
   const state: Partial<Entity> = {};
   if (!("isProp" in actor)) {
     for (const field of DURABLE_ENTITY_FIELDS) Object.assign(state, { [field]: actor[field] });
   }
-  if (state.resident) {
-    const resident = JSON.parse(JSON.stringify(state.resident)) as NonNullable<Entity["resident"]>;
-    delete resident.transferring;
+  if (state.resident?.transferring !== undefined) {
+    const { transferring: _, ...resident } = state.resident;
     state.resident = resident;
   }
-  // Semantic payload contains plain numeric/boolean/string data; JSON also strips
-  // undefined optionals and unwraps mutation-observed component objects.
-  return JSON.parse(
-    JSON.stringify({
-      version: 2,
-      persistentId: durableId(actor),
-      kind: "isProp" in actor ? "prop" : "entity",
-      type: actor.type,
-      wx: actor.position.wx,
-      wy: actor.position.wy,
-      ...(actor.proceduralId ? { proceduralId: actor.proceduralId } : {}),
-      ...(parent ? { parent: durableId(parent) } : {}),
-      ...("isProp" in actor && actor.spawnTimer !== undefined
-        ? { spawnTimer: actor.spawnTimer }
-        : {}),
-      state,
-    }),
-  ) as ActorRecord;
+  // Semantic payload contains plain numeric/boolean/string data; JSON strips
+  // undefined optionals.
+  return JSON.stringify({
+    version: 2,
+    persistentId: durableId(actor),
+    kind: "isProp" in actor ? "prop" : "entity",
+    type: actor.type,
+    wx: actor.position.wx,
+    wy: actor.position.wy,
+    ...(actor.proceduralId ? { proceduralId: actor.proceduralId } : {}),
+    ...(parent ? { parent: durableId(parent) } : {}),
+    ...("isProp" in actor && actor.spawnTimer !== undefined
+      ? { spawnTimer: actor.spawnTimer }
+      : {}),
+    state,
+  });
+}
+
+export function encodeActor(actor: Entity | Prop, parent?: Entity): ActorRecord {
+  return JSON.parse(actorRecordJson(actor, parent)) as ActorRecord;
 }
 
 export type ActorDefinitions = ReadonlyMap<string, Entity | Prop>;
@@ -151,50 +153,4 @@ export function decodeActor(record: ActorRecord, definitions?: ActorDefinitions)
   actor.persistentId = record.persistentId;
   if (record.proceduralId) actor.proceduralId = record.proceduralId;
   return actor;
-}
-
-/** Observe component edits without scanning or serializing unchanged actors. */
-export function observeActor(actor: Entity | Prop, changed: () => void): void {
-  const proxies = new WeakMap<object, object>();
-  const observe = (value: unknown): unknown => {
-    if (!value || typeof value !== "object" || Object.isFrozen(value)) return value;
-    const existing = proxies.get(value);
-    if (existing) return existing;
-    const proxy = new Proxy(value, {
-      get: (target, property, receiver) => observe(Reflect.get(target, property, receiver)),
-      set: (target, property, next) => {
-        if (Reflect.get(target, property) === next) return true;
-        const result = Reflect.set(target, property, next);
-        if (result) changed();
-        return result;
-      },
-      deleteProperty: (target, property) => {
-        const existed = Reflect.has(target, property);
-        const result = Reflect.deleteProperty(target, property);
-        if (existed && result) changed();
-        return result;
-      },
-    });
-    proxies.set(value, proxy);
-    proxies.set(proxy, proxy);
-    return proxy;
-  };
-  const fields =
-    "isProp" in actor
-      ? ["position", "spawnTimer"]
-      : ["position", "parentId", ...DURABLE_ENTITY_FIELDS];
-  for (const field of fields) {
-    let value = observe(Reflect.get(actor, field));
-    Object.defineProperty(actor, field, {
-      configurable: true,
-      enumerable: value !== undefined,
-      get: () => value,
-      set: (next) => {
-        if (next !== value) {
-          value = observe(next);
-          changed();
-        }
-      },
-    });
-  }
 }

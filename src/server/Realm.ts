@@ -53,7 +53,7 @@ import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
 import { PERSISTENCE_BUDGET } from "../persistence/PersistenceBudget.js";
 import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import { RealmRecords } from "../persistence/RealmRecords.js";
-import type { SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
+import type { FlushOptions, SavedMeta, SavedPlayerData } from "../persistence/SaveManager.js";
 import { SaveManager } from "../persistence/SaveManager.js";
 import { VehicleRecords } from "../persistence/VehicleRecords.js";
 import type { WorldMeta } from "../persistence/WorldRegistry.js";
@@ -592,6 +592,7 @@ export class Realm {
     this.updateSpawners(activeSessions, storagePaused, dormantClientIds);
     for (const session of activeSessions) this.savePlayerData(session);
     this.worldAPI.advanceTime(dt);
+    this.records?.tick(dt);
 
     this.publishState(transport, dormantClientIds, broadcasting);
   }
@@ -610,7 +611,7 @@ export class Realm {
         .catch((error) => console.error("Train service preparation failed", error));
     }
     const storagePaused = globalStoragePaused || (this.saveManager?.pressured ?? false);
-    if (storagePaused) this.saveManager?.flush();
+    if (storagePaused) this.saveManager?.flush({ sweep: false });
     for (const session of this.sessions.values()) {
       if ((this.storageNotified.get(session) ?? false) === storagePaused) continue;
       this.storageNotified.set(session, storagePaused);
@@ -1173,11 +1174,11 @@ export class Realm {
     await this.railways?.prepare([range]);
   }
 
-  async flushAsync(): Promise<void> {
+  async flushAsync(options?: FlushOptions): Promise<void> {
     await this.mutations.drain();
     for (const session of this.sessions.values()) this.savePlayerData(session);
     this.saveManager?.markMetaDirty();
-    await this.saveManager?.flushAsync();
+    await this.saveManager?.flushAsync(options);
   }
 
   async flushTransfer(source: Realm | undefined): Promise<void> {

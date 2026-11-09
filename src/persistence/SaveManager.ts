@@ -62,6 +62,16 @@ export interface SavedChunkData {
   heightGrid: Uint8Array;
 }
 
+/**
+ * Explicit barriers sweep every actor for unsaved continuous state. `sweep: false`
+ * skips it (periodic checkpoints, storage-pressure retries); `scope` sweeps only one
+ * chunk (release).
+ */
+export interface FlushOptions {
+  sweep?: boolean;
+  scope?: string;
+}
+
 interface SaveBatch {
   entries: SaveEntry[];
   restore: () => void;
@@ -86,6 +96,8 @@ export class SaveManager {
   private saveError: unknown;
   private getChunk: GetChunkFn | null = null;
   private getMeta: GetMetaFn | null = null;
+  /** Marks continuous state that changed since its last write (all, or one scope). */
+  beforeFlush?: (scope?: string) => void;
 
   constructor(readonly store: PersistenceStore) {}
   get dirtyCount(): number {
@@ -184,9 +196,9 @@ export class SaveManager {
   }
 
   /** A finite barrier: new mutations made during the write belong to the next save. */
-  async flushSnapshot(): Promise<void> {
+  async flushSnapshot(options?: FlushOptions): Promise<void> {
     await this.pending;
-    this.flush();
+    this.flush(options);
     await this.pending;
     if (this.saveFailed) throw new Error("Could not save world state.", { cause: this.saveError });
   }
@@ -250,7 +262,8 @@ export class SaveManager {
   }
 
   /** Flush immediately (e.g., on visibilitychange → hidden). */
-  flush(): void {
+  flush(options?: FlushOptions): void {
+    if (options?.sweep !== false) this.beforeFlush?.(options?.scope);
     if (this.saveTimer !== null) {
       clearTimeout(this.saveTimer);
       this.saveTimer = null;
@@ -261,12 +274,15 @@ export class SaveManager {
   }
 
   /** Finite barrier for mutations preceding this call; live producers may continue. */
-  async flushAsync(): Promise<void> {
-    await this.flushSnapshot();
+  async flushAsync(options?: FlushOptions): Promise<void> {
+    await this.flushSnapshot(options);
   }
 
   /** Related realm changes in one physical world share one atomic commit. */
-  static async flushTogether(managers: readonly SaveManager[]): Promise<void> {
+  static async flushTogether(
+    managers: readonly SaveManager[],
+    options?: FlushOptions,
+  ): Promise<void> {
     const unique = [...new Set(managers)];
     if (!unique.length) return;
     await Promise.all(unique.map((manager) => manager.pending));
@@ -278,12 +294,13 @@ export class SaveManager {
           !(manager.store instanceof RealmStore) || manager.store.physical !== first.physical,
       )
     ) {
-      await Promise.all(unique.map((manager) => manager.flushSnapshot()));
+      await Promise.all(unique.map((manager) => manager.flushSnapshot(options)));
       return;
     }
     const batches: { manager: SaveManager; batch: SaveBatch }[] = [];
     try {
       for (const manager of unique) {
+        if (options?.sweep !== false) manager.beforeFlush?.(options?.scope);
         const batch = manager.capture();
         if (batch) batches.push({ manager, batch });
       }

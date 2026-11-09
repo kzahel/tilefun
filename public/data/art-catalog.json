@@ -35467,11 +35467,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/RealmRecords.ts:51"
+          "source": "src/persistence/RealmRecords.ts:71"
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/RealmRecords.ts:145"
+          "source": "src/persistence/RealmRecords.ts:167"
         },
         {
           "system": "Gameplay",
@@ -35531,11 +35531,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/EntityHandle.ts:168"
+          "source": "src/server/EntityHandle.ts:177"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/EntityHandle.ts:168"
+          "source": "src/server/EntityHandle.ts:177"
         },
         {
           "system": "Gameplay",
@@ -35555,7 +35555,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1324"
+          "source": "src/server/Realm.ts:1325"
         },
         {
           "system": "Gameplay",
@@ -35563,15 +35563,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:149"
+          "source": "src/server/RealmStreaming.ts:151"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:215"
+          "source": "src/server/RealmStreaming.ts:217"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:216"
+          "source": "src/server/RealmStreaming.ts:218"
         },
         {
           "system": "Gameplay",
@@ -36623,7 +36623,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/ActorRecords.ts:139"
+          "source": "src/persistence/ActorRecords.ts:141"
         },
         {
           "system": "Gameplay",

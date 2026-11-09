@@ -353,7 +353,7 @@
       "overLimit": 1
     },
     "src/persistence/ActorRecords.ts": {
-      "lines": 200,
+      "lines": 156,
       "worst": 39,
       "overLimit": 1
     },
@@ -578,7 +578,7 @@
       "overLimit": 1
     },
     "src/server/EntityHandle.ts": {
-      "lines": 384,
+      "lines": 401,
       "worst": 28,
       "overLimit": 1
     },
@@ -608,7 +608,7 @@
       "overLimit": 1
     },
     "src/server/Realm.ts": {
-      "lines": 1342,
+      "lines": 1343,
       "worst": 0,
       "overLimit": 0
     },
@@ -623,7 +623,7 @@
       "overLimit": 1
     },
     "src/server/RealmStreaming.ts": {
-      "lines": 312,
+      "lines": 314,
       "worst": 31,
       "overLimit": 1
     },

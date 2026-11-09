@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [234 Sweep-based actor persistence](234-sweep-based-actor-persistence.md) | Implemented 2026-11-09: save-tracking Proxies removed; 10 s round-robin record sweep, per-tick chunk membership, full sweeps at explicit save barriers. Authority tick at 500 rabbits 14.5 → ~7 ms; Pixel 7a at 300 rabbits 27 → 11 ms. A crash may lose ~10 s of continuous actor state |
 | [233 Fast CI and local full suite](233-fast-ci-and-local-full-suite.md) | Implemented 2026-11-09: CI keeps check/unit/raster plus a three-file browser smoke, no scheduled full run; local 4-worker `npm run test:all`; animal-browser exhaustive checks move to Node; throw/streaming/ratchet repairs |
 | [232 WebGL2-only renderer](232-webgl2-only-renderer.md) | Parent plan, authorized 2026-11-09: game/labs require WebGL2 (no Canvas fallback), move direct Canvas users to GPU, delete the Canvas renderer, then a GPU-native sprite path for 120 Hz at 0.1×; local software-WebGL test lane before CI |
 | [231 Vehicle surfaces, tires and drivetrains](231-vehicle-surfaces-tires-and-drivetrains.md) | Delivered for owner play review: per-wheel surface grip and sand/water drag, slick/road/off-road tires, front/rear/all-wheel drive, coloured wheel spray, Workshop car-surfaces course; tracks and prop materials deferred |

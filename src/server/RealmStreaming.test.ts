@@ -1,4 +1,4 @@
-import { expect, it } from "vitest";
+import { expect, it, vi } from "vitest";
 import { createChicken } from "../entities/Chicken.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
@@ -116,6 +116,57 @@ it("unloads durable actors, moved procedural props and complete attachment group
     await f.visit(0);
     expect(f.records.byId.has(required(parentId))).toBe(false);
     expect(f.births()).toBe(3);
+  } finally {
+    await f.close();
+  }
+});
+
+it("an unload sweeps and saves continuous state changed in its released chunk only", async () => {
+  const f = await fixture();
+  try {
+    await f.visit(0);
+    await f.saves.flushAsync();
+    const actor = required(f.entities.entities[0]);
+    // A plain write with no explicit mark and no sweep tick before the unload.
+    actor.position.wx += 7;
+    required(actor.wanderAI).timer = 3.5;
+    const sweepAll = vi.spyOn(f.records, "sweepAll");
+    await f.visit(1);
+    expect(sweepAll).not.toHaveBeenCalled();
+    expect(f.records.byId.has(required(actor.persistentId))).toBe(false);
+    await f.visit(0);
+    const restored = required(f.records.byId.get(required(actor.persistentId)));
+    expect(restored.position).toEqual(actor.position);
+    expect(!("isProp" in restored) && restored.wanderAI?.timer).toBe(3.5);
+  } finally {
+    await f.close();
+  }
+});
+
+it("a change made during the eviction write keeps the chunk resident until it is saved", async () => {
+  const f = await fixture();
+  try {
+    await f.visit(0);
+    await f.saves.flushAsync();
+    const actor = required(f.entities.entities[0]);
+    const id = required(actor.persistentId);
+    let commits = 0;
+    f.executor.beforeCommit = async () => {
+      if (commits++) return;
+      actor.position.wx += 5;
+      required(actor.wanderAI).timer = 3.5;
+    };
+    f.saves.markMetaDirty(); // so the eviction write commits something
+    await f.visit(1);
+    expect(commits).toBeGreaterThan(0);
+    expect(f.records.byId.get(id)).toBe(actor);
+    delete f.executor.beforeCommit;
+    for (let i = 0; i < 5 && f.records.byId.has(id); i++) await f.visit(1);
+    expect(f.records.byId.has(id)).toBe(false);
+    await f.visit(0);
+    const restored = required(f.records.byId.get(id));
+    expect(restored.position).toEqual(actor.position);
+    expect(!("isProp" in restored) && restored.wanderAI?.timer).toBe(3.5);
   } finally {
     await f.close();
   }

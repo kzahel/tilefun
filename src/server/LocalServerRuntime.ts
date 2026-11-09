@@ -1,4 +1,5 @@
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
+import type { FlushOptions } from "../persistence/SaveManager.js";
 import { decodeClientMessage, encodeServerMessage } from "../shared/binaryCodec.js";
 import type {
   LocalHostBoot,
@@ -16,7 +17,7 @@ export interface LocalAuthority {
   startLoop(): void;
   stopLoop(): void;
   settle(): Promise<void>;
-  flushAsync(): Promise<void>;
+  flushAsync(options?: FlushOptions): Promise<void>;
   destroy(): void | Promise<void>;
   completedTicks: number;
   readonly persistenceDiagnostics?: GameServer["persistenceDiagnostics"];
@@ -340,7 +341,7 @@ export class LocalServerRuntime {
       )
         return;
       this.checkpointPending = true;
-      void this.flush()
+      void this.flush({ sweep: false })
         .catch((error) => this.storageFailure(error))
         .finally(() => {
           this.checkpointPending = false;
@@ -348,12 +349,12 @@ export class LocalServerRuntime {
     }, 5000);
   }
 
-  private flush(): Promise<void> {
+  private flush(options?: FlushOptions): Promise<void> {
     this.flushChain = this.flushChain
       .catch(() => {})
       .then(async () => {
         await this.server.settle();
-        await this.server.flushAsync();
+        await this.server.flushAsync(options);
       });
     return this.flushChain;
   }

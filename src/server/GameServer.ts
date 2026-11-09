@@ -506,7 +506,7 @@ export class GameServer {
     if (this.locations && !this.checkpointPending && Date.now() - this.lastCheckpoint >= 5000) {
       this.lastCheckpoint = Date.now();
       this.checkpointPending = true;
-      void this.trackOperation(this.flushAsync())
+      void this.trackOperation(this.flushAsync({ sweep: false }))
         .catch((error) => this.reportStorageFailure(error))
         .finally(() => {
           this.checkpointPending = false;
@@ -618,10 +618,10 @@ export class GameServer {
       this.transport.send(cid, { type: "chat", sender, text });
   }
 
-  async flushAsync(): Promise<void> {
+  async flushAsync(options?: Parameters<Realm["flushAsync"]>[0]): Promise<void> {
     this.lastCheckpoint = Date.now();
     try {
-      for (const realm of this.realms.values()) await realm.flushAsync();
+      for (const realm of this.realms.values()) await realm.flushAsync(options);
       for (const session of this.sessions.values()) {
         const realm = this.realms.get(session.realmId ?? "");
         if (realm && !session.transitioning && !session.retired)
