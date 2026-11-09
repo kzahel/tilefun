@@ -17,7 +17,7 @@ interface TerrainSurface {
   cy: number;
 }
 
-/** Completed surfaces belong to one Canvas renderer, never to the shared world. */
+/** Completed terrain surfaces belong to one backend, never to the shared world. */
 export class CanvasTerrainResources {
   private readonly surfaces = new Map<Chunk, TerrainSurface>();
   private readonly coordinates = new Map<string, Chunk>();

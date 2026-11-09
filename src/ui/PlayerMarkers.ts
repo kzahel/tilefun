@@ -59,7 +59,7 @@ export function collectPlayerMarkers(
   return markers;
 }
 
-/** Platform HUD overlay shared by Canvas and GPU gameplay, including the editor.
+/** Platform HUD overlay for gameplay, including the editor.
  * `localPlayerId` is the viewing player (a split-screen view's own seat). */
 export function drawPlayerMarkers(
   gc: Pick<GameContext, "ctx" | "camera" | "stateView">,

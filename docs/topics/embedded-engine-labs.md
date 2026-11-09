@@ -330,7 +330,7 @@ the page owns only fixture data, input and camera framing.
 
 [167](../tactical/167-tipping-dump-bed.md) extends those same normal controls and
 fixed-clock authority with tipping/lowering. Inclined support, cargo gravity,
-nullable replica state, renderer pose, debug and Canvas/failed-mesh fallback are
+nullable replica state, renderer pose, debug and failed-mesh fallback are
 shared; no lab equipment simulation exists. Pause/step/reload keep the same rig
 and occupants. The playground camera now fits the fully raised tub.
 
@@ -456,7 +456,7 @@ through the same natural generator, vehicle authority, rolling prediction,
 water-only swept-body collision, open driver presentation and saved traffic
 records used in the game. Boats are explicitly excluded from road populations.
 The shared mesh loader validates an authored zero-wheel watercraft rig and its
-independent propeller; cardinal fallback remains available on Canvas and while
+independent propeller; cardinal fallback remains available while
 meshes load or fail. Driver seat height is shared by authority and prediction.
 
 The Natural Landscape page now includes the sortable/searchable animal browser.
@@ -594,7 +594,7 @@ keeps no separate collision or wildlife-death implementation.
 The owner accepted the v3 curve lab and authorized game activation on 2026-10-12.
 Game and ScenarioPresentationHost now select the same three reviewed blue carriage
 models by default, using shared continuous track headings and signed wheel travel.
-GPU + meshes renders them; Canvas, GPU sprites and failed/lazy loads retain native
+GPU + meshes renders them; failed/lazy loads retain native
 crops. World Geometry offers `nativeTrains` for source-art comparison; its authored
 fixture aliases remain usable. No lab-only physics, service spacing, roof support
 or backend-default change is introduced. Main-game backend switching and the
@@ -847,7 +847,7 @@ original extraction and its validation. Shared owners are:
   and lab, retaining the shared default 2 ms/128-row budget and experimental
   two-row/completed-chunk mode. `collectScene` and `collectSceneOrder` provide the
   common actor/prop/grass/elevation/mesh presentation.
-- The existing Canvas/GPU `RenderHost` implementations configure complete terrain
+- The production GPU `RenderHost` (the only one since 232) configures complete terrain
   assets (blend sheets, roads, variants) and own recovery/disposal. Embedded GPU
   placement keeps the world canvas beneath the lab's input/UI canvas through
   scrolling and resize. The replica uses server-computed autotiles.
@@ -1183,7 +1183,7 @@ supersedes 109's authored directional lens: body vertices now share the fixed
 world projection, with static lateral asset registration, immediate displayed
 motion heading and rest hold. All three use the same axis normalization, wheel
 roll, silhouette pass, frame-stable sprite fallback and graphics lifecycle.
-`?renderer=gpu&meshes&allcars3d` supplies a blue fallback for unregistered road
+`?allcars3d` supplies a blue fallback for unregistered road
 vehicle types in the game and Traffic lab; all 45 registered types use their own
 assets. Original types/colliders stay unchanged. Traffic reset
 retains the view option. Traffic's Worker, input, collision and roof support remain

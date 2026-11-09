@@ -163,7 +163,7 @@ export function projectShadow(
     }
   return result;
 }
-/** Group coplanar pieces so native Canvas can clip their union without diagonal seams. */
+/** Group coplanar pieces so the raster surface can clip their union without diagonal seams. */
 export function surfaceDecals(
   fragments: readonly SurfaceFragment[],
   mask: DecalMask,

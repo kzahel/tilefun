@@ -139,7 +139,6 @@ try {
       `--movement-seconds=${config.movementSeconds}`,
       `--settle-seconds=${config.settleSeconds}`,
       `--warm-seconds=${config.warmSeconds}`,
-      `--renderer=${entry.renderer}`,
       `--terrain-pacing=${entry.pacing}`,
       `--output=${directory}`,
     ];

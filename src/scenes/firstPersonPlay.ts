@@ -134,8 +134,8 @@ function currentInterior(
 
 /**
  * Tactical 229 glue: draw the play view in first person when it is enabled and
- * loaded. Returns false to keep the fixed view (disabled, loading or unsupported
- * host). Indoors draws the room (230). Drivers get a chase camera behind their vehicle.
+ * loaded. Returns false to keep the fixed view (disabled, loading or
+ * failed to load). Indoors draws the room (230). Drivers get a chase camera behind their vehicle.
  */
 export function renderFirstPerson(gc: GameContext, alpha: number): boolean {
   const control = gc.firstPerson;

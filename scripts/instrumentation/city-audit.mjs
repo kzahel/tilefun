@@ -27,8 +27,6 @@ const endpoint = option("cdp", ""),
   port = Number(option("port", "0"));
 const seconds = Number(option("seconds", "12")),
   warmSeconds = Number(option("warm-seconds", "8"));
-const renderer = option("renderer", "gpu"),
-  meshes = option("meshes", "true") === "true";
 const overviewZoom = Number(option("overview-zoom", "0.1"));
 const arrivalKind = option("arrival", "gateway");
 const parkedFleet = option("parked-fleet", "false") === "true";
@@ -84,8 +82,6 @@ for (const [optionName, file] of [
   if (source) presentationReferences.set(file, await readFile(path.resolve(source), "utf8"));
 }
 const meshTargetReuse = option("mesh-target-reuse", "false") === "true";
-if (meshTargetReuse && (renderer !== "gpu" || !meshes))
-  throw Error("Mesh target reuse requires GPU meshes");
 if (trace && cpu) throw Error("Trace and CPU sampling must use separate attribution captures");
 const touch = option("touch", endpoint ? "true" : "false") === "true";
 if (course === "racetrack" && (!touch || driveReverseAt))
@@ -94,8 +90,6 @@ const androidCli = option("android-device-cli", ""),
   maxC = Number(option("max-battery-c", "32"));
 const cooldown = Number(option("cooldown-seconds", "60"));
 if (endpoint && !port) throw Error("Physical CDP requires a dedicated --port");
-if (renderer !== "gpu")
-  throw Error("The game requires WebGL2 (232); --renderer=canvas was removed");
 if (
   jobs.some(
     (j) => !["standing", "walk", "drive", "overview", "overview-drive", "zoom-entry"].includes(j),
@@ -122,8 +116,6 @@ const report = {
     option("revision", "") ||
     execFileSync("git", ["rev-parse", "HEAD"], { cwd: root, encoding: "utf8" }).trim(),
   physical: !!endpoint,
-  renderer,
-  meshes,
   touch,
   deep,
   cpu,
@@ -315,7 +307,7 @@ try {
       return { x: r.player.position.wx / 16, y, generation: r.generation };
     }, arrivalKind);
     await page.goto(
-      `${origin}/?perf&nogamepad&renderer=${renderer}&${meshes ? "meshes&" : ""}generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `${origin}/?perf&nogamepad&generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await page.waitForFunction(
@@ -639,7 +631,6 @@ try {
     console.log(
       JSON.stringify({
         stage,
-        renderer,
         deep,
         cpu,
         begin,

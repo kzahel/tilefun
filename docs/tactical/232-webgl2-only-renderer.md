@@ -1,7 +1,7 @@
 # WebGL2-only renderer
 
 Status: parent plan; planned 2026-11-09, slices 1–4 authorized for autonomous delivery;
-slices 1–2 delivered 2026-11-09.
+slices 1–3 delivered 2026-11-09.
 Owner direction, 2026-11-09: "having two renderers seems useless"; remove the
 Canvas renderer and its fallback, require WebGL2, then make the GPU-only
 optimizations that Canvas parity blocked. Run tests locally before touching CI.
@@ -136,7 +136,7 @@ reference, grass LOD) and other canvas/gpu parity specs.
 ### 4 — GPU-native sprite path
 
 Goal: 0.1× city sprinting holds 120 Hz (`streaming:bench -- --headed
---zoom-motion --zooms=0.1 --noclip --renderer=gpu --viewport=1728x1117
+--zoom-motion --zooms=0.1 --noclip --viewport=1728x1117
 --arrival=-380,-364 --scene=city`; baseline 40–41 of ~918 motion frames over
 cadence, render p50/p95 5.1/8.4 ms).
 
@@ -295,3 +295,67 @@ cadence, render p50/p95 5.1/8.4 ms).
     - `camera-registration.mjs` (10 groups; actor placement errors ≤0.0043 px).
   - Code-health ratchet: `TilePreview.ts` grew by 56 lines and its worst function
     by 1.
+
+### Slice 3 — delivered 2026-11-09
+
+- **Deleted.** `CanvasRenderHost` and its host tests (resize, recovery listeners,
+  region composition). The GPU host covers the same contracts in the browser:
+  graphics-loss recovery and `probeViewRegions` in `gpu-renderer.spec.ts`. Slice 1
+  had already removed the `RendererMode` type and the labs' Canvas fallback.
+- **Dead branches removed.**
+  - `FirstPersonControl`'s non-GPU branch: the game always has the GPU world canvas.
+  - The view regions' Canvas clip polygon and `isWholeCanvas`: only the Canvas
+    host used them; the GPU composes regions with the half-plane mask.
+  - `ViewRegionProbe`'s renderer check, which could not fail after
+    `createGpuRenderHost`.
+- **Review raster (decision).** `CanvasRenderBackend` is now `ReviewRasterBackend`,
+  documented as the native Canvas2D raster for fingerprinted review images only.
+  The boundary test allows only the three showcases and `PatternRuntime` to import
+  it. Fingerprints hash pixels, not source, and drawing is unchanged, so no review
+  state changes.
+- **Shared tests.** The resource-lifetime and visible-only multi-view refusal tests
+  now run on the shared `RasterRenderBackend` (`RasterRenderBackend.test.ts`).
+- **Scripts.**
+  - Removed the `--renderer` option, the `renderer=`/`meshes` URL params (the game
+    ignores them) and the `renderer`/`meshes` report fields from the streaming bench,
+    realm-physics bench, `city-audit`, `car-driving-browser`, `movement-pacing`, the
+    first-person captures. Deleted the unused `train-refresh-probe.mjs`.
+  - `city-audit`'s `--meshes=false` had done nothing since the GPU sprite-car mode
+    was removed.
+  - The streaming matrix no longer has a renderer column or `-gpu-` in run ids.
+  - Old commands that still pass `--renderer=gpu` keep working; the option parsers
+    ignore unknown flags.
+- **Docs.** Updated current guidance in rendering architecture, testing,
+  performance, embedded labs, 3D assets, boats, trains, ROADMAP and the
+  instrumentation README. Dated evidence paragraphs stay as history.
+- **Checks.**
+  - Typecheck, knip, and Biome on the changed files. The only findings are two
+    existing `innerText` lint lines in untouched code.
+  - Full vitest: 5,062 pass. The 4 failures are `BallCommands` (dog, capybara,
+    frog, robin) and fail the same way on HEAD without this slice.
+  - `streaming-matrix.test.mjs`, the art catalog and workshop manifest (input
+    digest only), and the build.
+  - `gpu-renderer`, `split-screen`, `dense-review`, `street-review`,
+    `building-review`, `city-places-review` and `pattern-studio` passed 59/59 on
+    hardware GPU and 59/59 under software WebGL.
+  - `streaming:bench -- --assert-ready`.
+  - Code-health ratchet: this slice only removes lines. The ratchet still fails on
+    `GpuRasterSurface.ts` and `RasterRenderBackend.ts` growth from earlier commits.
+- **Review** (Opus 5.5 High, Work-claude pool, bypass): approved with no must-fix
+  items. Fixed:
+  - the docs that still described the clip polygon and the matrix's renderer
+    dimension;
+  - the stale-link assertion, restored as `?renderer=legacy-canvas&meshes` in the
+    default-host test;
+  - the boundary test, which now also requires that only the GPU and review rasters
+    extend `RasterRenderBackend` and that production code never builds it directly;
+  - first-person comments that still described the Canvas case;
+  - present-tense Canvas mentions (also `characters.md`);
+  - the dead `--renderer` flag in slice 4's goal command;
+  - the unused train refresh probe.
+
+  Not changed: old `--renderer`/`--meshes` flags are ignored rather than rejected,
+  and reports no longer carry a renderer field. There is still no unit test for
+  `GpuRenderHost.dispose` idempotence; add one if slice 4 touches the host. After
+  the fixes, the boundary and first-person unit tests, typecheck, knip, the rebuild
+  and the restored default-host spec pass.

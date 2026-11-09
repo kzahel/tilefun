@@ -4,10 +4,10 @@ import { createProp } from "../entities/PropFactories.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import type { StreetRect, StreetScene } from "../generation/regional/StreetRecipes.js";
 import { Camera } from "../rendering/Camera.js";
-import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { drawCitySurfacePieces } from "../rendering/CitySurfaceRenderer.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { collectSceneOrder } from "../rendering/RenderFrame.js";
+import { ReviewRasterBackend } from "../rendering/ReviewRasterBackend.js";
 import { composeStreetStarterSurface } from "../road/StreetStarterSurface.js";
 import { World } from "../world/World.js";
 import { reviewContext2D } from "./reviewCanvas.js";
@@ -44,7 +44,7 @@ export function drawStreetShowcase(
     ...createProp(p.type, p.wx, p.wy),
     id: i + 1,
   }));
-  const renderer = new CanvasRenderBackend(ctx, new Map([["me-complete", sheet]]));
+  const renderer = new ReviewRasterBackend(ctx, new Map([["me-complete", sheet]]));
   const items = collectScene(
     [],
     props,

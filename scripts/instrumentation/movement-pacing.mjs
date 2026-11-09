@@ -47,8 +47,7 @@ try {
     page.on("pageerror", (e) => errors.push(e.message));
     const generation = { type: "flat", version: "flat-v1", seed: 1, preset: "grass" };
     await page.goto(
-      base +
-        `?nogamepad&renderer=gpu&meshes&generation=${encodeURIComponent(JSON.stringify(generation))}`,
+      `${base}?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await page.waitForFunction(() => document.querySelector("#game")?.dataset.ready === "true");
@@ -204,8 +203,6 @@ try {
             revision,
             browser: browser.version(),
             headless: true,
-            renderer: "gpu",
-            meshes: true,
             cpuRate: 1,
             viewport: { width: 1280, height: 900 },
             cases: output,

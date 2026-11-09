@@ -4,7 +4,7 @@ import { World } from "../world/World.js";
 import { Camera } from "./Camera.js";
 import { prepareViewTerrain, presentTerrain } from "./OutdoorPresentation.js";
 import { RecordingBackend } from "./testing/RecordingBackend.js";
-import { isWholeCanvas, layoutViews, type ViewLayout, ViewLayouts } from "./ViewLayout.js";
+import { layoutViews, type ViewLayout, ViewLayouts } from "./ViewLayout.js";
 
 const VIEW_LAYOUTS: readonly ViewLayout[] = ["1", "2", "4", "diagonal"];
 
@@ -28,14 +28,8 @@ describe("view layouts", () => {
           if (covering !== 1) expect([layout, x, y, covering]).toEqual([layout, x, y, 2]);
           if (covering !== 1) expect(height * (x + 0.5)).toBe(width * (y + 0.5));
         }
-      for (const { region } of views) {
+      for (const { region } of views)
         expect(Number.isInteger(region.x + region.y + region.width + region.height)).toBe(true);
-        if (region.clip) {
-          // Each clip vertex lies on or inside the kept half-plane.
-          const [a, b, c] = region.mask ?? [0, 0, 1];
-          for (const p of region.clip) expect(a * p.x + b * p.y + c).toBeGreaterThanOrEqual(0);
-        }
-      }
     }
   });
 
@@ -47,16 +41,6 @@ describe("view layouts", () => {
         expect(focusX).toBeLessThan(r.width);
         expect(focusY).toBeLessThan(r.height);
       }
-  });
-
-  it("only the single layout is the whole canvas", () => {
-    expect(layoutViews("1", 640, 480).map((v) => isWholeCanvas(v.region, 640, 480))).toEqual([
-      true,
-    ]);
-    for (const layout of ["2", "4", "diagonal"] as const)
-      expect(layoutViews(layout, 640, 480).some((v) => isWholeCanvas(v.region, 640, 480))).toBe(
-        false,
-      );
   });
 
   it("keeps the same regions until the layout or size changes", () => {

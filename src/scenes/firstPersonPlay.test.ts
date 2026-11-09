@@ -43,7 +43,7 @@ describe("first-person play input", () => {
   it("keeps ordinary controls until a frame was actually drawn in first person", () => {
     const { control, gc, cancelled } = setup();
     control.setActive(true, 0); // facing east
-    // Active but still loading, indoors or on legacy Canvas: the fixed view is shown.
+    // Active but still loading or indoors: the fixed view is shown.
     const hidden = firstPersonTick(gc, 1 / 60, undefined);
     expect(hidden).toBeUndefined();
     expect(firstPersonMovement(gc, hidden, undefined, forward)).toBe(forward);

@@ -44,7 +44,7 @@ try {
     return { x: 300, y: 519, generation: createDescriptor("regional", 2026) };
   });
   await page.goto(
-    `${origin}/?nogamepad&renderer=gpu&meshes&generation=${encodeURIComponent(
+    `${origin}/?nogamepad&generation=${encodeURIComponent(
       JSON.stringify(arrival.generation),
     )}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );

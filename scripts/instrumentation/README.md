@@ -7,7 +7,7 @@ Current authority/prediction scenarios exercise the shared default kernel.
 
 ## Current racetrack movement attribution
 
-`node scripts/benchmark-streaming.mjs --scene=racetrack --renderer=gpu --meshes --cpu=4 --output=/tmp/tilefun-racetrack`
+`node scripts/benchmark-streaming.mjs --scene=racetrack --cpu=4 --output=/tmp/tilefun-racetrack`
 uses the current ordinary game Worker and persistence with a fresh seed-2026 venue.
 An existing local-authority `tp` command stages the player on the clear northern
 infield lane, because ordinary arrival avoids the reserved venue. Every sampled
@@ -192,8 +192,8 @@ seed-2026 city through the real game, dedicated Worker, IndexedDB and GPU render
 Use `--stages=standing,drive,overview-drive,zoom-entry` to select/order stages;
 repeated stage names are allowed. `--arrival=gateway` uses the existing city-center
 inspection; `core` uses the same plan's central north/south extent. Overview zooms
-are 0.05/0.1/0.25. Default GPU/mesh mode still has sprite fallbacks for native models.
-`--meshes=false` changes the vehicle-body control; `--renderer=canvas` was removed (232).
+are 0.05/0.1/0.25. The GPU renderer still has sprite fallbacks for native models.
+There is no renderer or vehicle-body option: the game draws only through WebGL2 (232).
 
 Use `--arrival=racetrack` for the south spectator entrance,
 `racetrack-north` for the north spectators, or `racetrack-center` for the infield.
@@ -203,8 +203,7 @@ adds the first 45 registered road models through native parked placement in an
 track-centered grid. Placement must succeed for every model; the report retains
 the actual list. Some placements obstruct racers; use this for rendering density,
 not an unchanged-race simulation comparison or a saved-depot reproduction.
-Compare `--meshes=false` and the existing `--mesh-target-reuse=true` intervention
-separately. The latter changes diagnostic target retention only;
+The `--mesh-target-reuse=true` intervention changes diagnostic target retention only;
 it is not a production optimization or a pixel-parity acceptance result.
 
 Native driving setup stops and boards an existing horizontal-route car. Record its
@@ -407,9 +406,8 @@ counter changes and up to 128 GC events; this attribution instrumentation adds
 small timer/counter overhead. The corresponding native regression requires
 progress from every car in the final minute; a fast three-car lap is insufficient.
 
-`node scripts/benchmark-realm-physics-browser.mjs --fixture=traffic-crowd --renderer=gpu --meshes --cpu=4 --trials=1 --seconds=8 --warmup=5 --base=http://localhost:4174/tilefun/ --output=/tmp/traffic-browser`
-uses the same Worker/presentation host and bundled full Chromium. Omit `--meshes`
-for a sprite comparison. Captures include observed car counts, main-frame tails,
+`node scripts/benchmark-realm-physics-browser.mjs --fixture=traffic-crowd --cpu=4 --trials=1 --seconds=8 --warmup=5 --base=http://localhost:4174/tilefun/ --output=/tmp/traffic-browser`
+uses the same Worker/presentation host and bundled full Chromium. Captures include observed car counts, main-frame tails,
 Worker timings and start/end clock diagnostics. CPU emulation is a desktop stress
 lane, never physical-phone evidence. The normal `realm` crowd fixture/defaults and
 owned-tab physical CDP route remain available. See tactical 218 for checkpoints.

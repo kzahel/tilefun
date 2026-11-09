@@ -7,7 +7,7 @@ import { buildLayeredApartmentPlan } from "../interiors/ApartmentArchitecture.js
 import { parseFloorPlan } from "../interiors/ApartmentFloorPlan.js";
 import { Camera } from "../rendering/Camera.js";
 import { drawLayeredInteriorMap } from "../rendering/CanvasInteriorMap.js";
-import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
+import { ReviewRasterBackend } from "../rendering/ReviewRasterBackend.js";
 import { World } from "../world/World.js";
 import { compileTreeRun, treeRuns } from "./FencedTrees.js";
 import { familyDefinition, type PatternDocument, roomSketch } from "./PatternDocument.js";
@@ -51,7 +51,7 @@ export function renderPatternDocument(
   } else {
     const world = patternWorld(doc),
       graph = new BlendGraph(),
-      renderer = new CanvasRenderBackend(ctx, assets.sheets),
+      renderer = new ReviewRasterBackend(ctx, assets.sheets),
       camera = new Camera();
     renderer.configureAssets(assets, graph);
     camera.zoom = 1 / 3;

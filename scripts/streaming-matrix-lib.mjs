@@ -37,16 +37,13 @@ export function sourceFingerprint() {
 
 export function planMatrix(targets, repeats) {
   const cases = targets.flatMap((target) =>
-    ["throughput", "responsive"].flatMap((pacing) =>
-      // One renderer since 232; the field stays in reports for older results.
-      ["gpu"].map((renderer) => ({ target, pacing, renderer })),
-    ),
+    ["throughput", "responsive"].map((pacing) => ({ target, pacing })),
   );
   return Array.from({ length: repeats }, (_, i) =>
     (i % 2 ? [...cases].reverse() : cases).map((c) => ({
       ...c,
       repeat: i + 1,
-      id: `${c.target}-${c.renderer}-${c.pacing}-r${i + 1}`,
+      id: `${c.target}-${c.pacing}-r${i + 1}`,
     })),
   ).flat();
 }
@@ -70,10 +67,8 @@ export function sanitizeReport(report) {
       "browser",
       "headed",
       "input",
-      "renderer",
       "terrainPacing",
       "diagnosticUncachedImageSizes",
-      "meshes",
       "motionZooms",
       "movementSeconds",
       "settleSeconds",
@@ -172,13 +167,13 @@ export function markdownReport(matrix) {
     "",
     "Sequential real-game runs; each zoom starts in a fresh seeded world. Motion uses ordinary shared-physics input and a fixed wall duration. Misses are rAF intervals >1.5× the idle-page display cadence, not hardware presentation counts. Compare within device and zoom. Every repeat is shown separately; percentiles are not averaged. A failed row remains evidence, not a passed result.",
     "",
-    "| Device | Renderer | Pacing | Repeat | Zoom | Motion p95 / p99 ms | Misses / samples | Data-gap / terrain-gap frames | Travel px | Entry / recovery s | Result |",
-    "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
+    "| Device | Pacing | Repeat | Zoom | Motion p95 / p99 ms | Misses / samples | Data-gap / terrain-gap frames | Travel px | Entry / recovery s | Result |",
+    "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |",
   ];
   for (const run of matrix.runs) {
     if (!run.report) {
       lines.push(
-        `| ${run.target} | ${run.renderer} | ${run.pacing} | ${run.repeat} | — | — | — | — | — | — | ${run.status} |`,
+        `| ${run.target} | ${run.pacing} | ${run.repeat} | — | — | — | — | — | — | ${run.status} |`,
       );
       continue;
     }
@@ -201,7 +196,7 @@ export function markdownReport(matrix) {
             ? "pass"
             : "incomplete";
       lines.push(
-        `| ${run.target} | ${run.renderer} | ${run.pacing} | ${run.repeat} | ${f.zoom} | ${n(motion?.frames.p95)} / ${n(motion?.frames.p99)} | ${motion?.framesOverDisplayCadence ?? "—"} / ${motion?.frames.count ?? "—"} | ${motion?.missingDataFrames ?? "—"} / ${motion?.incompleteCacheFrames ?? "—"} | ${n(motion?.travelledPx, 0)} | ${time(entry)} / ${time(recovery)} | ${status} |`,
+        `| ${run.target} | ${run.pacing} | ${run.repeat} | ${f.zoom} | ${n(motion?.frames.p95)} / ${n(motion?.frames.p99)} | ${motion?.framesOverDisplayCadence ?? "—"} / ${motion?.frames.count ?? "—"} | ${motion?.missingDataFrames ?? "—"} / ${motion?.incompleteCacheFrames ?? "—"} | ${n(motion?.travelledPx, 0)} | ${time(entry)} / ${time(recovery)} | ${status} |`,
       );
     }
   }
@@ -209,15 +204,15 @@ export function markdownReport(matrix) {
     "",
     "## Stationary cost and recovery reuse",
     "",
-    "| Device | Renderer | Pacing | Repeat | Zoom | Stationary render p95 ms | Recovery render p95 ms | Recovery raster rows | Recovery texture MiB |",
-    "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
+    "| Device | Pacing | Repeat | Zoom | Stationary render p95 ms | Recovery render p95 ms | Recovery raster rows | Recovery texture MiB |",
+    "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |",
   );
   for (const run of matrix.runs)
     for (const f of run.report?.fixtures ?? []) {
       const a = f.samples.find((s) => s.name === "stationary"),
         b = f.samples.find((s) => s.name === "recovery-warm");
       lines.push(
-        `| ${run.target} | ${run.renderer} | ${run.pacing} | ${run.repeat} | ${f.zoom} | ${n(a?.renderMs.p95)} | ${n(b?.renderMs.p95)} | ${b?.totalTerrainRows ?? "—"} | ${b?.textureUploadedBytes == null ? "—" : n(b.textureUploadedBytes / 2 ** 20, 2)} |`,
+        `| ${run.target} | ${run.pacing} | ${run.repeat} | ${f.zoom} | ${n(a?.renderMs.p95)} | ${n(b?.renderMs.p95)} | ${b?.totalTerrainRows ?? "—"} | ${b?.textureUploadedBytes == null ? "—" : n(b.textureUploadedBytes / 2 ** 20, 2)} |`,
       );
     }
   lines.push(

@@ -1,8 +1,12 @@
 import { RasterRenderBackend } from "./RasterRenderBackend.js";
 import { SubpixelImages } from "./SubpixelImages.js";
 
-/** Native Canvas adapter; shared raster preparation and placement live in the base. */
-export class CanvasRenderBackend extends RasterRenderBackend {
+/** Native Canvas2D raster for fingerprinted review images only (showcases, pattern
+ * candidates). Their approval fingerprints hash these pixels, so they keep this raster
+ * instead of the GPU (232). The game and labs draw only through WebGL2; nothing else
+ * may use this class (see RenderingBoundary.test). Shared raster preparation and
+ * placement live in the base. */
+export class ReviewRasterBackend extends RasterRenderBackend {
   private readonly subpixel = new SubpixelImages();
   private readonly scaled = new SubpixelImages(64 * 1024 * 1024);
   constructor(...args: ConstructorParameters<typeof RasterRenderBackend>) {

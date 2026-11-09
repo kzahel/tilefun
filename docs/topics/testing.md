@@ -24,8 +24,9 @@ validation when focused checks expose unresolved concerns; do not repeat passing
 checks without a relevant change or unresolved concern. CI keeps its existing gates.
 
 Hosted CI renders with software WebGL (SwiftShader). Since
-[232](../tactical/232-webgl2-only-renderer.md) slice 1 every spec runs the WebGL2
-renderer; there is no Canvas option to fall back to. Playwright assertion waits are
+[232](../tactical/232-webgl2-only-renderer.md) every spec runs the WebGL2
+renderer; there is no Canvas renderer (only the native raster behind fingerprinted
+review images, which their own specs cover). Playwright assertion waits are
 15 s under CI. `npm run test:e2e:software-webgl -- <files>`
 (`playwright.software-webgl.config.ts`) reproduces the hosted lane locally: the
 bundled Chromium with `--use-angle=swiftshader --enable-unsafe-swiftshader

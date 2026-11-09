@@ -6,21 +6,15 @@ test("matrix covers every pair twice and reverses the second repeat", () => {
   const plan = planMatrix(["desktop", "phone"], 2);
   assert.equal(plan.length, 8);
   assert.equal(new Set(plan.map((p) => p.id)).size, 8);
-  const shape = (r) => `${r.target}/${r.renderer}/${r.pacing}`;
+  const shape = (r) => `${r.target}/${r.pacing}`;
   assert.deepEqual(plan.slice(0, 4).map(shape), plan.slice(4).map(shape).reverse());
   for (const target of ["desktop", "phone"])
-    for (const renderer of ["gpu"])
-      for (const pacing of ["throughput", "responsive"])
-        assert.equal(
-          plan.filter((r) => r.target === target && r.renderer === renderer && r.pacing === pacing)
-            .length,
-          2,
-        );
+    for (const pacing of ["throughput", "responsive"])
+      assert.equal(plan.filter((r) => r.target === target && r.pacing === pacing).length, 2);
 });
 
 function raw() {
   return {
-    renderer: "gpu",
     privateValue: "secret",
     fixtures: [
       {
@@ -71,7 +65,6 @@ test("table retains failed fixtures and uses calibrated display misses", () => {
     runs: [
       {
         target: "desktop",
-        renderer: "gpu",
         pacing: "responsive",
         repeat: 1,
         status: "failed",
@@ -79,7 +72,6 @@ test("table retains failed fixtures and uses calibrated display misses", () => {
       },
       {
         target: "phone",
-        renderer: "gpu",
         pacing: "throughput",
         repeat: 1,
         status: "interrupted",

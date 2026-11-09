@@ -12,8 +12,6 @@ export interface RenderRegion {
   readonly height: number;
   /** Keep a*x + b*y + c >= 0 (canvas pixels); the GPU present discards the rest. */
   readonly mask?: readonly [number, number, number];
-  /** The same kept area as a convex polygon, for Canvas path clipping. */
-  readonly clip?: readonly { readonly x: number; readonly y: number }[];
 }
 
 /** Fixed layouts: one view, two side by side, a 2×2 grid, or a diagonal split. */
@@ -25,17 +23,6 @@ export interface LayoutView {
    * diagonal half's centroid. */
   readonly focusX: number;
   readonly focusY: number;
-}
-
-/** The region covers the whole canvas with nothing masked (the single-view case). */
-export function isWholeCanvas(region: RenderRegion, width: number, height: number): boolean {
-  return (
-    region.x === 0 &&
-    region.y === 0 &&
-    region.width === width &&
-    region.height === height &&
-    !region.mask
-  );
 }
 
 const rect = (x: number, y: number, width: number, height: number): LayoutView => ({
@@ -68,28 +55,12 @@ export function layoutViews(layout: ViewLayout, width: number, height: number): 
       const whole = { x: 0, y: 0, width: w, height: h };
       return [
         {
-          region: {
-            ...whole,
-            mask: [-h, w, 0],
-            clip: [
-              { x: 0, y: 0 },
-              { x: w, y: h },
-              { x: 0, y: h },
-            ],
-          },
+          region: { ...whole, mask: [-h, w, 0] },
           focusX: w / 3,
           focusY: (2 * h) / 3,
         },
         {
-          region: {
-            ...whole,
-            mask: [h, -w, 0],
-            clip: [
-              { x: 0, y: 0 },
-              { x: w, y: 0 },
-              { x: w, y: h },
-            ],
-          },
+          region: { ...whole, mask: [h, -w, 0] },
           focusX: (2 * w) / 3,
           focusY: h / 3,
         },

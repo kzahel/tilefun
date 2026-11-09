@@ -3,7 +3,7 @@ import { RoadType } from "./RoadType.js";
 export function isRaceSurface(type: number): boolean {
   return type >= RoadType.RaceCurbRed && type <= RoadType.RaceLane;
 }
-/** Code-native paint rasterized once into the shared Canvas/GPU terrain cache. */
+/** Code-native paint rasterized once into the shared terrain cache. */
 export function drawRaceSurface(
   ctx: CanvasRenderingContext2D | OffscreenCanvasRenderingContext2D,
   type: number,

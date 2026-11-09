@@ -58,7 +58,7 @@ try {
     return { x: lot.entrance.x, y: lot.entrance.y, generation: createDescriptor("regional", 2026) };
   }, kind);
   await page.goto(
-    `${origin}/?nogamepad&renderer=gpu&meshes&generation=${encodeURIComponent(
+    `${origin}/?nogamepad&generation=${encodeURIComponent(
       JSON.stringify(arrival.generation),
     )}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );

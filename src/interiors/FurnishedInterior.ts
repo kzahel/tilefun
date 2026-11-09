@@ -15,7 +15,7 @@ import {
 } from "./FurnitureLayout.js";
 import type { LayeredInteriorMap } from "./LayeredInteriorMap.js";
 
-/** Neutral actor data; legacy Canvas composition adapters never accept callbacks. */
+/** Neutral actor data; review-raster composition adapters never accept callbacks. */
 export interface FurnitureActor {
   id: string;
   depth: number;

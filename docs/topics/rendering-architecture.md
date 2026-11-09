@@ -90,9 +90,10 @@ desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-ca
 GPU + 3D car is the owner-selected default for the game and every embedded lab,
 and since 2026-11-09 the only GPU mode (the GPU sprite-vehicle mode is removed).
 [232](../tactical/232-webgl2-only-renderer.md) (owner decision 2026-11-09) removes
-Canvas: since slice 1 the game and labs require WebGL2, ignore `?renderer=` and show
-a "Tilefun needs WebGL2" screen instead of falling back. The Canvas backend remains
-only for direct parity tools until slices 2–3.
+Canvas: the game, labs, explorer and probes draw only through WebGL2, ignore
+`?renderer=` and show a "Tilefun needs WebGL2" screen instead of falling back. The
+Canvas host is deleted (slice 3); a native Canvas2D raster (`ReviewRasterBackend`)
+remains only for fingerprinted review images.
 Bounded unchanged car images and ordered multi-texture GPU batches are delivered.
 Updated: 2026-11-09.
 
@@ -149,7 +150,8 @@ Worker simulation → replicated world + client prediction
                   frame builder + static content updates
                               ↓ ordered data + resource identities
                       renderer backend and resources
-                       WebGL2 game default / Canvas2D fallback
+                    WebGL2 (game, labs, explorer, probes)
+                    native review raster (fingerprinted showcases only)
 ```
 
 World chunks contain tile grids and content versions, never graphics resources.
@@ -174,14 +176,13 @@ One display frame can hold several views. `beginFrame` runs once, then each view
 calls `RenderHost.beginView(camera, region)`/`endView()` with a camera whose
 viewport is the region's size; `beginWorld`/`endWorld` are the whole-canvas view
 through the same code. Regions come from `layoutViews` (1, 2 side by side, 2×2,
-or a diagonal half-plane with a matching clip polygon) and never go through
+or a diagonal half-plane `mask`, discarded in the GPU present shader) and never go through
 `resize()`. The GPU host reuses one world target: a later view clears it, draws
 in its top-left corner and composes into its region with a GL viewport or a
 half-plane discard in the present shader (`GpuWorldComposition`, maths in
-`worldComposite`). The Canvas host clears its world surface before later views, clips to the
-region or polygon and draws the matching corner of its padded world surface. A view composed into a region is
+`worldComposite`). A view composed into a region is
 pixel-identical to a single view of that size (renderer lab
-`probeViewRegions`, GPU host only since 232). Terrain for every view is prepared once per frame
+`probeViewRegions`). Terrain for every view is prepared once per frame
 (`prepareViewTerrain` → `prepareTerrainViews`, scheduled by `TerrainResidency`):
 one time and row budget, any view's on-screen gap first, per-view look-ahead and
 focal rows, and no view evicts another's chunks; each view then presents its
@@ -349,7 +350,7 @@ priority and time/row budgets (now one budget across all views of a frame).
 Explorer and native review request explicit visible-only row budgets, which are
 single-view only (multi-view preparation refuses them). Viewport resize preserves native static caches. Realm
 reset and context recovery clear terrain and rooms; context restoration triggers
-recovery through the Canvas host. Disposal is idempotent, detaches host listeners
+recovery through the GPU host. Disposal is idempotent, detaches host listeners
 and rejects further rendering/preparation. Scene-frame release drops actor,
 particle, prop and overlay references; retained pools have explicit bounds.
 
@@ -359,8 +360,8 @@ particle, prop and overlay references; retained pools have explicit bounds.
 | --- | --- |
 | Play/edit outdoor and indoor rendering | Neutral `renderWorld`, `renderInterior`, scene and overlay builders; `RenderBackend` only |
 | Explorer | `TilePreview` draws on an offscreen WebGL2 `GpuRenderBackend` at device pixels (232), copied into the map canvas over the regional map and under the coverage overlay; explicit preparation/submission, ready-chunk clips and lifecycle |
-| Interactive Traffic, Outdoor Geometry, World Geometry, Natural landscape, Character lab and furniture playtest | The game's `LabView`, production Canvas/GPU hosts and semantic scene/terrain/indoor passes; view-specific controls and diagnostics |
-| Building/street/district reviews | Native Canvas raster (`CanvasRenderBackend`) at platform entry: approval fingerprints hash these pixels, so they stay off the GPU (232 slice 2); shared semantic scene/terrain passes; separate stage/geometry diagnostics remain native |
+| Interactive Traffic, Outdoor Geometry, World Geometry, Natural landscape, Character lab and furniture playtest | The game's `LabView`, the production GPU host and semantic scene/terrain/indoor passes; view-specific controls and diagnostics |
+| Building/street/district reviews | Native Canvas2D review raster (`ReviewRasterBackend`) at platform entry: approval fingerprints hash these pixels, so they stay off the GPU (232 slice 2); shared semantic scene/terrain passes; separate stage/geometry diagnostics remain native |
 | Native character review | Source-hashed `CharacterTestScene.ts` is immutable approval input. Its `drawScene2D` reference adapter consumes the same scene-pass implementation; do not rewrite approved controller bytes merely to rename a call |
 | Indoor review/reference | Explicit native Canvas surfaces using shared furniture/room ordering. `CachedInteriorRenderer` consumes `InteriorPresentation`; uncached drawing remains the independent parity reference |
 | Pattern room/atlas previews and tree source composition | Native asset/pattern reference rasterization, separate from gameplay presentation; pattern terrain uses the native raster backend, whose pixels are the candidate fingerprint (232 slice 2) |
@@ -368,7 +369,8 @@ particle, prop and overlay references; retained pools have explicit bounds.
 | GPU gameplay and diagnostics | Game and labs require WebGL2 and always draw GPU + 3D car (232); renderer lab shares its body adapter |
 | Asset loaders and `Canvas*` / `TileRenderer` internals | Concrete source decoding, rasterization and resource ownership; not presentation policy |
 
-`TileRenderer` is now an internal Canvas terrain preparation/resource component.
+`TileRenderer` is now an internal terrain preparation/resource component (it
+rasterizes chunks into images that the GPU uploads).
 The old combined terrain draw API and furniture metadata re-export aliases are
 removed. The small native reference adapters above are permanent, explicit
 composition choices, not hidden alternative gameplay pipelines.
@@ -412,7 +414,7 @@ Current mode inventory:
 | Surface | Available behavior | Boundary |
 | --- | --- | --- |
 | Main game/labs | GPU + 3D car (WebGL2 required, 232) | Shared fixed camera/painter ordering and GLB bodies |
-| F3 collision overlay | Independently colored driving, walking, actor, support, query and sprite geometry; optional shape labels | Shared physics-derived collector on Canvas/GPU, also used by the Truck bed playground; [vehicle inspection](vehicles.md#bed-geometry-and-debug-inspection) owns usage and limits |
+| F3 collision overlay | Independently colored driving, walking, actor, support, query and sprite geometry; optional shape labels | Shared physics-derived collector, also used by the Truck bed playground; [vehicle inspection](vehicles.md#bed-geometry-and-debug-inspection) owns usage and limits |
 | `r_show3d 1` | Orbitable perspective split-screen | Collider/terrain geometry, not a complete textured vehicle/world renderer |
 | Retained vehicle viewers | Study 50° / shared game camera, wheel motion, wireframe | Actual GLBs, still using native pixel targets and the shared outline |
 | Renderer lab | Mesh/sprite, pose, foreground/clip/recovery controls | Same production body adapter; useful for composition and fallback checks |
@@ -620,11 +622,11 @@ the delivered WebGL2 backend; a WebGPU or Rust migration remains unselected.
 
 | ID | State | Next evidence / decision |
 | --- | --- | --- |
-| G1 | Delivered, default in main game | Bounded GPU terrain/sprite backend behind `RenderHost`; preserve Canvas reference and compare existing presentation behavior |
+| G1 | Delivered, default in main game | Bounded GPU terrain/sprite backend behind `RenderHost`; the only renderer since 232 |
 | G2 | Diagnostic car delivered; general import later | Portable mesh/material import, sprite fallback and explicit world axes/units/origin; consume the car candidate from the 3D asset workstream |
 | G3 | Fixed-view pose delivered | One shared presentation path with optional mesh bodies and full transforms; first prove continuous car heading under the unchanged fixed projection, then expose diagnostic cameras |
 | G4 | Compatibility path delivered | Depth/cutout/transparent ordering, fallback sprites, elevation, indoors, picking, streamed edits and resource residency/lifecycle |
-| G5 | Measured in 045; Canvas retained | Matched device measurements of frame pacing, allocations, uploads, memory, cold start and graphics loss/recovery; choose backend based on evidence |
+| G5 | Measured in 045; Canvas removed in 232 | Matched device measurements of frame pacing, allocations, uploads, memory, cold start and graphics loss/recovery; choose backend based on evidence |
 | G6 | Later | Broader asset/world coverage and first-person interaction/content; consider Rust/wgpu only with a concrete measured or platform reason |
 
 G1 can proceed independently of reconstructing convincing 3D assets. G2/G3 make
@@ -641,8 +643,8 @@ improvement nor supplies hidden artwork or first-person-ready world geometry.
 ## Fixed-view sprite/mesh invariants
 
 These are the review checklist for G1–G5. Put shared behavior in one owner;
-Canvas and GPU necessarily have different drawing implementations, but must not
-acquire different gameplay or presentation rules.
+the GPU and the native review raster have different drawing implementations, but
+must not acquire different gameplay or presentation rules.
 
 1. **One simulation and identity.** A car remains the same entity whether drawn
    as a sprite, mesh or fallback. Rendering reads replicated/predicted state;
@@ -806,9 +808,9 @@ contact ellipse. End views retain the source-camera contradictions.
 Cosmetic yaw follows displayed forward movement, using velocity to reject backwards
 interpolation corrections; it holds at rest. Teleports/visibility gaps fence travel.
 Roof sprites attach to fitted visual support only while that exact mesh is ready;
-Canvas and loading/failure fallbacks retain their original support appearance.
+Loading/failure fallbacks retain their original support appearance.
 
-The opt-in `?renderer=gpu&meshes&allcars3d` flag selects the blue body for every
+The opt-in `?allcars3d` flag selects the blue body for every
 `vehicle-v1:` road vehicle in the shared game/lab collector. Original actor types,
 colliders and sprite fallbacks remain intact. A bus may retain a larger collision
 body than its compact test appearance. Trains and other actors are excluded.
@@ -823,7 +825,7 @@ unchanged body/base paint. [117](../tactical/117-ambulance-driving-controls.md) 
 ambulance v2 through its own resource slot and resolver in game/lab GPU mesh mode.
 It uses authored width, the same axis normalization, a 112px enclosing radius,
 independent wheel travel and native silhouette ink. Every draw sets lens state from
-replicated emergency flags and host presentation time; Canvas/GPU sprite fallback
+replicated emergency flags and host presentation time; the sprite fallback
 adds alternating blue roof beacons. Authority, persistence and audio remain outside
 the renderer. The allcars3d override preserves the ambulance's own asset.
 [120](../tactical/120-firetruck-gameplay.md) adds stowed firetruck v2 through a separate
@@ -875,8 +877,8 @@ slot prevents late async publication after replacement or disposal.
 The owner selected GPU + 3D car as the main-game default on 2026-10-11 and for
 embedded labs on 2026-11-07; this selection does not establish human art approval
 or a new performance claim. The debug panel's live renderer selector and
-`SelectableRenderHost` were removed with the Canvas option (232 slice 1); older
-`?renderer=` and `meshes` links still open, unchanged. Without WebGL2, the game
+`SelectableRenderHost` were removed with the Canvas option (232 slice 1), and the
+Canvas host in slice 3; older `?renderer=` and `meshes` links still open, unchanged. Without WebGL2, the game
 shows a "Tilefun needs WebGL2" dialog (not reported as a fault) and labs show the
 same message in their error area. Only the context probe produces that screen; a
 GPU backend that fails after a successful probe is an ordinary reported fault. Graphics-loss recovery is unchanged. The separate
@@ -938,7 +940,7 @@ and staging images. Active working sets can exceed the soft budget. A single
 mesh target is capped at 1024²; model textures and driver memory are additional.
 Texture/vertex upload counters estimate requested bytes, not measured bus traffic.
 Context loss pauses graphics; restoration rebuilds resources without resetting
-the Worker world. Unsupported construction falls back to Canvas.
+the Worker world. Without WebGL2 the game shows the "needs WebGL2" screen (232).
 
 See [045](../tactical/045-gpu-measurement-decision.md) for measurements and the
 adoption decision. Reconstructed car quality, WebGPU sprite-shader adaptation,

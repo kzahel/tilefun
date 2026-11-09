@@ -56,7 +56,7 @@ train stops as one consist at blockers, unready terrain or edited-away rail unde
 its current/next centers. Character walking/jumping and support velocity use the
 shared kernel. Nearby-train higher jumps return through the common jump assist.
 
-[Try the station](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=train&renderer=gpu&meshes#/tool/world-geometry).
+[Try the station](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=train#/tool/world-geometry).
 The new start is beside a bench. Inside driving, manual whistles and older
 specialized rail lab controls have not been revived. Production qualification and
 phone-performance limits are recorded in 218.
@@ -583,11 +583,10 @@ The [blue comparison and motion review](../../public/assets/models/trains/review
 is retained with the [source catalog](../../art-source/train-models/catalog.json).
 World Geometry offers authored blue loop, winding reversal and existing-city
 fixtures as well as ordinary loop/city fixtures. Game and labs share reviewed
-model selection. The game defaults to GPU + meshes; lab backend defaults remain
-Canvas. `nativeTrains` on World Geometry retains an explicit source-art comparison.
+model selection. The game and labs draw GPU + meshes (the only renderer since 232). `nativeTrains` on World Geometry retains an explicit source-art comparison.
 Mesh heading follows each replicated increasing track tangent, so reverse
 travel changes signed wheel roll without flipping physical end cars. Missing,
-loading, failed, disabled or Canvas mesh presentation keeps native train crops.
+loading or failed mesh presentation keeps native train crops.
 The six supported curve/straight carriage types use the model bank; legacy
 `train-local-v1` single-body services keep their native whole-train sprite.
 

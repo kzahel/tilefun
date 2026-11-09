@@ -43,7 +43,7 @@ export function drawScene2D(
   );
 }
 
-/** Native Canvas references and production consume the same semantic pass. */
+/** The GPU surface and the native review raster consume the same semantic pass. */
 export function drawScenePass2D(
   ctx: RasterSurface,
   camera: Camera,

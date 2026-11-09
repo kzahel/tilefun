@@ -20,11 +20,6 @@ const counts =
 // A comparison uses separate immutable bundles, never a dormant game backend.
 const referenceBase = option("reference-base", "");
 const lanes = referenceBase ? ["reference-legacy", "shared"] : ["shared"];
-const renderer = option("renderer", "gpu");
-if (renderer !== "gpu")
-  throw Error("The game requires WebGL2 (232); --renderer=canvas was removed");
-// Lab GPU always draws 3D vehicles; `--meshes` is still accepted from older commands.
-const meshes = renderer === "gpu";
 const trials = Number(option("trials", "2")),
   seconds = Number(option("seconds", "6")),
   warmup = Number(option("warmup", "4"));
@@ -52,9 +47,7 @@ const report = {
   date: new Date().toISOString(),
   browser: browser.version(),
   lane: cdp ? "dedicated physical browser via CDP" : "bundled full Chromium",
-  renderer,
   fixture,
-  meshes,
   allocations,
   cpuRate,
   seconds,
@@ -117,7 +110,6 @@ try {
           }
           url.searchParams.set("crowd", String(population));
           if (mode === "reference-legacy") url.searchParams.set("physics", "legacy");
-          url.searchParams.set("renderer", renderer);
           url.hash = "/tool/world-geometry";
           await page.goto(url.href, { waitUntil: "domcontentloaded" });
           await page.waitForSelector('canvas[data-ready="true"]', { timeout: 60000 });
@@ -186,7 +178,7 @@ try {
           if (
             !end.diagnostics?.timings?.["realm.tick"]?.count ||
             errors.length ||
-            start.device.renderer !== renderer
+            start.device.renderer !== "gpu"
           )
             failed = true;
           console.log(

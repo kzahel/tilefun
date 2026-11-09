@@ -17,8 +17,8 @@ linear depth scan. A shared overview LOD
 (`PROJECTED_SHADOW_MIN_ZOOM = 0.2`) uses the plain ground shadow below 0.2×; at
 0.1× shadows are 1–2 px and screenshots match. Labs share `collectScene`.
 
-`streaming:bench -- --zoom-motion --zooms=0.1 --noclip --renderer=gpu
---viewport=1728x1117 --arrival=-380,-364` (new options; GPU now implies meshes) measures, before → after:
+`streaming:bench -- --zoom-motion --zooms=0.1 --noclip
+--viewport=1728x1117 --arrival=-380,-364` (measured then with `--renderer=gpu`; the flag was removed in 232) measures, before → after:
 stationary render p50 30.8 → 5.4 ms, frame p50 33.3 → 16.7 ms, slow frames 59/59
 → 0/119; motion render p50/p95 27.8/38.7 → 5.6/9.1 ms, slow 205/251 → 0/480.
 Ordinary `--assert-ready` (GPU/meshes) still passes at 16.8 ms p99.
@@ -1070,9 +1070,9 @@ warm overview. See 047 for device, workload, debt and measurement limits.
 ## Reusable renderer matrix
 
 [049](../tactical/049-renderer-performance-matrix.md) owns the repeated device ×
-renderer × pacing comparison. `npm run streaming:matrix -- --help` describes the
-committed sequential runner. It supports desktop/phone, Canvas/GPU, both pacing
-policies, reversed repeat order, source-checked resume and sanitized JSON/Markdown
+pacing comparison (WebGL2 only since 232; 049's results compared Canvas and GPU).
+`npm run streaming:matrix -- --help` describes the committed sequential runner. It
+supports desktop/phone, both pacing policies, reversed repeat order, source-checked resume and sanitized JSON/Markdown
 reports. The default matrix is desktop only; explicitly include phone after
 setting up the dedicated CDP endpoint and reverse port.
 
@@ -1137,7 +1137,7 @@ the run; keep charging state, workload and durations matched. The single runner
 owns these optional flags; matrix-level forwarding is not implemented yet.
 
 
-For a matched GPU counterfactual, `streaming:bench -- --renderer=gpu
+For a matched GPU counterfactual, `streaming:bench --
 --uncached-image-sizes` disables only the new dimension cache in that run's
 isolated Vite transform. It uses the existing dynamic-source size lookup and
 records `diagnosticUncachedImageSizes`; it never changes production source or

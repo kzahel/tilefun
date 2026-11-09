@@ -74,29 +74,41 @@ it("detects forbidden types/imports/access even when they are type-only", () => 
 it("selects the backend in platform composition, not gameplay orchestration", () => {
   const client = readFileSync(resolve("src/client/GameClient.ts"), "utf8");
   expect(client).toContain("renderHostFactory");
-  expect(client).not.toMatch(/TileRenderer|CanvasRenderBackend/);
+  expect(client).not.toMatch(/TileRenderer|ReviewRasterBackend/);
   for (const path of ["scenes/PlayScene.ts", "scenes/EditScene.ts", "core/GameScene.ts"]) {
     const source = readFileSync(resolve("src", path), "utf8");
     expect(source, path).not.toMatch(
-      /import[^;]*(?:TileRenderer|CanvasRenderBackend|Canvas2DRenderer|Spritesheet)/,
+      /import[^;]*(?:TileRenderer|ReviewRasterBackend|Canvas2DRenderer|Spritesheet)/,
     );
   }
 });
-it("keeps the native Canvas raster to fingerprinted review rasters (232)", () => {
+it("keeps the native review raster to fingerprinted review rasters (232)", () => {
   // Approval fingerprints hash these tools' pixels; everything else draws on the GPU.
-  // `CanvasRenderHost` and its test are slice 3's deletion list.
   const allowed = [
     "art/BuildingShowcase.ts",
     "art/DenseDistrictShowcase.ts",
     "art/StreetShowcase.ts",
     "patterns/PatternRuntime.ts",
-    "rendering/CanvasRenderHost.ts",
-    "rendering/RenderHost.test.ts",
   ];
-  const canvasRenderer = /(?:from |import\()"[^"]*Canvas(?:RenderBackend|RenderHost)\.js"/;
+  const reviewRaster = /(?:from |import\()"[^"]*ReviewRasterBackend\.js"/;
   const users = readdirSync(resolve("src"), { recursive: true, encoding: "utf8" })
     .map((path) => path.split(sep).join("/"))
-    .filter((path) => path.endsWith(".ts") && path !== "rendering/CanvasRenderBackend.ts")
-    .filter((path) => canvasRenderer.test(readFileSync(resolve("src", path), "utf8")));
+    .filter((path) => /\.tsx?$/.test(path) && path !== "rendering/ReviewRasterBackend.ts")
+    .filter((path) => reviewRaster.test(readFileSync(resolve("src", path), "utf8")));
   expect(users.sort()).toEqual(allowed);
+  // No other native world raster under another name: only the GPU and the review raster
+  // extend the shared base, and production code never builds the base directly.
+  const sources = readdirSync(resolve("src"), { recursive: true, encoding: "utf8" })
+    .map((path) => path.split(sep).join("/"))
+    .filter((path) => /\.tsx?$/.test(path) && !/\.test\.tsx?$/.test(path))
+    .map((path) => ({ path, text: readFileSync(resolve("src", path), "utf8") }));
+  expect(
+    sources
+      .filter((f) => /extends RasterRenderBackend\b/.test(f.text))
+      .map((f) => f.path)
+      .sort(),
+  ).toEqual(["rendering/GpuRenderBackend.ts", "rendering/ReviewRasterBackend.ts"]);
+  expect(
+    sources.filter((f) => /new RasterRenderBackend\(/.test(f.text)).map((f) => f.path),
+  ).toEqual([]);
 });

@@ -114,7 +114,7 @@ not duplicate a moved, saved or deleted boat. Generated boats share the normal
 1024-state vehicle residency budget and storage-pressure admission gate.
 
 The World Geometry lab's **Large lake · motorboat & water wildlife** case uses
-the same generator, boat, controls, persistence and Canvas/GPU renderers. Its
+the same generator, boat, controls, persistence and GPU renderer. Its
 fixed seed-2026 beach is at approximately 813, −907 tiles. The boat source review
 also links to this playground. Existing animal habitats and exact art remain
 separate; the zebra showcase was moved to a current valid natural clearing.

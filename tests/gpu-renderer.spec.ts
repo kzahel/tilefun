@@ -188,8 +188,8 @@ test("default GPU mesh host runs the shared game and retains the input/UI canvas
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  // Old renderer links are ignored (232): there is only the WebGL2 renderer.
-  await page.goto("/tilefun/?renderer=legacy-canvas");
+  // Stale renderer links are ignored (232): there is only the WebGL2 renderer.
+  await page.goto("/tilefun/?renderer=legacy-canvas&meshes");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect(page.locator("#game")).toHaveAttribute("data-renderer", "gpu");
   expect(

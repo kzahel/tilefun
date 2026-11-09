@@ -15,9 +15,9 @@ import type { CommercialDistrictPlan } from "../generation/regional/CommercialDi
 import { DENSE_CITY_ASSETS } from "../generation/regional/DenseCityAssets.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
 import { Camera } from "../rendering/Camera.js";
-import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { collectSceneOrder } from "../rendering/RenderFrame.js";
+import { ReviewRasterBackend } from "../rendering/ReviewRasterBackend.js";
 import { World } from "../world/World.js";
 import type { ArtRect } from "./ArtCatalog.js";
 import { archivedCityScene, createPreviewGenerator } from "./CityReviewArchive.js";
@@ -330,7 +330,7 @@ export function drawDenseDistrictShowcase(
   // range here would load a second halo and exceed the 81-chunk preview budget.
   world.updateLoadedChunks(range);
   world.computeAutotile(graph);
-  const renderer = new CanvasRenderBackend(ctx, assets.sheets);
+  const renderer = new ReviewRasterBackend(ctx, assets.sheets);
   renderer.configureAssets(assets, graph);
   renderer.prepareTerrain(camera, world, range, { scope: "visible", rowBudget: 4096 });
   renderer.submit(camera, {

@@ -5,9 +5,9 @@ import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { buildingVisualBounds } from "../generation/regional/BuildingRecipes.js";
 import type { CityBuildingPrefab } from "../generation/regional/CityBuildingPrefabs.js";
 import { Camera } from "../rendering/Camera.js";
-import { CanvasRenderBackend } from "../rendering/CanvasRenderBackend.js";
 import { collectScene } from "../rendering/collectScene.js";
 import { collectSceneOrder } from "../rendering/RenderFrame.js";
+import { ReviewRasterBackend } from "../rendering/ReviewRasterBackend.js";
 import { World } from "../world/World.js";
 import { reviewContext2D } from "./reviewCanvas.js";
 
@@ -44,7 +44,7 @@ export function drawBuildingShowcase(
   ctx.fillRect(0, baseline + 100, canvas.width, 3);
   const props = placements.map((p, i) => ({ ...createProp(p.prefab.type, p.wx, p.wy), id: i + 1 }));
   const world = new World(new FlatStrategy());
-  const renderer = new CanvasRenderBackend(ctx, new Map([["me-complete", sheet]]));
+  const renderer = new ReviewRasterBackend(ctx, new Map([["me-complete", sheet]]));
   const items = collectScene(
     [],
     props,

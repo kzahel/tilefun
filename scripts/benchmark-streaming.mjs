@@ -32,9 +32,6 @@ const arrivalTile = arrivalOption ? arrivalOption.split(",").map(Number) : null;
 if (arrivalTile && (arrivalTile.length !== 2 || arrivalTile.some((v) => !Number.isInteger(v))))
   throw Error("--arrival must be integer tile coordinates X,Y");
 if (arrivalTile && scene !== "city") throw Error("--arrival applies to the city scene");
-const renderer = option("renderer", "gpu");
-if (renderer !== "gpu")
-  throw Error("The game requires WebGL2 (232); --renderer=canvas was removed");
 const terrainPacing = option("terrain-pacing", "throughput");
 if (!["throughput", "responsive"].includes(terrainPacing))
   throw Error("--terrain-pacing must be throughput or responsive");
@@ -61,10 +58,8 @@ if (assertBounded && (terrainPacing !== "responsive" || !(zoomSweep || zoomMotio
     "--assert-bounded requires --terrain-pacing=responsive and --zoom-sweep or --zoom-motion",
   );
 const uncachedImageSizes = process.argv.includes("--uncached-image-sizes");
-if (uncachedImageSizes && (renderer !== "gpu" || process.env.TILEFUN_DEV_URL))
-  throw Error("--uncached-image-sizes requires GPU and the isolated benchmark server");
-// GPU always draws 3D vehicles; `--meshes` is still accepted from older commands.
-const meshes = renderer === "gpu";
+if (uncachedImageSizes && process.env.TILEFUN_DEV_URL)
+  throw Error("--uncached-image-sizes requires the isolated benchmark server");
 const headed = process.argv.includes("--headed");
 const instrumentation = !process.argv.includes("--no-metrics");
 const output = option("output", path.join(os.tmpdir(), "tilefun-streaming"));
@@ -162,8 +157,6 @@ const report = {
   ...(zoomMotion ? { motionZooms, movementSeconds, settleSeconds, warmSeconds } : {}),
   catchupFrames,
   sprintFrames,
-  renderer,
-  meshes,
   cpuRate,
   viewport: endpoint ? null : { width: viewportOption[0], height: viewportOption[1] },
   ...(arrivalTile ? { arrivalTile } : {}),
@@ -265,7 +258,7 @@ try {
       { version, scene, arrivalTile },
     );
     await page.goto(
-      `${origin}/?nogamepad&renderer=${renderer}&${instrumentation ? "perf&" : ""}generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `${origin}/?nogamepad&${instrumentation ? "perf&" : ""}generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     try {
       await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -327,9 +320,6 @@ try {
         zoom,
       );
     }
-    const actualRenderer = await page.locator("#game").getAttribute("data-renderer");
-    if (renderer === "gpu" && actualRenderer !== "gpu")
-      throw Error(`GPU benchmark fell back to ${actualRenderer}`);
     const display = await page.evaluate(() => ({
       viewport: { width: innerWidth, height: innerHeight },
       screen: { width: screen.width, height: screen.height },

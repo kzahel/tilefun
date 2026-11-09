@@ -232,9 +232,8 @@ owner-selected main-game default as of 2026-10-11 and, since
 All six compact colors now use their own assets with this adapter. For testing, append `&allcars3d`
 to the game URL or Traffic lab: all `vehicle-v1:` road
 vehicles, including buses/vans, use the blue appearance. Their original types,
-sprites, colliders and persistence remain unchanged; trains are excluded. Legacy
-Canvas still draws their original sprites. The override is view-local and
-survives renderer switches, scene resets and refresh via the URL.
+sprites, colliders and persistence remain unchanged; trains are excluded. The override is view-local and
+survives scene resets and refresh via the URL.
 Simulation, prediction, input, cardinal colliders, roof support and persistence
 are unchanged. Wheel steering stays neutral; authored clearance is
 still unqualified. Selecting this renderer by default does not promote the model art.
@@ -372,7 +371,8 @@ arbitrary orbit output is not an immutable review snapshot.
 - A proposed asset record should identify source hashes/crops, mesh/material
   resources, transforms, visual bounds and separate physical/contact metadata.
   Start with the car; defer a general schema until two consumers exercise it.
-- Preserve Canvas gameplay and source-art reference rendering while experimenting.
+- Preserve source-art reference rendering while experimenting (the game itself is
+  WebGL2-only since [232](../tactical/232-webgl2-only-renderer.md)).
   Human acceptance of changed artwork remains governed by [art review](art-review.md).
 
 ## Tracking and next checkpoints
@@ -561,7 +561,7 @@ matched 4×2 and native-versus-mesh loop/reversal captures are tracked; source e
 projection and static coupling limits remain explicit. The [train topic](trains.md)
 owns its five-family queue. After reviewing the v3 curved-service LAN lab, the
 owner authorized these exact three carriages in game. Shared mesh mode now uses
-them by default; native art remains the Canvas/disabled/failed-load fallback.
+them by default; native art remains the loading/failed-load fallback.
 The review gate still applies to other families and changed geometry.
 
 

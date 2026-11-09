@@ -8,10 +8,7 @@ import { createServer } from "vite";
 
 const option = (name, fallback) =>
   process.argv.find((arg) => arg.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
-const renderer = option("renderer", "gpu");
 const serverHz = Number(option("server-hz", "60"));
-if (renderer !== "gpu")
-  throw Error("The game requires WebGL2 (232); --renderer=canvas was removed");
 if (![30, 60].includes(serverHz)) throw Error("Use --server-hz=30|60");
 const temp = await mkdtemp(path.join(os.tmpdir(), "tilefun-car-driving-"));
 for (const key of [
@@ -48,7 +45,7 @@ try {
   });
   const arrival = { x: 300, y: 519, generation };
   await page.goto(
-    `${origin}?nogamepad&renderer=${renderer}&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `${origin}?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByPlaceholder("World name...").fill("Car prediction diagnostic");
   await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -126,8 +123,6 @@ try {
     (hz) => Math.abs(document.querySelector("#game").__game.stateView.tickRate - hz) < 0.001,
     serverHz,
   );
-  const actualRenderer = await page.getAttribute("#game", "data-renderer");
-  if (actualRenderer !== renderer) throw Error(`Requested ${renderer}, got ${actualRenderer}`);
   await page.evaluate(() => {
     const g = document.querySelector("#game").__game,
       view = g.stateView;
@@ -185,7 +180,6 @@ try {
   const cruise = capture.rows.filter((r) => r.previousSpeed > 100 && r.speed > 90);
   const missing = cruise.filter((r) => r.ackGap === 0 && r.tickGap === 1);
   const summary = {
-    renderer: actualRenderer,
     serverHz,
     reconciliationSamples: capture.rows.length,
     cruiseSamples: cruise.length,

@@ -31,7 +31,7 @@ const VEHICLE_FOLLOW_DELAY_MS = 1500;
  *
  * `drawing` is the single per-frame answer to "is play shown in first person?".
  * Camera-relative movement, look input, the streaming zoom floor and pointer
- * lock all follow it, so the fixed-view fallbacks (legacy Canvas, loading,
+ * lock all follow it, so the fixed-view fallbacks (loading, a failed view module,
  * editor) keep ordinary controls. Rooms are drawn in first person too (230).
  */
 export class FirstPersonControl {
@@ -47,7 +47,6 @@ export class FirstPersonControl {
   private loading = false;
   /** The view module failed to load; cleared when first person is toggled off. */
   private failed = false;
-  private warnedCanvas = false;
   private drawn = false;
   private lastManualLook = -Infinity;
   private disposed = false;
@@ -89,7 +88,6 @@ export class FirstPersonControl {
     if (document.pointerLockElement === canvas) document.exitPointerLock();
     this.releaseView();
     this.failed = false;
-    this.warnedCanvas = false;
   }
 
   /** True when the latest play frame was drawn in first person. */
@@ -134,25 +132,17 @@ export class FirstPersonControl {
     return { x: dir.x, y: dir.y };
   }
 
-  /** The loaded view, or undefined while it loads or when this host cannot show it. */
+  /** The loaded view, or undefined while it loads or after its module failed to load. */
   currentView(): FirstPersonView | undefined {
     if (!this.active || this.disposed || this.failed) return undefined;
-    // The view sits between the GPU world canvas and this UI canvas. Only the
-    // direct Canvas host (removed in 232 slice 3) lacks that world canvas.
-    const canvas = this.canvas();
-    if (canvas.dataset.renderer !== "gpu") {
-      if (this.view) this.releaseView();
-      if (!this.warnedCanvas) console.warn("[tilefun] First-person view requires the GPU renderer");
-      this.warnedCanvas = true;
-      return undefined;
-    }
     if (this.view) return this.view;
     if (!this.loading) {
       this.loading = true;
       import("../rendering/firstperson/FirstPersonView.js")
         .then(({ FirstPersonView }) => {
           if (this.active && !this.disposed && !this.view)
-            this.view = new FirstPersonView(canvas, this.sheets());
+            // The view sits between the GPU world canvas and this UI canvas.
+            this.view = new FirstPersonView(this.canvas(), this.sheets());
         })
         .catch((error) => {
           this.failed = true;
@@ -170,7 +160,7 @@ export class FirstPersonControl {
     return this.view ? { ...this.view.stats } : undefined;
   }
 
-  /** The fixed view draws instead (editor, loading, legacy Canvas):
+  /** The fixed view draws instead (editor, loading, failed to load):
    * hide the view and give back ordinary controls and the pointer. */
   hideView(): void {
     this.drawn = false;
