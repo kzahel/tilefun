@@ -476,7 +476,8 @@ preserves the other 1,977 candidate fingerprints; the two excluded interactive
 truck/towing engine identities change because they hash the current adapter.
 
 [180](../tactical/180-ordered-texture-batches.md) delivers the next submission
-slice. Up to eight existing textures share an indexed batch, with one sampler
+slice. Up to eight existing textures (since 232 slice 4: seven, plus the page
+atlas; see the fixed-view backend section) share an indexed batch, with one sampler
 slot value per vertex and constant GLSL sampler indices. Quad/index order and
 per-source raw/sRGB conversion remain unchanged. Cached car quads can join the
 batch; dirty mesh/outline target writes, uploads, clips, capacity, pass endings
@@ -784,6 +785,36 @@ Canvas and GPU share placement, grass, shadows and room composition rules.
 `GpuRasterSurface` batches quads and retains revision-tracked texture pages; it
 still uploads CPU-prepared terrain/room images. It is not GPU terrain generation.
 Neutral `RenderBackend` frames never contain Three objects or decoded images.
+
+**Page atlas and direct sprites (232 slice 4).**
+- `GpuPages` keeps every paged image in one `TEXTURE_2D_ARRAY` of 1024² layers
+  (`GpuPageAtlas`, packed by `AtlasAllocator`): sprite sheets, terrain chunks,
+  shadow ellipses, actor crops and overlays. Interleaved sources no longer split
+  batches at the slot limit; a 0.1× city frame is ~8 draw calls (was ~91).
+- The array grows by half and shrinks when eviction empties its top three
+  quarters; the existing page LRU (age and 64 MiB budget) decides residency.
+  Beyond its 256 MiB cap a page falls back to its own texture (`atlasMisses`).
+- Pages upload through a 2D staging texture and a GPU copy, never
+  `texSubImage3D` from a canvas (a CPU readback in Chrome). Staging textures are
+  reused per page size within 8 MiB (`stagingBytes`). Staging flips rows like the
+  old 2D pages, and unfiltered lookups clamp to their page as CLAMP_TO_EDGE did.
+  Composed-world nearest-sampled scenery is byte-identical to separate page
+  textures, including 0.5×'s all-tie sampling. Filtered actor edges can round one
+  or two levels differently; without world composition (explorer, labs) a pixel
+  center exactly on a texel edge falls to interpolation rounding either way.
+- A resize holds the old and new arrays until the GPU copy completes: growing
+  41 → 62 layers peaks at ~412 MiB for one frame, then settles at the new size.
+- Seven image/depth sampler slots remain for non-paged textures (mesh composites,
+  white); with the atlas sampler that is 15 of WebGL2's 16 units.
+- `setPageAtlas(false)` is a diagnostic A/B that keeps every page in its own
+  texture; `setPageAtlas(true, layers)` lowers the cap to exercise growth,
+  shrinking and the fallback.
+- The shared scene drawing calls the GPU-only `RasterSurface.drawSpriteImage` and
+  `fillShadow` when present, skipping Canvas-shaped save/restore, transform and
+  path calls. The native review raster lacks them and draws through Canvas state,
+  so review fingerprints are unaffected.
+- Flushing through Three.js costs ~10 µs per batch; a direct WebGL draw was not
+  worth it at ~8 batches per frame.
 
 `EntityMeshPose` evaluates cosmetic orientation and signed wheel travel once in
 shared presentation. Its view-owned ID cache survives borrowed render clones,

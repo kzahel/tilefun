@@ -342,6 +342,9 @@ export function installCityRenderProfile() {
   let pass = "setup";
   const restores = [];
   // Attribution only: replay the unchanged quad order through bounded texture sets.
+  // Since 232 a number is a page-atlas layer; the whole atlas is one sampler.
+  const textureOf = (texture) => (typeof texture === "number" ? "atlas" : texture);
+  let lastTexture = null;
   const batchCensus = { quads: 0, textureSwitches: 0, barriers: 0 };
   const lanes = [1, 2, 4, 8].map((limit) => ({ limit, draws: 0, quads: 0, textures: new Set() }));
   const finish = (lane) => {
@@ -355,11 +358,13 @@ export function installCityRenderProfile() {
   let insideQuad = 0;
   surface.quad = function (...args) {
     batchCensus.quads++;
-    if (this.count && this.texture !== args[0]) batchCensus.textureSwitches++;
+    const texture = textureOf(args[0]);
+    if (this.count && lastTexture !== texture) batchCensus.textureSwitches++;
+    lastTexture = texture;
     for (const lane of lanes) {
-      if (lane.quads === 2048 || (!lane.textures.has(args[0]) && lane.textures.size === lane.limit))
+      if (lane.quads === 2048 || (!lane.textures.has(texture) && lane.textures.size === lane.limit))
         finish(lane);
-      lane.textures.add(args[0]);
+      lane.textures.add(texture);
       lane.quads++;
     }
     insideQuad++;
@@ -410,15 +415,17 @@ export function installCityRenderProfile() {
     row.items += args[1].items?.length ?? args[1].draws?.length ?? 0;
   });
   wrap(backend.surface, "flush", "flush");
-  wrap(backend.surface, "page", "page");
-  const page = surface.page;
-  surface.page = function (...args) {
-    const before = this.stats.uploadedBytes;
+  // Resident pages moved from the surface to GpuPages in 232.
+  const pages = surface.pages;
+  wrap(pages, "get", "page");
+  const page = pages.get;
+  pages.get = function (...args) {
+    const before = surface.stats.uploadedBytes;
     const result = page.apply(this, args);
-    const bytes = this.stats.uploadedBytes - before;
+    const bytes = surface.stats.uploadedBytes - before;
     if (bytes) {
       const image = args[0];
-      const shadow = [...this.ellipses.values()].includes(image);
+      const shadow = [...surface.ellipses.values()].includes(image);
       const kind = shadow ? "shadow" : pass;
       const key = `${kind}:${image.width ?? image.naturalWidth}x${image.height ?? image.naturalHeight}`;
       sourceUploads[key] ??= { uploads: 0, bytes: 0 };
@@ -429,7 +436,7 @@ export function installCityRenderProfile() {
     return result;
   };
   restores.push(() => {
-    surface.page = page;
+    pages.get = page;
   });
   wrap(backend.meshes, "draw", "mesh", (_, args) => {
     const id = args[1].mesh?.assetId;

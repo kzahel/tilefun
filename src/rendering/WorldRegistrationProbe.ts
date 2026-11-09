@@ -3,6 +3,7 @@ import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { createLayeredInteriorMap } from "../interiors/LayeredInteriorMap.js";
 import { Chunk } from "../world/Chunk.js";
 import { Camera } from "./Camera.js";
+import type { GpuRenderBackend } from "./GpuRenderBackend.js";
 import { createGpuRenderHost } from "./GpuRenderHost.js";
 import type { RasterRenderBackend } from "./RasterRenderBackend.js";
 import { touchRaster } from "./RasterSurface.js";
@@ -12,7 +13,7 @@ import type { TileRenderer } from "./TileRenderer.js";
 /** Actual GPU host composition, paired stationary registration and followed-actor pixels.
  * Solid landmarks separate placement from animation/sampling ties. A hostile atlas
  * neighbor catches crop bleed. This is deliberately a browser/GPU contract. */
-export function probeWorldRegistration() {
+export function probeWorldRegistration(pageAtlas = true) {
   const width = 720,
     height = 480;
   const output = document.createElement("canvas");
@@ -46,6 +47,8 @@ export function probeWorldRegistration() {
   const backend = host.renderer as RasterRenderBackend;
   if (!backend.worldRaster)
     throw Error("Registration requires composed host, including real WebGL");
+  // `false` repeats the probe with separate page textures (the 232 atlas A/B).
+  (backend as GpuRenderBackend).surface.setPageAtlas(pageAtlas);
   backend.setAssets(sheets);
   backend.prepareInterior({ id: 123456, map: createLayeredInteriorMap(1, 1), editable: false });
   try {
@@ -181,8 +184,15 @@ export function probeWorldRegistration() {
             }
           if (!propMass || !terrainMass || !actorMass || !elevationMass)
             throw Error("Missing registration landmark");
+          // Nearest-sampled scenery only: rows above the filtered actor (and its
+          // one-pixel filter guard), which stands 80 px below the view center.
+          const sceneryRows = Math.floor(height / 2 + 80 - 16 * camera.scale) - 2;
+          let sceneryDigest = 0x811c9dc5;
+          for (let i = 0; i < sceneryRows * width * 4; i++)
+            sceneryDigest = Math.imul(sceneryDigest ^ (pixels[i] ?? 0), 0x01000193);
           positions.push({
             phase,
+            sceneryDigest: sceneryDigest >>> 0,
             relativeX: propX / propMass - terrainX / terrainMass,
             elevationX: elevationX / elevationMass - terrainX / terrainMass,
             actorX: actorX / actorMass,

@@ -362,6 +362,14 @@ all GPU references remain backend-owned. Desktop/native exact-pixel checks,
 all 829 browser cases and GPU streaming readiness pass. There is no lab-specific
 batch policy, authority change or world-depth/outline change.
 
+[232](../tactical/232-webgl2-only-renderer.md) slice 4 puts every paged image (sprite
+sheets, terrain chunks, shadow ellipses, overlays) in one page atlas
+(`TEXTURE_2D_ARRAY`) in the same GPU surface the game and labs use; seven texture
+slots remain for mesh composites. The renderer lab's `gpu.surface.setPageAtlas(false)`
+draws with separate page textures for A/B checks, and `probeWorldRegistration(false)`
+repeats the composed-world probe that way. Sprites and shadows skip Canvas-shaped
+state calls only on the GPU surface; the native review raster is unchanged.
+
 [162](../tactical/162-shared-world-depth-comparison.md) is a standalone rendering
 experiment fed by normal headless scenario authority, binary replication and
 scene collection. It reuses production vehicle assets/loading without adding a

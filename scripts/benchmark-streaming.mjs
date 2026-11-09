@@ -418,7 +418,7 @@ try {
           instrument(game.renderHost, "beginFrame", "beginMs");
           instrument(game.renderer, "prepareTerrain", "prepareMs");
           instrument(game.renderer, "submit", "submitMs");
-          instrument(game.renderer.surface, "page", "pageMs");
+          instrument(game.renderer.surface?.pages, "get", "pageMs");
           instrument(game.renderer.surface, "flush", "flushMs");
           instrument(game.renderer.meshes, "draw", "meshMs");
           const gpuStats = game.renderer.surface?.stats;

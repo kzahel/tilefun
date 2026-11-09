@@ -36,35 +36,52 @@ export function segmentPose(s: RailSegment, distance: number): RailPose {
 /** Analytic nearest position for corridor reservation and native-pixel tracks. */
 export function nearestRail(path: RailPath, x: number, y: number) {
   let along = 0,
-    best = { distance: Infinity, lateral: 0, along: 0 };
+    best: RailHit = { distance: Infinity, lateral: 0, along: 0 };
   for (const s of path.segments) {
     const length = segmentLength(s);
-    let d: number;
-    if (s.kind === "line") {
-      d = Math.max(
-        0,
-        Math.min(length, ((x - s.x) * (s.endX - s.x) + (y - s.y) * (s.endY - s.y)) / length),
-      );
-    } else {
-      const angle = Math.atan2(y - s.y, x - s.x);
-      const swept = wrapDistance((angle - s.angle) * Math.sign(s.sweep), TAU);
-      if (swept <= Math.abs(s.sweep)) d = swept * s.radius;
-      else {
-        const a = segmentPose(s, 0),
-          b = segmentPose(s, length);
-        d = Math.hypot(x - a.x, y - a.y) <= Math.hypot(x - b.x, y - b.y) ? 0 : length;
-      }
-    }
-    const p = segmentPose(s, d),
-      distance = Math.hypot(x - p.x, y - p.y);
-    if (distance < best.distance)
-      best = {
-        distance,
-        lateral: -(x - p.x) * Math.sin(p.angle) + (y - p.y) * Math.cos(p.angle),
-        along: along + d,
-      };
+    best = nearerOnSegment(s, length, along, x, y, best);
     along += length;
   }
+  return best;
+}
+export interface RailHit {
+  distance: number;
+  lateral: number;
+  along: number;
+}
+/** `best`, or the nearest point of `s` (arclength `along` before it) when strictly nearer. */
+export function nearerOnSegment(
+  s: RailSegment,
+  length: number,
+  along: number,
+  x: number,
+  y: number,
+  best: RailHit,
+): RailHit {
+  let d: number;
+  if (s.kind === "line") {
+    d = Math.max(
+      0,
+      Math.min(length, ((x - s.x) * (s.endX - s.x) + (y - s.y) * (s.endY - s.y)) / length),
+    );
+  } else {
+    const angle = Math.atan2(y - s.y, x - s.x);
+    const swept = wrapDistance((angle - s.angle) * Math.sign(s.sweep), TAU);
+    if (swept <= Math.abs(s.sweep)) d = swept * s.radius;
+    else {
+      const a = segmentPose(s, 0),
+        b = segmentPose(s, length);
+      d = Math.hypot(x - a.x, y - a.y) <= Math.hypot(x - b.x, y - b.y) ? 0 : length;
+    }
+  }
+  const p = segmentPose(s, d),
+    distance = Math.hypot(x - p.x, y - p.y);
+  if (distance < best.distance)
+    return {
+      distance,
+      lateral: -(x - p.x) * Math.sin(p.angle) + (y - p.y) * Math.cos(p.angle),
+      along: along + d,
+    };
   return best;
 }
 export class RailAlignment {

@@ -61,6 +61,29 @@ prop caching was dropped: prop collection plus depth is ~0.3 ms at 0.1. Next
 candidates: sheet atlasing or a larger effective texture-slot budget, a direct
 WebGL draw for the batch mesh, and the ~1.6 ms of native `(program)` time.
 
+**120 Hz reached (232 slice 4, 2026-11-09).** Re-measured at the slice start, 0.1
+motion missed 20–29 of ~935 frames, with 91 draw calls per frame. Half of the
+flushes came from 384 terrain chunk rasters, the rest from sprite sheets and shadow
+ellipses filling the eight texture slots. Three changes, each with its own A/B
+(table in [232](../tactical/232-webgl2-only-renderer.md#slice-4--delivered-2026-11-09)):
+
+- One page atlas (`TEXTURE_2D_ARRAY`) for every paged image: 8 draw calls per
+  frame, `submit:terrain` 0.67 → 0.33 ms. Uploads go through a 2D staging texture
+  and a GPU copy; uploading canvases straight into the array read them back through
+  the CPU and doubled the misses.
+- Sprites and shadows skip the Canvas-shaped state calls: `submit:scene` 1.30 →
+  ~1.0 ms.
+- Railway tiles cull rail segments that cannot reach the tile (exact): the
+  per-pixel rail search was ~2.5 ms of the slowest motion ticks.
+
+Now 3 of 956 motion frames miss cadence in both runs, render p50/p95/p99 4.0/6.5/7.3
+ms (was 4.3/7.7/8.8); stationary render p50 4.7 → 4.0 ms. Flushing through
+Three.js costs ~10 µs per batch (0.07–0.09 ms/frame), so no direct WebGL draw. The
+remaining misses are CPU bursts in terrain cache builds and scene collection.
+Next: `collectScene` (~1.4 ms at 0.1) and a terrain LOD for overviews (0.1 keeps
+384 full-resolution chunk rasters, ~96 MiB, in the atlas, which reaches 41 layers /
+164 MiB).
+
 The black chunks were authority admission, not rendering; see
 [entity activation](entity-activation.md#overview-admission). The GPU sprite-vehicle
 mode was removed on 2026-11-09 (GPU always draws 3D vehicles); it was not a

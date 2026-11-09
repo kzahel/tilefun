@@ -42,10 +42,12 @@ export function installStreamingProfile() {
   for (const [key, sheet] of backend.sheets) sources.set(sheet.image, `sheet:${key}`);
   if (backend.overlay) sources.set(backend.overlay, "overlay");
   const sourceName = (image) => sources.get(image) ?? `canvas:${image.width}x${image.height}`;
-  if (surface) {
+  // GpuPages (232) owns the surface's resident pages.
+  const pages = surface?.pages;
+  if (pages) {
     const seen = new WeakSet();
-    for (const pages of surface.pages.values()) for (const page of pages) seen.add(page);
-    wrap(surface, "page", (fn, self, args) => {
+    for (const list of pages.pages.values()) for (const page of list) seen.add(page);
+    wrap(pages, "get", (fn, self, args) => {
       const before = surface.stats.uploadedBytes;
       const page = fn.apply(self, args);
       const bytes = surface.stats.uploadedBytes - before;
@@ -59,7 +61,7 @@ export function installStreamingProfile() {
       }
       return page;
     });
-    wrap(surface, "remove", (fn, self, args) => {
+    wrap(pages, "remove", (fn, self, args) => {
       const key = sourceName(args[0].image);
       evictions[key] = (evictions[key] ?? 0) + 1;
       return fn.apply(self, args);

@@ -1,8 +1,10 @@
 import * as THREE from "three";
-import { rasterFragmentShader } from "./GpuRasterShader.js";
+import { ATLAS_PAGE } from "./GpuPageAtlas.js";
+import { GpuPages, PAGE, type Page, size } from "./GpuPages.js";
+import { ATLAS_SLOT, rasterFragmentShader } from "./GpuRasterShader.js";
 import { GpuWorldComposition } from "./GpuWorldComposition.js";
 import type { DecalVertex } from "./ProjectedDecals.js";
-import { type RasterSurface, rasterRevision } from "./RasterSurface.js";
+import type { RasterSurface } from "./RasterSurface.js";
 import { SubpixelImages } from "./SubpixelImages.js";
 import type { RenderRegion } from "./ViewLayout.js";
 import { WORLD_RASTER_PAD } from "./WorldRasterFrame.js";
@@ -20,30 +22,13 @@ type State = {
   fillStyle: string | CanvasGradient | CanvasPattern;
   clips: Rect[] | null;
 };
-interface Page {
-  image: CanvasImageSource;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  texture: THREE.Texture;
-  source: HTMLCanvasElement;
-  revision: number;
-  used: number;
-}
-const PAGE = 1024;
 const QUADS = 2048;
 const STRIDE = 20;
-const TEXTURES = 8;
+// Seven image/depth sampler pairs plus the page atlas fit WebGL2's 16 units.
+const TEXTURES = 7;
+if (TEXTURES >= ATLAS_SLOT) throw Error("Batch slots would alias page atlas layers");
 const CORNERS = [0, 1, 2, 0, 2, 3];
 const WHITE = [1, 1, 1, 1];
-const size = (image: CanvasImageSource) => {
-  const source = image as HTMLImageElement;
-  return {
-    width: Number(source.naturalWidth || source.width),
-    height: Number(source.naturalHeight || source.height),
-  };
-};
 
 /** GPU triangle sink for the shared raster rules. No world, entity or simulation reads. */
 export class GpuRasterSurface implements RasterSurface {
@@ -63,6 +48,7 @@ export class GpuRasterSurface implements RasterSurface {
   private filtered = false;
   private readonly mesh: THREE.Mesh;
   private readonly white: THREE.DataTexture;
+  private readonly pages: GpuPages;
   private world?: GpuWorldComposition;
   private get worldTarget() {
     return this.world?.target;
@@ -86,16 +72,7 @@ export class GpuRasterSurface implements RasterSurface {
   private readonly depthFront = [0, 0, 0];
   private depthXBounds: readonly number[] | undefined;
   private count = 0;
-  private frame = 0;
-  private readonly pages = new Map<CanvasImageSource, Page[]>();
   private readonly actorCrops = new SubpixelImages();
-  // Decoded images cannot change asynchronously during synchronous submission.
-  // Read their DOM dimensions once per frame, retaining only weak source keys.
-  // Dynamic canvas sources continue through size() on every call.
-  private imageSizes = new WeakMap<
-    HTMLImageElement | ImageBitmap,
-    { frame: number; width: number; height: number }
-  >();
   private readonly scratch = document.createElement("canvas");
   private readonly colorContext: CanvasRenderingContext2D;
   private readonly colors = new Map<string, readonly number[]>();
@@ -131,6 +108,10 @@ export class GpuRasterSurface implements RasterSurface {
     batchTextureLimit: 1,
     worldTargetBytes: 0,
     worldComposites: 0,
+    atlasLayers: 0,
+    atlasBytes: 0,
+    atlasMisses: 0,
+    stagingBytes: 0,
   };
 
   constructor(canvas: HTMLCanvasElement) {
@@ -148,6 +129,7 @@ export class GpuRasterSurface implements RasterSurface {
     this.white.needsUpdate = true;
     const uniforms: Record<string, THREE.IUniform> = {};
     uniforms.stableRaster = { value: false };
+    uniforms.atlas = { value: null };
     for (let i = 0; i < TEXTURES; i++) {
       uniforms[`image${i || ""}`] = { value: this.white };
       uniforms[`encode${i || ""}`] = { value: false };
@@ -203,6 +185,7 @@ export class GpuRasterSurface implements RasterSurface {
     const ctx = this.scratch.getContext("2d", { willReadFrequently: true });
     if (!ctx) throw Error("Color parser unavailable");
     this.colorContext = ctx;
+    this.pages = new GpuPages(this.renderer, this.stats, () => this.flush());
     this.setBatchTextureLimit(TEXTURES);
     this.resize(canvas.width, canvas.height);
   }
@@ -301,14 +284,24 @@ export class GpuRasterSurface implements RasterSurface {
       this.setDepthPlane(...job.depth);
       this.globalAlpha = job.alpha;
       this.fillStyle = job.color;
-      const page = this.page(job.image, 0, 0, size(job.image));
+      const page = this.pages.get(job.image, 0, 0, size(job.image));
+      const r = page.region,
+        u = r ? r.x / ATLAS_PAGE : 0,
+        v = r ? r.y / ATLAS_PAGE : 0,
+        uw = r ? r.width / ATLAS_PAGE : 1,
+        vh = r ? r.height / ATLAS_PAGE : 1;
       for (const polygon of job.polygons)
         for (let i = 1; i + 1 < polygon.length; i++) {
           const a = polygon[0],
             b = polygon[i],
             c = polygon[i + 1];
           if (a && b && c)
-            this.quad(page.texture, 0, 0, 0, 0, 0, 0, 1, 1, this.color(), null, [a, b, c, c]);
+            this.quad(this.sampler(page), 0, 0, 0, 0, u, v, uw, vh, this.color(), null, [
+              a,
+              b,
+              c,
+              c,
+            ]);
         }
     }
     this.flush();
@@ -324,7 +317,11 @@ export class GpuRasterSurface implements RasterSurface {
   setBatchTextureLimit(value: number) {
     const limit = Math.max(
       1,
-      Math.min(TEXTURES, this.renderer.capabilities.maxTextures, Math.floor(value)),
+      Math.min(
+        TEXTURES,
+        Math.floor((this.renderer.capabilities.maxTextures - 1) / 2),
+        Math.floor(value),
+      ),
     );
     if (!Number.isFinite(value) || value < 1) throw Error("Invalid texture batch limit");
     if (this.stats.batchTextureLimit === limit) return;
@@ -339,7 +336,6 @@ export class GpuRasterSurface implements RasterSurface {
     if (this.lost) return;
     this.decals.length = 0;
     this.world?.beginFrame();
-    this.frame++;
     this.stats.frames++;
     this.count = 0;
     this.filtered = false;
@@ -353,33 +349,22 @@ export class GpuRasterSurface implements RasterSurface {
     }
     this.renderer.setRenderTarget(this.worldTarget ?? null);
     this.renderer.clear();
-    // LRU cache has both an age limit and a byte budget. Current-frame textures
-    // are never retired mid-command; excess residency is collected next frame.
-    const cold: Page[] = [];
-    for (const pages of this.pages.values()) for (const page of pages) cold.push(page);
-    cold.sort((a, b) => a.used - b.used);
-    for (const page of cold) {
-      if (this.frame - page.used < 2) continue;
-      if (this.frame - page.used <= 120 && this.stats.textureBytes <= 64 * 1024 * 1024) continue;
-      this.remove(page);
-    }
+    this.pages.beginFrame();
   }
-  private remove(page: Page) {
-    page.texture.dispose();
-    this.stats.textureBytes -= page.width * page.height * 4;
-    this.stats.textures--;
-    const list = this.pages.get(page.image);
-    if (list) {
-      list.splice(list.indexOf(page), 1);
-      if (!list.length) this.pages.delete(page.image);
-    }
+  /** Diagnostic A/B for the page atlas (and an optional layer cap, to exercise
+   * growth and the fallback); rebuilds every page on the next draw. */
+  setPageAtlas(enabled: boolean, maxLayers?: number) {
+    this.flush();
+    this.clearResources();
+    this.pages.atlasEnabled = enabled;
+    if (maxLayers !== undefined) this.pages.atlas.limitLayers(maxLayers);
+  }
+  private sampler(page: Page): THREE.Texture | number {
+    return page.region ? page.region.layer : (page.texture ?? this.white);
   }
   /** Retire a backend-owned source only after its queued quads are consumed. */
   releaseImage(image: CanvasImageSource) {
-    const pages = this.pages.get(image);
-    if (!pages) return;
-    this.flush();
-    for (const page of [...pages]) this.remove(page);
+    this.pages.release(image);
   }
   clearResources() {
     this.decals.length = 0;
@@ -392,13 +377,9 @@ export class GpuRasterSurface implements RasterSurface {
       const image = this.material.uniforms[`image${i || ""}`];
       if (image) image.value = this.white;
     }
-    for (const pages of this.pages.values()) for (const p of pages) p.texture.dispose();
     this.pages.clear();
-    this.imageSizes = new WeakMap();
     this.ellipses.clear();
     this.actorCrops.clear();
-    this.stats.textureBytes = 0;
-    this.stats.textures = 0;
   }
   recover() {
     this.clearResources();
@@ -501,6 +482,54 @@ export class GpuRasterSurface implements RasterSurface {
   fill() {
     if (!this.ellipsePath) throw Error("Only ellipse fill is supported by the scene sink");
     const [x = 0, y = 0, rx = 0, ry = 0] = this.ellipsePath;
+    this.fillEllipse(x, y, rx, ry, this.fillStyle);
+  }
+  /** Scene shadows without Canvas state: save, smoothing, 0.3 black ellipse fill,
+   * restore. Unlike `beginPath`/`ellipse`, it leaves the current path untouched. */
+  fillShadow(x: number, y: number, rx: number, ry: number, smooth: boolean) {
+    const alpha = this.globalAlpha,
+      smoothing = this.imageSmoothingEnabled;
+    this.globalAlpha = 0.3;
+    this.imageSmoothingEnabled = smooth || smoothing;
+    this.fillEllipse(x, y, rx, ry, "#000");
+    this.globalAlpha = alpha;
+    this.imageSmoothingEnabled = smoothing;
+  }
+  /** Scene sprites without Canvas state: save, alpha, optional mirror, drawImage, restore. */
+  drawSpriteImage(
+    image: CanvasImageSource,
+    sx: number,
+    sy: number,
+    sw: number,
+    sh: number,
+    dx: number,
+    dy: number,
+    dw: number,
+    dh: number,
+    flip: boolean,
+    alpha: number | undefined,
+    subpixel: boolean,
+  ) {
+    const { a, b, globalAlpha } = this;
+    if (alpha !== undefined) this.globalAlpha = alpha;
+    if (flip) {
+      this.a = -a;
+      this.b = -b;
+      dx = -(dx + dw);
+    }
+    if (subpixel) this.drawSubpixelImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
+    else this.drawRegion(image, this.pages.imageSize(image), sx, sy, sw, sh, dx, dy, dw, dh);
+    this.a = a;
+    this.b = b;
+    this.globalAlpha = globalAlpha;
+  }
+  private fillEllipse(
+    x: number,
+    y: number,
+    rx: number,
+    ry: number,
+    fillStyle: string | CanvasGradient | CanvasPattern,
+  ) {
     if (rx <= 0 || ry <= 0) return;
     // Rasterize at final screen resolution. Fractional local origins and room
     // scaling must not turn a smooth shadow into a shifted/upscaled bitmap.
@@ -515,7 +544,7 @@ export class GpuRasterSurface implements RasterSurface {
       height = Math.ceil(this.imageSmoothingEnabled ? sy * 2 + 2 : cy + sy - top + 1);
     const localX = this.imageSmoothingEnabled ? sx + 1 : cx - left,
       localY = this.imageSmoothingEnabled ? sy + 1 : cy - top;
-    const key = `${localX}:${localY}:${sx}:${sy}:${String(this.fillStyle)}`;
+    const key = `${localX}:${localY}:${sx}:${sy}:${String(fillStyle)}`;
     let image = this.ellipses.get(key);
     if (!image) {
       if (this.ellipses.size >= 128) this.ellipses.delete(this.ellipses.keys().next().value ?? "");
@@ -524,17 +553,22 @@ export class GpuRasterSurface implements RasterSurface {
       image.height = height;
       const ctx = image.getContext("2d");
       if (!ctx) throw Error("Ellipse canvas unavailable");
-      ctx.fillStyle = this.fillStyle;
+      ctx.fillStyle = fillStyle;
       ctx.beginPath();
       ctx.ellipse(localX, localY, sx, sy, 0, 0, Math.PI * 2);
       ctx.fill();
       this.ellipses.set(key, image);
     }
-    this.save();
+    const { a, b, c, d, e, f } = this;
     this.a = this.d = 1;
     this.b = this.c = this.e = this.f = 0;
-    this.drawImage(image, left, top);
-    this.restore();
+    this.drawRegion(image, size(image), 0, 0, width, height, left, top, width, height);
+    this.a = a;
+    this.b = b;
+    this.c = c;
+    this.d = d;
+    this.e = e;
+    this.f = f;
   }
   pixelShadow = (cx: number, cy: number, rx: number, ry: number) => {
     this.save();
@@ -579,7 +613,7 @@ export class GpuRasterSurface implements RasterSurface {
     g?: number,
     h?: number,
   ) {
-    const dim = this.imageSize(image);
+    const dim = this.pages.imageSize(image);
     if (h !== undefined)
       this.drawRegion(image, dim, a ?? 0, b ?? 0, c ?? 0, d ?? 0, e ?? 0, f ?? 0, g ?? 0, h);
     else if (d !== undefined)
@@ -587,23 +621,6 @@ export class GpuRasterSurface implements RasterSurface {
     else if (b !== undefined && c === undefined)
       this.drawRegion(image, dim, 0, 0, dim.width, dim.height, a ?? 0, b, dim.width, dim.height);
     else throw Error("Invalid drawImage arguments");
-  }
-  private imageSize(image: CanvasImageSource): { width: number; height: number } {
-    let dim: { width: number; height: number };
-    if (image instanceof ImageBitmap || image instanceof HTMLImageElement) {
-      let cached = this.imageSizes.get(image);
-      if (!cached) {
-        cached = { frame: this.frame, ...size(image) };
-        this.imageSizes.set(image, cached);
-      } else if (cached.frame !== this.frame) {
-        const current = size(image);
-        cached.width = current.width;
-        cached.height = current.height;
-        cached.frame = this.frame;
-      }
-      dim = cached;
-    } else dim = size(image);
-    return dim;
   }
   private drawRegion(
     image: CanvasImageSource,
@@ -617,7 +634,7 @@ export class GpuRasterSurface implements RasterSurface {
     dw: number,
     dh: number,
   ) {
-    if (sw <= 0 || sh <= 0 || dw === 0 || dh === 0) return;
+    if (sw <= 0 || sh <= 0 || dw === 0 || dh === 0 || this.lost || this.disposed) return;
     for (
       let py = Math.floor(Math.max(0, sy) / PAGE) * PAGE;
       py < Math.min(sy + sh, dim.height);
@@ -632,69 +649,26 @@ export class GpuRasterSurface implements RasterSurface {
           y = Math.max(py, sy),
           w = Math.min(px + PAGE, sx + sw, dim.width) - x,
           h = Math.min(py + PAGE, sy + sh, dim.height) - y;
-        const page = this.page(image, px, py, dim);
+        const page = this.pages.get(image, px, py, dim);
+        // Pages are stored bottom row first: v runs up from the page's last row.
+        const r = page.region,
+          width = r ? ATLAS_PAGE : page.width,
+          height = r ? ATLAS_PAGE : page.height;
+        this.pageBounds = page.bounds;
         this.quad(
-          page.texture,
+          this.sampler(page),
           dx + ((x - sx) * dw) / sw,
           dy + ((y - sy) * dh) / sh,
           (w * dw) / sw,
           (h * dh) / sh,
-          (x - px) / page.width,
-          1 - (y - py) / page.height,
-          w / page.width,
-          -h / page.height,
+          ((r?.x ?? 0) + x - px) / width,
+          ((r?.y ?? 0) + page.height - (y - py)) / height,
+          w / width,
+          -h / height,
           WHITE,
         );
+        this.pageBounds = null;
       }
-  }
-  private page(
-    image: CanvasImageSource,
-    x: number,
-    y: number,
-    dim: { width: number; height: number },
-  ): Page {
-    let pages = this.pages.get(image);
-    if (!pages) {
-      pages = [];
-      this.pages.set(image, pages);
-    }
-    let page = pages.find((p) => p.x === x && p.y === y);
-    if (!page) {
-      const source = document.createElement("canvas");
-      source.width = Math.min(PAGE, dim.width - x);
-      source.height = Math.min(PAGE, dim.height - y);
-      const texture = new THREE.Texture(source);
-      texture.magFilter = texture.minFilter = THREE.NearestFilter;
-      texture.generateMipmaps = false;
-      page = {
-        image,
-        x,
-        y,
-        width: source.width,
-        height: source.height,
-        texture,
-        source,
-        revision: -1,
-        used: this.frame,
-      };
-      pages.push(page);
-      this.stats.textureBytes += source.width * source.height * 4;
-      this.stats.textures++;
-    }
-    const revision = rasterRevision(image);
-    if (page.revision !== revision) {
-      this.flush();
-      const ctx = page.source.getContext("2d");
-      if (!ctx) throw Error("Texture page unavailable");
-      ctx.clearRect(0, 0, page.width, page.height);
-      ctx.drawImage(image, x, y, page.width, page.height, 0, 0, page.width, page.height);
-      page.texture.needsUpdate = true;
-      page.revision = revision;
-      this.stats.uploads++;
-      this.stats.uploadedBytes += page.width * page.height * 4;
-    }
-    page.used = this.frame;
-    return page;
   }
   /** Depth equations are in final padded screen pixels. Primitive changes remain batched. */
   setDepthPlane(a?: number, b = 0, c = 0) {
@@ -768,8 +742,46 @@ export class GpuRasterSurface implements RasterSurface {
     );
     this.imageSmoothingEnabled = smooth;
   }
+  /** The batch slot of `texture` (an atlas layer's is fixed), draining the batch
+   * when the slots are full. */
+  private slot(texture: THREE.Texture | number, sourceDepth: THREE.Texture | null) {
+    if (typeof texture === "number") return ATLAS_SLOT + texture;
+    let slot = this.texture === texture ? this.textureSlot : this.batchTextures.indexOf(texture);
+    if (slot < 0) {
+      if (this.batchTextures.length === this.stats.batchTextureLimit) this.flush();
+      slot = this.batchTextures.length;
+      this.batchTextures.push(texture);
+      this.batchDepthTextures.push(sourceDepth);
+    }
+    this.texture = texture;
+    this.textureSlot = slot;
+    return slot;
+  }
+  private readonly uvRect = [0, 0, 0, 0];
+  private uvBounds(
+    texture: THREE.Texture | number,
+    smooth: boolean,
+    u: number,
+    v: number,
+    uw: number,
+    vh: number,
+  ): readonly number[] {
+    if (typeof texture === "number" && !smooth && this.pageBounds) return this.pageBounds;
+    const r = this.uvRect;
+    r[0] = Math.min(u, u + uw);
+    r[1] = Math.min(v, v + vh);
+    r[2] = Math.max(u, u + uw);
+    r[3] = Math.max(v, v + vh);
+    return r;
+  }
+  /** Atlas page rectangle for the quads being emitted (see `quad`). */
+  private pageBounds: readonly number[] | null = null;
+  /** `texture` is a batch-slot texture or a page atlas layer. Unfiltered atlas
+   * quads carry their page's rectangle as bounds: the shader clamps lookups to it,
+   * as CLAMP_TO_EDGE did for 2D pages. Filtered quads keep their own rectangle,
+   * outside which the filter's taps are transparent. */
   private quad(
-    texture: THREE.Texture,
+    texture: THREE.Texture | number,
     x: number,
     y: number,
     w: number,
@@ -830,11 +842,12 @@ export class GpuRasterSurface implements RasterSurface {
       this.depthXBounds = bounds;
       return;
     }
-    const minU = Math.min(u, u + uw),
-      minV = Math.min(v, v + vh),
-      maxU = Math.max(u, u + uw),
-      maxV = Math.max(v, v + vh);
     const smooth = !points && this.imageSmoothingEnabled && texture !== this.white;
+    const rect = this.uvBounds(texture, smooth, u, v, uw, vh);
+    const minU = rect[0] ?? 0,
+      minV = rect[1] ?? 0,
+      maxU = rect[2] ?? 0,
+      maxV = rect[3] ?? 0;
     if (smooth) {
       // One output pixel of transparent guard coverage, independent of native texel size.
       const du = uw / w,
@@ -849,15 +862,7 @@ export class GpuRasterSurface implements RasterSurface {
       vh += dv * 2;
     }
     if (this.count + 4 > QUADS * 4) this.flush();
-    let slot = this.texture === texture ? this.textureSlot : this.batchTextures.indexOf(texture);
-    if (slot < 0) {
-      if (this.batchTextures.length === this.stats.batchTextureLimit) this.flush();
-      slot = this.batchTextures.length;
-      this.batchTextures.push(texture);
-      this.batchDepthTextures.push(sourceDepth);
-    }
-    this.texture = texture;
-    this.textureSlot = slot;
+    const slot = this.slot(texture, sourceDepth);
     this.filtered ||= smooth;
     // Per-quad values are read once; only position and texture coordinates vary by corner.
     const out = this.vertices,
@@ -883,8 +888,8 @@ export class GpuRasterSurface implements RasterSurface {
       const point = points?.[corner];
       out[i] = point ? point.x : a * px + c * py + e;
       out[i + 1] = point ? point.y : b * px + d * py + f;
-      out[i + 2] = point ? point.u : u + (right ? uw : 0);
-      out[i + 3] = point ? 1 - point.v : v + (bottom ? vh : 0);
+      out[i + 2] = point ? u + point.u * uw : u + (right ? uw : 0);
+      out[i + 3] = point ? v + (1 - point.v) * vh : v + (bottom ? vh : 0);
       out[i + 4] = red;
       out[i + 5] = green;
       out[i + 6] = blue;
@@ -922,6 +927,8 @@ export class GpuRasterSurface implements RasterSurface {
     material.depthTest = this.material.depthTest;
     material.depthWrite = this.material.depthWrite;
     this.mesh.material = material;
+    const atlas = this.material.uniforms.atlas;
+    if (atlas) atlas.value = this.pages.atlas.texture;
     const limit = this.stats.batchTextureLimit;
     for (let i = 0; i < limit; i++) {
       const texture = this.batchTextures[i] ?? this.white;

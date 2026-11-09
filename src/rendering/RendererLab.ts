@@ -472,6 +472,8 @@ const lab = {
     gpu.dispose();
   },
   gpu,
+  /** Publishes an in-place change to a raster source (page re-upload checks). */
+  touchRaster,
   probeSpriteSeams,
   probeCameraStability,
   probeWorldRegistration,

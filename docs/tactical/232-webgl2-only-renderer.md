@@ -1,7 +1,7 @@
 # WebGL2-only renderer
 
 Status: parent plan; planned 2026-11-09, slices 1–4 authorized for autonomous delivery;
-slices 1–3 delivered 2026-11-09.
+slices 1–4 delivered 2026-11-09. Next: the CI step (see Slice 4 progress).
 Owner direction, 2026-11-09: "having two renderers seems useless"; remove the
 Canvas renderer and its fallback, require WebGL2, then make the GPU-only
 optimizations that Canvas parity blocked. Run tests locally before touching CI.
@@ -359,3 +359,148 @@ cadence, render p50/p95 5.1/8.4 ms).
   `GpuRenderHost.dispose` idempotence; add one if slice 4 touches the host. After
   the fixes, the boundary and first-person unit tests, typecheck, knip, the rebuild
   and the restored default-host spec pass.
+
+### Slice 4 — delivered 2026-11-09
+
+Measured on the M4 Pro's 120 Hz built-in display. "Stationary" is
+`streaming:bench -- --headed --zoom-motion --zooms=0.1 --noclip
+--viewport=1728x1117 --arrival=-380,-364 --scene=city --profile-stage=stationary`
+(2,291 scene entries, 940 actors, 2,075 props); "motion" is the goal command
+without `--profile-stage`. Two runs per row unless noted.
+
+| Step | Stationary render p50/p95 | `submit:scene` / `submit:terrain` | Draws/frame | Motion frames over cadence | Motion render p50/p95/p99 |
+| --- | --- | --- | --- | --- | --- |
+| HEAD `91566d65` | 4.7/5.3 ms | 1.30 / 0.67 ms | 91 | 20, 29 of ~935 | 4.3/7.7/8.8 ms |
+| Page atlas, direct array uploads | 4.2/4.7 | 1.21 / 0.36 | 8 | 46, 47 (regression) | 4.0/9.5/17.4 |
+| Page atlas, staged uploads | 4.1/4.7 | 1.13 / 0.34 | 8 | 9, 5 | 3.8/7.1/8.2 |
+| + direct sprites and shadows | 3.8–4.0/4.3–4.5 | 0.94–1.01 / 0.31–0.36 | 8 | 7, 7 | 3.8/7.0/8.3 |
+| + rail raster culling | — | — | 8 | 2, 4 | 3.8/6.2/7.2 |
+| Final (code split into modules) | 4.0–4.1/4.6 | 1.03–1.05 / 0.33 | 8 | 3, 3 of 956 | 4.0/6.5/7.3 |
+| After review fixes (edge clamp) | 4.0–4.1/4.6 | 0.97–1.03 / 0.34 | 8 | 3, 4 of 956 | 3.9–4.2/6.4–6.5/7.3 |
+
+- **Why the draw calls were there.** A temporary flush counter showed ~80 flushes
+  per frame, almost all from the 8 texture slots filling: 384 terrain chunk rasters
+  (256×256, ~39 flushes), actor sheets (~23), shadow ellipses (~7) and prop sheets
+  (~7). Terrain was half of it, so the atlas takes every paged image, not only
+  sprite sheets.
+- **Page atlas (`GpuPageAtlas`, `AtlasAllocator`, `GpuPages`).**
+  - One `TEXTURE_2D_ARRAY` of 1024² layers holds every page: sprite sheets,
+    terrain chunks, shadow ellipses, actor crops and overlays. Layers are packed
+    with power-of-two shelves over a 1-D row buddy system, so emptied shelves
+    merge back into whole layers.
+  - The array grows by half when full (GPU copy of the old layers) and halves when
+    eviction empties its top three quarters. Doubling went to 64 layers (256 MiB)
+    for 136 MiB of pages; growing by half stops at 41 layers (164 MiB). Before the
+    atlas the same pages used 136 MiB of separate textures. Cap: 256 MiB or
+    `MAX_ARRAY_TEXTURE_LAYERS`; beyond it a page falls back to its own texture
+    (`atlasMisses`, 0 in every run).
+  - **Uploads go through a 2D staging texture and a GPU copy.** Uploading canvases
+    straight into the array (`texSubImage3D`) read them back through the CPU:
+    1.07 ms/frame in motion and twice the missed frames (row 2). The staging
+    texture also flips rows like the old 2D pages (`UNPACK_FLIP_Y`, which WebGL
+    rejects for array uploads from canvases), so layers hold each page bottom row
+    first and nearest lookups match the old pages. Staging textures are reused per
+    page size within 8 MiB (`stagingBytes`, 5.2 MiB at 0.1×).
+  - Unfiltered atlas quads carry their page rectangle as `bounds`, and the shader
+    clamps lookups to its edge texel centers: CLAMP_TO_EDGE for the 2D page it
+    replaces. Without it a lookup exactly on a page's top or right edge would read
+    the neighboring region (another page or stale texels).
+  - A resize holds the old and new arrays until the copy completes: growing
+    41 → 62 layers peaks at ~412 MiB for one frame.
+  - Sampler budget: seven image/depth slot pairs plus the atlas (15 of WebGL2's 16
+    units); `batchTextureLimit` now reports 7. Mesh composites and the white
+    texture still use slots.
+- **Direct sprites and shadows.** `RasterSurface` gained two optional GPU-only
+  methods, `drawSpriteImage` and `fillShadow`. The shared scene drawing computes
+  the same geometry and calls them instead of save/alpha/scale/`drawImage`/restore
+  and path/ellipse/fill. The native review raster does not have them and draws
+  through Canvas state unchanged. Emergency-flash sprites keep the Canvas-shaped
+  path (their lamp draws inside the sprite's state).
+- **Flush cost through Three.js (decision: keep).** With ~8 batches per frame,
+  `flush` is 0.07–0.09 ms/frame (~10 µs per `WebGLRenderer.render`). A direct
+  WebGL draw cannot save a measurable amount.
+- **Rail raster culling.** In the slowest motion ticks the per-pixel rail
+  rasterizer (`nearestRail` over every segment of every path, for every pixel of a
+  railway tile) took ~2.5 ms (profiled). `drawRailTile` now skips segments whose
+  bounds are more than 23 px from the tile; they can never color a pixel. A unit
+  test compares every pixel of 100+ tiles, two crossing paths, against
+  `railPixel`.
+- **Same pixels.**
+  - The renderer lab's recorded color counts and bounds pass unchanged.
+  - A new spec draws the lab with the atlas and with separate page textures
+    (`setPageAtlas(false)`) at zooms 1, 0.5 (exact texel-edge ties), 0.375, 1.3
+    and 0.1, with clips and the overlay, an interior and grass: identical digests.
+  - `probeWorldRegistration(false)` repeats the composed-world probe without the
+    atlas. Every frame's nearest-sampled scenery (rows above the actor: terrain,
+    prop and slab, at zooms 0.4–1.3 including 0.5's all-tie sampling) is
+    byte-identical on hardware and SwiftShader, and centroids match exactly.
+    **Filtered (subpixel) actor edges round differently**: layer-space UVs carry
+    less precision than a small page's. Measured ≤1 color level on hardware and ≤2
+    on SwiftShader, moving actor centroids ≤0.005 px; the spec allows 0.01 px.
+    These are gameplay pixels, not review rasters (those stay native), so nothing
+    returns to review.
+  - Without world composition (explorer, renderer lab, probes) lookups use the
+    hardware's unbiased nearest rule, so a pixel center exactly on a texel edge
+    falls to interpolation rounding on both paths and can resolve differently.
+    The lifecycle spec found one at 2.5× magnification; it uses 8:3 instead.
+  - A lifecycle spec caps the atlas at 2 layers and compares with separate page
+    textures exactly (hardware and SwiftShader): growth 1 → 2 with quads queued,
+    4 pages falling back to separate textures in the same batches, a page
+    re-uploaded between two queued draws, shrinking after every page ages out,
+    and new pages reusing evicted regions. The batch-order spec now runs with and
+    without the atlas.
+- **120 Hz verdict.** Reached: 3 of 956 motion frames miss the 8.3 ms cadence
+  (0.3%, from 2–3%), render p99 7.3 ms. The remaining misses are CPU bursts from
+  terrain cache builds (`Spritesheet.drawTile` composition) and scene collection,
+  not WebGL2 limits; draw calls are no longer a factor. Larger next steps (not
+  part of this slice): `collectScene` (~1.4 ms/frame at 0.1×), and a terrain LOD
+  for overviews — 0.1× keeps 384 full-resolution chunk rasters (~96 MiB) resident.
+- Instrumentation: `streaming-profile.mjs`, the streaming bench's `pageMs` and
+  `city-audit-profile.mjs` (upload sources, `page` timing) now wrap
+  `GpuPages.get`/`remove` (the surface's page methods moved there). City audit's
+  batch census counts the atlas as one texture, so its probe output changes.
+  `ordered-texture-batch-entry.mjs` measures slot batching (180) and turns the
+  atlas off.
+- **Checks.**
+  - Full local software-WebGL run (M4 Pro, 2 workers, before the review fixes):
+    616 passed, 7 failed, 34.1 min wall (slice 1: 36.5 min); the slowest file is
+    `animal-browser.spec.ts` (10.5 min). Four failures are pre-existing (frog,
+    robin and duck ball reactions, `streaming.spec.ts:6`). `train-recovery:275`
+    (player x after reload), `workshop-standalone:9` (login click) and
+    `world-map:58` (map settle) pass on rerun under the software lane with the
+    final build.
+  - After the review fixes, software lane: `gpu-renderer` (27, including the new
+    atlas specs), those three, `railway`, `rail-crossing`, `terrain-pacing`,
+    `split-screen`, `world-explorer` and `vehicle-geometry`: 57/57, 2.6 min.
+  - Hardware GPU: `gpu-renderer` 27/27 after the review fixes. Before them,
+    `gpu-renderer`, `split-screen`, `world-explorer`, `terrain-pacing`,
+    `vehicle-geometry`, `vehicle-rendering`, `vehicle-depot`, `railway`,
+    `rail-crossing`, `authored-train`, `natural-landscapes`, `player-markers` and
+    `furniture-motion`: 67/67.
+  - Typecheck, knip, Biome on changed files (only the existing `innerText`
+    warning), full vitest (5,067 pass; the 4 `BallCommands` failures also fail
+    on HEAD), art catalog, workshop manifest, build, and
+    `streaming:bench -- --assert-ready` before and after the review fixes.
+  - Code-health ratchet: `GpuRasterSurface.ts` is 1,011 lines (1,004 at HEAD;
+    page residency moved to `GpuPages`) and its worst function is unchanged.
+- **Review** (Opus 5.5 High, Work-claude pool, bypass): approve after two
+  must-fixes, both fixed: the status line claimed the final run before it was
+  recorded, and `city-audit-profile.mjs` still instrumented the removed
+  `surface.page` (and counted atlas layers as textures). Also fixed:
+  - the page-edge clamp (above);
+  - an exact composed-world A/B for nearest-sampled scenery;
+  - lifecycle coverage (growth, fallback, mid-batch re-upload, shrink, reuse)
+    and the batch-order spec without the atlas;
+  - a bound and a stat for staging memory, and the documented resize peak;
+  - no growth for a page no layer can hold;
+  - stats updated when they change, a guard that batch slots stay below the
+    atlas slot, the probe-length assertions, comments and doc wording, and an
+    embedded-labs note.
+
+  Not changed: growth is not capped to keep old + new under 256 MiB (documented
+  instead). The accepted filtered-edge rounding stands, recorded above.
+- **CI step (next, not done).** Measure the smoke files under the software lane
+  against the 20-minute smoke budget, then adjust the workflow, timeouts and
+  shards from the local ratio. On the first hosted x64 SwiftShader run, check the
+  renderer lab's recorded color counts (validated only on ARM) and the new exact
+  atlas parity specs.

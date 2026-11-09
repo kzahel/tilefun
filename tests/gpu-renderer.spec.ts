@@ -36,7 +36,8 @@ test("world composition keeps scenery rigid and followed actors steady", async (
     (
       window as unknown as {
         rendererLab: {
-          probeWorldRegistration(): {
+          probeWorldRegistration(atlas?: boolean): {
+            zoom: number;
             relativeRange: number;
             elevationRange: number;
             actorXRange: number;
@@ -44,12 +45,46 @@ test("world composition keeps scenery rigid and followed actors steady", async (
             actorXError: number;
             actorYError: number;
             bleed: number;
+            positions: {
+              sceneryDigest: number;
+              relativeX: number;
+              elevationX: number;
+              actorX: number;
+              actorY: number;
+              bleed: number;
+            }[];
           }[];
         };
       }
     ).rendererLab.probeWorldRegistration(),
   );
   expect(composed).toHaveLength(10);
+  // The page atlas (232) samples the same texels as separate page textures:
+  // nearest-sampled scenery (terrain, props, slabs; 0.5 is all texel ties) is
+  // byte-identical. Filtered actor edges may round differently (layer-space UVs
+  // carry less precision than a small page's; measured <=1 level on hardware,
+  // <=2 on SwiftShader), moving centroids <=0.005 px.
+  const separate = (await page.evaluate(() =>
+    (
+      window as unknown as {
+        rendererLab: { probeWorldRegistration(atlas: boolean): unknown };
+      }
+    ).rendererLab.probeWorldRegistration(false),
+  )) as typeof composed;
+  expect(separate).toHaveLength(composed.length);
+  composed.forEach((report, i) => {
+    expect(report.positions).toHaveLength(7);
+    expect(separate[i]?.positions).toHaveLength(7);
+    report.positions.forEach((p, j) => {
+      const other = separate[i]?.positions[j];
+      expect(other?.sceneryDigest, `zoom ${report.zoom} phase ${j}`).toBe(p.sceneryDigest);
+      expect(other?.relativeX).toBe(p.relativeX);
+      expect(other?.elevationX).toBe(p.elevationX);
+      expect(other?.bleed).toBe(p.bleed);
+      expect(Math.abs((other?.actorX ?? 0) - p.actorX)).toBeLessThan(0.01);
+      expect(Math.abs((other?.actorY ?? 0) - p.actorY)).toBeLessThan(0.01);
+    });
+  });
   // SwiftShader (hosted CI) rasterizes with 4 subpixel bits: a subpixel-placed
   // actor snaps by up to 1/16px (measured 0.032-0.054px, steadiness and absolute
   // placement). Hardware GPUs measure <=0.005px. Scenery registration and bleed keep
@@ -1009,73 +1044,227 @@ test("GPU indexed batches preserve quad order, capacity boundaries and upload ac
 }) => {
   await page.goto("/tilefun/renderer-lab.html");
   await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
-  const result = await page.evaluate(() => {
-    const surface = (
+  // With the page atlas (232) and with separate page textures (the slot path).
+  for (const atlas of [true, false]) {
+    const result = await page.evaluate((atlas) => {
+      const surface = (
+        window as unknown as {
+          rendererLab: {
+            gpu: { surface: import("../src/rendering/GpuRasterSurface.js").GpuRasterSurface };
+          };
+        }
+      ).rendererLab.gpu.surface;
+      surface.setPageAtlas(atlas);
+      const reference = document.createElement("canvas");
+      reference.width = surface.canvas.width;
+      reference.height = surface.canvas.height;
+      const ctx = reference.getContext("2d");
+      if (!ctx) throw Error("Missing reference context");
+      ctx.imageSmoothingEnabled = false;
+      const images = ["#2c85b7", "#e4a64c", "#6742a1"].map((color) => {
+        const image = document.createElement("canvas");
+        image.width = image.height = 3;
+        const paint = image.getContext("2d");
+        if (!paint) throw Error("Missing source context");
+        paint.fillStyle = color;
+        paint.fillRect(0, 0, 3, 3);
+        surface.drawImage(image, 0, 0);
+        return image;
+      });
+      surface.flush();
+      const before = { ...surface.stats };
+      surface.beginFrame();
+      // Four sources (white and three images: one atlas sampler, or four slots), more
+      // than two full batches. Overlap and changing tint/alpha expose index order
+      // errors; the final partial batch must not draw stale quads.
+      for (const target of [ctx, surface]) {
+        target.save();
+        target.translate(3, 5);
+        target.scale(2, 2);
+        for (let i = 0; i < 4101; i++) {
+          target.fillStyle = i % 2 ? "#28a45d" : "#9631e2";
+          // Use a representable 8-bit alpha, keeping the one-channel tolerance
+          // independent of Canvas/WebGL rounding exactly halfway between bytes.
+          target.globalAlpha = i % 3 ? 1 : 128 / 255;
+          const x = (i * 7) % 160,
+            y = (i * 11) % 120;
+          const image = images[i % images.length];
+          if (i % 4 && image) target.drawImage(image, x, y, 4, 5);
+          else target.fillRect(x, y, 4, 5);
+        }
+        target.restore();
+      }
+      surface.flush();
+      const copy = document.createElement("canvas");
+      copy.width = reference.width;
+      copy.height = reference.height;
+      const gpuCtx = copy.getContext("2d");
+      if (!gpuCtx) throw Error("Missing GPU capture context");
+      gpuCtx.drawImage(surface.canvas, 0, 0);
+      const actual = gpuCtx.getImageData(0, 0, copy.width, copy.height).data;
+      const expected = ctx.getImageData(0, 0, copy.width, copy.height).data;
+      let maxError = 0;
+      for (let i = 0; i < actual.length; i++)
+        maxError = Math.max(maxError, Math.abs((actual[i] ?? 0) - (expected[i] ?? 0)));
+      return {
+        maxError,
+        uploaded: surface.stats.vertexUploadedBytes - before.vertexUploadedBytes,
+        draws: surface.stats.drawCalls - before.drawCalls,
+      };
+    }, atlas);
+    expect(result.maxError).toBeLessThanOrEqual(1);
+    expect(result.draws).toBe(3);
+    expect(result.uploaded).toBe(4101 * 4 * 20 * 4);
+  }
+});
+
+test("the page atlas draws exactly the pixels of separate page textures (232)", async ({
+  page,
+}) => {
+  // A fresh lab per mode: grass and interior change the lab's view for good.
+  const frames = async (atlas: boolean) => {
+    await page.goto("/tilefun/renderer-lab.html");
+    await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+    return page.evaluate(async (atlas) => {
+      type Lab = {
+        gpu: import("../src/rendering/GpuRenderBackend.js").GpuRenderBackend;
+        setZoom(value: number): unknown;
+        setOverlay(value: boolean): unknown;
+        setClips(value: boolean): unknown;
+        setInterior(value: boolean): Promise<unknown>;
+        setGrassDetail(zoom: number, fixedProjection?: boolean): Promise<unknown>;
+        digest(): string;
+      };
+      const lab = (window as unknown as { rendererLab: Lab }).rendererLab;
+      const surface = lab.gpu.surface;
+      surface.setPageAtlas(atlas);
+      // Integer, half (exact texel-edge ties), fractional and overview zooms;
+      // clips, the overlay raster, an interior and grass cover the other page users.
+      const digests: string[] = [];
+      for (const zoom of [1, 0.5, 0.375, 1.3, 0.1]) {
+        lab.setZoom(zoom);
+        digests.push(lab.digest());
+      }
+      lab.setZoom(1);
+      lab.setClips(true);
+      lab.setOverlay(true);
+      digests.push(lab.digest());
+      lab.setClips(false);
+      lab.setOverlay(false);
+      await lab.setInterior(true);
+      digests.push(lab.digest());
+      await lab.setInterior(false);
+      await lab.setGrassDetail(0.5, true);
+      digests.push(lab.digest());
+      return { digests, layers: surface.stats.atlasLayers, misses: surface.stats.atlasMisses };
+    }, atlas);
+  };
+  const atlas = await frames(true);
+  const separate = await frames(false);
+  expect(atlas.layers).toBeGreaterThan(0);
+  expect(atlas.misses).toBe(0);
+  expect(separate.layers).toBe(0);
+  expect(new Set(atlas.digests).size).toBe(atlas.digests.length);
+  expect(atlas.digests).toEqual(separate.digests);
+});
+
+test("the page atlas grows, falls back at its cap, re-uploads mid-batch and reuses evicted space (232)", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const run = (atlas: boolean) =>
+    page.evaluate((atlas) => {
+      const lab = (
+        window as unknown as {
+          rendererLab: {
+            gpu: { surface: import("../src/rendering/GpuRasterSurface.js").GpuRasterSurface };
+            touchRaster(source: object): void;
+          };
+        }
+      ).rendererLab;
+      const surface = lab.gpu.surface;
+      // Two layers hold 32 of the 256² pages: the atlas grows 1 → 2, and the rest
+      // fall back to separate textures in the same batches.
+      surface.setPageAtlas(atlas, 2);
+      const paint = (image: HTMLCanvasElement, i: number, shade: number) => {
+        const ctx = image.getContext("2d");
+        if (!ctx) throw Error("Missing source context");
+        ctx.fillStyle = `hsl(${(i * 47) % 360} 70% ${shade}%)`;
+        ctx.fillRect(0, 0, 256, 256);
+        // A distinct top row: the page edge that layers store last (see GpuPageAtlas).
+        ctx.fillStyle = `hsl(${(i * 47 + 180) % 360} 90% 50%)`;
+        ctx.fillRect(0, 0, 256, 1);
+      };
+      const images = (shade: number) =>
+        Array.from({ length: 36 }, (_, i) => {
+          const image = document.createElement("canvas");
+          image.width = image.height = 256;
+          paint(image, i, shade);
+          return image;
+        });
+      const read = () => {
+        const copy = document.createElement("canvas");
+        copy.width = surface.canvas.width;
+        copy.height = surface.canvas.height;
+        const ctx = copy.getContext("2d");
+        if (!ctx) throw Error("Missing capture context");
+        ctx.drawImage(surface.canvas, 0, 0);
+        let hash = 0x811c9dc5;
+        for (const value of ctx.getImageData(0, 0, copy.width, copy.height).data)
+          hash = Math.imul(hash ^ value, 0x01000193);
+        return hash >>> 0;
+      };
+      // Each page's top-left corner, at whole and half-pixel rows: a half-pixel row
+      // puts pixel centers on the page's top edge (CLAMP_TO_EDGE for 2D pages).
+      const draw = (sources: HTMLCanvasElement[]) =>
+        sources.forEach((image, i) => {
+          const x = (i % 18) * 21,
+            y = Math.floor(i / 18) * 40;
+          surface.drawImage(image, 0, 0, 8, 8, x, y, 8, 8);
+          surface.drawImage(image, 0, 0, 8, 8, x + 10, y + 0.5, 8, 8);
+          // Magnified 8:3, so no pixel center lands exactly on a texel edge: unbiased
+          // hardware nearest resolves exact ties by interpolation rounding.
+          surface.drawImage(image, 0, 0, 6, 6, x, y + 12, 16, 16);
+        });
+      const first = images(45);
+      surface.beginFrame();
+      draw(first);
+      // A queued quad keeps the old pixels; the re-uploaded page draws the new ones.
+      const changed = first[0];
+      if (!changed) throw Error("Missing page");
+      paint(changed, 0, 75);
+      lab.touchRaster(changed);
+      surface.drawImage(changed, 0, 0, 8, 8, 0, 90, 8, 8);
+      surface.flush();
+      const grown = { frame: read(), layers: surface.stats.atlasLayers };
+      const misses = surface.stats.atlasMisses;
+      // Age every page out; the emptied array shrinks.
+      for (let i = 0; i < 125; i++) surface.beginFrame();
+      const shrunk = surface.stats.atlasLayers;
+      // New pages reuse evicted regions; their stale texels must not show.
+      surface.beginFrame();
+      draw(images(30));
+      surface.flush();
+      return { grown, misses, shrunk, reused: read() };
+    }, atlas);
+  const atlas = await run(true);
+  const separate = await run(false);
+  await page.evaluate(() =>
+    (
       window as unknown as {
         rendererLab: {
           gpu: { surface: import("../src/rendering/GpuRasterSurface.js").GpuRasterSurface };
         };
       }
-    ).rendererLab.gpu.surface;
-    const reference = document.createElement("canvas");
-    reference.width = surface.canvas.width;
-    reference.height = surface.canvas.height;
-    const ctx = reference.getContext("2d");
-    if (!ctx) throw Error("Missing reference context");
-    ctx.imageSmoothingEnabled = false;
-    const images = ["#2c85b7", "#e4a64c", "#6742a1"].map((color) => {
-      const image = document.createElement("canvas");
-      image.width = image.height = 3;
-      const paint = image.getContext("2d");
-      if (!paint) throw Error("Missing source context");
-      paint.fillStyle = color;
-      paint.fillRect(0, 0, 3, 3);
-      surface.drawImage(image, 0, 0);
-      return image;
-    });
-    surface.flush();
-    const before = { ...surface.stats };
-    surface.beginFrame();
-    // Four textures, more than two full batches. Overlap and changing tint/alpha
-    // expose index order errors; the final partial batch must not draw stale quads.
-    for (const target of [ctx, surface]) {
-      target.save();
-      target.translate(3, 5);
-      target.scale(2, 2);
-      for (let i = 0; i < 4101; i++) {
-        target.fillStyle = i % 2 ? "#28a45d" : "#9631e2";
-        // Use a representable 8-bit alpha, keeping the one-channel tolerance
-        // independent of Canvas/WebGL rounding exactly halfway between bytes.
-        target.globalAlpha = i % 3 ? 1 : 128 / 255;
-        const x = (i * 7) % 160,
-          y = (i * 11) % 120;
-        const image = images[i % images.length];
-        if (i % 4 && image) target.drawImage(image, x, y, 4, 5);
-        else target.fillRect(x, y, 4, 5);
-      }
-      target.restore();
-    }
-    surface.flush();
-    const copy = document.createElement("canvas");
-    copy.width = reference.width;
-    copy.height = reference.height;
-    const gpuCtx = copy.getContext("2d");
-    if (!gpuCtx) throw Error("Missing GPU capture context");
-    gpuCtx.drawImage(surface.canvas, 0, 0);
-    const actual = gpuCtx.getImageData(0, 0, copy.width, copy.height).data;
-    const expected = ctx.getImageData(0, 0, copy.width, copy.height).data;
-    let maxError = 0;
-    for (let i = 0; i < actual.length; i++)
-      maxError = Math.max(maxError, Math.abs((actual[i] ?? 0) - (expected[i] ?? 0)));
-    return {
-      maxError,
-      uploaded: surface.stats.vertexUploadedBytes - before.vertexUploadedBytes,
-      draws: surface.stats.drawCalls - before.drawCalls,
-    };
-  });
-  expect(result.maxError).toBeLessThanOrEqual(1);
-  expect(result.draws).toBe(3);
-  expect(result.uploaded).toBe(4101 * 4 * 20 * 4);
+    ).rendererLab.gpu.surface.setPageAtlas(true, 64),
+  );
+  expect(atlas.grown.layers).toBe(2);
+  expect(atlas.misses).toBe(4);
+  expect(atlas.shrunk).toBe(1);
+  expect(separate.grown.layers).toBe(0);
+  expect(atlas.grown.frame).toBe(separate.grown.frame);
+  expect(atlas.reused).toBe(separate.reused);
 });
 
 test("shared grass LOD fades linearly, hides when far and returns at ordinary zoom", async ({

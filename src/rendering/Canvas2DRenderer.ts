@@ -141,21 +141,19 @@ function drawOneShadow(
     );
     return;
   }
-  ctx.save();
   const subpixel = camera.worldRaster && item.subpixel && !pixelExactShadows;
+  const x = subpixel ? feetScreen.sx : Math.floor(feetScreen.sx),
+    y = subpixel ? feetScreen.sy - terrainOffset : Math.floor(feetScreen.sy - terrainOffset);
+  if (ctx.fillShadow) {
+    ctx.fillShadow(x, y, shadowW / 2, shadowH / 2, subpixel === true);
+    return;
+  }
+  ctx.save();
   if (subpixel) ctx.imageSmoothingEnabled = true;
   ctx.globalAlpha = 0.3;
   ctx.fillStyle = "#000";
   ctx.beginPath();
-  ctx.ellipse(
-    subpixel ? feetScreen.sx : Math.floor(feetScreen.sx),
-    subpixel ? feetScreen.sy - terrainOffset : Math.floor(feetScreen.sy - terrainOffset),
-    shadowW / 2,
-    shadowH / 2,
-    0,
-    0,
-    Math.PI * 2,
-  );
+  ctx.ellipse(x, y, shadowW / 2, shadowH / 2, 0, 0, Math.PI * 2);
   ctx.fill();
   ctx.restore();
 }
@@ -200,21 +198,35 @@ function drawSprite(
   item: SpriteItem,
   sheets: Map<string, Spritesheet>,
 ): void {
-  if (item.flashHidden) return;
-  if (ctx.meshBody?.(camera, item)) return;
-  if (drawCurveTrain(ctx, camera, item, sheets)) return;
-  if (drawTransporterFallback(ctx, camera, item, sheets, drawSprite)) return;
+  if (item.flashHidden || drawSpecialBody(ctx, camera, item, sheets)) return;
+  const sheet = sheets.get(item.sheetKey);
+  if (!sheet) return;
+  drawSpriteFrame(ctx, camera, item, sheet);
+  drawBedContentsFallback(ctx, camera, item, sheets, drawSprite);
+}
+
+/** Mesh bodies and composite vehicle fallbacks; true when one drew the item. */
+function drawSpecialBody(
+  ctx: RasterSurface,
+  camera: Camera,
+  item: SpriteItem,
+  sheets: Map<string, Spritesheet>,
+): boolean {
+  if (ctx.meshBody?.(camera, item)) return true;
+  if (drawCurveTrain(ctx, camera, item, sheets)) return true;
+  if (drawTransporterFallback(ctx, camera, item, sheets, drawSprite)) return true;
   if (drawTowingFallback(ctx, camera, item, sheets, drawEmergencyFlash)) {
     drawEmergencyFlash(ctx, camera, item);
-    return;
+    return true;
   }
   if (drawDumpTruckFallback(ctx, camera, item, sheets)) {
     drawBedContentsFallback(ctx, camera, item, sheets, drawSprite);
-    return;
+    return true;
   }
-  const sheet = sheets.get(item.sheetKey);
-  if (!sheet) return;
+  return false;
+}
 
+function drawSpriteFrame(ctx: RasterSurface, camera: Camera, item: SpriteItem, sheet: Spritesheet) {
   // Position is at feet (bottom-center of the sprite frame).
   // Offset draw origin so sprite frame is centered horizontally
   // and extends upward from feet.
@@ -245,32 +257,9 @@ function drawSprite(
     : Math.floor(end.sy) - Math.floor(screen.sy);
   const dx = subpixel ? end.sx - halfW * camera.scale - destW / 2 : Math.floor(screen.sx);
   const dy = subpixel ? end.sy - destH : Math.floor(screen.sy);
-  const drawImage =
-    (subpixel ? ctx.drawSubpixelImage : camera.worldRaster ? ctx.drawStableImage : undefined) ??
-    ctx.drawImage;
-
-  ctx.save();
-  if (item.alpha !== undefined) {
-    ctx.globalAlpha = Math.max(0, Math.min(1, item.alpha));
-  }
-
-  if (item.flipX) {
-    ctx.scale(-1, 1);
-    drawImage.call(
-      ctx,
-      sheet.image,
-      sourceX,
-      sourceY,
-      item.spriteWidth,
-      item.spriteHeight,
-      -(dx + destW),
-      dy,
-      destW,
-      destH,
-    );
-  } else {
-    drawImage.call(
-      ctx,
+  const alpha = item.alpha === undefined ? undefined : Math.max(0, Math.min(1, item.alpha));
+  if (ctx.drawSpriteImage && !item.emergencyFlash) {
+    ctx.drawSpriteImage(
       sheet.image,
       sourceX,
       sourceY,
@@ -280,12 +269,33 @@ function drawSprite(
       dy,
       destW,
       destH,
+      item.flipX,
+      alpha,
+      Boolean(subpixel),
     );
+    return;
   }
+  const drawImage =
+    (subpixel ? ctx.drawSubpixelImage : camera.worldRaster ? ctx.drawStableImage : undefined) ??
+    ctx.drawImage;
 
+  ctx.save();
+  if (alpha !== undefined) ctx.globalAlpha = alpha;
+  if (item.flipX) ctx.scale(-1, 1);
+  drawImage.call(
+    ctx,
+    sheet.image,
+    sourceX,
+    sourceY,
+    item.spriteWidth,
+    item.spriteHeight,
+    item.flipX ? -(dx + destW) : dx,
+    dy,
+    destW,
+    destH,
+  );
   drawEmergencyFlash(ctx, camera, item);
   ctx.restore();
-  drawBedContentsFallback(ctx, camera, item, sheets, drawSprite);
 }
 
 function drawEmergencyFlash(ctx: RasterSurface, camera: Camera, item: SpriteItem) {

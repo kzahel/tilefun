@@ -5,6 +5,8 @@ import { touchRaster } from "../../src/rendering/RasterSurface.ts";
 
 const canvas = document.querySelector("canvas"),
   surface = new GpuRasterSurface(canvas);
+// This probe measures sampler-slot batching (180); keep pages out of the 232 atlas.
+surface.setPageAtlas(false);
 const sources = Array.from({ length: 12 }, (_, i) => {
   const c = document.createElement("canvas");
   c.width = 16 + i;
