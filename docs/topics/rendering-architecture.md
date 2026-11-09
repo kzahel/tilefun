@@ -90,7 +90,8 @@ desktop/Android validation delivered; WebGL2 gameplay backend and shared mesh-ca
 GPU + 3D car is the owner-selected default for the game and every embedded lab,
 and since 2026-11-09 the only GPU mode (the GPU sprite-vehicle mode is removed);
 Canvas2D sprites are legacy, selected only by `?renderer=legacy-canvas` (older
-alias `canvas`) or the unsupported-WebGL2 fallback.
+alias `canvas`) or the unsupported-WebGL2 fallback. [232](../tactical/232-webgl2-only-renderer.md)
+(owner decision 2026-11-09) removes Canvas and requires WebGL2.
 Bounded unchanged car images and ordered multi-texture GPU batches are delivered.
 Updated: 2026-11-09.
 
