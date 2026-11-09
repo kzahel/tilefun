@@ -11,6 +11,7 @@ import type { SavedVehicle } from "../traffic/VehicleRegistry.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import type { World } from "../world/World.js";
 import { ChunkResidency } from "./ChunkResidency.js";
+import { admitDemand, DemandAdmission, SHED_ABOVE } from "./DemandAdmission.js";
 import { around, type ChunkDemand, InterestManager } from "./InterestManager.js";
 import type { PlayerSession } from "./PlayerSession.js";
 
@@ -26,7 +27,10 @@ interface ChunkPayload {
 export class RealmStreaming {
   readonly interest = new InterestManager();
   readonly residency: ChunkResidency<ChunkPayload>;
+  readonly admission = new DemandAdmission();
   demand = new Map<string, ChunkDemand>();
+  /** Demanded chunks currently withheld by admission, for diagnostics. */
+  shed = 0;
   private request = 0;
   private closed = false;
   constructor(
@@ -38,13 +42,13 @@ export class RealmStreaming {
     readonly forgetFeatures: (records: FeatureRecord[], key: string) => void,
     readonly generate: (key: string, seeded: boolean) => void,
     readonly traffic?: VehicleRecords,
+    readonly budget: { readonly actors: number; readonly props: number } = PERSISTENCE_BUDGET,
   ) {
     world.chunks.managed = true;
     this.residency = new ChunkResidency({
-      canLoad: () =>
-        !saves.pressured &&
-        records.entities.entities.length < PERSISTENCE_BUDGET.actors &&
-        props.props.length < PERSISTENCE_BUDGET.props,
+      // Start loads only below the shed threshold: in-flight loads keep headroom
+      // under the hard budget while shed chunks retire, so they wait rather than fail.
+      canLoad: () => !saves.pressured && this.usage() < SHED_ABOVE,
       load: async (key) => {
         const [terrain, entities, props, features, origin, vehicles] = await Promise.all([
           saves.loadChunk(key),
@@ -92,12 +96,12 @@ export class RealmStreaming {
               (actor) => actor.kind === "entity" && !records.byId.has(actor.persistentId),
             ).length +
             payload.traffic.length >
-            PERSISTENCE_BUDGET.actors ||
+            budget.actors ||
           props.props.length +
             payload.actors.filter(
               (actor) => actor.kind === "prop" && !records.byId.has(actor.persistentId),
             ).length >
-            PERSISTENCE_BUDGET.props
+            budget.props
         )
           throw new Error("Actor residency budget exceeded.");
         const [cx = 0, cy = 0] = key.split(",").map(Number);
@@ -218,8 +222,24 @@ export class RealmStreaming {
     this.pump();
   }
   private pump(): void {
-    this.demand = this.interest.demand(Date.now());
+    const now = Date.now();
+    const demand = this.interest.demand(now);
+    const limit = this.admission.update(
+      this.usage(),
+      this.residency.holders.size,
+      demand.size,
+      now,
+    );
+    this.demand = admitDemand(demand, limit);
+    this.shed = demand.size - this.demand.size;
     this.residency.reconcile(this.demand);
+  }
+  /** Larger fraction of the actor or prop residency budget in use. */
+  usage(): number {
+    return Math.max(
+      this.records.entities.entities.length / this.budget.actors,
+      this.props.props.length / this.budget.props,
+    );
   }
   rangeReady(range: ChunkRange): boolean {
     for (let cy = range.minCy; cy <= range.maxCy; cy++)

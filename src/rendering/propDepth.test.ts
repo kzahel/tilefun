@@ -5,7 +5,13 @@ import type { Prop } from "../entities/Prop.js";
 import type { World } from "../world/World.js";
 import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
-import { depthAboveProps, PropDepthCache, propDepthSurfaces } from "./propDepth.js";
+import { PropDepthIndex } from "./PropDepthIndex.js";
+import {
+  depthAboveProps,
+  PropDepthCache,
+  type PropDepthSurface,
+  propDepthSurfaces,
+} from "./propDepth.js";
 import { SceneFrame } from "./SceneFrame.js";
 import type { TileRenderer } from "./TileRenderer.js";
 
@@ -210,4 +216,39 @@ describe("cached prop depth metadata", () => {
     expect(frame.propDepth.getDiagnostics().residentProps).toBe(0);
     expect(collect([structuredClone(bed)], frame)).toEqual(collect([structuredClone(bed)]));
   });
+});
+
+it("indexes depth surfaces without changing any actor's depth", () => {
+  let seed = 7;
+  const r = () => {
+    seed = (seed * 1664525 + 1013904223) >>> 0;
+    return seed / 2 ** 32;
+  };
+  const surfaces: PropDepthSurface[] = Array.from({ length: 600 }, (_, i) => {
+    const left = r() * 6000 - 1000,
+      top = r() * 6000 - 1000;
+    // Mix small props, long low decks spanning many cells and one unbounded surface.
+    const width = i === 0 ? Infinity : i % 50 === 0 ? 3000 : 4 + r() * 200,
+      height = i % 50 === 0 ? 40 : 4 + r() * 200;
+    return {
+      bounds: { left, top, right: left + width, bottom: top + height },
+      topZ: r() * 40,
+      depth: top + height,
+    };
+  });
+  const index = new PropDepthIndex(surfaces);
+  let raised = 0;
+  for (let i = 0; i < 2000; i++) {
+    const left = r() * 6000 - 1000,
+      top = r() * 6000 - 1000;
+    const footprint =
+      i % 400 === 0
+        ? { left: -5000, top: -5000, right: 50000, bottom: 50000 }
+        : { left, top, right: left + 2 + r() * 40, bottom: top + 2 + r() * 20 };
+    const feetZ = r() * 50;
+    const expected = depthAboveProps(top, footprint, feetZ, surfaces);
+    expect(depthAboveProps(top, footprint, feetZ, index)).toBe(expected);
+    if (expected !== top) raised++;
+  }
+  expect(raised).toBeGreaterThan(100);
 });

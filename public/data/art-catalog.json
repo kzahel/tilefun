@@ -34613,7 +34613,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:419"
+          "source": "src/rendering/scene/EntitySprites.ts:430"
         },
         {
           "system": "Gameplay",
@@ -35507,7 +35507,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:251"
+          "source": "src/rendering/scene/EntitySprites.ts:262"
         },
         {
           "system": "Gameplay",
@@ -35551,11 +35551,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:298"
+          "source": "src/server/Realm.ts:299"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:1323"
+          "source": "src/server/Realm.ts:1324"
         },
         {
           "system": "Gameplay",
@@ -35563,15 +35563,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:145"
+          "source": "src/server/RealmStreaming.ts:149"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:211"
+          "source": "src/server/RealmStreaming.ts:215"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:212"
+          "source": "src/server/RealmStreaming.ts:216"
         },
         {
           "system": "Gameplay",

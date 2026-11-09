@@ -37,10 +37,7 @@ export function probeViewRegions() {
   };
   const reports = [];
   for (const mode of ["canvas", "gpu"] as const) {
-    const host =
-      mode === "canvas"
-        ? createCanvasRenderHost(output)
-        : createGpuRenderHost(output, { meshes: false });
+    const host = mode === "canvas" ? createCanvasRenderHost(output) : createGpuRenderHost(output);
     if (mode === "gpu" && output.dataset.renderer !== "gpu")
       throw Error("Region probe requires real WebGL");
     (host.renderer as RasterRenderBackend).setAssets(sheets);

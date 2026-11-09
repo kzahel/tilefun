@@ -7,7 +7,8 @@ import type { RenderRegion } from "./ViewLayout.js";
 /** Browser composition only. A GPU host may provide a separate 2D UI overlay;
  * world presentation never receives its context or loaded image resources.
  */
-export type RendererMode = "canvas" | "gpu" | "gpu-mesh";
+/** GPU always draws vehicles as 3D meshes; Canvas is the legacy/no-WebGL path. */
+export type RendererMode = "canvas" | "gpu";
 
 export interface RenderHost {
   readonly rendererControl?: {

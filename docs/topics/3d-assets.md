@@ -38,7 +38,7 @@ Fixed-view GPU gameplay integration is delivered and is the main-game default;
 Local SDXL/MV-Adapter/U2Net/TRELLIS.2 workflow and ten current-asset stage sheets
 are delivered. Volume is feasible; conditioning, masks, fidelity and registration
 remain unresolved. Game clipping is unchanged.
-Updated: 2026-10-19.
+Updated: 2026-11-09.
 
 Owns reconstructing coherent visual assets from sprite artwork, their relationship
 to physical proxies, and cross-view quality. [Rendering architecture](rendering-architecture.md)
@@ -227,13 +227,13 @@ forward length, roof height and circular tire geometry stay unchanged. Heading
 follows displayed motion immediately and holds at rest. Missing/loading/failed
 models retain the complete sprite. GPU + 3D car is the
 owner-selected main-game default as of 2026-10-11. The game selector is
-**Debug → Renderer → GPU + 3D car**, or `?renderer=gpu&meshes`.
+**Debug → Renderer → GPU + 3D cars**, the only GPU mode since 2026-11-09.
 
 All six compact colors now use their own assets with this adapter. For testing, append `&allcars3d`
-to `?renderer=gpu&meshes` in the game or Traffic lab: all `vehicle-v1:` road
+to the game URL or Traffic lab: all `vehicle-v1:` road
 vehicles, including buses/vans, use the blue appearance. Their original types,
-sprites, colliders and persistence remain unchanged; trains are excluded. Canvas
-and GPU sprites still draw their original sprites. The override is view-local and
+sprites, colliders and persistence remain unchanged; trains are excluded. Legacy
+Canvas still draws their original sprites. The override is view-local and
 survives renderer switches, scene resets and refresh via the URL.
 Simulation, prediction, input, cardinal colliders, roof support and persistence
 are unchanged. Wheel steering stays neutral; authored clearance is

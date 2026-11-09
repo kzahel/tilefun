@@ -12,11 +12,15 @@ import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js
 import { SaveManager } from "../persistence/SaveManager.js";
 import { required } from "../shared/required.js";
 import { World } from "../world/World.js";
+import { admitDemand, DemandAdmission, MIN_ADMITTED_CHUNKS } from "./DemandAdmission.js";
 import { around } from "./InterestManager.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { RealmStreaming } from "./RealmStreaming.js";
 
-async function fixture() {
+async function fixture(
+  budget?: { actors: number; props: number },
+  actorsPerChunk: (cx: number) => number = () => 1,
+) {
   const executor = new MemoryRecordStore();
   const store = new RecordPersistenceStore(executor);
   const saves = new SaveManager(store);
@@ -41,12 +45,16 @@ async function fixture() {
     (key, seeded) => {
       if (seeded) return;
       const [cx = 0, cy = 0] = key.split(",").map(Number);
-      const actor = createChicken(cx * 256 + 128, cy * 256 + 128);
-      actor.proceduralId = `origin:${key}`;
-      entities.spawn(actor);
+      for (let i = 0; i < actorsPerChunk(cx); i++) {
+        const actor = createChicken(cx * 256 + 128 + i * 8, cy * 256 + 128);
+        actor.proceduralId = i ? `origin:${key}:${i}` : `origin:${key}`;
+        entities.spawn(actor);
+      }
       births++;
       if (faults.generate) throw new Error("injected publication failure");
     },
+    undefined,
+    budget,
   );
   const visit = async (cx: number) => {
     streaming.interest.set("test", [{ range: around(cx, 0, 0), activity: 2, reason: "player" }]);
@@ -218,4 +226,75 @@ it("loads attachment support at the resolved destination before the first parent
   } finally {
     await f.close();
   }
+});
+
+it("sheds the farthest overview chunks under actor pressure so the player's chunks still load", async () => {
+  // Denser land lies east, so trailing chunks free less than leading ones need.
+  const f = await fixture({ actors: 400, props: 8192 }, (cx) => (cx >= 8 ? 3 : 1));
+  try {
+    const session = new PlayerSession("one", createPlayer(128, 128));
+    // A zoomed-out view: 23×23 chunks with the render-distance ring.
+    const view = (cx: number) => [around(cx, 0, 10)];
+    // One update per authority tick; each retires at most a few chunks.
+    const settle = async (cx: number) => {
+      for (let i = 0; i < 400; i++) {
+        f.streaming.update(view(cx), [session]);
+        await f.streaming.residency.settle();
+      }
+      f.streaming.update(view(cx), [session]);
+    };
+    await settle(0);
+    expect(f.entities.entities.length).toBeLessThan(400);
+    expect(f.streaming.shed).toBeGreaterThan(0);
+    expect(f.streaming.demand.size).toBeGreaterThanOrEqual(MIN_ADMITTED_CHUNKS);
+    expect(f.streaming.supported(session.player)).toBe(true);
+    // Only the far edge is withheld: every admitted chunk is nearer than any shed one.
+    const distance = (key: string) => {
+      const [cx = 0, cy = 0] = key.split(",").map(Number);
+      return Math.abs(cx) + Math.abs(cy);
+    };
+    const admitted = [...f.streaming.demand.keys()].map(distance);
+    expect(Math.max(...admitted)).toBeLessThanOrEqual(12);
+    for (const key of f.streaming.demand.keys())
+      expect(f.streaming.residency.ready(key)).toBe(true);
+
+    // Walking a few chunks east keeps most of the overview demanded. The chunks
+    // ahead of the player must still load instead of stalling behind far ones.
+    session.player.position.wx = 4 * 256 + 128;
+    await settle(4);
+    expect(f.streaming.supported(session.player)).toBe(true);
+    for (let cy = -10; cy <= 10; cy++)
+      for (let cx = 4 - 10; cx <= 4 + 10; cx++)
+        if (Math.abs(cx - 4) + Math.abs(cy) <= 10)
+          expect(f.streaming.residency.ready(`${cx},${cy}`), `${cx},${cy}`).toBe(true);
+    expect(f.streaming.residency.diagnostics().lastError).toBe(null);
+  } finally {
+    await f.close();
+  }
+}, 30000);
+
+it("admits demand in priority order, keeps simulated chunks and grows back when there is room", () => {
+  const demand = new Map(
+    Array.from({ length: 6 }, (_, i) => [
+      `${i},0`,
+      { cx: i, cy: 0, activity: (i === 5 ? 1 : 0) as 0 | 1, priority: i },
+    ]),
+  );
+  expect([...admitDemand(demand, 2).keys()]).toEqual(["0,0", "1,0", "5,0"]);
+  expect(admitDemand(demand, 6)).toBe(demand);
+
+  const admission = new DemandAdmission();
+  expect(admission.update(0.5, 600, 1000, 0)).toBe(Infinity);
+  // 95% used by 600 chunks: shrink toward 75%, never below the floor.
+  expect(admission.update(0.95, 600, 1000, 0)).toBe(Math.floor((0.75 * 600) / 0.95));
+  // Still crowded with fewer chunks resident means denser chunks: shrink further.
+  expect(admission.update(0.95, 300, 1000, 0)).toBe(MIN_ADMITTED_CHUNKS);
+  expect(new DemandAdmission().update(0.99, 200, 1000, 0)).toBe(MIN_ADMITTED_CHUNKS);
+  // In the hold band nothing changes; below it, growth is paced and ends unlimited.
+  const held = admission.limit;
+  expect(admission.update(0.7, 256, 1000, 5000)).toBe(held);
+  expect(admission.update(0.4, 256, 1000, 5000)).toBeGreaterThan(held);
+  const grown = admission.limit;
+  expect(admission.update(0.4, 256, 1000, 5500)).toBe(grown);
+  expect(admission.update(0.4, 256, 300, 7000)).toBe(Infinity);
 });

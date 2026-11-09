@@ -33,6 +33,8 @@ import {
 } from "../EntityMeshPose.js";
 import { vehicleMeshRadius, yawOrientation } from "../MeshPresentation.js";
 import { projectShadow, surfaceDecals } from "../ProjectedDecals.js";
+import type { PropDepthIndex } from "../PropDepthIndex.js";
+import { propDepthLookup } from "../PropDepthIndex.js";
 import { depthAboveProps, type PropDepthSurface, propDepthSurfaces } from "../propDepth.js";
 import type { SceneFrame } from "../SceneFrame.js";
 import type { SceneItem, SpriteItem } from "../SceneItem.js";
@@ -55,7 +57,7 @@ export interface EntityDepth {
   readonly planarProps: readonly Prop[];
   readonly hasExcavations: boolean;
   readonly movingRoofs: readonly Entity[];
-  readonly depthSurfaces: readonly PropDepthSurface[];
+  readonly depthSurfaces: readonly PropDepthSurface[] | PropDepthIndex;
 }
 
 /** Everything the actor stage reads; it appends sprites and their shadow decals to `items`. */
@@ -137,7 +139,12 @@ export function entityDepth(
   const depthSurfaces = vehicleSurfaces.length
     ? [...propSurfaces, ...vehicleSurfaces]
     : propSurfaces;
-  return { planarProps, hasExcavations, movingRoofs, depthSurfaces };
+  return {
+    planarProps,
+    hasExcavations,
+    movingRoofs,
+    depthSurfaces: propDepthLookup(depthSurfaces),
+  };
 }
 
 /** Cull, interpolate and append every visible actor in entity order. */
@@ -210,13 +217,9 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefine
   const sortKey = entitySortKey(pass, e, pos, zOffset, parents);
   const mesh = entityMesh(pass, e, pos, meshAsset, meshRadius);
   const { meshGroundShadow, hasShadow } = shadow;
+  // One fixed literal, then only the optional fields that apply: conditional
+  // spreads take V8's generic object-clone path, measurable at ~1,000 actors (0.1×).
   const spriteItem: SpriteItem = {
-    ...(mesh ? { mesh } : {}),
-    ...(meshGroundShadow ? { meshGroundShadow: true } : {}),
-    ...(meshGroundShadow && receivers ? { shadowCasterId: e.id } : {}),
-    ...(meshRoofSupport ? { meshRoofSupport } : {}),
-    ...emergencyLights(e, poseTime),
-    ...(remains ? roadkillFade(e, scaleY) : {}),
     kind: "sprite",
     subpixel: true,
     sortKey,
@@ -226,7 +229,6 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefine
     sheetKey: e.sprite.sheetKey,
     frameCol: e.sprite.frameCol,
     frameRow: e.sprite.frameRow,
-    ...(facingRows(e) ? { facing: e.sprite.direction } : {}),
     spriteWidth: e.sprite.spriteWidth,
     spriteHeight: e.sprite.spriteHeight,
     flipX: e.sprite.flipX ?? false,
@@ -237,6 +239,15 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefine
     shadowTerrainZ: shadow.shadowTerrainZ,
     flashHidden: e.flashHidden ?? false,
   };
+  if (facingRows(e)) spriteItem.facing = e.sprite.direction;
+  if (mesh) spriteItem.mesh = mesh;
+  if (meshGroundShadow) {
+    spriteItem.meshGroundShadow = true;
+    if (receivers) spriteItem.shadowCasterId = e.id;
+  }
+  if (meshRoofSupport) spriteItem.meshRoofSupport = meshRoofSupport;
+  if (hasVehicleLights(e)) Object.assign(spriteItem, emergencyLights(e, poseTime));
+  if (remains) Object.assign(spriteItem, roadkillFade(e, scaleY));
   pass.items.push(spriteItem);
   if (receivers && hasShadow && e.collider && (!meshGroundShadow || spriteItem.mesh))
     pushShadowDecals(pass, receivers, e, spriteItem, pos, zOffset, meshGroundShadow);

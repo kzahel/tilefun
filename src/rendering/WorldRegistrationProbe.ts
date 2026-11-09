@@ -44,10 +44,7 @@ export function probeWorldRegistration() {
   const reports = [];
   const canvasPixels = new Map<string, Uint8ClampedArray>();
   for (const mode of ["canvas", "gpu"] as const) {
-    const host =
-      mode === "canvas"
-        ? createCanvasRenderHost(output)
-        : createGpuRenderHost(output, { meshes: false });
+    const host = mode === "canvas" ? createCanvasRenderHost(output) : createGpuRenderHost(output);
     host.resize(width, height);
     const backend = host.renderer as RasterRenderBackend;
     if (!backend.worldRaster)

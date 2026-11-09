@@ -277,8 +277,7 @@ export class DebugPanel {
     // Canvas sprites are a legacy override, offered only once already selected.
     for (const [value, label] of [
       ...(control.mode === "canvas" ? ([["canvas", "Legacy canvas sprites"]] as const) : []),
-      ["gpu", "GPU sprites"],
-      ["gpu-mesh", "GPU + 3D car (default)"],
+      ["gpu", "GPU + 3D cars (default)"],
     ] as const) {
       const option = document.createElement("option");
       option.value = value;

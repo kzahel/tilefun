@@ -1,6 +1,7 @@
 import { type AABB, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { PropCollider } from "../entities/Prop.js";
 import type { PropSurface } from "../physics/surfaceHeight.js";
+import { PropDepthIndex } from "./PropDepthIndex.js";
 
 export interface PropDepthSurface {
   readonly bounds: Readonly<AABB>;
@@ -136,12 +137,15 @@ export function depthAboveProps(
   baseDepth: number,
   footprint: AABB | null,
   feetZ: number,
-  surfaces: readonly PropDepthSurface[],
+  surfaces: readonly PropDepthSurface[] | PropDepthIndex,
 ): number {
   if (!footprint) return baseDepth;
   let depth = baseDepth;
-  for (const surface of surfaces)
+  const test = (surface: PropDepthSurface) => {
     if (feetZ >= surface.topZ - 0.15 && aabbsOverlap(footprint, surface.bounds))
       depth = Math.max(depth, surface.depth + 0.001);
+  };
+  if (surfaces instanceof PropDepthIndex) surfaces.near(footprint, test);
+  else for (const surface of surfaces) test(surface);
   return depth;
 }

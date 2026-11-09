@@ -156,6 +156,7 @@ export class Realm {
       holders: this.streaming?.residency.holders.size ?? 0,
       queuedEdits: this.mutations.count,
       residency: this.streaming?.residency.diagnostics() ?? null,
+      shedChunks: this.streaming?.shed ?? 0,
       transitioningPlayers: [...this.sessions.values()].filter((session) => session.transitioning)
         .length,
       storage: this.saveManager?.diagnostics ?? null,

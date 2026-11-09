@@ -230,7 +230,8 @@ function drawSprite(
     item.wy + (attached ? (support.offsetY ?? 0) : 0) - item.zOffset + roofDelta + item.drawOffsetY;
   const screen = camera.worldToScreen(wx - halfW, bottom - item.spriteHeight * (item.scaleY ?? 1));
   const end = camera.worldToScreen(wx + halfW, bottom);
-  const region = sheet.getRegion(item.frameCol, item.frameRow);
+  const sourceX = item.frameCol * sheet.tileWidth,
+    sourceY = item.frameRow * sheet.tileHeight;
   const subpixel = camera.worldRaster && item.subpixel && ctx.drawSubpixelImage;
   // Snap shared edges, not an origin plus a fractional size. Otherwise adjoining
   // pieces (forest repeats, facades) leave gaps or overlap at non-integral zoom.
@@ -258,8 +259,8 @@ function drawSprite(
     drawImage.call(
       ctx,
       sheet.image,
-      region.x,
-      region.y,
+      sourceX,
+      sourceY,
       item.spriteWidth,
       item.spriteHeight,
       -(dx + destW),
@@ -271,8 +272,8 @@ function drawSprite(
     drawImage.call(
       ctx,
       sheet.image,
-      region.x,
-      region.y,
+      sourceX,
+      sourceY,
       item.spriteWidth,
       item.spriteHeight,
       dx,

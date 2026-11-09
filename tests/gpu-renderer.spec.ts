@@ -198,7 +198,7 @@ test("default GPU mesh host runs the shared game and retains the input/UI canvas
       independentSnapshot: !!first && !!second && first !== second && first !== canvas,
     };
   });
-  expect(capture.mode).toBe("gpu-mesh");
+  expect(capture.mode).toBe("gpu");
   expect(capture.dimensions).toEqual(capture.expected);
   expect(capture.visible).toBe(true);
   expect(capture.independentSnapshot).toBe(true);
@@ -838,7 +838,7 @@ test("debug renderer selector switches live without replacing the game or Worker
   const options = () =>
     selector.locator("option").evaluateAll((all) => all.map((o) => (o as HTMLOptionElement).value));
   await expect(selector).toHaveValue("canvas");
-  expect(await options()).toEqual(["canvas", "gpu", "gpu-mesh"]);
+  expect(await options()).toEqual(["canvas", "gpu"]);
   const bounds = await selector.boundingBox();
   expect(bounds && bounds.x >= 0 && bounds.x + bounds.width <= 390).toBe(true);
   const original = await page.locator("#game").evaluateHandle((canvas) => {
@@ -849,7 +849,7 @@ test("debug renderer selector switches live without replacing the game or Worker
     ).__game;
     return { game, transport: game.transport, playerId: game.stateView.playerEntity.id };
   });
-  for (const mode of ["gpu", "gpu-mesh", "canvas", "gpu-mesh"]) {
+  for (const mode of ["gpu", "canvas", "gpu"]) {
     await selector.selectOption(mode);
     await expect(selector).toBeEnabled();
     await expect(selector).toHaveValue(mode);
@@ -882,8 +882,8 @@ test("debug renderer selector switches live without replacing the game or Worker
     const url = new URL(page.url());
     expect(url.searchParams.get("testflag")).toBe("keep");
     expect(url.searchParams.get("renderer")).toBe(mode === "canvas" ? "legacy-canvas" : "gpu");
-    expect(url.searchParams.has("meshes")).toBe(mode === "gpu-mesh");
-    if (mode === "gpu-mesh")
+    expect(url.searchParams.has("meshes")).toBe(false);
+    if (mode === "gpu")
       await page.waitForFunction(
         () =>
           (
@@ -898,8 +898,8 @@ test("debug renderer selector switches live without replacing the game or Worker
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect(page.locator("#game")).toHaveAttribute("data-renderer", "gpu");
   // The open debug panel survives reload; its rebuilt selector drops legacy Canvas.
-  await expect(selector).toHaveValue("gpu-mesh");
-  expect(await options()).toEqual(["gpu", "gpu-mesh"]);
+  await expect(selector).toHaveValue("gpu");
+  expect(await options()).toEqual(["gpu"]);
   expect(errors).toEqual([]);
 });
 

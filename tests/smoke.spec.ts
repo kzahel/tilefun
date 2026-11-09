@@ -117,7 +117,7 @@ test("F3 toggles debug overlay", async ({ page }, testInfo) => {
   await expect(panel.getByLabel("Vehicle bodies", { exact: true })).toBeChecked();
   await expect(panel.getByLabel("Search bounds", { exact: true })).not.toBeChecked();
   await expect(
-    panel.getByRole("option", { name: "GPU + 3D car (default)", exact: true }),
+    panel.getByRole("option", { name: "GPU + 3D cars (default)", exact: true }),
   ).toHaveCount(1);
   const bluePixels = () =>
     page.evaluate(() => {

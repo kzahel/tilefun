@@ -19,6 +19,19 @@ const option = (key, fallback) =>
     .join("=") ?? fallback;
 const scene = option("scene", "city");
 if (!["city", "racetrack"].includes(scene)) throw Error("--scene must be city or racetrack");
+// Overview cost scales with window size and local density: e.g. a 16" MacBook
+// window (--viewport=1728x1117) east of Oakgrove (--arrival=-320,-364).
+const viewportOption = option("viewport", "1280x900").split("x").map(Number);
+if (
+  viewportOption.length !== 2 ||
+  viewportOption.some((v) => !Number.isInteger(v) || v < 320 || v > 3840)
+)
+  throw Error("--viewport must be WIDTHxHEIGHT between 320 and 3840");
+const arrivalOption = option("arrival", "");
+const arrivalTile = arrivalOption ? arrivalOption.split(",").map(Number) : null;
+if (arrivalTile && (arrivalTile.length !== 2 || arrivalTile.some((v) => !Number.isInteger(v))))
+  throw Error("--arrival must be integer tile coordinates X,Y");
+if (arrivalTile && scene !== "city") throw Error("--arrival applies to the city scene");
 const renderer = option("renderer", "canvas");
 if (!["canvas", "gpu"].includes(renderer)) throw Error("--renderer must be canvas or gpu");
 const terrainPacing = option("terrain-pacing", "throughput");
@@ -49,7 +62,8 @@ if (assertBounded && (terrainPacing !== "responsive" || !(zoomSweep || zoomMotio
 const uncachedImageSizes = process.argv.includes("--uncached-image-sizes");
 if (uncachedImageSizes && (renderer !== "gpu" || process.env.TILEFUN_DEV_URL))
   throw Error("--uncached-image-sizes requires GPU and the isolated benchmark server");
-const meshes = process.argv.includes("--meshes");
+// GPU always draws 3D vehicles; `--meshes` is still accepted from older commands.
+const meshes = renderer === "gpu";
 const headed = process.argv.includes("--headed");
 const instrumentation = !process.argv.includes("--no-metrics");
 const output = option("output", path.join(os.tmpdir(), "tilefun-streaming"));
@@ -150,7 +164,8 @@ const report = {
   renderer,
   meshes,
   cpuRate,
-  viewport: endpoint ? null : { width: 1280, height: 900 },
+  viewport: endpoint ? null : { width: viewportOption[0], height: viewportOption[1] },
+  ...(arrivalTile ? { arrivalTile } : {}),
   fixtures: [],
 };
 try {
@@ -225,7 +240,7 @@ try {
       ? await waitForAndroidCool(androidCli, maxBatteryC, cooldownSeconds, cooldownAbort.signal)
       : undefined;
     const arrival = await page.evaluate(
-      async ({ version, scene }) => {
+      async ({ version, scene, arrivalTile }) => {
         const { createDescriptor } = await import(
           "/tilefun/src/generation/GenerationDescriptor.ts"
         );
@@ -244,12 +259,12 @@ try {
           // Clear northern infield lane beside the ordinary vehicle depot.
           return { x: track.center.x - 27, y: track.center.y - 11, generation };
         }
-        return { x: 300, y: 519, generation };
+        return { x: arrivalTile?.[0] ?? 300, y: arrivalTile?.[1] ?? 519, generation };
       },
-      { version, scene },
+      { version, scene, arrivalTile },
     );
     await page.goto(
-      `${origin}/?nogamepad&renderer=${renderer}&${meshes ? "meshes&" : ""}${instrumentation ? "perf&" : ""}generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `${origin}/?nogamepad&renderer=${renderer}&${instrumentation ? "perf&" : ""}generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     try {
       await page.getByRole("button", { name: "New World", exact: true }).click();

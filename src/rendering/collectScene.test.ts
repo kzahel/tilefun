@@ -412,18 +412,20 @@ function sceneDigest(variant: {
 // split into stages; any change to item fields, values, key order or draw order fails.
 // 229 re-recorded them for the added `facing` field only: with that key omitted, the
 // shared collectWorldSprites stage reproduced every earlier digest exactly.
+// 2026-11-09 re-recorded them for key order only: actor items now assign optional
+// fields after a fixed literal; key-sorted digests of all five scenes were unchanged.
 it.each([
-  [{ frame: false, raster: false, grass: false, garage: false, time: 0 }, "68d24f0b70106eeb"],
+  [{ frame: false, raster: false, grass: false, garage: false, time: 0 }, "8cb06b493c72350e"],
   [
     { frame: true, raster: false, grass: true, garage: false, time: 0.05, zoom: 3 / 8 },
-    "8989a69863eea5b5",
+    "6c28c08dccb1c409",
   ],
-  [{ frame: true, raster: true, grass: true, garage: false, time: 0.55 }, "44673e385cb54537"],
+  [{ frame: true, raster: true, grass: true, garage: false, time: 0.55 }, "9232b9304475daed"],
   [
     { frame: true, raster: true, grass: false, garage: true, time: 0.25, nativeTrains: true },
-    "f6798e956d75c830",
+    "7e677f939a0e7d3d",
   ],
-  [{ frame: false, raster: true, grass: false, garage: true, time: 0 }, "3585ef2ea17cb438"],
+  [{ frame: false, raster: true, grass: false, garage: true, time: 0 }, "a95ffb71a76f339f"],
 ] as const)("collects a byte-identical characterization scene %o", (variant, digest) => {
   const result = sceneDigest(variant);
   expect(result.digest).toBe(digest);

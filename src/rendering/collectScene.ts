@@ -18,6 +18,11 @@ import { grassDepthUnderVehicles, isVehicleSprite } from "./VehicleGrassDepth.js
 
 export { interpolatePosition } from "./EntityInterpolation.js";
 
+/** Overview LOD in logical zoom: below this, actor shadows are a pixel or two, so
+ * they use the plain ground shadow instead of projecting onto every surface.
+ * Like the grass LOD, this keeps a 0.1× city overview within the frame budget. */
+export const PROJECTED_SHADOW_MIN_ZOOM = 0.2;
+
 type SceneWorld = Pick<World, "getHeightAt" | "getChunkIfLoaded" | "getRoadAt">;
 
 /**
@@ -48,12 +53,13 @@ export function collectScene(
   const visibleGrass = grassAlpha > 0;
   const items = frame ? frame.begin(visibleGrass) : [];
   const grassVehicles = visibleGrass ? ([] as SpriteItem[]) : undefined;
-  const receivers = camera.worldRaster
-    ? new SurfaceReceivers(world, props, entities, alpha, {
-        ...receiverOptions,
-        mesh: terrain.meshSurfaceGeometry?.bind(terrain),
-      })
-    : undefined;
+  const receivers =
+    camera.worldRaster && camera.zoom >= PROJECTED_SHADOW_MIN_ZOOM
+      ? new SurfaceReceivers(world, props, entities, alpha, {
+          ...receiverOptions,
+          mesh: terrain.meshSurfaceGeometry?.bind(terrain),
+        })
+      : undefined;
 
   // Viewport bounds in world coordinates for culling
   const vpTL = camera.screenToWorld(0, 0);

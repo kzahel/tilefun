@@ -1,5 +1,71 @@
 # Streaming and gameplay performance
 
+## City overview at 0.1× (2026-11-09)
+
+Owner report: at 0.1× on an M4 Pro MacBook (default GPU + meshes), frames stuck
+near 20 fps and some chunks stayed black. Reproduced in seed 2026 with a
+1728×1117 window east of Oakgrove: ~1,200 actors and ~2,600 props in view held
+render CPU at ~46 ms even while standing still. Three per-frame costs grew
+with the overview. The slab painter order used an O(n²) `findIndex` topological
+sort, with per-slab prop rescans. Every actor's depth key tested every prop/vehicle
+top. Every shadow was also projected onto surface receivers.
+
+Fixes: a min-heap topological sort with the same tie-breaking, coarse spatial
+buckets for slab/item pairs and depth tops, and a per-frame slab map. Node
+tests compare the new ordering against the original quadratic algorithm and the
+linear depth scan. A shared overview LOD
+(`PROJECTED_SHADOW_MIN_ZOOM = 0.2`) uses the plain ground shadow below 0.2×; at
+0.1× shadows are 1–2 px and screenshots match. Labs share `collectScene`.
+
+`streaming:bench -- --zoom-motion --zooms=0.1 --noclip --renderer=gpu
+--viewport=1728x1117 --arrival=-380,-364` (new options; GPU now implies meshes) measures, before → after:
+stationary render p50 30.8 → 5.4 ms, frame p50 33.3 → 16.7 ms, slow frames 59/59
+→ 0/119; motion render p50/p95 27.8/38.7 → 5.6/9.1 ms, slow 205/251 → 0/480.
+Ordinary `--assert-ready` (GPU/meshes) still passes at 16.8 ms p99.
+
+120 Hz: the same command with `--headed` runs at the built-in display's 8.3 ms
+cadence (bundled Chromium, `--scene=city`). At zooms 0.5 and 1 every stage keeps
+cadence with render p50 1.3–3.5 ms. At 0.1 stationary/warm stages keep cadence
+(render p50 5.5–5.8 ms); motion misses 54 of 906 frames (render p50/p95
+5.9/9.3 ms, max frame 18 ms). No ~100 ms hitch recurred in these headed runs.
+A `--profile-stage=motion` capture at 0.1 (~7.2 ms render incl. profiler) put
+~2.3 ms in drawing ~2,000 sprites through the Canvas2D-shaped `RasterSurface`
+path, ~2.1 ms in `collectScene` (entity collection ~1.2), ~1.1 ms client update,
+~0.8 ms terrain and ~0.5 ms Three.js meshes. V8 inlining credits much of the sprite
+cost to `spriteRegion`; per-change A/B timing of `submit:scene`
+(`--profile-stage=stationary`, 2,291 entries) was used instead of profile shares.
+Three behavior-preserving changes followed:
+
+- `GpuRasterSurface.drawImage` takes fixed optional arguments instead of a rest
+  array, and `drawSprite` computes the source cell inline: `submit:scene`
+  2.11–2.16 → 1.27–1.50 ms.
+- Actor `SpriteItem`s are one fixed literal plus assigned optional fields instead
+  of six conditional spreads (V8's generic clone path): `collectEntity` 1.22 →
+  0.46 ms. Characterization digests were re-recorded for key order only; key-sorted
+  digests of all five scenes are unchanged.
+- `quad` reads per-quad colour/depth values once rather than per corner (self
+  0.46 → 0.33 ms).
+
+Headed 120 Hz, two runs: 0.1 motion misses 40–41 of ~918 frames (was 54/906),
+frame p95 15.9 → 10.4 ms, render p50/p95 5.9/9.3 → 5.1/8.4 ms; stationary/warm keep
+cadence at render p50 5.0–5.1 ms. One ~24 ms render spike per motion run remains
+unattributed. GPU/smoke browser specs (30, including Canvas/GPU pixel parity and
+batch order) and GPU readiness pass.
+
+Rejected: packing shadow ellipses into one atlas texture cut 0.1 draw calls 91 → 76
+per frame (six ellipse textures were filling the eight batch slots), but
+`submit:scene` stayed within noise, and new shadow sizes during zoom would re-upload
+the shared page. Remaining batch splits come from many sprite sheets interleaved in
+depth order; each flush is a full Three.js `render` (~6 µs, ~0.6 ms/frame). Per-chunk
+prop caching was dropped: prop collection plus depth is ~0.3 ms at 0.1. Next
+candidates: sheet atlasing or a larger effective texture-slot budget, a direct
+WebGL draw for the batch mesh, and the ~1.6 ms of native `(program)` time.
+
+The black chunks were authority admission, not rendering; see
+[entity activation](entity-activation.md#overview-admission). The GPU sprite-vehicle
+mode was removed on 2026-11-09 (GPU always draws 3D vehicles); it was not a
+factor in this cost.
+
 ## Split-screen render cost on the Steam Deck (2026-11-07)
 
 [226](../tactical/226-player-views-and-local-split-screen.md) slice 1b gives the

@@ -8,7 +8,7 @@ import { WorldRasterFrame } from "./WorldRasterFrame.js";
 /** The original canvas retains input and UI; the world canvas is a sibling below it. */
 export function createGpuRenderHost(
   canvas: HTMLCanvasElement,
-  options?: { meshes: boolean; embedded?: boolean },
+  options?: { embedded?: boolean },
 ): RenderHost {
   const world = document.createElement("canvas");
   world.dataset.renderer = "gpu";
@@ -25,7 +25,8 @@ export function createGpuRenderHost(
     canvas.dataset.renderer = "canvas-fallback";
     return createCanvasRenderHost(canvas);
   }
-  renderer.meshes.setEnabled(options?.meshes ?? new URLSearchParams(location.search).has("meshes"));
+  // Vehicles are always 3D; their sprites only cover loading or failed meshes.
+  renderer.meshes.setEnabled(true);
   renderer.worldRaster = true;
   renderer.surface.enableWorldComposition();
   const frame = new WorldRasterFrame();

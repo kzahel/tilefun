@@ -3,14 +3,13 @@ import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { createCanvasRenderHost } from "./CanvasRenderHost.js";
 import type { RendererMode, RenderHost, RenderHostFactory } from "./RenderHost.js";
 
-/** Game and labs default to the GPU renderer with 3D vehicle meshes. Canvas
- * sprites are legacy: only `?renderer=legacy-canvas` (or its older `canvas`
- * alias) selects them, apart from the automatic no-WebGL fallback. */
+/** Game and labs use the GPU renderer, which always draws 3D vehicle meshes
+ * (older `?renderer=gpu` links without `meshes` included). Canvas sprites are
+ * legacy: only `?renderer=legacy-canvas` (or its older `canvas` alias) selects
+ * them, apart from the automatic no-WebGL fallback. */
 export function requestedRenderer(params: URLSearchParams): RendererMode {
   const requested = params.get("renderer");
-  if (requested === "legacy-canvas" || requested === "canvas") return "canvas";
-  if (requested === "gpu" && !params.has("meshes")) return "gpu";
-  return "gpu-mesh";
+  return requested === "legacy-canvas" || requested === "canvas" ? "canvas" : "gpu";
 }
 
 /** Browser composition owns backend changes; the same client/Worker keeps running. */
@@ -27,7 +26,7 @@ export async function selectableRenderHostFactory(
       delete canvas.dataset.gpuDevice;
       return mode === "canvas" || !createGpu
         ? createCanvasRenderHost(canvas)
-        : createGpu(canvas, { meshes: mode === "gpu-mesh", ...options });
+        : createGpu(canvas, options);
     };
     let current = create(initial);
     let mode: RendererMode = canvas.dataset.renderer === "gpu" ? initial : "canvas";
@@ -66,7 +65,6 @@ export async function selectableRenderHostFactory(
             url.searchParams.delete("renderer");
             url.searchParams.delete("meshes");
             url.searchParams.set("renderer", mode === "canvas" ? "legacy-canvas" : "gpu");
-            if (mode === "gpu-mesh") url.searchParams.set("meshes", "");
             history.replaceState(history.state, "", url);
             return mode;
           } finally {

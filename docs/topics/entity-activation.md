@@ -4,7 +4,7 @@ Topic: entity-activation
 Status: incremental persistence and shared lazy residency are implemented.
 World containers, traffic records, bounded admission and recovery validation
 are complete.
-Updated: 2026-10-11.
+Updated: 2026-11-09.
 
 Owns simulation activity, actor persistence/residency and the cost of distant entities.
 [Performance](performance.md) owns broader timing evidence and renderer work;
@@ -60,6 +60,23 @@ Realm updates interest once per tick (owner decision 2026-11-06, B8): a dormant
 session (disconnected, held 60 s for reconnect) keeps its player tickets so its
 body's neighbourhood stays resident, but contributes no camera range. Arrival
 leases are one per range, released when `ensure()` settles.
+
+### Overview admission
+
+A 0.1× view demands ~450 chunks. In wildlife-dense or long-played worlds, their
+actors/props can exceed `PERSISTENCE_BUDGET` (4,096 actors, 8,192 props).
+Previously, publication then failed with "Local actor limit reached". Farther
+chunks kept taking freed capacity while nearer failures waited to retry. Chunks
+ahead of the player stayed black indefinitely (reproduced 2026-11-09 with a
+lowered budget). `RealmStreaming` now gates new loads below 90% of either
+budget, leaving in-flight headroom. `DemandAdmission` then trims the
+priority-sorted demand (farthest view edge first) to a target of about 75% usage.
+Simulated (`activity > 0`) chunks and the nearest 256 chunks are never shed.
+Ordinary zoom therefore never trims. The limit grows back about 10% per second
+below 60% usage. Shed chunks retire through the normal save/release path;
+`persistenceDiagnostics.shedChunks` reports the count. A Node fixture with denser
+land ahead fails without trimming. The owner's "blue after walking on it" symptom
+was not reproduced.
 
 [094](../tactical/094-interest-demand-cache.md) caches the sorted demand assembled
 from ordered ticket values. `set` owns a snapshot; resubmit changed ticket/range

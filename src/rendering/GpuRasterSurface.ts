@@ -567,7 +567,28 @@ export class GpuRasterSurface implements RasterSurface {
   fillRect(x: number, y: number, w: number, h: number) {
     this.quad(this.white, x, y, w, h, 0, 0, 1, 1, this.color());
   }
-  drawImage(image: CanvasImageSource, ...v: number[]) {
+  /** Canvas drawImage arities without a per-call argument array (sprites call this per frame). */
+  drawImage(
+    image: CanvasImageSource,
+    a?: number,
+    b?: number,
+    c?: number,
+    d?: number,
+    e?: number,
+    f?: number,
+    g?: number,
+    h?: number,
+  ) {
+    const dim = this.imageSize(image);
+    if (h !== undefined)
+      this.drawRegion(image, dim, a ?? 0, b ?? 0, c ?? 0, d ?? 0, e ?? 0, f ?? 0, g ?? 0, h);
+    else if (d !== undefined)
+      this.drawRegion(image, dim, 0, 0, dim.width, dim.height, a ?? 0, b ?? 0, c ?? 0, d);
+    else if (b !== undefined && c === undefined)
+      this.drawRegion(image, dim, 0, 0, dim.width, dim.height, a ?? 0, b, dim.width, dim.height);
+    else throw Error("Invalid drawImage arguments");
+  }
+  private imageSize(image: CanvasImageSource): { width: number; height: number } {
     let dim: { width: number; height: number };
     if (image instanceof ImageBitmap || image instanceof HTMLImageElement) {
       let cached = this.imageSizes.get(image);
@@ -582,21 +603,20 @@ export class GpuRasterSurface implements RasterSurface {
       }
       dim = cached;
     } else dim = size(image);
-    let sx = 0,
-      sy = 0,
-      sw = dim.width,
-      sh = dim.height,
-      dx = 0,
-      dy = 0,
-      dw = sw,
-      dh = sh;
-    if (v.length === 2) {
-      [dx = 0, dy = 0] = v;
-    } else if (v.length === 4) {
-      [dx = 0, dy = 0, dw = 0, dh = 0] = v;
-    } else if (v.length === 8) {
-      [sx = 0, sy = 0, sw = 0, sh = 0, dx = 0, dy = 0, dw = 0, dh = 0] = v;
-    } else throw Error("Invalid drawImage arguments");
+    return dim;
+  }
+  private drawRegion(
+    image: CanvasImageSource,
+    dim: { width: number; height: number },
+    sx: number,
+    sy: number,
+    sw: number,
+    sh: number,
+    dx: number,
+    dy: number,
+    dw: number,
+    dh: number,
+  ) {
     if (sw <= 0 || sh <= 0 || dw === 0 || dh === 0) return;
     for (
       let py = Math.floor(Math.max(0, sy) / PAGE) * PAGE;
@@ -839,6 +859,21 @@ export class GpuRasterSurface implements RasterSurface {
     this.texture = texture;
     this.textureSlot = slot;
     this.filtered ||= smooth;
+    // Per-quad values are read once; only position and texture coordinates vary by corner.
+    const out = this.vertices,
+      { a, b, c, d, e, f, depthPlane: plane, depthFront: front } = this;
+    const red = color[0] ?? 1,
+      green = color[1] ?? 1,
+      blue = color[2] ?? 1,
+      alpha = (color[3] ?? 1) * this.globalAlpha,
+      imageSlot = slot + (smooth ? 0.25 : 0);
+    const p0 = plane[0] ?? 0,
+      p1 = plane[1] ?? 0,
+      p2 = plane[2] ?? 0,
+      p3 = plane[3] ?? 0,
+      f0 = front[0] ?? 0,
+      f1 = front[1] ?? 0,
+      f2 = front[2] ?? 0;
     for (let corner = 0; corner < 4; corner++) {
       const right = corner === 1 || corner === 2,
         bottom = corner >= 2;
@@ -846,21 +881,26 @@ export class GpuRasterSurface implements RasterSurface {
         py = y + (bottom ? h : 0),
         i = this.count++ * STRIDE;
       const point = points?.[corner];
-      this.vertices[i] = point ? point.x : this.a * px + this.c * py + this.e;
-      this.vertices[i + 1] = point ? point.y : this.b * px + this.d * py + this.f;
-      this.vertices[i + 2] = point ? point.u : u + (right ? uw : 0);
-      this.vertices[i + 3] = point ? 1 - point.v : v + (bottom ? vh : 0);
-      this.vertices[i + 4] = color[0] ?? 1;
-      this.vertices[i + 5] = color[1] ?? 1;
-      this.vertices[i + 6] = color[2] ?? 1;
-      this.vertices[i + 7] = (color[3] ?? 1) * this.globalAlpha;
-      this.vertices[i + 8] = slot + (smooth ? 0.25 : 0);
-      this.vertices[i + 9] = minU;
-      this.vertices[i + 10] = minV;
-      this.vertices[i + 11] = maxU;
-      this.vertices[i + 12] = maxV;
-      for (let j = 0; j < 4; j++) this.vertices[i + 13 + j] = this.depthPlane[j] ?? 0;
-      for (let j = 0; j < 3; j++) this.vertices[i + 17 + j] = this.depthFront[j] ?? 0;
+      out[i] = point ? point.x : a * px + c * py + e;
+      out[i + 1] = point ? point.y : b * px + d * py + f;
+      out[i + 2] = point ? point.u : u + (right ? uw : 0);
+      out[i + 3] = point ? 1 - point.v : v + (bottom ? vh : 0);
+      out[i + 4] = red;
+      out[i + 5] = green;
+      out[i + 6] = blue;
+      out[i + 7] = alpha;
+      out[i + 8] = imageSlot;
+      out[i + 9] = minU;
+      out[i + 10] = minV;
+      out[i + 11] = maxU;
+      out[i + 12] = maxV;
+      out[i + 13] = p0;
+      out[i + 14] = p1;
+      out[i + 15] = p2;
+      out[i + 16] = p3;
+      out[i + 17] = f0;
+      out[i + 18] = f1;
+      out[i + 19] = f2;
     }
   }
   flush() {

@@ -6,9 +6,10 @@ import { worldGeometryRecipe } from "../scenarios/WorldGeometryRecipe.js";
 import type { World } from "../world/World.js";
 import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
-import { presentSurfaceScene, surfaceSceneOrder } from "./presentSurfaceScene.js";
+import { presentSurfaceScene } from "./presentSurfaceScene.js";
 import { SceneFrame, type SurfaceFades } from "./SceneFrame.js";
 import { REVEAL_FADE_SECONDS, REVEAL_OPACITY } from "./SurfacePresentation.js";
+import { surfaceSceneOrder } from "./SurfaceSceneOrder.js";
 import type { TerrainPresentation } from "./TerrainPresentation.js";
 import { RecordingBackend } from "./testing/RecordingBackend.js";
 

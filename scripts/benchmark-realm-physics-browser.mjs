@@ -11,7 +11,6 @@ const option = (name, fallback) =>
 const output = option("output", path.join(os.tmpdir(), "tilefun-realm-physics"));
 const fixture = option("fixture", "realm");
 if (!["realm", "traffic-crowd"].includes(fixture)) throw Error("Unknown Realm fixture");
-const meshes = process.argv.includes("--meshes");
 const allocations = process.argv.includes("--allocations");
 const cpuRate = Number(option("cpu", "1"));
 if (!Number.isFinite(cpuRate) || cpuRate < 1 || cpuRate > 16)
@@ -23,6 +22,8 @@ const referenceBase = option("reference-base", "");
 const lanes = referenceBase ? ["reference-legacy", "shared"] : ["shared"];
 const renderer = option("renderer", "gpu");
 if (!["canvas", "gpu"].includes(renderer)) throw Error("Renderer must be canvas or gpu");
+// Lab GPU always draws 3D vehicles; `--meshes` is still accepted from older commands.
+const meshes = renderer === "gpu";
 const trials = Number(option("trials", "2")),
   seconds = Number(option("seconds", "6")),
   warmup = Number(option("warmup", "4"));
@@ -109,7 +110,6 @@ try {
             });
           const url = new URL("workshop.html", mode === "shared" ? base : referenceBase);
           url.searchParams.set("geometry", fixture);
-          if (meshes) url.searchParams.set("meshes", "");
           if (cpuRate !== 1) {
             const session = await context.newCDPSession(page);
             await session.send("Emulation.setCPUThrottlingRate", { rate: cpuRate });
