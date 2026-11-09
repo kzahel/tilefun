@@ -42,6 +42,7 @@
     "gameplay:bench": "node scripts/benchmark-gameplay.mjs",
     "streaming:bench": "node scripts/benchmark-streaming.mjs",
     "streaming:matrix": "node scripts/benchmark-streaming-matrix.mjs",
+    "stress:bench": "node scripts/benchmark-stress.mjs",
     "test:streaming": "node --test scripts/streaming-matrix.test.mjs",
     "desktop:build": "npm run build && node scripts/build-desktop.mjs",
     "desktop:build:linux": "npm run build && node scripts/build-desktop.mjs --linux",
