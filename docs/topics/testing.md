@@ -81,6 +81,7 @@ contracts run locally through `npm run test:all`:
 - multiplayer and vehicles;
 - labs, review and GPU parity.
 
+Hosted validation takes about 6 min, and deploy about 2.6 min more (2026-11-09).
 `workflow_dispatch` reruns the push gate without deploying. Each job spends
 about 90 s checking out the 2 GB tree (mostly `art-source/wildlife-v2`
 projection JSON), which unit tests partly read. Keep CI changes to stable,

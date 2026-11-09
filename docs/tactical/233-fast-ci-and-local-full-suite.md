@@ -1,6 +1,6 @@
 # 233 — Fast CI and a local full suite
 
-Status: implemented · 2026-11-09. Owner: [testing](../topics/testing.md).
+Status: implemented, hosted CI green · 2026-11-09. Owner: [testing](../topics/testing.md).
 
 The owner asked for fast, reliable CI with fewer and faster browser tests, and a
 wider suite that runs quickly on the local machine. They also asked to fix the
@@ -97,4 +97,16 @@ green and deployed in 8.8 min plus 5.8 min:
 - smoke spends 6.2 min on one SwiftShader worker;
 - deploy repeats the checkout and build.
 
-That led to two smoke shards and deploying the tested build.
+That led to two smoke shards and deploying the tested build. Run
+[42655838071](https://github.com/kzahel/tilefun/actions/runs/42655838071) then
+passed every gate:
+
+| Job | Time |
+| --- | --- |
+| Validation (push to last gate) | 6.1 min |
+| Smoke, each of 2 shards | ≈5.9 min |
+| Unit (slowest shard) | 5.3 min |
+| Raster | 3.9 min |
+| Check | 3.3 min |
+| Deploy (mostly GitHub's Pages publish) | 2.6 min |
+| Whole run | 8.8 min |
