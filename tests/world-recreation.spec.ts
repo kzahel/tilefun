@@ -6,10 +6,7 @@ test("retired browser worlds stay listed and recreate with the same seed in a ne
   page,
 }) => {
   const generation = createDescriptor("regional", 812);
-  // Registry recreation is menu/IndexedDB behavior; Canvas avoids software-WebGL startup.
-  await page.goto(
-    `/tilefun/?renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}`,
-  );
+  await page.goto(`/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}`);
   await page.getByPlaceholder("World name...").fill("Retired town");
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.getByTestId("world-menu")).toBeHidden();
@@ -48,7 +45,7 @@ test("retired browser worlds stay listed and recreate with the same seed in a ne
     }
     return id;
   });
-  await page.goto("/tilefun/?renderer=canvas");
+  await page.goto("/tilefun/");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await openWorlds(page);
   await expect(

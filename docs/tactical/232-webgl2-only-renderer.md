@@ -1,6 +1,7 @@
 # WebGL2-only renderer
 
-Status: parent plan; planned 2026-11-09, slices 1–4 authorized for autonomous delivery.
+Status: parent plan; planned 2026-11-09, slices 1–4 authorized for autonomous delivery;
+slice 1 delivered 2026-11-09.
 Owner direction, 2026-11-09: "having two renderers seems useless"; remove the
 Canvas renderer and its fallback, require WebGL2, then make the GPU-only
 optimizations that Canvas parity blocked. Run tests locally before touching CI.
@@ -116,8 +117,9 @@ reference, grass LOD) and other canvas/gpu parity specs.
 
 - Delete `CanvasRenderHost`, `CanvasRenderBackend` and Canvas-only branches
   (`worldRaster === false` paths, the `RendererMode` type, Canvas fallback in labs).
-- Scripts: drop `--renderer=canvas` from the streaming bench/matrix, realm-physics
-  bench, `city-audit`, `car-driving-browser`, and update `streaming-matrix-lib` tests.
+- Scripts: drop the `--renderer` option (GPU-only since slice 1) from the streaming
+  bench/matrix, realm-physics bench, `city-audit`, `car-driving-browser`, and the
+  `renderer` field from `streaming-matrix-lib` plans where it no longer helps.
 - Code shared with the GPU path (`Canvas2DRenderer` scene drawing, `TileRenderer`,
   terrain/interior/overlay resources) stays until slice 4 replaces it; rename only
   where the name now misleads.
@@ -148,4 +150,49 @@ cadence, render p50/p95 5.1/8.4 ms).
 
 ## Progress
 
-None yet.
+### Slice 1 — delivered 2026-11-09
+
+- `SelectableRenderHost`, the debug panel's renderer selector and
+  `RenderHost.rendererControl`/`RendererMode` are gone. `loadRenderHostFactory`
+  (game and `LabView`) runs `requireWebGl2` (a released probe context, remembered
+  after success) and then loads the GPU host. `GameClient` requires a host factory.
+  `?renderer=` and `meshes` are ignored.
+- No WebGL2: the game shows a "Tilefun needs WebGL2" dialog without a stack and
+  does not report a fault; labs show the same message in their error area. A GPU
+  backend that fails after a successful probe is an ordinary reported fault (not
+  "needs WebGL2"). Graphics-loss recovery is unchanged.
+- Specs: ~76 files lost `renderer=canvas`/`legacy-canvas`/`meshes`; Canvas-only and
+  Canvas+GPU loops were unwrapped; the selector and Canvas-fallback specs became a
+  needs-WebGL2 case (game and lab), a probe-passes-backend-fails case, and an
+  ignored-`?renderer=` assertion. The two terrain-pacing cases merged into one GPU
+  case at the 0.25 overview with the upload assertions. Test-side fixes: furniture
+  motion reads the composed frame through a playtest `__capture` hook; room editing
+  gets 90 s (31 s on hardware GPU); the co-op door check in tap movement compares
+  inside one task; two per-test deadlines scale from the config instead of `CI`.
+- Bench and instrumentation scripts default to GPU and reject `--renderer=canvas`;
+  the streaming matrix plans GPU only (slice 3 removes the option).
+- Software-WebGL lane: `npm run test:e2e:software-webgl` /
+  `playwright.software-webgl.config.ts`. It spreads the base config: `defineConfig`'s
+  merge would also run the hardware `chromium` project.
+- Full local software-WebGL run (M4 Pro, 2 workers, 621 tests in 130 files):
+  36.5 min wall, 14 failures. 5 are the pre-existing ones (frog/robin/duck ball
+  reactions, `streaming.spec.ts:6`, `gpu-renderer.spec.ts:577` room reference). 8
+  were a migration bug (a `GAME` constant lost its `?`, so `${GAME}&generation=…`
+  was not a game URL) and 1 a tap-movement race; all 9 pass on re-run under the
+  software lane (tap movement ×3). The slowest file was `animal-browser.spec.ts`
+  (9.9 min). The earlier timing failures (every-animal preview, controller menu,
+  train recall, room-editing walk) passed in this run.
+- Hardware GPU: the 22 hand-edited or previously failing spec files passed
+  (139 tests, 7.9 min) before the review fixes; the review-fix cases re-ran.
+- Checks: typecheck, Biome, knip, `test:streaming`, touched unit tests, art catalog
+  and workshop manifest, build, `streaming:bench -- --assert-ready` (GPU).
+  Code-health ratchet: `src/main.ts` +9 lines, `src/interiors/playtest/main.ts` +3
+  (the ratchet already failed on main for unrelated files).
+- Review (Opus 5.5 High, Work-claude pool, bypass): fixed the strict-mode locator
+  and stackless dialog, backend errors mislabeled as "needs WebGL2", P2P host left
+  open after init failure, script defaults that silently measured GPU as "canvas",
+  `CI`-only deadlines, leftover `meshes` params, stale comments/docs, lab error text
+  prefix and repeated probes. Not changed: CI. Before the first push, the smoke
+  files now run on GPU under hosted software WebGL; measure them with the local lane
+  against the 20-minute smoke budget (left for the CI step after slice 4's final
+  run, per the testing strategy).

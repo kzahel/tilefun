@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import type { ArtNote } from "../src/art/ArtNotes.js";
 
-const workshop = "/tilefun/workshop.html?renderer=legacy-canvas";
+const workshop = "/tilefun/workshop.html";
 const viewUrl = (id: string) => `${workshop}#/tool/vehicles?view=${encodeURIComponent(id)}`;
 
 test("vehicles are discoverable in the inbox and save exact directional boxes and height", async ({

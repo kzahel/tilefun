@@ -137,9 +137,8 @@ export class FirstPersonControl {
   /** The loaded view, or undefined while it loads or when this host cannot show it. */
   currentView(): FirstPersonView | undefined {
     if (!this.active || this.disposed || this.failed) return undefined;
-    // The view sits between the GPU world canvas and this UI canvas. Legacy Canvas
-    // draws the world on the UI canvas itself, so it keeps the fixed view until the
-    // renderer is switched back to GPU.
+    // The view sits between the GPU world canvas and this UI canvas. Only the
+    // direct Canvas host (removed in 232 slice 3) lacks that world canvas.
     const canvas = this.canvas();
     if (canvas.dataset.renderer !== "gpu") {
       if (this.view) this.releaseView();

@@ -21,7 +21,8 @@ const counts =
 const referenceBase = option("reference-base", "");
 const lanes = referenceBase ? ["reference-legacy", "shared"] : ["shared"];
 const renderer = option("renderer", "gpu");
-if (!["canvas", "gpu"].includes(renderer)) throw Error("Renderer must be canvas or gpu");
+if (renderer !== "gpu")
+  throw Error("The game requires WebGL2 (232); --renderer=canvas was removed");
 // Lab GPU always draws 3D vehicles; `--meshes` is still accepted from older commands.
 const meshes = renderer === "gpu";
 const trials = Number(option("trials", "2")),

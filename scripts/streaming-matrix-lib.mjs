@@ -38,7 +38,8 @@ export function sourceFingerprint() {
 export function planMatrix(targets, repeats) {
   const cases = targets.flatMap((target) =>
     ["throughput", "responsive"].flatMap((pacing) =>
-      ["canvas", "gpu"].map((renderer) => ({ target, pacing, renderer })),
+      // One renderer since 232; the field stays in reports for older results.
+      ["gpu"].map((renderer) => ({ target, pacing, renderer })),
     ),
   );
   return Array.from({ length: repeats }, (_, i) =>

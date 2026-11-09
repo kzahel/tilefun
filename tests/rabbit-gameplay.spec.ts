@@ -4,9 +4,6 @@ import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { RABBIT_TYPE } from "../src/wildlife/Rabbit.js";
 
 test.use({ channel: "chromium" });
-// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
-// software WebGL slows every page action about eightfold.
-
 // Shared Rapier contacts rest bodies within solver slop of the ground rather
 // than at exact zero, and the landing impact's depenetration can briefly give
 // the player ~20 px/s (frog, measured natively). The removed automatic wildlife
@@ -19,7 +16,7 @@ test("meadow rabbits physically hop, react to landing and reload their mid-hop p
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(
-    `/tilefun/workshop.html?geometry=nature-rabbits&landscape=thicket&renderer=canvas#/tool/world-geometry`,
+    `/tilefun/workshop.html?geometry=nature-rabbits&landscape=thicket#/tool/world-geometry`,
   );
   const c = page.getByLabel("Natural landscape playground");
   await expect(c).toHaveAttribute("data-ready", "true");
@@ -87,7 +84,7 @@ test("ordinary meadow rabbits support manual creation and durable deletion on wo
   const generation = createDescriptor("regional", 2026);
   const arrival = { x: -151, y: -529, generation };
   await page.goto(
-    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByPlaceholder("World name...").fill("Durable rabbit meadow");
   await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -131,7 +128,7 @@ test("ordinary meadow rabbits support manual creation and durable deletion on wo
     await host.flush();
     await host.shutdown();
   });
-  await page.goto("/tilefun/?nogamepad&renderer=canvas");
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(async () => (await rabbits()).length).toBe(original.length);
   await page.screenshot({ path: "/tmp/tilefun-rabbits-game.png" });

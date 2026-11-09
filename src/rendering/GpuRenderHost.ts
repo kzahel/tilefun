@@ -1,5 +1,4 @@
 import type { Camera } from "./Camera.js";
-import { createCanvasRenderHost } from "./CanvasRenderHost.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
 import type { RenderHost } from "./RenderHost.js";
 import type { RenderRegion } from "./ViewLayout.js";
@@ -20,10 +19,9 @@ export function createGpuRenderHost(
   try {
     renderer = new GpuRenderBackend(world);
   } catch (error) {
+    // `requireWebGl2` already found a context; any other failure is a fault.
     world.remove();
-    console.warn("GPU renderer unavailable; using Canvas", error);
-    canvas.dataset.renderer = "canvas-fallback";
-    return createCanvasRenderHost(canvas);
+    throw error;
   }
   // Vehicles are always 3D; their sprites only cover loading or failed meshes.
   renderer.meshes.setEnabled(true);

@@ -7,7 +7,6 @@ import {
 import type { Entity } from "../entities/Entity.js";
 import { COLLISION_LAYERS, defaultCollisionDebugOptions } from "./CollisionDebug.js";
 import { TERRAIN_PACING, type TerrainPacing, ZOOM_PRESETS } from "./PresentationSettings.js";
-import type { RendererMode, RenderHost } from "./RenderHost.js";
 
 const PANEL_STYLE = `
   position: fixed; top: 8px; right: 8px;
@@ -266,49 +265,6 @@ export class DebugPanel {
       convexRow,
     );
     document.body.appendChild(this.container);
-  }
-
-  setRendererControl(control: NonNullable<RenderHost["rendererControl"]>): void {
-    const row = document.createElement("label");
-    row.style.cssText = ROW_STYLE;
-    row.append("Renderer");
-    const select = document.createElement("select");
-    select.setAttribute("aria-label", "Renderer");
-    // Canvas sprites are a legacy override, offered only once already selected.
-    for (const [value, label] of [
-      ...(control.mode === "canvas" ? ([["canvas", "Legacy canvas sprites"]] as const) : []),
-      ["gpu", "GPU + 3D cars (default)"],
-    ] as const) {
-      const option = document.createElement("option");
-      option.value = value;
-      option.textContent = label;
-      select.append(option);
-    }
-    select.value = control.mode;
-    const status = document.createElement("div");
-    status.setAttribute("role", "status");
-    status.style.cssText = "font-size:11px;color:#ccc;max-width:280px";
-    status.textContent = "Switches live. Collision geometry stays the same.";
-    select.onchange = async () => {
-      const requested = select.value as RendererMode;
-      select.disabled = true;
-      status.textContent = "Switching renderer…";
-      try {
-        const actual = await control.select(requested);
-        select.value = actual;
-        status.textContent =
-          actual !== requested
-            ? "GPU unavailable; using Canvas."
-            : "Switched live. Collision geometry stays the same.";
-      } catch (error) {
-        select.value = control.mode;
-        status.textContent = `Renderer change failed: ${String(error)}`;
-      } finally {
-        select.disabled = false;
-      }
-    };
-    row.append(select);
-    this.container.append(row, status);
   }
 
   destroy(): void {

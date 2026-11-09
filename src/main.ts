@@ -8,7 +8,8 @@ import { controllerInput } from "./input/ControllerInput.js";
 import { enableFirstTouchFullscreen } from "./input/firstTouchFullscreen.js";
 import type { PlayerProfile } from "./persistence/PlayerProfileStore.js";
 import { PlayerProfileStore } from "./persistence/PlayerProfileStore.js";
-import { selectableRenderHostFactory } from "./rendering/SelectableRenderHost.js";
+import { loadRenderHostFactory } from "./rendering/RenderHostLoader.js";
+import { WebGl2UnavailableError } from "./rendering/WebGl2Support.js";
 import { ROOM_DIRECTORY_URL } from "./rooms/config.js";
 import { RoomDirectory } from "./rooms/RoomDirectory.js";
 import { ACTIVE_PROFILE_KEY, TAB_SESSION_KEY } from "./shared/storageKeys.js";
@@ -280,7 +281,7 @@ window.tilefunDesktop?.onPrepareQuit(() => {
 
 async function start() {
   showStartupStage("graphics", "Preparing graphics…", "Setting up the game renderer.");
-  const renderHostFactory = await selectableRenderHostFactory(new URLSearchParams(location.search));
+  const renderHostFactory = await loadRenderHostFactory();
   await import.meta.hot?.data.localShutdown;
   // Resolve player profile first
   showStartupStage("profile", "Loading your player…", "Opening saved profiles and preferences.");
@@ -515,10 +516,13 @@ function hideLocalHost(): void {
 /** Show a full-screen error overlay with recovery options. */
 function showErrorOverlay(error: unknown, recoverable = false): void {
   if (!recoverable) finishStartup();
-  reportFault(
-    error instanceof Error && error.name === "LocalServerHang" ? "server-hang" : "fatal",
-    error,
-  );
+  // A browser without WebGL2 is a device limit, not a fault (232).
+  const needsWebGl2 = error instanceof WebGl2UnavailableError;
+  if (!needsWebGl2)
+    reportFault(
+      error instanceof Error && error.name === "LocalServerHang" ? "server-hang" : "fatal",
+      error,
+    );
   // Only show the first error
   if (document.getElementById("tilefun-error-overlay")) return;
 
@@ -529,7 +533,12 @@ function showErrorOverlay(error: unknown, recoverable = false): void {
   overlay.id = "tilefun-error-overlay";
   overlay.setAttribute("role", "alertdialog");
   overlay.setAttribute("aria-modal", "true");
-  overlay.setAttribute("aria-label", recoverable ? "Couldn't save" : "Something went wrong");
+  const heading = needsWebGl2
+    ? "Tilefun needs WebGL2"
+    : recoverable
+      ? "Couldn't save"
+      : "Something went wrong";
+  overlay.setAttribute("aria-label", heading);
   overlay.style.cssText = `
     position: fixed; inset: 0; z-index: 9999;
     background: rgba(10, 10, 30, 0.95);
@@ -539,7 +548,7 @@ function showErrorOverlay(error: unknown, recoverable = false): void {
 
   const title = document.createElement("div");
   title.style.cssText = "font-size: 24px; font-weight: bold; color: #f66; margin-bottom: 16px;";
-  title.textContent = recoverable ? "Couldn't save" : "Something went wrong";
+  title.textContent = heading;
 
   const msgEl = document.createElement("div");
   msgEl.style.cssText =
@@ -599,7 +608,8 @@ function showErrorOverlay(error: unknown, recoverable = false): void {
   if (!recoverable && (joinPeerId || serverParam || multiplayer)) {
     btnRow.append(singlePlayerBtn);
   }
-  overlay.append(title, msgEl, stackEl, btnRow);
+  if (needsWebGl2) overlay.append(title, msgEl, btnRow);
+  else overlay.append(title, msgEl, stackEl, btnRow);
   document.body.appendChild(overlay);
   activateMenu(overlay, dismiss);
   (recoverable ? backBtn : reloadBtn).focus();
@@ -625,6 +635,7 @@ async function startWithDevUpdates(): Promise<void> {
 // Catch init errors
 startWithDevUpdates().catch((err) => {
   console.error("[tilefun] init failed:", err);
+  peerHost?.close();
   showErrorOverlay(err);
 });
 

@@ -83,13 +83,13 @@ export async function session(browser: Browser, overview = true) {
   try {
     await Promise.all([installProbe(host), installProbe(guest)]);
     // Two full games share one hosted runner; these sessions test networking and
-    // Worker authority, so both use the Canvas renderer rather than software WebGL.
+    // Worker authority.
     const generation = encodeURIComponent(
       JSON.stringify({ type: "flat", version: "flat-v1", seed: 42, preset: "grass" }),
     );
     const hostId = `recovery-${crypto.randomUUID()}`;
     await host.goto(
-      `/tilefun/?host&desktop=1&nogamepad&renderer=canvas&playerid=${hostId}&peerServer=${peerServer}&generation=${generation}`,
+      `/tilefun/?host&desktop=1&nogamepad&playerid=${hostId}&peerServer=${peerServer}&generation=${generation}`,
     );
     await expect(host.getByText("Hosting as Player 1", { exact: true })).toBeVisible();
     await host.getByRole("button", { name: "Back", exact: true }).click();
@@ -102,7 +102,7 @@ export async function session(browser: Browser, overview = true) {
       await host.keyboard.press("1");
       await expect.poll(async () => (await state(host)).chunks).toBeGreaterThan(50);
     }
-    await guest.goto(`/tilefun/?join=${hostId}&peerServer=${peerServer}&nogamepad&renderer=canvas`);
+    await guest.goto(`/tilefun/?join=${hostId}&peerServer=${peerServer}&nogamepad`);
     await expect(guest.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 30_000 });
     await expect.poll(async () => (await state(guest)).playerId).toBeGreaterThan(0);
     await advancing(guest);

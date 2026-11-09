@@ -226,8 +226,8 @@ paint, inward native-pixel silhouette ink and cosmetic distance-driven wheel rol
 forward length, roof height and circular tire geometry stay unchanged. Heading
 follows displayed motion immediately and holds at rest. Missing/loading/failed
 models retain the complete sprite. GPU + 3D car is the
-owner-selected main-game default as of 2026-10-11. The game selector is
-**Debug → Renderer → GPU + 3D cars**, the only GPU mode since 2026-11-09.
+owner-selected main-game default as of 2026-10-11 and, since
+[232](../tactical/232-webgl2-only-renderer.md), the only renderer (WebGL2 required).
 
 All six compact colors now use their own assets with this adapter. For testing, append `&allcars3d`
 to the game URL or Traffic lab: all `vehicle-v1:` road

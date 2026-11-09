@@ -23,7 +23,7 @@ test("edits and ready markers preserve play; controller reload saves, and save f
     await server.listen();
     const address = server.httpServer?.address();
     if (!address || typeof address === "string") throw new Error("Missing port");
-    const url = `http://127.0.0.1:${address.port}/tilefun/?renderer=canvas`;
+    const url = `http://127.0.0.1:${address.port}/tilefun/`;
     const stream = page.waitForResponse((res) => res.url().endsWith("/__dev-updates"));
     await page.goto(url);
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");

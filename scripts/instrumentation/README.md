@@ -193,7 +193,7 @@ Use `--stages=standing,drive,overview-drive,zoom-entry` to select/order stages;
 repeated stage names are allowed. `--arrival=gateway` uses the existing city-center
 inspection; `core` uses the same plan's central north/south extent. Overview zooms
 are 0.05/0.1/0.25. Default GPU/mesh mode still has sprite fallbacks for native models.
-`--renderer=canvas` or `--meshes=false` changes the renderer control explicitly.
+`--meshes=false` changes the vehicle-body control; `--renderer=canvas` was removed (232).
 
 Use `--arrival=racetrack` for the south spectator entrance,
 `racetrack-north` for the north spectators, or `racetrack-center` for the infield.

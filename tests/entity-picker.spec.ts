@@ -6,9 +6,6 @@ import { ENTITY_DEFS } from "../src/entities/EntityDefs.js";
 
 // Exercise the same compositor used by the actual picker, including phone sizing.
 test.use({ channel: "chromium" });
-// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
-// software WebGL slows every page action about eightfold.
-
 for (const viewport of [
   { width: 1280, height: 800 },
   { width: 390, height: 844 },
@@ -17,7 +14,7 @@ for (const viewport of [
     page,
   }, testInfo) => {
     await page.setViewportSize(viewport);
-    await page.goto("/tilefun/?nogamepad&renderer=canvas");
+    await page.goto("/tilefun/?nogamepad");
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await page.getByTestId("main-menu-toggle").click();
     await page.getByRole("button", { name: "Edit", exact: true }).click();

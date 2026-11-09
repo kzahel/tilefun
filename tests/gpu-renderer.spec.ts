@@ -144,7 +144,8 @@ test("default GPU mesh host runs the shared game and retains the input/UI canvas
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/tilefun/");
+  // Old renderer links are ignored (232): there is only the WebGL2 renderer.
+  await page.goto("/tilefun/?renderer=legacy-canvas");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect(page.locator("#game")).toHaveAttribute("data-renderer", "gpu");
   expect(
@@ -188,7 +189,7 @@ test("default GPU mesh host runs the shared game and retains the input/UI canvas
     const first = game.renderHost.captureFrame?.();
     const second = game.renderHost.captureFrame?.();
     return {
-      mode: game.renderHost.rendererControl?.mode,
+      mode: (canvas as HTMLCanvasElement).dataset.renderer,
       dimensions: [first?.width, first?.height],
       expected: [(canvas as HTMLCanvasElement).width, (canvas as HTMLCanvasElement).height],
       visible: first
@@ -534,7 +535,7 @@ test("authored car retains its fixed width registration across headings and zoom
 test("shared traffic scenario feeds the same GPU mesh path", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
+  await page.goto("/tilefun/workshop.html#/tool/traffic");
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   expect(
@@ -552,7 +553,7 @@ test("Traffic override selects original non-blue road vehicles without changing 
   page,
 }) => {
   await page.goto(
-    "/tilefun/workshop.html?geometry=car-garage&vehicle=pickup&renderer=gpu&meshes&allcars3d#/tool/world-geometry",
+    "/tilefun/workshop.html?geometry=car-garage&vehicle=pickup&allcars3d#/tool/world-geometry",
   );
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
@@ -674,7 +675,7 @@ test("separate surface passes reuse local rasters through camera movement", asyn
 test("real graphics loss recovers resources without restarting gameplay", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/tilefun/?renderer=gpu&meshes");
+  await page.goto("/tilefun/");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   const gpu = page.locator("canvas[data-renderer=gpu][aria-hidden=true]");
   // Renderer readiness can precede the first authority snapshot. Capture a
@@ -751,7 +752,7 @@ test("smooth shadows preserve final pixel placement at different scales", async 
 test("GPU feedback capture includes the world and preserves generation metadata", async ({
   page,
 }) => {
-  await page.goto("/tilefun/?renderer=gpu");
+  await page.goto("/tilefun/");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.waitForFunction(
     () =>
@@ -805,7 +806,7 @@ test("portable car materials render through WebGPU selection and forced WebGL2",
   }
 });
 
-test("unavailable WebGL2 leaves a usable Canvas game", async ({ page }) => {
+test("unavailable WebGL2 shows the needs-WebGL2 screen in the game and labs", async ({ page }) => {
   await page.addInitScript(() => {
     const original = HTMLCanvasElement.prototype.getContext;
     HTMLCanvasElement.prototype.getContext = function (
@@ -817,90 +818,35 @@ test("unavailable WebGL2 leaves a usable Canvas game", async ({ page }) => {
       return Reflect.apply(original, this, [kind, ...args]);
     } as typeof original;
   });
-  await page.goto("/tilefun/");
-  await expect(page.locator("#game")).toHaveAttribute("data-renderer", "canvas-fallback");
-  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  // No Canvas fallback (232); an old renderer link changes nothing.
+  await page.goto("/tilefun/?renderer=legacy-canvas");
+  const dialog = page.getByRole("alertdialog", { name: "Tilefun needs WebGL2" });
+  await expect(dialog.getByText(/Turn on hardware acceleration/)).toBeVisible();
+  await expect(dialog.getByRole("group")).toHaveCount(0); // no stack details
   await expect(page.locator("canvas[data-renderer=gpu]")).toHaveCount(0);
+  await page.goto("/tilefun/workshop.html#/tool/character-lab?character=tiger");
+  await expect(page.getByText(/^Tilefun needs WebGL2/)).toBeVisible();
 });
 
-test("debug renderer selector switches live without replacing the game or Worker", async ({
+test("a GPU backend failure after a successful WebGL2 probe is an ordinary fault", async ({
   page,
 }) => {
-  await page.setViewportSize({ width: 390, height: 844 });
-  const errors: string[] = [];
-  page.on("pageerror", (error) => errors.push(error.message));
-  // Legacy Canvas is offered only when the page already selected it (29a5989d).
-  await page.goto("/tilefun/?nogamepad&testflag=keep&renderer=legacy-canvas");
-  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-  await page.getByRole("button", { name: "☰", exact: true }).click();
-  await page.getByRole("button", { name: "Debug", exact: true }).click();
-  const selector = page.getByRole("combobox", { name: "Renderer", exact: true });
-  const options = () =>
-    selector.locator("option").evaluateAll((all) => all.map((o) => (o as HTMLOptionElement).value));
-  await expect(selector).toHaveValue("canvas");
-  expect(await options()).toEqual(["canvas", "gpu"]);
-  const bounds = await selector.boundingBox();
-  expect(bounds && bounds.x >= 0 && bounds.x + bounds.width <= 390).toBe(true);
-  const original = await page.locator("#game").evaluateHandle((canvas) => {
-    const game = (
-      canvas as unknown as {
-        __game: { transport: unknown; stateView: { playerEntity: { id: number } } };
-      }
-    ).__game;
-    return { game, transport: game.transport, playerId: game.stateView.playerEntity.id };
+  await page.addInitScript(() => {
+    const original = HTMLCanvasElement.prototype.getContext;
+    let webgl2 = 0;
+    HTMLCanvasElement.prototype.getContext = function (
+      this: HTMLCanvasElement,
+      kind: string,
+      ...args: unknown[]
+    ) {
+      // The first request is the probe; the renderer's own context then fails.
+      if (kind === "webgl2" && ++webgl2 > 1) return null;
+      return Reflect.apply(original, this, [kind, ...args]);
+    } as typeof original;
   });
-  for (const mode of ["gpu", "canvas", "gpu"]) {
-    await selector.selectOption(mode);
-    await expect(selector).toBeEnabled();
-    await expect(selector).toHaveValue(mode);
-    await expect(page.locator("#game")).toHaveAttribute(
-      "data-renderer",
-      mode === "canvas" ? "canvas" : "gpu",
-    );
-    await expect(page.locator("canvas[data-renderer=gpu][aria-hidden=true]")).toHaveCount(
-      mode === "canvas" ? 0 : 1,
-    );
-    await page.waitForFunction(
-      () =>
-        (
-          document.querySelector("#game") as unknown as {
-            __game: { renderer: { getDiagnostics(): { resident: number } } };
-          }
-        ).__game.renderer.getDiagnostics().resident > 0,
-    );
-    expect(
-      await original.evaluate((before) => {
-        const game = (document.querySelector("#game") as unknown as { __game: typeof before.game })
-          .__game;
-        return (
-          game === before.game &&
-          game.transport === before.transport &&
-          game.stateView.playerEntity.id === before.playerId
-        );
-      }),
-    ).toBe(true);
-    const url = new URL(page.url());
-    expect(url.searchParams.get("testflag")).toBe("keep");
-    expect(url.searchParams.get("renderer")).toBe(mode === "canvas" ? "legacy-canvas" : "gpu");
-    expect(url.searchParams.has("meshes")).toBe(false);
-    if (mode === "gpu")
-      await page.waitForFunction(
-        () =>
-          (
-            document.querySelector("#game") as unknown as {
-              __game: { renderer: { getDiagnostics(): { gpu: { meshState: string } } } };
-            }
-          ).__game.renderer.getDiagnostics().gpu.meshState === "ready",
-      );
-  }
-  await original.dispose();
-  await page.reload();
-  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-  await expect(page.locator("#game")).toHaveAttribute("data-renderer", "gpu");
-  // The open debug panel survives reload; its rebuilt selector drops legacy Canvas.
-  await expect(selector).toHaveValue("gpu");
-  expect(await options()).toEqual(["gpu"]);
-  expect(errors).toEqual([]);
+  await page.goto("/tilefun/");
+  await expect(page.getByRole("alertdialog", { name: "Something went wrong" })).toBeVisible();
+  await expect(page.getByRole("alertdialog", { name: "Tilefun needs WebGL2" })).toHaveCount(0);
 });
 
 test("GPU reads decoded image dimensions once per frame and resets on recovery", async ({

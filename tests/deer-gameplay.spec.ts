@@ -4,102 +4,91 @@ import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { DEER_TYPE } from "../src/wildlife/Deer.js";
 
 test.use({ channel: "chromium" });
-// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
-// software WebGL slows every page action about eightfold.
-
 // Shared Rapier contacts rest bodies within solver slop of the ground rather
 // than at exact zero, and the landing impact's depenetration can briefly give
 // the player ~20 px/s (frog, measured natively). The removed automatic wildlife
 // bounces (c473f541) launched at 75-95 px/s.
 const grounded = (z: number) => Math.abs(z) < 0.5;
 const MAX_LANDING_VZ = 40;
-// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
-for (const renderer of ["canvas"]) {
-  test(`woodland deer walk, react to landing and reload their walking pose (${renderer})`, async ({
-    page,
-  }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (e) => errors.push(e.message));
-    await page.goto(
-      `/tilefun/workshop.html?geometry=nature-deer&landscape=thicket&renderer=${renderer}#/tool/world-geometry`,
-    );
-    const c = page.getByLabel("Natural landscape playground");
-    await expect(c).toHaveAttribute("data-ready", "true");
-    await page.getByLabel("Landscape zoom").selectOption("0.8");
-    const poses = async () =>
-      JSON.parse((await c.getAttribute("data-deer-poses")) ?? "[]") as {
-        id: number;
-        x: number;
-        y: number;
-        z: number;
-        clip: number;
-        frame: number;
-        state: string;
-      }[];
-    const original = await poses();
-    expect(original.length).toBeGreaterThanOrEqual(2);
-    await expect
-      .poll(
-        async () => (await poses()).some((f) => f.clip === 1 && grounded(f.z) && f.frame >= 4),
-        {
-          intervals: [30],
-        },
-      )
-      .toBe(true);
-    // Pause a routine walk as well as the escape below. This checks saved phase,
-    // rather than assuming the client restarts its walk at frame zero.
-    await page.getByRole("button", { name: "Pause", exact: true }).click();
-    await expect(c).toHaveAttribute("data-authority-running", "false");
-    const before = await poses();
-    await page.waitForTimeout(250);
-    expect(await poses()).toEqual(before);
-    await page.screenshot({ path: `/tmp/tilefun-deer-woodland-${renderer}.png`, fullPage: true });
-    await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
-    await expect(c).toHaveAttribute("data-reload-count", "1");
-    const restored = await poses();
-    expect(restored.length).toBe(before.length);
-    for (const f of before) {
-      // Runtime IDs are reassigned on hydration; durable identity is checked in headless residency tests.
-      const r = restored.find((r) => Math.abs(r.x - f.x) < 0.01 && Math.abs(r.y - f.y) < 0.01);
-      expect(r?.x).toBeCloseTo(f.x, 3);
-      expect(r?.y).toBeCloseTo(f.y, 3);
-      expect(r?.z).toBeCloseTo(f.z, 3);
-      if (f.clip === 1) expect(r?.frame).toBe(f.frame);
-    }
-    await page.getByRole("button", { name: "Resume", exact: true }).click();
-    await expect
-      .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)))
-      .toBe(true);
-    // The player's start can alarm the nearest herd. Hopping elsewhere then would
-    // leave that herd scared outside the active region, never observed to recover.
-    await expect
-      .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 15000 })
-      .toBe(true);
-    await page.getByRole("button", { name: "Hop onto deer", exact: true }).click();
-    await expect
-      .poll(
-        async () =>
-          (await poses()).some((f) => f.state === "scared" && f.clip === 3 && grounded(f.z)),
-        { intervals: [30] },
-      )
-      .toBe(true);
-    // Leave the alarm radius after the landing. Remaining beside the herd can
-    // start a fresh scare before a slow renderer observes the recovery.
-    await c.focus();
-    await page.keyboard.press("ArrowDown", { delay: 750 });
-    await expect
-      .poll(
-        async () => {
-          const current = await poses();
-          return current.length >= original.length && current.every((f) => f.state !== "scared");
-        },
-        { timeout: 15000 },
-      )
-      .toBe(true);
-    expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
-    expect(errors).toEqual([]);
-  });
-}
+test(`woodland deer walk, react to landing and reload their walking pose`, async ({ page }) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto(
+    `/tilefun/workshop.html?geometry=nature-deer&landscape=thicket#/tool/world-geometry`,
+  );
+  const c = page.getByLabel("Natural landscape playground");
+  await expect(c).toHaveAttribute("data-ready", "true");
+  await page.getByLabel("Landscape zoom").selectOption("0.8");
+  const poses = async () =>
+    JSON.parse((await c.getAttribute("data-deer-poses")) ?? "[]") as {
+      id: number;
+      x: number;
+      y: number;
+      z: number;
+      clip: number;
+      frame: number;
+      state: string;
+    }[];
+  const original = await poses();
+  expect(original.length).toBeGreaterThanOrEqual(2);
+  await expect
+    .poll(async () => (await poses()).some((f) => f.clip === 1 && grounded(f.z) && f.frame >= 4), {
+      intervals: [30],
+    })
+    .toBe(true);
+  // Pause a routine walk as well as the escape below. This checks saved phase,
+  // rather than assuming the client restarts its walk at frame zero.
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await expect(c).toHaveAttribute("data-authority-running", "false");
+  const before = await poses();
+  await page.waitForTimeout(250);
+  expect(await poses()).toEqual(before);
+  await page.screenshot({ path: `/tmp/tilefun-deer-woodland.png`, fullPage: true });
+  await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+  await expect(c).toHaveAttribute("data-reload-count", "1");
+  const restored = await poses();
+  expect(restored.length).toBe(before.length);
+  for (const f of before) {
+    // Runtime IDs are reassigned on hydration; durable identity is checked in headless residency tests.
+    const r = restored.find((r) => Math.abs(r.x - f.x) < 0.01 && Math.abs(r.y - f.y) < 0.01);
+    expect(r?.x).toBeCloseTo(f.x, 3);
+    expect(r?.y).toBeCloseTo(f.y, 3);
+    expect(r?.z).toBeCloseTo(f.z, 3);
+    if (f.clip === 1) expect(r?.frame).toBe(f.frame);
+  }
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await expect
+    .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)))
+    .toBe(true);
+  // The player's start can alarm the nearest herd. Hopping elsewhere then would
+  // leave that herd scared outside the active region, never observed to recover.
+  await expect
+    .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 15000 })
+    .toBe(true);
+  await page.getByRole("button", { name: "Hop onto deer", exact: true }).click();
+  await expect
+    .poll(
+      async () =>
+        (await poses()).some((f) => f.state === "scared" && f.clip === 3 && grounded(f.z)),
+      { intervals: [30] },
+    )
+    .toBe(true);
+  // Leave the alarm radius after the landing. Remaining beside the herd can
+  // start a fresh scare before a slow renderer observes the recovery.
+  await c.focus();
+  await page.keyboard.press("ArrowDown", { delay: 750 });
+  await expect
+    .poll(
+      async () => {
+        const current = await poses();
+        return current.length >= original.length && current.every((f) => f.state !== "scared");
+      },
+      { timeout: 15000 },
+    )
+    .toBe(true);
+  expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
+  expect(errors).toEqual([]);
+});
 
 test("ordinary woodland deer support manual creation and durable deletion on world reopening", async ({
   page,
@@ -107,7 +96,7 @@ test("ordinary woodland deer support manual creation and durable deletion on wor
   const generation = createDescriptor("regional", 2026);
   const arrival = { x: -164, y: -460, generation };
   await page.goto(
-    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByPlaceholder("World name...").fill("Durable deer woodland");
   await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -151,7 +140,7 @@ test("ordinary woodland deer support manual creation and durable deletion on wor
     await host.flush();
     await host.shutdown();
   });
-  await page.goto("/tilefun/?nogamepad&renderer=canvas");
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(async () => (await deer()).length).toBe(original.length);
   await page.screenshot({ path: "/tmp/tilefun-deer-game.png" });

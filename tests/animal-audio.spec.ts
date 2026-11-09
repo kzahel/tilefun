@@ -26,9 +26,7 @@ test("recorded voices decode, render audible samples, audition by keyboard and f
       else start.call(this, when, offset, duration);
     };
   });
-  await page.goto(
-    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=nature-behavior-dog#/tool/world-geometry",
-  );
+  await page.goto("/tilefun/workshop.html?geometry=nature-behavior-dog#/tool/world-geometry");
   await page.getByLabel("Animal sound coverage", { exact: true }).selectOption("recorded");
   const results = page.getByRole("region", { name: "Animal results" });
   await expect(results.locator("article")).toHaveCount(coverageCount("recorded"));
@@ -113,7 +111,7 @@ test("ordinary Worker game plays placed farm voices and stops them at menu/focus
   const generation = createDescriptor("flat", 1),
     arrival = { x: 4, y: 4, generation };
   await page.goto(
-    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
   const canvas = page.locator("#game");

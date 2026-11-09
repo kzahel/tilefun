@@ -47,6 +47,9 @@ root.innerHTML = `<header><a href="./tools.html">Indexes & atlases</a><a href=".
 <section class="report"><p id="grade" role="status">Unchecked</p><label>Optional note <input id="note" maxlength="1800" placeholder="e.g. I stop too far from the wardrobe"></label><div class="verdict-buttons"><button id="good">Looks good</button><button id="report">Report issue</button></div><p>Your scene, player height, gravity, object settings and screenshot are included.</p></section>`;
 const el = <T extends HTMLElement = HTMLElement>(id: string) => document.getElementById(id) as T;
 const canvas = el<HTMLCanvasElement>("room");
+// Browser checks read the composed world and UI, as a review report does (232).
+(canvas as HTMLCanvasElement & { __capture?: () => HTMLCanvasElement }).__capture = () =>
+  presentation?.captureFrame() ?? canvas;
 const scene = el<HTMLSelectElement>("scene"),
   object = el<HTMLSelectElement>("object"),
   mode = el<HTMLSelectElement>("mode");

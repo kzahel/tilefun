@@ -2,13 +2,12 @@ import { expect, test } from "@playwright/test";
 import type { GeometryCanvas } from "../src/workshop/WorldGeometryPage.js";
 
 test.use({ channel: "chromium" });
-const renderer = "gpu";
-test(`preview authority survives a stalled client and explicit lifecycle fences (${renderer})`, async ({
+test(`preview authority survives a stalled client and explicit lifecycle fences`, async ({
   page,
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto(`/tilefun/workshop.html?renderer=${renderer}#/tool/traffic`);
+  await page.goto("/tilefun/workshop.html#/tool/traffic");
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   const diagnostic = () => canvas.evaluate((c: GeometryCanvas) => c.__presentationDiagnostics?.());

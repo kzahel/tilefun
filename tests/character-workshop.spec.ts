@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import type { ArtNote } from "../src/art/ArtNotes.js";
 import { required } from "../src/shared/required.js";
 
-const url = "/tilefun/workshop.html?renderer=legacy-canvas#/tool/character-lab";
+const url = "/tilefun/workshop.html#/tool/character-lab";
 
 test("character lab lists six candidates and exercises movement, grounding, animation and editing", async ({
   page,

@@ -4,9 +4,8 @@ import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPla
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { exteriorDoors } from "../src/interiors/BuildingDoors.js";
 
-// Door traversal is DOM, Worker authority and presentation state, not GPU output;
-// the Canvas renderer keeps these long flows within hosted software-WebGL budgets.
-const GAME = "/tilefun/?renderer=canvas";
+// Door traversal is DOM, Worker authority and presentation state, not GPU output.
+const GAME = "/tilefun/";
 
 for (const kind of ["butcher", "condo-bay"]) {
   test(`${kind}: walk between entrances, exit at the selected door and reload indoors`, async ({
@@ -33,7 +32,7 @@ for (const kind of ["butcher", "condo-bay"]) {
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.goto(
-      `${GAME}&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `${GAME}?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await expect(page.getByTestId("world-menu")).toBeHidden();
@@ -127,7 +126,7 @@ for (const kind of ["butcher", "condo-bay"]) {
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.goto(
-      `${GAME}&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `${GAME}?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");

@@ -19,8 +19,8 @@ async function state(page: Page) {
     };
   });
 }
-async function start(page: Page, renderer: string) {
-  await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
+async function start(page: Page) {
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async () => {
     const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
@@ -62,123 +62,113 @@ async function enable(page: Page, mode = "Joystick") {
   }
   await page.getByRole("button", { name: "Back to game", exact: true }).tap();
 }
-for (const renderer of ["canvas", "gpu"]) {
-  test(`pinch preference, world zoom and joystick/button protection (${renderer})`, async ({
-    page,
-  }) => {
-    await start(page, renderer);
-    await page.locator('button[aria-label="Options"]').tap();
-    await expect(
-      page.getByRole("checkbox", { name: "Two-finger pinch to zoom" }),
-    ).not.toBeChecked();
-    await page.getByRole("button", { name: "Back to game", exact: true }).tap();
+test(`pinch preference, world zoom and joystick/button protection`, async ({ page }) => {
+  await start(page);
+  await page.locator('button[aria-label="Options"]').tap();
+  await expect(page.getByRole("checkbox", { name: "Two-finger pinch to zoom" })).not.toBeChecked();
+  await page.getByRole("button", { name: "Back to game", exact: true }).tap();
+  const session = await page.context().newCDPSession(page);
+  const touch = (
+    type: "touchStart" | "touchMove" | "touchEnd" | "touchCancel",
+    points: { id: number; x: number; y: number }[],
+  ) => session.send("Input.dispatchTouchEvent", { type, touchPoints: points });
+  const a = { id: 1, x: 180, y: 350 };
+  const b = { id: 2, x: 300, y: 350 };
+  await touch("touchStart", [a, b]);
+  await touch("touchMove", [a, { ...b, x: 420 }]);
+  expect((await state(page)).zoom).toBe(1);
+  await touch("touchEnd", []);
+  await enable(page);
+  await touch("touchStart", [a, b]);
+  await touch("touchMove", [a, { ...b, x: 420 }]);
+  await expect.poll(async () => (await state(page)).zoom).toBe(2);
+  expect((await state(page)).joystick).toBe(false);
+  await touch("touchMove", [a, { ...b, x: 240 }]);
+  await expect.poll(async () => (await state(page)).zoom).toBe(0.5);
+  await touch("touchEnd", [a]);
+  await touch("touchMove", [{ ...a, x: 230 }]);
+  expect((await state(page)).joystick).toBe(false);
+  await touch("touchEnd", []);
+  // A dragged joystick plus a second world finger must continue moving without zoom.
+  await touch("touchStart", [a]);
+  await touch("touchMove", [{ ...a, x: 230 }]);
+  await touch("touchStart", [{ ...a, x: 230 }, b]);
+  await touch("touchMove", [
+    { ...a, x: 230 },
+    { ...b, x: 420 },
+  ]);
+  expect((await state(page)).zoom).toBe(0.5);
+  expect((await state(page)).movement.dx).toBeGreaterThan(0);
+  await touch("touchEnd", []);
+  // The keypad's jump touch is never a pinch finger, even with a neutral joystick.
+  const jump = { id: 2, x: 548, y: 748 };
+  await touch("touchStart", [a, jump]);
+  await touch("touchMove", [{ ...a, x: 230 }, jump]);
+  expect((await state(page)).zoom).toBe(0.5);
+  expect((await state(page)).jump).toBe(true);
+  expect((await state(page)).movement.dx).toBeGreaterThan(0);
+  await touch("touchEnd", []);
+  await page.reload();
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await page.locator('button[aria-label="Options"]').tap();
+  await expect(page.getByRole("checkbox", { name: "Two-finger pinch to zoom" })).toBeChecked();
+  await page.getByRole("checkbox", { name: "Two-finger pinch to zoom" }).uncheck();
+  await expect(page.getByRole("status").filter({ hasText: "Zoom preference saved" })).toBeVisible();
+  await page.getByRole("button", { name: "Back to game", exact: true }).tap();
+  const before = (await state(page)).zoom;
+  await touch("touchStart", [a, b]);
+  await touch("touchMove", [a, { ...b, x: 420 }]);
+  expect((await state(page)).zoom).toBe(before);
+  await touch("touchEnd", []);
+  await page.reload();
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await page.locator('button[aria-label="Options"]').tap();
+  await expect(page.getByRole("checkbox", { name: "Two-finger pinch to zoom" })).not.toBeChecked();
+  await session.detach();
+});
+test(`pinch cancels world movement and Options cancels pinch`, async ({ page }) => {
+  await start(page);
+  for (const mode of ["Tap to move"]) {
+    await enable(page, mode);
     const session = await page.context().newCDPSession(page);
-    const touch = (
-      type: "touchStart" | "touchMove" | "touchEnd" | "touchCancel",
-      points: { id: number; x: number; y: number }[],
-    ) => session.send("Input.dispatchTouchEvent", { type, touchPoints: points });
-    const a = { id: 1, x: 180, y: 350 };
-    const b = { id: 2, x: 300, y: 350 };
-    await touch("touchStart", [a, b]);
-    await touch("touchMove", [a, { ...b, x: 420 }]);
-    expect((await state(page)).zoom).toBe(1);
-    await touch("touchEnd", []);
-    await enable(page);
-    await touch("touchStart", [a, b]);
-    await touch("touchMove", [a, { ...b, x: 420 }]);
-    await expect.poll(async () => (await state(page)).zoom).toBe(2);
-    expect((await state(page)).joystick).toBe(false);
-    await touch("touchMove", [a, { ...b, x: 240 }]);
-    await expect.poll(async () => (await state(page)).zoom).toBe(0.5);
-    await touch("touchEnd", [a]);
-    await touch("touchMove", [{ ...a, x: 230 }]);
-    expect((await state(page)).joystick).toBe(false);
-    await touch("touchEnd", []);
-    // A dragged joystick plus a second world finger must continue moving without zoom.
-    await touch("touchStart", [a]);
-    await touch("touchMove", [{ ...a, x: 230 }]);
-    await touch("touchStart", [{ ...a, x: 230 }, b]);
-    await touch("touchMove", [
-      { ...a, x: 230 },
-      { ...b, x: 420 },
-    ]);
-    expect((await state(page)).zoom).toBe(0.5);
-    expect((await state(page)).movement.dx).toBeGreaterThan(0);
-    await touch("touchEnd", []);
-    // The keypad's jump touch is never a pinch finger, even with a neutral joystick.
-    const jump = { id: 2, x: 548, y: 748 };
-    await touch("touchStart", [a, jump]);
-    await touch("touchMove", [{ ...a, x: 230 }, jump]);
-    expect((await state(page)).zoom).toBe(0.5);
-    expect((await state(page)).jump).toBe(true);
-    expect((await state(page)).movement.dx).toBeGreaterThan(0);
-    await touch("touchEnd", []);
-    await page.reload();
-    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-    await page.locator('button[aria-label="Options"]').tap();
-    await expect(page.getByRole("checkbox", { name: "Two-finger pinch to zoom" })).toBeChecked();
-    await page.getByRole("checkbox", { name: "Two-finger pinch to zoom" }).uncheck();
-    await expect(
-      page.getByRole("status").filter({ hasText: "Zoom preference saved" }),
-    ).toBeVisible();
+    await session.send("Input.dispatchTouchEvent", {
+      type: "touchStart",
+      touchPoints: [
+        { id: 1, x: 180, y: 350 },
+        { id: 2, x: 300, y: 350 },
+      ],
+    });
+    await session.send("Input.dispatchTouchEvent", {
+      type: "touchMove",
+      touchPoints: [
+        { id: 1, x: 180, y: 350 },
+        { id: 2, x: 420, y: 350 },
+      ],
+    });
+    expect((await state(page)).target).toBeNull();
+    const zoom = (await state(page)).zoom;
+    await page
+      .locator('button[aria-label="Options"]')
+      .evaluate((b: HTMLButtonElement) => b.click());
+    await session.send("Input.dispatchTouchEvent", {
+      type: "touchMove",
+      touchPoints: [
+        { id: 1, x: 180, y: 350 },
+        { id: 2, x: 500, y: 350 },
+      ],
+    });
+    expect((await state(page)).zoom).toBe(zoom);
+    await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
     await page.getByRole("button", { name: "Back to game", exact: true }).tap();
-    const before = (await state(page)).zoom;
-    await touch("touchStart", [a, b]);
-    await touch("touchMove", [a, { ...b, x: 420 }]);
-    expect((await state(page)).zoom).toBe(before);
-    await touch("touchEnd", []);
-    await page.reload();
-    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-    await page.locator('button[aria-label="Options"]').tap();
-    await expect(
-      page.getByRole("checkbox", { name: "Two-finger pinch to zoom" }),
-    ).not.toBeChecked();
+    expect((await state(page)).target).toBeNull();
     await session.detach();
-  });
-  test(`pinch cancels world movement and Options cancels pinch (${renderer})`, async ({ page }) => {
-    await start(page, renderer);
-    for (const mode of ["Tap to move"]) {
-      await enable(page, mode);
-      const session = await page.context().newCDPSession(page);
-      await session.send("Input.dispatchTouchEvent", {
-        type: "touchStart",
-        touchPoints: [
-          { id: 1, x: 180, y: 350 },
-          { id: 2, x: 300, y: 350 },
-        ],
-      });
-      await session.send("Input.dispatchTouchEvent", {
-        type: "touchMove",
-        touchPoints: [
-          { id: 1, x: 180, y: 350 },
-          { id: 2, x: 420, y: 350 },
-        ],
-      });
-      expect((await state(page)).target).toBeNull();
-      const zoom = (await state(page)).zoom;
-      await page
-        .locator('button[aria-label="Options"]')
-        .evaluate((b: HTMLButtonElement) => b.click());
-      await session.send("Input.dispatchTouchEvent", {
-        type: "touchMove",
-        touchPoints: [
-          { id: 1, x: 180, y: 350 },
-          { id: 2, x: 500, y: 350 },
-        ],
-      });
-      expect((await state(page)).zoom).toBe(zoom);
-      await session.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
-      await page.getByRole("button", { name: "Back to game", exact: true }).tap();
-      expect((await state(page)).target).toBeNull();
-      await session.detach();
-    }
-  });
-}
+  }
+});
 
 test("Options keeps the checkbox and Back button visible in portrait and landscape", async ({
   page,
 }) => {
-  await start(page, "canvas");
+  await start(page);
   for (const viewport of [
     { width: 390, height: 844 },
     { width: 844, height: 390 },

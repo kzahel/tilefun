@@ -8,10 +8,11 @@ import { createServer } from "vite";
 
 const option = (name, fallback) =>
   process.argv.find((arg) => arg.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
-const renderer = option("renderer", "canvas");
+const renderer = option("renderer", "gpu");
 const serverHz = Number(option("server-hz", "60"));
-if (!["canvas", "gpu"].includes(renderer) || ![30, 60].includes(serverHz))
-  throw Error("Use --renderer=canvas|gpu and --server-hz=30|60");
+if (renderer !== "gpu")
+  throw Error("The game requires WebGL2 (232); --renderer=canvas was removed");
+if (![30, 60].includes(serverHz)) throw Error("Use --server-hz=30|60");
 const temp = await mkdtemp(path.join(os.tmpdir(), "tilefun-car-driving-"));
 for (const key of [
   "WORKSHOP_AUTH_DIR",

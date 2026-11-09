@@ -23,14 +23,14 @@ const state = (page: Page) =>
     };
   });
 
-// Input, contact and saved-preference flow; no GPU-output contract, so it runs on Canvas.
+// Input, contact and saved-preference flow; no GPU-output contract.
 test("saved car controls, keyboard steering, automatic reverse taps and dynamic car pushing", async ({
   page,
 }, testInfo) => {
   test.setTimeout(60_000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/tilefun/?nogamepad&renderer=canvas");
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async () => {
     const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;

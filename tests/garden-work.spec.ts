@@ -34,8 +34,7 @@ function spritePixels(png: PNG, pose: Pose, color: number[]) {
   }
   return { painted, pixels: Buffer.concat(rows).toString("base64") };
 }
-// Atlas pixels are renderer-independent; GPU sprite drawing consumes the same
-// scene and is compared with Canvas pixel for pixel in gpu-renderer.spec.
+// Atlas pixels are renderer-independent.
 test("garden action pixels, pollen-marked blooms and saved poses use the real Worker", async ({
   page,
 }) => {
@@ -43,9 +42,7 @@ test("garden action pixels, pollen-marked blooms and saved poses use the real Wo
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   for (const kind of ["chicken", "bee", "hummingbird"] as const) {
-    await page.goto(
-      `/tilefun/workshop.html?geometry=nature-behavior-${kind}&renderer=canvas#/tool/world-geometry`,
-    );
+    await page.goto(`/tilefun/workshop.html?geometry=nature-behavior-${kind}#/tool/world-geometry`);
     const canvas = page.getByLabel("Natural landscape playground");
     await expect(canvas).toHaveAttribute("data-ready", "true");
     await canvas.scrollIntoViewIfNeeded();

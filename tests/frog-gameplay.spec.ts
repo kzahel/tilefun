@@ -4,102 +4,96 @@ import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { FROG_TYPE } from "../src/wildlife/Frog.js";
 
 test.use({ channel: "chromium" });
-// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
-// software WebGL slows every page action about eightfold.
-
 // Shared Rapier contacts rest bodies within solver slop of the ground rather
 // than at exact zero, and the landing impact's depenetration can briefly give
 // the player ~20 px/s (frog, measured natively). The removed automatic wildlife
 // bounces (c473f541) launched at 75-95 px/s.
 const grounded = (z: number) => Math.abs(z) < 0.5;
 const MAX_LANDING_VZ = 40;
-// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
-for (const renderer of ["canvas"]) {
-  test(`pond frogs physically hop, react to landing and reload their mid-hop pose (${renderer})`, async ({
-    page,
-  }) => {
-    const errors: string[] = [];
-    page.on("pageerror", (e) => errors.push(e.message));
-    await page.goto(
-      `/tilefun/workshop.html?geometry=nature-frogs&landscape=thicket&renderer=${renderer}#/tool/world-geometry`,
-    );
-    const c = page.getByLabel("Natural landscape playground");
-    await expect(c).toHaveAttribute("data-ready", "true");
-    await page.getByLabel("Landscape zoom").selectOption("1.3");
-    const poses = async () =>
-      JSON.parse((await c.getAttribute("data-frog-poses")) ?? "[]") as {
-        id: number;
-        x: number;
-        y: number;
-        z: number;
-        clip: number;
-        frame: number;
-        state: string;
-      }[];
-    const original = await poses();
-    expect(original.length).toBeGreaterThanOrEqual(2);
-    await expect
-      .poll(
-        async () =>
-          (await poses()).some((f) => f.clip === 1 && f.z > 4 && f.frame >= 3 && f.frame <= 6),
-        { intervals: [30] },
-      )
-      .toBe(true);
-    // Pause a routine hop as well as the escape below. This checks saved phase,
-    // rather than assuming the client restarts its one-shot at frame zero.
-    await page.getByRole("button", { name: "Pause", exact: true }).click();
-    await expect(c).toHaveAttribute("data-authority-running", "false");
-    const before = await poses();
-    await page.waitForTimeout(250);
-    expect(await poses()).toEqual(before);
-    await page.screenshot({ path: `/tmp/tilefun-frog-pond-${renderer}.png`, fullPage: true });
-    await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
-    await expect(c).toHaveAttribute("data-reload-count", "1");
-    const restored = await poses();
-    expect(restored.length).toBe(before.length);
-    for (const f of before) {
-      // Runtime IDs are reassigned on hydration; durable identity is checked in headless residency tests.
-      const r = restored.find((r) => Math.abs(r.x - f.x) < 0.01 && Math.abs(r.y - f.y) < 0.01);
-      expect(r?.x).toBeCloseTo(f.x, 3);
-      expect(r?.y).toBeCloseTo(f.y, 3);
-      expect(r?.z).toBeCloseTo(f.z, 3);
-      if (f.clip === 1) expect(r?.frame).toBe(f.frame);
-    }
-    await page.getByRole("button", { name: "Resume", exact: true }).click();
-    await expect
-      .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)))
-      .toBe(true);
-    const hopOntoFrog = page.getByRole("button", { name: "Hop onto frog", exact: true });
-    await expect
-      .poll(
-        async () => {
-          const frogs = await poses();
-          if (frogs.some((f) => f.state === "scared" && f.clip === 1 && f.z > 3)) return true;
-          // The control picks the first grounded, non-scared frog. During a
-          // hop's push-off that frog can move away before the player lands;
-          // when none qualifies the control does nothing. Try a resting target
-          // and let any alarm finish before trying another real landing.
-          const target = frogs.find((f) => f.state !== "scared" && grounded(f.z));
-          if (!frogs.some((f) => f.state === "scared") && target?.clip === 0)
-            await hopOntoFrog.click();
-          return false;
-        },
-        { timeout: 10000, intervals: [30] },
-      )
-      .toBe(true);
-    await expect
-      .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 10000 })
-      .toBe(true);
-    expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
-    expect(errors).toEqual([]);
-  });
-}
+test(`pond frogs physically hop, react to landing and reload their mid-hop pose`, async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  page.on("pageerror", (e) => errors.push(e.message));
+  await page.goto(
+    `/tilefun/workshop.html?geometry=nature-frogs&landscape=thicket#/tool/world-geometry`,
+  );
+  const c = page.getByLabel("Natural landscape playground");
+  await expect(c).toHaveAttribute("data-ready", "true");
+  await page.getByLabel("Landscape zoom").selectOption("1.3");
+  const poses = async () =>
+    JSON.parse((await c.getAttribute("data-frog-poses")) ?? "[]") as {
+      id: number;
+      x: number;
+      y: number;
+      z: number;
+      clip: number;
+      frame: number;
+      state: string;
+    }[];
+  const original = await poses();
+  expect(original.length).toBeGreaterThanOrEqual(2);
+  await expect
+    .poll(
+      async () =>
+        (await poses()).some((f) => f.clip === 1 && f.z > 4 && f.frame >= 3 && f.frame <= 6),
+      { intervals: [30] },
+    )
+    .toBe(true);
+  // Pause a routine hop as well as the escape below. This checks saved phase,
+  // rather than assuming the client restarts its one-shot at frame zero.
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await expect(c).toHaveAttribute("data-authority-running", "false");
+  const before = await poses();
+  await page.waitForTimeout(250);
+  expect(await poses()).toEqual(before);
+  await page.screenshot({ path: `/tmp/tilefun-frog-pond.png`, fullPage: true });
+  await page.getByRole("button", { name: "Save / reload scene", exact: true }).click();
+  await expect(c).toHaveAttribute("data-reload-count", "1");
+  const restored = await poses();
+  expect(restored.length).toBe(before.length);
+  for (const f of before) {
+    // Runtime IDs are reassigned on hydration; durable identity is checked in headless residency tests.
+    const r = restored.find((r) => Math.abs(r.x - f.x) < 0.01 && Math.abs(r.y - f.y) < 0.01);
+    expect(r?.x).toBeCloseTo(f.x, 3);
+    expect(r?.y).toBeCloseTo(f.y, 3);
+    expect(r?.z).toBeCloseTo(f.z, 3);
+    if (f.clip === 1) expect(r?.frame).toBe(f.frame);
+  }
+  await page.getByRole("button", { name: "Resume", exact: true }).click();
+  await expect
+    .poll(async () => (await poses()).some((f) => f.clip === 0 && grounded(f.z)))
+    .toBe(true);
+  const hopOntoFrog = page.getByRole("button", { name: "Hop onto frog", exact: true });
+  await expect
+    .poll(
+      async () => {
+        const frogs = await poses();
+        if (frogs.some((f) => f.state === "scared" && f.clip === 1 && f.z > 3)) return true;
+        // The control picks the first grounded, non-scared frog. During a
+        // hop's push-off that frog can move away before the player lands;
+        // when none qualifies the control does nothing. Try a resting target
+        // and let any alarm finish before trying another real landing.
+        const target = frogs.find((f) => f.state !== "scared" && grounded(f.z));
+        if (!frogs.some((f) => f.state === "scared") && target?.clip === 0)
+          await hopOntoFrog.click();
+        return false;
+      },
+      { timeout: 10000, intervals: [30] },
+    )
+    .toBe(true);
+  await expect
+    .poll(async () => (await poses()).every((f) => f.state !== "scared"), { timeout: 10000 })
+    .toBe(true);
+  expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(MAX_LANDING_VZ);
+  expect(errors).toEqual([]);
+});
 
 test("frog ball contact dispatches client croaks through the live Worker", async ({ page }) => {
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
   await page.goto(
-    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.getByTestId("world-menu")).toBeHidden();
@@ -175,7 +169,7 @@ test("ordinary pond frogs support manual creation and durable deletion on world 
   const generation = createDescriptor("regional", 2026);
   const arrival = { x: 227, y: -183, generation };
   await page.goto(
-    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByPlaceholder("World name...").fill("Durable frog pond");
   await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -219,7 +213,7 @@ test("ordinary pond frogs support manual creation and durable deletion on world 
     await host.flush();
     await host.shutdown();
   });
-  await page.goto("/tilefun/?nogamepad&renderer=canvas");
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(async () => (await frogs()).length).toBe(original.length);
   await page.screenshot({ path: "/tmp/tilefun-frogs-game.png" });

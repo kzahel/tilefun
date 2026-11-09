@@ -11,9 +11,7 @@ test("normal Chromium verifies every character against the generated manifest", 
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   for (const def of CHARACTERS) {
-    await page.goto(
-      `/tilefun/workshop.html?renderer=legacy-canvas#/tool/character-lab?character=${def.id}`,
-    );
+    await page.goto(`/tilefun/workshop.html#/tool/character-lab?character=${def.id}`);
     await expect(page.getByRole("heading", { name: def.name, exact: true })).toBeVisible();
     await expect(page.getByLabel("Character movement test"), def.id).toHaveAttribute(
       "data-ready",
@@ -36,9 +34,7 @@ test("character verification rejects a mismatched manifest without enabling revi
     candidate.fingerprint = "0".repeat(64);
     await route.fulfill({ response, json: data });
   });
-  await page.goto(
-    "/tilefun/workshop.html?renderer=legacy-canvas#/tool/character-lab?character=tiger",
-  );
+  await page.goto("/tilefun/workshop.html#/tool/character-lab?character=tiger");
   await expect(page.getByRole("alert")).toContainText("report a rendering mismatch");
   await expect(page.getByRole("button", { name: "Approve character" })).toBeDisabled();
 });

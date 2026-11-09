@@ -6,7 +6,7 @@ test("embedded GPU surface tracks scrolling/resizing, recovers context and leave
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
+  await page.goto("/tilefun/workshop.html#/tool/traffic");
   const canvas = page.getByLabel("World geometry scene");
   const world = page.locator("canvas[data-renderer=gpu][aria-hidden=true]");
   await expect(canvas).toHaveAttribute("data-ready", "true");

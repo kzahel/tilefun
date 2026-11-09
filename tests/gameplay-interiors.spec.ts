@@ -5,7 +5,7 @@ import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { stopLocalWorld } from "./helpers/local-world.js";
 
 // Interior entry, furniture edits and reopening are Worker/DOM behavior, not GPU output.
-const GAME = "/tilefun/?renderer=canvas";
+const GAME = "/tilefun/";
 
 const source = new DenseDistrictSource(regionalWorld(2026), true);
 for (const kind of ["apartment", "shop"] as const)
@@ -27,7 +27,7 @@ for (const kind of ["apartment", "shop"] as const)
     const errors: string[] = [];
     page.on("pageerror", (error) => errors.push(error.message));
     await page.goto(
-      `${GAME}&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `${GAME}?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await expect(page.getByTestId("world-menu")).toBeHidden();

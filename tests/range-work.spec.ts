@@ -112,9 +112,7 @@ const KINDS = [
   "porcupine",
   "fox",
 ] as const;
-// Species atlases are renderer-independent textures; Canvas draws every kind.
-// GPU sprite drawing consumes the same scene and is compared with Canvas pixel
-// for pixel in gpu-renderer.spec (renderer lab), so no per-species GPU variant.
+// Species atlases are renderer-independent textures, so one case per kind covers them.
 for (const kind of KINDS)
   test(`${kind} range activity animates through the Worker`, async ({ page }) => {
     test.setTimeout(120000);
@@ -156,7 +154,7 @@ for (const kind of KINDS)
                               : "build"
       ] as { start: number; count: number };
       await page.goto(
-        `/tilefun/workshop.html?geometry=nature-behavior-${kind}&renderer=canvas#/tool/world-geometry`,
+        `/tilefun/workshop.html?geometry=nature-behavior-${kind}#/tool/world-geometry`,
       );
       const canvas = page.getByLabel("Natural landscape playground");
       await expect(canvas).toHaveAttribute("data-ready", "true");

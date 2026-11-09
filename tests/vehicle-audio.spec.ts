@@ -144,7 +144,7 @@ test("traffic lab uses the shared engine after gesture unlock and releases audio
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await instrument(page);
-  await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
+  await page.goto("/tilefun/workshop.html#/tool/traffic");
   await expect(page.getByLabel("World geometry scene")).toHaveAttribute("data-ready", "true");
   await page.getByRole("button", { name: "Enable engine sounds", exact: true }).click();
   expect(await voices(page)).toBe(0); // Standing near NPC traffic does not start a driver voice.

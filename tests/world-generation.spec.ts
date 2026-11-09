@@ -35,7 +35,7 @@ test("new worlds and the explorer default to the newest regional revision", asyn
   await expect(revision).toHaveValue(CURRENT_REGIONAL_VERSION);
 });
 
-// Descriptor and IndexedDB checks, not rendering: Canvas, one generator per case.
+// Descriptor and IndexedDB checks, not rendering: one generator per case.
 for (const choice of ["classic", "island", "flat", "regional"] as const)
   test(`game creates and reopens ${choice} with the pinned descriptor in IndexedDB`, async ({
     page,
@@ -44,9 +44,7 @@ for (const choice of ["classic", "island", "flat", "regional"] as const)
     page.on("pageerror", (error) => errors.push(error.message));
     const worldType = choice;
     const generation = createDescriptor(choice, 2026);
-    await page.goto(
-      `/tilefun/?renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}`,
-    );
+    await page.goto(`/tilefun/?generation=${encodeURIComponent(JSON.stringify(generation))}`);
     const canvas = page.locator("#game");
     await expect(canvas).toHaveAttribute("data-ready", "true");
     await expect(page.getByRole("combobox", { name: "World type" })).toHaveValue(worldType);
@@ -78,7 +76,7 @@ for (const choice of ["classic", "island", "flat", "regional"] as const)
     expect(meta?.generation).toEqual(generation);
     expect(meta?.seed).toBeUndefined();
     expect(meta?.worldType).toBeUndefined();
-    await page.goto("/tilefun/?renderer=canvas");
+    await page.goto("/tilefun/");
     await expect(canvas).toHaveAttribute("data-ready", "true");
     await expect(canvas).toHaveAttribute("data-generator", worldType);
     await expect(canvas).toHaveAttribute("data-generation", JSON.stringify(generation));
@@ -104,12 +102,10 @@ test("explorer handoff preserves settings and game reports an invalid seed", asy
   await expect(page.locator("#game")).toHaveAttribute("data-generator", "regional");
 });
 
-/** Follow the explorer's link on Canvas; this flow checks placement and saves, not rendering. */
+/** Follow the explorer's link; this flow checks placement and saves, not rendering. */
 async function playHere(page: Page): Promise<void> {
   const href = await page.getByRole("link", { name: "Play here" }).getAttribute("href");
-  const url = new URL(href ?? "", page.url());
-  url.searchParams.set("renderer", "canvas");
-  await page.goto(url.href);
+  await page.goto(new URL(href ?? "", page.url()).href);
 }
 
 test("Play here creates at the preview location and saved inspection includes a deleted building", async ({

@@ -4,9 +4,6 @@ import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { MALLARD_TYPE } from "../src/wildlife/Mallard.js";
 
 test.use({ channel: "chromium" });
-// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
-// software WebGL slows every page action about eightfold.
-
 // Shared Rapier contacts rest bodies within solver slop of the ground rather
 // than at exact zero, and the landing impact's depenetration can briefly give
 // the player ~20 px/s (frog, measured natively). The removed automatic wildlife
@@ -19,7 +16,7 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
   await page.goto(
-    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.getByTestId("world-menu")).toBeHidden();
@@ -110,7 +107,7 @@ test("duck landing stays grounded and starts a durable escape in the shared pond
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(
-    `/tilefun/workshop.html?geometry=nature-pond&landscape=thicket&renderer=canvas#/tool/world-geometry`,
+    `/tilefun/workshop.html?geometry=nature-pond&landscape=thicket#/tool/world-geometry`,
   );
   const c = page.getByLabel("Natural landscape playground");
   await expect(c).toHaveAttribute("data-ready", "true");
@@ -171,7 +168,7 @@ test("pond ducks animate in the shared Worker lab and survive reload", async ({ 
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(
-    `/tilefun/workshop.html?geometry=nature-pond&landscape=thicket&renderer=canvas#/tool/world-geometry`,
+    `/tilefun/workshop.html?geometry=nature-pond&landscape=thicket#/tool/world-geometry`,
   );
   const c = page.getByLabel("Natural landscape playground");
   await expect(c).toHaveAttribute("data-ready", "true");
@@ -216,7 +213,7 @@ test("ordinary seeded pond has durable ducks and offers manual creation in Entit
   const generation = createDescriptor("regional", 2026);
   const arrival = { x: 227, y: -183, generation };
   await page.goto(
-    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByPlaceholder("World name...").fill("Durable duck pond");
   await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -260,7 +257,7 @@ test("ordinary seeded pond has durable ducks and offers manual creation in Entit
     await host.flush();
     await host.shutdown();
   });
-  await page.goto("/tilefun/?nogamepad&renderer=canvas");
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(async () => (await ducks()).length).toBe(original.length);
   await page.screenshot({ path: "/tmp/tilefun-mallard-game.png" });

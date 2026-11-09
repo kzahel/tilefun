@@ -67,8 +67,7 @@ test.afterAll(async () => {
 
 async function open(page: Page) {
   await installRtcProbe(page);
-  // Delivery ordering, not GPU output; Canvas avoids software-GPU load with two clients.
-  await page.goto(`/tilefun/?renderer=canvas&server=localhost:${PORT}&transport=webrtc`);
+  await page.goto(`/tilefun/?server=localhost:${PORT}&transport=webrtc`);
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect
     .poll(() =>

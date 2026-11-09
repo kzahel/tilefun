@@ -9,8 +9,7 @@ test.describe.configure({ mode: "parallel" });
 // Fauna/WaterFauna/FaunaBodies/MallardResidency. These fixtures cover distinct
 // browser boundaries: dry walk, ride, hop, pond, shore gait and deep visibility.
 // animal-browser.spec still decodes and animates every roster asset in four views.
-// Motion and persistence carry no GPU-output contract, so they run on Canvas;
-// scene switching below keeps a GPU representative.
+// Motion and persistence carry no GPU-output contract.
 const browserSpecies = new Set(["fox", "horse", "kangaroo", "fish", "penguin", "manta-ray"]);
 // Shared Rapier contacts rest bodies within solver slop of the ground, not at
 // exact zero (205 checkpoint 4c); hops clear 2 px.
@@ -29,7 +28,7 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.goto(
-      `/tilefun/workshop.html?geometry=nature-${profile.species}&landscape=thicket&renderer=canvas#/tool/world-geometry`,
+      `/tilefun/workshop.html?geometry=nature-${profile.species}&landscape=thicket#/tool/world-geometry`,
     );
     const c = page.getByLabel("Natural landscape playground");
     await expect(c).toHaveAttribute("data-ready", "true");
@@ -188,7 +187,7 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
     const generation = createDescriptor("regional", 2026);
     const arrival = { x: arrivalX, y: arrivalY, generation };
     await page.goto(
-      `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByPlaceholder("World name...").fill(`Durable ${profile.species} refuge`);
     await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -239,36 +238,33 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
       await host.flush();
       await host.shutdown();
     });
-    await page.goto("/tilefun/?nogamepad&renderer=canvas");
+    await page.goto("/tilefun/?nogamepad");
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await expect.poll(async () => (await deer()).length).toBe(original.length);
     await page.screenshot({ path: `/tmp/tilefun-fauna-${profile.species}-game.png` });
   });
 }
 
-// Behavior on Canvas; GPU output is covered by gpu-renderer.spec.ts.
-
-for (const renderer of ["canvas"])
-  test(`wildlife scene switching keeps native framing (${renderer})`, async ({ page }) => {
-    await page.goto(
-      `/tilefun/workshop.html?geometry=nature-fox&landscape=thicket&renderer=${renderer}#/tool/world-geometry`,
-    );
-    const c = page.getByLabel("Natural landscape playground");
-    await expect(c).toHaveAttribute("data-ready", "true");
-    for (const [species, zoom] of [
-      ["giraffe", "0.6"],
-      ["manta-ray", "0.4"],
-      ["fish", "0.4"],
-    ] as const) {
-      await page.getByLabel("Landscape scene").selectOption(species);
-      await expect(page.getByLabel("Landscape zoom")).toHaveValue(zoom);
-      await expect
-        .poll(
-          async () =>
-            JSON.parse((await c.getAttribute("data-fauna-poses")) ?? "[]").filter(
-              (p: { species: string }) => p.species === species,
-            ).length,
-        )
-        .toBeGreaterThan(0);
-    }
-  });
+test(`wildlife scene switching keeps native framing`, async ({ page }) => {
+  await page.goto(
+    `/tilefun/workshop.html?geometry=nature-fox&landscape=thicket#/tool/world-geometry`,
+  );
+  const c = page.getByLabel("Natural landscape playground");
+  await expect(c).toHaveAttribute("data-ready", "true");
+  for (const [species, zoom] of [
+    ["giraffe", "0.6"],
+    ["manta-ray", "0.4"],
+    ["fish", "0.4"],
+  ] as const) {
+    await page.getByLabel("Landscape scene").selectOption(species);
+    await expect(page.getByLabel("Landscape zoom")).toHaveValue(zoom);
+    await expect
+      .poll(
+        async () =>
+          JSON.parse((await c.getAttribute("data-fauna-poses")) ?? "[]").filter(
+            (p: { species: string }) => p.species === species,
+          ).length,
+      )
+      .toBeGreaterThan(0);
+  }
+});

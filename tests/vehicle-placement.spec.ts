@@ -32,7 +32,7 @@ async function point(page: Page, wx: number, wy: number) {
     { wx, wy },
   );
 }
-async function reopen(page: Page, renderer: string) {
+async function reopen(page: Page) {
   await page.evaluate(async () => {
     const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
     g.loop.stop();
@@ -45,7 +45,7 @@ async function reopen(page: Page, renderer: string) {
     await host.flush();
     await host.shutdown();
   });
-  await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
 }
 test.use({
@@ -55,17 +55,16 @@ test.use({
   hasTouch: true,
 });
 const model = "rosso-coupe",
-  label = "Red sports coupe",
-  renderer = "gpu&meshes";
-test(`place, drive, save and delete ${model} through the mobile editor in a roadless world (${renderer})`, async ({
+  label = "Red sports coupe";
+test(`place, drive, save and delete ${model} through the mobile editor in a roadless world`, async ({
   page,
 }) => {
-  // GPU mesh readiness is the contract here, so this flow (place, drive, two world
-  // reopens) stays on GPU; hosted software WebGL needs ~60 s for it.
-  test.setTimeout(process.env.CI ? 120_000 : 60_000);
+  // GPU mesh readiness is the contract here; hosted software WebGL needs ~60 s
+  // for this flow (place, drive, two world reopens).
+  test.setTimeout(test.info().timeout * 2); // 120 s on CI and the software-WebGL lane
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async () => {
     const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
@@ -140,7 +139,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
   const car = (await vehicles(page))[0];
   if (!car) throw Error("No placed ambulance");
   expect(car.type).toBe(`vehicle-v1:${model}`);
-  if (model === "rosso-coupe" && renderer.includes("meshes")) {
+  if (model === "rosso-coupe") {
     await expect
       .poll(() =>
         page.evaluate(() => {
@@ -155,7 +154,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
       .toEqual(expect.objectContaining({ state: "ready", drawMeshes: 5 }));
   }
   await page.screenshot({
-    path: `/tmp/tilefun-placement-picker-${renderer.replaceAll("&", "-")}.png`,
+    path: `/tmp/tilefun-placement-picker.png`,
   });
   await page.touchscreen.tap(spot.x, spot.y); // No overlapping duplicate.
   await page.getByRole("button", { name: "Exit editor", exact: true }).tap();
@@ -182,7 +181,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
   await page.keyboard.down("ArrowUp");
   await expect.poll(async () => (await vehicles(page))[0]?.wx ?? 0).toBeGreaterThan(car.wx + 30);
   await page.keyboard.up("ArrowUp");
-  await reopen(page, renderer);
+  await reopen(page);
   await expect.poll(async () => (await vehicles(page))[0]?.type).toBe(`vehicle-v1:${model}`);
 
   await expect(page.getByRole("button", { name: /^Get out(?: · [^\s·]{1,3})?$/ })).toBeVisible();
@@ -203,9 +202,9 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
   await page.touchscreen.tap(body.x, body.y);
   await expect.poll(async () => (await vehicles(page)).length).toBe(0);
   await page.screenshot({
-    path: `/tmp/tilefun-vehicle-placement-${renderer.replaceAll("&", "-")}.png`,
+    path: `/tmp/tilefun-vehicle-placement.png`,
   });
-  await reopen(page, renderer);
+  await reopen(page);
   await expect.poll(async () => (await vehicles(page)).length).toBe(0);
   expect(errors).toEqual([]);
 });

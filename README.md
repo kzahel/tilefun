@@ -90,9 +90,8 @@ The game defaults to **GPU + 3D car**: the existing fixed game view rendered wit
 WebGL2, with all 45 authored vehicle models: compact cars, sedans, buses, police,
 ambulance, firetrucks and garbage trucks. Models load as needed; sprites remain
 available while loading or if a model cannot load.
-Choose **☰ → Debug → Renderer** (or F3) to switch to GPU sprites.
-`?renderer=legacy-canvas` selects legacy Canvas sprites; unsupported WebGL2 also falls back
-to Canvas. This does not enable the separate 3D collision view.
+Tilefun requires WebGL2; browsers without it get a "Tilefun needs WebGL2" screen.
+The separate 3D collision view is a debug option.
 
 - **Multiplayer** — Peer-to-peer via WebRTC (one browser hosts, others connect via URL — no server needed) or run a zero-dependency dedicated Node server. Parent crafts the world while the kid plays in it
 - **Collaborative editing** — See other players' editor cursors in real time, paint terrain together

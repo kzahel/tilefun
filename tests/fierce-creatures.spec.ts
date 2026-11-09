@@ -2,15 +2,13 @@ import { expect, test } from "@playwright/test";
 import { FIERCE_PROFILES } from "../src/wildlife/FierceCreatures.js";
 
 test.use({ channel: "chromium" });
-// Behavior/audio/persistence without a GPU-output contract uses Canvas; GPU wildlife
-// drawing is covered by animal-browser and gpu-renderer specs.
+// Behavior/audio/persistence only; wildlife drawing is covered by animal-browser
+// and gpu-renderer specs.
 for (const p of FIERCE_PROFILES)
   test(`${p.species} displays, sounds its warning, charges and feeds`, async ({
     page,
   }, testInfo) => {
-    await page.goto(
-      `/tilefun/workshop.html?geometry=nature-${p.species}&renderer=canvas#/tool/world-geometry`,
-    );
+    await page.goto(`/tilefun/workshop.html?geometry=nature-${p.species}#/tool/world-geometry`);
     const canvas = page.getByLabel("Natural landscape playground");
     await expect(canvas).toHaveAttribute("data-ready", "true");
     await page.getByRole("button", { name: "Enable creature sounds", exact: true }).click();

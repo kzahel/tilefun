@@ -32,8 +32,9 @@ const arrivalTile = arrivalOption ? arrivalOption.split(",").map(Number) : null;
 if (arrivalTile && (arrivalTile.length !== 2 || arrivalTile.some((v) => !Number.isInteger(v))))
   throw Error("--arrival must be integer tile coordinates X,Y");
 if (arrivalTile && scene !== "city") throw Error("--arrival applies to the city scene");
-const renderer = option("renderer", "canvas");
-if (!["canvas", "gpu"].includes(renderer)) throw Error("--renderer must be canvas or gpu");
+const renderer = option("renderer", "gpu");
+if (renderer !== "gpu")
+  throw Error("The game requires WebGL2 (232); --renderer=canvas was removed");
 const terrainPacing = option("terrain-pacing", "throughput");
 if (!["throughput", "responsive"].includes(terrainPacing))
   throw Error("--terrain-pacing must be throughput or responsive");

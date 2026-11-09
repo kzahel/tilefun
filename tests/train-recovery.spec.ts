@@ -23,8 +23,7 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   page.on("pageerror", (e) => errors.push(e.message));
   const recipe = cityTrainRecipe();
   // Boarding, riding and display continuity are Worker/prediction/presentation behavior.
-  // Canvas keeps the eight-second boarding window reachable on hosted software WebGL.
-  await page.goto("/tilefun/?nogamepad&renderer=canvas");
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async (recipe) => {
     const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
@@ -278,7 +277,7 @@ test("embedded station keeps its bench start, paused reload and shared recall co
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/tilefun/workshop.html?geometry=train&renderer=gpu&meshes#/tool/world-geometry");
+  await page.goto("/tilefun/workshop.html?geometry=train#/tool/world-geometry");
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   const call = page.getByRole("button", { name: /^Call train/ });

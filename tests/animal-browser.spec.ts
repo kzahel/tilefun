@@ -42,7 +42,7 @@ test("browses animated animals by name, family and dates, then runs their real A
   page,
 }) => {
   await page.goto(
-    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
+    "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
   );
   const browser = page.locator(".animal-browser"),
     results = page.getByRole("region", { name: "Animal results" });
@@ -102,9 +102,7 @@ test("browses animated animals by name, family and dates, then runs their real A
 
 test("mobile animal search fits the viewport and opens a hunting scene", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto(
-    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=nature-forest#/tool/world-geometry",
-  );
+  await page.goto("/tilefun/workshop.html?geometry=nature-forest#/tool/world-geometry");
   await page.getByLabel("Find animal", { exact: true }).fill("t. rex");
   const results = page.getByRole("region", { name: "Animal results" });
   await expect(results.locator("article")).toHaveCount(1);
@@ -126,7 +124,7 @@ for (const [facing, direction] of ["Front", "Back", "Left", "Right"].entries()) 
   }) => {
     test.setTimeout(180_000);
     await page.goto(
-      "/tilefun/workshop.html?renderer=legacy-canvas&geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
+      "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
     );
     await page.getByLabel("Preview facing", { exact: true }).selectOption(String(facing));
     const search = page.getByLabel("Find animal", { exact: true });
@@ -186,7 +184,7 @@ for (const animal of [
     page,
   }) => {
     await page.goto(
-      "/tilefun/workshop.html?renderer=legacy-canvas&geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
+      "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
     );
     await page.getByLabel("Find animal", { exact: true }).fill(animal.label);
     const card = page.locator(`[data-animal="${animal.species}"]`);
@@ -243,7 +241,7 @@ for (const animal of [
 ]) {
   test(`${animal.species} browser display opens a real moving shared hunter`, async ({ page }) => {
     await page.goto(
-      "/tilefun/workshop.html?renderer=legacy-canvas&geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
+      "/tilefun/workshop.html?geometry=nature-tiger&landscape=balanced#/tool/world-geometry",
     );
     await page.getByLabel("Find animal", { exact: true }).fill(animal.label);
     const card = page.locator(`[data-animal="${animal.species}"]`),

@@ -15,12 +15,11 @@ function game(page: Page) {
 const model = "beetle",
   label = "Beetle-style compact",
   paint = "teal",
-  paintLabel = "Lagoon teal",
-  renderer = "gpu&meshes";
-test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, async ({ page }) => {
+  paintLabel = "Lagoon teal";
+test(`mobile editor places and reloads ${model}/${paint} on GPU`, async ({ page }) => {
   test.setTimeout(60_000);
   await page.setViewportSize({ width: 600, height: 800 });
-  await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async () => {
     const gc = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
@@ -90,7 +89,7 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
     true,
   );
   await page.screenshot({
-    path: `data/vehicle-bake/paint-runtime-qa/${model}-${renderer.replaceAll("&", "-")}-editor.png`,
+    path: `data/vehicle-bake/paint-runtime-qa/${model}-editor.png`,
   });
   await page.getByRole("button", { name: "Exit editor", exact: true }).tap();
   const car = await page.evaluate(async () => {
@@ -134,7 +133,7 @@ test(`mobile editor places and reloads ${model}/${paint} with ${renderer}`, asyn
   await page.keyboard.up("ArrowUp");
   await flushLocalWorld(page);
   await stopLocalWorld(page);
-  await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect
     .poll(() => game(page))

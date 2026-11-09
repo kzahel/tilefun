@@ -17,12 +17,12 @@ type GameCanvas = HTMLCanvasElement & {
   };
 };
 
-async function openDebug(page: Page, renderer: "canvas" | "gpu") {
+async function openDebug(page: Page) {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto(`/tilefun/?nogamepad&renderer=${renderer}`);
+  await page.goto("/tilefun/?nogamepad");
   const canvas = page.locator("#game");
   await expect(canvas).toHaveAttribute("data-ready", "true");
-  await expect(canvas).toHaveAttribute("data-renderer", renderer);
+  await expect(canvas).toHaveAttribute("data-renderer", "gpu");
   await page.getByRole("button", { name: "☰", exact: true }).click();
   await page.getByRole("button", { name: "Debug", exact: true }).click();
   const zoom = page.getByRole("combobox", { name: "Zoom preset", exact: true });
@@ -89,12 +89,12 @@ function warm(canvas: Locator) {
   });
 }
 
-// Zoom input and row pacing live in the shared raster backend, so the Canvas case
-// owns them; the GPU case keeps only its upload contract at a cheaper overview.
+// Zoom input and row pacing at a 0.25 overview; warm GPU terrain then submits
+// without re-uploading its rows after the demand change.
 test("zoom shortcuts and terrain pacing survive demand changes", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  const { canvas, zoom, pacing } = await openDebug(page, "canvas");
+  const { canvas, zoom, pacing } = await openDebug(page);
   await canvas.click({ position: { x: 15, y: 600 } });
   for (const [key, value] of [
     ["1", "0.25"],
@@ -121,25 +121,9 @@ test("zoom shortcuts and terrain pacing survive demand changes", async ({ page }
   expect(result.rows).toBe(0);
   expect(result.after.surfaceBytes).toBe(result.before.surfaceBytes);
   expect(result.terrainPasses).toBeGreaterThan(0);
-  await pacing.selectOption("throughput");
-  await zoom.selectOption("1");
-  expect(errors).toEqual([]);
-});
-
-test("warm GPU terrain submits without re-uploading after a demand change", async ({ page }) => {
-  const errors: string[] = [];
-  page.on("pageerror", (e) => errors.push(e.message));
-  const { canvas, zoom } = await openDebug(page, "gpu");
-  await zoom.selectOption("1");
-  await zoom.selectOption("0.5");
-  const samples = await settle(canvas);
-  expect(samples.maxRows).toBeLessThanOrEqual(2);
-  expect(samples.quiet).toBe(60);
-  const result = await warm(canvas);
-  expect(result.rows).toBe(0);
-  expect(result.after.surfaceBytes).toBe(result.before.surfaceBytes);
-  expect(result.terrainPasses).toBeGreaterThan(0);
   expect(result.terrainUploadedBytes).toBe(0);
   expect(result.after.gpu?.uploadedBytes).toBeGreaterThan(result.before.gpu?.uploadedBytes ?? 0);
+  await pacing.selectOption("throughput");
+  await zoom.selectOption("1");
   expect(errors).toEqual([]);
 });

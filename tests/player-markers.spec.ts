@@ -138,97 +138,95 @@ async function teleport(page: Page, x: number, y: number) {
     .toBeLessThan(4);
 }
 
-for (const renderer of ["canvas", "gpu"]) {
-  test(`live co-op markers follow nearby/distant players, editor and realm departure (${renderer})`, async ({
-    page,
-    browser,
-  }) => {
-    test.setTimeout(90_000);
-    const second = await browser.newContext();
-    try {
-      const friend = await second.newPage();
-      await probe(page);
-      const url = `/tilefun/?nogamepad&server=localhost:${PORT}&renderer=${renderer}`;
-      // The existing tp diagnostic targets the first connected session.
-      await friend.goto(`http://localhost:4174${url}`);
-      await expect(friend.locator("#game")).toHaveAttribute("data-ready", "true");
-      await page.goto(url);
-      await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-      await expect(page.locator("#game")).toHaveAttribute("data-renderer", renderer);
-      for (const p of [friend, page]) {
-        await p.evaluate(
-          async ({ worldId, generation }) => {
-            const g = (document.querySelector("#game") as GameCanvas).__game;
-            await g.gcSendRequest({
-              type: "join-realm",
-              requestId: g.nextRequestId++,
-              worldId,
-              arrival: { x: 0, y: 0, generation },
-            });
-            g.transport.send({ type: "set-debug", paused: false });
-          },
-          { worldId, generation },
-        );
-      }
-      await teleport(friend, 50, 20);
-      await expect.poll(async () => (await read(page)).marker?.offscreen).toBe(false);
-      await page.screenshot({ path: `/tmp/tilefun-player-marker-near-${renderer}.png` });
-      for (const [x, y] of [
-        [10000, -10000],
-        [10000, 0],
-        [-10000, 0],
-        [0, 10000],
-        [0, -10000],
-      ]) {
-        await teleport(friend, x ?? 0, y ?? 0);
-        await expect
-          .poll(async () => {
-            const { marker, width, height } = await read(page);
-            if (!marker?.offscreen) return false;
-            if (Math.cos(marker.angle - Math.atan2(y ?? 0, x ?? 0)) < 0.999) return false;
-            if (x && Math.sign(marker.x - width / 2) !== Math.sign(x)) return false;
-            if (y && Math.sign(marker.y - height / 2) !== Math.sign(y)) return false;
-            return true;
-          })
-          .toBe(true);
-      }
-      await teleport(friend, 10000, -10000);
-      await page.setViewportSize({ width: 390, height: 844 });
+test(`live co-op markers follow nearby/distant players, editor and realm departure`, async ({
+  page,
+  browser,
+}) => {
+  test.setTimeout(90_000);
+  const second = await browser.newContext();
+  try {
+    const friend = await second.newPage();
+    await probe(page);
+    const url = `/tilefun/?nogamepad&server=localhost:${PORT}`;
+    // The existing tp diagnostic targets the first connected session.
+    await friend.goto(`http://localhost:4174${url}`);
+    await expect(friend.locator("#game")).toHaveAttribute("data-ready", "true");
+    await page.goto(url);
+    await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+    await expect(page.locator("#game")).toHaveAttribute("data-renderer", "gpu");
+    for (const p of [friend, page]) {
+      await p.evaluate(
+        async ({ worldId, generation }) => {
+          const g = (document.querySelector("#game") as GameCanvas).__game;
+          await g.gcSendRequest({
+            type: "join-realm",
+            requestId: g.nextRequestId++,
+            worldId,
+            arrival: { x: 0, y: 0, generation },
+          });
+          g.transport.send({ type: "set-debug", paused: false });
+        },
+        { worldId, generation },
+      );
+    }
+    await teleport(friend, 50, 20);
+    await expect.poll(async () => (await read(page)).marker?.offscreen).toBe(false);
+    await page.screenshot({ path: `/tmp/tilefun-player-marker-near.png` });
+    for (const [x, y] of [
+      [10000, -10000],
+      [10000, 0],
+      [-10000, 0],
+      [0, 10000],
+      [0, -10000],
+    ]) {
+      await teleport(friend, x ?? 0, y ?? 0);
       await expect
         .poll(async () => {
-          const { marker, width } = await read(page);
-          return (
-            width === 390 &&
-            marker?.offscreen &&
-            marker.x > 195 &&
-            marker.x <= 362 &&
-            marker.y >= 28 &&
-            marker.y < 422
-          );
+          const { marker, width, height } = await read(page);
+          if (!marker?.offscreen) return false;
+          if (Math.cos(marker.angle - Math.atan2(y ?? 0, x ?? 0)) < 0.999) return false;
+          if (x && Math.sign(marker.x - width / 2) !== Math.sign(x)) return false;
+          if (y && Math.sign(marker.y - height / 2) !== Math.sign(y)) return false;
+          return true;
         })
         .toBe(true);
-      await page.screenshot({ path: `/tmp/tilefun-player-marker-edge-${renderer}.png` });
-      await page.keyboard.press("Tab");
-      await expect
-        .poll(() =>
-          page.evaluate(
-            () => (document.querySelector("#game") as GameCanvas).__game.stateView.editorEnabled,
-          ),
-        )
-        .toBe(true);
-      await expect.poll(async () => (await read(page)).age).toBeLessThan(250);
-      await friend.evaluate(async () => {
-        const g = (document.querySelector("#game") as GameCanvas).__game;
-        await g.gcSendRequest({ type: "leave-realm", requestId: g.nextRequestId++ });
-      });
-      await expect.poll(async () => (await read(page)).players).toBe(1);
-      await expect.poll(async () => (await read(page)).age).toBeGreaterThan(500);
-    } finally {
-      await page.evaluate(async () => {
-        const g = (document.querySelector("#game") as GameCanvas).__game;
-        await g.gcSendRequest({ type: "leave-realm", requestId: g.nextRequestId++ });
-      });
-      await second.close();
     }
-  });
-}
+    await teleport(friend, 10000, -10000);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect
+      .poll(async () => {
+        const { marker, width } = await read(page);
+        return (
+          width === 390 &&
+          marker?.offscreen &&
+          marker.x > 195 &&
+          marker.x <= 362 &&
+          marker.y >= 28 &&
+          marker.y < 422
+        );
+      })
+      .toBe(true);
+    await page.screenshot({ path: `/tmp/tilefun-player-marker-edge.png` });
+    await page.keyboard.press("Tab");
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () => (document.querySelector("#game") as GameCanvas).__game.stateView.editorEnabled,
+        ),
+      )
+      .toBe(true);
+    await expect.poll(async () => (await read(page)).age).toBeLessThan(250);
+    await friend.evaluate(async () => {
+      const g = (document.querySelector("#game") as GameCanvas).__game;
+      await g.gcSendRequest({ type: "leave-realm", requestId: g.nextRequestId++ });
+    });
+    await expect.poll(async () => (await read(page)).players).toBe(1);
+    await expect.poll(async () => (await read(page)).age).toBeGreaterThan(500);
+  } finally {
+    await page.evaluate(async () => {
+      const g = (document.querySelector("#game") as GameCanvas).__game;
+      await g.gcSendRequest({ type: "leave-realm", requestId: g.nextRequestId++ });
+    });
+    await second.close();
+  }
+});

@@ -23,13 +23,18 @@ for broad changes, evidence of wider impact, explicit requests or CI. Broaden
 validation when focused checks expose unresolved concerns; do not repeat passing
 checks without a relevant change or unresolved concern. CI keeps its existing gates.
 
-Hosted CI renders with software WebGL (SwiftShader), where GPU-mode browser
-steps are several times slower. Behavior, DOM and networking specs load
-`renderer=canvas` (game) or `renderer=legacy-canvas` (labs, whose default is now
-GPU + 3D car); keep GPU variants only for cases that assert GPU output
-(`gpu-renderer.spec.ts` compares GPU with Canvas). Playwright assertion waits are
-15 s under CI. Reproduce hosted timing locally with Chromium flags
-`--use-angle=swiftshader --enable-unsafe-swiftshader --disable-gpu`.
+Hosted CI renders with software WebGL (SwiftShader). Since
+[232](../tactical/232-webgl2-only-renderer.md) slice 1 every spec runs the WebGL2
+renderer; there is no Canvas option to fall back to. Playwright assertion waits are
+15 s under CI. `npm run test:e2e:software-webgl -- <files>`
+(`playwright.software-webgl.config.ts`) reproduces the hosted lane locally: the
+bundled Chromium with `--use-angle=swiftshader --enable-unsafe-swiftshader
+--disable-gpu`, CI test/assertion deadlines and a JSON report in
+`test-results/software-webgl.json` (Playwright clears `test-results/` on the next
+run; copy the numbers to the owning doc first). Build first; it serves `dist`.
+Per-test deadline overrides scale from `test.info().timeout` rather than reading
+`CI`, so this lane gets the hosted values. Check software-WebGL timing there
+before changing CI deadlines or shards.
 
 Native tests share a 20 s deadline (`vitest.config.ts`) that only catches hangs:
 many open production Realms and run 1–5 s under parallel load, 2–4× longer on

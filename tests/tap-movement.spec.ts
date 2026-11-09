@@ -43,13 +43,12 @@ test.use({
   viewport: { width: 600, height: 800 },
 });
 
-// Tap/hold input, targeting and focus flows have no GPU-output contract: Canvas.
 async function start(
   page: Page,
   destination?: { generation: GenerationDescriptor; x: number; y: number },
   mode = "Tap to move",
 ) {
-  await page.goto("/tilefun/?nogamepad&renderer=canvas");
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async (destination) => {
     const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
@@ -224,8 +223,12 @@ test("walks, redirects, arrives and cancels with manual input", async ({ page })
     (await page.locator("#game").getAttribute("data-tap-destination")) ?? "{}",
   );
   expect(marker.wx).toBeCloseTo(first?.wx ?? 0, 3);
-  await page.evaluate(() => {
+  // Compare within one task: a slow frame may otherwise finish the short walk
+  // and clear the target before the check.
+  const coop = await page.evaluate(() => {
     const g = (document.querySelector("#game") as unknown as { __game: TestGame }).__game;
+    const target = g.tapMovement.target;
+    const before = target && { ...target };
     // Exercise the registered incoming-message path for a co-op traveller.
     g.netEmulatedTransport.messageHandler({
       type: "door-motion",
@@ -238,8 +241,10 @@ test("walks, redirects, arrives and cancels with manual input", async ({ page })
       to: { wx: 0, wy: -24 },
       duration: 400,
     });
+    return { before, after: g.tapMovement.target };
   });
-  expect((await state(page)).target).toEqual(first);
+  expect(coop.before).not.toBeNull();
+  expect(coop.after).toEqual(coop.before);
   await tapOffset(page, 0, 40);
   const target = (await state(page)).target;
   expect(target).not.toBeNull();

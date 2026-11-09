@@ -8,9 +8,7 @@ test("ordinary Worker car controls traverse a rendered ramp and retain the saved
   test.setTimeout(60000);
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto(
-    "/tilefun/workshop.html?geometry=car-garage&renderer=gpu&meshes#/tool/world-geometry",
-  );
+  await page.goto("/tilefun/workshop.html?geometry=car-garage#/tool/world-geometry");
   const c = page.getByLabel("World geometry scene");
   await expect(c).toHaveAttribute("data-ready", "true");
   // Car fixtures run on the game's lab view and the recipe-world Worker (226).
@@ -60,7 +58,7 @@ test("ordinary road traffic moves through Worker frames, pauses and survives sav
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/tilefun/workshop.html?renderer=gpu&meshes#/tool/traffic");
+  await page.goto("/tilefun/workshop.html#/tool/traffic");
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await expect
@@ -118,9 +116,7 @@ test("3D vehicle course preserves ramp rotation on reload and recovers cars and 
   test.setTimeout(90000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto(
-    "/tilefun/workshop.html?geometry=car-dynamics&renderer=gpu&meshes#/tool/world-geometry",
-  );
+  await page.goto("/tilefun/workshop.html?geometry=car-dynamics#/tool/world-geometry");
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await page.getByRole("button", { name: /^Drive car/ }).click();
@@ -196,7 +192,7 @@ test("ordinary ramp and mesh-roof landings share projected contact effects", asy
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(
-    "/tilefun/workshop.html?geometry=car-dynamics&route=ramp&renderer=gpu&meshes#/tool/world-geometry",
+    "/tilefun/workshop.html?geometry=car-dynamics&route=ramp#/tool/world-geometry",
   );
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
@@ -270,7 +266,7 @@ test("dump bed tips and lowers through the shared touch/keyboard control and dis
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto(
-    "/tilefun/workshop.html?geometry=car-dynamics&route=bed&renderer=gpu&meshes#/tool/world-geometry",
+    "/tilefun/workshop.html?geometry=car-dynamics&route=bed#/tool/world-geometry",
   );
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
@@ -307,12 +303,10 @@ test("tow truck and car transporter work through the shared equipment control", 
   test.setTimeout(90000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto(
-    "/tilefun/workshop.html?renderer=legacy-canvas&geometry=car-dynamics&route=tow#/tool/world-geometry",
-  );
+  await page.goto("/tilefun/workshop.html?geometry=car-dynamics&route=tow#/tool/world-geometry");
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
-  await expect(canvas).toHaveAttribute("data-renderer", "canvas");
+  await expect(canvas).toHaveAttribute("data-renderer", "gpu");
   await expect(page.getByRole("button", { name: /^Attach car/ })).toBeVisible();
   await canvas.focus();
   await page.keyboard.press("f");

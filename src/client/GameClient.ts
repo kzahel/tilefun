@@ -23,7 +23,6 @@ import { EditorMode } from "../editor/EditorMode.js";
 import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { startIdeaDelivery } from "../ideas/IdeaDialog.js";
-import { createCanvasRenderHost } from "../rendering/CanvasRenderHost.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
@@ -82,8 +81,8 @@ const FIRST_PERSON_TERRAIN: Pick<RenderBackend, "isTerrainReady"> = {
 };
 
 export interface GameClientOptions {
-  /** Platform renderer selection; simulation and presentation stay shared. */
-  renderHostFactory?: RenderHostFactory;
+  /** The WebGL2 world host (232); simulation and presentation stay shared. */
+  renderHostFactory: RenderHostFactory;
   profile?: {
     id: string;
     name: string;
@@ -185,19 +184,19 @@ export class GameClient implements GameTestHooks {
   private clientId: string;
   private readonly adminToken: string | undefined;
 
-  constructor(canvas: HTMLCanvasElement, transport: IClientTransport, options?: GameClientOptions) {
+  constructor(canvas: HTMLCanvasElement, transport: IClientTransport, options: GameClientOptions) {
     const admin = takeAdminToken(new URL(window.location.href));
     this.adminToken = admin.token;
     if (admin.token !== undefined) window.history.replaceState(window.history.state, "", admin.url);
-    this.renderHost = (options?.renderHostFactory ?? createCanvasRenderHost)(canvas);
+    this.renderHost = options.renderHostFactory(canvas);
     this.canvas = canvas;
     this.ctx = this.renderHost.uiContext;
     this.netEmulatedTransport = new NetEmulatedClientTransport(transport);
     this.transport = this.netEmulatedTransport;
     this.requests = new RequestBroker((message) => this.transport.send(message));
     this.transport.onDisconnect?.(() => this.router.disconnected());
-    const autoJoinRealm = options?.autoJoinRealm ?? false;
-    this.profile = options?.profile ?? null;
+    const autoJoinRealm = options.autoJoinRealm ?? false;
+    this.profile = options.profile ?? null;
     const inputSettings = {
       movementMode: touchMovementMode(this.profile?.touchMovement),
       pinchZoom: this.profile?.pinchZoom === true,
@@ -207,8 +206,8 @@ export class GameClient implements GameTestHooks {
       sessionStorage.getItem(HMR_KEY),
       this.profile?.id ?? null,
     );
-    this.profileStore = options?.profileStore;
-    this.clientId = options?.clientId ?? "local";
+    this.profileStore = options.profileStore;
+    this.clientId = options.clientId ?? "local";
     this.camera = new Camera();
     this.camera.pixelSnap = cameraPixelSnap(new URLSearchParams(window.location.search));
     const verticalFollow = () => this.consoleEngine.cvars.get("cl_verticalfollow")?.get() === true;
@@ -227,8 +226,6 @@ export class GameClient implements GameTestHooks {
     this.touchButtons = this.playInput.touchButtons;
     this.tapMovement = this.playInput.tapMovement;
     this.debugPanel = new DebugPanel();
-    if (this.renderHost.rendererControl)
-      this.debugPanel.setRendererControl(this.renderHost.rendererControl);
     this.editorModel = new EditorModel();
     this.editorMode = new EditorMode(canvas, this.camera, this.actions, this.editorModel);
     this.editorPanel = new EditorPanel(this.editorModel);
@@ -251,7 +248,7 @@ export class GameClient implements GameTestHooks {
         if (this.scenes.current instanceof WorldMapScene) this.scenes.pop();
       },
     });
-    this.mainMenu.roomDirectory = options?.roomDirectory ?? null;
+    this.mainMenu.roomDirectory = options.roomDirectory ?? null;
     this.propCatalog = new PropCatalog();
     this.propCatalog.onClose = () => {
       if (this.scenes.current instanceof CatalogScene) this.scenes.pop();

@@ -6,9 +6,6 @@ import { ROBIN_TYPE } from "../src/wildlife/Robin.js";
 import { flushLocalWorld, stopLocalWorld, worldRecords } from "./helpers/local-world.js";
 
 test.use({ channel: "chromium" });
-// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
-// software WebGL slows every page action about eightfold.
-
 // Shared Rapier contacts rest bodies within solver slop of the ground rather
 // than at exact zero, and the landing impact's depenetration can briefly give
 // the player ~20 px/s (frog, measured natively). The removed automatic wildlife
@@ -21,7 +18,7 @@ test("grove robins fly to crowns, react to landing and reload their flight pose"
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto(
-    `/tilefun/workshop.html?geometry=nature-robins&landscape=thicket&renderer=canvas#/tool/world-geometry`,
+    `/tilefun/workshop.html?geometry=nature-robins&landscape=thicket#/tool/world-geometry`,
   );
   const c = page.getByLabel("Natural landscape playground");
   await expect(c).toHaveAttribute("data-ready", "true");
@@ -99,7 +96,7 @@ test("robin ball contact dispatches client chirps through the live Worker", asyn
   const generation = createDescriptor("flat", 1);
   const arrival = { x: 4, y: 4, generation };
   await page.goto(
-    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByRole("button", { name: "New World", exact: true }).click();
   await expect(page.getByTestId("world-menu")).toBeHidden();
@@ -164,7 +161,7 @@ test("ordinary grove robins support manual creation and durable deletion on worl
   const generation = createDescriptor("regional", 2026);
   const arrival = { x: -163, y: -519, generation };
   await page.goto(
-    `/tilefun/?nogamepad&renderer=canvas&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
   await page.getByPlaceholder("World name...").fill("Durable robin grove");
   await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -217,7 +214,7 @@ test("ordinary grove robins support manual creation and durable deletion on worl
   expect(deleted).toHaveLength(1);
   expect(deleted[0]?.proceduralId).toBeTruthy();
   expect(afterDeletion.some((r) => r.persistentId === manual[0]?.persistentId)).toBe(true);
-  await page.goto("/tilefun/?nogamepad&renderer=canvas");
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await expect.poll(async () => (await robins()).length).toBeGreaterThanOrEqual(2);
   await page.screenshot({ path: "/tmp/tilefun-robins-game.png" });

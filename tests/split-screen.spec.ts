@@ -2,9 +2,9 @@ import { expect, type Page, test } from "@playwright/test";
 import { flushLocalWorld, stopLocalWorld, worldRecords } from "./helpers/local-world.js";
 
 // Split screen (226): real `KeyboardEvent.code` routing for two keyboard schemes, and
-// two mocked standard pads. Input routing and DOM menus, not GPU output, so Canvas.
+// two mocked standard pads. Input routing and DOM menus, not GPU output.
 const FLAT = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" };
-const GAME = `/tilefun/?renderer=canvas&generation=${encodeURIComponent(JSON.stringify(FLAT))}`;
+const GAME = `/tilefun/?generation=${encodeURIComponent(JSON.stringify(FLAT))}`;
 
 type Game = import("../src/client/GameTestHooks.js").GameTestHooks;
 type Snapshot = { views: number[][]; seats: number[]; positions: Record<number, number[]> };
@@ -297,7 +297,7 @@ test("the world saves both seats; after a reload seat 0 resumes and a guest join
     { x: expect.closeTo(guestX, -1), y: expect.closeTo(guestY, -1) },
   ]);
   await stopLocalWorld(page);
-  await page.goto("/tilefun/?renderer=canvas"); // reopen the saved world, not a new one
+  await page.goto("/tilefun/"); // reopen the saved world, not a new one
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 60000 });
   await expect.poll(async () => (await snapshot(page)).positions[0]).toBeTruthy();
   const resumed = await snapshot(page);

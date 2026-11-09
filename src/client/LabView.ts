@@ -9,8 +9,8 @@ import { OverlayFrame } from "../rendering/OverlayFrame.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { cameraPixelSnap, type TerrainPacing } from "../rendering/PresentationSettings.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
+import { loadRenderHostFactory } from "../rendering/RenderHostLoader.js";
 import type { SceneItem } from "../rendering/SceneItem.js";
-import { selectableRenderHostFactory } from "../rendering/SelectableRenderHost.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import { ViewLayouts } from "../rendering/ViewLayout.js";
 import { LabInput } from "../scenarios/LabInput.js";
@@ -81,8 +81,8 @@ function cycledPose(player: Entity, seconds: number, { fps, frameCount }: PoseCy
  * A Workshop lab on the game's view (226): the recipe world served by the
  * game's Worker runtime (`RecipeWorldClient`), one `View` with its camera
  * policy, the game's controls (`LabInput`, `VehicleControl`; a lab with its own
- * scripted input has no `LabInput`), the production clock and the selectable
- * render host. The page owns its DOM controls and a
+ * scripted input has no `LabInput`), the production clock and the WebGL2 render
+ * host. The page owns its DOM controls and a
  * positioned wrapper around the canvas.
  */
 export class LabView {
@@ -131,7 +131,7 @@ export class LabView {
       render: (alpha, now) => this.render(alpha, now),
     });
     document.addEventListener("visibilitychange", this.visibilityChanged);
-    this.ready = this.initialize(params).catch((error) => {
+    this.ready = this.initialize().catch((error) => {
       this.dispose();
       throw error;
     });
@@ -146,7 +146,7 @@ export class LabView {
     if (whole) this.view.setRegion(whole.region);
   }
 
-  private async initialize(params: URLSearchParams) {
+  private async initialize() {
     const graph = new BlendGraph();
     const loading = (this.options.loadAssets ?? loadGameAssets)(graph).then((assets) => {
       if (this.disposed) closeAssets(assets);
@@ -156,7 +156,7 @@ export class LabView {
     const [assets, , factory] = await Promise.all([
       loading,
       this.client.ready,
-      this.options.renderHost ?? selectableRenderHostFactory(params, { embedded: true }),
+      this.options.renderHost ?? loadRenderHostFactory({ embedded: true }),
     ]);
     if (this.disposed) return;
     this.host = factory(this.canvas);

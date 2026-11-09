@@ -5,9 +5,8 @@ import { shoppingSceneryPlacements } from "../src/generation/regional/ShoppingSc
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { exteriorDoors } from "../src/interiors/BuildingDoors.js";
 
-// Door traversal and reload are Worker/DOM behavior; the Canvas renderer keeps
-// these long flows within hosted software-WebGL budgets.
-const GAME = "/tilefun/?renderer=canvas";
+// Door traversal and reload are Worker/DOM behavior.
+const GAME = "/tilefun/";
 
 for (const [kind, type] of [
   ["bakery", "prop-shopping-v1-1"],
@@ -31,7 +30,7 @@ for (const [kind, type] of [
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.goto(
-      `${GAME}&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
+      `${GAME}?generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
     );
     await page.getByRole("button", { name: "New World", exact: true }).click();
     await expect(page.getByRole("button", { name: "New World", exact: true })).not.toBeVisible();

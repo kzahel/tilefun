@@ -16,7 +16,7 @@ test("farmhouse and tiny outbuilding enter and return through the normal door co
     (p) => p.propType === "prop-country-house" || p.propType === "prop-shed",
   );
   const generation = createDescriptor("regional", 2026);
-  await page.goto("/tilefun/?nogamepad&renderer=gpu&meshes");
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(
     async ({ generation, x, y }) => {

@@ -77,9 +77,8 @@ test("two clients share a persistent interior and cross-origin explorer reads li
       .find((l) => l.buildingType.startsWith("prop-city-dense-v1-condo"));
     if (!lot) throw new Error("No apartment");
     await start();
-    // Two live clients test shared authority, not GPU output; Canvas keeps hosted
-    // software rendering from starving the second client's startup.
-    const url = `/tilefun/?renderer=canvas&server=localhost:4191&worldId=${meta.id}&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify({ x: lot.entrance.x, y: lot.entrance.y, generation }))}`;
+    // Two live clients test shared authority, not GPU output.
+    const url = `/tilefun/?server=localhost:4191&worldId=${meta.id}&generation=${encodeURIComponent(JSON.stringify(generation))}&arrival=${encodeURIComponent(JSON.stringify({ x: lot.entrance.x, y: lot.entrance.y, generation }))}`;
     const two = await second.newPage();
     for (const p of [page, two]) {
       await p.goto(`http://localhost:4174${url}`);

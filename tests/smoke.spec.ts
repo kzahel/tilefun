@@ -116,9 +116,8 @@ test("F3 toggles debug overlay", async ({ page }, testInfo) => {
   await expect(panel).toBeVisible();
   await expect(panel.getByLabel("Vehicle bodies", { exact: true })).toBeChecked();
   await expect(panel.getByLabel("Search bounds", { exact: true })).not.toBeChecked();
-  await expect(
-    panel.getByRole("option", { name: "GPU + 3D cars (default)", exact: true }),
-  ).toHaveCount(1);
+  // One renderer (232): the panel has no renderer selector.
+  await expect(panel.getByRole("combobox", { name: "Renderer", exact: true })).toHaveCount(0);
   const bluePixels = () =>
     page.evaluate(() => {
       const canvas = document.querySelector("#game") as HTMLCanvasElement & {
@@ -203,7 +202,7 @@ test.describe("gem HUD", () => {
     page,
   }, testInfo) => {
     // HUD layout is DOM; the GPU launch contract is covered by the cases above.
-    await page.goto("/tilefun/?nogamepad&renderer=canvas");
+    await page.goto("/tilefun/?nogamepad");
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
     await page.evaluate(async () => {
       const g = (
@@ -270,17 +269,6 @@ test.describe("gem HUD", () => {
       await checkPlacement();
     }
     await testInfo.attach("gem-hud", { body: await page.screenshot(), contentType: "image/png" });
-    // Renderer replacement must retain this same progress display.
-    await page.evaluate(async () => {
-      const g = (
-        document.querySelector("#game") as unknown as {
-          __game: { renderHost: import("../src/rendering/RenderHost.js").RenderHost };
-        }
-      ).__game;
-      await g.renderHost.rendererControl?.select("canvas");
-    });
-    await expect(count).toHaveText("1");
-    await checkPlacement();
     // Check a larger readout without changing the player's authoritative balance.
     await page.evaluate(() => {
       const g = (

@@ -1,12 +1,8 @@
 import { expect, test } from "@playwright/test";
 
 test.use({ channel: "chromium" });
-// Behavior/persistence cases without a GPU-output contract use Canvas: hosted
-// software WebGL slows every page action about eightfold.
 test("a live wolf pack howls, hunts together and reloads three pack members", async ({ page }) => {
-  await page.goto(
-    "/tilefun/workshop.html?geometry=nature-wolf-pack&renderer=canvas#/tool/world-geometry",
-  );
+  await page.goto("/tilefun/workshop.html?geometry=nature-wolf-pack#/tool/world-geometry");
   const canvas = page.getByLabel("Natural landscape playground");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await page.getByRole("button", { name: "Enable creature sounds", exact: true }).click();

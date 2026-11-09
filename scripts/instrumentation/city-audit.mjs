@@ -94,7 +94,8 @@ const androidCli = option("android-device-cli", ""),
   maxC = Number(option("max-battery-c", "32"));
 const cooldown = Number(option("cooldown-seconds", "60"));
 if (endpoint && !port) throw Error("Physical CDP requires a dedicated --port");
-if (!["canvas", "gpu"].includes(renderer)) throw Error("Unknown renderer");
+if (renderer !== "gpu")
+  throw Error("The game requires WebGL2 (232); --renderer=canvas was removed");
 if (
   jobs.some(
     (j) => !["standing", "walk", "drive", "overview", "overview-drive", "zoom-entry"].includes(j),
