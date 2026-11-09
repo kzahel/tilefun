@@ -19,9 +19,10 @@ Deploy had been blocked since 2026-11-07.
 - **CI**:
   - `check`, `unit` (now four vitest shards) and `raster` are unchanged in
     scope.
-  - `smoke` is one job running `smoke.spec.ts`, `worker-server.spec.ts` and
+  - `smoke` runs two shards of `smoke.spec.ts`, `worker-server.spec.ts` and
     `pwa.spec.ts` (launch and pixels, keyboard input, Worker lifecycle and
-    saves, launcher assets).
+    saves, launcher assets). Its first shard uploads the tested build as the
+    Pages artifact; deploy only publishes it.
   - The scheduled twelve-shard full browser run is removed.
   - `workflow_dispatch` reruns the push gate without deploying.
   - Controller, mobile-editor, multiplayer, vehicle-placement, touch and lab
@@ -88,5 +89,12 @@ cases passed only on retry; they are the next local reliability targets:
 - the wolf pack (`food-chain.spec.ts:4`);
 - the apartment interior (`gameplay-interiors.spec.ts:12`).
 
-The last green hosted push run (2026-11-07) took 7.6 min to validate and
-10.3 min including deploy.
+The last green hosted push run before this work (2026-11-07) took 7.6 min to
+validate and 10.3 min including deploy. The first trimmed run
+([42653097377](https://github.com/kzahel/tilefun/actions/runs/42653097377)) went
+green and deployed in 8.8 min plus 5.8 min:
+- checkout takes about 100 s per job;
+- smoke spends 6.2 min on one SwiftShader worker;
+- deploy repeats the checkout and build.
+
+That led to two smoke shards and deploying the tested build.

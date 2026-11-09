@@ -66,9 +66,14 @@ four:
   and the build;
 - `unit`: `vitest --shard=i/4` on four runners;
 - `raster`: verification of registered art rasters;
-- `smoke`: one browser job running `smoke.spec.ts`, `worker-server.spec.ts` and
-  `pwa.spec.ts` (launch and pixels, keyboard input, Worker lifecycle and saves,
-  launcher assets).
+- `smoke`: two browser shards running `smoke.spec.ts`, `worker-server.spec.ts`
+  and `pwa.spec.ts` (launch and pixels, keyboard input, Worker lifecycle and
+  saves, launcher assets). One worker on SwiftShader takes 6.2 min for all
+  12 cases; the two shards split them per test.
+
+On a main push, smoke shard 1 uploads its tested `dist` as the Pages artifact,
+and deploy publishes it after every gate passes, with no second checkout or
+build.
 
 There is no scheduled or sharded full browser run. The remaining browser
 contracts run locally through `npm run test:all`:

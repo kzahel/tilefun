@@ -84,6 +84,10 @@ jobs:
   # saves, launcher assets) under software WebGL; everything else runs locally.
   smoke:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2]
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -95,12 +99,18 @@ jobs:
       - run: npm install --global npm@11.19.0
       - run: npm ci
       - run: npm run build
+      # The tested build is the deployed build; deploy only publishes it once
+      # every gate passes, without another checkout and build.
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        if: matrix.shard == 1 && github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          path: dist
       - run: npx playwright install --with-deps chromium
-      - run: npm run test:smoke
+      - run: npm run test:smoke -- --shard=${{ matrix.shard }}/2
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         if: failure()
         with:
-          name: playwright-smoke-report
+          name: playwright-smoke-report-${{ matrix.shard }}
           path: |
             playwright-report/
             test-results/
@@ -117,22 +127,6 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            worker/package-lock.json
-      - run: npm install --global npm@11.19.0
-      - run: npm ci
-      - run: npm run build
       - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
-      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
-        with:
-          path: dist
       - id: deployment
         uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
