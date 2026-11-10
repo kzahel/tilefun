@@ -20,6 +20,17 @@ its own ceiling, preserving underpass shadows even when an exposed end is higher
 Receiver broadphase bounds use actual polygon vertices rather than extrapolated
 AABB corners. The collector uses the same displayed orientation as the mesh.
 
+[235](../tactical/235-crowd-bench-and-unnecessary-work.md) makes the receiver
+partition (`SurfacePartition.ts`) cost follow real overlaps:
+- A cutter that misses a piece leaves it whole.
+- Exact box and edge rejections run before any clipping.
+- Each caster's partition is remembered across frames: up to four per caster,
+  within 8 MB, for bit-equal planes and clipped polygons.
+
+The union per receiver is unchanged, and a Node test compares it with the
+original algorithm. Candidate faces keep their first-visit order (broad sources,
+then x-major cells), because coplanar ties and decal sort keys depend on it.
+
 
 [218](../tactical/218-traffic-and-rail-gameplay-recovery.md) replaces repeated
 mixed-car scratch resizing with exact-size color/depth pairs in a 16MiB / 16-entry

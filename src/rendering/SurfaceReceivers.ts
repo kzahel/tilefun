@@ -8,6 +8,16 @@ import type { World } from "../world/World.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import { meshAssetFor } from "./EntityMeshPose.js";
 import { SurfaceMeshIndex } from "./SurfaceMeshIndex.js";
+import {
+  type ClippedReceiver,
+  clipPlane,
+  contains,
+  intersect,
+  partitionReceivers,
+  polygonBounds,
+  rectangle,
+  subtract,
+} from "./SurfacePartition.js";
 import { type SurfaceVisibility, surfaceDisplay } from "./SurfacePresentation.js";
 
 export type Point3 = readonly [number, number, number];
@@ -50,99 +60,14 @@ interface Source {
   bounds: AABB;
   ownerId?: number;
   faces(bounds: AABB, maxZ: number): readonly SurfaceFace[];
+  /** Query that last visited this source: dedupes sources spanning cells. */
+  seen?: number;
 }
 const EPS = 1e-6,
   CELL = 128;
+
+export { clipPlane, polygonArea, polygonBounds, rectangle } from "./SurfacePartition.js";
 export const planeZ = (p: Plane, x: number, y: number) => p[0] * x + p[1] * y + p[2];
-export function polygonBounds(p: readonly { x: number; y: number }[]): AABB {
-  return {
-    left: Math.min(...p.map((v) => v.x)),
-    right: Math.max(...p.map((v) => v.x)),
-    top: Math.min(...p.map((v) => v.y)),
-    bottom: Math.max(...p.map((v) => v.y)),
-  };
-}
-export function rectangle(b: AABB): SurfaceVertex[] {
-  return [
-    { x: b.left, y: b.top, u: 0, v: 0 },
-    { x: b.right, y: b.top, u: 1, v: 0 },
-    { x: b.right, y: b.bottom, u: 1, v: 1 },
-    { x: b.left, y: b.bottom, u: 0, v: 1 },
-  ];
-}
-export function polygonArea(p: readonly SurfaceVertex[]) {
-  const origin = p[0];
-  if (!origin) return 0;
-  let area = 0;
-  for (let i = 1; i + 1 < p.length; i++) {
-    const a = p[i],
-      b = p[i + 1];
-    if (a && b) area += (a.x - origin.x) * (b.y - origin.y) - (a.y - origin.y) * (b.x - origin.x);
-  }
-  return area / 2;
-}
-/** Clip a convex polygon, preserving decal UVs through every cut. */
-export function clipPlane(
-  p: readonly SurfaceVertex[],
-  a: number,
-  b: number,
-  c: number,
-): SurfaceVertex[] {
-  const out: SurfaceVertex[] = [];
-  for (let i = 0; i < p.length; i++) {
-    const s = p[i],
-      e = p[(i + 1) % p.length];
-    if (!s || !e) continue;
-    const ds = a * s.x + b * s.y + c,
-      de = a * e.x + b * e.y + c;
-    if (ds >= -EPS) out.push(s);
-    if ((ds > EPS && de < -EPS) || (ds < -EPS && de > EPS)) {
-      const t = ds / (ds - de);
-      out.push({
-        x: s.x + (e.x - s.x) * t,
-        y: s.y + (e.y - s.y) * t,
-        u: s.u + (e.u - s.u) * t,
-        v: s.v + (e.v - s.v) * t,
-      });
-    }
-  }
-  return out.length >= 3 && Math.abs(polygonArea(out)) > EPS ? out : [];
-}
-function edges(p: readonly SurfaceVertex[]) {
-  const sign = polygonArea(p) >= 0 ? 1 : -1;
-  return p.map((a, i) => {
-    const b = p[(i + 1) % p.length] ?? a;
-    const x = (a.y - b.y) * sign,
-      y = (b.x - a.x) * sign;
-    return [x, y, -x * a.x - y * a.y] as const;
-  });
-}
-function intersect(p: readonly SurfaceVertex[], cutter: readonly SurfaceVertex[]) {
-  let result = [...p];
-  for (const [a, b, c] of edges(cutter)) {
-    result = clipPlane(result, a, b, c);
-    if (!result.length) break;
-  }
-  return result;
-}
-/** Disjoint convex pieces outside a convex cutter: no double-darkened seams. */
-function subtract(
-  p: readonly SurfaceVertex[],
-  cutter: readonly SurfaceVertex[],
-): SurfaceVertex[][] {
-  const out: SurfaceVertex[][] = [];
-  let rest = [...p];
-  for (const [a, b, c] of edges(cutter)) {
-    const outside = clipPlane(rest, -a, -b, -c);
-    if (outside.length) out.push(outside);
-    rest = clipPlane(rest, a, b, c);
-    if (!rest.length) break;
-  }
-  return out;
-}
-function contains(p: readonly SurfaceVertex[], x: number, y: number) {
-  return edges(p).every(([a, b, c]) => a * x + b * y + c >= -EPS);
-}
 export function upwardSurfaceFace(
   id: string,
   points: readonly Point3[],
@@ -183,7 +108,8 @@ export interface ReceiverOptions {
  * Broadphase sources are local; detailed moving mesh faces are built lazily once. */
 export class SurfaceReceivers {
   readonly diagnostics = { sources: 0, meshTriangles: 0, queries: 0, fragments: 0 };
-  private grid = new Map<string, Source[]>();
+  private grid = new Map<number, Map<number, Source[]>>();
+  private query = 0;
   private broad: Source[] = [];
   private cuts: AABB[] = [];
   private owners = new Map<number, { entity: Entity; position: Point3 }>();
@@ -314,24 +240,40 @@ export class SurfaceReceivers {
       this.broad.push(source);
       return;
     }
-    for (let x = x0; x <= x1; x++)
-      for (let y = y0; y <= y1; y++) {
-        const key = `${x}:${y}`,
-          items = this.grid.get(key);
-        if (items) items.push(source);
-        else this.grid.set(key, [source]);
+    for (let x = x0; x <= x1; x++) {
+      let column = this.grid.get(x);
+      if (!column) {
+        column = new Map();
+        this.grid.set(x, column);
       }
+      for (let y = y0; y <= y1; y++) {
+        const items = column.get(y);
+        if (items) items.push(source);
+        else column.set(y, [source]);
+      }
+    }
   }
   private candidates(b: AABB, exclude: number | undefined, maxZ: number): SurfaceFace[] {
     this.diagnostics.queries++;
-    const sources = new Set(this.broad);
-    for (let x = Math.floor(b.left / CELL); x <= Math.floor(b.right / CELL); x++)
-      for (let y = Math.floor(b.top / CELL); y <= Math.floor(b.bottom / CELL); y++)
-        for (const s of this.grid.get(`${x}:${y}`) ?? []) sources.add(s);
-    const out: SurfaceFace[] = [];
-    for (const s of sources)
-      if ((exclude === undefined || s.ownerId !== exclude) && aabbsOverlap(b, s.bounds))
-        for (const f of s.faces(b, maxZ)) if (aabbsOverlap(b, f.bounds)) out.push(f);
+    const query = ++this.query,
+      out: SurfaceFace[] = [];
+    // Broad sources first, then cells in x-major order: each source once, in
+    // first-visit order (face order decides coplanar ties and decal sort keys).
+    const visit = (sources: readonly Source[]) => {
+      for (const s of sources) {
+        if (s.seen === query) continue;
+        s.seen = query;
+        if ((exclude === undefined || s.ownerId !== exclude) && aabbsOverlap(b, s.bounds))
+          for (const f of s.faces(b, maxZ)) if (aabbsOverlap(b, f.bounds)) out.push(f);
+      }
+    };
+    visit(this.broad);
+    for (let x = Math.floor(b.left / CELL); x <= Math.floor(b.right / CELL); x++) {
+      const column = this.grid.get(x);
+      if (column)
+        for (let y = Math.floor(b.top / CELL); y <= Math.floor(b.bottom / CELL); y++)
+          visit(column.get(y) ?? []);
+    }
     for (let x = Math.floor(b.left / TILE_SIZE); x <= Math.floor(b.right / TILE_SIZE); x++)
       for (let y = Math.floor(b.top / TILE_SIZE); y <= Math.floor(b.bottom / TILE_SIZE); y++) {
         const bounds = {
@@ -408,7 +350,7 @@ export class SurfaceReceivers {
     // AABB corner can invent a huge height outside that finite face.
     const maxCeiling = Math.max(...polygon.map((v) => planeZ(ceiling, v.x, v.y)));
     const faces = this.candidates(b, exclude, maxCeiling),
-      valid: { face: SurfaceFace; polygon: SurfaceVertex[] }[] = [];
+      valid: ClippedReceiver[] = [];
     for (const f of faces) {
       let clipped = intersect(polygon, f.polygon);
       clipped = clipPlane(
@@ -417,25 +359,14 @@ export class SurfaceReceivers {
         ceiling[1] - f.plane[1],
         ceiling[2] - f.plane[2],
       );
-      if (clipped.length) valid.push({ face: f, polygon: clipped });
+      if (!clipped.length) continue;
+      valid.push({ face: f, polygon: clipped, bounds: polygonBounds(clipped) });
     }
+    const pieces = partitionReceivers(valid, exclude);
     const out: SurfaceFragment[] = [];
-    for (const [i, r] of valid.entries()) {
-      let pieces = [r.polygon];
-      for (const [j, other] of valid.entries()) {
-        if (i === j || !aabbsOverlap(r.face.bounds, other.face.bounds)) continue;
-        const a = other.face.plane[0] - r.face.plane[0],
-          b = other.face.plane[1] - r.face.plane[1],
-          c = other.face.plane[2] - r.face.plane[2];
-        let cutter: SurfaceVertex[];
-        if (Math.abs(a) + Math.abs(b) < EPS) {
-          if (c < -EPS || (Math.abs(c) < EPS && j > i)) continue;
-          cutter = other.polygon;
-        } else cutter = clipPlane(other.polygon, a, b, c);
-        if (cutter.length) pieces = pieces.flatMap((p) => subtract(p, cutter));
-        if (!pieces.length) break;
-      }
-      for (const vertices of pieces) out.push({ face: r.face, vertices });
+    for (const { index, vertices } of pieces) {
+      const face = valid[index]?.face;
+      if (face) out.push({ face, vertices });
     }
     this.diagnostics.fragments += out.length;
     return out;

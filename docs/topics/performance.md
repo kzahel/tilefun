@@ -10,7 +10,9 @@ parked cars in one 5×5-chunk view on flat ground.
   `benchmark-realm-physics-browser.mjs --fixture=crowd --headed`.
 
 Baseline: authority tick 6.5 ms p50 while only 64 of 1,051 actors are in
-motion; the lab draws about 2.3 fps because of rabbit shadow projection.
+motion. The lab drew about 2.3 fps because of shadow projection: car shadows
+overlapping a neighbouring car's mesh fragmented into thousands of pieces. The
+receiver partition fix brings lab frames from about 430 ms to 16.7 ms p50.
 [235](../tactical/235-crowd-bench-and-unnecessary-work.md) owns the inventory
 of unnecessary work and the goal: tick ≤ 2 ms and the lab at 120 Hz.
 

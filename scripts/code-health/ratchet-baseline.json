@@ -508,9 +508,9 @@
       "overLimit": 1
     },
     "src/rendering/SurfaceReceivers.ts": {
-      "lines": 522,
+      "lines": 453,
       "worst": 51,
-      "overLimit": 5
+      "overLimit": 3
     },
     "src/rendering/TileRenderer.ts": {
       "lines": 608,
