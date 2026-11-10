@@ -20,3 +20,16 @@ it("keeps bounded samples while preserving lifetime totals and extrema", () => {
   metrics.reset();
   expect(metrics.snapshot()).toEqual({});
 });
+
+it("retains a complete benchmark window and restores the live bound on ordinary reset", () => {
+  const metrics = new PerformanceMetrics();
+  metrics.enabled = true;
+  metrics.reset(600);
+  for (let i = 0; i < 600; i++) metrics.record("work", i);
+  expect(metrics.snapshot().work).toMatchObject({ count: 600, retained: 600, p50Ms: 300 });
+  metrics.reset();
+  for (let i = 0; i < 600; i++) metrics.record("work", i);
+  expect(metrics.snapshot().work).toMatchObject({ count: 600, retained: 512 });
+  expect(() => metrics.reset(0)).toThrow();
+  expect(() => metrics.reset(Infinity)).toThrow();
+});

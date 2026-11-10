@@ -29,6 +29,7 @@ import {
 export type GeometryCanvas = HTMLCanvasElement & {
   __physicsSample?: RecipeWorldClient["samplePhysicsDiagnostics"];
   __presentationDiagnostics?: () => LabDiagnostics;
+  __performanceSample?: LabView["samplePerformance"];
   __command?: LabView["command"]; // Exact placement for browser checks.
 };
 const FIXTURES = [
@@ -163,6 +164,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
     scene.current = lab;
     c.__physicsSample = (reset) => lab.client.samplePhysicsDiagnostics(reset);
     c.__presentationDiagnostics = () => lab.getDiagnostics();
+    c.__performanceSample = (reset) => lab.samplePerformance(reset);
     c.__command = (command) => lab.command(command);
     void lab.ready
       .then(async () => {
@@ -194,6 +196,7 @@ function GeometryFixtures({ initial }: { initial: string }) {
       delete c.dataset.ready;
       delete c.__physicsSample;
       delete c.__presentationDiagnostics;
+      delete c.__performanceSample;
       delete c.__command;
       lab.dispose();
       scene.current = null;

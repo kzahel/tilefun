@@ -1,6 +1,7 @@
 import { closeAssets, type GameAssets, loadGameAssets } from "../assets/GameAssets.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { GameLoop } from "../core/GameLoop.js";
+import { PerformanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import type { Entity } from "../entities/Entity.js";
 import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
 import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
@@ -93,6 +94,7 @@ export class LabView {
   private readonly effects = new ParticleSystem();
   private readonly overlays = new OverlayFrame();
   private readonly loop: GameLoop;
+  private readonly timings = new PerformanceMetrics();
   private readonly vehicleControls: boolean;
   private host: RenderHost | undefined;
   private assets: GameAssets | undefined;
@@ -127,8 +129,22 @@ export class LabView {
     this.camera.pixelSnap = cameraPixelSnap(params);
     this.setRegion(options.width, options.height);
     this.loop = new GameLoop({
-      update: (dt) => this.update(dt),
-      render: (alpha, now) => this.render(alpha, now),
+      update: (dt) => {
+        const start = this.timings.start();
+        try {
+          this.update(dt);
+        } finally {
+          this.timings.end("lab.update", start);
+        }
+      },
+      render: (alpha, now) => {
+        const start = this.timings.start();
+        try {
+          this.render(alpha, now);
+        } finally {
+          this.timings.end("lab.render", start);
+        }
+      },
     });
     document.addEventListener("visibilitychange", this.visibilityChanged);
     this.ready = this.initialize().catch((error) => {
@@ -139,6 +155,15 @@ export class LabView {
 
   get camera() {
     return this.view.camera;
+  }
+
+  /** Explicit benchmark sampling only; ordinary labs collect no timings. */
+  samplePerformance(reset = false) {
+    if (reset) {
+      this.timings.reset(10_000);
+      this.timings.enabled = true;
+    }
+    return this.timings.snapshot();
   }
 
   private setRegion(width: number, height: number) {

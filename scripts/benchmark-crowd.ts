@@ -1,162 +1,203 @@
-// Body of `npm run crowd:bench` (scripts/benchmark-crowd.mjs compiles it without
-// keepNames, as Vite does, and runs it in plain Node).
-//
-// Repeatable authority crowd bench: the fixed CrowdBenchRecipe (1,000 rabbits and
-// 50 parked cars inside one 5×5-chunk view on flat ground) runs in a headless
-// ScenarioSession with its seeded random source and a simulated wall clock that
-// advances 1/60 s per tick. Reports tick time, per-stage timings and
-// machine-independent work counts (simulated actors, physics bodies, awake cars,
-// wheel ray tests, replication bytes). Counts repeat exactly between runs; times
-// depend on the machine and its load.
-
-import { execFileSync } from "node:child_process";
+// Compiled by benchmark-crowd.mjs without tsx keepNames instrumentation.
+import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { Session } from "node:inspector/promises";
 import { findSourceMap } from "node:module";
-import os from "node:os";
-import path from "node:path";
 import { performanceMetrics } from "../src/diagnostics/PerformanceMetrics.js";
 import { crowdBenchRecipe } from "../src/scenarios/CrowdBenchRecipe.js";
 import { ScenarioSession } from "../src/scenarios/ScenarioSession.js";
+import {
+  assertEquivalent,
+  cars,
+  compare,
+  lane,
+  output,
+  profile,
+  rabbits,
+  reportBase,
+  ticks,
+  warmup,
+} from "./crowd/options.js";
+import {
+  assertComparable,
+  compareOutcome,
+  delta,
+  round,
+  sha256,
+  summarize,
+} from "./crowd/report.js";
+import { writeTape } from "./crowd/tape.js";
 
-const option = (key: string, fallback: string) =>
-  process.argv.find((a) => a.startsWith(`--${key}=`))?.slice(key.length + 3) ?? fallback;
-const rabbits = Number(option("rabbits", "1000"));
-const cars = Number(option("cars", "50"));
-const warmup = Number(option("warmup", "180"));
-const ticks = Number(option("ticks", "600"));
-const output = option("output", path.join(os.tmpdir(), "tilefun-crowd.json"));
-const compare = option("compare", "");
-const profile = process.argv.includes("--profile");
-if (![warmup, ticks].every((n) => Number.isInteger(n) && n > 0 && n <= 10_000))
-  throw Error("--warmup and --ticks must be integers 1–10000");
+if (lane === "client" || lane === "render") {
+  const { runReplay } = await import("./crowd/replay.js");
+  await runReplay();
+} else {
+  await authority();
+}
 
-// Interest leases and door timers read Date.now(); a simulated clock keeps the
-// workload independent of how fast this machine runs the ticks.
-let clock = Date.UTC(2026, 0, 1);
-Date.now = () => clock;
-const step = () => {
-  clock += 1000 / 60;
-  return s.tick(true);
-};
-
-type Counters = NonNullable<ScenarioSession["realm"]["collisionDiagnostics"]>;
-const s = await ScenarioSession.create(crowdBenchRecipe(rabbits, cars));
-try {
-  const realm = s.realm;
-  const counters = (): Counters => {
-    const d = realm.collisionDiagnostics;
-    if (!d) throw Error("Physics scene is not ready");
-    return { ...d };
-  };
-  const count = (match: (type: string) => boolean) =>
-    realm.entityManager.entities.filter((e) => match(e.type)).length;
-  const placed = {
-    rabbits: count((t) => t === "wildlife-rabbit-v1"),
-    cars: count((t) => t.startsWith("vehicle-v1:")),
-    entities: realm.entityManager.entities.length,
-  };
-  if (placed.rabbits !== rabbits || placed.cars !== cars)
-    throw Error(`Placed ${JSON.stringify(placed)}, expected ${rabbits} rabbits and ${cars} cars`);
-
-  for (let i = 0; i < warmup; i++) step();
-  performanceMetrics.reset();
-  const before = counters();
-  const inspector = profile ? new Session() : undefined;
-  if (inspector) {
-    inspector.connect();
-    await inspector.post("Profiler.enable");
-    await inspector.post("Profiler.setSamplingInterval", { interval: 100 });
-    await inspector.post("Profiler.start");
-  }
-  const times: number[] = [];
-  let bytes = 0,
-    simulated = 0,
-    awakeCars = 0,
-    moving = 0,
-    samples = 0;
-  for (let i = 0; i < ticks; i++) {
-    const t = performance.now();
-    const frames = step();
-    times.push(performance.now() - t);
-    for (const frame of frames) bytes += frame.byteLength;
-    simulated += realm.persistenceDiagnostics.activeActors;
-    // Sleeping state is read outside the timed tick, every 30 ticks.
-    if (i % 30 === 0) {
-      samples++;
-      for (const body of realm.physicsState?.bodies ?? [])
-        if (body.kind === "vehicle" && !body.sleeping) awakeCars++;
-      for (const e of realm.entityManager.entities)
-        if (e.velocity?.vx || e.velocity?.vy || e.jumpVZ) moving++;
-    }
-  }
-  const cpu = inspector
-    ? sourceProfile((await inspector.post("Profiler.stop")).profile as CpuProfile)
-    : undefined;
-  inspector?.disconnect();
-  const after = counters();
-
-  const sorted = [...times].sort((a, b) => a - b);
-  const at = (p: number) => sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))] ?? 0;
-  const round = (v: number) => Math.round(v * 1000) / 1000;
-  const perTick = (key: keyof Counters) =>
-    round((Number(after[key]) - Number(before[key])) / ticks);
-  const stages = Object.fromEntries(
-    Object.entries(performanceMetrics.snapshot())
-      .filter(([name]) => name.startsWith("realm.") || name.startsWith("server."))
-      .map(([name, v]) => [name, { p50: round(v.p50Ms), p95: round(v.p95Ms) }]),
-  );
-  const git = (args: string[]) => execFileSync("git", args, { encoding: "utf8" }).trim();
-  const report = {
-    date: new Date().toISOString(),
-    revision: git(["rev-parse", "--short", "HEAD"]),
-    dirty: !!git(["status", "--porcelain", "--", "src"]),
-    machine: `${os.cpus()[0]?.model} · ${os.platform()} ${os.arch()} · load ${os.loadavg()[0]?.toFixed(1)}`,
-    recipe: { rabbits, cars, warmup, ticks },
-    placed,
-    tickMs: { p50: round(at(0.5)), p95: round(at(0.95)), p99: round(at(0.99)), max: round(at(1)) },
-    stages,
-    work: {
-      simulatedActors: round(simulated / ticks),
-      // Actors with horizontal or vertical motion: the work that is not idle.
-      movingActors: round(moving / samples),
-      physicsBodies: after.bodies,
-      awakeCars: round(awakeCars / samples),
-      wheelRays: perTick("wheelQueries"),
-      wheelBodyTests: perTick("wheelNarrowQueries"),
-      supportQueries: perTick("supportQueries"),
-      replicationBytes: Math.round(bytes / ticks),
-    },
-    profile: cpu ? summarizeProfile(cpu) : undefined,
-  };
-  await writeFile(output, `${JSON.stringify(report, null, 2)}\n`);
-  if (cpu) await writeFile(output.replace(/\.json$/, "") + ".cpuprofile", JSON.stringify(cpu));
-
+async function authority() {
+  const recipe = crowdBenchRecipe(rabbits, cars);
+  const base = reportBase({
+    recipeSha256: sha256(JSON.stringify(recipe)),
+    rabbits,
+    cars,
+    warmup,
+    ticks,
+    authorityHz: 60,
+    input: "none",
+    clock: "fixed-wall-v1",
+  });
   const previous = compare ? JSON.parse(await readFile(compare, "utf8")) : undefined;
-  const delta = (now: number, then: number | undefined) =>
-    then === undefined
-      ? ""
-      : ` (was ${then}${then ? `, ${Math.round(((now - then) / then) * 100)}%` : ""})`;
-  console.log(
-    `crowd:bench ${rabbits} rabbits, ${cars} cars · ${report.machine} · ${report.revision}${report.dirty ? "+dirty" : ""}`,
-  );
-  console.log(
-    `tick p50 ${report.tickMs.p50} ms${delta(report.tickMs.p50, previous?.tickMs.p50)}, p95 ${report.tickMs.p95} ms${delta(report.tickMs.p95, previous?.tickMs.p95)}`,
-  );
-  for (const [name, v] of Object.entries(stages))
-    console.log(
-      `  ${name.padEnd(26)} p50 ${v.p50} ms${delta(v.p50, previous?.stages?.[name]?.p50)}`,
+  const comparison = previous
+    ? assertComparable(base, previous, process.argv.includes("--allow-incompatible"))
+    : [];
+  const originalNow = Date.now;
+  let clock = Date.UTC(2026, 0, 1);
+  Date.now = () => clock;
+  const s = await ScenarioSession.create(recipe);
+  try {
+    const realm = s.realm;
+    const counters = () => {
+      const d = realm.collisionDiagnostics;
+      if (!d) throw Error("Physics scene is not ready");
+      return { ...d };
+    };
+    const placed = {
+      rabbits: realm.entityManager.entities.filter((e) => e.type === "wildlife-rabbit-v1").length,
+      cars: realm.entityManager.entities.filter((e) => e.type.startsWith("vehicle-v1:")).length,
+      entities: realm.entityManager.entities.length,
+    };
+    if (placed.rabbits !== rabbits || placed.cars !== cars)
+      throw Error(`Placed ${JSON.stringify(placed)}, expected ${rabbits} rabbits and ${cars} cars`);
+    const step = () => {
+      clock += 1000 / 60;
+      return s.tick(true);
+    };
+    if (lane === "record") {
+      performanceMetrics.enabled = false;
+      const initial = s.frames();
+      const steps = Array.from({ length: warmup + ticks }, step);
+      const digest = await writeTape(output, {
+        version: 1,
+        recipe,
+        recipeSha256: sha256(JSON.stringify(recipe)),
+        warmup,
+        ticks,
+        initial,
+        steps,
+        source: base.source,
+      });
+      console.log(
+        `Recorded ${steps.length} ticks (${warmup} warm-up), sha256 ${digest}\nTape: ${output}`,
+      );
+      return;
+    }
+    for (let i = 0; i < warmup; i++) step();
+    performanceMetrics.reset(ticks);
+    const before = counters();
+    const inspector = profile ? new Session() : undefined;
+    if (inspector) {
+      inspector.connect();
+      await inspector.post("Profiler.enable");
+      await inspector.post("Profiler.setSamplingInterval", { interval: 100 });
+      await inspector.post("Profiler.start");
+    }
+    const times: number[] = [];
+    const wire = createHash("sha256");
+    let bytes = 0,
+      simulated = 0,
+      awakeCars = 0,
+      moving = 0,
+      samples = 0;
+    for (let i = 0; i < ticks; i++) {
+      const t = performance.now();
+      const frames = step();
+      times.push(performance.now() - t);
+      // Observation stays outside the tick timer; it can still affect GC/cache state.
+      wire.update(`${i}:${frames.length}:`);
+      for (const frame of frames) {
+        bytes += frame.byteLength;
+        wire.update(`${frame.byteLength}:`).update(new Uint8Array(frame));
+      }
+      simulated += realm.persistenceDiagnostics.activeActors;
+      if (i % 30 === 0) {
+        samples++;
+        for (const body of realm.physicsState?.bodies ?? [])
+          if (body.kind === "vehicle" && !body.sleeping) awakeCars++;
+        for (const e of realm.entityManager.entities)
+          if (e.velocity?.vx || e.velocity?.vy || e.jumpVZ) moving++;
+      }
+    }
+    const cpu = inspector
+      ? sourceProfile((await inspector.post("Profiler.stop")).profile as CpuProfile)
+      : undefined;
+    inspector?.disconnect();
+    const after = counters();
+    const perTick = (key: keyof typeof after) =>
+      round((Number(after[key]) - Number(before[key])) / ticks);
+    const stages = Object.fromEntries(
+      Object.entries(performanceMetrics.snapshot())
+        .filter(([name]) => name.startsWith("realm.") || name.startsWith("server."))
+        .map(([name, v]) => {
+          if (v.count !== v.retained) throw Error(`Stage ${name} lost timing samples`);
+          return [
+            name,
+            {
+              count: v.count,
+              retained: v.retained,
+              totalMs: round(v.totalMs),
+              p50: round(v.p50Ms),
+              p95: round(v.p95Ms),
+              p99: round(v.p99Ms),
+            },
+          ];
+        }),
     );
-  console.log("work per tick:");
-  for (const [name, v] of Object.entries(report.work))
-    console.log(`  ${name.padEnd(26)} ${v}${delta(v, previous?.work?.[name])}`);
-  if (report.profile) {
-    console.log("profile, self time share of measured ticks:");
-    for (const [name, share] of report.profile.self) console.log(`  ${share.padStart(6)} ${name}`);
+    const outcome = { wireSha256: wire.digest("hex") };
+    const outcomeMatches = compareOutcome(outcome, previous?.outcome, assertEquivalent);
+    const report = {
+      ...base,
+      comparisonIssues: comparison,
+      placed,
+      tickMs: summarize(times),
+      stages,
+      work: {
+        simulatedActors: round(simulated / ticks),
+        movingActors: round(moving / samples),
+        movingSampleEveryTicks: 30,
+        physicsBodies: after.bodies,
+        awakeCars: round(awakeCars / samples),
+        wheelRays: perTick("wheelQueries"),
+        wheelBodyTests: perTick("wheelNarrowQueries"),
+        supportQueries: perTick("supportQueries"),
+        replicationBytes: Math.round(bytes / ticks),
+      },
+      outcome,
+      outcomeMatches,
+      profile: cpu ? summarizeProfile(cpu) : undefined,
+    };
+    await writeFile(output, `${JSON.stringify(report, null, 2)}\n`);
+    if (cpu) await writeFile(`${output.replace(/\.json$/, "")}.cpuprofile`, JSON.stringify(cpu));
+    if (comparison.length) console.log(`INCOMPATIBLE COMPARISON: ${comparison.join(", ")}`);
+    console.log(`crowd:bench authority ${rabbits} rabbits, ${cars} cars · ${base.environment.cpu}`);
+    console.log(
+      `tick p50 ${report.tickMs.p50} ms${delta(report.tickMs.p50, previous?.tickMs.p50)}, p95 ${report.tickMs.p95} ms${delta(report.tickMs.p95, previous?.tickMs.p95)}`,
+    );
+    for (const [name, v] of Object.entries(stages))
+      console.log(
+        `  ${name.padEnd(26)} p50 ${v.p50} ms${delta(v.p50, previous?.stages?.[name]?.p50)} (${v.count} samples)`,
+      );
+    console.log("work per tick:", report.work);
+    console.log("wire sha256:", report.outcome.wireSha256);
+    if (previous) console.log("outcome matches:", outcomeMatches);
+    if (report.profile)
+      for (const [name, share] of report.profile.self)
+        console.log(`  ${share.padStart(6)} ${name}`);
+    console.log(`Report: ${output}`);
+  } finally {
+    await s.close();
+    Date.now = originalNow;
   }
-  console.log(`Report: ${output}`);
-} finally {
-  await s.close();
 }
 
 interface CpuProfile {

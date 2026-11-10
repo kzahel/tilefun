@@ -13,6 +13,20 @@ test(`preview authority survives a stalled client and explicit lifecycle fences`
   const diagnostic = () => canvas.evaluate((c: GeometryCanvas) => c.__presentationDiagnostics?.());
   await expect.poll(async () => (await diagnostic())?.authority.clock?.running).toBe(true);
   await expect.poll(async () => (await diagnostic())?.steps ?? 0).toBeGreaterThan(10);
+  // Ordinary labs retain no callback timings; explicit benchmarks opt in.
+  expect(await canvas.evaluate((c: GeometryCanvas) => c.__performanceSample?.())).toEqual({});
+  await canvas.evaluate((c: GeometryCanvas) => c.__performanceSample?.(true));
+  await expect
+    .poll(
+      async () =>
+        (await canvas.evaluate((c: GeometryCanvas) => c.__performanceSample?.()))?.["lab.render"]
+          ?.count ?? 0,
+    )
+    .toBeGreaterThan(2);
+  expect(
+    (await canvas.evaluate((c: GeometryCanvas) => c.__performanceSample?.()))?.["lab.update"]
+      ?.count,
+  ).toBeGreaterThan(0);
   const before = await diagnostic();
   if (!before?.authority.clock) throw Error("Missing clock diagnostics");
   const beforeTicks = before.authority.clock.ticks;

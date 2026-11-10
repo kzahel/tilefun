@@ -16,6 +16,16 @@ receiver partition fix brings lab frames from about 430 ms to 16.7 ms p50.
 [235](../tactical/235-crowd-bench-and-unnecessary-work.md) owns the inventory
 of unnecessary work and the goal: tick ≤ 2 ms and the lab at 120 Hz.
 
+The measurement checkpoint separates authority, client processing and render
+preparation into plain-Node lanes. `--lane=record` saves binary output;
+`--lane=client|render --replay=<file.tape>` consumes the same motion, with a
+frozen-scene render control. Schema-2 reports check comparison compatibility,
+fingerprint executable inputs and retain the full authority timing window.
+Separate `--verify` runs hash replay outcomes; `npm run test:crowd-bench` checks
+the harness. The browser runner records idle cadence, GPU/build identity and
+opt-in update/render CPU timings. Only a headed target-display run can qualify
+120 Hz. See 235 for commands, exclusions, results and the next review boundary.
+
 ## Actor stress: rabbits and parked cars (2026-11-09)
 
 `npm run stress:bench -- --headed --rabbits=100 --cars=20` opens a new seed-2026

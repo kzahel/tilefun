@@ -6,6 +6,7 @@ export class PerformanceMetrics {
     { values: number[]; next: number; count: number; totalMs: number; maxMs: number }
   >();
   static readonly capacity = 512;
+  private sampleCapacity = PerformanceMetrics.capacity;
 
   start(): number {
     return this.enabled ? performance.now() : 0;
@@ -24,13 +25,17 @@ export class PerformanceMetrics {
       this.timings.set(name, timing);
     }
     timing.values[timing.next] = ms;
-    timing.next = (timing.next + 1) % PerformanceMetrics.capacity;
+    timing.next = (timing.next + 1) % this.sampleCapacity;
     timing.count++;
     timing.totalMs += ms;
     timing.maxMs = Math.max(timing.maxMs, ms);
   }
 
-  reset(): void {
+  /** Benchmarks can retain their full bounded window; live diagnostics default to 512. */
+  reset(capacity = PerformanceMetrics.capacity): void {
+    if (!Number.isSafeInteger(capacity) || capacity < 1 || capacity > 100_000)
+      throw Error("Timing capacity must be an integer 1–100000");
+    this.sampleCapacity = capacity;
     this.timings.clear();
   }
 

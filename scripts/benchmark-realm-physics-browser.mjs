@@ -41,10 +41,18 @@ const git = (args) =>
     ? execFileSync("wsl", ["git", ...args], { encoding: "utf8" }).trim()
     : execFileSync("git", args, { encoding: "utf8" }).trim();
 const report = {
+  schemaVersion: 2,
   revision: git(["rev-parse", "HEAD"]),
   dirty: !!git(["status", "--porcelain"]),
   date: new Date().toISOString(),
   browser: browser.version(),
+  headless: !cdp && !process.argv.includes("--headed"),
+  machine: {
+    cpu: os.cpus()[0]?.model,
+    platform: os.platform(),
+    arch: os.arch(),
+    release: os.release(),
+  },
   lane: cdp ? "dedicated physical browser via CDP" : "bundled full Chromium",
   fixture,
   allocations,
@@ -78,6 +86,35 @@ try {
           errors = [];
         page.on("pageerror", (e) => errors.push(String(e)));
         try {
+          await page.bringToFront();
+          // Calibrate the browser's own idle cadence; headless rAF need not match
+          // the physical display. This is separate from the scene sample.
+          const idleFrames = await page.evaluate(async () => {
+            const times = [];
+            let previous = await new Promise(requestAnimationFrame);
+            for (let i = 0; i < 120; i++) {
+              const now = await new Promise(requestAnimationFrame);
+              times.push(now - previous);
+              previous = now;
+            }
+            return times;
+          });
+          await page.addInitScript(() => {
+            performance.setResourceTimingBufferSize(20_000);
+            const original = HTMLCanvasElement.prototype.getContext;
+            HTMLCanvasElement.prototype.getContext = function (...args) {
+              const ctx = original.apply(this, args);
+              if (args[0] === "webgl2" && ctx) {
+                const debug = ctx.getExtension("WEBGL_debug_renderer_info");
+                window.__realmBenchGpu = {
+                  vendor: ctx.getParameter(debug?.UNMASKED_VENDOR_WEBGL ?? ctx.VENDOR),
+                  renderer: ctx.getParameter(debug?.UNMASKED_RENDERER_WEBGL ?? ctx.RENDERER),
+                  version: ctx.getParameter(ctx.VERSION),
+                };
+              }
+              return ctx;
+            };
+          });
           if (allocations)
             await page.addInitScript(() => {
               const counts = {};
@@ -115,13 +152,58 @@ try {
           await page.locator('canvas[data-ready="true"]').scrollIntoViewIfNeeded();
           await page.bringToFront();
           await page.waitForTimeout(warmup * 1000);
+          if (fixture === "crowd")
+            await page.waitForFunction(
+              () => {
+                const scene = document
+                  .querySelector('canvas[data-ready="true"]')
+                  ?.__presentationDiagnostics?.();
+                const terrain = scene?.terrain;
+                const assets = Object.values(terrain?.gpu?.vehicleAssets ?? {});
+                return (
+                  terrain?.pending === 0 &&
+                  terrain?.rowsLastFrame === 0 &&
+                  assets.length >= 8 &&
+                  assets.every((asset) => asset.state === "ready")
+                );
+              },
+              undefined,
+              { timeout: 60_000, polling: 100 },
+            );
+          const executableResources = await page.evaluate(
+            async (workerUrls) => {
+              const urls = [
+                ...new Set(
+                  [
+                    ...performance.getEntriesByType("resource").map((entry) => entry.name),
+                    ...workerUrls,
+                  ].filter((url) => new URL(url).pathname.endsWith(".js")),
+                ),
+              ].sort();
+              return Promise.all(
+                urls.map(async (url) => {
+                  const response = await fetch(url);
+                  if (!response.ok) throw Error(`Cannot fingerprint ${url}`);
+                  const hash = await crypto.subtle.digest("SHA-256", await response.arrayBuffer());
+                  return {
+                    path: new URL(url).pathname,
+                    sha256: [...new Uint8Array(hash)]
+                      .map((b) => b.toString(16).padStart(2, "0"))
+                      .join(""),
+                  };
+                }),
+              );
+            },
+            page.workers().map((worker) => worker.url()),
+          );
           const start = await page.evaluate(async () => {
             const c = document.querySelector('canvas[data-ready="true"]');
             const diagnostics = await c.__physicsSample(true);
+            c.__performanceSample?.(true);
             window.__realmBenchFrames = [];
-            let previous = performance.now();
+            let previous;
             const frame = (now) => {
-              window.__realmBenchFrames.push(now - previous);
+              if (previous !== undefined) window.__realmBenchFrames.push(now - previous);
               previous = now;
               window.__realmBenchFrame = requestAnimationFrame(frame);
             };
@@ -139,30 +221,46 @@ try {
                 memoryGiB: navigator.deviceMemory,
                 viewport: { width: innerWidth, height: innerHeight },
                 pixelRatio: devicePixelRatio,
+                gpu: window.__realmBenchGpu,
+                canvas: {
+                  width: c.width,
+                  height: c.height,
+                  css: { width: c.clientWidth, height: c.clientHeight },
+                },
               },
             };
           });
           await page.waitForTimeout(seconds * 1000);
           const end = await page.evaluate(async () => {
             const c = document.querySelector('canvas[data-ready="true"]');
-            const diagnostics = await c.__physicsSample();
             cancelAnimationFrame(window.__realmBenchFrame);
+            const at = performance.now();
+            const mainThread = c.__performanceSample?.();
+            const frames = window.__realmBenchFrames;
+            const scene = c.__presentationDiagnostics();
+            const diagnostics = await c.__physicsSample();
             return {
-              at: performance.now(),
+              at,
+              mainThread,
               diagnostics,
-              frames: window.__realmBenchFrames,
+              frames,
               gl: window.__tilefunGlAllocations ? { ...window.__tilefunGlAllocations } : undefined,
-              scene: c.__presentationDiagnostics(),
+              scene,
             };
           });
+          const idle = summary(idleFrames);
           const row = {
             trial,
             population,
             mode,
+            idleFrames: idle,
+            executableResources,
             elapsedMs: end.at - start.at,
             device: start.device,
             diagnostics: end.diagnostics,
             frames: summary(end.frames),
+            framesOverIdleCadence: end.frames.filter((ms) => ms > idle.p50 * 1.5).length,
+            mainThread: end.mainThread,
             scene: end.scene,
             startScene: start.scene,
             glAllocations:
@@ -176,6 +274,8 @@ try {
           report.cases.push(row);
           if (
             !end.diagnostics?.timings?.["realm.tick"]?.count ||
+            (mode === "shared" &&
+              (!end.mainThread?.["lab.update"]?.count || !end.mainThread?.["lab.render"]?.count)) ||
             errors.length ||
             start.device.renderer !== "gpu"
           )
@@ -187,6 +287,7 @@ try {
               mode,
               tick: end.diagnostics?.timings?.["realm.tick"],
               frames: row.frames,
+              mainThread: row.mainThread,
               errors,
             }),
           );

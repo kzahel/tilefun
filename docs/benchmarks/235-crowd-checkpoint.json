@@ -1,0 +1,3044 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-10T07:03:08.315Z",
+  "purpose": "235 measurement checkpoint; attribution only, no gameplay optimization",
+  "node": {
+    "environment": {
+      "node": "v24.22.1",
+      "v8": "13.6.233.17-node.58",
+      "platform": "darwin",
+      "release": "25.6.0",
+      "arch": "arm64",
+      "cpu": "Apple M4 Pro",
+      "logicalCpus": 14
+    },
+    "source": {
+      "sha256": "7f70e4ca325096c471ac41635bfb62b053257062f4d1d79fe1423c94325c271c",
+      "inputCount": 436,
+      "revision": "69ea9e1adb299aa4db4e7db1165c237f497c681e",
+      "dirty": true
+    },
+    "cases": [
+      {
+        "name": "authority-empty",
+        "lane": "authority",
+        "workload": {
+          "recipeSha256": "29f8bb33258130fcefe3ba9847e9b71a52ab2ddd9734fdc2b7470cb9d868a7e3",
+          "rabbits": 0,
+          "cars": 0,
+          "warmup": 180,
+          "ticks": 600,
+          "authorityHz": 60,
+          "input": "none",
+          "clock": "fixed-wall-v1"
+        },
+        "instrumentation": {
+          "profile": false,
+          "stageTimings": true
+        },
+        "work": {
+          "simulatedActors": 1,
+          "movingActors": 0,
+          "movingSampleEveryTicks": 30,
+          "physicsBodies": 1,
+          "awakeCars": 0,
+          "wheelRays": 0,
+          "wheelBodyTests": 0,
+          "supportQueries": 0,
+          "replicationBytes": 162
+        },
+        "outcome": {
+          "wireSha256": "d16d6d85e5491c1e0cdeddf672674b0f3bf690c91a3fddfa435ca087b1385665"
+        },
+        "trials": [
+          {
+            "date": "2026-11-10T07:03:01.257Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 41.645,
+              "mean": 0.069,
+              "p50": 0.062,
+              "p95": 0.1,
+              "p99": 0.247,
+              "max": 0.402
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.534,
+                "p50": 0.001,
+                "p95": 0.002,
+                "p99": 0.002
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.343,
+                "p50": 0.001,
+                "p95": 0.001,
+                "p99": 0.003
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 9.212,
+                "p50": 0.012,
+                "p95": 0.023,
+                "p99": 0.064
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.095,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 10.227,
+                "p50": 0.015,
+                "p95": 0.026,
+                "p99": 0.034
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 41.449,
+                "p50": 0.061,
+                "p95": 0.099,
+                "p99": 0.247
+              }
+            },
+            "outcomeMatches": null,
+            "loadBefore": [
+              8.17919921875,
+              6.0478515625,
+              4.71240234375
+            ]
+          },
+          {
+            "date": "2026-11-10T07:03:27.058Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 42.271,
+              "mean": 0.07,
+              "p50": 0.061,
+              "p95": 0.126,
+              "p99": 0.328,
+              "max": 0.451
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.445,
+                "p50": 0.001,
+                "p95": 0.002,
+                "p99": 0.002
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.362,
+                "p50": 0.001,
+                "p95": 0.001,
+                "p99": 0.003
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 9.966,
+                "p50": 0.012,
+                "p95": 0.027,
+                "p99": 0.138
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.122,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.001
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 10.376,
+                "p50": 0.015,
+                "p95": 0.029,
+                "p99": 0.058
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 42.007,
+                "p50": 0.061,
+                "p95": 0.121,
+                "p99": 0.327
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              6.69775390625,
+              5.87158203125,
+              4.6923828125
+            ]
+          },
+          {
+            "date": "2026-11-10T07:03:27.942Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 41.896,
+              "mean": 0.07,
+              "p50": 0.06,
+              "p95": 0.115,
+              "p99": 0.28,
+              "max": 0.443
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.432,
+                "p50": 0.001,
+                "p95": 0.002,
+                "p99": 0.002
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.36,
+                "p50": 0.001,
+                "p95": 0.001,
+                "p99": 0.003
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 9.937,
+                "p50": 0.012,
+                "p95": 0.027,
+                "p99": 0.147
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.095,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 10.836,
+                "p50": 0.015,
+                "p95": 0.027,
+                "p99": 0.117
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 41.671,
+                "p50": 0.06,
+                "p95": 0.114,
+                "p99": 0.279
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              6.69775390625,
+              5.87158203125,
+              4.6923828125
+            ]
+          }
+        ]
+      },
+      {
+        "name": "authority-rabbits",
+        "lane": "authority",
+        "workload": {
+          "recipeSha256": "f93fd435cde71a71a472702afb7f096ad3e8afd7294a7bfa7b4da38940d63378",
+          "rabbits": 1000,
+          "cars": 0,
+          "warmup": 180,
+          "ticks": 600,
+          "authorityHz": 60,
+          "input": "none",
+          "clock": "fixed-wall-v1"
+        },
+        "instrumentation": {
+          "profile": false,
+          "stageTimings": true
+        },
+        "work": {
+          "simulatedActors": 1001,
+          "movingActors": 64.05,
+          "movingSampleEveryTicks": 30,
+          "physicsBodies": 1001,
+          "awakeCars": 0,
+          "wheelRays": 0,
+          "wheelBodyTests": 0,
+          "supportQueries": 24.427,
+          "replicationBytes": 8109
+        },
+        "outcome": {
+          "wireSha256": "d4e6aa3f7ee51bb2dcb69a7a2341c58eb00f69c7ad092c33c5c2cb0c87b4d8e9"
+        },
+        "trials": [
+          {
+            "date": "2026-11-10T07:03:02.092Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 3901.415,
+              "mean": 6.502,
+              "p50": 6.435,
+              "p95": 7.48,
+              "p99": 7.873,
+              "max": 8.615
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.351,
+                "p50": 0.001,
+                "p95": 0.001,
+                "p99": 0.001
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 645.286,
+                "p50": 0.966,
+                "p95": 1.797,
+                "p99": 1.938
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 1796.773,
+                "p50": 3.009,
+                "p95": 3.361,
+                "p99": 3.66
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 23.945,
+                "p50": 0.039,
+                "p95": 0.054,
+                "p99": 0.068
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 752.897,
+                "p50": 1.245,
+                "p95": 1.394,
+                "p99": 1.623
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 3900.884,
+                "p50": 6.434,
+                "p95": 7.48,
+                "p99": 7.872
+              }
+            },
+            "outcomeMatches": null,
+            "loadBefore": [
+              7.68408203125,
+              5.98046875,
+              4.6962890625
+            ]
+          },
+          {
+            "date": "2026-11-10T07:03:21.442Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 4048.875,
+              "mean": 6.748,
+              "p50": 6.627,
+              "p95": 8.003,
+              "p99": 8.923,
+              "max": 9.779
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.385,
+                "p50": 0.001,
+                "p95": 0.001,
+                "p99": 0.001
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 657.911,
+                "p50": 0.972,
+                "p95": 1.885,
+                "p99": 2.241
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 1879.521,
+                "p50": 3.095,
+                "p95": 3.69,
+                "p99": 4.114
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 27.566,
+                "p50": 0.043,
+                "p95": 0.062,
+                "p99": 0.112
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 780.244,
+                "p50": 1.277,
+                "p95": 1.546,
+                "p99": 1.798
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 4048.271,
+                "p50": 6.626,
+                "p95": 8.001,
+                "p99": 8.921
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              6.671875,
+              5.8525390625,
+              4.67919921875
+            ]
+          },
+          {
+            "date": "2026-11-10T07:03:28.832Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 4156.53,
+              "mean": 6.928,
+              "p50": 6.812,
+              "p95": 8.273,
+              "p99": 9.026,
+              "max": 17.869
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.377,
+                "p50": 0.001,
+                "p95": 0.001,
+                "p99": 0.002
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 677.857,
+                "p50": 1.014,
+                "p95": 1.934,
+                "p99": 2.071
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 1923.907,
+                "p50": 3.145,
+                "p95": 3.96,
+                "p99": 4.528
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 28.065,
+                "p50": 0.044,
+                "p95": 0.07,
+                "p99": 0.085
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 804.488,
+                "p50": 1.31,
+                "p95": 1.628,
+                "p99": 1.796
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 4155.865,
+                "p50": 6.811,
+                "p95": 8.271,
+                "p99": 9.024
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              6.69775390625,
+              5.87158203125,
+              4.6923828125
+            ]
+          }
+        ]
+      },
+      {
+        "name": "authority-cars",
+        "lane": "authority",
+        "workload": {
+          "recipeSha256": "727a00ac80ad5980727ff6ddad0f77faf88f33755a202cef717e0f0e724776a8",
+          "rabbits": 0,
+          "cars": 50,
+          "warmup": 180,
+          "ticks": 600,
+          "authorityHz": 60,
+          "input": "none",
+          "clock": "fixed-wall-v1"
+        },
+        "instrumentation": {
+          "profile": false,
+          "stageTimings": true
+        },
+        "work": {
+          "simulatedActors": 51,
+          "movingActors": 0,
+          "movingSampleEveryTicks": 30,
+          "physicsBodies": 51,
+          "awakeCars": 0,
+          "wheelRays": 0,
+          "wheelBodyTests": 0,
+          "supportQueries": 0,
+          "replicationBytes": 1188
+        },
+        "outcome": {
+          "wireSha256": "90f8d28b2f9e0c5b072f30d671f4deec9f3b8c833eb9c4d136bdf4a299de3047"
+        },
+        "trials": [
+          {
+            "date": "2026-11-10T07:03:07.471Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 147.781,
+              "mean": 0.246,
+              "p50": 0.234,
+              "p95": 0.32,
+              "p99": 0.43,
+              "max": 0.62
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.333,
+                "p50": 0.001,
+                "p95": 0.001,
+                "p99": 0.001
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 3.252,
+                "p50": 0.005,
+                "p95": 0.006,
+                "p99": 0.011
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 64.635,
+                "p50": 0.101,
+                "p95": 0.138,
+                "p99": 0.215
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.092,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 37.363,
+                "p50": 0.059,
+                "p95": 0.074,
+                "p99": 0.135
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 147.547,
+                "p50": 0.234,
+                "p95": 0.32,
+                "p99": 0.426
+              }
+            },
+            "outcomeMatches": null,
+            "loadBefore": [
+              7.228515625,
+              5.9140625,
+              4.68017578125
+            ]
+          },
+          {
+            "date": "2026-11-10T07:03:20.564Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 152.684,
+              "mean": 0.254,
+              "p50": 0.237,
+              "p95": 0.362,
+              "p99": 0.497,
+              "max": 0.939
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.323,
+                "p50": 0,
+                "p95": 0.001,
+                "p99": 0.001
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 3.302,
+                "p50": 0.005,
+                "p95": 0.006,
+                "p99": 0.013
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 66.524,
+                "p50": 0.102,
+                "p95": 0.152,
+                "p99": 0.255
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.094,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.001
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 38.238,
+                "p50": 0.059,
+                "p95": 0.08,
+                "p99": 0.131
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 152.403,
+                "p50": 0.237,
+                "p95": 0.362,
+                "p99": 0.494
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              6.90478515625,
+              5.88427734375,
+              4.68359375
+            ]
+          },
+          {
+            "date": "2026-11-10T07:03:34.628Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 156.259,
+              "mean": 0.26,
+              "p50": 0.241,
+              "p95": 0.373,
+              "p99": 0.538,
+              "max": 0.705
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.344,
+                "p50": 0.001,
+                "p95": 0.001,
+                "p99": 0.001
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 3.419,
+                "p50": 0.005,
+                "p95": 0.006,
+                "p99": 0.013
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 68.489,
+                "p50": 0.105,
+                "p95": 0.168,
+                "p99": 0.24
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.108,
+                "p50": 0,
+                "p95": 0,
+                "p99": 0.001
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 38.808,
+                "p50": 0.06,
+                "p95": 0.086,
+                "p99": 0.179
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 155.987,
+                "p50": 0.241,
+                "p95": 0.372,
+                "p99": 0.537
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              6.5615234375,
+              5.85693359375,
+              4.69384765625
+            ]
+          }
+        ]
+      },
+      {
+        "name": "authority-crowd",
+        "lane": "authority",
+        "workload": {
+          "recipeSha256": "70af30fea0987e8a157ffd0bd7ed3a73dae89654e6dc7af2b1672cbf066d8b13",
+          "rabbits": 1000,
+          "cars": 50,
+          "warmup": 180,
+          "ticks": 600,
+          "authorityHz": 60,
+          "input": "none",
+          "clock": "fixed-wall-v1"
+        },
+        "instrumentation": {
+          "profile": false,
+          "stageTimings": true
+        },
+        "work": {
+          "simulatedActors": 1051,
+          "movingActors": 64.05,
+          "movingSampleEveryTicks": 30,
+          "physicsBodies": 1051,
+          "awakeCars": 0,
+          "wheelRays": 0,
+          "wheelBodyTests": 0,
+          "supportQueries": 24.427,
+          "replicationBytes": 9135
+        },
+        "outcome": {
+          "wireSha256": "0a8a22cc92489ba11af5e7a30678a38e5fe4a8891bc425e15333dc62763324b5"
+        },
+        "trials": [
+          {
+            "date": "2026-11-10T07:03:08.315Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 4101.944,
+              "mean": 6.837,
+              "p50": 6.77,
+              "p95": 7.824,
+              "p99": 8.211,
+              "max": 10.074
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.34,
+                "p50": 0.001,
+                "p95": 0.001,
+                "p99": 0.001
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 639.458,
+                "p50": 0.92,
+                "p95": 1.776,
+                "p99": 2.112
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 1907.578,
+                "p50": 3.157,
+                "p95": 3.674,
+                "p99": 4.089
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 24.224,
+                "p50": 0.04,
+                "p95": 0.053,
+                "p99": 0.065
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 801.432,
+                "p50": 1.321,
+                "p95": 1.513,
+                "p99": 1.796
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 4101.534,
+                "p50": 6.769,
+                "p95": 7.824,
+                "p99": 8.21
+              }
+            },
+            "outcomeMatches": null,
+            "loadBefore": [
+              7.228515625,
+              5.9140625,
+              4.68017578125
+            ]
+          },
+          {
+            "date": "2026-11-10T07:03:14.152Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 4498.143,
+              "mean": 7.497,
+              "p50": 7.303,
+              "p95": 9.247,
+              "p99": 10.827,
+              "max": 12.874
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.388,
+                "p50": 0.001,
+                "p95": 0.001,
+                "p99": 0.001
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 690.5,
+                "p50": 0.986,
+                "p95": 1.922,
+                "p99": 2.244
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 2080.491,
+                "p50": 3.335,
+                "p95": 4.212,
+                "p99": 5.09
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 32.027,
+                "p50": 0.049,
+                "p95": 0.081,
+                "p99": 0.113
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 884.257,
+                "p50": 1.417,
+                "p95": 1.841,
+                "p99": 2.163
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 4497.335,
+                "p50": 7.302,
+                "p95": 9.245,
+                "p99": 10.825
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              6.8095703125,
+              5.8486328125,
+              4.6640625
+            ]
+          },
+          {
+            "date": "2026-11-10T07:03:35.541Z",
+            "tickMs": {
+              "count": 600,
+              "totalMs": 4627.605,
+              "mean": 7.713,
+              "p50": 7.608,
+              "p95": 9.166,
+              "p99": 9.716,
+              "max": 18.922
+            },
+            "stages": {
+              "server.autotile": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 0.44,
+                "p50": 0.001,
+                "p95": 0.001,
+                "p99": 0.001
+              },
+              "realm.ai": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 697.381,
+                "p50": 1.027,
+                "p95": 1.964,
+                "p99": 2.175
+              },
+              "realm.entityPhysics": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 2151.154,
+                "p50": 3.536,
+                "p95": 4.231,
+                "p99": 4.502
+              },
+              "realm.saveSweep": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 33.557,
+                "p50": 0.053,
+                "p95": 0.076,
+                "p99": 0.105
+              },
+              "server.replication": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 912.898,
+                "p50": 1.482,
+                "p95": 1.84,
+                "p99": 2.049
+              },
+              "realm.tick": {
+                "count": 600,
+                "retained": 600,
+                "totalMs": 4626.741,
+                "p50": 7.606,
+                "p95": 9.165,
+                "p99": 9.713
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              6.5615234375,
+              5.85693359375,
+              4.69384765625
+            ]
+          }
+        ]
+      },
+      {
+        "name": "client",
+        "lane": "client",
+        "workload": {
+          "tapeSha256": "652cdfdcf1b185692fa15cf37d5bc0e83d8439e7a2981cf44cc81ce4f49c1c29",
+          "warmup": 180,
+          "ticks": 600,
+          "updatesHz": 60,
+          "presentationHz": 120,
+          "scene": "moving",
+          "view": {
+            "width": 960,
+            "height": 640,
+            "camera": {
+              "wx": 640,
+              "wy": 690
+            },
+            "zoom": 0.2
+          },
+          "meshes": []
+        },
+        "instrumentation": {
+          "profile": false,
+          "stageTimings": false,
+          "verify": false,
+          "fineGrainedTimers": true
+        },
+        "work": {
+          "updates": 600,
+          "presentations": 1200,
+          "collectedFrames": 0,
+          "meanSceneItems": 0,
+          "meanDrawOrderEntries": 0,
+          "finalEntities": 1051,
+          "finalServerTick": 780,
+          "finalReceivers": {
+            "sources": 0,
+            "meshTriangles": 0,
+            "queries": 0,
+            "fragments": 0
+          },
+          "promptKey": ""
+        },
+        "outcome": {
+          "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+          "finalSceneSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "trials": [
+          {
+            "date": "2026-11-10T07:04:22.205Z",
+            "stages": {
+              "client.decodeApply": {
+                "count": 600,
+                "totalMs": 181.261,
+                "mean": 0.302,
+                "p50": 0.288,
+                "p95": 0.384,
+                "p99": 0.611,
+                "max": 2.993
+              },
+              "client.appearances": {
+                "count": 600,
+                "totalMs": 2086.069,
+                "mean": 3.477,
+                "p50": 3.458,
+                "p95": 3.671,
+                "p99": 3.796,
+                "max": 3.957
+              },
+              "client.reconcile": {
+                "count": 600,
+                "totalMs": 113.324,
+                "mean": 0.189,
+                "p50": 0.18,
+                "p95": 0.256,
+                "p99": 0.456,
+                "max": 0.808
+              },
+              "client.animation": {
+                "count": 600,
+                "totalMs": 31.844,
+                "mean": 0.053,
+                "p50": 0.058,
+                "p95": 0.087,
+                "p99": 0.13,
+                "max": 0.392
+              },
+              "client.prompts": {
+                "count": 600,
+                "totalMs": 517.312,
+                "mean": 0.862,
+                "p50": 0.86,
+                "p95": 1.016,
+                "p99": 1.042,
+                "max": 1.06
+              },
+              "client.update": {
+                "count": 600,
+                "totalMs": 2930.324,
+                "mean": 4.884,
+                "p50": 4.857,
+                "p95": 5.217,
+                "p99": 5.443,
+                "max": 7.963
+              },
+              "client.presentation": {
+                "count": 1200,
+                "totalMs": 883.966,
+                "mean": 0.737,
+                "p50": 0.728,
+                "p95": 0.979,
+                "p99": 1.145,
+                "max": 1.395
+              }
+            },
+            "outcomeMatches": null,
+            "loadBefore": [
+              4.7294921875,
+              5.51025390625,
+              4.63330078125
+            ]
+          },
+          {
+            "date": "2026-11-10T07:05:46.278Z",
+            "stages": {
+              "client.decodeApply": {
+                "count": 600,
+                "totalMs": 175.769,
+                "mean": 0.293,
+                "p50": 0.283,
+                "p95": 0.366,
+                "p99": 0.608,
+                "max": 0.718
+              },
+              "client.appearances": {
+                "count": 600,
+                "totalMs": 2087.969,
+                "mean": 3.48,
+                "p50": 3.47,
+                "p95": 3.578,
+                "p99": 3.816,
+                "max": 3.868
+              },
+              "client.reconcile": {
+                "count": 600,
+                "totalMs": 110.611,
+                "mean": 0.184,
+                "p50": 0.171,
+                "p95": 0.234,
+                "p99": 0.447,
+                "max": 0.792
+              },
+              "client.animation": {
+                "count": 600,
+                "totalMs": 30.569,
+                "mean": 0.051,
+                "p50": 0.058,
+                "p95": 0.076,
+                "p99": 0.087,
+                "max": 0.391
+              },
+              "client.prompts": {
+                "count": 600,
+                "totalMs": 542.952,
+                "mean": 0.905,
+                "p50": 0.888,
+                "p95": 1.11,
+                "p99": 1.198,
+                "max": 1.216
+              },
+              "client.update": {
+                "count": 600,
+                "totalMs": 2948.344,
+                "mean": 4.914,
+                "p50": 4.887,
+                "p95": 5.336,
+                "p99": 5.493,
+                "max": 5.93
+              },
+              "client.presentation": {
+                "count": 1200,
+                "totalMs": 881.782,
+                "mean": 0.735,
+                "p50": 0.736,
+                "p95": 0.968,
+                "p99": 1.061,
+                "max": 1.46
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              2.9853515625,
+              4.75830078125,
+              4.42138671875
+            ]
+          },
+          {
+            "date": "2026-11-10T07:05:51.577Z",
+            "stages": {
+              "client.decodeApply": {
+                "count": 600,
+                "totalMs": 175.616,
+                "mean": 0.293,
+                "p50": 0.28,
+                "p95": 0.387,
+                "p99": 0.65,
+                "max": 0.742
+              },
+              "client.appearances": {
+                "count": 600,
+                "totalMs": 2096.793,
+                "mean": 3.495,
+                "p50": 3.482,
+                "p95": 3.639,
+                "p99": 3.794,
+                "max": 3.872
+              },
+              "client.reconcile": {
+                "count": 600,
+                "totalMs": 108.703,
+                "mean": 0.181,
+                "p50": 0.168,
+                "p95": 0.232,
+                "p99": 0.309,
+                "max": 0.795
+              },
+              "client.animation": {
+                "count": 600,
+                "totalMs": 30.528,
+                "mean": 0.051,
+                "p50": 0.059,
+                "p95": 0.076,
+                "p99": 0.092,
+                "max": 0.138
+              },
+              "client.prompts": {
+                "count": 600,
+                "totalMs": 519.601,
+                "mean": 0.866,
+                "p50": 0.864,
+                "p95": 1.013,
+                "p99": 1.029,
+                "max": 1.181
+              },
+              "client.update": {
+                "count": 600,
+                "totalMs": 2931.696,
+                "mean": 4.886,
+                "p50": 4.887,
+                "p95": 5.207,
+                "p99": 5.354,
+                "max": 5.706
+              },
+              "client.presentation": {
+                "count": 1200,
+                "totalMs": 872.392,
+                "mean": 0.727,
+                "p50": 0.726,
+                "p95": 0.963,
+                "p99": 1.045,
+                "max": 1.313
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              2.90625,
+              4.71240234375,
+              4.40673828125
+            ]
+          }
+        ]
+      },
+      {
+        "name": "render",
+        "lane": "render",
+        "workload": {
+          "tapeSha256": "652cdfdcf1b185692fa15cf37d5bc0e83d8439e7a2981cf44cc81ce4f49c1c29",
+          "warmup": 180,
+          "ticks": 600,
+          "updatesHz": 60,
+          "presentationHz": 120,
+          "scene": "moving",
+          "view": {
+            "width": 960,
+            "height": 640,
+            "camera": {
+              "wx": 640,
+              "wy": 690
+            },
+            "zoom": 0.2
+          },
+          "meshes": [
+            {
+              "assetId": "compact-1-authored-v7",
+              "sha256": "b568aa8d826c8ba78a3ed63b4198ba5c02f22fd74496d3a8dd6a6e537f5df1fd",
+              "triangles": 842
+            },
+            {
+              "assetId": "beetle-authored-v1",
+              "sha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+              "triangles": 2554
+            },
+            {
+              "assetId": "police-car-authored-v2",
+              "sha256": "6a46dd5867f8fd17bc9ec20af7c059c59153973774d6d7ea775905b32ccad892",
+              "triangles": 1300
+            },
+            {
+              "assetId": "rosso-coupe-authored-v3",
+              "sha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+              "triangles": 2299
+            },
+            {
+              "assetId": "rally-hatchback-authored-v1",
+              "sha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+              "triangles": 2900
+            },
+            {
+              "assetId": "tow-truck-authored-v2",
+              "sha256": "cf77b72b33eb76c7303f88641d5682e379485359dcaac0f113672069a32ae180",
+              "triangles": 3466
+            },
+            {
+              "assetId": "dump-truck-authored-v2",
+              "sha256": "237be10a2c5e63b9e7b226d4d6e4acd84f623e703386a2b43b43f3e0baecc719",
+              "triangles": 3720
+            },
+            {
+              "assetId": "garbage-truck-orange-authored-v1",
+              "sha256": "e6f93e2c8322e1c7ea8f8fa54967da98a3becc1b89eb2de9edca0ed6068ca8de",
+              "triangles": 1488
+            }
+          ]
+        },
+        "instrumentation": {
+          "profile": false,
+          "stageTimings": false,
+          "verify": false,
+          "fineGrainedTimers": false
+        },
+        "work": {
+          "updates": 600,
+          "presentations": 1200,
+          "collectedFrames": 1200,
+          "meanSceneItems": 2704.608,
+          "meanDrawOrderEntries": 2704.608,
+          "finalEntities": 1051,
+          "finalServerTick": 780,
+          "finalReceivers": {
+            "sources": 1051,
+            "meshTriangles": 1812,
+            "queries": 2083,
+            "fragments": 5071
+          },
+          "promptKey": ""
+        },
+        "outcome": {
+          "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+          "finalSceneSha256": "c4071745d5f916a05185911de3363811e39b2a37f4760fd9a5fa4b8bda0ba82f"
+        },
+        "trials": [
+          {
+            "date": "2026-11-10T07:04:27.500Z",
+            "stages": {
+              "render.prepare": {
+                "count": 1200,
+                "totalMs": 11541.637,
+                "mean": 9.618,
+                "p50": 9.628,
+                "p95": 10.261,
+                "p99": 15.376,
+                "max": 16.526
+              }
+            },
+            "outcomeMatches": null,
+            "loadBefore": [
+              4.5107421875,
+              5.45166015625,
+              4.61767578125
+            ]
+          },
+          {
+            "date": "2026-11-10T07:05:24.004Z",
+            "stages": {
+              "render.prepare": {
+                "count": 1200,
+                "totalMs": 11900.13,
+                "mean": 9.917,
+                "p50": 9.937,
+                "p95": 10.619,
+                "p99": 15.536,
+                "max": 17.82
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              3.1875,
+              4.916015625,
+              4.46826171875
+            ]
+          },
+          {
+            "date": "2026-11-10T07:05:56.846Z",
+            "stages": {
+              "render.prepare": {
+                "count": 1200,
+                "totalMs": 11669.29,
+                "mean": 9.724,
+                "p50": 9.661,
+                "p95": 10.774,
+                "p99": 15.315,
+                "max": 18.163
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              2.7666015625,
+              4.62255859375,
+              4.37841796875
+            ]
+          }
+        ]
+      },
+      {
+        "name": "frozen",
+        "lane": "render",
+        "workload": {
+          "tapeSha256": "652cdfdcf1b185692fa15cf37d5bc0e83d8439e7a2981cf44cc81ce4f49c1c29",
+          "warmup": 180,
+          "ticks": 600,
+          "updatesHz": 60,
+          "presentationHz": 120,
+          "scene": "frozen",
+          "view": {
+            "width": 960,
+            "height": 640,
+            "camera": {
+              "wx": 640,
+              "wy": 690
+            },
+            "zoom": 0.2
+          },
+          "meshes": [
+            {
+              "assetId": "compact-1-authored-v7",
+              "sha256": "b568aa8d826c8ba78a3ed63b4198ba5c02f22fd74496d3a8dd6a6e537f5df1fd",
+              "triangles": 842
+            },
+            {
+              "assetId": "beetle-authored-v1",
+              "sha256": "4e5094968f9eb2e734dd3aea694d302f9cef519f5501a2a61961973f0c368de1",
+              "triangles": 2554
+            },
+            {
+              "assetId": "police-car-authored-v2",
+              "sha256": "6a46dd5867f8fd17bc9ec20af7c059c59153973774d6d7ea775905b32ccad892",
+              "triangles": 1300
+            },
+            {
+              "assetId": "rosso-coupe-authored-v3",
+              "sha256": "05de49fc16a281db97fb6854d94252e44bb8f1502a5749e8580d95cba908df64",
+              "triangles": 2299
+            },
+            {
+              "assetId": "rally-hatchback-authored-v1",
+              "sha256": "e91485e56a610b4db8e01bbdd5c5047cf6fdd0807d828ab8e79a0a23dc77d5b7",
+              "triangles": 2900
+            },
+            {
+              "assetId": "tow-truck-authored-v2",
+              "sha256": "cf77b72b33eb76c7303f88641d5682e379485359dcaac0f113672069a32ae180",
+              "triangles": 3466
+            },
+            {
+              "assetId": "dump-truck-authored-v2",
+              "sha256": "237be10a2c5e63b9e7b226d4d6e4acd84f623e703386a2b43b43f3e0baecc719",
+              "triangles": 3720
+            },
+            {
+              "assetId": "garbage-truck-orange-authored-v1",
+              "sha256": "e6f93e2c8322e1c7ea8f8fa54967da98a3becc1b89eb2de9edca0ed6068ca8de",
+              "triangles": 1488
+            }
+          ]
+        },
+        "instrumentation": {
+          "profile": false,
+          "stageTimings": false,
+          "verify": false,
+          "fineGrainedTimers": false
+        },
+        "work": {
+          "updates": 0,
+          "presentations": 1200,
+          "collectedFrames": 1200,
+          "meanSceneItems": 2701,
+          "meanDrawOrderEntries": 2701,
+          "finalEntities": 1051,
+          "finalServerTick": 180,
+          "finalReceivers": {
+            "sources": 1051,
+            "meshTriangles": 1812,
+            "queries": 2083,
+            "fragments": 4959
+          },
+          "promptKey": ""
+        },
+        "outcome": {
+          "finalStateSha256": "3357fc91739f632b7bb085bba796f5ce414c3e252d86aee76f870e29c1df669b",
+          "finalSceneSha256": "baadbd47c245939f366cfd9acec3c40c5d0cf90582e0059006e54d6798a8e9d4"
+        },
+        "trials": [
+          {
+            "date": "2026-11-10T07:04:49.436Z",
+            "stages": {
+              "render.prepare": {
+                "count": 1200,
+                "totalMs": 10644.538,
+                "mean": 8.87,
+                "p50": 8.886,
+                "p95": 9.513,
+                "p99": 13.385,
+                "max": 15.547
+              }
+            },
+            "outcomeMatches": null,
+            "loadBefore": [
+              3.79736328125,
+              5.22705078125,
+              4.5556640625
+            ]
+          },
+          {
+            "date": "2026-11-10T07:05:06.798Z",
+            "stages": {
+              "render.prepare": {
+                "count": 1200,
+                "totalMs": 10478.794,
+                "mean": 8.732,
+                "p50": 8.765,
+                "p95": 9.251,
+                "p99": 13.602,
+                "max": 14.916
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              3.5263671875,
+              5.06689453125,
+              4.5126953125
+            ]
+          },
+          {
+            "date": "2026-11-10T07:06:18.921Z",
+            "stages": {
+              "render.prepare": {
+                "count": 1200,
+                "totalMs": 10635.623,
+                "mean": 8.863,
+                "p50": 8.89,
+                "p95": 9.548,
+                "p99": 14.068,
+                "max": 15.078
+              }
+            },
+            "outcomeMatches": true,
+            "loadBefore": [
+              2.802734375,
+              4.51513671875,
+              4.34521484375
+            ]
+          }
+        ]
+      }
+    ],
+    "verification": [
+      {
+        "lane": "client",
+        "repetitions": 2,
+        "work": {
+          "updates": 600,
+          "presentations": 1200,
+          "collectedFrames": 0,
+          "meanSceneItems": 0,
+          "meanDrawOrderEntries": 0,
+          "finalEntities": 1051,
+          "finalServerTick": 780,
+          "finalReceivers": {
+            "sources": 0,
+            "meshTriangles": 0,
+            "queries": 0,
+            "fragments": 0
+          },
+          "promptKey": ""
+        },
+        "outcome": {
+          "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+          "finalSceneSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "allStatesSha256": "3cdb900efc2cd65c734aacb02696543f28c57d79d68e9bcf4918728bfe235949",
+          "allScenesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      {
+        "lane": "render",
+        "repetitions": 2,
+        "work": {
+          "updates": 600,
+          "presentations": 1200,
+          "collectedFrames": 1200,
+          "meanSceneItems": 2704.608,
+          "meanDrawOrderEntries": 2704.608,
+          "finalEntities": 1051,
+          "finalServerTick": 780,
+          "finalReceivers": {
+            "sources": 1051,
+            "meshTriangles": 1812,
+            "queries": 2083,
+            "fragments": 5071
+          },
+          "promptKey": ""
+        },
+        "outcome": {
+          "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+          "finalSceneSha256": "c4071745d5f916a05185911de3363811e39b2a37f4760fd9a5fa4b8bda0ba82f",
+          "allStatesSha256": "3cdb900efc2cd65c734aacb02696543f28c57d79d68e9bcf4918728bfe235949",
+          "allScenesSha256": "49791e0b8a3a7f5265ee48479af126e5eccab1c9391d1dcaa9d53f0f9083c4db"
+        }
+      }
+    ]
+  },
+  "browser": {
+    "headed": {
+      "browser": "156.0.8078.4",
+      "machine": {
+        "cpu": "Apple M4 Pro",
+        "platform": "darwin",
+        "arch": "arm64",
+        "release": "25.6.0"
+      },
+      "headless": false,
+      "seconds": 6,
+      "warmup": 4,
+      "device": {
+        "renderer": "gpu",
+        "cars": 50,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+        "cores": 14,
+        "memoryGiB": 32,
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "pixelRatio": 1,
+        "gpu": {
+          "vendor": "Google Inc. (Apple)",
+          "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        },
+        "canvas": {
+          "width": 960,
+          "height": 640,
+          "css": {
+            "width": 960,
+            "height": 640
+          }
+        }
+      },
+      "executableResources": [
+        {
+          "path": "/tilefun/assets/ApartmentFloorPlan-DRRRyrkg.js",
+          "sha256": "b33c9d4334cad52e6f755baf2edb726aa93d491d91cdcecb38db82395d639631"
+        },
+        {
+          "path": "/tilefun/assets/ArtSource-CK9-Bt1i.js",
+          "sha256": "610b5f01d657027c2e9b3aa81036bf29684ce14751fda17ca0a0bb576737df42"
+        },
+        {
+          "path": "/tilefun/assets/AuthClient-VBaAvclb.js",
+          "sha256": "636caabfc27ef43923c0a4a0338862ad8f8713c11a76fb8b2c8f177bbfc983ec"
+        },
+        {
+          "path": "/tilefun/assets/Autotiler-Cy8-M0sn.js",
+          "sha256": "4a5ee425ee9571aac4d6ca043b8c8f0c056f406b4657e63361482592f264ab17"
+        },
+        {
+          "path": "/tilefun/assets/Canvas2DRenderer-Bf49wvvn.js",
+          "sha256": "8f482c52a1f4eee7f44d23f307a7a9e4add76c668abca94119c7c40504e5c816"
+        },
+        {
+          "path": "/tilefun/assets/CanvasInteriorMap-BK4IYu0R.js",
+          "sha256": "f0f05b7b2e747ac777bfd027d837ba145320d73c51a632c4347d65280c3e2936"
+        },
+        {
+          "path": "/tilefun/assets/CanvasInteriorResources-CstB1m5K.js",
+          "sha256": "686e25b020074f9436e79357754d3e978abe1551274616c6f077e2213330a2b6"
+        },
+        {
+          "path": "/tilefun/assets/CanvasOverlayRenderer-Cftui_OJ.js",
+          "sha256": "f5814a970ffc0599b364b85a690bd5b64becb6bf34ee82fb16fb7c413aed4bf4"
+        },
+        {
+          "path": "/tilefun/assets/CarMeshAsset-BSWeave9.js",
+          "sha256": "ad53193cf42448329bdfaffdc9f1408f1abcbbb7372b4888b6b604959685e1e8"
+        },
+        {
+          "path": "/tilefun/assets/CarProxy-CuKy2AEP.js",
+          "sha256": "1f56a48864a2af9ef67e3cd5502cc1ec47e490fa80ebe2b462f19d1f78d2cfc1"
+        },
+        {
+          "path": "/tilefun/assets/CharacterCatalog-BN8L2HYS.js",
+          "sha256": "09dd878db90eaeb9964b06291bec1592b3d6ccb8b132cce7a4d9addde55f6b33"
+        },
+        {
+          "path": "/tilefun/assets/CityReviewRuns-B2kLNFgN.js",
+          "sha256": "063dac044ebcc8772bdd86c8af2c75b89571a296ad070bf344d24b6a64631ed3"
+        },
+        {
+          "path": "/tilefun/assets/CitySurfaceRenderer-DQaiHj0k.js",
+          "sha256": "d3fd4d8459587abd5ec6fc374b38e6b5ea73e3dcd7115041a439b06103b84b25"
+        },
+        {
+          "path": "/tilefun/assets/ClientStateView-Bucg-4Sn.js",
+          "sha256": "9d38c9d313e90982773bfac2f03557538f90e9581edef139c20b4106943f0202"
+        },
+        {
+          "path": "/tilefun/assets/DeferredVehiclePage-CQkVLSQO.js",
+          "sha256": "efced24222e235dedbd13fb714cef7e2ba6e19ffb82f9a051aa059267d84b6ff"
+        },
+        {
+          "path": "/tilefun/assets/Entity-CVRLOj8L.js",
+          "sha256": "619dd194e22ad2b7692f81094f766d23973b38bcc11712ec67b146fe07f8d3c5"
+        },
+        {
+          "path": "/tilefun/assets/EntityFactories-BQ3bapY1.js",
+          "sha256": "35c4db5e1f9569c995801ffc58ba1dc54124b70e82ba7240d4ee9919f2586a60"
+        },
+        {
+          "path": "/tilefun/assets/FencedTrees-DUmhurLo.js",
+          "sha256": "6a3a210a3496e94ab0e853263b6b806296ea74c35c341bfb7a3a6c0f9aff7ece"
+        },
+        {
+          "path": "/tilefun/assets/FierceDens-BlBhCdzi.js",
+          "sha256": "baa85b40de79d266f9a2b4cc5fbfdc8bc8a9820d3a62f6d079777dc905edf669"
+        },
+        {
+          "path": "/tilefun/assets/FootstepSystem-DEv8sBax.js",
+          "sha256": "bdb20c0f81ec0d26f43f9024aa10e93dff79bf86c2989325e6caef4a3eebd9a0"
+        },
+        {
+          "path": "/tilefun/assets/GameAssets-C2ZW4edQ.js",
+          "sha256": "ff4419a4c02420c5cae05ca5b98760e05d8f91b02553c4658a29ad2abc641a50"
+        },
+        {
+          "path": "/tilefun/assets/GenerationDescriptor-Dp2rE_Te.js",
+          "sha256": "d911c529c0030b1edde6f71561ad959c5cfa3d9038ffd5ee4be5dd6eda9b8d7d"
+        },
+        {
+          "path": "/tilefun/assets/GpuRenderBackend-Bdd7enkJ.js",
+          "sha256": "3118faa04fa263666431c9e9da317ec3e2323cd321795c123f844b81b54d7a7a"
+        },
+        {
+          "path": "/tilefun/assets/GpuRenderHost-CXjc30M4.js",
+          "sha256": "28d71b32650bb5f3808ae474f69c605be08dcb8d1b2488607c9e9076f93f748b"
+        },
+        {
+          "path": "/tilefun/assets/GpuRenderHost-DsvmDmih.js",
+          "sha256": "1b2889fc689becfa6d8c967d5868802a2df71dbf6ca6dd5a7c3fe82dc90d0e36"
+        },
+        {
+          "path": "/tilefun/assets/LabInput-BY1tdjT3.js",
+          "sha256": "4ac4f97a696c51d69723bb9b255f1b1ec0a654adfc2207f4ecd558a27494d859"
+        },
+        {
+          "path": "/tilefun/assets/LabView-D1evyX9t.js",
+          "sha256": "60a6b0cf90ff227a7fd9aabc1984ef19e27c9b62f29775ecb0c1fd01be70614b"
+        },
+        {
+          "path": "/tilefun/assets/ModernInteriorsAtlasIndex-S5YrrbnU.js",
+          "sha256": "a25159e8e8ec8179358b78cced17c92ca4310ff77e60b3ccb700b2bb49dc0da9"
+        },
+        {
+          "path": "/tilefun/assets/OutdoorRuntime-4FCUaz77.js",
+          "sha256": "fc10ec56c9d57e6ad2a4dc14f2c9eca3f2cd2f0ea3a3709dec9111a54d9a49ee"
+        },
+        {
+          "path": "/tilefun/assets/ParkingLayout-CHFFgydN.js",
+          "sha256": "6a940d019d7ac69163baea8f622abd4f2b1559b906e3cbf8a48db773a300379f"
+        },
+        {
+          "path": "/tilefun/assets/ParkingSurface-BeUyJiPm.js",
+          "sha256": "c8e9681f19d87bc553b4b533623d631d168e1c5bb249e5e2289cab4ddeaeb1f9"
+        },
+        {
+          "path": "/tilefun/assets/Player-BnqWRPro.js",
+          "sha256": "5d436a5589787eaf805814a7536daeec2615a9702f87f9a518d792d99558922d"
+        },
+        {
+          "path": "/tilefun/assets/Predator-BkwYTST6.js",
+          "sha256": "951985147cec25fae9e267fb4ea8a46a8c728d3dcf08bdc4444e86d1070aa82d"
+        },
+        {
+          "path": "/tilefun/assets/PropFactories-B0wAlij-.js",
+          "sha256": "50cf1fd5475004a1c3d93e31e46197db35ad05cec3c4fe2732fc3a65f8a100a1"
+        },
+        {
+          "path": "/tilefun/assets/RailwayPlanner--QrCzA6O.js",
+          "sha256": "c5ccdc80d1c71433bbbdb6ad02ad05fa74f3fba82fbd3703bace5f9c4ae82d70"
+        },
+        {
+          "path": "/tilefun/assets/RailwayStrategy-DEzhwWds.js",
+          "sha256": "b3acacae0d32367f2dbe0fee50aa26a08da548a1bf9f8ef4986da689d5aca1c0"
+        },
+        {
+          "path": "/tilefun/assets/RasterRenderBackend-B0TQWF-L.js",
+          "sha256": "300b9f0c64a0b33e9edf3a9dcd248194f8fa57b05acfecb1f5a2b687d8de183f"
+        },
+        {
+          "path": "/tilefun/assets/RenderFrame-CuKJI0FI.js",
+          "sha256": "080e28d7de37548cbef7bf39f3c130556428c518f1a448e8c75ee6b47498bfb5"
+        },
+        {
+          "path": "/tilefun/assets/RoadGenerator-D_4_dnLY.js",
+          "sha256": "b24a8f1feef07369253d2254e1b8a22dc72cda0be81e74bd6e721e6f3577b7e3"
+        },
+        {
+          "path": "/tilefun/assets/RoadRailBridge-B7cTO3sB.js",
+          "sha256": "8fa9d25fdaaa1d6a18715535a856cb56538c5260f9a6e245cc6b885d67015bef"
+        },
+        {
+          "path": "/tilefun/assets/RoadType-caqnQaj0.js",
+          "sha256": "cc04d54cbc347371d80a28171a76cdc0b7f910db8651017e179a7b4e32874d5d"
+        },
+        {
+          "path": "/tilefun/assets/ScenarioRecipe-a5tXXWeB.js",
+          "sha256": "ba61664ccb87b65e2c1d97c3c4a9e4aa3c0c25ddcb2829b17d92d91cf7cb4d31"
+        },
+        {
+          "path": "/tilefun/assets/SpriteCatalog-BblZfuNz.js",
+          "sha256": "30163ddb499eda22ef6fa6a32447ed07357c571f1ff8c9777283f7e70c28b50f"
+        },
+        {
+          "path": "/tilefun/assets/Spritesheet-wcwe7Yzp.js",
+          "sha256": "11eb347d2e8e410a622015b06eacd1f514ee3973f1db9e8c94fa6e1ce432baa9"
+        },
+        {
+          "path": "/tilefun/assets/TileRegistry-D_8IWbOM.js",
+          "sha256": "2c4c2e81fc481b9f38566ee080dfe93f27d7ccaf24ce41d7801c1ea5038cffc1"
+        },
+        {
+          "path": "/tilefun/assets/TileRenderer-pHePiPbm.js",
+          "sha256": "ec3beeb47911ba8b221098d79ea91bc812dbb41a270a81929af855b599c652e4"
+        },
+        {
+          "path": "/tilefun/assets/ToolRegistry--t68JUKm.js",
+          "sha256": "a98ee7d9dceaf6c7938187fd0bbe91e33048c13d7c4b6733fbacebcfe4ce960b"
+        },
+        {
+          "path": "/tilefun/assets/VehiclePaint-CtZqRi0D.js",
+          "sha256": "66eff365c47d531eaecf8bf3dcb288e1c461218fd657f2063ea0f83e43531a38"
+        },
+        {
+          "path": "/tilefun/assets/VehiclePaintResources-DcWRE4yI.js",
+          "sha256": "02d449cb8344c8e0dfea0f1e49104fff00f42b37ffce0ca6b9321cd294bec052"
+        },
+        {
+          "path": "/tilefun/assets/ViewLayout-fh6YKiPl.js",
+          "sha256": "cff362a4a53c5b20bfb0f7d81d3d0ffee488ff83c8de19aadf559fab6f3f8c3d"
+        },
+        {
+          "path": "/tilefun/assets/WebGl2Support-BGZ-y-6B.js",
+          "sha256": "84d0d25d112be51e902989b71ad9c72c9f89629f22f9c22ed069ebc09ec4e25f"
+        },
+        {
+          "path": "/tilefun/assets/WorkerClientTransport--3TMVTMs.js",
+          "sha256": "9d182e262e7aa55ca8e927449419a6c8186499fa7e472ae0c32546a9210547c4"
+        },
+        {
+          "path": "/tilefun/assets/WorkshopCommon-BHq_zxsR.js",
+          "sha256": "912eaf9dd881eead14a83882e02d3fa662f45197c61a669a83a8c4bdf1253fe9"
+        },
+        {
+          "path": "/tilefun/assets/WorkshopQueries-zXlT66kd.js",
+          "sha256": "f399a0b1d9ac9cdae7c71d798c1e1f98c951b38dbcad23f7f2dde0b97a9603c3"
+        },
+        {
+          "path": "/tilefun/assets/WorkspaceStore-BL5300AK.js",
+          "sha256": "8bb63ec310bffa4f638cb191401e3a88b20a10a199af9b2f3e8267a0a81956a2"
+        },
+        {
+          "path": "/tilefun/assets/World-BJ9UrRSZ.js",
+          "sha256": "f9b30a6a4a7237463aa621a0dc890e9d5fecc7f165be739c66d9fa398c184537"
+        },
+        {
+          "path": "/tilefun/assets/WorldGeometryPage-Bn-OcWMF.js",
+          "sha256": "6b738fbb7a6e40549d7594aca634098f1c20fa84b4280d983a17a1b630f91144"
+        },
+        {
+          "path": "/tilefun/assets/WorldGeometryRecipe-DkJT7ybh.js",
+          "sha256": "5f8add52d70086b891e0a5702f2f028358543ceee53d2fd0477429750f70ac8b"
+        },
+        {
+          "path": "/tilefun/assets/WorldRasterFrame-CvLS7skx.js",
+          "sha256": "6e3c520d1c77bf2672b4b2ee794df221c968f75e2b8d41ee1bdaf40e247384d1"
+        },
+        {
+          "path": "/tilefun/assets/collectScene-CrsXG-fR.js",
+          "sha256": "e70e9cba6143b7b4b08e2487306321669b5d7ee1bf5a9855c794e75e4d67c4e6"
+        },
+        {
+          "path": "/tilefun/assets/constants-DoNpYYhx.js",
+          "sha256": "43d703cd9b738534d76c0b8562942d4352970e3f9a3d7c57ffac80265bff662f"
+        },
+        {
+          "path": "/tilefun/assets/gmBlobLayout-WrT971-c.js",
+          "sha256": "401195dabfcc73e01a450b1cfa2bfad2bedcac9f4600f552e1c3c9f1a990d9fb"
+        },
+        {
+          "path": "/tilefun/assets/jsx-runtime-C3cWAN_r.js",
+          "sha256": "036e646de62e26433472179f17fa666f8dc6728243a5551af4c11c86b53b2774"
+        },
+        {
+          "path": "/tilefun/assets/modulepreload-polyfill-P2Xu9kJm.js",
+          "sha256": "418c206484b89b68ef5f067277831e583fc9193a62aadf4de269acaaeb12a85f"
+        },
+        {
+          "path": "/tilefun/assets/preload-helper-BVkRQG0z.js",
+          "sha256": "8e8a7fc72dae57e1fcff22b7af5a773c6a76fd02f5aa8775a52a9c88609ac70c"
+        },
+        {
+          "path": "/tilefun/assets/presentSurfaceScene-BKFo2nCE.js",
+          "sha256": "cc24a42bf43c60a209099fa8bc915f96ade75cf28afcbf7de0fd99a138130209"
+        },
+        {
+          "path": "/tilefun/assets/propDepth-utGDnS4O.js",
+          "sha256": "29d69143bca143dadd28e632b921979939efa728832404c63ad1e9733a64199c"
+        },
+        {
+          "path": "/tilefun/assets/recipe-world.worker-C-ymiSGs.js",
+          "sha256": "bd1ca9a303b00d8b581b596c0fb2408be59b3bf5fef8c14ffa0d36a06ffb1f2b"
+        },
+        {
+          "path": "/tilefun/assets/required-mSLZPpYK.js",
+          "sha256": "87933cd622f5b1c68a4705c403c672c6b1c86d944f64254d273fce2be7735af1"
+        },
+        {
+          "path": "/tilefun/assets/reviewCanvas-ByZVTrHd.js",
+          "sha256": "1605115cd5d6f3c4753c956aa483eacbb085f7b5f215fd9589e5719bb52e0729"
+        },
+        {
+          "path": "/tilefun/assets/rolldown-runtime-XKyaHtl9.js",
+          "sha256": "548d1dbf321e7d2ae804fcc158b588706a7c52f8ca175de1490c6ccb4dbe55b7"
+        },
+        {
+          "path": "/tilefun/assets/three.core-CYA7kxmg.js",
+          "sha256": "2a028f3b845003d234c7f8ec1a070880fe01f430cd8ad0fdc9440bfaddda2695"
+        },
+        {
+          "path": "/tilefun/assets/three.module-CSIE96N8.js",
+          "sha256": "b2d59262083e2f3185b86929e99650aa700586a903eb04187abc7314644d8de4"
+        },
+        {
+          "path": "/tilefun/assets/useQuery-BMrTMUPW.js",
+          "sha256": "6ce66ebccda7a8f16388860ed7e3c75838c85ff7e4e018640590ef5bf25fad22"
+        },
+        {
+          "path": "/tilefun/assets/uuid-BXdVC_j_.js",
+          "sha256": "4d0dc9fdce128a6a8c1a144605ccc92ea9fd87deb82baee4477fe956acc98e5f"
+        },
+        {
+          "path": "/tilefun/assets/vehicles-v1-Zssjeqgv.js",
+          "sha256": "98bfd0b132d01c0c70849f35efa499634474dfee465dcfea0a58d4fee68e24dc"
+        },
+        {
+          "path": "/tilefun/assets/workshop-BnsA41KC.js",
+          "sha256": "41b68c73b8b55809554789079026b80a77d8731106f61de679057c2e49793fb4"
+        }
+      ],
+      "trials": [
+        {
+          "trial": 0,
+          "elapsedMs": 6012.6,
+          "idleFrames": {
+            "count": 120,
+            "p50": 8.3,
+            "p95": 10.2,
+            "p99": 10.3,
+            "max": 10.3,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "frames": {
+            "count": 338,
+            "p50": 16.7,
+            "p95": 25.1,
+            "p99": 26.5,
+            "max": 31.6,
+            "over25ms": 19,
+            "over50ms": 0
+          },
+          "framesOverIdleCadence": 338,
+          "mainThread": {
+            "lab.update": {
+              "count": 361,
+              "totalMs": 1975.3,
+              "maxMs": 10.8,
+              "retained": 361,
+              "p50Ms": 5.6,
+              "p95Ms": 6.5,
+              "p99Ms": 9.5
+            },
+            "lab.render": {
+              "count": 339,
+              "totalMs": 3870.0,
+              "maxMs": 22.3,
+              "retained": 339,
+              "p50Ms": 11.3,
+              "p95Ms": 12.3,
+              "p99Ms": 13.8
+            }
+          },
+          "workerTimings": {
+            "server.encode": {
+              "count": 366,
+              "totalMs": 21.5,
+              "maxMs": 0.5,
+              "retained": 366,
+              "p50Ms": 0.1,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "server.autotile": {
+              "count": 364,
+              "totalMs": 0.4,
+              "maxMs": 0.1,
+              "retained": 364,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 364,
+              "totalMs": 393.1,
+              "maxMs": 2.2,
+              "retained": 364,
+              "p50Ms": 1,
+              "p95Ms": 1.7,
+              "p99Ms": 1.8
+            },
+            "realm.entityPhysics": {
+              "count": 364,
+              "totalMs": 1118.8,
+              "maxMs": 5.4,
+              "retained": 364,
+              "p50Ms": 3.1,
+              "p95Ms": 3.4,
+              "p99Ms": 3.6
+            },
+            "realm.saveSweep": {
+              "count": 364,
+              "totalMs": 18.2,
+              "maxMs": 0.2,
+              "retained": 364,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "server.replication": {
+              "count": 364,
+              "totalMs": 469.7,
+              "maxMs": 2,
+              "retained": 364,
+              "p50Ms": 1.3,
+              "p95Ms": 1.5,
+              "p99Ms": 1.6
+            },
+            "realm.tick": {
+              "count": 364,
+              "totalMs": 2508.7,
+              "maxMs": 9.2,
+              "retained": 364,
+              "p50Ms": 6.9,
+              "p95Ms": 7.8,
+              "p99Ms": 8.3
+            },
+            "server.decode": {
+              "count": 364,
+              "totalMs": 1.3,
+              "maxMs": 0.1,
+              "retained": 364,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            }
+          },
+          "startPendingTerrain": 0,
+          "endPendingTerrain": 0,
+          "endPreparedRows": 0,
+          "requestedVehicleAssets": {
+            "compact-1-authored-v7": {
+              "state": "ready",
+              "meshes": 55,
+              "drawMeshes": 8,
+              "error": null
+            },
+            "ambulance-authored-v3": {
+              "state": "ready",
+              "meshes": 56,
+              "drawMeshes": 15,
+              "error": null
+            },
+            "fire-truck-ladder-1-authored-v2": {
+              "state": "ready",
+              "meshes": 49,
+              "drawMeshes": 10,
+              "error": null
+            },
+            "beetle-authored-v1": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "police-car-authored-v2": {
+              "state": "ready",
+              "meshes": 37,
+              "drawMeshes": 9,
+              "error": null
+            },
+            "rosso-coupe-authored-v3": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "rally-hatchback-authored-v1": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "tow-truck-authored-v2": {
+              "state": "ready",
+              "meshes": 7,
+              "drawMeshes": 7,
+              "error": null
+            },
+            "dump-truck-authored-v2": {
+              "state": "ready",
+              "meshes": 11,
+              "drawMeshes": 11,
+              "error": null
+            },
+            "garbage-truck-orange-authored-v1": {
+              "state": "ready",
+              "meshes": 53,
+              "drawMeshes": 20,
+              "error": null
+            }
+          },
+          "errors": []
+        },
+        {
+          "trial": 1,
+          "elapsedMs": 6020.5,
+          "idleFrames": {
+            "count": 120,
+            "p50": 8.3,
+            "p95": 9.7,
+            "p99": 10,
+            "max": 10.1,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "frames": {
+            "count": 347,
+            "p50": 16.7,
+            "p95": 25,
+            "p99": 27,
+            "max": 34,
+            "over25ms": 11,
+            "over50ms": 0
+          },
+          "framesOverIdleCadence": 331,
+          "mainThread": {
+            "lab.update": {
+              "count": 361,
+              "totalMs": 1934.0,
+              "maxMs": 10,
+              "retained": 361,
+              "p50Ms": 5.6,
+              "p95Ms": 6.6,
+              "p99Ms": 8.4
+            },
+            "lab.render": {
+              "count": 348,
+              "totalMs": 3910.7,
+              "maxMs": 21.4,
+              "retained": 348,
+              "p50Ms": 11.1,
+              "p95Ms": 12,
+              "p99Ms": 17.3
+            }
+          },
+          "workerTimings": {
+            "server.encode": {
+              "count": 367,
+              "totalMs": 22.3,
+              "maxMs": 0.2,
+              "retained": 367,
+              "p50Ms": 0.1,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "server.autotile": {
+              "count": 365,
+              "totalMs": 0.5,
+              "maxMs": 0.1,
+              "retained": 365,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 365,
+              "totalMs": 389.6,
+              "maxMs": 1.9,
+              "retained": 365,
+              "p50Ms": 1,
+              "p95Ms": 1.6,
+              "p99Ms": 1.7
+            },
+            "realm.entityPhysics": {
+              "count": 365,
+              "totalMs": 1108.6,
+              "maxMs": 3.7,
+              "retained": 365,
+              "p50Ms": 3,
+              "p95Ms": 3.4,
+              "p99Ms": 3.5
+            },
+            "realm.saveSweep": {
+              "count": 365,
+              "totalMs": 19.4,
+              "maxMs": 0.2,
+              "retained": 365,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "server.replication": {
+              "count": 365,
+              "totalMs": 468.5,
+              "maxMs": 1.8,
+              "retained": 365,
+              "p50Ms": 1.3,
+              "p95Ms": 1.4,
+              "p99Ms": 1.6
+            },
+            "realm.tick": {
+              "count": 365,
+              "totalMs": 2494.2,
+              "maxMs": 8.4,
+              "retained": 365,
+              "p50Ms": 6.8,
+              "p95Ms": 7.7,
+              "p99Ms": 8
+            },
+            "server.decode": {
+              "count": 364,
+              "totalMs": 1,
+              "maxMs": 0.1,
+              "retained": 364,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            }
+          },
+          "startPendingTerrain": 0,
+          "endPendingTerrain": 0,
+          "endPreparedRows": 0,
+          "requestedVehicleAssets": {
+            "compact-1-authored-v7": {
+              "state": "ready",
+              "meshes": 55,
+              "drawMeshes": 8,
+              "error": null
+            },
+            "ambulance-authored-v3": {
+              "state": "ready",
+              "meshes": 56,
+              "drawMeshes": 15,
+              "error": null
+            },
+            "fire-truck-ladder-1-authored-v2": {
+              "state": "ready",
+              "meshes": 49,
+              "drawMeshes": 10,
+              "error": null
+            },
+            "beetle-authored-v1": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "police-car-authored-v2": {
+              "state": "ready",
+              "meshes": 37,
+              "drawMeshes": 9,
+              "error": null
+            },
+            "rosso-coupe-authored-v3": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "rally-hatchback-authored-v1": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "tow-truck-authored-v2": {
+              "state": "ready",
+              "meshes": 7,
+              "drawMeshes": 7,
+              "error": null
+            },
+            "dump-truck-authored-v2": {
+              "state": "ready",
+              "meshes": 11,
+              "drawMeshes": 11,
+              "error": null
+            },
+            "garbage-truck-orange-authored-v1": {
+              "state": "ready",
+              "meshes": 53,
+              "drawMeshes": 20,
+              "error": null
+            }
+          },
+          "errors": []
+        },
+        {
+          "trial": 2,
+          "elapsedMs": 6008.3,
+          "idleFrames": {
+            "count": 120,
+            "p50": 8.3,
+            "p95": 9.5,
+            "p99": 10.1,
+            "max": 10.1,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "frames": {
+            "count": 344,
+            "p50": 16.7,
+            "p95": 25,
+            "p99": 25.6,
+            "max": 26.1,
+            "over25ms": 12,
+            "over50ms": 0
+          },
+          "framesOverIdleCadence": 334,
+          "mainThread": {
+            "lab.update": {
+              "count": 361,
+              "totalMs": 2011.7,
+              "maxMs": 10.2,
+              "retained": 361,
+              "p50Ms": 5.7,
+              "p95Ms": 6.8,
+              "p99Ms": 9.3
+            },
+            "lab.render": {
+              "count": 345,
+              "totalMs": 3827.9,
+              "maxMs": 21,
+              "retained": 345,
+              "p50Ms": 10.9,
+              "p95Ms": 11.8,
+              "p99Ms": 16.9
+            }
+          },
+          "workerTimings": {
+            "server.encode": {
+              "count": 365,
+              "totalMs": 21.6,
+              "maxMs": 0.2,
+              "retained": 365,
+              "p50Ms": 0.1,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "server.autotile": {
+              "count": 363,
+              "totalMs": 0.6,
+              "maxMs": 0.1,
+              "retained": 363,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 363,
+              "totalMs": 383.4,
+              "maxMs": 1.8,
+              "retained": 363,
+              "p50Ms": 1,
+              "p95Ms": 1.6,
+              "p99Ms": 1.8
+            },
+            "realm.entityPhysics": {
+              "count": 363,
+              "totalMs": 1097.3,
+              "maxMs": 3.7,
+              "retained": 363,
+              "p50Ms": 3,
+              "p95Ms": 3.4,
+              "p99Ms": 3.5
+            },
+            "realm.saveSweep": {
+              "count": 363,
+              "totalMs": 19.0,
+              "maxMs": 0.2,
+              "retained": 363,
+              "p50Ms": 0.1,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "server.replication": {
+              "count": 363,
+              "totalMs": 464.4,
+              "maxMs": 1.8,
+              "retained": 363,
+              "p50Ms": 1.3,
+              "p95Ms": 1.5,
+              "p99Ms": 1.6
+            },
+            "realm.tick": {
+              "count": 363,
+              "totalMs": 2459.8,
+              "maxMs": 8.3,
+              "retained": 363,
+              "p50Ms": 6.8,
+              "p95Ms": 7.6,
+              "p99Ms": 8
+            },
+            "server.decode": {
+              "count": 364,
+              "totalMs": 0.8,
+              "maxMs": 0.1,
+              "retained": 364,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            }
+          },
+          "startPendingTerrain": 0,
+          "endPendingTerrain": 0,
+          "endPreparedRows": 0,
+          "requestedVehicleAssets": {
+            "compact-1-authored-v7": {
+              "state": "ready",
+              "meshes": 55,
+              "drawMeshes": 8,
+              "error": null
+            },
+            "ambulance-authored-v3": {
+              "state": "ready",
+              "meshes": 56,
+              "drawMeshes": 15,
+              "error": null
+            },
+            "fire-truck-ladder-1-authored-v2": {
+              "state": "ready",
+              "meshes": 49,
+              "drawMeshes": 10,
+              "error": null
+            },
+            "beetle-authored-v1": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "police-car-authored-v2": {
+              "state": "ready",
+              "meshes": 37,
+              "drawMeshes": 9,
+              "error": null
+            },
+            "rosso-coupe-authored-v3": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "rally-hatchback-authored-v1": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "tow-truck-authored-v2": {
+              "state": "ready",
+              "meshes": 7,
+              "drawMeshes": 7,
+              "error": null
+            },
+            "dump-truck-authored-v2": {
+              "state": "ready",
+              "meshes": 11,
+              "drawMeshes": 11,
+              "error": null
+            },
+            "garbage-truck-orange-authored-v1": {
+              "state": "ready",
+              "meshes": 53,
+              "drawMeshes": 20,
+              "error": null
+            }
+          },
+          "errors": []
+        }
+      ]
+    },
+    "headless": {
+      "browser": "156.0.8078.4",
+      "machine": {
+        "cpu": "Apple M4 Pro",
+        "platform": "darwin",
+        "arch": "arm64",
+        "release": "25.6.0"
+      },
+      "headless": true,
+      "seconds": 6,
+      "warmup": 4,
+      "device": {
+        "renderer": "gpu",
+        "cars": 50,
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36",
+        "cores": 14,
+        "memoryGiB": 32,
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "pixelRatio": 1,
+        "gpu": {
+          "vendor": "Google Inc. (Apple)",
+          "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+          "version": "WebGL 2.0 (OpenGL ES 3.0 Chromium)"
+        },
+        "canvas": {
+          "width": 960,
+          "height": 640,
+          "css": {
+            "width": 960,
+            "height": 640
+          }
+        }
+      },
+      "executableResources": [
+        {
+          "path": "/tilefun/assets/ApartmentFloorPlan-DRRRyrkg.js",
+          "sha256": "b33c9d4334cad52e6f755baf2edb726aa93d491d91cdcecb38db82395d639631"
+        },
+        {
+          "path": "/tilefun/assets/ArtSource-CK9-Bt1i.js",
+          "sha256": "610b5f01d657027c2e9b3aa81036bf29684ce14751fda17ca0a0bb576737df42"
+        },
+        {
+          "path": "/tilefun/assets/AuthClient-VBaAvclb.js",
+          "sha256": "636caabfc27ef43923c0a4a0338862ad8f8713c11a76fb8b2c8f177bbfc983ec"
+        },
+        {
+          "path": "/tilefun/assets/Autotiler-Cy8-M0sn.js",
+          "sha256": "4a5ee425ee9571aac4d6ca043b8c8f0c056f406b4657e63361482592f264ab17"
+        },
+        {
+          "path": "/tilefun/assets/Canvas2DRenderer-Bf49wvvn.js",
+          "sha256": "8f482c52a1f4eee7f44d23f307a7a9e4add76c668abca94119c7c40504e5c816"
+        },
+        {
+          "path": "/tilefun/assets/CanvasInteriorMap-BK4IYu0R.js",
+          "sha256": "f0f05b7b2e747ac777bfd027d837ba145320d73c51a632c4347d65280c3e2936"
+        },
+        {
+          "path": "/tilefun/assets/CanvasInteriorResources-CstB1m5K.js",
+          "sha256": "686e25b020074f9436e79357754d3e978abe1551274616c6f077e2213330a2b6"
+        },
+        {
+          "path": "/tilefun/assets/CanvasOverlayRenderer-Cftui_OJ.js",
+          "sha256": "f5814a970ffc0599b364b85a690bd5b64becb6bf34ee82fb16fb7c413aed4bf4"
+        },
+        {
+          "path": "/tilefun/assets/CarMeshAsset-BSWeave9.js",
+          "sha256": "ad53193cf42448329bdfaffdc9f1408f1abcbbb7372b4888b6b604959685e1e8"
+        },
+        {
+          "path": "/tilefun/assets/CarProxy-CuKy2AEP.js",
+          "sha256": "1f56a48864a2af9ef67e3cd5502cc1ec47e490fa80ebe2b462f19d1f78d2cfc1"
+        },
+        {
+          "path": "/tilefun/assets/CharacterCatalog-BN8L2HYS.js",
+          "sha256": "09dd878db90eaeb9964b06291bec1592b3d6ccb8b132cce7a4d9addde55f6b33"
+        },
+        {
+          "path": "/tilefun/assets/CityReviewRuns-B2kLNFgN.js",
+          "sha256": "063dac044ebcc8772bdd86c8af2c75b89571a296ad070bf344d24b6a64631ed3"
+        },
+        {
+          "path": "/tilefun/assets/CitySurfaceRenderer-DQaiHj0k.js",
+          "sha256": "d3fd4d8459587abd5ec6fc374b38e6b5ea73e3dcd7115041a439b06103b84b25"
+        },
+        {
+          "path": "/tilefun/assets/ClientStateView-Bucg-4Sn.js",
+          "sha256": "9d38c9d313e90982773bfac2f03557538f90e9581edef139c20b4106943f0202"
+        },
+        {
+          "path": "/tilefun/assets/DeferredVehiclePage-CQkVLSQO.js",
+          "sha256": "efced24222e235dedbd13fb714cef7e2ba6e19ffb82f9a051aa059267d84b6ff"
+        },
+        {
+          "path": "/tilefun/assets/Entity-CVRLOj8L.js",
+          "sha256": "619dd194e22ad2b7692f81094f766d23973b38bcc11712ec67b146fe07f8d3c5"
+        },
+        {
+          "path": "/tilefun/assets/EntityFactories-BQ3bapY1.js",
+          "sha256": "35c4db5e1f9569c995801ffc58ba1dc54124b70e82ba7240d4ee9919f2586a60"
+        },
+        {
+          "path": "/tilefun/assets/FencedTrees-DUmhurLo.js",
+          "sha256": "6a3a210a3496e94ab0e853263b6b806296ea74c35c341bfb7a3a6c0f9aff7ece"
+        },
+        {
+          "path": "/tilefun/assets/FierceDens-BlBhCdzi.js",
+          "sha256": "baa85b40de79d266f9a2b4cc5fbfdc8bc8a9820d3a62f6d079777dc905edf669"
+        },
+        {
+          "path": "/tilefun/assets/FootstepSystem-DEv8sBax.js",
+          "sha256": "bdb20c0f81ec0d26f43f9024aa10e93dff79bf86c2989325e6caef4a3eebd9a0"
+        },
+        {
+          "path": "/tilefun/assets/GameAssets-C2ZW4edQ.js",
+          "sha256": "ff4419a4c02420c5cae05ca5b98760e05d8f91b02553c4658a29ad2abc641a50"
+        },
+        {
+          "path": "/tilefun/assets/GenerationDescriptor-Dp2rE_Te.js",
+          "sha256": "d911c529c0030b1edde6f71561ad959c5cfa3d9038ffd5ee4be5dd6eda9b8d7d"
+        },
+        {
+          "path": "/tilefun/assets/GpuRenderBackend-Bdd7enkJ.js",
+          "sha256": "3118faa04fa263666431c9e9da317ec3e2323cd321795c123f844b81b54d7a7a"
+        },
+        {
+          "path": "/tilefun/assets/GpuRenderHost-CXjc30M4.js",
+          "sha256": "28d71b32650bb5f3808ae474f69c605be08dcb8d1b2488607c9e9076f93f748b"
+        },
+        {
+          "path": "/tilefun/assets/GpuRenderHost-DsvmDmih.js",
+          "sha256": "1b2889fc689becfa6d8c967d5868802a2df71dbf6ca6dd5a7c3fe82dc90d0e36"
+        },
+        {
+          "path": "/tilefun/assets/LabInput-BY1tdjT3.js",
+          "sha256": "4ac4f97a696c51d69723bb9b255f1b1ec0a654adfc2207f4ecd558a27494d859"
+        },
+        {
+          "path": "/tilefun/assets/LabView-D1evyX9t.js",
+          "sha256": "60a6b0cf90ff227a7fd9aabc1984ef19e27c9b62f29775ecb0c1fd01be70614b"
+        },
+        {
+          "path": "/tilefun/assets/ModernInteriorsAtlasIndex-S5YrrbnU.js",
+          "sha256": "a25159e8e8ec8179358b78cced17c92ca4310ff77e60b3ccb700b2bb49dc0da9"
+        },
+        {
+          "path": "/tilefun/assets/OutdoorRuntime-4FCUaz77.js",
+          "sha256": "fc10ec56c9d57e6ad2a4dc14f2c9eca3f2cd2f0ea3a3709dec9111a54d9a49ee"
+        },
+        {
+          "path": "/tilefun/assets/ParkingLayout-CHFFgydN.js",
+          "sha256": "6a940d019d7ac69163baea8f622abd4f2b1559b906e3cbf8a48db773a300379f"
+        },
+        {
+          "path": "/tilefun/assets/ParkingSurface-BeUyJiPm.js",
+          "sha256": "c8e9681f19d87bc553b4b533623d631d168e1c5bb249e5e2289cab4ddeaeb1f9"
+        },
+        {
+          "path": "/tilefun/assets/Player-BnqWRPro.js",
+          "sha256": "5d436a5589787eaf805814a7536daeec2615a9702f87f9a518d792d99558922d"
+        },
+        {
+          "path": "/tilefun/assets/Predator-BkwYTST6.js",
+          "sha256": "951985147cec25fae9e267fb4ea8a46a8c728d3dcf08bdc4444e86d1070aa82d"
+        },
+        {
+          "path": "/tilefun/assets/PropFactories-B0wAlij-.js",
+          "sha256": "50cf1fd5475004a1c3d93e31e46197db35ad05cec3c4fe2732fc3a65f8a100a1"
+        },
+        {
+          "path": "/tilefun/assets/RailwayPlanner--QrCzA6O.js",
+          "sha256": "c5ccdc80d1c71433bbbdb6ad02ad05fa74f3fba82fbd3703bace5f9c4ae82d70"
+        },
+        {
+          "path": "/tilefun/assets/RailwayStrategy-DEzhwWds.js",
+          "sha256": "b3acacae0d32367f2dbe0fee50aa26a08da548a1bf9f8ef4986da689d5aca1c0"
+        },
+        {
+          "path": "/tilefun/assets/RasterRenderBackend-B0TQWF-L.js",
+          "sha256": "300b9f0c64a0b33e9edf3a9dcd248194f8fa57b05acfecb1f5a2b687d8de183f"
+        },
+        {
+          "path": "/tilefun/assets/RenderFrame-CuKJI0FI.js",
+          "sha256": "080e28d7de37548cbef7bf39f3c130556428c518f1a448e8c75ee6b47498bfb5"
+        },
+        {
+          "path": "/tilefun/assets/RoadGenerator-D_4_dnLY.js",
+          "sha256": "b24a8f1feef07369253d2254e1b8a22dc72cda0be81e74bd6e721e6f3577b7e3"
+        },
+        {
+          "path": "/tilefun/assets/RoadRailBridge-B7cTO3sB.js",
+          "sha256": "8fa9d25fdaaa1d6a18715535a856cb56538c5260f9a6e245cc6b885d67015bef"
+        },
+        {
+          "path": "/tilefun/assets/RoadType-caqnQaj0.js",
+          "sha256": "cc04d54cbc347371d80a28171a76cdc0b7f910db8651017e179a7b4e32874d5d"
+        },
+        {
+          "path": "/tilefun/assets/ScenarioRecipe-a5tXXWeB.js",
+          "sha256": "ba61664ccb87b65e2c1d97c3c4a9e4aa3c0c25ddcb2829b17d92d91cf7cb4d31"
+        },
+        {
+          "path": "/tilefun/assets/SpriteCatalog-BblZfuNz.js",
+          "sha256": "30163ddb499eda22ef6fa6a32447ed07357c571f1ff8c9777283f7e70c28b50f"
+        },
+        {
+          "path": "/tilefun/assets/Spritesheet-wcwe7Yzp.js",
+          "sha256": "11eb347d2e8e410a622015b06eacd1f514ee3973f1db9e8c94fa6e1ce432baa9"
+        },
+        {
+          "path": "/tilefun/assets/TileRegistry-D_8IWbOM.js",
+          "sha256": "2c4c2e81fc481b9f38566ee080dfe93f27d7ccaf24ce41d7801c1ea5038cffc1"
+        },
+        {
+          "path": "/tilefun/assets/TileRenderer-pHePiPbm.js",
+          "sha256": "ec3beeb47911ba8b221098d79ea91bc812dbb41a270a81929af855b599c652e4"
+        },
+        {
+          "path": "/tilefun/assets/ToolRegistry--t68JUKm.js",
+          "sha256": "a98ee7d9dceaf6c7938187fd0bbe91e33048c13d7c4b6733fbacebcfe4ce960b"
+        },
+        {
+          "path": "/tilefun/assets/VehiclePaint-CtZqRi0D.js",
+          "sha256": "66eff365c47d531eaecf8bf3dcb288e1c461218fd657f2063ea0f83e43531a38"
+        },
+        {
+          "path": "/tilefun/assets/VehiclePaintResources-DcWRE4yI.js",
+          "sha256": "02d449cb8344c8e0dfea0f1e49104fff00f42b37ffce0ca6b9321cd294bec052"
+        },
+        {
+          "path": "/tilefun/assets/ViewLayout-fh6YKiPl.js",
+          "sha256": "cff362a4a53c5b20bfb0f7d81d3d0ffee488ff83c8de19aadf559fab6f3f8c3d"
+        },
+        {
+          "path": "/tilefun/assets/WebGl2Support-BGZ-y-6B.js",
+          "sha256": "84d0d25d112be51e902989b71ad9c72c9f89629f22f9c22ed069ebc09ec4e25f"
+        },
+        {
+          "path": "/tilefun/assets/WorkerClientTransport--3TMVTMs.js",
+          "sha256": "9d182e262e7aa55ca8e927449419a6c8186499fa7e472ae0c32546a9210547c4"
+        },
+        {
+          "path": "/tilefun/assets/WorkshopCommon-BHq_zxsR.js",
+          "sha256": "912eaf9dd881eead14a83882e02d3fa662f45197c61a669a83a8c4bdf1253fe9"
+        },
+        {
+          "path": "/tilefun/assets/WorkshopQueries-zXlT66kd.js",
+          "sha256": "f399a0b1d9ac9cdae7c71d798c1e1f98c951b38dbcad23f7f2dde0b97a9603c3"
+        },
+        {
+          "path": "/tilefun/assets/WorkspaceStore-BL5300AK.js",
+          "sha256": "8bb63ec310bffa4f638cb191401e3a88b20a10a199af9b2f3e8267a0a81956a2"
+        },
+        {
+          "path": "/tilefun/assets/World-BJ9UrRSZ.js",
+          "sha256": "f9b30a6a4a7237463aa621a0dc890e9d5fecc7f165be739c66d9fa398c184537"
+        },
+        {
+          "path": "/tilefun/assets/WorldGeometryPage-Bn-OcWMF.js",
+          "sha256": "6b738fbb7a6e40549d7594aca634098f1c20fa84b4280d983a17a1b630f91144"
+        },
+        {
+          "path": "/tilefun/assets/WorldGeometryRecipe-DkJT7ybh.js",
+          "sha256": "5f8add52d70086b891e0a5702f2f028358543ceee53d2fd0477429750f70ac8b"
+        },
+        {
+          "path": "/tilefun/assets/WorldRasterFrame-CvLS7skx.js",
+          "sha256": "6e3c520d1c77bf2672b4b2ee794df221c968f75e2b8d41ee1bdaf40e247384d1"
+        },
+        {
+          "path": "/tilefun/assets/collectScene-CrsXG-fR.js",
+          "sha256": "e70e9cba6143b7b4b08e2487306321669b5d7ee1bf5a9855c794e75e4d67c4e6"
+        },
+        {
+          "path": "/tilefun/assets/constants-DoNpYYhx.js",
+          "sha256": "43d703cd9b738534d76c0b8562942d4352970e3f9a3d7c57ffac80265bff662f"
+        },
+        {
+          "path": "/tilefun/assets/gmBlobLayout-WrT971-c.js",
+          "sha256": "401195dabfcc73e01a450b1cfa2bfad2bedcac9f4600f552e1c3c9f1a990d9fb"
+        },
+        {
+          "path": "/tilefun/assets/jsx-runtime-C3cWAN_r.js",
+          "sha256": "036e646de62e26433472179f17fa666f8dc6728243a5551af4c11c86b53b2774"
+        },
+        {
+          "path": "/tilefun/assets/modulepreload-polyfill-P2Xu9kJm.js",
+          "sha256": "418c206484b89b68ef5f067277831e583fc9193a62aadf4de269acaaeb12a85f"
+        },
+        {
+          "path": "/tilefun/assets/preload-helper-BVkRQG0z.js",
+          "sha256": "8e8a7fc72dae57e1fcff22b7af5a773c6a76fd02f5aa8775a52a9c88609ac70c"
+        },
+        {
+          "path": "/tilefun/assets/presentSurfaceScene-BKFo2nCE.js",
+          "sha256": "cc24a42bf43c60a209099fa8bc915f96ade75cf28afcbf7de0fd99a138130209"
+        },
+        {
+          "path": "/tilefun/assets/propDepth-utGDnS4O.js",
+          "sha256": "29d69143bca143dadd28e632b921979939efa728832404c63ad1e9733a64199c"
+        },
+        {
+          "path": "/tilefun/assets/recipe-world.worker-C-ymiSGs.js",
+          "sha256": "bd1ca9a303b00d8b581b596c0fb2408be59b3bf5fef8c14ffa0d36a06ffb1f2b"
+        },
+        {
+          "path": "/tilefun/assets/required-mSLZPpYK.js",
+          "sha256": "87933cd622f5b1c68a4705c403c672c6b1c86d944f64254d273fce2be7735af1"
+        },
+        {
+          "path": "/tilefun/assets/reviewCanvas-ByZVTrHd.js",
+          "sha256": "1605115cd5d6f3c4753c956aa483eacbb085f7b5f215fd9589e5719bb52e0729"
+        },
+        {
+          "path": "/tilefun/assets/rolldown-runtime-XKyaHtl9.js",
+          "sha256": "548d1dbf321e7d2ae804fcc158b588706a7c52f8ca175de1490c6ccb4dbe55b7"
+        },
+        {
+          "path": "/tilefun/assets/three.core-CYA7kxmg.js",
+          "sha256": "2a028f3b845003d234c7f8ec1a070880fe01f430cd8ad0fdc9440bfaddda2695"
+        },
+        {
+          "path": "/tilefun/assets/three.module-CSIE96N8.js",
+          "sha256": "b2d59262083e2f3185b86929e99650aa700586a903eb04187abc7314644d8de4"
+        },
+        {
+          "path": "/tilefun/assets/useQuery-BMrTMUPW.js",
+          "sha256": "6ce66ebccda7a8f16388860ed7e3c75838c85ff7e4e018640590ef5bf25fad22"
+        },
+        {
+          "path": "/tilefun/assets/uuid-BXdVC_j_.js",
+          "sha256": "4d0dc9fdce128a6a8c1a144605ccc92ea9fd87deb82baee4477fe956acc98e5f"
+        },
+        {
+          "path": "/tilefun/assets/vehicles-v1-Zssjeqgv.js",
+          "sha256": "98bfd0b132d01c0c70849f35efa499634474dfee465dcfea0a58d4fee68e24dc"
+        },
+        {
+          "path": "/tilefun/assets/workshop-BnsA41KC.js",
+          "sha256": "41b68c73b8b55809554789079026b80a77d8731106f61de679057c2e49793fb4"
+        }
+      ],
+      "trials": [
+        {
+          "trial": 0,
+          "elapsedMs": 6013.3,
+          "idleFrames": {
+            "count": 120,
+            "p50": 16.7,
+            "p95": 16.7,
+            "p99": 16.8,
+            "max": 16.8,
+            "over25ms": 0,
+            "over50ms": 0
+          },
+          "frames": {
+            "count": 339,
+            "p50": 16.7,
+            "p95": 33.3,
+            "p99": 33.4,
+            "max": 33.5,
+            "over25ms": 21,
+            "over50ms": 0
+          },
+          "framesOverIdleCadence": 21,
+          "mainThread": {
+            "lab.update": {
+              "count": 361,
+              "totalMs": 2004.9,
+              "maxMs": 10.3,
+              "retained": 361,
+              "p50Ms": 5.7,
+              "p95Ms": 6.3,
+              "p99Ms": 7
+            },
+            "lab.render": {
+              "count": 340,
+              "totalMs": 3836.5,
+              "maxMs": 18.5,
+              "retained": 340,
+              "p50Ms": 11.2,
+              "p95Ms": 11.9,
+              "p99Ms": 16
+            }
+          },
+          "workerTimings": {
+            "server.encode": {
+              "count": 367,
+              "totalMs": 22.6,
+              "maxMs": 0.6,
+              "retained": 367,
+              "p50Ms": 0.1,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "server.autotile": {
+              "count": 365,
+              "totalMs": 0.7,
+              "maxMs": 0.1,
+              "retained": 365,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 365,
+              "totalMs": 390.1,
+              "maxMs": 2,
+              "retained": 365,
+              "p50Ms": 1,
+              "p95Ms": 1.6,
+              "p99Ms": 1.8
+            },
+            "realm.entityPhysics": {
+              "count": 365,
+              "totalMs": 1094.3,
+              "maxMs": 4.1,
+              "retained": 365,
+              "p50Ms": 3,
+              "p95Ms": 3.4,
+              "p99Ms": 3.6
+            },
+            "realm.saveSweep": {
+              "count": 365,
+              "totalMs": 20.3,
+              "maxMs": 0.2,
+              "retained": 365,
+              "p50Ms": 0.1,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "server.replication": {
+              "count": 365,
+              "totalMs": 464.4,
+              "maxMs": 1.7,
+              "retained": 365,
+              "p50Ms": 1.3,
+              "p95Ms": 1.4,
+              "p99Ms": 1.6
+            },
+            "realm.tick": {
+              "count": 365,
+              "totalMs": 2467.3,
+              "maxMs": 9.1,
+              "retained": 365,
+              "p50Ms": 6.7,
+              "p95Ms": 7.6,
+              "p99Ms": 8.1
+            },
+            "server.decode": {
+              "count": 366,
+              "totalMs": 1.5,
+              "maxMs": 0.1,
+              "retained": 366,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            }
+          },
+          "startPendingTerrain": 0,
+          "endPendingTerrain": 0,
+          "endPreparedRows": 0,
+          "requestedVehicleAssets": {
+            "compact-1-authored-v7": {
+              "state": "ready",
+              "meshes": 55,
+              "drawMeshes": 8,
+              "error": null
+            },
+            "ambulance-authored-v3": {
+              "state": "ready",
+              "meshes": 56,
+              "drawMeshes": 15,
+              "error": null
+            },
+            "fire-truck-ladder-1-authored-v2": {
+              "state": "ready",
+              "meshes": 49,
+              "drawMeshes": 10,
+              "error": null
+            },
+            "beetle-authored-v1": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "police-car-authored-v2": {
+              "state": "ready",
+              "meshes": 37,
+              "drawMeshes": 9,
+              "error": null
+            },
+            "rosso-coupe-authored-v3": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "rally-hatchback-authored-v1": {
+              "state": "ready",
+              "meshes": 5,
+              "drawMeshes": 5,
+              "error": null
+            },
+            "tow-truck-authored-v2": {
+              "state": "ready",
+              "meshes": 7,
+              "drawMeshes": 7,
+              "error": null
+            },
+            "dump-truck-authored-v2": {
+              "state": "ready",
+              "meshes": 11,
+              "drawMeshes": 11,
+              "error": null
+            },
+            "garbage-truck-orange-authored-v1": {
+              "state": "ready",
+              "meshes": 53,
+              "drawMeshes": 20,
+              "error": null
+            }
+          },
+          "errors": []
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Percentiles are per trial, not pooled or added across nested stages.",
+    "Fresh sequential Node processes; case order reversed in the middle repetition. Browser trials follow Node runs.",
+    "Client and render use one frozen binary recording; browser workload is wall-time-driven.",
+    "Verification timings excluded. Hashes supplement, rather than replace, focused gameplay tests.",
+    "Node render preparation excludes GPU submission/execution, terrain raster and effects.",
+    "Browser Worker diagnostics straddle main-thread sample boundaries; their totals are not exactly aligned."
+  ]
+}
