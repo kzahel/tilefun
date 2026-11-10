@@ -1,4 +1,5 @@
 import type { Direction } from "../entities/Entity.js";
+import type { GpuShadow } from "./GpuShadowShape.js";
 import type { MeshInstance } from "./MeshPresentation.js";
 import type { DecalMask } from "./ProjectedDecals.js";
 import type { Plane, SurfaceVertex } from "./SurfaceReceivers.js";
@@ -87,10 +88,9 @@ export interface SpriteItem {
   flashHidden: boolean;
   /** Optional per-item alpha (debug overlays). */
   alpha?: number;
-  /** Oval shadow for the GPU depth pass (236, `?shadows=gpu`): footprint centre and
-   * radii and the height of the surface under its centre, in world pixels.
-   * A sink without that pass draws the plain ground shadow instead. */
-  gpuShadow?: { x: number; y: number; rx: number; ry: number; z: number };
+  /** Shadow for the GPU depth pass (236), in place of projected decals. A sink
+   * without that pass draws the plain ground shadow for ovals instead. */
+  gpuShadow?: GpuShadow;
 }
 
 export interface ElevationItem {

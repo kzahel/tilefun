@@ -20,17 +20,21 @@ its own ceiling, preserving underpass shadows even when an exposed end is higher
 Receiver broadphase bounds use actual polygon vertices rather than extrapolated
 AABB corners. The collector uses the same displayed orientation as the mesh.
 
-[236](../tactical/236-render-scorecard-and-gpu-shadows.md) adds an opt-in GPU
-shadow pass (`?shadows=gpu`, `GpuDeferredShadows`). Non-vehicle actors carry an
-oval (`SpriteItem.gpuShadow`) instead of projected decals. After the world is
-complete, one instanced draw reconstructs each visible point from the world depth
-texture and shades upward-facing receivers near the caster's support height.
+[236](../tactical/236-render-scorecard-and-gpu-shadows.md) draws actor ovals and
+mesh vehicle shadows in a GPU pass (`GpuDeferredShadows`), the default since
+2026-11-10. `?shadows=projected` keeps the projected decals for comparison.
+- Collection attaches a `GpuShadow` (`GpuShadowShape.ts`) to the caster's sprite:
+  a footprint, a mask, an upper plane and a band of heights below it.
+- After the world is complete, one instanced draw reconstructs each visible point
+  from the world depth texture and shades upward-facing receivers in that band.
 - `GpuRenderBackend` owns the pass and `presentWorld`; hosts present through it.
-- The world target gets a depth texture only after a shadow asks for one.
+- The world target gets a depth texture once a shadow asks for one.
 - Rooms, clipped scene passes and the review raster draw the plain ground shadow.
-- Vehicles, particles and landing rings keep the projected path.
-- Known differences (ledges, crest seams, low ramp ends) are listed in 236; the
-  renderer lab's `probeDeferredShadows` compares both paths.
+- Particles, landing rings, boats and trains keep the projected path; receivers
+  also still serve the support point query.
+- The first-person view (229) is a separate renderer and draws no shadows.
+- Known differences (ledges, crest seams, low ramp ends, tilted stacks) are listed
+  in 236; the renderer lab's `probeDeferredShadows` compares both paths.
 
 [235](../tactical/235-crowd-bench-and-unnecessary-work.md) makes the receiver
 partition (`SurfacePartition.ts`) cost follow real overlaps:

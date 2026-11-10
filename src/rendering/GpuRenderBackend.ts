@@ -64,6 +64,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
         !!target &&
         surface.worldDepth &&
         !this.sceneClipped &&
+        (shadow.casterId === undefined || this.meshes.shadowCasters.has(shadow.casterId)) &&
         this.shadows.queue(target, camera, shadow)
       );
     };

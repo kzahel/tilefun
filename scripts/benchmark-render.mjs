@@ -4,7 +4,7 @@
 // ephemeral browser-local saves. Use --headed for the display's real cadence.
 //
 //   npm run render:bench -- --headed
-//   npm run render:bench -- --headed --scenes=crowd --zooms=0.25 --query=shadows=gpu
+//   npm run render:bench -- --headed --scenes=crowd --zooms=0.25 --query=shadows=projected
 //   npm run render:bench -- --compare=/tmp/before.json
 //
 // Per cell it reports frame cadence, main-thread render/update callbacks, the
@@ -41,14 +41,15 @@ const CAR_MODELS = [
   "vehicle-v1:dump-truck",
   "vehicle-v1:garbage-truck-orange",
 ];
-/** Seed-2026 regional world. `street` is a quiet town crossing; `crowd` adds the
- * stress population there; `city` is the dense block east of Oakgrove with its own traffic. */
+/** Seed-2026 regional world. `town` is the streaming bench's city crossing (shops,
+ * a few cars); `crowd` adds the stress population there; `woods` is woodland
+ * beside the racetrack, with the most props and wildlife in an overview. */
 const SCENES = {
-  street: { arrival: [300, 519], rabbits: 0, cars: 0 },
+  town: { arrival: [300, 519], rabbits: 0, cars: 0 },
   crowd: { arrival: [300, 519], rabbits: 1000, cars: 50 },
-  city: { arrival: [-380, -364], rabbits: 0, cars: 0 },
+  woods: { arrival: [-380, -364], rabbits: 0, cars: 0 },
 };
-const scenes = option("scenes", "street,crowd,city").split(",");
+const scenes = option("scenes", "town,crowd,woods").split(",");
 for (const name of scenes) if (!SCENES[name]) throw Error(`Unknown scene ${name}`);
 const zooms = option("zooms", "1,0.25,0.1").split(",").map(Number);
 if (zooms.some((z) => !Number.isFinite(z) || z < 0.05 || z > 3))

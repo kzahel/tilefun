@@ -9,7 +9,6 @@ import {
 } from "../../entities/Entity.js";
 import type { Prop } from "../../entities/Prop.js";
 import { rotateBodyVector } from "../../physics/BodyRotation.js";
-import { physicsBodyDimensions } from "../../physics/PhysicsBodies.js";
 import { terrainBaseZ } from "../../physics/TerrainExcavation.js";
 import {
   hasVehicleLights,
@@ -32,6 +31,7 @@ import {
   meshAssetFor,
   trainMeshHeading,
 } from "../EntityMeshPose.js";
+import { ovalShadow, vehicleShadow } from "../GpuShadowShape.js";
 import { vehicleMeshRadius, yawOrientation } from "../MeshPresentation.js";
 import { projectShadow, surfaceDecals } from "../ProjectedDecals.js";
 import type { PropDepthIndex } from "../PropDepthIndex.js";
@@ -462,31 +462,29 @@ function roadkillFade(e: Entity, scaleY: number): Pick<SpriteItem, "scaleY" | "a
   };
 }
 
-/** The oval of `shadowFootprint`, left for the GPU depth pass to place (236).
- * One point query finds the surface under its centre, as projection does for its
- * support; the pass shades receivers near that height, so a caster on a deck
- * never shades the ground seen beneath it. */
+/** The caster's shape for the GPU depth pass (236). One point query finds the
+ * surface under its centre, as projection does for its support, so a caster on
+ * a deck never shades the ground seen beneath it. Standing on base terrain
+ * needs no query: the ground is the support. */
 function gpuShadow(
+  pass: EntityPass,
   receivers: SurfaceReceivers,
   e: Entity,
+  spriteItem: SpriteItem,
   pos: PositionComponent,
   zOffset: number,
-  terrainZ: number,
-): NonNullable<SpriteItem["gpuShadow"]> {
-  const d = physicsBodyDimensions(e),
-    x = pos.wx + d.offsetX,
-    y = pos.wy + d.offsetY;
-  return {
-    x,
-    y,
-    rx: d.width / 2,
-    ry: Math.max(d.depth * 0.4, d.width * 0.175),
-    // Standing on base terrain needs no query: the ground is the support.
-    z:
+): SpriteItem["gpuShadow"] {
+  const terrainZ = spriteItem.shadowTerrainZ,
+    supportZ =
       Math.abs(zOffset - terrainZ) < 0.5
         ? terrainZ
-        : (receivers.hit(x, y, zOffset + 1, e.id)?.point[2] ?? Math.min(terrainZ, zOffset)),
-  };
+        : (receivers.hit(pos.wx, pos.wy, zOffset + 1, e.id)?.point[2] ??
+          Math.min(terrainZ, zOffset));
+  if (!e.type.startsWith("vehicle-v1:")) return ovalShadow(e, pos.wx, pos.wy, supportZ);
+  const mesh = spriteItem.mesh
+    ? pass.terrain.meshSurfaceGeometry?.(spriteItem.mesh.assetId)
+    : undefined;
+  return vehicleShadow(e, pos.wx, pos.wy, zOffset, supportZ, mesh, spriteItem.mesh?.orientation);
 }
 
 function pushShadowDecals(
@@ -499,8 +497,10 @@ function pushShadowDecals(
   meshGroundShadow: boolean,
 ): void {
   spriteItem.hasShadow = false;
-  if (shadowMode.gpu && !meshGroundShadow && !e.type.startsWith("vehicle-v1:")) {
-    spriteItem.gpuShadow = gpuShadow(receivers, e, pos, zOffset, spriteItem.shadowTerrainZ);
+  // Mesh vehicles and actor ovals; other bodies (boats, trains) stay projected.
+  if (shadowMode.gpu && meshGroundShadow === e.type.startsWith("vehicle-v1:")) {
+    const shadow = gpuShadow(pass, receivers, e, spriteItem, pos, zOffset);
+    if (shadow) spriteItem.gpuShadow = shadow;
     return;
   }
   const mesh = spriteItem.mesh

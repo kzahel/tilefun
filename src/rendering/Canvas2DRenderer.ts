@@ -99,13 +99,7 @@ export function drawSceneEntry2D(
       drawSurfaceDecal(ctx, camera, item);
       break;
     case "sprite":
-      if (item.gpuShadow && !ctx.deferredShadow?.(camera, item.gpuShadow)) {
-        // No depth pass here (rooms, review rasters): the plain ground shadow.
-        sceneDepth(ctx, camera, item, true);
-        drawOneShadow(ctx, camera, item, pixelExactShadows);
-        sceneDepth(ctx, camera, item, false);
-      }
-      drawSprite(ctx, camera, item, sheets);
+      drawSpriteEntry(ctx, camera, item, sheets, pixelExactShadows);
       break;
     case "elevation": {
       if (!terrain) throw new Error("Elevation drawing requires terrain resources");
@@ -120,6 +114,27 @@ export function drawSceneEntry2D(
       drawParticle(ctx, camera, item);
       break;
   }
+}
+
+/** A sprite and its GPU depth shadow (236). An oval queues before its body, so
+ * a sink without that pass (rooms, review rasters) can draw the plain ground
+ * shadow under it; a mesh body's shadow queues after the body reports drawing. */
+function drawSpriteEntry(
+  ctx: RasterSurface,
+  camera: Camera,
+  item: SpriteItem,
+  sheets: Map<string, Spritesheet>,
+  pixelExactShadows: boolean,
+): void {
+  const shadow = item.gpuShadow,
+    mesh = shadow?.casterId !== undefined;
+  if (shadow && !mesh && !ctx.deferredShadow?.(camera, shadow)) {
+    sceneDepth(ctx, camera, item, true);
+    drawOneShadow(ctx, camera, item, pixelExactShadows);
+    sceneDepth(ctx, camera, item, false);
+  }
+  drawSprite(ctx, camera, item, sheets);
+  if (shadow && mesh) ctx.deferredShadow?.(camera, shadow);
 }
 
 /** Draw a single entity shadow ellipse. */

@@ -1,13 +1,32 @@
 import { Spritesheet } from "../assets/Spritesheet.js";
 import { createPlayer } from "../entities/Player.js";
 import { surfaceProp } from "../scenarios/WorldGeometryRecipe.js";
+import { createVehicle } from "../traffic/Vehicle.js";
 import { Camera } from "./Camera.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
-import { surfaceDecals } from "./ProjectedDecals.js";
+import { type GpuShadow, vehicleShadow } from "./GpuShadowShape.js";
+import { poseOrientation } from "./MeshPresentation.js";
+import { projectShadow, surfaceDecals } from "./ProjectedDecals.js";
 import { presentSurfaceScene } from "./presentSurfaceScene.js";
 import { SceneFrame } from "./SceneFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
 import { rectangle, SurfaceReceivers } from "./SurfaceReceivers.js";
+
+/** `ovalShadow` for explicit radii (the probe has no physics body). */
+function probeOval(x: number, y: number, rx: number, ry: number, supportZ: number): GpuShadow {
+  const slack = 2 + Math.max(rx, ry) * 0.6;
+  return {
+    x,
+    y,
+    ux: rx,
+    uy: 0,
+    vx: 0,
+    vy: ry,
+    plane: [0, 0, supportZ + slack],
+    band: slack * 2,
+    mask: "oval",
+  };
+}
 
 /** Pixels each path shades against the baseline, and where the two paths disagree. */
 function comparePixels(
@@ -110,7 +129,7 @@ export async function probeDeferredShadows() {
       camera.setViewport(width, height);
       camera.worldRaster = true;
       const first = sprite("blank", 0, 0, 0);
-      first.gpuShadow = { x: 0, y: 0, rx: 4, ry: 4, z: 0 };
+      first.gpuShadow = probeOval(0, 0, 4, 4, 0);
       gpu.beginFrame();
       presentSurfaceScene(gpu, camera, frame, [first], props, observer, "all", 1);
       gpu.presentWorld(0, 0);
@@ -152,10 +171,40 @@ export async function probeDeferredShadows() {
           0.28,
         );
         const caster = sprite("blank", x, y, z);
-        caster.gpuShadow = { x, y, rx, ry, z: receivers.hit(x, y, z + 1)?.point[2] ?? 0 };
+        caster.gpuShadow = probeOval(x, y, rx, ry, receivers.hit(x, y, z + 1)?.point[2] ?? 0);
         const baseline = pixels(extra),
           projected = pixels([...decals, ...extra]),
           deferred = pixels([caster, ...extra]);
+        const difference = comparePixels(baseline, projected, deferred);
+        report.push({ name, zoom, queued: gpu.deferredShadowsDrawn, ...difference });
+      }
+      // Vehicle footprints: level on the ground, pitched along the ramp, yawed
+      // on the deck. A box stands in for the mesh; no body is drawn.
+      const box = { min: [-20, -10, 0], max: [20, 10, 16], triangles: [] } as const;
+      for (const [name, x, y, z, yaw, pitch] of [
+        ["car-flat", -24, 0, 0, 0.4, 0],
+        ["car-ramp", 32, 0, 16, 0, -Math.atan(0.5)],
+        ["car-deck", 86, 0, 32, Math.PI / 2, 0],
+      ] as const) {
+        const car = createVehicle("compact-1", x, y);
+        car.id = 99;
+        car.wz = z;
+        const rotation = poseOrientation(yaw, pitch, 0);
+        car.vehicleHeading = yaw;
+        const decals = surfaceDecals(
+          projectShadow(receivers, car, x, y, z, box, rotation),
+          "vehicle",
+          0.28,
+        );
+        const support = receivers.hit(x, y, z + 1)?.point[2] ?? 0;
+        const caster = sprite("blank", x, y, z);
+        const shape = vehicleShadow(car, x, y, z, support, box, rotation);
+        if (!shape) throw Error("Missing vehicle shadow shape");
+        delete shape.casterId; // the probe draws no mesh body
+        caster.gpuShadow = shape;
+        const baseline = pixels([]),
+          projected = pixels(decals),
+          deferred = pixels([caster]);
         const difference = comparePixels(baseline, projected, deferred);
         report.push({ name, zoom, queued: gpu.deferredShadowsDrawn, ...difference });
       }
