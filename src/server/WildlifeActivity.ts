@@ -1,6 +1,7 @@
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
+import { isNapping } from "../entities/naps.js";
 import { isWildlife } from "../wildlife/WildlifeKinds.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 
@@ -39,7 +40,10 @@ export class WildlifeActivity {
     observers: readonly Observer[],
     contacts: readonly Entity[],
     supported: (group: readonly Entity[]) => boolean,
+    tick = -1,
   ): boolean {
+    // A lone animal admitted when its nap began stays admitted until it ends.
+    if (group.length === 1 && isNapping(group[0] as Entity, tick)) return true;
     const fresh = group.some((member) => member.wz === undefined);
     const interest = fresh ? "held" : this.interest(group, observers, contacts);
     if (interest === "asleep") {

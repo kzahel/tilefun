@@ -39,40 +39,14 @@ export function tickAllAI(
   const budget = planning?.budget ?? robinWorkBudget();
   if (planning) {
     planning.begin();
-    let due = false;
-    for (const [entity, dt] of entries) {
-      planning.advance(entity, dt, playerPositions);
-      const ai = wildlifeBrain(entity);
-      if (ai) {
-        if (
-          ai.timer <= dt &&
-          !("motion" in ai && ai.motion) &&
-          ai.state !== "hop" &&
-          ai.state !== "flight"
-        )
-          due = true;
-      } else if (
-        entity.wanderAI &&
-        !entity.routeAI &&
-        entity.wanderAI.state !== "ridden" &&
-        entity.wanderAI.state !== "chasing" &&
-        entity.wanderAI.state !== "scared" &&
-        !entity.wanderAI.following &&
-        entity.wanderAI.timer <= dt
-      )
-        due = true;
+    // Stable order: long-waiting offers, urgent alarms, other offers, near, far.
+    const ranks: [Entity, number][][] = [[], [], [], [], []];
+    for (const entry of entries) {
+      const entity = entry[0];
+      planning.advance(entity, entry[1], playerPositions);
+      ranks[planning.priority(entity, !!wildlifeBrain(entity)?.alarmFrom)]?.push(entry);
     }
-    // Ordinary committed movement/rest waits need neither priority maps nor sorting.
-    if (due && entries.length) {
-      const priorities = new Map(
-        entries.map(([entity]) => {
-          return [entity, planning.priority(entity, !!wildlifeBrain(entity)?.alarmFrom)] as const;
-        }),
-      );
-      const start = robinTurn % entries.length;
-      entries = entries.slice(start).concat(entries.slice(0, start));
-      entries.sort((a, b) => (priorities.get(a[0]) ?? 2) - (priorities.get(b[0]) ?? 2));
-    }
+    entries = ranks.flat();
   }
   const robins: [Entity, number][] = [];
   // Poses stay fixed while decisions run; planners share one index of solid bodies.

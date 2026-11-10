@@ -30,9 +30,10 @@ Delivered:
   (it was 9.6 ms at 0.25 and missed 161 of 410 frames).
 
 Open:
-- With 1,000 rabbits the Pixel 7a and Steam Deck are authority-bound, so their
-  crowd cells still miss frames. The first authority slice brought the phone's
-  tick from 31–48 to 21–33 ms; 60 Hz needs 16.7 ms. 235 owns that.
+- With 1,000 rabbits the Pixel 7a was authority-bound. Two authority slices
+  brought its crowd tick from 31–48 to 11–18 ms at p50 (18–28 ms at p95); 60 Hz
+  needs 16.7 ms, so the median fits and the tail does not. Its main thread still
+  misses frames. The Steam Deck has not been re-measured. 235 owns that.
 - The Deck spends 7.7 ms submitting the crowd at 0.1.
 
 ## Crowd bench (2026-11-10)
@@ -60,11 +61,23 @@ Authority slice (2026-11-10): tick 6.61–6.74 → 4.01–4.13 ms p50 and 7.56�
 - Bodies resting in contact now sleep instead of jittering on solver noise. That
   is the only output change: x/y traces are identical and z differs by at most
   0.021 px on stacked rabbits.
-- The remaining tick is a flat set of per-actor passes. The next step is to take
-  idle actors out of the per-tick lists (rest timers as wake ticks, a realm-level
-  resting set); 235 lists the constraints.
+- Waiting actors now nap (`RealmNaps.ts`): they leave decisions, intents,
+  physics passes, finish and the replication comparison until a clock is due or
+  something disturbs them, and are simulated in full at least once in nine
+  ticks. Only rabbits that decide every tick nap so far. Code that edits an actor from outside its own brain should call `wake`
+  (`entities/naps.ts`); `PhysicalEdits`, script handles and startles already do.
+  In the crowd fixture clients receive the same bytes with or without naps.
+  Tick 4.0 → 2.6–2.9 ms.
+- The AI planner serves refused goals from a first-come line and offers two
+  ordinary starts per tick (`ORDINARY_STARTS`; alarms may use all four). That is
+  the knob for how lively a crowd larger than the budget is.
+- A static geometry rebuild used to wake every body on it for most of a second;
+  in the city any moving car triggered one. Bodies the new ground did not move
+  are put back to sleep at once. This was the largest part of phone physics.
+- Remaining: about 1.1 ms at rest plus roughly 20 µs per moving rabbit per tick.
+  235 lists what is left.
 - `render:bench` prints authority stage timings per cell and `--profile` records
-  the authority Worker.
+  the authority Worker, on a phone over `--cdp` as well.
 
 The measurement checkpoint separates authority, client processing and render
 preparation into plain-Node lanes. `--lane=record` saves binary output;

@@ -373,9 +373,9 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 942,
+      "lines": 921,
       "worst": 65,
-      "overLimit": 6
+      "overLimit": 4
     },
     "src/physics/rapier/ClippedTerrain.ts": {
       "lines": 75,
@@ -578,7 +578,7 @@
       "overLimit": 1
     },
     "src/server/EntityHandle.ts": {
-      "lines": 401,
+      "lines": 403,
       "worst": 28,
       "overLimit": 1
     },
@@ -608,12 +608,12 @@
       "overLimit": 1
     },
     "src/server/Realm.ts": {
-      "lines": 1343,
+      "lines": 1335,
       "worst": 0,
       "overLimit": 0
     },
     "src/server/RealmActivity.ts": {
-      "lines": 105,
+      "lines": 106,
       "worst": 27,
       "overLimit": 1
     },
@@ -625,11 +625,6 @@
     "src/server/RealmStreaming.ts": {
       "lines": 315,
       "worst": 31,
-      "overLimit": 1
-    },
-    "src/server/tickAllAI.ts": {
-      "lines": 114,
-      "worst": 26,
       "overLimit": 1
     },
     "src/server/vitePlugin.ts": {

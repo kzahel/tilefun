@@ -34,6 +34,7 @@ export class RealmActivity {
     sessions: readonly PlayerSession[],
     fixed: ReadonlyMap<Entity, number>,
     dt: number,
+    tick = -1,
   ): Map<Entity, number> {
     let changed = this.records !== records || this.revision !== records.membershipRevision;
     let count = 0;
@@ -71,7 +72,7 @@ export class RealmActivity {
     for (let i = 0; i < groups.length; i++)
       if (
         wildlifeOnly[i] &&
-        this.wildlife.admit(groups[i] as Entity[], sessions, contacts, supported)
+        this.wildlife.admit(groups[i] as Entity[], sessions, contacts, supported, tick)
       )
         admitted[i] = 1;
     const result = new Map<Entity, number>();

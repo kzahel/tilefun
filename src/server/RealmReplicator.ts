@@ -1,5 +1,6 @@
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
+import { isNapping } from "../entities/naps.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { getGravityRevision, getGravityScale } from "../physics/Gravity.js";
 import { diffEntitySnapshots, type EntityDelta } from "../shared/entityDelta.js";
@@ -170,12 +171,17 @@ export class RealmReplicator {
     const currentEntityIds = new Set<number>();
     const entityBaselines: EntitySnapshot[] = [];
     const entityDeltas: EntityDelta[] = [];
+    const tick = source.tickCounter;
     for (const entity of nearby) {
       const owned = this.snapshots.get(entity);
+      const prev = lastSent.get(entity.id);
+      currentEntityIds.add(entity.id);
+      // A napping actor compared since it was last simulated has not changed, and
+      // this stream already holds that snapshot.
+      if (prev === owned && prev && sentSinceSimulated(entity, tick)) continue;
+      entity.comparedTick = tick;
       const snapshot = reuseEntitySnapshot(entity, owned);
       if (snapshot !== owned) this.snapshots.set(entity, snapshot);
-      currentEntityIds.add(entity.id);
-      const prev = lastSent.get(entity.id);
       // An unchanged entity already sent to this stream needs nothing further.
       if (prev === snapshot) continue;
       if (!prev) entityBaselines.push(snapshot);
@@ -283,3 +289,7 @@ function editorCursors(session: PlayerSession, source: ReplicationSource): Remot
   }
   return cursors;
 }
+
+/** Napping at `tick`, and some stream compared it on or after its last simulated tick. */
+const sentSinceSimulated = (entity: Entity, tick: number) =>
+  isNapping(entity, tick) && (entity.comparedTick ?? -1) >= (entity.napFrom ?? 0) - 1;

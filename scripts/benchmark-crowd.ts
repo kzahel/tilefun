@@ -108,6 +108,7 @@ async function authority() {
       simulated = 0,
       awakeCars = 0,
       moving = 0,
+      napping = 0,
       samples = 0;
     for (let i = 0; i < ticks; i++) {
       const t = performance.now();
@@ -120,6 +121,7 @@ async function authority() {
         wire.update(`${frame.byteLength}:`).update(new Uint8Array(frame));
       }
       simulated += realm.persistenceDiagnostics.activeActors;
+      napping += realm.physicsScene?.diagnostics.heldBodies ?? 0;
       if (i % 30 === 0) {
         samples++;
         for (const body of realm.physicsState?.bodies ?? [])
@@ -163,6 +165,7 @@ async function authority() {
       stages,
       work: {
         simulatedActors: round(simulated / ticks),
+        nappingActors: round(napping / ticks),
         movingActors: round(moving / samples),
         movingSampleEveryTicks: 30,
         physicsBodies: after.bodies,

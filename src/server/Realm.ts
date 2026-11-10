@@ -87,6 +87,7 @@ import {
   loadWildlifeReturns,
   savedRoomState,
 } from "./RealmComposition.js";
+import { decisionDts, partitionNaps } from "./RealmNaps.js";
 import { RealmPhysics } from "./RealmPhysics.js";
 import {
   dryRespawn,
@@ -150,7 +151,7 @@ export class Realm {
       collision: this.collisionDiagnostics,
       loadedChunks: this.world.chunks.loadedCount,
       actors: this.entityManager.entities.length,
-      activeActors: this.previousActive.size,
+      activeActors: this.activeActors,
       props: this.propManager.props.length,
       features: this.records?.features.size ?? 0,
       holders: this.streaming?.residency.holders.size ?? 0,
@@ -712,8 +713,20 @@ export class Realm {
   ) {
     const stepDt = PHYSICS_DT;
     const entityTickDts = this.selectSimulationEntities(activeSessions, storagePaused);
-    const active = [...entityTickDts.keys()];
-    const decisions = this.decisionDts(entityTickDts, stepDt);
+    const players = activeSessions.map((s) => s.player);
+    const activity = (e: Entity) =>
+      this.streaming?.demand.get(this.records?.scope(e) ?? actorScope(e.position))?.activity;
+    const { active, awake, napping } = partitionNaps(
+      entityTickDts,
+      this.tickCounter,
+      players,
+      this.physicsScene,
+      this.aiPlanning,
+      activity,
+    );
+    this.activeActors = active.length;
+    const period = Realm.MID_TICK_FRAMES / this.tickRate;
+    const decisions = decisionDts(awake, stepDt, period, activity);
     this.entityManager.simulationEntities = active;
     this.propManager.simulationProps = this.propActivity.select(
       this.propManager,
@@ -721,11 +734,12 @@ export class Realm {
     );
     try {
       const work = createRealmWorkContext(this, entityTickDts, activeSessions);
-      this.updateDecisions(active, activeSessions, entityTickDts, decisions, work);
+      this.updateDecisions(active, awake, activeSessions, decisions, work);
       this.worldAPI.tick.firePre(stepDt);
       const timing = performanceMetrics.start();
       const { scene, participants, wasAirborne } = this.physics.step(
-        active,
+        awake,
+        napping,
         activeSessions,
         controls,
         controlTicks,
@@ -733,7 +747,7 @@ export class Realm {
       );
       this.physics.finish(participants, activeSessions, wasAirborne, scene);
       performanceMetrics.end("realm.entityPhysics", timing);
-      resolveSimulationGameplay(this, active, participants, entityTickDts, work, scene);
+      resolveSimulationGameplay(this, active, awake, participants, entityTickDts, work, scene);
     } finally {
       this.entityManager.simulationEntities = undefined;
       this.propManager.simulationProps = undefined;
@@ -742,8 +756,8 @@ export class Realm {
 
   private updateDecisions(
     active: Entity[],
+    awake: readonly Entity[],
     activeSessions: readonly PlayerSession[],
-    entityTickDts: ReadonlyMap<Entity, number>,
     decisions: ReadonlyMap<Entity, number>,
     work: WorkContext,
   ) {
@@ -761,9 +775,9 @@ export class Realm {
     );
     performanceMetrics.end("realm.ai", aiTiming);
 
-    for (const [entity, elapsed] of entityTickDts)
+    for (const entity of awake)
       if (entity.resident && entity.wanderAI?.state !== "scared")
-        updateResident(entity, elapsed, (p) => this.residentCanOccupy(entity, p, true), active);
+        updateResident(entity, PHYSICS_DT, (p) => this.residentCanOccupy(entity, p, true), active);
   }
 
   private updateSpawners(
@@ -978,6 +992,7 @@ export class Realm {
   private async closeLoadedWorld(): Promise<void> {
     await this.streaming?.close();
     this.streaming = null;
+    this.aiPlanning.clear();
     this.activity.clear();
     this.propActivity.clear();
     // Close previous save manager
@@ -1030,10 +1045,7 @@ export class Realm {
       this.options.definitions,
     );
     this.records = records;
-    this.entityManager.removalListeners.add((entity) => {
-      this.previousActive.delete(entity);
-      this.activity.invalidate();
-    });
+    this.entityManager.removalListeners.add(() => this.activity.invalidate());
     installCapacityGuards(this);
     this.proceduralActors.persistent = true;
     this.proceduralActors.canGenerate = (id) => !this.records?.features.has(id);
@@ -1221,6 +1233,7 @@ export class Realm {
     for (const [key] of this.world.chunks.entries()) this.world.chunks.remove(key);
     this.records?.features.clear();
     this.sessions.clear();
+    this.aiPlanning.clear();
     this.activity.clear();
     this.propActivity.clear();
     this.replication.clear();
@@ -1306,36 +1319,15 @@ export class Realm {
           streaming.supported(e, dt)
         )
           result.set(e, dt);
-    return this.activity.select(streaming.records, streaming, sessions, result, dt);
+    const tick = this.tickCounter;
+    return this.activity.select(streaming.records, streaming, sessions, result, dt, tick);
   }
 
-  private previousActive = new Set<Entity>();
+  private activeActors = 0;
   private readonly activity = new RealmActivity();
   private readonly propActivity = new RealmPropActivity();
   private robinTurn = 0;
   private readonly aiPlanning = new AiPlanningScheduler();
-  private decisionDts(active: ReadonlyMap<Entity, number>, dt: number): Map<Entity, number> {
-    const decisions = new Map<Entity, number>();
-    for (const entity of this.previousActive) if (!active.has(entity)) entity.tickAccumulator = 0;
-    this.previousActive = new Set(active.keys());
-    for (const entity of active.keys()) {
-      const activity = this.streaming?.demand.get(
-        this.records?.scope(entity) ?? actorScope(entity.position),
-      )?.activity;
-      if (activity === 2 || entity.type === "player") {
-        decisions.set(entity, dt);
-        entity.tickAccumulator = 0;
-      } else {
-        const accumulated = (entity.tickAccumulator ?? 0) + dt;
-        if (accumulated >= Realm.MID_TICK_FRAMES / this.tickRate) {
-          decisions.set(entity, accumulated);
-          entity.tickAccumulator = 0;
-        } else entity.tickAccumulator = accumulated;
-      }
-    }
-    return decisions;
-  }
-
   private buildStrategy(meta: WorldMeta | undefined): TerrainStrategy {
     this.generator = createGenerator(descriptorFromMetadata(meta), this.options.landscape);
     return this.generator.terrain;

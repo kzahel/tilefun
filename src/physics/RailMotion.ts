@@ -20,12 +20,13 @@ export const railGroup = (e: Entity) => e.physicsGroupId ?? e.id;
 /** A consist stops as one group when any moving car would sweep into static
  * geometry or another body during this tick. Read-only shape casts. */
 export function blockedRailGroups(
-  bodies: readonly RailBody[],
+  moving: readonly RailBody[],
+  bodies: ReadonlyMap<number, RailBody>,
   statics: RAPIER.Collider | undefined,
   intents: ReadonlyMap<number, MotionIntent>,
 ): Set<number> {
   const blocked = new Set<number>();
-  for (const entry of bodies) {
+  for (const entry of moving) {
     if (!isTrain(entry.entity)) continue;
     const input = intents.get(entry.entity.id);
     if (!input || (!input.vx && !input.vy)) continue;
@@ -45,7 +46,7 @@ export function blockedRailGroups(
     const group = railGroup(entry.entity);
     const candidates = [
       statics,
-      ...bodies
+      ...[...bodies.values()]
         .filter(
           (other) =>
             other !== entry &&

@@ -1,6 +1,7 @@
 import { TILE_SIZE } from "../config/constants.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
+import { wake } from "../entities/naps.js";
 import {
   setBodyPose,
   setHorizontalVelocity,
@@ -51,6 +52,7 @@ export class EntityHandle {
 
   /** Script edits are discrete: save them promptly rather than waiting for the record sweep. */
   protected mutated(entity = this.entity): void {
+    wake(entity);
     this.entityManager.onMutation?.(entity);
   }
 

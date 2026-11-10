@@ -226,3 +226,17 @@ it("replays a push into a resting body the same from a restored, awake copy", as
   }
   expect(authority.s.bodyState(3)?.x ?? 0).toBeGreaterThan(70);
 });
+
+it("keeps resting bodies asleep and unread through a rebuild of the ground they stand on", async () => {
+  const dogs = Array.from({ length: 6 }, (_, i) => createFauna("dog", i * 40, 0)),
+    rover = createFauna("dog", 600, 0);
+  const { s, tick } = await settled(...dogs, rover);
+  const before = dogs.map((e) => ({ ...e.position, wz: e.wz }));
+  const rebuilds = s.diagnostics.geometryRebuilds;
+  // The rover's sections change; the dogs' ground is compiled again, unchanged.
+  teleportBody(rover, { wx: 5000, wy: 5000, wz: 0 });
+  expect(tick().reads).toBeLessThanOrEqual(1);
+  expect(s.diagnostics.geometryRebuilds).toBe(rebuilds + 1);
+  for (let i = 0; i < 5; i++) expect(tick().reads).toBeLessThanOrEqual(1);
+  expect(dogs.map((e) => ({ ...e.position, wz: e.wz }))).toEqual(before);
+});

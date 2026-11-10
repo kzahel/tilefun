@@ -23,6 +23,7 @@ export async function openCdpTab(endpoint, { existingPage = false } = {}) {
   let nextId = 1;
   const pending = new Map();
   const listeners = { pageerror: [], load: [] };
+  const events = new Map();
   socket.addEventListener("message", (event) => {
     const message = JSON.parse(event.data);
     if (message.id) {
@@ -36,6 +37,8 @@ export async function openCdpTab(endpoint, { existingPage = false } = {}) {
       for (const listener of listeners.pageerror) listener(error);
     } else if (message.method === "Page.loadEventFired")
       for (const listener of listeners.load.splice(0)) listener();
+    // Any other protocol event, by its method name (Worker profiling listens to Target.*).
+    else for (const listener of events.get(message.method) ?? []) listener(message.params);
   });
   let sessionId;
   const call = (method, params, session) =>
@@ -76,7 +79,10 @@ export async function openCdpTab(endpoint, { existingPage = false } = {}) {
   const waitForTimeout = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   return {
     browserVersion: version.Browser,
-    on: (name, listener) => listeners[name]?.push(listener),
+    on(name, listener) {
+      if (listeners[name]) listeners[name].push(listener);
+      else events.set(name, [...(events.get(name) ?? []), listener]);
+    },
     evaluate,
     waitForTimeout,
     send,

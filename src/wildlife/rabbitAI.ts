@@ -115,7 +115,7 @@ export function updateRabbitAI(
     rest();
     return;
   }
-  if (planning && !planning.claim(rabbit, false)) return;
+  if (planning && !planning.claim(rabbit, false) && !planning.claimed(rabbit)) return;
   ai.activity++;
   if (ai.activity % 3 === 0) {
     ai.state = "action";

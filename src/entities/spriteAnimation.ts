@@ -60,3 +60,14 @@ export function setSpriteClipElapsed(entity: Entity, elapsedMs: number | undefin
   sprite.frameCol = clip.start + (clip.loop ? next % clip.count : Math.min(next, clip.count - 1));
   sprite.animTimer = elapsedMs % clip.frameDuration;
 }
+
+/** `tickSpriteAnimation` would show nothing new: a one-frame clip or a stopped walk cycle. */
+export function spriteHolds(entity: Entity): boolean {
+  const sprite = entity.sprite;
+  if (!sprite) return true;
+  const clip =
+    sprite.clip === undefined ? undefined : ENTITY_DEFS[entity.type]?.sprite?.clips?.[sprite.clip];
+  if (clip)
+    return sprite.clipElapsedMs === undefined && clip.count === 1 && sprite.frameCol === clip.start;
+  return sprite.frameCount <= 1 || (!sprite.moving && sprite.frameCol === 0 && !sprite.animTimer);
+}

@@ -46,6 +46,8 @@ export interface SceneBody {
   unmoved: boolean;
   /** Bodies in solved contact at the last full readback. */
   touching: number[];
+  /** Left out of the scene's per-tick passes while its actor naps. */
+  held: boolean;
 }
 
 type Dimensions = ReturnType<typeof physicsBodyDimensions>;
@@ -228,6 +230,7 @@ export function createSceneBody(
     centred: false,
     unmoved: false,
     touching: [],
+    held: false,
     state: initialState(entity, kind, d, rotation, bed),
   };
 }

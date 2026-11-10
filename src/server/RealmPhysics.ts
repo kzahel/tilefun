@@ -1,5 +1,6 @@
 import { CHUNK_SIZE_PX, ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
+import { isNapping } from "../entities/naps.js";
 import { updatePlayerSpriteFromInput } from "../entities/Player.js";
 import { groundMaterialAt } from "../physics/GroundMaterial.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
@@ -42,6 +43,8 @@ export function isEntityOnWater(world: World, entity: Entity): boolean {
 export class RealmPhysics {
   scene: PhysicsScene | undefined;
   private participants: Entity[] = [];
+  /** Actors held out of that step: see RealmNaps. */
+  private napping: Entity[] = [];
   /** The scene synchronize pass that admitted `participants`. */
   private stepPass = -1;
 
@@ -76,14 +79,14 @@ export class RealmPhysics {
   async reset(): Promise<void> {
     this.scene?.dispose();
     this.scene = await PhysicsScene.create();
-    this.participants = [];
+    this.participants = this.napping = [];
     this.stepPass = -1;
   }
 
   dispose(): void {
     this.scene?.dispose();
     this.scene = undefined;
-    this.participants = [];
+    this.participants = this.napping = [];
     this.stepPass = -1;
   }
 
@@ -102,6 +105,7 @@ export class RealmPhysics {
   /** Integrate one shared-physics step for the admitted entities. */
   step(
     active: Entity[],
+    napping: Entity[],
     activeSessions: readonly PlayerSession[],
     controls: ReadonlyMap<number, Movement>,
     controlTicks: ReadonlyMap<number, number>,
@@ -126,9 +130,10 @@ export class RealmPhysics {
     const scene = this.scene;
     if (!scene) throw Error("Realm physics is not initialized");
     this.participants = participants;
+    this.napping = napping;
     // Couplings publish resident partner IDs before the scene builds their joints.
     if (this.realm.vehicleRegistry) vehicleLinks(this.realm.vehicleRegistry).tick();
-    this.stepPass = scene.synchronize(participants);
+    this.stepPass = scene.synchronize(participants, undefined, napping);
     scene.step(intents, this.environment(), gravity);
     this.realm.railways?.finish();
     return { scene, participants, wasAirborne };
@@ -217,6 +222,9 @@ export class RealmPhysics {
         else admitted[index] = e;
       }
     }
-    this.scene?.synchronize(admitted);
+    // A nap disturbed since the step (an explicit edit) is admitted like any other body.
+    const held: Entity[] = [];
+    for (const e of this.napping) if (live(e)) (isNapping(e) ? held : admitted).push(e);
+    this.scene?.synchronize(admitted, undefined, held);
   }
 }

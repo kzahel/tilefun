@@ -217,7 +217,7 @@ async function samplePage({ seconds }) {
 }
 
 /** CPU profiles of the page's dedicated Workers (the authority runs in one). The
- * launched browser's page session reaches them through nested target messages. */
+ * page session reaches them through nested target messages, on a phone as well. */
 async function workerProfiler(cdp) {
   const sessions = [];
   const waiting = new Map();
@@ -316,7 +316,7 @@ try {
     page = await browser.newPage({ viewport: { width, height } });
   }
   const cdp = endpoint ? page : await page.context().newCDPSession(page);
-  const workers = profile && !endpoint ? await workerProfiler(cdp) : undefined;
+  const workers = profile ? await workerProfiler(cdp) : undefined;
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   // Computed here rather than in the page, so production builds work too.

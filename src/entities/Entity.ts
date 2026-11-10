@@ -196,6 +196,13 @@ export interface Entity {
   attributes?: Map<string, unknown>;
   /** Accumulated time since last AI/physics tick (server-only, not serialized). */
   tickAccumulator?: number;
+  /** Last tick the realm admitted this actor to simulation (server-only, not serialized). */
+  simTick?: number;
+  /** First and last tick of a nap: see `naps.ts` (server-only, not serialized). */
+  napFrom?: number | undefined;
+  napUntil?: number | undefined;
+  /** Last tick a replication stream compared this actor with its snapshot (server-only). */
+  comparedTick?: number;
   /** Current height above ground in world pixels (jump mechanic). Derived from wz - groundZ. */
   jumpZ?: number;
   /** Previous jumpZ (before last tick), for render interpolation. Ephemeral. */

@@ -29,13 +29,14 @@ export function isIdle(intent: MotionIntent | undefined) {
 
 /** Bodies whose motion a rider inherits this step, read before any motor changes. */
 export function supportMotions(
+  riders: readonly SceneBody[],
   bodies: ReadonlyMap<number, SceneBody>,
   intents: ReadonlyMap<number, MotionIntent>,
   blockedRails: ReadonlySet<unknown>,
   tick: number,
 ) {
   const supports = new Map<number, SupportMotion>();
-  for (const rider of bodies.values()) {
+  for (const rider of riders) {
     if (rider.state.supportId === undefined) continue;
     if (rider.kind === "loose" || rider.kind === "fixed") continue;
     const id = carryingSupportId(rider.entity, rider.state.supportId, bodies);

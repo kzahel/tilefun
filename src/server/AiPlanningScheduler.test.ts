@@ -41,7 +41,8 @@ it("admits synchronized mixed goals across every wildlife profile deterministica
         return false;
       },
     };
-    for (let tick = 0; tick < 60; tick++) {
+    // Two ordinary starts a tick: 158 goals due at once are all admitted within 79 ticks.
+    for (let tick = 0; tick < 90; tick++) {
       samples = 0;
       tickAllAI(animals, players, dts, () => 0.5, blocked, tick, planning);
       expect(samples).toBeLessThanOrEqual(768);
@@ -287,4 +288,104 @@ it("refreshes an idle duck waterline even when the shared search quota is exhaus
   expect(duck.noShadow).toBe(true);
   expect(duck.mallard?.activity).toBe(0);
   expect(duck.sprite?.clip).toBe(0);
+});
+
+it("serves refused goals first come, first served, and offers each turn's starts to the front", () => {
+  const rabbits = Array.from({ length: 7 }, (_, i) => ({ ...createRabbit(i * 40, 0), id: i + 1 }));
+  const planning = new AiPlanningScheduler();
+  const turn = (ask: readonly Entity[]) => {
+    planning.grant();
+    planning.begin();
+    for (const e of rabbits) planning.advance(e, 0.1, true);
+    return ask.filter((e) => planning.claim(e, false)).map((e) => e.id);
+  };
+  // Two ordinary starts a turn: the rest wait in the order they asked.
+  expect(turn(rabbits)).toEqual([1, 2]);
+  const waiting = rabbits.slice(2);
+  planning.grant();
+  // The front two are offered the coming turn; the others are certain to be refused.
+  expect(waiting.map((e) => planning.refusals(e, 1 / 60, 8))).toEqual([0, 0, 8, 8, 8]);
+  expect(waiting.map((e) => planning.priority(e, false))).toEqual([2, 2, 3, 3, 3]);
+  // Asked in reverse, the front of the line is still served: only it need ask.
+  planning.begin();
+  for (const e of rabbits) planning.advance(e, 0.1, true);
+  expect(
+    [...waiting]
+      .reverse()
+      .filter((e) => planning.priority(e, false) === 2 && planning.claim(e, false))
+      .map((e) => e.id),
+  ).toEqual([4, 3]);
+  expect(turn(waiting.slice(2))).toEqual([5, 6]);
+  // An alarm still finds a start when the ordinary ones are spent.
+  planning.grant();
+  planning.begin();
+  for (const e of rabbits) planning.advance(e, 0.1, true);
+  expect([
+    planning.claim(rabbits[0] as Entity, false),
+    planning.claim(rabbits[1] as Entity, false),
+  ]).toEqual([true, true]);
+  expect(planning.claim(rabbits[2] as Entity, false)).toBe(false);
+  expect(planning.claim(rabbits[3] as Entity, true)).toBe(true);
+});
+
+it("drops a request nobody claims so the line behind it moves", () => {
+  const [gone, next] = [createRabbit(0, 0), createRabbit(40, 0)];
+  const planning = new AiPlanningScheduler();
+  planning.begin();
+  for (const e of [gone, next]) planning.advance(e, 0.1, true);
+  planning.budget.starts = 0;
+  expect([planning.claim(gone, false), planning.claim(next, false)]).toEqual([false, false]);
+  // `gone` never asks again (it was startled, removed or left the simulation).
+  let served = 0;
+  for (let turns = 1; turns <= 40 && !served; turns++) {
+    planning.grant();
+    planning.begin();
+    planning.advance(next, 1 / 60, true);
+    if (planning.claim(next, false)) served = turns;
+  }
+  expect(served).toBe(1);
+  for (let turns = 0; turns < 40; turns++) planning.grant();
+  expect(planning.refusals(gone, 1 / 60, 8)).toBeLessThan(8);
+});
+
+it("lets a rabbit whose food search found nothing hop on the same start", () => {
+  const rabbit = createRabbit(0, 0),
+    planning = new AiPlanningScheduler();
+  const ai = required(rabbit.rabbit);
+  ai.timer = 0;
+  planning.begin();
+  planning.advance(rabbit, 0.1, true);
+  // The meadow search claims the start and comes back empty-handed.
+  const searched = { ...open, animalWork: () => !planning.claim(rabbit, false) };
+  updateRabbitAI(rabbit, 1 / 60, searched, [rabbit], [], planning);
+  expect(planning.budget.starts).toBe(3);
+  expect(ai.activity).toBe(1);
+  expect(ai.state).toBe("hop");
+});
+
+it("drops the requests of actors a realm no longer simulates, and forgets a closed world", () => {
+  const rabbits = Array.from({ length: 40 }, (_, i) => ({ ...createRabbit(i * 40, 0), id: i + 1 }));
+  const planning = new AiPlanningScheduler();
+  let tick = 1;
+  const simulate = (who: readonly Entity[]) => {
+    planning.grant(tick);
+    planning.begin();
+    for (const e of who) {
+      e.simTick = tick;
+      planning.advance(e, 0.1, true);
+    }
+    tick++;
+    return who.filter((e) => planning.claim(e, false)).map((e) => e.id);
+  };
+  // Forty goals, two starts: thirty-eight wait in line.
+  expect(simulate(rabbits)).toEqual([1, 2]);
+  // All but the last two leave the simulation (evicted, removed or asleep).
+  const left = rabbits.slice(38);
+  expect(simulate(left)).toEqual([]);
+  // Their turn comes at once, not after the departed ahead of them time out.
+  expect(simulate(left)).toEqual([39, 40]);
+  for (const e of rabbits) planning.advance(e, 0.1, true);
+  planning.clear();
+  expect(planning.refusals(rabbits[0] as Entity, 1 / 60, 8)).toBe(0);
+  expect(planning.claim(rabbits[0] as Entity, true)).toBe(false);
 });

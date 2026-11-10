@@ -1,4 +1,5 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
+import { wake } from "../entities/naps.js";
 import { setSpriteClip, setSpriteClipElapsed } from "../entities/spriteAnimation.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 
@@ -28,6 +29,7 @@ export function startleRabbit(rabbit: Entity, from: PositionComponent): boolean 
   rabbit.motionIntent ??= { vx: 0, vy: 0 };
   const ai = rabbit.rabbit;
   if (!ai || ai.alarmFrom || ai.state === "recover") return false;
+  wake(rabbit);
   ai.alarmFrom = { ...from };
   if (rabbit.wanderAI) rabbit.wanderAI.state = "scared";
   if (ai.state !== "hop") {

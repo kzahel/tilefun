@@ -514,25 +514,183 @@ The code-health baseline records one or two more lines in six files that gained
 an import or a guard; `PhysicsScene.ts`, `RealmActivity.ts` and `tickAllAI.ts`
 all shrink in size and worst-function complexity.
 
+### What remained after this slice
+
+Nothing marked an entity changed, so replication still compared all 1,051 each
+tick, and a dozen flat per-actor passes remained. The next section takes idle
+actors out of those passes.
+
+## Authority slice: napping actors, a planner line and geometry rebuilds (delivered 2026-11-10)
+
+The owner authorized taking idle actors out of the per-tick lists and asked for
+an investigation of phone physics.
+
+**Result** (M4 Pro, Node 24.22.1, three interleaved fresh processes each;
+[evidence](../benchmarks/235-authority-naps.json)):
+
+| Measure | Before (`536e7dbf`) | After |
+| --- | ---: | ---: |
+| Tick p50 | 4.03–4.08 ms | 2.56–2.88 ms |
+| Tick p95 | 4.61–5.43 ms | 3.48–4.21 ms |
+| Physics stage p50 / p95 | 1.50–1.51 / 1.75–2.13 ms | 0.94–1.01 / 1.35–1.62 ms |
+| Replication p50 / p95 | 0.78–0.81 / 1.09–1.22 ms | 0.61–0.72 / 0.86–1.03 ms |
+| AI p50 / p95 | 0.72–0.73 / 0.84–0.96 ms | 0.23–0.25 / 0.29–0.33 ms |
+| Actors napping per tick | 0 | 777 of 1,051 |
+| Actors in motion (sampled) | 42.8 | 50.5 |
+
+The tick is about a third shorter at p50 and about a quarter at p95, while
+slightly more rabbits move. **The 2 ms goal is not reached.** (The machine was
+busier than for the previous slice; quieter runs of the same code gave
+2.48–2.61 ms.)
+
+Pixel 7a, `render:bench` crowd scene in the seed-2026 city (about 885 rabbits and
+49 cars, Vite dev modules), before and after runs alternated:
+
+| Zoom | Worker tick p50 / p95 before | After |
+| --- | ---: | ---: |
+| 1 | 25.2–26.7 / 33.4–37.8 ms | 11.0–14.3 / 17.7–21.8 ms |
+| 0.25 | 27.0–34.2 / 43.5–48.5 ms | 14.3–17.7 / 24.1–28.2 ms |
+
+Phone physics p50 went from 12.5–20.8 to 4.9–8.2 ms. The median phone tick now
+fits a 60 Hz authority at zoom 1 and is at the limit at 0.25; p95 does not fit
+in either. The phone's main thread still misses frames (its own `update` rose
+from about 5.6 to 7–8 ms, since it now receives more ticks per second). The
+Steam Deck was not re-measured.
+
+### What the profile showed first
+
+Only about 80 of 1,000 rabbits were resting on a timer. About 670 had a finished
+rest and were asking the AI planner for one of its four starts every tick, and
+most starts went to food searches that found nothing (the bench has no food).
+So the crowd was mostly a queue, polled every tick.
+
+### Changes
+
+1. **Naps** (`src/server/RealmNaps.ts`, `src/entities/naps.ts`). Each tick the
+   admitted actors are split into those simulated and those napping. An actor
+   naps while its brain only waits on clocks, its body rests on static ground
+   (`PhysicsScene.restful`), its picture is still, no player is within 64 px and
+   it decides every tick (the outer ring, which decides every fourth tick on
+   accumulated time, stays awake, and a nap ends when its actor moves into
+   that ring).
+   Napping actors are left out of decisions, motion intents, the physics
+   synchronize/motor/readback passes (`held` bodies), post-physics finish, work
+   posing, the wildlife activity check and the replication comparison.
+   - A nap ends when a clock is due, when the actor is disturbed (`wake`: the
+     startle functions, `PhysicalEdits`, script handles, the planner, and the
+     solver waking the body), when a player comes near, and in any case on the
+     actor's own regular tick, once in nine. So an edit from a writer that does
+     not call `wake` is admitted to physics and replication at most 8 ticks
+     (133 ms) late, instead of never.
+   - On waking, the skipped clock ticks are replayed with the arithmetic the
+     decisions would have used, so a rest ends on the same tick as before.
+     Only rabbits declare their waiting state so far
+     (`src/wildlife/rabbitWaiting.ts`); another species opts in with `waits`
+     and `idles` in `WILDLIFE_SPECIES`.
+   - Replication skips the comparison only when some stream compared the actor
+     on or after its last simulated tick and this stream already holds that
+     snapshot, so a stream that fell behind (backpressure) still gets the change.
+   - Physics learns that a held body woke from the solver's active set rather
+     than by asking every body. Held bodies in resting contact keep their
+     contact entries, and the ground under held bodies stays compiled.
+2. **A first-come line in the AI planner** (`AiPlanningScheduler`). A goal refused
+   for lack of budget joins a line; each tick the front of the line is offered
+   that tick's ordinary starts and woken, so a waiting actor need not ask again.
+   This replaces the per-tick priority sort and rotation. Urgent alarms still go
+   first, and a request that waited half a second goes before alarms. Requests
+   of actors the realm no longer simulates are dropped when they reach the
+   front, a long line is swept of them, and closing a world clears the planner.
+3. **Static geometry rebuilds no longer wake the scene** (`resettle` in
+   `HeldBodies.ts`). Rebuilding the single static compound collider wakes every
+   body resting on it, and each needed most of a second to sleep again. In the
+   city that happened whenever a moving car changed the set of collision
+   sections. Bodies that were asleep, that the new ground moved less than
+   0.016 px in the following step and that are not falling (a falling body has
+   one step of free-fall speed, however weak the gravity) are put back to sleep
+   at once. With gravity switched off nothing shows whether a body is still
+   carried, so nothing is put back to sleep.
+4. **Wheel rays use a grid** (`WheelGrid.ts`). Each awake car's wheel rays tested
+   every body's bounding sphere in JavaScript; they now look up the bodies in
+   the ray's 2 m ground cells.
+
+### What changed in behaviour
+
+- **Planner order and rate.** Waiting goals are served first come, first served.
+  A rabbit whose food search finds nothing may now hop on the same start, instead
+  of the search using up its turn. That alone made the saturated crowd about
+  2.5 times livelier (110 rabbits in motion instead of 43–51), so ordinary goals
+  now get two of the four starts per tick (`ORDINARY_STARTS`), which keeps the
+  crowd as lively as before (50.5 in motion). Alarms can still use all four. In
+  a crowd of another species that saturates the planner, ordinary planning is
+  half as fast as before; a world with fewer animals than the budget sees no
+  difference. Raising `ORDINARY_STARTS` to 4 costs about 1 ms of tick on the Mac
+  in this bench.
+- **Decision order within a tick** is now offers, alarms, near, far, instead of a
+  rotation that depended on how many actors decided.
+- **Naps themselves are meant to change nothing a client receives**, and the
+  evidence is the crowd fixture: its wire digest is identical with 8-tick and
+  16-tick naps, and `RealmNaps.test.ts` compares a napping realm with one that
+  never naps, tick by tick. That is one fixture, not a proof for every species
+  and scene. The digest changed from `46beb807…` to `4fb15856…` because of the
+  planner changes above.
+- After a geometry rebuild a resting body's solver pose may differ from its
+  cached pose by up to 0.016 px (measured: about 0.00002 px) until its next
+  real readback.
+- Known limit, unchanged in kind: an edit made by code that does not call `wake`
+  on a napping actor is seen up to 8 ticks late.
+
+### Phone physics: what it is made of
+
+A Worker profile on the Pixel 7a (`render:bench --cdp … --profile`, now
+supported over a phone's DevTools connection) showed physics at 44–48% of the
+Worker. Within it, before the changes above:
+
+| Part | Share of Worker time |
+| --- | ---: |
+| Rapier's own step | 12–13% |
+| Reading bodies back (pose, velocity and contact callbacks) | 12% |
+| Wheel rays scanning every body in JavaScript | 8–9% |
+| Synchronize, motors, intents, finish | about 12% |
+
+So the solver was about a quarter to a third of phone physics; the rest was our
+code around it. The largest single cause was not visible in a flat profile: the
+static geometry rebuild that woke every body (change 3), which kept most bodies
+awake in the city and made every per-body pass run for all of them.
+
+### Validation
+
+3,562 native tests in the affected directories; the four crowd-bench tests;
+`streaming:bench -- --assert-ready`; typecheck, lint and the code-health ratchet;
+a production build; and the physics, prediction, riding, car, wildlife and
+split-screen browser cases. New tests cover: whole-realm equivalence with and
+without naps, exact clock catch-up, every wake path, the planner line, held
+bodies (not read, woken by a collision, removed, contacts kept, ground kept,
+falling when the ground goes, also at 1% gravity), a stream that fell behind,
+departed planner requests and the wheel grid. An independent review found four
+defects (re-settling at low gravity, the replication skip under backpressure,
+reduced-rate decision timing and departed requests clogging the line) and, on
+re-check, three leftovers (zero gravity, a tier change during a nap, clearing
+the planner when a world closes); each is fixed, with a regression test where
+one applies. Of 49 browser cases, the known flaky split-screen case and one fox
+case needed a retry in one run; the fox spec then passed 52 of 52.
+
+`PhysicsScene.ts` shrinks (edits moved to `BodyEdits.ts`); `Realm.ts` shrinks;
+`EntityHandle.ts` and `RealmActivity.ts` gain two lines and one.
+
 ### What remains for 2 ms
 
-Change-tracked replication in the sense of slice 3 is **not** delivered: nothing
-marks an entity changed, so replication still compares all 1,051 each tick,
-only more cheaply. The remaining cost is a dozen flat per-actor passes. Reaching
-2 ms needs idle actors to leave the per-tick lists:
-1. Rest timers as wake ticks. A resting rabbit's AI, animal work and planning
-   clocks decrement every tick. Scheduling the wake changes float accumulation,
-   so decision timing may shift by a tick: an intended output change that needs
-   its own equivalence argument.
-2. A realm-level resting set: actors whose body is dormant and whose AI is
-   waiting skip intents, finish, gameplay sync and replication comparison. This
-   needs a write barrier or an explicit "touched" call for gameplay edits.
-3. Fixed bodies (resources, anchors) are still read every tick; they are absent
+At rest the bench tick is about 1.1 ms; each rabbit in motion costs roughly
+20 µs per tick. The remaining cost is therefore in active actors and in a few
+whole-list steps:
+1. A hopping rabbit is awake for its whole one-second hop, though it stands
+   still for 0.6 s of it (gather and landing), and its body is read back with
+   contact callbacks every tick.
+2. Choosing who simulates (`RealmActivity.select`) and building the replication
+   interest list still visit every actor each tick.
+3. Parked cars, residents, other species and the outer ring of actors that
+   decide every fourth tick do not nap yet.
+4. Fixed bodies (resources, anchors) are still read every tick; they are absent
    from this bench but common in the woods.
-
-`render:bench` now prints the authority's stage timings for each cell, and
-`--profile` also records the busiest Worker (the authority) when the bench
-launches its own browser.
 
 ### Review boundary and next slices
 

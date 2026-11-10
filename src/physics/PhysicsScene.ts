@@ -1,21 +1,16 @@
 import RAPIER from "@dimforge/rapier3d-compat";
 import { CHUNK_SIZE_PX, JUMP_GRAVITY } from "../config/constants.js";
-import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
+import { wake } from "../entities/naps.js";
 import { isTrain } from "../railway/Train.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
-import { chunkKey } from "../world/types.js";
-import { AT_REST, driveMotor, isIdle, supportMotions } from "./BodyMotor.js";
+import { admitEntityEdits } from "./BodyEdits.js";
+import { driveMotor, isIdle, supportMotions } from "./BodyMotor.js";
 import { keepRest, publishBody } from "./BodyReadback.js";
-import {
-  rapierRotation,
-  rotateBodyVector,
-  rotationsEqual,
-  worldRotation,
-  yawRotation,
-} from "./BodyRotation.js";
+import { rapierRotation, rotateBodyVector, worldRotation, yawRotation } from "./BodyRotation.js";
 import { DumpBedBody } from "./DumpBedBody.js";
 import type { GroundMaterial } from "./GroundMaterial.js";
+import { hold, NOBODY, reachedSections, resettle, restingBodies, unedited } from "./HeldBodies.js";
 import { playerClimbIntent } from "./Ladders.js";
 import { teleportBody } from "./PhysicalEdits.js";
 import { physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
@@ -32,6 +27,7 @@ import {
 import { createSceneBody, type SceneBody } from "./SceneBody.js";
 import type { WheelContact } from "./VehicleChassis.js";
 import { VehicleCouplings } from "./VehicleCouplings.js";
+import { WheelGrid } from "./WheelGrid.js";
 
 export interface PhysicsGeometry extends CollisionGeometrySource {
   geometryVersion(cx: number, cy: number): { identity: unknown; revision: string | number };
@@ -75,10 +71,18 @@ export class PhysicsScene {
   readonly world: RAPIER.World;
   readonly origin = { x: 0, y: 0, z: 0 };
   private readonly bodies = new Map<number, Body>();
+  /** Bodies taking part this tick, and those held out of it: see `synchronize`. */
+  private readonly live: Body[] = [];
+  private readonly held: Body[] = [];
+  private readonly heldTouching: Body[] = [];
+  private readonly handles = new Map<number, Body>();
   private readonly colliderIds = new Map<number, number>();
   private readonly contacts = new Map<number, Set<number>>();
   private readonly sections = new Map<string, Section>();
   private readonly couplings = new VehicleCouplings();
+  private readonly wheelGrid = new WheelGrid();
+  /** The static geometry was rebuilt for the step in progress. */
+  private reshaped = false;
   private staticGeometry: RAPIER.Collider | undefined;
   private disposed = false;
   private originInitialized = false;
@@ -97,6 +101,8 @@ export class PhysicsScene {
     bodyReads: 0,
     /** Motors that evaluated their intent (the rest were dormant). */
     motorUpdates: 0,
+    /** Bodies held out of the last step. */
+    heldBodies: 0,
     wheelQueries: 0,
     wheelNarrowQueries: 0,
     stepMs: 0,
@@ -145,8 +151,14 @@ export class PhysicsScene {
     this.contacts.clear();
   }
 
-  /** Synchronize membership/explicit edits once, not once per neighboring motor. */
-  synchronize(entities: readonly Entity[], kinds?: ReadonlyMap<number, PhysicsBodyKind>) {
+  /** Synchronize membership/explicit edits once, not once per neighboring motor.
+   * `held` actors are napping (see RealmNaps): their bodies stay in the world, asleep,
+   * and are neither edited, motored nor read until the solver itself wakes them. */
+  synchronize(
+    entities: readonly Entity[],
+    kinds?: ReadonlyMap<number, PhysicsBodyKind>,
+    held: readonly Entity[] = [],
+  ) {
     if (this.disposed) throw Error("Physics scene is disposed");
     const pass = ++this.syncPass;
     if (!this.originInitialized && entities[0]) {
@@ -154,120 +166,80 @@ export class PhysicsScene {
       this.origin.z = (Math.floor(entities[0].position.wy / 4096) * 4096) / SCALE;
       this.originInitialized = true;
     }
-    let kept = 0;
-    for (const entity of entities) {
-      const c = entity.collider;
-      const kind = kinds?.get(entity.id) ?? physicsBodyKind(entity);
-      if (!c || entity.parentId !== undefined || (c.solid === false && kind !== "loose")) continue;
-      let entry = this.bodies.get(entity.id);
-      if (entry?.syncPass === pass) throw Error(`Duplicate physics body ${entity.id}`);
-      const dimensions = physicsBodyDimensions(entity);
-      if (entry && !sameShape(entry, kind, dimensions)) {
-        this.remove(entry);
-        entry = undefined;
+    this.live.length = this.held.length = this.heldTouching.length = 0;
+    for (const entity of entities) this.admit(entity, kinds, pass);
+    for (const entity of held) {
+      const entry = this.bodies.get(entity.id);
+      if (entry?.entity !== entity) {
+        this.admit(entity, kinds, pass);
+        continue;
       }
-      if (!entry) {
-        entry = createSceneBody(this.world, this.origin, entity, kind, dimensions);
-        const { collider } = entry;
-        this.bodies.set(entity.id, entry);
-        this.colliderIds.set(collider.handle, entity.id);
-        this.metrics.bodyCreates++;
-      } else {
-        // A replaced entity object has not received the cached pose yet.
-        if (entry.entity !== entity) {
-          entry.rested = 0;
-          entry.dormant = entry.centred = false;
-        }
-        entry.entity = entity;
-        this.admitEntityEdits(entry);
-      }
+      if (entry.syncPass === pass) throw Error(`Duplicate physics body ${entity.id}`);
+      if (!entry.held) hold(entry);
       entry.syncPass = pass;
-      kept++;
+      this.held.push(entry);
+      if (entry.touching.length) this.heldTouching.push(entry);
     }
-    if (kept !== this.bodies.size)
+    this.metrics.heldBodies = this.held.length;
+    if (this.live.length + this.held.length !== this.bodies.size)
       for (const body of [...this.bodies.values()]) if (body.syncPass !== pass) this.remove(body);
     this.couplings.sync(this.world, this.bodies);
     return pass;
   }
-  /** Commit explicit entity edits without integrating. Publication uses the same
-   * boundary, so a paused teleport/launch cannot mix new entities with old bodies. */
-  private admitEntityEdits(entry: Body) {
-    const entity = entry.entity,
-      s = entry.state;
-    entry.bed?.admit(entity, s, entry.collider);
-    entry.transporter?.admit(entity, entry.collider, entry.body);
-    const moved =
-      entity.position.wx !== s.x || entity.position.wy !== s.y || (entity.wz ?? 0) !== s.z;
-    const velocityChanged =
-      (entity.velocity?.vx ?? 0) !== s.vx ||
-      (entity.velocity?.vy ?? 0) !== s.vy ||
-      (entity.jumpVZ !== undefined && entity.jumpVZ !== s.vz);
-    const grounded = entity.jumpVZ === undefined;
-    const rotated =
-      entry.kind === "vehicle" &&
-      !!entity.bodyRotation &&
-      !rotationsEqual(entity.bodyRotation, s.rotation);
-    if (!moved && !rotated && !velocityChanged && grounded === s.grounded) return;
-    entry.rested = 0;
-    entry.dormant = entry.centred = false;
-    const rotation = entity.bodyRotation ?? s.rotation ?? yawRotation(s.heading);
-    const center = rotateBodyVector(rotation, 0, 0, entry.halfY);
-    if (rotated) {
-      entry.body.setRotation(rapierRotation(rotation), true);
-      const [x, y, z] = entity.bodyAngularVelocity ?? [0, 0, 0];
-      entry.body.setAngvel({ x: -x, y: -z, z: -y }, true);
-      s.rotation = s.prevRotation = rotation;
-      const forward = rotateBodyVector(rotation, 1, 0, 0);
-      if (Math.hypot(forward.x, forward.y) > 0.001)
-        s.heading = s.prevHeading = Math.atan2(forward.y, forward.x);
-      s.angularVelocity = entity.bodyAngularVelocity ?? [0, 0, 0];
+
+  private admit(
+    entity: Entity,
+    kinds: ReadonlyMap<number, PhysicsBodyKind> | undefined,
+    pass: number,
+  ) {
+    const c = entity.collider;
+    const kind = kinds?.get(entity.id) ?? physicsBodyKind(entity);
+    if (!c || entity.parentId !== undefined || (c.solid === false && kind !== "loose")) return;
+    let entry = this.bodies.get(entity.id);
+    if (entry?.syncPass === pass) throw Error(`Duplicate physics body ${entity.id}`);
+    const dimensions = physicsBodyDimensions(entity);
+    if (entry && !sameShape(entry, kind, dimensions)) {
+      this.remove(entry);
+      entry = undefined;
     }
-    if (moved || rotated)
-      entry.body.setTranslation(
-        {
-          x: entity.position.wx / SCALE + entry.offsetX + center.x - this.origin.x,
-          y: (entity.wz ?? 0) / SCALE + center.z,
-          z: entity.position.wy / SCALE + entry.offsetY + center.y - this.origin.z,
-        },
-        true,
-      );
-    if (velocityChanged || grounded !== s.grounded)
-      entry.body.setLinvel(
-        {
-          x: (entity.velocity?.vx ?? 0) / SCALE,
-          y: (entity.jumpVZ ?? 0) / SCALE,
-          z: (entity.velocity?.vy ?? 0) / SCALE,
-        },
-        true,
-      );
-    s.x = entity.position.wx;
-    s.y = entity.position.wy;
-    s.z = entity.wz ?? 0;
-    if (moved) {
-      s.prevX = s.x;
-      s.prevY = s.y;
-      s.prevZ = s.z;
-      s.prevHeading = s.heading;
+    if (!entry) {
+      entry = createSceneBody(this.world, this.origin, entity, kind, dimensions);
+      const { collider } = entry;
+      this.bodies.set(entity.id, entry);
+      this.handles.set(entry.body.handle, entry);
+      this.colliderIds.set(collider.handle, entity.id);
+      this.metrics.bodyCreates++;
+    } else {
+      // A replaced entity object has not received the cached pose yet.
+      if (entry.entity !== entity) {
+        entry.rested = 0;
+        entry.dormant = entry.centred = false;
+      }
+      entry.entity = entity;
+      entry.held = false;
+      admitEntityEdits(entry, this.origin, this.contacts);
     }
-    s.vx = entity.velocity?.vx ?? 0;
-    s.vy = entity.velocity?.vy ?? 0;
-    s.vz = entity.jumpVZ ?? 0;
-    s.grounded = grounded;
-    s.groundZ = entity.groundZ ?? s.z;
-    s.normalX = s.normalZ = 0;
-    s.normalY = 1;
-    delete s.supportId;
-    delete s.inheritedVx;
-    delete s.inheritedVy;
-    delete s.jumpQueued;
-    for (const neighbor of this.contacts.get(entity.id) ?? [])
-      this.contacts.get(neighbor)?.delete(entity.id);
-    this.contacts.delete(entity.id);
+    entry.syncPass = pass;
+    this.live.push(entry);
+  }
+
+  /** A body that would do nothing this tick whether or not it took part: asleep on
+   * static ground with an idle motor and carrying no pending edit. */
+  restful(entity: Entity): boolean {
+    const entry = this.bodies.get(entity.id);
+    return (
+      entry?.entity === entity &&
+      entry.dormant &&
+      entry.unmoved &&
+      this.restsUnread(entry) &&
+      unedited(entry)
+    );
   }
 
   private remove(entry: Body) {
     this.couplings.remove(this.world, entry.entity.id);
     this.colliderIds.delete(entry.collider.handle);
+    this.handles.delete(entry.body.handle);
     this.world.removeRigidBody(entry.body);
     this.bodies.delete(entry.entity.id);
   }
@@ -279,31 +251,7 @@ export class PhysicsScene {
     const started = performance.now();
     let changed = false;
     const needed = new Map<string, { cx: number; cy: number }>();
-    let lastLeft = Number.NaN,
-      lastRight = 0,
-      lastTop = 0,
-      lastBottom = 0;
-    for (const entry of this.bodies.values()) {
-      const c = entry.entity.collider;
-      if (!c) continue;
-      const box = getEntityAABB(entry.entity.position, c);
-      // A body asleep at its last readback and not edited since has no velocity.
-      const v = entry.rested ? AT_REST : entry.body.linvel();
-      const margin = 32 + Math.hypot(v.x, v.z) * SCALE * PHYSICS_DT;
-      const left = Math.floor((box.left - margin) / CHUNK_SIZE_PX),
-        right = Math.floor((box.right + margin) / CHUNK_SIZE_PX),
-        top = Math.floor((box.top - margin) / CHUNK_SIZE_PX),
-        bottom = Math.floor((box.bottom + margin) / CHUNK_SIZE_PX);
-      // Neighbours usually need the same sections as the body before them.
-      if (left === lastLeft && right === lastRight && top === lastTop && bottom === lastBottom)
-        continue;
-      lastLeft = left;
-      lastRight = right;
-      lastTop = top;
-      lastBottom = bottom;
-      for (let cy = top; cy <= bottom; cy++)
-        for (let cx = left; cx <= right; cx++) needed.set(chunkKey(cx, cy), { cx, cy });
-    }
+    reachedSections(this.live, needed);
     for (const box of extra)
       for (
         let cy = Math.floor(box.top / CHUNK_SIZE_PX);
@@ -316,6 +264,13 @@ export class PhysicsScene {
           cx++
         )
           needed.set(`${cx},${cy}`, { cx, cy });
+    // Held bodies stand where they stood: ask after them only before dropping a section.
+    if (this.held.length)
+      for (const key of this.sections.keys())
+        if (!needed.has(key)) {
+          reachedSections(this.held, needed);
+          break;
+        }
     if (needed.size > 512) throw Error("Physics section residency exceeds 512 sections");
     for (const key of this.sections.keys())
       if (!needed.has(key)) {
@@ -349,6 +304,7 @@ export class PhysicsScene {
       changed = true;
     }
     if (!changed) return;
+    this.reshaped = true;
     const parts = [...this.sections.values()].flatMap((section) => section.parts);
     this.metrics.geometryParts = parts.length;
     if (parts.length) {
@@ -383,7 +339,7 @@ export class PhysicsScene {
       : undefined;
     // Cheap bounding spheres reject distant residents before entering WASM. Direct
     // collider queries stay correct on the FIRST tick and after arbitrary restores.
-    for (const other of this.bodies.values()) {
+    for (const other of this.wheelGrid.near(this.bodies.values(), origin, direction, length)) {
       if (other === owner) continue;
       const p = other.queryCenter,
         dx = p.x - origin.x,
@@ -422,18 +378,20 @@ export class PhysicsScene {
     if (this.disposed) throw Error("Physics scene is disposed");
     const started = performance.now();
     this.prepareGeometry(geometry);
+    // Rebuilding the static geometry wakes every body resting on it.
+    const resting = this.reshaped ? restingBodies(this.bodies.values()) : NOBODY;
+    this.reshaped = false;
     this.world.propagateModifiedBodyPositionsToColliders();
-    for (const e of this.bodies.values())
-      e.bed?.advance(e.state, e.body, e.collider, this.staticGeometry);
+    for (const e of this.live) e.bed?.advance(e.state, e.body, e.collider, this.staticGeometry);
     this.world.gravity = { x: 0, y: (-JUMP_GRAVITY * gravity) / SCALE, z: 0 };
-    const bodies = [...this.bodies.values()];
-    const blockedRails = blockedRailGroups(bodies, this.staticGeometry, intents);
+    const blockedRails = blockedRailGroups(this.live, this.bodies, this.staticGeometry, intents);
     // Read support motion before changing any motors: actor order cannot change it.
     // Prescribed supports use this tick's admitted trajectory, so riders do not
     // lag a start or slide one extra tick after a station stop.
     const vehicleInputs: { entry: Body; input: MotionIntent }[] = [];
-    const supports = supportMotions(this.bodies, intents, blockedRails, this.tick);
-    for (const [id, entry] of this.bodies) {
+    const supports = supportMotions(this.live, this.bodies, intents, blockedRails, this.tick);
+    for (const entry of this.live) {
+      const id = entry.entity.id;
       if (entry.kind === "loose") {
         const v = entry.body.linvel();
         entry.incomingVelocity = v;
@@ -498,12 +456,13 @@ export class PhysicsScene {
         ({ entry, input }) => !entry.body.isSleeping() || (input.driveSpeed ?? 0) !== 0,
       )
     )
-      for (const entry of this.bodies.values()) {
+      for (const entry of this.live) {
         // A centre captured while the body rested stays exact until it wakes.
         if (entry.centred && entry.rested === 2) continue;
         entry.queryCenter = entry.body.translation();
         entry.centred = entry.rested === 2;
       }
+    this.wheelGrid.reset();
     // All chassis read the same pre-impulse state, including dynamic supports.
     const prepared = vehicleInputs.map(({ entry, input }) => ({
       entry,
@@ -524,10 +483,30 @@ export class PhysicsScene {
       }
     for (const { entry } of prepared) entry.incomingVelocity = entry.body.linvel();
     this.world.step();
+    resettle(resting, -this.world.gravity.y * PHYSICS_DT);
     this.contacts.clear();
     this.tick++;
     this.metrics.worldSteps++;
-    for (const entry of this.bodies.values()) this.readBody(entry);
+    for (const entry of this.live) this.readBody(entry);
+    // A held body's solved contacts are those it rested with.
+    for (const entry of this.heldTouching) if (entry.held) keepRest(entry, this.contacts);
+    // Only the solver wakes a held body; it reports the few that are awake.
+    if (this.held.length) {
+      const woken: Body[] = [];
+      this.world.islands.forEachActiveRigidBodyHandle((handle: number) => {
+        const entry = this.handles.get(handle);
+        if (entry?.held) woken.push(entry);
+      });
+      for (const entry of woken) {
+        // An edit made during the nap is admitted next tick; reading now would undo it.
+        if (unedited(entry)) this.readBody(entry);
+        // Put back to sleep after a geometry rebuild: its nap goes on undisturbed.
+        if (entry.rested !== 2 || !entry.body.isSleeping()) {
+          entry.held = false;
+          wake(entry.entity);
+        }
+      }
+    }
     for (const pair of this.couplings.pairs()) this.addContact(...pair);
     this.metrics.stepMs = performance.now() - started;
   }
@@ -735,7 +714,7 @@ export class PhysicsScene {
     });
     entry.entity.bodyRotation = entry.entity.prevBodyRotation = rotation;
     entry.entity.bodyAngularVelocity = [0, 0, 0];
-    this.admitEntityEdits(entry);
+    admitEntityEdits(entry, this.origin, this.contacts);
     entry.body.setAngvel({ x: 0, y: 0, z: 0 }, true);
     entry.state.angularVelocity = [0, 0, 0];
     entry.state.sleeping = false;
@@ -897,7 +876,7 @@ export class PhysicsScene {
       if (state.sleeping) entry.body.sleep();
       entry.state = { ...state };
       entry.rested = 0;
-      entry.dormant = entry.centred = entry.unmoved = false;
+      entry.dormant = entry.centred = entry.unmoved = entry.held = false;
       entry.touching.length = 0;
       entry.bed?.publish(entry.entity, entry.state, entry.collider);
       // Publish state and contact membership supplied by the same snapshot.

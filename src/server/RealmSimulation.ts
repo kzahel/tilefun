@@ -30,6 +30,7 @@ type GameplayRealm = Pick<
 export function resolveSimulationGameplay(
   realm: GameplayRealm,
   active: Entity[],
+  awake: Entity[],
   participants: Entity[],
   entityTickDts: ReadonlyMap<Entity, number>,
   work: WorkContext,
@@ -79,8 +80,9 @@ export function resolveSimulationGameplay(
     ),
     scene,
   );
-  realm.animalWork.syncAll(active);
-  realm.ownedBalls.sync(active);
+  // A napping animal carries nothing and is no toy: only simulated actors need posing.
+  realm.animalWork.syncAll(awake);
+  realm.ownedBalls.sync(awake);
 
   // Continuous motion/AI state reaches storage through the RealmRecords sweep (234).
   // ── TickService.postSimulation ──
