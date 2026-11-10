@@ -1,4 +1,5 @@
 import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
+import { CROWD_VIEW, crowdBenchRecipe } from "../scenarios/CrowdBenchRecipe.js";
 import { JUMP_STARTS, type JumpLane, jumpParkRecipe } from "../scenarios/JumpParkRecipe.js";
 import { outskirtsParkRecipe, PARK_STARTS } from "../scenarios/OutskirtsParkRecipe.js";
 import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
@@ -44,6 +45,7 @@ const STATIC_FIXTURES: Record<
   garage: { recipe: undergroundGarageRecipe, starts: GARAGE_STARTS },
   traffic: { recipe: roadTrafficRecipe, starts: TRAFFIC_STARTS },
   "traffic-crowd": { recipe: crowdedRoadTrafficRecipe },
+  crowd: { recipe: () => crowdBenchRecipe() },
   train: { recipe: cityTrainRecipe },
 };
 
@@ -74,7 +76,7 @@ export function geometryStarts(
 ): Record<string, Start> {
   if (generated) return generated.starts;
   if (fixture === "train") return { bench: { position: recipe.player.position, z: 0 } };
-  if (fixture === "traffic-crowd" || ambient)
+  if (fixture === "traffic-crowd" || fixture === "crowd" || ambient)
     return { sidewalk: { position: recipe.player.position, z: 0 } };
   if (fixture === "car-dynamics") return DYNAMICS_STARTS;
   if (fixture === "car-jumps") return JUMP_STARTS;
@@ -85,6 +87,7 @@ export function geometryStarts(
 
 const TERRAIN_FIXTURES = new Set([
   "realm",
+  "crowd",
   "traffic",
   "traffic-crowd",
   "train",
@@ -96,6 +99,7 @@ const TERRAIN_FIXTURES = new Set([
 const FOLLOW_FIXTURES = new Set(["outskirts-park", "realm", "train"]);
 const ZOOMS: Record<string, number> = {
   "traffic-crowd": 0.125,
+  crowd: CROWD_VIEW.zoom,
   "car-jumps": 0.25,
   "tree-house": 1,
   "outskirts-park": 0.7,
@@ -112,7 +116,9 @@ export function geometryView({ fixture, generated, ambient }: FixtureChoice) {
     ? { wx: generated.bridge.x * 16, wy: generated.bridge.y * 16 - 16 }
     : fixture === "tree-house"
       ? { wx: TREE_HOUSE_AT.wx, wy: TREE_HOUSE_AT.wy - 72 }
-      : (ambient?.camera ?? { wx: 0, wy: -16 });
+      : fixture === "crowd"
+        ? CROWD_VIEW.camera
+        : (ambient?.camera ?? { wx: 0, wy: -16 });
   const override = Number(new URLSearchParams(location.search).get("zoom")) || undefined;
   return {
     terrain: !!generated || !!ambient || TERRAIN_FIXTURES.has(fixture),

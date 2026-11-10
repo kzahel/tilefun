@@ -10,13 +10,12 @@ const option = (name, fallback) =>
   process.argv.find((a) => a.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const output = option("output", path.join(os.tmpdir(), "tilefun-realm-physics"));
 const fixture = option("fixture", "realm");
-if (!["realm", "traffic-crowd"].includes(fixture)) throw Error("Unknown Realm fixture");
+if (!["realm", "traffic-crowd", "crowd"].includes(fixture)) throw Error("Unknown Realm fixture");
 const allocations = process.argv.includes("--allocations");
 const cpuRate = Number(option("cpu", "1"));
 if (!Number.isFinite(cpuRate) || cpuRate < 1 || cpuRate > 16)
   throw Error("CPU throttle must be 1–16");
-const counts =
-  fixture === "traffic-crowd" ? [0] : option("counts", "0,24,96,384").split(",").map(Number);
+const counts = fixture !== "realm" ? [0] : option("counts", "0,24,96,384").split(",").map(Number);
 // A comparison uses separate immutable bundles, never a dormant game backend.
 const referenceBase = option("reference-base", "");
 const lanes = referenceBase ? ["reference-legacy", "shared"] : ["shared"];
@@ -33,7 +32,7 @@ const cdp = option("cdp", "");
 if (cdp && cpuRate !== 1) throw Error("Physical devices do not use CPU emulation");
 const browser = cdp
   ? await chromium.connectOverCDP(cdp)
-  : await chromium.launch({ channel: "chromium" });
+  : await chromium.launch({ channel: "chromium", headless: !process.argv.includes("--headed") });
 const context = cdp
   ? browser.contexts()[0]
   : await browser.newContext({ viewport: { width: 1280, height: 900 } });

@@ -44,6 +44,7 @@ const FIXTURES = [
   "realm",
   "traffic",
   "traffic-crowd",
+  "crowd",
   "racetrack",
   "shopping",
   "train",

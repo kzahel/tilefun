@@ -1,5 +1,19 @@
 # Streaming and gameplay performance
 
+## Crowd bench (2026-11-10)
+
+`npm run crowd:bench` is the repeatable crowd workload: 1,000 rabbits and 50
+parked cars in one 5×5-chunk view on flat ground.
+- It is seeded and runs on a simulated clock, so work counts repeat exactly.
+- `--compare` and `--profile` are available.
+- The same recipe is the `crowd` world-geometry lab fixture, measured with
+  `benchmark-realm-physics-browser.mjs --fixture=crowd --headed`.
+
+Baseline: authority tick 6.5 ms p50 while only 64 of 1,051 actors are in
+motion; the lab draws about 2.3 fps because of rabbit shadow projection.
+[235](../tactical/235-crowd-bench-and-unnecessary-work.md) owns the inventory
+of unnecessary work and the goal: tick ≤ 2 ms and the lab at 120 Hz.
+
 ## Actor stress: rabbits and parked cars (2026-11-09)
 
 `npm run stress:bench -- --headed --rabbits=100 --cars=20` opens a new seed-2026
