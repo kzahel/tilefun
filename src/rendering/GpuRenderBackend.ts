@@ -54,18 +54,16 @@ export class GpuRenderBackend extends RasterRenderBackend {
     this.meshes = new GpuMeshBodies(surface);
     surface.meshBody = (camera, item) => this.meshes.draw(camera, item, this.sheets);
     surface.meshReady = this.meshes.ready;
-    surface.meshCasters = this.meshes.shadowCasters;
     // Outdoor scene passes draw with the padded camera and no other transform.
     // Rooms (no world depth) and clipped passes keep the plain ground shadow.
     const sink: RasterSurface = surface;
-    sink.deferredShadow = (camera, shadow) => {
+    sink.deferredShadow = (camera, shadow, gate) => {
       const target = surface.worldTarget;
       return (
         !!target &&
         surface.worldDepth &&
         !this.sceneClipped &&
-        (shadow.casterId === undefined || this.meshes.shadowCasters.has(shadow.casterId)) &&
-        this.shadows.queue(target, camera, shadow)
+        this.shadows.queue(target, camera, shadow, gate)
       );
     };
     const ctx = this.overlay.getContext("2d");
@@ -85,6 +83,8 @@ export class GpuRenderBackend extends RasterRenderBackend {
   beginView() {
     this.views++;
     this.shadows.clear();
+    // Bodies drawn in one view say nothing about the next view's fallbacks.
+    this.meshes.shadowCasters.clear();
     this.surface.beginView();
   }
   override submit(view: RenderView, pass: RenderPass) {
@@ -109,7 +109,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
     const target = this.surface.worldTarget;
     if (!target || !this.shadows.pending) return;
     this.surface.flush();
-    this.shadows.draw(this.surface.renderer, target);
+    this.shadows.draw(this.surface.renderer, target, this.meshes.shadowCasters);
     this.surface.renderer.setRenderTarget(target);
   }
   /** Ovals drawn by the last depth shadow pass (diagnostics). */

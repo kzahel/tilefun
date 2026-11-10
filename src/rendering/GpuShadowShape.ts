@@ -45,7 +45,7 @@ export function ovalShadow(e: Entity, x: number, y: number, supportZ: number): G
 }
 
 const VEHICLE_SLACK = 4;
-/** A vehicle's oriented footprint under its body. The limit is the body's
+/** A vehicle's (or boat's or train's) oriented footprint under its body. The limit is the body's
  * underside plane, so its own roof and bonnet never receive the shadow; the
  * band reaches down to the surface under its centre (a jump or a drop). */
 export function vehicleShadow(
@@ -54,6 +54,8 @@ export function vehicleShadow(
   y: number,
   z: number,
   supportZ: number,
+  /** A drawn mesh body (rounded mask, gated on the body); else a soft oval. */
+  body: boolean,
   mesh?: SurfaceMesh,
   rotation?: BodyRotation,
 ): GpuShadow | undefined {
@@ -78,7 +80,7 @@ export function vehicleShadow(
     vy,
     plane: [a, b, z - a * x - b * y + VEHICLE_SLACK],
     band: VEHICLE_SLACK * 2 + Math.max(0, z - supportZ),
-    mask: "vehicle",
-    casterId: e.id,
+    mask: body ? "vehicle" : "oval",
+    ...(body ? { casterId: e.id } : {}),
   };
 }

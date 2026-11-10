@@ -12,29 +12,33 @@ distance that sets the fog end and the hidden fixed camera's streamed area, and 
 rooms from the fixed view's own room rasters (floor plane, painted wall heights,
 anchor-placed furniture, flat rugs).
 
-[220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) projects
-vehicle shadows from the displayed rotated bounding volume's finite upper faces.
+[220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) projected
+vehicle shadows on the CPU (replaced by the GPU depth pass in 236, below). It cast
+them from the displayed rotated bounding volume's finite upper faces.
 Using a scalar root height could drop the footprint through a ramp crest to
 terrain. Up to three disjoint caster quads share the existing soft mask; each has
 its own ceiling, preserving underpass shadows even when an exposed end is higher.
 Receiver broadphase bounds use actual polygon vertices rather than extrapolated
 AABB corners. The collector uses the same displayed orientation as the mesh.
 
-[236](../tactical/236-render-scorecard-and-gpu-shadows.md) draws actor ovals and
-mesh vehicle shadows in a GPU pass (`GpuDeferredShadows`), the default since
-2026-11-10. `?shadows=projected` keeps the projected decals for comparison.
+[236](../tactical/236-render-scorecard-and-gpu-shadows.md) draws every body
+shadow of the GPU fixed view in one pass (`GpuDeferredShadows`). There is no
+second path and no switch.
 - Collection attaches a `GpuShadow` (`GpuShadowShape.ts`) to the caster's sprite:
-  a footprint, a mask, an upper plane and a band of heights below it.
+  a footprint, a mask, an upper plane and a band of heights below it. Actors are
+  ovals; vehicles, boats and trains are oriented footprints.
 - After the world is complete, one instanced draw reconstructs each visible point
   from the world depth texture and shades upward-facing receivers in that band.
 - `GpuRenderBackend` owns the pass and `presentWorld`; hosts present through it.
 - The world target gets a depth texture once a shadow asks for one.
-- Rooms, clipped scene passes and the review raster draw the plain ground shadow.
-- Particles, landing rings, boats and trains keep the projected path; receivers
-  also still serve the support point query.
+- Sinks without world depth (rooms, clipped scene passes, the review raster) draw
+  the plain ground shadow for ovals.
+- Receivers serve the support point query and contact effects (particles,
+  landing rings) only. Below 0.2× none are built.
 - The first-person view (229) is a separate renderer and draws no shadows.
-- Known differences (ledges, crest seams, low ramp ends, tilted stacks) are listed
-  in 236; the renderer lab's `probeDeferredShadows` compares both paths.
+- Known differences from the deleted projection (ledges, crest seams, low ramp
+  ends, tilted stacks) are listed in 236; the renderer lab's
+  `probeDeferredShadows` compares the pass with a CPU oracle.
 
 [235](../tactical/235-crowd-bench-and-unnecessary-work.md) makes the receiver
 partition (`SurfacePartition.ts`) cost follow real overlaps:

@@ -2,35 +2,37 @@
 
 ## Render scorecard and GPU depth shadows (2026-11-10)
 
-`npm run render:bench` is the rendering scorecard: `town`, `crowd` and `woods`
+`npm run render:bench` is the rendering scorecard: `city`, `crowd` and `woods`
 scenes of the seed-2026 world at zooms 1, 0.25 and 0.1, with a steady camera.
 Each cell reports frame cadence, render and update callbacks, submit time, the
-GPU timer query where available and render plus `gl.finish()`. `--compare`,
-`--profile`, `--query` and `--cdp` are available.
+GPU timer query where available and render plus `gl.finish()`. It runs against
+the isolated Vite server or a production origin (`--base`), in bundled Chromium,
+a phone's Chrome or the packaged Deck shell (`--cdp`, `--attach-page`).
 [236](../tactical/236-render-scorecard-and-gpu-shadows.md) owns the commands,
-limits, baselines and the next slices.
+limits, tables and next options.
 
-Baselines on the M4 Pro (120 Hz) and Pixel 7a (60 Hz):
-- Rendering is CPU-bound on both. A blocking GPU finish adds under 1 ms.
-- `town` and `woods` hold cadence at every zoom on both devices. The phone's
-  0.1× overview no longer misses frames.
-- Only the 1,000-rabbit crowd misses: render p50 9.6 ms on the Mac and 29.5 ms on
-  the phone at 0.25. Submission is 1.3 and 4.0 ms of that.
-- In the Node render lane, shadow projection was about 7.5 of 9.2 ms of crowd
-  scene preparation. Collecting and sorting 1,051 actors is 1.7 ms, so a
-  retained or instanced scene is not the first target.
+Findings:
+- Rendering is CPU-bound on the M4 Pro, Pixel 7a and Steam Deck. GPU time is a
+  few milliseconds at most.
+- `city` and `woods` hold cadence at every zoom on all three.
+- Shadow projection was about 7.5 of 9.2 ms of crowd scene preparation.
+  Collecting and sorting 1,051 actors is about 1.6 ms, so a retained or
+  instanced scene is not the first target.
 
-Actor ovals and mesh vehicle shadows are now drawn in one instanced GPU pass from
-world depth instead of CPU receiver clipping (default by owner decision;
-`?shadows=projected` keeps the decals for comparison, with unchanged scene
-hashes). Crowd results:
-- Scene preparation in the Node lane: 8.3–9.5 → 1.5 ms.
-- M4 Pro at 0.25: render 8.4 → 3.6 ms, missed frames 115 of 487 → 0 of 600.
-- Pixel 7a at 0.25: render 22.9 → 10.7 ms, median frame 33 → 17 ms.
+Delivered:
+- Body shadows (actors, vehicles, boats, trains, at every zoom) are drawn in one
+  instanced GPU pass from world depth. The projected body-shadow path is deleted;
+  receiver projection remains for contact effects. Crowd scene preparation:
+  8.3–9.5 → 1.6 ms.
+- Resting replicated entities are presented without a per-frame copy:
+  presentation sampling 0.73 → 0.31 ms per frame.
+- M4 Pro, production build: every cell holds 120 Hz; crowd render is 2.5–4.8 ms
+  (it was 9.6 ms at 0.25 and missed 161 of 410 frames).
 
-The crowd at 0.1 is unchanged (the overview LOD draws plain shadows) and is now
-the worst cell. The Steam Deck is not measured yet, and there is no dense-city
-scene: `woods` was first mislabelled as one.
+Open:
+- With 1,000 rabbits the Pixel 7a and Steam Deck are authority-bound (ticks of
+  32–46 ms), so their crowd cells still miss frames. 235 owns that.
+- The Deck spends 7.7 ms submitting the crowd at 0.1.
 
 ## Crowd bench (2026-11-10)
 

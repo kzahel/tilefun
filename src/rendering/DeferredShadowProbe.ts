@@ -6,7 +6,7 @@ import { Camera } from "./Camera.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
 import { type GpuShadow, vehicleShadow } from "./GpuShadowShape.js";
 import { poseOrientation } from "./MeshPresentation.js";
-import { projectShadow, surfaceDecals } from "./ProjectedDecals.js";
+import { shadowFootprint, surfaceDecals } from "./ProjectedDecals.js";
 import { presentSurfaceScene } from "./presentSurfaceScene.js";
 import { SceneFrame } from "./SceneFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
@@ -54,8 +54,8 @@ function comparePixels(
   return { shadedProjected, shadedDeferred, differing, maxDifference };
 }
 
-/** The same oval shadow drawn two ways over one ramp/deck fixture (236): the
- * projected CPU decals and the GPU depth pass. Reports how far their pixels
+/** The same shadow drawn two ways over one ramp/deck fixture (236): the GPU
+ * depth pass, and an oracle that clips the footprint against receivers on the CPU. Reports how far their pixels
  * differ, per case and zoom. Pixel reads exist only in this diagnostic. */
 export async function probeDeferredShadows() {
   const width = 256,
@@ -191,14 +191,15 @@ export async function probeDeferredShadows() {
         car.wz = z;
         const rotation = poseOrientation(yaw, pitch, 0);
         car.vehicleHeading = yaw;
+        // The oracle clips the same footprint against receivers on the CPU.
         const decals = surfaceDecals(
-          projectShadow(receivers, car, x, y, z, box, rotation),
+          receivers.project(shadowFootprint(car, x, y, box, rotation), z),
           "vehicle",
           0.28,
         );
         const support = receivers.hit(x, y, z + 1)?.point[2] ?? 0;
         const caster = sprite("blank", x, y, z);
-        const shape = vehicleShadow(car, x, y, z, support, box, rotation);
+        const shape = vehicleShadow(car, x, y, z, support, true, box, rotation);
         if (!shape) throw Error("Missing vehicle shadow shape");
         delete shape.casterId; // the probe draws no mesh body
         caster.gpuShadow = shape;

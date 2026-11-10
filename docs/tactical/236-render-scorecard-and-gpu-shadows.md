@@ -1,8 +1,8 @@
 # 236 — Render scorecard and GPU depth shadows
 
-Status: delivered · 2026-11-10. Scorecard; GPU depth shadows for actor ovals and
-mesh vehicles, the default by owner decision (`?shadows=projected` keeps the
-projected decals for comparison).
+Status: delivered · 2026-11-10. Scorecard on the M4 Pro, Pixel 7a and Steam Deck;
+body shadows drawn only by the GPU depth pass (owner decision: no second path);
+resting entities presented without copies.
 Owner: [performance](../topics/performance.md); renderer contracts in
 [rendering architecture](../topics/rendering-architecture.md).
 
@@ -19,12 +19,13 @@ and a steady camera after terrain settles.
 
 | Scene | Content |
 | --- | --- |
-| `town` | The streaming bench's city crossing: shops and a few cars (arrival 300,519) |
+| `city` | The generated city: apartment and shop blocks, traffic and a station (arrival 300,519, the streaming bench's city) |
 | `crowd` | The same place plus 1,000 rabbits and 50 parked cars |
 | `woods` | Woodland beside the racetrack (arrival −380,−364): the most props and wildlife in an overview |
 
-The first report called `woods` "city", after an older note about that arrival.
-In the current generator it is woodland, so there is no dense-city cell yet.
+Earlier reports named these differently: `city` was `street` and then `town`,
+and `woods` was first called "city" after an older note about that arrival. The
+0.1× view of arrival 300,519 shows it is the city; −380,−364 is woodland.
 
 Each scene runs at zooms 1, 0.25 and 0.1 by default. Each cell reports:
 - frame interval p50/p95 and frames that missed the display cadence;
@@ -40,7 +41,11 @@ Each scene runs at zooms 1, 0.25 and 0.1 by default. Each cell reports:
 Options:
 - `--headed` uses the display's real cadence (headless rAF runs at 60 Hz).
 - `--scenes=`, `--zooms=`, `--seconds=`, `--viewport=` select the matrix.
-- `--query=shadows=projected` adds game URL parameters, for an A/B of a renderer path.
+- `--query=<params>` adds game URL parameters, for an A/B of a renderer flag.
+- `--base=<origin>` targets an existing production origin (a `vite preview`
+  server or the packaged shell) instead of the isolated Vite dev server.
+- `--attach-page` drives the attached browser's existing page (the packaged shell
+  has one window and no tabs).
 - `--compare=<before.json>` prints per-cell deltas.
 - `--profile` samples a main-thread CPU profile per cell and prints the top
   self-time functions. Profiled timings are not the baseline.
@@ -75,9 +80,9 @@ M4 Pro, headed bundled Chromium 156, 1280×800, 120 Hz (idle 8.3 ms):
 
 | Scene | Zoom | Frame p50 / missed | Render | Submit | GPU timer | Render + finish |
 | --- | --- | --- | ---: | ---: | ---: | ---: |
-| town | 1 | 8.3 / 0 of 600 | 0.8 | 0.3 | 0.97 | 0.9 |
-| town | 0.25 | 8.3 / 0 of 600 | 1.2 | 0.4 | 1.78 | 1.2 |
-| town | 0.1 | 8.3 / 0 of 600 | 1.3 | 0.8 | 1.93 | 1.4 |
+| city | 1 | 8.3 / 0 of 600 | 0.8 | 0.3 | 0.97 | 0.9 |
+| city | 0.25 | 8.3 / 0 of 600 | 1.2 | 0.4 | 1.78 | 1.2 |
+| city | 0.1 | 8.3 / 0 of 600 | 1.3 | 0.8 | 1.93 | 1.4 |
 | crowd | 1 | 8.3 / 2 of 598 | 3.9 | 0.4 | 2.29 | 4.1 |
 | crowd | 0.25 | 10.2 / 161 of 410 | 9.6 | 1.3 | 5.02 | 9.7 |
 | crowd | 0.1 | 9.5 / 173 of 426 | 6.0 | 1.8 | 3.45 | 6.5 |
@@ -89,9 +94,9 @@ Pixel 7a, Chrome 156 over CDP, 60 Hz, battery 23.9 → 27.3 °C, thermal status 
 
 | Scene | Zoom | Frame p50 / missed | Render | Submit | Render + finish | Worker tick |
 | --- | --- | --- | ---: | ---: | ---: | ---: |
-| town | 1 | 16.7 / 0 of 300 | 3.4 | 1.4 | 3.9 | 4.3 |
-| town | 0.25 | 16.7 / 0 of 300 | 3.9 | 1.5 | 4.0 | 4.3 |
-| town | 0.1 | 16.7 / 1 of 299 | 4.1 | 2.7 | 4.1 | 3.1 |
+| city | 1 | 16.7 / 0 of 300 | 3.4 | 1.4 | 3.9 | 4.3 |
+| city | 0.25 | 16.7 / 0 of 300 | 3.9 | 1.5 | 4.0 | 4.3 |
+| city | 0.1 | 16.7 / 1 of 299 | 4.1 | 2.7 | 4.1 | 3.1 |
 | crowd | 1 | 16.7 / 84 of 210 | 12.5 | 0.8 | 12.7 | 33.5 |
 | crowd | 0.25 | 50.0 / 6 of 93 | 29.5 | 4.0 | 28.6 | 48.0 |
 | crowd | 0.1 | 33.4 / 17 of 125 | 16.7 | 4.2 | 17.2 | 36.8 |
@@ -99,18 +104,16 @@ Pixel 7a, Chrome 156 over CDP, 60 Hz, battery 23.9 → 27.3 °C, thermal status 
 | woods | 0.25 | 16.7 / 2 of 291 | 4.4 | 0.6 | 4.5 | 6.9 |
 | woods | 0.1 | 16.7 / 0 of 300 | 5.0 | 1.5 | 5.3 | 8.7 |
 
-Steam Deck: not measured. `steamdeck doctor` reached the Deck over SSH but
-reported `session: error`, and the scorecard needs the packaged shell launched
-with `TILEFUN_CDP_PORT`.
+The Steam Deck was measured later, on the final code (see Final scorecard).
 
 ### What the baseline says
 
 1. **Rendering is CPU-bound on both devices.** Render plus a blocking GPU finish
    is within about 1 ms of render alone in every cell (the two are separate
    sampling windows). The earlier suspicion that the phone's 0.1× overview is
-   limited by GPU fill does not reproduce: `town` and `woods` hold 60 Hz at
+   limited by GPU fill does not reproduce: `city` and `woods` hold 60 Hz at
    every zoom.
-2. **Only the crowd misses cadence.** `town` and `woods` hold 120 Hz on the Mac
+2. **Only the crowd misses cadence.** `city` and `woods` hold 120 Hz on the Mac
    and 60 Hz on the phone at every zoom.
 3. **In the crowd, the cost is collection, not submission.** At 0.25 the Mac
    spends 1.3 of 9.6 ms in submits and the phone 4.0 of 29.5 ms.
@@ -147,25 +150,32 @@ allocations, with no single dominant function.
 
 ## GPU depth shadows
 
-Actor ovals and mesh vehicle shadows are drawn by the GPU from world depth. This
-began as an opt-in for ovals (`?shadows=gpu`); the owner then made it the
-default and asked for vehicle shadows too. `?shadows=projected` restores the
-projected decals, and that path still matches every scene hash of the 235
-checkpoint (`--shadows=projected --verify --assert-equivalent`).
+Every body shadow in the GPU fixed view is drawn from world depth. The work came
+in three steps: an opt-in for actor ovals, then vehicle footprints and the
+default, then (owner decision) removal of the projected body-shadow path and its
+`?shadows=` switch. `projectShadow`, the decal mesh gating and the bench's
+`--shadows` option are deleted.
 
 **Collection.** A caster's shadow is no longer clipped against receivers. Its
 sprite carries `gpuShadow` (`GpuShadowShape.ts`): a footprint parallelogram, a
 mask, an upper plane and a band of heights below it.
 - An actor oval is the oval of `shadowFootprint`, around the height of the
   surface under its centre.
+- A boat or train without a mesh pose uses the same oriented footprint with the
+  soft oval mask.
+- Below 0.2× no receivers are built; the collector's own surface height stands in
+  for the query, and a roof rider's support is the roof it stands on. Overview
+  shadows therefore use the same pass.
+- Towed cars and truck-bed contents leave the sorted scene list; the body that
+  draws them queues their shadows.
 - A mesh vehicle is the oriented footprint of `shadowFootprint`. Its upper plane
   is the body's underside (following pitch and roll), so its own roof and bonnet
   never receive the shadow. The band reaches down to the surface under its centre.
 - A caster standing on base terrain needs no query. A caster above terrain (deck,
   ramp, roof, jump) makes one `SurfaceReceivers.hit` point query, the same
   support lookup projection already makes.
-- A vehicle's shadow is queued after its body draws and only if the mesh was
-  drawn: sprite fallbacks contain a baked shadow.
+- A mesh vehicle's shadow is dropped by the pass unless that body was drawn in
+  the same view: sprite fallbacks contain a baked shadow.
 
 **Drawing.** `GpuDeferredShadows` draws every queued oval in one instanced draw
 after the world is complete, before late decals and non-world overlays:
@@ -188,8 +198,8 @@ after the world is complete, before late decals and non-world overlays:
 
 Rooms (no world depth), clipped scene passes (explorer, renderer lab) and the
 native review raster have no such pass: an oval draws the plain ground shadow
-there. Particles, landing rings, boats and trains keep the projected path. Below
-0.2× the shared overview LOD still draws plain ground shadows.
+there. Receiver projection (`SurfaceReceivers.project`, `surfaceDecals`) remains
+for contact effects only: particles and landing rings.
 
 **Known differences from projection.**
 - A footprint that straddles a ledge shades only receivers near the centre's
@@ -198,15 +208,18 @@ there. Particles, landing rings, boats and trains keep the projected path. Below
   unshaded (16–30 pixels in the probe).
 - A caster near a ramp's low end can shade the ramp top within the slack.
 - Mask edges differ by up to 9 of 255 levels (analytic masks against 64 px images).
-- A tilted vehicle uses one underside plane. Projection cast from each upper face
-  with its own ceiling, so stacked or interpenetrating bodies can differ.
+- A tilted vehicle uses one underside plane. The deleted projection cast from
+  each upper face with its own ceiling, so stacked or interpenetrating bodies
+  can look different from before.
 - A vehicle's own low parts (sills, tyre bottoms) within 4 px of its underside
   can take a little of its shadow where they face up.
 
 ### Equivalence probe
 
 `probeDeferredShadows` (renderer lab; browser case in `tests/gpu-renderer.spec.ts`)
-draws the same shadow both ways over the ramp/deck fixture at three zooms. For
+draws the same shadow two ways over the ramp/deck fixture at three zooms: the GPU
+pass, and an oracle that clips the same footprint against receivers on the CPU
+(the live contact-effect projection). For
 ovals: flat ground, an airborne caster, the ramp, the deck, a caster under the
 deck and a caster behind a solid body agree within 7 levels. The crest case
 differs on 16–30 pixels. For vehicles: yawed on flat ground, pitched along the
@@ -226,7 +239,7 @@ Node render lane, 235 tape, Node 24.22.1 (`render.prepare` for the crowd):
 Scene items fall from about 2,705 to 1,051 per frame and receiver queries from
 2,083 to 12. What remains is collection itself and receiver construction.
 
-Scorecard, `crowd`, final matched pairs (p50):
+Scorecard, `crowd`, matched pairs while both paths existed (p50):
 
 | Device | Zoom | Shadows | Render | Frame p50 | Missed |
 | --- | --- | --- | ---: | ---: | --- |
@@ -256,39 +269,140 @@ predicates are pure, so the result is the same (scene hashes unchanged). One
 matched render-lane pair measured 9.23 → 8.63 ms, which is within the
 run-to-run spread, so no saving is claimed.
 
+## Cleanup and follow-ups (same day)
+
+**One shadow path.** The numbers above compared the two paths while both
+existed. After the removal, crowd `render.prepare` is 1.56 ms p50 / 2.65 ms p95.
+
+**Overview shadows.** Below 0.2× casters now carry `gpuShadow` too, instead of
+plain ellipses in the painter pre-pass. On the production build the Mac's crowd
+at 0.1 went from missing 166 of 395 frames to 0 of 601 in the same run order
+(render 5.5 → 4.8 ms; the earlier build also ran in that session).
+
+**Resting entities are not copied.** `RemotePresentation.sample` cloned every
+replicated entity with an object spread on every frame. It now presents the
+entity itself when the sampled pose equals its committed pose and previous pose
+(position, height, jump, heading and rotation): the copy would have been equal
+field for field. Moving entities are still copied.
+- Client lane, `client.presentation` per 120 Hz frame: 0.728 → 0.31 ms.
+- Every collected scene hash is identical with the fast path on and off.
+
+### Final scorecard (p50, ms)
+
+M4 Pro, headed 120 Hz, **production build** (`--base` on `vite preview`):
+
+| Scene | Zoom | Frame / missed | Render | Submit | GPU timer | Update |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| city | 1 | 8.3 / 0 of 600 | 0.6 | 0.3 | 0.95 | 0.6 |
+| city | 0.25 | 8.3 / 0 of 600 | 0.8 | 0.4 | 1.74 | 0.6 |
+| city | 0.1 | 8.3 / 0 of 599 | 1.2 | 0.5 | 1.61 | 0.6 |
+| crowd | 1 | 8.3 / 0 of 600 | 2.5 | 0.3 | 2.32 | 2.7 |
+| crowd | 0.25 | 8.3 / 3 of 598 | 4.7 | 1.2 | 5.02 | 2.9 |
+| crowd | 0.1 | 8.3 / 0 of 601 | 4.8 | 1.6 | 4.86 | 2.9 |
+| woods | 1 | 8.3 / 0 of 600 | 1.0 | 0.3 | 0.60 | 0.6 |
+| woods | 0.25 | 8.3 / 0 of 600 | 1.3 | 0.2 | 0.62 | 0.8 |
+| woods | 0.1 | 8.3 / 0 of 600 | 2.1 | 0.7 | 0.69 | 0.9 |
+
+A crowd-only run in a fresh tab measured render 2.5 / 3.4 / 3.8 ms with 0, 0 and
+2 missed frames. The crowd draws about twice as many batches when it follows
+another scene in the same tab (37–40 against 15–34); that is unexplained.
+
+Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules, 25.3 → 27.1 °C, status 0:
+
+| Scene | Zoom | Frame / missed | Render | Submit | Update | Worker tick |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| city | 1 | 16.7 / 0 of 300 | 3.2 | 1.4 | 3.5 | 4.2 |
+| city | 0.25 | 16.7 / 0 of 300 | 3.5 | 1.5 | 3.0 | 4.1 |
+| city | 0.1 | 16.7 / 0 of 300 | 4.1 | 2.0 | 2.9 | 4.0 |
+| crowd | 1 | 16.7 / 23 of 276 | 9.1 | 0.7 | 5.9 | 33.4 |
+| crowd | 0.25 | 33.3 / 12 of 188 | 13.6 | 1.5 | 6.2 | 45.6 |
+| crowd | 0.1 | 16.7 / 88 of 200 | 11.5 | 2.6 | 7.0 | 36.5 |
+| woods | 1 | 16.7 / 0 of 300 | 3.9 | 1.0 | 3.1 | 7.5 |
+| woods | 0.25 | 16.7 / 0 of 300 | 4.2 | 0.7 | 3.4 | 8.1 |
+| woods | 0.1 | 16.7 / 0 of 300 | 4.7 | 1.4 | 3.3 | 7.8 |
+
+Steam Deck, packaged Electron 44 shell in Gaming Mode, production build, 90 Hz
+(11.1 ms), 1280×800:
+
+| Scene | Zoom | Frame / missed | Render | Submit | GPU timer | Update | Worker tick |
+| --- | --- | --- | ---: | ---: | ---: | ---: | ---: |
+| city | 1 | 11.1 / 0 of 450 | 2.0 | 1.0 | 0.78 | 1.7 | 2.1 |
+| city | 0.25 | 11.1 / 0 of 450 | 3.1 | 1.7 | 0.76 | 1.9 | 2.0 |
+| city | 0.1 | 11.1 / 0 of 450 | 4.3 | 2.2 | 0.87 | 1.8 | 2.2 |
+| crowd | 1 | 11.1 / 107 of 344 | 7.6 | 0.8 | 1.21 | 5.9 | 31.9 |
+| crowd | 0.25 | 22.2 / 41 of 212 | 12.8 | 1.9 | 1.47 | 5.7 | 41.4 |
+| crowd | 0.1 | 33.3 / 4 of 153 | 18.0 | 7.7 | 2.85 | 6.2 | 37.4 |
+| woods | 1 | 11.1 / 0 of 450 | 3.4 | 1.1 | 0.46 | 2.5 | 5.1 |
+| woods | 0.25 | 11.1 / 0 of 450 | 4.0 | 0.8 | 0.47 | 2.5 | 5.3 |
+| woods | 0.1 | 11.1 / 2 of 448 | 6.1 | 2.2 | 0.72 | 3.0 | 5.7 |
+
+What the three devices agree on:
+- `city` and `woods` hold the display cadence at every zoom.
+- The GPU is idle: its timer is under 3 ms on the Deck and under 5 ms on the Mac.
+- With 1,000 rabbits the phone and the Deck are limited by the authority (ticks
+  of 32–46 ms against a 16.7 ms step). Their crowd render numbers are taken
+  while the simulation runs at about half speed and replication arrives in
+  bursts, so they are not clean render measurements. 235 owns that work.
+- The Deck's crowd at 0.1 spends 7.7 ms in submits, the largest submit cost
+  measured anywhere.
+
+Deck procedure: `node scripts/build-desktop.mjs --linux` after a build; a
+separate Devkit title (`tilefun_renderbench`) whose launcher exports
+`TILEFUN_CDP_PORT` and an isolated `TILEFUN_USER_DATA`; an SSH forward of that
+loopback port; then `render:bench --cdp=… --base=tilefun://app/tilefun
+--attach-page`. The Devkit manifest's `env` did not reach the process, so the
+exports live in a launcher script inside the payload. The bench title is still
+installed on the Deck; its process was stopped and its save directory removed.
+
 ## Validation
 
-- Render lane `--shadows=projected --verify --assert-equivalent` against the 235
-  checkpoint: every projected scene hash matches.
-- `collectScene.test.ts` pins both paths: new digests for the default and the
-  earlier, unchanged digests for the projected path.
-- 699 Vitest cases in `src/rendering`, `src/session`, `src/scenes` and
-  `src/traffic`, and the four crowd-bench harness checks, pass.
+- Scene hashes: identical with the resting-entity fast path on and off.
+- `collectScene.test.ts` digests are unchanged by the cleanup.
+- `DepthShadowQueue.test.ts` (Node): a body queues its own shadow and those of
+  its towed car and bed contents, gated on the body; a sink without the pass
+  draws the plain shadow, for a mesh car only while its mesh is ready; a roof
+  rider keeps the roof as its support in the overview.
+- 879 Vitest cases in `src/rendering`, `src/session`, `src/scenes`,
+  `src/traffic` and `src/client`, and the four crowd-bench harness checks, pass.
 - Typechecks, Biome, the code-health ratchet and knip pass.
 - Art catalog and Workshop manifest regenerated; production build passes.
-- Full browser suite on the production build, because the default rendering
-  changed: 554 of 557 pass first time. Three timed out once and passed on retry
-  (deer walk and reload, apartment interior return, embedded station controls).
-  None was investigated further.
+- Full browser suite on the final production build: 556 of 557 pass first time.
+  The apartment interior case (`gameplay-interiors.spec.ts:12`) timed out once
+  and passed on retry in each of three full runs today; 233 already lists it as
+  a known local flake. An earlier run also retried the split-screen leave case,
+  likewise listed there.
 - The streaming readiness gate was not run (no streaming change).
-- Not run: any Steam Deck run.
 
-## Next slices, in order
+### Independent review
 
-1. **Overview (below 0.2×).** Plain ground shadows there still go through the
-   painter pre-pass; the crowd at 0.1 is now the worst scorecard cell. Either
-   send them through the depth pass or drop them when they are under a pixel.
-2. **Stop cloning presented entities each frame** (`RemotePresentation.sample`):
-   reuse one presented record per entity and rewrite only pose fields.
-3. **Bound per-frame UI scans and receiver construction** (the 235 slice-1
-   items): receivers are now needed only for point queries, particles and rings.
-4. **Delete the projected oval and vehicle path** once the owner is satisfied
-   with the GPU shadows; it remains only for `?shadows=projected` and the probe.
-5. **A dense-city scorecard scene**, since `woods` is not one.
-6. **Steam Deck scorecard run**, once the packaged shell is launched with its
-   CDP port.
-7. **Reconsider the retained, instanced scene** only if collection and
-   submission still exceed the budget after 1–3.
+A separate review session (yepanywhere, `gpt-6.1-sol`, high effort, read-only)
+found no stale-pose, GL-state or feedback-loop defect, and three shadow gaps,
+all fixed before the commit:
+- Towed cars and bed contents lost their shadows, because grouped children
+  leave the scene list. The drawing body now queues them.
+- A mesh vehicle had no fallback where the pass cannot run (clipped passes, the
+  first frame). Its shadow now queues before the body like an oval's, and the
+  pass drops it at draw time if the body was not drawn.
+- Mesh-body eligibility leaked between split-screen views. It is now cleared per
+  view.
+It also noted that a roof rider's overview shadow used terrain height (fixed
+with roof support) and two stale documentation lines (fixed).
+
+## Next options
+
+1. **Authority first on weak devices (235).** The phone and Deck crowd cells are
+   authority-bound. Sleeping-body reads and change-tracked replication are the
+   planned slices there.
+2. **Per-frame client scans.** `vehicleChoice`/`driveCandidate` and recipe
+   appearances run over every entity each update (5–7% of the phone's main
+   thread in the crowd).
+3. **Receiver construction.** `SurfaceReceivers` is rebuilt every frame from all
+   entities and props, and now serves only point queries and contact effects.
+4. **Submission at overview scale.** The Deck spends 7.7 ms submitting the
+   crowd at 0.1; sprites of a pixel or two could be skipped or instanced.
+5. **The unexplained batch count** when the crowd follows another scene.
+6. **Shadows in the first-person view**, by porting the depth pass.
+7. **A retained, instanced scene** remains last: collection is 1.6 ms.
 
 ## Renderer notes for later 3D work
 

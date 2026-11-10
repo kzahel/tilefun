@@ -4,7 +4,9 @@
 // The surface mirrors the few Playwright Page calls the device benches use.
 import { writeFile } from "node:fs/promises";
 
-export async function openCdpTab(endpoint) {
+/** `existingPage` drives the browser's first page instead of a new tab (a
+ * packaged shell has one window); `close` then leaves that page open. */
+export async function openCdpTab(endpoint, { existingPage = false } = {}) {
   const base = endpoint.replace(/\/$/, "");
   const json = async (pathname) => {
     const response = await fetch(`${base}${pathname}`);
@@ -44,7 +46,12 @@ export async function openCdpTab(endpoint) {
         JSON.stringify({ id, method, params, ...(session ? { sessionId: session } : {}) }),
       );
     });
-  const { targetId } = await call("Target.createTarget", { url: "about:blank" });
+  let targetId;
+  if (existingPage) {
+    const { targetInfos } = await call("Target.getTargets");
+    targetId = targetInfos.find((t) => t.type === "page")?.targetId;
+    if (!targetId) throw Error("The attached browser has no page");
+  } else ({ targetId } = await call("Target.createTarget", { url: "about:blank" }));
   ({ sessionId } = await call("Target.attachToTarget", { targetId, flatten: true }));
   const send = (method, params = {}) => call(method, params, sessionId);
   await send("Page.enable");
@@ -92,7 +99,7 @@ export async function openCdpTab(endpoint) {
       await writeFile(path, Buffer.from(data, "base64"));
     },
     async close() {
-      await call("Target.closeTarget", { targetId }).catch(() => {});
+      if (!existingPage) await call("Target.closeTarget", { targetId }).catch(() => {});
       socket.close();
     },
   };

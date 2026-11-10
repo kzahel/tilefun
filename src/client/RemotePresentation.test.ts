@@ -77,3 +77,29 @@ it("does not reuse motion after visibility exit, relocation, or replica clear", 
   presentation.record([train], 0, 1);
   expect(presentation.sample([train], 1)[0]?.position.wx).toBe(-100);
 });
+
+it("presents a resting entity itself and copies only one whose sampled pose differs", () => {
+  const presentation = new RemotePresentation();
+  const resting = createTrain(0, 64);
+  resting.id = 1;
+  resting.prevPosition = { ...resting.position };
+  // A settled replica entity: previous height, jump and rotation equal the current.
+  if (resting.wz !== undefined) resting.prevWz = resting.wz;
+  if (resting.jumpZ !== undefined) resting.prevJumpZ = resting.jumpZ;
+  if (resting.bodyRotation) resting.prevBodyRotation = resting.bodyRotation;
+  const moving = createTrain(0, 128);
+  moving.id = 2;
+  moving.prevPosition = { ...moving.position };
+  presentation.record([resting, moving], 0, 0);
+  moving.prevPosition = { ...moving.position };
+  moving.position = { wx: moving.position.wx + 8, wy: moving.position.wy };
+  presentation.record([resting, moving], 0.1, 0.1);
+  const [first, second] = presentation.sample([resting, moving], 0.1);
+  expect(first).toBe(resting);
+  expect(second).not.toBe(moving);
+  expect(second?.position.wx).toBeGreaterThan(0);
+  expect(second?.position.wx).toBeLessThan(8);
+  // A committed pose that moved since the last record is not "at rest" either.
+  resting.position = { wx: 4, wy: 64 };
+  expect(presentation.sample([resting, moving], 0.1)[0]).not.toBe(resting);
+});

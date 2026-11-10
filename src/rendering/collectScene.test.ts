@@ -24,7 +24,6 @@ import { Camera } from "./Camera.js";
 import { collectScene, collectWorldSprites } from "./collectScene.js";
 import { SceneFrame } from "./SceneFrame.js";
 import type { ElevationItem, ParticleItem, SceneItem, SpriteItem } from "./SceneItem.js";
-import { shadowMode } from "./ShadowMode.js";
 import type { TerrainResourceId } from "./TerrainPresentation.js";
 
 const world = { getHeightAt: () => 0, getChunkIfLoaded: () => undefined, getRoadAt: () => 0 };
@@ -415,55 +414,27 @@ function sceneDigest(variant: {
 // shared collectWorldSprites stage reproduced every earlier digest exactly.
 // 2026-11-09 re-recorded them for key order only: actor items now assign optional
 // fields after a fixed literal; key-sorted digests of all five scenes were unchanged.
-// 236 made GPU depth shadows the default: raster scenes carry `gpuShadow` on ovals
-// and mesh vehicles instead of projected decals. Their earlier digests still pin the
-// projected path (`shadowMode.gpu = false`), unchanged.
+// 236 re-recorded the raster scenes: casters carry `gpuShadow` for the GPU depth
+// pass instead of projected decals.
 it.each([
-  [
-    { frame: false, raster: false, grass: false, garage: false, time: 0 },
-    "8cb06b493c72350e",
-    undefined,
-  ],
+  [{ frame: false, raster: false, grass: false, garage: false, time: 0 }, "8cb06b493c72350e"],
   [
     { frame: true, raster: false, grass: true, garage: false, time: 0.05, zoom: 3 / 8 },
     "6c28c08dccb1c409",
-    undefined,
   ],
-  [
-    { frame: true, raster: true, grass: true, garage: false, time: 0.55 },
-    "1a2e80ea19044af2",
-    "9232b9304475daed",
-  ],
+  [{ frame: true, raster: true, grass: true, garage: false, time: 0.55 }, "1a2e80ea19044af2"],
   [
     { frame: true, raster: true, grass: false, garage: true, time: 0.25, nativeTrains: true },
     "76b558ad7a421bb9",
-    "7e677f939a0e7d3d",
   ],
-  [
-    { frame: false, raster: true, grass: false, garage: true, time: 0 },
-    "0454afa6d0e33319",
-    "a95ffb71a76f339f",
-  ],
-] as const)(
-  "collects a byte-identical characterization scene %o",
-  (variant, digest, projected?: string) => {
-    const result = sceneDigest(variant);
-    expect(result.digest).toBe(digest);
-    if (projected) {
-      shadowMode.gpu = false;
-      try {
-        const decals = sceneDigest(variant);
-        expect(decals.digest).toBe(projected);
-        expect(decals.kinds.decal).toBeGreaterThan(0);
-      } finally {
-        shadowMode.gpu = true;
-      }
-    }
-    expect(result.kinds.sprite).toBeGreaterThan(20);
-    if (variant.grass) expect(result.kinds.grass).toBeGreaterThan(0);
-    if (variant.raster) expect(result.kinds.decal).toBeUndefined();
-  },
-);
+  [{ frame: false, raster: true, grass: false, garage: true, time: 0 }, "0454afa6d0e33319"],
+] as const)("collects a byte-identical characterization scene %o", (variant, digest) => {
+  const result = sceneDigest(variant);
+  expect(result.digest).toBe(digest);
+  expect(result.kinds.sprite).toBeGreaterThan(20);
+  if (variant.grass) expect(result.kinds.grass).toBeGreaterThan(0);
+  if (variant.raster) expect(result.kinds.decal).toBeUndefined();
+});
 
 it("swaps a tree house's outside and inside parts by observer room and keeps floor depth", () => {
   const house = treeHouseProp(200, 200);

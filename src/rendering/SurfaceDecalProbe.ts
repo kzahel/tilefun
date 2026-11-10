@@ -5,8 +5,7 @@ import { createVehicle } from "../traffic/Vehicle.js";
 import { Camera } from "./Camera.js";
 import { collectScene } from "./collectScene.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
-import { poseOrientation } from "./MeshPresentation.js";
-import { projectShadow, surfaceDecals } from "./ProjectedDecals.js";
+import { surfaceDecals } from "./ProjectedDecals.js";
 import { projectWorld } from "./Projection.js";
 import { presentSurfaceScene } from "./presentSurfaceScene.js";
 import { SceneFrame } from "./SceneFrame.js";
@@ -114,33 +113,6 @@ export async function probeSurfaceDecals() {
         })),
       });
     }
-    const crestCar = createVehicle("compact-1", 60, 0);
-    crestCar.id = 99;
-    crestCar.wz = 20;
-    crestCar.bodyRotation = poseOrientation(0, -0.3, 0.1);
-    const carDecals = surfaceDecals(
-      projectShadow(receivers, crestCar, 60, 0, 20, {
-        min: [-20, -10, 0],
-        max: [20, 10, 20],
-        triangles: [],
-      }),
-      "vehicle",
-      0.28,
-    );
-    const crestBefore = pixels([]),
-      crestAfter = pixels(carDecals);
-    report.push({
-      name: "tilted-car-crest",
-      receivers: carDecals.map((d) => d.receiverId),
-      samples: [
-        [56, 1.5, 28],
-        [64, 1.5, 32],
-        [68, 1.5, 32],
-      ].map(([x = 0, y = 0, z = 0]) => ({
-        baseline: sample(crestBefore, x, y, z),
-        shadowed: sample(crestAfter, x, y, z),
-      })),
-    });
     // A solid sprite in front must retain its blue pixels, despite late shadow submission.
     const image = document.createElement("canvas");
     image.width = image.height = 32;
@@ -233,26 +205,12 @@ export async function probeSurfaceDecals() {
       shadowed: sample(roofAfter, 0, 0, hit.point[2]),
     };
     const overlaySample = sample(pixels(decals, [], true), 2, 2, 0);
-    const fallbackDecals = surfaceDecals(
-      floor.project(rectangle({ left: -20, right: 20, top: -12, bottom: 12 }), 0),
-      "vehicle",
-      0.28,
-      "#000",
-      "compact-1-authored-v7",
-      123,
-    );
-    const fallbackBefore = pixels([sprite], []),
-      fallbackAfter = pixels([sprite, ...fallbackDecals], []);
-    let fallbackShadowErrors = 0;
-    for (let i = 0; i < fallbackBefore.length; i++)
-      if (fallbackBefore[i] !== fallbackAfter[i]) fallbackShadowErrors++;
     return {
       report,
       protectedPixels,
       occlusionErrors,
       roof: roofSample,
       overlaySample,
-      fallbackShadowErrors,
     };
   } finally {
     gpu.dispose();

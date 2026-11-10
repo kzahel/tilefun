@@ -6,14 +6,11 @@ import { projectWorld } from "./Projection.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import type { DecalItem } from "./SceneItem.js";
 import {
-  type Point3,
   planeZ,
   polygonBounds,
   type SurfaceFragment,
   type SurfaceMesh,
-  type SurfaceReceivers,
   type SurfaceVertex,
-  upwardSurfaceFace,
 } from "./SurfaceReceivers.js";
 import { WORLD_DEPTH_RANGE } from "./WorldDepth.js";
 
@@ -103,74 +100,12 @@ export function shadowFootprint(
     [left, bottom, 0, 1],
   ].map(([f = 0, r = 0, u = 0, v = 0]) => ({ x: x + f * c - r * s, y: y + f * s + r * c, u, v }));
 }
-/** Cast downward from the displayed box's upper envelope, rather than its root.
- * A pitched/rolled root can be below the receiving ramp. Each upward box face
- * supplies its own finite ceiling, so a taller exposed end cannot cast onto a
- * bridge above the lower end. At most three disjoint quads share one mask UVs. */
-export function projectShadow(
-  receivers: SurfaceReceivers,
-  entity: Entity,
-  x: number,
-  y: number,
-  z: number,
-  mesh?: SurfaceMesh,
-  rotation?: BodyRotation,
-): SurfaceFragment[] {
-  const footprint = shadowFootprint(entity, x, y, mesh, rotation);
-  if (!entity.type.startsWith("vehicle-v1:")) return receivers.project(footprint, z, entity.id);
-  const d = physicsBodyDimensions(entity),
-    q = rotation ?? entity.bodyRotation ?? yawRotation(d.yaw),
-    min = mesh?.min ?? [-d.width / 2, -d.depth / 2, 0],
-    max = mesh?.max ?? [d.width / 2, d.depth / 2, d.height];
-  const p0 = footprint[0],
-    p1 = footprint[1],
-    p3 = footprint[3];
-  if (!p0 || !p1 || !p3) return [];
-  const ax = p1.x - p0.x,
-    ay = p1.y - p0.y,
-    bx = p3.x - p0.x,
-    by = p3.y - p0.y,
-    det = ax * by - ay * bx;
-  if (Math.abs(det) < 1e-8) return [];
-  const result: SurfaceFragment[] = [];
-  for (const axis of [0, 1, 2])
-    for (const side of [0, 1]) {
-      const a = (axis + 1) % 3,
-        b = (axis + 2) % 3;
-      const points: Point3[] = [
-        [0, 0],
-        [1, 0],
-        [1, 1],
-        [0, 1],
-      ].map(([aa, bb]) => {
-        const local = [0, 0, 0];
-        local[axis] = (side ? max[axis] : min[axis]) ?? 0;
-        local[a] = (aa ? max[a] : min[a]) ?? 0;
-        local[b] = (bb ? max[b] : min[b]) ?? 0;
-        const p = rotateBodyVector(q, local[0] ?? 0, local[1] ?? 0, local[2] ?? 0);
-        return [x + p.x, y + p.y, z + p.z];
-      });
-      if (!side) points.reverse();
-      const face = upwardSurfaceFace("caster", points);
-      if (!face) continue;
-      const polygon = face.polygon.map((p) => ({
-        x: p.x,
-        y: p.y,
-        u: ((p.x - p0.x) * by - (p.y - p0.y) * bx) / det,
-        v: (ax * (p.y - p0.y) - ay * (p.x - p0.x)) / det,
-      }));
-      result.push(...receivers.project(polygon, face.plane, entity.id));
-    }
-  return result;
-}
 /** Group coplanar pieces so the raster surface can clip their union without diagonal seams. */
 export function surfaceDecals(
   fragments: readonly SurfaceFragment[],
   mask: DecalMask,
   alpha: number,
   color = "#000",
-  meshAssetId?: string,
-  meshCasterId?: number,
 ): DecalItem[] {
   const groups = new Map<string, DecalItem>();
   for (const { face, vertices } of fragments) {
@@ -193,8 +128,6 @@ export function surfaceDecals(
         mask,
         alpha,
         color,
-        ...(meshAssetId ? { meshAssetId } : {}),
-        ...(meshCasterId === undefined ? {} : { meshCasterId }),
       };
       groups.set(key, item);
     }
@@ -203,7 +136,6 @@ export function surfaceDecals(
   return [...groups.values()];
 }
 export function drawSurfaceDecal(ctx: RasterSurface, camera: Camera, item: DecalItem) {
-  if (item.meshAssetId && !ctx.meshReady?.has(item.meshAssetId)) return;
   const image = maskImage(item.mask),
     origin = projectWorld(camera, 0, 0),
     [a, b, c] = item.plane;
@@ -225,7 +157,7 @@ export function drawSurfaceDecal(ctx: RasterSurface, camera: Camera, item: Decal
     }),
   );
   if (ctx.projectedDecal) {
-    ctx.projectedDecal(image, polygons, plane, item.alpha, item.color, item.meshCasterId);
+    ctx.projectedDecal(image, polygons, plane, item.alpha, item.color);
     return;
   }
   const native = ctx as CanvasRenderingContext2D;

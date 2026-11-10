@@ -155,6 +155,4 @@ export interface DecalItem {
   mask: DecalMask;
   alpha: number;
   color: string;
-  meshAssetId?: string;
-  meshCasterId?: number;
 }

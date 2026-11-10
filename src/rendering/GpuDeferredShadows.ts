@@ -59,6 +59,8 @@ void main(){
 export class GpuDeferredShadows {
   private data = new Float32Array(FLOATS * 256);
   private count = 0;
+  /** Per instance: the mesh body that must have been drawn in this view. */
+  private readonly gates: (number | undefined)[] = [];
   private readonly view = [0, 0, 1, 0];
   private gl: WebGL2RenderingContext | undefined;
   private program: WebGLProgram | null = null;
@@ -93,7 +95,13 @@ export class GpuDeferredShadows {
   /** Queue a caster for `target`, whose scene pass draws with the padded backend
    * camera and no other transform. False while the target has no sampleable
    * depth: the caller draws a plain shadow until the next frame. */
-  queue(target: THREE.WebGLRenderTarget, camera: Camera, shadow: GpuShadow): boolean {
+  queue(
+    target: THREE.WebGLRenderTarget,
+    camera: Camera,
+    shadow: GpuShadow,
+    /** Draw only if this mesh body is drawn in the view (default: the shadow's own). */
+    gate = shadow.casterId,
+  ): boolean {
     this.requested = true;
     if (!target.depthTexture) return false;
     const { x, y, ux, uy, vx, vy, plane, band } = shadow,
@@ -117,7 +125,8 @@ export class GpuDeferredShadows {
       middle = plane[0] * x + plane[1] * y + plane[2],
       tilt = Math.abs(plane[0]) * ex + Math.abs(plane[1]) * ey;
     const out = this.data,
-      i = this.count++ * FLOATS;
+      i = this.count * FLOATS;
+    this.gates[this.count++] = gate;
     out[i] = origin.sx + (x - ex) * scale - 1;
     out[i + 1] = origin.sy + (y - ey - middle - tilt) * scale - 1;
     out[i + 2] = origin.sx + (x + ex) * scale + 1;
@@ -138,8 +147,19 @@ export class GpuDeferredShadows {
   /** Blend the queued shadows into `target`'s colour, reading its depth texture.
    * Raw GL: the colour-only framebuffer keeps the sampled depth texture out of the
    * draw framebuffer (no feedback loop). The caller rebinds its render target. */
-  draw(renderer: THREE.WebGLRenderer, target: THREE.WebGLRenderTarget) {
-    const count = this.count;
+  draw(
+    renderer: THREE.WebGLRenderer,
+    target: THREE.WebGLRenderTarget,
+    drawnBodies: ReadonlySet<number>,
+  ) {
+    // A gated shadow belongs to a mesh body; a sprite fallback has a baked one.
+    let count = 0;
+    for (let i = 0; i < this.count; i++) {
+      const gate = this.gates[i];
+      if (gate !== undefined && !drawnBodies.has(gate)) continue;
+      if (count !== i) this.data.copyWithin(count * FLOATS, i * FLOATS, (i + 1) * FLOATS);
+      count++;
+    }
     this.count = 0;
     this.drawn = count;
     const depthTexture = target.depthTexture;

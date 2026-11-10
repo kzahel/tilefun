@@ -33,13 +33,11 @@ import {
 } from "../EntityMeshPose.js";
 import { ovalShadow, vehicleShadow } from "../GpuShadowShape.js";
 import { vehicleMeshRadius, yawOrientation } from "../MeshPresentation.js";
-import { projectShadow, surfaceDecals } from "../ProjectedDecals.js";
 import type { PropDepthIndex } from "../PropDepthIndex.js";
 import { propDepthLookup } from "../PropDepthIndex.js";
 import { depthAboveProps, type PropDepthSurface, propDepthSurfaces } from "../propDepth.js";
 import type { SceneFrame } from "../SceneFrame.js";
 import type { SceneItem, SpriteItem } from "../SceneItem.js";
-import { shadowMode } from "../ShadowMode.js";
 import { surfaceShadowZ } from "../SurfacePresentation.js";
 import type { SurfaceReceivers } from "../SurfaceReceivers.js";
 import type { TerrainPresentation } from "../TerrainPresentation.js";
@@ -70,6 +68,8 @@ export interface EntityStage {
   readonly terrain: Pick<TerrainPresentation, "meshSurfaceGeometry">;
   readonly frame: SceneFrame | undefined;
   readonly receivers: SurfaceReceivers | undefined;
+  /** The view has a world depth pass: casters carry `gpuShadow`, not ground shadows. */
+  readonly depthShadows: boolean;
   readonly cull: CullBounds;
   readonly depth: EntityDepth;
   readonly poseTime: number;
@@ -182,7 +182,7 @@ function indexEntities({ entities, depth }: EntityStage): EntityIndex {
 }
 
 function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefined {
-  const { alpha, frame, receivers, poseTime } = pass;
+  const { alpha, frame, poseTime } = pass;
   const pos = interpolatePosition(e.position, e.prevPosition, alpha);
   const zOffset = entityZOffset(pass, e, pos);
   // Match the displayed sprite rectangle, including vehicles whose artwork
@@ -245,14 +245,14 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefine
   if (mesh) spriteItem.mesh = mesh;
   if (meshGroundShadow) {
     spriteItem.meshGroundShadow = true;
-    if (receivers) spriteItem.shadowCasterId = e.id;
+    if (pass.depthShadows) spriteItem.shadowCasterId = e.id;
   }
   if (meshRoofSupport) spriteItem.meshRoofSupport = meshRoofSupport;
   if (hasVehicleLights(e)) Object.assign(spriteItem, emergencyLights(e, poseTime));
   if (remains) Object.assign(spriteItem, roadkillFade(e, scaleY));
   pass.items.push(spriteItem);
-  if (receivers && hasShadow && e.collider && (!meshGroundShadow || spriteItem.mesh))
-    pushShadowDecals(pass, receivers, e, spriteItem, pos, zOffset, meshGroundShadow);
+  if (pass.depthShadows && hasShadow && e.collider && (!meshGroundShadow || spriteItem.mesh))
+    depthShadow(pass, e, spriteItem, pos, zOffset, meshGroundShadow);
   if (pass.grassVehicles && isVehicleSprite(e.type)) pass.grassVehicles.push(spriteItem);
   return spriteItem;
 }
@@ -462,58 +462,38 @@ function roadkillFade(e: Entity, scaleY: number): Pick<SpriteItem, "scaleY" | "a
   };
 }
 
-/** The caster's shape for the GPU depth pass (236). One point query finds the
- * surface under its centre, as projection does for its support, so a caster on
- * a deck never shades the ground seen beneath it. Standing on base terrain
- * needs no query: the ground is the support. */
-function gpuShadow(
+/** The caster's shape for the GPU depth pass (236), which replaces its ground
+ * shadow. The pass shades receivers near the surface under the caster's centre,
+ * so a caster on a deck never shades the ground seen beneath it. Standing on
+ * base terrain needs no query; without receivers (the overview) the collector's
+ * surface height stands in, plus the moving roof under a rider. */
+function depthShadow(
   pass: EntityPass,
-  receivers: SurfaceReceivers,
-  e: Entity,
-  spriteItem: SpriteItem,
-  pos: PositionComponent,
-  zOffset: number,
-): SpriteItem["gpuShadow"] {
-  const terrainZ = spriteItem.shadowTerrainZ,
-    supportZ =
-      Math.abs(zOffset - terrainZ) < 0.5
-        ? terrainZ
-        : (receivers.hit(pos.wx, pos.wy, zOffset + 1, e.id)?.point[2] ??
-          Math.min(terrainZ, zOffset));
-  if (!e.type.startsWith("vehicle-v1:")) return ovalShadow(e, pos.wx, pos.wy, supportZ);
-  const mesh = spriteItem.mesh
-    ? pass.terrain.meshSurfaceGeometry?.(spriteItem.mesh.assetId)
-    : undefined;
-  return vehicleShadow(e, pos.wx, pos.wy, zOffset, supportZ, mesh, spriteItem.mesh?.orientation);
-}
-
-function pushShadowDecals(
-  pass: EntityPass,
-  receivers: SurfaceReceivers,
   e: Entity,
   spriteItem: SpriteItem,
   pos: PositionComponent,
   zOffset: number,
   meshGroundShadow: boolean,
 ): void {
-  spriteItem.hasShadow = false;
-  // Mesh vehicles and actor ovals; other bodies (boats, trains) stay projected.
-  if (shadowMode.gpu && meshGroundShadow === e.type.startsWith("vehicle-v1:")) {
-    const shadow = gpuShadow(pass, receivers, e, spriteItem, pos, zOffset);
-    if (shadow) spriteItem.gpuShadow = shadow;
-    return;
+  const terrainZ = spriteItem.shadowTerrainZ;
+  let supportZ = terrainZ;
+  if (Math.abs(zOffset - terrainZ) >= 0.5) {
+    if (pass.receivers)
+      supportZ =
+        pass.receivers.hit(pos.wx, pos.wy, zOffset + 1, e.id)?.point[2] ??
+        Math.min(terrainZ, zOffset);
+    // The overview has no receivers: a roof rider's support is the roof it stands on.
+    else if (!isVehicle(e) && roofSupport(e, pass.depth.movingRoofs)) supportZ = zOffset;
   }
-  const mesh = spriteItem.mesh
-    ? pass.terrain.meshSurfaceGeometry?.(spriteItem.mesh.assetId)
-    : undefined;
-  pass.items.push(
-    ...surfaceDecals(
-      projectShadow(receivers, e, pos.wx, pos.wy, zOffset, mesh, spriteItem.mesh?.orientation),
-      meshGroundShadow ? "vehicle" : "oval",
-      0.28,
-      "#000",
-      meshGroundShadow ? spriteItem.mesh?.assetId : undefined,
-      meshGroundShadow ? e.id : undefined,
-    ),
-  );
+  let shadow: SpriteItem["gpuShadow"];
+  if (e.type.startsWith("vehicle-v1:")) {
+    const mesh = spriteItem.mesh
+      ? pass.terrain.meshSurfaceGeometry?.(spriteItem.mesh.assetId)
+      : undefined;
+    const rotation = spriteItem.mesh?.orientation;
+    shadow = vehicleShadow(e, pos.wx, pos.wy, zOffset, supportZ, meshGroundShadow, mesh, rotation);
+  } else shadow = ovalShadow(e, pos.wx, pos.wy, supportZ);
+  if (!shadow) return;
+  spriteItem.hasShadow = false;
+  spriteItem.gpuShadow = shadow;
 }

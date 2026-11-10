@@ -116,9 +116,11 @@ export function drawSceneEntry2D(
   }
 }
 
-/** A sprite and its GPU depth shadow (236). An oval queues before its body, so
- * a sink without that pass (rooms, review rasters) can draw the plain ground
- * shadow under it; a mesh body's shadow queues after the body reports drawing. */
+/** A sprite and its GPU depth shadow (236). The shadow queues before the body,
+ * so a sink without that pass (rooms, clipped passes, review rasters) can draw
+ * the plain ground shadow under it. The pass itself drops a mesh body's shadow
+ * if the body was not drawn. Towed cars and bed contents left the sorted list:
+ * their shadows follow the body that draws them. */
 function drawSpriteEntry(
   ctx: RasterSurface,
   camera: Camera,
@@ -126,15 +128,19 @@ function drawSpriteEntry(
   sheets: Map<string, Spritesheet>,
   pixelExactShadows: boolean,
 ): void {
-  const shadow = item.gpuShadow,
-    mesh = shadow?.casterId !== undefined;
-  if (shadow && !mesh && !ctx.deferredShadow?.(camera, shadow)) {
+  const shadow = item.gpuShadow;
+  if (shadow && !ctx.deferredShadow?.(camera, shadow)) {
     sceneDepth(ctx, camera, item, true);
     drawOneShadow(ctx, camera, item, pixelExactShadows);
     sceneDepth(ctx, camera, item, false);
   }
+  if (ctx.deferredShadow && (item.towGroup || item.bedGroup)) {
+    const gate = item.shadowCasterId;
+    if (item.towGroup?.gpuShadow) ctx.deferredShadow(camera, item.towGroup.gpuShadow, gate);
+    for (const child of item.bedGroup?.contents ?? [])
+      if (child.gpuShadow) ctx.deferredShadow(camera, child.gpuShadow, gate);
+  }
   drawSprite(ctx, camera, item, sheets);
-  if (shadow && mesh) ctx.deferredShadow?.(camera, shadow);
 }
 
 /** Draw a single entity shadow ellipse. */

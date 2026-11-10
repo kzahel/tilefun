@@ -19,7 +19,6 @@ if (process.argv.includes("--help")) {
   --lane=client --replay=/tmp/crowd.tape   Client CPU processing, 60/120Hz
   --lane=render --replay=/tmp/crowd.tape   Collection/order with actual GLB receivers
     --scene=moving|frozen                 Moving is the default
-    --shadows=gpu|projected               gpu (default) leaves shadows to the depth pass (236)
   --verify                              Hash every replay state/scene (separate run)
   --assert-equivalent                   Require equal comparison outcomes (replay needs --verify)
   --output=<report.json> --compare=<before.json> [--allow-incompatible]

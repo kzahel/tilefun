@@ -16,6 +16,7 @@
 // --cdp attaches to a physical device's Chrome or the packaged desktop shell (as
 // stress:bench does): it opens only its own tab on the isolated origin served at
 // --port, clears that origin's storage afterwards and leaves the browser running.
+import { execFileSync } from "node:child_process";
 import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -41,15 +42,16 @@ const CAR_MODELS = [
   "vehicle-v1:dump-truck",
   "vehicle-v1:garbage-truck-orange",
 ];
-/** Seed-2026 regional world. `town` is the streaming bench's city crossing (shops,
- * a few cars); `crowd` adds the stress population there; `woods` is woodland
- * beside the racetrack, with the most props and wildlife in an overview. */
+/** Seed-2026 regional world. `city` is the generated city (apartment and shop
+ * blocks, traffic, a station; the streaming bench's city arrival); `crowd` adds the
+ * stress population there; `woods` is woodland beside the racetrack, with the most
+ * props and wildlife in an overview. */
 const SCENES = {
-  town: { arrival: [300, 519], rabbits: 0, cars: 0 },
+  city: { arrival: [300, 519], rabbits: 0, cars: 0 },
   crowd: { arrival: [300, 519], rabbits: 1000, cars: 50 },
   woods: { arrival: [-380, -364], rabbits: 0, cars: 0 },
 };
-const scenes = option("scenes", "town,crowd,woods").split(",");
+const scenes = option("scenes", "city,crowd,woods").split(",");
 for (const name of scenes) if (!SCENES[name]) throw Error(`Unknown scene ${name}`);
 const zooms = option("zooms", "1,0.25,0.1").split(",").map(Number);
 if (zooms.some((z) => !Number.isFinite(z) || z < 0.05 || z > 3))
@@ -62,7 +64,13 @@ const output = option("output", path.join(os.tmpdir(), "tilefun-render.json"));
 const compare = option("compare", "");
 const endpoint = option("cdp", "");
 const port = Number(option("port", "0"));
-if (endpoint && !port) throw Error("--cdp requires a dedicated --port");
+// An existing production origin (a preview server or the packaged shell's
+// tilefun://app/tilefun) instead of the isolated Vite dev server.
+const base = option("base", "").replace(/\/$/, "");
+// Drive the browser's existing page (the packaged shell has one window, no tabs).
+const attachPage = process.argv.includes("--attach-page");
+if (endpoint && !port && !base) throw Error("--cdp requires a dedicated --port or --base");
+if (attachPage && !(endpoint && base)) throw Error("--attach-page requires --cdp and --base");
 // Extra game URL parameters, e.g. an opt-in renderer path under comparison.
 const query = option("query", "");
 // Sample a CPU profile of each cell's main thread and print its top self-time
@@ -218,19 +226,22 @@ function topSelfTime(cpuProfile, limit = 18) {
 }
 
 try {
-  server = await createServer({
-    configFile: false,
-    base: "/tilefun/",
-    cacheDir: path.join(temp, "vite-cache"),
-    optimizeDeps: { entries: ["index.html"] },
-    plugins: [react()],
-    server: { host: "127.0.0.1", port, strictPort: !!port, hmr: false, watch: null },
-    logLevel: "error",
-  });
-  await server.listen();
-  const origin = `http://127.0.0.1:${server.httpServer.address().port}/tilefun`;
-  testOrigin = new URL(origin).origin;
-  if (endpoint) page = await openCdpTab(endpoint);
+  if (!base) {
+    server = await createServer({
+      configFile: false,
+      base: "/tilefun/",
+      cacheDir: path.join(temp, "vite-cache"),
+      optimizeDeps: { entries: ["index.html"] },
+      plugins: [react()],
+      server: { host: "127.0.0.1", port, strictPort: !!port, hmr: false, watch: null },
+      logLevel: "error",
+    });
+    await server.listen();
+  }
+  const origin = base || `http://127.0.0.1:${server.httpServer.address().port}/tilefun`;
+  // Only the isolated Vite origin is ours to clear afterwards.
+  testOrigin = base ? undefined : new URL(origin).origin;
+  if (endpoint) page = await openCdpTab(endpoint, { existingPage: attachPage });
   else {
     browser = await chromium.launch({ headless: !headed, channel: "chromium" });
     page = await browser.newPage({ viewport: { width, height } });
@@ -238,11 +249,20 @@ try {
   const cdp = endpoint ? page : await page.context().newCDPSession(page);
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
+  // Computed here rather than in the page, so production builds work too.
+  const generation = JSON.parse(
+    execFileSync(
+      process.execPath,
+      [
+        "--import",
+        "tsx",
+        "-e",
+        'import("./src/generation/GenerationDescriptor.ts").then((m) => console.log(JSON.stringify(m.createDescriptor("regional", 2026))))',
+      ],
+      { encoding: "utf8" },
+    ),
+  );
   await page.goto(`${origin}/tools.html`);
-  const generation = await page.evaluate(async () => {
-    const { createDescriptor } = await import("/tilefun/src/generation/GenerationDescriptor.ts");
-    return createDescriptor("regional", 2026);
-  });
   const idle = await page.evaluate(async () => {
     const times = [];
     let previous = await new Promise(requestAnimationFrame);
@@ -394,7 +414,7 @@ try {
     browser: endpoint ? page.browserVersion : browser.version(),
     headed: endpoint ? true : headed,
     label: option("device", endpoint ? "attached device" : os.hostname().split(".")[0]),
-    build: "vite dev (unminified modules)",
+    build: base ? `existing origin ${base}` : "vite dev (unminified modules)",
     query,
     profiled: profile,
     seconds,
@@ -422,10 +442,12 @@ try {
   }
 } finally {
   if (endpoint && page) {
-    await page.goto("about:blank").catch(() => {});
-    await page
-      .send("Storage.clearDataForOrigin", { origin: testOrigin, storageTypes: "all" })
-      .catch(() => {});
+    // An attached shell returns to its own menu; an owned tab is cleared and closed.
+    await page.goto(attachPage ? `${base}/` : "about:blank").catch(() => {});
+    if (testOrigin)
+      await page
+        .send("Storage.clearDataForOrigin", { origin: testOrigin, storageTypes: "all" })
+        .catch(() => {});
     await page.close().catch(() => {});
   }
   await browser?.close().catch(() => {});

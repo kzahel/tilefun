@@ -1443,7 +1443,6 @@ test("surface decals follow ramps, split at crests and blend over real mesh roof
   expect(report.protectedPixels).toBeGreaterThan(500);
   expect(report.occlusionErrors).toBe(0);
   expect(report.overlaySample).toEqual([255, 0, 170]);
-  expect(report.fallbackShadowErrors).toBe(0);
   expect(report.roof.height).toBeGreaterThan(15);
   expect(report.roof.height).toBeLessThan(24);
   for (let i = 0; i < 3; i++)

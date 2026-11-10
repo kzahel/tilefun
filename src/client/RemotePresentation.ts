@@ -1,4 +1,5 @@
 import type { Entity } from "../entities/Entity.js";
+import type { BodyRotation } from "../physics/BodyRotation.js";
 import {
   advancePresentationClock,
   type MotionSample,
@@ -7,6 +8,31 @@ import {
   recordMotionSample,
   sampleMotion,
 } from "../rendering/PresentationTimeline.js";
+
+const sameRotation = (a: BodyRotation, b: BodyRotation | undefined) =>
+  !!b && a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3];
+
+/** The sampled pose is exactly the entity's committed pose and its previous
+ * pose: the presented copy would equal the entity field for field, so the
+ * entity itself is presented. Most of a resting crowd takes this path, which
+ * saves copying every field of every entity on each frame. */
+function atRest(e: Entity, pose: MotionSample): boolean {
+  const prev = e.prevPosition;
+  return (
+    pose.x === e.position.wx &&
+    pose.y === e.position.wy &&
+    !!prev &&
+    prev.wx === pose.x &&
+    prev.wy === pose.y &&
+    (e.wz === undefined || (pose.z === e.wz && e.prevWz === e.wz)) &&
+    (e.jumpZ === undefined || (pose.jumpZ === e.jumpZ && e.prevJumpZ === e.jumpZ)) &&
+    (e.vehicleHeading === undefined ||
+      (pose.vehicleHeading ?? e.vehicleHeading) === e.vehicleHeading) &&
+    (!pose.bodyRotation ||
+      (sameRotation(pose.bodyRotation, e.bodyRotation) &&
+        sameRotation(pose.bodyRotation, e.prevBodyRotation)))
+  );
+}
 
 /** Replica-owned presentation history. Never changes committed physics poses. */
 export class RemotePresentation {
@@ -58,7 +84,7 @@ export class RemotePresentation {
     const time = paused ? this.latest : this.clock.time;
     return entities.map((e) => {
       const pose = sampleMotion(this.history.get(e.id) ?? [], time);
-      if (!pose) return e;
+      if (!pose || atRest(e, pose)) return e;
       const position = { wx: pose.x, wy: pose.y };
       return {
         ...e,

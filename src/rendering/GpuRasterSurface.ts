@@ -65,7 +65,6 @@ export class GpuRasterSurface implements RasterSurface {
     alpha: number;
     color: string;
     clips: Rect[] | null;
-    casterId?: number | undefined;
   }[] = [];
   worldDepth = false;
   private readonly depthPlane = [0, 0, 0, 0];
@@ -93,7 +92,6 @@ export class GpuRasterSurface implements RasterSurface {
   imageSmoothingEnabled = false;
   meshBody?: NonNullable<RasterSurface["meshBody"]>;
   meshReady?: ReadonlySet<string>;
-  meshCasters?: ReadonlySet<number>;
   lost = false;
   disposed = false;
   readonly stats = {
@@ -237,7 +235,6 @@ export class GpuRasterSurface implements RasterSurface {
     depth: readonly [number, number, number],
     alpha: number,
     color: string,
-    casterId?: number,
   ) => {
     const det = this.a * this.d - this.b * this.c;
     if (!this.worldTarget || Math.abs(det) < 1e-8) return;
@@ -247,9 +244,6 @@ export class GpuRasterSurface implements RasterSurface {
       image,
       alpha,
       color,
-      // Room painter prepasses precede bodies; outdoor late blends can verify
-      // the actual representation selected, including pending paint fallbacks.
-      casterId: this.worldDepth ? casterId : undefined,
       depth: [a, b, depth[2] - a * this.e - b * this.f],
       polygons: polygons.map((p) =>
         p.map((v) => ({
@@ -276,7 +270,6 @@ export class GpuRasterSurface implements RasterSurface {
     this.setDepthPlane(0, 0, 0);
     this.material.depthWrite = false;
     for (const job of this.decals) {
-      if (job.casterId !== undefined && !this.meshCasters?.has(job.casterId)) continue;
       if (this.clips !== job.clips) {
         this.flush();
         this.clips = job.clips;
