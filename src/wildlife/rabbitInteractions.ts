@@ -40,6 +40,12 @@ export function startleRabbit(rabbit: Entity, from: PositionComponent): boolean 
   }
   return true;
 }
+/** A tick of the hop in which the rabbit only gathers or holds its landing: no travel,
+ * no lift, and not the tick that settles it. */
+export function rabbitHopHolds(elapsed: number, dt: number): boolean {
+  const next = Math.min(RABBIT_HOP_DURATION, elapsed + dt);
+  return (next <= PUSH_OFF || elapsed >= LANDING) && next < RABBIT_HOP_DURATION;
+}
 export function prepareRabbitHop(rabbit: Entity, dt: number): void {
   rabbit.motionIntent ??= { vx: 0, vy: 0 };
   const ai = rabbit.rabbit,
@@ -54,7 +60,16 @@ export function prepareRabbitHop(rabbit: Entity, dt: number): void {
   rabbit.motionIntent.vy = ((ai.target.wy - rabbit.position.wy) * fraction) / dt;
   const t = Math.max(0, Math.min(1, (hop.elapsed - PUSH_OFF) / (LANDING - PUSH_OFF)));
   const height = Math.sin(Math.PI * t) * 10;
-  rabbit.motionIntent.altitude = hop.startZ + (hop.endZ - hop.startZ) * t + height;
+  const altitude = hop.startZ + (hop.endZ - hop.startZ) * t + height;
+  // Standing on the ground the hop starts or ends at, the prescribed height asks the
+  // motor for nothing (BodyMotor leaves solved support alone): the intent is idle and
+  // the body may rest through the gather and the landing.
+  const standing =
+    (t === 0 || t === 1) &&
+    rabbit.jumpVZ === undefined &&
+    altitude <= (rabbit.groundZ ?? rabbit.wz ?? 0) + 0.15;
+  if (standing) delete rabbit.motionIntent.altitude;
+  else rabbit.motionIntent.altitude = altitude;
   rabbit.jumpZ = height;
   rabbit.noShadow = false;
 }
@@ -71,7 +86,8 @@ export function settleRabbit(rabbit: Entity, _groundZ: number): void {
   delete ai.hop;
   if (!queuedEscape) delete ai.alarmFrom;
 
-  delete rabbit.jumpZ;
+  // As the readback of a grounded body leaves it.
+  rabbit.jumpZ = 0;
   if (rabbit.motionIntent) rabbit.motionIntent.vx = rabbit.motionIntent.vy = 0;
   if (rabbit.wanderAI) rabbit.wanderAI.state = alarm ? "scared" : "idle";
   restoreRabbitPose(rabbit);

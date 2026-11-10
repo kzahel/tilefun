@@ -1,6 +1,6 @@
 import type { Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
-import { isNapping } from "../entities/naps.js";
+import { isNapping, wake } from "../entities/naps.js";
 import type { PropManager } from "../entities/PropManager.js";
 import { getGravityRevision, getGravityScale } from "../physics/Gravity.js";
 import { diffEntitySnapshots, type EntityDelta } from "../shared/entityDelta.js";
@@ -13,7 +13,9 @@ import type {
 } from "../shared/protocol.js";
 import { reuseEntitySnapshot, serializeProp } from "../shared/serialization.js";
 import type { World } from "../world/World.js";
+import type { AiPlanningScheduler } from "./AiPlanningScheduler.js";
 import { type PlayerSession, seatAddress } from "./PlayerSession.js";
+import { endNap } from "./RealmNaps.js";
 import {
   interestChunks,
   interestEntities,
@@ -28,6 +30,7 @@ interface ReplicationSource {
   readonly entityManager: EntityManager;
   readonly propManager: PropManager;
   readonly sessions: ReadonlyMap<string, PlayerSession>;
+  readonly aiPlanning: AiPlanningScheduler;
   readonly tickCounter: number;
   readonly simulationTime?: number;
   /** Prediction context around one anchor per seat in the stream. */
@@ -178,13 +181,13 @@ export class RealmReplicator {
       currentEntityIds.add(entity.id);
       // A napping actor compared since it was last simulated has not changed, and
       // this stream already holds that snapshot.
-      if (prev === owned && prev && sentSinceSimulated(entity, tick)) continue;
+      if (unchangedNap(entity, source) && prev === owned && prev) continue;
       entity.comparedTick = tick;
       const snapshot = reuseEntitySnapshot(entity, owned);
       if (snapshot !== owned) this.snapshots.set(entity, snapshot);
       // An unchanged entity already sent to this stream needs nothing further.
       if (prev === snapshot) continue;
-      if (!prev) entityBaselines.push(snapshot);
+      if (!prev) entityBaselines.push(introduce(entity, snapshot));
       else {
         const d = diffEntitySnapshots(prev, snapshot);
         if (d) entityDeltas.push(d);
@@ -290,6 +293,19 @@ function editorCursors(session: PlayerSession, source: ReplicationSource): Remot
   return cursors;
 }
 
-/** Napping at `tick`, and some stream compared it on or after its last simulated tick. */
-const sentSinceSimulated = (entity: Entity, tick: number) =>
-  isNapping(entity, tick) && (entity.comparedTick ?? -1) >= (entity.napFrom ?? 0) - 1;
+/** Napping at `tick`, and some stream compared it on or after its last simulated
+ * tick. An actor with a nap pending that was not in this tick's split has left
+ * simulation: the nap ends here, with its clocks current, and it is compared. */
+function unchangedNap(entity: Entity, source: ReplicationSource): boolean {
+  if (entity.napFrom === undefined) return false;
+  const tick = source.tickCounter;
+  if (entity.simTick !== tick) endNap(entity, source);
+  return isNapping(entity, tick) && (entity.comparedTick ?? -1) >= (entity.napFrom ?? 0) - 1;
+}
+
+/** A new viewer's baseline. A napping actor's timed clip (a hop) shows the phase its
+ * nap began with: simulate it next tick, so the viewer has the current phase then. */
+function introduce(entity: Entity, snapshot: EntitySnapshot): EntitySnapshot {
+  if (entity.sprite?.clipElapsedMs !== undefined) wake(entity);
+  return snapshot;
+}

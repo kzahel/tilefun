@@ -148,3 +148,67 @@ it.each([1, 0.01, 0])(
     expect(dog.wz).toBeLessThan(-20);
   },
 );
+
+it("puts an actor to sleep within a few ticks of its own motor stopping", async () => {
+  const dog = createFauna("dog", 0, 0);
+  const { s, tick } = await settled(dog);
+  const walk = new Map([[dog.id, { vx: 40, vy: 0 }]]);
+  for (let i = 0; i < 30; i++) tick([dog], [], walk);
+  expect(dog.position.wx).toBeGreaterThan(10);
+  // The solver alone keeps it awake, motored and read, for half a second and more.
+  let ticks = 0;
+  while (!s.restful(dog) && ticks < 60) {
+    tick([dog]);
+    ticks++;
+  }
+  expect(ticks).toBeLessThan(10);
+  expect(tick([dog])).toEqual({ reads: 0, motors: 0 });
+  expect(dog.velocity).toEqual({ vx: 0, vy: 0 });
+});
+
+it("leaves to the solver a still actor with another body in reach", async () => {
+  const dog = createFauna("dog", 0, 32),
+    other = createFauna("dog", 13, 32);
+  const { s, tick } = await settled(dog, other);
+  const nudge = new Map([[dog.id, { vx: 20, vy: 0 }]]);
+  for (let i = 0; i < 6; i++) tick([dog, other], [], nudge);
+  for (let i = 0; i < 20; i++) tick([dog, other]);
+  // Pressed against its neighbour it is not put to sleep early.
+  expect(s.contactIds(dog.id)?.has(other.id)).toBe(true);
+  expect(s.restful(dog)).toBe(false);
+});
+
+it("wakes a sleeping actor before another lands on it, so the lander does not sink in", async () => {
+  for (const held of [false, true]) {
+    const low = createFauna("dog", 0, 0),
+      top = createFauna("dog", 300, 0);
+    const { s, tick } = await settled(low, top);
+    const height = low.collider?.physicalHeight ?? 0;
+    expect(s.restful(low)).toBe(true);
+    if (held) nap(low);
+    const step = () => (isNapping(low) && held ? tick([top], [low]) : tick([low, top]));
+    teleportBody(top, { wx: 0, wy: 0, wz: height + 14 });
+    let sunk = 0,
+      landed = false;
+    for (let i = 0; i < 40; i++) {
+      step();
+      if (top.jumpVZ !== undefined) continue;
+      landed = true;
+      sunk = Math.max(sunk, height - (top.wz ?? 0), -(low.wz ?? 0));
+    }
+    expect(landed).toBe(true);
+    // Onto a sleeper left asleep the lander drives it a pixel into the ground.
+    expect(sunk).toBeLessThan(0.2);
+    expect(isNapping(low)).toBe(false);
+  }
+});
+
+it("publishes an airborne body's height above the ground beneath it", async () => {
+  const dog = createFauna("dog", 0, 0);
+  const { tick } = await settled(dog);
+  teleportBody(dog, { wx: 0, wy: 0, wz: 12 });
+  tick([dog]);
+  expect(dog.jumpVZ).toBeDefined();
+  expect(dog.jumpZ).toBeGreaterThan(8);
+  expect(dog.groundZ).toBeCloseTo(0, 0);
+});

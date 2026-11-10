@@ -44,6 +44,12 @@ export interface SceneBody {
   centred: boolean;
   /** The last readback found the pose bit-identical to the tick before. */
   unmoved: boolean;
+  /** This step's motor asked for no motion at all. */
+  still: boolean;
+  /** Newly made, or moved by its own motor, and not yet put to rest. */
+  settling: boolean;
+  /** The last full readback found a contact pair, solved or not, with another body. */
+  beside: boolean;
   /** Bodies in solved contact at the last full readback. */
   touching: number[];
   /** Left out of the scene's per-tick passes while its actor naps. */
@@ -229,6 +235,9 @@ export function createSceneBody(
     dormant: false,
     centred: false,
     unmoved: false,
+    still: false,
+    settling: true,
+    beside: false,
     touching: [],
     held: false,
     state: initialState(entity, kind, d, rotation, bed),

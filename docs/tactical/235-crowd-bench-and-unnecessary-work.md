@@ -677,19 +677,146 @@ case needed a retry in one run; the fox spec then passed 52 of 52.
 `PhysicsScene.ts` shrinks (edits moved to `BodyEdits.ts`); `Realm.ts` shrinks;
 `EntityHandle.ts` and `RealmActivity.ts` gain two lines and one.
 
+### What remained after this slice
+
+The estimate made here (about 1.1 ms at rest plus 20 µs per moving rabbit) was
+wrong: the next slice halved the actors awake and the tick fell by 13 %. See
+"What remains for 2 ms" below it.
+
+## Authority slice: fewer actors awake (delivered 2026-11-10)
+
+The owner asked for the cost of moving actors to be reduced. A temporary counter
+in `partitionNaps` showed who was awake each tick in the bench, and why:
+
+| Awake per tick (of 1,051) | Before | After |
+| --- | ---: | ---: |
+| On the forced waking tick (one in nine) | 98 | 0 |
+| Standing after a hop, waiting for the solver to sleep the body | 63 | about 10 |
+| In a hop's gather or landing, standing | 36 | about 5 |
+| In a hop's travel | 22 | 22 |
+| Parked cars | 50 | 50 |
+| Other (asking the planner, touching a neighbour, the player) | 5 | about 30 |
+| **Total** | **274** | **about 120** |
+
+Only the 22 were moving. ("Other" grew because rabbits that used to be counted
+under the first rows now show up briefly as they change state.)
+
+**Result** (M4 Pro, Node 24.22.1, three interleaved fresh processes each;
+[evidence](../benchmarks/235-authority-hop-holds.json)):
+
+| Measure | Before (`da8165be`) | After |
+| --- | ---: | ---: |
+| Tick p50 | 2.61–2.92 ms | 2.27–2.33 ms |
+| Tick p95 | 3.16–3.78 ms | 3.16–3.32 ms |
+| Physics stage p50 / p95 | 0.93–1.08 / 1.18–1.46 ms | 0.69–0.71 / 1.05–1.08 ms |
+| Replication p50 / p95 | 0.64–0.67 / 0.75–0.89 ms | 0.62–0.64 / 0.85–0.89 ms |
+| AI p50 / p95 | 0.23–0.24 / 0.28–0.31 ms | 0.18 / 0.23–0.25 ms |
+| Actors napping per tick | 777 | 929 |
+| Body reads / motor updates per tick | 102 / 171 | 68 / 115 |
+| Replication bytes per tick | 9,756 | 8,892 |
+| Actors in motion (sampled) | 50.5 | 49.7 |
+
+The tick is about 13–15 % shorter at p50; p95 is at best slightly better.
+**The 2 ms goal is not reached.** (Another project's test suite loaded the
+machine for part of the session; these runs were taken at a load average near 3.)
+
+**Pixel 7a: no measurable change.** Crowd scene in the seed-2026 city, run
+after/before/before/after with 150 s pauses:
+
+| Zoom | Worker tick p50 / p95 before | After |
+| --- | ---: | ---: |
+| 1 | 12.9–13.8 / 19.6–20.2 ms | 12.6–13.7 / 20.2–20.7 ms |
+| 0.25 | 16.4–18.7 / 24.0–26.4 ms | 16.6–17.2 / 24.4 ms |
+
+The phone's runs differ from each other by more than this change is worth, and a
+first pass without pauses drifted by several milliseconds as the phone warmed.
+(The phone runs predate the review fixes below, which do not touch the tick's cost.)
+Its Worker profile is flat: Rapier's own step 8 %, body readback 7 %, choosing
+who simulates 7 %, moving traffic (wheel contacts, route planning) about 10 %,
+replication 16 %.
+
+### Changes
+
+- **Naps go straight on** (`RealmNaps.ts`). A nap that ran its length continues
+  without a simulated tick in between while its conditions still hold; that tick
+  would have changed nothing. `LONGEST_NAP` (8 ticks) is now only how often the
+  conditions are looked at again and the actor is compared for replication.
+  A nap ended from outside (`wake`, a player near, a tier change) is still
+  followed by a simulated tick.
+- **A hop's standing parts nap** (`rabbitWaiting.ts`, `rabbitInteractions.ts`).
+  A hop lasts one second and travels only between 0.25 and 0.625 s. While the
+  rabbit stands on the ground it starts from or lands on, `prepareRabbitHop`
+  no longer prescribes a height (the motor ignored it there anyway), so the
+  intent is idle and the body may sleep; the rabbit naps and its hop clock is
+  replayed on waking. Clients run the hop clip themselves between frames, as
+  they already did, so the authority no longer sends its phase every tick.
+- **An actor that stops is put to sleep at once** (`restNow` in
+  `HeldBodies.ts`). The solver waits half a second or more before sleeping a
+  still body, and rabbits stayed awake about a second after each hop. A
+  non-player character whose own motor asks for nothing, that the step left in
+  place (within 0.016 px), on static ground with no other body in reach, now
+  sleeps on that tick. A body something else woke is left to the solver.
+- **A sleeper is woken before something lands on it** (`meetBody`, and the
+  airborne ground probe in `BodyReadback.ts`). Landing on a sleeping body drove
+  it about a pixel into the ground, because its own ground contact joins the
+  solver one step late. That was already so for any animal at rest for a while;
+  sleeping bodies sooner made it the common case and the raptor hunt test found
+  it. The wake-ups are applied after all bodies are read, so the result does not
+  depend on body order.
+
+- **A nap never lags what is shown outside simulation** (`endNap`). A hop's
+  clock is behind during a nap, which is invisible while clients run the clip
+  themselves but not otherwise. So a nap ends, with its clocks replayed, when
+  its actor is published without having been simulated that tick: a paused
+  realm, a workshop clock stop or manual step (`ScenarioSession.publish`), an
+  actor that left admission but is still in view. A viewer that takes a first
+  baseline of a napping hop wakes it, so the current phase follows a tick later.
+
+### What changed in behaviour
+
+- Rabbits farther than 64 px from every player show their hop clip from the
+  client's own clock for up to eight ticks at a time; the test holds it within
+  2 ms of the authority's phase. A new viewer may see a hop up to eight ticks
+  behind for one tick.
+- Landing on an animal that had been resting for a while no longer sinks into
+  it. Raptors therefore land cleanly on resting prey at the first approach; the
+  prey may then startle and hop off, so a hunt can take a third approach (the
+  realm hunt test allows 900 ticks instead of 600).
+- A still actor's body sleeps within a few ticks instead of after about half a
+  second. A sleeping body is woken by contact as before.
+- The wire changes (fewer clip-phase updates, `jumpZ` stays 0 after a hop
+  instead of being absent for one tick), so the bench digest changes.
+
+### Validation
+
+`RealmNaps.test.ts` compares a napping realm with one that never naps, tick by
+tick, in everything but the clip phase of rabbits napping inside a hop, and
+compares what two clients show (clip, phase within 2 ms, position).
+`HeldBodies.test.ts` covers the early sleep, its exclusion with a neighbour in
+reach, and landing on a sleeper (free and held); each was checked to fail with
+its change removed. Further tests cover a late viewer, publication outside a
+tick, an actor leaving admission mid-nap and 900 manually stepped ticks.
+3,571 native tests pass.
+
+The independent review found, over four passes: the airborne `jumpZ`
+assignment dropped by accident (restored, with a test), stale hop phases for
+late viewers, pauses and actors leaving admission (the `endNap` paths above),
+and rabbits never hopping under manual stepping when ending a nap skipped the
+planner clock (it is replayed now). Its last pass found nothing further.
+
 ### What remains for 2 ms
 
-At rest the bench tick is about 1.1 ms; each rabbit in motion costs roughly
-20 µs per tick. The remaining cost is therefore in active actors and in a few
-whole-list steps:
-1. A hopping rabbit is awake for its whole one-second hop, though it stands
-   still for 0.6 s of it (gather and landing), and its body is read back with
-   contact callbacks every tick.
-2. Choosing who simulates (`RealmActivity.select`) and building the replication
-   interest list still visit every actor each tick.
-3. Parked cars, residents, other species and the outer ring of actors that
-   decide every fourth tick do not nap yet.
-4. Fixed bodies (resources, anchors) are still read every tick; they are absent
+Halving the actors awake bought 13 %, so most of the 2.2 ms is not per moving
+actor. It is steps that visit all 1,051 actors or bodies every tick whatever
+they do: choosing who simulates (`RealmActivity.select`, about 7 %), the
+napping split itself (about 6 %), the replication frame loop and interest list
+(about 16 %), the prediction snapshot around the player (about 6 %), physics
+`synchronize` over live and held bodies (about 5 %), and Rapier's own step
+(about 10 %).
+1. Make those whole-list steps follow changes instead of visiting everyone.
+2. Parked cars (50 of the 120 still awake), residents, other species and the
+   outer ring of actors that decide every fourth tick do not nap yet.
+3. Fixed bodies (resources, anchors) are still read every tick; they are absent
    from this bench but common in the woods.
 
 ### Review boundary and next slices

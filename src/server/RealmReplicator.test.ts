@@ -6,6 +6,7 @@ import { PropManager } from "../entities/PropManager.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import type { FrameMessage } from "../shared/protocol.js";
 import { World } from "../world/World.js";
+import { AiPlanningScheduler } from "./AiPlanningScheduler.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { RealmReplicator } from "./RealmReplicator.js";
 
@@ -24,6 +25,7 @@ it("replicates ready collision terrain throughout actor interest, including narr
     entityManager,
     propManager: new PropManager(),
     sessions: new Map([["local", session]]),
+    aiPlanning: new AiPlanningScheduler(),
     tickCounter: 1,
     tickRate: 60,
     playerNamesRevision: 0,
@@ -59,6 +61,7 @@ it("shares unchanged snapshots across clients while observing edits within the s
     entityManager,
     propManager: new PropManager(),
     sessions,
+    aiPlanning: new AiPlanningScheduler(),
     tickCounter: 1,
     tickRate: 60,
     playerNamesRevision: 0,
@@ -99,6 +102,7 @@ it("replicates distant realm players for location markers while keeping other di
     entityManager,
     propManager: new PropManager(),
     sessions,
+    aiPlanning: new AiPlanningScheduler(),
     tickCounter: 1,
     tickRate: 60,
     playerNamesRevision: 0,

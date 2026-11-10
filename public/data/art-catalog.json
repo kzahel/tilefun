@@ -35487,7 +35487,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/BodyMotor.ts:141"
+          "source": "src/physics/BodyMotor.ts:143"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/physics/HeldBodies.ts:118"
         },
         {
           "system": "Gameplay",
@@ -35503,7 +35507,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:520"
+          "source": "src/physics/PhysicsScene.ts:529"
         },
         {
           "system": "Gameplay",
@@ -35527,11 +35531,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:147"
+          "source": "src/scenarios/ScenarioSession.ts:148"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:227"
+          "source": "src/scenarios/ScenarioSession.ts:228"
         },
         {
           "system": "Gameplay",
@@ -35563,7 +35567,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmNaps.ts:137"
+          "source": "src/server/RealmNaps.ts:167"
         },
         {
           "system": "Gameplay",
@@ -36643,11 +36647,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/SceneBody.ts:112"
+          "source": "src/physics/SceneBody.ts:118"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/SceneBody.ts:130"
+          "source": "src/physics/SceneBody.ts:136"
         },
         {
           "system": "Gameplay",

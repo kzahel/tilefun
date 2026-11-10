@@ -711,7 +711,6 @@ export class Realm {
     storagePaused: boolean,
     gravity: number,
   ) {
-    const stepDt = PHYSICS_DT;
     const entityTickDts = this.selectSimulationEntities(activeSessions, storagePaused);
     const players = activeSessions.map((s) => s.player);
     const activity = (e: Entity) =>
@@ -726,7 +725,7 @@ export class Realm {
     );
     this.activeActors = active.length;
     const period = Realm.MID_TICK_FRAMES / this.tickRate;
-    const decisions = decisionDts(awake, stepDt, period, activity);
+    const decisions = decisionDts(awake, PHYSICS_DT, period, activity);
     this.entityManager.simulationEntities = active;
     this.propManager.simulationProps = this.propActivity.select(
       this.propManager,
@@ -735,7 +734,7 @@ export class Realm {
     try {
       const work = createRealmWorkContext(this, entityTickDts, activeSessions);
       this.updateDecisions(active, awake, activeSessions, decisions, work);
-      this.worldAPI.tick.firePre(stepDt);
+      this.worldAPI.tick.firePre(PHYSICS_DT);
       const timing = performanceMetrics.start();
       const { scene, participants, wasAirborne } = this.physics.step(
         awake,
@@ -866,6 +865,7 @@ export class Realm {
         entityManager: this.entityManager,
         propManager: this.propManager,
         sessions: this.sessions,
+        aiPlanning: this.aiPlanning,
         tickCounter: this.tickCounter,
         simulationTime: this.worldAPI.time,
         tickRate: this.tickRate,
@@ -1327,7 +1327,7 @@ export class Realm {
   private readonly activity = new RealmActivity();
   private readonly propActivity = new RealmPropActivity();
   private robinTurn = 0;
-  private readonly aiPlanning = new AiPlanningScheduler();
+  readonly aiPlanning = new AiPlanningScheduler();
   private buildStrategy(meta: WorldMeta | undefined): TerrainStrategy {
     this.generator = createGenerator(descriptorFromMetadata(meta), this.options.landscape);
     return this.generator.terrain;

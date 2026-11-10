@@ -1,0 +1,560 @@
+{
+ "description": "Authority tick before (da8165be) and after naps that go straight on, napping through a hop's gather and landing, putting an actor to sleep when its own motor stops, and waking a sleeper before a body lands on it (tactical 235). Node 24.22.1, Apple M4 Pro, interleaved fresh processes, 180 warm-up + 600 measured ticks each. Phone rows are render:bench crowd cells on a Pixel 7a (Vite dev modules, seed-2026 city), run after/before/before/after with 150 s pauses; an earlier pass without pauses drifted with temperature and is not used. The phone rows were taken before the review fixes (airborne jumpZ restored, naps ended for publications outside a tick); the Node rows are the final code. Another project's test suite ran on the Mac for part of the session; these Node runs were taken at a load average near 3.",
+ "node": {
+  "before": [
+   {
+    "tickMs": {
+     "p50": 2.919,
+     "p95": 3.78,
+     "p99": 4.349
+    },
+    "stagesMs": {
+     "server.autotile": {
+      "p50": 0.001,
+      "p95": 0.001
+     },
+     "realm.ai": {
+      "p50": 0.242,
+      "p95": 0.307
+     },
+     "realm.entityPhysics": {
+      "p50": 1.084,
+      "p95": 1.463
+     },
+     "realm.saveSweep": {
+      "p50": 0.05,
+      "p95": 0.07
+     },
+     "server.replication": {
+      "p50": 0.672,
+      "p95": 0.885
+     },
+     "realm.tick": {
+      "p50": 2.919,
+      "p95": 3.779
+     }
+    },
+    "work": {
+     "simulatedActors": 1051,
+     "nappingActors": 777.325,
+     "movingActors": 50.5,
+     "movingSampleEveryTicks": 30,
+     "physicsBodies": 1051,
+     "bodyReads": 101.607,
+     "motorUpdates": 171,
+     "awakeCars": 0,
+     "wheelRays": 0,
+     "wheelBodyTests": 0,
+     "supportQueries": 32.887,
+     "replicationBytes": 9756
+    },
+    "wireSha256": "4fb15856030802866759bedb42dc94498334bca21a50525d984b9ab47db75028",
+    "loadAverage": [
+     2.9,
+     4.2,
+     8.0
+    ]
+   },
+   {
+    "tickMs": {
+     "p50": 2.724,
+     "p95": 3.412,
+     "p99": 3.755
+    },
+    "stagesMs": {
+     "server.autotile": {
+      "p50": 0.001,
+      "p95": 0.001
+     },
+     "realm.ai": {
+      "p50": 0.235,
+      "p95": 0.29
+     },
+     "realm.entityPhysics": {
+      "p50": 0.978,
+      "p95": 1.287
+     },
+     "realm.saveSweep": {
+      "p50": 0.046,
+      "p95": 0.062
+     },
+     "server.replication": {
+      "p50": 0.641,
+      "p95": 0.776
+     },
+     "realm.tick": {
+      "p50": 2.724,
+      "p95": 3.411
+     }
+    },
+    "work": {
+     "simulatedActors": 1051,
+     "nappingActors": 777.325,
+     "movingActors": 50.5,
+     "movingSampleEveryTicks": 30,
+     "physicsBodies": 1051,
+     "bodyReads": 101.607,
+     "motorUpdates": 171,
+     "awakeCars": 0,
+     "wheelRays": 0,
+     "wheelBodyTests": 0,
+     "supportQueries": 32.887,
+     "replicationBytes": 9756
+    },
+    "wireSha256": "4fb15856030802866759bedb42dc94498334bca21a50525d984b9ab47db75028",
+    "loadAverage": [
+     3.2,
+     4.2,
+     8.0
+    ]
+   },
+   {
+    "tickMs": {
+     "p50": 2.607,
+     "p95": 3.162,
+     "p99": 3.543
+    },
+    "stagesMs": {
+     "server.autotile": {
+      "p50": 0,
+      "p95": 0.001
+     },
+     "realm.ai": {
+      "p50": 0.229,
+      "p95": 0.278
+     },
+     "realm.entityPhysics": {
+      "p50": 0.931,
+      "p95": 1.176
+     },
+     "realm.saveSweep": {
+      "p50": 0.043,
+      "p95": 0.052
+     },
+     "server.replication": {
+      "p50": 0.648,
+      "p95": 0.749
+     },
+     "realm.tick": {
+      "p50": 2.607,
+      "p95": 3.161
+     }
+    },
+    "work": {
+     "simulatedActors": 1051,
+     "nappingActors": 777.325,
+     "movingActors": 50.5,
+     "movingSampleEveryTicks": 30,
+     "physicsBodies": 1051,
+     "bodyReads": 101.607,
+     "motorUpdates": 171,
+     "awakeCars": 0,
+     "wheelRays": 0,
+     "wheelBodyTests": 0,
+     "supportQueries": 32.887,
+     "replicationBytes": 9756
+    },
+    "wireSha256": "4fb15856030802866759bedb42dc94498334bca21a50525d984b9ab47db75028",
+    "loadAverage": [
+     3.1,
+     4.2,
+     7.9
+    ]
+   }
+  ],
+  "after": [
+   {
+    "tickMs": {
+     "p50": 2.27,
+     "p95": 3.159,
+     "p99": 3.715
+    },
+    "stagesMs": {
+     "server.autotile": {
+      "p50": 0.001,
+      "p95": 0.001
+     },
+     "realm.ai": {
+      "p50": 0.179,
+      "p95": 0.228
+     },
+     "realm.entityPhysics": {
+      "p50": 0.694,
+      "p95": 1.058
+     },
+     "realm.saveSweep": {
+      "p50": 0.042,
+      "p95": 0.066
+     },
+     "server.replication": {
+      "p50": 0.624,
+      "p95": 0.846
+     },
+     "realm.tick": {
+      "p50": 2.269,
+      "p95": 3.159
+     }
+    },
+    "work": {
+     "simulatedActors": 1051,
+     "nappingActors": 928.985,
+     "movingActors": 49.65,
+     "movingSampleEveryTicks": 30,
+     "physicsBodies": 1051,
+     "bodyReads": 68.467,
+     "motorUpdates": 114.87,
+     "awakeCars": 0,
+     "wheelRays": 0,
+     "wheelBodyTests": 0,
+     "supportQueries": 32.897,
+     "replicationBytes": 8892
+    },
+    "wireSha256": "3459473146991bf3eaeff4a5c89e9e769e06d30477a7ad6fff84068bbb0f941a",
+    "loadAverage": [
+     2.9,
+     4.2,
+     8.0
+    ]
+   },
+   {
+    "tickMs": {
+     "p50": 2.328,
+     "p95": 3.323,
+     "p99": 3.789
+    },
+    "stagesMs": {
+     "server.autotile": {
+      "p50": 0.001,
+      "p95": 0.001
+     },
+     "realm.ai": {
+      "p50": 0.183,
+      "p95": 0.245
+     },
+     "realm.entityPhysics": {
+      "p50": 0.711,
+      "p95": 1.08
+     },
+     "realm.saveSweep": {
+      "p50": 0.042,
+      "p95": 0.07
+     },
+     "server.replication": {
+      "p50": 0.642,
+      "p95": 0.885
+     },
+     "realm.tick": {
+      "p50": 2.327,
+      "p95": 3.321
+     }
+    },
+    "work": {
+     "simulatedActors": 1051,
+     "nappingActors": 928.985,
+     "movingActors": 49.65,
+     "movingSampleEveryTicks": 30,
+     "physicsBodies": 1051,
+     "bodyReads": 68.467,
+     "motorUpdates": 114.87,
+     "awakeCars": 0,
+     "wheelRays": 0,
+     "wheelBodyTests": 0,
+     "supportQueries": 32.897,
+     "replicationBytes": 8892
+    },
+    "wireSha256": "3459473146991bf3eaeff4a5c89e9e769e06d30477a7ad6fff84068bbb0f941a",
+    "loadAverage": [
+     3.2,
+     4.2,
+     8.0
+    ]
+   },
+   {
+    "tickMs": {
+     "p50": 2.289,
+     "p95": 3.247,
+     "p99": 4.146
+    },
+    "stagesMs": {
+     "server.autotile": {
+      "p50": 0,
+      "p95": 0.001
+     },
+     "realm.ai": {
+      "p50": 0.18,
+      "p95": 0.23
+     },
+     "realm.entityPhysics": {
+      "p50": 0.712,
+      "p95": 1.052
+     },
+     "realm.saveSweep": {
+      "p50": 0.042,
+      "p95": 0.067
+     },
+     "server.replication": {
+      "p50": 0.64,
+      "p95": 0.863
+     },
+     "realm.tick": {
+      "p50": 2.289,
+      "p95": 3.245
+     }
+    },
+    "work": {
+     "simulatedActors": 1051,
+     "nappingActors": 928.985,
+     "movingActors": 49.65,
+     "movingSampleEveryTicks": 30,
+     "physicsBodies": 1051,
+     "bodyReads": 68.467,
+     "motorUpdates": 114.87,
+     "awakeCars": 0,
+     "wheelRays": 0,
+     "wheelBodyTests": 0,
+     "supportQueries": 32.897,
+     "replicationBytes": 8892
+    },
+    "wireSha256": "3459473146991bf3eaeff4a5c89e9e769e06d30477a7ad6fff84068bbb0f941a",
+    "loadAverage": [
+     3.1,
+     4.2,
+     7.9
+    ]
+   }
+  ]
+ },
+ "awakePerTick": {
+  "before": {
+   "total": 274,
+   "regularWakeTick": 98,
+   "bodyAwaitingSolverSleep": 63,
+   "hopGather": 15.5,
+   "hopTravel": 21.7,
+   "hopLanding": 20.4,
+   "parkedCars": 50,
+   "other": 5
+  },
+  "after": {
+   "total": 122,
+   "hopTravel": 22,
+   "parkedCars": 50,
+   "other": 50
+  },
+  "note": "One instrumented run each; categories from a temporary counter in partitionNaps, not kept in the code."
+ },
+ "phone": {
+  "before": [
+   {
+    "zoom": 1,
+    "workerTickMs": {
+     "p50": 13.8,
+     "p95": 20.2
+    },
+    "physicsMs": {
+     "p50": 5.9,
+     "p95": 9.4
+    },
+    "replicationMs": {
+     "p50": 2.2,
+     "p95": 3.3
+    },
+    "aiMs": {
+     "p50": 0.7,
+     "p95": 1.1
+    },
+    "frameMs": {
+     "p50": 16.7,
+     "p95": 16.8,
+     "max": 33.4
+    },
+    "missed": 3,
+    "frames": 298
+   },
+   {
+    "zoom": 0.25,
+    "workerTickMs": {
+     "p50": 16.4,
+     "p95": 24
+    },
+    "physicsMs": {
+     "p50": 7.3,
+     "p95": 10.9
+    },
+    "replicationMs": {
+     "p50": 3,
+     "p95": 4.5
+    },
+    "aiMs": {
+     "p50": 1.1,
+     "p95": 1.8
+    },
+    "frameMs": {
+     "p50": 33.3,
+     "p95": 33.4,
+     "max": 50
+    },
+    "missed": 1,
+    "frames": 186
+   },
+   {
+    "zoom": 1,
+    "workerTickMs": {
+     "p50": 12.9,
+     "p95": 19.6
+    },
+    "physicsMs": {
+     "p50": 5.5,
+     "p95": 9.2
+    },
+    "replicationMs": {
+     "p50": 2.2,
+     "p95": 3.3
+    },
+    "aiMs": {
+     "p50": 0.7,
+     "p95": 1.1
+    },
+    "frameMs": {
+     "p50": 16.7,
+     "p95": 16.8,
+     "max": 50
+    },
+    "missed": 6,
+    "frames": 294
+   },
+   {
+    "zoom": 0.25,
+    "workerTickMs": {
+     "p50": 18.7,
+     "p95": 26.4
+    },
+    "physicsMs": {
+     "p50": 8.7,
+     "p95": 12.2
+    },
+    "replicationMs": {
+     "p50": 3.3,
+     "p95": 5.2
+    },
+    "aiMs": {
+     "p50": 1.2,
+     "p95": 2.7
+    },
+    "frameMs": {
+     "p50": 33.3,
+     "p95": 49.8,
+     "max": 66.6
+    },
+    "missed": 7,
+    "frames": 175
+   }
+  ],
+  "after": [
+   {
+    "zoom": 1,
+    "workerTickMs": {
+     "p50": 12.6,
+     "p95": 20.7
+    },
+    "physicsMs": {
+     "p50": 5.4,
+     "p95": 9.8
+    },
+    "replicationMs": {
+     "p50": 2.4,
+     "p95": 3.7
+    },
+    "aiMs": {
+     "p50": 0.7,
+     "p95": 1.4
+    },
+    "frameMs": {
+     "p50": 16.7,
+     "p95": 33.3,
+     "max": 66.7
+    },
+    "missed": 27,
+    "frames": 273
+   },
+   {
+    "zoom": 0.25,
+    "workerTickMs": {
+     "p50": 16.6,
+     "p95": 24.4
+    },
+    "physicsMs": {
+     "p50": 7.1,
+     "p95": 11.6
+    },
+    "replicationMs": {
+     "p50": 3,
+     "p95": 4.9
+    },
+    "aiMs": {
+     "p50": 0.9,
+     "p95": 1.5
+    },
+    "frameMs": {
+     "p50": 33.3,
+     "p95": 50,
+     "max": 50.1
+    },
+    "missed": 11,
+    "frames": 160
+   },
+   {
+    "zoom": 1,
+    "workerTickMs": {
+     "p50": 13.7,
+     "p95": 20.2
+    },
+    "physicsMs": {
+     "p50": 5.8,
+     "p95": 10
+    },
+    "replicationMs": {
+     "p50": 2.3,
+     "p95": 3.6
+    },
+    "aiMs": {
+     "p50": 0.7,
+     "p95": 1.2
+    },
+    "frameMs": {
+     "p50": 16.7,
+     "p95": 33.3,
+     "max": 33.4
+    },
+    "missed": 21,
+    "frames": 280
+   },
+   {
+    "zoom": 0.25,
+    "workerTickMs": {
+     "p50": 17.2,
+     "p95": 24.4
+    },
+    "physicsMs": {
+     "p50": 7.3,
+     "p95": 10.9
+    },
+    "replicationMs": {
+     "p50": 3,
+     "p95": 4.8
+    },
+    "aiMs": {
+     "p50": 1,
+     "p95": 1.6
+    },
+    "frameMs": {
+     "p50": 33.3,
+     "p95": 50,
+     "max": 50.1
+    },
+    "missed": 19,
+    "frames": 151
+   }
+  ]
+ }
+}

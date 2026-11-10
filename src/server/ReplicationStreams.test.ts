@@ -9,6 +9,7 @@ import { FlatStrategy } from "../generation/FlatStrategy.js";
 import type { FrameMessage, ServerMessage, VehicleHornMessage } from "../shared/protocol.js";
 import type { IServerTransport } from "../transport/Transport.js";
 import { World } from "../world/World.js";
+import { AiPlanningScheduler } from "./AiPlanningScheduler.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { publishStreams, replicationStreams } from "./RealmPublication.js";
 import { RealmReplicator } from "./RealmReplicator.js";
@@ -43,6 +44,7 @@ function fixture() {
     entityManager,
     propManager,
     sessions: new Map([host, guest, other].map((s) => [s.clientId, s])),
+    aiPlanning: new AiPlanningScheduler(),
     tickCounter: 1,
     tickRate: 60,
     physicsSnapshot,

@@ -32,9 +32,11 @@ interface WildlifeSpecies {
   ): void;
   /** Player landing or ball contact; not a predator alarm (see `alarmPrey`). */
   startle(entity: Entity, from: PositionComponent): void;
-  /** How many coming decisions, up to `limit`, would only run this animal's clocks down. */
+  /** How many coming ticks, up to `limit`, would only run this animal's clocks down:
+   * no decision, no motion asked of its body, and no change to its picture other than
+   * a timed clip that every client runs by itself. */
   waits?(entity: Entity, dt: number, limit: number, planning: AiPlanningScheduler): number;
-  /** Run those clocks for `ticks` skipped decisions, exactly as the decisions would have. */
+  /** Run those clocks for `ticks` skipped ticks, exactly as the ticks would have. */
   idles?(entity: Entity, dt: number, ticks: number): void;
 }
 

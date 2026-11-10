@@ -1,14 +1,13 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
-import { spriteHolds } from "../entities/spriteAnimation.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import type { PhysicsScene } from "../physics/PhysicsScene.js";
 import { wildlifeKind } from "../wildlife/WildlifeKinds.js";
 import { WILDLIFE_SPECIES } from "../wildlife/WildlifeSpecies.js";
 import type { AiPlanningScheduler } from "./AiPlanningScheduler.js";
 
-/** Longest nap in ticks: every napping actor is simulated in full at least once in
- * LONGEST_NAP + 1 ticks. An edit the realm was not told about (`wake`) is admitted to
- * physics and replication after at most this long. */
+/** Longest nap in ticks before an actor's conditions are looked at again. A nap that
+ * ran its length goes straight on while they still hold; an edit the realm was not
+ * told about (`wake`) is seen by physics and replication after at most this long. */
 export const LONGEST_NAP = 8;
 /** Pixels. No actor naps with a player this close, so reactions to players stay immediate. */
 const NEAR = 64;
@@ -26,10 +25,10 @@ type Activity = (entity: Entity) => number | undefined;
 
 /**
  * Split this tick's admitted actors into those simulated and those napping (see
- * `entities/naps.ts`). An actor naps while its brain only waits on clocks, its body
- * rests on static ground, its picture is still and no player is near. It wakes when a
- * clock is due, when disturbed, and on its own regular tick regardless; the tick it
- * wakes it is simulated in full, and its clocks first catch up tick by tick.
+ * `entities/naps.ts`). An actor naps while its species only waits on clocks (a rest,
+ * the standing parts of a hop), its body rests on static ground and no player is
+ * near. It wakes when a clock is due or it is disturbed; the tick it wakes it is
+ * simulated in full, and its clocks first catch up tick by tick.
  */
 export function partitionNaps(
   all: ReadonlyMap<Entity, number>,
@@ -53,13 +52,15 @@ export function partitionNaps(
     entity.simTick = now.tick;
     // A decision clock restarts when its actor returns to simulation.
     if (!continuing) entity.tickAccumulator = 0;
+    // A nap that ran its length may go straight on, since the simulated tick in
+    // between would have changed nothing either. One ended from outside (`wake`, a
+    // player near, a new tier) is followed by a simulated tick.
+    let rested = continuing,
+      extended = false;
     if (entity.napFrom !== undefined) {
-      if (
-        continuing &&
-        (entity.napUntil ?? -1) >= now.tick &&
-        !near(entity, now.players) &&
-        now.activity(entity) === 2
-      ) {
+      const until = entity.napUntil ?? -1;
+      rested &&= until >= 0 && !near(entity, now.players) && now.activity(entity) === 2;
+      if (rested && until >= now.tick) {
         napping.push(entity);
         continue;
       }
@@ -67,18 +68,48 @@ export function partitionNaps(
       entity.napFrom = entity.napUntil = undefined;
       positions ??= now.players.map((player) => player.position);
       if (skipped > 0) catchUp(entity, skipped, now, positions);
-    } else if (continuing) {
-      const ticks = napLength(entity, now);
-      if (ticks > 0) {
-        entity.napFrom = now.tick;
-        entity.napUntil = now.tick + ticks - 1;
-        napping.push(entity);
-        continue;
+      extended = rested;
+    }
+    const ticks = rested ? napLength(entity, now) : 0;
+    if (ticks > 0) {
+      entity.napFrom = now.tick;
+      entity.napUntil = now.tick + ticks - 1;
+      if (extended && positions) {
+        // Replay this tick as well: the actor is compared for replication now, like
+        // one starting a nap, and so shows its clocks as of this tick.
+        catchUp(entity, 1, now, positions);
+        entity.napFrom++;
+        delete entity.comparedTick;
       }
+      napping.push(entity);
+      continue;
     }
     awake.push(entity);
   }
   return { active, awake, napping };
+}
+
+/** What ending a nap outside the tick's split needs of its realm. */
+interface NapRealm {
+  readonly aiPlanning: AiPlanningScheduler;
+  readonly sessions: ReadonlyMap<string, { readonly player: Entity }>;
+}
+
+/** An actor that is shown but was not simulated this tick (a pause, a publication
+ * outside a tick, an actor that left admission): replay the clocks its nap skipped,
+ * up to its last simulated tick, so its picture is current. */
+export function endNap(entity: Entity, realm: NapRealm) {
+  if (entity.napFrom === undefined) return;
+  const skipped = (entity.simTick ?? -1) + 1 - entity.napFrom;
+  entity.napFrom = entity.napUntil = undefined;
+  delete entity.comparedTick;
+  if (skipped <= 0) return;
+  const players = [...realm.sessions.values()].map((session) => session.player.position);
+  catchUp(entity, skipped, { dt: PHYSICS_DT, planning: realm.aiPlanning }, players);
+}
+/** A publication outside a tick (a clock stop, a manual step): no nap may lag it. */
+export function endNaps(realm: NapRealm & { entityManager: { entities: readonly Entity[] } }) {
+  for (const entity of realm.entityManager.entities) endNap(entity, realm);
 }
 
 function near(entity: Entity, players: readonly Entity[]) {
@@ -97,14 +128,13 @@ function napLength(entity: Entity, now: NapTick) {
     !waits ||
     entity.parentId !== undefined ||
     entity.deathTimer !== undefined ||
-    near(entity, now.players) ||
-    !spriteHolds(entity)
+    near(entity, now.players)
   )
     return 0;
-  // Each actor's regular waking tick depends on its id, so a crowd that settles
-  // together does not also wake together.
-  const limit = LONGEST_NAP - ((now.tick + entity.id) % (LONGEST_NAP + 1));
-  const ticks = limit > 0 ? waits(entity, now.dt, limit, now.planning) : 0;
+  // The tick an actor's conditions are looked at again depends on its id, so a crowd
+  // that settles together is not also looked at together.
+  const limit = LONGEST_NAP - ((now.tick + entity.id) % LONGEST_NAP);
+  const ticks = waits(entity, now.dt, limit, now.planning);
   // Skipped clocks are replayed one tick at a time, which is what an actor deciding
   // every tick would have done; one deciding every fourth tick stays awake.
   return ticks > 0 && now.activity(entity) === 2 && now.scene?.restful(entity) ? ticks : 0;
@@ -113,7 +143,7 @@ function napLength(entity: Entity, now: NapTick) {
 function catchUp(
   entity: Entity,
   skipped: number,
-  now: NapTick,
+  now: Pick<NapTick, "dt" | "planning">,
   players: readonly PositionComponent[],
 ) {
   now.planning.advance(entity, now.dt, players, skipped);

@@ -8,6 +8,7 @@ import { decodeServerMessage, encodeServerMessage } from "../shared/binaryCodec.
 import { required } from "../shared/required.js";
 import { applyVehicleFacing, createVehicle } from "../traffic/Vehicle.js";
 import { World } from "../world/World.js";
+import { AiPlanningScheduler } from "./AiPlanningScheduler.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { RealmReplicator } from "./RealmReplicator.js";
 
@@ -21,6 +22,7 @@ it("replicates original, painted and cleared cars to two clients and a reconnect
     entityManager,
     propManager: new PropManager(),
     sessions,
+    aiPlanning: new AiPlanningScheduler(),
     tickCounter: 1,
     tickRate: 60,
     playerNamesRevision: 0,

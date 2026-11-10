@@ -10,7 +10,18 @@ import { keepRest, publishBody } from "./BodyReadback.js";
 import { rapierRotation, rotateBodyVector, worldRotation, yawRotation } from "./BodyRotation.js";
 import { DumpBedBody } from "./DumpBedBody.js";
 import type { GroundMaterial } from "./GroundMaterial.js";
-import { hold, NOBODY, reachedSections, resettle, restingBodies, unedited } from "./HeldBodies.js";
+import {
+  hold,
+  meetBody,
+  NOBODY,
+  reachedSections,
+  resettle,
+  restingBodies,
+  restNow,
+  restsUnread,
+  unedited,
+  wokenBodies,
+} from "./HeldBodies.js";
 import { playerClimbIntent } from "./Ladders.js";
 import { teleportBody } from "./PhysicalEdits.js";
 import { physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
@@ -83,6 +94,8 @@ export class PhysicsScene {
   private readonly wheelGrid = new WheelGrid();
   /** The static geometry was rebuilt for the step in progress. */
   private reshaped = false;
+  /** Sleeping bodies about to be landed on (see `meetBody`). */
+  private readonly rousing: RAPIER.RigidBody[] = [];
   private staticGeometry: RAPIER.Collider | undefined;
   private disposed = false;
   private originInitialized = false;
@@ -231,7 +244,7 @@ export class PhysicsScene {
       entry?.entity === entity &&
       entry.dormant &&
       entry.unmoved &&
-      this.restsUnread(entry) &&
+      restsUnread(entry) &&
       unedited(entry)
     );
   }
@@ -491,13 +504,8 @@ export class PhysicsScene {
     // A held body's solved contacts are those it rested with.
     for (const entry of this.heldTouching) if (entry.held) keepRest(entry, this.contacts);
     // Only the solver wakes a held body; it reports the few that are awake.
-    if (this.held.length) {
-      const woken: Body[] = [];
-      this.world.islands.forEachActiveRigidBodyHandle((handle: number) => {
-        const entry = this.handles.get(handle);
-        if (entry?.held) woken.push(entry);
-      });
-      for (const entry of woken) {
+    if (this.held.length)
+      for (const entry of wokenBodies(this.world, this.handles)) {
         // An edit made during the nap is admitted next tick; reading now would undo it.
         if (unedited(entry)) this.readBody(entry);
         // Put back to sleep after a geometry rebuild: its nap goes on undisturbed.
@@ -506,7 +514,8 @@ export class PhysicsScene {
           wake(entry.entity);
         }
       }
-    }
+    // Woken once every body is read: no readback depends on the order of bodies.
+    for (const body of this.rousing.splice(0)) body.wakeUp();
     for (const pair of this.couplings.pairs()) this.addContact(...pair);
     this.metrics.stepMs = performance.now() - started;
   }
@@ -521,25 +530,11 @@ export class PhysicsScene {
     return playerClimbIntent(input, entry.state, entry.entity.collider, geometry);
   }
 
-  /** A body asleep through two full readbacks has nothing new to read: its pose,
-   * velocity and solved contacts are exactly those already cached. */
-  /** Only a dynamic body the solver itself put to sleep can be left unread: an
-   * anchor never wakes when something lands on it, and equipment moves its collider. */
-  private restsUnread(entry: Body) {
-    return (
-      entry.rested >= 2 &&
-      entry.state.grounded &&
-      entry.kind !== "fixed" &&
-      !isTrain(entry.entity) &&
-      !entry.bed &&
-      !entry.transporter
-    );
-  }
-
   private readBody(entry: Body) {
     const asleep = entry.body.isSleeping();
-    if (asleep && this.restsUnread(entry)) keepRest(entry, this.contacts);
+    if (asleep && restsUnread(entry)) keepRest(entry, this.contacts);
     else this.readMotion(entry, asleep);
+    restNow(entry, asleep);
     entry.rested = asleep ? Math.min(entry.rested + 1, 2) : 0;
     if (!asleep) entry.centred = false;
     if (entry.chassis) {
@@ -549,7 +544,7 @@ export class PhysicsScene {
         this.addContact(entry.entity.id, support);
       }
     }
-    publishBody(entry, this.world, this.metrics);
+    publishBody(entry, this.world, this.metrics, this.rousing);
   }
 
   private readMotion(entry: Body, asleep: boolean) {
@@ -584,7 +579,10 @@ export class PhysicsScene {
     state.grounded = isTrain(entry.entity) || entry.kind === "fixed" || (asleep && state.grounded);
     if (!asleep) delete state.supportId;
     entry.touching.length = 0;
+    entry.beside = false;
     this.world.contactPairsWith(entry.collider, (other) => {
+      if (other.handle !== this.staticGeometry?.handle)
+        meetBody(entry, other, asleep ? 0 : v.y, this.rousing);
       this.world.contactPair(entry.collider, other, (manifold, flipped) => {
         const otherId = this.colliderIds.get(other.handle);
         // Use the contact constraints Rapier actually solves, including its

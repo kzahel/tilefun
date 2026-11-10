@@ -235,7 +235,8 @@ describe.each(PREDATOR_PROFILES.filter((p) => p.expansion?.habitat !== "deep"))(
       try {
         const entities = () => session.realm.entityManager.entities;
         const original = required(entities().find((e) => e.type === preyType)).persistentId;
-        for (let i = 0; i < 600 && !entities().find((e) => e.predator)?.predator?.meals; i++)
+        // A raptor may need a third approach: prey it lands on can startle and hop off.
+        for (let i = 0; i < 900 && !entities().find((e) => e.predator)?.predator?.meals; i++)
           await session.step(idle);
         const fed = required(entities().find((e) => e.predator));
         expect(fed.predator?.meals).toBe(1);

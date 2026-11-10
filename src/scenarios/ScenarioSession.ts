@@ -12,6 +12,7 @@ import { runEquipment } from "../server/EquipmentControl.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
 import { isValidThrow } from "../server/RealmCommands.js";
+import { endNaps } from "../server/RealmNaps.js";
 import {
   decodeClientMessage,
   encodeClientMessage,
@@ -367,6 +368,8 @@ export class ScenarioSession {
   }
   /** Send a seat's full replication through the session's transport. */
   publish(session = this.player) {
+    // Outside a tick (a pause, a manual step): no nap's clocks may lag what is shown.
+    endNaps(this.realm);
     for (const message of this.realm.replicate(session.clientId))
       this.transport.send(session.clientId, message);
   }

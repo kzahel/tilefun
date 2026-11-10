@@ -5,8 +5,11 @@ import { applyCurveTrainFacing, isCurveTrain } from "../railway/CurveTrain.js";
 import { headingFrame } from "../railway/RailPath.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
 import { yawRotation } from "./BodyRotation.js";
-import { PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
+import { PHYSICS_DT, PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
 import type { SceneBody } from "./SceneBody.js";
+
+/** Pixels above a body at which a descending one wakes it, plus three ticks of its fall. */
+const LANDING_LEAD = 2;
 
 /** A body still asleep has the pose, velocity and solved contacts already cached:
  * its previous pose catches up and its own contacts are listed again. */
@@ -34,6 +37,7 @@ export function publishBody(
   entry: SceneBody,
   world: RAPIER.World,
   metrics: { supportQueries: number },
+  rousing: RAPIER.RigidBody[],
 ) {
   const state = entry.state,
     entity = entry.entity;
@@ -64,6 +68,13 @@ export function publishBody(
     );
     entity.groundZ = hit ? state.z + 0.16 - hit.timeOfImpact * SCALE : state.z;
     entity.jumpZ = Math.max(0, state.z - entity.groundZ);
+    // About to come down on a sleeping body: have it woken first. A sleeper's own
+    // ground contact joins the solver a step late, and the lander would sink into it.
+    const below = hit?.collider.parent();
+    if (hit && below && state.vz < 0) {
+      const lead = LANDING_LEAD - state.vz * PHYSICS_DT * 3;
+      if (hit.timeOfImpact * SCALE < lead) rousing.push(below);
+    }
   }
   state.groundZ = entity.groundZ ?? state.z;
   entry.bed?.publish(entity, state, entry.collider);

@@ -134,6 +134,8 @@ export function driveMotor(
   // cleared while awake, as before, but an unmoved body stops resetting the
   // solver's sleep timer; once asleep it is left alone until something wakes it.
   const still = !drive && state.grounded && x === 0 && z === 0 && vertical === 0;
+  entry.still = still;
+  if (!still) entry.settling = true;
   if (!(still && asleep)) entry.body.setLinvel({ x, y: vertical, z }, !(still && entry.unmoved));
   // Asleep on static ground with an idle motor: every input to this function is
   // cached state, so it repeats exactly until a readback, edit or intent.

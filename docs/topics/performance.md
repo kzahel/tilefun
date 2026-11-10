@@ -63,10 +63,10 @@ Authority slice (2026-11-10): tick 6.61–6.74 → 4.01–4.13 ms p50 and 7.56�
   0.021 px on stacked rabbits.
 - Waiting actors now nap (`RealmNaps.ts`): they leave decisions, intents,
   physics passes, finish and the replication comparison until a clock is due or
-  something disturbs them, and are simulated in full at least once in nine
-  ticks. Only rabbits that decide every tick nap so far. Code that edits an actor from outside its own brain should call `wake`
+  something disturbs them. Only rabbits that decide every tick nap so far. Code that edits an actor from outside its own brain should call `wake`
   (`entities/naps.ts`); `PhysicalEdits`, script handles and startles already do.
-  In the crowd fixture clients receive the same bytes with or without naps.
+  In the crowd fixture the realm state is the same with or without naps, apart
+  from the clip phase of a rabbit napping inside a hop, which clients run themselves.
   Tick 4.0 → 2.6–2.9 ms.
 - The AI planner serves refused goals from a first-come line and offers two
   ordinary starts per tick (`ORDINARY_STARTS`; alarms may use all four). That is
@@ -74,8 +74,17 @@ Authority slice (2026-11-10): tick 6.61–6.74 → 4.01–4.13 ms p50 and 7.56�
 - A static geometry rebuild used to wake every body on it for most of a second;
   in the city any moving car triggered one. Bodies the new ground did not move
   are put back to sleep at once. This was the largest part of phone physics.
-- Remaining: about 1.1 ms at rest plus roughly 20 µs per moving rabbit per tick.
-  235 lists what is left.
+- Naps now go straight on while their conditions hold (no forced waking tick),
+  rabbits nap through the standing parts of a hop, an actor whose own motor
+  stops is put to sleep at once, and a sleeper is woken before something lands
+  on it. Actors awake per tick 274 → about 120; tick 2.6–2.9 → 2.3 ms. A nap
+  ends, clocks replayed, whenever its actor is published without being
+  simulated that tick (`endNap`). The
+  Pixel 7a shows no measurable change.
+- Remaining: mostly steps that visit every actor each tick whatever it does
+  (selection, the napping split, the replication loop, the prediction snapshot,
+  physics synchronize). Halving the awake actors bought only 13 %. 235 lists
+  what is left.
 - `render:bench` prints authority stage timings per cell and `--profile` records
   the authority Worker, on a phone over `--cdp` as well.
 

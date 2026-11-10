@@ -373,7 +373,7 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 921,
+      "lines": 919,
       "worst": 65,
       "overLimit": 4
     },
@@ -548,7 +548,7 @@
       "overLimit": 1
     },
     "src/scenarios/ScenarioSession.ts": {
-      "lines": 406,
+      "lines": 409,
       "worst": 65,
       "overLimit": 1
     },
