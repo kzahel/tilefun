@@ -48,6 +48,9 @@ export type RasterSurface = Pick<
   meshReady?: ReadonlySet<string>;
   meshCasters?: ReadonlySet<number>;
   pixelShadow?: (cx: number, cy: number, rx: number, ry: number) => void;
+  /** Queue an oval for the GPU depth shadow pass (236); false when this pass
+   * cannot run it (no world depth), and the caller draws a plain shadow. */
+  deferredShadow?: (camera: Camera, shadow: NonNullable<SpriteItem["gpuShadow"]>) => boolean;
   /** GPU-only scene fast paths (232); the native review raster draws through Canvas state. */
   fillShadow?: (x: number, y: number, rx: number, ry: number, smooth: boolean) => void;
   drawSpriteImage?: (

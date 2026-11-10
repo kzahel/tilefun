@@ -45,6 +45,7 @@
     "crowd:bench": "node scripts/benchmark-crowd.mjs",
     "test:crowd-bench": "node --import tsx --test scripts/crowd/*.test.ts",
     "stress:bench": "node scripts/benchmark-stress.mjs",
+    "render:bench": "node scripts/benchmark-render.mjs",
     "test:streaming": "node --test scripts/streaming-matrix.test.mjs",
     "desktop:build": "npm run build && node scripts/build-desktop.mjs",
     "desktop:build:linux": "npm run build && node scripts/build-desktop.mjs --linux",

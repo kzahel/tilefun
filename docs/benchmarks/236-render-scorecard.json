@@ -1,0 +1,1567 @@
+{
+ "tactical": 236,
+ "date": "2026-11-10",
+ "scope": "Steady camera after terrain settles; p50/p95 in ms. render = main-thread render callback; submit = time inside backend submits; gpuMs = timer query around the render callback's GL commands; renderFinishMs = render + gl.finish() in a separate window. Rabbits wander, so populated scenes are not exact replays.",
+ "build": "vite dev (unminified modules)",
+ "runs": [
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, baseline before 236",
+   "note": "all scenes; before the roof-support reorder",
+   "browser": "156.0.8078.4",
+   "query": "",
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "street",
+     "zoom": 1,
+     "placed": null,
+     "entities": 17,
+     "frames": 600,
+     "missed": 0,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "renderMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 3
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 1
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1.3,
+      "max": 2.1
+     },
+     "gpuMs": {
+      "p50": 0.97,
+      "p95": 1.05,
+      "max": 2.64,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.9,
+      "p95": 1.3,
+      "max": 2.1
+     },
+     "drawCallsPerFrame": 9.5,
+     "workerTickMs": {
+      "p50": 1.2,
+      "p95": 1.7
+     }
+    },
+    {
+     "scene": "street",
+     "zoom": 0.25,
+     "placed": null,
+     "entities": 26,
+     "frames": 600,
+     "missed": 0,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.1,
+      "max": 10.4
+     },
+     "renderMs": {
+      "p50": 1.2,
+      "p95": 1.5,
+      "max": 1.6
+     },
+     "submitMs": {
+      "p50": 0.4,
+      "p95": 0.6,
+      "max": 0.8
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.9,
+      "max": 1.1
+     },
+     "gpuMs": {
+      "p50": 1.78,
+      "p95": 1.91,
+      "max": 4.15,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.2,
+      "p95": 1.6,
+      "max": 1.7
+     },
+     "drawCallsPerFrame": 16.1,
+     "workerTickMs": {
+      "p50": 0.9,
+      "p95": 1.3
+     }
+    },
+    {
+     "scene": "street",
+     "zoom": 0.1,
+     "placed": null,
+     "entities": 52,
+     "frames": 600,
+     "missed": 0,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "renderMs": {
+      "p50": 1.3,
+      "p95": 1.8,
+      "max": 2
+     },
+     "submitMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 1.3
+     },
+     "updateMs": {
+      "p50": 0.5,
+      "p95": 0.7,
+      "max": 0.8
+     },
+     "gpuMs": {
+      "p50": 1.93,
+      "p95": 4.24,
+      "max": 6.48,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.4,
+      "p95": 1.8,
+      "max": 2
+     },
+     "drawCallsPerFrame": 15.6,
+     "workerTickMs": {
+      "p50": 0.8,
+      "p95": 1.1
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "entities": 950,
+     "frames": 598,
+     "missed": 2,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 16.6
+     },
+     "renderMs": {
+      "p50": 3.9,
+      "p95": 4.6,
+      "max": 17.7
+     },
+     "submitMs": {
+      "p50": 0.4,
+      "p95": 0.5,
+      "max": 0.8
+     },
+     "updateMs": {
+      "p50": 2.7,
+      "p95": 3.2,
+      "max": 4.2
+     },
+     "gpuMs": {
+      "p50": 2.29,
+      "p95": 4.93,
+      "max": 5.84,
+      "samples": 598,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 4.1,
+      "p95": 4.7,
+      "max": 11.7
+     },
+     "drawCallsPerFrame": 10.9,
+     "workerTickMs": {
+      "p50": 9.9,
+      "p95": 11.6
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "entities": 1067,
+     "frames": 410,
+     "missed": 161,
+     "frameMs": {
+      "p50": 10.2,
+      "p95": 18.1,
+      "max": 24.6
+     },
+     "renderMs": {
+      "p50": 9.6,
+      "p95": 10.4,
+      "max": 17.7
+     },
+     "submitMs": {
+      "p50": 1.3,
+      "p95": 2.1,
+      "max": 3.1
+     },
+     "updateMs": {
+      "p50": 2.9,
+      "p95": 3.7,
+      "max": 5.2
+     },
+     "gpuMs": {
+      "p50": 5.02,
+      "p95": 15.91,
+      "max": 18.72,
+      "samples": 410,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 9.7,
+      "p95": 10.7,
+      "max": 18.6
+     },
+     "drawCallsPerFrame": 32.1,
+     "workerTickMs": {
+      "p50": 9.3,
+      "p95": 14
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "entities": 1093,
+     "frames": 426,
+     "missed": 173,
+     "frameMs": {
+      "p50": 9.5,
+      "p95": 17.7,
+      "max": 24.7
+     },
+     "renderMs": {
+      "p50": 6,
+      "p95": 8.9,
+      "max": 9.9
+     },
+     "submitMs": {
+      "p50": 1.8,
+      "p95": 4.7,
+      "max": 5.3
+     },
+     "updateMs": {
+      "p50": 3,
+      "p95": 4,
+      "max": 4.7
+     },
+     "gpuMs": {
+      "p50": 3.45,
+      "p95": 13.99,
+      "max": 30.4,
+      "samples": 426,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 6.5,
+      "p95": 9.9,
+      "max": 10.5
+     },
+     "drawCallsPerFrame": 34.6,
+     "workerTickMs": {
+      "p50": 9.9,
+      "p95": 14.3
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 1,
+     "placed": null,
+     "entities": 138,
+     "frames": 600,
+     "missed": 0,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "renderMs": {
+      "p50": 1.1,
+      "p95": 1.4,
+      "max": 1.5
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.4,
+      "max": 0.6
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.8,
+      "max": 2.6
+     },
+     "gpuMs": {
+      "p50": 0.62,
+      "p95": 0.65,
+      "max": 1.9,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.2,
+      "p95": 1.4,
+      "max": 1.5
+     },
+     "drawCallsPerFrame": 5,
+     "workerTickMs": {
+      "p50": 1.7,
+      "p95": 2.2
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "placed": null,
+     "entities": 261,
+     "frames": 600,
+     "missed": 0,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "renderMs": {
+      "p50": 1.6,
+      "p95": 1.8,
+      "max": 2
+     },
+     "submitMs": {
+      "p50": 0.2,
+      "p95": 0.3,
+      "max": 0.5
+     },
+     "updateMs": {
+      "p50": 0.7,
+      "p95": 0.9,
+      "max": 1.9
+     },
+     "gpuMs": {
+      "p50": 0.62,
+      "p95": 0.65,
+      "max": 2.07,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.7,
+      "p95": 1.9,
+      "max": 2
+     },
+     "drawCallsPerFrame": 5,
+     "workerTickMs": {
+      "p50": 1.8,
+      "p95": 2.1
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "placed": null,
+     "entities": 536,
+     "frames": 600,
+     "missed": 0,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "renderMs": {
+      "p50": 2.3,
+      "p95": 2.6,
+      "max": 3.4
+     },
+     "submitMs": {
+      "p50": 0.9,
+      "p95": 1,
+      "max": 1.6
+     },
+     "updateMs": {
+      "p50": 1,
+      "p95": 1.2,
+      "max": 1.9
+     },
+     "gpuMs": {
+      "p50": 0.84,
+      "p95": 2.15,
+      "max": 3.09,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.6,
+      "p95": 2.8,
+      "max": 3.1
+     },
+     "drawCallsPerFrame": 7,
+     "workerTickMs": {
+      "p50": 2.1,
+      "p95": 2.3
+     }
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, crowd, projected shadows",
+   "note": "default path at the 236 revision",
+   "browser": "156.0.8078.4",
+   "query": "",
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "placed": {
+      "rabbits": 893,
+      "cars": 47
+     },
+     "entities": 950,
+     "frames": 600,
+     "missed": 0,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "renderMs": {
+      "p50": 3.2,
+      "p95": 3.5,
+      "max": 6
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 0.7
+     },
+     "updateMs": {
+      "p50": 2.3,
+      "p95": 2.5,
+      "max": 3.1
+     },
+     "gpuMs": {
+      "p50": 2.36,
+      "p95": 4.92,
+      "max": 5.27,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.1,
+      "p95": 3.5,
+      "max": 3.6
+     },
+     "drawCallsPerFrame": 9.9,
+     "workerTickMs": {
+      "p50": 7.1,
+      "p95": 9.9
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "placed": {
+      "rabbits": 893,
+      "cars": 47
+     },
+     "entities": 1067,
+     "frames": 457,
+     "missed": 144,
+     "frameMs": {
+      "p50": 8.7,
+      "p95": 17.3,
+      "max": 18.7
+     },
+     "renderMs": {
+      "p50": 8.8,
+      "p95": 10,
+      "max": 10.3
+     },
+     "submitMs": {
+      "p50": 1.2,
+      "p95": 1.9,
+      "max": 2.5
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 3.2,
+      "max": 4.1
+     },
+     "gpuMs": {
+      "p50": 2.67,
+      "p95": 16.49,
+      "max": 23.18,
+      "samples": 457,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 8.9,
+      "p95": 10,
+      "max": 10.6
+     },
+     "drawCallsPerFrame": 30.1,
+     "workerTickMs": {
+      "p50": 8.6,
+      "p95": 12.9
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "placed": {
+      "rabbits": 893,
+      "cars": 47
+     },
+     "entities": 1093,
+     "frames": 601,
+     "missed": 0,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 9.9,
+      "max": 10.4
+     },
+     "renderMs": {
+      "p50": 4.5,
+      "p95": 5.3,
+      "max": 7.5
+     },
+     "submitMs": {
+      "p50": 1.3,
+      "p95": 1.9,
+      "max": 4.2
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 2.9,
+      "max": 5.9
+     },
+     "gpuMs": {
+      "p50": 2.21,
+      "p95": 6.12,
+      "max": 16.75,
+      "samples": 601,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 4.5,
+      "p95": 5,
+      "max": 6.4
+     },
+     "drawCallsPerFrame": 19,
+     "workerTickMs": {
+      "p50": 8.8,
+      "p95": 12.3
+     }
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, crowd, ?shadows=gpu",
+   "note": "opt-in GPU depth shadows",
+   "browser": "156.0.8078.4",
+   "query": "shadows=gpu",
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "placed": {
+      "rabbits": 888,
+      "cars": 47
+     },
+     "entities": 1067,
+     "frames": 587,
+     "missed": 13,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 18.3
+     },
+     "renderMs": {
+      "p50": 6.1,
+      "p95": 7.4,
+      "max": 14.1
+     },
+     "submitMs": {
+      "p50": 0.8,
+      "p95": 1.5,
+      "max": 2
+     },
+     "updateMs": {
+      "p50": 2.8,
+      "p95": 3.3,
+      "max": 3.9
+     },
+     "gpuMs": {
+      "p50": 1.74,
+      "p95": 19.15,
+      "max": 24.03,
+      "samples": 587,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 5.9,
+      "p95": 6.5,
+      "max": 7
+     },
+     "drawCallsPerFrame": 24.5,
+     "workerTickMs": {
+      "p50": 8.3,
+      "p95": 12.4
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "placed": {
+      "rabbits": 888,
+      "cars": 47
+     },
+     "entities": 939,
+     "frames": 600,
+     "missed": 0,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "renderMs": {
+      "p50": 3.2,
+      "p95": 3.6,
+      "max": 4.1
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 0.7
+     },
+     "updateMs": {
+      "p50": 2.7,
+      "p95": 3,
+      "max": 3.5
+     },
+     "gpuMs": {
+      "p50": 2.3,
+      "p95": 4.84,
+      "max": 5.16,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.3,
+      "p95": 3.7,
+      "max": 4
+     },
+     "drawCallsPerFrame": 9.6,
+     "workerTickMs": {
+      "p50": 7.4,
+      "p95": 10.8
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, Chrome over CDP, 60 Hz, baseline before 236",
+   "note": "all scenes; battery 23.9 to 27.3 C, thermal status 0",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "",
+   "idleFrameMs": 16.7,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "street",
+     "zoom": 1,
+     "placed": null,
+     "entities": 16,
+     "frames": 300,
+     "missed": 0,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.8,
+      "max": 16.8
+     },
+     "renderMs": {
+      "p50": 3.4,
+      "p95": 4.8,
+      "max": 6.5
+     },
+     "submitMs": {
+      "p50": 1.4,
+      "p95": 2.1,
+      "max": 4.2
+     },
+     "updateMs": {
+      "p50": 3.5,
+      "p95": 4.4,
+      "max": 5.5
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.9,
+      "p95": 4.8,
+      "max": 6.4
+     },
+     "drawCallsPerFrame": 7.3,
+     "workerTickMs": {
+      "p50": 4.3,
+      "p95": 7.3
+     }
+    },
+    {
+     "scene": "street",
+     "zoom": 0.25,
+     "placed": null,
+     "entities": 16,
+     "frames": 300,
+     "missed": 0,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.8,
+      "max": 16.9
+     },
+     "renderMs": {
+      "p50": 3.9,
+      "p95": 5.7,
+      "max": 7.7
+     },
+     "submitMs": {
+      "p50": 1.5,
+      "p95": 2.9,
+      "max": 4.6
+     },
+     "updateMs": {
+      "p50": 3.1,
+      "p95": 4,
+      "max": 4.7
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4,
+      "p95": 5,
+      "max": 6.7
+     },
+     "drawCallsPerFrame": 9.5,
+     "workerTickMs": {
+      "p50": 4.3,
+      "p95": 9.2
+     }
+    },
+    {
+     "scene": "street",
+     "zoom": 0.1,
+     "placed": null,
+     "entities": 30,
+     "frames": 299,
+     "missed": 1,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 33.3
+     },
+     "renderMs": {
+      "p50": 4.1,
+      "p95": 5.9,
+      "max": 7.3
+     },
+     "submitMs": {
+      "p50": 2.7,
+      "p95": 4.1,
+      "max": 5.5
+     },
+     "updateMs": {
+      "p50": 1.9,
+      "p95": 2.6,
+      "max": 3.2
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.1,
+      "p95": 5.4,
+      "max": 6.3
+     },
+     "drawCallsPerFrame": 11.1,
+     "workerTickMs": {
+      "p50": 3.1,
+      "p95": 6.2
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 50
+     },
+     "entities": 938,
+     "frames": 210,
+     "missed": 84,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 33.4,
+      "max": 116.8
+     },
+     "renderMs": {
+      "p50": 12.5,
+      "p95": 15.4,
+      "max": 24.8
+     },
+     "submitMs": {
+      "p50": 0.8,
+      "p95": 2.2,
+      "max": 3.7
+     },
+     "updateMs": {
+      "p50": 5.9,
+      "p95": 11.1,
+      "max": 96.8
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 12.7,
+      "p95": 15.7,
+      "max": 35.5
+     },
+     "drawCallsPerFrame": 8.3,
+     "workerTickMs": {
+      "p50": 33.5,
+      "p95": 46.9
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 50
+     },
+     "entities": 1058,
+     "frames": 93,
+     "missed": 6,
+     "frameMs": {
+      "p50": 50,
+      "p95": 83.3,
+      "max": 83.4
+     },
+     "renderMs": {
+      "p50": 29.5,
+      "p95": 36.1,
+      "max": 39.3
+     },
+     "submitMs": {
+      "p50": 4,
+      "p95": 8,
+      "max": 9.7
+     },
+     "updateMs": {
+      "p50": 6.7,
+      "p95": 11.6,
+      "max": 15.8
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 28.6,
+      "p95": 32.9,
+      "max": 80.7
+     },
+     "drawCallsPerFrame": 18.5,
+     "workerTickMs": {
+      "p50": 48,
+      "p95": 63.8
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 50
+     },
+     "entities": 1069,
+     "frames": 125,
+     "missed": 17,
+     "frameMs": {
+      "p50": 33.4,
+      "p95": 66.5,
+      "max": 116.7
+     },
+     "renderMs": {
+      "p50": 16.7,
+      "p95": 22.2,
+      "max": 30.9
+     },
+     "submitMs": {
+      "p50": 4.2,
+      "p95": 9,
+      "max": 18.3
+     },
+     "updateMs": {
+      "p50": 6.9,
+      "p95": 11.1,
+      "max": 14.1
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 17.2,
+      "p95": 23.3,
+      "max": 26.8
+     },
+     "drawCallsPerFrame": 18.2,
+     "workerTickMs": {
+      "p50": 36.8,
+      "p95": 44.3
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 1,
+     "placed": null,
+     "entities": 125,
+     "frames": 301,
+     "missed": 0,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.8,
+      "max": 16.8
+     },
+     "renderMs": {
+      "p50": 3.9,
+      "p95": 6.1,
+      "max": 10.3
+     },
+     "submitMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 6.9
+     },
+     "updateMs": {
+      "p50": 3.1,
+      "p95": 6.8,
+      "max": 11.3
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4,
+      "p95": 5.6,
+      "max": 13.9
+     },
+     "drawCallsPerFrame": 5,
+     "workerTickMs": {
+      "p50": 6.3,
+      "p95": 20.4
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "placed": null,
+     "entities": 177,
+     "frames": 291,
+     "missed": 2,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.8,
+      "max": 116.7
+     },
+     "renderMs": {
+      "p50": 4.4,
+      "p95": 9.7,
+      "max": 14.7
+     },
+     "submitMs": {
+      "p50": 0.6,
+      "p95": 0.9,
+      "max": 4.2
+     },
+     "updateMs": {
+      "p50": 2.8,
+      "p95": 4.1,
+      "max": 16.5
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.5,
+      "p95": 9.6,
+      "max": 12.4
+     },
+     "drawCallsPerFrame": 5,
+     "workerTickMs": {
+      "p50": 6.9,
+      "p95": 10.6
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "placed": null,
+     "entities": 308,
+     "frames": 300,
+     "missed": 0,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.8,
+      "max": 16.8
+     },
+     "renderMs": {
+      "p50": 5,
+      "p95": 5.9,
+      "max": 7.9
+     },
+     "submitMs": {
+      "p50": 1.5,
+      "p95": 1.9,
+      "max": 3.6
+     },
+     "updateMs": {
+      "p50": 3.5,
+      "p95": 4.3,
+      "max": 5.2
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 5.3,
+      "p95": 6.1,
+      "max": 7.5
+     },
+     "drawCallsPerFrame": 4,
+     "workerTickMs": {
+      "p50": 8.7,
+      "p95": 10.8
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, crowd, projected shadows",
+   "note": "first pair; 26.6 to 26.7 C, thermal status 0",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "",
+   "idleFrameMs": 16.7,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "placed": {
+      "rabbits": 885,
+      "cars": 46
+     },
+     "entities": 944,
+     "frames": 263,
+     "missed": 38,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 33.3,
+      "max": 33.4
+     },
+     "renderMs": {
+      "p50": 10.7,
+      "p95": 12.4,
+      "max": 16.9
+     },
+     "submitMs": {
+      "p50": 0.7,
+      "p95": 1.5,
+      "max": 2.2
+     },
+     "updateMs": {
+      "p50": 5.7,
+      "p95": 10.5,
+      "max": 13.9
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 10.7,
+      "p95": 13.7,
+      "max": 15.9
+     },
+     "drawCallsPerFrame": 7,
+     "workerTickMs": {
+      "p50": 31,
+      "p95": 36.3
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "placed": {
+      "rabbits": 885,
+      "cars": 46
+     },
+     "entities": 1057,
+     "frames": 111,
+     "missed": 1,
+     "frameMs": {
+      "p50": 49.9,
+      "p95": 66.6,
+      "max": 83.2
+     },
+     "renderMs": {
+      "p50": 24.4,
+      "p95": 28,
+      "max": 48.1
+     },
+     "submitMs": {
+      "p50": 2.8,
+      "p95": 5.8,
+      "max": 7.7
+     },
+     "updateMs": {
+      "p50": 6.3,
+      "p95": 10.8,
+      "max": 24.3
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 25.8,
+      "p95": 30.1,
+      "max": 36.6
+     },
+     "drawCallsPerFrame": 17.5,
+     "workerTickMs": {
+      "p50": 31.2,
+      "p95": 44.4
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "placed": {
+      "rabbits": 885,
+      "cars": 46
+     },
+     "entities": 1071,
+     "frames": 123,
+     "missed": 15,
+     "frameMs": {
+      "p50": 33.4,
+      "p95": 83.2,
+      "max": 166.8
+     },
+     "renderMs": {
+      "p50": 15.4,
+      "p95": 26.4,
+      "max": 36.5
+     },
+     "submitMs": {
+      "p50": 4.2,
+      "p95": 13.6,
+      "max": 24.1
+     },
+     "updateMs": {
+      "p50": 6.9,
+      "p95": 12,
+      "max": 16.2
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 16,
+      "p95": 30.1,
+      "max": 43.1
+     },
+     "drawCallsPerFrame": 19.2,
+     "workerTickMs": {
+      "p50": 40.9,
+      "p95": 59.8
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, crowd, ?shadows=gpu",
+   "note": "first pair; 26.7 to 28.3 C, thermal status 0",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "shadows=gpu",
+   "idleFrameMs": 16.7,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "placed": {
+      "rabbits": 886,
+      "cars": 49
+     },
+     "entities": 944,
+     "frames": 257,
+     "missed": 42,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 33.4,
+      "max": 50.1
+     },
+     "renderMs": {
+      "p50": 10.3,
+      "p95": 12.9,
+      "max": 25.1
+     },
+     "submitMs": {
+      "p50": 0.8,
+      "p95": 1.9,
+      "max": 5.4
+     },
+     "updateMs": {
+      "p50": 5.8,
+      "p95": 10.7,
+      "max": 32.1
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 10.5,
+      "p95": 13.3,
+      "max": 15.8
+     },
+     "drawCallsPerFrame": 8.2,
+     "workerTickMs": {
+      "p50": 32.3,
+      "p95": 39.5
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "placed": {
+      "rabbits": 886,
+      "cars": 49
+     },
+     "entities": 1059,
+     "frames": 125,
+     "missed": 12,
+     "frameMs": {
+      "p50": 33.4,
+      "p95": 66.6,
+      "max": 99.9
+     },
+     "renderMs": {
+      "p50": 20.3,
+      "p95": 27.6,
+      "max": 50.1
+     },
+     "submitMs": {
+      "p50": 2,
+      "p95": 6.7,
+      "max": 10.6
+     },
+     "updateMs": {
+      "p50": 6.6,
+      "p95": 11.6,
+      "max": 23.8
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 20.6,
+      "p95": 25.9,
+      "max": 28.3
+     },
+     "drawCallsPerFrame": 16.8,
+     "workerTickMs": {
+      "p50": 43,
+      "p95": 64.6
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "placed": {
+      "rabbits": 886,
+      "cars": 49
+     },
+     "entities": 1072,
+     "frames": 145,
+     "missed": 30,
+     "frameMs": {
+      "p50": 33.3,
+      "p95": 50.1,
+      "max": 66.7
+     },
+     "renderMs": {
+      "p50": 15,
+      "p95": 20.9,
+      "max": 24.1
+     },
+     "submitMs": {
+      "p50": 4.1,
+      "p95": 9.2,
+      "max": 11.4
+     },
+     "updateMs": {
+      "p50": 6.7,
+      "p95": 10.9,
+      "max": 14.1
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 15,
+      "p95": 21.8,
+      "max": 29.2
+     },
+     "drawCallsPerFrame": 19.5,
+     "workerTickMs": {
+      "p50": 39.3,
+      "p95": 47.5
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, crowd 0.25, ?shadows=gpu (reverse order)",
+   "note": "second pair, GPU first; 27.9 C, thermal status 0",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "shadows=gpu",
+   "idleFrameMs": 16.7,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "placed": {
+      "rabbits": 880,
+      "cars": 50
+     },
+     "entities": 1060,
+     "frames": 151,
+     "missed": 21,
+     "frameMs": {
+      "p50": 33.3,
+      "p95": 50,
+      "max": 50.1
+     },
+     "renderMs": {
+      "p50": 18.7,
+      "p95": 23.1,
+      "max": 25.3
+     },
+     "submitMs": {
+      "p50": 3,
+      "p95": 6.6,
+      "max": 7.3
+     },
+     "updateMs": {
+      "p50": 6,
+      "p95": 11,
+      "max": 14.9
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 19.4,
+      "p95": 23.6,
+      "max": 41.7
+     },
+     "drawCallsPerFrame": 19.3,
+     "workerTickMs": {
+      "p50": 41.7,
+      "p95": 52.3
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, crowd 0.25, projected shadows (reverse order)",
+   "note": "second pair; 27.9 C, thermal status 0",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "",
+   "idleFrameMs": 16.7,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "placed": {
+      "rabbits": 882,
+      "cars": 48
+     },
+     "entities": 1059,
+     "frames": 116,
+     "missed": 0,
+     "frameMs": {
+      "p50": 49.9,
+      "p95": 66.7,
+      "max": 66.8
+     },
+     "renderMs": {
+      "p50": 25.3,
+      "p95": 32.7,
+      "max": 40.9
+     },
+     "submitMs": {
+      "p50": 3,
+      "p95": 7.6,
+      "max": 11.3
+     },
+     "updateMs": {
+      "p50": 5.9,
+      "p95": 10.5,
+      "max": 15.6
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 27.6,
+      "p95": 35.9,
+      "max": 95.4
+     },
+     "drawCallsPerFrame": 18.9,
+     "workerTickMs": {
+      "p50": 44.7,
+      "p95": 59.5
+     }
+    }
+   ]
+  }
+ ],
+ "nodeRenderLane": {
+  "tape": "data/scratch/crowd/checkpoint-235/crowd.tape (235 checkpoint)",
+  "node": "24.22.1",
+  "note": "three interleaved pairs, 1,200 presentations each; default path matches every 235 checkpoint scene hash",
+  "renderPrepare": {
+   "projected": [
+    {
+     "p50": 9.523,
+     "p95": 10.644,
+     "count": 1200
+    },
+    {
+     "p50": 9.546,
+     "p95": 10.628,
+     "count": 1200
+    },
+    {
+     "p50": 9.257,
+     "p95": 10.727,
+     "count": 1200
+    }
+   ],
+   "gpu": [
+    {
+     "p50": 5.923,
+     "p95": 7.409,
+     "count": 1200
+    },
+    {
+     "p50": 5.492,
+     "p95": 6.8,
+     "count": 1200
+    },
+    {
+     "p50": 5.69,
+     "p95": 7.005,
+     "count": 1200
+    }
+   ]
+  }
+ }
+}

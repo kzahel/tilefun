@@ -1,12 +1,14 @@
 import { drawOverlayGeometry } from "./CanvasOverlayRenderer.js";
+import { GpuDeferredShadows } from "./GpuDeferredShadows.js";
 import { GpuMeshBodies } from "./GpuMeshBodies.js";
 import { GpuOverlayResources } from "./GpuOverlayResources.js";
 import { GpuRasterSurface } from "./GpuRasterSurface.js";
 import { COMPACT_CAR_MESH } from "./MeshPresentation.js";
 import type { OverlayDraw } from "./OverlayFrame.js";
 import { RasterRenderBackend } from "./RasterRenderBackend.js";
-import { touchRaster } from "./RasterSurface.js";
+import { type RasterSurface, touchRaster } from "./RasterSurface.js";
 import type { RenderPass, RenderView } from "./RenderFrame.js";
+import type { RenderRegion } from "./ViewLayout.js";
 import { WORLD_RASTER_PAD } from "./WorldRasterFrame.js";
 
 /** GPU draw adapter with shared terrain, interior and scene preparation. */
@@ -40,6 +42,9 @@ export class GpuRenderBackend extends RasterRenderBackend {
   private readonly overlayItems: OverlayDraw[] = [];
   private overlayValid = false;
   private views = 0;
+  /** Actor ovals for the depth shadow pass (236, `?shadows=gpu`). */
+  private readonly shadows = new GpuDeferredShadows();
+  private sceneClipped = false;
   private readonly overlayContext: CanvasRenderingContext2D;
   constructor(canvas: HTMLCanvasElement) {
     const surface = new GpuRasterSurface(canvas);
@@ -50,6 +55,18 @@ export class GpuRenderBackend extends RasterRenderBackend {
     surface.meshBody = (camera, item) => this.meshes.draw(camera, item, this.sheets);
     surface.meshReady = this.meshes.ready;
     surface.meshCasters = this.meshes.shadowCasters;
+    // Outdoor scene passes draw with the padded camera and no other transform.
+    // Rooms (no world depth) and clipped passes keep the plain ground shadow.
+    const sink: RasterSurface = surface;
+    sink.deferredShadow = (camera, shadow) => {
+      const target = surface.worldTarget;
+      return (
+        !!target &&
+        surface.worldDepth &&
+        !this.sceneClipped &&
+        this.shadows.queue(target, camera, shadow)
+      );
+    };
     const ctx = this.overlay.getContext("2d");
     if (!ctx) throw Error("Overlay surface unavailable");
     this.overlayContext = ctx;
@@ -57,6 +74,8 @@ export class GpuRenderBackend extends RasterRenderBackend {
     this.overlay.height = canvas.height;
   }
   beginFrame() {
+    this.shadows.clear();
+    this.shadows.prepare(this.surface.worldTarget);
     this.surface.beginFrame();
     this.meshes.beginFrame(this.views); // the last display frame's layout
     this.views = 0;
@@ -64,6 +83,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
   /** Start another view of this display frame (`RenderHost.beginView`). */
   beginView() {
     this.views++;
+    this.shadows.clear();
     this.surface.beginView();
   }
   override submit(view: RenderView, pass: RenderPass) {
@@ -72,11 +92,33 @@ export class GpuRenderBackend extends RasterRenderBackend {
     // Cached room walls/furniture retain their explicit painter ordering; they
     // do not yet publish world-depth surfaces. Their decals draw in that order.
     this.surface.worldDepth = this.worldRaster && pass.kind !== "interior";
-    if (pass.kind === "overlay" && !pass.worldDepth) this.surface.finishDecals();
+    if (pass.kind === "overlay" && !pass.worldDepth) {
+      this.drawShadows();
+      this.surface.finishDecals();
+    }
     this.surface.setDepthPlane();
+    this.sceneClipped = pass.kind === "scene" && !!pass.clipRects;
     super.submit(view, pass);
     this.surface.flush();
     this.surface.setDepthPlane();
+  }
+  /** Blend queued actor shadows over the world drawn so far (before late decals
+   * and any overlay that must stay above them). */
+  private drawShadows() {
+    const target = this.surface.worldTarget;
+    if (!target || !this.shadows.pending) return;
+    this.surface.flush();
+    this.shadows.draw(this.surface.renderer, target);
+    this.surface.renderer.setRenderTarget(target);
+  }
+  /** Ovals drawn by the last depth shadow pass (diagnostics). */
+  get deferredShadowsDrawn() {
+    return this.shadows.drawn;
+  }
+  /** Finish the view's world (shadows, late decals) and compose it into `region`. */
+  presentWorld(x: number, y: number, region?: RenderRegion) {
+    this.drawShadows();
+    this.surface.presentWorld(x, y, region);
   }
   protected override drawOverlay(pass: Extract<RenderPass, { kind: "overlay" }>) {
     if (!pass.items.length) return;
@@ -200,6 +242,7 @@ export class GpuRenderBackend extends RasterRenderBackend {
   }
   override recover() {
     super.recover();
+    this.shadows.reset();
     this.surface.recover();
     this.meshes.recover();
   }

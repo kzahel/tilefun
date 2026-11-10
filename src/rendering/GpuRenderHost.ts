@@ -71,7 +71,7 @@ export function createGpuRenderHost(
   };
   const endView = () => {
     const offset = frame.end();
-    if (offset) renderer.surface.presentWorld(offset.x, offset.y, region);
+    if (offset) renderer.presentWorld(offset.x, offset.y, region);
     region = undefined;
   };
   return {

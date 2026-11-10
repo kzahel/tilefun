@@ -7,6 +7,7 @@ import { PHYSICS_DT } from "../../src/physics/PhysicsDefaults.js";
 import { Camera } from "../../src/rendering/Camera.js";
 import { collectScene } from "../../src/rendering/collectScene.js";
 import { collectSceneOrder } from "../../src/rendering/RenderFrame.js";
+import { shadowMode } from "../../src/rendering/ShadowMode.js";
 import { WorldRasterFrame } from "../../src/rendering/WorldRasterFrame.js";
 import { CROWD_VIEW } from "../../src/scenarios/CrowdBenchRecipe.js";
 import { applyRecipeAppearances, scenarioGravity } from "../../src/scenarios/ScenarioRecipe.js";
@@ -29,6 +30,10 @@ export async function runReplay() {
     throw Error("Frozen scene is a render-only workload");
   const verify = process.argv.includes("--verify");
   if (assertEquivalent && !verify) throw Error("Replay --assert-equivalent requires --verify");
+  // Opt-in GPU shadow experiment (236): collection leaves actor ovals to the GPU.
+  const shadows = option("shadows", "projected");
+  if (!["projected", "gpu"].includes(shadows)) throw Error("--shadows must be projected or gpu");
+  shadowMode.gpu = shadows === "gpu";
   const meshes = lane === "render" ? await loadReceivers(tape.recipe) : undefined;
   const base = reportBase({
     tapeSha256,
@@ -37,6 +42,7 @@ export async function runReplay() {
     updatesHz: 60,
     presentationHz: 120,
     scene,
+    ...(shadows === "gpu" ? { shadows } : {}),
     view: { width: 960, height: 640, ...CROWD_VIEW },
     meshes: meshes?.inputs ?? [],
   });

@@ -99,6 +99,12 @@ export function drawSceneEntry2D(
       drawSurfaceDecal(ctx, camera, item);
       break;
     case "sprite":
+      if (item.gpuShadow && !ctx.deferredShadow?.(camera, item.gpuShadow)) {
+        // No depth pass here (rooms, review rasters): the plain ground shadow.
+        sceneDepth(ctx, camera, item, true);
+        drawOneShadow(ctx, camera, item, pixelExactShadows);
+        sceneDepth(ctx, camera, item, false);
+      }
       drawSprite(ctx, camera, item, sheets);
       break;
     case "elevation": {

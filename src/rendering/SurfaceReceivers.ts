@@ -66,7 +66,7 @@ interface Source {
 const EPS = 1e-6,
   CELL = 128;
 
-export { clipPlane, polygonArea, polygonBounds, rectangle } from "./SurfacePartition.js";
+export { polygonArea, polygonBounds, rectangle } from "./SurfacePartition.js";
 export const planeZ = (p: Plane, x: number, y: number) => p[0] * x + p[1] * y + p[2];
 export function upwardSurfaceFace(
   id: string,

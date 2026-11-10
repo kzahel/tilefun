@@ -9,6 +9,7 @@ import {
 } from "../../entities/Entity.js";
 import type { Prop } from "../../entities/Prop.js";
 import { rotateBodyVector } from "../../physics/BodyRotation.js";
+import { physicsBodyDimensions } from "../../physics/PhysicsBodies.js";
 import { terrainBaseZ } from "../../physics/TerrainExcavation.js";
 import {
   hasVehicleLights,
@@ -38,6 +39,7 @@ import { propDepthLookup } from "../PropDepthIndex.js";
 import { depthAboveProps, type PropDepthSurface, propDepthSurfaces } from "../propDepth.js";
 import type { SceneFrame } from "../SceneFrame.js";
 import type { SceneItem, SpriteItem } from "../SceneItem.js";
+import { shadowMode } from "../ShadowMode.js";
 import { surfaceShadowZ } from "../SurfacePresentation.js";
 import type { SurfaceReceivers } from "../SurfaceReceivers.js";
 import type { TerrainPresentation } from "../TerrainPresentation.js";
@@ -460,6 +462,33 @@ function roadkillFade(e: Entity, scaleY: number): Pick<SpriteItem, "scaleY" | "a
   };
 }
 
+/** The oval of `shadowFootprint`, left for the GPU depth pass to place (236).
+ * One point query finds the surface under its centre, as projection does for its
+ * support; the pass shades receivers near that height, so a caster on a deck
+ * never shades the ground seen beneath it. */
+function gpuShadow(
+  receivers: SurfaceReceivers,
+  e: Entity,
+  pos: PositionComponent,
+  zOffset: number,
+  terrainZ: number,
+): NonNullable<SpriteItem["gpuShadow"]> {
+  const d = physicsBodyDimensions(e),
+    x = pos.wx + d.offsetX,
+    y = pos.wy + d.offsetY;
+  return {
+    x,
+    y,
+    rx: d.width / 2,
+    ry: Math.max(d.depth * 0.4, d.width * 0.175),
+    // Standing on base terrain needs no query: the ground is the support.
+    z:
+      Math.abs(zOffset - terrainZ) < 0.5
+        ? terrainZ
+        : (receivers.hit(x, y, zOffset + 1, e.id)?.point[2] ?? Math.min(terrainZ, zOffset)),
+  };
+}
+
 function pushShadowDecals(
   pass: EntityPass,
   receivers: SurfaceReceivers,
@@ -470,6 +499,10 @@ function pushShadowDecals(
   meshGroundShadow: boolean,
 ): void {
   spriteItem.hasShadow = false;
+  if (shadowMode.gpu && !meshGroundShadow && !e.type.startsWith("vehicle-v1:")) {
+    spriteItem.gpuShadow = gpuShadow(receivers, e, pos, zOffset, spriteItem.shadowTerrainZ);
+    return;
+  }
   const mesh = spriteItem.mesh
     ? pass.terrain.meshSurfaceGeometry?.(spriteItem.mesh.assetId)
     : undefined;

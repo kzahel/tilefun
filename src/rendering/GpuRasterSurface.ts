@@ -50,7 +50,7 @@ export class GpuRasterSurface implements RasterSurface {
   private readonly white: THREE.DataTexture;
   private readonly pages: GpuPages;
   private world?: GpuWorldComposition;
-  private get worldTarget() {
+  get worldTarget() {
     return this.world?.target;
   }
   private texture: THREE.Texture | null = null;

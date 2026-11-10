@@ -87,6 +87,10 @@ export interface SpriteItem {
   flashHidden: boolean;
   /** Optional per-item alpha (debug overlays). */
   alpha?: number;
+  /** Oval shadow for the GPU depth pass (236, `?shadows=gpu`): footprint centre and
+   * radii and the height of the surface under its centre, in world pixels.
+   * A sink without that pass draws the plain ground shadow instead. */
+  gpuShadow?: { x: number; y: number; rx: number; ry: number; z: number };
 }
 
 export interface ElevationItem {

@@ -1387,6 +1387,35 @@ test("production vehicle depth matches common 3D geometry through ordering, tilt
   }
 });
 
+test("GPU depth shadows match projected oval decals on ground, ramps, decks and behind bodies", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const report = await page.evaluate(() =>
+    (
+      window as unknown as {
+        rendererLab: {
+          probeDeferredShadows: typeof import("../src/rendering/DeferredShadowProbe.js").probeDeferredShadows;
+        };
+      }
+    ).rendererLab.probeDeferredShadows(),
+  );
+  expect(report).toHaveLength(21);
+  for (const row of report) {
+    expect(row.queued, `${row.name} @${row.zoom}`).toBe(1);
+    expect(row.shadedProjected, `${row.name} @${row.zoom}`).toBeGreaterThan(50);
+    // The analytic oval and the 64 px mask differ by a few levels at most. Only
+    // the crest's seam strip differs more: projection leaves it unshaded.
+    expect(row.differing, `${row.name} @${row.zoom}`).toBeLessThanOrEqual(
+      row.name === "crest" ? 40 : 0,
+    );
+    expect(Math.abs(row.shadedDeferred - row.shadedProjected)).toBeLessThanOrEqual(
+      row.name === "crest" ? 40 : 12,
+    );
+  }
+});
+
 test("surface decals follow ramps, split at crests and blend over real mesh roofs without shadowing foreground bodies", async ({
   page,
 }) => {

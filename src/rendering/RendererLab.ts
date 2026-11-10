@@ -8,6 +8,7 @@ import { Chunk } from "../world/Chunk.js";
 import { Camera } from "./Camera.js";
 import { probeCameraStability } from "./CameraStabilityProbe.js";
 import { collectScene } from "./collectScene.js";
+import { probeDeferredShadows } from "./DeferredShadowProbe.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
 import { COMPACT_CAR_MESH, poseOrientation, yawOrientation } from "./MeshPresentation.js";
 import { OverlayFrame } from "./OverlayFrame.js";
@@ -479,6 +480,7 @@ const lab = {
   probeWorldRegistration,
   probeVehicleDepth,
   probeSurfaceDecals,
+  probeDeferredShadows,
   probeViewRegions,
 };
 (window as unknown as { rendererLab: typeof lab }).rendererLab = lab;
