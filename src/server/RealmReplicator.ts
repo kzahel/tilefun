@@ -171,12 +171,15 @@ export class RealmReplicator {
     const entityBaselines: EntitySnapshot[] = [];
     const entityDeltas: EntityDelta[] = [];
     for (const entity of nearby) {
-      const snapshot = reuseEntitySnapshot(entity, this.snapshots.get(entity));
-      this.snapshots.set(entity, snapshot);
+      const owned = this.snapshots.get(entity);
+      const snapshot = reuseEntitySnapshot(entity, owned);
+      if (snapshot !== owned) this.snapshots.set(entity, snapshot);
       currentEntityIds.add(entity.id);
       const prev = lastSent.get(entity.id);
+      // An unchanged entity already sent to this stream needs nothing further.
+      if (prev === snapshot) continue;
       if (!prev) entityBaselines.push(snapshot);
-      else if (prev !== snapshot) {
+      else {
         const d = diffEntitySnapshots(prev, snapshot);
         if (d) entityDeltas.push(d);
       }

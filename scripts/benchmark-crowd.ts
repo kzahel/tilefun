@@ -166,6 +166,8 @@ async function authority() {
         movingActors: round(moving / samples),
         movingSampleEveryTicks: 30,
         physicsBodies: after.bodies,
+        bodyReads: perTick("bodyReads"),
+        motorUpdates: perTick("motorUpdates"),
         awakeCars: round(awakeCars / samples),
         wheelRays: perTick("wheelQueries"),
         wheelBodyTests: perTick("wheelNarrowQueries"),

@@ -22,7 +22,10 @@ export interface SceneBody {
   body: RAPIER.RigidBody;
   collider: RAPIER.Collider;
   kind: PhysicsBodyKind;
-  signature: string;
+  /** Outer dimensions the body was built from. */
+  shape: Dimensions;
+  /** The synchronize pass that last admitted this body. */
+  syncPass: number;
   halfY: number;
   offsetX: number;
   offsetY: number;
@@ -33,6 +36,16 @@ export interface SceneBody {
   transporter?: TransporterBody;
   queryRadius: number;
   queryCenter: RAPIER.Vector;
+  /** Consecutive readbacks that found the body asleep, capped at two. */
+  rested: number;
+  /** A resting motor on static ground whose idle intent needs no further work. */
+  dormant: boolean;
+  /** `queryCenter` was captured while the body rested and is still its pose. */
+  centred: boolean;
+  /** The last readback found the pose bit-identical to the tick before. */
+  unmoved: boolean;
+  /** Bodies in solved contact at the last full readback. */
+  touching: number[];
 }
 
 type Dimensions = ReturnType<typeof physicsBodyDimensions>;
@@ -178,7 +191,6 @@ export function createSceneBody(
   entity: Entity,
   kind: PhysicsBodyKind,
   d: Dimensions,
-  signature: string,
 ): SceneBody {
   const car = kind === "vehicle" && !isBoat(entity) && !isTrain(entity);
   const halfY = d.height / 2 / SCALE,
@@ -199,7 +211,8 @@ export function createSceneBody(
     body,
     collider,
     kind,
-    signature,
+    shape: d,
+    syncPass: 0,
     halfY,
     offsetX: d.offsetX / SCALE,
     offsetY: d.offsetY / SCALE,
@@ -210,6 +223,11 @@ export function createSceneBody(
     // A raised tub or deployed ramp reaches beyond the level body envelope.
     queryRadius: Math.hypot(hx, halfY, hz) + (bed ? 1.5 : transporter ? 5 : 0.1),
     queryCenter: body.translation(),
+    rested: 0,
+    dormant: false,
+    centred: false,
+    unmoved: false,
+    touching: [],
     state: initialState(entity, kind, d, rotation, bed),
   };
 }

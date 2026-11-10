@@ -93,7 +93,7 @@
       "overLimit": 0
     },
     "src/entities/EntityManager.ts": {
-      "lines": 247,
+      "lines": 249,
       "worst": 47,
       "overLimit": 2
     },
@@ -353,7 +353,7 @@
       "overLimit": 1
     },
     "src/persistence/ActorRecords.ts": {
-      "lines": 156,
+      "lines": 157,
       "worst": 39,
       "overLimit": 1
     },
@@ -373,8 +373,8 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 1001,
-      "worst": 79,
+      "lines": 942,
+      "worst": 65,
       "overLimit": 6
     },
     "src/physics/rapier/ClippedTerrain.ts": {
@@ -473,7 +473,7 @@
       "overLimit": 1
     },
     "src/rendering/GpuRasterSurface.ts": {
-      "lines": 1011,
+      "lines": 1004,
       "worst": 72,
       "overLimit": 1
     },
@@ -613,8 +613,8 @@
       "overLimit": 0
     },
     "src/server/RealmActivity.ts": {
-      "lines": 104,
-      "worst": 38,
+      "lines": 105,
+      "worst": 27,
       "overLimit": 1
     },
     "src/server/RealmPropActivity.ts": {
@@ -623,13 +623,13 @@
       "overLimit": 1
     },
     "src/server/RealmStreaming.ts": {
-      "lines": 314,
+      "lines": 315,
       "worst": 31,
       "overLimit": 1
     },
     "src/server/tickAllAI.ts": {
-      "lines": 140,
-      "worst": 42,
+      "lines": 114,
+      "worst": 26,
       "overLimit": 1
     },
     "src/server/vitePlugin.ts": {
@@ -703,7 +703,7 @@
       "overLimit": 2
     },
     "src/wildlife/deerAI.ts": {
-      "lines": 137,
+      "lines": 138,
       "worst": 60,
       "overLimit": 1
     },
@@ -713,7 +713,7 @@
       "overLimit": 0
     },
     "src/wildlife/faunaAI.ts": {
-      "lines": 188,
+      "lines": 187,
       "worst": 77,
       "overLimit": 1
     },
@@ -748,7 +748,7 @@
       "overLimit": 4
     },
     "src/wildlife/frogAI.ts": {
-      "lines": 175,
+      "lines": 176,
       "worst": 61,
       "overLimit": 2
     },
@@ -798,7 +798,7 @@
       "overLimit": 1
     },
     "src/wildlife/rabbitAI.ts": {
-      "lines": 124,
+      "lines": 125,
       "worst": 65,
       "overLimit": 1
     },
@@ -808,7 +808,7 @@
       "overLimit": 1
     },
     "src/wildlife/robinAI.ts": {
-      "lines": 187,
+      "lines": 182,
       "worst": 106,
       "overLimit": 1
     },

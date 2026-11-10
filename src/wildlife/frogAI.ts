@@ -4,6 +4,7 @@ import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { lcgNext } from "../shared/Determinism.js";
 import { gap } from "../shared/gap.js";
 import { restoreFrogPose, settleFrog, startleFrog } from "./frogInteractions.js";
+import { solidWithin } from "./SolidNeighbours.js";
 import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
 /** Short hops, kick/glide swims and quiet bank rests; all decisions are durable. */
@@ -62,7 +63,7 @@ export function updateFrogAI(
       if (
         gap(point, ai.home) > ai.radius ||
         players.some((p) => gap(point, p) < 16) ||
-        animals.some((a) => a !== frog && a.collider?.solid && gap(point, a.position) < 12)
+        solidWithin(animals, frog, point, 12)
       )
         continue;
       let clear = true;

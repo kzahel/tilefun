@@ -9,6 +9,7 @@ import {
   settleDeer,
   startleDeer,
 } from "./deerInteractions.js";
+import { solidWithin } from "./SolidNeighbours.js";
 import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
 export function updateDeerAI(
@@ -89,7 +90,7 @@ export function updateDeerAI(
     if (
       gap(point, ai.home) > ai.radius - 12 ||
       players.some((p) => gap(point, p) < 34) ||
-      animals.some((a) => a !== deer && a.collider?.solid && gap(point, a.position) < 24) ||
+      solidWithin(animals, deer, point, 24) ||
       (escaping && gain < 12)
     )
       continue;

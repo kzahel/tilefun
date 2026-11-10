@@ -1,0 +1,560 @@
+{
+  "description": "Authority tick before and after resting bodies stop being read and motored (tactical 235). Node 24.22.1, Apple M4 Pro, interleaved fresh processes, 180 warm-up + 600 measured ticks each. Device rows are render:bench crowd cells (Vite dev modules, seed-2026 city).",
+  "node": {
+    "before": [
+      {
+        "tickMs": {
+          "p50": 6.744,
+          "p95": 7.781,
+          "p99": 8.406
+        },
+        "stagesMs": {
+          "server.autotile": {
+            "p50": 0.001,
+            "p95": 0.001
+          },
+          "realm.ai": {
+            "p50": 0.93,
+            "p95": 1.724
+          },
+          "realm.entityPhysics": {
+            "p50": 3.154,
+            "p95": 3.608
+          },
+          "realm.saveSweep": {
+            "p50": 0.043,
+            "p95": 0.06
+          },
+          "server.replication": {
+            "p50": 1.29,
+            "p95": 1.477
+          },
+          "realm.tick": {
+            "p50": 6.743,
+            "p95": 7.78
+          }
+        },
+        "work": {
+          "simulatedActors": 1051,
+          "movingActors": 64.05,
+          "movingSampleEveryTicks": 30,
+          "physicsBodies": 1051,
+          "awakeCars": 0,
+          "wheelRays": 0,
+          "wheelBodyTests": 0,
+          "supportQueries": 24.427,
+          "replicationBytes": 9135
+        },
+        "wireSha256": "0a8a22cc92489ba11af5e7a30678a38e5fe4a8891bc425e15333dc62763324b5",
+        "source": "b85383c93bc99aa93d929a365bda2ddd7c3e73fbbd670cd62969b6e3f04256ca"
+      },
+      {
+        "tickMs": {
+          "p50": 6.694,
+          "p95": 7.653,
+          "p99": 8.142
+        },
+        "stagesMs": {
+          "server.autotile": {
+            "p50": 0.001,
+            "p95": 0.001
+          },
+          "realm.ai": {
+            "p50": 0.944,
+            "p95": 1.753
+          },
+          "realm.entityPhysics": {
+            "p50": 3.089,
+            "p95": 3.509
+          },
+          "realm.saveSweep": {
+            "p50": 0.04,
+            "p95": 0.058
+          },
+          "server.replication": {
+            "p50": 1.289,
+            "p95": 1.516
+          },
+          "realm.tick": {
+            "p50": 6.694,
+            "p95": 7.652
+          }
+        },
+        "work": {
+          "simulatedActors": 1051,
+          "movingActors": 64.05,
+          "movingSampleEveryTicks": 30,
+          "physicsBodies": 1051,
+          "awakeCars": 0,
+          "wheelRays": 0,
+          "wheelBodyTests": 0,
+          "supportQueries": 24.427,
+          "replicationBytes": 9135
+        },
+        "wireSha256": "0a8a22cc92489ba11af5e7a30678a38e5fe4a8891bc425e15333dc62763324b5",
+        "source": "b85383c93bc99aa93d929a365bda2ddd7c3e73fbbd670cd62969b6e3f04256ca"
+      },
+      {
+        "tickMs": {
+          "p50": 6.609,
+          "p95": 7.557,
+          "p99": 7.938
+        },
+        "stagesMs": {
+          "server.autotile": {
+            "p50": 0.001,
+            "p95": 0.001
+          },
+          "realm.ai": {
+            "p50": 0.924,
+            "p95": 1.719
+          },
+          "realm.entityPhysics": {
+            "p50": 3.041,
+            "p95": 3.432
+          },
+          "realm.saveSweep": {
+            "p50": 0.039,
+            "p95": 0.052
+          },
+          "server.replication": {
+            "p50": 1.287,
+            "p95": 1.439
+          },
+          "realm.tick": {
+            "p50": 6.608,
+            "p95": 7.557
+          }
+        },
+        "work": {
+          "simulatedActors": 1051,
+          "movingActors": 64.05,
+          "movingSampleEveryTicks": 30,
+          "physicsBodies": 1051,
+          "awakeCars": 0,
+          "wheelRays": 0,
+          "wheelBodyTests": 0,
+          "supportQueries": 24.427,
+          "replicationBytes": 9135
+        },
+        "wireSha256": "0a8a22cc92489ba11af5e7a30678a38e5fe4a8891bc425e15333dc62763324b5",
+        "source": "b85383c93bc99aa93d929a365bda2ddd7c3e73fbbd670cd62969b6e3f04256ca"
+      }
+    ],
+    "after": [
+      {
+        "tickMs": {
+          "p50": 4.008,
+          "p95": 4.589,
+          "p99": 5.333
+        },
+        "stagesMs": {
+          "server.autotile": {
+            "p50": 0,
+            "p95": 0.001
+          },
+          "realm.ai": {
+            "p50": 0.739,
+            "p95": 0.867
+          },
+          "realm.entityPhysics": {
+            "p50": 1.473,
+            "p95": 1.699
+          },
+          "realm.saveSweep": {
+            "p50": 0.038,
+            "p95": 0.05
+          },
+          "server.replication": {
+            "p50": 0.774,
+            "p95": 1.051
+          },
+          "realm.tick": {
+            "p50": 4.008,
+            "p95": 4.589
+          }
+        },
+        "work": {
+          "simulatedActors": 1051,
+          "movingActors": 42.75,
+          "movingSampleEveryTicks": 30,
+          "physicsBodies": 1051,
+          "bodyReads": 81.963,
+          "motorUpdates": 144.483,
+          "awakeCars": 0,
+          "wheelRays": 0,
+          "wheelBodyTests": 0,
+          "supportQueries": 24.427,
+          "replicationBytes": 9100
+        },
+        "wireSha256": "46beb8074d24d696dfdd1dbd5e23756c0405e622de935a8bf0d4f7435e6d01ea",
+        "source": "cb89f7635bf434f978bf4d6d29921c7730df9d3b053175f20b3cd46f520f9f52"
+      },
+      {
+        "tickMs": {
+          "p50": 4.13,
+          "p95": 4.679,
+          "p99": 4.994
+        },
+        "stagesMs": {
+          "server.autotile": {
+            "p50": 0,
+            "p95": 0.001
+          },
+          "realm.ai": {
+            "p50": 0.709,
+            "p95": 0.825
+          },
+          "realm.entityPhysics": {
+            "p50": 1.49,
+            "p95": 1.692
+          },
+          "realm.saveSweep": {
+            "p50": 0.038,
+            "p95": 0.05
+          },
+          "server.replication": {
+            "p50": 0.952,
+            "p95": 1.189
+          },
+          "realm.tick": {
+            "p50": 4.13,
+            "p95": 4.679
+          }
+        },
+        "work": {
+          "simulatedActors": 1051,
+          "movingActors": 42.75,
+          "movingSampleEveryTicks": 30,
+          "physicsBodies": 1051,
+          "bodyReads": 81.963,
+          "motorUpdates": 144.483,
+          "awakeCars": 0,
+          "wheelRays": 0,
+          "wheelBodyTests": 0,
+          "supportQueries": 24.427,
+          "replicationBytes": 9100
+        },
+        "wireSha256": "46beb8074d24d696dfdd1dbd5e23756c0405e622de935a8bf0d4f7435e6d01ea",
+        "source": "cb89f7635bf434f978bf4d6d29921c7730df9d3b053175f20b3cd46f520f9f52"
+      },
+      {
+        "tickMs": {
+          "p50": 4.067,
+          "p95": 4.574,
+          "p99": 5.001
+        },
+        "stagesMs": {
+          "server.autotile": {
+            "p50": 0.001,
+            "p95": 0.001
+          },
+          "realm.ai": {
+            "p50": 0.725,
+            "p95": 0.85
+          },
+          "realm.entityPhysics": {
+            "p50": 1.502,
+            "p95": 1.698
+          },
+          "realm.saveSweep": {
+            "p50": 0.038,
+            "p95": 0.048
+          },
+          "server.replication": {
+            "p50": 0.809,
+            "p95": 1.107
+          },
+          "realm.tick": {
+            "p50": 4.067,
+            "p95": 4.573
+          }
+        },
+        "work": {
+          "simulatedActors": 1051,
+          "movingActors": 42.75,
+          "movingSampleEveryTicks": 30,
+          "physicsBodies": 1051,
+          "bodyReads": 81.963,
+          "motorUpdates": 144.483,
+          "awakeCars": 0,
+          "wheelRays": 0,
+          "wheelBodyTests": 0,
+          "supportQueries": 24.427,
+          "replicationBytes": 9100
+        },
+        "wireSha256": "46beb8074d24d696dfdd1dbd5e23756c0405e622de935a8bf0d4f7435e6d01ea",
+        "source": "cb89f7635bf434f978bf4d6d29921c7730df9d3b053175f20b3cd46f520f9f52"
+      }
+    ]
+  },
+  "pixel7aAfter": [
+    {
+      "device": "Pixel 7a",
+      "scene": "crowd",
+      "zoom": 0.25,
+      "workerTickMs": {
+        "p50": 32.5,
+        "p95": 41.8
+      },
+      "authorityStagesMs": null,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 33.4,
+        "max": 50.1
+      },
+      "missed": 172,
+      "frames": 425,
+      "entities": 1059
+    },
+    {
+      "device": "Pixel 7a",
+      "scene": "crowd",
+      "zoom": 1,
+      "workerTickMs": {
+        "p50": 22.3,
+        "p95": 29.1
+      },
+      "authorityStagesMs": {
+        "server.decode": {
+          "p50": 0,
+          "p95": 0
+        },
+        "server.autotile": {
+          "p50": 0,
+          "p95": 0.1
+        },
+        "realm.saveSweep": {
+          "p50": 0.1,
+          "p95": 0.3
+        },
+        "realm.ai": {
+          "p50": 1.7,
+          "p95": 3.1
+        },
+        "realm.entityPhysics": {
+          "p50": 12.6,
+          "p95": 17
+        },
+        "server.replication": {
+          "p50": 3.2,
+          "p95": 5
+        },
+        "server.encode": {
+          "p50": 0.3,
+          "p95": 0.5
+        },
+        "server.tick": {
+          "p50": 22.3,
+          "p95": 29.1
+        }
+      },
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.8,
+        "max": 50.1
+      },
+      "missed": 20,
+      "frames": 580,
+      "entities": 939
+    },
+    {
+      "device": "Pixel 7a",
+      "scene": "crowd",
+      "zoom": 0.25,
+      "workerTickMs": {
+        "p50": 20.7,
+        "p95": 34.5
+      },
+      "authorityStagesMs": {
+        "server.decode": {
+          "p50": 0,
+          "p95": 0
+        },
+        "server.autotile": {
+          "p50": 0,
+          "p95": 0
+        },
+        "realm.saveSweep": {
+          "p50": 0.1,
+          "p95": 0.4
+        },
+        "realm.ai": {
+          "p50": 2.7,
+          "p95": 4.4
+        },
+        "realm.entityPhysics": {
+          "p50": 9.5,
+          "p95": 20.4
+        },
+        "server.replication": {
+          "p50": 3.7,
+          "p95": 6.1
+        },
+        "server.encode": {
+          "p50": 0.2,
+          "p95": 0.6
+        },
+        "server.tick": {
+          "p50": 20.7,
+          "p95": 34.5
+        }
+      },
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 33.4,
+        "max": 66.6
+      },
+      "missed": 158,
+      "frames": 440,
+      "entities": 1058
+    },
+    {
+      "device": "Pixel 7a",
+      "scene": "crowd",
+      "zoom": 1,
+      "workerTickMs": {
+        "p50": 20.8,
+        "p95": 31.4
+      },
+      "authorityStagesMs": {
+        "server.decode": {
+          "p50": 0,
+          "p95": 0
+        },
+        "server.autotile": {
+          "p50": 0,
+          "p95": 0
+        },
+        "realm.saveSweep": {
+          "p50": 0.1,
+          "p95": 0.3
+        },
+        "realm.ai": {
+          "p50": 1.7,
+          "p95": 2.9
+        },
+        "realm.entityPhysics": {
+          "p50": 9.7,
+          "p95": 18.8
+        },
+        "server.replication": {
+          "p50": 3.2,
+          "p95": 5.1
+        },
+        "server.encode": {
+          "p50": 0.3,
+          "p95": 0.6
+        },
+        "server.tick": {
+          "p50": 20.8,
+          "p95": 31.4
+        }
+      },
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.8,
+        "max": 33.4
+      },
+      "missed": 13,
+      "frames": 588,
+      "entities": 942
+    },
+    {
+      "device": "Pixel 7a",
+      "scene": "crowd",
+      "zoom": 0.25,
+      "workerTickMs": {
+        "p50": 26.5,
+        "p95": 48.6
+      },
+      "authorityStagesMs": {
+        "server.decode": {
+          "p50": 0,
+          "p95": 0
+        },
+        "server.autotile": {
+          "p50": 0,
+          "p95": 0.1
+        },
+        "realm.saveSweep": {
+          "p50": 0.1,
+          "p95": 0.4
+        },
+        "realm.ai": {
+          "p50": 3.1,
+          "p95": 5.3
+        },
+        "realm.entityPhysics": {
+          "p50": 12.4,
+          "p95": 29.2
+        },
+        "server.replication": {
+          "p50": 4.5,
+          "p95": 7.2
+        },
+        "server.encode": {
+          "p50": 0.3,
+          "p95": 0.8
+        },
+        "server.tick": {
+          "p50": 26.5,
+          "p95": 48.6
+        }
+      },
+      "frameMs": {
+        "p50": 33.3,
+        "p95": 50.1,
+        "max": 83.4
+      },
+      "missed": 39,
+      "frames": 320,
+      "entities": 1059
+    }
+  ],
+  "pixel7aBefore": "docs/benchmarks/236-render-scorecard.json, same procedure at 17459f62 earlier the same day: crowd zoom 1 tick p50 30.8-33.7 ms; zoom 0.25 39.8-48.0 ms",
+  "macCityCrowdAfter": [
+    {
+      "scene": "crowd",
+      "zoom": 0.25,
+      "workerTickMs": {
+        "p50": 6.9,
+        "p95": 9.9
+      },
+      "authorityStagesMs": {
+        "server.decode": {
+          "p50": 0,
+          "p95": 0
+        },
+        "server.autotile": {
+          "p50": 0,
+          "p95": 0
+        },
+        "realm.saveSweep": {
+          "p50": 0,
+          "p95": 0.1
+        },
+        "realm.ai": {
+          "p50": 0.8,
+          "p95": 1
+        },
+        "realm.entityPhysics": {
+          "p50": 3.9,
+          "p95": 5.9
+        },
+        "server.replication": {
+          "p50": 1.1,
+          "p95": 1.5
+        },
+        "server.encode": {
+          "p50": 0.1,
+          "p95": 0.3
+        },
+        "server.tick": {
+          "p50": 6.9,
+          "p95": 9.9
+        }
+      }
+    }
+  ]
+}

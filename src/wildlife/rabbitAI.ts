@@ -3,6 +3,7 @@ import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { lcgNext } from "../shared/Determinism.js";
 import { gap } from "../shared/gap.js";
 import { restoreRabbitPose, settleRabbit, startleRabbit } from "./rabbitInteractions.js";
+import { solidWithin } from "./SolidNeighbours.js";
 import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
 /** Bounded dry-ground hops, quiet action cycles and short escapes toward open cover. */
@@ -55,7 +56,7 @@ export function updateRabbitAI(
       if (
         gap(point, ai.home) > ai.radius ||
         players.some((p) => gap(point, p) < 22) ||
-        animals.some((a) => a !== rabbit && a.collider?.solid && gap(point, a.position) < 14)
+        solidWithin(animals, rabbit, point, 14)
       )
         continue;
       let clear = true;

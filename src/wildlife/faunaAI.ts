@@ -9,6 +9,7 @@ import {
   startleFauna,
   syncFaunaWater,
 } from "./faunaInteractions.js";
+import { solidWithin } from "./SolidNeighbours.js";
 import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
 export function updateFaunaAI(
@@ -98,9 +99,7 @@ export function updateFaunaAI(
     if (
       gap(point, ai.home) > ai.radius - p.body[0] / 2 ||
       players.some((player) => gap(point, player) < p.alarmDistance) ||
-      animals.some(
-        (a) => a !== animal && a.collider?.solid && gap(point, a.position) < p.body[0] + 6,
-      ) ||
+      solidWithin(animals, animal, point, p.body[0] + 6) ||
       (escaping && gain < p.step / 4)
     )
       continue;

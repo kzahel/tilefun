@@ -5,6 +5,7 @@ import { gap } from "../shared/gap.js";
 import type { RobinPerch } from "./Robin.js";
 import type { RobinWorkBudget } from "./RobinWorkBudget.js";
 import { restoreRobinPose, robinMotionZ, settleRobin, startleRobin } from "./robinInteractions.js";
+import { solidWithin } from "./SolidNeighbours.js";
 import type { WildlifeBody, WildlifeEnvironment } from "./WildlifeEnvironment.js";
 
 export function updateRobinAI(
@@ -119,13 +120,7 @@ export function updateRobinAI(
       gap(p, ai.home) > ai.radius - 8 ||
       environment.isWater(p) ||
       players.some((player) => gap(p, player) < 22) ||
-      animals.some(
-        (a) =>
-          a !== bird &&
-          a.collider?.solid &&
-          gap(p, a.position) < 12 &&
-          Math.abs((a.wz ?? 0) - p.z) < 10,
-      ) ||
+      solidWithin(animals, bird, p, 12, (a) => Math.abs((a.wz ?? 0) - p.z) < 10) ||
       (escaping && gain < 10)
     )
       continue;

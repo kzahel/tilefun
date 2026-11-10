@@ -75,7 +75,9 @@ export class RealmRecords {
   }
 
   projectedPosition(actor: Entity | Prop): { wx: number; wy: number } {
-    let current = actor,
+    if ("isProp" in actor || actor.parentId === undefined)
+      return { wx: actor.position.wx, wy: actor.position.wy };
+    let current: Entity | Prop = actor,
       dx = 0,
       dy = 0;
     const seen = new Set<number>();

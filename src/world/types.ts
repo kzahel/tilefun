@@ -59,7 +59,24 @@ export function chunkToWorld(cx: number, cy: number): WorldPos {
   };
 }
 
-/** Map key for chunk coordinates. */
+const chunkKeys = new Map<number, string>();
+
+/** Map key for chunk coordinates. Per-actor-per-tick callers reuse the built string. */
 export function chunkKey(cx: number, cy: number): string {
-  return `${cx},${cy}`;
+  // Integer coordinates within ±32768 pack exactly; anything else is formatted directly.
+  if (
+    !Number.isInteger(cx) ||
+    !Number.isInteger(cy) ||
+    Math.abs(cx) > 32767 ||
+    Math.abs(cy) > 32767
+  )
+    return `${cx},${cy}`;
+  const packed = (cx + 32768) * 65536 + (cy + 32768);
+  let key = chunkKeys.get(packed);
+  if (key === undefined) {
+    if (chunkKeys.size >= 65536) chunkKeys.clear();
+    key = `${cx},${cy}`;
+    chunkKeys.set(packed, key);
+  }
+  return key;
 }

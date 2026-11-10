@@ -1,12 +1,12 @@
 import type { Entity } from "../entities/Entity.js";
-import { updateRouteAI } from "../entities/routeAI.js";
-import { updateBehaviorAI, updateWanderAI } from "../entities/wanderAI.js";
 import { robinWorkBudget } from "../wildlife/RobinWorkBudget.js";
 import { updateRobinAI } from "../wildlife/robinAI.js";
+import { duringDecisions } from "../wildlife/SolidNeighbours.js";
 import type { WildlifeEnvironment } from "../wildlife/WildlifeEnvironment.js";
 import { isWildlife, wildlifeBrain, wildlifeKind } from "../wildlife/WildlifeKinds.js";
 import { WILDLIFE_SPECIES } from "../wildlife/WildlifeSpecies.js";
 import type { AiPlanningScheduler } from "./AiPlanningScheduler.js";
+import { updateOrdinaryAI } from "./ordinaryAI.js";
 
 /**
  * Run AI for all entities: tick-tier culling, chase/follow, wander.
@@ -28,12 +28,14 @@ export function tickAllAI(
   planning?: AiPlanningScheduler,
 ): void {
   const buddies = entities.filter((e) => e.wanderAI?.following);
-  let entries = [...entityTickDts].filter(
-    ([e]) =>
+  let entries: [Entity, number][] = [];
+  for (const [e, dt] of entityTickDts)
+    if (
       (!e.resident || e.wanderAI?.state === "scared") &&
       // Every predator also carries wanderAI, so this admits exactly the old set.
-      (e.wanderAI || isWildlife(e)),
-  );
+      (e.wanderAI || isWildlife(e))
+    )
+      entries.push([e, dt]);
   const budget = planning?.budget ?? robinWorkBudget();
   if (planning) {
     planning.begin();
@@ -73,68 +75,40 @@ export function tickAllAI(
     }
   }
   const robins: [Entity, number][] = [];
-  for (const [entity, dt] of entries) {
-    const kind = wildlifeKind(entity);
-    if (kind && wildlife) {
-      if (kind === "robin" && !planning) robins.push([entity, dt]);
-      else
-        WILDLIFE_SPECIES[kind].update(
-          entity,
-          dt,
-          wildlife,
-          entities,
-          playerPositions,
-          planning,
-          budget,
-        );
-    } else if (entity.wanderAI && entity.wanderAI.state !== "ridden") {
-      if (entity.routeAI && !entity.wanderAI.following && entity.wanderAI.state !== "scared") {
-        updateRouteAI(entity, dt);
-      } else if (
-        entity.wanderAI.chaseRange ||
-        entity.wanderAI.following ||
-        entity.wanderAI.befriendable
-      ) {
-        const nearest = nearestPlayerPos(entity.position, playerPositions);
-        updateBehaviorAI(entity, dt, rng, nearest, buddies, planning);
-      } else updateWanderAI(entity, dt, rng, planning);
+  // Poses stay fixed while decisions run; planners share one index of solid bodies.
+  duringDecisions(entities, () => {
+    for (const [entity, dt] of entries) {
+      const kind = wildlifeKind(entity);
+      if (kind && wildlife) {
+        if (kind === "robin" && !planning) robins.push([entity, dt]);
+        else
+          WILDLIFE_SPECIES[kind].update(
+            entity,
+            dt,
+            wildlife,
+            entities,
+            playerPositions,
+            planning,
+            budget,
+          );
+      } else updateOrdinaryAI(entity, dt, rng, playerPositions, buddies, planning);
     }
-  }
-  // Direct diagnostic callers without a Realm scheduler retain the robin quota.
-  if (wildlife && robins.length) {
-    const start = robinTurn % robins.length;
-    const rotated = robins.slice(start).concat(robins.slice(0, start));
-    const rank = (entity: Entity) =>
-      entity.robin?.alarmFrom
-        ? 0
-        : playerPositions.some(
-              (p) => Math.hypot(p.wx - entity.position.wx, p.wy - entity.position.wy) < 192,
-            )
-          ? 1
-          : 2;
-    const priorities = new Map(rotated.map(([entity]) => [entity, rank(entity)]));
-    rotated.sort((a, b) => (priorities.get(a[0]) ?? 2) - (priorities.get(b[0]) ?? 2));
-    for (const [entity, dt] of rotated)
-      updateRobinAI(entity, dt, wildlife, entities, playerPositions, budget);
-  }
-}
-
-/** Find the nearest player position to a given world position. */
-function nearestPlayerPos(
-  pos: { wx: number; wy: number },
-  playerPositions: readonly { wx: number; wy: number }[],
-): { wx: number; wy: number } {
-  if (playerPositions.length === 1) return playerPositions[0] as { wx: number; wy: number };
-  let best = playerPositions[0] as { wx: number; wy: number };
-  let bestDist = Number.MAX_VALUE;
-  for (const pp of playerPositions) {
-    const dx = pp.wx - pos.wx;
-    const dy = pp.wy - pos.wy;
-    const dist = dx * dx + dy * dy;
-    if (dist < bestDist) {
-      bestDist = dist;
-      best = pp;
+    // Direct diagnostic callers without a Realm scheduler retain the robin quota.
+    if (wildlife && robins.length) {
+      const start = robinTurn % robins.length;
+      const rotated = robins.slice(start).concat(robins.slice(0, start));
+      const rank = (entity: Entity) =>
+        entity.robin?.alarmFrom
+          ? 0
+          : playerPositions.some(
+                (p) => Math.hypot(p.wx - entity.position.wx, p.wy - entity.position.wy) < 192,
+              )
+            ? 1
+            : 2;
+      const priorities = new Map(rotated.map(([entity]) => [entity, rank(entity)]));
+      rotated.sort((a, b) => (priorities.get(a[0]) ?? 2) - (priorities.get(b[0]) ?? 2));
+      for (const [entity, dt] of rotated)
+        updateRobinAI(entity, dt, wildlife, entities, playerPositions, budget);
     }
-  }
-  return best;
+  });
 }

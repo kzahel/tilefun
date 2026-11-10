@@ -1,6 +1,6 @@
 # 235 — Crowd bench: remove unnecessary work
 
-Status: shadows delivered; attribution/measurement checkpoint delivered and awaiting owner review before optimization · 2026-11-10. Owner: [performance](../topics/performance.md).
+Status: shadows, measurement checkpoint and the first authority slice delivered (tick 6.6–6.7 → 4.0–4.1 ms; the 2 ms goal is not reached) · 2026-11-10. Owner: [performance](../topics/performance.md).
 
 The owner asked for a repeatable bench with about 1,000 rabbits and 50 cars,
 all within a few chunks and all in view. The goal is to remove all
@@ -377,6 +377,162 @@ lifecycle. The shell's Node 27 alpha failed the existing PNG decoder during the
 initial build; validation and recorded baselines use installed Node 24 instead.
 No full repository suite or streaming traversal gate was needed: simulation,
 streaming, rendering algorithms and input behavior are unchanged.
+
+## Authority slice: resting bodies and per-actor passes (delivered 2026-11-10)
+
+The owner authorized the authority work (slices 2 and 3 of the review order).
+
+**Result** (M4 Pro, Node 24.22.1, three interleaved fresh processes each, same
+machine load; [evidence](../benchmarks/235-authority-rest.json)):
+
+| Measure | Before (`17459f62`) | After |
+| --- | ---: | ---: |
+| Tick p50 | 6.61–6.74 ms | 4.01–4.13 ms |
+| Tick p95 | 7.56–7.78 ms | 4.57–4.68 ms |
+| Physics stage p50 / p95 | 3.04–3.15 / 3.43–3.61 ms | 1.47–1.50 / 1.69–1.70 ms |
+| Replication p50 / p95 | 1.29 / 1.44–1.52 ms | 0.77–0.95 / 1.05–1.19 ms |
+| AI p50 / p95 | 0.92–0.94 / 1.72–1.75 ms | 0.71–0.74 / 0.82–0.87 ms |
+| Bodies read back per tick | 1,051 | 82 |
+| Motors evaluated per tick | 1,051 | 144 |
+
+The tick is 39% shorter at p50 and 40% at p95. **The 2 ms goal is not reached.**
+
+In the real game (`render:bench` crowd scene in the seed-2026 city, about 890
+rabbits and 49 cars, Vite dev modules):
+
+| Device | Zoom | Worker tick p50 before | After |
+| --- | --- | ---: | ---: |
+| M4 Pro | 0.25 | 8.1–12.7 ms | 6.0–6.9 ms |
+| Pixel 7a | 1 | 30.8–33.7 ms | 20.8–22.3 ms |
+| Pixel 7a | 0.25 | 39.8–48.0 ms | 20.7–32.5 ms (three runs) |
+
+The phone's "before" rows are the 236 scorecard runs from earlier the same day
+at `17459f62`, not interleaved with the "after" runs. The phone tick is about a
+third shorter but still above the 16.7 ms a 60 Hz authority needs, so its crowd
+cell still misses frames. Physics is the largest phone stage (9.5–12.6 ms).
+The Steam Deck was not re-measured.
+
+### What the first profile showed
+
+Idle rabbits were already asleep inside Rapier. The cost was the game's own
+code around the solver: every tick it read every body's pose, velocity,
+rotation and contact pairs back through WASM, re-ran every motor, and then
+walked all 1,051 actors again in about a dozen further passes (body
+synchronization twice, intents, activity selection, AI, gameplay, replication).
+After this slice the profile is flat: each remaining pass costs 60–120 ns per
+actor and none is above about 9% of the tick.
+
+### Changes
+
+Physics (`PhysicsScene`, new `BodyMotor.ts` and `BodyReadback.ts`):
+- **Resting readback.** A body the solver reports asleep for two consecutive
+  readbacks, grounded and without a dump bed or transporter deck, is not read
+  again. Its cached state is exactly its state; its previous pose catches up and
+  its own solved contacts are listed again from the last full read. The cached
+  state is still published to the entity every tick, because other systems write
+  pose arcs (`jumpZ`) onto those fields.
+- **Dormant motors.** A character motor that found its body asleep on static
+  ground, grounded, with an idle intent, is skipped while the intent stays idle.
+  A full readback, an explicit edit, a restore or a replaced entity object ends it.
+- **Noise no longer keeps bodies awake.** A grounded motor asking for no motion
+  still clears velocity while awake, but stops resetting the solver's sleep timer
+  once the last readback found the pose bit-identical to the tick before. Rabbits
+  resting against or on top of each other carried 1e-5…1e-17 px/s solver noise
+  and never slept.
+- Support velocities are read only for bodies something stands on; section
+  residency skips the velocity query for resting bodies and repeated chunk
+  ranges; wheel queries keep the centre of a resting body; body shape is compared
+  as numbers rather than a built string.
+- `bodyReads` and `motorUpdates` are new scene counters and bench work counts.
+
+Other passes, each with identical output:
+- Publication synchronizes the step's own participant list unless a seat
+  boarded, left or mounted since.
+- Activity selection decides a wildlife group's interest once per tick (it ran
+  the wake test twice) without per-call closures; wildlife-only membership is
+  computed when groups rebuild.
+- Chunk key strings are memoized (`chunkKey`); actor scope and streaming support
+  built several per actor per tick.
+- Replication compares mirrored fields by name instead of a keyed loop, and
+  writes its maps only for changed entities. `MATCHED` fails to compile if a
+  mirrored field is missing from the comparison; the reuse test changes every
+  mirrored field.
+- Hop planners (rabbit, frog, deer, fauna, robin) ask one shared grid of the
+  pass's solid bodies (`SolidNeighbours.ts`) instead of scanning the population
+  for each of up to 24 candidates. Outside `tickAllAI`'s pass the same question
+  scans, with the same answer.
+- `finishPhysics` asks for water only when a duck or frog lands, and skips
+  attachment resolution when nothing is attached.
+
+### What changed in behaviour
+
+Everything after the physics change keeps the wire digest bit-identical
+(`46beb807…` for every later step). The physics change itself moves the digest
+from `0a8a22cc…`, for one reason:
+- Bodies resting in contact now sleep, so their replicated velocity is exactly
+  zero instead of solver noise. Sampled movers drop from 64 to 43 and
+  replication from 9,135 to 9,100 bytes per tick.
+
+A per-tick trace of every actor's pose over the 600 measured ticks, before and
+after: every x and y is identical; z differs by at most 0.021 px, on rabbits
+standing on another rabbit (the awake stack kept settling by fractions of a
+micro-pixel; asleep, it stops). Hop counts and support queries are identical.
+
+Not changed: a body already asleep in the solver stayed asleep through a
+terrain edit under it before this slice, and still does.
+
+### Wake paths tested
+
+`RestingBodies.test.ts` settles bodies until a tick does zero reads, then checks:
+- skipped reads and motors, with the cached pose still published (a stray
+  `jumpZ` is cleared);
+- a motion intent; a moving body running into a resting one, with the contact
+  recorded; teleport and launch edits; a replacement entity object;
+- a dynamic support that is removed, and one that starts to move;
+- a collider change that rebuilds the body;
+- a resting pair's contact listed both ways and kept in the prediction snapshot
+  closure;
+- an anchor (fixed body) is read every tick and lists what rests on it;
+- an awake copy restored from the authority's snapshot, as client prediction
+  does (only vehicles replicate sleep), follows the same 90-tick push through
+  two resting bodies within 0.05 px of the asleep authority.
+
+Not rested at all, so unchanged: fixed bodies, trains, and bodies with a dump
+bed or transporter deck. Not covered by a new test: tow/carry joints forming on
+a resting car, a train starting under a resting rider, and gravity changes.
+The existing vehicle, coupling, railway and prediction tests pass.
+
+`SolidNeighbours.test.ts` compares 2,000 indexed answers with scans. The index
+assumes poses and solidity do not change during the decision pass; the
+independent review found no stock path that breaks this (carried balls and
+forage items are not solid). The 3,537 tests of the affected directories pass,
+as do the crowd-bench harness tests, `streaming:bench -- --assert-ready` and 45
+browser cases (physics, prediction recovery, riding, cars, wildlife species and
+split screen).
+
+The code-health baseline records one or two more lines in six files that gained
+an import or a guard; `PhysicsScene.ts`, `RealmActivity.ts` and `tickAllAI.ts`
+all shrink in size and worst-function complexity.
+
+### What remains for 2 ms
+
+Change-tracked replication in the sense of slice 3 is **not** delivered: nothing
+marks an entity changed, so replication still compares all 1,051 each tick,
+only more cheaply. The remaining cost is a dozen flat per-actor passes. Reaching
+2 ms needs idle actors to leave the per-tick lists:
+1. Rest timers as wake ticks. A resting rabbit's AI, animal work and planning
+   clocks decrement every tick. Scheduling the wake changes float accumulation,
+   so decision timing may shift by a tick: an intended output change that needs
+   its own equivalence argument.
+2. A realm-level resting set: actors whose body is dormant and whose AI is
+   waiting skip intents, finish, gameplay sync and replication comparison. This
+   needs a write barrier or an explicit "touched" call for gameplay edits.
+3. Fixed bodies (resources, anchors) are still read every tick; they are absent
+   from this bench but common in the woods.
+
+`render:bench` now prints the authority's stage timings for each cell, and
+`--profile` also records the busiest Worker (the authority) when the bench
+launches its own browser.
 
 ### Review boundary and next slices
 

@@ -198,6 +198,15 @@ async function samplePage({ seconds }) {
       workerTickMs: tick
         ? { p50: Math.round(tick.p50Ms * 100) / 100, p95: Math.round(tick.p95Ms * 100) / 100 }
         : null,
+      // The authority's own stage timers (rolling window), for attributing its tick.
+      authorityStagesMs: Object.fromEntries(
+        Object.entries(host?.authority?.timings ?? {})
+          .filter(([name]) => name.startsWith("realm.") || name.startsWith("server."))
+          .map(([name, t]) => [
+            name,
+            { p50: Math.round(t.p50Ms * 100) / 100, p95: Math.round(t.p95Ms * 100) / 100 },
+          ]),
+      ),
       atlasMiB: stats ? Math.round(stats.atlasBytes / 2 ** 20) : null,
     };
   } finally {
@@ -206,6 +215,66 @@ async function samplePage({ seconds }) {
     backend.submit = submit;
   }
 }
+
+/** CPU profiles of the page's dedicated Workers (the authority runs in one). The
+ * launched browser's page session reaches them through nested target messages. */
+async function workerProfiler(cdp) {
+  const sessions = [];
+  const waiting = new Map();
+  let next = 1;
+  cdp.on("Target.attachedToTarget", (e) => {
+    if (e.targetInfo.type === "worker") sessions.push(e.sessionId);
+  });
+  // Each scene navigates away and destroys the previous scene's Workers.
+  cdp.on("Target.detachedFromTarget", (e) => {
+    const index = sessions.indexOf(e.sessionId);
+    if (index >= 0) sessions.splice(index, 1);
+  });
+  cdp.on("Target.receivedMessageFromTarget", (e) => {
+    const message = JSON.parse(e.message);
+    waiting.get(message.id)?.(message.result);
+    waiting.delete(message.id);
+  });
+  await cdp.send("Target.setAutoAttach", {
+    autoAttach: true,
+    waitForDebuggerOnStart: false,
+    flatten: false,
+  });
+  const send = (sessionId, method, params = {}) =>
+    new Promise((resolve) => {
+      const id = next++;
+      waiting.set(id, resolve);
+      // A Worker that went away mid-command answers nothing: resolve empty.
+      cdp
+        .send("Target.sendMessageToTarget", {
+          sessionId,
+          message: JSON.stringify({ id, method, params }),
+        })
+        .catch(() => {
+          waiting.delete(id);
+          resolve(undefined);
+        });
+    });
+  return {
+    async start() {
+      for (const session of [...sessions]) {
+        await send(session, "Profiler.enable");
+        await send(session, "Profiler.setSamplingInterval", { interval: 200 });
+        await send(session, "Profiler.start");
+      }
+    },
+    async stop() {
+      const profiles = [];
+      for (const session of [...sessions]) {
+        const stopped = await send(session, "Profiler.stop");
+        if (stopped?.profile) profiles.push(stopped.profile);
+      }
+      return profiles;
+    },
+  };
+}
+
+const idleShare = (top) => top.find((row) => row.name.startsWith("(idle)"))?.percent ?? 0;
 
 /** Top self-time frames of a DevTools CPU profile, as shares of sampled time. */
 function topSelfTime(cpuProfile, limit = 18) {
@@ -247,6 +316,7 @@ try {
     page = await browser.newPage({ viewport: { width, height } });
   }
   const cdp = endpoint ? page : await page.context().newCDPSession(page);
+  const workers = profile && !endpoint ? await workerProfiler(cdp) : undefined;
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   // Computed here rather than in the page, so production builds work too.
@@ -387,6 +457,7 @@ try {
         await cdp.send("Profiler.enable");
         await cdp.send("Profiler.setSamplingInterval", { interval: 200 });
         await cdp.send("Profiler.start");
+        await workers?.start();
       }
       const cell = {
         scene: name,
@@ -395,12 +466,31 @@ try {
         ...(await page.evaluate(samplePage, { seconds })),
       };
       if (profile) cell.profile = topSelfTime((await cdp.send("Profiler.stop")).profile);
+      const workerProfiles = (await workers?.stop()) ?? [];
+      // The busiest Worker is the authority; idle ones only wait for messages.
+      const busiest = workerProfiles
+        .map((p) => ({ p, top: topSelfTime(p, 24) }))
+        .sort((a, b) => idleShare(a.top) - idleShare(b.top))[0];
+      if (busiest) {
+        cell.workerProfile = busiest.top;
+        if (output)
+          await writeFile(
+            `${output.replace(/\.json$/, "")}.${name}-${zoom}.worker.cpuprofile`,
+            JSON.stringify(busiest.p),
+          );
+      }
       cells.push(cell);
       for (const row of cell.profile ?? [])
         console.log(`    ${String(row.percent).padStart(5)}%  ${row.name}`);
+      for (const row of cell.workerProfile ?? [])
+        console.log(`    worker ${String(row.percent).padStart(5)}%  ${row.name}`);
       if (screenshots)
         await page.screenshot({ path: path.join(screenshots, `${name}-${zoom}.png`) });
       const g = cell.gpuMs ? `${cell.gpuMs.p50}/${cell.gpuMs.p95}` : "n/a";
+      const stages = Object.entries(cell.authorityStagesMs)
+        .filter(([stage]) => stage !== "server.tick")
+        .map(([stage, t]) => `${stage.replace(/^(realm|server)\./, "")} ${t.p50}`);
+      if (stages.length) console.log(`    authority stages p50 ms: ${stages.join(", ")}`);
       console.log(
         `${name.padEnd(6)} ${String(zoom).padEnd(5)} frame ${cell.frameMs.p50}/${cell.frameMs.p95} ms, missed ${cell.missed}/${cell.frames}; render ${cell.renderMs.p50}/${cell.renderMs.p95} (submit ${cell.submitMs.p50}); gpu ${g}; render+finish ${cell.renderFinishMs?.p50}; update ${cell.updateMs.p50}; draws ${cell.drawCallsPerFrame}; tick ${cell.workerTickMs?.p50 ?? "?"}; ${cell.entities} entities`,
       );

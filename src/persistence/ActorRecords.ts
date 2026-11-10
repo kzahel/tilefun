@@ -14,6 +14,7 @@ import { restoreMallardPose } from "../wildlife/mallardInteractions.js";
 import { restorePredatorPose } from "../wildlife/PredatorMotion.js";
 import { restoreRabbitPose } from "../wildlife/rabbitInteractions.js";
 import { restoreRobinPose } from "../wildlife/robinInteractions.js";
+import { chunkKey } from "../world/types.js";
 
 export interface ActorRecord {
   version: 2;
@@ -55,7 +56,7 @@ export const DURABLE_ENTITY_FIELDS = [
 ] as const;
 
 export function actorScope(position: { wx: number; wy: number }): string {
-  return `${Math.floor(position.wx / CHUNK_SIZE_PX)},${Math.floor(position.wy / CHUNK_SIZE_PX)}`;
+  return chunkKey(Math.floor(position.wx / CHUNK_SIZE_PX), Math.floor(position.wy / CHUNK_SIZE_PX));
 }
 
 export function durableId(actor: Entity | Prop): string {

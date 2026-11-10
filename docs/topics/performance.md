@@ -30,8 +30,9 @@ Delivered:
   (it was 9.6 ms at 0.25 and missed 161 of 410 frames).
 
 Open:
-- With 1,000 rabbits the Pixel 7a and Steam Deck are authority-bound (ticks of
-  32–46 ms), so their crowd cells still miss frames. 235 owns that.
+- With 1,000 rabbits the Pixel 7a and Steam Deck are authority-bound, so their
+  crowd cells still miss frames. The first authority slice brought the phone's
+  tick from 31–48 to 21–33 ms; 60 Hz needs 16.7 ms. 235 owns that.
 - The Deck spends 7.7 ms submitting the crowd at 0.1.
 
 ## Crowd bench (2026-11-10)
@@ -49,6 +50,21 @@ overlapping a neighbouring car's mesh fragmented into thousands of pieces. The
 receiver partition fix brings lab frames from about 430 ms to 16.7 ms p50.
 [235](../tactical/235-crowd-bench-and-unnecessary-work.md) owns the inventory
 of unnecessary work and the goal: tick ≤ 2 ms and the lab at 120 Hz.
+
+Authority slice (2026-11-10): tick 6.61–6.74 → 4.01–4.13 ms p50 and 7.56–7.78 →
+4.57–4.68 ms p95, matched and interleaved. The goal is not reached.
+- Idle rabbits were already asleep in the solver; the cost was reading every
+  body back through WASM, re-running every motor and a dozen further per-actor
+  passes. Bodies asleep for two readbacks are no longer read (82 of 1,051 per
+  tick) and resting motors are skipped (144 evaluated).
+- Bodies resting in contact now sleep instead of jittering on solver noise. That
+  is the only output change: x/y traces are identical and z differs by at most
+  0.021 px on stacked rabbits.
+- The remaining tick is a flat set of per-actor passes. The next step is to take
+  idle actors out of the per-tick lists (rest timers as wake ticks, a realm-level
+  resting set); 235 lists the constraints.
+- `render:bench` prints authority stage timings per cell and `--profile` records
+  the authority Worker.
 
 The measurement checkpoint separates authority, client processing and render
 preparation into plain-Node lanes. `--lane=record` saves binary output;

@@ -32,7 +32,7 @@ Each scene runs at zooms 1, 0.25 and 0.1 by default. Each cell reports:
 - the main-thread render and update callbacks;
 - time inside backend submits (the rest of render is collection and terrain
   preparation);
-- draw calls, entities and the Worker tick;
+- draw calls, entities, the Worker tick and the authority's stage timings;
 - GPU time from `EXT_disjoint_timer_query_webgl2` when the browser exposes it;
 - render plus `gl.finish()` in a separate window. This blocks on the GPU, so it
   is a GPU-inclusive upper bound that also works where the timer query is absent
@@ -49,6 +49,8 @@ Options:
 - `--compare=<before.json>` prints per-cell deltas.
 - `--profile` samples a main-thread CPU profile per cell and prints the top
   self-time functions. Profiled timings are not the baseline.
+  When the bench launches its own browser it also profiles the busiest Worker
+  (the authority) and saves that profile beside the report.
 - `--screenshots=<dir>` saves one screenshot per cell.
 - `--cdp=<url> --port=<n>` attaches to a device browser, as `stress:bench` does.
 

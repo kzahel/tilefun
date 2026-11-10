@@ -42,6 +42,8 @@ export function isEntityOnWater(world: World, entity: Entity): boolean {
 export class RealmPhysics {
   scene: PhysicsScene | undefined;
   private participants: Entity[] = [];
+  /** The scene synchronize pass that admitted `participants`. */
+  private stepPass = -1;
 
   constructor(private readonly realm: PhysicsRealm) {}
 
@@ -75,12 +77,14 @@ export class RealmPhysics {
     this.scene?.dispose();
     this.scene = await PhysicsScene.create();
     this.participants = [];
+    this.stepPass = -1;
   }
 
   dispose(): void {
     this.scene?.dispose();
     this.scene = undefined;
     this.participants = [];
+    this.stepPass = -1;
   }
 
   canPlaceTrain(
@@ -124,7 +128,7 @@ export class RealmPhysics {
     this.participants = participants;
     // Couplings publish resident partner IDs before the scene builds their joints.
     if (this.realm.vehicleRegistry) vehicleLinks(this.realm.vehicleRegistry).tick();
-    scene.synchronize(participants);
+    this.stepPass = scene.synchronize(participants);
     scene.step(intents, this.environment(), gravity);
     this.realm.railways?.finish();
     return { scene, participants, wasAirborne };
@@ -195,20 +199,24 @@ export class RealmPhysics {
    */
   synchronizeForPublication(sessions: Iterable<PlayerSession>): void {
     const { entityManager, vehicles } = this.realm;
-    const admitted = new Map(this.participants.map((e) => [e.id, e]));
+    const live = (e: Entity) => entityManager.byId.get(e.id) === e && !e.tags?.has("passage");
+    const admitted = this.participants.filter(live);
+    // Seats may have boarded, left or mounted since the step admitted its bodies.
+    let ids: Map<number, number> | undefined;
     for (const session of sessions) {
       if (session.retired || session.transitioning) continue;
       for (const e of [
         session.player,
         vehicles.get(session),
         entityManager.byId.get(session.gameplaySession.mountId ?? -1),
-      ])
-        if (e) admitted.set(e.id, e);
+      ]) {
+        if (!e || !live(e) || this.scene?.admitted(e, this.stepPass)) continue;
+        ids ??= new Map(admitted.map((member, index) => [member.id, index]));
+        const index = ids.get(e.id);
+        if (index === undefined) ids.set(e.id, admitted.push(e) - 1);
+        else admitted[index] = e;
+      }
     }
-    this.scene?.synchronize(
-      [...admitted.values()].filter(
-        (e) => entityManager.byId.get(e.id) === e && !e.tags?.has("passage"),
-      ),
-    );
+    this.scene?.synchronize(admitted);
   }
 }

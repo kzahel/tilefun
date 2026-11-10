@@ -35471,7 +35471,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/RealmRecords.ts:167"
+          "source": "src/persistence/RealmRecords.ts:169"
         },
         {
           "system": "Gameplay",
@@ -35487,6 +35487,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/physics/BodyMotor.ts:140"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/physics/JumpAssist.ts:17"
         },
         {
@@ -35499,7 +35503,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:580"
+          "source": "src/physics/PhysicsScene.ts:541"
         },
         {
           "system": "Gameplay",
@@ -35563,15 +35567,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:151"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/server/RealmStreaming.ts:217"
+          "source": "src/server/RealmStreaming.ts:152"
         },
         {
           "system": "Gameplay",
           "source": "src/server/RealmStreaming.ts:218"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/RealmStreaming.ts:219"
         },
         {
           "system": "Gameplay",
@@ -36623,7 +36627,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/persistence/ActorRecords.ts:141"
+          "source": "src/persistence/ActorRecords.ts:142"
         },
         {
           "system": "Gameplay",
@@ -36639,11 +36643,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/SceneBody.ts:97"
+          "source": "src/physics/SceneBody.ts:110"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/SceneBody.ts:115"
+          "source": "src/physics/SceneBody.ts:128"
         },
         {
           "system": "Gameplay",
@@ -36655,7 +36659,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmActivity.ts:51"
+          "source": "src/server/RealmActivity.ts:54"
         },
         {
           "system": "Gameplay",

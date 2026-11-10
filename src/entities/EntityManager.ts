@@ -131,13 +131,13 @@ export class EntityManager {
       )
         onWanderBlocked(e);
       const z = e.groundZ ?? e.wz ?? 0;
-      const water =
+      const water = () =>
         (getCollision(Math.floor(e.position.wx / 16), Math.floor(e.position.wy / 16)) &
           CollisionFlag.Water) !==
         0;
       if (e.mallard?.flight && e.mallard.flight.elapsed >= e.mallard.flight.duration)
-        settleMallard(e, z, water);
-      if (e.frog?.hop && e.frog.hop.elapsed >= FROG_HOP_DURATION) settleFrog(e, z, water);
+        settleMallard(e, z, water());
+      if (e.frog?.hop && e.frog.hop.elapsed >= FROG_HOP_DURATION) settleFrog(e, z, water());
       if (e.rabbit?.hop && e.rabbit.hop.elapsed >= RABBIT_HOP_DURATION) settleRabbit(e, z);
       if (e.deer?.motion && e.deer.motion.elapsed >= e.deer.motion.duration) settleDeer(e);
       if (e.fauna?.motion && e.fauna.motion.elapsed >= e.fauna.motion.duration) settleFauna(e, z);
@@ -175,6 +175,8 @@ export class EntityManager {
     players: readonly Entity[],
     active: readonly Entity[] = this.entities,
   ): void {
+    const free = (entity: Entity) => entity.parentId === undefined;
+    if (active.every(free) && players.every(free)) return;
     // A live parent may be outside the ordinary actor tick set (for example a
     // railway-owned carriage). Resolve attachments without advancing that body.
     const attached = new Set([...active, ...players]);

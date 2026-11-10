@@ -264,15 +264,66 @@ function copyField<K extends MirroredKey>(target: Mirror, source: Mirror, field:
   if (value !== undefined) target[field.key] = field.clone ? field.clone(value) : value;
 }
 
-/** Whether every optional field of `entity` matches the snapshot. */
+/** Whether every optional field of `entity` matches the snapshot. Replication asks
+ * this for every entity in view every tick, so the fields are named loads, not a
+ * keyed loop over `MIRRORED_FIELDS`; `MATCHED` fails to compile when a mirrored
+ * field is missing here, and the field test changes each one in turn. */
 export function mirroredFieldsMatch(entity: Mirror, snap: Mirror): boolean {
-  for (const field of MIRRORED_FIELDS) {
-    const a = entity[field.key];
-    const b = snap[field.key];
-    if (a !== b && !field.equal?.(a, b)) return false;
-  }
-  return true;
+  return (
+    entity.wz === snap.wz &&
+    entity.jumpZ === snap.jumpZ &&
+    entity.jumpVZ === snap.jumpVZ &&
+    entity.jumpInputState === snap.jumpInputState &&
+    entity.vehicleHeading === snap.vehicleHeading &&
+    (entity.bodyRotation === snap.bodyRotation ||
+      rotationsEqual(entity.bodyRotation, snap.bodyRotation)) &&
+    entity.flashHidden === snap.flashHidden &&
+    entity.noShadow === snap.noShadow &&
+    entity.deathTimer === snap.deathTimer &&
+    entity.parentId === snap.parentId &&
+    entity.localOffsetX === snap.localOffsetX &&
+    entity.localOffsetY === snap.localOffsetY &&
+    entity.emergencyState === snap.emergencyState &&
+    entity.paintSchemeId === snap.paintSchemeId &&
+    entity.physicsGroupId === snap.physicsGroupId &&
+    entity.vehicleBedTilt === snap.vehicleBedTilt &&
+    entity.vehicleBedTarget === snap.vehicleBedTarget &&
+    entity.towTargetId === snap.towTargetId &&
+    entity.towedBy === snap.towedBy &&
+    entity.vehicleRamp === snap.vehicleRamp &&
+    entity.transportLoadId === snap.transportLoadId &&
+    entity.transportedBy === snap.transportedBy
+  );
 }
+const MATCHED = [
+  "wz",
+  "jumpZ",
+  "jumpVZ",
+  "jumpInputState",
+  "vehicleHeading",
+  "bodyRotation",
+  "flashHidden",
+  "noShadow",
+  "deathTimer",
+  "parentId",
+  "localOffsetX",
+  "localOffsetY",
+  "emergencyState",
+  "paintSchemeId",
+  "physicsGroupId",
+  "vehicleBedTilt",
+  "vehicleBedTarget",
+  "towTargetId",
+  "towedBy",
+  "vehicleRamp",
+  "transportLoadId",
+  "transportedBy",
+] as const satisfies readonly MirroredKey[];
+/** `true` only while `MATCHED` names every mirrored field. */
+const everyMirroredFieldMatched: Exclude<MirroredKey, (typeof MATCHED)[number]> extends never
+  ? true
+  : never = true;
+void everyMirroredFieldMatched;
 
 /** Applies changed optional delta fields to `entity`: `null` deletes, a value sets. */
 export function applyMirroredFields(entity: Mirror, delta: EntityDelta): void {

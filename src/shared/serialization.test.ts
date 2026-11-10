@@ -506,13 +506,35 @@ describe("immutable snapshot reuse", () => {
         "parentId",
         "localOffsetX",
         "localOffsetY",
+        "emergencyState",
+        "vehicleHeading",
+        "paintSchemeId",
+        "bodyRotation",
+        "physicsGroupId",
+        "vehicleBedTilt",
+        "vehicleBedTarget",
+        "towTargetId",
+        "towedBy",
+        "vehicleRamp",
+        "transportLoadId",
+        "transportedBy",
       ] as const
     ).map(
       (key) =>
         [
           key,
           (e: Entity) => {
-            Reflect.set(e, key, key === "flashHidden" || key === "noShadow" ? false : 13);
+            Reflect.set(
+              e,
+              key,
+              key === "flashHidden" || key === "noShadow"
+                ? false
+                : key === "paintSchemeId"
+                  ? "another"
+                  : key === "bodyRotation"
+                    ? [0, 0, 0.6, 0.8]
+                    : 13,
+            );
           },
         ] as [string, (e: Entity) => void],
     ),

@@ -9,6 +9,7 @@ import type { SavedChunkData, SaveManager } from "../persistence/SaveManager.js"
 import type { VehicleRecords } from "../persistence/VehicleRecords.js";
 import type { SavedVehicle } from "../traffic/VehicleRegistry.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
+import { chunkKey } from "../world/types.js";
 import type { World } from "../world/World.js";
 import { ChunkResidency } from "./ChunkResidency.js";
 import { admitDemand, DemandAdmission, SHED_ABOVE } from "./DemandAdmission.js";
@@ -246,7 +247,7 @@ export class RealmStreaming {
   rangeReady(range: ChunkRange): boolean {
     for (let cy = range.minCy; cy <= range.maxCy; cy++)
       for (let cx = range.minCx; cx <= range.maxCx; cx++)
-        if (!this.residency.ready(`${cx},${cy}`)) return false;
+        if (!this.residency.ready(chunkKey(cx, cy))) return false;
     return true;
   }
   async ensure(range: ChunkRange): Promise<void> {
@@ -286,7 +287,7 @@ export class RealmStreaming {
       maxCy = Math.floor((p.wy + reach) / CHUNK_SIZE_PX);
     for (let cy = minCy; cy <= maxCy; cy++)
       for (let cx = minCx; cx <= maxCx; cx++)
-        if (!this.residency.ready(`${cx},${cy}`)) return false;
+        if (!this.residency.ready(chunkKey(cx, cy))) return false;
     return true;
   }
   resume(): void {

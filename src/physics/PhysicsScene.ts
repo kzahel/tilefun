@@ -2,12 +2,11 @@ import RAPIER from "@dimforge/rapier3d-compat";
 import { CHUNK_SIZE_PX, JUMP_GRAVITY } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
-import { Direction } from "../entities/Entity.js";
-import { applyCurveTrainFacing, isCurveTrain } from "../railway/CurveTrain.js";
-import { headingFrame } from "../railway/RailPath.js";
 import { isTrain } from "../railway/Train.js";
-import { applyVehicleFacing } from "../traffic/Vehicle.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
+import { chunkKey } from "../world/types.js";
+import { AT_REST, driveMotor, isIdle, supportMotions } from "./BodyMotor.js";
+import { keepRest, publishBody } from "./BodyReadback.js";
 import {
   rapierRotation,
   rotateBodyVector,
@@ -17,25 +16,22 @@ import {
 } from "./BodyRotation.js";
 import { DumpBedBody } from "./DumpBedBody.js";
 import type { GroundMaterial } from "./GroundMaterial.js";
-import { assistedJumpVelocity } from "./JumpAssist.js";
 import { playerClimbIntent } from "./Ladders.js";
 import { teleportBody } from "./PhysicalEdits.js";
-import { carryingSupportId, physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
+import { physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
 import {
   initializePhysics,
   PHYSICS_DT,
   PHYSICS_PIXELS_PER_METRE as SCALE,
 } from "./PhysicsDefaults.js";
-import { blockedRailGroups, prescribedRailVelocity, railGroup } from "./RailMotion.js";
+import { blockedRailGroups, railGroup } from "./RailMotion.js";
 import {
   type CollisionGeometrySource,
   compileCollisionGeometry,
 } from "./rapier/CollisionGeometry.js";
 import { createSceneBody, type SceneBody } from "./SceneBody.js";
-import { type SupportMotion, supportVelocityAt } from "./SupportMotion.js";
 import type { WheelContact } from "./VehicleChassis.js";
 import { VehicleCouplings } from "./VehicleCouplings.js";
-import { vehicleMotor } from "./VehicleMotor.js";
 
 export interface PhysicsGeometry extends CollisionGeometrySource {
   geometryVersion(cx: number, cy: number): { identity: unknown; revision: string | number };
@@ -53,7 +49,18 @@ import type {
 import { selectAround } from "./PredictionSelection.js";
 
 let nextSceneEpoch = 1;
-
+/** The body was built for this kind and outer size; yaw is state, not shape. */
+function sameShape(entry: SceneBody, kind: PhysicsBodyKind, d: SceneBody["shape"]) {
+  const s = entry.shape;
+  return (
+    entry.kind === kind &&
+    s.width === d.width &&
+    s.depth === d.depth &&
+    s.height === d.height &&
+    s.offsetX === d.offsetX &&
+    s.offsetY === d.offsetY
+  );
+}
 type Body = SceneBody;
 interface Section {
   identity: unknown;
@@ -76,6 +83,7 @@ export class PhysicsScene {
   private disposed = false;
   private originInitialized = false;
   private tick = 0;
+  private syncPass = 0;
   private epoch = nextSceneEpoch++;
   readonly metrics = {
     worldSteps: 0,
@@ -85,6 +93,10 @@ export class PhysicsScene {
     geometryBuildMs: 0,
     geometryParts: 0,
     supportQueries: 0,
+    /** Bodies whose pose and contacts were read back from the solver. */
+    bodyReads: 0,
+    /** Motors that evaluated their intent (the rest were dormant). */
+    motorUpdates: 0,
     wheelQueries: 0,
     wheelNarrowQueries: 0,
     stepMs: 0,
@@ -136,40 +148,46 @@ export class PhysicsScene {
   /** Synchronize membership/explicit edits once, not once per neighboring motor. */
   synchronize(entities: readonly Entity[], kinds?: ReadonlyMap<number, PhysicsBodyKind>) {
     if (this.disposed) throw Error("Physics scene is disposed");
-    const present = new Set<number>();
+    const pass = ++this.syncPass;
     if (!this.originInitialized && entities[0]) {
       this.origin.x = (Math.floor(entities[0].position.wx / 4096) * 4096) / SCALE;
       this.origin.z = (Math.floor(entities[0].position.wy / 4096) * 4096) / SCALE;
       this.originInitialized = true;
     }
+    let kept = 0;
     for (const entity of entities) {
       const c = entity.collider;
       const kind = kinds?.get(entity.id) ?? physicsBodyKind(entity);
       if (!c || entity.parentId !== undefined || (c.solid === false && kind !== "loose")) continue;
-      if (present.has(entity.id)) throw Error(`Duplicate physics body ${entity.id}`);
-      present.add(entity.id);
-      const dimensions = physicsBodyDimensions(entity);
-      const width = dimensions.width,
-        height = dimensions.depth;
-      const signature = `${kind}:${width}:${height}:${dimensions.height}:${dimensions.offsetX}:${dimensions.offsetY}`;
       let entry = this.bodies.get(entity.id);
-      if (entry && entry.signature !== signature) {
+      if (entry?.syncPass === pass) throw Error(`Duplicate physics body ${entity.id}`);
+      const dimensions = physicsBodyDimensions(entity);
+      if (entry && !sameShape(entry, kind, dimensions)) {
         this.remove(entry);
         entry = undefined;
       }
       if (!entry) {
-        entry = createSceneBody(this.world, this.origin, entity, kind, dimensions, signature);
+        entry = createSceneBody(this.world, this.origin, entity, kind, dimensions);
         const { collider } = entry;
         this.bodies.set(entity.id, entry);
         this.colliderIds.set(collider.handle, entity.id);
         this.metrics.bodyCreates++;
       } else {
+        // A replaced entity object has not received the cached pose yet.
+        if (entry.entity !== entity) {
+          entry.rested = 0;
+          entry.dormant = entry.centred = false;
+        }
         entry.entity = entity;
         this.admitEntityEdits(entry);
       }
+      entry.syncPass = pass;
+      kept++;
     }
-    for (const [id, body] of this.bodies) if (!present.has(id)) this.remove(body);
+    if (kept !== this.bodies.size)
+      for (const body of [...this.bodies.values()]) if (body.syncPass !== pass) this.remove(body);
     this.couplings.sync(this.world, this.bodies);
+    return pass;
   }
   /** Commit explicit entity edits without integrating. Publication uses the same
    * boundary, so a paused teleport/launch cannot mix new entities with old bodies. */
@@ -190,6 +208,8 @@ export class PhysicsScene {
       !!entity.bodyRotation &&
       !rotationsEqual(entity.bodyRotation, s.rotation);
     if (!moved && !rotated && !velocityChanged && grounded === s.grounded) return;
+    entry.rested = 0;
+    entry.dormant = entry.centred = false;
     const rotation = entity.bodyRotation ?? s.rotation ?? yawRotation(s.heading);
     const center = rotateBodyVector(rotation, 0, 0, entry.halfY);
     if (rotated) {
@@ -259,23 +279,30 @@ export class PhysicsScene {
     const started = performance.now();
     let changed = false;
     const needed = new Map<string, { cx: number; cy: number }>();
+    let lastLeft = Number.NaN,
+      lastRight = 0,
+      lastTop = 0,
+      lastBottom = 0;
     for (const entry of this.bodies.values()) {
       const c = entry.entity.collider;
       if (!c) continue;
       const box = getEntityAABB(entry.entity.position, c);
-      const v = entry.body.linvel();
+      // A body asleep at its last readback and not edited since has no velocity.
+      const v = entry.rested ? AT_REST : entry.body.linvel();
       const margin = 32 + Math.hypot(v.x, v.z) * SCALE * PHYSICS_DT;
-      for (
-        let cy = Math.floor((box.top - margin) / CHUNK_SIZE_PX);
-        cy <= Math.floor((box.bottom + margin) / CHUNK_SIZE_PX);
-        cy++
-      )
-        for (
-          let cx = Math.floor((box.left - margin) / CHUNK_SIZE_PX);
-          cx <= Math.floor((box.right + margin) / CHUNK_SIZE_PX);
-          cx++
-        )
-          needed.set(`${cx},${cy}`, { cx, cy });
+      const left = Math.floor((box.left - margin) / CHUNK_SIZE_PX),
+        right = Math.floor((box.right + margin) / CHUNK_SIZE_PX),
+        top = Math.floor((box.top - margin) / CHUNK_SIZE_PX),
+        bottom = Math.floor((box.bottom + margin) / CHUNK_SIZE_PX);
+      // Neighbours usually need the same sections as the body before them.
+      if (left === lastLeft && right === lastRight && top === lastTop && bottom === lastBottom)
+        continue;
+      lastLeft = left;
+      lastRight = right;
+      lastTop = top;
+      lastBottom = bottom;
+      for (let cy = top; cy <= bottom; cy++)
+        for (let cx = left; cx <= right; cx++) needed.set(chunkKey(cx, cy), { cx, cy });
     }
     for (const box of extra)
       for (
@@ -405,24 +432,7 @@ export class PhysicsScene {
     // Prescribed supports use this tick's admitted trajectory, so riders do not
     // lag a start or slide one extra tick after a station stop.
     const vehicleInputs: { entry: Body; input: MotionIntent }[] = [];
-    const supports = new Map<number, SupportMotion>();
-    for (const [id, entry] of this.bodies)
-      supports.set(
-        id,
-        isTrain(entry.entity)
-          ? {
-              linear: prescribedRailVelocity(
-                entry.state,
-                intents.get(id),
-                blockedRails.has(railGroup(entry.entity)),
-                this.tick,
-              ),
-            }
-          : {
-              linear: entry.body.linvel(),
-              ...(entry.chassis ? { chassis: entry.body } : {}),
-            },
-      );
+    const supports = supportMotions(this.bodies, intents, blockedRails, this.tick);
     for (const [id, entry] of this.bodies) {
       if (entry.kind === "loose") {
         const v = entry.body.linvel();
@@ -430,7 +440,11 @@ export class PhysicsScene {
         continue;
       }
       if (entry.kind === "fixed") continue;
-      const input = this.motorInput(entry, intents.get(id) ?? { vx: 0, vy: 0 }, geometry);
+      const submitted = intents.get(id);
+      // Nothing below can change for a resting motor that is still asked for nothing.
+      if (entry.dormant && isIdle(submitted)) continue;
+      this.metrics.motorUpdates++;
+      const input = this.motorInput(entry, submitted ?? { vx: 0, vy: 0 }, geometry);
       entry.state.desiredVx = input.vx;
       entry.state.desiredVy = input.vy;
       if (input.altitude === undefined) delete entry.state.altitude;
@@ -475,65 +489,7 @@ export class PhysicsScene {
         vehicleInputs.push({ entry, input: DumpBedBody.driveIntent(entry.state, locked) });
         continue;
       }
-      const velocity = entry.body.linvel();
-      const support = supportVelocityAt(
-        supports.get(carryingSupportId(entry.entity, entry.state.supportId, this.bodies)),
-        entry.body.translation(),
-      );
-      const pressed = input.jumpPressed || (input.jump && !entry.state.jumpHeld);
-      entry.state.jumpHeld = input.jump ?? false;
-      if (!entry.state.jumpHeld && !input.jumpPressed) delete entry.state.jumpQueued;
-      if (pressed && !entry.state.grounded) entry.state.jumpQueued = true;
-      const jump = pressed || entry.state.jumpQueued;
-      const drive =
-        entry.kind === "vehicle"
-          ? vehicleMotor(
-              entry.entity.type,
-              entry.state.heading,
-              (velocity.x - (support?.x ?? 0)) * SCALE,
-              (velocity.z - (support?.z ?? 0)) * SCALE,
-              entry.state.grounded,
-              input,
-            )
-          : undefined;
-      if (entry.state.grounded) {
-        if (support?.x) entry.state.inheritedVx = support.x * SCALE;
-        else delete entry.state.inheritedVx;
-        if (support?.z) entry.state.inheritedVy = support.z * SCALE;
-        else delete entry.state.inheritedVy;
-      }
-      const x = ((drive?.vx ?? input.vx) + (entry.state.inheritedVx ?? 0)) / SCALE,
-        z = ((drive?.vy ?? input.vy) + (entry.state.inheritedVy ?? 0)) / SCALE;
-      // A grounded motor follows the support tangent. Keeping last tick's tiny
-      // downward velocity makes a fixed box snag at a ramp/deck junction.
-      let vertical = entry.state.grounded
-        ? -(entry.state.normalX * x + entry.state.normalZ * z) / Math.max(0.5, entry.state.normalY)
-        : velocity.y;
-      if (input.altitude !== undefined) {
-        // A prescribed landing may meet a loose body or an edited higher floor.
-        // Do not keep driving through solved support: the solver would accumulate
-        // an upward separation velocity that launches the actor on motor release.
-        if (!entry.state.grounded || input.altitude > entry.state.groundZ + 0.15)
-          vertical =
-            (input.altitude / SCALE + entry.halfY - entry.body.translation().y) / PHYSICS_DT;
-      } else if (jump && entry.state.grounded) {
-        delete entry.state.jumpQueued;
-        vertical =
-          assistedJumpVelocity(entry.entity, entry.state, this.bodies.values(), gravity) / SCALE +
-          (support?.y ?? 0);
-        entry.state.grounded = false;
-        delete entry.state.supportId;
-      }
-      entry.body.setLinvel(
-        {
-          x,
-          y: vertical,
-          z,
-        },
-        true,
-      );
-      if (drive?.yawRate !== undefined)
-        entry.body.setAngvel({ x: 0, y: -drive.yawRate, z: 0 }, true);
+      driveMotor(entry, input, isIdle(submitted), supports, this.bodies, gravity);
     }
     // A body's pose is immutable during preparation. Read it once, rather than
     // crossing JS/WASM again for every wheel/neighbour pair. Parked fleets skip it.
@@ -542,7 +498,12 @@ export class PhysicsScene {
         ({ entry, input }) => !entry.body.isSleeping() || (input.driveSpeed ?? 0) !== 0,
       )
     )
-      for (const entry of this.bodies.values()) entry.queryCenter = entry.body.translation();
+      for (const entry of this.bodies.values()) {
+        // A centre captured while the body rested stays exact until it wakes.
+        if (entry.centred && entry.rested === 2) continue;
+        entry.queryCenter = entry.body.translation();
+        entry.centred = entry.rested === 2;
+      }
     // All chassis read the same pre-impulse state, including dynamic supports.
     const prepared = vehicleInputs.map(({ entry, input }) => ({
       entry,
@@ -581,7 +542,40 @@ export class PhysicsScene {
     return playerClimbIntent(input, entry.state, entry.entity.collider, geometry);
   }
 
+  /** A body asleep through two full readbacks has nothing new to read: its pose,
+   * velocity and solved contacts are exactly those already cached. */
+  /** Only a dynamic body the solver itself put to sleep can be left unread: an
+   * anchor never wakes when something lands on it, and equipment moves its collider. */
+  private restsUnread(entry: Body) {
+    return (
+      entry.rested >= 2 &&
+      entry.state.grounded &&
+      entry.kind !== "fixed" &&
+      !isTrain(entry.entity) &&
+      !entry.bed &&
+      !entry.transporter
+    );
+  }
+
   private readBody(entry: Body) {
+    const asleep = entry.body.isSleeping();
+    if (asleep && this.restsUnread(entry)) keepRest(entry, this.contacts);
+    else this.readMotion(entry, asleep);
+    entry.rested = asleep ? Math.min(entry.rested + 1, 2) : 0;
+    if (!asleep) entry.centred = false;
+    if (entry.chassis) {
+      entry.state.grounded ||= entry.chassis.grounded;
+      for (const support of entry.chassis.supports) {
+        entry.state.supportId ??= support;
+        this.addContact(entry.entity.id, support);
+      }
+    }
+    publishBody(entry, this.world, this.metrics);
+  }
+
+  private readMotion(entry: Body, asleep: boolean) {
+    entry.dormant = false;
+    this.metrics.bodyReads++;
     const p = entry.body.translation(),
       v = entry.body.linvel(),
       q = entry.body.rotation();
@@ -589,7 +583,7 @@ export class PhysicsScene {
     const rotation = worldRotation(q);
     const center = rotateBodyVector(rotation, 0, 0, entry.halfY);
     if (entry.kind === "vehicle") {
-      state.sleeping = entry.body.isSleeping();
+      state.sleeping = asleep;
       state.prevRotation = state.rotation ?? rotation;
       state.rotation = rotation;
       const angular = entry.body.angvel();
@@ -602,16 +596,15 @@ export class PhysicsScene {
     state.x = (p.x + this.origin.x - entry.offsetX - center.x) * SCALE;
     state.y = (p.z + this.origin.z - entry.offsetY - center.y) * SCALE;
     state.z = (p.y - center.z) * SCALE;
+    entry.unmoved = state.x === state.prevX && state.y === state.prevY && state.z === state.prevZ;
     state.vx = v.x * SCALE;
     state.vy = v.z * SCALE;
     state.vz = v.y * SCALE;
     const forward = rotateBodyVector(rotation, 1, 0, 0);
     if (Math.hypot(forward.x, forward.y) > 0.001) state.heading = Math.atan2(forward.y, forward.x);
-    state.grounded =
-      isTrain(entry.entity) ||
-      entry.kind === "fixed" ||
-      (entry.body.isSleeping() && state.grounded);
-    if (!entry.body.isSleeping()) delete state.supportId;
+    state.grounded = isTrain(entry.entity) || entry.kind === "fixed" || (asleep && state.grounded);
+    if (!asleep) delete state.supportId;
+    entry.touching.length = 0;
     this.world.contactPairsWith(entry.collider, (other) => {
       this.world.contactPair(entry.collider, other, (manifold, flipped) => {
         const otherId = this.colliderIds.get(other.handle);
@@ -638,6 +631,7 @@ export class PhysicsScene {
             this.contacts.set(entry.entity.id, neighbors);
           }
           neighbors.add(otherId);
+          entry.touching.push(otherId);
         }
         const normal = manifold.normal(),
           factor = flipped ? -1 : 1;
@@ -679,68 +673,6 @@ export class PhysicsScene {
         }
       });
     });
-    if (entry.chassis) {
-      state.grounded ||= entry.chassis.grounded;
-      for (const support of entry.chassis.supports) {
-        state.supportId ??= support;
-        this.addContact(entry.entity.id, support);
-      }
-    }
-    const entity = entry.entity;
-    entity.prevPosition = { ...entity.position };
-    entity.prevWz = entity.wz ?? 0;
-    entity.position.wx = state.x;
-    entity.position.wy = state.y;
-    entity.wz = state.z;
-    if (entity.velocity) {
-      entity.velocity.vx = state.vx;
-      entity.velocity.vy = state.vy;
-    }
-    if (state.grounded) {
-      delete entity.jumpVZ;
-      entity.groundZ = state.z;
-      entity.jumpZ = 0;
-    } else {
-      entity.jumpVZ = state.vz;
-      this.metrics.supportQueries++;
-      const hit = this.world.castRay(
-        new RAPIER.Ray({ x: p.x, y: p.y - entry.halfY + 0.01, z: p.z }, { x: 0, y: -1, z: 0 }),
-        512,
-        true,
-        undefined,
-        undefined,
-        entry.collider,
-      );
-      entity.groundZ = hit ? state.z + 0.16 - hit.timeOfImpact * SCALE : state.z;
-      entity.jumpZ = Math.max(0, state.z - entity.groundZ);
-    }
-    state.groundZ = entity.groundZ ?? state.z;
-    entry.bed?.publish(entity, state, entry.collider);
-    if (entry.kind === "vehicle") {
-      entity.prevBodyRotation = state.prevRotation ?? rotation;
-      entity.bodyRotation = state.rotation ?? rotation;
-      entity.bodyAngularVelocity = state.angularVelocity ?? [0, 0, 0];
-      entity.prevVehicleHeading = entity.vehicleHeading ?? state.heading;
-      entity.vehicleHeading = state.heading;
-      const x = Math.cos(state.heading),
-        y = Math.sin(state.heading);
-      applyVehicleFacing(
-        entity,
-        Math.abs(x) >= Math.abs(y)
-          ? x >= 0
-            ? Direction.Right
-            : Direction.Left
-          : y >= 0
-            ? Direction.Down
-            : Direction.Up,
-      );
-      if (isCurveTrain(entity) && entity.sprite) {
-        entity.sprite.frameRow = headingFrame(state.heading);
-        applyCurveTrainFacing(entity);
-      }
-      if (entity.sprite) entity.sprite.moving = Math.hypot(state.vx, state.vy) > 1;
-    }
-    entity.jumpInputState = state.jumpHeld ? 3 : 0;
   }
 
   /** Solved dependency pair (contact, wheel support or coupling) for snapshot closure. */
@@ -894,6 +826,12 @@ export class PhysicsScene {
     return speed;
   }
 
+  /** This exact entity object was admitted as a body by synchronize pass `pass`. */
+  admitted(entity: Entity, pass: number): boolean {
+    const entry = this.bodies.get(entity.id);
+    return entry?.entity === entity && entry.syncPass === pass;
+  }
+
   bodyState(id: number): Readonly<PhysicsBodyState> | undefined {
     return this.bodies.get(id)?.state;
   }
@@ -958,6 +896,9 @@ export class PhysicsScene {
       entry.body.setAngvel({ x: -ax, y: -az, z: -ay }, true);
       if (state.sleeping) entry.body.sleep();
       entry.state = { ...state };
+      entry.rested = 0;
+      entry.dormant = entry.centred = entry.unmoved = false;
+      entry.touching.length = 0;
       entry.bed?.publish(entry.entity, entry.state, entry.collider);
       // Publish state and contact membership supplied by the same snapshot.
       entry.entity.prevPosition = { wx: state.prevX, wy: state.prevY };

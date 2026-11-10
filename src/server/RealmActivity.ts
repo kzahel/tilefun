@@ -11,6 +11,7 @@ export class RealmActivity {
   private revision = -1;
   private keys: string[] = [];
   private groups: Entity[][] = [];
+  private wildlifeOnly: boolean[] = [];
   private wildlife = new WildlifeActivity();
 
   clear(): void {
@@ -24,6 +25,7 @@ export class RealmActivity {
     this.revision = -1;
     this.keys = [];
     this.groups = [];
+    this.wildlifeOnly = [];
   }
 
   select(
@@ -42,7 +44,8 @@ export class RealmActivity {
     if (changed || count !== this.keys.length) this.rebuild(records, streaming);
     this.wildlife.advance(dt);
 
-    const admitted = new Set<readonly Entity[]>();
+    const { groups, wildlifeOnly } = this;
+    const admitted = new Uint8Array(groups.length);
     const contacts: Entity[] = [];
     const addContact = (e: Entity) => {
       if (
@@ -52,33 +55,29 @@ export class RealmActivity {
       )
         contacts.push(e);
     };
+    const supported = (group: readonly Entity[]) => {
+      for (const member of group) if (!streaming.supported(member, dt)) return false;
+      return true;
+    };
     // Ordinary bodies, vehicles and players supply contact dependencies even
     // when every wildlife group is asleep. Their readiness checks remain live.
-    for (const group of this.groups) {
-      if (group.every(isWildlife)) continue;
-      if (!group.every((member) => streaming.supported(member, dt))) continue;
-      admitted.add(group);
+    for (let i = 0; i < groups.length; i++) {
+      const group = groups[i] as Entity[];
+      if (wildlifeOnly[i] || !supported(group)) continue;
+      admitted[i] = 1;
       for (const member of group) addContact(member);
     }
     for (const e of fixed.keys()) addContact(e);
-
-    for (const group of this.groups) {
-      if (admitted.has(group) || !group.every(isWildlife)) continue;
-      const fresh = group.some((member) => member.wz === undefined);
-      // Preview cannot refresh hysteresis for a body whose terrain is not
-      // ready. Sleeping residents need no trajectory readiness queries.
-      if (!fresh && !this.wildlife.awake(group, sessions, contacts, false)) {
-        for (const member of group) member.tickAccumulator = 0;
-        continue;
-      }
-      if (!group.every((member) => streaming.supported(member, dt))) continue;
-      if (!fresh) this.wildlife.awake(group, sessions, contacts);
-      admitted.add(group);
-    }
+    for (let i = 0; i < groups.length; i++)
+      if (
+        wildlifeOnly[i] &&
+        this.wildlife.admit(groups[i] as Entity[], sessions, contacts, supported)
+      )
+        admitted[i] = 1;
     const result = new Map<Entity, number>();
     // Preserve native bucket/group order, including the wildlife second pass.
-    for (const group of this.groups)
-      if (admitted.has(group)) for (const member of group) result.set(member, dt);
+    for (let i = 0; i < groups.length; i++)
+      if (admitted[i]) for (const member of groups[i] as Entity[]) result.set(member, dt);
     for (const [entity, entityDt] of fixed) result.set(entity, entityDt);
     return result;
   }
@@ -100,5 +99,7 @@ export class RealmActivity {
         this.groups.push(records.group(actor));
       }
     }
+    // Types are immutable, so wildlife-only membership holds until the next rebuild.
+    this.wildlifeOnly = this.groups.map((group) => group.every(isWildlife));
   }
 }
