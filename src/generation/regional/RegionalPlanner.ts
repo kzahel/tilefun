@@ -8,7 +8,7 @@ import {
 } from "./RegionalGeography.js";
 import { readSettlement, settlementForOwner } from "./RegionalSettlement.js";
 
-export { naturalElevation, plannedMoisture, REGION_SIZE } from "./RegionalGeography.js";
+export { plannedMoisture, REGION_SIZE } from "./RegionalGeography.js";
 export { settlementForOwner } from "./RegionalSettlement.js";
 
 import { regionalTerrainForElevation } from "./RegionalTerrain.js";

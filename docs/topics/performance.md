@@ -107,8 +107,36 @@ standing allocation 529 → 409 MiB/30 s; qualifying moving runs 669–672 → 4
 MiB/30 s (about 25% by two-run means; routes/populations differ). Median unseen
 generation falls 33–51% with matching work counts and unchanged content checks.
 Cold tails and occasional frame misses remain. Next: predictor snapshot/readback
-reuse, CPU attribution of the remaining long render callback, and a deterministic
-driving/jammed-traffic workload. Rust/WASM is still an optional Worker experiment.
+reuse and CPU attribution of the remaining long render callback. The repeatable
+driving/jammed-traffic workloads are delivered in 239 below. Rust/WASM is still
+an optional Worker experiment.
+
+## Repeatable driving workloads (2026-11-11)
+
+`npm run driving:bench -- --headed --seconds=30 --trials=3` uses a fixed clear
+straight road and a separate queue of 32 autonomous cars, four parked leaders and
+the driver (37 vehicles). Each cell gets fresh world/GPU caches and the same
+180-tick idle warm-up; trial order alternates. Both use ordinary shared Worker
+authority, prediction, vehicle physics and rendering. `--allocations` saves
+main-thread heap samples; `--compare` refuses incompatible instrumentation,
+recipes, initial poses, populations or materially different simulation/distance.
+
+These are prepared flat roads, isolating recurring driving and traffic work.
+They exclude regional generation and city building art. Keep the original city
+`render:bench --scenes=drive` for exploratory art/streaming measurements and
+`generation:bench` for unseen chunk work. Live wall-time windows are qualified,
+not bit-exact replays; native tests check exact fixed-step pose repetition.
+[239](../tactical/239-repeatable-driving-workloads.md) owns commands, limits,
+validation and physical results.
+
+Production qualification: three Mac runs per fixture, two physical Pixel 7a runs
+per fixture, all valid. Phone clear distance is 3,324.1 / 3,326.0 px per 30 s
+(<0.1% variation); the independent comparison passes. All 37 jam cars remain,
+with all 32 queued cars stopped. Mac misses no intervals; phone clear misses
+one each, jam one/two, with a remaining 50 ms clear interval. Separate 10 s phone
+allocation controls produce estimates of 88.2 MiB clear / 445.5 MiB jam; this is
+a workload contrast, not an optimization gain. The jam now provides a bounded
+snapshot/allocation stress case; residual pause attribution remains open.
 
 ## Crowd bench (2026-11-10)
 

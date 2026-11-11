@@ -2,7 +2,6 @@ import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { createProp } from "../entities/PropFactories.js";
 import { baseGameMod } from "../game/base-game.js";
-import type { IWorldRegistry, WorldMeta } from "../persistence/IWorldRegistry.js";
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
 import { replaceBodyCollider, teleportBody } from "../physics/PhysicalEdits.js";
@@ -31,6 +30,7 @@ import {
   type ScenarioRecipe,
   scenarioGravity,
 } from "./ScenarioRecipe.js";
+import { scenarioRegistry } from "./ScenarioRegistry.js";
 import { paintScenarioTerrain } from "./ScenarioTerrain.js";
 import { scenarioVehicleSource } from "./ScenarioTraffic.js";
 
@@ -102,30 +102,7 @@ export class ScenarioSession {
     if (!this.guest) throw Error("No guest in this scenario");
     return this.guest;
   }
-  private async open(fresh: boolean) {
-    const meta: WorldMeta = {
-      id: "scenario",
-      name: this.recipe.id,
-      generation: this.recipe.generation,
-      createdAt: 0,
-      lastPlayedAt: 0,
-    };
-    const registry: IWorldRegistry = {
-      async open() {},
-      close() {},
-      async listWorlds() {
-        return [structuredClone(meta)];
-      },
-      async getWorld(id) {
-        return id === meta.id ? structuredClone(meta) : undefined;
-      },
-      async createWorld() {
-        throw Error("Scenario registry is fixed");
-      },
-      async updateLastPlayed() {},
-      async renameWorld() {},
-      async deleteWorld() {},
-    };
+  private async openRealm() {
     const vehicleSource = scenarioVehicleSource(this.recipe);
     this.realm = new Realm([baseGameMod], {
       ...(vehicleSource ? { vehicleSource } : {}),
@@ -138,7 +115,12 @@ export class ScenarioSession {
         return this.randomState / 4294967296;
       },
     });
-    await this.realm.loadWorld(meta.id, registry, () => this.store);
+    await this.realm.loadWorld("scenario", scenarioRegistry(this.recipe), () => this.store);
+    if (this.recipe.fixedTrafficPopulation && this.realm.vehicleRegistry)
+      this.realm.vehicleRegistry.canSpawn = () => false;
+  }
+  private async open(fresh: boolean) {
+    await this.openRealm();
     this.player = new PlayerSession(this.clientId);
     this.player.editorEnabled = false;
     await this.realm.addPlayer(this.player);

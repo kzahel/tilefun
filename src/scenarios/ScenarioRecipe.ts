@@ -30,6 +30,9 @@ export interface ScenarioRecipe {
   terrain?: { tx: number; ty: number; terrain: number }[];
   /** Canonical generated-lane input for ordinary road traffic fixtures. Tile units. */
   trafficRoads?: import("../traffic/LaneGraph.js").RoadSegment[];
+  /** Fixed diagnostic populations still use ordinary road decisions/motors, but
+   * admit only the recipe's vehicles instead of adding generated lane traffic. */
+  fixedTrafficPopulation?: boolean;
   /** Speedway ovals (tile-unit centers) whose two closed rings carry racers. */
   racetracks?: { id: string; center: { x: number; y: number } }[];
   /** Shopping centers (world pixels) that passing road compacts may visit. */

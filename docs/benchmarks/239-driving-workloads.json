@@ -1,0 +1,1857 @@
+{
+  "description": "Repeatable prepared-road and native backed-up-traffic workloads, physical Mac and Pixel 7a production runs, 2026-11-11. Raw reports/profiles remain in ignored data/scratch/driving-239/.",
+  "methodology": "Fresh page/Worker/world/renderer per cell; ordinary shared authority, prediction and GPU rendering. Exactly 180 fixed idle warm-up ticks, initial asset/terrain readiness and 60 paused idle cadence samples. Main windows are wall-time, qualified by actual authority progress, named poses, vehicle counts and queue state. Fixed geometry/input, not bit-exact live scheduling. Prepared flat roads exclude regional generation, city art and physical storage I/O; ordinary memory-record bookkeeping remains. Per-page caches reset; browser/driver caches and process JIT are not reset. Allocation samples include collected objects and bookkeeping; ordinary cadence runs are separate.",
+  "phoneThermals": [
+    {
+      "label": "before-phone-a",
+      "date": "2026-11-11T14:59:48.311Z",
+      "batteryC": 25.2,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "before-phone-b",
+      "date": "2026-11-11T15:01:07.456Z",
+      "batteryC": 25.2,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "before-phone-allocations",
+      "date": "2026-11-11T15:02:26.412Z",
+      "batteryC": 25.2,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "after-phone-allocations",
+      "date": "2026-11-11T15:03:05.729Z",
+      "batteryC": 25.4,
+      "thermalStatus": 0,
+      "acPowered": true
+    }
+  ],
+  "campaignError": null,
+  "validation": {
+    "nativeTests": 27,
+    "reportTests": 2,
+    "browserLifecycleChecks": 2,
+    "typecheckProjects": 4,
+    "health": "pass",
+    "productionBuild": "pass",
+    "workshopCandidatesVerified": 2130,
+    "streamingReadiness": "pass",
+    "nativeReplay": "Two fresh 900-tick traces per fixture after 180 idle ticks; all per-second named poses identical; 32 autonomous jam cars and exact admitted populations preserved.",
+    "phoneComparison": "Second independent production run uses CLI --compare against the first; matched workload and initial-pose checks pass."
+  },
+  "runs": [
+    {
+      "name": "desktop-production",
+      "source": {
+        "revision": "25cb7c481659522d7db9d9885b3d78579f762e9e",
+        "dirty": true,
+        "sha256": "d5a8ed76787f329b6e9f4ccccfd09b2c77901d81be93bea6e71e36d87b639c69"
+      },
+      "browser": "156.0.8078.4",
+      "headed": true,
+      "runtime": "production origin",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+        "cores": 14,
+        "width": 1280,
+        "height": 800,
+        "devicePixelRatio": 1,
+        "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)"
+      },
+      "seconds": 30,
+      "allocationSampled": false,
+      "measurementVersion": "idle-cadence-and-poses-v1",
+      "errors": [],
+      "cells": [
+        {
+          "fixture": "clear",
+          "trial": 0,
+          "recipeSha256": "04b4cadd77d201391a4a15dd7822847bd526d89ef9a5b520debc4a10b39c5614",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 1800,
+            "wheelQueries": 7196
+          },
+          "idleFrameMs": 8.3,
+          "frameMs": {
+            "count": 3601,
+            "p50": 8.3,
+            "p95": 10.1,
+            "p99": 10.3,
+            "max": 10.4
+          },
+          "missed": 0,
+          "slowFrames": [],
+          "distancePx": 3329.701,
+          "maxLateralPx": 0,
+          "startTick": 180,
+          "endTick": 1980,
+          "vehicles": [
+            1,
+            1
+          ],
+          "endSpeed": 112.013,
+          "stoppedQueueCars": 0,
+          "mainThread": {
+            "lab.update": {
+              "count": 1801,
+              "totalMs": 980.4,
+              "maxMs": 4.7,
+              "retained": 1801,
+              "p50Ms": 0.5,
+              "p95Ms": 1,
+              "p99Ms": 1.3
+            },
+            "lab.render": {
+              "count": 3602,
+              "totalMs": 2213.6,
+              "maxMs": 5.5,
+              "retained": 3602,
+              "p50Ms": 0.5,
+              "p95Ms": 1.3,
+              "p99Ms": 1.5
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 1895,
+              "totalMs": 54.3,
+              "maxMs": 0.6,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.autotile": {
+              "count": 1804,
+              "totalMs": 17.2,
+              "maxMs": 0.4,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 1800,
+              "totalMs": 10.6,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "realm.entityPhysics": {
+              "count": 1800,
+              "totalMs": 383.4,
+              "maxMs": 1.1,
+              "retained": 512,
+              "p50Ms": 0.1,
+              "p95Ms": 0.4,
+              "p99Ms": 0.5
+            },
+            "realm.saveSweep": {
+              "count": 1800,
+              "totalMs": 2,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "server.replication": {
+              "count": 1800,
+              "totalMs": 174.7,
+              "maxMs": 1.5,
+              "retained": 512,
+              "p50Ms": 0.1,
+              "p95Ms": 0.2,
+              "p99Ms": 0.3
+            },
+            "realm.tick": {
+              "count": 1800,
+              "totalMs": 987.1,
+              "maxMs": 2.8,
+              "retained": 512,
+              "p50Ms": 0.4,
+              "p95Ms": 0.9,
+              "p99Ms": 1.1
+            },
+            "server.decode": {
+              "count": 1826,
+              "totalMs": 8.1,
+              "maxMs": 0.3,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "server.generate": {
+              "count": 126,
+              "totalMs": 0.1,
+              "maxMs": 0.1,
+              "retained": 126,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            }
+          }
+        },
+        {
+          "fixture": "jam",
+          "trial": 0,
+          "recipeSha256": "575908211fad23fa0a0b08ef3abd6fce6e96feb74619e209eccc1c03b13c5c3b",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 1800,
+            "wheelQueries": 72740
+          },
+          "idleFrameMs": 8.3,
+          "frameMs": {
+            "count": 3601,
+            "p50": 8.3,
+            "p95": 10.2,
+            "p99": 10.4,
+            "max": 10.4
+          },
+          "missed": 0,
+          "slowFrames": [],
+          "distancePx": 267.077,
+          "maxLateralPx": 1.486,
+          "startTick": 180,
+          "endTick": 1980,
+          "vehicles": [
+            37,
+            37
+          ],
+          "endSpeed": 0.857,
+          "stoppedQueueCars": 32,
+          "mainThread": {
+            "lab.render": {
+              "count": 3602,
+              "totalMs": 2923,
+              "maxMs": 3.3,
+              "retained": 3602,
+              "p50Ms": 0.8,
+              "p95Ms": 1.1,
+              "p99Ms": 1.3
+            },
+            "lab.update": {
+              "count": 1801,
+              "totalMs": 1019.8,
+              "maxMs": 3.5,
+              "retained": 1801,
+              "p50Ms": 0.6,
+              "p95Ms": 0.7,
+              "p99Ms": 0.8
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 1809,
+              "totalMs": 57.5,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.autotile": {
+              "count": 1804,
+              "totalMs": 5.1,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 1800,
+              "totalMs": 14.9,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.entityPhysics": {
+              "count": 1800,
+              "totalMs": 743,
+              "maxMs": 1.4,
+              "retained": 512,
+              "p50Ms": 0.4,
+              "p95Ms": 0.5,
+              "p99Ms": 0.6
+            },
+            "realm.saveSweep": {
+              "count": 1800,
+              "totalMs": 1.1,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            },
+            "server.replication": {
+              "count": 1800,
+              "totalMs": 164.3,
+              "maxMs": 0.3,
+              "retained": 512,
+              "p50Ms": 0.1,
+              "p95Ms": 0.2,
+              "p99Ms": 0.2
+            },
+            "realm.tick": {
+              "count": 1800,
+              "totalMs": 1268.1,
+              "maxMs": 2.6,
+              "retained": 512,
+              "p50Ms": 0.7,
+              "p95Ms": 0.8,
+              "p99Ms": 0.9
+            },
+            "server.decode": {
+              "count": 1800,
+              "totalMs": 5.8,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "server.generate": {
+              "count": 3,
+              "totalMs": 0,
+              "maxMs": 0,
+              "retained": 3,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            }
+          }
+        },
+        {
+          "fixture": "jam",
+          "trial": 1,
+          "recipeSha256": "575908211fad23fa0a0b08ef3abd6fce6e96feb74619e209eccc1c03b13c5c3b",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 1800,
+            "wheelQueries": 72740
+          },
+          "idleFrameMs": 8.3,
+          "frameMs": {
+            "count": 3600,
+            "p50": 8.3,
+            "p95": 10.2,
+            "p99": 10.3,
+            "max": 10.5
+          },
+          "missed": 0,
+          "slowFrames": [],
+          "distancePx": 267.077,
+          "maxLateralPx": 1.486,
+          "startTick": 180,
+          "endTick": 1980,
+          "vehicles": [
+            37,
+            37
+          ],
+          "endSpeed": 0.857,
+          "stoppedQueueCars": 32,
+          "mainThread": {
+            "lab.render": {
+              "count": 3601,
+              "totalMs": 2593.6,
+              "maxMs": 2,
+              "retained": 3601,
+              "p50Ms": 0.7,
+              "p95Ms": 1.1,
+              "p99Ms": 1.4
+            },
+            "lab.update": {
+              "count": 1800,
+              "totalMs": 947.2,
+              "maxMs": 1.9,
+              "retained": 1800,
+              "p50Ms": 0.5,
+              "p95Ms": 0.7,
+              "p99Ms": 0.8
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 1809,
+              "totalMs": 56.7,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "server.autotile": {
+              "count": 1804,
+              "totalMs": 5.1,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 1800,
+              "totalMs": 14.4,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.entityPhysics": {
+              "count": 1800,
+              "totalMs": 766.4,
+              "maxMs": 1,
+              "retained": 512,
+              "p50Ms": 0.4,
+              "p95Ms": 0.5,
+              "p99Ms": 0.6
+            },
+            "realm.saveSweep": {
+              "count": 1800,
+              "totalMs": 1.3,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            },
+            "server.replication": {
+              "count": 1800,
+              "totalMs": 187.4,
+              "maxMs": 0.4,
+              "retained": 512,
+              "p50Ms": 0.1,
+              "p95Ms": 0.2,
+              "p99Ms": 0.2
+            },
+            "realm.tick": {
+              "count": 1800,
+              "totalMs": 1329.8,
+              "maxMs": 1.4,
+              "retained": 512,
+              "p50Ms": 0.7,
+              "p95Ms": 0.9,
+              "p99Ms": 1
+            },
+            "server.decode": {
+              "count": 1799,
+              "totalMs": 7.3,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "server.generate": {
+              "count": 3,
+              "totalMs": 0.1,
+              "maxMs": 0.1,
+              "retained": 3,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            }
+          }
+        },
+        {
+          "fixture": "clear",
+          "trial": 1,
+          "recipeSha256": "04b4cadd77d201391a4a15dd7822847bd526d89ef9a5b520debc4a10b39c5614",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 1800,
+            "wheelQueries": 7200
+          },
+          "idleFrameMs": 8.3,
+          "frameMs": {
+            "count": 3601,
+            "p50": 8.3,
+            "p95": 10.2,
+            "p99": 10.3,
+            "max": 10.5
+          },
+          "missed": 0,
+          "slowFrames": [],
+          "distancePx": 3331.568,
+          "maxLateralPx": 0,
+          "startTick": 180,
+          "endTick": 1980,
+          "vehicles": [
+            1,
+            1
+          ],
+          "endSpeed": 112.013,
+          "stoppedQueueCars": 0,
+          "mainThread": {
+            "lab.update": {
+              "count": 1801,
+              "totalMs": 866.1,
+              "maxMs": 2.4,
+              "retained": 1801,
+              "p50Ms": 0.4,
+              "p95Ms": 0.9,
+              "p99Ms": 1.1
+            },
+            "lab.render": {
+              "count": 3602,
+              "totalMs": 2190.5,
+              "maxMs": 5.2,
+              "retained": 3602,
+              "p50Ms": 0.5,
+              "p95Ms": 1.2,
+              "p99Ms": 1.5
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 1899,
+              "totalMs": 51.3,
+              "maxMs": 0.4,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "server.autotile": {
+              "count": 1804,
+              "totalMs": 16.1,
+              "maxMs": 0.5,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.decode": {
+              "count": 1826,
+              "totalMs": 11.4,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 1800,
+              "totalMs": 9.6,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.entityPhysics": {
+              "count": 1800,
+              "totalMs": 412,
+              "maxMs": 1.9,
+              "retained": 512,
+              "p50Ms": 0.2,
+              "p95Ms": 0.6,
+              "p99Ms": 0.8
+            },
+            "realm.saveSweep": {
+              "count": 1800,
+              "totalMs": 1,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            },
+            "server.replication": {
+              "count": 1800,
+              "totalMs": 167.2,
+              "maxMs": 1.4,
+              "retained": 512,
+              "p50Ms": 0.1,
+              "p95Ms": 0.2,
+              "p99Ms": 0.5
+            },
+            "realm.tick": {
+              "count": 1800,
+              "totalMs": 994.7,
+              "maxMs": 2.9,
+              "retained": 512,
+              "p50Ms": 0.6,
+              "p95Ms": 1.2,
+              "p99Ms": 2
+            },
+            "server.generate": {
+              "count": 126,
+              "totalMs": 0.3,
+              "maxMs": 0.1,
+              "retained": 126,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            }
+          }
+        },
+        {
+          "fixture": "clear",
+          "trial": 2,
+          "recipeSha256": "04b4cadd77d201391a4a15dd7822847bd526d89ef9a5b520debc4a10b39c5614",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 1800,
+            "wheelQueries": 7196
+          },
+          "idleFrameMs": 8.3,
+          "frameMs": {
+            "count": 3601,
+            "p50": 8.3,
+            "p95": 10.2,
+            "p99": 10.4,
+            "max": 10.4
+          },
+          "missed": 0,
+          "slowFrames": [],
+          "distancePx": 3329.701,
+          "maxLateralPx": 0,
+          "startTick": 180,
+          "endTick": 1980,
+          "vehicles": [
+            1,
+            1
+          ],
+          "endSpeed": 112.013,
+          "stoppedQueueCars": 0,
+          "mainThread": {
+            "lab.update": {
+              "count": 1801,
+              "totalMs": 713.4,
+              "maxMs": 1.9,
+              "retained": 1801,
+              "p50Ms": 0.4,
+              "p95Ms": 0.7,
+              "p99Ms": 1
+            },
+            "lab.render": {
+              "count": 3602,
+              "totalMs": 1598.5,
+              "maxMs": 4.3,
+              "retained": 3602,
+              "p50Ms": 0.4,
+              "p95Ms": 0.8,
+              "p99Ms": 1.3
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 1898,
+              "totalMs": 37.8,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.autotile": {
+              "count": 1804,
+              "totalMs": 11.8,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 1800,
+              "totalMs": 7.8,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "realm.entityPhysics": {
+              "count": 1800,
+              "totalMs": 288.5,
+              "maxMs": 1.2,
+              "retained": 512,
+              "p50Ms": 0.1,
+              "p95Ms": 0.3,
+              "p99Ms": 0.4
+            },
+            "realm.saveSweep": {
+              "count": 1800,
+              "totalMs": 1.3,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            },
+            "server.replication": {
+              "count": 1800,
+              "totalMs": 126.1,
+              "maxMs": 1.2,
+              "retained": 512,
+              "p50Ms": 0.1,
+              "p95Ms": 0.2,
+              "p99Ms": 0.3
+            },
+            "realm.tick": {
+              "count": 1800,
+              "totalMs": 748,
+              "maxMs": 2,
+              "retained": 512,
+              "p50Ms": 0.4,
+              "p95Ms": 0.7,
+              "p99Ms": 1
+            },
+            "server.decode": {
+              "count": 1826,
+              "totalMs": 6.7,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "server.generate": {
+              "count": 126,
+              "totalMs": 0,
+              "maxMs": 0,
+              "retained": 126,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            }
+          }
+        },
+        {
+          "fixture": "jam",
+          "trial": 2,
+          "recipeSha256": "575908211fad23fa0a0b08ef3abd6fce6e96feb74619e209eccc1c03b13c5c3b",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 1800,
+            "wheelQueries": 72588
+          },
+          "idleFrameMs": 8.3,
+          "frameMs": {
+            "count": 3601,
+            "p50": 8.3,
+            "p95": 10.2,
+            "p99": 10.4,
+            "max": 10.5
+          },
+          "missed": 0,
+          "slowFrames": [],
+          "distancePx": 266.767,
+          "maxLateralPx": 1.27,
+          "startTick": 180,
+          "endTick": 1980,
+          "vehicles": [
+            37,
+            37
+          ],
+          "endSpeed": 0.902,
+          "stoppedQueueCars": 32,
+          "mainThread": {
+            "lab.update": {
+              "count": 1801,
+              "totalMs": 878.5,
+              "maxMs": 1.5,
+              "retained": 1801,
+              "p50Ms": 0.5,
+              "p95Ms": 0.6,
+              "p99Ms": 0.7
+            },
+            "lab.render": {
+              "count": 3602,
+              "totalMs": 2862.1,
+              "maxMs": 1.9,
+              "retained": 3602,
+              "p50Ms": 0.8,
+              "p95Ms": 1.1,
+              "p99Ms": 1.2
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 1809,
+              "totalMs": 56.8,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.autotile": {
+              "count": 1804,
+              "totalMs": 5.3,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "server.decode": {
+              "count": 1800,
+              "totalMs": 6.5,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 1800,
+              "totalMs": 11.8,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.entityPhysics": {
+              "count": 1800,
+              "totalMs": 746.5,
+              "maxMs": 0.7,
+              "retained": 512,
+              "p50Ms": 0.4,
+              "p95Ms": 0.5,
+              "p99Ms": 0.6
+            },
+            "realm.saveSweep": {
+              "count": 1800,
+              "totalMs": 0.8,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            },
+            "server.replication": {
+              "count": 1800,
+              "totalMs": 166.1,
+              "maxMs": 0.3,
+              "retained": 512,
+              "p50Ms": 0.1,
+              "p95Ms": 0.2,
+              "p99Ms": 0.2
+            },
+            "realm.tick": {
+              "count": 1800,
+              "totalMs": 1276.7,
+              "maxMs": 1.5,
+              "retained": 512,
+              "p50Ms": 0.7,
+              "p95Ms": 0.9,
+              "p99Ms": 1
+            },
+            "server.generate": {
+              "count": 3,
+              "totalMs": 0,
+              "maxMs": 0,
+              "retained": 3,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "phone-production-a",
+      "source": {
+        "revision": "25cb7c481659522d7db9d9885b3d78579f762e9e",
+        "dirty": true,
+        "sha256": "d5a8ed76787f329b6e9f4ccccfd09b2c77901d81be93bea6e71e36d87b639c69"
+      },
+      "browser": "Chrome/156.0.8078.79",
+      "headed": true,
+      "runtime": "production origin",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "seconds": 30,
+      "allocationSampled": false,
+      "measurementVersion": "idle-cadence-and-poses-v1",
+      "errors": [],
+      "cells": [
+        {
+          "fixture": "clear",
+          "trial": 0,
+          "recipeSha256": "04b4cadd77d201391a4a15dd7822847bd526d89ef9a5b520debc4a10b39c5614",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 1800,
+            "wheelQueries": 7184
+          },
+          "idleFrameMs": 16.7,
+          "frameMs": {
+            "count": 1798,
+            "p50": 16.7,
+            "p95": 16.8,
+            "p99": 16.8,
+            "max": 50
+          },
+          "missed": 1,
+          "slowFrames": [
+            {
+              "atMs": 22586.6,
+              "frameMs": 50
+            }
+          ],
+          "distancePx": 3324.1,
+          "maxLateralPx": 0,
+          "startTick": 180,
+          "endTick": 1980,
+          "vehicles": [
+            1,
+            1
+          ],
+          "endSpeed": 112.013,
+          "stoppedQueueCars": 0,
+          "mainThread": {
+            "lab.update": {
+              "count": 1801,
+              "totalMs": 4652.8,
+              "maxMs": 23.5,
+              "retained": 1801,
+              "p50Ms": 2.5,
+              "p95Ms": 3.5,
+              "p99Ms": 4.6
+            },
+            "lab.render": {
+              "count": 1799,
+              "totalMs": 5275.5,
+              "maxMs": 22.5,
+              "retained": 1799,
+              "p50Ms": 2.7,
+              "p95Ms": 4,
+              "p99Ms": 5.5
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 1894,
+              "totalMs": 329.2,
+              "maxMs": 2.1,
+              "retained": 512,
+              "p50Ms": 0.2,
+              "p95Ms": 0.4,
+              "p99Ms": 0.5
+            },
+            "server.autotile": {
+              "count": 1804,
+              "totalMs": 84.1,
+              "maxMs": 0.8,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.2,
+              "p99Ms": 0.4
+            },
+            "realm.ai": {
+              "count": 1800,
+              "totalMs": 67.1,
+              "maxMs": 0.4,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "realm.entityPhysics": {
+              "count": 1800,
+              "totalMs": 2188.9,
+              "maxMs": 8.1,
+              "retained": 512,
+              "p50Ms": 1.4,
+              "p95Ms": 2,
+              "p99Ms": 2.5
+            },
+            "realm.saveSweep": {
+              "count": 1800,
+              "totalMs": 15.2,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.replication": {
+              "count": 1800,
+              "totalMs": 1062.7,
+              "maxMs": 18.3,
+              "retained": 512,
+              "p50Ms": 0.7,
+              "p95Ms": 1.1,
+              "p99Ms": 2.1
+            },
+            "realm.tick": {
+              "count": 1800,
+              "totalMs": 5751.2,
+              "maxMs": 25.6,
+              "retained": 512,
+              "p50Ms": 4.1,
+              "p95Ms": 5.3,
+              "p99Ms": 6.6
+            },
+            "server.decode": {
+              "count": 1824,
+              "totalMs": 54.6,
+              "maxMs": 0.4,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "server.generate": {
+              "count": 117,
+              "totalMs": 1.3,
+              "maxMs": 0.1,
+              "retained": 117,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            }
+          }
+        },
+        {
+          "fixture": "jam",
+          "trial": 0,
+          "recipeSha256": "575908211fad23fa0a0b08ef3abd6fce6e96feb74619e209eccc1c03b13c5c3b",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 1800,
+            "wheelQueries": 72580
+          },
+          "idleFrameMs": 16.7,
+          "frameMs": {
+            "count": 1799,
+            "p50": 16.7,
+            "p95": 16.8,
+            "p99": 16.8,
+            "max": 33.3
+          },
+          "missed": 1,
+          "slowFrames": [
+            {
+              "atMs": 133.3,
+              "frameMs": 33.3
+            }
+          ],
+          "distancePx": 266.808,
+          "maxLateralPx": 0.748,
+          "startTick": 180,
+          "endTick": 1980,
+          "vehicles": [
+            37,
+            37
+          ],
+          "endSpeed": 0.893,
+          "stoppedQueueCars": 32,
+          "mainThread": {
+            "lab.update": {
+              "count": 1802,
+              "totalMs": 4914.5,
+              "maxMs": 12.5,
+              "retained": 1802,
+              "p50Ms": 2.7,
+              "p95Ms": 3.6,
+              "p99Ms": 3.9
+            },
+            "lab.render": {
+              "count": 1800,
+              "totalMs": 7142.6,
+              "maxMs": 13.3,
+              "retained": 1800,
+              "p50Ms": 3.6,
+              "p95Ms": 6.8,
+              "p99Ms": 8.2
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 1812,
+              "totalMs": 309.1,
+              "maxMs": 6.1,
+              "retained": 512,
+              "p50Ms": 0.1,
+              "p95Ms": 0.3,
+              "p99Ms": 0.5
+            },
+            "server.autotile": {
+              "count": 1804,
+              "totalMs": 28.2,
+              "maxMs": 1.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 1800,
+              "totalMs": 62.1,
+              "maxMs": 2.5,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "realm.entityPhysics": {
+              "count": 1800,
+              "totalMs": 3636.6,
+              "maxMs": 10.2,
+              "retained": 512,
+              "p50Ms": 1.8,
+              "p95Ms": 4.9,
+              "p99Ms": 7.7
+            },
+            "realm.saveSweep": {
+              "count": 1800,
+              "totalMs": 8.2,
+              "maxMs": 0.8,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "server.replication": {
+              "count": 1800,
+              "totalMs": 819.4,
+              "maxMs": 6.2,
+              "retained": 512,
+              "p50Ms": 0.4,
+              "p95Ms": 1,
+              "p99Ms": 1.6
+            },
+            "realm.tick": {
+              "count": 1800,
+              "totalMs": 6233,
+              "maxMs": 16.3,
+              "retained": 512,
+              "p50Ms": 2.9,
+              "p95Ms": 7.9,
+              "p99Ms": 9.7
+            },
+            "server.decode": {
+              "count": 1799,
+              "totalMs": 31.9,
+              "maxMs": 0.3,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.generate": {
+              "count": 11,
+              "totalMs": 0,
+              "maxMs": 0,
+              "retained": 11,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "phone-production-b",
+      "source": {
+        "revision": "25cb7c481659522d7db9d9885b3d78579f762e9e",
+        "dirty": true,
+        "sha256": "d5a8ed76787f329b6e9f4ccccfd09b2c77901d81be93bea6e71e36d87b639c69"
+      },
+      "browser": "Chrome/156.0.8078.79",
+      "headed": true,
+      "runtime": "production origin",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "seconds": 30,
+      "allocationSampled": false,
+      "measurementVersion": "idle-cadence-and-poses-v1",
+      "errors": [],
+      "cells": [
+        {
+          "fixture": "clear",
+          "trial": 0,
+          "recipeSha256": "04b4cadd77d201391a4a15dd7822847bd526d89ef9a5b520debc4a10b39c5614",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 1800,
+            "wheelQueries": 7188
+          },
+          "idleFrameMs": 16.7,
+          "frameMs": {
+            "count": 1799,
+            "p50": 16.7,
+            "p95": 16.8,
+            "p99": 16.8,
+            "max": 33.4
+          },
+          "missed": 1,
+          "slowFrames": [
+            {
+              "atMs": 66.7,
+              "frameMs": 33.4
+            }
+          ],
+          "distancePx": 3325.967,
+          "maxLateralPx": 0,
+          "startTick": 180,
+          "endTick": 1980,
+          "vehicles": [
+            1,
+            1
+          ],
+          "endSpeed": 112.013,
+          "stoppedQueueCars": 0,
+          "mainThread": {
+            "lab.update": {
+              "count": 1801,
+              "totalMs": 4159,
+              "maxMs": 26.8,
+              "retained": 1801,
+              "p50Ms": 2.2,
+              "p95Ms": 3.3,
+              "p99Ms": 4.7
+            },
+            "lab.render": {
+              "count": 1800,
+              "totalMs": 5094.7,
+              "maxMs": 23.6,
+              "retained": 1800,
+              "p50Ms": 2.6,
+              "p95Ms": 3.9,
+              "p99Ms": 5.4
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 1893,
+              "totalMs": 273.5,
+              "maxMs": 1.1,
+              "retained": 512,
+              "p50Ms": 0.1,
+              "p95Ms": 0.3,
+              "p99Ms": 0.5
+            },
+            "server.autotile": {
+              "count": 1804,
+              "totalMs": 73.6,
+              "maxMs": 0.8,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.2,
+              "p99Ms": 0.3
+            },
+            "realm.ai": {
+              "count": 1800,
+              "totalMs": 46.9,
+              "maxMs": 0.4,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.entityPhysics": {
+              "count": 1800,
+              "totalMs": 1891.6,
+              "maxMs": 7.3,
+              "retained": 512,
+              "p50Ms": 0.7,
+              "p95Ms": 1.7,
+              "p99Ms": 2.1
+            },
+            "realm.saveSweep": {
+              "count": 1800,
+              "totalMs": 15.1,
+              "maxMs": 0.8,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "server.replication": {
+              "count": 1800,
+              "totalMs": 818.2,
+              "maxMs": 12.9,
+              "retained": 512,
+              "p50Ms": 0.3,
+              "p95Ms": 0.9,
+              "p99Ms": 1.2
+            },
+            "realm.tick": {
+              "count": 1800,
+              "totalMs": 4699.7,
+              "maxMs": 19,
+              "retained": 512,
+              "p50Ms": 1.8,
+              "p95Ms": 4.7,
+              "p99Ms": 5.7
+            },
+            "server.decode": {
+              "count": 1825,
+              "totalMs": 47.3,
+              "maxMs": 0.4,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.generate": {
+              "count": 117,
+              "totalMs": 1.2,
+              "maxMs": 0.1,
+              "retained": 117,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            }
+          }
+        },
+        {
+          "fixture": "jam",
+          "trial": 0,
+          "recipeSha256": "575908211fad23fa0a0b08ef3abd6fce6e96feb74619e209eccc1c03b13c5c3b",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 1799,
+            "wheelQueries": 72592
+          },
+          "idleFrameMs": 16.7,
+          "frameMs": {
+            "count": 1798,
+            "p50": 16.7,
+            "p95": 16.8,
+            "p99": 16.8,
+            "max": 33.3
+          },
+          "missed": 2,
+          "slowFrames": [
+            {
+              "atMs": 83.4,
+              "frameMs": 33.3
+            },
+            {
+              "atMs": 22673.3,
+              "frameMs": 33.3
+            }
+          ],
+          "distancePx": 266.91,
+          "maxLateralPx": 0.586,
+          "startTick": 180,
+          "endTick": 1979,
+          "vehicles": [
+            37,
+            37
+          ],
+          "endSpeed": 0.845,
+          "stoppedQueueCars": 32,
+          "mainThread": {
+            "lab.update": {
+              "count": 1801,
+              "totalMs": 4838.1,
+              "maxMs": 16.2,
+              "retained": 1801,
+              "p50Ms": 2.7,
+              "p95Ms": 3.5,
+              "p99Ms": 4.1
+            },
+            "lab.render": {
+              "count": 1799,
+              "totalMs": 7152,
+              "maxMs": 14.8,
+              "retained": 1799,
+              "p50Ms": 3.7,
+              "p95Ms": 6.5,
+              "p99Ms": 7.8
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 1811,
+              "totalMs": 352.5,
+              "maxMs": 6,
+              "retained": 512,
+              "p50Ms": 0.2,
+              "p95Ms": 0.4,
+              "p99Ms": 0.8
+            },
+            "server.autotile": {
+              "count": 1803,
+              "totalMs": 29.9,
+              "maxMs": 1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 1799,
+              "totalMs": 71.7,
+              "maxMs": 0.9,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "realm.entityPhysics": {
+              "count": 1799,
+              "totalMs": 3974.1,
+              "maxMs": 11,
+              "retained": 512,
+              "p50Ms": 1.9,
+              "p95Ms": 5.2,
+              "p99Ms": 7.2
+            },
+            "realm.saveSweep": {
+              "count": 1799,
+              "totalMs": 9.9,
+              "maxMs": 0.3,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "server.replication": {
+              "count": 1799,
+              "totalMs": 856.6,
+              "maxMs": 6.2,
+              "retained": 512,
+              "p50Ms": 0.4,
+              "p95Ms": 1,
+              "p99Ms": 1.1
+            },
+            "realm.tick": {
+              "count": 1799,
+              "totalMs": 6732.1,
+              "maxMs": 16.5,
+              "retained": 512,
+              "p50Ms": 3.2,
+              "p95Ms": 8.2,
+              "p99Ms": 9.5
+            },
+            "server.decode": {
+              "count": 1799,
+              "totalMs": 33.5,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.generate": {
+              "count": 11,
+              "totalMs": 0,
+              "maxMs": 0,
+              "retained": 11,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "phone-allocations",
+      "source": {
+        "revision": "25cb7c481659522d7db9d9885b3d78579f762e9e",
+        "dirty": true,
+        "sha256": "d5a8ed76787f329b6e9f4ccccfd09b2c77901d81be93bea6e71e36d87b639c69"
+      },
+      "browser": "Chrome/156.0.8078.79",
+      "headed": true,
+      "runtime": "production origin",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "seconds": 10,
+      "allocationSampled": true,
+      "measurementVersion": "idle-cadence-and-poses-v1",
+      "errors": [],
+      "cells": [
+        {
+          "fixture": "clear",
+          "trial": 0,
+          "recipeSha256": "04b4cadd77d201391a4a15dd7822847bd526d89ef9a5b520debc4a10b39c5614",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 600,
+            "wheelQueries": 2384
+          },
+          "idleFrameMs": 16.7,
+          "frameMs": {
+            "count": 599,
+            "p50": 16.7,
+            "p95": 16.8,
+            "p99": 16.8,
+            "max": 33.3
+          },
+          "missed": 1,
+          "slowFrames": [
+            {
+              "atMs": 83.3,
+              "frameMs": 33.3
+            }
+          ],
+          "distancePx": 1081.86,
+          "maxLateralPx": 0,
+          "startTick": 180,
+          "endTick": 780,
+          "vehicles": [
+            1,
+            1
+          ],
+          "endSpeed": 112.013,
+          "stoppedQueueCars": 0,
+          "mainThread": {
+            "lab.update": {
+              "count": 601,
+              "totalMs": 1805,
+              "maxMs": 24.6,
+              "retained": 601,
+              "p50Ms": 2.9,
+              "p95Ms": 4,
+              "p99Ms": 5.1
+            },
+            "lab.render": {
+              "count": 600,
+              "totalMs": 1960.9,
+              "maxMs": 21.9,
+              "retained": 600,
+              "p50Ms": 3,
+              "p95Ms": 4.4,
+              "p99Ms": 6.4
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 639,
+              "totalMs": 115.7,
+              "maxMs": 1.8,
+              "retained": 512,
+              "p50Ms": 0.2,
+              "p95Ms": 0.3,
+              "p99Ms": 0.5
+            },
+            "server.autotile": {
+              "count": 604,
+              "totalMs": 29,
+              "maxMs": 2.6,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.2,
+              "p99Ms": 0.5
+            },
+            "realm.ai": {
+              "count": 600,
+              "totalMs": 20.5,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.2
+            },
+            "realm.entityPhysics": {
+              "count": 600,
+              "totalMs": 772.4,
+              "maxMs": 10,
+              "retained": 512,
+              "p50Ms": 1.1,
+              "p95Ms": 2.5,
+              "p99Ms": 3.4
+            },
+            "realm.saveSweep": {
+              "count": 600,
+              "totalMs": 6.2,
+              "maxMs": 0.1,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.replication": {
+              "count": 600,
+              "totalMs": 334.7,
+              "maxMs": 13,
+              "retained": 512,
+              "p50Ms": 0.4,
+              "p95Ms": 1.1,
+              "p99Ms": 2.2
+            },
+            "realm.tick": {
+              "count": 600,
+              "totalMs": 1905.9,
+              "maxMs": 21.4,
+              "retained": 512,
+              "p50Ms": 2.7,
+              "p95Ms": 6,
+              "p99Ms": 7.7
+            },
+            "server.decode": {
+              "count": 606,
+              "totalMs": 15.9,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.generate": {
+              "count": 45,
+              "totalMs": 0.5,
+              "maxMs": 0.1,
+              "retained": 45,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            }
+          },
+          "allocations": {
+            "estimatedMiB": 88.202,
+            "samplingInterval": 32768,
+            "scope": "Main-thread estimated allocations, including collected objects, cadence setup, pause fence/diagnostics and benchmark bookkeeping. Excludes warm-up and idle calibration. Instrumented timings; not a retained heap or GC-cause diagnosis."
+          }
+        },
+        {
+          "fixture": "jam",
+          "trial": 0,
+          "recipeSha256": "575908211fad23fa0a0b08ef3abd6fce6e96feb74619e209eccc1c03b13c5c3b",
+          "servedEntry": {
+            "path": "/tilefun/assets/drivingBench-uCHZvwRV.js",
+            "sha256": "dbb1a55fccb0e25d29e32299c331f5147cd9ccf34349408edddbacd89cc521ea"
+          },
+          "qualification": {
+            "valid": true,
+            "reasons": [],
+            "ticks": 599,
+            "wheelQueries": 27312
+          },
+          "idleFrameMs": 16.7,
+          "frameMs": {
+            "count": 598,
+            "p50": 16.7,
+            "p95": 16.8,
+            "p99": 16.8,
+            "max": 33.4
+          },
+          "missed": 3,
+          "slowFrames": [
+            {
+              "atMs": 66.7,
+              "frameMs": 33.4
+            },
+            {
+              "atMs": 116.7,
+              "frameMs": 33.3
+            },
+            {
+              "atMs": 266.6,
+              "frameMs": 33.3
+            }
+          ],
+          "distancePx": 233.873,
+          "maxLateralPx": 0.121,
+          "startTick": 180,
+          "endTick": 779,
+          "vehicles": [
+            37,
+            37
+          ],
+          "endSpeed": 2.233,
+          "stoppedQueueCars": 32,
+          "mainThread": {
+            "lab.update": {
+              "count": 602,
+              "totalMs": 1852.9,
+              "maxMs": 19.4,
+              "retained": 602,
+              "p50Ms": 3,
+              "p95Ms": 4,
+              "p99Ms": 4.8
+            },
+            "lab.render": {
+              "count": 599,
+              "totalMs": 2754.3,
+              "maxMs": 16.8,
+              "retained": 599,
+              "p50Ms": 4,
+              "p95Ms": 7.6,
+              "p99Ms": 8.6
+            }
+          },
+          "authority": {
+            "server.encode": {
+              "count": 611,
+              "totalMs": 77.6,
+              "maxMs": 2.7,
+              "retained": 512,
+              "p50Ms": 0.1,
+              "p95Ms": 0.2,
+              "p99Ms": 0.4
+            },
+            "server.autotile": {
+              "count": 603,
+              "totalMs": 10.8,
+              "maxMs": 1.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.ai": {
+              "count": 599,
+              "totalMs": 15.1,
+              "maxMs": 0.4,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "realm.entityPhysics": {
+              "count": 599,
+              "totalMs": 963.8,
+              "maxMs": 12.8,
+              "retained": 512,
+              "p50Ms": 1.4,
+              "p95Ms": 2.3,
+              "p99Ms": 3.2
+            },
+            "realm.saveSweep": {
+              "count": 599,
+              "totalMs": 2.6,
+              "maxMs": 0.4,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0.1
+            },
+            "server.replication": {
+              "count": 599,
+              "totalMs": 209.3,
+              "maxMs": 6.3,
+              "retained": 512,
+              "p50Ms": 0.3,
+              "p95Ms": 0.6,
+              "p99Ms": 0.9
+            },
+            "realm.tick": {
+              "count": 599,
+              "totalMs": 1653.8,
+              "maxMs": 18.5,
+              "retained": 512,
+              "p50Ms": 2.5,
+              "p95Ms": 4,
+              "p99Ms": 5.3
+            },
+            "server.decode": {
+              "count": 600,
+              "totalMs": 10.8,
+              "maxMs": 0.2,
+              "retained": 512,
+              "p50Ms": 0,
+              "p95Ms": 0.1,
+              "p99Ms": 0.1
+            },
+            "server.generate": {
+              "count": 11,
+              "totalMs": 0,
+              "maxMs": 0,
+              "retained": 11,
+              "p50Ms": 0,
+              "p95Ms": 0,
+              "p99Ms": 0
+            }
+          },
+          "allocations": {
+            "estimatedMiB": 445.485,
+            "samplingInterval": 32768,
+            "scope": "Main-thread estimated allocations, including collected objects, cadence setup, pause fence/diagnostics and benchmark bookkeeping. Excludes warm-up and idle calibration. Instrumented timings; not a retained heap or GC-cause diagnosis."
+          }
+        }
+      ]
+    }
+  ]
+}

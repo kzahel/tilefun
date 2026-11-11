@@ -1,5 +1,12 @@
 # Embedded engine labs
 
+[239](../tactical/239-repeatable-driving-workloads.md) adds the diagnostic-only
+`driving-bench.html` entry on `LabView`, with clear-road and native traffic-queue
+recipes. It uses the existing Worker/prediction/render host and ordinary movement
+input; it owns no physics kernel or simulation clock. A recipe can opt into a
+fixed vehicle population while retaining ordinary autonomous traffic decisions.
+The normal game and other recipes keep their existing population policy.
+
 ## Labs on the game's Worker runtime (226 slice 3c, 2026-11-08)
 
 Every Workshop lab except the two-pane physics lab now runs on the game's own

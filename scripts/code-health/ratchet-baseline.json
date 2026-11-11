@@ -548,8 +548,8 @@
       "overLimit": 1
     },
     "src/scenarios/ScenarioSession.ts": {
-      "lines": 409,
-      "worst": 65,
+      "lines": 391,
+      "worst": 63,
       "overLimit": 1
     },
     "src/scenarios/ScenarioWorkerHost.ts": {
