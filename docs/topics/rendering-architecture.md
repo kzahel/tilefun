@@ -1,5 +1,13 @@
 # Rendering architecture and backend separation
 
+[240](../tactical/240-phone-pause-attribution.md) identifies a remaining terrain
+budget blind spot: CPU-requested canvas draw calls can defer raster completion
+until `GpuPages.get` copies their pixels. Preparation's submission-time deadline
+does not account for that later cost. A local row-flush experiment validates the
+boundary but is not shipped; budgeting raster completion and pixel/device
+qualification remain next work. Plain GL copies and CPU-canvas requests stay in
+place; this finding does not restore the retired GPU-backed terrain builder.
+
 [238](../tactical/238-allocation-churn-and-regional-planning.md) retains static prop
 receiver faces in a per-client `SceneFrame` weak cache. Scalar snapshots detect
 in-place shape edits; an edit replaces cached faces without mutating prior borrows.

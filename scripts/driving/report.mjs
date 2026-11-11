@@ -49,6 +49,8 @@ export function assertComparable(before, after) {
     "fixtures",
     "zoomOverride",
     "allocationSampled",
+    "profiled",
+    "traced",
     "measurementVersion",
   ])
     if (JSON.stringify(before[key]) !== JSON.stringify(after[key]))

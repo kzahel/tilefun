@@ -1,0 +1,2007 @@
+{
+  "description": "Physical Pixel 7a attribution of remaining driving pauses, 2026-11-11. Full Chrome traces, profiles, source maps, probe records and build transform remain local under ignored data/scratch/driving-240/.",
+  "baselineRevision": "f95b6e57",
+  "renderer": [
+    {
+      "file": "src/rendering/TileRenderer.ts",
+      "sha256": "4b349fc93350a702076edbcf3fde5bbc0325f97e7fd684b9457257e1e5d2afcf",
+      "matchesBaseline": true
+    },
+    {
+      "file": "src/rendering/RasterSurface.ts",
+      "sha256": "76b30e9f4defd7c78c0288b5dc01a9ac87bdb85a219ea018b03ec61fc48b932a",
+      "matchesBaseline": true
+    },
+    {
+      "file": "src/rendering/GpuPages.ts",
+      "sha256": "746416b7167dff350d86b8471351888b5804cdcf0a449ca3974ffe972cc33594",
+      "matchesBaseline": true
+    },
+    {
+      "file": "src/rendering/GpuPageAtlas.ts",
+      "sha256": "bc212e1152250a484c8583cb216e6a8d62054cd12e9a5cfa02470c0ffb16bbb1",
+      "matchesBaseline": true
+    }
+  ],
+  "device": {
+    "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+    "cores": 8,
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625,
+    "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+  },
+  "methodology": "Same rebuilt production page, fixed clear road and 180 idle warm-up ticks. Two ordinary controls, two trace-only runs and two CPU+trace runs; each 30 seconds, no heap sampler. 1 ms CPU sampling. Cadence user-timing marks align trace/profile/page clocks exactly. Correlations are not automatic causal labels. Root GC uses main renderer thread only; CPU observations are timestamp-sorted to handle negative Chrome deltas, weighted as disjoint sampled wall-time intervals, not exact CPU time. Chromium thread-time counters can exceed wall durations and are retained only as reported, not used for conclusions. Raw browser traces may contain unrelated metadata and are not published.",
+  "phoneThermals": {
+    "capture": [
+      {
+        "label": "before-ordinary-before",
+        "date": "2026-11-11T15:18:15.235Z",
+        "batteryC": 25.7,
+        "thermalStatus": 0,
+        "acPowered": true
+      },
+      {
+        "label": "before-trace-only-a",
+        "date": "2026-11-11T15:18:54.024Z",
+        "batteryC": 25.6,
+        "thermalStatus": 0,
+        "acPowered": true
+      },
+      {
+        "label": "before-cpu-trace-a",
+        "date": "2026-11-11T15:19:58.369Z",
+        "batteryC": 25.6,
+        "thermalStatus": 0,
+        "acPowered": true
+      },
+      {
+        "label": "before-trace-only-b",
+        "date": "2026-11-11T15:21:02.893Z",
+        "batteryC": 25.6,
+        "thermalStatus": 0,
+        "acPowered": true
+      },
+      {
+        "label": "before-cpu-trace-b",
+        "date": "2026-11-11T15:22:07.081Z",
+        "batteryC": 25.8,
+        "thermalStatus": 0,
+        "acPowered": true
+      },
+      {
+        "label": "before-ordinary-after",
+        "date": "2026-11-11T15:23:11.153Z",
+        "batteryC": 26.4,
+        "thermalStatus": 0,
+        "acPowered": true
+      },
+      {
+        "label": "after-campaign",
+        "date": "2026-11-11T15:23:50.062Z",
+        "batteryC": 26.4,
+        "thermalStatus": 0,
+        "acPowered": true
+      }
+    ],
+    "probe": [
+      {
+        "label": "before-control-0",
+        "batteryC": 27,
+        "thermalStatus": 0
+      },
+      {
+        "label": "before-row-flush-1",
+        "batteryC": 27,
+        "thermalStatus": 0
+      },
+      {
+        "label": "before-row-flush-2",
+        "batteryC": 26.9,
+        "thermalStatus": 0
+      },
+      {
+        "label": "before-control-3",
+        "batteryC": 26.8,
+        "thermalStatus": 0
+      },
+      {
+        "label": "after-copy-probe",
+        "batteryC": 26.8,
+        "thermalStatus": 0
+      }
+    ]
+  },
+  "captureCampaignError": null,
+  "probeCampaignError": null,
+  "runs": [
+    {
+      "name": "ordinary-before",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DhTX0if2.js",
+        "sha256": "2a0cfabb726a3247187e7ba152b756e8ef2322ed4e3ec6bfc1b8a12849c2740f"
+      },
+      "mode": {
+        "profiled": false,
+        "traced": false,
+        "allocationSampled": false
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1799,
+        "wheelQueries": 7188
+      },
+      "distancePx": 3325.967,
+      "frameMs": {
+        "count": 1799,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 33.4
+      },
+      "missed": 1,
+      "slowFrames": [
+        {
+          "atMs": 15867.3,
+          "endMs": 22084.1,
+          "frameMs": 33.4
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 3906.3,
+          "maxMs": 19.1,
+          "retained": 1801,
+          "p50Ms": 2.1,
+          "p95Ms": 3.1,
+          "p99Ms": 4.5
+        },
+        "lab.render": {
+          "count": 1800,
+          "totalMs": 5312.3,
+          "maxMs": 26.2,
+          "retained": 1800,
+          "p50Ms": 2.7,
+          "p95Ms": 4.2,
+          "p99Ms": 5.9
+        }
+      },
+      "authority": {
+        "count": 1799,
+        "totalMs": 6302,
+        "maxMs": 26.1,
+        "retained": 512,
+        "p50Ms": 2.6,
+        "p95Ms": 5.2,
+        "p99Ms": 8
+      }
+    },
+    {
+      "name": "trace-only-a",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DhTX0if2.js",
+        "sha256": "2a0cfabb726a3247187e7ba152b756e8ef2322ed4e3ec6bfc1b8a12849c2740f"
+      },
+      "mode": {
+        "profiled": false,
+        "traced": true,
+        "allocationSampled": false
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1800,
+        "wheelQueries": 7184
+      },
+      "distancePx": 3324.1,
+      "frameMs": {
+        "count": 1799,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 33.3
+      },
+      "missed": 1,
+      "slowFrames": [
+        {
+          "atMs": 83.3,
+          "endMs": 6325.3,
+          "frameMs": 33.3
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 3793.8,
+          "maxMs": 26.7,
+          "retained": 1801,
+          "p50Ms": 2,
+          "p95Ms": 2.9,
+          "p99Ms": 4
+        },
+        "lab.render": {
+          "count": 1800,
+          "totalMs": 4632.6,
+          "maxMs": 20.8,
+          "retained": 1800,
+          "p50Ms": 2.4,
+          "p95Ms": 3.5,
+          "p99Ms": 5.3
+        }
+      },
+      "authority": {
+        "count": 1800,
+        "totalMs": 5066.5,
+        "maxMs": 26.1,
+        "retained": 512,
+        "p50Ms": 2.4,
+        "p95Ms": 4.6,
+        "p99Ms": 5.2
+      },
+      "trace": {
+        "dataLossOccurred": false,
+        "clockErrorUs": 0,
+        "gc": {
+          "count": 34,
+          "kinds": [
+            "MinorGC"
+          ],
+          "maxWallMs": 4.664,
+          "totalWallMs": 107.392
+        },
+        "missedIntervals": [
+          {
+            "atMs": 83.3,
+            "frameMs": 33.3,
+            "mainTaskWallMs": 31.937,
+            "gcWallMs": 0,
+            "main": [
+              {
+                "name": "RunTask",
+                "thread": "CrRendererMain",
+                "atMs": 51.363,
+                "wallMs": 35.591,
+                "threadMs": 34.92,
+                "overlapMs": 31.937
+              },
+              {
+                "name": "ThreadControllerImpl::RunTask",
+                "thread": "CrRendererMain",
+                "atMs": 51.387,
+                "wallMs": 35.531,
+                "threadMs": 34.869,
+                "overlapMs": 31.913
+              },
+              {
+                "name": "ProxyMain::BeginMainFrame",
+                "thread": "CrRendererMain",
+                "atMs": 51.404,
+                "wallMs": 35.509,
+                "threadMs": 34.849,
+                "overlapMs": 31.896
+              },
+              {
+                "name": "FireAnimationFrame",
+                "thread": "CrRendererMain",
+                "atMs": 51.551,
+                "wallMs": 32.781,
+                "threadMs": 32.256,
+                "overlapMs": 31.749
+              },
+              {
+                "name": "v8.callFunction",
+                "thread": "CrRendererMain",
+                "atMs": 51.583,
+                "wallMs": 32.734,
+                "threadMs": 32.211,
+                "overlapMs": 31.717
+              },
+              {
+                "name": "FunctionCall",
+                "thread": "CrRendererMain",
+                "atMs": 51.591,
+                "wallMs": 32.473,
+                "threadMs": 31.957,
+                "overlapMs": 31.709,
+                "call": {
+                  "function": "tick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 69
+                }
+              }
+            ],
+            "gpu": [
+              {
+                "name": "RunTask",
+                "thread": "CrGpuMain",
+                "atMs": 52.083,
+                "wallMs": 0.703,
+                "threadMs": 0.688,
+                "overlapMs": 0.703
+              },
+              {
+                "name": "ThreadControllerImpl::RunTask",
+                "thread": "CrGpuMain",
+                "atMs": 52.091,
+                "wallMs": 0.691,
+                "threadMs": 0.68,
+                "overlapMs": 0.691
+              },
+              {
+                "name": "Scheduler::RunTask",
+                "thread": "CrGpuMain",
+                "atMs": 52.1,
+                "wallMs": 0.677,
+                "threadMs": 0.666,
+                "overlapMs": 0.677
+              }
+            ],
+            "contextGcWallMs": 0
+          }
+        ],
+        "longCallbacks": [
+          {
+            "name": "FunctionCall",
+            "thread": "CrRendererMain",
+            "atMs": 51.591,
+            "wallMs": 32.473,
+            "threadMs": 31.957,
+            "overlapMs": 32.473,
+            "call": {
+              "function": "tick",
+              "source": "src/core/GameLoop.ts",
+              "line": 69
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "cpu-trace-a",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DhTX0if2.js",
+        "sha256": "2a0cfabb726a3247187e7ba152b756e8ef2322ed4e3ec6bfc1b8a12849c2740f"
+      },
+      "mode": {
+        "profiled": true,
+        "traced": true,
+        "allocationSampled": false
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1799,
+        "wheelQueries": 7188
+      },
+      "distancePx": 3325.967,
+      "frameMs": {
+        "count": 1800,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 17.1
+      },
+      "missed": 0,
+      "slowFrames": [],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 3493.9,
+          "maxMs": 14.9,
+          "retained": 1801,
+          "p50Ms": 1.9,
+          "p95Ms": 2.7,
+          "p99Ms": 4.1
+        },
+        "lab.render": {
+          "count": 1801,
+          "totalMs": 4673,
+          "maxMs": 20.5,
+          "retained": 1801,
+          "p50Ms": 2.4,
+          "p95Ms": 3.6,
+          "p99Ms": 4.9
+        }
+      },
+      "authority": {
+        "count": 1799,
+        "totalMs": 4530.3,
+        "maxMs": 22.6,
+        "retained": 512,
+        "p50Ms": 1.8,
+        "p95Ms": 4.2,
+        "p99Ms": 5.4
+      },
+      "trace": {
+        "dataLossOccurred": false,
+        "clockErrorUs": 0,
+        "gc": {
+          "count": 34,
+          "kinds": [
+            "MinorGC"
+          ],
+          "maxWallMs": 4.844,
+          "totalWallMs": 104.078
+        },
+        "missedIntervals": [],
+        "longCallbacks": [
+          {
+            "name": "FunctionCall",
+            "thread": "CrRendererMain",
+            "atMs": 22686.873,
+            "wallMs": 22.354,
+            "threadMs": 21.938,
+            "overlapMs": 22.354,
+            "call": {
+              "function": "tick",
+              "source": "src/core/GameLoop.ts",
+              "line": 69
+            },
+            "profile": {
+              "samples": 21,
+              "self": [
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 11.648
+                },
+                {
+                  "function": "texSubImage2D",
+                  "sampledWallMs": 2.394
+                },
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 2.339
+                },
+                {
+                  "function": "drawRegion",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 618,
+                  "sampledWallMs": 1.169
+                },
+                {
+                  "function": "worldComposite",
+                  "source": "src/rendering/WorldRasterFrame.ts",
+                  "line": 61,
+                  "sampledWallMs": 1.148
+                },
+                {
+                  "function": "clearRect",
+                  "sampledWallMs": 1.14
+                },
+                {
+                  "function": "clearRect",
+                  "sampledWallMs": 1.131
+                },
+                {
+                  "function": "wasm-function[2664]",
+                  "source": "/00bc1dde",
+                  "line": 1,
+                  "sampledWallMs": 1.123
+                },
+                {
+                  "function": "(program)",
+                  "sampledWallMs": 0.262
+                }
+              ],
+              "inclusive": [
+                {
+                  "function": "(root)",
+                  "sampledWallMs": 22.354
+                },
+                {
+                  "function": "externalTick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 47,
+                  "sampledWallMs": 22.092
+                },
+                {
+                  "function": "tick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 69,
+                  "sampledWallMs": 22.092
+                },
+                {
+                  "function": "renderViews",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 29,
+                  "sampledWallMs": 20.969
+                },
+                {
+                  "function": "drawLabFrame",
+                  "source": "src/client/LabScene.ts",
+                  "line": 38,
+                  "sampledWallMs": 20.969
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 304,
+                  "sampledWallMs": 20.969
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 140,
+                  "sampledWallMs": 20.969
+                },
+                {
+                  "function": "",
+                  "source": "src/client/LabScene.ts",
+                  "line": 50,
+                  "sampledWallMs": 16.342
+                },
+                {
+                  "function": "get",
+                  "source": "src/rendering/GpuPages.ts",
+                  "line": 103,
+                  "sampledWallMs": 15.173
+                },
+                {
+                  "function": "drawRegion",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 618,
+                  "sampledWallMs": 15.173
+                },
+                {
+                  "function": "drawImage",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 598,
+                  "sampledWallMs": 15.173
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/RasterRenderBackend.ts",
+                  "line": 143,
+                  "sampledWallMs": 15.173
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/GpuRenderBackend.ts",
+                  "line": 90,
+                  "sampledWallMs": 15.173
+                },
+                {
+                  "function": "presentTerrain",
+                  "source": "src/rendering/OutdoorPresentation.ts",
+                  "line": 19,
+                  "sampledWallMs": 15.173
+                }
+              ]
+            }
+          },
+          {
+            "name": "FunctionCall",
+            "thread": "CrRendererMain",
+            "atMs": 6685.253,
+            "wallMs": 21.759,
+            "threadMs": 21.339,
+            "overlapMs": 21.759,
+            "call": {
+              "function": "tick",
+              "source": "src/core/GameLoop.ts",
+              "line": 69
+            },
+            "profile": {
+              "samples": 21,
+              "self": [
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 11.324
+                },
+                {
+                  "function": "texSubImage2D",
+                  "sampledWallMs": 2.263
+                },
+                {
+                  "function": "step",
+                  "source": "src/physics/PhysicsScene.ts",
+                  "line": 388,
+                  "sampledWallMs": 1.582
+                },
+                {
+                  "function": "entityShadow",
+                  "source": "src/rendering/scene/EntitySprites.ts",
+                  "line": 355,
+                  "sampledWallMs": 1.152
+                },
+                {
+                  "function": "setValueV3f",
+                  "source": "node_modules/three/build/three.module.js",
+                  "line": 4941,
+                  "sampledWallMs": 1.144
+                },
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 1.138
+                },
+                {
+                  "function": "prepareTerrainViews",
+                  "source": "src/rendering/TileRenderer.ts",
+                  "line": 132,
+                  "sampledWallMs": 1.133
+                },
+                {
+                  "function": "setup",
+                  "source": "node_modules/three/build/three.module.js",
+                  "line": 1623,
+                  "sampledWallMs": 1.105
+                },
+                {
+                  "function": "(program)",
+                  "sampledWallMs": 0.88
+                },
+                {
+                  "function": "needsUpdate",
+                  "source": "node_modules/three/build/three.module.js",
+                  "line": 1759,
+                  "sampledWallMs": 0.038
+                }
+              ],
+              "inclusive": [
+                {
+                  "function": "(root)",
+                  "sampledWallMs": 21.759
+                },
+                {
+                  "function": "externalTick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 47,
+                  "sampledWallMs": 20.879
+                },
+                {
+                  "function": "tick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 69,
+                  "sampledWallMs": 20.879
+                },
+                {
+                  "function": "renderViews",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 29,
+                  "sampledWallMs": 19.297
+                },
+                {
+                  "function": "drawLabFrame",
+                  "source": "src/client/LabScene.ts",
+                  "line": 38,
+                  "sampledWallMs": 19.297
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 304,
+                  "sampledWallMs": 19.297
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 140,
+                  "sampledWallMs": 19.297
+                },
+                {
+                  "function": "",
+                  "source": "src/client/LabScene.ts",
+                  "line": 50,
+                  "sampledWallMs": 17.026
+                },
+                {
+                  "function": "drawViewTerrain",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 66,
+                  "sampledWallMs": 14.73
+                },
+                {
+                  "function": "get",
+                  "source": "src/rendering/GpuPages.ts",
+                  "line": 103,
+                  "sampledWallMs": 13.587
+                },
+                {
+                  "function": "drawRegion",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 618,
+                  "sampledWallMs": 13.587
+                },
+                {
+                  "function": "drawImage",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 598,
+                  "sampledWallMs": 13.587
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/RasterRenderBackend.ts",
+                  "line": 143,
+                  "sampledWallMs": 13.587
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/GpuRenderBackend.ts",
+                  "line": 90,
+                  "sampledWallMs": 13.587
+                }
+              ]
+            }
+          },
+          {
+            "name": "FunctionCall",
+            "thread": "CrRendererMain",
+            "atMs": 15836.45,
+            "wallMs": 20.796,
+            "threadMs": 20.36,
+            "overlapMs": 20.796,
+            "call": {
+              "function": "tick",
+              "source": "src/core/GameLoop.ts",
+              "line": 69
+            },
+            "profile": {
+              "samples": 19,
+              "self": [
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 10.523
+                },
+                {
+                  "function": "texSubImage2D",
+                  "sampledWallMs": 2.391
+                },
+                {
+                  "function": "getContext",
+                  "sampledWallMs": 1.188
+                },
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 1.187
+                },
+                {
+                  "function": "drawBuffers",
+                  "sampledWallMs": 1.175
+                },
+                {
+                  "function": "bindFramebuffer",
+                  "sampledWallMs": 1.172
+                },
+                {
+                  "function": "updateMatrixWorld",
+                  "source": "node_modules/three/build/three.core.js",
+                  "line": 13071,
+                  "sampledWallMs": 1.172
+                },
+                {
+                  "function": "update",
+                  "source": "src/client/LabView.ts",
+                  "line": 254,
+                  "sampledWallMs": 1.001
+                },
+                {
+                  "function": "(program)",
+                  "sampledWallMs": 0.987
+                }
+              ],
+              "inclusive": [
+                {
+                  "function": "(root)",
+                  "sampledWallMs": 20.796
+                },
+                {
+                  "function": "externalTick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 47,
+                  "sampledWallMs": 19.809
+                },
+                {
+                  "function": "tick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 69,
+                  "sampledWallMs": 19.809
+                },
+                {
+                  "function": "drawLabFrame",
+                  "source": "src/client/LabScene.ts",
+                  "line": 38,
+                  "sampledWallMs": 18.808
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 304,
+                  "sampledWallMs": 18.808
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 140,
+                  "sampledWallMs": 18.808
+                },
+                {
+                  "function": "renderViews",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 29,
+                  "sampledWallMs": 17.636
+                },
+                {
+                  "function": "",
+                  "source": "src/client/LabScene.ts",
+                  "line": 50,
+                  "sampledWallMs": 16.449
+                },
+                {
+                  "function": "drawViewTerrain",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 66,
+                  "sampledWallMs": 15.274
+                },
+                {
+                  "function": "get",
+                  "source": "src/rendering/GpuPages.ts",
+                  "line": 103,
+                  "sampledWallMs": 14.102
+                },
+                {
+                  "function": "drawRegion",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 618,
+                  "sampledWallMs": 14.102
+                },
+                {
+                  "function": "drawImage",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 598,
+                  "sampledWallMs": 14.102
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/RasterRenderBackend.ts",
+                  "line": 143,
+                  "sampledWallMs": 14.102
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/GpuRenderBackend.ts",
+                  "line": 90,
+                  "sampledWallMs": 14.102
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "trace-only-b",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DhTX0if2.js",
+        "sha256": "2a0cfabb726a3247187e7ba152b756e8ef2322ed4e3ec6bfc1b8a12849c2740f"
+      },
+      "mode": {
+        "profiled": false,
+        "traced": true,
+        "allocationSampled": false
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1800,
+        "wheelQueries": 7188
+      },
+      "distancePx": 3325.967,
+      "frameMs": {
+        "count": 1799,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 33.4
+      },
+      "missed": 1,
+      "slowFrames": [
+        {
+          "atMs": 29485.6,
+          "endMs": 35809.1,
+          "frameMs": 33.4
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 3879.3,
+          "maxMs": 20,
+          "retained": 1801,
+          "p50Ms": 2.1,
+          "p95Ms": 2.9,
+          "p99Ms": 4.1
+        },
+        "lab.render": {
+          "count": 1800,
+          "totalMs": 4495.2,
+          "maxMs": 19.3,
+          "retained": 1800,
+          "p50Ms": 2.3,
+          "p95Ms": 3.4,
+          "p99Ms": 5
+        }
+      },
+      "authority": {
+        "count": 1800,
+        "totalMs": 4835.8,
+        "maxMs": 29.2,
+        "retained": 512,
+        "p50Ms": 3.1,
+        "p95Ms": 5,
+        "p99Ms": 6.6
+      },
+      "trace": {
+        "dataLossOccurred": false,
+        "clockErrorUs": 0,
+        "gc": {
+          "count": 35,
+          "kinds": [
+            "MinorGC"
+          ],
+          "maxWallMs": 7.562,
+          "totalWallMs": 108.3
+        },
+        "missedIntervals": [
+          {
+            "atMs": 29485.6,
+            "frameMs": 33.4,
+            "mainTaskWallMs": 33.4,
+            "gcWallMs": 0,
+            "main": [
+              {
+                "name": "RunTask",
+                "thread": "CrRendererMain",
+                "atMs": 29448.231,
+                "wallMs": 46.385,
+                "threadMs": 48.194,
+                "overlapMs": 33.4
+              },
+              {
+                "name": "ThreadControllerImpl::RunTask",
+                "thread": "CrRendererMain",
+                "atMs": 29448.237,
+                "wallMs": 46.349,
+                "threadMs": 48.162,
+                "overlapMs": 33.4
+              },
+              {
+                "name": "Receive mojo message",
+                "thread": "CrRendererMain",
+                "atMs": 29448.27,
+                "wallMs": 46.245,
+                "threadMs": 48.114,
+                "overlapMs": 33.4,
+                "mojoInterface": "memory_instrumentation.mojom.ClientProcess"
+              }
+            ],
+            "gpu": [
+              {
+                "name": "RunTask",
+                "thread": "CrGpuMain",
+                "atMs": 29437.499,
+                "wallMs": 25.084,
+                "threadMs": 25.881,
+                "overlapMs": 10.383
+              },
+              {
+                "name": "ThreadControllerImpl::RunTask",
+                "thread": "CrGpuMain",
+                "atMs": 29437.501,
+                "wallMs": 25.074,
+                "threadMs": 25.873,
+                "overlapMs": 10.375
+              },
+              {
+                "name": "Receive mojo message",
+                "thread": "CrGpuMain",
+                "atMs": 29437.512,
+                "wallMs": 24.994,
+                "threadMs": 25.848,
+                "overlapMs": 10.306,
+                "mojoInterface": "memory_instrumentation.mojom.ClientProcess"
+              }
+            ],
+            "contextGcWallMs": 0
+          }
+        ],
+        "longCallbacks": [
+          {
+            "name": "FunctionCall",
+            "thread": "CrRendererMain",
+            "atMs": 34.739,
+            "wallMs": 25.074,
+            "threadMs": 24.662,
+            "overlapMs": 25.074,
+            "call": {
+              "function": "tick",
+              "source": "src/core/GameLoop.ts",
+              "line": 69
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "cpu-trace-b",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DhTX0if2.js",
+        "sha256": "2a0cfabb726a3247187e7ba152b756e8ef2322ed4e3ec6bfc1b8a12849c2740f"
+      },
+      "mode": {
+        "profiled": true,
+        "traced": true,
+        "allocationSampled": false
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1799,
+        "wheelQueries": 7192
+      },
+      "distancePx": 3327.834,
+      "frameMs": {
+        "count": 1800,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 17.8
+      },
+      "missed": 0,
+      "slowFrames": [],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 3263.7,
+          "maxMs": 13.7,
+          "retained": 1801,
+          "p50Ms": 1.7,
+          "p95Ms": 2.8,
+          "p99Ms": 3.7
+        },
+        "lab.render": {
+          "count": 1801,
+          "totalMs": 4107.7,
+          "maxMs": 16.9,
+          "retained": 1801,
+          "p50Ms": 2.2,
+          "p95Ms": 3.5,
+          "p99Ms": 5.6
+        }
+      },
+      "authority": {
+        "count": 1799,
+        "totalMs": 4552.9,
+        "maxMs": 17,
+        "retained": 512,
+        "p50Ms": 1.9,
+        "p95Ms": 3.7,
+        "p99Ms": 4.3
+      },
+      "trace": {
+        "dataLossOccurred": false,
+        "clockErrorUs": 0,
+        "gc": {
+          "count": 34,
+          "kinds": [
+            "MinorGC"
+          ],
+          "maxWallMs": 3.723,
+          "totalWallMs": 83.073
+        },
+        "missedIntervals": [],
+        "longCallbacks": [
+          {
+            "name": "FunctionCall",
+            "thread": "CrRendererMain",
+            "atMs": 29536.936,
+            "wallMs": 19.51,
+            "threadMs": 18.969,
+            "overlapMs": 19.51,
+            "call": {
+              "function": "tick",
+              "source": "src/core/GameLoop.ts",
+              "line": 69
+            },
+            "profile": {
+              "samples": 20,
+              "self": [
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 7.992
+                },
+                {
+                  "function": "texSubImage2D",
+                  "sampledWallMs": 2.038
+                },
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 2.002
+                },
+                {
+                  "function": "(program)",
+                  "sampledWallMs": 1.715
+                },
+                {
+                  "function": "build",
+                  "source": "src/physics/WheelGrid.ts",
+                  "line": 56,
+                  "sampledWallMs": 1.017
+                },
+                {
+                  "function": "bufferSubData",
+                  "sampledWallMs": 1.003
+                },
+                {
+                  "function": "",
+                  "source": "src/rendering/scene/VehicleGroups.ts",
+                  "line": 21,
+                  "sampledWallMs": 1.001
+                },
+                {
+                  "function": "decompose",
+                  "source": "node_modules/three/build/three.core.js",
+                  "line": 11073,
+                  "sampledWallMs": 0.998
+                },
+                {
+                  "function": "beginFrame",
+                  "source": "src/rendering/CarBodyImageCache.ts",
+                  "line": 52,
+                  "sampledWallMs": 0.986
+                },
+                {
+                  "function": "recordMotionSample",
+                  "source": "src/rendering/PresentationTimeline.ts",
+                  "line": 21,
+                  "sampledWallMs": 0.758
+                }
+              ],
+              "inclusive": [
+                {
+                  "function": "(root)",
+                  "sampledWallMs": 19.51
+                },
+                {
+                  "function": "externalTick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 47,
+                  "sampledWallMs": 17.795
+                },
+                {
+                  "function": "tick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 69,
+                  "sampledWallMs": 17.795
+                },
+                {
+                  "function": "drawLabFrame",
+                  "source": "src/client/LabScene.ts",
+                  "line": 38,
+                  "sampledWallMs": 16.02
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 304,
+                  "sampledWallMs": 16.02
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 140,
+                  "sampledWallMs": 16.02
+                },
+                {
+                  "function": "renderViews",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 29,
+                  "sampledWallMs": 15.034
+                },
+                {
+                  "function": "",
+                  "source": "src/client/LabScene.ts",
+                  "line": 50,
+                  "sampledWallMs": 13.032
+                },
+                {
+                  "function": "drawViewTerrain",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 66,
+                  "sampledWallMs": 11.033
+                },
+                {
+                  "function": "get",
+                  "source": "src/rendering/GpuPages.ts",
+                  "line": 103,
+                  "sampledWallMs": 10.03
+                },
+                {
+                  "function": "drawRegion",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 618,
+                  "sampledWallMs": 10.03
+                },
+                {
+                  "function": "drawImage",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 598,
+                  "sampledWallMs": 10.03
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/RasterRenderBackend.ts",
+                  "line": 143,
+                  "sampledWallMs": 10.03
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/GpuRenderBackend.ts",
+                  "line": 90,
+                  "sampledWallMs": 10.03
+                }
+              ]
+            }
+          },
+          {
+            "name": "FunctionCall",
+            "thread": "CrRendererMain",
+            "atMs": 2101.418,
+            "wallMs": 18.607,
+            "threadMs": 18.241,
+            "overlapMs": 18.607,
+            "call": {
+              "function": "tick",
+              "source": "src/core/GameLoop.ts",
+              "line": 69
+            },
+            "profile": {
+              "samples": 18,
+              "self": [
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 6.664
+                },
+                {
+                  "function": "getBlades",
+                  "source": "src/rendering/GrassBladeRenderer.ts",
+                  "line": 105,
+                  "sampledWallMs": 1.18
+                },
+                {
+                  "function": "drawElements",
+                  "sampledWallMs": 1.167
+                },
+                {
+                  "function": "buildRowOrder",
+                  "source": "src/rendering/TileRenderer.ts",
+                  "line": 449,
+                  "sampledWallMs": 1.127
+                },
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 1.118
+                },
+                {
+                  "function": "publish",
+                  "source": "src/client/PlayerPredictor.ts",
+                  "line": 605,
+                  "sampledWallMs": 1.113
+                },
+                {
+                  "function": "texSubImage2D",
+                  "sampledWallMs": 1.113
+                },
+                {
+                  "function": "setup",
+                  "source": "node_modules/three/build/three.module.js",
+                  "line": 1623,
+                  "sampledWallMs": 1.11
+                },
+                {
+                  "function": "createElement",
+                  "sampledWallMs": 1.101
+                },
+                {
+                  "function": "activeTexture",
+                  "sampledWallMs": 1.098
+                },
+                {
+                  "function": "",
+                  "source": "src/input/InputHints.ts",
+                  "line": 32,
+                  "sampledWallMs": 0.998
+                },
+                {
+                  "function": "(program)",
+                  "sampledWallMs": 0.818
+                }
+              ],
+              "inclusive": [
+                {
+                  "function": "(root)",
+                  "sampledWallMs": 18.607
+                },
+                {
+                  "function": "externalTick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 47,
+                  "sampledWallMs": 17.789
+                },
+                {
+                  "function": "tick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 69,
+                  "sampledWallMs": 17.789
+                },
+                {
+                  "function": "renderViews",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 29,
+                  "sampledWallMs": 15.678
+                },
+                {
+                  "function": "drawLabFrame",
+                  "source": "src/client/LabScene.ts",
+                  "line": 38,
+                  "sampledWallMs": 15.678
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 304,
+                  "sampledWallMs": 15.678
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 140,
+                  "sampledWallMs": 15.678
+                },
+                {
+                  "function": "",
+                  "source": "src/client/LabScene.ts",
+                  "line": 50,
+                  "sampledWallMs": 13.433
+                },
+                {
+                  "function": "drawViewTerrain",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 66,
+                  "sampledWallMs": 11.086
+                },
+                {
+                  "function": "get",
+                  "source": "src/rendering/GpuPages.ts",
+                  "line": 103,
+                  "sampledWallMs": 9.976
+                },
+                {
+                  "function": "drawRegion",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 618,
+                  "sampledWallMs": 9.976
+                },
+                {
+                  "function": "drawImage",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 598,
+                  "sampledWallMs": 9.976
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/RasterRenderBackend.ts",
+                  "line": 143,
+                  "sampledWallMs": 9.976
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/GpuRenderBackend.ts",
+                  "line": 90,
+                  "sampledWallMs": 9.976
+                }
+              ]
+            }
+          },
+          {
+            "name": "FunctionCall",
+            "thread": "CrRendererMain",
+            "atMs": 27253.199,
+            "wallMs": 17.974,
+            "threadMs": 17.646,
+            "overlapMs": 17.974,
+            "call": {
+              "function": "tick",
+              "source": "src/core/GameLoop.ts",
+              "line": 69
+            },
+            "profile": {
+              "samples": 19,
+              "self": [
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 8.011
+                },
+                {
+                  "function": "texSubImage2D",
+                  "sampledWallMs": 2.01
+                },
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 2.002
+                },
+                {
+                  "function": "bindBuffer",
+                  "sampledWallMs": 1.004
+                },
+                {
+                  "function": "unmapRemovedJoints",
+                  "source": "node_modules/@dimforge/rapier3d-compat/dist/rapier.mjs",
+                  "line": 1,
+                  "sampledWallMs": 1.003
+                },
+                {
+                  "function": "clearRect",
+                  "sampledWallMs": 1.003
+                },
+                {
+                  "function": "appendGrassBladeItems",
+                  "source": "src/rendering/GrassBladeRenderer.ts",
+                  "line": 145,
+                  "sampledWallMs": 1.002
+                },
+                {
+                  "function": "drawTile",
+                  "source": "src/assets/Spritesheet.ts",
+                  "line": 27,
+                  "sampledWallMs": 0.999
+                },
+                {
+                  "function": "structuredClone",
+                  "sampledWallMs": 0.478
+                },
+                {
+                  "function": "(program)",
+                  "sampledWallMs": 0.462
+                }
+              ],
+              "inclusive": [
+                {
+                  "function": "(root)",
+                  "sampledWallMs": 17.974
+                },
+                {
+                  "function": "externalTick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 47,
+                  "sampledWallMs": 17.512
+                },
+                {
+                  "function": "tick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 69,
+                  "sampledWallMs": 17.512
+                },
+                {
+                  "function": "renderViews",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 29,
+                  "sampledWallMs": 16.031
+                },
+                {
+                  "function": "drawLabFrame",
+                  "source": "src/client/LabScene.ts",
+                  "line": 38,
+                  "sampledWallMs": 16.031
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 304,
+                  "sampledWallMs": 16.031
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 140,
+                  "sampledWallMs": 16.031
+                },
+                {
+                  "function": "",
+                  "source": "src/client/LabScene.ts",
+                  "line": 50,
+                  "sampledWallMs": 13.03
+                },
+                {
+                  "function": "get",
+                  "source": "src/rendering/GpuPages.ts",
+                  "line": 103,
+                  "sampledWallMs": 11.024
+                },
+                {
+                  "function": "drawRegion",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 618,
+                  "sampledWallMs": 11.024
+                },
+                {
+                  "function": "drawImage",
+                  "source": "src/rendering/GpuRasterSurface.ts",
+                  "line": 598,
+                  "sampledWallMs": 11.024
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/RasterRenderBackend.ts",
+                  "line": 143,
+                  "sampledWallMs": 11.024
+                },
+                {
+                  "function": "submit",
+                  "source": "src/rendering/GpuRenderBackend.ts",
+                  "line": 90,
+                  "sampledWallMs": 11.024
+                },
+                {
+                  "function": "presentTerrain",
+                  "source": "src/rendering/OutdoorPresentation.ts",
+                  "line": 19,
+                  "sampledWallMs": 11.024
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ordinary-after",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DhTX0if2.js",
+        "sha256": "2a0cfabb726a3247187e7ba152b756e8ef2322ed4e3ec6bfc1b8a12849c2740f"
+      },
+      "mode": {
+        "profiled": false,
+        "traced": false,
+        "allocationSampled": false
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1800,
+        "wheelQueries": 7188
+      },
+      "distancePx": 3325.967,
+      "frameMs": {
+        "count": 1800,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 33.3
+      },
+      "missed": 1,
+      "slowFrames": [
+        {
+          "atMs": 66.7,
+          "endMs": 6308,
+          "frameMs": 33.3
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 4263.2,
+          "maxMs": 28.2,
+          "retained": 1801,
+          "p50Ms": 2.3,
+          "p95Ms": 3.2,
+          "p99Ms": 4.5
+        },
+        "lab.render": {
+          "count": 1801,
+          "totalMs": 5280.8,
+          "maxMs": 20.3,
+          "retained": 1801,
+          "p50Ms": 2.8,
+          "p95Ms": 4,
+          "p99Ms": 5.5
+        }
+      },
+      "authority": {
+        "count": 1800,
+        "totalMs": 7392.5,
+        "maxMs": 29.4,
+        "retained": 512,
+        "p50Ms": 4.5,
+        "p95Ms": 5.4,
+        "p99Ms": 9.1
+      }
+    }
+  ],
+  "probe": {
+    "methodology": "Same source except offCtx.getImageData(0,0,1,1) immediately after each terrain row, before the next budget check. Local transform only; working renderer unchanged. Both lanes wrap only native HTML canvas page copies, canvas uploads and one-pixel CPU reads; timing/bookkeeping overhead is instrumented.",
+    "interpretation": "All four 30-second probes qualify and copy the same 26 256x256 pages. A one-pixel read after each terrain row forces pending raster before the next builder deadline check; it moves cost out of later page-copy calls. Both CPU-request flags remain true. This confirms unaccounted deferred raster work, not that per-row reads are the optimal product fix. The local variant has no pixel-parity qualification and is not shipped. Startup/browser pauses remain separate.",
+    "runs": [
+      {
+        "name": "copy-control-0",
+        "lane": "control",
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 1800,
+          "wheelQueries": 7184
+        },
+        "distancePx": 3324.1,
+        "slowFrames": [
+          {
+            "atMs": 83.3,
+            "endMs": 6169.5,
+            "frameMs": 33.3
+          }
+        ],
+        "render": {
+          "count": 1801,
+          "totalMs": 5101.5,
+          "maxMs": 23.2,
+          "retained": 1801,
+          "p50Ms": 2.6,
+          "p95Ms": 3.9,
+          "p99Ms": 5.7
+        },
+        "update": {
+          "count": 1801,
+          "totalMs": 3852.3,
+          "maxMs": 28.4,
+          "retained": 1801,
+          "p50Ms": 2,
+          "p95Ms": 3.3,
+          "p99Ms": 4.4
+        },
+        "groups": {
+          "page-copy": {
+            "count": 26,
+            "p50": 5,
+            "p95": 6.5,
+            "p99": 6.5,
+            "max": 6.5,
+            "totalMs": 132.1
+          },
+          "canvas-upload": {
+            "count": 26,
+            "p50": 1.2,
+            "p95": 1.4,
+            "p99": 1.5,
+            "max": 1.5,
+            "totalMs": 29.4
+          },
+          "row-raster-flush": {
+            "count": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null,
+            "totalMs": 0
+          }
+        },
+        "copyDimensions": [
+          {
+            "source": [
+              256,
+              256
+            ],
+            "destination": [
+              256,
+              256
+            ],
+            "sourceWillReadFrequently": true,
+            "destinationWillReadFrequently": true
+          }
+        ]
+      },
+      {
+        "name": "copy-row-flush-1",
+        "lane": "row-flush",
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 1800,
+          "wheelQueries": 7192
+        },
+        "distancePx": 3327.834,
+        "slowFrames": [],
+        "render": {
+          "count": 1802,
+          "totalMs": 5647.1,
+          "maxMs": 11.9,
+          "retained": 1802,
+          "p50Ms": 2.9,
+          "p95Ms": 4.9,
+          "p99Ms": 6.3
+        },
+        "update": {
+          "count": 1802,
+          "totalMs": 4048.8,
+          "maxMs": 20.5,
+          "retained": 1802,
+          "p50Ms": 2.2,
+          "p95Ms": 3,
+          "p99Ms": 4.3
+        },
+        "groups": {
+          "page-copy": {
+            "count": 26,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.1,
+            "max": 0.1,
+            "totalMs": 0.9
+          },
+          "canvas-upload": {
+            "count": 26,
+            "p50": 1.3,
+            "p95": 1.7,
+            "p99": 1.9,
+            "max": 1.9,
+            "totalMs": 31.8
+          },
+          "row-raster-flush": {
+            "count": 832,
+            "p50": 0.5,
+            "p95": 0.7,
+            "p99": 0.8,
+            "max": 1.1,
+            "totalMs": 386.1
+          }
+        },
+        "copyDimensions": [
+          {
+            "source": [
+              256,
+              256
+            ],
+            "destination": [
+              256,
+              256
+            ],
+            "sourceWillReadFrequently": true,
+            "destinationWillReadFrequently": true
+          }
+        ]
+      },
+      {
+        "name": "copy-row-flush-2",
+        "lane": "row-flush",
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 1799,
+          "wheelQueries": 7188
+        },
+        "distancePx": 3325.967,
+        "slowFrames": [
+          {
+            "atMs": 66.7,
+            "endMs": 6186.3,
+            "frameMs": 33.3
+          }
+        ],
+        "render": {
+          "count": 1800,
+          "totalMs": 5741.6,
+          "maxMs": 13.1,
+          "retained": 1800,
+          "p50Ms": 3,
+          "p95Ms": 5,
+          "p99Ms": 6.7
+        },
+        "update": {
+          "count": 1801,
+          "totalMs": 4209.2,
+          "maxMs": 26.5,
+          "retained": 1801,
+          "p50Ms": 2.2,
+          "p95Ms": 3.2,
+          "p99Ms": 4.5
+        },
+        "groups": {
+          "page-copy": {
+            "count": 26,
+            "p50": 0,
+            "p95": 0.1,
+            "p99": 0.2,
+            "max": 0.2,
+            "totalMs": 1.2
+          },
+          "canvas-upload": {
+            "count": 26,
+            "p50": 1.3,
+            "p95": 1.5,
+            "p99": 1.6,
+            "max": 1.6,
+            "totalMs": 31
+          },
+          "row-raster-flush": {
+            "count": 828,
+            "p50": 0.5,
+            "p95": 0.7,
+            "p99": 0.8,
+            "max": 0.9,
+            "totalMs": 386.8
+          }
+        },
+        "copyDimensions": [
+          {
+            "source": [
+              256,
+              256
+            ],
+            "destination": [
+              256,
+              256
+            ],
+            "sourceWillReadFrequently": true,
+            "destinationWillReadFrequently": true
+          }
+        ]
+      },
+      {
+        "name": "copy-control-3",
+        "lane": "control",
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 1800,
+          "wheelQueries": 7192
+        },
+        "distancePx": 3327.834,
+        "slowFrames": [],
+        "render": {
+          "count": 1802,
+          "totalMs": 5151.9,
+          "maxMs": 22.6,
+          "retained": 1802,
+          "p50Ms": 2.7,
+          "p95Ms": 3.9,
+          "p99Ms": 5.7
+        },
+        "update": {
+          "count": 1802,
+          "totalMs": 4081.7,
+          "maxMs": 20.7,
+          "retained": 1802,
+          "p50Ms": 2.2,
+          "p95Ms": 3.1,
+          "p99Ms": 4.1
+        },
+        "groups": {
+          "page-copy": {
+            "count": 26,
+            "p50": 5,
+            "p95": 8.1,
+            "p99": 8.7,
+            "max": 8.7,
+            "totalMs": 130.4
+          },
+          "canvas-upload": {
+            "count": 26,
+            "p50": 1,
+            "p95": 1.3,
+            "p99": 1.4,
+            "max": 1.4,
+            "totalMs": 26.8
+          },
+          "row-raster-flush": {
+            "count": 0,
+            "p50": null,
+            "p95": null,
+            "p99": null,
+            "max": null,
+            "totalMs": 0
+          }
+        },
+        "copyDimensions": [
+          {
+            "source": [
+              256,
+              256
+            ],
+            "destination": [
+              256,
+              256
+            ],
+            "sourceWillReadFrequently": true,
+            "destinationWillReadFrequently": true
+          }
+        ]
+      }
+    ]
+  },
+  "conclusions": [
+    "Repeated long rendering callbacks spend most sampled time in GpuPages.get -> Canvas2D drawImage, before GL texSubImage2D upload.",
+    "CPU-requested terrain canvases can defer raster work until copied; a submission-time budget does not account for completion cost.",
+    "No GC overlaps either captured missed trace-only interval, including their neighbouring-frame context. All recorded main-thread collections are minor; no natural major GC in these four captures.",
+    "The late trace-only-b miss overlaps a 46.245 ms Chromium memory_instrumentation.mojom.ClientProcess IPC. Its trigger is not established; do not attribute it to the game, GC or assume it occurs without diagnostics.",
+    "The 239 untraced 50 ms interval cannot be attributed retrospectively. The early 32.473 ms game callback remains incompletely attributed; CPU-profile captures did not reproduce a missed interval."
+  ],
+  "validation": {
+    "nodeReportCaptureAndTraceTests": 6,
+    "typecheckProjects": 4,
+    "focusedBiome": "pass",
+    "health": "pass",
+    "productionSourcemapBuild": "pass",
+    "workshopCandidateIdentities": 2130,
+    "physicalCaptureCells": 6,
+    "physicalCopyProbeCells": 4,
+    "desktopCaptureSmokeCells": 2,
+    "allWorkloadsQualified": true,
+    "normalRendererUnchanged": true,
+    "phoneDoctorAfterCleanup": "pass"
+  },
+  "next": "Budget completed terrain raster work during preparation, then validate pixel parity and device cadence/CPU tradeoffs. Keep browser IPC/startup pauses separate.",
+  "finalCaptureSmoke": {
+    "headed": false,
+    "qualification": {
+      "valid": true,
+      "reasons": [],
+      "ticks": 300,
+      "wheelQueries": 1196
+    },
+    "traceDataLoss": false,
+    "analysisClockErrorUs": 0
+  }
+}

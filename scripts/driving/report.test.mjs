@@ -67,6 +67,8 @@ test("comparisons reject changed workloads, instrumentation and materially diffe
   for (const mutate of [
     (r) => (r.headed = false),
     (r) => (r.allocationSampled = true),
+    (r) => (r.profiled = true),
+    (r) => (r.traced = true),
     (r) => (r.cells[0].recipeSha256 = "changed"),
     (r) => (r.cells[0].qualification.valid = false),
     (r) => (r.cells[0].qualification.ticks = 800),

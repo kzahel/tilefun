@@ -149,3 +149,7 @@ Checks passed:
 Use the clear fixture for predictor allocation comparisons and the jam fixture
 for backed-up-traffic physics. Keep the city drive/generation probes for streaming
 tails. CPU attribution of the occasional city frame pause remains separate work.
+
+[240](240-phone-pause-attribution.md) delivers the first attribution follow-up:
+deferred terrain raster work is a confirmed render-tail target; a shipping budget
+fix and separate startup/browser-pause investigation remain.

@@ -9,6 +9,7 @@ import react from "@vitejs/plugin-react";
 import { chromium } from "playwright-core";
 import { createServer } from "vite";
 import { openCdpTab } from "./cdp-tab.mjs";
+import { drivingCapture } from "./driving/capture.mjs";
 import { assertComparable, qualify, summarize } from "./driving/report.mjs";
 import { allocationSummary } from "./instrumentation/allocation-summary.mjs";
 
@@ -19,6 +20,7 @@ if (process.argv.includes("--help")) {
   --fixtures=clear,jam --seconds=30 --trials=3 --headed --viewport=1280x800
   --output=/tmp/driving.json --compare=/tmp/before.json --zoom=1
   --allocations  Separate main-thread allocation sampling run; saves heap profiles
+  --profile --trace  Main-thread CPU profile (1 ms) and all-thread Chrome trace
   --cdp=http://127.0.0.1:9223 --port=4188 --device=pixel7a
   --base=http://localhost:4174/tilefun  Use a rebuilt production origin
 Clear: east at ordinary compact-car throttle on a prepared flat road, following camera.
@@ -60,6 +62,10 @@ if (![width, height].every((n) => Number.isInteger(n) && n >= 200 && n <= 4096))
   throw Error("Invalid viewport");
 const headed = !!endpoint || process.argv.includes("--headed");
 const allocations = process.argv.includes("--allocations");
+const profile = process.argv.includes("--profile"),
+  trace = process.argv.includes("--trace");
+if (allocations && (profile || trace))
+  throw Error("Keep allocation sampling separate from CPU/trace captures");
 const output = path.resolve(option("output", path.join(os.tmpdir(), "tilefun-driving.json")));
 const compare = option("compare", "");
 if (compare && path.resolve(compare) === output)
@@ -117,6 +123,7 @@ try {
   }
   page.on("pageerror", (error) => errors.push(error.message));
   const cdp = endpoint ? page : await page.context().newCDPSession(page);
+  const capture = drivingCapture(cdp, { profile, trace });
   let device, measurementVersion;
   for (let trial = 0; trial < trials; trial++)
     for (const fixture of trial % 2 ? [...fixtures].reverse() : fixtures) {
@@ -175,10 +182,16 @@ try {
           includeObjectsCollectedByMajorGC: true,
           includeObjectsCollectedByMinorGC: true,
         });
-      const sample = await page.evaluate(
-        (duration) => window.__drivingBench.run(duration),
-        seconds,
-      );
+      const stopCapture =
+        profile || trace
+          ? await capture.start(`${output.replace(/\.json$/, "")}.${fixture}-${trial}`)
+          : undefined;
+      let sample, diagnostic;
+      try {
+        sample = await page.evaluate((duration) => window.__drivingBench.run(duration), seconds);
+      } finally {
+        diagnostic = await stopCapture?.();
+      }
       if (allocations) {
         const { profile } = await cdp.send("HeapProfiler.stopSampling");
         sample.allocations = {
@@ -203,6 +216,7 @@ try {
           sha256: createHash("sha256").update(entry.text).digest("hex"),
         },
         ...sample,
+        ...(diagnostic ? { diagnostic } : {}),
         idleFrames,
         frameMs: frames,
         idleFrameMs,
@@ -227,6 +241,8 @@ try {
     fixtures,
     zoomOverride,
     allocationSampled: allocations,
+    profiled: profile,
+    traced: trace,
     measurementVersion,
     label: option("device", endpoint ? "attached device" : os.cpus()[0]?.model),
     device,

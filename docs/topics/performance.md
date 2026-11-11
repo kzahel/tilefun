@@ -39,8 +39,9 @@ Open:
   while new terrain and sprite pages were uploaded; paired fix runs dropped none
   ([237](../tactical/237-phone-driving-hitches.md)). `render:bench --scenes=drive`
   measures it, with per-frame slow-frame and upload records and `--trace`.
-  Remaining there: an occasional 20 ms major garbage collection, and chunk
-  generation bursts of 17–27 ms on the authority Worker.
+  Chunk generation bursts of 17–27 ms on the authority Worker remain separate
+  from main-thread cadence. Later captures distinguish natural minor GC from
+  the heap sampler's stop-time major collection; see the follow-up below.
   [237's follow-up](../tactical/237-phone-driving-hitches.md#gc-and-generation-follow-up-2026-11-11)
   records the saved trace's GC census, generation profile attribution and the
   old `generation:bench` limits. The expanded benchmark and main-thread
@@ -137,6 +138,29 @@ one each, jam one/two, with a remaining 50 ms clear interval. Separate 10 s phon
 allocation controls produce estimates of 88.2 MiB clear / 445.5 MiB jam; this is
 a workload contrast, not an optimization gain. The jam now provides a bounded
 snapshot/allocation stress case; residual pause attribution remains open.
+
+## Remaining phone pause attribution (2026-11-11)
+
+[240](../tactical/240-phone-pause-attribution.md) adds `driving:bench --profile
+--trace` and `node scripts/analyze-driving.mjs --report=<report.json>`. Explicit
+cadence marks align page, trace and CPU clocks. Analysis checks data loss, unions
+nested tasks, isolates main-thread GC and sorts out-of-order CPU samples.
+
+The concrete render-tail target is deferred terrain raster work: a CPU-requested
+canvas still finishes drawing when `GpuPages.get` copies it for upload. Profiles
+credit roughly 8–12 ms to native `drawImage` in repeated long callbacks. A local
+one-pixel flush after each built row moves that work inside preparation's deadline
+checks: page-copy median 5 ms → below 0.1 ms, worst render 22.6–23.2 → 11.9–13.1
+ms, with render median rising from 2.6–2.7 to 2.9–3.0 ms. This is diagnostic evidence;
+shipping renderer code is unchanged. Next: budget raster completion and qualify
+pixel parity/device tradeoffs.
+
+Neither captured missed interval overlaps GC; all 137 recorded main-thread
+collections are minor (max 7.562 ms). One late miss is occupied by a Chromium
+memory-instrumentation IPC; its trigger is unknown. A startup game callback
+remains incompletely attributed. The old untraced 50 ms interval cannot be
+assigned a cause retrospectively. Keep these limits separate from the confirmed
+terrain-copy cost and from server generation.
 
 ## Crowd bench (2026-11-10)
 

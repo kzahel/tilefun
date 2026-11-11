@@ -85,13 +85,14 @@ async function run(seconds: number) {
   lab.samplePerformance(true);
   const frames: number[] = [],
     checkpoints = [start],
-    slowFrames: { atMs: number; frameMs: number }[] = [];
+    slowFrames: { atMs: number; endMs: number; frameMs: number }[] = [];
   let distance = 0,
     maxLateral = 0,
     lastX = start.x,
     lastY = start.y;
   let last = await new Promise<number>(requestAnimationFrame);
   const began = last;
+  performance.mark("tilefun.driving.start", { startTime: began });
   driving = true;
   paused = false;
   while (last - began < seconds * 1000) {
@@ -99,7 +100,7 @@ async function run(seconds: number) {
     if (failure) throw failure;
     const ms = now - last;
     frames.push(ms);
-    if (ms > 25) slowFrames.push({ atMs: now - began, frameMs: ms });
+    if (ms > 25) slowFrames.push({ atMs: now - began, endMs: now, frameMs: ms });
     const replica = lab.client.replica;
     const car = required(replica.serverEntities.find((e) => e.id === lab.client.handles.car));
     distance += Math.hypot(car.position.wx - lastX, car.position.wy - lastY);
@@ -109,7 +110,8 @@ async function run(seconds: number) {
     if (now - began >= checkpoints.length * 1000) checkpoints.push(state());
     last = now;
   }
-  const performance = lab.samplePerformance();
+  performance.mark("tilefun.driving.end", { startTime: last });
+  const timings = lab.samplePerformance();
   // Pause acknowledges the authority and applies its final snapshot. Cadence
   // ends above; the fence/diagnostic round trip is never timed as a display frame.
   await pause();
@@ -125,7 +127,8 @@ async function run(seconds: number) {
     frames,
     slowFrames,
     elapsedMs: last - began,
-    performance,
+    pageClock: { startMs: began, endMs: last, timeOriginMs: globalThis.performance.timeOrigin },
+    performance: timings,
     physics,
     physicsBefore,
     presentation: lab.getDiagnostics(),
@@ -141,7 +144,7 @@ for (let i = 0; i < DRIVING_WARMUP_TICKS; i++) await lab.client.step(DRIVING_IDL
 await wait(1500);
 Object.assign(window, {
   __drivingBench: {
-    measurementVersion: "idle-cadence-and-poses-v1",
+    measurementVersion: "idle-cadence-and-poses-v2",
     recipe,
     state,
     run,
