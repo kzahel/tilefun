@@ -21,6 +21,13 @@ import type { World } from "../world/World.js";
 import { predictionGeometry } from "./PredictionGeometry.js";
 import { PredictionHistory } from "./PredictionHistory.js";
 import {
+  clonePredictionEntity as clone,
+  predictionDistance as distance,
+  type ReplayPose,
+  replayPose,
+} from "./PredictionSnapshots.js";
+import { PredictionWork } from "./PredictionWork.js";
+import {
   CoSeats,
   hasMovement,
   normalizedMovement,
@@ -98,42 +105,6 @@ interface Replay {
   inputs: StoredInput[];
   seats: SeatReplay;
 }
-interface ReplayPose {
-  x: number;
-  y: number;
-  z: number;
-  prevX: number;
-  prevY: number;
-  prevZ: number;
-}
-function replayPose(entity: Entity): ReplayPose {
-  return {
-    x: entity.position.wx,
-    y: entity.position.wy,
-    z: entity.wz ?? 0,
-    prevX: entity.prevPosition?.wx ?? entity.position.wx,
-    prevY: entity.prevPosition?.wy ?? entity.position.wy,
-    prevZ: entity.prevWz ?? entity.wz ?? 0,
-  };
-}
-function clone(entity: Entity): Entity {
-  return {
-    ...entity,
-    position: { ...entity.position },
-    velocity: entity.velocity && { ...entity.velocity },
-    collider: entity.collider && { ...entity.collider },
-    sprite: entity.sprite && { ...entity.sprite },
-    wanderAI: entity.wanderAI && { ...entity.wanderAI },
-    ...(entity.tags ? { tags: new Set(entity.tags) } : {}),
-  };
-}
-function distance(a: Entity, b: Entity) {
-  return Math.hypot(
-    a.position.wx - b.position.wx,
-    a.position.wy - b.position.wy,
-    (a.wz ?? 0) - (b.wz ?? 0),
-  );
-}
 
 /** One bounded private copy of the ordinary fixed-step kernel. Inputs address
  * local ticks; an acknowledged snapshot anchors that clock to an authority tick.
@@ -141,6 +112,7 @@ function distance(a: Entity, b: Entity) {
  */
 export class PlayerPredictor {
   private scene: PhysicsScene | undefined;
+  private readonly work = new PredictionWork();
   private initialization: Promise<void> | undefined;
   private generation = 0;
   private predicted: Entity | null = null;
@@ -208,6 +180,7 @@ export class PlayerPredictor {
     return this.initialization;
   }
   reset(player: Entity, mount?: Entity): void {
+    this.work.record("resets");
     this.scene?.clear();
     void this.ready;
     this.predicted = clone(player);
@@ -244,6 +217,7 @@ export class PlayerPredictor {
     this.diagnostics = null;
   }
   clearPredicted(): void {
+    this.work.record("clears");
     this.generation++;
     this.scene?.dispose();
     this.scene = undefined;
@@ -269,6 +243,7 @@ export class PlayerPredictor {
   /** `seats` carries every co-seat's movement, idle or not, under the same sequence (226). */
   storeInput(seq: number, movement: Movement, _dt: number, seats?: SeatMovements): void {
     if (!this.predicted || seq <= Math.max(this.latestSeq, this.receivedAck)) return;
+    this.work.record("inputs");
     this.latestSeq = seq;
     this.inputTick++;
     const co = this.coSeats.store(seats);
@@ -308,6 +283,7 @@ export class PlayerPredictor {
         (timing?.serverTick !== undefined && timing.serverTick < this.receivedServerTick))
     )
       return;
+    this.work.record("reconciliations");
     if (this.epoch !== undefined && this.epoch !== state.epoch) {
       this.retiredEpochs.add(this.epoch);
       if (this.retiredEpochs.size > 8) {
@@ -399,6 +375,8 @@ export class PlayerPredictor {
     const kinds = new Map(state.bodies.map((b) => [b.id, b.kind]));
     scene.synchronize([...this.bodies.values()], kinds);
     scene.restore(state);
+    this.work.record("restores");
+    this.work.record("restoredBodies", state.bodies.length);
     this.motorIntents = new Map(
       state.bodies.map((body) => [
         body.id,
@@ -462,7 +440,7 @@ export class PlayerPredictor {
       this.step({ ...movement, jumpPressed }, job.request.player, job.seats.take());
     } else {
       // No new local command is due: continue the snapshot's held motor targets.
-      scene.step(this.motorIntents, this.geometry, this.gravity());
+      this.work.step(scene, this.motorIntents, this.geometry, this.gravity(), true);
     }
   }
   private captureReplayComparison(job: Replay) {
@@ -587,7 +565,7 @@ export class PlayerPredictor {
       ...intent,
       controlUntil: scene.physicsTick + CONTROL_HOLD_TICKS,
     });
-    scene.step(this.motorIntents, this.geometry, this.gravity());
+    this.work.step(scene, this.motorIntents, this.geometry, this.gravity(), !!this.replay);
     updatePlayerSpriteFromInput(this.bodies.get(player.id) ?? player, movement);
   }
   private samplePlayer(authority: Entity): Entity {
@@ -969,6 +947,10 @@ export class PlayerPredictor {
   /** Committed predicted body pose and its physics tick (multi-seat diagnostics). */
   publishedBody(id: number): { tick: number | undefined; body: Entity | undefined } {
     return { tick: this.publishedPhysicsTick, body: this.published.get(id) };
+  }
+  /** Start/reset an explicit work window, or stop and snapshot it (the default). */
+  sampleWork(start = false) {
+    return this.work.sample(start);
   }
   get lastReconcileDiagnostics() {
     return this.diagnostics;

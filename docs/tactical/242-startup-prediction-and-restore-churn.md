@@ -130,3 +130,7 @@ large buckets include remote presentation, projected decals and body transforms;
 optimize them only with equal-work comparisons. Keep startup collision preparation
 and unrelated browser pauses separate; this change claims neither zero GC nor
 universal hitch-free driving.
+
+Follow-up: [243](243-client-prediction-work-counters.md) delivers v3 client work
+counters. New repeats pass the old gate but expose substantially different client
+physics work; these counts cannot be reconstructed for the older records above.

@@ -7,6 +7,11 @@ input; it owns no physics kernel or simulation clock. A recipe can opt into a
 fixed vehicle population while retaining ordinary autonomous traffic decisions.
 The normal game and other recipes keep their existing population policy.
 
+[243](../tactical/243-client-prediction-work-counters.md) adds cadence-only client
+work windows on the shared predictor for driving diagnostics. These counters are
+separate from Worker authority metrics and exclude the pause fence; no lab-owned
+physics kernel or clock is introduced.
+
 ## Labs on the game's Worker runtime (226 slice 3c, 2026-11-08)
 
 Every Workshop lab except the two-pane physics lab now runs on the game's own

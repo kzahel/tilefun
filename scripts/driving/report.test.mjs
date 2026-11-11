@@ -1,7 +1,23 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { assertComparable, qualify, summarize } from "./report.mjs";
+import { assertWorkComparable } from "./work.mjs";
 
+const work = () => ({
+  inputs: 1800,
+  reconciliations: 1800,
+  restores: 1800,
+  restoredBodies: 1800,
+  forwardSteps: 1800,
+  replaySteps: 600,
+  worldSteps: 2400,
+  bodyReads: 2400,
+  motorUpdates: 2400,
+  wheelQueries: 9600,
+  geometryBuilds: 16,
+  resets: 1,
+  clears: 0,
+});
 const state = { tick: 180, x: 0, y: 32, speed: 0, seated: true, vehicles: 1 };
 const sample = () => ({
   start: { ...state },
@@ -9,6 +25,7 @@ const sample = () => ({
   checkpoints: [],
   distance: 3300,
   maxLateral: 0,
+  predictionWork: work(),
   physics: { collision: { wheelQueries: 8000 } },
   physicsBefore: { collision: { wheelQueries: 720 } },
 });
@@ -52,20 +69,37 @@ test("comparisons reject changed workloads, instrumentation and materially diffe
     fixtures: ["clear"],
     zoomOverride: "",
     errors: [],
+    measurementVersion: "prediction-work-v3",
     cells: [
       {
         fixture: "clear",
         trial: 0,
         recipeSha256: "recipe",
         distance: 3300,
+        predictionWork: work(),
         qualification: { valid: true, ticks: 1800 },
         start: { poses: [] },
       },
     ],
   });
   assert.doesNotThrow(() => assertComparable(report(), report()));
+  const heapBefore = report(),
+    heapAfter = report();
+  for (const r of [heapBefore, heapAfter]) {
+    r.allocationSampled = true;
+    r.cells[0].performance = { "lab.update": { count: 1800 }, "lab.render": { count: 1800 } };
+  }
+  assert.doesNotThrow(() => assertComparable(heapBefore, heapAfter));
+  heapAfter.cells[0].performance["lab.render"].count = 1200;
+  assert.throws(() => assertComparable(heapBefore, heapAfter), /lab.render.*counts differ/);
   for (const mutate of [
     (r) => (r.headed = false),
+    (r) => delete r.cells[0].predictionWork,
+    (r) => (r.cells[0].predictionWork.bodyReads *= 2),
+    (r) => (r.cells[0].predictionWork.restoredBodies *= 2),
+    (r) => r.cells[0].predictionWork.resets++,
+    (r) => r.cells[0].predictionWork.replaySteps++, // disagrees with total physics steps
+    (r) => (r.measurementVersion = "idle-cadence-and-poses-v2"),
     (r) => (r.pacing = "throughput"),
     (r) => (r.allocationSampled = true),
     (r) => (r.profiled = true),
@@ -81,4 +115,41 @@ test("comparisons reject changed workloads, instrumentation and materially diffe
     assert.throws(() => assertComparable(report(), changed));
   }
   assert.deepEqual(summarize([1, 2, 3, 100]), { count: 4, p50: 3, p95: 100, p99: 100, max: 100 });
+});
+
+test("client work validation catches omissions and comparisons allow small live scheduling variation", () => {
+  const valid = sample();
+  assert.doesNotThrow(() =>
+    assertWorkComparable(
+      { ...work(), forwardSteps: 3, replaySteps: 2397 },
+      { ...work(), forwardSteps: 20, replaySteps: 2380 },
+    ),
+  );
+  assert.equal(
+    qualify("clear", {
+      ...valid,
+      predictionWork: { ...work(), reconciliations: 0, restores: 1, restoredBodies: 1 },
+    }).valid,
+    true,
+  ); // accepted before the window
+  assert.doesNotThrow(() =>
+    assertWorkComparable(work(), {
+      ...work(),
+      replaySteps: 602,
+      worldSteps: 2402,
+      bodyReads: 2402,
+    }),
+  );
+  assert.throws(() =>
+    assertWorkComparable(work(), { ...work(), replaySteps: 1200, worldSteps: 3000 }),
+  );
+  for (const bad of [
+    undefined,
+    { ...work(), bodyReads: NaN },
+    { ...work(), inputs: -1 },
+    { ...work(), restores: 1801 },
+    { ...work(), worldSteps: 0, forwardSteps: 0, replaySteps: 0 },
+  ]) {
+    assert.equal(qualify("clear", { ...valid, predictionWork: bad }).valid, false);
+  }
 });

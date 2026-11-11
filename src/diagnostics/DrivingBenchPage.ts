@@ -96,6 +96,7 @@ async function run(seconds: number) {
   let last = await new Promise<number>(requestAnimationFrame);
   const began = last;
   performance.mark("tilefun.driving.start", { startTime: began });
+  lab.client.predictor.sampleWork(true);
   driving = true;
   paused = false;
   while (last - began < seconds * 1000) {
@@ -114,6 +115,7 @@ async function run(seconds: number) {
     last = now;
   }
   performance.mark("tilefun.driving.end", { startTime: last });
+  const predictionWork = lab.client.predictor.sampleWork();
   const timings = lab.samplePerformance();
   // Pause acknowledges the authority and applies its final snapshot. Cadence
   // ends above; the fence/diagnostic round trip is never timed as a display frame.
@@ -134,6 +136,7 @@ async function run(seconds: number) {
     performance: timings,
     physics,
     physicsBefore,
+    predictionWork,
     presentation: lab.getDiagnostics(),
   };
 }
@@ -147,7 +150,7 @@ for (let i = 0; i < DRIVING_WARMUP_TICKS; i++) await lab.client.step(DRIVING_IDL
 await wait(1500);
 Object.assign(window, {
   __drivingBench: {
-    measurementVersion: "idle-cadence-and-poses-v2",
+    measurementVersion: "prediction-work-v3",
     recipe,
     state,
     run,

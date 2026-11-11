@@ -212,6 +212,31 @@ runs miss one interval each in both lanes, and startup updates still reach
 win or startup fix is claimed. Next add cumulative client prediction-step/body-read
 counts, then compare remaining presentation/decal churn at equal work.
 
+## Client prediction work accounting (2026-11-11)
+
+[243](../tactical/243-client-prediction-work-counters.md) adds opt-in scalar
+`PlayerPredictor.sampleWork` accounting and `prediction-work-v3` driving records.
+Counts cover cadence only, including executed unfinished/cancelled replay; they
+survive scene resets and exclude the final pause fence. Replay-job steps include
+extension by newly admitted input. Restores/bodies, reads, motor/wheel work and
+geometry builds are counted separately from the authority Worker.
+
+Comparisons reject materially different client work, lifecycle fences and (for
+heap samples) update/render counts. Old v2 records lack these measurements and
+must be rerun. All 12 new physical Pixel 7a cells qualify, but all three full
+pairs pass the old authority/distance gate and fail the new client-work gate.
+One clear pair executes **1,192 → 1,755 client steps (+47%) for 600 authority ticks
+each**; a jam pair executes **1,194 → 1,613 (+35%)**. This demonstrates a source of
+noise the earlier allocation records did not measure, without retrospectively
+attributing those old samples.
+
+Only one prescribed jam heap pair passes per-fixture work compatibility:
+388.5 → 379.5 MiB (~2.3% lower), alongside 1,226 → 1,193 client steps (~2.7% lower).
+No reliable whole-game gain follows from that single tolerated difference. Next
+attribute/control the replay horizon/delivery work and use fixed-work allocation
+replay before tackling small presentation/decal savings. Live cadence stays a
+separate check; the counters change no prediction policy or GC behavior.
+
 ## Crowd bench (2026-11-10)
 
 `npm run crowd:bench` is the repeatable crowd workload: 1,000 rabbits and 50

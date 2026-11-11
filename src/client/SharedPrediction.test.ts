@@ -1,8 +1,9 @@
-import { afterEach, expect, it } from "vitest";
+import { afterEach, expect, it, vi } from "vitest";
 import { createChicken } from "../entities/Chicken.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
+import { PhysicsScene } from "../physics/PhysicsScene.js";
 import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
@@ -80,6 +81,81 @@ async function setup(recipe?: ScenarioRecipe) {
     now: () => now,
   };
 }
+
+it("counts executed client work through unfinished replay, reset and scene replacement only inside its window", async () => {
+  const f = await setup(),
+    authority = f.s.realm.physicsScene,
+    step = vi.spyOn(PhysicsScene.prototype, "step"),
+    restore = vi.spyOn(PhysicsScene.prototype, "restore");
+  try {
+    f.input(2, { ...idle, dx: 1 });
+    expect(Object.values(f.predictor.sampleWork()).every((n) => n === 0)).toBe(true);
+    const original = step.mock.contexts.find(
+      (s): s is PhysicsScene => s instanceof PhysicsScene && s !== authority,
+    );
+    if (!original) throw Error("Expected an unmeasured prediction step");
+    const before = { ...original.metrics };
+    step.mockClear();
+    restore.mockClear();
+    f.predictor.sampleWork(true);
+    for (let seq = 3; seq <= 80; seq++) f.input(seq, { ...idle, dx: 1 });
+    f.s.tick();
+    f.receive(f.s.frames());
+    f.predictor.update(PHYSICS_DT, idle, f.view.world, f.view.props, f.view.serverEntities);
+    expect(f.predictor.recoveryDiagnostics.status).toBe("replaying");
+    // Cancel that partial replay, then replace the private scene: neither event
+    // may lose work already executed in the same diagnostic window.
+    f.predictor.reset(f.view.serverPlayerEntity);
+    f.receive(f.s.frames());
+    f.input(81, idle);
+    f.predictor.clearPredicted();
+    await f.predictor.ready;
+    f.predictor.reset(f.view.serverPlayerEntity);
+    f.receive(f.s.frames());
+    f.input(82, idle);
+    f.predictor.storeInput(82, idle, PHYSICS_DT); // duplicate is not admitted input
+    const work = f.predictor.sampleWork();
+    const scenes = new Set(
+      step.mock.contexts.filter(
+        (s): s is PhysicsScene => s instanceof PhysicsScene && s !== authority,
+      ),
+    );
+    const delta = (
+      key: "worldSteps" | "bodyReads" | "motorUpdates" | "wheelQueries" | "geometryBuilds",
+    ) =>
+      [...scenes].reduce(
+        (n, s) => n + s.metrics[key] - (s === original ? (before?.[key] ?? 0) : 0),
+        0,
+      );
+    expect(work.inputs).toBe(80);
+    expect(work.replaySteps).toBeGreaterThan(0);
+    expect(work.forwardSteps).toBeGreaterThan(0);
+    expect(work.worldSteps).toBe(work.forwardSteps + work.replaySteps);
+    expect(work.worldSteps).toBe(step.mock.contexts.filter((s) => s !== authority).length);
+    for (const key of [
+      "worldSteps",
+      "bodyReads",
+      "motorUpdates",
+      "wheelQueries",
+      "geometryBuilds",
+    ] as const)
+      expect(work[key]).toBe(delta(key));
+    const restored = restore.mock.calls.filter((_, i) => restore.mock.contexts[i] !== authority);
+    expect(work.restores).toBe(restored.length);
+    expect(work.restoredBodies).toBe(restored.reduce((n, [state]) => n + state.bodies.length, 0));
+    expect(work.resets).toBe(2);
+    expect(work.clears).toBe(1);
+    f.input(83, idle);
+    expect(f.predictor.sampleWork()).toEqual(work); // stop excludes subsequent fence/work
+    const fresh = f.predictor.sampleWork(true);
+    expect(Object.values(fresh).every((n) => n === 0)).toBe(true);
+    fresh.inputs = 999;
+    expect(f.predictor.sampleWork().inputs).toBe(0); // snapshots cannot mutate accounting
+  } finally {
+    step.mockRestore();
+    restore.mockRestore();
+  }
+});
 
 it("uses the ordinary shared kernel to predict contacts, with a fixed tick independent of command duration", async () => {
   const f = await setup(),

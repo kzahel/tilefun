@@ -1,3 +1,5 @@
+import { assertWorkComparable, workProblem } from "./work.mjs";
+
 export function summarize(values) {
   const sorted = [...values].sort((a, b) => a - b);
   const at = (p) => sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * p))] ?? null;
@@ -15,6 +17,8 @@ export function qualify(fixture, sample) {
       reasons.push(`expected ${expectedCars} vehicles, got ${state.vehicles}`);
   }
   if (!(ticks > 0)) reasons.push("authority did not advance");
+  const problem = workProblem(sample.predictionWork);
+  if (problem) reasons.push(problem);
   if (fixture === "clear") {
     // From rest at 112 px/s, allowing acceleration, transport fences and modest
     // suspension drag. Normalize by actual simulated ticks, never wall seconds.
@@ -73,6 +77,16 @@ export function assertComparable(before, after) {
       if (!a || a.name !== b.name || Math.hypot(a.x - b.x, a.y - b.y, a.z - b.z) > 1)
         throw Error("Incompatible driving reports: initial poses differ");
     }
+    assertWorkComparable(old.predictionWork, cell.predictionWork);
+    if (before.allocationSampled)
+      for (const key of ["lab.update", "lab.render"]) {
+        const a = old.performance?.[key]?.count,
+          b = cell.performance?.[key]?.count;
+        if (![a, b].every((n) => Number.isSafeInteger(n) && n > 0))
+          throw Error(`Incompatible driving reports: missing ${key} counts`);
+        if (Math.abs(a - b) > Math.max(a, b) * 0.05)
+          throw Error(`Incompatible driving reports: ${key} counts differ by more than 5%`);
+      }
     const a = old.qualification.ticks,
       b = cell.qualification.ticks;
     // Different authority throughput is itself a result, but a wall-time sample

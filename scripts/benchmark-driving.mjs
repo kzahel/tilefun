@@ -21,6 +21,7 @@ if (process.argv.includes("--help")) {
   --output=/tmp/driving.json --compare=/tmp/before.json --zoom=1
   --pacing=responsive|throughput  Small row batches (default) or ordinary game policy
   --allocations  Separate main-thread allocation sampling run; saves heap profiles
+  Comparisons also require similar client prediction/replay and body work (v3).
   --profile --trace  Main-thread CPU profile (1 ms) and all-thread Chrome trace
   --cdp=http://127.0.0.1:9223 --port=4188 --device=pixel7a
   --base=http://localhost:4174/tilefun  Use a rebuilt production origin
@@ -230,6 +231,9 @@ try {
       console.log(
         `${fixture} trial ${trial + 1}: ${cell.qualification.valid ? "qualified" : "INVALID"}, ${cell.qualification.ticks} ticks, ${cell.distance.toFixed(1)} px; frame p50/p95 ${frames.p50.toFixed(1)}/${frames.p95.toFixed(1)} ms, missed ${cell.missed}/${frames.count}; render ${sample.performance["lab.render"]?.p50Ms.toFixed(2)} ms; wheel queries ${cell.qualification.wheelQueries}`,
       );
+      console.log(
+        `  client: ${sample.predictionWork?.forwardSteps} forward + ${sample.predictionWork?.replaySteps} replay steps; ${sample.predictionWork?.bodyReads} body reads; ${sample.predictionWork?.restoredBodies} bodies restored`,
+      );
       for (const reason of cell.qualification.reasons) console.log(`  ${reason}`);
     }
   const report = {
@@ -253,7 +257,7 @@ try {
     cells,
     errors,
     scope:
-      "Fixed placements and eastward input; wall-time windows with simulation/distance qualification, not a bit-exact live replay. Jam has real autonomous lane decisions and wheel physics. Flat roads pre-admitted before timing; excludes city art, regional generation and persistence. Physics timing percentiles retain the latest 512 samples; counters cover the full cadence window plus its pause fence. Native lab.update/render timers include benchmark input and ordinary presentation. Each cell owns a fresh page/Worker. No frame-rate performance gate.",
+      "Fixed placements and eastward input; wall-time windows with simulation/distance qualification, not a bit-exact live replay. Jam has real autonomous lane decisions and wheel physics. Flat roads pre-admitted before timing; excludes city art, regional generation and persistence. Authority physics timing percentiles retain the latest 512 samples; authority counters include the pause fence. Opt-in client work counters cover only cadence, survive scene resets, and include executed incomplete/cancelled replay. Work comparisons permit 5% or two operations per counter, scale the forward/replay partition by total steps, and require identical reset/clear counts; heap comparisons also require similar update/render counts. Not exact replays. Replay counts all steps inside replay jobs, including extension by newly submitted input. Native lab.update/render timers include benchmark input and ordinary presentation. Each cell owns a fresh page/Worker. No frame-rate performance gate.",
   };
   await writeFile(output, `${JSON.stringify(report, null, 2)}\n`);
   console.log(`Report: ${output}`);

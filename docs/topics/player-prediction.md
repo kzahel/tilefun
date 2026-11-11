@@ -1,5 +1,14 @@
 # Player prediction and moving contacts
 
+[243](../tactical/243-client-prediction-work-counters.md) adds explicit diagnostic
+work windows: `sampleWork(true)` starts/resets, `sampleWork()` stops/snapshots.
+Fixed scalar counts include steps inside replay jobs (new-input extension too),
+restores/bodies, reads, wheel/motor work and geometry. Executed partial/cancelled
+work survives scene resets/replacement; returned records are independent. Ordinary
+play leaves accounting disabled. The v3 driving gate rejects materially different
+client work; live phone repeats expose up to 47% step variation at equal authority
+progress. Simulation clocks, admission and replay policy remain unchanged.
+
 [242](../tactical/242-startup-prediction-and-restore-churn.md) bounds past-tick
 agreement history to 120 recycled position triples instead of whole entity
 clones. It preserves replacement/insertion order and clears on the same resets.
