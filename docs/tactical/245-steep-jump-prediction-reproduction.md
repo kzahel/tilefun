@@ -1,6 +1,7 @@
 # Steep-jump prediction reproduction
 
-Status: numerical landing divergence reproduced, 2026-11-11; runtime unchanged.
+Status: numerical landing divergence reproduced, 2026-11-11; repair and current
+qualification are recorded in [246](246-stable-fast-landing-contacts.md).
 Owner: [player prediction](../topics/player-prediction.md).
 
 The owner reports a large apparent correction driving the F1 car over the

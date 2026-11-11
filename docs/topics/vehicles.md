@@ -1,5 +1,11 @@
 # Vehicles: shared physics baseline
 
+[246](../tactical/246-stable-fast-landing-contacts.md) repairs the F1 sky-jump
+landing correction in shared collision response: a one-pixel chassis bevel and
+a bounded second CCD pass reduce the original same-tick error from 13.56px to
+0.047px. Motors and outer dimensions remain; corner rounding and impact
+substepping change. Game and labs share the repair; owner phone review remains.
+
 [225](../tactical/225-speedway-racers-and-shopping-visits.md) restores speedway racers
 (a durable grid lapping both rings) and shopping visits (a passing road compact
 parks, its shopper walks in and back, and the car rejoins the boulevard). With

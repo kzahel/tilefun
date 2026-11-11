@@ -1,5 +1,13 @@
 # General 3D physics backend
 
+[246](../tactical/246-stable-fast-landing-contacts.md) stabilizes fast chassis
+landings at coplanar slab joins: wheeled bodies keep their outer box dimensions
+with a one-pixel bevel, and the shared world permits at most two CCD substeps
+inside its fixed 1/60s step. This bounds the reproduced replay-induced sideways
+kick without changing suspension, wire state, static volumes or presentation.
+Extra collision work on fast impacts is a correctness tradeoff, not a measured
+phone performance gain.
+
 [224](../tactical/224-shared-physics-towing-and-transporter.md) adds joints:
 replicated tow/carry links become Rapier spherical/fixed impulse joints
 (`VehicleCouplings`) with contacts disabled between each pair. A deployed

@@ -1,5 +1,13 @@
 # Player prediction and moving contacts
 
+[246](../tactical/246-stable-fast-landing-contacts.md) repairs the reproduced
+fast-landing contact instability with a one-pixel wheeled-chassis bevel and
+at most two CCD substeps inside the same shared 60Hz step. The original delayed
+F1 sky-jump error falls from 13.56px / 6.55° to 0.047px / 0.009°; three real
+Worker landing captures stay below 0.61px. No input, history, wire or correction-
+smoothing policy changes. Native same-tick replay regression guards the event;
+owner phone confirmation remains.
+
 [245](../tactical/245-steep-jump-prediction-reproduction.md) reproduces a landing
 disagreement with the open-wheel racer on the shared sky jump: after three idle
 ticks, constant boost and two-tick frame delay produce 13.56 px / 6.55° same-tick

@@ -127,6 +127,9 @@ export class PhysicsScene {
   private constructor() {
     this.world = new RAPIER.World({ x: 0, y: -JUMP_GRAVITY / SCALE, z: 0 });
     this.world.timestep = PHYSICS_DT;
+    // Continue a fast collision's remaining interval instead of leaving the
+    // whole landing velocity for the next tick. The public step stays 1/60 s.
+    this.world.integrationParameters.maxCcdSubsteps = 2;
   }
   static async create() {
     await initializePhysics();

@@ -1,5 +1,10 @@
 # Embedded engine labs
 
+[246](../tactical/246-stable-fast-landing-contacts.md) changes only the common
+PhysicsScene/SceneBody collision setup for stable fast landings. Game Worker,
+RecipeWorldClient labs and the two-pane scenario lab share the one-pixel chassis
+bevel and bounded two-pass CCD; no lab-specific solver or prediction policy.
+
 [239](../tactical/239-repeatable-driving-workloads.md) adds the diagnostic-only
 `driving-bench.html` entry on `LabView`, with clear-road and native traffic-queue
 recipes. It uses the existing Worker/prediction/render host and ordinary movement

@@ -110,10 +110,11 @@ function colliderDesc(
   clearance: number,
   articulated: DumpBedBody | TransporterBody | undefined,
 ) {
-  // Keep the exact outer box footprint, with a fixed subpixel bevel so
-  // the bottom edge clears adjacent ramp/slab seams. CCD resolves actual
+  // Keep the exact outer box footprint. Wheeled chassis need a one-pixel
+  // bevel: the old 0.16px edge could catch a coplanar slab join on landing,
+  // amplifying tiny replay differences into a sideways collision. CCD resolves actual
   // travel instead of soft-CCD's premature face constraint at the seam.
-  const bevel = Math.min(0.01, hx / 4, halfY / 4, hz / 4);
+  const bevel = Math.min(car ? 1 / SCALE : 0.01, hx / 4, halfY / 4, hz / 4);
   const shape =
     entity.type === "ball"
       ? RAPIER.ColliderDesc.ball(Math.min(hx, hz, halfY))
