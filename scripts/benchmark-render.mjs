@@ -17,7 +17,7 @@
 // stress:bench does): it opens only its own tab on the isolated origin served at
 // --port, clears that origin's storage afterwards and leaves the browser running.
 import { execFileSync } from "node:child_process";
-import { mkdir, mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, open, readFile, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import react from "@vitejs/plugin-react";
@@ -50,6 +50,9 @@ const SCENES = {
   city: { arrival: [300, 519], rabbits: 0, cars: 0 },
   crowd: { arrival: [300, 519], rabbits: 1000, cars: 50 },
   woods: { arrival: [-380, -364], rabbits: 0, cars: 0 },
+  // The city again, sampled while driving a car along the street with the throttle
+  // held: streaming, traffic and collision geometry change under the camera.
+  drive: { arrival: [300, 519], rabbits: 0, cars: 0, drive: true },
 };
 const scenes = option("scenes", "city,crowd,woods").split(",");
 for (const name of scenes) if (!SCENES[name]) throw Error(`Unknown scene ${name}`);
@@ -76,6 +79,8 @@ const query = option("query", "");
 // Sample a CPU profile of each cell's main thread and print its top self-time
 // functions. Profiled timings are not the unprofiled baseline.
 const profile = process.argv.includes("--profile");
+// A Chrome trace of each cell (all threads and the GPU process), written beside the report.
+const trace = process.argv.includes("--trace");
 // Optional directory for one screenshot per cell (visual evidence for A/B runs).
 const screenshots = option("screenshots", "");
 
@@ -103,13 +108,47 @@ async function samplePage({ seconds }) {
       : null;
   };
   const stat = (values) => ({ p50: pct(values, 0.5), p95: pct(values, 0.95), max: pct(values, 1) });
+  // What the main thread did inside each frame interval, for the slow ones.
+  const slow = [];
+  // The game's rAF callback runs before this sampler's: the work that made an
+  // interval long was recorded before the previous sampler call.
+  let inFrame = { updateMs: 0, updates: 0, renderMs: 0 },
+    before = inFrame;
+  // Texture bytes and pages uploaded per frame interval (terrain and sprite pages).
+  const uploads = [],
+    uploadCounts = [];
+  let uploaded = game.renderer.surface?.stats?.uploadedBytes ?? 0,
+    uploadCount = game.renderer.surface?.stats?.uploads ?? 0;
   const frameLoop = async (ms, each) => {
     const frames = [];
-    const end = performance.now() + ms;
+    const start = performance.now(),
+      end = start + ms;
     let last = await new Promise(requestAnimationFrame);
+    before = inFrame;
+    inFrame = { updateMs: 0, updates: 0, renderMs: 0 };
     while (last < end) {
       const now = await new Promise(requestAnimationFrame);
       frames.push(now - last);
+      const gpuStats = game.renderer.surface?.stats;
+      uploads.push(((gpuStats?.uploadedBytes ?? 0) - uploaded) / 1024);
+      uploadCounts.push((gpuStats?.uploads ?? 0) - uploadCount);
+      uploaded = gpuStats?.uploadedBytes ?? 0;
+      uploadCount = gpuStats?.uploads ?? 0;
+      if (now - last > 25)
+        slow.push({
+          atMs: Math.round(now - start),
+          // rAF timestamp on the page clock, for locating the frame in a CPU profile.
+          endMs: Math.round(now * 10) / 10,
+          frameMs: Math.round((now - last) * 10) / 10,
+          updateMs: Math.round(before.updateMs * 10) / 10,
+          updates: before.updates,
+          renderMs: Math.round(before.renderMs * 10) / 10,
+          // Uploads in this interval and the two before it: the GPU works behind.
+          uploadKiB: Math.round(uploads.slice(-3).reduce((a, b) => a + b, 0)),
+          uploadPages: uploadCounts.slice(-3).reduce((a, b) => a + b, 0),
+        });
+      before = inFrame;
+      inFrame = { updateMs: 0, updates: 0, renderMs: 0 };
       last = now;
       each?.();
     }
@@ -146,6 +185,8 @@ async function samplePage({ seconds }) {
     const t = performance.now();
     update(dt);
     updates.push(performance.now() - t);
+    inFrame.updateMs += performance.now() - t;
+    inFrame.updates++;
   };
   callbacks.render = (alpha, now) => {
     submitMs = sceneMs = 0;
@@ -154,6 +195,7 @@ async function samplePage({ seconds }) {
     const t = performance.now();
     render(alpha, now);
     renders.push(performance.now() - t);
+    inFrame.renderMs += performance.now() - t;
     if (q) {
       gl.endQuery(timer.TIME_ELAPSED_EXT);
       pending.push(q);
@@ -166,7 +208,18 @@ async function samplePage({ seconds }) {
   let frames;
   const finish = [];
   try {
+    const driven = window.__driven?.();
     frames = await frameLoop(seconds * 1000, poll);
+    // Distance within the cadence window only (not warm-up or the finish window).
+    const drivenPx = driven === undefined ? undefined : window.__driven() - driven;
+    const slowFrames = slow.splice(0);
+    const uploadFrames = uploads.filter((kib) => kib > 0);
+    const upload = {
+      frames: uploadFrames.length,
+      kiB: stat(uploadFrames),
+      pages: uploadCounts.reduce((a, b) => a + b, 0),
+      totalMiB: Math.round((uploads.reduce((a, b) => a + b, 0) / 1024) * 10) / 10,
+    };
     for (const q of pending) gl.deleteQuery(q);
     const draws = stats ? (stats.drawCalls - draws0) / Math.max(1, renders.length) : null;
     // Separate window: blocking on the GPU distorts cadence, so it never shares
@@ -187,6 +240,9 @@ async function samplePage({ seconds }) {
       frameMs: stat(frames),
       // Frames longer than 1.5× the median interval missed the display cadence.
       missed: frames.filter((f) => f > cadence * 1.5).length,
+      slowFrames,
+      upload,
+      drivenPx,
       renderMs: stat(renders),
       submitMs: stat(submits),
       sceneSubmitMs: stat(scene),
@@ -273,6 +329,127 @@ async function workerProfiler(cdp) {
     },
   };
 }
+
+const playerAt = (page) =>
+  page.evaluate(() => {
+    const p = document.querySelector("#game").__game.stateView.serverPlayerEntity;
+    return { x: p.position.wx, y: p.position.wy, parent: p.parentId ?? null };
+  });
+
+/** Runs in the page: keep the player's car on the streets with the throttle held.
+ * Follows road tiles straight on, turns where the road ends, and turns round when
+ * stuck (backed-up traffic, a kerb). Steering-mode keys: Up throttle, Left/Right steer. */
+function autopilot() {
+  const g = document.querySelector("#game").__game;
+  const held = new Set();
+  const key = (name, down) => {
+    if (held.has(name) === down) return;
+    if (down) held.add(name);
+    else held.delete(name);
+    window.dispatchEvent(
+      new KeyboardEvent(down ? "keydown" : "keyup", { key: name, code: name, bubbles: true }),
+    );
+  };
+  const DIRS = [
+    [1, 0],
+    [0, 1],
+    [-1, 0],
+    [0, -1],
+  ];
+  const road = (x, y, d, from, to) => {
+    for (let i = from; i <= to; i++)
+      if (
+        !g.stateView.world.getRoadAt(Math.floor(x / 16) + d[0] * i, Math.floor(y / 16) + d[1] * i)
+      )
+        return false;
+    return true;
+  };
+  let dir = -1,
+    stuck = 0,
+    path = 0,
+    last;
+  const timer = setInterval(() => {
+    const p = g.stateView.serverPlayerEntity;
+    const car = g.stateView.serverEntities.find((e) => e.id === p.parentId);
+    if (!car) return;
+    const { wx: x, wy: y } = car.position,
+      heading = car.vehicleHeading ?? 0;
+    if (last) path += Math.hypot(x - last.x, y - last.y);
+    const moved = last ? Math.hypot(x - last.x, y - last.y) : 9;
+    last = { x, y };
+    if (dir < 0) dir = ((Math.round(heading / (Math.PI / 2)) % 4) + 4) % 4;
+    stuck = moved < 0.5 ? stuck + 1 : 0;
+    const open = (d) => road(x, y, DIRS[d], 2, 7);
+    if (stuck > 20) {
+      // Two seconds without progress: take any other open street, else turn round.
+      dir = [1, 3, 2].map((turn) => (dir + turn) % 4).find(open) ?? (dir + 2) % 4;
+      stuck = 0;
+    } else if (!open(dir)) dir = [1, 3].map((turn) => (dir + turn) % 4).find(open) ?? dir;
+    // Keep to the middle of the right-hand half of the road, like the traffic.
+    const side = DIRS[(dir + 1) % 4],
+      span = (sign) => {
+        let n = 0;
+        while (n < 10 && road(x, y, [side[0] * sign, side[1] * sign], n + 1, n + 1)) n++;
+        return n;
+      };
+    const right = span(1),
+      left = span(-1);
+    const offset = ((right - left) / 2 + (right + left + 1) / 4) * 16;
+    const want = dir * (Math.PI / 2) + Math.max(-0.5, Math.min(0.5, offset / 48));
+    const error = Math.atan2(Math.sin(want - heading), Math.cos(want - heading));
+    key("ArrowRight", error > 0.06);
+    key("ArrowLeft", error < -0.06);
+    key("ArrowUp", true);
+  }, 100);
+  window.__driven = () => Math.round(path);
+  window.__autopilot = () => {
+    clearInterval(timer);
+    for (const name of [...held]) key(name, false);
+    window.__driven = undefined;
+  };
+}
+
+/** Sit in a car beside the player (spawning one the first time) and start driving. */
+async function startDriving(page) {
+  if ((await playerAt(page)).parent === null) {
+    await page.evaluate(() => {
+      const g = document.querySelector("#game").__game;
+      const p = g.stateView.serverPlayerEntity.position;
+      g.transport.send({ type: "set-editor-mode", enabled: true });
+      g.transport.send({
+        type: "edit-spawn",
+        entityType: "vehicle-v1:compact-1",
+        wx: p.wx + 40,
+        wy: p.wy,
+      });
+      g.transport.send({ type: "set-editor-mode", enabled: false });
+    });
+    const car = () => {
+      const g = document.querySelector("#game").__game;
+      const p = g.stateView.serverPlayerEntity.position;
+      return g.stateView.serverEntities.find(
+        (e) =>
+          e.type === "vehicle-v1:compact-1" &&
+          Math.hypot(e.position.wx - p.wx - 40, e.position.wy - p.wy) < 24,
+      )?.id;
+    };
+    await page.waitForFunction(car, undefined, { timeout: 20_000 });
+    const entityId = await page.evaluate(car);
+    await page.evaluate((entityId) => {
+      const g = document.querySelector("#game").__game;
+      g.transport.send({ type: "enter-vehicle", requestId: g.nextRequestId++, entityId });
+    }, entityId);
+    await page.waitForFunction(
+      () => document.querySelector("#game").__game.stateView.serverPlayerEntity.parentId != null,
+      undefined,
+      { timeout: 20_000 },
+    );
+  }
+  await page.evaluate(autopilot);
+  // Up to speed before the sample begins.
+  await page.waitForTimeout(1500);
+}
+const stopDriving = (page) => page.evaluate(() => window.__autopilot());
 
 const idleShare = (top) => top.find((row) => row.name.startsWith("(idle)"))?.percent ?? 0;
 
@@ -453,6 +630,16 @@ try {
         )
         .catch(() => {});
       await page.waitForTimeout(1500);
+      if (scene.drive) await startDriving(page);
+      let traced;
+      if (trace) {
+        traced = new Promise((resolve) => cdp.on("Tracing.tracingComplete", resolve));
+        await cdp.send("Tracing.start", {
+          transferMode: "ReturnAsStream",
+          categories:
+            "devtools.timeline,toplevel,blink.user_timing,cc,viz,gpu,v8,benchmark,disabled-by-default-devtools.timeline,disabled-by-default-devtools.timeline.frame,disabled-by-default-v8.gc",
+        });
+      }
       if (profile) {
         await cdp.send("Profiler.enable");
         await cdp.send("Profiler.setSamplingInterval", { interval: 200 });
@@ -465,7 +652,21 @@ try {
         placed,
         ...(await page.evaluate(samplePage, { seconds })),
       };
-      if (profile) cell.profile = topSelfTime((await cdp.send("Profiler.stop")).profile);
+      if (scene.drive) await stopDriving(page);
+      // Profilers stop before the trace is downloaded: the transfer is not the scene.
+      if (profile) {
+        const main = (await cdp.send("Profiler.stop")).profile;
+        cell.profile = topSelfTime(main);
+        // Monotonic seconds at navigation start: profile timestamps use that clock.
+        await cdp.send("Performance.enable");
+        const { metrics } = await cdp.send("Performance.getMetrics");
+        cell.navigationStartS = metrics.find((m) => m.name === "NavigationStart")?.value;
+        if (output)
+          await writeFile(
+            `${output.replace(/\.json$/, "")}.${name}-${zoom}.main.cpuprofile`,
+            JSON.stringify(main),
+          );
+      }
       const workerProfiles = (await workers?.stop()) ?? [];
       // The busiest Worker is the authority; idle ones only wait for messages.
       const busiest = workerProfiles
@@ -479,6 +680,21 @@ try {
             JSON.stringify(busiest.p),
           );
       }
+      if (traced) {
+        await cdp.send("Tracing.end");
+        const { stream } = await traced;
+        // Browser traces can contain unrelated browser metadata: keep them local.
+        const file = await open(`${output.replace(/\.json$/, "")}.${name}-${zoom}.trace.json`, "w");
+        for (;;) {
+          const chunk = await cdp.send("IO.read", { handle: stream, size: 1024 * 1024 });
+          await file.writeFile(
+            chunk.base64Encoded ? Buffer.from(chunk.data, "base64") : chunk.data,
+          );
+          if (chunk.eof) break;
+        }
+        await file.close();
+        await cdp.send("IO.close", { handle: stream });
+      }
       cells.push(cell);
       for (const row of cell.profile ?? [])
         console.log(`    ${String(row.percent).padStart(5)}%  ${row.name}`);
@@ -491,6 +707,14 @@ try {
         .filter(([stage]) => stage !== "server.tick")
         .map(([stage, t]) => `${stage.replace(/^(realm|server)\./, "")} ${t.p50}`);
       if (stages.length) console.log(`    authority stages p50 ms: ${stages.join(", ")}`);
+      if (scene.drive)
+        console.log(
+          `    drove ${cell.drivenPx} px; worst frame ${cell.frameMs.max} ms; uploads ${cell.upload.totalMiB} MiB in ${cell.upload.pages} pages over ${cell.upload.frames} frames (KiB per uploading frame p50 ${cell.upload.kiB.p50}, max ${cell.upload.kiB.max})`,
+        );
+      for (const f of cell.slowFrames.slice(0, 14))
+        console.log(
+          `    slow frame at ${f.atMs} ms: ${f.frameMs} ms (update ${f.updateMs} in ${f.updates}, render ${f.renderMs}, uploads ${f.uploadPages} pages ${f.uploadKiB} KiB)`,
+        );
       console.log(
         `${name.padEnd(6)} ${String(zoom).padEnd(5)} frame ${cell.frameMs.p50}/${cell.frameMs.p95} ms, missed ${cell.missed}/${cell.frames}; render ${cell.renderMs.p50}/${cell.renderMs.p95} (submit ${cell.submitMs.p50}); gpu ${g}; render+finish ${cell.renderFinishMs?.p50}; update ${cell.updateMs.p50}; draws ${cell.drawCallsPerFrame}; tick ${cell.workerTickMs?.p50 ?? "?"}; ${cell.entities} entities`,
       );

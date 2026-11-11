@@ -1,0 +1,622 @@
+{
+ "description": "Pixel 7a (Chrome 156, Vite dev modules, seed-2026 city): `npm run render:bench -- --cdp=... --scenes=drive --zooms=1 --seconds=30`. A car driven by the bench's street autopilot with the throttle held; before (085fe6fc) and after runs alternated. Runs where the car was held up in traffic (drivenPx under 1,000) upload little and miss little either way. 'afterFinal' are two further runs of the committed code. Steady scenes on the same phone, one run each, are in 'steadyScenes'. In these runs drivenPx also counts the 1.5 s warm-up and the 2 s finish window (about 33.5 s in all); the bench now reports the distance within the 30 s cadence window only.",
+ "before": [
+  {
+   "drivenPx": 2748,
+   "frames": 1782,
+   "missed": 15,
+   "frameMs": {
+    "p50": 16.7,
+    "p95": 16.8,
+    "max": 50.1
+   },
+   "renderMs": {
+    "p50": 3.4,
+    "p95": 5.4,
+    "max": 50.8
+   },
+   "updateMs": {
+    "p50": 2.4,
+    "p95": 3.5,
+    "max": 6.2
+   },
+   "upload": {
+    "frames": 27,
+    "kiB": {
+     "p50": 512,
+     "p95": 4096,
+     "max": 7168
+    },
+    "pages": 37,
+    "totalMiB": 34.5
+   },
+   "workerTickMs": {
+    "p50": 4.5,
+    "p95": 10.1
+   }
+  },
+  {
+   "drivenPx": 2283,
+   "frames": 1783,
+   "missed": 15,
+   "frameMs": {
+    "p50": 16.7,
+    "p95": 16.8,
+    "max": 49.9
+   },
+   "renderMs": {
+    "p50": 3.6,
+    "p95": 5.3,
+    "max": 44.3
+   },
+   "updateMs": {
+    "p50": 2.8,
+    "p95": 3.9,
+    "max": 6.9
+   },
+   "upload": {
+    "frames": 18,
+    "kiB": {
+     "p50": 672,
+     "p95": 4096,
+     "max": 4096
+    },
+    "pages": 23,
+    "totalMiB": 17.2
+   },
+   "workerTickMs": {
+    "p50": 4.7,
+    "p95": 7.9
+   }
+  },
+  {
+   "drivenPx": 2728,
+   "frames": 1784,
+   "missed": 12,
+   "frameMs": {
+    "p50": 16.7,
+    "p95": 16.8,
+    "max": 66.7
+   },
+   "renderMs": {
+    "p50": 3.5,
+    "p95": 5.4,
+    "max": 75.9
+   },
+   "updateMs": {
+    "p50": 2.7,
+    "p95": 3.8,
+    "max": 5.1
+   },
+   "upload": {
+    "frames": 22,
+    "kiB": {
+     "p50": 528,
+     "p95": 4096,
+     "max": 7168
+    },
+    "pages": 34,
+    "totalMiB": 23.1
+   },
+   "workerTickMs": {
+    "p50": 4.5,
+    "p95": 8.5
+   }
+  },
+  {
+   "drivenPx": 258,
+   "frames": 1797,
+   "missed": 1,
+   "frameMs": {
+    "p50": 16.7,
+    "p95": 16.7,
+    "max": 66.7
+   },
+   "renderMs": {
+    "p50": 3.8,
+    "p95": 5.1,
+    "max": 62.5
+   },
+   "updateMs": {
+    "p50": 2.8,
+    "p95": 3.7,
+    "max": 6.7
+   },
+   "upload": {
+    "frames": 11,
+    "kiB": {
+     "p50": 1024,
+     "p95": 4096,
+     "max": 4096
+    },
+    "pages": 12,
+    "totalMiB": 12.2
+   },
+   "workerTickMs": {
+    "p50": 4.2,
+    "p95": 8.2
+   }
+  }
+ ],
+ "after": [
+  {
+   "drivenPx": 262,
+   "frames": 1799,
+   "missed": 1,
+   "frameMs": {
+    "p50": 16.7,
+    "p95": 16.8,
+    "max": 33.2
+   },
+   "renderMs": {
+    "p50": 4.1,
+    "p95": 5.5,
+    "max": 9.8
+   },
+   "updateMs": {
+    "p50": 2.9,
+    "p95": 3.8,
+    "max": 6.6
+   },
+   "upload": {
+    "frames": 15,
+    "kiB": {
+     "p50": 512,
+     "p95": 1024,
+     "max": 1024
+    },
+    "pages": 17,
+    "totalMiB": 7.8
+   },
+   "workerTickMs": {
+    "p50": 5.1,
+    "p95": 8.7
+   }
+  },
+  {
+   "drivenPx": 2310,
+   "frames": 1800,
+   "missed": 0,
+   "frameMs": {
+    "p50": 16.7,
+    "p95": 16.8,
+    "max": 17
+   },
+   "renderMs": {
+    "p50": 4,
+    "p95": 5.8,
+    "max": 17.4
+   },
+   "updateMs": {
+    "p50": 3,
+    "p95": 4.1,
+    "max": 6.6
+   },
+   "upload": {
+    "frames": 26,
+    "kiB": {
+     "p50": 512,
+     "p95": 1024,
+     "max": 1024
+    },
+    "pages": 33,
+    "totalMiB": 10.9
+   },
+   "workerTickMs": {
+    "p50": 5.7,
+    "p95": 9
+   }
+  },
+  {
+   "drivenPx": 3044,
+   "frames": 1800,
+   "missed": 0,
+   "frameMs": {
+    "p50": 16.7,
+    "p95": 16.8,
+    "max": 17.5
+   },
+   "renderMs": {
+    "p50": 3.9,
+    "p95": 5.9,
+    "max": 21
+   },
+   "updateMs": {
+    "p50": 2.7,
+    "p95": 3.8,
+    "max": 6.5
+   },
+   "upload": {
+    "frames": 32,
+    "kiB": {
+     "p50": 512,
+     "p95": 2048,
+     "max": 2560
+    },
+    "pages": 44,
+    "totalMiB": 17.9
+   },
+   "workerTickMs": {
+    "p50": 5,
+    "p95": 8.5
+   }
+  },
+  {
+   "drivenPx": 854,
+   "frames": 1800,
+   "missed": 0,
+   "frameMs": {
+    "p50": 16.7,
+    "p95": 16.8,
+    "max": 18.2
+   },
+   "renderMs": {
+    "p50": 4,
+    "p95": 5.5,
+    "max": 12.5
+   },
+   "updateMs": {
+    "p50": 3.1,
+    "p95": 4.1,
+    "max": 6.1
+   },
+   "upload": {
+    "frames": 14,
+    "kiB": {
+     "p50": 512,
+     "p95": 1024,
+     "max": 1024
+    },
+    "pages": 17,
+    "totalMiB": 6.9
+   },
+   "workerTickMs": {
+    "p50": 4.8,
+    "p95": 6.8
+   }
+  }
+ ],
+ "afterFinal": [
+  {
+   "drivenPx": 2244,
+   "frames": 1800,
+   "missed": 0,
+   "frameMs": {
+    "p50": 16.7,
+    "p95": 16.7,
+    "max": 17.1
+   },
+   "renderMs": {
+    "p50": 3.8,
+    "p95": 5.7,
+    "max": 21.4
+   },
+   "updateMs": {
+    "p50": 2.9,
+    "p95": 4,
+    "max": 6.2
+   },
+   "upload": {
+    "frames": 23,
+    "kiB": {
+     "p50": 512,
+     "p95": 1024,
+     "max": 1024
+    },
+    "pages": 29,
+    "totalMiB": 9.8
+   },
+   "workerTickMs": {
+    "p50": 5.5,
+    "p95": 9.3
+   }
+  },
+  {
+   "drivenPx": 2979,
+   "frames": 1800,
+   "missed": 0,
+   "frameMs": {
+    "p50": 16.7,
+    "p95": 16.7,
+    "max": 16.9
+   },
+   "renderMs": {
+    "p50": 4,
+    "p95": 6.2,
+    "max": 23.3
+   },
+   "updateMs": {
+    "p50": 2.9,
+    "p95": 4,
+    "max": 7.9
+   },
+   "upload": {
+    "frames": 28,
+    "kiB": {
+     "p50": 512,
+     "p95": 1024,
+     "max": 2560
+    },
+    "pages": 39,
+    "totalMiB": 14.6
+   },
+   "workerTickMs": {
+    "p50": 6.1,
+    "p95": 11.1
+   }
+  }
+ ],
+ "steps": {
+  "note": "Missed frames per 30 s in runs that drove more than 1,500 px, as each change was added (not interleaved).",
+  "baseline": [
+   8,
+   10,
+   11,
+   9,
+   19,
+   8
+  ],
+  "plainGlCopy": [
+   8,
+   8,
+   6,
+   7,
+   4
+  ],
+  "plusCpuCanvases": [
+   3,
+   3
+  ],
+  "plus512Pages": [
+   0,
+   0,
+   0
+  ]
+ },
+ "steadyScenes": {
+  "before": [
+   {
+    "scene": "city",
+    "zoom": 1,
+    "frames": 300,
+    "missed": 0,
+    "renderMs": {
+     "p50": 3.2,
+     "p95": 4.5,
+     "max": 8.7
+    },
+    "updateMs": {
+     "p50": 3.5,
+     "p95": 4.4,
+     "max": 5.4
+    },
+    "workerTickMs": {
+     "p50": 4.7,
+     "p95": 6.9
+    }
+   },
+   {
+    "scene": "city",
+    "zoom": 0.25,
+    "frames": 300,
+    "missed": 0,
+    "renderMs": {
+     "p50": 3.5,
+     "p95": 4.8,
+     "max": 12.2
+    },
+    "updateMs": {
+     "p50": 3.3,
+     "p95": 4.2,
+     "max": 5.7
+    },
+    "workerTickMs": {
+     "p50": 4.5,
+     "p95": 6.9
+    }
+   },
+   {
+    "scene": "woods",
+    "zoom": 1,
+    "frames": 300,
+    "missed": 0,
+    "renderMs": {
+     "p50": 3.8,
+     "p95": 5.2,
+     "max": 8.3
+    },
+    "updateMs": {
+     "p50": 3.4,
+     "p95": 5.4,
+     "max": 9.8
+    },
+    "workerTickMs": {
+     "p50": 5.6,
+     "p95": 13.1
+    }
+   },
+   {
+    "scene": "woods",
+    "zoom": 0.25,
+    "frames": 299,
+    "missed": 1,
+    "renderMs": {
+     "p50": 4.4,
+     "p95": 5.5,
+     "max": 23.1
+    },
+    "updateMs": {
+     "p50": 3.7,
+     "p95": 4.7,
+     "max": 8.3
+    },
+    "workerTickMs": {
+     "p50": 6.6,
+     "p95": 9.9
+    }
+   },
+   {
+    "scene": "crowd",
+    "zoom": 1,
+    "frames": 231,
+    "missed": 72,
+    "renderMs": {
+     "p50": 10.3,
+     "p95": 13.1,
+     "max": 16
+    },
+    "updateMs": {
+     "p50": 7.3,
+     "p95": 11.7,
+     "max": 16.1
+    },
+    "workerTickMs": {
+     "p50": 21.2,
+     "p95": 30.8
+    }
+   },
+   {
+    "scene": "crowd",
+    "zoom": 0.25,
+    "frames": 154,
+    "missed": 15,
+    "renderMs": {
+     "p50": 15.7,
+     "p95": 19.2,
+     "max": 52
+    },
+    "updateMs": {
+     "p50": 7.5,
+     "p95": 12.1,
+     "max": 15.7
+    },
+    "workerTickMs": {
+     "p50": 22.6,
+     "p95": 34.5
+    }
+   }
+  ],
+  "after": [
+   {
+    "scene": "city",
+    "zoom": 1,
+    "frames": 300,
+    "missed": 0,
+    "renderMs": {
+     "p50": 3.2,
+     "p95": 4.8,
+     "max": 7.5
+    },
+    "updateMs": {
+     "p50": 3,
+     "p95": 3.9,
+     "max": 5.6
+    },
+    "workerTickMs": {
+     "p50": 4.8,
+     "p95": 7.6
+    }
+   },
+   {
+    "scene": "city",
+    "zoom": 0.25,
+    "frames": 300,
+    "missed": 0,
+    "renderMs": {
+     "p50": 3.7,
+     "p95": 4.9,
+     "max": 6.8
+    },
+    "updateMs": {
+     "p50": 2.8,
+     "p95": 3.7,
+     "max": 4.3
+    },
+    "workerTickMs": {
+     "p50": 4.6,
+     "p95": 8.5
+    }
+   },
+   {
+    "scene": "woods",
+    "zoom": 1,
+    "frames": 300,
+    "missed": 0,
+    "renderMs": {
+     "p50": 3.9,
+     "p95": 5.2,
+     "max": 9
+    },
+    "updateMs": {
+     "p50": 3.3,
+     "p95": 4.8,
+     "max": 9.4
+    },
+    "workerTickMs": {
+     "p50": 6.4,
+     "p95": 9.5
+    }
+   },
+   {
+    "scene": "woods",
+    "zoom": 0.25,
+    "frames": 300,
+    "missed": 0,
+    "renderMs": {
+     "p50": 4.1,
+     "p95": 5.4,
+     "max": 10
+    },
+    "updateMs": {
+     "p50": 3.4,
+     "p95": 4.5,
+     "max": 9.9
+    },
+    "workerTickMs": {
+     "p50": 6.9,
+     "p95": 9.7
+    }
+   },
+   {
+    "scene": "crowd",
+    "zoom": 1,
+    "frames": 261,
+    "missed": 40,
+    "renderMs": {
+     "p50": 9.8,
+     "p95": 12.1,
+     "max": 16.4
+    },
+    "updateMs": {
+     "p50": 6.4,
+     "p95": 12.4,
+     "max": 27.6
+    },
+    "workerTickMs": {
+     "p50": 19,
+     "p95": 30.6
+    }
+   },
+   {
+    "scene": "crowd",
+    "zoom": 0.25,
+    "frames": 147,
+    "missed": 26,
+    "renderMs": {
+     "p50": 15.4,
+     "p95": 21.1,
+     "max": 39.9
+    },
+    "updateMs": {
+     "p50": 8.3,
+     "p95": 13.5,
+     "max": 29.9
+    },
+    "workerTickMs": {
+     "p50": 24.1,
+     "p95": 34.5
+    }
+   }
+  ]
+ }
+}

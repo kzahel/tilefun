@@ -825,8 +825,14 @@ Neutral `RenderBackend` frames never contain Three objects or decoded images.
 - The array grows by half and shrinks when eviction empties its top three
   quarters; the existing page LRU (age and 64 MiB budget) decides residency.
   Beyond its 256 MiB cap a page falls back to its own texture (`atlasMisses`).
+- Images are split into pages of at most 512 texels a side, so a first use
+  uploads at most 1 MiB (237). Page sources and terrain chunk images are CPU
+  canvases (`cpuRasterCanvas`): a GPU-backed 2D canvas would rasterize in the
+  GPU process, outside any main-thread time budget.
 - Pages upload through a 2D staging texture and a GPU copy, never
-  `texSubImage3D` from a canvas (a CPU readback in Chrome). Staging textures are
+  `texSubImage3D` from a canvas (a CPU readback in Chrome). The copy is plain
+  GL: three.js's `copyTextureToTexture` reads context state back, which waits
+  for the GPU process (20–40 ms a page on a phone). Staging textures are
   reused per page size within 8 MiB (`stagingBytes`). Staging flips rows like the
   old 2D pages, and unfiltered lookups clamp to their page as CLAMP_TO_EDGE did.
   Composed-world nearest-sampled scenery is byte-identical to separate page

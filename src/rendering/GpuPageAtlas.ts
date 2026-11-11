@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { AtlasAllocator, type AtlasRegion } from "./AtlasAllocator.js";
 
-/** Layer edge; also the surface's page size, so every page fits one layer. */
+/** Layer edge; the surface's pages are at most this size, so each fits one layer. */
 export const ATLAS_PAGE = 1024;
 const LAYER_BYTES = ATLAS_PAGE * ATLAS_PAGE * 4;
 /** Staging textures are reused per page size, least recently used first out. */
@@ -29,8 +29,8 @@ export class GpuPageAtlas {
   /** Reused per page size; never drawn. */
   private readonly staging = new Map<string, THREE.Texture>();
   stagingBytes = 0;
-  private readonly region = new THREE.Box2();
-  private readonly position = new THREE.Vector3();
+  /** Read framebuffer for page copies; lost and remade with the context. */
+  private copyFramebuffer: WebGLFramebuffer | null = null;
   resizes = 0;
 
   constructor(
@@ -78,10 +78,38 @@ export class GpuPageAtlas {
     staging.image = page;
     staging.needsUpdate = true;
     this.renderer.initTexture(staging);
-    this.region.min.set(0, 0);
-    this.region.max.set(region.width, region.height);
-    this.position.set(region.x, region.y, region.layer);
-    this.renderer.copyTextureToTexture(staging, target.texture, this.region, this.position);
+    // Copy on the GPU with plain GL. The renderer's own texture copy first reads
+    // five pixel-store parameters back from the context; each read waits for the
+    // GPU process to finish the upload above, which stalls a phone for 20–40 ms.
+    const { renderer } = this,
+      gl = renderer.getContext() as WebGL2RenderingContext;
+    const glTexture = (texture: THREE.Texture) =>
+      (renderer.properties.get(texture) as { __webglTexture: WebGLTexture }).__webglTexture;
+    this.copyFramebuffer ??= gl.createFramebuffer();
+    renderer.state.bindFramebuffer(gl.READ_FRAMEBUFFER, this.copyFramebuffer);
+    gl.framebufferTexture2D(
+      gl.READ_FRAMEBUFFER,
+      gl.COLOR_ATTACHMENT0,
+      gl.TEXTURE_2D,
+      glTexture(staging),
+      0,
+    );
+    renderer.state.activeTexture(gl.TEXTURE0);
+    renderer.state.bindTexture(gl.TEXTURE_2D_ARRAY, glTexture(target.texture));
+    gl.copyTexSubImage3D(
+      gl.TEXTURE_2D_ARRAY,
+      0,
+      region.x,
+      region.y,
+      region.layer,
+      0,
+      0,
+      region.width,
+      region.height,
+    );
+    // Unbind both, so restoring the caller's target rebinds read and draw alike.
+    renderer.state.bindFramebuffer(gl.READ_FRAMEBUFFER, null);
+    renderer.state.bindFramebuffer(gl.DRAW_FRAMEBUFFER, null);
     this.restoreTarget();
   }
   private stagingFor(page: HTMLCanvasElement) {
@@ -144,6 +172,7 @@ export class GpuPageAtlas {
     this.stagingBytes = 0;
     this.target?.dispose();
     this.target = null;
+    this.copyFramebuffer = null;
     this.allocator = new AtlasAllocator(ATLAS_PAGE);
   }
 }

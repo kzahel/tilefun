@@ -3,8 +3,10 @@ import type { AtlasRegion } from "./AtlasAllocator.js";
 import { ATLAS_PAGE, GpuPageAtlas } from "./GpuPageAtlas.js";
 import { rasterRevision } from "./RasterSurface.js";
 
-/** Largest page edge; images are split into pages of at most this size. */
-export const PAGE = ATLAS_PAGE;
+/** Largest page edge; images are split into pages of at most this size. A page
+ * uploads whole the first time a sprite in it is drawn: at 512 that is at most
+ * 1 MiB, where a 1,024 page of a large sheet (4 MiB) cost a phone a frame. */
+export const PAGE = 512;
 export interface Page {
   image: CanvasImageSource;
   x: number;
@@ -136,6 +138,9 @@ export class GpuPages {
     const source = document.createElement("canvas");
     source.width = Math.min(PAGE, dim.width - x);
     source.height = Math.min(PAGE, dim.height - y);
+    // A CPU canvas: its pixels upload directly, without work in the GPU process to
+    // rasterize the copy first.
+    source.getContext("2d", { willReadFrequently: true });
     const region = this.atlasEnabled ? this.atlas.allocate(source.width, source.height) : null;
     let texture: THREE.Texture | null = null;
     if (!region) {
@@ -148,10 +153,10 @@ export class GpuPages {
     this.stats.textures++;
     const { width, height } = source;
     const bounds = region && [
-      region.x / PAGE,
-      region.y / PAGE,
-      (region.x + width) / PAGE,
-      (region.y + height) / PAGE,
+      region.x / ATLAS_PAGE,
+      region.y / ATLAS_PAGE,
+      (region.x + width) / ATLAS_PAGE,
+      (region.y + height) / ATLAS_PAGE,
     ];
     const used = this.frame;
     return { image, x, y, width, height, region, bounds, texture, source, revision: -1, used };

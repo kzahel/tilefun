@@ -26,7 +26,7 @@ import { allocateTerrainResourceId, CanvasTerrainResources } from "./CanvasTerra
 import { drawCitySurfacePieces } from "./CitySurfaceRenderer.js";
 import { ElevationDescriptorCache } from "./ElevationDescriptorCache.js";
 import { drawRailTile } from "./RailTrackRaster.js";
-import { touchRaster } from "./RasterSurface.js";
+import { cpuRasterCanvas, touchRaster } from "./RasterSurface.js";
 import type { TerrainPreparationOptions } from "./RenderFrame.js";
 import type { ElevationItem } from "./SceneItem.js";
 import type {
@@ -386,7 +386,7 @@ export class TileRenderer implements TerrainPresentation {
       state = {
         resourceId: allocateTerrainResourceId(),
         chunk,
-        canvas: new OffscreenCanvas(CHUNK_NATIVE_PX, CHUNK_NATIVE_PX),
+        canvas: cpuRasterCanvas(CHUNK_NATIVE_PX, CHUNK_NATIVE_PX),
         nextRowOrderIdx: 0,
         revision: chunk.revision,
         visualRevision: chunk.visualRevision,

@@ -1267,6 +1267,95 @@ test("the page atlas grows, falls back at its cap, re-uploads mid-batch and reus
   expect(atlas.reused).toBe(separate.reused);
 });
 
+test("page uploads read nothing back from the context and split a large image into 512-texel pages", async ({
+  page,
+}) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const run = (atlas: boolean) =>
+    page.evaluate((atlas) => {
+      const lab = (
+        window as unknown as {
+          rendererLab: {
+            gpu: { surface: import("../src/rendering/GpuRasterSurface.js").GpuRasterSurface };
+            touchRaster(source: object): void;
+          };
+        }
+      ).rendererLab;
+      const surface = lab.gpu.surface;
+      surface.setPageAtlas(atlas, 8);
+      // 1100×600 spans three pages across and two down.
+      const image = document.createElement("canvas");
+      image.width = 1100;
+      image.height = 600;
+      const ctx = image.getContext("2d");
+      if (!ctx) throw Error("Missing source context");
+      for (let y = 0; y < 600; y += 20)
+        for (let x = 0; x < 1100; x += 20) {
+          ctx.fillStyle = `hsl(${(x * 7 + y * 13) % 360} 70% 50%)`;
+          ctx.fillRect(x, y, 20, 20);
+        }
+      const draw = () => {
+        // A sprite across every page seam, and one inside the last page.
+        surface.drawImage(image, 480, 480, 64, 64, 4, 4, 64, 64);
+        surface.drawImage(image, 992, 80, 64, 64, 80, 4, 64, 64);
+        surface.drawImage(image, 1040, 540, 40, 40, 160, 4, 40, 40);
+      };
+      surface.beginFrame();
+      draw();
+      surface.flush();
+      // Uploads again, counting synchronous context reads. The depth-shadow pass
+      // resets the renderer's cached GL state every frame, as here.
+      (surface as unknown as { renderer: { resetState(): void } }).renderer.resetState();
+      const gl = surface.canvas.getContext("webgl2");
+      if (!gl) throw Error("Missing context");
+      const getParameter = gl.getParameter;
+      let reads = 0;
+      gl.getParameter = function (name: number) {
+        reads++;
+        return getParameter.call(this, name);
+      };
+      const { uploads, uploadedBytes } = surface.stats;
+      lab.touchRaster(image);
+      surface.beginFrame();
+      draw();
+      surface.flush();
+      gl.getParameter = getParameter;
+      const copy = document.createElement("canvas");
+      copy.width = surface.canvas.width;
+      copy.height = surface.canvas.height;
+      const out = copy.getContext("2d");
+      if (!out) throw Error("Missing capture context");
+      out.drawImage(surface.canvas, 0, 0);
+      let hash = 0x811c9dc5;
+      for (const value of out.getImageData(0, 0, 220, 80).data)
+        hash = Math.imul(hash ^ value, 0x01000193);
+      return {
+        reads,
+        pages: surface.stats.uploads - uploads,
+        bytes: surface.stats.uploadedBytes - uploadedBytes,
+        frame: hash >>> 0,
+      };
+    }, atlas);
+  const atlas = await run(true);
+  const separate = await run(false);
+  await page.evaluate(() =>
+    (
+      window as unknown as {
+        rendererLab: {
+          gpu: { surface: import("../src/rendering/GpuRasterSurface.js").GpuRasterSurface };
+        };
+      }
+    ).rendererLab.gpu.surface.setPageAtlas(true, 64),
+  );
+  // Each read waits for the GPU process: on a phone, a dropped frame per upload.
+  expect(atlas.reads).toBe(0);
+  // The six pages the sprites touch, none larger than 512 texels a side.
+  expect(atlas.pages).toBe(6);
+  expect(atlas.bytes).toBe(1100 * 600 * 4);
+  expect(atlas.frame).toBe(separate.frame);
+});
+
 test("shared grass LOD fades linearly, hides when far and returns at ordinary zoom", async ({
   page,
 }) => {

@@ -35,6 +35,12 @@ Open:
   needs 16.7 ms, so the median fits and the tail does not. Its main thread still
   misses frames. The Steam Deck has not been re-measured. 235 owns that.
 - The Deck spends 7.7 ms submitting the crowd at 0.1.
+- Driving through the city on the Pixel 7a dropped 12–15 frames in 30 seconds
+  while new terrain and sprite pages were uploaded; it now drops none
+  ([237](../tactical/237-phone-driving-hitches.md)). `render:bench --scenes=drive`
+  measures it, with per-frame slow-frame and upload records and `--trace`.
+  Remaining there: an occasional 20 ms major garbage collection, and chunk
+  generation bursts of 17–27 ms on the authority Worker.
 
 ## Crowd bench (2026-11-10)
 
