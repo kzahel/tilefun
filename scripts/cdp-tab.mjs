@@ -88,8 +88,18 @@ export async function openCdpTab(endpoint, { existingPage = false } = {}) {
     send,
     async goto(url) {
       const loaded = new Promise((resolve) => listeners.load.push(resolve));
-      await send("Page.navigate", { url });
-      await Promise.race([loaded, waitForTimeout(120_000)]);
+      let timer;
+      try {
+        await Promise.race([
+          send("Page.navigate", { url }).then(() => loaded),
+          new Promise((_, reject) => {
+            timer = setTimeout(() => reject(Error("Page navigation timed out")), 120_000);
+          }),
+        ]);
+      } finally {
+        // A successful load must not keep a short diagnostic command alive for two minutes.
+        clearTimeout(timer);
+      }
     },
     async waitForFunction(fn, arg, { timeout = 30_000, polling = 100 } = {}) {
       const end = Date.now() + timeout;

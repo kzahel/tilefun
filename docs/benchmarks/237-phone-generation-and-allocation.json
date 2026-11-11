@@ -1,0 +1,3331 @@
+{
+  "description": "Physical Pixel 7a measurements, 2026-11-11. Full traces/profiles and raw reports remain in ignored data/scratch/generation-237/. No CPU/viewport emulation. Allocation estimates include collected objects and diagnostic bookkeeping; timing from sampled/traced runs is not a clean cadence baseline.",
+  "device": {
+    "name": "Pixel 7a",
+    "browser": "Chrome/156.0.8078.79",
+    "details": {
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+      "cores": 8,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625
+      },
+      "canvas": {
+        "width": 411,
+        "height": 789
+      },
+      "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+      "gpuTimer": false
+    },
+    "power": "External AC power reported; battery 80%, Android status 4 (not charging).",
+    "temperatureC": [
+      24.3,
+      26.8
+    ],
+    "thermalStatuses": [
+      0
+    ],
+    "taskRoutesRemoved": true,
+    "androidApiLevel": 37
+  },
+  "generation": {
+    "runtime": {
+      "kind": "browser-worker",
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+      "cores": 8,
+      "device": "Pixel 7a"
+    },
+    "date": "2026-11-11T12:54:15.264Z",
+    "source": "fba4e3ce1e84caab9bcb6b8d39a88626a14a8957c60f020d144414e57d8c73dd",
+    "build": "esbuild, no keepNames, unminified",
+    "workload": {
+      "seed": 2026,
+      "side": 7,
+      "trials": 3,
+      "fixtures": [
+        "district",
+        "farm",
+        "woodland",
+        "negative-coast"
+      ],
+      "lanes": [
+        "generate",
+        "streaming"
+      ],
+      "verify": false,
+      "route": "serpentine-square-v1",
+      "batchSize": 8
+    },
+    "matchingDesktopWorkCounts": true,
+    "cells": [
+      {
+        "fixture": "district",
+        "lane": "generate",
+        "pass": "unseen",
+        "totalMs": {
+          "count": 147,
+          "totalMs": 1324.8,
+          "p50": 6.1,
+          "p95": 10.3,
+          "max": 328.2
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 147,
+            "totalMs": 1164.6,
+            "p50": 5.2,
+            "p95": 7.2,
+            "max": 318.9
+          },
+          "railMetadata": {
+            "count": 147,
+            "totalMs": 2.1,
+            "p50": 0,
+            "p95": 0.1,
+            "max": 0.1
+          },
+          "propPlans": {
+            "count": 147,
+            "totalMs": 43.6,
+            "p50": 0.2,
+            "p95": 0.4,
+            "max": 5.3
+          },
+          "actorPlans": {
+            "count": 147,
+            "totalMs": 114.5,
+            "p50": 0.5,
+            "p95": 2.2,
+            "max": 6.3
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 328.1999999284744,
+            "phasesMs": {
+              "terrain": 318.89999997615814,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 5.299999952316284,
+              "actorPlans": 3.899999976158142
+            }
+          },
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 80.10000002384186,
+            "phasesMs": {
+              "terrain": 77.89999997615814,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 1.5,
+              "actorPlans": 0.6000000238418579
+            }
+          },
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 80.5,
+            "phasesMs": {
+              "terrain": 77.80000007152557,
+              "railMetadata": 0,
+              "propPlans": 2.299999952316284,
+              "actorPlans": 0.3999999761581421
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 328.1999999284744,
+            "phasesMs": {
+              "terrain": 318.89999997615814,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 5.299999952316284,
+              "actorPlans": 3.899999976158142
+            },
+            "props": 1,
+            "actors": 1,
+            "gridBytes": 9281,
+            "trial": 0
+          },
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 80.5,
+            "phasesMs": {
+              "terrain": 77.80000007152557,
+              "railMetadata": 0,
+              "propPlans": 2.299999952316284,
+              "actorPlans": 0.3999999761581421
+            },
+            "props": 1,
+            "actors": 1,
+            "gridBytes": 9281,
+            "trial": 2
+          },
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 80.10000002384186,
+            "phasesMs": {
+              "terrain": 77.89999997615814,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 1.5,
+              "actorPlans": 0.6000000238418579
+            },
+            "props": 1,
+            "actors": 1,
+            "gridBytes": 9281,
+            "trial": 1
+          }
+        ]
+      },
+      {
+        "fixture": "district",
+        "lane": "generate",
+        "pass": "regenerate",
+        "totalMs": {
+          "count": 147,
+          "totalMs": 816.3,
+          "p50": 6.1,
+          "p95": 7.3,
+          "max": 10.8
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 147,
+            "totalMs": 686.5,
+            "p50": 5.2,
+            "p95": 6.3,
+            "max": 9.7
+          },
+          "railMetadata": {
+            "count": 147,
+            "totalMs": 1.3,
+            "p50": 0,
+            "p95": 0.1,
+            "max": 0.1
+          },
+          "propPlans": {
+            "count": 147,
+            "totalMs": 31.6,
+            "p50": 0.2,
+            "p95": 0.3,
+            "max": 1.1
+          },
+          "actorPlans": {
+            "count": 147,
+            "totalMs": 96.9,
+            "p50": 0.5,
+            "p95": 1.3,
+            "max": 5.7
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 6.799999952316284,
+            "phasesMs": {
+              "terrain": 6,
+              "railMetadata": 0,
+              "propPlans": 0.2999999523162842,
+              "actorPlans": 0.5
+            }
+          },
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 6.600000023841858,
+            "phasesMs": {
+              "terrain": 5.899999976158142,
+              "railMetadata": 0,
+              "propPlans": 0.20000004768371582,
+              "actorPlans": 0.5
+            }
+          },
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 6.5,
+            "phasesMs": {
+              "terrain": 5.600000023841858,
+              "railMetadata": 0,
+              "propPlans": 0.19999992847442627,
+              "actorPlans": 0.7000000476837158
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": 16,
+            "cy": 35,
+            "totalMs": 10.800000071525574,
+            "phasesMs": {
+              "terrain": 4.900000095367432,
+              "railMetadata": 0,
+              "propPlans": 0.19999992847442627,
+              "actorPlans": 5.700000047683716
+            },
+            "props": 23,
+            "actors": 1,
+            "gridBytes": 9281,
+            "trial": 1
+          },
+          {
+            "cx": 16,
+            "cy": 35,
+            "totalMs": 10.799999952316284,
+            "phasesMs": {
+              "terrain": 4.799999952316284,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 0.20000004768371582,
+              "actorPlans": 5.699999928474426
+            },
+            "props": 23,
+            "actors": 1,
+            "gridBytes": 9281,
+            "trial": 0
+          },
+          {
+            "cx": 17,
+            "cy": 30,
+            "totalMs": 10.5,
+            "phasesMs": {
+              "terrain": 9.700000047683716,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 0.19999992847442627,
+              "actorPlans": 0.5
+            },
+            "props": 2,
+            "actors": 1,
+            "gridBytes": 9281,
+            "trial": 1
+          }
+        ]
+      },
+      {
+        "fixture": "district",
+        "lane": "streaming",
+        "pass": "unseen-batches",
+        "totalMs": {
+          "count": 21,
+          "totalMs": 1098.7,
+          "p50": 50.5,
+          "p95": 117.7,
+          "max": 139
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 21,
+            "totalMs": 944.4,
+            "p50": 41.9,
+            "p95": 108,
+            "max": 123.1
+          },
+          "railMetadata": {
+            "count": 21,
+            "totalMs": 1.9,
+            "p50": 0.1,
+            "p95": 0.2,
+            "max": 0.3
+          },
+          "propPlans": {
+            "count": 21,
+            "totalMs": 36.7,
+            "p50": 1.8,
+            "p95": 3.5,
+            "max": 3.6
+          },
+          "actorPlans": {
+            "count": 21,
+            "totalMs": 107.3,
+            "p50": 4.5,
+            "p95": 8.9,
+            "max": 11.8
+          },
+          "propAdmission": {
+            "count": 21,
+            "totalMs": 3.9,
+            "p50": 0.1,
+            "p95": 0.5,
+            "max": 1.1
+          },
+          "actorAdmission": {
+            "count": 21,
+            "totalMs": 5.4,
+            "p50": 0.2,
+            "p95": 0.7,
+            "max": 0.9
+          },
+          "publishOther": {
+            "count": 21,
+            "totalMs": -14.2,
+            "p50": 0.4,
+            "p95": 1.1,
+            "max": 1.5
+          },
+          "outsidePublish": {
+            "count": 21,
+            "totalMs": 13.3,
+            "p50": 0.6,
+            "p95": 0.9,
+            "max": 2.1
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 139,
+            "phasesMs": {
+              "terrain": 123.10000014305115,
+              "railMetadata": 0.20000004768371582,
+              "propPlans": 3.6000001430511475,
+              "actorPlans": 6.4999998807907104,
+              "propAdmission": 1.0999999046325684,
+              "actorAdmission": 0.9000000953674316,
+              "publishOther": 1.499999761581421,
+              "outsidePublish": 2.100000023841858
+            }
+          },
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 114.39999997615814,
+            "phasesMs": {
+              "terrain": 104.90000009536743,
+              "railMetadata": 0,
+              "propPlans": 2.999999761581421,
+              "actorPlans": 4.5,
+              "propAdmission": 0.20000004768371582,
+              "actorAdmission": 0.20000004768371582,
+              "publishOther": 1.1000001430511475,
+              "outsidePublish": 0.49999988079071045
+            }
+          },
+          {
+            "cx": 15,
+            "cy": 29,
+            "totalMs": 117.70000004768372,
+            "phasesMs": {
+              "terrain": 108,
+              "railMetadata": 0,
+              "propPlans": 3.5,
+              "actorPlans": 4.5,
+              "propAdmission": 0.30000007152557373,
+              "actorAdmission": 0.20000004768371582,
+              "publishOther": 0.7999998331069946,
+              "outsidePublish": 0.40000009536743164
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": 15,
+            "cy": 29,
+            "coordinates": [
+              {
+                "cx": 15,
+                "cy": 29
+              },
+              {
+                "cx": 16,
+                "cy": 29
+              },
+              {
+                "cx": 17,
+                "cy": 29
+              },
+              {
+                "cx": 18,
+                "cy": 29
+              },
+              {
+                "cx": 19,
+                "cy": 29
+              },
+              {
+                "cx": 20,
+                "cy": 29
+              },
+              {
+                "cx": 21,
+                "cy": 29
+              },
+              {
+                "cx": 21,
+                "cy": 30
+              }
+            ],
+            "chunks": 8,
+            "props": 5,
+            "actors": 1,
+            "planProps": 11,
+            "planActors": 10,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 139,
+            "publications": [
+              {
+                "cx": 15,
+                "cy": 29,
+                "ms": 92
+              },
+              {
+                "cx": 16,
+                "cy": 29,
+                "ms": 8.100000023841858
+              },
+              {
+                "cx": 17,
+                "cy": 29,
+                "ms": 7.899999976158142
+              },
+              {
+                "cx": 18,
+                "cy": 29,
+                "ms": 7.899999976158142
+              },
+              {
+                "cx": 19,
+                "cy": 29,
+                "ms": 5.100000023841858
+              },
+              {
+                "cx": 20,
+                "cy": 29,
+                "ms": 5.299999952316284
+              },
+              {
+                "cx": 21,
+                "cy": 29,
+                "ms": 3.799999952316284
+              },
+              {
+                "cx": 21,
+                "cy": 30,
+                "ms": 6.800000071525574
+              }
+            ],
+            "phasesMs": {
+              "terrain": 123.10000014305115,
+              "railMetadata": 0.20000004768371582,
+              "propPlans": 3.6000001430511475,
+              "actorPlans": 6.4999998807907104,
+              "propAdmission": 1.0999999046325684,
+              "actorAdmission": 0.9000000953674316,
+              "publishOther": 1.499999761581421,
+              "outsidePublish": 2.100000023841858
+            },
+            "trial": 0
+          },
+          {
+            "cx": 15,
+            "cy": 29,
+            "coordinates": [
+              {
+                "cx": 15,
+                "cy": 29
+              },
+              {
+                "cx": 16,
+                "cy": 29
+              },
+              {
+                "cx": 17,
+                "cy": 29
+              },
+              {
+                "cx": 18,
+                "cy": 29
+              },
+              {
+                "cx": 19,
+                "cy": 29
+              },
+              {
+                "cx": 20,
+                "cy": 29
+              },
+              {
+                "cx": 21,
+                "cy": 29
+              },
+              {
+                "cx": 21,
+                "cy": 30
+              }
+            ],
+            "chunks": 8,
+            "props": 5,
+            "actors": 1,
+            "planProps": 11,
+            "planActors": 10,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 117.70000004768372,
+            "publications": [
+              {
+                "cx": 15,
+                "cy": 29,
+                "ms": 78
+              },
+              {
+                "cx": 16,
+                "cy": 29,
+                "ms": 7.399999976158142
+              },
+              {
+                "cx": 17,
+                "cy": 29,
+                "ms": 7.399999976158142
+              },
+              {
+                "cx": 18,
+                "cy": 29,
+                "ms": 6.600000023841858
+              },
+              {
+                "cx": 19,
+                "cy": 29,
+                "ms": 3.799999952316284
+              },
+              {
+                "cx": 20,
+                "cy": 29,
+                "ms": 4.100000023841858
+              },
+              {
+                "cx": 21,
+                "cy": 29,
+                "ms": 4.200000047683716
+              },
+              {
+                "cx": 21,
+                "cy": 30,
+                "ms": 5.799999952316284
+              }
+            ],
+            "phasesMs": {
+              "terrain": 108,
+              "railMetadata": 0,
+              "propPlans": 3.5,
+              "actorPlans": 4.5,
+              "propAdmission": 0.30000007152557373,
+              "actorAdmission": 0.20000004768371582,
+              "publishOther": 0.7999998331069946,
+              "outsidePublish": 0.40000009536743164
+            },
+            "trial": 2
+          },
+          {
+            "cx": 15,
+            "cy": 29,
+            "coordinates": [
+              {
+                "cx": 15,
+                "cy": 29
+              },
+              {
+                "cx": 16,
+                "cy": 29
+              },
+              {
+                "cx": 17,
+                "cy": 29
+              },
+              {
+                "cx": 18,
+                "cy": 29
+              },
+              {
+                "cx": 19,
+                "cy": 29
+              },
+              {
+                "cx": 20,
+                "cy": 29
+              },
+              {
+                "cx": 21,
+                "cy": 29
+              },
+              {
+                "cx": 21,
+                "cy": 30
+              }
+            ],
+            "chunks": 8,
+            "props": 5,
+            "actors": 1,
+            "planProps": 11,
+            "planActors": 10,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 114.39999997615814,
+            "publications": [
+              {
+                "cx": 15,
+                "cy": 29,
+                "ms": 76.69999992847443
+              },
+              {
+                "cx": 16,
+                "cy": 29,
+                "ms": 6.900000095367432
+              },
+              {
+                "cx": 17,
+                "cy": 29,
+                "ms": 6.799999952316284
+              },
+              {
+                "cx": 18,
+                "cy": 29,
+                "ms": 6.600000023841858
+              },
+              {
+                "cx": 19,
+                "cy": 29,
+                "ms": 3.600000023841858
+              },
+              {
+                "cx": 20,
+                "cy": 29,
+                "ms": 4
+              },
+              {
+                "cx": 21,
+                "cy": 29,
+                "ms": 4
+              },
+              {
+                "cx": 21,
+                "cy": 30,
+                "ms": 5.300000071525574
+              }
+            ],
+            "phasesMs": {
+              "terrain": 104.90000009536743,
+              "railMetadata": 0,
+              "propPlans": 2.999999761581421,
+              "actorPlans": 4.5,
+              "propAdmission": 0.20000004768371582,
+              "actorAdmission": 0.20000004768371582,
+              "publishOther": 1.1000001430511475,
+              "outsidePublish": 0.49999988079071045
+            },
+            "trial": 1
+          }
+        ],
+        "singlePublicationMs": {
+          "count": 147,
+          "totalMs": 1085.4,
+          "p50": 6.2,
+          "p95": 10.2,
+          "max": 92
+        }
+      },
+      {
+        "fixture": "farm",
+        "lane": "generate",
+        "pass": "unseen",
+        "totalMs": {
+          "count": 147,
+          "totalMs": 1169.6,
+          "p50": 4.8,
+          "p95": 24.6,
+          "max": 102.3
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 147,
+            "totalMs": 654.8,
+            "p50": 2.8,
+            "p95": 3.6,
+            "max": 90.7
+          },
+          "railMetadata": {
+            "count": 147,
+            "totalMs": 1.2,
+            "p50": 0,
+            "p95": 0.1,
+            "max": 0.1
+          },
+          "propPlans": {
+            "count": 147,
+            "totalMs": 47.7,
+            "p50": 0.2,
+            "p95": 0.4,
+            "max": 9.5
+          },
+          "actorPlans": {
+            "count": 147,
+            "totalMs": 465.9,
+            "p50": 1.5,
+            "p95": 6,
+            "max": 26.6
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 102.29999995231628,
+            "phasesMs": {
+              "terrain": 90.69999992847443,
+              "railMetadata": 0,
+              "propPlans": 9.5,
+              "actorPlans": 2.100000023841858
+            }
+          },
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 90.80000007152557,
+            "phasesMs": {
+              "terrain": 84.10000002384186,
+              "railMetadata": 0,
+              "propPlans": 6.100000023841858,
+              "actorPlans": 0.6000000238418579
+            }
+          },
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 80.80000007152557,
+            "phasesMs": {
+              "terrain": 73.39999997615814,
+              "railMetadata": 0,
+              "propPlans": 6.800000071525574,
+              "actorPlans": 0.6000000238418579
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 102.29999995231628,
+            "phasesMs": {
+              "terrain": 90.69999992847443,
+              "railMetadata": 0,
+              "propPlans": 9.5,
+              "actorPlans": 2.100000023841858
+            },
+            "props": 0,
+            "actors": 0,
+            "gridBytes": 9281,
+            "trial": 0
+          },
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 90.80000007152557,
+            "phasesMs": {
+              "terrain": 84.10000002384186,
+              "railMetadata": 0,
+              "propPlans": 6.100000023841858,
+              "actorPlans": 0.6000000238418579
+            },
+            "props": 0,
+            "actors": 0,
+            "gridBytes": 9281,
+            "trial": 1
+          },
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 80.80000007152557,
+            "phasesMs": {
+              "terrain": 73.39999997615814,
+              "railMetadata": 0,
+              "propPlans": 6.800000071525574,
+              "actorPlans": 0.6000000238418579
+            },
+            "props": 0,
+            "actors": 0,
+            "gridBytes": 9281,
+            "trial": 2
+          }
+        ]
+      },
+      {
+        "fixture": "farm",
+        "lane": "generate",
+        "pass": "regenerate",
+        "totalMs": {
+          "count": 147,
+          "totalMs": 739.4,
+          "p50": 4.3,
+          "p95": 7.6,
+          "max": 10.5
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 147,
+            "totalMs": 408.6,
+            "p50": 2.8,
+            "p95": 3.2,
+            "max": 3.8
+          },
+          "railMetadata": {
+            "count": 147,
+            "totalMs": 1.1,
+            "p50": 0,
+            "p95": 0.1,
+            "max": 0.1
+          },
+          "propPlans": {
+            "count": 147,
+            "totalMs": 26.3,
+            "p50": 0.2,
+            "p95": 0.3,
+            "max": 1.7
+          },
+          "actorPlans": {
+            "count": 147,
+            "totalMs": 303.4,
+            "p50": 1.3,
+            "p95": 4.6,
+            "max": 6.3
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 4.200000047683716,
+            "phasesMs": {
+              "terrain": 2.600000023841858,
+              "railMetadata": 0,
+              "propPlans": 0.19999992847442627,
+              "actorPlans": 1.4000000953674316
+            }
+          },
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 3.600000023841858,
+            "phasesMs": {
+              "terrain": 2.799999952316284,
+              "railMetadata": 0,
+              "propPlans": 0.10000002384185791,
+              "actorPlans": 0.7000000476837158
+            }
+          },
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 3.700000047683716,
+            "phasesMs": {
+              "terrain": 3,
+              "railMetadata": 0,
+              "propPlans": 0.20000004768371582,
+              "actorPlans": 0.5
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": 44,
+            "cy": 81,
+            "totalMs": 10.5,
+            "phasesMs": {
+              "terrain": 2.5,
+              "railMetadata": 0,
+              "propPlans": 1.7000000476837158,
+              "actorPlans": 6.299999952316284
+            },
+            "props": 11,
+            "actors": 3,
+            "gridBytes": 9281,
+            "trial": 0
+          },
+          {
+            "cx": 45,
+            "cy": 84,
+            "totalMs": 8.400000095367432,
+            "phasesMs": {
+              "terrain": 3.100000023841858,
+              "railMetadata": 0,
+              "propPlans": 0.20000004768371582,
+              "actorPlans": 5.100000023841858
+            },
+            "props": 20,
+            "actors": 5,
+            "gridBytes": 9281,
+            "trial": 2
+          },
+          {
+            "cx": 45,
+            "cy": 84,
+            "totalMs": 8.299999952316284,
+            "phasesMs": {
+              "terrain": 3,
+              "railMetadata": 0,
+              "propPlans": 0.19999992847442627,
+              "actorPlans": 5.100000023841858
+            },
+            "props": 20,
+            "actors": 5,
+            "gridBytes": 9281,
+            "trial": 1
+          }
+        ]
+      },
+      {
+        "fixture": "farm",
+        "lane": "streaming",
+        "pass": "unseen-batches",
+        "totalMs": {
+          "count": 21,
+          "totalMs": 1167.0,
+          "p50": 43.9,
+          "p95": 132.4,
+          "max": 145.6
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 21,
+            "totalMs": 786.5,
+            "p50": 31.4,
+            "p95": 93.0,
+            "max": 102.6
+          },
+          "railMetadata": {
+            "count": 21,
+            "totalMs": 0.7,
+            "p50": 0,
+            "p95": 0.1,
+            "max": 0.2
+          },
+          "propPlans": {
+            "count": 21,
+            "totalMs": 43.4,
+            "p50": 1.4,
+            "p95": 7.2,
+            "max": 7.4
+          },
+          "actorPlans": {
+            "count": 21,
+            "totalMs": 443.5,
+            "p50": 23.5,
+            "p95": 32.6,
+            "max": 34.3
+          },
+          "propAdmission": {
+            "count": 21,
+            "totalMs": 6.1,
+            "p50": 0.3,
+            "p95": 0.6,
+            "max": 0.9
+          },
+          "actorAdmission": {
+            "count": 21,
+            "totalMs": 15.9,
+            "p50": 0.7,
+            "p95": 1.4,
+            "max": 1.7
+          },
+          "publishOther": {
+            "count": 21,
+            "totalMs": -142.2,
+            "p50": -5.0,
+            "p95": 0.1,
+            "max": 0.1
+          },
+          "outsidePublish": {
+            "count": 21,
+            "totalMs": 13.1,
+            "p50": 0.6,
+            "p95": 0.9,
+            "max": 1
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 145.60000002384186,
+            "phasesMs": {
+              "terrain": 102.60000014305115,
+              "railMetadata": 0,
+              "propPlans": 7.199999928474426,
+              "actorPlans": 34.300000071525574,
+              "propAdmission": 0.8999999761581421,
+              "actorAdmission": 1.4000000953674316,
+              "publishOther": -1.6000001430511475,
+              "outsidePublish": 0.7999999523162842
+            }
+          },
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 132.39999997615814,
+            "phasesMs": {
+              "terrain": 92.99999988079071,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 7.400000095367432,
+              "actorPlans": 31.899999976158142,
+              "propAdmission": 0.40000009536743164,
+              "actorAdmission": 0.6000000238418579,
+              "publishOther": -1.600000023841858,
+              "outsidePublish": 0.5999999046325684
+            }
+          },
+          {
+            "cx": 39,
+            "cy": 79,
+            "totalMs": 130.80000007152557,
+            "phasesMs": {
+              "terrain": 92.10000002384186,
+              "railMetadata": 0,
+              "propPlans": 7.099999785423279,
+              "actorPlans": 32.60000014305115,
+              "propAdmission": 0.10000002384185791,
+              "actorAdmission": 0.30000007152557373,
+              "publishOther": -1.899999976158142,
+              "outsidePublish": 0.5
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": 39,
+            "cy": 79,
+            "coordinates": [
+              {
+                "cx": 39,
+                "cy": 79
+              },
+              {
+                "cx": 40,
+                "cy": 79
+              },
+              {
+                "cx": 41,
+                "cy": 79
+              },
+              {
+                "cx": 42,
+                "cy": 79
+              },
+              {
+                "cx": 43,
+                "cy": 79
+              },
+              {
+                "cx": 44,
+                "cy": 79
+              },
+              {
+                "cx": 45,
+                "cy": 79
+              },
+              {
+                "cx": 45,
+                "cy": 80
+              }
+            ],
+            "chunks": 8,
+            "props": 34,
+            "actors": 9,
+            "planProps": 50,
+            "planActors": 9,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 145.60000002384186,
+            "publications": [
+              {
+                "cx": 39,
+                "cy": 79,
+                "ms": 86.20000004768372
+              },
+              {
+                "cx": 40,
+                "cy": 79,
+                "ms": 3.5
+              },
+              {
+                "cx": 41,
+                "cy": 79,
+                "ms": 4.199999928474426
+              },
+              {
+                "cx": 42,
+                "cy": 79,
+                "ms": 7.100000023841858
+              },
+              {
+                "cx": 43,
+                "cy": 79,
+                "ms": 7.800000071525574
+              },
+              {
+                "cx": 44,
+                "cy": 79,
+                "ms": 4.5
+              },
+              {
+                "cx": 45,
+                "cy": 79,
+                "ms": 27.09999990463257
+              },
+              {
+                "cx": 45,
+                "cy": 80,
+                "ms": 4.400000095367432
+              }
+            ],
+            "phasesMs": {
+              "terrain": 102.60000014305115,
+              "railMetadata": 0,
+              "propPlans": 7.199999928474426,
+              "actorPlans": 34.300000071525574,
+              "propAdmission": 0.8999999761581421,
+              "actorAdmission": 1.4000000953674316,
+              "publishOther": -1.6000001430511475,
+              "outsidePublish": 0.7999999523162842
+            },
+            "trial": 0
+          },
+          {
+            "cx": 39,
+            "cy": 79,
+            "coordinates": [
+              {
+                "cx": 39,
+                "cy": 79
+              },
+              {
+                "cx": 40,
+                "cy": 79
+              },
+              {
+                "cx": 41,
+                "cy": 79
+              },
+              {
+                "cx": 42,
+                "cy": 79
+              },
+              {
+                "cx": 43,
+                "cy": 79
+              },
+              {
+                "cx": 44,
+                "cy": 79
+              },
+              {
+                "cx": 45,
+                "cy": 79
+              },
+              {
+                "cx": 45,
+                "cy": 80
+              }
+            ],
+            "chunks": 8,
+            "props": 34,
+            "actors": 9,
+            "planProps": 50,
+            "planActors": 9,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 132.39999997615814,
+            "publications": [
+              {
+                "cx": 39,
+                "cy": 79,
+                "ms": 78.70000004768372
+              },
+              {
+                "cx": 40,
+                "cy": 79,
+                "ms": 3.5
+              },
+              {
+                "cx": 41,
+                "cy": 79,
+                "ms": 4.400000095367432
+              },
+              {
+                "cx": 42,
+                "cy": 79,
+                "ms": 4.399999976158142
+              },
+              {
+                "cx": 43,
+                "cy": 79,
+                "ms": 7.100000023841858
+              },
+              {
+                "cx": 44,
+                "cy": 79,
+                "ms": 4.399999976158142
+              },
+              {
+                "cx": 45,
+                "cy": 79,
+                "ms": 24.699999928474426
+              },
+              {
+                "cx": 45,
+                "cy": 80,
+                "ms": 4.600000023841858
+              }
+            ],
+            "phasesMs": {
+              "terrain": 92.99999988079071,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 7.400000095367432,
+              "actorPlans": 31.899999976158142,
+              "propAdmission": 0.40000009536743164,
+              "actorAdmission": 0.6000000238418579,
+              "publishOther": -1.600000023841858,
+              "outsidePublish": 0.5999999046325684
+            },
+            "trial": 1
+          },
+          {
+            "cx": 39,
+            "cy": 79,
+            "coordinates": [
+              {
+                "cx": 39,
+                "cy": 79
+              },
+              {
+                "cx": 40,
+                "cy": 79
+              },
+              {
+                "cx": 41,
+                "cy": 79
+              },
+              {
+                "cx": 42,
+                "cy": 79
+              },
+              {
+                "cx": 43,
+                "cy": 79
+              },
+              {
+                "cx": 44,
+                "cy": 79
+              },
+              {
+                "cx": 45,
+                "cy": 79
+              },
+              {
+                "cx": 45,
+                "cy": 80
+              }
+            ],
+            "chunks": 8,
+            "props": 34,
+            "actors": 9,
+            "planProps": 50,
+            "planActors": 9,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 130.80000007152557,
+            "publications": [
+              {
+                "cx": 39,
+                "cy": 79,
+                "ms": 77.5
+              },
+              {
+                "cx": 40,
+                "cy": 79,
+                "ms": 3.8000000715255737
+              },
+              {
+                "cx": 41,
+                "cy": 79,
+                "ms": 3.899999976158142
+              },
+              {
+                "cx": 42,
+                "cy": 79,
+                "ms": 4
+              },
+              {
+                "cx": 43,
+                "cy": 79,
+                "ms": 7.299999952316284
+              },
+              {
+                "cx": 44,
+                "cy": 79,
+                "ms": 4.200000047683716
+              },
+              {
+                "cx": 45,
+                "cy": 79,
+                "ms": 25
+              },
+              {
+                "cx": 45,
+                "cy": 80,
+                "ms": 4.600000023841858
+              }
+            ],
+            "phasesMs": {
+              "terrain": 92.10000002384186,
+              "railMetadata": 0,
+              "propPlans": 7.099999785423279,
+              "actorPlans": 32.60000014305115,
+              "propAdmission": 0.10000002384185791,
+              "actorAdmission": 0.30000007152557373,
+              "publishOther": -1.899999976158142,
+              "outsidePublish": 0.5
+            },
+            "trial": 2
+          }
+        ],
+        "singlePublicationMs": {
+          "count": 147,
+          "totalMs": 1153.9,
+          "p50": 4.7,
+          "p95": 25,
+          "max": 86.2
+        }
+      },
+      {
+        "fixture": "woodland",
+        "lane": "generate",
+        "pass": "unseen",
+        "totalMs": {
+          "count": 147,
+          "totalMs": 1509.2,
+          "p50": 5.6,
+          "p95": 14.2,
+          "max": 322.8
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 147,
+            "totalMs": 689.1,
+            "p50": 2.3,
+            "p95": 3.1,
+            "max": 142
+          },
+          "railMetadata": {
+            "count": 147,
+            "totalMs": 0.7,
+            "p50": 0,
+            "p95": 0,
+            "max": 0.1
+          },
+          "propPlans": {
+            "count": 147,
+            "totalMs": 283.6,
+            "p50": 0.2,
+            "p95": 0.4,
+            "max": 159.9
+          },
+          "actorPlans": {
+            "count": 147,
+            "totalMs": 535.8,
+            "p50": 3.2,
+            "p95": 11.4,
+            "max": 20.9
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 322.8000000715256,
+            "phasesMs": {
+              "terrain": 142,
+              "railMetadata": 0,
+              "propPlans": 159.90000009536743,
+              "actorPlans": 20.899999976158142
+            }
+          },
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 169,
+            "phasesMs": {
+              "terrain": 102.20000004768372,
+              "railMetadata": 0,
+              "propPlans": 47.699999928474426,
+              "actorPlans": 19.100000023841858
+            }
+          },
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 165.70000004768372,
+            "phasesMs": {
+              "terrain": 98.89999997615814,
+              "railMetadata": 0,
+              "propPlans": 47.5,
+              "actorPlans": 19.300000071525574
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 322.8000000715256,
+            "phasesMs": {
+              "terrain": 142,
+              "railMetadata": 0,
+              "propPlans": 159.90000009536743,
+              "actorPlans": 20.899999976158142
+            },
+            "props": 6,
+            "actors": 9,
+            "gridBytes": 9281,
+            "trial": 0
+          },
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 169,
+            "phasesMs": {
+              "terrain": 102.20000004768372,
+              "railMetadata": 0,
+              "propPlans": 47.699999928474426,
+              "actorPlans": 19.100000023841858
+            },
+            "props": 6,
+            "actors": 9,
+            "gridBytes": 9281,
+            "trial": 1
+          },
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 165.70000004768372,
+            "phasesMs": {
+              "terrain": 98.89999997615814,
+              "railMetadata": 0,
+              "propPlans": 47.5,
+              "actorPlans": 19.300000071525574
+            },
+            "props": 6,
+            "actors": 9,
+            "gridBytes": 9281,
+            "trial": 2
+          }
+        ]
+      },
+      {
+        "fixture": "woodland",
+        "lane": "generate",
+        "pass": "regenerate",
+        "totalMs": {
+          "count": 147,
+          "totalMs": 756.9,
+          "p50": 5.1,
+          "p95": 7.2,
+          "max": 8
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 147,
+            "totalMs": 342.6,
+            "p50": 2.3,
+            "p95": 2.7,
+            "max": 3.4
+          },
+          "railMetadata": {
+            "count": 147,
+            "totalMs": 0.4,
+            "p50": 0,
+            "p95": 0,
+            "max": 0.1
+          },
+          "propPlans": {
+            "count": 147,
+            "totalMs": 27.9,
+            "p50": 0.2,
+            "p95": 0.3,
+            "max": 0.4
+          },
+          "actorPlans": {
+            "count": 147,
+            "totalMs": 386.0,
+            "p50": 2.2,
+            "p95": 4.6,
+            "max": 5
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 6.599999904632568,
+            "phasesMs": {
+              "terrain": 2.5,
+              "railMetadata": 0,
+              "propPlans": 0.19999992847442627,
+              "actorPlans": 3.899999976158142
+            }
+          },
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 6.899999976158142,
+            "phasesMs": {
+              "terrain": 2.299999952316284,
+              "railMetadata": 0,
+              "propPlans": 0.10000002384185791,
+              "actorPlans": 4.5
+            }
+          },
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 6.5,
+            "phasesMs": {
+              "terrain": 2.299999952316284,
+              "railMetadata": 0,
+              "propPlans": 0.20000004768371582,
+              "actorPlans": 4
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": -57,
+            "cy": -61,
+            "totalMs": 8,
+            "phasesMs": {
+              "terrain": 3.100000023841858,
+              "railMetadata": 0,
+              "propPlans": 0.2999999523162842,
+              "actorPlans": 4.600000023841858
+            },
+            "props": 18,
+            "actors": 4,
+            "gridBytes": 9281,
+            "trial": 0
+          },
+          {
+            "cx": -62,
+            "cy": -57,
+            "totalMs": 7.5,
+            "phasesMs": {
+              "terrain": 2.0999999046325684,
+              "railMetadata": 0,
+              "propPlans": 0.40000009536743164,
+              "actorPlans": 5
+            },
+            "props": 22,
+            "actors": 6,
+            "gridBytes": 9281,
+            "trial": 0
+          },
+          {
+            "cx": -62,
+            "cy": -57,
+            "totalMs": 7.5,
+            "phasesMs": {
+              "terrain": 2.3000000715255737,
+              "railMetadata": 0,
+              "propPlans": 0.3999999761581421,
+              "actorPlans": 4.799999952316284
+            },
+            "props": 22,
+            "actors": 6,
+            "gridBytes": 9281,
+            "trial": 2
+          }
+        ]
+      },
+      {
+        "fixture": "woodland",
+        "lane": "streaming",
+        "pass": "unseen-batches",
+        "totalMs": {
+          "count": 21,
+          "totalMs": 1491.5,
+          "p50": 49,
+          "p95": 231.7,
+          "max": 285.6
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 21,
+            "totalMs": 891.4,
+            "p50": 28.4,
+            "p95": 133.1,
+            "max": 184.5
+          },
+          "railMetadata": {
+            "count": 21,
+            "totalMs": 0.6,
+            "p50": 0,
+            "p95": 0.1,
+            "max": 0.2
+          },
+          "propPlans": {
+            "count": 21,
+            "totalMs": 172.8,
+            "p50": 1.6,
+            "p95": 48.0,
+            "max": 53.3
+          },
+          "actorPlans": {
+            "count": 21,
+            "totalMs": 544.9,
+            "p50": 26.2,
+            "p95": 53.7,
+            "max": 58.4
+          },
+          "propAdmission": {
+            "count": 21,
+            "totalMs": 10.7,
+            "p50": 0.4,
+            "p95": 1.1,
+            "max": 1.3
+          },
+          "actorAdmission": {
+            "count": 21,
+            "totalMs": 20.8,
+            "p50": 0.9,
+            "p95": 1.6,
+            "max": 2.3
+          },
+          "publishOther": {
+            "count": 21,
+            "totalMs": -162.6,
+            "p50": -9,
+            "p95": 0.1,
+            "max": 0.3
+          },
+          "outsidePublish": {
+            "count": 21,
+            "totalMs": 12.9,
+            "p50": 0.6,
+            "p95": 0.9,
+            "max": 1.2
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 285.59999990463257,
+            "phasesMs": {
+              "terrain": 184.49999976158142,
+              "railMetadata": 0,
+              "propPlans": 48.00000011920929,
+              "actorPlans": 58.39999985694885,
+              "propAdmission": 0.8999999761581421,
+              "actorAdmission": 2.3000001907348633,
+              "publishOther": -9.699999928474426,
+              "outsidePublish": 1.1999999284744263
+            }
+          },
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 231.69999992847443,
+            "phasesMs": {
+              "terrain": 133.09999990463257,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 53.300000071525574,
+              "actorPlans": 51.90000009536743,
+              "propAdmission": 0.30000007152557373,
+              "actorAdmission": 1.399999737739563,
+              "publishOther": -9.099999904632568,
+              "outsidePublish": 0.6999999284744263
+            }
+          },
+          {
+            "cx": -63,
+            "cy": -63,
+            "totalMs": 221.30000007152557,
+            "phasesMs": {
+              "terrain": 127.09999990463257,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 47.200000286102295,
+              "actorPlans": 53.699999928474426,
+              "propAdmission": 0.6999998092651367,
+              "actorAdmission": 1.600000262260437,
+              "publishOther": -9.600000262260437,
+              "outsidePublish": 0.5000001192092896
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": -63,
+            "cy": -63,
+            "coordinates": [
+              {
+                "cx": -63,
+                "cy": -63
+              },
+              {
+                "cx": -62,
+                "cy": -63
+              },
+              {
+                "cx": -61,
+                "cy": -63
+              },
+              {
+                "cx": -60,
+                "cy": -63
+              },
+              {
+                "cx": -59,
+                "cy": -63
+              },
+              {
+                "cx": -58,
+                "cy": -63
+              },
+              {
+                "cx": -57,
+                "cy": -63
+              },
+              {
+                "cx": -57,
+                "cy": -62
+              }
+            ],
+            "chunks": 8,
+            "props": 67,
+            "actors": 36,
+            "planProps": 103,
+            "planActors": 36,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 285.59999990463257,
+            "publications": [
+              {
+                "cx": -63,
+                "cy": -63,
+                "ms": 223.60000002384186
+              },
+              {
+                "cx": -62,
+                "cy": -63,
+                "ms": 4.700000047683716
+              },
+              {
+                "cx": -61,
+                "cy": -63,
+                "ms": 5.100000023841858
+              },
+              {
+                "cx": -60,
+                "cy": -63,
+                "ms": 9
+              },
+              {
+                "cx": -59,
+                "cy": -63,
+                "ms": 10.899999976158142
+              },
+              {
+                "cx": -58,
+                "cy": -63,
+                "ms": 15
+              },
+              {
+                "cx": -57,
+                "cy": -63,
+                "ms": 6.799999952316284
+              },
+              {
+                "cx": -57,
+                "cy": -62,
+                "ms": 9.299999952316284
+              }
+            ],
+            "phasesMs": {
+              "terrain": 184.49999976158142,
+              "railMetadata": 0,
+              "propPlans": 48.00000011920929,
+              "actorPlans": 58.39999985694885,
+              "propAdmission": 0.8999999761581421,
+              "actorAdmission": 2.3000001907348633,
+              "publishOther": -9.699999928474426,
+              "outsidePublish": 1.1999999284744263
+            },
+            "trial": 0
+          },
+          {
+            "cx": -63,
+            "cy": -63,
+            "coordinates": [
+              {
+                "cx": -63,
+                "cy": -63
+              },
+              {
+                "cx": -62,
+                "cy": -63
+              },
+              {
+                "cx": -61,
+                "cy": -63
+              },
+              {
+                "cx": -60,
+                "cy": -63
+              },
+              {
+                "cx": -59,
+                "cy": -63
+              },
+              {
+                "cx": -58,
+                "cy": -63
+              },
+              {
+                "cx": -57,
+                "cy": -63
+              },
+              {
+                "cx": -57,
+                "cy": -62
+              }
+            ],
+            "chunks": 8,
+            "props": 67,
+            "actors": 36,
+            "planProps": 103,
+            "planActors": 36,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 231.69999992847443,
+            "publications": [
+              {
+                "cx": -63,
+                "cy": -63,
+                "ms": 178.5
+              },
+              {
+                "cx": -62,
+                "cy": -63,
+                "ms": 4.700000047683716
+              },
+              {
+                "cx": -61,
+                "cy": -63,
+                "ms": 4.399999976158142
+              },
+              {
+                "cx": -60,
+                "cy": -63,
+                "ms": 7.600000023841858
+              },
+              {
+                "cx": -59,
+                "cy": -63,
+                "ms": 10.700000047683716
+              },
+              {
+                "cx": -58,
+                "cy": -63,
+                "ms": 13.899999976158142
+              },
+              {
+                "cx": -57,
+                "cy": -63,
+                "ms": 6.799999952316284
+              },
+              {
+                "cx": -57,
+                "cy": -62,
+                "ms": 4.399999976158142
+              }
+            ],
+            "phasesMs": {
+              "terrain": 133.09999990463257,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 53.300000071525574,
+              "actorPlans": 51.90000009536743,
+              "propAdmission": 0.30000007152557373,
+              "actorAdmission": 1.399999737739563,
+              "publishOther": -9.099999904632568,
+              "outsidePublish": 0.6999999284744263
+            },
+            "trial": 1
+          },
+          {
+            "cx": -63,
+            "cy": -63,
+            "coordinates": [
+              {
+                "cx": -63,
+                "cy": -63
+              },
+              {
+                "cx": -62,
+                "cy": -63
+              },
+              {
+                "cx": -61,
+                "cy": -63
+              },
+              {
+                "cx": -60,
+                "cy": -63
+              },
+              {
+                "cx": -59,
+                "cy": -63
+              },
+              {
+                "cx": -58,
+                "cy": -63
+              },
+              {
+                "cx": -57,
+                "cy": -63
+              },
+              {
+                "cx": -57,
+                "cy": -62
+              }
+            ],
+            "chunks": 8,
+            "props": 67,
+            "actors": 36,
+            "planProps": 103,
+            "planActors": 36,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 221.30000007152557,
+            "publications": [
+              {
+                "cx": -63,
+                "cy": -63,
+                "ms": 166
+              },
+              {
+                "cx": -62,
+                "cy": -63,
+                "ms": 4.399999976158142
+              },
+              {
+                "cx": -61,
+                "cy": -63,
+                "ms": 4.399999976158142
+              },
+              {
+                "cx": -60,
+                "cy": -63,
+                "ms": 8
+              },
+              {
+                "cx": -59,
+                "cy": -63,
+                "ms": 11
+              },
+              {
+                "cx": -58,
+                "cy": -63,
+                "ms": 14.399999976158142
+              },
+              {
+                "cx": -57,
+                "cy": -63,
+                "ms": 7.799999952316284
+              },
+              {
+                "cx": -57,
+                "cy": -62,
+                "ms": 4.800000071525574
+              }
+            ],
+            "phasesMs": {
+              "terrain": 127.09999990463257,
+              "railMetadata": 0.10000002384185791,
+              "propPlans": 47.200000286102295,
+              "actorPlans": 53.699999928474426,
+              "propAdmission": 0.6999998092651367,
+              "actorAdmission": 1.600000262260437,
+              "publishOther": -9.600000262260437,
+              "outsidePublish": 0.5000001192092896
+            },
+            "trial": 2
+          }
+        ],
+        "singlePublicationMs": {
+          "count": 147,
+          "totalMs": 1478.6,
+          "p50": 5.8,
+          "p95": 15,
+          "max": 223.6
+        }
+      },
+      {
+        "fixture": "negative-coast",
+        "lane": "generate",
+        "pass": "unseen",
+        "totalMs": {
+          "count": 147,
+          "totalMs": 1410.2,
+          "p50": 6.7,
+          "p95": 13.4,
+          "max": 98
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 147,
+            "totalMs": 523.1,
+            "p50": 2.4,
+            "p95": 3,
+            "max": 61.6
+          },
+          "railMetadata": {
+            "count": 147,
+            "totalMs": 0.8,
+            "p50": 0,
+            "p95": 0.1,
+            "max": 0.1
+          },
+          "propPlans": {
+            "count": 147,
+            "totalMs": 32.7,
+            "p50": 0.2,
+            "p95": 0.4,
+            "max": 0.6
+          },
+          "actorPlans": {
+            "count": 147,
+            "totalMs": 853.6,
+            "p50": 4.1,
+            "p95": 11,
+            "max": 95.3
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": -7,
+            "cy": -12,
+            "totalMs": 79.10000002384186,
+            "phasesMs": {
+              "terrain": 56.200000047683716,
+              "railMetadata": 0,
+              "propPlans": 0.2999999523162842,
+              "actorPlans": 22.600000023841858
+            }
+          },
+          {
+            "cx": -7,
+            "cy": -12,
+            "totalMs": 83.79999995231628,
+            "phasesMs": {
+              "terrain": 61.60000002384186,
+              "railMetadata": 0.09999990463256836,
+              "propPlans": 0.20000004768371582,
+              "actorPlans": 21.899999976158142
+            }
+          },
+          {
+            "cx": -7,
+            "cy": -12,
+            "totalMs": 77.80000007152557,
+            "phasesMs": {
+              "terrain": 56.40000009536743,
+              "railMetadata": 0,
+              "propPlans": 0.2999999523162842,
+              "actorPlans": 21.100000023841858
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": -3,
+            "cy": -12,
+            "totalMs": 98,
+            "phasesMs": {
+              "terrain": 2.399999976158142,
+              "railMetadata": 0,
+              "propPlans": 0.2999999523162842,
+              "actorPlans": 95.30000007152557
+            },
+            "props": 11,
+            "actors": 3,
+            "gridBytes": 9281,
+            "trial": 0
+          },
+          {
+            "cx": -3,
+            "cy": -12,
+            "totalMs": 96.70000004768372,
+            "phasesMs": {
+              "terrain": 2.100000023841858,
+              "railMetadata": 0,
+              "propPlans": 0.2999999523162842,
+              "actorPlans": 94.30000007152557
+            },
+            "props": 11,
+            "actors": 3,
+            "gridBytes": 9281,
+            "trial": 2
+          },
+          {
+            "cx": -3,
+            "cy": -12,
+            "totalMs": 95.89999997615814,
+            "phasesMs": {
+              "terrain": 2.100000023841858,
+              "railMetadata": 0,
+              "propPlans": 0.2999999523162842,
+              "actorPlans": 93.5
+            },
+            "props": 11,
+            "actors": 3,
+            "gridBytes": 9281,
+            "trial": 1
+          }
+        ]
+      },
+      {
+        "fixture": "negative-coast",
+        "lane": "generate",
+        "pass": "regenerate",
+        "totalMs": {
+          "count": 147,
+          "totalMs": 856.9,
+          "p50": 5.9,
+          "p95": 7.8,
+          "max": 12
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 147,
+            "totalMs": 353.1,
+            "p50": 2.4,
+            "p95": 2.7,
+            "max": 5.5
+          },
+          "railMetadata": {
+            "count": 147,
+            "totalMs": 0.9,
+            "p50": 0,
+            "p95": 0.1,
+            "max": 0.1
+          },
+          "propPlans": {
+            "count": 147,
+            "totalMs": 32.8,
+            "p50": 0.2,
+            "p95": 0.4,
+            "max": 1.1
+          },
+          "actorPlans": {
+            "count": 147,
+            "totalMs": 470.1,
+            "p50": 3.5,
+            "p95": 5.1,
+            "max": 5.9
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": -7,
+            "cy": -12,
+            "totalMs": 3.700000047683716,
+            "phasesMs": {
+              "terrain": 2.200000047683716,
+              "railMetadata": 0,
+              "propPlans": 0.19999992847442627,
+              "actorPlans": 1.3000000715255737
+            }
+          },
+          {
+            "cx": -7,
+            "cy": -12,
+            "totalMs": 4,
+            "phasesMs": {
+              "terrain": 2.5,
+              "railMetadata": 0,
+              "propPlans": 0.19999992847442627,
+              "actorPlans": 1.3000000715255737
+            }
+          },
+          {
+            "cx": -7,
+            "cy": -12,
+            "totalMs": 3.899999976158142,
+            "phasesMs": {
+              "terrain": 2.600000023841858,
+              "railMetadata": 0,
+              "propPlans": 0.10000002384185791,
+              "actorPlans": 1.1999999284744263
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": -2,
+            "cy": -7,
+            "totalMs": 12,
+            "phasesMs": {
+              "terrain": 5.5,
+              "railMetadata": 0,
+              "propPlans": 1.100000023841858,
+              "actorPlans": 5.399999976158142
+            },
+            "props": 10,
+            "actors": 4,
+            "gridBytes": 9281,
+            "trial": 0
+          },
+          {
+            "cx": -3,
+            "cy": -10,
+            "totalMs": 8.700000047683716,
+            "phasesMs": {
+              "terrain": 2.600000023841858,
+              "railMetadata": 0,
+              "propPlans": 0.30000007152557373,
+              "actorPlans": 5.799999952316284
+            },
+            "props": 15,
+            "actors": 3,
+            "gridBytes": 9281,
+            "trial": 0
+          },
+          {
+            "cx": -2,
+            "cy": -8,
+            "totalMs": 8.399999976158142,
+            "phasesMs": {
+              "terrain": 2.1999999284744263,
+              "railMetadata": 0,
+              "propPlans": 0.30000007152557373,
+              "actorPlans": 5.899999976158142
+            },
+            "props": 22,
+            "actors": 6,
+            "gridBytes": 9281,
+            "trial": 2
+          }
+        ]
+      },
+      {
+        "fixture": "negative-coast",
+        "lane": "streaming",
+        "pass": "unseen-batches",
+        "totalMs": {
+          "count": 21,
+          "totalMs": 1517.0,
+          "p50": 50.3,
+          "p95": 222.4,
+          "max": 224.4
+        },
+        "phasesMs": {
+          "terrain": {
+            "count": 21,
+            "totalMs": 748.9,
+            "p50": 31.0,
+            "p95": 85.7,
+            "max": 86.9
+          },
+          "railMetadata": {
+            "count": 21,
+            "totalMs": 1.3,
+            "p50": 0,
+            "p95": 0.2,
+            "max": 0.2
+          },
+          "propPlans": {
+            "count": 21,
+            "totalMs": 34.1,
+            "p50": 1.9,
+            "p95": 2.6,
+            "max": 2.7
+          },
+          "actorPlans": {
+            "count": 21,
+            "totalMs": 885.6,
+            "p50": 25.6,
+            "p95": 139.9,
+            "max": 145.0
+          },
+          "propAdmission": {
+            "count": 21,
+            "totalMs": 13.3,
+            "p50": 0.7,
+            "p95": 1.0,
+            "max": 1.2
+          },
+          "actorAdmission": {
+            "count": 21,
+            "totalMs": 28.0,
+            "p50": 1.3,
+            "p95": 2.2,
+            "max": 3.1
+          },
+          "publishOther": {
+            "count": 21,
+            "totalMs": -206.2,
+            "p50": -9.2,
+            "p95": 0.1,
+            "max": 0.1
+          },
+          "outsidePublish": {
+            "count": 21,
+            "totalMs": 12.0,
+            "p50": 0.6,
+            "p95": 0.8,
+            "max": 0.9
+          }
+        },
+        "firstEachTrial": [
+          {
+            "cx": -7,
+            "cy": -12,
+            "totalMs": 222.39999997615814,
+            "phasesMs": {
+              "terrain": 86.89999997615814,
+              "railMetadata": 0,
+              "propPlans": 2.299999952316284,
+              "actorPlans": 139.89999997615814,
+              "propAdmission": 0.5,
+              "actorAdmission": 0.8999998569488525,
+              "publishOther": -8.899999856948853,
+              "outsidePublish": 0.8000000715255737
+            }
+          },
+          {
+            "cx": -7,
+            "cy": -12,
+            "totalMs": 217.5,
+            "phasesMs": {
+              "terrain": 85.700000166893,
+              "railMetadata": 0.20000004768371582,
+              "propPlans": 1.799999713897705,
+              "actorPlans": 136.39999997615814,
+              "propAdmission": 0.7000001668930054,
+              "actorAdmission": 0.7999999523162842,
+              "publishOther": -8.899999976158142,
+              "outsidePublish": 0.7999999523162842
+            }
+          },
+          {
+            "cx": -7,
+            "cy": -12,
+            "totalMs": 224.39999997615814,
+            "phasesMs": {
+              "terrain": 85.59999990463257,
+              "railMetadata": 0.20000004768371582,
+              "propPlans": 2.500000238418579,
+              "actorPlans": 144.9999998807907,
+              "propAdmission": 0.39999985694885254,
+              "actorAdmission": 1.3000000715255737,
+              "publishOther": -11.200000047683716,
+              "outsidePublish": 0.6000000238418579
+            }
+          }
+        ],
+        "slowest": [
+          {
+            "cx": -7,
+            "cy": -12,
+            "coordinates": [
+              {
+                "cx": -7,
+                "cy": -12
+              },
+              {
+                "cx": -6,
+                "cy": -12
+              },
+              {
+                "cx": -5,
+                "cy": -12
+              },
+              {
+                "cx": -4,
+                "cy": -12
+              },
+              {
+                "cx": -3,
+                "cy": -12
+              },
+              {
+                "cx": -2,
+                "cy": -12
+              },
+              {
+                "cx": -1,
+                "cy": -12
+              },
+              {
+                "cx": -1,
+                "cy": -11
+              }
+            ],
+            "chunks": 8,
+            "props": 50,
+            "actors": 17,
+            "planProps": 94,
+            "planActors": 17,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 224.39999997615814,
+            "publications": [
+              {
+                "cx": -7,
+                "cy": -12,
+                "ms": 79.20000004768372
+              },
+              {
+                "cx": -6,
+                "cy": -12,
+                "ms": 9.299999952316284
+              },
+              {
+                "cx": -5,
+                "cy": -12,
+                "ms": 4.200000047683716
+              },
+              {
+                "cx": -4,
+                "cy": -12,
+                "ms": 7.899999976158142
+              },
+              {
+                "cx": -3,
+                "cy": -12,
+                "ms": 100.5
+              },
+              {
+                "cx": -2,
+                "cy": -12,
+                "ms": 4.600000023841858
+              },
+              {
+                "cx": -1,
+                "cy": -12,
+                "ms": 8.599999904632568
+              },
+              {
+                "cx": -1,
+                "cy": -11,
+                "ms": 9.5
+              }
+            ],
+            "phasesMs": {
+              "terrain": 85.59999990463257,
+              "railMetadata": 0.20000004768371582,
+              "propPlans": 2.500000238418579,
+              "actorPlans": 144.9999998807907,
+              "propAdmission": 0.39999985694885254,
+              "actorAdmission": 1.3000000715255737,
+              "publishOther": -11.200000047683716,
+              "outsidePublish": 0.6000000238418579
+            },
+            "trial": 2
+          },
+          {
+            "cx": -7,
+            "cy": -12,
+            "coordinates": [
+              {
+                "cx": -7,
+                "cy": -12
+              },
+              {
+                "cx": -6,
+                "cy": -12
+              },
+              {
+                "cx": -5,
+                "cy": -12
+              },
+              {
+                "cx": -4,
+                "cy": -12
+              },
+              {
+                "cx": -3,
+                "cy": -12
+              },
+              {
+                "cx": -2,
+                "cy": -12
+              },
+              {
+                "cx": -1,
+                "cy": -12
+              },
+              {
+                "cx": -1,
+                "cy": -11
+              }
+            ],
+            "chunks": 8,
+            "props": 50,
+            "actors": 17,
+            "planProps": 94,
+            "planActors": 17,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 222.39999997615814,
+            "publications": [
+              {
+                "cx": -7,
+                "cy": -12,
+                "ms": 81.09999990463257
+              },
+              {
+                "cx": -6,
+                "cy": -12,
+                "ms": 6.700000047683716
+              },
+              {
+                "cx": -5,
+                "cy": -12,
+                "ms": 4.5
+              },
+              {
+                "cx": -4,
+                "cy": -12,
+                "ms": 7.199999928474426
+              },
+              {
+                "cx": -3,
+                "cy": -12,
+                "ms": 97.89999997615814
+              },
+              {
+                "cx": -2,
+                "cy": -12,
+                "ms": 4.5
+              },
+              {
+                "cx": -1,
+                "cy": -12,
+                "ms": 8.5
+              },
+              {
+                "cx": -1,
+                "cy": -11,
+                "ms": 11.200000047683716
+              }
+            ],
+            "phasesMs": {
+              "terrain": 86.89999997615814,
+              "railMetadata": 0,
+              "propPlans": 2.299999952316284,
+              "actorPlans": 139.89999997615814,
+              "propAdmission": 0.5,
+              "actorAdmission": 0.8999998569488525,
+              "publishOther": -8.899999856948853,
+              "outsidePublish": 0.8000000715255737
+            },
+            "trial": 0
+          },
+          {
+            "cx": -7,
+            "cy": -12,
+            "coordinates": [
+              {
+                "cx": -7,
+                "cy": -12
+              },
+              {
+                "cx": -6,
+                "cy": -12
+              },
+              {
+                "cx": -5,
+                "cy": -12
+              },
+              {
+                "cx": -4,
+                "cy": -12
+              },
+              {
+                "cx": -3,
+                "cy": -12
+              },
+              {
+                "cx": -2,
+                "cy": -12
+              },
+              {
+                "cx": -1,
+                "cy": -12
+              },
+              {
+                "cx": -1,
+                "cy": -11
+              }
+            ],
+            "chunks": 8,
+            "props": 50,
+            "actors": 17,
+            "planProps": 94,
+            "planActors": 17,
+            "residentChunks": 8,
+            "gridBytes": 74248,
+            "totalMs": 217.5,
+            "publications": [
+              {
+                "cx": -7,
+                "cy": -12,
+                "ms": 81.10000002384186
+              },
+              {
+                "cx": -6,
+                "cy": -12,
+                "ms": 7
+              },
+              {
+                "cx": -5,
+                "cy": -12,
+                "ms": 4.200000047683716
+              },
+              {
+                "cx": -4,
+                "cy": -12,
+                "ms": 7.399999976158142
+              },
+              {
+                "cx": -3,
+                "cy": -12,
+                "ms": 95.29999995231628
+              },
+              {
+                "cx": -2,
+                "cy": -12,
+                "ms": 4.400000095367432
+              },
+              {
+                "cx": -1,
+                "cy": -12,
+                "ms": 8.199999928474426
+              },
+              {
+                "cx": -1,
+                "cy": -11,
+                "ms": 9.100000023841858
+              }
+            ],
+            "phasesMs": {
+              "terrain": 85.700000166893,
+              "railMetadata": 0.20000004768371582,
+              "propPlans": 1.799999713897705,
+              "actorPlans": 136.39999997615814,
+              "propAdmission": 0.7000001668930054,
+              "actorAdmission": 0.7999999523162842,
+              "publishOther": -8.899999976158142,
+              "outsidePublish": 0.7999999523162842
+            },
+            "trial": 1
+          }
+        ],
+        "singlePublicationMs": {
+          "count": 147,
+          "totalMs": 1505.0,
+          "p50": 7.2,
+          "p95": 14.5,
+          "max": 100.5
+        }
+      }
+    ],
+    "scope": {
+      "generate": "Fresh planner caches per fixture/trial; all unseen chunks then same-coordinate regeneration. JIT stays warm across fixtures. Phases are exclusive; terrain includes its internal regional planning. No persistence, live admission, autotiling, physics, traffic services, replication or rendering.",
+      "streaming": "Production RealmStreaming + procedural registries + RealmRecords, empty MemoryRecordStore, batches of up to eight unique chunks; all earlier batches stay resident. totalMs is awaited batch wall time, NOT a single Worker task or disk latency. publications records synchronous per-chunk publication. phasesMs partitions the batch into exclusive timings. Excludes physics, autotiling, traffic services, replication and rendering. Verification hashes terrain/rail metadata only; live props/actors are counted.",
+      "observation": "Counts/records are collected after timers, but can affect later GC. No forced GC or discarded warmup. Verify/profile runs are diagnostic, not timing baselines. FNV-1a content hashes are regression checks, not cryptographic identities."
+    }
+  },
+  "cadence": {
+    "ordinary": {
+      "allocationSampled": false,
+      "seconds": 30,
+      "cells": [
+        {
+          "scene": "drive",
+          "zoom": 1,
+          "drivenPx": 2665,
+          "frames": 1798,
+          "missed": 1,
+          "frameMs": {
+            "p50": 16.7,
+            "p95": 16.8,
+            "max": 33.4
+          },
+          "renderMs": {
+            "p50": 4.1,
+            "p95": 6.4,
+            "max": 36
+          },
+          "updateMs": {
+            "p50": 2.8,
+            "p95": 4,
+            "max": 5.8
+          },
+          "workerTickMs": {
+            "p50": 5.8,
+            "p95": 10.6
+          },
+          "entities": 21,
+          "slowFrames": [
+            {
+              "atMs": 27549,
+              "endMs": 51492.7,
+              "frameMs": 33.4,
+              "updateMs": 2.1,
+              "updates": 1,
+              "renderMs": 36,
+              "uploadKiB": 2560,
+              "uploadPages": 3
+            }
+          ]
+        }
+      ]
+    },
+    "sampledMoving": {
+      "allocationSampled": true,
+      "seconds": 30,
+      "cells": [
+        {
+          "scene": "drive",
+          "zoom": 1,
+          "drivenPx": 2462,
+          "frames": 1797,
+          "missed": 2,
+          "frameMs": {
+            "p50": 16.7,
+            "p95": 16.8,
+            "max": 50
+          },
+          "renderMs": {
+            "p50": 3.7,
+            "p95": 5.8,
+            "max": 45.8
+          },
+          "updateMs": {
+            "p50": 2.6,
+            "p95": 3.6,
+            "max": 6
+          },
+          "workerTickMs": {
+            "p50": 4.4,
+            "p95": 8
+          },
+          "entities": 14,
+          "slowFrames": [
+            {
+              "atMs": 4223,
+              "endMs": 26912,
+              "frameMs": 50,
+              "updateMs": 3.1,
+              "updates": 1,
+              "renderMs": 45.8,
+              "uploadKiB": 384,
+              "uploadPages": 1
+            },
+            {
+              "atMs": 15490,
+              "endMs": 38179.1,
+              "frameMs": 33.3,
+              "updateMs": 2.1,
+              "updates": 1,
+              "renderMs": 33.4,
+              "uploadKiB": 2560,
+              "uploadPages": 3
+            }
+          ]
+        }
+      ]
+    },
+    "traceOnlyBackedUp": {
+      "allocationSampled": false,
+      "seconds": 30,
+      "cells": [
+        {
+          "scene": "drive",
+          "zoom": 1,
+          "drivenPx": 806,
+          "frames": 1796,
+          "missed": 2,
+          "frameMs": {
+            "p50": 16.7,
+            "p95": 16.7,
+            "max": 66.7
+          },
+          "renderMs": {
+            "p50": 3.3,
+            "p95": 4.8,
+            "max": 31.8
+          },
+          "updateMs": {
+            "p50": 2.8,
+            "p95": 3.7,
+            "max": 5.3
+          },
+          "workerTickMs": {
+            "p50": 4.1,
+            "p95": 6.2
+          },
+          "entities": 17,
+          "slowFrames": [
+            {
+              "atMs": 4342,
+              "endMs": 26953.8,
+              "frameMs": 33.2,
+              "updateMs": 1.7,
+              "updates": 1,
+              "renderMs": 31.8,
+              "uploadKiB": 384,
+              "uploadPages": 1
+            },
+            {
+              "atMs": 17373,
+              "endMs": 39985.1,
+              "frameMs": 66.7,
+              "updateMs": 1.5,
+              "updates": 1,
+              "renderMs": 2,
+              "uploadKiB": 0,
+              "uploadPages": 0
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "allocations": [
+    {
+      "scene": "city",
+      "seconds": 30,
+      "drivenPx": null,
+      "entities": 11,
+      "sampledBytes": 573139404,
+      "estimatedMiBPerSecond": 18.22,
+      "topSelf": [
+        {
+          "function": "SurfaceReceivers",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "line": 68,
+          "sampledBytes": 102241148
+        },
+        {
+          "function": "prepare",
+          "source": "src/physics/VehicleChassis.ts",
+          "line": 93,
+          "sampledBytes": 25313864
+        },
+        {
+          "function": "clone",
+          "source": "src/client/PlayerPredictor.ts",
+          "line": 26,
+          "sampledBytes": 13768344
+        },
+        {
+          "function": "register",
+          "source": "(runtime/bench/dependency)",
+          "line": 0,
+          "sampledBytes": 11148524
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "line": 134,
+          "sampledBytes": 11116636
+        },
+        {
+          "function": "recordMotionSample",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "line": 10,
+          "sampledBytes": 10846896
+        },
+        {
+          "function": "entries",
+          "source": "(runtime/bench/dependency)",
+          "line": 0,
+          "sampledBytes": 10652664
+        },
+        {
+          "function": "mul",
+          "source": "src/physics/VehicleChassis.ts",
+          "line": 28,
+          "sampledBytes": 10233000
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/client/RemotePresentation.ts",
+          "line": 57,
+          "sampledBytes": 10228296
+        },
+        {
+          "function": "rotateBodyVector",
+          "source": "src/physics/BodyRotation.ts",
+          "line": 22,
+          "sampledBytes": 9905220
+        },
+        {
+          "function": "build",
+          "source": "src/physics/WheelGrid.ts",
+          "line": 27,
+          "sampledBytes": 9839256
+        },
+        {
+          "function": "readPhysicsState",
+          "source": "src/shared/physicsStateCodec.ts",
+          "line": 135,
+          "sampledBytes": 8596912
+        }
+      ],
+      "nearestProjectFile": [
+        {
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 134087556
+        },
+        {
+          "source": "src/physics/PhysicsScene.ts",
+          "sampledBytes": 63275984
+        },
+        {
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 62011184
+        },
+        {
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 32035860
+        },
+        {
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 20951436
+        },
+        {
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 17903256
+        },
+        {
+          "source": "src/input/ControllerBindings.ts",
+          "sampledBytes": 12915056
+        },
+        {
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 12495388
+        },
+        {
+          "source": "src/rendering/scene/EntitySprites.ts",
+          "sampledBytes": 12199896
+        },
+        {
+          "source": "src/rendering/GpuRasterSurface.ts",
+          "sampledBytes": 11841256
+        },
+        {
+          "source": "src/client/ClientStateView.ts",
+          "sampledBytes": 11508408
+        },
+        {
+          "source": "src/physics/WheelGrid.ts",
+          "sampledBytes": 10429164
+        }
+      ],
+      "stackOwnershipBytes": {
+        "other": 210062744,
+        "physics": 178319812,
+        "presentation": 38854692,
+        "surfaceReceivers": 145902156
+      },
+      "scope": "Main thread only, cadence sample and its setup/diagnostics; GPU finish window skipped. Includes benchmark bookkeeping and collected objects. Estimated allocations, not retained heap or a GC-cause diagnosis. Sampling affects timing; compare cadence in a separate uninstrumented run.",
+      "stackOwnershipScope": "Disjoint groups by sampled call stack: SurfaceReceivers first, then src/physics modules, then RemotePresentation/PresentationTimeline, else other. Inclusive within the selected group; each byte counted once. Top self sites and nearest-file totals are alternate views, not additional bytes."
+    },
+    {
+      "scene": "drive",
+      "seconds": 30,
+      "drivenPx": 2462,
+      "entities": 14,
+      "sampledBytes": 692494360,
+      "estimatedMiBPerSecond": 22.01,
+      "topSelf": [
+        {
+          "function": "SurfaceReceivers",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "line": 68,
+          "sampledBytes": 128682652
+        },
+        {
+          "function": "prepare",
+          "source": "src/physics/VehicleChassis.ts",
+          "line": 93,
+          "sampledBytes": 27314828
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "line": 134,
+          "sampledBytes": 17409020
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/client/RemotePresentation.ts",
+          "line": 57,
+          "sampledBytes": 16195052
+        },
+        {
+          "function": "recordMotionSample",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "line": 10,
+          "sampledBytes": 15581404
+        },
+        {
+          "function": "clone",
+          "source": "src/client/PlayerPredictor.ts",
+          "line": 26,
+          "sampledBytes": 13244480
+        },
+        {
+          "function": "entries",
+          "source": "(runtime/bench/dependency)",
+          "line": 0,
+          "sampledBytes": 12980008
+        },
+        {
+          "function": "rotateBodyVector",
+          "source": "src/physics/BodyRotation.ts",
+          "line": 22,
+          "sampledBytes": 12037080
+        },
+        {
+          "function": "register",
+          "source": "(runtime/bench/dependency)",
+          "line": 0,
+          "sampledBytes": 11968252
+        },
+        {
+          "function": "mul",
+          "source": "src/physics/VehicleChassis.ts",
+          "line": 28,
+          "sampledBytes": 10823460
+        },
+        {
+          "function": "Map",
+          "source": "(runtime/bench/dependency)",
+          "line": 0,
+          "sampledBytes": 10365376
+        },
+        {
+          "function": "next",
+          "source": "(runtime/bench/dependency)",
+          "line": 0,
+          "sampledBytes": 9768464
+        }
+      ],
+      "nearestProjectFile": [
+        {
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 166200724
+        },
+        {
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 61225144
+        },
+        {
+          "source": "src/physics/PhysicsScene.ts",
+          "sampledBytes": 60815260
+        },
+        {
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 35706220
+        },
+        {
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 31295348
+        },
+        {
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 26363540
+        },
+        {
+          "source": "src/rendering/GpuRasterSurface.ts",
+          "sampledBytes": 18234624
+        },
+        {
+          "source": "src/input/ControllerBindings.ts",
+          "sampledBytes": 15766888
+        },
+        {
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 15610444
+        },
+        {
+          "source": "src/rendering/scene/EntitySprites.ts",
+          "sampledBytes": 15446108
+        },
+        {
+          "source": "src/rendering/GpuMeshBodies.ts",
+          "sampledBytes": 13739720
+        },
+        {
+          "source": "src/client/ClientStateView.ts",
+          "sampledBytes": 13313196
+        }
+      ],
+      "stackOwnershipBytes": {
+        "other": 276015740,
+        "physics": 181298752,
+        "presentation": 57658888,
+        "surfaceReceivers": 177520980
+      },
+      "scope": "Main thread only, cadence sample and its setup/diagnostics; GPU finish window skipped. Includes benchmark bookkeeping and collected objects. Estimated allocations, not retained heap or a GC-cause diagnosis. Sampling affects timing; compare cadence in a separate uninstrumented run.",
+      "stackOwnershipScope": "Disjoint groups by sampled call stack: SurfaceReceivers first, then src/physics modules, then RemotePresentation/PresentationTimeline, else other. Inclusive within the selected group; each byte counted once. Top self sites and nearest-file totals are alternate views, not additional bytes."
+    }
+  ],
+  "gc": [
+    {
+      "trace": "phone-allocations",
+      "scene": "city",
+      "approximateTraceSeconds": 30.41,
+      "minor": {
+        "count": 85,
+        "totalMs": 168.353,
+        "p50": 1.852,
+        "p95": 2.851,
+        "max": 4.403
+      },
+      "major": {
+        "count": 0,
+        "totalMs": 0,
+        "p50": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "majorEvents": [],
+      "profilerInducedMajor": {
+        "count": 1,
+        "totalMs": 47.111,
+        "p50": 47.111,
+        "p95": 47.111,
+        "max": 47.111
+      },
+      "longMemoryInstrumentationTasks": []
+    },
+    {
+      "trace": "phone-allocations",
+      "scene": "drive",
+      "approximateTraceSeconds": 30.41,
+      "minor": {
+        "count": 94,
+        "totalMs": 176.35,
+        "p50": 1.675,
+        "p95": 3.141,
+        "max": 7.73
+      },
+      "major": {
+        "count": 2,
+        "totalMs": 24.524,
+        "p50": 12.045,
+        "p95": 12.479,
+        "max": 12.479
+      },
+      "majorEvents": [
+        {
+          "elapsedMs": 12.045,
+          "reason": "finalize incremental marking via task",
+          "heapBeforeMiB": 68.13,
+          "heapAfterMiB": 53.77
+        },
+        {
+          "elapsedMs": 12.479,
+          "reason": "finalize incremental marking via task",
+          "heapBeforeMiB": 65.37,
+          "heapAfterMiB": 54.81
+        }
+      ],
+      "profilerInducedMajor": {
+        "count": 1,
+        "totalMs": 45.439,
+        "p50": 45.439,
+        "p95": 45.439,
+        "max": 45.439
+      },
+      "longMemoryInstrumentationTasks": []
+    },
+    {
+      "trace": "phone-drive-allocations-repeat",
+      "scene": "drive",
+      "approximateTraceSeconds": 30.46,
+      "minor": {
+        "count": 101,
+        "totalMs": 176.541,
+        "p50": 1.601,
+        "p95": 2.629,
+        "max": 6.353
+      },
+      "major": {
+        "count": 0,
+        "totalMs": 0,
+        "p50": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "majorEvents": [],
+      "profilerInducedMajor": {
+        "count": 1,
+        "totalMs": 55.201,
+        "p50": 55.201,
+        "p95": 55.201,
+        "max": 55.201
+      },
+      "longMemoryInstrumentationTasks": []
+    },
+    {
+      "trace": "phone-driving-trace",
+      "scene": "drive",
+      "approximateTraceSeconds": 32.2,
+      "minor": {
+        "count": 126,
+        "totalMs": 191.869,
+        "p50": 1.444,
+        "p95": 2.252,
+        "max": 3.612
+      },
+      "major": {
+        "count": 0,
+        "totalMs": 0,
+        "p50": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "majorEvents": [],
+      "profilerInducedMajor": {
+        "count": 0,
+        "totalMs": 0,
+        "p50": 0,
+        "p95": 0,
+        "max": 0
+      },
+      "longMemoryInstrumentationTasks": [
+        {
+          "elapsedMs": 62.18,
+          "gcOverlap": false
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Initial allocation drive covered only 158 px; excluded from representative moving allocation comparison. Its GC census is retained as an instrumented blocked-traffic observation.",
+    "Trace-only drive covered 806 px; useful for GC observation, not comparable to the ordinary 2665 px traversal for streaming cost. Trace window includes the separate GPU-finish measurement.",
+    "Stopping HeapProfiler sampling induced explicit sampling-profiler MajorGC events after the cadence sample. These are reported separately and excluded from natural-major summaries.",
+    "The 33.4 ms interval in the ordinary drive has no trace; its cause is not established.",
+    "No long-session retained-heap/leak test; allocation volume is not live-heap size."
+  ]
+}

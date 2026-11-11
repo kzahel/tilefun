@@ -24,6 +24,7 @@ import react from "@vitejs/plugin-react";
 import { chromium } from "playwright-core";
 import { createServer } from "vite";
 import { openCdpTab } from "./cdp-tab.mjs";
+import { allocationSummary } from "./instrumentation/allocation-summary.mjs";
 
 const option = (key, fallback) =>
   process.argv
@@ -79,6 +80,9 @@ const query = option("query", "");
 // Sample a CPU profile of each cell's main thread and print its top self-time
 // functions. Profiled timings are not the unprofiled baseline.
 const profile = process.argv.includes("--profile");
+// Separate diagnostic runs: sampling itself and the bench's frame records allocate.
+const allocations = process.argv.includes("--allocations");
+if (allocations && profile) throw Error("Use --allocations and --profile in separate runs");
 // A Chrome trace of each cell (all threads and the GPU process), written beside the report.
 const trace = process.argv.includes("--trace");
 // Optional directory for one screenshot per cell (visual evidence for A/B runs).
@@ -91,7 +95,7 @@ for (const key of ["WORKSHOP_AUTH_DIR", "WORKSHOP_DATA_DIR", "ART_NOTES_DIR"])
 let server, browser, page, testOrigin;
 
 /** Runs in the page: one steady sample of `seconds`, then a short finish window. */
-async function samplePage({ seconds }) {
+async function samplePage({ seconds, measureFinish = true }) {
   const game = document.querySelector("#game").__game;
   const surface = game.renderer.surface;
   const gl = surface?.renderer?.getContext?.();
@@ -224,13 +228,15 @@ async function samplePage({ seconds }) {
     const draws = stats ? (stats.drawCalls - draws0) / Math.max(1, renders.length) : null;
     // Separate window: blocking on the GPU distorts cadence, so it never shares
     // samples with the frame measurements above.
-    callbacks.render = (alpha, now) => {
-      const t = performance.now();
-      render(alpha, now);
-      gl?.finish();
-      finish.push(performance.now() - t);
-    };
-    await frameLoop(Math.min(2000, seconds * 1000));
+    if (measureFinish) {
+      callbacks.render = (alpha, now) => {
+        const t = performance.now();
+        render(alpha, now);
+        gl?.finish();
+        finish.push(performance.now() - t);
+      };
+      await frameLoop(Math.min(2000, seconds * 1000));
+    }
     const cadence = pct(frames, 0.5);
     const host = await game.transport.getDiagnostics?.();
     const tick = host?.authority?.timings?.["server.tick"];
@@ -646,12 +652,32 @@ try {
         await cdp.send("Profiler.start");
         await workers?.start();
       }
+      if (allocations) {
+        await cdp.send("HeapProfiler.startSampling", {
+          samplingInterval: 32768,
+          includeObjectsCollectedByMajorGC: true,
+          includeObjectsCollectedByMinorGC: true,
+        });
+      }
       const cell = {
         scene: name,
         zoom,
         placed,
-        ...(await page.evaluate(samplePage, { seconds })),
+        ...(await page.evaluate(samplePage, { seconds, measureFinish: !allocations })),
       };
+      if (allocations) {
+        const { profile: heap } = await cdp.send("HeapProfiler.stopSampling");
+        cell.allocations = {
+          ...allocationSummary(heap),
+          samplingInterval: 32768,
+          scope:
+            "Main thread only, cadence sample and its setup/diagnostics; GPU finish window skipped. Includes benchmark bookkeeping and collected objects. Estimated allocations, not retained heap or a GC-cause diagnosis. Sampling affects timing; compare cadence in a separate uninstrumented run.",
+        };
+        await writeFile(
+          `${output.replace(/\.json$/, "")}.${name}-${zoom}.main.heapprofile`,
+          JSON.stringify(heap),
+        );
+      }
       if (scene.drive) await stopDriving(page);
       // Profilers stop before the trace is downloaded: the transfer is not the scene.
       if (profile) {
@@ -700,6 +726,10 @@ try {
         console.log(`    ${String(row.percent).padStart(5)}%  ${row.name}`);
       for (const row of cell.workerProfile ?? [])
         console.log(`    worker ${String(row.percent).padStart(5)}%  ${row.name}`);
+      if (cell.allocations)
+        console.log(
+          `    main-thread sampled allocations ${(cell.allocations.sampledBytes / 2 ** 20).toFixed(1)} MiB (includes collected objects and sampler bookkeeping; timing is instrumented)`,
+        );
       if (screenshots)
         await page.screenshot({ path: path.join(screenshots, `${name}-${zoom}.png`) });
       const g = cell.gpuMs ? `${cell.gpuMs.p50}/${cell.gpuMs.p95}` : "n/a";
@@ -716,7 +746,7 @@ try {
           `    slow frame at ${f.atMs} ms: ${f.frameMs} ms (update ${f.updateMs} in ${f.updates}, render ${f.renderMs}, uploads ${f.uploadPages} pages ${f.uploadKiB} KiB)`,
         );
       console.log(
-        `${name.padEnd(6)} ${String(zoom).padEnd(5)} frame ${cell.frameMs.p50}/${cell.frameMs.p95} ms, missed ${cell.missed}/${cell.frames}; render ${cell.renderMs.p50}/${cell.renderMs.p95} (submit ${cell.submitMs.p50}); gpu ${g}; render+finish ${cell.renderFinishMs?.p50}; update ${cell.updateMs.p50}; draws ${cell.drawCallsPerFrame}; tick ${cell.workerTickMs?.p50 ?? "?"}; ${cell.entities} entities`,
+        `${name.padEnd(6)} ${String(zoom).padEnd(5)} frame ${cell.frameMs.p50}/${cell.frameMs.p95} ms, missed ${cell.missed}/${cell.frames}; render ${cell.renderMs.p50}/${cell.renderMs.p95} (submit ${cell.submitMs.p50}); gpu ${g}; render+finish ${cell.renderFinishMs?.p50 ?? "n/a"}; update ${cell.updateMs.p50}; draws ${cell.drawCallsPerFrame}; tick ${cell.workerTickMs?.p50 ?? "?"}; ${cell.entities} entities`,
       );
     }
   }
@@ -731,19 +761,22 @@ try {
     build: base ? `existing origin ${base}` : "vite dev (unminified modules)",
     query,
     profiled: profile,
+    allocationSampled: allocations,
     seconds,
     idleFrameMs: Math.round(idle * 100) / 100,
     device,
     cells,
     errors,
     scope:
-      "Steady camera after terrain settles; p50/p95 in ms. render = main-thread render callback; submit = time inside backend submits; gpuMs = timer query around the render callback's GL commands; renderFinishMs = render + gl.finish() in a separate window. Rabbits wander, so populated scenes are not exact replays.",
+      "Steady camera after terrain settles, except the moving drive scene; p50/p95 in ms. render = main-thread render callback; submit = time inside backend submits; gpuMs = timer query around the render callback's GL commands; renderFinishMs = render + gl.finish() in a separate window (skipped with --allocations). Rabbits wander and traffic varies, so populated scenes are not exact replays.",
   };
   await writeFile(output, `${JSON.stringify(report, null, 2)}\n`);
   console.log(`Report: ${output}`);
   if (errors.length) console.log(`Page errors: ${errors.join("; ")}`);
   if (compare) {
     const before = JSON.parse(await readFile(compare, "utf8"));
+    if (Boolean(before.allocationSampled) !== allocations)
+      throw Error("Cannot compare allocation-sampled and ordinary timing runs");
     console.log(`\nAgainst ${compare} (${before.label}, query "${before.query}"):`);
     for (const cell of cells) {
       const old = before.cells.find((c) => c.scene === cell.scene && c.zoom === cell.zoom);

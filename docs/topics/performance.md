@@ -36,11 +36,73 @@ Open:
   misses frames. The Steam Deck has not been re-measured. 235 owns that.
 - The Deck spends 7.7 ms submitting the crowd at 0.1.
 - Driving through the city on the Pixel 7a dropped 12–15 frames in 30 seconds
-  while new terrain and sprite pages were uploaded; it now drops none
+  while new terrain and sprite pages were uploaded; paired fix runs dropped none
   ([237](../tactical/237-phone-driving-hitches.md)). `render:bench --scenes=drive`
   measures it, with per-frame slow-frame and upload records and `--trace`.
   Remaining there: an occasional 20 ms major garbage collection, and chunk
   generation bursts of 17–27 ms on the authority Worker.
+  [237's follow-up](../tactical/237-phone-driving-hitches.md#gc-and-generation-follow-up-2026-11-11)
+  records the saved trace's GC census, generation profile attribution and the
+  old `generation:bench` limits. The expanded benchmark and main-thread
+  allocation sampler and physical-phone measurements are delivered below. A new
+  ordinary drive missed 1 of 1,798 frames; that isolated pause is unattributed.
+
+## Chunk generation and allocation benchmarks (2026-11-11)
+
+`npm run generation:bench` now traverses 49 adjacent unseen chunks per fixture
+(district, farm, woodland, coast), then regenerates the same coordinates as a
+cache control. Three trials use fresh generators and rotate fixture order.
+Process imports/JIT are not reset between fixtures. No startup sample is dropped.
+
+The `generate` lane separates terrain (including internal regional planning),
+rail metadata, prop plans and actor plans. The `streaming` lane exercises
+production `RealmStreaming`, procedural registries and record admission with
+empty memory storage. It records batches of up to eight chunks, each individual
+synchronous publication, and exclusive phase costs. All earlier batches remain
+resident. This does not measure disk/IndexedDB latency, physics insertion,
+autotiling, vehicle/rail services, replication, rendering or full Worker tasks.
+
+```sh
+npm run generation:bench -- --output=/tmp/generation.json
+npm run generation:bench -- --compare=/tmp/generation.json --output=/tmp/after.json
+npm run generation:bench -- --profile --output=/tmp/generation-profile.json
+npm run generation:bench -- --verify --output=/tmp/generation-content.json
+npm run generation:bench -- --browser --trials=1 --output=/tmp/browser-generation.json
+npm run generation:bench -- --cdp=http://127.0.0.1:9223 --port=4188 --device=pixel7a --trials=1
+npm run render:bench -- --scenes=city,drive --zooms=1 --seconds=30 --allocations --output=/tmp/allocations.json
+```
+
+Use the existing physical-device CDP/port-forward setup for the device command.
+The browser generation workload runs in its own diagnostic Worker and owned tab,
+with no game or saved-world writes. Bundled Chromium owns desktop browser runs.
+JSON reports retain every sample, coordinates, work counts, p50/p95/p99/max,
+first samples and slowest chunks, plus runtime and executable-source identity.
+Comparisons reject different workloads, runtimes, work counts or profiling modes.
+`--verify` hashes generated content in a separate diagnostic run; Node `--profile`
+saves a CPU profile. These modes affect timing and allocation.
+
+`render:bench --allocations` samples main-thread JS allocations, including objects
+collected during the window, and saves a `.main.heapprofile` per scene. It skips
+the GPU-finish window and labels the estimates as instrumented. Benchmark
+bookkeeping is included. Use separate ordinary runs for cadence, `--profile` for
+CPU attribution, and `--trace` for GC pauses. The allocation sample is not a leak
+measurement or proof that a particular site caused a collection.
+Stopping allocation sampling can itself trigger a MajorGC labelled
+`sampling profiler`, after the cadence window. Exclude those events from natural
+GC counts and use a separate trace without the heap sampler.
+
+[237](../tactical/237-phone-driving-hitches.md#physical-pixel-7a-measurements-2026-11-11)
+owns the desktop/phone baselines and checks. On the Pixel 7a, isolated unseen
+generation medians are 4.8–6.7 ms, but cold planner spikes survive process warmup
+(80–169 ms in trial two). Main-thread sampled allocation is about 18 MiB/s
+standing and 22 MiB/s driving: surface receivers and physics each account for
+about 26% of the moving sample by call-stack attribution. The ordinary drive
+covered 2,665 px and missed one frame in 30 seconds; that pause is unattributed.
+The separate trace-only observation found minor GC but no major GC. Sampler-stop
+MajorGC events are artifacts and must be excluded from natural-GC counts.
+Next: reduce repeated planner work and static receiver/prediction allocation,
+then remeasure. A Rust/WASM generation kernel remains an experiment for the
+Worker, separate from main-thread churn.
 
 ## Crowd bench (2026-11-10)
 
