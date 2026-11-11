@@ -15,6 +15,7 @@ class Surface extends EventTarget {
     clearRect: vi.fn(),
     drawImage: vi.fn(),
     fillRect: vi.fn(),
+    getImageData: vi.fn(),
   };
   getContext() {
     return this.ctx;

@@ -34,6 +34,7 @@ import type {
   TerrainRenderWorld,
   TerrainResourceId,
 } from "./TerrainPresentation.js";
+import { finishTerrainRow, terrainRowOrder } from "./TerrainRaster.js";
 import {
   type TerrainPreparationView,
   TerrainResidency,
@@ -391,7 +392,7 @@ export class TileRenderer implements TerrainPresentation {
         revision: chunk.revision,
         visualRevision: chunk.visualRevision,
         assetRevision: this.resources.assetRevision,
-        rowOrder: this.buildRowOrder(focalRow),
+        rowOrder: terrainRowOrder(focalRow),
       };
       this.cacheBuildStates.set(key, state);
       this.partialResources.set(state.resourceId, state.canvas);
@@ -408,7 +409,7 @@ export class TileRenderer implements TerrainPresentation {
       state.visualRevision = chunk.visualRevision;
       state.assetRevision = this.resources.assetRevision;
       state.nextRowOrderIdx = 0;
-      state.rowOrder = this.buildRowOrder(focalRow);
+      state.rowOrder = terrainRowOrder(focalRow);
       const restartCtx = state.canvas.getContext("2d");
       if (!restartCtx) return rowBudget;
       restartCtx.imageSmoothingEnabled = false;
@@ -432,6 +433,7 @@ export class TileRenderer implements TerrainPresentation {
       state.nextRowOrderIdx++;
       if (ly === undefined) continue;
       this.drawCacheRows(chunk, cx, cy, sheets, offCtx, ly, ly + 1, getGlobalRoad);
+      finishTerrainRow(offCtx, ly);
       usedRows++;
     }
 
@@ -443,19 +445,6 @@ export class TileRenderer implements TerrainPresentation {
 
     performanceMetrics.end("client.cache", timing);
     return rowBudget - usedRows;
-  }
-
-  /** Build center-out row ordering so rows near the camera are rendered first. */
-  private buildRowOrder(centerRow: number): number[] {
-    const order: number[] = [];
-    for (let d = 0; d < CHUNK_SIZE; d++) {
-      const up = centerRow - d;
-      if (up >= 0) order.push(up);
-      if (d === 0) continue;
-      const down = centerRow + d;
-      if (down < CHUNK_SIZE) order.push(down);
-    }
-    return order;
   }
 
   /** Draw a contiguous row range into a chunk cache canvas. */

@@ -14,6 +14,9 @@ const fixture = params.get("fixture") as DrivingFixture;
 const recipe = drivingBenchRecipe(fixture);
 const zoom = Number(params.get("zoom") ?? (fixture === "jam" ? "0.25" : "1"));
 if (!Number.isFinite(zoom) || zoom < 0.1 || zoom > 2) throw Error("Invalid zoom");
+const terrainPacing = params.get("pacing") ?? "responsive";
+if (terrainPacing !== "responsive" && terrainPacing !== "throughput")
+  throw Error("Invalid terrain pacing");
 const canvas = required(document.querySelector<HTMLCanvasElement>("#driving-bench"));
 let paused = true,
   driving = false,
@@ -24,7 +27,7 @@ const lab = new LabView(canvas, recipe, {
   terrain: true,
   ...(fixture === "jam" ? { camera: fixedCamera({ wx: 0, wy: 0 }) } : {}),
   input: () => (driving ? DRIVING_INPUT : DRIVING_IDLE),
-  settings: () => ({ paused, zoom, terrainPacing: "responsive" }),
+  settings: () => ({ paused, zoom, terrainPacing }),
   onError: (error) => {
     failure = error;
   },

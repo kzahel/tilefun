@@ -1,0 +1,868 @@
+{
+  "description": "Physical Pixel 7a production before/after terrain raster-completion budgeting, 2026-11-11. Raw records, original production baseline and compatible baseline build transform remain in ignored data/scratch/raster-241/.",
+  "baseline": {
+    "revision": "32e2e176",
+    "source": "src/rendering/TileRenderer.ts",
+    "sha256": "4b349fc93350a702076edbcf3fde5bbc0325f97e7fd684b9457257e1e5d2afcf",
+    "description": "Original terrain renderer compiled with the current unchanged assets and the same current benchmark/pacing harness as after. Other runtime source behavior is unchanged; new diagnostic-only pixel probe is not invoked by driving."
+  },
+  "afterSource": [
+    {
+      "file": "src/rendering/TileRenderer.ts",
+      "sha256": "fbda33a0403d26ee798a9781cae87945756d9e71b22d6a831a1343aeb7fabfb4"
+    },
+    {
+      "file": "src/rendering/TerrainRaster.ts",
+      "sha256": "c997c20cd426d4da24e47f74395fea88b2336dccde67d486bf6287df4de890e6"
+    },
+    {
+      "file": "src/rendering/RasterSurface.ts",
+      "sha256": "c9bf223fd0984a718a4c25d0b47371dc0d92ff92707729cfb4bd2c5787a89482"
+    }
+  ],
+  "methodology": "Two fresh-world 30 s runs per lane and policy, before/after/after/before order. Exact same current benchmark, native viewport, assets and dependencies; before substitutes the preserved 32e2e176 TileRenderer only. Both policies use 2 ms; responsive caps two rows, throughput caps 128 and is the normal game policy. Every workload qualifies and four compatibility checks pass (initial poses, population, simulated work, distance, viewport/mode/policy). Ordinary cadence separated from native-operation probes. CPU frequency/JIT and browser scheduling are not frozen. The fix targets render tails, not every frame-gap cause.",
+  "phoneThermals": [
+    {
+      "label": "before-responsive-before-a",
+      "date": "2026-11-11T16:13:49.661Z",
+      "batteryC": 25.2,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "before-responsive-after-a",
+      "date": "2026-11-11T16:14:28.470Z",
+      "batteryC": 25.2,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "before-responsive-after-b",
+      "date": "2026-11-11T16:15:07.170Z",
+      "batteryC": 25.1,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "before-responsive-before-b",
+      "date": "2026-11-11T16:15:45.918Z",
+      "batteryC": 25.1,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "before-throughput-before-a",
+      "date": "2026-11-11T16:16:24.535Z",
+      "batteryC": 25.1,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "before-throughput-after-a",
+      "date": "2026-11-11T16:17:03.333Z",
+      "batteryC": 25.2,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "before-throughput-after-b",
+      "date": "2026-11-11T16:17:42.206Z",
+      "batteryC": 25.4,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "before-throughput-before-b",
+      "date": "2026-11-11T16:18:21.148Z",
+      "batteryC": 25.4,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "before-copy-before",
+      "date": "2026-11-11T16:18:59.749Z",
+      "batteryC": 25.6,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "before-copy-after",
+      "date": "2026-11-11T16:19:38.043Z",
+      "batteryC": 25.9,
+      "thermalStatus": 0,
+      "acPowered": true
+    },
+    {
+      "label": "after-campaign",
+      "date": "2026-11-11T16:20:36.040Z",
+      "batteryC": 26.2,
+      "thermalStatus": 0,
+      "acPowered": true
+    }
+  ],
+  "comparisons": [
+    {
+      "pacing": "responsive",
+      "pair": "a",
+      "passed": true
+    },
+    {
+      "pacing": "responsive",
+      "pair": "b",
+      "passed": true
+    },
+    {
+      "pacing": "throughput",
+      "pair": "a",
+      "passed": true
+    },
+    {
+      "pacing": "throughput",
+      "pair": "b",
+      "passed": true
+    }
+  ],
+  "campaignError": null,
+  "phonePixelParity": {
+    "completedRows": 32,
+    "mismatches": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "digests": [
+      1071050889,
+      3742657853,
+      3742657853,
+      827026069
+    ],
+    "coloredBytes": [
+      43000,
+      230500,
+      230500,
+      230250
+    ]
+  },
+  "runs": [
+    {
+      "pacing": "responsive",
+      "lane": "before",
+      "pair": "a",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-6o_aQJcC.js",
+        "sha256": "1bc1a372d7d7271990e6f90d8435df60c8649689608106f5ed528a19d70ff02c"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1799,
+        "wheelQueries": 7184
+      },
+      "seconds": 30,
+      "distancePx": 3324.1,
+      "frames": {
+        "count": 1799,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 33.2
+      },
+      "missed": 1,
+      "slowFrames": [
+        {
+          "atMs": 66.5,
+          "endMs": 6350.9,
+          "frameMs": 33.2
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 3845.2,
+          "maxMs": 30.9,
+          "retained": 1801,
+          "p50Ms": 2,
+          "p95Ms": 3,
+          "p99Ms": 4.2
+        },
+        "lab.render": {
+          "count": 1800,
+          "totalMs": 5133.8,
+          "maxMs": 21.9,
+          "retained": 1800,
+          "p50Ms": 2.6,
+          "p95Ms": 3.9,
+          "p99Ms": 5.4
+        }
+      },
+      "authorityTick": {
+        "count": 1799,
+        "totalMs": 6050.3,
+        "maxMs": 22,
+        "retained": 512,
+        "p50Ms": 2.6,
+        "p95Ms": 5.4,
+        "p99Ms": 7.9
+      },
+      "errors": []
+    },
+    {
+      "pacing": "responsive",
+      "lane": "before",
+      "pair": "b",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-6o_aQJcC.js",
+        "sha256": "1bc1a372d7d7271990e6f90d8435df60c8649689608106f5ed528a19d70ff02c"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1799,
+        "wheelQueries": 7188
+      },
+      "seconds": 30,
+      "distancePx": 3325.967,
+      "frames": {
+        "count": 1799,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 33.3
+      },
+      "missed": 1,
+      "slowFrames": [
+        {
+          "atMs": 83.3,
+          "endMs": 6243.5,
+          "frameMs": 33.3
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 3973.9,
+          "maxMs": 24.7,
+          "retained": 1801,
+          "p50Ms": 2.1,
+          "p95Ms": 3.1,
+          "p99Ms": 4.4
+        },
+        "lab.render": {
+          "count": 1800,
+          "totalMs": 5163.1,
+          "maxMs": 22,
+          "retained": 1800,
+          "p50Ms": 2.7,
+          "p95Ms": 3.9,
+          "p99Ms": 5.2
+        }
+      },
+      "authorityTick": {
+        "count": 1799,
+        "totalMs": 6579.4,
+        "maxMs": 29.7,
+        "retained": 512,
+        "p50Ms": 2.5,
+        "p95Ms": 5.5,
+        "p99Ms": 7.9
+      },
+      "errors": []
+    },
+    {
+      "pacing": "responsive",
+      "lane": "after",
+      "pair": "a",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1800,
+        "wheelQueries": 7192
+      },
+      "seconds": 30,
+      "distancePx": 3325.967,
+      "frames": {
+        "count": 1799,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 33.4
+      },
+      "missed": 1,
+      "slowFrames": [
+        {
+          "atMs": 17685,
+          "endMs": 23792,
+          "frameMs": 33.4
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 4047.9,
+          "maxMs": 19.6,
+          "retained": 1801,
+          "p50Ms": 2.2,
+          "p95Ms": 3,
+          "p99Ms": 4.4
+        },
+        "lab.render": {
+          "count": 1800,
+          "totalMs": 5437.5,
+          "maxMs": 10.5,
+          "retained": 1800,
+          "p50Ms": 2.7,
+          "p95Ms": 4.8,
+          "p99Ms": 6.6
+        }
+      },
+      "authorityTick": {
+        "count": 1800,
+        "totalMs": 6117.6,
+        "maxMs": 29.3,
+        "retained": 512,
+        "p50Ms": 2.7,
+        "p95Ms": 5.8,
+        "p99Ms": 6.8
+      },
+      "errors": []
+    },
+    {
+      "pacing": "responsive",
+      "lane": "after",
+      "pair": "b",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1800,
+        "wheelQueries": 7188
+      },
+      "seconds": 30,
+      "distancePx": 3324.1,
+      "frames": {
+        "count": 1800,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 33.3
+      },
+      "missed": 1,
+      "slowFrames": [
+        {
+          "atMs": 66.6,
+          "endMs": 6312.1,
+          "frameMs": 33.3
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 1802,
+          "totalMs": 4554.6,
+          "maxMs": 32.7,
+          "retained": 1802,
+          "p50Ms": 2.4,
+          "p95Ms": 3.4,
+          "p99Ms": 4.7
+        },
+        "lab.render": {
+          "count": 1801,
+          "totalMs": 5481.3,
+          "maxMs": 12,
+          "retained": 1801,
+          "p50Ms": 2.9,
+          "p95Ms": 4.8,
+          "p99Ms": 6.3
+        }
+      },
+      "authorityTick": {
+        "count": 1800,
+        "totalMs": 5801.3,
+        "maxMs": 29.1,
+        "retained": 512,
+        "p50Ms": 3.1,
+        "p95Ms": 5.6,
+        "p99Ms": 6.5
+      },
+      "errors": []
+    },
+    {
+      "pacing": "throughput",
+      "lane": "before",
+      "pair": "a",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-6o_aQJcC.js",
+        "sha256": "1bc1a372d7d7271990e6f90d8435df60c8649689608106f5ed528a19d70ff02c"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1800,
+        "wheelQueries": 7192
+      },
+      "seconds": 30,
+      "distancePx": 3327.834,
+      "frames": {
+        "count": 1800,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 17.3
+      },
+      "missed": 0,
+      "slowFrames": [],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 4135.7,
+          "maxMs": 19.8,
+          "retained": 1801,
+          "p50Ms": 2.2,
+          "p95Ms": 3.1,
+          "p99Ms": 4.4
+        },
+        "lab.render": {
+          "count": 1801,
+          "totalMs": 5035.2,
+          "maxMs": 23.5,
+          "retained": 1801,
+          "p50Ms": 2.6,
+          "p95Ms": 4.1,
+          "p99Ms": 5.5
+        }
+      },
+      "authorityTick": {
+        "count": 1800,
+        "totalMs": 6353.9,
+        "maxMs": 30.9,
+        "retained": 512,
+        "p50Ms": 4.6,
+        "p95Ms": 6.6,
+        "p99Ms": 7.9
+      },
+      "errors": []
+    },
+    {
+      "pacing": "throughput",
+      "lane": "before",
+      "pair": "b",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-6o_aQJcC.js",
+        "sha256": "1bc1a372d7d7271990e6f90d8435df60c8649689608106f5ed528a19d70ff02c"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1799,
+        "wheelQueries": 7188
+      },
+      "seconds": 30,
+      "distancePx": 3325.967,
+      "frames": {
+        "count": 1800,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 16.8
+      },
+      "missed": 0,
+      "slowFrames": [],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 4279,
+          "maxMs": 20.7,
+          "retained": 1801,
+          "p50Ms": 2.3,
+          "p95Ms": 3.2,
+          "p99Ms": 4.1
+        },
+        "lab.render": {
+          "count": 1801,
+          "totalMs": 5284.9,
+          "maxMs": 23.8,
+          "retained": 1801,
+          "p50Ms": 2.8,
+          "p95Ms": 4.2,
+          "p99Ms": 5.8
+        }
+      },
+      "authorityTick": {
+        "count": 1799,
+        "totalMs": 6726.4,
+        "maxMs": 28.1,
+        "retained": 512,
+        "p50Ms": 3,
+        "p95Ms": 5.1,
+        "p99Ms": 7.7
+      },
+      "errors": []
+    },
+    {
+      "pacing": "throughput",
+      "lane": "after",
+      "pair": "a",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1800,
+        "wheelQueries": 7184
+      },
+      "seconds": 30,
+      "distancePx": 3324.1,
+      "frames": {
+        "count": 1799,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 33.4
+      },
+      "missed": 1,
+      "slowFrames": [
+        {
+          "atMs": 66.7,
+          "endMs": 6404.3,
+          "frameMs": 33.4
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 1801,
+          "totalMs": 4535.4,
+          "maxMs": 33.5,
+          "retained": 1801,
+          "p50Ms": 2.4,
+          "p95Ms": 3.5,
+          "p99Ms": 4.7
+        },
+        "lab.render": {
+          "count": 1800,
+          "totalMs": 5512.8,
+          "maxMs": 11.2,
+          "retained": 1800,
+          "p50Ms": 2.8,
+          "p95Ms": 5,
+          "p99Ms": 6.3
+        }
+      },
+      "authorityTick": {
+        "count": 1800,
+        "totalMs": 5456.4,
+        "maxMs": 21,
+        "retained": 512,
+        "p50Ms": 2.3,
+        "p95Ms": 4.4,
+        "p99Ms": 6
+      },
+      "errors": []
+    },
+    {
+      "pacing": "throughput",
+      "lane": "after",
+      "pair": "b",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1801,
+        "wheelQueries": 7188
+      },
+      "seconds": 30,
+      "distancePx": 3324.1,
+      "frames": {
+        "count": 1800,
+        "p50": 16.7,
+        "p95": 16.8,
+        "p99": 16.8,
+        "max": 33.4
+      },
+      "missed": 1,
+      "slowFrames": [
+        {
+          "atMs": 83.3,
+          "endMs": 6505.6,
+          "frameMs": 33.4
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 1802,
+          "totalMs": 4685.7,
+          "maxMs": 27.7,
+          "retained": 1802,
+          "p50Ms": 2.5,
+          "p95Ms": 3.6,
+          "p99Ms": 4.9
+        },
+        "lab.render": {
+          "count": 1801,
+          "totalMs": 5605.5,
+          "maxMs": 11.8,
+          "retained": 1801,
+          "p50Ms": 2.8,
+          "p95Ms": 5,
+          "p99Ms": 6.2
+        }
+      },
+      "authorityTick": {
+        "count": 1801,
+        "totalMs": 5996.3,
+        "maxMs": 30.4,
+        "retained": 512,
+        "p50Ms": 2.7,
+        "p95Ms": 5.5,
+        "p99Ms": 6.3
+      },
+      "errors": []
+    }
+  ],
+  "probes": [
+    {
+      "lane": "before",
+      "pacing": "throughput",
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1800,
+        "wheelQueries": 7192
+      },
+      "distancePx": 3327.834,
+      "render": {
+        "count": 1802,
+        "totalMs": 4863.3,
+        "maxMs": 23.3,
+        "retained": 1802,
+        "p50Ms": 2.4,
+        "p95Ms": 4,
+        "p99Ms": 5.3
+      },
+      "slowFrames": [],
+      "groups": {
+        "page-copy": {
+          "count": 26,
+          "p50": 5.2,
+          "p95": 6.5,
+          "p99": 7.3,
+          "max": 7.3,
+          "totalMs": 128,
+          "requestedPixelBytes": 0
+        },
+        "canvas-upload": {
+          "count": 26,
+          "p50": 1.1,
+          "p95": 1.3,
+          "p99": 1.3,
+          "max": 1.3,
+          "totalMs": 27.3,
+          "requestedPixelBytes": 0
+        },
+        "row-completion": {
+          "count": 0,
+          "p50": null,
+          "p95": null,
+          "p99": null,
+          "max": null,
+          "totalMs": 0,
+          "requestedPixelBytes": 0
+        }
+      },
+      "copyDimensions": [
+        {
+          "source": [
+            256,
+            256
+          ],
+          "destination": [
+            256,
+            256
+          ],
+          "sourceWillReadFrequently": true,
+          "destinationWillReadFrequently": true
+        }
+      ]
+    },
+    {
+      "lane": "after",
+      "pacing": "throughput",
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 1801,
+        "wheelQueries": 7188
+      },
+      "distancePx": 3324.1,
+      "render": {
+        "count": 1799,
+        "totalMs": 5532.6,
+        "maxMs": 12.7,
+        "retained": 1799,
+        "p50Ms": 2.8,
+        "p95Ms": 5,
+        "p99Ms": 6.2
+      },
+      "slowFrames": [
+        {
+          "atMs": 100,
+          "endMs": 6320.7,
+          "frameMs": 33.3
+        },
+        {
+          "atMs": 23014.9,
+          "endMs": 29235.6,
+          "frameMs": 50.1
+        }
+      ],
+      "groups": {
+        "page-copy": {
+          "count": 26,
+          "p50": 0.1,
+          "p95": 0.1,
+          "p99": 0.2,
+          "max": 0.2,
+          "totalMs": 1.4,
+          "requestedPixelBytes": 0
+        },
+        "canvas-upload": {
+          "count": 26,
+          "p50": 1.1,
+          "p95": 1.5,
+          "p99": 1.6,
+          "max": 1.6,
+          "totalMs": 30,
+          "requestedPixelBytes": 0
+        },
+        "row-completion": {
+          "count": 832,
+          "p50": 0.5,
+          "p95": 0.7,
+          "p99": 0.8,
+          "max": 1,
+          "totalMs": 413.8,
+          "requestedPixelBytes": 13631488
+        }
+      },
+      "copyDimensions": [
+        {
+          "source": [
+            256,
+            256
+          ],
+          "destination": [
+            256,
+            256
+          ],
+          "sourceWillReadFrequently": true,
+          "destinationWillReadFrequently": true
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "renderingUnitTests": 517,
+    "renderingUnitFiles": 61,
+    "benchmarkTests": 6,
+    "typecheckProjects": 4,
+    "browserChecks": 7,
+    "pixelByteComparisonsPerOracle": 1048576,
+    "workshopCandidateIdentities": 2130,
+    "health": "pass; TileRenderer baseline tightened",
+    "build": "pass; rebuilt before browser and device checks",
+    "streamingReadiness": "pass",
+    "phoneDoctorAfterCleanup": "pass"
+  },
+  "conclusions": [
+    "Whole-row CPU reads materialize actual drawing before the next budget check or publication; a row remains atomic, allowing at most one completed-row overrun.",
+    "Responsive worst render callbacks fall from 21.9/22.0 to 10.5/12.0 ms, with p50 2.6/2.7 to 2.7/2.9 ms.",
+    "Default throughput worst render callbacks fall from 23.5/23.8 to 11.2/11.8 ms, with p50 2.6/2.8 to 2.8/2.8 ms.",
+    "Render p95 increases as raster work is spread across preparation frames; no whole-run missed-interval improvement is established. Throughput controls miss zero; after runs miss one startup interval each. Responsive lanes miss one each, with one late after interval unassigned.",
+    "The native copy probe keeps 26 identical 256x256 pages per run: median copy ~5.2 to ~0.1 ms, max 7.3 to 0.2 ms. Whole-row completion requests 13 MiB of transient pixel data over the 30 s after probe; these buffers are not retained.",
+    "Pixel oracle has zero channel mismatches for partial, completed, retained-old and edited-ready surfaces on both desktop Chromium and physical phone. Approved Workshop identities remain unchanged."
+  ],
+  "next": "Startup prediction/initialization and the occasional unrelated browser or late interval remain separate; do not claim universally hitch-free driving."
+}

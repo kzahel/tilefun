@@ -19,6 +19,7 @@ if (process.argv.includes("--help")) {
   console.log(`Repeatable driving benchmark (fresh page/world per cell)
   --fixtures=clear,jam --seconds=30 --trials=3 --headed --viewport=1280x800
   --output=/tmp/driving.json --compare=/tmp/before.json --zoom=1
+  --pacing=responsive|throughput  Small row batches (default) or ordinary game policy
   --allocations  Separate main-thread allocation sampling run; saves heap profiles
   --profile --trace  Main-thread CPU profile (1 ms) and all-thread Chrome trace
   --cdp=http://127.0.0.1:9223 --port=4188 --device=pixel7a
@@ -34,6 +35,8 @@ const fixtures = option("fixtures", "clear,jam").split(",");
 const seconds = Number(option("seconds", "30")),
   trials = Number(option("trials", "3"));
 const zoomOverride = option("zoom", "");
+const pacing = option("pacing", "responsive");
+if (!["responsive", "throughput"].includes(pacing)) throw Error("Invalid --pacing");
 if (
   fixtures.some((s) => !["clear", "jam"].includes(s)) ||
   new Set(fixtures).size !== fixtures.length
@@ -129,7 +132,7 @@ try {
     for (const fixture of trial % 2 ? [...fixtures].reverse() : fixtures) {
       await page.goto("about:blank");
       await page.goto(
-        `${origin}/driving-bench.html?fixture=${fixture}${zoomOverride ? `&zoom=${zoomOverride}` : ""}`,
+        `${origin}/driving-bench.html?fixture=${fixture}&pacing=${pacing}${zoomOverride ? `&zoom=${zoomOverride}` : ""}`,
       );
       await page.waitForFunction(
         () => document.querySelector("#driving-bench")?.dataset.ready === "true",
@@ -240,6 +243,7 @@ try {
     trials,
     fixtures,
     zoomOverride,
+    pacing,
     allocationSampled: allocations,
     profiled: profile,
     traced: trace,

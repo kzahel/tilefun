@@ -1,12 +1,15 @@
 # Rendering architecture and backend separation
 
-[240](../tactical/240-phone-pause-attribution.md) identifies a remaining terrain
-budget blind spot: CPU-requested canvas draw calls can defer raster completion
-until `GpuPages.get` copies their pixels. Preparation's submission-time deadline
-does not account for that later cost. A local row-flush experiment validates the
-boundary but is not shipped; budgeting raster completion and pixel/device
-qualification remain next work. Plain GL copies and CPU-canvas requests stay in
-place; this finding does not restore the retired GPU-backed terrain builder.
+[241](../tactical/241-budget-terrain-raster-completion.md) closes the terrain
+budget blind spot identified in [240](../tactical/240-phone-pause-attribution.md).
+CPU-requested canvases can defer drawing until a page copy; preparation now reads
+the full changed 256×16 row before the next deadline check or publication. The
+pixels are discarded without write-back. Rows remain atomic, so a deadline can
+overrun by one completed row. Existing scheduling, retained imagery and shared
+game/lab ownership remain intact; warm terrain does no reads. Desktop and phone
+pixel oracles are exact. Pixel 7a worst render callbacks roughly halve with
+~0.1–0.2 ms median overhead; occasional startup/late intervals remain. Plain GL
+copies and CPU canvases stay in place.
 
 [238](../tactical/238-allocation-churn-and-regional-planning.md) retains static prop
 receiver faces in a per-client `SceneFrame` weak cache. Scalar snapshots detect
@@ -845,7 +848,9 @@ Neutral `RenderBackend` frames never contain Three objects or decoded images.
 - Images are split into pages of at most 512 texels a side, so a first use
   uploads at most 1 MiB (237). Page sources and terrain chunk images are CPU
   canvases (`cpuRasterCanvas`): a GPU-backed 2D canvas would rasterize in the
-  GPU process, outside any main-thread time budget.
+  GPU process, outside any main-thread time budget. CPU canvases can still defer
+  drawing, so terrain completes each changed row with a full-row read before
+  checking its preparation deadline or publishing pixels (241).
 - Pages upload through a 2D staging texture and a GPU copy, never
   `texSubImage3D` from a canvas (a CPU readback in Chrome). The copy is plain
   GL: three.js's `copyTextureToTexture` reads context state back, which waits

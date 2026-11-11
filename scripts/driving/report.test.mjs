@@ -66,6 +66,7 @@ test("comparisons reject changed workloads, instrumentation and materially diffe
   assert.doesNotThrow(() => assertComparable(report(), report()));
   for (const mutate of [
     (r) => (r.headed = false),
+    (r) => (r.pacing = "throughput"),
     (r) => (r.allocationSampled = true),
     (r) => (r.profiled = true),
     (r) => (r.traced = true),

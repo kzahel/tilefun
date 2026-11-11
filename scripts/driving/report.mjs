@@ -48,6 +48,7 @@ export function assertComparable(before, after) {
     "device",
     "fixtures",
     "zoomOverride",
+    "pacing",
     "allocationSampled",
     "profiled",
     "traced",

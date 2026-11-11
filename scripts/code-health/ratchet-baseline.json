@@ -513,7 +513,7 @@
       "overLimit": 3
     },
     "src/rendering/TileRenderer.ts": {
-      "lines": 608,
+      "lines": 597,
       "worst": 124,
       "overLimit": 1
     },

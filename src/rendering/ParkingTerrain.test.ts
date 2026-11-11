@@ -23,7 +23,13 @@ it.each(["parking", "racetrack", "depot"])(
         readonly height: number,
       ) {}
       getContext() {
-        return { imageSmoothingEnabled: false, clearRect: vi.fn(), fillRect, drawImage };
+        return {
+          imageSmoothingEnabled: false,
+          clearRect: vi.fn(),
+          fillRect,
+          drawImage,
+          getImageData: vi.fn(),
+        };
       }
     }
     vi.stubGlobal("OffscreenCanvas", Surface);

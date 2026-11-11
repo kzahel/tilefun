@@ -4,6 +4,30 @@ import type { RenderPass, RenderView, TerrainDiagnostics } from "../src/renderin
 test.use({ channel: "chromium" });
 test.setTimeout(60000);
 
+test("completed terrain rows preserve partial, ready and edited pixels", async ({ page }) => {
+  await page.goto("/tilefun/renderer-lab.html");
+  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
+  const result = await page.evaluate(() =>
+    (
+      window as unknown as {
+        rendererLab: {
+          probeTerrainRasterCompletion(): {
+            completedRows: number;
+            mismatches: number[];
+            digests: number[];
+            coloredBytes: number[];
+          };
+        };
+      }
+    ).rendererLab.probeTerrainRasterCompletion(),
+  );
+  expect(result.completedRows).toBe(32);
+  expect(result.mismatches).toEqual([0, 0, 0, 0]);
+  expect(result.coloredBytes.every((n) => n > 10000)).toBe(true);
+  expect(new Set(result.digests).size).toBe(3);
+  expect(result.digests[1]).toBe(result.digests[2]); // retained old imagery while rebuilding
+});
+
 type GameCanvas = HTMLCanvasElement & {
   __game: {
     camera: { zoom: number };

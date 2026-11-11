@@ -29347,7 +29347,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:428"
+          "source": "src/rendering/RendererLab.ts:429"
         }
       ]
     },
@@ -29365,7 +29365,7 @@
       "consumers": [
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:429"
+          "source": "src/rendering/RendererLab.ts:430"
         }
       ]
     },
@@ -33891,19 +33891,19 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:305"
+          "source": "src/rendering/RendererLab.ts:306"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:370"
+          "source": "src/rendering/RendererLab.ts:371"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:373"
+          "source": "src/rendering/RendererLab.ts:374"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:377"
+          "source": "src/rendering/RendererLab.ts:378"
         },
         {
           "system": "Gameplay",
@@ -38263,11 +38263,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:310"
+          "source": "src/rendering/RendererLab.ts:311"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:314"
+          "source": "src/rendering/RendererLab.ts:315"
         },
         {
           "system": "Editor",

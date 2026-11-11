@@ -122,3 +122,7 @@ game/browser suite was needed for this diagnostic slice.
 Next: make completed terrain raster work part of the preparation budget, then
 qualify pixel parity, median CPU cost and cadence on the phone. Keep startup
 initialization and Chromium memory-footprint work separate from that fix.
+
+Follow-up: [241](241-budget-terrain-raster-completion.md) delivers whole-row
+raster-completion budgeting with exact pixel parity and physical before/after
+measurements; occasional startup/late intervals remain separate.

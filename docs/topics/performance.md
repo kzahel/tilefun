@@ -151,9 +151,8 @@ canvas still finishes drawing when `GpuPages.get` copies it for upload. Profiles
 credit roughly 8–12 ms to native `drawImage` in repeated long callbacks. A local
 one-pixel flush after each built row moves that work inside preparation's deadline
 checks: page-copy median 5 ms → below 0.1 ms, worst render 22.6–23.2 → 11.9–13.1
-ms, with render median rising from 2.6–2.7 to 2.9–3.0 ms. This is diagnostic evidence;
-shipping renderer code is unchanged. Next: budget raster completion and qualify
-pixel parity/device tradeoffs.
+ms, with render median rising from 2.6–2.7 to 2.9–3.0 ms. That one-pixel
+experiment was diagnostic; the production fix and its measurements follow below.
 
 Neither captured missed interval overlaps GC; all 137 recorded main-thread
 collections are minor (max 7.562 ms). One late miss is occupied by a Chromium
@@ -161,6 +160,31 @@ memory-instrumentation IPC; its trigger is unknown. A startup game callback
 remains incompletely attributed. The old untraced 50 ms interval cannot be
 assigned a cause retrospectively. Keep these limits separate from the confirmed
 terrain-copy cost and from server generation.
+
+### Terrain raster completion budget delivered (241)
+
+[241](../tactical/241-budget-terrain-raster-completion.md) materializes the entire
+changed terrain row before checking the preparation deadline or publishing its
+image. It discards a 256×16 read without write-back, retaining the shared renderer,
+row caps, old imagery and one-row atomic overrun. Desktop and physical-phone
+oracles compare partial, complete, retained-old and edited surfaces exactly.
+
+Eight alternating qualified Pixel 7a 30-second runs compare matched responsive
+and normal-game throughput policies. Throughput worst render callbacks fall
+**23.5 / 23.8 → 11.2 / 11.8 ms**; medians **2.6 / 2.8 → 2.8 / 2.8 ms** and p95
+**4.1 / 4.2 → 5.0 / 5.0 ms**. Responsive tails improve similarly. The tradeoff is
+more preparation frames with work and ~0.1–0.2 ms median overhead. Separate
+operation probes keep 26 equal pages: median copy **5.2 → 0.1 ms**, max
+**7.3 → 0.2 ms**. The after probe requests 13 MiB transient row-pixel payload over
+30 seconds, discarded immediately; this is not retained heap or total allocation.
+
+No whole-run missed-interval win is established: responsive misses 1 / 1 in both
+lanes; throughput misses 0 / 0 before and 1 / 1 after, both at startup. A late
+responsive interval and a late instrumented interval remain unassigned without
+traces. These prepared roads exclude regional generation/city-art streaming;
+the Steam Deck was not measured. Next measure startup prediction/initialization
+separately, then remaining snapshot churn. Do not conflate this render-tail fix
+with every browser pause or the historical untraced 50 ms interval.
 
 ## Crowd bench (2026-11-10)
 

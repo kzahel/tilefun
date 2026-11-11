@@ -7,7 +7,12 @@ import { TerrainFrame } from "./TerrainFrame.js";
 import { TileRenderer } from "./TileRenderer.js";
 
 class Surface {
-  readonly context = { imageSmoothingEnabled: false, clearRect: vi.fn(), drawImage: vi.fn() };
+  readonly context = {
+    imageSmoothingEnabled: false,
+    clearRect: vi.fn(),
+    drawImage: vi.fn(),
+    getImageData: vi.fn<(x: number, y: number, width: number, height: number) => void>(),
+  };
   constructor(
     readonly width: number,
     readonly height: number,
@@ -77,6 +82,33 @@ describe("terrain preparation", () => {
     renderer.prepareTerrain(camera, world, sheets, visible, 100, 3);
     expect(draw).toHaveBeenCalledTimes(5);
     expect(renderer.getDiagnostics().rowsLastFrame).toBe(3);
+  });
+
+  it("charges deferred raster completion before the next row and before publishing imagery", () => {
+    const { camera, world } = scene();
+    let now = 0;
+    const renderer = new TileRenderer(() => now);
+    const completed: number[][] = [];
+    const draw = drawing(renderer);
+    draw.mockImplementation((chunk, _cx, _cy, _sheets, context) => {
+      (context as Surface["context"]).getImageData.mockImplementation((x, y, width, height) => {
+        expect(renderer.isTerrainReady(chunk)).toBe(false);
+        completed.push([x, y, width, height]);
+        now += 1.1; // recording was free; actual raster completion was not
+      });
+    });
+    renderer.prepareTerrain(camera, world, sheets, visible, 0, 128);
+    expect(draw).not.toHaveBeenCalled();
+    renderer.prepareTerrain(camera, world, sheets, visible, 2, 128);
+    expect(completed).toEqual([
+      [0, 128, 256, 16],
+      [0, 112, 256, 16],
+    ]);
+    expect(renderer.getDiagnostics().rowsLastFrame).toBe(2);
+    expect(renderer.getTerrainSurface(world.getChunkIfLoaded(0, 0))).toBeNull();
+    renderer.prepareTerrain(camera, world, sheets, visible, Infinity, 14);
+    expect(completed).toHaveLength(16);
+    expect(renderer.isTerrainReady(world.getChunkIfLoaded(0, 0))).toBe(true);
   });
 
   it("keeps completed imagery during a revision rebuild and restarts stale partial work", () => {

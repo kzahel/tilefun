@@ -26,6 +26,7 @@ import { SceneFrame } from "./SceneFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
 import { probeSpriteSeams } from "./SpriteSeamProbe.js";
 import { probeSurfaceDecals } from "./SurfaceDecalProbe.js";
+import { probeTerrainRasterCompletion } from "./TerrainRasterProbe.js";
 import { probeVehicleDepth } from "./VehicleDepthProbe.js";
 import { probeViewRegions } from "./ViewRegionProbe.js";
 import { probeWorldRegistration } from "./WorldRegistrationProbe.js";
@@ -478,6 +479,7 @@ const lab = {
   probeSpriteSeams,
   probeCameraStability,
   probeWorldRegistration,
+  probeTerrainRasterCompletion,
   probeVehicleDepth,
   probeSurfaceDecals,
   probeDeferredShadows,
