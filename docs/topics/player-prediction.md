@@ -1,5 +1,15 @@
 # Player prediction and moving contacts
 
+[245](../tactical/245-steep-jump-prediction-reproduction.md) reproduces a landing
+disagreement with the open-wheel racer on the shared sky jump: after three idle
+ticks, constant boost and two-tick frame delay produce 13.56 px / 6.55° same-tick
+car-body error. Immediate delivery stays within 0.000016 px; a real Worker run
+without simulated network delay also records a 7.21 px landing error. Flight
+agrees closely. The native case needs no renderer, Worker or real-time clock,
+and bypassing the physics-state codec retains the error. Runtime is unchanged;
+the first divergent wheel/contact/solver operation remains to be isolated.
+`npx tsx scripts/reproduce-jump-prediction.ts` retains the bounded reproduction.
+
 [244](../tactical/244-direct-prediction-body-capture.md) removes the queued entity
 array/re-index conversion. Reconciliation borrows `RemoteStateView.serverEntityMap`
 for ID lookup, captures independent body/component copies in physics order into
