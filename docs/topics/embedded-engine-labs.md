@@ -12,6 +12,11 @@ work windows on the shared predictor for driving diagnostics. These counters are
 separate from Worker authority metrics and exclude the pause fence; no lab-owned
 physics kernel or clock is introduced.
 
+[244](../tactical/244-direct-prediction-body-capture.md) keeps game/lab prediction
+on the same direct ID-index capture contract: one owned body map transfers from
+queued reconciliation to private replay. Rendering keeps its ordered entity array
+and committed copies; clocks and Worker authority do not change.
+
 ## Labs on the game's Worker runtime (226 slice 3c, 2026-11-08)
 
 Every Workshop lab except the two-pane physics lab now runs on the game's own

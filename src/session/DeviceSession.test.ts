@@ -10,7 +10,7 @@ import { followSeat, View } from "./View.js";
 function replica(player: Entity) {
   return {
     serverPlayerEntity: player,
-    serverEntities: [] as Entity[],
+    serverEntityMap: new Map<number, Entity>(),
     mountEntityId: undefined as number | undefined,
     lastProcessedInputSeq: 7,
     serverTick: 40,
@@ -75,7 +75,10 @@ describe("DeviceSession prediction", () => {
     const horse = { ...createPlayer(10, 20), id: 5 };
     const car = { ...createPlayer(10, 20), id: 9 };
     const view = replica(player);
-    view.serverEntities = [horse, car];
+    view.serverEntityMap = new Map([
+      [horse.id, horse],
+      [car.id, car],
+    ]);
     view.mountEntityId = 5;
     const session = new DeviceSession(view as unknown as RemoteStateView);
     expect(session.reconcile(false)).toBe(false); // no predictor yet
@@ -84,10 +87,18 @@ describe("DeviceSession prediction", () => {
     p.reset.mockClear();
     expect(session.reconcile(false)).toBe(true);
     expect(p.reset).not.toHaveBeenCalled();
-    expect(p.reconcile).toHaveBeenLastCalledWith(player, 7, view.world, [], [horse, car], 5, {
-      serverTick: 40,
-      seats: view.seats.entities,
-    });
+    expect(p.reconcile).toHaveBeenLastCalledWith(
+      player,
+      7,
+      view.world,
+      [],
+      view.serverEntityMap,
+      5,
+      {
+        serverTick: 40,
+        seats: view.seats.entities,
+      },
+    );
     // Asked (a door transition): a reset seats the player on its parent as the frame
     // shows it, for the game and labs alike, even while session sync names another mount.
     session.reconcile(true);

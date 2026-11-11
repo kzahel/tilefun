@@ -114,7 +114,7 @@ it("replicates surfaces through the normal codec and predicts ramp movement thro
       view.lastProcessedInputSeq,
       view.world,
       view.props,
-      view.serverEntities,
+      view.serverEntityMap,
       view.mountEntityId,
       { serverTick: view.serverTick, ...(view.physicsState ? { physics: view.physicsState } : {}) },
     );
@@ -134,7 +134,7 @@ it("replicates surfaces through the normal codec and predicts ramp movement thro
         view.lastProcessedInputSeq,
         view.world,
         view.props,
-        view.serverEntities,
+        view.serverEntityMap,
         view.mountEntityId,
         {
           serverTick: view.serverTick,

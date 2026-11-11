@@ -86,7 +86,7 @@ it("replicates excavation geometry and predicts negative-height movement through
       view.lastProcessedInputSeq,
       view.world,
       view.props,
-      view.serverEntities,
+      view.serverEntityMap,
       view.mountEntityId,
       { serverTick: view.serverTick, ...(view.physicsState ? { physics: view.physicsState } : {}) },
     );
@@ -106,7 +106,7 @@ it("replicates excavation geometry and predicts negative-height movement through
         view.lastProcessedInputSeq,
         view.world,
         view.props,
-        view.serverEntities,
+        view.serverEntityMap,
         view.mountEntityId,
         {
           serverTick: view.serverTick,

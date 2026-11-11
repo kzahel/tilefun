@@ -82,16 +82,13 @@ export class DeviceSession {
     const player = replica.serverPlayerEntity;
     if (!predictor || player.id === -1) return false;
     if (reset || !predictor.player || predictor.player.id !== player.id)
-      predictor.reset(
-        player,
-        replica.serverEntities.find((e) => e.id === player.parentId),
-      );
+      predictor.reset(player, replica.serverEntityMap.get(player.parentId ?? -1));
     predictor.reconcile(
       player,
       replica.lastProcessedInputSeq,
       replica.world,
       replica.props,
-      replica.serverEntities,
+      replica.serverEntityMap,
       replica.mountEntityId,
       {
         serverTick: replica.serverTick,

@@ -61,7 +61,7 @@ async function setup(recipe?: ScenarioRecipe) {
       view.lastProcessedInputSeq,
       view.world,
       view.props,
-      view.serverEntities,
+      view.serverEntityMap,
       view.mountEntityId,
       { serverTick: view.serverTick, ...(view.physicsState ? { physics: view.physicsState } : {}) },
     );
@@ -428,7 +428,7 @@ it("holds an overflowed scene and rejects stale state across reload instead of d
     f.view.lastProcessedInputSeq,
     f.view.world,
     f.view.props,
-    f.view.serverEntities,
+    f.view.serverEntityMap,
     undefined,
     { serverTick: f.view.serverTick + 1, physics: { ...state, omitted: 1 } },
   );
@@ -631,7 +631,7 @@ it("keeps a delayed second player's contact component coherent at render fractio
       view.lastProcessedInputSeq,
       view.world,
       view.props,
-      view.serverEntities,
+      view.serverEntityMap,
       view.mountEntityId,
       { serverTick: view.serverTick, ...(view.physicsState ? { physics: view.physicsState } : {}) },
     );

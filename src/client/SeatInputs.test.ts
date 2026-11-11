@@ -45,7 +45,7 @@ const at = (x: number, y = 0, z = 0) => ({ x, y, z });
 
 describe("seatBodies", () => {
   it("resolves each guest's controlled body by the parent rule, from the stream's seat list", () => {
-    const entities = [body(4), body(5, { parentId: 9 }), body(9)];
+    const entities = new Map([body(4), body(5, { parentId: 9 }), body(9)].map((e) => [e.id, e]));
     // Seat 0 is the primary; seat 3 is in no frame (another realm), so its old id
     // in this realm cannot be mistaken for its body.
     const seats = new Map([

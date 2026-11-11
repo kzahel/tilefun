@@ -36,3 +36,17 @@ export function predictionDistance(a: Entity, b: Entity) {
     (a.wz ?? 0) - (b.wz ?? 0),
   );
 }
+
+/** One owned body map per queued request, in authoritative physics order. The
+ * replay takes this map directly; replica entities can change after capture. */
+export function capturePredictionBodies(
+  states: readonly { id: number }[],
+  entities: ReadonlyMap<number, Entity>,
+): Map<number, Entity> {
+  const bodies = new Map<number, Entity>();
+  for (const body of states) {
+    const entity = entities.get(body.id);
+    if (entity) bodies.set(body.id, clonePredictionEntity(entity));
+  }
+  return bodies;
+}

@@ -88,7 +88,7 @@ function receive(
     view.lastProcessedInputSeq,
     view.world,
     view.props,
-    view.serverEntities,
+    view.serverEntityMap,
     view.mountEntityId,
     {
       serverTick: view.serverTick,

@@ -58,7 +58,7 @@
       "overLimit": 1
     },
     "src/client/ClientStateView.ts": {
-      "lines": 541,
+      "lines": 543,
       "worst": 35,
       "overLimit": 1
     },
@@ -68,7 +68,7 @@
       "overLimit": 0
     },
     "src/client/PlayerPredictor.ts": {
-      "lines": 968,
+      "lines": 963,
       "worst": 45,
       "overLimit": 3
     },

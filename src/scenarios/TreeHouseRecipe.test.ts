@@ -116,7 +116,7 @@ it("lets go sideways and predicts the climb through the shared kernel", async ()
       view.lastProcessedInputSeq,
       view.world,
       view.props,
-      view.serverEntities,
+      view.serverEntityMap,
       view.mountEntityId,
       { serverTick: view.serverTick, ...(view.physicsState ? { physics: view.physicsState } : {}) },
     );

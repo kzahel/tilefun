@@ -1,0 +1,1285 @@
+{
+  "description": "Bounded prediction data-flow simplification, 2026-11-11. Accept as removal of one staging/conversion layer with preserved movement and no fixed-work CPU regression, not a demonstrated phone speedup.",
+  "methodology": "Reuse the existing 1,051-entity recorded crowd client replay: 180 warmup ticks, 600 measured updates and 1200 presentations. Three ordinary trials per lane, before-a / after-a / after-b / before-b / before-c / after-c, followed by separate verify runs. Final timing run starts after this task build/test jobs stop; unrelated OS/background load is not frozen. Earlier overlapping build/test timings are excluded and retained as local logs. Native active-driving fixed schedule separately verifies prediction. One ordinary 10 s clear/jam phone check per lane is a functionality check, with the same v3 work gates and no rematching.",
+  "change": {
+    "before": "replica ID map -> flat entity array -> repeated finds -> captured request array -> rebuilt private body map -> published copy",
+    "after": "borrow existing replica ID map -> owned captured body map -> direct replay handoff -> published copy",
+    "removed": "temporary request entity array, its map/filter/map intermediates, repeated whole-array ID searches, and the array/tuple-to-private-map reconstruction. The physics synchronize boundary still takes an array; rendering keeps its ordered array.",
+    "preserved": "Independent replica/queued-body/published component ownership, physics body order, missing-metadata holds, input admission, latency and replay scheduling. No pooling, compact schema or clock changes."
+  },
+  "baseline": {
+    "revision": "003fa5f0",
+    "files": [
+      {
+        "file": "src/client/PlayerPredictor.ts",
+        "sha256": "7b2a6c0e9272388a8f97e34412a86d9f92c18ce65a5438912b8c93565ae9380a"
+      },
+      {
+        "file": "src/client/SeatInputs.ts",
+        "sha256": "ee014d36d40b87ed2917a20b3052ef7e065999267e3f8e5881163c32799cdcf7"
+      },
+      {
+        "file": "src/session/DeviceSession.ts",
+        "sha256": "539595268733411f8b196faf3e02288460e1bda518b60eb5c582024c02f6d958"
+      }
+    ]
+  },
+  "afterSource": [
+    {
+      "file": "src/client/PlayerPredictor.ts",
+      "sha256": "bbaa324319fedefb9997f05beacd7b2372518ad6823ba09d275c0d7160ec9c40"
+    },
+    {
+      "file": "src/client/PredictionSnapshots.ts",
+      "sha256": "94849240574886a0cf9bd18370ea2fa57c47568a1251e829975a14ab9b3fc259"
+    },
+    {
+      "file": "src/client/ClientStateView.ts",
+      "sha256": "637683095f62d413a177ef3893f74331414d052a7dcfe2abc12f1b491582e127"
+    },
+    {
+      "file": "src/client/SeatInputs.ts",
+      "sha256": "241cbb3134f4ed471715e864c7017e6ff75dfba3ff4cb95b024027afbdc7ad21"
+    },
+    {
+      "file": "src/session/DeviceSession.ts",
+      "sha256": "a79c05d0decaea150226bb389caab6b9715ba95b5502f818fb5d54d81dfec969"
+    }
+  ],
+  "fixedReplay": [
+    {
+      "lane": "before",
+      "trial": 0,
+      "source": {
+        "sha256": "a175d324c847d54b0113280faae0bef2aedc8d5bfa79b28cf46cfd34d421eb9e",
+        "lane": "before",
+        "baselineRevision": "003fa5f0"
+      },
+      "environment": {
+        "node": "v24.22.1",
+        "v8": "13.6.233.17-node.58",
+        "platform": "darwin",
+        "release": "25.6.0",
+        "arch": "arm64",
+        "cpu": "Apple M4 Pro",
+        "logicalCpus": 14
+      },
+      "load": [
+        12.57861328125,
+        7.8564453125,
+        5.47216796875
+      ],
+      "workload": {
+        "tapeSha256": "652cdfdcf1b185692fa15cf37d5bc0e83d8439e7a2981cf44cc81ce4f49c1c29",
+        "warmup": 180,
+        "ticks": 600,
+        "updatesHz": 60,
+        "presentationHz": 120,
+        "scene": "moving",
+        "view": {
+          "width": 960,
+          "height": 640,
+          "camera": {
+            "wx": 640,
+            "wy": 690
+          },
+          "zoom": 0.2
+        },
+        "meshes": []
+      },
+      "instrumentation": {
+        "profile": false,
+        "stageTimings": false,
+        "verify": false,
+        "fineGrainedTimers": true
+      },
+      "work": {
+        "updates": 600,
+        "presentations": 1200,
+        "collectedFrames": 0,
+        "meanSceneItems": 0,
+        "meanDrawOrderEntries": 0,
+        "finalEntities": 1051,
+        "finalServerTick": 780,
+        "finalReceivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        },
+        "promptKey": ""
+      },
+      "stages": {
+        "client.decodeApply": {
+          "count": 600,
+          "totalMs": 251.297,
+          "mean": 0.419,
+          "p50": 0.395,
+          "p95": 0.529,
+          "p99": 1.152,
+          "max": 3.106
+        },
+        "client.appearances": {
+          "count": 600,
+          "totalMs": 2305.661,
+          "mean": 3.843,
+          "p50": 3.783,
+          "p95": 4.214,
+          "p99": 4.611,
+          "max": 10.747
+        },
+        "client.reconcile": {
+          "count": 600,
+          "totalMs": 178.293,
+          "mean": 0.297,
+          "p50": 0.285,
+          "p95": 0.408,
+          "p99": 0.731,
+          "max": 0.994
+        },
+        "client.animation": {
+          "count": 600,
+          "totalMs": 73.1,
+          "mean": 0.122,
+          "p50": 0.118,
+          "p95": 0.19,
+          "p99": 0.22,
+          "max": 0.783
+        },
+        "client.prompts": {
+          "count": 600,
+          "totalMs": 573.43,
+          "mean": 0.956,
+          "p50": 0.953,
+          "p95": 1.137,
+          "p99": 1.6,
+          "max": 2.514
+        },
+        "client.update": {
+          "count": 600,
+          "totalMs": 3383.837,
+          "mean": 5.64,
+          "p50": 5.552,
+          "p95": 6.363,
+          "p99": 7.843,
+          "max": 13.893
+        },
+        "client.presentation": {
+          "count": 1200,
+          "totalMs": 641.069,
+          "mean": 0.534,
+          "p50": 0.509,
+          "p95": 0.784,
+          "p99": 1.125,
+          "max": 3.397
+        }
+      },
+      "outcome": {
+        "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+        "finalSceneSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "lane": "before",
+      "trial": 1,
+      "source": {
+        "sha256": "a175d324c847d54b0113280faae0bef2aedc8d5bfa79b28cf46cfd34d421eb9e",
+        "lane": "before",
+        "baselineRevision": "003fa5f0"
+      },
+      "environment": {
+        "node": "v24.22.1",
+        "v8": "13.6.233.17-node.58",
+        "platform": "darwin",
+        "release": "25.6.0",
+        "arch": "arm64",
+        "cpu": "Apple M4 Pro",
+        "logicalCpus": 14
+      },
+      "load": [
+        12.3583984375,
+        8.1083984375,
+        5.6171875
+      ],
+      "workload": {
+        "tapeSha256": "652cdfdcf1b185692fa15cf37d5bc0e83d8439e7a2981cf44cc81ce4f49c1c29",
+        "warmup": 180,
+        "ticks": 600,
+        "updatesHz": 60,
+        "presentationHz": 120,
+        "scene": "moving",
+        "view": {
+          "width": 960,
+          "height": 640,
+          "camera": {
+            "wx": 640,
+            "wy": 690
+          },
+          "zoom": 0.2
+        },
+        "meshes": []
+      },
+      "instrumentation": {
+        "profile": false,
+        "stageTimings": false,
+        "verify": false,
+        "fineGrainedTimers": true
+      },
+      "work": {
+        "updates": 600,
+        "presentations": 1200,
+        "collectedFrames": 0,
+        "meanSceneItems": 0,
+        "meanDrawOrderEntries": 0,
+        "finalEntities": 1051,
+        "finalServerTick": 780,
+        "finalReceivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        },
+        "promptKey": ""
+      },
+      "stages": {
+        "client.decodeApply": {
+          "count": 600,
+          "totalMs": 250.584,
+          "mean": 0.418,
+          "p50": 0.399,
+          "p95": 0.526,
+          "p99": 0.968,
+          "max": 3.001
+        },
+        "client.appearances": {
+          "count": 600,
+          "totalMs": 2295.085,
+          "mean": 3.825,
+          "p50": 3.789,
+          "p95": 4.191,
+          "p99": 4.633,
+          "max": 5.547
+        },
+        "client.reconcile": {
+          "count": 600,
+          "totalMs": 173.421,
+          "mean": 0.289,
+          "p50": 0.278,
+          "p95": 0.362,
+          "p99": 0.59,
+          "max": 1.309
+        },
+        "client.animation": {
+          "count": 600,
+          "totalMs": 63.64,
+          "mean": 0.106,
+          "p50": 0.103,
+          "p95": 0.173,
+          "p99": 0.209,
+          "max": 0.284
+        },
+        "client.prompts": {
+          "count": 600,
+          "totalMs": 572.357,
+          "mean": 0.954,
+          "p50": 0.954,
+          "p95": 1.125,
+          "p99": 1.209,
+          "max": 2.241
+        },
+        "client.update": {
+          "count": 600,
+          "totalMs": 3356.994,
+          "mean": 5.595,
+          "p50": 5.562,
+          "p95": 6.194,
+          "p99": 6.673,
+          "max": 10.312
+        },
+        "client.presentation": {
+          "count": 1200,
+          "totalMs": 606.928,
+          "mean": 0.506,
+          "p50": 0.468,
+          "p95": 0.74,
+          "p99": 1.057,
+          "max": 2.162
+        }
+      },
+      "outcome": {
+        "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+        "finalSceneSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "lane": "before",
+      "trial": 2,
+      "source": {
+        "sha256": "a175d324c847d54b0113280faae0bef2aedc8d5bfa79b28cf46cfd34d421eb9e",
+        "lane": "before",
+        "baselineRevision": "003fa5f0"
+      },
+      "environment": {
+        "node": "v24.22.1",
+        "v8": "13.6.233.17-node.58",
+        "platform": "darwin",
+        "release": "25.6.0",
+        "arch": "arm64",
+        "cpu": "Apple M4 Pro",
+        "logicalCpus": 14
+      },
+      "load": [
+        12.08935546875,
+        8.123046875,
+        5.63671875
+      ],
+      "workload": {
+        "tapeSha256": "652cdfdcf1b185692fa15cf37d5bc0e83d8439e7a2981cf44cc81ce4f49c1c29",
+        "warmup": 180,
+        "ticks": 600,
+        "updatesHz": 60,
+        "presentationHz": 120,
+        "scene": "moving",
+        "view": {
+          "width": 960,
+          "height": 640,
+          "camera": {
+            "wx": 640,
+            "wy": 690
+          },
+          "zoom": 0.2
+        },
+        "meshes": []
+      },
+      "instrumentation": {
+        "profile": false,
+        "stageTimings": false,
+        "verify": false,
+        "fineGrainedTimers": true
+      },
+      "work": {
+        "updates": 600,
+        "presentations": 1200,
+        "collectedFrames": 0,
+        "meanSceneItems": 0,
+        "meanDrawOrderEntries": 0,
+        "finalEntities": 1051,
+        "finalServerTick": 780,
+        "finalReceivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        },
+        "promptKey": ""
+      },
+      "stages": {
+        "client.decodeApply": {
+          "count": 600,
+          "totalMs": 265.007,
+          "mean": 0.442,
+          "p50": 0.392,
+          "p95": 0.57,
+          "p99": 1.678,
+          "max": 8.41
+        },
+        "client.appearances": {
+          "count": 600,
+          "totalMs": 2335.395,
+          "mean": 3.892,
+          "p50": 3.777,
+          "p95": 4.465,
+          "p99": 6.322,
+          "max": 10.713
+        },
+        "client.reconcile": {
+          "count": 600,
+          "totalMs": 183.292,
+          "mean": 0.305,
+          "p50": 0.286,
+          "p95": 0.395,
+          "p99": 0.995,
+          "max": 1.603
+        },
+        "client.animation": {
+          "count": 600,
+          "totalMs": 79.275,
+          "mean": 0.132,
+          "p50": 0.121,
+          "p95": 0.186,
+          "p99": 0.264,
+          "max": 2.462
+        },
+        "client.prompts": {
+          "count": 600,
+          "totalMs": 638.992,
+          "mean": 1.065,
+          "p50": 1.029,
+          "p95": 1.333,
+          "p99": 1.823,
+          "max": 7.392
+        },
+        "client.update": {
+          "count": 600,
+          "totalMs": 3504.057,
+          "mean": 5.84,
+          "p50": 5.661,
+          "p95": 6.953,
+          "p99": 10.18,
+          "max": 14.162
+        },
+        "client.presentation": {
+          "count": 1200,
+          "totalMs": 674.713,
+          "mean": 0.562,
+          "p50": 0.562,
+          "p95": 0.787,
+          "p99": 1.096,
+          "max": 16.757
+        }
+      },
+      "outcome": {
+        "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+        "finalSceneSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "lane": "after",
+      "trial": 0,
+      "source": {
+        "sha256": "10a5d9604ef71ab56dba3fe47cd53f24bfd49d65f5ee2a2b56ebe06a2441d010",
+        "lane": "after",
+        "baselineRevision": "003fa5f0"
+      },
+      "environment": {
+        "node": "v24.22.1",
+        "v8": "13.6.233.17-node.58",
+        "platform": "darwin",
+        "release": "25.6.0",
+        "arch": "arm64",
+        "cpu": "Apple M4 Pro",
+        "logicalCpus": 14
+      },
+      "load": [
+        12.5322265625,
+        7.9248046875,
+        5.51025390625
+      ],
+      "workload": {
+        "tapeSha256": "652cdfdcf1b185692fa15cf37d5bc0e83d8439e7a2981cf44cc81ce4f49c1c29",
+        "warmup": 180,
+        "ticks": 600,
+        "updatesHz": 60,
+        "presentationHz": 120,
+        "scene": "moving",
+        "view": {
+          "width": 960,
+          "height": 640,
+          "camera": {
+            "wx": 640,
+            "wy": 690
+          },
+          "zoom": 0.2
+        },
+        "meshes": []
+      },
+      "instrumentation": {
+        "profile": false,
+        "stageTimings": false,
+        "verify": false,
+        "fineGrainedTimers": true
+      },
+      "work": {
+        "updates": 600,
+        "presentations": 1200,
+        "collectedFrames": 0,
+        "meanSceneItems": 0,
+        "meanDrawOrderEntries": 0,
+        "finalEntities": 1051,
+        "finalServerTick": 780,
+        "finalReceivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        },
+        "promptKey": ""
+      },
+      "stages": {
+        "client.decodeApply": {
+          "count": 600,
+          "totalMs": 242.05,
+          "mean": 0.403,
+          "p50": 0.385,
+          "p95": 0.523,
+          "p99": 0.995,
+          "max": 1.366
+        },
+        "client.appearances": {
+          "count": 600,
+          "totalMs": 2297.644,
+          "mean": 3.829,
+          "p50": 3.765,
+          "p95": 4.348,
+          "p99": 4.799,
+          "max": 6.899
+        },
+        "client.reconcile": {
+          "count": 600,
+          "totalMs": 132.473,
+          "mean": 0.221,
+          "p50": 0.214,
+          "p95": 0.297,
+          "p99": 0.384,
+          "max": 0.851
+        },
+        "client.animation": {
+          "count": 600,
+          "totalMs": 68.422,
+          "mean": 0.114,
+          "p50": 0.109,
+          "p95": 0.178,
+          "p99": 0.2,
+          "max": 0.361
+        },
+        "client.prompts": {
+          "count": 600,
+          "totalMs": 586.744,
+          "mean": 0.978,
+          "p50": 0.974,
+          "p95": 1.163,
+          "p99": 1.219,
+          "max": 4.29
+        },
+        "client.update": {
+          "count": 600,
+          "totalMs": 3329.161,
+          "mean": 5.549,
+          "p50": 5.474,
+          "p95": 6.143,
+          "p99": 7.109,
+          "max": 12.01
+        },
+        "client.presentation": {
+          "count": 1200,
+          "totalMs": 629.612,
+          "mean": 0.525,
+          "p50": 0.524,
+          "p95": 0.759,
+          "p99": 0.998,
+          "max": 4.104
+        }
+      },
+      "outcome": {
+        "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+        "finalSceneSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "lane": "after",
+      "trial": 1,
+      "source": {
+        "sha256": "10a5d9604ef71ab56dba3fe47cd53f24bfd49d65f5ee2a2b56ebe06a2441d010",
+        "lane": "after",
+        "baselineRevision": "003fa5f0"
+      },
+      "environment": {
+        "node": "v24.22.1",
+        "v8": "13.6.233.17-node.58",
+        "platform": "darwin",
+        "release": "25.6.0",
+        "arch": "arm64",
+        "cpu": "Apple M4 Pro",
+        "logicalCpus": 14
+      },
+      "load": [
+        12.302734375,
+        8.02587890625,
+        5.57373046875
+      ],
+      "workload": {
+        "tapeSha256": "652cdfdcf1b185692fa15cf37d5bc0e83d8439e7a2981cf44cc81ce4f49c1c29",
+        "warmup": 180,
+        "ticks": 600,
+        "updatesHz": 60,
+        "presentationHz": 120,
+        "scene": "moving",
+        "view": {
+          "width": 960,
+          "height": 640,
+          "camera": {
+            "wx": 640,
+            "wy": 690
+          },
+          "zoom": 0.2
+        },
+        "meshes": []
+      },
+      "instrumentation": {
+        "profile": false,
+        "stageTimings": false,
+        "verify": false,
+        "fineGrainedTimers": true
+      },
+      "work": {
+        "updates": 600,
+        "presentations": 1200,
+        "collectedFrames": 0,
+        "meanSceneItems": 0,
+        "meanDrawOrderEntries": 0,
+        "finalEntities": 1051,
+        "finalServerTick": 780,
+        "finalReceivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        },
+        "promptKey": ""
+      },
+      "stages": {
+        "client.decodeApply": {
+          "count": 600,
+          "totalMs": 246.654,
+          "mean": 0.411,
+          "p50": 0.394,
+          "p95": 0.506,
+          "p99": 1.056,
+          "max": 1.61
+        },
+        "client.appearances": {
+          "count": 600,
+          "totalMs": 2324.1,
+          "mean": 3.874,
+          "p50": 3.82,
+          "p95": 4.325,
+          "p99": 4.617,
+          "max": 5.825
+        },
+        "client.reconcile": {
+          "count": 600,
+          "totalMs": 135.272,
+          "mean": 0.225,
+          "p50": 0.217,
+          "p95": 0.29,
+          "p99": 0.38,
+          "max": 0.889
+        },
+        "client.animation": {
+          "count": 600,
+          "totalMs": 72.101,
+          "mean": 0.12,
+          "p50": 0.114,
+          "p95": 0.189,
+          "p99": 0.218,
+          "max": 0.421
+        },
+        "client.prompts": {
+          "count": 600,
+          "totalMs": 554.707,
+          "mean": 0.925,
+          "p50": 0.93,
+          "p95": 1.086,
+          "p99": 1.189,
+          "max": 1.705
+        },
+        "client.update": {
+          "count": 600,
+          "totalMs": 3334.834,
+          "mean": 5.558,
+          "p50": 5.519,
+          "p95": 6.099,
+          "p99": 6.655,
+          "max": 7.895
+        },
+        "client.presentation": {
+          "count": 1200,
+          "totalMs": 630.968,
+          "mean": 0.526,
+          "p50": 0.515,
+          "p95": 0.757,
+          "p99": 0.942,
+          "max": 1.408
+        }
+      },
+      "outcome": {
+        "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+        "finalSceneSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "lane": "after",
+      "trial": 2,
+      "source": {
+        "sha256": "10a5d9604ef71ab56dba3fe47cd53f24bfd49d65f5ee2a2b56ebe06a2441d010",
+        "lane": "after",
+        "baselineRevision": "003fa5f0"
+      },
+      "environment": {
+        "node": "v24.22.1",
+        "v8": "13.6.233.17-node.58",
+        "platform": "darwin",
+        "release": "25.6.0",
+        "arch": "arm64",
+        "cpu": "Apple M4 Pro",
+        "logicalCpus": 14
+      },
+      "load": [
+        12.001953125,
+        8.17041015625,
+        5.66796875
+      ],
+      "workload": {
+        "tapeSha256": "652cdfdcf1b185692fa15cf37d5bc0e83d8439e7a2981cf44cc81ce4f49c1c29",
+        "warmup": 180,
+        "ticks": 600,
+        "updatesHz": 60,
+        "presentationHz": 120,
+        "scene": "moving",
+        "view": {
+          "width": 960,
+          "height": 640,
+          "camera": {
+            "wx": 640,
+            "wy": 690
+          },
+          "zoom": 0.2
+        },
+        "meshes": []
+      },
+      "instrumentation": {
+        "profile": false,
+        "stageTimings": false,
+        "verify": false,
+        "fineGrainedTimers": true
+      },
+      "work": {
+        "updates": 600,
+        "presentations": 1200,
+        "collectedFrames": 0,
+        "meanSceneItems": 0,
+        "meanDrawOrderEntries": 0,
+        "finalEntities": 1051,
+        "finalServerTick": 780,
+        "finalReceivers": {
+          "sources": 0,
+          "meshTriangles": 0,
+          "queries": 0,
+          "fragments": 0
+        },
+        "promptKey": ""
+      },
+      "stages": {
+        "client.decodeApply": {
+          "count": 600,
+          "totalMs": 277.033,
+          "mean": 0.462,
+          "p50": 0.4,
+          "p95": 0.528,
+          "p99": 1.423,
+          "max": 22.319
+        },
+        "client.appearances": {
+          "count": 600,
+          "totalMs": 2305.446,
+          "mean": 3.842,
+          "p50": 3.754,
+          "p95": 4.389,
+          "p99": 4.959,
+          "max": 8.224
+        },
+        "client.reconcile": {
+          "count": 600,
+          "totalMs": 137.458,
+          "mean": 0.229,
+          "p50": 0.218,
+          "p95": 0.299,
+          "p99": 0.418,
+          "max": 0.958
+        },
+        "client.animation": {
+          "count": 600,
+          "totalMs": 86.308,
+          "mean": 0.144,
+          "p50": 0.141,
+          "p95": 0.204,
+          "p99": 0.264,
+          "max": 2.508
+        },
+        "client.prompts": {
+          "count": 600,
+          "totalMs": 589.054,
+          "mean": 0.982,
+          "p50": 0.964,
+          "p95": 1.184,
+          "p99": 1.693,
+          "max": 4.041
+        },
+        "client.update": {
+          "count": 600,
+          "totalMs": 3397.42,
+          "mean": 5.662,
+          "p50": 5.534,
+          "p95": 6.43,
+          "p99": 8.301,
+          "max": 28.189
+        },
+        "client.presentation": {
+          "count": 1200,
+          "totalMs": 660.361,
+          "mean": 0.55,
+          "p50": 0.571,
+          "p95": 0.773,
+          "p99": 1.204,
+          "max": 3.388
+        }
+      },
+      "outcome": {
+        "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+        "finalSceneSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "verification": {
+    "before": {
+      "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+      "finalSceneSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "allStatesSha256": "3cdb900efc2cd65c734aacb02696543f28c57d79d68e9bcf4918728bfe235949",
+      "allScenesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "after": {
+      "finalStateSha256": "36b01534e6ad5e36c69233ea918391b317548ea6d9b0a4b88840dde4e1a27054",
+      "finalSceneSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "allStatesSha256": "3cdb900efc2cd65c734aacb02696543f28c57d79d68e9bcf4918728bfe235949",
+      "allScenesSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "activeDriving": {
+      "sha256": "6069297294d23da40d4019aa737bed63d1e6ab24c7b5ddf5382d33b45c3383b2",
+      "fixtures": [
+        "clear",
+        "jam"
+      ],
+      "ticksPerFixture": 900,
+      "checkpointsPerFixture": 30,
+      "description": "Exact previous full authority/predictor checkpoint record and work counts. Deliveries are delayed but fully acknowledged at reception: this schedule has 900 direct steps and no replay steps per fixture. Actual sliced/unacknowledged replay is covered separately by existing native regression tests. Random UUID/tag sets excluded as in 242/243.",
+      "work": [
+        {
+          "fixture": "clear",
+          "counts": {
+            "inputs": 900,
+            "reconciliations": 263,
+            "restores": 263,
+            "restoredBodies": 263,
+            "forwardSteps": 900,
+            "replaySteps": 0,
+            "worldSteps": 900,
+            "bodyReads": 900,
+            "motorUpdates": 900,
+            "wheelQueries": 3600,
+            "geometryBuilds": 44,
+            "resets": 0,
+            "clears": 0
+          }
+        },
+        {
+          "fixture": "jam",
+          "counts": {
+            "inputs": 900,
+            "reconciliations": 263,
+            "restores": 263,
+            "restoredBodies": 3383,
+            "forwardSteps": 900,
+            "replaySteps": 0,
+            "worldSteps": 900,
+            "bodyReads": 8843,
+            "motorUpdates": 11568,
+            "wheelQueries": 20456,
+            "geometryBuilds": 9,
+            "resets": 0,
+            "clears": 0
+          }
+        }
+      ]
+    }
+  },
+  "phone": {
+    "runs": [
+      {
+        "lane": "before",
+        "fixture": "clear",
+        "browser": "Chrome/156.0.8078.79",
+        "device": {
+          "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+          "cores": 8,
+          "width": 411,
+          "height": 789,
+          "devicePixelRatio": 2.625,
+          "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+        },
+        "servedEntry": {
+          "path": "/tilefun/assets/drivingBench-BW3kQ2SN.js",
+          "sha256": "4c26f04ca4bdf0ceaad2ab2b5a6431d68b62a672a71002356a817ae92061bf3f"
+        },
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 599,
+          "wheelQueries": 2384
+        },
+        "predictionWork": {
+          "inputs": 599,
+          "reconciliations": 596,
+          "restores": 583,
+          "restoredBodies": 583,
+          "forwardSteps": 4,
+          "replaySteps": 1294,
+          "worldSteps": 1298,
+          "bodyReads": 1298,
+          "motorUpdates": 1298,
+          "wheelQueries": 5192,
+          "geometryBuilds": 36,
+          "resets": 1,
+          "clears": 0
+        },
+        "seconds": 10,
+        "distancePx": 1083.7269926331937,
+        "mainThread": {
+          "lab.update": {
+            "count": 601,
+            "totalMs": 1616.4999995231628,
+            "maxMs": 26.399999976158142,
+            "retained": 601,
+            "p50Ms": 2.5,
+            "p95Ms": 3.9000000953674316,
+            "p99Ms": 5.5
+          },
+          "lab.render": {
+            "count": 600,
+            "totalMs": 1906.699999332428,
+            "maxMs": 9.100000023841858,
+            "retained": 600,
+            "p50Ms": 2.700000047683716,
+            "p95Ms": 5.200000047683716,
+            "p99Ms": 6.600000023841858
+          }
+        },
+        "missed": 1,
+        "frameMs": {
+          "count": 599,
+          "p50": 16.69999999999891,
+          "p95": 16.799999999999272,
+          "p99": 16.80000000000109,
+          "max": 33.30000000000018
+        },
+        "errors": []
+      },
+      {
+        "lane": "before",
+        "fixture": "jam",
+        "browser": "Chrome/156.0.8078.79",
+        "device": {
+          "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+          "cores": 8,
+          "width": 411,
+          "height": 789,
+          "devicePixelRatio": 2.625,
+          "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+        },
+        "servedEntry": {
+          "path": "/tilefun/assets/drivingBench-BW3kQ2SN.js",
+          "sha256": "4c26f04ca4bdf0ceaad2ab2b5a6431d68b62a672a71002356a817ae92061bf3f"
+        },
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 600,
+          "wheelQueries": 27304
+        },
+        "predictionWork": {
+          "inputs": 598,
+          "reconciliations": 597,
+          "restores": 593,
+          "restoredBodies": 7200,
+          "forwardSteps": 3,
+          "replaySteps": 1299,
+          "worldSteps": 1302,
+          "bodyReads": 14955,
+          "motorUpdates": 15456,
+          "wheelQueries": 27516,
+          "geometryBuilds": 9,
+          "resets": 1,
+          "clears": 0
+        },
+        "seconds": 10,
+        "distancePx": 233.80937361332298,
+        "mainThread": {
+          "lab.update": {
+            "count": 601,
+            "totalMs": 1601.5999999046326,
+            "maxMs": 12.5,
+            "retained": 601,
+            "p50Ms": 2.600000023841858,
+            "p95Ms": 3.5,
+            "p99Ms": 4.100000023841858
+          },
+          "lab.render": {
+            "count": 599,
+            "totalMs": 2418.1999999284744,
+            "maxMs": 13.100000023841858,
+            "retained": 599,
+            "p50Ms": 3.600000023841858,
+            "p95Ms": 6.699999928474426,
+            "p99Ms": 7.900000095367432
+          }
+        },
+        "missed": 2,
+        "frameMs": {
+          "count": 598,
+          "p50": 16.69999999999891,
+          "p95": 16.799999999999272,
+          "p99": 16.80000000000109,
+          "max": 33.30000000000018
+        },
+        "errors": []
+      },
+      {
+        "lane": "after",
+        "fixture": "clear",
+        "browser": "Chrome/156.0.8078.79",
+        "device": {
+          "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+          "cores": 8,
+          "width": 411,
+          "height": 789,
+          "devicePixelRatio": 2.625,
+          "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+        },
+        "servedEntry": {
+          "path": "/tilefun/assets/drivingBench-Hkc-2iKN.js",
+          "sha256": "44533278891ef6ced02956197814f53d5cbf8311bef971726b15bf40ab30140a"
+        },
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 599,
+          "wheelQueries": 2388
+        },
+        "predictionWork": {
+          "inputs": 599,
+          "reconciliations": 595,
+          "restores": 588,
+          "restoredBodies": 588,
+          "forwardSteps": 5,
+          "replaySteps": 1186,
+          "worldSteps": 1191,
+          "bodyReads": 1191,
+          "motorUpdates": 1191,
+          "wheelQueries": 4764,
+          "geometryBuilds": 32,
+          "resets": 1,
+          "clears": 0
+        },
+        "seconds": 10,
+        "distancePx": 1085.5936918519437,
+        "mainThread": {
+          "lab.update": {
+            "count": 601,
+            "totalMs": 1430.6000000238419,
+            "maxMs": 21.399999976158142,
+            "retained": 601,
+            "p50Ms": 2.200000047683716,
+            "p95Ms": 3.200000047683716,
+            "p99Ms": 5
+          },
+          "lab.render": {
+            "count": 601,
+            "totalMs": 1823.6000024080276,
+            "maxMs": 10.299999952316284,
+            "retained": 601,
+            "p50Ms": 2.600000023841858,
+            "p95Ms": 5,
+            "p99Ms": 6.600000023841858
+          }
+        },
+        "missed": 0,
+        "frameMs": {
+          "count": 600,
+          "p50": 16.69999999999891,
+          "p95": 16.799999999999272,
+          "p99": 16.80000000000109,
+          "max": 16.899999999999636
+        },
+        "errors": []
+      },
+      {
+        "lane": "after",
+        "fixture": "jam",
+        "browser": "Chrome/156.0.8078.79",
+        "device": {
+          "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+          "cores": 8,
+          "width": 411,
+          "height": 789,
+          "devicePixelRatio": 2.625,
+          "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+        },
+        "servedEntry": {
+          "path": "/tilefun/assets/drivingBench-Hkc-2iKN.js",
+          "sha256": "44533278891ef6ced02956197814f53d5cbf8311bef971726b15bf40ab30140a"
+        },
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 601,
+          "wheelQueries": 27364
+        },
+        "predictionWork": {
+          "inputs": 600,
+          "reconciliations": 600,
+          "restores": 598,
+          "restoredBodies": 7262,
+          "forwardSteps": 1,
+          "replaySteps": 1196,
+          "worldSteps": 1197,
+          "bodyReads": 14528,
+          "motorUpdates": 14537,
+          "wheelQueries": 25544,
+          "geometryBuilds": 9,
+          "resets": 1,
+          "clears": 0
+        },
+        "seconds": 10,
+        "distancePx": 233.88879474940393,
+        "mainThread": {
+          "lab.update": {
+            "count": 602,
+            "totalMs": 1668.6000000238419,
+            "maxMs": 12.699999928474426,
+            "retained": 602,
+            "p50Ms": 2.700000047683716,
+            "p95Ms": 3.700000047683716,
+            "p99Ms": 4.399999976158142
+          },
+          "lab.render": {
+            "count": 602,
+            "totalMs": 2123.3000005483627,
+            "maxMs": 13.300000071525574,
+            "retained": 602,
+            "p50Ms": 3.299999952316284,
+            "p95Ms": 6.200000047683716,
+            "p99Ms": 7.299999952316284
+          }
+        },
+        "missed": 0,
+        "frameMs": {
+          "count": 601,
+          "p50": 16.69999999999891,
+          "p95": 16.799999999999272,
+          "p99": 16.80000000000109,
+          "max": 16.80000000000109
+        },
+        "errors": []
+      }
+    ],
+    "comparisons": [
+      {
+        "fixture": "clear",
+        "passed": false,
+        "error": "Incompatible driving reports: client replaySteps differ beyond work tolerance"
+      },
+      {
+        "fixture": "jam",
+        "passed": false,
+        "error": "Incompatible driving reports: client replaySteps differ beyond work tolerance"
+      }
+    ],
+    "thermals": [
+      {
+        "lane": "before",
+        "points": [
+          {
+            "label": "before",
+            "date": "2026-11-11T19:21:02.341Z",
+            "batteryC": 25.2,
+            "thermalStatus": 0,
+            "acPowered": true
+          },
+          {
+            "label": "after",
+            "date": "2026-11-11T19:21:39.766Z",
+            "batteryC": 25.2,
+            "thermalStatus": 0,
+            "acPowered": true
+          }
+        ],
+        "error": null
+      },
+      {
+        "lane": "after",
+        "points": [
+          {
+            "label": "before",
+            "date": "2026-11-11T19:25:45.920Z",
+            "batteryC": 25.3,
+            "thermalStatus": 0,
+            "acPowered": true
+          },
+          {
+            "label": "after",
+            "date": "2026-11-11T19:26:23.671Z",
+            "batteryC": 25.3,
+            "thermalStatus": 0,
+            "acPowered": true
+          }
+        ],
+        "error": null
+      }
+    ]
+  },
+  "validation": {
+    "nativeTests": 77,
+    "nativeFiles": 10,
+    "typecheckProjects": 4,
+    "browserChecks": 2,
+    "build": "pass; normal production before final browser/phone checks",
+    "streamingReadiness": "pass",
+    "health": "pass; ClientStateView +2 lines for readonly index alias, PlayerPredictor 968 -> 963",
+    "workshopIdentitiesUnchanged": 2130,
+    "phoneDoctorAfterCleanup": "pass"
+  },
+  "limits": [
+    "Recorded crowd client lane has empty input backlog and no transport/DOM/WebGL; it is not active phone driving. Reconciliation-stage gains must not be applied to total frame time.",
+    "Only one live phone run per fixture/lane. Work counters differ beyond the v3 tolerance; no phone CPU/cadence/allocation percentage is established.",
+    "No allocation sampling added for this pass; discarded temporary structures are a code/data-flow fact, not a measured total heap reduction."
+  ],
+  "next": "This bounded pass is complete. Per-frame presentation/decal copies are a separate possible target; do not extend this cleanup into a new benchmark or replay-policy investigation.",
+  "summary": {
+    "client.reconcile": {
+      "before": {
+        "p50": 0.285,
+        "p95": 0.395
+      },
+      "after": {
+        "p50": 0.217,
+        "p95": 0.297
+      }
+    },
+    "client.update": {
+      "before": {
+        "p50": 5.562,
+        "p95": 6.363
+      },
+      "after": {
+        "p50": 5.519,
+        "p95": 6.143
+      }
+    }
+  },
+  "conclusions": [
+    "One unnecessary array/index conversion layer is removed; the existing replica index serves reconciliation, and one owned body map passes from queued request to private physics.",
+    "Median of the three trial reconciliation p50 values: 0.285 -> 0.217 ms (~24% lower); p95 values 0.395 -> 0.297 ms. Whole client-update p50 5.562 -> 5.519 ms is effectively unchanged; p95 6.363 -> 6.143 ms is a small change, not a phone performance claim.",
+    "All native motion/ownership checks and exact fixed-schedule prediction outcomes pass. The necessary published copy remains to isolate rendering from unfinished replay.",
+    "Phone clear/jam both qualify, but client steps fall 1298 -> 1191 and 1302 -> 1197, beyond work tolerance. The observed missed-interval changes (1/2 -> 0/0) cannot be credited to this cleanup.",
+    "Accepted as a concrete data-flow/API simplification with lower measured reconciliation cost, not as meeting a 10% whole-thread allocation or 0.5 ms phone-update p95 performance goal."
+  ]
+}

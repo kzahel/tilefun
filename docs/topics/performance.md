@@ -232,10 +232,33 @@ attributing those old samples.
 
 Only one prescribed jam heap pair passes per-fixture work compatibility:
 388.5 → 379.5 MiB (~2.3% lower), alongside 1,226 → 1,193 client steps (~2.7% lower).
-No reliable whole-game gain follows from that single tolerated difference. Next
-attribute/control the replay horizon/delivery work and use fixed-work allocation
-replay before tackling small presentation/decal savings. Live cadence stays a
-separate check; the counters change no prediction policy or GC behavior.
+No reliable whole-game gain follows from that single tolerated difference. The
+owner then bounded the next pass to a concrete prediction simplification (244
+below), using the existing fixed replay rather than expanding measurement work.
+Live cadence stays a separate check; the counters change no prediction policy.
+
+## Prediction capture simplification (2026-11-11)
+
+[244](../tactical/244-direct-prediction-body-capture.md) delivers the bounded code
+cleanup: use the replica's existing ID index and transfer one owned captured body
+map directly to replay. The temporary request array, repeated ID searches and
+map reconstruction disappear. Required replica/private/published ownership copies
+remain; no pool, wire/schema change or replay-policy change is introduced.
+
+The existing fixed 1,051-entity crowd recording shows reconciliation p50
+**0.285 → 0.217 ms (~24% lower)** and p95 **0.395 → 0.297 ms**, using medians of
+three trial percentiles. Entire client-update p50 **5.562 → 5.519 ms** is essentially
+unchanged; p95 is 6.363 → 6.143 ms. The final run excludes this task's concurrent
+build/tests but does not freeze OS background load. This is a client-processing
+recording with empty input backlog, not active phone driving.
+
+Native active-driving outcomes and work counts match exactly. Both ordinary phone
+fixtures qualify, but client steps differ beyond tolerance (1,298 → 1,191 clear;
+1,302 → 1,197 jam), so their lower missed-interval counts cannot be credited to the
+change. Accepted as a simpler data flow with lower reconciliation cost; no
+whole-thread allocation or phone-frame improvement is claimed. The bounded pass
+ends here. Remaining per-frame presentation/decal copies are a separate target
+that can use the existing recorded replay.
 
 ## Crowd bench (2026-11-10)
 

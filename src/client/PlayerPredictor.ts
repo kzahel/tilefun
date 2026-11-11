@@ -21,6 +21,7 @@ import type { World } from "../world/World.js";
 import { predictionGeometry } from "./PredictionGeometry.js";
 import { PredictionHistory } from "./PredictionHistory.js";
 import {
+  capturePredictionBodies,
   clonePredictionEntity as clone,
   predictionDistance as distance,
   type ReplayPose,
@@ -83,7 +84,8 @@ interface Request {
   player: Entity;
   ack: number;
   state: PhysicsState;
-  entities: readonly Entity[];
+  /** Owned by this request until the replay takes it as its private body map. */
+  bodies: Map<number, Entity>;
   world: World;
   props: readonly Prop[];
   /** Each co-seat's controlled body at this snapshot (226). */
@@ -271,7 +273,7 @@ export class PlayerPredictor {
     ack: number,
     world: World,
     props: readonly Prop[],
-    entities: readonly Entity[],
+    entities: ReadonlyMap<number, Entity>,
     _mountId?: number,
     timing?: ReconcileTiming,
   ): void {
@@ -290,10 +292,7 @@ export class PlayerPredictor {
         const oldest = this.retiredEpochs.values().next().value;
         if (oldest !== undefined) this.retiredEpochs.delete(oldest);
       }
-      this.reset(
-        player,
-        entities.find((e) => e.id === player.parentId),
-      );
+      this.reset(player, entities.get(player.parentId ?? -1));
     }
     this.epoch = state.epoch;
     this.receivedAck = ack;
@@ -305,16 +304,13 @@ export class PlayerPredictor {
       player: clone(player),
       ack,
       state,
-      entities: state.bodies
-        .map((body) => entities.find((e) => e.id === body.id))
-        .filter((e): e is Entity => !!e)
-        .map(clone),
+      bodies: capturePredictionBodies(state.bodies, entities),
       world,
       props,
       seatBodies: seatBodies(timing?.seats, entities),
     };
     // Retain the parent's replicated seat metadata even though it has no body.
-    this.riderLift = (player.wz ?? 0) - (entities.find((e) => e.id === player.parentId)?.wz ?? 0);
+    this.riderLift = (player.wz ?? 0) - (entities.get(player.parentId ?? -1)?.wz ?? 0);
     this.queued = request;
     const lastReplayInput = this.replay?.inputs[this.replay.inputs.length - 1];
     if (lastReplayInput && ack >= lastReplayInput.seq) this.replay = undefined;
@@ -335,8 +331,7 @@ export class PlayerPredictor {
     const { state } = request;
     const anchorId = request.player.parentId ?? request.player.id;
     const missing =
-      state.bodies.length !== request.entities.length ||
-      !state.bodies.some((b) => b.id === anchorId);
+      state.bodies.length !== request.bodies.size || !state.bodies.some((b) => b.id === anchorId);
     if (
       state.omitted ||
       state.bodies.length > MAX_PREDICTION_BODIES ||
@@ -344,7 +339,7 @@ export class PlayerPredictor {
       (this.discardedThroughSeq !== undefined && request.ack < this.discardedThroughSeq)
     ) {
       this.predicted = clone(request.player);
-      this.predictedMount = request.entities.find((e) => e.id === request.player.parentId) ?? null;
+      this.predictedMount = request.bodies.get(request.player.parentId ?? -1) ?? null;
       this.published.clear();
       this.publishedPhysicsTick = undefined;
       this.correctionAnchor = undefined;
@@ -371,7 +366,7 @@ export class PlayerPredictor {
       overdue = this.inputHistory.some((input) => input.tick <= this.appliedInputTick);
     const pastError = this.stateHistory.distance(state.tick, request.player);
     this.bindGeometry(request.world, request.props);
-    this.bodies = new Map(request.entities.map((e) => [e.id, e]));
+    this.bodies = request.bodies;
     const kinds = new Map(state.bodies.map((b) => [b.id, b.kind]));
     scene.synchronize([...this.bodies.values()], kinds);
     scene.restore(state);

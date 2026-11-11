@@ -78,7 +78,9 @@ export class RemoteStateView implements ClientStateView {
   roomState: import("../interiors/GameplayRoom.js").GameplayRoomState | null = null;
   interior: import("../interiors/GameplayInterior.js").InteriorIdentity | null = null;
   private _world: World;
-  private _entityMap: Map<number, Entity> = new Map();
+  private readonly _entityMap: Map<number, Entity> = new Map();
+  /** Borrowed index; queued prediction captures its own mutable entity copies. */
+  readonly serverEntityMap: ReadonlyMap<number, Entity> = this._entityMap;
   private authoritativeClipPhases = new Map<number, number>();
   private _entities: Entity[] = [];
   private _props: Prop[] = [];
@@ -525,7 +527,7 @@ export class RemoteStateView implements ClientStateView {
     return 1000 / TICK_RATE;
   }
 
-  /** Raw server entities (not replaced by predictor). Used for reconciliation. */
+  /** Raw server entities in presentation order (not replaced by predictor). */
   get serverEntities(): readonly Entity[] {
     return this._entities;
   }

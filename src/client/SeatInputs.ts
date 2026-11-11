@@ -64,12 +64,12 @@ export class SeatReplay {
 /** Each co-seat's controlled body: the seat's parent (vehicle or mount) or its own body. */
 export function seatBodies(
   seats: ReadonlyMap<number, number> | undefined,
-  entities: readonly Entity[],
+  entities: ReadonlyMap<number, Entity>,
 ): Map<number, number> {
   const bodies = new Map<number, number>();
   for (const [seat, entityId] of seats ?? []) {
     if (seat === 0) continue; // The primary seat resolves its own body.
-    const entity = entities.find((e) => e.id === entityId);
+    const entity = entities.get(entityId);
     if (entity) bodies.set(seat, entity.parentId ?? entity.id);
   }
   return bodies;

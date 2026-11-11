@@ -1,5 +1,13 @@
 # Player prediction and moving contacts
 
+[244](../tactical/244-direct-prediction-body-capture.md) removes the queued entity
+array/re-index conversion. Reconciliation borrows `RemoteStateView.serverEntityMap`
+for ID lookup, captures independent body/component copies in physics order into
+one owned map, then transfers that map directly to private replay. Replica actors
+can mutate after capture; committed published copies still isolate rendering from
+sliced replay. The ordered rendering array remains separate. Inputs, clocks and
+replay scheduling are unchanged. All game/lab consumers share this contract.
+
 [243](../tactical/243-client-prediction-work-counters.md) adds explicit diagnostic
 work windows: `sampleWork(true)` starts/resets, `sampleWork()` stops/snapshots.
 Fixed scalar counts include steps inside replay jobs (new-input extension too),
