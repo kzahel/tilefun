@@ -13,11 +13,21 @@ const NONE: readonly SceneBody[] = [];
  */
 export class WheelGrid {
   private readonly cells = new Map<number, SceneBody[]>();
+  private readonly spare: SceneBody[][] = [];
+  private readonly found = new Set<SceneBody>();
   private built = false;
 
   /** Poses are about to change: the next ray rebuilds the grid. */
   reset() {
     this.built = false;
+    this.found.clear();
+    // Retire travelled cells and release body references even if no next ray is cast.
+    for (const cell of this.cells.values()) {
+      const small = cell.length <= 64;
+      cell.length = 0;
+      if (small && this.spare.length < 1024) this.spare.push(cell);
+    }
+    this.cells.clear();
   }
 
   /** Every body whose bounding sphere can touch the ray segment, and possibly more. */
@@ -35,7 +45,8 @@ export class WheelGrid {
       z0 = Math.floor(Math.min(origin.z, endZ) / CELL),
       z1 = Math.floor(Math.max(origin.z, endZ) / CELL);
     if (x0 === x1 && z0 === z1) return this.cells.get(key(x0, z0)) ?? NONE;
-    const found = new Set<SceneBody>();
+    const found = this.found;
+    found.clear();
     for (let x = x0; x <= x1; x++)
       for (let z = z0; z <= z1; z++)
         for (const body of this.cells.get(key(x, z)) ?? NONE) found.add(body);
@@ -44,7 +55,6 @@ export class WheelGrid {
 
   private build(bodies: Iterable<SceneBody>) {
     this.built = true;
-    for (const cell of this.cells.values()) cell.length = 0;
     for (const body of bodies) {
       const p = body.queryCenter,
         r = body.queryRadius;
@@ -52,9 +62,13 @@ export class WheelGrid {
         z1 = Math.floor((p.z + r) / CELL);
       for (let x = Math.floor((p.x - r) / CELL); x <= x1; x++)
         for (let z = Math.floor((p.z - r) / CELL); z <= z1; z++) {
-          const cell = this.cells.get(key(x, z));
-          if (cell) cell.push(body);
-          else this.cells.set(key(x, z), [body]);
+          const address = key(x, z);
+          let cell = this.cells.get(address);
+          if (!cell) {
+            cell = this.spare.pop() ?? [];
+            this.cells.set(address, cell);
+          }
+          cell.push(body);
         }
     }
   }

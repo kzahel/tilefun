@@ -1,5 +1,16 @@
 import { TerrainId } from "../../autotile/TerrainId.js";
-import { fbm } from "../noise.js";
+import { OwnerPlanCache } from "./OwnerPlanCache.js";
+import {
+  regionalHash as hash,
+  naturalElevation,
+  plannedMoisture,
+  REGION_SIZE,
+} from "./RegionalGeography.js";
+import { readSettlement, settlementForOwner } from "./RegionalSettlement.js";
+
+export { naturalElevation, plannedMoisture, REGION_SIZE } from "./RegionalGeography.js";
+export { settlementForOwner } from "./RegionalSettlement.js";
+
 import { regionalTerrainForElevation } from "./RegionalTerrain.js";
 import { MAX_WORLD_COORDINATE, type RegionalWorld, validateWorld } from "./WorldDescriptor.js";
 
@@ -16,7 +27,6 @@ export interface Point {
   y: number;
 }
 
-export const REGION_SIZE = 1024;
 export const QUERY_LIMITS = { maxSamples: 24_576, maxOwners: 144, maxFeatures: 432 } as const;
 export const LandCover = {
   Water: 0,
@@ -75,72 +85,10 @@ export function intersects(a: Bounds, b: Bounds): boolean {
   return a.minX < b.maxX && a.maxX > b.minX && a.minY < b.maxY && a.maxY > b.minY;
 }
 
-function hash(cx: number, cy: number, seed: number, salt: number): number {
-  let h = Math.imul(cx, 374761393) ^ Math.imul(cy, 668265263) ^ seed ^ salt;
-  h = Math.imul(h ^ (h >>> 13), 1274126177);
-  return ((h ^ (h >>> 16)) >>> 0) / 2 ** 32;
-}
-
-export function plannedMoisture(world: RegionalWorld, x: number, y: number): number {
-  return fbm(x / 1100, y / 1100, world.seed + 2801, 2);
-}
-
-/** The regional geographic spine; local realization must consume these constraints. */
-export function naturalElevation(world: RegionalWorld, x: number, y: number): number {
-  return (
-    fbm(x / 4096, y / 4096, world.seed, 3) * 0.72 +
-    fbm(x / 640, y / 640, world.seed + 1709, 2) * 0.28
-  );
-}
-
-const NAME_START = ["Maple", "Willow", "Ash", "Oak", "Fern", "Cedar", "Brook", "Birch"];
-const NAME_END = ["ford", "haven", "field", "wick", "grove", "bridge", "stead", "vale"];
-
-/** One independently addressable owner. No neighbor search or child construction. */
-export function settlementForOwner(
-  world: RegionalWorld,
-  cx: number,
-  cy: number,
-): Settlement | null {
-  const x = cx * REGION_SIZE + 288 + Math.floor(hash(cx, cy, world.seed, 101) * 448);
-  const y = cy * REGION_SIZE + 288 + Math.floor(hash(cx, cy, world.seed, 211) * 448);
-  if (hash(cx, cy, world.seed, 307) > 0.76 || naturalElevation(world, x, y) < 0.02) return null;
-  const kind = hash(cx, cy, world.seed, 401) < 0.32 ? "city" : "village";
-  const width = kind === "city" ? 320 + Math.floor(hash(cx, cy, world.seed, 503) * 64) : 128;
-  const height = kind === "city" ? 256 + Math.floor(hash(cx, cy, world.seed, 601) * 64) : 112;
-  const bounds = {
-    minX: x - width / 2,
-    minY: y - height / 2,
-    maxX: x + width / 2,
-    maxY: y + height / 2,
-  };
-  const { minX, minY, maxX, maxY } = bounds;
-  const cut = kind === "city" ? 32 : 16;
-  return {
-    id: `settlement:${cx}:${cy}`,
-    parentId: `region:${cx}:${cy}`,
-    owner: { cx, cy },
-    bounds,
-    kind,
-    name: `${NAME_START[Math.floor(hash(cx, cy, world.seed, 701) * NAME_START.length)]}${NAME_END[Math.floor(hash(cx, cy, world.seed, 809) * NAME_END.length)]}`,
-    center: { x, y },
-    outline: [
-      { x: minX + cut, y: minY },
-      { x: maxX - cut, y: minY },
-      { x: maxX, y: minY + cut },
-      { x: maxX, y: maxY - cut },
-      { x: maxX - cut, y: maxY },
-      { x: minX + cut, y: maxY },
-      { x: minX, y: maxY - cut },
-      { x: minX, y: minY + cut },
-    ],
-  };
-}
-
 /** Reservations guarantee dry usable land, with a bounded earthworks halo. */
 export function plannedElevation(world: RegionalWorld, x: number, y: number): number {
   const base = naturalElevation(world, x, y);
-  const settlement = settlementForOwner(
+  const settlement = readSettlement(
     world,
     Math.floor(x / REGION_SIZE),
     Math.floor(y / REGION_SIZE),
@@ -184,7 +132,7 @@ function corridorIsDry(world: RegionalWorld, points: Point[], width: number): bo
 }
 
 /** East/south edges have one owner. Both endpoints derive exactly the same connection. */
-export function connectionForOwner(
+function buildConnection(
   world: RegionalWorld,
   cx: number,
   cy: number,
@@ -218,6 +166,30 @@ export function connectionForOwner(
     };
   }
   return null;
+}
+
+const eastConnections = new OwnerPlanCache((world, cx, cy) =>
+  buildConnection(world, cx, cy, "east"),
+);
+const southConnections = new OwnerPlanCache((world, cx, cy) =>
+  buildConnection(world, cx, cy, "south"),
+);
+export function connectionForOwner(
+  world: RegionalWorld,
+  cx: number,
+  cy: number,
+  axis: "east" | "south",
+): Connection | null {
+  const c = (axis === "east" ? eastConnections : southConnections).get(world, cx, cy);
+  return (
+    c && {
+      ...c,
+      owner: { ...c.owner },
+      bounds: { ...c.bounds },
+      settlementIds: [c.settlementIds[0], c.settlementIds[1]],
+      points: c.points.map((p) => ({ ...p })),
+    }
+  );
 }
 
 export function validateRequest(request: RegionalRequest): void {

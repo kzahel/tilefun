@@ -2,6 +2,7 @@ import type { InteriorPresentation } from "../interiors/InteriorPresentation.js"
 import { EntityMeshPose } from "./EntityMeshPose.js";
 import { GrassFrameBuffer } from "./GrassFrameBuffer.js";
 import { OverlayFrame } from "./OverlayFrame.js";
+import { PropReceiverCache } from "./PropReceiverCache.js";
 import { PropDepthCache } from "./propDepth.js";
 import type { SceneItem } from "./SceneItem.js";
 
@@ -26,6 +27,7 @@ export class SceneFrame {
   readonly items: SceneItem[] = [];
   readonly grass = new GrassFrameBuffer();
   readonly propDepth = new PropDepthCache();
+  readonly propReceivers = new PropReceiverCache();
 
   constructor(options?: { allCars3d?: boolean; authoredTrains?: boolean }) {
     this.meshPoses = new EntityMeshPose(options?.allCars3d, options?.authoredTrains);
@@ -54,5 +56,6 @@ export class SceneFrame {
     this.interiorKey = "";
     this.grass.clear();
     this.propDepth.clear();
+    this.propReceivers.clear();
   }
 }

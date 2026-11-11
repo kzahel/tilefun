@@ -100,9 +100,15 @@ about 26% of the moving sample by call-stack attribution. The ordinary drive
 covered 2,665 px and missed one frame in 30 seconds; that pause is unattributed.
 The separate trace-only observation found minor GC but no major GC. Sampler-stop
 MajorGC events are artifacts and must be excluded from natural-GC counts.
-Next: reduce repeated planner work and static receiver/prediction allocation,
-then remeasure. A Rust/WASM generation kernel remains an experiment for the
-Worker, separate from main-thread churn.
+[238](../tactical/238-allocation-churn-and-regional-planning.md) delivers weak prop
+receiver geometry caching, scalar body bounds, per-chassis vector/impulse scratch,
+bounded wheel-grid reuse and regional owner/connection caches. Pixel paired runs:
+standing allocation 529 → 409 MiB/30 s; qualifying moving runs 669–672 → 491–523
+MiB/30 s (about 25% by two-run means; routes/populations differ). Median unseen
+generation falls 33–51% with matching work counts and unchanged content checks.
+Cold tails and occasional frame misses remain. Next: predictor snapshot/readback
+reuse, CPU attribution of the remaining long render callback, and a deterministic
+driving/jammed-traffic workload. Rust/WASM is still an optional Worker experiment.
 
 ## Crowd bench (2026-11-10)
 

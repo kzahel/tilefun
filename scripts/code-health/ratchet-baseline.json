@@ -208,7 +208,7 @@
       "overLimit": 1
     },
     "src/generation/regional/RegionalPlanner.ts": {
-      "lines": 359,
+      "lines": 331,
       "worst": 45,
       "overLimit": 2
     },
@@ -373,7 +373,7 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 919,
+      "lines": 917,
       "worst": 65,
       "overLimit": 4
     },
@@ -398,8 +398,8 @@
       "overLimit": 1
     },
     "src/physics/VehicleChassis.ts": {
-      "lines": 218,
-      "worst": 37,
+      "lines": 190,
+      "worst": 36,
       "overLimit": 1
     },
     "src/projection/CarProxyScene.ts": {
@@ -508,8 +508,8 @@
       "overLimit": 1
     },
     "src/rendering/SurfaceReceivers.ts": {
-      "lines": 453,
-      "worst": 51,
+      "lines": 445,
+      "worst": 37,
       "overLimit": 3
     },
     "src/rendering/TileRenderer.ts": {

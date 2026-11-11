@@ -55,3 +55,21 @@ it("rebuilds from the new poses after a reset", () => {
   expect([...grid.near([body], { x: 30, y: 1, z: 0 }, down, 1)]).toEqual([body]);
   expect([...grid.near([body], { x: 0, y: 1, z: 0 }, down, 1)]).toEqual([]);
 });
+
+it("retires travelled cells and releases borrowed body lists on reset", () => {
+  const body = { queryCenter: { x: 0, y: 0, z: 0 }, queryRadius: 0.5 } as unknown as SceneBody;
+  const grid = new WheelGrid(),
+    direction = { x: 0, y: -1, z: 0 };
+  const old = grid.near([body], { x: 0, y: 1, z: 0 }, direction, 1);
+  expect([...old]).toEqual([body]);
+  grid.reset();
+  expect([...old]).toEqual([]);
+  for (let i = 0; i < 500; i++) {
+    body.queryCenter.x = i * 30;
+    grid.reset();
+    expect([...grid.near([body], { x: i * 30, y: 1, z: 0 }, direction, 1)]).toEqual([body]);
+  }
+  // Empty residency after retirement must not retain old bodies anywhere in the grid.
+  grid.reset();
+  expect([...grid.near([], { x: 499 * 30, y: 1, z: 0 }, direction, 1)]).toEqual([]);
+});

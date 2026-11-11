@@ -2,7 +2,7 @@
 
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.
-Updated: 2026-10-21.
+Updated: 2026-11-11.
 
 ## Current generation policy
 
@@ -153,6 +153,18 @@ Racetrack lab diagnostics select sports cars inside the shared planner's oval,
 excluding nearby road traffic that uses the same model. Motion checks follow
 runtime actor IDs so two racers with the same appearance cannot stand in for
 each other; paused reload checks retain model and position matching.
+
+## Bounded planner working memory
+
+[238](../tactical/238-allocation-churn-and-regional-planning.md) caches settlements
+and corridor admission per `RegionalWorld` identity in weak working memory, with
+128 entries for settlements and 128 for each connection axis. Missing owners are
+cached too; seed changes invalidate that world's entries. Terrain's repeated
+owner lookup has a last-owner fast path. Internal cached plans never escape:
+public settlement/connection/query results remain independent mutable copies.
+Eviction/query order does not change generation. Hash verification, existing
+border/query-order tests and explicit public-mutation tests preserve output.
+The generator version, promoted banks and exact review snapshots are unchanged.
 
 ## Exact review scenes and asset banks
 

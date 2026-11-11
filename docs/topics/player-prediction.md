@@ -1,5 +1,14 @@
 # Player prediction and moving contacts
 
+[238](../tactical/238-allocation-churn-and-regional-planning.md) reuses chassis
+vectors and wheel-impulse records in the shared authority/prediction kernel.
+`VehicleChassis.prepare` results are borrowed until the next prepare on that
+same chassis. Scratch is never shared between cars: all chassis read pre-impulse
+poses before the scene applies any impulses. Saved/wire/replay snapshots keep
+their existing independent ownership. Wheel-grid buckets retire body references
+at reset/disposal and keep a bounded spare pool, rather than retaining travelled
+cells. Arithmetic, solver scheduling and movement behavior remain unchanged.
+
 [226](../tactical/226-player-views-and-local-split-screen.md) adds additive
 multi-seat replay (slice 1a: `storeInput(seq, movement, dt, seats)` with co-seat
 movement keyed by controlled body) and, in slice 2, the input side of one

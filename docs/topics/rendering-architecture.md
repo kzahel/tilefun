@@ -1,5 +1,14 @@
 # Rendering architecture and backend separation
 
+[238](../tactical/238-allocation-churn-and-regional-planning.md) retains static prop
+receiver faces in a per-client `SceneFrame` weak cache. Scalar snapshots detect
+in-place shape edits; an edit replaces cached faces without mutating prior borrows.
+Visibility, eligibility and excavation are evaluated per view. Sources use unique
+query tokens, so sharing geometry across frame/view instances cannot suppress
+candidates. World/frame clear discards the cache; ordinary release keeps weak
+geometry entries. Moving body bounds use the same eight scalar corner transforms,
+and detailed triangle caches allocate only on demand. Pixel output/order is unchanged.
+
 [229](../tactical/229-first-person-view.md) adds an opt-in first-person view, the
 first non-fixed camera over shared presentation. It is not a `RenderBackend`: it
 consumes `collectWorldSprites` (the actor stage split out of `collectScene`;
@@ -126,7 +135,7 @@ Canvas: the game, labs, explorer and probes draw only through WebGL2, ignore
 Canvas host is deleted (slice 3); a native Canvas2D raster (`ReviewRasterBackend`)
 remains only for fingerprinted review images.
 Bounded unchanged car images and ordered multi-texture GPU batches are delivered.
-Updated: 2026-11-09.
+Updated: 2026-11-11.
 
 [169](../tactical/169-wheel-lift-towing.md) groups a tow truck and its car in one
 shared GPU depth target. Per-draw absolute transforms reset both cached assets;

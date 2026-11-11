@@ -57,6 +57,7 @@ export function collectScene(
     camera.worldRaster && camera.zoom >= SURFACE_RECEIVER_MIN_ZOOM
       ? new SurfaceReceivers(world, props, entities, alpha, {
           ...receiverOptions,
+          propCache: frame?.propReceivers,
           mesh: terrain.meshSurfaceGeometry?.bind(terrain),
         })
       : undefined;

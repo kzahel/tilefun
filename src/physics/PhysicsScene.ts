@@ -158,10 +158,8 @@ export class PhysicsScene {
     if (this.disposed) return;
     this.disposed = true;
     this.world.free();
-    this.bodies.clear();
-    this.sections.clear();
-    this.colliderIds.clear();
-    this.contacts.clear();
+    for (const map of [this.bodies, this.sections, this.colliderIds, this.contacts]) map.clear();
+    this.wheelGrid.reset();
   }
 
   /** Synchronize membership/explicit edits once, not once per neighboring motor.

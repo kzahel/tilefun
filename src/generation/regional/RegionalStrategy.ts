@@ -32,8 +32,12 @@ export class RegionalStrategy implements TerrainStrategy {
       sampleStep: 64,
       limits: QUERY_LIMITS,
     });
-    const distance = (x: number, y: number) =>
-      Math.min(Infinity, ...plan.connections.map((road) => corridorDistance(road, x, y)));
+    const distance = (x: number, y: number) => {
+      let nearest = Infinity;
+      for (const road of plan.connections)
+        nearest = Math.min(nearest, corridorDistance(road, x, y));
+      return nearest;
+    };
     for (let sy = 0; sy < Chunk.SUBGRID_SIZE; sy++) {
       for (let sx = 0; sx < Chunk.SUBGRID_SIZE; sx++) {
         const x = minX + sx / 2;

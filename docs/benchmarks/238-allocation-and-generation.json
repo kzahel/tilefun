@@ -1,0 +1,3066 @@
+{
+  "description": "Physical Pixel 7a before/after allocation and generation optimizations, 2026-11-11. Full local records/profiles: ignored data/scratch/churn-238/.",
+  "baselineRevision": "a7c647e6",
+  "optimizedSourceSha256": "9d5b8fea34fdd887443aea790f882a988765ecc89c29bb723e59655e90b89435",
+  "optimizedSourceFileCount": 978,
+  "device": {
+    "name": "Pixel 7a",
+    "browser": "Chrome/156.0.8078.79",
+    "nativeViewport": {
+      "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+      "cores": 8,
+      "viewport": {
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625
+      },
+      "canvas": {
+        "width": 411,
+        "height": 789
+      },
+      "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+      "gpuTimer": false
+    },
+    "temperatureC": [
+      24.8,
+      28.8
+    ],
+    "thermalStatuses": [
+      0
+    ],
+    "acPowered": true,
+    "batteryPercent": 80
+  },
+  "methodology": {
+    "allocation": "Same render:bench and dependency/assets; preserved baseline src from a7c647e6 vs current source on separate isolated Vite origins. Sequential interleaved runs, then retry blocked controls; 30 s, zoom 1, heap sampling includes collected objects and bench bookkeeping. No GPU-finish window. Driving comparisons require >=2000 px; traffic/populations differ, so reported reduction is observed, not a fixed-replay causal estimate.",
+    "generation": "Separate immediately successive before/after diagnostic Workers at 28.7\u201328.8 C, status 0. Same four 7x7 routes, three fresh-generator trials; all baseline src overridden from preserved a7c647e6 snapshot. Source imports are frozen; dependencies/assets unchanged. No forced GC or discarded startup. Terrain/placement work counts and coordinates match.",
+    "stackGroups": "Disjoint by sampled stack: receivers first, then src/physics, then RemotePresentation/PresentationTimeline, else other. Alternate nearest-source/top-self views are not additional bytes."
+  },
+  "allocations": [
+    {
+      "mode": "before",
+      "report": "phone-before-allocations-1.json",
+      "scene": "city",
+      "representative": true,
+      "seconds": 30,
+      "estimatedMiB": 529.315,
+      "estimatedMiBPerSecond": 17.644,
+      "drivenPx": null,
+      "frames": 1800,
+      "missed": 0,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.8,
+        "max": 17.6
+      },
+      "renderMs": {
+        "p50": 3.5,
+        "p95": 4.6,
+        "max": 7.5
+      },
+      "updateMs": {
+        "p50": 3.5,
+        "p95": 4.6,
+        "max": 7.2
+      },
+      "workerTickMs": {
+        "p50": 4.2,
+        "p95": 8.7
+      },
+      "entities": 11,
+      "stackGroupsBytes": {
+        "other": 205827452,
+        "physics": 189721120,
+        "presentation": 38986516,
+        "receivers": 120491600
+      },
+      "nearestSource": [
+        {
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 112189988
+        },
+        {
+          "source": "src/physics/PhysicsScene.ts",
+          "sampledBytes": 67931116
+        },
+        {
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 65684316
+        },
+        {
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 30006696
+        },
+        {
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 20328544
+        },
+        {
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 18657972
+        },
+        {
+          "source": "src/rendering/GpuRasterSurface.ts",
+          "sampledBytes": 12960332
+        },
+        {
+          "source": "src/rendering/scene/EntitySprites.ts",
+          "sampledBytes": 12495456
+        },
+        {
+          "source": "src/client/ClientStateView.ts",
+          "sampledBytes": 12492072
+        },
+        {
+          "source": "src/physics/WheelGrid.ts",
+          "sampledBytes": 12331404
+        }
+      ],
+      "topSelf": [
+        {
+          "function": "SurfaceReceivers",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 83591432
+        },
+        {
+          "function": "prepare",
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 28166868
+        },
+        {
+          "function": "register",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 12657068
+        },
+        {
+          "function": "clone",
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 12325752
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 11507976
+        },
+        {
+          "function": "build",
+          "source": "src/physics/WheelGrid.ts",
+          "sampledBytes": 11446512
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 11342588
+        },
+        {
+          "function": "mul",
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 10757760
+        },
+        {
+          "function": "recordMotionSample",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 10650932
+        },
+        {
+          "function": "entries",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 10095472
+        },
+        {
+          "function": "rotateBodyVector",
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 9576840
+        },
+        {
+          "function": "Map",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 9184880
+        }
+      ]
+    },
+    {
+      "mode": "before",
+      "report": "phone-before-allocations-1.json",
+      "scene": "drive",
+      "representative": true,
+      "seconds": 30,
+      "estimatedMiB": 672.417,
+      "estimatedMiBPerSecond": 22.414,
+      "drivenPx": 2689,
+      "frames": 1800,
+      "missed": 0,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.8,
+        "max": 17.1
+      },
+      "renderMs": {
+        "p50": 3.9,
+        "p95": 5.9,
+        "max": 17.3
+      },
+      "updateMs": {
+        "p50": 2.8,
+        "p95": 4,
+        "max": 7
+      },
+      "workerTickMs": {
+        "p50": 4.6,
+        "p95": 7.2
+      },
+      "entities": 19,
+      "stackGroupsBytes": {
+        "other": 281456920,
+        "physics": 196471876,
+        "presentation": 55886052,
+        "receivers": 171265600
+      },
+      "nearestSource": [
+        {
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 154716548
+        },
+        {
+          "source": "src/physics/PhysicsScene.ts",
+          "sampledBytes": 74751040
+        },
+        {
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 58163828
+        },
+        {
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 33868104
+        },
+        {
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 27943520
+        },
+        {
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 27942532
+        },
+        {
+          "source": "src/rendering/GpuRasterSurface.ts",
+          "sampledBytes": 16596128
+        },
+        {
+          "source": "src/input/ControllerBindings.ts",
+          "sampledBytes": 15471736
+        },
+        {
+          "source": "src/rendering/scene/EntitySprites.ts",
+          "sampledBytes": 14330328
+        },
+        {
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 14069164
+        }
+      ],
+      "topSelf": [
+        {
+          "function": "SurfaceReceivers",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 111919412
+        },
+        {
+          "function": "prepare",
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 32026160
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 17117528
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 15245136
+        },
+        {
+          "function": "recordMotionSample",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 13771596
+        },
+        {
+          "function": "register",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 13739092
+        },
+        {
+          "function": "clone",
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 12621328
+        },
+        {
+          "function": "entries",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 12619352
+        },
+        {
+          "function": "rotateBodyVector",
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 11446560
+        },
+        {
+          "function": "next",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 10850064
+        },
+        {
+          "function": "build",
+          "source": "src/physics/WheelGrid.ts",
+          "sampledBytes": 10332484
+        },
+        {
+          "function": "Map",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 9578308
+        }
+      ]
+    },
+    {
+      "mode": "before",
+      "report": "phone-before-allocations-2.json",
+      "scene": "drive",
+      "representative": false,
+      "seconds": 30,
+      "estimatedMiB": 546.785,
+      "estimatedMiBPerSecond": 18.226,
+      "drivenPx": 147,
+      "frames": 1800,
+      "missed": 0,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.8,
+        "max": 17.1
+      },
+      "renderMs": {
+        "p50": 4,
+        "p95": 5.3,
+        "max": 19
+      },
+      "updateMs": {
+        "p50": 2.9,
+        "p95": 3.7,
+        "max": 6.3
+      },
+      "workerTickMs": {
+        "p50": 4.5,
+        "p95": 8.5
+      },
+      "entities": 15,
+      "stackGroupsBytes": {
+        "other": 260666064,
+        "physics": 140042584,
+        "presentation": 41085012,
+        "receivers": 131552460
+      },
+      "nearestSource": [
+        {
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 121938564
+        },
+        {
+          "source": "src/physics/PhysicsScene.ts",
+          "sampledBytes": 51602300
+        },
+        {
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 46009168
+        },
+        {
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 33905556
+        },
+        {
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 21148144
+        },
+        {
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 19936868
+        },
+        {
+          "source": "src/rendering/collectScene.ts",
+          "sampledBytes": 19717004
+        },
+        {
+          "source": "src/rendering/GpuRasterSurface.ts",
+          "sampledBytes": 18004304
+        },
+        {
+          "source": "src/input/ControllerBindings.ts",
+          "sampledBytes": 15706276
+        },
+        {
+          "source": "src/rendering/Canvas2DRenderer.ts",
+          "sampledBytes": 15666196
+        }
+      ],
+      "topSelf": [
+        {
+          "function": "SurfaceReceivers",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 92916052
+        },
+        {
+          "function": "prepare",
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 19412264
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/rendering/collectScene.ts",
+          "sampledBytes": 15404928
+        },
+        {
+          "function": "entries",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 12750612
+        },
+        {
+          "function": "clone",
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 12523312
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 12491472
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 12195896
+        },
+        {
+          "function": "recordMotionSample",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 10747764
+        },
+        {
+          "function": "drawGrass",
+          "source": "src/rendering/Canvas2DRenderer.ts",
+          "sampledBytes": 10684332
+        },
+        {
+          "function": "Map",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 9086868
+        },
+        {
+          "function": "rotateBodyVector",
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 8986680
+        },
+        {
+          "function": "register",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 8918800
+        }
+      ]
+    },
+    {
+      "mode": "before",
+      "report": "phone-before-allocations-3.json",
+      "scene": "drive",
+      "representative": false,
+      "seconds": 30,
+      "estimatedMiB": 636.125,
+      "estimatedMiBPerSecond": 21.204,
+      "drivenPx": 150,
+      "frames": 1799,
+      "missed": 1,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.8,
+        "max": 33.3
+      },
+      "renderMs": {
+        "p50": 3.8,
+        "p95": 5.4,
+        "max": 9.1
+      },
+      "updateMs": {
+        "p50": 3.4,
+        "p95": 4.4,
+        "max": 6.6
+      },
+      "workerTickMs": {
+        "p50": 3.5,
+        "p95": 8.4
+      },
+      "entities": 15,
+      "stackGroupsBytes": {
+        "other": 261171352,
+        "physics": 228595488,
+        "presentation": 42662712,
+        "receivers": 134595384
+      },
+      "nearestSource": [
+        {
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 127934508
+        },
+        {
+          "source": "src/physics/PhysicsScene.ts",
+          "sampledBytes": 87012868
+        },
+        {
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 77802588
+        },
+        {
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 30885588
+        },
+        {
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 22693536
+        },
+        {
+          "source": "src/rendering/GpuRasterSurface.ts",
+          "sampledBytes": 20400132
+        },
+        {
+          "source": "src/rendering/collectScene.ts",
+          "sampledBytes": 20175964
+        },
+        {
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 19969176
+        },
+        {
+          "source": "src/input/ControllerBindings.ts",
+          "sampledBytes": 16881304
+        },
+        {
+          "source": "src/rendering/Canvas2DRenderer.ts",
+          "sampledBytes": 16354408
+        }
+      ],
+      "topSelf": [
+        {
+          "function": "SurfaceReceivers",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 102845452
+        },
+        {
+          "function": "prepare",
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 40514228
+        },
+        {
+          "function": "register",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 15969920
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/rendering/collectScene.ts",
+          "sampledBytes": 15207132
+        },
+        {
+          "function": "build",
+          "source": "src/physics/WheelGrid.ts",
+          "sampledBytes": 14595996
+        },
+        {
+          "function": "entries",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 13930352
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 12654280
+        },
+        {
+          "function": "recordMotionSample",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 12260408
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 12163256
+        },
+        {
+          "function": "drawGrass",
+          "source": "src/rendering/Canvas2DRenderer.ts",
+          "sampledBytes": 11339808
+        },
+        {
+          "function": "clone",
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 10818700
+        },
+        {
+          "function": "rotateBodyVector",
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 10429740
+        }
+      ]
+    },
+    {
+      "mode": "before",
+      "report": "phone-before-allocations-4.json",
+      "scene": "drive",
+      "representative": true,
+      "seconds": 30,
+      "estimatedMiB": 669.552,
+      "estimatedMiBPerSecond": 22.318,
+      "drivenPx": 2872,
+      "frames": 1800,
+      "missed": 0,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.7,
+        "max": 17.3
+      },
+      "renderMs": {
+        "p50": 3.9,
+        "p95": 6.3,
+        "max": 21.5
+      },
+      "updateMs": {
+        "p50": 2.8,
+        "p95": 3.8,
+        "max": 8.2
+      },
+      "workerTickMs": {
+        "p50": 4.6,
+        "p95": 7.9
+      },
+      "entities": 21,
+      "stackGroupsBytes": {
+        "other": 288409256,
+        "physics": 186025948,
+        "presentation": 55724588,
+        "receivers": 171916336
+      },
+      "nearestSource": [
+        {
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 156987724
+        },
+        {
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 62899420
+        },
+        {
+          "source": "src/physics/PhysicsScene.ts",
+          "sampledBytes": 62325624
+        },
+        {
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 36104084
+        },
+        {
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 29322504
+        },
+        {
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 26402084
+        },
+        {
+          "source": "src/input/ControllerBindings.ts",
+          "sampledBytes": 16782868
+        },
+        {
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 16561160
+        },
+        {
+          "source": "src/rendering/GpuRasterSurface.ts",
+          "sampledBytes": 15874232
+        },
+        {
+          "source": "src/rendering/scene/EntitySprites.ts",
+          "sampledBytes": 15216716
+        }
+      ],
+      "topSelf": [
+        {
+          "function": "SurfaceReceivers",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 114024700
+        },
+        {
+          "function": "prepare",
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 29085440
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 14950096
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 14785464
+        },
+        {
+          "function": "clone",
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 14227916
+        },
+        {
+          "function": "entries",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 14061500
+        },
+        {
+          "function": "recordMotionSample",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 13247780
+        },
+        {
+          "function": "rotateBodyVector",
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 12332280
+        },
+        {
+          "function": "next",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 11735180
+        },
+        {
+          "function": "register",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 11640524
+        },
+        {
+          "function": "mul",
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 10364280
+        },
+        {
+          "function": "sampleMotion",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 10069220
+        }
+      ]
+    },
+    {
+      "mode": "after",
+      "report": "phone-after-allocations-1.json",
+      "scene": "city",
+      "representative": true,
+      "seconds": 30,
+      "estimatedMiB": 409.37,
+      "estimatedMiBPerSecond": 13.646,
+      "drivenPx": null,
+      "frames": 1796,
+      "missed": 1,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.8,
+        "max": 83.2
+      },
+      "renderMs": {
+        "p50": 3.2,
+        "p95": 4.4,
+        "max": 6.4
+      },
+      "updateMs": {
+        "p50": 3.4,
+        "p95": 4.5,
+        "max": 5.9
+      },
+      "workerTickMs": {
+        "p50": 3.6,
+        "p95": 7.4
+      },
+      "entities": 11,
+      "stackGroupsBytes": {
+        "other": 206594444,
+        "physics": 153693640,
+        "receivers": 30112592,
+        "presentation": 38855340
+      },
+      "nearestSource": [
+        {
+          "source": "src/physics/PhysicsScene.ts",
+          "sampledBytes": 72882380
+        },
+        {
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 31746832
+        },
+        {
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 23451620
+        },
+        {
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 20919228
+        },
+        {
+          "source": "src/physics/WheelGrid.ts",
+          "sampledBytes": 18090000
+        },
+        {
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 17936112
+        },
+        {
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 14848704
+        },
+        {
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 13773992
+        },
+        {
+          "source": "src/rendering/scene/EntitySprites.ts",
+          "sampledBytes": 12953928
+        },
+        {
+          "source": "src/rendering/GpuRasterSurface.ts",
+          "sampledBytes": 12704604
+        }
+      ],
+      "topSelf": [
+        {
+          "function": "register",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 14132528
+        },
+        {
+          "function": "SurfaceReceivers",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 14001696
+        },
+        {
+          "function": "clone",
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 13571992
+        },
+        {
+          "function": "build",
+          "source": "src/physics/WheelGrid.ts",
+          "sampledBytes": 11546596
+        },
+        {
+          "function": "rotateBodyVector",
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 11249700
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 10916796
+        },
+        {
+          "function": "recordMotionSample",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 10781696
+        },
+        {
+          "function": "entries",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 9734884
+        },
+        {
+          "function": "prepare",
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 9308556
+        },
+        {
+          "function": "readPhysicsState",
+          "source": "src/shared/physicsStateCodec.ts",
+          "sampledBytes": 8530212
+        },
+        {
+          "function": "Map",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 6724700
+        },
+        {
+          "function": "next",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 6720132
+        }
+      ]
+    },
+    {
+      "mode": "after",
+      "report": "phone-after-allocations-1.json",
+      "scene": "drive",
+      "representative": true,
+      "seconds": 30,
+      "estimatedMiB": 490.492,
+      "estimatedMiBPerSecond": 16.35,
+      "drivenPx": 2023,
+      "frames": 1800,
+      "missed": 0,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.8,
+        "max": 16.9
+      },
+      "renderMs": {
+        "p50": 3.7,
+        "p95": 5.8,
+        "max": 18.1
+      },
+      "updateMs": {
+        "p50": 2.9,
+        "p95": 4,
+        "max": 6.9
+      },
+      "workerTickMs": {
+        "p50": 4.6,
+        "p95": 8.2
+      },
+      "entities": 17,
+      "stackGroupsBytes": {
+        "other": 276780208,
+        "physics": 150127480,
+        "receivers": 33953924,
+        "presentation": 53456376
+      },
+      "nearestSource": [
+        {
+          "source": "src/physics/PhysicsScene.ts",
+          "sampledBytes": 70292744
+        },
+        {
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 35576956
+        },
+        {
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 28207296
+        },
+        {
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 25249080
+        },
+        {
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 23355372
+        },
+        {
+          "source": "src/rendering/GpuRasterSurface.ts",
+          "sampledBytes": 16573000
+        },
+        {
+          "source": "src/input/ControllerBindings.ts",
+          "sampledBytes": 15768952
+        },
+        {
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 14921808
+        },
+        {
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 14128184
+        },
+        {
+          "source": "src/physics/WheelGrid.ts",
+          "sampledBytes": 13761640
+        }
+      ],
+      "topSelf": [
+        {
+          "function": "(anonymous)",
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 15769032
+        },
+        {
+          "function": "SurfaceReceivers",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 15181524
+        },
+        {
+          "function": "register",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 14297064
+        },
+        {
+          "function": "recordMotionSample",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 13870796
+        },
+        {
+          "function": "entries",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 12849700
+        },
+        {
+          "function": "clone",
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 12720012
+        },
+        {
+          "function": "rotateBodyVector",
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 12168120
+        },
+        {
+          "function": "next",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 9932212
+        },
+        {
+          "function": "sampleMotion",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 8593344
+        },
+        {
+          "function": "applyVehicleFacing",
+          "source": "src/traffic/Vehicle.ts",
+          "sampledBytes": 8591208
+        },
+        {
+          "function": "prepare",
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 8357724
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/rendering/collectScene.ts",
+          "sampledBytes": 8029632
+        }
+      ]
+    },
+    {
+      "mode": "after",
+      "report": "phone-after-allocations-2.json",
+      "scene": "drive",
+      "representative": true,
+      "seconds": 30,
+      "estimatedMiB": 523.233,
+      "estimatedMiBPerSecond": 17.441,
+      "drivenPx": 2217,
+      "frames": 1800,
+      "missed": 0,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.8,
+        "max": 17.3
+      },
+      "renderMs": {
+        "p50": 3.8,
+        "p95": 5.8,
+        "max": 18.8
+      },
+      "updateMs": {
+        "p50": 3,
+        "p95": 4,
+        "max": 8.4
+      },
+      "workerTickMs": {
+        "p50": 4.5,
+        "p95": 7.8
+      },
+      "entities": 17,
+      "stackGroupsBytes": {
+        "other": 275888400,
+        "physics": 189682292,
+        "presentation": 50797936,
+        "receivers": 32281232
+      },
+      "nearestSource": [
+        {
+          "source": "src/physics/PhysicsScene.ts",
+          "sampledBytes": 92395800
+        },
+        {
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 36334388
+        },
+        {
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 26828000
+        },
+        {
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 23969936
+        },
+        {
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 23355976
+        },
+        {
+          "source": "src/rendering/GpuRasterSurface.ts",
+          "sampledBytes": 19254012
+        },
+        {
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 18914900
+        },
+        {
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 17807788
+        },
+        {
+          "source": "src/physics/WheelGrid.ts",
+          "sampledBytes": 17507112
+        },
+        {
+          "source": "src/input/ControllerBindings.ts",
+          "sampledBytes": 17209020
+        }
+      ],
+      "topSelf": [
+        {
+          "function": "register",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 18886968
+        },
+        {
+          "function": "SurfaceReceivers",
+          "source": "src/rendering/SurfaceReceivers.ts",
+          "sampledBytes": 16559152
+        },
+        {
+          "function": "entries",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 15208824
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/client/RemotePresentation.ts",
+          "sampledBytes": 14194952
+        },
+        {
+          "function": "rotateBodyVector",
+          "source": "src/physics/BodyRotation.ts",
+          "sampledBytes": 13709760
+        },
+        {
+          "function": "clone",
+          "source": "src/client/PlayerPredictor.ts",
+          "sampledBytes": 13441072
+        },
+        {
+          "function": "recordMotionSample",
+          "source": "src/rendering/PresentationTimeline.ts",
+          "sampledBytes": 12918168
+        },
+        {
+          "function": "prepare",
+          "source": "src/physics/VehicleChassis.ts",
+          "sampledBytes": 10914584
+        },
+        {
+          "function": "next",
+          "source": "(runtime/bench/dependency)",
+          "sampledBytes": 10882956
+        },
+        {
+          "function": "applyVehicleFacing",
+          "source": "src/traffic/Vehicle.ts",
+          "sampledBytes": 8820812
+        },
+        {
+          "function": "(anonymous)",
+          "source": "src/rendering/collectScene.ts",
+          "sampledBytes": 8422908
+        },
+        {
+          "function": "compileCollisionGeometry",
+          "source": "src/physics/rapier/CollisionGeometry.ts",
+          "sampledBytes": 8264584
+        }
+      ]
+    }
+  ],
+  "generation": {
+    "workload": {
+      "seed": 2026,
+      "side": 7,
+      "trials": 3,
+      "fixtures": [
+        "district",
+        "farm",
+        "woodland",
+        "negative-coast"
+      ],
+      "lanes": [
+        "generate",
+        "streaming"
+      ],
+      "verify": false,
+      "route": "serpentine-square-v1",
+      "batchSize": 8
+    },
+    "beforeSource": {
+      "revision": "a7c647e6",
+      "bundleSha256": "82e4c3378befdf6432dbc0b427f63ab67cd0ee6cbd14766150b02ac21a4f3f22",
+      "frozenSourceFiles": 231
+    },
+    "afterSource": {
+      "revision": "working optimization",
+      "bundleSha256": "9a9f69ac29de4dc7ac3d19432035507857645a1c80def1aa1ec9f40e3cc73936",
+      "frozenSourceFiles": 0
+    },
+    "matchingWorkCounts": true,
+    "cells": [
+      {
+        "fixture": "district",
+        "lane": "generate",
+        "pass": "unseen",
+        "before": {
+          "totalMs": {
+            "count": 147,
+            "p50": 6.4,
+            "p95": 10.1,
+            "max": 348.5,
+            "totalMs": 1372.1
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 5.5,
+              "p95": 7.1,
+              "max": 339,
+              "totalMs": 1203.5
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.2,
+              "totalMs": 2.9
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.5,
+              "max": 5.3,
+              "totalMs": 47.1
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 0.5,
+              "p95": 2.4,
+              "max": 6.9,
+              "totalMs": 118.6
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 348.5
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 86.60000002384186
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 82.29999995231628
+            }
+          ]
+        },
+        "after": {
+          "totalMs": {
+            "count": 147,
+            "p50": 4.3,
+            "p95": 7.4,
+            "max": 189.3,
+            "totalMs": 796.0
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 3.5,
+              "p95": 4.7,
+              "max": 179.5,
+              "totalMs": 661.4
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": 1.3
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 3.7,
+              "totalMs": 33.8
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 0.5,
+              "p95": 1.8,
+              "max": 6,
+              "totalMs": 99.5
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 189.30000007152557
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 37.300000071525574
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 38.39999997615814
+            }
+          ]
+        }
+      },
+      {
+        "fixture": "district",
+        "lane": "generate",
+        "pass": "regenerate",
+        "before": {
+          "totalMs": {
+            "count": 147,
+            "p50": 6.3,
+            "p95": 8,
+            "max": 10.7,
+            "totalMs": 836.7
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 5.3,
+              "p95": 6.5,
+              "max": 8.2,
+              "totalMs": 705.6
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": 2.2
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.4,
+              "totalMs": 30.0
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 0.5,
+              "p95": 0.8,
+              "max": 5.8,
+              "totalMs": 98.9
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 7
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 9
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 6.5
+            }
+          ]
+        },
+        "after": {
+          "totalMs": {
+            "count": 147,
+            "p50": 4.2,
+            "p95": 5.5,
+            "max": 6.8,
+            "totalMs": 509.5
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 3.3,
+              "p95": 4.3,
+              "max": 5.1,
+              "totalMs": 398.8
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1,
+              "totalMs": 0.7
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.4,
+              "totalMs": 24.7
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 0.4,
+              "p95": 1.6,
+              "max": 3.6,
+              "totalMs": 85.3
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 5.199999928474426
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 4.899999976158142
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 4.399999976158142
+            }
+          ]
+        }
+      },
+      {
+        "fixture": "district",
+        "lane": "streaming",
+        "pass": "unseen-batches",
+        "before": {
+          "totalMs": {
+            "count": 21,
+            "p50": 50.6,
+            "p95": 119.7,
+            "max": 152.4,
+            "totalMs": 1145.7
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 21,
+              "p50": 43.1,
+              "p95": 109.4,
+              "max": 135.3,
+              "totalMs": 986.6
+            },
+            "railMetadata": {
+              "count": 21,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.3,
+              "totalMs": 1.8
+            },
+            "propPlans": {
+              "count": 21,
+              "p50": 1.6,
+              "p95": 3.5,
+              "max": 3.9,
+              "totalMs": 35.3
+            },
+            "actorPlans": {
+              "count": 21,
+              "p50": 4.9,
+              "p95": 9.4,
+              "max": 10.1,
+              "totalMs": 110.4
+            },
+            "propAdmission": {
+              "count": 21,
+              "p50": 0.2,
+              "p95": 0.5,
+              "max": 1.0,
+              "totalMs": 4.9
+            },
+            "actorAdmission": {
+              "count": 21,
+              "p50": 0.2,
+              "p95": 0.7,
+              "max": 1.1,
+              "totalMs": 5.8
+            },
+            "publishOther": {
+              "count": 21,
+              "p50": 0.4,
+              "p95": 0.9,
+              "max": 2.8,
+              "totalMs": -14.1
+            },
+            "outsidePublish": {
+              "count": 21,
+              "p50": 0.6,
+              "p95": 1.2,
+              "max": 1.9,
+              "totalMs": 15.0
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 152.39999997615814
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 118.59999990463257
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 119.70000004768372
+            }
+          ],
+          "singlePublicationMs": {
+            "count": 147,
+            "p50": 6.3,
+            "p95": 10.9,
+            "max": 101.9,
+            "totalMs": 1130.7
+          }
+        },
+        "after": {
+          "totalMs": {
+            "count": 21,
+            "p50": 31.4,
+            "p95": 59.5,
+            "max": 85,
+            "totalMs": 660.7
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 21,
+              "p50": 25.1,
+              "p95": 51.7,
+              "max": 65.8,
+              "totalMs": 517.9
+            },
+            "railMetadata": {
+              "count": 21,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 0.3,
+              "totalMs": 1.8
+            },
+            "propPlans": {
+              "count": 21,
+              "p50": 1.4,
+              "p95": 2.0,
+              "max": 4.4,
+              "totalMs": 29.9
+            },
+            "actorPlans": {
+              "count": 21,
+              "p50": 4.2,
+              "p95": 7.4,
+              "max": 9.1,
+              "totalMs": 93.3
+            },
+            "propAdmission": {
+              "count": 21,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 0.9,
+              "totalMs": 3.4
+            },
+            "actorAdmission": {
+              "count": 21,
+              "p50": 0.2,
+              "p95": 0.7,
+              "max": 1.3,
+              "totalMs": 5.9
+            },
+            "publishOther": {
+              "count": 21,
+              "p50": 0.1,
+              "p95": 0.7,
+              "max": 1.4,
+              "totalMs": -5.6
+            },
+            "outsidePublish": {
+              "count": 21,
+              "p50": 0.6,
+              "p95": 1.0,
+              "max": 1.9,
+              "totalMs": 14.1
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 85
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 58
+            },
+            {
+              "cx": 15,
+              "cy": 29,
+              "ms": 59.5
+            }
+          ],
+          "singlePublicationMs": {
+            "count": 147,
+            "p50": 4.2,
+            "p95": 6.8,
+            "max": 49.4,
+            "totalMs": 646.6
+          }
+        }
+      },
+      {
+        "fixture": "farm",
+        "lane": "generate",
+        "pass": "unseen",
+        "before": {
+          "totalMs": {
+            "count": 147,
+            "p50": 4.9,
+            "p95": 25.8,
+            "max": 100.8,
+            "totalMs": 1208.0
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 2.9,
+              "p95": 3.6,
+              "max": 88.9,
+              "totalMs": 673.9
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": 1.0
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 9.8,
+              "totalMs": 49.6
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 1.5,
+              "p95": 7.2,
+              "max": 28,
+              "totalMs": 483.5
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 100.80000007152557
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 87
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 84.20000004768372
+            }
+          ]
+        },
+        "after": {
+          "totalMs": {
+            "count": 147,
+            "p50": 2.5,
+            "p95": 18.5,
+            "max": 47.2,
+            "totalMs": 616.2
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 1,
+              "p95": 1.5,
+              "max": 35,
+              "totalMs": 243.5
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": 0.8
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.1,
+              "p95": 0.4,
+              "max": 9.7,
+              "totalMs": 47.0
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 1.2,
+              "p95": 4.1,
+              "max": 22.7,
+              "totalMs": 324.9
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 47.199999928474426
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 36.39999997615814
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 34.200000047683716
+            }
+          ]
+        }
+      },
+      {
+        "fixture": "farm",
+        "lane": "generate",
+        "pass": "regenerate",
+        "before": {
+          "totalMs": {
+            "count": 147,
+            "p50": 4.4,
+            "p95": 8,
+            "max": 12.3,
+            "totalMs": 770.2
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 2.9,
+              "p95": 3.3,
+              "max": 7.8,
+              "totalMs": 432.1
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.3,
+              "totalMs": 1.4
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.5,
+              "totalMs": 26.8
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 1.3,
+              "p95": 4.6,
+              "max": 5.4,
+              "totalMs": 309.9
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 3.6999999284744263
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 4.100000023841858
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 3.5
+            }
+          ]
+        },
+        "after": {
+          "totalMs": {
+            "count": 147,
+            "p50": 2.1,
+            "p95": 3.9,
+            "max": 4.7,
+            "totalMs": 353.3
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 1,
+              "p95": 1.3,
+              "max": 2.5,
+              "totalMs": 146.1
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1,
+              "totalMs": 0.4
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.1,
+              "p95": 0.3,
+              "max": 0.7,
+              "totalMs": 21.2
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 1.1,
+              "p95": 2.6,
+              "max": 3.7,
+              "totalMs": 185.6
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 2.0999999046325684
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 1.6999999284744263
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 1.899999976158142
+            }
+          ]
+        }
+      },
+      {
+        "fixture": "farm",
+        "lane": "streaming",
+        "pass": "unseen-batches",
+        "before": {
+          "totalMs": {
+            "count": 21,
+            "p50": 43.7,
+            "p95": 136.8,
+            "max": 150,
+            "totalMs": 1200.9
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 21,
+              "p50": 31.6,
+              "p95": 96.2,
+              "max": 107.8,
+              "totalMs": 817.1
+            },
+            "railMetadata": {
+              "count": 21,
+              "p50": 0.1,
+              "p95": 0.2,
+              "max": 0.2,
+              "totalMs": 1.4
+            },
+            "propPlans": {
+              "count": 21,
+              "p50": 1.3,
+              "p95": 7.3,
+              "max": 7.4,
+              "totalMs": 42.5
+            },
+            "actorPlans": {
+              "count": 21,
+              "p50": 23.5,
+              "p95": 33.2,
+              "max": 34.5,
+              "totalMs": 449.1
+            },
+            "propAdmission": {
+              "count": 21,
+              "p50": 0.3,
+              "p95": 0.6,
+              "max": 0.8,
+              "totalMs": 6.9
+            },
+            "actorAdmission": {
+              "count": 21,
+              "p50": 0.8,
+              "p95": 1.7,
+              "max": 1.8,
+              "totalMs": 17.9
+            },
+            "publishOther": {
+              "count": 21,
+              "p50": -5.2,
+              "p95": 0,
+              "max": 0.1,
+              "totalMs": -147.0
+            },
+            "outsidePublish": {
+              "count": 21,
+              "p50": 0.6,
+              "p95": 0.8,
+              "max": 0.9,
+              "totalMs": 13.0
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 150
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 136.79999995231628
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 135.79999995231628
+            }
+          ],
+          "singlePublicationMs": {
+            "count": 147,
+            "p50": 5,
+            "p95": 25.9,
+            "max": 92.5,
+            "totalMs": 1187.9
+          }
+        },
+        "after": {
+          "totalMs": {
+            "count": 21,
+            "p50": 22.2,
+            "p95": 69.7,
+            "max": 79.1,
+            "totalMs": 605.6
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 21,
+              "p50": 10.5,
+              "p95": 37.4,
+              "max": 41.7,
+              "totalMs": 288.7
+            },
+            "railMetadata": {
+              "count": 21,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": 0.3
+            },
+            "propPlans": {
+              "count": 21,
+              "p50": 1.0,
+              "p95": 6.7,
+              "max": 6.8,
+              "totalMs": 37.9
+            },
+            "actorPlans": {
+              "count": 21,
+              "p50": 13.8,
+              "p95": 27.6,
+              "max": 28.7,
+              "totalMs": 294.4
+            },
+            "propAdmission": {
+              "count": 21,
+              "p50": 0.3,
+              "p95": 0.4,
+              "max": 0.5,
+              "totalMs": 5.0
+            },
+            "actorAdmission": {
+              "count": 21,
+              "p50": 0.6,
+              "p95": 1.3,
+              "max": 1.4,
+              "totalMs": 12.3
+            },
+            "publishOther": {
+              "count": 21,
+              "p50": -1.8,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": -44.7
+            },
+            "outsidePublish": {
+              "count": 21,
+              "p50": 0.6,
+              "p95": 0.8,
+              "max": 0.8,
+              "totalMs": 11.7
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 79.09999990463257
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 69.70000004768372
+            },
+            {
+              "cx": 39,
+              "cy": 79,
+              "ms": 69.10000002384186
+            }
+          ],
+          "singlePublicationMs": {
+            "count": 147,
+            "p50": 2.5,
+            "p95": 18.6,
+            "max": 41,
+            "totalMs": 593.9
+          }
+        }
+      },
+      {
+        "fixture": "woodland",
+        "lane": "generate",
+        "pass": "unseen",
+        "before": {
+          "totalMs": {
+            "count": 147,
+            "p50": 5.7,
+            "p95": 14.4,
+            "max": 346.5,
+            "totalMs": 1569.3
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 2.5,
+              "p95": 2.7,
+              "max": 149,
+              "totalMs": 707.6
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1,
+              "totalMs": 0.6
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 176,
+              "totalMs": 308.9
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 3.2,
+              "p95": 11.8,
+              "max": 21.5,
+              "totalMs": 552.2
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 346.5
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 174.39999997615814
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 175.89999997615814
+            }
+          ]
+        },
+        "after": {
+          "totalMs": {
+            "count": 147,
+            "p50": 2.8,
+            "p95": 9.3,
+            "max": 161.2,
+            "totalMs": 796.2
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 1,
+              "p95": 1.5,
+              "max": 63.7,
+              "totalMs": 291.8
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1,
+              "totalMs": 0.7
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 84.1,
+              "totalMs": 151.4
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 1.7,
+              "p95": 8.2,
+              "max": 13.4,
+              "totalMs": 352.3
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 161.19999992847443
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 74.30000007152557
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 78.79999995231628
+            }
+          ]
+        }
+      },
+      {
+        "fixture": "woodland",
+        "lane": "generate",
+        "pass": "regenerate",
+        "before": {
+          "totalMs": {
+            "count": 147,
+            "p50": 4.8,
+            "p95": 7.5,
+            "max": 9.3,
+            "totalMs": 791.2
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 2.5,
+              "p95": 2.8,
+              "max": 3.7,
+              "totalMs": 359.9
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": 0.9
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.4,
+              "totalMs": 28.5
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 2.3,
+              "p95": 4.7,
+              "max": 6.3,
+              "totalMs": 401.9
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 7.600000023841858
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 7.300000071525574
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 6.700000047683716
+            }
+          ]
+        },
+        "after": {
+          "totalMs": {
+            "count": 147,
+            "p50": 2.7,
+            "p95": 3.9,
+            "max": 4.9,
+            "totalMs": 411.1
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 0.9,
+              "p95": 1.1,
+              "max": 1.4,
+              "totalMs": 139.9
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1,
+              "totalMs": 0.6
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.3,
+              "totalMs": 22.3
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 1.6,
+              "p95": 2.8,
+              "max": 3.7,
+              "totalMs": 248.3
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 3.899999976158142
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 3.5
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 3.700000047683716
+            }
+          ]
+        }
+      },
+      {
+        "fixture": "woodland",
+        "lane": "streaming",
+        "pass": "unseen-batches",
+        "before": {
+          "totalMs": {
+            "count": 21,
+            "p50": 51.3,
+            "p95": 246.8,
+            "max": 284.6,
+            "totalMs": 1527.8
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 21,
+              "p50": 29.8,
+              "p95": 140.5,
+              "max": 185.6,
+              "totalMs": 913.2
+            },
+            "railMetadata": {
+              "count": 21,
+              "p50": 0,
+              "p95": 0.2,
+              "max": 0.2,
+              "totalMs": 1.2
+            },
+            "propPlans": {
+              "count": 21,
+              "p50": 1.6,
+              "p95": 51.4,
+              "max": 57,
+              "totalMs": 181.5
+            },
+            "actorPlans": {
+              "count": 21,
+              "p50": 27.1,
+              "p95": 54.4,
+              "max": 55.5,
+              "totalMs": 553.6
+            },
+            "propAdmission": {
+              "count": 21,
+              "p50": 0.6,
+              "p95": 0.9,
+              "max": 0.9,
+              "totalMs": 11.8
+            },
+            "actorAdmission": {
+              "count": 21,
+              "p50": 1.2,
+              "p95": 1.9,
+              "max": 2.1,
+              "totalMs": 22.6
+            },
+            "publishOther": {
+              "count": 21,
+              "p50": -9.2,
+              "p95": 0.1,
+              "max": 0.2,
+              "totalMs": -168.8
+            },
+            "outsidePublish": {
+              "count": 21,
+              "p50": 0.6,
+              "p95": 0.9,
+              "max": 0.9,
+              "totalMs": 12.7
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 284.59999990463257
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 246.79999995231628
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 227.40000009536743
+            }
+          ],
+          "singlePublicationMs": {
+            "count": 147,
+            "p50": 6.1,
+            "p95": 14.9,
+            "max": 228.2,
+            "totalMs": 1515.1
+          }
+        },
+        "after": {
+          "totalMs": {
+            "count": 21,
+            "p50": 26.6,
+            "p95": 113.1,
+            "max": 139.5,
+            "totalMs": 783.1
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 21,
+              "p50": 10.9,
+              "p95": 52.7,
+              "max": 77.6,
+              "totalMs": 352.1
+            },
+            "railMetadata": {
+              "count": 21,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": 0.4
+            },
+            "propPlans": {
+              "count": 21,
+              "p50": 1.2,
+              "p95": 25.3,
+              "max": 26.4,
+              "totalMs": 95.5
+            },
+            "actorPlans": {
+              "count": 21,
+              "p50": 15.5,
+              "p95": 34.8,
+              "max": 37.1,
+              "totalMs": 356.0
+            },
+            "propAdmission": {
+              "count": 21,
+              "p50": 0.5,
+              "p95": 0.7,
+              "max": 0.8,
+              "totalMs": 9.1
+            },
+            "actorAdmission": {
+              "count": 21,
+              "p50": 0.9,
+              "p95": 1.3,
+              "max": 2.2,
+              "totalMs": 17.2
+            },
+            "publishOther": {
+              "count": 21,
+              "p50": -2.9,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": -60.0
+            },
+            "outsidePublish": {
+              "count": 21,
+              "p50": 0.6,
+              "p95": 0.8,
+              "max": 1.3,
+              "totalMs": 12.8
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 139.5
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 113.10000002384186
+            },
+            {
+              "cx": -63,
+              "cy": -63,
+              "ms": 108.10000002384186
+            }
+          ],
+          "singlePublicationMs": {
+            "count": 147,
+            "p50": 2.9,
+            "p95": 9.6,
+            "max": 102.6,
+            "totalMs": 770.3
+          }
+        }
+      },
+      {
+        "fixture": "negative-coast",
+        "lane": "generate",
+        "pass": "unseen",
+        "before": {
+          "totalMs": {
+            "count": 147,
+            "p50": 6.9,
+            "p95": 15.2,
+            "max": 100.9,
+            "totalMs": 1463.9
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 2.5,
+              "p95": 3,
+              "max": 62,
+              "totalMs": 544.5
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": 0.9
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 0.6,
+              "totalMs": 34.9
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 4.2,
+              "p95": 12.2,
+              "max": 98,
+              "totalMs": 883.6
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 86.10000002384186
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 79.79999995231628
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 82
+            }
+          ]
+        },
+        "after": {
+          "totalMs": {
+            "count": 147,
+            "p50": 3.4,
+            "p95": 7.3,
+            "max": 51.3,
+            "totalMs": 775.0
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 0.9,
+              "p95": 1.3,
+              "max": 28,
+              "totalMs": 219.4
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0,
+              "max": 0.1,
+              "totalMs": 0.3
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 0.6,
+              "totalMs": 28.6
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 2.3,
+              "p95": 6.1,
+              "max": 49.7,
+              "totalMs": 526.7
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 45.300000071525574
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 51.200000047683716
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 46.700000047683716
+            }
+          ]
+        }
+      },
+      {
+        "fixture": "negative-coast",
+        "lane": "generate",
+        "pass": "regenerate",
+        "before": {
+          "totalMs": {
+            "count": 147,
+            "p50": 6.2,
+            "p95": 8.2,
+            "max": 9.3,
+            "totalMs": 883.3
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 2.4,
+              "p95": 2.9,
+              "max": 3.4,
+              "totalMs": 360.8
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": 1.0
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.4,
+              "max": 0.7,
+              "totalMs": 33.2
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 3.8,
+              "p95": 5.3,
+              "max": 6,
+              "totalMs": 488.3
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 3.6999999284744263
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 3.899999976158142
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 3.899999976158142
+            }
+          ]
+        },
+        "after": {
+          "totalMs": {
+            "count": 147,
+            "p50": 3.1,
+            "p95": 4.3,
+            "max": 6.1,
+            "totalMs": 465.3
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 147,
+              "p50": 0.9,
+              "p95": 1.2,
+              "max": 1.9,
+              "totalMs": 139.9
+            },
+            "railMetadata": {
+              "count": 147,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": 0.8
+            },
+            "propPlans": {
+              "count": 147,
+              "p50": 0.2,
+              "p95": 0.3,
+              "max": 2,
+              "totalMs": 28.8
+            },
+            "actorPlans": {
+              "count": 147,
+              "p50": 1.9,
+              "p95": 3.1,
+              "max": 3.9,
+              "totalMs": 295.8
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 2.299999952316284
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 2.100000023841858
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 2.399999976158142
+            }
+          ]
+        }
+      },
+      {
+        "fixture": "negative-coast",
+        "lane": "streaming",
+        "pass": "unseen-batches",
+        "before": {
+          "totalMs": {
+            "count": 21,
+            "p50": 55.6,
+            "p95": 227,
+            "max": 232.7,
+            "totalMs": 1547.2
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 21,
+              "p50": 31.6,
+              "p95": 87.3,
+              "max": 89.2,
+              "totalMs": 758.1
+            },
+            "railMetadata": {
+              "count": 21,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.2,
+              "totalMs": 0.9
+            },
+            "propPlans": {
+              "count": 21,
+              "p50": 2.1,
+              "p95": 3.3,
+              "max": 3.4,
+              "totalMs": 37.7
+            },
+            "actorPlans": {
+              "count": 21,
+              "p50": 27.4,
+              "p95": 143.7,
+              "max": 147.9,
+              "totalMs": 908.4
+            },
+            "propAdmission": {
+              "count": 21,
+              "p50": 0.5,
+              "p95": 0.8,
+              "max": 1.6,
+              "totalMs": 11.3
+            },
+            "actorAdmission": {
+              "count": 21,
+              "p50": 1.4,
+              "p95": 1.8,
+              "max": 2.5,
+              "totalMs": 26.1
+            },
+            "publishOther": {
+              "count": 21,
+              "p50": -9.6,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": -207.9
+            },
+            "outsidePublish": {
+              "count": 21,
+              "p50": 0.6,
+              "p95": 1.0,
+              "max": 1.2,
+              "totalMs": 12.6
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 232.69999992847443
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 223
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 227
+            }
+          ],
+          "singlePublicationMs": {
+            "count": 147,
+            "p50": 7.3,
+            "p95": 15.1,
+            "max": 104.5,
+            "totalMs": 1534.6
+          }
+        },
+        "after": {
+          "totalMs": {
+            "count": 21,
+            "p50": 28.6,
+            "p95": 119.6,
+            "max": 142.6,
+            "totalMs": 848.9
+          },
+          "phaseMs": {
+            "terrain": {
+              "count": 21,
+              "p50": 12.8,
+              "p95": 37.9,
+              "max": 44.4,
+              "totalMs": 308.9
+            },
+            "railMetadata": {
+              "count": 21,
+              "p50": 0,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": 0.5
+            },
+            "propPlans": {
+              "count": 21,
+              "p50": 1.5,
+              "p95": 2.0,
+              "max": 2.1,
+              "totalMs": 28.9
+            },
+            "actorPlans": {
+              "count": 21,
+              "p50": 16.6,
+              "p95": 83.2,
+              "max": 95.5,
+              "totalMs": 539.7
+            },
+            "propAdmission": {
+              "count": 21,
+              "p50": 0.4,
+              "p95": 0.6,
+              "max": 0.6,
+              "totalMs": 7.6
+            },
+            "actorAdmission": {
+              "count": 21,
+              "p50": 0.9,
+              "p95": 2.2,
+              "max": 2.7,
+              "totalMs": 20.4
+            },
+            "publishOther": {
+              "count": 21,
+              "p50": -3.3,
+              "p95": 0.1,
+              "max": 0.1,
+              "totalMs": -69.5
+            },
+            "outsidePublish": {
+              "count": 21,
+              "p50": 0.6,
+              "p95": 0.9,
+              "max": 1.3,
+              "totalMs": 12.4
+            }
+          },
+          "firstEachTrial": [
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 119.60000002384186
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 117.89999997615814
+            },
+            {
+              "cx": -7,
+              "cy": -12,
+              "ms": 142.60000002384186
+            }
+          ],
+          "singlePublicationMs": {
+            "count": 147,
+            "p50": 3.8,
+            "p95": 7.9,
+            "max": 65.4,
+            "totalMs": 836.5
+          }
+        }
+      }
+    ]
+  },
+  "ordinaryAfter": [
+    {
+      "report": "phone-after-driving-ordinary.json",
+      "drivenPx": 1186,
+      "frames": 1800,
+      "missed": 1,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.7,
+        "max": 33.4
+      },
+      "renderMs": {
+        "p50": 3.7,
+        "p95": 5.5,
+        "max": 26.4
+      },
+      "updateMs": {
+        "p50": 3.1,
+        "p95": 4,
+        "max": 6.7
+      },
+      "workerTickMs": {
+        "p50": 4.3,
+        "p95": 6.6
+      },
+      "slowFrames": [
+        {
+          "atMs": 13835,
+          "endMs": 35383.8,
+          "frameMs": 33.4,
+          "updateMs": 3.2,
+          "updates": 1,
+          "renderMs": 26.4,
+          "uploadKiB": 2560,
+          "uploadPages": 3
+        }
+      ]
+    },
+    {
+      "report": "phone-after-ordinary-1.json",
+      "drivenPx": 1019,
+      "frames": 1800,
+      "missed": 1,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.7,
+        "max": 33.4
+      },
+      "renderMs": {
+        "p50": 3.9,
+        "p95": 5.5,
+        "max": 29.9
+      },
+      "updateMs": {
+        "p50": 2.9,
+        "p95": 3.9,
+        "max": 5.8
+      },
+      "workerTickMs": {
+        "p50": 4.6,
+        "p95": 7.9
+      },
+      "slowFrames": [
+        {
+          "atMs": 14221,
+          "endMs": 36414,
+          "frameMs": 33.4,
+          "updateMs": 3.1,
+          "updates": 1,
+          "renderMs": 29.9,
+          "uploadKiB": 2560,
+          "uploadPages": 3
+        }
+      ]
+    },
+    {
+      "report": "phone-after-ordinary-2.json",
+      "drivenPx": 737,
+      "frames": 1801,
+      "missed": 0,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.7,
+        "max": 16.9
+      },
+      "renderMs": {
+        "p50": 3.7,
+        "p95": 5.3,
+        "max": 16.6
+      },
+      "updateMs": {
+        "p50": 3,
+        "p95": 3.9,
+        "max": 6.3
+      },
+      "workerTickMs": {
+        "p50": 4.6,
+        "p95": 9
+      },
+      "slowFrames": []
+    },
+    {
+      "report": "phone-after-ordinary-3.json",
+      "drivenPx": 2604,
+      "frames": 1800,
+      "missed": 1,
+      "frameMs": {
+        "p50": 16.7,
+        "p95": 16.7,
+        "max": 33.4
+      },
+      "renderMs": {
+        "p50": 3.7,
+        "p95": 5.8,
+        "max": 20.1
+      },
+      "updateMs": {
+        "p50": 2.7,
+        "p95": 3.7,
+        "max": 6.5
+      },
+      "workerTickMs": {
+        "p50": 5,
+        "p95": 8.6
+      },
+      "slowFrames": [
+        {
+          "atMs": 12884,
+          "endMs": 33904.7,
+          "frameMs": 33.4,
+          "updateMs": 2.3,
+          "updates": 1,
+          "renderMs": 14.3,
+          "uploadKiB": 0,
+          "uploadPages": 0
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "nativeTests": 728,
+    "nativeFiles": 98,
+    "typecheckProjects": 4,
+    "browserChecks": [
+      "GPU depth-shadow oracle",
+      "GPU contact/decal oracle",
+      "embedded lab lifecycle",
+      "embedded lab scheduling"
+    ],
+    "suspensionExactParity": {
+      "chassisSteps": 1800,
+      "wheelImpulses": 8320
+    },
+    "generationContentParity": {
+      "sampleRecords": 420,
+      "generatedChunks": 392,
+      "streamingBatches": 28
+    },
+    "inventoryCandidatesVerified": 2130,
+    "build": true,
+    "streamingAssertReady": true
+  },
+  "cleanup": {
+    "routes": true,
+    "storage": true
+  },
+  "limits": [
+    "Main-thread allocation remains substantial; no claim of zero GC or universally hitch-free driving.",
+    "One representative ordinary after drive covers 2604 px and misses one frame; cause untraced. Short/blocked ordinary runs are retained.",
+    "Allocation/CPU instrumentation changes timing; ordinary cadence comes from separate runs.",
+    "Generation maxima include cold compiler/planner startup; late-trial tails still exist."
+  ]
+}

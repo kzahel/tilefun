@@ -1,5 +1,5 @@
 import { ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
-import { type AABB, aabbsOverlap, getEntityAABB } from "../entities/collision.js";
+import { type AABB, aabbsOverlap } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import { rotateBodyVector, yawRotation } from "../physics/BodyRotation.js";
@@ -7,6 +7,8 @@ import { physicsBodyDimensions } from "../physics/PhysicsBodies.js";
 import type { World } from "../world/World.js";
 import { interpolatePosition, interpolateWz } from "./EntityInterpolation.js";
 import { meshAssetFor } from "./EntityMeshPose.js";
+import { PropReceiverCache } from "./PropReceiverCache.js";
+import { rotatedBounds } from "./RotatedBounds.js";
 import { SurfaceMeshIndex } from "./SurfaceMeshIndex.js";
 import {
   type ClippedReceiver,
@@ -56,12 +58,12 @@ export interface SurfaceAttachment {
   faceId: string;
   point: Point3;
 }
-interface Source {
+export interface SurfaceSource {
   bounds: AABB;
   ownerId?: number;
   faces(bounds: AABB, maxZ: number): readonly SurfaceFace[];
   /** Query that last visited this source: dedupes sources spanning cells. */
-  seen?: number;
+  seen?: object;
 }
 const EPS = 1e-6,
   CELL = 128;
@@ -100,6 +102,7 @@ function flatFace(id: string, b: AABB, z: number): SurfaceFace {
   return { id, bounds: b, polygon: rectangle(b), plane: [0, 0, z] };
 }
 export interface ReceiverOptions {
+  propCache?: PropReceiverCache | undefined;
   observer?: Entity;
   visibility?: SurfaceVisibility;
   mesh?: ((assetId: string) => SurfaceMesh | undefined) | undefined;
@@ -108,9 +111,8 @@ export interface ReceiverOptions {
  * Broadphase sources are local; detailed moving mesh faces are built lazily once. */
 export class SurfaceReceivers {
   readonly diagnostics = { sources: 0, meshTriangles: 0, queries: 0, fragments: 0 };
-  private grid = new Map<number, Map<number, Source[]>>();
-  private query = 0;
-  private broad: Source[] = [];
+  private grid = new Map<number, Map<number, SurfaceSource[]>>();
+  private broad: SurfaceSource[] = [];
   private cuts: AABB[] = [];
   private owners = new Map<number, { entity: Entity; position: Point3 }>();
   constructor(
@@ -120,37 +122,32 @@ export class SurfaceReceivers {
     alpha = 1,
     options: ReceiverOptions = {},
   ) {
-    for (const prop of props)
-      for (const [i, c] of (prop.walls ?? (prop.collider ? [prop.collider] : [])).entries()) {
-        const bounds = getEntityAABB(prop.position, c),
-          patch = c.surface;
-        if (patch?.excavation) this.cuts.push(bounds);
+    const propCache = options.propCache ?? new PropReceiverCache();
+    for (const prop of props) {
+      const entries = propCache.get(prop);
+      for (let i = 0; i < entries.length; i++) {
+        const source = entries[i]?.source,
+          c = prop.walls ? prop.walls[i] : prop.collider;
+        if (!source || !c) continue;
+        const patch = c.surface;
+        if (patch?.excavation) this.cuts.push(source.bounds);
         if (
           patch &&
           options.observer &&
-          surfaceDisplay(patch, bounds, options.observer, options.visibility ?? "auto", alpha) ===
-            "hidden"
+          surfaceDisplay(
+            patch,
+            source.bounds,
+            options.observer,
+            options.visibility ?? "auto",
+            alpha,
+          ) === "hidden"
         )
           continue;
         if (c.passable && !patch && !c.walkableTop) continue;
-        if (!patch && c.zHeight === undefined) continue; // Unbounded walls have no usable roof.
-        const p: Plane = patch
-          ? [
-              patch.riseX / c.width,
-              patch.riseY / c.height,
-              patch.z -
-                (patch.riseX / c.width) * bounds.left -
-                (patch.riseY / c.height) * bounds.top,
-            ]
-          : [0, 0, (c.zBase ?? 0) + (c.zHeight ?? 0)];
-        const f: SurfaceFace = {
-          id: patch?.id ?? `prop:${prop.id}:${i}`,
-          bounds,
-          polygon: rectangle(bounds),
-          plane: p,
-        };
-        this.add({ bounds, faces: () => [f] });
+        if (!patch && c.zHeight === undefined) continue;
+        this.add(source);
       }
+    }
     for (const entity of entities) {
       if (!entity.collider || entity.parentId !== undefined) continue;
       const pos = interpolatePosition(entity.position, entity.prevPosition, alpha),
@@ -167,15 +164,9 @@ export class SurfaceReceivers {
         const v = rotateBodyVector(q, x, y, z);
         return [v.x + position[0], v.y + position[1], v.z + position[2]];
       };
-      const corners: Point3[] = [];
-      for (const x of [min[0], max[0]])
-        for (const y of [min[1], max[1]])
-          for (const zz of [min[2], max[2]]) corners.push(toWorld([x ?? 0, y ?? 0, zz ?? 0]));
-      const bounds = polygonBounds(corners.map(([x, y]) => ({ x, y })));
-      const worldMinZ = Math.min(...corners.map((p) => p[2])),
-        worldMaxZ = Math.max(...corners.map((p) => p[2]));
+      const { bounds, minZ: worldMinZ, maxZ: worldMaxZ } = rotatedBounds(q, position, min, max);
       const inverse = [-q[0], -q[1], -q[2], q[3]] as const;
-      const cached = new Map<number, SurfaceFace | null>();
+      let cached: Map<number, SurfaceFace | null> | undefined;
       this.add({
         bounds,
         ownerId: entity.id,
@@ -204,6 +195,7 @@ export class SurfaceReceivers {
                 }
             indices = SurfaceMeshIndex.for(mesh).query(low, high);
           } else indices = [0];
+          cached ??= new Map();
           const result: SurfaceFace[] = [];
           for (const i of indices) {
             let f = cached.get(i);
@@ -229,7 +221,7 @@ export class SurfaceReceivers {
       });
     }
   }
-  private add(source: Source) {
+  private add(source: SurfaceSource) {
     this.diagnostics.sources++;
     const b = source.bounds,
       x0 = Math.floor(b.left / CELL),
@@ -255,11 +247,11 @@ export class SurfaceReceivers {
   }
   private candidates(b: AABB, exclude: number | undefined, maxZ: number): SurfaceFace[] {
     this.diagnostics.queries++;
-    const query = ++this.query,
+    const query = {},
       out: SurfaceFace[] = [];
     // Broad sources first, then cells in x-major order: each source once, in
     // first-visit order (face order decides coplanar ties and decal sort keys).
-    const visit = (sources: readonly Source[]) => {
+    const visit = (sources: readonly SurfaceSource[]) => {
       for (const s of sources) {
         if (s.seen === query) continue;
         s.seen = query;
