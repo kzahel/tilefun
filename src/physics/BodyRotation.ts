@@ -17,15 +17,21 @@ export const worldRotation = (q: { x: number; y: number; z: number; w: number })
 export function rotationsEqual(a?: BodyRotation, b?: BodyRotation): boolean {
   return a === b || (!!a && !!b && a.every((n, i) => n === b[i]));
 }
-export function rotateBodyVector(q: BodyRotation, x: number, y: number, z: number) {
+/** Optional caller-owned output is scratch; omitted output is an independent value. */
+export function rotateBodyVector(
+  q: BodyRotation,
+  x: number,
+  y: number,
+  z: number,
+  out = { x: 0, y: 0, z: 0 },
+) {
   const tx = 2 * (q[1] * z - q[2] * y),
     ty = 2 * (q[2] * x - q[0] * z),
     tz = 2 * (q[0] * y - q[1] * x);
-  return {
-    x: x + q[3] * tx + q[1] * tz - q[2] * ty,
-    y: y + q[3] * ty + q[2] * tx - q[0] * tz,
-    z: z + q[3] * tz + q[0] * ty - q[1] * tx,
-  };
+  out.x = x + q[3] * tx + q[1] * tz - q[2] * ty;
+  out.y = y + q[3] * ty + q[2] * tx - q[0] * tz;
+  out.z = z + q[3] * tz + q[0] * ty - q[1] * tx;
+  return out;
 }
 /** Shortest spherical arc; never interpolate quaternion components independently. */
 export function interpolateRotation(a: BodyRotation, b: BodyRotation, t: number): BodyRotation {

@@ -182,9 +182,35 @@ No whole-run missed-interval win is established: responsive misses 1 / 1 in both
 lanes; throughput misses 0 / 0 before and 1 / 1 after, both at startup. A late
 responsive interval and a late instrumented interval remain unassigned without
 traces. These prepared roads exclude regional generation/city-art streaming;
-the Steam Deck was not measured. Next measure startup prediction/initialization
-separately, then remaining snapshot churn. Do not conflate this render-tail fix
-with every browser pause or the historical untraced 50 ms interval.
+the Steam Deck was not measured. Startup attribution and a bounded prediction
+allocation slice follow in 242 below. Do not conflate this render-tail fix with
+every browser pause or the historical untraced 50 ms interval.
+
+## Startup prediction and transient restore allocation (2026-11-11)
+
+[242](../tactical/242-startup-prediction-and-restore-churn.md) profiles the first
+movement callback separately. One early 19.3 ms phone callback samples ~13.3 ms
+in client physics, including ~6.8 ms geometry preparation, with no overlapping GC.
+Manual authority warmup does not exercise active prediction; the lab clock fence
+also resets that private scene. This explains a first-use cost, not every earlier
+unprofiled spike or ordinary game pause/resume.
+
+Prediction history now retains 120 recycled position triples instead of entity
+clones. Shared physics restore/readback use scene-owned immediate setter/transform
+vectors; numerical snapshots keep independent copies. Whole-record reuse was
+rejected: its `Object.assign` copy more than doubled isolated restore CPU. The
+selected version lowers isolated Mac/Node restore sampled allocation **149.6 →
+106.4 MiB (29%)** for equal work, with essentially unchanged CPU. Both 900-tick
+native driving fixtures have exact authority/predictor checkpoint parity.
+
+Sixteen final qualified phone cells separate heap sampling and ordinary cadence.
+Whole-thread allocation ranges overlap across lanes (clear ~85–95 MiB/10 s;
+jam ~376–450 MiB/10 s). Observed means are lower but replay work is not held fixed,
+so no reliable whole-game allocation percentage is established. Ordinary clear
+runs miss one interval each in both lanes, and startup updates still reach
+24–31 ms after the change. Jam misses 0 / 2 before versus 1 / 1 after. No cadence
+win or startup fix is claimed. Next add cumulative client prediction-step/body-read
+counts, then compare remaining presentation/decal churn at equal work.
 
 ## Crowd bench (2026-11-10)
 

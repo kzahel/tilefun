@@ -1,0 +1,1835 @@
+{
+  "description": "Startup attribution and bounded prediction/physics scratch, 2026-11-11. Sanitized summary; raw traces, sampler profiles, rejected prototype reports, source transforms and production bundles remain ignored in data/scratch/startup-242/.",
+  "baseline": {
+    "revision": "168f3fa9",
+    "source": [
+      {
+        "file": "src/client/PlayerPredictor.ts",
+        "sha256": "4f8b4a4ccb6a02dc2111d3eb89b475c34f09135d90ca98acc3eee2c81f9503aa"
+      },
+      {
+        "file": "src/physics/PhysicsScene.ts",
+        "sha256": "c5d24ff39c01f44fb9c4c005b04636107b7b16213133cc9095c859a9fa45e78a"
+      },
+      {
+        "file": "src/physics/BodyRotation.ts",
+        "sha256": "aa30c13bab983a2d3359ca3f9c67528fe4a5fd69d84dc6e37df8e98f622448b7"
+      }
+    ],
+    "identity": "Preserved production dist from 241 with exactly these runtime sources. --base report checkout source metadata is not served bundle identity; per-run entry hashes identify the served artifact."
+  },
+  "afterSource": [
+    {
+      "file": "src/client/PlayerPredictor.ts",
+      "sha256": "2bd201db12bb63d32d1023227ca878d9d6f48548052185260f0bc0cb7ff00f68"
+    },
+    {
+      "file": "src/client/PredictionHistory.ts",
+      "sha256": "23ecef86d33c15e36c44626c606dd2f10a7fb3c510c07b0409597fd6c4c9c19c"
+    },
+    {
+      "file": "src/physics/PhysicsScene.ts",
+      "sha256": "529c0878c2fec9db17816ed6585b225f0e8281ce625d0ec1f2c4180198e5da66"
+    },
+    {
+      "file": "src/physics/PhysicsRestore.ts",
+      "sha256": "bbc9ef4f8e3f4db2a690cda4da1ee2bb62c5335f95151d1854574090d7e3ac3a"
+    },
+    {
+      "file": "src/physics/BodyRotation.ts",
+      "sha256": "e80e2168479d159993091b79a2a53a6b26a1e82a969ea165b27e132f01d5a553"
+    }
+  ],
+  "methodology": "Pixel 7a / Chrome 156, native viewport, no browser/JIT reset. Final allocation and ordinary campaigns are separate, each before-a / after-a / after-b / before-b; 10 seconds per fixture, two fixtures per run (clear then jam), fresh page/world/Worker per cell, unchanged 180 idle authority ticks, terrain/mesh warmup and idle cadence calibration. Paused manual steps do not exercise active client prediction; initial play costs stay inside measurement. CPU/trace and sampler modes never mix. Sampler-stop GC excluded from natural-GC claims. Prepared roads exclude generation/city streaming; no Deck measurement.",
+  "startup": {
+    "ordinary": [
+      {
+        "trial": 0,
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 599,
+          "wheelQueries": 2388
+        },
+        "update": {
+          "count": 602,
+          "totalMs": 1507.4999996423721,
+          "maxMs": 21.100000023841858,
+          "retained": 602,
+          "p50Ms": 2.399999976158142,
+          "p95Ms": 3.5,
+          "p99Ms": 4.600000023841858
+        },
+        "missed": 0,
+        "distancePx": 1085.5936918519437
+      },
+      {
+        "trial": 1,
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 599,
+          "wheelQueries": 2388
+        },
+        "update": {
+          "count": 601,
+          "totalMs": 1479.9000000953674,
+          "maxMs": 12.200000047683716,
+          "retained": 601,
+          "p50Ms": 2.399999976158142,
+          "p95Ms": 3.299999952316284,
+          "p99Ms": 4.5
+        },
+        "missed": 0,
+        "distancePx": 1085.5936918519437
+      },
+      {
+        "trial": 2,
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 600,
+          "wheelQueries": 2392
+        },
+        "update": {
+          "count": 601,
+          "totalMs": 1467.6999979019165,
+          "maxMs": 8.299999952316284,
+          "retained": 601,
+          "p50Ms": 2.299999952316284,
+          "p95Ms": 3.299999952316284,
+          "p99Ms": 5.300000071525574
+        },
+        "missed": 0,
+        "distancePx": 1085.5936918519437
+      }
+    ],
+    "cpuTrace": [
+      {
+        "trial": 0,
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 600,
+          "wheelQueries": 2392
+        },
+        "update": {
+          "count": 601,
+          "totalMs": 1472.2000015974045,
+          "maxMs": 16.200000047683716,
+          "retained": 601,
+          "p50Ms": 2.3000000715255737,
+          "p95Ms": 3.3000000715255737,
+          "p99Ms": 5.599999904632568
+        },
+        "missed": 0,
+        "clockErrorUs": 0,
+        "longCallbacks": [
+          {
+            "atMs": 34.632,
+            "wallMs": 19.277,
+            "threadMs": 18.741,
+            "call": {
+              "function": "tick",
+              "source": "src/core/GameLoop.ts",
+              "line": 69
+            },
+            "profile": {
+              "samples": 26,
+              "self": [
+                {
+                  "function": "step",
+                  "source": "src/physics/PhysicsScene.ts",
+                  "line": 388,
+                  "sampledWallMs": 1.91
+                },
+                {
+                  "function": "applyVehicleFacing",
+                  "source": "src/traffic/Vehicle.ts",
+                  "line": 128,
+                  "sampledWallMs": 1.167
+                },
+                {
+                  "function": "storeInput",
+                  "source": "src/client/PlayerPredictor.ts",
+                  "line": 269,
+                  "sampledWallMs": 1.16
+                },
+                {
+                  "function": "getCollision",
+                  "source": "src/world/Chunk.ts",
+                  "line": 119,
+                  "sampledWallMs": 1.15
+                },
+                {
+                  "function": "wasm-function[2529]",
+                  "source": "/00bc1dde",
+                  "line": 1,
+                  "sampledWallMs": 1.148
+                },
+                {
+                  "function": "prepareGeometry",
+                  "source": "src/physics/PhysicsScene.ts",
+                  "line": 258,
+                  "sampledWallMs": 1.138
+                },
+                {
+                  "function": "getUniformLocation",
+                  "sampledWallMs": 1.131
+                },
+                {
+                  "function": "mapNewSoftBodies",
+                  "source": "node_modules/@dimforge/rapier3d-compat/dist/rapier.mjs",
+                  "line": 1,
+                  "sampledWallMs": 1.128
+                },
+                {
+                  "function": "js-to-wasm:ii:i",
+                  "source": "/00bc1dde",
+                  "line": 1,
+                  "sampledWallMs": 1.125
+                },
+                {
+                  "function": "near",
+                  "source": "src/physics/WheelGrid.ts",
+                  "line": 34,
+                  "sampledWallMs": 1.122
+                },
+                {
+                  "function": "compileCollisionGeometry",
+                  "source": "src/physics/rapier/CollisionGeometry.ts",
+                  "line": 17,
+                  "sampledWallMs": 1.109
+                },
+                {
+                  "function": "getRoad",
+                  "source": "src/world/Chunk.ts",
+                  "line": 147,
+                  "sampledWallMs": 1.099
+                },
+                {
+                  "function": "beginFrame",
+                  "source": "src/rendering/GpuMeshBodies.ts",
+                  "line": 101,
+                  "sampledWallMs": 1.099
+                },
+                {
+                  "function": "cuboid",
+                  "source": "node_modules/@dimforge/rapier3d-compat/dist/rapier.mjs",
+                  "line": 1,
+                  "sampledWallMs": 1.03
+                }
+              ],
+              "inclusive": [
+                {
+                  "function": "(root)",
+                  "sampledWallMs": 19.277
+                },
+                {
+                  "function": "externalTick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 47,
+                  "sampledWallMs": 19.026
+                },
+                {
+                  "function": "tick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 69,
+                  "sampledWallMs": 19.026
+                },
+                {
+                  "function": "update",
+                  "source": "src/client/LabView.ts",
+                  "line": 254,
+                  "sampledWallMs": 15.654
+                },
+                {
+                  "function": "update",
+                  "source": "src/client/LabView.ts",
+                  "line": 132,
+                  "sampledWallMs": 15.654
+                },
+                {
+                  "function": "predictInput",
+                  "source": "src/client/predictInput.ts",
+                  "line": 9,
+                  "sampledWallMs": 14.872
+                },
+                {
+                  "function": "predict",
+                  "source": "src/session/DeviceSession.ts",
+                  "line": 117,
+                  "sampledWallMs": 14.872
+                },
+                {
+                  "function": "submitInput",
+                  "source": "src/client/RecipeWorldClient.ts",
+                  "line": 134,
+                  "sampledWallMs": 14.872
+                },
+                {
+                  "function": "step",
+                  "source": "src/client/PlayerPredictor.ts",
+                  "line": 576,
+                  "sampledWallMs": 13.712
+                },
+                {
+                  "function": "update",
+                  "source": "src/client/PlayerPredictor.ts",
+                  "line": 661,
+                  "sampledWallMs": 13.712
+                },
+                {
+                  "function": "step",
+                  "source": "src/physics/PhysicsScene.ts",
+                  "line": 388,
+                  "sampledWallMs": 13.336
+                },
+                {
+                  "function": "prepareGeometry",
+                  "source": "src/physics/PhysicsScene.ts",
+                  "line": 258,
+                  "sampledWallMs": 6.839
+                },
+                {
+                  "function": "compileCollisionGeometry",
+                  "source": "src/physics/rapier/CollisionGeometry.ts",
+                  "line": 17,
+                  "sampledWallMs": 4.553
+                },
+                {
+                  "function": "drawLabFrame",
+                  "source": "src/client/LabScene.ts",
+                  "line": 38,
+                  "sampledWallMs": 3.372
+                }
+              ]
+            },
+            "mainGcOverlapMs": 0
+          },
+          {
+            "atMs": 2102.679,
+            "wallMs": 13.165,
+            "threadMs": 12.794,
+            "call": {
+              "function": "tick",
+              "source": "src/core/GameLoop.ts",
+              "line": 69
+            },
+            "profile": {
+              "samples": 16,
+              "self": [
+                {
+                  "function": "(program)",
+                  "sampledWallMs": 2.226
+                },
+                {
+                  "function": "",
+                  "source": "src/client/PlayerPredictor.ts",
+                  "line": 403,
+                  "sampledWallMs": 1.29
+                },
+                {
+                  "function": "setup",
+                  "source": "node_modules/three/build/three.module.js",
+                  "line": 1623,
+                  "sampledWallMs": 1.151
+                },
+                {
+                  "function": "drawImage",
+                  "sampledWallMs": 1.136
+                },
+                {
+                  "function": "",
+                  "source": "src/physics/PhysicsScene.ts",
+                  "line": 483,
+                  "sampledWallMs": 1.131
+                },
+                {
+                  "function": "framebufferTexture2D",
+                  "sampledWallMs": 1.124
+                },
+                {
+                  "function": "texSubImage2D",
+                  "sampledWallMs": 1.113
+                },
+                {
+                  "function": "setMaterial",
+                  "source": "node_modules/three/build/three.module.js",
+                  "line": 10205,
+                  "sampledWallMs": 1.102
+                },
+                {
+                  "function": "residentFor",
+                  "source": "src/rendering/TerrainResidency.ts",
+                  "line": 150,
+                  "sampledWallMs": 0.97
+                },
+                {
+                  "function": "tick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 69,
+                  "sampledWallMs": 0.682
+                },
+                {
+                  "function": "appendGrassBladeItems",
+                  "source": "src/rendering/GrassBladeRenderer.ts",
+                  "line": 145,
+                  "sampledWallMs": 0.656
+                },
+                {
+                  "function": "buildBladesForChunk",
+                  "source": "src/rendering/GrassBladeRenderer.ts",
+                  "line": 57,
+                  "sampledWallMs": 0.482
+                },
+                {
+                  "function": "visit",
+                  "source": "src/rendering/TerrainResidency.ts",
+                  "line": 116,
+                  "sampledWallMs": 0.102
+                }
+              ],
+              "inclusive": [
+                {
+                  "function": "(root)",
+                  "sampledWallMs": 13.165
+                },
+                {
+                  "function": "tick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 69,
+                  "sampledWallMs": 10.939
+                },
+                {
+                  "function": "externalTick",
+                  "source": "src/core/GameLoop.ts",
+                  "line": 47,
+                  "sampledWallMs": 10.257
+                },
+                {
+                  "function": "renderViews",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 29,
+                  "sampledWallMs": 7.836
+                },
+                {
+                  "function": "drawLabFrame",
+                  "source": "src/client/LabScene.ts",
+                  "line": 38,
+                  "sampledWallMs": 7.836
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 304,
+                  "sampledWallMs": 7.836
+                },
+                {
+                  "function": "render",
+                  "source": "src/client/LabView.ts",
+                  "line": 140,
+                  "sampledWallMs": 7.836
+                },
+                {
+                  "function": "",
+                  "source": "src/client/LabScene.ts",
+                  "line": 50,
+                  "sampledWallMs": 5.628
+                },
+                {
+                  "function": "drawViewTerrain",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 66,
+                  "sampledWallMs": 3.339
+                },
+                {
+                  "function": "update",
+                  "source": "src/client/LabView.ts",
+                  "line": 254,
+                  "sampledWallMs": 2.421
+                },
+                {
+                  "function": "update",
+                  "source": "src/client/LabView.ts",
+                  "line": 132,
+                  "sampledWallMs": 2.421
+                },
+                {
+                  "function": "drawViewScene",
+                  "source": "src/session/ViewRender.ts",
+                  "line": 97,
+                  "sampledWallMs": 2.289
+                },
+                {
+                  "function": "write",
+                  "source": "src/rendering/GpuPageAtlas.ts",
+                  "line": 74,
+                  "sampledWallMs": 2.237
+                },
+                {
+                  "function": "get",
+                  "source": "src/rendering/GpuPages.ts",
+                  "line": 103,
+                  "sampledWallMs": 2.237
+                }
+              ]
+            },
+            "mainGcOverlapMs": 0
+          }
+        ],
+        "mainGcCount": 14
+      },
+      {
+        "trial": 1,
+        "qualification": {
+          "valid": true,
+          "reasons": [],
+          "ticks": 600,
+          "wheelQueries": 2392
+        },
+        "update": {
+          "count": 601,
+          "totalMs": 1337.6000014543533,
+          "maxMs": 6.400000095367432,
+          "retained": 601,
+          "p50Ms": 2.1999999284744263,
+          "p95Ms": 2.899999976158142,
+          "p99Ms": 4
+        },
+        "missed": 0,
+        "clockErrorUs": 0,
+        "longCallbacks": [],
+        "mainGcCount": 13
+      }
+    ]
+  },
+  "comparisons": [
+    {
+      "mode": "alloc",
+      "pair": "a",
+      "passed": true
+    },
+    {
+      "mode": "alloc",
+      "pair": "b",
+      "passed": true
+    },
+    {
+      "mode": "ordinary",
+      "pair": "a",
+      "passed": true
+    },
+    {
+      "mode": "ordinary",
+      "pair": "b",
+      "passed": true
+    }
+  ],
+  "runs": [
+    {
+      "mode": "alloc",
+      "lane": "before",
+      "pair": "a",
+      "fixture": "clear",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 599,
+        "wheelQueries": 2384
+      },
+      "seconds": 10,
+      "distancePx": 1083.7269926331937,
+      "missed": 1,
+      "frameMs": {
+        "count": 599,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.399999999999636
+      },
+      "slowFrames": [
+        {
+          "atMs": 66.69999999999982,
+          "endMs": 6327.7,
+          "frameMs": 33.399999999999636
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 601,
+          "totalMs": 1586.8000016212463,
+          "maxMs": 29.899999976158142,
+          "retained": 601,
+          "p50Ms": 2.4000000953674316,
+          "p95Ms": 3.600000023841858,
+          "p99Ms": 6.100000023841858
+        },
+        "lab.render": {
+          "count": 600,
+          "totalMs": 1980.799997806549,
+          "maxMs": 11.5,
+          "retained": 600,
+          "p50Ms": 2.899999976158142,
+          "p95Ms": 5.399999976158142,
+          "p99Ms": 6.700000047683716
+        }
+      },
+      "allocationBytes": 89769780,
+      "errors": []
+    },
+    {
+      "mode": "alloc",
+      "lane": "before",
+      "pair": "a",
+      "fixture": "jam",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 599,
+        "wheelQueries": 27312
+      },
+      "seconds": 10,
+      "distancePx": 233.8732078852334,
+      "missed": 2,
+      "frameMs": {
+        "count": 598,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.399999999999636
+      },
+      "slowFrames": [
+        {
+          "atMs": 150,
+          "endMs": 7011.5,
+          "frameMs": 33.30000000000018
+        },
+        {
+          "atMs": 200,
+          "endMs": 7061.5,
+          "frameMs": 33.399999999999636
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 601,
+          "totalMs": 1671.50000166893,
+          "maxMs": 11.399999976158142,
+          "retained": 601,
+          "p50Ms": 2.700000047683716,
+          "p95Ms": 3.700000047683716,
+          "p99Ms": 4.5
+        },
+        "lab.render": {
+          "count": 599,
+          "totalMs": 2679.9000002145767,
+          "maxMs": 14.199999928474426,
+          "retained": 599,
+          "p50Ms": 4.100000023841858,
+          "p95Ms": 7.700000047683716,
+          "p99Ms": 8.899999976158142
+        }
+      },
+      "allocationBytes": 409088736,
+      "errors": []
+    },
+    {
+      "mode": "alloc",
+      "lane": "after",
+      "pair": "a",
+      "fixture": "clear",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DcN-C5d3.js",
+        "sha256": "a43bf544d156f522b1773b41f1611fd92fbdfbdb3cd6ae1b621c749b943ebca5"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 599,
+        "wheelQueries": 2388
+      },
+      "seconds": 10,
+      "distancePx": 1085.5936918519437,
+      "missed": 0,
+      "frameMs": {
+        "count": 600,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109
+      },
+      "slowFrames": [],
+      "mainThread": {
+        "lab.update": {
+          "count": 601,
+          "totalMs": 1735.0000014305115,
+          "maxMs": 22.299999952316284,
+          "retained": 601,
+          "p50Ms": 2.700000047683716,
+          "p95Ms": 3.899999976158142,
+          "p99Ms": 6.200000047683716
+        },
+        "lab.render": {
+          "count": 601,
+          "totalMs": 2061.0999985933304,
+          "maxMs": 12.100000023841858,
+          "retained": 601,
+          "p50Ms": 3,
+          "p95Ms": 5.5,
+          "p99Ms": 6.400000095367432
+        }
+      },
+      "allocationBytes": 90697100,
+      "errors": []
+    },
+    {
+      "mode": "alloc",
+      "lane": "after",
+      "pair": "a",
+      "fixture": "jam",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DcN-C5d3.js",
+        "sha256": "a43bf544d156f522b1773b41f1611fd92fbdfbdb3cd6ae1b621c749b943ebca5"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 599,
+        "wheelQueries": 27312
+      },
+      "seconds": 10,
+      "distancePx": 233.8732078852334,
+      "missed": 2,
+      "frameMs": {
+        "count": 598,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.399999999999636
+      },
+      "slowFrames": [
+        {
+          "atMs": 233.39999999999964,
+          "endMs": 7142.2,
+          "frameMs": 33.399999999999636
+        },
+        {
+          "atMs": 266.59999999999945,
+          "endMs": 7175.4,
+          "frameMs": 33.19999999999982
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 601,
+          "totalMs": 1715.4000006914139,
+          "maxMs": 12.600000023841858,
+          "retained": 601,
+          "p50Ms": 2.799999952316284,
+          "p95Ms": 3.899999976158142,
+          "p99Ms": 4.699999928474426
+        },
+        "lab.render": {
+          "count": 599,
+          "totalMs": 2629.399998664856,
+          "maxMs": 14.900000095367432,
+          "retained": 599,
+          "p50Ms": 4,
+          "p95Ms": 7.800000071525574,
+          "p99Ms": 9.399999976158142
+        }
+      },
+      "allocationBytes": 394043188,
+      "errors": []
+    },
+    {
+      "mode": "alloc",
+      "lane": "after",
+      "pair": "b",
+      "fixture": "clear",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DcN-C5d3.js",
+        "sha256": "a43bf544d156f522b1773b41f1611fd92fbdfbdb3cd6ae1b621c749b943ebca5"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 599,
+        "wheelQueries": 2380
+      },
+      "seconds": 10,
+      "distancePx": 1081.8602934144437,
+      "missed": 1,
+      "frameMs": {
+        "count": 599,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.29999999999927
+      },
+      "slowFrames": [
+        {
+          "atMs": 83.29999999999927,
+          "endMs": 6470.9,
+          "frameMs": 33.29999999999927
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 601,
+          "totalMs": 1608.0999978780746,
+          "maxMs": 30.300000071525574,
+          "retained": 601,
+          "p50Ms": 2.5,
+          "p95Ms": 3.6999999284744263,
+          "p99Ms": 5.599999904632568
+        },
+        "lab.render": {
+          "count": 600,
+          "totalMs": 1943.2000025510788,
+          "maxMs": 15.200000047683716,
+          "retained": 600,
+          "p50Ms": 2.899999976158142,
+          "p95Ms": 5.100000023841858,
+          "p99Ms": 6.5
+        }
+      },
+      "allocationBytes": 88994852,
+      "errors": []
+    },
+    {
+      "mode": "alloc",
+      "lane": "after",
+      "pair": "b",
+      "fixture": "jam",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DcN-C5d3.js",
+        "sha256": "a43bf544d156f522b1773b41f1611fd92fbdfbdb3cd6ae1b621c749b943ebca5"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 599,
+        "wheelQueries": 27312
+      },
+      "seconds": 10,
+      "distancePx": 233.87320603587716,
+      "missed": 6,
+      "frameMs": {
+        "count": 594,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 33.29999999999927,
+        "max": 33.400000000000546
+      },
+      "slowFrames": [
+        {
+          "atMs": 216.69999999999982,
+          "endMs": 7233.2,
+          "frameMs": 33.30000000000018
+        },
+        {
+          "atMs": 250.10000000000036,
+          "endMs": 7266.6,
+          "frameMs": 33.400000000000546
+        },
+        {
+          "atMs": 933.5,
+          "endMs": 7950,
+          "frameMs": 33.399999999999636
+        },
+        {
+          "atMs": 8667.7,
+          "endMs": 15684.2,
+          "frameMs": 33.30000000000109
+        },
+        {
+          "atMs": 8751.1,
+          "endMs": 15767.6,
+          "frameMs": 33.30000000000109
+        },
+        {
+          "atMs": 8784.4,
+          "endMs": 15800.9,
+          "frameMs": 33.29999999999927
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 601,
+          "totalMs": 1756.5000005960464,
+          "maxMs": 11.700000047683716,
+          "retained": 601,
+          "p50Ms": 2.899999976158142,
+          "p95Ms": 3.899999976158142,
+          "p99Ms": 4.5
+        },
+        "lab.render": {
+          "count": 595,
+          "totalMs": 2734.9000002145767,
+          "maxMs": 11.299999952316284,
+          "retained": 595,
+          "p50Ms": 4.199999928474426,
+          "p95Ms": 7.399999976158142,
+          "p99Ms": 8.200000047683716
+        }
+      },
+      "allocationBytes": 416079668,
+      "errors": []
+    },
+    {
+      "mode": "alloc",
+      "lane": "before",
+      "pair": "b",
+      "fixture": "clear",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 599,
+        "wheelQueries": 2384
+      },
+      "seconds": 10,
+      "distancePx": 1083.7269926331937,
+      "missed": 0,
+      "frameMs": {
+        "count": 600,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.80000000000109
+      },
+      "slowFrames": [],
+      "mainThread": {
+        "lab.update": {
+          "count": 601,
+          "totalMs": 1595.5999989509583,
+          "maxMs": 21.90000009536743,
+          "retained": 601,
+          "p50Ms": 2.5,
+          "p95Ms": 3.600000023841858,
+          "p99Ms": 5.700000047683716
+        },
+        "lab.render": {
+          "count": 601,
+          "totalMs": 1799.6999995708466,
+          "maxMs": 10.900000095367432,
+          "retained": 601,
+          "p50Ms": 2.6999999284744263,
+          "p95Ms": 5.099999904632568,
+          "p99Ms": 6.200000047683716
+        }
+      },
+      "allocationBytes": 100050984,
+      "errors": []
+    },
+    {
+      "mode": "alloc",
+      "lane": "before",
+      "pair": "b",
+      "fixture": "jam",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 599,
+        "wheelQueries": 27312
+      },
+      "seconds": 10,
+      "distancePx": 233.8324820174281,
+      "missed": 4,
+      "frameMs": {
+        "count": 596,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.399999999999636
+      },
+      "slowFrames": [
+        {
+          "atMs": 166.70000000000073,
+          "endMs": 7127.6,
+          "frameMs": 33.30000000000018
+        },
+        {
+          "atMs": 199.90000000000055,
+          "endMs": 7160.8,
+          "frameMs": 33.19999999999982
+        },
+        {
+          "atMs": 1716.800000000001,
+          "endMs": 8677.7,
+          "frameMs": 33.30000000000109
+        },
+        {
+          "atMs": 7983.4,
+          "endMs": 14944.3,
+          "frameMs": 33.399999999999636
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 601,
+          "totalMs": 1911.7999988794327,
+          "maxMs": 9.899999976158142,
+          "retained": 601,
+          "p50Ms": 3.1999999284744263,
+          "p95Ms": 4,
+          "p99Ms": 4.599999904632568
+        },
+        "lab.render": {
+          "count": 597,
+          "totalMs": 2939.600001811981,
+          "maxMs": 11.599999904632568,
+          "retained": 597,
+          "p50Ms": 4.399999976158142,
+          "p95Ms": 7.700000047683716,
+          "p99Ms": 9.299999952316284
+        }
+      },
+      "allocationBytes": 471326308,
+      "errors": []
+    },
+    {
+      "mode": "ordinary",
+      "lane": "before",
+      "pair": "a",
+      "fixture": "clear",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 600,
+        "wheelQueries": 2388
+      },
+      "seconds": 10,
+      "distancePx": 1085.5936918519437,
+      "missed": 1,
+      "frameMs": {
+        "count": 600,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.399999999999636
+      },
+      "slowFrames": [
+        {
+          "atMs": 83.5,
+          "endMs": 6393.5,
+          "frameMs": 33.399999999999636
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 602,
+          "totalMs": 1500.4999995231628,
+          "maxMs": 25.199999928474426,
+          "retained": 602,
+          "p50Ms": 2.3000000715255737,
+          "p95Ms": 3.299999952316284,
+          "p99Ms": 5.200000047683716
+        },
+        "lab.render": {
+          "count": 601,
+          "totalMs": 1930.7999992370605,
+          "maxMs": 10.299999952316284,
+          "retained": 601,
+          "p50Ms": 2.8000000715255737,
+          "p95Ms": 5.299999952316284,
+          "p99Ms": 6.100000023841858
+        }
+      },
+      "allocationBytes": null,
+      "errors": []
+    },
+    {
+      "mode": "ordinary",
+      "lane": "before",
+      "pair": "a",
+      "fixture": "jam",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 600,
+        "wheelQueries": 27344
+      },
+      "seconds": 10,
+      "distancePx": 233.91373458079983,
+      "missed": 0,
+      "frameMs": {
+        "count": 601,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 16.899999999999636
+      },
+      "slowFrames": [],
+      "mainThread": {
+        "lab.update": {
+          "count": 602,
+          "totalMs": 1702.900000333786,
+          "maxMs": 8.799999952316284,
+          "retained": 602,
+          "p50Ms": 2.8000000715255737,
+          "p95Ms": 4,
+          "p99Ms": 4.699999928474426
+        },
+        "lab.render": {
+          "count": 602,
+          "totalMs": 2312.100001335144,
+          "maxMs": 9.200000047683716,
+          "retained": 602,
+          "p50Ms": 3.600000023841858,
+          "p95Ms": 6.199999928474426,
+          "p99Ms": 6.899999976158142
+        }
+      },
+      "allocationBytes": null,
+      "errors": []
+    },
+    {
+      "mode": "ordinary",
+      "lane": "after",
+      "pair": "a",
+      "fixture": "clear",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DcN-C5d3.js",
+        "sha256": "a43bf544d156f522b1773b41f1611fd92fbdfbdb3cd6ae1b621c749b943ebca5"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 600,
+        "wheelQueries": 2388
+      },
+      "seconds": 10,
+      "distancePx": 1085.5936918519437,
+      "missed": 1,
+      "frameMs": {
+        "count": 600,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.30000000000018
+      },
+      "slowFrames": [
+        {
+          "atMs": 83.19999999999982,
+          "endMs": 6294.2,
+          "frameMs": 33.30000000000018
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 602,
+          "totalMs": 1510.0000003576279,
+          "maxMs": 24.100000023841858,
+          "retained": 602,
+          "p50Ms": 2.3000000715255737,
+          "p95Ms": 3.5,
+          "p99Ms": 5.5
+        },
+        "lab.render": {
+          "count": 601,
+          "totalMs": 1956.4000025987625,
+          "maxMs": 10.899999976158142,
+          "retained": 601,
+          "p50Ms": 2.899999976158142,
+          "p95Ms": 5.199999928474426,
+          "p99Ms": 6.299999952316284
+        }
+      },
+      "allocationBytes": null,
+      "errors": []
+    },
+    {
+      "mode": "ordinary",
+      "lane": "after",
+      "pair": "a",
+      "fixture": "jam",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DcN-C5d3.js",
+        "sha256": "a43bf544d156f522b1773b41f1611fd92fbdfbdb3cd6ae1b621c749b943ebca5"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 600,
+        "wheelQueries": 27344
+      },
+      "seconds": 10,
+      "distancePx": 233.91373531587683,
+      "missed": 1,
+      "frameMs": {
+        "count": 600,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.29999999999927
+      },
+      "slowFrames": [
+        {
+          "atMs": 183.29999999999927,
+          "endMs": 7161.4,
+          "frameMs": 33.29999999999927
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 602,
+          "totalMs": 1624.2000017166138,
+          "maxMs": 7,
+          "retained": 602,
+          "p50Ms": 2.600000023841858,
+          "p95Ms": 3.700000047683716,
+          "p99Ms": 4.599999904632568
+        },
+        "lab.render": {
+          "count": 601,
+          "totalMs": 2353.299996614456,
+          "maxMs": 9.5,
+          "retained": 601,
+          "p50Ms": 3.5,
+          "p95Ms": 6.799999952316284,
+          "p99Ms": 8.099999904632568
+        }
+      },
+      "allocationBytes": null,
+      "errors": []
+    },
+    {
+      "mode": "ordinary",
+      "lane": "after",
+      "pair": "b",
+      "fixture": "clear",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DcN-C5d3.js",
+        "sha256": "a43bf544d156f522b1773b41f1611fd92fbdfbdb3cd6ae1b621c749b943ebca5"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 600,
+        "wheelQueries": 2388
+      },
+      "seconds": 10,
+      "distancePx": 1083.7269926331937,
+      "missed": 1,
+      "frameMs": {
+        "count": 600,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 33.30000000000018
+      },
+      "slowFrames": [
+        {
+          "atMs": 66.69999999999982,
+          "endMs": 6263.8,
+          "frameMs": 33.30000000000018
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 602,
+          "totalMs": 1594.8999991416931,
+          "maxMs": 31,
+          "retained": 602,
+          "p50Ms": 2.5,
+          "p95Ms": 3.399999976158142,
+          "p99Ms": 5.399999976158142
+        },
+        "lab.render": {
+          "count": 601,
+          "totalMs": 1923.2999992370605,
+          "maxMs": 11.799999952316284,
+          "retained": 601,
+          "p50Ms": 2.8000000715255737,
+          "p95Ms": 5.299999952316284,
+          "p99Ms": 6.399999976158142
+        }
+      },
+      "allocationBytes": null,
+      "errors": []
+    },
+    {
+      "mode": "ordinary",
+      "lane": "after",
+      "pair": "b",
+      "fixture": "jam",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-DcN-C5d3.js",
+        "sha256": "a43bf544d156f522b1773b41f1611fd92fbdfbdb3cd6ae1b621c749b943ebca5"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 601,
+        "wheelQueries": 27352
+      },
+      "seconds": 10,
+      "distancePx": 233.8449778496939,
+      "missed": 1,
+      "frameMs": {
+        "count": 600,
+        "p50": 16.69999999999891,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 33.30000000000018
+      },
+      "slowFrames": [
+        {
+          "atMs": 183.19999999999982,
+          "endMs": 7206.3,
+          "frameMs": 33.30000000000018
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 602,
+          "totalMs": 1775.8000010252,
+          "maxMs": 9.600000023841858,
+          "retained": 602,
+          "p50Ms": 2.899999976158142,
+          "p95Ms": 4,
+          "p99Ms": 4.600000023841858
+        },
+        "lab.render": {
+          "count": 601,
+          "totalMs": 2190.500000476837,
+          "maxMs": 10.299999952316284,
+          "retained": 601,
+          "p50Ms": 3.5,
+          "p95Ms": 5.899999976158142,
+          "p99Ms": 7.199999928474426
+        }
+      },
+      "allocationBytes": null,
+      "errors": []
+    },
+    {
+      "mode": "ordinary",
+      "lane": "before",
+      "pair": "b",
+      "fixture": "clear",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 601,
+        "wheelQueries": 2392
+      },
+      "seconds": 10,
+      "distancePx": 1085.5936918519437,
+      "missed": 1,
+      "frameMs": {
+        "count": 600,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 33.399999999999636
+      },
+      "slowFrames": [
+        {
+          "atMs": 5915.5,
+          "endMs": 12149,
+          "frameMs": 33.399999999999636
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 602,
+          "totalMs": 1699.6999999284744,
+          "maxMs": 23.399999976158142,
+          "retained": 602,
+          "p50Ms": 2.6999999284744263,
+          "p95Ms": 3.799999952316284,
+          "p99Ms": 4.800000071525574
+        },
+        "lab.render": {
+          "count": 601,
+          "totalMs": 1905.1000010967255,
+          "maxMs": 8.100000023841858,
+          "retained": 601,
+          "p50Ms": 2.8000000715255737,
+          "p95Ms": 5,
+          "p99Ms": 5.700000047683716
+        }
+      },
+      "allocationBytes": null,
+      "errors": []
+    },
+    {
+      "mode": "ordinary",
+      "lane": "before",
+      "pair": "b",
+      "fixture": "jam",
+      "browser": "Chrome/156.0.8078.79",
+      "device": {
+        "userAgent": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Mobile Safari/537.36",
+        "cores": 8,
+        "width": 411,
+        "height": 789,
+        "devicePixelRatio": 2.625,
+        "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)"
+      },
+      "servedEntry": {
+        "path": "/tilefun/assets/drivingBench-CWurSGqc.js",
+        "sha256": "e38e8622c25ea96e70538a8227f0010ea924f02dc51d2d37d1059c507ef3efcf"
+      },
+      "qualification": {
+        "valid": true,
+        "reasons": [],
+        "ticks": 601,
+        "wheelQueries": 27336
+      },
+      "seconds": 10,
+      "distancePx": 233.80937361334594,
+      "missed": 2,
+      "frameMs": {
+        "count": 599,
+        "p50": 16.69999999999891,
+        "p95": 16.700000000000728,
+        "p99": 16.80000000000109,
+        "max": 33.400000000000546
+      },
+      "slowFrames": [
+        {
+          "atMs": 149.89999999999964,
+          "endMs": 6817.4,
+          "frameMs": 33.19999999999982
+        },
+        {
+          "atMs": 183.30000000000018,
+          "endMs": 6850.8,
+          "frameMs": 33.400000000000546
+        }
+      ],
+      "mainThread": {
+        "lab.update": {
+          "count": 602,
+          "totalMs": 1742.4000004529953,
+          "maxMs": 11.600000023841858,
+          "retained": 602,
+          "p50Ms": 2.899999976158142,
+          "p95Ms": 3.899999976158142,
+          "p99Ms": 4.799999952316284
+        },
+        "lab.render": {
+          "count": 600,
+          "totalMs": 2248,
+          "maxMs": 12,
+          "retained": 600,
+          "p50Ms": 3.5,
+          "p95Ms": 6.200000047683716,
+          "p99Ms": 7.200000047683716
+        }
+      },
+      "allocationBytes": null,
+      "errors": []
+    }
+  ],
+  "thermals": [
+    {
+      "name": "final-before-alloc-a",
+      "points": [
+        {
+          "label": "before",
+          "date": "2026-11-11T17:56:51.544Z",
+          "batteryC": 25.7,
+          "thermalStatus": 0,
+          "acPowered": true
+        },
+        {
+          "label": "after",
+          "date": "2026-11-11T17:57:28.767Z",
+          "batteryC": 25.7,
+          "thermalStatus": 0,
+          "acPowered": true
+        }
+      ],
+      "error": null
+    },
+    {
+      "name": "final-after-alloc-a",
+      "points": [
+        {
+          "label": "before",
+          "date": "2026-11-11T17:58:26.001Z",
+          "batteryC": 25.8,
+          "thermalStatus": 0,
+          "acPowered": true
+        },
+        {
+          "label": "after",
+          "date": "2026-11-11T17:59:03.547Z",
+          "batteryC": 25.8,
+          "thermalStatus": 0,
+          "acPowered": true
+        }
+      ],
+      "error": null
+    },
+    {
+      "name": "final-after-alloc-b",
+      "points": [
+        {
+          "label": "before",
+          "date": "2026-11-11T17:59:06.072Z",
+          "batteryC": 25.8,
+          "thermalStatus": 0,
+          "acPowered": true
+        },
+        {
+          "label": "after",
+          "date": "2026-11-11T17:59:43.358Z",
+          "batteryC": 25.9,
+          "thermalStatus": 0,
+          "acPowered": true
+        }
+      ],
+      "error": null
+    },
+    {
+      "name": "final-before-alloc-b",
+      "points": [
+        {
+          "label": "before",
+          "date": "2026-11-11T17:59:45.837Z",
+          "batteryC": 25.9,
+          "thermalStatus": 0,
+          "acPowered": true
+        },
+        {
+          "label": "after",
+          "date": "2026-11-11T18:00:22.844Z",
+          "batteryC": 25.9,
+          "thermalStatus": 0,
+          "acPowered": true
+        }
+      ],
+      "error": null
+    },
+    {
+      "name": "final-before-ordinary-a",
+      "points": [
+        {
+          "label": "before",
+          "date": "2026-11-11T18:00:25.249Z",
+          "batteryC": 25.9,
+          "thermalStatus": 0,
+          "acPowered": true
+        },
+        {
+          "label": "after",
+          "date": "2026-11-11T18:01:02.155Z",
+          "batteryC": 26,
+          "thermalStatus": 0,
+          "acPowered": true
+        }
+      ],
+      "error": null
+    },
+    {
+      "name": "final-after-ordinary-a",
+      "points": [
+        {
+          "label": "before",
+          "date": "2026-11-11T18:01:04.647Z",
+          "batteryC": 26,
+          "thermalStatus": 0,
+          "acPowered": true
+        },
+        {
+          "label": "after",
+          "date": "2026-11-11T18:01:41.707Z",
+          "batteryC": 26.3,
+          "thermalStatus": 0,
+          "acPowered": true
+        }
+      ],
+      "error": null
+    },
+    {
+      "name": "final-after-ordinary-b",
+      "points": [
+        {
+          "label": "before",
+          "date": "2026-11-11T18:01:44.448Z",
+          "batteryC": 26.3,
+          "thermalStatus": 0,
+          "acPowered": true
+        },
+        {
+          "label": "after",
+          "date": "2026-11-11T18:02:21.425Z",
+          "batteryC": 26.3,
+          "thermalStatus": 0,
+          "acPowered": true
+        }
+      ],
+      "error": null
+    },
+    {
+      "name": "final-before-ordinary-b",
+      "points": [
+        {
+          "label": "before",
+          "date": "2026-11-11T18:02:23.866Z",
+          "batteryC": 26.3,
+          "thermalStatus": 0,
+          "acPowered": true
+        },
+        {
+          "label": "after",
+          "date": "2026-11-11T18:03:00.417Z",
+          "batteryC": 26.7,
+          "thermalStatus": 0,
+          "acPowered": true
+        }
+      ],
+      "error": null
+    }
+  ],
+  "micro": {
+    "description": "Isolated Mac Node 24 restore stress: 37 ordinary car bodies, 200 warmup restores, three ordinary timing trials of 5,000 restores each, then a separate 5,000-restore heap sample (32 KiB sampling, collected objects included). No world steps. Node V8 and Chrome V8 differ; not a physical-phone CPU estimate.",
+    "cpu": "Apple M4 Pro",
+    "node": "v24.22.1",
+    "before": {
+      "bodies": 37,
+      "iterations": 5000,
+      "trials": [
+        74.91212499999999,
+        69.07941699999998,
+        64.01316600000001
+      ],
+      "sampledBytes": 156903240
+    },
+    "after": {
+      "bodies": 37,
+      "iterations": 5000,
+      "trials": [
+        70.25350000000002,
+        68.327708,
+        65.24908399999998
+      ],
+      "sampledBytes": 111542360
+    }
+  },
+  "rejectedPrototype": {
+    "description": "Whole numerical-record reuse via Object.assign cut isolated allocation but made restore ~2.3x slower. Manual dynamic-field/direct-field copies remained slower. Final code retains spread copies and only reuses immediate setter arguments and position-history points. Prototype phone reports remain local; excluded from final comparisons.",
+    "objectAssign": {
+      "bodies": 37,
+      "iterations": 5000,
+      "trialsMs": [
+        146.598708,
+        145.072834,
+        141.739792
+      ],
+      "sampledBytes": 66953568
+    },
+    "directFields": {
+      "bodies": 37,
+      "iterations": 5000,
+      "trials": [
+        104.99362500000001,
+        103.04845899999998,
+        100.097375
+      ],
+      "sampledBytes": 69054312
+    }
+  },
+  "validation": {
+    "nativeTests": 76,
+    "typecheckProjects": 4,
+    "browserChecks": 2,
+    "workshopIdentitiesUnchanged": 2130,
+    "exactKernelParity": {
+      "sha256": "6069297294d23da40d4019aa737bed63d1e6ab24c7b5ddf5382d33b45c3383b2",
+      "fixtures": [
+        "clear",
+        "jam"
+      ],
+      "ticksPerFixture": 900,
+      "checkpointsPerFixture": 30,
+      "description": "Source-substituted independent esbuild Node bundles of baseline/current. Fixed tick/input schedule with delayed delivery and replay backlogs. Authority numerical states/contact graphs and predictor entity/diagnostic records match exactly at all checkpoints; random UUID and tag sets omitted."
+    },
+    "health": "pass; two source baselines tightened",
+    "build": "pass; rebuilt final source before browser/device checks",
+    "streamingReadiness": "pass",
+    "phoneDoctorAfterCleanup": "pass"
+  },
+  "limits": [
+    "Allocation samples are estimates of collected and retained JS allocations, not leak measurements or direct GC-time evidence.",
+    "Whole-run allocation and cadence effects must be read from final runs; the isolated restore percentage does not apply to the whole game.",
+    "The historical untraced startup/late intervals are not retrospectively attributed or claimed fixed."
+  ],
+  "conclusions": [
+    "Startup profiling identifies first-use client physics/collision compilation in one early callback, without overlapping GC. Unprofiled historical pauses remain unassigned. The lab clock reset and idle authority warmup are not warm active prediction.",
+    "Position-only bounded history and per-scene immediate setter/readback vectors preserve ownership and exact simulation/replay results. Full numerical state reuse was rejected for its CPU regression.",
+    "Equal-work isolated Node restore allocation falls about 29%, while ordinary CPU medians are effectively unchanged. This percentage does not apply to total game allocation or physical-phone CPU.",
+    "Phone sampled allocation varies across fresh pages. Observed means are lower but no reliable whole-game percentage is established; client replay-step count is not fixed.",
+    "Ordinary cadence does not improve overall and startup updates remain. Clear misses one interval per run in both lanes; jam misses 0/2 before and 1/1 after. No claim of zero GC, universal hitch-free driving or a startup fix."
+  ],
+  "next": "Add cumulative client prediction/replay-step and body-read counts to driving reports, then compare remaining presentation/decal churn at equal work."
+}

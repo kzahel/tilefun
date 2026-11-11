@@ -19,6 +19,7 @@ import { interpolateHeading } from "../rendering/PresentationTimeline.js";
 import type { Movement } from "../shared/Movement.js";
 import type { World } from "../world/World.js";
 import { predictionGeometry } from "./PredictionGeometry.js";
+import { PredictionHistory } from "./PredictionHistory.js";
 import {
   CoSeats,
   hasMovement,
@@ -163,7 +164,7 @@ export class PlayerPredictor {
   private replay: Replay | undefined;
   private status: PredictionRecoveryDiagnostics["status"] = "waiting";
   private lastReplaySteps = 0;
-  private stateHistory = new Map<number, Entity>();
+  private readonly stateHistory = new PredictionHistory(MAX_HISTORY);
   private geometry: PhysicsGeometry | undefined;
   private geometryWorld: World | undefined;
   private geometryProps: readonly Prop[] | undefined;
@@ -391,9 +392,8 @@ export class PlayerPredictor {
     }
     const before = clone(this.predicted),
       beforePhysicsTick = this.publishedPhysicsTick ?? state.tick,
-      overdue = this.inputHistory.some((input) => input.tick <= this.appliedInputTick),
-      past = this.stateHistory.get(state.tick);
-    const pastError = past ? distance(past, request.player) : undefined;
+      overdue = this.inputHistory.some((input) => input.tick <= this.appliedInputTick);
+    const pastError = this.stateHistory.distance(state.tick, request.player);
     this.bindGeometry(request.world, request.props);
     this.bodies = new Map(request.entities.map((e) => [e.id, e]));
     const kinds = new Map(state.bodies.map((b) => [b.id, b.kind]));
@@ -650,13 +650,7 @@ export class PlayerPredictor {
         [...touching].find((id) => id !== root && id !== this.predicted?.id) ?? root;
     }
     this.correctionMembers = touching;
-    if (this.scene) {
-      this.stateHistory.set(this.scene.physicsTick, clone(this.predicted));
-      while (this.stateHistory.size > MAX_HISTORY) {
-        const first = this.stateHistory.keys().next().value;
-        if (first !== undefined) this.stateHistory.delete(first);
-      }
-    }
+    if (this.scene) this.stateHistory.remember(this.scene.physicsTick, this.predicted);
   }
   update(
     _dt: number,

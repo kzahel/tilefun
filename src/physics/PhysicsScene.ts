@@ -47,6 +47,7 @@ export interface PhysicsGeometry extends CollisionGeometrySource {
 }
 export type { PhysicsBodyKind, PhysicsBodyState, PhysicsState } from "./PhysicsState.js";
 
+import { PhysicsRestore } from "./PhysicsRestore.js";
 import type {
   MotionIntent,
   PhysicsBodyKind,
@@ -92,6 +93,8 @@ export class PhysicsScene {
   private readonly sections = new Map<string, Section>();
   private readonly couplings = new VehicleCouplings();
   private readonly wheelGrid = new WheelGrid();
+  private readonly restorer = new PhysicsRestore();
+  private readonly readVector = { x: 0, y: 0, z: 0 };
   /** The static geometry was rebuilt for the step in progress. */
   private reshaped = false;
   /** Sleeping bodies about to be landed on (see `meetBody`). */
@@ -553,7 +556,7 @@ export class PhysicsScene {
       q = entry.body.rotation();
     const state = entry.state;
     const rotation = worldRotation(q);
-    const center = rotateBodyVector(rotation, 0, 0, entry.halfY);
+    const center = rotateBodyVector(rotation, 0, 0, entry.halfY, this.readVector);
     if (entry.kind === "vehicle") {
       state.sleeping = asleep;
       state.prevRotation = state.rotation ?? rotation;
@@ -572,7 +575,7 @@ export class PhysicsScene {
     state.vx = v.x * SCALE;
     state.vy = v.z * SCALE;
     state.vz = v.y * SCALE;
-    const forward = rotateBodyVector(rotation, 1, 0, 0);
+    const forward = rotateBodyVector(rotation, 1, 0, 0, this.readVector);
     if (Math.hypot(forward.x, forward.y) > 0.001) state.heading = Math.atan2(forward.y, forward.x);
     state.grounded = isTrain(entry.entity) || entry.kind === "fixed" || (asleep && state.grounded);
     if (!asleep) delete state.supportId;
@@ -807,6 +810,8 @@ export class PhysicsScene {
     return entry?.entity === entity && entry.syncPass === pass;
   }
 
+  /** Borrowed cached numbers, valid until the next scene operation. Use snapshot
+   * or snapshotAround for independently retained state. */
   bodyState(id: number): Readonly<PhysicsBodyState> | undefined {
     return this.bodies.get(id)?.state;
   }
@@ -855,48 +860,7 @@ export class PhysicsScene {
       const entry = this.bodies.get(state.id);
       if (!entry || entry.kind !== state.kind)
         throw Error(`Missing or incompatible physics body ${state.id} during restore`);
-      const rotation = state.rotation ?? yawRotation(state.heading);
-      const center = rotateBodyVector(rotation, 0, 0, entry.halfY);
-      entry.body.setTranslation(
-        {
-          x: state.x / SCALE + entry.offsetX + center.x - this.origin.x,
-          y: state.z / SCALE + center.z,
-          z: state.y / SCALE + entry.offsetY + center.y - this.origin.z,
-        },
-        true,
-      );
-      entry.body.setLinvel({ x: state.vx / SCALE, y: state.vz / SCALE, z: state.vy / SCALE }, true);
-      entry.body.setRotation(rapierRotation(rotation), true);
-      const [ax, ay, az] = state.angularVelocity ?? [0, 0, 0];
-      entry.body.setAngvel({ x: -ax, y: -az, z: -ay }, true);
-      if (state.sleeping) entry.body.sleep();
-      entry.state = { ...state };
-      entry.rested = 0;
-      entry.dormant = entry.centred = entry.unmoved = entry.held = false;
-      entry.touching.length = 0;
-      entry.bed?.publish(entry.entity, entry.state, entry.collider);
-      // Publish state and contact membership supplied by the same snapshot.
-      entry.entity.prevPosition = { wx: state.prevX, wy: state.prevY };
-      entry.entity.prevWz = state.prevZ;
-      if (entry.kind === "vehicle") {
-        entry.entity.bodyRotation = state.rotation ?? rotation;
-        entry.entity.prevBodyRotation = state.prevRotation ?? rotation;
-        entry.entity.bodyAngularVelocity = state.angularVelocity ?? [0, 0, 0];
-        entry.entity.vehicleHeading = state.heading;
-        entry.entity.prevVehicleHeading = state.prevHeading;
-      }
-      entry.entity.position.wx = state.x;
-      entry.entity.position.wy = state.y;
-      entry.entity.wz = state.z;
-      entry.entity.groundZ = state.groundZ;
-      entry.entity.jumpZ = Math.max(0, state.z - state.groundZ);
-      entry.entity.jumpInputState = state.jumpHeld ? 3 : 0;
-      if (entry.entity.velocity) {
-        entry.entity.velocity.vx = state.vx;
-        entry.entity.velocity.vy = state.vy;
-      }
-      if (state.grounded) delete entry.entity.jumpVZ;
-      else entry.entity.jumpVZ = state.vz;
+      this.restorer.body(entry, state, this.origin);
     }
     for (const [a, b] of snapshot.contacts) {
       if (!this.bodies.has(a) || !this.bodies.has(b) || a === b)

@@ -68,9 +68,9 @@
       "overLimit": 0
     },
     "src/client/PlayerPredictor.ts": {
-      "lines": 992,
+      "lines": 986,
       "worst": 45,
-      "overLimit": 4
+      "overLimit": 3
     },
     "src/editor/collectEditorOverlay.ts": {
       "lines": 294,
@@ -373,9 +373,9 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 917,
+      "lines": 881,
       "worst": 65,
-      "overLimit": 4
+      "overLimit": 3
     },
     "src/physics/rapier/ClippedTerrain.ts": {
       "lines": 75,

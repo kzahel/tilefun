@@ -1,5 +1,15 @@
 # Player prediction and moving contacts
 
+[242](../tactical/242-startup-prediction-and-restore-churn.md) bounds past-tick
+agreement history to 120 recycled position triples instead of whole entity
+clones. It preserves replacement/insertion order and clears on the same resets.
+Physics restore and readback reuse scene-owned temporary coordinate vectors;
+Rapier setters copy their numbers immediately. Numerical packet/replay records,
+immutable quaternion arrays and published entity components retain their existing
+ownership; none retains the temporary vectors.
+Whole numerical-record reuse was rejected after measuring slower restore CPU.
+Game and lab consumers share this code; solver arithmetic and timing are unchanged.
+
 [238](../tactical/238-allocation-churn-and-regional-planning.md) reuses chassis
 vectors and wheel-impulse records in the shared authority/prediction kernel.
 `VehicleChassis.prepare` results are borrowed until the next prepare on that
