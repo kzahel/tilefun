@@ -98,7 +98,12 @@ let server, browser, page, testOrigin;
 async function samplePage({ seconds, measureFinish = true }) {
   const game = document.querySelector("#game").__game;
   const surface = game.renderer.surface;
-  const gl = surface?.renderer?.getContext?.();
+  // With `--query=view=fps` play is drawn by the first-person view's own WebGL
+  // context: GPU time, the finish window and draw calls are measured there.
+  const firstPerson = game.firstPerson?.drawing
+    ? document.querySelector('canvas[data-view="first-person"]')?.getContext("webgl2")
+    : null;
+  const gl = firstPerson ?? surface?.renderer?.getContext?.();
   const timer = gl?.getExtension("EXT_disjoint_timer_query_webgl2") ?? null;
   const callbacks = game.loop.callbacks,
     render = callbacks.render,
@@ -206,9 +211,12 @@ async function samplePage({ seconds, measureFinish = true }) {
     }
     submits.push(submitMs);
     scene.push(sceneMs);
+    if (firstPerson) viewCalls.push(game.firstPerson.viewStats?.calls ?? 0);
   };
   const stats = surface?.stats;
   const draws0 = stats?.drawCalls ?? 0;
+  const viewCalls = [];
+  const sunRedraws0 = firstPerson ? (game.firstPerson.viewStats?.sunRedraws ?? 0) : 0;
   let frames;
   const finish = [];
   try {
@@ -225,7 +233,15 @@ async function samplePage({ seconds, measureFinish = true }) {
       totalMiB: Math.round((uploads.reduce((a, b) => a + b, 0) / 1024) * 10) / 10,
     };
     for (const q of pending) gl.deleteQuery(q);
-    const draws = stats ? (stats.drawCalls - draws0) / Math.max(1, renders.length) : null;
+    // Shadow-map redraws inside the cadence window (chunk changes and map steps).
+    const sunRedraws = firstPerson
+      ? (game.firstPerson.viewStats?.sunRedraws ?? 0) - sunRedraws0
+      : undefined;
+    const draws = firstPerson
+      ? viewCalls.reduce((a, b) => a + b, 0) / Math.max(1, viewCalls.length)
+      : stats
+        ? (stats.drawCalls - draws0) / Math.max(1, renders.length)
+        : null;
     // Separate window: blocking on the GPU distorts cadence, so it never shares
     // samples with the frame measurements above.
     if (measureFinish) {
@@ -257,6 +273,7 @@ async function samplePage({ seconds, measureFinish = true }) {
       renderFinishMs: finish.length ? stat(finish) : null,
       drawCallsPerFrame: draws === null ? null : Math.round(draws * 10) / 10,
       entities: entities.length,
+      firstPerson: firstPerson ? { ...game.firstPerson.viewStats, sunRedraws } : undefined,
       workerTickMs: tick
         ? { p50: Math.round(tick.p50Ms * 100) / 100, p95: Math.round(tick.p95Ms * 100) / 100 }
         : null,
@@ -621,7 +638,11 @@ try {
         zoom,
       );
       await page.waitForFunction(
-        (z) => document.querySelector("#game").__game.camera.zoom === z,
+        // First person lowers the hidden fixed camera's zoom to its view distance.
+        (z) => {
+          const g = document.querySelector("#game").__game;
+          return g.camera.zoom === z || (g.firstPerson?.drawing && g.camera.zoom < z);
+        },
         zoom,
       );
       // Terrain preparation and caches settle; a wide overview takes a while.

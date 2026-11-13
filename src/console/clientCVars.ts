@@ -20,6 +20,7 @@ export interface ClientCVars {
   cl_verticalfollow: CVar<boolean>;
   r_show3d: CVar<boolean>;
   r_firstperson: CVar<boolean>;
+  r_fpshadows: CVar<boolean>;
 }
 
 export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
@@ -185,6 +186,14 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "r",
   });
 
+  const r_fpshadows = engine.cvars.register<boolean>({
+    name: "r_fpshadows",
+    description: "Sun and contact shadows in the first-person view (?fpshadows=0 disables)",
+    type: "boolean",
+    defaultValue: true,
+    category: "r",
+  });
+
   return {
     r_showbboxes,
     r_showchunks,
@@ -204,5 +213,6 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     cl_verticalfollow,
     r_show3d,
     r_firstperson,
+    r_fpshadows,
   };
 }

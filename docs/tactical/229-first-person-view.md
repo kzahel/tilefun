@@ -192,6 +192,10 @@ A follow-up pass in the same session confirmed all nine fixes: ACCEPT.
 
 ## Known limits
 
+[247](247-first-person-shadows-and-walls.md) (2026-11-13) added sun and contact
+shadows, artwork on every building wall and forest rows as cards; its own limits
+and the recommended direction are recorded there. The list below is as of 229.
+
 - Fixed-view artwork seen from new angles: sprites show their top-down 3/4 drawing,
   and projected faces assume the art matches its collider.
 - Terrain ignores authored excavations (garage ramps below ground), and cliff walls

@@ -76,76 +76,116 @@ export function actorBillboard(
   };
 }
 
-/** Camera-facing upright quads for one texture, refilled every frame. */
+/** Vertices and indices per card: bottom-left, bottom-right, top-right, top-left. */
+const CARD_INDICES = [0, 1, 2, 0, 2, 3] as const;
+
+/**
+ * Cards as shader-expanded quads. Every vertex carries the card's foot centre, its
+ * corner offset (across, up) and its UV; the vertex shader places it along one
+ * shared horizontal axis. Turning the camera therefore changes a uniform, not
+ * vertex data, and the same cards can be drawn facing the sun for its shadow map.
+ */
+export class CardArrays {
+  centres: Float32Array;
+  corners: Float32Array;
+  uvs: Float32Array;
+  count = 0;
+
+  constructor(capacity: number) {
+    this.centres = new Float32Array(capacity * 12);
+    this.corners = new Float32Array(capacity * 8);
+    this.uvs = new Float32Array(capacity * 8);
+  }
+
+  get capacity(): number {
+    return this.corners.length / 8;
+  }
+
+  push(b: Billboard): void {
+    const { centres, corners, uvs } = this;
+    const half = b.width / 2;
+    const [u0, v0, u1, v1] = b.uv;
+    let p = this.count * 12,
+      c = this.count * 8;
+    for (let i = 0; i < 4; i++) {
+      centres[p++] = b.x;
+      centres[p++] = b.y;
+      centres[p++] = b.z;
+      const right = i === 1 || i === 2,
+        top = i >= 2;
+      corners[c] = right ? half : -half;
+      corners[c + 1] = top ? b.height : 0;
+      uvs[c] = right ? u1 : u0;
+      uvs[c + 1] = top ? v0 : v1;
+      c += 2;
+    }
+    this.count++;
+  }
+
+  /** Copies another set's cards after this one's; the capacity must already fit. */
+  append(other: CardArrays): void {
+    this.centres.set(other.centres.subarray(0, other.count * 12), this.count * 12);
+    this.corners.set(other.corners.subarray(0, other.count * 8), this.count * 8);
+    this.uvs.set(other.uvs.subarray(0, other.count * 8), this.count * 8);
+    this.count += other.count;
+  }
+}
+
+function cardGeometry(arrays: CardArrays, usage: THREE.Usage): THREE.BufferGeometry {
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute("position", new THREE.BufferAttribute(arrays.centres, 3).setUsage(usage));
+  geometry.setAttribute("corner", new THREE.BufferAttribute(arrays.corners, 2).setUsage(usage));
+  geometry.setAttribute("uv", new THREE.BufferAttribute(arrays.uvs, 2).setUsage(usage));
+  const capacity = arrays.capacity;
+  const index =
+    capacity * 4 > 65535 ? new Uint32Array(capacity * 6) : new Uint16Array(capacity * 6);
+  for (let card = 0; card < capacity; card++)
+    for (let i = 0; i < 6; i++) index[card * 6 + i] = card * 4 + (CARD_INDICES[i] ?? 0);
+  geometry.setIndex(new THREE.BufferAttribute(index, 1));
+  geometry.setDrawRange(0, arrays.count * 6);
+  return geometry;
+}
+
+/** Builds the material for one texture's cards; the view supplies shading. */
+export type CardMaterial = (texture: THREE.Texture) => THREE.Material;
+
+/** Moving cards for one texture, refilled every frame. */
 class BillboardBatch {
   readonly mesh: THREE.Mesh;
-  private positions = new Float32Array(0);
-  private uvs = new Float32Array(0);
-  private count = 0;
+  private arrays = new CardArrays(0);
   idleFrames = 0;
 
-  constructor(readonly material: THREE.MeshBasicMaterial) {
+  constructor(readonly material: THREE.Material) {
     this.mesh = new THREE.Mesh(new THREE.BufferGeometry(), material);
     this.mesh.frustumCulled = false;
   }
 
   begin(): void {
-    this.count = 0;
+    this.arrays.count = 0;
   }
 
-  push(b: Billboard, right: { x: number; y: number }): void {
-    if (this.count * 18 >= this.positions.length) this.grow();
-    const hx = (right.x * b.width) / 2,
-      hy = (right.y * b.width) / 2;
-    const [u0, v0, u1, v1] = b.uv;
-    const top = b.z + b.height;
-    // Bottom-left, bottom-right, top-right / bottom-left, top-right, top-left.
-    const corners = [
-      [b.x - hx, b.y - hy, b.z, u0, v1],
-      [b.x + hx, b.y + hy, b.z, u1, v1],
-      [b.x + hx, b.y + hy, top, u1, v0],
-      [b.x - hx, b.y - hy, b.z, u0, v1],
-      [b.x + hx, b.y + hy, top, u1, v0],
-      [b.x - hx, b.y - hy, top, u0, v0],
-    ] as const;
-    let p = this.count * 18,
-      t = this.count * 12;
-    for (const c of corners) {
-      this.positions[p++] = c[0];
-      this.positions[p++] = c[1];
-      this.positions[p++] = c[2];
-      this.uvs[t++] = c[3];
-      this.uvs[t++] = c[4];
-    }
-    this.count++;
+  push(b: Billboard): void {
+    if (this.arrays.count >= this.arrays.capacity) this.grow();
+    this.arrays.push(b);
   }
 
   end(): void {
-    this.mesh.visible = this.count > 0;
-    this.idleFrames = this.count ? 0 : this.idleFrames + 1;
-    if (!this.count) return;
+    const count = this.arrays.count;
+    this.mesh.visible = count > 0;
+    this.idleFrames = count ? 0 : this.idleFrames + 1;
+    if (!count) return;
     const geometry = this.mesh.geometry;
-    (geometry.getAttribute("position") as THREE.BufferAttribute).needsUpdate = true;
-    (geometry.getAttribute("uv") as THREE.BufferAttribute).needsUpdate = true;
-    geometry.setDrawRange(0, this.count * 6);
+    for (const name of ["position", "corner", "uv"])
+      (geometry.getAttribute(name) as THREE.BufferAttribute).needsUpdate = true;
+    geometry.setDrawRange(0, count * 6);
   }
 
   private grow(): void {
-    const quads = Math.max(64, (this.positions.length / 18) * 2);
-    const positions = new Float32Array(quads * 18);
-    const uvs = new Float32Array(quads * 12);
-    positions.set(this.positions);
-    uvs.set(this.uvs);
-    this.positions = positions;
-    this.uvs = uvs;
-    const geometry = new THREE.BufferGeometry();
-    geometry.setAttribute(
-      "position",
-      new THREE.BufferAttribute(positions, 3).setUsage(THREE.DynamicDrawUsage),
-    );
-    geometry.setAttribute("uv", new THREE.BufferAttribute(uvs, 2).setUsage(THREE.DynamicDrawUsage));
+    const grown = new CardArrays(Math.max(64, this.arrays.capacity * 2));
+    grown.append(this.arrays);
+    this.arrays = grown;
     this.mesh.geometry.dispose();
-    this.mesh.geometry = geometry;
+    this.mesh.geometry = cardGeometry(grown, THREE.DynamicDrawUsage);
   }
 
   dispose(): void {
@@ -159,18 +199,19 @@ class BillboardBatch {
 const IDLE_FRAMES = 600;
 
 /**
- * One alpha-tested batch per texture, so every billboard sharing a sheet is a
- * single draw. All quads face the camera plane (Doom/Build style).
+ * Moving actors: one alpha-tested batch per texture, so every billboard sharing a
+ * sheet is a single draw. All quads face the camera plane (Doom/Build style).
  */
 export class BillboardBatches {
   count = 0;
   private readonly batches = new Map<THREE.Texture, BillboardBatch>();
-  private right = { x: 1, y: 0 };
 
-  constructor(private readonly parent: THREE.Object3D) {}
+  constructor(
+    private readonly parent: THREE.Object3D,
+    private readonly material: CardMaterial,
+  ) {}
 
-  begin(right: { x: number; y: number }): void {
-    this.right = right;
+  begin(): void {
     this.count = 0;
     for (const batch of this.batches.values()) batch.begin();
   }
@@ -178,17 +219,11 @@ export class BillboardBatches {
   push(billboard: Billboard): void {
     let batch = this.batches.get(billboard.texture);
     if (!batch) {
-      batch = new BillboardBatch(
-        new THREE.MeshBasicMaterial({
-          map: billboard.texture,
-          alphaTest: 0.5,
-          side: THREE.DoubleSide,
-        }),
-      );
+      batch = new BillboardBatch(this.material(billboard.texture));
       this.batches.set(billboard.texture, batch);
       this.parent.add(batch.mesh);
     }
-    batch.push(billboard, this.right);
+    batch.push(billboard);
     this.count++;
   }
 
@@ -205,6 +240,119 @@ export class BillboardBatches {
   dispose(): void {
     for (const batch of this.batches.values()) batch.dispose();
     this.batches.clear();
+  }
+}
+
+interface StaticBatch {
+  readonly mesh: THREE.Mesh;
+  /** The same cards facing the sun, drawn only into its shadow map. */
+  readonly caster: THREE.Mesh | undefined;
+  dirty: boolean;
+}
+
+/**
+ * Standing props (trees, posts, signs, forest rows): each chunk's cards are built
+ * once, and all resident chunks merge into one mesh per texture. Nothing is
+ * written per frame; a merged mesh is rebuilt only when one of its chunks changes.
+ */
+export class StaticCards {
+  count = 0;
+  private readonly chunks = new Map<string, Map<THREE.Texture, CardArrays>>();
+  private readonly batches = new Map<THREE.Texture, StaticBatch>();
+
+  /** `casters` receives the sun-facing copies when `casterMaterial` is given. */
+  constructor(
+    private readonly parent: THREE.Object3D,
+    private readonly material: CardMaterial,
+    private readonly casters?: THREE.Object3D,
+    private readonly casterMaterial?: CardMaterial,
+  ) {}
+
+  /** Replace one chunk's cards. */
+  set(key: string, cards: readonly Billboard[]): void {
+    this.delete(key);
+    if (!cards.length) return;
+    const counts = new Map<THREE.Texture, number>();
+    for (const card of cards) counts.set(card.texture, (counts.get(card.texture) ?? 0) + 1);
+    const byTexture = new Map<THREE.Texture, CardArrays>();
+    for (const [texture, count] of counts) byTexture.set(texture, new CardArrays(count));
+    for (const card of cards) byTexture.get(card.texture)?.push(card);
+    this.chunks.set(key, byTexture);
+    for (const texture of byTexture.keys()) this.touch(texture);
+  }
+
+  delete(key: string): void {
+    const previous = this.chunks.get(key);
+    if (!previous) return;
+    this.chunks.delete(key);
+    for (const texture of previous.keys()) this.touch(texture);
+  }
+
+  private touch(texture: THREE.Texture): void {
+    let batch = this.batches.get(texture);
+    if (!batch) {
+      const mesh = new THREE.Mesh(new THREE.BufferGeometry(), this.material(texture));
+      mesh.frustumCulled = false;
+      this.parent.add(mesh);
+      let caster: THREE.Mesh | undefined;
+      if (this.casters && this.casterMaterial) {
+        caster = new THREE.Mesh(mesh.geometry, this.casterMaterial(texture));
+        caster.frustumCulled = false;
+        this.casters.add(caster);
+      }
+      batch = { mesh, caster, dirty: true };
+      this.batches.set(texture, batch);
+    }
+    batch.dirty = true;
+  }
+
+  /** Rebuild the merged meshes whose chunks changed; true when any did. */
+  flush(): boolean {
+    let changed = false;
+    for (const [texture, batch] of this.batches) {
+      if (!batch.dirty) continue;
+      batch.dirty = false;
+      changed = true;
+      let total = 0;
+      for (const chunk of this.chunks.values()) total += chunk.get(texture)?.count ?? 0;
+      batch.mesh.geometry.dispose();
+      if (!total) {
+        this.release(batch);
+        this.batches.delete(texture);
+        continue;
+      }
+      const merged = new CardArrays(total);
+      for (const chunk of this.chunks.values()) {
+        const part = chunk.get(texture);
+        if (part) merged.append(part);
+      }
+      batch.mesh.geometry = cardGeometry(merged, THREE.StaticDrawUsage);
+      if (batch.caster) batch.caster.geometry = batch.mesh.geometry;
+    }
+    if (changed) {
+      this.count = 0;
+      for (const chunk of this.chunks.values())
+        for (const part of chunk.values()) this.count += part.count;
+    }
+    return changed;
+  }
+
+  private release(batch: StaticBatch): void {
+    for (const mesh of [batch.mesh, batch.caster]) {
+      if (!mesh) continue;
+      (mesh.material as THREE.Material).dispose();
+      mesh.removeFromParent();
+    }
+  }
+
+  dispose(): void {
+    for (const batch of this.batches.values()) {
+      batch.mesh.geometry.dispose();
+      this.release(batch);
+    }
+    this.batches.clear();
+    this.chunks.clear();
+    this.count = 0;
   }
 }
 

@@ -76,7 +76,9 @@ export class FirstPersonRoomScene {
   }
 
   floorFaces(): TexturedTriangles {
-    return roomFloorQuad(this.interior.map);
+    const quad = roomFloorQuad(this.interior.map);
+    // Room art is unshaded: white vertex colours.
+    return { ...quad, colors: quad.positions.map(() => 1) };
   }
 
   isShell(prop: Prop): boolean {
@@ -172,7 +174,7 @@ export class FirstPersonRoomScene {
     elevation: number,
     facesFor: (image: PropImage | undefined) => TexturedTriangles | undefined,
   ): boolean {
-    let quad: TexturedTriangles | undefined;
+    let quad: Pick<TexturedTriangles, "positions" | "uvs"> | undefined;
     if (furniture.floor) quad = floorDecalQuad(prop, furniture.frame, elevation + 0.25);
     else if (furniture.wall && this.shell) {
       const painted = this.measure(this.shell, elevation).painted;
@@ -183,6 +185,7 @@ export class FirstPersonRoomScene {
     const faces = facesFor(furniture.image(false));
     faces?.positions.push(...quad.positions);
     faces?.uvs.push(...quad.uvs);
+    faces?.colors.push(...quad.positions.map(() => 1));
     return true;
   }
 

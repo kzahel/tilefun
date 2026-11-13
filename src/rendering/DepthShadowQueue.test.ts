@@ -18,6 +18,7 @@ const shape = (casterId?: number): GpuShadow => ({
   vy: 4,
   plane: [0, 0, 4],
   band: 8,
+  support: 0,
   mask: casterId === undefined ? "oval" : "vehicle",
   ...(casterId === undefined ? {} : { casterId }),
 });

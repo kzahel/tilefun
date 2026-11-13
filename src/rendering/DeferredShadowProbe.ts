@@ -24,6 +24,7 @@ function probeOval(x: number, y: number, rx: number, ry: number, supportZ: numbe
     vy: ry,
     plane: [0, 0, supportZ + slack],
     band: slack * 2,
+    support: supportZ,
     mask: "oval",
   };
 }

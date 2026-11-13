@@ -59,4 +59,8 @@ export function registerClientConsole(
   });
   if (new URLSearchParams(location.search).get("view") === "fps")
     clientCVars.r_firstperson.set(true);
+  clientCVars.r_fpshadows.onChange((val) => {
+    if (gc.firstPerson) gc.firstPerson.shadows = val;
+  });
+  if (gc.firstPerson && !gc.firstPerson.shadows) clientCVars.r_fpshadows.set(false);
 }

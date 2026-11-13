@@ -17,7 +17,13 @@ export interface GpuShadow {
   /** Upper limit for receivers, z = a·x + b·y + c. */
   plane: readonly [number, number, number];
   band: number;
+  /** Height of the surface under the centre, as resolved by the collector. Views
+   * without a depth pass (first person) lay the shadow on it. */
+  support: number;
   mask: "oval" | "vehicle";
+  /** An upright actor's oval. Its depth is foreshortened for the fixed view;
+   * views at ground level (first person) draw it round, `ux` in radius. */
+  upright?: true;
   /** A mesh body's shadow: drawn only when that body was drawn this frame
    * (sprite fallbacks already contain a baked shadow). */
   casterId?: number;
@@ -40,11 +46,13 @@ export function ovalShadow(e: Entity, x: number, y: number, supportZ: number): G
     vy: ry,
     plane: [0, 0, supportZ + slack],
     band: slack * 2,
+    support: supportZ,
     mask: "oval",
+    upright: true,
   };
 }
 
-const VEHICLE_SLACK = 4;
+export const VEHICLE_SLACK = 4;
 /** A vehicle's (or boat's or train's) oriented footprint under its body. The limit is the body's
  * underside plane, so its own roof and bonnet never receive the shadow; the
  * band reaches down to the surface under its centre (a jump or a drop). */
@@ -80,6 +88,7 @@ export function vehicleShadow(
     vy,
     plane: [a, b, z - a * x - b * y + VEHICLE_SLACK],
     band: VEHICLE_SLACK * 2 + Math.max(0, z - supportZ),
+    support: Math.min(supportZ, z),
     mask: body ? "vehicle" : "oval",
     ...(body ? { casterId: e.id } : {}),
   };

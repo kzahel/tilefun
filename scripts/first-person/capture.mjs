@@ -13,6 +13,7 @@ import { createServer } from "vite";
 const option = (name, fallback) =>
   process.argv.find((arg) => arg.startsWith(`--${name}=`))?.slice(name.length + 3) ?? fallback;
 const headed = process.argv.includes("--headed");
+class LooksOnly extends Error {}
 const temp = await mkdtemp(path.join(os.tmpdir(), "tilefun-first-person-"));
 const output = path.resolve(option("out", path.join(temp, "captures")));
 await mkdir(output, { recursive: true });
@@ -41,10 +42,15 @@ try {
   await page.goto(`${origin}/tools.html`);
   const arrival = await page.evaluate(async () => {
     const { createDescriptor } = await import("/tilefun/src/generation/GenerationDescriptor.ts");
-    return { x: 300, y: 519, generation: createDescriptor("regional", 2026) };
+    return { generation: createDescriptor("regional", 2026) };
   });
+  // --arrival=x,y picks the spot (tiles); the default is the render bench's city.
+  const [arrivalX, arrivalY] = option("arrival", "300,519").split(",").map(Number);
+  arrival.x = arrivalX;
+  arrival.y = arrivalY;
   await page.goto(
-    `${origin}/?nogamepad&generation=${encodeURIComponent(
+    // --query=a=b&c=d adds game URL parameters (e.g. fpshadows=0).
+    `${origin}/?nogamepad${option("query", "") ? `&${option("query", "")}` : ""}&generation=${encodeURIComponent(
       JSON.stringify(arrival.generation),
     )}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
   );
@@ -87,13 +93,33 @@ try {
     });
     report.shots.push({ name, file, ...state });
   };
+  // --lift=N raises the eye N world pixels (an overview of shadows and roofs).
+  await game(
+    `(() => { document.querySelector("#game").__game.firstPerson.lift = ${Number(option("lift", "0"))}; })()`,
+  );
   const headings = { north: -Math.PI / 2, east: 0, south: Math.PI / 2, west: Math.PI };
   for (const [name, yaw] of Object.entries(headings))
     await shoot(
       `fps-${name}`,
-      `(() => { const l = document.querySelector("#game").__game.firstPerson.look; l.yaw = ${yaw}; l.pitch = -0.08; })()`,
+      `(() => { const l = document.querySelector("#game").__game.firstPerson.look; l.yaw = ${yaw}; l.pitch = ${Number(option("pitch", "-0.08"))}; })()`,
     );
   report.viewStats = await game(() => document.querySelector("#game").__game.firstPerson.viewStats);
+  // Forest rows near the player, nearest first, for choosing an --arrival to look at.
+  report.forestRows = await game(() => {
+    const g = document.querySelector("#game").__game;
+    const p = g.stateView.playerEntity.position;
+    return g.stateView.props
+      .filter((prop) => prop.type.startsWith("pattern:forest-thicket-v1:"))
+      .map((prop) => ({
+        type: prop.type,
+        tile: [Math.round(prop.position.wx / 16), Math.round(prop.position.wy / 16)],
+        distance: Math.round(Math.hypot(prop.position.wx - p.wx, prop.position.wy - p.wy)),
+      }))
+      .sort((a, b) => a.distance - b.distance)
+      .slice(0, 6);
+  });
+  // --looks-only stops after the four headings (a quick look at one place).
+  if (process.argv.includes("--looks-only")) throw new LooksOnly();
   await shoot(
     "fixed-view",
     `document.querySelector("#game").__game.consoleEngine.cvars.get("r_firstperson").set(false)`,
@@ -160,6 +186,8 @@ try {
   await page.keyboard.press("Tab");
   await shoot("editor");
   report.editorHidesView = !report.shots.at(-1)?.viewShown;
+} catch (error) {
+  if (!(error instanceof LooksOnly)) throw error;
 } finally {
   await browser?.close();
   await server.close();

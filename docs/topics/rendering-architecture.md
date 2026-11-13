@@ -31,6 +31,19 @@ The integration glue is temporary; 226 owns the view/camera-policy contracts it 
 distance that sets the fog end and the hidden fixed camera's streamed area, and draw
 rooms from the fixed view's own room rasters (floor plane, painted wall heights,
 anchor-placed furniture, flat rugs).
+[247](../tactical/247-first-person-shadows-and-walls.md) gives that view shadows
+and fuller props without per-frame cost:
+- A sun shadow map of the static world only (`SunShadows`). It is the ground seen
+  along the sun's rays, one texel per world pixel, and is redrawn only when nearby
+  static content changes or the eye crosses a 128 px step.
+- Receivers are Three's built-in materials with their shaders edited by
+  `shadeMaterial`. New first-person materials must go through it to take shadows.
+- Contact shadows under moving bodies use the collector's `GpuShadow` shapes, as
+  the fixed view's depth pass does. `GpuShadow.support` carries the resolved
+  surface height for views without a depth pass.
+- Standing props (trees, posts, forest rows) are static merged card meshes; the
+  vertex shader turns them to the eye. Only moving actors are written per frame.
+- Building walls all wear the south-face artwork; forest rows stand as cards.
 
 [220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) projected
 vehicle shadows on the CPU (replaced by the GPU depth pass in 236, below). It cast
@@ -55,7 +68,8 @@ second path and no switch.
   the plain ground shadow for ovals.
 - Receivers serve the support point query and contact effects (particles,
   landing rings) only. Below 0.2× none are built.
-- The first-person view (229) is a separate renderer and draws no shadows.
+- The first-person view (229) is a separate renderer with its own shadows (247):
+  a cached sun map plus contact shadows from the same `GpuShadow` shapes.
 - Known differences from the deleted projection (ledges, crest seams, low ramp
   ends, tilted stacks) are listed in 236; the renderer lab's
   `probeDeferredShadows` compares the pass with a CPU oracle.

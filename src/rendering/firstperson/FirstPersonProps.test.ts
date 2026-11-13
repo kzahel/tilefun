@@ -1,12 +1,16 @@
 import { describe, expect, it } from "vitest";
 import type { Prop, PropCollider } from "../../entities/Prop.js";
+import { forestRowProp, forestRowType } from "../../patterns/ForestThicket.js";
 import {
   appendPropGeometry,
   blockingColliders,
   projectedUv,
   propForm,
   propImageFrame,
+  propSlices,
   propSolids,
+  propSurfaces,
+  surfaceUnder,
   unlimitedWallHeight,
 } from "./FirstPersonProps.js";
 import { TriangleWriter } from "./FirstPersonTerrain.js";
@@ -111,12 +115,63 @@ describe("first-person prop forms", () => {
     expect(projectedUv(building, frame, 0, 0, 400, -50)).toEqual([0, 1]);
   });
 
-  it("textures the faces the fixed view shows and colours the rest", () => {
+  it("wears the south face's artwork on every wall", () => {
     const flat = new TriangleWriter();
-    const textured = { positions: [] as number[], uvs: [] as number[] };
-    appendPropGeometry({ flat, textured }, prop({}, box(64, 32)), 0x808080, 0);
-    expect(textured.positions.length / 18).toBe(2); // top + south
-    expect(flat.vertexCount / 6).toBe(3); // north, east, west
+    const textured = { positions: [] as number[], uvs: [] as number[], colors: [] as number[] };
+    // A 64×32 footprint, 64 tall: artwork 64 wide and 96 tall (32 of roof, 64 of wall).
+    const building = prop({ spriteWidth: 64, spriteHeight: 96 }, box(64, 32, { zHeight: 64 }));
+    appendPropGeometry({ flat, textured }, building, 0x808080, 0);
+    expect(textured.positions.length / 18).toBe(5); // top, south, east, west, north
+    expect(flat.vertexCount).toBe(0);
+    const face = (index: number) => {
+      const vertices: { x: number; y: number; z: number; u: number; v: number; grey: number }[] =
+        [];
+      for (let i = index * 6; i < index * 6 + 6; i++)
+        vertices.push({
+          x: textured.positions[i * 3] ?? 0,
+          y: textured.positions[i * 3 + 1] ?? 0,
+          z: textured.positions[i * 3 + 2] ?? 0,
+          u: textured.uvs[i * 2] ?? 0,
+          v: textured.uvs[i * 2 + 1] ?? 0,
+          grey: textured.colors[i * 3] ?? 0,
+        });
+      return vertices;
+    };
+    const [, south, east, west, north] = [0, 1, 2, 3, 4].map(face);
+    // Walls show only the wall rows of the artwork (below the roof's 32 rows).
+    for (const wall of [south, east, west, north])
+      for (const p of wall ?? []) expect(p.v).toBeCloseTo(p.z === 0 ? 1 : 1 / 3);
+    // Side walls continue the south face around their south corner, pixel for pixel:
+    // the east wall starts at the artwork's right edge and runs back 32 px.
+    for (const p of east ?? []) expect(p.u).toBeCloseTo(p.y === 200 ? 1 : 0.5);
+    for (const p of west ?? []) expect(p.u).toBeCloseTo(p.y === 200 ? 0 : 0.5);
+    // The north wall repeats the south face unmirrored for a viewer facing it.
+    for (const p of north ?? []) expect(p.u).toBeCloseTo(p.x === 68 ? 1 : 0);
+    // Faces the sun never reaches are baked darker than those it lights.
+    expect(north?.[0]?.grey).toBeLessThan(west?.[0]?.grey ?? 0);
+    expect(west?.[0]?.grey).toBeLessThan(east?.[0]?.grey ?? 0);
+    expect(south?.[0]?.grey).toBe(1);
+    // A wall deeper than the picture is wide turns the picture round where it runs
+    // out, as separate strips: a UV never interpolates across a turn.
+    const deep = { positions: [] as number[], uvs: [] as number[], colors: [] as number[] };
+    const wing = prop({ spriteWidth: 32, spriteHeight: 160 }, box(32, 80, { zHeight: 64 }));
+    appendPropGeometry({ flat: new TriangleWriter(), textured: deep }, wing, 0x808080, 0);
+    // Top, south, east in three strips (32 + 32 + 16 px), west in three, north.
+    expect(deep.positions.length / 18).toBe(9);
+    const eastStrips = [2, 3, 4].map((strip) => {
+      const us = new Set<number>();
+      const ys = new Set<number>();
+      for (let i = strip * 6; i < strip * 6 + 6; i++) {
+        us.add(Math.round((deep.uvs[i * 2] ?? 0) * 100) / 100);
+        ys.add(deep.positions[i * 3 + 1] ?? 0);
+      }
+      return { us: [...us].sort(), ys: [...ys].sort((p, q) => p - q) };
+    });
+    expect(eastStrips).toEqual([
+      { us: [0, 1], ys: [168, 200] },
+      { us: [0, 1], ys: [136, 168] },
+      { us: [0.5, 1], ys: [120, 136] }, // turned round again at the far edge
+    ]);
     const plain = new TriangleWriter();
     appendPropGeometry({ flat: plain, textured: undefined }, prop({}, box(64, 32)), 0x808080, 0);
     expect(plain.vertexCount / 6).toBe(5);
@@ -124,7 +179,7 @@ describe("first-person prop forms", () => {
 
   it("dresses room walls on both sides and colours their ends per wall", () => {
     const flat = new TriangleWriter();
-    const textured = { positions: [] as number[], uvs: [] as number[] };
+    const textured = { positions: [] as number[], uvs: [] as number[], colors: [] as number[] };
     const wall = prop({}, null, [box(64, 16, { zHeight: 64 })]);
     const sides: number[] = [];
     appendPropGeometry({ flat, textured }, wall, 0x808080, 0, undefined, {
@@ -143,5 +198,45 @@ describe("first-person prop forms", () => {
     const colors = flat.finish().colors;
     expect(colors[0]).toBeGreaterThan(0);
     expect(colors[1]).toBe(0); // red, not the prop's grey
+  });
+
+  it("stands a forest row up as cards cut from its artwork", () => {
+    const row = forestRowProp(forestRowType(1, 2), 1000, 500);
+    if (!row) throw Error("missing forest row");
+    expect(propForm(row)).toBe("cards");
+    const slices = propSlices(row, (col, rowIndex) => ({ x: col * 16, y: rowIndex * 16 }));
+    // A 48 px cap, two 128 px repeats cut in half, and a 32 px cap.
+    expect(slices.map((s) => s.width)).toEqual([48, 64, 64, 64, 64, 32]);
+    // Side by side they cover the artwork exactly, left to right.
+    const frame = propImageFrame(row);
+    let edge = row.position.wx + frame.left;
+    for (const slice of slices) {
+      expect(slice.x - slice.width / 2).toBeCloseTo(edge);
+      edge += slice.width;
+    }
+    expect(edge).toBeCloseTo(row.position.wx + frame.left + frame.width);
+    // The two halves of a repeat read neighbouring halves of the same sheet frame.
+    expect(slices[2]?.sheetX).toBe((slices[1]?.sheetX ?? 0) + 64);
+    expect(slices[3]?.sheetX).toBe(slices[1]?.sheetX);
+    // Cards stand in the middle of the row's 48 px body; the shorter cap stands back.
+    expect(slices[1]?.y).toBe(500 - 24);
+    expect(slices[5]?.y).toBe(500 - 24 - 16);
+    expect(slices[5]?.height).toBe(96);
+  });
+
+  it("finds the deck or ramp under a body", () => {
+    const ramp = box(64, 32, {
+      passable: true,
+      surface: { id: "r", spaceId: "s", z: 0, riseX: 32, riseY: 0, thickness: 4, connectsTo: [] },
+    });
+    const [surface] = propSurfaces(prop({}, ramp));
+    if (!surface) throw Error("missing surface");
+    const middle = surfaceUnder(surface, 100, 190, 100);
+    expect(middle).toBeGreaterThan(0);
+    expect(middle).toBeLessThan(32);
+    // Above the body's feet, or beside the surface: not its support.
+    expect(surfaceUnder(surface, 100, 190, (middle ?? 0) - 1)).toBeUndefined();
+    expect(surfaceUnder(surface, 300, 190, 100)).toBeUndefined();
+    expect(propSurfaces(prop({}, box(64, 32)))).toHaveLength(0);
   });
 });

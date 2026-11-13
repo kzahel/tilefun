@@ -39,6 +39,10 @@ export class FirstPersonControl {
   readonly look: FirstPersonLook = { yaw: NORTH_YAW, pitch: 0 };
   /** Saved per player (Options); sets the fog end and the streamed area. */
   viewDistance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE;
+  /** Sun and contact shadows (247); `r_fpshadows` and `?fpshadows=0` set it. */
+  shadows = new URLSearchParams(location.search).get("fpshadows") !== "0";
+  /** Captures only: raises the eye by this many world pixels for an overview. */
+  lift = 0;
   /** View-owned presentation storage; first-person mesh poses never share the fixed view's. */
   readonly frame = new SceneFrame({
     allCars3d: new URLSearchParams(location.search).has("allcars3d"),

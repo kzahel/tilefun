@@ -1,39 +1,26 @@
 import * as THREE from "three";
 import { MODERN_INTERIORS_SHEET_KEY } from "../../assets/ModernInteriorsAtlasIndex.js";
 import type { Spritesheet } from "../../assets/Spritesheet.js";
-import { CHUNK_SIZE, ELEVATION_PX, TILE_SIZE } from "../../config/constants.js";
+import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
 import type { Prop } from "../../entities/Prop.js";
-import { vehiclePaint } from "../../traffic/VehiclePaint.js";
 import type { World } from "../../world/World.js";
-import { applyMeshInstance, loadAuthoredMesh } from "../AuthoredMeshPose.js";
-import { authoredVehicleForAsset } from "../AuthoredVehicleMeshes.js";
-import type { CarMeshAsset } from "../CarMeshAsset.js";
-import { ResourceSlot } from "../ResourceSlot.js";
 import type { SpriteItem } from "../SceneItem.js";
-import { VehiclePaintResources } from "../VehiclePaintResources.js";
-import {
-  actorBillboard,
-  artCard,
-  type Billboard,
-  BillboardBatches,
-  sheetUv,
-} from "./FirstPersonBillboards.js";
+import { actorBillboard, BillboardBatches, StaticCards } from "./FirstPersonBillboards.js";
 import {
   cameraRight,
   type FirstPersonEye,
   lookDirection,
   nextFogEnd,
 } from "./FirstPersonCamera.js";
-import { FirstPersonImages, type PropImage } from "./FirstPersonImages.js";
+import { FirstPersonImages } from "./FirstPersonImages.js";
 import { type FirstPersonInterior, INTERIOR_BACKGROUND } from "./FirstPersonInterior.js";
-import {
-  appendPropGeometry,
-  type PropGeometry,
-  propForm,
-  propImageFrame,
-} from "./FirstPersonProps.js";
+import { type SunReceiver, shadeMaterial } from "./FirstPersonMaterials.js";
+import { coloredMesh, disposeGroup, PropMeshes, texturedMesh } from "./FirstPersonPropMeshes.js";
+import { type PropSurface, surfaceUnder } from "./FirstPersonProps.js";
 import { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
-import { buildTerrainChunk, type ColoredTriangles, TriangleWriter } from "./FirstPersonTerrain.js";
+import { BlobShadows, SunShadows } from "./FirstPersonShadows.js";
+import { buildTerrainChunk } from "./FirstPersonTerrain.js";
+import { FirstPersonVehicles } from "./FirstPersonVehicles.js";
 
 export type FirstPersonWorld = Pick<World, "getChunkIfLoaded" | "getHeightAt">;
 type FirstPersonChunkSource = NonNullable<ReturnType<FirstPersonWorld["getChunkIfLoaded"]>>;
@@ -51,6 +38,8 @@ export interface FirstPersonFrame {
   readonly drawRadius: number;
   /** Set inside a room: its floor and walls replace outdoor ground, without fog. */
   readonly interior?: FirstPersonInterior | undefined;
+  /** Sun and contact shadows (247); on unless false. Rooms have none. */
+  readonly shadows?: boolean | undefined;
 }
 
 const SKY = 0x9fd3f0;
@@ -59,17 +48,20 @@ const CHUNK_BUILDS_PER_FRAME = 3;
 /** The fog never closes in nearer than this while chunks arrive. */
 const MIN_FOG_END = 96;
 
-type TexturedFaces = NonNullable<PropGeometry["textured"]>;
-
 interface TerrainEntry {
   readonly chunk: object;
   readonly key: string;
 }
 
 interface ChunkScene {
+  readonly cx: number;
+  readonly cy: number;
   terrain?: TerrainEntry & { mesh: THREE.Mesh };
-  props?: { group: THREE.Group; signature: string; billboards: Billboard[] };
+  props?: { group: THREE.Group; signature: string; surfaces: PropSurface[] };
 }
+
+/** One flat quad per tile: more triangles means cliff walls, which cast shadows. */
+const FLAT_CHUNK_VERTICES = CHUNK_SIZE * CHUNK_SIZE * 6;
 
 /** Ground rebuilds for a replaced chunk object as well as for edited content. */
 export function terrainStale(
@@ -102,41 +94,6 @@ export function chunksInReach(
   return wanted.sort((a, b) => a.distance - b.distance);
 }
 
-function coloredMesh(triangles: ColoredTriangles, material: THREE.Material): THREE.Mesh {
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.BufferAttribute(triangles.positions, 3));
-  geometry.setAttribute("color", new THREE.BufferAttribute(triangles.colors, 3));
-  geometry.computeBoundingSphere();
-  return new THREE.Mesh(geometry, material);
-}
-
-function texturedMesh(faces: TexturedFaces, material: THREE.Material): THREE.Mesh {
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute(
-    "position",
-    new THREE.BufferAttribute(new Float32Array(faces.positions), 3),
-  );
-  geometry.setAttribute("uv", new THREE.BufferAttribute(new Float32Array(faces.uvs), 2));
-  geometry.computeBoundingSphere();
-  return new THREE.Mesh(geometry, material);
-}
-
-function disposeGroup(group: THREE.Object3D): void {
-  group.traverse((node) => {
-    if (node instanceof THREE.Mesh) node.geometry.dispose();
-  });
-  group.removeFromParent();
-}
-
-function propElevation(prop: Prop, world: FirstPersonWorld): number {
-  return (
-    world.getHeightAt(
-      Math.floor(prop.position.wx / TILE_SIZE),
-      Math.floor(prop.position.wy / TILE_SIZE),
-    ) * ELEVATION_PX
-  );
-}
-
 /**
  * Experimental first-person world view (tactical 229). Flat-coloured terrain,
  * prop collision volumes wearing their projected fixed-view artwork, upright
@@ -148,23 +105,41 @@ function propElevation(prop: Prop, world: FirstPersonWorld): number {
  */
 export class FirstPersonView {
   readonly canvas: HTMLCanvasElement;
-  readonly stats = { chunks: 0, builds: 0, billboards: 0, cars: 0, calls: 0, fogEnd: 0 };
+  readonly stats = {
+    chunks: 0,
+    builds: 0,
+    /** Moving actor cards written this frame. */
+    billboards: 0,
+    /** Standing prop cards in the merged static meshes. */
+    cards: 0,
+    /** Contact shadows drawn this frame. */
+    blobs: 0,
+    /** Sun shadow map redraws since the view was created. */
+    sunRedraws: 0,
+    cars: 0,
+    calls: 0,
+    fogEnd: 0,
+  };
   private readonly renderer: THREE.WebGLRenderer;
   private readonly scene = new THREE.Scene();
   private readonly worldRoot = new THREE.Group();
-  private readonly carScene = new THREE.Scene();
-  private readonly carHolder = new THREE.Group();
   private readonly camera = new THREE.PerspectiveCamera(70, 1, 2, 4000);
   private readonly fog = new THREE.Fog(SKY, 200, 600);
-  private readonly flatMaterial = new THREE.MeshBasicMaterial({
-    vertexColors: true,
-    side: THREE.DoubleSide,
-  });
-  private readonly faceMaterials = new Map<THREE.Texture, THREE.MeshBasicMaterial>();
+  private readonly sun = new SunShadows();
+  /** Horizontal axis the cards are expanded along: the camera's right (game axes). */
+  private readonly cardRight = { value: new THREE.Vector2(1, 0) };
+  private readonly flatMaterial = this.lit(
+    new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide }),
+    "faces",
+  );
   private readonly billboards: BillboardBatches;
+  private readonly cards: StaticCards;
+  private readonly blobs: BlobShadows;
+  private readonly vehicles = new FirstPersonVehicles((material) => {
+    this.lit(material, "body");
+  });
+  private readonly propMeshes: PropMeshes;
   private readonly chunks = new Map<string, ChunkScene>();
-  private readonly vehicles = new Map<string, ResourceSlot<CarMeshAsset>>();
-  private readonly paints = new VehiclePaintResources();
   private readonly images: FirstPersonImages;
   private readonly observer: ResizeObserver;
   private world: FirstPersonWorld | null = null;
@@ -173,6 +148,8 @@ export class FirstPersonView {
   private propsByChunk = new Map<string, { props: Prop[]; signature: string }>();
   /** Fog end, pulled in while in-reach chunks are still arriving. */
   private fogEnd: number | undefined;
+  /** Every resident chunk's decks and ramps; rebuilt on demand after a chunk changes. */
+  private surfaces: PropSurface[] | null = null;
   private room: { scene: FirstPersonRoomScene; mesh: THREE.Mesh } | null = null;
   private disposed = false;
 
@@ -180,10 +157,10 @@ export class FirstPersonView {
     private readonly host: HTMLCanvasElement,
     private readonly sheets: ReadonlyMap<string, Spritesheet>,
   ) {
-    this.images = new FirstPersonImages(sheets, (texture) => {
-      this.faceMaterials.get(texture)?.dispose();
-      this.faceMaterials.delete(texture);
-    });
+    this.images = new FirstPersonImages(sheets, (texture) => this.propMeshes.dropMaterial(texture));
+    this.propMeshes = new PropMeshes(this.images, this.flatMaterial, (material) =>
+      this.lit(material, "faces"),
+    );
     this.canvas = document.createElement("canvas");
     this.canvas.dataset.view = "first-person";
     this.canvas.setAttribute("aria-hidden", "true");
@@ -200,16 +177,35 @@ export class FirstPersonView {
     this.worldRoot.scale.set(1, -1, 1);
     this.scene.add(this.worldRoot);
     this.scene.fog = this.fog;
-    this.billboards = new BillboardBatches(this.worldRoot);
-    const carRoot = new THREE.Group();
-    carRoot.scale.set(1, -1, 1);
-    carRoot.add(this.carHolder);
-    this.carScene.add(carRoot);
-    this.carScene.fog = this.fog;
+    const card = (receiver: SunReceiver) => (texture: THREE.Texture) =>
+      shadeMaterial(
+        new THREE.MeshBasicMaterial({ map: texture, alphaTest: 0.5, side: THREE.DoubleSide }),
+        { card: this.cardRight, sun: { uniforms: this.sun.uniforms, receiver } },
+      );
+    this.billboards = new BillboardBatches(this.worldRoot, card("body"));
+    this.cards = new StaticCards(this.worldRoot, card("card"), this.sun.cardRoot, (texture) =>
+      shadeMaterial(
+        new THREE.MeshBasicMaterial({
+          map: texture,
+          alphaTest: 0.5,
+          side: THREE.DoubleSide,
+          colorWrite: false,
+          fog: false,
+        }),
+        { card: this.sun.cardRight },
+      ),
+    );
+    this.blobs = new BlobShadows(this.worldRoot);
+    this.vehicles.fog = this.fog;
     this.camera.up.set(0, 0, 1);
     this.observer = new ResizeObserver(() => this.align());
     this.observer.observe(host);
     this.align();
+  }
+
+  /** Adds the sun's shadow to a material of the given receiver kind. */
+  private lit<T extends THREE.Material>(material: T, receiver: SunReceiver): T {
+    return shadeMaterial(material, { sun: { uniforms: this.sun.uniforms, receiver } });
   }
 
   set visible(value: boolean) {
@@ -231,16 +227,23 @@ export class FirstPersonView {
     this.syncRoom(frame.interior);
     if (frame.props !== this.propsSource) this.groupProps(frame.props);
     this.updateChunks(frame);
+    // Card changes come with their chunk's rebuild, which already told the sun.
+    this.cards.flush();
+    this.stats.cards = this.cards.count;
     this.placeCamera(frame.eye, frame.drawRadius);
-    this.paints.beginFrame();
-    const ready = new Set<string>();
-    for (const [assetId, slot] of this.vehicles) if (slot.state === "ready") ready.add(assetId);
-    const cars = this.fillBillboards(frame, ready);
+    const ready = this.vehicles.beginFrame();
+    // Rooms have contact shadows but no sun.
+    const shadows = frame.shadows !== false;
+    const cars = this.fillBillboards(frame, ready, shadows);
+    const fogEnd = this.fogEnd ?? frame.drawRadius;
+    this.sun.update(this.renderer, this.scene, frame.eye, fogEnd, shadows && !frame.interior);
+    this.stats.sunRedraws = this.sun.redraws;
     this.renderer.info.reset();
     this.renderer.clear();
     this.renderer.render(this.scene, this.camera);
     this.stats.cars = 0;
-    for (const item of cars) if (this.drawVehicle(item)) this.stats.cars++;
+    for (const item of cars)
+      if (this.vehicles.draw(this.renderer, this.camera, item)) this.stats.cars++;
     this.stats.calls = this.renderer.info.render.calls;
   }
 
@@ -273,7 +276,7 @@ export class FirstPersonView {
   }
 
   private dropChunks(): void {
-    for (const chunk of this.chunks.values()) this.dropChunk(chunk);
+    for (const [key, chunk] of this.chunks) this.dropChunk(key, chunk);
     this.chunks.clear();
   }
 
@@ -290,12 +293,12 @@ export class FirstPersonView {
       for (const chunk of this.chunks.values()) if (chunk.props) chunk.props.signature = "\0stale";
     } else this.dropChunks();
     this.disposeRoom();
-    this.scene.fog = this.carScene.fog = interior ? null : this.fog;
+    this.scene.fog = this.vehicles.fog = interior ? null : this.fog;
     this.renderer.setClearColor(interior ? INTERIOR_BACKGROUND : SKY, 1);
     if (!interior || !key) return;
     const scene = new FirstPersonRoomScene(interior, key, atlas);
     scene.adoptShell(this.propsSource);
-    const mesh = texturedMesh(scene.floorFaces(), this.faceMaterial(scene.floor));
+    const mesh = texturedMesh(scene.floorFaces(), this.propMeshes.faceMaterial(scene.floor));
     this.worldRoot.add(mesh);
     this.room = { scene, mesh };
   }
@@ -305,10 +308,8 @@ export class FirstPersonView {
     if (!room) return;
     this.room = null;
     disposeGroup(room.mesh);
-    for (const texture of [room.scene.floor, room.scene.walls]) {
-      this.faceMaterials.get(texture)?.dispose();
-      this.faceMaterials.delete(texture);
-    }
+    for (const texture of [room.scene.floor, room.scene.walls])
+      this.propMeshes.dropMaterial(texture);
     room.scene.dispose();
   }
 
@@ -352,7 +353,7 @@ export class FirstPersonView {
     this.stats.fogEnd = Math.round(this.fogEnd);
     for (const [key, chunk] of this.chunks)
       if (!keep.has(key)) {
-        this.dropChunk(chunk);
+        this.dropChunk(key, chunk);
         this.chunks.delete(key);
       }
     this.stats.chunks = this.chunks.size;
@@ -365,7 +366,7 @@ export class FirstPersonView {
     if (!chunk) return 0;
     let scene = this.chunks.get(key);
     if (!scene) {
-      scene = {};
+      scene = { cx, cy };
       this.chunks.set(key, scene);
     }
     let builds = 0;
@@ -378,10 +379,17 @@ export class FirstPersonView {
     const { props, signature } = this.propsByChunk.get(key) ?? { props: [], signature: "" };
     if (scene.props?.signature !== signature) {
       if (scene.props) disposeGroup(scene.props.group);
-      scene.props = { signature, ...this.buildProps(props, world) };
+      const room = this.room?.scene;
+      const built = this.propMeshes.build(props, (tx, ty) => world.getHeightAt(tx, ty), room);
+      // Room shells and furniture stay out of the sun's map: rooms have no sun.
+      if (!room) for (const mesh of built.group.children) SunShadows.cast(mesh);
+      scene.props = { signature, group: built.group, surfaces: built.surfaces };
+      this.cards.set(key, built.billboards);
+      this.surfaces = null;
       this.worldRoot.add(scene.props.group);
       builds++;
     }
+    if (builds) this.sun.invalidate(cx, cy);
     return builds;
   }
 
@@ -392,109 +400,41 @@ export class FirstPersonView {
     world: FirstPersonWorld,
   ): TerrainEntry & { mesh: THREE.Mesh } {
     const triangles = buildTerrainChunk(chunk, cx, cy, (tx, ty) => world.getHeightAt(tx, ty));
-    return {
-      chunk,
-      key: `${chunk.revision}:${chunk.visualRevision}`,
-      mesh: coloredMesh(triangles, this.flatMaterial),
-    };
+    const mesh = coloredMesh(triangles, this.flatMaterial);
+    if (triangles.positions.length / 3 > FLAT_CHUNK_VERTICES) SunShadows.cast(mesh);
+    return { chunk, key: `${chunk.revision}:${chunk.visualRevision}`, mesh };
   }
 
-  private dropChunk(chunk: ChunkScene): void {
+  private dropChunk(key: string, chunk: ChunkScene): void {
     if (chunk.terrain) disposeGroup(chunk.terrain.mesh);
     if (chunk.props) disposeGroup(chunk.props.group);
+    this.cards.delete(key);
+    this.surfaces = null;
+    this.sun.invalidate(chunk.cx, chunk.cy);
   }
 
-  private buildProps(
-    props: readonly Prop[],
-    world: FirstPersonWorld,
-  ): { group: THREE.Group; billboards: Billboard[] } {
-    const group = new THREE.Group();
-    const billboards: Billboard[] = [];
-    const flat = new TriangleWriter();
-    const textured = new Map<THREE.Texture, TexturedFaces>();
-    const facesFor = (image: PropImage | undefined) => {
-      if (!image) return undefined;
-      const faces = textured.get(image.texture) ?? { positions: [], uvs: [] };
-      textured.set(image.texture, faces);
-      return faces;
-    };
-    const room = this.room?.scene;
-    for (const prop of props) {
-      const elevation = propElevation(prop, world);
-      if (room?.isShell(prop)) {
-        room.appendShell(prop, elevation, flat, facesFor);
-        continue;
-      }
-      // Room furniture is placed by its anchor; rugs lie on the floor.
-      const furniture = room?.furniture(prop.type, this.images);
-      if (room && furniture && room.appendFlat(prop, furniture, elevation, facesFor)) continue;
-      const frame = furniture?.frame ?? propImageFrame(prop);
-      if (propForm(prop, frame) === "billboard") {
-        const card = furniture?.image(false);
-        const billboard = furniture
-          ? card && artCard(prop, frame, card.texture, elevation)
-          : this.propBillboard(prop, elevation);
-        if (billboard) billboards.push(billboard);
-        continue;
-      }
-      const image = furniture ? furniture.image(true) : this.images.prop(prop, true);
-      const color = image?.color ?? 0x8a8a8a;
-      appendPropGeometry({ flat, textured: facesFor(image) }, prop, color, elevation, frame);
-    }
-    if (flat.vertexCount) group.add(coloredMesh(flat.finish(), this.flatMaterial));
-    for (const [texture, faces] of textured)
-      if (faces.positions.length) group.add(texturedMesh(faces, this.faceMaterial(texture)));
-    return { group, billboards };
-  }
-
-  private propBillboard(prop: Prop, elevation: number): Billboard | undefined {
-    if (!prop.sprite.parts?.length) {
-      const sheet = this.images.sheet(prop.sprite.sheetKey);
-      if (!sheet) return undefined;
-      return {
-        texture: sheet.texture,
-        uv: sheetUv(sheet.sheet, prop.sprite, prop.sprite.frameRow, false),
-        x: prop.position.wx,
-        y: prop.position.wy,
-        z: elevation,
-        width: prop.sprite.spriteWidth,
-        height: prop.sprite.spriteHeight,
-      };
-    }
-    const image = this.images.prop(prop, false);
-    return image && artCard(prop, image.frame, image.texture, elevation);
-  }
-
-  private faceMaterial(texture: THREE.Texture): THREE.MeshBasicMaterial {
-    let material = this.faceMaterials.get(texture);
-    if (!material) {
-      // Opaque compositions have no holes; floor decals (rugs) cut out their padding.
-      material = new THREE.MeshBasicMaterial({
-        map: texture,
-        side: THREE.DoubleSide,
-        alphaTest: 0.5,
-      });
-      this.faceMaterials.set(texture, material);
-    }
-    return material;
-  }
-
-  /** Static prop and actor billboards; returns actors whose authored mesh is drawable. */
-  private fillBillboards(frame: FirstPersonFrame, ready: ReadonlySet<string>): SpriteItem[] {
-    const { eye, drawRadius } = frame;
-    this.billboards.begin(cameraRight(eye.yaw));
-    for (const chunk of this.chunks.values())
-      for (const b of chunk.props?.billboards ?? [])
-        if (Math.hypot(b.x - eye.x, b.y - eye.y) <= drawRadius + b.width) this.billboards.push(b);
+  /** Actor billboards and contact shadows; returns actors whose authored mesh is drawable. */
+  private fillBillboards(
+    frame: FirstPersonFrame,
+    ready: ReadonlySet<string>,
+    shadows: boolean,
+  ): SpriteItem[] {
+    const { eye } = frame;
+    const right = cameraRight(eye.yaw);
+    this.cardRight.value.set(right.x, right.y);
+    this.billboards.begin();
+    this.blobs.begin();
     const cars: SpriteItem[] = [];
     for (const item of frame.sprites) {
-      this.queueActor(item, eye, ready, cars);
-      if (item.towGroup) this.queueActor(item.towGroup, eye, ready, cars);
+      this.queueActor(item, eye, ready, cars, shadows);
+      if (item.towGroup) this.queueActor(item.towGroup, eye, ready, cars, shadows);
       for (const content of item.bedGroup?.contents ?? [])
-        this.queueActor(content, eye, ready, cars);
+        this.queueActor(content, eye, ready, cars, shadows);
     }
     this.billboards.end();
+    this.blobs.end();
     this.stats.billboards = this.billboards.count;
+    this.stats.blobs = this.blobs.count;
     return cars;
   }
 
@@ -504,9 +444,14 @@ export class FirstPersonView {
     eye: FirstPersonEye,
     ready: ReadonlySet<string>,
     cars: SpriteItem[],
+    shadows: boolean,
   ): void {
     if (item.flashHidden || item.alpha === 0) return;
-    if (item.mesh && this.vehicleReady(item.mesh.assetId, ready)) {
+    const body = !!item.mesh && this.vehicles.drawable(item.mesh.assetId);
+    // A mesh body's shadow belongs to the drawn body: sprite fallbacks have one baked in.
+    const shadow = shadows && (body || item.gpuShadow?.casterId === undefined) && item.gpuShadow;
+    if (shadow) this.blobs.push(shadow, this.supportUnder(shadow, item.zOffset));
+    if (body) {
       cars.push(item);
       return;
     }
@@ -514,37 +459,21 @@ export class FirstPersonView {
     if (sheet) this.billboards.push(actorBillboard(item, sheet.sheet, sheet.texture, eye, ready));
   }
 
-  /** Starts a load on first sight; true only once the asset is ready. */
-  private vehicleReady(assetId: string, ready: ReadonlySet<string>): boolean {
-    if (ready.has(assetId)) return true;
-    if (!this.vehicles.has(assetId)) {
-      const slot = new ResourceSlot<CarMeshAsset>();
-      this.vehicles.set(assetId, slot);
-      const load = loadAuthoredMesh(assetId);
-      if (load) void slot.load(() => load);
-      else slot.state = "failed";
+  /** The collector resolves support without surface queries here, so a body above the
+   * terrain also checks the static decks and ramps under it. */
+  private supportUnder(shadow: { x: number; y: number; support: number }, z: number): number {
+    if (z - shadow.support < 0.5) return shadow.support;
+    if (!this.surfaces) {
+      this.surfaces = [];
+      for (const chunk of this.chunks.values())
+        if (chunk.props) this.surfaces.push(...chunk.props.surfaces);
     }
-    return false;
-  }
-
-  private drawVehicle(item: SpriteItem): boolean {
-    const mesh = item.mesh;
-    const asset = mesh ? this.vehicles.get(mesh.assetId)?.value : undefined;
-    if (!mesh || !asset) return false;
-    const definition = authoredVehicleForAsset(mesh.assetId);
-    const paint = definition && vehiclePaint(definition.vehicle, mesh.paintSchemeId);
-    const paintTexture = paint ? this.paints.request(paint) : undefined;
-    applyMeshInstance(asset, mesh);
-    this.carHolder.position.set(item.wx, item.wy, item.zOffset);
-    this.carHolder.add(asset.object);
-    const restore = paintTexture ? this.paints.bind(asset.object, paintTexture) : undefined;
-    try {
-      this.renderer.render(this.carScene, this.camera);
-    } finally {
-      restore?.();
-      this.carHolder.remove(asset.object);
+    let support = shadow.support;
+    for (const surface of this.surfaces) {
+      const height = surfaceUnder(surface, shadow.x, shadow.y, z + 1);
+      if (height !== undefined && height > support) support = height;
     }
-    return true;
+    return support;
   }
 
   dispose(): void {
@@ -554,11 +483,11 @@ export class FirstPersonView {
     this.dropChunks();
     this.disposeRoom();
     this.billboards.dispose();
-    for (const material of this.faceMaterials.values()) material.dispose();
-    this.faceMaterials.clear();
-    for (const slot of this.vehicles.values()) slot.dispose();
-    this.vehicles.clear();
-    this.paints.dispose();
+    this.cards.dispose();
+    this.blobs.dispose();
+    this.sun.dispose();
+    this.propMeshes.dispose();
+    this.vehicles.dispose();
     this.images.dispose();
     this.flatMaterial.dispose();
     // Release the context now, as GpuRasterSurface does; repeated toggles must not

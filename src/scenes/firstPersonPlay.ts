@@ -160,6 +160,7 @@ export function renderFirstPerson(gc: GameContext, alpha: number): boolean {
     const height = shown.collider?.physicalHeight ?? 24;
     eye = { ...feet, z: feet.z + height * EYE_FRACTION, ...control.look };
   }
+  eye.z += control.lift;
   const drawRadius = firstPersonDrawRadius(VIEW_DISTANCES[control.viewDistance], camera);
   const interior = currentInterior(gc, control);
   const frame = control.frame;
@@ -180,6 +181,8 @@ export function renderFirstPerson(gc: GameContext, alpha: number): boolean {
       },
       items,
       frame,
+      // Casters carry their shadow shapes, as for the fixed view's depth pass (247).
+      depthShadows: control.shadows,
     });
     view.render({
       eye,
@@ -189,6 +192,7 @@ export function renderFirstPerson(gc: GameContext, alpha: number): boolean {
       sprites: items.filter((item): item is SpriteItem => item.kind === "sprite"),
       drawRadius,
       interior,
+      shadows: control.shadows,
     });
   } finally {
     frame.release();

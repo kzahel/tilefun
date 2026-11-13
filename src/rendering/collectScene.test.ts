@@ -416,18 +416,20 @@ function sceneDigest(variant: {
 // fields after a fixed literal; key-sorted digests of all five scenes were unchanged.
 // 236 re-recorded the raster scenes: casters carry `gpuShadow` for the GPU depth
 // pass instead of projected decals.
+// 247 re-recorded the raster scenes for `gpuShadow.support` and `gpuShadow.upright`
+// only: with those keys omitted, all five earlier digests were reproduced exactly.
 it.each([
   [{ frame: false, raster: false, grass: false, garage: false, time: 0 }, "8cb06b493c72350e"],
   [
     { frame: true, raster: false, grass: true, garage: false, time: 0.05, zoom: 3 / 8 },
     "6c28c08dccb1c409",
   ],
-  [{ frame: true, raster: true, grass: true, garage: false, time: 0.55 }, "1a2e80ea19044af2"],
+  [{ frame: true, raster: true, grass: true, garage: false, time: 0.55 }, "4ae0b45458b5dc6a"],
   [
     { frame: true, raster: true, grass: false, garage: true, time: 0.25, nativeTrains: true },
-    "76b558ad7a421bb9",
+    "ce0022840239d279",
   ],
-  [{ frame: false, raster: true, grass: false, garage: true, time: 0 }, "0454afa6d0e33319"],
+  [{ frame: false, raster: true, grass: false, garage: true, time: 0 }, "a9115be3c1a76df3"],
 ] as const)("collects a byte-identical characterization scene %o", (variant, digest) => {
   const result = sceneDigest(variant);
   expect(result.digest).toBe(digest);
