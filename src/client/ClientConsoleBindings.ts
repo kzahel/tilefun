@@ -61,7 +61,11 @@ export function registerClientConsole(
     clientCVars.r_firstperson.set(true);
   // The top-down view through the 3D scene (251): an opt-in for the whole device.
   clientCVars.r_topdown3d.onChange((val) => {
+    gc.debugPanel.topDown3d = val;
     if (gc.firstPerson) gc.firstPerson.topDown = val;
+  });
+  gc.debugPanel.onTopDown3dChange((checked) => {
+    clientCVars.r_topdown3d.set(checked);
   });
   if (new URLSearchParams(location.search).get("view") === "topdown3d")
     clientCVars.r_topdown3d.set(true);

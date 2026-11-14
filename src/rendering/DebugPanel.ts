@@ -36,6 +36,7 @@ export class DebugPanel {
   private readonly baseModeBtn: HTMLButtonElement;
   private readonly convexCheckbox: HTMLInputElement;
   private readonly pauseCheckbox: HTMLInputElement;
+  private readonly topDown3dCheckbox: HTMLInputElement;
   private readonly show3dCheckbox: HTMLInputElement;
   private pendingBaseMode = false;
   private pendingConvex = false;
@@ -58,6 +59,13 @@ export class DebugPanel {
     this.collisionContext = document.createElement("div");
     this.collisionContext.style.cssText = "font:12px/1.4 monospace;max-width:330px;color:#d7e5f5;";
     this.container.append(this.collisionContext);
+
+    const topDown3dRow = document.createElement("label");
+    topDown3dRow.style.cssText = `${ROW_STYLE}cursor:pointer;`;
+    this.topDown3dCheckbox = document.createElement("input");
+    this.topDown3dCheckbox.type = "checkbox";
+    topDown3dRow.append(this.topDown3dCheckbox, "Unified top-down 3D (experimental)");
+    this.container.append(topDown3dRow);
 
     const geometry = document.createElement("fieldset");
     geometry.style.cssText = "margin:8px 0;padding:8px;max-width:330px;border:1px solid #667;";
@@ -318,6 +326,14 @@ export class DebugPanel {
 
   onShow3dChange(cb: (checked: boolean) => void): void {
     this.show3dCheckbox.addEventListener("change", () => cb(this.show3dCheckbox.checked));
+  }
+
+  set topDown3d(value: boolean) {
+    this.topDown3dCheckbox.checked = value;
+  }
+
+  onTopDown3dChange(cb: (checked: boolean) => void): void {
+    this.topDown3dCheckbox.addEventListener("change", () => cb(this.topDown3dCheckbox.checked));
   }
 
   setZoom(value: number): void {

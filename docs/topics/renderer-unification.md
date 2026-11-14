@@ -58,6 +58,15 @@ wanted as well, and a third renderer is not.
 - **Labs.** Shared changes account for embedded labs
   ([embedded engine labs](embedded-engine-labs.md)).
 
+## Trying the unified top-down view
+
+Open the debug panel with **F3** (or **More → Debug** in the world menu) and
+toggle **Unified top-down 3D (experimental)**. It changes top-down play for the
+whole device immediately and stays in sync with `/r_topdown3d 1` / `0` in the
+console and the startup flag `?view=topdown3d`. It is off by default and is not
+saved across reloads. This debug opt-in does not change the Options/default
+gates below; the parity checklist still applies.
+
 ## Target shape
 
 ```text
