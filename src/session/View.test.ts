@@ -1,11 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 import type { RemoteStateView } from "../client/ClientStateView.js";
+import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { Camera } from "../rendering/Camera.js";
 import type { RenderPass } from "../rendering/RenderFrame.js";
 import { RecordingBackend } from "../rendering/testing/RecordingBackend.js";
 import { layoutViews, type RenderRegion } from "../rendering/ViewLayout.js";
 import { WorldRasterFrame } from "../rendering/WorldRasterFrame.js";
+import { createVehicle } from "../traffic/Vehicle.js";
 import { Chunk } from "../world/Chunk.js";
 import { World } from "../world/World.js";
 import { DeviceSession } from "./DeviceSession.js";
@@ -69,6 +71,33 @@ describe("camera policies", () => {
     expect([policy.beforeInput, followSeat().beforeInput]).toEqual([true, false]);
   });
 
+  it("give a seat's 3D eye: its own eyes on foot, a chase camera when it drives (249)", () => {
+    const player = { ...createPlayer(100, 200), id: 3 };
+    const car = { ...createVehicle("compact-1", 100, 200, Direction.Right), id: 9 };
+    const replica = {
+      playerEntity: player,
+      presentedPlayerEntity: player,
+      entities: [player, car],
+      setPredictor: vi.fn(),
+    };
+    const device = new DeviceSession(replica as unknown as RemoteStateView);
+    const look = { yaw: 0, pitch: 0 }; // facing east
+    const eye = followSeat().eye?.(device, look, 1);
+    // On foot: at the player, above its feet, and its own body is not drawn.
+    expect(eye).toMatchObject({ x: 100, y: 200, yaw: 0, own: 3 });
+    expect(eye?.z).toBeGreaterThan(0);
+    // Driving: behind and above the vehicle, looking down at it; the driver is drawn.
+    player.parentId = car.id;
+    const chase = followSeat().eye?.(device, look, 1);
+    expect(chase?.own).toBeUndefined();
+    expect(chase?.x).toBeLessThan(100);
+    expect(chase?.pitch).toBeLessThan(0);
+    // No body yet (the placeholder), and a fixed diagnostic camera has no eye.
+    replica.presentedPlayerEntity = { ...player, id: -1 };
+    expect(followSeat().eye?.(device, look, 1)).toBeUndefined();
+    expect(fixedCamera({ wx: 0, wy: 0 }).eye).toBeUndefined();
+  });
+
   it("a view's camera viewport is its region", () => {
     const view = new View(followSeat());
     view.setRegion({ x: 640, y: 0, width: 641, height: 800 });
@@ -128,6 +157,54 @@ describe("renderViews", () => {
     // Indoors (no terrain) nothing is prepared.
     renderViews(host, views.slice(0, 1), undefined, () => {});
     expect(prepare).toHaveBeenCalledTimes(1);
+  });
+
+  it("draws 3D views first, outside the fixed view's frame and terrain preparation (249)", () => {
+    const backend = new RecordingBackend(new Map());
+    const prepared: number[] = [];
+    vi.spyOn(backend, "prepareTerrainViews").mockImplementation((list) => {
+      prepared.push(list.length);
+    });
+    const order: string[] = [];
+    const host = {
+      renderer: backend,
+      beginView: (_camera: Camera, region: RenderRegion) => order.push(`begin ${region.x}`),
+      endView: () => order.push("end"),
+    };
+    // Views 1 and 3 draw in 3D; view 2 asks for it and falls back (its scene is loading).
+    const threeD = new Set([views[1], views[3]]);
+    renderViews(
+      host,
+      views,
+      { world, pacing: "throughput" },
+      (_view, i) => order.push(`fixed ${i}`),
+      (view, i) => {
+        if (threeD.has(view)) order.push(`3d ${i}`);
+        return threeD.has(view);
+      },
+    );
+    expect(order).toEqual([
+      "3d 1",
+      "3d 3",
+      `begin ${views[0]?.region.x}`,
+      "fixed 0",
+      "end",
+      `begin ${views[2]?.region.x}`,
+      "fixed 2",
+      "end",
+    ]);
+    expect(prepared).toEqual([2]); // only the fixed views' terrain
+    // Every view in 3D: nothing is prepared and no fixed frame opens.
+    order.length = 0;
+    renderViews(
+      host,
+      views,
+      { world, pacing: "throughput" },
+      () => order.push("fixed"),
+      () => true,
+    );
+    expect(order).toEqual([]);
+    expect(prepared).toEqual([2]);
   });
 
   it("ends a view whose drawing throws and leaves no camera in world scope", () => {

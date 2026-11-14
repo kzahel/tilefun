@@ -2,8 +2,8 @@ import { applyPlayerModel, normalizePlayerModel } from "../characters/PlayerMode
 import type { SceneManager } from "../core/SceneManager.js";
 import type { GenerationRequest } from "../generation/GenerationDescriptor.js";
 import type { WorldType } from "../persistence/WorldRegistry.js";
-import type { Camera } from "../rendering/Camera.js";
 import { MenuScene } from "../scenes/MenuScene.js";
+import type { View } from "../session/View.js";
 import type { Arrival, ClientMessage } from "../shared/protocol.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import { ACTIVE_PROFILE_KEY, TAB_SESSION_KEY } from "../shared/storageKeys.js";
@@ -19,7 +19,8 @@ type ProfileStore = NonNullable<GameClientOptions["profileStore"]>;
 /** Client state that world and session operations read lazily. */
 export interface WorldSessionHost {
   readonly transport: IClientTransport;
-  readonly camera: Camera;
+  /** Seat 0's view: what it needs streamed (its rectangle, or a 3D view's radius). */
+  readonly view: Pick<View, "interestRange">;
   readonly scenes: SceneManager;
   readonly mainMenu: MainMenu;
   readonly stateView: RemoteStateView;
@@ -85,7 +86,7 @@ export class WorldSessionActions {
 
   /** Send current visible chunk range to server when changed. */
   sendVisibleRange(force = false): void {
-    const range = this.host.camera.getVisibleChunkRange();
+    const range = this.host.view.interestRange();
     const key = `${range.minCx},${range.minCy},${range.maxCx},${range.maxCy}`;
     if (!force && key === this.lastVisibleRangeKey) return;
     this.lastVisibleRangeKey = key;

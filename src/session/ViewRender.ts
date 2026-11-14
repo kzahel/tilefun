@@ -25,6 +25,10 @@ const preparation: { view: View["camera"]; visible: TerrainPreparationView["visi
  * over every view's range with one budget (`terrain` omitted indoors), then each
  * view draws inside its own region. Views always end, even if drawing throws.
  * Cameras must already be presented (see `CameraPolicy.present`).
+ *
+ * `draw3d` draws a view in the 3D scene instead (249) and returns true when it
+ * did. Those views go first, straight to their canvas regions, and take no part
+ * in terrain preparation or the fixed view's world target.
  */
 export function renderViews(
   host: {
@@ -35,10 +39,19 @@ export function renderViews(
   views: readonly View[],
   terrain: { world: TerrainRenderWorld; pacing: TerrainPacing } | undefined,
   draw: (view: View, index: number) => void,
+  draw3d?: (view: View, index: number) => boolean,
 ): void {
-  if (terrain) {
+  let fixed = views;
+  if (draw3d) {
+    const rest: View[] = [];
+    views.forEach((view, index) => {
+      if (!draw3d(view, index)) rest.push(view);
+    });
+    fixed = rest;
+  }
+  if (terrain && fixed.length) {
     try {
-      for (const { camera } of views) {
+      for (const { camera } of fixed) {
         // The world frame's own range: pixel-snapped, with the raster guard.
         scope.begin(camera);
         preparation.push({ view: camera, visible: camera.getVisibleChunkRange() });
@@ -52,7 +65,7 @@ export function renderViews(
   }
   for (let index = 0; index < views.length; index++) {
     const view = views[index];
-    if (!view) continue;
+    if (!view || !fixed.includes(view)) continue;
     host.beginView(view.camera, view.region);
     try {
       draw(view, index);

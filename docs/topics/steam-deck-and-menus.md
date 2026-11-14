@@ -78,12 +78,15 @@ or credentials in this repository.
   - **Menus:** while guests play, a menu, the map, catalogs, Options or lost
     focus pause the whole device. A guest's Menu button opens the world menu,
     and only that pad drives it until it closes. The home page has one
-    "Player N leaves" button per guest.
+    "Player N leaves" button per guest, and one button that switches that
+    guest's view between top-down and first person
+    ([249](../tactical/249-one-renderer-host.md)).
   - **Views:** layouts 1, 2 (side by side) and 2×2 for 3–4 players, zoomed to
     0.75 of the chosen zoom. Each view shows its player's badge (name and
     gems), and partners get location markers. With three players, the empty
-    corner says how to join. Edit mode shows seat 0 alone, and first person
-    works only while one player plays.
+    corner says how to join. Edit mode shows seat 0 alone. Each player's view
+    can be top-down or first person; a pad's right stick looks, and a keyboard
+    guest's left and right keys turn.
   - **Places:** a guest's enter key (its scheme's Quote, a pad's Y) gets in or
     out of the nearest car, calls a train or takes everyone through the nearest
     door, and its equipment key (Semicolon, a pad's D↓) runs the equipment

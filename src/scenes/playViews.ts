@@ -5,7 +5,7 @@ import { layoutViews } from "../rendering/ViewLayout.js";
 import { seatBody } from "../session/SeatFocus.js";
 import type { View } from "../session/View.js";
 import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
-import { renderFirstPerson } from "./firstPersonPlay.js";
+import { drawCrosshair } from "./firstPersonPlay.js";
 
 /**
  * Play's split-screen views (226): one view per seat, laid out each tick. Seat 0's
@@ -23,6 +23,8 @@ export function beginViewTick(gc: GameContext): readonly View[] {
     view.camera.savePrev();
     view.camera.zoom = gc.debugPanel.zoom * view.zoomScale;
   }
+  // Each seat's choice of view kind, and each 3D view's streaming interest (249).
+  gc.firstPerson?.sync(views, new Set(gc.session.seats.list().map((seat) => seat.seat)));
   // Seat 0's touch controls and gestures stay inside its view (the whole canvas alone).
   const touch = views.length > 1 ? cssRegion(gc.canvas, gc.view.region) : null;
   gc.touchJoystick.region = gc.touchButtons.region = touch;
@@ -36,7 +38,7 @@ export function followGuestViews(gc: GameContext): void {
   for (const view of gc.session.views) {
     if (view.seat === 0 || !seatBody(gc.session, view.seat)) continue;
     view.policy.tick(view.camera, gc.session);
-    const range = view.camera.getVisibleChunkRange();
+    const range = view.interestRange();
     const key = `${range.minCx},${range.minCy},${range.maxCx},${range.maxCy}`;
     if (key === view.rangeKey) continue;
     view.rangeKey = key;
@@ -92,15 +94,6 @@ export function restoreViews(gc: GameContext): void {
   for (const view of gc.session.views) view.camera.restoreActual();
 }
 
-/** First person draws only while one seat plays. */
-export function renderSoloFirstPerson(gc: GameContext, alpha: number): boolean {
-  if (gc.session.views.length > 1) {
-    gc.firstPerson?.hideView();
-    return false;
-  }
-  return renderFirstPerson(gc, alpha);
-}
-
 /** Each view's overlays inside its region: player markers (partners marked, the
  * view's own player not) and, in split screen, each seat's badge. A 2×2 grid with
  * three players shows how to join in its empty corner. */
@@ -118,8 +111,12 @@ export function drawViewOverlays(gc: GameContext, alpha: number): void {
         ctx.clip();
         ctx.translate(x, y);
       }
-      const own = view.seat === 0 ? gc.stateView.playerEntity.id : seatEntityId(gc, view.seat);
-      drawPlayerMarkers({ ctx, camera: view.camera, stateView: gc.stateView }, alpha, own);
+      // Markers are placed through the fixed camera; a 3D view gets its aiming mark.
+      if (view.drawn3d) drawCrosshair(ctx, width, height);
+      else {
+        const own = view.seat === 0 ? gc.stateView.playerEntity.id : seatEntityId(gc, view.seat);
+        drawPlayerMarkers({ ctx, camera: view.camera, stateView: gc.stateView }, alpha, own);
+      }
       if (split) drawSeatBadge(gc, view);
       if (view.seat !== 0) drawSeatPrompts(gc, view);
     } finally {

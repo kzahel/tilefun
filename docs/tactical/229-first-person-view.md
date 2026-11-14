@@ -97,6 +97,10 @@ RenderBackend (unchanged)          FirstPersonView (own Three.js renderer/canvas
 
 ### Temporary glue (replace in 226)
 
+Replaced by [249](249-one-renderer-host.md) (2026-11-14): view kind, look and
+streaming interest are per seat, and the zoom floor and separate canvas are gone.
+The list below is as of 229.
+
 - `FirstPersonControl` (one per `GameClient`): active flag, look state, pointer lock,
   right-stick look and the lazily imported view. It becomes per-seat input plus a
   view's camera policy.

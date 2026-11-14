@@ -1,7 +1,7 @@
 # Renderer unification
 
 Topic: renderer-unification
-Status: committed direction, 2026-11-14; slice 1 in progress (phases 1a and 1b of three delivered). The
+Status: committed direction, 2026-11-14; slice 1 (one renderer host) delivered the same day. The
 fixed 2D view is the default top-down renderer and stays so until the
 [retirement gate](#retirement-gate) is met.
 Updated: 2026-11-14.
@@ -84,7 +84,7 @@ row when a slice starts, delivers or is blocked.
 | Slice | State | Record |
 | --- | --- | --- |
 | 0 — Spike and plan | Done 2026-11-14 | [248](../tactical/248-renderer-unification.md) |
-| 1 — One renderer host | In progress: 1a (one WebGL context) and 1b (shared vehicle assets) done 2026-11-14; 1c (view kind, mixed split screen) next | [249](../tactical/249-one-renderer-host.md) |
+| 1 — One renderer host | Done 2026-11-14: one WebGL context, shared vehicle assets, first person as a per-seat view kind with mixed split screen | [249](../tactical/249-one-renderer-host.md) |
 | 2 — Ground artwork, shared page atlas | Not started | — |
 | 3 — Top-down camera, parity probe, draw calls, device scorecard | Not started | — |
 | 4 — XR on the shared scene | Not started (needs slice 1) | [230](../tactical/230-3d-cameras-stereo-and-webxr.md) slices 5–8 |
@@ -113,7 +113,7 @@ States: missing, partial, done. Add rows as differences are found.
 | Excavations (garage ramps below ground) | Missing | 229 limit |
 | Editor overlays | Missing | The editor falls back to the fixed view |
 | Picking, tap and hold destinations | Missing | Needs a ray against the 3D ground |
-| Split-screen regions and diagonal masks | Missing | Slice 1 gives regions |
+| Split-screen regions and diagonal masks | Partial | Rectangular regions done (249); a 3D view falls back to the fixed view in a diagonal mask |
 | Door overlays and realm transitions | Missing | |
 | Labs, explorer and renderer probes | Missing | They pin the fixed backend's pixels |
 | Context loss recovery | Done | 249 phase 1a |
@@ -173,6 +173,7 @@ Three owner decisions, in order. Each needs the evidence listed.
 
 ## Next
 
-Slice 1, phase 1c ([249](../tactical/249-one-renderer-host.md)): first person
-as a per-seat view kind so split screen can mix views. Sharing the page atlas moved to slice 2, where ground artwork
-needs the same atlas-sampling materials.
+Slice 2 ([248](../tactical/248-renderer-unification.md#2--ground-artwork)): the
+3D ground samples the fixed view's terrain pages, and first person's sheet
+textures come from the same page atlas. Slice 3's device scorecard (Pixel 7a,
+Deck) can start in parallel, since slice 1 changed how first person draws.

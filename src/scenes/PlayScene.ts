@@ -11,7 +11,12 @@ import type { DeviceSeats } from "../session/DeviceSeats.js";
 import { composeDeviceTick } from "../session/DeviceTick.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import type { IClientTransport } from "../transport/Transport.js";
-import { drawCrosshair, firstPersonMovement, firstPersonTick } from "./firstPersonPlay.js";
+import {
+  firstPersonAim,
+  firstPersonMovement,
+  firstPersonTick,
+  turnGuestFrames,
+} from "./firstPersonPlay.js";
 import {
   beginViewTick,
   drawTapDestination,
@@ -20,7 +25,6 @@ import {
   followGuestViews,
   GuestFeedback,
   presentViews,
-  renderSoloFirstPerson,
   restoreViews,
 } from "./playViews.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
@@ -272,10 +276,10 @@ export class PlayScene implements GameScene {
             steering,
             joystick: (gc.touchMovement ?? "joystick") === "joystick",
             facing: gc.stateView.playerEntity.sprite?.direction,
-            look: firstPerson?.forward(),
+            look: firstPersonAim(gc, firstPerson),
           },
         },
-        ...seats.guestFrames(gc.stateView, inputLocked),
+        ...turnGuestFrames(gc, seats.guestFrames(gc.stateView, inputLocked), dt),
       ],
       seq,
       dt,
@@ -344,7 +348,7 @@ export class PlayScene implements GameScene {
       gc.stateView.entities,
       gc.stateView.world,
       dt,
-      gc.session.views.map((view) => view.camera.getVisibleChunkRange()),
+      gc.session.views.map((view) => view.interestRange()),
     );
 
     // Detect ball removal — spawn water splash if it disappeared over water
@@ -378,16 +382,12 @@ export class PlayScene implements GameScene {
       const shown = view?.presentedPlayerEntity ?? gc.stateView.playerEntity;
       gc.tapMovement?.captureView(gc.view, Math.max(0, (shown.wz ?? 0) - (shown.jumpZ ?? 0)));
 
-      const firstPerson = renderSoloFirstPerson(gc, alpha);
-      if (!firstPerson) {
-        renderPlayViews(gc, alpha, this.particles);
-        drawViewOverlays(gc, alpha);
-      }
+      renderPlayViews(gc, alpha, this.particles);
+      drawViewOverlays(gc, alpha);
       gc.chatHUD.render(gc.ctx);
       renderDebugOverlay(gc, alpha);
       render3DDebug(gc);
-      if (firstPerson) drawCrosshair(gc.ctx, gc.canvas.width, gc.canvas.height);
-      else drawTapDestination(gc);
+      if (!gc.view.drawn3d) drawTapDestination(gc);
       gc.touchJoystick.draw(gc.ctx);
       gc.touchButtons.draw(gc.ctx);
     } finally {

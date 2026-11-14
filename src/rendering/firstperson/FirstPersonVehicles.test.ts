@@ -1,5 +1,7 @@
 import * as THREE from "three";
 import { describe, expect, it } from "vitest";
+import { vehiclePaintSchemes } from "../../traffic/VehiclePaint.js";
+import { AUTHORED_VEHICLE_MESHES } from "../AuthoredVehicleMeshes.js";
 import type { CarMeshAsset } from "../CarMeshAsset.js";
 import type { SpriteItem } from "../SceneItem.js";
 import type { SharedMeshAssets } from "../View3dHost.js";
@@ -83,19 +85,61 @@ describe("first-person vehicles on the host's shared assets", () => {
     expect(vehicles.draw(renderer, new THREE.Camera(), host(undefined), item())).toBe(false);
   });
 
-  it("follows a paint atlas bound to the shared material for the draw", () => {
+  it("binds a painted vehicle's atlas for the draw and restores it afterwards", () => {
+    // A registered vehicle with a paint scheme, so the draw itself asks for the atlas.
+    const painted = AUTHORED_VEHICLE_MESHES.find((m) => vehiclePaintSchemes(m.vehicle).length);
+    const scheme = painted && vehiclePaintSchemes(painted.vehicle)[0];
+    if (!painted || !scheme) throw Error("No painted vehicle is registered");
     const { asset, mesh, body, stock } = sharedAsset();
     const paint = new THREE.Texture();
     const vehicles = new FirstPersonVehicles(() => {});
+    const order: string[] = [];
     let drawnMap: THREE.Texture | null = null;
     const renderer = {
       render() {
+        order.push("render");
         drawnMap = (mesh.material as THREE.MeshBasicMaterial).map;
       },
     } as unknown as THREE.WebGLRenderer;
     const meshes: SharedMeshAssets = {
       ...host(asset),
+      paint: (asked) => (asked === scheme ? paint : undefined),
       // The fixed view's binding: the atlas goes onto the asset's own material.
+      bindPaint: (object, texture) => {
+        expect(object).toBe(asset.object);
+        expect(mesh.material).toBe(body); // bound before the lit copies are swapped in
+        order.push("bind");
+        body.map = texture;
+        return () => {
+          order.push("restore");
+          body.map = stock;
+        };
+      },
+    };
+    const car = {
+      ...item(),
+      mesh: { ...item().mesh, assetId: painted.assetId, paintSchemeId: scheme.id },
+    } as unknown as SpriteItem;
+    expect(vehicles.draw(renderer, new THREE.Camera(), meshes, car)).toBe(true);
+    expect(order).toEqual(["bind", "render", "restore"]);
+    expect(drawnMap).toBe(paint);
+    expect(body.map).toBe(stock);
+  });
+
+  it("leaves the shared asset as it found it when a draw throws", () => {
+    const painted = AUTHORED_VEHICLE_MESHES.find((m) => vehiclePaintSchemes(m.vehicle).length);
+    const scheme = painted && vehiclePaintSchemes(painted.vehicle)[0];
+    if (!painted || !scheme) throw Error("No painted vehicle is registered");
+    const { asset, mesh, body, stock } = sharedAsset();
+    const vehicles = new FirstPersonVehicles(() => {});
+    const renderer = {
+      render() {
+        throw Error("context lost mid-draw");
+      },
+    } as unknown as THREE.WebGLRenderer;
+    const meshes: SharedMeshAssets = {
+      ...host(asset),
+      paint: () => new THREE.Texture(),
       bindPaint: (_object, texture) => {
         body.map = texture;
         return () => {
@@ -103,11 +147,14 @@ describe("first-person vehicles on the host's shared assets", () => {
         };
       },
     };
-    // An unregistered asset ID has no paint scheme, so bind directly.
-    const restore = meshes.bindPaint(asset.object, paint);
-    vehicles.draw(renderer, new THREE.Camera(), meshes, item());
-    restore();
-    expect(drawnMap).toBe(paint);
+    const car = {
+      ...item(),
+      mesh: { ...item().mesh, assetId: painted.assetId, paintSchemeId: scheme.id },
+    } as unknown as SpriteItem;
+    expect(() => vehicles.draw(renderer, new THREE.Camera(), meshes, car)).toThrow("mid-draw");
+    // What the fixed view draws next: its own material, stock atlas, no parent.
+    expect(mesh.material).toBe(body);
     expect(body.map).toBe(stock);
+    expect(asset.object.parent).toBeNull();
   });
 });

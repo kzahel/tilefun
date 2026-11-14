@@ -45,6 +45,9 @@ export interface SeatInput {
   on(action: SeatPlacePress, callback: () => void): () => void;
   /** The label of the seat's own key or button for an action ("'" or "Y"). */
   hint(action: ActionName): string;
+  /** The seat's look stick this tick (first person, 249); absent on an input set
+   * with no look device, such as a keyboard scheme. */
+  look?(): { dx: number; dy: number } | undefined;
 }
 
 /** Presses a guest's place controls listen for. */
@@ -59,6 +62,8 @@ export interface SeatActions {
   clearHeld(): void;
   /** The label of this set's key or button for an action. */
   hint(action: ActionName): string;
+  /** A pad's right stick; absent on keys. */
+  getLook?(): { dx: number; dy: number };
 }
 
 /** A seat's input set over one action set: movement, presses and a latched jump.
@@ -107,5 +112,9 @@ export class ActionSeatInput implements SeatInput {
 
   hint(action: ActionName): string {
     return this.actions.hint(action);
+  }
+
+  look(): { dx: number; dy: number } | undefined {
+    return this.actions.getLook?.();
   }
 }

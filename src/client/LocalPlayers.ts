@@ -7,7 +7,9 @@ import { eventCode } from "../input/KeyLabels.js";
 import { PadActions } from "../input/PadActions.js";
 import { EVERY_PAD, PadAssignment, type PadPool } from "../input/PadAssignment.js";
 import { ActionSeatInput, type SeatInput } from "../input/SeatInput.js";
+import { directionHeading } from "../rendering/firstperson/FirstPersonCamera.js";
 import { PlayScene } from "../scenes/PlayScene.js";
+import { seatEntity } from "../session/SeatFocus.js";
 import { MAX_SEATS } from "../shared/protocol.js";
 import { DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
 
@@ -32,6 +34,7 @@ type Host = Pick<
   | "inputBlocked"
   | "storagePaused"
   | "doorPresentation"
+  | "firstPerson"
   | "sendRequest"
   | "takeRequestId"
 >;
@@ -71,7 +74,7 @@ export class LocalPlayers implements PadPool {
     controller.seats = this;
     window.addEventListener("keydown", this.onKey);
     gc.mainMenu.seatActions = (add) => {
-      for (const { label, run } of this.leaveActions()) add(label, run);
+      for (const { label, run } of [...this.viewActions(), ...this.leaveActions()]) add(label, run);
     };
     this.offs = [
       gc.session.seats.onChange(() => this.sync()),
@@ -263,6 +266,31 @@ export class LocalPlayers implements PadPool {
     for (let seat = 1; seat < MAX_SEATS; seat++)
       if (!seats.get(seat) && !this.joining.has(seat)) return seat;
     return undefined;
+  }
+
+  /** Each guest switches its own view between top-down and first person (249);
+   * seat 0's choice is in Options. */
+  private viewActions(): { label: string; run: () => void }[] {
+    const { mainMenu, session, firstPerson } = this.gc;
+    if (!firstPerson) return [];
+    return session.seats
+      .list()
+      .filter((seat) => seat.seat !== 0)
+      .map(({ seat }) => {
+        const on = firstPerson.seatActive(seat);
+        return {
+          label: `${playerName(seat)}: ${on ? "top-down view" : "first-person view"}`,
+          run: () => {
+            const facing = seatEntity(session, seat)?.sprite?.direction;
+            firstPerson.setSeat(
+              seat,
+              !on,
+              facing === undefined ? undefined : directionHeading(facing),
+            );
+            if (mainMenu.visible) mainMenu.openPage("home");
+          },
+        };
+      });
   }
 
   private leaveActions(): { label: string; run: () => void }[] {

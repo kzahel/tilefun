@@ -3,6 +3,7 @@ import type { GameContext } from "../core/GameScene.js";
 import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
 import { seatEntity } from "../session/SeatFocus.js";
 import { drawViewScene, drawViewTerrain, renderViews } from "../session/ViewRender.js";
+import { renderFirstPerson } from "./firstPersonPlay.js";
 import { renderInterior } from "./renderInterior.js";
 
 /**
@@ -66,8 +67,8 @@ export function renderEntities(
   );
 }
 
-/** Play's display frame: every view of the device (one per seat), with terrain
- * prepared once. Headless fixtures without graphics draw seat 0's view directly. */
+/** Play's display frame: every view of the device (one per seat), each drawn as
+ * its seat chose (the fixed view or first person, 249), with terrain prepared once. Headless fixtures without graphics draw seat 0's view directly. */
 export function renderPlayViews(
   gc: GameContext,
   alpha: number,
@@ -79,6 +80,7 @@ export function renderPlayViews(
     renderEntities(gc, alpha, particles, view);
   };
   if (!beginView || !endView) {
+    for (const view of gc.session.views) gc.firstPerson?.hide(view);
     draw();
     return;
   }
@@ -88,5 +90,7 @@ export function renderPlayViews(
     gc.session.views,
     outdoors ? { world: gc.stateView.world, pacing: gc.debugPanel.terrainPacing } : undefined,
     draw,
+    // A seat in first person draws in the 3D scene; the fixed view is its fallback.
+    (view) => renderFirstPerson(gc, view, alpha),
   );
 }

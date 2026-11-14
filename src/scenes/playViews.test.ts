@@ -16,7 +16,6 @@ import {
   inHostView,
   JOIN_HINT,
   presentViews,
-  renderSoloFirstPerson,
   restoreViews,
 } from "./playViews.js";
 
@@ -95,7 +94,6 @@ async function playing() {
     debugPanel: { zoom: 1 },
     transport: { send: (message: ClientMessage) => sent.push(message) },
     gemSpriteCanvas: null,
-    firstPerson: { hideView: vi.fn() },
     touchJoystick: { region: null },
     touchButtons: { region: null },
     touchPinch: { region: null },
@@ -279,10 +277,27 @@ describe("play's split-screen views (226)", () => {
     expect(recording.clips).toHaveLength(3); // one view: the whole canvas, no clip
   });
 
-  it("first person only while one seat plays", async () => {
-    const { gc } = await playing();
+  it("gives a view drawn in 3D an aiming mark instead of fixed-camera markers (249)", async () => {
+    const { gc, session, recording } = await playing();
     beginViewTick(gc);
-    expect(renderSoloFirstPerson(gc, 1)).toBe(false);
-    expect(gc.firstPerson?.hideView).toHaveBeenCalled();
+    gc.camera.snapTo(100, 100);
+    followGuestViews(gc);
+    const guest = session.views[1];
+    if (!guest) throw Error("Missing guest view");
+    guest.drawn3d = true;
+    const fills: number[][] = [];
+    (recording.ctx as unknown as { fillRect: (...a: number[]) => void }).fillRect = (...a) =>
+      fills.push(a);
+    drawViewOverlays(gc, 1);
+    const names = recording.texts.map((t) => t.text);
+    // The fixed-view test above finds "Host" marked in the guest's view; in 3D it is not.
+    expect(names).not.toContain("Host");
+    // Seat 0's fixed view still marks the guest, and the guest keeps its badge.
+    expect(names.filter((n) => n === "Guest")).toHaveLength(1);
+    expect(names).toEqual(expect.arrayContaining(["Player 1", "Player 2"]));
+    // The aiming mark's bars, centred in the guest's region (region-local pixels).
+    const { width, height } = guest.region;
+    expect(fills).toHaveLength(4);
+    expect(fills).toContainEqual([Math.round(width / 2) - 6, Math.round(height / 2) - 1, 12, 2]);
   });
 });

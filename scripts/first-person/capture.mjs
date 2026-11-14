@@ -219,6 +219,81 @@ try {
   });
   report.contextLoss = context;
   await shoot("context-restored");
+  // Split screen mixes view kinds (249): a keyboard guest joins, then each seat
+  // switches between the fixed view and first person on the one canvas.
+  const views = () =>
+    game(() => {
+      const g = document.querySelector("#game").__game;
+      return g.device.views.map((view) => ({
+        seat: view.seat,
+        region: view.region,
+        drawn3d: view.drawn3d,
+        yaw: view.look?.yaw,
+        interestRadius: view.interestRadius,
+        interest: view.interestRange(),
+      }));
+    });
+  const setSeats = async (name, host, guest) => {
+    await game(
+      ([host, guest]) => {
+        const g = document.querySelector("#game").__game;
+        g.consoleEngine.cvars.get("r_firstperson").set(host);
+        g.firstPerson.setSeat(1, guest, -Math.PI / 2);
+      },
+      [host, guest],
+    );
+    await page.waitForFunction(
+      ([host, guest]) => {
+        const [a, b] = document.querySelector("#game").__game.device.views;
+        return a?.drawn3d === host && b?.drawn3d === guest;
+      },
+      [host, guest],
+    );
+    await shoot(name);
+    return views();
+  };
+  // The Options button still has focus from turning first person on; a focused
+  // control keeps its keys.
+  await game(() => document.activeElement?.blur());
+  await page.keyboard.press("Slash");
+  await page.waitForFunction(
+    () => document.querySelector("#game").__game.device.views.length === 2,
+  );
+  await page.waitForTimeout(1500);
+  report.split = {
+    hostFirstPerson: await setSeats("split-fps-and-top", true, false),
+    guestFirstPerson: await setSeats("split-top-and-fps", false, true),
+  };
+  // A keyboard guest has no look device: its right key turns (away from seat 0's
+  // car, which is beside it), then up walks that way.
+  const guestBody = () =>
+    game(() => {
+      const g = document.querySelector("#game").__game;
+      const id = g.stateView.seats.entities.get(1);
+      const body = g.stateView.entities.find((e) => e.id === id);
+      return { ...body.position, yaw: g.device.views[1].look.yaw };
+    });
+  const before = await guestBody();
+  await page.keyboard.down("ArrowRight");
+  await page.waitForTimeout(500);
+  await page.keyboard.up("ArrowRight");
+  const turned = await guestBody();
+  await page.keyboard.down("ArrowUp");
+  await page.waitForTimeout(700);
+  await page.keyboard.up("ArrowUp");
+  await page.waitForTimeout(300);
+  const walked = await guestBody();
+  report.split.guestTurn = {
+    yawBefore: before.yaw,
+    yawAfter: turned.yaw,
+    sidestep: Math.hypot(turned.wx - before.wx, turned.wy - before.wy),
+    walk: { dx: walked.wx - turned.wx, dy: walked.wy - turned.wy },
+    heading: { x: Math.cos(turned.yaw), y: Math.sin(turned.yaw) },
+  };
+  report.split.bothFirstPerson = await setSeats("split-both-fps", true, true);
+  report.split.webglCanvases = await game(
+    () => document.querySelectorAll("canvas[data-renderer=gpu]:not(#game)").length,
+  );
   // The editor draws the fixed view instead of first person.
   await page.keyboard.press("Tab");
   await shoot("editor");

@@ -736,7 +736,7 @@ export class GameClient implements GameTestHooks {
     const client = this;
     return {
       transport: this.transport,
-      camera: this.camera,
+      view: this.view,
       scenes: this.scenes,
       mainMenu: this.mainMenu,
       stateView: this.stateView,

@@ -11,7 +11,9 @@ Since [249](../tactical/249-one-renderer-host.md) phase 1a the first-person view
 has no canvas or context of its own: `RenderHost.view3d` lends it the host's
 `WebGLRenderer`, bound to a region of the world canvas, and restores the host's
 render state afterwards. A 3D view draws straight to the canvas, not into the
-fixed view's world target.
+fixed view's world target. First person is a per-seat view kind: `renderViews`
+draws 3D views first and gives only the remaining views terrain preparation and
+the fixed frame, and `View.interestRange()` is what each view asks to be streamed.
 
 [241](../tactical/241-budget-terrain-raster-completion.md) closes the terrain
 budget blind spot identified in [240](../tactical/240-phone-pause-attribution.md).
