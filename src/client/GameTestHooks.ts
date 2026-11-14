@@ -22,6 +22,7 @@ import type { GemHUD } from "../ui/GemHUD.js";
 import type { MainMenu } from "../ui/MainMenu.js";
 import type { RemoteStateView } from "./ClientStateView.js";
 import type { FirstPersonControl } from "./FirstPersonControl.js";
+import type { ParityOptions } from "./RendererParityProbe.js";
 
 /**
  * The stable surface that Playwright specs and browser instrumentation read
@@ -80,5 +81,11 @@ export interface GameTestHooks {
  * instance because untyped `.mjs` instrumentation reads it directly.
  */
 export function exposeGameTestHooks(canvas: HTMLCanvasElement, hooks: GameTestHooks): void {
-  Object.assign(canvas, { __game: hooks });
+  Object.assign(canvas, {
+    __game: hooks,
+    // The renderer parity probe (251), loaded on first use: one moment of play
+    // through the fixed view and the 3D scene's top-down camera, compared.
+    __parity: async (options?: ParityOptions) =>
+      (await import("./RendererParityProbe.js")).probeRendererParity(hooks, options),
+  });
 }

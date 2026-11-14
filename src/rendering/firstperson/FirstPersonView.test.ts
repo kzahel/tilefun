@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
-import { chunksInReach, terrainStale } from "./FirstPersonView.js";
+import { chunksInReach, terrainStale } from "./FirstPersonChunks.js";
 
 describe("first-person chunk residency", () => {
   it("rebuilds ground for a replaced chunk object even with the same revisions", () => {

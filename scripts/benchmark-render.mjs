@@ -434,40 +434,61 @@ function autopilot() {
 /** Sit in a car beside the player (spawning one the first time) and start driving. */
 async function startDriving(page) {
   if ((await playerAt(page)).parent === null) {
-    const spawn = () =>
-      page.evaluate(() => {
+    // Beside the player, trying another side each time: a traffic car that has
+    // stopped for the player can occupy the first spot, and a blocked spawn is
+    // dropped without an answer.
+    const SPOTS = [
+      [40, 0],
+      [-40, 0],
+      [0, 44],
+      [0, -44],
+      [64, 44],
+      [-64, -44],
+    ];
+    const cars = () =>
+      page.evaluate(() =>
+        document
+          .querySelector("#game")
+          .__game.stateView.serverEntities.filter((e) => e.type === "vehicle-v1:compact-1")
+          .map((e) => e.id),
+      );
+    const spawn = (spot) =>
+      page.evaluate(([dx, dy]) => {
         const g = document.querySelector("#game").__game;
         const p = g.stateView.serverPlayerEntity.position;
         g.transport.send({ type: "set-editor-mode", enabled: true });
         g.transport.send({
           type: "edit-spawn",
           entityType: "vehicle-v1:compact-1",
-          wx: p.wx + 40,
-          wy: p.wy,
+          wx: p.wx + dx,
+          wy: p.wy + dy,
         });
         g.transport.send({ type: "set-editor-mode", enabled: false });
-      });
-    const car = () => {
+      }, spot);
+    // The new car: one that was not there before, within reach of the player.
+    const car = (known) => {
       const g = document.querySelector("#game").__game;
       const p = g.stateView.serverPlayerEntity.position;
       return g.stateView.serverEntities.find(
         (e) =>
           e.type === "vehicle-v1:compact-1" &&
-          Math.hypot(e.position.wx - p.wx - 40, e.position.wy - p.wy) < 24,
+          !known.includes(e.id) &&
+          Math.hypot(e.position.wx - p.wx, e.position.wy - p.wy) < 120,
       )?.id;
     };
+    const known = await cars();
     // Arrival finishes some time after the first ready frame, and edits sent
     // before then are dropped, not queued: ask again until the car appears.
     for (let attempt = 0; ; attempt++) {
-      await spawn();
+      await spawn(SPOTS[attempt % SPOTS.length]);
       const appeared = await page
-        .waitForFunction(car, undefined, { timeout: 4000 })
+        .waitForFunction(car, known, { timeout: 4000 })
         .then(() => true)
         .catch(() => false);
       if (appeared) break;
-      if (attempt === 5) throw Error("The drive scene's car did not spawn");
+      if (attempt === 2 * SPOTS.length - 1) throw Error("The drive scene's car did not spawn");
     }
-    const entityId = await page.evaluate(car);
+    const entityId = await page.evaluate(car, known);
     await page.evaluate((entityId) => {
       const g = document.querySelector("#game").__game;
       g.transport.send({ type: "enter-vehicle", requestId: g.nextRequestId++, entityId });

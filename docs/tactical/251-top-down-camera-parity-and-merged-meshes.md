@@ -160,3 +160,91 @@ Validation:
   `firstPersonPlay.test.ts` pass.
 - Typechecks, Biome and knip pass; the ratchet reports only `PhysicsScene.ts`
   (881 → 884, not this work). `art:catalog` and `workshop:manifest` regenerated.
+
+### 3b — delivered 2026-11-14
+
+How it works:
+
+- **The probe.** `canvas.__parity()` (`RendererParityProbe.ts`, loaded on first
+  use) takes the current moment of outdoor play with `?view=topdown3d` and draws
+  it through both renderers into seat 0's region, in one task, so no simulation
+  step falls between two pictures. The camera is moved to a whole screen pixel
+  first: the fixed view composes its picture at the camera's fraction of a
+  pixel, which is filtering and not placement.
+- **One kind of content at a time.** The fixed view is given part of the scene
+  (no props, only solid props, only mesh bodies, and so on). The 3D scene hides
+  kinds through `FirstPersonView.layers`. Sixteen pictures are read back.
+- **Footprints.** A kind's footprint is the pixels that change when it is added
+  to that renderer's own ground-only picture. `RendererParity.ts` reports, per
+  kind: the pixels each renderer draws, the share of the union both draw
+  (overlap), the whole-pixel move of the 3D picture that overlaps best (within 3
+  px), and how far colours differ where both draw (pixels beyond 24 of 255 on
+  any channel, and the mean).
+- **The script.** `node scripts/first-person/parity.mjs --headed` runs the probe
+  in the bench's `city`, `woods` and `crowd` at zooms 1 and 0.25, prints the
+  numbers and writes each cell's two pictures and a difference picture.
+
+Change from 248: the plan said a renderer-lab probe. The lab's fixture scenes
+have no generated world, streamed chunks or real props, so the probe runs in the
+game on the bench's scenes. Its comparison maths is a plain module with Node
+tests.
+
+Numbers, M4 Pro, headed Chromium, 1280×800, before the merge of phase 3c. A cell
+reads "overlap; share of differing pixels where both draw", with the best move
+when it is not (0, 0). The last three columns are shares of the whole picture
+that differ.
+
+| Scene | Zoom | Ground | Solid props | Standing cards | Actors | Vehicles | All kinds, no grass or shadows | As played |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| city | 1 | 0.0% | 53.8%, (0, 3); 0.0% | none | 100.0%; 0.0% | 96.8%; 24.3% | 3.3% | 3.7% |
+| city | 0.25 | 1.1% | 85.7%; 13.2% | 93.4%; 8.5% | 84.0%; 25.9% | 94.5%; 31.7% | 8.5% | 12.0% |
+| woods | 1 | 0.0% | none | 97.6%, (−1, 0); 9.0% | 82.9%; 8.5% | none | 2.5% | 8.9% |
+| woods | 0.25 | 0.0% | none | 93.4%, (−1, 0); 25.9% | 67.2%; 40.3% | none | 6.9% | 11.9% |
+| crowd | 1 | 0.0% | 53.8%, (0, 3); 0.0% | none | 88.0%; 10.0% | 96.8%; 25.7% | 3.7% | 4.3% |
+| crowd | 0.25 | 1.1% | 85.7%; 13.2% | 93.4%; 8.5% | 68.1%; 49.8% | 97.1%; 14.9% | 11.7% | 15.1% |
+
+What the numbers say:
+
+- **Ground.** Identical at 1×. At 0.25× in the city 1.1% of pixels differ, on
+  crosswalk stripes and lane dashes: the 3D ground averages four samples per
+  pixel and the fixed view takes one.
+- **Actors.** Identical in the city at 1× (the player and one walker: 3,735
+  pixels each, none different). Wildlife and rabbits overlap 83 to 88% at 1×:
+  the fixed view blends the soft shadow painted into those sprites, and the 3D
+  cards cut artwork off at half opacity. At 0.25× overlap falls to 67 to 84%,
+  because the fixed view filters small sprites and the 3D scene takes one
+  sample.
+- **Standing cards.** Trees and forest rows overlap 98% at 1×, and best after
+  moving the 3D picture one pixel left. The fixed view floors a static sprite's
+  screen edges to whole pixels; the 3D card is rasterised where it falls.
+- **Solid props.** The largest gap, and a new finding: 54% overlap at 1× and 86%
+  at 0.25×. The 3D scene draws 53,248 pixels of buildings where the fixed view
+  draws 28,672. Its volumes use the colliders' physical heights, which are
+  taller than the artwork implies, so each building shows a band of stretched
+  roof above the fixed view's picture.
+- **Vehicles.** Silhouettes overlap 95 to 97% with no move. A quarter of their
+  pixels differ in colour: the 3D scene shades the bodies with its sun.
+- **Grass.** The fixed view draws 1,200 (city) to 30,254 (woods) pixels of grass
+  blades at 1×. The 3D scene draws none.
+- **Shadows.** Not comparable yet: the fixed view draws 340 to 6,800 pixels of
+  body shadow, the 3D scene 5,500 to 72,000 of sun and contact shadow.
+
+Registration tolerance recorded for the opt-in gate: ground, actors and vehicles
+must align best at (0, 0), and standing cards within one pixel, at zooms 1 and
+0.25. That holds today. Solid props do not have the same silhouette, so their
+best move (0, 3 at 1×) measures the height difference, not placement.
+
+Validation:
+
+- Node: `RendererParity.test.ts` (footprints and noise, a registered pair, a
+  picture two pixels off, colour apart from coverage, a kind neither draws,
+  whole pictures and their alignment, the tolerance, the difference picture).
+- Browser: the script above; pictures looked at for each scene.
+- Typechecks, Biome and knip pass; the ratchet reports only `PhysicsScene.ts`.
+  `FirstPersonView.ts` passed 600 lines, so its chunk helpers moved to
+  `FirstPersonChunks.ts`.
+
+Also in this phase: the bench's `drive` scene now starts on the phone. In first
+person there a traffic car that had stopped for the player stood on the spawn
+spot, and the server drops a blocked spawn without an answer. The bench now
+tries six spots around the player and looks for a car that was not there before.

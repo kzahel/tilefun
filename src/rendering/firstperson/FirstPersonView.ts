@@ -13,6 +13,7 @@ import {
   lookDirection,
   nextFogEnd,
 } from "./FirstPersonCamera.js";
+import { chunkKey, chunksInReach, type TerrainEntry, terrainStale } from "./FirstPersonChunks.js";
 import { bindGroundPage, groundMesh } from "./FirstPersonGround.js";
 import { FirstPersonImages } from "./FirstPersonImages.js";
 import { type FirstPersonInterior, INTERIOR_BACKGROUND } from "./FirstPersonInterior.js";
@@ -52,6 +53,20 @@ export interface FirstPersonFrame {
   readonly topDown?: { readonly scale: number } | undefined;
 }
 
+/** Kinds of content a view draws. */
+export interface SceneLayers {
+  /** Ground and cliff walls. */
+  ground: boolean;
+  /** Props drawn as solid volumes wearing their artwork. */
+  solids: boolean;
+  /** Props drawn as standing cards. */
+  cards: boolean;
+  /** Moving actors drawn as cards. */
+  actors: boolean;
+  /** Authored vehicle and train meshes. */
+  vehicles: boolean;
+}
+
 const SKY = 0x9fd3f0;
 const CHUNK_PX = CHUNK_SIZE * TILE_SIZE;
 const CHUNK_BUILDS_PER_FRAME = 3;
@@ -61,11 +76,6 @@ const MIN_FOG_END = 96;
  * their chunk, and tall ones south of the bottom edge stand up into the view. */
 const TOP_DOWN_SIDE = 128;
 const TOP_DOWN_BELOW = 512;
-
-interface TerrainEntry {
-  readonly chunk: object;
-  readonly key: string;
-}
 
 interface ChunkGround extends TerrainEntry {
   readonly chunk: FirstPersonChunkSource;
@@ -83,37 +93,6 @@ interface ChunkScene {
 
 /** One flat quad per tile: more triangles means cliff walls, which cast shadows. */
 const FLAT_CHUNK_VERTICES = CHUNK_SIZE * CHUNK_SIZE * 6;
-
-/** Ground rebuilds for a replaced chunk object as well as for edited content. */
-export function terrainStale(
-  cached: TerrainEntry | undefined,
-  chunk: { revision: number; visualRevision: number },
-): boolean {
-  return cached?.chunk !== chunk || cached.key !== `${chunk.revision}:${chunk.visualRevision}`;
-}
-
-function chunkKey(cx: number, cy: number): string {
-  return `${cx},${cy}`;
-}
-
-/** Chunk coordinates within `reach` of the eye, nearest first. */
-export function chunksInReach(
-  x: number,
-  y: number,
-  reach: number,
-): { cx: number; cy: number; key: string; distance: number }[] {
-  const wanted: { cx: number; cy: number; key: string; distance: number }[] = [];
-  const min = (v: number) => Math.floor((v - reach) / CHUNK_PX);
-  const max = (v: number) => Math.floor((v + reach) / CHUNK_PX);
-  for (let cy = min(y); cy <= max(y); cy++)
-    for (let cx = min(x); cx <= max(x); cx++) {
-      const nx = Math.max(cx * CHUNK_PX, Math.min(x, (cx + 1) * CHUNK_PX));
-      const ny = Math.max(cy * CHUNK_PX, Math.min(y, (cy + 1) * CHUNK_PX));
-      const distance = Math.hypot(nx - x, ny - y);
-      if (distance <= reach) wanted.push({ cx, cy, key: chunkKey(cx, cy), distance });
-    }
-  return wanted.sort((a, b) => a.distance - b.distance);
-}
 
 /**
  * Experimental first-person world view (tactical 229). Flat-coloured terrain,
@@ -142,8 +121,21 @@ export class FirstPersonView {
     calls: 0,
     fogEnd: 0,
   };
+  /** Diagnostics: kinds of content to leave out. The parity probe (251) draws
+   * one kind at a time; play draws them all. */
+  readonly layers: SceneLayers = {
+    ground: true,
+    solids: true,
+    cards: true,
+    actors: true,
+    vehicles: true,
+  };
   private readonly scene = new THREE.Scene();
   private readonly worldRoot = new THREE.Group();
+  /** One parent per kind of static content, so a kind can be hidden. */
+  private readonly groundRoot = new THREE.Group();
+  private readonly solidRoot = new THREE.Group();
+  private readonly cardRoot = new THREE.Group();
   private readonly camera = new THREE.PerspectiveCamera(70, 1, 2, 4000);
   /** The fixed view's projection (251); see `ObliqueCamera`. */
   private readonly oblique = new THREE.Camera();
@@ -196,6 +188,7 @@ export class FirstPersonView {
     // Y once at this boundary makes the world right-handed for Three, so east stays
     // on the right when looking north; Three flips face winding for det < 0.
     this.worldRoot.scale.set(1, -1, 1);
+    this.worldRoot.add(this.groundRoot, this.solidRoot, this.cardRoot);
     this.scene.add(this.worldRoot);
     this.scene.fog = this.fog;
     // Every card reads the page atlas, so each kind of card is one material and one draw.
@@ -207,7 +200,7 @@ export class FirstPersonView {
       });
     this.billboards = new MovingCards(this.worldRoot, card("body"));
     this.cards = new StaticCards(
-      this.worldRoot,
+      this.cardRoot,
       card("card"),
       this.sun.cardRoot,
       shadeMaterial(
@@ -268,6 +261,9 @@ export class FirstPersonView {
     this.cards.keep(this.cardPages);
     this.cards.flush();
     this.stats.cards = this.cards.count;
+    this.groundRoot.visible = this.layers.ground;
+    this.solidRoot.visible = this.layers.solids;
+    this.cardRoot.visible = this.layers.cards;
     const camera = topDown
       ? this.placeOblique(frame.eye, topDown.scale, target.width, target.height)
       : this.placeCamera(frame.eye, frame.drawRadius);
@@ -434,7 +430,7 @@ export class FirstPersonView {
     if (!this.room && terrainStale(scene.terrain, chunk)) {
       if (scene.terrain) disposeGroup(scene.terrain.mesh);
       scene.terrain = this.buildTerrain(chunk, cx, cy, world);
-      this.worldRoot.add(scene.terrain.mesh);
+      this.groundRoot.add(scene.terrain.mesh);
       builds++;
     }
     const { props, signature } = this.propsByChunk.get(key) ?? { props: [], signature: "" };
@@ -447,7 +443,7 @@ export class FirstPersonView {
       scene.props = { signature, group: built.group, surfaces: built.surfaces };
       this.cards.set(key, built.billboards, this.cardPages);
       this.surfaces = null;
-      this.worldRoot.add(scene.props.group);
+      this.solidRoot.add(scene.props.group);
       builds++;
     }
     if (builds) this.sun.invalidate(cx, cy);
@@ -525,6 +521,7 @@ export class FirstPersonView {
   ): void {
     if (item.flashHidden || item.alpha === 0) return;
     const body = !!item.mesh && this.vehicles.drawable(meshes, item.mesh.assetId);
+    if (!(body ? this.layers.vehicles : this.layers.actors)) return;
     // A mesh body's shadow belongs to the drawn body: sprite fallbacks have one baked in.
     const shadow = shadows && (body || item.gpuShadow?.casterId === undefined) && item.gpuShadow;
     if (shadow) this.blobs.push(shadow, this.supportUnder(shadow, item.zOffset));
