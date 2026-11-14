@@ -12,6 +12,7 @@ import {
   differencePicture,
   type FrameParity,
 } from "../rendering/RendererParity.js";
+import { SceneFrame } from "../rendering/SceneFrame.js";
 import type { SceneItem, SpriteItem } from "../rendering/SceneItem.js";
 import { drawViewScene, drawViewTerrain, renderViews } from "../session/ViewRender.js";
 import type { GameTestHooks } from "./GameTestHooks.js";
@@ -105,13 +106,24 @@ export function probeRendererParity(
     return context.getImageData(region.x, region.y, width, height).data;
   };
 
+  // Mesh poses build up over frames (wheel travel, eased headings), so the fixed
+  // view draws entities from the 3D views' own frame: both renderers then pose
+  // every vehicle alike. Pictures without entities use a frame of their own;
+  // collecting nothing into play's frame would forget its poses.
+  const scratch = new SceneFrame();
+  // A body is a mesh that is ready to draw, as the 3D scene decides it; a mesh
+  // still loading draws its sprite in both renderers. Tow and bed groups go
+  // with the item that carries them.
+  const ready = (game.renderer as { meshes?: { ready: ReadonlySet<string> } }).meshes?.ready;
+  const isBody = (item: SpriteItem) => !!item.mesh && (ready?.has(item.mesh.assetId) ?? true);
+
   const drawFixed = (content: FixedContent): Uint8ClampedArray => {
     host.beginFrame();
     const collected = (items: SceneItem[]) => {
       for (let i = items.length - 1; i >= 0; i--) {
         const item = items[i];
         if (item?.kind !== "sprite") continue;
-        if (content.bodies !== undefined && !!item.mesh !== content.bodies) items.splice(i, 1);
+        if (content.bodies !== undefined && isBody(item) !== content.bodies) items.splice(i, 1);
         else if (!content.shadows) items[i] = withoutShadow(item);
       }
     };
@@ -132,8 +144,10 @@ export function probeRendererParity(
         drawViewScene(
           game.renderer,
           camera,
-          game.device.frame,
-          view.fades,
+          content.entities ? control.frame : scratch,
+          // Not the view's own slab fades: a picture without props would reset
+          // them. Every slab draws at full opacity (the 3D scene has no cutaways).
+          new Map(),
           {
             world: stateView.world,
             props: content.props ?? [],
@@ -157,7 +171,7 @@ export function probeRendererParity(
   };
 
   const ground = obliqueGround({ x: camera.x, y: camera.y, scale: camera.scale }, width, height);
-  const drawScene = (layers: SceneLayers, shadows: boolean): Uint8ClampedArray => {
+  const drawScene = (layers: SceneLayers, shadows: boolean): void => {
     host.beginFrame();
     Object.assign(scene.layers, layers);
     const frame = control.frame;
@@ -193,6 +207,9 @@ export function probeRendererParity(
     } finally {
       frame.release();
     }
+  };
+  const readScene = (layers: SceneLayers, shadows: boolean): Uint8ClampedArray => {
+    drawScene(layers, shadows);
     return read();
   };
 
@@ -200,7 +217,8 @@ export function probeRendererParity(
     // The snapped camera can bring a chunk into the scene's reach: build it first.
     // Ground pages upload a few per frame; chunks beyond the prepared ground
     // never get one, so wait for the count to stop rising.
-    for (let i = 0, pages = -1, steady = 0; i < 400 && steady < 4; i++) {
+    // Under the atlas's page age (120 frames), so the fixed view's pages stay.
+    for (let i = 0, pages = -1, steady = 0; i < 100 && steady < 4; i++) {
       drawScene(ALL_LAYERS, false);
       steady = !scene.stats.builds && scene.stats.groundPages === pages ? steady + 1 : 0;
       pages = scene.stats.groundPages;
@@ -221,15 +239,17 @@ export function probeRendererParity(
       shadowed: drawFixed({ props: all, entities: true, shadows: true }),
       played: drawFixed({ props: all, entities: true, shadows: true, grass: true }),
     };
-    const one = (layer: keyof SceneLayers) => drawScene({ ...NO_LAYERS, [layer]: true }, false);
+    const one = (layer: keyof SceneLayers) => readScene({ ...NO_LAYERS, [layer]: true }, false);
     const drawn = {
-      ground: drawScene(NO_LAYERS, false),
+      ground: readScene(NO_LAYERS, false),
       solids: one("solids"),
       cards: one("cards"),
       actors: one("actors"),
       vehicles: one("vehicles"),
-      together: drawScene(ALL_LAYERS, false),
-      shadowed: drawScene(ALL_LAYERS, true),
+      together: readScene(ALL_LAYERS, false),
+      shadowed: readScene(ALL_LAYERS, true),
+      // As the player has it: `r_fpshadows` can turn the 3D scene's shadows off.
+      played: readScene(ALL_LAYERS, control.shadows),
     };
     const category = (name: "solids" | "cards" | "actors" | "vehicles") =>
       compareCategory(
@@ -244,7 +264,7 @@ export function probeRendererParity(
       frames: {
         ground: compareFrames(fixed.ground, drawn.ground, width),
         together: compareFrames(fixed.together, drawn.together, width),
-        played: compareFrames(fixed.played, drawn.shadowed, width),
+        played: compareFrames(fixed.played, drawn.played, width),
       },
       categories: {
         // The 3D scene draws no grass: its picture with grass is its ground.
@@ -281,20 +301,26 @@ export function probeRendererParity(
       };
       report.pictures = {
         fixed: picture(fixed.played),
-        scene: picture(drawn.shadowed),
-        difference: picture(differencePicture(fixed.played, drawn.shadowed)),
+        scene: picture(drawn.played),
+        difference: picture(differencePicture(fixed.played, drawn.played)),
       };
     }
     return report;
   } finally {
     Object.assign(scene.layers, ALL_LAYERS);
+    scratch.clear();
     camera.x = actual.x;
     camera.y = actual.y;
   }
 }
 
-/** A copy of a collected sprite that draws no shadow of any kind. */
+/** A copy of a collected sprite that draws no shadow of any kind, nor do the
+ * towed body and bed contents it carries. */
 function withoutShadow(item: SpriteItem): SpriteItem {
   const { gpuShadow: _shadow, ...plain } = item;
-  return { ...plain, hasShadow: false, meshGroundShadow: false };
+  const copy: SpriteItem = { ...plain, hasShadow: false, meshGroundShadow: false };
+  if (item.towGroup) copy.towGroup = withoutShadow(item.towGroup);
+  if (item.bedGroup)
+    copy.bedGroup = { ...item.bedGroup, contents: item.bedGroup.contents.map(withoutShadow) };
+  return copy;
 }

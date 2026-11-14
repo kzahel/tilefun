@@ -1,0 +1,9414 @@
+{
+ "tactical": 251,
+ "date": "2026-11-14",
+ "scope": "npm run render:bench cells: steady camera after terrain settles, except the moving drive scene; p50/p95 in ms. render = main-thread render callback; gpuMs = timer query around the render callback's GL commands (absent on the phone); renderFinishMs = render + gl.finish() in a separate window. 'before' is commit 6fd0d4be (one mesh per chunk), 'after' the merged meshes of phase 3c. drawCallsPerFrame of the fixed view counts its batches only; meshDrawCallsPerFrame (after runs) adds the vehicle meshes it draws into images. The 3D views' count includes vehicle meshes. Rabbits wander and traffic varies, so populated scenes are not exact replays. One run per cell.",
+ "runs": [
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, Vite dev modules: Fixed view, before the merge",
+   "device": "mac",
+   "merge": "before",
+   "browser": "156.0.8078.4",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 9.9,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.6,
+      "p95": 0.9,
+      "max": 1.6
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 1.3
+     },
+     "updateMs": {
+      "p50": 0.7,
+      "p95": 1.1,
+      "max": 1.8
+     },
+     "gpuMs": {
+      "p50": 0.96,
+      "p95": 1.07,
+      "max": 1.25,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.6,
+      "p95": 1,
+      "max": 1.7
+     },
+     "drawCallsPerFrame": 8.5,
+     "entities": 17,
+     "workerTickMs": {
+      "p50": 1,
+      "p95": 1.6
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 2,
+      "totalMiB": 0.4
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 2.8
+     },
+     "submitMs": {
+      "p50": 0.4,
+      "p95": 0.6,
+      "max": 2.3
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.8,
+      "max": 1.1
+     },
+     "gpuMs": {
+      "p50": 1.79,
+      "p95": 1.91,
+      "max": 3.09,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.8,
+      "p95": 1,
+      "max": 1.6
+     },
+     "drawCallsPerFrame": 15.4,
+     "entities": 26,
+     "workerTickMs": {
+      "p50": 0.8,
+      "p95": 1.3
+     },
+     "upload": {
+      "frames": 10,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 10,
+      "totalMiB": 4.4
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.2,
+      "p95": 1.5,
+      "max": 2.8
+     },
+     "submitMs": {
+      "p50": 0.6,
+      "p95": 0.8,
+      "max": 2
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.7,
+      "max": 1
+     },
+     "gpuMs": {
+      "p50": 1.69,
+      "p95": 2.29,
+      "max": 2.67,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.3,
+      "p95": 1.7,
+      "max": 2.7
+     },
+     "drawCallsPerFrame": 14.4,
+     "entities": 52,
+     "workerTickMs": {
+      "p50": 1.1,
+      "p95": 1.4
+     },
+     "upload": {
+      "frames": 10,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 10,
+      "totalMiB": 4.4
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.1,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2,
+      "p95": 2.3,
+      "max": 3.2
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 0.6
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 3,
+      "max": 4.7
+     },
+     "gpuMs": {
+      "p50": 2.61,
+      "p95": 4.86,
+      "max": 4.99,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2,
+      "p95": 2.3,
+      "max": 3.1
+     },
+     "drawCallsPerFrame": 13,
+     "entities": 943,
+     "workerTickMs": {
+      "p50": 5.4,
+      "p95": 6.6
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.4,
+      "p95": 3.9,
+      "max": 4.6
+     },
+     "submitMs": {
+      "p50": 1,
+      "p95": 1.3,
+      "max": 1.8
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 3,
+      "max": 3.5
+     },
+     "gpuMs": {
+      "p50": 15.27,
+      "p95": 22.11,
+      "max": 26.17,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.9,
+      "p95": 3.8,
+      "max": 4.8
+     },
+     "drawCallsPerFrame": 34.1,
+     "entities": 1067,
+     "workerTickMs": {
+      "p50": 4.9,
+      "p95": 6.3
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 601,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.4,
+      "p95": 4.8,
+      "max": 6.5
+     },
+     "submitMs": {
+      "p50": 1.6,
+      "p95": 1.8,
+      "max": 3.1
+     },
+     "updateMs": {
+      "p50": 2.7,
+      "p95": 3,
+      "max": 4.1
+     },
+     "gpuMs": {
+      "p50": 13.3,
+      "p95": 21.23,
+      "max": 23.36,
+      "samples": 601,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 4.3,
+      "p95": 4.9,
+      "max": 6.1
+     },
+     "drawCallsPerFrame": 46,
+     "entities": 1093,
+     "workerTickMs": {
+      "p50": 5.7,
+      "p95": 7
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.2,
+      "p95": 1.5,
+      "max": 2.4
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 1.2
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1,
+      "max": 3.5
+     },
+     "gpuMs": {
+      "p50": 0.62,
+      "p95": 0.67,
+      "max": 1.91,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.3,
+      "p95": 1.7,
+      "max": 2.4
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 138,
+     "workerTickMs": {
+      "p50": 1.8,
+      "p95": 2.4
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 240,
+       "p95": 240,
+       "max": 240
+      },
+      "pages": 1,
+      "totalMiB": 0.2
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.1,
+      "p95": 1.6,
+      "max": 2.3
+     },
+     "submitMs": {
+      "p50": 0.2,
+      "p95": 0.4,
+      "max": 0.7
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 1.8
+     },
+     "gpuMs": {
+      "p50": 0.62,
+      "p95": 0.68,
+      "max": 1.81,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.3,
+      "p95": 1.6,
+      "max": 2.1
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 261,
+     "workerTickMs": {
+      "p50": 1.7,
+      "p95": 2.4
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 112,
+       "p95": 112,
+       "max": 112
+      },
+      "pages": 2,
+      "totalMiB": 0.2
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.3,
+      "p95": 2.6,
+      "max": 2.8
+     },
+     "submitMs": {
+      "p50": 0.8,
+      "p95": 0.9,
+      "max": 1.1
+     },
+     "updateMs": {
+      "p50": 1,
+      "p95": 1.2,
+      "max": 1.7
+     },
+     "gpuMs": {
+      "p50": 0.85,
+      "p95": 2.17,
+      "max": 2.34,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.3,
+      "p95": 2.6,
+      "max": 3.1
+     },
+     "drawCallsPerFrame": 7,
+     "entities": 536,
+     "workerTickMs": {
+      "p50": 1.7,
+      "p95": 2
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, Vite dev modules: Fixed view, before the merge",
+   "device": "mac",
+   "merge": "before",
+   "browser": "156.0.8078.4",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 3.5
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 1.7
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 2.1
+     },
+     "gpuMs": {
+      "p50": 1.09,
+      "p95": 1.87,
+      "max": 4.29,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 2.4
+     },
+     "drawCallsPerFrame": 10.3,
+     "entities": 21,
+     "workerTickMs": {
+      "p50": 1.3,
+      "p95": 2.3
+     },
+     "drivenPx": 427,
+     "upload": {
+      "frames": 10,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 11,
+      "totalMiB": 4.9
+     }
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, Vite dev modules: Top-down in the 3D scene (view=topdown3d), before the merge",
+   "device": "mac",
+   "merge": "before",
+   "browser": "156.0.8078.4",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.5,
+      "p95": 1,
+      "max": 2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1.9,
+      "max": 2.3
+     },
+     "gpuMs": {
+      "p50": 0.5,
+      "p95": 0.55,
+      "max": 1.87,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.5,
+      "p95": 1.6,
+      "max": 1.9
+     },
+     "drawCallsPerFrame": 29.7,
+     "entities": 17,
+     "workerTickMs": {
+      "p50": 1.2,
+      "p95": 2.4
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 3,
+      "cards": 5,
+      "blobs": 7,
+      "sunRedraws": 0,
+      "cars": 4,
+      "calls": 28,
+      "fogEnd": 252
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.1,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.9,
+      "p95": 1.5,
+      "max": 2.9
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 2.1
+     },
+     "gpuMs": {
+      "p50": 0.79,
+      "p95": 0.83,
+      "max": 2.91,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.9,
+      "p95": 1.9,
+      "max": 2.6
+     },
+     "drawCallsPerFrame": 104,
+     "entities": 26,
+     "workerTickMs": {
+      "p50": 1.3,
+      "p95": 2.2
+     },
+     "upload": {
+      "frames": 9,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 9,
+      "totalMiB": 4.4
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 12,
+      "cards": 43,
+      "blobs": 18,
+      "sunRedraws": 0,
+      "cars": 6,
+      "calls": 97,
+      "fogEnd": 1006
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.5,
+      "p95": 1.8,
+      "max": 2.5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.7,
+      "max": 0.8
+     },
+     "gpuMs": {
+      "p50": 1.25,
+      "p95": 3.21,
+      "max": 3.35,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.6,
+      "p95": 1.8,
+      "max": 2.4
+     },
+     "drawCallsPerFrame": 442,
+     "entities": 52,
+     "workerTickMs": {
+      "p50": 1,
+      "p95": 1.2
+     },
+     "upload": {
+      "frames": 9,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 9,
+      "totalMiB": 4.4
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 28,
+      "cards": 46,
+      "blobs": 36,
+      "sunRedraws": 0,
+      "cars": 11,
+      "calls": 442,
+      "fogEnd": 1488
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 9.9,
+      "max": 10.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.8,
+      "p95": 2.1,
+      "max": 2.7
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.5,
+      "p95": 2.9,
+      "max": 3.6
+     },
+     "gpuMs": {
+      "p50": 0.51,
+      "p95": 1.76,
+      "max": 1.83,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.9,
+      "p95": 2.1,
+      "max": 2.4
+     },
+     "drawCallsPerFrame": 27,
+     "entities": 951,
+     "workerTickMs": {
+      "p50": 5.4,
+      "p95": 6.7
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 427,
+      "cards": 5,
+      "blobs": 441,
+      "sunRedraws": 0,
+      "cars": 14,
+      "calls": 27,
+      "fogEnd": 252
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.2,
+      "p95": 3.5,
+      "max": 5.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 3.1,
+      "max": 3.9
+     },
+     "gpuMs": {
+      "p50": 1.45,
+      "p95": 2.49,
+      "max": 2.63,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.1,
+      "p95": 3.5,
+      "max": 5.3
+     },
+     "drawCallsPerFrame": 417,
+     "entities": 1067,
+     "workerTickMs": {
+      "p50": 5.1,
+      "p95": 6.2
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 1012,
+      "cards": 43,
+      "blobs": 1059,
+      "sunRedraws": 0,
+      "cars": 47,
+      "calls": 417,
+      "fogEnd": 1006
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.3,
+      "p95": 4.8,
+      "max": 5.9
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.7,
+      "p95": 3.1,
+      "max": 4
+     },
+     "gpuMs": {
+      "p50": 1.45,
+      "p95": 3.3,
+      "max": 3.78,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 4.2,
+      "p95": 4.8,
+      "max": 6
+     },
+     "drawCallsPerFrame": 798.3,
+     "entities": 1093,
+     "workerTickMs": {
+      "p50": 5.8,
+      "p95": 7.3
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 1028,
+      "cards": 46,
+      "blobs": 1077,
+      "sunRedraws": 0,
+      "cars": 52,
+      "calls": 743,
+      "fogEnd": 1488
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.1,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.5,
+      "p95": 0.8,
+      "max": 2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.7,
+      "p95": 1.2,
+      "max": 2.8
+     },
+     "gpuMs": {
+      "p50": 0.44,
+      "p95": 0.48,
+      "max": 1.45,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.5,
+      "p95": 0.7,
+      "max": 1.9
+     },
+     "drawCallsPerFrame": 12,
+     "entities": 138,
+     "workerTickMs": {
+      "p50": 1.7,
+      "p95": 2.7
+     },
+     "upload": {
+      "frames": 3,
+      "kiB": {
+       "p50": 256,
+       "p95": 256,
+       "max": 256
+      },
+      "pages": 3,
+      "totalMiB": 0.6
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 25,
+      "cards": 127,
+      "blobs": 25,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 12,
+      "fogEnd": 252
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.9,
+      "p95": 1.2,
+      "max": 1.5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 2.6
+     },
+     "gpuMs": {
+      "p50": 0.71,
+      "p95": 0.73,
+      "max": 2.19,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.8,
+      "p95": 1,
+      "max": 1.2
+     },
+     "drawCallsPerFrame": 51,
+     "entities": 261,
+     "workerTickMs": {
+      "p50": 1.6,
+      "p95": 2.7
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 112,
+       "p95": 112,
+       "max": 112
+      },
+      "pages": 2,
+      "totalMiB": 0.2
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 137,
+      "cards": 396,
+      "blobs": 137,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 51,
+      "fogEnd": 1006
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.8,
+      "p95": 2.1,
+      "max": 2.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1,
+      "p95": 1.3,
+      "max": 1.8
+     },
+     "gpuMs": {
+      "p50": 1.92,
+      "p95": 3.33,
+      "max": 3.46,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.9,
+      "p95": 2.2,
+      "max": 2.6
+     },
+     "drawCallsPerFrame": 232,
+     "entities": 536,
+     "workerTickMs": {
+      "p50": 1.8,
+      "p95": 2.1
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 488,
+      "cards": 1266,
+      "blobs": 488,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 232,
+      "fogEnd": 1536
+     }
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, Vite dev modules: Top-down in the 3D scene (view=topdown3d), before the merge",
+   "device": "mac",
+   "merge": "before",
+   "browser": "156.0.8078.4",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 599,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 16.7
+     },
+     "missed": 1,
+     "renderMs": {
+      "p50": 0.6,
+      "p95": 1.1,
+      "max": 2.5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.9,
+      "p95": 1.9,
+      "max": 2.3
+     },
+     "gpuMs": {
+      "p50": 0.53,
+      "p95": 0.71,
+      "max": 3.1,
+      "samples": 599,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.6,
+      "p95": 1.8,
+      "max": 3.3
+     },
+     "drawCallsPerFrame": 29.6,
+     "entities": 24,
+     "workerTickMs": {
+      "p50": 1.4,
+      "p95": 2.3
+     },
+     "drivenPx": 78,
+     "upload": {
+      "frames": 7,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 7,
+      "totalMiB": 3.4
+     },
+     "view3d": {
+      "chunks": 15,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 5,
+      "cards": 3,
+      "blobs": 9,
+      "sunRedraws": 2,
+      "cars": 4,
+      "calls": 26,
+      "fogEnd": 252
+     }
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, Vite dev modules: First person (view=fps), before the merge",
+   "device": "mac",
+   "merge": "before",
+   "browser": "156.0.8078.4",
+   "query": "view=fps",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.1,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.7,
+      "p95": 1.1,
+      "max": 10.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1,
+      "p95": 1.4,
+      "max": 2.5
+     },
+     "gpuMs": {
+      "p50": 0.56,
+      "p95": 0.6,
+      "max": 1.8,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.8,
+      "p95": 1.4,
+      "max": 3.2
+     },
+     "drawCallsPerFrame": 47.9,
+     "entities": 30,
+     "workerTickMs": {
+      "p50": 1.3,
+      "p95": 1.9
+     },
+     "upload": {
+      "frames": 9,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 9,
+      "totalMiB": 4.4
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 8,
+      "cards": 37,
+      "blobs": 16,
+      "sunRedraws": 0,
+      "cars": 8,
+      "calls": 52,
+      "fogEnd": 800
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 1.7
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1,
+      "p95": 1.3,
+      "max": 3.5
+     },
+     "gpuMs": {
+      "p50": 0.54,
+      "p95": 0.57,
+      "max": 1.94,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.9,
+      "p95": 1.2,
+      "max": 1.7
+     },
+     "drawCallsPerFrame": 29,
+     "entities": 310,
+     "workerTickMs": {
+      "p50": 1.7,
+      "p95": 2.2
+     },
+     "upload": {
+      "frames": 6,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 6,
+      "totalMiB": 2
+     },
+     "view3d": {
+      "chunks": 69,
+      "builds": 0,
+      "groundPages": 69,
+      "billboards": 135,
+      "cards": 402,
+      "blobs": 135,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 29,
+      "fogEnd": 800
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.8,
+      "p95": 3.1,
+      "max": 3.8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.5,
+      "p95": 2.7,
+      "max": 3.1
+     },
+     "gpuMs": {
+      "p50": 1.12,
+      "p95": 2.16,
+      "max": 2.28,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.8,
+      "p95": 3.1,
+      "max": 3.3
+     },
+     "drawCallsPerFrame": 325,
+     "entities": 1071,
+     "workerTickMs": {
+      "p50": 5.3,
+      "p95": 6.7
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 1008,
+      "cards": 37,
+      "blobs": 1057,
+      "sunRedraws": 0,
+      "cars": 49,
+      "calls": 325,
+      "fogEnd": 800
+     }
+    },
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 599,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.8,
+      "p95": 2,
+      "max": 3.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 1.7
+     },
+     "gpuMs": {
+      "p50": 0.66,
+      "p95": 0.72,
+      "max": 1.98,
+      "samples": 599,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.8,
+      "p95": 2.1,
+      "max": 2.9
+     },
+     "drawCallsPerFrame": 62.8,
+     "entities": 35,
+     "workerTickMs": {
+      "p50": 1.2,
+      "p95": 1.9
+     },
+     "drivenPx": 480,
+     "upload": {
+      "frames": 23,
+      "kiB": {
+       "p50": 256,
+       "p95": 512,
+       "max": 960
+      },
+      "pages": 25,
+      "totalMiB": 8.4
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 67,
+      "billboards": 11,
+      "cards": 6,
+      "blobs": 22,
+      "sunRedraws": 10,
+      "cars": 11,
+      "calls": 52,
+      "fogEnd": 800
+     }
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, Vite dev modules: Fixed view, after the merge",
+   "device": "mac",
+   "merge": "after",
+   "browser": "156.0.8078.4",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.6,
+      "p95": 0.8,
+      "max": 1.5
+     },
+     "submitMs": {
+      "p50": 0.2,
+      "p95": 0.4,
+      "max": 1.2
+     },
+     "updateMs": {
+      "p50": 0.7,
+      "p95": 1,
+      "max": 1.7
+     },
+     "gpuMs": {
+      "p50": 0.97,
+      "p95": 1.04,
+      "max": 2.32,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.7,
+      "p95": 1,
+      "max": 2
+     },
+     "drawCallsPerFrame": 8.5,
+     "meshDrawCallsPerFrame": 26.3,
+     "entities": 17,
+     "workerTickMs": {
+      "p50": 1,
+      "p95": 1.6
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 2,
+      "totalMiB": 0.4
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 2.5
+     },
+     "submitMs": {
+      "p50": 0.4,
+      "p95": 0.7,
+      "max": 2
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 1,
+      "max": 1.5
+     },
+     "gpuMs": {
+      "p50": 1.78,
+      "p95": 1.9,
+      "max": 3.28,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.9,
+      "p95": 1.4,
+      "max": 2.7
+     },
+     "drawCallsPerFrame": 15.3,
+     "meshDrawCallsPerFrame": 72.8,
+     "entities": 26,
+     "workerTickMs": {
+      "p50": 1,
+      "p95": 1.5
+     },
+     "upload": {
+      "frames": 10,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 10,
+      "totalMiB": 4.4
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.1,
+      "p95": 1.4,
+      "max": 2.6
+     },
+     "submitMs": {
+      "p50": 0.5,
+      "p95": 0.7,
+      "max": 1.6
+     },
+     "updateMs": {
+      "p50": 0.5,
+      "p95": 0.7,
+      "max": 0.9
+     },
+     "gpuMs": {
+      "p50": 1.6,
+      "p95": 1.83,
+      "max": 2.38,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.3,
+      "p95": 1.6,
+      "max": 2.5
+     },
+     "drawCallsPerFrame": 14.2,
+     "meshDrawCallsPerFrame": 99.9,
+     "entities": 52,
+     "workerTickMs": {
+      "p50": 0.9,
+      "p95": 1.3
+     },
+     "upload": {
+      "frames": 11,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 11,
+      "totalMiB": 4.9
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2,
+      "p95": 2.3,
+      "max": 2.6
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 0.6
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 2.8,
+      "max": 3.1
+     },
+     "gpuMs": {
+      "p50": 2.87,
+      "p95": 4.93,
+      "max": 5.1,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2,
+      "p95": 2.4,
+      "max": 2.6
+     },
+     "drawCallsPerFrame": 13,
+     "meshDrawCallsPerFrame": 112.7,
+     "entities": 948,
+     "workerTickMs": {
+      "p50": 5.5,
+      "p95": 6.8
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.7,
+      "p95": 4.2,
+      "max": 12.3
+     },
+     "submitMs": {
+      "p50": 1.2,
+      "p95": 1.4,
+      "max": 1.8
+     },
+     "updateMs": {
+      "p50": 2.8,
+      "p95": 3.2,
+      "max": 4.1
+     },
+     "gpuMs": {
+      "p50": 8.27,
+      "p95": 20.57,
+      "max": 25.56,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.4,
+      "p95": 4,
+      "max": 6.2
+     },
+     "drawCallsPerFrame": 34.8,
+     "meshDrawCallsPerFrame": 310.7,
+     "entities": 1067,
+     "workerTickMs": {
+      "p50": 5.5,
+      "p95": 6.9
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.3,
+      "p95": 4.9,
+      "max": 5.7
+     },
+     "submitMs": {
+      "p50": 1.6,
+      "p95": 1.9,
+      "max": 2.6
+     },
+     "updateMs": {
+      "p50": 2.8,
+      "p95": 3.1,
+      "max": 3.7
+     },
+     "gpuMs": {
+      "p50": 15.63,
+      "p95": 22.78,
+      "max": 24.53,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 4.3,
+      "p95": 4.7,
+      "max": 5.8
+     },
+     "drawCallsPerFrame": 46,
+     "meshDrawCallsPerFrame": 547.1,
+     "entities": 1093,
+     "workerTickMs": {
+      "p50": 5.6,
+      "p95": 7.3
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.1,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1,
+      "p95": 1.4,
+      "max": 1.7
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.4,
+      "max": 1.1
+     },
+     "updateMs": {
+      "p50": 0.7,
+      "p95": 0.9,
+      "max": 2.5
+     },
+     "gpuMs": {
+      "p50": 0.61,
+      "p95": 0.64,
+      "max": 1.89,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.9,
+      "p95": 1.1,
+      "max": 1.4
+     },
+     "drawCallsPerFrame": 4,
+     "meshDrawCallsPerFrame": 0,
+     "entities": 138,
+     "workerTickMs": {
+      "p50": 1.4,
+      "p95": 2
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 240,
+       "p95": 240,
+       "max": 240
+      },
+      "pages": 1,
+      "totalMiB": 0.2
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.2,
+      "p95": 1.5,
+      "max": 1.8
+     },
+     "submitMs": {
+      "p50": 0.2,
+      "p95": 0.4,
+      "max": 0.7
+     },
+     "updateMs": {
+      "p50": 0.9,
+      "p95": 1.1,
+      "max": 2.2
+     },
+     "gpuMs": {
+      "p50": 0.62,
+      "p95": 0.67,
+      "max": 1.98,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.2,
+      "p95": 1.6,
+      "max": 1.8
+     },
+     "drawCallsPerFrame": 4,
+     "meshDrawCallsPerFrame": 0,
+     "entities": 261,
+     "workerTickMs": {
+      "p50": 1.8,
+      "p95": 2.3
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 112,
+       "p95": 112,
+       "max": 112
+      },
+      "pages": 2,
+      "totalMiB": 0.2
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.1,
+      "p95": 2.4,
+      "max": 2.6
+     },
+     "submitMs": {
+      "p50": 0.7,
+      "p95": 0.9,
+      "max": 1
+     },
+     "updateMs": {
+      "p50": 1,
+      "p95": 1.1,
+      "max": 1.5
+     },
+     "gpuMs": {
+      "p50": 0.69,
+      "p95": 0.99,
+      "max": 2.09,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.1,
+      "p95": 2.4,
+      "max": 3.1
+     },
+     "drawCallsPerFrame": 7,
+     "meshDrawCallsPerFrame": 0,
+     "entities": 536,
+     "workerTickMs": {
+      "p50": 1.6,
+      "p95": 1.8
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.7,
+      "p95": 0.9,
+      "max": 3.6
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 1.4
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.8,
+      "max": 1.1
+     },
+     "gpuMs": {
+      "p50": 1.11,
+      "p95": 1.88,
+      "max": 2.25,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.6,
+      "p95": 0.8,
+      "max": 1.3
+     },
+     "drawCallsPerFrame": 10.5,
+     "meshDrawCallsPerFrame": 38.6,
+     "entities": 22,
+     "workerTickMs": {
+      "p50": 0.9,
+      "p95": 1.5
+     },
+     "drivenPx": 425,
+     "upload": {
+      "frames": 11,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 12,
+      "totalMiB": 5.3
+     }
+    },
+    {
+     "scene": "drive",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.1,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.9,
+      "p95": 1.8,
+      "max": 6.2
+     },
+     "submitMs": {
+      "p50": 0.5,
+      "p95": 0.7,
+      "max": 3.7
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.8,
+      "max": 1.4
+     },
+     "gpuMs": {
+      "p50": 2.51,
+      "p95": 3.23,
+      "max": 6.68,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.9,
+      "p95": 1.4,
+      "max": 2.3
+     },
+     "drawCallsPerFrame": 16.5,
+     "meshDrawCallsPerFrame": 90.7,
+     "entities": 29,
+     "workerTickMs": {
+      "p50": 1,
+      "p95": 1.6
+     },
+     "drivenPx": 506,
+     "upload": {
+      "frames": 15,
+      "kiB": {
+       "p50": 512,
+       "p95": 2048,
+       "max": 2048
+      },
+      "pages": 37,
+      "totalMiB": 11.4
+     }
+    },
+    {
+     "scene": "drive",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.4,
+      "p95": 1.7,
+      "max": 4.3
+     },
+     "submitMs": {
+      "p50": 0.7,
+      "p95": 0.9,
+      "max": 3.2
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.8,
+      "max": 1.4
+     },
+     "gpuMs": {
+      "p50": 4.34,
+      "p95": 6.77,
+      "max": 9.5,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.5,
+      "p95": 3.2,
+      "max": 4.2
+     },
+     "drawCallsPerFrame": 24.3,
+     "meshDrawCallsPerFrame": 205,
+     "entities": 56,
+     "workerTickMs": {
+      "p50": 1.2,
+      "p95": 1.8
+     },
+     "drivenPx": 340,
+     "upload": {
+      "frames": 12,
+      "kiB": {
+       "p50": 512,
+       "p95": 2816,
+       "max": 2816
+      },
+      "pages": 27,
+      "totalMiB": 7.8
+     }
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, Vite dev modules: Top-down in the 3D scene (view=topdown3d), after the merge",
+   "device": "mac",
+   "merge": "after",
+   "browser": "156.0.8078.4",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.1,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.5,
+      "p95": 0.8,
+      "max": 1.9
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1.5,
+      "max": 2.6
+     },
+     "gpuMs": {
+      "p50": 0.51,
+      "p95": 0.56,
+      "max": 1.81,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.5,
+      "p95": 0.9,
+      "max": 1.9
+     },
+     "drawCallsPerFrame": 21.7,
+     "entities": 17,
+     "workerTickMs": {
+      "p50": 1.1,
+      "p95": 1.8
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 3,
+      "cards": 5,
+      "blobs": 7,
+      "sunRedraws": 0,
+      "cars": 4,
+      "calls": 20,
+      "fogEnd": 252,
+      "meshes": 9,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 599,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.8,
+      "p95": 1.3,
+      "max": 3.5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1.3,
+      "max": 2.2
+     },
+     "gpuMs": {
+      "p50": 0.8,
+      "p95": 0.85,
+      "max": 3.06,
+      "samples": 599,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.6,
+      "p95": 0.7,
+      "max": 1.4
+     },
+     "drawCallsPerFrame": 44,
+     "entities": 26,
+     "workerTickMs": {
+      "p50": 1.1,
+      "p95": 1.8
+     },
+     "upload": {
+      "frames": 9,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 9,
+      "totalMiB": 4.4
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 12,
+      "cards": 43,
+      "blobs": 18,
+      "sunRedraws": 0,
+      "cars": 6,
+      "calls": 37,
+      "fogEnd": 1006,
+      "meshes": 16,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1,
+      "p95": 1.4,
+      "max": 2.5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.9,
+      "max": 1.3
+     },
+     "gpuMs": {
+      "p50": 1.05,
+      "p95": 2.12,
+      "max": 4.35,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.3,
+      "p95": 1.6,
+      "max": 2.4
+     },
+     "drawCallsPerFrame": 193,
+     "entities": 52,
+     "workerTickMs": {
+      "p50": 1,
+      "p95": 1.5
+     },
+     "upload": {
+      "frames": 9,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 9,
+      "totalMiB": 4.4
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 28,
+      "cards": 46,
+      "blobs": 36,
+      "sunRedraws": 0,
+      "cars": 11,
+      "calls": 193,
+      "fogEnd": 1488,
+      "meshes": 22,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2,
+      "p95": 2.2,
+      "max": 2.8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3,
+      "p95": 3.4,
+      "max": 3.8
+     },
+     "gpuMs": {
+      "p50": 0.52,
+      "p95": 1.74,
+      "max": 1.85,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.1,
+      "p95": 2.4,
+      "max": 2.7
+     },
+     "drawCallsPerFrame": 19,
+     "entities": 941,
+     "workerTickMs": {
+      "p50": 5.8,
+      "p95": 7.3
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 421,
+      "cards": 5,
+      "blobs": 435,
+      "sunRedraws": 0,
+      "cars": 14,
+      "calls": 19,
+      "fogEnd": 252,
+      "meshes": 9,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3,
+      "p95": 3.4,
+      "max": 3.7
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3,
+      "p95": 3.3,
+      "max": 3.9
+     },
+     "gpuMs": {
+      "p50": 1.27,
+      "p95": 2.48,
+      "max": 2.54,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.2,
+      "p95": 3.6,
+      "max": 4.9
+     },
+     "drawCallsPerFrame": 358,
+     "entities": 1067,
+     "workerTickMs": {
+      "p50": 5.2,
+      "p95": 6.8
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 1012,
+      "cards": 43,
+      "blobs": 1059,
+      "sunRedraws": 0,
+      "cars": 47,
+      "calls": 358,
+      "fogEnd": 1006,
+      "meshes": 16,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.8,
+      "p95": 4.3,
+      "max": 5.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.1,
+      "p95": 3.5,
+      "max": 4.1
+     },
+     "gpuMs": {
+      "p50": 1.59,
+      "p95": 3.49,
+      "max": 7.01,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.9,
+      "p95": 4.3,
+      "max": 5.1
+     },
+     "drawCallsPerFrame": 549.3,
+     "entities": 1093,
+     "workerTickMs": {
+      "p50": 5.7,
+      "p95": 7.2
+     },
+     "upload": {
+      "frames": 3,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 3,
+      "totalMiB": 1.4
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 1028,
+      "cards": 46,
+      "blobs": 1077,
+      "sunRedraws": 0,
+      "cars": 52,
+      "calls": 494,
+      "fogEnd": 1488,
+      "meshes": 22,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.5,
+      "p95": 0.9,
+      "max": 1.7
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.9,
+      "p95": 1.4,
+      "max": 2.8
+     },
+     "gpuMs": {
+      "p50": 0.45,
+      "p95": 0.5,
+      "max": 3.56,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.4,
+      "p95": 0.7,
+      "max": 1.9
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 138,
+     "workerTickMs": {
+      "p50": 2.1,
+      "p95": 3.3
+     },
+     "upload": {
+      "frames": 3,
+      "kiB": {
+       "p50": 256,
+       "p95": 256,
+       "max": 256
+      },
+      "pages": 3,
+      "totalMiB": 0.6
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 25,
+      "cards": 127,
+      "blobs": 25,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 4,
+      "fogEnd": 252,
+      "meshes": 2,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.9,
+      "p95": 1.1,
+      "max": 1.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1,
+      "p95": 1.3,
+      "max": 2.6
+     },
+     "gpuMs": {
+      "p50": 0.77,
+      "p95": 0.82,
+      "max": 2.53,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.9,
+      "p95": 1.2,
+      "max": 2.6
+     },
+     "drawCallsPerFrame": 6,
+     "entities": 261,
+     "workerTickMs": {
+      "p50": 2.2,
+      "p95": 2.8
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 112,
+       "p95": 112,
+       "max": 112
+      },
+      "pages": 2,
+      "totalMiB": 0.2
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 137,
+      "cards": 396,
+      "blobs": 137,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 6,
+      "fogEnd": 1006,
+      "meshes": 4,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.6,
+      "p95": 2,
+      "max": 2.3
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.2,
+      "p95": 1.5,
+      "max": 2.2
+     },
+     "gpuMs": {
+      "p50": 1.38,
+      "p95": 3.28,
+      "max": 3.39,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.7,
+      "p95": 2.1,
+      "max": 2.2
+     },
+     "drawCallsPerFrame": 15,
+     "entities": 536,
+     "workerTickMs": {
+      "p50": 2.1,
+      "p95": 2.6
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 488,
+      "cards": 1266,
+      "blobs": 488,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 15,
+      "fogEnd": 1536,
+      "meshes": 13,
+      "merged": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, Vite dev modules: Top-down in the 3D scene (view=topdown3d), after the merge",
+   "device": "mac",
+   "merge": "after",
+   "browser": "156.0.8078.4",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.6,
+      "p95": 1.2,
+      "max": 3.1
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.7,
+      "p95": 1.3,
+      "max": 2.4
+     },
+     "gpuMs": {
+      "p50": 0.55,
+      "p95": 0.61,
+      "max": 3.14,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.5,
+      "p95": 0.9,
+      "max": 2.2
+     },
+     "drawCallsPerFrame": 23.2,
+     "entities": 22,
+     "workerTickMs": {
+      "p50": 1.2,
+      "p95": 2
+     },
+     "drivenPx": 422,
+     "upload": {
+      "frames": 13,
+      "kiB": {
+       "p50": 512,
+       "p95": 672,
+       "max": 672
+      },
+      "pages": 18,
+      "totalMiB": 6.4
+     },
+     "view3d": {
+      "chunks": 20,
+      "builds": 0,
+      "groundPages": 16,
+      "billboards": 5,
+      "cards": 4,
+      "blobs": 9,
+      "sunRedraws": 12,
+      "cars": 4,
+      "calls": 28,
+      "fogEnd": 252,
+      "meshes": 8,
+      "merged": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz, Vite dev modules: First person (view=fps), after the merge",
+   "device": "mac",
+   "merge": "after",
+   "browser": "156.0.8078.4",
+   "query": "view=fps",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.7,
+      "p95": 1.5,
+      "max": 11.8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.9,
+      "p95": 2.1,
+      "max": 3
+     },
+     "gpuMs": {
+      "p50": 0.6,
+      "p95": 0.65,
+      "max": 1.88,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.5,
+      "p95": 1.3,
+      "max": 2.3
+     },
+     "drawCallsPerFrame": 19.9,
+     "entities": 30,
+     "workerTickMs": {
+      "p50": 1.4,
+      "p95": 2.8
+     },
+     "upload": {
+      "frames": 9,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 9,
+      "totalMiB": 4.4
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 8,
+      "cards": 37,
+      "blobs": 16,
+      "sunRedraws": 0,
+      "cars": 8,
+      "calls": 24,
+      "fogEnd": 800,
+      "meshes": 16,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.9,
+      "p95": 1.1,
+      "max": 2.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.1,
+      "p95": 1.6,
+      "max": 4.6
+     },
+     "gpuMs": {
+      "p50": 0.59,
+      "p95": 0.65,
+      "max": 3.16,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1,
+      "p95": 1.5,
+      "max": 2.6
+     },
+     "drawCallsPerFrame": 6,
+     "entities": 310,
+     "workerTickMs": {
+      "p50": 2.2,
+      "p95": 2.9
+     },
+     "upload": {
+      "frames": 6,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 6,
+      "totalMiB": 2
+     },
+     "view3d": {
+      "chunks": 69,
+      "builds": 0,
+      "groundPages": 69,
+      "billboards": 135,
+      "cards": 402,
+      "blobs": 135,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 6,
+      "fogEnd": 800,
+      "meshes": 4,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 9.9,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.9,
+      "p95": 3.6,
+      "max": 4.3
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.7,
+      "p95": 3,
+      "max": 3.4
+     },
+     "gpuMs": {
+      "p50": 1.22,
+      "p95": 2.28,
+      "max": 2.4,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.1,
+      "p95": 3.5,
+      "max": 3.7
+     },
+     "drawCallsPerFrame": 297,
+     "entities": 1071,
+     "workerTickMs": {
+      "p50": 6,
+      "p95": 8.2
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 1008,
+      "cards": 37,
+      "blobs": 1057,
+      "sunRedraws": 0,
+      "cars": 49,
+      "calls": 297,
+      "fogEnd": 800,
+      "meshes": 16,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.8,
+      "p95": 1.5,
+      "max": 3.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.7,
+      "p95": 1.1,
+      "max": 1.9
+     },
+     "gpuMs": {
+      "p50": 0.7,
+      "p95": 0.75,
+      "max": 2.07,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.8,
+      "p95": 1.4,
+      "max": 3.2
+     },
+     "drawCallsPerFrame": 38.6,
+     "entities": 38,
+     "workerTickMs": {
+      "p50": 1.2,
+      "p95": 2
+     },
+     "drivenPx": 418,
+     "upload": {
+      "frames": 21,
+      "kiB": {
+       "p50": 256,
+       "p95": 512,
+       "max": 960
+      },
+      "pages": 23,
+      "totalMiB": 7.9
+     },
+     "view3d": {
+      "chunks": 70,
+      "builds": 0,
+      "groundPages": 70,
+      "billboards": 12,
+      "cards": 6,
+      "blobs": 23,
+      "sunRedraws": 8,
+      "cars": 11,
+      "calls": 40,
+      "fogEnd": 800,
+      "meshes": 14,
+      "merged": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules: Fixed view, before the merge",
+   "device": "pixel",
+   "merge": "before",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 16.7,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.8,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.6,
+      "p95": 5.1,
+      "max": 7.9
+     },
+     "submitMs": {
+      "p50": 1.6,
+      "p95": 2.4,
+      "max": 5.6
+     },
+     "updateMs": {
+      "p50": 3.3,
+      "p95": 4.3,
+      "max": 7.3
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.7,
+      "p95": 5,
+      "max": 6.3
+     },
+     "drawCallsPerFrame": 6.4,
+     "entities": 16,
+     "workerTickMs": {
+      "p50": 5.6,
+      "p95": 8.3
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 1,
+      "totalMiB": 0.4
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4,
+      "p95": 5.3,
+      "max": 6.9
+     },
+     "submitMs": {
+      "p50": 1.8,
+      "p95": 2.7,
+      "max": 4.7
+     },
+     "updateMs": {
+      "p50": 3,
+      "p95": 3.9,
+      "max": 5.8
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.7,
+      "p95": 4.8,
+      "max": 6
+     },
+     "drawCallsPerFrame": 8.3,
+     "entities": 16,
+     "workerTickMs": {
+      "p50": 5,
+      "p95": 9.9
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 48,
+       "p95": 48,
+       "max": 48
+      },
+      "pages": 1,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 301,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.9,
+      "p95": 6.6,
+      "max": 9.2
+     },
+     "submitMs": {
+      "p50": 2.7,
+      "p95": 4,
+      "max": 6.6
+     },
+     "updateMs": {
+      "p50": 2.7,
+      "p95": 3.5,
+      "max": 5.9
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 5.2,
+      "p95": 6.6,
+      "max": 7.3
+     },
+     "drawCallsPerFrame": 9.6,
+     "entities": 30,
+     "workerTickMs": {
+      "p50": 4.1,
+      "p95": 7.7
+     },
+     "upload": {
+      "frames": 5,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 5,
+      "totalMiB": 2
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 301,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.8,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.8,
+      "p95": 5.5,
+      "max": 6.3
+     },
+     "submitMs": {
+      "p50": 1,
+      "p95": 1.4,
+      "max": 3.8
+     },
+     "updateMs": {
+      "p50": 3,
+      "p95": 4,
+      "max": 8.9
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.5,
+      "p95": 5.5,
+      "max": 8.5
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 125,
+     "workerTickMs": {
+      "p50": 6.2,
+      "p95": 9.9
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.8,
+      "max": 16.9
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.3,
+      "p95": 5.4,
+      "max": 6.5
+     },
+     "submitMs": {
+      "p50": 0.8,
+      "p95": 1,
+      "max": 1.2
+     },
+     "updateMs": {
+      "p50": 3.4,
+      "p95": 4.5,
+      "max": 10.2
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4,
+      "p95": 5.2,
+      "max": 5.7
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 177,
+     "workerTickMs": {
+      "p50": 7.2,
+      "p95": 9.5
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 5.2,
+      "p95": 6.2,
+      "max": 8.3
+     },
+     "submitMs": {
+      "p50": 1.6,
+      "p95": 1.9,
+      "max": 3.4
+     },
+     "updateMs": {
+      "p50": 3.3,
+      "p95": 4.1,
+      "max": 9.8
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 5.5,
+      "p95": 6.5,
+      "max": 6.9
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 308,
+     "workerTickMs": {
+      "p50": 7.6,
+      "p95": 9.9
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 261,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 33.3,
+      "max": 66.6
+     },
+     "missed": 37,
+     "renderMs": {
+      "p50": 8.5,
+      "p95": 10.9,
+      "max": 14.7
+     },
+     "submitMs": {
+      "p50": 1.6,
+      "p95": 2.4,
+      "max": 3.5
+     },
+     "updateMs": {
+      "p50": 7.2,
+      "p95": 11.8,
+      "max": 52.6
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 8.4,
+      "p95": 11.4,
+      "max": 14.4
+     },
+     "drawCallsPerFrame": 8.4,
+     "entities": 945,
+     "workerTickMs": {
+      "p50": 24.3,
+      "p95": 36.1
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 48,
+       "p95": 48,
+       "max": 48
+      },
+      "pages": 1,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 183,
+     "frameMs": {
+      "p50": 33.2,
+      "p95": 49.9,
+      "max": 50.1
+     },
+     "missed": 11,
+     "renderMs": {
+      "p50": 12.5,
+      "p95": 17.9,
+      "max": 26.4
+     },
+     "submitMs": {
+      "p50": 4,
+      "p95": 6.6,
+      "max": 13.6
+     },
+     "updateMs": {
+      "p50": 7,
+      "p95": 11.6,
+      "max": 15
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 12.5,
+      "p95": 18,
+      "max": 20.3
+     },
+     "drawCallsPerFrame": 23,
+     "entities": 1058,
+     "workerTickMs": {
+      "p50": 28.7,
+      "p95": 37.9
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 48,
+       "p95": 48,
+       "max": 48
+      },
+      "pages": 1,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 189,
+     "frameMs": {
+      "p50": 33.3,
+      "p95": 33.4,
+      "max": 49.9
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 14,
+      "p95": 18.2,
+      "max": 23.3
+     },
+     "submitMs": {
+      "p50": 3.8,
+      "p95": 6.3,
+      "max": 9
+     },
+     "updateMs": {
+      "p50": 6.8,
+      "p95": 11.4,
+      "max": 15.3
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 14.6,
+      "p95": 19.4,
+      "max": 19.9
+     },
+     "drawCallsPerFrame": 22.5,
+     "entities": 1068,
+     "workerTickMs": {
+      "p50": 24.6,
+      "p95": 31.8
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules: Fixed view, before the merge",
+   "device": "pixel",
+   "merge": "before",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 16.7,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4,
+      "p95": 6.7,
+      "max": 13.9
+     },
+     "submitMs": {
+      "p50": 1.4,
+      "p95": 2.2,
+      "max": 11.2
+     },
+     "updateMs": {
+      "p50": 3.2,
+      "p95": 4.5,
+      "max": 5.7
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.9,
+      "p95": 5.1,
+      "max": 6.7
+     },
+     "drawCallsPerFrame": 7.2,
+     "entities": 19,
+     "workerTickMs": {
+      "p50": 5.4,
+      "p95": 8.8
+     },
+     "drivenPx": 501,
+     "upload": {
+      "frames": 7,
+      "kiB": {
+       "p50": 512,
+       "p95": 1024,
+       "max": 1024
+      },
+      "pages": 9,
+      "totalMiB": 3.9
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules: Top-down in the 3D scene (view=topdown3d), before the merge",
+   "device": "pixel",
+   "merge": "before",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 16.7,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.7,
+      "p95": 3.9,
+      "max": 5.6
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.8,
+      "p95": 4.7,
+      "max": 5.4
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.2,
+      "p95": 4.2,
+      "max": 4.9
+     },
+     "drawCallsPerFrame": 18.1,
+     "entities": 16,
+     "workerTickMs": {
+      "p50": 5.2,
+      "p95": 7.7
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 48,
+       "p95": 48,
+       "max": 48
+      },
+      "pages": 1,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 12,
+      "builds": 0,
+      "groundPages": 9,
+      "billboards": 2,
+      "cards": 5,
+      "blobs": 5,
+      "sunRedraws": 0,
+      "cars": 3,
+      "calls": 25,
+      "fogEnd": 148
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.6,
+      "p95": 4.9,
+      "max": 7.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.3,
+      "p95": 4.4,
+      "max": 6.1
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.5,
+      "p95": 4.8,
+      "max": 7.5
+     },
+     "drawCallsPerFrame": 47,
+     "entities": 16,
+     "workerTickMs": {
+      "p50": 5.9,
+      "p95": 9.9
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 2,
+      "totalMiB": 0.9
+     },
+     "view3d": {
+      "chunks": 32,
+      "builds": 0,
+      "groundPages": 28,
+      "billboards": 6,
+      "cards": 19,
+      "blobs": 8,
+      "sunRedraws": 0,
+      "cars": 2,
+      "calls": 47,
+      "fogEnd": 593
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 17
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.6,
+      "p95": 5.9,
+      "max": 8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.4,
+      "p95": 4,
+      "max": 4.4
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.6,
+      "p95": 5.6,
+      "max": 6.6
+     },
+     "drawCallsPerFrame": 190.6,
+     "entities": 27,
+     "workerTickMs": {
+      "p50": 4.6,
+      "p95": 8.3
+     },
+     "upload": {
+      "frames": 4,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 4,
+      "totalMiB": 2
+     },
+     "view3d": {
+      "chunks": 91,
+      "builds": 0,
+      "groundPages": 91,
+      "billboards": 13,
+      "cards": 42,
+      "blobs": 17,
+      "sunRedraws": 0,
+      "cars": 4,
+      "calls": 142,
+      "fogEnd": 1483
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 17.5
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.4,
+      "p95": 4,
+      "max": 7.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.5,
+      "p95": 5.2,
+      "max": 10.7
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 2.7,
+      "p95": 3.4,
+      "max": 5.1
+     },
+     "drawCallsPerFrame": 9,
+     "entities": 125,
+     "workerTickMs": {
+      "p50": 7,
+      "p95": 14.1
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 12,
+      "builds": 0,
+      "groundPages": 9,
+      "billboards": 13,
+      "cards": 94,
+      "blobs": 13,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 9,
+      "fogEnd": 148
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 301,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.4,
+      "p95": 4.6,
+      "max": 6.5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.9,
+      "p95": 5.3,
+      "max": 9.6
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.4,
+      "p95": 4.3,
+      "max": 5.5
+     },
+     "drawCallsPerFrame": 27,
+     "entities": 177,
+     "workerTickMs": {
+      "p50": 8,
+      "p95": 10.8
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 32,
+      "builds": 0,
+      "groundPages": 28,
+      "billboards": 70,
+      "cards": 231,
+      "blobs": 70,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 27,
+      "fogEnd": 593
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 17.1
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.7,
+      "p95": 5.8,
+      "max": 6.5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.8,
+      "p95": 4.7,
+      "max": 10.5
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.8,
+      "p95": 5.6,
+      "max": 6.4
+     },
+     "drawCallsPerFrame": 87,
+     "entities": 308,
+     "workerTickMs": {
+      "p50": 7.4,
+      "p95": 10.5
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 91,
+      "builds": 0,
+      "groundPages": 91,
+      "billboards": 221,
+      "cards": 718,
+      "blobs": 221,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 87,
+      "fogEnd": 1483
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 301,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 6.1,
+      "p95": 8.7,
+      "max": 13.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 6.3,
+      "p95": 10.6,
+      "max": 15.5
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 6.7,
+      "p95": 9.6,
+      "max": 11.8
+     },
+     "drawCallsPerFrame": 17,
+     "entities": 944,
+     "workerTickMs": {
+      "p50": 23,
+      "p95": 32.1
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 12,
+      "builds": 0,
+      "groundPages": 9,
+      "billboards": 238,
+      "cards": 5,
+      "blobs": 248,
+      "sunRedraws": 0,
+      "cars": 10,
+      "calls": 17,
+      "fogEnd": 148
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 207,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 33.4,
+      "max": 83.3
+     },
+     "missed": 87,
+     "renderMs": {
+      "p50": 11.1,
+      "p95": 14.1,
+      "max": 23.1
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 6.9,
+      "p95": 11.4,
+      "max": 51
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 11.1,
+      "p95": 14,
+      "max": 15.9
+     },
+     "drawCallsPerFrame": 197,
+     "entities": 1060,
+     "workerTickMs": {
+      "p50": 27.2,
+      "p95": 41.7
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 32,
+      "builds": 0,
+      "groundPages": 28,
+      "billboards": 699,
+      "cards": 19,
+      "blobs": 738,
+      "sunRedraws": 0,
+      "cars": 39,
+      "calls": 197,
+      "fogEnd": 593
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 139,
+     "frameMs": {
+      "p50": 33.3,
+      "p95": 50.1,
+      "max": 50.4
+     },
+     "missed": 26,
+     "renderMs": {
+      "p50": 17.8,
+      "p95": 20.8,
+      "max": 23.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 8.4,
+      "p95": 12.5,
+      "max": 16.1
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 18.8,
+      "p95": 20.9,
+      "max": 21.7
+     },
+     "drawCallsPerFrame": 521,
+     "entities": 1069,
+     "workerTickMs": {
+      "p50": 23.7,
+      "p95": 30.9
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 91,
+      "builds": 0,
+      "groundPages": 91,
+      "billboards": 1013,
+      "cards": 42,
+      "blobs": 1062,
+      "sunRedraws": 0,
+      "cars": 49,
+      "calls": 521,
+      "fogEnd": 1483
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules: Top-down in the 3D scene (view=topdown3d), before the merge",
+   "device": "pixel",
+   "merge": "before",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 16.7,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.6,
+      "p95": 16.7,
+      "max": 17.1
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.6,
+      "p95": 6.6,
+      "max": 12.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.4,
+      "p95": 4.6,
+      "max": 6.1
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.8,
+      "p95": 5.2,
+      "max": 10.7
+     },
+     "drawCallsPerFrame": 17.9,
+     "entities": 19,
+     "workerTickMs": {
+      "p50": 5.7,
+      "p95": 9.5
+     },
+     "drivenPx": 518,
+     "upload": {
+      "frames": 14,
+      "kiB": {
+       "p50": 512,
+       "p95": 672,
+       "max": 672
+      },
+      "pages": 19,
+      "totalMiB": 6.3
+     },
+     "view3d": {
+      "chunks": 15,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 1,
+      "cards": 1,
+      "blobs": 5,
+      "sunRedraws": 11,
+      "cars": 4,
+      "calls": 28,
+      "fogEnd": 148
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules: First person (view=fps), before the merge",
+   "device": "pixel",
+   "merge": "before",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "view=fps",
+   "seconds": 5,
+   "idleFrameMs": 16.6,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.8,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.8,
+      "p95": 4.9,
+      "max": 8.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.8,
+      "p95": 4.5,
+      "max": 5.3
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.1,
+      "p95": 5.3,
+      "max": 8.2
+     },
+     "drawCallsPerFrame": 29.8,
+     "entities": 30,
+     "workerTickMs": {
+      "p50": 5.2,
+      "p95": 8.7
+     },
+     "upload": {
+      "frames": 4,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 4,
+      "totalMiB": 2
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 8,
+      "cards": 37,
+      "blobs": 14,
+      "sunRedraws": 0,
+      "cars": 6,
+      "calls": 33,
+      "fogEnd": 800
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 287,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 150
+     },
+     "missed": 2,
+     "renderMs": {
+      "p50": 3.6,
+      "p95": 4.6,
+      "max": 6.7
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.6,
+      "p95": 4.9,
+      "max": 10.1
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.9,
+      "p95": 5.4,
+      "max": 6.6
+     },
+     "drawCallsPerFrame": 17,
+     "entities": 310,
+     "workerTickMs": {
+      "p50": 7.1,
+      "p95": 10.5
+     },
+     "upload": {
+      "frames": 4,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 4,
+      "totalMiB": 1.4
+     },
+     "view3d": {
+      "chunks": 69,
+      "builds": 0,
+      "groundPages": 69,
+      "billboards": 135,
+      "cards": 402,
+      "blobs": 135,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 17,
+      "fogEnd": 800
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 172,
+     "frameMs": {
+      "p50": 33.3,
+      "p95": 50,
+      "max": 50.1
+     },
+     "missed": 10,
+     "renderMs": {
+      "p50": 12.5,
+      "p95": 16.2,
+      "max": 17.7
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 8.4,
+      "p95": 12.9,
+      "max": 17
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 15,
+      "p95": 20.4,
+      "max": 21
+     },
+     "drawCallsPerFrame": 124.8,
+     "entities": 1072,
+     "workerTickMs": {
+      "p50": 28.6,
+      "p95": 39.9
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 1008,
+      "cards": 37,
+      "blobs": 1058,
+      "sunRedraws": 0,
+      "cars": 50,
+      "calls": 125,
+      "fogEnd": 800
+     }
+    },
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 5.1,
+      "p95": 7.2,
+      "max": 12
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.1,
+      "p95": 4,
+      "max": 6.4
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.7,
+      "p95": 6.7,
+      "max": 16.2
+     },
+     "drawCallsPerFrame": 37.6,
+     "entities": 35,
+     "workerTickMs": {
+      "p50": 5.8,
+      "p95": 9.3
+     },
+     "drivenPx": 417,
+     "upload": {
+      "frames": 18,
+      "kiB": {
+       "p50": 256,
+       "p95": 960,
+       "max": 960
+      },
+      "pages": 22,
+      "totalMiB": 7.1
+     },
+     "view3d": {
+      "chunks": 70,
+      "builds": 0,
+      "groundPages": 70,
+      "billboards": 14,
+      "cards": 6,
+      "blobs": 23,
+      "sunRedraws": 10,
+      "cars": 9,
+      "calls": 46,
+      "fogEnd": 800
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules: Fixed view, after the merge",
+   "device": "pixel",
+   "merge": "after",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 16.7,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 17.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.5,
+      "p95": 4.8,
+      "max": 9.6
+     },
+     "submitMs": {
+      "p50": 1.6,
+      "p95": 2.4,
+      "max": 6.7
+     },
+     "updateMs": {
+      "p50": 3.3,
+      "p95": 4.2,
+      "max": 5.2
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.7,
+      "p95": 4.6,
+      "max": 5.1
+     },
+     "drawCallsPerFrame": 6.3,
+     "meshDrawCallsPerFrame": 22.8,
+     "entities": 16,
+     "workerTickMs": {
+      "p50": 4.8,
+      "p95": 8.4
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 1,
+      "totalMiB": 0.4
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 17.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.6,
+      "p95": 4.7,
+      "max": 5.9
+     },
+     "submitMs": {
+      "p50": 1.6,
+      "p95": 2.3,
+      "max": 4.2
+     },
+     "updateMs": {
+      "p50": 3.3,
+      "p95": 4.2,
+      "max": 5
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.6,
+      "p95": 4.6,
+      "max": 4.9
+     },
+     "drawCallsPerFrame": 8.1,
+     "meshDrawCallsPerFrame": 23.5,
+     "entities": 16,
+     "workerTickMs": {
+      "p50": 3.9,
+      "p95": 8.6
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 48,
+       "p95": 48,
+       "max": 48
+      },
+      "pages": 1,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.7,
+      "p95": 6.6,
+      "max": 11.5
+     },
+     "submitMs": {
+      "p50": 2.5,
+      "p95": 4,
+      "max": 9.1
+     },
+     "updateMs": {
+      "p50": 2.7,
+      "p95": 3.4,
+      "max": 5.8
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 5.4,
+      "p95": 6.6,
+      "max": 7.2
+     },
+     "drawCallsPerFrame": 9.6,
+     "meshDrawCallsPerFrame": 131.8,
+     "entities": 30,
+     "workerTickMs": {
+      "p50": 4.2,
+      "p95": 9.1
+     },
+     "upload": {
+      "frames": 5,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 5,
+      "totalMiB": 2
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.6,
+      "p95": 16.8,
+      "max": 17.5
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.1,
+      "p95": 5.7,
+      "max": 6.8
+     },
+     "submitMs": {
+      "p50": 1,
+      "p95": 1.5,
+      "max": 3.8
+     },
+     "updateMs": {
+      "p50": 3,
+      "p95": 3.8,
+      "max": 9.5
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.2,
+      "p95": 5.4,
+      "max": 6.8
+     },
+     "drawCallsPerFrame": 4,
+     "meshDrawCallsPerFrame": 0,
+     "entities": 125,
+     "workerTickMs": {
+      "p50": 6.5,
+      "p95": 9.5
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.7,
+      "p95": 5.9,
+      "max": 7.1
+     },
+     "submitMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 3.3
+     },
+     "updateMs": {
+      "p50": 3.4,
+      "p95": 4.5,
+      "max": 15.6
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.5,
+      "p95": 5.4,
+      "max": 5.8
+     },
+     "drawCallsPerFrame": 4,
+     "meshDrawCallsPerFrame": 0,
+     "entities": 177,
+     "workerTickMs": {
+      "p50": 7.6,
+      "p95": 11.2
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 17
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 5.3,
+      "p95": 6.3,
+      "max": 8
+     },
+     "submitMs": {
+      "p50": 1.7,
+      "p95": 1.9,
+      "max": 2.3
+     },
+     "updateMs": {
+      "p50": 3.4,
+      "p95": 4.3,
+      "max": 8.4
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 5.5,
+      "p95": 6.4,
+      "max": 8.9
+     },
+     "drawCallsPerFrame": 4,
+     "meshDrawCallsPerFrame": 0,
+     "entities": 308,
+     "workerTickMs": {
+      "p50": 7.5,
+      "p95": 9.9
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 244,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 33.3,
+      "max": 50
+     },
+     "missed": 54,
+     "renderMs": {
+      "p50": 8,
+      "p95": 13.2,
+      "max": 23.6
+     },
+     "submitMs": {
+      "p50": 1.4,
+      "p95": 2.5,
+      "max": 4.1
+     },
+     "updateMs": {
+      "p50": 7.5,
+      "p95": 12.7,
+      "max": 15.6
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 8,
+      "p95": 12.6,
+      "max": 22.5
+     },
+     "drawCallsPerFrame": 7.8,
+     "meshDrawCallsPerFrame": 63.2,
+     "entities": 947,
+     "workerTickMs": {
+      "p50": 27,
+      "p95": 40.9
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 48,
+       "p95": 48,
+       "max": 48
+      },
+      "pages": 1,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 180,
+     "frameMs": {
+      "p50": 33.2,
+      "p95": 50,
+      "max": 50.1
+     },
+     "missed": 16,
+     "renderMs": {
+      "p50": 12.7,
+      "p95": 18,
+      "max": 29.8
+     },
+     "submitMs": {
+      "p50": 1.6,
+      "p95": 6.1,
+      "max": 8.2
+     },
+     "updateMs": {
+      "p50": 7,
+      "p95": 13.6,
+      "max": 26.5
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 12.5,
+      "p95": 17.8,
+      "max": 27
+     },
+     "drawCallsPerFrame": 21.1,
+     "meshDrawCallsPerFrame": 174.1,
+     "entities": 1060,
+     "workerTickMs": {
+      "p50": 34.2,
+      "p95": 46.3
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 48,
+       "p95": 48,
+       "max": 48
+      },
+      "pages": 1,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 84,
+     "frameMs": {
+      "p50": 66.6,
+      "p95": 83.3,
+      "max": 83.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 18.3,
+      "p95": 23,
+      "max": 26.9
+     },
+     "submitMs": {
+      "p50": 5,
+      "p95": 9.5,
+      "max": 10.7
+     },
+     "updateMs": {
+      "p50": 11.2,
+      "p95": 16.7,
+      "max": 19
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 19.6,
+      "p95": 24.6,
+      "max": 25.8
+     },
+     "drawCallsPerFrame": 18.6,
+     "meshDrawCallsPerFrame": 68.4,
+     "entities": 1069,
+     "workerTickMs": {
+      "p50": 26.5,
+      "p95": 34.5
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules: Fixed view, after the merge",
+   "device": "pixel",
+   "merge": "after",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 16.6,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.1,
+      "p95": 6.6,
+      "max": 10.4
+     },
+     "submitMs": {
+      "p50": 1.5,
+      "p95": 2.5,
+      "max": 7.1
+     },
+     "updateMs": {
+      "p50": 3,
+      "p95": 4,
+      "max": 8.5
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.3,
+      "p95": 5.9,
+      "max": 7.4
+     },
+     "drawCallsPerFrame": 7.3,
+     "meshDrawCallsPerFrame": 25.1,
+     "entities": 19,
+     "workerTickMs": {
+      "p50": 5.1,
+      "p95": 10.5
+     },
+     "drivenPx": 507,
+     "upload": {
+      "frames": 7,
+      "kiB": {
+       "p50": 512,
+       "p95": 1024,
+       "max": 1024
+      },
+      "pages": 9,
+      "totalMiB": 3.9
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules: Top-down in the 3D scene (view=topdown3d), after the merge",
+   "device": "pixel",
+   "merge": "after",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 16.6,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.7,
+      "p95": 3.8,
+      "max": 5.5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.7,
+      "p95": 4.8,
+      "max": 5.8
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.3,
+      "p95": 4.2,
+      "max": 5.2
+     },
+     "drawCallsPerFrame": 14.1,
+     "entities": 16,
+     "workerTickMs": {
+      "p50": 5.1,
+      "p95": 8.4
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 48,
+       "p95": 48,
+       "max": 48
+      },
+      "pages": 1,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 12,
+      "builds": 0,
+      "groundPages": 9,
+      "billboards": 2,
+      "cards": 5,
+      "blobs": 5,
+      "sunRedraws": 0,
+      "cars": 3,
+      "calls": 21,
+      "fogEnd": 148,
+      "meshes": 8,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 296,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 83.3
+     },
+     "missed": 1,
+     "renderMs": {
+      "p50": 3.2,
+      "p95": 4.2,
+      "max": 7.8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.7,
+      "p95": 4.6,
+      "max": 7.5
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.1,
+      "p95": 4.2,
+      "max": 4.5
+     },
+     "drawCallsPerFrame": 23,
+     "entities": 16,
+     "workerTickMs": {
+      "p50": 5.3,
+      "p95": 8.7
+     },
+     "upload": {
+      "frames": 3,
+      "kiB": {
+       "p50": 384,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 3,
+      "totalMiB": 0.9
+     },
+     "view3d": {
+      "chunks": 32,
+      "builds": 0,
+      "groundPages": 28,
+      "billboards": 6,
+      "cards": 19,
+      "blobs": 8,
+      "sunRedraws": 0,
+      "cars": 2,
+      "calls": 23,
+      "fogEnd": 593,
+      "meshes": 12,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 301,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.9,
+      "p95": 6.4,
+      "max": 10.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.5,
+      "p95": 4.1,
+      "max": 4.6
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.1,
+      "p95": 5.5,
+      "max": 6.6
+     },
+     "drawCallsPerFrame": 144.6,
+     "entities": 27,
+     "workerTickMs": {
+      "p50": 5.1,
+      "p95": 8.9
+     },
+     "upload": {
+      "frames": 4,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 4,
+      "totalMiB": 2
+     },
+     "view3d": {
+      "chunks": 91,
+      "builds": 0,
+      "groundPages": 91,
+      "billboards": 13,
+      "cards": 42,
+      "blobs": 17,
+      "sunRedraws": 0,
+      "cars": 4,
+      "calls": 46,
+      "fogEnd": 1483,
+      "meshes": 15,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.6,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.6,
+      "p95": 3.5,
+      "max": 5.9
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 4.2,
+      "p95": 5.7,
+      "max": 11.4
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.1,
+      "p95": 3.8,
+      "max": 6.3
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 125,
+     "workerTickMs": {
+      "p50": 7.2,
+      "p95": 10.7
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 12,
+      "builds": 0,
+      "groundPages": 9,
+      "billboards": 13,
+      "cards": 94,
+      "blobs": 13,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 4,
+      "fogEnd": 148,
+      "meshes": 2,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.5,
+      "p95": 4.4,
+      "max": 8.5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 4.3,
+      "p95": 5.3,
+      "max": 10.4
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.4,
+      "p95": 4.2,
+      "max": 4.8
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 177,
+     "workerTickMs": {
+      "p50": 8.3,
+      "p95": 10.9
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 32,
+      "builds": 0,
+      "groundPages": 28,
+      "billboards": 70,
+      "cards": 231,
+      "blobs": 70,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 4,
+      "fogEnd": 593,
+      "meshes": 2,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.6,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.3,
+      "p95": 5.5,
+      "max": 6.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.9,
+      "p95": 4.9,
+      "max": 8.8
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.6,
+      "p95": 5.5,
+      "max": 5.9
+     },
+     "drawCallsPerFrame": 6,
+     "entities": 308,
+     "workerTickMs": {
+      "p50": 7.4,
+      "p95": 10.5
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 91,
+      "builds": 0,
+      "groundPages": 91,
+      "billboards": 221,
+      "cards": 718,
+      "blobs": 221,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 6,
+      "fogEnd": 1483,
+      "meshes": 4,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 298,
+     "frameMs": {
+      "p50": 16.6,
+      "p95": 16.7,
+      "max": 33.3
+     },
+     "missed": 3,
+     "renderMs": {
+      "p50": 6.7,
+      "p95": 9.1,
+      "max": 10.8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 6.9,
+      "p95": 11.1,
+      "max": 14.5
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 7,
+      "p95": 9.5,
+      "max": 11.6
+     },
+     "drawCallsPerFrame": 13,
+     "entities": 943,
+     "workerTickMs": {
+      "p50": 24.9,
+      "p95": 37.8
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 12,
+      "builds": 0,
+      "groundPages": 9,
+      "billboards": 239,
+      "cards": 5,
+      "blobs": 249,
+      "sunRedraws": 0,
+      "cars": 10,
+      "calls": 13,
+      "fogEnd": 148,
+      "meshes": 8,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 200,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 33.4,
+      "max": 50.1
+     },
+     "missed": 99,
+     "renderMs": {
+      "p50": 11.4,
+      "p95": 14.8,
+      "max": 17.6
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 7.1,
+      "p95": 11.6,
+      "max": 22.4
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 11.3,
+      "p95": 14.3,
+      "max": 15.5
+     },
+     "drawCallsPerFrame": 173,
+     "entities": 1059,
+     "workerTickMs": {
+      "p50": 25.8,
+      "p95": 41.1
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 32,
+      "builds": 0,
+      "groundPages": 28,
+      "billboards": 702,
+      "cards": 19,
+      "blobs": 740,
+      "sunRedraws": 0,
+      "cars": 38,
+      "calls": 173,
+      "fogEnd": 593,
+      "meshes": 12,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 77,
+     "frameMs": {
+      "p50": 66.6,
+      "p95": 116.5,
+      "max": 133.4
+     },
+     "missed": 4,
+     "renderMs": {
+      "p50": 21.1,
+      "p95": 25.1,
+      "max": 57.8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 10.6,
+      "p95": 15.1,
+      "max": 23.8
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 22.1,
+      "p95": 24.9,
+      "max": 29.5
+     },
+     "drawCallsPerFrame": 425,
+     "entities": 1069,
+     "workerTickMs": {
+      "p50": 31.6,
+      "p95": 39.5
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 91,
+      "builds": 0,
+      "groundPages": 91,
+      "billboards": 1013,
+      "cards": 42,
+      "blobs": 1062,
+      "sunRedraws": 0,
+      "cars": 49,
+      "calls": 425,
+      "fogEnd": 1483,
+      "meshes": 15,
+      "merged": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules: Top-down in the 3D scene (view=topdown3d), after the merge",
+   "device": "pixel",
+   "merge": "after",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 16.7,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.6,
+      "p95": 16.7,
+      "max": 17.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.4,
+      "p95": 6.4,
+      "max": 11
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.3,
+      "p95": 4.7,
+      "max": 9.3
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 2.9,
+      "p95": 5.1,
+      "max": 7.1
+     },
+     "drawCallsPerFrame": 13.1,
+     "entities": 19,
+     "workerTickMs": {
+      "p50": 5.2,
+      "p95": 9.3
+     },
+     "drivenPx": 504,
+     "upload": {
+      "frames": 13,
+      "kiB": {
+       "p50": 512,
+       "p95": 672,
+       "max": 672
+      },
+      "pages": 17,
+      "totalMiB": 5.8
+     },
+     "view3d": {
+      "chunks": 15,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 1,
+      "cards": 1,
+      "blobs": 5,
+      "sunRedraws": 9,
+      "cars": 4,
+      "calls": 23,
+      "fogEnd": 148,
+      "meshes": 8,
+      "merged": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules: First person (view=fps), after the merge",
+   "device": "pixel",
+   "merge": "after",
+   "browser": "Chrome/156.0.8078.79",
+   "query": "view=fps",
+   "seconds": 5,
+   "idleFrameMs": 16.6,
+   "viewport": {
+    "width": 411,
+    "height": 789,
+    "devicePixelRatio": 2.625
+   },
+   "canvas": {
+    "width": 411,
+    "height": 789
+   },
+   "gpu": "ANGLE (ARM, Mali-G710, OpenGL ES 3.2)",
+   "gpuTimer": false,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.8,
+      "p95": 5.1,
+      "max": 7.1
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.9,
+      "p95": 4.6,
+      "max": 5.7
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.8,
+      "p95": 4.8,
+      "max": 7.3
+     },
+     "drawCallsPerFrame": 19,
+     "entities": 30,
+     "workerTickMs": {
+      "p50": 5.8,
+      "p95": 8.8
+     },
+     "upload": {
+      "frames": 4,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 4,
+      "totalMiB": 2
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 8,
+      "cards": 37,
+      "blobs": 14,
+      "sunRedraws": 0,
+      "cars": 6,
+      "calls": 22,
+      "fogEnd": 800,
+      "meshes": 16,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 300,
+     "frameMs": {
+      "p50": 16.7,
+      "p95": 16.7,
+      "max": 17.6
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.4,
+      "p95": 4.4,
+      "max": 6.1
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 4,
+      "p95": 5.3,
+      "max": 9.6
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 3.9,
+      "p95": 4.6,
+      "max": 6
+     },
+     "drawCallsPerFrame": 6,
+     "entities": 310,
+     "workerTickMs": {
+      "p50": 6.9,
+      "p95": 10.4
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 2,
+      "totalMiB": 0.6
+     },
+     "view3d": {
+      "chunks": 69,
+      "builds": 0,
+      "groundPages": 69,
+      "billboards": 135,
+      "cards": 402,
+      "blobs": 135,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 6,
+      "fogEnd": 800,
+      "meshes": 4,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 69,
+     "frameMs": {
+      "p50": 66.6,
+      "p95": 100,
+      "max": 116.6
+     },
+     "missed": 11,
+     "renderMs": {
+      "p50": 20.3,
+      "p95": 24.1,
+      "max": 25.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 10.6,
+      "p95": 17.7,
+      "max": 27.5
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 19.7,
+      "p95": 24.9,
+      "max": 25.9
+     },
+     "drawCallsPerFrame": 113.7,
+     "entities": 1072,
+     "workerTickMs": {
+      "p50": 40,
+      "p95": 53.5
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 1,
+      "totalMiB": 0.4
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 1008,
+      "cards": 37,
+      "blobs": 1058,
+      "sunRedraws": 0,
+      "cars": 50,
+      "calls": 114,
+      "fogEnd": 800,
+      "meshes": 16,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 301,
+     "frameMs": {
+      "p50": 16.6,
+      "p95": 16.7,
+      "max": 16.8
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.4,
+      "p95": 6.4,
+      "max": 9.7
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.7,
+      "p95": 4.4,
+      "max": 6.3
+     },
+     "gpuMs": null,
+     "renderFinishMs": {
+      "p50": 4.1,
+      "p95": 5.5,
+      "max": 6.9
+     },
+     "drawCallsPerFrame": 25.9,
+     "entities": 33,
+     "workerTickMs": {
+      "p50": 5.9,
+      "p95": 9.4
+     },
+     "drivenPx": 169,
+     "upload": {
+      "frames": 11,
+      "kiB": {
+       "p50": 384,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 11,
+      "totalMiB": 4.1
+     },
+     "view3d": {
+      "chunks": 69,
+      "builds": 0,
+      "groundPages": 69,
+      "billboards": 9,
+      "cards": 37,
+      "blobs": 14,
+      "sunRedraws": 7,
+      "cars": 5,
+      "calls": 30,
+      "fogEnd": 800,
+      "meshes": 15,
+      "merged": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "Steam Deck, packaged shell over CDP, 90 Hz, production build: Fixed view, before the merge",
+   "device": "deck",
+   "merge": "before",
+   "browser": "Chrome/152.0.7977.167",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 11.1,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (AMD, AMD Custom GPU 0932 (radeonsi vangogh ACO), OpenGL 4.6)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.2,
+      "p95": 2.9,
+      "max": 4.9
+     },
+     "submitMs": {
+      "p50": 1.1,
+      "p95": 1.7,
+      "max": 3.9
+     },
+     "updateMs": {
+      "p50": 2.1,
+      "p95": 2.8,
+      "max": 4.7
+     },
+     "gpuMs": {
+      "p50": 0.81,
+      "p95": 1.51,
+      "max": 1.65,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.2,
+      "p95": 3.1,
+      "max": 4.4
+     },
+     "drawCallsPerFrame": 8.4,
+     "entities": 17,
+     "workerTickMs": {
+      "p50": 2.3,
+      "p95": 3.6
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 2,
+      "totalMiB": 0.4
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.2
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.1,
+      "p95": 4,
+      "max": 6.6
+     },
+     "submitMs": {
+      "p50": 1.8,
+      "p95": 2.5,
+      "max": 5
+     },
+     "updateMs": {
+      "p50": 2,
+      "p95": 2.6,
+      "max": 4.2
+     },
+     "gpuMs": {
+      "p50": 0.83,
+      "p95": 1.47,
+      "max": 2.2,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.6,
+      "p95": 3.3,
+      "max": 4.7
+     },
+     "drawCallsPerFrame": 13.4,
+     "entities": 26,
+     "workerTickMs": {
+      "p50": 2,
+      "p95": 3
+     },
+     "upload": {
+      "frames": 5,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 5,
+      "totalMiB": 1.9
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.6,
+      "p95": 5.6,
+      "max": 13.7
+     },
+     "submitMs": {
+      "p50": 2.6,
+      "p95": 3.5,
+      "max": 11.4
+     },
+     "updateMs": {
+      "p50": 2,
+      "p95": 2.6,
+      "max": 4.4
+     },
+     "gpuMs": {
+      "p50": 0.89,
+      "p95": 1.03,
+      "max": 1.07,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 4.9,
+      "p95": 5.9,
+      "max": 6.5
+     },
+     "drawCallsPerFrame": 10.9,
+     "entities": 52,
+     "workerTickMs": {
+      "p50": 2.2,
+      "p95": 3.1
+     },
+     "upload": {
+      "frames": 6,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 6,
+      "totalMiB": 2.4
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.2
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.4,
+      "p95": 4.3,
+      "max": 5.4
+     },
+     "submitMs": {
+      "p50": 1.1,
+      "p95": 1.5,
+      "max": 2.1
+     },
+     "updateMs": {
+      "p50": 2.5,
+      "p95": 4.2,
+      "max": 7.3
+     },
+     "gpuMs": {
+      "p50": 0.46,
+      "p95": 0.47,
+      "max": 0.49,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.5,
+      "p95": 4.4,
+      "max": 6.2
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 138,
+     "workerTickMs": {
+      "p50": 3.8,
+      "p95": 5.4
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 240,
+       "p95": 240,
+       "max": 240
+      },
+      "pages": 1,
+      "totalMiB": 0.2
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 449,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 16.6
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.1,
+      "p95": 4.9,
+      "max": 7.8
+     },
+     "submitMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 1.7
+     },
+     "updateMs": {
+      "p50": 2.7,
+      "p95": 3.4,
+      "max": 5.9
+     },
+     "gpuMs": {
+      "p50": 0.48,
+      "p95": 0.49,
+      "max": 1.19,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.9,
+      "p95": 4.8,
+      "max": 5.2
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 261,
+     "workerTickMs": {
+      "p50": 4.1,
+      "p95": 5
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 112,
+       "p95": 112,
+       "max": 112
+      },
+      "pages": 1,
+      "totalMiB": 0.1
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 6.1,
+      "p95": 7.3,
+      "max": 10.1
+     },
+     "submitMs": {
+      "p50": 2.3,
+      "p95": 2.7,
+      "max": 5.9
+     },
+     "updateMs": {
+      "p50": 3.2,
+      "p95": 4.2,
+      "max": 6.7
+     },
+     "gpuMs": {
+      "p50": 0.73,
+      "p95": 0.77,
+      "max": 0.8,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 6.3,
+      "p95": 7.5,
+      "max": 9.4
+     },
+     "drawCallsPerFrame": 7,
+     "entities": 536,
+     "workerTickMs": {
+      "p50": 4.2,
+      "p95": 5
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 343,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 22.3,
+      "max": 22.4
+     },
+     "missed": 108,
+     "renderMs": {
+      "p50": 7.7,
+      "p95": 9.3,
+      "max": 10.8
+     },
+     "submitMs": {
+      "p50": 1.5,
+      "p95": 2.2,
+      "max": 3.6
+     },
+     "updateMs": {
+      "p50": 6.2,
+      "p95": 9.6,
+      "max": 11.4
+     },
+     "gpuMs": {
+      "p50": 1.49,
+      "p95": 1.56,
+      "max": 2.14,
+      "samples": 343,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 7.8,
+      "p95": 9.2,
+      "max": 10.7
+     },
+     "drawCallsPerFrame": 13.4,
+     "entities": 941,
+     "workerTickMs": {
+      "p50": 20.5,
+      "p95": 27.7
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 193,
+     "frameMs": {
+      "p50": 22.3,
+      "p95": 33.5,
+      "max": 77.9
+     },
+     "missed": 11,
+     "renderMs": {
+      "p50": 14.7,
+      "p95": 19.1,
+      "max": 24.6
+     },
+     "submitMs": {
+      "p50": 5.9,
+      "p95": 8.7,
+      "max": 15.8
+     },
+     "updateMs": {
+      "p50": 6.4,
+      "p95": 9.6,
+      "max": 50
+     },
+     "gpuMs": {
+      "p50": 3.03,
+      "p95": 3.67,
+      "max": 3.77,
+      "samples": 193,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 14,
+      "p95": 17.5,
+      "max": 20.2
+     },
+     "drawCallsPerFrame": 35.6,
+     "entities": 1068,
+     "workerTickMs": {
+      "p50": 21,
+      "p95": 29.2
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 2,
+      "totalMiB": 0.4
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 154,
+     "frameMs": {
+      "p50": 33.3,
+      "p95": 44.5,
+      "max": 55.6
+     },
+     "missed": 2,
+     "renderMs": {
+      "p50": 17.1,
+      "p95": 23.3,
+      "max": 30.1
+     },
+     "submitMs": {
+      "p50": 7.8,
+      "p95": 13.7,
+      "max": 18
+     },
+     "updateMs": {
+      "p50": 7.3,
+      "p95": 10.3,
+      "max": 12.3
+     },
+     "gpuMs": {
+      "p50": 2.88,
+      "p95": 3.3,
+      "max": 3.62,
+      "samples": 154,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 11.4,
+      "p95": 12.8,
+      "max": 13.6
+     },
+     "drawCallsPerFrame": 45.2,
+     "entities": 1094,
+     "workerTickMs": {
+      "p50": 16.5,
+      "p95": 25.9
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "Steam Deck, packaged shell over CDP, 90 Hz, production build: Fixed view, before the merge",
+   "device": "deck",
+   "merge": "before",
+   "browser": "Chrome/152.0.7977.167",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 11.1,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (AMD, AMD Custom GPU 0932 (radeonsi vangogh ACO), OpenGL 4.6)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.7,
+      "p95": 3.5,
+      "max": 4.9
+     },
+     "submitMs": {
+      "p50": 1.4,
+      "p95": 2.2,
+      "max": 3.6
+     },
+     "updateMs": {
+      "p50": 1.9,
+      "p95": 2.3,
+      "max": 3.2
+     },
+     "gpuMs": {
+      "p50": 0.79,
+      "p95": 0.87,
+      "max": 1.49,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.5,
+      "p95": 3.2,
+      "max": 3.6
+     },
+     "drawCallsPerFrame": 10.2,
+     "entities": 23,
+     "workerTickMs": {
+      "p50": 2.4,
+      "p95": 3.3
+     },
+     "drivenPx": 75,
+     "upload": {
+      "frames": 7,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 7,
+      "totalMiB": 3.5
+     }
+    }
+   ]
+  },
+  {
+   "label": "Steam Deck, packaged shell over CDP, 90 Hz, production build: Top-down in the 3D scene (view=topdown3d), before the merge",
+   "device": "deck",
+   "merge": "before",
+   "browser": "Chrome/152.0.7977.167",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 11.1,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (AMD, AMD Custom GPU 0932 (radeonsi vangogh ACO), OpenGL 4.6)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.2
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.3,
+      "p95": 1.6,
+      "max": 1.9
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.8,
+      "p95": 2.3,
+      "max": 3.2
+     },
+     "gpuMs": {
+      "p50": 0.84,
+      "p95": 0.85,
+      "max": 1.62,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.3,
+      "p95": 1.6,
+      "max": 1.8
+     },
+     "drawCallsPerFrame": 29.8,
+     "entities": 17,
+     "workerTickMs": {
+      "p50": 2.2,
+      "p95": 3.1
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 3,
+      "cards": 5,
+      "blobs": 7,
+      "sunRedraws": 0,
+      "cars": 4,
+      "calls": 28,
+      "fogEnd": 252
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 447,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 40.7
+     },
+     "missed": 1,
+     "renderMs": {
+      "p50": 2.3,
+      "p95": 2.9,
+      "max": 4.6
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.9,
+      "p95": 2.5,
+      "max": 4
+     },
+     "gpuMs": {
+      "p50": 1.02,
+      "p95": 1.74,
+      "max": 1.78,
+      "samples": 447,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.2,
+      "p95": 2.6,
+      "max": 4.1
+     },
+     "drawCallsPerFrame": 101.2,
+     "entities": 26,
+     "workerTickMs": {
+      "p50": 2.1,
+      "p95": 3.5
+     },
+     "upload": {
+      "frames": 5,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 5,
+      "totalMiB": 2.4
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 12,
+      "cards": 43,
+      "blobs": 18,
+      "sunRedraws": 0,
+      "cars": 6,
+      "calls": 97,
+      "fogEnd": 1006
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 5.2,
+      "p95": 6.3,
+      "max": 7.6
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.1,
+      "p95": 2.7,
+      "max": 3.3
+     },
+     "gpuMs": {
+      "p50": 1.3,
+      "p95": 1.32,
+      "max": 2.06,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 5.3,
+      "p95": 6.2,
+      "max": 7.9
+     },
+     "drawCallsPerFrame": 442,
+     "entities": 52,
+     "workerTickMs": {
+      "p50": 2.7,
+      "p95": 3.5
+     },
+     "upload": {
+      "frames": 6,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 6,
+      "totalMiB": 2.9
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 28,
+      "cards": 46,
+      "blobs": 36,
+      "sunRedraws": 0,
+      "cars": 11,
+      "calls": 442,
+      "fogEnd": 1488
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.5,
+      "p95": 2,
+      "max": 2.9
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.3,
+      "p95": 4.1,
+      "max": 7.1
+     },
+     "gpuMs": {
+      "p50": 0.85,
+      "p95": 0.86,
+      "max": 4.21,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.6,
+      "p95": 2,
+      "max": 2.3
+     },
+     "drawCallsPerFrame": 12,
+     "entities": 138,
+     "workerTickMs": {
+      "p50": 3.9,
+      "p95": 5.7
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 256,
+       "p95": 256,
+       "max": 256
+      },
+      "pages": 2,
+      "totalMiB": 0.4
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 26,
+      "cards": 127,
+      "blobs": 26,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 12,
+      "fogEnd": 252
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.5,
+      "p95": 3.2,
+      "max": 3.6
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.3,
+      "p95": 2.9,
+      "max": 5.4
+     },
+     "gpuMs": {
+      "p50": 0.96,
+      "p95": 0.97,
+      "max": 1.72,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.5,
+      "p95": 3.2,
+      "max": 3.5
+     },
+     "drawCallsPerFrame": 51,
+     "entities": 261,
+     "workerTickMs": {
+      "p50": 4.2,
+      "p95": 5.2
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 112,
+       "p95": 112,
+       "max": 112
+      },
+      "pages": 1,
+      "totalMiB": 0.1
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 137,
+      "cards": 396,
+      "blobs": 137,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 51,
+      "fogEnd": 1006
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.2
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 6.3,
+      "p95": 7.7,
+      "max": 9.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.4,
+      "p95": 4.8,
+      "max": 7
+     },
+     "gpuMs": {
+      "p50": 1.25,
+      "p95": 1.28,
+      "max": 2.01,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 6.3,
+      "p95": 7.9,
+      "max": 9.9
+     },
+     "drawCallsPerFrame": 232,
+     "entities": 536,
+     "workerTickMs": {
+      "p50": 5.3,
+      "p95": 6.7
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 488,
+      "cards": 1266,
+      "blobs": 488,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 232,
+      "fogEnd": 1536
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 378,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 22.3,
+      "max": 22.4
+     },
+     "missed": 73,
+     "renderMs": {
+      "p50": 6.7,
+      "p95": 8.2,
+      "max": 9.9
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 6.2,
+      "p95": 9.7,
+      "max": 12.3
+     },
+     "gpuMs": {
+      "p50": 0.9,
+      "p95": 0.91,
+      "max": 4.29,
+      "samples": 378,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 6.8,
+      "p95": 8.1,
+      "max": 9.3
+     },
+     "drawCallsPerFrame": 28,
+     "entities": 946,
+     "workerTickMs": {
+      "p50": 20.3,
+      "p95": 26.4
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 428,
+      "cards": 5,
+      "blobs": 443,
+      "sunRedraws": 0,
+      "cars": 15,
+      "calls": 28,
+      "fogEnd": 252
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 240,
+     "frameMs": {
+      "p50": 22.2,
+      "p95": 33.3,
+      "max": 77.8
+     },
+     "missed": 15,
+     "renderMs": {
+      "p50": 11.3,
+      "p95": 12.7,
+      "max": 16.8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 6.2,
+      "p95": 9.4,
+      "max": 44.5
+     },
+     "gpuMs": {
+      "p50": 1.26,
+      "p95": 1.28,
+      "max": 2,
+      "samples": 240,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 11.1,
+      "p95": 12.3,
+      "max": 13.2
+     },
+     "drawCallsPerFrame": 419,
+     "entities": 1068,
+     "workerTickMs": {
+      "p50": 21,
+      "p95": 28.6
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 1012,
+      "cards": 43,
+      "blobs": 1060,
+      "sunRedraws": 0,
+      "cars": 48,
+      "calls": 419,
+      "fogEnd": 1006
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 186,
+     "frameMs": {
+      "p50": 22.3,
+      "p95": 33.4,
+      "max": 44.5
+     },
+     "missed": 6,
+     "renderMs": {
+      "p50": 14.1,
+      "p95": 15.8,
+      "max": 19.9
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 7.3,
+      "p95": 9.9,
+      "max": 11.2
+     },
+     "gpuMs": {
+      "p50": 1.43,
+      "p95": 1.6,
+      "max": 2.94,
+      "samples": 186,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 14,
+      "p95": 15,
+      "max": 15.3
+     },
+     "drawCallsPerFrame": 764.9,
+     "entities": 1094,
+     "workerTickMs": {
+      "p50": 19.7,
+      "p95": 25.9
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 1028,
+      "cards": 46,
+      "blobs": 1078,
+      "sunRedraws": 0,
+      "cars": 53,
+      "calls": 748,
+      "fogEnd": 1488
+     }
+    }
+   ]
+  },
+  {
+   "label": "Steam Deck, packaged shell over CDP, 90 Hz, production build: Top-down in the 3D scene (view=topdown3d), before the merge",
+   "device": "deck",
+   "merge": "before",
+   "browser": "Chrome/152.0.7977.167",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 11.1,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (AMD, AMD Custom GPU 0932 (radeonsi vangogh ACO), OpenGL 4.6)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.7,
+      "p95": 2.4,
+      "max": 5.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.7,
+      "p95": 2.2,
+      "max": 3
+     },
+     "gpuMs": {
+      "p50": 0.84,
+      "p95": 1.48,
+      "max": 1.65,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.7,
+      "p95": 3.5,
+      "max": 5.6
+     },
+     "drawCallsPerFrame": 28.6,
+     "entities": 22,
+     "workerTickMs": {
+      "p50": 2.4,
+      "p95": 5
+     },
+     "drivenPx": 484,
+     "upload": {
+      "frames": 10,
+      "kiB": {
+       "p50": 512,
+       "p95": 672,
+       "max": 672
+      },
+      "pages": 15,
+      "totalMiB": 4.9
+     },
+     "view3d": {
+      "chunks": 12,
+      "builds": 0,
+      "groundPages": 9,
+      "billboards": 6,
+      "cards": 1,
+      "blobs": 11,
+      "sunRedraws": 12,
+      "cars": 5,
+      "calls": 24,
+      "fogEnd": 252
+     }
+    }
+   ]
+  },
+  {
+   "label": "Steam Deck, packaged shell over CDP, 90 Hz, production build: First person (view=fps), before the merge",
+   "device": "deck",
+   "merge": "before",
+   "browser": "Chrome/152.0.7977.167",
+   "query": "view=fps",
+   "seconds": 5,
+   "idleFrameMs": 11.1,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (AMD, AMD Custom GPU 0932 (radeonsi vangogh ACO), OpenGL 4.6)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.2
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.1,
+      "p95": 2.5,
+      "max": 4.3
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.9,
+      "p95": 2.4,
+      "max": 3.9
+     },
+     "gpuMs": {
+      "p50": 0.69,
+      "p95": 0.7,
+      "max": 0.79,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.1,
+      "p95": 2.4,
+      "max": 2.9
+     },
+     "drawCallsPerFrame": 50.5,
+     "entities": 30,
+     "workerTickMs": {
+      "p50": 2.2,
+      "p95": 3.1
+     },
+     "upload": {
+      "frames": 5,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 5,
+      "totalMiB": 2.4
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 8,
+      "cards": 37,
+      "blobs": 16,
+      "sunRedraws": 0,
+      "cars": 8,
+      "calls": 52,
+      "fogEnd": 800
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.6,
+      "p95": 3.8,
+      "max": 4.9
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.2,
+      "p95": 4.4,
+      "max": 7.3
+     },
+     "gpuMs": {
+      "p50": 0.69,
+      "p95": 0.69,
+      "max": 0.72,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.4,
+      "p95": 3.7,
+      "max": 4.1
+     },
+     "drawCallsPerFrame": 29,
+     "entities": 310,
+     "workerTickMs": {
+      "p50": 4.6,
+      "p95": 6.1
+     },
+     "upload": {
+      "frames": 9,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 9,
+      "totalMiB": 2.7
+     },
+     "view3d": {
+      "chunks": 69,
+      "builds": 0,
+      "groundPages": 69,
+      "billboards": 135,
+      "cards": 402,
+      "blobs": 135,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 29,
+      "fogEnd": 800
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 247,
+     "frameMs": {
+      "p50": 22.2,
+      "p95": 33.2,
+      "max": 44.6
+     },
+     "missed": 7,
+     "renderMs": {
+      "p50": 10.5,
+      "p95": 13.4,
+      "max": 15.3
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 6.7,
+      "p95": 10.3,
+      "max": 12.3
+     },
+     "gpuMs": {
+      "p50": 0.9,
+      "p95": 0.91,
+      "max": 4.27,
+      "samples": 247,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 10.9,
+      "p95": 12.3,
+      "max": 15.8
+     },
+     "drawCallsPerFrame": 325,
+     "entities": 1071,
+     "workerTickMs": {
+      "p50": 21.9,
+      "p95": 29.4
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 1008,
+      "cards": 37,
+      "blobs": 1057,
+      "sunRedraws": 0,
+      "cars": 49,
+      "calls": 325,
+      "fogEnd": 800
+     }
+    },
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 449,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 22.2
+     },
+     "missed": 1,
+     "renderMs": {
+      "p50": 2.6,
+      "p95": 4.7,
+      "max": 27.1
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.9,
+      "p95": 2.5,
+      "max": 4.7
+     },
+     "gpuMs": {
+      "p50": 0.78,
+      "p95": 1.41,
+      "max": 1.58,
+      "samples": 448,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.5,
+      "p95": 3.2,
+      "max": 4.2
+     },
+     "drawCallsPerFrame": 64.7,
+     "entities": 38,
+     "workerTickMs": {
+      "p50": 2.9,
+      "p95": 5.3
+     },
+     "drivenPx": 494,
+     "upload": {
+      "frames": 21,
+      "kiB": {
+       "p50": 256,
+       "p95": 512,
+       "max": 960
+      },
+      "pages": 23,
+      "totalMiB": 7.4
+     },
+     "view3d": {
+      "chunks": 69,
+      "builds": 0,
+      "groundPages": 69,
+      "billboards": 12,
+      "cards": 6,
+      "blobs": 22,
+      "sunRedraws": 10,
+      "cars": 10,
+      "calls": 70,
+      "fogEnd": 800
+     }
+    }
+   ]
+  },
+  {
+   "label": "Steam Deck, packaged shell over CDP, 90 Hz, production build: Fixed view, after the merge",
+   "device": "deck",
+   "merge": "after",
+   "browser": "Chrome/152.0.7977.167",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 11.1,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (AMD, AMD Custom GPU 0932 (radeonsi vangogh ACO), OpenGL 4.6)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 447,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 44.1
+     },
+     "missed": 1,
+     "renderMs": {
+      "p50": 2.1,
+      "p95": 3.1,
+      "max": 5.9
+     },
+     "submitMs": {
+      "p50": 1.1,
+      "p95": 1.7,
+      "max": 4.5
+     },
+     "updateMs": {
+      "p50": 2,
+      "p95": 2.9,
+      "max": 7.3
+     },
+     "gpuMs": {
+      "p50": 0.8,
+      "p95": 1.51,
+      "max": 1.76,
+      "samples": 447,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2,
+      "p95": 2.7,
+      "max": 3.7
+     },
+     "drawCallsPerFrame": 8.4,
+     "meshDrawCallsPerFrame": 26.3,
+     "entities": 17,
+     "workerTickMs": {
+      "p50": 2.4,
+      "p95": 3.4
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 2,
+      "totalMiB": 0.4
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.2
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3,
+      "p95": 4.1,
+      "max": 13.4
+     },
+     "submitMs": {
+      "p50": 1.7,
+      "p95": 2.7,
+      "max": 12.2
+     },
+     "updateMs": {
+      "p50": 2.5,
+      "p95": 3.3,
+      "max": 4.1
+     },
+     "gpuMs": {
+      "p50": 0.78,
+      "p95": 0.83,
+      "max": 1.32,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.9,
+      "p95": 4,
+      "max": 6
+     },
+     "drawCallsPerFrame": 13.5,
+     "meshDrawCallsPerFrame": 62.9,
+     "entities": 26,
+     "workerTickMs": {
+      "p50": 2.3,
+      "p95": 3.3
+     },
+     "upload": {
+      "frames": 5,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 5,
+      "totalMiB": 1.9
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.9,
+      "p95": 6.3,
+      "max": 8.3
+     },
+     "submitMs": {
+      "p50": 2.7,
+      "p95": 4.1,
+      "max": 6.4
+     },
+     "updateMs": {
+      "p50": 2.2,
+      "p95": 2.9,
+      "max": 4.3
+     },
+     "gpuMs": {
+      "p50": 1.07,
+      "p95": 1.55,
+      "max": 1.87,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 5.4,
+      "p95": 6.5,
+      "max": 7.7
+     },
+     "drawCallsPerFrame": 12.2,
+     "meshDrawCallsPerFrame": 152.8,
+     "entities": 52,
+     "workerTickMs": {
+      "p50": 2.6,
+      "p95": 3.3
+     },
+     "upload": {
+      "frames": 6,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 6,
+      "totalMiB": 2.4
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 447,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 44.8
+     },
+     "missed": 1,
+     "renderMs": {
+      "p50": 3.3,
+      "p95": 4.3,
+      "max": 6.5
+     },
+     "submitMs": {
+      "p50": 1.1,
+      "p95": 1.6,
+      "max": 2.5
+     },
+     "updateMs": {
+      "p50": 2.3,
+      "p95": 4.6,
+      "max": 6.8
+     },
+     "gpuMs": {
+      "p50": 0.48,
+      "p95": 1.08,
+      "max": 1.21,
+      "samples": 447,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.3,
+      "p95": 4.2,
+      "max": 4.7
+     },
+     "drawCallsPerFrame": 4,
+     "meshDrawCallsPerFrame": 0,
+     "entities": 138,
+     "workerTickMs": {
+      "p50": 4.2,
+      "p95": 5.7
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 240,
+       "p95": 240,
+       "max": 240
+      },
+      "pages": 1,
+      "totalMiB": 0.2
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4,
+      "p95": 5,
+      "max": 5.7
+     },
+     "submitMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 1.4
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 3.2,
+      "max": 5.8
+     },
+     "gpuMs": {
+      "p50": 0.47,
+      "p95": 0.49,
+      "max": 1.2,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.9,
+      "p95": 4.9,
+      "max": 5.6
+     },
+     "drawCallsPerFrame": 4,
+     "meshDrawCallsPerFrame": 0,
+     "entities": 261,
+     "workerTickMs": {
+      "p50": 4.3,
+      "p95": 5.4
+     },
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 112,
+       "p95": 112,
+       "max": 112
+      },
+      "pages": 1,
+      "totalMiB": 0.1
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 449,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 22.2
+     },
+     "missed": 2,
+     "renderMs": {
+      "p50": 6.1,
+      "p95": 8.2,
+      "max": 10.4
+     },
+     "submitMs": {
+      "p50": 2.4,
+      "p95": 3.2,
+      "max": 4.6
+     },
+     "updateMs": {
+      "p50": 2.8,
+      "p95": 3.5,
+      "max": 6
+     },
+     "gpuMs": {
+      "p50": 0.73,
+      "p95": 0.77,
+      "max": 0.78,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 6.5,
+      "p95": 8.2,
+      "max": 11.9
+     },
+     "drawCallsPerFrame": 7,
+     "meshDrawCallsPerFrame": 0,
+     "entities": 536,
+     "workerTickMs": {
+      "p50": 4.4,
+      "p95": 5.7
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 337,
+     "frameMs": {
+      "p50": 11.2,
+      "p95": 22.3,
+      "max": 22.4
+     },
+     "missed": 115,
+     "renderMs": {
+      "p50": 7.6,
+      "p95": 10,
+      "max": 12.2
+     },
+     "submitMs": {
+      "p50": 1.4,
+      "p95": 2.3,
+      "max": 4.5
+     },
+     "updateMs": {
+      "p50": 6.7,
+      "p95": 9.4,
+      "max": 11.9
+     },
+     "gpuMs": {
+      "p50": 1.32,
+      "p95": 1.37,
+      "max": 2.05,
+      "samples": 337,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 7.7,
+      "p95": 9.1,
+      "max": 10.4
+     },
+     "drawCallsPerFrame": 11.6,
+     "meshDrawCallsPerFrame": 105.4,
+     "entities": 943,
+     "workerTickMs": {
+      "p50": 20,
+      "p95": 26.8
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 196,
+     "frameMs": {
+      "p50": 22.3,
+      "p95": 33.5,
+      "max": 78.1
+     },
+     "missed": 10,
+     "renderMs": {
+      "p50": 14.1,
+      "p95": 18.3,
+      "max": 26.7
+     },
+     "submitMs": {
+      "p50": 5.7,
+      "p95": 8.4,
+      "max": 15.4
+     },
+     "updateMs": {
+      "p50": 6.4,
+      "p95": 9.4,
+      "max": 46.8
+     },
+     "gpuMs": {
+      "p50": 3,
+      "p95": 3.57,
+      "max": 7.16,
+      "samples": 196,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 13.8,
+      "p95": 16.5,
+      "max": 19.5
+     },
+     "drawCallsPerFrame": 39,
+     "meshDrawCallsPerFrame": 423.2,
+     "entities": 1067,
+     "workerTickMs": {
+      "p50": 18.4,
+      "p95": 26.4
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 156,
+     "frameMs": {
+      "p50": 33.3,
+      "p95": 44.4,
+      "max": 55.7
+     },
+     "missed": 1,
+     "renderMs": {
+      "p50": 17,
+      "p95": 21.2,
+      "max": 28.5
+     },
+     "submitMs": {
+      "p50": 7.7,
+      "p95": 10.6,
+      "max": 15.6
+     },
+     "updateMs": {
+      "p50": 7.7,
+      "p95": 10,
+      "max": 11.9
+     },
+     "gpuMs": {
+      "p50": 2.8,
+      "p95": 3.41,
+      "max": 3.82,
+      "samples": 156,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 12.1,
+      "p95": 16.1,
+      "max": 16.8
+     },
+     "drawCallsPerFrame": 50.2,
+     "meshDrawCallsPerFrame": 390.9,
+     "entities": 1093,
+     "workerTickMs": {
+      "p50": 17.6,
+      "p95": 25.5
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "Steam Deck, packaged shell over CDP, 90 Hz, production build: Fixed view, after the merge",
+   "device": "deck",
+   "merge": "after",
+   "browser": "Chrome/152.0.7977.167",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 11.1,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (AMD, AMD Custom GPU 0932 (radeonsi vangogh ACO), OpenGL 4.6)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.4,
+      "p95": 3.3,
+      "max": 10
+     },
+     "submitMs": {
+      "p50": 1.1,
+      "p95": 1.8,
+      "max": 7.2
+     },
+     "updateMs": {
+      "p50": 1.9,
+      "p95": 2.4,
+      "max": 3.7
+     },
+     "gpuMs": {
+      "p50": 0.85,
+      "p95": 1.55,
+      "max": 1.72,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2,
+      "p95": 2.4,
+      "max": 3.1
+     },
+     "drawCallsPerFrame": 10.1,
+     "meshDrawCallsPerFrame": 37.8,
+     "entities": 21,
+     "workerTickMs": {
+      "p50": 2.4,
+      "p95": 4.7
+     },
+     "drivenPx": 425,
+     "upload": {
+      "frames": 8,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 9,
+      "totalMiB": 3.9
+     }
+    }
+   ]
+  },
+  {
+   "label": "Steam Deck, packaged shell over CDP, 90 Hz, production build: Top-down in the 3D scene (view=topdown3d), after the merge",
+   "device": "deck",
+   "merge": "after",
+   "browser": "Chrome/152.0.7977.167",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 11.1,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (AMD, AMD Custom GPU 0932 (radeonsi vangogh ACO), OpenGL 4.6)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.4,
+      "p95": 1.7,
+      "max": 3.1
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.8,
+      "p95": 2.3,
+      "max": 3.4
+     },
+     "gpuMs": {
+      "p50": 0.84,
+      "p95": 0.85,
+      "max": 0.91,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.4,
+      "p95": 1.7,
+      "max": 2
+     },
+     "drawCallsPerFrame": 21.8,
+     "entities": 17,
+     "workerTickMs": {
+      "p50": 2.3,
+      "p95": 3.4
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 3,
+      "cards": 5,
+      "blobs": 7,
+      "sunRedraws": 0,
+      "cars": 4,
+      "calls": 20,
+      "fogEnd": 252,
+      "meshes": 9,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.2
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.8,
+      "p95": 2.1,
+      "max": 4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.6,
+      "p95": 2,
+      "max": 2.9
+     },
+     "gpuMs": {
+      "p50": 1,
+      "p95": 1.74,
+      "max": 1.79,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.7,
+      "p95": 2,
+      "max": 3.6
+     },
+     "drawCallsPerFrame": 41.4,
+     "entities": 26,
+     "workerTickMs": {
+      "p50": 2,
+      "p95": 2.9
+     },
+     "upload": {
+      "frames": 6,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 6,
+      "totalMiB": 2.9
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 12,
+      "cards": 43,
+      "blobs": 18,
+      "sunRedraws": 0,
+      "cars": 6,
+      "calls": 37,
+      "fogEnd": 1006,
+      "meshes": 16,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.4,
+      "p95": 4,
+      "max": 5.5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2,
+      "p95": 2.5,
+      "max": 3.8
+     },
+     "gpuMs": {
+      "p50": 1.25,
+      "p95": 1.26,
+      "max": 2,
+      "samples": 448,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.5,
+      "p95": 4.1,
+      "max": 5.4
+     },
+     "drawCallsPerFrame": 193,
+     "entities": 52,
+     "workerTickMs": {
+      "p50": 2.4,
+      "p95": 3.2
+     },
+     "upload": {
+      "frames": 6,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 6,
+      "totalMiB": 2.9
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 28,
+      "cards": 46,
+      "blobs": 36,
+      "sunRedraws": 0,
+      "cars": 11,
+      "calls": 193,
+      "fogEnd": 1488,
+      "meshes": 22,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.2
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.4,
+      "p95": 1.9,
+      "max": 3.1
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.4,
+      "p95": 4,
+      "max": 7.8
+     },
+     "gpuMs": {
+      "p50": 0.85,
+      "p95": 0.86,
+      "max": 0.88,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.5,
+      "p95": 1.9,
+      "max": 2.5
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 138,
+     "workerTickMs": {
+      "p50": 3.7,
+      "p95": 6.3
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 256,
+       "p95": 256,
+       "max": 256
+      },
+      "pages": 2,
+      "totalMiB": 0.4
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 25,
+      "cards": 127,
+      "blobs": 25,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 4,
+      "fogEnd": 252,
+      "meshes": 2,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.1,
+      "p95": 2.9,
+      "max": 4.6
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 3.4,
+      "max": 5.6
+     },
+     "gpuMs": {
+      "p50": 0.94,
+      "p95": 0.95,
+      "max": 1.11,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.1,
+      "p95": 2.8,
+      "max": 3.1
+     },
+     "drawCallsPerFrame": 6,
+     "entities": 261,
+     "workerTickMs": {
+      "p50": 4,
+      "p95": 5.1
+     },
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 112,
+       "p95": 112,
+       "max": 112
+      },
+      "pages": 2,
+      "totalMiB": 0.2
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 137,
+      "cards": 396,
+      "blobs": 137,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 6,
+      "fogEnd": 1006,
+      "meshes": 4,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.9,
+      "p95": 6.3,
+      "max": 7.3
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.5,
+      "p95": 4.5,
+      "max": 7.5
+     },
+     "gpuMs": {
+      "p50": 1.28,
+      "p95": 1.29,
+      "max": 1.98,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 5,
+      "p95": 7.1,
+      "max": 7.7
+     },
+     "drawCallsPerFrame": 15,
+     "entities": 536,
+     "workerTickMs": {
+      "p50": 5.2,
+      "p95": 6.5
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 488,
+      "cards": 1266,
+      "blobs": 488,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 15,
+      "fogEnd": 1536,
+      "meshes": 13,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 385,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 22.3,
+      "max": 40.1
+     },
+     "missed": 64,
+     "renderMs": {
+      "p50": 6.5,
+      "p95": 8.4,
+      "max": 10.6
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 5.8,
+      "p95": 9.6,
+      "max": 38.9
+     },
+     "gpuMs": {
+      "p50": 0.9,
+      "p95": 0.91,
+      "max": 1.64,
+      "samples": 385,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 7,
+      "p95": 8,
+      "max": 8.7
+     },
+     "drawCallsPerFrame": 19,
+     "entities": 942,
+     "workerTickMs": {
+      "p50": 19.6,
+      "p95": 27.9
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 16,
+      "builds": 0,
+      "groundPages": 12,
+      "billboards": 426,
+      "cards": 5,
+      "blobs": 440,
+      "sunRedraws": 0,
+      "cars": 14,
+      "calls": 19,
+      "fogEnd": 252,
+      "meshes": 9,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 248,
+     "frameMs": {
+      "p50": 22.2,
+      "p95": 22.4,
+      "max": 33.4
+     },
+     "missed": 6,
+     "renderMs": {
+      "p50": 11.1,
+      "p95": 12.7,
+      "max": 16.6
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 6.1,
+      "p95": 9.5,
+      "max": 11.7
+     },
+     "gpuMs": {
+      "p50": 1.25,
+      "p95": 1.27,
+      "max": 5.93,
+      "samples": 248,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 11.1,
+      "p95": 13.7,
+      "max": 15.8
+     },
+     "drawCallsPerFrame": 355.7,
+     "entities": 1067,
+     "workerTickMs": {
+      "p50": 20.7,
+      "p95": 29.1
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 72,
+      "builds": 0,
+      "groundPages": 63,
+      "billboards": 1012,
+      "cards": 43,
+      "blobs": 1059,
+      "sunRedraws": 0,
+      "cars": 47,
+      "calls": 355,
+      "fogEnd": 1006,
+      "meshes": 16,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 202,
+     "frameMs": {
+      "p50": 22.3,
+      "p95": 33.4,
+      "max": 44.4
+     },
+     "missed": 5,
+     "renderMs": {
+      "p50": 12.9,
+      "p95": 15.3,
+      "max": 18.6
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 7.5,
+      "p95": 10.3,
+      "max": 11.7
+     },
+     "gpuMs": {
+      "p50": 1.42,
+      "p95": 1.44,
+      "max": 2.16,
+      "samples": 202,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 13,
+      "p95": 15.8,
+      "max": 17.6
+     },
+     "drawCallsPerFrame": 529.7,
+     "entities": 1093,
+     "workerTickMs": {
+      "p50": 19.1,
+      "p95": 26
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 247,
+      "builds": 0,
+      "groundPages": 247,
+      "billboards": 1028,
+      "cards": 46,
+      "blobs": 1077,
+      "sunRedraws": 0,
+      "cars": 52,
+      "calls": 494,
+      "fogEnd": 1488,
+      "meshes": 22,
+      "merged": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "Steam Deck, packaged shell over CDP, 90 Hz, production build: Top-down in the 3D scene (view=topdown3d), after the merge",
+   "device": "deck",
+   "merge": "after",
+   "browser": "Chrome/152.0.7977.167",
+   "query": "view=topdown3d",
+   "seconds": 5,
+   "idleFrameMs": 11.1,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (AMD, AMD Custom GPU 0932 (radeonsi vangogh ACO), OpenGL 4.6)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.6,
+      "p95": 2.4,
+      "max": 7.6
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.6,
+      "p95": 2.2,
+      "max": 3.3
+     },
+     "gpuMs": {
+      "p50": 0.84,
+      "p95": 1.49,
+      "max": 1.66,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.7,
+      "p95": 3.6,
+      "max": 5.5
+     },
+     "drawCallsPerFrame": 21.7,
+     "entities": 22,
+     "workerTickMs": {
+      "p50": 2.4,
+      "p95": 5
+     },
+     "drivenPx": 483,
+     "upload": {
+      "frames": 9,
+      "kiB": {
+       "p50": 512,
+       "p95": 1184,
+       "max": 1184
+      },
+      "pages": 15,
+      "totalMiB": 4.9
+     },
+     "view3d": {
+      "chunks": 12,
+      "builds": 0,
+      "groundPages": 9,
+      "billboards": 6,
+      "cards": 1,
+      "blobs": 11,
+      "sunRedraws": 12,
+      "cars": 5,
+      "calls": 16,
+      "fogEnd": 252,
+      "meshes": 4,
+      "merged": 0
+     }
+    }
+   ]
+  },
+  {
+   "label": "Steam Deck, packaged shell over CDP, 90 Hz, production build: First person (view=fps), after the merge",
+   "device": "deck",
+   "merge": "after",
+   "browser": "Chrome/152.0.7977.167",
+   "query": "view=fps",
+   "seconds": 5,
+   "idleFrameMs": 11.1,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (AMD, AMD Custom GPU 0932 (radeonsi vangogh ACO), OpenGL 4.6)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.3
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.8,
+      "p95": 2.3,
+      "max": 3.6
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.9,
+      "p95": 2.4,
+      "max": 3.5
+     },
+     "gpuMs": {
+      "p50": 0.7,
+      "p95": 0.72,
+      "max": 0.8,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.9,
+      "p95": 2.2,
+      "max": 2.6
+     },
+     "drawCallsPerFrame": 22.5,
+     "entities": 30,
+     "workerTickMs": {
+      "p50": 2.3,
+      "p95": 3.1
+     },
+     "upload": {
+      "frames": 5,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 5,
+      "totalMiB": 2.4
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 8,
+      "cards": 37,
+      "blobs": 16,
+      "sunRedraws": 0,
+      "cars": 8,
+      "calls": 24,
+      "fogEnd": 800,
+      "meshes": 16,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 450,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 11.4
+     },
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.5,
+      "p95": 3.3,
+      "max": 4.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 3.2,
+      "p95": 4.5,
+      "max": 7.7
+     },
+     "gpuMs": {
+      "p50": 0.7,
+      "p95": 0.71,
+      "max": 0.73,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.4,
+      "p95": 3.2,
+      "max": 3.5
+     },
+     "drawCallsPerFrame": 6,
+     "entities": 310,
+     "workerTickMs": {
+      "p50": 4.5,
+      "p95": 6.2
+     },
+     "upload": {
+      "frames": 9,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 9,
+      "totalMiB": 2.7
+     },
+     "view3d": {
+      "chunks": 69,
+      "builds": 0,
+      "groundPages": 69,
+      "billboards": 135,
+      "cards": 402,
+      "blobs": 135,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 6,
+      "fogEnd": 800,
+      "meshes": 4,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 247,
+     "frameMs": {
+      "p50": 22.2,
+      "p95": 22.4,
+      "max": 34.1
+     },
+     "missed": 7,
+     "renderMs": {
+      "p50": 10.6,
+      "p95": 12.1,
+      "max": 15.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 6.6,
+      "p95": 10,
+      "max": 13.8
+     },
+     "gpuMs": {
+      "p50": 0.92,
+      "p95": 1.38,
+      "max": 4.37,
+      "samples": 247,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 10.7,
+      "p95": 12,
+      "max": 14.9
+     },
+     "drawCallsPerFrame": 302,
+     "entities": 1072,
+     "workerTickMs": {
+      "p50": 19.5,
+      "p95": 26.7
+     },
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "view3d": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 1008,
+      "cards": 37,
+      "blobs": 1058,
+      "sunRedraws": 0,
+      "cars": 50,
+      "calls": 302,
+      "fogEnd": 800,
+      "meshes": 16,
+      "merged": 0
+     }
+    },
+    {
+     "scene": "drive",
+     "zoom": 1,
+     "frames": 449,
+     "frameMs": {
+      "p50": 11.1,
+      "p95": 11.2,
+      "max": 22.2
+     },
+     "missed": 1,
+     "renderMs": {
+      "p50": 2.7,
+      "p95": 4.9,
+      "max": 11.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2,
+      "p95": 2.7,
+      "max": 4.3
+     },
+     "gpuMs": {
+      "p50": 0.81,
+      "p95": 1.52,
+      "max": 1.57,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.5,
+      "p95": 3.2,
+      "max": 4.8
+     },
+     "drawCallsPerFrame": 39.6,
+     "entities": 38,
+     "workerTickMs": {
+      "p50": 2.8,
+      "p95": 5.5
+     },
+     "drivenPx": 493,
+     "upload": {
+      "frames": 21,
+      "kiB": {
+       "p50": 256,
+       "p95": 512,
+       "max": 960
+      },
+      "pages": 23,
+      "totalMiB": 7.4
+     },
+     "view3d": {
+      "chunks": 69,
+      "builds": 0,
+      "groundPages": 69,
+      "billboards": 12,
+      "cards": 6,
+      "blobs": 22,
+      "sunRedraws": 10,
+      "cars": 10,
+      "calls": 47,
+      "fogEnd": 800,
+      "meshes": 14,
+      "merged": 0
+     }
+    }
+   ]
+  }
+ ]
+}

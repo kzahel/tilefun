@@ -71,21 +71,25 @@ export function colourDifference(
   return { pixels, mean: pixels ? sum / pixels : 0, over: pixels ? over / pixels : 0 };
 }
 
-/** Pixels set in both masks and in either, with `scene` moved by (dx, dy). */
-function overlapAt(fixed: Uint8Array, scene: Uint8Array, width: number, dx: number, dy: number) {
+/** Whole-pixel moves within `SHIFT_REACH`, shortest first, so that of two
+ * moves that do equally well the shorter is reported. (0, 0) comes first. */
+const MOVES: readonly { x: number; y: number }[] = (() => {
+  const moves: { x: number; y: number }[] = [];
+  for (let y = -SHIFT_REACH; y <= SHIFT_REACH; y++)
+    for (let x = -SHIFT_REACH; x <= SHIFT_REACH; x++) moves.push({ x, y });
+  return moves.sort((a, b) => a.x * a.x + a.y * a.y - (b.x * b.x + b.y * b.y));
+})();
+
+const count = (mask: Uint8Array) => mask.reduce((n, v) => n + v, 0);
+
+/** Pixels set in both masks, with `scene` moved by (dx, dy). */
+function bothAt(fixed: Uint8Array, scene: Uint8Array, width: number, dx: number, dy: number) {
   const height = fixed.length / width;
-  let both = 0,
-    either = 0;
-  for (let y = 0; y < height; y++)
-    for (let x = 0; x < width; x++) {
-      const a = fixed[y * width + x] ?? 0;
-      const sx = x - dx,
-        sy = y - dy;
-      const b = sx >= 0 && sy >= 0 && sx < width && sy < height ? (scene[sy * width + sx] ?? 0) : 0;
-      if (a & b) both++;
-      if (a | b) either++;
-    }
-  return { both, either };
+  let both = 0;
+  for (let y = Math.max(0, dy); y < Math.min(height, height + dy); y++)
+    for (let x = Math.max(0, dx); x < Math.min(width, width + dx); x++)
+      if (fixed[y * width + x] && scene[(y - dy) * width + (x - dx)]) both++;
+  return both;
 }
 
 export interface CategoryParity {
@@ -95,7 +99,9 @@ export interface CategoryParity {
   /** Share of the pixels either draws that both draw (1 is the same silhouette). */
   overlap: number;
   /** The whole-pixel move of the 3D picture that makes the silhouettes overlap
-   * most, and the overlap there. (0, 0) means it is registered. */
+   * most (the shortest such move, up to 3 pixels each way), and the overlap
+   * there. (0, 0) means it is registered; a move at the 3 pixel limit means the
+   * silhouettes differ by more than the probe looks for. */
   shift: { x: number; y: number };
   shiftedOverlap: number;
   /** Colours where both draw the category, as drawn. */
@@ -115,32 +121,26 @@ export function compareCategory(
 ): CategoryParity {
   const a = footprint(fixed.with, fixed.ground),
     b = footprint(scene.with, scene.ground);
-  const count = (mask: Uint8Array) => mask.reduce((n, v) => n + v, 0);
-  const share = ({ both, either }: { both: number; either: number }) =>
-    either ? both / either : 1;
-  const overlap = share(overlapAt(a, b, width, 0, 0));
+  // A pixel moved off the picture still counts as drawn: moving a silhouette
+  // over the edge must not look like agreement.
+  const drawn = count(a) + count(b);
+  const share = (both: number) => (drawn ? both / (drawn - both) : 1);
+  const overlap = share(bothAt(a, b, width, 0, 0));
   let shift = { x: 0, y: 0 },
     shiftedOverlap = overlap;
-  for (let dy = -SHIFT_REACH; dy <= SHIFT_REACH; dy++)
-    for (let dx = -SHIFT_REACH; dx <= SHIFT_REACH; dx++) {
-      if (!dx && !dy) continue;
-      const moved = share(overlapAt(a, b, width, dx, dy));
-      // A longer move must be clearly better: ties stay at the shorter one.
-      if (moved > shiftedOverlap + 1e-6) {
-        shift = { x: dx, y: dy };
-        shiftedOverlap = moved;
-      }
+  for (const move of MOVES) {
+    const moved = share(bothAt(a, b, width, move.x, move.y));
+    if (moved > shiftedOverlap + 1e-6) {
+      shift = move;
+      shiftedOverlap = moved;
     }
-  const bothAt = (dx: number, dy: number) => {
+  }
+  const maskAt = (dx: number, dy: number) => {
     const height = a.length / width;
     const mask = new Uint8Array(a.length);
-    for (let y = 0; y < height; y++)
-      for (let x = 0; x < width; x++) {
-        const sx = x - dx,
-          sy = y - dy;
-        if (sx < 0 || sy < 0 || sx >= width || sy >= height) continue;
-        if (a[y * width + x] && b[sy * width + sx]) mask[y * width + x] = 1;
-      }
+    for (let y = Math.max(0, dy); y < Math.min(height, height + dy); y++)
+      for (let x = Math.max(0, dx); x < Math.min(width, width + dx); x++)
+        if (a[y * width + x] && b[(y - dy) * width + (x - dx)]) mask[y * width + x] = 1;
     return mask;
   };
   return {
@@ -149,12 +149,12 @@ export function compareCategory(
     overlap,
     shift,
     shiftedOverlap,
-    colour: colourDifference(fixed.with, scene.with, width, bothAt(0, 0)),
+    colour: colourDifference(fixed.with, scene.with, width, maskAt(0, 0)),
     alignedColour: colourDifference(
       fixed.with,
       scene.with,
       width,
-      bothAt(shift.x, shift.y),
+      maskAt(shift.x, shift.y),
       shift.x,
       shift.y,
     ),
@@ -178,15 +178,13 @@ export function compareFrames(
   const colour = colourDifference(fixed, scene, width);
   let shift = { x: 0, y: 0 },
     alignedColour = colour;
-  for (let dy = -SHIFT_REACH; dy <= SHIFT_REACH; dy++)
-    for (let dx = -SHIFT_REACH; dx <= SHIFT_REACH; dx++) {
-      if (!dx && !dy) continue;
-      const moved = colourDifference(fixed, scene, width, undefined, dx, dy);
-      if (moved.mean < alignedColour.mean - 1e-6) {
-        shift = { x: dx, y: dy };
-        alignedColour = moved;
-      }
+  for (const move of MOVES) {
+    const moved = colourDifference(fixed, scene, width, undefined, move.x, move.y);
+    if (moved.mean < alignedColour.mean - 1e-6) {
+      shift = move;
+      alignedColour = moved;
     }
+  }
   return { colour, shift, alignedColour };
 }
 

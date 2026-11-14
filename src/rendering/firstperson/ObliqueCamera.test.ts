@@ -58,7 +58,7 @@ describe("the fixed view's camera on the 3D scene", () => {
     );
     expect(depth(0, 0, 32)).toBeLessThan(depth(0, -32, 0));
     expect(depth(0, 10, 0)).toBeLessThan(depth(0, 0, 0));
-    // Everything a view can show stays inside the clip range, at any zoom.
+    // The nearest and farthest content a view shows stays inside the clip range.
     for (const scale of [3, 0.3, 0.15]) {
       const half = HEIGHT / (2 * scale);
       const far = obliqueScreen({ x: 0, y: 0, scale }, WIDTH, HEIGHT, 0, -half - 500, -64).depth;
@@ -66,6 +66,28 @@ describe("the fixed view's camera on the 3D scene", () => {
       expect(far).toBeLessThan(1);
       expect(near).toBeGreaterThan(-1);
     }
+  });
+
+  it("lets three.js cull against it: on screen is kept, far off screen is not", () => {
+    const scale = 0.75;
+    const camera = new THREE.Camera();
+    camera.position.set(1000, -2000, 0);
+    camera.projectionMatrix.fromArray(obliqueProjection(scale, WIDTH, HEIGHT)).transpose();
+    camera.updateMatrixWorld(true);
+    const frustum = new THREE.Frustum().setFromProjectionMatrix(
+      new THREE.Matrix4().multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse),
+    );
+    const sphere = (x: number, y: number, z: number) =>
+      frustum.intersectsSphere(new THREE.Sphere(new THREE.Vector3(x, -y, z), 16));
+    const halfWidth = WIDTH / (2 * scale),
+      halfHeight = HEIGHT / (2 * scale);
+    expect(sphere(1000, 2000, 0)).toBe(true);
+    expect(sphere(1000 + halfWidth - 20, 2000 - halfHeight + 20, 0)).toBe(true);
+    // A tall thing south of the bottom edge stands up into the view.
+    expect(sphere(1000, 2000 + halfHeight + 100, 150)).toBe(true);
+    expect(sphere(1000, 2000 + halfHeight + 100, 0)).toBe(false);
+    expect(sphere(1000 + halfWidth + 100, 2000, 0)).toBe(false);
+    expect(sphere(1000, 2000 - halfHeight - 100, 0)).toBe(false);
   });
 
   it("shows the fixed camera's ground rectangle", () => {

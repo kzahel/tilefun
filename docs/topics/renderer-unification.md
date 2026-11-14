@@ -1,9 +1,10 @@
 # Renderer unification
 
 Topic: renderer-unification
-Status: committed direction, 2026-11-14; slices 1 (one renderer host) and 2
-(ground artwork, shared page atlas) delivered the same day. The fixed 2D view is
-the default top-down renderer and stays so until the
+Status: committed direction, 2026-11-14; slices 1 (one renderer host), 2 (ground
+artwork, shared page atlas) and 3 (opt-in top-down camera, parity probe, merged
+meshes, device scorecard) delivered the same day. The fixed 2D view is the
+default top-down renderer and stays so until the
 [retirement gate](#retirement-gate) is met.
 Updated: 2026-11-14.
 
@@ -87,7 +88,7 @@ row when a slice starts, delivers or is blocked.
 | 0 — Spike and plan | Done 2026-11-14 | [248](../tactical/248-renderer-unification.md) |
 | 1 — One renderer host | Done 2026-11-14: one WebGL context, shared vehicle assets, first person as a per-seat view kind with mixed split screen | [249](../tactical/249-one-renderer-host.md) |
 | 2 — Ground artwork, shared page atlas | Done 2026-11-14: the 3D ground wears the fixed view's terrain pages, and 3D cards read the same atlas instead of whole-sheet textures (99.6 MiB → 4.6 MiB of card artwork in the city) | [250](../tactical/250-ground-artwork-and-shared-pages.md) |
-| 3 — Top-down camera, parity probe, draw calls, device scorecard | Not started | — |
+| 3 — Top-down camera, parity probe, draw calls, device scorecard | Done 2026-11-14: `?view=topdown3d` / `r_topdown3d` draws top-down play through the 3D scene; the parity probe gives the checklist numbers; static content is merged into 4 to 25 draws; measured on the Mac, Pixel 7a and Deck, with a go on draw-call cost | [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) |
 | 4 — XR on the shared scene | Not started (needs slice 1) | [230](../tactical/230-3d-cameras-stereo-and-webxr.md) slices 5–8 |
 | 5 — Top-down parity | Not started (needs slices 2 and 3) | checklist below |
 | 6 — Opt-in, default, retirement | Not started (owner decisions) | gate below |
@@ -97,27 +98,37 @@ row when a slice starts, delivers or is blocked.
 What the unified top-down camera needs before it can replace the fixed view.
 States: missing, partial, done. Add rows as differences are found.
 
+Numbers are from the parity probe
+([251](../tactical/251-top-down-camera-parity-and-merged-meshes.md#3b--delivered-2026-11-14),
+`node scripts/first-person/parity.mjs --headed`) in `city`, `woods` and `crowd`
+on the Mac. "Overlap" is the share of a kind's pixels that both renderers draw.
+Run the probe again when a row changes state.
+
 | Item | State | Notes |
 | --- | --- | --- |
-| Framing and registration of props, actors and vehicles | Partial | Matches in the spike by eye; no pixel probe yet |
-| Ground artwork (terrain pages, road markings, paths) | Done in the 3D scene | 250: every drawn chunk wears its terrain page. Not yet checked through the top-down camera (slice 3), which will need the visible rectangle's pages and its own sampling rule |
-| Grass blades | Missing | |
+| Framing and registration of actors and vehicles | Done at whole pixels | Actors identical in the city at 1× (3,735 pixels, none different). Vehicle silhouettes overlap 95–97%. Both align best with no move at zooms 1 and 0.25 |
+| Registration of standing cards (trees, posts, forest rows) | Partial | 98% overlap at 1×, best one pixel to the left: the fixed view floors a static sprite's screen edges to whole pixels and the 3D card is rasterised where it falls |
+| Solid props (buildings) | Partial, new in 251 | 54% overlap at 1× and 86% at 0.25×. The 3D volumes use the colliders' physical heights, which are taller than the artwork implies, so a band of stretched roof shows above each building. Decide between the artwork's height for the top-down camera and new artwork for the taller faces |
+| Ground artwork (terrain pages, road markings, paths) | Done at 1×; partial zoomed out | Identical at 1×. At 0.25× in the city 1.1% of pixels differ on crosswalk stripes and lane dashes: four samples per pixel against the fixed view's one. The top-down camera still needs its own sampling rule |
+| Grass blades | Missing | The fixed view draws 1,200 (city) to 30,000 (woods) pixels of blades at 1× |
 | Particles and contact effects | Missing | |
 | Surface decals | Missing | |
-| Sprite edges | Missing | 3D cards are hard cutouts (`alphaTest`) with one sample per pixel; the fixed view blends filtered edges at fractional zoom |
-| Pixel snapping and stable sampling at fractional zoom | Missing | Fixed-view rules from 213 and 215 |
-| Body shadows | Partial | 3D has sun shadows and contact shadows; the fixed view has the deferred depth pass. Choose one look for top-down |
+| Sprite edges | Missing | 3D cards are hard cutouts (`alphaTest`) with one sample per pixel; the fixed view blends filtered edges at fractional zoom. Wildlife overlaps 83–88% at 1× (the soft shadow painted into those sprites is cut off) and 67–84% at 0.25× |
+| Pixel snapping and stable sampling at fractional zoom | Missing | Fixed-view rules from 213 and 215. The standing-card row above is the first measured case |
+| Vehicle shading | Partial, new in 251 | A fifth to a third of vehicle pixels differ in colour where both draw: the 3D scene shades bodies with its sun |
+| Raised ground | Partial, new in 251 | The fixed view tints raised tiles and draws cliff artwork; the 3D scene wears the plain ground image and flat brown walls. The generated world is flat, so only edited worlds show it |
+| Body shadows | Partial | 3D has sun shadows and contact shadows; the fixed view has the deferred depth pass. The two are not comparable (340–6,800 pixels against 5,500–72,000). Choose one look for top-down. Zoomed out, the sun's map (2,048 px) covers only the middle of the view |
 | Cutaways, slab fades, roof visibility | Missing | `SurfacePresentation` |
-| Rooms shown roofless | Missing | First person draws rooms with full walls (230 slice 2) |
+| Rooms shown roofless | Missing | First person draws rooms with full walls (230 slice 2). The top-down 3D view hands rooms to the fixed view |
 | Tow and bed groups posed together | Missing | 229 limit: members draw at their own poses |
 | Emergency lights and flashing sprites | Missing | |
 | Excavations (garage ramps below ground) | Missing | 229 limit |
 | Editor overlays | Missing | The editor falls back to the fixed view |
-| Picking, tap and hold destinations | Missing | Needs a ray against the 3D ground |
-| Split-screen regions and diagonal masks | Partial | Rectangular regions done (249); a 3D view falls back to the fixed view in a diagonal mask |
+| Picking, tap and hold destinations | Done for the top-down camera | 251: it is the fixed view's own camera, so the fixed view's unprojection, markers and tap destinations are used unchanged. Cameras that turn (orbit, XR) still need a ray against the 3D ground |
+| Split-screen regions and diagonal masks | Partial | Rectangular regions done (249), also for top-down 3D views; a 3D view falls back to the fixed view in a diagonal mask |
 | Door overlays and realm transitions | Missing | |
 | Labs, explorer and renderer probes | Missing | They pin the fixed backend's pixels |
-| Context loss recovery | Done | 249 phase 1a |
+| Context loss recovery | Done | 249 phase 1a; merged meshes re-upload (251) |
 
 Known disagreement to settle: in the `crowd` scene, cars parked north of the
 shop row draw over the roofs in the fixed view and behind the buildings in the
@@ -127,23 +138,46 @@ shop row draw over the roofs in the fixed view and behind the buildings in the
 
 `npm run render:bench` is the common measure
 ([236](../tactical/236-render-scorecard-and-gpu-shadows.md) owns commands and
-limits). `--query=` selects the renderer under test.
+limits). `--query=` selects the renderer under test: none for the fixed view,
+`view=topdown3d` for the unified top-down view, `view=fps` for first person.
 
-| Device | Access | Fixed view baseline | Unified top-down |
-| --- | --- | --- | --- |
-| M4 Pro Mac, 120 Hz | local | [236](../tactical/236-render-scorecard-and-gpu-shadows.md), [248 spike](../benchmarks/248-oblique-camera-spike.json) | Spike only: [248](../tactical/248-renderer-unification.md#spike) |
-| Pixel 7a, 60 Hz | adb, bench `--cdp` | 236 | Not measured. First person after slice 2: city 3.8 / 5.5 ms, woods 4.0 / 5.6 ms render, no missed frames ([250](../tactical/250-ground-artwork-and-shared-pages.md)) |
-| Steam Deck, 90 Hz | `npm run deck:*`, bench `--attach-page` | 236 | Not measured |
-| Quest 3 | adb, Quest Browser | None | Not measured; XR frame pacing is slice 4 |
+Main-thread render time, p50 in ms, at zooms 1 / 0.25 / 0.1, after 251's merge.
+Tables with p95, missed frames, draw calls and the before-merge cells are in
+[251](../tactical/251-top-down-camera-parity-and-merged-meshes.md#3d--delivered-2026-11-14);
+full cells in [evidence](../benchmarks/251-device-scorecard.json).
 
-All four were reachable on 2026-11-14. Concrete device selection comes from
-`~/code/machine-control` and private inventory at run time; none of it is
+| Device | Access | Scene | Fixed view | Unified top-down |
+| --- | --- | --- | --- | --- |
+| M4 Pro Mac, 120 Hz | local | city | 0.6 / 0.8 / 1.1 | 0.5 / 0.8 / 1.0 |
+| | | woods | 1.0 / 1.2 / 2.1 | 0.5 / 0.9 / 1.6 |
+| | | crowd | 2.0 / 3.7 / 4.3 | 2.0 / 3.0 / 3.8 |
+| Pixel 7a, 60 Hz | adb, bench `--cdp` | city | 3.5 / 3.6 / 4.7 | 2.7 / 3.2 / 4.9 |
+| | | woods | 4.1 / 4.7 / 5.3 | 2.6 / 3.5 / 4.3 |
+| | | crowd | 8.0 / 12.7 / 18.3 | 6.7 / 11.4 / 21.1 |
+| Steam Deck, 90 Hz | `npm run deck:*`, bench `--attach-page` | city | 2.1 / 3.0 / 4.9 | 1.4 / 1.8 / 3.4 |
+| | | woods | 3.3 / 4.0 / 6.1 | 1.4 / 2.1 / 4.9 |
+| | | crowd | 7.6 / 14.1 / 17.0 | 6.5 / 11.1 / 12.9 |
+| Quest 3 | adb, Quest Browser | — | None | Not measured; XR frame pacing is slice 4 |
+
+- `city`, `woods` and the driving scene hold the display's cadence in the
+  unified view on all three devices. The crowd overloads the authority on the
+  phone and the Deck in both renderers, so its rows are not clean render
+  measurements there.
+- The unified view draws less than the fixed view today (no grass, particles or
+  decals). These rows will move as slice 5 adds them; measure again then.
+- First person after the merge, city / woods at zoom 1: Mac 0.7 / 0.9 ms, Pixel
+  7a 3.8 / 3.4, Deck 1.8 / 2.5. Driving on the phone: 4.4 ms, no missed frame.
+
+All four devices were reachable on 2026-11-14. Concrete device selection comes
+from `~/code/machine-control` and private inventory at run time; none of it is
 recorded here.
 
-Open device question: the 3D scene makes 4 to 60 times more draw calls than the
-fixed view (one mesh per chunk's ground and per chunk's props). The Mac does not
-notice. The Deck's fixed view already spends up to 7.7 ms in submits, so the
-phone and Deck must be measured before and after chunk meshes are merged.
+Draw calls (251): **go.** Merged, the 3D scene's static content is 4 to 25
+draws at any zoom. The Deck gained up to 1.8 ms from the merge; the phone was
+not limited by draw calls. What is left is vehicles, 8 to 16 meshes a car with
+one render each, and the fixed view makes a similar number into its vehicle
+images (its bench count used to leave them out). Merge or batch vehicle meshes
+before stereo doubles them.
 
 ## Retirement gate
 
@@ -163,7 +197,11 @@ Three owner decisions, in order. Each needs the evidence listed.
 ## Open questions
 
 - Whether top-down in the unified view keeps its own shadow look or takes the
-  sun shadows.
+  sun shadows. If it takes them, the sun's map must follow the zoom: at 0.1× it
+  covers only the middle of the view (251).
+- How tall solid props are for the top-down camera (251): the artwork's implied
+  height, which matches the fixed view, or the colliders' height, which first
+  person needs and which shows a stretched band of roof from above.
 - Whether stereo and headset "flat" modes use the oblique camera or the orbit
   overhead preset (230). An oblique shear is exact on a page but is not a
   physically viewable camera in a headset.
@@ -184,9 +222,19 @@ Three owner decisions, in order. Each needs the evidence listed.
 
 ## Next
 
-Slice 3 ([248](../tactical/248-renderer-unification.md#3--top-down-camera-parity-probe-draw-calls-device-scorecard)):
-land the oblique top-down camera as an opt-in view, add the parity probe, merge
-chunk meshes, and fill the device scorecard. Device runs come first: slice 2
-chose four ground samples per pixel and unpaced card page uploads on Mac
-numbers, with only two standing-still cells on the Pixel 7a. The bench's
-`drive` scene does not start on the phone and needs fixing for that.
+Slice 3 is done, so two lines of work are open and do not depend on each other:
+
+- **Slice 4, XR on the shared scene**
+  ([248](../tactical/248-renderer-unification.md#4--xr-on-the-shared-scene)).
+  Merge or batch vehicle meshes first or alongside: they are most of the 3D
+  scene's remaining draw calls and stereo doubles them.
+- **Slice 5, top-down parity**, ordered by what the probe measured. Largest
+  first: solid props' height (54% overlap at 1×), then sprite edges and pixel
+  snapping together (standing cards one pixel off, soft sprite shadows cut,
+  small sprites unfiltered when zoomed out), then grass. Decide the shadow look
+  before touching shadows.
+
+Gate 1 (opt-in in Options) needs ground artwork (done), registration within the
+recorded tolerance (holds for ground, actors, vehicles and cards; solid props
+are the open case) and no missed frames in `city` and `woods` on the three
+devices (holds). It is an owner decision.

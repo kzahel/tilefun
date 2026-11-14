@@ -1,8 +1,10 @@
 # 248 — Renderer unification
 
 Status: parent sequencing plan, recorded 2026-11-14. Slices 0 (spike and plan),
-1 ([249](249-one-renderer-host.md)) and 2
-([250](250-ground-artwork-and-shared-pages.md)) are done; slice 3 is next.
+1 ([249](249-one-renderer-host.md)), 2
+([250](250-ground-artwork-and-shared-pages.md)) and 3
+([251](251-top-down-camera-parity-and-merged-meshes.md)) are done; slices 4 and
+5 are open.
 Owner decision, 2026-11-14: commit to one world renderer. Keep the fixed 2D view
 as the default top-down renderer until the unified one is good enough. WebXR is
 wanted on the same renderer. Test devices are available: the M4 Pro Mac, a Pixel
@@ -204,8 +206,11 @@ here deletes fixed-view code before the third decision.
 
 ## Progress
 
-Slice 1 is recorded in [249](249-one-renderer-host.md) and slice 2 in
-[250](250-ground-artwork-and-shared-pages.md).
+Slice 1 is recorded in [249](249-one-renderer-host.md), slice 2 in
+[250](250-ground-artwork-and-shared-pages.md) and slice 3 in
+[251](251-top-down-camera-parity-and-merged-meshes.md). 251 corrects one of the
+spike's readings below: the fixed view's draw-call column counted its sprite
+batches and left out the vehicle meshes it draws into images.
 
 ### Slice 0 — spike and plan (2026-11-14)
 

@@ -10,6 +10,14 @@ the isolated Vite server or a production origin (`--base`), in bundled Chromium,
 a phone's Chrome or the packaged Deck shell (`--cdp`, `--attach-page`).
 [236](../tactical/236-render-scorecard-and-gpu-shadows.md) owns the commands,
 limits, tables and next options.
+Since [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) a cell
+also reports `meshDrawCallsPerFrame`: the vehicle meshes the fixed view draws
+into images, which its draw-call figure had left out (26 to 547 a frame in the
+city and crowd). `--query=view=topdown3d` and `--query=view=fps` measure the 3D
+scene, whose own count includes vehicles; the
+[renderer unification scorecard](renderer-unification.md#device-scorecard)
+compares the three on the Mac, the Pixel 7a and the Deck. The `drive` scene now
+starts in first person on the phone as well.
 
 Findings:
 - Rendering is CPU-bound on the M4 Pro, Pixel 7a and Steam Deck. GPU time is a

@@ -23,6 +23,17 @@ context or changed assets give every page a new region object, so anything that
 bakes a region into vertex data compares regions each frame and rewrites when
 one changes. 3D views take part in terrain preparation over their interest
 range, within the frame's one shared budget.
+Since [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) the 3D
+scene has the fixed view's camera as an opt-in top-down preset (`r_topdown3d`,
+`?view=topdown3d`). Such a view sets `View.topDown3d`, not `drawn3d`: it keeps
+the fixed view's controls, markers, picking and streaming interest, and rooms,
+the editor and masked regions still draw through the fixed backend. Chunks of
+the 3D scene no longer own meshes. Their static content lives in merged ones:
+tile tops in fixed slots of `GroundTops` blocks (a chunk change uploads its
+slot), cliff walls and flat prop faces per 4 × 4 chunks, and prop faces wearing
+artwork per texture (`MergedFaces`). New static content should join a merged
+mesh, not add one per chunk. `canvas.__parity()` draws one moment of play
+through both renderers and reports where their pixels differ, by kind of content.
 
 [241](../tactical/241-budget-terrain-raster-completion.md) closes the terrain
 budget blind spot identified in [240](../tactical/240-phone-pause-attribution.md).

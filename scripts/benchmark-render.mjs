@@ -474,30 +474,28 @@ async function startDriving(page) {
         });
         g.transport.send({ type: "set-editor-mode", enabled: false });
       }, spot);
-    // The new car: one that was not there before, within reach of the player.
-    const car = (known) => {
+    // The new car: one that was not there before the attempt, at its spot. A
+    // traffic car of the same model that drives past is neither.
+    const car = ([known, [dx, dy]]) => {
       const g = document.querySelector("#game").__game;
       const p = g.stateView.serverPlayerEntity.position;
       return g.stateView.serverEntities.find(
         (e) =>
           e.type === "vehicle-v1:compact-1" &&
           !known.includes(e.id) &&
-          Math.hypot(e.position.wx - p.wx, e.position.wy - p.wy) < 120,
+          Math.hypot(e.position.wx - p.wx - dx, e.position.wy - p.wy - dy) < 24,
       )?.id;
     };
-    const known = await cars();
     // Arrival finishes some time after the first ready frame, and edits sent
     // before then are dropped, not queued: ask again until the car appears.
-    for (let attempt = 0; ; attempt++) {
-      await spawn(SPOTS[attempt % SPOTS.length]);
-      const appeared = await page
-        .waitForFunction(car, known, { timeout: 4000 })
-        .then(() => true)
-        .catch(() => false);
-      if (appeared) break;
-      if (attempt === 2 * SPOTS.length - 1) throw Error("The drive scene's car did not spawn");
+    let entityId;
+    for (let attempt = 0; entityId === undefined; attempt++) {
+      if (attempt === 2 * SPOTS.length) throw Error("The drive scene's car did not spawn");
+      const found = [await cars(), SPOTS[attempt % SPOTS.length]];
+      await spawn(found[1]);
+      await page.waitForFunction(car, found, { timeout: 4000 }).catch(() => {});
+      entityId = await page.evaluate(car, found);
     }
-    const entityId = await page.evaluate(car, known);
     await page.evaluate((entityId) => {
       const g = document.querySelector("#game").__game;
       g.transport.send({ type: "enter-vehicle", requestId: g.nextRequestId++, entityId });

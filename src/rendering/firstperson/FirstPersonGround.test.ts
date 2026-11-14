@@ -68,7 +68,9 @@ describe("the 3D ground (250, merged since 251)", () => {
     expect(slot(ground, "groundPage", 1)[2]).toBe(5);
     // An edited chunk keeps its slot and goes back to flat colours until bound again.
     attribute(ground, "groundPage").clearUpdateRanges();
+    const edited = attribute(ground, "position").version;
     ground.set("0,0", tops(0));
+    expect(attribute(ground, "position").version).toBeGreaterThan(edited);
     expect(slot(ground, "groundPage", 0)[2]).toBe(-1);
     expect(slot(ground, "groundPage", 1)[2]).toBe(5);
     expect(attribute(ground, "position").updateRanges).toEqual([
@@ -79,8 +81,16 @@ describe("the 3D ground (250, merged since 251)", () => {
   it("draws nothing for a chunk that left and gives its slot to the next one", () => {
     const ground = make();
     for (let cx = 0; cx < 3; cx++) ground.set(`${cx},0`, tops(cx));
+    const position = attribute(ground, "position");
+    position.clearUpdateRanges();
+    const version = position.version;
     ground.delete("1,0");
     expect(ground.count).toBe(2);
+    // The emptied slot, and only it, is uploaded.
+    expect(position.version).toBeGreaterThan(version);
+    expect(position.updateRanges).toEqual([
+      { start: CHUNK_TOP_VERTICES * 3, count: CHUNK_TOP_VERTICES * 3 },
+    ]);
     // Every corner in one place: no triangle has area.
     expect(new Set(slot(ground, "position", 1))).toEqual(new Set([0]));
     expect(mesh(ground).geometry.drawRange.count).toBe(3 * CHUNK_TOP_VERTICES);

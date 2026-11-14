@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { type FacePart, MergedFaces } from "./FirstPersonFaces.js";
 
 const material = new THREE.MeshBasicMaterial();
@@ -75,6 +75,22 @@ describe("merged static faces (251)", () => {
     faces.remove("never there");
   });
 
+  it("shows each new or rebuilt mesh to the caller, and nothing for a part that came and went", () => {
+    const faces = new MergedFaces();
+    const root = new THREE.Group();
+    const made: THREE.Mesh[] = [];
+    faces.replace("a", [{ ...part("walls:0,0", 1, 1), parent: root }]);
+    faces.flush((mesh) => made.push(mesh));
+    expect(made).toEqual([root.children[0]]);
+    // Added and removed inside one frame: no mesh is ever made.
+    faces.replace("b", [{ ...part("walls:9,9", 1, 1), parent: root }]);
+    faces.remove("b");
+    expect(faces.flush((mesh) => made.push(mesh))).toBe(0);
+    expect(made).toHaveLength(1);
+    expect(root.children).toHaveLength(1);
+    expect(faces.count).toBe(1);
+  });
+
   it("keeps one mesh object per bucket across rebuilds and frees everything on dispose", () => {
     const faces = new MergedFaces();
     const root = new THREE.Group();
@@ -86,7 +102,9 @@ describe("merged static faces (251)", () => {
     faces.flush();
     expect(root.children[0]).toBe(mesh);
     expect(mesh.geometry).not.toBe(first);
+    const freed = vi.spyOn(mesh.geometry, "dispose");
     faces.dispose();
+    expect(freed).toHaveBeenCalledTimes(1);
     expect(root.children).toHaveLength(0);
     expect(faces.count).toBe(0);
   });

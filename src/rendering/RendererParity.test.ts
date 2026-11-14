@@ -94,6 +94,25 @@ describe("renderer parity maths", () => {
     expect(compareFrames(fixed, fixed.slice(), WIDTH).shift).toEqual({ x: 0, y: 0 });
   });
 
+  it("reports the shortest of the moves that align equally well", () => {
+    // A band across the whole picture, two rows lower in the 3D scene: any move
+    // sideways does as well, and the plain one is reported.
+    const fixed = picture({ x: 0, y: 4, w: WIDTH, h: 3, rgb: RED });
+    const scene = picture({ x: 0, y: 6, w: WIDTH, h: 3, rgb: RED });
+    const result = compareCategory({ with: fixed, ground }, { with: scene, ground }, WIDTH);
+    expect(result.shift).toEqual({ x: 0, y: -2 });
+    expect(result.shiftedOverlap).toBe(1);
+    expect(compareFrames(fixed, scene, WIDTH).shift).toEqual({ x: 0, y: -2 });
+  });
+
+  it("does not call a silhouette moved off the picture agreement", () => {
+    // The fixed view draws nothing; the 3D scene draws a strip at the left edge.
+    const scene = picture({ x: 0, y: 2, w: 2, h: 4, rgb: RED });
+    const result = compareCategory({ with: ground, ground }, { with: scene, ground }, WIDTH);
+    expect(result).toMatchObject({ fixed: 0, scene: 8, overlap: 0, shiftedOverlap: 0 });
+    expect(result.shift).toEqual({ x: 0, y: 0 });
+  });
+
   it("counts only differences beyond the tolerance", () => {
     const near = picture();
     near.fill(100 + PARITY_TOLERANCE);

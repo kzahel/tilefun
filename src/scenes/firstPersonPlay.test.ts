@@ -280,7 +280,7 @@ describe("first person per seat", () => {
 });
 
 describe("top-down play in the 3D scene", () => {
-  it("keeps the fixed view's controls, markers and streaming interest", () => {
+  it("keeps the fixed view's controls and streaming interest", () => {
     const { control, gc, cancelled, view, sync } = setup();
     view.setRegion({ x: 0, y: 0, width: 1280, height: 720 });
     view.camera.snapTo(1000, 2000);
@@ -353,7 +353,7 @@ describe("top-down play in the 3D scene", () => {
     return { ...made, gc, frames };
   }
 
-  it("draws through the view's own fixed camera, with the player's body", () => {
+  it("draws through the view's own fixed camera", () => {
     const { control, gc, view, frames, sync } = drawable();
     control.topDown = true;
     sync();
@@ -367,6 +367,46 @@ describe("top-down play in the 3D scene", () => {
     control.topDown = false;
     expect(renderFirstPerson(gc, view, 1)).toBe(false);
     expect(view.topDown3d).toBe(false);
+  });
+
+  it("says the fixed view draws when the host cannot draw 3D (graphics lost)", () => {
+    const { control, gc, view, sync } = drawable();
+    control.topDown = true;
+    sync();
+    expect(renderFirstPerson(gc, view, 1)).toBe(true);
+    (gc.view3d as { draw: unknown }).draw = () => false;
+    expect(renderFirstPerson(gc, view, 1)).toBe(false);
+    expect(view.topDown3d).toBe(false);
+    expect(control.drawing3d).toBe(false);
+  });
+
+  it("follows guests who join and leave, the editor and dispose", async () => {
+    const { control, view, guest, views, sync } = setup();
+    control.topDown = true;
+    sync();
+    await vi.waitFor(() => expect(control.scene(guest)).toBeDefined());
+    const scene = control.scene(guest) as FirstPersonView;
+    const dispose = vi.spyOn(scene, "dispose");
+    control.markTopDown(view);
+    control.markTopDown(guest);
+    // The editor draws the fixed view for everyone.
+    control.hideView();
+    expect([view.topDown3d, guest.topDown3d]).toEqual([false, false]);
+    control.markTopDown(guest);
+    // The guest leaves: its view is gone from the layout and its scene is freed.
+    control.sync([view], new Set([0]));
+    expect(dispose).toHaveBeenCalledTimes(1);
+    expect(guest.topDown3d).toBe(false);
+    // Disposing the control turns the choice off and frees the rest.
+    const host = control.scene(view) as FirstPersonView;
+    const hostDispose = vi.spyOn(host, "dispose");
+    control.dispose();
+    expect(control.topDown).toBe(false);
+    expect(hostDispose).toHaveBeenCalledTimes(1);
+    expect(control.scene(view)).toBeUndefined();
+    control.topDown = true; // ignored once disposed
+    expect(control.topDown).toBe(false);
+    expect(views).toHaveLength(2);
   });
 
   it("leaves rooms to the fixed view, which draws them roofless", () => {
