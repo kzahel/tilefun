@@ -2,7 +2,7 @@
 
 Topic: steam-deck-and-menus
 Status: shared controller/touch UX and reverse driving delivered; hands-on tuning next.
-Updated: 2026-10-21.
+Updated: 2026-11-14.
 
 ## Contextual gameplay actions
 
@@ -66,7 +66,12 @@ or credentials in this repository.
   lights and D-pad Right/K changes siren style. Jump/Throw retain their meanings.
   Named on-screen paddles and interaction prompts follow the last input source.
 - Local players (226): split screen in the game.
-  - **Joining:** a press on a pad that seat 0 does not use joins Player 2–4
+  - **Joining:** **Multiplayer → Local split screen → Add Player 2 (keyboard)**
+    joins a keyboard player on this device and resumes Play (leaving Build mode
+    if needed). The menu explains each player's controls and also lists each
+    guest's **Player N leaves** button. It offers only one keyboard guest;
+    leaving restores the join button. Slash remains a shortcut during Play.
+    A press on a pad that seat 0 does not use joins Player 2–4
     (`PadAssignment` by `Gamepad.index`). Seat 0 keeps the first pad it uses
     (a button or the stick), as single player does, so the Deck's own controls
     stay player 1's. A guest keeps its pad until it leaves or the pad

@@ -35431,11 +35431,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LocalPlayers.ts:201"
+          "source": "src/client/LocalPlayers.ts:230"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LocalPlayers.ts:204"
+          "source": "src/client/LocalPlayers.ts:233"
         },
         {
           "system": "Gameplay",
@@ -36841,7 +36841,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LocalPlayers.ts:21"
+          "source": "src/client/LocalPlayers.ts:22"
         }
       ]
     },
@@ -36863,7 +36863,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LocalPlayers.ts:21"
+          "source": "src/client/LocalPlayers.ts:22"
         }
       ]
     },
@@ -36885,7 +36885,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LocalPlayers.ts:21"
+          "source": "src/client/LocalPlayers.ts:22"
         }
       ]
     },
@@ -36907,7 +36907,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LocalPlayers.ts:21"
+          "source": "src/client/LocalPlayers.ts:22"
         }
       ]
     },

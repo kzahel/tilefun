@@ -71,6 +71,9 @@ export class MainMenu {
   onDevelopmentReload: (() => void) | null = null;
   /** Adds local guests' buttons to the home page (226: a guest leaves from the menu). */
   seatActions: (add: (label: string, run: () => void) => void) => void = () => {};
+  /** Local join/leave controls, separate from online hosting and invitations. */
+  localPlayerActions: (add: (label: string, run: () => void, disabled?: boolean) => void) => void =
+    () => {};
 
   constructor() {
     this.overlay.className = "game-menu";
@@ -254,6 +257,25 @@ export class MainMenu {
       if (["classic", "island"].includes(this.type.value))
         this.content.append(...this.roadControls);
     } else if (page === "multiplayer") {
+      const localTitle = document.createElement("h2");
+      localTitle.textContent = "Local split screen";
+      this.content.append(localTitle);
+      if (this.currentWorldId) {
+        this.message(
+          "Play together on this device. Player 1 uses WASD or the first controller. Add a keyboard player for arrow keys and / to jump.",
+        );
+        this.localPlayerActions((label, run, disabled) => {
+          this.button(label, run).disabled = disabled ?? false;
+        });
+        this.message(
+          "For more controllers, resume play and press a button on another controller to join.",
+        );
+      } else {
+        this.message("Open a world to start local split screen.");
+      }
+      const onlineTitle = document.createElement("h2");
+      onlineTitle.textContent = "Online multiplayer";
+      this.content.append(onlineTitle);
       if (this.info) {
         this.message(`Hosting as ${this.info.hostName}`);
         this.message(`Join code: ${this.info.peerId}`);

@@ -34,13 +34,22 @@ function harness() {
   actions.on("toggle_menu", () => menus.push(1));
   const mainMenu = {
     seatActions: (_add: (label: string, run: () => void) => void) => {},
+    localPlayerActions: (_add: (label: string, run: () => void, disabled?: boolean) => void) => {},
     visible: true,
     openPage: vi.fn(),
+    onClose: vi.fn(),
   };
   /** The world menu's guest buttons, as its home page adds them. */
   const leaveButtons = () => {
     const buttons: { label: string; run: () => void }[] = [];
     mainMenu.seatActions((label, run) => buttons.push({ label, run }));
+    return buttons;
+  };
+  const localButtons = () => {
+    const buttons: { label: string; run: () => void; disabled: boolean }[] = [];
+    mainMenu.localPlayerActions((label, run, disabled) =>
+      buttons.push({ label, run, disabled: disabled ?? false }),
+    );
     return buttons;
   };
   const state = { blocked: false };
@@ -75,6 +84,7 @@ function harness() {
   return {
     players,
     leaveButtons,
+    localButtons,
     session,
     actions,
     mainMenu,
@@ -95,6 +105,28 @@ beforeEach(() => vi.stubGlobal("window", new EventTarget()));
 afterEach(() => vi.unstubAllGlobals());
 
 describe("local players joining from the keyboard (226)", () => {
+  it("the Multiplayer menu joins one keyboard guest and offers leave/rejoin there", async () => {
+    const h = harness();
+    h.state.blocked = true; // Menu actions work while gameplay input is blocked.
+    const [add] = h.localButtons();
+    expect(add?.label).toBe("Add Player 2 (keyboard)");
+    add?.run();
+    add?.run(); // A repeated activation cannot add another keyboard guest.
+    await settle();
+    expect(h.mainMenu.onClose).toHaveBeenCalled();
+    expect(h.requests).toHaveLength(1);
+    expect(h.session.seats.get(1)?.input).toBeTruthy();
+    expect(h.actions.getConfig()).toEqual(hostKeyMap());
+    const [leave] = h.localButtons();
+    expect(leave?.label).toBe("Player 2 leaves");
+    leave?.run();
+    await settle();
+    expect(h.session.seats.get(1)).toBeUndefined();
+    expect(h.actions.getConfig()).toBe(DEFAULT_ACTION_MAP);
+    expect(h.mainMenu.openPage).toHaveBeenLastCalledWith("multiplayer");
+    expect(h.localButtons()[0]?.label).toBe("Add Player 2 (keyboard)");
+  });
+
   it("scheme B's action key seats a guest on the right hand; seat 0 keeps the rest", async () => {
     const h = harness();
     const press = Object.assign(new Event("keydown", { cancelable: true }), { code: "Slash" });

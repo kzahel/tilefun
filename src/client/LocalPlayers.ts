@@ -8,6 +8,7 @@ import { PadActions } from "../input/PadActions.js";
 import { EVERY_PAD, PadAssignment, type PadPool, padsAway } from "../input/PadAssignment.js";
 import { ActionSeatInput, type SeatInput } from "../input/SeatInput.js";
 import { directionHeading } from "../rendering/firstperson/FirstPersonCamera.js";
+import { EditScene } from "../scenes/EditScene.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import { seatEntity } from "../session/SeatFocus.js";
 import { MAX_SEATS } from "../shared/protocol.js";
@@ -85,6 +86,27 @@ export class LocalPlayers implements PadPool {
       ])
         add(label, run);
     };
+    gc.mainMenu.localPlayerActions = (add) => {
+      const seat = this.freeSeat();
+      if (this.keyboardSeat === undefined && seat !== undefined) {
+        add(
+          `Add ${playerName(seat)} (keyboard)`,
+          () => {
+            gc.mainMenu.onClose?.();
+            if (gc.scenes.current instanceof EditScene) gc.mainMenu.onBuild?.();
+            // Menu activation explicitly joins, independent of gameplay input.
+            if (
+              gc.scenes.current instanceof PlayScene &&
+              !gc.storagePaused &&
+              !gc.doorPresentation?.busy
+            )
+              this.joinKeyboard();
+          },
+          gc.storagePaused || !!gc.doorPresentation?.busy,
+        );
+      }
+      for (const { label, run } of this.leaveActions("multiplayer")) add(label, run);
+    };
     this.offs = [
       gc.session.seats.onChange(() => this.sync()),
       // Seat 0 opening a menu (its keys or its pad) drives that menu itself.
@@ -153,15 +175,22 @@ export class LocalPlayers implements PadPool {
     window.removeEventListener("keydown", this.onKey);
     for (const off of this.offs) off();
     this.gc.mainMenu.seatActions = () => {};
+    this.gc.mainMenu.localPlayerActions = () => {};
   }
 
   private readonly onKey = (event: KeyboardEvent): void => {
     if (eventCode(event) !== KEYBOARD_JOIN_KEY || event.repeat || event.ctrlKey || event.metaKey)
       return;
     if (this.keyboardSeat !== undefined || ownsKeys(event.target) || !this.joinable) return;
+    if (this.freeSeat() === undefined) return;
+    event.preventDefault(); // Firefox's Quick Find would take the joining slash
+    this.joinKeyboard();
+  };
+
+  private joinKeyboard(): void {
+    if (this.destroyed || this.keyboardSeat !== undefined) return;
     const seat = this.freeSeat();
     if (seat === undefined) return;
-    event.preventDefault(); // Firefox's Quick Find would take the joining slash
     // Attached during this keydown, the scheme does not also see the joining press.
     // It reads no pads, so clearing or detaching it leaves seat 0's pad alone.
     const keys = new ActionManager(seatKeyMap("right"));
@@ -173,7 +202,7 @@ export class LocalPlayers implements PadPool {
         if (!joined && this.keyboardSeat === seat) this.keyboardSeat = undefined;
       },
     );
-  };
+  }
 
   private async joinPad(index: number): Promise<void> {
     const seat = this.freeSeat();
@@ -330,7 +359,9 @@ export class LocalPlayers implements PadPool {
     return actions;
   }
 
-  private leaveActions(): { label: string; run: () => void }[] {
+  private leaveActions(
+    page: "home" | "multiplayer" = "home",
+  ): { label: string; run: () => void }[] {
     const { mainMenu, session } = this.gc;
     return session.seats
       .list()
@@ -339,7 +370,7 @@ export class LocalPlayers implements PadPool {
         label: `${playerName(seat)} leaves`,
         run: () =>
           void this.leave(seat).then(() => {
-            if (mainMenu.visible) mainMenu.openPage("home");
+            if (mainMenu.visible) mainMenu.openPage(page);
           }),
       }));
   }
