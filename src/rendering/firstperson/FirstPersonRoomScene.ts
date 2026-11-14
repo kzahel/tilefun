@@ -100,10 +100,10 @@ export class FirstPersonRoomScene {
     shell: Prop,
     elevation: number,
     flat: TriangleWriter,
-    facesFor: (image: PropImage) => TexturedTriangles | undefined,
+    facesFor: (image: Pick<PropImage, "texture">) => TexturedTriangles | undefined,
   ): void {
     const { frame, painted, plain, sideColor } = this.measure(shell, elevation);
-    const image = { texture: this.walls, color: this.wallColor, frame };
+    const image = { texture: this.walls };
     appendPropGeometry(
       { flat, textured: facesFor(image) },
       painted,

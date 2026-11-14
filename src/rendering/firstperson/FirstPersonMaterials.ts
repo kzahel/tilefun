@@ -33,6 +33,8 @@ export interface MaterialShading {
   card?: { value: THREE.Vector2 } | undefined;
   /** Ground faces wear their chunk's page of this atlas (see `FirstPersonGround`). */
   ground?: { value: THREE.Texture | null } | undefined;
+  /** Cards show their `cardPage` place in this atlas (see `CardArrays`). */
+  cardArt?: { value: THREE.Texture | null } | undefined;
   sun?: { uniforms: SunUniforms; receiver: SunReceiver } | undefined;
 }
 
@@ -97,20 +99,43 @@ vec3 groundArt() {
 }
 `;
 
+/** A card's artwork: `cardPage` is its place in the page atlas (texel x, texel y,
+ * layer). Alpha is the artwork's own, for the material's alpha test. */
+const CARD_ART_FRAGMENT = `
+uniform highp sampler2DArray cardAtlas;
+varying vec3 vCardPage;
+vec4 cardArt() {
+  vec3 uvw = vec3(vCardPage.xy / vec2(textureSize(cardAtlas, 0).xy), floor(vCardPage.z + 0.5));
+  // Pages hold display-encoded bytes; the scene shades in linear light.
+  return sRGBTransferEOTF(texture(cardAtlas, uvw));
+}
+`;
+
 /**
  * Adds the view's shading to one of Three's built-in materials by editing its
- * shader source: shader-expanded cards (see `CardArrays`), ground artwork from
- * the page atlas, and the sun's shadow.
+ * shader source: shader-expanded cards (see `CardArrays`), card and ground
+ * artwork from the page atlas, and the sun's shadow.
  */
 export function shadeMaterial<T extends THREE.Material>(material: T, shading: MaterialShading): T {
-  const { card, sun, ground } = shading;
-  if (!card && !sun && !ground) return material;
+  const { card, sun, ground, cardArt } = shading;
+  if (!card && !sun && !ground && !cardArt) return material;
   material.customProgramCacheKey = () =>
-    `fp:${card ? "card" : ""}:${sun?.receiver ?? ""}:${ground ? "ground" : ""}`;
+    `fp:${card ? "card" : ""}:${sun?.receiver ?? ""}:${ground ? "ground" : ""}:${cardArt ? "art" : ""}`;
   material.onBeforeCompile = (shader) => {
     let vertex = shader.vertexShader;
     let fragment = shader.fragmentShader;
     const declare: string[] = [];
+    if (cardArt) {
+      shader.uniforms.cardAtlas = cardArt;
+      declare.push("attribute vec3 cardPage;", "varying vec3 vCardPage;");
+      vertex = vertex.replace(
+        "#include <color_vertex>",
+        "#include <color_vertex>\n  vCardPage = cardPage;",
+      );
+      fragment = fragment
+        .replace("#include <common>", `#include <common>${CARD_ART_FRAGMENT}`)
+        .replace("#include <map_fragment>", "diffuseColor *= cardArt();");
+    }
     if (ground) {
       shader.uniforms.groundAtlas = ground;
       declare.push(

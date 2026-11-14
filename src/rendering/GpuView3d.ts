@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { GpuMeshBodies } from "./GpuMeshBodies.js";
+import { PAGE } from "./GpuPages.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
 import type { SharedMeshAssets, SharedPages, View3dHost } from "./View3dHost.js";
 
@@ -49,6 +50,9 @@ export function createView3dHost(
       }
       return surface.pages.get(image, 0, 0, GROUND_SIZE).region ?? undefined;
     },
+    pageSize: PAGE,
+    page: (image, x, y) =>
+      surface.pages.get(image, x, y, surface.pages.imageSize(image)).region ?? undefined,
   };
   return {
     draw(region, draw) {

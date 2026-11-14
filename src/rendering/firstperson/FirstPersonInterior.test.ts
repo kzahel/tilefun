@@ -143,7 +143,7 @@ describe("first-person rooms", () => {
       floor: false,
       wall: false,
     });
-    const texture = {} as Parameters<typeof artCard>[2];
+    const texture = { width: 32, height: 48 } as Parameters<typeof artCard>[2];
     const card = artCard(prop(100, 200), frame, texture, 0);
     expect(card).toMatchObject({ x: 100, height: 48 });
     expect(card.z + card.height - 40).toBe(0); // the anchor row meets the floor

@@ -6,7 +6,7 @@ import type { Prop } from "../../entities/Prop.js";
 import type { World } from "../../world/World.js";
 import type { SpriteItem } from "../SceneItem.js";
 import type { PageRegion, SharedMeshAssets, SharedPages, View3dTarget } from "../View3dHost.js";
-import { actorBillboard, BillboardBatches, StaticCards } from "./FirstPersonBillboards.js";
+import { actorBillboard, MovingCards, RecentPages, StaticCards } from "./FirstPersonBillboards.js";
 import {
   cameraRight,
   type FirstPersonEye,
@@ -141,13 +141,16 @@ export class FirstPersonView {
     new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide }),
     "faces",
   );
-  /** The host's page atlas as of this frame; ground meshes sample their chunk's page. */
-  private readonly groundAtlas: { value: THREE.Texture | null } = { value: null };
+  /** The host's page atlas as of this frame: ground meshes sample their chunk's
+   * page, and cards their sheet's or composed image's pages. */
+  private readonly atlas: { value: THREE.Texture | null } = { value: null };
   private readonly groundMaterial = shadeMaterial(
     new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide }),
-    { sun: { uniforms: this.sun.uniforms, receiver: "faces" }, ground: this.groundAtlas },
+    { sun: { uniforms: this.sun.uniforms, receiver: "faces" }, ground: this.atlas },
   );
-  private readonly billboards: BillboardBatches;
+  /** The frame's pages as cards ask for them. */
+  private readonly cardPages = new RecentPages();
+  private readonly billboards: MovingCards;
   private readonly cards: StaticCards;
   private readonly blobs: BlobShadows;
   private readonly vehicles = new FirstPersonVehicles((material) => {
@@ -181,22 +184,26 @@ export class FirstPersonView {
     this.worldRoot.scale.set(1, -1, 1);
     this.scene.add(this.worldRoot);
     this.scene.fog = this.fog;
-    const card = (receiver: SunReceiver) => (texture: THREE.Texture) =>
-      shadeMaterial(
-        new THREE.MeshBasicMaterial({ map: texture, alphaTest: 0.5, side: THREE.DoubleSide }),
-        { card: this.cardRight, sun: { uniforms: this.sun.uniforms, receiver } },
-      );
-    this.billboards = new BillboardBatches(this.worldRoot, card("body"));
-    this.cards = new StaticCards(this.worldRoot, card("card"), this.sun.cardRoot, (texture) =>
+    // Every card reads the page atlas, so each kind of card is one material and one draw.
+    const card = (receiver: SunReceiver) =>
+      shadeMaterial(new THREE.MeshBasicMaterial({ alphaTest: 0.5, side: THREE.DoubleSide }), {
+        card: this.cardRight,
+        cardArt: this.atlas,
+        sun: { uniforms: this.sun.uniforms, receiver },
+      });
+    this.billboards = new MovingCards(this.worldRoot, card("body"));
+    this.cards = new StaticCards(
+      this.worldRoot,
+      card("card"),
+      this.sun.cardRoot,
       shadeMaterial(
         new THREE.MeshBasicMaterial({
-          map: texture,
           alphaTest: 0.5,
           side: THREE.DoubleSide,
           colorWrite: false,
           fog: false,
         }),
-        { card: this.sun.cardRight },
+        { card: this.sun.cardRight, cardArt: this.atlas },
       ),
     );
     this.blobs = new BlobShadows(this.worldRoot);
@@ -223,16 +230,19 @@ export class FirstPersonView {
     if (frame.world !== this.world || frame.realm !== this.realm) this.resetWorld(frame);
     this.syncRoom(frame.interior);
     if (frame.props !== this.propsSource) this.groupProps(frame.props);
-    this.updateChunks(frame, target.pages);
-    // Read after the frame's page requests: the atlas is replaced when it grows.
-    this.groundAtlas.value = target.pages.atlas;
+    const { pages } = target;
+    this.cardPages.begin(pages);
+    this.updateChunks(frame, pages);
     // Card changes come with their chunk's rebuild, which already told the sun.
+    this.cards.keep(this.cardPages);
     this.cards.flush();
     this.stats.cards = this.cards.count;
     this.placeCamera(frame.eye, frame.drawRadius);
     // Rooms have contact shadows but no sun.
     const shadows = frame.shadows !== false;
     const cars = this.fillBillboards(frame, meshes, shadows);
+    // Read after the frame's page requests: the atlas is replaced when it grows.
+    this.atlas.value = pages.atlas;
     const fogEnd = this.fogEnd ?? frame.drawRadius;
     // Draw calls are counted over every render of this view, sun map included.
     const { info } = renderer;
@@ -387,7 +397,7 @@ export class FirstPersonView {
       // Room shells and furniture stay out of the sun's map: rooms have no sun.
       if (!room) for (const mesh of built.group.children) SunShadows.cast(mesh);
       scene.props = { signature, group: built.group, surfaces: built.surfaces };
-      this.cards.set(key, built.billboards);
+      this.cards.set(key, built.billboards, this.cardPages);
       this.surfaces = null;
       this.worldRoot.add(scene.props.group);
       builds++;
@@ -470,8 +480,7 @@ export class FirstPersonView {
       return;
     }
     const sheet = this.images.sheet(item.sheetKey);
-    if (sheet)
-      this.billboards.push(actorBillboard(item, sheet.sheet, sheet.texture, eye, meshes.ready));
+    if (sheet) this.billboards.push(actorBillboard(item, sheet, eye, meshes.ready), this.cardPages);
   }
 
   /** The collector resolves support without surface queries here, so a body above the

@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { ELEVATION_PX, TILE_SIZE } from "../../config/constants.js";
 import type { Prop } from "../../entities/Prop.js";
-import { artCard, type Billboard, sheetUv } from "./FirstPersonBillboards.js";
+import { artCard, type Billboard, sheetFrame } from "./FirstPersonBillboards.js";
 import type { FirstPersonImages, PropImage } from "./FirstPersonImages.js";
 import {
   appendPropGeometry,
@@ -16,7 +16,7 @@ import type { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
 import { type ColoredTriangles, TriangleWriter } from "./FirstPersonTerrain.js";
 
 type TexturedFaces = NonNullable<PropGeometry["textured"]>;
-type FacesFor = (image: PropImage | undefined) => TexturedFaces | undefined;
+type FacesFor = (image: Pick<PropImage, "texture"> | undefined) => TexturedFaces | undefined;
 
 /** One chunk's props as drawn: solid meshes, standing cards and walkable surfaces. */
 export interface ChunkProps {
@@ -173,22 +173,19 @@ export class PropMeshes {
       return;
     }
     const card = furniture.image(false);
-    if (card) built.billboards.push(artCard(prop, furniture.frame, card.texture, elevation));
+    if (card) built.billboards.push(artCard(prop, furniture.frame, card.image, elevation));
   }
 
-  /** A forest row's slices as cards on its sheet's texture. */
+  /** A forest row's slices as cards of its sheet's image. */
   private propCards(prop: Prop, elevation: number): Billboard[] {
     const sheet = this.images.sheet(prop.sprite.sheetKey);
     if (!sheet) return [];
-    const { width, height } = sheet.sheet.image;
-    return propSlices(prop, (col, row) => sheet.sheet.getRegion(col, row)).map((slice) => ({
-      texture: sheet.texture,
-      uv: [
-        slice.sheetX / width,
-        slice.sheetY / height,
-        (slice.sheetX + slice.width) / width,
-        (slice.sheetY + slice.height) / height,
-      ],
+    return propSlices(prop, (col, row) => sheet.getRegion(col, row)).map((slice) => ({
+      image: sheet.image as CanvasImageSource,
+      sx: slice.sheetX,
+      sy: slice.sheetY,
+      sw: slice.width,
+      sh: slice.height,
       x: slice.x,
       y: slice.y,
       z: elevation,
@@ -202,8 +199,7 @@ export class PropMeshes {
       const sheet = this.images.sheet(prop.sprite.sheetKey);
       if (!sheet) return undefined;
       return {
-        texture: sheet.texture,
-        uv: sheetUv(sheet.sheet, prop.sprite, prop.sprite.frameRow, false),
+        ...sheetFrame(sheet, prop.sprite, prop.sprite.frameRow),
         x: prop.position.wx,
         y: prop.position.wy,
         z: elevation,
@@ -212,7 +208,7 @@ export class PropMeshes {
       };
     }
     const image = this.images.prop(prop, false);
-    return image && artCard(prop, image.frame, image.texture, elevation);
+    return image && artCard(prop, image.frame, image.image, elevation);
   }
 
   dispose(): void {

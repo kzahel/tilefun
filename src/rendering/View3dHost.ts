@@ -41,6 +41,14 @@ export interface SharedPages {
    * waits for a later frame (uploads are paced), or when the atlas is full.
    */
   ground(chunk: Chunk): PageRegion | undefined;
+  /** Images are split into pages of at most this many texels a side. */
+  readonly pageSize: number;
+  /**
+   * The page of `image` whose top-left corner is at (x, y), both multiples of
+   * `pageSize`, kept resident for this display frame and uploaded on first use.
+   * Undefined when the atlas is full.
+   */
+  page(image: CanvasImageSource, x: number, y: number): PageRegion | undefined;
 }
 
 /** What a 3D view draws into: the host's renderer, already bound to the view's

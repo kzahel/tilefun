@@ -34,6 +34,7 @@ function fixture() {
       atlas: { texture: { name: "atlas" } },
       pages: new Map<object, { region: object | null }[]>(),
       full: false,
+      imageSize: () => ({ width: 2816, height: 8224 }),
       get(image: object, x: number, y: number, size: { width: number; height: number }) {
         let page = this.pages.get(image)?.[0];
         if (!page) {
@@ -148,5 +149,19 @@ describe("3D views on the fixed view's renderer (249)", () => {
     const chunk = {} as Chunk;
     images.set(chunk, {});
     host.draw(undefined, ({ pages }) => expect(pages.ground(chunk)).toBeUndefined());
+  });
+
+  it("lends the pages of any image, uploaded on first use (250)", () => {
+    const { host, calls } = fixture();
+    const sheet = {} as CanvasImageSource;
+    host.draw(undefined, ({ pages }) => {
+      expect(pages.pageSize).toBe(512);
+      const page = pages.page(sheet, 1024, 512);
+      expect(page).toBeDefined();
+      // The page store splits by the image's own size.
+      expect(calls).toContain("upload 1024,512 2816x8224");
+      expect(pages.page(sheet, 1024, 512)).toBe(page);
+      expect(calls.filter((call) => call.startsWith("upload"))).toHaveLength(1);
+    });
   });
 });

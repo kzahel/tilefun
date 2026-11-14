@@ -3,12 +3,10 @@ import type { Spritesheet } from "../../assets/Spritesheet.js";
 import type { Prop } from "../../entities/Prop.js";
 import { type PropImageFrame, propImageFrame, propPieces } from "./FirstPersonProps.js";
 
-export interface SheetImage {
-  readonly texture: THREE.Texture;
-  readonly sheet: Spritesheet;
-}
-
 export interface PropImage {
+  /** The composed pixels: cards read them through the host's page atlas (250). */
+  readonly image: HTMLCanvasElement;
+  /** The same pixels as a texture of the view's own, for the faces of solid props. */
   readonly texture: THREE.Texture;
   /** Alpha-weighted average artwork colour (sRGB hex). */
   readonly color: number;
@@ -29,13 +27,13 @@ export function pixelTexture(source: TexImageSource): THREE.Texture {
 }
 
 /**
- * View-owned textures over the already-decoded sprite sheets. Sheet textures
- * borrow the loader's images; composed prop images are owned here (softly bounded).
- * Opaque compositions back transparent pixels with the average colour so a
- * projected face never shows holes.
+ * Artwork the view composes from the already-decoded sprite sheets: one image
+ * per prop or furniture piece, owned here (softly bounded). Opaque compositions
+ * back transparent pixels with the average colour so a projected face never shows
+ * holes. Sheet frames themselves are not copied: cards read them from the host's
+ * page atlas.
  */
 export class FirstPersonImages {
-  private readonly sheetTextures = new Map<string, SheetImage>();
   private readonly propImages = new Map<string, PropImage>();
   private disposed = false;
 
@@ -45,15 +43,8 @@ export class FirstPersonImages {
     private readonly onEvict: (texture: THREE.Texture) => void = () => {},
   ) {}
 
-  sheet(key: string): SheetImage | undefined {
-    let image = this.sheetTextures.get(key);
-    if (!image && !this.disposed) {
-      const sheet = this.sheets.get(key);
-      if (!sheet) return undefined;
-      image = { texture: pixelTexture(sheet.image as TexImageSource), sheet };
-      this.sheetTextures.set(key, image);
-    }
-    return image;
+  sheet(key: string): Spritesheet | undefined {
+    return this.disposed ? undefined : this.sheets.get(key);
   }
 
   prop(prop: Prop, opaque: boolean): PropImage | undefined {
@@ -129,7 +120,7 @@ export class FirstPersonImages {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
     if (this.propImages.size >= MAX_PROP_IMAGES) this.evictOldest();
-    const image = { texture: pixelTexture(canvas), color, frame };
+    const image = { image: canvas, texture: pixelTexture(canvas), color, frame };
     this.propImages.set(key, image);
     return image;
   }
@@ -147,9 +138,7 @@ export class FirstPersonImages {
 
   dispose(): void {
     this.disposed = true;
-    for (const image of this.sheetTextures.values()) image.texture.dispose();
     for (const image of this.propImages.values()) image.texture.dispose();
-    this.sheetTextures.clear();
     this.propImages.clear();
   }
 }

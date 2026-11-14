@@ -1,6 +1,6 @@
 # 250 — Ground artwork and shared pages
 
-Status: in progress, started 2026-11-14. Phase 2a delivered; 2b not started.
+Status: phases 2a and 2b delivered 2026-11-14; independent review pending.
 Slice 2 of [248](248-renderer-unification.md).
 Owners: [renderer unification](../topics/renderer-unification.md),
 [rendering architecture](../topics/rendering-architecture.md).
@@ -203,3 +203,98 @@ Limits:
   dropped at once instead of after 120.
 - Grass blades, decals and particles are not ground images and are still
   missing in 3D (parity checklist).
+
+### 2b — delivered 2026-11-14
+
+How it works:
+
+- **The seam.** `SharedPages.page(image, x, y)` gives the atlas region of any
+  image's page (pages are at most 512 texels a side), uploading it on first use
+  and marking it used this frame.
+- **Cards describe artwork, not textures.** A `Billboard` now names an image (a
+  sheet, or a canvas the view composed) and the rectangle of it to show.
+  `CardArrays` turns that into quads whose vertices carry a place in the atlas
+  (`cardPage`: texel x, texel y, layer). Artwork that crosses a page boundary
+  becomes one quad per page. A card whose page is not in the atlas (atlas full)
+  is left out.
+- **One material per kind of card.** With every card reading the atlas, moving
+  cards are one mesh and one draw (`MovingCards`), and standing cards are one
+  merged mesh plus its sun-facing copy for the shadow map (`StaticCards`).
+  Before there was one of each per sheet.
+- **Standing cards keep their pages.** They are written once per chunk, so each
+  frame `StaticCards.keep` asks for the pages they were written against. A page
+  someone asks for stays where it is. If the atlas gives any page a new place
+  (restored context, changed assets), every chunk's cards are written again
+  from their kept descriptions.
+- **Whole-sheet textures are gone.** `FirstPersonImages` no longer makes a
+  texture per sheet. It still composes prop and furniture artwork; cards read
+  those canvases through the atlas, and the faces of solid props keep the view's
+  own texture of them (out of scope above).
+- `RecentPages` remembers the last page asked for, so a crowd on one sheet page
+  costs one request to the host per frame.
+
+Card artwork on the GPU, one first-person view, six seconds after arrival:
+
+| Scene | Before: whole sheets | After: pages |
+| --- | --- | --- |
+| city | 15 sheets, 99.6 MiB (one sheet of 2,816 × 8,224 is 88 MiB) | 14 pages, 4.6 MiB |
+| woods | 8 sheets, 12.2 MiB (one sheet is 7,232 texels wide) | 13 pages, 3.0 MiB |
+
+A 7,232-texel sheet is wider than the 4,096-texel texture limit some phones
+have. As pages it never exceeds 512.
+
+Cost, same bench and machine as 2a. Render p50 / p95 ms, GPU p50 ms:
+
+| Scene | After 2a | After 2b | Draws 2a → 2b |
+| --- | --- | --- | --- |
+| city | 0.6 / 1.0, 0.55 | 0.7 / 1.2, 0.55 | 56 → 48 |
+| woods | 0.9 / 1.1, 0.50 | 0.8 / 1.1, 0.54 | 35 → 29 |
+| crowd | 3.0 / 3.4, 1.09 | 2.8 / 3.1, 1.16 | 333 → 325 |
+| drive | 0.8 / 1.4, 0.64 | 0.9 / 2.4, 0.66 | 71 → 65 |
+
+- Standing still, cost is unchanged and draw calls are lower.
+- **Driving p95 rose from 1.4 to 2.2–2.4 ms** (three runs: 2.4, 2.2, 2.3). No
+  frame was missed and the worst frame is unchanged at 10.4 ms. Card artwork now
+  uploads a page at a time as it is first seen: 25 pages (7.6 MiB) in the 5 s
+  drive against 14 ground pages (3.5 MiB) after 2a, at most 960 KiB in a frame.
+  Each uploading frame costs about 1.5 ms more, and there are now enough of them
+  to reach the 95th percentile.
+- Part of that is repeated work. A wide animation sheet (a dog's is 3,648 texels,
+  eight pages) has its frames on several pages, and the page store drops a page
+  nobody drew for 120 frames, which is one second at 120 Hz. Standing still in
+  the city, two pages were uploaded again within 5 s. The fixed view has the
+  same behaviour; first person did not while it kept whole sheets.
+- Fixed view after 2b: city 0.7 / 1.0 at 1× and 0.9 / 1.2 at 0.25×; crowd
+  1.9 / 2.1 and 3.4 / 4.2. Unchanged.
+
+Validation:
+
+- Captures: `capture.mjs` (city on foot, driving, mixed split screen in three
+  layouts, the editor's fixed view, context loss and recovery), the woods
+  (135 actors, 402 standing cards, tree shadows from the sun-facing copy), and
+  `capture-rooms.mjs` (furniture cards, pictures, actors indoors). Signs, lamp
+  posts, trees, people and furniture look as they did. No page errors.
+- Node: `FirstPersonBillboards.test.ts` rewritten (atlas places for a frame,
+  mirrored cards, artwork across a page boundary, a missing page, one mesh for
+  all moving cards, one request per run of cards, merged standing cards with the
+  sun's copy, pages kept resident and cards rewritten when the atlas moves a
+  page, and the shader edit's anchors). `GpuView3d.test.ts` covers `page`.
+  354 tests in `src/rendering/firstperson`, `src/session`, `src/scenes`,
+  `src/client` and the two host tests pass.
+- `npm run streaming:bench -- --assert-ready` passes. Typechecks, Biome and knip
+  pass; the ratchet reports only `PhysicsScene.ts`. `art:catalog` and
+  `workshop:manifest` regenerated.
+- Not run: full unit and browser suites. Not measured: phone, Deck, headset.
+
+Limits:
+
+- Uploads of card artwork are not paced (the fixed view's are not either); see
+  the driving p95 above. The page store's 120-frame age is the lever, and it is
+  shared with the fixed view.
+- At the atlas's 256 MiB cap a card is not drawn at all, where the fixed view
+  falls back to a separate texture. The cap has not been reached in any run
+  (largest seen: 72 MiB at the far view distance).
+- Each 3D view composes its own prop artwork, so two first-person views put two
+  copies of those canvases in the atlas. Sheet pages are shared.
+- Cards far away are still unfiltered (one sample per pixel).
+
