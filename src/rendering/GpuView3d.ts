@@ -24,6 +24,8 @@ export function createView3dHost(
   bodies: GpuMeshBodies,
   /** A chunk's prepared ground image, if it has one. */
   groundImage: (chunk: Chunk) => CanvasImageSource | null,
+  /** A headset session gave the renderer back (252): size it to the page. */
+  restored: () => void = () => surface.resize(surface.canvas.width, surface.canvas.height),
 ): View3dHost {
   // The fixed view's loaded vehicle meshes and paint atlases, lent to 3D views.
   const meshes: SharedMeshAssets = {
@@ -75,7 +77,7 @@ export function createView3dHost(
     };
   };
   return {
-    xr: createXrHost(surface, viewTarget),
+    xr: createXrHost(surface, viewTarget, restored),
     draw(region, draw) {
       if (surface.disposed || surface.lost || region?.mask) return false;
       surface.flush();

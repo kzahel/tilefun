@@ -15,6 +15,7 @@ import {
   roomToWorld,
   scaleTable,
   snapTurn,
+  TABLE_DEAD_ZONE,
   type XrHead,
 } from "../xr/XrRig.js";
 
@@ -61,12 +62,15 @@ export interface XrClient {
   /** The render host's headset outputs; undefined without a GPU host. */
   readonly output: View3dXr | undefined;
   readonly loop: { start(): void; stop(): void; externalTick(nowMs: number): void };
-  /** Seat 0's choice of first person: immersive modes hold it for the session. */
+  /** Immersive modes hold seat 0 in the 3D scene for the session, whatever the
+   * seat chose; a tabletop sets how far its view reaches. */
   readonly firstPerson: {
-    readonly active: boolean;
-    setActive(value: boolean, heading?: number): void;
+    hold(heading: number): void;
+    unhold(): void;
     reach: number | undefined;
   };
+  /** Free what the client set up for the control (listeners). */
+  dispose?(): void;
   readonly controller: {
     /** The session's controllers as a pad, while it presents. */
     headset: (() => Gamepad | undefined) | null;
@@ -113,6 +117,7 @@ export class XrControl {
   /** Whether it can also show a flat panel (WebXR layers), which the headset
    * screen is. */
   private panels = false;
+  private handheld = false;
   /** The mode a pause ended; play's next user gesture may enter it again. */
   resume: XrMode | null = null;
   /**
@@ -134,7 +139,10 @@ export class XrControl {
   private starting = false;
   private played = false;
   private startedAt = 0;
-  private wasFirstPerson = false;
+  private disposed = false;
+  /** This headset frame has a head pose, and some frame of the session drew. */
+  private posed = false;
+  private drew = false;
   private head: XrHead = { x: 0, y: 1.2, z: 0, yaw: 0, pitch: 0 };
   /** The room point that sits at the player's eye (the head's resting place) or,
    * for a tabletop, at the miniature's middle. Set from the session's first pose. */
@@ -163,12 +171,18 @@ export class XrControl {
     this.supported = await xr.isSessionSupported("immersive-vr").catch(() => false);
     this.panels =
       typeof XRWebGLBinding !== "undefined" && "createQuadLayer" in XRWebGLBinding.prototype;
+    // Standalone headsets' browsers do not call themselves Android or mobile.
+    this.handheld = /Android|iPhone|iPad|Mobile/.test(navigator.userAgent ?? "");
     return this.supported;
   }
 
-  /** The modes this browser can present, for menus. */
+  /**
+   * The modes menus offer. A phone's browser can report immersive sessions too
+   * (a cardboard viewer); a children's menu does not list those. The console's
+   * `xr` command still starts one anywhere the browser allows it.
+   */
   get modes(): readonly XrMode[] {
-    if (!this.supported) return [];
+    if (!this.supported || this.handheld) return [];
     return this.panels ? XR_MODES : XR_MODES.filter((mode) => mode !== "screen");
   }
 
@@ -208,7 +222,7 @@ export class XrControl {
       const live = session;
       this.session = live;
       this.current = mode;
-      this.played = false;
+      this.played = this.drew = this.posed = false;
       this.startedAt = performance.now();
       this.lastFrame = 0;
       this.intervals.length = this.work.length = 0;
@@ -230,10 +244,9 @@ export class XrControl {
         // First person starts looking the way the player faces; a tabletop
         // starts with north away from the player, like the top-down view.
         this.yaw = (mode === "eye" ? client.heading() : undefined) ?? NORTH_YAW;
-        this.wasFirstPerson = client.firstPerson.active;
         // Movement follows the look and the body leaves its own view, as in
         // first person on the page.
-        client.firstPerson.setActive(true, this.yaw);
+        client.firstPerson.hold(this.yaw);
         this.output = await client.output.immersive(live, this.onFrame);
         this.output.space.addEventListener?.("reset", () => this.recentre());
       }
@@ -248,14 +261,24 @@ export class XrControl {
   }
 
   /**
-   * A pause ended the session and play is back on top: enter again, if the
-   * close was a user's gesture (a click on Resume), which a session needs.
+   * After a gesture, when a pause ended the session: enter again if play is
+   * back on top and the gesture is one a session accepts (a click on Resume).
    */
   resumeInPlay(): void {
     const mode = this.resume;
     if (!mode || this.session || this.starting || !this.client.playing()) return;
-    if (!navigator.userActivation?.isActive) return;
-    void this.enter(mode);
+    // Play is back: this is the one chance. A menu closed without a gesture (a
+    // pad, Escape) stays on the page, and no later click starts a session.
+    this.resume = null;
+    if (navigator.userActivation?.isActive) void this.enter(mode);
+  }
+
+  /** The client is going away: end any session and leave its page alone. */
+  dispose(): void {
+    this.disposed = true;
+    this.resume = null;
+    this.client.dispose?.();
+    this.exit();
   }
 
   /** End the session; the page's loop takes over again. */
@@ -273,8 +296,10 @@ export class XrControl {
     client.controller.headset = null;
     if (immersive) {
       client.firstPerson.reach = undefined;
-      client.firstPerson.setActive(this.wasFirstPerson, client.heading());
+      client.firstPerson.unhold();
     }
+    // A destroyed client has no page to go back to.
+    if (this.disposed) return;
     client.restored();
     client.loop.start();
   };
@@ -302,8 +327,10 @@ export class XrControl {
     this.lastFrame = time;
     this.stats.frames++;
     this.stats.inputs = session.inputSources.length;
+    this.posed = false;
     if (this.output) {
       const pose = frame.getViewerPose(this.output.space);
+      this.posed = !!pose;
       if (pose) {
         this.head = headFromMatrix(pose.transform.matrix);
         this.stats.posed++;
@@ -315,11 +342,15 @@ export class XrControl {
     this.keep(this.work, performance.now() - began);
     // Anything over play is HTML on the page: leave the headset to show it.
     const playing = client.playing();
+    const late = began - this.startedAt > START_GRACE_MS;
     if (playing) this.played = true;
-    else if (this.played || began - this.startedAt > START_GRACE_MS) {
+    else if (this.played || late) {
       if (this.played) this.resume = this.current;
       this.exit();
     }
+    // Nothing reached the eyes (the 3D scene failed to load, graphics are lost):
+    // the page can say so, a black headset cannot.
+    if (this.output && !this.drew && late) this.exit();
   }
 
   /**
@@ -361,7 +392,10 @@ export class XrControl {
 
   /** Draw this headset frame of the 3D scene; false while it cannot be drawn. */
   draw(draw: Parameters<ImmersiveOutput["draw"]>[0]): boolean {
-    return !!this.output?.draw(draw);
+    // Without a pose the eyes' cameras and textures are the last frame's.
+    if (!this.posed || !this.output?.draw(draw)) return false;
+    this.drew = true;
+    return true;
   }
 
   resetPacing(): void {
@@ -377,7 +411,9 @@ export class XrControl {
     this.yaw += snapTurn(this.snap, stick.dx);
     if (this.current === "tabletop") {
       this.tableScale = scaleTable(this.tableScale, stick.dy, dt);
-      this.client.firstPerson.reach = this.tableHalf() * Math.SQRT2;
+      // Streamed around the player, who may stand off the table's middle by its
+      // dead zone: reach the far corners from there.
+      this.client.firstPerson.reach = this.tableHalf() * (Math.SQRT2 + TABLE_DEAD_ZONE);
     }
     look.yaw = this.yaw + this.head.yaw;
     look.pitch = clampPitch(this.head.pitch);
@@ -401,7 +437,12 @@ export class XrControl {
       this.current === "tabletop"
         ? {
             x: head.x + Math.sin(head.yaw) * table.distance,
-            y: Math.max(TABLE_FLOOR, head.y - table.drop),
+            // Kept off the floor where the room has one. A room measured from
+            // the head's start has the head near zero: the table goes below it.
+            y:
+              head.y > TABLE_FLOOR * 2
+                ? Math.max(TABLE_FLOOR, head.y - table.drop)
+                : head.y - table.drop,
             z: head.z - Math.cos(head.yaw) * table.distance,
           }
         : { x: head.x, y: head.y, z: head.z };

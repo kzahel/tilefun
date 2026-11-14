@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { NORTH_YAW } from "../rendering/firstperson/FirstPersonCamera.js";
 import type { ImmersiveOutput, View3dXr } from "../rendering/View3dHost.js";
 import type { ViewEye } from "../session/ViewEye.js";
-import { roomToWorld, SNAP_TURN } from "../xr/XrRig.js";
+import { roomToWorld, SNAP_TURN, TABLE_DEAD_ZONE } from "../xr/XrRig.js";
 import { EYE_PIXELS_PER_METRE, type XrClient, XrControl } from "./XrControl.js";
 
 /** A head pose as a session reports it: yaw to the right, then pitch up. */
@@ -22,7 +22,7 @@ function harness() {
   let end: (() => void) | undefined;
   const state = {
     playing: true,
-    firstPerson: false,
+    held: undefined as number | undefined,
     reach: undefined as number | undefined,
     pose: headPose(0, 1.2, 0),
     posed: true,
@@ -61,11 +61,11 @@ function harness() {
       externalTick: (now) => events.push(`tick ${now}`),
     },
     firstPerson: {
-      get active() {
-        return state.firstPerson;
+      hold(heading) {
+        state.held = heading;
       },
-      setActive(value) {
-        state.firstPerson = value;
+      unhold() {
+        state.held = undefined;
       },
       get reach() {
         return state.reach;
@@ -80,6 +80,8 @@ function harness() {
     restored: () => events.push("restored"),
   };
   vi.stubGlobal("navigator", {
+    userAgent:
+      "Mozilla/5.0 (X11; Linux x86_64; Quest 3) OculusBrowser/156.0 Chrome/156.0 VR Safari/537.36",
     userActivation: { isActive: false },
     xr: {
       isSessionSupported: async () => true,
@@ -107,7 +109,7 @@ afterEach(() => vi.unstubAllGlobals());
 
 describe("a headset session (252)", () => {
   it("drives the game loop from its frames and gives it back when it ends", async () => {
-    const { control, client, session, events, step } = harness();
+    const { control, client, session, state, events, step } = harness();
     expect(await control.detect()).toBe(true);
     // No quad layers in this browser: no headset screen.
     expect(control.modes).toEqual(["eye", "tabletop"]);
@@ -115,7 +117,8 @@ describe("a headset session (252)", () => {
     expect(events).toEqual(["page loop off", "immersive"]);
     expect(control.mode).toBe("eye");
     expect(control.immersive).toBe(true);
-    expect(client.firstPerson.active).toBe(true);
+    // Seat 0 is held in the 3D scene, facing the way the player faces.
+    expect(state.held).toBe(0);
     expect(client.controller.headset).toBeTypeOf("function");
     events.length = 0;
     step();
@@ -126,19 +129,81 @@ describe("a headset session (252)", () => {
     expect(events.slice(-3)).toEqual(["session ended", "restored", "page loop on"]);
     expect(control.mode).toBeNull();
     expect(control.immersive).toBe(false);
-    expect(client.firstPerson.active).toBe(false);
+    expect(state.held).toBeUndefined();
     expect(client.controller.headset).toBeNull();
     // The player left by choice: nothing to resume.
     expect(control.resume).toBeNull();
   });
 
-  it("keeps a first-person player in first person afterwards", async () => {
-    const { control, client, state } = harness();
-    state.firstPerson = true;
+  it("does not list a phone's cardboard mode in the menu", async () => {
+    const { control } = harness();
+    (navigator as { userAgent: string }).userAgent =
+      "Mozilla/5.0 (Linux; Android 16; Pixel 7a) AppleWebKit/537.36 Chrome/156.0 Mobile Safari/537.36";
+    expect(await control.detect()).toBe(true);
+    expect(control.modes).toEqual([]);
+    // Asked for by name (the console), it still starts.
+    expect(await control.enter("eye")).toBe(true);
+  });
+
+  it("gives the tabletop's reach back with the seat", async () => {
+    const { control, client, state, step } = harness();
     await control.enter("tabletop");
+    step();
+    control.tick({ yaw: 0, pitch: 0 }, 1 / 60, { dx: 0, dy: 0 });
+    expect(client.firstPerson.reach).toBeGreaterThan(0);
     control.exit();
-    expect(client.firstPerson.active).toBe(true);
+    expect(state.held).toBeUndefined();
     expect(client.firstPerson.reach).toBeUndefined();
+  });
+
+  it("leaves nothing held when the headset's output cannot start", async () => {
+    const { control, client, session, state, events } = harness();
+    (client.output as { immersive: unknown }).immersive = async () => {
+      throw Error("no layers today");
+    };
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    expect(await control.enter("eye")).toBe(false);
+    expect(warn).toHaveBeenCalledOnce();
+    expect(session.end).toHaveBeenCalledOnce();
+    expect(control.mode).toBeNull();
+    expect(state.held).toBeUndefined();
+    expect(client.controller.headset).toBeNull();
+    expect(events.at(-1)).toBe("page loop on");
+  });
+
+  it("ends a session whose eyes never get a picture", async () => {
+    const { control, session, step } = harness();
+    let now = 0;
+    vi.stubGlobal("performance", { now: () => now });
+    await control.enter("eye");
+    step();
+    expect(session.end).not.toHaveBeenCalled();
+    // Play is on top, but nothing drew: the scene failed to load, say.
+    now = 5000;
+    step();
+    expect(session.end).toHaveBeenCalledOnce();
+    // One that draws stays.
+    const drawing = harness();
+    await drawing.control.enter("eye");
+    drawing.step();
+    expect(drawing.control.draw(() => {})).toBe(true);
+    now = 10_000;
+    drawing.step();
+    expect(drawing.session.end).not.toHaveBeenCalled();
+    // A frame without a pose has last frame's eyes: it is not drawn.
+    drawing.state.posed = false;
+    drawing.step();
+    expect(drawing.control.draw(() => {})).toBe(false);
+  });
+
+  it("does not start the page's loop again for a client that is going away", async () => {
+    const { control, session, events } = harness();
+    await control.enter("eye");
+    events.length = 0;
+    control.dispose();
+    expect(session.end).toHaveBeenCalledOnce();
+    expect(events).toEqual(["session ended"]);
+    expect(control.resume).toBeNull();
   });
 
   it("ends when a menu covers play, and enters again on the gesture that resumes", async () => {
@@ -150,15 +215,34 @@ describe("a headset session (252)", () => {
     expect(session.end).toHaveBeenCalledOnce();
     expect(control.mode).toBeNull();
     expect(control.resume).toBe("eye");
-    // Back in play, but not from a click: a session cannot start.
+    // Play resumes from a click: the gesture a session needs.
     state.playing = true;
-    control.resumeInPlay();
-    expect(state.requests).toHaveLength(1);
     (navigator.userActivation as { isActive: boolean }).isActive = true;
     control.resumeInPlay();
     await vi.waitFor(() => expect(control.mode).toBe("eye"));
     expect(state.requests).toHaveLength(2);
     expect(control.resume).toBeNull();
+  });
+
+  it("stays on the page when the menu closes without a gesture", async () => {
+    const { control, state, step } = harness();
+    await control.enter("eye");
+    step();
+    state.playing = false;
+    step();
+    expect(control.resume).toBe("eye");
+    // A gesture while the menu is still open changes nothing.
+    control.resumeInPlay();
+    expect(control.resume).toBe("eye");
+    // Closed with a pad or Escape: play is back without a gesture a session
+    // accepts, and no later click starts one.
+    state.playing = true;
+    control.resumeInPlay();
+    expect(control.resume).toBeNull();
+    (navigator.userActivation as { isActive: boolean }).isActive = true;
+    control.resumeInPlay();
+    expect(state.requests).toHaveLength(1);
+    expect(control.mode).toBeNull();
   });
 
   it("asks for layers only for the screen, and does not wait on the display rate", async () => {
@@ -365,7 +449,8 @@ describe("a tabletop in a headset", () => {
     // What is drawn and streamed reaches the table's corners.
     expect(seen?.drawRadius).toBeCloseTo(table.half * Math.SQRT2, 6);
     control.tick({ yaw: 0, pitch: 0 }, 1 / 60, { dx: 0, dy: 0 });
-    expect(client.firstPerson.reach).toBeCloseTo(table.half * Math.SQRT2, 6);
+    // Streaming reaches them from a player standing off the middle.
+    expect(client.firstPerson.reach).toBeCloseTo(table.half * (Math.SQRT2 + TABLE_DEAD_ZONE), 6);
     expect(control.walking).toBe(false);
   });
 

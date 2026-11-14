@@ -8,6 +8,12 @@ Since 2026-11-14 [248](248-renderer-unification.md) sequences the remaining
 slices: 3 and 4 after its shared renderer (248 slice 1), 5 to 8 as 248 slice 4.
 On a flat screen the "pretend 2D" view is 248's exact oblique camera, not the
 narrow orbit preset below; the orbit presets remain for stereo and headsets.
+Slices 5 to 8 were delivered in [252](252-xr-on-the-shared-scene.md), with these
+differences: the headset screen is mono and shows the page's canvas; the
+tabletop is placed from the head's first pose and is not the orbit preset
+(slice 3 has not landed); its two-controller grab, manual recentre and lock are
+not built; B on the right controller pauses, because the headset's menu button
+is not given to pages. Slices 3, 4 and 9 remain.
 Owner direction, 2026-11-08, after playing the [229](229-first-person-view.md)
 first-person experiment: configurable view distance, a stereo "2D-looking" hybrid,
 a tabletop mode, and WebXR again (a basic screen mode as before, plus immersive).

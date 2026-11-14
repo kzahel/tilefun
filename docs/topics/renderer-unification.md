@@ -2,9 +2,9 @@
 
 Topic: renderer-unification
 Status: committed direction, 2026-11-14; slices 1 (one renderer host), 2 (ground
-artwork, shared page atlas) and 3 (opt-in top-down camera, parity probe, merged
-meshes, device scorecard) delivered the same day. The fixed 2D view is the
-default top-down renderer and stays so until the
+artwork, shared page atlas), 3 (opt-in top-down camera, parity probe, merged
+meshes, device scorecard) and 4 (play in a headset) delivered the same day. The
+fixed 2D view is the default top-down renderer and stays so until the
 [retirement gate](#retirement-gate) is met.
 Updated: 2026-11-14.
 
@@ -89,7 +89,7 @@ row when a slice starts, delivers or is blocked.
 | 1 — One renderer host | Done 2026-11-14: one WebGL context, shared vehicle assets, first person as a per-seat view kind with mixed split screen | [249](../tactical/249-one-renderer-host.md) |
 | 2 — Ground artwork, shared page atlas | Done 2026-11-14: the 3D ground wears the fixed view's terrain pages, and 3D cards read the same atlas instead of whole-sheet textures (99.6 MiB → 4.6 MiB of card artwork in the city) | [250](../tactical/250-ground-artwork-and-shared-pages.md) |
 | 3 — Top-down camera, parity probe, draw calls, device scorecard | Done 2026-11-14: `?view=topdown3d` / `r_topdown3d` draws top-down play through the 3D scene; the parity probe gives the checklist numbers; static content is merged into 4 to 25 draws; measured on the Mac, Pixel 7a and Deck, with a go on draw-call cost | [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) |
-| 4 — XR on the shared scene | Not started (needs slice 1) | [230](../tactical/230-3d-cameras-stereo-and-webxr.md) slices 5–8 |
+| 4 — XR on the shared scene | Done 2026-11-14 for owner play: the world menu's **Headset** buttons start a WebXR session as a floating screen, immersive first person or a tabletop miniature, with the headset's controllers as seat 0's pad; all three hold 72 Hz on a Quest 3 in `city` and `woods`. Comfort and the controller mapping are not yet checked by a wearer | [252](../tactical/252-xr-on-the-shared-scene.md) |
 | 5 — Top-down parity | Not started (needs slices 2 and 3) | checklist below |
 | 6 — Opt-in, default, retirement | Not started (owner decisions) | gate below |
 
@@ -157,7 +157,7 @@ full cells in [evidence](../benchmarks/251-device-scorecard.json).
 | Steam Deck, 90 Hz | `npm run deck:*`, bench `--attach-page` | city | 2.1 / 3.0 / 4.9 | 1.4 / 1.8 / 3.4 |
 | | | woods | 3.3 / 4.0 / 6.1 | 1.4 / 2.1 / 4.9 |
 | | | crowd | 7.6 / 14.1 / 17.0 | 6.5 / 11.1 / 12.9 |
-| Quest 3 | adb, Quest Browser | — | None | Not measured; XR frame pacing is slice 4 |
+| Quest 3 | adb, Quest Browser | — | Not a headset view | Headset sessions: table below |
 
 - `city`, `woods` and the driving scene hold the display's cadence in the
   unified view on all three devices. The crowd overloads the authority on the
@@ -168,16 +168,38 @@ full cells in [evidence](../benchmarks/251-device-scorecard.json).
 - First person after the merge, city / woods at zoom 1: Mac 0.7 / 0.9 ms, Pixel
   7a 3.8 / 3.4, Deck 1.8 / 2.5. Driving on the phone: 4.4 ms, no missed frame.
 
+Headset sessions on the Quest 3 at 72 Hz
+([252](../tactical/252-xr-on-the-shared-scene.md#quest-3-frame-pacing),
+`scripts/first-person/xr-quest.mjs`). Each cell is late frames of about 720,
+then the session's frame work in ms (p50): controller poll, game ticks and
+drawing, which is not the render time the table above reports.
+
+| Scene | Screen (the page's canvas) | First person | Tabletop |
+| --- | --- | --- | --- |
+| city | 0 late, 4.8 | 1 late, 5.7 | 0 late, 5.1 |
+| woods | 1 late, 6.6 | 4 late, 6.8 | 1 late, 5.3 |
+
+- At the headset's own 90 Hz every mode, the screen included, is late for 1 to
+  4% of frames, so sessions ask for 72 Hz. The GPU takes 0.7 to 2.9 ms a frame.
+- Nobody wore the headset for these runs: no head movement, no controllers, no
+  judgement of comfort.
+
 All four devices were reachable on 2026-11-14. Concrete device selection comes
 from `~/code/machine-control` and private inventory at run time; none of it is
 recorded here.
+
+Stereo (252): first person draws 60 calls in the city in the headset against 25
+on its flat page, and 12 against 6 in the woods. Halving the city's calls did
+not bring 90 Hz back (page work 4.9 → 4.7 ms), so vehicle meshes were not
+batched: the screen, which draws no eyes, already takes 4.5 to 6.6 ms of page
+work a frame and misses 90 Hz as often as first person does.
 
 Draw calls (251): **go.** Merged, the 3D scene's static content is 4 to 25
 draws at any zoom. The Deck gained up to 1.8 ms from the merge; the phone was
 not limited by draw calls. What is left is vehicles, 8 to 16 meshes a car with
 one render each, and the fixed view makes a similar number into its vehicle
-images (its bench count used to leave them out). Merge or batch vehicle meshes
-before stereo doubles them.
+images (its bench count used to leave them out). 252 then measured stereo on
+the Quest 3 and did not need to batch them.
 
 ## Retirement gate
 
@@ -217,22 +239,37 @@ Three owner decisions, in order. Each needs the evidence listed.
   which is one second at 120 Hz. Wide animation sheets then upload pages again
   and again, in both renderers. Whether the age should be a time, not a frame
   count, is undecided.
+- Headset display rate (252): sessions ask for 72 Hz because 90 Hz misses 1 to
+  4% of frames on a Quest 3. Whether a production build, or less work in the
+  page's frame, holds 90 Hz is not measured.
+- Edges in the headset (252): the shared context has no multisampling, so the
+  eyes show hard edges. Turning it on changes the fixed view's context as well.
+- A HUD inside a session (252, 230): prompts, gems, markers and chat are HTML or
+  the 2D overlay canvas, and a session shows neither.
+- The page atlas inside a session (252): on the Quest 3 a framebuffer copy of
+  the atlas misses pages written since the session began; it grows by drawing
+  there. The cause was not found, and other copies of that kind inside a session
+  are suspect until it is.
+- First person in the woods on the Quest stalled once for about 0.2 s in each
+  run (252). Not investigated.
 - WebGPU is not part of this work
   ([renderer options](../research/sprite-to-3d-and-renderer-options.md#renderer-choices)).
 
 ## Next
 
-Slice 3 is done, so two lines of work are open and do not depend on each other:
+Slice 4 is delivered for owner play, so the open work is:
 
-- **Slice 4, XR on the shared scene**
-  ([248](../tactical/248-renderer-unification.md#4--xr-on-the-shared-scene)).
-  Merge or batch vehicle meshes first or alongside: they are most of the 3D
-  scene's remaining draw calls and stereo doubles them.
+- **Owner checks in the headset**
+  ([252](../tactical/252-xr-on-the-shared-scene.md#owner-checks-on-the-headset)):
+  the controller mapping, comfort in first person, the tabletop's placement and
+  scale, and the Resume flow. These decide what the next XR work is; a HUD in
+  the session and multisampling are the known gaps.
 - **Slice 5, top-down parity**, ordered by what the probe measured. Largest
   first: solid props' height (54% overlap at 1×), then sprite edges and pixel
   snapping together (standing cards one pixel off, soft sprite shadows cut,
   small sprites unfiltered when zoomed out), then grass. Decide the shadow look
   before touching shadows.
+- 230's orbit camera and stereo on the page can land at any time.
 
 Gate 1 (opt-in in Options) needs ground artwork (done), registration within the
 recorded tolerance (holds for ground, actors, vehicles and cards; solid props

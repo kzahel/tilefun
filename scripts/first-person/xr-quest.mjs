@@ -229,7 +229,10 @@ try {
         await tab.send("Profiler.setSamplingInterval", { interval: 200 });
         await tab.send("Profiler.start");
       }
-      await game((g) => g.xr.resetPacing());
+      const ended = await game((g) => {
+        g.xr.resetPacing();
+        return g.xr.stats.ended;
+      });
       await tab.waitForTimeout(seconds * 1000);
       if (profile) cell.profile = topSelfTime((await tab.send("Profiler.stop")).profile);
       Object.assign(
@@ -243,8 +246,14 @@ try {
             g.renderHost.renderer.surface.canvas.width,
             g.renderHost.renderer.surface.canvas.height,
           ],
+          mode: g.xr.mode,
         })),
       );
+      // A session that died during the measurement has no pacing to report.
+      if (cell.mode !== mode || cell.stats.ended !== ended)
+        report.errors.push(`${name} ${mode}: the session ended during the measurement`);
+      if (mode !== "screen" && !(cell.stats.posed > 0 && cell.view?.calls > 0))
+        report.errors.push(`${name} ${mode}: nothing was drawn to the eyes`);
       cell.compositor = compositor();
       await writeFile(path.join(output, `${name}-${mode}.png`), adb("exec-out", "screencap", "-p"));
       await game((g) => g.xr.exit());
@@ -265,7 +274,12 @@ try {
 } finally {
   await writeFile(path.join(output, "xr-quest.json"), `${JSON.stringify(report, null, 2)}\n`);
   console.log(`\nReport and headset pictures: ${output}`);
-  if (report.errors.length) console.log(`Errors:\n  ${[...new Set(report.errors)].join("\n  ")}`);
+  if (report.errors.length) {
+    console.log(`FAILED:\n  ${[...new Set(report.errors)].join("\n  ")}`);
+    process.exitCode = 1;
+  }
+  // Take back the immersive permission this run granted its origin.
+  await tab?.send("Browser.resetPermissions").catch(() => {});
   await tab?.close().catch(() => {});
   try {
     adb("forward", "--remove", `tcp:${DEVTOOLS}`);

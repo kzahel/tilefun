@@ -1,4 +1,3 @@
-import type { XrMode } from "../client/XrControl.js";
 import type { GameContext } from "../core/GameScene.js";
 import { PropEditorScene } from "../scenes/PropEditorScene.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
@@ -30,9 +29,9 @@ export function registerClientCommands(engine: ConsoleEngine, gc: GameContext): 
       const mode = String(args.mode ?? "");
       if (!xr?.supported) out("No headset: this browser offers no immersive sessions");
       else if (mode === "off") xr.exit();
-      else if (xr.modes.some((offered) => offered === mode))
+      else if (mode === "eye" || mode === "tabletop" || mode === "screen")
         void xr
-          .enter(mode as XrMode)
+          .enter(mode)
           .then((entered) => out(entered ? `Headset: ${mode}` : "Headset refused"));
       else out(`Headset: ${xr.mode ?? "off"}`);
     },

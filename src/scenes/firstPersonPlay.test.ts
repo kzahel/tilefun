@@ -270,6 +270,36 @@ describe("first person per seat", () => {
     expect(again.look?.yaw).toBeCloseTo(1, 9);
   });
 
+  it("a headset holds seat 0 in 3D whatever the seat chooses, then gives its choice back (252)", async () => {
+    const { control, view, guest, sync } = setup();
+    sync();
+    control.hold(0);
+    expect(view.look).toEqual({ yaw: 0, pitch: 0 });
+    expect(guest.look).toBeNull();
+    // The seat's own choice is not the headset's: it stays off.
+    expect(control.active).toBe(false);
+    await vi.waitFor(() => expect(control.scene(view)).toBeDefined());
+    const scene = control.scene(view) as FirstPersonView;
+    const dispose = vi.spyOn(scene, "dispose");
+    // Switching first person on and off during the session keeps the scene.
+    control.setActive(true, 1);
+    control.setActive(false);
+    sync();
+    expect(view.look).not.toBeNull();
+    expect(control.scene(view)).toBe(scene);
+    expect(dispose).not.toHaveBeenCalled();
+    control.unhold();
+    expect(view.look).toBeNull();
+    expect(dispose).toHaveBeenCalledOnce();
+    // A seat that chose first person keeps it, and its scene, after the session.
+    control.setActive(true, 1);
+    sync();
+    control.hold(0);
+    control.unhold();
+    expect(control.active).toBe(true);
+    expect(view.look).not.toBeNull();
+  });
+
   it("forgets a seat's choice when the seat leaves", () => {
     const { control, guest, views } = setup();
     control.setSeat(1, true, 0);

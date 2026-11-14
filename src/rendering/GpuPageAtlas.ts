@@ -63,6 +63,9 @@ export class GpuPageAtlas {
   /** Draws a layer of one atlas into another when the array grows or shrinks. */
   private copier: ReturnType<typeof layerCopier> | null = null;
   resizes = 0;
+  /** A headset session is using the context (252), as a screen or immersively:
+   * growth then draws the old layers; see `drawLayers`. */
+  session = false;
 
   constructor(
     private readonly renderer: THREE.WebGLRenderer,
@@ -184,7 +187,7 @@ export class GpuPageAtlas {
     const old = this.target,
       keep = Math.min(old?.depth ?? 0, layers);
     if (old && keep) {
-      if (this.renderer.xr.isPresenting) {
+      if (this.session) {
         const drawing = this.renderer.getRenderTarget();
         this.drawLayers(old.texture, next, keep);
         this.renderer.setRenderTarget(drawing);
@@ -207,7 +210,7 @@ export class GpuPageAtlas {
   }
   /**
    * Draw the first `layers` layers of one atlas texture into another's: the
-   * copy used while a headset session presents (252).
+   * copy used while a headset session lasts (252).
    *
    * On a Quest 3 inside a session, every framebuffer copy (`copyTexSubImage3D`,
    * `blitFramebuffer`, the renderer's texture copy) read the atlas without the

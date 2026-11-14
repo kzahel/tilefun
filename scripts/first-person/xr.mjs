@@ -38,7 +38,11 @@ const server = await createServer({
   logLevel: "error",
 });
 let browser;
-const report = { output, date: new Date().toISOString(), errors: [], modes: {} };
+const report = { output, date: new Date().toISOString(), errors: [], console: [], modes: {} };
+/** A check of the contract this script exists for; a failure fails the run. */
+const expect = (ok, what) => {
+  if (!ok) report.errors.push(what);
+};
 const game = (page, fn, arg) =>
   page.evaluate(
     ([source, value]) =>
@@ -57,9 +61,10 @@ try {
   });
   const page = await browser.newPage({ viewport: { width: 1280, height: 720 } });
   page.on("pageerror", (error) => report.errors.push(error.message));
+  // Kept for reading; only page errors and failed checks below fail the run.
   page.on("console", (message) => {
     if (message.type() === "error" || message.type() === "warning")
-      report.errors.push(`console ${message.type()}: ${message.text()}`);
+      report.console.push(`${message.type()}: ${message.text()}`);
   });
   // A Quest 3 with its Touch Plus controllers, standing at the room's origin.
   await page.addInitScript(`${emulator};
@@ -208,6 +213,22 @@ try {
     };
     await page.screenshot({ path: path.join(output, `${mode}-after.png`) });
     console.log(`${mode}: ${JSON.stringify(cell)}`);
+    expect(cell.mode === mode, `${mode}: the session was not presenting when measured`);
+    expect(Math.hypot(cell.walked.dx, cell.walked.dy) > 20, `${mode}: the left stick did not walk`);
+    expect(cell.inputs === 2, `${mode}: the session saw ${cell.inputs} controllers, not 2`);
+    if (mode !== "screen") {
+      expect(cell.drawn3d && cell.view?.calls > 0, `${mode}: nothing was drawn to the eyes`);
+      expect(
+        Math.abs(cell.snapTurnDegrees - 30) < 1,
+        `${mode}: a flick turned ${cell.snapTurnDegrees}°`,
+      );
+      // A 40° turn of the head to the left, after the 30° snap to the right.
+      expect(Math.abs(cell.headTurnDegrees + 10) < 2, `${mode}: the look did not follow the head`);
+    }
+    expect(!cell.contextLost, `${mode}: graphics were lost`);
+    expect(cell.pageLoopBack, `${mode}: the page's loop did not come back`);
+    expect(cell.restored.firstPerson, `${mode}: the seat's own view choice changed`);
+    expect(cell.restored.size, `${mode}: the canvases were not sized back to the page`);
   }
   // A menu over play ends the session and remembers the mode.
   if (modes.includes("eye") && report.modes.eye?.entered) {
@@ -245,11 +266,25 @@ try {
     report.pause.resumed = await game(page, (g) => g.xr.mode);
     await game(page, (g) => g.xr.exit());
     console.log(`pause: ${JSON.stringify(report.pause)}`);
+    expect(
+      report.pause.menu && report.pause.mode === null,
+      "B did not end the session for the menu",
+    );
+    expect(report.pause.resume === "eye", "the paused mode was not remembered");
+    expect(
+      report.pause.offers.includes("Headset: tabletop") &&
+        report.pause.offers.includes("Headset: stay on this page"),
+      `the paused menu offers ${JSON.stringify(report.pause.offers)}`,
+    );
+    expect(report.pause.resumed === "eye", "Resume did not go back into the session");
   }
 } finally {
   await writeFile(path.join(output, "xr.json"), `${JSON.stringify(report, null, 2)}\n`);
   console.log(`\nReport and pictures: ${output}`);
-  if (report.errors.length) console.log(`Errors:\n  ${[...new Set(report.errors)].join("\n  ")}`);
+  if (report.errors.length) {
+    console.log(`FAILED:\n  ${[...new Set(report.errors)].join("\n  ")}`);
+    process.exitCode = 1;
+  } else console.log("All checks passed.");
   await browser?.close().catch(() => {});
   await server.close().catch(() => {});
   await rm(temp, { recursive: true, force: true });

@@ -66,6 +66,8 @@ export class FirstPersonControl {
   });
   /** Seats that chose first person, with the heading their view starts at. */
   private readonly chosen = new Map<number, number>();
+  /** The heading a headset session holds seat 0's 3D view at; see `hold`. */
+  private held: number | undefined;
   private readonly scenes = new Map<View, FirstPersonView>();
   private readonly lastManualLook = new WeakMap<View, number>();
   /** The device's views as last laid out. */
@@ -117,9 +119,37 @@ export class FirstPersonControl {
     // come first (a menu over play draws without ticking).
     for (const view of this.views) if (view.seat === seat) this.apply(view);
     // A view the device has since replaced may still hold the seat's scene.
-    if (!value && !this.topDownChoice)
+    if (!value) this.releaseSeat(seat);
+  }
+
+  /**
+   * A headset session holds seat 0 in the 3D scene (252), with its look and
+   * camera-relative movement, whatever the seat chose and whatever it chooses
+   * while the session lasts. `unhold` gives the seat's own choice back.
+   */
+  hold(heading: number): void {
+    if (this.disposed || this.held !== undefined) return;
+    this.held = heading;
+    for (const view of this.views) if (view.seat === 0) this.apply(view);
+  }
+
+  unhold(): void {
+    if (this.held === undefined) return;
+    this.held = undefined;
+    for (const view of this.views) if (view.seat === 0) this.apply(view);
+    this.releaseSeat(0);
+  }
+
+  /** The heading a seat's 3D view starts at, if the seat is shown in one. */
+  private heading(seat: number): number | undefined {
+    return this.chosen.get(seat) ?? (seat === 0 ? this.held : undefined);
+  }
+
+  /** Free the scenes of a seat that is no longer shown in 3D. */
+  private releaseSeat(seat: number): void {
+    if (this.heading(seat) === undefined && !this.topDownChoice)
       for (const view of [...this.scenes.keys()]) if (view.seat === seat) this.release(view);
-    if (!this.chosen.size && !this.topDownChoice) this.failed = false;
+    if (!this.chosen.size && this.held === undefined && !this.topDownChoice) this.failed = false;
   }
 
   seatActive(seat: number): boolean {
@@ -175,7 +205,7 @@ export class FirstPersonControl {
   }
 
   private apply(view: View): void {
-    const heading = this.chosen.get(view.seat);
+    const heading = this.heading(view.seat);
     if (heading === undefined) {
       view.look = null;
       // A top-down view may keep drawing in the same scene.
@@ -183,7 +213,7 @@ export class FirstPersonControl {
       else this.release(view);
     } else if (!view.look) view.look = { yaw: heading, pitch: 0 };
     // A guest's view is made again after leaving play: it resumes this heading.
-    else this.chosen.set(view.seat, view.look.yaw);
+    else if (this.chosen.has(view.seat)) this.chosen.set(view.seat, view.look.yaw);
     view.interestRadius = view.drawn3d ? this.drawRadius : undefined;
   }
 
@@ -263,7 +293,7 @@ export class FirstPersonControl {
   /** The view's loaded 3D scene, or undefined while the module loads or after it
    * failed to load. */
   scene(view: View): FirstPersonView | undefined {
-    const eye = !!view.look && this.chosen.has(view.seat);
+    const eye = !!view.look && this.heading(view.seat) !== undefined;
     if ((!eye && !this.topDownChoice) || this.disposed || this.failed) return undefined;
     const existing = this.scenes.get(view);
     if (existing) return existing;
@@ -320,6 +350,7 @@ export class FirstPersonControl {
 
   dispose(): void {
     if (this.disposed) return;
+    this.unhold();
     for (const seat of [...this.chosen.keys()]) this.setSeat(seat, false);
     this.topDown = false;
     this.disposed = true;

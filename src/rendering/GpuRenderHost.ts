@@ -95,8 +95,12 @@ export function createGpuRenderHost(
     endWorld: endView,
     beginView,
     endView,
-    view3d: createView3dHost(renderer.surface, renderer.meshes, (chunk) =>
-      renderer.groundImage(chunk),
+    view3d: createView3dHost(
+      renderer.surface,
+      renderer.meshes,
+      (chunk) => renderer.groundImage(chunk),
+      // The page's size as last asked for, which `resize` held back in a session.
+      () => renderer.resize(canvas.width, canvas.height),
     ),
     captureFrame() {
       if (disposed || renderer.surface.lost) throw Error("Graphics are unavailable for capture");

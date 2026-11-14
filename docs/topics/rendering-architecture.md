@@ -34,6 +34,18 @@ slot), cliff walls and flat prop faces per 4 × 4 chunks, and prop faces wearing
 artwork per texture (`MergedFaces`). New static content should join a merged
 mesh, not add one per chunk. `canvas.__parity()` draws one moment of play
 through both renderers and reports where their pixels differ, by kind of content.
+Since [252](../tactical/252-xr-on-the-shared-scene.md) the host also presents
+to a headset (`View3dHost.xr`). The screen output copies the host's canvas into
+a quad layer and runs the session's frames itself. The immersive output goes
+through three.js's XR manager, which replaces the camera of every render while
+it is enabled: the host enables it only around the immersive draw, and anything
+that renders with a camera of its own inside that draw (the sun's map, the
+atlas's growth) turns it off for the render. A 3D view frame for a headset
+carries a room placed in the world (`HeadsetFrame.rig`); its view space is in
+metres. While a session presents, its frames drive `GameLoop` and the page's
+loop is stopped. Inside a session on a Quest 3 a framebuffer copy of the page
+atlas misses recently written pages, so there the atlas grows by drawing its
+layers; treat other framebuffer copies inside a session as suspect.
 
 [241](../tactical/241-budget-terrain-raster-completion.md) closes the terrain
 budget blind spot identified in [240](../tactical/240-phone-pause-attribution.md).

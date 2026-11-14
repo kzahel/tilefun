@@ -528,7 +528,7 @@ export class GameClient implements GameTestHooks {
     this.playInput.detachFocusListeners();
     this.chrome.showStorageStatus("", false);
     this.stopIdeaDelivery?.();
-    this.xr?.exit();
+    this.xr?.dispose();
     this.firstPerson.dispose();
     this.renderHost.dispose();
     this.debugPanel.destroy();

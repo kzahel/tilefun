@@ -1,0 +1,1099 @@
+{
+ "note": "Tactical 252: play in a headset on a Quest 3, Quest Browser 156, driven over adb and DevTools with nobody wearing the headset (scripts/first-person/xr-quest.mjs). Vite development modules. Intervals and page work in ms over 10 s per cell. compositor: fields of the headset's own once-a-second log lines for the last seconds of the cell.",
+ "runs": [
+  {
+   "date": "2026-11-14T12:25:21.839Z",
+   "seconds": 10,
+   "rate": "the game's default (72)",
+   "distance": "medium",
+   "errors": [],
+   "shots": {
+    "city": {
+     "chunks": 71,
+     "builds": 0,
+     "groundPages": 71,
+     "billboards": 8,
+     "cards": 37,
+     "blobs": 16,
+     "sunRedraws": 22,
+     "cars": 8,
+     "calls": 25,
+     "fogEnd": 800,
+     "meshes": 16,
+     "merged": 0
+    },
+    "woods": {
+     "chunks": 69,
+     "builds": 0,
+     "groundPages": 69,
+     "billboards": 135,
+     "cards": 402,
+     "blobs": 135,
+     "sunRedraws": 22,
+     "cars": 0,
+     "calls": 6,
+     "fogEnd": 800,
+     "meshes": 4,
+     "merged": 0
+    }
+   },
+   "cells": [
+    {
+     "scene": "city",
+     "mode": "eye",
+     "entered": true,
+     "pacing": {
+      "frames": 719,
+      "interval": {
+       "p50": 13.86,
+       "p95": 15.87,
+       "p99": 16.51,
+       "max": 25.64
+      },
+      "work": {
+       "p50": 5.7,
+       "p95": 7.3,
+       "max": 12.5
+      },
+      "missed": 1
+     },
+     "stats": {
+      "frames": 1029,
+      "posed": 1029,
+      "inputs": 0,
+      "ended": 0
+     },
+     "view": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 8,
+      "cards": 37,
+      "blobs": 11,
+      "sunRedraws": 22,
+      "cars": 3,
+      "calls": 60,
+      "fogEnd": 800,
+      "meshes": 16,
+      "merged": 0
+     },
+     "focus": false,
+     "canvas": [
+      3360,
+      1760
+     ],
+     "compositor": [
+      {
+       "FPS": "73/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "2.75ms",
+       "CPU&GPU": "13.60ms",
+       "GPU%": "0.28",
+       "CPU%": "0.34(W0.35)"
+      },
+      {
+       "FPS": "72/72",
+       "Stale": "2",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "2.76ms",
+       "CPU&GPU": "11.32ms",
+       "GPU%": "0.28",
+       "CPU%": "0.33(W0.38)"
+      },
+      {
+       "FPS": "72/72",
+       "Stale": "2",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "2.68ms",
+       "CPU&GPU": "11.41ms",
+       "GPU%": "0.27",
+       "CPU%": "0.32(W0.33)"
+      },
+      {
+       "FPS": "73/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "2.71ms",
+       "CPU&GPU": "11.65ms",
+       "GPU%": "0.28",
+       "CPU%": "0.32(W0.38)"
+      }
+     ]
+    },
+    {
+     "scene": "city",
+     "mode": "tabletop",
+     "entered": true,
+     "pacing": {
+      "frames": 721,
+      "interval": {
+       "p50": 13.84,
+       "p95": 15.88,
+       "p99": 16.61,
+       "max": 17.25
+      },
+      "work": {
+       "p50": 5.1,
+       "p95": 6.6,
+       "max": 8.5
+      },
+      "missed": 0
+     },
+     "stats": {
+      "frames": 1027,
+      "posed": 1027,
+      "inputs": 0,
+      "ended": 1
+     },
+     "view": {
+      "chunks": 33,
+      "builds": 0,
+      "groundPages": 33,
+      "billboards": 4,
+      "cards": 5,
+      "blobs": 7,
+      "sunRedraws": 17,
+      "cars": 3,
+      "calls": 68,
+      "fogEnd": 424,
+      "meshes": 11,
+      "merged": 0
+     },
+     "focus": false,
+     "canvas": [
+      3360,
+      1760
+     ],
+     "compositor": [
+      {
+       "FPS": "73/72",
+       "Stale": "1",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "2.18ms",
+       "CPU&GPU": "9.93ms",
+       "GPU%": "0.24",
+       "CPU%": "0.31(W0.32)"
+      },
+      {
+       "FPS": "73/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "2.15ms",
+       "CPU&GPU": "9.92ms",
+       "GPU%": "0.24",
+       "CPU%": "0.32(W0.36)"
+      },
+      {
+       "FPS": "72/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "2.08ms",
+       "CPU&GPU": "11.14ms",
+       "GPU%": "0.24",
+       "CPU%": "0.29(W0.32)"
+      },
+      {
+       "FPS": "72/72",
+       "Stale": "1",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "2.17ms",
+       "CPU&GPU": "11.34ms",
+       "GPU%": "0.24",
+       "CPU%": "0.32(W0.34)"
+      }
+     ]
+    },
+    {
+     "scene": "city",
+     "mode": "screen",
+     "entered": true,
+     "pacing": {
+      "frames": 721,
+      "interval": {
+       "p50": 13.87,
+       "p95": 15.74,
+       "p99": 16.27,
+       "max": 16.78
+      },
+      "work": {
+       "p50": 4.8,
+       "p95": 6.2,
+       "max": 8.1
+      },
+      "missed": 0
+     },
+     "stats": {
+      "frames": 1009,
+      "posed": 0,
+      "inputs": 0,
+      "ended": 2
+     },
+     "focus": false,
+     "canvas": [
+      1280,
+      587
+     ],
+     "compositor": [
+      {
+       "FPS": "72/72",
+       "Stale": "1",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "1.04ms",
+       "CPU&GPU": "9.09ms",
+       "GPU%": "0.14",
+       "CPU%": "0.26(W0.28)"
+      },
+      {
+       "FPS": "73/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "0.90ms",
+       "CPU&GPU": "11.19ms",
+       "GPU%": "0.13",
+       "CPU%": "0.31(W0.38)"
+      },
+      {
+       "FPS": "72/72",
+       "Stale": "1",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "1.08ms",
+       "CPU&GPU": "9.81ms",
+       "GPU%": "0.14",
+       "CPU%": "0.28(W0.31)"
+      },
+      {
+       "FPS": "72/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "38.0C/0.0C",
+       "App": "1.02ms",
+       "CPU&GPU": "10.35ms",
+       "GPU%": "0.14",
+       "CPU%": "0.35(W0.39)"
+      }
+     ]
+    },
+    {
+     "scene": "woods",
+     "mode": "eye",
+     "entered": true,
+     "pacing": {
+      "frames": 701,
+      "interval": {
+       "p50": 13.85,
+       "p95": 16.05,
+       "p99": 18.78,
+       "max": 190.17
+      },
+      "work": {
+       "p50": 6.8,
+       "p95": 8.7,
+       "max": 16.4
+      },
+      "missed": 4
+     },
+     "stats": {
+      "frames": 1009,
+      "posed": 1009,
+      "inputs": 0,
+      "ended": 0
+     },
+     "view": {
+      "chunks": 69,
+      "builds": 0,
+      "groundPages": 69,
+      "billboards": 133,
+      "cards": 402,
+      "blobs": 133,
+      "sunRedraws": 66,
+      "cars": 0,
+      "calls": 12,
+      "fogEnd": 800,
+      "meshes": 4,
+      "merged": 0
+     },
+     "focus": true,
+     "canvas": [
+      3360,
+      1760
+     ],
+     "compositor": [
+      {
+       "FPS": "73/72",
+       "Stale": "1",
+       "CPU4/GPU": "2/2",
+       "Temp": "39.0C/0.0C",
+       "App": "2.86ms",
+       "CPU&GPU": "12.26ms",
+       "GPU%": "0.29",
+       "CPU%": "0.34(W0.38)"
+      },
+      {
+       "FPS": "71/72",
+       "Stale": "1",
+       "CPU4/GPU": "2/2",
+       "Temp": "39.0C/0.0C",
+       "App": "2.82ms",
+       "CPU&GPU": "10.64ms",
+       "GPU%": "0.28",
+       "CPU%": "0.35(W0.37)"
+      },
+      {
+       "FPS": "72/72",
+       "Stale": "6",
+       "CPU4/GPU": "2/2",
+       "Temp": "39.0C/0.0C",
+       "App": "2.79ms",
+       "CPU&GPU": "13.33ms",
+       "GPU%": "0.29",
+       "CPU%": "0.38(W0.39)"
+      },
+      {
+       "FPS": "72/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "39.0C/0.0C",
+       "App": "2.79ms",
+       "CPU&GPU": "11.40ms",
+       "GPU%": "0.28",
+       "CPU%": "0.37(W0.40)"
+      }
+     ]
+    },
+    {
+     "scene": "woods",
+     "mode": "tabletop",
+     "entered": true,
+     "pacing": {
+      "frames": 719,
+      "interval": {
+       "p50": 13.85,
+       "p95": 15.81,
+       "p99": 16.5,
+       "max": 26.34
+      },
+      "work": {
+       "p50": 5.3,
+       "p95": 6.9,
+       "max": 10
+      },
+      "missed": 1
+     },
+     "stats": {
+      "frames": 1028,
+      "posed": 1028,
+      "inputs": 0,
+      "ended": 1
+     },
+     "view": {
+      "chunks": 33,
+      "builds": 0,
+      "groundPages": 33,
+      "billboards": 29,
+      "cards": 242,
+      "blobs": 29,
+      "sunRedraws": 17,
+      "cars": 0,
+      "calls": 12,
+      "fogEnd": 424,
+      "meshes": 3,
+      "merged": 0
+     },
+     "focus": false,
+     "canvas": [
+      3360,
+      1760
+     ],
+     "compositor": [
+      {
+       "FPS": "72/72",
+       "Stale": "1",
+       "CPU4/GPU": "2/2",
+       "Temp": "39.0C/0.0C",
+       "App": "2.05ms",
+       "CPU&GPU": "10.65ms",
+       "GPU%": "0.23",
+       "CPU%": "0.35(W0.36)"
+      },
+      {
+       "FPS": "73/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "39.0C/0.0C",
+       "App": "2.09ms",
+       "CPU&GPU": "10.57ms",
+       "GPU%": "0.23",
+       "CPU%": "0.31(W0.34)"
+      },
+      {
+       "FPS": "72/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "39.0C/0.0C",
+       "App": "2.07ms",
+       "CPU&GPU": "10.68ms",
+       "GPU%": "0.23",
+       "CPU%": "0.31(W0.35)"
+      },
+      {
+       "FPS": "72/72",
+       "Stale": "3",
+       "CPU4/GPU": "2/2",
+       "Temp": "39.0C/0.0C",
+       "App": "2.12ms",
+       "CPU&GPU": "8.48ms",
+       "GPU%": "0.23",
+       "CPU%": "0.33(W0.39)"
+      }
+     ]
+    },
+    {
+     "scene": "woods",
+     "mode": "screen",
+     "entered": true,
+     "pacing": {
+      "frames": 719,
+      "interval": {
+       "p50": 13.87,
+       "p95": 15.84,
+       "p99": 16.6,
+       "max": 25.31
+      },
+      "work": {
+       "p50": 6.6,
+       "p95": 7.9,
+       "max": 10.9
+      },
+      "missed": 1
+     },
+     "stats": {
+      "frames": 1007,
+      "posed": 0,
+      "inputs": 0,
+      "ended": 2
+     },
+     "focus": false,
+     "canvas": [
+      1280,
+      587
+     ],
+     "compositor": [
+      {
+       "FPS": "71/72",
+       "Stale": "2",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "0.64ms",
+       "CPU&GPU": "10.90ms",
+       "GPU%": "0.11",
+       "CPU%": "0.32(W0.35)"
+      },
+      {
+       "FPS": "73/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "0.68ms",
+       "CPU&GPU": "10.47ms",
+       "GPU%": "0.11",
+       "CPU%": "0.30(W0.32)"
+      },
+      {
+       "FPS": "72/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "0.64ms",
+       "CPU&GPU": "9.42ms",
+       "GPU%": "0.11",
+       "CPU%": "0.32(W0.35)"
+      },
+      {
+       "FPS": "73/72",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "0.65ms",
+       "CPU&GPU": "10.51ms",
+       "GPU%": "0.11",
+       "CPU%": "0.32(W0.33)"
+      }
+     ]
+    }
+   ],
+   "browser": "OculusBrowser/156.0.0.38.16.1112015520 Chrome/156.0.8078.47",
+   "page": {
+    "canvas": [
+     1280,
+     670
+    ],
+    "supported": true,
+    "modes": [
+     "eye",
+     "tabletop",
+     "screen"
+    ],
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64; Quest 3) AppleWebKit/537.36 (KHTML, like Gecko) OculusBrowser/156.0.0.38.16.1112015520 Chrome/156.0.8078.47 VR Safari/537.36"
+   }
+  },
+  {
+   "date": "2026-11-14T12:28:43.114Z",
+   "seconds": 10,
+   "rate": 90,
+   "distance": "medium",
+   "errors": [],
+   "shots": {
+    "city": {
+     "chunks": 71,
+     "builds": 0,
+     "groundPages": 70,
+     "billboards": 8,
+     "cards": 37,
+     "blobs": 16,
+     "sunRedraws": 22,
+     "cars": 8,
+     "calls": 25,
+     "fogEnd": 800,
+     "meshes": 16,
+     "merged": 0
+    },
+    "woods": {
+     "chunks": 69,
+     "builds": 0,
+     "groundPages": 69,
+     "billboards": 135,
+     "cards": 402,
+     "blobs": 135,
+     "sunRedraws": 21,
+     "cars": 0,
+     "calls": 6,
+     "fogEnd": 800,
+     "meshes": 4,
+     "merged": 0
+    }
+   },
+   "cells": [
+    {
+     "scene": "city",
+     "mode": "eye",
+     "entered": true,
+     "pacing": {
+      "frames": 894,
+      "interval": {
+       "p50": 11.12,
+       "p95": 14.01,
+       "p99": 18.31,
+       "max": 20.53
+      },
+      "work": {
+       "p50": 5.4,
+       "p95": 7.2,
+       "max": 9.7
+      },
+      "missed": 18
+     },
+     "stats": {
+      "frames": 1227,
+      "posed": 1227,
+      "inputs": 0,
+      "ended": 0
+     },
+     "view": {
+      "chunks": 71,
+      "builds": 0,
+      "groundPages": 71,
+      "billboards": 8,
+      "cards": 37,
+      "blobs": 11,
+      "sunRedraws": 102,
+      "cars": 3,
+      "calls": 60,
+      "fogEnd": 800,
+      "meshes": 16,
+      "merged": 0
+     },
+     "focus": false,
+     "canvas": [
+      3360,
+      1760
+     ],
+     "compositor": [
+      {
+       "FPS": "90/90",
+       "Stale": "2",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.69ms",
+       "CPU&GPU": "11.84ms",
+       "GPU%": "0.35",
+       "CPU%": "0.36(W0.37)"
+      },
+      {
+       "FPS": "90/90",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.78ms",
+       "CPU&GPU": "12.57ms",
+       "GPU%": "0.35",
+       "CPU%": "0.38(W0.39)"
+      },
+      {
+       "FPS": "89/90",
+       "Stale": "3",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.88ms",
+       "CPU&GPU": "13.16ms",
+       "GPU%": "0.35",
+       "CPU%": "0.37(W0.39)"
+      },
+      {
+       "FPS": "89/90",
+       "Stale": "6",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.77ms",
+       "CPU&GPU": "12.56ms",
+       "GPU%": "0.36",
+       "CPU%": "0.37(W0.38)"
+      }
+     ]
+    },
+    {
+     "scene": "city",
+     "mode": "tabletop",
+     "entered": true,
+     "pacing": {
+      "frames": 887,
+      "interval": {
+       "p50": 11.09,
+       "p95": 13.05,
+       "p99": 17.91,
+       "max": 52.27
+      },
+      "work": {
+       "p50": 4.5,
+       "p95": 6,
+       "max": 24
+      },
+      "missed": 9
+     },
+     "stats": {
+      "frames": 1264,
+      "posed": 1264,
+      "inputs": 0,
+      "ended": 1
+     },
+     "view": {
+      "chunks": 33,
+      "builds": 0,
+      "groundPages": 33,
+      "billboards": 4,
+      "cards": 5,
+      "blobs": 7,
+      "sunRedraws": 17,
+      "cars": 3,
+      "calls": 68,
+      "fogEnd": 424,
+      "meshes": 11,
+      "merged": 0
+     },
+     "focus": false,
+     "canvas": [
+      3360,
+      1760
+     ],
+     "compositor": [
+      {
+       "FPS": "91/90",
+       "Stale": "1",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.05ms",
+       "CPU&GPU": "9.61ms",
+       "GPU%": "0.29",
+       "CPU%": "0.35(W0.39)"
+      },
+      {
+       "FPS": "83/90",
+       "Stale": "0",
+       "CPU4/GPU": "3/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.65ms",
+       "CPU&GPU": "35.35ms",
+       "GPU%": "0.27",
+       "CPU%": "0.35(W0.38)"
+      },
+      {
+       "FPS": "88/90",
+       "Stale": "15",
+       "CPU4/GPU": "2/3",
+       "Temp": "40.0C/0.0C",
+       "App": "1.92ms",
+       "CPU&GPU": "9.14ms",
+       "GPU%": "0.27",
+       "CPU%": "0.39(W0.41)"
+      },
+      {
+       "FPS": "91/90",
+       "Stale": "2",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.12ms",
+       "CPU&GPU": "10.16ms",
+       "GPU%": "0.28",
+       "CPU%": "0.38(W0.39)"
+      }
+     ]
+    },
+    {
+     "scene": "city",
+     "mode": "screen",
+     "entered": true,
+     "pacing": {
+      "frames": 889,
+      "interval": {
+       "p50": 11.12,
+       "p95": 13.59,
+       "p99": 17.74,
+       "max": 19.54
+      },
+      "work": {
+       "p50": 4.5,
+       "p95": 6.2,
+       "max": 10.5
+      },
+      "missed": 18
+     },
+     "stats": {
+      "frames": 1245,
+      "posed": 0,
+      "inputs": 0,
+      "ended": 2
+     },
+     "focus": false,
+     "canvas": [
+      1280,
+      587
+     ],
+     "compositor": [
+      {
+       "FPS": "90/90",
+       "Stale": "3",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "1.09ms",
+       "CPU&GPU": "9.82ms",
+       "GPU%": "0.17",
+       "CPU%": "0.33(W0.39)"
+      },
+      {
+       "FPS": "91/90",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "0.93ms",
+       "CPU&GPU": "10.46ms",
+       "GPU%": "0.17",
+       "CPU%": "0.33(W0.36)"
+      },
+      {
+       "FPS": "89/90",
+       "Stale": "3",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "1.09ms",
+       "CPU&GPU": "11.23ms",
+       "GPU%": "0.17",
+       "CPU%": "0.33(W0.40)"
+      },
+      {
+       "FPS": "88/90",
+       "Stale": "4",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "1.06ms",
+       "CPU&GPU": "8.69ms",
+       "GPU%": "0.17",
+       "CPU%": "0.36(W0.38)"
+      }
+     ]
+    },
+    {
+     "scene": "woods",
+     "mode": "eye",
+     "entered": true,
+     "pacing": {
+      "frames": 852,
+      "interval": {
+       "p50": 11.13,
+       "p95": 16.4,
+       "p99": 19.59,
+       "max": 213.86
+      },
+      "work": {
+       "p50": 5.9,
+       "p95": 8.2,
+       "max": 18.6
+      },
+      "missed": 36
+     },
+     "stats": {
+      "frames": 1186,
+      "posed": 1186,
+      "inputs": 0,
+      "ended": 0
+     },
+     "view": {
+      "chunks": 69,
+      "builds": 0,
+      "groundPages": 69,
+      "billboards": 135,
+      "cards": 402,
+      "blobs": 135,
+      "sunRedraws": 53,
+      "cars": 0,
+      "calls": 12,
+      "fogEnd": 800,
+      "meshes": 4,
+      "merged": 0
+     },
+     "focus": false,
+     "canvas": [
+      3360,
+      1760
+     ],
+     "compositor": [
+      {
+       "FPS": "88/90",
+       "Stale": "4",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.84ms",
+       "CPU&GPU": "9.86ms",
+       "GPU%": "0.35",
+       "CPU%": "0.39(W0.40)"
+      },
+      {
+       "FPS": "88/90",
+       "Stale": "4",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.85ms",
+       "CPU&GPU": "13.06ms",
+       "GPU%": "0.35",
+       "CPU%": "0.38(W0.41)"
+      },
+      {
+       "FPS": "88/90",
+       "Stale": "6",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.81ms",
+       "CPU&GPU": "12.27ms",
+       "GPU%": "0.35",
+       "CPU%": "0.38(W0.40)"
+      },
+      {
+       "FPS": "90/90",
+       "Stale": "3",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.86ms",
+       "CPU&GPU": "11.84ms",
+       "GPU%": "0.35",
+       "CPU%": "0.34(W0.35)"
+      }
+     ]
+    },
+    {
+     "scene": "woods",
+     "mode": "tabletop",
+     "entered": true,
+     "pacing": {
+      "frames": 898,
+      "interval": {
+       "p50": 11.0,
+       "p95": 13.9,
+       "p99": 16.17,
+       "max": 19.98
+      },
+      "work": {
+       "p50": 5.5,
+       "p95": 7.2,
+       "max": 8.6
+      },
+      "missed": 8
+     },
+     "stats": {
+      "frames": 1235,
+      "posed": 1235,
+      "inputs": 0,
+      "ended": 1
+     },
+     "view": {
+      "chunks": 33,
+      "builds": 0,
+      "groundPages": 33,
+      "billboards": 28,
+      "cards": 242,
+      "blobs": 28,
+      "sunRedraws": 17,
+      "cars": 0,
+      "calls": 12,
+      "fogEnd": 424,
+      "meshes": 3,
+      "merged": 0
+     },
+     "focus": false,
+     "canvas": [
+      3360,
+      1760
+     ],
+     "compositor": [
+      {
+       "FPS": "91/90",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.05ms",
+       "CPU&GPU": "10.52ms",
+       "GPU%": "0.29",
+       "CPU%": "0.34(W0.38)"
+      },
+      {
+       "FPS": "91/90",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.12ms",
+       "CPU&GPU": "10.59ms",
+       "GPU%": "0.29",
+       "CPU%": "0.31(W0.32)"
+      },
+      {
+       "FPS": "91/90",
+       "Stale": "0",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.08ms",
+       "CPU&GPU": "8.39ms",
+       "GPU%": "0.29",
+       "CPU%": "0.36(W0.41)"
+      },
+      {
+       "FPS": "91/90",
+       "Stale": "2",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "2.29ms",
+       "CPU&GPU": "8.39ms",
+       "GPU%": "0.29",
+       "CPU%": "0.40(W0.43)"
+      }
+     ]
+    },
+    {
+     "scene": "woods",
+     "mode": "screen",
+     "entered": true,
+     "pacing": {
+      "frames": 886,
+      "interval": {
+       "p50": 11.14,
+       "p95": 13.3,
+       "p99": 17.91,
+       "max": 40.24
+      },
+      "work": {
+       "p50": 5.7,
+       "p95": 7.5,
+       "max": 11.4
+      },
+      "missed": 15
+     },
+     "stats": {
+      "frames": 1238,
+      "posed": 0,
+      "inputs": 0,
+      "ended": 2
+     },
+     "focus": false,
+     "canvas": [
+      1280,
+      587
+     ],
+     "compositor": [
+      {
+       "FPS": "91/90",
+       "Stale": "2",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "0.66ms",
+       "CPU&GPU": "9.36ms",
+       "GPU%": "0.13",
+       "CPU%": "0.34(W0.38)"
+      },
+      {
+       "FPS": "87/90",
+       "Stale": "6",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "0.72ms",
+       "CPU&GPU": "10.30ms",
+       "GPU%": "0.13",
+       "CPU%": "0.38(W0.42)"
+      },
+      {
+       "FPS": "89/90",
+       "Stale": "2",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "0.66ms",
+       "CPU&GPU": "9.65ms",
+       "GPU%": "0.14",
+       "CPU%": "0.35(W0.36)"
+      },
+      {
+       "FPS": "90/90",
+       "Stale": "2",
+       "CPU4/GPU": "2/2",
+       "Temp": "40.0C/0.0C",
+       "App": "0.65ms",
+       "CPU&GPU": "10.43ms",
+       "GPU%": "0.14",
+       "CPU%": "0.35(W0.35)"
+      }
+     ]
+    }
+   ],
+   "browser": "OculusBrowser/156.0.0.38.16.1112015520 Chrome/156.0.8078.47",
+   "page": {
+    "canvas": [
+     1280,
+     670
+    ],
+    "supported": true,
+    "modes": [
+     "eye",
+     "tabletop",
+     "screen"
+    ],
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64; Quest 3) AppleWebKit/537.36 (KHTML, like Gecko) OculusBrowser/156.0.0.38.16.1112015520 Chrome/156.0.8078.47 VR Safari/537.36"
+   }
+  }
+ ]
+}

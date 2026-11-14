@@ -18,6 +18,14 @@ scene, whose own count includes vehicles; the
 [renderer unification scorecard](renderer-unification.md#device-scorecard)
 compares the three on the Mac, the Pixel 7a and the Deck. The `drive` scene now
 starts in first person on the phone as well.
+Since [252](../tactical/252-xr-on-the-shared-scene.md) a headset has its own
+measure: `scripts/first-person/xr-quest.mjs`, run inside a `quest session` lease
+from the machine-control checkout, starts a WebXR session per mode on a Quest
+and reports frame intervals, late frames, the session's frame work and the
+compositor's own log line. It needs nobody wearing the headset. `render:bench`
+GPU times differ between a working checkout and a temporary copy of the same
+code (0.86 against 0.71 ms in the woods at 0.1×), so compare them only between
+runs from the same place.
 
 Findings:
 - Rendering is CPU-bound on the M4 Pro, Pixel 7a and Steam Deck. GPU time is a

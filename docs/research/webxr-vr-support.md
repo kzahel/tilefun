@@ -4,7 +4,8 @@
 > here were removed in [226](../tactical/226-player-views-and-local-split-screen.md)
 > slice 2a. Kept as research history. The current WebXR plan (headset screen,
 > immersive and tabletop from the 3D scene) is
-> [230](../tactical/230-3d-cameras-stereo-and-webxr.md).
+> [230](../tactical/230-3d-cameras-stereo-and-webxr.md), delivered on the shared
+> renderer in [252](../tactical/252-xr-on-the-shared-scene.md) (2026-11-14).
 
 ## Integration checkpoint (2026-10-11)
 

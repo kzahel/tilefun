@@ -24,7 +24,7 @@ interface HeadsetPage {
 export function createHeadset(gc: GameContext, page: HeadsetPage): XrControl | undefined {
   const { firstPerson } = gc;
   if (!firstPerson) return undefined;
-  const xr = new XrControl({
+  const xr: XrControl = new XrControl({
     output: gc.view3d?.xr,
     loop: page.loop,
     firstPerson,
@@ -47,6 +47,11 @@ export function createHeadset(gc: GameContext, page: HeadsetPage): XrControl | u
       const sprite = gc.stateView.playerEntity.sprite;
       return sprite ? directionHeading(sprite.direction) : undefined;
     },
+    dispose() {
+      window.removeEventListener("click", resume, true);
+      window.removeEventListener("keydown", resume, true);
+      if (gc.xr === xr) delete gc.xr;
+    },
     restored() {
       page.resize();
       // The menu that ended the session opened before it knew: list the way to
@@ -58,9 +63,9 @@ export function createHeadset(gc: GameContext, page: HeadsetPage): XrControl | u
   // A pause ended the session; the click or key that resumes play is the user
   // gesture the next session needs. Checked once that gesture's own handlers
   // have closed the menu.
-  const resume = () => {
+  function resume(): void {
     if (xr.resume) setTimeout(() => xr.resumeInPlay(), 0);
-  };
+  }
   window.addEventListener("click", resume, true);
   window.addEventListener("keydown", resume, true);
   void xr.detect();

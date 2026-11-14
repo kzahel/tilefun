@@ -1,7 +1,9 @@
-import type * as THREE from "three";
+import * as THREE from "three";
 import { headFromMatrix } from "../xr/XrRig.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
 import type { ImmersiveOutput, ScreenOutput, View3dTarget, View3dXr } from "./View3dHost.js";
+
+const clearColor = new THREE.Color();
 
 /** `local-floor` where the headset has a floor; otherwise the head's start. */
 async function roomSpace(session: XRSession): Promise<XRReferenceSpace> {
@@ -27,6 +29,9 @@ async function roomSpace(session: XRSession): Promise<XRReferenceSpace> {
 export function createXrHost(
   surface: GpuRasterSurface,
   target: (width: number, height: number) => View3dTarget,
+  /** An immersive session ended and the renderer has its own size back: size it
+   * to the page as the page is now. */
+  restored: () => void,
 ): View3dXr {
   return {
     async immersive(session, frame): Promise<ImmersiveOutput> {
@@ -37,29 +42,38 @@ export function createXrHost(
       const floor = session.enabledFeatures?.includes("local-floor") ?? true;
       xr.setReferenceSpaceType(floor ? "local-floor" : "local");
       xr.enabled = false;
-      // Sizes the renderer to the headset's eye buffers until the session ends.
-      await xr.setSession(session);
-      const space = xr.getReferenceSpace() ?? (await roomSpace(session));
       /** The headset's render target as the manager bound it for this frame. */
       let eyes: THREE.WebGLRenderTarget | null = null;
+      // Sizes the renderer to the headset's eye buffers until the session ends.
+      const started = xr.setSession(session);
+      // Registered after the manager's own listener (added as `setSession` was
+      // called), so this runs once it has put the renderer's size and target
+      // back, whether the session presented or failed to start.
+      session.addEventListener(
+        "end",
+        () => {
+          // The manager's page loop would now idle with no callback: stop it.
+          renderer.setAnimationLoop(null);
+          xr.enabled = false;
+          eyes = null;
+          surface.pages.atlas.session = false;
+          // A session that failed before it was sized puts no pixel ratio back.
+          if (!renderer.getPixelRatio()) renderer.setPixelRatio(1);
+          // The manager restored the size the session started at; the page may
+          // have changed size meanwhile, and its resizes were held back.
+          restored();
+        },
+        { once: true },
+      );
+      surface.pages.atlas.session = true;
+      await started;
+      const space = xr.getReferenceSpace() ?? (await roomSpace(session));
       xr.setAnimationLoop((time: number, xrFrame?: XRFrame) => {
         if (!xrFrame) return;
         eyes = renderer.getRenderTarget();
         frame(time, xrFrame);
         eyes = null;
       });
-      session.addEventListener(
-        "end",
-        () => {
-          // The manager has already restored the renderer's size and target. Its
-          // page loop would now idle with no callback: stop it.
-          renderer.setAnimationLoop(null);
-          xr.enabled = false;
-          eyes = null;
-          surface.resize(surface.canvas.width, surface.canvas.height);
-        },
-        { once: true },
-      );
       return {
         space,
         draw(draw) {
@@ -67,6 +81,8 @@ export function createXrHost(
           if (surface.disposed || surface.lost || !bound?.isXRRenderTarget) return false;
           surface.flush();
           const scissor = renderer.getScissorTest();
+          const clearAlpha = renderer.getClearAlpha();
+          renderer.getClearColor(clearColor);
           renderer.setRenderTarget(bound);
           renderer.setScissorTest(false);
           xr.enabled = true;
@@ -76,6 +92,7 @@ export function createXrHost(
           } finally {
             xr.enabled = false;
             renderer.setScissorTest(scissor);
+            renderer.setClearColor(clearColor, clearAlpha);
             renderer.setRenderTarget(bound);
           }
           return true;
@@ -101,6 +118,7 @@ export function createXrHost(
         height: (metres * pixels.height) / pixels.width / 2,
       });
       session.updateRenderState({ layers: [layer] });
+      surface.pages.atlas.session = true;
       const copy = gl.createFramebuffer();
       let ended = false;
       let hung = false;
@@ -167,6 +185,7 @@ export function createXrHost(
         "end",
         () => {
           ended = true;
+          surface.pages.atlas.session = false;
           if (!surface.disposed && !surface.lost) gl.deleteFramebuffer(copy);
           renderer.resetState();
         },
