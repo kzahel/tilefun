@@ -131,9 +131,10 @@ export class View {
   /** First person (249): the seat's look while this view shows its player's eye in
    * the 3D scene; null for the fixed top-down view. */
   look: FirstPersonLook | null = null;
-  /** The latest display frame drew this view in 3D. Controls, streaming interest
-   * and overlays follow what is on screen, not the chosen kind: the fixed view
-   * still draws while the 3D scene loads, in the editor or without graphics. */
+  /** The latest display frame drew this view in first person in the 3D scene.
+   * Controls, streaming interest and overlays follow what is on screen, not the
+   * chosen kind: the fixed view still draws while the 3D scene loads, in the
+   * editor or without graphics. */
   drawn3d = false;
   /** The latest display frame drew this view's top-down framing in the 3D scene
    * (251). Everything else about the view stays as for the fixed view: the same

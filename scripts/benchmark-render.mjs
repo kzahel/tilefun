@@ -214,6 +214,9 @@ async function samplePage({ seconds, measureFinish = true }) {
   };
   const stats = surface?.stats;
   const draws0 = stats?.drawCalls ?? 0;
+  // The fixed view draws vehicle meshes into images outside its batch count; the
+  // 3D scene's own count already includes them.
+  const meshCalls0 = game.renderer.meshes?.drawCalls ?? 0;
   const viewCalls = [];
   const sunRedraws0 = firstPerson ? (game.firstPerson.viewStats?.sunRedraws ?? 0) : 0;
   let frames;
@@ -271,6 +274,12 @@ async function samplePage({ seconds, measureFinish = true }) {
       gpuMs: gpu.length ? { ...stat(gpu), samples: gpu.length, disjoint } : null,
       renderFinishMs: finish.length ? stat(finish) : null,
       drawCallsPerFrame: draws === null ? null : Math.round(draws * 10) / 10,
+      meshDrawCallsPerFrame: firstPerson
+        ? undefined
+        : Math.round(
+            (((game.renderer.meshes?.drawCalls ?? 0) - meshCalls0) / Math.max(1, renders.length)) *
+              10,
+          ) / 10,
       entities: entities.length,
       firstPerson: firstPerson ? { ...game.firstPerson.viewStats, sunRedraws } : undefined,
       workerTickMs: tick
@@ -798,7 +807,7 @@ try {
           `    slow frame at ${f.atMs} ms: ${f.frameMs} ms (update ${f.updateMs} in ${f.updates}, render ${f.renderMs}, uploads ${f.uploadPages} pages ${f.uploadKiB} KiB)`,
         );
       console.log(
-        `${name.padEnd(6)} ${String(zoom).padEnd(5)} frame ${cell.frameMs.p50}/${cell.frameMs.p95} ms, missed ${cell.missed}/${cell.frames}; render ${cell.renderMs.p50}/${cell.renderMs.p95} (submit ${cell.submitMs.p50}); gpu ${g}; render+finish ${cell.renderFinishMs?.p50 ?? "n/a"}; update ${cell.updateMs.p50}; draws ${cell.drawCallsPerFrame}; tick ${cell.workerTickMs?.p50 ?? "?"}; ${cell.entities} entities`,
+        `${name.padEnd(6)} ${String(zoom).padEnd(5)} frame ${cell.frameMs.p50}/${cell.frameMs.p95} ms, missed ${cell.missed}/${cell.frames}; render ${cell.renderMs.p50}/${cell.renderMs.p95} (submit ${cell.submitMs.p50}); gpu ${g}; render+finish ${cell.renderFinishMs?.p50 ?? "n/a"}; update ${cell.updateMs.p50}; draws ${cell.drawCallsPerFrame}${cell.meshDrawCallsPerFrame ? ` + ${cell.meshDrawCallsPerFrame} vehicle mesh` : ""}; tick ${cell.workerTickMs?.p50 ?? "?"}; ${cell.entities} entities`,
       );
     }
   }

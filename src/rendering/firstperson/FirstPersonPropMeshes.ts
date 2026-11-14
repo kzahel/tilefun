@@ -15,22 +15,17 @@ import {
 import type { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
 import { type ColoredTriangles, TriangleWriter } from "./FirstPersonTerrain.js";
 
-type TexturedFaces = NonNullable<PropGeometry["textured"]>;
+export type TexturedFaces = NonNullable<PropGeometry["textured"]>;
 type FacesFor = (image: Pick<PropImage, "texture"> | undefined) => TexturedFaces | undefined;
 
-/** One chunk's props as drawn: solid meshes, standing cards and walkable surfaces. */
+/** One chunk's props as drawn: the faces of solid volumes (flat-coloured, and
+ * wearing artwork by its texture), standing cards and walkable surfaces. The
+ * view merges the faces with other chunks' (`MergedFaces`, 251). */
 export interface ChunkProps {
-  group: THREE.Group;
+  flat: ColoredTriangles | undefined;
+  textured: Map<THREE.Texture, TexturedFaces>;
   billboards: Billboard[];
   surfaces: PropSurface[];
-}
-
-export function coloredMesh(triangles: ColoredTriangles, material: THREE.Material): THREE.Mesh {
-  const geometry = new THREE.BufferGeometry();
-  geometry.setAttribute("position", new THREE.BufferAttribute(triangles.positions, 3));
-  geometry.setAttribute("color", new THREE.BufferAttribute(triangles.colors, 3));
-  geometry.computeBoundingSphere();
-  return new THREE.Mesh(geometry, material);
 }
 
 export function texturedMesh(faces: TexturedFaces, material: THREE.Material): THREE.Mesh {
@@ -70,7 +65,6 @@ export class PropMeshes {
 
   constructor(
     private readonly images: FirstPersonImages,
-    private readonly flatMaterial: THREE.Material,
     private readonly shade: (material: THREE.MeshBasicMaterial) => THREE.MeshBasicMaterial,
   ) {}
 
@@ -104,9 +98,9 @@ export class PropMeshes {
     heightAt: (tx: number, ty: number) => number,
     room: FirstPersonRoomScene | undefined,
   ): ChunkProps {
-    const built: ChunkProps = { group: new THREE.Group(), billboards: [], surfaces: [] };
     const flat = new TriangleWriter();
     const textured = new Map<THREE.Texture, TexturedFaces>();
+    const built: ChunkProps = { flat: undefined, textured, billboards: [], surfaces: [] };
     const facesFor: FacesFor = (image) => {
       if (!image) return undefined;
       const faces = textured.get(image.texture) ?? { positions: [], uvs: [], colors: [] };
@@ -118,9 +112,7 @@ export class PropMeshes {
       if (room) this.appendRoomProp(built, prop, elevation, room, flat, facesFor);
       else this.appendProp(built, prop, elevation, flat, facesFor);
     }
-    if (flat.vertexCount) built.group.add(coloredMesh(flat.finish(), this.flatMaterial));
-    for (const [texture, faces] of textured)
-      if (faces.positions.length) built.group.add(texturedMesh(faces, this.faceMaterial(texture)));
+    if (flat.vertexCount) built.flat = flat.finish();
     return built;
   }
 

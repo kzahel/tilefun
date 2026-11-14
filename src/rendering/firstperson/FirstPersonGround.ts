@@ -1,39 +1,164 @@
 import * as THREE from "three";
 import type { PageRegion } from "../View3dHost.js";
-import type { ColoredTriangles } from "./FirstPersonTerrain.js";
+import { CHUNK_TOP_VERTICES, type ColoredTriangles } from "./FirstPersonTerrain.js";
 
-/**
- * A chunk's ground mesh (250). Besides position and flat colour, every vertex
- * carries its place in the chunk's ground image (`groundTexel`) and where that
- * image's page sits in the page atlas (`groundPage`: corner x, corner y, layer).
- * The page is the same for the whole chunk; it is a vertex attribute rather than
- * a uniform so that chunks can later share one mesh and one draw.
- */
-export function groundMesh(triangles: ColoredTriangles, material: THREE.Material): THREE.Mesh {
-  const geometry = new THREE.BufferGeometry();
-  const count = triangles.positions.length / 3;
-  geometry.setAttribute("position", new THREE.BufferAttribute(triangles.positions, 3));
-  geometry.setAttribute("color", new THREE.BufferAttribute(triangles.colors, 3));
-  geometry.setAttribute(
-    "groundTexel",
-    new THREE.BufferAttribute(triangles.texels ?? new Float32Array(count * 2).fill(-1), 2),
-  );
-  geometry.setAttribute(
-    "groundPage",
-    new THREE.BufferAttribute(new Float32Array(count * 3).fill(-1), 3),
-  );
-  geometry.computeBoundingSphere();
-  return new THREE.Mesh(geometry, material);
+/** Floats per vertex of each attribute. */
+const ATTRIBUTES = { position: 3, color: 3, groundTexel: 2, groundPage: 3 } as const;
+type AttributeName = keyof typeof ATTRIBUTES;
+const NAMES = Object.keys(ATTRIBUTES) as AttributeName[];
+/** Chunks per mesh: 2.2 MiB of vertex data, allocated and uploaded whole once. */
+export const GROUND_BLOCK_CHUNKS = 32;
+
+/** One mesh of `GROUND_BLOCK_CHUNKS` slots. */
+interface Block {
+  readonly mesh: THREE.Mesh;
+  readonly arrays: Record<AttributeName, Float32Array>;
+  /** The chunk in each slot. */
+  readonly used: (string | undefined)[];
+  count: number;
 }
 
-/** Point a ground mesh at its chunk's page, or back at its flat colours. */
-export function bindGroundPage(mesh: THREE.Mesh, page: PageRegion | undefined): void {
-  const attribute = mesh.geometry.getAttribute("groundPage") as THREE.BufferAttribute;
-  const values = attribute.array as Float32Array;
-  for (let i = 0; i < values.length; i += 3) {
-    values[i] = page?.x ?? -1;
-    values[i + 1] = page?.y ?? -1;
-    values[i + 2] = page?.layer ?? -1;
+/**
+ * Every resident chunk's tile tops in a few meshes (251): one draw per 32
+ * chunks instead of one per chunk. A chunk's tops are always the same number of
+ * vertices, so each chunk owns a slot of a block's buffers: a chunk that
+ * arrives, changes or leaves uploads its own slot and nothing else. Blocks are
+ * fixed in size, so more chunks mean another block, never a larger buffer to
+ * fill again; a block whose chunks have all left is freed.
+ *
+ * Besides position and flat colour, every vertex carries its place in the
+ * chunk's ground image (`groundTexel`) and where that image's page sits in the
+ * page atlas (`groundPage`: corner x, corner y, layer; layer −1 keeps the flat
+ * colour). The page is per vertex because chunks share a mesh.
+ */
+export class GroundTops {
+  /** Parent of the blocks' meshes. */
+  readonly root = new THREE.Group();
+  private readonly blocks: (Block | undefined)[] = [];
+  private readonly slots = new Map<string, { block: Block; slot: number }>();
+
+  constructor(
+    parent: THREE.Object3D,
+    private readonly material: THREE.Material,
+  ) {
+    parent.add(this.root);
   }
+
+  /** Chunks drawn. */
+  get count(): number {
+    return this.slots.size;
+  }
+
+  /** Meshes they are drawn as. */
+  get meshes(): number {
+    return this.root.children.length;
+  }
+
+  /** Add a chunk's tops or replace them. They draw flat colours until `bind`. */
+  set(key: string, tops: ColoredTriangles): void {
+    if (tops.positions.length !== CHUNK_TOP_VERTICES * 3 || !tops.texels)
+      throw Error("A chunk's ground tops must be one textured quad per tile");
+    let place = this.slots.get(key);
+    if (!place) {
+      place = this.take();
+      place.block.used[place.slot] = key;
+      place.block.count++;
+      this.slots.set(key, place);
+    }
+    const { block, slot } = place;
+    write(block, slot, "position", tops.positions);
+    write(block, slot, "color", tops.colors);
+    write(block, slot, "groundTexel", tops.texels);
+    fill(block, slot, "groundPage", -1, -1, -1);
+    range(block);
+  }
+
+  /** Point a chunk's tops at its ground page, or back at their flat colours. */
+  bind(key: string, page: PageRegion | undefined): void {
+    const place = this.slots.get(key);
+    if (place)
+      fill(place.block, place.slot, "groundPage", page?.x ?? -1, page?.y ?? -1, page?.layer ?? -1);
+  }
+
+  delete(key: string): void {
+    const place = this.slots.get(key);
+    if (!place) return;
+    this.slots.delete(key);
+    const { block, slot } = place;
+    block.used[slot] = undefined;
+    if (--block.count === 0) {
+      block.mesh.geometry.dispose();
+      block.mesh.removeFromParent();
+      this.blocks[this.blocks.indexOf(block)] = undefined;
+      return;
+    }
+    // Triangles with every corner in one place draw nothing.
+    fill(block, slot, "position", 0, 0, 0);
+    range(block);
+  }
+
+  /** The first free slot of the first block that has one, else of a new block. */
+  private take(): { block: Block; slot: number } {
+    for (const block of this.blocks)
+      if (block && block.count < GROUND_BLOCK_CHUNKS)
+        return { block, slot: block.used.indexOf(undefined) };
+    const geometry = new THREE.BufferGeometry();
+    const arrays = {} as Record<AttributeName, Float32Array>;
+    for (const name of NAMES) {
+      arrays[name] = new Float32Array(GROUND_BLOCK_CHUNKS * CHUNK_TOP_VERTICES * ATTRIBUTES[name]);
+      geometry.setAttribute(
+        name,
+        new THREE.BufferAttribute(arrays[name], ATTRIBUTES[name]).setUsage(THREE.DynamicDrawUsage),
+      );
+    }
+    const mesh = new THREE.Mesh(geometry, this.material);
+    // A block's chunks can lie anywhere around the view.
+    mesh.frustumCulled = false;
+    this.root.add(mesh);
+    const block: Block = {
+      mesh,
+      arrays,
+      used: new Array(GROUND_BLOCK_CHUNKS).fill(undefined),
+      count: 0,
+    };
+    const free = this.blocks.indexOf(undefined);
+    this.blocks[free < 0 ? this.blocks.length : free] = block;
+    return { block, slot: 0 };
+  }
+
+  dispose(): void {
+    for (const block of this.blocks) block?.mesh.geometry.dispose();
+    this.blocks.length = 0;
+    this.slots.clear();
+    this.root.clear();
+    this.root.removeFromParent();
+  }
+}
+
+function write(block: Block, slot: number, name: AttributeName, values: Float32Array): void {
+  block.arrays[name].set(values, slot * CHUNK_TOP_VERTICES * ATTRIBUTES[name]);
+  upload(block, slot, name);
+}
+
+function fill(block: Block, slot: number, name: AttributeName, ...value: number[]): void {
+  const size = ATTRIBUTES[name],
+    array = block.arrays[name];
+  const start = slot * CHUNK_TOP_VERTICES * size;
+  for (let i = 0; i < CHUNK_TOP_VERTICES * size; i++) array[start + i] = value[i % size] ?? 0;
+  upload(block, slot, name);
+}
+
+/** Mark one slot of one attribute for upload. */
+function upload(block: Block, slot: number, name: AttributeName): void {
+  const attribute = block.mesh.geometry.getAttribute(name) as THREE.BufferAttribute;
+  const count = CHUNK_TOP_VERTICES * ATTRIBUTES[name];
+  attribute.addUpdateRange(slot * count, count);
   attribute.needsUpdate = true;
+}
+
+/** Draw up to the block's last slot in use. */
+function range(block: Block): void {
+  let end = GROUND_BLOCK_CHUNKS;
+  while (end > 0 && block.used[end - 1] === undefined) end--;
+  block.mesh.geometry.setDrawRange(0, end * CHUNK_TOP_VERTICES);
 }

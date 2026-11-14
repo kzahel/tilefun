@@ -294,6 +294,44 @@ try {
   report.split.webglCanvases = await game(
     () => document.querySelectorAll("canvas[data-renderer=gpu]:not(#game)").length,
   );
+  // Top-down in the 3D scene (251): the device's opt-in. A seat in first person
+  // stays there; every other view draws through the fixed view's camera.
+  const topDown = async (name, on, host) => {
+    await game(
+      ([on, host]) => {
+        const g = document.querySelector("#game").__game;
+        g.firstPerson.setSeat(1, false);
+        g.consoleEngine.cvars.get("r_firstperson").set(host);
+        g.consoleEngine.cvars.get("r_topdown3d").set(on);
+      },
+      [on, host],
+    );
+    await page.waitForFunction(
+      ([on, host]) => {
+        const [a, b] = document.querySelector("#game").__game.device.views;
+        return a?.drawn3d === host && a?.topDown3d === (on && !host) && b?.topDown3d === on;
+      },
+      [on, host],
+    );
+    await page.waitForTimeout(1500);
+    await shoot(name);
+    return game(() => {
+      const g = document.querySelector("#game").__game;
+      return g.device.views.map((view) => ({
+        seat: view.seat,
+        drawn3d: view.drawn3d,
+        topDown3d: view.topDown3d,
+        // The fixed view's own rectangle, not a radius.
+        interestRadius: view.interestRadius,
+        interest: view.interestRange(),
+      }));
+    });
+  };
+  report.topDown3d = {
+    both: await topDown("split-top-down-3d", true, false),
+    withFirstPerson: await topDown("split-fps-and-top-down-3d", true, true),
+    off: await topDown("split-fixed-again", false, false),
+  };
   // The editor draws the fixed view instead of first person.
   await page.keyboard.press("Tab");
   await shoot("editor");

@@ -4,6 +4,7 @@ import { RoadType } from "../../road/RoadType.js";
 import { CollisionFlag, TileId } from "../../world/TileRegistry.js";
 import {
   buildTerrainChunk,
+  CHUNK_TOP_VERTICES,
   type FirstPersonChunk,
   groundColor,
   mixColor,
@@ -29,13 +30,16 @@ const vertices = (positions: Float32Array) =>
 
 describe("first-person terrain chunks", () => {
   it("emits one flat quad per tile in world pixels", () => {
-    const { positions, colors } = buildTerrainChunk(
+    const { tops, walls } = buildTerrainChunk(
       chunk(() => 0),
       2,
       -1,
       () => 0,
     );
-    expect(positions.length).toBe(CHUNK_SIZE * CHUNK_SIZE * 6 * 3);
+    const { positions, colors } = tops;
+    expect(walls.positions.length).toBe(0);
+    expect(CHUNK_TOP_VERTICES).toBe(CHUNK_SIZE * CHUNK_SIZE * 6);
+    expect(positions.length).toBe(CHUNK_TOP_VERTICES * 3);
     expect(colors.length).toBe(positions.length);
     const all = vertices(positions);
     expect(Math.min(...all.map((v) => v[0] ?? 0))).toBe(2 * CHUNK_SIZE * TILE_SIZE);
@@ -46,11 +50,15 @@ describe("first-person terrain chunks", () => {
   it("raises tiles and walls only the edges that drop to lower neighbours", () => {
     // One raised tile in the chunk interior: its top plus four cliff faces.
     const raised = chunk((lx, ly) => (lx === 5 && ly === 5 ? 2 : 0));
-    const { positions } = buildTerrainChunk(raised, 0, 0, () => 0);
-    const quads = positions.length / 18;
-    expect(quads).toBe(CHUNK_SIZE * CHUNK_SIZE + 4);
+    const { tops, walls } = buildTerrainChunk(raised, 0, 0, () => 0);
+    // Tops never change size: a chunk's slot in the shared ground mesh (251).
+    expect(tops.positions.length).toBe(CHUNK_TOP_VERTICES * 3);
+    expect(walls.positions.length / 18).toBe(4);
     const top = 2 * ELEVATION_PX;
-    expect(vertices(positions).filter((v) => v[2] === top).length).toBe(6 + 4 * 3);
+    expect(vertices(tops.positions).filter((v) => v[2] === top).length).toBe(6);
+    expect(vertices(walls.positions).filter((v) => v[2] === top).length).toBe(4 * 3);
+    // Walls are flat-coloured only.
+    expect(walls.texels).toBeUndefined();
   });
 
   it("asks the world for heights across chunk edges", () => {
@@ -63,8 +71,10 @@ describe("first-person terrain chunks", () => {
     expect(asked).toContain("-1,0");
     expect(asked).toContain(`${CHUNK_SIZE},0`);
     // Equal-height neighbours add no cliffs.
-    const { positions } = buildTerrainChunk(edge, 0, 0, () => 1);
-    expect(positions.length / 18).toBe(CHUNK_SIZE * CHUNK_SIZE);
+    expect(buildTerrainChunk(edge, 0, 0, () => 1).walls.positions.length).toBe(0);
+    // A lower neighbour across the edge gets a wall along the whole side.
+    const dropped = buildTerrainChunk(edge, 0, 0, (tx) => (tx < 0 ? 0 : 1));
+    expect(dropped.walls.positions.length / 18).toBe(CHUNK_SIZE);
   });
 
   it("colours roads, water and terrain from their semantic layers", () => {
@@ -82,7 +92,7 @@ describe("first-person terrain chunks", () => {
       0,
       0,
       () => 0,
-    );
+    ).tops;
     expect(Math.max(...colors)).toBeLessThanOrEqual(1);
     expect(srgbToLinear(1)).toBeCloseTo(1, 9);
     expect(srgbToLinear(0.5)).toBeCloseTo(0.214, 3);
@@ -90,33 +100,25 @@ describe("first-person terrain chunks", () => {
 
   it("places tile tops in the chunk's ground image and leaves cliff walls flat (250)", () => {
     // One raised tile: its top still wears the image; its four walls do not.
-    const { positions, texels } = buildTerrainChunk(
+    const { tops, walls } = buildTerrainChunk(
       chunk((lx, ly) => (lx === 3 && ly === 5 ? 2 : 0)),
       2,
       -1,
       () => 0,
     );
+    const { positions, texels } = tops;
     if (!texels) throw Error("ground without texels");
     expect(texels.length).toBe((positions.length / 3) * 2);
     const size = CHUNK_SIZE * TILE_SIZE;
-    const all = vertices(positions);
-    let walls = 0;
-    all.forEach(([x, y, z], i) => {
-      const u = texels[i * 2] ?? NaN,
-        v = texels[i * 2 + 1] ?? NaN;
-      // Non-indexed triangles: a face is six vertices, and a top is level.
-      const face = all.slice(i - (i % 6), i - (i % 6) + 6);
-      const top = face.every((p) => p[2] === face[0]?.[2]);
-      if (!top) {
-        walls++;
-        expect([u, v]).toEqual([-1, -1]);
-        return;
-      }
+    vertices(positions).forEach(([x, y, z], i) => {
       // Image texels are world pixels from the chunk's north-west corner, at any height.
-      expect([u, v]).toEqual([(x ?? NaN) - 2 * size, (y ?? NaN) + size]);
+      expect([texels[i * 2], texels[i * 2 + 1]]).toEqual([
+        (x ?? NaN) - 2 * size,
+        (y ?? NaN) + size,
+      ]);
       expect(z === 0 || z === 2 * ELEVATION_PX).toBe(true);
     });
-    expect(walls).toBe(4 * 6);
     expect(Math.max(...texels)).toBe(size);
+    expect(walls.positions.length / 3).toBe(4 * 6);
   });
 });

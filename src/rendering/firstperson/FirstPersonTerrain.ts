@@ -132,20 +132,32 @@ export class TriangleWriter {
 /** Baked sector-style lighting: south faces (shown by the fixed view) are brightest. */
 export const FACE_SHADE = { top: 1, south: 0.84, east: 0.74, west: 0.7, north: 0.6, bottom: 0.5 };
 
+/** Vertices of a chunk's tile tops: one quad per tile, whatever its content. */
+export const CHUNK_TOP_VERTICES = CHUNK_SIZE * CHUNK_SIZE * 6;
+
+/** A chunk's ground: its tile tops, always `CHUNK_TOP_VERTICES` vertices in tile
+ * order, and its cliff walls, which only raised ground has. */
+export interface TerrainChunk {
+  tops: ColoredTriangles;
+  walls: ColoredTriangles;
+}
+
 /**
  * One chunk of ground: a quad per tile at its terrain height, plus cliff walls on
  * edges that drop to a lower neighbour. Tile tops carry a flat colour and their
  * place in the chunk's ground image (250); cliff walls are flat-coloured only.
- * `heightAt` answers neighbouring tiles in world coordinates (0 where nothing is
- * loaded).
+ * The two are separate so that tops, which never change size, can share one mesh
+ * with every other chunk's (251). `heightAt` answers neighbouring tiles in world
+ * coordinates (0 where nothing is loaded).
  */
 export function buildTerrainChunk(
   chunk: FirstPersonChunk,
   cx: number,
   cy: number,
   heightAt: (tx: number, ty: number) => number,
-): ColoredTriangles {
-  const out = new TriangleWriter();
+): TerrainChunk {
+  const tops = new TriangleWriter(),
+    out = new TriangleWriter();
   const baseTx = cx * CHUNK_SIZE,
     baseTy = cy * CHUNK_SIZE;
   const image = { x: baseTx * TILE_SIZE, y: baseTy * TILE_SIZE };
@@ -168,7 +180,7 @@ export function buildTerrainChunk(
         chunk.getRoad(lx, ly),
         chunk.getCollision(lx, ly),
       );
-      out.quad(
+      tops.quad(
         [
           [x0, y0, z],
           [x1, y0, z],
@@ -230,5 +242,5 @@ export function buildTerrainChunk(
         );
     }
   }
-  return out.finish();
+  return { tops: tops.finish(), walls: out.finish() };
 }

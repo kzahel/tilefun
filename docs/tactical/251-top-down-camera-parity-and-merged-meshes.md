@@ -248,3 +248,33 @@ Also in this phase: the bench's `drive` scene now starts on the phone. In first
 person there a traffic car that had stopped for the player stood on the spawn
 spot, and the server drops a blocked spawn without an answer. The bench now
 tries six spots around the player and looks for a car that was not there before.
+
+### 3c — delivered 2026-11-14
+
+How it works:
+
+- **Ground tops.** `buildTerrainChunk` now returns a chunk's tile tops apart
+  from its cliff walls. Tops are always 1,536 vertices, so `GroundTops` gives
+  every chunk a slot in a mesh of 32 slots. A chunk that arrives, is edited,
+  gets its ground page or leaves writes its own slot and uploads only that
+  range (`addUpdateRange`), 68 KiB at most. More chunks add another block of
+  2.2 MiB; nothing is copied or uploaded again. A block whose chunks have all
+  left is freed. 71 chunks (first person, default distance) are 3 draws and 247
+  (top-down at 0.1×) are 8, where each chunk was one.
+- **Cliff walls and flat prop faces.** `MergedFaces` merges them per area of
+  4 × 4 chunks. A chunk change puts together only its own area.
+- **Prop faces wearing artwork.** One mesh per artwork texture across every
+  resident chunk: a row of the same shop is one draw, where each chunk drew its
+  own copy. These meshes are small (about 30 vertices a building), so putting
+  one together again is cheap.
+- **Shadows.** Only walls and prop faces are drawn into the sun's map now. A
+  chunk with any cliff used to draw all its tops there as well; tops never
+  shadow anything a wall does not.
+- Chunks no longer own meshes. `FirstPersonView` keeps what was built for each
+  chunk (revisions, the page its tops wear, prop surfaces) and three roots, one
+  per kind of static content.
+
+Decided against, for now: moving the artwork of solid props into the page atlas
+so that they share one material. It needs faces cut at page boundaries and the
+same residency rule as cards, and would take the city's remaining 12 draws to 1.
+Vehicles are the larger remainder (below).

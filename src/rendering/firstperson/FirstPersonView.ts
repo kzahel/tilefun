@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { MODERN_INTERIORS_SHEET_KEY } from "../../assets/ModernInteriorsAtlasIndex.js";
 import type { Spritesheet } from "../../assets/Spritesheet.js";
-import { CHUNK_SIZE, TILE_SIZE, VIEW_BACKDROP_CSS } from "../../config/constants.js";
+import { CHUNK_SIZE_PX, VIEW_BACKDROP_CSS } from "../../config/constants.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { World } from "../../world/World.js";
 import type { SpriteItem } from "../SceneItem.js";
@@ -14,7 +14,8 @@ import {
   nextFogEnd,
 } from "./FirstPersonCamera.js";
 import { chunkKey, chunksInReach, type TerrainEntry, terrainStale } from "./FirstPersonChunks.js";
-import { bindGroundPage, groundMesh } from "./FirstPersonGround.js";
+import { type FacePart, MergedFaces } from "./FirstPersonFaces.js";
+import { GroundTops } from "./FirstPersonGround.js";
 import { FirstPersonImages } from "./FirstPersonImages.js";
 import { type FirstPersonInterior, INTERIOR_BACKGROUND } from "./FirstPersonInterior.js";
 import { type SunReceiver, shadeMaterial } from "./FirstPersonMaterials.js";
@@ -68,7 +69,7 @@ export interface SceneLayers {
 }
 
 const SKY = 0x9fd3f0;
-const CHUNK_PX = CHUNK_SIZE * TILE_SIZE;
+const CHUNK_PX = CHUNK_SIZE_PX;
 const CHUNK_BUILDS_PER_FRAME = 3;
 /** The fog never closes in nearer than this while chunks arrive. */
 const MIN_FOG_END = 96;
@@ -77,22 +78,23 @@ const MIN_FOG_END = 96;
 const TOP_DOWN_SIDE = 128;
 const TOP_DOWN_BELOW = 512;
 
+/** Chunks a side of the areas that flat-coloured faces (cliff walls, plain prop
+ * faces) are merged over: one mesh per area, rebuilt when one of its chunks changes. */
+const FACE_AREA_CHUNKS = 4;
+
 interface ChunkGround extends TerrainEntry {
   readonly chunk: FirstPersonChunkSource;
-  readonly mesh: THREE.Mesh;
-  /** The atlas page the mesh samples; undefined while it draws flat colours. */
+  /** The atlas page its tops sample; undefined while they draw flat colours. */
   page: PageRegion | undefined;
 }
 
+/** What is built for a chunk. Its triangles live in the view's merged meshes. */
 interface ChunkScene {
   readonly cx: number;
   readonly cy: number;
   terrain?: ChunkGround;
-  props?: { group: THREE.Group; signature: string; surfaces: PropSurface[] };
+  props?: { signature: string; surfaces: PropSurface[] };
 }
-
-/** One flat quad per tile: more triangles means cliff walls, which cast shadows. */
-const FLAT_CHUNK_VERTICES = CHUNK_SIZE * CHUNK_SIZE * 6;
 
 /**
  * Experimental first-person world view (tactical 229). Flat-coloured terrain,
@@ -120,6 +122,10 @@ export class FirstPersonView {
     cars: 0,
     calls: 0,
     fogEnd: 0,
+    /** Meshes the static world draws as: the ground, merged faces and cards. */
+    meshes: 0,
+    /** Vertices of merged faces put together again this frame. */
+    merged: 0,
   };
   /** Diagnostics: kinds of content to leave out. The parity probe (251) draws
    * one kind at a time; play draws them all. */
@@ -154,6 +160,9 @@ export class FirstPersonView {
     new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide }),
     { sun: { uniforms: this.sun.uniforms, receiver: "faces" }, ground: this.atlas },
   );
+  /** Every chunk's tile tops in one mesh; cliff walls and prop faces in a few. */
+  private readonly ground = new GroundTops(this.groundRoot, this.groundMaterial);
+  private readonly faces = new MergedFaces();
   /** The frame's pages as cards ask for them. */
   private readonly cardPages = new RecentPages();
   private readonly billboards: MovingCards;
@@ -181,9 +190,7 @@ export class FirstPersonView {
 
   constructor(private readonly sheets: ReadonlyMap<string, Spritesheet>) {
     this.images = new FirstPersonImages(sheets, (texture) => this.propMeshes.dropMaterial(texture));
-    this.propMeshes = new PropMeshes(this.images, this.flatMaterial, (material) =>
-      this.lit(material, "faces"),
-    );
+    this.propMeshes = new PropMeshes(this.images, (material) => this.lit(material, "faces"));
     // Game axes are X east, Y south, Z up (left-handed seen from above). Mirroring
     // Y once at this boundary makes the world right-handed for Three, so east stays
     // on the right when looking north; Three flips face winding for det < 0.
@@ -261,6 +268,12 @@ export class FirstPersonView {
     this.cards.keep(this.cardPages);
     this.cards.flush();
     this.stats.cards = this.cards.count;
+    // Room shells and furniture stay out of the sun's map: rooms have no sun.
+    this.stats.merged = this.faces.flush((mesh) => {
+      mesh.layers.set(0);
+      if (!this.room) SunShadows.cast(mesh);
+    });
+    this.stats.meshes = this.faces.count + this.ground.meshes + (this.cards.count ? 1 : 0);
     this.groundRoot.visible = this.layers.ground;
     this.solidRoot.visible = this.layers.solids;
     this.cardRoot.visible = this.layers.cards;
@@ -402,7 +415,7 @@ export class FirstPersonView {
         nearestMissing = distance;
       if (builds < CHUNK_BUILDS_PER_FRAME) builds += this.refreshChunk(frame.world, cx, cy, key);
       const ground = this.chunks.get(key)?.terrain;
-      if (ground && this.pageGround(ground, pages)) groundPages++;
+      if (ground && this.pageGround(key, ground, pages)) groundPages++;
     }
     this.stats.groundPages = groundPages;
     // Rooms have no fog; outdoors the fog hides chunks that have not arrived yet.
@@ -427,55 +440,57 @@ export class FirstPersonView {
       this.chunks.set(key, scene);
     }
     let builds = 0;
+    const heightAt = (tx: number, ty: number) => world.getHeightAt(tx, ty);
+    const area = `${Math.floor(cx / FACE_AREA_CHUNKS)},${Math.floor(cy / FACE_AREA_CHUNKS)}`;
     if (!this.room && terrainStale(scene.terrain, chunk)) {
-      if (scene.terrain) disposeGroup(scene.terrain.mesh);
-      scene.terrain = this.buildTerrain(chunk, cx, cy, world);
-      this.groundRoot.add(scene.terrain.mesh);
+      const { tops, walls } = buildTerrainChunk(chunk, cx, cy, heightAt);
+      this.ground.set(key, tops);
+      this.faces.replace(`${key}:walls`, [
+        { bucket: `walls:${area}`, material: this.flatMaterial, parent: this.groundRoot, ...walls },
+      ]);
+      scene.terrain = { chunk, key: `${chunk.revision}:${chunk.visualRevision}`, page: undefined };
       builds++;
     }
     const { props, signature } = this.propsByChunk.get(key) ?? { props: [], signature: "" };
     if (scene.props?.signature !== signature) {
-      if (scene.props) disposeGroup(scene.props.group);
-      const room = this.room?.scene;
-      const built = this.propMeshes.build(props, (tx, ty) => world.getHeightAt(tx, ty), room);
-      // Room shells and furniture stay out of the sun's map: rooms have no sun.
-      if (!room) for (const mesh of built.group.children) SunShadows.cast(mesh);
-      scene.props = { signature, group: built.group, surfaces: built.surfaces };
+      const built = this.propMeshes.build(props, heightAt, this.room?.scene);
+      const parent = this.solidRoot;
+      const parts: FacePart[] = [];
+      if (built.flat)
+        parts.push({ bucket: `flat:${area}`, material: this.flatMaterial, parent, ...built.flat });
+      // Faces wearing the same artwork are one mesh, whichever chunks they stand in.
+      for (const [texture, faces] of built.textured)
+        parts.push({
+          bucket: texture,
+          material: this.propMeshes.faceMaterial(texture),
+          parent,
+          ...faces,
+        });
+      this.faces.replace(`${key}:props`, parts);
+      scene.props = { signature, surfaces: built.surfaces };
       this.cards.set(key, built.billboards, this.cardPages);
       this.surfaces = null;
-      this.solidRoot.add(scene.props.group);
       builds++;
     }
     if (builds) this.sun.invalidate(cx, cy);
     return builds;
   }
 
-  private buildTerrain(
-    chunk: FirstPersonChunkSource,
-    cx: number,
-    cy: number,
-    world: FirstPersonWorld,
-  ): ChunkGround {
-    const triangles = buildTerrainChunk(chunk, cx, cy, (tx, ty) => world.getHeightAt(tx, ty));
-    const mesh = groundMesh(triangles, this.groundMaterial);
-    if (triangles.positions.length / 3 > FLAT_CHUNK_VERTICES) SunShadows.cast(mesh);
-    return { chunk, key: `${chunk.revision}:${chunk.visualRevision}`, mesh, page: undefined };
-  }
-
-  /** Keep the chunk's ground page resident and point the mesh at it; false while
+  /** Keep the chunk's ground page resident and point its tops at it; false while
    * the chunk has none and draws its flat colours. */
-  private pageGround(ground: ChunkGround, pages: SharedPages): boolean {
+  private pageGround(key: string, ground: ChunkGround, pages: SharedPages): boolean {
     const page = pages.ground(ground.chunk);
     if (page !== ground.page) {
       ground.page = page;
-      bindGroundPage(ground.mesh, page);
+      this.ground.bind(key, page);
     }
     return !!page;
   }
 
   private dropChunk(key: string, chunk: ChunkScene): void {
-    if (chunk.terrain) disposeGroup(chunk.terrain.mesh);
-    if (chunk.props) disposeGroup(chunk.props.group);
+    this.ground.delete(key);
+    this.faces.remove(`${key}:walls`);
+    this.faces.remove(`${key}:props`);
     this.cards.delete(key);
     this.surfaces = null;
     this.sun.invalidate(chunk.cx, chunk.cy);
@@ -557,6 +572,8 @@ export class FirstPersonView {
     this.disposeRoom();
     this.billboards.dispose();
     this.cards.dispose();
+    this.ground.dispose();
+    this.faces.dispose();
     this.blobs.dispose();
     this.sun.dispose();
     this.propMeshes.dispose();
