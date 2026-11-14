@@ -138,6 +138,21 @@ export class ActionManager {
     return binding.keys.some((k) => this.keysDown.has(k));
   }
 
+  /** Keyboard owns movement unless an active touch joystick overrides it. */
+  get keyboardMoving(): boolean {
+    return (
+      !this.touchJoystick?.isActive() &&
+      this.config.some(
+        ({ action, keys }) =>
+          (action === "move_up" ||
+            action === "move_down" ||
+            action === "move_left" ||
+            action === "move_right") &&
+          keys.some((key) => this.keysDown.has(key)),
+      )
+    );
+  }
+
   getMovement(normalizeDiagonal = true): Movement {
     if (this.touchJoystick?.isActive()) {
       const touch = this.touchJoystick.getMovement();

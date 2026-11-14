@@ -1,4 +1,5 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
+import type { FirstPersonControls } from "../config/firstPersonControls.js";
 import {
   DEFAULT_VIEW_DISTANCE,
   type FirstPersonViewDistance,
@@ -48,6 +49,20 @@ export interface LookStick {
  * editor, lost graphics) keep ordinary controls.
  */
 export class FirstPersonControl {
+  private keyboardChoice: FirstPersonControls = "simple";
+
+  get controls(): FirstPersonControls {
+    return this.keyboardChoice;
+  }
+
+  set controls(value: FirstPersonControls) {
+    this.keyboardChoice = value;
+    if (value === "simple") {
+      if (this.host?.look) this.host.look.pitch = 0;
+      if (document.pointerLockElement === this.canvas()) document.exitPointerLock();
+    }
+  }
+
   /** Saved per player (Options); sets the fog end and each 3D view's streamed area. */
   viewDistance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE;
   /** Sun and contact shadows (247); `r_fpshadows` and `?fpshadows=0` set it. */
@@ -85,11 +100,17 @@ export class FirstPersonControl {
 
   private readonly onClick = (): void => {
     const canvas = this.canvas();
-    if (this.drawing && document.pointerLockElement !== canvas)
+    if (this.controls === "mouse" && this.drawing && document.pointerLockElement !== canvas)
       void Promise.resolve(canvas.requestPointerLock?.()).catch(() => {});
   };
   private readonly onMouseMove = (event: MouseEvent): void => {
-    if (!this.host || !this.drawing || document.pointerLockElement !== this.canvas()) return;
+    if (
+      this.controls !== "mouse" ||
+      !this.host ||
+      !this.drawing ||
+      document.pointerLockElement !== this.canvas()
+    )
+      return;
     this.turn(
       this.host,
       event.movementX * MOUSE_RADIANS_PER_PIXEL,
@@ -272,9 +293,13 @@ export class FirstPersonControl {
 
   /** A seat with no look device turns with left and right instead of strafing. */
   keyTurn<T extends { dx: number; dy: number }>(view: View, input: T, dt: number): T {
-    if (!view.look || !view.drawn3d || !input.dx) return input;
-    this.turn(view, input.dx * KEY_YAW_RATE * dt, 0);
-    return { ...input, dx: 0 };
+    if (!view.look || !view.drawn3d) return input;
+    if (input.dx || input.dy) view.look.pitch = 0;
+    if (!input.dx) return input;
+    this.turn(view, Math.sign(input.dx) * KEY_YAW_RATE * dt, 0);
+    // The keyboard diagonal was normalized for strafing. Turning is a separate
+    // action, so forward/back keeps its full speed while following a curve.
+    return { ...input, dx: 0, dy: Math.sign(input.dy) };
   }
 
   /** Screen-style manual input rotated into world axes for the view's heading. */

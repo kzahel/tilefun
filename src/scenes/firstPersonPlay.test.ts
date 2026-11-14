@@ -4,6 +4,7 @@ import { XR_WALK } from "../client/XrControl.js";
 import { CHUNK_SIZE_PX, PIXEL_SCALE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
+import { ActionManager } from "../input/ActionManager.js";
 import { NEUTRAL_MOVEMENT, neutralSample, type SeatInput } from "../input/SeatInput.js";
 import { NORTH_YAW } from "../rendering/firstperson/FirstPersonCamera.js";
 import type {
@@ -40,7 +41,10 @@ function setup(carDriving: GameContext["carDriving"] = "steering") {
   const guest = new View(followSeat({ seat: 1 }), undefined, 1);
   const views = [view, guest];
   const cancelled = { tap: 0, hold: 0 };
+  const actions = new ActionManager();
+  actions.disableGamepad();
   const gc = {
+    actions,
     firstPerson: control,
     carDriving,
     view,
@@ -50,13 +54,50 @@ function setup(carDriving: GameContext["carDriving"] = "steering") {
     touchHold: { reset: () => cancelled.hold++ },
   } as unknown as GameContext;
   const sync = () => control.sync(views, new Set([0, 1]));
-  return { control, gc, cancelled, view, guest, views, sync };
+  return { control, gc, cancelled, view, guest, views, sync, actions };
 }
 
 const forward = { dx: 0, dy: -1, sprinting: false, jump: false };
 const pick = (m: { dx: number; dy: number }) => ({ dx: m.dx, dy: m.dy });
 
 describe("first-person play input", () => {
+  it("simple keyboard turns and walks in a level curve at full walking speed", () => {
+    const { control, gc, view, sync, actions } = setup();
+    control.setActive(true, NORTH_YAW);
+    sync();
+    control.markDrawn(view);
+    if (view.look) view.look.pitch = 0.5;
+    actions.pressKey("KeyW");
+    actions.pressKey("KeyD");
+    const movement = firstPersonMovement(gc, view, undefined, actions.getMovement(), 0.1);
+    expect(view.look?.yaw).toBeGreaterThan(NORTH_YAW);
+    expect(view.look?.pitch).toBe(0);
+    expect(Math.hypot(movement.dx, movement.dy)).toBeCloseTo(1, 9);
+    expect(movement.dx).toBeCloseTo(Math.cos(view.look?.yaw ?? 0), 9);
+    actions.releaseKey("KeyW");
+    expect(pick(firstPersonMovement(gc, view, undefined, actions.getMovement(), 0.1))).toEqual({
+      dx: 0,
+      dy: 0,
+    });
+  });
+
+  it("mouse mode strafes with keys, while controller movement still strafes in simple mode", () => {
+    const { control, gc, view, sync, actions } = setup();
+    control.setActive(true, NORTH_YAW);
+    sync();
+    control.markDrawn(view);
+    control.controls = "mouse";
+    actions.pressKey("KeyD");
+    const strafe = firstPersonMovement(gc, view, undefined, actions.getMovement(), 0.1);
+    expect(strafe.dx).toBeCloseTo(1, 9);
+    expect(view.look?.yaw).toBe(NORTH_YAW);
+    actions.releaseKey("KeyD");
+    control.controls = "simple";
+    const pad = firstPersonMovement(gc, view, undefined, { ...forward, dx: 1, dy: 0 }, 0.1);
+    expect(pad.dx).toBeCloseTo(1, 9);
+    expect(view.look?.yaw).toBe(NORTH_YAW);
+  });
+
   it("keeps ordinary controls until a frame was actually drawn in first person", () => {
     const { control, gc, cancelled, view, sync } = setup();
     view.camera.zoom = 2;

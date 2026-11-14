@@ -255,6 +255,7 @@ export class PlayScene implements GameScene {
       inputLocked
         ? { dx: 0, dy: 0, sprinting: false, jump: false }
         : gc.actions.getMovement(normalizesDiagonal(vehicle, steering)),
+      dt,
     );
     let steered =
       !inputLocked && gc.touchMovement === "tap" && gc.tapMovement

@@ -24,6 +24,16 @@ secondary settings/views may remain in controller-accessible menus.
 
 ## Direction and ownership
 
+First-person controls are in **gear → Options → First-person controls**, saved
+with the selected player profile. **Simple keyboard** uses W/S or up/down to
+walk and A/D or left/right to turn; forward and turn together walk in a curve
+at full walking speed. Keyboard movement levels the camera, and world clicks
+leave the mouse free. **Keyboard + mouse** retains strafing and click-to-capture
+mouse look (Escape releases it). New profiles choose Simple; existing profiles
+without a saved preset retain mouse controls. Controller sticks, vehicle
+steering, headset input and local keyboard guests retain their own controls.
+There is no speed setting.
+
 Ship the ordinary Tilefun web engine inside a Linux x64 Electron application.
 The Chromium runtime, GPU renderer, committed assets and local authority Worker
 are bundled; single-player does not depend on the hosted site. Online P2P uses

@@ -1,3 +1,4 @@
+import { type FirstPersonControls, firstPersonControls } from "../config/firstPersonControls.js";
 import {
   DEFAULT_VIEW_DISTANCE,
   type FirstPersonViewDistance,
@@ -20,6 +21,8 @@ export class OptionsDialog {
   private carStyle = document.createElement("select");
   private firstPerson = document.createElement("input");
   private firstPersonHelp = document.createElement("p");
+  private firstPersonControls = document.createElement("select");
+  private firstPersonControlsHelp = document.createElement("p");
   private distance = document.createElement("select");
   private controls = document.createElement("p");
   constructor(
@@ -29,6 +32,7 @@ export class OptionsDialog {
     private selectCar: (style: CarDrivingStyle) => Promise<void>,
     private selectFirstPerson: (enabled: boolean) => Promise<void>,
     private selectDistance: (distance: FirstPersonViewDistance) => Promise<void>,
+    private selectFirstPersonControls: (controls: FirstPersonControls) => Promise<void>,
   ) {
     const d = this.dialog;
     d.className = "options-dialog";
@@ -96,6 +100,17 @@ export class OptionsDialog {
     };
     view.append(this.firstPerson, "First-person view (experiment)");
     this.firstPersonHelp.id = "options-view-help";
+    const firstPersonControls = document.createElement("label");
+    firstPersonControls.className = "options-driving";
+    firstPersonControls.append("First-person controls ", this.firstPersonControls);
+    this.firstPersonControls.setAttribute("aria-label", "First-person controls");
+    this.firstPersonControls.setAttribute("aria-describedby", "options-first-person-controls-help");
+    this.firstPersonControls.add(new Option("Simple keyboard", "simple"));
+    this.firstPersonControls.add(new Option("Keyboard + mouse", "mouse"));
+    this.firstPersonControls.onchange = () => {
+      void this.chooseFirstPersonControls();
+    };
+    this.firstPersonControlsHelp.id = "options-first-person-controls-help";
     const distance = document.createElement("label");
     distance.className = "options-driving";
     distance.append("First-person view distance ", this.distance);
@@ -132,6 +147,8 @@ export class OptionsDialog {
       pinchHelp,
       view,
       this.firstPersonHelp,
+      firstPersonControls,
+      this.firstPersonControlsHelp,
       distance,
       this.status,
       back,
@@ -160,6 +177,7 @@ export class OptionsDialog {
     carDriving: CarDrivingStyle = DEFAULT_CAR_DRIVING,
     firstPerson = false,
     distance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE,
+    controls: FirstPersonControls = "simple",
   ): void {
     this.opener = opener;
     this.status.textContent = "";
@@ -168,9 +186,11 @@ export class OptionsDialog {
     this.carStyle.value = carDriving;
     this.firstPerson.checked = firstPerson;
     this.distance.value = distance;
+    this.firstPersonControls.value = controls;
+    this.updateFirstPersonControlsHelp();
     // Key labels follow the player's layout, which may be learned during play.
     const k = keyLabel;
-    this.firstPersonHelp.textContent = `Look by clicking the world, then moving the mouse, or with the right stick. ${k("KeyV")} switches it until you reload; this box is the saved choice.`;
+    this.firstPersonHelp.textContent = `${k("KeyV")} switches first-person view until you reload; this box is the saved choice. A controller's right stick looks around in either control mode.`;
     this.controls.textContent = `A / ${k("Space")} Jump · X / ${k("KeyB")} Throw · Y / ${k("KeyE")} Interact · RT / Shift Fast · RB / ${k("KeyH")} Horn · D-pad ↑ / ${k("KeyL")} Lights · D-pad → / ${k("KeyK")} Siren style. LB / Tab Build–Play · View / ${k("KeyG")} Map · Menu / Escape Pause. Right stick moves the cursor over the world and tools (in first person it looks around); A or RT selects. In menus: A Select · B Back. While building: RT Paint · LT Erase · Y Tools.`;
     if (!this.visible) this.dialog.showModal();
     activateMenu(this.dialog, () => this.hide(), false);
@@ -211,7 +231,14 @@ export class OptionsDialog {
   ): Promise<void> {
     if (this.saving) return;
     this.saving = true;
-    const controls = [...this.cards, this.pinch, this.carStyle, this.firstPerson, this.distance];
+    const controls = [
+      ...this.cards,
+      this.pinch,
+      this.carStyle,
+      this.firstPerson,
+      this.firstPersonControls,
+      this.distance,
+    ];
     for (const c of controls) c.disabled = true;
     try {
       await action();
@@ -252,6 +279,21 @@ export class OptionsDialog {
       () => this.selectDistance(viewDistance(this.distance.value)),
       "View distance saved for this player.",
       () => this.distance,
+    );
+  }
+  private updateFirstPersonControlsHelp(): void {
+    const k = keyLabel;
+    this.firstPersonControlsHelp.textContent =
+      this.firstPersonControls.value === "simple"
+        ? `${k("KeyW")}/${k("KeyS")} or ↑/↓ walk forward/back. ${k("KeyA")}/${k("KeyD")} or ←/→ turn. Hold forward and turn to walk in a curve. No mouse needed.`
+        : `${k("KeyW")}/${k("KeyS")} walk forward/back; ${k("KeyA")}/${k("KeyD")} strafe. Click the world to capture the mouse and look around; Escape releases it.`;
+  }
+  private chooseFirstPersonControls(): Promise<void> {
+    this.updateFirstPersonControlsHelp();
+    return this.save(
+      () => this.selectFirstPersonControls(firstPersonControls(this.firstPersonControls.value)),
+      "First-person controls saved for this player.",
+      () => this.firstPersonControls,
     );
   }
   private chooseCar(): Promise<void> {

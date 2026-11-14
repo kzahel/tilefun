@@ -54,10 +54,17 @@ export function firstPersonMovement<T extends { dx: number; dy: number }>(
   view: View | undefined,
   vehicle: Entity | undefined,
   input: T,
+  dt = 0,
 ): T {
   const vehicleAxes = !!vehicle && gc.carDriving === "steering";
   if (!view || !gc.firstPerson || vehicleAxes) return input;
-  const turned = gc.firstPerson.movement(view, input);
+  const keyboardTurn =
+    !vehicle &&
+    !gc.xr?.immersive &&
+    gc.firstPerson.controls === "simple" &&
+    gc.actions?.keyboardMoving;
+  const manual = keyboardTurn ? gc.firstPerson.keyTurn(view, input, dt) : input;
+  const turned = gc.firstPerson.movement(view, manual);
   // First person in a headset walks: full stick speed reads as a run there.
   return gc.xr?.walking && !vehicle
     ? { ...turned, dx: turned.dx * XR_WALK, dy: turned.dy * XR_WALK }

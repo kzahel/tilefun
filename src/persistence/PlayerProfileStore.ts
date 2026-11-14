@@ -1,3 +1,4 @@
+import type { FirstPersonControls } from "../config/firstPersonControls.js";
 import type { FirstPersonViewDistance } from "../config/firstPersonViewDistance.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { generateUUID } from "../shared/uuid.js";
@@ -16,6 +17,8 @@ export interface PlayerProfile {
   firstPerson?: boolean;
   /** First-person fog and streaming distance (tactical 230). */
   firstPersonViewDistance?: FirstPersonViewDistance;
+  /** Keyboard turning or mouse look for this player's first-person view. */
+  firstPersonControls?: FirstPersonControls;
 }
 
 /** Fields players change after creation; undefined leaves a field unchanged. */
@@ -28,6 +31,7 @@ const UPDATABLE_FIELDS = [
   "carDriving",
   "firstPerson",
   "firstPersonViewDistance",
+  "firstPersonControls",
 ] as const;
 type ProfileUpdates = Partial<Pick<PlayerProfile, (typeof UPDATABLE_FIELDS)[number]>>;
 
@@ -100,6 +104,7 @@ export class PlayerProfileStore {
       name,
       pin: null,
       createdAt: Date.now(),
+      firstPersonControls: "simple",
     };
     return new Promise((resolve, reject) => {
       const tx = db.transaction(STORE_PROFILES, "readwrite");

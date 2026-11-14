@@ -10,6 +10,7 @@ import { AudioManager } from "../audio/AudioManager.js";
 import { buildAudioManifest } from "../audio/SurfaceType.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { normalizePlayerModel } from "../characters/PlayerModels.js";
+import { type FirstPersonControls, firstPersonControls } from "../config/firstPersonControls.js";
 import { type FirstPersonViewDistance, viewDistance } from "../config/firstPersonViewDistance.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { ConsoleUI } from "../console/ConsoleUI.js";
@@ -88,6 +89,7 @@ export interface GameClientOptions {
     carDriving?: CarDrivingStyle;
     firstPerson?: boolean;
     firstPersonViewDistance?: FirstPersonViewDistance;
+    firstPersonControls?: FirstPersonControls;
   };
   profileStore?: {
     listProfiles(): Promise<{ id: string; name: string; pin: string | null; createdAt: number }[]>;
@@ -365,6 +367,10 @@ export class GameClient implements GameTestHooks {
     // Register console cvars and commands
     registerClientConsole(gc, this.netEmulatedTransport);
     this.firstPerson.viewDistance = viewDistance(this.profile?.firstPersonViewDistance);
+    this.firstPerson.controls = firstPersonControls(
+      this.profile?.firstPersonControls,
+      this.profile ? "mouse" : "simple",
+    );
     if (this.profile?.firstPerson) this.consoleEngine.cvars.get("r_firstperson")?.set(true);
     this.pushStartScene();
 

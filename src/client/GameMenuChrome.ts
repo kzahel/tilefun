@@ -103,6 +103,11 @@ export class GameMenuChrome {
         if (host.profile) host.profile.firstPersonViewDistance = distance;
         await this.saveProfile({ firstPersonViewDistance: distance });
       },
+      async (controls) => {
+        host.firstPerson.controls = controls;
+        if (host.profile) host.profile.firstPersonControls = controls;
+        await this.saveProfile({ firstPersonControls: controls });
+      },
     );
   }
 
@@ -146,6 +151,7 @@ export class GameMenuChrome {
       this.playInput.carDriving,
       this.host.consoleEngine.cvars.get("r_firstperson")?.get() === true,
       this.host.firstPerson.viewDistance,
+      this.host.firstPerson.controls,
     );
   }
 
