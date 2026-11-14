@@ -210,6 +210,9 @@ and the recommended direction are recorded there. The list below is as of 229.
 
 ## Next
 
+Since 2026-11-14 [248](248-renderer-unification.md) sequences this work
+(shared renderer first). The list below is as of 229.
+
 1. Owner/child playtest: feel, motion comfort, field of view, look speed.
 2. Touch look (drag on the right half) and a controller button for the toggle.
 3. Fold the glue into 226 phases 1, 2 and 4. Showcase: split screen with one top-down

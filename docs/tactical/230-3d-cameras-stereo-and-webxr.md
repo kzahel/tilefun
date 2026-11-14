@@ -4,6 +4,10 @@ Status: slices 1 (view distance) and 2 (interiors in 3D) delivered for owner pla
 on 2026-11-08; slices 3 onward wait until
 [226](226-player-views-and-local-split-screen.md) has its device session and view
 with a camera-policy interface (226 slice 3).
+Since 2026-11-14 [248](248-renderer-unification.md) sequences the remaining
+slices: 3 and 4 after its shared renderer (248 slice 1), 5 to 8 as 248 slice 4.
+On a flat screen the "pretend 2D" view is 248's exact oblique camera, not the
+narrow orbit preset below; the orbit presets remain for stereo and headsets.
 Owner direction, 2026-11-08, after playing the [229](229-first-person-view.md)
 first-person experiment: configurable view distance, a stereo "2D-looking" hybrid,
 a tabletop mode, and WebXR again (a basic screen mode as before, plus immersive).

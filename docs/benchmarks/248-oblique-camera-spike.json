@@ -1,0 +1,2870 @@
+{
+ "tactical": 248,
+ "date": "2026-11-14",
+ "scope": "Steady camera after terrain settles, except the moving drive scene; p50/p95 in ms. render = main-thread render callback; submit = time inside backend submits; gpuMs = timer query around the render callback's GL commands; renderFinishMs = render + gl.finish() in a separate window (skipped with --allocations). Rabbits wander and traffic varies, so populated scenes are not exact replays. The spike (56 lines, not committed) drew the first-person scene with the fixed view's x, y \u2212 z projection, cards facing south, no fog, the player's own body shown and collection culled to the fixed camera's rectangle; the 3D scene draws flat-coloured ground and no grass, particles or decals. One run per cell.",
+ "build": "vite dev (unminified modules)",
+ "runs": [
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz: Fixed view (default GPU backend)",
+   "browser": "156.0.8078.4",
+   "query": "",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 9.3,
+      "max": 9.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 384,
+       "p95": 384,
+       "max": 384
+      },
+      "pages": 2,
+      "totalMiB": 0.4
+     },
+     "renderMs": {
+      "p50": 0.7,
+      "p95": 1,
+      "max": 1.7
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 1.3
+     },
+     "sceneSubmitMs": {
+      "p50": 0.2,
+      "p95": 0.4,
+      "max": 1.3
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 2
+     },
+     "gpuMs": {
+      "p50": 1.01,
+      "p95": 1.08,
+      "max": 2.15,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.7,
+      "p95": 1.1,
+      "max": 1.6
+     },
+     "drawCallsPerFrame": 8.5,
+     "entities": 17,
+     "workerTickMs": {
+      "p50": 1.1,
+      "p95": 1.6
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.ai": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.entityPhysics": {
+       "p50": 0.6,
+       "p95": 0.9
+      },
+      "server.replication": {
+       "p50": 0.2,
+       "p95": 0.3
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.1,
+       "p95": 1.6
+      }
+     },
+     "atlasMiB": 8
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 9.3,
+      "max": 9.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 10,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 10,
+      "totalMiB": 4.4
+     },
+     "renderMs": {
+      "p50": 0.9,
+      "p95": 1.1,
+      "max": 2.2
+     },
+     "submitMs": {
+      "p50": 0.4,
+      "p95": 0.6,
+      "max": 1.7
+     },
+     "sceneSubmitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 1.5
+     },
+     "updateMs": {
+      "p50": 0.7,
+      "p95": 1,
+      "max": 1.5
+     },
+     "gpuMs": {
+      "p50": 1.77,
+      "p95": 1.9,
+      "max": 2.35,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.9,
+      "p95": 1.2,
+      "max": 2.3
+     },
+     "drawCallsPerFrame": 14.9,
+     "entities": 26,
+     "workerTickMs": {
+      "p50": 0.9,
+      "p95": 1.3
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.ai": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.entityPhysics": {
+       "p50": 0.4,
+       "p95": 0.7
+      },
+      "server.replication": {
+       "p50": 0.2,
+       "p95": 0.2
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 0.9,
+       "p95": 1.3
+      }
+     },
+     "atlasMiB": 32
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 9.3,
+      "max": 9.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 10,
+      "kiB": {
+       "p50": 512,
+       "p95": 512,
+       "max": 512
+      },
+      "pages": 10,
+      "totalMiB": 4.4
+     },
+     "renderMs": {
+      "p50": 1.2,
+      "p95": 1.5,
+      "max": 2.3
+     },
+     "submitMs": {
+      "p50": 0.6,
+      "p95": 0.8,
+      "max": 1.7
+     },
+     "sceneSubmitMs": {
+      "p50": 0.4,
+      "p95": 0.5,
+      "max": 1.4
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.9,
+      "max": 1.1
+     },
+     "gpuMs": {
+      "p50": 1.61,
+      "p95": 1.88,
+      "max": 2.22,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.3,
+      "p95": 1.5,
+      "max": 2
+     },
+     "drawCallsPerFrame": 14.1,
+     "entities": 52,
+     "workerTickMs": {
+      "p50": 1,
+      "p95": 1.3
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.ai": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.entityPhysics": {
+       "p50": 0.4,
+       "p95": 0.6
+      },
+      "server.replication": {
+       "p50": 0.2,
+       "p95": 0.3
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1,
+       "p95": 1.3
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 72
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 9.3,
+      "max": 9.5
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 2,
+      "p95": 2.3,
+      "max": 3.7
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 1.4
+     },
+     "sceneSubmitMs": {
+      "p50": 0.3,
+      "p95": 0.4,
+      "max": 1.4
+     },
+     "updateMs": {
+      "p50": 2.5,
+      "p95": 2.8,
+      "max": 3.4
+     },
+     "gpuMs": {
+      "p50": 2.41,
+      "p95": 4.96,
+      "max": 5.09,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2,
+      "p95": 2.3,
+      "max": 2.5
+     },
+     "drawCallsPerFrame": 13,
+     "entities": 943,
+     "workerTickMs": {
+      "p50": 5.4,
+      "p95": 6.6
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.2
+      },
+      "realm.ai": {
+       "p50": 0.3,
+       "p95": 0.4
+      },
+      "realm.entityPhysics": {
+       "p50": 2.4,
+       "p95": 3.3
+      },
+      "server.replication": {
+       "p50": 0.9,
+       "p95": 1.1
+      },
+      "server.encode": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "server.tick": {
+       "p50": 5.4,
+       "p95": 6.6
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 72
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 9.3,
+      "max": 9.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 3.3,
+      "p95": 3.8,
+      "max": 5.3
+     },
+     "submitMs": {
+      "p50": 1,
+      "p95": 1.3,
+      "max": 1.6
+     },
+     "sceneSubmitMs": {
+      "p50": 1,
+      "p95": 1.2,
+      "max": 1.5
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 3,
+      "max": 3.6
+     },
+     "gpuMs": {
+      "p50": 10.98,
+      "p95": 23.67,
+      "max": 29.2,
+      "samples": 599,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.1,
+      "p95": 3.6,
+      "max": 5
+     },
+     "drawCallsPerFrame": 37.5,
+     "entities": 1067,
+     "workerTickMs": {
+      "p50": 5,
+      "p95": 6.2
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.2
+      },
+      "realm.ai": {
+       "p50": 0.3,
+       "p95": 0.4
+      },
+      "realm.entityPhysics": {
+       "p50": 2.4,
+       "p95": 3.2
+      },
+      "server.replication": {
+       "p50": 0.9,
+       "p95": 1.1
+      },
+      "server.encode": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "server.tick": {
+       "p50": 5,
+       "p95": 6.2
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 72
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 9.3,
+      "max": 9.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 4.3,
+      "p95": 4.7,
+      "max": 7
+     },
+     "submitMs": {
+      "p50": 1.6,
+      "p95": 1.8,
+      "max": 2.2
+     },
+     "sceneSubmitMs": {
+      "p50": 1.4,
+      "p95": 1.6,
+      "max": 1.9
+     },
+     "updateMs": {
+      "p50": 2.7,
+      "p95": 3,
+      "max": 4.4
+     },
+     "gpuMs": {
+      "p50": 18.64,
+      "p95": 25.63,
+      "max": 28.6,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 4.3,
+      "p95": 4.8,
+      "max": 5.6
+     },
+     "drawCallsPerFrame": 50.4,
+     "entities": 1093,
+     "workerTickMs": {
+      "p50": 5.8,
+      "p95": 7.2
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.3,
+       "p95": 0.4
+      },
+      "realm.entityPhysics": {
+       "p50": 2.9,
+       "p95": 3.7
+      },
+      "server.replication": {
+       "p50": 1,
+       "p95": 1.2
+      },
+      "server.encode": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "server.tick": {
+       "p50": 5.8,
+       "p95": 7.2
+      }
+     },
+     "atlasMiB": 72
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 1,
+      "kiB": {
+       "p50": 240,
+       "p95": 240,
+       "max": 240
+      },
+      "pages": 1,
+      "totalMiB": 0.2
+     },
+     "renderMs": {
+      "p50": 1.1,
+      "p95": 1.5,
+      "max": 1.8
+     },
+     "submitMs": {
+      "p50": 0.3,
+      "p95": 0.5,
+      "max": 1
+     },
+     "sceneSubmitMs": {
+      "p50": 0.3,
+      "p95": 0.4,
+      "max": 1
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1,
+      "max": 2.8
+     },
+     "gpuMs": {
+      "p50": 0.62,
+      "p95": 0.66,
+      "max": 0.91,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.2,
+      "p95": 1.5,
+      "max": 2.1
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 138,
+     "workerTickMs": {
+      "p50": 1.7,
+      "p95": 2.2
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.1,
+       "p95": 0.3
+      },
+      "realm.entityPhysics": {
+       "p50": 0.5,
+       "p95": 0.8
+      },
+      "server.replication": {
+       "p50": 0.3,
+       "p95": 0.4
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.7,
+       "p95": 2.2
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 4
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 2,
+      "kiB": {
+       "p50": 112,
+       "p95": 112,
+       "max": 112
+      },
+      "pages": 2,
+      "totalMiB": 0.2
+     },
+     "renderMs": {
+      "p50": 1.3,
+      "p95": 1.6,
+      "max": 2
+     },
+     "submitMs": {
+      "p50": 0.2,
+      "p95": 0.4,
+      "max": 0.8
+     },
+     "sceneSubmitMs": {
+      "p50": 0.1,
+      "p95": 0.2,
+      "max": 0.7
+     },
+     "updateMs": {
+      "p50": 0.9,
+      "p95": 1.1,
+      "max": 1.9
+     },
+     "gpuMs": {
+      "p50": 0.62,
+      "p95": 0.67,
+      "max": 1.83,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.3,
+      "p95": 1.7,
+      "max": 1.8
+     },
+     "drawCallsPerFrame": 4,
+     "entities": 261,
+     "workerTickMs": {
+      "p50": 1.9,
+      "p95": 2.2
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.1,
+       "p95": 0.3
+      },
+      "realm.entityPhysics": {
+       "p50": 0.6,
+       "p95": 0.8
+      },
+      "server.replication": {
+       "p50": 0.4,
+       "p95": 0.5
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.9,
+       "p95": 2.2
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 20
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 2.3,
+      "p95": 2.6,
+      "max": 2.9
+     },
+     "submitMs": {
+      "p50": 0.8,
+      "p95": 0.9,
+      "max": 1
+     },
+     "sceneSubmitMs": {
+      "p50": 0.5,
+      "p95": 0.6,
+      "max": 0.7
+     },
+     "updateMs": {
+      "p50": 1.1,
+      "p95": 1.2,
+      "max": 1.8
+     },
+     "gpuMs": {
+      "p50": 0.8,
+      "p95": 1.98,
+      "max": 2.29,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.3,
+      "p95": 2.6,
+      "max": 2.8
+     },
+     "drawCallsPerFrame": 7,
+     "entities": 536,
+     "workerTickMs": {
+      "p50": 1.7,
+      "p95": 1.9
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "realm.entityPhysics": {
+       "p50": 0.4,
+       "p95": 0.6
+      },
+      "server.replication": {
+       "p50": 0.5,
+       "p95": 0.6
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.7,
+       "p95": 1.9
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 72
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz: First-person scene through the fixed view's oblique camera (spike), shadows on",
+   "browser": "156.0.8078.4",
+   "query": "view=fps&fpoblique=1",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 0.5,
+      "p95": 0.9,
+      "max": 1
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.9,
+      "p95": 1.3,
+      "max": 2.1
+     },
+     "gpuMs": {
+      "p50": 0.44,
+      "p95": 0.75,
+      "max": 2.23,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.6,
+      "p95": 1.1,
+      "max": 1.6
+     },
+     "drawCallsPerFrame": 32.7,
+     "entities": 17,
+     "firstPerson": {
+      "chunks": 22,
+      "builds": 0,
+      "billboards": 3,
+      "cards": 5,
+      "blobs": 6,
+      "sunRedraws": 0,
+      "cars": 3,
+      "calls": 31,
+      "fogEnd": 252
+     },
+     "workerTickMs": {
+      "p50": 1.1,
+      "p95": 1.7
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.ai": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.entityPhysics": {
+       "p50": 0.6,
+       "p95": 0.9
+      },
+      "server.replication": {
+       "p50": 0.2,
+       "p95": 0.3
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.1,
+       "p95": 1.7
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 1.5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.7,
+      "p95": 0.9,
+      "max": 1.2
+     },
+     "gpuMs": {
+      "p50": 0.6,
+      "p95": 1.01,
+      "max": 1.85,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 1.4
+     },
+     "drawCallsPerFrame": 112.2,
+     "entities": 26,
+     "firstPerson": {
+      "chunks": 88,
+      "builds": 0,
+      "billboards": 10,
+      "cards": 43,
+      "blobs": 16,
+      "sunRedraws": 0,
+      "cars": 6,
+      "calls": 105,
+      "fogEnd": 1006
+     },
+     "workerTickMs": {
+      "p50": 1,
+      "p95": 1.5
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.ai": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.entityPhysics": {
+       "p50": 0.5,
+       "p95": 0.8
+      },
+      "server.replication": {
+       "p50": 0.2,
+       "p95": 0.3
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1,
+       "p95": 1.5
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 1.4,
+      "p95": 1.6,
+      "max": 1.8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.7,
+      "max": 1.1
+     },
+     "gpuMs": {
+      "p50": 1.06,
+      "p95": 2.03,
+      "max": 3.6,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.4,
+      "p95": 1.7,
+      "max": 1.8
+     },
+     "drawCallsPerFrame": 461,
+     "entities": 52,
+     "firstPerson": {
+      "chunks": 260,
+      "builds": 0,
+      "billboards": 28,
+      "cards": 46,
+      "blobs": 36,
+      "sunRedraws": 1,
+      "cars": 11,
+      "calls": 461,
+      "fogEnd": 1648
+     },
+     "workerTickMs": {
+      "p50": 1,
+      "p95": 1.2
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.ai": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.entityPhysics": {
+       "p50": 0.4,
+       "p95": 0.5
+      },
+      "server.replication": {
+       "p50": 0.2,
+       "p95": 0.3
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1,
+       "p95": 1.2
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 1.9,
+      "p95": 2.2,
+      "max": 2.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.7,
+      "p95": 3,
+      "max": 3.6
+     },
+     "gpuMs": {
+      "p50": 0.7,
+      "p95": 2.33,
+      "max": 2.58,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.9,
+      "p95": 2.2,
+      "max": 2.5
+     },
+     "drawCallsPerFrame": 30,
+     "entities": 951,
+     "firstPerson": {
+      "chunks": 22,
+      "builds": 0,
+      "billboards": 286,
+      "cards": 5,
+      "blobs": 298,
+      "sunRedraws": 0,
+      "cars": 12,
+      "calls": 30,
+      "fogEnd": 252
+     },
+     "workerTickMs": {
+      "p50": 5.7,
+      "p95": 7.2
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.2
+      },
+      "realm.ai": {
+       "p50": 0.3,
+       "p95": 0.4
+      },
+      "realm.entityPhysics": {
+       "p50": 2.5,
+       "p95": 3.7
+      },
+      "server.replication": {
+       "p50": 1,
+       "p95": 1.1
+      },
+      "server.encode": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "server.tick": {
+       "p50": 5.7,
+       "p95": 7.2
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 3.1,
+      "p95": 3.4,
+      "max": 4.3
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 2.9,
+      "max": 3.4
+     },
+     "gpuMs": {
+      "p50": 1.5,
+      "p95": 2.99,
+      "max": 4.62,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.1,
+      "p95": 3.4,
+      "max": 3.8
+     },
+     "drawCallsPerFrame": 426,
+     "entities": 1067,
+     "firstPerson": {
+      "chunks": 88,
+      "builds": 0,
+      "billboards": 1010,
+      "cards": 43,
+      "blobs": 1057,
+      "sunRedraws": 0,
+      "cars": 47,
+      "calls": 426,
+      "fogEnd": 1006
+     },
+     "workerTickMs": {
+      "p50": 5.1,
+      "p95": 6
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.3,
+       "p95": 0.4
+      },
+      "realm.entityPhysics": {
+       "p50": 2.4,
+       "p95": 3
+      },
+      "server.replication": {
+       "p50": 0.9,
+       "p95": 1.1
+      },
+      "server.encode": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "server.tick": {
+       "p50": 5.1,
+       "p95": 6
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 4,
+      "p95": 4.3,
+      "max": 5.7
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 2.9,
+      "max": 4
+     },
+     "gpuMs": {
+      "p50": 2.89,
+      "p95": 4.09,
+      "max": 5.67,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.9,
+      "p95": 4.2,
+      "max": 4.7
+     },
+     "drawCallsPerFrame": 819,
+     "entities": 1093,
+     "firstPerson": {
+      "chunks": 260,
+      "builds": 0,
+      "billboards": 1028,
+      "cards": 46,
+      "blobs": 1077,
+      "sunRedraws": 1,
+      "cars": 52,
+      "calls": 797,
+      "fogEnd": 1648
+     },
+     "workerTickMs": {
+      "p50": 5.6,
+      "p95": 7
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.2
+      },
+      "realm.ai": {
+       "p50": 0.3,
+       "p95": 0.4
+      },
+      "realm.entityPhysics": {
+       "p50": 2.7,
+       "p95": 3.7
+      },
+      "server.replication": {
+       "p50": 1,
+       "p95": 1.3
+      },
+      "server.encode": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "server.tick": {
+       "p50": 5.6,
+       "p95": 7
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 0.5,
+      "p95": 0.7,
+      "max": 0.9
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 3.4
+     },
+     "gpuMs": {
+      "p50": 0.39,
+      "p95": 1.51,
+      "max": 2.18,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.5,
+      "p95": 0.8,
+      "max": 1
+     },
+     "drawCallsPerFrame": 14,
+     "entities": 138,
+     "firstPerson": {
+      "chunks": 22,
+      "builds": 0,
+      "billboards": 14,
+      "cards": 173,
+      "blobs": 14,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 14,
+      "fogEnd": 252
+     },
+     "workerTickMs": {
+      "p50": 1.9,
+      "p95": 2.7
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.2,
+       "p95": 0.3
+      },
+      "realm.entityPhysics": {
+       "p50": 0.6,
+       "p95": 0.9
+      },
+      "server.replication": {
+       "p50": 0.3,
+       "p95": 0.5
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.9,
+       "p95": 2.7
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 0.9,
+      "p95": 1.1,
+      "max": 1.3
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.8,
+      "p95": 1,
+      "max": 1.9
+     },
+     "gpuMs": {
+      "p50": 0.52,
+      "p95": 1.2,
+      "max": 1.72,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.9,
+      "p95": 1.1,
+      "max": 1.3
+     },
+     "drawCallsPerFrame": 58,
+     "entities": 261,
+     "firstPerson": {
+      "chunks": 88,
+      "builds": 0,
+      "billboards": 125,
+      "cards": 508,
+      "blobs": 125,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 58,
+      "fogEnd": 1006
+     },
+     "workerTickMs": {
+      "p50": 1.8,
+      "p95": 2.3
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "realm.entityPhysics": {
+       "p50": 0.6,
+       "p95": 0.8
+      },
+      "server.replication": {
+       "p50": 0.4,
+       "p95": 0.5
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.8,
+       "p95": 2.3
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 1.7,
+      "p95": 1.9,
+      "max": 2.3
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1,
+      "p95": 1.2,
+      "max": 1.6
+     },
+     "gpuMs": {
+      "p50": 1.29,
+      "p95": 1.39,
+      "max": 3.2,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.8,
+      "p95": 2,
+      "max": 2.2
+     },
+     "drawCallsPerFrame": 263,
+     "entities": 536,
+     "firstPerson": {
+      "chunks": 259,
+      "builds": 0,
+      "billboards": 450,
+      "cards": 1266,
+      "blobs": 450,
+      "sunRedraws": 1,
+      "cars": 0,
+      "calls": 263,
+      "fogEnd": 1600
+     },
+     "workerTickMs": {
+      "p50": 1.7,
+      "p95": 2
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "realm.entityPhysics": {
+       "p50": 0.4,
+       "p95": 0.6
+      },
+      "server.replication": {
+       "p50": 0.5,
+       "p95": 0.6
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.7,
+       "p95": 2
+      }
+     },
+     "atlasMiB": 0
+    }
+   ]
+  },
+  {
+   "label": "M4 Pro MacBook, headed 120 Hz: Same spike, fpshadows=0",
+   "browser": "156.0.8078.4",
+   "query": "view=fps&fpoblique=1&fpshadows=0",
+   "seconds": 5,
+   "idleFrameMs": 8.3,
+   "viewport": {
+    "width": 1280,
+    "height": 800,
+    "devicePixelRatio": 1
+   },
+   "canvas": {
+    "width": 1280,
+    "height": 800
+   },
+   "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+   "gpuTimer": true,
+   "errors": [],
+   "cells": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 0.5,
+      "p95": 0.8,
+      "max": 1.1
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.9,
+      "p95": 1.3,
+      "max": 2.9
+     },
+     "gpuMs": {
+      "p50": 0.35,
+      "p95": 1.42,
+      "max": 2.12,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.6,
+      "p95": 0.9,
+      "max": 1.8
+     },
+     "drawCallsPerFrame": 31.7,
+     "entities": 17,
+     "firstPerson": {
+      "chunks": 22,
+      "builds": 0,
+      "billboards": 3,
+      "cards": 5,
+      "blobs": 0,
+      "sunRedraws": 0,
+      "cars": 3,
+      "calls": 30,
+      "fogEnd": 252
+     },
+     "workerTickMs": {
+      "p50": 1.2,
+      "p95": 1.8
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.ai": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.entityPhysics": {
+       "p50": 0.6,
+       "p95": 1
+      },
+      "server.replication": {
+       "p50": 0.2,
+       "p95": 0.3
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.2,
+       "p95": 1.8
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.1,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 0.8,
+      "p95": 1.2,
+      "max": 1.4
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.7,
+      "p95": 1,
+      "max": 1.6
+     },
+     "gpuMs": {
+      "p50": 0.52,
+      "p95": 0.88,
+      "max": 1.77,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 1.4
+     },
+     "drawCallsPerFrame": 111.2,
+     "entities": 26,
+     "firstPerson": {
+      "chunks": 88,
+      "builds": 0,
+      "billboards": 10,
+      "cards": 43,
+      "blobs": 0,
+      "sunRedraws": 0,
+      "cars": 6,
+      "calls": 104,
+      "fogEnd": 1006
+     },
+     "workerTickMs": {
+      "p50": 1.1,
+      "p95": 1.6
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.ai": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.entityPhysics": {
+       "p50": 0.5,
+       "p95": 0.9
+      },
+      "server.replication": {
+       "p50": 0.2,
+       "p95": 0.3
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.1,
+       "p95": 1.6
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 1.4,
+      "p95": 1.6,
+      "max": 1.8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.6,
+      "p95": 0.7,
+      "max": 1.2
+     },
+     "gpuMs": {
+      "p50": 1.04,
+      "p95": 1.98,
+      "max": 4.93,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.4,
+      "p95": 1.7,
+      "max": 1.8
+     },
+     "drawCallsPerFrame": 460,
+     "entities": 52,
+     "firstPerson": {
+      "chunks": 260,
+      "builds": 0,
+      "billboards": 28,
+      "cards": 46,
+      "blobs": 0,
+      "sunRedraws": 0,
+      "cars": 11,
+      "calls": 460,
+      "fogEnd": 1648
+     },
+     "workerTickMs": {
+      "p50": 0.9,
+      "p95": 1.2
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.ai": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.entityPhysics": {
+       "p50": 0.4,
+       "p95": 0.5
+      },
+      "server.replication": {
+       "p50": 0.2,
+       "p95": 0.3
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 0.9,
+       "p95": 1.2
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 1.6,
+      "p95": 1.9,
+      "max": 2.8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 3,
+      "max": 3.6
+     },
+     "gpuMs": {
+      "p50": 0.54,
+      "p95": 2.12,
+      "max": 2.19,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.7,
+      "p95": 2,
+      "max": 2.3
+     },
+     "drawCallsPerFrame": 29,
+     "entities": 951,
+     "firstPerson": {
+      "chunks": 22,
+      "builds": 0,
+      "billboards": 286,
+      "cards": 5,
+      "blobs": 0,
+      "sunRedraws": 0,
+      "cars": 12,
+      "calls": 29,
+      "fogEnd": 252
+     },
+     "workerTickMs": {
+      "p50": 5.5,
+      "p95": 6.8
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.3,
+       "p95": 0.4
+      },
+      "realm.entityPhysics": {
+       "p50": 2.6,
+       "p95": 3.5
+      },
+      "server.replication": {
+       "p50": 0.9,
+       "p95": 1.1
+      },
+      "server.encode": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "server.tick": {
+       "p50": 5.5,
+       "p95": 6.8
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 2.8,
+      "p95": 3.1,
+      "max": 4.8
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.6,
+      "p95": 3,
+      "max": 3.6
+     },
+     "gpuMs": {
+      "p50": 1.28,
+      "p95": 2.81,
+      "max": 4.29,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 2.8,
+      "p95": 3.1,
+      "max": 4
+     },
+     "drawCallsPerFrame": 423,
+     "entities": 1067,
+     "firstPerson": {
+      "chunks": 88,
+      "builds": 0,
+      "billboards": 1010,
+      "cards": 43,
+      "blobs": 0,
+      "sunRedraws": 0,
+      "cars": 47,
+      "calls": 423,
+      "fogEnd": 1006
+     },
+     "workerTickMs": {
+      "p50": 5,
+      "p95": 6.2
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.2
+      },
+      "realm.ai": {
+       "p50": 0.3,
+       "p95": 0.4
+      },
+      "realm.entityPhysics": {
+       "p50": 2.4,
+       "p95": 3.2
+      },
+      "server.replication": {
+       "p50": 0.9,
+       "p95": 1.1
+      },
+      "server.encode": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "server.tick": {
+       "p50": 5,
+       "p95": 6.2
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "placed": {
+      "rabbits": 1000,
+      "cars": 49
+     },
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 3.8,
+      "p95": 4.1,
+      "max": 5
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 2.7,
+      "p95": 3,
+      "max": 3.6
+     },
+     "gpuMs": {
+      "p50": 3.16,
+      "p95": 4.05,
+      "max": 5.66,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 3.8,
+      "p95": 4.1,
+      "max": 4.8
+     },
+     "drawCallsPerFrame": 818,
+     "entities": 1093,
+     "firstPerson": {
+      "chunks": 260,
+      "builds": 0,
+      "billboards": 1028,
+      "cards": 46,
+      "blobs": 0,
+      "sunRedraws": 0,
+      "cars": 52,
+      "calls": 798,
+      "fogEnd": 1648
+     },
+     "workerTickMs": {
+      "p50": 5.9,
+      "p95": 7.5
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.2
+      },
+      "realm.ai": {
+       "p50": 0.3,
+       "p95": 0.4
+      },
+      "realm.entityPhysics": {
+       "p50": 3,
+       "p95": 4.1
+      },
+      "server.replication": {
+       "p50": 1.1,
+       "p95": 1.3
+      },
+      "server.encode": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "server.tick": {
+       "p50": 5.9,
+       "p95": 7.5
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.2,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 0.5,
+      "p95": 0.7,
+      "max": 0.9
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.9,
+      "p95": 1.2,
+      "max": 4.3
+     },
+     "gpuMs": {
+      "p50": 0.31,
+      "p95": 1.2,
+      "max": 2.1,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.6,
+      "p95": 0.8,
+      "max": 0.9
+     },
+     "drawCallsPerFrame": 13,
+     "entities": 138,
+     "firstPerson": {
+      "chunks": 22,
+      "builds": 0,
+      "billboards": 14,
+      "cards": 173,
+      "blobs": 0,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 13,
+      "fogEnd": 252
+     },
+     "workerTickMs": {
+      "p50": 1.9,
+      "p95": 2.5
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.2,
+       "p95": 0.3
+      },
+      "realm.entityPhysics": {
+       "p50": 0.6,
+       "p95": 0.8
+      },
+      "server.replication": {
+       "p50": 0.3,
+       "p95": 0.4
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.9,
+       "p95": 2.5
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0.1
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 0.8,
+      "p95": 1,
+      "max": 1.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 0.9,
+      "p95": 1.1,
+      "max": 2.5
+     },
+     "gpuMs": {
+      "p50": 0.44,
+      "p95": 0.8,
+      "max": 1.73,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 0.9,
+      "p95": 1.1,
+      "max": 1.3
+     },
+     "drawCallsPerFrame": 57,
+     "entities": 261,
+     "firstPerson": {
+      "chunks": 88,
+      "builds": 0,
+      "billboards": 125,
+      "cards": 508,
+      "blobs": 0,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 57,
+      "fogEnd": 1006
+     },
+     "workerTickMs": {
+      "p50": 1.9,
+      "p95": 2.3
+     },
+     "authorityStagesMs": {
+      "server.decode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "realm.entityPhysics": {
+       "p50": 0.6,
+       "p95": 0.8
+      },
+      "server.replication": {
+       "p50": 0.4,
+       "p95": 0.5
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.9,
+       "p95": 2.3
+      }
+     },
+     "atlasMiB": 0
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 600,
+     "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.4
+     },
+     "missed": 0,
+     "slowFrames": [],
+     "upload": {
+      "frames": 0,
+      "kiB": {
+       "p50": null,
+       "p95": null,
+       "max": null
+      },
+      "pages": 0,
+      "totalMiB": 0
+     },
+     "renderMs": {
+      "p50": 1.7,
+      "p95": 2,
+      "max": 2.2
+     },
+     "submitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "sceneSubmitMs": {
+      "p50": 0,
+      "p95": 0,
+      "max": 0
+     },
+     "updateMs": {
+      "p50": 1.1,
+      "p95": 1.3,
+      "max": 1.8
+     },
+     "gpuMs": {
+      "p50": 1.26,
+      "p95": 1.35,
+      "max": 3.05,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "renderFinishMs": {
+      "p50": 1.8,
+      "p95": 2,
+      "max": 2.2
+     },
+     "drawCallsPerFrame": 262,
+     "entities": 536,
+     "firstPerson": {
+      "chunks": 259,
+      "builds": 0,
+      "billboards": 450,
+      "cards": 1266,
+      "blobs": 0,
+      "sunRedraws": 0,
+      "cars": 0,
+      "calls": 262,
+      "fogEnd": 1600
+     },
+     "workerTickMs": {
+      "p50": 1.8,
+      "p95": 2
+     },
+     "authorityStagesMs": {
+      "server.autotile": {
+       "p50": 0,
+       "p95": 0
+      },
+      "realm.saveSweep": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "realm.ai": {
+       "p50": 0.1,
+       "p95": 0.2
+      },
+      "realm.entityPhysics": {
+       "p50": 0.5,
+       "p95": 0.6
+      },
+      "server.replication": {
+       "p50": 0.5,
+       "p95": 0.6
+      },
+      "server.encode": {
+       "p50": 0,
+       "p95": 0.1
+      },
+      "server.tick": {
+       "p50": 1.8,
+       "p95": 2
+      },
+      "server.decode": {
+       "p50": 0,
+       "p95": 0
+      }
+     },
+     "atlasMiB": 0
+    }
+   ]
+  }
+ ]
+}

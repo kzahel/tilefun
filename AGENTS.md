@@ -43,6 +43,11 @@ Single-player authority runs in a Worker using the shared server implementation;
 prediction and rendering remain on the main thread. Read
 [client/server boundaries](docs/client-server-architecture.md) for ownership.
 
+Renderer work follows [renderer unification](docs/topics/renderer-unification.md):
+the 3D scene is becoming the one world renderer, and the fixed 2D view stays the
+default top-down renderer until that topic's owner gates. Do not delete or degrade
+it before then; update the topic's tracker when a slice changes state.
+
 Engine changes must account for affected embedded labs. Read
 [embedded engine labs](docs/topics/embedded-engine-labs.md) before changing shared
 simulation, prediction, presentation or renderer lifecycle; keep game and lab

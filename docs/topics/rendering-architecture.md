@@ -1,5 +1,13 @@
 # Rendering architecture and backend separation
 
+[248](../tactical/248-renderer-unification.md) (owner decision 2026-11-14) commits
+to one world renderer: the first-person 3D scene, with top-down as an oblique
+camera on it and WebXR on the same scene. The fixed GPU backend described below
+stays the default top-down renderer until the owner gates in
+[renderer unification](renderer-unification.md), which owns that work's status,
+parity checklist and device scorecard. Do not delete or degrade the fixed view
+before those gates. This topic keeps backend boundaries and resource lifetimes.
+
 [241](../tactical/241-budget-terrain-raster-completion.md) closes the terrain
 budget blind spot identified in [240](../tactical/240-phone-pause-attribution.md).
 CPU-requested canvases can defer drawing until a page copy; preparation now reads
@@ -160,7 +168,7 @@ Canvas: the game, labs, explorer and probes draw only through WebGL2, ignore
 Canvas host is deleted (slice 3); a native Canvas2D raster (`ReviewRasterBackend`)
 remains only for fingerprinted review images.
 Bounded unchanged car images and ordered multi-texture GPU batches are delivered.
-Updated: 2026-11-11.
+Updated: 2026-11-14.
 
 [169](../tactical/169-wheel-lift-towing.md) groups a tow truck and its car in one
 shared GPU depth target. Per-draw absolute transforms reset both cached assets;

@@ -48,6 +48,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Natural landscapes](natural-landscapes.md) | Overworld forest/tree/pond preview; shared explorer/lab composition review and future landforms |
 | [Multiplayer networking](multiplayer-networking.md) | Replication, channel routing, last-sent baselines and remaining loss/reconnect validation |
 | [Player prediction](player-prediction.md) | Reproduction-first investigation of moving NPC contact and car/train support timelines |
+| [Renderer unification](renderer-unification.md) | One world renderer: the 3D scene with top-down, first-person and XR cameras; slice tracker, top-down parity checklist, device scorecard and the gate for retiring the fixed 2D view |
 | [Rendering architecture](rendering-architecture.md) | Backend separation, resource ownership, frame lifetime and incremental renderer replacement |
 | [3D assets](3d-assets.md) | Sprite reconstruction, physical/visual proxies, car investigation and model-assisted asset experiments |
 | [Game diagnostics](game-diagnostics.md) | Automatic fault reports, local authority watchdog, bounded delivery and owner inbox |

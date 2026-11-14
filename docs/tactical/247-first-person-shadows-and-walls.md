@@ -192,6 +192,10 @@ five items:
 
 ## Direction for the first-person view
 
+Since 2026-11-14 [248](248-renderer-unification.md) owns this direction: items 1
+and 2 are its slices 2 and 1, and the 3D scene is to become the one world
+renderer. The list below is as recorded on 2026-11-13.
+
 Recommended order. Each is a separate slice.
 
 1. **Ground artwork.** The fixed view's ground is already a top-down picture, so
