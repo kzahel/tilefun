@@ -7,6 +7,35 @@ const LAYER_BYTES = ATLAS_PAGE * ATLAS_PAGE * 4;
 /** Staging textures are reused per page size, least recently used first out. */
 const STAGING_BYTES = 8 * 1024 * 1024;
 
+/** A triangle over the whole target that writes one layer's texels as they are. */
+function layerCopier() {
+  const uniforms = { atlas: { value: null as THREE.Texture | null }, layer: { value: 0 } };
+  const material = new THREE.RawShaderMaterial({
+    glslVersion: THREE.GLSL3,
+    uniforms,
+    vertexShader: "in vec3 position;\nvoid main() { gl_Position = vec4(position.xy, 0.0, 1.0); }",
+    fragmentShader: `precision highp float;
+precision highp sampler2DArray;
+uniform sampler2DArray atlas;
+uniform int layer;
+out vec4 texel;
+void main() { texel = texelFetch(atlas, ivec3(ivec2(gl_FragCoord.xy), layer), 0); }`,
+    depthTest: false,
+    depthWrite: false,
+    blending: THREE.NoBlending,
+  });
+  const geometry = new THREE.BufferGeometry();
+  geometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(new Float32Array([-1, -1, 0, 3, -1, 0, -1, 3, 0]), 3),
+  );
+  const mesh = new THREE.Mesh(geometry, material);
+  mesh.frustumCulled = false;
+  const scene = new THREE.Scene();
+  scene.add(mesh);
+  return { scene, camera: new THREE.Camera(), uniforms, material, geometry };
+}
+
 /**
  * Paged raster images (sprite sheets, terrain chunks, shadow ellipses, overlays)
  * share one TEXTURE_2D_ARRAY, so interleaved sources no longer split batches at
@@ -31,6 +60,8 @@ export class GpuPageAtlas {
   stagingBytes = 0;
   /** Read framebuffer for page copies; lost and remade with the context. */
   private copyFramebuffer: WebGLFramebuffer | null = null;
+  /** Draws a layer of one atlas into another when the array grows or shrinks. */
+  private copier: ReturnType<typeof layerCopier> | null = null;
   resizes = 0;
 
   constructor(
@@ -152,18 +183,57 @@ export class GpuPageAtlas {
     this.renderer.initRenderTarget(next);
     const old = this.target,
       keep = Math.min(old?.depth ?? 0, layers);
-    if (old && keep)
-      this.renderer.copyTextureToTexture(
-        old.texture,
-        next.texture,
-        new THREE.Box3(new THREE.Vector3(0, 0, 0), new THREE.Vector3(ATLAS_PAGE, ATLAS_PAGE, keep)),
-        new THREE.Vector3(0, 0, 0),
-      );
+    if (old && keep) {
+      if (this.renderer.xr.isPresenting) {
+        const drawing = this.renderer.getRenderTarget();
+        this.drawLayers(old.texture, next, keep);
+        this.renderer.setRenderTarget(drawing);
+      } else
+        this.renderer.copyTextureToTexture(
+          old.texture,
+          next.texture,
+          new THREE.Box3(
+            new THREE.Vector3(0, 0, 0),
+            new THREE.Vector3(ATLAS_PAGE, ATLAS_PAGE, keep),
+          ),
+          new THREE.Vector3(0, 0, 0),
+        );
+    }
     old?.dispose();
     this.restoreTarget();
     this.target = next;
     this.allocator.resize(layers);
     this.resizes++;
+  }
+  /**
+   * Draw the first `layers` layers of one atlas texture into another's: the
+   * copy used while a headset session presents (252).
+   *
+   * On a Quest 3 inside a session, every framebuffer copy (`copyTexSubImage3D`,
+   * `blitFramebuffer`, the renderer's texture copy) read the atlas without the
+   * pages written since the session began, while sampling it returned them all.
+   * Outside a session the renderer's copy stays as it was: it has not been seen
+   * to fail there, and the fixed view's path is left unchanged.
+   */
+  private drawLayers(from: THREE.Texture, to: THREE.WebGLArrayRenderTarget, layers: number) {
+    const { renderer } = this;
+    this.copier ??= layerCopier();
+    const { scene, camera, uniforms } = this.copier;
+    // A headset's eyes replace the camera of every render while its output is on.
+    const { xr } = renderer;
+    const headset = xr.enabled;
+    xr.enabled = false;
+    uniforms.atlas.value = from;
+    try {
+      for (let layer = 0; layer < layers; layer++) {
+        uniforms.layer.value = layer;
+        renderer.setRenderTarget(to, layer);
+        renderer.render(scene, camera);
+      }
+    } finally {
+      uniforms.atlas.value = null;
+      xr.enabled = headset;
+    }
   }
   /** Forget every region; context recovery and asset changes rebuild pages. */
   clear() {
@@ -173,6 +243,9 @@ export class GpuPageAtlas {
     this.target?.dispose();
     this.target = null;
     this.copyFramebuffer = null;
+    this.copier?.material.dispose();
+    this.copier?.geometry.dispose();
+    this.copier = null;
     this.allocator = new AtlasAllocator(ATLAS_PAGE);
   }
 }
