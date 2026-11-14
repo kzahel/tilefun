@@ -135,6 +135,10 @@ export class View {
    * and overlays follow what is on screen, not the chosen kind: the fixed view
    * still draws while the 3D scene loads, in the editor or without graphics. */
   drawn3d = false;
+  /** The latest display frame drew this view's top-down framing in the 3D scene
+   * (251). Everything else about the view stays as for the fixed view: the same
+   * camera, controls, markers and streaming interest. */
+  topDown3d = false;
   /** A 3D view's streaming interest while it is drawn in 3D: world pixels around
    * the camera's centre (the seat it follows). Whenever the fixed view draws (the
    * editor, a fallback), the interest is its visible rectangle. */

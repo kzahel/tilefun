@@ -1,10 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { FirstPersonControl } from "../client/FirstPersonControl.js";
-import { CHUNK_SIZE_PX } from "../config/constants.js";
+import { CHUNK_SIZE_PX, PIXEL_SCALE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
 import { NEUTRAL_MOVEMENT, neutralSample, type SeatInput } from "../input/SeatInput.js";
 import { NORTH_YAW } from "../rendering/firstperson/FirstPersonCamera.js";
+import type {
+  FirstPersonFrame,
+  FirstPersonView,
+} from "../rendering/firstperson/FirstPersonView.js";
 import { ClientSeat } from "../session/ClientSeat.js";
 import type { SeatFrame } from "../session/DeviceSeats.js";
 import { followSeat, View } from "../session/View.js";
@@ -13,6 +17,7 @@ import {
   firstPersonAim,
   firstPersonMovement,
   firstPersonTick,
+  renderFirstPerson,
   turnGuestFrames,
 } from "./firstPersonPlay.js";
 
@@ -271,5 +276,105 @@ describe("first person per seat", () => {
     control.sync(views, new Set([0])); // the guest left; a new guest starts top-down
     expect(control.seatActive(1)).toBe(false);
     expect(guest.look).toBeNull();
+  });
+});
+
+describe("top-down play in the 3D scene", () => {
+  it("keeps the fixed view's controls, markers and streaming interest", () => {
+    const { control, gc, cancelled, view, sync } = setup();
+    view.setRegion({ x: 0, y: 0, width: 1280, height: 720 });
+    view.camera.snapTo(1000, 2000);
+    const fixed = view.interestRange();
+    control.topDown = true;
+    sync();
+    control.markTopDown(view);
+    expect(view.topDown3d).toBe(true);
+    expect(control.drawing3d).toBe(true);
+    // Not first person: no camera-relative movement, look, or cancelled taps.
+    expect(view.drawn3d).toBe(false);
+    expect(control.drawing).toBe(false);
+    expect(firstPersonTick(gc, 1 / 60, undefined)).toBeUndefined();
+    expect(cancelled.tap).toBe(0);
+    sync();
+    expect(view.interestRadius).toBeUndefined();
+    expect(view.interestRange()).toEqual(fixed);
+    // A fallback frame (the editor, lost graphics) is the fixed view again.
+    control.hide(view);
+    expect(view.topDown3d).toBe(false);
+    expect(control.drawing3d).toBe(false);
+  });
+
+  it("lets a seat go to first person and back in the same scene", async () => {
+    const { control, view, guest, sync } = setup();
+    control.topDown = true;
+    sync();
+    await vi.waitFor(() => expect(control.scene(view)).toBeDefined());
+    const scene = control.scene(view) as FirstPersonView;
+    const dispose = vi.spyOn(scene, "dispose");
+    control.markTopDown(view);
+    control.setActive(true, 0);
+    expect(view.look).toEqual({ yaw: 0, pitch: 0 });
+    control.markDrawn(view);
+    expect(view.topDown3d).toBe(false);
+    control.setActive(false);
+    // Back to top-down at once, still in 3D: the scene and its chunks are kept.
+    expect(view.look).toBeNull();
+    expect(view.drawn3d).toBe(false);
+    expect(control.scene(view)).toBe(scene);
+    expect(dispose).not.toHaveBeenCalled();
+    // Every view of the device follows the choice.
+    expect(control.scene(guest)).toBeDefined();
+    control.topDown = false;
+    expect(dispose).toHaveBeenCalledTimes(1);
+    expect(control.scene(view)).toBeUndefined();
+    expect(control.scene(guest)).toBeUndefined();
+  });
+
+  function drawable(interior?: object) {
+    const made = setup();
+    const { control, view } = made;
+    const frames: FirstPersonFrame[] = [];
+    vi.spyOn(control, "scene").mockReturnValue({
+      render: (frame: FirstPersonFrame) => frames.push(frame),
+    } as unknown as FirstPersonView);
+    const gc = {
+      ...made.gc,
+      stateView: { entities: [], props: [], world: {}, interior },
+      view3d: {
+        draw(_region: unknown, draw: (target: object) => void) {
+          draw({});
+          return true;
+        },
+      },
+    } as unknown as GameContext;
+    view.setRegion({ x: 0, y: 0, width: 1200, height: 600 });
+    view.camera.snapTo(500, 300);
+    view.camera.zoom = 0.5;
+    return { ...made, gc, frames };
+  }
+
+  it("draws through the view's own fixed camera, with the player's body", () => {
+    const { control, gc, view, frames, sync } = drawable();
+    control.topDown = true;
+    sync();
+    expect(renderFirstPerson(gc, view, 1)).toBe(true);
+    expect(view.topDown3d).toBe(true);
+    const scale = PIXEL_SCALE * 0.5;
+    expect(frames[0]?.topDown).toEqual({ scale });
+    expect(frames[0]?.eye).toMatchObject({ x: 500, y: 300 });
+    expect(frames[0]?.interior).toBeUndefined();
+    // Not chosen: the fixed view draws, and the view says so.
+    control.topDown = false;
+    expect(renderFirstPerson(gc, view, 1)).toBe(false);
+    expect(view.topDown3d).toBe(false);
+  });
+
+  it("leaves rooms to the fixed view, which draws them roofless", () => {
+    const { control, gc, view, frames, sync } = drawable({ id: 1 });
+    control.topDown = true;
+    sync();
+    expect(renderFirstPerson(gc, view, 1)).toBe(false);
+    expect(view.topDown3d).toBe(false);
+    expect(frames).toHaveLength(0);
   });
 });

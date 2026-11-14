@@ -87,19 +87,20 @@ function roofShift(
 /**
  * Upright placement of one collected actor sprite: feet at its displayed position
  * and height (minus the draw offset), with four-direction rows reselected for the
- * side that faces the eye.
+ * side that faces the eye. Seen from the `"south"` (the top-down camera, whose
+ * rays are parallel) every actor shows the row it was drawn with.
  */
 export function actorBillboard(
   item: SpriteItem,
   sheet: Spritesheet,
-  eye: FirstPersonEye,
+  eye: Pick<FirstPersonEye, "x" | "y"> | "south",
   ready: ReadonlySet<string>,
 ): Billboard {
   const shift = roofShift(item.meshRoofSupport, ready);
   const x = item.wx + shift.x,
     y = item.wy + shift.y;
   const row =
-    item.facing === undefined
+    item.facing === undefined || eye === "south"
       ? item.frameRow
       : apparentDirection(item.facing, Math.atan2(y - eye.y, x - eye.x));
   return {

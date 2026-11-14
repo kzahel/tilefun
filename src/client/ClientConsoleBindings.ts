@@ -59,6 +59,12 @@ export function registerClientConsole(
   });
   if (new URLSearchParams(location.search).get("view") === "fps")
     clientCVars.r_firstperson.set(true);
+  // The top-down view through the 3D scene (251): an opt-in for the whole device.
+  clientCVars.r_topdown3d.onChange((val) => {
+    if (gc.firstPerson) gc.firstPerson.topDown = val;
+  });
+  if (new URLSearchParams(location.search).get("view") === "topdown3d")
+    clientCVars.r_topdown3d.set(true);
   clientCVars.r_fpshadows.onChange((val) => {
     if (gc.firstPerson) gc.firstPerson.shadows = val;
   });

@@ -9,10 +9,12 @@ import { furnitureAsset, INTERIOR_WALL_TYPE } from "../interiors/GameplayInterio
 import { compileGameplayRoom, initialRoom } from "../interiors/GameplayRoom.js";
 import { collectWorldSprites } from "../rendering/collectScene.js";
 import { entityHeading } from "../rendering/EntityMeshPose.js";
+import { type FirstPersonEye, NORTH_YAW } from "../rendering/firstperson/FirstPersonCamera.js";
 import type {
   FirstPersonInterior,
   InteriorFurnitureArt,
 } from "../rendering/firstperson/FirstPersonInterior.js";
+import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js";
 import type { SpriteItem } from "../rendering/SceneItem.js";
 import type { SeatFrame } from "../session/DeviceSeats.js";
 import type { View } from "../session/View.js";
@@ -138,31 +140,87 @@ function currentInterior(
 }
 
 /** True when a view should be drawn in 3D this frame: its seat chose first
- * person, the host can draw 3D into its region and its scene has loaded. */
+ * person or the device draws top-down in 3D, the host can draw 3D into its
+ * region and its scene has loaded. */
 export function wantsFirstPerson(gc: GameContext, view: View): boolean {
-  return !!view.look && !!gc.view3d && !view.region.mask && !!gc.firstPerson?.scene(view);
+  return !!gc.view3d && !view.region.mask && !!gc.firstPerson?.scene(view);
+}
+
+/** What a 3D view shows this frame: where it looks from, and what is collected. */
+interface Seen {
+  readonly eye: FirstPersonEye;
+  /** The viewer's own body, left out of its own first-person view. */
+  readonly own: number | undefined;
+  readonly cull: { left: number; right: number; top: number; bottom: number };
+  readonly drawRadius: number;
+  readonly topDown: { scale: number } | undefined;
+}
+
+/** Collection beyond the ground on screen in a top-down 3D view: wide sprites at
+ * the sides, and raised or tall bodies south of the bottom edge. */
+const TOP_DOWN_CULL_SIDE = 96;
+const TOP_DOWN_CULL_BELOW = 384;
+
+/** The seat's eye in first person; the view's own fixed camera for top-down (251),
+ * already presented for this display frame. */
+function seen(gc: GameContext, control: FirstPersonControl, view: View, alpha: number) {
+  if (view.look) {
+    const eye = view.policy.eye?.(gc.session, view.look, alpha);
+    if (!eye) return undefined;
+    const lifted = { ...eye, z: eye.z + control.lift };
+    const drawRadius = VIEW_DISTANCES[control.viewDistance];
+    return {
+      eye: lifted,
+      own: eye.own,
+      cull: {
+        left: eye.x - drawRadius,
+        right: eye.x + drawRadius,
+        top: eye.y - drawRadius,
+        bottom: eye.y + drawRadius,
+      },
+      drawRadius,
+      topDown: undefined,
+    } satisfies Seen;
+  }
+  // Rooms are drawn roofless by the fixed view; the 3D scene has only walled rooms.
+  if (!control.topDown || gc.stateView.interior) return undefined;
+  const { camera } = view;
+  const ground = obliqueGround(
+    { x: camera.x, y: camera.y, scale: camera.scale },
+    view.region.width,
+    view.region.height,
+  );
+  return {
+    eye: { x: camera.x, y: camera.y, z: 0, yaw: NORTH_YAW, pitch: 0 },
+    own: undefined,
+    cull: grown(ground, TOP_DOWN_CULL_SIDE, TOP_DOWN_CULL_BELOW),
+    drawRadius: Math.hypot(ground.right - ground.left, ground.bottom - ground.top) / 2,
+    topDown: { scale: camera.scale },
+  } satisfies Seen;
 }
 
 /**
- * Draw one view of play in first person (229, per view since 249) into its
- * region. Returns false to let the fixed view draw it (not chosen, loading,
- * failed to load, graphics lost, or the seat's body is not streamed yet).
- * Indoors draws the room (230). Drivers get a chase camera behind their vehicle.
+ * Draw one view of play in the 3D scene (229, per view since 249) into its
+ * region: first person for a seat that chose it, or the top-down view through
+ * the fixed view's camera when the device opted in (251). Returns false to let
+ * the fixed view draw it (not chosen, loading, failed to load, graphics lost,
+ * the seat's body is not streamed yet, or top-down inside a room).
+ * In first person, indoors draws the room (230) and drivers get a chase camera
+ * behind their vehicle.
  */
 export function renderFirstPerson(gc: GameContext, view: View, alpha: number): boolean {
   const control = gc.firstPerson;
   const { stateView, view3d } = gc;
   const scene = control && wantsFirstPerson(gc, view) ? control.scene(view) : undefined;
-  const seen = view.look && scene ? view.policy.eye?.(gc.session, view.look, alpha) : undefined;
-  if (!control || !scene || !view3d || !seen) {
+  const from = control && scene ? seen(gc, control, view, alpha) : undefined;
+  if (!control || !scene || !view3d || !from) {
     control?.hide(view);
     return false;
   }
-  const eye = { ...seen, z: seen.z + control.lift };
+  const { eye, drawRadius, topDown } = from;
   const entities =
     gc.doorPresentation?.entities(stateView.entities, gc.realmId ?? null) ?? stateView.entities;
-  const drawRadius = VIEW_DISTANCES[control.viewDistance];
-  const interior = currentInterior(gc, control);
+  const interior = topDown ? undefined : currentInterior(gc, control);
   const frame = control.frame;
   frame.presentationTime = gc.time?.presentationSeconds ?? 0;
   const items = frame.begin(false);
@@ -170,16 +228,11 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
   try {
     collectWorldSprites({
       // First person hides the viewer's own body; a driver is drawn inside the vehicle.
-      entities: seen.own === undefined ? entities : entities.filter((e) => e.id !== seen.own),
+      entities: from.own === undefined ? entities : entities.filter((e) => e.id !== from.own),
       props: stateView.props,
       world: stateView.world,
       alpha,
-      cull: {
-        left: eye.x - drawRadius,
-        right: eye.x + drawRadius,
-        top: eye.y - drawRadius,
-        bottom: eye.y + drawRadius,
-      },
+      cull: from.cull,
       items,
       frame,
       // Casters carry their shadow shapes, as for the fixed view's depth pass (247).
@@ -194,14 +247,16 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
       drawRadius,
       interior,
       shadows: control.shadows,
+      topDown,
     };
     // Through the render host's own renderer, into this view's region (249).
     drawn = view3d.draw(view.region, (target) => scene.render(content, target));
   } finally {
     frame.release();
   }
-  if (drawn) control.markDrawn(view);
-  else control.hide(view);
+  if (!drawn) control.hide(view);
+  else if (topDown) control.markTopDown(view);
+  else control.markDrawn(view);
   return drawn;
 }
 

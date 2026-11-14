@@ -54,6 +54,9 @@ export class FirstPersonControl {
   shadows = new URLSearchParams(location.search).get("fpshadows") !== "0";
   /** Captures only: raises every eye by this many world pixels for an overview. */
   lift = 0;
+  /** Top-down views draw in the 3D scene through the fixed view's camera (251).
+   * A device-wide opt-in (`r_topdown3d`, `?view=topdown3d`); off by default. */
+  private topDownChoice = false;
   /** Presentation storage for 3D views; their mesh poses never share the fixed view's. */
   readonly frame = new SceneFrame({
     allCars3d: new URLSearchParams(location.search).has("allcars3d"),
@@ -111,9 +114,9 @@ export class FirstPersonControl {
     // come first (a menu over play draws without ticking).
     for (const view of this.views) if (view.seat === seat) this.apply(view);
     // A view the device has since replaced may still hold the seat's scene.
-    if (!value)
+    if (!value && !this.topDownChoice)
       for (const view of [...this.scenes.keys()]) if (view.seat === seat) this.release(view);
-    if (!this.chosen.size) this.failed = false;
+    if (!this.chosen.size && !this.topDownChoice) this.failed = false;
   }
 
   seatActive(seat: number): boolean {
@@ -123,6 +126,25 @@ export class FirstPersonControl {
   /** Seat 0 chose first person. */
   get active(): boolean {
     return this.chosen.has(0);
+  }
+
+  get topDown(): boolean {
+    return this.topDownChoice;
+  }
+
+  /** Draw every top-down view in the 3D scene, or go back to the fixed view. */
+  set topDown(value: boolean) {
+    if (value === this.topDownChoice || (value && this.disposed)) return;
+    this.topDownChoice = value;
+    for (const view of this.views) this.apply(view);
+    if (!value) for (const view of [...this.scenes.keys()]) if (!view.look) this.release(view);
+    if (!value && !this.chosen.size) this.failed = false;
+  }
+
+  /** True when the latest play frame drew seat 0's view in the 3D scene, in
+   * first person or top-down. */
+  get drawing3d(): boolean {
+    return !!this.host && (this.host.drawn3d || this.host.topDown3d);
   }
 
   /** Seat 0's look. */
@@ -153,7 +175,9 @@ export class FirstPersonControl {
     const heading = this.chosen.get(view.seat);
     if (heading === undefined) {
       view.look = null;
-      this.release(view);
+      // A top-down view may keep drawing in the same scene.
+      if (this.topDownChoice) view.drawn3d = false;
+      else this.release(view);
     } else if (!view.look) view.look = { yaw: heading, pitch: 0 };
     // A guest's view is made again after leaving play: it resumes this heading.
     else this.chosen.set(view.seat, view.look.yaw);
@@ -174,8 +198,15 @@ export class FirstPersonControl {
     if (document.pointerLockElement === canvas) document.exitPointerLock();
   }
 
+  /** Called by the play view after drawing a view's top-down frame in the 3D scene. */
+  markTopDown(view: View): void {
+    this.hide(view);
+    view.topDown3d = true;
+  }
+
   /** Called by the play view after drawing a view's frame in first person. */
   markDrawn(view: View): void {
+    view.topDown3d = false;
     view.drawn3d = true;
     // Now, not at the next tick: a menu over play draws frames without ticking,
     // and the frame's terrain preparation reads the view's interest range.
@@ -224,7 +255,8 @@ export class FirstPersonControl {
   /** The view's loaded 3D scene, or undefined while the module loads or after it
    * failed to load. */
   scene(view: View): FirstPersonView | undefined {
-    if (!view.look || !this.chosen.has(view.seat) || this.disposed || this.failed) return undefined;
+    const eye = !!view.look && this.chosen.has(view.seat);
+    if ((!eye && !this.topDownChoice) || this.disposed || this.failed) return undefined;
     const existing = this.scenes.get(view);
     if (existing) return existing;
     if (this.create) {
@@ -257,7 +289,7 @@ export class FirstPersonControl {
 
   /** The fixed view draws this view instead (loading, failed to load, graphics lost). */
   hide(view: View): void {
-    view.drawn3d = false;
+    view.drawn3d = view.topDown3d = false;
     if (view === this.host && document.pointerLockElement === this.canvas())
       document.exitPointerLock();
   }
@@ -265,12 +297,12 @@ export class FirstPersonControl {
   /** The fixed view draws every view (the editor and other scenes over play):
    * give back ordinary controls and the pointer. */
   hideView(): void {
-    for (const view of this.scenes.keys()) view.drawn3d = false;
+    for (const view of this.scenes.keys()) view.drawn3d = view.topDown3d = false;
     if (this.host) this.hide(this.host);
   }
 
   private release(view: View): void {
-    view.drawn3d = false;
+    view.drawn3d = view.topDown3d = false;
     const scene = this.scenes.get(view);
     if (!scene) return;
     scene.dispose();
@@ -281,6 +313,7 @@ export class FirstPersonControl {
   dispose(): void {
     if (this.disposed) return;
     for (const seat of [...this.chosen.keys()]) this.setSeat(seat, false);
+    this.topDown = false;
     this.disposed = true;
     for (const view of [...this.scenes.keys()]) this.release(view);
     this.listen(false);

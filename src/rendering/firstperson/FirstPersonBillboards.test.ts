@@ -1,7 +1,11 @@
 import * as THREE from "three";
 import { describe, expect, it, vi } from "vitest";
+import { Spritesheet } from "../../assets/Spritesheet.js";
+import { Direction } from "../../entities/Entity.js";
+import type { SpriteItem } from "../SceneItem.js";
 import type { PageRegion } from "../View3dHost.js";
 import {
+  actorBillboard,
   type Billboard,
   CardArrays,
   type CardPages,
@@ -58,6 +62,35 @@ function atlas(pageSize = 512) {
 }
 
 const rounded = (values: Float32Array) => [...values].map((v) => Math.round(v * 10) / 10);
+
+describe("an actor's card", () => {
+  const sheet = new Spritesheet({ width: 64, height: 64 } as unknown as HTMLCanvasElement, 16, 16);
+  const actor = {
+    wx: 100,
+    wy: 100,
+    zOffset: 0,
+    drawOffsetY: 0,
+    frameCol: 1,
+    frameRow: Direction.Left,
+    facing: Direction.Left,
+    spriteWidth: 16,
+    spriteHeight: 16,
+    flipX: false,
+  } as SpriteItem;
+  const row = (b: Billboard) => b.sy / 16;
+
+  it("shows the side that faces a first-person eye", () => {
+    // Seen from the east, an actor facing west (left) shows its back.
+    expect(row(actorBillboard(actor, sheet, { x: 200, y: 100 }, new Set()))).toBe(Direction.Up);
+    // Seen from the south it is the row the fixed view draws.
+    expect(row(actorBillboard(actor, sheet, { x: 100, y: 200 }, new Set()))).toBe(Direction.Left);
+  });
+
+  it("shows its drawn row to the top-down camera wherever it stands", () => {
+    for (const wx of [-500, 100, 900])
+      expect(row(actorBillboard({ ...actor, wx }, sheet, "south", new Set()))).toBe(Direction.Left);
+  });
+});
 
 describe("first-person cards", () => {
   it("writes each card as a foot centre, corner offsets and its place in the atlas", () => {

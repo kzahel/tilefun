@@ -98,10 +98,10 @@ let server, browser, page, testOrigin;
 async function samplePage({ seconds, measureFinish = true }) {
   const game = document.querySelector("#game").__game;
   const surface = game.renderer.surface;
-  // With `--query=view=fps` play is drawn by the first-person view on the same
-  // renderer (248): GPU time and the finish window need no other context, and
-  // draw calls come from the view's own count.
-  const firstPerson = !!game.firstPerson?.drawing;
+  // With `--query=view=fps` or `view=topdown3d` play is drawn by the 3D scene on
+  // the same renderer (248): GPU time and the finish window need no other
+  // context, and draw calls come from the view's own count.
+  const firstPerson = !!game.firstPerson?.drawing3d;
   const gl = surface?.renderer?.getContext?.();
   const timer = gl?.getExtension("EXT_disjoint_timer_query_webgl2") ?? null;
   const callbacks = game.loop.callbacks,
