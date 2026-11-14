@@ -4,7 +4,8 @@ import type { Chunk } from "../world/Chunk.js";
 import type { GpuMeshBodies } from "./GpuMeshBodies.js";
 import { PAGE } from "./GpuPages.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
-import type { SharedMeshAssets, SharedPages, View3dHost } from "./View3dHost.js";
+import { createXrHost } from "./GpuXr.js";
+import type { SharedMeshAssets, SharedPages, View3dHost, View3dTarget } from "./View3dHost.js";
 
 const clearColor = new THREE.Color();
 const GROUND_SIZE = { width: CHUNK_SIZE_PX, height: CHUNK_SIZE_PX };
@@ -62,7 +63,19 @@ export function createView3dHost(
     page: (image, x, y) =>
       surface.pages.get(image, x, y, surface.pages.imageSize(image)).region ?? undefined,
   };
+  const viewTarget = (width: number, height: number): View3dTarget => {
+    uploads = 0;
+    return {
+      renderer: surface.renderer,
+      width,
+      height,
+      generation: surface.stats.recoveries,
+      meshes,
+      pages,
+    };
+  };
   return {
+    xr: createXrHost(surface, viewTarget),
     draw(region, draw) {
       if (surface.disposed || surface.lost || region?.mask) return false;
       surface.flush();
@@ -79,9 +92,8 @@ export function createView3dHost(
       renderer.setViewport(x, y, width, height);
       renderer.setScissor(x, y, width, height);
       renderer.setScissorTest(true);
-      uploads = 0;
       try {
-        draw({ renderer, width, height, generation: surface.stats.recoveries, meshes, pages });
+        draw(viewTarget(width, height));
       } finally {
         renderer.setRenderTarget(null);
         renderer.setScissorTest(false);

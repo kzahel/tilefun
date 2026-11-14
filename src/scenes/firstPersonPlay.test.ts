@@ -1,5 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { FirstPersonControl } from "../client/FirstPersonControl.js";
+import { XR_WALK } from "../client/XrControl.js";
 import { CHUNK_SIZE_PX, PIXEL_SCALE } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
 import { Direction } from "../entities/Entity.js";
@@ -53,6 +54,7 @@ function setup(carDriving: GameContext["carDriving"] = "steering") {
 }
 
 const forward = { dx: 0, dy: -1, sprinting: false, jump: false };
+const pick = (m: { dx: number; dy: number }) => ({ dx: m.dx, dy: m.dy });
 
 describe("first-person play input", () => {
   it("keeps ordinary controls until a frame was actually drawn in first person", () => {
@@ -367,6 +369,69 @@ describe("top-down play in the 3D scene", () => {
     control.topDown = false;
     expect(renderFirstPerson(gc, view, 1)).toBe(false);
     expect(view.topDown3d).toBe(false);
+  });
+
+  it("draws seat 0 to a headset's eyes and leaves no view to the fixed view (252)", () => {
+    const { control, gc: base, view, guest, frames, sync } = drawable();
+    const rig = { x: 480, y: 290, z: 0, yaw: 0, pixelsPerMetre: 18 };
+    const xr = {
+      immersive: true,
+      walking: true,
+      seen: (seen: View) =>
+        seen.seat === 0
+          ? {
+              eye: { x: 500, y: 300, z: 20, yaw: 0.5, pitch: 0.1, own: 9 },
+              cull: { left: 0, right: 1000, top: 0, bottom: 600 },
+              drawRadius: 640,
+              headset: { rig },
+            }
+          : undefined,
+      draw: vi.fn((draw: (target: object) => void) => {
+        draw({});
+        return true;
+      }),
+      tick: vi.fn((look: { yaw: number }) => {
+        look.yaw = Math.PI / 2; // the head faces south
+      }),
+    };
+    const gc = { ...base, xr } as unknown as GameContext;
+    control.setActive(true, 0);
+    sync();
+    expect(renderFirstPerson(gc, view, 1)).toBe(true);
+    expect(xr.draw).toHaveBeenCalledOnce();
+    expect(frames[0]).toMatchObject({ headset: { rig }, drawRadius: 640 });
+    expect(frames[0]?.eye).toMatchObject({ x: 500, y: 300, z: 20, yaw: 0.5 });
+    expect(view.drawn3d).toBe(true);
+    // A guest has no eyes in the headset, and the fixed view must not draw it.
+    expect(renderFirstPerson(gc, guest, 1)).toBe(true);
+    expect(frames).toHaveLength(1);
+    // Nor when the headset cannot be drawn to this frame.
+    xr.draw.mockReturnValue(false);
+    expect(renderFirstPerson(gc, view, 1)).toBe(true);
+    expect(view.drawn3d).toBe(true);
+
+    // The headset turns the look in place of the stick, and the player walks.
+    const shown = firstPersonTick(gc, 1 / 60, undefined);
+    expect(xr.tick).toHaveBeenCalledOnce();
+    const moved = firstPersonMovement(gc, shown, undefined, forward);
+    expect(moved.dx).toBeCloseTo(0, 9);
+    expect(moved.dy).toBeCloseTo(XR_WALK, 9);
+    // Driving keeps full input.
+    const car = createVehicle("compact-1", 0, 0, Direction.Right);
+    expect(
+      Math.hypot(
+        ...Object.values(
+          pick(
+            firstPersonMovement(
+              { ...gc, carDriving: "direction" } as GameContext,
+              shown,
+              car,
+              forward,
+            ),
+          ),
+        ),
+      ),
+    ).toBeCloseTo(1, 9);
   });
 
   it("says the fixed view draws when the host cannot draw 3D (graphics lost)", () => {

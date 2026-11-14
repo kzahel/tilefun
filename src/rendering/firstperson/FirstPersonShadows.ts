@@ -146,6 +146,11 @@ export class SunShadows {
     this.camera.updateMatrixWorld(true);
     const previous = renderer.getRenderTarget();
     const { overrideMaterial, fog } = scene;
+    // A headset's eyes replace the camera of every render while its output is
+    // enabled (252); the map is the sun's view, drawn once for both eyes.
+    const { xr } = renderer;
+    const headset = xr.enabled;
+    xr.enabled = false;
     renderer.setRenderTarget(this.target);
     renderer.clear(false, true, false);
     try {
@@ -158,6 +163,7 @@ export class SunShadows {
     } finally {
       scene.overrideMaterial = overrideMaterial;
       scene.fog = fog;
+      xr.enabled = headset;
       renderer.setRenderTarget(previous);
     }
   }

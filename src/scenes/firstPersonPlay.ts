@@ -1,6 +1,6 @@
 import { getModernInteriorsEntry } from "../assets/ModernInteriorsAtlasIndex.js";
 import type { FirstPersonControl } from "../client/FirstPersonControl.js";
-import { VIEW_DISTANCES } from "../config/firstPersonViewDistance.js";
+import { XR_WALK } from "../client/XrControl.js";
 import type { GameContext } from "../core/GameScene.js";
 import type { Entity } from "../entities/Entity.js";
 import { controllerInput } from "../input/ControllerInput.js";
@@ -10,6 +10,7 @@ import { compileGameplayRoom, initialRoom } from "../interiors/GameplayRoom.js";
 import { collectWorldSprites } from "../rendering/collectScene.js";
 import { entityHeading } from "../rendering/EntityMeshPose.js";
 import { type FirstPersonEye, NORTH_YAW } from "../rendering/firstperson/FirstPersonCamera.js";
+import type { HeadsetFrame } from "../rendering/firstperson/FirstPersonCameras.js";
 import type {
   FirstPersonInterior,
   InteriorFurnitureArt,
@@ -32,12 +33,15 @@ export function firstPersonTick(
   const control = gc.firstPerson;
   const view = gc.view;
   if (!control || !view?.drawn3d) return undefined;
-  control.update(
-    view,
-    dt,
-    controllerInput.rightStick,
-    vehicle ? entityHeading(vehicle) : undefined,
-  );
+  // A headset's look is the head's; the stick snap-turns the room (252).
+  if (gc.xr?.immersive && view.look) gc.xr.tick(view.look, dt, controllerInput.rightStick);
+  else
+    control.update(
+      view,
+      dt,
+      controllerInput.rightStick,
+      vehicle ? entityHeading(vehicle) : undefined,
+    );
   gc.tapMovement?.cancel();
   gc.touchHold?.reset();
   return view;
@@ -52,7 +56,12 @@ export function firstPersonMovement<T extends { dx: number; dy: number }>(
   input: T,
 ): T {
   const vehicleAxes = !!vehicle && gc.carDriving === "steering";
-  return view && gc.firstPerson && !vehicleAxes ? gc.firstPerson.movement(view, input) : input;
+  if (!view || !gc.firstPerson || vehicleAxes) return input;
+  const turned = gc.firstPerson.movement(view, input);
+  // First person in a headset walks: full stick speed reads as a run there.
+  return gc.xr?.walking && !vehicle
+    ? { ...turned, dx: turned.dx * XR_WALK, dy: turned.dy * XR_WALK }
+    : turned;
 }
 
 /** Where a seat shown in first person aims (a stationary throw); `view` is
@@ -154,6 +163,8 @@ interface Seen {
   readonly cull: { left: number; right: number; top: number; bottom: number };
   readonly drawRadius: number;
   readonly topDown: { scale: number } | undefined;
+  /** Drawn to a headset's eyes instead of the view's region (252). */
+  readonly headset?: HeadsetFrame | undefined;
 }
 
 /** Collection beyond the ground on screen in a top-down 3D view: wide sprites at
@@ -163,12 +174,26 @@ const TOP_DOWN_CULL_BELOW = 384;
 
 /** The seat's eye in first person; the view's own fixed camera for top-down (251),
  * already presented for this display frame. */
-function seen(gc: GameContext, control: FirstPersonControl, view: View, alpha: number) {
+function seen(
+  gc: GameContext,
+  control: FirstPersonControl,
+  view: View,
+  alpha: number,
+): Seen | undefined {
+  if (gc.xr?.immersive) {
+    const seenInHeadset = gc.xr.seen(
+      view,
+      (look) => view.policy.eye?.(gc.session, look, alpha),
+      () => view.policy.focus?.(gc.session, alpha),
+      control.drawRadius,
+    );
+    return seenInHeadset && { ...seenInHeadset, own: seenInHeadset.eye.own, topDown: undefined };
+  }
   if (view.look) {
     const eye = view.policy.eye?.(gc.session, view.look, alpha);
     if (!eye) return undefined;
     const lifted = { ...eye, z: eye.z + control.lift };
-    const drawRadius = VIEW_DISTANCES[control.viewDistance];
+    const { drawRadius } = control;
     return {
       eye: lifted,
       own: eye.own,
@@ -214,6 +239,8 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
   const scene = control && wantsFirstPerson(gc, view) ? control.scene(view) : undefined;
   const from = control && scene ? seen(gc, control, view, alpha) : undefined;
   if (!control || !scene || !view3d || !from) {
+    // A headset shows nothing else: no fixed view takes this view's place.
+    if (gc.xr?.immersive) return true;
     control?.hide(view);
     return false;
   }
@@ -248,16 +275,20 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
       interior,
       shadows: control.shadows,
       topDown,
+      headset: from.headset,
     };
-    // Through the render host's own renderer, into this view's region (249).
-    drawn = view3d.draw(view.region, (target) => scene.render(content, target));
+    // Through the render host's own renderer (249): into this view's region, or
+    // to a headset's eyes.
+    drawn = from.headset
+      ? !!gc.xr?.draw((target) => scene.render(content, target))
+      : view3d.draw(view.region, (target) => scene.render(content, target));
   } finally {
     frame.release();
   }
-  if (!drawn) control.hide(view);
+  if (!drawn && !from.headset) control.hide(view);
   else if (topDown) control.markTopDown(view);
-  else control.markDrawn(view);
-  return drawn;
+  else if (drawn) control.markDrawn(view);
+  return drawn || !!from.headset;
 }
 
 /** Small aiming mark at the centre of a view (context already at its region's origin). */

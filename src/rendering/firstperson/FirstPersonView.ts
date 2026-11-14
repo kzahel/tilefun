@@ -7,12 +7,8 @@ import type { World } from "../../world/World.js";
 import type { SpriteItem } from "../SceneItem.js";
 import type { PageRegion, SharedMeshAssets, SharedPages, View3dTarget } from "../View3dHost.js";
 import { actorBillboard, MovingCards, RecentPages, StaticCards } from "./FirstPersonBillboards.js";
-import {
-  cameraRight,
-  type FirstPersonEye,
-  lookDirection,
-  nextFogEnd,
-} from "./FirstPersonCamera.js";
+import { cameraRight, type FirstPersonEye, nextFogEnd } from "./FirstPersonCamera.js";
+import { type HeadsetFrame, TABLE_BACKGROUND, ViewCameras } from "./FirstPersonCameras.js";
 import { chunkKey, chunksInReach, type TerrainEntry, terrainStale } from "./FirstPersonChunks.js";
 import { type FacePart, MergedFaces } from "./FirstPersonFaces.js";
 import { GroundTops } from "./FirstPersonGround.js";
@@ -25,7 +21,7 @@ import { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
 import { BlobShadows, SunShadows } from "./FirstPersonShadows.js";
 import { buildTerrainChunk } from "./FirstPersonTerrain.js";
 import { FirstPersonVehicles } from "./FirstPersonVehicles.js";
-import { chunksInRect, grown, obliqueGround, obliqueProjection } from "./ObliqueCamera.js";
+import { chunksInRect, grown, obliqueGround } from "./ObliqueCamera.js";
 
 export type FirstPersonWorld = Pick<World, "getChunkIfLoaded" | "getHeightAt">;
 type FirstPersonChunkSource = NonNullable<ReturnType<FirstPersonWorld["getChunkIfLoaded"]>>;
@@ -52,6 +48,12 @@ export interface FirstPersonFrame {
    * the ground on screen instead of a radius.
    */
   readonly topDown?: { readonly scale: number } | undefined;
+  /**
+   * A headset (252): both eyes through the session's head pose, from a room
+   * placed in the world. `eye` is then the head in the world: cards turn to its
+   * heading and actors show the row seen from it.
+   */
+  readonly headset?: HeadsetFrame | undefined;
 }
 
 /** Kinds of content a view draws. */
@@ -81,6 +83,14 @@ const TOP_DOWN_BELOW = 512;
 /** Chunks a side of the areas that flat-coloured faces (cliff walls, plain prop
  * faces) are merged over: one mesh per area, rebuilt when one of its chunks changes. */
 const FACE_AREA_CHUNKS = 4;
+const NO_PLANES: THREE.Plane[] = [];
+
+/** What shows where nothing is drawn. */
+function backdrop(table: boolean, interior: boolean, topDown: boolean): THREE.ColorRepresentation {
+  if (table) return TABLE_BACKGROUND;
+  if (interior) return INTERIOR_BACKGROUND;
+  return topDown ? VIEW_BACKDROP_CSS : SKY;
+}
 
 interface ChunkGround extends TerrainEntry {
   readonly chunk: FirstPersonChunkSource;
@@ -142,9 +152,7 @@ export class FirstPersonView {
   private readonly groundRoot = new THREE.Group();
   private readonly solidRoot = new THREE.Group();
   private readonly cardRoot = new THREE.Group();
-  private readonly camera = new THREE.PerspectiveCamera(70, 1, 2, 4000);
-  /** The fixed view's projection (251); see `ObliqueCamera`. */
-  private readonly oblique = new THREE.Camera();
+  private readonly cameras = new ViewCameras(this.scene);
   private readonly fog = new THREE.Fog(SKY, 200, 600);
   private readonly sun = new SunShadows();
   /** Horizontal axis the cards are expanded along: the camera's right (game axes). */
@@ -222,7 +230,6 @@ export class FirstPersonView {
     );
     this.blobs = new BlobShadows(this.worldRoot);
     this.vehicles.fog = this.fog;
-    this.camera.up.set(0, 0, 1);
   }
 
   /** Adds the sun's shadow to a material of the given receiver kind. */
@@ -240,15 +247,16 @@ export class FirstPersonView {
       this.generation = generation;
       this.sun.reset();
     }
-    this.camera.aspect = target.width / Math.max(1, target.height);
     if (frame.world !== this.world || frame.realm !== this.realm) this.resetWorld(frame);
     this.syncRoom(frame.interior);
     if (frame.props !== this.propsSource) this.groupProps(frame.props);
     const { pages } = target;
     const topDown = frame.topDown && !frame.interior ? frame.topDown : undefined;
-    const fog = frame.interior || topDown ? null : this.fog;
+    const headset = topDown ? undefined : frame.headset;
+    const table = headset?.table;
+    const fog = frame.interior || topDown || table ? null : this.fog;
     this.scene.fog = this.vehicles.fog = fog;
-    this.background.set(frame.interior ? INTERIOR_BACKGROUND : topDown ? VIEW_BACKDROP_CSS : SKY);
+    this.background.set(backdrop(!!table, !!frame.interior, !!topDown));
     const ground =
       topDown &&
       obliqueGround(
@@ -256,13 +264,15 @@ export class FirstPersonView {
         target.width,
         target.height,
       );
+    // What is kept and shadowed centres on the eye, or on a tabletop's middle.
+    const centre = table ?? frame.eye;
     this.cardPages.begin(pages);
     this.updateChunks(
       frame,
       pages,
       ground
         ? chunksInRect(grown(ground, TOP_DOWN_SIDE, TOP_DOWN_BELOW))
-        : chunksInReach(frame.eye.x, frame.eye.y, frame.drawRadius + CHUNK_PX),
+        : chunksInReach(centre.x, centre.y, frame.drawRadius + CHUNK_PX),
     );
     // Card changes come with their chunk's rebuild, which already told the sun.
     this.cards.keep(this.cardPages);
@@ -277,23 +287,23 @@ export class FirstPersonView {
     this.groundRoot.visible = this.layers.ground;
     this.solidRoot.visible = this.layers.solids;
     this.cardRoot.visible = this.layers.cards;
-    const camera = topDown
-      ? this.placeOblique(frame.eye, topDown.scale, target.width, target.height)
-      : this.placeCamera(frame.eye, frame.drawRadius);
+    // Without fog nothing hides far casters: the sun map's own reach decides.
+    const fogEnd = fog ? (this.fogEnd ?? frame.drawRadius) : Infinity;
+    const camera = this.cameras.place(frame, topDown, headset, target, this.fog, fogEnd);
     // Rooms have contact shadows but no sun.
     const shadows = frame.shadows !== false;
     const cars = this.fillBillboards(frame, meshes, shadows, !!topDown);
     // Read after the frame's page requests: the atlas is replaced when it grows.
     this.atlas.value = pages.atlas;
-    // Without fog nothing hides far casters: the sun map's own reach decides.
-    const fogEnd = topDown ? Infinity : (this.fogEnd ?? frame.drawRadius);
     // Draw calls are counted over every render of this view, sun map included.
     const { info } = renderer;
     info.autoReset = false;
     info.reset();
     try {
-      this.sun.update(renderer, this.scene, frame.eye, fogEnd, shadows && !frame.interior);
+      this.sun.update(renderer, this.scene, centre, fogEnd, shadows && !frame.interior);
       this.stats.sunRedraws = this.sun.redraws;
+      // After the sun's map: casters beyond a tabletop's edge still shade it.
+      renderer.clippingPlanes = this.cameras.cutFor(headset);
       renderer.setClearColor(this.background, 1);
       renderer.clear();
       renderer.render(this.scene, camera);
@@ -303,34 +313,8 @@ export class FirstPersonView {
       this.stats.calls = info.render.calls;
     } finally {
       info.autoReset = true;
+      renderer.clippingPlanes = NO_PLANES;
     }
-  }
-
-  private placeCamera(eye: FirstPersonEye, drawRadius: number): THREE.Camera {
-    const fogEnd = this.fogEnd ?? drawRadius;
-    this.fog.near = fogEnd * 0.45;
-    this.fog.far = fogEnd;
-    this.camera.far = drawRadius + CHUNK_PX;
-    this.camera.updateProjectionMatrix();
-    const dir = lookDirection(eye.yaw, eye.pitch);
-    this.camera.position.set(eye.x, -eye.y, eye.z);
-    this.camera.lookAt(eye.x + dir.x, -(eye.y + dir.y), eye.z + dir.z);
-    return this.camera;
-  }
-
-  /** The fixed view's camera: no rotation, and a projection that shears height
-   * into screen Y. */
-  private placeOblique(
-    centre: { x: number; y: number },
-    scale: number,
-    width: number,
-    height: number,
-  ): THREE.Camera {
-    const camera = this.oblique;
-    camera.position.set(centre.x, -centre.y, 0);
-    camera.projectionMatrix.fromArray(obliqueProjection(scale, width, height)).transpose();
-    camera.projectionMatrixInverse.copy(camera.projectionMatrix).invert();
-    return camera;
   }
 
   private resetWorld(frame: FirstPersonFrame): void {
@@ -578,6 +562,7 @@ export class FirstPersonView {
     this.sun.dispose();
     this.propMeshes.dispose();
     this.vehicles.dispose();
+    this.cameras.dispose();
     this.images.dispose();
     this.flatMaterial.dispose();
     this.groundMaterial.dispose();

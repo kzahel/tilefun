@@ -23,6 +23,7 @@ import type { MainMenu } from "../ui/MainMenu.js";
 import type { RemoteStateView } from "./ClientStateView.js";
 import type { FirstPersonControl } from "./FirstPersonControl.js";
 import type { ParityOptions } from "./RendererParityProbe.js";
+import type { XrControl } from "./XrControl.js";
 
 /**
  * The stable surface that Playwright specs and browser instrumentation read
@@ -54,6 +55,8 @@ export interface GameTestHooks {
   readonly debugPanel: DebugPanel;
   /** Experimental first-person look/view state (tactical 229 captures). */
   readonly firstPerson: FirstPersonControl;
+  /** Play in a headset (252 captures and device runs). */
+  readonly xr: XrControl | undefined;
   readonly mainMenu: MainMenu;
   readonly editorMode: EditorMode;
   readonly editorModel: EditorModel;

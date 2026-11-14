@@ -75,6 +75,7 @@
     "@vitejs/plugin-react": "^6.1.2",
     "electron": "^44.9.1",
     "esbuild": "^0.28.2",
+    "iwer": "^2.8.0",
     "knip": "^6.44.1",
     "peer": "^1.0.2",
     "playwright": "^1.64.1",

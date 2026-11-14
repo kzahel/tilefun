@@ -64,6 +64,47 @@ export interface View3dTarget {
   readonly pages: SharedPages;
 }
 
+/** A headset session's immersive output (252): both eyes, through the head pose. */
+export interface ImmersiveOutput {
+  /** The room's reference space: poses are read in it. */
+  readonly space: XRReferenceSpace;
+  /**
+   * Draw this headset frame; call only inside the session's frame callback.
+   * `draw` renders with a camera parented to the room's place in the world: the
+   * renderer replaces it with the eyes' cameras. The target's size is one eye's.
+   * Returns false, without calling `draw`, while graphics are lost.
+   */
+  draw(draw: (target: View3dTarget) => void): boolean;
+}
+
+/** A headset session's screen output (252): the host's canvas on a flat panel
+ * in the room. The page draws its frame as usual; the host copies it across. */
+export interface ScreenOutput {
+  readonly space: XRReferenceSpace;
+}
+
+/** Where a headset screen hangs when the session starts: in front of the head,
+ * the way it faces, its centre a little below it. Metres. */
+export interface ScreenPlacement {
+  readonly below: number;
+  readonly distance: number;
+  readonly width: number;
+}
+
+/**
+ * Headset sessions on the render host's WebGL context (252). Either output
+ * calls `frame` once per headset frame, for as long as the session lasts; the
+ * caller ends the session, and the host gives its renderer back when it ends.
+ */
+export interface View3dXr {
+  immersive(session: XRSession, frame: XRFrameRequestCallback): Promise<ImmersiveOutput>;
+  screen(
+    session: XRSession,
+    frame: XRFrameRequestCallback,
+    placement: ScreenPlacement,
+  ): Promise<ScreenOutput>;
+}
+
 /**
  * 3D views of a display frame on the render host's own WebGL context (248): the
  * fixed view and 3D views share one renderer, so they share loaded GPU assets and
@@ -77,4 +118,6 @@ export interface View3dHost {
    * are lost or the region keeps only part of its rectangle (a diagonal mask).
    */
   draw(region: RenderRegion | undefined, draw: (target: View3dTarget) => void): boolean;
+  /** Headset sessions on the same context. */
+  readonly xr: View3dXr;
 }

@@ -1,3 +1,4 @@
+import { XR_FRAME_RATE } from "../client/XrControl.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
 import type { CVar } from "./CVar.js";
 
@@ -22,6 +23,7 @@ export interface ClientCVars {
   r_firstperson: CVar<boolean>;
   r_fpshadows: CVar<boolean>;
   r_topdown3d: CVar<boolean>;
+  xr_rate: CVar<number>;
 }
 
 export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
@@ -204,6 +206,14 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "r",
   });
 
+  const xr_rate = engine.cvars.register<number>({
+    name: "xr_rate",
+    description: "Display rate a headset session asks for, in Hz (0 keeps the headset's own)",
+    type: "number",
+    defaultValue: XR_FRAME_RATE,
+    category: "r",
+  });
+
   return {
     r_showbboxes,
     r_showchunks,
@@ -225,5 +235,6 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     r_firstperson,
     r_fpshadows,
     r_topdown3d,
+    xr_rate,
   };
 }

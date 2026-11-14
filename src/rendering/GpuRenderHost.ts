@@ -82,7 +82,9 @@ export function createGpuRenderHost(
     resize(width, height) {
       canvas.width = width;
       canvas.height = height;
-      renderer.resize(width, height);
+      // A headset session sizes the renderer to its eyes until it ends (252);
+      // the page is laid out again then.
+      if (!renderer.surface.renderer.xr.isPresenting) renderer.resize(width, height);
       align();
     },
     beginFrame() {

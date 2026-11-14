@@ -14,6 +14,16 @@ export interface PadState {
   active: boolean;
 }
 
+/** A presenting headset session holds the page's focus for as long as it lasts
+ * (252): an unfocused page is then not a player who looked away. */
+export const padFocus = { headset: false };
+
+/** True while pads are released: the page is hidden or lost focus. */
+export function padsAway(): boolean {
+  if (padFocus.headset || typeof document === "undefined") return false;
+  return document.hidden || !document.hasFocus();
+}
+
 /** Chooses the pads that drive seat 0 and its menus from every standard pad, seeing
  * them all first (226: the page's seat assignment). */
 export interface PadPool {

@@ -68,6 +68,7 @@ import { registerClientConsole } from "./ClientConsoleBindings.js";
 import { RemoteStateView } from "./ClientStateView.js";
 import { FIRST_PERSON_TERRAIN, FirstPersonControl } from "./FirstPersonControl.js";
 import { GameMenuChrome, type MenuChromeHost } from "./GameMenuChrome.js";
+import { createHeadset, type XrControl } from "./Headset.js";
 import { LocalPlayers } from "./LocalPlayers.js";
 import { PlaceControls, type PlaceControlsHost } from "./PlaceControls.js";
 import { PlayInputController, type PlayInputHost } from "./PlayInputController.js";
@@ -156,6 +157,7 @@ export class GameClient implements GameTestHooks {
     () => this.canvas,
     () => this.sheets,
   );
+  xr: XrControl | undefined;
 
   // Mutable state exposed via GameContext
   private gemSpriteCanvas: HTMLCanvasElement | null = null;
@@ -355,6 +357,11 @@ export class GameClient implements GameTestHooks {
     const gc = this.buildGameContext();
     this.scenes.setContext(gc);
     this.localPlayers = new LocalPlayers(gc);
+    this.xr = createHeadset(gc, {
+      loop: this.loop,
+      pads: this.localPlayers,
+      resize: () => this.resize(),
+    });
     // Register console cvars and commands
     registerClientConsole(gc, this.netEmulatedTransport);
     this.firstPerson.viewDistance = viewDistance(this.profile?.firstPersonViewDistance);
@@ -521,6 +528,7 @@ export class GameClient implements GameTestHooks {
     this.playInput.detachFocusListeners();
     this.chrome.showStorageStatus("", false);
     this.stopIdeaDelivery?.();
+    this.xr?.exit();
     this.firstPerson.dispose();
     this.renderHost.dispose();
     this.debugPanel.destroy();

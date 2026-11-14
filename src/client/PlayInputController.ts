@@ -2,6 +2,7 @@ import type { AudioManager } from "../audio/AudioManager.js";
 import type { GameScene } from "../core/GameScene.js";
 import { isBefriendHit } from "../game/playInteraction.js";
 import type { ActionManager } from "../input/ActionManager.js";
+import { padFocus } from "../input/PadAssignment.js";
 import { TapMovement, type TapTarget, type TouchMovementMode } from "../input/TapMovement.js";
 import { TouchButtons } from "../input/TouchButtons.js";
 import { TouchHold } from "../input/TouchHold.js";
@@ -127,7 +128,7 @@ export class PlayInputController {
 
   /** Menus, the Options dialog, lost focus or a hidden page block play UI. */
   get uiBlocked(): boolean {
-    return this.host.menuOpen || this.focusPaused || document.hidden;
+    return this.host.menuOpen || (this.focusPaused && !padFocus.headset) || document.hidden;
   }
   get inputBlocked(): boolean {
     return this.uiBlocked;

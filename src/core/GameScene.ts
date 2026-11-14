@@ -3,6 +3,7 @@ import type { AudioManager } from "../audio/AudioManager.js";
 import type { RemoteStateView } from "../client/ClientStateView.js";
 import type { DoorPresentation } from "../client/DoorPresentation.js";
 import type { FirstPersonControl } from "../client/FirstPersonControl.js";
+import type { XrControl } from "../client/XrControl.js";
 import type { ConsoleEngine } from "../console/ConsoleEngine.js";
 import type { ConsoleUI } from "../console/ConsoleUI.js";
 import type { EditorMode } from "../editor/EditorMode.js";
@@ -98,6 +99,9 @@ export interface GameContext {
   gemSpriteCanvas: HTMLCanvasElement | null;
   debugEnabled: boolean;
   editorButton: HTMLButtonElement | null;
+  /** Play in a headset (252), set once the page's game is built; absent in labs
+   * and headless fixtures. */
+  xr?: XrControl;
   /** 3D views on the render host's renderer (248); absent without graphics. */
   readonly view3d?: View3dHost | undefined;
   /** Experimental first-person view and look state (tactical 229). */

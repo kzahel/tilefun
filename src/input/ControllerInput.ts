@@ -7,7 +7,7 @@ import {
 } from "./ControllerBindings.js";
 import { controllerPointer } from "./ControllerPointer.js";
 import { noteInputSource } from "./InputHints.js";
-import { EVERY_PAD, type PadPool } from "./PadAssignment.js";
+import { EVERY_PAD, type PadPool, padsAway } from "./PadAssignment.js";
 
 export { CONTROLLER_ACTIONS, type ControllerCommand } from "./ControllerBindings.js";
 export const CONTROLLER_EVENT = "tilefun-controller";
@@ -73,7 +73,7 @@ export class ControllerInput {
         ? standard.find((p) => p.index !== this.source && meaningful(p))
         : undefined;
     const gp = active ?? current ?? standard[0];
-    if (!gp || (typeof document !== "undefined" && (document.hidden || !document.hasFocus()))) {
+    if (!gp || padsAway()) {
       if (!gp) this.source = -1;
       this.reset();
       return [];

@@ -52,6 +52,9 @@ export class FirstPersonControl {
   viewDistance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE;
   /** Sun and contact shadows (247); `r_fpshadows` and `?fpshadows=0` set it. */
   shadows = new URLSearchParams(location.search).get("fpshadows") !== "0";
+  /** A headset's tabletop (252) sets how far its 3D view reaches, in place of
+   * the view distance. World pixels. */
+  reach: number | undefined;
   /** Captures only: raises every eye by this many world pixels for an overview. */
   lift = 0;
   /** Top-down views draw in the 3D scene through the fixed view's camera (251).
@@ -181,7 +184,7 @@ export class FirstPersonControl {
     } else if (!view.look) view.look = { yaw: heading, pitch: 0 };
     // A guest's view is made again after leaving play: it resumes this heading.
     else this.chosen.set(view.seat, view.look.yaw);
-    view.interestRadius = view.drawn3d ? VIEW_DISTANCES[this.viewDistance] : undefined;
+    view.interestRadius = view.drawn3d ? this.drawRadius : undefined;
   }
 
   private listen(value: boolean): void {
@@ -210,7 +213,12 @@ export class FirstPersonControl {
     view.drawn3d = true;
     // Now, not at the next tick: a menu over play draws frames without ticking,
     // and the frame's terrain preparation reads the view's interest range.
-    view.interestRadius = VIEW_DISTANCES[this.viewDistance];
+    view.interestRadius = this.drawRadius;
+  }
+
+  /** How far a 3D view draws and streams around its centre, in world pixels. */
+  get drawRadius(): number {
+    return this.reach ?? VIEW_DISTANCES[this.viewDistance];
   }
 
   turn(view: View, yaw: number, pitch: number): void {

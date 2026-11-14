@@ -4,6 +4,7 @@ import { ActionManager } from "../input/ActionManager.js";
 import { DEFAULT_ACTION_MAP } from "../input/ActionMap.js";
 import { hostKeyMap } from "../input/KeyboardSchemes.js";
 import { EVERY_PAD, type PadPool } from "../input/PadAssignment.js";
+import { XR_PAD_INDEX } from "../input/XrPad.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import { DeviceSession } from "../session/DeviceSession.js";
 import type { RequestMessage } from "../shared/requests.js";
@@ -195,6 +196,23 @@ describe("local players joining from the keyboard (226)", () => {
 });
 
 describe("local players joining from pads (226)", () => {
+  it("a headset's controllers stay with seat 0, whichever pad it already plays on (252)", async () => {
+    const h = harness();
+    expect(h.poll([gamepad(0, [0])])).toEqual([0]); // pad 0 is seat 0's
+    // Another pad's press would ask to join; the headset's pad never does.
+    h.players.headset = () => gamepad(XR_PAD_INDEX, [0]);
+    expect(h.poll([gamepad(0)])).toEqual([0, XR_PAD_INDEX]);
+    await settle();
+    expect(h.requests).toEqual([]);
+    expect(h.session.seats.list().map((s) => s.seat)).toEqual([0]);
+    // It drives seat 0 before any other pad was used, and leaves with its session.
+    const fresh = harness();
+    fresh.players.headset = () => gamepad(XR_PAD_INDEX, [0]);
+    expect(fresh.poll([])).toEqual([XR_PAD_INDEX]);
+    fresh.players.headset = null;
+    expect(fresh.poll([])).toEqual([]);
+  });
+
   it("seat 0 keeps its pad; another pad's press joins and drives only its guest", async () => {
     const h = harness();
     expect(h.poll([gamepad(0, [0]), gamepad(1)])).toEqual([0]); // pad 0 is now seat 0's alone

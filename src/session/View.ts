@@ -7,7 +7,7 @@ import type { SurfaceFades } from "../rendering/SceneFrame.js";
 import type { RenderRegion } from "../rendering/ViewLayout.js";
 import type { DeviceSession } from "./DeviceSession.js";
 import { presentedSeatBody, seatBody, seatEntity } from "./SeatFocus.js";
-import { seatEye, type ViewEye } from "./ViewEye.js";
+import { seatEye, seatFocus, type ViewEye } from "./ViewEye.js";
 
 /** How a view frames its device's world (226): follow one seat, frame a group
  * (later), or a fixed camera for labs. */
@@ -25,6 +25,9 @@ export interface CameraPolicy {
    * own eyes, or a chase camera when it drives. A policy without one frames only
    * the fixed view. Undefined until the seat's body is streamed. */
   eye?(session: DeviceSession, look: FirstPersonLook, alpha: number): ViewEye | undefined;
+  /** The body this framing follows, as displayed: the seat's player, or the
+   * vehicle it rides (252: a tabletop centres on it). Game axes, world pixels. */
+  focus?(session: DeviceSession, alpha: number): { x: number; y: number; z: number } | undefined;
 }
 
 /** The eye of a seat's presented body. */
@@ -36,6 +39,18 @@ function eyeOfSeat(seat: number) {
         ? (replica.presentedPlayerEntity ?? replica.playerEntity)
         : seatEntity(session, seat);
     return body && body.id !== -1 ? seatEye(body, replica.entities, look, alpha) : undefined;
+  };
+}
+
+/** The displayed body of a seat's player, or of the vehicle it rides. */
+function focusOfSeat(seat: number) {
+  return (session: DeviceSession, alpha: number) => {
+    const { replica } = session;
+    const body =
+      seat === 0
+        ? (replica.presentedPlayerEntity ?? replica.playerEntity)
+        : seatEntity(session, seat);
+    return body && body.id !== -1 ? seatFocus(body, replica.entities, alpha) : undefined;
   };
 }
 
@@ -52,6 +67,7 @@ export function followSeat(
       beforeInput: false,
       forSeat: (other) => followSeat({ ...options, seat: other }),
       eye: eyeOfSeat(seat),
+      focus: focusOfSeat(seat),
       tick(camera, session) {
         const body = seatBody(session, seat);
         if (body) followPlayer(camera, body, vertical(), offsetY);
@@ -75,6 +91,7 @@ export function followSeat(
     beforeInput: false,
     forSeat: (other) => followSeat({ ...options, seat: other }),
     eye: eyeOfSeat(0),
+    focus: focusOfSeat(0),
     tick(camera, session) {
       const { replica, prediction } = session;
       followPlayer(camera, replica.playerEntity, vertical(), offsetY, prediction);

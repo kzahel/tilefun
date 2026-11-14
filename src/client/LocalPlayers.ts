@@ -5,13 +5,14 @@ import { hostKeyMap, KEYBOARD_JOIN_KEY, seatKeyMap } from "../input/KeyboardSche
 import { ownsKeys } from "../input/KeyFocus.js";
 import { eventCode } from "../input/KeyLabels.js";
 import { PadActions } from "../input/PadActions.js";
-import { EVERY_PAD, PadAssignment, type PadPool } from "../input/PadAssignment.js";
+import { EVERY_PAD, PadAssignment, type PadPool, padsAway } from "../input/PadAssignment.js";
 import { ActionSeatInput, type SeatInput } from "../input/SeatInput.js";
 import { directionHeading } from "../rendering/firstperson/FirstPersonCamera.js";
 import { PlayScene } from "../scenes/PlayScene.js";
 import { seatEntity } from "../session/SeatFocus.js";
 import { MAX_SEATS } from "../shared/protocol.js";
 import { DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
+import { XR_MODE_LABELS } from "./XrControl.js";
 
 /** A seat whose pad disconnected during travel keeps asking to leave this many times. */
 const LOST_PAD_RETRIES = 10;
@@ -35,6 +36,7 @@ type Host = Pick<
   | "storagePaused"
   | "doorPresentation"
   | "firstPerson"
+  | "xr"
   | "sendRequest"
   | "takeRequestId"
 >;
@@ -65,6 +67,8 @@ export class LocalPlayers implements PadPool {
   private uiPad: number | undefined;
   private wasUI = false;
   private readonly offs: (() => void)[];
+  /** A presenting headset session's controllers as a pad (see `XrPad`). */
+  headset: (() => Gamepad | undefined) | null = null;
 
   constructor(
     private readonly gc: Host,
@@ -74,7 +78,12 @@ export class LocalPlayers implements PadPool {
     controller.seats = this;
     window.addEventListener("keydown", this.onKey);
     gc.mainMenu.seatActions = (add) => {
-      for (const { label, run } of [...this.viewActions(), ...this.leaveActions()]) add(label, run);
+      for (const { label, run } of [
+        ...this.viewActions(),
+        ...this.headsetActions(),
+        ...this.leaveActions(),
+      ])
+        add(label, run);
     };
     this.offs = [
       gc.session.seats.onChange(() => this.sync()),
@@ -120,7 +129,7 @@ export class LocalPlayers implements PadPool {
     );
     for (const seat of changes.lost) void this.leave(seat, LOST_PAD_RETRIES);
     for (const index of changes.joins) void this.joinPad(index);
-    const away = typeof document !== "undefined" && (document.hidden || !document.hasFocus());
+    const away = padsAway();
     for (const [index, actions] of this.padInputs)
       actions.poll(
         pads.find((pad) => pad.index === index),
@@ -129,7 +138,11 @@ export class LocalPlayers implements PadPool {
     const opener = ui ? this.uiPad : undefined;
     if (opener !== undefined) return pads.filter((pad) => pad.index === opener);
     const excluded = this.pads.excluded(pads);
-    return pads.filter((pad) => !excluded.has(pad.index));
+    const own = pads.filter((pad) => !excluded.has(pad.index));
+    // A headset's controllers are seat 0's (252): they take no part in seat
+    // assignment, so they never ask to join a guest.
+    const headset = this.headset?.();
+    return headset ? [...own, headset] : own;
   }
 
   /** Release the page's listeners; the device session releases guests' inputs. */
@@ -291,6 +304,30 @@ export class LocalPlayers implements PadPool {
           },
         };
       });
+  }
+
+  /** Ways to play in a headset (252), when the browser has one. A click on one
+   * is the user gesture a session needs. */
+  private headsetActions(): { label: string; run: () => void }[] {
+    const { mainMenu, xr } = this.gc;
+    if (!xr) return [];
+    const actions = xr.modes.map((mode) => ({
+      label: `Headset: ${XR_MODE_LABELS[mode]}`,
+      run: () => {
+        mainMenu.onClose?.();
+        void xr.enter(mode);
+      },
+    }));
+    // A pause ended a session: Resume goes back into it unless told otherwise.
+    if (xr.resume)
+      actions.push({
+        label: "Headset: stay on this page",
+        run: () => {
+          xr.resume = null;
+          if (mainMenu.visible) mainMenu.openPage("home");
+        },
+      });
+    return actions;
   }
 
   private leaveActions(): { label: string; run: () => void }[] {

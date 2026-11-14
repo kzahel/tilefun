@@ -24,6 +24,15 @@ function displayed(e: Entity, alpha: number): { x: number; y: number; z: number 
   return { x: p.wx, y: p.wy, z: interpolateWz(e, alpha) ?? 0 };
 }
 
+/** Where a seat's player is, as displayed: its vehicle when it rides one. */
+export function seatFocus(
+  body: Entity,
+  entities: readonly Entity[],
+  alpha: number,
+): { x: number; y: number; z: number } {
+  return displayed(occupiedVehicle(body, entities) ?? body, alpha);
+}
+
 /**
  * The eye a seat's player sees from: its own eyes on foot, or a chase camera
  * behind and above the vehicle it rides. `body` is the seat's own entity as
