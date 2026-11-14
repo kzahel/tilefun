@@ -1,5 +1,23 @@
 # Diagnostic probes
 
+## Split-screen player pacing
+
+`node scripts/instrumentation/split-screen-pacing.mjs --regional --split-only --turn-seconds=3 --seconds=30 --rates=16,1`
+captures the real Worker game with two keyboard seats in isolated bundled
+Chromium. `--tx-latency=67` adds a controlled outbound delay. Reports retain
+authority/predicted poses, replay state and sampled presentation; a publication
+count alone does not establish visible movement. Page CPU throttling does not
+throttle the authority Worker. The browser/server and temporary data are reaped.
+`--minimum-step-ms=3` burns at least 3 ms per private physics step, forcing the
+one-step replay budget without slowing authority. This is an artificial-load
+control, not a hardware-performance measurement.
+
+`npx tsx scripts/reproduce-split-prediction.ts` is the narrower deterministic
+control: both local seats must keep moving under simulated replay cost plus
+input delay while NPC presentation advances. It asserts bounded work/lag, the
+slow-only/delay-only controls and recovery without claiming hardware timing. See the
+[investigation](../../docs/research/split-screen-prediction-starvation.md).
+
 The per-character adapter/model comparison CLI was retired by
 [205](../../docs/tactical/205-physics-reset.md). The frozen native measurements and
 semantic limits remain in [203](../../docs/tactical/203-physics-copy-and-model-comparison.md).

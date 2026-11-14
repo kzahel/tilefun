@@ -240,7 +240,7 @@ it.each(["walk", "run", "car"])(
   },
 );
 
-it("compares the committed tick once while new input extends a sliced replay", async () => {
+it("finishes a fixed replay prefix and retains later input, including a jump", async () => {
   const f = await setup({
     version: 1,
     id: "matched-sliced-replay",
@@ -257,7 +257,8 @@ it("compares the committed tick once while new input extends a sliced replay", a
   let appended = 0;
   while (f.predictor.recoveryDiagnostics.status === "replaying" && appended < 40) {
     expect(f.predictor.presentEntities(0.25, f.view.serverEntities)).toEqual(committed);
-    f.input(62 + appended++, movement);
+    f.input(62 + appended, { ...movement, jump: appended === 1 });
+    appended++;
     expect(f.predictor.recoveryDiagnostics.replayStepsThisTick).toBeLessThanOrEqual(8);
   }
   expect(appended).toBeGreaterThan(1);
@@ -265,10 +266,20 @@ it("compares the committed tick once while new input extends a sliced replay", a
   expect(f.predictor.lastReconcileDiagnostics?.resimPosErr).toBeLessThan(0.002);
   expect(f.predictor.lastReconcileDiagnostics?.comparisonInputTick).toBe(60);
   expect(f.predictor.lastReconcileDiagnostics?.comparisonPhysicsTick).toBe(61);
+  expect((f.predictor.player?.position.wx ?? 0) - before).toBeCloseTo(64 * PHYSICS_DT, 2);
+  let peak = 0;
+  // No fresh authority is available. Later commands must be consumed in order
+  // on the committed scene, including the press/release after the cutoff.
+  for (let i = 1; i < appended; i++) {
+    f.input(62 + appended + i, movement);
+    peak = Math.max(peak, f.predictor.player?.wz ?? 0);
+  }
+  expect(peak).toBeGreaterThan(1);
   expect((f.predictor.player?.position.wx ?? 0) - before).toBeCloseTo(
     appended * 64 * PHYSICS_DT,
     2,
   );
+  expect(f.predictor.publishedBody(f.s.player.player.id).tick).toBe(61 + appended);
 });
 
 it("coalesces overdue inputs without losing a jump when authority overtakes the client", async () => {

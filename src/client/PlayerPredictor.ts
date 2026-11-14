@@ -21,6 +21,13 @@ import type { World } from "../world/World.js";
 import { predictionGeometry } from "./PredictionGeometry.js";
 import { PredictionHistory } from "./PredictionHistory.js";
 import {
+  type PredictionReplay as Replay,
+  type ReplayRequest as Request,
+  replayInputOffset,
+  replayTarget,
+  type StoredInput,
+} from "./PredictionReplay.js";
+import {
   capturePredictionBodies,
   clonePredictionEntity as clone,
   predictionDistance as distance,
@@ -33,20 +40,14 @@ import {
   hasMovement,
   normalizedMovement,
   type SeatMovements,
-  type SeatReplay,
   seatBodies,
 } from "./SeatInputs.js";
 
 const MAX_HISTORY = 120;
 const REPLAY_STEPS_PER_UPDATE = 8;
 const REPLAY_MS_PER_UPDATE = 2; // Injected clock: simulated time slices by step count alone.
-export interface StoredInput {
-  seq: number;
-  tick: number;
-  movement: Movement;
-  /** Co-seats' movement on the same device tick (226). */
-  seats?: SeatMovements;
-}
+
+export type { StoredInput } from "./PredictionReplay.js";
 export interface ReconcileTiming {
   serverTick?: number;
   physics?: PhysicsState;
@@ -79,33 +80,6 @@ export interface ReconcileDiagnostics {
   status: PredictionRecoveryDiagnostics["status"];
   /** Co-seat body corrections at the committed tick (226). */
   seatCorrections?: ReadonlyMap<number, number>;
-}
-interface Request {
-  player: Entity;
-  ack: number;
-  state: PhysicsState;
-  /** Owned by this request until the replay takes it as its private body map. */
-  bodies: Map<number, Entity>;
-  world: World;
-  props: readonly Prop[];
-  /** Each co-seat's controlled body at this snapshot (226). */
-  seatBodies: ReadonlyMap<number, number>;
-}
-interface Replay {
-  request: Request;
-  physicsInputOffset: number;
-  inputIndex: number;
-  jumpHeld: boolean;
-  heldMovement?: Movement;
-  steps: number;
-  ms: number;
-  before: Entity;
-  beforeInputTick: number;
-  beforePhysicsTick: number;
-  comparison?: { player: Entity; bodies: Map<number, ReplayPose> };
-  pastError: number | undefined;
-  inputs: StoredInput[];
-  seats: SeatReplay;
 }
 
 /** One bounded private copy of the ordinary fixed-step kernel. Inputs address
@@ -256,7 +230,8 @@ export class PlayerPredictor {
       ...(co ? { seats: co } : {}),
     });
     const submitted = this.inputHistory[this.inputHistory.length - 1];
-    if (this.replay && submitted) this.replay.inputs.push(submitted);
+    if (this.replay && this.replay.targetInputTick === undefined && submitted)
+      this.replay.inputs.push(submitted);
     if (hasMovement(movement) || [...(co?.values() ?? [])].some(hasMovement))
       this.activeUntil = this.clock() + 0.3;
     while (this.inputHistory.length > MAX_HISTORY) {
@@ -392,10 +367,14 @@ export class PlayerPredictor {
       // Keep the committed physics horizon advancing once per local input tick.
       // A repeated/jumping packet acknowledgement must not add/remove a world tick.
       // Authority covering an unpublished suffix is an explicit recovery fence.
-      physicsInputOffset:
-        this.ackInputTick > this.appliedInputTick
-          ? state.tick - this.ackInputTick
-          : Math.max(beforePhysicsTick, state.tick + Number(overdue)) - this.appliedInputTick,
+      physicsInputOffset: replayInputOffset(
+        this.inputTick,
+        this.appliedInputTick,
+        this.ackInputTick,
+        beforePhysicsTick,
+        state.tick,
+        overdue,
+      ),
       inputIndex: 0,
       jumpHeld: state.bodies.find((body) => body.id === anchorId)?.jumpHeld ?? false,
       steps: 0,
@@ -409,10 +388,7 @@ export class PlayerPredictor {
     };
     this.status = "replaying";
     if (scene.physicsTick === beforePhysicsTick) this.captureReplayComparison(this.replay);
-    if (scene.physicsTick >= this.replayTarget(this.replay)) this.drainReplay();
-  }
-  private replayTarget(job: Replay): number {
-    return Math.max(job.request.state.tick, this.inputTick + job.physicsInputOffset);
+    if (scene.physicsTick >= replayTarget(this.replay, this.inputTick)) this.drainReplay();
   }
   private replayStep(job: Replay) {
     const scene = this.scene;
@@ -446,14 +422,11 @@ export class PlayerPredictor {
       bodies: new Map([...this.bodies].map(([id, entity]) => [id, replayPose(entity)])),
     };
   }
-  private drainReplay() {
-    const job = this.replay,
-      scene = this.scene;
-    if (!job || !scene || !this.geometry) return;
+  private advanceReplay(job: Replay, scene: PhysicsScene): boolean {
     const start = this.clock() * 1000;
     let steps = 0;
     while (
-      scene.physicsTick < this.replayTarget(job) &&
+      scene.physicsTick < replayTarget(job, this.inputTick) &&
       steps < REPLAY_STEPS_PER_UPDATE &&
       (steps === 0 || this.clock() * 1000 - start < REPLAY_MS_PER_UPDATE)
     ) {
@@ -464,10 +437,22 @@ export class PlayerPredictor {
     }
     this.lastReplaySteps += steps;
     job.ms += this.clock() * 1000 - start;
-    if (scene.physicsTick < this.replayTarget(job)) return;
+    if (scene.physicsTick < replayTarget(job, this.inputTick)) {
+      // A one-step slice must reduce a finite job, even when one new command
+      // arrives per update. Never publish the private scene before this prefix
+      // is complete; subsequent input remains available for the next replay.
+      job.targetInputTick ??= this.inputTick;
+      return false;
+    }
+    return true;
+  }
+  private drainReplay() {
+    const job = this.replay,
+      scene = this.scene;
+    if (!job || !scene || !this.geometry || !this.advanceReplay(job, scene)) return;
     this.replay = undefined;
     this.status = "ready";
-    this.appliedInputTick = this.inputTick;
+    this.appliedInputTick = job.targetInputTick ?? this.inputTick;
     const beforeBodies = this.published,
       beforeMembers = this.correctionMembers,
       oldError = this.error();
@@ -640,8 +625,10 @@ export class PlayerPredictor {
     }
     if (this.replay) this.drainReplay();
     else if (this.status === "ready" && this.appliedInputTick < this.inputTick) {
-      this.appliedInputTick = this.inputTick;
-      const submitted = this.inputHistory[this.inputHistory.length - 1];
+      // A completed prefix can leave newer commands behind. Consume them in
+      // order rather than skipping to the latest axes and losing a jump edge.
+      const submitted = this.inputHistory.find((input) => input.tick > this.appliedInputTick);
+      this.appliedInputTick = submitted?.tick ?? this.inputTick;
       this.step(submitted?.movement ?? movement, this.predicted, submitted?.seats);
       this.publish(this.predicted);
     }

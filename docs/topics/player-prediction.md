@@ -1,5 +1,17 @@
 # Player prediction and moving contacts
 
+[Split-screen starvation](../research/split-screen-prediction-starvation.md)
+(2026-11-14) fixes reproduced player-only freezing under slow replay and delayed
+input. A replay that exhausts its slice finishes a fixed input prefix; later
+commands remain queued. Completed input/physics clocks retain that cutoff, count
+unpublished time once, and consume pending commands in order so jumps survive.
+The existing 2 ms/eight-step slice limits remain. With one step fitting per
+update, both seats now advance about 319 px over 300 updates instead of freezing;
+the maximum unchanged run is one update. NPC presentation keeps advancing.
+The ordinary Worker browser also advances under forced slow steps and input
+delay. The owner's Chromebook trigger and exact 1 Hz cadence remain unverified;
+next is ordinary device confirmation after Save and reload.
+
 [246](../tactical/246-stable-fast-landing-contacts.md) repairs the reproduced
 fast-landing contact instability with a one-pixel wheeled-chassis bevel and
 at most two CCD substeps inside the same shared 60Hz step. The original delayed

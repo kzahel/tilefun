@@ -1,0 +1,480 @@
+{
+  "date": "2026-11-14",
+  "native": {
+    "note": "Simulated 3ms private physics steps exhaust the 2ms replay budget. This is a mechanism control, not Chromebook timing.",
+    "before": {
+      "server": {
+        "wx": 31.9921875,
+        "wy": 0
+      },
+      "predicted": {
+        "wx": 31.992446899414062,
+        "wy": 0
+      },
+      "guestServer": {
+        "wx": 16,
+        "wy": 31.999982833862305
+      },
+      "guestPredicted": {
+        "wx": 16,
+        "wy": 31.999982833862305
+      },
+      "npcPresented": {
+        "wx": -80,
+        "wy": 68.66661071777344
+      },
+      "recovery": {
+        "status": "ready",
+        "retainedInputs": 1,
+        "retainedSeconds": 0.016666666666666666,
+        "replayStepsThisTick": 0
+      }
+    },
+    "slowWithoutDelay": {
+      "server": {
+        "wx": 95.9765625,
+        "wy": 0
+      },
+      "predicted": {
+        "wx": 95.97683715820312,
+        "wy": 0
+      },
+      "guestServer": {
+        "wx": 16,
+        "wy": 96.00033569335938
+      },
+      "guestPredicted": {
+        "wx": 16,
+        "wy": 96.00033569335938
+      },
+      "npcPresented": {
+        "wx": -80,
+        "wy": 91.66731262207033
+      },
+      "recovery": {
+        "status": "ready",
+        "retainedInputs": 1,
+        "retainedSeconds": 0.016666666666666666,
+        "replayStepsThisTick": 0
+      }
+    },
+    "delayWithoutCost": {
+      "server": {
+        "wx": 127.96875,
+        "wy": 0
+      },
+      "predicted": {
+        "wx": 129.03567504882812,
+        "wy": 0
+      },
+      "guestServer": {
+        "wx": 16,
+        "wy": 128.00076293945312
+      },
+      "guestPredicted": {
+        "wx": 16,
+        "wy": 129.06744384765625
+      },
+      "npcPresented": {
+        "wx": -80,
+        "wy": 101.66761779785158
+      },
+      "recovery": {
+        "status": "ready",
+        "retainedInputs": 5,
+        "retainedSeconds": 0.08333333333333333,
+        "replayStepsThisTick": 2
+      }
+    },
+    "firstSlow": {
+      "server": {
+        "wx": 129.03515625,
+        "wy": 0
+      },
+      "predicted": {
+        "wx": 129.03567504882812,
+        "wy": 0
+      },
+      "guestServer": {
+        "wx": 16,
+        "wy": 129.06744384765625
+      },
+      "guestPredicted": {
+        "wx": 16,
+        "wy": 129.06744384765625
+      },
+      "npcPresented": {
+        "wx": -80,
+        "wy": 102.00096130371095
+      },
+      "recovery": {
+        "status": "replaying",
+        "retainedInputs": 5,
+        "retainedSeconds": 0.08333333333333333,
+        "replayStepsThisTick": 1,
+        "replayAck": 116
+      }
+    },
+    "frozen": {
+      "server": {
+        "wx": 447.890625,
+        "wy": 0
+      },
+      "predicted": {
+        "wx": 129.03567504882812,
+        "wy": 0
+      },
+      "guestServer": {
+        "wx": 16,
+        "wy": 447.9959716796875
+      },
+      "guestPredicted": {
+        "wx": 16,
+        "wy": 129.06744384765625
+      },
+      "npcPresented": {
+        "wx": -80,
+        "wy": 201.66419982910156
+      },
+      "recovery": {
+        "status": "replaying",
+        "retainedInputs": 5,
+        "retainedSeconds": 0.08333333333333333,
+        "replayStepsThisTick": 1,
+        "replayAck": 116
+      }
+    },
+    "after": {
+      "server": {
+        "wx": 458.5546875,
+        "wy": 0
+      },
+      "predicted": {
+        "wx": 459.62158203125,
+        "wy": 0
+      },
+      "guestServer": {
+        "wx": 16,
+        "wy": 458.6624755859375
+      },
+      "guestPredicted": {
+        "wx": 16,
+        "wy": 459.7291259765625
+      },
+      "npcPresented": {
+        "wx": -80,
+        "wy": 204.99732971191406
+      },
+      "recovery": {
+        "status": "ready",
+        "retainedInputs": 5,
+        "retainedSeconds": 0.08333333333333333,
+        "replayStepsThisTick": 2
+      }
+    },
+    "slowUpdates": 300,
+    "slowPositionChanges": 0,
+    "npcPositionChanges": 299
+  },
+  "browser": [
+    {
+      "revision": "2f7c8b64cfd05792496790d048d3e00cb73e992c",
+      "browser": "156.0.8078.4",
+      "seconds": 30,
+      "regional": true,
+      "turnSeconds": 3,
+      "txLatencyMs": 0,
+      "note": "Desktop page CPU throttle does not throttle the authority Worker; this is not Chromebook hardware evidence.",
+      "cases": [
+        {
+          "split": true,
+          "rate": 16,
+          "frames": 1166,
+          "errors": [],
+          "duration": 30.838299999713897,
+          "serverHz": 59.990336692267846,
+          "statuses": [
+            "replaying",
+            "ready"
+          ],
+          "maxHorizon": 12,
+          "maxUnpublished": 14,
+          "maxRetained": 24,
+          "publishHz": 20.267005639279677,
+          "maxPublishGapMs": 251.59999990463257,
+          "p99PublishGapMs": 172.09999990463257
+        },
+        {
+          "split": true,
+          "rate": 1,
+          "frames": 1803,
+          "errors": [],
+          "duration": 30.03110000038147,
+          "serverHz": 60.00446204025527,
+          "statuses": [
+            "ready"
+          ],
+          "maxHorizon": 0,
+          "maxUnpublished": 0,
+          "maxRetained": 3,
+          "publishHz": 60.00446204025527,
+          "maxPublishGapMs": 21.5,
+          "p99PublishGapMs": 20.200000286102295
+        }
+      ]
+    },
+    {
+      "revision": "2f7c8b64cfd05792496790d048d3e00cb73e992c",
+      "browser": "156.0.8078.4",
+      "seconds": 30,
+      "regional": true,
+      "turnSeconds": 3,
+      "txLatencyMs": 67,
+      "note": "Desktop page CPU throttle does not throttle the authority Worker; this is not Chromebook hardware evidence.",
+      "cases": [
+        {
+          "split": true,
+          "rate": 8,
+          "frames": 1811,
+          "errors": [],
+          "duration": 30.1815,
+          "serverHz": 60.00364461673542,
+          "statuses": [
+            "replaying",
+            "ready"
+          ],
+          "maxHorizon": 4,
+          "maxUnpublished": 6,
+          "maxRetained": 11,
+          "publishHz": 47.61194771631629,
+          "maxPublishGapMs": 118.59999990463257,
+          "p99PublishGapMs": 66.5
+        },
+        {
+          "split": true,
+          "rate": 1,
+          "frames": 1802,
+          "errors": [],
+          "duration": 30.017199999809264,
+          "serverHz": 59.99893394491971,
+          "statuses": [
+            "ready"
+          ],
+          "maxHorizon": 0,
+          "maxUnpublished": 0,
+          "maxRetained": 8,
+          "publishHz": 59.99893394491971,
+          "maxPublishGapMs": 22,
+          "p99PublishGapMs": 20.200000286102295
+        }
+      ]
+    }
+  ],
+  "fixed": {
+    "note": "Uncommitted fixed source; original native/browser entries above retain the baseline.",
+    "native": {
+      "note": "Simulated 3ms private physics steps exhaust the 2ms replay budget. Both seats must keep advancing with at most one replay step per update. This is a mechanism control, not Chromebook timing.",
+      "before": {
+        "server": {
+          "wx": 31.9921875,
+          "wy": 0
+        },
+        "predicted": {
+          "wx": 31.992446899414062,
+          "wy": 0
+        },
+        "guestServer": {
+          "wx": 16,
+          "wy": 31.999982833862305
+        },
+        "guestPredicted": {
+          "wx": 16,
+          "wy": 31.999982833862305
+        },
+        "npcPresented": {
+          "wx": -80,
+          "wy": 68.66661071777344
+        },
+        "recovery": {
+          "status": "ready",
+          "retainedInputs": 1,
+          "retainedSeconds": 0.016666666666666666,
+          "replayStepsThisTick": 0
+        }
+      },
+      "slowWithoutDelay": {
+        "server": {
+          "wx": 95.9765625,
+          "wy": 0
+        },
+        "predicted": {
+          "wx": 95.97683715820312,
+          "wy": 0
+        },
+        "guestServer": {
+          "wx": 16,
+          "wy": 96.00033569335938
+        },
+        "guestPredicted": {
+          "wx": 16,
+          "wy": 96.00033569335938
+        },
+        "npcPresented": {
+          "wx": -80,
+          "wy": 91.66731262207033
+        },
+        "recovery": {
+          "status": "ready",
+          "retainedInputs": 1,
+          "retainedSeconds": 0.016666666666666666,
+          "replayStepsThisTick": 0
+        }
+      },
+      "delayWithoutCost": {
+        "server": {
+          "wx": 127.96875,
+          "wy": 0
+        },
+        "predicted": {
+          "wx": 129.03567504882812,
+          "wy": 0
+        },
+        "guestServer": {
+          "wx": 16,
+          "wy": 128.00076293945312
+        },
+        "guestPredicted": {
+          "wx": 16,
+          "wy": 129.06744384765625
+        },
+        "npcPresented": {
+          "wx": -80,
+          "wy": 101.66761779785158
+        },
+        "recovery": {
+          "status": "ready",
+          "retainedInputs": 5,
+          "retainedSeconds": 0.08333333333333333,
+          "replayStepsThisTick": 2
+        }
+      },
+      "firstSlow": {
+        "server": {
+          "wx": 129.03515625,
+          "wy": 0
+        },
+        "predicted": {
+          "wx": 129.03567504882812,
+          "wy": 0
+        },
+        "guestServer": {
+          "wx": 16,
+          "wy": 129.06744384765625
+        },
+        "guestPredicted": {
+          "wx": 16,
+          "wy": 129.06744384765625
+        },
+        "npcPresented": {
+          "wx": -80,
+          "wy": 102.00096130371095
+        },
+        "recovery": {
+          "status": "replaying",
+          "retainedInputs": 5,
+          "retainedSeconds": 0.08333333333333333,
+          "replayStepsThisTick": 1,
+          "replayAck": 116
+        }
+      },
+      "underLoad": {
+        "server": {
+          "wx": 447.890625,
+          "wy": 0
+        },
+        "predicted": {
+          "wx": 447.89111328125,
+          "wy": 0
+        },
+        "guestServer": {
+          "wx": 16,
+          "wy": 447.9959716796875
+        },
+        "guestPredicted": {
+          "wx": 16,
+          "wy": 447.9959716796875
+        },
+        "npcPresented": {
+          "wx": -80,
+          "wy": 201.66419982910156
+        },
+        "recovery": {
+          "status": "ready",
+          "retainedInputs": 5,
+          "retainedSeconds": 0.08333333333333333,
+          "replayStepsThisTick": 1
+        }
+      },
+      "after": {
+        "server": {
+          "wx": 458.5546875,
+          "wy": 0
+        },
+        "predicted": {
+          "wx": 459.62158203125,
+          "wy": 0
+        },
+        "guestServer": {
+          "wx": 16,
+          "wy": 458.6624755859375
+        },
+        "guestPredicted": {
+          "wx": 16,
+          "wy": 459.7291259765625
+        },
+        "npcPresented": {
+          "wx": -80,
+          "wy": 204.99732971191406
+        },
+        "recovery": {
+          "status": "ready",
+          "retainedInputs": 5,
+          "retainedSeconds": 0.08333333333333333,
+          "replayStepsThisTick": 2
+        }
+      },
+      "slowUpdates": 300,
+      "slowPositionChanges": 150,
+      "maxHeldUpdates": 1,
+      "npcPositionChanges": 299
+    },
+    "browser": {
+      "browser": "156.0.8078.4",
+      "regional": true,
+      "turnSeconds": 3,
+      "txLatencyMs": 67,
+      "minimumStepMs": 3,
+      "seconds": 15,
+      "cases": [
+        {
+          "split": true,
+          "rate": 1,
+          "frames": 902,
+          "errors": [],
+          "duration": 15.016799999713898,
+          "serverHz": 59.99946726447485,
+          "statuses": [
+            "replaying",
+            "ready"
+          ],
+          "maxHorizon": 3,
+          "maxUnpublished": 5,
+          "maxRetained": 7,
+          "publishHz": 19.977625060313493,
+          "maxPublishGapMs": 66.89999961853027,
+          "p99PublishGapMs": 52.09999990463257
+        }
+      ]
+    }
+  }
+}

@@ -1,5 +1,12 @@
 # Embedded engine labs
 
+[Split-screen replay progress](../research/split-screen-prediction-starvation.md)
+(2026-11-14) keeps the shared predictor's yielded replay endpoint fixed, retaining
+subsequent commands for the next work and preserving input/physics clock ownership.
+Game, RecipeWorldClient and scenario clients use this one policy; no lab-specific
+budget or prediction path is added. The two-pane and lab lifecycle/scheduling
+boundaries remain consumers of the common implementation.
+
 [246](../tactical/246-stable-fast-landing-contacts.md) changes only the common
 PhysicsScene/SceneBody collision setup for stable fast landings. Game Worker,
 RecipeWorldClient labs and the two-pane scenario lab share the one-pixel chassis

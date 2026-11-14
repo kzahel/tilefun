@@ -11,6 +11,7 @@ import type { SeatSample } from "../input/SeatComposer.js";
 import { NEUTRAL_MOVEMENT, neutralSample, type SeatInput } from "../input/SeatInput.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
+import type { PhysicsScene } from "../physics/PhysicsScene.js";
 import { sessionOf, start, stopDevices } from "../server/test/DeviceHarness.js";
 import { DeviceSession } from "../session/DeviceSession.js";
 import { composeDeviceTick } from "../session/DeviceTick.js";
@@ -70,6 +71,14 @@ async function device(worlds: string[] = []) {
     () => now,
   );
   await predictor.ready;
+  const emulation = { stepCostMs: 0, inputDelayTicks: 0 };
+  const scene = (predictor as unknown as { scene: PhysicsScene }).scene;
+  const step = scene.step.bind(scene);
+  scene.step = (...args) => {
+    const result = step(...args);
+    now += emulation.stepCostMs / 1000;
+    return result;
+  };
   const replies: ServerMessage[] = [];
   const entered: string[] = [];
   /** The authority's physics poses by tick, from every frame the device received. */
@@ -124,6 +133,7 @@ async function device(worlds: string[] = []) {
   session.startPrediction(predictor);
 
   let seq = 0;
+  const outgoing: { due: number; input: ClientMessage }[] = [];
   /** One client frame: apply last tick's frames, send this tick's device packet,
    * reconcile and predict, then the authority ticks. */
   /** `standingGuest` sends authority a still guest while the predictor replays its
@@ -143,13 +153,30 @@ async function device(worlds: string[] = []) {
       standingGuest && tick.input.type === "player-input"
         ? { ...tick.input, seats: (tick.input.seats ?? []).map((s) => ({ ...s, dx: 0, dy: 0 })) }
         : tick.input;
-    for (const msg of [...tick.before, input, ...tick.after]) send(msg);
+    for (const msg of tick.before) send(msg);
+    outgoing.push({ due: seq + emulation.inputDelayTicks, input });
+    while (outgoing[0] && outgoing[0].due <= seq) {
+      const packet = outgoing.shift();
+      if (packet) send(packet.input);
+    }
+    for (const msg of tick.after) send(msg);
     if (replica.stateAppliedThisTick) session.reconcile(false);
     session.predict(seq, tick.host.movement, PHYSICS_DT, tick.coSeats);
     server.server.tick(PHYSICS_DT);
   };
   const nextId = () => ++requestId;
-  return { ...server, replica, session, predictor, frame, request, nextId, entered, truth };
+  return {
+    ...server,
+    replica,
+    session,
+    predictor,
+    frame,
+    request,
+    nextId,
+    entered,
+    truth,
+    emulation,
+  };
 }
 
 type Device = Awaited<ReturnType<typeof device>>;
@@ -192,6 +219,40 @@ function play(d: Device, frames: number, host: Movement) {
 }
 
 describe("multi-seat prediction on the device session (226 slice 5-i)", () => {
+  it("keeps both seats moving when only one replay step fits and inputs arrive late", async () => {
+    const d = await device();
+    const input = new ScriptedInput();
+    await d.session.seats.join(d.request, d.nextId(), 1, input);
+    const guest = sessionOf(d.server, "local#1");
+    if (!guest) throw Error("Missing guest");
+    input.movement = walk(0, 1);
+    for (let i = 0; i < 30; i++) d.frame(walk(1));
+    d.emulation.inputDelayTicks = 4;
+    for (let i = 0; i < 30; i++) d.frame(walk(1));
+    d.emulation.stepCostMs = 3;
+    const start = d.predictor.player?.position.wx ?? Number.NaN;
+    const guestStart = d.predictor.publishedBody(guest.player.id).body?.position.wy ?? Number.NaN;
+    let held = 0,
+      maxHeld = 0,
+      previous = start;
+    for (let i = 0; i < 300; i++) {
+      d.frame(walk(1));
+      const x = d.predictor.player?.position.wx ?? Number.NaN;
+      const guestY = d.predictor.publishedBody(guest.player.id).body?.position.wy ?? Number.NaN;
+      held = x === previous ? held + 1 : 0;
+      maxHeld = Math.max(maxHeld, held);
+      previous = x;
+      expect(d.predictor.recoveryDiagnostics.replayStepsThisTick).toBeLessThanOrEqual(1);
+      expect(Math.abs(d.host.player.position.wx - x)).toBeLessThan(4);
+      expect(Math.abs(guest.player.position.wy - guestY)).toBeLessThan(4);
+    }
+    expect(maxHeld).toBeLessThanOrEqual(2);
+    expect(previous - start).toBeGreaterThan(300);
+    expect(
+      (d.predictor.publishedBody(guest.player.id).body?.position.wy ?? 0) - guestStart,
+    ).toBeGreaterThan(300);
+  });
+
   it("predicts a guest with seat 0 from one device tick and one acknowledgement", async () => {
     const d = await device();
     const input = new ScriptedInput();
