@@ -118,6 +118,8 @@ const CARD_INDICES = [0, 1, 2, 0, 2, 3] as const;
 /** Lookups stay this far (texels) inside a card's artwork: the texels around it
  * belong to other frames, or to other images in the atlas layer. */
 const EDGE_INSET = 0.01;
+/** Artwork narrower than this (texels) past a page boundary is ignored. */
+const SLIVER = 0.001;
 
 /**
  * Cards as shader-expanded quads. Every vertex carries the card's foot centre, its
@@ -147,13 +149,15 @@ export class CardArrays {
 
   /** Writes the card; false, writing nothing, when a page it needs is not in the atlas. */
   push(b: Billboard, pages: CardPages): boolean {
-    if (!(b.sw > 0 && b.sh > 0)) return false;
     const size = pages.pageSize;
+    if (!(b.sw > 0 && b.sh > 0 && size > 0)) return false;
     const start = this.count;
     const right = b.sx + b.sw,
       bottom = b.sy + b.sh;
-    for (let py = Math.floor(b.sy / size) * size; py < bottom; py += size)
-      for (let px = Math.floor(b.sx / size) * size; px < right; px += size) {
+    // Slices of a sprite have fractional edges that can land a rounding error past
+    // a page boundary; a sliver that thin is not a part worth another page.
+    for (let py = Math.floor(b.sy / size) * size; py < bottom - SLIVER; py += size)
+      for (let px = Math.floor(b.sx / size) * size; px < right - SLIVER; px += size) {
         const region = pages.page(b.image, px, py);
         if (!region) {
           this.count = start;

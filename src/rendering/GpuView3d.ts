@@ -37,17 +37,25 @@ export function createView3dHost(
   // The fixed view's page atlas, lent the same way. A page a 3D view asks for is
   // marked used this frame, exactly as if the fixed view had drawn it.
   let uploads = 0;
+  // The image each chunk's ground last came from: while a replacement waits for
+  // its upload, the chunk keeps wearing this one instead of going flat.
+  const worn = new WeakMap<Chunk, CanvasImageSource>();
   const pages: SharedPages = {
     get atlas() {
       return surface.pages.atlas.texture;
     },
     ground(chunk) {
-      const image = groundImage(chunk);
+      let image = groundImage(chunk);
       if (!image) return undefined;
       if (!surface.pages.pages.has(image)) {
-        if (uploads >= GROUND_UPLOADS_PER_VIEW) return undefined;
-        uploads++;
+        if (uploads < GROUND_UPLOADS_PER_VIEW) uploads++;
+        else {
+          const previous = worn.get(chunk);
+          if (!previous || !surface.pages.pages.has(previous)) return undefined;
+          image = previous;
+        }
       }
+      worn.set(chunk, image);
       return surface.pages.get(image, 0, 0, GROUND_SIZE).region ?? undefined;
     },
     pageSize: PAGE,

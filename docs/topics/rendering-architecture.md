@@ -12,8 +12,17 @@ has no canvas or context of its own: `RenderHost.view3d` lends it the host's
 `WebGLRenderer`, bound to a region of the world canvas, and restores the host's
 render state afterwards. A 3D view draws straight to the canvas, not into the
 fixed view's world target. First person is a per-seat view kind: `renderViews`
-draws 3D views first and gives only the remaining views terrain preparation and
-the fixed frame, and `View.interestRange()` is what each view asks to be streamed.
+draws 3D views first and gives only the remaining views the fixed frame, and
+`View.interestRange()` is what each view asks to be streamed.
+Since [250](../tactical/250-ground-artwork-and-shared-pages.md) 3D views read the
+fixed view's page atlas (`View3dTarget.pages`): the ground wears each chunk's
+terrain image, and sprite cards read sheet pages instead of whole-sheet textures.
+The lifetime rule for a borrower: ask for a page every frame it is used. Asking
+keeps the page where it is; a page nobody asks for ages out, and a restored
+context or changed assets give every page a new region object, so anything that
+bakes a region into vertex data compares regions each frame and rewrites when
+one changes. 3D views take part in terrain preparation over their interest
+range, within the frame's one shared budget.
 
 [241](../tactical/241-budget-terrain-raster-completion.md) closes the terrain
 budget blind spot identified in [240](../tactical/240-phone-pause-attribution.md).

@@ -52,7 +52,14 @@ describe("first-person ground pages (250)", () => {
     expect(shader.vertexShader).toContain("attribute vec3 groundPage;");
     expect(shader.vertexShader).toContain("vGroundPage = groundPage;");
     expect(shader.fragmentShader).toContain("uniform highp sampler2DArray groundAtlas;");
-    expect(shader.fragmentShader).toContain("diffuseColor.rgb = groundArt();");
+    expect(shader.fragmentShader).toContain("diffuseColor.rgb = groundArt(groundDx, groundDy);");
+    // Derivatives are taken before the branch, and lookups name their level.
+    expect(shader.fragmentShader.indexOf("dFdx(vGroundTexel)")).toBeLessThan(
+      shader.fragmentShader.indexOf("if (vGroundPage.z"),
+    );
+    expect(shader.fragmentShader).not.toContain("texture(groundAtlas");
+    // The decode it calls is three.js's own, declared in every fragment prefix.
+    expect(THREE.ShaderChunk.colorspace_pars_fragment).toContain("vec4 sRGBTransferEOTF(");
     // Offsets are float literals: GLSL ES has no implicit int conversion.
     expect(shader.fragmentShader).not.toMatch(/[^.\d]\d+ \* d[xy]/);
     // A different program from the plain flat material's.

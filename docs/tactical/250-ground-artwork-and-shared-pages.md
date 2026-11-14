@@ -1,6 +1,7 @@
 # 250 — Ground artwork and shared pages
 
-Status: phases 2a and 2b delivered 2026-11-14; independent review pending.
+Status: delivered 2026-11-14 (phases 2a and 2b, independent review applied), for
+owner play.
 Slice 2 of [248](248-renderer-unification.md).
 Owners: [renderer unification](../topics/renderer-unification.md),
 [rendering architecture](../topics/rendering-architecture.md).
@@ -186,10 +187,10 @@ Scripts:
 
 - New `scripts/first-person/ground-pages.mjs` reports the fill on arrival, the
   table above and the shimmer measure.
-- `render:bench`: the `drive` scene now waits for arrival before spawning its
-  car. In first person nothing used to prepare terrain, so the bench's settle
-  wait returned at once and the spawn could be sent while edits are still
-  dropped (the cell then timed out).
+- `render:bench`: the `drive` scene now asks for its car again until it appears.
+  Edits sent before arrival finishes are dropped. In first person nothing used
+  to prepare terrain, so the bench's settle wait returned at once, the one spawn
+  was sent too early and the cell timed out.
 
 Limits:
 
@@ -199,8 +200,8 @@ Limits:
 - Far ground is smoothed, not mip-mapped: beyond about four texels per pixel it
   still aliases.
 - With the far view distance and a fixed view in split screen, page memory can
-  pass the page store's 64 MiB mark, after which pages unused for two frames are
-  dropped at once instead of after 120.
+  pass the page store's 64 MiB mark. The review's first finding changed what
+  happens then (below).
 - Grass blades, decals and particles are not ground images and are still
   missing in 3D (parity checklist).
 
@@ -253,8 +254,9 @@ Cost, same bench and machine as 2a. Render p50 / p95 ms, GPU p50 ms:
 | drive | 0.8 / 1.4, 0.64 | 0.9 / 2.4, 0.66 | 71 → 65 |
 
 - Standing still, cost is unchanged and draw calls are lower.
-- **Driving p95 rose from 1.4 to 2.2–2.4 ms** (three runs: 2.4, 2.2, 2.3). No
-  frame was missed and the worst frame is unchanged at 10.4 ms. Card artwork now
+- **Driving p95 rose from 1.4 ms to between 1.5 and 2.4 ms** (four runs: 2.4,
+  2.2, 2.3, 1.5). No frame was missed and the worst frame is unchanged at
+  10.4 ms. Card artwork now
   uploads a page at a time as it is first seen: 25 pages (7.6 MiB) in the 5 s
   drive against 14 ground pages (3.5 MiB) after 2a, at most 960 KiB in a frame.
   Each uploading frame costs about 1.5 ms more, and there are now enough of them
@@ -266,6 +268,22 @@ Cost, same bench and machine as 2a. Render p50 / p95 ms, GPU p50 ms:
   same behaviour; first person did not while it kept whole sheets.
 - Fixed view after 2b: city 0.7 / 1.0 at 1× and 0.9 / 1.2 at 0.25×; crowd
   1.9 / 2.1 and 3.4 / 4.2. Unchanged.
+
+Pixel 7a, Chrome over CDP, 60 Hz, Vite dev modules, battery 26.3 → 26.4 °C,
+first person after 2b, one 5 s run per cell (236's setup, `--query=view=fps`):
+
+| Scene | Render p50 / p95 | Render + finish p50 | Missed frames | Draws |
+| --- | --- | ---: | --- | ---: |
+| city | 3.8 / 5.5 ms | 4.1 ms | 0 of 300 | 30 |
+| woods | 4.0 / 5.6 ms | 3.9 ms | 0 of 300 | 17 |
+
+- This is the first first-person measurement on the phone. There is no before
+  column: the phone was not measured before this slice, so it shows that the
+  result fits a 16.7 ms frame, not what the slice cost.
+- The phone has no GPU timer; render + finish is the nearest measure.
+- The `drive` cell did not run on the phone: the bench's car never appeared
+  there (six spawn attempts). Not investigated. Upload pacing while moving is
+  therefore unmeasured on the phone.
 
 Validation:
 
@@ -284,7 +302,8 @@ Validation:
 - `npm run streaming:bench -- --assert-ready` passes. Typechecks, Biome and knip
   pass; the ratchet reports only `PhysicsScene.ts`. `art:catalog` and
   `workshop:manifest` regenerated.
-- Not run: full unit and browser suites. Not measured: phone, Deck, headset.
+- Not run: full unit and browser suites. Not measured: Deck, headset, and the
+  phone beyond the two cells above.
 
 Limits:
 
@@ -297,4 +316,63 @@ Limits:
 - Each 3D view composes its own prop artwork, so two first-person views put two
   copies of those canvases in the atlas. Sheet pages are shared.
 - Cards far away are still unfiltered (one sample per pixel).
+
+## Independent review (2026-11-14)
+
+A separate read-only session (general-purpose agent, fresh context) reviewed
+both phases against three.js 0.187's source. It reported the atlas addressing
+(row order, texel maths, clamping, layers), colour and alpha handling, the
+texture-array uniform inside an edited built-in material, staleness handling,
+frame order with one or two 3D views beside a fixed view, the GL state the page
+uploads leave behind, and the card rewrite as sound. It ran nothing in a browser.
+Its findings:
+
+1. **Fixed.** Pages a 3D view asks for every frame cannot be retired but count
+   toward the page store's 64 MiB mark. Past it, every idle page was dropped
+   after two frames and uploaded again when next drawn, in both renderers. One
+   far view beside a fixed view, or two far views, would stay there. The mark
+   now moves up with the bytes in use, keeping 16 MiB for idle pages
+   (`pageBudget`, Node test). Below 48 MiB in use nothing changes. Fixed-view
+   crowd cells with and without the change: 2.0 / 2.4 against 2.0 / 2.3 at 1×
+   and 4.2 / 4.5 against 4.2 / 4.6 at 0.1×.
+2. **Fixed.** A chunk whose ground image was replaced while the frame's four
+   uploads were already spent went back to flat colours until its turn. It now
+   keeps wearing the old image's page until the new one uploads (Node test).
+3. **Fixed.** A card's artwork was not guarded against rounding: a forest row's
+   fractional slice can end 3e-14 past a page boundary, which asked for one more
+   page, and at a sheet's edge that page does not exist and the slice was
+   dropped. Slivers under 0.001 texel are ignored, and a page size of zero no
+   longer loops (Node test).
+4. **Fixed.** A view's interest radius was set only on a tick, so the first 3D
+   frames, and frames drawn under a menu, prepared only the camera rectangle. It
+   is set when the view is drawn in 3D (Node test).
+5. **Fixed.** The ground shader took screen derivatives and implicit-level
+   lookups inside a branch on a varying, which GLSL ES leaves undefined. The
+   derivatives are taken before the branch and lookups name level 0 (Node test
+   of the shader text; the captures and benches were run again).
+6. **Recorded, not fixed.** At the atlas cap, or with the atlas diagnostic
+   switched off, the page store gives a separate texture instead of a region. A
+   3D view cannot draw from it, and its request each frame keeps that page from
+   being tried again.
+7. **Recorded, not fixed.** Every chunk of a 3D view's interest square ranks as
+   on screen in terrain preparation, including fogged chunks behind the camera.
+   After a far view arrives, a fixed view's edited on-screen chunks can wait
+   behind them for up to about a second.
+8. **Fixed.** A stale comment in `GameClient.ts`, and the bench's fixed wait
+   before the drive spawn (now a retry).
+
+Test gaps it named, now covered: a page shorter than a full page (row order), a
+mirrored card across a page boundary, moving cards outgrowing buffers a mesh
+was already built from, pages distinguished by their place in the image in the
+host test, three.js still declaring `sRGBTransferEOTF`, and the prepared range
+checked against literal chunk numbers. Still not covered in Node:
+`FirstPersonView`'s own chunk loop (it needs a document), and `GpuPages`
+eviction beyond the budget function.
+
+After the fixes, same bench and machine: first person city 0.7 / 1.1 ms, GPU
+0.56; woods 0.8 / 1.1, 0.54; crowd 2.9 / 3.2, 1.09; drive 0.8 / 1.5, 0.64.
+Fixed view: city 0.5 / 0.7 at 1×, 0.8 / 0.9 at 0.25×, 1.2 / 1.4 at 0.1×. 359
+tests in the affected directories pass; typechecks, Biome, knip and the
+streaming gate pass; `capture.mjs` (including context loss and split screen)
+and `ground-pages.mjs` ran clean.
 

@@ -89,10 +89,11 @@ vec3 groundAt(vec2 texel) {
   vec2 at = vGroundPage.xy + vec2(texel.x, ${CHUNK_SIZE_PX}.0 - texel.y);
   vec3 uvw = vec3(at / vec2(textureSize(groundAtlas, 0).xy), floor(vGroundPage.z + 0.5));
   // Pages hold display-encoded bytes; the scene shades in linear light.
-  return sRGBTransferEOTF(texture(groundAtlas, uvw)).rgb;
+  return sRGBTransferEOTF(textureLod(groundAtlas, uvw, 0.0)).rgb;
 }
-vec3 groundArt() {
-  vec2 dx = dFdx(vGroundTexel), dy = dFdy(vGroundTexel);
+// dx and dy are the texel steps to the next screen pixel. The caller takes
+// them outside its branch: derivatives are undefined inside non-uniform control flow.
+vec3 groundArt(vec2 dx, vec2 dy) {
   vec3 sum = vec3(0.0);
   ${GROUND_TAPS.map(([x, y]) => `sum += groundAt(vGroundTexel + ${x.toFixed(4)} * dx + ${y.toFixed(4)} * dy);`).join("\n  ")}
   return sum / ${GROUND_TAPS.length}.0;
@@ -107,7 +108,7 @@ varying vec3 vCardPage;
 vec4 cardArt() {
   vec3 uvw = vec3(vCardPage.xy / vec2(textureSize(cardAtlas, 0).xy), floor(vCardPage.z + 0.5));
   // Pages hold display-encoded bytes; the scene shades in linear light.
-  return sRGBTransferEOTF(texture(cardAtlas, uvw));
+  return sRGBTransferEOTF(textureLod(cardAtlas, uvw, 0.0));
 }
 `;
 
@@ -152,7 +153,9 @@ export function shadeMaterial<T extends THREE.Material>(material: T, shading: Ma
         .replace("#include <common>", `#include <common>${GROUND_FRAGMENT}`)
         .replace(
           "#include <color_fragment>",
-          `if (vGroundPage.z > -0.5 && vGroundTexel.x > -0.5) diffuseColor.rgb = groundArt();
+          `vec2 groundDx = dFdx(vGroundTexel), groundDy = dFdy(vGroundTexel);
+  if (vGroundPage.z > -0.5 && vGroundTexel.x > -0.5)
+    diffuseColor.rgb = groundArt(groundDx, groundDy);
   else {
     #include <color_fragment>
   }`,

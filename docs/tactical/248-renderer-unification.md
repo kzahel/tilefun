@@ -1,7 +1,8 @@
 # 248 — Renderer unification
 
-Status: parent sequencing plan, recorded 2026-11-14. Slice 0 (spike and plan) is
-done; no implementation slice has started.
+Status: parent sequencing plan, recorded 2026-11-14. Slices 0 (spike and plan),
+1 ([249](249-one-renderer-host.md)) and 2
+([250](250-ground-artwork-and-shared-pages.md)) are done; slice 3 is next.
 Owner decision, 2026-11-14: commit to one world renderer. Keep the fixed 2D view
 as the default top-down renderer until the unified one is good enough. WebXR is
 wanted on the same renderer. Test devices are available: the M4 Pro Mac, a Pixel
@@ -203,7 +204,8 @@ here deletes fixed-view code before the third decision.
 
 ## Progress
 
-Slice 1 is recorded in [249](249-one-renderer-host.md).
+Slice 1 is recorded in [249](249-one-renderer-host.md) and slice 2 in
+[250](250-ground-artwork-and-shared-pages.md).
 
 ### Slice 0 — spike and plan (2026-11-14)
 

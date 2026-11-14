@@ -177,6 +177,9 @@ export class FirstPersonControl {
   /** Called by the play view after drawing a view's frame in first person. */
   markDrawn(view: View): void {
     view.drawn3d = true;
+    // Now, not at the next tick: a menu over play draws frames without ticking,
+    // and the frame's terrain preparation reads the view's interest range.
+    view.interestRadius = VIEW_DISTANCES[this.viewDistance];
   }
 
   turn(view: View, yaw: number, pitch: number): void {

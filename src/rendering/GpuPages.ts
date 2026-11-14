@@ -33,6 +33,18 @@ export interface PageStats {
   /** Reused upload textures, outside `textureBytes` and `atlasBytes`. */
   stagingBytes: number;
 }
+const PAGE_BUDGET = 64 * 1024 * 1024;
+const IDLE_ALLOWANCE = 16 * 1024 * 1024;
+/**
+ * Page bytes above which idle pages are retired at once instead of after 120
+ * frames. Pages drawn in the current frames cannot be retired, so when they
+ * alone approach the budget (a far 3D view's ground, a zoomed-out fixed view)
+ * it moves up with them: otherwise every idle page, such as the other frames of
+ * an animation, would be dropped and uploaded again each time it came round.
+ */
+export function pageBudget(inUseBytes: number): number {
+  return Math.max(PAGE_BUDGET, inUseBytes + IDLE_ALLOWANCE);
+}
 export const size = (image: CanvasImageSource) => {
   const source = image as HTMLImageElement;
   return {
@@ -71,11 +83,16 @@ export class GpuPages {
   beginFrame() {
     this.frame++;
     const cold: Page[] = [];
-    for (const pages of this.pages.values()) for (const page of pages) cold.push(page);
+    let inUse = 0;
+    for (const pages of this.pages.values())
+      for (const page of pages) {
+        if (this.frame - page.used < 2) inUse += page.width * page.height * 4;
+        else cold.push(page);
+      }
+    const budget = pageBudget(inUse);
     cold.sort((a, b) => a.used - b.used);
     for (const page of cold) {
-      if (this.frame - page.used < 2) continue;
-      if (this.frame - page.used <= 120 && this.stats.textureBytes <= 64 * 1024 * 1024) continue;
+      if (this.frame - page.used <= 120 && this.stats.textureBytes <= budget) continue;
       this.remove(page);
     }
     this.atlas.compact();

@@ -32,15 +32,17 @@ function fixture() {
     flush: () => calls.push("flush"),
     pages: {
       atlas: { texture: { name: "atlas" } },
-      pages: new Map<object, { region: object | null }[]>(),
+      pages: new Map<object, { x: number; y: number; region: object | null }[]>(),
       full: false,
       imageSize: () => ({ width: 2816, height: 8224 }),
       get(image: object, x: number, y: number, size: { width: number; height: number }) {
-        let page = this.pages.get(image)?.[0];
+        const list = this.pages.get(image) ?? [];
+        this.pages.set(image, list);
+        let page = list.find((p) => p.x === x && p.y === y);
         if (!page) {
           calls.push(`upload ${x},${y} ${size.width}x${size.height}`);
-          page = { region: this.full ? null : { layer: this.pages.size } };
-          this.pages.set(image, [page]);
+          page = { x, y, region: this.full ? null : { layer: this.pages.size, x, y } };
+          list.push(page);
         }
         return page;
       },
@@ -162,6 +164,49 @@ describe("3D views on the fixed view's renderer (249)", () => {
       expect(calls).toContain("upload 1024,512 2816x8224");
       expect(pages.page(sheet, 1024, 512)).toBe(page);
       expect(calls.filter((call) => call.startsWith("upload"))).toHaveLength(1);
+      // Another page of the same image is another region and another upload.
+      expect(pages.page(sheet, 0, 0)).not.toBe(page);
+      expect(calls).toContain("upload 0,0 2816x8224");
+    });
+  });
+
+  it("keeps a chunk in its old ground image while the replacement waits its turn", () => {
+    const { host, calls, surface, images } = fixture();
+    const edited = {} as Chunk,
+      old = {},
+      replacement = {};
+    images.set(edited, old);
+    let worn: unknown;
+    host.draw(undefined, ({ pages }) => {
+      worn = pages.ground(edited);
+    });
+    expect(worn).toBeDefined();
+    // The chunk is rastered again, in a frame whose uploads are already spent.
+    images.set(edited, replacement);
+    const others = Array.from({ length: GROUND_UPLOADS_PER_VIEW }, () => ({}) as Chunk);
+    for (const chunk of others) images.set(chunk, {});
+    const uploads = () => calls.filter((call) => call.startsWith("upload")).length;
+    host.draw(undefined, ({ pages }) => {
+      for (const chunk of others) pages.ground(chunk);
+      const before = uploads();
+      expect(pages.ground(edited)).toBe(worn); // not flat, and no upload
+      expect(uploads()).toBe(before);
+    });
+    // Its turn comes: the new image's page.
+    host.draw(undefined, ({ pages }) => {
+      const page = pages.ground(edited);
+      expect(page).toBeDefined();
+      expect(page).not.toBe(worn);
+    });
+    // An old image whose page is gone (aged out, restored context) is not worn.
+    const second = {} as Chunk;
+    images.set(second, {});
+    host.draw(undefined, ({ pages }) => void pages.ground(second));
+    surface.pages.pages.clear();
+    images.set(second, {});
+    host.draw(undefined, ({ pages }) => {
+      for (const chunk of others) pages.ground(chunk);
+      expect(pages.ground(second)).toBeUndefined();
     });
   });
 });

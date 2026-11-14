@@ -126,6 +126,8 @@ describe("a 3D view's streaming interest", () => {
     ] as const) {
       control.viewDistance = distance;
       control.markDrawn(view);
+      // Already, before any tick: a menu over play draws frames without ticking.
+      expect(view.interestRadius).toBe(radius);
       sync();
       expect(view.interestRadius).toBe(radius);
       expect(view.interestRange()).toEqual({

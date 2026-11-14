@@ -465,8 +465,8 @@ export class GameClient implements GameTestHooks {
     // Tick client-side sprite animations (animTimer/frameCol not serialized).
     this.stateView.tickAnimations(dt);
     this.scenes.update(dt);
-    // First person builds its ground from chunk data and skips the fixed view's
-    // terrain cache, so a loaded chunk is presentable there.
+    // First person builds its ground from chunk data and draws flat colours until
+    // a chunk's terrain image arrives (250), so a loaded chunk is presentable there.
     const ready = this.device.seatWorldReady(
       this.firstPerson.drawing ? FIRST_PERSON_TERRAIN : this.renderer,
     );

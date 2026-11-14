@@ -39,7 +39,10 @@ try {
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   page.on("pageerror", (error) => report.errors.push(error.message));
   page.on("console", (message) => {
-    if (message.type() === "error") report.errors.push(`console: ${message.text()}`);
+    const url = message.location()?.url ?? "";
+    // The isolated server has no favicon.
+    if (message.type() === "error" && !url.endsWith("/favicon.ico"))
+      report.errors.push(`console: ${message.text()} ${url}`);
   });
   await page.goto(`${origin}/tools.html`);
   const arrival = await page.evaluate(async () => {

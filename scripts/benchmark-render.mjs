@@ -434,18 +434,19 @@ function autopilot() {
 /** Sit in a car beside the player (spawning one the first time) and start driving. */
 async function startDriving(page) {
   if ((await playerAt(page)).parent === null) {
-    await page.evaluate(() => {
-      const g = document.querySelector("#game").__game;
-      const p = g.stateView.serverPlayerEntity.position;
-      g.transport.send({ type: "set-editor-mode", enabled: true });
-      g.transport.send({
-        type: "edit-spawn",
-        entityType: "vehicle-v1:compact-1",
-        wx: p.wx + 40,
-        wy: p.wy,
+    const spawn = () =>
+      page.evaluate(() => {
+        const g = document.querySelector("#game").__game;
+        const p = g.stateView.serverPlayerEntity.position;
+        g.transport.send({ type: "set-editor-mode", enabled: true });
+        g.transport.send({
+          type: "edit-spawn",
+          entityType: "vehicle-v1:compact-1",
+          wx: p.wx + 40,
+          wy: p.wy,
+        });
+        g.transport.send({ type: "set-editor-mode", enabled: false });
       });
-      g.transport.send({ type: "set-editor-mode", enabled: false });
-    });
     const car = () => {
       const g = document.querySelector("#game").__game;
       const p = g.stateView.serverPlayerEntity.position;
@@ -455,7 +456,17 @@ async function startDriving(page) {
           Math.hypot(e.position.wx - p.wx - 40, e.position.wy - p.wy) < 24,
       )?.id;
     };
-    await page.waitForFunction(car, undefined, { timeout: 20_000 });
+    // Arrival finishes some time after the first ready frame, and edits sent
+    // before then are dropped, not queued: ask again until the car appears.
+    for (let attempt = 0; ; attempt++) {
+      await spawn();
+      const appeared = await page
+        .waitForFunction(car, undefined, { timeout: 4000 })
+        .then(() => true)
+        .catch(() => false);
+      if (appeared) break;
+      if (attempt === 5) throw Error("The drive scene's car did not spawn");
+    }
     const entityId = await page.evaluate(car);
     await page.evaluate((entityId) => {
       const g = document.querySelector("#game").__game;
@@ -656,13 +667,7 @@ try {
         )
         .catch(() => {});
       await page.waitForTimeout(1500);
-      if (scene.drive) {
-        // Arrival finishes after the first ready frame and early edits are dropped.
-        // In first person before 250 nothing prepared terrain, so the wait above
-        // returned at once and the car's spawn could be sent too early.
-        await page.waitForTimeout(2500);
-        await startDriving(page);
-      }
+      if (scene.drive) await startDriving(page);
       let traced;
       if (trace) {
         traced = new Promise((resolve) => cdp.on("Tracing.tracingComplete", resolve));

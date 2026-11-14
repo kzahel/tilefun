@@ -103,6 +103,53 @@ describe("first-person cards", () => {
     expect([right[0], right[2], right[3]]).toEqual([100, 1, 108]);
   });
 
+  it("counts rows from the bottom of a page shorter than a full page", () => {
+    // A sheet's last page: 64 texels wide, 20 tall, at (300, 700) in its layer.
+    const short: CardPages = {
+      pageSize: 64,
+      page: () => ({ layer: 4, x: 300, y: 700, width: 64, height: 20 }),
+    };
+    const arrays = new CardArrays(1);
+    arrays.push(card(oak, 0, { sx: 8, sy: 64 + 4, sw: 16, sh: 12 }), short);
+    expect(arrays.count).toBe(1);
+    // The frame's top row is 4 texels down the 20-row page: 700 + 20 − 4.
+    expect(rounded(arrays.pages)).toEqual([
+      ...[308, 704, 4],
+      ...[324, 704, 4],
+      ...[324, 716, 4],
+      ...[308, 716, 4],
+    ]);
+  });
+
+  it("splits a mirrored card with each part on the far side", () => {
+    const arrays = new CardArrays(1);
+    arrays.push(card(oak, 0, { flipX: true }), atlas(64).pages);
+    expect(arrays.count).toBe(2);
+    const corners = [...arrays.corners];
+    // The artwork's left 24 texels are now the card's right 24, and still read
+    // the first page; within each part the edges are swapped too.
+    expect(corners.slice(0, 8)).toEqual([-8, 0, 16, 0, 16, 48, -8, 48]);
+    expect(corners.slice(8, 16)).toEqual([-16, 0, -8, 0, -8, 48, -16, 48]);
+    const pages = rounded(arrays.pages);
+    expect([pages[0], pages[3], pages[2]]).toEqual([164, 140, 0]);
+    expect([pages[12], pages[15], pages[14]]).toEqual([108, 100, 1]);
+  });
+
+  it("does not ask for another page over a rounding error", () => {
+    // A forest row's slices have fractional edges: 130 / 3 × 3 lands 3e-14 past 64 + 130.
+    const { pages, asked } = atlas(64);
+    const arrays = new CardArrays(1);
+    const width = 130 / 3;
+    const sx = 64 - 2 * width + 64 * 2; // the third slice ends on the boundary at 192
+    arrays.push(
+      card(oak, 0, { sx: sx + 2 * width - width, sy: 0, sw: width + 3e-14, sh: 16 }),
+      pages,
+    );
+    expect(asked.every((key) => !key.startsWith("oak 192,"))).toBe(true);
+    // And a page size of zero (pages not begun) writes nothing instead of looping.
+    expect(new CardArrays(1).push(card(oak, 0), new RecentPages())).toBe(false);
+  });
+
   it("leaves a card out when a page it needs is not in the atlas", () => {
     const arrays = new CardArrays(1);
     const full: CardPages = {
@@ -136,6 +183,15 @@ describe("first-person cards", () => {
     moving.end();
     expect(moving.mesh.geometry).toBe(geometry);
     expect(geometry.drawRange.count).toBe(6);
+    // A bigger crowd outgrows them: the mesh gets buffers that hold every card.
+    moving.begin();
+    for (let i = 0; i < 300; i++) moving.push(card(oak, i), pages);
+    moving.end();
+    expect(moving.mesh.geometry).not.toBe(geometry);
+    expect(moving.mesh.geometry.drawRange.count).toBe(1800);
+    expect(moving.mesh.geometry.getAttribute("position").count).toBeGreaterThanOrEqual(1200);
+    expect(moving.mesh.geometry.index?.count).toBeGreaterThanOrEqual(1800);
+    expect(moving.mesh.geometry.getAttribute("position").getX(299 * 4)).toBe(299);
   });
 
   it("asks the host once for a run of cards on the same page", () => {

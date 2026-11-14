@@ -208,9 +208,14 @@ describe("renderViews", () => {
       return { view: view.camera, visible };
     });
     expect(prepared).toEqual([expected]);
-    const wide = views[1]?.interestRange(),
-      rectangle = views[1]?.camera.getVisibleChunkRange();
-    expect(wide).not.toEqual(rectangle);
+    // View 1's camera is at (−150, −100): 800 px each way, in 256 px chunks. Its
+    // camera rectangle at this zoom is two chunks wide.
+    expect(prepared[0]?.[1]).toEqual({
+      view: views[1]?.camera,
+      visible: { minCx: -4, minCy: -4, maxCx: 2, maxCy: 2 },
+    });
+    const rectangle = views[1]?.camera.getVisibleChunkRange();
+    expect(rectangle).not.toEqual({ minCx: -4, minCy: -4, maxCx: 2, maxCy: 2 });
     // Every view in 3D: terrain is still prepared, and no fixed frame opens.
     order.length = 0;
     for (const view of views) threeD.add(view);

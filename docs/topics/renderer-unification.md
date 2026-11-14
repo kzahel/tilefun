@@ -1,8 +1,9 @@
 # Renderer unification
 
 Topic: renderer-unification
-Status: committed direction, 2026-11-14; slice 1 (one renderer host) delivered the same day. The
-fixed 2D view is the default top-down renderer and stays so until the
+Status: committed direction, 2026-11-14; slices 1 (one renderer host) and 2
+(ground artwork, shared page atlas) delivered the same day. The fixed 2D view is
+the default top-down renderer and stays so until the
 [retirement gate](#retirement-gate) is met.
 Updated: 2026-11-14.
 
@@ -85,7 +86,7 @@ row when a slice starts, delivers or is blocked.
 | --- | --- | --- |
 | 0 — Spike and plan | Done 2026-11-14 | [248](../tactical/248-renderer-unification.md) |
 | 1 — One renderer host | Done 2026-11-14: one WebGL context, shared vehicle assets, first person as a per-seat view kind with mixed split screen | [249](../tactical/249-one-renderer-host.md) |
-| 2 — Ground artwork, shared page atlas | In progress from 2026-11-14 | [250](../tactical/250-ground-artwork-and-shared-pages.md) |
+| 2 — Ground artwork, shared page atlas | Done 2026-11-14: the 3D ground wears the fixed view's terrain pages, and 3D cards read the same atlas instead of whole-sheet textures (99.6 MiB → 4.6 MiB of card artwork in the city) | [250](../tactical/250-ground-artwork-and-shared-pages.md) |
 | 3 — Top-down camera, parity probe, draw calls, device scorecard | Not started | — |
 | 4 — XR on the shared scene | Not started (needs slice 1) | [230](../tactical/230-3d-cameras-stereo-and-webxr.md) slices 5–8 |
 | 5 — Top-down parity | Not started (needs slices 2 and 3) | checklist below |
@@ -99,11 +100,11 @@ States: missing, partial, done. Add rows as differences are found.
 | Item | State | Notes |
 | --- | --- | --- |
 | Framing and registration of props, actors and vehicles | Partial | Matches in the spike by eye; no pixel probe yet |
-| Ground artwork (terrain pages, road markings, paths) | Missing | Flat colour per tile today; slice 2 |
+| Ground artwork (terrain pages, road markings, paths) | Done in the 3D scene | 250: every drawn chunk wears its terrain page. Not yet checked through the top-down camera (slice 3), which will need the visible rectangle's pages and its own sampling rule |
 | Grass blades | Missing | |
 | Particles and contact effects | Missing | |
 | Surface decals | Missing | |
-| Sprite edges | Missing | 3D cards are hard cutouts (`alphaTest`); the fixed view blends filtered edges at fractional zoom |
+| Sprite edges | Missing | 3D cards are hard cutouts (`alphaTest`) with one sample per pixel; the fixed view blends filtered edges at fractional zoom |
 | Pixel snapping and stable sampling at fractional zoom | Missing | Fixed-view rules from 213 and 215 |
 | Body shadows | Partial | 3D has sun shadows and contact shadows; the fixed view has the deferred depth pass. Choose one look for top-down |
 | Cutaways, slab fades, roof visibility | Missing | `SurfacePresentation` |
@@ -131,7 +132,7 @@ limits). `--query=` selects the renderer under test.
 | Device | Access | Fixed view baseline | Unified top-down |
 | --- | --- | --- | --- |
 | M4 Pro Mac, 120 Hz | local | [236](../tactical/236-render-scorecard-and-gpu-shadows.md), [248 spike](../benchmarks/248-oblique-camera-spike.json) | Spike only: [248](../tactical/248-renderer-unification.md#spike) |
-| Pixel 7a, 60 Hz | adb, bench `--cdp` | 236 | Not measured |
+| Pixel 7a, 60 Hz | adb, bench `--cdp` | 236 | Not measured. First person after slice 2: city 3.8 / 5.5 ms, woods 4.0 / 5.6 ms render, no missed frames ([250](../tactical/250-ground-artwork-and-shared-pages.md)) |
 | Steam Deck, 90 Hz | `npm run deck:*`, bench `--attach-page` | 236 | Not measured |
 | Quest 3 | adb, Quest Browser | None | Not measured; XR frame pacing is slice 4 |
 
@@ -166,14 +167,26 @@ Three owner decisions, in order. Each needs the evidence listed.
 - Whether stereo and headset "flat" modes use the oblique camera or the orbit
   overhead preset (230). An oblique shear is exact on a page but is not a
   physically viewable camera in a headset.
-- How much of the fixed view's CPU terrain rasteriser stays. The 3D ground needs
-  the same pages either way.
+- How much of the fixed view's CPU terrain rasteriser stays. Since 250 the 3D
+  ground wears its chunk images, so it stays at least until something else
+  makes them.
+- Texture memory at the far view distance (250): 48.5 MiB of ground pages on
+  the GPU and 60 MiB of chunk images on the CPU for one view. Not measured on
+  the phone. A cap, or a fade to average colours, is the fallback.
+- Terrain preparation ranks every chunk of a 3D view's interest square as on
+  screen (250 review). A nearer "on screen" set for 3D views is open.
+- Page ageing (250): the page store drops a page nobody drew for 120 frames,
+  which is one second at 120 Hz. Wide animation sheets then upload pages again
+  and again, in both renderers. Whether the age should be a time, not a frame
+  count, is undecided.
 - WebGPU is not part of this work
   ([renderer options](../research/sprite-to-3d-and-renderer-options.md#renderer-choices)).
 
 ## Next
 
-Slice 2 ([248](../tactical/248-renderer-unification.md#2--ground-artwork)): the
-3D ground samples the fixed view's terrain pages, and first person's sheet
-textures come from the same page atlas. Slice 3's device scorecard (Pixel 7a,
-Deck) can start in parallel, since slice 1 changed how first person draws.
+Slice 3 ([248](../tactical/248-renderer-unification.md#3--top-down-camera-parity-probe-draw-calls-device-scorecard)):
+land the oblique top-down camera as an opt-in view, add the parity probe, merge
+chunk meshes, and fill the device scorecard. Device runs come first: slice 2
+chose four ground samples per pixel and unpaced card page uploads on Mac
+numbers, with only two standing-still cells on the Pixel 7a. The bench's
+`drive` scene does not start on the phone and needs fixing for that.
