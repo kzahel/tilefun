@@ -66,7 +66,7 @@ import { World } from "../world/World.js";
 import { takeAdminToken } from "./adminToken.js";
 import { registerClientConsole } from "./ClientConsoleBindings.js";
 import { RemoteStateView } from "./ClientStateView.js";
-import { FirstPersonControl } from "./FirstPersonControl.js";
+import { FIRST_PERSON_TERRAIN, FirstPersonControl } from "./FirstPersonControl.js";
 import { GameMenuChrome, type MenuChromeHost } from "./GameMenuChrome.js";
 import { LocalPlayers } from "./LocalPlayers.js";
 import { PlaceControls, type PlaceControlsHost } from "./PlaceControls.js";
@@ -74,11 +74,6 @@ import { PlayInputController, type PlayInputHost } from "./PlayInputController.j
 import { RequestBroker } from "./RequestBroker.js";
 import { type ServerMessageHost, ServerMessageRouter } from "./ServerMessageRouter.js";
 import { WorldSessionActions, type WorldSessionHost } from "./WorldSessionActions.js";
-
-/** First-person readiness: the view meshes the loaded chunk directly. */
-const FIRST_PERSON_TERRAIN: Pick<RenderBackend, "isTerrainReady"> = {
-  isTerrainReady: (chunk) => chunk !== undefined,
-};
 
 export interface GameClientOptions {
   /** The WebGL2 world host (232); simulation and presentation stay shared. */
@@ -864,6 +859,7 @@ export class GameClient implements GameTestHooks {
       endWorld: () => client.renderHost.endWorld(),
       beginView: (camera, region) => client.renderHost.beginView(camera, region),
       endView: () => client.renderHost.endView(),
+      view3d: client.renderHost.view3d,
       session: this.device,
       view: this.view,
       sceneFrame: this.device.frame,

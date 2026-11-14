@@ -76,7 +76,6 @@ try {
   const state = () =>
     game(() => {
       const g = document.querySelector("#game").__game;
-      const view = document.querySelector('canvas[data-view="first-person"]');
       const camera = g.camera;
       return {
         player: { ...g.stateView.playerEntity.position },
@@ -84,7 +83,7 @@ try {
         look: { ...g.firstPerson.look },
         viewDistance: g.firstPerson.viewDistance,
         drawing: g.firstPerson.drawing,
-        viewShown: !!view && view.style.display !== "none",
+        viewShown: g.firstPerson.drawing,
         stats: g.firstPerson.viewStats,
         streamedRadius: camera
           ? Math.min(camera.viewportWidth, camera.viewportHeight) / (2 * 3 * camera.zoom)

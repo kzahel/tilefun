@@ -114,7 +114,8 @@ Draw the 3D scene through the GPU host's `WebGLRenderer` as a view kind
 (226 requirement 4).
 
 - A 3D view draws inside `beginView`/`endView` regions like a fixed view.
-- One page atlas and sheet textures, one set of vehicle assets and mesh poses.
+- One set of vehicle assets and mesh poses. (The shared page atlas moved to
+  slice 2; see [249](249-one-renderer-host.md#scope-change-from-248).)
 - The second canvas and WebGL context are removed. Context loss recovery follows
   the host's.
 - 229's temporary glue becomes a camera policy that produces a 3D eye, a
@@ -126,7 +127,8 @@ Draw the 3D scene through the GPU host's `WebGLRenderer` as a view kind
 
 ### 2 — Ground artwork
 
-The 3D ground samples the fixed view's terrain pages instead of flat colours.
+The 3D ground samples the fixed view's terrain pages instead of flat colours,
+and first person's sheet textures come from the same page atlas.
 
 - Chunk ground meshes take UVs into the shared atlas page of their chunk. Cliff
   walls keep their shading.
@@ -200,6 +202,8 @@ here deletes fixed-view code before the third decision.
   XR session start and end.
 
 ## Progress
+
+Slice 1 is recorded in [249](249-one-renderer-host.md).
 
 ### Slice 0 — spike and plan (2026-11-14)
 

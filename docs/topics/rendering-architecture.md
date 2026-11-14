@@ -7,6 +7,11 @@ stays the default top-down renderer until the owner gates in
 [renderer unification](renderer-unification.md), which owns that work's status,
 parity checklist and device scorecard. Do not delete or degrade the fixed view
 before those gates. This topic keeps backend boundaries and resource lifetimes.
+Since [249](../tactical/249-one-renderer-host.md) phase 1a the first-person view
+has no canvas or context of its own: `RenderHost.view3d` lends it the host's
+`WebGLRenderer`, bound to a region of the world canvas, and restores the host's
+render state afterwards. A 3D view draws straight to the canvas, not into the
+fixed view's world target.
 
 [241](../tactical/241-budget-terrain-raster-completion.md) closes the terrain
 budget blind spot identified in [240](../tactical/240-phone-pause-attribution.md).

@@ -21,6 +21,7 @@ import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { SceneFrame } from "../rendering/SceneFrame.js";
+import type { View3dHost } from "../rendering/View3dHost.js";
 import type { RenderRegion } from "../rendering/ViewLayout.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import type { View } from "../session/View.js";
@@ -97,6 +98,8 @@ export interface GameContext {
   gemSpriteCanvas: HTMLCanvasElement | null;
   debugEnabled: boolean;
   editorButton: HTMLButtonElement | null;
+  /** 3D views on the render host's renderer (248); absent without graphics. */
+  readonly view3d?: View3dHost | undefined;
   /** Experimental first-person view and look state (tactical 229). */
   readonly firstPerson?: FirstPersonControl;
 

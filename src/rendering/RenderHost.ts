@@ -2,6 +2,7 @@ import type { GameAssets } from "../assets/GameAssets.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
 import type { Camera } from "./Camera.js";
 import type { RenderBackend } from "./RenderFrame.js";
+import type { View3dHost } from "./View3dHost.js";
 import type { RenderRegion } from "./ViewLayout.js";
 
 /** Browser composition only. A GPU host may provide a separate 2D UI overlay;
@@ -23,6 +24,8 @@ export interface RenderHost {
    * may follow one beginFrame; regions never go through resize(). */
   beginView(camera: Camera, region: RenderRegion): void;
   endView(): void;
+  /** 3D views of the display frame on this host's renderer (248), if it has one. */
+  readonly view3d?: View3dHost;
   /** Independent snapshot of world plus Canvas UI. */
   captureFrame?(): HTMLCanvasElement;
   dispose(): void;

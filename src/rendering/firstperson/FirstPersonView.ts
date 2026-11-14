@@ -5,6 +5,7 @@ import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { World } from "../../world/World.js";
 import type { SpriteItem } from "../SceneItem.js";
+import type { View3dTarget } from "../View3dHost.js";
 import { actorBillboard, BillboardBatches, StaticCards } from "./FirstPersonBillboards.js";
 import {
   cameraRight,
@@ -100,11 +101,10 @@ export function chunksInReach(
  * billboards for actors and narrow props, and the authored vehicle meshes.
  * Reads shared presentation output only; it never advances simulation.
  *
- * Owns its own canvas between the GPU world canvas and the UI canvas. The 226
- * multi-viewport work should let it share the host's WebGL renderer and assets.
+ * Draws through the render host's WebGL renderer into a region of its canvas
+ * (248): the view owns scene content, never a context or a canvas.
  */
 export class FirstPersonView {
-  readonly canvas: HTMLCanvasElement;
   readonly stats = {
     chunks: 0,
     builds: 0,
@@ -120,7 +120,6 @@ export class FirstPersonView {
     calls: 0,
     fogEnd: 0,
   };
-  private readonly renderer: THREE.WebGLRenderer;
   private readonly scene = new THREE.Scene();
   private readonly worldRoot = new THREE.Group();
   private readonly camera = new THREE.PerspectiveCamera(70, 1, 2, 4000);
@@ -141,7 +140,9 @@ export class FirstPersonView {
   private readonly propMeshes: PropMeshes;
   private readonly chunks = new Map<string, ChunkScene>();
   private readonly images: FirstPersonImages;
-  private readonly observer: ResizeObserver;
+  private readonly background = new THREE.Color(SKY);
+  /** The host's restored-context count the sun map was last drawn under. */
+  private generation = 0;
   private world: FirstPersonWorld | null = null;
   private realm: string | null | undefined;
   private propsSource: readonly Prop[] | null = null;
@@ -153,24 +154,11 @@ export class FirstPersonView {
   private room: { scene: FirstPersonRoomScene; mesh: THREE.Mesh } | null = null;
   private disposed = false;
 
-  constructor(
-    private readonly host: HTMLCanvasElement,
-    private readonly sheets: ReadonlyMap<string, Spritesheet>,
-  ) {
+  constructor(private readonly sheets: ReadonlyMap<string, Spritesheet>) {
     this.images = new FirstPersonImages(sheets, (texture) => this.propMeshes.dropMaterial(texture));
     this.propMeshes = new PropMeshes(this.images, this.flatMaterial, (material) =>
       this.lit(material, "faces"),
     );
-    this.canvas = document.createElement("canvas");
-    this.canvas.dataset.view = "first-person";
-    this.canvas.setAttribute("aria-hidden", "true");
-    this.canvas.style.cssText = "position:fixed;pointer-events:none;image-rendering:pixelated;";
-    host.before(this.canvas);
-    this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: false });
-    this.renderer.setPixelRatio(1);
-    this.renderer.autoClear = false;
-    this.renderer.info.autoReset = false;
-    this.renderer.setClearColor(SKY, 1);
     // Game axes are X east, Y south, Z up (left-handed seen from above). Mirroring
     // Y once at this boundary makes the world right-handed for Three, so east stays
     // on the right when looking north; Three flips face winding for det < 0.
@@ -198,9 +186,6 @@ export class FirstPersonView {
     this.blobs = new BlobShadows(this.worldRoot);
     this.vehicles.fog = this.fog;
     this.camera.up.set(0, 0, 1);
-    this.observer = new ResizeObserver(() => this.align());
-    this.observer.observe(host);
-    this.align();
   }
 
   /** Adds the sun's shadow to a material of the given receiver kind. */
@@ -208,21 +193,17 @@ export class FirstPersonView {
     return shadeMaterial(material, { sun: { uniforms: this.sun.uniforms, receiver } });
   }
 
-  set visible(value: boolean) {
-    this.canvas.style.display = value ? "" : "none";
-  }
-
-  private align(): void {
-    const rect = this.host.getBoundingClientRect();
-    this.canvas.style.left = `${rect.left}px`;
-    this.canvas.style.top = `${rect.top}px`;
-    this.canvas.style.width = `${rect.width}px`;
-    this.canvas.style.height = `${rect.height}px`;
-  }
-
-  render(frame: FirstPersonFrame): void {
+  /** Draw one frame into `target`: the host's renderer, bound to this view's region.
+   * `generation` is the host's count of restored graphics contexts. */
+  render(frame: FirstPersonFrame, target: View3dTarget, generation = 0): void {
     if (this.disposed) return;
-    this.resize();
+    const { renderer } = target;
+    if (generation !== this.generation) {
+      // three.js re-uploads meshes and textures itself; the cached sun map is ours.
+      this.generation = generation;
+      this.sun.reset();
+    }
+    this.camera.aspect = target.width / Math.max(1, target.height);
     if (frame.world !== this.world || frame.realm !== this.realm) this.resetWorld(frame);
     this.syncRoom(frame.interior);
     if (frame.props !== this.propsSource) this.groupProps(frame.props);
@@ -236,24 +217,23 @@ export class FirstPersonView {
     const shadows = frame.shadows !== false;
     const cars = this.fillBillboards(frame, ready, shadows);
     const fogEnd = this.fogEnd ?? frame.drawRadius;
-    this.sun.update(this.renderer, this.scene, frame.eye, fogEnd, shadows && !frame.interior);
-    this.stats.sunRedraws = this.sun.redraws;
-    this.renderer.info.reset();
-    this.renderer.clear();
-    this.renderer.render(this.scene, this.camera);
-    this.stats.cars = 0;
-    for (const item of cars)
-      if (this.vehicles.draw(this.renderer, this.camera, item)) this.stats.cars++;
-    this.stats.calls = this.renderer.info.render.calls;
-  }
-
-  private resize(): void {
-    const width = this.host.clientWidth || this.host.width;
-    const height = this.host.clientHeight || this.host.height;
-    if (this.canvas.width === width && this.canvas.height === height) return;
-    this.renderer.setSize(width, height, false);
-    this.camera.aspect = width / Math.max(1, height);
-    this.align();
+    // Draw calls are counted over every render of this view, sun map included.
+    const { info } = renderer;
+    info.autoReset = false;
+    info.reset();
+    try {
+      this.sun.update(renderer, this.scene, frame.eye, fogEnd, shadows && !frame.interior);
+      this.stats.sunRedraws = this.sun.redraws;
+      renderer.setClearColor(this.background, 1);
+      renderer.clear();
+      renderer.render(this.scene, this.camera);
+      this.stats.cars = 0;
+      for (const item of cars)
+        if (this.vehicles.draw(renderer, this.camera, item)) this.stats.cars++;
+      this.stats.calls = info.render.calls;
+    } finally {
+      info.autoReset = true;
+    }
   }
 
   private placeCamera(eye: FirstPersonEye, drawRadius: number): void {
@@ -294,7 +274,7 @@ export class FirstPersonView {
     } else this.dropChunks();
     this.disposeRoom();
     this.scene.fog = this.vehicles.fog = interior ? null : this.fog;
-    this.renderer.setClearColor(interior ? INTERIOR_BACKGROUND : SKY, 1);
+    this.background.set(interior ? INTERIOR_BACKGROUND : SKY);
     if (!interior || !key) return;
     const scene = new FirstPersonRoomScene(interior, key, atlas);
     scene.adoptShell(this.propsSource);
@@ -479,7 +459,6 @@ export class FirstPersonView {
   dispose(): void {
     if (this.disposed) return;
     this.disposed = true;
-    this.observer.disconnect();
     this.dropChunks();
     this.disposeRoom();
     this.billboards.dispose();
@@ -490,10 +469,5 @@ export class FirstPersonView {
     this.vehicles.dispose();
     this.images.dispose();
     this.flatMaterial.dispose();
-    // Release the context now, as GpuRasterSurface does; repeated toggles must not
-    // stack contexts until garbage collection.
-    this.renderer.forceContextLoss();
-    this.renderer.dispose();
-    this.canvas.remove();
   }
 }

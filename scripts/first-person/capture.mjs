@@ -83,12 +83,13 @@ try {
     await page.screenshot({ path: file });
     const state = await game(() => {
       const g = document.querySelector("#game").__game;
-      const view = document.querySelector('canvas[data-view="first-person"]');
       return {
         player: g.stateView.playerEntity.position,
         look: { ...g.firstPerson.look },
         active: g.firstPerson.active,
-        viewShown: !!view && view.style.display !== "none",
+        // First person draws on the game's own world canvas (248).
+        viewShown: g.firstPerson.drawing,
+        webglCanvases: document.querySelectorAll("canvas[data-renderer=gpu]:not(#game)").length,
       };
     });
     report.shots.push({ name, file, ...state });
@@ -182,7 +183,33 @@ try {
     await shoot("drive-moving");
     await page.keyboard.up("w");
   }
-  // The editor draws the fixed view; the first-person canvas must not cover it.
+  // The graphics context is the game's own (248): losing it stops first person,
+  // and restoring it brings back the scene and a fresh sun shadow map.
+  const context = await game(async () => {
+    const g = document.querySelector("#game").__game;
+    const gl = g.renderer.surface.renderer.getContext();
+    const lose = gl.getExtension("WEBGL_lose_context");
+    const frames = (n) =>
+      new Promise((resolve) => {
+        const step = () => (--n > 0 ? requestAnimationFrame(step) : resolve());
+        requestAnimationFrame(step);
+      });
+    const before = g.firstPerson.viewStats.sunRedraws;
+    lose.loseContext();
+    await frames(10);
+    const drawingWhileLost = g.firstPerson.drawing;
+    lose.restoreContext();
+    await frames(30);
+    return {
+      drawingWhileLost,
+      drawingAfter: g.firstPerson.drawing,
+      sunRedrawn: g.firstPerson.viewStats.sunRedraws > before,
+      recoveries: g.renderer.surface.stats.recoveries,
+    };
+  });
+  report.contextLoss = context;
+  await shoot("context-restored");
+  // The editor draws the fixed view instead of first person.
   await page.keyboard.press("Tab");
   await shoot("editor");
   report.editorHidesView = !report.shots.at(-1)?.viewShown;

@@ -1,5 +1,6 @@
 import type { Camera } from "./Camera.js";
 import { GpuRenderBackend } from "./GpuRenderBackend.js";
+import { createView3dHost } from "./GpuView3d.js";
 import type { RenderHost } from "./RenderHost.js";
 import type { RenderRegion } from "./ViewLayout.js";
 import { WorldRasterFrame } from "./WorldRasterFrame.js";
@@ -92,6 +93,7 @@ export function createGpuRenderHost(
     endWorld: endView,
     beginView,
     endView,
+    view3d: createView3dHost(renderer.surface),
     captureFrame() {
       if (disposed || renderer.surface.lost) throw Error("Graphics are unavailable for capture");
       renderer.surface.flush();

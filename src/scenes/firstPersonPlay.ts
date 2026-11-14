@@ -134,16 +134,16 @@ function currentInterior(
 
 /**
  * Tactical 229 glue: draw the play view in first person when it is enabled and
- * loaded. Returns false to keep the fixed view (disabled, loading or
- * failed to load). Indoors draws the room (230). Drivers get a chase camera behind their vehicle.
+ * loaded. Returns false to keep the fixed view (disabled, loading, failed to
+ * load, or graphics lost). Indoors draws the room (230). Drivers get a chase camera behind their vehicle.
  */
 export function renderFirstPerson(gc: GameContext, alpha: number): boolean {
   const control = gc.firstPerson;
   if (!control?.active) return false;
   const view = control.currentView();
-  const { stateView, camera } = gc;
+  const { stateView, camera, view3d } = gc;
   const shown = stateView.presentedPlayerEntity ?? stateView.playerEntity;
-  if (!view || shown.id === -1) {
+  if (!view || !view3d || shown.id === -1) {
     control.hideView();
     return false;
   }
@@ -166,6 +166,7 @@ export function renderFirstPerson(gc: GameContext, alpha: number): boolean {
   const frame = control.frame;
   frame.presentationTime = gc.time?.presentationSeconds ?? 0;
   const items = frame.begin(false);
+  let drawn = false;
   try {
     collectWorldSprites({
       // First person hides the viewer's own body; a driver is drawn inside the vehicle anyway.
@@ -184,7 +185,7 @@ export function renderFirstPerson(gc: GameContext, alpha: number): boolean {
       // Casters carry their shadow shapes, as for the fixed view's depth pass (247).
       depthShadows: control.shadows,
     });
-    view.render({
+    const scene = {
       eye,
       world: stateView.world,
       realm: gc.realmId ?? null,
@@ -193,12 +194,15 @@ export function renderFirstPerson(gc: GameContext, alpha: number): boolean {
       drawRadius,
       interior,
       shadows: control.shadows,
-    });
+    };
+    // The whole canvas, through the render host's own renderer (248).
+    drawn = view3d.draw(undefined, (target) => view.render(scene, target, view3d.generation));
   } finally {
     frame.release();
   }
-  control.markDrawn();
-  return true;
+  if (drawn) control.markDrawn();
+  else control.hideView();
+  return drawn;
 }
 
 /** Small aiming mark at the screen centre of the UI canvas. */

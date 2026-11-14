@@ -13,7 +13,13 @@ import {
   NORTH_YAW,
 } from "../rendering/firstperson/FirstPersonCamera.js";
 import type { FirstPersonView } from "../rendering/firstperson/FirstPersonView.js";
+import type { RenderBackend } from "../rendering/RenderFrame.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
+
+/** First-person readiness: the view meshes the loaded chunk directly. */
+export const FIRST_PERSON_TERRAIN: Pick<RenderBackend, "isTerrainReady"> = {
+  isTerrainReady: (chunk) => chunk !== undefined,
+};
 
 const MOUSE_RADIANS_PER_PIXEL = 0.0025;
 const STICK_YAW_RATE = 2.6;
@@ -68,7 +74,8 @@ export class FirstPersonControl {
     );
   };
 
-  /** Lazy sources: the client creates this before its canvas and sheets exist. */
+  /** Lazy sources: the client creates this before its canvas and sheets exist.
+   * `canvas` is the input canvas (pointer lock); drawing goes through the render host. */
   constructor(
     private readonly canvas: () => HTMLCanvasElement,
     private readonly sheets: () => ReadonlyMap<string, Spritesheet>,
@@ -102,7 +109,6 @@ export class FirstPersonControl {
   /** Called by the play view after drawing a frame in first person. */
   markDrawn(): void {
     this.drawn = true;
-    if (this.view) this.view.visible = true;
   }
 
   turn(yaw: number, pitch: number): void {
@@ -145,8 +151,7 @@ export class FirstPersonControl {
       import("../rendering/firstperson/FirstPersonView.js")
         .then(({ FirstPersonView }) => {
           if (this.active && !this.disposed && !this.view)
-            // The view sits between the GPU world canvas and this UI canvas.
-            this.view = new FirstPersonView(this.canvas(), this.sheets());
+            this.view = new FirstPersonView(this.sheets());
         })
         .catch((error) => {
           this.failed = true;
@@ -164,11 +169,10 @@ export class FirstPersonControl {
     return this.view ? { ...this.view.stats } : undefined;
   }
 
-  /** The fixed view draws instead (editor, loading, failed to load):
-   * hide the view and give back ordinary controls and the pointer. */
+  /** The fixed view draws instead (editor, loading, failed to load, graphics
+   * lost): give back ordinary controls and the pointer. */
   hideView(): void {
     this.drawn = false;
-    if (this.view) this.view.visible = false;
     if (document.pointerLockElement === this.canvas()) document.exitPointerLock();
   }
 

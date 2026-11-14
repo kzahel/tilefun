@@ -83,6 +83,12 @@ export class SunShadows {
     this.cards.add(this.cardRoot);
   }
 
+  /** The graphics context was restored: the map is empty and must be set up again. */
+  reset(): void {
+    this.created = false;
+    this.dirty = true;
+  }
+
   /** Marks a static world mesh as a shadow caster. */
   static cast(mesh: THREE.Object3D): void {
     mesh.layers.enable(CASTER_LAYER);

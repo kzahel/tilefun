@@ -106,6 +106,8 @@ RenderBackend (unchanged)          FirstPersonView (own Three.js renderer/canvas
   range covers the fog radius. It becomes a view-owned interest radius.
 - A separate WebGL context and canvas between the GPU world canvas and the UI
   canvas, with its own vehicle assets. It should share the host renderer.
+  (The separate context and canvas were removed by
+  [249](249-one-renderer-host.md) phase 1a, 2026-11-14.)
 
 ### Owner feedback, 2026-11-07
 
