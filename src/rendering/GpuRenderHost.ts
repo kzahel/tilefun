@@ -93,7 +93,7 @@ export function createGpuRenderHost(
     endWorld: endView,
     beginView,
     endView,
-    view3d: createView3dHost(renderer.surface),
+    view3d: createView3dHost(renderer.surface, renderer.meshes),
     captureFrame() {
       if (disposed || renderer.surface.lost) throw Error("Graphics are unavailable for capture");
       renderer.surface.flush();

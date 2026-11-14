@@ -35,6 +35,16 @@ try {
   browser = await chromium.launch({ headless: !headed, channel: "chromium" });
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
   page.on("pageerror", (error) => report.errors.push(error.message));
+  // Vehicle meshes are loaded once for the fixed view and first person (249).
+  const meshLoads = new Map();
+  page.on("request", (request) => {
+    const file = new URL(request.url()).pathname;
+    if (file.endsWith(".glb")) meshLoads.set(file, (meshLoads.get(file) ?? 0) + 1);
+  });
+  report.meshLoads = () => ({
+    files: meshLoads.size,
+    repeated: [...meshLoads].filter(([, count]) => count > 1).map(([file]) => file),
+  });
   page.on("console", (message) => {
     if (message.type() === "error" || message.text().includes("First-person"))
       report.errors.push(`console: ${message.text()} ${message.location()?.url ?? ""}`);
@@ -218,6 +228,7 @@ try {
 } finally {
   await browser?.close();
   await server.close();
+  report.meshLoads = report.meshLoads?.();
   await writeFile(path.join(output, "report.json"), `${JSON.stringify(report, null, 2)}\n`);
   console.log(JSON.stringify(report, null, 2));
   if (!process.argv.includes("--keep-temp"))

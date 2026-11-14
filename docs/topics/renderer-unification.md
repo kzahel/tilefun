@@ -1,7 +1,7 @@
 # Renderer unification
 
 Topic: renderer-unification
-Status: committed direction, 2026-11-14; slice 1 in progress (phase 1a of three delivered). The
+Status: committed direction, 2026-11-14; slice 1 in progress (phases 1a and 1b of three delivered). The
 fixed 2D view is the default top-down renderer and stays so until the
 [retirement gate](#retirement-gate) is met.
 Updated: 2026-11-14.
@@ -84,7 +84,7 @@ row when a slice starts, delivers or is blocked.
 | Slice | State | Record |
 | --- | --- | --- |
 | 0 — Spike and plan | Done 2026-11-14 | [248](../tactical/248-renderer-unification.md) |
-| 1 — One renderer host | In progress: 1a (one WebGL context) done 2026-11-14; 1b (shared vehicle assets) and 1c (view kind, mixed split screen) next | [249](../tactical/249-one-renderer-host.md) |
+| 1 — One renderer host | In progress: 1a (one WebGL context) and 1b (shared vehicle assets) done 2026-11-14; 1c (view kind, mixed split screen) next | [249](../tactical/249-one-renderer-host.md) |
 | 2 — Ground artwork, shared page atlas | Not started | — |
 | 3 — Top-down camera, parity probe, draw calls, device scorecard | Not started | — |
 | 4 — XR on the shared scene | Not started (needs slice 1) | [230](../tactical/230-3d-cameras-stereo-and-webxr.md) slices 5–8 |
@@ -173,7 +173,6 @@ Three owner decisions, in order. Each needs the evidence listed.
 
 ## Next
 
-Slice 1, phases 1b and 1c ([249](../tactical/249-one-renderer-host.md)): one
-set of vehicle assets, then first person as a per-seat view kind so split screen
-can mix views. Sharing the page atlas moved to slice 2, where ground artwork
+Slice 1, phase 1c ([249](../tactical/249-one-renderer-host.md)): first person
+as a per-seat view kind so split screen can mix views. Sharing the page atlas moved to slice 2, where ground artwork
 needs the same atlas-sampling materials.

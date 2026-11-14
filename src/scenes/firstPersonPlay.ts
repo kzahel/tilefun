@@ -196,7 +196,7 @@ export function renderFirstPerson(gc: GameContext, alpha: number): boolean {
       shadows: control.shadows,
     };
     // The whole canvas, through the render host's own renderer (248).
-    drawn = view3d.draw(undefined, (target) => view.render(scene, target, view3d.generation));
+    drawn = view3d.draw(undefined, (target) => view.render(scene, target));
   } finally {
     frame.release();
   }

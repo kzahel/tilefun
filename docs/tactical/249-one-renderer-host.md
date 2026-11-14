@@ -1,6 +1,6 @@
 # 249 — One renderer host
 
-Status: in progress. Phase 1a delivered 2026-11-14; 1b and 1c not started.
+Status: in progress. Phases 1a and 1b delivered 2026-11-14; 1c not started.
 Slice 1 of [248](248-renderer-unification.md).
 Owners: [renderer unification](../topics/renderer-unification.md),
 [rendering architecture](../topics/rendering-architecture.md).
@@ -118,3 +118,43 @@ Validation:
 
 Scripts changed: `render:bench` measures first person on the game's own
 context; the capture scripts report `drawing` instead of a second canvas.
+
+### 1b — delivered 2026-11-14
+
+How it works:
+
+- `View3dTarget.meshes` (`SharedMeshAssets`) lends a 3D view the fixed view's
+  loaded vehicle and train meshes and its paint atlases. `GpuView3d.ts` adapts
+  `GpuMeshBodies`; the first sight of an asset in either view starts its one
+  load, and it becomes drawable at the next display frame, as before.
+- `FirstPersonVehicles` no longer loads or owns assets. For each shared asset it
+  makes one lit copy of each material (the copy carries the view's shadow
+  shading and shares the original's textures). Per draw it poses the asset with
+  the shared pose, binds the paint to the asset's own materials, copies what the
+  pose and paint changed onto the lit copies (paint atlas, emergency-light
+  colour and gain, opacity, visibility), swaps the copies in for the render and
+  swaps the originals back.
+- The fixed view therefore still compiles and draws the original materials. 247
+  edited the shader of the view-owned copies of the assets; with shared assets
+  that edit would have reached the fixed view's vehicle pass.
+- `View3dTarget` also carries `generation`, so `View3dHost` is only `draw`.
+
+Validation:
+
+- Node: `FirstPersonVehicles.test.ts` (lit copies are drawn and follow the
+  shared material; originals and their shader hook are restored; nothing draws
+  before the asset is ready; a bound paint atlas reaches the copy).
+  `src/rendering/firstperson` and `GpuRasterSurface.test.ts`: 49 tests pass.
+- `capture.mjs` now counts `.glb` requests: 15–16 files in a run that shows the
+  fixed view, first person, driving and the fixed view again, none requested
+  twice. Vehicles draw painted and shaded in first person and unchanged in the
+  fixed view afterwards. The context-loss step still passes.
+- `tests/gpu-renderer.spec.ts` and `tests/car-projection.spec.ts`, the six cases
+  matching paint, mesh and graphics loss: pass.
+- `render:bench --query=view=fps`, M4 Pro: crowd (49 cars) 3.1 / 3.4 ms and
+  drive 0.9 / 1.4 ms, against 3.1 / 3.5 and 0.9 / 1.2 after 1a.
+- Typechecks, Biome and knip pass. The ratchet reports only `PhysicsScene.ts`.
+- Not measured: how much memory one copy saves. Not run: full suites, devices.
+
+Limit: each first-person view makes its own lit material copies. They are small
+(no textures or geometry), but two first-person views compile two sets.

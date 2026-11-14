@@ -5,7 +5,7 @@ import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { World } from "../../world/World.js";
 import type { SpriteItem } from "../SceneItem.js";
-import type { View3dTarget } from "../View3dHost.js";
+import type { SharedMeshAssets, View3dTarget } from "../View3dHost.js";
 import { actorBillboard, BillboardBatches, StaticCards } from "./FirstPersonBillboards.js";
 import {
   cameraRight,
@@ -193,11 +193,11 @@ export class FirstPersonView {
     return shadeMaterial(material, { sun: { uniforms: this.sun.uniforms, receiver } });
   }
 
-  /** Draw one frame into `target`: the host's renderer, bound to this view's region.
-   * `generation` is the host's count of restored graphics contexts. */
-  render(frame: FirstPersonFrame, target: View3dTarget, generation = 0): void {
+  /** Draw one frame into `target`: the host's renderer, bound to this view's region,
+   * and the host's shared vehicle meshes. */
+  render(frame: FirstPersonFrame, target: View3dTarget): void {
     if (this.disposed) return;
-    const { renderer } = target;
+    const { renderer, generation, meshes } = target;
     if (generation !== this.generation) {
       // three.js re-uploads meshes and textures itself; the cached sun map is ours.
       this.generation = generation;
@@ -212,10 +212,9 @@ export class FirstPersonView {
     this.cards.flush();
     this.stats.cards = this.cards.count;
     this.placeCamera(frame.eye, frame.drawRadius);
-    const ready = this.vehicles.beginFrame();
     // Rooms have contact shadows but no sun.
     const shadows = frame.shadows !== false;
-    const cars = this.fillBillboards(frame, ready, shadows);
+    const cars = this.fillBillboards(frame, meshes, shadows);
     const fogEnd = this.fogEnd ?? frame.drawRadius;
     // Draw calls are counted over every render of this view, sun map included.
     const { info } = renderer;
@@ -229,7 +228,7 @@ export class FirstPersonView {
       renderer.render(this.scene, this.camera);
       this.stats.cars = 0;
       for (const item of cars)
-        if (this.vehicles.draw(renderer, this.camera, item)) this.stats.cars++;
+        if (this.vehicles.draw(renderer, this.camera, meshes, item)) this.stats.cars++;
       this.stats.calls = info.render.calls;
     } finally {
       info.autoReset = true;
@@ -396,7 +395,7 @@ export class FirstPersonView {
   /** Actor billboards and contact shadows; returns actors whose authored mesh is drawable. */
   private fillBillboards(
     frame: FirstPersonFrame,
-    ready: ReadonlySet<string>,
+    meshes: SharedMeshAssets,
     shadows: boolean,
   ): SpriteItem[] {
     const { eye } = frame;
@@ -406,10 +405,10 @@ export class FirstPersonView {
     this.blobs.begin();
     const cars: SpriteItem[] = [];
     for (const item of frame.sprites) {
-      this.queueActor(item, eye, ready, cars, shadows);
-      if (item.towGroup) this.queueActor(item.towGroup, eye, ready, cars, shadows);
+      this.queueActor(item, eye, meshes, cars, shadows);
+      if (item.towGroup) this.queueActor(item.towGroup, eye, meshes, cars, shadows);
       for (const content of item.bedGroup?.contents ?? [])
-        this.queueActor(content, eye, ready, cars, shadows);
+        this.queueActor(content, eye, meshes, cars, shadows);
     }
     this.billboards.end();
     this.blobs.end();
@@ -422,12 +421,12 @@ export class FirstPersonView {
   private queueActor(
     item: SpriteItem,
     eye: FirstPersonEye,
-    ready: ReadonlySet<string>,
+    meshes: SharedMeshAssets,
     cars: SpriteItem[],
     shadows: boolean,
   ): void {
     if (item.flashHidden || item.alpha === 0) return;
-    const body = !!item.mesh && this.vehicles.drawable(item.mesh.assetId);
+    const body = !!item.mesh && this.vehicles.drawable(meshes, item.mesh.assetId);
     // A mesh body's shadow belongs to the drawn body: sprite fallbacks have one baked in.
     const shadow = shadows && (body || item.gpuShadow?.casterId === undefined) && item.gpuShadow;
     if (shadow) this.blobs.push(shadow, this.supportUnder(shadow, item.zOffset));
@@ -436,7 +435,8 @@ export class FirstPersonView {
       return;
     }
     const sheet = this.images.sheet(item.sheetKey);
-    if (sheet) this.billboards.push(actorBillboard(item, sheet.sheet, sheet.texture, eye, ready));
+    if (sheet)
+      this.billboards.push(actorBillboard(item, sheet.sheet, sheet.texture, eye, meshes.ready));
   }
 
   /** The collector resolves support without surface queries here, so a body above the

@@ -66,7 +66,7 @@ export class GpuMeshBodies {
         this.request(assetId);
   }
   /** Lazy family loads never replace their source sprite before the next frame. */
-  private request(assetId: string) {
+  request(assetId: string) {
     if (!this.enabled || !(authoredVehicleForAsset(assetId) ?? authoredTrainForAsset(assetId)))
       return undefined;
     let slot = this.slots.get(assetId);
