@@ -85,7 +85,7 @@ row when a slice starts, delivers or is blocked.
 | --- | --- | --- |
 | 0 — Spike and plan | Done 2026-11-14 | [248](../tactical/248-renderer-unification.md) |
 | 1 — One renderer host | Done 2026-11-14: one WebGL context, shared vehicle assets, first person as a per-seat view kind with mixed split screen | [249](../tactical/249-one-renderer-host.md) |
-| 2 — Ground artwork, shared page atlas | Not started | — |
+| 2 — Ground artwork, shared page atlas | In progress from 2026-11-14 | [250](../tactical/250-ground-artwork-and-shared-pages.md) |
 | 3 — Top-down camera, parity probe, draw calls, device scorecard | Not started | — |
 | 4 — XR on the shared scene | Not started (needs slice 1) | [230](../tactical/230-3d-cameras-stereo-and-webxr.md) slices 5–8 |
 | 5 — Top-down parity | Not started (needs slices 2 and 3) | checklist below |
