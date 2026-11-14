@@ -1,4 +1,5 @@
 import type * as THREE from "three";
+import { CHUNK_SIZE_PX } from "../../config/constants.js";
 
 /** Shared by every material that receives the sun's shadow (tactical 247). Scene
  * axes: X east, Y north, Z up. */
@@ -30,6 +31,8 @@ export type SunReceiver = "faces" | "body" | "card";
 export interface MaterialShading {
   /** Expand `corner` offsets along this horizontal axis (game axes). */
   card?: { value: THREE.Vector2 } | undefined;
+  /** Ground faces wear their chunk's page of this atlas (see `FirstPersonGround`). */
+  ground?: { value: THREE.Texture | null } | undefined;
   sun?: { uniforms: SunUniforms; receiver: SunReceiver } | undefined;
 }
 
@@ -61,17 +64,75 @@ vec3 sunLight() {
 `;
 
 /**
+ * A ground face's artwork: its chunk's page of the fixed view's page atlas (250).
+ * `groundPage` is the page's corner in its layer and the layer, or layer −1 while
+ * the chunk has no page; `groundTexel` is the place in the chunk's image, or −1
+ * on faces without artwork (cliff walls). Either case keeps the vertex colour.
+ * Lookups stay inside the page: its neighbours in the layer are other images.
+ */
+/** Sample positions inside one screen pixel (a rotated grid), in pixel units. */
+const GROUND_TAPS = [
+  [0.125, 0.375],
+  [-0.125, -0.375],
+  [0.375, -0.125],
+  [-0.375, 0.125],
+] as const;
+const GROUND_FRAGMENT = `
+uniform highp sampler2DArray groundAtlas;
+varying vec2 vGroundTexel;
+varying vec3 vGroundPage;
+vec3 groundAt(vec2 texel) {
+  texel = clamp(texel, vec2(0.5), vec2(${CHUNK_SIZE_PX}.0 - 0.5));
+  // Pages store their rows bottom first.
+  vec2 at = vGroundPage.xy + vec2(texel.x, ${CHUNK_SIZE_PX}.0 - texel.y);
+  vec3 uvw = vec3(at / vec2(textureSize(groundAtlas, 0).xy), floor(vGroundPage.z + 0.5));
+  // Pages hold display-encoded bytes; the scene shades in linear light.
+  return sRGBTransferEOTF(texture(groundAtlas, uvw)).rgb;
+}
+vec3 groundArt() {
+  vec2 dx = dFdx(vGroundTexel), dy = dFdy(vGroundTexel);
+  vec3 sum = vec3(0.0);
+  ${GROUND_TAPS.map(([x, y]) => `sum += groundAt(vGroundTexel + ${x.toFixed(4)} * dx + ${y.toFixed(4)} * dy);`).join("\n  ")}
+  return sum / ${GROUND_TAPS.length}.0;
+}
+`;
+
+/**
  * Adds the view's shading to one of Three's built-in materials by editing its
- * shader source: shader-expanded cards (see `CardArrays`) and the sun's shadow.
+ * shader source: shader-expanded cards (see `CardArrays`), ground artwork from
+ * the page atlas, and the sun's shadow.
  */
 export function shadeMaterial<T extends THREE.Material>(material: T, shading: MaterialShading): T {
-  const { card, sun } = shading;
-  if (!card && !sun) return material;
-  material.customProgramCacheKey = () => `fp:${card ? "card" : ""}:${sun?.receiver ?? ""}`;
+  const { card, sun, ground } = shading;
+  if (!card && !sun && !ground) return material;
+  material.customProgramCacheKey = () =>
+    `fp:${card ? "card" : ""}:${sun?.receiver ?? ""}:${ground ? "ground" : ""}`;
   material.onBeforeCompile = (shader) => {
     let vertex = shader.vertexShader;
     let fragment = shader.fragmentShader;
     const declare: string[] = [];
+    if (ground) {
+      shader.uniforms.groundAtlas = ground;
+      declare.push(
+        "attribute vec2 groundTexel;",
+        "attribute vec3 groundPage;",
+        "varying vec2 vGroundTexel;",
+        "varying vec3 vGroundPage;",
+      );
+      vertex = vertex.replace(
+        "#include <color_vertex>",
+        "#include <color_vertex>\n  vGroundTexel = groundTexel;\n  vGroundPage = groundPage;",
+      );
+      fragment = fragment
+        .replace("#include <common>", `#include <common>${GROUND_FRAGMENT}`)
+        .replace(
+          "#include <color_fragment>",
+          `if (vGroundPage.z > -0.5 && vGroundTexel.x > -0.5) diffuseColor.rgb = groundArt();
+  else {
+    #include <color_fragment>
+  }`,
+        );
+    }
     if (card) {
       shader.uniforms.cardRight = card;
       declare.push("attribute vec2 corner;", "uniform vec2 cardRight;");

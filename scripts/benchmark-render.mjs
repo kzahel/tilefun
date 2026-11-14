@@ -656,7 +656,13 @@ try {
         )
         .catch(() => {});
       await page.waitForTimeout(1500);
-      if (scene.drive) await startDriving(page);
+      if (scene.drive) {
+        // Arrival finishes after the first ready frame and early edits are dropped.
+        // In first person before 250 nothing prepared terrain, so the wait above
+        // returned at once and the car's spawn could be sent too early.
+        await page.waitForTimeout(2500);
+        await startDriving(page);
+      }
       let traced;
       if (trace) {
         traced = new Promise((resolve) => cdp.on("Tracing.tracingComplete", resolve));

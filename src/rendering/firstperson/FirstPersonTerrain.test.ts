@@ -87,4 +87,36 @@ describe("first-person terrain chunks", () => {
     expect(srgbToLinear(1)).toBeCloseTo(1, 9);
     expect(srgbToLinear(0.5)).toBeCloseTo(0.214, 3);
   });
+
+  it("places tile tops in the chunk's ground image and leaves cliff walls flat (250)", () => {
+    // One raised tile: its top still wears the image; its four walls do not.
+    const { positions, texels } = buildTerrainChunk(
+      chunk((lx, ly) => (lx === 3 && ly === 5 ? 2 : 0)),
+      2,
+      -1,
+      () => 0,
+    );
+    if (!texels) throw Error("ground without texels");
+    expect(texels.length).toBe((positions.length / 3) * 2);
+    const size = CHUNK_SIZE * TILE_SIZE;
+    const all = vertices(positions);
+    let walls = 0;
+    all.forEach(([x, y, z], i) => {
+      const u = texels[i * 2] ?? NaN,
+        v = texels[i * 2 + 1] ?? NaN;
+      // Non-indexed triangles: a face is six vertices, and a top is level.
+      const face = all.slice(i - (i % 6), i - (i % 6) + 6);
+      const top = face.every((p) => p[2] === face[0]?.[2]);
+      if (!top) {
+        walls++;
+        expect([u, v]).toEqual([-1, -1]);
+        return;
+      }
+      // Image texels are world pixels from the chunk's north-west corner, at any height.
+      expect([u, v]).toEqual([(x ?? NaN) - 2 * size, (y ?? NaN) + size]);
+      expect(z === 0 || z === 2 * ELEVATION_PX).toBe(true);
+    });
+    expect(walls).toBe(4 * 6);
+    expect(Math.max(...texels)).toBe(size);
+  });
 });

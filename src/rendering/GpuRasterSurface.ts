@@ -48,7 +48,7 @@ export class GpuRasterSurface implements RasterSurface {
   private filtered = false;
   private readonly mesh: THREE.Mesh;
   private readonly white: THREE.DataTexture;
-  private readonly pages: GpuPages;
+  readonly pages: GpuPages;
   private world?: GpuWorldComposition;
   get worldTarget() {
     return this.world?.target;

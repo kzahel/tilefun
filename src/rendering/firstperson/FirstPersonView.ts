@@ -5,7 +5,7 @@ import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { World } from "../../world/World.js";
 import type { SpriteItem } from "../SceneItem.js";
-import type { SharedMeshAssets, View3dTarget } from "../View3dHost.js";
+import type { PageRegion, SharedMeshAssets, SharedPages, View3dTarget } from "../View3dHost.js";
 import { actorBillboard, BillboardBatches, StaticCards } from "./FirstPersonBillboards.js";
 import {
   cameraRight,
@@ -13,10 +13,11 @@ import {
   lookDirection,
   nextFogEnd,
 } from "./FirstPersonCamera.js";
+import { bindGroundPage, groundMesh } from "./FirstPersonGround.js";
 import { FirstPersonImages } from "./FirstPersonImages.js";
 import { type FirstPersonInterior, INTERIOR_BACKGROUND } from "./FirstPersonInterior.js";
 import { type SunReceiver, shadeMaterial } from "./FirstPersonMaterials.js";
-import { coloredMesh, disposeGroup, PropMeshes, texturedMesh } from "./FirstPersonPropMeshes.js";
+import { disposeGroup, PropMeshes, texturedMesh } from "./FirstPersonPropMeshes.js";
 import { type PropSurface, surfaceUnder } from "./FirstPersonProps.js";
 import { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
 import { BlobShadows, SunShadows } from "./FirstPersonShadows.js";
@@ -54,10 +55,17 @@ interface TerrainEntry {
   readonly key: string;
 }
 
+interface ChunkGround extends TerrainEntry {
+  readonly chunk: FirstPersonChunkSource;
+  readonly mesh: THREE.Mesh;
+  /** The atlas page the mesh samples; undefined while it draws flat colours. */
+  page: PageRegion | undefined;
+}
+
 interface ChunkScene {
   readonly cx: number;
   readonly cy: number;
-  terrain?: TerrainEntry & { mesh: THREE.Mesh };
+  terrain?: ChunkGround;
   props?: { group: THREE.Group; signature: string; surfaces: PropSurface[] };
 }
 
@@ -108,6 +116,8 @@ export class FirstPersonView {
   readonly stats = {
     chunks: 0,
     builds: 0,
+    /** Chunks whose ground drew its artwork this frame (the rest drew flat colours). */
+    groundPages: 0,
     /** Moving actor cards written this frame. */
     billboards: 0,
     /** Standing prop cards in the merged static meshes. */
@@ -130,6 +140,12 @@ export class FirstPersonView {
   private readonly flatMaterial = this.lit(
     new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide }),
     "faces",
+  );
+  /** The host's page atlas as of this frame; ground meshes sample their chunk's page. */
+  private readonly groundAtlas: { value: THREE.Texture | null } = { value: null };
+  private readonly groundMaterial = shadeMaterial(
+    new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide }),
+    { sun: { uniforms: this.sun.uniforms, receiver: "faces" }, ground: this.groundAtlas },
   );
   private readonly billboards: BillboardBatches;
   private readonly cards: StaticCards;
@@ -207,7 +223,9 @@ export class FirstPersonView {
     if (frame.world !== this.world || frame.realm !== this.realm) this.resetWorld(frame);
     this.syncRoom(frame.interior);
     if (frame.props !== this.propsSource) this.groupProps(frame.props);
-    this.updateChunks(frame);
+    this.updateChunks(frame, target.pages);
+    // Read after the frame's page requests: the atlas is replaced when it grows.
+    this.groundAtlas.value = target.pages.atlas;
     // Card changes come with their chunk's rebuild, which already told the sun.
     this.cards.flush();
     this.stats.cards = this.cards.count;
@@ -312,10 +330,13 @@ export class FirstPersonView {
     }
   }
 
-  /** Nearest missing or stale chunks first, a few per frame; far chunks are released. */
-  private updateChunks(frame: FirstPersonFrame): void {
+  /** Nearest missing or stale chunks first, a few per frame; far chunks are released.
+   * Ground pages are asked for in the same order, so the host's paced uploads
+   * reach the nearest ground first. */
+  private updateChunks(frame: FirstPersonFrame, pages: SharedPages): void {
     const keep = new Set<string>();
     let builds = 0;
+    let groundPages = 0;
     let nearestMissing: number | undefined;
     for (const { cx, cy, key, distance } of chunksInReach(
       frame.eye.x,
@@ -326,7 +347,10 @@ export class FirstPersonView {
       if (nearestMissing === undefined && !frame.world.getChunkIfLoaded(cx, cy))
         nearestMissing = distance;
       if (builds < CHUNK_BUILDS_PER_FRAME) builds += this.refreshChunk(frame.world, cx, cy, key);
+      const ground = this.chunks.get(key)?.terrain;
+      if (ground && this.pageGround(ground, pages)) groundPages++;
     }
+    this.stats.groundPages = groundPages;
     // Rooms have no fog; outdoors the fog hides chunks that have not arrived yet.
     this.fogEnd = nextFogEnd(this.fogEnd, frame.drawRadius, nearestMissing, MIN_FOG_END);
     this.stats.fogEnd = Math.round(this.fogEnd);
@@ -377,11 +401,22 @@ export class FirstPersonView {
     cx: number,
     cy: number,
     world: FirstPersonWorld,
-  ): TerrainEntry & { mesh: THREE.Mesh } {
+  ): ChunkGround {
     const triangles = buildTerrainChunk(chunk, cx, cy, (tx, ty) => world.getHeightAt(tx, ty));
-    const mesh = coloredMesh(triangles, this.flatMaterial);
+    const mesh = groundMesh(triangles, this.groundMaterial);
     if (triangles.positions.length / 3 > FLAT_CHUNK_VERTICES) SunShadows.cast(mesh);
-    return { chunk, key: `${chunk.revision}:${chunk.visualRevision}`, mesh };
+    return { chunk, key: `${chunk.revision}:${chunk.visualRevision}`, mesh, page: undefined };
+  }
+
+  /** Keep the chunk's ground page resident and point the mesh at it; false while
+   * the chunk has none and draws its flat colours. */
+  private pageGround(ground: ChunkGround, pages: SharedPages): boolean {
+    const page = pages.ground(ground.chunk);
+    if (page !== ground.page) {
+      ground.page = page;
+      bindGroundPage(ground.mesh, page);
+    }
+    return !!page;
   }
 
   private dropChunk(key: string, chunk: ChunkScene): void {
@@ -469,5 +504,6 @@ export class FirstPersonView {
     this.vehicles.dispose();
     this.images.dispose();
     this.flatMaterial.dispose();
+    this.groundMaterial.dispose();
   }
 }

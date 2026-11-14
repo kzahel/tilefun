@@ -159,11 +159,11 @@ describe("renderViews", () => {
     expect(prepare).toHaveBeenCalledTimes(1);
   });
 
-  it("draws 3D views first, outside the fixed view's frame and terrain preparation (249)", () => {
+  it("draws 3D views first, outside the fixed view's frame; their interest range is prepared (249, 250)", () => {
     const backend = new RecordingBackend(new Map());
-    const prepared: number[] = [];
+    const prepared: unknown[][] = [];
     vi.spyOn(backend, "prepareTerrainViews").mockImplementation((list) => {
-      prepared.push(list.length);
+      prepared.push(list.map(({ view, visible }) => ({ view, visible: { ...visible } })));
     });
     const order: string[] = [];
     const host = {
@@ -173,15 +173,19 @@ describe("renderViews", () => {
     };
     // Views 1 and 3 draw in 3D; view 2 asks for it and falls back (its scene is loading).
     const threeD = new Set([views[1], views[3]]);
+    const draw3d = (view: View, i: number) => {
+      if (threeD.has(view)) order.push(`3d ${i}`);
+      // What the play scene does after drawing a view in 3D.
+      view.drawn3d = threeD.has(view);
+      view.interestRadius = 800;
+      return threeD.has(view);
+    };
     renderViews(
       host,
       views,
       { world, pacing: "throughput" },
       (_view, i) => order.push(`fixed ${i}`),
-      (view, i) => {
-        if (threeD.has(view)) order.push(`3d ${i}`);
-        return threeD.has(view);
-      },
+      draw3d,
     );
     expect(order).toEqual([
       "3d 1",
@@ -193,18 +197,33 @@ describe("renderViews", () => {
       "fixed 2",
       "end",
     ]);
-    expect(prepared).toEqual([2]); // only the fixed views' terrain
-    // Every view in 3D: nothing is prepared and no fixed frame opens.
+    // One preparation for the frame: a fixed view's camera rectangle (world-frame
+    // scope), a 3D view's interest range. The 3D ground wears the same chunk images.
+    const scope = new WorldRasterFrame();
+    const expected = views.map((view) => {
+      if (threeD.has(view)) return { view: view.camera, visible: view.interestRange() };
+      scope.begin(view.camera);
+      const visible = view.camera.getVisibleChunkRange();
+      scope.end();
+      return { view: view.camera, visible };
+    });
+    expect(prepared).toEqual([expected]);
+    const wide = views[1]?.interestRange(),
+      rectangle = views[1]?.camera.getVisibleChunkRange();
+    expect(wide).not.toEqual(rectangle);
+    // Every view in 3D: terrain is still prepared, and no fixed frame opens.
     order.length = 0;
-    renderViews(
-      host,
-      views,
-      { world, pacing: "throughput" },
-      () => order.push("fixed"),
-      () => true,
+    for (const view of views) threeD.add(view);
+    renderViews(host, views, { world, pacing: "throughput" }, () => order.push("fixed"), draw3d);
+    expect(order).toEqual(["3d 0", "3d 1", "3d 2", "3d 3"]);
+    expect(prepared).toHaveLength(2);
+    expect(prepared[1]).toEqual(
+      views.map((view) => ({ view: view.camera, visible: view.interestRange() })),
     );
-    expect(order).toEqual([]);
-    expect(prepared).toEqual([2]);
+    for (const view of views) {
+      view.drawn3d = false;
+      view.interestRadius = undefined;
+    }
   });
 
   it("ends a view whose drawing throws and leaves no camera in world scope", () => {

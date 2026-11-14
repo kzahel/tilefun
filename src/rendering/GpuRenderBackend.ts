@@ -1,3 +1,4 @@
+import type { Chunk } from "../world/Chunk.js";
 import { drawOverlayGeometry } from "./CanvasOverlayRenderer.js";
 import { GpuDeferredShadows } from "./GpuDeferredShadows.js";
 import { GpuMeshBodies } from "./GpuMeshBodies.js";
@@ -34,6 +35,10 @@ const overlayFields: (keyof OverlayDraw)[] = [
 export class GpuRenderBackend extends RasterRenderBackend {
   meshSurfaceGeometry(assetId: string) {
     return this.meshes.surfaceGeometry(assetId);
+  }
+  /** A chunk's prepared ground image (an older one while its replacement builds). */
+  groundImage(chunk: Chunk): CanvasImageSource | null {
+    return this.terrain.getTerrainSurface(chunk);
   }
   readonly surface: GpuRasterSurface;
   readonly meshes: GpuMeshBodies;

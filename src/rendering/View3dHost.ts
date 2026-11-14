@@ -1,5 +1,6 @@
 import type * as THREE from "three";
 import type { VehiclePaintScheme } from "../traffic/VehiclePaint.js";
+import type { Chunk } from "../world/Chunk.js";
 import type { CarMeshAsset } from "./CarMeshAsset.js";
 import type { RenderRegion } from "./ViewLayout.js";
 
@@ -17,6 +18,31 @@ export interface SharedMeshAssets {
   bindPaint(object: THREE.Object3D, texture: THREE.Texture): () => void;
 }
 
+/** A rectangle of one layer of the page atlas, in texels. The object lasts as long
+ * as its page stays resident: a page that was evicted and uploaded again, or an
+ * atlas that forgot its pages (restored context, changed assets), gives a new one. */
+export interface PageRegion {
+  readonly layer: number;
+  readonly x: number;
+  readonly y: number;
+  readonly width: number;
+  readonly height: number;
+}
+
+/** The fixed view's page atlas, lent to 3D views (250): one GPU copy of each
+ * image for every view. Pages store their rows bottom first. */
+export interface SharedPages {
+  /** The atlas texture array, or null while nothing is resident. It is replaced
+   * when the atlas grows, so read it after the frame's page requests. */
+  readonly atlas: THREE.Texture | null;
+  /**
+   * The page of a loaded chunk's prepared ground image, kept resident for this
+   * display frame. Undefined while the image is not prepared, while its upload
+   * waits for a later frame (uploads are paced), or when the atlas is full.
+   */
+  ground(chunk: Chunk): PageRegion | undefined;
+}
+
 /** What a 3D view draws into: the host's renderer, already bound to the view's
  * region of the canvas (viewport and scissor), and the region's size. */
 export interface View3dTarget {
@@ -27,6 +53,7 @@ export interface View3dTarget {
    * itself; a view rebuilds anything it tracks beyond that (cached render targets). */
   readonly generation: number;
   readonly meshes: SharedMeshAssets;
+  readonly pages: SharedPages;
 }
 
 /**

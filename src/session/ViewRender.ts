@@ -28,7 +28,9 @@ const preparation: { view: View["camera"]; visible: TerrainPreparationView["visi
  *
  * `draw3d` draws a view in the 3D scene instead (249) and returns true when it
  * did. Those views go first, straight to their canvas regions, and take no part
- * in terrain preparation or the fixed view's world target.
+ * in the fixed view's world target. They do take part in terrain preparation
+ * (250): the 3D ground wears the same chunk images, over the view's interest
+ * range instead of a camera rectangle.
  */
 export function renderViews(
   host: {
@@ -49,9 +51,14 @@ export function renderViews(
     });
     fixed = rest;
   }
-  if (terrain && fixed.length) {
+  if (terrain && views.length) {
     try {
-      for (const { camera } of fixed) {
+      for (const view of views) {
+        const { camera } = view;
+        if (!fixed.includes(view)) {
+          preparation.push({ view: camera, visible: view.interestRange() });
+          continue;
+        }
         // The world frame's own range: pixel-snapped, with the raster guard.
         scope.begin(camera);
         preparation.push({ view: camera, visible: camera.getVisibleChunkRange() });

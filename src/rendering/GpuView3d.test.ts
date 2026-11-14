@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
+import type { Chunk } from "../world/Chunk.js";
 import type { GpuMeshBodies } from "./GpuMeshBodies.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
-import { createView3dHost } from "./GpuView3d.js";
+import { createView3dHost, GROUND_UPLOADS_PER_VIEW } from "./GpuView3d.js";
 
 /** A renderer that records the state calls the fixed view depends on. */
 function fixture() {
@@ -28,13 +30,30 @@ function fixture() {
     canvas: { width: 1280, height: 800 },
     renderer,
     flush: () => calls.push("flush"),
+    pages: {
+      atlas: { texture: { name: "atlas" } },
+      pages: new Map<object, { region: object | null }[]>(),
+      full: false,
+      get(image: object, x: number, y: number, size: { width: number; height: number }) {
+        let page = this.pages.get(image)?.[0];
+        if (!page) {
+          calls.push(`upload ${x},${y} ${size.width}x${size.height}`);
+          page = { region: this.full ? null : { layer: this.pages.size } };
+          this.pages.set(image, [page]);
+        }
+        return page;
+      },
+    },
   };
   const bodies = { ready: new Set<string>(), paints: {} };
+  // Ground images by chunk; the page store uploads on first sight, as GpuPages does.
+  const images = new Map<object, object>();
   const host = createView3dHost(
     surface as unknown as GpuRasterSurface,
     bodies as unknown as GpuMeshBodies,
+    (chunk) => (images.get(chunk) as CanvasImageSource | undefined) ?? null,
   );
-  return { host, calls, surface, target: () => target, worldTarget };
+  return { host, calls, surface, images, target: () => target, worldTarget };
 }
 
 const restored = [
@@ -93,5 +112,41 @@ describe("3D views on the fixed view's renderer (249)", () => {
     const gone = fixture();
     gone.surface.disposed = true;
     expect(gone.host.draw(undefined, () => expect.unreachable())).toBe(false);
+  });
+
+  it("lends the page atlas: a chunk's ground page, with paced uploads (250)", () => {
+    const { host, calls, surface, images } = fixture();
+    const chunks = Array.from({ length: GROUND_UPLOADS_PER_VIEW + 2 }, () => ({}) as Chunk);
+    for (const chunk of chunks.slice(1)) images.set(chunk, {});
+    const uploads = () => calls.filter((call) => call.startsWith("upload")).length;
+    host.draw(undefined, ({ pages }) => {
+      expect(pages.atlas).toBe(surface.pages.atlas.texture);
+      // No prepared image yet: flat colours, and nothing is uploaded for it.
+      expect(pages.ground(chunks[0] as Chunk)).toBeUndefined();
+      const got = chunks.slice(1).map((chunk) => pages.ground(chunk));
+      // One view uploads a few pages a frame, in the order it asks (nearest first).
+      expect(got.map((page) => !!page)).toEqual([
+        ...Array(GROUND_UPLOADS_PER_VIEW).fill(true),
+        false,
+      ]);
+      expect(uploads()).toBe(GROUND_UPLOADS_PER_VIEW);
+      expect(calls).toContain(`upload 0,0 ${CHUNK_SIZE_PX}x${CHUNK_SIZE_PX}`);
+      // A resident page is the same region every time and costs no upload.
+      expect(pages.ground(chunks[1] as Chunk)).toBe(got[0]);
+      expect(uploads()).toBe(GROUND_UPLOADS_PER_VIEW);
+    });
+    // The next view (or frame) has its own allowance, so the rest follow.
+    host.draw(undefined, ({ pages }) => {
+      expect(pages.ground(chunks.at(-1) as Chunk)).toBeDefined();
+    });
+    expect(uploads()).toBe(GROUND_UPLOADS_PER_VIEW + 1);
+  });
+
+  it("gives no ground page when the atlas is full", () => {
+    const { host, surface, images } = fixture();
+    surface.pages.full = true;
+    const chunk = {} as Chunk;
+    images.set(chunk, {});
+    host.draw(undefined, ({ pages }) => expect(pages.ground(chunk)).toBeUndefined());
   });
 });

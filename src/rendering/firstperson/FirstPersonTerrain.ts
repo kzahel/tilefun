@@ -14,6 +14,9 @@ export interface FirstPersonChunk {
 export interface ColoredTriangles {
   positions: Float32Array;
   colors: Float32Array;
+  /** Ground only: each vertex's place in its chunk's ground image (x, y in texels
+   * from the image's top-left corner), or −1, −1 where no artwork applies. */
+  texels?: Float32Array;
 }
 
 const TERRAIN_COLORS: Record<number, number> = {
@@ -82,9 +85,12 @@ export function srgbToLinear(c: number): number {
 export class TriangleWriter {
   private positions: number[] = [];
   private colors: number[] = [];
+  private texels: number[] = [];
+  private textured = false;
 
-  vertex(x: number, y: number, z: number, hex: number, shade: number): void {
+  vertex(x: number, y: number, z: number, hex: number, shade: number, u = -1, v = -1): void {
     this.positions.push(x, y, z);
+    this.texels.push(u, v);
     this.colors.push(
       srgbToLinear(Math.min(1, (((hex >> 16) & 255) / 255) * shade)),
       srgbToLinear(Math.min(1, (((hex >> 8) & 255) / 255) * shade)),
@@ -92,11 +98,23 @@ export class TriangleWriter {
     );
   }
 
-  /** Two triangles a→b→c, a→c→d (counter-clockwise seen from the face's front). */
-  quad(corners: readonly (readonly [number, number, number])[], hex: number, shade: number): void {
+  /**
+   * Two triangles a→b→c, a→c→d (counter-clockwise seen from the face's front).
+   * A flat face of a chunk's ground passes `image`, the world position of its
+   * ground image's top-left corner, to wear that image.
+   */
+  quad(
+    corners: readonly (readonly [number, number, number])[],
+    hex: number,
+    shade: number,
+    image?: { readonly x: number; readonly y: number },
+  ): void {
     const [a, b, c, d] = corners;
     if (!a || !b || !c || !d) return;
-    for (const p of [a, b, c, a, c, d]) this.vertex(p[0], p[1], p[2], hex, shade);
+    if (image) this.textured = true;
+    for (const p of [a, b, c, a, c, d])
+      if (image) this.vertex(p[0], p[1], p[2], hex, shade, p[0] - image.x, p[1] - image.y);
+      else this.vertex(p[0], p[1], p[2], hex, shade);
   }
 
   get vertexCount(): number {
@@ -104,7 +122,10 @@ export class TriangleWriter {
   }
 
   finish(): ColoredTriangles {
-    return { positions: new Float32Array(this.positions), colors: new Float32Array(this.colors) };
+    const positions = new Float32Array(this.positions),
+      colors = new Float32Array(this.colors);
+    if (!this.textured) return { positions, colors };
+    return { positions, colors, texels: new Float32Array(this.texels) };
   }
 }
 
@@ -112,9 +133,11 @@ export class TriangleWriter {
 export const FACE_SHADE = { top: 1, south: 0.84, east: 0.74, west: 0.7, north: 0.6, bottom: 0.5 };
 
 /**
- * One chunk of flat-coloured ground: a quad per tile at its terrain height, plus
- * cliff walls on edges that drop to a lower neighbour. `heightAt` answers
- * neighbouring tiles in world coordinates (0 where nothing is loaded).
+ * One chunk of ground: a quad per tile at its terrain height, plus cliff walls on
+ * edges that drop to a lower neighbour. Tile tops carry a flat colour and their
+ * place in the chunk's ground image (250); cliff walls are flat-coloured only.
+ * `heightAt` answers neighbouring tiles in world coordinates (0 where nothing is
+ * loaded).
  */
 export function buildTerrainChunk(
   chunk: FirstPersonChunk,
@@ -125,6 +148,7 @@ export function buildTerrainChunk(
   const out = new TriangleWriter();
   const baseTx = cx * CHUNK_SIZE,
     baseTy = cy * CHUNK_SIZE;
+  const image = { x: baseTx * TILE_SIZE, y: baseTy * TILE_SIZE };
   const localHeight = (lx: number, ly: number) =>
     lx >= 0 && ly >= 0 && lx < CHUNK_SIZE && ly < CHUNK_SIZE
       ? chunk.getHeight(lx, ly)
@@ -153,6 +177,7 @@ export function buildTerrainChunk(
         ],
         color,
         tileJitter(tx, ty),
+        image,
       );
       if (level <= 0) continue;
       const north = localHeight(lx, ly - 1) * ELEVATION_PX;
