@@ -5,6 +5,7 @@ import { NORTH_YAW } from "../rendering/firstperson/FirstPersonCamera.js";
 import { propForm } from "../rendering/firstperson/FirstPersonProps.js";
 import type { SceneLayers } from "../rendering/firstperson/FirstPersonView.js";
 import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js";
+import { collectCameraGrass } from "../rendering/GrassBladeRenderer.js";
 import {
   type CategoryParity,
   compareCategory,
@@ -46,7 +47,9 @@ const NO_LAYERS: SceneLayers = {
   cards: false,
   actors: false,
   vehicles: false,
+  grass: false,
 };
+/** Every kind of content but grass, which `together` and `shadowed` leave out. */
 const ALL_LAYERS: SceneLayers = {
   ...NO_LAYERS,
   solids: true,
@@ -54,6 +57,8 @@ const ALL_LAYERS: SceneLayers = {
   actors: true,
   vehicles: true,
 };
+/** What play draws. */
+const PLAYED_LAYERS: SceneLayers = { ...ALL_LAYERS, grass: true };
 
 /** What the fixed view is asked to draw for one picture. */
 interface FixedContent {
@@ -176,7 +181,14 @@ export function probeRendererParity(
     Object.assign(scene.layers, layers);
     const frame = control.frame;
     frame.presentationTime = time;
-    const items = frame.begin(false);
+    // As play collects them: the fixed view's blades for this camera. Bodies push
+    // blades aside, so a picture without bodies has none pushed, as in `drawFixed`.
+    const pushing = layers.actors || layers.vehicles ? stateView.entities : [];
+    const grass =
+      layers.grass && game.renderer.assets.has("grass-blades")
+        ? collectCameraGrass(stateView.world, pushing, camera, time, frame.grass)
+        : undefined;
+    const items = frame.begin(!!grass?.length);
     try {
       collectWorldSprites({
         entities: stateView.entities,
@@ -199,6 +211,7 @@ export function probeRendererParity(
             drawRadius: Math.hypot(width, height) / (2 * camera.scale),
             shadows,
             topDown: { scale: camera.scale },
+            grass,
           },
           target,
         ),
@@ -242,6 +255,7 @@ export function probeRendererParity(
     const one = (layer: keyof SceneLayers) => readScene({ ...NO_LAYERS, [layer]: true }, false);
     const drawn = {
       ground: readScene(NO_LAYERS, false),
+      grass: one("grass"),
       solids: one("solids"),
       cards: one("cards"),
       actors: one("actors"),
@@ -249,9 +263,9 @@ export function probeRendererParity(
       together: readScene(ALL_LAYERS, false),
       shadowed: readScene(ALL_LAYERS, true),
       // As the player has it: `r_fpshadows` can turn the 3D scene's shadows off.
-      played: readScene(ALL_LAYERS, control.shadows),
+      played: readScene(PLAYED_LAYERS, control.shadows),
     };
-    const category = (name: "solids" | "cards" | "actors" | "vehicles") =>
+    const category = (name: "grass" | "solids" | "cards" | "actors" | "vehicles") =>
       compareCategory(
         { with: fixed[name], ground: fixed.ground },
         { with: drawn[name], ground: drawn.ground },
@@ -267,12 +281,7 @@ export function probeRendererParity(
         played: compareFrames(fixed.played, drawn.played, width),
       },
       categories: {
-        // The 3D scene draws no grass: its picture with grass is its ground.
-        grass: compareCategory(
-          { with: fixed.grass, ground: fixed.ground },
-          { with: drawn.ground, ground: drawn.ground },
-          width,
-        ),
+        grass: category("grass"),
         solids: category("solids"),
         cards: category("cards"),
         actors: category("actors"),
@@ -307,7 +316,7 @@ export function probeRendererParity(
     }
     return report;
   } finally {
-    Object.assign(scene.layers, ALL_LAYERS);
+    Object.assign(scene.layers, PLAYED_LAYERS);
     scratch.clear();
     camera.x = actual.x;
     camera.y = actual.y;

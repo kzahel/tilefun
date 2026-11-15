@@ -4,7 +4,7 @@ Topic: renderer-unification
 Status: committed direction, 2026-11-14; slices 1 (one renderer host), 2 (ground
 artwork, shared page atlas), 3 (opt-in top-down camera, parity probe, merged
 meshes, device scorecard) and 4 (play in a headset) delivered the same day;
-slice 5 (top-down parity) started 2026-11-15 with building bodies. The fixed 2D
+slice 5 (top-down parity) started 2026-11-15 with building bodies and grass. The fixed 2D
 view is the default top-down renderer and stays so until the
 [retirement gate](#retirement-gate) is met.
 Updated: 2026-11-15.
@@ -100,7 +100,7 @@ row when a slice starts, delivers or is blocked.
 | 2 — Ground artwork, shared page atlas | Done 2026-11-14: the 3D ground wears the fixed view's terrain pages, and 3D cards read the same atlas instead of whole-sheet textures (99.6 MiB → 4.6 MiB of card artwork in the city) | [250](../tactical/250-ground-artwork-and-shared-pages.md) |
 | 3 — Top-down camera, parity probe, draw calls, device scorecard | Done 2026-11-14: `?view=topdown3d` / `r_topdown3d` draws top-down play through the 3D scene; the parity probe gives the checklist numbers; static content is merged into 4 to 25 draws; measured on the Mac, Pixel 7a and Deck, with a go on draw-call cost | [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) |
 | 4 — XR on the shared scene | Done 2026-11-14 for owner play: the world menu's **Headset** buttons start a WebXR session as a floating screen, immersive first person or a tabletop miniature, with the headset's controllers as seat 0's pad; all three hold 72 Hz on a Quest 3 in `city` and `woods`. Comfort and the controller mapping are not yet checked by a wearer | [252](../tactical/252-xr-on-the-shared-scene.md) |
-| 5 — Top-down parity | In progress since 2026-11-15: building bodies match their artwork (solid props identical at 1×). Sprite edges with pixel snapping, then grass, are next | checklist below |
+| 5 — Top-down parity | In progress since 2026-11-15: building bodies match their artwork (solid props identical at 1×), and grass blades are drawn (99% overlap). Sprite edges with pixel snapping are next | checklist below |
 | 6 — Opt-in, default, retirement | Not started (owner decisions) | gate below |
 
 ## Top-down parity checklist
@@ -112,8 +112,8 @@ Numbers are from the parity probe
 ([251](../tactical/251-top-down-camera-parity-and-merged-meshes.md#3b--delivered-2026-11-14),
 `node scripts/first-person/parity.mjs --headed`) in `city`, `woods` and `crowd`
 on the Mac. "Overlap" is the share of a kind's pixels that both renderers draw.
-Run the probe again when a row changes state. The solid props row was measured
-again on 2026-11-15; the other rows are 251's.
+Run the probe again when a row changes state. The solid props and grass rows
+were measured on 2026-11-15; the other rows are 251's.
 
 | Item | State | Notes |
 | --- | --- | --- |
@@ -121,7 +121,7 @@ again on 2026-11-15; the other rows are 251's.
 | Registration of standing cards (trees, posts, forest rows) | Partial | 98% overlap at 1×, best one pixel to the left: the fixed view floors a static sprite's screen edges to whole pixels and the 3D card is rasterised where it falls |
 | Solid props (buildings) | Done at 1×; partial zoomed out | 2026-11-15: identical at 1× in the city (28,672 pixels, none different; was 54% overlap) and 97.8% overlap at 0.25× (was 86%), where 12% of shared pixels differ in colour from sampling, as for ground. A building's physical box is now the one its artwork depicts ([building bodies](#building-bodies)). Artwork outside the box is not drawn in 3D: rooftop and side signs, and the hotel's carpet south of its feet |
 | Ground artwork (terrain pages, road markings, paths) | Done at 1×; partial zoomed out | Identical at 1×. At 0.25× in the city 1.1% of pixels differ on crosswalk stripes and lane dashes: four samples per pixel against the fixed view's one. The top-down camera still needs its own sampling rule |
-| Grass blades | Missing | The fixed view draws 1,200 (city) to 30,000 (woods) pixels of blades at 1× |
+| Grass blades | Done for the top-down camera | 2026-11-15: 99% overlap at 1× in all three scenes (city 1,215 against 1,222 pixels, woods 30,252 against 30,382), about 1% of shared pixels a different colour; 99% at 0.4× and 0.5×, inside the zoom fade. What is left is the edge pixels of leaning blades. See [grass](#grass). First person and headset views draw none |
 | Particles and contact effects | Missing | |
 | Surface decals | Missing | |
 | Sprite edges | Missing | 3D cards are hard cutouts (`alphaTest`) with one sample per pixel; the fixed view blends filtered edges at fractional zoom. Wildlife overlaps 83–88% at 1× (the soft shadow painted into those sprites is cut off) and 67–84% at 0.25× |
@@ -144,6 +144,28 @@ again on 2026-11-15; the other rows are 251's.
 Known disagreement to settle: in the `crowd` scene, cars parked north of the
 shop row draw over the roofs in the fixed view and behind the buildings in the
 3D scene.
+
+### Grass
+
+The 3D scene draws the fixed view's own blades: `collectCameraGrass` collects
+them for the view's camera each frame with the fixed view's placement, sway,
+push from bodies and zoom fade (none at 0.25× and below), and `GrassCards`
+writes them as one mesh of leaning cards read from the page atlas. One draw.
+
+- A blade is an upright card turned in its own plane, which the top-down camera
+  shows as the fixed view's turn on screen. Its foot stands a pixel or two south
+  of the blade's anchor, so the artwork's rows below the anchor are not under
+  the ground.
+- Blades blend at the frame's opacity and do not write depth. They hide behind
+  anything nearer, cover an actor's feet from in front, and stay under
+  vehicles, which the fixed view also keeps above grass. Where blades overlap
+  each other they draw in collection order, not sorted by depth.
+- Blades are collected and written on the CPU every frame, as in the fixed
+  view. Mac, main-thread render p50, unified against fixed: woods 1.0 against
+  1.2 ms at 1× and 2.2 against 2.7 ms at 0.4×; city 0.8 against 0.7 and 1.2
+  against 1.3. No missed frame. Not yet measured on the phone or the Deck.
+- The top-down camera only. Whether first person and headset views get grass,
+  and how tall it stands there, is open.
 
 ### Building bodies
 
@@ -206,8 +228,10 @@ full cells in [evidence](../benchmarks/251-device-scorecard.json).
   unified view on all three devices. The crowd overloads the authority on the
   phone and the Deck in both renderers, so its rows are not clean render
   measurements there.
-- The unified view draws less than the fixed view today (no grass, particles or
-  decals). These rows will move as slice 5 adds them; measure again then.
+- The unified view draws less than the fixed view (no particles or decals), and
+  the table is from before it drew grass. On the Mac grass took the woods at 1×
+  from 0.5 to 1.0 ms, still under the fixed view's 1.2 ([grass](#grass)). The
+  phone and the Deck are to be measured again as slice 5 adds content.
 - First person after the merge, city / woods at zoom 1: Mac 0.7 / 0.9 ms, Pixel
   7a 3.8 / 3.4, Deck 1.8 / 2.5. Driving on the phone: 4.4 ms, no missed frame.
 
@@ -308,9 +332,11 @@ Slice 4 is delivered for owner play, so the open work is:
   scale, and the Resume flow. These decide what the next XR work is; a HUD in
   the session and multisampling are the known gaps.
 - **Slice 5, top-down parity**, ordered by what the probe measured. Building
-  bodies are done. Next: sprite edges and pixel snapping together (standing
-  cards one pixel off, soft sprite shadows cut, small sprites unfiltered when
-  zoomed out), then grass. Decide the shadow look before touching shadows.
+  bodies and grass are done. Next: sprite edges and pixel snapping together
+  (standing cards one pixel off, soft sprite shadows cut, small sprites
+  unfiltered when zoomed out), then particles and surface decals. Decide the
+  shadow look before touching shadows. Measure the phone and the Deck again
+  now that the unified view draws grass.
 - 230's orbit camera and stereo on the page can land at any time.
 
 Gate 1 (opt-in in Options) needs ground artwork (done), registration within the

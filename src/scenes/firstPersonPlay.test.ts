@@ -1,4 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { TerrainId } from "../autotile/TerrainId.js";
 import { FirstPersonControl } from "../client/FirstPersonControl.js";
 import { XR_WALK } from "../client/XrControl.js";
 import { CHUNK_SIZE_PX, PIXEL_SCALE } from "../config/constants.js";
@@ -15,6 +16,7 @@ import { ClientSeat } from "../session/ClientSeat.js";
 import type { SeatFrame } from "../session/DeviceSeats.js";
 import { followSeat, View } from "../session/View.js";
 import { createVehicle } from "../traffic/Vehicle.js";
+import { Chunk } from "../world/Chunk.js";
 import {
   firstPersonAim,
   firstPersonMovement,
@@ -410,9 +412,14 @@ describe("top-down play in the 3D scene", () => {
     vi.spyOn(control, "scene").mockReturnValue({
       render: (frame: FirstPersonFrame) => frames.push(frame),
     } as unknown as FirstPersonView);
+    // One lawn chunk everywhere: the top-down view collects its grass blades.
+    const lawn = new Chunk();
+    lawn.blendBase.fill(TerrainId.Grass);
+    lawn.autotileComputed = true;
     const gc = {
       ...made.gc,
-      stateView: { entities: [], props: [], world: {}, interior },
+      spriteCatalog: new Map([["grass-blades", {}]]),
+      stateView: { entities: [], props: [], world: { getChunkIfLoaded: () => lawn }, interior },
       view3d: {
         draw(_region: unknown, draw: (target: object) => void) {
           draw({});
@@ -436,6 +443,16 @@ describe("top-down play in the 3D scene", () => {
     expect(frames[0]?.topDown).toEqual({ scale });
     expect(frames[0]?.eye).toMatchObject({ x: 500, y: 300 });
     expect(frames[0]?.interior).toBeUndefined();
+    // The fixed view's grass for this camera, at full opacity from zoom 0.5 up.
+    const ground = view.camera.screenToWorld(0, 0);
+    expect(frames[0]?.grass?.length).toBeGreaterThan(100);
+    expect(frames[0]?.grass?.every((b) => b.alpha === undefined && b.wx >= ground.wx - 30)).toBe(
+      true,
+    );
+    // An overview zoom has none.
+    view.camera.zoom = 0.2;
+    expect(renderFirstPerson(gc, view, 1)).toBe(true);
+    expect(frames[1]?.grass).toEqual([]);
     // Not chosen: the fixed view draws, and the view says so.
     control.topDown = false;
     expect(renderFirstPerson(gc, view, 1)).toBe(false);

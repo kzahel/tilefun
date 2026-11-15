@@ -5,6 +5,7 @@ import type { Chunk } from "../world/Chunk.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
 import { chunkToWorld } from "../world/types.js";
 import type { World } from "../world/World.js";
+import type { Camera } from "./Camera.js";
 import { GrassFrameBuffer } from "./GrassFrameBuffer.js";
 import type { GrassItem, SceneItem } from "./SceneItem.js";
 
@@ -138,6 +139,41 @@ export function collectGrassBladeItems(
   result: GrassItem[] = [],
 ): GrassItem[] {
   appendGrassBladeItems(world, entityPositions, visible, viewport, nowSec, scratch, result);
+  return result;
+}
+
+/**
+ * The blades a camera shows, at its zoom's grass opacity, for a renderer that
+ * draws them apart from the sorted scene list (the 3D scene's top-down view).
+ * Placement, sway and push are the fixed view's: the same blades from the same
+ * entities. Empty at overview zooms. Records are borrowed until `scratch` is
+ * next used.
+ */
+export function collectCameraGrass(
+  world: Pick<World, "getChunkIfLoaded">,
+  entityPositions: readonly { position: { wx: number; wy: number } }[],
+  camera: Pick<
+    Camera,
+    "zoom" | "screenToWorld" | "viewportWidth" | "viewportHeight" | "getVisibleChunkRange"
+  >,
+  nowSec: number,
+  scratch: GrassFrameBuffer,
+): GrassItem[] {
+  const result: GrassItem[] = [];
+  const alpha = grassOpacity(camera.zoom);
+  if (alpha <= 0) return result;
+  const topLeft = camera.screenToWorld(0, 0),
+    bottomRight = camera.screenToWorld(camera.viewportWidth, camera.viewportHeight);
+  appendGrassBladeItems(
+    world,
+    entityPositions,
+    camera.getVisibleChunkRange(),
+    { minWx: topLeft.wx, minWy: topLeft.wy, maxWx: bottomRight.wx, maxWy: bottomRight.wy },
+    nowSec,
+    scratch,
+    result,
+    alpha === 1 ? undefined : alpha,
+  );
   return result;
 }
 

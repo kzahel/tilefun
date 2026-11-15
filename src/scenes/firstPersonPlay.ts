@@ -16,6 +16,7 @@ import type {
   InteriorFurnitureArt,
 } from "../rendering/firstperson/FirstPersonInterior.js";
 import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js";
+import { collectCameraGrass } from "../rendering/GrassBladeRenderer.js";
 import type { SpriteItem } from "../rendering/SceneItem.js";
 import type { SeatFrame } from "../session/DeviceSeats.js";
 import type { View } from "../session/View.js";
@@ -257,7 +258,18 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
   const interior = topDown ? undefined : currentInterior(gc, control);
   const frame = control.frame;
   frame.presentationTime = gc.time?.presentationSeconds ?? 0;
-  const items = frame.begin(false);
+  // Top-down draws the fixed view's blades for its camera; first person has none.
+  const grass =
+    topDown && gc.spriteCatalog.has("grass-blades")
+      ? collectCameraGrass(
+          stateView.world,
+          entities,
+          view.camera,
+          frame.presentationTime,
+          frame.grass,
+        )
+      : undefined;
+  const items = frame.begin(!!grass?.length);
   let drawn = false;
   try {
     collectWorldSprites({
@@ -282,6 +294,7 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
       interior,
       shadows: control.shadows,
       topDown,
+      grass,
       headset: from.headset,
     };
     // Through the render host's own renderer (249): into this view's region, or

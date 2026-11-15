@@ -4,13 +4,14 @@ import type { Spritesheet } from "../../assets/Spritesheet.js";
 import { CHUNK_SIZE_PX, VIEW_BACKDROP_CSS } from "../../config/constants.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { World } from "../../world/World.js";
-import type { SpriteItem } from "../SceneItem.js";
+import type { GrassItem, SpriteItem } from "../SceneItem.js";
 import type { PageRegion, SharedMeshAssets, SharedPages, View3dTarget } from "../View3dHost.js";
 import { actorBillboard, MovingCards, RecentPages, StaticCards } from "./FirstPersonBillboards.js";
 import { cameraRight, type FirstPersonEye, nextFogEnd } from "./FirstPersonCamera.js";
 import { type HeadsetFrame, TABLE_BACKGROUND, ViewCameras } from "./FirstPersonCameras.js";
 import { chunkKey, chunksInReach, type TerrainEntry, terrainStale } from "./FirstPersonChunks.js";
 import { type FacePart, MergedFaces } from "./FirstPersonFaces.js";
+import { GrassCards } from "./FirstPersonGrass.js";
 import { GroundTops } from "./FirstPersonGround.js";
 import { FirstPersonImages } from "./FirstPersonImages.js";
 import { type FirstPersonInterior, INTERIOR_BACKGROUND } from "./FirstPersonInterior.js";
@@ -48,6 +49,9 @@ export interface FirstPersonFrame {
    * the ground on screen instead of a radius.
    */
   readonly topDown?: { readonly scale: number } | undefined;
+  /** Grass blades as the fixed view collects them (`collectCameraGrass`), posed
+   * for this frame. Drawn by the top-down camera only. */
+  readonly grass?: readonly GrassItem[] | undefined;
   /**
    * A headset (252): both eyes through the session's head pose, from a room
    * placed in the world. `eye` is then the head in the world: cards turn to its
@@ -68,6 +72,8 @@ export interface SceneLayers {
   actors: boolean;
   /** Authored vehicle and train meshes. */
   vehicles: boolean;
+  /** Grass blades (top-down only). */
+  grass: boolean;
 }
 
 const SKY = 0x9fd3f0;
@@ -127,6 +133,8 @@ export class FirstPersonView {
     cards: 0,
     /** Contact shadows drawn this frame. */
     blobs: 0,
+    /** Grass blades written this frame. */
+    grass: 0,
     /** Sun shadow map redraws since the view was created. */
     sunRedraws: 0,
     cars: 0,
@@ -145,6 +153,7 @@ export class FirstPersonView {
     cards: true,
     actors: true,
     vehicles: true,
+    grass: true,
   };
   private readonly scene = new THREE.Scene();
   private readonly worldRoot = new THREE.Group();
@@ -176,6 +185,7 @@ export class FirstPersonView {
   private readonly billboards: MovingCards;
   private readonly cards: StaticCards;
   private readonly blobs: BlobShadows;
+  private readonly grass: GrassCards;
   private readonly vehicles = new FirstPersonVehicles((material) => {
     this.lit(material, "body");
   });
@@ -229,6 +239,22 @@ export class FirstPersonView {
       ),
     );
     this.blobs = new BlobShadows(this.worldRoot);
+    // Blades blend (the zoom fade) and leave depth alone: see `GrassCards`.
+    this.grass = new GrassCards(
+      this.worldRoot,
+      shadeMaterial(
+        new THREE.MeshBasicMaterial({
+          transparent: true,
+          depthWrite: false,
+          side: THREE.DoubleSide,
+        }),
+        {
+          card: this.cardRight,
+          cardArt: this.atlas,
+          sun: { uniforms: this.sun.uniforms, receiver: "body" },
+        },
+      ),
+    );
     this.vehicles.fog = this.fog;
   }
 
@@ -293,6 +319,12 @@ export class FirstPersonView {
     // Rooms have contact shadows but no sun.
     const shadows = frame.shadows !== false;
     const cars = this.fillBillboards(frame, meshes, shadows, !!topDown);
+    this.grass.fill(
+      (topDown && this.layers.grass && frame.grass) || [],
+      this.sheets.get("grass-blades"),
+      this.cardPages,
+    );
+    this.stats.grass = this.grass.count;
     // Read after the frame's page requests: the atlas is replaced when it grows.
     this.atlas.value = pages.atlas;
     // Draw calls are counted over every render of this view, sun map included.
@@ -559,6 +591,7 @@ export class FirstPersonView {
     this.ground.dispose();
     this.faces.dispose();
     this.blobs.dispose();
+    this.grass.dispose();
     this.sun.dispose();
     this.propMeshes.dispose();
     this.vehicles.dispose();
