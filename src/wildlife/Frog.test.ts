@@ -11,6 +11,7 @@ import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { encodeActor } from "../persistence/ActorRecords.js";
+import { teleportBody } from "../physics/PhysicalEdits.js";
 import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
@@ -114,6 +115,18 @@ it("runs all four frog cycles, land and water in the production pond Realm, and 
   try {
     const frogs = () => s.realm.entityManager.entities.filter((e) => e.type === FROG_TYPE);
     expect(frogs().length).toBeGreaterThanOrEqual(2);
+    // Exercise swimming explicitly: crossing the wider dry bank by random hops
+    // is no longer guaranteed within this bounded animation/persistence check.
+    // Natural grassy-bank placement is checked separately above.
+    const pond = required(new NaturalLandscape(regionalWorld(2026), "thicket").pond(1, -2));
+    const swimmer = required(frogs()[0]);
+    teleportBody(swimmer, { wx: pond.x * 16, wy: (pond.y + pond.ry * 0.8) * 16, wz: 0 });
+    expect(
+      s.realm.world.getCollisionIfLoaded(
+        Math.floor(swimmer.position.wx / 16),
+        Math.floor(swimmer.position.wy / 16),
+      ) & CollisionFlag.Water,
+    ).not.toBe(0);
     const clips = new Set<number>(),
       media = new Set<boolean>();
     for (let i = 0; i < 1600; i++) {

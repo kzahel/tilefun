@@ -11,9 +11,11 @@ const FamilySheetsPage = lazy(() => import("./FamilySheetsPage.js"));
 const PatternPage = lazy(() => import("./PatternPage.js"));
 const ParkingPage = lazy(() => import("./ParkingPage.js"));
 const OutdoorPage = lazy(() => import("./OutdoorPage.js"));
+const TerrainBlendPage = lazy(() => import("./TerrainBlendPage.js"));
 
 /** Tools with their own Workshop page. Tools absent here open by their registry `mode`. */
 export const TOOL_PAGES: Partial<Record<WorkshopToolId, ReactElement>> = {
+  "terrain-blends": <TerrainBlendPage />,
   patterns: <PatternPage />,
   "parking-lab": <ParkingPage />,
   "character-lab": (

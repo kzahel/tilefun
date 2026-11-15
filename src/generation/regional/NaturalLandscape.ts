@@ -101,6 +101,11 @@ const rect = (x: number, y: number, r: number): Bounds => ({
   maxY: y + r,
 });
 const near = (b: Bounds, x: number, y: number, r: number) => intersects(b, rect(x, y, r));
+const POND_EDGE_VARIATION = 0.18;
+const POND_SAND_WIDTH = 2;
+/** Keep a grassy margin beyond both shore bands even at the noisiest waterline. */
+const pondGrassBankRadius = (radius: number) =>
+  Math.max(radius * 1.5, radius * (1 + POND_EDGE_VARIATION) + POND_SAND_WIDTH * 2 + 1.5);
 
 /** Coordinate-addressable natural cover. Geographic noise is not physical height. */
 export function naturalHabitat(
@@ -427,7 +432,7 @@ export class NaturalLandscape {
         y = cy * 128 + 28 + h(7121) * 72;
       const rx = 6 + h(7127) * 8,
         ry = 5 + h(7129) * 6,
-        radius = Math.max(rx, ry) * 1.5 + 2;
+        radius = Math.max(Math.max(rx, ry) * 1.5 + 2, pondGrassBankRadius(Math.max(rx, ry)) + 0.5);
       let valid = !this.reserved(x, y, radius);
       for (let dy = -radius; dy <= radius && valid; dy += 2)
         for (let dx = -radius; dx <= radius && valid; dx += 2) valid = this.dry(x + dx, y + dy);
@@ -444,8 +449,8 @@ export class NaturalLandscape {
     const pond = this.pond(Math.floor(x / 128), Math.floor(y / 128));
     if (!pond || !near(pond.bounds, x, y, 0.01)) return undefined;
     const radius = Math.hypot((x - pond.x) / pond.rx, (y - pond.y) / pond.ry);
-    const edge = 1 + fbm(x / 9, y / 9, this.world.seed + 7151, 2) * 0.18;
-    return { pond, distance: radius / edge };
+    const edge = 1 + fbm(x / 9, y / 9, this.world.seed + 7151, 2) * POND_EDGE_VARIATION;
+    return { pond, distance: radius / edge, edge };
   }
   /** Broad, rare water refuges; upstream of forests and wildlife to avoid planner cycles. */
   lagoon(cx: number, cy: number): NaturalPond | null {
@@ -772,6 +777,19 @@ export class NaturalLandscape {
       : 0.65;
     if (local.distance < deepEdge) return TerrainId.DeepWater;
     if (local.distance < 1) return TerrainId.ShallowWater;
+    if ("edge" in local && typeof local.edge === "number") {
+      // Two tile-wide bands outside the same noisy waterline. Expanding each
+      // ellipse axis keeps small/narrow ponds from collapsing to sub-tile strips.
+      const dx = x - local.pond.x,
+        dy = y - local.pond.y;
+      const rx = local.pond.rx * local.edge,
+        ry = local.pond.ry * local.edge;
+      if (Math.hypot(dx / (rx + POND_SAND_WIDTH), dy / (ry + POND_SAND_WIDTH)) < 1)
+        return TerrainId.Sand;
+      if (Math.hypot(dx / (rx + POND_SAND_WIDTH * 2), dy / (ry + POND_SAND_WIDTH * 2)) < 1)
+        return TerrainId.SandLight;
+      return base;
+    }
     if (local.distance < 1.1) return TerrainId.Sand;
     if (local.distance < 1.23) return TerrainId.SandLight;
     return base;
@@ -787,7 +805,11 @@ export class NaturalLandscape {
           (x - lake.x) / (lake.rx * 1.3 + clearance),
           (y - lake.y) / (lake.ry * 1.3 + clearance),
         ) < 1) ||
-      (!!p && Math.hypot((x - p.x) / (p.rx + clearance), (y - p.y) / (p.ry + clearance)) < 1.5) ||
+      (!!p &&
+        Math.hypot(
+          (x - p.x) / (pondGrassBankRadius(p.rx) + clearance * 1.5),
+          (y - p.y) / (pondGrassBankRadius(p.ry) + clearance * 1.5),
+        ) < 1) ||
       (!!bay &&
         Math.hypot(
           (x - bay.x) / (bay.rx * 1.3 + clearance),
@@ -853,8 +875,8 @@ export class NaturalLandscape {
       for (let attempt = 0; attempt < 12; attempt++) {
         const angle = h(7511) * Math.PI * 2 + i * 0.65 + (attempt * Math.PI) / 6;
         const candidate = {
-          wx: (pond.x + Math.cos(angle) * pond.rx * 1.4) * 16,
-          wy: (pond.y + Math.sin(angle) * pond.ry * 1.4) * 16,
+          wx: (pond.x + Math.cos(angle) * (pondGrassBankRadius(pond.rx) - 0.5)) * 16,
+          wy: (pond.y + Math.sin(angle) * (pondGrassBankRadius(pond.ry) - 0.5)) * 16,
         };
         if (occupied.some((p) => Math.hypot(candidate.wx - p.wx, candidate.wy - p.wy) < 14))
           continue;
@@ -869,7 +891,7 @@ export class NaturalLandscape {
         ai = frog.frog;
       if (!ai) throw new Error("Missing frog behavior");
       ai.home = { wx: pond.x * 16, wy: pond.y * 16 };
-      ai.radius = Math.max(pond.rx, pond.ry) * 1.5 * 16;
+      ai.radius = pondGrassBankRadius(Math.max(pond.rx, pond.ry)) * 16;
       ai.randomState = Math.floor(h(7521 + i) * 4294967296) >>> 0;
       ai.timer = 1.4 + i * 0.8;
       actors.push({

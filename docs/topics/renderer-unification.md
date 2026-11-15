@@ -120,7 +120,7 @@ were measured on 2026-11-15; the other rows are 251's.
 | Framing and registration of actors and vehicles | Done at whole pixels | Actors identical in the city at 1× (3,735 pixels, none different). Vehicle silhouettes overlap 95–97%. Both align best with no move at zooms 1 and 0.25 |
 | Registration of standing cards (trees, posts, forest rows) | Partial | 98% overlap at 1×, best one pixel to the left: the fixed view floors a static sprite's screen edges to whole pixels and the 3D card is rasterised where it falls |
 | Solid props (buildings) | Done at 1×; partial zoomed out | 2026-11-15: identical at 1× in the city (28,672 pixels, none different; was 54% overlap) and 97.8% overlap at 0.25× (was 86%), where 12% of shared pixels differ in colour from sampling, as for ground. A building's physical box is now the one its artwork depicts ([building bodies](#building-bodies)). Artwork outside the box is not drawn in 3D: rooftop and side signs, and the hotel's carpet south of its feet |
-| Ground artwork (terrain pages, road markings, paths) | Done at 1×; partial zoomed out | Identical at 1×. At 0.25× in the city 1.1% of pixels differ on crosswalk stripes and lane dashes: four samples per pixel against the fixed view's one. The top-down camera still needs its own sampling rule |
+| Ground artwork (terrain pages, road markings, paths) | Done at 1×; partial zoomed out | Identical at 1×, including the seeded pond shoreline ([pond comparison](#pond-shoreline-comparison)). At 0.25× in the city 1.1% of pixels differ on crosswalk stripes and lane dashes: four samples per pixel against the fixed view's one. The top-down camera still needs its own sampling rule |
 | Grass blades | Done for the top-down camera | 2026-11-15: 99% overlap at 1× in all three scenes (city 1,215 against 1,222 pixels, woods 30,252 against 30,382), about 1% of shared pixels a different colour; 99% at 0.4× and 0.5×, inside the zoom fade. What is left is the edge pixels of leaning blades. See [grass](#grass). First person and headset views draw none |
 | Particles and contact effects | Missing | |
 | Surface decals | Missing | |
@@ -144,6 +144,39 @@ were measured on 2026-11-15; the other rows are 251's.
 Known disagreement to settle: in the `crowd` scene, cars parked north of the
 shop row draw over the roofs in the fixed view and behind the buildings in the
 3D scene.
+
+### Pond shoreline comparison
+
+2026-11-15: investigated the owner's report that pond edges look different in
+the unified view. The parity runner now has an explicit `pond` scene: seed 2026,
+arrival at tile (215, −196), on the western bank of `pond:1:-2`.
+
+```sh
+node scripts/first-person/parity.mjs --headed --scenes=pond --zooms=1,0.75,0.5,0.25 --out=/tmp/tilefun-pond-parity
+```
+
+Bundled Chromium on the Mac, 1,280 × 800, with both renderers drawing the same
+moment and the probe snapping the camera to screen pixels:
+
+| Zoom setting | Ground pixels differing by more than 24 in any RGB channel | Mean largest channel difference (0–255) |
+| --- | --- | --- |
+| 1 | 0% (byte-identical ground) | 0 |
+| 0.75 | 0.418% | 0.442 |
+| 0.5 | 0.552% | 0.548 |
+| 0.25 | 0.249% | 0.243 |
+
+These percentages cover the whole ground frame, not just shoreline pixels.
+The captures show the same scalloped grass/sand/water boundaries in both views;
+no different autotile selection or texture repeat scale was reproduced here.
+The shared terrain pages retain their artwork, while the 3D ground shader takes
+four samples per pixel and averages them in linear light. Fractional zoom therefore
+changes boundary colours. Tree shadows and sprite sampling also differ in the
+complete scene, independently of terrain tiling.
+
+The run had no reported errors. This is one seeded pond with a snapped camera;
+it does not rule out a different location, camera phase or first-person issue.
+Next: use the owner's exact view if its edge shapes differ, and include this
+pond when qualifying the top-down sampling rule in slice 5.
 
 ### Grass
 

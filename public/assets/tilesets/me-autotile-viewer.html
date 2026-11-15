@@ -26,6 +26,7 @@ h2 { margin-top: 0; }
 </style></head><body>
 <nav><a href="../../tools.html" style="color:#e9c36c">← Indexes & atlases</a></nav>
 <h1>Modern Exteriors — 26 Autotile Terrains</h1>
+<p><a href="../../workshop.html#/tool/terrain-blends" style="color:#e9c36c">Open the Terrain blend lab →</a> for current game pair support, pond examples and tile-layer inspection. This page inventories source artwork; not all 26 sheets are active ground materials.</p>
 <p class="subtitle">GM Blob Format, 16&times;16. Each strip: 192&times;64 px (12&times;4 grid) = 47 unique bitmask variants. Shown at 3x scale.<br>
 <b>Primary</b> = center fill (mask 255). <b>Secondary</b> = what shows at edges (mask 0 = island of primary in secondary).<br>
 All standard grass: <span style="background:rgb(107,147,95); padding:2px 8px; border-radius:3px; color:#222; font-weight:bold">rgb(107, 147, 95)</span></p>
@@ -463,23 +464,23 @@ All standard grass: <span style="background:rgb(107,147,95); padding:2px 8px; bo
 </div>
 
 <div style="margin-top:40px; padding:20px; background:#2a2a2a; border-radius:8px;">
-<h2>Transition Pair Map</h2>
+<h2>Current natural-terrain pair map</h2>
 <pre style="font-size:14px; line-height:1.6; color:#ccc;">
-Deep Water ──(#16)──▶ Shallow Water ──(#3⟷#15)──▶ Grass (dirt strip at shore)
-                            │                              │
-                          (#8)                       (#2⟷#12 or #1)
-                            │                              │
-                      Sand ◀────────(#7)──────────── Grass/Dirt
-                       │
-                     (#9)
-                       │
-                   Light Sand
+Dedicated sheet direction (primary over secondary):
+  Deep water → Shallow water (#16)
+  Sand → Shallow water (#8)
+  Sand → Light sand (#9)
+  Light sand → Grass (#7)
+  Shallow water → Grass (#3); Grass → Shallow water (#15)
+  Light dirt → Grass (#1)
+  Warm dirt → Grass (#2); Grass → Warm dirt (#12)
 
-Alpha overlays (blend onto anything):
-  #6  Grass alpha ─── fills gaps where no dedicated pair exists
-  #10 Sand alpha  ─── fills gaps where no dedicated pair exists
-  #13 Light Grass ─── lighter grass variant overlay
+Registered alpha fallbacks in the game:
+  Grass: #13
+  Sand and Light sand: #10 (shared artwork)
+  Water and dirt: no alpha fallback
 </pre>
+<p>Fallbacks are directional and do not guarantee a good-looking join. The editor accepts dedicated pairs in either direction and some two-way alpha fallbacks; its automatic bridge search can use both. The lab derives its pair table directly from the game.</p>
 
 <h2 style="margin-top:24px">Reversible Pairs</h2>
 <table style="border-collapse:collapse; font-size:14px; width:100%">
@@ -488,14 +489,7 @@ Alpha overlays (blend onto anything):
 <tr><td style="padding:4px 6px">#3 Water primary</td><td style="padding:4px 6px; text-align:center">⟷</td><td style="padding:4px 6px">#15 Grass primary</td><td style="padding:4px 6px; color:#aaa">Use #3 on water side, #15 on grass side of shore</td></tr>
 </table>
 
-<h2 style="margin-top:24px">Terrain Generation (Natural Phase)</h2>
-<p>Noise layers determine terrain type. The autotile renderer picks sheets based on each tile + its neighbors:</p>
-<ol>
-<li><b>Elevation noise</b> → deep water / shallow water / land</li>
-<li><b>Moisture noise</b> → sand (dry) / dirt (normal) / grass (wet)</li>
-<li><b>Variety noise</b> → which dirt color (#1 light vs #2 warm)</li>
-<li>For each border between terrain types, select the matching dedicated pair sheet (or fall back to alpha overlay)</li>
-<li>Props scattered on top for visual detail</li>
-</ol>
+<h2 style="margin-top:24px">Generation and blending are separate</h2>
+<p>Classic retains the old onion generator. The current Regional generator supplies half-tile material samples; local ponds use nested deep water, shallow water, sand and light-sand bands. The shared autotiler reads each tile centre and its eight surrounding samples, chooses a background, then orders dedicated pair artwork before alpha fallbacks. A narrow band or three-material join can expose weaknesses even when every individual source sheet looks plausible.</p>
 </div>
 </body></html>

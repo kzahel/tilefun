@@ -6,6 +6,7 @@
 //
 //   node scripts/first-person/parity.mjs [--out=DIR] [--headed] [--scenes=city,woods,crowd]
 //     [--zooms=1,0.25] [--query=a=b]
+//   --scenes=pond compares the seeded grass/water shoreline (seed 2026).
 //
 // Per kind it prints the pixels each renderer draws, how much of the two
 // silhouettes overlap, the whole-pixel move that aligns them best, and how far
@@ -35,6 +36,7 @@ const SCENES = {
   city: { arrival: [300, 519], rabbits: 0, cars: 0 },
   crowd: { arrival: [300, 519], rabbits: 1000, cars: 50 },
   woods: { arrival: [-380, -364], rabbits: 0, cars: 0 },
+  pond: { arrival: [215, -196], rabbits: 0, cars: 0 },
 };
 const scenes = option("scenes", "city,woods,crowd").split(",");
 for (const name of scenes) if (!SCENES[name]) throw Error(`Unknown scene ${name}`);

@@ -281,6 +281,15 @@ export const WORKSHOP_TOOLS = defineTools([
     sidebar: "link",
   },
   {
+    id: "terrain-blends",
+    name: "Terrain blend lab",
+    description:
+      "Inspect pond shorelines, material pairs, corners and narrow bands using the game's autotiler, with sample maps and per-tile layer inspection.",
+    url: "workshop.html#/tool/terrain-blends",
+    mode: "source",
+    sidebar: "link",
+  },
+  {
     id: "autotiles",
     name: "Terrain reference",
     description: "Compare the 26 Modern Exteriors terrain strips and transitions.",

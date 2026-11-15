@@ -113,6 +113,38 @@ describe("natural landscape shared composition", () => {
       }
     expect(result.ponds?.some((p) => p.id === pond.id)).toBe(true);
   });
+  it("keeps both sand bands broad and connected around round and narrow ponds", () => {
+    const n = new NaturalLandscape(regionalWorld(2026), "thicket");
+    for (const [cx, cy] of [
+      [1, -2],
+      [-1, 0],
+    ] as const) {
+      const pond = n.pond(cx, cy);
+      expect(pond).not.toBeNull();
+      if (!pond) throw Error("Missing shoreline fixture");
+      for (let direction = 0; direction < 8; direction++) {
+        const angle = (direction * Math.PI) / 4;
+        const sequence: TerrainId[] = [],
+          widths = new Map<TerrainId, number>();
+        for (let r = 0; r < Math.max(pond.rx, pond.ry) * 2 + 6; r += 0.25) {
+          const material = n.terrain(pond.x + Math.cos(angle) * r, pond.y + Math.sin(angle) * r);
+          if (sequence.at(-1) !== material) sequence.push(material);
+          widths.set(material, (widths.get(material) ?? 0) + 0.25);
+        }
+        expect(sequence, `${pond.id} direction ${direction}`).toEqual([
+          TerrainId.DeepWater,
+          TerrainId.ShallowWater,
+          TerrainId.Sand,
+          TerrainId.SandLight,
+          TerrainId.Grass,
+        ]);
+        // Noise and the angle perturb the nominal two-tile width, but neither
+        // band may collapse back to a sub-tile strip or disconnected patch.
+        expect(widths.get(TerrainId.Sand)).toBeGreaterThanOrEqual(1.5);
+        expect(widths.get(TerrainId.SandLight)).toBeGreaterThanOrEqual(1.5);
+      }
+    }
+  });
   it("bounds caches after sustained traversal", () => {
     const n = new NaturalLandscape(regionalWorld(2026), "balanced");
     for (let i = -80; i < 80; i++) {

@@ -7,7 +7,8 @@ import { ALL_TERRAIN_IDS, TERRAIN_COUNT, type TerrainId } from "./TerrainId.js";
  * - Tier 1 (dedicated): non-alpha BlendEntry pairs — high-quality pixel-art transitions.
  * - Tier 2 (alpha): alpha overlay BlendEntry pairs — semi-transparent fallback.
  *
- * Bridge insertion routes through Tier 1 edges only via all-pairs BFS.
+ * Bridge insertion uses bidirectionally permitted edges via all-pairs BFS,
+ * including two-way alpha fallbacks, not only dedicated artwork.
  */
 export class TerrainAdjacency {
   /** dedicated[a * TERRAIN_COUNT + b] = true if Tier 1 edge exists. */
@@ -68,7 +69,7 @@ export class TerrainAdjacency {
     return this.dedicated[a * TERRAIN_COUNT + b] === true;
   }
 
-  /** Next terrain on shortest Tier 1 path from `from` to `to`, or undefined if unreachable. */
+  /** Next terrain on the shortest permitted adjacency path, or undefined if unreachable. */
   getBridgeStep(from: TerrainId, to: TerrainId): TerrainId | undefined {
     if (from === to) return undefined;
     const next = this.bridgeNext[from * TERRAIN_COUNT + to] ?? -1;

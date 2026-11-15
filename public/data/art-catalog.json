@@ -10543,11 +10543,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1398"
+          "source": "src/generation/regional/NaturalLandscape.ts:1420"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1592"
+          "source": "src/generation/regional/NaturalLandscape.ts:1614"
         },
         {
           "system": "World generation",
@@ -37615,11 +37615,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1398"
+          "source": "src/generation/regional/NaturalLandscape.ts:1420"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/NaturalLandscape.ts:1592"
+          "source": "src/generation/regional/NaturalLandscape.ts:1614"
         },
         {
           "system": "World generation",

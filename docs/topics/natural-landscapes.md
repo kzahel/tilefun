@@ -2,13 +2,26 @@
 
 Topic: natural-landscapes
 Status: natural cover and patterned forests are the default current regional generation.
-Updated: 2026-10-18.
+Updated: 2026-11-15.
 
 Owns natural land cover, forest composition, scattered vegetation and small ponds
 in the current regional overworld. [City generation](city-generation.md) owns
 generator policy and settlements; [world geometry](world-geometry.md) owns physical
 terrain elevation, slopes and stacked spaces. [Tactical 068](../tactical/068-natural-landscape-preview.md)
 records the first review delivery and validation.
+
+## Wider small-pond shores
+
+Owner request, 2026-11-15: small regional ponds now have a nominal two-tile sand
+band and two-tile light-sand band outside their noisy waterline. The former
+radius fractions made small ponds' shores too narrow. Admission and tree/forest
+bank clearance account for the larger shore, and new frogs start on the grassy
+outer bank with an expanded home range. Shared regional generation feeds the
+game, explorer and [terrain blend lab](terrain-blending.md). Existing saved
+terrain is retained; inspect fresh areas or recreate the world for the update.
+Water thresholds and the separate large-lake/refuge shore rules are retained.
+Focused generation/animal checks and the lab's desktop/mobile capture pass;
+the blending topic records the width and visual evidence.
 
 ## Connected farmsteads and access lanes
 

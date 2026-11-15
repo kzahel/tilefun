@@ -1,0 +1,114 @@
+.terrain-blend-lab {
+  min-width: 0;
+}
+.terrain-blend-controls,
+.terrain-blend-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+.terrain-blend-controls label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+.terrain-blend-controls select {
+  max-width: 100%;
+}
+.terrain-blend-maps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.terrain-blend-maps figure {
+  margin: 0;
+  min-width: 0;
+}
+.terrain-blend-maps figcaption p {
+  font-size: 13px;
+  min-height: 3em;
+  color: var(--muted);
+}
+.terrain-blend-map {
+  position: relative;
+  aspect-ratio: 1;
+  border: 1px solid #607d6d;
+}
+.terrain-blend-map canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+  cursor: crosshair;
+}
+.terrain-blend-selection {
+  position: absolute;
+  pointer-events: none;
+  border: 2px solid #fff;
+  outline: 1px solid #111;
+  box-sizing: border-box;
+}
+.terrain-blend-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+}
+.terrain-blend-legend i {
+  width: 14px;
+  height: 14px;
+  border: 1px solid #bbb;
+}
+.terrain-blend-table {
+  overflow: auto;
+  margin: 12px 0;
+}
+.terrain-blend-table table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.terrain-blend-table th,
+.terrain-blend-table td {
+  text-align: left;
+  padding: 9px;
+  border-bottom: 1px solid #405349;
+  font-size: 13px;
+}
+.terrain-blend-table button {
+  white-space: nowrap;
+}
+.terrain-blend-crop {
+  width: 64px;
+  height: 64px;
+  image-rendering: pixelated;
+  background: repeating-conic-gradient(#404840 0% 25%, #202820 0% 50%) 0 / 16px 16px;
+}
+.terrain-blend-lab details {
+  padding: 12px 0;
+  border-top: 1px solid #405349;
+}
+.terrain-blend-neighbours {
+  border-spacing: 4px;
+  margin: 12px 0;
+  font-size: 12px;
+}
+.terrain-blend-neighbours td {
+  border-left: 6px solid;
+  padding: 6px;
+  background: #ffffff08;
+}
+.terrain-blend-lab summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+@media (max-width: 700px) {
+  .terrain-blend-maps {
+    grid-template-columns: 1fr;
+  }
+  .terrain-blend-maps figcaption p {
+    min-height: 0;
+  }
+}

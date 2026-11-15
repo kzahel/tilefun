@@ -46,6 +46,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 | [Semantic tileset map](semantic-tileset-map.md) | Whole-sheet thematic mapping, autonomous asset hypotheses and independent review for Modern Exteriors and Interiors |
 | [City generation](city-generation.md) | Frozen revisions/banks, approved checkpoints and staged v7–v10 city reviews |
 | [Natural landscapes](natural-landscapes.md) | Overworld forest/tree/pond preview; shared explorer/lab composition review and future landforms |
+| [Terrain blending](terrain-blending.md) | Current material/alpha/bridge rules, shoreline topology lab and proposed blend-quality criteria |
 | [Multiplayer networking](multiplayer-networking.md) | Replication, channel routing, last-sent baselines and remaining loss/reconnect validation |
 | [Player prediction](player-prediction.md) | Reproduction-first investigation of moving NPC contact and car/train support timelines |
 | [Renderer unification](renderer-unification.md) | One world renderer: the 3D scene with top-down, first-person and XR cameras; slice tracker, top-down parity checklist, device scorecard and the gate for retiring the fixed 2D view |
