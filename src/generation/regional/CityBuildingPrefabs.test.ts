@@ -3,7 +3,13 @@ import { readFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 import { createProp, getWallsForPropType } from "../../entities/PropFactories.js";
 import { exteriorEntrance } from "../../interiors/GameplayInterior.js";
-import { BUILDING_RECIPES, buildingRecipe, buildingVisualBounds } from "./BuildingRecipes.js";
+import {
+  BUILDING_RECIPES,
+  buildingBody,
+  buildingRecipe,
+  buildingVisualBounds,
+} from "./BuildingRecipes.js";
+import { CITY_ARCHITECTURE_BUILDINGS } from "./CityArchitectureAssets.js";
 import {
   CITY_BUILDING_PREFABS,
   CITY_COMMERCIAL_ENVELOPE,
@@ -15,6 +21,13 @@ import {
   validateFacadeTopology,
   validateStorefrontEnvelope,
 } from "./CityBuildingPrefabs.js";
+import { DENSE_CITY_BUILDINGS } from "./DenseCityAssets.js";
+import { SHOPPING_BUILDINGS } from "./ShoppingScenery.js";
+
+function required<T>(value: T | undefined): T {
+  if (value === undefined) throw new Error("Missing value");
+  return value;
+}
 
 describe("source-audited city prefab candidates", () => {
   it("pins sampled pixels to the selected image and explicitly audited source regions", () => {
@@ -63,6 +76,36 @@ describe("source-audited city prefab candidates", () => {
       }
       expect(bounds.minY).toBe(-prefab.height);
     }
+  });
+  it("gives each building the box its artwork depicts: the roof deck's depth under the wall's height", () => {
+    for (const recipe of [
+      ...BUILDING_RECIPES,
+      ...CITY_BUILDING_PREFABS,
+      ...DENSE_CITY_BUILDINGS,
+      ...CITY_ARCHITECTURE_BUILDINGS,
+    ]) {
+      const body = buildingBody(recipe);
+      expect(getWallsForPropType(recipe.type)).toEqual([
+        { offsetX: 0, offsetY: 0, width: recipe.width, height: body.depth, zHeight: body.height },
+      ]);
+      // From above the box covers the picture's rows; only a rooftop sign stands clear.
+      const sign = recipe.type.endsWith("-roof-sign") ? 40 : 0;
+      expect(body.depth + body.height, recipe.type).toBe(recipe.height - sign);
+      expect(body.depth, recipe.type).toBeGreaterThanOrEqual(96);
+      expect(body.height, recipe.type).toBeGreaterThanOrEqual(48);
+    }
+    for (const prefab of CITY_BUILDING_PREFABS)
+      expect(buildingBody(prefab).depth).toBe(
+        prefab.family === "hotel" ? 112 : prefab.topology.roof.depth,
+      );
+    // A promoted copy takes the deck its source prefab declares.
+    expect(buildingBody(required(buildingRecipe("prop-city-dense-v1-hotel-4-roof-sign")))).toEqual({
+      depth: 112,
+      height: 256,
+    });
+    // A storefront strip's picture is all wall: its roof is a separate ground piece.
+    for (const shop of SHOPPING_BUILDINGS)
+      expect(buildingBody(shop)).toEqual({ depth: 16, height: 64 });
   });
   it("restores the full hotel roof and keeps optional signage out of the ground footprint", () => {
     const hotels = CITY_BUILDING_PREFABS.filter((p) => p.family === "hotel");

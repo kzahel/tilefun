@@ -1,5 +1,5 @@
 import { CITY_ARCHITECTURE_BUILDINGS } from "./CityArchitectureAssets.js";
-import { CITY_BUILDING_PREFABS } from "./CityBuildingPrefabs.js";
+import { CITY_BUILDING_PREFABS, prefabRoofDepth } from "./CityBuildingPrefabs.js";
 import { DENSE_CITY_BUILDINGS } from "./DenseCityAssets.js";
 import { SHOPPING_BUILDINGS } from "./ShoppingScenery.js";
 
@@ -37,6 +37,37 @@ export function buildingVisualBounds(recipe: BuildingRecipe) {
     minY: Math.min(...recipe.parts.map((p) => p.dy - p.spriteHeight)),
     maxY: Math.max(...recipe.parts.map((p) => p.dy)),
   };
+}
+/**
+ * The solid box a facade's artwork depicts, from the feet northwards and up.
+ * The fixed view draws a box of depth D and height H over D + H screen rows: the
+ * roof deck's rows are the depth and the wall's rows below it the height, so the
+ * box fills its picture exactly from above and stands in proportion from the
+ * street. The deck starts at the highest row of pieces that spans the frontage
+ * (signs standing above it are narrower) and is that row deep unless
+ * `prefabRoofDepth` records a deeper deck. A picture with no deck is all wall
+ * and keeps the recipe's `groundDepth`, which otherwise only sets a lot's street
+ * margin.
+ */
+export function buildingBody(recipe: BuildingRecipe): { depth: number; height: number } {
+  const rows = new Map<number, { width: number; depth: number }>();
+  for (const p of recipe.parts) {
+    if (p.view === "inside") continue;
+    const row = rows.get(p.dy - p.spriteHeight) ?? { width: 0, depth: Infinity };
+    row.width += p.spriteWidth;
+    row.depth = Math.min(row.depth, p.spriteHeight);
+    rows.set(p.dy - p.spriteHeight, row);
+  }
+  // A promoted copy takes the deck of the prefab it was taken from.
+  const declared = prefabRoofDepth((recipe as { sourceType?: string }).sourceType ?? recipe.type);
+  for (const top of [...rows.keys()].sort((a, b) => a - b)) {
+    const row = rows.get(top);
+    if (!row || row.width < recipe.width) continue;
+    const depth = declared ?? row.depth;
+    if (-(top + depth) > 0) return { depth, height: -(top + depth) };
+    break;
+  }
+  return { depth: recipe.groundDepth, height: recipe.height - recipe.groundDepth };
 }
 function piece(x: number, y: number, w: number, h: number, dx: number, dy: number): FacadePiece {
   return { frameCol: x / 16, frameRow: y / 16, spriteWidth: w, spriteHeight: h, dx, dy };

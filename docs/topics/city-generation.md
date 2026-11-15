@@ -197,6 +197,11 @@ remain immutable, with bank hash checks. The architecture bank is a candidate ba
 not an approval promotion. Builds consume committed assets. Candidate approval,
 asset promotion and inclusion in the current generator are separate decisions.
 
+A building's collision box is read from its artwork in code (`buildingBody`), not
+from a bank: the roof deck's rows are its depth and the wall's rows its height.
+A recipe's `groundDepth` only sets the lot's street margin. See
+[building bodies](renderer-unification.md#building-bodies).
+
 ## Recorded review checkpoints
 
 - Street starter: six furniture scenes, `run=streets`; road foundations: nine approved

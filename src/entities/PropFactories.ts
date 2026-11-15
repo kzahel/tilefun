@@ -2,7 +2,11 @@ import { ATLAS_PREFIX, getAtlasSprites, isAtlasLoaded } from "../assets/AtlasInd
 import { outdoorRuntimeAsset, outdoorRuntimeProp } from "../assets/outdoor/OutdoorRuntime.js";
 import { MaterialType } from "../audio/SurfaceType.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
-import { buildingRecipe, buildingVisualBounds } from "../generation/regional/BuildingRecipes.js";
+import {
+  buildingBody,
+  buildingRecipe,
+  buildingVisualBounds,
+} from "../generation/regional/BuildingRecipes.js";
 import { COMMERCIAL_STREET_PROPS } from "../generation/regional/CommercialCityAssets.js";
 import { depotBridgeProp } from "../generation/regional/DepotBridge.js";
 import { jumpSlabProp } from "../generation/regional/JumpProfiles.js";
@@ -580,16 +584,12 @@ export function getWallsForPropType(type: string): PropCollider[] | null {
   const shopping = shoppingScenery.find((p) => p.type === type);
   if (shopping) return shopping.walls;
   const recipe = buildingRecipe(type);
-  if (recipe)
+  if (recipe) {
+    const body = buildingBody(recipe);
     return [
-      {
-        offsetX: 0,
-        offsetY: 0,
-        width: recipe.width,
-        height: recipe.groundDepth,
-        zHeight: recipe.height,
-      },
+      { offsetX: 0, offsetY: 0, width: recipe.width, height: body.depth, zHeight: body.height },
     ];
+  }
   const def = PROP_DEFS[type];
   if (!def?.walls) return null;
   return def.walls.map((w) => ({ ...w }));

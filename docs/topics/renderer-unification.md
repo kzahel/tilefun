@@ -3,10 +3,11 @@
 Topic: renderer-unification
 Status: committed direction, 2026-11-14; slices 1 (one renderer host), 2 (ground
 artwork, shared page atlas), 3 (opt-in top-down camera, parity probe, merged
-meshes, device scorecard) and 4 (play in a headset) delivered the same day. The
-fixed 2D view is the default top-down renderer and stays so until the
+meshes, device scorecard) and 4 (play in a headset) delivered the same day;
+slice 5 (top-down parity) started 2026-11-15 with building bodies. The fixed 2D
+view is the default top-down renderer and stays so until the
 [retirement gate](#retirement-gate) is met.
-Updated: 2026-11-14.
+Updated: 2026-11-15.
 
 Owns the move to one world renderer: its status, parity checklist, device
 scorecard and decision gates. [Rendering architecture](rendering-architecture.md)
@@ -99,7 +100,7 @@ row when a slice starts, delivers or is blocked.
 | 2 — Ground artwork, shared page atlas | Done 2026-11-14: the 3D ground wears the fixed view's terrain pages, and 3D cards read the same atlas instead of whole-sheet textures (99.6 MiB → 4.6 MiB of card artwork in the city) | [250](../tactical/250-ground-artwork-and-shared-pages.md) |
 | 3 — Top-down camera, parity probe, draw calls, device scorecard | Done 2026-11-14: `?view=topdown3d` / `r_topdown3d` draws top-down play through the 3D scene; the parity probe gives the checklist numbers; static content is merged into 4 to 25 draws; measured on the Mac, Pixel 7a and Deck, with a go on draw-call cost | [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) |
 | 4 — XR on the shared scene | Done 2026-11-14 for owner play: the world menu's **Headset** buttons start a WebXR session as a floating screen, immersive first person or a tabletop miniature, with the headset's controllers as seat 0's pad; all three hold 72 Hz on a Quest 3 in `city` and `woods`. Comfort and the controller mapping are not yet checked by a wearer | [252](../tactical/252-xr-on-the-shared-scene.md) |
-| 5 — Top-down parity | Not started (needs slices 2 and 3) | checklist below |
+| 5 — Top-down parity | In progress since 2026-11-15: building bodies match their artwork (solid props identical at 1×). Sprite edges with pixel snapping, then grass, are next | checklist below |
 | 6 — Opt-in, default, retirement | Not started (owner decisions) | gate below |
 
 ## Top-down parity checklist
@@ -111,13 +112,14 @@ Numbers are from the parity probe
 ([251](../tactical/251-top-down-camera-parity-and-merged-meshes.md#3b--delivered-2026-11-14),
 `node scripts/first-person/parity.mjs --headed`) in `city`, `woods` and `crowd`
 on the Mac. "Overlap" is the share of a kind's pixels that both renderers draw.
-Run the probe again when a row changes state.
+Run the probe again when a row changes state. The solid props row was measured
+again on 2026-11-15; the other rows are 251's.
 
 | Item | State | Notes |
 | --- | --- | --- |
 | Framing and registration of actors and vehicles | Done at whole pixels | Actors identical in the city at 1× (3,735 pixels, none different). Vehicle silhouettes overlap 95–97%. Both align best with no move at zooms 1 and 0.25 |
 | Registration of standing cards (trees, posts, forest rows) | Partial | 98% overlap at 1×, best one pixel to the left: the fixed view floors a static sprite's screen edges to whole pixels and the 3D card is rasterised where it falls |
-| Solid props (buildings) | Partial, new in 251 | 54% overlap at 1× and 86% at 0.25×. The 3D volumes use the colliders' physical heights, which are taller than the artwork implies, so a band of stretched roof shows above each building. Decide between the artwork's height for the top-down camera and new artwork for the taller faces |
+| Solid props (buildings) | Done at 1×; partial zoomed out | 2026-11-15: identical at 1× in the city (28,672 pixels, none different; was 54% overlap) and 97.8% overlap at 0.25× (was 86%), where 12% of shared pixels differ in colour from sampling, as for ground. A building's physical box is now the one its artwork depicts ([building bodies](#building-bodies)). Artwork outside the box is not drawn in 3D: rooftop and side signs, and the hotel's carpet south of its feet |
 | Ground artwork (terrain pages, road markings, paths) | Done at 1×; partial zoomed out | Identical at 1×. At 0.25× in the city 1.1% of pixels differ on crosswalk stripes and lane dashes: four samples per pixel against the fixed view's one. The top-down camera still needs its own sampling rule |
 | Grass blades | Missing | The fixed view draws 1,200 (city) to 30,000 (woods) pixels of blades at 1× |
 | Particles and contact effects | Missing | |
@@ -142,6 +144,38 @@ Run the probe again when a row changes state.
 Known disagreement to settle: in the `crowd` scene, cars parked north of the
 shop row draw over the roofs in the fixed view and behind the buildings in the
 3D scene.
+
+### Building bodies
+
+Owner decision, 2026-11-15: a building stands as tall as its artwork implies,
+and its collision box may change to match the picture.
+
+The fixed view draws a box of depth D and height H over D + H screen rows, so a
+facade's picture fixes both: the roof deck's rows are the depth and the wall's
+rows below it the height. `buildingBody` (`BuildingRecipes.ts`) reads that from
+a recipe's pieces, and `getWallsForPropType` makes it the building's one wall,
+for collision, the fixed view's depth and shadows, and the 3D volume alike.
+
+| Family | Before (depth × height) | Now |
+| --- | --- | --- |
+| Condos | 32 × 240 to 384 | 112 × 128 to 272 |
+| Storefronts with apartments, regional facades, offices | 48 × 144 to 336 | 96 × 48 to 240 |
+| Hotels | 32 × 304 to 536 | 112 × 192 to 384 |
+| Shop row (`prop-shopping-v1-*`) | 16 × 64 | unchanged: its picture is all wall |
+
+- Before, the height was the whole picture, roof included, on a footprint a
+  third as deep as the roof: tall, thin boxes that stood 32 to 48 px above
+  their artwork from above.
+- The deck is the highest row of pieces that spans the frontage. A hotel's deck
+  is deeper than its top row (112 px, down to the cornice), recorded in
+  `prefabRoofDepth` and not on the prefab, whose record is its reviewed identity.
+- `groundDepth` no longer sizes the collision box. It still sets a lot's street
+  margin, and the promoted asset banks keep it unchanged.
+- Bodies reach further north inside ground their lots already reserved. No
+  generated prop stands in the newly solid ground (88 buildings, seed 2026,
+  chunks −45 to 45).
+- The shop row is still 16 px deep: its roof is a separate ground piece, which
+  is the parked-cars disagreement above.
 
 ## Device scorecard
 
@@ -230,9 +264,9 @@ Three owner decisions, in order. Each needs the evidence listed.
 - Whether top-down in the unified view keeps its own shadow look or takes the
   sun shadows. If it takes them, the sun's map must follow the zoom: at 0.1× it
   covers only the middle of the view (251).
-- How tall solid props are for the top-down camera (251): the artwork's implied
-  height, which matches the fixed view, or the colliders' height, which first
-  person needs and which shows a stretched band of roof from above.
+- Artwork outside a building's box (signs above the roof or beside the wall,
+  the hotel's carpet): the 3D scene does not draw it. A standing card for a
+  sign and a ground decal for a carpet are the likely forms.
 - Whether stereo and headset "flat" modes use the oblique camera or the orbit
   overhead preset (230). An oblique shear is exact on a page but is not a
   physically viewable camera in a headset.
@@ -273,14 +307,13 @@ Slice 4 is delivered for owner play, so the open work is:
   the controller mapping, comfort in first person, the tabletop's placement and
   scale, and the Resume flow. These decide what the next XR work is; a HUD in
   the session and multisampling are the known gaps.
-- **Slice 5, top-down parity**, ordered by what the probe measured. Largest
-  first: solid props' height (54% overlap at 1×), then sprite edges and pixel
-  snapping together (standing cards one pixel off, soft sprite shadows cut,
-  small sprites unfiltered when zoomed out), then grass. Decide the shadow look
-  before touching shadows.
+- **Slice 5, top-down parity**, ordered by what the probe measured. Building
+  bodies are done. Next: sprite edges and pixel snapping together (standing
+  cards one pixel off, soft sprite shadows cut, small sprites unfiltered when
+  zoomed out), then grass. Decide the shadow look before touching shadows.
 - 230's orbit camera and stereo on the page can land at any time.
 
 Gate 1 (opt-in in Options) needs ground artwork (done), registration within the
-recorded tolerance (holds for ground, actors, vehicles and cards; solid props
-are the open case) and no missed frames in `city` and `woods` on the three
-devices (holds). It is an owner decision.
+recorded tolerance (holds for ground, actors, vehicles and cards, and since
+2026-11-15 for solid props) and no missed frames in `city` and `woods` on the
+three devices (holds). It is an owner decision.

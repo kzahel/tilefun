@@ -156,6 +156,15 @@ function condo(style: "bay" | "narrow" | "wide", floors: number): CityBuildingPr
     entrance: { dx: assembled.width / 2 - 32, dy: 24 },
   };
 }
+/**
+ * Rows of roof deck a prefab's artwork shows, when that is more than its top row
+ * of pieces. A hotel's deck runs from the 32px roof strip down to the cornice
+ * above the top windows, through the head of the upper wall piece. Kept out of
+ * the prefab records: those are the candidates' reviewed identity.
+ */
+export function prefabRoofDepth(type: string): number | undefined {
+  return CITY_BUILDING_PREFABS.find((p) => p.type === type)?.family === "hotel" ? 112 : undefined;
+}
 function hotel(floors: number, sign: HotelSign = "none"): CityBuildingPrefab {
   const repeat = floors - 3;
   const roofDatum = -272 - repeat * 64;

@@ -1,5 +1,5 @@
 import type { OverviewResult as RegionalResult } from "../generation/Overview.js";
-import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
+import { buildingBody, buildingRecipe } from "../generation/regional/BuildingRecipes.js";
 import type { CountryPlan } from "../generation/regional/CountrysidePlanner.js";
 import type { DistrictLot } from "../generation/regional/DistrictPlanner.js";
 import {
@@ -235,7 +235,7 @@ export class MapRenderer {
           for (const lot of block.lots) {
             const recipe = buildingRecipe(lot.buildingType);
             const w = (recipe?.width ?? 288) / 16,
-              d = (recipe?.groundDepth ?? 80) / 16;
+              d = (recipe ? buildingBody(recipe).depth : 80) / 16;
             ctx.fillStyle = selectedId === lot.id ? "#aa553a" : "#d2bd97";
             ctx.strokeStyle = "#786654";
             ctx.lineWidth = 1;

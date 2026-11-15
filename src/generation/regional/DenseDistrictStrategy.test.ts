@@ -17,7 +17,7 @@ import { World } from "../../world/World.js";
 import { CURRENT_REGIONAL_VERSION } from "../GenerationDescriptor.js";
 import { createGenerator } from "../Generator.js";
 import { ProceduralProps } from "../ProceduralProps.js";
-import { buildingRecipe, buildingVisualBounds } from "./BuildingRecipes.js";
+import { buildingBody, buildingRecipe, buildingVisualBounds } from "./BuildingRecipes.js";
 import { DENSE_CITY_ASSETS, DENSE_CITY_BUILDINGS, denseBuilding } from "./DenseCityAssets.js";
 import { DenseDistrictSource, denseSurfaceAt } from "./DenseDistrictPlanner.js";
 import { DenseDistrictStrategy } from "./DenseDistrictStrategy.js";
@@ -69,7 +69,7 @@ describe("current dense districts and approved art", () => {
       const prop = createProp(p.type, 0, 0);
       expect(prop.sprite.parts).toBe(p.parts);
       expect(prop.walls?.[0]?.width).toBe(p.width);
-      expect(prop.walls?.[0]?.height).toBe(p.groundDepth);
+      expect(prop.walls?.[0]?.height).toBe(buildingBody(p).depth);
     }
   });
   it("reserves native art extents and unobstructed door approaches inside connected blocks", () => {
