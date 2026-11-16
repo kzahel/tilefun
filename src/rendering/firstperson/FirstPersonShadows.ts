@@ -11,6 +11,7 @@ import {
   SUN_MAP_SIZE,
   sunCardRight,
   sunCasterRange,
+  sunMapScale,
   sunOrigin,
   sunProjection,
   writeBlob,
@@ -46,6 +47,8 @@ export class SunShadows {
     fog: false,
   });
   private origin: { x: number; y: number } | undefined;
+  /** The map's scale (`sunMapScale`) as last drawn. */
+  private scale = 1;
   /** The last frame's eye and how far from it content can change a visible shadow. */
   private eye: { x: number; y: number } | undefined;
   private range = 0;
@@ -77,6 +80,7 @@ export class SunShadows {
       sunDir: { value: new THREE.Vector3(SUN.x, -SUN.y, SUN.z) },
       sunFade: { value: new THREE.Vector4(0, 0, -1, 0) },
       sunShade: { value: new THREE.Color(...SHADE) },
+      sunTexel: { value: 1 },
     };
     const right = sunCardRight();
     this.cardRight.value.set(right.x, right.y);
@@ -108,7 +112,8 @@ export class SunShadows {
    * Before the view's frame: point receivers at this eye and redraw the map if it
    * is stale. `scene` is the view's world; only its caster-layer meshes are drawn.
    * With `lit` false (rooms, shadows off) every receiver is fully lit. `fogEnd` is
-   * where the view's fog hides the world.
+   * where the view's fog hides the world; `cover` how far from `eye` the view
+   * must be shaded (the top-down camera zoomed out), which sets the map's scale.
    */
   update(
     renderer: THREE.WebGLRenderer,
@@ -116,6 +121,7 @@ export class SunShadows {
     eye: { x: number; y: number },
     fogEnd: number,
     lit: boolean,
+    cover?: number,
   ): void {
     // Receivers declare a shadow sampler even while unlit, and a draw with anything
     // but a comparison depth texture bound to it is invalid: create the map now.
@@ -130,13 +136,23 @@ export class SunShadows {
       this.origin = this.eye = undefined;
       return;
     }
+    const scale = sunMapScale(cover);
+    if (scale !== this.scale) {
+      this.scale = scale;
+      this.dirty = true;
+      const projection = new THREE.Matrix4().fromArray(sunProjection(scale)).transpose();
+      this.camera.projectionMatrix.copy(projection);
+      this.camera.projectionMatrixInverse.copy(projection).invert();
+      this.uniforms.sunMatrix.value.copy(projection);
+      this.uniforms.sunTexel.value = scale;
+    }
     this.eye = { x: eye.x, y: eye.y };
-    this.range = sunCasterRange(fogEnd);
-    const origin = sunOrigin(eye.x, eye.y);
+    this.range = sunCasterRange(fogEnd, scale);
+    const origin = sunOrigin(eye.x, eye.y, scale);
     if (origin.x !== this.origin?.x || origin.y !== this.origin?.y) this.dirty = true;
     this.origin = origin;
     this.uniforms.sunOrigin.value.set(origin.x, -origin.y, 0);
-    fade.set(eye.x - origin.x, -(eye.y - origin.y), SUN_FADE_START, SUN_FADE_END);
+    fade.set(eye.x - origin.x, -(eye.y - origin.y), SUN_FADE_START * scale, SUN_FADE_END * scale);
     if (this.staleSince !== undefined && performance.now() - this.staleSince >= SETTLE_MS)
       this.dirty = true;
     if (!this.dirty) return;

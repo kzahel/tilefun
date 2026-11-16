@@ -14,6 +14,9 @@ export interface SunUniforms {
   sunFade: { value: THREE.Vector4 };
   /** Linear colour multiplier inside a shadow. */
   sunShade: { value: THREE.Color };
+  /** World pixels per map texel (`sunMapScale`): receivers sample this much
+   * further off their surface. */
+  sunTexel: { value: number };
 }
 
 /**
@@ -46,6 +49,7 @@ uniform mat4 sunMatrix;
 uniform vec3 sunDir;
 uniform vec4 sunFade;
 uniform vec3 sunShade;
+uniform float sunTexel;
 vec3 sunLightAt(vec3 p) {
   float fade = smoothstep(sunFade.z, sunFade.w, distance(p.xy, sunFade.xy));
   if (fade >= 1.0) return vec3(1.0);
@@ -53,10 +57,10 @@ vec3 sunLightAt(vec3 p) {
     receiver === "faces"
       ? `vec3 n = normalize(cross(dFdx(p), dFdy(p)));
   if (dot(n, sunDir) <= 0.02) return vec3(1.0);
-  p += n;`
+  p += n * sunTexel;`
       : ""
   }
-  p += sunDir * 1.5;
+  p += sunDir * 1.5 * sunTexel;
   vec3 at = (sunMatrix * vec4(p, 1.0)).xyz * 0.5 + 0.5;
   // A high point near the fade's end can project past the map's edge: lit.
   if (at.x < 0.0 || at.x > 1.0 || at.y < 0.0 || at.y > 1.0) return vec3(1.0);

@@ -29,6 +29,22 @@ export const SUN_FADE_START = 760;
 export const SUN_FADE_END = SUN_RADIUS - SUN_SNAP - 24;
 /** Farthest a caster outside the covered square can throw a shadow into it. */
 export const SUN_REACH = 256;
+/** Largest map scale: one texel per this many world pixels. */
+export const SUN_MAX_SCALE = 8;
+
+/**
+ * The map's scale for a view that must be shaded out to `cover` world pixels from
+ * its centre: a power of two, so zooming changes it rarely. At scale `s` one
+ * texel is `s` world pixels and the square, snap step and fade all grow `s`
+ * times. First person keeps 1 (its fog ends shadows sooner); the top-down camera
+ * zoomed out needs more (at 0.1× its view is about 2,500 px from centre to
+ * corner).
+ */
+export function sunMapScale(cover = 0): number {
+  let scale = 1;
+  while (scale < SUN_MAX_SCALE && cover > SUN_FADE_START * scale) scale *= 2;
+  return scale;
+}
 
 const CHUNK_PX = CHUNK_SIZE * TILE_SIZE;
 
@@ -43,8 +59,9 @@ export function sunCardRight(): { x: number; y: number } {
 }
 
 /** The map's origin for an eye position, on the snap grid. */
-export function sunOrigin(x: number, y: number): { x: number; y: number } {
-  return { x: Math.round(x / SUN_SNAP) * SUN_SNAP, y: Math.round(y / SUN_SNAP) * SUN_SNAP };
+export function sunOrigin(x: number, y: number, scale = 1): { x: number; y: number } {
+  const snap = SUN_SNAP * scale;
+  return { x: Math.round(x / snap) * snap, y: Math.round(y / snap) * snap };
 }
 
 /**
@@ -53,9 +70,9 @@ export function sunOrigin(x: number, y: number): { x: number; y: number } {
  * Depth runs from −1 at `SUN_Z_MAX` to +1 at `SUN_Z_MIN`, so the usual "nearer
  * wins" depth test keeps the highest point.
  */
-export function sunProjection(): number[] {
+export function sunProjection(scale = 1): number[] {
   const range = SUN_Z_MAX - SUN_Z_MIN;
-  const r = 1 / SUN_RADIUS;
+  const r = 1 / (SUN_RADIUS * scale);
   // Scene Y is north, so the sun's southward component changes sign.
   return [
     r,
@@ -78,8 +95,13 @@ export function sunProjection(): number[] {
 }
 
 /** Clip coordinates of a point given in game axes relative to the origin. */
-export function sunClip(dx: number, dy: number, z: number): { x: number; y: number; z: number } {
-  const m = sunProjection();
+export function sunClip(
+  dx: number,
+  dy: number,
+  z: number,
+  scale = 1,
+): { x: number; y: number; z: number } {
+  const m = sunProjection(scale);
   const at = (row: number) =>
     (m[row * 4] ?? 0) * dx +
     (m[row * 4 + 1] ?? 0) * -dy +
@@ -95,8 +117,8 @@ export function sunClip(dx: number, dy: number, z: number): { x: number; y: numb
  * hidden, and what little of its shadow reaches thinner fog arrives with the
  * map's next step.
  */
-export function sunCasterRange(fogEnd: number): number {
-  return Math.min(fogEnd, SUN_FADE_END + SUN_REACH);
+export function sunCasterRange(fogEnd: number, scale = 1): number {
+  return Math.min(fogEnd, SUN_FADE_END * scale + SUN_REACH);
 }
 
 /** True when a chunk has ground within `range` of the eye. Chunks beyond it are

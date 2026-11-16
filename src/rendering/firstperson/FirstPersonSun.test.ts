@@ -5,6 +5,8 @@ import {
   chunkNearSun,
   SUN,
   SUN_FADE_END,
+  SUN_FADE_START,
+  SUN_MAX_SCALE,
   SUN_RADIUS,
   SUN_REACH,
   SUN_SLOPE,
@@ -14,6 +16,7 @@ import {
   sunCardRight,
   sunCasterRange,
   sunClip,
+  sunMapScale,
   sunOrigin,
   writeBlob,
 } from "./FirstPersonSun.js";
@@ -54,6 +57,21 @@ describe("first-person sun projection", () => {
     });
     // An eye never strays further than half a step, so the fade ends inside the map.
     expect(SUN_FADE_END + SUN_SNAP / 2).toBeLessThan(SUN_RADIUS);
+  });
+
+  it("grows the map in powers of two to cover a zoomed-out top-down view", () => {
+    expect(sunMapScale()).toBe(1);
+    expect(sunMapScale(SUN_FADE_START)).toBe(1);
+    // 0.25×, 1,280 × 800: about 1,000 px centre to corner, plus tall faces.
+    expect(sunMapScale(1006 + SUN_REACH)).toBe(2);
+    // 0.1×: about 2,500 px.
+    const scale = sunMapScale(2516 + SUN_REACH);
+    expect(scale).toBe(4);
+    expect(sunMapScale(1e6)).toBe(SUN_MAX_SCALE);
+    // The scaled square, steps and fade keep their proportions.
+    expect(sunClip(SUN_RADIUS * scale, 0, 0, scale).x).toBeCloseTo(1);
+    expect(sunOrigin(SUN_SNAP * scale * 2.6, 0, scale).x).toBe(SUN_SNAP * scale * 3);
+    expect(sunCasterRange(Infinity, scale)).toBe(SUN_FADE_END * scale + SUN_REACH);
   });
 
   it("turns standing cards across the sun's direction", () => {

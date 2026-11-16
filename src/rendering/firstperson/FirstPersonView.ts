@@ -35,6 +35,7 @@ import {
 import { type PropSurface, surfaceUnder } from "./FirstPersonProps.js";
 import { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
 import { BlobShadows, plainShadow, SunShadows } from "./FirstPersonShadows.js";
+import { SUN_REACH } from "./FirstPersonSun.js";
 import { buildTerrainChunk } from "./FirstPersonTerrain.js";
 import { FirstPersonVehicles } from "./FirstPersonVehicles.js";
 import {
@@ -485,6 +486,8 @@ export class FirstPersonView {
         centre,
         fogEnd,
         shadows && frame.sun !== false && !frame.interior,
+        // Top-down: the whole view, and tall faces standing south of its ground.
+        topDown ? frame.drawRadius + SUN_REACH : undefined,
       );
       this.stats.sunRedraws = this.sun.redraws;
       // After the sun's map: casters beyond a tabletop's edge still shade it.
