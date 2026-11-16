@@ -12,6 +12,7 @@ import { BodyImageCards } from "./FirstPersonBodyImages.js";
 import { cameraRight, type FirstPersonEye, nextFogEnd } from "./FirstPersonCamera.js";
 import { type HeadsetFrame, TABLE_BACKGROUND, ViewCameras } from "./FirstPersonCameras.js";
 import { chunkKey, chunksInReach, type TerrainEntry, terrainStale } from "./FirstPersonChunks.js";
+import { type EffectItem, EffectQuads } from "./FirstPersonEffects.js";
 import { type FacePart, MergedFaces } from "./FirstPersonFaces.js";
 import { GrassCards } from "./FirstPersonGrass.js";
 import { GroundTops } from "./FirstPersonGround.js";
@@ -68,6 +69,8 @@ export interface FirstPersonFrame {
   /** Grass blades as the fixed view collects them (`collectCameraGrass`), posed
    * for this frame. Drawn by the top-down camera only. */
   readonly grass?: readonly GrassItem[] | undefined;
+  /** Play's particles and surface marks for this frame (`EffectQuads`). */
+  readonly effects?: readonly EffectItem[] | undefined;
   /**
    * A headset (252): both eyes through the session's head pose, from a room
    * placed in the world. `eye` is then the head in the world: cards turn to its
@@ -151,6 +154,8 @@ export class FirstPersonView {
     blobs: 0,
     /** Grass blades written this frame. */
     grass: 0,
+    /** Particles and surface marks written this frame. */
+    effects: 0,
     /** Sun shadow map redraws since the view was created. */
     sunRedraws: 0,
     /** Vehicle bodies drawn, as meshes or images. */
@@ -214,6 +219,7 @@ export class FirstPersonView {
   private readonly cards: StaticCards;
   private readonly blobs: BlobShadows;
   private readonly grass: GrassCards;
+  private readonly effects: EffectQuads;
   private readonly vehicles = new FirstPersonVehicles((material) => {
     this.lit(material, "body");
   });
@@ -268,6 +274,7 @@ export class FirstPersonView {
       ),
     );
     this.blobs = new BlobShadows(this.worldRoot);
+    this.effects = new EffectQuads(this.worldRoot);
     // Blades blend (the zoom fade) and leave depth alone: see `GrassCards`.
     this.grass = new GrassCards(
       this.worldRoot,
@@ -369,6 +376,8 @@ export class FirstPersonView {
         this.cardPages,
       );
       this.stats.grass = this.grass.count;
+      this.effects.fill((this.layers.actors && frame.effects) || [], this.cardRight.value);
+      this.stats.effects = this.effects.count;
       // Read after the frame's page requests: the atlas is replaced when it grows.
       this.atlas.value = pages.atlas;
       this.sun.update(
@@ -672,6 +681,7 @@ export class FirstPersonView {
     this.ground.dispose();
     this.faces.dispose();
     this.blobs.dispose();
+    this.effects.dispose();
     this.grass.dispose();
     this.sun.dispose();
     this.propMeshes.dispose();

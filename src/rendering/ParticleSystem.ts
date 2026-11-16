@@ -74,7 +74,9 @@ const COLORS = {
   wisp: ["#FF3333", "#CC2222", "#FF5555", "#AA1111"],
 };
 const GRAVITY = 120;
-export type ParticlePresentation = ParticleItem[] | Pick<ParticleSystem, "collectItems">;
+export type ParticlePresentation =
+  | ParticleItem[]
+  | (Pick<ParticleSystem, "collectItems"> & Partial<Pick<ParticleSystem, "active">>);
 function basis(normal: Point3): [Point3, Point3] {
   const length = Math.hypot(normal[2], normal[0]);
   const u: Point3 = length > 1e-6 ? [normal[2] / length, 0, -normal[0] / length] : [1, 0, 0];
@@ -341,6 +343,13 @@ export class ParticleSystem {
     this.particles.length = write;
     for (const m of this.marks) m.life -= dt;
     this.marks = this.marks.filter((m) => m.life > 0);
+  }
+  /** Anything to draw, or a landing to watch for: views that build surface
+   * receivers only for particles can skip them otherwise. */
+  get active(): boolean {
+    return (
+      this.particles.length > 0 || this.pending.length > 0 || this.marks.length > 0 || this.inFlight
+    );
   }
   collectItems(receivers?: SurfaceReceivers): SceneItem[] {
     if (this.inFlight && this.previous) {

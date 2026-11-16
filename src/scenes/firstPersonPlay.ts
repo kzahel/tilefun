@@ -7,18 +7,21 @@ import { controllerInput } from "../input/ControllerInput.js";
 import { furnitureDefinition } from "../interiors/FurnitureCatalog.js";
 import { furnitureAsset, INTERIOR_WALL_TYPE } from "../interiors/GameplayInterior.js";
 import { compileGameplayRoom, initialRoom } from "../interiors/GameplayRoom.js";
-import { collectWorldSprites } from "../rendering/collectScene.js";
+import { collectWorldSprites, SURFACE_RECEIVER_MIN_ZOOM } from "../rendering/collectScene.js";
 import { entityHeading } from "../rendering/EntityMeshPose.js";
 import { type FirstPersonEye, NORTH_YAW } from "../rendering/firstperson/FirstPersonCamera.js";
 import type { HeadsetFrame } from "../rendering/firstperson/FirstPersonCameras.js";
+import type { EffectItem } from "../rendering/firstperson/FirstPersonEffects.js";
 import type {
   FirstPersonInterior,
   InteriorFurnitureArt,
 } from "../rendering/firstperson/FirstPersonInterior.js";
 import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js";
 import { collectCameraGrass } from "../rendering/GrassBladeRenderer.js";
-import { bladesOnPixelGrid, onPixelGrid } from "../rendering/PixelGrid.js";
+import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
+import { bladesOnPixelGrid, onPixelGrid, particlesOnPixelGrid } from "../rendering/PixelGrid.js";
 import type { SpriteItem } from "../rendering/SceneItem.js";
+import { SurfaceReceivers } from "../rendering/SurfaceReceivers.js";
 import type { SeatFrame } from "../session/DeviceSeats.js";
 import type { View } from "../session/View.js";
 
@@ -245,7 +248,12 @@ function seen(
  * In first person, indoors draws the room (230) and drivers get a chase camera
  * behind their vehicle.
  */
-export function renderFirstPerson(gc: GameContext, view: View, alpha: number): boolean {
+export function renderFirstPerson(
+  gc: GameContext,
+  view: View,
+  alpha: number,
+  particles?: ParticlePresentation,
+): boolean {
   const control = gc.firstPerson;
   const { stateView, view3d } = gc;
   const scene = control && wantsFirstPerson(gc, view) ? control.scene(view) : undefined;
@@ -275,6 +283,8 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
         )
       : undefined;
   if (grid && grass) bladesOnPixelGrid(grass, grid);
+  const effects = particles && viewEffects(gc, view, particles, entities, alpha, !!topDown);
+  if (grid && effects) particlesOnPixelGrid(effects, grid);
   const items = frame.begin(!!grass?.length);
   let drawn = false;
   try {
@@ -305,6 +315,7 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
       pixelBodies: control.pixelBodies,
       groundNearest: control.groundNearest || !!grid,
       grass,
+      effects,
       headset: from.headset,
     };
     // Through the render host's own renderer (249): into this view's region, or
@@ -319,6 +330,34 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
   else if (topDown) control.markTopDown(view);
   else if (drawn) control.markDrawn(view);
   return drawn || !!from.headset;
+}
+
+/**
+ * Play's particles and surface marks for one 3D view, as the fixed view collects
+ * them: on the decks and ground under them (`SurfaceReceivers`), which are only
+ * built while there is something to show and, top-down, above the fixed view's
+ * overview LOD. Collection advances the particles' landings, as it does there.
+ */
+function viewEffects(
+  gc: GameContext,
+  view: View,
+  particles: ParticlePresentation,
+  entities: readonly Entity[],
+  alpha: number,
+  topDown: boolean,
+): EffectItem[] {
+  if (Array.isArray(particles)) return particles;
+  if (particles.active === false) return [];
+  const { stateView } = gc;
+  const receivers =
+    !topDown || view.camera.zoom >= SURFACE_RECEIVER_MIN_ZOOM
+      ? new SurfaceReceivers(stateView.world, stateView.props, entities, alpha, {
+          propCache: gc.firstPerson?.frame.propReceivers,
+        })
+      : undefined;
+  return particles
+    .collectItems(receivers)
+    .filter((item): item is EffectItem => item.kind === "particle" || item.kind === "decal");
 }
 
 /** Small aiming mark at the centre of a view (context already at its region's origin). */

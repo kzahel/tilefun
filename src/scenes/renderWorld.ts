@@ -91,6 +91,6 @@ export function renderPlayViews(
     outdoors ? { world: gc.stateView.world, pacing: gc.debugPanel.terrainPacing } : undefined,
     draw,
     // A seat in first person draws in the 3D scene; the fixed view is its fallback.
-    (view) => renderFirstPerson(gc, view, alpha),
+    (view) => renderFirstPerson(gc, view, alpha, particles),
   );
 }
