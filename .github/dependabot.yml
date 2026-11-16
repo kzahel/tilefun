@@ -1,23 +1,27 @@
 version: 2
+
+# Security updates only. Routine upgrades are maintainer-run batches.
+# Dependabot requires a schedule, but open-pull-requests-limit: 0 disables
+# version-update PRs without disabling security updates, which are grouped
+# per ecosystem entry.
 updates:
   - package-ecosystem: npm
-    directory: /
+    directories:
+      - /
+      - /worker
     schedule:
       interval: weekly
+    open-pull-requests-limit: 0
     groups:
-      compatible-updates:
-        update-types: [minor, patch]
-  - package-ecosystem: npm
-    directory: /worker
-    schedule:
-      interval: weekly
-    groups:
-      worker-tooling:
-        patterns: [wrangler, "@cloudflare/workers-types"]
+      npm-security:
+        applies-to: security-updates
+        patterns: ["*"]
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    open-pull-requests-limit: 0
     groups:
-      actions:
+      actions-security:
+        applies-to: security-updates
         patterns: ["*"]
