@@ -26,6 +26,7 @@ import { FirstPersonImages } from "./FirstPersonImages.js";
 import { type FirstPersonInterior, INTERIOR_BACKGROUND } from "./FirstPersonInterior.js";
 import { GROUND_NEAREST, type SunReceiver, shadeMaterial } from "./FirstPersonMaterials.js";
 import {
+  ART_HOLES,
   disposeGroup,
   type OverheadDeck,
   PropMeshes,
@@ -445,6 +446,7 @@ export class FirstPersonView {
     // Rooms have contact shadows but no sun.
     const shadows = frame.shadows !== false;
     GROUND_NEAREST.value = !!frame.groundNearest;
+    ART_HOLES.value = !!topDown;
     // Draw calls are counted over every render of this view: vehicle images and
     // the sun map included.
     const { info } = renderer;

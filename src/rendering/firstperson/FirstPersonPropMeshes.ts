@@ -4,8 +4,9 @@ import type { AABB } from "../../entities/collision.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { SurfacePatch } from "../../physics/SurfacePatch.js";
 import { artCard, type Billboard, sheetFrame } from "./FirstPersonBillboards.js";
-import type { FirstPersonImages, PropImage } from "./FirstPersonImages.js";
+import { BACKING_ALPHA, type FirstPersonImages, type PropImage } from "./FirstPersonImages.js";
 import {
+  appendLeftover,
   appendPropGeometry,
   isOverheadDeck,
   type PropGeometry,
@@ -14,6 +15,7 @@ import {
   propImageFrame,
   propSlices,
   propSurfaces,
+  solidSilhouettes,
 } from "./FirstPersonProps.js";
 import type { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
 import { type ColoredTriangles, TriangleWriter } from "./FirstPersonTerrain.js";
@@ -62,6 +64,30 @@ export function disposeGroup(group: THREE.Object3D): void {
   group.removeFromParent();
 }
 
+/** Set per frame: faces drop their compositions' backing (`BACKING_ALPHA`), as
+ * the top-down camera does, so what lies behind shows where the fixed view's
+ * artwork is empty. First person keeps the backing, so no box shows its inside. */
+export const ART_HOLES = { value: false };
+
+function artHoles(material: THREE.MeshBasicMaterial): THREE.MeshBasicMaterial {
+  const shade = material.onBeforeCompile.bind(material),
+    key = material.customProgramCacheKey.bind(material);
+  material.customProgramCacheKey = () => `${key()}:art-holes`;
+  material.onBeforeCompile = (shader, renderer) => {
+    shade(shader, renderer);
+    shader.uniforms.artHoles = ART_HOLES;
+    shader.fragmentShader = shader.fragmentShader
+      .replace("#include <common>", "#include <common>\nuniform bool artHoles;")
+      .replace(
+        "#include <map_fragment>",
+        `#include <map_fragment>
+  if (artHoles && diffuseColor.a < ${((BACKING_ALPHA + 0.5) / 255).toFixed(4)}) discard;`,
+      );
+  };
+  material.needsUpdate = true;
+  return material;
+}
+
 function propElevation(prop: Prop, heightAt: (tx: number, ty: number) => number): number {
   return (
     heightAt(Math.floor(prop.position.wx / TILE_SIZE), Math.floor(prop.position.wy / TILE_SIZE)) *
@@ -88,13 +114,15 @@ export class PropMeshes {
     if (!material) {
       // Opaque compositions have no holes; floor decals (rugs) cut out their padding.
       // Vertex colours carry each face's baked shade.
-      material = this.shade(
-        new THREE.MeshBasicMaterial({
-          map: texture,
-          side: THREE.DoubleSide,
-          alphaTest: 0.5,
-          vertexColors: true,
-        }),
+      material = artHoles(
+        this.shade(
+          new THREE.MeshBasicMaterial({
+            map: texture,
+            side: THREE.DoubleSide,
+            alphaTest: 0.5,
+            vertexColors: true,
+          }),
+        ),
       );
       this.faceMaterials.set(texture, material);
     }
@@ -164,6 +192,11 @@ export class PropMeshes {
         frame,
       );
       built.surfaces.push(...surfaces);
+      // Artwork the volumes do not wear (signs, a carpet): see `appendLeftover`.
+      const holes = solidSilhouettes(prop, frame, elevation);
+      const leftover = holes && this.images.leftover(prop, holes);
+      const leftoverFaces = leftover ? facesFor(leftover) : undefined;
+      if (leftoverFaces) appendLeftover(leftoverFaces, prop, frame, elevation);
       const [surface] = surfaces;
       if (overhead?.vertexCount && surface)
         built.decks.push({

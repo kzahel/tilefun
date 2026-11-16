@@ -7,6 +7,7 @@
 //     [--zooms=1,0.5] [--speed=64] [--direction=20] [--seconds=4] [--fps=60]
 //     [--columns=fixed,scene] [--crop=240x160] [--enlarge=4] [--query=a=b]
 //     [--others=0] [--others-direction=200] [--stop=SECONDS]
+//     [--spawn=TYPE@DX,DY;TYPE@DX,DY] (entities or props placed round the player)
 //
 // Entities are paused and presentation time stands still, so frame N is the same
 // picture on every run; only the camera (and the player with it) moves, `--speed`
@@ -59,6 +60,14 @@ const columns = option("columns", "fixed,rigid").split(",");
 const [cropWidth, cropHeight] = option("crop", "240x160").split("x").map(Number);
 const enlarge = Number(option("enlarge", "4"));
 const query = option("query", "");
+const extraSpawns = option("spawn", "")
+  .split(";")
+  .filter(Boolean)
+  .map((entry) => {
+    const [entityType, at] = entry.split("@");
+    const [dx, dy] = (at ?? "0,0").split(",").map(Number);
+    return { entityType, dx, dy };
+  });
 const output = path.resolve(option("out", path.join(os.tmpdir(), "tilefun-film")));
 await mkdir(output, { recursive: true });
 const temp = await mkdtemp(path.join(os.tmpdir(), "tilefun-film-"));
@@ -111,6 +120,17 @@ try {
     // Arrival finishes after the first ready frame; then freeze entities, so the
     // parts of a film read in separate tasks show the same world.
     await page.waitForTimeout(2500);
+    if (extraSpawns.length) {
+      await page.evaluate((spawns) => {
+        const g = document.querySelector("#game").__game;
+        const p = g.stateView.playerEntity.position;
+        g.transport.send({ type: "set-editor-mode", enabled: true });
+        for (const { entityType, dx, dy } of spawns)
+          g.transport.send({ type: "edit-spawn", entityType, wx: p.wx + dx, wy: p.wy + dy });
+        g.transport.send({ type: "set-editor-mode", enabled: false });
+      }, extraSpawns);
+      await page.waitForTimeout(3000);
+    }
     if (SCENES[name].spawn) {
       await page.evaluate(async () => {
         const g = document.querySelector("#game").__game;

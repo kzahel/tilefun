@@ -3,6 +3,9 @@ import type { Spritesheet } from "../../assets/Spritesheet.js";
 import type { Prop } from "../../entities/Prop.js";
 import { type PropImageFrame, propImageFrame, propPieces } from "./FirstPersonProps.js";
 
+/** A pixel rectangle: left, top, right, bottom. */
+export type Rect = readonly [number, number, number, number];
+
 export interface PropImage {
   /** The composed pixels: cards read them through the host's page atlas (250). */
   readonly image: HTMLCanvasElement;
@@ -14,6 +17,10 @@ export interface PropImage {
 }
 
 const MAX_PROP_IMAGES = 256;
+
+/** Alpha of the average colour backing an opaque composition's empty pixels;
+ * the artwork's own pixels are fully opaque. */
+export const BACKING_ALPHA = 0xfe;
 
 export function pixelTexture(source: TexImageSource): THREE.Texture {
   const texture = new THREE.Texture(source as THREE.Texture["image"]);
@@ -35,6 +42,8 @@ export function pixelTexture(source: TexImageSource): THREE.Texture {
  */
 export class FirstPersonImages {
   private readonly propImages = new Map<string, PropImage>();
+  /** Leftover compositions with nothing in them (`leftover`). */
+  private readonly emptyLeftovers = new Set<string>();
   private disposed = false;
 
   /** `onEvict` lets the owner drop materials built on an evicted texture. */
@@ -72,6 +81,56 @@ export class FirstPersonImages {
         );
       }
     });
+  }
+
+  /**
+   * A prop's artwork with `holes` (frame-local pixel rectangles: the silhouette
+   * of its solid volumes, which wear the rest) cleared: what the volumes do not
+   * show, such as rooftop signs and a carpet before the door. Null when nothing
+   * is left; undefined while the sheet is not loaded.
+   */
+  leftover(prop: Prop, holes: readonly Rect[]): PropImage | null | undefined {
+    const pieces = propPieces(prop);
+    const key = `${prop.sprite.sheetKey}|left|${pieces
+      .map((p) => `${p.frameCol},${p.frameRow},${p.spriteWidth},${p.spriteHeight},${p.dx},${p.dy}`)
+      .join(";")}|${holes.map((h) => h.join(",")).join(";")}`;
+    if (this.emptyLeftovers.has(key)) return null;
+    const sheet = this.sheets.get(prop.sprite.sheetKey);
+    if (!sheet && !this.propImages.has(key)) return undefined;
+    const frame = propImageFrame(prop);
+    let empty = false;
+    const image = this.composed(key, frame, false, (ctx) => {
+      if (!sheet) return;
+      for (const p of pieces) {
+        const region = sheet.getRegion(p.frameCol, p.frameRow);
+        ctx.drawImage(
+          sheet.image as CanvasImageSource,
+          region.x,
+          region.y,
+          p.spriteWidth,
+          p.spriteHeight,
+          Math.round(p.dx - p.spriteWidth / 2 - frame.left),
+          Math.round(p.dy - p.spriteHeight - frame.top),
+          p.spriteWidth,
+          p.spriteHeight,
+        );
+      }
+      for (const [x0, y0, x1, y1] of holes) ctx.clearRect(x0, y0, x1 - x0, y1 - y0);
+      const data = ctx.getImageData(0, 0, frame.width, frame.height).data;
+      empty = true;
+      for (let i = 3; i < data.length; i += 4)
+        if ((data[i] ?? 0) >= 128) {
+          empty = false;
+          break;
+        }
+    });
+    if (!empty) return image;
+    // Nothing to draw: remember that, and give the canvas back.
+    this.emptyLeftovers.add(key);
+    const composed = this.propImages.get(key);
+    composed?.texture.dispose();
+    this.propImages.delete(key);
+    return null;
   }
 
   /** One rectangle of a loaded sheet's image as artwork with the given frame (interior furniture). */
@@ -115,8 +174,11 @@ export class FirstPersonImages {
     draw(ctx);
     const color = averageColor(ctx.getImageData(0, 0, canvas.width, canvas.height).data);
     if (opaque) {
+      // One step short of opaque: the top-down camera cuts the backing out again
+      // (`ART_HOLES`), where the fixed view shows what lies behind.
       ctx.globalCompositeOperation = "destination-over";
-      ctx.fillStyle = `#${color.toString(16).padStart(6, "0")}`;
+      const hex = color.toString(16).padStart(6, "0");
+      ctx.fillStyle = `#${hex}${BACKING_ALPHA.toString(16)}`;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
     }
     if (this.propImages.size >= MAX_PROP_IMAGES) this.evictOldest();

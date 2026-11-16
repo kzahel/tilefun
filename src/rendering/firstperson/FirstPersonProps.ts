@@ -136,6 +136,90 @@ export function projectedUv(
   return [Math.max(0, Math.min(1, u)), Math.max(0, Math.min(1, v))];
 }
 
+/** How far nearer than the ground leftover artwork lying on it is (world pixels
+ * along the view ray). */
+const LEFTOVER_LIFT = 0.25;
+
+/**
+ * Frame-local pixel rectangles (left, top, right, bottom) that a prop's solid
+ * volumes cover in the fixed view's picture: their artwork is worn by the
+ * volumes' faces. Undefined for props whose leftover artwork is not drawn
+ * (walkable surfaces).
+ */
+export function solidSilhouettes(
+  prop: Prop,
+  frame: PropImageFrame,
+  elevation: number,
+): [number, number, number, number][] | undefined {
+  if (prop.collider?.surface || prop.walls?.some((wall) => wall.surface)) return undefined;
+  if (!prop.collider && !prop.walls?.length) return undefined;
+  const originX = prop.position.wx + frame.left,
+    originY = prop.position.wy - elevation + frame.top;
+  return propSolids(prop, frame).map(({ corners }) => {
+    let left = Infinity,
+      right = -Infinity,
+      top = Infinity,
+      bottom = -Infinity;
+    for (const [x, y, z] of corners) {
+      left = Math.min(left, x - originX);
+      right = Math.max(right, x - originX);
+      top = Math.min(top, y - z - originY);
+      bottom = Math.max(bottom, y - z - originY);
+    }
+    return [Math.floor(left), Math.floor(top), Math.ceil(right), Math.ceil(bottom)];
+  });
+}
+
+/**
+ * A prop's artwork outside its volumes (`solidSilhouettes`), such as a rooftop
+ * sign or a carpet before the door, as the fixed view shows it. Rows above the
+ * prop's feet stand upright at its feet row, which is where the fixed view sorts
+ * the whole picture; rows below lie on the ground in front of it. Either way
+ * each pixel lands where the fixed view draws it.
+ */
+export function appendLeftover(
+  target: TexturedTriangles,
+  prop: Prop,
+  frame: PropImageFrame,
+  elevation: number,
+): void {
+  const { wx, wy } = prop.position;
+  const left = wx + frame.left,
+    right = left + frame.width;
+  // The feet row in the artwork, from its top.
+  const feet = Math.max(0, Math.min(frame.height, -frame.top));
+  const quad = (points: Point[], lift: number) => {
+    const [a, b, c, d] = points;
+    if (!a || !b || !c || !d) return;
+    for (const p of [a, b, c, a, c, d]) {
+      target.positions.push(p[0], p[1] + lift, p[2] + lift);
+      target.uvs.push(...projectedUv(prop, frame, elevation, p[0], p[1], p[2]));
+      target.colors.push(1, 1, 1);
+    }
+  };
+  if (feet > 0)
+    quad(
+      [
+        [left, wy, elevation],
+        [right, wy, elevation],
+        [right, wy, elevation + feet],
+        [left, wy, elevation + feet],
+      ],
+      0,
+    );
+  const below = frame.height - feet;
+  if (below > 0)
+    quad(
+      [
+        [left, wy + below, elevation],
+        [right, wy + below, elevation],
+        [right, wy, elevation],
+        [left, wy, elevation],
+      ],
+      LEFTOVER_LIFT,
+    );
+}
+
 export interface TexturedTriangles {
   positions: number[];
   uvs: number[];

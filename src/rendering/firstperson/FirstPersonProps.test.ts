@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import type { Prop, PropCollider } from "../../entities/Prop.js";
+import { createProp } from "../../entities/PropFactories.js";
 import { jumpPlacements, jumpSlabProp } from "../../generation/regional/JumpProfiles.js";
 import { forestRowProp, forestRowType } from "../../patterns/ForestThicket.js";
 import { surfaceZAt } from "../../physics/SurfacePatch.js";
 import { roadRailBridgeProp } from "../../railway/RoadRailBridge.js";
 import { roadDeckMarkings } from "../RoadDeckPresentation.js";
 import {
+  appendLeftover,
   appendPropGeometry,
   blockingColliders,
   projectedUv,
@@ -14,6 +16,7 @@ import {
   propSlices,
   propSolids,
   propSurfaces,
+  solidSilhouettes,
   surfaceUnder,
   unlimitedWallHeight,
 } from "./FirstPersonProps.js";
@@ -296,5 +299,45 @@ describe("walkable surfaces", () => {
       );
     // No tile grid on roads.
     expect(lines.positions).toHaveLength(0);
+  });
+});
+
+describe("artwork outside a building's volumes", () => {
+  it("lands every leftover corner on the fixed view's pixel: upright above the feet, flat below", () => {
+    const hotel = createProp("prop-city-v1-hotel-3-roof-sign", 400, 300);
+    const frame = propImageFrame(hotel);
+    const holes = solidSilhouettes(hotel, frame, 0);
+    if (!holes) throw Error("hotel has volumes");
+    // One wall box: its silhouette is inside the artwork and leaves the sign above.
+    expect(holes).toHaveLength(1);
+    const [left, top, right, bottom] = holes[0] ?? [0, 0, 0, 0];
+    expect(top).toBeGreaterThan(0);
+    expect([left, right, bottom]).toEqual([
+      expect.any(Number),
+      expect.any(Number),
+      expect.any(Number),
+    ]);
+    const faces = { positions: [] as number[], uvs: [] as number[], colors: [] as number[] };
+    appendLeftover(faces, hotel, frame, 0);
+    expect(faces.positions.length).toBeGreaterThan(0);
+    for (let i = 0, j = 0; i < faces.positions.length; i += 3, j += 2) {
+      const x = faces.positions[i] ?? 0,
+        y = faces.positions[i + 1] ?? 0,
+        z = faces.positions[i + 2] ?? 0;
+      // Lifted points move equally south and up: the same screen row.
+      const u = faces.uvs[j] ?? 0,
+        v = faces.uvs[j + 1] ?? 0;
+      expect(x).toBeCloseTo(hotel.position.wx + frame.left + u * frame.width, 6);
+      expect(y - z).toBeCloseTo(hotel.position.wy + frame.top + v * frame.height, 6);
+      // Upright at the feet row, or lying on (just above) the ground south of it.
+      if (y > hotel.position.wy) expect(z).toBeCloseTo(0.25, 6);
+      else expect(y).toBe(hotel.position.wy);
+    }
+    // Walkable surfaces wear the surface look instead.
+    const ramp = jumpPlacements("kicker", "e", 0, 0, "test")
+      .map((p) => jumpSlabProp(p.propType, p.wx, p.wy))
+      .find(Boolean);
+    if (!ramp) throw Error("no ramp");
+    expect(solidSilhouettes(ramp, propImageFrame(ramp), 0)).toBeUndefined();
   });
 });

@@ -121,7 +121,7 @@ were measured on 2026-11-15; the other rows are 251's.
 | --- | --- | --- |
 | Framing and registration of actors and vehicles | Done at whole pixels | Actors identical in the city at 1× (3,735 pixels, none different). Vehicles identical at 1× since 2026-11-16 ([vehicles](#vehicles)); they overlapped 95–97% as meshes. Both align best with no move at zooms 1 and 0.25 |
 | Registration of standing cards (trees, posts, forest rows) | Partial | 98% overlap at 1×, best one pixel to the left: the fixed view floors a static sprite's screen edges to whole pixels and the 3D card is rasterised where it falls |
-| Solid props (buildings) | Done at 1×; partial zoomed out | 2026-11-15: identical at 1× in the city (28,672 pixels, none different; was 54% overlap) and 97.8% overlap at 0.25× (was 86%), where 12% of shared pixels differ in colour from sampling, as for ground. A building's physical box is now the one its artwork depicts ([building bodies](#building-bodies)). Artwork outside the box is not drawn in 3D: rooftop and side signs, and the hotel's carpet south of its feet |
+| Solid props (buildings) | Done at 1×; partial zoomed out | 2026-11-15: identical at 1× in the city (28,672 pixels, none different; was 54% overlap) and 97.8% overlap at 0.25× (was 86%), where 12% of shared pixels differ in colour from sampling, as for ground. A building's physical box is now the one its artwork depicts ([building bodies](#building-bodies)). Since 2026-11-16 artwork outside the box is drawn too (`appendLeftover`): the composition minus the volumes' silhouettes, upright at the feet row above it (rooftop and side signs) and lying on the ground below it (the hotel's carpet), so each pixel lands where the fixed view draws it. Top-down faces also drop the average-colour backing of empty artwork (`ART_HOLES`), so ground shows where the fixed view shows ground (beside the hotel's carpets); first person keeps it. Mac city draws unchanged (27 at 1×, 72 at 0.25×) |
 | Ground artwork (terrain pages, road markings, paths) | Done at 1×; partial zoomed out | Identical at 1×, including the seeded pond shoreline ([pond comparison](#pond-shoreline-comparison)). At 0.25× in the city 1.1% of pixels differ on crosswalk stripes and lane dashes: four samples per pixel against the fixed view's one. The top-down camera still needs its own sampling rule |
 | Grass blades | Done for the top-down camera | 2026-11-15: 99% overlap at 1× in all three scenes (city 1,215 against 1,222 pixels, woods 30,252 against 30,382), about 1% of shared pixels a different colour; 99% at 0.4× and 0.5×, inside the zoom fade. What is left is the edge pixels of leaning blades. See [grass](#grass). First person and headset views draw none |
 | Particles and contact effects | Done | 2026-11-16: every 3D view draws play's particles (dust, spray, splashes, wisps) as the fixed view's coloured squares standing at their point, on the pixel grid top-down (`EffectQuads`). They are collected as the fixed view collects them, on surface receivers built only while particles are active (and top-down only above the 0.2× receiver LOD) |
@@ -466,9 +466,8 @@ Three owner decisions, in order. Each needs the evidence listed.
 - Whether top-down in the unified view keeps its own shadow look or takes the
   sun shadows. If it takes them, the sun's map must follow the zoom: at 0.1× it
   covers only the middle of the view (251).
-- Artwork outside a building's box (signs above the roof or beside the wall,
-  the hotel's carpet): the 3D scene does not draw it. A standing card for a
-  sign and a ground decal for a carpet are the likely forms.
+- Artwork outside a building's box: drawn since 2026-11-16 (see the solid
+  props row).
 - Whether stereo and headset "flat" modes use the oblique camera or the orbit
   overhead preset (230). An oblique shear is exact on a page but is not a
   physically viewable camera in a headset.
