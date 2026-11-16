@@ -38271,7 +38271,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RasterRenderBackend.ts:239"
+          "source": "src/rendering/RasterRenderBackend.ts:240"
         },
         {
           "system": "Gameplay",
@@ -38283,7 +38283,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:470"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:490"
         },
         {
           "system": "Editor",
