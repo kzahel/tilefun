@@ -384,19 +384,35 @@ for collision, the fixed view's depth and shadows, and the 3D volume alike.
 limits). `--query=` selects the renderer under test: none for the fixed view,
 `view=topdown3d` for the unified top-down view, `view=fps` for first person.
 
-Pixel 7a, 2026-11-16, after the pixel grid, grass, pixel vehicles, surface
-grids, particles, leftover building art and deck fades: unified against fixed,
-5 s per cell, render p50 ms (missed frames).
+All three devices, 2026-11-16, after building mode, raised ground, tree houses
+and the zoom-following sun map: render p50 in ms (missed frames), 5 s per cell,
+zooms 1 / 0.25 / 0.1. The Deck ran the production build (`da90ca88`) in the
+packaged shell over CDP; the phone and the Mac the dev build. Cells:
+[evidence](../benchmarks/unified-topdown-scorecard-2026-11-16.json).
 
-| Scene | 1× unified | 1× fixed | 0.25× unified | 0.25× fixed |
-| --- | --- | --- | --- | --- |
-| city | 2.9 (0) | 3.5 (1) | 3.2 (0) | 3.6 (0) |
-| crowd | 5.7 (0) | 7.1 (11) | 9.7 (60) | 11.7 (92) |
-| woods | 3.8 (0) | 3.9 (0) | 3.7 (0) | 4.5 (1) |
+| Device | Scene | Fixed view | Unified top-down |
+| --- | --- | --- | --- |
+| M4 Pro Mac, 120 Hz | city | 0.6 (0) / 0.9 (0) / 1.2 (0) | 0.5 (0) / 0.7 (0) / 0.9 (0) |
+| | woods | 1.0 (0) / 1.2 (0) / 2.3 (0) | 0.9 (0) / 0.7 (0) / 1.5 (0) |
+| | crowd | 1.9 (0) / 3.2 (0) / 4.3 (0) | 2.3 (0) / 3.1 (0) / 4.5 (0) |
+| Pixel 7a, 60 Hz | city | 3.5 (2) / 3.8 (0) / 4.9 (0) | 3.4 (0) / 3.5 (0) / 4.3 (0) |
+| | woods | 4.3 (1) / 4.7 (0) / 5.5 (0) | 3.6 (0) / 3.6 (0) / 4.5 (0) |
+| | crowd | 7.2 (11) / 12.3 (4) / 15.8 (26) | 7.4 (14) / 11.6 (12) / 12.4 (5) |
+| Steam Deck, 90 Hz | city | 2.2 (0) / 3.2 (0) / 5.3 (0) | 1.9 (0) / 2.4 (0) / 3.4 (0) |
+| | woods | 3.4 (0) / 3.7 (1) / 6.4 (0) | 2.6 (0) / 2.4 (0) / 5.3 (0) |
+| | crowd | 7.0 (67) / 13.8 (4) / 16.2 (0) | 7.0 (87) / 11.4 (17) / 13.6 (2) |
 
-Both miss frames in the crowd at 0.25× (1,000 rabbits, authority-bound, tick
-20–26 ms); the unified view misses fewer. Unified draws: 23–36, 146 in the
-crowd at 0.25×. The Deck was not re-measured.
+- `city` and `woods`: the unified view is no slower than the fixed view in any
+  cell on any device and misses no frame.
+- The crowd (1,000 rabbits, 50 cars) is bound by the authority on the phone
+  and the Deck in both renderers (ticks of 17–27 ms against a 16.7 or 11.1 ms
+  step), so its missed frames are not a render measurement. Its render time is
+  lower in the unified view except on the Mac at 1× and 0.1× (2.3 against 1.9,
+  4.5 against 4.3 ms) and the phone at 1× (7.4 against 7.2); its GPU time on
+  the Mac is a quarter of the fixed view's zoomed out (2.5 against 13.6 ms at
+  0.25×).
+- Earlier the same day, before these slices, the phone measured city 2.9 / 3.2,
+  woods 3.8 / 3.7 and crowd 5.7 / 9.7 ms unified at 1× / 0.25×.
 
 Main-thread render time, p50 in ms, at zooms 1 / 0.25 / 0.1, after 251's merge.
 Tables with p95, missed frames, draw calls and the before-merge cells are in
@@ -420,10 +436,8 @@ full cells in [evidence](../benchmarks/251-device-scorecard.json).
   unified view on all three devices. The crowd overloads the authority on the
   phone and the Deck in both renderers, so its rows are not clean render
   measurements there.
-- The unified view draws less than the fixed view (no particles or decals), and
-  the table is from before it drew grass. On the Mac grass took the woods at 1×
-  from 0.5 to 1.0 ms, still under the fixed view's 1.2 ([grass](#grass)). The
-  phone and the Deck are to be measured again as slice 5 adds content.
+- This older table is from before the unified view drew grass, particles and
+  decals; the table above supersedes it.
 - First person after the merge, city / woods at zoom 1: Mac 0.7 / 0.9 ms, Pixel
   7a 3.8 / 3.4, Deck 1.8 / 2.5. Driving on the phone: 4.4 ms, no missed frame.
 

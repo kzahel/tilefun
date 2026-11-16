@@ -1,0 +1,1461 @@
+{
+ "date": "2026-11-16",
+ "note": "render:bench, 5 s per cell, production build da90ca88 on the Deck (packaged shell over CDP), dev server on the Pixel 7a (Chrome over adb). fixed = no query; unified = view=topdown3d. Mac: bundled Chromium, headed, 120 Hz.",
+ "runs": {
+  "Steam Deck": {
+   "build": "existing origin tilefun://app/tilefun",
+   "browser": "Chrome/152.0.7977.167",
+   "fixed": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 450,
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.2,
+      "p95": 2.9,
+      "max": 4.4
+     },
+     "renderFinishMs": {
+      "p50": 2.3,
+      "p95": 2.7,
+      "max": 4.6
+     },
+     "gpuMs": {
+      "p50": 0.78,
+      "p95": 0.87,
+      "max": 0.89,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "draws": 8.4,
+     "meshDraws": 26.1,
+     "workerTickMs": {
+      "p50": 2.2,
+      "p95": 3.1
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 450,
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.2,
+      "p95": 4.1,
+      "max": 5.7
+     },
+     "renderFinishMs": {
+      "p50": 3,
+      "p95": 3.8,
+      "max": 5.3
+     },
+     "gpuMs": {
+      "p50": 0.82,
+      "p95": 1.51,
+      "max": 1.87,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "draws": 13.4,
+     "meshDraws": 61.9,
+     "workerTickMs": {
+      "p50": 2.1,
+      "p95": 3.1
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 450,
+     "missed": 0,
+     "renderMs": {
+      "p50": 5.3,
+      "p95": 6.7,
+      "max": 13.6
+     },
+     "renderFinishMs": {
+      "p50": 5.8,
+      "p95": 6.7,
+      "max": 8.2
+     },
+     "gpuMs": {
+      "p50": 1.02,
+      "p95": 1.2,
+      "max": 1.6,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "draws": 12.1,
+     "meshDraws": 155.8,
+     "workerTickMs": {
+      "p50": 2.6,
+      "p95": 3.5
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 450,
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.4,
+      "p95": 4.2,
+      "max": 4.9
+     },
+     "renderFinishMs": {
+      "p50": 3.4,
+      "p95": 4.3,
+      "max": 4.9
+     },
+     "gpuMs": {
+      "p50": 0.46,
+      "p95": 0.47,
+      "max": 0.49,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "draws": 4,
+     "meshDraws": 0,
+     "workerTickMs": {
+      "p50": 3.8,
+      "p95": 5
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 446,
+     "missed": 1,
+     "renderMs": {
+      "p50": 3.7,
+      "p95": 4.8,
+      "max": 7.9
+     },
+     "renderFinishMs": {
+      "p50": 3.6,
+      "p95": 4.9,
+      "max": 5.4
+     },
+     "gpuMs": {
+      "p50": 0.46,
+      "p95": 0.47,
+      "max": 0.73,
+      "samples": 445,
+      "disjoint": 0
+     },
+     "draws": 4,
+     "meshDraws": 0,
+     "workerTickMs": {
+      "p50": 4.1,
+      "p95": 5.2
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 450,
+     "missed": 0,
+     "renderMs": {
+      "p50": 6.4,
+      "p95": 7.6,
+      "max": 11.6
+     },
+     "renderFinishMs": {
+      "p50": 6.6,
+      "p95": 8.3,
+      "max": 10.3
+     },
+     "gpuMs": {
+      "p50": 0.73,
+      "p95": 0.76,
+      "max": 1.36,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "draws": 7,
+     "meshDraws": 0,
+     "workerTickMs": {
+      "p50": 4.5,
+      "p95": 5.7
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 378,
+     "missed": 67,
+     "renderMs": {
+      "p50": 7,
+      "p95": 8.3,
+      "max": 13.9
+     },
+     "renderFinishMs": {
+      "p50": 7.4,
+      "p95": 8.6,
+      "max": 10.1
+     },
+     "gpuMs": {
+      "p50": 1.29,
+      "p95": 1.31,
+      "max": 6.22,
+      "samples": 378,
+      "disjoint": 0
+     },
+     "draws": 11.1,
+     "meshDraws": 72.4,
+     "workerTickMs": {
+      "p50": 20.1,
+      "p95": 25.4
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 206,
+     "missed": 4,
+     "renderMs": {
+      "p50": 13.8,
+      "p95": 16.5,
+      "max": 19.3
+     },
+     "renderFinishMs": {
+      "p50": 13.5,
+      "p95": 17.5,
+      "max": 19.8
+     },
+     "gpuMs": {
+      "p50": 2.73,
+      "p95": 3.29,
+      "max": 3.46,
+      "samples": 206,
+      "disjoint": 0
+     },
+     "draws": 35.6,
+     "meshDraws": 395.6,
+     "workerTickMs": {
+      "p50": 21.4,
+      "p95": 27.9
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 182,
+     "missed": 0,
+     "renderMs": {
+      "p50": 16.2,
+      "p95": 19.4,
+      "max": 23.9
+     },
+     "renderFinishMs": {
+      "p50": 16.2,
+      "p95": 18.9,
+      "max": 22.4
+     },
+     "gpuMs": {
+      "p50": 2.61,
+      "p95": 3.1,
+      "max": 3.25,
+      "samples": 182,
+      "disjoint": 0
+     },
+     "draws": 42.1,
+     "meshDraws": 467.4,
+     "workerTickMs": {
+      "p50": 21.2,
+      "p95": 27.9
+     }
+    }
+   ],
+   "unified": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 450,
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.9,
+      "p95": 2.3,
+      "max": 2.6
+     },
+     "renderFinishMs": {
+      "p50": 2,
+      "p95": 2.4,
+      "max": 2.6
+     },
+     "gpuMs": {
+      "p50": 0.69,
+      "p95": 0.71,
+      "max": 0.72,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "draws": 27.6,
+     "workerTickMs": {
+      "p50": 2.3,
+      "p95": 3.1
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 450,
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.4,
+      "p95": 2.9,
+      "max": 4.4
+     },
+     "renderFinishMs": {
+      "p50": 2.4,
+      "p95": 2.8,
+      "max": 5.1
+     },
+     "gpuMs": {
+      "p50": 0.86,
+      "p95": 0.91,
+      "max": 0.94,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "draws": 63.8,
+     "workerTickMs": {
+      "p50": 2.2,
+      "p95": 3
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 450,
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.4,
+      "p95": 4.7,
+      "max": 6.2
+     },
+     "renderFinishMs": {
+      "p50": 4.8,
+      "p95": 5.7,
+      "max": 7.5
+     },
+     "gpuMs": {
+      "p50": 1.13,
+      "p95": 1.24,
+      "max": 1.28,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "draws": 93.2,
+     "workerTickMs": {
+      "p50": 2.4,
+      "p95": 3.2
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 450,
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.6,
+      "p95": 3.2,
+      "max": 4.7
+     },
+     "renderFinishMs": {
+      "p50": 2.6,
+      "p95": 3.2,
+      "max": 3.6
+     },
+     "gpuMs": {
+      "p50": 0.61,
+      "p95": 0.61,
+      "max": 0.63,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "draws": 6,
+     "workerTickMs": {
+      "p50": 4.2,
+      "p95": 6.4
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 450,
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.4,
+      "p95": 3.1,
+      "max": 3.5
+     },
+     "renderFinishMs": {
+      "p50": 2.3,
+      "p95": 3,
+      "max": 3.4
+     },
+     "gpuMs": {
+      "p50": 0.61,
+      "p95": 0.62,
+      "max": 0.84,
+      "samples": 449,
+      "disjoint": 0
+     },
+     "draws": 6,
+     "workerTickMs": {
+      "p50": 4.2,
+      "p95": 5.6
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 450,
+     "missed": 0,
+     "renderMs": {
+      "p50": 5.3,
+      "p95": 6.2,
+      "max": 7.7
+     },
+     "renderFinishMs": {
+      "p50": 5.4,
+      "p95": 6.2,
+      "max": 6.6
+     },
+     "gpuMs": {
+      "p50": 1.01,
+      "p95": 1.02,
+      "max": 1.33,
+      "samples": 450,
+      "disjoint": 0
+     },
+     "draws": 19,
+     "workerTickMs": {
+      "p50": 5.1,
+      "p95": 6.7
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 363,
+     "missed": 87,
+     "renderMs": {
+      "p50": 7,
+      "p95": 8.4,
+      "max": 10.4
+     },
+     "renderFinishMs": {
+      "p50": 7,
+      "p95": 8.6,
+      "max": 10.4
+     },
+     "gpuMs": {
+      "p50": 0.87,
+      "p95": 0.88,
+      "max": 3.27,
+      "samples": 363,
+      "disjoint": 0
+     },
+     "draws": 44.9,
+     "workerTickMs": {
+      "p50": 19.5,
+      "p95": 25.5
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 234,
+     "missed": 17,
+     "renderMs": {
+      "p50": 11.4,
+      "p95": 13.8,
+      "max": 17.6
+     },
+     "renderFinishMs": {
+      "p50": 9.9,
+      "p95": 14.3,
+      "max": 102.4
+     },
+     "gpuMs": {
+      "p50": 2.31,
+      "p95": 2.92,
+      "max": 8.82,
+      "samples": 234,
+      "disjoint": 0
+     },
+     "draws": 292,
+     "workerTickMs": {
+      "p50": 16.7,
+      "p95": 25.8
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 197,
+     "missed": 2,
+     "renderMs": {
+      "p50": 13.6,
+      "p95": 16.6,
+      "max": 18.6
+     },
+     "renderFinishMs": {
+      "p50": 10.2,
+      "p95": 12.8,
+      "max": 17.2
+     },
+     "gpuMs": {
+      "p50": 2.74,
+      "p95": 3.35,
+      "max": 3.98,
+      "samples": 197,
+      "disjoint": 0
+     },
+     "draws": 388.5,
+     "workerTickMs": {
+      "p50": 19,
+      "p95": 25.3
+     }
+    }
+   ]
+  },
+  "Pixel 7a": {
+   "build": "vite dev (unminified modules)",
+   "browser": "Chrome/157.0.8103.78",
+   "fixed": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 294,
+     "missed": 2,
+     "renderMs": {
+      "p50": 3.5,
+      "p95": 4.9,
+      "max": 6.8
+     },
+     "renderFinishMs": {
+      "p50": 3.7,
+      "p95": 5,
+      "max": 5.9
+     },
+     "gpuMs": null,
+     "draws": 6.3,
+     "meshDraws": 22.7,
+     "workerTickMs": {
+      "p50": 4.9,
+      "p95": 8
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 300,
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.8,
+      "p95": 5.2,
+      "max": 7.9
+     },
+     "renderFinishMs": {
+      "p50": 3.8,
+      "p95": 4.9,
+      "max": 5.7
+     },
+     "gpuMs": null,
+     "draws": 8,
+     "meshDraws": 23.4,
+     "workerTickMs": {
+      "p50": 4.6,
+      "p95": 7.1
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 300,
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.9,
+      "p95": 6.9,
+      "max": 10.5
+     },
+     "renderFinishMs": {
+      "p50": 5.6,
+      "p95": 7.3,
+      "max": 9
+     },
+     "gpuMs": null,
+     "draws": 9.6,
+     "meshDraws": 132.9,
+     "workerTickMs": {
+      "p50": 4.8,
+      "p95": 9.6
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 298,
+     "missed": 1,
+     "renderMs": {
+      "p50": 4.3,
+      "p95": 5.9,
+      "max": 8.7
+     },
+     "renderFinishMs": {
+      "p50": 4.3,
+      "p95": 6.2,
+      "max": 7.9
+     },
+     "gpuMs": null,
+     "draws": 4,
+     "meshDraws": 0,
+     "workerTickMs": {
+      "p50": 6.6,
+      "p95": 12.1
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 300,
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.7,
+      "p95": 5.8,
+      "max": 6.6
+     },
+     "renderFinishMs": {
+      "p50": 4.5,
+      "p95": 5.6,
+      "max": 7.4
+     },
+     "gpuMs": null,
+     "draws": 4,
+     "meshDraws": 0,
+     "workerTickMs": {
+      "p50": 7.3,
+      "p95": 10.2
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 300,
+     "missed": 0,
+     "renderMs": {
+      "p50": 5.5,
+      "p95": 6.6,
+      "max": 7.2
+     },
+     "renderFinishMs": {
+      "p50": 5.6,
+      "p95": 6.8,
+      "max": 7.5
+     },
+     "gpuMs": null,
+     "draws": 4,
+     "meshDraws": 0,
+     "workerTickMs": {
+      "p50": 7.5,
+      "p95": 10.7
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 289,
+     "missed": 11,
+     "renderMs": {
+      "p50": 7.2,
+      "p95": 10.7,
+      "max": 14.2
+     },
+     "renderFinishMs": {
+      "p50": 8.1,
+      "p95": 11.7,
+      "max": 16
+     },
+     "gpuMs": null,
+     "draws": 7.7,
+     "meshDraws": 38.2,
+     "workerTickMs": {
+      "p50": 24.8,
+      "p95": 37.8
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 190,
+     "missed": 4,
+     "renderMs": {
+      "p50": 12.3,
+      "p95": 17.1,
+      "max": 24.6
+     },
+     "renderFinishMs": {
+      "p50": 12.2,
+      "p95": 17.5,
+      "max": 30.6
+     },
+     "gpuMs": null,
+     "draws": 20.5,
+     "meshDraws": 167.3,
+     "workerTickMs": {
+      "p50": 26,
+      "p95": 37.1
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 143,
+     "missed": 26,
+     "renderMs": {
+      "p50": 15.8,
+      "p95": 20.9,
+      "max": 49
+     },
+     "renderFinishMs": {
+      "p50": 13.3,
+      "p95": 18.1,
+      "max": 21.7
+     },
+     "gpuMs": null,
+     "draws": 37.6,
+     "meshDraws": 296,
+     "workerTickMs": {
+      "p50": 24.1,
+      "p95": 31.9
+     }
+    }
+   ],
+   "unified": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 300,
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.4,
+      "p95": 4.7,
+      "max": 6.4
+     },
+     "renderFinishMs": {
+      "p50": 3.5,
+      "p95": 4.9,
+      "max": 6
+     },
+     "gpuMs": null,
+     "draws": 22.5,
+     "workerTickMs": {
+      "p50": 6,
+      "p95": 9.7
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 300,
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.5,
+      "p95": 4.7,
+      "max": 7.1
+     },
+     "renderFinishMs": {
+      "p50": 3.5,
+      "p95": 4.5,
+      "max": 7
+     },
+     "gpuMs": null,
+     "draws": 25.8,
+     "workerTickMs": {
+      "p50": 4.9,
+      "p95": 9.4
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 300,
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.3,
+      "p95": 6.2,
+      "max": 10.2
+     },
+     "renderFinishMs": {
+      "p50": 4.3,
+      "p95": 4.9,
+      "max": 5.6
+     },
+     "gpuMs": null,
+     "draws": 74.8,
+     "workerTickMs": {
+      "p50": 4.5,
+      "p95": 8.7
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 300,
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.6,
+      "p95": 4.7,
+      "max": 7.3
+     },
+     "renderFinishMs": {
+      "p50": 4.2,
+      "p95": 5,
+      "max": 5.5
+     },
+     "gpuMs": null,
+     "draws": 6,
+     "workerTickMs": {
+      "p50": 6.9,
+      "p95": 10.6
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 300,
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.6,
+      "p95": 4.5,
+      "max": 5.8
+     },
+     "renderFinishMs": {
+      "p50": 3.5,
+      "p95": 4.4,
+      "max": 4.6
+     },
+     "gpuMs": null,
+     "draws": 4,
+     "workerTickMs": {
+      "p50": 8.1,
+      "p95": 11.1
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 300,
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.5,
+      "p95": 5.5,
+      "max": 6.3
+     },
+     "renderFinishMs": {
+      "p50": 4.8,
+      "p95": 5.7,
+      "max": 8.1
+     },
+     "gpuMs": null,
+     "draws": 6,
+     "workerTickMs": {
+      "p50": 8.1,
+      "p95": 10.5
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 282,
+     "missed": 14,
+     "renderMs": {
+      "p50": 7.4,
+      "p95": 10.2,
+      "max": 12.5
+     },
+     "renderFinishMs": {
+      "p50": 7.2,
+      "p95": 10.2,
+      "max": 36.2
+     },
+     "gpuMs": null,
+     "draws": 33.8,
+     "workerTickMs": {
+      "p50": 26.3,
+      "p95": 37.2
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 187,
+     "missed": 12,
+     "renderMs": {
+      "p50": 11.6,
+      "p95": 16.2,
+      "max": 19.5
+     },
+     "renderFinishMs": {
+      "p50": 11.7,
+      "p95": 15.2,
+      "max": 28.7
+     },
+     "gpuMs": null,
+     "draws": 130.7,
+     "workerTickMs": {
+      "p50": 27,
+      "p95": 38.8
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 185,
+     "missed": 5,
+     "renderMs": {
+      "p50": 12.4,
+      "p95": 17.2,
+      "max": 19.7
+     },
+     "renderFinishMs": {
+      "p50": 15.9,
+      "p95": 19.6,
+      "max": 21
+     },
+     "gpuMs": null,
+     "draws": 139.5,
+     "workerTickMs": {
+      "p50": 20.8,
+      "p95": 29.5
+     }
+    }
+   ]
+  },
+  "M4 Pro Mac": {
+   "build": "vite dev (unminified modules)",
+   "browser": "156.0.8078.4",
+   "fixed": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.6,
+      "p95": 1.1,
+      "max": 2.5
+     },
+     "renderFinishMs": {
+      "p50": 0.8,
+      "p95": 1.3,
+      "max": 2
+     },
+     "gpuMs": {
+      "p50": 0.99,
+      "p95": 1.09,
+      "max": 2.29,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 8.5,
+     "meshDraws": 26.4,
+     "workerTickMs": {
+      "p50": 1.2,
+      "p95": 1.9
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.9,
+      "p95": 1.3,
+      "max": 2.8
+     },
+     "renderFinishMs": {
+      "p50": 0.9,
+      "p95": 1.3,
+      "max": 2.5
+     },
+     "gpuMs": {
+      "p50": 1.77,
+      "p95": 2.02,
+      "max": 4.41,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 15.3,
+     "meshDraws": 72.7,
+     "workerTickMs": {
+      "p50": 1.1,
+      "p95": 1.7
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.2,
+      "p95": 1.6,
+      "max": 2.9
+     },
+     "renderFinishMs": {
+      "p50": 1.2,
+      "p95": 1.6,
+      "max": 2.4
+     },
+     "gpuMs": {
+      "p50": 1.61,
+      "p95": 1.95,
+      "max": 2.44,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 14.4,
+     "meshDraws": 90,
+     "workerTickMs": {
+      "p50": 1,
+      "p95": 1.3
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 1,
+      "p95": 1.5,
+      "max": 2
+     },
+     "renderFinishMs": {
+      "p50": 1,
+      "p95": 1.5,
+      "max": 2.3
+     },
+     "gpuMs": {
+      "p50": 0.62,
+      "p95": 0.66,
+      "max": 1.91,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 4,
+     "meshDraws": 0,
+     "workerTickMs": {
+      "p50": 1.4,
+      "p95": 2.3
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.2,
+      "p95": 1.7,
+      "max": 2.2
+     },
+     "renderFinishMs": {
+      "p50": 1.4,
+      "p95": 2,
+      "max": 4
+     },
+     "gpuMs": {
+      "p50": 0.63,
+      "p95": 0.67,
+      "max": 1.26,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 4,
+     "meshDraws": 0,
+     "workerTickMs": {
+      "p50": 1.8,
+      "p95": 2.6
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.3,
+      "p95": 2.6,
+      "max": 2.9
+     },
+     "renderFinishMs": {
+      "p50": 2.3,
+      "p95": 2.6,
+      "max": 2.7
+     },
+     "gpuMs": {
+      "p50": 0.83,
+      "p95": 1.01,
+      "max": 2.25,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 7,
+     "meshDraws": 0,
+     "workerTickMs": {
+      "p50": 1.7,
+      "p95": 2
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.9,
+      "p95": 2.2,
+      "max": 2.9
+     },
+     "renderFinishMs": {
+      "p50": 1.9,
+      "p95": 2.2,
+      "max": 2.4
+     },
+     "gpuMs": {
+      "p50": 1.3,
+      "p95": 2.57,
+      "max": 5.09,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 10.2,
+     "meshDraws": 70.8,
+     "workerTickMs": {
+      "p50": 5.2,
+      "p95": 6.6
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.2,
+      "p95": 3.6,
+      "max": 4.6
+     },
+     "renderFinishMs": {
+      "p50": 3.1,
+      "p95": 3.5,
+      "max": 4.8
+     },
+     "gpuMs": {
+      "p50": 13.61,
+      "p95": 18.69,
+      "max": 22.99,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 30.9,
+     "meshDraws": 274.4,
+     "workerTickMs": {
+      "p50": 4.8,
+      "p95": 6.1
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.3,
+      "p95": 4.7,
+      "max": 5.7
+     },
+     "renderFinishMs": {
+      "p50": 4.2,
+      "p95": 4.6,
+      "max": 6.6
+     },
+     "gpuMs": {
+      "p50": 15.4,
+      "p95": 19.82,
+      "max": 21.78,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 47.7,
+     "meshDraws": 541.7,
+     "workerTickMs": {
+      "p50": 5.5,
+      "p95": 6.9
+     }
+    }
+   ],
+   "unified": [
+    {
+     "scene": "city",
+     "zoom": 1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.5,
+      "p95": 0.7,
+      "max": 1
+     },
+     "renderFinishMs": {
+      "p50": 0.6,
+      "p95": 0.7,
+      "max": 1
+     },
+     "gpuMs": {
+      "p50": 0.7,
+      "p95": 0.75,
+      "max": 4.67,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 27.6,
+     "workerTickMs": {
+      "p50": 0.8,
+      "p95": 1.2
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.25,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.7,
+      "p95": 1,
+      "max": 2.1
+     },
+     "renderFinishMs": {
+      "p50": 0.6,
+      "p95": 1,
+      "max": 1.9
+     },
+     "gpuMs": {
+      "p50": 1.13,
+      "p95": 1.18,
+      "max": 4.18,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 70.3,
+     "workerTickMs": {
+      "p50": 0.8,
+      "p95": 1.3
+     }
+    },
+    {
+     "scene": "city",
+     "zoom": 0.1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.9,
+      "p95": 1.4,
+      "max": 2.6
+     },
+     "renderFinishMs": {
+      "p50": 1.1,
+      "p95": 1.7,
+      "max": 2
+     },
+     "gpuMs": {
+      "p50": 2.17,
+      "p95": 2.37,
+      "max": 5.4,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 85.8,
+     "workerTickMs": {
+      "p50": 1.1,
+      "p95": 1.5
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.9,
+      "p95": 1.4,
+      "max": 1.9
+     },
+     "renderFinishMs": {
+      "p50": 1,
+      "p95": 1.3,
+      "max": 1.4
+     },
+     "gpuMs": {
+      "p50": 0.41,
+      "p95": 0.45,
+      "max": 1.7,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 6,
+     "workerTickMs": {
+      "p50": 1.7,
+      "p95": 2.3
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.25,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 0.7,
+      "p95": 1.1,
+      "max": 2.4
+     },
+     "renderFinishMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 1.5
+     },
+     "gpuMs": {
+      "p50": 0.69,
+      "p95": 0.72,
+      "max": 4.37,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 6,
+     "workerTickMs": {
+      "p50": 1.6,
+      "p95": 2.5
+     }
+    },
+    {
+     "scene": "woods",
+     "zoom": 0.1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 1.5,
+      "p95": 1.8,
+      "max": 2.1
+     },
+     "renderFinishMs": {
+      "p50": 1.5,
+      "p95": 1.9,
+      "max": 2.1
+     },
+     "gpuMs": {
+      "p50": 1.07,
+      "p95": 1.91,
+      "max": 3.28,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 19,
+     "workerTickMs": {
+      "p50": 1.8,
+      "p95": 2.1
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 2.3,
+      "p95": 2.7,
+      "max": 3.9
+     },
+     "renderFinishMs": {
+      "p50": 2.4,
+      "p95": 2.7,
+      "max": 2.8
+     },
+     "gpuMs": {
+      "p50": 0.77,
+      "p95": 1.98,
+      "max": 2.76,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 42,
+     "workerTickMs": {
+      "p50": 5.9,
+      "p95": 7.7
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.25,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 3.1,
+      "p95": 3.8,
+      "max": 4.8
+     },
+     "renderFinishMs": {
+      "p50": 3,
+      "p95": 3.5,
+      "max": 3.8
+     },
+     "gpuMs": {
+      "p50": 2.47,
+      "p95": 4.26,
+      "max": 8.65,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 228.6,
+     "workerTickMs": {
+      "p50": 5.2,
+      "p95": 6.6
+     }
+    },
+    {
+     "scene": "crowd",
+     "zoom": 0.1,
+     "frames": 600,
+     "missed": 0,
+     "renderMs": {
+      "p50": 4.5,
+      "p95": 5.2,
+      "max": 6.6
+     },
+     "renderFinishMs": {
+      "p50": 4.1,
+      "p95": 4.9,
+      "max": 5.7
+     },
+     "gpuMs": {
+      "p50": 3.77,
+      "p95": 5.92,
+      "max": 8.46,
+      "samples": 600,
+      "disjoint": 0
+     },
+     "draws": 388.4,
+     "workerTickMs": {
+      "p50": 6.4,
+      "p95": 8.1
+     }
+    }
+   ]
+  }
+ }
+}
