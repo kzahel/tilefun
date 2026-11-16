@@ -210,6 +210,7 @@ test("multiplayer join, validation, public browse and cancellation use controlle
   await expect(page.getByTestId("world-menu")).toBeVisible();
   await focusWithPad(page, "Multiplayer");
   await press(page, 0);
+  await focusWithPad(page, "Host P2P");
   await expect(page.getByRole("button", { name: "Host P2P" })).toBeFocused();
   await press(page, 13);
   await press(page, 0);
@@ -314,6 +315,7 @@ test("failed saving keeps the session open and the recovery dialog works with B"
   });
   await focusWithPad(page, "Multiplayer");
   await press(page, 0);
+  await focusWithPad(page, "Host P2P");
   await press(page, 0);
   const recovery = page.getByRole("alertdialog", { name: "Couldn't save" });
   await expect(recovery).toBeVisible();

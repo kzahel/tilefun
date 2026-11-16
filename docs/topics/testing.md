@@ -2,6 +2,39 @@
 
 ## Local validation
 
+The 2026-11-16 seven-failure browser repair updates stale gorilla, seahorse and
+shark inspection coordinates to existing natural homes, and makes two controller
+cases navigate to Host P2P after the local split-screen controls. The kangaroo
+browser check had treated physical lift from a hopping back as an automatic
+bounce. `SharedPhysics.test.ts` now checks its initial landing and every contact/
+airborne tick against support velocity and previous vertical velocity, while the
+browser keeps the actual hop, alarm, recovery and reload assertions. The existing
+40px/s bound remains for stationary backs. Focused validation: all 31 browser
+cases in the five affected files, 10 selected wildlife cases and all 14 shared
+physics cases pass; typechecks, generated inventories and the build pass under
+the pinned Node 24. Two earlier formatting errors in the capture runner and
+vehicle geometry spec are also corrected for the CI gate.
+
+The code-health baseline is refreshed for the already committed renderer
+unification, terrain/lake composition and local multiplayer changes being pushed
+with this repair. Its 600-line/25-complexity thresholds stay fixed and future
+growth remains gated; this accepts the current implementation rather than
+mixing a broad renderer refactor into test repair. New split candidates include
+`FirstPersonView.ts` (901 lines), `FirstPersonProps.ts` (630) and
+`RendererParityProbe.ts` (621); the terrain blend study's complexity is 75.
+Knip also recognizes the optional film runner's external `ffmpeg` binary,
+alongside `wsl`; neither is an npm package dependency.
+
+The full run also exposed a train-lab race after paused reload: the recall prompt
+is visible while resume/teleport commands still lock interaction. Its keyboard
+check now waits for the prompt to become enabled before pressing E.
+An apartment check similarly held Up long enough under load to leave the exit's
+interaction radius; it now walks back until Return to street is visible before
+using that action. The train passes four parallel repeats and the apartment/shop
+pair passes two repeats each. The first full rerun passed the original seven
+cases and finished with 556 passed, two retry flakes (garden and second pad),
+and these two additional failures, now repaired.
+
 Match validation to the affected behavior and dependencies. Small code changes
 should run focused tests and relevant lint/typechecks. Documentation-only edits
 need diff review and `git diff --check`, without runtime tests. Report which

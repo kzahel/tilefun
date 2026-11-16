@@ -8209,8 +8209,8 @@
       "name": "Shark · hunting & prey replacement · sparse",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-shark&landscape=sparse#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=13419&y=-12921&landscape=sparse&zoom=0.8",
-      "fingerprint": "6f4c73541435127e54876671711bde81982260d78fdbfe79846a44df45ca4bf0"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=23129&y=-7586&landscape=sparse&zoom=0.8",
+      "fingerprint": "2ecd44edb22047ac597f92e22e0fbc0799e28a463227ef79c8ae39df55ad6efe"
     },
     {
       "id": "nature:shark:balanced:v1",
@@ -8219,8 +8219,8 @@
       "name": "Shark · hunting & prey replacement · balanced",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-shark&landscape=balanced#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=13419&y=-12921&landscape=balanced&zoom=0.8",
-      "fingerprint": "53b5c5ca4706654beda865b1c6187abe172df49fb4ee2d5704b3a610449cf11f"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=23129&y=-7586&landscape=balanced&zoom=0.8",
+      "fingerprint": "a89612ba4ed78c1d88b9acd7833aeeb78ce77f3b881250e557234d0537ab46ca"
     },
     {
       "id": "nature:shark:lush:v1",
@@ -8229,8 +8229,8 @@
       "name": "Shark · hunting & prey replacement · lush",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-shark&landscape=lush#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=13419&y=-12921&landscape=lush&zoom=0.8",
-      "fingerprint": "4692dc3670fc22211cfd83e0bc53378c9c1a6251bbf2ad68b9f1b39508b9904f"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=23129&y=-7586&landscape=lush&zoom=0.8",
+      "fingerprint": "28e73ad031b30682a64568c49cd570fabafdbbe969f86e65832f79506dfd2c81"
     },
     {
       "id": "nature:shark:thicket:v1",
@@ -8239,8 +8239,8 @@
       "name": "Shark · hunting & prey replacement · thicket",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-shark&landscape=thicket#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=13419&y=-12921&landscape=thicket&zoom=0.8",
-      "fingerprint": "26aee8a0a70125f9b919414e5c725fe8ff8ff9382c25b037281be25384459ae7"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=23129&y=-7586&landscape=thicket&zoom=0.8",
+      "fingerprint": "5ce6d0161a34d4c0ef7270a8bf5ad129be5064d9834ffe086561b10a313b396c"
     },
     {
       "id": "nature:hammerhead-shark:sparse:v1",
@@ -9209,8 +9209,8 @@
       "name": "Silverback gorilla · woodland refuge · sparse",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-gorilla&landscape=sparse#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1569&y=1512&landscape=sparse&zoom=0.8",
-      "fingerprint": "5ebc4b16cf6e9a9a820b8ebfaa8db0a039c4d51eb73be8e9480dda44615ba6ee"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1377&y=2334&landscape=sparse&zoom=0.8",
+      "fingerprint": "e1bc56f6f631c56a32557fcd96e738c600def01852cdcab968c61a90ef5120ea"
     },
     {
       "id": "nature:gorilla:balanced:v1",
@@ -9219,8 +9219,8 @@
       "name": "Silverback gorilla · woodland refuge · balanced",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-gorilla&landscape=balanced#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1569&y=1512&landscape=balanced&zoom=0.8",
-      "fingerprint": "da9f2f420e6e0300e038fb765a285c033f7404dfce9c588ec7b44c116cf9da0e"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1377&y=2334&landscape=balanced&zoom=0.8",
+      "fingerprint": "cceeb851d7a7815c27b16f2a0e2cfbcaa0c7b755d3da0cf0453087ca26165b95"
     },
     {
       "id": "nature:gorilla:lush:v1",
@@ -9229,8 +9229,8 @@
       "name": "Silverback gorilla · woodland refuge · lush",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-gorilla&landscape=lush#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1569&y=1512&landscape=lush&zoom=0.8",
-      "fingerprint": "02d498a01b357138a17c2dbc79138d0fe84cd15baff7ef5babde9c1b582b6cb7"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1377&y=2334&landscape=lush&zoom=0.8",
+      "fingerprint": "ea26a43bd3daf81ea3833a976d6dd1465b79d660723df0ef86756df218bae79e"
     },
     {
       "id": "nature:gorilla:thicket:v1",
@@ -9239,8 +9239,8 @@
       "name": "Silverback gorilla · woodland refuge · thicket",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-gorilla&landscape=thicket#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1569&y=1512&landscape=thicket&zoom=0.8",
-      "fingerprint": "e031f37b02cf62de794330940eebb84e9fc2f17d17150a3ec894ce0ecb117b5e"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1377&y=2334&landscape=thicket&zoom=0.8",
+      "fingerprint": "32a5d82489bfac4f838830315396e47b54b6d8e28007b7afd94fbe89c16f1de1"
     },
     {
       "id": "nature:crab:sparse:v1",
@@ -13169,8 +13169,8 @@
       "name": "Seahorse · deep refuge · sparse",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-seahorse&landscape=sparse#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1698&y=-3945&landscape=sparse&zoom=0.8",
-      "fingerprint": "350291151e2128b4ca2aef2805a31ec4b1715b84a20d7831cb7108120946406a"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=13229&y=-7256&landscape=sparse&zoom=0.8",
+      "fingerprint": "3da5862e3eb37a172fd202083b539e33731da9597930254ecba130b9342c979d"
     },
     {
       "id": "nature:seahorse:balanced:v1",
@@ -13179,8 +13179,8 @@
       "name": "Seahorse · deep refuge · balanced",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-seahorse&landscape=balanced#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1698&y=-3945&landscape=balanced&zoom=0.8",
-      "fingerprint": "133c20d064a48352e18a9f42520aba4bd6e2ac94a18a50731a1206881d046afb"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=13229&y=-7256&landscape=balanced&zoom=0.8",
+      "fingerprint": "54d481ab95b15c2cae28d5884f9fbd8301518d6ebd80643c9087f2f59bd74ade"
     },
     {
       "id": "nature:seahorse:lush:v1",
@@ -13189,8 +13189,8 @@
       "name": "Seahorse · deep refuge · lush",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-seahorse&landscape=lush#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1698&y=-3945&landscape=lush&zoom=0.8",
-      "fingerprint": "060a9937fd0aaa7916c9648cafa892e245a60c3689df8f5c3717d7ad721c359d"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=13229&y=-7256&landscape=lush&zoom=0.8",
+      "fingerprint": "fb1afc0c7b3bf4c3074fc1909ae941a960421fecbd2b96a5cb700240cb5745b0"
     },
     {
       "id": "nature:seahorse:thicket:v1",
@@ -13199,8 +13199,8 @@
       "name": "Seahorse · deep refuge · thicket",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-seahorse&landscape=thicket#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=1698&y=-3945&landscape=thicket&zoom=0.8",
-      "fingerprint": "d7c7b9d2f31fae400c68ae40c6672c5b2c8307bdc3b39a34f8fa224943a15cf8"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=13229&y=-7256&landscape=thicket&zoom=0.8",
+      "fingerprint": "29af7671c168633000b95a2c3f4de6676f1e01066dff7775044654849c308186"
     },
     {
       "id": "nature:nautilus:sparse:v1",
@@ -56275,5 +56275,5 @@
       }
     }
   ],
-  "inputDigest": "753f1aa3bf070e51d692c1246106e797b16a46ca9b1f4402e45e47a980946505"
+  "inputDigest": "df3f88212e73960f159e512d49eb1c88572109c552c3cb83a601f5392e809b4e"
 }

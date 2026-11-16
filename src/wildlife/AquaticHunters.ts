@@ -51,7 +51,7 @@ export const AQUATIC_HUNTER_PROFILES = [
       habitat: "deep",
       radius: 176,
       group: 1,
-      inspection: [13419, -12921],
+      inspection: [23129, -7586],
     },
   },
   {

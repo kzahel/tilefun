@@ -73,9 +73,10 @@ would draw the 3D scene, and the classic view is far cheaper there. That
 includes the browser suite's headless Chromium, which runs at about a third of
 its usual pace with the 3D view on every page and misses timing-sensitive
 gameplay phases; `tests/unified-topdown.spec.ts` asks for the unified view
-explicitly. Full suite on 2026-11-16 after the default: 553 of 560 pass; 7 fail
-the same way on the session's starting commit (animal browser, aquatic
-hunters, controller menu, kangaroo, predator world: not renderer work); specs
+explicitly. The first full suite on 2026-11-16 after the default passed 553 of
+560; seven failures also reproduced on that session's starting commit. The
+follow-up [browser-suite repair](testing.md#local-validation) fixes their stale
+inspection/menu assumptions and checks kangaroo contact physics natively. Specs
 that instrument the fixed backend pin `view=fixed` ([inventory](#retirement-inventory)).
 It stays in sync with the debug panel's
 **Unified top-down 3D** (**F3**, or **More → Debug**) and `/r_topdown3d 1` / `0`

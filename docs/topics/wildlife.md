@@ -4,7 +4,21 @@ Topic: wildlife
 Status: all 196 roster animals implemented and available in the animated lab.
 New exact art remains pending human review; specialist behavior limits are
 recorded in the individual checkpoints.
-Updated: 2026-11-03.
+Updated: 2026-11-16.
+
+Browser-suite repair (2026-11-16): gorilla, seahorse and shark inspection
+coordinates now point at current seed-2026 natural owners. The previous homes
+no longer survived regional placement reservations; the generator and art stay
+unchanged. Animal Browser Watch AI, shark lagoon feeding/reload and ordinary-world
+shark placement/deletion all pass in the five affected browser files (31 cases).
+The kangaroo's rising back can physically lift a player at about 70px/s. Its
+no-automatic-bounce contract now runs at every native physics tick, checking the
+initial landing, contact velocity transfer and subsequent ballistic departure;
+the browser retains hopping, contact reactions and saved phases. See
+[testing](testing.md) for the full-suite delivery evidence.
+Production-table refresh was attempted with `node scripts/wildlife/status.mjs`,
+but this checkout lacks the ignored `data/wildlife-campaign-v2/progress.json`;
+the historical art-production table cannot be regenerated from local state.
 
 Physics reset [205](../tactical/205-physics-reset.md) moves AI trajectories into
 the shared physics intent contract. Anchored resources stay fixed; loose food/toys

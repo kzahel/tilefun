@@ -14,8 +14,9 @@ const browserSpecies = new Set(["fox", "horse", "kangaroo", "fish", "penguin", "
 // Shared Rapier contacts rest bodies within solver slop of the ground, not at
 // exact zero (205 checkpoint 4c); hops clear 2 px.
 const grounded = (z: number) => Math.abs(z) < 0.5;
-// Landing on a back may leave one sub-pixel solver depenetration tick (12-20px/s
-// measured; same bound as other wildlife specs); removed bounces were 75-150px/s.
+// Landing on a stationary back may leave a sub-pixel solver depenetration tick.
+// Hopping backs physically lift the player; SharedPhysics.test.ts checks their
+// contact velocity and ballistic departure at the native fixed-tick boundary.
 const expectNoBounce = async (c: Locator) =>
   expect(Number(await c.getAttribute("data-player-max-vz"))).toBeLessThan(40);
 for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species))) {
@@ -177,7 +178,7 @@ for (const profile of FAUNA_PROFILES.filter((p) => browserSpecies.has(p.species)
         intervals: [30],
       })
       .toBe(true);
-    await expectNoBounce(c);
+    if (!profile.hop) await expectNoBounce(c);
     expect(errors).toEqual([]);
   });
 

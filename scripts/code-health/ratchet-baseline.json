@@ -53,7 +53,7 @@
       "overLimit": 1
     },
     "src/autotile/TerrainAdjacency.ts": {
-      "lines": 151,
+      "lines": 152,
       "worst": 41,
       "overLimit": 1
     },
@@ -63,14 +63,19 @@
       "overLimit": 1
     },
     "src/client/GameClient.ts": {
-      "lines": 927,
+      "lines": 934,
       "worst": 0,
       "overLimit": 0
     },
     "src/client/PlayerPredictor.ts": {
-      "lines": 963,
-      "worst": 45,
+      "lines": 950,
+      "worst": 40,
       "overLimit": 3
+    },
+    "src/client/RendererParityProbe.ts": {
+      "lines": 621,
+      "worst": 0,
+      "overLimit": 0
     },
     "src/editor/collectEditorOverlay.ts": {
       "lines": 294,
@@ -119,7 +124,7 @@
     },
     "src/explorer/MapRenderer.ts": {
       "lines": 566,
-      "worst": 156,
+      "worst": 160,
       "overLimit": 1
     },
     "src/explorer/regional.worker.ts": {
@@ -188,7 +193,7 @@
       "overLimit": 1
     },
     "src/generation/regional/NaturalLandscape.ts": {
-      "lines": 1613,
+      "lines": 1635,
       "worst": 72,
       "overLimit": 10
     },
@@ -219,7 +224,7 @@
     },
     "src/input/ControllerInput.ts": {
       "lines": 157,
-      "worst": 62,
+      "worst": 60,
       "overLimit": 1
     },
     "src/input/ControllerPointer.ts": {
@@ -373,7 +378,7 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 881,
+      "lines": 884,
       "worst": 65,
       "overLimit": 3
     },
@@ -462,9 +467,24 @@
       "worst": 42,
       "overLimit": 1
     },
+    "src/rendering/firstperson/FirstPersonFaces.ts": {
+      "lines": 125,
+      "worst": 27,
+      "overLimit": 1
+    },
+    "src/rendering/firstperson/FirstPersonProps.ts": {
+      "lines": 630,
+      "worst": 37,
+      "overLimit": 1
+    },
+    "src/rendering/firstperson/FirstPersonView.ts": {
+      "lines": 901,
+      "worst": 32,
+      "overLimit": 2
+    },
     "src/rendering/GpuMeshBodies.ts": {
-      "lines": 302,
-      "worst": 61,
+      "lines": 370,
+      "worst": 66,
       "overLimit": 1
     },
     "src/rendering/GpuOverlayResources.ts": {
@@ -478,12 +498,12 @@
       "overLimit": 1
     },
     "src/rendering/GrassBladeRenderer.ts": {
-      "lines": 248,
+      "lines": 284,
       "worst": 57,
       "overLimit": 1
     },
     "src/rendering/ParticleSystem.ts": {
-      "lines": 443,
+      "lines": 452,
       "worst": 51,
       "overLimit": 3
     },
@@ -498,13 +518,18 @@
       "overLimit": 1
     },
     "src/rendering/RasterRenderBackend.ts": {
-      "lines": 335,
+      "lines": 342,
       "worst": 34,
       "overLimit": 1
     },
+    "src/rendering/RoadDeckPresentation.ts": {
+      "lines": 138,
+      "worst": 26,
+      "overLimit": 1
+    },
     "src/rendering/SurfacePresentation.ts": {
-      "lines": 299,
-      "worst": 77,
+      "lines": 322,
+      "worst": 50,
       "overLimit": 1
     },
     "src/rendering/SurfaceReceivers.ts": {
@@ -558,12 +583,12 @@
       "overLimit": 1
     },
     "src/scenes/EditScene.ts": {
-      "lines": 292,
+      "lines": 327,
       "worst": 31,
       "overLimit": 1
     },
     "src/scenes/PlayScene.ts": {
-      "lines": 638,
+      "lines": 639,
       "worst": 45,
       "overLimit": 2
     },
@@ -683,8 +708,8 @@
       "overLimit": 1
     },
     "src/ui/MainMenu.ts": {
-      "lines": 465,
-      "worst": 41,
+      "lines": 487,
+      "worst": 43,
       "overLimit": 1
     },
     "src/ui/WorldMap.ts": {
@@ -865,6 +890,11 @@
     "src/workshop/SourcePage.tsx": {
       "lines": 732,
       "worst": 40,
+      "overLimit": 1
+    },
+    "src/workshop/TerrainBlendStudy.ts": {
+      "lines": 198,
+      "worst": 75,
       "overLimit": 1
     },
     "src/workshop/WorkshopProjection.ts": {

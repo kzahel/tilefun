@@ -6,6 +6,7 @@ import { createPlayer } from "../entities/Player.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { decodeServerMessage } from "../shared/binaryCodec.js";
+import { createFauna } from "../wildlife/Fauna.js";
 import { PlayerSession } from "./PlayerSession.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
@@ -99,6 +100,49 @@ it("ordinary player can land and walk on an NPC without dragging it", async () =
     const anchor = { ...npc.position };
     for (let i = 0; i < 4; i++) await s.step({ ...idle, dx: 1 });
     expect(Math.hypot(npc.position.wx - anchor.wx, npc.position.wy - anchor.wy)).toBeLessThan(0.2);
+  } finally {
+    await s.close();
+  }
+});
+
+it("landing on a kangaroo has no automatic bounce but its rising back can lift the player", async () => {
+  const kangaroo = createFauna("kangaroo", 64, 64);
+  const player = createPlayer(64, 64);
+  player.wz = 40; // Two pixels above the stationary 38px back.
+  const s = await ScenarioSession.create({
+    version: 1,
+    id: "kangaroo-landing",
+    generation: FLAT_SCENARIO,
+    player,
+    props: [],
+    actors: [kangaroo],
+  });
+  try {
+    let landed = false,
+      lifted = false,
+      previousVz = 0;
+    for (let i = 0; i < 300; i++) {
+      await s.step(idle);
+      const body = s.realm.physicsScene?.bodyState(s.player.player.id);
+      if (!body) throw Error("Missing player body");
+      const contacts = s.realm.physicsScene?.contactIds(body.id);
+      const supports = s.realm.physicsState?.bodies.filter(
+        (b) => contacts?.has(b.id) && b.z < body.z,
+      );
+      const supportVz = Math.max(0, ...(supports ?? []).map((b) => b.vz));
+      // Contact may transfer the back's upward velocity; once airborne only
+      // gravity acts. A gameplay bounce would add velocity beyond both bounds.
+      expect(body.vz).toBeLessThanOrEqual(Math.max(40, previousVz, supportVz + 1));
+      if (!landed && body.grounded && body.supportId !== undefined) {
+        landed = true;
+        expect(body.vz).toBeLessThan(40);
+      }
+      lifted ||= body.vz > 40 && supportVz > 40;
+      previousVz = body.vz;
+    }
+    expect(landed).toBe(true);
+    expect(lifted).toBe(true);
+    expect(Math.abs(s.player.player.wz ?? Infinity)).toBeLessThan(0.5);
   } finally {
     await s.close();
   }

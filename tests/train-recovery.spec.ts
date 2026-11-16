@@ -292,7 +292,8 @@ test("embedded station keeps its bench start, paused reload and shared recall co
   expect(Number(await canvas.getAttribute("data-player-x"))).toBeCloseTo(x, 1);
   await page.getByRole("button", { name: "Resume", exact: true }).click();
   await page.getByRole("button", { name: "bench", exact: true }).click();
-  await expect(call).toBeVisible();
+  // The prompt stays visible while resume/teleport commands lock interaction.
+  await expect(call).toBeEnabled();
   await canvas.focus();
   await page.keyboard.press("e");
   await expect(page.getByText("Poof! Your train is here.", { exact: true })).toBeVisible();

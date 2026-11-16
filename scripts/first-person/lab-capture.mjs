@@ -44,7 +44,10 @@ try {
     await page.getByRole("button", { name: start, exact: true }).click();
     await page.waitForTimeout(3000);
     const unified = query.includes("topdown3d");
-    const file = path.join(out, `${fixture}-${start.replace(/ /g, "-")}${unified ? "-3d" : ""}.png`);
+    const file = path.join(
+      out,
+      `${fixture}-${start.replace(/ /g, "-")}${unified ? "-3d" : ""}.png`,
+    );
     await page.locator("canvas").first().screenshot({ path: file });
     console.log(file);
   }
