@@ -4,12 +4,22 @@ Topic: multiplayer-networking
 Status: shared Worker authority for browser P2P, independent bounded guest links,
 reliable ordered replication and fragmented snapshots; bounded guest recovery.
 Broader network investigation is deferred.
-Updated: 2026-11-04.
+Updated: 2026-11-16.
 
 Owns ongoing transport/replication decisions and gaps. The
 [architecture guide](../client-server-architecture.md) owns runtime boundaries;
 [network design](../NETWORK-ARCHITECTURE.md) retains channel rationale and future
 proposals. [Server access](../SERVER-SECURITY.md) owns deployed admin policy.
+
+## Terrain eviction and reentry
+
+Since 2026-11-16 terrain send baselines track the actual delivered loaded-key
+set, not only the stream's interest rectangle. Removal clears the remembered
+revision, so a reload resends full terrain even at the same or a lower revision.
+This fixes persistent terrain holes after zoom changes and applies to all hosts
+and Worker labs through `ReplicationInterest.ts`. The native replication/client
+regression and browser protocol trace are recorded in
+[terrain holes after zoom](../research/terrain-holes-on-zoom.md).
 
 ## Shared physics frame layout
 

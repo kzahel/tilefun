@@ -4,7 +4,9 @@ Investigation checkpoint, 2026-11-16. Owner: [renderer unification](../topics/re
 The initial checkpoint reproduces progressive visibility loss with Far selected, but
 does not reproduce the reported approximately one-metre visibility or confirm
 recovery on returning to the original spawn. The owner's subsequent fog policy
-change is recorded below; terrain streaming is still a separate open issue.
+change is recorded below. The separate terrain resend defect was subsequently
+fixed and traced through real zoom changes in
+[terrain holes after zoom](terrain-holes-on-zoom.md).
 
 ## Browser evidence
 
@@ -40,7 +42,7 @@ screenshots, sampled state and a report under the printed temporary directory.
 defaults are 16 outward and 40 reverse. The flat control above used the original
 probe at the origin, rather than the retained runner's town coordinates.
 
-## Confirmed resend defect; connection to browser symptom still to verify
+## Initial resend defect checkpoint
 
 An independent native probe through `interestChunks` confirms this sequence
 with an unchanged streaming interest and an unedited chunk:
@@ -58,10 +60,10 @@ that chunk, so the retained revision suppresses a necessary resend. Terrain
 replication also has a two-chunk buffer while observer residency has a one-chunk
 buffer, allowing authority eviction within terrain replication interest.
 
-The separate terrain follow-up is a native regression for eviction/reload inside
-interest and invalidating the corresponding send baseline when the chunk
-disappears. The native defect is established; complete message-level tracing
-linking each browser hole to that defect has not yet been recorded.
+At this checkpoint the separate follow-up was a native eviction/reload regression
+and message-level tracing. [The zoom investigation](terrain-holes-on-zoom.md)
+now records that failing native case, a real Worker trace proving omitted
+snapshots for nine client holes, and the validated resend fix.
 
 ## Fixed fog distance, 2026-11-16
 

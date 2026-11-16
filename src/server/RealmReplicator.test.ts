@@ -1,4 +1,5 @@
 import { expect, it } from "vitest";
+import { RemoteStateView } from "../client/ClientStateView.js";
 import { createChicken } from "../entities/Chicken.js";
 import { EntityManager } from "../entities/EntityManager.js";
 import { createPlayer } from "../entities/Player.js";
@@ -9,6 +10,47 @@ import { World } from "../world/World.js";
 import { AiPlanningScheduler } from "./AiPlanningScheduler.js";
 import { PlayerSession } from "./PlayerSession.js";
 import { RealmReplicator } from "./RealmReplicator.js";
+
+it("resends terrain evicted and reloaded inside the stream's collision buffer", () => {
+  const entityManager = new EntityManager();
+  const player = entityManager.spawn(createPlayer(0, 0));
+  const session = new PlayerSession("local", player);
+  session.visibleRange = { minCx: 0, maxCx: 0, minCy: 0, maxCy: 0 };
+  const world = new World(new FlatStrategy());
+  const source = {
+    world,
+    entityManager,
+    propManager: new PropManager(),
+    sessions: new Map([["local", session]]),
+    aiPlanning: new AiPlanningScheduler(),
+    tickCounter: 1,
+    tickRate: 60,
+    playerNamesRevision: 0,
+    editorCursorsRevision: 0,
+  };
+  const replicator = new RealmReplicator();
+  const client = new RemoteStateView(new World(new FlatStrategy()));
+  const deliver = () => {
+    const chunks = replicator.build("local", source).find((m) => m.type === "sync-chunks");
+    if (chunks?.type !== "sync-chunks") throw Error("Missing chunk sync");
+    client.applyMessage(chunks);
+    return chunks;
+  };
+  // Residency keeps a one-chunk observer buffer; replication covers two chunks.
+  // A view contraction can evict this chunk while its send baseline is in range.
+  const first = world.getChunk(2, 0);
+  deliver();
+  expect(client.world.getChunkIfLoaded(2, 0)).toBeDefined();
+  world.chunks.remove("2,0");
+  deliver();
+  expect(client.world.getChunkIfLoaded(2, 0)).toBeUndefined();
+  const reloaded = world.getChunk(2, 0);
+  expect(reloaded.revision).toBe(first.revision);
+  const returned = deliver();
+  expect(returned.loadedChunkKeys).toContain("2,0");
+  expect(client.world.getChunkIfLoaded(2, 0)).toBeDefined();
+  expect(replicator.build("local", source).some((m) => m.type === "sync-chunks")).toBe(false);
+});
 
 it("replicates ready collision terrain throughout actor interest, including narrow viewports", () => {
   const entityManager = new EntityManager();

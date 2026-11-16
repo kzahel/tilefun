@@ -94,7 +94,10 @@ reduces that distance (owner instruction); fog fades from 45% of the selected
 distance to fully opaque at its end. Changes of distance apply immediately.
 Immersive XR uses the same distance converted to metres; rooms, tabletop and
 top-down views retain their fog-free presentation. Terrain holes are a separate
-streaming concern; [investigation and evidence](../research/first-person-driving-fog.md).
+streaming concern; [fog investigation](../research/first-person-driving-fog.md).
+The persistent holes reproduced by cycling 0.1× ↔ 0.25× were fixed on 2026-11-16
+by clearing evicted chunks' replication baselines; the matched browser run has
+zero missing terrain or ground images. [Cause and evidence](../research/terrain-holes-on-zoom.md).
 
 ## Target shape
 
@@ -617,10 +620,6 @@ reported regressions, and the rows below are not all moved.
 
 Item order after the default (2026-11-16):
 
-- **Terrain streaming holes:** [reproduction checkpoint](../research/first-person-driving-fog.md)
-  records persistent missing client terrain and a confirmed native eviction/
-  reload resend defect. Fog now stays at the selected distance independently;
-  the separate terrain follow-up is a native resend regression and fix.
 - **Owner and child play review** of the unified default, the one part of gate 2
   not yet done. Reports of regressions decide whether the default holds.
 - **Checklist rows still open:** sprite edges (hard cutouts; wildlife's painted

@@ -1,0 +1,359 @@
+{
+  "date": "2026-11-16",
+  "baseCommit": "569f36fb7f1b7821bf312b85a409234c60a1b983",
+  "fixedReplicationInterestSha256": "1a8f2aba9063652a649d89d8efd596b19a2a3ee28f4113242fa8fcce0281f045",
+  "environment": "macOS, Node 24.22.1, bundled Playwright Chromium headless, isolated Vite and browser storage",
+  "fixture": {
+    "generation": "regional seed 2026",
+    "arrivalTile": [
+      300,
+      519
+    ],
+    "viewport": [
+      1280,
+      800
+    ],
+    "view": "topdown3d",
+    "stages": [
+      [
+        1,
+        4000
+      ],
+      [
+        0.1,
+        10000
+      ],
+      [
+        0.25,
+        8000
+      ],
+      [
+        0.1,
+        10000
+      ],
+      [
+        0.25,
+        8000
+      ],
+      [
+        0.1,
+        10000
+      ]
+    ]
+  },
+  "runs": [
+    {
+      "name": "before",
+      "errors": [],
+      "reentriesWithoutData": 18,
+      "exampleFailure": [
+        {
+          "key": "24,30",
+          "phase": "stage-3-zoom-0.1",
+          "history": [
+            {
+              "message": 15,
+              "listed": true,
+              "snapshot": 0
+            },
+            {
+              "message": 40,
+              "listed": true,
+              "snapshot": 1
+            },
+            {
+              "message": 107,
+              "listed": false,
+              "snapshot": null
+            },
+            {
+              "message": 114,
+              "listed": true,
+              "snapshot": null
+            }
+          ]
+        }
+      ],
+      "samples": [
+        {
+          "phase": "stage-0-zoom-1",
+          "zoom": 1,
+          "range": {
+            "minCx": 17,
+            "minCy": 31,
+            "maxCx": 19,
+            "maxCy": 32
+          },
+          "missingData": [],
+          "missingImages": [],
+          "advertisedMissing": [],
+          "reentriesWithoutData": 0,
+          "pendingTerrain": 0
+        },
+        {
+          "phase": "stage-1-zoom-0.1",
+          "zoom": 0.1,
+          "range": {
+            "minCx": 10,
+            "minCy": 27,
+            "maxCx": 27,
+            "maxCy": 37
+          },
+          "missingData": [],
+          "missingImages": [],
+          "advertisedMissing": [],
+          "reentriesWithoutData": 0,
+          "pendingTerrain": 0
+        },
+        {
+          "phase": "stage-2-zoom-0.25",
+          "zoom": 0.25,
+          "range": {
+            "minCx": 15,
+            "minCy": 30,
+            "maxCx": 22,
+            "maxCy": 34
+          },
+          "missingData": [],
+          "missingImages": [],
+          "advertisedMissing": [],
+          "reentriesWithoutData": 0,
+          "pendingTerrain": 0
+        },
+        {
+          "phase": "stage-3-zoom-0.1",
+          "zoom": 0.1,
+          "range": {
+            "minCx": 10,
+            "minCy": 27,
+            "maxCx": 27,
+            "maxCy": 37
+          },
+          "missingData": [
+            "24,28",
+            "24,29",
+            "24,30",
+            "24,31",
+            "24,32",
+            "24,33",
+            "24,34",
+            "24,35",
+            "24,36"
+          ],
+          "missingImages": [],
+          "advertisedMissing": [
+            "24,28",
+            "24,29",
+            "24,30",
+            "24,31",
+            "24,32",
+            "24,33",
+            "24,34",
+            "24,35",
+            "24,36"
+          ],
+          "reentriesWithoutData": 9,
+          "pendingTerrain": 0
+        },
+        {
+          "phase": "stage-4-zoom-0.25",
+          "zoom": 0.25,
+          "range": {
+            "minCx": 15,
+            "minCy": 30,
+            "maxCx": 22,
+            "maxCy": 34
+          },
+          "missingData": [],
+          "missingImages": [],
+          "advertisedMissing": [],
+          "reentriesWithoutData": 9,
+          "pendingTerrain": 0
+        },
+        {
+          "phase": "stage-5-zoom-0.1",
+          "zoom": 0.1,
+          "range": {
+            "minCx": 10,
+            "minCy": 27,
+            "maxCx": 27,
+            "maxCy": 37
+          },
+          "missingData": [
+            "24,28",
+            "24,29",
+            "24,30",
+            "24,31",
+            "24,32",
+            "24,33",
+            "24,34",
+            "24,35",
+            "24,36"
+          ],
+          "missingImages": [],
+          "advertisedMissing": [
+            "24,28",
+            "24,29",
+            "24,30",
+            "24,31",
+            "24,32",
+            "24,33",
+            "24,34",
+            "24,35",
+            "24,36"
+          ],
+          "reentriesWithoutData": 18,
+          "pendingTerrain": 0
+        }
+      ]
+    },
+    {
+      "name": "after",
+      "errors": [],
+      "reentriesWithoutData": 0,
+      "exampleFailure": [],
+      "samples": [
+        {
+          "phase": "stage-0-zoom-1",
+          "zoom": 1,
+          "range": {
+            "minCx": 17,
+            "minCy": 31,
+            "maxCx": 19,
+            "maxCy": 32
+          },
+          "missingData": [],
+          "missingImages": [],
+          "advertisedMissing": [],
+          "reentriesWithoutData": 0,
+          "pendingTerrain": 0
+        },
+        {
+          "phase": "stage-1-zoom-0.1",
+          "zoom": 0.1,
+          "range": {
+            "minCx": 10,
+            "minCy": 27,
+            "maxCx": 27,
+            "maxCy": 37
+          },
+          "missingData": [],
+          "missingImages": [],
+          "advertisedMissing": [],
+          "reentriesWithoutData": 0,
+          "pendingTerrain": 0
+        },
+        {
+          "phase": "stage-2-zoom-0.25",
+          "zoom": 0.25,
+          "range": {
+            "minCx": 15,
+            "minCy": 30,
+            "maxCx": 22,
+            "maxCy": 34
+          },
+          "missingData": [],
+          "missingImages": [],
+          "advertisedMissing": [],
+          "reentriesWithoutData": 0,
+          "pendingTerrain": 0
+        },
+        {
+          "phase": "stage-3-zoom-0.1",
+          "zoom": 0.1,
+          "range": {
+            "minCx": 10,
+            "minCy": 27,
+            "maxCx": 27,
+            "maxCy": 37
+          },
+          "missingData": [],
+          "missingImages": [],
+          "advertisedMissing": [],
+          "reentriesWithoutData": 0,
+          "pendingTerrain": 0
+        },
+        {
+          "phase": "stage-4-zoom-0.25",
+          "zoom": 0.25,
+          "range": {
+            "minCx": 15,
+            "minCy": 30,
+            "maxCx": 22,
+            "maxCy": 34
+          },
+          "missingData": [],
+          "missingImages": [],
+          "advertisedMissing": [],
+          "reentriesWithoutData": 0,
+          "pendingTerrain": 0
+        },
+        {
+          "phase": "stage-5-zoom-0.1",
+          "zoom": 0.1,
+          "range": {
+            "minCx": 10,
+            "minCy": 27,
+            "maxCx": 27,
+            "maxCy": 37
+          },
+          "missingData": [],
+          "missingImages": [],
+          "advertisedMissing": [],
+          "reentriesWithoutData": 0,
+          "pendingTerrain": 0
+        }
+      ]
+    }
+  ],
+  "streamingReadiness": [
+    {
+      "name": "cold",
+      "missingDataFrames": 0,
+      "incompleteCacheFrames": 0,
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0
+    },
+    {
+      "name": "standing",
+      "missingDataFrames": 0,
+      "incompleteCacheFrames": 0,
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0
+    },
+    {
+      "name": "walk",
+      "missingDataFrames": 0,
+      "incompleteCacheFrames": 0,
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0
+    },
+    {
+      "name": "sprint",
+      "missingDataFrames": 0,
+      "incompleteCacheFrames": 0,
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0
+    },
+    {
+      "name": "reverse",
+      "missingDataFrames": 0,
+      "incompleteCacheFrames": 0,
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0
+    },
+    {
+      "name": "zoom-out",
+      "missingDataFrames": 0,
+      "incompleteCacheFrames": 0,
+      "finalMissing": 0,
+      "finalIncomplete": 0,
+      "finalStale": 0
+    }
+  ]
+}

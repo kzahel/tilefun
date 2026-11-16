@@ -56,7 +56,7 @@ export class StreamInterest {
 
 /**
  * Ready terrain in the interest, and the chunks changed since `revisions` (which this
- * advances and prunes to the interest). Only sends already-ready terrain; never loads.
+ * advances and prunes to the delivered loaded set). Only sends ready terrain; never loads.
  */
 export function interestChunks(
   world: World,
@@ -74,10 +74,11 @@ export function interestChunks(
       revisions.set(key, chunk.revision);
     }
   }
-  for (const key of revisions.keys()) {
-    const [cx, cy] = chunkCoords(key);
-    if (!interest.coversTerrain(cx, cy)) revisions.delete(key);
-  }
+  // A chunk can be evicted while still inside replication interest. Its removal
+  // tells the client to delete terrain, so a later reload needs a full snapshot
+  // even if the terrain revision is unchanged.
+  const loaded = new Set(loadedChunkKeys);
+  for (const key of revisions.keys()) if (!loaded.has(key)) revisions.delete(key);
   return { loadedChunkKeys, chunkUpdates };
 }
 
