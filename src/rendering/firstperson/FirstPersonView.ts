@@ -11,7 +11,7 @@ import { SURFACE_GRID, surfaceDisplay, surfaceFadeOpacity } from "../SurfacePres
 import type { PageRegion, SharedMeshAssets, SharedPages, View3dTarget } from "../View3dHost.js";
 import { actorBillboard, MovingCards, RecentPages, StaticCards } from "./FirstPersonBillboards.js";
 import { BodyImageCards } from "./FirstPersonBodyImages.js";
-import { cameraRight, type FirstPersonEye, nextFogEnd } from "./FirstPersonCamera.js";
+import { cameraRight, type FirstPersonEye } from "./FirstPersonCamera.js";
 import { type HeadsetFrame, TABLE_BACKGROUND, ViewCameras } from "./FirstPersonCameras.js";
 import { chunkKey, chunksInReach, type TerrainEntry, terrainStale } from "./FirstPersonChunks.js";
 import {
@@ -125,8 +125,6 @@ export interface SceneLayers {
 const SKY = 0x9fd3f0;
 const CHUNK_PX = CHUNK_SIZE_PX;
 const CHUNK_BUILDS_PER_FRAME = 3;
-/** The fog never closes in nearer than this while chunks arrive. */
-const MIN_FOG_END = 96;
 /** Top-down residency beyond the ground on screen: props reach sideways out of
  * their chunk, and tall ones south of the bottom edge stand up into the view. */
 const TOP_DOWN_SIDE = 128;
@@ -284,8 +282,6 @@ export class FirstPersonView {
   private realm: string | null | undefined;
   private propsSource: readonly Prop[] | null = null;
   private propsByChunk = new Map<string, { props: Prop[]; signature: string }>();
-  /** Fog end, pulled in while in-reach chunks are still arriving. */
-  private fogEnd: number | undefined;
   /** Every resident chunk's decks and ramps; rebuilt on demand after a chunk changes. */
   private surfaces: PropSurface[] | null = null;
   private room: { scene: FirstPersonRoomScene; mesh: THREE.Mesh } | null = null;
@@ -463,8 +459,10 @@ export class FirstPersonView {
     this.groundRoot.visible = this.layers.ground && frame.background === undefined;
     this.solidRoot.visible = this.layers.solids;
     this.cardRoot.visible = this.layers.cards;
+    // Outdoor fog follows the selected distance, independently of chunk arrival.
     // Without fog nothing hides far casters: the sun map's own reach decides.
-    const fogEnd = fog ? (this.fogEnd ?? frame.drawRadius) : Infinity;
+    const fogEnd = fog ? frame.drawRadius : Infinity;
+    this.stats.fogEnd = frame.drawRadius;
     const camera = this.cameras.place(frame, topDown, headset, target, this.fog, fogEnd);
     // Rooms have contact shadows but no sun.
     const shadows = frame.shadows !== false;
@@ -534,7 +532,6 @@ export class FirstPersonView {
     this.world = frame.world;
     this.realm = frame.realm;
     this.propsSource = null;
-    this.fogEnd = undefined;
   }
 
   private dropChunks(): void {
@@ -605,19 +602,13 @@ export class FirstPersonView {
     const keep = new Set<string>();
     let builds = 0;
     let groundPages = 0;
-    let nearestMissing: number | undefined;
-    for (const { cx, cy, key, distance } of wanted) {
+    for (const { cx, cy, key } of wanted) {
       keep.add(key);
-      if (nearestMissing === undefined && !frame.world.getChunkIfLoaded(cx, cy))
-        nearestMissing = distance;
       if (builds < CHUNK_BUILDS_PER_FRAME) builds += this.refreshChunk(frame.world, cx, cy, key);
       const ground = this.chunks.get(key)?.terrain;
       if (ground && this.pageGround(key, ground, pages)) groundPages++;
     }
     this.stats.groundPages = groundPages;
-    // Rooms have no fog; outdoors the fog hides chunks that have not arrived yet.
-    this.fogEnd = nextFogEnd(this.fogEnd, frame.drawRadius, nearestMissing, MIN_FOG_END);
-    this.stats.fogEnd = Math.round(this.fogEnd);
     for (const [key, chunk] of this.chunks)
       if (!keep.has(key)) {
         this.dropChunk(key, chunk);

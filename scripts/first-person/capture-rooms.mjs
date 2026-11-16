@@ -115,7 +115,7 @@ try {
   // Look away from the door, down the street, for the distance comparison.
   await shoot("outdoor-near", look(Math.PI / 2, -0.04));
   await options("far");
-  // Fog follows arriving chunks: sample it while Far is still streaming in.
+  // Fog stays at Far while its terrain is still streaming in.
   report.fogWhileStreaming = [];
   for (let i = 0; i < 6; i++) {
     await page.waitForTimeout(250);

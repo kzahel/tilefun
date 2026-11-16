@@ -99,6 +99,30 @@ describe("the view's merged static world (251)", () => {
       ground: { count: number; meshes: number; root: THREE.Group };
     };
 
+  it("keeps the selected fog distance through missing terrain, movement and chunk arrival", () => {
+    const loaded = new Map<string, Chunk>();
+    const w = world(loaded);
+    const view = new FirstPersonView(new Map());
+    const f = { ...frame(w, false), drawRadius: 1600 };
+    const { fog } = view as unknown as { fog: THREE.Fog };
+    const check = (radius: number) => {
+      view.render({ ...f, drawRadius: radius }, target);
+      expect(fog.near).toBe(radius * 0.45);
+      expect(fog.far).toBe(radius);
+      expect(view.stats.fogEnd).toBe(radius);
+    };
+    // Even the eye's own chunk is missing at first.
+    check(1600);
+    loaded.set("0,0", new Chunk());
+    check(1600);
+    f.eye = { ...f.eye, x: 4096 };
+    check(1600);
+    // Both nearer and farther choices apply on the very next frame.
+    check(400);
+    check(1600);
+    view.dispose();
+  });
+
   it("draws every chunk's ground as one mesh, with walls only where ground is raised", () => {
     const loaded = new Map<string, Chunk>();
     for (let cy = -1; cy <= 1; cy++)

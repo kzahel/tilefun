@@ -38283,7 +38283,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:490"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:488"
         },
         {
           "system": "Editor",

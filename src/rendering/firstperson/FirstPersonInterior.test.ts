@@ -2,7 +2,6 @@ import { describe, expect, it } from "vitest";
 import type { Prop } from "../../entities/Prop.js";
 import { createLayeredInteriorMap } from "../../interiors/LayeredInteriorMap.js";
 import { artCard } from "./FirstPersonBillboards.js";
-import { nextFogEnd } from "./FirstPersonCamera.js";
 import {
   containingWallFace,
   DEFAULT_ROOM_WALL_HEIGHT,
@@ -174,19 +173,6 @@ describe("first-person rooms", () => {
     expect(ys).toEqual(new Set([32.25])); // a hair in front of the face
     // Rows 0..32 of the art sit at heights faceY − row: 32 − (25 − 25) … 32 − 32.
     expect([Math.min(...zs), Math.max(...zs)]).toEqual([0, 32]);
-  });
-});
-
-describe("first-person fog while streaming", () => {
-  it("pulls in to the nearest missing chunk at once and eases back out", () => {
-    expect(nextFogEnd(undefined, 1600, undefined)).toBe(1600);
-    expect(nextFogEnd(1600, 1600, 300)).toBe(300);
-    expect(nextFogEnd(300, 1600, 40, 96)).toBe(96);
-    const eased = nextFogEnd(300, 1600, undefined);
-    expect(eased).toBeGreaterThan(300);
-    expect(eased).toBeLessThan(1600);
-    expect(nextFogEnd(1599.5, 1600, undefined)).toBe(1600);
-    expect(nextFogEnd(1600, 400, undefined)).toBe(400); // a nearer choice applies at once
   });
 });
 

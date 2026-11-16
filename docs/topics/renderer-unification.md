@@ -88,6 +88,14 @@ From 2026-11-16 until the default changed the same day it was an opt-in,
 **Pixel 3D top-down view (preview)**; a device that opted in keeps the unified
 view.
 
+First-person and driving fog use the selected fixed view distance: Near 400,
+Medium 800 or Far 1600 world pixels. Since 2026-11-16, missing terrain never
+reduces that distance (owner instruction); fog fades from 45% of the selected
+distance to fully opaque at its end. Changes of distance apply immediately.
+Immersive XR uses the same distance converted to metres; rooms, tabletop and
+top-down views retain their fog-free presentation. Terrain holes are a separate
+streaming concern; [investigation and evidence](../research/first-person-driving-fog.md).
+
 ## Target shape
 
 ```text
@@ -579,6 +587,10 @@ reported regressions, and the rows below are not all moved.
 
 Item order after the default (2026-11-16):
 
+- **Terrain streaming holes:** [reproduction checkpoint](../research/first-person-driving-fog.md)
+  records persistent missing client terrain and a confirmed native eviction/
+  reload resend defect. Fog now stays at the selected distance independently;
+  the separate terrain follow-up is a native resend regression and fix.
 - **Owner and child play review** of the unified default, the one part of gate 2
   not yet done. Reports of regressions decide whether the default holds.
 - **Checklist rows still open:** sprite edges (hard cutouts; wildlife's painted
