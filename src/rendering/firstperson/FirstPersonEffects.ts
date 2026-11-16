@@ -1,10 +1,44 @@
 import * as THREE from "three";
 import type { DecalMask } from "../ProjectedDecals.js";
-import type { DecalItem, ParticleItem } from "../SceneItem.js";
+import type { DecalItem, ParticleItem, SpriteItem } from "../SceneItem.js";
 import { planeZ } from "../SurfaceReceivers.js";
 
 /** What the effects mesh draws: the play view's particles and surface marks. */
 export type EffectItem = ParticleItem | DecalItem;
+
+/** A flashing emergency lamp on a vehicle drawn as its sprite. */
+export interface LampItem {
+  kind: "lamp";
+  wx: number;
+  wy: number;
+  z: number;
+  color: string;
+}
+
+/** The fixed view's lamp (`drawEmergencyFlash`): a 4 × 2 world-pixel bar of the
+ * flash's colour, `emergencyHeight` above the body, to one side or out front. */
+export function emergencyLamp(item: SpriteItem): LampItem | undefined {
+  const flash = item.emergencyFlash;
+  if (!flash) return undefined;
+  const heading = item.emergencyHeading ?? 0;
+  const forward = item.emergencyForward ?? 0;
+  const side = item.emergencySide ?? (flash === 1 ? -9 : 9);
+  // Screen offsets: the fixed view adds the forward reach's y to the screen row.
+  const dx = forward ? forward * Math.cos(heading) - side * Math.sin(heading) : side,
+    dy = forward ? forward * Math.sin(heading) + side * Math.cos(heading) : 0;
+  return {
+    kind: "lamp",
+    wx: item.wx + dx,
+    // Standing at the body's row, shown `height − dy` up the screen; a little
+    // nearer than the body's own card, which stands at the same row.
+    wy: item.wy + LAMP_LIFT,
+    z: item.zOffset + (item.emergencyHeight ?? 40) - dy + LAMP_LIFT,
+    color: item.emergencyColors?.[flash === 1 ? 0 : 1] ?? "#79dfff",
+  };
+}
+
+/** How much nearer than its body's card a lamp stands, along the view ray. */
+const LAMP_LIFT = 0.5;
 
 /** Mask cells in the effects' alpha map, left to right; `solid` is opaque. */
 const MASK_CELLS: readonly (DecalMask | "solid")[] = ["ring", "oval", "vehicle", "solid"];
@@ -91,11 +125,16 @@ export class EffectQuads {
 
   /** Replace the frame's effects. `right` is the camera's right in game axes:
    * particles face it. */
-  fill(items: readonly EffectItem[], right: { x: number; y: number }): void {
+  fill(
+    items: readonly EffectItem[],
+    right: { x: number; y: number },
+    lamps: readonly LampItem[] = [],
+  ): void {
     this.vertices = this.indices = this.count = 0;
     for (const item of items)
       if (item.kind === "particle") this.particle(item, right);
       else this.decal(item);
+    for (const lamp of lamps) this.rect(lamp.wx, lamp.wy, lamp.z, 2, 1, lamp.color, 1, right);
     this.mesh.visible = this.indices > 0;
     if (!this.indices) return;
     const geometry = this.mesh.geometry;
@@ -107,8 +146,21 @@ export class EffectQuads {
 
   private particle(item: ParticleItem, right: { x: number; y: number }): void {
     const half = item.size / 2;
-    const { wx: x, wy: y, z } = item;
-    const colour = this.colour(item.color);
+    this.rect(item.wx, item.wy, item.z, half, half, item.color, item.alpha, right);
+  }
+
+  /** An upright rectangle facing the camera, `halfWidth` and `halfHeight` each way. */
+  private rect(
+    x: number,
+    y: number,
+    z: number,
+    halfWidth: number,
+    halfHeight: number,
+    color: string,
+    alpha: number,
+    right: { x: number; y: number },
+  ): void {
+    const colour = this.colour(color);
     const first = this.reserve(4, 6);
     for (const [a, b] of [
       [-1, -1],
@@ -117,11 +169,11 @@ export class EffectQuads {
       [-1, 1],
     ] as const)
       this.vertex(
-        x + right.x * a * half,
-        y + right.y * a * half,
-        z + b * half,
+        x + right.x * a * halfWidth,
+        y + right.y * a * halfWidth,
+        z + b * halfHeight,
         colour,
-        item.alpha,
+        alpha,
         cellU("solid", 0.5),
         0.5,
       );

@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import { describe, expect, it } from "vitest";
-import type { DecalItem, ParticleItem } from "../SceneItem.js";
-import { EffectQuads, MARK_LIFT } from "./FirstPersonEffects.js";
+import type { DecalItem, ParticleItem, SpriteItem } from "../SceneItem.js";
+import { EffectQuads, emergencyLamp, MARK_LIFT } from "./FirstPersonEffects.js";
 import { obliqueScreen } from "./ObliqueCamera.js";
 
 const particle = (extra: Partial<ParticleItem> = {}): ParticleItem => ({
@@ -88,5 +88,60 @@ describe("particles and surface marks in the 3D scene", () => {
     expect(uv.getX(1)).toBeLessThan(0.25);
     expect(uv.getX(4)).toBeGreaterThan(0.75);
     effects.dispose();
+  });
+});
+
+describe("emergency lamps on sprite vehicles", () => {
+  const vehicle = (extra: Partial<SpriteItem>): SpriteItem => ({
+    kind: "sprite",
+    sortKey: 0,
+    wx: 100,
+    wy: 80,
+    zOffset: 3,
+    sheetKey: "x",
+    frameCol: 0,
+    frameRow: 0,
+    spriteWidth: 64,
+    spriteHeight: 64,
+    flipX: false,
+    drawOffsetY: 0,
+    hasShadow: false,
+    shadowFeetWy: 0,
+    shadowWidth: 0,
+    shadowTerrainZ: 0,
+    flashHidden: false,
+    ...extra,
+  });
+
+  it("lands each lamp on the fixed view's screen pixel, in the flash's colour", () => {
+    const camera = { x: 100, y: 80, scale: 1 };
+    for (const extra of [
+      { emergencyFlash: 1, emergencyColors: ["#ff7979", "#79dfff"] as const, emergencyHeight: 22 },
+      { emergencyFlash: 2, emergencyForward: 64, emergencyHeading: 0.7, emergencyHeight: 28 },
+    ]) {
+      const item = vehicle(extra);
+      const lamp = emergencyLamp(item);
+      if (!lamp) throw Error("No lamp");
+      // The fixed view's lamp centre, in world pixels on screen (drawEmergencyFlash).
+      const heading = item.emergencyHeading ?? 0,
+        forward = item.emergencyForward ?? 0,
+        side = item.emergencyFlash === 1 ? -9 : 9;
+      const fixed = {
+        x: item.wx + (forward ? forward * Math.cos(heading) - side * Math.sin(heading) : side),
+        y:
+          item.wy -
+          item.zOffset -
+          (item.emergencyHeight ?? 40) +
+          (forward ? forward * Math.sin(heading) + side * Math.cos(heading) : 0),
+      };
+      const at = obliqueScreen(camera, 400, 400, lamp.wx, lamp.wy, lamp.z);
+      const origin = obliqueScreen(camera, 400, 400, 0, 0);
+      expect(at.sx - origin.sx).toBeCloseTo(fixed.x, 9);
+      expect(at.sy - origin.sy).toBeCloseTo(fixed.y, 9);
+    }
+    expect(
+      emergencyLamp(vehicle({ emergencyFlash: 1, emergencyColors: ["#f00", "#00f"] }))?.color,
+    ).toBe("#f00");
+    expect(emergencyLamp(vehicle({}))).toBeUndefined();
   });
 });

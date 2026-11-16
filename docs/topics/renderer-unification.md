@@ -135,7 +135,7 @@ were measured on 2026-11-15; the other rows are 251's.
 | Cutaways, slab fades, roof visibility | Missing | `SurfacePresentation` |
 | Rooms shown roofless | Missing | First person draws rooms with full walls (230 slice 2). The top-down 3D view hands rooms to the fixed view |
 | Tow and bed groups posed together | Done for the top-down camera; missing elsewhere | 2026-11-16: a body's image holds its towed car and bed contents, posed as the fixed view poses them. First person and headset views: 229 limit, members draw at their own poses |
-| Emergency lights and flashing sprites | Missing | |
+| Emergency lights and flashing sprites | Done | 2026-11-16: mesh vehicles flash through their lens materials, as meshes and as pixel images (lit bodies are drawn each frame, not cached). A vehicle drawn as its sprite gets the fixed view's 4 × 2 lamp in the effects draw (`emergencyLamp`). Invincibility flashes hide the card, as in the fixed view |
 | Excavations (garage ramps below ground) | Missing | 229 limit |
 | Editor overlays | Missing | The editor falls back to the fixed view |
 | Picking, tap and hold destinations | Done for the top-down camera | 251: it is the fixed view's own camera, so the fixed view's unprojection, markers and tap destinations are used unchanged. Cameras that turn (orbit, XR) still need a ray against the 3D ground |

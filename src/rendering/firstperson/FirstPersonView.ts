@@ -12,7 +12,12 @@ import { BodyImageCards } from "./FirstPersonBodyImages.js";
 import { cameraRight, type FirstPersonEye, nextFogEnd } from "./FirstPersonCamera.js";
 import { type HeadsetFrame, TABLE_BACKGROUND, ViewCameras } from "./FirstPersonCameras.js";
 import { chunkKey, chunksInReach, type TerrainEntry, terrainStale } from "./FirstPersonChunks.js";
-import { type EffectItem, EffectQuads } from "./FirstPersonEffects.js";
+import {
+  type EffectItem,
+  EffectQuads,
+  emergencyLamp,
+  type LampItem,
+} from "./FirstPersonEffects.js";
 import { type FacePart, MergedFaces } from "./FirstPersonFaces.js";
 import { GrassCards } from "./FirstPersonGrass.js";
 import { GroundTops } from "./FirstPersonGround.js";
@@ -220,6 +225,8 @@ export class FirstPersonView {
   private readonly blobs: BlobShadows;
   private readonly grass: GrassCards;
   private readonly effects: EffectQuads;
+  /** Emergency lamps of vehicles drawn as sprites this frame. */
+  private readonly lamps: LampItem[] = [];
   private readonly vehicles = new FirstPersonVehicles((material) => {
     this.lit(material, "body");
   });
@@ -376,7 +383,11 @@ export class FirstPersonView {
         this.cardPages,
       );
       this.stats.grass = this.grass.count;
-      this.effects.fill((this.layers.actors && frame.effects) || [], this.cardRight.value);
+      this.effects.fill(
+        (this.layers.actors && frame.effects) || [],
+        this.cardRight.value,
+        this.lamps,
+      );
       this.stats.effects = this.effects.count;
       // Read after the frame's page requests: the atlas is replaced when it grows.
       this.atlas.value = pages.atlas;
@@ -595,6 +606,7 @@ export class FirstPersonView {
     }
     this.billboards.begin();
     this.blobs.begin();
+    this.lamps.length = 0;
     this.bodyImages.begin();
     const cars: SpriteItem[] = [];
     for (const item of frame.sprites) {
@@ -651,7 +663,10 @@ export class FirstPersonView {
       return;
     }
     const sheet = this.images.sheet(item.sheetKey);
-    if (sheet) this.billboards.push(actorBillboard(item, sheet, eye, meshes.ready), this.cardPages);
+    if (!sheet) return;
+    this.billboards.push(actorBillboard(item, sheet, eye, meshes.ready), this.cardPages);
+    const lamp = emergencyLamp(item);
+    if (lamp) this.lamps.push(lamp);
   }
 
   /** The collector resolves support without surface queries here, so a body above the
