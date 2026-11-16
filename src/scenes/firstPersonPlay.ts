@@ -316,7 +316,6 @@ export function renderFirstPerson(
       topDown,
       pixelBodies: control.pixelBodies,
       groundNearest: control.groundNearest || !!grid,
-      cardTaps: control.cardTaps,
       grass,
       effects,
       cutaway: viewCutaway(gc, view, alpha),
