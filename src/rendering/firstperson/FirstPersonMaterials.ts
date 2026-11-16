@@ -91,8 +91,16 @@ const GROUND_TAPS = [
   [0.375, -0.125],
   [-0.375, 0.125],
 ] as const;
+/**
+ * Prototype for the top-down sampling rule (renderer film, 2026-11-16): ground
+ * artwork sampled once at the pixel's centre, as cards are, instead of averaged
+ * over four samples. Shared by every view; each sets it before it draws.
+ */
+export const GROUND_NEAREST = { value: false };
+
 const GROUND_FRAGMENT = `
 uniform highp sampler2DArray groundAtlas;
+uniform bool groundNearest;
 varying vec2 vGroundTexel;
 varying vec3 vGroundPage;
 vec3 groundAt(vec2 texel) {
@@ -106,6 +114,7 @@ vec3 groundAt(vec2 texel) {
 // dx and dy are the texel steps to the next screen pixel. The caller takes
 // them outside its branch: derivatives are undefined inside non-uniform control flow.
 vec3 groundArt(vec2 dx, vec2 dy) {
+  if (groundNearest) return groundAt(vGroundTexel);
   vec3 sum = vec3(0.0);
   ${GROUND_TAPS.map(([x, y]) => `sum += groundAt(vGroundTexel + ${x.toFixed(4)} * dx + ${y.toFixed(4)} * dy);`).join("\n  ")}
   return sum / ${GROUND_TAPS.length}.0;
@@ -151,6 +160,7 @@ export function shadeMaterial<T extends THREE.Material>(material: T, shading: Ma
     }
     if (ground) {
       shader.uniforms.groundAtlas = ground;
+      shader.uniforms.groundNearest = GROUND_NEAREST;
       declare.push(
         "attribute vec2 groundTexel;",
         "attribute vec3 groundPage;",

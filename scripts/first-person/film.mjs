@@ -6,14 +6,15 @@
 //   node scripts/first-person/film.mjs [--out=DIR] [--headless] [--scenes=woods,city]
 //     [--zooms=1,0.5] [--speed=64] [--direction=20] [--seconds=4] [--fps=60]
 //     [--columns=fixed,scene] [--crop=240x160] [--enlarge=4] [--query=a=b]
-//     [--others=0] [--others-direction=200]
+//     [--others=0] [--others-direction=200] [--stop=SECONDS]
 //
 // Entities are paused and presentation time stands still, so frame N is the same
 // picture on every run; only the camera (and the player with it) moves, `--speed`
 // world pixels a second (the player walks at 64) toward `--direction` degrees
 // (0 east, 90 south); `--others` moves every other entity the same way, so
 // NPCs and cars cross the view at their own speed. Columns: `fixed`, `scene` (3D as played) and `snapped`
-// (3D with its camera held to whole screen pixels). Writes one MP4 per scene and
+// (3D with its camera held to whole screen pixels) and `nearest` (3D with its
+// ground sampled once per pixel, as trees are: a prototype). Writes one MP4 per scene and
 // zoom, and keeps the PNG frames beside it.
 import { execFileSync } from "node:child_process";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
@@ -41,6 +42,10 @@ const frames = Math.round(Number(option("seconds", "4")) * fps);
 const speed = Number(option("speed", "64"));
 const direction = (Number(option("direction", "20")) * Math.PI) / 180;
 const step = { x: (speed / fps) * Math.cos(direction), y: (speed / fps) * Math.sin(direction) };
+// `--stop=S`: the player walks for S seconds then stops, and the camera trails
+// it as play's follow does (the moment layers settle).
+const stopSeconds = option("stop", "");
+const stopAt = stopSeconds === "" ? undefined : Math.round(Number(stopSeconds) * fps);
 const othersSpeed = Number(option("others", "0"));
 const othersDirection = (Number(option("others-direction", "200")) * Math.PI) / 180;
 const others = {
@@ -163,6 +168,8 @@ try {
             start,
             step,
             others,
+            stopAt,
+            frameSeconds: 1 / fps,
             from,
             count: Math.min(20, frames - from),
             columns,

@@ -202,6 +202,35 @@ Owner review, 2026-11-16: the fixed view looks blurry in motion, and the 3D
 camera held to whole pixels looks jittery. The continuous 3D camera is the
 better base; what it lacks is a sampling rule for fractional scales.
 
+**Settling after a stop.** Owner report: in the unified view, trees shimmer
+for a moment after the player stops; ground and trees are handled differently.
+Play's follow camera trails the player exponentially, so after a stop it creeps
+by shrinking fractions of a pixel. The 3D ground averages four samples per
+pixel and glides, cards (trees, actors) take one sample and step whole pixels,
+and blades, actors and their contact blobs sit at their own fractions, so each
+steps on a different frame. `--stop=1.5` films this (walk, stop, play's own
+`advanceCameraFollow`). Two prototype columns:
+
+- `nearest`: the ground sampled once per pixel, as cards are (`GROUND_NEAREST`;
+  in play `?groundnearest=1` or `r_groundnearest`). It also removes a one-pixel
+  seam line the averaged ground draws at some chunk edges in the city.
+- `rigid`: that ground, plus the camera, every entity and every blade placed on
+  one grid of screen pixels in world space, so the picture moves as one.
+
+Pixels that move against the rest of the picture between consecutive frames
+while the camera settles (after the best whole-pixel shift; walk 1.5 s at
+64 px/s, then 2 s):
+
+| Scene | Today: frames, mean px | Rigid: frames, mean px |
+| --- | --- | --- |
+| woods 1× | 76, 45 | 0, 0 |
+| woods 0.5× | 71, 63 | 0, 0 |
+| city 1× | 37, 210 | 0, 0 |
+| city 0.5× | 47, 219 | 15, 6 |
+
+The rigid column is film-only: the probe moves copies of entities and blades.
+Play needs the same placement inside sprite and grass collection.
+
 ### Pond shoreline comparison
 
 2026-11-15: investigated the owner's report that pond edges look different in

@@ -16,7 +16,7 @@ import { GrassCards } from "./FirstPersonGrass.js";
 import { GroundTops } from "./FirstPersonGround.js";
 import { FirstPersonImages } from "./FirstPersonImages.js";
 import { type FirstPersonInterior, INTERIOR_BACKGROUND } from "./FirstPersonInterior.js";
-import { type SunReceiver, shadeMaterial } from "./FirstPersonMaterials.js";
+import { GROUND_NEAREST, type SunReceiver, shadeMaterial } from "./FirstPersonMaterials.js";
 import { disposeGroup, PropMeshes, texturedMesh } from "./FirstPersonPropMeshes.js";
 import { type PropSurface, surfaceUnder } from "./FirstPersonProps.js";
 import { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
@@ -59,6 +59,9 @@ export interface FirstPersonFrame {
   /** Top-down only: vehicle bodies as the fixed view's outlined native-pixel
    * images instead of meshes at the screen's resolution; on unless false. */
   readonly pixelBodies?: boolean | undefined;
+  /** Prototype: ground artwork sampled once per pixel, as cards are
+   * (`GROUND_NEAREST`). */
+  readonly groundNearest?: boolean | undefined;
   /** Grass blades as the fixed view collects them (`collectCameraGrass`), posed
    * for this frame. Drawn by the top-down camera only. */
   readonly grass?: readonly GrassItem[] | undefined;
@@ -332,6 +335,7 @@ export class FirstPersonView {
     const camera = this.cameras.place(frame, topDown, headset, target, this.fog, fogEnd);
     // Rooms have contact shadows but no sun.
     const shadows = frame.shadows !== false;
+    GROUND_NEAREST.value = !!frame.groundNearest;
     // Draw calls are counted over every render of this view: vehicle images and
     // the sun map included.
     const { info } = renderer;

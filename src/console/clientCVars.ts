@@ -24,6 +24,7 @@ export interface ClientCVars {
   r_fpshadows: CVar<boolean>;
   r_topdown3d: CVar<boolean>;
   r_pixelcars3d: CVar<boolean>;
+  r_groundnearest: CVar<boolean>;
   xr_rate: CVar<number>;
 }
 
@@ -216,6 +217,15 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "r",
   });
 
+  const r_groundnearest = engine.cvars.register<boolean>({
+    name: "r_groundnearest",
+    description:
+      "Prototype: the 3D view's ground sampled once per pixel, as trees and actors are (?groundnearest=1)",
+    type: "boolean",
+    defaultValue: false,
+    category: "r",
+  });
+
   const xr_rate = engine.cvars.register<number>({
     name: "xr_rate",
     description: "Display rate a headset session asks for, in Hz (0 keeps the headset's own)",
@@ -246,6 +256,7 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     r_fpshadows,
     r_topdown3d,
     r_pixelcars3d,
+    r_groundnearest,
     xr_rate,
   };
 }

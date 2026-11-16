@@ -1,6 +1,7 @@
 import { VIEW_BACKDROP_CSS } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
+import { advanceCameraFollow, type CameraFollowState } from "../rendering/CameraFollow.js";
 import { collectWorldSprites } from "../rendering/collectScene.js";
 import { NORTH_YAW } from "../rendering/firstperson/FirstPersonCamera.js";
 import { propForm } from "../rendering/firstperson/FirstPersonProps.js";
@@ -194,7 +195,13 @@ export type FilmColumn =
   /** The 3D scene's top-down camera, as played: drawn at the camera's position. */
   | "scene"
   /** The 3D scene with its camera held to whole screen pixels. */
-  | "snapped";
+  | "snapped"
+  /** Prototype: the 3D scene with its ground sampled once per pixel, as cards
+   * are (`GROUND_NEAREST`). */
+  | "nearest"
+  /** Prototype: that ground, and the camera, every entity and every blade on one
+   * grid of screen pixels in world space, so the picture moves as one. */
+  | "rigid";
 
 export interface FilmOptions {
   /** Where the first frame stands; the first call without it returns play's. */
@@ -203,6 +210,10 @@ export interface FilmOptions {
   step: { x: number; y: number };
   /** Every other entity's travel per frame, world pixels (none by default). */
   others?: { x: number; y: number };
+  /** The player stops after this many frames, and the camera follows as in play
+   * (`advanceCameraFollow`, `frameSeconds` a frame) instead of moving with it. */
+  stopAt?: number;
+  frameSeconds?: number;
   /** Frames `from` … `from + count − 1`, so a long film can be read in parts. */
   from: number;
   count: number;
@@ -224,13 +235,17 @@ const FILM_LABELS: Record<FilmColumn, string> = {
   fixed: "fixed view",
   scene: "unified 3D",
   snapped: "unified 3D, camera on whole pixels",
+  nearest: "unified 3D, ground sampled like trees",
+  rigid: "unified 3D, one pixel grid for everything",
 };
 
 /**
  * Renderer film: the same moment of play through each column's renderer, while
  * the camera pans by `step` a frame and carries the player with it, as following
- * does, and other entities move by `others`. Time stands still, so a frame depends only on its index: two runs, or
- * two parts of one run, draw the same pictures. Each frame is one PNG of the
+ * does, and other entities move by `others`. With `stopAt` the player walks and
+ * stops, and the camera trails it with play's own follow. Time stands still, so a
+ * frame depends only on its index: two runs, or two parts of one run, draw the
+ * same pictures. Each frame is one PNG of the
  * crops side by side, enlarged without smoothing so single pixels show.
  */
 export function filmRendererParity(
@@ -247,7 +262,16 @@ export function filmRendererParity(
       x: snapToPixel(camera.x, region.width, camera.scale),
       y: snapToPixel(camera.y, region.height, camera.scale),
     },
-    player: { wx: own.wx, wy: own.wy },
+    // The player a whole number of screen pixels from the camera, as following
+    // leaves it at rest.
+    player: {
+      wx:
+        snapToPixel(camera.x, region.width, camera.scale) -
+        Math.round((camera.x - own.wx) * camera.scale) / camera.scale,
+      wy:
+        snapToPixel(camera.y, region.height, camera.scale) -
+        Math.round((camera.y - own.wy) * camera.scale) / camera.scale,
+    },
     time: stage.time,
   };
   const { crop, enlarge, columns } = options;
@@ -271,11 +295,13 @@ export function filmRendererParity(
   const frames: string[] = [];
   try {
     stage.setTime(start.time);
+    const walked = (i: number) => Math.min(i, options.stopAt ?? i);
     for (let i = options.from; i < options.from + options.count; i++) {
-      const dx = options.step.x * i,
-        dy = options.step.y * i;
-      camera.x = start.camera.x + dx;
-      camera.y = start.camera.y + dy;
+      const dx = options.step.x * walked(i),
+        dy = options.step.y * walked(i);
+      const at = filmCamera(options, start, i);
+      camera.x = at.x;
+      camera.y = at.y;
       stage.moveEntities(
         { wx: start.player.wx + dx, wy: start.player.wy + dy },
         { x: (options.others?.x ?? 0) * i, y: (options.others?.y ?? 0) * i },
@@ -307,7 +333,13 @@ export function filmRendererParity(
                   y: snapToPixel(camera.y, region.height, camera.scale),
                 }
               : camera;
-          stage.drawScene(PLAYED_LAYERS, stage.control.shadows, eye);
+          stage.drawScene(
+            PLAYED_LAYERS,
+            stage.control.shadows,
+            eye,
+            column === "nearest" || column === "rigid",
+            column === "rigid",
+          );
           pixels = stage.read(rect);
         }
         cellContext.putImageData(new ImageData(pixels.slice(), crop.width, crop.height), 0, 0);
@@ -318,7 +350,8 @@ export function filmRendererParity(
         context.fillText(FILM_LABELS[column], left + 4, 20);
       }
       const fraction = (v: number) => (((v * camera.scale) % 1) + 1) % 1;
-      const note = `frame ${i}  zoom ${camera.zoom}  camera fraction ${fraction(camera.x).toFixed(2)}, ${fraction(camera.y).toFixed(2)} px`;
+      const walking = options.stopAt === undefined || i < options.stopAt;
+      const note = `${walking ? "" : "stopped  "}frame ${i}  zoom ${camera.zoom}  camera fraction ${fraction(camera.x).toFixed(2)}, ${fraction(camera.y).toFixed(2)} px`;
       context.font = "14px monospace";
       context.fillText(note, canvas.width - context.measureText(note).width - 6, 20);
       frames.push(canvas.toDataURL("image/png"));
@@ -327,6 +360,26 @@ export function filmRendererParity(
     stage.restore();
   }
   return { start, frames };
+}
+
+/** Frame `i`'s camera: carried with the player, or trailing it as play's
+ * follow does from rest at the start. */
+function filmCamera(options: FilmOptions, start: FilmStart, i: number): { x: number; y: number } {
+  const { step, stopAt } = options;
+  if (stopAt === undefined)
+    return { x: start.camera.x + step.x * i, y: start.camera.y + step.y * i };
+  const seconds = options.frameSeconds ?? 1 / 60;
+  let state: CameraFollowState | null = null;
+  for (let k = 0; k <= i; k++) {
+    const walked = Math.min(k, stopAt);
+    state = advanceCameraFollow(
+      state,
+      k * seconds,
+      start.camera.x + step.x * walked,
+      start.camera.y + step.y * walked,
+    );
+  }
+  return state ?? start.camera;
 }
 
 /** The camera centre that puts the view's middle on a whole screen pixel. */
@@ -435,17 +488,32 @@ function parityStage(game: GameTestHooks) {
     return read();
   };
 
-  /** `eye`: the 3D camera's centre when it is not the view's camera. */
+  /** `eye`: the 3D camera's centre when it is not the view's camera. `rigid`
+   * (prototype): the eye, every entity and every blade placed on one grid of
+   * screen pixels in world space, so the whole picture steps together. */
   const drawScene = (
     layers: SceneLayers,
     shadows: boolean,
     eye: { x: number; y: number } = camera,
+    groundNearest = control.groundNearest,
+    rigid = false,
   ): void => {
     host.beginFrame();
     Object.assign(scene.layers, layers);
     const frame = control.frame;
     frame.presentationTime = time;
-    const all = drawnEntities();
+    const grid = (v: number) => Math.round(v * camera.scale) / camera.scale;
+    const all = rigid
+      ? drawnEntities().map((entity) => ({
+          ...entity,
+          position: {
+            ...entity.position,
+            wx: grid(entity.position.wx),
+            wy: grid(entity.position.wy),
+          },
+        }))
+      : drawnEntities();
+    if (rigid) eye = { x: grid(eye.x), y: grid(eye.y) };
     // As play collects them: the fixed view's blades for this camera. Bodies push
     // blades aside, so a picture without bodies has none pushed, as in `drawFixed`.
     const pushing = layers.actors || layers.vehicles ? all : [];
@@ -453,6 +521,11 @@ function parityStage(game: GameTestHooks) {
       layers.grass && game.renderer.assets.has("grass-blades")
         ? collectCameraGrass(stateView.world, pushing, camera, time, frame.grass)
         : undefined;
+    if (rigid)
+      for (const blade of grass ?? []) {
+        blade.wx = grid(blade.wx);
+        blade.wy = grid(blade.wy);
+      }
     const ground = obliqueGround({ x: eye.x, y: eye.y, scale: camera.scale }, width, height);
     const items = frame.begin(!!grass?.length);
     try {
@@ -479,6 +552,7 @@ function parityStage(game: GameTestHooks) {
             topDown: { scale: camera.scale },
             // As the player has it: `r_pixelcars3d` can turn vehicle images off.
             pixelBodies: control.pixelBodies,
+            groundNearest,
             grass,
           },
           target,

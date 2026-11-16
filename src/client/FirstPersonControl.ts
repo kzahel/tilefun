@@ -70,6 +70,9 @@ export class FirstPersonControl {
   /** Top-down 3D views draw vehicles as the fixed view's outlined native-pixel
    * images; `r_pixelcars3d` and `?pixelcars=0` set it. */
   pixelBodies = new URLSearchParams(location.search).get("pixelcars") !== "0";
+  /** Prototype: the 3D ground sampled once per pixel, as trees and actors are;
+   * `r_groundnearest` and `?groundnearest=1` set it. */
+  groundNearest = new URLSearchParams(location.search).get("groundnearest") === "1";
   /** A headset's tabletop (252) sets how far its 3D view reaches, in place of
    * the view distance. World pixels. */
   reach: number | undefined;
