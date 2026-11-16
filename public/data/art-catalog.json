@@ -38255,11 +38255,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/RendererParityProbe.ts:480"
+          "source": "src/client/RendererParityProbe.ts:489"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/RendererParityProbe.ts:512"
+          "source": "src/client/RendererParityProbe.ts:521"
         },
         {
           "system": "Gameplay",
@@ -38279,7 +38279,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:465"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:475"
         },
         {
           "system": "Editor",

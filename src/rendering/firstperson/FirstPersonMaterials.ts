@@ -121,15 +121,44 @@ vec3 groundArt(vec2 dx, vec2 dy) {
 }
 `;
 
+/**
+ * Prototype (fractional zoom, 2026-11-16): cards sampled at the ground's four
+ * taps per pixel instead of once at its centre. At whole screen pixels per texel
+ * the taps share a texel and nothing changes; between, a pixel takes the
+ * coverage-weighted colour of the texels under it, so a one-texel detail (an
+ * eye) dims instead of vanishing. Shared by every view; each sets it.
+ */
+export const CARD_TAPS = { value: false };
+
 /** A card's artwork: `cardPage` is its place in the page atlas (texel x, texel y,
- * layer). Alpha is the artwork's own, for the material's alpha test. */
+ * layer). Alpha is the artwork's own, for the material's alpha test. With
+ * `cardTaps`, taps outside the card's own quad (`vCardLocal`, 0…1 across it)
+ * count as empty: the atlas around it holds other frames. */
 const CARD_ART_FRAGMENT = `
 uniform highp sampler2DArray cardAtlas;
+uniform bool cardTaps;
 varying vec3 vCardPage;
-vec4 cardArt() {
-  vec3 uvw = vec3(vCardPage.xy / vec2(textureSize(cardAtlas, 0).xy), floor(vCardPage.z + 0.5));
+varying vec2 vCardLocal;
+vec4 cardAt(vec2 texel) {
+  vec3 uvw = vec3(texel / vec2(textureSize(cardAtlas, 0).xy), floor(vCardPage.z + 0.5));
   // Pages hold display-encoded bytes; the scene shades in linear light.
   return sRGBTransferEOTF(textureLod(cardAtlas, uvw, 0.0));
+}
+vec4 cardArt() {
+  vec2 dx = dFdx(vCardPage.xy), dy = dFdy(vCardPage.xy);
+  vec2 lx = dFdx(vCardLocal), ly = dFdy(vCardLocal);
+  if (!cardTaps) return cardAt(vCardPage.xy);
+  vec4 sum = vec4(0.0);
+  ${GROUND_TAPS.map(
+    ([x, y]) => `{
+    vec2 local = vCardLocal + ${x.toFixed(4)} * lx + ${y.toFixed(4)} * ly;
+    if (all(greaterThanEqual(local, vec2(0.0))) && all(lessThanEqual(local, vec2(1.0)))) {
+      vec4 c = cardAt(vCardPage.xy + ${x.toFixed(4)} * dx + ${y.toFixed(4)} * dy);
+      sum += vec4(c.rgb * c.a, c.a);
+    }
+  }`,
+  ).join("\n  ")}
+  return vec4(sum.rgb / max(sum.a, 1e-4), sum.a / ${GROUND_TAPS.length}.0);
 }
 `;
 
@@ -149,10 +178,19 @@ export function shadeMaterial<T extends THREE.Material>(material: T, shading: Ma
     const declare: string[] = [];
     if (cardArt) {
       shader.uniforms.cardAtlas = cardArt;
-      declare.push("attribute vec3 cardPage;", "varying vec3 vCardPage;");
+      shader.uniforms.cardTaps = CARD_TAPS;
+      declare.push(
+        "attribute vec3 cardPage;",
+        "varying vec3 vCardPage;",
+        "varying vec2 vCardLocal;",
+      );
+      // Cards are quads of four vertices: bottom-left, bottom-right, top-right, top-left.
       vertex = vertex.replace(
         "#include <color_vertex>",
-        "#include <color_vertex>\n  vCardPage = cardPage;",
+        `#include <color_vertex>
+  vCardPage = cardPage;
+  int cardCorner = gl_VertexID % 4;
+  vCardLocal = vec2(cardCorner == 1 || cardCorner == 2 ? 1.0 : 0.0, cardCorner >= 2 ? 1.0 : 0.0);`,
       );
       fragment = fragment
         .replace("#include <common>", `#include <common>${CARD_ART_FRAGMENT}`)

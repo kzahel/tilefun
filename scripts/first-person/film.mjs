@@ -17,7 +17,8 @@
 // (3D as played: one pixel grid for camera, bodies and blades), `scene` (3D with
 // sub-pixel placement, as before the grid), `snapped` (only the camera on whole
 // screen pixels) and `nearest` (sub-pixel, ground sampled once per pixel). Writes
-// one MP4 per scene and zoom, and keeps the PNG frames beside it.
+// one MP4 per scene and zoom, and keeps the PNG frames beside it. `taps` is
+// `rigid` with cards sampled at four taps per pixel (prototype, `?cardtaps=1`).
 import { execFileSync } from "node:child_process";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import os from "node:os";

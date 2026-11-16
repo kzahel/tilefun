@@ -27,6 +27,7 @@ export interface ClientCVars {
   r_groundnearest: CVar<boolean>;
   r_pixelgrid: CVar<boolean>;
   r_sun3d: CVar<boolean>;
+  r_cardtaps: CVar<boolean>;
   xr_rate: CVar<number>;
 }
 
@@ -245,6 +246,15 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "r",
   });
 
+  const r_cardtaps = engine.cvars.register<boolean>({
+    name: "r_cardtaps",
+    description:
+      "Prototype: 3D cards and ground sampled at four taps per pixel, so zoomed-out details dim instead of vanishing (?cardtaps=1)",
+    type: "boolean",
+    defaultValue: false,
+    category: "r",
+  });
+
   const xr_rate = engine.cvars.register<number>({
     name: "xr_rate",
     description: "Display rate a headset session asks for, in Hz (0 keeps the headset's own)",
@@ -278,6 +288,7 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     r_groundnearest,
     r_pixelgrid,
     r_sun3d,
+    r_cardtaps,
     xr_rate,
   };
 }

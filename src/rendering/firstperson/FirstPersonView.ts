@@ -24,7 +24,12 @@ import { GrassCards } from "./FirstPersonGrass.js";
 import { GroundTops } from "./FirstPersonGround.js";
 import { FirstPersonImages } from "./FirstPersonImages.js";
 import { type FirstPersonInterior, INTERIOR_BACKGROUND } from "./FirstPersonInterior.js";
-import { GROUND_NEAREST, type SunReceiver, shadeMaterial } from "./FirstPersonMaterials.js";
+import {
+  CARD_TAPS,
+  GROUND_NEAREST,
+  type SunReceiver,
+  shadeMaterial,
+} from "./FirstPersonMaterials.js";
 import {
   ART_HOLES,
   disposeGroup,
@@ -78,6 +83,8 @@ export interface FirstPersonFrame {
   /** Prototype: ground artwork sampled once per pixel, as cards are
    * (`GROUND_NEAREST`). */
   readonly groundNearest?: boolean | undefined;
+  /** Prototype: cards sampled at four taps per pixel, as ground is (`CARD_TAPS`). */
+  readonly cardTaps?: boolean | undefined;
   /** Grass blades as the fixed view collects them (`collectCameraGrass`), posed
    * for this frame. Drawn by the top-down camera only. */
   readonly grass?: readonly GrassItem[] | undefined;
@@ -446,6 +453,7 @@ export class FirstPersonView {
     // Rooms have contact shadows but no sun.
     const shadows = frame.shadows !== false;
     GROUND_NEAREST.value = !!frame.groundNearest;
+    CARD_TAPS.value = !!frame.cardTaps;
     ART_HOLES.value = !!topDown;
     // Draw calls are counted over every render of this view: vehicle images and
     // the sun map included.

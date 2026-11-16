@@ -202,7 +202,8 @@ export type FilmColumn =
   | "nearest"
   /** Prototype: that ground, and the camera, every entity and every blade on one
    * grid of screen pixels in world space, so the picture moves as one. */
-  | "rigid";
+  | "rigid"
+  | "taps";
 
 export interface FilmOptions {
   /** Where the first frame stands; the first call without it returns play's. */
@@ -238,6 +239,7 @@ const FILM_LABELS: Record<FilmColumn, string> = {
   snapped: "unified 3D, camera on whole pixels",
   nearest: "unified 3D, ground sampled like trees",
   rigid: "unified 3D, one pixel grid (as played)",
+  taps: "unified 3D, cards at four taps (prototype)",
 };
 
 /**
@@ -334,13 +336,20 @@ export function filmRendererParity(
                   y: snapToPixel(camera.y, region.height, camera.scale),
                 }
               : camera;
-          stage.drawScene(
-            PLAYED_LAYERS,
-            stage.control.shadows,
-            eye,
-            column === "nearest" || column === "rigid",
-            column === "rigid",
-          );
+          const grid = column === "rigid" || column === "taps";
+          const taps = stage.control.cardTaps;
+          if (column === "taps") stage.control.cardTaps = true;
+          try {
+            stage.drawScene(
+              PLAYED_LAYERS,
+              stage.control.shadows,
+              eye,
+              column === "nearest" || grid,
+              grid,
+            );
+          } finally {
+            stage.control.cardTaps = taps;
+          }
           pixels = stage.read(rect);
         }
         cellContext.putImageData(new ImageData(pixels.slice(), crop.width, crop.height), 0, 0);
@@ -542,6 +551,7 @@ function parityStage(game: GameTestHooks) {
             // As the player has it: `r_pixelcars3d` can turn vehicle images off.
             pixelBodies: control.pixelBodies,
             groundNearest,
+            cardTaps: control.cardTaps,
             grass,
           },
           target,
