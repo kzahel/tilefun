@@ -92,7 +92,10 @@ describe("the view's merged static world (251)", () => {
     throw Error("chunks kept building");
   };
   const internals = (view: FirstPersonView) =>
-    view as unknown as { groundRoot: THREE.Group; ground: { count: number; meshes: number } };
+    view as unknown as {
+      groundRoot: THREE.Group;
+      ground: { count: number; meshes: number; root: THREE.Group };
+    };
 
   it("draws every chunk's ground as one mesh, with walls only where ground is raised", () => {
     const loaded = new Map<string, Chunk>();
@@ -103,16 +106,23 @@ describe("the view's merged static world (251)", () => {
     settle(view, frame(world(loaded), false));
     expect(view.stats.chunks).toBe(9);
     expect(internals(view).ground.count).toBe(9);
-    // Nine chunks share one ground mesh; the raised tile's area adds one of walls.
-    expect(internals(view).ground.meshes).toBe(1);
-    expect(view.stats.meshes).toBe(2);
+    // Nine chunks share one ground mesh; the raised tile adds its textured south
+    // face (a ground mesh of its chunk) and its area one of flat walls.
+    expect(internals(view).ground.meshes).toBe(2);
+    expect(view.stats.meshes).toBe(3);
     const walls = internals(view).groundRoot.children.filter(
       (child) => child instanceof THREE.Mesh,
     ) as THREE.Mesh[];
     expect(walls).toHaveLength(1);
-    expect(walls[0]?.geometry.getAttribute("position").count).toBe(4 * 6);
-    // Walls cast the sun's shadow; ground tops are not drawn into its map.
+    expect(walls[0]?.geometry.getAttribute("position").count).toBe(3 * 6);
+    // Walls and cliffs cast the sun's shadow; ground tops are not drawn into its map.
     expect(walls[0]?.layers.isEnabled(1)).toBe(true);
+    const ground = internals(view).ground.root.children as THREE.Mesh[];
+    const cliff = ground.find((mesh) => mesh.geometry.getAttribute("position").count < 100);
+    const tops = ground.find((mesh) => mesh !== cliff);
+    expect(cliff?.geometry.getAttribute("position").count).toBe(6);
+    expect(cliff?.layers.isEnabled(1)).toBe(true);
+    expect(tops?.layers.isEnabled(1)).toBe(false);
     view.dispose();
   });
 

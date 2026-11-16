@@ -106,14 +106,17 @@ const GROUND_FRAGMENT = `
 uniform highp sampler2DArray groundAtlas;
 uniform bool groundNearest;
 varying vec2 vGroundTexel;
+varying float vGroundShade;
 varying vec3 vGroundPage;
 vec3 groundAt(vec2 texel) {
   texel = clamp(texel, vec2(0.5), vec2(${CHUNK_SIZE_PX}.0 - 0.5));
   // Pages store their rows bottom first.
   vec2 at = vGroundPage.xy + vec2(texel.x, ${CHUNK_SIZE_PX}.0 - texel.y);
   vec3 uvw = vec3(at / vec2(textureSize(groundAtlas, 0).xy), floor(vGroundPage.z + 0.5));
-  // Pages hold display-encoded bytes; the scene shades in linear light.
-  return sRGBTransferEOTF(textureLod(groundAtlas, uvw, 0.0)).rgb;
+  // Pages hold display-encoded bytes; the scene shades in linear light. Raised
+  // ground darkens in display space, as the fixed view's overlays do.
+  vec4 art = textureLod(groundAtlas, uvw, 0.0);
+  return sRGBTransferEOTF(vec4(art.rgb * vGroundShade, art.a)).rgb;
 }
 // dx and dy are the texel steps to the next screen pixel. The caller takes
 // them outside its branch: derivatives are undefined inside non-uniform control flow.
@@ -167,13 +170,15 @@ export function shadeMaterial<T extends THREE.Material>(material: T, shading: Ma
       shader.uniforms.groundNearest = GROUND_NEAREST;
       declare.push(
         "attribute vec2 groundTexel;",
+        "attribute float groundShade;",
         "attribute vec3 groundPage;",
         "varying vec2 vGroundTexel;",
+        "varying float vGroundShade;",
         "varying vec3 vGroundPage;",
       );
       vertex = vertex.replace(
         "#include <color_vertex>",
-        "#include <color_vertex>\n  vGroundTexel = groundTexel;\n  vGroundPage = groundPage;",
+        "#include <color_vertex>\n  vGroundTexel = groundTexel;\n  vGroundShade = groundShade;\n  vGroundPage = groundPage;",
       );
       fragment = fragment
         .replace("#include <common>", `#include <common>${GROUND_FRAGMENT}`)

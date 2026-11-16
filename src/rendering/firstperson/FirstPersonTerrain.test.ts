@@ -5,9 +5,11 @@ import { CollisionFlag, TileId } from "../../world/TileRegistry.js";
 import {
   buildTerrainChunk,
   CHUNK_TOP_VERTICES,
+  CLIFF_ART_SHADE,
   type FirstPersonChunk,
   groundColor,
   mixColor,
+  RAISED_ART_SHADE,
   roadColor,
   srgbToLinear,
 } from "./FirstPersonTerrain.js";
@@ -50,15 +52,31 @@ describe("first-person terrain chunks", () => {
   it("raises tiles and walls only the edges that drop to lower neighbours", () => {
     // One raised tile in the chunk interior: its top plus four cliff faces.
     const raised = chunk((lx, ly) => (lx === 5 && ly === 5 ? 2 : 0));
-    const { tops, walls } = buildTerrainChunk(raised, 0, 0, () => 0);
+    const { tops, cliffs, walls } = buildTerrainChunk(raised, 0, 0, () => 0);
     // Tops never change size: a chunk's slot in the shared ground mesh (251).
     expect(tops.positions.length).toBe(CHUNK_TOP_VERTICES * 3);
-    expect(walls.positions.length / 18).toBe(4);
+    expect(cliffs.positions.length / 18).toBe(1);
+    expect(walls.positions.length / 18).toBe(3);
     const top = 2 * ELEVATION_PX;
     expect(vertices(tops.positions).filter((v) => v[2] === top).length).toBe(6);
-    expect(vertices(walls.positions).filter((v) => v[2] === top).length).toBe(4 * 3);
-    // Walls are flat-coloured only.
+    expect(vertices(walls.positions).filter((v) => v[2] === top).length).toBe(3 * 3);
+    // North, east and west walls are flat-coloured only.
     expect(walls.texels).toBeUndefined();
+    // The raised top is darkened as the fixed view darkens it; the rest are not.
+    const shades = tops.artShades ?? [];
+    expect([...shades].filter((s) => s === Math.fround(RAISED_ART_SHADE))).toHaveLength(6);
+    expect([...shades].filter((s) => s === 1)).toHaveLength(CHUNK_TOP_VERTICES - 6);
+    // The south face wears the tile's bottom row across its width, darker still.
+    const y1 = 6 * TILE_SIZE;
+    const texels = cliffs.texels ?? [];
+    for (let i = 0; i < 6; i++) {
+      expect(texels[i * 2]).toBe(cliffs.positions[i * 3]);
+      expect(texels[i * 2 + 1]).toBe(y1 - 0.5);
+    }
+    expect([...(cliffs.artShades ?? [])].every((s) => s === Math.fround(CLIFF_ART_SHADE))).toBe(
+      true,
+    );
+    expect(vertices(cliffs.positions).every((v) => v[1] === y1)).toBe(true);
   });
 
   it("asks the world for heights across chunk edges", () => {
@@ -75,6 +93,9 @@ describe("first-person terrain chunks", () => {
     // A lower neighbour across the edge gets a wall along the whole side.
     const dropped = buildTerrainChunk(edge, 0, 0, (tx) => (tx < 0 ? 0 : 1));
     expect(dropped.walls.positions.length / 18).toBe(CHUNK_SIZE);
+    const south = buildTerrainChunk(edge, 0, 0, (_tx, ty) => (ty >= CHUNK_SIZE ? 0 : 1));
+    expect(south.cliffs.positions.length / 18).toBe(CHUNK_SIZE);
+    expect(south.walls.positions.length).toBe(0);
   });
 
   it("colours roads, water and terrain from their semantic layers", () => {
@@ -98,8 +119,8 @@ describe("first-person terrain chunks", () => {
     expect(srgbToLinear(0.5)).toBeCloseTo(0.214, 3);
   });
 
-  it("places tile tops in the chunk's ground image and leaves cliff walls flat (250)", () => {
-    // One raised tile: its top still wears the image; its four walls do not.
+  it("places tile tops in the chunk's ground image and leaves the unseen cliff walls flat (250)", () => {
+    // One raised tile: its top still wears the image; its north, east and west walls do not.
     const { tops, walls } = buildTerrainChunk(
       chunk((lx, ly) => (lx === 3 && ly === 5 ? 2 : 0)),
       2,
@@ -119,6 +140,6 @@ describe("first-person terrain chunks", () => {
       expect(z === 0 || z === 2 * ELEVATION_PX).toBe(true);
     });
     expect(Math.max(...texels)).toBe(size);
-    expect(walls.positions.length / 3).toBe(4 * 6);
+    expect(walls.positions.length / 3).toBe(3 * 6);
   });
 });

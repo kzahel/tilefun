@@ -236,7 +236,9 @@ export class FirstPersonView {
     { sun: { uniforms: this.sun.uniforms, receiver: "faces" }, ground: this.atlas },
   );
   /** Every chunk's tile tops in one mesh; cliff walls and prop faces in a few. */
-  private readonly ground = new GroundTops(this.groundRoot, this.groundMaterial);
+  private readonly ground = new GroundTops(this.groundRoot, this.groundMaterial, (mesh) =>
+    SunShadows.cast(mesh),
+  );
   private readonly faces = new MergedFaces();
   /** The frame's pages as cards ask for them. */
   private readonly cardPages = new RecentPages();
@@ -620,8 +622,8 @@ export class FirstPersonView {
     const heightAt = (tx: number, ty: number) => world.getHeightAt(tx, ty);
     const area = `${Math.floor(cx / FACE_AREA_CHUNKS)},${Math.floor(cy / FACE_AREA_CHUNKS)}`;
     if (!this.room && terrainStale(scene.terrain, chunk)) {
-      const { tops, walls } = buildTerrainChunk(chunk, cx, cy, heightAt);
-      this.ground.set(key, tops);
+      const { tops, cliffs, walls } = buildTerrainChunk(chunk, cx, cy, heightAt);
+      this.ground.set(key, tops, cliffs);
       this.faces.replace(`${key}:walls`, [
         { bucket: `walls:${area}`, material: this.flatMaterial, parent: this.groundRoot, ...walls },
       ]);

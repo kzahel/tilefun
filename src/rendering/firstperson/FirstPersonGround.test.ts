@@ -24,6 +24,33 @@ const PAGE = { layer: 3, x: 512, y: 256, width: 256, height: 256 };
 const make = () => new GroundTops(new THREE.Group(), new THREE.MeshBasicMaterial());
 
 describe("the 3D ground (250, merged since 251)", () => {
+  it("gives raised ground's textured cliffs a mesh of their own on the chunk's page", () => {
+    const made: THREE.Mesh[] = [];
+    const ground = new GroundTops(new THREE.Group(), new THREE.MeshBasicMaterial(), (m) =>
+      made.push(m),
+    );
+    const raised = { ...flat, getHeight: (_lx: number, ly: number) => (ly < 4 ? 1 : 0) };
+    const { tops: raisedTops, cliffs } = buildTerrainChunk(raised, 0, 0, () => 0);
+    ground.set("0,0", raisedTops, cliffs);
+    ground.set("1,0", tops(1), buildTerrainChunk(flat, 1, 0, () => 0).cliffs);
+    // One block of tops and one cliff mesh: flat chunks have none.
+    expect(ground.meshes).toBe(2);
+    expect(made).toHaveLength(1);
+    const cliffMesh = made[0] as THREE.Mesh;
+    const page = () => [...(cliffMesh.geometry.getAttribute("groundPage").array as Float32Array)];
+    expect(page().every((v) => v === -1)).toBe(true);
+    ground.bind("0,0", PAGE);
+    expect(page().slice(0, 3)).toEqual([512, 256, 3]);
+    expect(slot(ground, "groundShade", 0).some((v) => v < 1)).toBe(true);
+    // Replaced without cliffs, then removed: the mesh goes.
+    ground.set("0,0", tops(0));
+    expect(ground.meshes).toBe(1);
+    expect(cliffMesh.parent).toBeNull();
+    ground.set("0,0", raisedTops, cliffs);
+    ground.delete("0,0");
+    expect(ground.meshes).toBe(1);
+  });
+
   it("starts a chunk on flat colours and follows its page", () => {
     const ground = make();
     expect(ground.meshes).toBe(0);

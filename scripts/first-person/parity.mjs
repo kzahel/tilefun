@@ -6,7 +6,8 @@
 //
 //   node scripts/first-person/parity.mjs [--out=DIR] [--headed] [--scenes=city,woods,crowd]
 //     [--zooms=1,0.25] [--query=a=b]
-//   --scenes=pond compares the seeded grass/water shoreline (seed 2026).
+//   --scenes=pond compares the seeded grass/water shoreline (seed 2026);
+//   --scenes=hills raises ground round the player in the woods first.
 //
 // Per kind it prints the pixels each renderer draws, how much of the two
 // silhouettes overlap, the whole-pixel move that aligns them best, and how far
@@ -37,6 +38,19 @@ const SCENES = {
   crowd: { arrival: [300, 519], rabbits: 1000, cars: 50 },
   woods: { arrival: [-380, -364], rabbits: 0, cars: 0 },
   pond: { arrival: [215, -196], rabbits: 0, cars: 0 },
+  // Raised ground (the generated world is flat): elevation edits round the
+  // player in the woods, as [tile dx, tile dy, height, brush size].
+  hills: {
+    arrival: [-380, -364],
+    rabbits: 0,
+    cars: 0,
+    raise: [
+      [-6, -5, 1, 5],
+      [-6, -5, 2, 3],
+      [5, -3, 3, 3],
+      [3, 3, 1, 4],
+    ],
+  },
 };
 const scenes = option("scenes", "city,woods,crowd").split(",");
 for (const name of scenes) if (!SCENES[name]) throw Error(`Unknown scene ${name}`);
@@ -90,6 +104,20 @@ try {
       undefined,
       { timeout: 120_000 },
     );
+    if (scene.raise) {
+      await page.waitForTimeout(2500);
+      await page.evaluate(async (raise) => {
+        const g = document.querySelector("#game").__game;
+        const p = g.stateView.playerEntity.position;
+        const [tx, ty] = [Math.floor(p.wx / 16), Math.floor(p.wy / 16)];
+        g.transport.send({ type: "set-editor-mode", enabled: true });
+        for (const [dx, dy, height, gridSize] of raise)
+          g.transport.send({ type: "edit-elevation", tx: tx + dx, ty: ty + dy, height, gridSize });
+        await new Promise((resolve) => setTimeout(resolve, 250));
+        g.transport.send({ type: "set-editor-mode", enabled: false });
+      }, scene.raise);
+      await page.waitForTimeout(3000);
+    }
     if (scene.rabbits || scene.cars) {
       // Arrival finishes after the first ready frame; early edits are dropped.
       await page.waitForTimeout(2500);

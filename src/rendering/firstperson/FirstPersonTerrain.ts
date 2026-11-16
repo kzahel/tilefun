@@ -17,6 +17,8 @@ export interface ColoredTriangles {
   /** Ground only: each vertex's place in its chunk's ground image (x, y in texels
    * from the image's top-left corner), or −1, −1 where no artwork applies. */
   texels?: Float32Array;
+  /** With `texels`: each vertex's display-space multiplier on the artwork. */
+  artShades?: Float32Array;
 }
 
 const TERRAIN_COLORS: Record<number, number> = {
@@ -86,11 +88,22 @@ export class TriangleWriter {
   private positions: number[] = [];
   private colors: number[] = [];
   private texels: number[] = [];
+  private artShades: number[] = [];
   private textured = false;
 
-  vertex(x: number, y: number, z: number, hex: number, shade: number, u = -1, v = -1): void {
+  vertex(
+    x: number,
+    y: number,
+    z: number,
+    hex: number,
+    shade: number,
+    u = -1,
+    v = -1,
+    artShade = 1,
+  ): void {
     this.positions.push(x, y, z);
     this.texels.push(u, v);
+    this.artShades.push(artShade);
     this.colors.push(
       srgbToLinear(Math.min(1, (((hex >> 16) & 255) / 255) * shade)),
       srgbToLinear(Math.min(1, (((hex >> 8) & 255) / 255) * shade)),
@@ -100,20 +113,33 @@ export class TriangleWriter {
 
   /**
    * Two triangles a→b→c, a→c→d (counter-clockwise seen from the face's front).
-   * A flat face of a chunk's ground passes `image`, the world position of its
-   * ground image's top-left corner, to wear that image.
+   * A face of a chunk's ground passes `image`, the world position of its ground
+   * image's top-left corner, to wear that image; `row` holds its texel row
+   * fixed (a cliff wears the row along its top edge), and `artShade` darkens the
+   * artwork in display space as the fixed view's black overlays do.
    */
   quad(
     corners: readonly (readonly [number, number, number])[],
     hex: number,
     shade: number,
     image?: { readonly x: number; readonly y: number },
+    art?: { readonly row?: number; readonly shade?: number },
   ): void {
     const [a, b, c, d] = corners;
     if (!a || !b || !c || !d) return;
     if (image) this.textured = true;
     for (const p of [a, b, c, a, c, d])
-      if (image) this.vertex(p[0], p[1], p[2], hex, shade, p[0] - image.x, p[1] - image.y);
+      if (image)
+        this.vertex(
+          p[0],
+          p[1],
+          p[2],
+          hex,
+          shade,
+          p[0] - image.x,
+          (art?.row ?? p[1]) - image.y,
+          art?.shade,
+        );
       else this.vertex(p[0], p[1], p[2], hex, shade);
   }
 
@@ -125,7 +151,12 @@ export class TriangleWriter {
     const positions = new Float32Array(this.positions),
       colors = new Float32Array(this.colors);
     if (!this.textured) return { positions, colors };
-    return { positions, colors, texels: new Float32Array(this.texels) };
+    return {
+      positions,
+      colors,
+      texels: new Float32Array(this.texels),
+      artShades: new Float32Array(this.artShades),
+    };
   }
 }
 
@@ -135,17 +166,28 @@ export const FACE_SHADE = { top: 1, south: 0.84, east: 0.74, west: 0.7, north: 0
 /** Vertices of a chunk's tile tops: one quad per tile, whatever its content. */
 export const CHUNK_TOP_VERTICES = CHUNK_SIZE * CHUNK_SIZE * 6;
 
+/** The fixed view's black overlays on raised ground (`drawElevation`): 12% over
+ * a raised tile's surface, 35% over its cliff face. As artwork multipliers. */
+export const RAISED_ART_SHADE = 0.88;
+export const CLIFF_ART_SHADE = 0.65;
+
 /** A chunk's ground: its tile tops, always `CHUNK_TOP_VERTICES` vertices in tile
- * order, and its cliff walls, which only raised ground has. */
+ * order; the south faces of its cliffs, which wear the ground image as the fixed
+ * view draws them; and its other cliff walls, flat-coloured. Only raised ground
+ * has cliffs. */
 export interface TerrainChunk {
   tops: ColoredTriangles;
+  cliffs: ColoredTriangles;
   walls: ColoredTriangles;
 }
 
 /**
  * One chunk of ground: a quad per tile at its terrain height, plus cliff walls on
  * edges that drop to a lower neighbour. Tile tops carry a flat colour and their
- * place in the chunk's ground image (250); cliff walls are flat-coloured only.
+ * place in the chunk's ground image (250), raised ones darkened as the fixed view
+ * darkens them. A south face (the only side the top-down camera sees) wears its
+ * tile's bottom row of the image, stretched down the face and darkened, as the
+ * fixed view draws a cliff; the other walls are flat-coloured.
  * The two are separate so that tops, which never change size, can share one mesh
  * with every other chunk's (251). `heightAt` answers neighbouring tiles in world
  * coordinates (0 where nothing is loaded).
@@ -157,6 +199,7 @@ export function buildTerrainChunk(
   heightAt: (tx: number, ty: number) => number,
 ): TerrainChunk {
   const tops = new TriangleWriter(),
+    cliffs = new TriangleWriter(),
     out = new TriangleWriter();
   const baseTx = cx * CHUNK_SIZE,
     baseTy = cy * CHUNK_SIZE;
@@ -190,6 +233,7 @@ export function buildTerrainChunk(
         color,
         tileJitter(tx, ty),
         image,
+        level > 0 ? { shade: RAISED_ART_SHADE } : undefined,
       );
       if (level <= 0) continue;
       const north = localHeight(lx, ly - 1) * ELEVATION_PX;
@@ -197,7 +241,7 @@ export function buildTerrainChunk(
       const west = localHeight(lx - 1, ly) * ELEVATION_PX;
       const east = localHeight(lx + 1, ly) * ELEVATION_PX;
       if (south < z)
-        out.quad(
+        cliffs.quad(
           [
             [x0, y1, south],
             [x0, y1, z],
@@ -206,6 +250,8 @@ export function buildTerrainChunk(
           ],
           CLIFF_COLOR,
           FACE_SHADE.south,
+          image,
+          { row: y1 - 0.5, shade: CLIFF_ART_SHADE },
         );
       if (north < z)
         out.quad(
@@ -242,5 +288,5 @@ export function buildTerrainChunk(
         );
     }
   }
-  return { tops: tops.finish(), walls: out.finish() };
+  return { tops: tops.finish(), cliffs: cliffs.finish(), walls: out.finish() };
 }

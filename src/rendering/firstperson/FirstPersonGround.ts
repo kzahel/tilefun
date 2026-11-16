@@ -3,7 +3,13 @@ import type { PageRegion } from "../View3dHost.js";
 import { CHUNK_TOP_VERTICES, type ColoredTriangles } from "./FirstPersonTerrain.js";
 
 /** Floats per vertex of each attribute. */
-const ATTRIBUTES = { position: 3, color: 3, groundTexel: 2, groundPage: 3 } as const;
+const ATTRIBUTES = {
+  position: 3,
+  color: 3,
+  groundTexel: 2,
+  groundShade: 1,
+  groundPage: 3,
+} as const;
 type AttributeName = keyof typeof ATTRIBUTES;
 const NAMES = Object.keys(ATTRIBUTES) as AttributeName[];
 /** Chunks per mesh: 2.2 MiB of vertex data, allocated and uploaded whole once. */
@@ -29,17 +35,24 @@ interface Block {
  * Besides position and flat colour, every vertex carries its place in the
  * chunk's ground image (`groundTexel`) and where that image's page sits in the
  * page atlas (`groundPage`: corner x, corner y, layer; layer −1 keeps the flat
- * colour). The page is per vertex because chunks share a mesh.
+ * colour). The page is per vertex because chunks share a mesh. `groundShade`
+ * darkens the artwork (raised ground, `RAISED_ART_SHADE`).
+ *
+ * A chunk's cliff faces that wear its image (`TerrainChunk.cliffs`) are a mesh
+ * of their own, made only where there is raised ground, and bound to the same
+ * page. `made` sees each such mesh (the sun's casters).
  */
 export class GroundTops {
   /** Parent of the blocks' meshes. */
   readonly root = new THREE.Group();
   private readonly blocks: (Block | undefined)[] = [];
   private readonly slots = new Map<string, { block: Block; slot: number }>();
+  private readonly cliffs = new Map<string, THREE.Mesh>();
 
   constructor(
     parent: THREE.Object3D,
     private readonly material: THREE.Material,
+    private readonly made?: (mesh: THREE.Mesh) => void,
   ) {
     parent.add(this.root);
   }
@@ -54,10 +67,12 @@ export class GroundTops {
     return this.root.children.length;
   }
 
-  /** Add a chunk's tops or replace them. They draw flat colours until `bind`. */
-  set(key: string, tops: ColoredTriangles): void {
-    if (tops.positions.length !== CHUNK_TOP_VERTICES * 3 || !tops.texels)
+  /** Add a chunk's tops (and textured cliffs) or replace them. They draw flat
+   * colours until `bind`. */
+  set(key: string, tops: ColoredTriangles, cliffs?: ColoredTriangles): void {
+    if (tops.positions.length !== CHUNK_TOP_VERTICES * 3 || !tops.texels || !tops.artShades)
       throw Error("A chunk's ground tops must be one textured quad per tile");
+    this.setCliffs(key, cliffs);
     let place = this.slots.get(key);
     if (!place) {
       place = this.take();
@@ -69,6 +84,7 @@ export class GroundTops {
     write(block, slot, "position", tops.positions);
     write(block, slot, "color", tops.colors);
     write(block, slot, "groundTexel", tops.texels);
+    write(block, slot, "groundShade", tops.artShades);
     fill(block, slot, "groundPage", -1, -1, -1);
     range(block);
   }
@@ -78,9 +94,33 @@ export class GroundTops {
     const place = this.slots.get(key);
     if (place)
       fill(place.block, place.slot, "groundPage", page?.x ?? -1, page?.y ?? -1, page?.layer ?? -1);
+    const cliffs = this.cliffs.get(key);
+    if (cliffs) bindPage(cliffs.geometry, page);
+  }
+
+  private setCliffs(key: string, cliffs: ColoredTriangles | undefined): void {
+    this.cliffs.get(key)?.geometry.dispose();
+    this.cliffs.get(key)?.removeFromParent();
+    this.cliffs.delete(key);
+    if (!cliffs?.positions.length || !cliffs.texels || !cliffs.artShades) return;
+    const geometry = new THREE.BufferGeometry();
+    const count = cliffs.positions.length / 3;
+    geometry.setAttribute("position", new THREE.BufferAttribute(cliffs.positions, 3));
+    geometry.setAttribute("color", new THREE.BufferAttribute(cliffs.colors, 3));
+    geometry.setAttribute("groundTexel", new THREE.BufferAttribute(cliffs.texels, 2));
+    geometry.setAttribute("groundShade", new THREE.BufferAttribute(cliffs.artShades, 1));
+    geometry.setAttribute(
+      "groundPage",
+      new THREE.BufferAttribute(new Float32Array(count * 3).fill(-1), 3),
+    );
+    const mesh = new THREE.Mesh(geometry, this.material);
+    this.root.add(mesh);
+    this.cliffs.set(key, mesh);
+    this.made?.(mesh);
   }
 
   delete(key: string): void {
+    this.setCliffs(key, undefined);
     const place = this.slots.get(key);
     if (!place) return;
     this.slots.delete(key);
@@ -128,6 +168,8 @@ export class GroundTops {
 
   dispose(): void {
     for (const block of this.blocks) block?.mesh.geometry.dispose();
+    for (const mesh of this.cliffs.values()) mesh.geometry.dispose();
+    this.cliffs.clear();
     this.blocks.length = 0;
     this.slots.clear();
     this.root.clear();
@@ -146,6 +188,14 @@ function fill(block: Block, slot: number, name: AttributeName, ...value: number[
   const start = slot * CHUNK_TOP_VERTICES * size;
   for (let i = 0; i < CHUNK_TOP_VERTICES * size; i++) array[start + i] = value[i % size] ?? 0;
   upload(block, slot, name);
+}
+
+function bindPage(geometry: THREE.BufferGeometry, page: PageRegion | undefined): void {
+  const attribute = geometry.getAttribute("groundPage") as THREE.BufferAttribute;
+  const array = attribute.array as Float32Array;
+  const value = [page?.x ?? -1, page?.y ?? -1, page?.layer ?? -1];
+  for (let i = 0; i < array.length; i++) array[i] = value[i % 3] ?? -1;
+  attribute.needsUpdate = true;
 }
 
 /** Mark one slot of one attribute for upload. */
