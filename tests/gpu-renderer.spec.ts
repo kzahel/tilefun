@@ -625,7 +625,7 @@ test("authored car retains its fixed width registration across headings and zoom
 test("shared traffic scenario feeds the same GPU mesh path", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/tilefun/workshop.html#/tool/traffic");
+  await page.goto("/tilefun/workshop.html?view=fixed#/tool/traffic");
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   expect(
@@ -643,7 +643,7 @@ test("Traffic override selects original non-blue road vehicles without changing 
   page,
 }) => {
   await page.goto(
-    "/tilefun/workshop.html?geometry=car-garage&vehicle=pickup&allcars3d#/tool/world-geometry",
+    "/tilefun/workshop.html?geometry=car-garage&vehicle=pickup&allcars3d&view=fixed#/tool/world-geometry",
   );
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");

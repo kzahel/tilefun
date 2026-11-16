@@ -8,7 +8,7 @@ test("ordinary Worker car controls traverse a rendered ramp and retain the saved
   test.setTimeout(60000);
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/tilefun/workshop.html?geometry=car-garage#/tool/world-geometry");
+  await page.goto("/tilefun/workshop.html?geometry=car-garage&view=fixed#/tool/world-geometry");
   const c = page.getByLabel("World geometry scene");
   await expect(c).toHaveAttribute("data-ready", "true");
   // Car fixtures run on the game's lab view and the recipe-world Worker (226).
@@ -191,7 +191,7 @@ test("3D vehicle course preserves ramp rotation on reload and recovers cars and 
 test("ordinary ramp and mesh-roof landings share projected contact effects", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/tilefun/workshop.html?geometry=car-dynamics&route=ramp#/tool/world-geometry");
+  await page.goto("/tilefun/workshop.html?geometry=car-dynamics&route=ramp&view=fixed#/tool/world-geometry");
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await expect(canvas).toHaveAttribute("data-course-route", "ramp");
@@ -263,7 +263,7 @@ test("dump bed tips and lowers through the shared touch/keyboard control and dis
   test.setTimeout(90000);
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
-  await page.goto("/tilefun/workshop.html?geometry=car-dynamics&route=bed#/tool/world-geometry");
+  await page.goto("/tilefun/workshop.html?geometry=car-dynamics&route=bed&view=fixed#/tool/world-geometry");
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await expect(canvas).toHaveAttribute("data-course-route", "bed");

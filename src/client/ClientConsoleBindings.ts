@@ -4,6 +4,7 @@ import { registerClientCVars } from "../console/clientCVars.js";
 import { registerServerCommandStubs } from "../console/serverCommandStubs.js";
 import type { GameContext } from "../core/GameScene.js";
 import { directionHeading } from "../rendering/firstperson/FirstPersonCamera.js";
+import { softwareWebGl } from "../rendering/WebGl2Support.js";
 import type { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransport.js";
 
 /**
@@ -71,7 +72,7 @@ export function registerClientConsole(
   });
   // Options saves the choice for the device; `?view=fixed` / `?view=topdown3d`
   // override it for this load.
-  if (unifiedTopDownChoice(location.search, globalThis.localStorage))
+  if (unifiedTopDownChoice(location.search, globalThis.localStorage, softwareWebGl()))
     clientCVars.r_topdown3d.set(true);
   clientCVars.r_fpshadows.onChange((val) => {
     if (gc.firstPerson) gc.firstPerson.shadows = val;

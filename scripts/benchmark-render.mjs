@@ -6,6 +6,7 @@
 //   npm run render:bench -- --headed
 //   npm run render:bench -- --headed --scenes=crowd --zooms=0.25 --query=shadows=projected
 //   npm run render:bench -- --compare=/tmp/before.json
+//   npm run render:bench -- --headed --query=view=fixed   (the classic fixed view)
 //
 // Per cell it reports frame cadence, main-thread render/update callbacks, the
 // time inside backend submits (the rest of render is collection and terrain
@@ -103,9 +104,10 @@ let server, browser, page, testOrigin;
 async function samplePage({ seconds, measureFinish = true }) {
   const game = document.querySelector("#game").__game;
   const surface = game.renderer.surface;
-  // With `--query=view=fps` or `view=topdown3d` play is drawn by the 3D scene on
-  // the same renderer (248): GPU time and the finish window need no other
-  // context, and draw calls come from the view's own count.
+  // By default (since 2026-11-16) and with `--query=view=fps` play is drawn by
+  // the 3D scene on the same renderer (248): GPU time and the finish window need
+  // no other context, and draw calls come from the view's own count.
+  // `--query=view=fixed` measures the classic fixed view.
   const firstPerson = !!game.firstPerson?.drawing3d;
   const gl = surface?.renderer?.getContext?.();
   const timer = gl?.getExtension("EXT_disjoint_timer_query_webgl2") ?? null;

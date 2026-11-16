@@ -10,7 +10,7 @@ test(`driving produces inert visible roadkill and saves its death`, async ({ pag
   page.on("pageerror", (e) => errors.push(e.message));
   const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
   await page.goto(
-    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}`,
+    `/tilefun/?nogamepad&view=fixed&generation=${encodeURIComponent(JSON.stringify(generation))}`,
   );
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 15000 });
   await page.getByRole("button", { name: "New World", exact: true }).click();

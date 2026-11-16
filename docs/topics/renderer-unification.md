@@ -65,9 +65,19 @@ wanted as well, and a third renderer is not.
 
 Since 2026-11-16 the unified top-down view is the default. **Options → Pixel 3D
 top-down view** turns it off for the classic fixed view; the choice is saved on
-the device (`unifiedTopDown.ts`, local storage: only "0", the classic view, is
-remembered as a choice), not in the player profile, because it is a renderer
-choice like the others below. It stays in sync with the debug panel's
+the device (`unifiedTopDown.ts`, local storage "1" or "0"), not in the player
+profile, because it is a renderer choice like the others below. A device that
+made no choice gets the unified view, except where WebGL is a software
+rasteriser (SwiftShader, llvmpipe: `softwareWebGl` from the WebGL2 probe): the CPU
+would draw the 3D scene, and the classic view is far cheaper there. That
+includes the browser suite's headless Chromium, which runs at about a third of
+its usual pace with the 3D view on every page and misses timing-sensitive
+gameplay phases; `tests/unified-topdown.spec.ts` asks for the unified view
+explicitly. Full suite on 2026-11-16 after the default: 551 passed; 7 failed
+the same way on the session's starting commit (animal browser, aquatic
+hunters, controller menu, kangaroo, predator world: not renderer work); specs
+that instrument the fixed backend pin `view=fixed` ([inventory](#retirement-inventory)).
+It stays in sync with the debug panel's
 **Unified top-down 3D** (**F3**, or **More → Debug**) and `/r_topdown3d 1` / `0`
 in the console, which change only the current load. `?view=fixed` (or `2d`) and
 `?view=topdown3d` override the saved choice for one load. Specs that test the
@@ -150,7 +160,7 @@ were measured on 2026-11-15; the other rows are 251's.
 | Picking, tap and hold destinations | Done for the top-down camera | 251: it is the fixed view's own camera, so the fixed view's unprojection, markers and tap destinations are used unchanged. Cameras that turn (orbit, XR) still need a ray against the 3D ground |
 | Split-screen regions and diagonal masks | Done for play | Rectangular regions done (249), also for top-down 3D views. Play only lays out one view, two side by side or a 2×2 grid (`seatLayout`); the diagonal layout is used only by the GPU region probe, where a 3D view falls back to the fixed view. Not a retirement blocker unless play adopts it |
 | Door overlays and realm transitions | Done | 2026-11-16: the door-opening sprites (`DoorPresentation.appendOverlays`) join the 3D view's collection, and bodies crossing a door are the same presented copies as in the fixed view. A realm change resets the 3D scene's world |
-| Labs, explorer and renderer probes | Partial | 2026-11-16: labs on `LabView` (Workshop world geometry, traffic, parking and the other `LabView` labs) draw through the unified top-down view with `?view=topdown3d` on the Workshop URL, by the game's own path (`renderTopDown3d` and `drawSeen` in `firstPersonPlay.ts`: one collection, pixel grid, grass, effects and cutaway). Off by default, so review captures keep the fixed view; the device's Options choice does not apply to labs. Diagnostic world overlays are the fixed view's and are not drawn in 3D; room labs stay fixed; a fixture without terrain shows its background colour. `scripts/first-person/lab-capture.mjs` captures the world geometry lab both ways. The explorer and probes still pin the fixed view |
+| Labs, explorer and renderer probes | Partial | 2026-11-16: labs on `LabView` (Workshop world geometry, traffic, parking, natural landscapes, characters, the driving bench) draw through the unified top-down view by default since play's default changed, by the game's own path (`renderTopDown3d` and `drawSeen` in `firstPersonPlay.ts`: one collection, pixel grid, grass, effects and cutaway); `?view=fixed` on the Workshop URL pins the classic view. A hook's `overlay` drawing goes on the UI canvas above the 3D view. Room labs and labs with an `underlay` stay fixed; a fixture without terrain shows its background colour. `scripts/first-person/lab-capture.mjs` captures a lab both ways. The explorer, the terrain blend study and the renderer lab's probes still draw through the fixed backend: see [retirement inventory](#retirement-inventory) |
 | Context loss recovery | Done | 249 phase 1a; merged meshes re-upload (251) |
 
 Known disagreement to settle: in the `crowd` scene, cars parked north of the
@@ -388,8 +398,10 @@ for collision, the fixed view's depth and shadows, and the 3D volume alike.
 
 `npm run render:bench` is the common measure
 ([236](../tactical/236-render-scorecard-and-gpu-shadows.md) owns commands and
-limits). `--query=` selects the renderer under test: none for the fixed view,
-`view=topdown3d` for the unified top-down view, `view=fps` for first person.
+limits). `--query=` selects the renderer under test: `view=fixed` for the
+classic fixed view, `view=topdown3d` (or, since 2026-11-16, none) for the unified
+top-down view, `view=fps` for first person. The runs below predate the default
+and used none for the fixed view.
 
 All three devices, 2026-11-16, after building mode, raised ground, tree houses
 and the zoom-following sun map: render p50 in ms (missed frames), 5 s per cell,
@@ -501,6 +513,30 @@ Three owner decisions, in order. Each needs the evidence listed.
    period as default without reported regressions, and probes and labs moved or
    retired. The review raster stays.
 
+## Retirement inventory
+
+2026-11-16, after the default changed: what still draws through the fixed GPU
+backend (`GpuRenderBackend` world drawing), and what each needs before gate 3.
+The fixed renderer was not removed: gate 3 needs a period as the default without
+reported regressions, and the rows below are not all moved.
+
+| Consumer | Today | Before retirement |
+| --- | --- | --- |
+| Play, classic choice | Options, `?view=fixed`, `r_topdown3d 0` | Owner decision to drop the choice |
+| Software WebGL (SwiftShader, llvmpipe), the browser suite included | Classic view unless the unified one is chosen | Measure the 3D view in software; make it cheap enough, or keep a fallback |
+| Play fallbacks | The fixed view draws a view the 3D scene cannot: while its module loads or after it failed, graphics lost, a diagonal split-screen mask (probe only), `?rooms3d=0` | A 3D-only answer for each (a loading frame, a lost-context frame) |
+| Building mode with a seat in first person | Fixed view | Top-down 3D for that seat, or edit from first person |
+| Prop editor (`PropEditorScene`) | Fixed view | Move to the 3D scene or retire |
+| Room labs (`LabView` with `interior`: furniture playtest) | Fixed view | Play's top-down room form (`FirstPersonRoomScene`) for the lab's furnished room |
+| Labs with an `underlay` (outdoor geometry test's grid) | Fixed view | Draw the underlay in the 3D scene (a ground grid), as surface grids are |
+| World explorer tiles (`TilePreview`) | Fixed backend on an offscreen canvas | Draw tiles with the 3D scene's top-down camera, or keep a raster path |
+| Workshop terrain blend study (`TerrainBlendPreview`) | Fixed backend | The 3D ground, or the review raster |
+| Renderer lab probes (`renderer-lab.html`: registration, sprite seams, deferred shadows, surface decals, vehicle depth, camera stability, view regions) and `gpu-renderer.spec.ts` | Test the fixed backend itself | Retire with it; keep the parity probe until then |
+| Parity probe and film (`RendererParityProbe`, `parity.mjs`, `film.mjs`) | Draw both renderers | Retire with the fixed view |
+| Browser specs that instrument the fixed backend's scene pass or its vehicle-mesh counters (`gpu-renderer`, `jump-park`, `roadkill`, `train-recovery`, `vehicle-geometry`, `world-geometry` cutaway, `terrain-pacing`) | Pinned to `view=fixed` (2026-11-16); on GPU Chromium they would otherwise get the unified view | Unified-view equivalents (the 3D frame's collected items and body images), then retire the pins |
+| CPU terrain rasteriser and terrain pages | Shared: the 3D ground wears its chunk images | Stays |
+| Review raster (`ReviewRasterBackend`), showcases, patterns, Workshop candidates | Outside this work | Stays |
+
 ## Open questions
 
 - Top-down takes the sun's shadows (owner, 2026-11-16); the map follows the
@@ -540,23 +576,18 @@ Three owner decisions, in order. Each needs the evidence listed.
 
 ## Next
 
-Slice 4 is delivered for owner play, so the open work is:
+Item order after the default (2026-11-16):
 
+- **Owner and child play review** of the unified default, the one part of gate 2
+  not yet done. Reports of regressions decide whether the default holds.
+- **Checklist rows still open:** sprite edges (hard cutouts; wildlife's painted
+  soft shadows cut), standing cards one pixel off at 1×, excavations (229
+  limit), tow and bed groups in first person, the `crowd` parked-cars
+  disagreement. Each is either fixed or waived by the owner.
+- **Retirement inventory** above: move or retire each fixed consumer; then gate
+  3 after a period as the default.
 - **Owner checks in the headset**
   ([252](../tactical/252-xr-on-the-shared-scene.md#owner-checks-on-the-headset)):
   the controller mapping, comfort in first person, the tabletop's placement and
-  scale, and the Resume flow. These decide what the next XR work is; a HUD in
-  the session and multisampling are the known gaps.
-- **Slice 5, top-down parity**, ordered by what the probe measured. Building
-  bodies, grass and pixel vehicles are done. Owner check: whether the pixel
-  vehicle look is right in top-down play, and whether first person wants it. Next: sprite edges and pixel snapping together
-  (standing cards one pixel off, soft sprite shadows cut, small sprites
-  unfiltered when zoomed out), then particles and surface decals. Decide the
-  shadow look before touching shadows. Measure the phone and the Deck again
-  now that the unified view draws grass.
+  scale, and the Resume flow.
 - 230's orbit camera and stereo on the page can land at any time.
-
-Gate 1 (opt-in in Options) needs ground artwork (done), registration within the
-recorded tolerance (holds for ground, actors, vehicles and cards, and since
-2026-11-15 for solid props) and no missed frames in `city` and `woods` on the
-three devices (holds). It is an owner decision.

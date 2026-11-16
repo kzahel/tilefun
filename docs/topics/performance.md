@@ -9,7 +9,9 @@ GPU timer query where available and render plus `gl.finish()`. It runs against
 the isolated Vite server or a production origin (`--base`), in bundled Chromium,
 a phone's Chrome or the packaged Deck shell (`--cdp`, `--attach-page`).
 [236](../tactical/236-render-scorecard-and-gpu-shadows.md) owns the commands,
-limits, tables and next options.
+limits, tables and next options. Since 2026-11-16 play's default, and so the
+bench's, is the unified top-down view; `--query=view=fixed` measures the classic
+fixed view ([renderer unification](renderer-unification.md#device-scorecard)).
 Since [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) a cell
 also reports `meshDrawCallsPerFrame`: the vehicle meshes the fixed view draws
 into images, which its draw-call figure had left out (26 to 547 a frame in the

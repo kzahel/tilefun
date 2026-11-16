@@ -989,14 +989,18 @@ an unintended relaunch. Explicit Jump retains ordinary input physics.
 
 ## Unified top-down view in labs (2026-11-16)
 
-`LabView` labs accept `?view=topdown3d` on the Workshop URL: the view draws
-through the game's unified top-down path (`renderTopDown3d`, sharing
-`drawSeen` with play), with its own `FirstPersonControl` disposed with the lab.
-Slab fades run on the lab's display clock, as its fixed view's do; a fixture
-without terrain shows its background colour. Diagnostic overlays are fixed-view
-submissions and are not drawn over the 3D view; room labs stay on the fixed view.
-It is off by default so review captures are unchanged
-([renderer unification](renderer-unification.md)).
+`LabView` labs draw through the game's unified top-down path (`renderTopDown3d`,
+sharing `drawSeen` with play), with their own `FirstPersonControl` disposed with
+the lab. Since play made it the default the same day, labs follow the device's
+choice too (`unifiedTopDownChoice`: Options' saved choice, overridden by
+`?view=fixed` or `?view=topdown3d` on the Workshop URL). Slab fades run on the
+lab's display clock, as its fixed view's do; a fixture without terrain shows its
+background colour. A hook's `overlay` drawing goes on the render host's UI canvas
+above the 3D view (`RenderHost.drawUiOverlay`), so it sits above bodies. Room
+labs (`interior`) and labs with an `underlay` (the outdoor geometry test's grid
+under a prop) stay on the fixed view: neither has a 3D form yet. Review identities
+are unaffected: Workshop candidates and room reviews render through the review
+raster, not `LabView` ([renderer unification](renderer-unification.md)).
 
 ## Change and validation discipline
 

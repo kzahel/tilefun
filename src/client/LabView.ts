@@ -1,5 +1,6 @@
 import { closeAssets, type GameAssets, loadGameAssets } from "../assets/GameAssets.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
+import { unifiedTopDownChoice } from "../config/unifiedTopDown.js";
 import { GameLoop } from "../core/GameLoop.js";
 import { PerformanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import type { Entity } from "../entities/Entity.js";
@@ -14,6 +15,7 @@ import { loadRenderHostFactory } from "../rendering/RenderHostLoader.js";
 import type { SceneItem } from "../rendering/SceneItem.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import { ViewLayouts } from "../rendering/ViewLayout.js";
+import { requireWebGl2, softwareWebGl } from "../rendering/WebGl2Support.js";
 import { LabInput } from "../scenarios/LabInput.js";
 import type { ScenarioCommand } from "../scenarios/ScenarioProtocol.js";
 import type { ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
@@ -112,9 +114,9 @@ export class LabView {
   private displayedPlayer: Entity | undefined;
   private renderX = 0;
   private renderY = 0;
-  /** `?view=topdown3d` on the lab's page: the view draws through the unified 3D
-   * scene, as the game's opt-in does. Off by default, so review captures keep
-   * the fixed view until the renderer gate. */
+  /** The view draws through the unified 3D scene, as play does by default since
+   * 2026-11-16: the device's choice, or `?view=fixed` / `?view=topdown3d` on the
+   * lab's page. Room labs and labs with an underlay keep the fixed view. */
   private readonly unified: FirstPersonControl | undefined;
   /** Worlds loaded so far (`worldLoaded`). */
   private worlds = 0;
@@ -135,7 +137,17 @@ export class LabView {
     // A new world clears the device's presentation, this view's slab fades included.
     this.client.device.views.push(this.view);
     this.camera.pixelSnap = cameraPixelSnap(params);
-    if (params.get("view") === "topdown3d" && !options.interior) {
+    // Room labs, and labs that draw beneath the world (a grid under a prop),
+    // keep the fixed view: neither has a 3D form yet. The WebGL2 probe says
+    // whether graphics run in software; a missing context fails in `initialize`.
+    try {
+      requireWebGl2();
+    } catch {}
+    if (
+      unifiedTopDownChoice(location.search, globalThis.localStorage, softwareWebGl()) &&
+      !options.interior &&
+      !options.underlay
+    ) {
       this.unified = new FirstPersonControl(
         () => this.canvas,
         () => this.assets?.sheets ?? new Map(),
@@ -377,6 +389,8 @@ export class LabView {
             }
           : {}),
       });
+      // Drawn in 3D, the hooks' world overlays go on the UI canvas above it.
+      if (this.view.topDown3d) this.drawOverlay(this.options.overlay, true);
       this.options.uiOverlay?.(host.uiContext, this);
       this.input?.draw(host.uiContext);
       this.renderX = camera.x;
@@ -444,13 +458,15 @@ export class LabView {
     return this.alpha;
   }
 
-  /** One pass of a hook's drawing, in the presented camera's screen space. */
-  private drawOverlay(collect: LabViewOptions["overlay"]) {
+  /** One pass of a hook's drawing, in the presented camera's screen space: into
+   * the fixed view's world, or on the UI canvas above a view drawn in 3D. */
+  private drawOverlay(collect: LabViewOptions["overlay"], ui = false) {
     if (!collect || !this.host) return;
     this.overlays.begin();
     collect(this.overlays, this);
-    if (this.overlays.items.length)
-      this.host.renderer.submit(this.camera, { kind: "overlay", items: this.overlays.items });
+    if (!this.overlays.items.length) return;
+    if (ui) this.host.drawUiOverlay(this.overlays.items);
+    else this.host.renderer.submit(this.camera, { kind: "overlay", items: this.overlays.items });
   }
 
   getDiagnostics(): LabDiagnostics {

@@ -57,7 +57,7 @@ try {
   for (const unified of [false, true]) {
     const params = [
       "nogamepad",
-      unified ? "view=topdown3d" : "",
+      unified ? "view=topdown3d" : "view=fixed",
       query,
       `generation=${encodeURIComponent(JSON.stringify(generation))}`,
       `arrival=${encodeURIComponent(JSON.stringify(arrival))}`,

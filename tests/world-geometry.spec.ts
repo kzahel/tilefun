@@ -115,7 +115,7 @@ test.describe("phone controls", () => {
 test(`automatic cutaway follows rendered occlusion north and south of the deck`, async ({
   page,
 }) => {
-  await page.goto("/tilefun/workshop.html#/tool/world-geometry");
+  await page.goto("/tilefun/workshop.html?view=fixed#/tool/world-geometry");
   const c = page.getByLabel("World geometry scene");
   await expect(c).toHaveAttribute("data-ready", "true");
   const select = page.getByLabel("Visible surfaces");
