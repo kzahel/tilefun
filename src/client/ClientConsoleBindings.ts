@@ -81,6 +81,10 @@ export function registerClientConsole(
     if (gc.firstPerson) gc.firstPerson.groundNearest = val;
   });
   if (gc.firstPerson?.groundNearest) clientCVars.r_groundnearest.set(true);
+  clientCVars.r_pixelgrid.onChange((val) => {
+    if (gc.firstPerson) gc.firstPerson.pixelGrid = val;
+  });
+  if (gc.firstPerson?.pixelGrid) clientCVars.r_pixelgrid.set(true);
   // A headset session's display rate (252); a running session keeps its own.
   clientCVars.xr_rate.onChange((val) => {
     if (gc.xr) gc.xr.frameRate = Math.max(0, val);

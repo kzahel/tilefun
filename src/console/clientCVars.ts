@@ -25,6 +25,7 @@ export interface ClientCVars {
   r_topdown3d: CVar<boolean>;
   r_pixelcars3d: CVar<boolean>;
   r_groundnearest: CVar<boolean>;
+  r_pixelgrid: CVar<boolean>;
   xr_rate: CVar<number>;
 }
 
@@ -226,6 +227,15 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "r",
   });
 
+  const r_pixelgrid = engine.cvars.register<boolean>({
+    name: "r_pixelgrid",
+    description:
+      "Prototype: the 3D top-down view places camera, entities and grass on one screen-pixel grid (?pixelgrid=1)",
+    type: "boolean",
+    defaultValue: false,
+    category: "r",
+  });
+
   const xr_rate = engine.cvars.register<number>({
     name: "xr_rate",
     description: "Display rate a headset session asks for, in Hz (0 keeps the headset's own)",
@@ -257,6 +267,7 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     r_topdown3d,
     r_pixelcars3d,
     r_groundnearest,
+    r_pixelgrid,
     xr_rate,
   };
 }

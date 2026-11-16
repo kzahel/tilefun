@@ -228,8 +228,13 @@ while the camera settles (after the best whole-pixel shift; walk 1.5 s at
 | city 1× | 37, 210 | 0, 0 |
 | city 0.5× | 47, 219 | 15, 6 |
 
-The rigid column is film-only: the probe moves copies of entities and blades.
-Play needs the same placement inside sprite and grass collection.
+Both prototypes are in play for the owner to try, top-down 3D only:
+`?view=topdown3d&groundnearest=1` and `?view=topdown3d&pixelgrid=1` (console
+`r_groundnearest`, `r_pixelgrid`). The pixel grid (`PixelGrid.ts`) copies each
+entity whose position is off the grid every frame, which is fine for a
+prototype but not for the crowd; a kept version belongs in sprite collection.
+Picking and markers still use the fixed view's continuous camera, up to one
+screen pixel from the gridded eye.
 
 ### Pond shoreline comparison
 

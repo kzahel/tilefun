@@ -16,6 +16,11 @@ import type {
   InteriorFurnitureArt,
 } from "../rendering/firstperson/FirstPersonInterior.js";
 import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js";
+import {
+  bladesOnPixelGrid,
+  entitiesOnPixelGrid,
+  onPixelGrid,
+} from "../rendering/firstperson/PixelGrid.js";
 import { collectCameraGrass } from "../rendering/GrassBladeRenderer.js";
 import type { SpriteItem } from "../rendering/SceneItem.js";
 import type { SeatFrame } from "../session/DeviceSeats.js";
@@ -218,13 +223,16 @@ function seen(
   // Rooms are drawn roofless by the fixed view; the 3D scene has only walled rooms.
   if (!control.topDown || gc.stateView.interior) return undefined;
   const { camera } = view;
+  // The pixel-grid prototype puts the eye on the grid its content stands on.
+  const x = control.pixelGrid ? onPixelGrid(camera.x, camera.scale) : camera.x;
+  const y = control.pixelGrid ? onPixelGrid(camera.y, camera.scale) : camera.y;
   const ground = obliqueGround(
-    { x: camera.x, y: camera.y, scale: camera.scale },
+    { x, y, scale: camera.scale },
     view.region.width,
     view.region.height,
   );
   return {
-    eye: { x: camera.x, y: camera.y, z: 0, yaw: NORTH_YAW, pitch: 0 },
+    eye: { x, y, z: 0, yaw: NORTH_YAW, pitch: 0 },
     own: undefined,
     cull: grown(ground, TOP_DOWN_CULL_SIDE, TOP_DOWN_CULL_BELOW),
     drawRadius: Math.hypot(ground.right - ground.left, ground.bottom - ground.top) / 2,
@@ -253,8 +261,10 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
     return false;
   }
   const { eye, drawRadius, topDown } = from;
-  const entities =
+  const presented =
     gc.doorPresentation?.entities(stateView.entities, gc.realmId ?? null) ?? stateView.entities;
+  const grid = topDown && control.pixelGrid ? topDown.scale : undefined;
+  const entities = grid ? entitiesOnPixelGrid(presented, grid) : presented;
   const interior = topDown ? undefined : currentInterior(gc, control);
   const frame = control.frame;
   frame.presentationTime = gc.time?.presentationSeconds ?? 0;
@@ -269,6 +279,7 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
           frame.grass,
         )
       : undefined;
+  if (grid && grass) bladesOnPixelGrid(grass, grid);
   const items = frame.begin(!!grass?.length);
   let drawn = false;
   try {
@@ -295,7 +306,7 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
       shadows: control.shadows,
       topDown,
       pixelBodies: control.pixelBodies,
-      groundNearest: control.groundNearest,
+      groundNearest: control.groundNearest || !!grid,
       grass,
       headset: from.headset,
     };

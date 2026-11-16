@@ -7,6 +7,11 @@ import { NORTH_YAW } from "../rendering/firstperson/FirstPersonCamera.js";
 import { propForm } from "../rendering/firstperson/FirstPersonProps.js";
 import type { SceneLayers } from "../rendering/firstperson/FirstPersonView.js";
 import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js";
+import {
+  bladesOnPixelGrid,
+  entitiesOnPixelGrid,
+  onPixelGrid,
+} from "../rendering/firstperson/PixelGrid.js";
 import { collectCameraGrass } from "../rendering/GrassBladeRenderer.js";
 import {
   type CategoryParity,
@@ -502,18 +507,8 @@ function parityStage(game: GameTestHooks) {
     Object.assign(scene.layers, layers);
     const frame = control.frame;
     frame.presentationTime = time;
-    const grid = (v: number) => Math.round(v * camera.scale) / camera.scale;
-    const all = rigid
-      ? drawnEntities().map((entity) => ({
-          ...entity,
-          position: {
-            ...entity.position,
-            wx: grid(entity.position.wx),
-            wy: grid(entity.position.wy),
-          },
-        }))
-      : drawnEntities();
-    if (rigid) eye = { x: grid(eye.x), y: grid(eye.y) };
+    const all = rigid ? entitiesOnPixelGrid(drawnEntities(), camera.scale) : drawnEntities();
+    if (rigid) eye = { x: onPixelGrid(eye.x, camera.scale), y: onPixelGrid(eye.y, camera.scale) };
     // As play collects them: the fixed view's blades for this camera. Bodies push
     // blades aside, so a picture without bodies has none pushed, as in `drawFixed`.
     const pushing = layers.actors || layers.vehicles ? all : [];
@@ -521,11 +516,7 @@ function parityStage(game: GameTestHooks) {
       layers.grass && game.renderer.assets.has("grass-blades")
         ? collectCameraGrass(stateView.world, pushing, camera, time, frame.grass)
         : undefined;
-    if (rigid)
-      for (const blade of grass ?? []) {
-        blade.wx = grid(blade.wx);
-        blade.wy = grid(blade.wy);
-      }
+    if (rigid && grass) bladesOnPixelGrid(grass, camera.scale);
     const ground = obliqueGround({ x: eye.x, y: eye.y, scale: camera.scale }, width, height);
     const items = frame.begin(!!grass?.length);
     try {
