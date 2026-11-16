@@ -215,12 +215,8 @@ export class GameClient implements GameTestHooks {
     if (new URLSearchParams(window.location.search).has("nogamepad")) {
       this.actions.disableGamepad();
     }
-    this.playInput = new PlayInputController(
-      canvas,
-      this.actions,
-      this.playInputHost(),
-      inputSettings,
-    );
+    const playInputHost = this.playInputHost();
+    this.playInput = new PlayInputController(canvas, this.actions, playInputHost, inputSettings);
     this.touchJoystick = this.playInput.touchJoystick;
     this.touchButtons = this.playInput.touchButtons;
     this.tapMovement = this.playInput.tapMovement;
@@ -687,6 +683,7 @@ export class GameClient implements GameTestHooks {
         return client.stateView;
       },
       view: this.view,
+      firstPerson: this.firstPerson,
       transport: this.transport,
       get audioManager() {
         return client.audioManager;

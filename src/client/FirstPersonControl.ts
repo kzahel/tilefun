@@ -24,6 +24,8 @@ export const FIRST_PERSON_TERRAIN: Pick<RenderBackend, "isTerrainReady"> = {
 };
 
 const MOUSE_RADIANS_PER_PIXEL = 0.0025;
+/** Match mclone's default: radians per drag across the view's shorter side. */
+const TOUCH_LOOK_SENSITIVITY = 2.4;
 const STICK_YAW_RATE = 2.6;
 const STICK_PITCH_RATE = 1.6;
 /** A seat without a look device turns with its left and right keys. */
@@ -294,6 +296,12 @@ export class FirstPersonControl {
     view.look.yaw += yaw;
     view.look.pitch = clampPitch(view.look.pitch + pitch);
     this.lastManualLook.set(view, performance.now());
+  }
+
+  /** Seat 0's right-side touch drag; independent of the keyboard control scheme. */
+  touchLook(dx: number, dy: number): void {
+    if (!this.host || !this.drawing) return;
+    this.turn(this.host, dx * TOUCH_LOOK_SENSITIVITY, -dy * TOUCH_LOOK_SENSITIVITY);
   }
 
   /** Per tick for a view drawn in 3D: its seat's look stick, then a driving camera

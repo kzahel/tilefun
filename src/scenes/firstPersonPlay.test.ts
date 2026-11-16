@@ -63,6 +63,26 @@ const forward = { dx: 0, dy: -1, sprinting: false, jump: false };
 const pick = (m: { dx: number; dy: number }) => ({ dx: m.dx, dy: m.dy });
 
 describe("first-person play input", () => {
+  it("touch look turns right, looks up and clamps pitch in either keyboard scheme", () => {
+    const { control, view, sync } = setup();
+    control.setActive(true, NORTH_YAW);
+    sync();
+    control.touchLook(0.1, -0.1); // loading: ordinary controls
+    expect(view.look).toEqual({ yaw: NORTH_YAW, pitch: 0 });
+    control.markDrawn(view);
+    control.touchLook(0.1, -0.1);
+    expect(view.look?.yaw).toBeCloseTo(NORTH_YAW + 0.24);
+    expect(view.look?.pitch).toBeCloseTo(0.24);
+    control.controls = "mouse";
+    control.touchLook(0.1, -100);
+    expect(view.look?.yaw).toBeCloseTo(NORTH_YAW + 0.48);
+    expect(view.look?.pitch).toBeLessThan(Math.PI / 2);
+    control.hideView();
+    const before = { ...view.look };
+    control.touchLook(1, 1);
+    expect(view.look).toEqual(before);
+  });
+
   it("simple keyboard turns and walks in a level curve at full walking speed", () => {
     const { control, gc, view, sync, actions } = setup();
     control.setActive(true, NORTH_YAW);

@@ -208,7 +208,7 @@ export class OptionsDialog {
     this.updateFirstPersonControlsHelp();
     // Key labels follow the player's layout, which may be learned during play.
     const k = keyLabel;
-    this.firstPersonHelp.textContent = `${k("KeyV")} switches first-person view until you reload; this box is the saved choice. A controller's right stick looks around in either control mode.`;
+    this.firstPersonHelp.textContent = `${k("KeyV")} switches first-person view until you reload; this box is the saved choice. A controller's right stick looks around in either control mode. With touch Joystick, drag on the left half to move and on the right half to look around.`;
     this.controls.textContent = `A / ${k("Space")} Jump · X / ${k("KeyB")} Throw · Y / ${k("KeyE")} Interact · RT / Shift Fast · RB / ${k("KeyH")} Horn · D-pad ↑ / ${k("KeyL")} Lights · D-pad → / ${k("KeyK")} Siren style. LB / Tab Build–Play · View / ${k("KeyG")} Map · Menu / Escape Pause. Right stick moves the cursor over the world and tools (in first person it looks around); A or RT selects. In menus: A Select · B Back. While building: RT Paint · LT Erase · Y Tools.`;
     if (!this.visible) this.dialog.showModal();
     activateMenu(this.dialog, () => this.hide(), false);

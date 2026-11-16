@@ -2,7 +2,7 @@
 
 Topic: pinch-zoom
 Status: Optional gameplay pinch zoom delivered; physical device trial next.
-Updated: 2026-10-19.
+Updated: 2026-11-16.
 
 The gear, hamburger and main-menu Options dialog has a **Two-finger pinch to
 zoom** checkbox. It defaults to off and is remembered per local browser player
@@ -10,6 +10,11 @@ profile. Missing or invalid values stay off. Storage failure leaves the selected
 setting usable for the session and reports that it could not be remembered.
 
 ## Gesture contract
+
+Gameplay pinch is disabled while the game draws first person. In Joystick mode,
+the left thumb moves and the right thumb looks; a neutral movement thumb and a
+look drag must never become a pinch. The saved preference still applies on
+returning to top-down play. See [FPS touch roles](touch-movement.md#first-person-joystick).
 
 Pinch uses exactly two world-canvas contacts. Both may arrive together, or the
 second must arrive within 200 ms of the first, before the first moves more than

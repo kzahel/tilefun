@@ -1,4 +1,4 @@
-import { canvasPoint, inRegion, type ViewRegion, withCssPixels } from "./ViewRect.js";
+import { canvasPoint, inRegion, type ViewRegion, wholeCanvas, withCssPixels } from "./ViewRect.js";
 
 const BASE_RADIUS = 60;
 const THUMB_RADIUS = 28;
@@ -23,8 +23,14 @@ interface JoystickState {
 
 export class TouchJoystick {
   private state: JoystickState | null = null;
+  private lookState: { touchId: number; x: number; y: number } | null = null;
+  private splitLook = false;
   private canvas: HTMLCanvasElement;
-  enabled = true;
+  private available = true;
+  /** First person splits the view: left moves, right drags to look. */
+  lookEnabled: () => boolean = () => false;
+  /** Drag delta as a fraction of the view's shorter CSS dimension; right/down positive. */
+  onLook: ((dx: number, dy: number) => void) | null = null;
   /** Called when a short tap (no drag) is detected. Coordinates are client-space. */
   onTap: ((clientX: number, clientY: number) => void) | null = null;
   /** Touch IDs claimed by other systems (e.g. TouchButtons). Joystick ignores these. */
@@ -34,6 +40,22 @@ export class TouchJoystick {
 
   constructor(canvas: HTMLCanvasElement) {
     this.canvas = canvas;
+  }
+
+  get enabled(): boolean {
+    return this.available;
+  }
+
+  set enabled(value: boolean) {
+    this.available = value;
+    if (!value) this.reset();
+  }
+
+  /** A view change requires fresh contacts; an old drag never changes roles. */
+  private syncLook(): void {
+    const split = this.lookEnabled();
+    if (split !== this.splitLook) this.reset();
+    this.splitLook = split;
   }
 
   attach(): void {
@@ -48,20 +70,23 @@ export class TouchJoystick {
     this.canvas.removeEventListener("touchmove", this.onTouchMove);
     this.canvas.removeEventListener("touchend", this.onTouchEnd);
     this.canvas.removeEventListener("touchcancel", this.onTouchEnd);
-    this.state = null;
+    this.reset();
   }
 
   isActive(): boolean {
+    this.syncLook();
     return this.enabled && this.state !== null;
   }
 
   reset(): void {
     this.state = null;
+    this.lookState = null;
   }
 
   /** Get analog movement vector. dx/dy in [-1, 1], magnitude capped at 1. */
   getMovement(): { dx: number; dy: number } {
-    if (!this.state) return { dx: 0, dy: 0 };
+    this.syncLook();
+    if (!this.enabled || !this.state) return { dx: 0, dy: 0 };
 
     const rawDx = (this.state.thumbX - this.state.baseX) / MAX_DISTANCE;
     const rawDy = (this.state.thumbY - this.state.baseY) / MAX_DISTANCE;
@@ -139,14 +164,22 @@ export class TouchJoystick {
   }
 
   private onTouchStart = (e: TouchEvent): void => {
+    this.syncLook();
     if (!this.enabled) return;
+    const region = this.region ?? wholeCanvas(this.canvas);
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
       if (!touch) continue;
       // Skip touches claimed by other systems (e.g. on-screen buttons)
       if (this.claimedTouches?.has(touch.identifier)) continue;
       const at = canvasPoint(this.canvas, touch.clientX, touch.clientY);
-      if (!this.state && (!this.region || inRegion(this.region, at))) {
+      if (!inRegion(region, at)) continue;
+      if (this.splitLook && at.x >= region.x + region.width / 2) {
+        if (!this.lookState) this.lookState = { touchId: touch.identifier, ...at };
+        e.preventDefault();
+        continue;
+      }
+      if (!this.state) {
         // First finger: joystick
         this.state = {
           touchId: touch.identifier,
@@ -164,22 +197,39 @@ export class TouchJoystick {
   };
 
   private onTouchMove = (e: TouchEvent): void => {
-    if (!this.state) return;
+    this.syncLook();
+    if (!this.enabled) return;
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
-      if (touch && touch.identifier === this.state.touchId) {
+      if (!touch) continue;
+      if (touch.identifier === this.lookState?.touchId) {
+        const at = canvasPoint(this.canvas, touch.clientX, touch.clientY);
+        const region = this.region ?? wholeCanvas(this.canvas);
+        const span = Math.max(1, Math.min(region.width, region.height));
+        this.onLook?.((at.x - this.lookState.x) / span, (at.y - this.lookState.y) / span);
+        this.lookState = { touchId: touch.identifier, ...at };
+        e.preventDefault();
+      } else if (touch.identifier === this.state?.touchId) {
         const at = canvasPoint(this.canvas, touch.clientX, touch.clientY);
         this.clampThumb(at.x, at.y);
         e.preventDefault();
-        return;
       }
     }
   };
 
   private onTouchEnd = (e: TouchEvent): void => {
+    this.syncLook();
+    if (e.type === "touchcancel") {
+      this.reset();
+      return;
+    }
     for (let i = 0; i < e.changedTouches.length; i++) {
       const touch = e.changedTouches[i];
       if (!touch) continue;
+      if (touch.identifier === this.lookState?.touchId) {
+        this.lookState = null;
+        e.preventDefault();
+      }
       if (this.state && touch.identifier === this.state.touchId) {
         // Detect tap: short duration + minimal movement
         const elapsed = performance.now() - this.state.startTime;
@@ -187,7 +237,7 @@ export class TouchJoystick {
         const dy = touch.clientY - this.state.clientY;
         const moved = Math.hypot(dx, dy);
         if (
-          e.type !== "touchcancel" &&
+          !this.splitLook &&
           elapsed < TAP_MAX_DURATION_MS &&
           moved < TAP_MAX_DISTANCE &&
           this.onTap

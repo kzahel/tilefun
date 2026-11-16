@@ -16,6 +16,7 @@ import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import type { RemoteStateView } from "./ClientStateView.js";
+import type { FirstPersonControl } from "./FirstPersonControl.js";
 
 /**
  * Client state the play input reads lazily. Several members are created after
@@ -34,6 +35,7 @@ export interface PlayInputHost {
   readonly storagePaused: boolean;
   /** The hamburger panel or the Options dialog is open. */
   readonly menuOpen: boolean;
+  readonly firstPerson?: Pick<FirstPersonControl, "drawing" | "touchLook">;
   zoom: number;
 }
 
@@ -66,6 +68,10 @@ export class PlayInputController {
   ) {
     this.settings = settings;
     this.touchJoystick = new TouchJoystick(canvas);
+    this.touchJoystick.lookEnabled = () => this.host.firstPerson?.drawing === true;
+    this.touchJoystick.onLook = (dx, dy) => {
+      if (this.playActive()) this.host.firstPerson?.touchLook(dx, dy);
+    };
     this.touchButtons = new TouchButtons(canvas);
     this.touchTap = new TouchTap(
       canvas,
@@ -89,7 +95,7 @@ export class PlayInputController {
     this.touchPinch = new TouchPinch(
       canvas,
       this.touchButtons.claimedTouches,
-      () => this.pinchZoom && this.playActive(),
+      () => this.pinchZoom && this.playActive() && !this.host.firstPerson?.drawing,
       () => {
         const { dx, dy } = this.touchJoystick.getMovement();
         return dx !== 0 || dy !== 0;

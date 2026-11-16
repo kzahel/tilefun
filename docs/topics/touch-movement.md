@@ -2,7 +2,7 @@
 
 Topic: touch-movement
 Status: Joystick, tap and hold movement delivered; all validation passes, child device trial next.
-Updated: 2026-10-19.
+Updated: 2026-11-16.
 
 Options is available from the gear, hamburger and main menu. It offers Joystick
 (default), Tap to move and Hold to move, remembered per local browser profile.
@@ -22,6 +22,41 @@ Shared Options now participates in controller focus/back navigation. The main
 menu uses separate Worlds, Multiplayer and Character pages; the browser sidebar
 and gear shortcut remain. [Steam Deck and menus](steam-deck-and-menus.md) owns
 controller semantics and packaged acceptance.
+
+## First-person joystick
+
+While seat 0's view is drawn in first person, Joystick divides that view at its
+horizontal midpoint: a finger starting on the left moves relative to the camera
+on foot, and a finger starting on the right drags the camera's yaw and pitch.
+Driving retains the chosen car controls.
+Both work simultaneously, in either finger order and with either keyboard control
+scheme. Each finger keeps its original role if it crosses the midpoint; lifting
+one leaves the other active. Action-button touches retain priority, and extra
+fingers cannot take over an occupied role. The split uses the view's CSS bounds,
+including a scaled canvas or local split screen; guest views cannot claim it.
+
+Look sensitivity matches mclone's default, 2.4 radians per drag across the shorter
+view dimension. Right drags turn right, upward drags look up, and the existing
+pitch clamp and vehicle camera follow delay apply. FPS disables gameplay pinch
+zoom so two thumbs cannot start a pinch, and joystick releases do not interact
+through the hidden top-down camera. The Options help describes the two sides.
+Tap/hold destinations remain disabled in FPS. Top-down views and embedded labs
+keep the ordinary full-view joystick unless they opt into split touch look.
+
+Input resets, cancellation, disabling, scene detach and changing between FPS and
+top-down discard movement/look contacts and require a fresh touch-down. The
+shared input owner's existing menu, focus and travel resets clear both roles.
+
+Validation: 142 focused native cases cover the joystick, button/pinch arbitration,
+CSS regions, action composition and first-person movement/look. The FPS Chromium
+boundary and all three existing pinch browser cases pass, as do typechecks,
+focused lint, the code-health ratchet, regenerated inventories and the production
+build. All 2,130 Workshop candidate identities remain unchanged. The FPS browser
+case covers right-first look and simultaneous movement/look with pinch enabled;
+its initial failure lifted the wrong finger in CDP, corrected before the passing
+rerun. Physical phone/child usability remains a device trial.
+
+## Tap and hold browser targeting
 
 Browser targeting waits for the scene's rendered camera capture before projecting
 touch coordinates. The slow first-tap/fullscreen regression controls the page clock
