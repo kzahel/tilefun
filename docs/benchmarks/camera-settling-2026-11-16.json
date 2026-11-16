@@ -1,0 +1,79 @@
+{
+  "date": "2026-11-16T19:45:23.354Z",
+  "renderer": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+  "command": "node scripts/first-person/settling.mjs",
+  "fixture": {
+    "scene": "regional seed 2026, woods (-380, -364)",
+    "hz": 60,
+    "walkSeconds": 1.5,
+    "speedWorldPixelsPerSecond": 64,
+    "stopPhaseScreenPixels": 0.5001,
+    "captureSeconds": 4,
+    "worldPresentationTime": "held constant",
+    "outputColumns": [
+      "before (left)",
+      "after (right)"
+    ]
+  },
+  "measurement": "Changes to actual unified-renderer crop pixels between frames, excluding diagnostic text. Gap is the still interval preceding a later changed frame.",
+  "cells": [
+    {
+      "zoom": 1,
+      "before": {
+        "longestStillGapMs": 1450,
+        "lastPixelChangeAfterStopMs": 2000
+      },
+      "after": {
+        "longestStillGapMs": 116.66666666666667,
+        "lastPixelChangeAfterStopMs": 550,
+        "finalResidualWorldPixels": 0
+      }
+    },
+    {
+      "zoom": 0.5,
+      "before": {
+        "longestStillGapMs": 1466.6666666666667,
+        "lastPixelChangeAfterStopMs": 1900
+      },
+      "after": {
+        "longestStillGapMs": 100,
+        "lastPixelChangeAfterStopMs": 433.3333333333333,
+        "finalResidualWorldPixels": 0
+      }
+    }
+  ],
+  "errors": [],
+  "nativeRegression": {
+    "hz": [
+      30,
+      60,
+      120
+    ],
+    "zooms": [
+      0.25,
+      0.5,
+      1,
+      1.3,
+      2
+    ],
+    "stopPhases": [
+      0,
+      0.25,
+      0.49,
+      0.4999,
+      0.5,
+      0.5001,
+      0.51,
+      0.75,
+      0.99
+    ],
+    "directions": [
+      -1,
+      1
+    ],
+    "traces": 270,
+    "maxAllowedStillGapSeconds": 0.15,
+    "exactTargetBySecondsAfterStop": 0.75
+  },
+  "limitations": "Deterministic stationary-target replay isolates camera settling; hardware pixel checks are on this Mac only, not phone, Steam Deck or XR."
+}

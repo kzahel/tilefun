@@ -267,6 +267,36 @@ turns it off; `?groundnearest=1` keeps only the ground sampling. The film's
 markers still use the fixed view's continuous camera, up to half a screen pixel
 from the gridded eye.
 
+**Delayed final pixel step, fixed 2026-11-16.** A second owner report identified
+a different settling fault: the picture appears still, then moves one pixel
+after a long pause. The render-time exponential follow had no finite endpoint.
+Stopping just beyond a rounding boundary reproduced a 1,450–1,467 ms still
+interval before that last step, even with every layer sharing the pixel grid.
+`Camera.presentFollow` now finishes each stationary axis when its remaining
+error is at most one screen pixel (`1 / camera.scale`). Moving targets keep the
+existing response, including slow travel; the change does not increase the
+general follow rate. The fixed view and following labs share this policy. The
+ordinary film's stop replay now uses `Camera.presentFollow` too.
+
+`node scripts/first-person/settling.mjs` replays the original unbounded follow
+and production camera through the actual unified renderer, with the same frozen
+world and a stop 0.0001 screen pixels beyond a rounding boundary. It asserts the
+old fault reproduces in the captured pixels and that the new run has no step
+after a still interval longer than 150 ms. On the M4 Pro's Metal renderer at
+60 Hz, the longest still interval is now 117 ms at 1× and 100 ms at 0.5×; the
+last pixel moves 550 / 433 ms after stopping and the camera then equals its
+target exactly. The runner writes before/after videos (left/right), frames and
+full traces to its `--out` directory; the compact
+[measurement record](../benchmarks/camera-settling-2026-11-16.json) is committed.
+
+`CameraFollow.test.ts` covers 270 traces across 30/60/120 Hz, five zooms,
+both directions and rounding ties, with no pixel movement after a >150 ms
+still interval and exact settlement within 750 ms of the stop. It also retains
+slow motion and restart behavior. All 66 selected camera, timeline, player,
+top-down scene and lab presentation tests pass, together with typechecks,
+focused lint, code health and the generated art/Workshop inventories. This is
+Mac evidence; no phone or Deck run is claimed.
+
 ### Pond shoreline comparison
 
 2026-11-15: investigated the owner's report that pond edges look different in

@@ -19,12 +19,15 @@ const DECAY_RATE = -Math.log(1 - CAMERA_LERP) * TICK_RATE;
 /** Exact exponential follow of a target moving linearly between observations.
  * It composes across omitted render frames for straight constant-speed motion.
  * A repeated/regressing timestamp cannot advance state. Resets pass null.
+ * `settleDistance` finishes a stationary axis's sub-pixel tail. Without it, an
+ * arbitrarily small residual can cross a pixel boundary after a long still frame.
  */
 export function advanceCameraFollow(
   previous: CameraFollowState | null,
   time: number,
   targetX: number,
   targetY: number,
+  settleDistance = 0,
 ): CameraFollowState {
   if (!previous) return { time, x: targetX, y: targetY, targetX, targetY };
   const dt = time - previous.time;
@@ -33,7 +36,10 @@ export function advanceCameraFollow(
   const gain = -Math.expm1(-DECAY_RATE * dt);
   const axis = (value: number, start: number, end: number) => {
     const velocity = (end - start) / dt;
-    return end + (value - start) * decay - (velocity * gain) / DECAY_RATE;
+    const next = end + (value - start) * decay - (velocity * gain) / DECAY_RATE;
+    // Finish while the picture is still stepping, at most one screen pixel
+    // away. Do not change the response to slow movement or moving targets.
+    return start === end && Math.abs(next - end) <= settleDistance ? end : next;
   };
   return {
     time,

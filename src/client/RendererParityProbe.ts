@@ -1,7 +1,7 @@
 import { VIEW_BACKDROP_CSS } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
-import { advanceCameraFollow, type CameraFollowState } from "../rendering/CameraFollow.js";
+import { Camera } from "../rendering/Camera.js";
 import { collectWorldSprites } from "../rendering/collectScene.js";
 import { NORTH_YAW } from "../rendering/firstperson/FirstPersonCamera.js";
 import { propForm } from "../rendering/firstperson/FirstPersonProps.js";
@@ -212,7 +212,7 @@ export interface FilmOptions {
   /** Every other entity's travel per frame, world pixels (none by default). */
   others?: { x: number; y: number };
   /** The player stops after this many frames, and the camera follows as in play
-   * (`advanceCameraFollow`, `frameSeconds` a frame) instead of moving with it. */
+   * (`Camera.presentFollow`, `frameSeconds` a frame) instead of moving with it. */
   stopAt?: number;
   frameSeconds?: number;
   /** Frames `from` … `from + count − 1`, so a long film can be read in parts. */
@@ -300,7 +300,7 @@ export function filmRendererParity(
     for (let i = options.from; i < options.from + options.count; i++) {
       const dx = options.step.x * walked(i),
         dy = options.step.y * walked(i);
-      const at = filmCamera(options, start, i);
+      const at = filmCamera(options, start, i, camera.zoom);
       camera.x = at.x;
       camera.y = at.y;
       stage.moveEntities(
@@ -363,24 +363,24 @@ export function filmRendererParity(
   return { start, frames };
 }
 
-/** Frame `i`'s camera: carried with the player, or trailing it as play's
- * follow does from rest at the start. */
-function filmCamera(options: FilmOptions, start: FilmStart, i: number): { x: number; y: number } {
+/** Frame `i`'s camera: carried with the player or following from rest, as play does. */
+function filmCamera(options: FilmOptions, start: FilmStart, i: number, zoom: number) {
   const { step, stopAt } = options;
   if (stopAt === undefined)
     return { x: start.camera.x + step.x * i, y: start.camera.y + step.y * i };
   const seconds = options.frameSeconds ?? 1 / 60;
-  let state: CameraFollowState | null = null;
+  const camera = new Camera();
+  camera.zoom = zoom;
   for (let k = 0; k <= i; k++) {
     const walked = Math.min(k, stopAt);
-    state = advanceCameraFollow(
-      state,
+    camera.presentFollow(
       k * seconds,
       start.camera.x + step.x * walked,
       start.camera.y + step.y * walked,
+      "film",
     );
   }
-  return state ?? start.camera;
+  return camera;
 }
 
 /** The camera centre that puts the view's middle on a whole screen pixel. */

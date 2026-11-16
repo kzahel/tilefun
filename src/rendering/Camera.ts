@@ -122,7 +122,13 @@ export class Camera {
       this.presentedFollow = { ...this.presentedFollow, time, targetX, targetY };
     }
     this.presentedDomain = domain;
-    this.presentedFollow = advanceCameraFollow(this.presentedFollow, time, targetX, targetY);
+    this.presentedFollow = advanceCameraFollow(
+      this.presentedFollow,
+      time,
+      targetX,
+      targetY,
+      1 / this.scale,
+    );
     this.x = this.presentedFollow.x;
     this.y = this.presentedFollow.y;
     this.actualX = this.x;
