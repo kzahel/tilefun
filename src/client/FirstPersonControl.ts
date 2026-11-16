@@ -67,6 +67,9 @@ export class FirstPersonControl {
   viewDistance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE;
   /** Sun and contact shadows (247); `r_fpshadows` and `?fpshadows=0` set it. */
   shadows = new URLSearchParams(location.search).get("fpshadows") !== "0";
+  /** With shadows on, the sun's too (else contact shadows only); `r_sun3d` and
+   * `?sun3d=0` set it. */
+  sun = new URLSearchParams(location.search).get("sun3d") !== "0";
   /** Top-down 3D views draw vehicles as the fixed view's outlined native-pixel
    * images; `r_pixelcars3d` and `?pixelcars=0` set it. */
   pixelBodies = new URLSearchParams(location.search).get("pixelcars") !== "0";

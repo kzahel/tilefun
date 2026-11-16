@@ -537,6 +537,7 @@ function parityStage(game: GameTestHooks) {
             sprites: items.filter((item): item is SpriteItem => item.kind === "sprite"),
             drawRadius: Math.hypot(width, height) / (2 * camera.scale),
             shadows,
+            sun: control.sun,
             topDown: { scale: camera.scale },
             // As the player has it: `r_pixelcars3d` can turn vehicle images off.
             pixelBodies: control.pixelBodies,

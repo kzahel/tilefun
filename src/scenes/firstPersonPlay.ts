@@ -300,6 +300,7 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
       drawRadius,
       interior,
       shadows: control.shadows,
+      sun: control.sun,
       topDown,
       pixelBodies: control.pixelBodies,
       groundNearest: control.groundNearest || !!grid,

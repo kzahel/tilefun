@@ -34613,7 +34613,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:432"
+          "source": "src/rendering/scene/EntitySprites.ts:440"
         },
         {
           "system": "Gameplay",
@@ -35515,7 +35515,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:264"
+          "source": "src/rendering/scene/EntitySprites.ts:272"
         },
         {
           "system": "Gameplay",
@@ -38255,11 +38255,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/RendererParityProbe.ts:484"
+          "source": "src/client/RendererParityProbe.ts:480"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/RendererParityProbe.ts:516"
+          "source": "src/client/RendererParityProbe.ts:512"
         },
         {
           "system": "Gameplay",
@@ -38279,11 +38279,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:366"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:368"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/firstPersonPlay.ts:273"
+          "source": "src/scenes/firstPersonPlay.ts:268"
         },
         {
           "system": "Editor",

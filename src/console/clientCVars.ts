@@ -26,6 +26,7 @@ export interface ClientCVars {
   r_pixelcars3d: CVar<boolean>;
   r_groundnearest: CVar<boolean>;
   r_pixelgrid: CVar<boolean>;
+  r_sun3d: CVar<boolean>;
   xr_rate: CVar<number>;
 }
 
@@ -236,6 +237,14 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "r",
   });
 
+  const r_sun3d = engine.cvars.register<boolean>({
+    name: "r_sun3d",
+    description: "3D views draw the sun's shadows as well as contact shadows (?sun3d=0)",
+    type: "boolean",
+    defaultValue: true,
+    category: "r",
+  });
+
   const xr_rate = engine.cvars.register<number>({
     name: "xr_rate",
     description: "Display rate a headset session asks for, in Hz (0 keeps the headset's own)",
@@ -268,6 +277,7 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     r_pixelcars3d,
     r_groundnearest,
     r_pixelgrid,
+    r_sun3d,
     xr_rate,
   };
 }

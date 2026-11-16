@@ -50,6 +50,8 @@ export interface FirstPersonFrame {
   readonly interior?: FirstPersonInterior | undefined;
   /** Sun and contact shadows (247); on unless false. Rooms have none. */
   readonly shadows?: boolean | undefined;
+  /** With shadows, the sun's as well as contact shadows; on unless false. */
+  readonly sun?: boolean | undefined;
   /**
    * Top-down play (251): draw through the fixed view's camera centred on the
    * eye's x and y, at `scale` screen pixels per world pixel. The eye's height and
@@ -369,7 +371,13 @@ export class FirstPersonView {
       this.stats.grass = this.grass.count;
       // Read after the frame's page requests: the atlas is replaced when it grows.
       this.atlas.value = pages.atlas;
-      this.sun.update(renderer, this.scene, centre, fogEnd, shadows && !frame.interior);
+      this.sun.update(
+        renderer,
+        this.scene,
+        centre,
+        fogEnd,
+        shadows && frame.sun !== false && !frame.interior,
+      );
       this.stats.sunRedraws = this.sun.redraws;
       // After the sun's map: casters beyond a tabletop's edge still shade it.
       renderer.clippingPlanes = this.cameras.cutFor(headset);
