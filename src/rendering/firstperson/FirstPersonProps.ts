@@ -15,8 +15,6 @@ export interface PropImageFrame {
   height: number;
 }
 
-type Piece = { dx: number; dy: number; spriteWidth: number; spriteHeight: number };
-
 /** Which of a room prop's pictures (`parts[].view`): the fixed view shows the
  * inside one while the observer is in one of its rooms (`observerInsideRoom`). */
 export type PropView = "outside" | "inside";
@@ -26,7 +24,7 @@ export type PropView = "outside" | "inside";
 export function propPieces(
   prop: Prop,
   view: PropView = "outside",
-): readonly (Piece & { frameCol: number; frameRow: number })[] {
+): readonly (PlanePiece & { frameCol: number; frameRow: number })[] {
   const parts = prop.sprite.parts?.filter((part) => !part.view || part.view === view);
   return parts?.length ? parts : [{ ...prop.sprite, dx: 0, dy: 0 }];
 }
