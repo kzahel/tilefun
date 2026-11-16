@@ -23,6 +23,7 @@ export interface ClientCVars {
   r_firstperson: CVar<boolean>;
   r_fpshadows: CVar<boolean>;
   r_topdown3d: CVar<boolean>;
+  r_pixelcars3d: CVar<boolean>;
   xr_rate: CVar<number>;
 }
 
@@ -206,6 +207,15 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "r",
   });
 
+  const r_pixelcars3d = engine.cvars.register<boolean>({
+    name: "r_pixelcars3d",
+    description:
+      "Vehicles in the 3D top-down view as outlined native-pixel images, as the fixed view draws them (?pixelcars=0 disables)",
+    type: "boolean",
+    defaultValue: true,
+    category: "r",
+  });
+
   const xr_rate = engine.cvars.register<number>({
     name: "xr_rate",
     description: "Display rate a headset session asks for, in Hz (0 keeps the headset's own)",
@@ -235,6 +245,7 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     r_firstperson,
     r_fpshadows,
     r_topdown3d,
+    r_pixelcars3d,
     xr_rate,
   };
 }

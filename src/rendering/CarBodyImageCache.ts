@@ -79,8 +79,9 @@ export class CarBodyImageCache {
     return (this.entries.get(key)?.target ?? this.frameImages.get(key))?.depthTexture;
   }
   /** Caller renders directly into this target, avoiding a copy/readback. A pose that
-   * did not recur gets this frame's target when several views draw. */
-  admit(key: string, size: number) {
+   * did not recur gets this frame's target when several views draw. `keepUsed`:
+   * images used this frame are still to be drawn, so none is evicted to make room. */
+  admit(key: string, size: number, keepUsed = false) {
     const bytes = size * size * 8;
     if (!this.enabled || bytes > this.maxBytes) return undefined;
     if (!this.previous.has(key)) return this.frameImages.take(key, size);
@@ -88,8 +89,10 @@ export class CarBodyImageCache {
       this.entries.size &&
       (this.bytes + bytes > this.maxBytes || this.entries.size >= this.maxEntries)
     ) {
-      const oldest = this.entries.keys().next().value;
-      if (oldest !== undefined) this.remove(oldest);
+      // Least recently used first: if this one was used this frame, all were.
+      const [oldest, entry] = this.entries.entries().next().value ?? [];
+      if (oldest === undefined || (keepUsed && entry?.frame === this.frame)) return undefined;
+      this.remove(oldest);
     }
     const target = carImageTarget(size);
     this.entries.set(key, { target, frame: this.frame });

@@ -100,7 +100,7 @@ row when a slice starts, delivers or is blocked.
 | 2 — Ground artwork, shared page atlas | Done 2026-11-14: the 3D ground wears the fixed view's terrain pages, and 3D cards read the same atlas instead of whole-sheet textures (99.6 MiB → 4.6 MiB of card artwork in the city) | [250](../tactical/250-ground-artwork-and-shared-pages.md) |
 | 3 — Top-down camera, parity probe, draw calls, device scorecard | Done 2026-11-14: `?view=topdown3d` / `r_topdown3d` draws top-down play through the 3D scene; the parity probe gives the checklist numbers; static content is merged into 4 to 25 draws; measured on the Mac, Pixel 7a and Deck, with a go on draw-call cost | [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) |
 | 4 — XR on the shared scene | Done 2026-11-14 for owner play: the world menu's **Headset** buttons start a WebXR session as a floating screen, immersive first person or a tabletop miniature, with the headset's controllers as seat 0's pad; all three hold 72 Hz on a Quest 3 in `city` and `woods`. Comfort and the controller mapping are not yet checked by a wearer | [252](../tactical/252-xr-on-the-shared-scene.md) |
-| 5 — Top-down parity | In progress since 2026-11-15: building bodies match their artwork (solid props identical at 1×), and grass blades are drawn (99% overlap). Sprite edges with pixel snapping are next | checklist below |
+| 5 — Top-down parity | In progress since 2026-11-15: building bodies match their artwork (solid props identical at 1×), grass blades are drawn (99% overlap), and since 2026-11-16 vehicles are the fixed view's outlined pixel images (identical at 1×). Sprite edges with pixel snapping are next | checklist below |
 | 6 — Opt-in, default, retirement | Not started (owner decisions) | gate below |
 
 ## Top-down parity checklist
@@ -117,7 +117,7 @@ were measured on 2026-11-15; the other rows are 251's.
 
 | Item | State | Notes |
 | --- | --- | --- |
-| Framing and registration of actors and vehicles | Done at whole pixels | Actors identical in the city at 1× (3,735 pixels, none different). Vehicle silhouettes overlap 95–97%. Both align best with no move at zooms 1 and 0.25 |
+| Framing and registration of actors and vehicles | Done at whole pixels | Actors identical in the city at 1× (3,735 pixels, none different). Vehicles identical at 1× since 2026-11-16 ([vehicles](#vehicles)); they overlapped 95–97% as meshes. Both align best with no move at zooms 1 and 0.25 |
 | Registration of standing cards (trees, posts, forest rows) | Partial | 98% overlap at 1×, best one pixel to the left: the fixed view floors a static sprite's screen edges to whole pixels and the 3D card is rasterised where it falls |
 | Solid props (buildings) | Done at 1×; partial zoomed out | 2026-11-15: identical at 1× in the city (28,672 pixels, none different; was 54% overlap) and 97.8% overlap at 0.25× (was 86%), where 12% of shared pixels differ in colour from sampling, as for ground. A building's physical box is now the one its artwork depicts ([building bodies](#building-bodies)). Artwork outside the box is not drawn in 3D: rooftop and side signs, and the hotel's carpet south of its feet |
 | Ground artwork (terrain pages, road markings, paths) | Done at 1×; partial zoomed out | Identical at 1×, including the seeded pond shoreline ([pond comparison](#pond-shoreline-comparison)). At 0.25× in the city 1.1% of pixels differ on crosswalk stripes and lane dashes: four samples per pixel against the fixed view's one. The top-down camera still needs its own sampling rule |
@@ -126,12 +126,12 @@ were measured on 2026-11-15; the other rows are 251's.
 | Surface decals | Missing | |
 | Sprite edges | Missing | 3D cards are hard cutouts (`alphaTest`) with one sample per pixel; the fixed view blends filtered edges at fractional zoom. Wildlife overlaps 83–88% at 1× (the soft shadow painted into those sprites is cut off) and 67–84% at 0.25× |
 | Pixel snapping and stable sampling at fractional zoom | Missing | Fixed-view rules from 213 and 215. The standing-card row above is the first measured case |
-| Vehicle shading | Partial, new in 251 | A fifth to a third of vehicle pixels differ in colour where both draw: the 3D scene shades bodies with its sun |
+| Vehicle shading and outline | Done at 1× for the top-down camera; partial zoomed out | 2026-11-16: the top-down camera draws the fixed view's own outlined native-pixel images ([vehicles](#vehicles)). City and crowd at 1×: 100% overlap, 0.0% of shared pixels differ (as meshes, a fifth to a third differed and there was no outline). At 0.5×: 97–98% overlap, 11% differ, the same sampling gap as solid props. First person and headset views keep meshes |
 | Raised ground | Partial, new in 251 | The fixed view tints raised tiles and draws cliff artwork; the 3D scene wears the plain ground image and flat brown walls. The generated world is flat, so only edited worlds show it |
 | Body shadows | Partial | 3D has sun shadows and contact shadows; the fixed view has the deferred depth pass. The two are not comparable (340–6,800 pixels against 5,500–72,000). Choose one look for top-down. Zoomed out, the sun's map (2,048 px) covers only the middle of the view |
 | Cutaways, slab fades, roof visibility | Missing | `SurfacePresentation` |
 | Rooms shown roofless | Missing | First person draws rooms with full walls (230 slice 2). The top-down 3D view hands rooms to the fixed view |
-| Tow and bed groups posed together | Missing | 229 limit: members draw at their own poses |
+| Tow and bed groups posed together | Done for the top-down camera; missing elsewhere | 2026-11-16: a body's image holds its towed car and bed contents, posed as the fixed view poses them. First person and headset views: 229 limit, members draw at their own poses |
 | Emergency lights and flashing sprites | Missing | |
 | Excavations (garage ramps below ground) | Missing | 229 limit |
 | Editor overlays | Missing | The editor falls back to the fixed view |
@@ -199,6 +199,51 @@ writes them as one mesh of leaning cards read from the page atlas. One draw.
   against 1.3. No missed frame. Not yet measured on the phone or the Deck.
 - The top-down camera only. Whether first person and headset views get grass,
   and how tall it stands there, is open.
+
+### Vehicles
+
+Owner request, 2026-11-16: top-down play in the unified view should keep the
+fixed view's pixel look for vehicles, the one-pixel ink outline and native-pixel
+texels. First person may not want it; that is undecided, so first person and
+headset views keep meshes.
+
+- The top-down camera asks the host for the fixed view's own image of each body
+  (`SharedMeshAssets.bodyImage`, `GpuMeshBodies.bodyImage`): the same render,
+  outline pass, cache keys and tow and bed grouping. A body is culled before
+  anything is rendered for it when its image square is off screen.
+- `BodyImageCards` draws each image as a square on the ground plane. Its
+  fragments write the depth the image's depth texture records, so bodies still
+  hide behind buildings and each other, and take the sun's shadow where each
+  texel stands. The filter is the fixed view's for actor images: nearest texels
+  on the square's own pixel grid, one bilinear step onto the screen, blended in
+  display-encoded colour. The image's faint contact disc is dropped; the 3D
+  scene's contact shadows stand in.
+- Images lent to 3D views must outlive the frame's later renders, so they never
+  use the scratch target and never evict a cached image already used this
+  frame. Uncached ones go to a 16 MiB per-frame pool (`GpuMeshBodies.held`).
+  Over that budget, or while assets or paint load, the view draws the mesh.
+- `r_pixelcars3d` and `?pixelcars=0` turn it off for comparison.
+
+Cost, `render:bench` with `--scenes=city,cars,fleet --zooms=1,0.25` (`cars`:
+50 parked bodies from the cache; `fleet`: the same with the cache off, the
+moving-fleet worst case). Fixed view / unified with meshes / unified with images:
+
+| Device | Measure | city 1× · 0.25× | cars 1× · 0.25× | fleet 1× · 0.25× |
+| --- | --- | --- | --- | --- |
+| M4 Pro Mac | GPU timer, p50 ms | (fixed not rerun) · mesh 0.52 · 0.80 · images 0.82 · 1.20 | 1.88 · 5.16 / 0.52 · 1.02 / 0.98 · 2.47 | 1.91 · 7.97 / 0.53 · 1.04 / 1.00 · 3.25 |
+| Pixel 7a, 60 Hz | render + finish, ms | 3.7 · 3.9 / 3.2 · 3.3 / 3.4 · 3.5 | 3.6 · 4.0 / 3.2 · 5.2 / 3.4 · 4.6 | 3.8 · 4.9 / 3.1 · 5.0 / 3.7 · 5.0 |
+
+- No missed frames anywhere except `cars` at 1× on the phone, 2 of about 290
+  with meshes and with images alike (not with the fixed view). Phone battery
+  23.6 → 25.6 °C over the three runs. The Deck was not measured.
+- Images cost the Mac's GPU 0.3 to 2.2 ms more than meshes, from two offscreen
+  passes per rendered body (draw calls fell: crowd 42 → 20 at 1×), and stay well
+  under the fixed view, which makes the same images. On the phone they cost 0.2
+  to 0.6 ms of render plus finish over meshes, except 50 parked cars at 0.25×,
+  where they are cheaper (4.6 against 5.2 ms). They are no worse than the fixed
+  view there except that cell (4.6 against 4.0 ms).
+- If a crowded scene needs it, every body's image can render into one shared
+  atlas pass instead of a target switch per body.
 
 ### Building bodies
 
@@ -365,7 +410,8 @@ Slice 4 is delivered for owner play, so the open work is:
   scale, and the Resume flow. These decide what the next XR work is; a HUD in
   the session and multisampling are the known gaps.
 - **Slice 5, top-down parity**, ordered by what the probe measured. Building
-  bodies and grass are done. Next: sprite edges and pixel snapping together
+  bodies, grass and pixel vehicles are done. Owner check: whether the pixel
+  vehicle look is right in top-down play, and whether first person wants it. Next: sprite edges and pixel snapping together
   (standing cards one pixel off, soft sprite shadows cut, small sprites
   unfiltered when zoomed out), then particles and surface decals. Decide the
   shadow look before touching shadows. Measure the phone and the Deck again

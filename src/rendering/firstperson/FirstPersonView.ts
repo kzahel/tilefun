@@ -7,6 +7,7 @@ import type { World } from "../../world/World.js";
 import type { GrassItem, SpriteItem } from "../SceneItem.js";
 import type { PageRegion, SharedMeshAssets, SharedPages, View3dTarget } from "../View3dHost.js";
 import { actorBillboard, MovingCards, RecentPages, StaticCards } from "./FirstPersonBillboards.js";
+import { BodyImageCards } from "./FirstPersonBodyImages.js";
 import { cameraRight, type FirstPersonEye, nextFogEnd } from "./FirstPersonCamera.js";
 import { type HeadsetFrame, TABLE_BACKGROUND, ViewCameras } from "./FirstPersonCameras.js";
 import { chunkKey, chunksInReach, type TerrainEntry, terrainStale } from "./FirstPersonChunks.js";
@@ -22,7 +23,13 @@ import { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
 import { BlobShadows, SunShadows } from "./FirstPersonShadows.js";
 import { buildTerrainChunk } from "./FirstPersonTerrain.js";
 import { FirstPersonVehicles } from "./FirstPersonVehicles.js";
-import { chunksInRect, grown, obliqueGround } from "./ObliqueCamera.js";
+import {
+  chunksInRect,
+  grown,
+  obliqueGround,
+  squareShows,
+  type WorldRect,
+} from "./ObliqueCamera.js";
 
 export type FirstPersonWorld = Pick<World, "getChunkIfLoaded" | "getHeightAt">;
 type FirstPersonChunkSource = NonNullable<ReturnType<FirstPersonWorld["getChunkIfLoaded"]>>;
@@ -49,6 +56,9 @@ export interface FirstPersonFrame {
    * the ground on screen instead of a radius.
    */
   readonly topDown?: { readonly scale: number } | undefined;
+  /** Top-down only: vehicle bodies as the fixed view's outlined native-pixel
+   * images instead of meshes at the screen's resolution; on unless false. */
+  readonly pixelBodies?: boolean | undefined;
   /** Grass blades as the fixed view collects them (`collectCameraGrass`), posed
    * for this frame. Drawn by the top-down camera only. */
   readonly grass?: readonly GrassItem[] | undefined;
@@ -137,7 +147,10 @@ export class FirstPersonView {
     grass: 0,
     /** Sun shadow map redraws since the view was created. */
     sunRedraws: 0,
+    /** Vehicle bodies drawn, as meshes or images. */
     cars: 0,
+    /** Of those, the ones drawn as the fixed view's images (top-down only). */
+    bodyImages: 0,
     calls: 0,
     fogEnd: 0,
     /** Meshes the static world draws as: the ground, merged faces and cards. */
@@ -189,6 +202,7 @@ export class FirstPersonView {
   private readonly vehicles = new FirstPersonVehicles((material) => {
     this.lit(material, "body");
   });
+  private readonly bodyImages = new BodyImageCards(this.sun.uniforms);
   private readonly propMeshes: PropMeshes;
   private readonly chunks = new Map<string, ChunkScene>();
   private readonly images: FirstPersonImages;
@@ -318,20 +332,29 @@ export class FirstPersonView {
     const camera = this.cameras.place(frame, topDown, headset, target, this.fog, fogEnd);
     // Rooms have contact shadows but no sun.
     const shadows = frame.shadows !== false;
-    const cars = this.fillBillboards(frame, meshes, shadows, !!topDown);
-    this.grass.fill(
-      (topDown && this.layers.grass && frame.grass) || [],
-      this.sheets.get("grass-blades"),
-      this.cardPages,
-    );
-    this.stats.grass = this.grass.count;
-    // Read after the frame's page requests: the atlas is replaced when it grows.
-    this.atlas.value = pages.atlas;
-    // Draw calls are counted over every render of this view, sun map included.
+    // Draw calls are counted over every render of this view: vehicle images and
+    // the sun map included.
     const { info } = renderer;
     info.autoReset = false;
     info.reset();
     try {
+      // Vehicle images are rendered offscreen here, before anything is drawn to
+      // the view's own target.
+      const cars = this.fillBillboards(
+        frame,
+        meshes,
+        shadows,
+        !!topDown,
+        (frame.pixelBodies !== false && ground) || undefined,
+      );
+      this.grass.fill(
+        (topDown && this.layers.grass && frame.grass) || [],
+        this.sheets.get("grass-blades"),
+        this.cardPages,
+      );
+      this.stats.grass = this.grass.count;
+      // Read after the frame's page requests: the atlas is replaced when it grows.
+      this.atlas.value = pages.atlas;
       this.sun.update(renderer, this.scene, centre, fogEnd, shadows && !frame.interior);
       this.stats.sunRedraws = this.sun.redraws;
       // After the sun's map: casters beyond a tabletop's edge still shade it.
@@ -342,6 +365,9 @@ export class FirstPersonView {
       this.stats.cars = 0;
       for (const item of cars)
         if (this.vehicles.draw(renderer, camera, meshes, item)) this.stats.cars++;
+      this.bodyImages.draw(renderer, camera, topDown?.scale ?? 1);
+      this.stats.bodyImages = this.bodyImages.count;
+      this.stats.cars += this.bodyImages.count;
       this.stats.calls = info.render.calls;
     } finally {
       info.autoReset = true;
@@ -512,12 +538,15 @@ export class FirstPersonView {
     this.sun.invalidate(chunk.cx, chunk.cy);
   }
 
-  /** Actor billboards and contact shadows; returns actors whose authored mesh is drawable. */
+  /** Actor billboards, contact shadows and vehicle images; returns actors whose
+   * authored mesh is to be drawn as a mesh. */
   private fillBillboards(
     frame: FirstPersonFrame,
     meshes: SharedMeshAssets,
     shadows: boolean,
     topDown: boolean,
+    /** The ground on screen, for a top-down frame that draws vehicle images. */
+    imagesIn: WorldRect | undefined,
   ): SpriteItem[] {
     // Top-down cards stand along east and show their rows as drawn (seen from the south).
     const eye = topDown ? "south" : frame.eye;
@@ -528,12 +557,21 @@ export class FirstPersonView {
     }
     this.billboards.begin();
     this.blobs.begin();
+    this.bodyImages.begin();
     const cars: SpriteItem[] = [];
     for (const item of frame.sprites) {
-      this.queueActor(item, eye, meshes, cars, shadows);
-      if (item.towGroup) this.queueActor(item.towGroup, eye, meshes, cars, shadows);
+      // An image holds the whole group: the car in tow and what rides in the bed.
+      // Null: the group is off screen, and nothing of it is drawn.
+      const image =
+        imagesIn && this.visibleBody(item, meshes)
+          ? meshes.bodyImage?.(item, (radius) => squareShows(imagesIn, item, radius))
+          : undefined;
+      if (image) this.bodyImages.push(item, image);
+      const drawn = image === undefined ? cars : undefined;
+      this.queueActor(item, eye, meshes, drawn, shadows);
+      if (item.towGroup) this.queueActor(item.towGroup, eye, meshes, drawn, shadows);
       for (const content of item.bedGroup?.contents ?? [])
-        this.queueActor(content, eye, meshes, cars, shadows);
+        this.queueActor(content, eye, meshes, drawn, shadows);
     }
     this.billboards.end();
     this.blobs.end();
@@ -542,12 +580,25 @@ export class FirstPersonView {
     return cars;
   }
 
-  /** Ready authored meshes draw as models; loading, failed and plain actors as sprites. */
+  /** A shown actor whose authored mesh is ready and whose kind is being drawn. */
+  private visibleBody(item: SpriteItem, meshes: SharedMeshAssets): boolean {
+    return (
+      !item.flashHidden &&
+      item.alpha !== 0 &&
+      this.layers.vehicles &&
+      !!item.mesh &&
+      this.vehicles.drawable(meshes, item.mesh.assetId)
+    );
+  }
+
+  /** Ready authored meshes draw as models; loading, failed and plain actors as
+   * sprites. Without `cars` only the actor's shadow is queued: an image of its
+   * group already shows it. */
   private queueActor(
     item: SpriteItem,
     eye: FirstPersonEye | "south",
     meshes: SharedMeshAssets,
-    cars: SpriteItem[],
+    cars: SpriteItem[] | undefined,
     shadows: boolean,
   ): void {
     if (item.flashHidden || item.alpha === 0) return;
@@ -556,6 +607,7 @@ export class FirstPersonView {
     // A mesh body's shadow belongs to the drawn body: sprite fallbacks have one baked in.
     const shadow = shadows && (body || item.gpuShadow?.casterId === undefined) && item.gpuShadow;
     if (shadow) this.blobs.push(shadow, this.supportUnder(shadow, item.zOffset));
+    if (!cars) return;
     if (body) {
       cars.push(item);
       return;
@@ -595,6 +647,7 @@ export class FirstPersonView {
     this.sun.dispose();
     this.propMeshes.dispose();
     this.vehicles.dispose();
+    this.bodyImages.dispose();
     this.cameras.dispose();
     this.images.dispose();
     this.flatMaterial.dispose();

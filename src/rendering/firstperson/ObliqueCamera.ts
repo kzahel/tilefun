@@ -81,6 +81,23 @@ export function obliqueGround(camera: ObliqueCamera, width: number, height: numb
   };
 }
 
+/** Whether a screen square of `radius` world pixels each way around a point
+ * (game axes) touches the view whose ground is `ground`: height lifts the point
+ * up the screen, as far as the same distance north would. */
+export function squareShows(
+  ground: WorldRect,
+  point: { readonly wx: number; readonly wy: number; readonly zOffset: number },
+  radius: number,
+): boolean {
+  const y = point.wy - point.zOffset;
+  return (
+    point.wx + radius > ground.left &&
+    point.wx - radius < ground.right &&
+    y + radius > ground.top &&
+    y - radius < ground.bottom
+  );
+}
+
 /** Wider than the ground on screen: a prop reaches sideways out of its own
  * chunk, and tall things south of the bottom edge stand up into the view. */
 export function grown(rect: WorldRect, side: number, below: number): WorldRect {

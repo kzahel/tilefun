@@ -9,6 +9,8 @@ import type { OverlayDraw } from "./OverlayFrame.js";
 import { RasterRenderBackend } from "./RasterRenderBackend.js";
 import { type RasterSurface, touchRaster } from "./RasterSurface.js";
 import type { RenderPass, RenderView } from "./RenderFrame.js";
+import type { SpriteItem } from "./SceneItem.js";
+import type { BodyImage } from "./View3dHost.js";
 import type { RenderRegion } from "./ViewLayout.js";
 import { WORLD_RASTER_PAD } from "./WorldRasterFrame.js";
 
@@ -39,6 +41,10 @@ export class GpuRenderBackend extends RasterRenderBackend {
   /** A chunk's prepared ground image (an older one while its replacement builds). */
   groundImage(chunk: Chunk): CanvasImageSource | null {
     return this.terrain.getTerrainSurface(chunk);
+  }
+  /** A vehicle body's finished image, for 3D views (`GpuMeshBodies.bodyImage`). */
+  bodyImage(item: SpriteItem, shows: (radius: number) => boolean): BodyImage | null | undefined {
+    return this.meshes.bodyImage(item, this.sheets, shows);
   }
   readonly surface: GpuRasterSurface;
   readonly meshes: GpuMeshBodies;

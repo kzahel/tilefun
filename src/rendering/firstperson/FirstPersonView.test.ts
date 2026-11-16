@@ -2,7 +2,9 @@ import * as THREE from "three";
 import { describe, expect, it } from "vitest";
 import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
 import { Chunk } from "../../world/Chunk.js";
-import type { View3dTarget } from "../View3dHost.js";
+import type { CarMeshAsset } from "../CarMeshAsset.js";
+import type { SpriteItem } from "../SceneItem.js";
+import type { BodyImage, View3dTarget } from "../View3dHost.js";
 import { chunksInReach, terrainStale } from "./FirstPersonChunks.js";
 import {
   type FirstPersonFrame,
@@ -178,6 +180,89 @@ describe("the view's merged static world (251)", () => {
     expect((view as unknown as { scene: THREE.Scene }).scene.fog).toBeNull();
     // The cut is the frame's own: the host's other draws are not clipped.
     expect(renderer.clippingPlanes).toEqual([]);
+    view.dispose();
+  });
+  it("draws top-down vehicles as the host's images, and as meshes where it has none", () => {
+    const rig = () => {};
+    const asset = {
+      object: new THREE.Group(),
+      setPhysical: rig,
+      setTransportRamp: rig,
+      setTowLift: rig,
+      setTravel: rig,
+      setDumpBed: rig,
+      setEmergency: rig,
+    } as unknown as CarMeshAsset;
+    const body = (wx: number, more: Partial<SpriteItem> = {}) =>
+      ({
+        kind: "sprite",
+        wx,
+        wy: 128,
+        zOffset: 0,
+        sheetKey: "none",
+        mesh: { assetId: "car", orientation: [0, 0, 0, 1], radius: 8 },
+        ...more,
+      }) as unknown as SpriteItem;
+    const image: BodyImage = { texture: new THREE.Texture(), depth: null, radius: 8 };
+    const asked: SpriteItem[] = [];
+    /** The host has an image for every body in view west of x = 150. */
+    const withImages = {
+      ...target,
+      meshes: {
+        ready: new Set(["car"]),
+        asset: () => asset,
+        paint: () => undefined,
+        bindPaint: () => () => {},
+        bodyImage(item: SpriteItem, shows: (radius: number) => boolean) {
+          asked.push(item);
+          if (!shows(8)) return null;
+          return item.wx < 150 ? image : undefined;
+        },
+      },
+    } as unknown as View3dTarget;
+    const towed = body(110);
+    const truck = body(100, { towGroup: towed });
+    const lone = body(120);
+    const unready = body(160);
+    const hidden = body(130, { alpha: 0 });
+    // The view is 1280 × 800 at 3×: 427 world pixels wide around x = 128.
+    const offScreen = body(128 + 214 + 9, { towGroup: body(128 + 214 + 20) });
+    const loaded = new Map([["0,0", new Chunk()]]);
+    const view = new FirstPersonView(new Map());
+    const scene = (topDown: boolean, more: Partial<FirstPersonFrame> = {}): FirstPersonFrame => ({
+      ...frame(world(loaded), topDown),
+      sprites: [truck, lone, unready, hidden, offScreen],
+      ...more,
+    });
+    settle(view, scene(true));
+
+    asked.length = 0;
+    drawn.length = 0;
+    view.render(scene(true), withImages);
+    // Shown bodies only, and not the towed car: it is in its truck's image.
+    expect(asked).toEqual([truck, lone, unready, offScreen]);
+    // Nothing is drawn for the group off screen, as an image or as meshes.
+    expect(view.stats.bodyImages).toBe(2);
+    expect(view.stats.cars).toBe(3);
+    // The world, the one body without an image as a mesh, then every image at once.
+    expect(drawn).toHaveLength(3);
+
+    // Switched off, every body is a mesh again, the towed car included.
+    asked.length = 0;
+    drawn.length = 0;
+    view.render(scene(true, { pixelBodies: false }), withImages);
+    expect(asked).toEqual([]);
+    expect(view.stats.bodyImages).toBe(0);
+    expect(view.stats.cars).toBe(6);
+    expect(drawn).toHaveLength(7);
+
+    // An image is the body seen by the top-down camera: no other camera shows one.
+    settle(view, scene(false));
+    asked.length = 0;
+    view.render(scene(false), withImages);
+    expect(asked).toEqual([]);
+    expect(view.stats.bodyImages).toBe(0);
+    expect(view.stats.cars).toBe(6);
     view.dispose();
   });
 });

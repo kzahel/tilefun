@@ -8,6 +8,7 @@ import {
   obliqueGround,
   obliqueProjection,
   obliqueScreen,
+  squareShows,
 } from "./ObliqueCamera.js";
 
 const WIDTH = 1280,
@@ -108,5 +109,20 @@ describe("the fixed view's camera on the 3D scene", () => {
     expect(chunks[0]?.key).toBe("0,0");
     expect(chunks[0]?.distance).toBe(0);
     expect(chunks[2]?.distance).toBeCloseTo(size / 2, 6);
+  });
+
+  it("tells which screen squares touch the view: a raised point shows farther south", () => {
+    const ground = obliqueGround({ x: 100, y: 50, scale: 2 }, 400, 200);
+    // Ground on screen: x 0…200, y 0…100.
+    const at = (wx: number, wy: number, zOffset = 0) => ({ wx, wy, zOffset });
+    expect(squareShows(ground, at(100, 50), 8)).toBe(true);
+    expect(squareShows(ground, at(-7, 50), 8)).toBe(true);
+    expect(squareShows(ground, at(-8, 50), 8)).toBe(false);
+    expect(squareShows(ground, at(208, 50), 8)).toBe(false);
+    expect(squareShows(ground, at(100, -8), 8)).toBe(false);
+    expect(squareShows(ground, at(100, 108), 8)).toBe(false);
+    // 30 pixels up, a point 30 south of the bottom edge is drawn on the edge.
+    expect(squareShows(ground, at(100, 130, 30), 8)).toBe(true);
+    expect(squareShows(ground, at(100, 20, 30), 8)).toBe(false);
   });
 });

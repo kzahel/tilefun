@@ -17,7 +17,10 @@ city and crowd). `--query=view=topdown3d` and `--query=view=fps` measure the 3D
 scene, whose own count includes vehicles; the
 [renderer unification scorecard](renderer-unification.md#device-scorecard)
 compares the three on the Mac, the Pixel 7a and the Deck. The `drive` scene now
-starts in first person on the phone as well.
+starts in first person on the phone as well. The `cars` scene parks 50 vehicles
+in the city without the crowd's rabbits, and `fleet` is the same scene with the
+vehicle image cache off, so every body is rendered again each frame as a moving
+fleet's are ([vehicles](renderer-unification.md#vehicles)).
 Since [252](../tactical/252-xr-on-the-shared-scene.md) a headset has its own
 measure: `scripts/first-person/xr-quest.mjs`, run inside a `quest session` lease
 from the machine-control checkout, starts a WebXR session per mode on a Quest

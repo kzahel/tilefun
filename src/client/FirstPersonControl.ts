@@ -67,6 +67,9 @@ export class FirstPersonControl {
   viewDistance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE;
   /** Sun and contact shadows (247); `r_fpshadows` and `?fpshadows=0` set it. */
   shadows = new URLSearchParams(location.search).get("fpshadows") !== "0";
+  /** Top-down 3D views draw vehicles as the fixed view's outlined native-pixel
+   * images; `r_pixelcars3d` and `?pixelcars=0` set it. */
+  pixelBodies = new URLSearchParams(location.search).get("pixelcars") !== "0";
   /** A headset's tabletop (252) sets how far its 3D view reaches, in place of
    * the view distance. World pixels. */
   reach: number | undefined;

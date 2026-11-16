@@ -38,17 +38,17 @@ export interface MaterialShading {
   sun?: { uniforms: SunUniforms; receiver: SunReceiver } | undefined;
 }
 
-const SUN_FRAGMENT = (receiver: SunReceiver) => `
+/** `sunLightAt(p)`: the colour multiplier at `p`, a scene position relative to
+ * `sunOrigin`. */
+const SUN_LIGHT = (receiver: SunReceiver) => `
 uniform highp sampler2DShadow sunMap;
 uniform mat4 sunMatrix;
 uniform vec3 sunDir;
 uniform vec4 sunFade;
 uniform vec3 sunShade;
-varying vec3 vSunLocal;
-vec3 sunLight() {
-  float fade = smoothstep(sunFade.z, sunFade.w, distance(vSunLocal.xy, sunFade.xy));
+vec3 sunLightAt(vec3 p) {
+  float fade = smoothstep(sunFade.z, sunFade.w, distance(p.xy, sunFade.xy));
   if (fade >= 1.0) return vec3(1.0);
-  vec3 p = vSunLocal;
   ${
     receiver === "faces"
       ? `vec3 n = normalize(cross(dFdx(p), dFdy(p)));
@@ -62,6 +62,18 @@ vec3 sunLight() {
   if (at.x < 0.0 || at.x > 1.0 || at.y < 0.0 || at.y > 1.0) return vec3(1.0);
   float lit = mix(texture(sunMap, at), 1.0, fade);
   return mix(sunShade, vec3(1.0), lit);
+}
+`;
+
+/** The `body` receiver's `sunLightAt`, for shaders that work out their own
+ * positions (vehicle images, whose pixels carry a depth). They declare
+ * `sunOrigin` and take the rest of `SunUniforms` as they are. */
+export const SUN_BODY_LIGHT = SUN_LIGHT("body");
+
+const SUN_FRAGMENT = (receiver: SunReceiver) => `${SUN_LIGHT(receiver)}
+varying vec3 vSunLocal;
+vec3 sunLight() {
+  return sunLightAt(vSunLocal);
 }
 `;
 

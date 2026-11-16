@@ -26,6 +26,8 @@ export function createView3dHost(
   groundImage: (chunk: Chunk) => CanvasImageSource | null,
   /** A headset session gave the renderer back (252): size it to the page. */
   restored: () => void = () => surface.resize(surface.canvas.width, surface.canvas.height),
+  /** The fixed view's finished image of a vehicle body (`GpuMeshBodies.bodyImage`). */
+  bodyImage?: SharedMeshAssets["bodyImage"],
 ): View3dHost {
   // The fixed view's loaded vehicle meshes and paint atlases, lent to 3D views.
   const meshes: SharedMeshAssets = {
@@ -36,6 +38,7 @@ export function createView3dHost(
     },
     paint: (paint) => bodies.paints.request(paint),
     bindPaint: (object, texture) => bodies.paints.bind(object, texture),
+    ...(bodyImage && { bodyImage }),
   };
   // The fixed view's page atlas, lent the same way. A page a 3D view asks for is
   // marked used this frame, exactly as if the fixed view had drawn it.

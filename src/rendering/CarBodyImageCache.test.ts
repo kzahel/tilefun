@@ -102,3 +102,26 @@ it("keeps a moving pose for later views of the same frame from a pool reused acr
   expect(disposeE).toHaveBeenCalledOnce();
   expect(cache.get("e")).toBeUndefined();
 });
+
+it("keeps images used this frame when a view still has to draw them", () => {
+  const cache = new CarBodyImageCache(8 * 8 * 8 * 2, 2);
+  cache.beginFrame();
+  for (const key of ["a", "b", "c"]) cache.get(key);
+  cache.beginFrame();
+  const a = cache.admit("a", 8, true);
+  const b = cache.admit("b", 8, true);
+  if (!a || !b) throw Error("Expected admission");
+  const disposeA = vi.spyOn(a, "dispose");
+  // Full of this frame's images: a third pose is refused instead of evicting one.
+  expect(cache.admit("c", 8, true)).toBeUndefined();
+  expect(disposeA).not.toHaveBeenCalled();
+  expect(cache.get("a")).toBe(a.texture);
+  for (const key of ["a", "b", "c"]) cache.get(key);
+  // Next frame only `a` is used again, so `b` gives way.
+  cache.beginFrame();
+  expect(cache.get("a")).toBe(a.texture);
+  expect(cache.admit("c", 8, true)).toBeDefined();
+  expect(cache.get("b")).toBeUndefined();
+  expect(disposeA).not.toHaveBeenCalled();
+  cache.clear();
+});

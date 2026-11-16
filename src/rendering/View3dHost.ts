@@ -2,7 +2,22 @@ import type * as THREE from "three";
 import type { VehiclePaintScheme } from "../traffic/VehiclePaint.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { CarMeshAsset } from "./CarMeshAsset.js";
+import type { SpriteItem } from "./SceneItem.js";
 import type { RenderRegion } from "./ViewLayout.js";
+
+/**
+ * A vehicle body as the fixed view draws it: an outlined image at one texel per
+ * world pixel, square, covering `radius` world pixels each way from the body's
+ * anchor, seen through the fixed view's camera (east to the right, north and
+ * height up). `depth` holds each texel's nearness along that camera's view ray:
+ * 0.5 at the anchor, one unit across 8 × `radius` world pixels of north minus
+ * height, smaller is nearer.
+ */
+export interface BodyImage {
+  readonly texture: THREE.Texture;
+  readonly depth: THREE.Texture | null | undefined;
+  readonly radius: number;
+}
 
 /** The host's loaded vehicle and train meshes and paint atlases: one copy for the
  * fixed view and every 3D view (249). A view poses a shared asset for each draw
@@ -16,6 +31,16 @@ export interface SharedMeshAssets {
   paint(paint: VehiclePaintScheme): THREE.Texture | undefined;
   /** Put a paint atlas on an asset's own materials; call the result to restore them. */
   bindPaint(object: THREE.Object3D, texture: THREE.Texture): () => void;
+  /**
+   * The fixed view's finished image of a vehicle body, with the car it tows and
+   * what stands in its bed, valid until the next display frame. `shows(radius)`
+   * says whether a square of that many world pixels each way from the body's
+   * anchor is in view: null when it is not, and there is nothing to draw.
+   * Undefined when there is no image to give (assets or paint loading, or too
+   * many this frame); the view then draws the meshes itself. Call it before
+   * drawing to the view's target: making an image renders offscreen.
+   */
+  bodyImage?(item: SpriteItem, shows: (radius: number) => boolean): BodyImage | null | undefined;
 }
 
 /** A rectangle of one layer of the page atlas, in texels. The object lasts as long

@@ -101,6 +101,7 @@ export function createGpuRenderHost(
       (chunk) => renderer.groundImage(chunk),
       // The page's size as last asked for, which `resize` held back in a session.
       () => renderer.resize(canvas.width, canvas.height),
+      (item, shows) => renderer.bodyImage(item, shows),
     ),
     captureFrame() {
       if (disposed || renderer.surface.lost) throw Error("Graphics are unavailable for capture");

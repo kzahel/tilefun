@@ -54,6 +54,11 @@ const SCENES = {
   // The city again, sampled while driving a car along the street with the throttle
   // held: streaming, traffic and collision geometry change under the camera.
   drive: { arrival: [300, 519], rabbits: 0, cars: 0, drive: true },
+  // Vehicle drawing without the crowd's authority load: 50 parked cars, whose
+  // finished images are reused from frame to frame, and the same cars with the
+  // image cache off, so each is rendered again every frame as a moving fleet is.
+  cars: { arrival: [300, 519], rabbits: 0, cars: 50 },
+  fleet: { arrival: [300, 519], rabbits: 0, cars: 50, uncached: true },
 };
 const scenes = option("scenes", "city,crowd,woods").split(",");
 for (const name of scenes) if (!SCENES[name]) throw Error(`Unknown scene ${name}`);
@@ -656,7 +661,12 @@ try {
       }
       console.log(`${name}: placed ${JSON.stringify(placed)}`);
       if (placed.rabbits < scene.rabbits * 0.7) throw Error(`${name}: crowd did not spawn`);
+      if (placed.cars < scene.cars * 0.7) throw Error(`${name}: cars did not spawn`);
     }
+    if (scene.uncached)
+      await page.evaluate(() => {
+        document.querySelector("#game").__game.renderer.meshes.images.enabled = false;
+      });
     device ??= await page.evaluate(() => {
       const world = document.querySelector('canvas[data-renderer="gpu"]:not(#game)');
       const gl = document.querySelector("#game").__game.renderer.surface?.renderer?.getContext?.();

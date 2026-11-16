@@ -10,6 +10,7 @@ import type { CarMeshAsset } from "./CarMeshAsset.js";
 import { setCarMeshProjection } from "./CarMeshProjection.js";
 import { CarPixelOutline } from "./CarPixelOutline.js";
 import { CarRenderTargets } from "./CarRenderTargets.js";
+import { FrameCarImages } from "./FrameCarImages.js";
 import type { GpuRasterSurface } from "./GpuRasterSurface.js";
 import { GpuVehicleContents } from "./GpuVehicleContents.js";
 import { meshBedFoot, meshChildPoint } from "./MeshGradePose.js";
@@ -23,11 +24,23 @@ import { projectWorld } from "./Projection.js";
 import { ResourceSlot } from "./ResourceSlot.js";
 import type { SpriteItem } from "./SceneItem.js";
 import { VehiclePaintResources } from "./VehiclePaintResources.js";
+import type { BodyImage } from "./View3dHost.js";
 import { WORLD_DEPTH_RANGE } from "./WorldDepth.js";
+
+/** A finished image and what the fixed view counts about it. */
+interface DrawnImage extends BodyImage {
+  /** Taken from the cache: nothing was rendered for it. */
+  readonly reused: boolean;
+  readonly painted: boolean;
+}
 
 /** Exact finished-image reuse; dirty bodies and opt-in contents share scratch depth. */
 export class GpuMeshBodies {
   readonly images = new CarBodyImageCache();
+  /** Images lent to 3D views (`bodyImage`): each keeps its own target until the
+   * next display frame, because a 3D view draws them all after rendering them. */
+  readonly held = new FrameCarImages(16 * 1024 * 1024);
+  private heldGroups = 0;
   readonly paints = new VehiclePaintResources();
   readonly contents = new GpuVehicleContents();
   readonly car = new ResourceSlot<CarMeshAsset>();
@@ -58,6 +71,7 @@ export class GpuMeshBodies {
     if (!value) {
       this.surface.flush();
       this.images.clear();
+      this.held.clear();
       this.targets.clear();
     }
     this.enabled = value;
@@ -102,6 +116,8 @@ export class GpuMeshBodies {
     this.shadowCasters.clear();
     this.targets.beginFrame();
     this.images.beginFrame(views);
+    this.held.beginFrame(true);
+    this.heldGroups = 0;
     this.paints.beginFrame();
     this.ready.clear();
     if (this.enabled)
@@ -112,16 +128,57 @@ export class GpuMeshBodies {
     item: SpriteItem,
     sheets: ReadonlyMap<string, Spritesheet> = new Map(),
   ): boolean {
+    const image = this.image(item, sheets, undefined);
+    if (!image) return false;
+    this.composite(
+      camera,
+      item,
+      image.texture,
+      image.radius,
+      image.depth,
+      !image.reused || !this.deferCachedImages,
+    );
+    if (image.painted) this.paintDraws++;
+    if (item.bedGroup) this.bedDraws++;
+    if (item.shadowCasterId !== undefined) this.shadowCasters.add(item.shadowCasterId);
+    return true;
+  }
+  /**
+   * The image `draw` would composite, for a 3D view to place in its own scene:
+   * the same outlined native-pixel body, with its towed car and bed contents.
+   * It stays valid until the next display frame. `shows(radius)` says whether a
+   * square of that many world pixels each way from the body's anchor is in
+   * view; null when it is not, and nothing is rendered for it. Undefined while
+   * the fixed view would show the sprite (assets or paint still loading) or the
+   * frame's held images are over budget; the caller then draws the body some
+   * other way. Renders into offscreen targets and restores the renderer's target.
+   */
+  bodyImage(
+    item: SpriteItem,
+    sheets: ReadonlyMap<string, Spritesheet>,
+    shows: (radius: number) => boolean,
+  ): BodyImage | null | undefined {
+    return this.image(item, sheets, shows);
+  }
+  /** `shows`: a 3D view's test of what is in view. Its image must outlive later
+   * images of this display frame, so it never lands in the scratch target and
+   * never evicts an image used this frame. */
+  private image(
+    item: SpriteItem,
+    sheets: ReadonlyMap<string, Spritesheet>,
+    shows: ((radius: number) => boolean) | undefined,
+  ): DrawnImage | null | undefined {
+    const hold = !!shows;
     const asset = item.mesh ? this.request(item.mesh.assetId)?.value : undefined;
-    if (resolveBody(item.mesh, this.ready) !== "mesh" || !item.mesh || !asset) return false;
+    if (resolveBody(item.mesh, this.ready) !== "mesh" || !item.mesh || !asset) return undefined;
     const definition = authoredVehicleForAsset(item.mesh.assetId);
     const paint = definition && vehiclePaint(definition.vehicle, item.mesh.paintSchemeId);
     const paintTexture = paint && this.paints.request(paint);
     if (paint && !paintTexture) {
-      this.paintFallbacks++;
-      return false; // Complete matching sprite while pending/failed.
+      if (!hold) this.paintFallbacks++;
+      return undefined; // Complete matching sprite while pending/failed.
     }
-    if (item.bedGroup && !this.contents.prepare(item, sheets)) return false;
+    if (item.bedGroup && !this.contents.prepare(item, sheets)) return undefined;
     const child = item.towGroup,
       childAsset = child?.mesh ? this.request(child.mesh.assetId)?.value : undefined;
     const childDefinition = child?.mesh && authoredVehicleForAsset(child.mesh.assetId);
@@ -135,28 +192,7 @@ export class GpuMeshBodies {
         !this.ready.has(child.mesh.assetId) ||
         (childPaint && !childTexture))
     )
-      return false;
-    const key =
-      this.images.enabled && !item.bedGroup && !child && !item.mesh.emergencyEnabled
-        ? carBodyImageKey(item.mesh, asset.object.id, paintTexture || undefined)
-        : undefined;
-    const cached = key === undefined ? undefined : this.images.get(key);
-    if (cached) {
-      this.composite(
-        camera,
-        item,
-        cached,
-        Math.ceil(item.mesh.radius),
-        key === undefined ? undefined : this.images.depth(key),
-        !this.deferCachedImages,
-      );
-      if (paintTexture) this.paintDraws++;
-      if (item.shadowCasterId !== undefined) this.shadowCasters.add(item.shadowCasterId);
-      return true;
-    }
-    const { surface } = this,
-      renderer = surface.renderer;
-    surface.flush();
+      return undefined;
     let radius = item.mesh.radius;
     for (const content of item.bedGroup?.contents ?? []) {
       const foot = meshBedFoot(item, content);
@@ -176,9 +212,43 @@ export class GpuMeshBodies {
         Math.abs(childPoint.y - childPoint.z) + child.mesh.radius,
       );
     radius = Math.ceil(radius);
+    if (shows && !shows(radius)) return null;
+    const painted = !!paintTexture;
+    const key =
+      this.images.enabled && !item.bedGroup && !child && !item.mesh.emergencyEnabled
+        ? carBodyImageKey(item.mesh, asset.object.id, paintTexture || undefined)
+        : undefined;
+    if (key !== undefined) {
+      const cached = this.images.get(key);
+      if (cached)
+        return {
+          texture: cached,
+          depth: this.images.depth(key),
+          radius,
+          reused: true,
+          painted,
+        };
+      // An earlier 3D view of this display frame drew the same pose.
+      const lent = hold ? this.held.get(key) : undefined;
+      if (lent)
+        return {
+          texture: lent.texture,
+          depth: lent.depthTexture,
+          radius,
+          reused: true,
+          painted,
+        };
+    }
+    const { surface } = this,
+      renderer = surface.renderer;
+    surface.flush();
     const resolution = Math.min(1024, Math.max(1, Math.ceil(radius * 2)));
     const scratch = this.targets.get(resolution);
     const target = scratch.source;
+    const output =
+      (key === undefined ? undefined : this.images.admit(key, resolution, hold)) ??
+      (hold ? this.held.take(key ?? `group:${this.heldGroups++}`, resolution) : scratch.outline);
+    if (!output) return undefined;
     const object = asset.object;
     applyMeshInstance(asset, item.mesh);
     this.scene.add(object);
@@ -217,8 +287,9 @@ export class GpuMeshBodies {
     renderer.getClearColor(this.clearColor);
     const alpha = renderer.getClearAlpha();
     const previous = renderer.getRenderTarget();
+    // A 3D view draws inside its region's scissor; the fixed view has none set.
+    const scissor = renderer.getScissorTest();
     let texture = target.texture;
-    let depth: THREE.Texture | null = target.depthTexture;
     renderer.setScissorTest(false);
     const restorePaint = paintTexture ? this.paints.bind(object, paintTexture) : undefined;
     const restoreChildPaint =
@@ -228,26 +299,21 @@ export class GpuMeshBodies {
       renderer.setClearColor(0, 0);
       renderer.clear();
       renderer.render(this.scene, this.camera);
-      this.drawCalls += renderer.info.render.calls;
-      const output =
-        (key === undefined ? undefined : this.images.admit(key, resolution)) ?? scratch.outline;
+      // A 3D view keeps its own count over every render of its frame.
+      if (!hold) this.drawCalls += renderer.info.render.calls;
       texture = this.outline.render(renderer, target, output);
-      depth = output.depthTexture;
-      this.drawCalls += renderer.info.render.calls;
+      if (!hold) this.drawCalls += renderer.info.render.calls;
     } finally {
       restorePaint?.();
       restoreChildPaint?.();
       if (childAsset) this.scene.remove(childAsset.object);
       renderer.setRenderTarget(previous);
+      renderer.setScissorTest(scissor);
       renderer.setClearColor(this.clearColor, alpha);
       this.scene.remove(object);
       this.scene.remove(this.contents.group);
     }
-    this.composite(camera, item, texture, radius, depth);
-    if (item.shadowCasterId !== undefined) this.shadowCasters.add(item.shadowCasterId);
-    if (item.bedGroup) this.bedDraws++;
-    if (paintTexture) this.paintDraws++;
-    return true;
+    return { texture, depth: output.depthTexture, radius, reused: false, painted };
   }
   private composite(
     camera: Camera,
@@ -283,12 +349,14 @@ export class GpuMeshBodies {
   recover() {
     this.surface.flush();
     this.images.clear();
+    this.held.clear();
     this.outline.recover();
     this.targets.clear();
   }
   dispose() {
     this.surface.flush();
     this.images.clear();
+    this.held.clear();
     this.paints.dispose();
     this.contents.clear();
     this.ready.clear();
@@ -297,6 +365,6 @@ export class GpuMeshBodies {
     this.targets.clear();
   }
   get targetBytes() {
-    return this.images.bytes + this.images.frameImages.bytes + this.targets.bytes;
+    return this.images.bytes + this.images.frameImages.bytes + this.held.bytes + this.targets.bytes;
   }
 }

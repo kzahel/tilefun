@@ -294,6 +294,7 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
       interior,
       shadows: control.shadows,
       topDown,
+      pixelBodies: control.pixelBodies,
       grass,
       headset: from.headset,
     };

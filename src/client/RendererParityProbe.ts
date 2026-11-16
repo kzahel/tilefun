@@ -211,6 +211,8 @@ export function probeRendererParity(
             drawRadius: Math.hypot(width, height) / (2 * camera.scale),
             shadows,
             topDown: { scale: camera.scale },
+            // As the player has it: `r_pixelcars3d` can turn vehicle images off.
+            pixelBodies: control.pixelBodies,
             grass,
           },
           target,
