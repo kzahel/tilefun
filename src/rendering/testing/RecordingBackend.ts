@@ -3,7 +3,6 @@ import type { InteriorContent } from "../../interiors/InteriorPresentation.js";
 import type { Chunk } from "../../world/Chunk.js";
 import type { ChunkRange } from "../../world/ChunkManager.js";
 import { ElevationDescriptorCache } from "../ElevationDescriptorCache.js";
-import type { OverlayDraw } from "../OverlayFrame.js";
 import type { RenderBackend, RenderPass, RenderView } from "../RenderFrame.js";
 import { type TerrainDrawOptions, TerrainFrame } from "../TerrainFrame.js";
 import type { TerrainRenderWorld, TerrainResourceId } from "../TerrainPresentation.js";
@@ -32,13 +31,7 @@ export class RecordingBackend implements RenderBackend {
   preparations = 0;
   assetRevision = 0;
   disposed = false;
-  /** Overlay items drawn onto a 2D context, copied. */
-  readonly drawnOverlays: OverlayDraw[][] = [];
   constructor(readonly assets: SpriteCatalog) {}
-  drawOverlayOn(_ctx: CanvasRenderingContext2D, items: readonly OverlayDraw[]) {
-    this.live();
-    this.drawnOverlays.push(items.map((item) => ({ ...item })));
-  }
   private live() {
     if (this.disposed) throw Error("disposed");
   }

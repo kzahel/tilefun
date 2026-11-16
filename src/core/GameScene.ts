@@ -20,6 +20,7 @@ import type { TouchPinch } from "../input/TouchPinch.js";
 import type { TouchTap } from "../input/TouchTap.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
+import type { OverlayDraw } from "../rendering/OverlayFrame.js";
 import type { RenderBackend } from "../rendering/RenderFrame.js";
 import type { SceneFrame } from "../rendering/SceneFrame.js";
 import type { View3dHost } from "../rendering/View3dHost.js";
@@ -64,6 +65,8 @@ export interface GameContext {
   /** One view of a display frame (226; see RenderHost.beginView). */
   beginView?(camera: Camera, region: RenderRegion): void;
   endView?(): void;
+  /** Overlay items on the UI canvas above every view (see RenderHost.drawUiOverlay). */
+  drawUiOverlay?(items: readonly OverlayDraw[]): void;
   /** The device session (replica, prediction, shared presentation) and seat 0's
    * view; `camera`, `stateView` and `sceneFrame` are seat-0 shortcuts onto them. */
   readonly session: DeviceSession;

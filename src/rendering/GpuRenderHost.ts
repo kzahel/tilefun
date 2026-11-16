@@ -95,6 +95,7 @@ export function createGpuRenderHost(
     endWorld: endView,
     beginView,
     endView,
+    drawUiOverlay: (items) => renderer.drawOverlayOn(uiContext, items),
     view3d: createView3dHost(
       renderer.surface,
       renderer.meshes,

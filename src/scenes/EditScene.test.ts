@@ -5,6 +5,7 @@ import type { EditorMode } from "../editor/EditorMode.js";
 import { EditorModel } from "../editor/EditorModel.js";
 import { createPlayer } from "../entities/Player.js";
 import { Camera } from "../rendering/Camera.js";
+import type { OverlayDraw } from "../rendering/OverlayFrame.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import { RecordingBackend } from "../rendering/testing/RecordingBackend.js";
 import { World } from "../world/World.js";
@@ -33,6 +34,7 @@ function setup(topDown: boolean, look: object | null = null) {
   };
   const entities = [createPlayer(64, 64)];
   const regions: number[] = [];
+  const uiOverlays: OverlayDraw[][] = [];
   const gc = {
     debugPanel: { terrainPacing: "throughput" },
     camera,
@@ -58,6 +60,9 @@ function setup(topDown: boolean, look: object | null = null) {
     firstPerson: { topDown, sync: () => {} },
     beginView: () => {},
     endView: () => {},
+    drawUiOverlay: (items: readonly OverlayDraw[]) => {
+      uiOverlays.push(items.map((item) => ({ ...item })));
+    },
     transport: {},
     console: { cvars: { get: () => undefined } },
     stateView: {
@@ -71,22 +76,22 @@ function setup(topDown: boolean, look: object | null = null) {
     },
     ctx: {},
   } as unknown as GameContext;
-  return { backend, gc, regions };
+  return { backend, gc, regions, uiOverlays };
 }
 
 describe("building mode", () => {
   it("draws in the unified top-down view with its overlays on the UI canvas", () => {
     drawn3d.result = true;
     drawn3d.calls = 0;
-    const { backend, gc, regions } = setup(true);
+    const { backend, gc, regions, uiOverlays } = setup(true);
     new EditScene().render(1, gc);
     expect(drawn3d.calls).toBe(1);
     // Laid out for this canvas, as play lays its views out.
     expect(regions).toEqual([256]);
     // No fixed view: only the overlays, drawn above the 3D view.
     expect(backend.passes.map((p) => p.kind)).toEqual([]);
-    expect(backend.drawnOverlays).toHaveLength(1);
-    expect(backend.drawnOverlays[0]?.some((item) => item.kind === "rect")).toBe(true);
+    expect(uiOverlays).toHaveLength(1);
+    expect(uiOverlays[0]?.some((item) => item.kind === "rect")).toBe(true);
     expect(gc.sceneFrame.overlays.items).toEqual([]);
   });
 
@@ -97,10 +102,10 @@ describe("building mode", () => {
       [false, null, true],
     ] as const) {
       drawn3d.result = result;
-      const { backend, gc } = setup(topDown, look);
+      const { backend, gc, uiOverlays } = setup(topDown, look);
       new EditScene().render(1, gc);
       expect(backend.passes.map((p) => p.kind)).toEqual(["clear", "terrain", "overlay", "scene"]);
-      expect(backend.drawnOverlays).toHaveLength(0);
+      expect(uiOverlays).toHaveLength(0);
     }
   });
 });

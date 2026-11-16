@@ -132,6 +132,7 @@ function recordingHost() {
     endWorld: vi.fn(),
     beginView: vi.fn(),
     endView: vi.fn(),
+    drawUiOverlay: vi.fn(),
     dispose: vi.fn(),
   } satisfies RenderHost;
 }

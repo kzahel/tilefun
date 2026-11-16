@@ -47,7 +47,6 @@ describe("backend-independent frame submission", () => {
         return true;
       },
       releaseChunk() {},
-      drawOverlayOn() {},
       getDiagnostics() {
         return {
           resident: 0,

@@ -86,7 +86,6 @@ describe("neutral interior frames", () => {
         return true;
       },
       releaseChunk() {},
-      drawOverlayOn() {},
       getDiagnostics() {
         return {
           resident: 0,

@@ -245,6 +245,8 @@ export class RasterRenderBackend implements RenderBackend {
     }
   }
 
+  /** Overlay items on another 2D context with this backend's sheets (the host's
+   * UI canvas above a 3D view). */
   drawOverlayOn(ctx: CanvasRenderingContext2D, items: readonly OverlayDraw[]): void {
     drawOverlayGeometry(ctx, items, this.sheets);
   }

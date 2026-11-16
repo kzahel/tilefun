@@ -873,6 +873,7 @@ export class GameClient implements GameTestHooks {
       endWorld: () => client.renderHost.endWorld(),
       beginView: (camera, region) => client.renderHost.beginView(camera, region),
       endView: () => client.renderHost.endView(),
+      drawUiOverlay: (items) => client.renderHost.drawUiOverlay(items),
       view3d: client.renderHost.view3d,
       session: this.device,
       view: this.view,

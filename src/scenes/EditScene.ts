@@ -261,10 +261,10 @@ export class EditScene implements GameScene {
 
   render(alpha: number, gc: GameContext): void {
     gc.camera.applyInterpolation(alpha);
-    const { beginView, endView } = gc;
+    const { beginView, endView, drawUiOverlay } = gc;
     // Building mode draws as play does: in the unified top-down view when the
     // device chose it (renderer unification), its overlays on the UI canvas above.
-    if (beginView && endView && gc.firstPerson?.topDown && !gc.view.look) {
+    if (beginView && endView && drawUiOverlay && gc.firstPerson?.topDown && !gc.view.look) {
       const views = gc.session.layoutViews(gc.canvas.width, gc.canvas.height, false);
       const [view] = views;
       // Seat 0 alone, as outside play; also when the game opens in building mode.
@@ -282,7 +282,7 @@ export class EditScene implements GameScene {
             return unified;
           },
         );
-        if (unified) this.collectOverlays(gc, (items) => gc.renderer.drawOverlayOn(gc.ctx, items));
+        if (unified) this.collectOverlays(gc, drawUiOverlay);
       }
     } else {
       gc.beginWorld?.();
