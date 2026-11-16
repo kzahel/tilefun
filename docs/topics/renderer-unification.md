@@ -384,6 +384,20 @@ for collision, the fixed view's depth and shadows, and the 3D volume alike.
 limits). `--query=` selects the renderer under test: none for the fixed view,
 `view=topdown3d` for the unified top-down view, `view=fps` for first person.
 
+Pixel 7a, 2026-11-16, after the pixel grid, grass, pixel vehicles, surface
+grids, particles, leftover building art and deck fades: unified against fixed,
+5 s per cell, render p50 ms (missed frames).
+
+| Scene | 1× unified | 1× fixed | 0.25× unified | 0.25× fixed |
+| --- | --- | --- | --- | --- |
+| city | 2.9 (0) | 3.5 (1) | 3.2 (0) | 3.6 (0) |
+| crowd | 5.7 (0) | 7.1 (11) | 9.7 (60) | 11.7 (92) |
+| woods | 3.8 (0) | 3.9 (0) | 3.7 (0) | 4.5 (1) |
+
+Both miss frames in the crowd at 0.25× (1,000 rabbits, authority-bound, tick
+20–26 ms); the unified view misses fewer. Unified draws: 23–36, 146 in the
+crowd at 0.25×. The Deck was not re-measured.
+
 Main-thread render time, p50 in ms, at zooms 1 / 0.25 / 0.1, after 251's merge.
 Tables with p95, missed frames, draw calls and the before-merge cells are in
 [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md#3d--delivered-2026-11-14);
