@@ -170,13 +170,13 @@ export function collectWorldSprites(input: WorldSpriteInput): void {
   });
 }
 
-interface RoomObserver {
+export interface RoomObserver {
   wx: number;
   wy: number;
   z: number;
 }
 /** The observer's displayed footprint centre and feet height. */
-function roomObserver(observer: Entity, alpha: number): RoomObserver {
+export function roomObserver(observer: Entity, alpha: number): RoomObserver {
   const p = interpolatePosition(observer.position, observer.prevPosition, alpha);
   const c = observer.collider;
   return {

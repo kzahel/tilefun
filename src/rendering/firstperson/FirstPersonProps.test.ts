@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import type { Prop, PropCollider } from "../../entities/Prop.js";
 import { createProp } from "../../entities/PropFactories.js";
+import { DECK_Z, treeHouseProp } from "../../entities/TreeHouse.js";
 import { jumpPlacements, jumpSlabProp } from "../../generation/regional/JumpProfiles.js";
 import { forestRowProp, forestRowType } from "../../patterns/ForestThicket.js";
 import { surfaceZAt } from "../../physics/SurfacePatch.js";
@@ -8,11 +9,14 @@ import { roadRailBridgeProp } from "../../railway/RoadRailBridge.js";
 import { roadDeckMarkings } from "../RoadDeckPresentation.js";
 import {
   appendLeftover,
+  appendPiecePlane,
   appendPropGeometry,
   blockingColliders,
+  hasRoomViews,
   projectedUv,
   propForm,
   propImageFrame,
+  propPieces,
   propSlices,
   propSolids,
   propSurfaces,
@@ -339,5 +343,57 @@ describe("artwork outside a building's volumes", () => {
       .find(Boolean);
     if (!ramp) throw Error("no ramp");
     expect(solidSilhouettes(ramp, propImageFrame(ramp), 0)).toBeUndefined();
+  });
+});
+
+describe("room props on their planes (tree houses, top-down)", () => {
+  const house = treeHouseProp(0, 200);
+  const corners = (piece: Parameters<typeof appendPiecePlane>[2], elevation = 0) => {
+    const faces = { positions: [] as number[], uvs: [] as number[], colors: [] as number[] };
+    appendPiecePlane(faces, house, piece, elevation);
+    return Array.from({ length: faces.positions.length / 3 }, (_, i) => ({
+      x: faces.positions[i * 3] ?? NaN,
+      y: faces.positions[i * 3 + 1] ?? NaN,
+      z: faces.positions[i * 3 + 2] ?? NaN,
+      v: faces.uvs[i * 2 + 1] ?? NaN,
+    }));
+  };
+
+  it("has an inside picture and an outside one, sharing the ground band", () => {
+    expect(hasRoomViews(house)).toBe(true);
+    const outside = propPieces(house, "outside"),
+      inside = propPieces(house, "inside");
+    expect(outside).toHaveLength(3);
+    expect(inside).toHaveLength(5);
+    expect(outside.at(-1)).toBe(inside.at(-1));
+  });
+
+  it("lays a floor piece on its deck, every pixel where the fixed view draws it", () => {
+    const deckBand = propPieces(house, "inside").find((p) => p.depthFloorZ !== undefined);
+    if (!deckBand) throw Error("no deck band");
+    const quad = corners(deckBand, 8);
+    expect(quad.every((p) => p.z === 8 + DECK_Z)).toBe(true);
+    // Screen row y − z runs from the piece's top to its bottom as v goes 0 → 1.
+    for (const p of quad)
+      expect(p.y - p.z).toBeCloseTo(
+        200 - 8 + deckBand.dy - deckBand.spriteHeight + p.v * deckBand.spriteHeight,
+      );
+  });
+
+  it("stands an upright piece at its plane, with rows below it lying in front", () => {
+    // The ground band stands at the deck's front edge, above its own bottom row.
+    const band = propPieces(house).at(-1);
+    if (!band?.depthDy) throw Error("no ground band");
+    const plane = 200 + band.depthDy;
+    const quad = corners(band);
+    const upright = quad.filter((p) => p.y === plane);
+    const lying = quad.filter((p) => p.y !== plane);
+    expect(upright).toHaveLength(6);
+    expect(lying).toHaveLength(6);
+    for (const p of upright)
+      expect(p.y - p.z).toBeCloseTo(200 + band.dy - band.spriteHeight * (1 - p.v));
+    // Lifted a quarter pixel along the view ray, as leftover art is.
+    for (const p of lying) expect(p.z).toBe(0.25);
+    expect(Math.max(...lying.map((p) => p.v))).toBe(1);
   });
 });

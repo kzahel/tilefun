@@ -17,20 +17,31 @@ export interface PropImageFrame {
 
 type Piece = { dx: number; dy: number; spriteWidth: number; spriteHeight: number };
 
-/** Outside-view pieces (or the single sprite), each anchored bottom-centre. */
+/** Which of a room prop's pictures (`parts[].view`): the fixed view shows the
+ * inside one while the observer is in one of its rooms (`observerInsideRoom`). */
+export type PropView = "outside" | "inside";
+
+/** The pieces one view of the prop shows (parts for both views, and its own), or
+ * the single sprite; each anchored bottom-centre. */
 export function propPieces(
   prop: Prop,
+  view: PropView = "outside",
 ): readonly (Piece & { frameCol: number; frameRow: number })[] {
-  const parts = prop.sprite.parts?.filter((part) => part.view !== "inside");
+  const parts = prop.sprite.parts?.filter((part) => !part.view || part.view === view);
   return parts?.length ? parts : [{ ...prop.sprite, dx: 0, dy: 0 }];
 }
 
-export function propImageFrame(prop: Prop): PropImageFrame {
+/** True when the prop has an inside picture to swap to (tree houses). */
+export function hasRoomViews(prop: Prop): boolean {
+  return !!prop.sprite.parts?.some((part) => part.view === "inside");
+}
+
+export function propImageFrame(prop: Prop, view: PropView = "outside"): PropImageFrame {
   let left = Infinity,
     top = Infinity,
     right = -Infinity,
     bottom = -Infinity;
-  for (const p of propPieces(prop)) {
+  for (const p of propPieces(prop, view)) {
     left = Math.min(left, p.dx - p.spriteWidth / 2);
     right = Math.max(right, p.dx + p.spriteWidth / 2);
     top = Math.min(top, p.dy - p.spriteHeight);
@@ -218,6 +229,68 @@ export function appendLeftover(
       ],
       LEFTOVER_LIFT,
     );
+}
+
+/** A piece of a prop's picture with the depth plane the fixed view gives it. */
+export interface PlanePiece {
+  dx: number;
+  dy: number;
+  spriteWidth: number;
+  spriteHeight: number;
+  depthDy?: number;
+  depthFloorZ?: number;
+}
+
+/**
+ * One piece of a prop's picture (its own image, `uv` 0–1 across it) on the plane
+ * the fixed view sorts it by (`collectScene`'s part depth): lying on a floor at
+ * `depthFloorZ` above the ground, or standing upright at the ground row
+ * `depthDy` (the piece's bottom row when neither is set), with any rows below
+ * that row lying on the ground in front, as `appendLeftover` lays them. Each
+ * pixel lands where the fixed view draws it, and bodies sort against it as
+ * there. The top-down camera's form of a room prop (tree houses).
+ */
+export function appendPiecePlane(
+  target: TexturedTriangles,
+  prop: Prop,
+  piece: PlanePiece,
+  elevation: number,
+): void {
+  const { wx, wy } = prop.position;
+  const left = wx + piece.dx - piece.spriteWidth / 2,
+    right = left + piece.spriteWidth;
+  // The piece's rows on screen, in world pixels (y − z).
+  const top = wy - elevation + piece.dy - piece.spriteHeight,
+    bottom = wy - elevation + piece.dy;
+  const v = (row: number) => (row - top) / piece.spriteHeight;
+  const quad = (rows: [number, number], at: (row: number) => [number, number], lift = 0) => {
+    const [r0, r1] = rows;
+    if (r1 <= r0) return;
+    const corners: [number, number, number, number][] = [
+      [left, ...at(r0), 0],
+      [right, ...at(r0), 1],
+      [right, ...at(r1), 1],
+      [left, ...at(r1), 0],
+    ];
+    const [a, b, c, d] = corners;
+    if (!a || !b || !c || !d) return;
+    for (const [x, y, z, u] of [a, b, c, a, c, d]) {
+      target.positions.push(x, y + lift, z + lift);
+      // The row is y − z before the lift.
+      target.uvs.push(u, v(y - z));
+      target.colors.push(1, 1, 1);
+    }
+  };
+  if (piece.depthFloorZ !== undefined) {
+    const z = elevation + piece.depthFloorZ;
+    quad([top, bottom], (row) => [row + z, z]);
+    return;
+  }
+  const plane = wy + (piece.depthDy ?? piece.dy);
+  // Rows above the plane's own ground row stand on it; the rest lie in front.
+  const split = Math.max(top, Math.min(bottom, plane - elevation));
+  quad([top, split], (row) => [plane, plane - row]);
+  quad([split, bottom], (row) => [row + elevation, elevation], LEFTOVER_LIFT);
 }
 
 export interface TexturedTriangles {

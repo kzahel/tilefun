@@ -1,7 +1,12 @@
 import * as THREE from "three";
 import type { Spritesheet } from "../../assets/Spritesheet.js";
 import type { Prop } from "../../entities/Prop.js";
-import { type PropImageFrame, propImageFrame, propPieces } from "./FirstPersonProps.js";
+import {
+  type PropImageFrame,
+  type PropView,
+  propImageFrame,
+  propPieces,
+} from "./FirstPersonProps.js";
 
 /** A pixel rectangle: left, top, right, bottom. */
 export type Rect = readonly [number, number, number, number];
@@ -56,14 +61,14 @@ export class FirstPersonImages {
     return this.disposed ? undefined : this.sheets.get(key);
   }
 
-  prop(prop: Prop, opaque: boolean): PropImage | undefined {
-    const pieces = propPieces(prop);
+  prop(prop: Prop, opaque: boolean, view: PropView = "outside"): PropImage | undefined {
+    const pieces = propPieces(prop, view);
     const key = `${prop.sprite.sheetKey}|${opaque ? 1 : 0}|${pieces
       .map((p) => `${p.frameCol},${p.frameRow},${p.spriteWidth},${p.spriteHeight},${p.dx},${p.dy}`)
       .join(";")}`;
     const sheet = this.sheets.get(prop.sprite.sheetKey);
     if (!sheet && !this.propImages.has(key)) return undefined;
-    const frame = propImageFrame(prop);
+    const frame = propImageFrame(prop, view);
     return this.composed(key, frame, opaque, (ctx) => {
       if (!sheet) return;
       for (const p of pieces) {
@@ -89,15 +94,19 @@ export class FirstPersonImages {
    * show, such as rooftop signs and a carpet before the door. Null when nothing
    * is left; undefined while the sheet is not loaded.
    */
-  leftover(prop: Prop, holes: readonly Rect[]): PropImage | null | undefined {
-    const pieces = propPieces(prop);
+  leftover(
+    prop: Prop,
+    holes: readonly Rect[],
+    view: PropView = "outside",
+  ): PropImage | null | undefined {
+    const pieces = propPieces(prop, view);
     const key = `${prop.sprite.sheetKey}|left|${pieces
       .map((p) => `${p.frameCol},${p.frameRow},${p.spriteWidth},${p.spriteHeight},${p.dx},${p.dy}`)
       .join(";")}|${holes.map((h) => h.join(",")).join(";")}`;
     if (this.emptyLeftovers.has(key)) return null;
     const sheet = this.sheets.get(prop.sprite.sheetKey);
     if (!sheet && !this.propImages.has(key)) return undefined;
-    const frame = propImageFrame(prop);
+    const frame = propImageFrame(prop, view);
     let empty = false;
     const image = this.composed(key, frame, false, (ctx) => {
       if (!sheet) return;

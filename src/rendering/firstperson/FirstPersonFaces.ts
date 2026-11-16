@@ -98,8 +98,11 @@ export class MergedFaces {
       geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
       if (uvs) geometry.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
       geometry.computeBoundingSphere();
-      if (bucket.mesh) bucket.mesh.geometry = geometry;
-      else {
+      if (bucket.mesh) {
+        bucket.mesh.geometry = geometry;
+        // A rebuilt owner may hand in a new parent (a room prop's view group).
+        if (bucket.mesh.parent !== first.parent) first.parent.add(bucket.mesh);
+      } else {
         bucket.mesh = first.lines
           ? new THREE.LineSegments(geometry, first.material)
           : new THREE.Mesh(geometry, first.material);

@@ -5,6 +5,7 @@ import { CHUNK_SIZE_PX, VIEW_BACKDROP_CSS } from "../../config/constants.js";
 import type { Entity } from "../../entities/Entity.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { World } from "../../world/World.js";
+import { observerInsideRoom, roomObserver } from "../collectScene.js";
 import type { GrassItem, SpriteItem } from "../SceneItem.js";
 import { SURFACE_GRID, surfaceDisplay, surfaceFadeOpacity } from "../SurfacePresentation.js";
 import type { PageRegion, SharedMeshAssets, SharedPages, View3dTarget } from "../View3dHost.js";
@@ -30,6 +31,7 @@ import {
   disposeGroup,
   type OverheadDeck,
   PropMeshes,
+  type RoomProp,
   texturedMesh,
 } from "./FirstPersonPropMeshes.js";
 import { type PropSurface, surfaceUnder } from "./FirstPersonProps.js";
@@ -251,6 +253,21 @@ export class FirstPersonView {
   private readonly deckMaterials = new Map<string, THREE.MeshBasicMaterial>();
   /** Some deck was fading last frame (its mesh drawn after grass and effects). */
   private decksFading = false;
+  /** Room props' two views (tree houses), by chunk key and prop id: the top-down
+   * camera shows the inside one while the frame's observer is in one of its
+   * rooms, as the fixed view does (`observerInsideRoom`), each picture's pieces
+   * on their planes. First person shows the volumes. */
+  private readonly roomViews = new Map<
+    string,
+    {
+      prop: Prop;
+      cx: number;
+      cy: number;
+      solid: THREE.Group;
+      outside: THREE.Group;
+      inside: THREE.Group;
+    }
+  >();
   /** Emergency lamps of vehicles drawn as sprites this frame. */
   private readonly lamps: LampItem[] = [];
   private readonly vehicles = new FirstPersonVehicles((material) => {
@@ -482,6 +499,7 @@ export class FirstPersonView {
       this.stats.effects = this.effects.count;
       // Read after the frame's page requests: the atlas is replaced when it grows.
       this.atlas.value = pages.atlas;
+      this.swapRoomViews(frame);
       this.sun.update(
         renderer,
         this.scene,
@@ -660,6 +678,8 @@ export class FirstPersonView {
           parent,
           ...deck.flat,
         });
+      this.dropRoomViews(key);
+      for (const room of built.rooms) parts.push(...this.roomViewParts(key, cx, cy, room));
       this.faces.replace(`${key}:props`, parts);
       scene.props = { signature, surfaces: built.surfaces, decks: built.decks };
       this.cards.set(key, built.billboards, this.cardPages);
@@ -681,7 +701,68 @@ export class FirstPersonView {
     return !!page;
   }
 
+  /** A room prop's two views as faces under groups of their own (`roomViews`). */
+  private roomViewParts(key: string, cx: number, cy: number, room: RoomProp): FacePart[] {
+    const solid = new THREE.Group(),
+      outside = new THREE.Group(),
+      inside = new THREE.Group();
+    outside.visible = inside.visible = false;
+    this.solidRoot.add(solid, outside, inside);
+    const id = `${key}:${room.prop.id}`;
+    this.roomViews.set(id, { prop: room.prop, cx, cy, solid, outside, inside });
+    const parts: FacePart[] = [];
+    for (const [view, faces, parent] of [
+      ["solid", room.solid, solid],
+      ["outside", room.outside, outside],
+      ["inside", room.inside, inside],
+    ] as const) {
+      if (faces.flat)
+        parts.push({
+          bucket: `room:${id}:${view}`,
+          material: this.flatMaterial,
+          parent,
+          ...faces.flat,
+        });
+      for (const [texture, textured] of faces.textured)
+        parts.push({
+          bucket: `room:${id}:${view}:${texture.uuid}`,
+          material: this.propMeshes.faceMaterial(texture),
+          parent,
+          ...textured,
+        });
+    }
+    return parts;
+  }
+
+  private dropRoomViews(key: string): void {
+    for (const [id, room] of this.roomViews)
+      if (id.startsWith(`${key}:`)) {
+        room.solid.removeFromParent();
+        room.outside.removeFromParent();
+        room.inside.removeFromParent();
+        this.roomViews.delete(id);
+      }
+  }
+
+  /** Volumes in first person; top-down, the inside picture while the frame's
+   * observer is in the prop's room and the outside one otherwise. */
+  private swapRoomViews(frame: FirstPersonFrame): void {
+    if (!this.roomViews.size) return;
+    const topDown = !!frame.topDown;
+    const cutaway = topDown ? frame.cutaway : undefined;
+    const observer = cutaway && roomObserver(cutaway.observer, cutaway.alpha);
+    for (const room of this.roomViews.values()) {
+      const inside = !!observer && observerInsideRoom(room.prop, observer);
+      const shown = !topDown ? room.solid : inside ? room.inside : room.outside;
+      if (shown.visible) continue;
+      for (const group of [room.solid, room.outside, room.inside]) group.visible = group === shown;
+      // Each form casts its own shadow.
+      this.sun.invalidate(room.cx, room.cy);
+    }
+  }
+
   private dropChunk(key: string, chunk: ChunkScene): void {
+    this.dropRoomViews(key);
     this.ground.delete(key);
     this.faces.remove(`${key}:walls`);
     this.faces.remove(`${key}:props`);

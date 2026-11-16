@@ -3,6 +3,7 @@
 // without `?view=topdown3d`, after pressing one of the fixture's start buttons.
 //
 //   node scripts/first-person/lab-capture.mjs [FIXTURE=crossing] [START=trackside] [--out=DIR]
+//     [--query=a=b] (added to the unified view's URL)
 //
 // Writes `<fixture>-<start>.png` (fixed view) and `<fixture>-<start>-3d.png`.
 import { mkdir } from "node:fs/promises";
@@ -35,7 +36,8 @@ try {
   browser = await chromium.launch({ headless: false, channel: "chromium" });
   const page = await browser.newPage({ viewport: { width: 1400, height: 1100 } });
   page.on("pageerror", (error) => console.log(`page error: ${error.message}`));
-  for (const query of ["", "&view=topdown3d"]) {
+  const extra = process.argv.find((arg) => arg.startsWith("--query="))?.slice(8);
+  for (const query of ["", `&view=topdown3d${extra ? `&${extra}` : ""}`]) {
     await page.goto(`${origin}/workshop.html?geometry=${fixture}${query}#/tool/world-geometry`);
     await page.waitForSelector("canvas", { timeout: 60_000 });
     await page.waitForTimeout(6000);

@@ -7,12 +7,16 @@ import { artCard, type Billboard, sheetFrame } from "./FirstPersonBillboards.js"
 import { BACKING_ALPHA, type FirstPersonImages, type PropImage } from "./FirstPersonImages.js";
 import {
   appendLeftover,
+  appendPiecePlane,
   appendPropGeometry,
+  hasRoomViews,
   isOverheadDeck,
   type PropGeometry,
   type PropSurface,
+  type PropView,
   propForm,
   propImageFrame,
+  propPieces,
   propSlices,
   propSurfaces,
   solidSilhouettes,
@@ -35,6 +39,25 @@ export interface ChunkProps {
   surfaces: PropSurface[];
   /** Decks a body can stand under, each apart so it can fade (`isOverheadDeck`). */
   decks: OverheadDeck[];
+  /** Props with an inside picture (tree houses), each view apart so the view can
+   * swap them as the fixed view does (`observerInsideRoom`). */
+  rooms: RoomProp[];
+}
+
+/** One view's faces of a room prop. */
+export interface RoomPropFaces {
+  flat: ColoredTriangles | undefined;
+  textured: Map<THREE.Texture, TexturedFaces>;
+}
+
+/** A room prop's forms: its volumes wearing the outside picture (first person),
+ * and for the top-down camera each picture's pieces on their planes
+ * (`appendPiecePlane`). */
+export interface RoomProp {
+  readonly prop: Prop;
+  readonly solid: RoomPropFaces;
+  readonly outside: RoomPropFaces;
+  readonly inside: RoomPropFaces;
 }
 
 /** One overhead deck's faces, with the surface the fixed view's cutaway reads. */
@@ -150,6 +173,7 @@ export class PropMeshes {
       billboards: [],
       surfaces: [],
       decks: [],
+      rooms: [],
     };
     const facesFor: FacesFor = (image) => {
       if (!image) return undefined;
@@ -179,24 +203,25 @@ export class PropMeshes {
     else if (form === "billboard") {
       const billboard = this.propBillboard(prop, elevation);
       if (billboard) built.billboards.push(billboard);
+    } else if (hasRoomViews(prop)) {
+      built.surfaces.push(...propSurfaces(prop));
+      built.rooms.push({
+        prop,
+        solid: this.roomView((flat, facesFor) =>
+          this.appendSolid(prop, elevation, flat, facesFor, built, "outside"),
+        ),
+        outside: this.roomView((_flat, facesFor) =>
+          this.appendPlanes(prop, elevation, facesFor, "outside"),
+        ),
+        inside: this.roomView((_flat, facesFor) =>
+          this.appendPlanes(prop, elevation, facesFor, "inside"),
+        ),
+      });
     } else {
-      const image = this.images.prop(prop, true);
-      const textured = facesFor(image);
       const surfaces = propSurfaces(prop);
       const overhead = isOverheadDeck(prop) ? new TriangleWriter() : undefined;
-      appendPropGeometry(
-        { flat: overhead ?? flat, textured, lines: built.lines },
-        prop,
-        image?.color ?? 0x8a8a8a,
-        elevation,
-        frame,
-      );
+      this.appendSolid(prop, elevation, overhead ?? flat, facesFor, built, "outside");
       built.surfaces.push(...surfaces);
-      // Artwork the volumes do not wear (signs, a carpet): see `appendLeftover`.
-      const holes = solidSilhouettes(prop, frame, elevation);
-      const leftover = holes && this.images.leftover(prop, holes);
-      const leftoverFaces = leftover ? facesFor(leftover) : undefined;
-      if (leftoverFaces) appendLeftover(leftoverFaces, prop, frame, elevation);
       const [surface] = surfaces;
       if (overhead?.vertexCount && surface)
         built.decks.push({
@@ -205,6 +230,67 @@ export class PropMeshes {
           bounds: surface.bounds,
           flat: overhead.finish(),
         });
+    }
+  }
+
+  /** A solid prop's volumes wearing one view's picture, and the artwork they do
+   * not wear (signs, a carpet: see `appendLeftover`). */
+  private appendSolid(
+    prop: Prop,
+    elevation: number,
+    flat: TriangleWriter,
+    facesFor: FacesFor,
+    built: ChunkProps,
+    view: PropView,
+  ): void {
+    const frame = propImageFrame(prop, view);
+    const image = this.images.prop(prop, true, view);
+    appendPropGeometry(
+      { flat, textured: facesFor(image), lines: built.lines },
+      prop,
+      image?.color ?? 0x8a8a8a,
+      elevation,
+      frame,
+    );
+    const holes = solidSilhouettes(prop, frame, elevation);
+    const leftover = holes && this.images.leftover(prop, holes, view);
+    const leftoverFaces = leftover ? facesFor(leftover) : undefined;
+    if (leftoverFaces) appendLeftover(leftoverFaces, prop, frame, elevation);
+  }
+
+  /** One form of a room prop, apart from the chunk's merged faces. */
+  private roomView(append: (flat: TriangleWriter, facesFor: FacesFor) => void): RoomPropFaces {
+    const flat = new TriangleWriter();
+    const textured = new Map<THREE.Texture, TexturedFaces>();
+    const facesFor: FacesFor = (image) => {
+      if (!image) return undefined;
+      const faces = textured.get(image.texture) ?? { positions: [], uvs: [], colors: [] };
+      textured.set(image.texture, faces);
+      return faces;
+    };
+    append(flat, facesFor);
+    return { flat: flat.vertexCount ? flat.finish() : undefined, textured };
+  }
+
+  /** One picture's pieces, each its own image on its plane. */
+  private appendPlanes(prop: Prop, elevation: number, facesFor: FacesFor, view: PropView): void {
+    const sheet = this.images.sheet(prop.sprite.sheetKey);
+    if (!sheet) return;
+    for (const piece of propPieces(prop, view)) {
+      const region = sheet.getRegion(piece.frameCol, piece.frameRow);
+      const image = this.images.region(
+        prop.sprite.sheetKey,
+        [region.x, region.y, piece.spriteWidth, piece.spriteHeight],
+        {
+          left: piece.dx - piece.spriteWidth / 2,
+          top: piece.dy - piece.spriteHeight,
+          width: piece.spriteWidth,
+          height: piece.spriteHeight,
+        },
+        false,
+      );
+      const faces = facesFor(image);
+      if (faces) appendPiecePlane(faces, prop, piece, elevation);
     }
   }
 

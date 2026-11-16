@@ -2,9 +2,11 @@ import * as THREE from "three";
 import { describe, expect, it } from "vitest";
 import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
 import { createPlayer } from "../../entities/Player.js";
+import { DECK_Z, treeHousePoint, treeHouseProp } from "../../entities/TreeHouse.js";
 import { railCrossingRecipe } from "../../scenarios/RailCrossingRecipe.js";
 import { Chunk } from "../../world/Chunk.js";
 import type { CarMeshAsset } from "../CarMeshAsset.js";
+import { observerInsideRoom, roomObserver } from "../collectScene.js";
 import type { SpriteItem } from "../SceneItem.js";
 import { REVEAL_OPACITY } from "../SurfacePresentation.js";
 import type { BodyImage, View3dTarget } from "../View3dHost.js";
@@ -277,6 +279,52 @@ describe("the view's merged static world (251)", () => {
     expect(view.stats.bodyImages).toBe(0);
     expect(view.stats.cars).toBe(6);
     view.dispose();
+  });
+
+  it("swaps a tree house to its inside picture top-down while the observer is in its cabin", () => {
+    const loaded = new Map<string, Chunk>();
+    for (let cy = -2; cy <= 1; cy++)
+      for (let cx = -2; cx <= 1; cx++) loaded.set(`${cx},${cy}`, new Chunk());
+    const house = { ...treeHouseProp(0, 100), id: 7 };
+    const props = [house];
+    const cabin = treeHousePoint(0, 100, 65, 140);
+    const player = (z: number) => {
+      const body = { ...createPlayer(cabin.wx, cabin.wy), wz: z };
+      // The fixed view's own test, at the body's footprint.
+      expect(observerInsideRoom(house, roomObserver(body, 1))).toBe(z === DECK_Z);
+      return body;
+    };
+    const at = (observer: ReturnType<typeof player>, topDown = true): FirstPersonFrame => ({
+      ...frame(world(loaded), topDown),
+      eye: { x: 0, y: 0, z: 0, yaw: 0, pitch: 0 },
+      props,
+      cutaway: { observer, fades: new Map(), time: 0, alpha: 1 },
+    });
+    const view = new FirstPersonView(new Map());
+    const rooms = () => [
+      ...(
+        view as unknown as {
+          roomViews: Map<string, { solid: THREE.Group; outside: THREE.Group; inside: THREE.Group }>;
+        }
+      ).roomViews.values(),
+    ];
+    settle(view, at(player(0)));
+    expect(rooms()).toHaveLength(1);
+    const room = () => rooms()[0];
+    // Each view is its own meshes, under its own group.
+    // Without sheets only the volumes have faces (flat); the pictures need artwork.
+    expect(room()?.solid.children.length).toBeGreaterThan(0);
+    const shown = () => [room()?.solid.visible, room()?.outside.visible, room()?.inside.visible];
+    expect(shown()).toEqual([false, true, false]);
+    view.render(at(player(DECK_Z)), target);
+    expect(shown()).toEqual([false, false, true]);
+    // First person shows the volumes.
+    const firstPerson = at(player(DECK_Z), false);
+    settle(view, firstPerson);
+    view.render(firstPerson, target);
+    expect(shown()).toEqual([true, false, false]);
+    view.dispose();
+    expect(rooms()).toHaveLength(0);
   });
 
   it("fades an overhead deck over the player beneath it, as the fixed view's cutaway does", () => {
