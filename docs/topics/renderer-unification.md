@@ -4,10 +4,10 @@ Topic: renderer-unification
 Status: committed direction, 2026-11-14; slices 1 (one renderer host), 2 (ground
 artwork, shared page atlas), 3 (opt-in top-down camera, parity probe, merged
 meshes, device scorecard) and 4 (play in a headset) delivered the same day;
-slice 5 (top-down parity) started 2026-11-15 with building bodies and grass. The fixed 2D
-view is the default top-down renderer and stays so until the
-[retirement gate](#retirement-gate) is met.
-Updated: 2026-11-15.
+slice 5 (top-down parity) started 2026-11-15 with building bodies and grass. Since
+2026-11-16 the unified top-down view is play's default (owner instruction, gate 2);
+the fixed 2D view stays selectable until the [retirement gate](#retirement-gate).
+Updated: 2026-11-16.
 
 Owns the move to one world renderer: its status, parity checklist, device
 scorecard and decision gates. [Rendering architecture](rendering-architecture.md)
@@ -24,8 +24,9 @@ wanted as well, and a third renderer is not.
   renderer. Top-down, first person, chase, orbit and XR are cameras on it.
 - Unification runs in that direction only. The first-person view is not merged
   into the fixed 2D backend.
-- The fixed 2D view stays the default for top-down play until the unified one is
-  good enough. Until then it is not deleted, not degraded and not left unmaintained.
+- The fixed 2D view stayed the default for top-down play until the unified one
+  was good enough (owner, 2026-11-16: make it the default). It stays selectable
+  until retirement: not deleted, not degraded and not left unmaintained.
 
 ## Why this direction
 
@@ -42,9 +43,10 @@ wanted as well, and a third renderer is not.
 
 ## Guardrails
 
-- **Default.** Top-down play, labs, the explorer and probes draw through the
-  fixed GPU backend until the retirement gate. New top-down features keep working
-  there.
+- **Default.** Top-down play and building mode draw through the unified view
+  since 2026-11-16. The fixed GPU backend stays selectable for play and still
+  draws labs by default, the explorer, probes and review captures until the
+  retirement gate. New top-down features keep working there.
 - **Review raster.** `ReviewRasterBackend` and fingerprinted review images are
   outside this work and stay.
 - **No cost to the default.** A slice must not slow the fixed view. Check the
@@ -52,23 +54,28 @@ wanted as well, and a third renderer is not.
 - **One presentation evaluation.** Both renderers keep reading the shared
   collector, mesh poses and shadow shapes. Nothing here changes simulation,
   prediction or replication.
-- **Opt-in until gated.** The unified top-down camera is a debug or Options
-  choice. It becomes the default only by owner decision.
+- **Classic view selectable.** The fixed view is an Options choice (and
+  `?view=fixed`, `r_topdown3d 0`) until retirement, which is an owner decision.
 - **Device claims need device runs.** The Mac alone does not show that a change
   is safe on the phone, the Deck or the headset.
 - **Labs.** Shared changes account for embedded labs
   ([embedded engine labs](embedded-engine-labs.md)).
 
-## Trying the unified top-down view
+## Choosing the view
 
-Since 2026-11-16 players can choose **Options → Pixel 3D top-down view
-(preview)**. The choice is saved on the device (`unifiedTopDown.ts`, local
-storage), not in the player profile, because it is a renderer choice like the
-others below. It stays in sync with the debug panel's **Unified top-down 3D
-(experimental)** (**F3**, or **More → Debug**), `/r_topdown3d 1` / `0` in the
-console, and the startup flag `?view=topdown3d`. Those three change only the
-current load. It is off by default; making it the default is the owner's gate,
-and the parity checklist still applies.
+Since 2026-11-16 the unified top-down view is the default. **Options → Pixel 3D
+top-down view** turns it off for the classic fixed view; the choice is saved on
+the device (`unifiedTopDown.ts`, local storage: only "0", the classic view, is
+remembered as a choice), not in the player profile, because it is a renderer
+choice like the others below. It stays in sync with the debug panel's
+**Unified top-down 3D** (**F3**, or **More → Debug**) and `/r_topdown3d 1` / `0`
+in the console, which change only the current load. `?view=fixed` (or `2d`) and
+`?view=topdown3d` override the saved choice for one load. Specs that test the
+fixed backend's own passes pin `?view=fixed` (`terrain-pacing.spec.ts`).
+
+From 2026-11-16 until the default changed the same day it was an opt-in,
+**Pixel 3D top-down view (preview)**; a device that opted in keeps the unified
+view.
 
 ## Target shape
 
@@ -103,7 +110,7 @@ row when a slice starts, delivers or is blocked.
 | 3 — Top-down camera, parity probe, draw calls, device scorecard | Done 2026-11-14: `?view=topdown3d` / `r_topdown3d` draws top-down play through the 3D scene; the parity probe gives the checklist numbers; static content is merged into 4 to 25 draws; measured on the Mac, Pixel 7a and Deck, with a go on draw-call cost | [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) |
 | 4 — XR on the shared scene | Done 2026-11-14 for owner play: the world menu's **Headset** buttons start a WebXR session as a floating screen, immersive first person or a tabletop miniature, with the headset's controllers as seat 0's pad; all three hold 72 Hz on a Quest 3 in `city` and `woods`. Comfort and the controller mapping are not yet checked by a wearer | [252](../tactical/252-xr-on-the-shared-scene.md) |
 | 5 — Top-down parity | In progress since 2026-11-15: building bodies match their artwork (solid props identical at 1×), grass blades are drawn (99% overlap), and since 2026-11-16 vehicles are the fixed view's outlined pixel images (identical at 1×). Sprite edges with pixel snapping are next | checklist below |
-| 6 — Opt-in, default, retirement | Not started (owner decisions) | gate below |
+| 6 — Opt-in, default, retirement | Opt-in and default done 2026-11-16 (owner instruction); retirement not started | gate below |
 
 ## Top-down parity checklist
 
@@ -485,6 +492,11 @@ Three owner decisions, in order. Each needs the evidence listed.
    selectable. Needs every checklist row done or explicitly waived by the owner,
    scorecard cells no worse than the fixed view on all three devices at zooms 1,
    0.25 and 0.1, labs running on it, and an owner and child play review.
+   **Taken 2026-11-16 on the owner's instruction** to proceed. Where it stood:
+   the scorecard holds for `city` and `woods` on all three devices (the crowd is
+   authority-bound); the checklist rows still open are listed under
+   [Next](#next); labs run on it on request (`?view=topdown3d`), not by default;
+   the owner and child play review has not happened yet.
 3. **Retirement.** The fixed GPU backend's world drawing is deleted. Needs a
    period as default without reported regressions, and probes and labs moved or
    retired. The review raster stays.

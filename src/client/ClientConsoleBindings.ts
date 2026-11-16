@@ -1,4 +1,4 @@
-import { savedUnifiedTopDown } from "../config/unifiedTopDown.js";
+import { unifiedTopDownChoice } from "../config/unifiedTopDown.js";
 import { registerClientCommands } from "../console/clientCommands.js";
 import { registerClientCVars } from "../console/clientCVars.js";
 import { registerServerCommandStubs } from "../console/serverCommandStubs.js";
@@ -60,7 +60,8 @@ export function registerClientConsole(
   });
   if (new URLSearchParams(location.search).get("view") === "fps")
     clientCVars.r_firstperson.set(true);
-  // The top-down view through the 3D scene (251): an opt-in for the whole device.
+  // The top-down view through the 3D scene (251), the default for the whole
+  // device since 2026-11-16; the classic fixed view is a choice.
   clientCVars.r_topdown3d.onChange((val) => {
     gc.debugPanel.topDown3d = val;
     if (gc.firstPerson) gc.firstPerson.topDown = val;
@@ -68,11 +69,9 @@ export function registerClientConsole(
   gc.debugPanel.onTopDown3dChange((checked) => {
     clientCVars.r_topdown3d.set(checked);
   });
-  // `?view=topdown3d` turns it on for this load; Options saves it for the device.
-  if (
-    new URLSearchParams(location.search).get("view") === "topdown3d" ||
-    savedUnifiedTopDown(globalThis.localStorage)
-  )
+  // Options saves the choice for the device; `?view=fixed` / `?view=topdown3d`
+  // override it for this load.
+  if (unifiedTopDownChoice(location.search, globalThis.localStorage))
     clientCVars.r_topdown3d.set(true);
   clientCVars.r_fpshadows.onChange((val) => {
     if (gc.firstPerson) gc.firstPerson.shadows = val;

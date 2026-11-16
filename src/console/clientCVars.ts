@@ -204,7 +204,7 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
   const r_topdown3d = engine.cvars.register<boolean>({
     name: "r_topdown3d",
     description:
-      "Draw the top-down view in the 3D scene, an unfinished experiment (?view=topdown3d enables)",
+      "Draw the top-down view in the 3D scene, the default (0 for the classic fixed view; ?view=fixed for one load)",
     type: "boolean",
     defaultValue: false,
     category: "r",

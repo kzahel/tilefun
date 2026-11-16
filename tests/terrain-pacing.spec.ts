@@ -43,7 +43,8 @@ type GameCanvas = HTMLCanvasElement & {
 
 async function openDebug(page: Page) {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/tilefun/?nogamepad");
+  // The fixed view's terrain passes: the classic view, behind its setting.
+  await page.goto("/tilefun/?nogamepad&view=fixed");
   const canvas = page.locator("#game");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await expect(canvas).toHaveAttribute("data-renderer", "gpu");

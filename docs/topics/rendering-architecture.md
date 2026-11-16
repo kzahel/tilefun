@@ -2,11 +2,12 @@
 
 [248](../tactical/248-renderer-unification.md) (owner decision 2026-11-14) commits
 to one world renderer: the first-person 3D scene, with top-down as an oblique
-camera on it and WebXR on the same scene. The fixed GPU backend described below
-stays the default top-down renderer until the owner gates in
+camera on it and WebXR on the same scene. Since 2026-11-16 that top-down camera
+is play's default; the fixed GPU backend described below stays selectable (and
+draws labs, probes and review captures) until the retirement gate in
 [renderer unification](renderer-unification.md), which owns that work's status,
 parity checklist and device scorecard. Do not delete or degrade the fixed view
-before those gates. This topic keeps backend boundaries and resource lifetimes.
+before that gate. This topic keeps backend boundaries and resource lifetimes.
 Since [249](../tactical/249-one-renderer-host.md) phase 1a the first-person view
 has no canvas or context of its own: `RenderHost.view3d` lends it the host's
 `WebGLRenderer`, bound to a region of the world canvas, and restores the host's

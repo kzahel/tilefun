@@ -89,7 +89,8 @@ export class FirstPersonControl {
   /** Captures only: raises every eye by this many world pixels for an overview. */
   lift = 0;
   /** Top-down views draw in the 3D scene through the fixed view's camera (251).
-   * A device-wide opt-in (`r_topdown3d`, `?view=topdown3d`); off by default. */
+   * A device-wide choice (`r_topdown3d`, Options, `?view=fixed`), which the
+   * game turns on by default; off until then, as for labs and probes. */
   private topDownChoice = false;
   /** Presentation storage for 3D views; their mesh poses never share the fixed view's. */
   readonly frame = new SceneFrame({

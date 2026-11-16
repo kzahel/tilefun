@@ -110,7 +110,7 @@ export class GameMenuChrome {
         await this.saveProfile({ firstPersonControls: controls });
       },
       async (enabled) => {
-        // The cvar owns the live state (debug panel, console, ?view=topdown3d).
+        // The cvar owns the live state (debug panel, console, ?view=fixed).
         host.consoleEngine.cvars.get("r_topdown3d")?.set(enabled);
         saveUnifiedTopDown(localStorage, enabled);
       },

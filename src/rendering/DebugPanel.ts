@@ -64,7 +64,7 @@ export class DebugPanel {
     topDown3dRow.style.cssText = `${ROW_STYLE}cursor:pointer;`;
     this.topDown3dCheckbox = document.createElement("input");
     this.topDown3dCheckbox.type = "checkbox";
-    topDown3dRow.append(this.topDown3dCheckbox, "Unified top-down 3D (experimental)");
+    topDown3dRow.append(this.topDown3dCheckbox, "Unified top-down 3D (off: classic view)");
     this.container.append(topDown3dRow);
 
     const geometry = document.createElement("fieldset");

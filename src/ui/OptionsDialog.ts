@@ -137,11 +137,11 @@ export class OptionsDialog {
     this.unified.onchange = () => {
       void this.chooseUnified();
     };
-    unified.append(this.unified, "Pixel 3D top-down view (preview)");
+    unified.append(this.unified, "Pixel 3D top-down view");
     const unifiedHelp = document.createElement("p");
     unifiedHelp.id = "options-unified-help";
     unifiedHelp.textContent =
-      "Draws the usual top-down view with the new 3D renderer: crisp pixels that move together. Saved on this device. Rooms and building mode still use the classic view.";
+      "Draws the top-down view with the 3D renderer: crisp pixels that move together. Turn it off for the classic view. Saved on this device.";
     const drivingHelp = document.createElement("p");
     drivingHelp.id = "options-driving-help";
     drivingHelp.textContent =
