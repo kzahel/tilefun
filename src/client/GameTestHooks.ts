@@ -22,7 +22,7 @@ import type { GemHUD } from "../ui/GemHUD.js";
 import type { MainMenu } from "../ui/MainMenu.js";
 import type { RemoteStateView } from "./ClientStateView.js";
 import type { FirstPersonControl } from "./FirstPersonControl.js";
-import type { ParityOptions } from "./RendererParityProbe.js";
+import type { FilmOptions, ParityOptions } from "./RendererParityProbe.js";
 import type { XrControl } from "./XrControl.js";
 
 /**
@@ -90,5 +90,8 @@ export function exposeGameTestHooks(canvas: HTMLCanvasElement, hooks: GameTestHo
     // through the fixed view and the 3D scene's top-down camera, compared.
     __parity: async (options?: ParityOptions) =>
       (await import("./RendererParityProbe.js")).probeRendererParity(hooks, options),
+    // The renderer film: a pan through both renderers, frame by frame.
+    __parityFilm: async (options: FilmOptions) =>
+      (await import("./RendererParityProbe.js")).filmRendererParity(hooks, options),
   });
 }

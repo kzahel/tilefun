@@ -125,10 +125,11 @@ were measured on 2026-11-15; the other rows are 251's.
 | Particles and contact effects | Missing | |
 | Surface decals | Missing | |
 | Sprite edges | Missing | 3D cards are hard cutouts (`alphaTest`) with one sample per pixel; the fixed view blends filtered edges at fractional zoom. Wildlife overlaps 83–88% at 1× (the soft shadow painted into those sprites is cut off) and 67–84% at 0.25× |
-| Pixel snapping and stable sampling at fractional zoom | Missing | Fixed-view rules from 213 and 215. The standing-card row above is the first measured case |
+| Pixel snapping and stable sampling at fractional zoom | Missing | Fixed-view rules from 213 and 215. The standing-card row above is the first measured case. Owner direction, 2026-11-16: snap, with one shared rule for every element on screen. Behaviour in motion: [renderer film](#renderer-film) |
+| Grass in front of actors | Missing | The 3D scene draws the blades an actor stands in over its body ([renderer film](#renderer-film)) |
 | Vehicle shading and outline | Done at 1× for the top-down camera; partial zoomed out | 2026-11-16: the top-down camera draws the fixed view's own outlined native-pixel images ([vehicles](#vehicles)). City and crowd at 1×: 100% overlap, 0.0% of shared pixels differ (as meshes, a fifth to a third differed and there was no outline). At 0.5×: 97–98% overlap, 11% differ, the same sampling gap as solid props. First person and headset views keep meshes |
 | Raised ground | Partial, new in 251 | The fixed view tints raised tiles and draws cliff artwork; the 3D scene wears the plain ground image and flat brown walls. The generated world is flat, so only edited worlds show it |
-| Body shadows | Partial | 3D has sun shadows and contact shadows; the fixed view has the deferred depth pass. The two are not comparable (340–6,800 pixels against 5,500–72,000). Choose one look for top-down. Zoomed out, the sun's map (2,048 px) covers only the middle of the view |
+| Body shadows | Partial | 3D has sun shadows and contact shadows; the fixed view has the deferred depth pass. The two are not comparable (340–6,800 pixels against 5,500–72,000). Choose one look for top-down. The fixed view's player shadow is hidden under the sprite in play ([renderer film](#renderer-film)) Zoomed out, the sun's map (2,048 px) covers only the middle of the view |
 | Cutaways, slab fades, roof visibility | Missing | `SurfacePresentation` |
 | Rooms shown roofless | Missing | First person draws rooms with full walls (230 slice 2). The top-down 3D view hands rooms to the fixed view |
 | Tow and bed groups posed together | Done for the top-down camera; missing elsewhere | 2026-11-16: a body's image holds its towed car and bed contents, posed as the fixed view poses them. First person and headset views: 229 limit, members draw at their own poses |
@@ -144,6 +145,62 @@ were measured on 2026-11-15; the other rows are 251's.
 Known disagreement to settle: in the `crowd` scene, cars parked north of the
 shop row draw over the roofs in the fixed view and behind the buildings in the
 3D scene.
+
+### Renderer film
+
+2026-11-16: motion behaviour cannot be judged from one picture, so
+`scripts/first-person/film.mjs` makes enlarged side-by-side videos. With
+entities paused and presentation time held, the camera pans from a whole screen
+pixel at walking speed and carries the player with it, as following does. Each
+frame draws the same moment through each column's renderer
+(`canvas.__parityFilm`, which shares the parity probe's drawing). A frame
+depends only on its index, so runs repeat exactly.
+
+```sh
+node scripts/first-person/film.mjs --scenes=woods,city,pond --zooms=1,0.5
+node scripts/first-person/film.mjs --scenes=woods --speed=24 --columns=fixed,scene,snapped
+```
+
+Columns: `fixed` (as played), `scene` (the 3D top-down camera as played) and
+`snapped` (the 3D camera held to whole screen pixels, a preview of snapping).
+Grass sway, water and walk cycles stand still; only the camera moves.
+
+What the first films show, for the owner's style decision:
+
+- **Camera fraction.** The fixed view draws the world at whole pixels, then
+  moves the finished picture by the camera's fraction of a pixel with a
+  bilinear filter (215). Layers stay locked together, but while panning the
+  whole screen alternates between sharp (fraction near 0) and soft (near 0.5)
+  every few frames. The 3D scene is always sharp, but ground, cards and actors
+  each rasterise at their own fractional position, so their edges step on
+  different frames. That is the shimmer, and the source of scenery drifting a
+  pixel against the ground. Snapping the 3D camera keeps every layer sharp and
+  locked, and moves the picture in whole screen pixels.
+- **Player shadow.** The fixed view shows none in play: the depth pass's oval
+  for the player is 10 × 5 world px, centred 3 px north of the feet, so it lies
+  wholly under the sprite, and the pass never shades upright bodies. Robins'
+  ovals do show. Before the depth texture exists, the fallback oval at the feet
+  shows (the first frame of a session). The 3D scene draws a dark, hard-edged
+  contact blob under the feet.
+- **Tree shadows.** The fixed view has a soft round shadow under each tree;
+  the 3D scene adds the sun's shadow, a large dark patch offset to one side.
+- **Grass over the player.** In the 3D scene the blades the player stands in
+  draw over the body (blades do not write depth); the fixed view keeps them
+  behind it.
+- **Fractional zoom (0.5×).** One texel is 1.5 screen pixels, so texel widths
+  alternate in both renderers; the fixed view then softens the frame.
+- **Moving NPCs and cars** (`--scenes=traffic --others=25`: cars, people and
+  rabbits placed round the player, moving at their own speed). The fixed view
+  draws a moving actor between pixels with a bilinear step, so people and
+  rabbits are always soft, and softer again under the camera's fraction. The 3D
+  scene's actor cards are nearest-sampled: at 1× (3 screen pixels a texel) they
+  stay sharp and step a screen pixel at a time; at 0.5× texels drop and double
+  as they move (a person's eyes come and go). Cars are the same in both, the
+  fixed view's images with their one-pixel soft edge.
+
+Owner review, 2026-11-16: the fixed view looks blurry in motion, and the 3D
+camera held to whole pixels looks jittery. The continuous 3D camera is the
+better base; what it lacks is a sampling rule for fractional scales.
 
 ### Pond shoreline comparison
 
