@@ -13,10 +13,14 @@ import {
   floorDecalQuad,
   furnitureFrame,
   paintedShell,
+  rasterizeBands,
   rasterizeRoom,
   roomFloorQuad,
   roomShellFrame,
   shellSideColor,
+  type WallBand,
+  wallBandQuads,
+  wallBands,
   wallPieceQuad,
 } from "./FirstPersonInterior.js";
 import {
@@ -57,20 +61,36 @@ interface ShellMeasure {
 export class FirstPersonRoomScene {
   readonly floor: THREE.Texture;
   readonly walls: THREE.Texture;
+  /** Top-down, an editable room's wall bands (`wallBands`), stacked in one image. */
+  readonly bands:
+    | { readonly list: readonly WallBand[]; readonly texture: THREE.Texture }
+    | undefined;
   private readonly wallPixels: ImageData | undefined;
   private readonly wallColor: number;
   private shell: Prop | undefined;
   private measured: ShellMeasure | undefined;
 
-  /** `key` includes whether the atlas was loaded, so late artwork rebuilds the room. */
+  /**
+   * `key` includes whether the atlas was loaded, so late artwork rebuilds the
+   * room. `topDown` draws the fixed view's picture of the room instead of walls
+   * as tall as the first-person view needs: the floor, then the walls in the
+   * fixed view's bands (editable rooms) or lying on the floor (other rooms).
+   */
   constructor(
     readonly interior: FirstPersonInterior,
     readonly key: string,
     atlas: CanvasImageSource | undefined,
+    readonly topDown = false,
   ) {
     const rasters = rasterizeRoom(interior.map, atlas);
-    this.floor = pixelTexture(rasters.floor);
+    const list = topDown && interior.editable ? wallBands(interior.map) : undefined;
+    // Rooms whose walls the fixed view draws behind everything wear them on the floor.
+    this.floor = pixelTexture(topDown && !list ? rasters.walls : rasters.floor);
     this.walls = pixelTexture(rasters.walls);
+    this.bands = list && {
+      list,
+      texture: pixelTexture(rasterizeBands(interior.map, list, atlas)),
+    };
     this.wallPixels = rasters.wallPixels;
     this.wallColor = rasters.wallPixels ? averageColor(rasters.wallPixels.data) : 0x8a8a8a;
   }
@@ -102,6 +122,10 @@ export class FirstPersonRoomScene {
     flat: TriangleWriter,
     facesFor: (image: Pick<PropImage, "texture">) => TexturedTriangles | undefined,
   ): void {
+    if (this.topDown) {
+      this.appendBands(facesFor);
+      return;
+    }
     const { frame, painted, plain, sideColor } = this.measure(shell, elevation);
     const image = { texture: this.walls };
     appendPropGeometry(
@@ -113,6 +137,24 @@ export class FirstPersonRoomScene {
       { sideColor },
     );
     appendPropGeometry({ flat, textured: undefined }, plain, this.wallColor, elevation, frame);
+  }
+
+  /** Top-down: the wall bands in place of the shell's volumes (the floor
+   * already wears a non-editable room's walls). */
+  private appendBands(
+    facesFor: (image: Pick<PropImage, "texture">) => TexturedTriangles | undefined,
+  ): void {
+    const bands = this.bands;
+    if (!bands) return;
+    const faces = facesFor({ texture: bands.texture });
+    if (!faces) return;
+    const width = this.interior.map.width * 16;
+    bands.list.forEach((band, slot) => {
+      const quads = wallBandQuads(band, slot, bands.list.length, width);
+      faces.positions.push(...quads.positions);
+      faces.uvs.push(...quads.uvs);
+      for (let i = 0; i < quads.positions.length; i++) faces.colors.push(1);
+    });
   }
 
   private measure(shell: Prop, elevation: number): ShellMeasure {
@@ -175,8 +217,12 @@ export class FirstPersonRoomScene {
     facesFor: (image: PropImage | undefined) => TexturedTriangles | undefined,
   ): boolean {
     let quad: Pick<TexturedTriangles, "positions" | "uvs"> | undefined;
-    if (furniture.floor) quad = floorDecalQuad(prop, furniture.frame, elevation + 0.25);
-    else if (furniture.wall && this.shell) {
+    // A hair above the floor: straight up for the eye, along the view ray top-down,
+    // where moving up would also move the rug up the screen.
+    if (furniture.floor)
+      quad = floorDecalQuad(prop, furniture.frame, elevation + 0.25, this.topDown ? 0.25 : 0);
+    // Top-down has no wall faces: pictures stand as cards, as other furniture.
+    else if (furniture.wall && this.shell && !this.topDown) {
       const painted = this.measure(this.shell, elevation).painted;
       const face = containingWallFace(painted, prop.position.wx, prop.position.wy);
       if (face !== undefined) quad = wallPieceQuad(prop, furniture.frame, face, elevation);
@@ -192,5 +238,6 @@ export class FirstPersonRoomScene {
   dispose(): void {
     this.floor.dispose();
     this.walls.dispose();
+    this.bands?.texture.dispose();
   }
 }

@@ -25,7 +25,7 @@ import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js"
 import { collectCameraGrass } from "../rendering/GrassBladeRenderer.js";
 import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
 import { bladesOnPixelGrid, onPixelGrid, particlesOnPixelGrid } from "../rendering/PixelGrid.js";
-import type { SpriteItem } from "../rendering/SceneItem.js";
+import type { SceneItem, SpriteItem } from "../rendering/SceneItem.js";
 import { SurfaceReceivers } from "../rendering/SurfaceReceivers.js";
 import type { View3dHost } from "../rendering/View3dHost.js";
 import type { SeatFrame } from "../session/DeviceSeats.js";
@@ -161,7 +161,13 @@ function currentInterior(
   let interior = cached?.interior;
   if (interior?.key !== key) {
     const room = compileGameplayRoom(identity, state ?? initialRoom(identity));
-    interior = { key, map: room.map, shellType: INTERIOR_WALL_TYPE, furniture: furnitureArt };
+    interior = {
+      key,
+      map: room.map,
+      shellType: INTERIOR_WALL_TYPE,
+      furniture: furnitureArt,
+      editable: !room.legacy,
+    };
   }
   rooms.set(control, { identity, state, interior });
   return interior;
@@ -226,8 +232,8 @@ function seen(
       topDown: undefined,
     } satisfies Seen;
   }
-  // Rooms are drawn roofless by the fixed view; the 3D scene has only walled rooms.
-  if (gc.stateView.interior) return undefined;
+  // `?rooms3d=0` leaves rooms to the fixed view.
+  if (gc.stateView.interior && !control.topDownRooms) return undefined;
   return topDownSeen(control, view);
 }
 
@@ -274,6 +280,9 @@ export interface Play3dSource {
   readonly grass: boolean;
   /** The view's body, for the overhead decks' cutaway. */
   readonly observer: Entity | undefined;
+  /** Appends presentation-only sprites (opening doors), as the fixed view's
+   * `collected` hook does. */
+  readonly overlays?: ((items: SceneItem[]) => void) | undefined;
 }
 
 /**
@@ -311,9 +320,10 @@ export function renderFirstPerson(
     presentationTime: gc.time?.presentationSeconds ?? 0,
     fadeSeconds: gc.time?.presentationSeconds ?? 0,
     grass: gc.spriteCatalog.has("grass-blades"),
+    overlays: (items) => gc.doorPresentation?.appendOverlays(items, realm),
     observer: (view.seat ? seatEntity(gc.session, view.seat) : undefined) ?? stateView.playerEntity,
   };
-  const interior = from.topDown ? undefined : currentInterior(gc, control);
+  const interior = currentInterior(gc, control);
   const headset = from.headset && gc.xr;
   return drawSeen(source, view, scene, from, alpha, particles, interior, headset || undefined);
 }
@@ -357,7 +367,8 @@ function drawSeen(
   frame.presentationTime = source.presentationTime;
   // Top-down draws the fixed view's blades for its camera; first person has none.
   const grass =
-    topDown && source.grass
+    // Rooms have no grass.
+    topDown && source.grass && !interior
       ? collectCameraGrass(state.world, entities, view.camera, frame.presentationTime, frame.grass)
       : undefined;
   if (grid && grass) bladesOnPixelGrid(grass, grid);
@@ -376,9 +387,11 @@ function drawSeen(
       items,
       frame,
       // Casters carry their shadow shapes, as for the fixed view's depth pass (247).
-      depthShadows: control.shadows,
+      // Top-down rooms have none there: every body takes the plain oval at its feet.
+      depthShadows: control.shadows && !(topDown && interior),
       pixelGrid: grid,
     });
+    source.overlays?.(items);
     const content: FirstPersonFrame = {
       eye,
       world: state.world,

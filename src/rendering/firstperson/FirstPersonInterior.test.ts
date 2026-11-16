@@ -14,6 +14,10 @@ import {
   roomRasterSize,
   roomShellFrame,
   shellSideColor,
+  WALL_BAND_HEIGHT,
+  type WallBand,
+  wallBandQuads,
+  wallBands,
   wallPieceQuad,
 } from "./FirstPersonInterior.js";
 import { projectedUv, propSolids } from "./FirstPersonProps.js";
@@ -183,5 +187,33 @@ describe("first-person fog while streaming", () => {
     expect(eased).toBeLessThan(1600);
     expect(nextFogEnd(1599.5, 1600, undefined)).toBe(1600);
     expect(nextFogEnd(1600, 400, undefined)).toBe(400); // a nearer choice applies at once
+  });
+});
+
+describe("top-down rooms as the fixed view draws them", () => {
+  it("bands the wall rows in pairs and lands every band pixel on the fixed view's row", () => {
+    const walled = createLayeredInteriorMap(4, 6);
+    // Wall tiles on rows 0 and 3: bands for rows 0–1 and 2–3, none for 4–5.
+    walled.cells[0]?.[1]?.wall.push({ key: "wall" });
+    walled.cells[3]?.[2]?.wall.push({ key: "wall" });
+    const bands = wallBands(walled);
+    expect(bands).toEqual([
+      { row: 0, top: -16, depth: 32 },
+      { row: 2, top: 16, depth: 64 },
+    ]);
+    const band = bands[1] as WallBand;
+    const { positions, uvs } = wallBandQuads(band, 1, bands.length, 64);
+    expect(positions.length / 3).toBe(12);
+    for (let i = 0, j = 0; i < positions.length; i += 3, j += 2) {
+      const y = positions[i + 1] ?? 0,
+        z = positions[i + 2] ?? 0;
+      // The band's own row in the stacked image, and its world row on screen.
+      const row = (uvs[j + 1] ?? 0) * bands.length * WALL_BAND_HEIGHT - WALL_BAND_HEIGHT;
+      expect(y - z).toBeCloseTo(band.top + row, 6);
+      // Upright at the sort row, or on (just above) the floor in front of it.
+      if (y === band.depth) expect(z).toBeGreaterThanOrEqual(0);
+      else expect(z).toBeCloseTo(0.5, 6);
+      expect((positions[i] ?? 0) / 64).toBeCloseTo(uvs[j] ?? 0, 6);
+    }
   });
 });

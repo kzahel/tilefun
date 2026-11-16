@@ -34,7 +34,7 @@ import {
 } from "./FirstPersonPropMeshes.js";
 import { type PropSurface, surfaceUnder } from "./FirstPersonProps.js";
 import { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
-import { BlobShadows, SunShadows } from "./FirstPersonShadows.js";
+import { BlobShadows, plainShadow, SunShadows } from "./FirstPersonShadows.js";
 import { buildTerrainChunk } from "./FirstPersonTerrain.js";
 import { FirstPersonVehicles } from "./FirstPersonVehicles.js";
 import {
@@ -403,10 +403,10 @@ export class FirstPersonView {
       this.sun.reset();
     }
     if (frame.world !== this.world || frame.realm !== this.realm) this.resetWorld(frame);
-    this.syncRoom(frame.interior);
+    this.syncRoom(frame.interior, !!frame.topDown);
     if (frame.props !== this.propsSource) this.groupProps(frame.props);
     const { pages } = target;
-    const topDown = frame.topDown && !frame.interior ? frame.topDown : undefined;
+    const topDown = frame.topDown;
     const headset = topDown ? undefined : frame.headset;
     const table = headset?.table;
     const fog = frame.interior || topDown || table ? null : this.fog;
@@ -522,18 +522,19 @@ export class FirstPersonView {
   /** Entering or leaving a room rebuilds every chunk (outdoor ground is not drawn
    * indoors). Editing the room keeps the old walls and furniture until each chunk
    * is rebuilt against the new artwork, so nothing flashes away. */
-  private syncRoom(interior: FirstPersonInterior | undefined): void {
+  private syncRoom(interior: FirstPersonInterior | undefined, topDown: boolean): void {
     const atlas = this.sheets.get(MODERN_INTERIORS_SHEET_KEY)?.image as
       | CanvasImageSource
       | undefined;
-    const key = interior && `${interior.key}|${atlas ? "art" : "plain"}`;
+    // The camera is part of the key: top-down draws the fixed view's room picture.
+    const key = interior && `${interior.key}|${atlas ? "art" : "plain"}|${topDown ? "top" : "eye"}`;
     if (this.room?.scene.key === key) return;
     if (this.room && interior) {
       for (const chunk of this.chunks.values()) if (chunk.props) chunk.props.signature = "\0stale";
     } else this.dropChunks();
     this.disposeRoom();
     if (!interior || !key) return;
-    const scene = new FirstPersonRoomScene(interior, key, atlas);
+    const scene = new FirstPersonRoomScene(interior, key, atlas, topDown);
     scene.adoptShell(this.propsSource);
     const mesh = texturedMesh(scene.floorFaces(), this.propMeshes.faceMaterial(scene.floor));
     this.worldRoot.add(mesh);
@@ -545,8 +546,8 @@ export class FirstPersonView {
     if (!room) return;
     this.room = null;
     disposeGroup(room.mesh);
-    for (const texture of [room.scene.floor, room.scene.walls])
-      this.propMeshes.dropMaterial(texture);
+    for (const texture of [room.scene.floor, room.scene.walls, room.scene.bands?.texture])
+      if (texture) this.propMeshes.dropMaterial(texture);
     room.scene.dispose();
   }
 
@@ -752,7 +753,11 @@ export class FirstPersonView {
     const body = !!item.mesh && this.vehicles.drawable(meshes, item.mesh.assetId);
     if (!(body ? this.layers.vehicles : this.layers.actors)) return;
     // A mesh body's shadow belongs to the drawn body: sprite fallbacks have one baked in.
-    const shadow = shadows && (body || item.gpuShadow?.casterId === undefined) && item.gpuShadow;
+    const shadow =
+      shadows &&
+      ((body || item.gpuShadow?.casterId === undefined) && item.gpuShadow
+        ? item.gpuShadow
+        : plainShadow(item));
     if (shadow) this.blobs.push(shadow, this.supportUnder(shadow, item.zOffset));
     if (!cars) return;
     if (body) {

@@ -562,12 +562,28 @@ describe("top-down play in the 3D scene", () => {
     expect(views).toHaveLength(2);
   });
 
-  it("leaves rooms to the fixed view, which draws them roofless", () => {
-    const { control, gc, view, frames, sync } = drawable({ id: 1 });
+  it("draws rooms as the fixed view's picture, or leaves them to it with ?rooms3d=0", () => {
+    const room = {
+      version: "interior-v1",
+      parentWorldId: "world-1",
+      featureId: "settlement:0:0:block:1:1:lot:0",
+      buildingType: "prop-regional-apartment-2",
+      floor: 0,
+      returnX: 1,
+      returnY: 2,
+    };
+    const { control, gc, view, frames, sync } = drawable(room);
     control.topDown = true;
     sync();
+    expect(renderFirstPerson(gc, view, 1)).toBe(true);
+    expect(view.topDown3d).toBe(true);
+    // The top-down camera over the room; rooms have no grass.
+    expect(frames[0]?.topDown).toBeDefined();
+    expect(frames[0]?.interior?.map).toBeDefined();
+    expect(frames[0]?.grass).toBeUndefined();
+    control.topDownRooms = false;
     expect(renderFirstPerson(gc, view, 1)).toBe(false);
     expect(view.topDown3d).toBe(false);
-    expect(frames).toHaveLength(0);
+    expect(frames).toHaveLength(1);
   });
 });

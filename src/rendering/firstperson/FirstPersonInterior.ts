@@ -27,6 +27,9 @@ export interface FirstPersonInterior {
   readonly map: LayeredInteriorMap;
   /** Type of the replicated prop whose `walls` are the room's wall colliders. */
   readonly shellType: string;
+  /** An editable (gameplay) room: the fixed view draws its walls in bands that
+   * sort with actors (`InteriorPresentation`); other rooms draw them flat behind. */
+  readonly editable?: boolean;
   furniture(type: string): InteriorFurnitureArt | undefined;
 }
 
@@ -202,14 +205,119 @@ export function roomFloorQuad(map: LayeredInteriorMap): { positions: number[]; u
   return { positions, uvs };
 }
 
+/** Rows of one fixed-view wall band: two map rows, drawn from 16 px above them
+ * to 16 px below (tiles overhang their cells). */
+export const WALL_BAND_ROWS = 2;
+export const WALL_BAND_HEIGHT = 64;
+
+/** One wall band of an editable room, as the fixed view draws and sorts it
+ * (`CanvasInteriorResources`, `InteriorPresentation`): map row `row` and the next. */
+export interface WallBand {
+  readonly row: number;
+  /** World row its top is drawn at (screen y − z). */
+  readonly top: number;
+  /** World row it sorts at: actors whose feet are farther south are in front. */
+  readonly depth: number;
+}
+
+/** The bands an editable room's walls are drawn in: every pair of map rows with
+ * wall, foreground or object tiles. */
+export function wallBands(map: LayeredInteriorMap): WallBand[] {
+  const bands: WallBand[] = [];
+  for (let y = 0; y < map.height; y += WALL_BAND_ROWS) {
+    const rows = map.cells.slice(y, y + WALL_BAND_ROWS);
+    if (!rows.some((r) => r.some((c) => c.wall.length || c.foreground.length || c.objects.length)))
+      continue;
+    bands.push({ row: y, top: y * 16 - 16, depth: y * 16 + 32 });
+  }
+  return bands;
+}
+
+/** The bands' pictures stacked in one image, band `i` at rows `i × 64`. */
+export function rasterizeBands(
+  map: LayeredInteriorMap,
+  bands: readonly WallBand[],
+  atlas: CanvasImageSource | undefined,
+): HTMLCanvasElement {
+  const canvas = document.createElement("canvas");
+  canvas.width = Math.max(1, map.width * 16);
+  canvas.height = Math.max(1, bands.length * WALL_BAND_HEIGHT);
+  const ctx = canvas.getContext("2d");
+  if (!ctx || !atlas) return canvas;
+  ctx.imageSmoothingEnabled = false;
+  bands.forEach((band, i) => {
+    const rows = map.cells.slice(band.row, band.row + WALL_BAND_ROWS);
+    ctx.save();
+    ctx.translate(0, i * WALL_BAND_HEIGHT + 16);
+    ctx.beginPath();
+    ctx.rect(0, -16, canvas.width, WALL_BAND_HEIGHT);
+    ctx.clip();
+    drawLayeredInteriorMap(
+      ctx,
+      atlas,
+      { ...map, height: rows.length, pixelHeight: 32, cells: rows },
+      ["wall", "foreground", "objects"],
+    );
+    ctx.restore();
+  });
+  return canvas;
+}
+
+/** How far nearer than the floor a band's rows below its sort row lie. */
+const BAND_FLOOR_LIFT = 0.5;
+
+/**
+ * The top-down camera's room walls: each band upright at its sort row, so a
+ * body sorts against it as in the fixed view, and its rows below that row lying
+ * on the floor in front. Every pixel lands where the fixed view draws it.
+ * `slot` is the band's place in `rasterizeBands`' image of `count` bands.
+ */
+export function wallBandQuads(
+  band: WallBand,
+  slot: number,
+  count: number,
+  width: number,
+): { positions: number[]; uvs: number[] } {
+  const positions: number[] = [];
+  const uvs: number[] = [];
+  const v = (row: number) => (slot * WALL_BAND_HEIGHT + row) / (count * WALL_BAND_HEIGHT);
+  const feet = band.depth - band.top;
+  const quad = (corners: [number, number, number, number][]) => {
+    const [a, b, c, d] = corners;
+    if (!a || !b || !c || !d) return;
+    for (const [x, y, z, row] of [a, b, c, a, c, d]) {
+      positions.push(x, y, z);
+      uvs.push(x / width, v(row));
+    }
+  };
+  // Upright: band rows 0…feet stand at the sort row, `feet − row` up.
+  quad([
+    [0, band.depth, 0, feet],
+    [width, band.depth, 0, feet],
+    [width, band.depth, feet, 0],
+    [0, band.depth, feet, 0],
+  ]);
+  // On the floor: rows below the sort row, lifted toward the camera.
+  const below = WALL_BAND_HEIGHT - feet,
+    lift = BAND_FLOOR_LIFT;
+  quad([
+    [0, band.depth + below + lift, lift, WALL_BAND_HEIGHT],
+    [width, band.depth + below + lift, lift, WALL_BAND_HEIGHT],
+    [width, band.depth + lift, lift, feet],
+    [0, band.depth + lift, lift, feet],
+  ]);
+  return { positions, uvs };
+}
+
 /** A flat artwork rectangle lying on the floor (`z` slightly above it), UVs over the whole image. */
 export function floorDecalQuad(
   prop: Prop,
   frame: PropImageFrame,
   z: number,
+  south = 0,
 ): { positions: number[]; uvs: number[] } {
   const x0 = prop.position.wx + frame.left,
-    y0 = prop.position.wy + frame.top;
+    y0 = prop.position.wy + frame.top + south;
   const x1 = x0 + frame.width,
     y1 = y0 + frame.height;
   const corners = [

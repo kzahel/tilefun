@@ -227,6 +227,15 @@ export class PropMeshes {
       return;
     }
     if (room.appendFlat(prop, furniture, elevation, facesFor)) return;
+    // Top-down draws the fixed view's picture: furniture stands as its artwork at
+    // its anchor row, where the fixed view sorts it, with the rows below that
+    // lying on the floor (`appendLeftover`), not as a volume.
+    if (room.topDown) {
+      const faces = facesFor(furniture.image(false));
+      if (faces) appendLeftover(faces, prop, furniture.frame, elevation);
+      built.surfaces.push(...propSurfaces(prop));
+      return;
+    }
     if (propForm(prop, furniture.frame) === "solid") {
       const image = furniture.image(true);
       const textured = facesFor(image);

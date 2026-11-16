@@ -80,6 +80,9 @@ export class FirstPersonControl {
    * pixels, with ground sampled as cards are (`PixelGrid`; owner-accepted
    * 2026-11-16). `r_pixelgrid` and `?pixelgrid=0` turn it off for comparison. */
   pixelGrid = new URLSearchParams(location.search).get("pixelgrid") !== "0";
+  /** Top-down 3D views draw rooms too, as the fixed view's picture (floor and
+   * wall bands); `?rooms3d=0` hands rooms back to the fixed view. */
+  topDownRooms = new URLSearchParams(location.search).get("rooms3d") !== "0";
   /** A headset's tabletop (252) sets how far its 3D view reaches, in place of
    * the view distance. World pixels. */
   reach: number | undefined;

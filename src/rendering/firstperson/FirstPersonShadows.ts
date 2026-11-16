@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import type { GpuShadow } from "../GpuShadowShape.js";
+import type { SpriteItem } from "../SceneItem.js";
 import type { SunUniforms } from "./FirstPersonMaterials.js";
 import {
   BLOB_LOCAL,
@@ -173,6 +174,29 @@ export class SunShadows {
     this.target.dispose();
     this.depth.dispose();
   }
+}
+
+/**
+ * The fixed view's plain ground shadow (`drawSceneEntry2D`) for a sprite that
+ * has one but no depth-pass shape (bodies without a collider, such as gems):
+ * an oval `shadowWidth` across and 0.35 of that deep at its feet row, on the
+ * ground height the collector resolved.
+ */
+export function plainShadow(item: SpriteItem): GpuShadow | undefined {
+  if (!item.hasShadow || item.gpuShadow || item.shadowWidth <= 0) return undefined;
+  const half = item.shadowWidth / 2;
+  return {
+    x: item.wx,
+    y: item.shadowFeetWy,
+    ux: half,
+    uy: 0,
+    vx: 0,
+    vy: half * 0.35,
+    plane: [0, 0, item.shadowTerrainZ + 1],
+    band: 2,
+    support: item.shadowTerrainZ,
+    mask: "oval",
+  };
 }
 
 const BLOB_VERTEX = `
