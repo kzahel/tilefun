@@ -23,6 +23,8 @@ type FacesFor = (image: Pick<PropImage, "texture"> | undefined) => TexturedFaces
  * view merges the faces with other chunks' (`MergedFaces`, 251). */
 export interface ChunkProps {
   flat: ColoredTriangles | undefined;
+  /** Surface grid lines (`PropGeometry.lines`), in pairs of points. */
+  lines: { positions: number[]; colors: number[] };
   textured: Map<THREE.Texture, TexturedFaces>;
   billboards: Billboard[];
   surfaces: PropSurface[];
@@ -100,7 +102,13 @@ export class PropMeshes {
   ): ChunkProps {
     const flat = new TriangleWriter();
     const textured = new Map<THREE.Texture, TexturedFaces>();
-    const built: ChunkProps = { flat: undefined, textured, billboards: [], surfaces: [] };
+    const built: ChunkProps = {
+      flat: undefined,
+      lines: { positions: [], colors: [] },
+      textured,
+      billboards: [],
+      surfaces: [],
+    };
     const facesFor: FacesFor = (image) => {
       if (!image) return undefined;
       const faces = textured.get(image.texture) ?? { positions: [], uvs: [], colors: [] };
@@ -132,7 +140,13 @@ export class PropMeshes {
     } else {
       const image = this.images.prop(prop, true);
       const textured = facesFor(image);
-      appendPropGeometry({ flat, textured }, prop, image?.color ?? 0x8a8a8a, elevation, frame);
+      appendPropGeometry(
+        { flat, textured, lines: built.lines },
+        prop,
+        image?.color ?? 0x8a8a8a,
+        elevation,
+        frame,
+      );
       built.surfaces.push(...propSurfaces(prop));
     }
   }
@@ -160,7 +174,13 @@ export class PropMeshes {
       const image = furniture.image(true);
       const textured = facesFor(image);
       const color = image?.color ?? 0x8a8a8a;
-      appendPropGeometry({ flat, textured }, prop, color, elevation, furniture.frame);
+      appendPropGeometry(
+        { flat, textured, lines: built.lines },
+        prop,
+        color,
+        elevation,
+        furniture.frame,
+      );
       built.surfaces.push(...propSurfaces(prop));
       return;
     }

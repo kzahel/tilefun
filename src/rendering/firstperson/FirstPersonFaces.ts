@@ -11,11 +11,13 @@ export interface FacePart {
   readonly positions: ArrayLike<number>;
   readonly colors: ArrayLike<number>;
   readonly uvs?: ArrayLike<number> | undefined;
+  /** Line segments in pairs of points instead of triangles (surface grids). */
+  readonly lines?: boolean | undefined;
 }
 
 interface Bucket {
   readonly parts: Map<string, FacePart>;
-  mesh: THREE.Mesh | undefined;
+  mesh: THREE.Mesh | THREE.LineSegments | undefined;
   dirty: boolean;
 }
 
@@ -98,10 +100,12 @@ export class MergedFaces {
       geometry.computeBoundingSphere();
       if (bucket.mesh) bucket.mesh.geometry = geometry;
       else {
-        bucket.mesh = new THREE.Mesh(geometry, first.material);
+        bucket.mesh = first.lines
+          ? new THREE.LineSegments(geometry, first.material)
+          : new THREE.Mesh(geometry, first.material);
         first.parent.add(bucket.mesh);
       }
-      made?.(bucket.mesh);
+      if (bucket.mesh instanceof THREE.Mesh) made?.(bucket.mesh);
       written += vertices;
     }
     return written;

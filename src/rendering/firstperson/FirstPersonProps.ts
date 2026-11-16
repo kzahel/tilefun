@@ -1,7 +1,9 @@
 import { type AABB, getEntityAABB } from "../../entities/collision.js";
 import type { Prop, PropCollider } from "../../entities/Prop.js";
 import { forestRowDefinition } from "../../patterns/ForestThicket.js";
-import { surfaceZAt } from "../../physics/SurfacePatch.js";
+import { type SurfacePatch, surfaceZAt } from "../../physics/SurfacePatch.js";
+import { isRoadDeck } from "../RoadDeckPresentation.js";
+import { SURFACE_GRID, surfaceColors, surfaceGridLines } from "../SurfacePresentation.js";
 import { FACE_SHADE, srgbToLinear, type TriangleWriter } from "./FirstPersonTerrain.js";
 
 /** The prop's composed artwork relative to its feet, in the fixed view's plane:
@@ -79,6 +81,8 @@ export function unlimitedWallHeight(prop: Prop, bounds: AABB, frame: PropImageFr
 export interface PropSolid {
   bounds: AABB;
   surface: boolean;
+  /** A walkable surface's plane, when `surface`. */
+  patch?: SurfacePatch;
   /** Bottom ring then top ring: (left,top), (right,top), (right,bottom), (left,bottom). */
   corners: [number, number, number][];
 }
@@ -98,6 +102,7 @@ export function propSolids(prop: Prop, frame = propImageFrame(prop)): PropSolid[
       return {
         bounds,
         surface: true,
+        patch: surface,
         corners: [
           ...top.map(([x, y, z]) => [x, y, z - surface.thickness] as [number, number, number]),
           ...top.map(([x, y, z]) => [x, y, z] as [number, number, number]),
@@ -205,7 +210,19 @@ export interface PropGeometry {
   flat: TriangleWriter;
   /** Top and south faces wearing the projected artwork; flat when the artwork is missing. */
   textured: TexturedTriangles | undefined;
+  /** Line segments in pairs of points, with a linear colour per point: the tile
+   * grid over walkable surfaces, as the fixed view draws it. */
+  lines?: { positions: number[]; colors: number[] } | undefined;
 }
+
+/** Grid lines move this far south and as far up, toward the top-down camera
+ * along its view ray (screen `(x, y − z)` is unchanged, `y + z` is nearer), so
+ * the surface's own top never hides them. */
+const GRID_LIFT = 0.25;
+const GRID_RGB = [1, 3, 5].map((i) =>
+  srgbToLinear(Number.parseInt(SURFACE_GRID.color.slice(i, i + 2), 16) / 255),
+);
+const hex = (css: string) => Number.parseInt(css.slice(1), 16);
 
 const FACES = {
   top: [4, 5, 6, 7],
@@ -336,13 +353,24 @@ export function appendPropGeometry(
       continue;
     }
     if (solid.surface) {
-      // Decks and ramps are usually drawn by surface overlays rather than their sprite.
-      flat(FACES.top, FACE_SHADE.top);
-      flat(FACES.south, FACE_SHADE.south);
-      flat(FACES.bottom, FACE_SHADE.bottom);
-      flat(FACES.north, FACE_SHADE.north);
-      flat(FACES.east, FACE_SHADE.east);
-      flat(FACES.west, FACE_SHADE.west);
+      // Decks and ramps wear the fixed view's surface look: its top and edge
+      // colours and its tile grid. Road decks keep their own colour for now.
+      const look =
+        solid.patch && !isRoadDeck(prop.type) ? surfaceColors(prop.type, solid.patch) : undefined;
+      const top = look ? hex(look.top) : color,
+        edge = look ? hex(look.edge) : color;
+      flat(FACES.top, FACE_SHADE.top, top);
+      // The fixed view's edge is unshaded; the sides it never shows keep theirs.
+      flat(FACES.south, look ? 1 : FACE_SHADE.south, edge);
+      flat(FACES.bottom, FACE_SHADE.bottom, edge);
+      flat(FACES.north, FACE_SHADE.north, edge);
+      flat(FACES.east, FACE_SHADE.east, edge);
+      flat(FACES.west, FACE_SHADE.west, edge);
+      if (look && solid.patch && out.lines)
+        for (const [x, y, z] of surfaceGridLines(solid.patch, solid.bounds)) {
+          out.lines.positions.push(x, y + GRID_LIFT, z + GRID_LIFT);
+          out.lines.colors.push(...GRID_RGB);
+        }
       continue;
     }
     // The fixed view shows only the roof and the south face. The other walls wear

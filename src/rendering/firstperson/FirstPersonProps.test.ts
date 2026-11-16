@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 import type { Prop, PropCollider } from "../../entities/Prop.js";
+import { jumpPlacements, jumpSlabProp } from "../../generation/regional/JumpProfiles.js";
 import { forestRowProp, forestRowType } from "../../patterns/ForestThicket.js";
+import { surfaceZAt } from "../../physics/SurfacePatch.js";
 import {
   appendPropGeometry,
   blockingColliders,
@@ -238,5 +240,33 @@ describe("first-person prop forms", () => {
     expect(surfaceUnder(surface, 100, 190, (middle ?? 0) - 1)).toBeUndefined();
     expect(surfaceUnder(surface, 300, 190, 100)).toBeUndefined();
     expect(propSurfaces(prop({}, box(64, 32)))).toHaveLength(0);
+  });
+});
+
+describe("walkable surfaces", () => {
+  it("wear the fixed view's dirt colours and tile grid on motocross jumps", () => {
+    // A sloped slab of the kicker.
+    const jump = jumpPlacements("kicker", "e", 0, 0, "test")
+      .map((p) => jumpSlabProp(p.propType, p.wx, p.wy))
+      .find((p) => p?.collider?.surface?.riseX);
+    const surface = jump?.collider?.surface;
+    const [solid] = jump ? propSolids(jump) : [];
+    if (!jump || !surface || !solid) throw Error("no sloped jump slab");
+    const flat = new TriangleWriter();
+    const lines = { positions: [] as number[], colors: [] as number[] };
+    appendPropGeometry({ flat, textured: undefined, lines }, jump, 0x8a8a8a, 0);
+    // The top is the sloped dirt colour (#a8784a) in linear light, not the grey.
+    expect(flat.finish().colors[0]).toBeCloseTo(((0xa8 / 255 + 0.055) / 1.055) ** 2.4, 3);
+    // A line every 16 px each way, edges included, on the plane.
+    const { left, right, top, bottom } = solid.bounds;
+    const count = Math.floor((right - left) / 16) + Math.floor((bottom - top) / 16) + 2;
+    expect(lines.positions.length / 6).toBe(count);
+    for (let i = 0; i < lines.positions.length; i += 3) {
+      // Moved equally south and up: the same screen point, nearer the camera.
+      const x = lines.positions[i] ?? 0,
+        y = (lines.positions[i + 1] ?? 0) - 0.25,
+        z = (lines.positions[i + 2] ?? 0) - 0.25;
+      expect(z).toBeCloseTo(surfaceZAt(surface, solid.bounds, x, y), 4);
+    }
   });
 });

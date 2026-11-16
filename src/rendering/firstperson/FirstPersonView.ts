@@ -5,6 +5,7 @@ import { CHUNK_SIZE_PX, VIEW_BACKDROP_CSS } from "../../config/constants.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { World } from "../../world/World.js";
 import type { GrassItem, SpriteItem } from "../SceneItem.js";
+import { SURFACE_GRID } from "../SurfacePresentation.js";
 import type { PageRegion, SharedMeshAssets, SharedPages, View3dTarget } from "../View3dHost.js";
 import { actorBillboard, MovingCards, RecentPages, StaticCards } from "./FirstPersonBillboards.js";
 import { BodyImageCards } from "./FirstPersonBodyImages.js";
@@ -186,6 +187,15 @@ export class FirstPersonView {
     new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide }),
     "faces",
   );
+  /** The fixed view's tile grid over decks, ramps and jumps (`SURFACE_GRID`):
+   * one-pixel lines blended over the surface, behind anything nearer. */
+  private readonly gridMaterial = new THREE.LineBasicMaterial({
+    vertexColors: true,
+    transparent: true,
+    opacity: SURFACE_GRID.opacity,
+    depthWrite: false,
+    toneMapped: false,
+  });
   /** The host's page atlas as of this frame: ground meshes sample their chunk's
    * page, and cards their sheet's or composed image's pages. */
   private readonly atlas: { value: THREE.Texture | null } = { value: null };
@@ -504,6 +514,13 @@ export class FirstPersonView {
       const parts: FacePart[] = [];
       if (built.flat)
         parts.push({ bucket: `flat:${area}`, material: this.flatMaterial, parent, ...built.flat });
+      parts.push({
+        bucket: `grid:${area}`,
+        material: this.gridMaterial,
+        parent,
+        ...built.lines,
+        lines: true,
+      });
       // Faces wearing the same artwork are one mesh, whichever chunks they stand in.
       for (const [texture, faces] of built.textured)
         parts.push({
@@ -655,6 +672,7 @@ export class FirstPersonView {
     this.cameras.dispose();
     this.images.dispose();
     this.flatMaterial.dispose();
+    this.gridMaterial.dispose();
     this.groundMaterial.dispose();
   }
 }

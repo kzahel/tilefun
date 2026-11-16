@@ -33,6 +33,8 @@ const SCENES = {
   woods: { arrival: [-380, -364] },
   pond: { arrival: [215, -196] },
   traffic: { arrival: [300, 519], spawn: true },
+  // Ferngrove Motocross (seed 2026): the north straight's jumps.
+  motocross: { arrival: [44, 452] },
 };
 const scenes = option("scenes", "woods,city").split(",");
 for (const name of scenes) if (!SCENES[name]) throw Error(`Unknown scene ${name}`);

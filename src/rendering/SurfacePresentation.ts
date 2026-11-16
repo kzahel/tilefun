@@ -11,6 +11,50 @@ import { drawRoadDeck, isRoadDeck } from "./RoadDeckPresentation.js";
 
 export type SurfaceVisibility = "auto" | "all" | "lower" | "upper";
 
+/**
+ * A walkable surface's look (decks, ramps, motocross jumps), shared by the fixed
+ * view and 3D views: its top and edge colours. Road decks draw their own.
+ */
+export function surfaceColors(type: string, patch: SurfacePatch): { top: string; edge: string } {
+  const dirt = type.startsWith("prop-mx-");
+  const sloped = !!(patch.riseX || patch.riseY);
+  return {
+    top: dirt
+      ? sloped
+        ? "#a8784a"
+        : "#b78a5a"
+      : sloped
+        ? "#d4ad73"
+        : patch.excavation
+          ? "#c7cbb9"
+          : "#98bec6",
+    edge: dirt ? "#6f4b2e" : "#547780",
+  };
+}
+
+/** The tile grid drawn over a surface's top, so its slopes and steps read. */
+export const SURFACE_GRID = { spacing: 16, color: "#4e6e73", opacity: 0x55 / 255 } as const;
+
+/** The grid's lines over a surface's top, as world points `[x, y, z]` in pairs:
+ * north to south every `spacing` along x, then west to east along y. */
+export function surfaceGridLines(patch: SurfacePatch, bounds: AABB): [number, number, number][] {
+  const points: [number, number, number][] = [];
+  const at = (x: number, y: number): [number, number, number] => [
+    x,
+    y,
+    surfaceZAt(patch, bounds, x, y),
+  ];
+  for (let x = bounds.left; x <= bounds.right; x += SURFACE_GRID.spacing)
+    points.push(at(x, bounds.top), at(x, bounds.bottom));
+  for (let y = bounds.top; y <= bounds.bottom; y += SURFACE_GRID.spacing)
+    points.push(at(bounds.left, y), at(bounds.right, y));
+  return points;
+}
+
+const SURFACE_GRID_CSS = `${SURFACE_GRID.color}${Math.round(SURFACE_GRID.opacity * 255)
+  .toString(16)
+  .padStart(2, "0")}`;
+
 // One presentation tolerance for height comparisons and shadow support.
 // Interpolation across a clipped ramp/deck join may put feet just below its top.
 const SUPPORT_TOLERANCE = 1;
@@ -230,7 +274,7 @@ export function collectSurfacePresentation(
       }
       // Thin strips approximate a projected plane without introducing a separate
       // GPU renderer. All collision queries use the exact plane, not these strips.
-      const dirt = prop.type.startsWith("prop-mx-");
+      const colors = surfaceColors(prop.type, patch);
       const step = 2;
       for (let x = bounds.left; x < bounds.right; x += step) {
         const width = Math.min(step, bounds.right - x);
@@ -241,43 +285,22 @@ export function collectSurfacePresentation(
           bounds.bottom,
           surfaceZAt(patch, bounds, x, bounds.bottom),
         );
-        frame.rect(
-          north.sx,
-          north.sy,
-          width * camera.scale + 0.5,
-          south.sy - north.sy,
-          dirt
-            ? patch.riseX || patch.riseY
-              ? "#a8784a"
-              : "#b78a5a"
-            : patch.riseX || patch.riseY
-              ? "#d4ad73"
-              : patch.excavation
-                ? "#c7cbb9"
-                : "#98bec6",
-        );
+        frame.rect(north.sx, north.sy, width * camera.scale + 0.5, south.sy - north.sy, colors.top);
         frame.rect(
           south.sx,
           south.sy,
           width * camera.scale + 0.5,
           patch.thickness * camera.scale,
-          dirt ? "#6f4b2e" : "#547780",
+          colors.edge,
         );
       }
-      for (let x = bounds.left; x <= bounds.right; x += 16) {
-        const a = projectWorld(camera, x, bounds.top, surfaceZAt(patch, bounds, x, bounds.top));
-        const b = projectWorld(
-          camera,
-          x,
-          bounds.bottom,
-          surfaceZAt(patch, bounds, x, bounds.bottom),
-        );
-        frame.line(a.sx, a.sy, b.sx, b.sy, "#4e6e7355");
-      }
-      for (let y = bounds.top; y <= bounds.bottom; y += 16) {
-        const a = projectWorld(camera, bounds.left, y, surfaceZAt(patch, bounds, bounds.left, y));
-        const b = projectWorld(camera, bounds.right, y, surfaceZAt(patch, bounds, bounds.right, y));
-        frame.line(a.sx, a.sy, b.sx, b.sy, "#4e6e7355");
+      const grid = surfaceGridLines(patch, bounds);
+      for (let i = 0; i + 1 < grid.length; i += 2) {
+        const [ax, ay, az] = grid[i] ?? [0, 0, 0];
+        const [bx, by, bz] = grid[i + 1] ?? [0, 0, 0];
+        const a = projectWorld(camera, ax, ay, az);
+        const b = projectWorld(camera, bx, by, bz);
+        frame.line(a.sx, a.sy, b.sx, b.sy, SURFACE_GRID_CSS);
       }
     }
   }
