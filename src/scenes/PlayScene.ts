@@ -415,7 +415,7 @@ export class PlayScene implements GameScene {
   }
 
   private stopMovement(gc: GameContext): void {
-    gc.firstPerson?.hideView(); // Editor and other opaque scenes draw the fixed view.
+    gc.firstPerson?.hideView(); // Opaque scenes start from the fixed view; building mode marks its own.
     gc.audioManager.stopSirens();
     gc.audioManager.stopTrains();
     gc.audioManager.stopCarEngine();

@@ -1,6 +1,9 @@
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { collectEditorOverlay, collectRemoteCursors } from "../editor/collectEditorOverlay.js";
+import type { OverlayDraw } from "../rendering/OverlayFrame.js";
+import { renderViews } from "../session/ViewRender.js";
 import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
+import { renderFirstPerson } from "./firstPersonPlay.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
 import { renderEntities, renderWorld } from "./renderWorld.js";
 
@@ -258,12 +261,51 @@ export class EditScene implements GameScene {
 
   render(alpha: number, gc: GameContext): void {
     gc.camera.applyInterpolation(alpha);
-    gc.beginWorld?.();
-    renderWorld(gc);
+    const { beginView, endView } = gc;
+    // Building mode draws as play does: in the unified top-down view when the
+    // device chose it (renderer unification), its overlays on the UI canvas above.
+    if (beginView && endView && gc.firstPerson?.topDown && !gc.view.look) {
+      const views = gc.session.layoutViews(gc.canvas.width, gc.canvas.height, false);
+      const [view] = views;
+      // Seat 0 alone, as outside play; also when the game opens in building mode.
+      gc.firstPerson.sync(views, new Set(gc.session.seats.list().map((seat) => seat.seat)));
+      if (view) {
+        const outdoors = gc.spriteCatalog.size > 0 && !gc.stateView.interior;
+        let unified = false;
+        renderViews(
+          { renderer: gc.renderer, beginView, endView },
+          [view],
+          outdoors ? { world: gc.stateView.world, pacing: gc.debugPanel.terrainPacing } : undefined,
+          () => this.drawFixed(gc, alpha, true),
+          () => {
+            unified = renderFirstPerson(gc, view, alpha);
+            return unified;
+          },
+        );
+        if (unified) this.collectOverlays(gc, (items) => gc.renderer.drawOverlayOn(gc.ctx, items));
+      }
+    } else {
+      gc.beginWorld?.();
+      this.drawFixed(gc, alpha, false);
+      gc.endWorld?.();
+    }
+    drawPlayerMarkers(gc, alpha);
+    renderDebugOverlay(gc, alpha);
+    render3DDebug(gc);
+    gc.camera.restoreActual();
+  }
 
-    // Editor overlays (grid + cursor highlight + elevation tint) — drawn between terrain and entities
-    const visible = gc.camera.getVisibleChunkRange();
+  /** The fixed view's world: editor overlays sit between terrain and bodies
+   * outdoors, above the room indoors. */
+  private drawFixed(gc: GameContext, alpha: number, prepared: boolean): void {
+    renderWorld(gc, prepared);
     if (gc.stateView.interior) renderEntities(gc, alpha);
+    this.collectOverlays(gc, (items) => gc.renderer.submit(gc.camera, { kind: "overlay", items }));
+    if (!gc.stateView.interior) renderEntities(gc, alpha);
+  }
+
+  /** Editor overlays (grid, cursor, elevation tint, previews, remote cursors). */
+  private collectOverlays(gc: GameContext, draw: (items: readonly OverlayDraw[]) => void): void {
     const overlays = gc.sceneFrame.overlays;
     overlays.begin();
     try {
@@ -272,21 +314,14 @@ export class EditScene implements GameScene {
         gc.camera,
         gc.editorMode,
         gc.editorModel,
-        visible,
+        gc.camera.getVisibleChunkRange(),
         gc.stateView.world,
         gc.spriteCatalog,
       );
       collectRemoteCursors(overlays, gc.camera, gc.stateView.remoteCursors);
-      gc.renderer.submit(gc.camera, { kind: "overlay", items: overlays.items });
+      draw(overlays.items);
     } finally {
       overlays.release();
     }
-
-    if (!gc.stateView.interior) renderEntities(gc, alpha);
-    gc.endWorld?.();
-    drawPlayerMarkers(gc, alpha);
-    renderDebugOverlay(gc, alpha);
-    render3DDebug(gc);
-    gc.camera.restoreActual();
   }
 }

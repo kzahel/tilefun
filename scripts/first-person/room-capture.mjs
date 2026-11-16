@@ -85,7 +85,9 @@ try {
     await page.waitForTimeout(4000);
     const file = path.join(out, `${kind}${unified ? "-3d" : ""}.png`);
     await page.locator("#game").screenshot({ path: file });
-    const drawn = await page.evaluate(() => document.querySelector("#game").__game.firstPerson?.drawing3d);
+    const drawn = await page.evaluate(
+      () => document.querySelector("#game").__game.firstPerson?.drawing3d,
+    );
     console.log(file, unified ? `3D drawing: ${drawn}` : "");
     if (process.argv.includes("--sequence")) {
       await page.keyboard.down("ArrowUp");

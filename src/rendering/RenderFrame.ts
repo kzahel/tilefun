@@ -109,6 +109,9 @@ export interface RenderBackend extends TerrainPresentation {
     options?: TerrainDrawOptions,
   ): readonly TerrainDraw[];
   submit(view: RenderView, pass: RenderPass): void;
+  /** Draw overlay items onto a 2D context with this backend's sheets: the UI
+   * canvas above a view drawn in the 3D scene (the editor's grid and cursor). */
+  drawOverlayOn(ctx: CanvasRenderingContext2D, items: readonly OverlayDraw[]): void;
   isTerrainReady(chunk: Chunk | undefined): boolean;
   hasTerrain(chunk: Chunk | undefined): boolean;
   releaseChunk(chunk: Chunk): void;

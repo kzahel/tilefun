@@ -9,6 +9,7 @@ import { Camera } from "./Camera.js";
 import { drawScenePass2D } from "./Canvas2DRenderer.js";
 import { CanvasInteriorResources } from "./CanvasInteriorResources.js";
 import { drawOverlayGeometry } from "./CanvasOverlayRenderer.js";
+import type { OverlayDraw } from "./OverlayFrame.js";
 import type { RasterSurface } from "./RasterSurface.js";
 import type {
   RenderBackend,
@@ -242,6 +243,10 @@ export class RasterRenderBackend implements RenderBackend {
         ctx.restore();
         break;
     }
+  }
+
+  drawOverlayOn(ctx: CanvasRenderingContext2D, items: readonly OverlayDraw[]): void {
+    drawOverlayGeometry(ctx, items, this.sheets);
   }
 
   protected drawOverlay(pass: Extract<RenderPass, { kind: "overlay" }>): void {
