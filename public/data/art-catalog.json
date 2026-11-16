@@ -38279,11 +38279,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:368"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:465"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/firstPersonPlay.ts:268"
+          "source": "src/scenes/firstPersonPlay.ts:278"
         },
         {
           "system": "Editor",

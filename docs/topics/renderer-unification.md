@@ -61,12 +61,14 @@ wanted as well, and a third renderer is not.
 
 ## Trying the unified top-down view
 
-Open the debug panel with **F3** (or **More → Debug** in the world menu) and
-toggle **Unified top-down 3D (experimental)**. It changes top-down play for the
-whole device immediately and stays in sync with `/r_topdown3d 1` / `0` in the
-console and the startup flag `?view=topdown3d`. It is off by default and is not
-saved across reloads. This debug opt-in does not change the Options/default
-gates below; the parity checklist still applies.
+Since 2026-11-16 players can choose **Options → Pixel 3D top-down view
+(preview)**. The choice is saved on the device (`unifiedTopDown.ts`, local
+storage), not in the player profile, because it is a renderer choice like the
+others below. It stays in sync with the debug panel's **Unified top-down 3D
+(experimental)** (**F3**, or **More → Debug**), `/r_topdown3d 1` / `0` in the
+console, and the startup flag `?view=topdown3d`. Those three change only the
+current load. It is off by default; making it the default is the owner's gate,
+and the parity checklist still applies.
 
 ## Target shape
 

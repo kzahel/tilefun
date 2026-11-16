@@ -1,3 +1,4 @@
+import { savedUnifiedTopDown } from "../config/unifiedTopDown.js";
 import { registerClientCommands } from "../console/clientCommands.js";
 import { registerClientCVars } from "../console/clientCVars.js";
 import { registerServerCommandStubs } from "../console/serverCommandStubs.js";
@@ -67,7 +68,11 @@ export function registerClientConsole(
   gc.debugPanel.onTopDown3dChange((checked) => {
     clientCVars.r_topdown3d.set(checked);
   });
-  if (new URLSearchParams(location.search).get("view") === "topdown3d")
+  // `?view=topdown3d` turns it on for this load; Options saves it for the device.
+  if (
+    new URLSearchParams(location.search).get("view") === "topdown3d" ||
+    savedUnifiedTopDown(globalThis.localStorage)
+  )
     clientCVars.r_topdown3d.set(true);
   clientCVars.r_fpshadows.onChange((val) => {
     if (gc.firstPerson) gc.firstPerson.shadows = val;
