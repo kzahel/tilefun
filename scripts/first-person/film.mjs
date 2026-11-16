@@ -12,10 +12,11 @@
 // picture on every run; only the camera (and the player with it) moves, `--speed`
 // world pixels a second (the player walks at 64) toward `--direction` degrees
 // (0 east, 90 south); `--others` moves every other entity the same way, so
-// NPCs and cars cross the view at their own speed. Columns: `fixed`, `scene` (3D as played) and `snapped`
-// (3D with its camera held to whole screen pixels) and `nearest` (3D with its
-// ground sampled once per pixel, as trees are: a prototype). Writes one MP4 per scene and
-// zoom, and keeps the PNG frames beside it.
+// NPCs and cars cross the view at their own speed. Columns: `fixed`, `rigid`
+// (3D as played: one pixel grid for camera, bodies and blades), `scene` (3D with
+// sub-pixel placement, as before the grid), `snapped` (only the camera on whole
+// screen pixels) and `nearest` (sub-pixel, ground sampled once per pixel). Writes
+// one MP4 per scene and zoom, and keeps the PNG frames beside it.
 import { execFileSync } from "node:child_process";
 import { mkdir, mkdtemp, rm, writeFile } from "node:fs/promises";
 import os from "node:os";
@@ -54,7 +55,7 @@ const others = {
   x: (othersSpeed / fps) * Math.cos(othersDirection),
   y: (othersSpeed / fps) * Math.sin(othersDirection),
 };
-const columns = option("columns", "fixed,scene").split(",");
+const columns = option("columns", "fixed,rigid").split(",");
 const [cropWidth, cropHeight] = option("crop", "240x160").split("x").map(Number);
 const enlarge = Number(option("enlarge", "4"));
 const query = option("query", "");

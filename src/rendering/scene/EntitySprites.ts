@@ -33,6 +33,7 @@ import {
 } from "../EntityMeshPose.js";
 import { ovalShadow, vehicleShadow } from "../GpuShadowShape.js";
 import { vehicleMeshRadius, yawOrientation } from "../MeshPresentation.js";
+import { onPixelGrid } from "../PixelGrid.js";
 import type { PropDepthIndex } from "../PropDepthIndex.js";
 import { propDepthLookup } from "../PropDepthIndex.js";
 import { depthAboveProps, type PropDepthSurface, propDepthSurfaces } from "../propDepth.js";
@@ -76,6 +77,9 @@ export interface EntityStage {
   readonly items: SceneItem[];
   /** Vehicle sprites that grass must stay under; absent while grass is hidden. */
   readonly grassVehicles: SpriteItem[] | undefined;
+  /** Screen pixels per world pixel when a view places every body on its pixel
+   * grid (the 3D top-down view, `PixelGrid`); absent keeps sub-pixel positions. */
+  readonly pixelGrid?: number | undefined;
 }
 
 /** Lookups built once per collection. Each map keeps the first matching entity
@@ -183,8 +187,12 @@ function indexEntities({ entities, depth }: EntityStage): EntityIndex {
 
 function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefined {
   const { alpha, frame, poseTime } = pass;
-  const pos = interpolatePosition(e.position, e.prevPosition, alpha);
-  const zOffset = entityZOffset(pass, e, pos);
+  const grid = pass.pixelGrid;
+  const shown = interpolatePosition(e.position, e.prevPosition, alpha);
+  const pos = grid ? { wx: onPixelGrid(shown.wx, grid), wy: onPixelGrid(shown.wy, grid) } : shown;
+  const zOffset = grid
+    ? onPixelGrid(entityZOffset(pass, e, pos), grid)
+    : entityZOffset(pass, e, pos);
   // Match the displayed sprite rectangle, including vehicles whose artwork
   // extends below their ground-center anchor. Preserve conservative mesh
   // bounds as well, so either the mesh or its sprite fallback can enter view.

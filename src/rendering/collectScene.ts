@@ -139,6 +139,8 @@ export interface WorldSpriteInput {
   /** The view draws shadows from world depth (the GPU fixed view). */
   readonly depthShadows?: boolean | undefined;
   readonly grassVehicles?: SpriteItem[] | undefined;
+  /** Screen pixels per world pixel: bodies placed on the view's pixel grid. */
+  readonly pixelGrid?: number | undefined;
 }
 
 /**
@@ -164,6 +166,7 @@ export function collectWorldSprites(input: WorldSpriteInput): void {
     poseTime: frame?.presentationTime ?? 0,
     items: input.items,
     grassVehicles: input.grassVehicles,
+    pixelGrid: input.pixelGrid,
   });
 }
 

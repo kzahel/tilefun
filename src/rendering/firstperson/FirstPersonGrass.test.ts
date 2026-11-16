@@ -12,7 +12,7 @@ import {
 } from "../GrassBladeRenderer.js";
 import type { GrassItem } from "../SceneItem.js";
 import type { CardPages } from "./FirstPersonBillboards.js";
-import { bladeQuad, GrassCards } from "./FirstPersonGrass.js";
+import { bladeDepth, bladeQuad, GrassCards } from "./FirstPersonGrass.js";
 import { obliqueScreen } from "./ObliqueCamera.js";
 
 const blade = (extra: Partial<GrassItem> = {}): GrassItem => ({
@@ -46,27 +46,70 @@ function fixedCorners(item: GrassItem): [number, number][] {
 }
 
 describe("grass blades as cards", () => {
-  it("lands every corner where the fixed view draws it, without going under the ground", () => {
+  it("lands every corner where the fixed view draws it, on a card standing at the anchor", () => {
     const camera = { x: 90, y: 50, scale: 3 };
+    const origin = obliqueScreen(camera, 640, 480, 0, 0);
     for (const variant of [0, 1, 2, 3])
       for (const angle of [0, 0.15, -0.15, 0.545, -0.545]) {
         const item = blade({ variant, angle });
-        const quad = bladeQuad(variant, angle, 8, 8);
         const expected = fixedCorners(item);
-        const origin = obliqueScreen(camera, 640, 480, 0, 0);
-        for (const [i, [across, up]] of quad.corners.entries()) {
-          // A top-down card runs east; its foot stands `south` of the anchor.
-          const at = obliqueScreen(camera, 640, 480, item.wx + across, item.wy + quad.south, up);
+        for (const [i, [across, up]] of bladeQuad(variant, angle, 8, 8).entries()) {
+          const at = obliqueScreen(camera, 640, 480, item.wx + across, item.wy, up);
           const [x, y] = expected[i] ?? [0, 0];
           expect((at.sx - origin.sx) / camera.scale).toBeCloseTo(x, 9);
           expect((at.sy - origin.sy) / camera.scale).toBeCloseTo(y, 9);
-          expect(up).toBeGreaterThanOrEqual(0);
         }
-        expect(Math.min(...quad.corners.map(([, up]) => up))).toBeCloseTo(0, 9);
       }
-    // Upright, the artwork reaches one row (big blades) or two (small) below its anchor.
-    expect(bladeQuad(0, 0, 8, 8).south).toBe(1);
-    expect(bladeQuad(2, 0, 8, 8).south).toBe(2);
+    // Upright, the artwork reaches one row (big blades) or two (small) below its
+    // anchor: under the ground, drawn at the ground's depth by the material.
+    const lowest = (variant: number) =>
+      -Math.min(...bladeQuad(variant, 0, 8, 8).map(([, up]) => up));
+    expect(lowest(0)).toBe(1);
+    expect(lowest(2)).toBe(2);
+  });
+
+  it("sorts with a body by the anchor's row, as the fixed view does", () => {
+    // A body's card stands at its feet; blades anchored just north of them were
+    // drawn over its legs when the card stood south of its anchor.
+    const camera = { x: 100, y: 40, scale: 3 };
+    const feet = 41;
+    for (const wy of [40, 42]) {
+      const item = blade({ wy });
+      const [, up] = bladeQuad(item.variant, 0, 8, 8)[3] ?? [0, 0];
+      const at = obliqueScreen(camera, 640, 480, item.wx, item.wy, up);
+      // The body's pixel at the same place on screen.
+      const body = obliqueScreen(camera, 640, 480, item.wx, feet, feet - item.wy + up);
+      expect(body.sy).toBeCloseTo(at.sy, 9);
+      // Smaller depth is nearer.
+      if (wy < feet) expect(at.depth).toBeGreaterThan(body.depth);
+      else expect(at.depth).toBeLessThan(body.depth);
+    }
+  });
+
+  it("draws rows below the anchor at the depth of the ground in front of them", () => {
+    const material = new THREE.MeshBasicMaterial();
+    material.onBeforeCompile = (shader) => {
+      shader.vertexShader = "#include <common>\n#include <project_vertex>";
+      shader.fragmentShader = "#include <common>\n#include <dithering_fragment>";
+    };
+    bladeDepth(material);
+    const shader = {
+      vertexShader: "",
+      fragmentShader: "",
+      uniforms: {},
+    } as never as THREE.WebGLProgramParametersWithUniforms;
+    material.onBeforeCompile(shader, {} as THREE.WebGLRenderer);
+    expect(shader.vertexShader).toContain("vBladeBelow = -corner.y");
+    expect(shader.fragmentShader).toContain("gl_FragDepth");
+    expect(material.customProgramCacheKey()).toContain("blade-depth");
+    // Window depth per world pixel nearer, from the camera's own projection:
+    // the ground `below` south of the anchor is `2 × below` nearer than the card.
+    const camera = { x: 100, y: 40, scale: 3 };
+    const card = obliqueScreen(camera, 640, 480, 100, 40, -2);
+    const ground = obliqueScreen(camera, 640, 480, 100, 42, 0);
+    const up = obliqueScreen(camera, 640, 480, 100, 40, -1);
+    const perNear = (up.depth - card.depth) / 2; // window depth is clip depth halved
+    expect((ground.depth - card.depth) / 2).toBeCloseTo(perNear * 2 * 2, 9);
   });
 
   it("writes each blade's cell of the page atlas, blends at the frame's opacity and keeps depth", () => {
@@ -103,9 +146,9 @@ describe("grass blades as cards", () => {
       expect.closeTo(1024 + 24 - 0.01),
       expect.closeTo(512 + 512 - 0.01),
     ]);
-    // The second blade stands one row south of its anchor, on the ground.
+    // The second blade's card stands at its anchor.
     const centre = geometry.getAttribute("position");
-    expect([centre.getX(4), centre.getY(4), centre.getZ(4)]).toEqual([12, 10, 0]);
+    expect([centre.getX(4), centre.getY(4), centre.getZ(4)]).toEqual([12, 9, 0]);
 
     // No blades, or no sheet: nothing is drawn, and full opacity is the default.
     cards.fill([], sheet, pages);

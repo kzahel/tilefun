@@ -16,12 +16,8 @@ import type {
   InteriorFurnitureArt,
 } from "../rendering/firstperson/FirstPersonInterior.js";
 import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js";
-import {
-  bladesOnPixelGrid,
-  entitiesOnPixelGrid,
-  onPixelGrid,
-} from "../rendering/firstperson/PixelGrid.js";
 import { collectCameraGrass } from "../rendering/GrassBladeRenderer.js";
+import { bladesOnPixelGrid, onPixelGrid } from "../rendering/PixelGrid.js";
 import type { SpriteItem } from "../rendering/SceneItem.js";
 import type { SeatFrame } from "../session/DeviceSeats.js";
 import type { View } from "../session/View.js";
@@ -223,7 +219,7 @@ function seen(
   // Rooms are drawn roofless by the fixed view; the 3D scene has only walled rooms.
   if (!control.topDown || gc.stateView.interior) return undefined;
   const { camera } = view;
-  // The pixel-grid prototype puts the eye on the grid its content stands on.
+  // The eye stands on the pixel grid its bodies and blades stand on (`PixelGrid`).
   const x = control.pixelGrid ? onPixelGrid(camera.x, camera.scale) : camera.x;
   const y = control.pixelGrid ? onPixelGrid(camera.y, camera.scale) : camera.y;
   const ground = obliqueGround(
@@ -261,10 +257,9 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
     return false;
   }
   const { eye, drawRadius, topDown } = from;
-  const presented =
+  const entities =
     gc.doorPresentation?.entities(stateView.entities, gc.realmId ?? null) ?? stateView.entities;
   const grid = topDown && control.pixelGrid ? topDown.scale : undefined;
-  const entities = grid ? entitiesOnPixelGrid(presented, grid) : presented;
   const interior = topDown ? undefined : currentInterior(gc, control);
   const frame = control.frame;
   frame.presentationTime = gc.time?.presentationSeconds ?? 0;
@@ -294,6 +289,7 @@ export function renderFirstPerson(gc: GameContext, view: View, alpha: number): b
       frame,
       // Casters carry their shadow shapes, as for the fixed view's depth pass (247).
       depthShadows: control.shadows,
+      pixelGrid: grid,
     });
     const content = {
       eye,

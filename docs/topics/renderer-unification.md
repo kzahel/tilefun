@@ -125,8 +125,8 @@ were measured on 2026-11-15; the other rows are 251's.
 | Particles and contact effects | Missing | |
 | Surface decals | Missing | |
 | Sprite edges | Missing | 3D cards are hard cutouts (`alphaTest`) with one sample per pixel; the fixed view blends filtered edges at fractional zoom. Wildlife overlaps 83–88% at 1× (the soft shadow painted into those sprites is cut off) and 67–84% at 0.25× |
-| Pixel snapping and stable sampling at fractional zoom | Missing | Fixed-view rules from 213 and 215. The standing-card row above is the first measured case. Owner direction, 2026-11-16: snap, with one shared rule for every element on screen. The pixel-grid prototype (`?pixelgrid=1`) was accepted by the owner in play the same day ("consistent and good"); it still has to become the default and move into sprite collection. Fractional zoom still drops and doubles texels. Behaviour in motion: [renderer film](#renderer-film) |
-| Grass in front of actors | Missing | The 3D scene draws the blades an actor stands in over its body ([renderer film](#renderer-film)) |
+| Pixel snapping and stable sampling at fractional zoom | Partial | Fixed-view rules from 213 and 215. Owner direction, 2026-11-16: snap, with one shared rule for every element on screen. The pixel grid was accepted by the owner in play the same day ("consistent and good") and is the top-down default since: the eye, bodies (in `collectWorldSprites`, after interpolation, with their heights) and blades stand on one grid of screen pixels, and the ground is sampled once per pixel. `?pixelgrid=0` / `r_pixelgrid 0` turn it off for comparison. Fractional zoom still drops and doubles texels. Behaviour in motion: [renderer film](#renderer-film) |
+| Grass in front of actors | Done | 2026-11-16: blade cards stand at their anchor, so they sort with bodies by the anchor's row as the fixed view does; the rows below the anchor are drawn at the depth of the ground they cover ([grass](#grass)) |
 | Vehicle shading and outline | Done at 1× for the top-down camera; partial zoomed out | 2026-11-16: the top-down camera draws the fixed view's own outlined native-pixel images ([vehicles](#vehicles)). City and crowd at 1×: 100% overlap, 0.0% of shared pixels differ (as meshes, a fifth to a third differed and there was no outline). At 0.5×: 97–98% overlap, 11% differ, the same sampling gap as solid props. First person and headset views keep meshes |
 | Walkable surfaces (decks, ramps, motocross jumps) | Done for the 3D scene | 2026-11-16: the fixed view's top and edge colours and its 16 px tile grid, from one shared definition (`surfaceColors`, `surfaceGridLines` in `SurfacePresentation.ts`). Grid lines are one-pixel lines merged per map area, moved toward the top-down camera along its view ray so the surface never hides them. The 3D slab is an exact plane where the fixed view draws 2 px strips |
 | Road decks (bridges) | Missing | The fixed view draws road markings on decks (`drawRoadDeck`); the 3D scene draws a plain box in the artwork's average colour |
@@ -230,13 +230,14 @@ while the camera settles (after the best whole-pixel shift; walk 1.5 s at
 | city 1× | 37, 210 | 0, 0 |
 | city 0.5× | 47, 219 | 15, 6 |
 
-Both prototypes are in play for the owner to try, top-down 3D only:
-`?view=topdown3d&groundnearest=1` and `?view=topdown3d&pixelgrid=1` (console
-`r_groundnearest`, `r_pixelgrid`). The pixel grid (`PixelGrid.ts`) copies each
-entity whose position is off the grid every frame, which is fine for a
-prototype but not for the crowd; a kept version belongs in sprite collection.
-Picking and markers still use the fixed view's continuous camera, up to one
-screen pixel from the gridded eye.
+The owner accepted the pixel grid in play on 2026-11-16, and it became the
+top-down default the same day (`PixelGrid.ts`): the actor stage places each
+body's interpolated position and height on the grid (`pixelGrid` in
+`collectWorldSprites`), with no entity copies. `?pixelgrid=0` (`r_pixelgrid 0`)
+turns it off; `?groundnearest=1` keeps only the ground sampling. The film's
+`rigid` column is play; `scene` is the earlier sub-pixel placement. Picking and
+markers still use the fixed view's continuous camera, up to half a screen pixel
+from the gridded eye.
 
 ### Pond shoreline comparison
 
@@ -279,11 +280,15 @@ push from bodies and zoom fade (none at 0.25× and below), and `GrassCards`
 writes them as one mesh of leaning cards read from the page atlas. One draw.
 
 - A blade is an upright card turned in its own plane, which the top-down camera
-  shows as the fixed view's turn on screen. Its foot stands a pixel or two south
-  of the blade's anchor, so the artwork's rows below the anchor are not under
-  the ground.
+  shows as the fixed view's turn on screen. The card stands at the blade's
+  anchor, so it is in front of or behind a body by the same row the fixed view
+  sorts on. The artwork's rows below the anchor would be under the ground; the
+  blade material writes their depth as that of the ground they cover (plus a
+  quarter pixel, `bladeDepth`). Until 2026-11-16 the card stood a row or two
+  south of its anchor instead, which put blades just north of a body's feet
+  over its legs.
 - Blades blend at the frame's opacity and do not write depth. They hide behind
-  anything nearer, cover an actor's feet from in front, and stay under
+  anything nearer, cover an actor's feet only from in front, and stay under
   vehicles, which the fixed view also keeps above grass. Where blades overlap
   each other they draw in collection order, not sorted by depth.
 - Blades are collected and written on the CPU every frame, as in the fixed

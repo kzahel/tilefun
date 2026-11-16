@@ -495,3 +495,33 @@ it("marks only four-direction facing rows for views that reselect them (229)", (
   const facing = (items as SpriteItem[]).map((item) => item.facing);
   expect(facing).toEqual([Direction.Left, undefined, undefined, cow.sprite?.direction]);
 });
+
+it("places interpolated bodies and their heights on a view's pixel grid", () => {
+  const player = { ...createPlayer(100.3, 100.3), id: 1 };
+  player.prevPosition = { wx: 99.1, wy: 100.9 };
+  player.wz = 3.3;
+  player.prevWz = 2.1;
+  const collect = (pixelGrid?: number) => {
+    const items: SceneItem[] = [];
+    collectWorldSprites({
+      entities: [player],
+      props: [],
+      world: { getHeightAt: () => 0 },
+      alpha: 0.5,
+      cull: { left: 0, right: 400, top: 0, bottom: 400 },
+      items,
+      pixelGrid,
+    });
+    return items[0] as SpriteItem;
+  };
+  // Sub-pixel by default: the interpolated position and height as they are.
+  const free = collect();
+  expect([free.wx, free.wy, free.zOffset].map((v) => v.toFixed(3))).toEqual([
+    "99.700",
+    "100.600",
+    "2.700",
+  ]);
+  // At 0.5× a screen pixel is two world pixels: position and height step by two.
+  expect(collect(0.5)).toMatchObject({ wx: 100, wy: 100, zOffset: 2 });
+  expect(collect(2)).toMatchObject({ wx: 99.5, wy: 100.5, zOffset: 2.5 });
+});

@@ -230,9 +230,9 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
   const r_pixelgrid = engine.cvars.register<boolean>({
     name: "r_pixelgrid",
     description:
-      "Prototype: the 3D top-down view places camera, entities and grass on one screen-pixel grid (?pixelgrid=1)",
+      "The 3D top-down view places camera, bodies and grass on one screen-pixel grid (?pixelgrid=0 turns it off)",
     type: "boolean",
-    defaultValue: false,
+    defaultValue: true,
     category: "r",
   });
 

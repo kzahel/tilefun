@@ -7,12 +7,8 @@ import { NORTH_YAW } from "../rendering/firstperson/FirstPersonCamera.js";
 import { propForm } from "../rendering/firstperson/FirstPersonProps.js";
 import type { SceneLayers } from "../rendering/firstperson/FirstPersonView.js";
 import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js";
-import {
-  bladesOnPixelGrid,
-  entitiesOnPixelGrid,
-  onPixelGrid,
-} from "../rendering/firstperson/PixelGrid.js";
 import { collectCameraGrass } from "../rendering/GrassBladeRenderer.js";
+import { bladesOnPixelGrid, onPixelGrid } from "../rendering/PixelGrid.js";
 import {
   type CategoryParity,
   compareCategory,
@@ -238,10 +234,10 @@ export interface FilmStart {
 
 const FILM_LABELS: Record<FilmColumn, string> = {
   fixed: "fixed view",
-  scene: "unified 3D",
+  scene: "unified 3D, sub-pixel",
   snapped: "unified 3D, camera on whole pixels",
   nearest: "unified 3D, ground sampled like trees",
-  rigid: "unified 3D, one pixel grid for everything",
+  rigid: "unified 3D, one pixel grid (as played)",
 };
 
 /**
@@ -493,9 +489,9 @@ function parityStage(game: GameTestHooks) {
     return read();
   };
 
-  /** `eye`: the 3D camera's centre when it is not the view's camera. `rigid`
-   * (prototype): the eye, every entity and every blade placed on one grid of
-   * screen pixels in world space, so the whole picture steps together. */
+  /** `eye`: the 3D camera's centre when it is not the view's camera. `rigid`:
+   * the eye, every body and every blade placed on one grid of screen pixels in
+   * world space, as play does (`PixelGrid`), so the whole picture steps together. */
   const drawScene = (
     layers: SceneLayers,
     shadows: boolean,
@@ -507,7 +503,7 @@ function parityStage(game: GameTestHooks) {
     Object.assign(scene.layers, layers);
     const frame = control.frame;
     frame.presentationTime = time;
-    const all = rigid ? entitiesOnPixelGrid(drawnEntities(), camera.scale) : drawnEntities();
+    const all = drawnEntities();
     if (rigid) eye = { x: onPixelGrid(eye.x, camera.scale), y: onPixelGrid(eye.y, camera.scale) };
     // As play collects them: the fixed view's blades for this camera. Bodies push
     // blades aside, so a picture without bodies has none pushed, as in `drawFixed`.
@@ -529,6 +525,7 @@ function parityStage(game: GameTestHooks) {
         items,
         frame,
         depthShadows: shadows,
+        pixelGrid: rigid ? camera.scale : undefined,
       });
       const drawn = view3d.draw(region, (target) =>
         scene.render(

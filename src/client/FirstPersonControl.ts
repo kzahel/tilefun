@@ -73,10 +73,10 @@ export class FirstPersonControl {
   /** Prototype: the 3D ground sampled once per pixel, as trees and actors are;
    * `r_groundnearest` and `?groundnearest=1` set it. */
   groundNearest = new URLSearchParams(location.search).get("groundnearest") === "1";
-  /** Prototype: top-down 3D views place the camera, entities and grass on one
-   * grid of screen pixels, with ground sampled as cards are (`PixelGrid`);
-   * `r_pixelgrid` and `?pixelgrid=1` set it. */
-  pixelGrid = new URLSearchParams(location.search).get("pixelgrid") === "1";
+  /** Top-down 3D views place the camera, bodies and grass on one grid of screen
+   * pixels, with ground sampled as cards are (`PixelGrid`; owner-accepted
+   * 2026-11-16). `r_pixelgrid` and `?pixelgrid=0` turn it off for comparison. */
+  pixelGrid = new URLSearchParams(location.search).get("pixelgrid") !== "0";
   /** A headset's tabletop (252) sets how far its 3D view reaches, in place of
    * the view distance. World pixels. */
   reach: number | undefined;

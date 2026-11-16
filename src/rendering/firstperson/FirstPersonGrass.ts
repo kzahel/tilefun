@@ -6,12 +6,8 @@ import type { CardPages } from "./FirstPersonBillboards.js";
 
 /** A blade's four corners on its card, in the order of a card's vertices
  * (bottom-left, bottom-right, top-right, top-left of the artwork): `across`
- * along the card and `up` from its foot. */
-export interface BladeQuad {
-  /** How far south of the blade's anchor the card stands. */
-  south: number;
-  corners: readonly [across: number, up: number][];
-}
+ * along the card and `up` from its anchor (below it where negative). */
+export type BladeCorners = readonly [across: number, up: number][];
 
 /** The artwork's corners as (column, row) from its top-left, in vertex order. */
 const ART_CORNERS = [
@@ -21,33 +17,80 @@ const ART_CORNERS = [
   [0, 0],
 ] as const;
 
+/** How much nearer than the ground it covers a blade's row below its anchor is
+ * drawn (world pixels along a view ray). */
+export const BLADE_GROUND_LIFT = 0.25;
+
 /**
  * Where a blade's artwork stands in the scene. The fixed view turns the blade
  * about its anchor on screen (clockwise for a positive angle). The top-down
  * camera shows an upright card's `up` as distance up the screen, so the same
  * turn made in the card's plane lands on the same pixels.
  *
- * The artwork reaches a row or two below its anchor, more when it leans. Below
- * the ground the ground in front would hide it, so the card stands just far
- * enough south of the anchor for its lowest corner to touch the ground.
+ * The card stands at the anchor, so it is nearer or farther than a body exactly
+ * where the fixed view sorts it, by the anchor's row. The artwork reaches a row
+ * or two below the anchor, more when it leans; those rows are under the ground,
+ * and the blade material draws them at the depth of the ground they cover
+ * (`bladeDepth`), so they show and still sort by their own row.
  */
 export function bladeQuad(
   variant: number,
   angle: number,
   width: number,
   height: number,
-): BladeQuad {
+): BladeCorners {
   const cos = Math.cos(angle),
     sin = Math.sin(angle);
   const anchorY = GRASS_ANCHOR_Y[variant] ?? 7;
-  // Screen offsets from the anchor: right, and down.
-  const offsets = ART_CORNERS.map(([column, row]) => {
+  return ART_CORNERS.map(([column, row]) => {
     const x = column * width - GRASS_ANCHOR_X,
       y = row * height - anchorY;
-    return [x * cos - y * sin, x * sin + y * cos] as const;
+    // Screen offsets from the anchor: right, and down.
+    return [x * cos - y * sin, -(x * sin + y * cos)] as const;
   });
-  const south = Math.max(0, ...offsets.map(([, down]) => down));
-  return { south, corners: offsets.map(([right, down]) => [right, south - down]) };
+}
+
+/**
+ * Depth for a blade's rows below its anchor (top-down camera only). Such a row
+ * `below` world pixels under the anchor stands under the ground that covers it
+ * on screen: the camera shows a point that far south of the anchor on the
+ * ground at the same pixel, `2 × below` nearer along the ray. Writing that
+ * depth (plus `BLADE_GROUND_LIFT`) keeps the row in front of its ground and
+ * behind a body whose feet are farther south, as the fixed view sorts them;
+ * the rows above the anchor keep the card's own depth. Geometry cannot do this:
+ * a card bent at the anchor's row would interpolate depth across the whole
+ * triangle and pull the blade's top over a body's legs.
+ */
+export function bladeDepth(material: THREE.Material): void {
+  const shade = material.onBeforeCompile.bind(material),
+    key = material.customProgramCacheKey.bind(material);
+  material.customProgramCacheKey = () => `${key()}:blade-depth`;
+  material.onBeforeCompile = (shader, renderer) => {
+    shade(shader, renderer);
+    shader.vertexShader = shader.vertexShader
+      .replace(
+        "#include <common>",
+        "#include <common>\nvarying float vBladeBelow;\nvarying float vDepthPerNear;",
+      )
+      .replace(
+        "#include <project_vertex>",
+        // Window depth per world pixel nearer: half the clip depth per unit up.
+        "#include <project_vertex>\n  vBladeBelow = -corner.y;\n  vDepthPerNear = 0.5 * projectionMatrix[2][2];",
+      );
+    shader.fragmentShader = shader.fragmentShader
+      .replace(
+        "#include <common>",
+        "#include <common>\nvarying float vBladeBelow;\nvarying float vDepthPerNear;",
+      )
+      .replace(
+        "#include <dithering_fragment>",
+        `#include <dithering_fragment>
+  gl_FragDepth = vBladeBelow > 0.0
+    ? gl_FragCoord.z + vDepthPerNear * 2.0 * (vBladeBelow + ${BLADE_GROUND_LIFT.toFixed(2)})
+    : gl_FragCoord.z;`,
+      );
+  };
+  material.needsUpdate = true;
 }
 
 const CARD_INDICES = [0, 1, 2, 0, 2, 3] as const;
@@ -60,8 +103,9 @@ const EDGE_INSET = 0.01;
  * blade's angle, as one mesh of leaning cards read from the page atlas.
  *
  * Blades blend at the frame's grass opacity and do not write depth: they hide
- * behind anything nearer, cover an actor's feet from in front, and stay under
- * vehicles, which are drawn after the scene.
+ * behind anything nearer, cover an actor's feet only from in front (south of
+ * its feet, as the fixed view sorts them), and stay under vehicles, which are
+ * drawn after the scene.
  */
 export class GrassCards {
   /** Blades written this frame. */
@@ -75,6 +119,7 @@ export class GrassCards {
     parent: THREE.Object3D,
     private readonly material: THREE.MeshBasicMaterial,
   ) {
+    bladeDepth(material);
     this.mesh = new THREE.Mesh(new THREE.BufferGeometry(), material);
     this.mesh.frustumCulled = false;
     this.mesh.visible = false;
@@ -130,9 +175,9 @@ export class GrassCards {
       c = this.count * 8;
     for (let i = 0; i < 4; i++) {
       const [column, row] = ART_CORNERS[i] ?? [0, 0];
-      const [across, up] = quad.corners[i] ?? [0, 0];
+      const [across, up] = quad[i] ?? [0, 0];
       centres[p] = blade.wx;
-      centres[p + 1] = blade.wy + quad.south;
+      centres[p + 1] = blade.wy;
       centres[p + 2] = 0;
       corners[c] = across;
       corners[c + 1] = up;
