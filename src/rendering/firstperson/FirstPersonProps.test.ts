@@ -3,6 +3,8 @@ import type { Prop, PropCollider } from "../../entities/Prop.js";
 import { jumpPlacements, jumpSlabProp } from "../../generation/regional/JumpProfiles.js";
 import { forestRowProp, forestRowType } from "../../patterns/ForestThicket.js";
 import { surfaceZAt } from "../../physics/SurfacePatch.js";
+import { roadRailBridgeProp } from "../../railway/RoadRailBridge.js";
+import { roadDeckMarkings } from "../RoadDeckPresentation.js";
 import {
   appendPropGeometry,
   blockingColliders,
@@ -268,5 +270,31 @@ describe("walkable surfaces", () => {
         z = (lines.positions[i + 2] ?? 0) - 0.25;
       expect(z).toBeCloseTo(surfaceZAt(surface, solid.bounds, x, y), 4);
     }
+  });
+  it("wear the fixed view's asphalt and painted lines on road decks over rail", () => {
+    const deck = roadRailBridgeProp("prop-road-rail-x-deck", 400, 300);
+    const surface = deck?.collider?.surface;
+    const [solid] = deck ? propSolids(deck) : [];
+    if (!deck || !surface || !solid) throw Error("no road deck");
+    const flat = new TriangleWriter();
+    const lines = { positions: [] as number[], colors: [] as number[] };
+    appendPropGeometry({ flat, textured: undefined, lines }, deck, 0x8a8a8a, 0);
+    const { colors, positions } = flat.finish();
+    const linear = (c: number) => ((c / 255 + 0.055) / 1.055) ** 2.4;
+    // The top is the deck's asphalt at its height (rgb 128,134,139), not the grey.
+    expect(colors[0]).toBeCloseTo(linear(128), 3);
+    // Six faces, then one strip per painted line: edges, guard rails and centre dashes.
+    const strips = roadDeckMarkings(deck.type, solid.bounds);
+    expect(strips.length).toBeGreaterThan(5);
+    expect(positions.length / 18).toBe(6 + strips.length);
+    // The first strip lies on the deck, lifted toward the camera like the grid.
+    const first = 6 * 18;
+    for (let i = first; i < first + 18; i += 3)
+      expect((positions[i + 2] ?? 0) - 0.25).toBeCloseTo(
+        surfaceZAt(surface, solid.bounds, positions[i] ?? 0, (positions[i + 1] ?? 0) - 0.25),
+        4,
+      );
+    // No tile grid on roads.
+    expect(lines.positions).toHaveLength(0);
   });
 });

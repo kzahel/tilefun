@@ -2,7 +2,7 @@ import { type AABB, getEntityAABB } from "../../entities/collision.js";
 import type { Prop, PropCollider } from "../../entities/Prop.js";
 import { forestRowDefinition } from "../../patterns/ForestThicket.js";
 import { type SurfacePatch, surfaceZAt } from "../../physics/SurfacePatch.js";
-import { isRoadDeck } from "../RoadDeckPresentation.js";
+import { isRoadDeck, roadDeckColors, roadDeckMarkings } from "../RoadDeckPresentation.js";
 import { SURFACE_GRID, surfaceColors, surfaceGridLines } from "../SurfacePresentation.js";
 import { FACE_SHADE, srgbToLinear, type TriangleWriter } from "./FirstPersonTerrain.js";
 
@@ -354,9 +354,13 @@ export function appendPropGeometry(
     }
     if (solid.surface) {
       // Decks and ramps wear the fixed view's surface look: its top and edge
-      // colours and its tile grid. Road decks keep their own colour for now.
-      const look =
-        solid.patch && !isRoadDeck(prop.type) ? surfaceColors(prop.type, solid.patch) : undefined;
+      // colours and its tile grid; road decks its asphalt and painted lines.
+      const road = !!solid.patch && isRoadDeck(prop.type);
+      const look = solid.patch
+        ? road
+          ? roadDeckColors(prop.type, meanZ(solid.corners))
+          : surfaceColors(prop.type, solid.patch)
+        : undefined;
       const top = look ? hex(look.top) : color,
         edge = look ? hex(look.edge) : color;
       flat(FACES.top, FACE_SHADE.top, top);
@@ -366,7 +370,8 @@ export function appendPropGeometry(
       flat(FACES.north, FACE_SHADE.north, edge);
       flat(FACES.east, FACE_SHADE.east, edge);
       flat(FACES.west, FACE_SHADE.west, edge);
-      if (look && solid.patch && out.lines)
+      if (road && solid.patch) deckMarkings(out, prop.type, solid.patch, solid.bounds);
+      else if (look && solid.patch && out.lines)
         for (const [x, y, z] of surfaceGridLines(solid.patch, solid.bounds)) {
           out.lines.positions.push(x, y + GRID_LIFT, z + GRID_LIFT);
           out.lines.colors.push(...GRID_RGB);
@@ -385,6 +390,40 @@ export function appendPropGeometry(
     wrapped(FACES.west, ART_SHADE.west, left + depth, left);
     const mirror = 2 * artLeft + frame.width;
     wrapped(FACES.north, ART_SHADE.north, mirror - right, mirror - left);
+  }
+}
+
+/** Mean height of a solid's top corners (`FACES.top`). */
+function meanZ(corners: readonly (readonly number[])[]): number {
+  let sum = 0;
+  for (const corner of corners.slice(4, 8)) sum += corner[2] ?? 0;
+  return sum / 4;
+}
+
+/** The fixed view's painted lines on a road deck (`roadDeckMarkings`), as strips
+ * lying on its plane, as wide in world pixels as the fixed view draws them. */
+function deckMarkings(out: PropGeometry, type: string, patch: SurfacePatch, bounds: AABB): void {
+  for (const line of roadDeckMarkings(type, bounds)) {
+    const alongX = line.ay === line.by,
+      half = line.weight / 2;
+    const points: [number, number][] = alongX
+      ? [
+          [line.ax, line.ay - half],
+          [line.bx, line.by - half],
+          [line.bx, line.by + half],
+          [line.ax, line.ay + half],
+        ]
+      : [
+          [line.ax - half, line.ay],
+          [line.ax + half, line.ay],
+          [line.bx + half, line.by],
+          [line.bx - half, line.by],
+        ];
+    out.flat.quad(
+      points.map(([x, y]) => [x, y + GRID_LIFT, surfaceZAt(patch, bounds, x, y) + GRID_LIFT]),
+      hex(line.color),
+      1,
+    );
   }
 }
 

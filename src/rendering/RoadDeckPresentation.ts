@@ -13,8 +13,11 @@ export const isRoadDeck = (type: string) =>
 /** Road-over-rail asphalt lightens with height (0 → bridge deck). */
 function deckShade(z: number): string {
   const t = Math.max(0, Math.min(1, z / ROAD_RAIL_BRIDGE.height));
-  const c = (lo: number, hi: number) => Math.round(lo + (hi - lo) * t);
-  return `rgb(${c(84, 128)},${c(89, 134)},${c(93, 139)})`;
+  const c = (lo: number, hi: number) =>
+    Math.round(lo + (hi - lo) * t)
+      .toString(16)
+      .padStart(2, "0");
+  return `#${c(84, 128)}${c(89, 134)}${c(93, 139)}`;
 }
 
 /** Thin strips approximate the projected plane, as for schematic surfaces; all
@@ -27,8 +30,7 @@ export function drawRoadDeck(
   patch: SurfacePatch,
   bounds: AABB,
 ) {
-  const railRoad = isRoadRailBridge(type);
-  const alongY = railRoad && !type.startsWith("prop-road-rail-x-");
+  const alongY = deckAlongY(type);
   if (alongY) drawDeckRows(frame, camera, patch, bounds);
   else
     for (let x = bounds.left; x < bounds.right; x += 2) {
@@ -41,13 +43,11 @@ export function drawRoadDeck(
         surfaceZAt(patch, bounds, x, bounds.bottom),
       );
       const w = width * camera.scale + 0.5;
-      const fill = railRoad
-        ? deckShade(surfaceZAt(patch, bounds, x + width / 2, bounds.top))
-        : "#62676b";
-      frame.rect(north.sx, north.sy, w, south.sy - north.sy, fill);
-      frame.rect(south.sx, south.sy, w, patch.thickness * camera.scale, "#3d4854");
+      const colors = roadDeckColors(type, surfaceZAt(patch, bounds, x + width / 2, bounds.top));
+      frame.rect(north.sx, north.sy, w, south.sy - north.sy, colors.top);
+      frame.rect(south.sx, south.sy, w, patch.thickness * camera.scale, colors.edge);
     }
-  drawMarkings(frame, camera, patch, bounds, alongY, railRoad);
+  drawMarkings(frame, camera, patch, bounds, type);
 }
 
 /** A north/south deck rises along Y, which this projection only stretches. Rows
@@ -69,41 +69,70 @@ function drawDeckRows(frame: OverlayFrame, camera: Camera, patch: SurfacePatch, 
   }
 }
 
+/** One painted line on a road deck, in world pixels along its plane. */
+export interface DeckMarking {
+  ax: number;
+  ay: number;
+  bx: number;
+  by: number;
+  color: string;
+  /** Line width in world pixels: guard rails read as parapets at twice the paint. */
+  weight: number;
+}
+
+/** Whether a road deck carries its traffic along Y (north/south road-rail decks). */
+export function deckAlongY(type: string): boolean {
+  return isRoadRailBridge(type) && !type.startsWith("prop-road-rail-x-");
+}
+
+/** A road deck's top colour at height `z` and its edge colour. */
+export function roadDeckColors(type: string, z: number): { top: string; edge: string } {
+  return { top: isRoadRailBridge(type) ? deckShade(z) : "#62676b", edge: "#3d4854" };
+}
+
 /** Rail-crossing decks match the regional road: ±64px asphalt edge lines and a
- * guard rail at each outer edge; depot decks keep their inset lines. */
-function drawMarkings(
-  frame: OverlayFrame,
-  camera: Camera,
-  patch: SurfacePatch,
-  bounds: AABB,
-  alongY: boolean,
-  railRoad: boolean,
-) {
+ * guard rail at each outer edge; depot decks keep their inset lines. The centre
+ * line is dashed, 16 on and 16 off. */
+export function roadDeckMarkings(type: string, bounds: AABB): DeckMarking[] {
+  const railRoad = isRoadRailBridge(type),
+    alongY = deckAlongY(type);
   const lo = alongY ? bounds.left : bounds.top,
     hi = alongY ? bounds.right : bounds.bottom,
     mid = (lo + hi) / 2;
   const rows = railRoad ? [lo + 2, hi - 2, mid - 64, mid + 64, mid] : [lo + 6, hi - 6, mid];
   const start = alongY ? bounds.top : bounds.left,
     stop = alongY ? bounds.bottom : bounds.right;
+  const markings: DeckMarking[] = [];
   for (const across of rows) {
     const center = across === mid,
       guard = railRoad && Math.abs(across - mid) > 64;
-    // Guard rails read as parapets: twice the painted line weight.
-    const stroke = center ? "#e5bf59" : guard ? "#d8d5ca" : "#e0dfd6",
-      weight = Math.max(1, camera.scale) * (guard ? 2 : 1);
+    const color = center ? "#e5bf59" : guard ? "#d8d5ca" : "#e0dfd6";
     for (let along = start; along < stop; along += center ? 32 : stop - start) {
       const end = Math.min(stop, along + (center ? 16 : stop - start));
       const [ax, ay, bx, by] = alongY ? [across, along, across, end] : [along, across, end, across];
-      const a = projectWorld(camera, ax, ay, surfaceZAt(patch, bounds, ax, ay));
-      const b = projectWorld(camera, bx, by, surfaceZAt(patch, bounds, bx, by));
-      Object.assign(frame.next("line"), {
-        x: a.sx,
-        y: a.sy,
-        width: b.sx,
-        height: b.sy,
-        stroke,
-        lineWidth: weight,
-      });
+      markings.push({ ax, ay, bx, by, color, weight: guard ? 2 : 1 });
     }
+  }
+  return markings;
+}
+
+function drawMarkings(
+  frame: OverlayFrame,
+  camera: Camera,
+  patch: SurfacePatch,
+  bounds: AABB,
+  type: string,
+) {
+  for (const { ax, ay, bx, by, color, weight } of roadDeckMarkings(type, bounds)) {
+    const a = projectWorld(camera, ax, ay, surfaceZAt(patch, bounds, ax, ay));
+    const b = projectWorld(camera, bx, by, surfaceZAt(patch, bounds, bx, by));
+    Object.assign(frame.next("line"), {
+      x: a.sx,
+      y: a.sy,
+      width: b.sx,
+      height: b.sy,
+      stroke: color,
+      lineWidth: Math.max(1, camera.scale) * weight,
+    });
   }
 }
