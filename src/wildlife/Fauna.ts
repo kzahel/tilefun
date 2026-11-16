@@ -267,7 +267,7 @@ const BASE_FAUNA_PROFILES: readonly FaunaProfile[] = [
     sha256: "258fc640b891fceb6b2f272bfc2796f10dcb78410550acc46bdf379a022cad46",
     size: 48,
     anchor: [24, 35],
-    inspection: [-355, 284],
+    inspection: [-418, 97],
     clips: standardClips("walk", 30),
     body: [22, 12, 20],
     speed: 16,

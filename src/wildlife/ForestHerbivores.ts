@@ -31,7 +31,7 @@ export const FOREST_HERBIVORE_PROFILES: readonly FaunaProfile[] = [
     sha256: "e971e51aef9936fd1db0f81fd044fbc0bce0af670df74988f0f6ccc8233773db",
     size: 64,
     anchor: [32, 48],
-    inspection: [-1379, 486],
+    inspection: [-1640, -615],
     clips: standardClips("walk", 40),
     body: [24, 16, 28],
     speed: 12,

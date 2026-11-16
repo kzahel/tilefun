@@ -71,7 +71,7 @@ export const SHELLED_AMPHIBIAN_PROFILES: readonly FaunaProfile[] = [
     sha256: "aaa68522dfe4bde20691c3697a1b4df0a2aff8ba3c049364b87eb800eb7a3d5c",
     size: 64,
     anchor: [32, 44],
-    inspection: [-30, -794],
+    inspection: [1308, -1116],
     clips: standardClips("walk", 30),
     body: [12, 8, 14],
     speed: 6,

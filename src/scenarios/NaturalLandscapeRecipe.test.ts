@@ -1,4 +1,5 @@
 import { expect, it } from "vitest";
+import { TerrainId } from "../autotile/TerrainId.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
@@ -95,12 +96,14 @@ it("keeps the pond arrival dry and computes authoritative shore blends", async (
   const s = await ScenarioSession.create(recipe);
   try {
     const p = s.player.player.position;
-    expect(s.realm.world.getTerrain(Math.floor(p.wx / 16), Math.floor(p.wy / 16))).toBe(1);
+    expect([TerrainId.Grass, TerrainId.Sand, TerrainId.SandLight]).toContain(
+      s.realm.world.getTerrain(Math.floor(p.wx / 16), Math.floor(p.wy / 16)),
+    );
     const chunk = s.realm.world.getChunkIfLoaded(Math.floor(p.wx / 256), Math.floor(p.wy / 256));
-    expect(chunk?.subgrid.some((v) => v === 4)).toBe(true);
+    expect(chunk?.subgrid.some((v) => v === TerrainId.Grass)).toBe(true);
     for (let i = 0; i < 30; i++) await s.step({ dx: 0, dy: 0, jump: false, sprinting: false });
     expect(chunk?.autotileComputed).toBe(true);
-    expect(chunk?.blendBase.some((v) => v === 4)).toBe(true);
+    expect(chunk?.blendBase.some((v) => v === TerrainId.Grass)).toBe(true);
   } finally {
     await s.close();
   }

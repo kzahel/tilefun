@@ -19,6 +19,9 @@ the browser retains hopping, contact reactions and saved phases. See
 Production-table refresh was attempted with `node scripts/wildlife/status.mjs`,
 but this checkout lacks the ignored `data/wildlife-campaign-v2/progress.json`;
 the historical art-production table cannot be regenerated from local state.
+Hosted native qualification found the same stale-home issue for sheep, impala,
+capybara and frilled-neck lizard; their destinations are also refreshed, with
+the exact fauna-data snapshot updated for these intentional coordinate changes.
 
 Physics reset [205](../tactical/205-physics-reset.md) moves AI trajectories into
 the shared physics intent contract. Anchored resources stay fixed; loose food/toys

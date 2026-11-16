@@ -35,6 +35,16 @@ pair passes two repeats each. The first full rerun passed the original seven
 cases and finished with 556 passed, two retry flakes (garden and second pad),
 and these two additional failures, now repaired.
 
+The first hosted push passed check, raster and both smoke shards, but native
+tests found four more stale natural homes (sheep, impala, capybara and
+frilled-neck lizard). Their inspection coordinates now point at current owners.
+The complete fauna serialization snapshot is refreshed for the six changed
+fauna destinations, retaining all art/gait data. The pond-arrival test now asserts
+dry grass or sand through `TerrainId`, replacing an obsolete literal `1` that
+currently means shallow water; shore subgrid/blend assertions remain.
+All 929 cases across the thirteen affected fauna, residency, profile and recipe
+files pass locally, as do focused lint, the regenerated inventory and build.
+
 Match validation to the affected behavior and dependencies. Small code changes
 should run focused tests and relevant lint/typechecks. Documentation-only edits
 need diff review and `git diff --check`, without runtime tests. Report which

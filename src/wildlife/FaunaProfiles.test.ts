@@ -10,8 +10,9 @@ function canonical(value: unknown): string {
 describe("fauna profile data", () => {
   it("keeps the complete FAUNA_PROFILES serialization byte-identical", () => {
     expect(FAUNA_PROFILES).toHaveLength(153);
+    // 2026-11-16: refresh six natural inspection destinations; art and gait data stay fixed.
     expect(createHash("sha256").update(canonical(FAUNA_PROFILES)).digest("hex")).toBe(
-      "fd7930a522752b5c8f832af37bbefb9073d361609b58053e29544a2ff85e36a6",
+      "08342200cbeeed7e553702ed610756848a791c35c68cd7a6310a75639da43290",
     );
   });
 });
