@@ -16,6 +16,7 @@ import type {
   FirstPersonInterior,
   InteriorFurnitureArt,
 } from "../rendering/firstperson/FirstPersonInterior.js";
+import type { FirstPersonFrame } from "../rendering/firstperson/FirstPersonView.js";
 import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js";
 import { collectCameraGrass } from "../rendering/GrassBladeRenderer.js";
 import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
@@ -23,6 +24,7 @@ import { bladesOnPixelGrid, onPixelGrid, particlesOnPixelGrid } from "../renderi
 import type { SpriteItem } from "../rendering/SceneItem.js";
 import { SurfaceReceivers } from "../rendering/SurfaceReceivers.js";
 import type { SeatFrame } from "../session/DeviceSeats.js";
+import { seatEntity } from "../session/SeatFocus.js";
 import type { View } from "../session/View.js";
 
 /**
@@ -316,6 +318,7 @@ export function renderFirstPerson(
       groundNearest: control.groundNearest || !!grid,
       grass,
       effects,
+      cutaway: viewCutaway(gc, view, alpha),
       headset: from.headset,
     };
     // Through the render host's own renderer (249): into this view's region, or
@@ -330,6 +333,16 @@ export function renderFirstPerson(
   else if (topDown) control.markTopDown(view);
   else if (drawn) control.markDrawn(view);
   return drawn || !!from.headset;
+}
+
+/** The fixed view's cutaway inputs for this view: its seat's body (or the player)
+ * and the view's own slab fades, so switching views keeps a fade where it was. */
+function viewCutaway(gc: GameContext, view: View, alpha: number): FirstPersonFrame["cutaway"] {
+  const observer =
+    (view.seat ? seatEntity(gc.session, view.seat) : undefined) ?? gc.stateView.playerEntity;
+  return observer
+    ? { observer, fades: view.fades, time: gc.time?.presentationSeconds ?? 0, alpha }
+    : undefined;
 }
 
 /**

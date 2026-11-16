@@ -427,6 +427,27 @@ function deckMarkings(out: PropGeometry, type: string, patch: SurfacePatch, boun
   }
 }
 
+/** Clear height under a deck, in world pixels, from which a body can stand below it. */
+const OVERHEAD_CLEARANCE = 16;
+
+/**
+ * A deck someone can stand under (bridge decks and their raised ramp ends,
+ * garage levels): one walkable surface whose underside rises at least
+ * `OVERHEAD_CLEARANCE` somewhere. The 3D scene draws each as its own mesh so it
+ * can fade, as the fixed view does, over a player beneath it. Motocross
+ * earthworks are built up from the ground and are never overhead.
+ */
+export function isOverheadDeck(prop: Prop): boolean {
+  const surface = prop.collider?.surface;
+  if (!surface || prop.walls?.length || prop.type.startsWith("prop-mx-")) return false;
+  const bounds = getEntityAABB(prop.position, prop.collider as PropCollider);
+  let top = -Infinity;
+  for (const x of [bounds.left, bounds.right])
+    for (const y of [bounds.top, bounds.bottom])
+      top = Math.max(top, surfaceZAt(surface, bounds, x, y));
+  return top - surface.thickness >= OVERHEAD_CLEARANCE;
+}
+
 /** A walkable surface (deck, ramp) a moving body can stand on. */
 export interface PropSurface {
   readonly bounds: AABB;

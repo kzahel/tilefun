@@ -1,10 +1,13 @@
 import * as THREE from "three";
 import { ELEVATION_PX, TILE_SIZE } from "../../config/constants.js";
+import type { AABB } from "../../entities/collision.js";
 import type { Prop } from "../../entities/Prop.js";
+import type { SurfacePatch } from "../../physics/SurfacePatch.js";
 import { artCard, type Billboard, sheetFrame } from "./FirstPersonBillboards.js";
 import type { FirstPersonImages, PropImage } from "./FirstPersonImages.js";
 import {
   appendPropGeometry,
+  isOverheadDeck,
   type PropGeometry,
   type PropSurface,
   propForm,
@@ -28,6 +31,16 @@ export interface ChunkProps {
   textured: Map<THREE.Texture, TexturedFaces>;
   billboards: Billboard[];
   surfaces: PropSurface[];
+  /** Decks a body can stand under, each apart so it can fade (`isOverheadDeck`). */
+  decks: OverheadDeck[];
+}
+
+/** One overhead deck's faces, with the surface the fixed view's cutaway reads. */
+export interface OverheadDeck {
+  readonly id: string;
+  readonly patch: SurfacePatch;
+  readonly bounds: AABB;
+  readonly flat: ColoredTriangles;
 }
 
 export function texturedMesh(faces: TexturedFaces, material: THREE.Material): THREE.Mesh {
@@ -108,6 +121,7 @@ export class PropMeshes {
       textured,
       billboards: [],
       surfaces: [],
+      decks: [],
     };
     const facesFor: FacesFor = (image) => {
       if (!image) return undefined;
@@ -140,14 +154,24 @@ export class PropMeshes {
     } else {
       const image = this.images.prop(prop, true);
       const textured = facesFor(image);
+      const surfaces = propSurfaces(prop);
+      const overhead = isOverheadDeck(prop) ? new TriangleWriter() : undefined;
       appendPropGeometry(
-        { flat, textured, lines: built.lines },
+        { flat: overhead ?? flat, textured, lines: built.lines },
         prop,
         image?.color ?? 0x8a8a8a,
         elevation,
         frame,
       );
-      built.surfaces.push(...propSurfaces(prop));
+      built.surfaces.push(...surfaces);
+      const [surface] = surfaces;
+      if (overhead?.vertexCount && surface)
+        built.decks.push({
+          id: surface.patch.id,
+          patch: surface.patch,
+          bounds: surface.bounds,
+          flat: overhead.finish(),
+        });
     }
   }
 

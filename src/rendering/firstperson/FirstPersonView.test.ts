@@ -1,9 +1,12 @@
 import * as THREE from "three";
 import { describe, expect, it } from "vitest";
 import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
+import { createPlayer } from "../../entities/Player.js";
+import { railCrossingRecipe } from "../../scenarios/RailCrossingRecipe.js";
 import { Chunk } from "../../world/Chunk.js";
 import type { CarMeshAsset } from "../CarMeshAsset.js";
 import type { SpriteItem } from "../SceneItem.js";
+import { REVEAL_OPACITY } from "../SurfacePresentation.js";
 import type { BodyImage, View3dTarget } from "../View3dHost.js";
 import { chunksInReach, terrainStale } from "./FirstPersonChunks.js";
 import {
@@ -263,6 +266,49 @@ describe("the view's merged static world (251)", () => {
     expect(asked).toEqual([]);
     expect(view.stats.bodyImages).toBe(0);
     expect(view.stats.cars).toBe(6);
+    view.dispose();
+  });
+
+  it("fades an overhead deck over the player beneath it, as the fixed view's cutaway does", () => {
+    const loaded = new Map<string, Chunk>();
+    for (let cy = -2; cy <= 1; cy++)
+      for (let cx = -2; cx <= 1; cx++) loaded.set(`${cx},${cy}`, new Chunk());
+    const props = railCrossingRecipe().props.filter((p) => p.collider?.surface);
+    const fades = new Map<string, { opacity: number; time: number }>();
+    // North of the deck's middle: on screen the raised deck covers what stands under its north half.
+    const player = (z: number) => ({ ...createPlayer(0, -40), wz: z });
+    const at = (observer: ReturnType<typeof player>, time: number): FirstPersonFrame => ({
+      ...frame(world(loaded), true),
+      eye: { x: 0, y: 0, z: 0, yaw: 0, pitch: 0 },
+      props,
+      cutaway: { observer, fades, time, alpha: 1 },
+    });
+    const view = new FirstPersonView(new Map());
+    settle(view, at(player(64), 0));
+    const materials = (view as unknown as { deckMaterials: Map<string, THREE.MeshBasicMaterial> })
+      .deckMaterials;
+    // The bridge and both ramps rise clear of the ground: each is its own mesh.
+    expect([...materials.keys()].sort()).toEqual(["north-ramp", "road-bridge", "south-ramp"]);
+    const bridge = () => materials.get("road-bridge") as THREE.MeshBasicMaterial;
+    // On the bridge, nothing fades.
+    expect(bridge().transparent).toBe(false);
+    // Under it, the deck eases to the fixed view's reveal opacity, then back.
+    view.render(at(player(0), 1), target);
+    view.render(at(player(0), 1.05), target);
+    expect(bridge().transparent).toBe(true);
+    expect(bridge().opacity).toBeGreaterThan(REVEAL_OPACITY);
+    view.render(at(player(0), 1.3), target);
+    expect(bridge().opacity).toBeCloseTo(REVEAL_OPACITY, 6);
+    // Nearest faces first: the deck blends once, after grass and effects.
+    expect(bridge().depthWrite).toBe(true);
+    const mesh = (view as unknown as { solidRoot: THREE.Group }).solidRoot.children.find(
+      (child) => child instanceof THREE.Mesh && child.material === bridge(),
+    );
+    expect(mesh?.renderOrder).toBe(3);
+    view.render(at(player(64), 2), target);
+    view.render(at(player(64), 2.3), target);
+    expect(bridge().transparent).toBe(false);
+    expect(bridge().opacity).toBe(1);
     view.dispose();
   });
 });
