@@ -17,10 +17,12 @@ import { ViewLayouts } from "../rendering/ViewLayout.js";
 import { LabInput } from "../scenarios/LabInput.js";
 import type { ScenarioCommand } from "../scenarios/ScenarioProtocol.js";
 import type { ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
+import { renderTopDown3d } from "../scenes/firstPersonPlay.js";
 import { type CameraPolicy, followSeat, View } from "../session/View.js";
 import type { Movement } from "../shared/Movement.js";
 import type { WorkerEndpoint } from "../transport/WorkerClientTransport.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
+import { FirstPersonControl } from "./FirstPersonControl.js";
 import { drawLabFrame, type LabDiagnostics, labPresentationDiagnostics } from "./LabScene.js";
 import { RecipeWorldClient } from "./RecipeWorldClient.js";
 
@@ -110,6 +112,12 @@ export class LabView {
   private displayedPlayer: Entity | undefined;
   private renderX = 0;
   private renderY = 0;
+  /** `?view=topdown3d` on the lab's page: the view draws through the unified 3D
+   * scene, as the game's opt-in does. Off by default, so review captures keep
+   * the fixed view until the renderer gate. */
+  private readonly unified: FirstPersonControl | undefined;
+  /** Worlds loaded so far (`worldLoaded`). */
+  private worlds = 0;
 
   constructor(
     private readonly canvas: HTMLCanvasElement,
@@ -127,6 +135,13 @@ export class LabView {
     // A new world clears the device's presentation, this view's slab fades included.
     this.client.device.views.push(this.view);
     this.camera.pixelSnap = cameraPixelSnap(params);
+    if (params.get("view") === "topdown3d" && !options.interior) {
+      this.unified = new FirstPersonControl(
+        () => this.canvas,
+        () => this.assets?.sheets ?? new Map(),
+      );
+      this.unified.topDown = true;
+    }
     this.setRegion(options.width, options.height);
     this.loop = new GameLoop({
       update: (dt) => {
@@ -236,6 +251,8 @@ export class LabView {
    * the game; `reload` then snaps the camera. */
   private worldLoaded() {
     this.host?.renderer.clear();
+    // The 3D scene keys its world by realm: a new world starts it afresh.
+    this.worlds++;
   }
 
   private snapCamera() {
@@ -341,6 +358,9 @@ export class LabView {
         collectObserver: shown,
         underlay: () => this.drawOverlay(this.options.underlay),
         overlay: () => this.drawOverlay(this.options.overlay),
+        ...(this.unified
+          ? { draw3d: (view: View) => this.draw3d(view, entities, shown, now) }
+          : {}),
         ...(interior
           ? {
               room: {
@@ -370,6 +390,31 @@ export class LabView {
       camera.restoreActual();
       replica.endPresentation();
     }
+  }
+
+  /** The view through the unified 3D scene, as the game's top-down opt-in. */
+  private draw3d(view: View, entities: readonly Entity[], observer: Entity, now: number): boolean {
+    const { host, unified } = this;
+    if (!host?.view3d || !unified) return false;
+    return renderTopDown3d(
+      {
+        control: unified,
+        view3d: host.view3d,
+        state: this.client.device.replica,
+        entities,
+        realm: `lab:${this.worlds}`,
+        presentationTime: this.lightSeconds,
+        // Slab fades run on display time, as `drawLabFrame`'s fixed view does.
+        fadeSeconds: now,
+        grass: this.options.terrain !== false && host.renderer.assets.has("grass-blades"),
+        background:
+          this.options.terrain === false ? (this.options.background ?? "#cbd5c3") : undefined,
+        observer,
+      },
+      view,
+      this.alpha,
+      this.effects,
+    );
   }
 
   /** A fresh frame that does not advance the world, for a report: the world
@@ -446,6 +491,8 @@ export class LabView {
     this.vehicleControl?.destroy();
     this.input?.dispose();
     this.input = undefined;
+    // The 3D scenes before the host whose renderer they draw with.
+    this.unified?.dispose();
     this.host?.dispose();
     this.host = undefined;
     this.effects.clear();

@@ -987,6 +987,17 @@ Realm still startles the animal. Native Canvas/GPU landing checks record the
 maximum authority player vertical velocity throughout escape/recovery to catch
 an unintended relaunch. Explicit Jump retains ordinary input physics.
 
+## Unified top-down view in labs (2026-11-16)
+
+`LabView` labs accept `?view=topdown3d` on the Workshop URL: the view draws
+through the game's unified top-down path (`renderTopDown3d`, sharing
+`drawSeen` with play), with its own `FirstPersonControl` disposed with the lab.
+Slab fades run on the lab's display clock, as its fixed view's do; a fixture
+without terrain shows its background colour. Diagnostic overlays are fixed-view
+submissions and are not drawn over the 3D view; room labs stay on the fixed view.
+It is off by default so review captures are unchanged
+([renderer unification](renderer-unification.md)).
+
 ## Change and validation discipline
 
 Tap movement (2026-10-10) is a game input/UI concern and does not add Options to

@@ -25,9 +25,13 @@ export interface LabSceneOptions {
   collectObserver: Entity;
   /** An owned room cache: props it draws itself, and its own slab presentation. */
   room?: { drawProps: ReadonlySet<number>; present(items: readonly SceneItem[]): void };
-  /** Diagnostic world overlays submitted before and after the scene. */
+  /** Diagnostic world overlays submitted before and after the scene. They are
+   * the fixed view's: a view drawn in 3D shows none. */
   underlay?(): void;
   overlay?(): void;
+  /** Draws the view in the unified 3D scene (`renderTopDown3d`); false leaves
+   * it to the fixed view. */
+  draw3d?(view: View): boolean;
 }
 
 /**
@@ -47,40 +51,46 @@ export function drawLabFrame(
   const { replica } = device;
   const world = options.terrain ? replica.world : undefined;
   host.beginFrame();
-  renderViews(host, [view], world ? { world, pacing: options.pacing } : undefined, () => {
-    drawViewTerrain(renderer, camera, world, {
-      background: options.background,
-      pacing: options.pacing,
-      prepared: true,
-    });
-    options.underlay?.();
-    drawViewScene(
-      renderer,
-      camera,
-      device.frame,
-      view.fades,
-      {
-        world: replica.world,
-        props: replica.props,
-        entities: options.entities,
-        collectObserver: options.collectObserver,
-        surfaceObserver: replica.playerEntity,
-      },
-      {
-        alpha: options.alpha,
-        particles,
-        grass: options.terrain && renderer.assets.has("grass-blades"),
-        visibility: options.visibility,
-        presentationTime: options.presentationTime,
-        fadeSeconds: options.fadeSeconds,
-        pixelExactShadows: options.pixelExactShadows,
-        ...(options.room
-          ? { drawProps: options.room.drawProps, present: options.room.present }
-          : {}),
-      },
-    );
-    options.overlay?.();
-  });
+  renderViews(
+    host,
+    [view],
+    world ? { world, pacing: options.pacing } : undefined,
+    () => {
+      drawViewTerrain(renderer, camera, world, {
+        background: options.background,
+        pacing: options.pacing,
+        prepared: true,
+      });
+      options.underlay?.();
+      drawViewScene(
+        renderer,
+        camera,
+        device.frame,
+        view.fades,
+        {
+          world: replica.world,
+          props: replica.props,
+          entities: options.entities,
+          collectObserver: options.collectObserver,
+          surfaceObserver: replica.playerEntity,
+        },
+        {
+          alpha: options.alpha,
+          particles,
+          grass: options.terrain && renderer.assets.has("grass-blades"),
+          visibility: options.visibility,
+          presentationTime: options.presentationTime,
+          fadeSeconds: options.fadeSeconds,
+          pixelExactShadows: options.pixelExactShadows,
+          ...(options.room
+            ? { drawProps: options.room.drawProps, present: options.room.present }
+            : {}),
+        },
+      );
+      options.overlay?.();
+    },
+    options.draw3d,
+  );
 }
 
 /** What a lab reports to browser checks, including the authority's clock and

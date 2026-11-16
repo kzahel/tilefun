@@ -91,6 +91,8 @@ export interface FirstPersonFrame {
         readonly alpha: number;
       }
     | undefined;
+  /** No ground: the clear colour instead (a Workshop fixture without terrain). */
+  readonly background?: string | undefined;
   /** Play's particles and surface marks for this frame (`EffectQuads`). */
   readonly effects?: readonly EffectItem[] | undefined;
   /**
@@ -437,7 +439,8 @@ export class FirstPersonView {
       if (!this.room) SunShadows.cast(mesh);
     });
     this.stats.meshes = this.faces.count + this.ground.meshes + (this.cards.count ? 1 : 0);
-    this.groundRoot.visible = this.layers.ground;
+    // A diagnostic fixture without terrain shows its plain background instead.
+    this.groundRoot.visible = this.layers.ground && frame.background === undefined;
     this.solidRoot.visible = this.layers.solids;
     this.cardRoot.visible = this.layers.cards;
     // Without fog nothing hides far casters: the sun map's own reach decides.
@@ -487,7 +490,7 @@ export class FirstPersonView {
       // After the sun's map: casters beyond a tabletop's edge still shade it.
       renderer.clippingPlanes = this.cameras.cutFor(headset);
       this.revealDecks(frame);
-      renderer.setClearColor(this.background, 1);
+      renderer.setClearColor(frame.background ?? this.background, 1);
       renderer.clear();
       renderer.render(this.scene, camera);
       this.stats.cars = 0;

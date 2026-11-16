@@ -38251,7 +38251,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LabScene.ts:72"
+          "source": "src/client/LabScene.ts:80"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/client/LabView.ts:409"
         },
         {
           "system": "Gameplay",
@@ -38279,11 +38283,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:467"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:470"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/firstPersonPlay.ts:278"
+          "source": "src/scenes/firstPersonPlay.ts:313"
         },
         {
           "system": "Editor",

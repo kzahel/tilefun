@@ -1,4 +1,5 @@
 import { getModernInteriorsEntry } from "../assets/ModernInteriorsAtlasIndex.js";
+import type { RemoteStateView } from "../client/ClientStateView.js";
 import type { FirstPersonControl } from "../client/FirstPersonControl.js";
 import { XR_WALK } from "../client/XrControl.js";
 import type { GameContext } from "../core/GameScene.js";
@@ -16,13 +17,17 @@ import type {
   FirstPersonInterior,
   InteriorFurnitureArt,
 } from "../rendering/firstperson/FirstPersonInterior.js";
-import type { FirstPersonFrame } from "../rendering/firstperson/FirstPersonView.js";
+import type {
+  FirstPersonFrame,
+  FirstPersonView,
+} from "../rendering/firstperson/FirstPersonView.js";
 import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js";
 import { collectCameraGrass } from "../rendering/GrassBladeRenderer.js";
 import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
 import { bladesOnPixelGrid, onPixelGrid, particlesOnPixelGrid } from "../rendering/PixelGrid.js";
 import type { SpriteItem } from "../rendering/SceneItem.js";
 import { SurfaceReceivers } from "../rendering/SurfaceReceivers.js";
+import type { View3dHost } from "../rendering/View3dHost.js";
 import type { SeatFrame } from "../session/DeviceSeats.js";
 import { seatEntity } from "../session/SeatFocus.js";
 import type { View } from "../session/View.js";
@@ -222,9 +227,15 @@ function seen(
     } satisfies Seen;
   }
   // Rooms are drawn roofless by the fixed view; the 3D scene has only walled rooms.
-  if (!control.topDown || gc.stateView.interior) return undefined;
+  if (gc.stateView.interior) return undefined;
+  return topDownSeen(control, view);
+}
+
+/** The top-down camera's view (251): the fixed view's camera, its eye on the
+ * pixel grid its bodies and blades stand on (`PixelGrid`). */
+function topDownSeen(control: FirstPersonControl, view: View): Seen | undefined {
+  if (!control.topDown) return undefined;
   const { camera } = view;
-  // The eye stands on the pixel grid its bodies and blades stand on (`PixelGrid`).
   const x = control.pixelGrid ? onPixelGrid(camera.x, camera.scale) : camera.x;
   const y = control.pixelGrid ? onPixelGrid(camera.y, camera.scale) : camera.y;
   const ground = obliqueGround(
@@ -239,6 +250,30 @@ function seen(
     drawRadius: Math.hypot(ground.right - ground.left, ground.bottom - ground.top) / 2,
     topDown: { scale: camera.scale },
   } satisfies Seen;
+}
+
+/**
+ * What a 3D view of play reads, from the game or from a Workshop lab: one
+ * device's replica and its presentation this frame. Both draw through
+ * `drawSeen`, so collection, the pixel grid, grass, effects and the cutaway are
+ * shared, not copied.
+ */
+export interface Play3dSource {
+  readonly control: FirstPersonControl;
+  readonly view3d: View3dHost;
+  readonly state: RemoteStateView;
+  /** Presented bodies (the game leaves out those behind a door being crossed). */
+  readonly entities: readonly Entity[];
+  readonly realm: string | null;
+  readonly presentationTime: number;
+  /** The clock slab fades run on, as the fixed view's `fadeSeconds`. */
+  readonly fadeSeconds: number;
+  /** A lab fixture without terrain: no ground, this colour behind. */
+  readonly background?: string | undefined;
+  /** The grass sheet is loaded. */
+  readonly grass: boolean;
+  /** The view's body, for the overhead decks' cutaway. */
+  readonly observer: Entity | undefined;
 }
 
 /**
@@ -266,26 +301,67 @@ export function renderFirstPerson(
     control?.hide(view);
     return false;
   }
+  const realm = gc.realmId ?? null;
+  const source: Play3dSource = {
+    control,
+    view3d,
+    state: stateView,
+    entities: gc.doorPresentation?.entities(stateView.entities, realm) ?? stateView.entities,
+    realm,
+    presentationTime: gc.time?.presentationSeconds ?? 0,
+    fadeSeconds: gc.time?.presentationSeconds ?? 0,
+    grass: gc.spriteCatalog.has("grass-blades"),
+    observer: (view.seat ? seatEntity(gc.session, view.seat) : undefined) ?? stateView.playerEntity,
+  };
+  const interior = from.topDown ? undefined : currentInterior(gc, control);
+  const headset = from.headset && gc.xr;
+  return drawSeen(source, view, scene, from, alpha, particles, interior, headset || undefined);
+}
+
+/**
+ * A Workshop lab's view in the unified top-down view (renderer unification:
+ * labs on the one renderer). As the game's top-down path; false leaves the view
+ * to the fixed view (not opted in, still loading, a diagonal split, or a room).
+ */
+export function renderTopDown3d(
+  source: Play3dSource,
+  view: View,
+  alpha: number,
+  particles?: ParticlePresentation,
+): boolean {
+  const { control } = source;
+  const scene = !view.region.mask && !source.state.interior ? control.scene(view) : undefined;
+  const from = scene ? topDownSeen(control, view) : undefined;
+  if (!scene || !from) {
+    control.hide(view);
+    return false;
+  }
+  return drawSeen(source, view, scene, from, alpha, particles, undefined, undefined);
+}
+
+/** Collect and draw what `from` sees; marks the view drawn or hands it back. */
+function drawSeen(
+  source: Play3dSource,
+  view: View,
+  scene: FirstPersonView,
+  from: Seen,
+  alpha: number,
+  particles: ParticlePresentation | undefined,
+  interior: FirstPersonInterior | undefined,
+  headset: Pick<NonNullable<GameContext["xr"]>, "draw"> | undefined,
+): boolean {
+  const { control, state, entities, view3d } = source;
   const { eye, drawRadius, topDown } = from;
-  const entities =
-    gc.doorPresentation?.entities(stateView.entities, gc.realmId ?? null) ?? stateView.entities;
   const grid = topDown && control.pixelGrid ? topDown.scale : undefined;
-  const interior = topDown ? undefined : currentInterior(gc, control);
   const frame = control.frame;
-  frame.presentationTime = gc.time?.presentationSeconds ?? 0;
+  frame.presentationTime = source.presentationTime;
   // Top-down draws the fixed view's blades for its camera; first person has none.
   const grass =
-    topDown && gc.spriteCatalog.has("grass-blades")
-      ? collectCameraGrass(
-          stateView.world,
-          entities,
-          view.camera,
-          frame.presentationTime,
-          frame.grass,
-        )
+    topDown && source.grass
+      ? collectCameraGrass(state.world, entities, view.camera, frame.presentationTime, frame.grass)
       : undefined;
   if (grid && grass) bladesOnPixelGrid(grass, grid);
-  const effects = particles && viewEffects(gc, view, particles, entities, alpha, !!topDown);
+  const effects = particles && viewEffects(source, view, particles, alpha, !!topDown);
   if (grid && effects) particlesOnPixelGrid(effects, grid);
   const items = frame.begin(!!grass?.length);
   let drawn = false;
@@ -293,8 +369,8 @@ export function renderFirstPerson(
     collectWorldSprites({
       // First person hides the viewer's own body; a driver is drawn inside the vehicle.
       entities: from.own === undefined ? entities : entities.filter((e) => e.id !== from.own),
-      props: stateView.props,
-      world: stateView.world,
+      props: state.props,
+      world: state.world,
       alpha,
       cull: from.cull,
       items,
@@ -303,11 +379,11 @@ export function renderFirstPerson(
       depthShadows: control.shadows,
       pixelGrid: grid,
     });
-    const content = {
+    const content: FirstPersonFrame = {
       eye,
-      world: stateView.world,
-      realm: gc.realmId ?? null,
-      props: stateView.props,
+      world: state.world,
+      realm: source.realm,
+      props: state.props,
       sprites: items.filter((item): item is SpriteItem => item.kind === "sprite"),
       drawRadius,
       interior,
@@ -318,31 +394,29 @@ export function renderFirstPerson(
       groundNearest: control.groundNearest || !!grid,
       grass,
       effects,
-      cutaway: viewCutaway(gc, view, alpha),
+      // The fixed view's cutaway: the view's body and its own slab fades, so
+      // switching renderers keeps a fade where it was.
+      cutaway: source.observer && {
+        observer: source.observer,
+        fades: view.fades,
+        time: source.fadeSeconds,
+        alpha,
+      },
+      background: source.background,
       headset: from.headset,
     };
     // Through the render host's own renderer (249): into this view's region, or
     // to a headset's eyes.
-    drawn = from.headset
-      ? !!gc.xr?.draw((target) => scene.render(content, target))
+    drawn = headset
+      ? headset.draw((target) => scene.render(content, target))
       : view3d.draw(view.region, (target) => scene.render(content, target));
   } finally {
     frame.release();
   }
-  if (!drawn && !from.headset) control.hide(view);
+  if (!drawn && !headset) control.hide(view);
   else if (topDown) control.markTopDown(view);
   else if (drawn) control.markDrawn(view);
-  return drawn || !!from.headset;
-}
-
-/** The fixed view's cutaway inputs for this view: its seat's body (or the player)
- * and the view's own slab fades, so switching views keeps a fade where it was. */
-function viewCutaway(gc: GameContext, view: View, alpha: number): FirstPersonFrame["cutaway"] {
-  const observer =
-    (view.seat ? seatEntity(gc.session, view.seat) : undefined) ?? gc.stateView.playerEntity;
-  return observer
-    ? { observer, fades: view.fades, time: gc.time?.presentationSeconds ?? 0, alpha }
-    : undefined;
+  return drawn || !!headset;
 }
 
 /**
@@ -352,20 +426,19 @@ function viewCutaway(gc: GameContext, view: View, alpha: number): FirstPersonFra
  * overview LOD. Collection advances the particles' landings, as it does there.
  */
 function viewEffects(
-  gc: GameContext,
+  source: Play3dSource,
   view: View,
   particles: ParticlePresentation,
-  entities: readonly Entity[],
   alpha: number,
   topDown: boolean,
 ): EffectItem[] {
   if (Array.isArray(particles)) return particles;
   if (particles.active === false) return [];
-  const { stateView } = gc;
+  const { state } = source;
   const receivers =
     !topDown || view.camera.zoom >= SURFACE_RECEIVER_MIN_ZOOM
-      ? new SurfaceReceivers(stateView.world, stateView.props, entities, alpha, {
-          propCache: gc.firstPerson?.frame.propReceivers,
+      ? new SurfaceReceivers(state.world, state.props, source.entities, alpha, {
+          propCache: source.control.frame.propReceivers,
         })
       : undefined;
   return particles
