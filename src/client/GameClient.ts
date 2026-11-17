@@ -24,7 +24,7 @@ import { EditorMode } from "../editor/EditorMode.js";
 import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { startIdeaDelivery } from "../ideas/IdeaDialog.js";
-import type { RenderBackend } from "../rendering/RenderFrame.js";
+import type { RenderResources } from "../rendering/RenderFrame.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
 import { type CarDrivingStyle, carDrivingStyle } from "../traffic/CarControls.js";
@@ -122,7 +122,7 @@ export class GameClient implements GameTestHooks {
   readonly loop: GameLoop;
   private sheets = new Map<string, Spritesheet>();
   readonly renderHost: RenderHost;
-  get renderer(): RenderBackend {
+  get renderer(): RenderResources {
     return this.renderHost.renderer;
   }
   /** The device session and seat 0's view (226); `camera` is the view's camera. */
@@ -489,11 +489,7 @@ export class GameClient implements GameTestHooks {
     this.time.alpha = alpha;
     this.time.presentationSeconds = presentationSeconds;
     this.renderHost.beginFrame();
-    try {
-      this.scenes.render(alpha);
-    } finally {
-      this.renderHost.endWorld();
-    }
+    this.scenes.render(alpha);
     if (this.initDone && (this.startupWorldReady || this.scenes.has(MenuScene))) finishStartup();
     if (this.initDone) this.gemHUD.present(this.stateView, this.device.views.length === 1);
   }
@@ -866,10 +862,6 @@ export class GameClient implements GameTestHooks {
       get renderer() {
         return client.renderer;
       },
-      beginWorld: () => client.renderHost.beginWorld(client.camera),
-      endWorld: () => client.renderHost.endWorld(),
-      beginView: (camera, region) => client.renderHost.beginView(camera, region),
-      endView: () => client.renderHost.endView(),
       drawUiOverlay: (items) => client.renderHost.drawUiOverlay(items),
       view3d: client.renderHost.view3d,
       session: this.device,

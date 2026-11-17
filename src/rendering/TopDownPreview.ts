@@ -11,7 +11,6 @@ export class TopDownPreview {
   private scene: TopDownScene | undefined;
   constructor(canvas: HTMLCanvasElement) {
     this.renderer = new GpuRenderResources(canvas);
-    this.renderer.meshes.setEnabled(true);
     const r = this.renderer;
     this.target = createView3dHost(
       r.surface,

@@ -301,7 +301,6 @@ try {
       const g = document.querySelector("#game").__game;
       g.firstPerson.setSeat(1, false);
       g.consoleEngine.cvars.get("r_firstperson").set(host);
-      g.firstPerson.topDown = true;
     }, host);
     await page.waitForFunction((host) => {
       const [a, b] = document.querySelector("#game").__game.device.views;

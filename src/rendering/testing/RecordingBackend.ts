@@ -1,9 +1,8 @@
 import type { SpriteCatalog } from "../../assets/SpriteCatalog.js";
-import type { InteriorContent } from "../../interiors/InteriorPresentation.js";
 import type { Chunk } from "../../world/Chunk.js";
 import type { ChunkRange } from "../../world/ChunkManager.js";
 import { ElevationDescriptorCache } from "../ElevationDescriptorCache.js";
-import type { RenderBackend, RenderPass, RenderView } from "../RenderFrame.js";
+import type { RenderPass, RenderView, ReviewRenderBackend } from "../RenderFrame.js";
 import { type TerrainDrawOptions, TerrainFrame } from "../TerrainFrame.js";
 import type { TerrainRenderWorld, TerrainResourceId } from "../TerrainPresentation.js";
 import type { TerrainPreparationView } from "../TerrainResidency.js";
@@ -19,10 +18,9 @@ interface Resource {
 }
 /** Contract test implementation: no DOM, image, draw callback or raster dependency.
  * Copies borrowed submissions immediately, as a retaining backend must do. */
-export class RecordingBackend implements RenderBackend {
+export class RecordingBackend implements ReviewRenderBackend {
   readonly passes: RenderPass[] = [];
   readonly views: RenderView[] = [];
-  readonly contents = new Map<number, InteriorContent>();
   readonly terrain = new TerrainFrame();
   readonly elevation = new ElevationDescriptorCache();
   readonly resources = new Map<Chunk, Resource>();
@@ -82,15 +80,9 @@ export class RecordingBackend implements RenderBackend {
   collectElevationItems(world: TerrainRenderWorld, visible: ChunkRange) {
     return this.elevation.collect(world, visible, this);
   }
-  prepareInterior(content: InteriorContent) {
-    this.live();
-    assertData(content);
-    if (!this.contents.has(content.id)) this.contents.set(content.id, structuredClone(content));
-  }
   submit(view: RenderView, pass: RenderPass) {
     this.live();
     assertData(pass);
-    if (pass.kind === "interior" && !this.contents.has(pass.contentId)) throw Error("stale room");
     this.views.push({
       x: view.x,
       y: view.y,
@@ -134,7 +126,6 @@ export class RecordingBackend implements RenderBackend {
   invalidateAssets() {
     this.live();
     this.assetRevision++;
-    this.contents.clear();
   }
   recover() {
     this.live();
@@ -142,7 +133,6 @@ export class RecordingBackend implements RenderBackend {
   }
   clear() {
     this.resources.clear();
-    this.contents.clear();
     this.elevation.clear();
     this.terrain.clear();
   }

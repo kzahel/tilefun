@@ -28,7 +28,7 @@ import {
   restoreViews,
 } from "./playViews.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
-import { renderPlayViews } from "./renderWorld.js";
+import { renderPlayViews } from "./renderPlayViews.js";
 
 /**
  * Play mode scene.

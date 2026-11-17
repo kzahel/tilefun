@@ -9,13 +9,13 @@ import { GpuMeshBodies } from "./GpuMeshBodies.js";
 import { GpuSceneSurface } from "./GpuSceneSurface.js";
 import { COMPACT_CAR_MESH } from "./MeshPresentation.js";
 import type { OverlayDraw } from "./OverlayFrame.js";
-import type { RenderBackend, RenderPass, RenderView } from "./RenderFrame.js";
+import type { RenderResources } from "./RenderFrame.js";
 import type { SpriteItem } from "./SceneItem.js";
 import { TileRenderer } from "./TileRenderer.js";
 
 /** Shared terrain rasters, atlas and vehicle images for the unified scene.
  * Fixed world drawing is retired; review rasters have their own adapter. */
-export class GpuRenderResources implements RenderBackend {
+export class GpuRenderResources implements RenderResources {
   readonly surface: GpuSceneSurface;
   readonly meshes: GpuMeshBodies;
   private readonly terrain = new TileRenderer();
@@ -52,7 +52,7 @@ export class GpuRenderResources implements RenderBackend {
     this.sheets = sheets;
     this.assets = createSpriteCatalog(sheets);
   }
-  prepareTerrain: RenderBackend["prepareTerrain"] = (view, world, visible, options) => {
+  prepareTerrain: RenderResources["prepareTerrain"] = (view, world, visible, options) => {
     const camera = new Camera();
     Object.assign(camera, view);
     if (options?.scope === "visible")
@@ -67,10 +67,8 @@ export class GpuRenderResources implements RenderBackend {
         options?.rowBudget,
       );
   };
-  prepareTerrainViews: RenderBackend["prepareTerrainViews"] = (views, world, options) =>
+  prepareTerrainViews: RenderResources["prepareTerrainViews"] = (views, world, options) =>
     this.terrain.prepareTerrainViews(views, world, this.sheets, options);
-  collectElevationItems: RenderBackend["collectElevationItems"] = (world, visible) =>
-    this.terrain.collectElevationItems(world, visible);
   isTerrainReady(chunk: Chunk | undefined) {
     return this.terrain.isTerrainReady(chunk);
   }
@@ -82,16 +80,6 @@ export class GpuRenderResources implements RenderBackend {
   }
   drawOverlayOn(ctx: CanvasRenderingContext2D, items: readonly OverlayDraw[]) {
     drawOverlayGeometry(ctx, items, this.sheets);
-  }
-  // These methods belong only to the immutable review-raster protocol now.
-  submit(_view: RenderView, _pass: RenderPass): never {
-    throw Error("Fixed world passes are retired");
-  }
-  prepareInterior(): never {
-    throw Error("Use the unified room scene");
-  }
-  collectTerrain(): never {
-    throw Error("Use the unified ground scene");
   }
   resize(width: number, height: number) {
     this.surface.resize(width, height);

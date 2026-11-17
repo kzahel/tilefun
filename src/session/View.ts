@@ -139,7 +139,7 @@ export function fixedCamera(
  */
 export class View {
   region: RenderRegion = { x: 0, y: 0, width: 1, height: 1 };
-  /** Observer-local slab fades (see presentSurfaceScene). */
+  /** Observer-local slab fades (used by the unified deck presentation). */
   readonly fades: SurfaceFades = new Map();
   /** Zoom relative to the page's chosen zoom (split layouts zoom out). */
   zoomScale = 1;

@@ -7,7 +7,7 @@ import { RecordingBackend } from "../rendering/testing/RecordingBackend.js";
 import { followSeat, View } from "../session/View.js";
 import { Chunk } from "../world/Chunk.js";
 import { World } from "../world/World.js";
-import { renderPlayViews } from "./renderWorld.js";
+import { renderPlayViews } from "./renderPlayViews.js";
 
 function context(graphics: boolean) {
   const assets = new Map([["player", spriteMetadata(64, 64, 16, 16)]]);
@@ -19,8 +19,6 @@ function context(graphics: boolean) {
   const view = new View(followSeat());
   view.setRegion({ x: 0, y: 0, width: 512, height: 384 });
   view.camera.zoom = 1 / 3;
-  const beginView = vi.fn();
-  const endView = vi.fn();
   const stateView = {
     world,
     entities: [player],
@@ -39,24 +37,22 @@ function context(graphics: boolean) {
     sceneFrame: new SceneFrame(),
     time: { presentationSeconds: 0 },
     stateView,
-    ...(graphics ? { beginView, endView, drawUiOverlay: vi.fn() } : {}),
+    ...(graphics ? { drawUiOverlay: vi.fn() } : {}),
   } as unknown as GameContext;
-  return { gc, backend, view, beginView, endView };
+  return { gc, backend, view };
 }
 
 it("prepares play terrain and uses a loading UI frame when its unified scene is not ready", () => {
-  const { gc, backend, beginView, endView } = context(true);
+  const { gc, backend } = context(true);
   renderPlayViews(gc, 1, []);
   expect(backend.preparations).toBe(1);
-  expect(beginView).not.toHaveBeenCalled();
-  expect(endView).not.toHaveBeenCalled();
   expect(backend.passes).toEqual([]);
   expect(gc.drawUiOverlay).toHaveBeenCalledOnce();
 });
 
-it("headless fixtures without graphics still prepare and draw seat 0's view", () => {
+it("headless fixtures without graphics never invoke review passes", () => {
   const { gc, backend } = context(false);
   renderPlayViews(gc, 1, []);
   expect(backend.preparations).toBe(1);
-  expect(backend.passes.map((p) => p.kind)).toEqual(["clear", "terrain", "scene"]);
+  expect(backend.passes).toEqual([]);
 });

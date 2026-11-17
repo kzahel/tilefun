@@ -37,7 +37,6 @@ export function createXrHost(
     async immersive(session, frame): Promise<ImmersiveOutput> {
       const { renderer } = surface;
       const { xr } = renderer;
-      surface.flush();
       // Not every headset has a floor; a session lists what it was given.
       const floor = session.enabledFeatures?.includes("local-floor") ?? true;
       xr.setReferenceSpaceType(floor ? "local-floor" : "local");
@@ -79,7 +78,6 @@ export function createXrHost(
         draw(draw) {
           const bound = eyes as (THREE.WebGLRenderTarget & { isXRRenderTarget?: boolean }) | null;
           if (surface.disposed || surface.lost || !bound?.isXRRenderTarget) return false;
-          surface.flush();
           const scissor = renderer.getScissorTest();
           const clearAlpha = renderer.getClearAlpha();
           renderer.getClearColor(clearColor);
@@ -147,7 +145,6 @@ export function createXrHost(
         }
         frame(time, xrFrame);
         if (surface.disposed || surface.lost) return;
-        surface.flush();
         // The page's frame is on the canvas now; copy it to the panel.
         const image = binding.getSubImage(layer, xrFrame);
         const { x, y, width, height } = image.viewport;

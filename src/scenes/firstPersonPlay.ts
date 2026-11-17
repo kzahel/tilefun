@@ -240,7 +240,6 @@ function seen(
 /** The top-down camera's view (251): the fixed view's camera, its eye on the
  * pixel grid its bodies and blades stand on (`PixelGrid`). */
 function topDownSeen(control: FirstPersonControl, view: View): Seen | undefined {
-  if (!control.topDown) return undefined;
   const { camera } = view;
   const x = control.pixelGrid ? onPixelGrid(camera.x, camera.scale) : camera.x;
   const y = control.pixelGrid ? onPixelGrid(camera.y, camera.scale) : camera.y;

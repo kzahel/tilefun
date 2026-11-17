@@ -81,7 +81,6 @@ export function createView3dHost(
     xr: createXrHost(surface, viewTarget, restored),
     draw(region, draw) {
       if (surface.disposed || surface.lost || region?.mask) return false;
-      surface.flush();
       const { renderer, canvas } = surface;
       const width = region?.width ?? canvas.width,
         height = region?.height ?? canvas.height;

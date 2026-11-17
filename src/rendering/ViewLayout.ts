@@ -1,6 +1,6 @@
 /**
  * Split-screen regions for one render host (tactical 226). Each view draws the
- * world into its own region of the canvas; `RenderHost.beginView` composes it.
+ * world into its own region of the canvas; `View3dHost.draw` owns its viewport and scissor.
  */
 
 /** A view's region of the canvas in canvas pixels, top-left origin. A diagonal

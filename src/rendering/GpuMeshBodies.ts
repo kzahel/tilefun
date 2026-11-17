@@ -24,7 +24,7 @@ import type { SpriteItem } from "./SceneItem.js";
 import { VehiclePaintResources } from "./VehiclePaintResources.js";
 import type { BodyImage } from "./View3dHost.js";
 
-/** A finished image and what the fixed view counts about it. */
+/** A finished image and its shared resource diagnostics. */
 interface DrawnImage extends BodyImage {
   /** Taken from the cache: nothing was rendered for it. */
   readonly reused: boolean;
@@ -54,29 +54,18 @@ export class GpuMeshBodies {
   readonly targets = new CarRenderTargets();
   private readonly outline = new CarPixelOutline();
   private readonly clearColor = new THREE.Color();
-  private enabled = false;
   draws = 0;
   bedDraws = 0;
   drawCalls = 0;
   paintDraws = 0;
   paintFallbacks = 0;
-  constructor(private readonly surface: GpuSceneSurface) {}
-  setEnabled(value: boolean) {
-    if (!value) {
-      this.surface.flush();
-      this.images.clear();
-      this.held.clear();
-      this.targets.clear();
-    }
-    this.enabled = value;
-    if (value)
-      for (const assetId of [COMPACT_CAR_MESH, AMBULANCE_MESH, FIRE_TRUCK_MESH])
-        this.request(assetId);
+  constructor(private readonly surface: GpuSceneSurface) {
+    for (const assetId of [COMPACT_CAR_MESH, AMBULANCE_MESH, FIRE_TRUCK_MESH])
+      this.request(assetId);
   }
   /** Lazy family loads never replace their source sprite before the next frame. */
   request(assetId: string) {
-    if (!this.enabled || !(authoredVehicleForAsset(assetId) ?? authoredTrainForAsset(assetId)))
-      return undefined;
+    if (!(authoredVehicleForAsset(assetId) ?? authoredTrainForAsset(assetId))) return undefined;
     let slot = this.slots.get(assetId);
     if (!slot) {
       slot = new ResourceSlot<CarMeshAsset>();
@@ -100,9 +89,7 @@ export class GpuMeshBodies {
     );
   }
   surfaceGeometry(assetId: string) {
-    return this.enabled && this.ready.has(assetId)
-      ? this.slots.get(assetId)?.value?.surfaceGeometry
-      : undefined;
+    return this.ready.has(assetId) ? this.slots.get(assetId)?.value?.surfaceGeometry : undefined;
   }
   /** Called once before submissions; promise completions only become visible here.
    * `views`: the last display frame's view count, for the same-frame image memo. */
@@ -113,11 +100,10 @@ export class GpuMeshBodies {
     this.heldGroups = 0;
     this.paints.beginFrame();
     this.ready.clear();
-    if (this.enabled)
-      for (const [assetId, slot] of this.slots) if (slot.state === "ready") this.ready.add(assetId);
+    for (const [assetId, slot] of this.slots) if (slot.state === "ready") this.ready.add(assetId);
   }
   /**
-   * The image `draw` would composite, for a 3D view to place in its own scene:
+   * The outlined body image placed by a view in its scene:
    * the same outlined native-pixel body, with its towed car and bed contents.
    * It stays valid until the next display frame. `shows(radius)` says whether a
    * square of that many world pixels each way from the body's anchor is in
@@ -220,7 +206,6 @@ export class GpuMeshBodies {
     }
     const { surface } = this,
       renderer = surface.renderer;
-    surface.flush();
     const resolution = Math.min(1024, Math.max(1, Math.ceil(radius * 2)));
     const scratch = this.targets.get(resolution);
     const target = scratch.source;
@@ -266,7 +251,7 @@ export class GpuMeshBodies {
     renderer.getClearColor(this.clearColor);
     const alpha = renderer.getClearAlpha();
     const previous = renderer.getRenderTarget();
-    // A 3D view draws inside its region's scissor; the fixed view has none set.
+    // Offscreen body images temporarily suspend the view's scissor.
     const scissor = renderer.getScissorTest();
     let texture = target.texture;
     renderer.setScissorTest(false);
@@ -295,14 +280,12 @@ export class GpuMeshBodies {
     return { texture, depth: output.depthTexture, radius, reused: false, painted };
   }
   recover() {
-    this.surface.flush();
     this.images.clear();
     this.held.clear();
     this.outline.recover();
     this.targets.clear();
   }
   dispose() {
-    this.surface.flush();
     this.images.clear();
     this.held.clear();
     this.paints.dispose();

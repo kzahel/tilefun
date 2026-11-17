@@ -14,12 +14,12 @@ import {
   NORTH_YAW,
 } from "../rendering/firstperson/FirstPersonCamera.js";
 import type { FirstPersonView } from "../rendering/firstperson/FirstPersonView.js";
-import type { RenderBackend } from "../rendering/RenderFrame.js";
+import type { RenderResources } from "../rendering/RenderFrame.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import type { View } from "../session/View.js";
 
 /** First-person readiness: the view meshes the loaded chunk directly. */
-export const FIRST_PERSON_TERRAIN: Pick<RenderBackend, "isTerrainReady"> = {
+export const FIRST_PERSON_TERRAIN: Pick<RenderResources, "isTerrainReady"> = {
   isTerrainReady: (chunk) => chunk !== undefined,
 };
 
@@ -87,8 +87,6 @@ export class FirstPersonControl {
   reach: number | undefined;
   /** Captures only: raises every eye by this many world pixels for an overview. */
   lift = 0;
-  /** Unified top-down drawing stays enabled until this control is disposed. */
-  private topDownChoice = true;
   /** Presentation storage owned by the unified views. */
   readonly frame = new SceneFrame({
     allCars3d: new URLSearchParams(location.search).has("allcars3d"),
@@ -107,7 +105,7 @@ export class FirstPersonControl {
   private readonly idle: FirstPersonLook = { yaw: NORTH_YAW, pitch: 0 };
   private create: ((sheets: ReadonlyMap<string, Spritesheet>) => FirstPersonView) | null = null;
   private loading = false;
-  /** The view module failed to load; cleared when no seat is in first person. */
+  /** The view module failed to load; Save and reload retries its import. */
   private failed = false;
   private listening = false;
   private disposed = false;
@@ -153,8 +151,6 @@ export class FirstPersonControl {
     // The seat's views change kind now, not at the next tick: a display frame may
     // come first (a menu over play draws without ticking).
     for (const view of this.views) if (view.seat === seat) this.apply(view);
-    // A view the device has since replaced may still hold the seat's scene.
-    if (!value) this.releaseSeat(seat);
   }
 
   /**
@@ -172,19 +168,11 @@ export class FirstPersonControl {
     if (this.held === undefined) return;
     this.held = undefined;
     for (const view of this.views) if (view.seat === 0) this.apply(view);
-    this.releaseSeat(0);
   }
 
   /** The heading a seat's 3D view starts at, if the seat is shown in one. */
   private heading(seat: number): number | undefined {
     return this.chosen.get(seat) ?? (seat === 0 ? this.held : undefined);
-  }
-
-  /** Free the scenes of a seat that is no longer shown in 3D. */
-  private releaseSeat(seat: number): void {
-    if (this.heading(seat) === undefined && !this.topDownChoice)
-      for (const view of [...this.scenes.keys()]) if (view.seat === seat) this.release(view);
-    if (!this.chosen.size && this.held === undefined && !this.topDownChoice) this.failed = false;
   }
 
   seatActive(seat: number): boolean {
@@ -194,19 +182,6 @@ export class FirstPersonControl {
   /** Seat 0 chose first person. */
   get active(): boolean {
     return this.chosen.has(0);
-  }
-
-  get topDown(): boolean {
-    return this.topDownChoice;
-  }
-
-  /** Drawing gate used by disposal and isolated presentation fixtures. */
-  set topDown(value: boolean) {
-    if (value === this.topDownChoice || (value && this.disposed)) return;
-    this.topDownChoice = value;
-    for (const view of this.views) this.apply(view);
-    if (!value) for (const view of [...this.scenes.keys()]) if (!view.look) this.release(view);
-    if (!value && !this.chosen.size) this.failed = false;
   }
 
   /** True when the latest play frame drew seat 0's view in the 3D scene, in
@@ -244,8 +219,7 @@ export class FirstPersonControl {
     if (heading === undefined) {
       view.look = null;
       // A top-down view may keep drawing in the same scene.
-      if (this.topDownChoice) view.drawn3d = false;
-      else this.release(view);
+      view.drawn3d = false;
     } else if (!view.look) view.look = { yaw: heading, pitch: 0 };
     // A guest's view is made again after leaving play: it resumes this heading.
     else if (this.chosen.has(view.seat)) this.chosen.set(view.seat, view.look.yaw);
@@ -344,8 +318,7 @@ export class FirstPersonControl {
   /** The view's loaded 3D scene, or undefined while the module loads or after it
    * failed to load. */
   scene(view: View): FirstPersonView | undefined {
-    const eye = !!view.look && this.heading(view.seat) !== undefined;
-    if ((!eye && !this.topDownChoice) || this.disposed || this.failed) return undefined;
+    if (this.disposed || this.failed) return undefined;
     const existing = this.scenes.get(view);
     if (existing) return existing;
     if (this.create) {
@@ -407,7 +380,6 @@ export class FirstPersonControl {
     if (this.disposed) return;
     this.unhold();
     for (const seat of [...this.chosen.keys()]) this.setSeat(seat, false);
-    this.topDown = false;
     this.disposed = true;
     for (const view of [...this.scenes.keys()]) this.release(view);
     this.listen(false);

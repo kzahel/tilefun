@@ -6,7 +6,7 @@ import { InteriorPresentation } from "./InteriorPresentation.js";
 import type { LayeredInteriorMap } from "./LayeredInteriorMap.js";
 
 /** Canvas composition adapter for existing native review/benchmark surfaces.
- * Production uses RenderBackend; all callers share the same presentation order.
+ * The native review cache shares the same room presentation order.
  */
 export class CachedInteriorRenderer {
   private readonly presentation: InteriorPresentation;

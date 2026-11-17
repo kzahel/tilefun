@@ -2,6 +2,7 @@
 
 The fixed-renderer registration, fused-composite, ordered-texture, body-cache
 and surface-overlay runners retired with [253](../../docs/tactical/253-retire-fixed-world-renderer.md).
+254 also retires the fixed-collector `surface-shadows.ts` comparison.
 Their historical measurements remain in the owning tacticals. Current world
 rendering uses `render:bench`; its shared terrain/atlas/body-image resources stay.
 

@@ -1,62 +1,23 @@
-import type { Entity } from "../entities/Entity.js";
 import type { ParticleSystem } from "../rendering/ParticleSystem.js";
 import type { TerrainPacing } from "../rendering/PresentationSettings.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
-import type { SceneItem } from "../rendering/SceneItem.js";
-import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import { drawViewUnavailable } from "../rendering/ViewUnavailable.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import type { View } from "../session/View.js";
 import { renderViews } from "../session/ViewRender.js";
 import type { PlayerPredictor } from "./PlayerPredictor.js";
 
-export interface LabSceneOptions {
-  /** Terrain and grass; otherwise the background colour alone. */
-  terrain: boolean;
-  background: string;
-  pacing: TerrainPacing;
-  visibility: SurfaceVisibility;
-  alpha: number;
-  /** Display seconds (slab fades) and the lab's presentation seconds (lights). */
-  fadeSeconds: number;
-  presentationTime: number;
-  pixelExactShadows: boolean;
-  /** The drawn actors; a pose-cycling lab substitutes its displayed player. */
-  entities: readonly Entity[];
-  collectObserver: Entity;
-  /** An owned room cache: props it draws itself, and its own slab presentation. */
-  room?: { drawProps: ReadonlySet<number>; present(items: readonly SceneItem[]): void };
-  /** Diagnostic world overlays submitted before and after the scene. They are
-   * the fixed view's: a view drawn in 3D shows none. */
-  underlay?(): void;
-  overlay?(): void;
-  /** Draws the view in the unified 3D scene (`renderTopDown3d`); false leaves
-   * it to the fixed view. */
-  draw3d?(view: View): boolean;
-}
-
-/**
- * One display frame of a lab's single view (226): terrain prepared for the
- * view, then the device's shared scene with the view's own slab fades. The
- * view's camera must be presented.
- */
+/** Prepare and draw one lab through the same view orchestrator as play. */
 export function drawLabFrame(
   host: RenderHost,
   view: View,
-  device: DeviceSession,
-  _particles: ParticleSystem,
-  options: LabSceneOptions,
+  world: import("../rendering/TerrainPresentation.js").TerrainRenderWorld | undefined,
+  pacing: TerrainPacing,
+  draw: (view: View) => boolean,
 ): void {
-  const world = options.terrain ? device.replica.world : undefined;
   host.beginFrame();
-  renderViews(
-    host,
-    [view],
-    world ? { world, pacing: options.pacing } : undefined,
-    () => {
-      if (host.view3d) drawViewUnavailable(host.drawUiOverlay.bind(host), view);
-    },
-    options.draw3d,
+  renderViews(host.renderer, [view], world ? { world, pacing } : undefined, draw, () =>
+    drawViewUnavailable(host.drawUiOverlay.bind(host), view),
   );
 }
 

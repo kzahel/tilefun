@@ -6,6 +6,12 @@ art uses the shared wall-band/furniture scene, and view diagnostics read actual
 unified presentation. Worker authority, prediction, clocks, input and persistence
 are unchanged; the lab retains no fixed-world fallback.
 
+[254](../tactical/254-remove-renderer-scaffolding.md) narrows `drawLabFrame` to
+frame setup, shared terrain preparation and a unified draw callback. A lab's
+actual `Play3dSource` owns presented actors, observer, room and diagnostic hooks;
+there is no parallel fixed-pass options object or native fallback in the lab.
+Native lab tests observe that shared source while the replica is presented.
+
 [Split-screen replay progress](../research/split-screen-prediction-starvation.md)
 (2026-11-14) keeps the shared predictor's yielded replay endpoint fixed, retaining
 subsequent commands for the next work and preserving input/physics clock ownership.
@@ -63,8 +69,8 @@ scenario Worker until slice 6.
   tick as in `GameClient`, and resets seat the player on its parent.
 - **View:** `LabView` (`src/client/`) is the lab view surface: one `View` with a
   camera policy (the game's follow by default), `LabInput`, `VehicleControl`,
-  the production `GameLoop` and the selectable render host. Page plugins: zoom,
-  pause, surface visibility, terrain pacing, pixel-exact shadows, a per-frame
+  the production `GameLoop` and the shared GPU render host. Page plugins: zoom,
+  pause, surface visibility, terrain pacing, a per-frame
   hook, commands and reload, `resize` (the Worker and world stay), and
   `underlay`/`overlay` hooks that draw diagnostic `OverlayFrame` geometry over
   the terrain and over the scene (they read the frame's `presentedPlayer` and

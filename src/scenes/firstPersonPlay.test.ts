@@ -375,12 +375,11 @@ describe("first person per seat", () => {
 });
 
 describe("top-down play in the 3D scene", () => {
-  it("keeps the fixed view's controls and streaming interest", () => {
+  it("keeps top-down controls and streaming interest", () => {
     const { control, gc, cancelled, view, sync } = setup();
     view.setRegion({ x: 0, y: 0, width: 1280, height: 720 });
     view.camera.snapTo(1000, 2000);
     const fixed = view.interestRange();
-    control.topDown = true;
     sync();
     control.markTopDown(view);
     expect(view.topDown3d).toBe(true);
@@ -393,7 +392,7 @@ describe("top-down play in the 3D scene", () => {
     sync();
     expect(view.interestRadius).toBeUndefined();
     expect(view.interestRange()).toEqual(fixed);
-    // A fallback frame (the editor, lost graphics) is the fixed view again.
+    // An unavailable frame clears the last presented camera state.
     control.hide(view);
     expect(view.topDown3d).toBe(false);
     expect(control.drawing3d).toBe(false);
@@ -401,7 +400,6 @@ describe("top-down play in the 3D scene", () => {
 
   it("lets a seat go to first person and back in the same scene", async () => {
     const { control, view, guest, sync } = setup();
-    control.topDown = true;
     sync();
     await vi.waitFor(() => expect(control.scene(view)).toBeDefined());
     const scene = control.scene(view) as FirstPersonView;
@@ -419,7 +417,7 @@ describe("top-down play in the 3D scene", () => {
     expect(dispose).not.toHaveBeenCalled();
     // Every view of the device follows the choice.
     expect(control.scene(guest)).toBeDefined();
-    control.topDown = false;
+    control.dispose();
     expect(dispose).toHaveBeenCalledTimes(1);
     expect(control.scene(view)).toBeUndefined();
     expect(control.scene(guest)).toBeUndefined();
@@ -453,9 +451,8 @@ describe("top-down play in the 3D scene", () => {
     return { ...made, gc, frames };
   }
 
-  it("draws through the view's own fixed camera", () => {
-    const { control, gc, view, frames, sync } = drawable();
-    control.topDown = true;
+  it("draws through the view's own top-down camera", () => {
+    const { gc, view, frames, sync } = drawable();
     sync();
     expect(renderFirstPerson(gc, view, 1)).toBe(true);
     expect(view.topDown3d).toBe(true);
@@ -473,13 +470,9 @@ describe("top-down play in the 3D scene", () => {
     view.camera.zoom = 0.2;
     expect(renderFirstPerson(gc, view, 1)).toBe(true);
     expect(frames[1]?.grass).toEqual([]);
-    // Not chosen: the fixed view draws, and the view says so.
-    control.topDown = false;
-    expect(renderFirstPerson(gc, view, 1)).toBe(false);
-    expect(view.topDown3d).toBe(false);
   });
 
-  it("draws seat 0 to a headset's eyes and leaves no view to the fixed view (252)", () => {
+  it("draws seat 0 to a headset's eyes and uses the unified scene for every view (252)", () => {
     const { control, gc: base, view, guest, frames, sync } = drawable();
     const rig = { x: 480, y: 290, z: 0, yaw: 0, pixelsPerMetre: 18 };
     const xr = {
@@ -542,9 +535,8 @@ describe("top-down play in the 3D scene", () => {
     ).toBeCloseTo(1, 9);
   });
 
-  it("says the fixed view draws when the host cannot draw 3D (graphics lost)", () => {
+  it("clears drawn state when the host cannot draw the scene (graphics lost)", () => {
     const { control, gc, view, sync } = drawable();
-    control.topDown = true;
     sync();
     expect(renderFirstPerson(gc, view, 1)).toBe(true);
     (gc.view3d as { draw: unknown }).draw = () => false;
@@ -555,14 +547,13 @@ describe("top-down play in the 3D scene", () => {
 
   it("follows guests who join and leave, the editor and dispose", async () => {
     const { control, view, guest, views, sync } = setup();
-    control.topDown = true;
     sync();
     await vi.waitFor(() => expect(control.scene(guest)).toBeDefined());
     const scene = control.scene(guest) as FirstPersonView;
     const dispose = vi.spyOn(scene, "dispose");
     control.markTopDown(view);
     control.markTopDown(guest);
-    // The editor draws the fixed view for everyone.
+    // A scene over play releases active camera state for every seat.
     control.hideView();
     expect([view.topDown3d, guest.topDown3d]).toEqual([false, false]);
     control.markTopDown(guest);
@@ -570,15 +561,12 @@ describe("top-down play in the 3D scene", () => {
     control.sync([view], new Set([0]));
     expect(dispose).toHaveBeenCalledTimes(1);
     expect(guest.topDown3d).toBe(false);
-    // Disposing the control turns the choice off and frees the rest.
+    // Disposing the control frees every remaining scene.
     const host = control.scene(view) as FirstPersonView;
     const hostDispose = vi.spyOn(host, "dispose");
     control.dispose();
-    expect(control.topDown).toBe(false);
     expect(hostDispose).toHaveBeenCalledTimes(1);
     expect(control.scene(view)).toBeUndefined();
-    control.topDown = true; // ignored once disposed
-    expect(control.topDown).toBe(false);
     expect(views).toHaveLength(2);
   });
 
@@ -592,8 +580,7 @@ describe("top-down play in the 3D scene", () => {
       returnX: 1,
       returnY: 2,
     };
-    const { control, gc, view, frames, sync } = drawable(room);
-    control.topDown = true;
+    const { gc, view, frames, sync } = drawable(room);
     sync();
     expect(renderFirstPerson(gc, view, 1)).toBe(true);
     expect(view.topDown3d).toBe(true);

@@ -29,7 +29,6 @@ function fixture() {
     stats: { recoveries: 3 },
     canvas: { width: 1280, height: 800 },
     renderer,
-    flush: () => calls.push("flush"),
     pages: {
       atlas: { texture: { name: "atlas" } },
       pages: new Map<object, { x: number; y: number; region: object | null }[]>(),
@@ -75,7 +74,6 @@ describe("3D views on the fixed view's renderer (249)", () => {
     });
     expect(drawn).toBe(true);
     expect(calls).toEqual([
-      "flush", // the fixed view's queued quads first
       "target canvas",
       "viewport 640,400,640,300",
       "scissor 640,400,640,300",

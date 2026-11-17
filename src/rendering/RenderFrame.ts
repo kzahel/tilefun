@@ -1,8 +1,6 @@
 import type { SpriteCatalog } from "../assets/SpriteCatalog.js";
-import type { InteriorContent, InteriorDraw } from "../interiors/InteriorPresentation.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { ChunkRange } from "../world/ChunkManager.js";
-import type { OverlayDraw } from "./OverlayFrame.js";
 import type { SceneItem } from "./SceneItem.js";
 import type { TerrainDrawOptions } from "./TerrainFrame.js";
 import type {
@@ -30,8 +28,6 @@ export interface TerrainDraw {
   y: number;
   width: number;
   height: number;
-  /** Extrude the last source texel beyond the true scaled extent; never stretch the image. */
-  edgePixels?: number;
 }
 
 /** Semantic batches, consumed in submission order. All storage is borrowed
@@ -39,27 +35,6 @@ export interface TerrainDraw {
  * ownership/acknowledgment protocol before retaining any part of a frame.
  */
 export type RenderPass =
-  | {
-      readonly kind: "interior";
-      readonly contentId: number;
-      readonly draws: readonly InteriorDraw[];
-    }
-  | {
-      readonly kind: "overlay";
-      readonly items: readonly OverlayDraw[];
-      /** Stable semantic surface identity; backends may reuse its local raster. */
-      readonly cacheKey?: string;
-      /** Group opacity: the items compose opaquely, then the result is blended
-       * once, so overlapping strips never double-blend into seams. */
-      readonly opacity?: number;
-      /** Affine top/front depth equations in logical screen pixels. */
-      readonly worldDepth?: {
-        top: readonly [number, number, number];
-        front: readonly [number, number, number];
-        /** Painted outlines/strip overscan inherit finite edge depth. */
-        xBounds?: readonly [number, number];
-      };
-    }
   | { readonly kind: "clear"; readonly color: string }
   | { readonly kind: "terrain"; readonly draws: readonly TerrainDraw[] }
   | {
@@ -67,7 +42,6 @@ export type RenderPass =
       readonly items: readonly SceneItem[];
       readonly order: readonly number[];
       readonly pixelExactShadows?: boolean;
-      readonly clipRects?: readonly { x: number; y: number; width: number; height: number }[];
     };
 
 export interface TerrainPreparationOptions {
@@ -86,29 +60,21 @@ export interface TerrainDiagnostics {
   surfaceBytes: number;
 }
 
-export interface RenderBackend extends TerrainPresentation {
+/** Resources and terrain preparation shared by interactive scene hosts. */
+export interface RenderResources {
   readonly assets: SpriteCatalog;
-  prepareInterior(content: InteriorContent): void;
+  meshSurfaceGeometry?(assetId: string): import("./SurfaceReceivers.js").SurfaceMesh | undefined;
   prepareTerrain(
     view: RenderView,
     world: TerrainRenderWorld,
     visible: ChunkRange,
     options?: TerrainPreparationOptions,
   ): void;
-  /** Several views of one display frame (226): prepare their union once with one
-   * budget, then collect per view. Never evicts another view's chunks. */
   prepareTerrainViews(
     views: readonly TerrainPreparationView[],
     world: TerrainRenderWorld,
     options?: TerrainPreparationOptions,
   ): void;
-  collectTerrain(
-    view: RenderView,
-    world: TerrainRenderWorld,
-    visible: ChunkRange,
-    options?: TerrainDrawOptions,
-  ): readonly TerrainDraw[];
-  submit(view: RenderView, pass: RenderPass): void;
   isTerrainReady(chunk: Chunk | undefined): boolean;
   hasTerrain(chunk: Chunk | undefined): boolean;
   releaseChunk(chunk: Chunk): void;
@@ -118,6 +84,17 @@ export interface RenderBackend extends TerrainPresentation {
   recover(): void;
   dispose(): void;
   clear(): void;
+}
+
+/** Immutable review raster protocol; never exposed to interactive game scenes. */
+export interface ReviewRenderBackend extends RenderResources, TerrainPresentation {
+  collectTerrain(
+    view: RenderView,
+    world: TerrainRenderWorld,
+    visible: ChunkRange,
+    options?: TerrainDrawOptions,
+  ): readonly TerrainDraw[];
+  submit(view: RenderView, pass: RenderPass): void;
 }
 
 /** Positive/zero entries index main items; -(index + 1) indexes a shadow.

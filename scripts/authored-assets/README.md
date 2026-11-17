@@ -1,5 +1,13 @@
 # Reusable sprite-matched Blender authoring
 
+The historical `verify_blue_train`, `verify_blue_train_v2` and
+`verify_engine_vehicles` GPU capture scripts retired in renderer cleanup 254.
+They invoked the removed fixed-pass/mesh-composition API. Current bank validation
+is `node scripts/check-vehicle-bank.mjs` (also part of the production build);
+current native mesh and browser train/vehicle checks exercise the shared scene.
+Their old tactical evidence remains historical.
+
+
 Offline tools for [3D assets](../../docs/topics/3d-assets.md), introduced in
 [098](../../docs/tactical/098-reusable-sprite-authoring.md). The goal is source
 fidelity with coherent 3D geometry. A source-pixel projection is a draft, not a

@@ -82,7 +82,6 @@ export function OutdoorGeometryTest({
       height: Math.ceil(height * scale),
       camera: fixedCamera({ wx: 0, wy: -asset.rect[3] / 3 }),
       terrain: false,
-      pixelExactShadows: true,
       loadAssets: () => geometryAssets(image),
       settings: () => ({ paused: false, zoom: scale / PIXEL_SCALE, terrainPacing: "throughput" }),
       underlay: (frame, { camera }) => {

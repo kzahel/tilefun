@@ -5,9 +5,8 @@ import { PlayerPredictor } from "../../src/client/PlayerPredictor.js";
 import { performanceMetrics } from "../../src/diagnostics/PerformanceMetrics.js";
 import { PHYSICS_DT } from "../../src/physics/PhysicsDefaults.js";
 import { Camera } from "../../src/rendering/Camera.js";
-import { collectScene } from "../../src/rendering/collectScene.js";
-import { collectSceneOrder } from "../../src/rendering/RenderFrame.js";
-import { WorldRasterFrame } from "../../src/rendering/WorldRasterFrame.js";
+import { collectWorldSprites } from "../../src/rendering/collectScene.js";
+import { grown, obliqueGround } from "../../src/rendering/firstperson/ObliqueCamera.js";
 import { CROWD_VIEW } from "../../src/scenarios/CrowdBenchRecipe.js";
 import { applyRecipeAppearances, scenarioGravity } from "../../src/scenarios/ScenarioRecipe.js";
 import { DeviceSession } from "../../src/session/DeviceSession.js";
@@ -16,7 +15,6 @@ import type { BufferedMessage } from "../../src/shared/protocol.js";
 import { serializeEntity } from "../../src/shared/serialization.js";
 import { vehicleChoice } from "../../src/ui/PlacePrompts.js";
 import { World } from "../../src/world/World.js";
-import { loadReceivers } from "./meshes.js";
 import { assertEquivalent, compare, lane, option, output, replay, reportBase } from "./options.js";
 import { assertComparable, compareOutcome, delta, sha256, summarize } from "./report.js";
 import { readTape } from "./tape.js";
@@ -29,7 +27,6 @@ export async function runReplay() {
     throw Error("Frozen scene is a render-only workload");
   const verify = process.argv.includes("--verify");
   if (assertEquivalent && !verify) throw Error("Replay --assert-equivalent requires --verify");
-  const meshes = lane === "render" ? await loadReceivers(tape.recipe) : undefined;
   const base = reportBase({
     tapeSha256,
     warmup: tape.warmup,
@@ -37,8 +34,8 @@ export async function runReplay() {
     updatesHz: 60,
     presentationHz: 120,
     scene,
+    presentation: "unified-sprites-v1",
     view: { width: 960, height: 640, ...CROWD_VIEW },
-    meshes: meshes?.inputs ?? [],
   });
   const instrumentation = { ...base.instrumentation, verify, fineGrainedTimers: lane === "client" };
   const previous = compare ? JSON.parse(await readFile(compare, "utf8")) : undefined;
@@ -62,12 +59,6 @@ export async function runReplay() {
   camera.setViewport(960, 640);
   camera.zoom = CROWD_VIEW.zoom;
   camera.snapTo(CROWD_VIEW.camera.wx, CROWD_VIEW.camera.wy);
-  const raster = new WorldRasterFrame();
-  const terrain = {
-    // This fixture is flat: there are no elevated terrain items to compile.
-    collectElevationItems: () => [],
-    meshSurfaceGeometry: (id: string) => meshes?.assets.get(id)?.surfaceGeometry,
-  };
   const stages: Record<string, number[]> = {};
   let measured = false;
   const timed = (name: string, fn: () => void) => {
@@ -94,7 +85,6 @@ export async function runReplay() {
   const state = () => JSON.stringify(view.serverEntities.map(serializeEntity));
   let finalScene = "",
     itemCount = 0,
-    orderCount = 0,
     promptKey = "";
   const counts = { updates: 0, presentations: 0, collectedFrames: 0 };
   const observer = performanceMetrics.enabled;
@@ -141,39 +131,30 @@ export async function runReplay() {
         try {
           if (lane === "render") {
             device.frame.presentationTime = scene === "frozen" && measured ? tape.warmup / 60 : now;
-            raster.begin(camera);
             try {
               timed("render.prepare", () => {
-                const items = collectScene(
-                  view.entities,
-                  view.props,
-                  view.world,
-                  camera,
-                  camera.getVisibleChunkRange(),
+                collectWorldSprites({
+                  entities: view.entities,
+                  props: view.props,
+                  world: view.world,
                   alpha,
-                  terrain,
-                  [],
-                  false,
-                  undefined,
-                  device.frame,
-                  { observer: view.presentedPlayerEntity, visibility: "auto" },
-                );
-                collectSceneOrder(items, device.frame.drawOrder);
+                  cull: grown(obliqueGround(camera, 960, 640), 96, 384),
+                  items: device.frame.begin(false),
+                  frame: device.frame,
+                  depthShadows: true,
+                });
               });
               if (measured) {
                 counts.collectedFrames++;
                 itemCount += device.frame.items.length;
-                orderCount += device.frame.drawOrder.length;
                 if (verify || tick === tape.steps.length - 1) {
                   finalScene = JSON.stringify({
                     items: device.frame.items,
-                    order: device.frame.drawOrder,
                   });
                   if (verify) sceneHash.update(`${tick}:${alpha}:`).update(finalScene);
                 }
               }
             } finally {
-              raster.end();
               device.frame.release();
             }
           }
@@ -202,10 +183,8 @@ export async function runReplay() {
       work: {
         ...counts,
         meanSceneItems: itemCount / Math.max(1, counts.collectedFrames),
-        meanDrawOrderEntries: orderCount / Math.max(1, counts.collectedFrames),
         finalEntities: view.serverEntities.length,
         finalServerTick: view.serverTick,
-        finalReceivers: { ...device.frame.receiverStats },
         promptKey,
       },
       outcome,
@@ -213,7 +192,7 @@ export async function runReplay() {
       scope:
         lane === "client"
           ? "Synchronous decode/apply, recipe appearances, empty-backlog reconciliation, animation and prompts at 60Hz; presentation sampling at 120Hz. No input prediction, transport scheduling, DOM or graphics."
-          : "Shared collectScene and collectSceneOrder with actual GLB receivers at 120Hz. Replica processing/presentation outside timer. No terrain raster, particles, WebGL submission, uploads or GPU execution.",
+          : "Shared unified collectWorldSprites and mesh poses at 120Hz. Replica processing/presentation outside timer. No terrain, grass, particles, receiver geometry, WebGL submission, uploads or GPU execution.",
     };
     await writeFile(output, `${JSON.stringify(report, null, 2)}\n`);
     if (comparison.length) console.log(`INCOMPATIBLE COMPARISON: ${comparison.join(", ")}`);
@@ -231,6 +210,5 @@ export async function runReplay() {
   } finally {
     performanceMetrics.enabled = observer;
     device.dispose();
-    meshes?.dispose();
   }
 }

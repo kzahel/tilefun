@@ -10,7 +10,7 @@ import { appendGrassBladeItems, GrassFrameBuffer, grassOpacity } from "./GrassBl
 import type { ParticlePresentation } from "./ParticleSystem.js";
 import type { SceneFrame } from "./SceneFrame.js";
 import type { SceneItem, SpriteItem } from "./SceneItem.js";
-import { type ReceiverOptions, SurfaceReceivers } from "./SurfaceReceivers.js";
+import type { ReceiverOptions, SurfaceReceivers } from "./SurfaceReceivers.js";
 import { collectEntitySprites, entityDepth } from "./scene/EntitySprites.js";
 import { type CullBounds, cullBounds, outsideView } from "./scene/SceneCull.js";
 import type { TerrainPresentation } from "./TerrainPresentation.js";
@@ -53,14 +53,6 @@ export function collectScene(
   const visibleGrass = grassAlpha > 0;
   const items = frame ? frame.begin(visibleGrass) : [];
   const grassVehicles = visibleGrass ? ([] as SpriteItem[]) : undefined;
-  const receivers =
-    camera.worldRaster && camera.zoom >= SURFACE_RECEIVER_MIN_ZOOM
-      ? new SurfaceReceivers(world, props, entities, alpha, {
-          ...receiverOptions,
-          propCache: frame?.propReceivers,
-          mesh: terrain.meshSurfaceGeometry?.bind(terrain),
-        })
-      : undefined;
 
   // Viewport bounds in world coordinates for culling
   const vpTL = camera.screenToWorld(0, 0);
@@ -76,8 +68,7 @@ export function collectScene(
     items,
     frame,
     terrain,
-    receivers,
-    depthShadows: camera.worldRaster,
+    depthShadows: false,
     grassVehicles,
   });
   const observer = receiverOptions.observer;
@@ -111,11 +102,9 @@ export function collectScene(
   // --- Elevation tiles ---
   for (const elev of terrain.collectElevationItems(world, visible)) items.push(elev);
   // --- Particles ---
-  for (const p of Array.isArray(particles) ? particles : particles.collectItems(receivers)) {
+  for (const p of Array.isArray(particles) ? particles : particles.collectItems(undefined)) {
     items.push(p);
   }
-
-  if (frame && receivers) Object.assign(frame.receiverStats, receivers.diagnostics);
 
   // Sort by pre-computed sort key for correct depth ordering
   items.sort((a, b) => a.sortKey - b.sortKey);

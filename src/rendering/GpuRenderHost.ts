@@ -1,8 +1,6 @@
-import type { Camera } from "./Camera.js";
 import { GpuRenderResources } from "./GpuRenderResources.js";
 import { createView3dHost } from "./GpuView3d.js";
 import type { RenderHost } from "./RenderHost.js";
-import type { RenderRegion } from "./ViewLayout.js";
 
 /** The original canvas retains input and UI; the world canvas is a sibling below it. */
 export function createGpuRenderHost(
@@ -24,7 +22,6 @@ export function createGpuRenderHost(
     throw error;
   }
   // Vehicles are always 3D; their sprites only cover loading or failed meshes.
-  renderer.meshes.setEnabled(true);
   const uiContext = canvas.getContext("2d");
   if (!uiContext) {
     renderer.dispose();
@@ -60,8 +57,6 @@ export function createGpuRenderHost(
   canvas.dataset.gpuDevice = "ready";
   const observer = new ResizeObserver(align);
   observer.observe(canvas);
-  const beginView = (_camera: Camera, _region?: RenderRegion) => {};
-  const endView = () => {};
   return {
     renderer,
     uiContext,
@@ -78,10 +73,6 @@ export function createGpuRenderHost(
       uiContext.clearRect(0, 0, canvas.width, canvas.height);
       renderer.beginFrame();
     },
-    beginWorld: (camera) => beginView(camera),
-    endWorld: endView,
-    beginView,
-    endView,
     drawUiOverlay: (items) => renderer.drawOverlayOn(uiContext, items),
     view3d: createView3dHost(
       renderer.surface,
@@ -93,7 +84,6 @@ export function createGpuRenderHost(
     ),
     captureFrame() {
       if (disposed || renderer.surface.lost) throw Error("Graphics are unavailable for capture");
-      renderer.surface.flush();
       const copy = document.createElement("canvas");
       copy.width = canvas.width;
       copy.height = canvas.height;

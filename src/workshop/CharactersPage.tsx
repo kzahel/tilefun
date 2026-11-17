@@ -226,7 +226,6 @@ function CharacterInspector({
       camera: fixedCamera({ wx: 0, wy: -12 }),
       terrain: false,
       background: "#d4dfcc",
-      pixelExactShadows: true,
       loadAssets: async () => ({
         // Each lab owns its map, while verified HTML images/fixture canvases are borrowed.
         sheets: new Map(verified.sheets),

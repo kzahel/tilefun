@@ -10,10 +10,8 @@ import {
 } from "./FurnitureLayout.js";
 import type { LayeredInteriorMap } from "./LayeredInteriorMap.js";
 
-let nextInteriorContent = 1;
 /** Immutable compiled room geometry. Preparing it does not advance gameplay. */
 export interface InteriorContent {
-  readonly id: number;
   readonly map: LayeredInteriorMap;
   readonly editable: boolean;
 }
@@ -64,7 +62,7 @@ export class InteriorPresentation {
     private readonly floorBounds?: FurnitureRect | ((rect: FurnitureRect) => boolean),
     editable = false,
   ) {
-    this.content = Object.freeze({ id: nextInteriorContent++, map, editable });
+    this.content = Object.freeze({ map, editable });
     if (editable)
       for (let y = 0; y < map.height; y += 2) {
         if (

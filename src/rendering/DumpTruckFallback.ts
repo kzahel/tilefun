@@ -177,8 +177,6 @@ export function drawDumpTruckFallback(
   ctx.globalAlpha = item.alpha ?? 1;
   drawActorImage(
     ctx,
-    camera,
-    item,
     output,
     0,
     0,

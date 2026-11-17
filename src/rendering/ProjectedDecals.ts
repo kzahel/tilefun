@@ -12,7 +12,6 @@ import {
   type SurfaceMesh,
   type SurfaceVertex,
 } from "./SurfaceReceivers.js";
-import { WORLD_DEPTH_RANGE } from "./WorldDepth.js";
 
 export interface DecalVertex {
   x: number;
@@ -136,30 +135,13 @@ export function surfaceDecals(
   return [...groups.values()];
 }
 export function drawSurfaceDecal(ctx: RasterSurface, camera: Camera, item: DecalItem) {
-  const image = maskImage(item.mask),
-    origin = projectWorld(camera, 0, 0),
-    [a, b, c] = item.plane;
-  // z=ax+by+c, screen y=y-z. Edge-on top faces have no drawable area.
-  if (Math.abs(1 - b) < 1e-5) return;
-  const dx = (2 * a) / (1 - b),
-    dy = (1 + b) / (1 - b),
-    s = camera.scale,
-    r = WORLD_DEPTH_RANGE;
-  const plane: [number, number, number] = [
-    -dx / s / r,
-    -dy / s / r,
-    0.5 - ((2 * c) / (1 - b) - camera.y - (dx * origin.sx) / s - (dy * origin.sy) / s + 0.03) / r,
-  ];
+  if (Math.abs(1 - item.plane[1]) < 1e-5) return;
   const polygons = item.polygons.map((p) =>
     p.map((v) => {
       const point = projectWorld(camera, v.x, v.y, planeZ(item.plane, v.x, v.y));
       return { x: point.sx, y: point.sy, u: v.u, v: v.v };
     }),
   );
-  if (ctx.projectedDecal) {
-    ctx.projectedDecal(image, polygons, plane, item.alpha, item.color);
-    return;
-  }
   const native = ctx as CanvasRenderingContext2D;
   const p = polygons.find((p) => p.length >= 3),
     p0 = p?.[0];

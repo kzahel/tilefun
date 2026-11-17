@@ -12,7 +12,6 @@ const neutral = [
   "rendering/Projection.ts",
   "rendering/PresentationSettings.ts",
   "rendering/PlayerPresentation.ts",
-  "rendering/OutdoorPresentation.ts",
   "rendering/TerrainPresentation.ts",
   "rendering/TerrainFrame.ts",
   "rendering/SceneItem.ts",
@@ -29,11 +28,10 @@ const neutral = [
   "interiors/FurnitureLayout.ts",
   "interiors/LayeredInteriorMap.ts",
   "editor/collectEditorOverlay.ts",
-  "scenes/renderWorld.ts",
+  "scenes/renderPlayViews.ts",
   "session/DeviceSession.ts",
   "session/View.ts",
   "session/ViewRender.ts",
-  "scenes/renderInterior.ts",
   "world/Chunk.ts",
 ];
 const forbidden =
@@ -96,8 +94,7 @@ it("keeps the native review raster to fingerprinted review rasters (232)", () =>
     .filter((path) => /\.tsx?$/.test(path) && path !== "rendering/ReviewRasterBackend.ts")
     .filter((path) => reviewRaster.test(readFileSync(resolve("src", path), "utf8")));
   expect(users.sort()).toEqual(allowed);
-  // No other native world raster under another name: only the GPU and the review raster
-  // extend the shared base, and production code never builds the base directly.
+  // Only immutable review tools extend the raster base.
   const sources = readdirSync(resolve("src"), { recursive: true, encoding: "utf8" })
     .map((path) => path.split(sep).join("/"))
     .filter((path) => /\.tsx?$/.test(path) && !/\.test\.tsx?$/.test(path))

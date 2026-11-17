@@ -58,8 +58,7 @@ function setup(topDown: boolean, look: object | null = null) {
     } as unknown as EditorMode,
     editorModel: new EditorModel(),
     firstPerson: { topDown, sync: () => {} },
-    beginView: () => {},
-    endView: () => {},
+
     drawUiOverlay: (items: readonly OverlayDraw[]) => {
       uiOverlays.push(items.map((item) => ({ ...item })));
     },

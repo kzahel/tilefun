@@ -34,8 +34,6 @@ export function drawTransporterFallback(
   ctx.globalAlpha = item.alpha ?? 1;
   drawActorImage(
     ctx,
-    camera,
-    item,
     sheet.image,
     col * size,
     item.mesh.transportRamp ? size : 0,

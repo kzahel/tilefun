@@ -13,36 +13,32 @@ import { inProcessWorker } from "../server/testing/InProcessWorker.js";
 import { fixedCamera } from "../session/View.js";
 import type { Movement } from "../shared/Movement.js";
 
-/** What each frame hands the shared lab draw, captured while it is presented. */
+/** Capture the real unified scene source while the replica is presented. */
 const drawn = vi.hoisted(
   () =>
     [] as {
-      options: import("./LabScene.js").LabSceneOptions;
-      presented: import("../entities/Entity.js").Entity;
-      physics: import("../entities/Entity.js").Entity;
-      entities: readonly import("../entities/Entity.js").Entity[];
+      options: import("../scenes/firstPersonPlay.js").Play3dSource & { alpha: number };
+      presented: Entity;
+      physics: Entity;
+      entities: readonly Entity[];
     }[],
 );
-vi.mock("./LabScene.js", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("./LabScene.js")>();
-  return {
-    ...actual,
-    drawLabFrame: (...args: Parameters<typeof actual.drawLabFrame>) => {
-      const [, , device, , options] = args;
-      drawn.push({
-        options,
-        presented: device.replica.presentedPlayerEntity,
-        physics: device.replica.playerEntity,
-        entities: device.replica.entities,
-      });
-      actual.drawLabFrame(...args);
-    },
-  };
-});
-
-/** The room view's draws: the shared interior presenter's arguments. */
-const presentInterior = vi.hoisted(() => vi.fn());
-vi.mock("../interiors/presentInterior.js", () => ({ presentInterior }));
+vi.mock("../scenes/firstPersonPlay.js", () => ({
+  renderTopDown3d: (
+    source: import("../scenes/firstPersonPlay.js").Play3dSource,
+    view: import("../session/View.js").View,
+    alpha: number,
+  ) => {
+    drawn.push({
+      options: { ...source, alpha },
+      presented: source.state.presentedPlayerEntity,
+      physics: source.state.playerEntity,
+      entities: source.state.entities,
+    });
+    source.control.markTopDown(view);
+    return true;
+  },
+}));
 
 import { LabView, type LabViewOptions, type PoseCycle } from "./LabView.js";
 
@@ -109,7 +105,6 @@ beforeEach(() => {
   vi.stubGlobal("cancelAnimationFrame", vi.fn());
   vi.stubGlobal("ImageBitmap", class {});
   removed.mockClear();
-  presentInterior.mockReset();
   drawn.length = 0;
 });
 const labs: LabView[] = [];
@@ -135,10 +130,6 @@ function recordingHost() {
     setAssets: vi.fn(),
     resize: vi.fn(),
     beginFrame: vi.fn(),
-    beginWorld: vi.fn(),
-    endWorld: vi.fn(),
-    beginView: vi.fn(),
-    endView: vi.fn(),
     drawUiOverlay: vi.fn((items: readonly import("../rendering/OverlayFrame.js").OverlayDraw[]) => {
       uiFrames.push(items.map((i) => ({ ...i })));
     }),
@@ -303,7 +294,6 @@ it("plays with the game's controls: predicted steps, a following camera and the 
   // Drawn through the shared lab frame: terrain prepared, a clear, terrain, the
   // replicated scene, then the touch controls on the UI layer.
   expect(host.beginFrame).toHaveBeenCalled();
-  expect(host.beginView).not.toHaveBeenCalled();
   expect(host.renderer.preparations).toBeGreaterThan(0);
   const kinds = host.renderer.passes.map((pass) => pass.kind);
   expect(kinds).toEqual([]);
@@ -312,12 +302,11 @@ it("plays with the game's controls: predicted steps, a following camera and the 
   // player as its collect observer, the page's visibility and the lab's light time.
   expect(end).toHaveBeenCalledTimes(begin.mock.calls.length);
   const last = drawn.at(-1);
-  expect(last?.options.collectObserver).toBe(last?.presented);
+  expect(last?.options.observer).toBe(last?.presented);
   expect(last?.presented).not.toBe(last?.physics);
   expect(last?.options).toMatchObject({
-    terrain: true,
+    background: undefined,
     visibility: "lower",
-    pixelExactShadows: false,
   });
   expect(last?.options.presentationTime).toBeGreaterThan(0.1);
   // A throw is released after that tick's movement.
@@ -445,7 +434,6 @@ it("draws the page's underlay over the terrain and overlay over the scene, then 
   const { lab, host, frame, key } = open({
     // A framing from the presented pose, so the presented camera is not the actual one.
     camera: fixedCamera((player) => ({ wx: player.position.wx + 40, wy: -20 })),
-    pixelExactShadows: true,
     underlay: (overlay) => {
       frames.push(overlay);
       if (grid) overlay.line(0, 0, 960, 0, "#afc0ad");
@@ -482,7 +470,6 @@ it("draws the page's underlay over the terrain and overlay over the scene, then 
   expect(last?.alpha).toBe(shown?.options.alpha);
   expect(last?.alpha).toBeLessThan(1);
   expect(last?.x).toBe((shown?.presented.position.wx ?? Number.NaN) + 40);
-  expect(shown?.options.pixelExactShadows).toBe(true);
   // An empty collection submits nothing.
   grid = false;
   frame();
@@ -533,7 +520,7 @@ it("a pose cycle stops the world and cycles only the drawn player's sprite", asy
   /** The frame's drawn copy, checked against the replica's presented player. */
   const cycled = () => {
     const shown = drawn.at(-1);
-    const copy = shown?.options.collectObserver;
+    const copy = shown?.options.observer;
     if (!shown || !copy?.sprite) throw new Error("no drawn player");
     expect(copy).not.toBe(shown.presented);
     expect(copy.id).toBe(shown.presented.id);
@@ -575,7 +562,7 @@ it("a pose cycle stops the world and cycles only the drawn player's sprite", asy
   cycle = undefined;
   frame();
   const shown = drawn.at(-1);
-  expect(shown?.options.collectObserver).toBe(shown?.presented);
+  expect(shown?.options.observer).toBe(shown?.presented);
   expect(shown?.options.entities).toBe(shown?.entities);
   expect(framed.at(-1)).toBe(shown?.presented);
   await until(frame, () => expect(submit).toHaveBeenCalled());
@@ -607,7 +594,6 @@ it("resizes the view and its renderer without restarting the world", async () =>
   expect(lab.view.region).toEqual({ x: 0, y: 0, width: 1152, height: 768 });
   expect([lab.camera.viewportWidth, lab.camera.viewportHeight]).toEqual([1152, 768]);
   frame();
-  expect(host.beginView).not.toHaveBeenCalled();
   // The same Worker and world, still running.
   expect(clear).not.toHaveBeenCalled();
   expect(lab.client.clock?.running).toBe(true);
@@ -687,7 +673,7 @@ it("draws the page's UI over the world and under the controls, and captures a fr
   expect(last?.passes).toBe(host.renderer.passes.length);
   expect(host.renderer.passes).toEqual([]);
   expect(last?.player).toBe(drawn.at(-1)?.presented);
-  expect(drawn.at(-1)?.options.room).toBeUndefined();
+  expect(drawn.at(-1)?.options.interior).toBeUndefined();
   // A capture draws one more frame now, without a tick, at the whole step.
   const ticks = vi.spyOn(lab.client, "update");
   const submit = vi.spyOn(lab.client, "submitInput");
@@ -722,8 +708,8 @@ it("passes an owned room to unified drawing instead of preparing outdoor terrain
   const { lab, host, frame } = open({ terrain: true, interior });
   await lab.ready;
   frame();
-  expect(drawn.at(-1)?.options.terrain).toBe(false);
-  expect(drawn.at(-1)?.options.draw3d).toBeTypeOf("function");
+  expect(drawn.at(-1)?.options.interior).toBe(interior);
+  expect(drawn.at(-1)?.options.control.scene).toBeTypeOf("function");
   expect(host.renderer.preparations).toBe(0);
   lab.dispose();
 });

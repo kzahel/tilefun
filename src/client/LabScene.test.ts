@@ -5,7 +5,7 @@ import { DeviceSession } from "../session/DeviceSession.js";
 import { followSeat, View } from "../session/View.js";
 import { World } from "../world/World.js";
 import { RemoteStateView } from "./ClientStateView.js";
-import { drawLabFrame, type LabSceneOptions, labPresentationDiagnostics } from "./LabScene.js";
+import { drawLabFrame, labPresentationDiagnostics } from "./LabScene.js";
 
 it("prepares one lab's terrain and invokes its unified draw without fixed passes", () => {
   const view = new View(followSeat());
@@ -19,8 +19,7 @@ it("prepares one lab's terrain and invokes its unified draw without fixed passes
     beginFrame,
   } as unknown as RenderHost;
   const draw3d = vi.fn(() => true);
-  const options = { terrain: true, pacing: "throughput", draw3d } as unknown as LabSceneOptions;
-  drawLabFrame(host, view, device, new ParticleSystem(), options);
+  drawLabFrame(host, view, device.replica.world, "throughput", draw3d);
   expect(beginFrame).toHaveBeenCalledOnce();
   expect(draw3d).toHaveBeenCalledWith(view, 0);
   expect(prepare).toHaveBeenCalledOnce();

@@ -115,18 +115,18 @@ describe("renderViews", () => {
     const prepare = vi.spyOn(backend, "prepareTerrainViews").mockImplementation((list) => {
       prepared.push(list.map(({ view, visible }) => ({ view, visible: { ...visible } })));
     });
-    const host = { renderer: backend, beginView: vi.fn(), endView: vi.fn() };
+    const host = backend;
     const drawn: number[] = [];
     const waiting: number[] = [];
     renderViews(
       host,
       views,
       { world, pacing: "throughput" },
-      (_v, i) => waiting.push(i),
       (_v, i) => {
         drawn.push(i);
         return i % 2 === 1;
       },
+      (_v, i) => waiting.push(i),
     );
     expect(drawn).toEqual([0, 1, 2, 3]);
     expect(waiting).toEqual([0, 2]);
@@ -135,18 +135,16 @@ describe("renderViews", () => {
     ]);
     expect(prepare).toHaveBeenCalledOnce();
     expect(prepare.mock.calls[0]?.[0]).toHaveLength(0);
-    expect(host.beginView).not.toHaveBeenCalled();
-    expect(host.endView).not.toHaveBeenCalled();
   });
   it("does not prepare outdoor terrain indoors", () => {
     const backend = new RecordingBackend(new Map());
     const prepare = vi.spyOn(backend, "prepareTerrainViews");
     renderViews(
-      { renderer: backend, beginView() {}, endView() {} },
+      backend,
       views,
       undefined,
-      () => {},
       () => true,
+      () => {},
     );
     expect(prepare).not.toHaveBeenCalled();
   });
@@ -155,17 +153,17 @@ describe("renderViews", () => {
     const prepare = vi.spyOn(backend, "prepareTerrainViews").mockImplementationOnce(() => {
       throw Error("prepare");
     });
-    const host = { renderer: backend, beginView() {}, endView() {} };
+    const host = backend;
     expect(() =>
       renderViews(
         host,
         views,
         { world, pacing: "throughput" },
-        () => {},
         () => true,
+        () => {},
       ),
     ).toThrow("prepare");
     expect(prepare.mock.calls[0]?.[0]).toHaveLength(0);
-    expect(views.every((v) => !v.camera.worldRaster)).toBe(true);
+    expect(views.every((v) => v.camera.pixelSnap === false)).toBe(true);
   });
 });

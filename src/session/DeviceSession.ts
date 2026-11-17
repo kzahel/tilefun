@@ -3,7 +3,7 @@ import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { predictInput } from "../client/predictInput.js";
 import type { SeatMovements } from "../client/SeatInputs.js";
 import { CHUNK_SIZE_PX } from "../config/constants.js";
-import type { RenderBackend } from "../rendering/RenderFrame.js";
+import type { RenderResources } from "../rendering/RenderFrame.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import type { Movement } from "../shared/Movement.js";
 import { DeviceSeats } from "./DeviceSeats.js";
@@ -100,7 +100,7 @@ export class DeviceSession {
   }
 
   /** Seat 0 exists and its room or terrain chunk is presentable. */
-  seatWorldReady(terrain: Pick<RenderBackend, "isTerrainReady">): boolean {
+  seatWorldReady(terrain: Pick<RenderResources, "isTerrainReady">): boolean {
     const { replica } = this;
     const p = replica.serverPlayerEntity;
     if (p.id === -1) return false;

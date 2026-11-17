@@ -50,7 +50,6 @@ export class TerrainFrame {
         draw.y = y;
         draw.width = size + (options?.overscanPixels ?? 1);
         draw.height = draw.width;
-        draw.edgePixels = 0;
         this.draws.push(draw);
       }
     return this.draws;

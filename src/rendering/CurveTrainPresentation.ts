@@ -24,8 +24,6 @@ export function drawCurveTrain(
   ctx.globalAlpha = item.alpha ?? 1;
   drawActorImage(
     ctx,
-    camera,
-    item,
     sheet.image,
     view.x,
     view.y,

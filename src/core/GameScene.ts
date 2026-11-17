@@ -21,10 +21,9 @@ import type { TouchTap } from "../input/TouchTap.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
 import type { OverlayDraw } from "../rendering/OverlayFrame.js";
-import type { RenderBackend } from "../rendering/RenderFrame.js";
+import type { RenderResources } from "../rendering/RenderFrame.js";
 import type { SceneFrame } from "../rendering/SceneFrame.js";
 import type { View3dHost } from "../rendering/View3dHost.js";
-import type { RenderRegion } from "../rendering/ViewLayout.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import type { View } from "../session/View.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
@@ -58,13 +57,7 @@ export interface GameContext {
   readonly stateView: RemoteStateView;
   readonly transport: IClientTransport;
   readonly spriteCatalog: SpriteCatalog;
-  readonly renderer: RenderBackend;
-  /** Browser composition boundary; headless scene fixtures may omit graphics. */
-  beginWorld?(): void;
-  endWorld?(): void;
-  /** One view of a display frame (226; see RenderHost.beginView). */
-  beginView?(camera: Camera, region: RenderRegion): void;
-  endView?(): void;
+  readonly renderer: RenderResources;
   /** Overlay items on the UI canvas above every view (see RenderHost.drawUiOverlay). */
   drawUiOverlay?(items: readonly OverlayDraw[]): void;
   /** The device session (replica, prediction, shared presentation) and seat 0's

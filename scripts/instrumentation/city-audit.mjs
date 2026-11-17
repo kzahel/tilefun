@@ -75,26 +75,6 @@ if (
   throw Error(
     "Fixed-renderer counterfactuals are retired; use render:bench for unified-scene measurements",
   );
-const batchTextures = Number(option("batch-textures", "8"));
-const deferCachedImages = option("defer-cached-images", "true") === "true";
-if (![1, 2, 4, 8].includes(batchTextures)) throw Error("Invalid batch texture limit");
-const rasterReferencePath = option("raster-reference", "");
-const rasterReference = rasterReferencePath
-  ? await readFile(path.resolve(rasterReferencePath), "utf8")
-  : null;
-if (rasterReference && (batchTextures !== 1 || deferCachedImages))
-  throw Error("Original raster control requires --batch-textures=1 --defer-cached-images=false");
-const rasterReferenceSHA256 = rasterReference
-  ? createHash("sha256").update(rasterReference).digest("hex")
-  : null;
-const presentationReferences = new Map();
-for (const [optionName, file] of [
-  ["backend-reference", "src/rendering/GpuRenderResources.ts"],
-  ["surface-scene-reference", "src/rendering/presentSurfaceScene.ts"],
-]) {
-  const source = option(optionName, "");
-  if (source) presentationReferences.set(file, await readFile(path.resolve(source), "utf8"));
-}
 const meshTargetReuse = option("mesh-target-reuse", "false") === "true";
 if (trace && cpu) throw Error("Trace and CPU sampling must use separate attribution captures");
 const touch = option("touch", endpoint ? "true" : "false") === "true";
@@ -137,9 +117,6 @@ const report = {
   renderProfile,
   meshTargetReuse,
   meshImageCache,
-  batchTextures,
-  deferCachedImages,
-  rasterReferenceSHA256,
   seconds,
   warmSeconds,
   overviewZoom,
@@ -190,7 +167,6 @@ for (const file of [
   "src/rendering/CarPixelOutline.ts",
   "src/rendering/GpuSceneSurface.ts",
   "src/rendering/GpuRenderResources.ts",
-  "src/rendering/presentSurfaceScene.ts",
   "src/rendering/TileRenderer.ts",
   "src/rendering/RasterRenderBackend.ts",
   "src/rendering/collectScene.ts",
@@ -201,11 +177,7 @@ for (const file of [
 ])
   try {
     report.sourcesSHA256[file] = createHash("sha256")
-      .update(
-        file === "src/rendering/GpuSceneSurface.ts" && rasterReference
-          ? rasterReference
-          : (presentationReferences.get(file) ?? (await readFile(path.join(root, file)))),
-      )
+      .update(await readFile(path.join(root, file)))
       .digest("hex");
   } catch (error) {
     if (
@@ -228,14 +200,6 @@ const server = await createServer({
       enforce: "pre",
       transform(code, id) {
         const file = id.split("?")[0];
-        for (const [module, source] of presentationReferences)
-          if (file.endsWith(`/${module}`) && !id.includes("?raw")) return source;
-        if (
-          rasterReference &&
-          file.endsWith("/src/rendering/GpuSceneSurface.ts") &&
-          !id.includes("?raw")
-        )
-          return rasterReference;
         const replace = (from, to) => {
           if (code.split(from).length !== 2) throw Error(`City probe marker changed: ${file}`);
           code = code.replace(from, to);
@@ -454,16 +418,15 @@ try {
       }, driveModel);
     }
     await page.evaluate(
-      ({ enabled, limit }) => {
+      ({ enabled }) => {
         const backend = document.querySelector("#game").__game.renderer;
-        backend.surface?.setBatchTextureLimit?.(limit);
         const meshes = backend.meshes;
         if (meshes?.images) {
           meshes.images.clear();
           meshes.images.enabled = enabled;
         }
       },
-      { enabled: meshImageCache, limit: batchTextures, defer: deferCachedImages },
+      { enabled: meshImageCache },
     );
     if (meshTargetReuse) await page.evaluate(installCityMeshTargetReuse);
     const zoom = stage.startsWith("overview") ? overviewZoom : 1;

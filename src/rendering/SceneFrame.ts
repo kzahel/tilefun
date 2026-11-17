@@ -1,4 +1,3 @@
-import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import { EntityMeshPose } from "./EntityMeshPose.js";
 import { GrassFrameBuffer } from "./GrassFrameBuffer.js";
 import { OverlayFrame } from "./OverlayFrame.js";
@@ -15,8 +14,6 @@ export type SurfaceFades = Map<string, { opacity: number; time: number }>;
  * Release after drawing so particles and elevation surfaces are not retained.
  */
 export class SceneFrame {
-  interior: InteriorPresentation | null = null;
-  interiorKey = "";
   presentationTime = 0;
   /** Wall-clock seconds for cosmetic transitions; advances while a lab is paused. */
   fadeSeconds = 0;
@@ -40,7 +37,6 @@ export class SceneFrame {
   }
 
   release(): void {
-    this.interior?.release();
     this.overlays.release();
     this.items.length = 0;
     this.drawOrder.length = 0;
@@ -51,9 +47,6 @@ export class SceneFrame {
     this.meshPoses.clear();
     this.release();
     this.overlays.clear();
-    this.interior?.clear();
-    this.interior = null;
-    this.interiorKey = "";
     this.grass.clear();
     this.propDepth.clear();
     this.propReceivers.clear();

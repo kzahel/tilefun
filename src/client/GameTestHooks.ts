@@ -12,7 +12,7 @@ import type { TouchButtons } from "../input/TouchButtons.js";
 import type { TouchJoystick } from "../input/TouchJoystick.js";
 import type { Camera } from "../rendering/Camera.js";
 import type { DebugPanel } from "../rendering/DebugPanel.js";
-import type { RenderBackend } from "../rendering/RenderFrame.js";
+import type { RenderResources } from "../rendering/RenderFrame.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
@@ -33,7 +33,7 @@ import type { XrControl } from "./XrControl.js";
 export interface GameTestHooks {
   readonly canvas: HTMLCanvasElement;
   readonly renderHost: RenderHost;
-  readonly renderer: RenderBackend;
+  readonly renderer: RenderResources;
   readonly camera: Camera;
   readonly loop: GameLoop;
   readonly time: Time;

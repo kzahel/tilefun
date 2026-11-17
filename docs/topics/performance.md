@@ -1,5 +1,12 @@
 # Streaming and gameplay performance
 
+The crowd replay's render lane uses the unified `collectWorldSprites` stage
+since [254](../tactical/254-remove-renderer-scaffolding.md). Its workload records
+`presentation: unified-sprites-v1`; old fixed-collector timing/outcome reports
+are incompatible by default. Historical surface-shadow comparison and legacy
+GPU asset-capture harnesses are retired. Current measurements use the render,
+streaming and driving runners below.
+
 ## Render scorecard and GPU depth shadows (2026-11-10)
 
 `npm run render:bench` is the rendering scorecard: `city`, `crowd` and `woods`

@@ -34,7 +34,6 @@ export interface LabViewOptions {
   background?: string;
   surfaceVisibility?(): SurfaceVisibility;
   /** Shadows at whole source pixels (asset inspection). */
-  pixelExactShadows?: boolean;
   /** Four-direction sprite inspection: stops the world and cycles only the drawn pose. */
   poseCycle?(): PoseCycle | undefined;
   /** An owned room cache drawn instead of terrain; its props still take part in
@@ -108,7 +107,7 @@ export class LabView {
   private renderX = 0;
   private renderY = 0;
   /** Every lab uses the shared world scene, including rooms and grid underlays. */
-  private readonly unified: FirstPersonControl | undefined;
+  private readonly unified: FirstPersonControl;
   /** Worlds loaded so far (`worldLoaded`). */
   private worlds = 0;
 
@@ -138,7 +137,6 @@ export class LabView {
       () => this.canvas,
       () => this.assets?.sheets ?? new Map(),
     );
-    this.unified.topDown = true;
     this.unified.sync([this.view], new Set([0]));
     this.setRegion(options.width, options.height);
     this.loop = new GameLoop({
@@ -343,23 +341,13 @@ export class LabView {
           ? replica.entities
           : replica.entities.map((entity) => (entity.id === player.id ? shown : entity));
       const { interior } = this.options;
-      drawLabFrame(host, this.view, device, this.effects, {
-        terrain: !interior && this.options.terrain !== false,
-        background: this.options.background ?? "#cbd5c3",
-        pacing: settings.terrainPacing,
-        visibility: this.options.surfaceVisibility?.() ?? "auto",
-        alpha: this.alpha,
-        fadeSeconds: now,
-        presentationTime: this.lightSeconds,
-        pixelExactShadows: this.options.pixelExactShadows ?? false,
-        entities,
-        collectObserver: shown,
-        underlay: () => this.drawOverlay(this.options.underlay),
-        overlay: () => this.drawOverlay(this.options.overlay),
-        ...(this.unified
-          ? { draw3d: (view: View) => this.draw3d(view, entities, shown, now) }
-          : {}),
-      });
+      drawLabFrame(
+        host,
+        this.view,
+        !interior && this.options.terrain !== false ? replica.world : undefined,
+        settings.terrainPacing,
+        (view) => this.draw3d(view, entities, shown, now),
+      );
       // Drawn in 3D, the hooks' world overlays go on the UI canvas above it.
       this.drawOverlay(this.options.overlay);
       this.options.uiOverlay?.(host.uiContext, this);
@@ -392,7 +380,7 @@ export class LabView {
         entities,
         realm: `lab:${this.worlds}`,
         presentationTime: this.lightSeconds,
-        // Slab fades run on display time, as `drawLabFrame`'s fixed view does.
+        // Slab fades follow display time even when simulation is paused.
         fadeSeconds: now,
         grass: this.options.terrain !== false && host.renderer.assets.has("grass-blades"),
         background:

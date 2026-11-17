@@ -44,8 +44,6 @@ export function drawTowingFallback(
   ctx.globalAlpha = item.alpha ?? 1;
   drawActorImage(
     ctx,
-    camera,
-    item,
     sheet.image,
     col * size,
     row * size,

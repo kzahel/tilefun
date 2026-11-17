@@ -6,6 +6,13 @@ owner authorized fixed-world retirement on 2026-11-17; [253](../tactical/253-ret
 records completed migration and validation. [Renderer unification](renderer-unification.md)
 owns the current inventory and device evidence.
 
+[254](../tactical/254-remove-renderer-scaffolding.md) removes the retirement's
+remaining adapters: game/lab code receives `RenderResources`, without review
+submission methods. Native `ReviewRenderBackend` submissions remain restricted
+to frozen review tools. Hosts have no world-target begin/end or flush protocol;
+`View3dHost.draw` owns viewport/scissor and the unified scene owns depth. There
+is no headless fixed-world drawing branch or renderer-enable gate.
+
 `RenderHost.view3d` lends each view the host's `WebGLRenderer`, bound to its
 canvas region, and restores renderer state after drawing. Interactive views
 never submit fixed world passes. Game, labs and the prop editor share this host;
@@ -230,88 +237,45 @@ Changes to shared presentation, assets, preparation or lifecycle must account fo
 embedded consumers as well as gameplay; shared backend imports alone are not
 evidence of equivalent scheduling or resource behavior.
 
-The fixed-view GPU renderer preserves existing sprite presentation
-and can replace individual sprite bodies with meshes. Entity orientation may
-vary continuously while the world camera projection stays fixed. Authored bodies
-may need explicit source-camera registration, as described for compact-1 below.
-The following invariants govern that extension; they remain requirements for further assets and backends.
-
 ## Architecture
 
-Cutaways and level/sector visibility are part of the agreed
-[world geometry direction](world-geometry.md#visibility-and-seamless-interiors),
-including underground spaces and seamless indoor floor transitions. Shared
-presentation should derive observer-specific visibility from physical space and
-connection data; backends consume that result. Visibility selection must not
-change simulation or collision. `SurfacePresentation` now supplies a bounded
-schematic slab view and translucent whole-patch cutaway (group opacity on the
-overlay pass, honored by Canvas and GPU), shared by outdoor game rendering and
-the scenario host. `presentSurfaceScene` now orders individual sprites against
-overlapping slabs at their own heights, so a lower train remains below a bridge
-when the observer stands on it. General sector visibility, indoor transitions,
-intersecting surfaces and arbitrary mesh/particle depth remain future work.
+Simulation and prediction publish read-only world state. `FirstPersonView` draws
+that state with top-down, first-person, driving and XR cameras on one WebGL2
+context. Shared collectors evaluate actor poses, grass, contact effects and
+observer-specific cutaways without advancing simulation.
 
-```text
-Worker simulation → replicated world + client prediction
-                              ↓ read-only presentation inputs
-                  frame builder + static content updates
-                              ↓ ordered data + resource identities
-                      renderer backend and resources
-                    WebGL2 (game, labs, explorer, probes)
-                    native review raster (fingerprinted showcases only)
-```
+`GameClientOptions.renderHostFactory` supplies the browser host. `RenderHost`
+owns asset configuration, resize, one `beginFrame`, the independent UI canvas,
+feedback capture and disposal. `View3dHost.draw` owns each view's canvas region,
+viewport/scissor and renderer-state restoration. There are no intermediate world
+raster targets or begin/end world/view hooks. Split-screen seats use rectangular
+regions; no gameplay path uses the historical diagonal raster composition.
 
-World chunks contain tile grids and content versions, never graphics resources.
-Presentation computes interpolation, visibility and ordering without advancing
-simulation. `RenderBackend` receives plain view values and semantic passes:
-clear, terrain placements, ordered scene bodies/shadows, indoor commands and
-editor overlay geometry. It owns preparation, resource lookup, invalidation,
-eviction, resize, recovery and teardown. It does not decide depth/shadow order.
+`RenderResources` exposes sprite metadata, terrain preparation and resource
+lifecycles. `renderViews` draws each scene, prepares the union of terrain interests
+once with the shared `TerrainResidency` budget, and displays unavailable-graphics
+UI for undrawn views. Each `View` owns its observer-local slab fades. The
+presentation frame owns borrowed items and mesh poses; callers release it after
+drawing. Native/headless tests never invoke an alternate fixed-world renderer.
 
-`GameClientOptions.renderHostFactory` supplies the browser host.
-`RenderHost` supplies the backend, asset configuration, viewport lifecycle and an
-independent HUD/touch/debug context. `loadRenderHostFactory` gives the game and
-every `LabView` lab the WebGL2 host after `requireWebGl2` confirms a context; there
-is no renderer choice (232). The GPU host
-supplies a separate UI overlay and composes it for feedback capture. This works
-without changing physics, generation, editing or
-presentation policy. GameClient asset loading, procedural sprite creation and
-platform input/UI wiring remain application composition responsibilities.
+`LabView` embeds the same scene and host, with the world canvas positioned inside
+its lab wrapper and an independent input/UI canvas. Its `Play3dSource` supplies
+presented actors, observer, room and diagnostic hooks. Room caches used by
+immutable review images belong directly to `CachedInteriorRenderer`; they never
+live on the interactive frame. See [embedded engine labs](embedded-engine-labs.md)
+for authority, prediction and presentation-clock ownership.
 
-**Views ([226](../tactical/226-player-views-and-local-split-screen.md) slice 3a).**
-One display frame can hold several views. `beginFrame` runs once, then each view
-calls `RenderHost.beginView(camera, region)`/`endView()` with a camera whose
-viewport is the region's size; `beginWorld`/`endWorld` are the whole-canvas view
-through the same code. Regions come from `layoutViews` (1, 2 side by side, 2×2,
-or a diagonal half-plane `mask`, discarded in the GPU present shader) and never go through
-`resize()`. The GPU host reuses one world target: a later view clears it, draws
-in its top-left corner and composes into its region with a GL viewport or a
-half-plane discard in the present shader (`GpuWorldComposition`, maths in
-`worldComposite`). A view composed into a region is
-pixel-identical to a single view of that size (renderer lab
-`probeViewRegions`). Terrain for every view is prepared once per frame
-(`prepareViewTerrain` → `prepareTerrainViews`, scheduled by `TerrainResidency`):
-one time and row budget, any view's on-screen gap first, per-view look-ahead and
-focal rows, and no view evicts another's chunks; each view then presents its
-terrain with `prepared` set. Observer-local slab fades belong to each view
-(`presentSurfaceScene`'s `fades`, cleared with the device's presentation on a
-world load or realm exit); the device's `SceneFrame` (mesh poses, collection
-buffers) is shared. Since slice 3b the game (PlayScene) and the lab
-host draw through `renderViews` over their device session's views
-(`src/session/`), with `drawViewTerrain`/`drawViewScene` as the one outdoor
-world draw; each has one view until split screen (slice 5).
+`ReviewRenderBackend` is the separate native approval protocol: clear, prepared
+terrain and explicitly ordered scene submissions. It has no GPU depth, padded
+raster sampling, slab compositor, indoor submission or UI-overlay adapter. Its
+previous native pixel policy remains unchanged. Shared terrain rasters, page
+atlases and native-pixel vehicle images remain resources of the unified scene.
 
-`LabView` (226; `ScenarioPresentationHost` before it) embeds the same
-render-host implementations for the interactive labs. `PlayerPresentation`, `OutdoorPresentation` and `presentInterior`
-share camera interpolation, terrain policy and room submission with gameplay. GPU hosts support an absolute world surface inside a positioned
-lab wrapper, while the input/UI canvas stays in document flow. See
-[embedded engine labs](embedded-engine-labs.md) for lifecycle and migration boundaries.
-
-The reviewed blue v3 rear/middle/front train meshes now share the road models'
-ordinary game/lab mesh selection. Each carriage retains physical end orientation
-when travel reverses. Backend-disabled, loading and failed assets draw the native
-carriage crop. Retained model/review pixels and authoritative train geometry stay
-unchanged; [trains](trains.md) records owner acceptance and the remaining join limits.
+The reviewed rear/middle/front train meshes share ordinary game/lab asset
+selection. Each carriage retains physical end orientation when travel reverses;
+loading or failed assets use sprite fallbacks within the same scene. Retained
+model/review pixels and authoritative train geometry stay unchanged;
+[trains](trains.md) records owner acceptance and join limits.
 
 ## Data and resource contracts
 

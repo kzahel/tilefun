@@ -63,7 +63,7 @@
       "overLimit": 1
     },
     "src/client/GameClient.ts": {
-      "lines": 931,
+      "lines": 923,
       "worst": 0,
       "overLimit": 0
     },
@@ -283,7 +283,7 @@
       "overLimit": 2
     },
     "src/interiors/InteriorPresentation.ts": {
-      "lines": 178,
+      "lines": 176,
       "worst": 40,
       "overLimit": 1
     },
@@ -443,7 +443,7 @@
       "overLimit": 1
     },
     "src/rendering/DumpTruckFallback.ts": {
-      "lines": 194,
+      "lines": 192,
       "worst": 71,
       "overLimit": 1
     },
@@ -473,7 +473,7 @@
       "overLimit": 1
     },
     "src/rendering/GpuMeshBodies.ts": {
-      "lines": 318,
+      "lines": 301,
       "worst": 66,
       "overLimit": 1
     },
@@ -487,19 +487,9 @@
       "worst": 51,
       "overLimit": 3
     },
-    "src/rendering/presentSurfaceScene.ts": {
-      "lines": 94,
-      "worst": 26,
-      "overLimit": 1
-    },
     "src/rendering/propDepth.ts": {
       "lines": 151,
       "worst": 29,
-      "overLimit": 1
-    },
-    "src/rendering/RasterRenderBackend.ts": {
-      "lines": 342,
-      "worst": 34,
       "overLimit": 1
     },
     "src/rendering/RoadDeckPresentation.ts": {

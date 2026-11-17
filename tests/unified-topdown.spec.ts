@@ -2,7 +2,7 @@ import { expect, type Page, test } from "@playwright/test";
 
 // Unified drawing is mandatory, including the software-WebGL browser lane.
 type GameCanvas = HTMLCanvasElement & {
-  __game: { firstPerson: { drawing3d: boolean; topDown: boolean } };
+  __game: { firstPerson: { drawing3d: boolean } };
 };
 
 const drawing3d = (page: Page) =>
@@ -32,9 +32,6 @@ test("play and building mode use the unified scene and ignore retired fixed-view
 
   await page.goto("/tilefun/?nogamepad&view=fixed");
   await page.locator('#game[data-ready="true"]').waitFor();
-  await page.waitForTimeout(500);
-  expect(
-    await page.locator("#game").evaluate((c: GameCanvas) => c.__game.firstPerson.topDown),
-  ).toBe(true);
-  expect(await drawing3d(page)).toBe(true);
+  await expect.poll(() => drawing3d(page)).toBe(true);
+  expect(errors).toEqual([]);
 });

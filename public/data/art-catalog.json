@@ -38199,11 +38199,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LabView.ts:397"
+          "source": "src/client/LabView.ts:385"
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RasterRenderBackend.ts:240"
+          "source": "src/rendering/RasterRenderBackend.ts:144"
         },
         {
           "system": "Gameplay",
@@ -38211,11 +38211,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/firstPersonPlay.ts:327"
-        },
-        {
-          "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:62"
+          "source": "src/scenes/firstPersonPlay.ts:326"
         },
         {
           "system": "Gameplay",

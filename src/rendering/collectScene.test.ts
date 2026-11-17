@@ -337,7 +337,6 @@ grassChunk.autotileComputed = true;
 
 function sceneDigest(variant: {
   frame: boolean;
-  raster: boolean;
   grass: boolean;
   garage: boolean;
   time: number;
@@ -351,7 +350,6 @@ function sceneDigest(variant: {
   camera.zoom = zoom;
   camera.setViewport(800 * zoom, 600 * zoom);
   camera.snapTo(200, 150);
-  camera.worldRaster = variant.raster;
   const frame = variant.frame
     ? new SceneFrame({ authoredTrains: !variant.nativeTrains })
     : undefined;
@@ -389,7 +387,7 @@ function sceneDigest(variant: {
     { minCx: -1, maxCx: 1, minCy: -1, maxCy: 1 },
     0.5,
     { collectElevationItems: () => [elevation] },
-    variant.raster ? { collectItems: () => [particle] } : [particle],
+    [particle],
     variant.grass,
     drawProps,
     frame,
@@ -419,23 +417,13 @@ function sceneDigest(variant: {
 // 247 re-recorded the raster scenes for `gpuShadow.support` and `gpuShadow.upright`
 // only: with those keys omitted, all five earlier digests were reproduced exactly.
 it.each([
-  [{ frame: false, raster: false, grass: false, garage: false, time: 0 }, "8cb06b493c72350e"],
-  [
-    { frame: true, raster: false, grass: true, garage: false, time: 0.05, zoom: 3 / 8 },
-    "6c28c08dccb1c409",
-  ],
-  [{ frame: true, raster: true, grass: true, garage: false, time: 0.55 }, "4ae0b45458b5dc6a"],
-  [
-    { frame: true, raster: true, grass: false, garage: true, time: 0.25, nativeTrains: true },
-    "ce0022840239d279",
-  ],
-  [{ frame: false, raster: true, grass: false, garage: true, time: 0 }, "a9115be3c1a76df3"],
+  [{ frame: false, grass: false, garage: false, time: 0 }, "8cb06b493c72350e"],
+  [{ frame: true, grass: true, garage: false, time: 0.05, zoom: 3 / 8 }, "6c28c08dccb1c409"],
 ] as const)("collects a byte-identical characterization scene %o", (variant, digest) => {
   const result = sceneDigest(variant);
   expect(result.digest).toBe(digest);
   expect(result.kinds.sprite).toBeGreaterThan(20);
   if (variant.grass) expect(result.kinds.grass).toBeGreaterThan(0);
-  if (variant.raster) expect(result.kinds.decal).toBeUndefined();
 });
 
 it("swaps a tree house's outside and inside parts by observer room and keeps floor depth", () => {

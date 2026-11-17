@@ -5,6 +5,10 @@ Status: fixed GPU world renderer retired, owner-authorized 2026-11-17.
 The unified scene owns every interactive consumer. Local validation, regression
 corrections and passing hosted Linux qualification are recorded in
 [253](../tactical/253-retire-fixed-world-renderer.md).
+[254](../tactical/254-remove-renderer-scaffolding.md) removes the remaining
+fixed-pass orchestration, enable gates, empty host hooks and GPU raster adapters.
+Interactive `RenderResources` expose terrain preparation/resources only;
+`ReviewRenderBackend` exposes the immutable native review pass protocol.
 Updated: 2026-11-17.
 
 Owns the move to one world renderer: its status, parity checklist, device

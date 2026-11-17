@@ -12,7 +12,6 @@ import type { TerrainResourceId } from "./TerrainPresentation.js";
 import { drawTowingFallback } from "./TowingFallback.js";
 import { drawTransporterFallback } from "./TransporterFallback.js";
 import { drawBedContentsFallback } from "./VehicleBedPresentation.js";
-import { sceneDepth } from "./WorldDepth.js";
 
 /** Canvas-specific resource resolution stays on the drawing side of the boundary. */
 export interface CanvasTerrainSource {
@@ -43,7 +42,7 @@ export function drawScene2D(
   );
 }
 
-/** The GPU surface and the native review raster consume the same semantic pass. */
+/** Consume an explicitly ordered native review pass. */
 export function drawScenePass2D(
   ctx: RasterSurface,
   camera: Camera,
@@ -52,29 +51,19 @@ export function drawScenePass2D(
   grassSheet: Spritesheet | undefined,
   terrain?: CanvasTerrainSource,
 ): void {
-  if (pass.clipRects) {
-    ctx.save();
-    ctx.beginPath();
-    for (const rect of pass.clipRects) ctx.rect(rect.x, rect.y, rect.width, rect.height);
-    ctx.clip();
-  }
-  try {
-    for (const entry of pass.order) {
-      const item = pass.items[entry < 0 ? -entry - 1 : entry];
-      if (item)
-        drawSceneEntry2D(
-          ctx,
-          camera,
-          item,
-          sheets,
-          grassSheet,
-          pass.pixelExactShadows,
-          terrain,
-          entry < 0,
-        );
-    }
-  } finally {
-    if (pass.clipRects) ctx.restore();
+  for (const entry of pass.order) {
+    const item = pass.items[entry < 0 ? -entry - 1 : entry];
+    if (item)
+      drawSceneEntry2D(
+        ctx,
+        camera,
+        item,
+        sheets,
+        grassSheet,
+        pass.pixelExactShadows,
+        terrain,
+        entry < 0,
+      );
   }
 }
 
@@ -89,7 +78,6 @@ export function drawSceneEntry2D(
   terrain?: CanvasTerrainSource,
   shadow = false,
 ): void {
-  sceneDepth(ctx, camera, item, shadow);
   if (shadow) {
     if (item.kind === "sprite") drawOneShadow(ctx, camera, item, pixelExactShadows);
     return;
@@ -116,11 +104,7 @@ export function drawSceneEntry2D(
   }
 }
 
-/** A sprite and its GPU depth shadow (236). The shadow queues before the body,
- * so a sink without that pass (rooms, clipped passes, review rasters) can draw
- * the plain ground shadow under it. The pass itself drops a mesh body's shadow
- * if the body was not drawn. Towed cars and bed contents left the sorted list:
- * their shadows follow the body that draws them. */
+/** Native reviews draw a plain shadow for any explicitly supplied shadow shape. */
 function drawSpriteEntry(
   ctx: RasterSurface,
   camera: Camera,
@@ -129,16 +113,8 @@ function drawSpriteEntry(
   pixelExactShadows: boolean,
 ): void {
   const shadow = item.gpuShadow;
-  if (shadow && !ctx.deferredShadow?.(camera, shadow)) {
-    sceneDepth(ctx, camera, item, true);
+  if (shadow) {
     drawOneShadow(ctx, camera, item, pixelExactShadows);
-    sceneDepth(ctx, camera, item, false);
-  }
-  if (ctx.deferredShadow && (item.towGroup || item.bedGroup)) {
-    const gate = item.shadowCasterId;
-    if (item.towGroup?.gpuShadow) ctx.deferredShadow(camera, item.towGroup.gpuShadow, gate);
-    for (const child of item.bedGroup?.contents ?? [])
-      if (child.gpuShadow) ctx.deferredShadow(camera, child.gpuShadow, gate);
   }
   drawSprite(ctx, camera, item, sheets);
 }
@@ -150,17 +126,14 @@ function drawOneShadow(
   item: SpriteItem,
   pixelExactShadows: boolean,
 ): void {
-  if (item.meshGroundShadow && (!item.mesh || !ctx.meshReady?.has(item.mesh.assetId))) return;
+  if (item.meshGroundShadow) return;
   const shadowW = item.shadowWidth * camera.scale;
   const shadowH = shadowW * 0.35;
   const terrainOffset = item.shadowTerrainZ * camera.scale;
   const feetScreen = camera.worldToScreen(item.wx, item.shadowFeetWy);
   if (pixelExactShadows) {
-    (
-      ctx.pixelShadow ??
-      ((...args: [number, number, number, number]) =>
-        drawPixelShadow(ctx as CanvasRenderingContext2D, ...args))
-    )(
+    drawPixelShadow(
+      ctx as CanvasRenderingContext2D,
       Math.floor(feetScreen.sx),
       Math.floor(feetScreen.sy - terrainOffset),
       shadowW / 2,
@@ -168,15 +141,9 @@ function drawOneShadow(
     );
     return;
   }
-  const subpixel = camera.worldRaster && item.subpixel && !pixelExactShadows;
-  const x = subpixel ? feetScreen.sx : Math.floor(feetScreen.sx),
-    y = subpixel ? feetScreen.sy - terrainOffset : Math.floor(feetScreen.sy - terrainOffset);
-  if (ctx.fillShadow) {
-    ctx.fillShadow(x, y, shadowW / 2, shadowH / 2, subpixel === true);
-    return;
-  }
+  const x = Math.floor(feetScreen.sx),
+    y = Math.floor(feetScreen.sy - terrainOffset);
   ctx.save();
-  if (subpixel) ctx.imageSmoothingEnabled = true;
   ctx.globalAlpha = 0.3;
   ctx.fillStyle = "#000";
   ctx.beginPath();
@@ -239,7 +206,6 @@ function drawSpecialBody(
   item: SpriteItem,
   sheets: Map<string, Spritesheet>,
 ): boolean {
-  if (ctx.meshBody?.(camera, item)) return true;
   if (drawCurveTrain(ctx, camera, item, sheets)) return true;
   if (drawTransporterFallback(ctx, camera, item, sheets, drawSprite)) return true;
   if (drawTowingFallback(ctx, camera, item, sheets, drawEmergencyFlash)) {
@@ -258,53 +224,18 @@ function drawSpriteFrame(ctx: RasterSurface, camera: Camera, item: SpriteItem, s
   // Offset draw origin so sprite frame is centered horizontally
   // and extends upward from feet.
   const halfW = item.spriteWidth / 2;
-  const support = item.meshRoofSupport;
-  const attached =
-    support &&
-    ctx.meshReady?.has(support.assetId) &&
-    (!support.ownerAssetId || ctx.meshReady.has(support.ownerAssetId));
-  const roofDelta = attached ? support.heightDelta : 0;
-  const wx = item.wx + (attached ? (support.offsetX ?? 0) : 0);
-  const bottom =
-    item.wy + (attached ? (support.offsetY ?? 0) : 0) - item.zOffset + roofDelta + item.drawOffsetY;
+  const wx = item.wx,
+    bottom = item.wy - item.zOffset + item.drawOffsetY;
   const screen = camera.worldToScreen(wx - halfW, bottom - item.spriteHeight * (item.scaleY ?? 1));
   const end = camera.worldToScreen(wx + halfW, bottom);
   const sourceX = item.frameCol * sheet.tileWidth,
     sourceY = item.frameRow * sheet.tileHeight;
-  const subpixel = camera.worldRaster && item.subpixel && ctx.drawSubpixelImage;
-  // Snap shared edges, not an origin plus a fractional size. Otherwise adjoining
-  // pieces (forest repeats, facades) leave gaps or overlap at non-integral zoom.
-  // Quantize actor dimensions directly, then pin the foot anchor. Subtracting
-  // projected edges can change half-pixel ties through floating-point cancellation.
-  const destW = subpixel
-    ? Math.max(1, Math.round(item.spriteWidth * camera.scale))
-    : Math.floor(end.sx) - Math.floor(screen.sx);
-  const destH = subpixel
-    ? Math.max(1, Math.round(item.spriteHeight * (item.scaleY ?? 1) * camera.scale))
-    : Math.floor(end.sy) - Math.floor(screen.sy);
-  const dx = subpixel ? end.sx - halfW * camera.scale - destW / 2 : Math.floor(screen.sx);
-  const dy = subpixel ? end.sy - destH : Math.floor(screen.sy);
+  const destW = Math.floor(end.sx) - Math.floor(screen.sx);
+  const destH = Math.floor(end.sy) - Math.floor(screen.sy);
+  const dx = Math.floor(screen.sx),
+    dy = Math.floor(screen.sy);
   const alpha = item.alpha === undefined ? undefined : Math.max(0, Math.min(1, item.alpha));
-  if (ctx.drawSpriteImage && !item.emergencyFlash) {
-    ctx.drawSpriteImage(
-      sheet.image,
-      sourceX,
-      sourceY,
-      item.spriteWidth,
-      item.spriteHeight,
-      dx,
-      dy,
-      destW,
-      destH,
-      item.flipX,
-      alpha,
-      Boolean(subpixel),
-    );
-    return;
-  }
-  const drawImage =
-    (subpixel ? ctx.drawSubpixelImage : camera.worldRaster ? ctx.drawStableImage : undefined) ??
-    ctx.drawImage;
+  const drawImage = ctx.drawImage;
 
   ctx.save();
   if (alpha !== undefined) ctx.globalAlpha = alpha;
@@ -358,18 +289,12 @@ function drawElevation(
   const tileSx = Math.round(screen.sx);
   const tileSy = Math.round(screen.sy);
   const cliffH = item.height * ELEVATION_PX * camera.scale;
-  const end = camera.worldToScreen(item.wx + TILE_SIZE, item.wy + TILE_SIZE);
-  const raised = camera.worldToScreen(item.wx, item.wy - item.height * ELEVATION_PX);
-  const w = camera.worldRaster ? Math.round(end.sx) - tileSx : tileScreenSize;
-  const surfaceY = camera.worldRaster ? Math.round(raised.sy) : tileSy - cliffH;
-  const surfaceH = camera.worldRaster
-    ? Math.round(raised.sy + tileScreenSize) - surfaceY
-    : tileScreenSize;
-  const cliffY = camera.worldRaster
-    ? Math.round(raised.sy + tileScreenSize)
-    : tileSy + tileScreenSize - cliffH;
-  const faceH = camera.worldRaster ? Math.round(end.sy) - cliffY : cliffH;
-  const drawImage = (camera.worldRaster ? ctx.drawStableImage : undefined) ?? ctx.drawImage;
+  const w = tileScreenSize,
+    surfaceY = tileSy - cliffH,
+    surfaceH = tileScreenSize;
+  const cliffY = tileSy + tileScreenSize - cliffH,
+    faceH = cliffH;
+  const drawImage = ctx.drawImage;
 
   if (item.phase === "surface") {
     // Elevated tile shifted up

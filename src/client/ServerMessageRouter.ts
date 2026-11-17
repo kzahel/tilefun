@@ -4,7 +4,7 @@ import type { SceneManager } from "../core/SceneManager.js";
 import type { EditorModel } from "../editor/EditorModel.js";
 import type { GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import type { Camera } from "../rendering/Camera.js";
-import type { RenderBackend } from "../rendering/RenderFrame.js";
+import type { RenderResources } from "../rendering/RenderFrame.js";
 import { MenuScene } from "../scenes/MenuScene.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import type { RealmInfo, ServerMessage } from "../shared/protocol.js";
@@ -25,7 +25,7 @@ export interface ServerMessageHost {
   readonly stateView: RemoteStateView;
   readonly canvas: HTMLCanvasElement;
   readonly camera: Camera;
-  readonly renderer: RenderBackend;
+  readonly renderer: RenderResources;
   /** Device presentation (scene frame and every view's fades), reset with the realm,
    * and its local seats. */
   readonly device: Pick<DeviceSession, "clearPresentation" | "seats">;

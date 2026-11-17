@@ -45,8 +45,6 @@ export class GpuSceneSurface {
     this.renderer.clear();
     this.pages.beginFrame();
   }
-  /** Immediate Three rendering has no queued raster commands. */
-  flush() {}
   clearResources() {
     this.pages.clear();
   }

@@ -7,7 +7,7 @@ import { test } from "node:test";
 import { deserialize, serialize } from "node:v8";
 import { readTape } from "./tape.js";
 
-test("binary recording replays deterministically through client and real-mesh collection", async () => {
+test("binary recording replays deterministically through client and unified sprite collection", async () => {
   const directory = await mkdtemp(path.join(os.tmpdir(), "tilefun-crowd-test-"));
   const recording = path.join(directory, "scene.tape");
   const run = (args: string[]) => {
@@ -38,8 +38,7 @@ test("binary recording replays deterministically through client and real-mesh co
       run(["--lane=render", `--replay=${recording}`, "--verify", `--output=${file}`]);
       const render = JSON.parse(await readFile(file, "utf8"));
       assert.equal(render.stages["render.prepare"].count, 20);
-      assert.equal(render.workload.meshes.length, 1);
-      assert.ok(render.workload.meshes[0].triangles > 0);
+      assert.equal(render.workload.presentation, "unified-sprites-v1");
       assert.ok(render.work.meanSceneItems >= 10);
       assert.equal(render.outcome.finalStateSha256, client.outcome.finalStateSha256);
       assert.equal(render.outcome.allStatesSha256, client.outcome.allStatesSha256);
