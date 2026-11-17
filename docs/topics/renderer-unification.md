@@ -1,9 +1,9 @@
 # Renderer unification
 
 Topic: renderer-unification
-Status: retiring the fixed GPU world renderer, owner-authorized 2026-11-17.
-The unified scene now owns all interactive consumers in the working change;
-validation and hosted Linux qualification are tracked in
+Status: fixed GPU world renderer retired, owner-authorized 2026-11-17.
+The unified scene owns every interactive consumer. Local validation, regression
+corrections and passing hosted Linux qualification are recorded in
 [253](../tactical/253-retire-fixed-world-renderer.md).
 Updated: 2026-11-17.
 
@@ -110,8 +110,8 @@ row when a slice starts, delivers or is blocked.
 | 2 — Ground artwork, shared page atlas | Done 2026-11-14: the 3D ground wears the fixed view's terrain pages, and 3D cards read the same atlas instead of whole-sheet textures (99.6 MiB → 4.6 MiB of card artwork in the city) | [250](../tactical/250-ground-artwork-and-shared-pages.md) |
 | 3 — Top-down camera, parity probe, draw calls, device scorecard | Done 2026-11-14: `?view=topdown3d` / `r_topdown3d` draws top-down play through the 3D scene; the parity probe gives the checklist numbers; static content is merged into 4 to 25 draws; measured on the Mac, Pixel 7a and Deck, with a go on draw-call cost | [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) |
 | 4 — XR on the shared scene | Done 2026-11-14 for owner play: the world menu's **Headset** buttons start a WebXR session as a floating screen, immersive first person or a tabletop miniature, with the headset's controllers as seat 0's pad; all three hold 72 Hz on a Quest 3 in `city` and `woods`. Comfort and the controller mapping are not yet checked by a wearer | [252](../tactical/252-xr-on-the-shared-scene.md) |
-| 5 — Top-down parity | In progress since 2026-11-15: building bodies match their artwork (solid props identical at 1×), grass blades are drawn (99% overlap), and since 2026-11-16 vehicles are the fixed view's outlined pixel images (identical at 1×). 2026-11-17: actors' feet show over the ground and excavation roofs fade; sprite edges waived | checklist below |
-| 6 — Opt-in, default, retirement | Opt-in and default done 2026-11-16 (owner instruction); the Options choice removed 2026-11-17, the first step of retirement | gate below |
+| 5 — Top-down parity | Retirement authorized 2026-11-17; historical comparisons retained below: building bodies match their artwork (solid props identical at 1×), grass blades are drawn (99% overlap), and since 2026-11-16 vehicles are the fixed view's outlined pixel images (identical at 1×). 2026-11-17: actors' feet show over the ground and excavation roofs fade; sprite edges waived | checklist below |
+| 6 — Opt-in, default, retirement | Opt-in and default done 2026-11-16 (owner instruction); retirement completed 2026-11-17: all consumers migrated, fixed GPU passes/probes removed, local and hosted qualification passed | [253](../tactical/253-retire-fixed-world-renderer.md) |
 
 ## Top-down parity checklist
 
@@ -542,13 +542,16 @@ Three owner decisions, in order. Each needs the evidence listed.
    the owner and child play review has not happened yet.
 3. **Retirement.** The fixed GPU backend's world drawing is deleted. Needs a
    period as default without reported regressions, and probes and labs moved or
-   retired. The review raster stays.
+   retired. The review raster stays. **Authorized and completed 2026-11-17**
+   in 253: shared terrain/atlas/body-image resources retained, immutable review
+   pixels unchanged, broad local coverage and hosted Linux smoke/native gates
+   passed. No child play approval or new physical-device scorecard is inferred.
 
 ## Retirement inventory
 
 253 migrates the following consumers; its execution record owns validation.
-The original inventory supplied the scope rather than permission to remove
-shared image resources.
+All rows are complete; 253 records the broad run, bounded correction reruns and
+final passing hosted revision. Shared image resources remain.
 
 | Consumer | Retirement change |
 | --- | --- |
@@ -669,8 +672,6 @@ changed by this investigation.
 
 ## Next
 
-- Finish 253's broad local and hosted-Linux qualification; the retirement
-  implementation is already on the unified scene.
 - Family play review remains useful for feel and device regressions. No child
   approval is inferred from the owner's retirement authorization.
 - Excavation floor visibility from outside and a real generated garage remain

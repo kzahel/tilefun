@@ -11,7 +11,7 @@ rasters, page atlases, vehicle body images and the immutable review raster.
 - [x] Replace fixed-pass assertions with shared/unified presentation diagnostics.
 - [x] Replace loading/failure/context-loss fallback drawing with explicit frames.
 - [x] Retire fixed-only renderer probes, parity captures and world drawing passes.
-- [ ] Validate affected native/browser contracts and hosted Linux; update the topic inventory.
+- [x] Validate affected native/browser contracts and hosted Linux; update the topic inventory.
 
 Validation uses pinned Node 24, isolated local data and bundled Chromium. Render
 changes refresh the catalog then manifest before production/browser checks.
@@ -39,7 +39,7 @@ Current local evidence: typechecks, repository lint/Knip/health, 74 focused nati
 cases, 26 card/view cases, the production build and 2,130 exact review pixel
 identities pass. The first room follow-up passed 13 of 14; its remaining bed
 regression then passed separately after the depth correction. Broad native and
-browser validation and hosted Linux are in progress. The broad native run passed
+browser and hosted results are recorded below. The broad native run passed
 5,614 cases and found two fixed-pass expectations; the three affected tests pass
 after migration, and Node integration passes. The streaming readiness assertion
 passes cold/standing/walk/sprint/reverse/zoom with zero final missing, incomplete
@@ -73,8 +73,7 @@ The smoke asserts an actual unified world frame, so green is not an empty canvas
 
 Additional local captures inspected the shared terrain blend preview (pond) and
 prop editor entered from an FPS seat. Both render correctly with no page errors.
-The full stable-build browser suite remains in progress; record its final result
-before closing the retirement slice.
+The broad browser result and the later correction are recorded below.
 
 ## Broad browser result and cutaway correction
 
@@ -99,6 +98,28 @@ its deadline or assertions. Graceful termination had stalled on its test databas
 force-stopping that confirmed orphan released the port.
 
 Render inventories and the completed production build were refreshed after the
-cutaway fix; all 2,130 registered pixel fingerprints remain identical. Hosted CI will be repeated on the corrected revision. The other 537 browser cases exercised the
-migration commit; the correction changes only overhead deck presentation and is
+cutaway fix; all 2,130 registered pixel fingerprints remain identical. The other 537 browser cases exercised the migration commit; the correction changes only overhead deck presentation and is
 covered by the focused geometry/furniture rerun, rather than another full suite.
+
+## Completion — 2026-11-17
+
+The fixed GPU world renderer is retired. Implementation commits are `c7b1c0ff`
+and `3f7d9435`. The final
+[Ubuntu CI run 44062146394](https://github.com/kzahel/tilefun/actions/runs/44062146394)
+passed every gate on exact revision `3f7d94353d6878b8fe3216ce0f45507c23e98e0f`:
+5,616 native cases, eleven Worker cases, four Node/HTTP integration cases, twelve
+software-WebGL browser smoke cases, immutable raster verification, audits,
+lint/Knip/health, typechecks and the production build. Deployment was skipped.
+
+Local evidence combines the 539-case broad browser run with the unchanged
+cutaway test and affected geometry/furniture rerun (13 passed), plus standalone
+review after orphan cleanup (one passed). One deer locomotion case needed the
+suite's existing retry. The broad suite was not repeated after the bounded
+cutaway correction. Streaming readiness passed; all 2,130 review pixel identities
+remain unchanged. The final documentation-only commit does not change tested code.
+
+No new phone, Deck or headset performance is claimed. Next is family play review
+on the unified scene, with device checks for feel; headset comfort/controller
+checks remain owned by 252. The implementation is committed locally and the
+validation ref is remote; main was not pushed or deployed. Mark development ready
+after this record is committed, leaving players in control of Save and reload.

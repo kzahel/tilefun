@@ -3,7 +3,7 @@
 [248](../tactical/248-renderer-unification.md) established one world scene:
 `FirstPersonView`, with top-down, first-person, driving and XR cameras. The
 owner authorized fixed-world retirement on 2026-11-17; [253](../tactical/253-retire-fixed-world-renderer.md)
-tracks migration and validation. [Renderer unification](renderer-unification.md)
+records completed migration and validation. [Renderer unification](renderer-unification.md)
 owns the current inventory and device evidence.
 
 `RenderHost.view3d` lends each view the host's `WebGLRenderer`, bound to its
