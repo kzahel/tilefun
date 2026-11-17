@@ -2,7 +2,7 @@ import type { Entity } from "../entities/Entity.js";
 import { interpolateRotation } from "../physics/BodyRotation.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { interpolateHeading } from "../rendering/PresentationTimeline.js";
-import { samplePredictedPose } from "./PredictionPresentation.js";
+import { motionLead, samplePredictedPose } from "./PredictionPresentation.js";
 
 interface Handoff {
   selected: boolean;
@@ -20,6 +20,7 @@ interface CommittedFrame {
   local: ReadonlySet<number>;
   inContact(id: number): boolean;
 }
+type OwnsPose = (entity: Entity) => boolean;
 
 const BASE_DURATION = 0.16;
 const RELOCATION = 32;
@@ -84,6 +85,7 @@ export class NearbyPredictionPresentation {
     selected: Map<number, Entity>,
     now: number,
     committed?: CommittedFrame,
+    carrierOwns?: OwnsPose,
   ): Entity[] {
     if (!this.handoffs.size && !selected.size) return [...buffered];
     const remaining = new Set(this.handoffs.keys());
@@ -92,7 +94,14 @@ export class NearbyPredictionPresentation {
       const state = this.handoffs.get(id);
       if (state) remaining.delete(id);
       const selectedPose = selected.get(id);
-      const pose = this.presentBody(entity, selectedPose, state, now, committed);
+      const pose = this.presentBody(
+        entity,
+        selectedPose,
+        state,
+        now,
+        committed,
+        carrierOwns?.(selectedPose ?? entity) === true,
+      );
       if (selectedPose) selected.set(id, pose);
       return pose;
     });
@@ -106,6 +115,7 @@ export class NearbyPredictionPresentation {
     state: Handoff | undefined,
     now: number,
     committed: CommittedFrame | undefined,
+    carrierOwns: boolean,
   ): Entity {
     const { id } = entity;
     if (!committed && selectedPose) {
@@ -113,11 +123,7 @@ export class NearbyPredictionPresentation {
       return selectedPose; // Hold the last committed draw during replay.
     }
     if (!selectedPose && !state) return entity;
-    if (
-      entity.physicsGroupId !== undefined ||
-      selectedPose?.physicsGroupId !== undefined ||
-      committed?.local.has(id)
-    ) {
+    if (carrierOwns || committed?.local.has(id)) {
       this.handoffs.delete(id);
       return selectedPose ?? entity;
     }
@@ -163,10 +169,9 @@ export class NearbyPredictionPresentation {
       body && prev ? (body.position.wx - prev.wx) / PHYSICS_DT : (predicted.velocity?.vx ?? 0);
     const vy =
       body && prev ? (body.position.wy - prev.wy) / PHYSICS_DT : (predicted.velocity?.vy ?? 0);
-    const speedSq = vx * vx + vy * vy;
     // A difference explained by up to two seconds of travel is a timeline lead.
     // A discontinuity beyond that allowance takes effect immediately.
-    const lead = Math.max(-2, Math.min(2, (dx * vx + dy * vy) / (speedSq || 1)));
+    const lead = motionLead(dx, dy, vx, vy);
     const dz = (predicted.wz ?? 0) - (buffered.wz ?? 0);
     const relocated = Math.hypot(dx - vx * lead, dy - vy * lead, dz) >= RELOCATION;
     // Smoothstep's maximum slope is 1.5. Spread the longitudinal gap over

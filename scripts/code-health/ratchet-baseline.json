@@ -68,9 +68,9 @@
       "overLimit": 0
     },
     "src/client/PlayerPredictor.ts": {
-      "lines": 925,
+      "lines": 841,
       "worst": 40,
-      "overLimit": 2
+      "overLimit": 1
     },
     "src/editor/collectEditorOverlay.ts": {
       "lines": 294,

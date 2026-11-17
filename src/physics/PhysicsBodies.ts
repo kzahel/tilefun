@@ -32,6 +32,13 @@ export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
   return "fixed";
 }
 
+/** How the solver admits motion. Prescribed bodies follow their own trajectory
+ * while dynamic bodies and their riders can affect each other through contacts. */
+export function physicsBodyMotion(entity: Entity, kind?: PhysicsBodyKind) {
+  if (isTrain(entity)) return "prescribed";
+  return (kind ?? physicsBodyKind(entity)) === "fixed" ? "fixed" : "dynamic";
+}
+
 /** Outer dimensions in world pixels, shared by Rapier and read-only inspection.
  * Facing never rotates a character footprint. Vehicle dimensions stay canonical;
  * the body yaw rotates them exactly once. */

@@ -3,6 +3,7 @@ import { updatePlayerSpriteFromInput } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
 import { getGravityScale } from "../physics/Gravity.js";
+import { physicsBodyMotion } from "../physics/PhysicsBodies.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { type PhysicsGeometry, PhysicsScene } from "../physics/PhysicsScene.js";
 import type { MotionIntent } from "../physics/PhysicsState.js";
@@ -16,12 +17,14 @@ import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
 import type { Movement } from "../shared/Movement.js";
 import { isDrivable } from "../traffic/VehicleSeats.js";
 import type { World } from "../world/World.js";
+import { CarrierPresentation } from "./CarrierPresentation.js";
 import { NearbyPredictionPresentation } from "./NearbyPredictionPresentation.js";
 import { predictionGeometry } from "./PredictionGeometry.js";
 import { PredictionHistory } from "./PredictionHistory.js";
 import {
   activePresentationIds,
   expandCoherentMembers,
+  movingSupportIds,
   samplePredictedPose,
 } from "./PredictionPresentation.js";
 import {
@@ -35,7 +38,6 @@ import {
   capturePredictionBodies,
   clonePredictionEntity as clone,
   predictionDistance as distance,
-  type ReplayPose,
   replayPose,
 } from "./PredictionSnapshots.js";
 import { PredictionWork } from "./PredictionWork.js";
@@ -130,11 +132,7 @@ export class PlayerPredictor {
   private correctionMembers = new Set<number>();
   private readonly nearbyPresentation = new NearbyPredictionPresentation();
   private readonly lastPresentation = new Map<number, Entity>();
-  private readonly groupErrors = new Map<number, { x: number; y: number; z: number; at: number }>();
-  private readonly releasedGroups = new Map<
-    number,
-    { x: number; y: number; z: number; at: number; duration: number }
-  >();
+  private readonly carriers = new CarrierPresentation();
   private diagnostics: ReconcileDiagnostics | null = null;
   /** The co-seats of the latest stored input and their own display corrections (226). */
   private readonly coSeats: CoSeats;
@@ -192,9 +190,8 @@ export class PlayerPredictor {
     this.correctionAnchor = undefined;
     this.correctionMembers.clear();
     this.lastPresentation.clear();
-    this.releasedGroups.clear();
+    this.carriers.clear();
     this.nearbyPresentation.clear();
-    this.groupErrors.clear();
     this.activeUntil = -Infinity;
     this.diagnostics = null;
   }
@@ -218,9 +215,8 @@ export class PlayerPredictor {
     this.correctionAnchor = undefined;
     this.correctionMembers.clear();
     this.lastPresentation.clear();
-    this.releasedGroups.clear();
+    this.carriers.clear();
     this.nearbyPresentation.clear();
-    this.groupErrors.clear();
     this.status = "waiting";
   }
   /** `seats` carries every co-seat's movement, idle or not, under the same sequence (226). */
@@ -464,7 +460,7 @@ export class PlayerPredictor {
       beforeMembers = this.correctionMembers,
       oldError = this.error();
     this.publish(job.request.player);
-    this.reconcileGroupErrors(beforeBodies, job.comparison?.bodies);
+    this.carriers.reconcile(this.published, beforeBodies, job.comparison?.bodies, this.clock());
     const seatCorrections = this.coSeats.settle(
       beforeBodies,
       job.comparison?.bodies,
@@ -513,7 +509,7 @@ export class PlayerPredictor {
     // A prescribed carrier cannot be pushed by player prediction. Preserve the
     // rider's own residual through landing instead of transferring it to that
     // carrier or dropping it when contact ownership changes.
-    if (this.published.get(anchor)?.physicsGroupId !== undefined && compared) {
+    if (compared && this.hasPrescribedContact(after, anchor)) {
       offset.x = job.before.position.wx - compared.position.wx + oldError.x;
       offset.y = job.before.position.wy - compared.position.wy + oldError.y;
       offset.z = (job.before.wz ?? 0) - (compared.wz ?? 0) + oldError.z;
@@ -604,7 +600,7 @@ export class PlayerPredictor {
     // the merged group there instead of pulling that actor toward the player.
     if (incoming !== undefined) {
       this.correctionAnchor = incoming;
-      if (this.published.get(incoming)?.physicsGroupId === undefined)
+      if (!this.hasPrescribedMotion(incoming))
         this.displayError = { x: 0, y: 0, z: 0, at: this.clock() };
     } else if (
       this.correctionAnchor === undefined ||
@@ -696,103 +692,16 @@ export class PlayerPredictor {
     // camera follows the displayed pose on the monotonic render clock instead.
     return { time: presentationSeconds, domain: this.clockEpoch };
   }
-  private groupError(id: number) {
-    const error = this.groupErrors.get(id);
-    const decay = error ? Math.exp(-Math.max(0, this.clock() - error.at) / 0.06) : 0;
-    return { x: (error?.x ?? 0) * decay, y: (error?.y ?? 0) * decay, z: (error?.z ?? 0) * decay };
+  private hasPrescribedMotion(id: number | undefined): boolean {
+    const body = id === undefined ? undefined : this.published.get(id);
+    return !!body && physicsBodyMotion(body) === "prescribed";
   }
-  /** Prescribed bodies have their own matching-tick correction, independent of
-   * rider input/contact errors. Every member shares the same group transform. */
-  private reconcileGroupErrors(
-    before: ReadonlyMap<number, Entity>,
-    compared?: ReadonlyMap<number, ReplayPose>,
-  ) {
-    const groups = new Map<number, Entity>();
-    for (const e of this.published.values())
-      if (e.physicsGroupId !== undefined)
-        groups.set(e.physicsGroupId, this.published.get(e.physicsGroupId) ?? e);
-    for (const id of this.groupErrors.keys()) if (!groups.has(id)) this.groupErrors.delete(id);
-    for (const [id, anchor] of groups) {
-      const previous = before.get(anchor.id),
-        matching = compared?.get(anchor.id),
-        retained = this.groupError(id);
-      if (!previous || !matching) {
-        this.groupErrors.delete(id);
-        continue;
-      }
-      const error = {
-        x: previous.position.wx - matching.x + retained.x,
-        y: previous.position.wy - matching.y + retained.y,
-        z: (previous.wz ?? 0) - matching.z + retained.z,
-      };
-      this.groupErrors.set(id, {
-        ...(Math.hypot(error.x, error.y, error.z) < 32 ? error : { x: 0, y: 0, z: 0 }),
-        at: this.clock(),
-      });
-    }
+
+  private hasPrescribedContact(player: Entity, anchor: number): boolean {
+    const support = this.scene?.bodyState(player.parentId ?? player.id)?.supportId;
+    return this.hasPrescribedMotion(support) || this.hasPrescribedMotion(anchor);
   }
-  /** A departing prescribed group eases from predicted time back to the remote
-   * buffer as one translation. Sampling its current predicted interval first
-   * avoids losing a tick of real travel at the handoff. No physics pose changes. */
-  private releasePresentationGroups(
-    buffered: readonly Entity[],
-    selected: { has(id: number): boolean },
-    alpha: number,
-  ): readonly Entity[] {
-    let needed = this.releasedGroups.size > 0;
-    for (const e of this.lastPresentation.values()) needed ||= e.physicsGroupId !== undefined;
-    if (!needed) return buffered;
-    const now = this.clock(),
-      present = new Set<number>();
-    let released: Entity[] | undefined;
-    for (const [index, e] of buffered.entries()) {
-      const group = e.physicsGroupId;
-      if (group === undefined) continue;
-      present.add(group);
-      if (selected.has(e.id)) {
-        this.releasedGroups.delete(group);
-        continue;
-      }
-      let shift = this.releasedGroups.get(group);
-      const previous = this.lastPresentation.get(e.id),
-        predicted = this.published.get(e.id);
-      if (!shift && previous && predicted) {
-        const p = predicted.prevPosition ?? predicted.position,
-          c = this.groupError(group),
-          vx = (predicted.position.wx - p.wx) / PHYSICS_DT,
-          vy = (predicted.position.wy - p.wy) / PHYSICS_DT,
-          x = p.wx + vx * PHYSICS_DT * alpha + c.x - e.position.wx,
-          y = p.wy + vy * PHYSICS_DT * alpha + c.y - e.position.wy,
-          z = (predicted.prevWz ?? predicted.wz ?? 0) * (1 - alpha) + (predicted.wz ?? 0) * alpha,
-          dz = z + c.z - (e.wz ?? 0);
-        // A moving group's buffer trails by its travel over Worker/buffer delays (within
-        // the 2s input history); only the remainder is a relocation. The explained
-        // lead dissolves at no more than half the group's speed.
-        const lead = Math.min(2, Math.max(0, (x * vx + y * vy) / (vx * vx + vy * vy || 1)));
-        shift = { x, y, z: dz, at: now, duration: 0.2 + 3 * lead };
-        if (Math.hypot(x - vx * lead, y - vy * lead, dz) < 32)
-          this.releasedGroups.set(group, shift);
-        else shift = undefined; // An explicit relocation must remain a relocation.
-      }
-      if (!shift) continue;
-      const t = Math.min(1, Math.max(0, (now - shift.at) / shift.duration)),
-        factor = 1 - t * t * (3 - 2 * t);
-      if (!factor) {
-        this.releasedGroups.delete(group);
-        continue;
-      }
-      const position = {
-          wx: e.position.wx + shift.x * factor,
-          wy: e.position.wy + shift.y * factor,
-        },
-        z = (e.wz ?? 0) + shift.z * factor;
-      released ??= [...buffered];
-      released[index] = { ...e, position, prevPosition: position, wz: z, prevWz: z };
-    }
-    for (const id of this.releasedGroups.keys())
-      if (!present.has(id)) this.releasedGroups.delete(id);
-    return released ?? buffered;
-  }
+
   /** Nearby bodies approach predicted time; solved contacts share one pose transform. */
   presentEntities(alpha: number, buffered: readonly Entity[]): Entity[] {
     const player = this.predicted,
@@ -802,22 +711,25 @@ export class PlayerPredictor {
     // departing actors ease with the buffer while unrelated actors advance.
     if (this.status === "replaying")
       return this.nearbyPresentation.present(
-        this.releasePresentationGroups(buffered, this.lastPresentation, alpha),
+        this.carriers.release(buffered, this.lastPresentation, this.published, alpha, now),
         this.lastPresentation,
         now,
+        undefined,
+        this.carriers.owns,
       );
     if (!player || !scene || this.status !== "ready") {
-      const released = this.releasePresentationGroups(buffered, new Set(), alpha);
       this.lastPresentation.clear();
       this.nearbyPresentation.clear();
-      return [...released];
+      this.carriers.clear();
+      return [...buffered];
     }
     const local = new Set([player.id, player.parentId ?? player.id, ...this.coSeats.bodyIds()]);
     const component = this.active
       ? activePresentationIds(player, this.published, local)
       : new Set(this.drivenPresentationIds(player));
     if (component.size) expandCoherentMembers(component, this.published, scene);
-    const releasing = this.releasePresentationGroups(buffered, component, alpha);
+    const releasing = this.carriers.release(buffered, component, this.published, alpha, now);
+    const supports = movingSupportIds(local, this.published, scene);
     this.lastPresentation.clear();
     const touching = this.correctionMembers;
     const error = this.error();
@@ -834,12 +746,10 @@ export class PlayerPredictor {
       const predicted = entity.id === player.id ? player : this.published.get(entity.id);
       if (!predicted) continue;
       const corrected = touching.has(entity.id);
-      const groupOffset =
-        predicted.physicsGroupId === undefined
-          ? undefined
-          : this.groupError(predicted.physicsGroupId);
+      const carrierOffset = this.carriers.offset(predicted, now);
       const seatOffset = corrected ? undefined : this.coSeats.offset(entity.id, scene);
-      const offset = groupOffset ?? seatOffset ?? (corrected ? contactOffset : undefined);
+      const offset = carrierOffset ?? seatOffset ?? (corrected ? contactOffset : undefined);
+      this.carriers.track(predicted, offset, supports.has(entity.id));
       this.lastPresentation.set(
         entity.id,
         samplePredictedPose(
@@ -850,12 +760,18 @@ export class PlayerPredictor {
         ),
       );
     }
-    const presented = this.nearbyPresentation.present(releasing, this.lastPresentation, now, {
-      bodies: this.published,
-      alpha,
-      local,
-      inContact: (id) => touching.has(id) || !!scene.contactIds(id)?.size,
-    });
+    const presented = this.nearbyPresentation.present(
+      releasing,
+      this.lastPresentation,
+      now,
+      {
+        bodies: this.published,
+        alpha,
+        local,
+        inContact: (id) => touching.has(id) || !!scene.contactIds(id)?.size,
+      },
+      this.carriers.owns,
+    );
     return this.coSeats.presentRiders(presented, buffered, this.lastPresentation);
   }
   get player() {

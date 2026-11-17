@@ -1,5 +1,18 @@
 # Player prediction and moving contacts
 
+Moving-surface presentation (2026-11-17) follows each local rider's solved
+support. A prescribed carrier keeps its matching-tick display correction
+independent of the rider's correction. A dynamic carrier shares the solved
+contact correction while coupled. After separation, either kind of support
+can ease back to buffered time as one unit, including across sliced replay.
+An optional physics group keeps multiple bodies on the same display timeline.
+Native regressions exercise delayed takeoff, landing and departure on a single
+prescribed platform and a train consist, plus departure from a driven car roof.
+The single-body test reproduced a 1.42 px backward rider step near landing
+before the fix, while the carrier continued 1.60 px forward.
+The ordinary Worker train roof ride, Workshop station lifecycle, two-session
+Worker lab and ordinary vehicle placement checks pass in Chromium.
+
 [Stop-and-go vehicle jumps](../research/stop-go-vehicle-prediction.md)
 (2026-11-17) fixes backward and forward snaps on throttle release and resume.
 The 300 ms activity gate used the seated avatar's zero velocity and switched

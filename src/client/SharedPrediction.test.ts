@@ -4,6 +4,7 @@ import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { PhysicsScene } from "../physics/PhysicsScene.js";
+import { createTrainCarriages } from "../railway/Train.js";
 import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import { drivingBenchRecipe } from "../scenarios/DrivingBenchRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
@@ -884,74 +885,102 @@ it("presents a ridden consist at one predicted time including distant uncontacte
   }
 });
 
-it("keeps the train and rider display continuous through delayed takeoff, landing and alighting", async () => {
-  const f = await setup(cityTrainRecipe());
-  f.view.setPredictor(f.predictor);
-  const service = [...(f.s.realm.railways?.services.values() ?? [])][0];
-  const train = service?.cars[1];
-  if (!service || !train) throw Error("Missing service");
-  await f.s.command({ kind: "teleport", position: train.position, z: 44 });
-  service.record.dwell = 0;
-  service.record.speed = 192;
-  f.s.tick();
-  f.receive(f.s.frames());
-  const queued: ArrayBuffer[][] = [];
-  const samples: {
-    tick: number;
-    x: number;
-    px: number;
-    y: number;
-    z: number;
-    error: number;
-    status: string;
-  }[] = [];
-  for (let tick = 0; tick < 240; tick++) {
-    const movement = {
-      ...idle,
-      dx: tick >= 100 && tick < 104 ? 1 : 0,
-      jump: tick === 70 || tick === 150,
-      dy: tick >= 150 && tick < 180 ? 1 : 0,
-    };
-    const seq = tick + 10;
-    f.input(seq, movement);
-    // Rejected/dropped strafe controls force a rider-only reconciliation near
-    // landing; they must never move the prescribed train's display.
-    f.s.input(encodeClientMessage({ type: "player-input", seq, ...movement, dx: 0 }));
-    f.s.tick();
-    queued.push(f.s.frames());
-    if (queued.length > 3) f.receive(queued.shift() ?? []);
-    f.predictor.update(PHYSICS_DT, movement, f.view.world, f.view.props, f.view.serverEntities);
-    for (const alpha of [0.25, 0.75]) {
-      f.view.beginPresentation(f.now() - PHYSICS_DT * (1 - alpha), alpha);
-      const c = f.view.entities.find((e) => e.id === train.id),
-        p = f.view.presentedPlayerEntity;
-      if (!c) throw Error("Missing displayed train");
-      samples.push({
-        tick: tick + alpha,
-        x: c.position.wx,
-        px: p.position.wx,
-        y: p.position.wy,
-        z: p.wz ?? 0,
-        error: f.predictor.lastReconcileDiagnostics?.resimPosErr ?? 0,
-        status: f.predictor.recoveryDiagnostics.status,
-      });
-      f.view.endPresentation();
-    }
+async function movingCarrier(membership: "grouped" | "ungrouped") {
+  if (membership === "grouped") {
+    const f = await setup(cityTrainRecipe());
+    const service = required([...required(f.s.realm.railways).services.values()][0]);
+    service.record.dwell = 0;
+    service.record.speed = 192;
+    return { f, carrier: required(service.cars[1]) };
   }
-  const jumps = samples
-    .slice(1)
-    .map((s, i) => ({
-      tick: s.tick,
-      dx: s.x - (samples[i]?.x ?? 0),
-      pdx: s.px - (samples[i]?.px ?? 0),
-      status: s.status,
-    }))
-    .filter(
-      (s) =>
-        s.tick > 40 && (s.dx < 0 || s.dx > 2.2 || (s.tick < 145 && (s.pdx < 0 || s.pdx > 3.2))),
+  // One actual kinematic body, with neither a rail service nor a motion group.
+  // Submit a straight trajectory through the ordinary authority step.
+  const platform = required(createTrainCarriages(100, 100, [0, 0, 0])[1]);
+  const f = await setup({
+    version: 1,
+    id: "single-moving-support",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(100, 140),
+    actors: [platform],
+    props: [],
+  });
+  const manager = f.s.realm.entityManager;
+  const carrier = required(manager.entities.find((entity) => entity.type === platform.type));
+  // Standalone fixture bodies are transient, like the bodies a rail service admits.
+  f.s.realm.backgroundResidents.add(carrier);
+  carrier.motionIntent = { vx: 192, vy: 0, altitude: 0, heading: 0 };
+  return { f, carrier };
+}
+
+it.each(["grouped", "ungrouped"] as const)(
+  "keeps a %s carrier and rider continuous through delayed takeoff, landing and alighting",
+  async (membership) => {
+    const { f, carrier } = await movingCarrier(membership);
+    f.view.setPredictor(f.predictor);
+    await f.s.command({ kind: "teleport", position: carrier.position, z: 44 });
+    f.s.tick();
+    f.receive(f.s.frames());
+    const queued: ArrayBuffer[][] = [];
+    const samples: {
+      tick: number;
+      x: number;
+      px: number;
+      y: number;
+      z: number;
+      error: number;
+      status: string;
+    }[] = [];
+    for (let tick = 0; tick < 240; tick++) {
+      const movement = {
+        ...idle,
+        dx: tick >= 100 && tick < 104 ? 1 : 0,
+        jump: tick === 70 || tick === 150,
+        dy: tick >= 150 && tick < 180 ? 1 : 0,
+      };
+      const seq = tick + 10;
+      f.input(seq, movement);
+      // Rejected/dropped strafe controls force a rider-only reconciliation near
+      // landing; they must never move the prescribed carrier's display.
+      f.s.input(encodeClientMessage({ type: "player-input", seq, ...movement, dx: 0 }));
+      f.s.tick();
+      queued.push(f.s.frames());
+      if (queued.length > 3) f.receive(queued.shift() ?? []);
+      f.predictor.update(PHYSICS_DT, movement, f.view.world, f.view.props, f.view.serverEntities);
+      for (const alpha of [0.25, 0.75]) {
+        f.view.beginPresentation(f.now() - PHYSICS_DT * (1 - alpha), alpha);
+        const c = f.view.entities.find((e) => e.id === carrier.id),
+          p = f.view.presentedPlayerEntity;
+        if (!c) throw Error("Missing displayed carrier");
+        samples.push({
+          tick: tick + alpha,
+          x: c.position.wx,
+          px: p.position.wx,
+          y: p.position.wy,
+          z: p.wz ?? 0,
+          error: f.predictor.lastReconcileDiagnostics?.resimPosErr ?? 0,
+          status: f.predictor.recoveryDiagnostics.status,
+        });
+        f.view.endPresentation();
+      }
+    }
+    const jumps = samples
+      .slice(1)
+      .map((s, i) => ({
+        tick: s.tick,
+        dx: s.x - (samples[i]?.x ?? 0),
+        pdx: s.px - (samples[i]?.px ?? 0),
+        status: s.status,
+      }))
+      .filter(
+        (s) =>
+          s.tick > 40 && (s.dx < 0 || s.dx > 2.2 || (s.tick < 145 && (s.pdx < 0 || s.pdx > 3.2))),
+      );
+    expect(jumps).toEqual([]);
+    expect(f.view.serverEntityMap.get(carrier.id)?.physicsGroupId).toBe(
+      membership === "grouped" ? carrier.id : undefined,
     );
-  expect(jumps).toHaveLength(0);
-});
+  },
+);
 
 it("eases a departing train back to a lagging buffer, including across sliced replay frames", async () => {
   const f = await setup(cityTrainRecipe());
@@ -1008,4 +1037,50 @@ it("eases a departing train back to a lagging buffer, including across sliced re
   expect(Math.max(...dx)).toBeLessThan(2.2);
   expect(shown[0]?.x).toBeCloseTo((shown[0]?.buffered ?? 0) + lag, 1);
   expect(shown.at(-1)?.x).toBeCloseTo(shown.at(-1)?.buffered ?? 0, 2);
+});
+
+it("releases a moving dynamic roof from prediction after its rider jumps off", async () => {
+  const recipe = drivingBenchRecipe("clear");
+  const fixture = required(recipe.parkedVehicles?.[0]);
+  const f = await setup({ ...recipe, guest: createPlayer(fixture.wx, fixture.wy + 38) });
+  const carrier = required(f.s.realm.entityManager.byId.get(required(f.s.handles.car)));
+  await f.s.command({
+    kind: "teleport",
+    position: carrier.position,
+    z: (carrier.wz ?? 0) + required(carrier.collider?.physicalHeight),
+  });
+  f.s.realm.vehicles.enter(required(f.s.guest), carrier.id);
+  for (let tick = 0; tick < 20; tick++) f.s.tick();
+  f.receive(f.s.frames());
+  const riderId = f.s.player.player.id;
+  const support = () => f.view.physicsState?.bodies.find((body) => body.id === riderId)?.supportId;
+  expect(support()).toBe(carrier.id);
+  let last = 0;
+  const steps = [];
+  const leads = [];
+  for (let tick = 0; tick < 175; tick++) {
+    const seq = tick + 10;
+    const input = { ...idle, jump: tick === 60, dy: tick >= 60 && tick < 120 ? 1 : 0 };
+    f.input(seq, input);
+    f.s.accept({ type: "player-input", seq, ...idle, dx: 1 }, undefined, 1);
+    f.s.accept({ type: "player-input", seq, ...input });
+    f.s.tick();
+    f.receive(f.s.frames());
+    const buffered = f.view.serverEntities.map((entity) =>
+      entity.id === carrier.id
+        ? { ...entity, position: { wx: entity.position.wx - 20, wy: entity.position.wy } }
+        : entity,
+    );
+    const shown = required(
+      f.predictor.presentEntities(1, buffered).find((e) => e.id === carrier.id),
+    );
+    if (tick > 50) steps.push(shown.position.wx - last);
+    last = shown.position.wx;
+    leads.push(last - required(buffered.find((e) => e.id === carrier.id)).position.wx);
+  }
+  expect(Math.min(...steps)).toBeGreaterThan(0.4);
+  expect(Math.max(...steps)).toBeLessThan(2.8);
+  expect(leads[50]).toBeCloseTo(20, 0);
+  expect(leads.at(-1)).toBeCloseTo(0, 2);
+  expect(support()).toBeUndefined();
 });

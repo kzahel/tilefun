@@ -1,6 +1,7 @@
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { interpolateRotation } from "../physics/BodyRotation.js";
+import { physicsBodyMotion } from "../physics/PhysicsBodies.js";
 import type { PhysicsScene } from "../physics/PhysicsScene.js";
 import { interpolateHeading } from "../rendering/PresentationTimeline.js";
 
@@ -29,7 +30,7 @@ export function activePresentationIds(
 export function expandCoherentMembers(
   members: Set<number>,
   published: ReadonlyMap<number, Entity>,
-  scene: Pick<PhysicsScene, "contactIds"> | undefined,
+  scene: Pick<PhysicsScene, "bodyState" | "contactIds"> | undefined,
 ): void {
   const groups = new Map<number, number[]>();
   for (const e of published.values()) {
@@ -40,9 +41,33 @@ export function expandCoherentMembers(
   }
   for (const id of members) {
     for (const neighbor of scene?.contactIds(id) ?? []) members.add(neighbor);
+    const support = scene?.bodyState(id)?.supportId;
+    if (support !== undefined && published.has(support)) members.add(support);
     const group = published.get(id)?.physicsGroupId;
     if (group !== undefined) for (const member of groups.get(group) ?? []) members.add(member);
   }
+}
+
+/** Local seats borrow the timeline of any solved, mobile supporting body. */
+export function movingSupportIds(
+  local: ReadonlySet<number>,
+  published: ReadonlyMap<number, Entity>,
+  scene: Pick<PhysicsScene, "bodyState">,
+): Set<number> {
+  const supports = new Set<number>();
+  for (const id of local) {
+    const support = scene.bodyState(id)?.supportId;
+    if (support === undefined) continue;
+    const entity = published.get(support);
+    if (entity && physicsBodyMotion(entity, scene.bodyState(support)?.kind) !== "fixed")
+      supports.add(support);
+  }
+  return supports;
+}
+
+/** Seconds of ordinary travel that account for a difference between display poses. */
+export function motionLead(dx: number, dy: number, vx: number, vy: number): number {
+  return Math.max(-2, Math.min(2, (dx * vx + dy * vy) / (vx * vx + vy * vy || 1)));
 }
 
 /** Resolve the committed interpolation interval once, before any scene drawing. */

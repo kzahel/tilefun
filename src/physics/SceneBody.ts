@@ -6,7 +6,7 @@ import { hasDumpBed } from "../traffic/DumpBed.js";
 import { isTransporter } from "../traffic/Transporter.js";
 import { rapierRotation, rotateBodyVector, yawRotation } from "./BodyRotation.js";
 import { DumpBedBody, setChassisBoxMass } from "./DumpBedBody.js";
-import type { physicsBodyDimensions } from "./PhysicsBodies.js";
+import { type physicsBodyDimensions, physicsBodyMotion } from "./PhysicsBodies.js";
 import { PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
 import type { PhysicsBodyKind, PhysicsBodyState } from "./PhysicsState.js";
 import { TransporterBody } from "./TransporterBody.js";
@@ -69,11 +69,13 @@ function rigidBody(
   const halfY = d.height / 2 / SCALE;
   const rotation = entity.bodyRotation ?? yawRotation(d.yaw);
   const center = rotateBodyVector(rotation, 0, 0, halfY);
-  const desc = isTrain(entity)
-    ? RAPIER.RigidBodyDesc.kinematicVelocityBased()
-    : kind === "fixed"
-      ? RAPIER.RigidBodyDesc.fixed()
-      : RAPIER.RigidBodyDesc.dynamic().setCcdEnabled(true);
+  const motion = physicsBodyMotion(entity, kind);
+  const desc =
+    motion === "prescribed"
+      ? RAPIER.RigidBodyDesc.kinematicVelocityBased()
+      : motion === "fixed"
+        ? RAPIER.RigidBodyDesc.fixed()
+        : RAPIER.RigidBodyDesc.dynamic().setCcdEnabled(true);
   desc.setTranslation(
     entity.position.wx / SCALE + d.offsetX / SCALE + center.x - origin.x,
     (entity.wz ?? 0) / SCALE + center.z,
