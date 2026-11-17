@@ -1,5 +1,5 @@
+import type { FeaturePlacement } from "../StructureGenerator.js";
 import type { CityPlace } from "./CityPlacesPlanner.js";
-import type { FeaturePlacement } from "./DistrictStrategy.js";
 import type { Bounds } from "./RegionalPlanner.js";
 
 /** Public spaces reserve circulation first. Native props furnish the remaining

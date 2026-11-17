@@ -2,6 +2,7 @@ import type { SurfacePiece } from "../../road/CitySurfaceRecipes.js";
 import { commercialSurfaceAt } from "../../road/CommercialCitySurface.js";
 import { RoadType } from "../../road/RoadType.js";
 import { edgeHash } from "../RoadGenerator.js";
+import type { FeaturePlacement } from "../StructureGenerator.js";
 import { architectureDistrict } from "./CityArchitecturePlanner.js";
 import { type CityWalkGraph, pedestrianDistrict } from "./CityWalkGraph.js";
 import { COMMERCIAL_CITY_ASSETS } from "./CommercialCityAssets.js";
@@ -11,12 +12,8 @@ import {
   commercialDistrictSurfaceAt,
   commercialRoadAt,
 } from "./CommercialDistrictPlanner.js";
-import {
-  type DenseDistrictPlan,
-  DenseDistrictSource,
-  insideDenseBounds,
-} from "./DenseDistrictPlanner.js";
-import type { FeaturePlacement } from "./DistrictStrategy.js";
+import { type DenseDistrictPlan, insideDenseBounds } from "./DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "./DenseDistrictSource.js";
 import { publicSpace } from "./PublicSpaceRecipes.js";
 import { type Bounds, type Settlement, settlementForOwner } from "./RegionalPlanner.js";
 

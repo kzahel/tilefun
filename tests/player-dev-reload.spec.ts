@@ -2,7 +2,7 @@ import { expect, test } from "@playwright/test";
 import react from "@vitejs/plugin-react";
 import { createServer } from "vite";
 import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
-import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictSource.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { buildingDoors } from "../src/interiors/BuildingDoors.js";
 
@@ -136,7 +136,7 @@ test("dev reload during the guided doorway walk settles into the saved destinati
     const address = server.httpServer?.address();
     if (!address || typeof address === "string") throw new Error("Missing port");
     const { DenseDistrictSource } = await import(
-      "../src/generation/regional/DenseDistrictPlanner.js"
+      "../src/generation/regional/DenseDistrictSource.js"
     );
     const lot = new DenseDistrictSource(regionalWorld(2026), true)
       .owner(0, 0)

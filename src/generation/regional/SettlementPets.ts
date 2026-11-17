@@ -3,8 +3,8 @@ import { createProp } from "../../entities/PropFactories.js";
 import { createFauna, petCoat } from "../../wildlife/Fauna.js";
 import type { ActorPlacement } from "../Generator.js";
 import { edgeHash } from "../RoadGenerator.js";
+import type { FeaturePlacement } from "../StructureGenerator.js";
 import type { DenseDistrictPlan } from "./DenseDistrictPlanner.js";
-import type { FeaturePlacement } from "./DistrictStrategy.js";
 import { residentFauna } from "./ResidentFauna.js";
 
 /** Existing green furniture, shared by town realization and safe initial pet placement. */

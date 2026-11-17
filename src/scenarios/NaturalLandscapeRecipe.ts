@@ -1,7 +1,7 @@
 import { TerrainId } from "../autotile/TerrainId.js";
 import { createPlayer } from "../entities/Player.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
-import { DenseDistrictSource } from "../generation/regional/DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "../generation/regional/DenseDistrictSource.js";
 import { FarmsteadSource } from "../generation/regional/FarmsteadPlanner.js";
 import { MotocrossSource } from "../generation/regional/MotocrossPlanner.js";
 import {

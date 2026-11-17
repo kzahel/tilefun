@@ -168,19 +168,9 @@
       "overLimit": 1
     },
     "src/generation/regional/DenseDistrictPlanner.ts": {
-      "lines": 447,
+      "lines": 417,
       "worst": 134,
       "overLimit": 2
-    },
-    "src/generation/regional/DistrictPlanner.ts": {
-      "lines": 207,
-      "worst": 78,
-      "overLimit": 1
-    },
-    "src/generation/regional/DistrictStrategy.ts": {
-      "lines": 222,
-      "worst": 38,
-      "overLimit": 1
     },
     "src/generation/regional/FarmsteadPlanner.ts": {
       "lines": 275,

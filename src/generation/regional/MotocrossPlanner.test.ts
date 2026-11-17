@@ -8,7 +8,7 @@ import { required } from "../../shared/required.js";
 import { Chunk } from "../../world/Chunk.js";
 import { createDescriptor } from "../GenerationDescriptor.js";
 import { createGenerator } from "../Generator.js";
-import { DenseDistrictSource } from "./DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "./DenseDistrictSource.js";
 import { jumpHeight, jumpLength } from "./JumpProfiles.js";
 import {
   MotocrossSource,

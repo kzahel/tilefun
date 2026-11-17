@@ -1,6 +1,6 @@
 import { TILE_SIZE } from "../../config/constants.js";
 import type { ShoppingCenter } from "../../traffic/ShoppingCenter.js";
-import type { DistrictLot, DistrictPlan } from "./DistrictPlanner.js";
+import type { DistrictLot, DistrictPlan } from "./DistrictPlan.js";
 import { shoppingBuilding, shoppingSceneryPlacements } from "./ShoppingScenery.js";
 
 /** Resolve only buildings actually present in this owner's generated plan. */

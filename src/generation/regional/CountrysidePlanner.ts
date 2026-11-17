@@ -1,5 +1,5 @@
 import type { ActorPlacement } from "../Generator.js";
-import type { FeaturePlacement } from "./DistrictStrategy.js";
+import type { FeaturePlacement } from "../StructureGenerator.js";
 import type { Bounds, Point } from "./RegionalPlanner.js";
 
 export interface CountryPlan {

@@ -5,7 +5,7 @@ import { join } from "node:path";
 import { expect, test } from "@playwright/test";
 import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
 import { createGenerator } from "../src/generation/Generator.js";
-import { DistrictStrategy } from "../src/generation/regional/DistrictStrategy.js";
+import { DenseDistrictStrategy } from "../src/generation/regional/DenseDistrictStrategy.js";
 import { FsWorldRegistry } from "../src/persistence/FsWorldRegistry.js";
 import { openWorlds } from "./helpers/gameMenu.js";
 
@@ -70,7 +70,7 @@ test("two clients share a persistent interior and cross-origin explorer reads li
     );
     registry.close();
     const terrain = createGenerator(generation).terrain;
-    if (!(terrain instanceof DistrictStrategy)) throw new Error("No district");
+    if (!(terrain instanceof DenseDistrictStrategy)) throw new Error("No district");
     const lot = terrain.districts
       .owner(0, 0)
       ?.blocks.flatMap((b) => b.lots)

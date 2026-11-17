@@ -2,7 +2,7 @@
 
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.
-Updated: 2026-11-11.
+Updated: 2026-11-17.
 
 ## Current generation policy
 
@@ -107,6 +107,12 @@ This change does not automatically erase any saved worlds. Do not retain runtime
 branches or old world-output hashes to reproduce retired versions. The version
 in a save detects retired descriptors, not output drift within the active
 greenfield version; it is not a promise that the old algorithm remains available.
+
+The current dense district strategy builds directly on regional geography. Its
+bounded district source serves terrain, overview and building lookup. The retired
+district terrain, placement and planning implementations have been removed.
+The generation benchmark matched the previous terrain, rail, prop and actor hashes
+across 196 district, farm, woodland and negative-coast chunks.
 
 Old worlds remain listed with a compatibility reason. **Recreate with same seed**
 creates a new save ID using the current generator; it copies no edits, characters,

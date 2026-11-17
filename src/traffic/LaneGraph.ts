@@ -1,6 +1,6 @@
 import type { AABB } from "../entities/collision.js";
 import { Direction } from "../entities/Entity.js";
-import type { DistrictPlan } from "../generation/regional/DistrictPlanner.js";
+import type { DistrictPlan } from "../generation/regional/DistrictPlan.js";
 import type { Connection, Point } from "../generation/regional/RegionalPlanner.js";
 import { required } from "../shared/required.js";
 

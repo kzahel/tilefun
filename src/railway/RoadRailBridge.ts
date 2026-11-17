@@ -1,6 +1,6 @@
 import type { Prop } from "../entities/Prop.js";
-import type { FeaturePlacement } from "../generation/regional/DistrictStrategy.js";
 import type { Bounds } from "../generation/regional/RegionalPlanner.js";
+import type { FeaturePlacement } from "../generation/StructureGenerator.js";
 
 /** One tile-aligned road deck above level rails. Units: pixels. A `south` bridge
  * carries a north/south road over east/west track; an `east` bridge carries an

@@ -6,8 +6,8 @@ import {
 } from "../../generation/regional/CommercialDistrictPlanner.js";
 import type { DenseDistrictPlan } from "../../generation/regional/DenseDistrictPlanner.js";
 import { DenseDistrictStrategy } from "../../generation/regional/DenseDistrictStrategy.js";
-import type { FeaturePlacement } from "../../generation/regional/DistrictStrategy.js";
 import type { RegionalWorld } from "../../generation/regional/WorldDescriptor.js";
+import type { FeaturePlacement } from "../../generation/StructureGenerator.js";
 
 export class CommercialDistrictStrategy extends DenseDistrictStrategy {
   override readonly districts: CommercialDistrictSource;

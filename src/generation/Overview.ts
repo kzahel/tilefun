@@ -8,8 +8,8 @@ import {
 } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
 import type { CountryPlan } from "./regional/CountrysidePlanner.js";
-import { DenseDistrictSource } from "./regional/DenseDistrictPlanner.js";
-import type { DistrictPlan } from "./regional/DistrictPlanner.js";
+import { DenseDistrictSource } from "./regional/DenseDistrictSource.js";
+import type { DistrictPlan } from "./regional/DistrictPlan.js";
 import { type MotocrossPark, MotocrossSource } from "./regional/MotocrossPlanner.js";
 import {
   DEFAULT_LANDSCAPE_PROFILE,

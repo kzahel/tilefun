@@ -1,6 +1,6 @@
 import { expect, type Page, test } from "@playwright/test";
 import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
-import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictSource.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { openHome } from "./helpers/gameMenu.js";
 

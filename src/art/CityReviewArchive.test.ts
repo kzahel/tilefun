@@ -1,5 +1,5 @@
 import { expect, it, vi } from "vitest";
-import { DenseDistrictSource } from "../generation/regional/DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "../generation/regional/DenseDistrictSource.js";
 import { Chunk } from "../world/Chunk.js";
 import { archivedCityScene, createPreviewGenerator } from "./CityReviewArchive.js";
 

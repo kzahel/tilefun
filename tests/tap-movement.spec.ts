@@ -4,7 +4,7 @@ import {
   CURRENT_REGIONAL_VERSION,
   type GenerationDescriptor,
 } from "../src/generation/GenerationDescriptor.js";
-import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictSource.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import type { TapMovement } from "../src/input/TapMovement.js";
 import { exteriorDoors } from "../src/interiors/BuildingDoors.js";

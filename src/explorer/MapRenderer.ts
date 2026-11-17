@@ -1,7 +1,7 @@
 import type { OverviewResult as RegionalResult } from "../generation/Overview.js";
 import { buildingBody, buildingRecipe } from "../generation/regional/BuildingRecipes.js";
 import type { CountryPlan } from "../generation/regional/CountrysidePlanner.js";
-import type { DistrictLot } from "../generation/regional/DistrictPlanner.js";
+import type { DistrictLot } from "../generation/regional/DistrictPlan.js";
 import {
   type Connection,
   LandCover,

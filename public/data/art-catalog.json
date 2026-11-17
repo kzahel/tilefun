@@ -9779,7 +9779,7 @@
       "consumers": [
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:83"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:80"
         },
         {
           "system": "World generation",
@@ -10029,7 +10029,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:161"
+          "source": "src/generation/StructureGenerator.ts:165"
         }
       ]
     },
@@ -10325,7 +10325,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:159"
+          "source": "src/generation/StructureGenerator.ts:163"
         },
         {
           "system": "Gameplay",
@@ -10367,7 +10367,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:169"
+          "source": "src/generation/StructureGenerator.ts:173"
         }
       ]
     },
@@ -10431,7 +10431,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:253"
+          "source": "src/generation/regional/MotocrossPlanner.ts:254"
         },
         {
           "system": "World generation",
@@ -10523,23 +10523,19 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:113"
+          "source": "src/generation/StructureGenerator.ts:117"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:148"
+          "source": "src/generation/StructureGenerator.ts:152"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:171"
+          "source": "src/generation/StructureGenerator.ts:175"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:90"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictStrategy.ts:212"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:87"
         },
         {
           "system": "World generation",
@@ -10703,19 +10699,19 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:146"
+          "source": "src/generation/StructureGenerator.ts:150"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:160"
+          "source": "src/generation/StructureGenerator.ts:164"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:170"
+          "source": "src/generation/StructureGenerator.ts:174"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:252"
+          "source": "src/generation/regional/MotocrossPlanner.ts:253"
         },
         {
           "system": "World generation",
@@ -10850,10 +10846,6 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:757"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictStrategy.ts:209"
         }
       ]
     },
@@ -10948,10 +10940,6 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:760"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictStrategy.ts:210"
         }
       ]
     },
@@ -11127,7 +11115,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:54"
+          "source": "src/generation/StructureGenerator.ts:58"
         }
       ]
     },
@@ -11153,7 +11141,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:64"
+          "source": "src/generation/StructureGenerator.ts:68"
         }
       ]
     },
@@ -11179,7 +11167,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:74"
+          "source": "src/generation/StructureGenerator.ts:78"
         }
       ]
     },
@@ -11205,7 +11193,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:83"
+          "source": "src/generation/StructureGenerator.ts:87"
         }
       ]
     },
@@ -11231,7 +11219,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:93"
+          "source": "src/generation/StructureGenerator.ts:97"
         }
       ]
     },
@@ -11257,7 +11245,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:102"
+          "source": "src/generation/StructureGenerator.ts:106"
         }
       ]
     },
@@ -11283,15 +11271,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:112"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:137"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictStrategy.ts:203"
+          "source": "src/generation/StructureGenerator.ts:116"
         },
         {
           "system": "World generation",
@@ -11333,7 +11313,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:122"
+          "source": "src/generation/StructureGenerator.ts:126"
         }
       ]
     },
@@ -11359,39 +11339,39 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:55"
+          "source": "src/generation/StructureGenerator.ts:59"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:66"
+          "source": "src/generation/StructureGenerator.ts:70"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:94"
+          "source": "src/generation/StructureGenerator.ts:98"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:123"
+          "source": "src/generation/StructureGenerator.ts:127"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:137"
+          "source": "src/generation/StructureGenerator.ts:141"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:138"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:182"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:184"
+          "source": "src/generation/StructureGenerator.ts:142"
         },
         {
           "system": "World generation",
           "source": "src/generation/StructureGenerator.ts:186"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/StructureGenerator.ts:188"
+        },
+        {
+          "system": "World generation",
+          "source": "src/generation/StructureGenerator.ts:190"
         },
         {
           "system": "World generation",
@@ -11403,15 +11383,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictStrategy.ts:111"
+          "source": "src/generation/regional/DenseDistrictStrategy.ts:106"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictStrategy.ts:217"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:251"
+          "source": "src/generation/regional/MotocrossPlanner.ts:252"
         },
         {
           "system": "World generation",
@@ -11473,31 +11449,31 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:65"
+          "source": "src/generation/StructureGenerator.ts:69"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:85"
+          "source": "src/generation/StructureGenerator.ts:89"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:103"
+          "source": "src/generation/StructureGenerator.ts:107"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:135"
+          "source": "src/generation/StructureGenerator.ts:139"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:136"
+          "source": "src/generation/StructureGenerator.ts:140"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:147"
+          "source": "src/generation/StructureGenerator.ts:151"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:183"
+          "source": "src/generation/StructureGenerator.ts:187"
         },
         {
           "system": "World generation",
@@ -11509,11 +11485,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DistrictStrategy.ts:211"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:239"
+          "source": "src/generation/regional/MotocrossPlanner.ts:240"
         },
         {
           "system": "World generation",
@@ -11591,19 +11563,19 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:56"
+          "source": "src/generation/StructureGenerator.ts:60"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:84"
+          "source": "src/generation/StructureGenerator.ts:88"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:114"
+          "source": "src/generation/StructureGenerator.ts:118"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:187"
+          "source": "src/generation/StructureGenerator.ts:191"
         }
       ]
     },
@@ -11629,7 +11601,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:134"
+          "source": "src/generation/StructureGenerator.ts:138"
         },
         {
           "system": "World generation",
@@ -11659,15 +11631,15 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:75"
+          "source": "src/generation/StructureGenerator.ts:79"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:104"
+          "source": "src/generation/StructureGenerator.ts:108"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:185"
+          "source": "src/generation/StructureGenerator.ts:189"
         }
       ]
     },
@@ -11690,10 +11662,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:113"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -11716,10 +11684,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:113"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -11742,10 +11706,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:113"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -11768,10 +11728,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:113"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -11794,10 +11750,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:113"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -11820,10 +11772,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:113"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -11846,10 +11794,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:113"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -11872,10 +11816,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:113"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -11898,10 +11838,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:113"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:135"
         }
       ]
     },
@@ -11924,10 +11860,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -11950,10 +11882,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -11976,10 +11904,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -12002,10 +11926,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -12028,10 +11948,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -12054,10 +11970,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -12080,10 +11992,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -12106,10 +12014,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -12132,10 +12036,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -12158,10 +12058,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -12184,10 +12080,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -12210,10 +12102,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:114"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:136"
         }
       ]
     },
@@ -12236,14 +12124,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:115"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -12266,14 +12146,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:115"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -12296,14 +12168,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:115"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -12326,14 +12190,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:115"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -12356,14 +12212,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:115"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -12386,14 +12234,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:115"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:132"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:198"
         }
       ]
     },
@@ -12416,10 +12256,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:116"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -12442,10 +12278,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:116"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -12468,10 +12300,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:116"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -12494,10 +12322,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:116"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -12520,10 +12344,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:116"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -12546,10 +12366,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:116"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -12572,10 +12388,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:116"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -12598,10 +12410,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:116"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -12624,10 +12432,6 @@
         {
           "system": "World generation",
           "source": "src/generation/regional/BuildingRecipes.ts:116"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictPlanner.ts:133"
         }
       ]
     },
@@ -36917,7 +36721,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/DenseDistrictPlanner.ts:195"
+          "source": "src/generation/regional/DenseDistrictPlanner.ts:194"
         }
       ]
     },
@@ -37325,7 +37129,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:159"
+          "source": "src/generation/StructureGenerator.ts:163"
         },
         {
           "system": "Gameplay",
@@ -37371,7 +37175,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:169"
+          "source": "src/generation/StructureGenerator.ts:173"
         }
       ]
     },
@@ -37443,7 +37247,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:253"
+          "source": "src/generation/regional/MotocrossPlanner.ts:254"
         },
         {
           "system": "World generation",
@@ -37543,23 +37347,19 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:113"
+          "source": "src/generation/StructureGenerator.ts:117"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:148"
+          "source": "src/generation/StructureGenerator.ts:152"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:171"
+          "source": "src/generation/StructureGenerator.ts:175"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/CityPlacesPlanner.ts:90"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictStrategy.ts:212"
+          "source": "src/generation/regional/CityPlacesPlanner.ts:87"
         },
         {
           "system": "World generation",
@@ -37731,19 +37531,19 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:146"
+          "source": "src/generation/StructureGenerator.ts:150"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:160"
+          "source": "src/generation/StructureGenerator.ts:164"
         },
         {
           "system": "World generation",
-          "source": "src/generation/StructureGenerator.ts:170"
+          "source": "src/generation/StructureGenerator.ts:174"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/MotocrossPlanner.ts:252"
+          "source": "src/generation/regional/MotocrossPlanner.ts:253"
         },
         {
           "system": "World generation",
@@ -37890,10 +37690,6 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:757"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictStrategy.ts:209"
         }
       ]
     },
@@ -38000,10 +37796,6 @@
         {
           "system": "Gameplay",
           "source": "src/entities/PropFactories.ts:760"
-        },
-        {
-          "system": "World generation",
-          "source": "src/generation/regional/DistrictStrategy.ts:210"
         }
       ]
     },

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { CURRENT_REGIONAL_VERSION } from "../src/generation/GenerationDescriptor.js";
-import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "../src/generation/regional/DenseDistrictSource.js";
 import { regionalWorld } from "../src/generation/regional/WorldDescriptor.js";
 import { exteriorDoors } from "../src/interiors/BuildingDoors.js";
 

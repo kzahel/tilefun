@@ -2,7 +2,7 @@ import { getEntityAABB } from "../../entities/collision.js";
 import { Direction } from "../../entities/Entity.js";
 import { createProp } from "../../entities/PropFactories.js";
 import { RoadType } from "../../road/RoadType.js";
-import type { FeaturePlacement } from "./DistrictStrategy.js";
+import type { FeaturePlacement } from "../StructureGenerator.js";
 import type { Racetrack } from "./RacetrackPlanner.js";
 import type { Bounds, Point } from "./RegionalPlanner.js";
 

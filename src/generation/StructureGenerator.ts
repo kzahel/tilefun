@@ -45,6 +45,10 @@ export interface StructurePlacement {
   wy: number;
 }
 
+export interface FeaturePlacement extends StructurePlacement {
+  featureId: string;
+}
+
 // ── Building templates ────────────────────────────────────────────────────
 
 const RESIDENTIAL_TEMPLATES: SettlementTemplate[] = [

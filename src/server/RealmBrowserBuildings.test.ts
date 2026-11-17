@@ -10,7 +10,7 @@ import { GameServer } from "./GameServer.js";
 
 async function cityDoorSetup(building = "butcher") {
   const setup = await createTestSetup();
-  const { DenseDistrictSource } = await import("../generation/regional/DenseDistrictPlanner.js");
+  const { DenseDistrictSource } = await import("../generation/regional/DenseDistrictSource.js");
   const { regionalWorld } = await import("../generation/regional/WorldDescriptor.js");
   const { exteriorDoors } = await import("../interiors/BuildingDoors.js");
   const generation = {
@@ -537,7 +537,7 @@ it("enters the generated farmhouse and tiny outbuilding, exits and restores the 
 it("enters every mall shop, exits at its own facade and restores a saved mall interior", async () => {
   const setup = await createTestSetup();
   const { server, transport, registry } = setup;
-  const { DenseDistrictSource } = await import("../generation/regional/DenseDistrictPlanner.js");
+  const { DenseDistrictSource } = await import("../generation/regional/DenseDistrictSource.js");
   const { regionalWorld } = await import("../generation/regional/WorldDescriptor.js");
   const { shoppingBuilding, shoppingSceneryPlacements } = await import(
     "../generation/regional/ShoppingScenery.js"

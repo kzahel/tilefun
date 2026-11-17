@@ -2,7 +2,7 @@ import { expect, it } from "vitest";
 import { createTestSetup, restoreProfile } from "../../tests-support/RealmBrowser.test-helper.js";
 import { PLAYER_SPEED } from "../config/constants.js";
 import { CURRENT_REGIONAL_VERSION } from "../generation/GenerationDescriptor.js";
-import { DenseDistrictSource } from "../generation/regional/DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "../generation/regional/DenseDistrictSource.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import { exteriorDoors } from "../interiors/BuildingDoors.js";
 import { atDoorThreshold, doorwayReached } from "../interiors/DoorTraversal.js";

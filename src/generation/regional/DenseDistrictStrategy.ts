@@ -4,14 +4,11 @@ import { createProp } from "../../entities/PropFactories.js";
 import { Chunk } from "../../world/Chunk.js";
 import { deriveTerrain } from "../deriveTerrain.js";
 import type { ActorPlacement } from "../Generator.js";
+import type { FeaturePlacement } from "../StructureGenerator.js";
 import { buildingVisualBounds } from "./BuildingRecipes.js";
 import { denseBuilding } from "./DenseCityAssets.js";
-import {
-  type DenseDistrictPlan,
-  DenseDistrictSource,
-  denseSurfaceAt,
-} from "./DenseDistrictPlanner.js";
-import { DistrictStrategy, type FeaturePlacement } from "./DistrictStrategy.js";
+import { type DenseDistrictPlan, denseSurfaceAt } from "./DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "./DenseDistrictSource.js";
 import { intersects } from "./RegionalPlanner.js";
 import { RegionalStrategy } from "./RegionalStrategy.js";
 import { settlementGreenProps } from "./SettlementPets.js";
@@ -21,16 +18,14 @@ import type { RegionalWorld } from "./WorldDescriptor.js";
 /** Shared dense realization using promoted facades, streets and walking routes.
  * Current gameplay enables threshold connections; authoring studies can omit them.
  */
-export class DenseDistrictStrategy extends DistrictStrategy {
-  override readonly districts: DenseDistrictSource;
-  private readonly geography: RegionalStrategy;
+export class DenseDistrictStrategy extends RegionalStrategy {
+  readonly districts: DenseDistrictSource;
   constructor(world: RegionalWorld, connectEntrances = false) {
     super(world);
     this.districts = new DenseDistrictSource(world, connectEntrances);
-    this.geography = new RegionalStrategy(world);
   }
   override generate(chunk: Chunk, cx: number, cy: number): void {
-    this.geography.generate(chunk, cx, cy);
+    super.generate(chunk, cx, cy);
     const baseX = cx * CHUNK_SIZE,
       baseY = cy * CHUNK_SIZE;
     for (let sy = 0; sy < Chunk.SUBGRID_SIZE; sy++)
@@ -56,7 +51,7 @@ export class DenseDistrictStrategy extends DistrictStrategy {
         }
       }
   }
-  override placements(cx: number, cy: number): FeaturePlacement[] {
+  placements(cx: number, cy: number): FeaturePlacement[] {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 },
       search = {
         minX: bounds.minX - 32,

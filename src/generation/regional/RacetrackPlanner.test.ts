@@ -15,7 +15,7 @@ import { Chunk } from "../../world/Chunk.js";
 import { createDescriptor } from "../GenerationDescriptor.js";
 import { createGenerator } from "../Generator.js";
 import { ProceduralActors } from "../ProceduralActors.js";
-import { DenseDistrictSource } from "./DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "./DenseDistrictSource.js";
 import { NaturalLandscape } from "./NaturalLandscape.js";
 import { pathDistance } from "./PlanGeometry.js";
 import { RacetrackSource, racetrackReserved, racetrackSurface } from "./RacetrackPlanner.js";

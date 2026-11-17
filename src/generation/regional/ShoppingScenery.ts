@@ -1,8 +1,8 @@
 import type { Prop } from "../../entities/Prop.js";
 import type { ShoppingCenter } from "../../traffic/ShoppingCenter.js";
+import type { FeaturePlacement } from "../StructureGenerator.js";
 import type { BuildingRecipe } from "./BuildingRecipes.js";
 import { denseDoorThresholds } from "./DenseDoorThresholds.js";
-import type { FeaturePlacement } from "./DistrictStrategy.js";
 import { parkingLayout } from "./ParkingLayout.js";
 
 /** Reconstructible generated props: durable records store type and anchor. */

@@ -6,15 +6,15 @@ import {
 import { commercialSurfaceAt as encodeSurface } from "../../road/CommercialCitySurface.js";
 import { RoadType } from "../../road/RoadType.js";
 import { edgeHash } from "../RoadGenerator.js";
+import type { FeaturePlacement } from "../StructureGenerator.js";
 import { COMMERCIAL_CITY_ASSETS as art } from "./CommercialCityAssets.js";
 import {
   connectedDenseDistrict,
   type DenseDistrictPlan,
-  DenseDistrictSource,
   denseSurfaceAt,
   insideDenseBounds,
 } from "./DenseDistrictPlanner.js";
-import type { FeaturePlacement } from "./DistrictStrategy.js";
+import { DenseDistrictSource } from "./DenseDistrictSource.js";
 import { type Bounds, type Settlement, settlementForOwner } from "./RegionalPlanner.js";
 
 export interface CommercialDistrictPlan extends DenseDistrictPlan {

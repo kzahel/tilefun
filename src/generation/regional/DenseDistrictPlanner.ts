@@ -5,9 +5,8 @@ import type { ActorPlacement } from "../Generator.js";
 import { edgeHash } from "../RoadGenerator.js";
 import { denseBuilding } from "./DenseCityAssets.js";
 import { denseDoorThresholds } from "./DenseDoorThresholds.js";
-import type { DistrictBlock, DistrictPlan, DistrictStreet } from "./DistrictPlanner.js";
-import { DistrictSource } from "./DistrictStrategy.js";
-import { type Bounds, type Settlement, settlementForOwner } from "./RegionalPlanner.js";
+import type { DistrictBlock, DistrictPlan, DistrictStreet } from "./DistrictPlan.js";
+import type { Bounds, Settlement } from "./RegionalPlanner.js";
 
 export interface DenseDistrictPlan extends DistrictPlan {
   readonly recipe:
@@ -212,35 +211,6 @@ function planDenseDistrict(
     park,
     actors,
   };
-}
-
-export class DenseDistrictSource extends DistrictSource {
-  private cache = new Map<string, DenseDistrictPlan | null>();
-  constructor(
-    world: DistrictSource["world"],
-    private readonly connectEntrances = false,
-  ) {
-    super(world);
-  }
-  override owner(cx: number, cy: number): DenseDistrictPlan | null {
-    const key = `${cx},${cy}`;
-    if (this.cache.has(key)) return this.cache.get(key) ?? null;
-    const settlement = settlementForOwner(this.world, cx, cy),
-      plan = settlement
-        ? this.connectEntrances
-          ? currentDenseDistrict(settlement, this.world.seed)
-          : denseDistrict(settlement, this.world.seed)
-        : null;
-    this.cache.set(key, plan);
-    if (this.cache.size > 16) this.cache.delete(this.cache.keys().next().value ?? "");
-    return plan;
-  }
-  override at(x: number, y: number): DenseDistrictPlan | null {
-    return super.at(x, y) as DenseDistrictPlan | null;
-  }
-  override query(bounds: Bounds): DenseDistrictPlan[] {
-    return super.query(bounds) as DenseDistrictPlan[];
-  }
 }
 
 /** Reuse the pinned building layout; revise approach paving and doorway alignment.

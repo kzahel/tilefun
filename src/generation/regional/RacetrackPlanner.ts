@@ -2,8 +2,9 @@ import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
 import { RoadType } from "../../road/RoadType.js";
 import type { ActorPlacement } from "../Generator.js";
-import { DenseDistrictSource, insideDenseBounds } from "./DenseDistrictPlanner.js";
-import type { FeaturePlacement } from "./DistrictStrategy.js";
+import type { FeaturePlacement } from "../StructureGenerator.js";
+import { insideDenseBounds } from "./DenseDistrictPlanner.js";
+import { DenseDistrictSource } from "./DenseDistrictSource.js";
 import { pathDistance } from "./PlanGeometry.js";
 import {
   type Bounds,
@@ -109,8 +110,7 @@ export class RacetrackSource {
         limits: QUERY_LIMITS,
       });
       const lines = this.railways.query(reservation);
-      // Keep the entire venue away from existing intercity roads and railways.
-      // Its short access road may share the city's existing outbound road.
+      // Keep the venue clear of roads and railways. Access may share the outbound road.
       let valid = true;
       for (let py = bounds.minY; py <= bounds.maxY && valid; py += 4)
         for (let px = bounds.minX; px <= bounds.maxX; px += 4)

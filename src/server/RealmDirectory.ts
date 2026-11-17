@@ -2,8 +2,8 @@ import { TILE_SIZE } from "../config/constants.js";
 import { baseGameMod } from "../game/base-game.js";
 import { createDescriptor, descriptorFromMetadata } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
+import { DenseDistrictStrategy } from "../generation/regional/DenseDistrictStrategy.js";
 import { districtBuilding } from "../generation/regional/DistrictBuildings.js";
-import { DistrictStrategy } from "../generation/regional/DistrictStrategy.js";
 import { FarmsteadSource } from "../generation/regional/FarmsteadPlanner.js";
 import { withLivedInLayout } from "../interiors/BuildingDoors.js";
 import {
@@ -31,7 +31,7 @@ export interface RealmDirectoryDeps {
 }
 
 /** A farmstead house/shed owner from its feature id, located on the generated plan. */
-function farmsteadLot(terrain: DistrictStrategy, featureId: string, farm: RegExpExecArray) {
+function farmsteadLot(terrain: DenseDistrictStrategy, featureId: string, farm: RegExpExecArray) {
   const plan = new FarmsteadSource(terrain.world).owner(
     Number(farm[1]),
     Number(farm[2]),
@@ -53,7 +53,7 @@ function farmsteadLot(terrain: DistrictStrategy, featureId: string, farm: RegExp
     : undefined;
 }
 
-function buildingLot(terrain: DistrictStrategy, featureId: string) {
+function buildingLot(terrain: DenseDistrictStrategy, featureId: string) {
   const farm = /^farmstead:(-?\d+):(-?\d+):(east|south):(?:house|shed)$/.exec(featureId);
   if (farm) return farmsteadLot(terrain, featureId, farm);
   const match = /^settlement:(-?\d+):(-?\d+):/.exec(featureId);
@@ -74,7 +74,8 @@ async function interiorMetadata(
   if (generation.type !== "regional")
     throw new Error("This generator has no enterable building plans.");
   const terrain = createGenerator(generation).terrain;
-  if (!(terrain instanceof DistrictStrategy)) throw new Error("World has no enterable districts.");
+  if (!(terrain instanceof DenseDistrictStrategy))
+    throw new Error("World has no enterable districts.");
   const lot = buildingLot(terrain, parsed.featureId);
   if (!lot) throw new Error("Building is absent from the generated plan.");
   const interior: InteriorIdentity = withLivedInLayout(
