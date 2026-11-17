@@ -9,6 +9,7 @@ import {
   appendLeftover,
   appendPiecePlane,
   appendPropGeometry,
+  excavationCeilings,
   hasRoomViews,
   isOverheadDeck,
   type PropGeometry,
@@ -181,10 +182,12 @@ export class PropMeshes {
       textured.set(image.texture, faces);
       return faces;
     };
+    // A roof and the floor it covers share their bounds, so also their chunk.
+    const ceilings = excavationCeilings(props);
     for (const prop of props) {
       const elevation = propElevation(prop, heightAt);
       if (room) this.appendRoomProp(built, prop, elevation, room, flat, facesFor);
-      else this.appendProp(built, prop, elevation, flat, facesFor);
+      else this.appendProp(built, prop, elevation, flat, facesFor, ceilings);
     }
     if (flat.vertexCount) built.flat = flat.finish();
     return built;
@@ -196,6 +199,7 @@ export class PropMeshes {
     elevation: number,
     flat: TriangleWriter,
     facesFor: FacesFor,
+    ceilings?: ReadonlySet<string>,
   ): void {
     const frame = propImageFrame(prop);
     const form = propForm(prop, frame);
@@ -219,7 +223,7 @@ export class PropMeshes {
       });
     } else {
       const surfaces = propSurfaces(prop);
-      const overhead = isOverheadDeck(prop) ? new TriangleWriter() : undefined;
+      const overhead = isOverheadDeck(prop, ceilings) ? new TriangleWriter() : undefined;
       this.appendSolid(prop, elevation, overhead ?? flat, facesFor, built, "outside");
       built.surfaces.push(...surfaces);
       const [surface] = surfaces;

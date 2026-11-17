@@ -60,11 +60,14 @@ export function bladeQuad(
  * the rows above the anchor keep the card's own depth. Geometry cannot do this:
  * a card bent at the anchor's row would interpolate depth across the whole
  * triangle and pull the blade's top over a body's legs.
+ *
+ * Actor cards use it too, for the rows under their standing point (near feet),
+ * with a larger `lift` that also clears the contact shadow under them.
  */
-export function bladeDepth(material: THREE.Material): void {
+export function bladeDepth(material: THREE.Material, lift = BLADE_GROUND_LIFT): void {
   const shade = material.onBeforeCompile.bind(material),
     key = material.customProgramCacheKey.bind(material);
-  material.customProgramCacheKey = () => `${key()}:blade-depth`;
+  material.customProgramCacheKey = () => `${key()}:blade-depth:${lift}`;
   material.onBeforeCompile = (shader, renderer) => {
     shade(shader, renderer);
     shader.vertexShader = shader.vertexShader
@@ -86,7 +89,7 @@ export function bladeDepth(material: THREE.Material): void {
         "#include <dithering_fragment>",
         `#include <dithering_fragment>
   gl_FragDepth = vBladeBelow > 0.0
-    ? gl_FragCoord.z + vDepthPerNear * 2.0 * (vBladeBelow + ${BLADE_GROUND_LIFT.toFixed(2)})
+    ? gl_FragCoord.z + vDepthPerNear * 2.0 * (vBladeBelow + ${lift.toFixed(2)})
     : gl_FragCoord.z;`,
       );
   };

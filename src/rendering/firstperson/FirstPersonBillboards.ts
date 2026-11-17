@@ -24,6 +24,10 @@ export interface Billboard {
   z: number;
   width: number;
   height: number;
+  /** Rows of the card under its standing point (an actor's draw offset): `z`
+   * is then the standing height and the card hangs this far below it. The
+   * top-down camera draws those rows over the ground (`bladeDepth`). */
+  below?: number;
 }
 
 /**
@@ -108,9 +112,10 @@ export function actorBillboard(
     flipX: item.flipX,
     x,
     y,
-    z: item.zOffset - item.drawOffsetY - shift.z,
+    z: item.zOffset - shift.z,
     width: item.spriteWidth,
     height: item.spriteHeight * (item.scaleY ?? 1),
+    below: item.drawOffsetY,
   };
 }
 
@@ -191,9 +196,10 @@ export class CardArrays {
   ): void {
     if (this.count >= this.capacity) this.grow();
     const { centres, corners, pages } = this;
-    // Where the part sits on the card: across from the card's left, up from its feet.
+    // Where the part sits on the card: across from the card's left, up from its
+    // standing point.
     const across = (x: number) => ((px + x - b.sx) / b.sw - 0.5) * b.width * (b.flipX ? -1 : 1);
-    const up = (y: number) => (1 - (py + y - b.sy) / b.sh) * b.height;
+    const up = (y: number) => (1 - (py + y - b.sy) / b.sh) * b.height - (b.below ?? 0);
     const a0 = across(left),
       a1 = across(right);
     // Pages store their rows bottom first.
@@ -271,9 +277,12 @@ export class MovingCards {
   /** The buffer the mesh's geometry was made from; the arrays replace theirs to grow. */
   private built: Float32Array | undefined;
 
+  /** `topDownMaterial` draws the rows under a card's standing point over the
+   * ground; `begin` chooses it for the top-down camera. */
   constructor(
     parent: THREE.Object3D,
     private readonly material: THREE.Material,
+    private readonly topDownMaterial: THREE.Material = material,
   ) {
     this.mesh = new THREE.Mesh(new THREE.BufferGeometry(), material);
     this.mesh.frustumCulled = false;
@@ -281,7 +290,8 @@ export class MovingCards {
     parent.add(this.mesh);
   }
 
-  begin(): void {
+  begin(topDown = false): void {
+    this.mesh.material = topDown ? this.topDownMaterial : this.material;
     this.count = 0;
     this.arrays.count = 0;
   }
@@ -309,6 +319,7 @@ export class MovingCards {
   dispose(): void {
     this.mesh.geometry.dispose();
     this.material.dispose();
+    this.topDownMaterial.dispose();
     this.mesh.removeFromParent();
   }
 }

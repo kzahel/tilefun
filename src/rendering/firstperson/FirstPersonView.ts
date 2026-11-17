@@ -21,7 +21,7 @@ import {
   type LampItem,
 } from "./FirstPersonEffects.js";
 import { type FacePart, MergedFaces } from "./FirstPersonFaces.js";
-import { GrassCards } from "./FirstPersonGrass.js";
+import { bladeDepth, GrassCards } from "./FirstPersonGrass.js";
 import { GroundTops } from "./FirstPersonGround.js";
 import { FirstPersonImages } from "./FirstPersonImages.js";
 import { type FirstPersonInterior, INTERIOR_BACKGROUND } from "./FirstPersonInterior.js";
@@ -304,7 +304,11 @@ export class FirstPersonView {
         cardArt: this.atlas,
         sun: { uniforms: this.sun.uniforms, receiver },
       });
-    this.billboards = new MovingCards(this.worldRoot, card("body"));
+    // Top-down, an actor's rows under its standing point (its near feet) show
+    // over the ground as in the fixed view; other cameras leave them under it.
+    const sunk = card("body");
+    bladeDepth(sunk, 1);
+    this.billboards = new MovingCards(this.worldRoot, card("body"), sunk);
     this.cards = new StaticCards(
       this.cardRoot,
       card("card"),
@@ -779,7 +783,7 @@ export class FirstPersonView {
       const right = cameraRight(frame.eye.yaw);
       this.cardRight.value.set(right.x, right.y);
     }
-    this.billboards.begin();
+    this.billboards.begin(topDown);
     this.blobs.begin();
     this.lamps.length = 0;
     this.bodyImages.begin();

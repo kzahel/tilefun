@@ -590,17 +590,31 @@ const OVERHEAD_CLEARANCE = 16;
  * garage levels): one walkable surface whose underside rises at least
  * `OVERHEAD_CLEARANCE` somewhere. The 3D scene draws each as its own mesh so it
  * can fade, as the fixed view does, over a player beneath it. Motocross
- * earthworks are built up from the ground and are never overhead.
+ * earthworks are built up from the ground and are never overhead. A deck at
+ * ground level is overhead too when it roofs an excavation (`ceilings`, see
+ * `excavationCeilings`): a body stands under it on the dug floor.
  */
-export function isOverheadDeck(prop: Prop): boolean {
+export function isOverheadDeck(prop: Prop, ceilings?: ReadonlySet<string>): boolean {
   const surface = prop.collider?.surface;
   if (!surface || prop.walls?.length || prop.type.startsWith("prop-mx-")) return false;
+  if (ceilings?.has(surface.id)) return true;
   const bounds = getEntityAABB(prop.position, prop.collider as PropCollider);
   let top = -Infinity;
   for (const x of [bounds.left, bounds.right])
     for (const y of [bounds.top, bounds.bottom])
       top = Math.max(top, surfaceZAt(surface, bounds, x, y));
   return top - surface.thickness >= OVERHEAD_CLEARANCE;
+}
+
+/** The ids of the surfaces that roof an excavation among `props`. */
+export function excavationCeilings(props: readonly Prop[]): Set<string> {
+  const ceilings = new Set<string>();
+  for (const prop of props)
+    for (const c of prop.walls ?? (prop.collider ? [prop.collider] : [])) {
+      const id = c.surface?.excavation?.ceilingId;
+      if (id) ceilings.add(id);
+    }
+  return ceilings;
 }
 
 /** A walkable surface (deck, ramp) a moving body can stand on. */

@@ -92,6 +92,32 @@ describe("an actor's card", () => {
   });
 });
 
+describe("an actor drawn below its standing point", () => {
+  const sheet = new Spritesheet({ width: 64, height: 64 } as unknown as HTMLCanvasElement, 16, 16);
+  const rabbit = {
+    wx: 100,
+    wy: 100,
+    zOffset: 4,
+    drawOffsetY: 6,
+    frameCol: 0,
+    frameRow: 0,
+    spriteWidth: 16,
+    spriteHeight: 16,
+    flipX: false,
+  } as SpriteItem;
+
+  it("hangs its card from the standing height, with the rows under it below zero", () => {
+    const billboard = actorBillboard(rabbit, sheet, "south", new Set());
+    expect(billboard.z).toBe(4);
+    const arrays = new CardArrays(1);
+    expect(arrays.push(billboard, atlas().pages)).toBe(true);
+    // Every vertex stands at the feet; the artwork spans 6 below to 10 above,
+    // so the top-down material can tell the rows that go over the ground.
+    expect([...arrays.centres].filter((_, i) => i % 3 === 2)).toEqual([4, 4, 4, 4]);
+    expect([...arrays.corners]).toEqual([-8, -6, 8, -6, 8, 10, -8, 10]);
+  });
+});
+
 describe("first-person cards", () => {
   it("writes each card as a foot centre, corner offsets and its place in the atlas", () => {
     const arrays = new CardArrays(1);

@@ -6,13 +6,16 @@ import { jumpPlacements, jumpSlabProp } from "../../generation/regional/JumpProf
 import { forestRowProp, forestRowType } from "../../patterns/ForestThicket.js";
 import { surfaceZAt } from "../../physics/SurfacePatch.js";
 import { roadRailBridgeProp } from "../../railway/RoadRailBridge.js";
+import { undergroundGarageRecipe } from "../../scenarios/UndergroundGarageRecipe.js";
 import { roadDeckMarkings } from "../RoadDeckPresentation.js";
 import {
   appendLeftover,
   appendPiecePlane,
   appendPropGeometry,
   blockingColliders,
+  excavationCeilings,
   hasRoomViews,
+  isOverheadDeck,
   projectedUv,
   propForm,
   propImageFrame,
@@ -395,5 +398,17 @@ describe("room props on their planes (tree houses, top-down)", () => {
     // Lifted a quarter pixel along the view ray, as leftover art is.
     for (const p of lying) expect(p.z).toBe(0.25);
     expect(Math.max(...lying.map((p) => p.v))).toBe(1);
+  });
+});
+
+describe("an excavation's roof", () => {
+  it("is an overhead deck although it lies at ground level, so it fades over a body on the dug floor", () => {
+    const props = undergroundGarageRecipe().props as Prop[];
+    const ceilings = excavationCeilings(props);
+    expect([...ceilings]).toEqual(["garage-roof"]);
+    const overhead = props.filter((prop) => isOverheadDeck(prop, ceilings));
+    expect(overhead.map((prop) => prop.collider?.surface?.id)).toEqual(["garage-roof"]);
+    // Without the excavation under it, a ground-level slab hides nobody.
+    expect(props.some((prop) => isOverheadDeck(prop))).toBe(false);
   });
 });
