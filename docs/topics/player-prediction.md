@@ -187,6 +187,26 @@ while actual touching bodies retain one horizontal correction. Snapshots include
 bounded solved body pairs so restore preserves that membership without another
 physics tick. The physics controller and contact response remain unchanged.
 
+### Nearby remote-actor handoffs
+
+Reproduced after the stop-and-go fix (2026-11-17). A local player walks east
+while a remote player sprints west on a parallel flat lane 20 px away. The
+players never touch. At the 24 px collider proximity boundary, the local view
+switches the remote player from buffered to predicted time on approach and back
+to buffered time on departure. On individual 60 Hz samples the remote runner
+advances 7.47 px on approach and moves 3.20 px backward on departure. Authority
+and a replica using only the buffer advance 2.13 px in the running direction on
+both ticks. Predicted and authority X agree exactly at the same physics tick.
+The native result repeats with zero and three extra ticks of frame delivery
+delay. Browser and device reproduction are pending.
+
+Run `npx tsx scripts/reproduce-nearby-prediction-handoff.ts` for both lanes.
+The existing release easing only applies to prescribed groups such as trains.
+Evaluate a velocity-bounded handoff on both edges for unconnected remote
+bodies, with solved contact taking precedence when bodies meet. A regression
+should check continuous travel on a close pass and coherent contact when the
+same paths intersect.
+
 ## Shared-physics default (205)
 
 The normal `PlayerPredictor` now restores/replays the same fixed 60Hz `PhysicsScene`
