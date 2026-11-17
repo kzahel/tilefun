@@ -1,12 +1,12 @@
 /** Load an image from the given URL, pre-decoded to avoid render-time stalls. */
-export async function loadImage(url: string): Promise<ImageBitmap> {
+export async function loadImage(url: string, options?: ImageBitmapOptions): Promise<ImageBitmap> {
   const img = new Image();
   img.src = url;
   await new Promise<void>((resolve, reject) => {
     img.onload = () => resolve();
     img.onerror = () => reject(new Error(`Failed to load image: ${url}`));
   });
-  return createImageBitmap(img);
+  return createImageBitmap(img, options);
 }
 
 /** Load and parse JSON from the given URL. */

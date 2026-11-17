@@ -401,28 +401,17 @@ export class InteriorCatalog {
 
   setImage(img: CanvasImageSource): void {
     this.atlasImage = img;
-    this.renderPrefabPreview();
-    this.renderGeneratedRoomPreview();
-    this.applyFilter();
   }
 
-  populateAtlas(): void {
+  private populateAtlas(): void {
     if (!isModernInteriorsAtlasLoaded() || this.entries.length > 0) return;
     this.entries = getModernInteriorsEntries();
     this.populateCategories();
     this.populateDesigns();
-    this.applyPendingRouteState();
-    this.applyFilter();
-    this.renderPrefabPreview();
-    this.renderGeneratedRoomPreview();
   }
 
   setRouteState(state: InteriorCatalogRouteState): void {
     this.pendingRouteState = state;
-    this.applyPendingRouteState();
-    this.applyFilter();
-    this.renderPrefabPreview();
-    this.renderGeneratedRoomPreview();
   }
 
   get visible(): boolean {
@@ -430,6 +419,8 @@ export class InteriorCatalog {
   }
 
   show(): void {
+    this.populateAtlas();
+    this.applyPendingRouteState();
     this.overlay.style.display = "flex";
     this.applyFilter();
     this.renderPrefabPreview();
@@ -451,8 +442,9 @@ export class InteriorCatalog {
   }
 
   private applyPendingRouteState(): void {
-    if (!this.pendingRouteState) return;
     const state = this.pendingRouteState;
+    if (!state) return;
+    this.pendingRouteState = null;
     if (state.search !== undefined) this.searchInput.value = state.search;
     if (state.sourceKind !== undefined) this.sourceSelect.value = state.sourceKind;
     if (state.category !== undefined) this.categorySelect.value = state.category;

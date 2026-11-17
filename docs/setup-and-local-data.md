@@ -147,6 +147,7 @@ which browser-local state is visible.
 | Extracted Modern Exteriors terrain strips and metadata | `public/assets/tilesets/me-autotile-*.png`, `me-autotile-metadata.json` | Yes |
 | Modern Exteriors named slices | `public/data/me-atlas-index.json` | Yes |
 | Packed Modern Interiors atlas and index | `public/assets/tilesets/modern-interiors-atlas.png`, `public/data/modern-interiors-atlas.json` | Yes |
+| Lossless gameplay atlas copies | `public/assets/tilesets/me-complete.webp`, `public/assets/tilesets/modern-interiors-atlas.webp` | Yes |
 | Room-review sprite subset | `src/interiors/review/assets/review-sprites.png` and `.json` | Yes |
 | Other runtime sprites, props, tiles and audio | `public/assets/` | Yes |
 | Blender tiger walk demo, pixel masters, editable source and builders | `public/demos/blender-tiger/`, `art-source/blender/`, `art-source/pixel-tiger/`, `scripts/blender/` | Yes; see [the workflow guide](blender-pixel-characters.md) |
@@ -178,6 +179,7 @@ saved feedback were copied into that build.
 | `npm run assets:review` | Committed Interiors atlas and index | No |
 | `npx tsx scripts/build-gameplay-furniture.ts` | Committed Interiors index and furniture catalogue | No |
 | `npm run assets:interiors` | Original files under `assets/interiors/1_Interiors/16x16` and `assets/interiors/6_Home_Designs` | Yes; repacks the full atlas/index |
+| `npm run assets:game-atlases` | Committed Exteriors and Interiors PNG atlases, plus `cwebp` and `dwebp` | No; verifies decoded pixels and refreshes the gameplay copies and fingerprints |
 | Original-pack extraction/indexing scripts | Their original image, XML or Godot inputs | Yes; inspect the script's inputs before running |
 
 Do not run `assets:interiors` as a fresh-clone setup step. Restore the original

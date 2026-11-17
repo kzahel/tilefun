@@ -320,6 +320,7 @@ export class GameClient implements GameTestHooks {
   }
 
   async init(): Promise<void> {
+    this.firstPerson.preloadScene();
     this.resize();
     window.addEventListener("resize", () => this.resize());
     // Prevent buttons from stealing keyboard focus — keeps all keys routed to the game.
@@ -452,10 +453,8 @@ export class GameClient implements GameTestHooks {
     this.editorPanel.setAssets(assets.sheets, assets.blendSheets, blendGraph);
     const meComplete = assets.sheets.get("me-complete");
     if (meComplete) this.propCatalog.setImage(meComplete.image);
-    this.propCatalog.populateAtlas();
     const modernInteriors = assets.sheets.get(MODERN_INTERIORS_SHEET_KEY);
     if (modernInteriors) this.interiorCatalog.setImage(modernInteriors.image);
-    this.interiorCatalog.populateAtlas();
 
     // Generate procedural gem sprite and add to sheets
     this.gemSpriteCanvas = generateGemSprite();

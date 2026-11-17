@@ -17,7 +17,7 @@
     "captures/**/*.ts"
   ],
   "ignoreUnresolved": ["^/tilefun/", "^/src/"],
-  "ignoreBinaries": ["wsl", "ffmpeg"],
+  "ignoreBinaries": ["wsl", "ffmpeg", "cwebp", "dwebp"],
   "ignoreExportsUsedInFile": true,
   "ignoreDependencies": ["@cloudflare/workers-types"]
 }

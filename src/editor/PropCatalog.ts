@@ -177,9 +177,9 @@ export class PropCatalog {
     document.body.appendChild(this.overlay);
   }
 
-  /** Populate theme dropdown and sprite cells after atlas index is loaded. */
-  populateAtlas(): void {
-    if (!isAtlasLoaded()) return;
+  /** Build the theme dropdown and sprite cells on the first visit. */
+  private populateAtlas(): void {
+    if (this.cells.length || !isAtlasLoaded()) return;
     for (const theme of getAtlasThemes()) {
       const opt = document.createElement("option");
       opt.value = theme;
@@ -198,6 +198,7 @@ export class PropCatalog {
   }
 
   show(): void {
+    this.populateAtlas();
     this.overlay.style.display = "flex";
     this.searchInput.value = "";
     this.themeSelect.value = "";

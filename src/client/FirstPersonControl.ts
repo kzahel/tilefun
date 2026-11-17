@@ -315,32 +315,35 @@ export class FirstPersonControl {
       : "Loading world…";
   }
 
-  /** The view's loaded 3D scene, or undefined while the module loads or after it
-   * failed to load. */
+  /** Start loading the shared scene module while the game prepares its assets. */
+  preloadScene(): void {
+    if (this.disposed || this.failed || this.loading || this.create) return;
+    this.loading = true;
+    import("../rendering/firstperson/FirstPersonView.js")
+      .then(({ FirstPersonView }) => {
+        this.create = (sheets) => new FirstPersonView(sheets);
+      })
+      .catch((error) => {
+        this.failed = true;
+        console.warn("[tilefun] World view unavailable", error);
+      })
+      .finally(() => {
+        this.loading = false;
+      });
+  }
+
+  /** The view's loaded 3D scene, or undefined while the module is unavailable. */
   scene(view: View): FirstPersonView | undefined {
-    if (this.disposed || this.failed) return undefined;
+    if (this.disposed) return undefined;
     const existing = this.scenes.get(view);
     if (existing) return existing;
-    if (this.create) {
-      const scene = this.create(this.sheets());
-      this.scenes.set(view, scene);
-      return scene;
+    if (!this.create) {
+      this.preloadScene();
+      return undefined;
     }
-    if (!this.loading) {
-      this.loading = true;
-      import("../rendering/firstperson/FirstPersonView.js")
-        .then(({ FirstPersonView }) => {
-          this.create = (sheets) => new FirstPersonView(sheets);
-        })
-        .catch((error) => {
-          this.failed = true;
-          console.warn("[tilefun] First-person view unavailable", error);
-        })
-        .finally(() => {
-          this.loading = false;
-        });
-    }
-    return undefined;
+    const scene = this.create(this.sheets());
+    this.scenes.set(view, scene);
+    return scene;
   }
 
   /** Opt-in synchronous observation of a drawn frame; items are borrowed only during the call. */

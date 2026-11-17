@@ -22,6 +22,9 @@ import { MODERN_INTERIORS_SHEET_KEY } from "./ModernInteriorsAtlasIndex.js";
 import { Spritesheet } from "./Spritesheet.js";
 import { TileVariants } from "./TileVariants.js";
 
+// Keep the atlas's original RGBA values through the browser's WebP decoder.
+const webpAtlasOptions: ImageBitmapOptions = { premultiplyAlpha: "none" };
+
 export interface GameAssets {
   sheets: Map<string, Spritesheet>;
   blendSheets: Spritesheet[];
@@ -186,16 +189,17 @@ export const SPRITE_MANIFEST: SpriteAsset[] = [
 export async function loadTerrainAssets(
   blendGraph: BlendGraph,
   onImageLoaded?: () => void,
+  completeAtlasPath = "assets/tilesets/me-complete.png",
 ): Promise<GameAssets> {
-  const load = async (path: string) => {
-    const image = await loadImage(path);
+  const load = async (path: string, options?: ImageBitmapOptions) => {
+    const image = await loadImage(path, options);
     onImageLoaded?.();
     return image;
   };
   const blendDescs = blendGraph.allSheets;
   const [blendImages, completeImg, objectsImg] = await Promise.all([
     Promise.all(blendDescs.map((desc) => load(desc.assetPath))),
-    load("assets/tilesets/me-complete.png"),
+    load(completeAtlasPath, completeAtlasPath.endsWith(".webp") ? webpAtlasOptions : undefined),
     load("assets/tilesets/objects.png"),
   ]);
   const sheets = new Map<string, Spritesheet>();
@@ -227,7 +231,7 @@ export async function loadGameAssets(
   const loaded = () => onProgress?.(++completed, total);
   onProgress?.(0, total);
   const [terrain, spriteImages, modernInteriorsImg] = await Promise.all([
-    loadTerrainAssets(blendGraph, loaded),
+    loadTerrainAssets(blendGraph, loaded, "assets/tilesets/me-complete.webp"),
     Promise.all(
       SPRITE_MANIFEST.map(async (entry) => {
         const image = await loadSpriteAsset(entry);
@@ -235,7 +239,7 @@ export async function loadGameAssets(
         return image;
       }),
     ),
-    loadImage("assets/tilesets/modern-interiors-atlas.png").then((image) => {
+    loadImage("assets/tilesets/modern-interiors-atlas.webp", webpAtlasOptions).then((image) => {
       loaded();
       return image;
     }),

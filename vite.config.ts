@@ -16,6 +16,9 @@ export default defineConfig({
   base: "/tilefun/",
   // Standalone capture/benchmark servers must not replace the live dev cache.
   cacheDir: "node_modules/.vite-dev",
+  // Rapier already ships browser ESM. Pre-bundling adds an inline source map
+  // that embeds another copy of its Wasm payload in the served JavaScript.
+  optimizeDeps: { exclude: ["@dimforge/rapier3d-compat"] },
   define: {
     "import.meta.env.VITE_MANUAL_RELOAD": JSON.stringify(!autoReload),
     "import.meta.env.VITE_BUILD_ID": JSON.stringify(
