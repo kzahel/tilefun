@@ -7,6 +7,8 @@
 //   npm run render:bench -- --headed --scenes=crowd --zooms=0.25 --query=shadows=projected
 //   npm run render:bench -- --compare=/tmp/before.json
 //   npm run render:bench -- --headed --query=view=fixed   (the classic fixed view)
+//   npm run render:bench -- --software-webgl --query=view=topdown3d
+//     (the browser suite's SwiftShader lane; compare with --query=view=fixed)
 //
 // Per cell it reports frame cadence, main-thread render/update callbacks, the
 // time inside backend submits (the rest of render is collection and terrain
@@ -70,9 +72,11 @@ const seconds = Number(option("seconds", "5"));
 if (!Number.isFinite(seconds) || seconds < 1 || seconds > 60) throw Error("--seconds must be 1–60");
 const [width, height] = option("viewport", "1280x800").split("x").map(Number);
 const headed = process.argv.includes("--headed");
+const softwareWebGl = process.argv.includes("--software-webgl");
 const output = option("output", path.join(os.tmpdir(), "tilefun-render.json"));
 const compare = option("compare", "");
 const endpoint = option("cdp", "");
+if (softwareWebGl && endpoint) throw Error("--software-webgl requires a launched browser");
 const port = Number(option("port", "0"));
 // An existing production origin (a preview server or the packaged shell's
 // tilefun://app/tilefun) instead of the isolated Vite dev server.
@@ -267,6 +271,7 @@ async function samplePage({ seconds, measureFinish = true }) {
     const tick = host?.authority?.timings?.["server.tick"];
     const entities = game.stateView.entities;
     return {
+      drawing3d: firstPerson,
       frames: frames.length,
       frameMs: stat(frames),
       // Frames longer than 1.5× the median interval missed the display cadence.
@@ -557,7 +562,14 @@ try {
   testOrigin = base ? undefined : new URL(origin).origin;
   if (endpoint) page = await openCdpTab(endpoint, { existingPage: attachPage });
   else {
-    browser = await chromium.launch({ headless: !headed, channel: "chromium" });
+    browser = await chromium.launch({
+      headless: !headed,
+      // Match playwright.software-webgl.config.ts, including its headless shell.
+      channel: softwareWebGl ? undefined : "chromium",
+      args: softwareWebGl
+        ? ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-gpu"]
+        : undefined,
+    });
     page = await browser.newPage({ viewport: { width, height } });
   }
   const cdp = endpoint ? page : await page.context().newCDPSession(page);
@@ -682,6 +694,8 @@ try {
         gpuTimer: !!gl?.getExtension("EXT_disjoint_timer_query_webgl2"),
       };
     });
+    if (softwareWebGl && !/swiftshader/i.test(device.gpu ?? ""))
+      throw Error(`Expected SwiftShader, got ${device.gpu}`);
     for (const zoom of zooms) {
       await page.evaluate(
         (z) => document.querySelector("#game").__game.debugPanel.setZoom(z),
@@ -817,7 +831,7 @@ try {
           `    slow frame at ${f.atMs} ms: ${f.frameMs} ms (update ${f.updateMs} in ${f.updates}, render ${f.renderMs}, uploads ${f.uploadPages} pages ${f.uploadKiB} KiB)`,
         );
       console.log(
-        `${name.padEnd(6)} ${String(zoom).padEnd(5)} frame ${cell.frameMs.p50}/${cell.frameMs.p95} ms, missed ${cell.missed}/${cell.frames}; render ${cell.renderMs.p50}/${cell.renderMs.p95} (submit ${cell.submitMs.p50}); gpu ${g}; render+finish ${cell.renderFinishMs?.p50 ?? "n/a"}; update ${cell.updateMs.p50}; draws ${cell.drawCallsPerFrame}${cell.meshDrawCallsPerFrame ? ` + ${cell.meshDrawCallsPerFrame} vehicle mesh` : ""}; tick ${cell.workerTickMs?.p50 ?? "?"}; ${cell.entities} entities`,
+        `${name.padEnd(6)} ${String(zoom).padEnd(5)} ${cell.drawing3d ? "3D" : "fixed"} frame ${cell.frameMs.p50}/${cell.frameMs.p95} ms, missed ${cell.missed}/${cell.frames}; render ${cell.renderMs.p50}/${cell.renderMs.p95} (submit ${cell.submitMs.p50}); gpu ${g}; render+finish ${cell.renderFinishMs?.p50 ?? "n/a"}; update ${cell.updateMs.p50}; draws ${cell.drawCallsPerFrame}${cell.meshDrawCallsPerFrame ? ` + ${cell.meshDrawCallsPerFrame} vehicle mesh` : ""}; tick ${cell.workerTickMs?.p50 ?? "?"}; ${cell.entities} entities`,
       );
     }
   }
@@ -828,6 +842,7 @@ try {
     cpu: endpoint ? undefined : os.cpus()[0]?.model,
     browser: endpoint ? page.browserVersion : browser.version(),
     headed: endpoint ? true : headed,
+    softwareWebGl,
     label: option("device", endpoint ? "attached device" : os.hostname().split(".")[0]),
     build: base ? `existing origin ${base}` : "vite dev (unminified modules)",
     query,

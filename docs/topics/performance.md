@@ -12,6 +12,13 @@ a phone's Chrome or the packaged Deck shell (`--cdp`, `--attach-page`).
 limits, tables and next options. Since 2026-11-16 play's default, and so the
 bench's, is the unified top-down view; `--query=view=fixed` measures the classic
 fixed view ([renderer unification](renderer-unification.md#device-scorecard)).
+`--software-webgl` launches the same SwiftShader headless shell and flags as
+the software browser-test lane, verifies its renderer string and records the
+active world renderer in each cell (`drawing3d`). Use explicit
+`--query=view=fixed` and `--query=view=topdown3d` for a comparison: the default
+still selects the fixed fallback on software WebGL. The
+[software investigation](renderer-unification.md#software-webgl-investigation-2026-11-17)
+owns the paired results and browser-suite limits.
 Since [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) a cell
 also reports `meshDrawCallsPerFrame`: the vehicle meshes the fixed view draws
 into images, which its draw-call figure had left out (26 to 547 a frame in the

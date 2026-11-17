@@ -5,8 +5,9 @@ Status: committed direction, 2026-11-14; slices 1 (one renderer host), 2 (ground
 artwork, shared page atlas), 3 (opt-in top-down camera, parity probe, merged
 meshes, device scorecard) and 4 (play in a headset) delivered the same day;
 slice 5 (top-down parity) started 2026-11-15 with building bodies and grass. Since
-2026-11-16 the unified top-down view is play's default (owner instruction, gate 2);
-the fixed 2D view stays selectable until the [retirement gate](#retirement-gate).
+2026-11-16 the unified top-down view is play's default (owner instruction, gate 2).
+Since 2026-11-17 it is the only player-facing choice; the fixed 2D view remains
+an internal fallback until the [retirement gate](#retirement-gate).
 Updated: 2026-11-17.
 
 Owns the move to one world renderer: its status, parity checklist, device
@@ -25,7 +26,8 @@ wanted as well, and a third renderer is not.
 - Unification runs in that direction only. The first-person view is not merged
   into the fixed 2D backend.
 - The fixed 2D view stayed the default for top-down play until the unified one
-  was good enough (owner, 2026-11-16: make it the default). It stays selectable
+  was good enough (owner, 2026-11-16: make it the default). Since 2026-11-17
+  it is available only through development controls and internal fallbacks
   until retirement: not deleted, not degraded and not left unmaintained.
 
 ## Why this direction
@@ -44,8 +46,8 @@ wanted as well, and a third renderer is not.
 ## Guardrails
 
 - **Default.** Top-down play and building mode draw through the unified view
-  since 2026-11-16. The fixed GPU backend stays selectable for play and still
-  draws labs by default, the explorer, probes and review captures until the
+  since 2026-11-16. The fixed GPU backend remains an internal fallback and
+  draws room/underlay labs, the explorer, probes and review captures until the
   retirement gate. New top-down features keep working there.
 - **Review raster.** `ReviewRasterBackend` and fingerprinted review images are
   outside this work and stay.
@@ -74,11 +76,11 @@ The fixed view remains in the code as a fallback and a development tool until
 the [retirement inventory](#retirement-inventory) is cleared:
 
 - Where WebGL is a software rasteriser (SwiftShader, llvmpipe: `softwareWebGl`
-  from the WebGL2 probe) the fixed view stands in, because the CPU would draw
-  the 3D scene. That includes the browser suite's headless Chromium, which runs
-  at about a third of its usual pace with the 3D view on every page and misses
-  timing-sensitive gameplay phases; `tests/unified-topdown.spec.ts` asks for
-  the unified view explicitly. The first full suite on 2026-11-16 after the
+  from the WebGL2 probe) the fixed view still stands in. That includes the
+  browser suite's headless Chromium; `tests/unified-topdown.spec.ts` asks for
+  the unified view explicitly. The previously reported threefold slowdown is
+  not reproduced by the [paired software-GPU investigation](#software-webgl-investigation-2026-11-17).
+  The first full suite on 2026-11-16 after the
   default passed 553 of 560; seven failures also reproduced on that session's
   starting commit, and the follow-up
   [browser-suite repair](testing.md#local-validation) fixed them.
@@ -572,7 +574,7 @@ reported regressions, and the rows below are not all moved.
 | Consumer | Today | Before retirement |
 | --- | --- | --- |
 | Play, classic choice | Options choice removed 2026-11-17; `?view=fixed` and `r_topdown3d 0` remain for specs and comparison | Remove with the pinned specs |
-| Software WebGL (SwiftShader, llvmpipe), the browser suite included | Classic view unless the unified one is chosen | Measure the 3D view in software; make it cheap enough, or keep a fallback |
+| Software WebGL (SwiftShader, llvmpipe), the browser suite included | Classic view unless the unified one is chosen; paired local SwiftShader measurements below do not reproduce the claimed threefold slowdown | Migrate the suite deliberately and validate hosted Linux before removing this fallback |
 | Play fallbacks | The fixed view draws a view the 3D scene cannot: while its module loads or after it failed, graphics lost, a diagonal split-screen mask (probe only), `?rooms3d=0` | A 3D-only answer for each (a loading frame, a lost-context frame) |
 | Building mode with a seat in first person | Fixed view | Top-down 3D for that seat, or edit from first person |
 | Prop editor (`PropEditorScene`) | Fixed view | Move to the 3D scene or retire |
@@ -585,6 +587,67 @@ reported regressions, and the rows below are not all moved.
 | Browser specs that instrument the fixed backend's scene pass or its vehicle-mesh counters (`gpu-renderer`, `jump-park`, `roadkill`, `train-recovery`, `vehicle-geometry`, `world-geometry` cutaway, `terrain-pacing`) | Pinned to `view=fixed` (2026-11-16); on GPU Chromium they would otherwise get the unified view | Unified-view equivalents (the 3D frame's collected items and body images), then retire the pins |
 | CPU terrain rasteriser and terrain pages | Shared: the 3D ground wears its chunk images | Stays |
 | Review raster (`ReviewRasterBackend`), showcases, patterns, Workshop candidates | Outside this work | Stays |
+
+## Software WebGL investigation (2026-11-17)
+
+Owner request: remove the player-facing choice and commit it, then investigate
+the software-GPU cost before retiring the fixed renderer. The choice removal is
+committed as `71f1e81d`. The interrupted investigation's temporary forced-3D
+source edit is removed; the software fallback policy is unchanged.
+
+`render:bench --software-webgl` now launches the browser suite's bundled
+headless shell with its exact SwiftShader flags, verifies the actual GL renderer
+string, and records `drawing3d` in each cell. Both lanes use explicit URL choices,
+so they need no source edits or different builds. Commands, timings and limits:
+[paired evidence](../benchmarks/software-webgl-renderer-2026-11-17.json).
+
+Local M4 Pro, Chromium 156, macOS, 1280×800 at DPR 1, seed 2026; steady
+camera after terrain preparation. Samples are 4 seconds at 1×/0.25× and
+5 seconds at 0.1×. FPS below is approximately sampled frames / sample seconds.
+Lanes ran sequentially, with their order reversed for the 0.1× cells.
+
+| Scene | Zoom | Fixed FPS | Unified FPS | Fixed / unified GPU p50, ms |
+| --- | --- | --- | --- | --- |
+| City | 1 | 44.2 | 59.0 | 19.06 / 13.89 |
+| City | 0.25 | 41.0 | 56.0 | 18.60 / 14.11 |
+| City | 0.1 | 49.0 | 40.0 | 16.39 / 20.77 |
+| Woods | 1 | 59.2 | 59.8 | 13.64 / 8.61 |
+| Woods | 0.25 | 56.2 | 60.0 | 14.46 / 9.78 |
+| Woods | 0.1 | 42.0 | 45.6 | 18.14 / 17.24 |
+| Crowd (1,000 rabbits, parked cars) | 0.1 | 14.0 | 20.2 | 55.60 / 38.51 |
+
+The reported threefold slowdown does not reproduce. Unified is equal or faster
+in six of seven cells; the widest city view is slower. Short, local software-GPU
+samples do not establish hosted Linux performance, a whole-suite pass or device
+acceptance. GPU timers measure SwiftShader work here, not physical GPU speed.
+
+The existing CI smoke (`smoke`, `worker-server`, `pwa`) passes all 12 cases
+with each view explicitly selected, one worker and zero retries, against the
+same production build and current manifest. Summed test time is 66.6 s fixed
+versus 67.9 s unified; this excludes browser/server setup. A temporary wrapper
+sets the URL choice before app startup without editing game source or test
+bodies. Separate playable-world preflights confirm SwiftShader and the expected
+active renderer; the wrapper is removed after measurement. The normal-Chromium
+character-manifest test and fixed-view embedded train-recall test also pass
+after restoring manifest freshness. Build, the two view-choice unit cases,
+focused script/JSON lint and diff checks pass.
+
+The interrupted full-suite experiment is not a valid retirement qualification:
+it forced 3D by editing `unifiedTopDown.ts`, failed the manifest build check,
+then used `vite build` directly without refreshing the Workshop manifest. Its
+log explicitly reports **Review inputs changed. Rebuild the Workshop manifest
+before saving.** The 527 passes, 32 failures and two retry flakes include many
+disabled-review-button failures caused by that stale inventory. They cannot
+establish a 3D regression. A train-recall assertion and the deer/garden retry
+flakes remain unattributed under that run's load; the train assertion passes
+alone, and there was no matched full-suite baseline.
+
+Step 2 is complete as an investigation. The smoke does not require retaining
+fixed drawing on the measured machine, but deleting it still needs the
+inventory above: migrate fixed-counter specs and editor/lab/explorer consumers,
+provide loading/lost-context frames, then qualify unified drawing on hosted
+Linux and the affected browser contracts. No fallback or CI timing policy is
+changed by this investigation.
 
 ## Open questions
 

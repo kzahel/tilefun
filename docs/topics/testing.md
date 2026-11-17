@@ -90,6 +90,10 @@ run; copy the numbers to the owning doc first). Build first; it serves `dist`.
 Per-test deadline overrides scale from `test.info().timeout` rather than reading
 `CI`, so this lane gets the hosted values. Check software-WebGL timing there
 before changing CI deadlines or shards.
+The [2026-11-17 renderer investigation](renderer-unification.md#software-webgl-investigation-2026-11-17)
+compares fixed and unified drawing in this lane with explicit URL choices and
+active-renderer assertions; its local smoke evidence does not qualify the full
+suite or hosted Linux for fixed-renderer retirement.
 
 Native tests share a 20 s deadline (`vitest.config.ts`) that only catches hangs:
 many open production Realms and run 1–5 s under parallel load, 2–4× longer on

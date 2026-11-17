@@ -1,0 +1,692 @@
+{
+  "date": "2026-11-17",
+  "revision": "71f1e81d",
+  "purpose": "Renderer retirement step 2: paired software-WebGL investigation; gameplay renderer policy is unchanged.",
+  "environment": {
+    "cpu": "Apple M4 Pro",
+    "platform": "darwin 25.6.0 arm64",
+    "node": "27.0.0-alpha.0.0.0 (timing harness); build and browser assertions use pinned Node 24.22.1",
+    "browser": "156.0.8078.4",
+    "gpu": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver)",
+    "viewport": {
+      "width": 1280,
+      "height": 800,
+      "devicePixelRatio": 1
+    },
+    "headed": false,
+    "build": "vite dev (unminified modules)",
+    "launchArgs": [
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+      "--disable-gpu"
+    ],
+    "channel": "Playwright headless shell"
+  },
+  "method": [
+    "Run each lane sequentially without other test/build work; fixed then unified at 1 and 0.25; unified then fixed at 0.1.",
+    "Existing render:bench seeds regional world 2026, waits for terrain settling, samples steady frames, then measures render plus gl.finish in a separate window.",
+    "City/woods at 1 and 0.25: 4 seconds per cell; city/woods/crowd at 0.1: 5 seconds per cell. FPS = frame count / requested sampling seconds, approximately.",
+    "Crowd requests 1000 rabbits and 50 parked vehicles; live populations and traffic vary slightly.",
+    "drawing3d is observed from the live game, not inferred from the requested URL. Every run verified SwiftShader on the actual render context."
+  ],
+  "commands": [
+    "node scripts/benchmark-render.mjs --software-webgl --scenes=city,woods --zooms=1,0.25 --seconds=4 --query=view=fixed --output=/tmp/sw-fixed.json",
+    "Repeat with --query=view=topdown3d, then both with --scenes=city,woods,crowd --zooms=0.1 --seconds=5."
+  ],
+  "runs": {
+    "fixed": [
+      {
+        "scene": "city",
+        "zoom": 1,
+        "drawing3d": false,
+        "frames": 177,
+        "frameMs": {
+          "p50": 16.7,
+          "p95": 33.4,
+          "max": 33.4
+        },
+        "renderMs": {
+          "p50": 0.6,
+          "p95": 0.8,
+          "max": 1.3
+        },
+        "gpuMs": {
+          "p50": 19.06,
+          "p95": 23,
+          "max": 25.78,
+          "samples": 177,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 8.3,
+        "entities": 17,
+        "workerTickMs": {
+          "p50": 0.8,
+          "p95": 1
+        },
+        "seconds": 4,
+        "fps": 44.2
+      },
+      {
+        "scene": "city",
+        "zoom": 0.25,
+        "drawing3d": false,
+        "frames": 164,
+        "frameMs": {
+          "p50": 16.7,
+          "p95": 33.4,
+          "max": 99.9
+        },
+        "renderMs": {
+          "p50": 0.9,
+          "p95": 1.1,
+          "max": 1.5
+        },
+        "gpuMs": {
+          "p50": 18.6,
+          "p95": 29.55,
+          "max": 96.06,
+          "samples": 164,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 15.6,
+        "entities": 26,
+        "workerTickMs": {
+          "p50": 0.7,
+          "p95": 1
+        },
+        "seconds": 4,
+        "fps": 41.0
+      },
+      {
+        "scene": "woods",
+        "zoom": 1,
+        "drawing3d": false,
+        "frames": 237,
+        "frameMs": {
+          "p50": 16.7,
+          "p95": 16.8,
+          "max": 33.4
+        },
+        "renderMs": {
+          "p50": 0.9,
+          "p95": 1,
+          "max": 2
+        },
+        "gpuMs": {
+          "p50": 13.64,
+          "p95": 14.55,
+          "max": 15.35,
+          "samples": 237,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 4,
+        "entities": 138,
+        "workerTickMs": {
+          "p50": 1.2,
+          "p95": 1.4
+        },
+        "seconds": 4,
+        "fps": 59.2
+      },
+      {
+        "scene": "woods",
+        "zoom": 0.25,
+        "drawing3d": false,
+        "frames": 225,
+        "frameMs": {
+          "p50": 16.7,
+          "p95": 33.3,
+          "max": 33.4
+        },
+        "renderMs": {
+          "p50": 1,
+          "p95": 1.2,
+          "max": 1.9
+        },
+        "gpuMs": {
+          "p50": 14.46,
+          "p95": 15.94,
+          "max": 22.89,
+          "samples": 225,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 4,
+        "entities": 261,
+        "workerTickMs": {
+          "p50": 1.3,
+          "p95": 1.5
+        },
+        "seconds": 4,
+        "fps": 56.2
+      },
+      {
+        "scene": "city",
+        "zoom": 0.1,
+        "drawing3d": false,
+        "frames": 245,
+        "frameMs": {
+          "p50": 16.7,
+          "p95": 33.3,
+          "max": 33.5
+        },
+        "renderMs": {
+          "p50": 1.3,
+          "p95": 1.5,
+          "max": 1.8
+        },
+        "gpuMs": {
+          "p50": 16.39,
+          "p95": 17.35,
+          "max": 20.65,
+          "samples": 245,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 17.1,
+        "entities": 52,
+        "workerTickMs": {
+          "p50": 0.9,
+          "p95": 1.1
+        },
+        "seconds": 5,
+        "fps": 49.0
+      },
+      {
+        "scene": "woods",
+        "zoom": 0.1,
+        "drawing3d": false,
+        "frames": 210,
+        "frameMs": {
+          "p50": 16.7,
+          "p95": 33.4,
+          "max": 33.5
+        },
+        "renderMs": {
+          "p50": 2.2,
+          "p95": 4.6,
+          "max": 5.2
+        },
+        "gpuMs": {
+          "p50": 18.14,
+          "p95": 19.27,
+          "max": 28.48,
+          "samples": 210,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 7.1,
+        "entities": 536,
+        "workerTickMs": {
+          "p50": 1.7,
+          "p95": 2.1
+        },
+        "seconds": 5,
+        "fps": 42.0
+      },
+      {
+        "scene": "crowd",
+        "zoom": 0.1,
+        "drawing3d": false,
+        "frames": 70,
+        "frameMs": {
+          "p50": 66.7,
+          "p95": 83.4,
+          "max": 83.4
+        },
+        "renderMs": {
+          "p50": 4.2,
+          "p95": 4.8,
+          "max": 5.2
+        },
+        "gpuMs": {
+          "p50": 55.6,
+          "p95": 59.5,
+          "max": 63.19,
+          "samples": 70,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 52.2,
+        "entities": 1084,
+        "workerTickMs": {
+          "p50": 6.5,
+          "p95": 7.9
+        },
+        "seconds": 5,
+        "fps": 14.0
+      }
+    ],
+    "unified": [
+      {
+        "scene": "city",
+        "zoom": 1,
+        "drawing3d": true,
+        "frames": 236,
+        "frameMs": {
+          "p50": 16.7,
+          "p95": 16.8,
+          "max": 33.4
+        },
+        "renderMs": {
+          "p50": 0.5,
+          "p95": 0.7,
+          "max": 0.8
+        },
+        "gpuMs": {
+          "p50": 13.89,
+          "p95": 15.46,
+          "max": 19.68,
+          "samples": 236,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 26.3,
+        "entities": 17,
+        "workerTickMs": {
+          "p50": 0.7,
+          "p95": 0.9
+        },
+        "seconds": 4,
+        "fps": 59.0
+      },
+      {
+        "scene": "city",
+        "zoom": 0.25,
+        "drawing3d": true,
+        "frames": 224,
+        "frameMs": {
+          "p50": 16.7,
+          "p95": 33.3,
+          "max": 50
+        },
+        "renderMs": {
+          "p50": 0.7,
+          "p95": 0.9,
+          "max": 1.3
+        },
+        "gpuMs": {
+          "p50": 14.11,
+          "p95": 16.79,
+          "max": 45.41,
+          "samples": 224,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 72.6,
+        "entities": 26,
+        "workerTickMs": {
+          "p50": 0.7,
+          "p95": 1
+        },
+        "seconds": 4,
+        "fps": 56.0
+      },
+      {
+        "scene": "woods",
+        "zoom": 1,
+        "drawing3d": true,
+        "frames": 239,
+        "frameMs": {
+          "p50": 16.7,
+          "p95": 16.7,
+          "max": 33.3
+        },
+        "renderMs": {
+          "p50": 0.8,
+          "p95": 0.9,
+          "max": 1.4
+        },
+        "gpuMs": {
+          "p50": 8.61,
+          "p95": 10.18,
+          "max": 38.68,
+          "samples": 239,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 6,
+        "entities": 138,
+        "workerTickMs": {
+          "p50": 1.2,
+          "p95": 1.5
+        },
+        "seconds": 4,
+        "fps": 59.8
+      },
+      {
+        "scene": "woods",
+        "zoom": 0.25,
+        "drawing3d": true,
+        "frames": 240,
+        "frameMs": {
+          "p50": 16.7,
+          "p95": 16.8,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 0.7,
+          "p95": 0.8,
+          "max": 0.9
+        },
+        "gpuMs": {
+          "p50": 9.78,
+          "p95": 12.03,
+          "max": 16.38,
+          "samples": 240,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 6,
+        "entities": 261,
+        "workerTickMs": {
+          "p50": 1.4,
+          "p95": 1.6
+        },
+        "seconds": 4,
+        "fps": 60.0
+      },
+      {
+        "scene": "city",
+        "zoom": 0.1,
+        "drawing3d": true,
+        "frames": 200,
+        "frameMs": {
+          "p50": 33.2,
+          "p95": 33.4,
+          "max": 33.4
+        },
+        "renderMs": {
+          "p50": 1.1,
+          "p95": 1.3,
+          "max": 1.9
+        },
+        "gpuMs": {
+          "p50": 20.77,
+          "p95": 24.53,
+          "max": 32.84,
+          "samples": 200,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 111,
+        "entities": 52,
+        "workerTickMs": {
+          "p50": 0.9,
+          "p95": 1.2
+        },
+        "seconds": 5,
+        "fps": 40.0
+      },
+      {
+        "scene": "woods",
+        "zoom": 0.1,
+        "drawing3d": true,
+        "frames": 228,
+        "frameMs": {
+          "p50": 16.7,
+          "p95": 33.4,
+          "max": 33.4
+        },
+        "renderMs": {
+          "p50": 1.5,
+          "p95": 1.7,
+          "max": 2
+        },
+        "gpuMs": {
+          "p50": 17.24,
+          "p95": 19.62,
+          "max": 25.96,
+          "samples": 228,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 19,
+        "entities": 536,
+        "workerTickMs": {
+          "p50": 1.6,
+          "p95": 1.9
+        },
+        "seconds": 5,
+        "fps": 45.6
+      },
+      {
+        "scene": "crowd",
+        "zoom": 0.1,
+        "drawing3d": true,
+        "frames": 101,
+        "frameMs": {
+          "p50": 50,
+          "p95": 50.1,
+          "max": 66.7
+        },
+        "renderMs": {
+          "p50": 3.9,
+          "p95": 4.4,
+          "max": 4.9
+        },
+        "gpuMs": {
+          "p50": 38.51,
+          "p95": 39.9,
+          "max": 43.84,
+          "samples": 101,
+          "disjoint": 0
+        },
+        "drawCallsPerFrame": 468.6,
+        "entities": 1085,
+        "workerTickMs": {
+          "p50": 6.5,
+          "p95": 8.1
+        },
+        "seconds": 5,
+        "fps": 20.2
+      }
+    ]
+  },
+  "priorInterruptedExperiment": {
+    "stats": {
+      "startTime": "2026-11-17T07:52:31.601Z",
+      "duration": 1302930.009,
+      "expected": 527,
+      "skipped": 0,
+      "unexpected": 32,
+      "flaky": 2
+    },
+    "caveat": "The full-suite run forced 3D by editing src/config/unifiedTopDown.ts, bypassed the failed manifest build check with vite build, and ran with a stale Workshop manifest. The log explicitly reports Review inputs changed; review-button failures cannot establish a 3D regression. No matched full-suite baseline was acquired. One train recall assertion and two gameplay retry flakes remain unattributed."
+  },
+  "limits": [
+    "Short local macOS software-GPU samples, not hosted Linux measurements or physical-device results.",
+    "No full-suite qualification; pinned fixed-renderer specs and remaining editor/lab consumers still block deletion.",
+    "City at 0.1 is slower in unified; a blanket claim that unified is faster would be incorrect."
+  ],
+  "validation": {
+    "build": "npm run build passes under Node 24.22.1, including current Workshop manifest (2130 candidates).",
+    "unit": "Both src/config/unifiedTopDown.test.ts cases pass after restoring the unchanged software fallback.",
+    "lint": "Biome checks benchmark script and this evidence file; node --check and git diff --check pass.",
+    "softwareSmoke": {
+      "method": "Unmodified smoke, worker-server and pwa test bodies imported through a temporary wrapper; beforeEach installs an init script adding an explicit view parameter to each game URL before app startup. One worker and zero retries in playwright.software-webgl.config.ts. Temporary wrapper removed afterward.",
+      "fixed": {
+        "passed": 12,
+        "unexpected": 0,
+        "flaky": 0,
+        "sumTestDurationMs": 66589,
+        "cases": [
+          {
+            "file": "smoke.spec.ts",
+            "title": "ready game fills a nonzero viewport with rendered pixels",
+            "status": "expected",
+            "durationMs": 3345,
+            "attempts": 1
+          },
+          {
+            "file": "smoke.spec.ts",
+            "title": "arrow and WASD input keep the game rendering without console or page errors",
+            "status": "expected",
+            "durationMs": 10266,
+            "attempts": 1
+          },
+          {
+            "file": "smoke.spec.ts",
+            "title": "F3 toggles debug overlay",
+            "status": "expected",
+            "durationMs": 10390,
+            "attempts": 1
+          },
+          {
+            "file": "smoke.spec.ts",
+            "title": "startup shows the HTML shell before game code, image progress, and world preparation",
+            "status": "expected",
+            "durationMs": 2935,
+            "attempts": 1
+          },
+          {
+            "file": "worker-server.spec.ts",
+            "title": "lake travel and rejected open-water travel keep the local Worker, map and streaming alive",
+            "status": "expected",
+            "durationMs": 9448,
+            "attempts": 1
+          },
+          {
+            "file": "worker-server.spec.ts",
+            "title": "single player renders while its authoritative Worker is busy",
+            "status": "expected",
+            "durationMs": 4612,
+            "attempts": 1
+          },
+          {
+            "file": "worker-server.spec.ts",
+            "title": "an unhandled local Worker failure offers reload with the authority stack",
+            "status": "expected",
+            "durationMs": 6937,
+            "attempts": 1
+          },
+          {
+            "file": "worker-server.spec.ts",
+            "title": "Worker saves player and edits before shutdown and restores them on reopen",
+            "status": "expected",
+            "durationMs": 6515,
+            "attempts": 1
+          },
+          {
+            "file": "worker-server.spec.ts",
+            "title": "physics settings replicate across isolated heaps and lifecycle pause resumes",
+            "status": "expected",
+            "durationMs": 3839,
+            "attempts": 1
+          },
+          {
+            "file": "pwa.spec.ts",
+            "title": "the built game exposes a valid standalone launcher under its deployment path",
+            "status": "expected",
+            "durationMs": 3330,
+            "attempts": 1
+          },
+          {
+            "file": "pwa.spec.ts",
+            "title": "Vite dev serving applies the deployment prefix once to launcher assets",
+            "status": "expected",
+            "durationMs": 174,
+            "attempts": 1
+          },
+          {
+            "file": "smoke.spec.ts",
+            "title": "zero and collected totals remain visible below Map in Play and Edit across screen sizes",
+            "status": "expected",
+            "durationMs": 4798,
+            "attempts": 1
+          }
+        ]
+      },
+      "unified": {
+        "passed": 12,
+        "unexpected": 0,
+        "flaky": 0,
+        "sumTestDurationMs": 67930,
+        "cases": [
+          {
+            "file": "smoke.spec.ts",
+            "title": "ready game fills a nonzero viewport with rendered pixels",
+            "status": "expected",
+            "durationMs": 4061,
+            "attempts": 1
+          },
+          {
+            "file": "smoke.spec.ts",
+            "title": "arrow and WASD input keep the game rendering without console or page errors",
+            "status": "expected",
+            "durationMs": 10005,
+            "attempts": 1
+          },
+          {
+            "file": "smoke.spec.ts",
+            "title": "F3 toggles debug overlay",
+            "status": "expected",
+            "durationMs": 9841,
+            "attempts": 1
+          },
+          {
+            "file": "smoke.spec.ts",
+            "title": "startup shows the HTML shell before game code, image progress, and world preparation",
+            "status": "expected",
+            "durationMs": 3607,
+            "attempts": 1
+          },
+          {
+            "file": "worker-server.spec.ts",
+            "title": "lake travel and rejected open-water travel keep the local Worker, map and streaming alive",
+            "status": "expected",
+            "durationMs": 8944,
+            "attempts": 1
+          },
+          {
+            "file": "worker-server.spec.ts",
+            "title": "single player renders while its authoritative Worker is busy",
+            "status": "expected",
+            "durationMs": 5076,
+            "attempts": 1
+          },
+          {
+            "file": "worker-server.spec.ts",
+            "title": "an unhandled local Worker failure offers reload with the authority stack",
+            "status": "expected",
+            "durationMs": 6408,
+            "attempts": 1
+          },
+          {
+            "file": "worker-server.spec.ts",
+            "title": "Worker saves player and edits before shutdown and restores them on reopen",
+            "status": "expected",
+            "durationMs": 6899,
+            "attempts": 1
+          },
+          {
+            "file": "worker-server.spec.ts",
+            "title": "physics settings replicate across isolated heaps and lifecycle pause resumes",
+            "status": "expected",
+            "durationMs": 3882,
+            "attempts": 1
+          },
+          {
+            "file": "pwa.spec.ts",
+            "title": "the built game exposes a valid standalone launcher under its deployment path",
+            "status": "expected",
+            "durationMs": 3973,
+            "attempts": 1
+          },
+          {
+            "file": "pwa.spec.ts",
+            "title": "Vite dev serving applies the deployment prefix once to launcher assets",
+            "status": "expected",
+            "durationMs": 170,
+            "attempts": 1
+          },
+          {
+            "file": "smoke.spec.ts",
+            "title": "zero and collected totals remain visible below Map in Play and Edit across screen sizes",
+            "status": "expected",
+            "durationMs": 5064,
+            "attempts": 1
+          }
+        ]
+      },
+      "preflight": "Separate fixed and unified assertions start a flat playable world, assert observed drawing3d false/true respectively, and verify SwiftShader. Both pass. The first fixed preflight omitted the generation parameter and could not find New World; corrected harness rerun passes without any game change.",
+      "limits": "12 existing browser cases per lane, not the full suite. Test duration sums exclude browser/server setup and renderer preflights."
+    },
+    "priorFailureRechecks": {
+      "command": "npx playwright test tests/character-rendering.spec.ts tests/train-recovery.spec.ts --grep=\"normal Chromium verifies|embedded station keeps\" --workers=1 --retries=0",
+      "passed": 2,
+      "durationMs": 9900,
+      "note": "Fresh manifest, unchanged restored software fallback; individual success does not attribute prior failures under full-suite load."
+    }
+  }
+}
