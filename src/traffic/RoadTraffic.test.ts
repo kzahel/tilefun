@@ -1,10 +1,12 @@
 import { expect, it } from "vitest";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
 import { crowdedRoadTrafficRecipe, roadTrafficRecipe } from "../scenarios/RoadTrafficRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { installTrafficGuard } from "../server/RealmComposition.js";
 import { required } from "../shared/required.js";
 import { buildLaneGraph, nextLanes } from "./LaneGraph.js";
 
@@ -31,6 +33,52 @@ function straightRecipe(crossing = false): ScenarioRecipe {
     ],
   };
 }
+
+it("only seeds new road traffic outside every live camera and its buffer", async () => {
+  const recipe = straightRecipe();
+  const s = await ScenarioSession.create({
+    ...recipe,
+    guest: createPlayer(32, 128),
+    fixedTrafficPopulation: true,
+    trafficRoads: [{ a: { x: -68, y: 0 }, b: { x: 68, y: 0 }, width: 8, intercity: false }],
+    roads: [{ left: -1024, top: -64, right: 1024, bottom: 64 }],
+  });
+  try {
+    const guest = required(s.guest);
+    const narrow = { minCx: -1, maxCx: 1, minCy: -1, maxCy: 1 };
+    const overview = { ...narrow, minCx: -4, maxCx: 4 };
+    const tickPopulation = () => {
+      for (let i = 0; i < 120; i++) s.tick();
+    };
+    await s.realm.ensureReady({ ...overview, minCx: -5, maxCx: 5 });
+    installTrafficGuard(s.realm);
+    s.player.debugPaused = guest.debugPaused = true;
+    s.player.visibleRange = overview;
+    guest.visibleRange = narrow;
+    tickPopulation();
+    expect(automatic(s)).toHaveLength(0);
+
+    // An arrival/readiness request can also run while another player watches.
+    await s.realm.ensureReady(overview);
+    expect(automatic(s)).toHaveLength(0);
+
+    s.player.visibleRange = narrow;
+    guest.visibleRange = { ...narrow, minCx: 3, maxCx: 3 };
+    tickPopulation();
+    const carChunks = () =>
+      automatic(s).map(({ entity }) => Math.floor(entity.position.wx / CHUNK_SIZE_PX));
+    const seeded = carChunks();
+    expect(seeded.length).toBeGreaterThan(0);
+    expect(seeded.every((cx) => cx === -4 || cx === -3)).toBe(true);
+
+    guest.visibleRange = narrow;
+    tickPopulation();
+    expect(carChunks().some((cx) => cx === 3)).toBe(true);
+    expect(carChunks().every((cx) => Math.abs(cx) > 2)).toBe(true);
+  } finally {
+    await s.close();
+  }
+});
 
 it("queues behind a parked body without pushing it, then follows when the road clears", async () => {
   const s = await ScenarioSession.create(straightRecipe());

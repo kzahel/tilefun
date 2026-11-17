@@ -101,6 +101,7 @@ import { RealmReplicator } from "./RealmReplicator.js";
 import { dismountPlayer, restoreSavedMount } from "./RealmRiding.js";
 import { resolveSimulationGameplay } from "./RealmSimulation.js";
 import { RealmStreaming } from "./RealmStreaming.js";
+import { RealmTrafficPopulation } from "./RealmTrafficPopulation.js";
 import { createRealmWorkContext } from "./RealmWildlife.js";
 import { tickAllAI } from "./tickAllAI.js";
 import { VehicleControl } from "./VehicleControl.js";
@@ -226,6 +227,7 @@ export class Realm {
   private readonly replication = new RealmReplicator();
   /** Monotonic tick counter. */
   private tickCounter = 0;
+  private readonly trafficPopulation = new RealmTrafficPopulation(this);
   /** Bumped when sessions join/leave (affects playerNames). */
   private playerNamesRevision = 0;
   /** Bumped when any session's editor cursor or editor mode changes. */
@@ -631,18 +633,7 @@ export class Realm {
         .filter((s) => !dormantClientIds.has(s.clientId))
         .map((s) => s.visibleRange),
     );
-    if (this.tickCounter % 120 === 0)
-      this.vehicleRegistry?.populate(
-        [...this.sessions.values()]
-          .filter((s) => !s.retired && !s.transitioning)
-          .map((s) =>
-            around(
-              Math.floor(s.player.position.wx / CHUNK_SIZE_PX),
-              Math.floor(s.player.position.wy / CHUNK_SIZE_PX),
-              2,
-            ),
-          ),
-      );
+    this.trafficPopulation.tick(this.tickCounter, dormantClientIds);
     return storagePaused;
   }
 
@@ -1182,7 +1173,7 @@ export class Realm {
     // Explicit readiness fences may load chunks after the ordinary budgeted pass.
     // Publish complete terrain even when authority will stay paused after reload.
     this.world.computeAutotile(this.blendGraph);
-    this.vehicleRegistry?.populate([range]);
+    this.trafficPopulation.prepareArrival(range);
     await this.railways?.prepare([range]);
   }
 

@@ -35283,11 +35283,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:130"
+          "source": "src/scenarios/ScenarioSession.ts:129"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:210"
+          "source": "src/scenarios/ScenarioSession.ts:187"
         },
         {
           "system": "Gameplay",
@@ -35311,7 +35311,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:300"
+          "source": "src/server/Realm.ts:302"
         },
         {
           "system": "Gameplay",

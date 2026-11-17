@@ -6,7 +6,6 @@ import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
 import { replaceBodyCollider, teleportBody } from "../physics/PhysicalEdits.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
-import { RoadType } from "../road/RoadType.js";
 import { runEquipment } from "../server/EquipmentControl.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
@@ -31,7 +30,7 @@ import {
   scenarioGravity,
 } from "./ScenarioRecipe.js";
 import { scenarioRegistry } from "./ScenarioRegistry.js";
-import { paintScenarioTerrain } from "./ScenarioTerrain.js";
+import { paintScenarioRoads, paintScenarioTerrain } from "./ScenarioTerrain.js";
 import { scenarioVehicleSource } from "./ScenarioTraffic.js";
 
 /** Presses composed with a seat's movement (horn, sirens, throw). */
@@ -135,32 +134,7 @@ export class ScenarioSession {
     if (this.realm.vehicles.get(this.player)) replaceBodyCollider(this.player.player, null);
     await this.ready();
     if (fresh) {
-      for (const area of this.recipe.roads ?? []) {
-        if (
-          !Object.values(area).every((v) => Number.isSafeInteger(v) && v % 16 === 0) ||
-          area.right <= area.left ||
-          area.bottom <= area.top ||
-          (area.right - area.left) * (area.bottom - area.top) > 1048576
-        )
-          throw Error("Invalid scenario road bounds");
-        await this.ready({
-          minCx: Math.floor(area.left / CHUNK_SIZE_PX),
-          maxCx: Math.floor((area.right - 1) / CHUNK_SIZE_PX),
-          minCy: Math.floor(area.top / CHUNK_SIZE_PX),
-          maxCy: Math.floor((area.bottom - 1) / CHUNK_SIZE_PX),
-        });
-        for (let y = area.top / 16; y < area.bottom / 16; y++)
-          for (let x = area.left / 16; x < area.right / 16; x++) {
-            const cx = Math.floor(x / 16),
-              cy = Math.floor(y / 16),
-              c = this.realm.world.getChunkIfLoaded(cx, cy);
-            if (!c) throw Error("Scenario road is not ready");
-            const lx = ((x % 16) + 16) % 16,
-              ly = ((y % 16) + 16) % 16;
-            if (!c.getRoad(lx, ly)) c.setRoad(lx, ly, RoadType.Asphalt);
-            this.realm.saveManager?.markChunkDirty(`${cx},${cy}`);
-          }
-      }
+      await paintScenarioRoads(this.recipe.roads, (r) => this.ready(r), this.realm);
       await paintScenarioTerrain(
         this.recipe.terrain,
         (r) => this.ready(r),
@@ -189,6 +163,9 @@ export class ScenarioSession {
           if (state.entity.proceduralId) this.identities[fixture.name] = state.entity.proceduralId;
         }
       }
+      // Authored roads are painted during staging. Seed them before the lab's first frame.
+      if (this.recipe.trafficRoads?.length)
+        this.realm.vehicleRegistry?.populate([this.player.visibleRange]);
     } else
       for (const [name, identity] of Object.entries(this.identities)) {
         const entity = this.realm.entityManager.entities.find((e) => e.proceduralId === identity);

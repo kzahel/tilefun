@@ -70,6 +70,16 @@ and player takeover/road release/off-road parking share ordinary lifecycle owner
 Generated depots remain parked. Workshop → Driving and traffic uses the same
 ScenarioSession/Worker/Realm and motor, with pause/save/reload and visible NPC cars.
 
+During play, the realm searches already-ready roads up to four chunks from
+connected players every two seconds. A new ordinary road car must start outside
+every active seat's reported camera range plus one chunk. Each seat contributes
+its own rectangle, so a road between separated players can still seed offscreen.
+Arrival preparation applies the same rule to seats already in the realm.
+An overview can cover the whole search area, leaving fewer new cars until
+offscreen roads become available. Saved cars load with their chunks, fixed
+depots and race grids use their existing search range, and authored road labs
+stage their starting traffic before the first frame.
+
 Qualification: 116 focused native checks, five production Worker/P2P/vehicle browser
 cases, all typechecks, focused lint, production build and GPU/meshes streaming
 readiness with 4× CPU throttling pass. This does not establish physical-phone
@@ -916,11 +926,10 @@ new implementation concerns, not evidence that the approved bounds need re-revie
   jumps elsewhere retain their settings. Height checks keep a low airborne player
   blocking the car until their feet clear its body. Roof passengers never mount,
   steer or suppress normal obstacle braking. Rendering sorts riders over bodies.
-- Traffic is capped at 12 vehicles per player and 32 per realm. Spawn checks exclude
-  every visible camera range and nearby players. Vehicles farther than 2,200px
-  from all players retire only offscreen, with a 30-second repopulation cooldown.
-  Network caching is bounded. Nearby passengers request a three-chunk halo even
-  with the camera elsewhere; this preserves support across corridor boundaries.
+- This first milestone capped traffic at 12 vehicles per player and 32 per realm,
+  excluded visible spawn points, and retired distant offscreen cars with a cooldown.
+  The [current traffic policy](#vehicles-shared-physics-baseline) covers
+  population and persistence after the shared-physics reset.
 - Saves retain bounded vehicle identity, route/path progress and next turn. Reload
   rebuilds reservations and resumes from rest; roof riders restore by vehicle
   identity and relative position. Disconnect removes the passenger without

@@ -1,4 +1,4 @@
-import { CHUNK_SIZE_PX, ELEVATION_PX } from "../config/constants.js";
+import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { zRangesOverlap } from "../physics/AABB3D.js";
@@ -7,28 +7,21 @@ import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import type { MotionIntent } from "../physics/PhysicsState.js";
 import { CONTROL_HOLD_TICKS } from "../physics/PlayerControls.js";
 import { angleDifference } from "../physics/VehicleMotor.js";
-import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { type Lane, type LaneGraph, nextLanes, type Path, samplePath } from "./LaneGraph.js";
-import { planRacer, populateRacers } from "./RaceTraffic.js";
+import { planRacer } from "./RaceTraffic.js";
 import { projectRoad } from "./RoadProjection.js";
 import { roadTurn } from "./RoadTurn.js";
 import { planShoppingVisit } from "./ShoppingVisits.js";
+import { trafficHash } from "./TrafficPopulation.js";
 import {
   isVehicleOverturned,
-  TRAFFIC_MODELS,
   vehicleNoseHeading,
   vehicleRoadWidth,
   vehicleTurningRadius,
 } from "./Vehicle.js";
 import { vehiclePerformance } from "./VehiclePerformance.js";
 import type { VehicleRegistry, VehicleState } from "./VehicleRegistry.js";
-
-const hash = (text: string) => {
-  let n = 2166136261;
-  for (let i = 0; i < text.length; i++) n = Math.imul(n ^ text.charCodeAt(i), 16777619);
-  return n >>> 0;
-};
 
 /** Bounded road decisions only. Cars share the same physical motor as players. */
 export class RoadTraffic {
@@ -39,7 +32,6 @@ export class RoadTraffic {
   private waiting = new Map<number, number>();
   private tick = 0;
   private turns = new Map<string, ReturnType<typeof roadTurn>>();
-  private models = new Map<number, string[]>();
   constructor(private readonly registry: VehicleRegistry) {}
 
   private corner(lane: Lane, next: Lane, type: string) {
@@ -52,76 +44,6 @@ export class RoadTraffic {
       if (this.turns.size > 256) this.turns.delete(this.turns.keys().next().value ?? "");
     }
     return cached;
-  }
-
-  populate(ranges: readonly ChunkRange[]) {
-    const r = this.registry;
-    if (!r.source.trafficNetwork) return;
-    let population = [...r.states.values()].filter((s) => s.autonomous).length;
-    if (population >= 32) return;
-    const graphs = new Set<LaneGraph>();
-    const identities = new Set([...r.states.values()].map((s) => s.entity.proceduralId));
-    for (const range of ranges)
-      for (let cy = range.minCy; cy <= range.maxCy; cy++)
-        for (let cx = range.minCx; cx <= range.maxCx; cx++) {
-          if (!r.world.getChunkIfLoaded(cx, cy)) continue;
-          const graph = r.source.trafficNetwork(cx * CHUNK_SIZE_PX + 128, cy * CHUNK_SIZE_PX + 128);
-          if (graphs.has(graph)) continue;
-          graphs.add(graph);
-          populateRacers(r, graph, ranges, identities);
-          for (const lane of graph.lanes.values()) {
-            if (lane.race) continue;
-            if (
-              !ranges.some(
-                (a) =>
-                  Math.max(lane.a.x, lane.b.x) + lane.width >= a.minCx * CHUNK_SIZE_PX &&
-                  Math.min(lane.a.x, lane.b.x) - lane.width < (a.maxCx + 1) * CHUNK_SIZE_PX &&
-                  Math.max(lane.a.y, lane.b.y) + lane.width >= a.minCy * CHUNK_SIZE_PX &&
-                  Math.min(lane.a.y, lane.b.y) - lane.width < (a.maxCy + 1) * CHUNK_SIZE_PX,
-              )
-            )
-              continue;
-            let models = this.models.get(lane.width);
-            if (!models) {
-              models = TRAFFIC_MODELS.filter(
-                (model) =>
-                  vehicleRoadWidth(`vehicle-v1:${model}`) <= lane.width &&
-                  vehicleTurningRadius(`vehicle-v1:${model}`) <= lane.width / 2,
-              );
-              this.models.set(lane.width, models);
-            }
-            if (!models.length) continue;
-            for (let slot = 0; slot * 256 + 128 < lane.path.length - 64; slot++) {
-              const p = samplePath(lane.path, slot * 256 + 128);
-              if (!r.world.getRoadAt(Math.floor(p.x / 16), Math.floor(p.y / 16))) continue;
-              if (
-                !ranges.some(
-                  (a) =>
-                    p.x >= a.minCx * CHUNK_SIZE_PX &&
-                    p.x < (a.maxCx + 1) * CHUNK_SIZE_PX &&
-                    p.y >= a.minCy * CHUNK_SIZE_PX &&
-                    p.y < (a.maxCy + 1) * CHUNK_SIZE_PX,
-                )
-              )
-                continue;
-              const identity = `traffic-v1:${lane.id}:slot-${slot}`;
-              if (hash(identity) % 3 !== 0) continue;
-              if (!r.canSpawn(identity, p.x, p.y) || identities.has(identity)) continue;
-              const model = models[hash(identity) % models.length];
-              if (!model) continue;
-              const ground = lane.surfaceFollowing
-                ? undefined
-                : r.world.getHeightAt(Math.floor(p.x / 16), Math.floor(p.y / 16)) * ELEVATION_PX;
-              const state = r.place(model, p.x, p.y, p.direction, undefined, identity, ground);
-              if (!state) continue;
-              state.autonomous = true;
-              identities.add(identity);
-              state.route = { laneId: lane.id, choices: 0 };
-              r.onChange?.(state, false);
-              if (++population >= 32) return;
-            }
-          }
-        }
   }
 
   private acquire(state: VehicleState, graph: LaneGraph): Lane | undefined {
@@ -238,7 +160,7 @@ export class RoadTraffic {
         ).filter((l) => !l.race);
         const continuing = choices.filter((l) => nextLanes(graph, l).some((n) => !n.race));
         const viable = continuing.length ? continuing : choices;
-        next = viable[hash(`${e.proceduralId}:${state.route.choices}`) % viable.length];
+        next = viable[trafficHash(`${e.proceduralId}:${state.route.choices}`) % viable.length];
         if (next) {
           state.route.nextId = next.id;
           r.onChange?.(state, false);

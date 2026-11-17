@@ -21,6 +21,7 @@ import { validVehicleLightState } from "./EmergencyVehicle.js";
 import type { LaneGraph } from "./LaneGraph.js";
 import { RoadTraffic } from "./RoadTraffic.js";
 import { restoredShoppingVisit, type ShoppingVisit } from "./ShoppingVisits.js";
+import { type RoadSpawnOptions, TrafficPopulation } from "./TrafficPopulation.js";
 import { type TrafficRoute, validTrafficRoute } from "./TrafficRoute.js";
 import {
   applyVehicleFacing,
@@ -70,6 +71,7 @@ export interface VehicleSource {
 export class VehicleRegistry {
   readonly states = new Map<number, VehicleState>();
   readonly traffic = new RoadTraffic(this);
+  private readonly population = new TrafficPopulation(this);
   onChange?: (state: VehicleState, destroyed: boolean) => void;
   onRestore?: (state: VehicleState, record: SavedVehicle) => void;
   canSpawn: (identity: string, wx: number, wy: number) => boolean = () => true;
@@ -152,26 +154,8 @@ export class VehicleRegistry {
     this.onChange?.(state, false);
     return state;
   }
-  /** Generated depot models keep their durable identities/tombstones. */
-  populate(ranges: readonly ChunkRange[]) {
-    const seen = new Set<string>();
-    for (const range of ranges)
-      for (let cy = range.minCy; cy <= range.maxCy; cy++)
-        for (let cx = range.minCx; cx <= range.maxCx; cx++) {
-          const key = `${cx},${cy}`;
-          if (seen.has(key)) continue;
-          seen.add(key);
-          for (const p of this.source.depotVehicles?.(cx, cy) ?? []) {
-            if (this.states.size >= 1024) return;
-            if (
-              [...this.states.values()].some((s) => s.entity.proceduralId === p.identity) ||
-              !this.canSpawn(p.identity, p.wx, p.wy)
-            )
-              continue;
-            this.place(p.model, p.wx, p.wy, p.facing, undefined, p.identity);
-          }
-        }
-    this.traffic.populate(ranges);
+  populate(ranges: readonly ChunkRange[], roadSpawns?: RoadSpawnOptions) {
+    this.population.populate(ranges, roadSpawns);
   }
   takeControl(state: VehicleState, playerId: number) {
     state.driverId = playerId;
