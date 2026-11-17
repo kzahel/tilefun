@@ -6,6 +6,14 @@ and surface-overlay runners retired with [253](../../docs/tactical/253-retire-fi
 Their historical measurements remain in the owning tacticals. Current world
 rendering uses `render:bench`; its shared terrain/atlas/body-image resources stay.
 
+254 retires the old `movement-pacing.mjs` raster-coordinate probe and the
+pre-reset `city-audit` / `city-audit-profile` / `city-course` harnesses, including
+their quad/flush profiler and mesh-target intervention. The old city harness also
+references the deleted `TrafficSystem.ts`; it is not a current command. Use the
+current racetrack attribution runner below, `streaming:bench`, `render:bench`,
+`driving:bench` and `first-person/settling.mjs` for new measurements. Historical
+sections below preserve prior evidence.
+
 ## Split-screen player pacing
 
 `node scripts/instrumentation/split-screen-pacing.mjs --regional --split-only --turn-seconds=3 --seconds=30 --rates=16,1`
@@ -52,7 +60,7 @@ The older `city-audit` / `city-course` helpers below describe pre-reset traffic
 owners; they need migration before use on current shared-physics driving. Do not
 interpret missing legacy helper methods as a current game timing result.
 
-## Elevated surface overlays and actual venue driving
+## Elevated surface overlays and actual venue driving (historical)
 
 `node scripts/instrumentation/fused-outline-composite.mjs --probe=surface --output=/tmp/tilefun-surface-overlays`
 qualifies the shared production overlay backend with the real three-part depot
@@ -208,7 +216,7 @@ Run these timing probes sequentially without concurrent validation. They charact
 known faults/workloads rather than asserting FPS acceptance or modifying gameplay.
 [Evidence and next work](../../docs/research/mobile-desync-investigation.md).
 
-## Native city workload
+## Native city workload (historical; retired by 254)
 
 `node scripts/instrumentation/city-audit.mjs --arrival=core --overview-zoom=0.05 --seconds=8 --warm-seconds=4 --output=/tmp/tilefun-city-audit`
 profiles standing, walking, driving, warmed overview and zoom entry in a fresh
@@ -227,8 +235,8 @@ adds the first 45 registered road models through native parked placement in an
 track-centered grid. Placement must succeed for every model; the report retains
 the actual list. Some placements obstruct racers; use this for rendering density,
 not an unchanged-race simulation comparison or a saved-depot reproduction.
-The `--mesh-target-reuse=true` intervention changes diagnostic target retention only;
-it is not a production optimization or a pixel-parity acceptance result.
+The former `--mesh-target-reuse=true` intervention is retired by 254; its
+historical results did not establish production optimization or pixel parity.
 
 Native driving setup stops and boards an existing horizontal-route car. Record its
 actual model, lane and pose: load/spawn timing can select different neighborhoods

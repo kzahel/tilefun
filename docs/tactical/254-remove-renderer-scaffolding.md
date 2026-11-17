@@ -18,7 +18,7 @@ scene's top-down/first-person/XR cameras.
   the actual sprite/pose stage, without GPU or receiver-geometry timing.
 - [x] Retire the old surface-shadow comparison and three historical asset GPU
   harnesses that called removed APIs. Current bank checks and scene tests stay.
-- [ ] Verify unchanged review identities, focused browser boundaries, streaming
+- [x] Verify unchanged review identities, focused browser boundaries, streaming
   readiness and final production build; record completion evidence.
 
 The review raster retains the exact previously used native sampling branch.
@@ -60,4 +60,33 @@ projects pass. No new physical-device performance or human approval is claimed.
 The historical diagonal layout helper remains a generic layout function; it is
 not a selectable gameplay renderer or a world-composition pass. Immutable native
 review drawing, UI overlays and shared resource caches remain intentional owners.
-Final hosted qualification is pending on the cleanup commit, without deploying.
+Final hosted qualification passed on the cleanup commit, without deploying.
+
+## Final diagnostic audit
+
+The hosted run on `ad4770ef` passed every runtime gate. A final script-only audit
+found the old city profiler still wrapping removed `quad`/`flush` methods, its
+mesh-target intervention wrapping removed `meshes.draw`, and the movement probe
+recording deleted raster coordinates. A short city smoke could not start because
+its provenance list references deleted `src/traffic/TrafficSystem.ts`, confirming
+the README's existing pre-reset/historical status. The old city harness, profiler
+and exclusive course/CPU helpers are retired with the movement probe; no simulation
+or traffic policy was changed to resurrect them. Current racetrack attribution,
+render/streaming/driving benches and settling captures remain. Historical
+measurement records are preserved. This follow-up changes no tested game code.
+
+## Completion — 2026-11-17
+
+[Hosted Linux CI 44069517975](https://github.com/kzahel/tilefun/actions/runs/44069517975)
+passed every gate on `ad4770ef8a5154d2012afb1ba39b5e1d05db2dc5`: all native
+shards, Worker and Node/HTTP integration, both software-WebGL smoke shards,
+immutable raster verification, audits, lint/Knip/health, typechecks and production
+build. Deployment was skipped. Local evidence is 5,585 broad native cases,
+bounded follow-up cases, four deterministic crowd checks, 37 browser checks
+without retries, streaming readiness and unchanged 2,130 review identities.
+
+The final commit retires only stale diagnostic files and updates documentation;
+tested game code and assets are unchanged. Final lint/Knip/health and typechecks
+pass. Shared runtime resources, native review drawing and current measurement
+runners remain. Next is ordinary family/device play review on the one scene.
+Mark development ready after committing; main is not pushed or deployed.
