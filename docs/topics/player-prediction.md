@@ -198,14 +198,26 @@ advances 7.47 px on approach and moves 3.20 px backward on departure. Authority
 and a replica using only the buffer advance 2.13 px in the running direction on
 both ticks. Predicted and authority X agree exactly at the same physics tick.
 The native result repeats with zero and three extra ticks of frame delivery
-delay. Browser and device reproduction are pending.
+delay.
 
-Run `npx tsx scripts/reproduce-nearby-prediction-handoff.ts` for both lanes.
-The existing release easing only applies to prescribed groups such as trains.
-Evaluate a velocity-bounded handoff on both edges for unconnected remote
-bodies, with solved contact taking precedence when bodies meet. A regression
-should check continuous travel on a close pass and coherent contact when the
-same paths intersect.
+The shared predictor now blends independent nearby actors between their
+buffered and predicted poses. The blend reverses from its current progress if
+an actor crosses the boundary again. It lengthens with the timeline gap so a
+steady actor keeps moving in its direction of travel. Solved contacts take
+priority on the first contact frame and seed a release from the coherent pose
+when they separate. Local seats and prescribed groups retain their own pose
+handling. A sliced replay holds selected poses and lets a departing actor
+continue easing with the buffer.
+
+Run `npx tsx scripts/reproduce-nearby-prediction-handoff.ts` for both delay
+lanes. Each now records forward steps of 1.31–2.96 px through the pass and no
+handoff step more than 1 px from the authority's steady step. The native
+regressions check forward travel and full prediction near the middle of the
+pass, plus contact, separation and release during sliced replay.
+A Chromium P2P capture on the normal game recorded 29 steady-speed frames
+across both boundaries, all forward at 1.14–3.21 px per frame. The ordinary
+Worker and delayed-P2P physics checks and both two-session Workshop lab
+checks also passed.
 
 ## Shared-physics default (205)
 

@@ -2,7 +2,6 @@ import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { updatePlayerSpriteFromInput } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
 import { tickSpriteAnimation } from "../entities/spriteAnimation.js";
-import { interpolateRotation } from "../physics/BodyRotation.js";
 import { getGravityScale } from "../physics/Gravity.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { type PhysicsGeometry, PhysicsScene } from "../physics/PhysicsScene.js";
@@ -14,13 +13,17 @@ import {
   vehicleMotionIntent,
 } from "../physics/PlayerControls.js";
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
-import { interpolateHeading } from "../rendering/PresentationTimeline.js";
 import type { Movement } from "../shared/Movement.js";
 import { isDrivable } from "../traffic/VehicleSeats.js";
 import type { World } from "../world/World.js";
+import { NearbyPredictionPresentation } from "./NearbyPredictionPresentation.js";
 import { predictionGeometry } from "./PredictionGeometry.js";
 import { PredictionHistory } from "./PredictionHistory.js";
-import { activePresentationIds, expandCoherentMembers } from "./PredictionPresentation.js";
+import {
+  activePresentationIds,
+  expandCoherentMembers,
+  samplePredictedPose,
+} from "./PredictionPresentation.js";
 import {
   type PredictionReplay as Replay,
   type ReplayRequest as Request,
@@ -125,6 +128,7 @@ export class PlayerPredictor {
   private displayError = { x: 0, y: 0, z: 0, at: 0 };
   private correctionAnchor: number | undefined;
   private correctionMembers = new Set<number>();
+  private readonly nearbyPresentation = new NearbyPredictionPresentation();
   private readonly lastPresentation = new Map<number, Entity>();
   private readonly groupErrors = new Map<number, { x: number; y: number; z: number; at: number }>();
   private readonly releasedGroups = new Map<
@@ -189,6 +193,7 @@ export class PlayerPredictor {
     this.correctionMembers.clear();
     this.lastPresentation.clear();
     this.releasedGroups.clear();
+    this.nearbyPresentation.clear();
     this.groupErrors.clear();
     this.activeUntil = -Infinity;
     this.diagnostics = null;
@@ -214,6 +219,7 @@ export class PlayerPredictor {
     this.correctionMembers.clear();
     this.lastPresentation.clear();
     this.releasedGroups.clear();
+    this.nearbyPresentation.clear();
     this.groupErrors.clear();
     this.status = "waiting";
   }
@@ -787,95 +793,68 @@ export class PlayerPredictor {
       if (!present.has(id)) this.releasedGroups.delete(id);
     return released ?? buffered;
   }
-  /** Nearby bodies share predicted time; only actual contacts share correction. */
+  /** Nearby bodies approach predicted time; solved contacts share one pose transform. */
   presentEntities(alpha: number, buffered: readonly Entity[]): Entity[] {
     const player = this.predicted,
       scene = this.scene;
-    // The scene is scratch state while replay is sliced across updates. Retain
-    // the last committed contact presentation, never switch to older replicas
-    // or expose partially replayed contacts. Unrelated actors remain buffered;
-    // groups released to the buffer keep easing instead of jumping back.
-    if (this.status === "replaying" && this.lastPresentation.size)
-      return this.releasePresentationGroups(buffered, this.lastPresentation, alpha).map(
-        (entity) => this.lastPresentation.get(entity.id) ?? entity,
+    const now = this.clock();
+    // The scene is scratch during sliced replay. Hold committed display poses;
+    // departing actors ease with the buffer while unrelated actors advance.
+    if (this.status === "replaying")
+      return this.nearbyPresentation.present(
+        this.releasePresentationGroups(buffered, this.lastPresentation, alpha),
+        this.lastPresentation,
+        now,
       );
-    const component =
-      !player || !scene || this.status !== "ready"
-        ? undefined
-        : this.active
-          ? activePresentationIds(player, this.published, this.coSeats.bodyIds())
-          : new Set(this.drivenPresentationIds(player));
-    if (!player || !scene || !component?.size) {
-      const released = this.releasePresentationGroups(buffered, component ?? new Set(), alpha);
+    if (!player || !scene || this.status !== "ready") {
+      const released = this.releasePresentationGroups(buffered, new Set(), alpha);
       this.lastPresentation.clear();
+      this.nearbyPresentation.clear();
       return [...released];
     }
-    expandCoherentMembers(component, this.published, scene);
+    const local = new Set([player.id, player.parentId ?? player.id, ...this.coSeats.bodyIds()]);
+    const component = this.active
+      ? activePresentationIds(player, this.published, local)
+      : new Set(this.drivenPresentationIds(player));
+    if (component.size) expandCoherentMembers(component, this.published, scene);
     const releasing = this.releasePresentationGroups(buffered, component, alpha);
     this.lastPresentation.clear();
     const touching = this.correctionMembers;
     const error = this.error();
     // A correction must not lift an entire contact stack off its solved floor.
-    let floorSupported = false;
-    for (const id of touching) {
-      const state = scene.bodyState(id);
-      if (state?.grounded && state.supportId === undefined) {
-        floorSupported = true;
-        break;
-      }
-    }
-    const presented = releasing.map((entity) => {
-      if (!component.has(entity.id)) return entity;
+    const floorSupported =
+      component.size > 0 &&
+      [...touching].some((id) => {
+        const state = scene.bodyState(id);
+        return state?.grounded && state.supportId === undefined;
+      });
+    const contactOffset = { ...error, z: floorSupported ? 0 : error.z };
+    for (const entity of releasing) {
+      if (!component.has(entity.id)) continue;
       const predicted = entity.id === player.id ? player : this.published.get(entity.id);
-      if (!predicted) return entity;
-      // Proximity selects a coherent simulation tick, not a physical connection.
-      // Transferring the player's correction here moves parked cars before touch.
+      if (!predicted) continue;
       const corrected = touching.has(entity.id);
       const groupOffset =
         predicted.physicsGroupId === undefined
           ? undefined
           : this.groupError(predicted.physicsGroupId);
-      // A co-seat outside the primary's contact group eases its own correction.
       const seatOffset = corrected ? undefined : this.coSeats.offset(entity.id, scene);
-      const displayOffset = groupOffset ?? seatOffset ?? (corrected ? error : { x: 0, y: 0, z: 0 });
-      const prev = predicted.prevPosition ?? predicted.position;
-      const position = {
-        wx: prev.wx + (predicted.position.wx - prev.wx) * alpha + displayOffset.x,
-        wy: prev.wy + (predicted.position.wy - prev.wy) * alpha + displayOffset.y,
-      };
-      const z =
-        (predicted.prevWz ?? predicted.wz ?? 0) * (1 - alpha) +
-        (predicted.wz ?? 0) * alpha +
-        ((groupOffset ?? seatOffset)?.z ?? (corrected && !floorSupported ? error.z : 0));
-      const presented = {
-        ...predicted,
-        sprite: entity.id === player.id ? predicted.sprite : entity.sprite,
-        position,
-        prevPosition: position,
-        wz: z,
-        prevWz: z,
-        ...(predicted.bodyRotation
-          ? (() => {
-              const bodyRotation = interpolateRotation(
-                predicted.prevBodyRotation ?? predicted.bodyRotation,
-                predicted.bodyRotation,
-                alpha,
-              );
-              return { bodyRotation, prevBodyRotation: bodyRotation };
-            })()
-          : {}),
-        ...(predicted.vehicleHeading === undefined
-          ? {}
-          : {
-              vehicleHeading: interpolateHeading(
-                predicted.prevVehicleHeading ?? predicted.vehicleHeading,
-                predicted.vehicleHeading,
-                alpha,
-              ),
-            }),
-      };
-      this.lastPresentation.set(entity.id, presented);
-      return presented;
+      const offset = groupOffset ?? seatOffset ?? (corrected ? contactOffset : undefined);
+      this.lastPresentation.set(
+        entity.id,
+        samplePredictedPose(
+          predicted,
+          alpha,
+          entity.id === player.id ? predicted.sprite : entity.sprite,
+          offset,
+        ),
+      );
+    }
+    const presented = this.nearbyPresentation.present(releasing, this.lastPresentation, now, {
+      bodies: this.published,
+      alpha,
+      local,
+      inContact: (id) => touching.has(id) || !!scene.contactIds(id)?.size,
     });
     return this.coSeats.presentRiders(presented, buffered, this.lastPresentation);
   }

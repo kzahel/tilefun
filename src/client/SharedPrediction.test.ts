@@ -598,6 +598,42 @@ it("does not transfer a player's display correction to a nearby car or NPC befor
   }
 });
 
+it("keeps a runner moving forward while passing into and out of nearby prediction", async () => {
+  const f = await setup({
+    version: 1,
+    id: "nearby-runner",
+    generation: FLAT_SCENARIO,
+    player: createPlayer(100, 100),
+    guest: createPlayer(175, 120),
+    props: [],
+  });
+  f.view.setPredictor(f.predictor);
+  const id = required(f.s.guest).player.id;
+  const local = { ...idle, dx: 1 };
+  const remote = { ...idle, dx: -1, sprinting: true };
+  const pending: ArrayBuffer[][] = [];
+  let previous: number | undefined;
+  for (let seq = 2; seq <= 65; seq++) {
+    if (pending.length > 3) f.receive(required(pending.shift()));
+    f.input(seq, local);
+    f.s.accept({ type: "player-input", seq, ...remote }, undefined, 1);
+    await f.s.step(local);
+    pending.push(f.s.frames());
+    f.view.beginPresentation(f.now(), 0.5);
+    const x = required(f.view.entities.find((entity) => entity.id === id)).position.wx;
+    if (previous !== undefined && seq > 10) {
+      expect(previous - x).toBeGreaterThan(1);
+      expect(previous - x).toBeLessThan(3.3);
+    }
+    if (seq === 30) {
+      const predicted = required(f.predictor.publishedBody(id).body);
+      expect(x).toBeCloseTo((predicted.position.wx + required(predicted.prevPosition).wx) / 2, 3);
+    }
+    f.view.endPresentation();
+    previous = x;
+  }
+});
+
 it("keeps a touching player and car coherent without lifting them off solved support", async () => {
   const f = await setup({
     version: 1,
