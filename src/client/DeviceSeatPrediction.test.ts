@@ -310,6 +310,17 @@ describe("multi-seat prediction on the device session (226 slice 5-i)", () => {
     expect(run.error).toBeLessThan(0.02); // measured 0; without its movement 1.07 / 0.07
     const predicted = d.predictor.publishedBody(car.id).body;
     expect(Math.abs((predicted?.position.wx ?? 0) - car.position.wx)).toBeLessThan(8);
+
+    input.movement = walk(0);
+    play(d, 90, walk(0));
+    const buffered = d.replica.serverEntities;
+    const shown = d.predictor.presentEntities(0.5, buffered);
+    const shownCar = shown.find((e) => e.id === car.id);
+    expect(shownCar).toBeDefined();
+    expect(shownCar).not.toBe(buffered.find((e) => e.id === car.id));
+    expect(shown.find((e) => e.id === guest.player.id)?.position).toEqual(shownCar?.position);
+    expect(shown.find((e) => e.id === d.host.player.id)).toBe(d.replica.serverPlayerEntity);
+    expect(d.predictor.presentationClock(1)).not.toBeNull();
   });
 
   it("presents a guest from prediction while seat 0 stands, easing the guest's own correction", async () => {

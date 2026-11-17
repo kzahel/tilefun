@@ -1,4 +1,3 @@
-import { getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { updatePlayerSpriteFromInput } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
@@ -17,9 +16,11 @@ import {
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
 import { interpolateHeading } from "../rendering/PresentationTimeline.js";
 import type { Movement } from "../shared/Movement.js";
+import { isDrivable } from "../traffic/VehicleSeats.js";
 import type { World } from "../world/World.js";
 import { predictionGeometry } from "./PredictionGeometry.js";
 import { PredictionHistory } from "./PredictionHistory.js";
+import { activePresentationIds, expandCoherentMembers } from "./PredictionPresentation.js";
 import {
   type PredictionReplay as Replay,
   type ReplayRequest as Request,
@@ -659,30 +660,32 @@ export class PlayerPredictor {
       this.coSeats.moving(this.published, this.scene)
     );
   }
+  /** A local seat stays on its car's timeline even in idle. Nearby bodies
+   * still need active play or solved contact to join predicted presentation. */
+  private drivenPresentationIds(player: Entity): number[] {
+    const ids = this.coSeats.bodyIds().filter((id) => {
+      const body = this.published.get(id);
+      return body && isDrivable(body);
+    });
+    if (this.predictedMount && isDrivable(this.predictedMount))
+      ids.push(this.predictedMount.id, player.id);
+    return ids;
+  }
   private touchingIds(): Set<number> {
     const player = this.predicted;
     const touching = new Set<number>(player ? [player.parentId ?? player.id, player.id] : []);
-    this.expandCoherentMembers(touching);
+    expandCoherentMembers(touching, this.published, this.scene);
     return touching;
   }
-  /** A prescribed group shares both predicted time and correction. Proximity alone
-   * still cannot transfer a player's correction to unrelated parked bodies. */
-  private expandCoherentMembers(members: Set<number>) {
-    const groups = new Map<number, number[]>();
-    for (const e of this.published.values()) {
-      if (e.physicsGroupId === undefined) continue;
-      const ids = groups.get(e.physicsGroupId) ?? [];
-      ids.push(e.id);
-      groups.set(e.physicsGroupId, ids);
-    }
-    for (const id of members) {
-      for (const neighbor of this.scene?.contactIds(id) ?? []) members.add(neighbor);
-      const group = this.published.get(id)?.physicsGroupId;
-      if (group !== undefined) for (const member of groups.get(group) ?? []) members.add(member);
-    }
-  }
   presentationClock(presentationSeconds: number): CameraPresentationTime | null {
-    if (!this.active || !this.scene) return null;
+    const player = this.predicted;
+    if (!this.scene || !player) return null;
+    if (
+      !this.active &&
+      !(this.status === "ready" && this.drivenPresentationIds(player).length) &&
+      !(this.status === "replaying" && this.lastPresentation.size)
+    )
+      return null;
     // Reconciliation may rebase the simulation tick in either direction. The
     // camera follows the displayed pose on the monotonic render clock instead.
     return { time: presentationSeconds, domain: this.clockEpoch };
@@ -796,25 +799,18 @@ export class PlayerPredictor {
       return this.releasePresentationGroups(buffered, this.lastPresentation, alpha).map(
         (entity) => this.lastPresentation.get(entity.id) ?? entity,
       );
-    if (!player || !scene || this.status !== "ready" || !this.active) {
-      const released = this.releasePresentationGroups(buffered, new Set(), alpha);
+    const component =
+      !player || !scene || this.status !== "ready"
+        ? undefined
+        : this.active
+          ? activePresentationIds(player, this.published, this.coSeats.bodyIds())
+          : new Set(this.drivenPresentationIds(player));
+    if (!player || !scene || !component?.size) {
+      const released = this.releasePresentationGroups(buffered, component ?? new Set(), alpha);
       this.lastPresentation.clear();
       return [...released];
     }
-    const root = player.parentId ?? player.id,
-      component = new Set<number>([root, player.id, ...this.coSeats.bodyIds()]);
-    const anchor = this.published.get(root) ?? player;
-    if (anchor.collider) {
-      const a = getEntityAABB(anchor.position, anchor.collider);
-      for (const entity of this.published.values()) {
-        if (!entity.collider) continue;
-        const b = getEntityAABB(entity.position, entity.collider);
-        const dx = Math.max(a.left - b.right, b.left - a.right, 0),
-          dy = Math.max(a.top - b.bottom, b.top - a.bottom, 0);
-        if (Math.hypot(dx, dy) <= 24) component.add(entity.id);
-      }
-    }
-    this.expandCoherentMembers(component);
+    expandCoherentMembers(component, this.published, scene);
     const releasing = this.releasePresentationGroups(buffered, component, alpha);
     this.lastPresentation.clear();
     const touching = this.correctionMembers;

@@ -1,5 +1,14 @@
 # Player prediction and moving contacts
 
+[Stop-and-go vehicle jumps](../research/stop-go-vehicle-prediction.md)
+(2026-11-17) fixes backward and forward snaps on throttle release and resume.
+The 300 ms activity gate used the seated avatar's zero velocity and switched
+a still-moving car and rider to older buffered poses. Local drivers, including
+co-seats, now stay on predicted presentation through braking and idle. Idle
+proximity alone still leaves other actors buffered. The deterministic stop-and-go
+run matches continuous presentation exactly. A real Worker repeat records
+zero handoffs over 434 frames through a full stop and verifies dismount.
+
 [Split-screen starvation](../research/split-screen-prediction-starvation.md)
 (2026-11-14) fixes reproduced player-only freezing under slow replay and delayed
 input. A replay that exhausts its slice finishes a fixed input prefix; later

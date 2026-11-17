@@ -5,6 +5,7 @@ import { createPlayer } from "../entities/Player.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { PhysicsScene } from "../physics/PhysicsScene.js";
 import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
+import { drivingBenchRecipe } from "../scenarios/DrivingBenchRecipe.js";
 import { FLAT_SCENARIO, type ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { PlayerSession } from "../server/PlayerSession.js";
@@ -15,6 +16,8 @@ import {
   encodeServerMessage,
 } from "../shared/binaryCodec.js";
 import type { Movement } from "../shared/Movement.js";
+import { required } from "../shared/required.js";
+import { manualCarMovement } from "../traffic/CarControls.js";
 import { World } from "../world/World.js";
 import { RemoteStateView } from "./ClientStateView.js";
 import { PlayerPredictor } from "./PlayerPredictor.js";
@@ -497,6 +500,63 @@ it("buffers an idle observer's whole scene and gives an active contact component
   expect(npc).toBeDefined();
   expect((npc?.position.wx ?? 0) - (player?.position.wx ?? 0)).toBeGreaterThan(9.5);
   expect((npc?.position.wx ?? 0) - (player?.position.wx ?? 0)).toBeLessThan(11);
+});
+
+it("keeps a driven car and rider on one timeline through braking, restart and idle", async () => {
+  const recipe = drivingBenchRecipe("clear");
+  const fixtureCar = required(recipe.parkedVehicles?.[0]);
+  fixtureCar.model = "open-wheel-racer";
+  const nearby = createChicken(fixtureCar.wx, fixtureCar.wy - 27);
+  if (nearby.wanderAI) nearby.wanderAI.timer = 100;
+  const f = await setup({ ...recipe, actors: [nearby] });
+  f.view.setPredictor(f.predictor);
+  const id = required(f.s.handles.car);
+  const driver = f.s.player.player.id;
+  await f.s.command({ kind: "enter-vehicle", entityId: id });
+  for (let i = 0; i < 60; i++) await f.s.step(idle);
+  f.receive(f.s.frames());
+
+  // An unconnected actor close to the parked car still comes from the buffer.
+  const buffered = f.view.serverEntities;
+  const chicken = required(buffered.find((e) => e.type === "chicken"));
+  expect(f.predictor.presentEntities(0.5, buffered).find((e) => e.id === chicken.id)).toBe(chicken);
+
+  let seq = 61;
+  for (const [throttle, ticks] of [
+    [-1, 90],
+    [0, 22],
+    [-1, 90],
+    [0, 100],
+  ] as const) {
+    const movement = manualCarMovement({ ...idle, dy: throttle, sprinting: true });
+    for (let i = 0; i < ticks; i++) {
+      f.receive(f.s.frames());
+      f.input(++seq, movement);
+      await f.s.step(movement);
+      f.view.beginPresentation(f.now(), 0.5);
+      const shown = required(f.view.entities.find((e) => e.id === id));
+      const raw = required(f.predictor.publishedBody(id).body);
+      const x = (raw.position.wx + (raw.prevPosition?.wx ?? raw.position.wx)) / 2;
+      const correction =
+        required(f.predictor.presentationPlayer).position.wx -
+        required(f.predictor.player).position.wx;
+      expect(shown.position.wx).toBeCloseTo(x + correction, 3);
+      expect(f.view.presentedPlayerEntity.position).toEqual(shown.position);
+      expect(f.view.cameraPresentation.domain).not.toBe("remote");
+      f.view.endPresentation();
+    }
+  }
+
+  await f.s.command({ kind: "exit-vehicle" });
+  await f.s.step(idle);
+  f.receive(f.s.frames());
+  expect(f.predictor.player?.id).toBe(driver);
+  expect(f.predictor.player?.parentId).toBeUndefined();
+  expect(f.predictor.presentationClock(f.now())).toBeNull();
+  const parked = required(f.view.serverEntityMap.get(id));
+  expect(f.predictor.presentEntities(0.5, f.view.serverEntities).find((e) => e.id === id)).toBe(
+    parked,
+  );
 });
 
 it("does not transfer a player's display correction to a nearby car or NPC before contact", async () => {
