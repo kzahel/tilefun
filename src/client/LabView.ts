@@ -144,7 +144,7 @@ export class LabView {
       requireWebGl2();
     } catch {}
     if (
-      unifiedTopDownChoice(location.search, globalThis.localStorage, softwareWebGl()) &&
+      unifiedTopDownChoice(location.search, softwareWebGl()) &&
       !options.interior &&
       !options.underlay
     ) {

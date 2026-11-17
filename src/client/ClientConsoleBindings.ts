@@ -61,8 +61,8 @@ export function registerClientConsole(
   });
   if (new URLSearchParams(location.search).get("view") === "fps")
     clientCVars.r_firstperson.set(true);
-  // The top-down view through the 3D scene (251), the default for the whole
-  // device since 2026-11-16; the classic fixed view is a choice.
+  // The top-down view through the 3D scene (251): the one view players get.
+  // The cvar and the debug panel switch to the fixed view for development.
   clientCVars.r_topdown3d.onChange((val) => {
     gc.debugPanel.topDown3d = val;
     if (gc.firstPerson) gc.firstPerson.topDown = val;
@@ -70,10 +70,8 @@ export function registerClientConsole(
   gc.debugPanel.onTopDown3dChange((checked) => {
     clientCVars.r_topdown3d.set(checked);
   });
-  // Options saves the choice for the device; `?view=fixed` / `?view=topdown3d`
-  // override it for this load.
-  if (unifiedTopDownChoice(location.search, globalThis.localStorage, softwareWebGl()))
-    clientCVars.r_topdown3d.set(true);
+  // `?view=fixed` / `?view=topdown3d` choose for this load (specs, probes).
+  if (unifiedTopDownChoice(location.search, softwareWebGl())) clientCVars.r_topdown3d.set(true);
   clientCVars.r_fpshadows.onChange((val) => {
     if (gc.firstPerson) gc.firstPerson.shadows = val;
   });

@@ -44,10 +44,11 @@ prediction and rendering remain on the main thread. Read
 [client/server boundaries](docs/client-server-architecture.md) for ownership.
 
 Renderer work follows [renderer unification](docs/topics/renderer-unification.md):
-the 3D scene is becoming the one world renderer. Since 2026-11-16 its top-down view
-is the default; the fixed 2D view stays selectable (Options, `?view=fixed`) until
-that topic's retirement gate. Do not delete or degrade it before then; update the
-topic's tracker when a slice changes state.
+the 3D scene is becoming the one world renderer. Its top-down view is the only one
+players are offered since 2026-11-17; the fixed 2D view remains as a fallback
+(software WebGL, the browser suite, `?view=fixed`) until that topic's retirement
+inventory is cleared. Remove it only through that inventory; update the topic's
+tracker when a slice changes state.
 
 Engine changes must account for affected embedded labs. Read
 [embedded engine labs](docs/topics/embedded-engine-labs.md) before changing shared

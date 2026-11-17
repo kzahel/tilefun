@@ -24,7 +24,6 @@ export class OptionsDialog {
   private firstPersonControls = document.createElement("select");
   private firstPersonControlsHelp = document.createElement("p");
   private distance = document.createElement("select");
-  private unified = document.createElement("input");
   private controls = document.createElement("p");
   constructor(
     private select: (mode: TouchMovementMode) => Promise<void>,
@@ -34,7 +33,6 @@ export class OptionsDialog {
     private selectFirstPerson: (enabled: boolean) => Promise<void>,
     private selectDistance: (distance: FirstPersonViewDistance) => Promise<void>,
     private selectFirstPersonControls: (controls: FirstPersonControls) => Promise<void>,
-    private selectUnified: (enabled: boolean) => Promise<void> = async () => {},
   ) {
     const d = this.dialog;
     d.className = "options-dialog";
@@ -130,18 +128,6 @@ export class OptionsDialog {
     this.distance.onchange = () => {
       void this.chooseDistance();
     };
-    const unified = document.createElement("label");
-    unified.className = "options-pinch";
-    this.unified.type = "checkbox";
-    this.unified.setAttribute("aria-describedby", "options-unified-help");
-    this.unified.onchange = () => {
-      void this.chooseUnified();
-    };
-    unified.append(this.unified, "Pixel 3D top-down view");
-    const unifiedHelp = document.createElement("p");
-    unifiedHelp.id = "options-unified-help";
-    unifiedHelp.textContent =
-      "Draws the top-down view with the 3D renderer: crisp pixels that move together. Turn it off for the classic view. Saved on this device.";
     const drivingHelp = document.createElement("p");
     drivingHelp.id = "options-driving-help";
     drivingHelp.textContent =
@@ -164,8 +150,6 @@ export class OptionsDialog {
       firstPersonControls,
       this.firstPersonControlsHelp,
       distance,
-      unified,
-      unifiedHelp,
       this.status,
       back,
     );
@@ -194,7 +178,6 @@ export class OptionsDialog {
     firstPerson = false,
     distance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE,
     controls: FirstPersonControls = "simple",
-    unified = false,
   ): void {
     this.opener = opener;
     this.status.textContent = "";
@@ -204,7 +187,6 @@ export class OptionsDialog {
     this.firstPerson.checked = firstPerson;
     this.distance.value = distance;
     this.firstPersonControls.value = controls;
-    this.unified.checked = unified;
     this.updateFirstPersonControlsHelp();
     // Key labels follow the player's layout, which may be learned during play.
     const k = keyLabel;
@@ -290,13 +272,6 @@ export class OptionsDialog {
       () => this.selectFirstPerson(this.firstPerson.checked),
       "View saved for this player.",
       () => this.firstPerson,
-    );
-  }
-  private chooseUnified(): Promise<void> {
-    return this.save(
-      () => this.selectUnified(this.unified.checked),
-      "Top-down view saved on this device.",
-      () => this.unified,
     );
   }
   private chooseDistance(): Promise<void> {

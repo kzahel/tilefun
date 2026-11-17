@@ -54,8 +54,9 @@ wanted as well, and a third renderer is not.
 - **One presentation evaluation.** Both renderers keep reading the shared
   collector, mesh poses and shadow shapes. Nothing here changes simulation,
   prediction or replication.
-- **Classic view selectable.** The fixed view is an Options choice (and
-  `?view=fixed`, `r_topdown3d 0`) until retirement, which is an owner decision.
+- **Classic view kept as a fallback.** Players are no longer offered the fixed
+  view (2026-11-17); `?view=fixed` and `r_topdown3d 0` remain for development
+  until retirement.
 - **Device claims need device runs.** The Mac alone does not show that a change
   is safe on the phone, the Deck or the headset.
 - **Labs.** Shared changes account for embedded labs
@@ -63,30 +64,28 @@ wanted as well, and a third renderer is not.
 
 ## Choosing the view
 
-Since 2026-11-16 the unified top-down view is the default. **Options → Pixel 3D
-top-down view** turns it off for the classic fixed view; the choice is saved on
-the device (`unifiedTopDown.ts`, local storage "1" or "0"), not in the player
-profile, because it is a renderer choice like the others below. A device that
-made no choice gets the unified view, except where WebGL is a software
-rasteriser (SwiftShader, llvmpipe: `softwareWebGl` from the WebGL2 probe): the CPU
-would draw the 3D scene, and the classic view is far cheaper there. That
-includes the browser suite's headless Chromium, which runs at about a third of
-its usual pace with the 3D view on every page and misses timing-sensitive
-gameplay phases; `tests/unified-topdown.spec.ts` asks for the unified view
-explicitly. The first full suite on 2026-11-16 after the default passed 553 of
-560; seven failures also reproduced on that session's starting commit. The
-follow-up [browser-suite repair](testing.md#local-validation) fixes their stale
-inspection/menu assumptions and checks kangaroo contact physics natively. Specs
-that instrument the fixed backend pin `view=fixed` ([inventory](#retirement-inventory)).
-It stays in sync with the debug panel's
-**Unified top-down 3D** (**F3**, or **More → Debug**) and `/r_topdown3d 1` / `0`
-in the console, which change only the current load. `?view=fixed` (or `2d`) and
-`?view=topdown3d` override the saved choice for one load. Specs that test the
-fixed backend's own passes pin `?view=fixed` (`terrain-pacing.spec.ts`).
+Since 2026-11-17 the unified top-down view is the only view players are
+offered (owner: "ready to be promoted to default entirely"). The Options choice
+**Pixel 3D top-down view** and its saved device setting are gone; a device that
+had saved the classic view now gets the unified one. It had been the default
+since 2026-11-16 and an opt-in earlier the same day.
 
-From 2026-11-16 until the default changed the same day it was an opt-in,
-**Pixel 3D top-down view (preview)**; a device that opted in keeps the unified
-view.
+The fixed view remains in the code as a fallback and a development tool until
+the [retirement inventory](#retirement-inventory) is cleared:
+
+- Where WebGL is a software rasteriser (SwiftShader, llvmpipe: `softwareWebGl`
+  from the WebGL2 probe) the fixed view stands in, because the CPU would draw
+  the 3D scene. That includes the browser suite's headless Chromium, which runs
+  at about a third of its usual pace with the 3D view on every page and misses
+  timing-sensitive gameplay phases; `tests/unified-topdown.spec.ts` asks for
+  the unified view explicitly. The first full suite on 2026-11-16 after the
+  default passed 553 of 560; seven failures also reproduced on that session's
+  starting commit, and the follow-up
+  [browser-suite repair](testing.md#local-validation) fixed them.
+- `?view=fixed` (or `2d`) and `?view=topdown3d` choose for one load; specs that
+  instrument the fixed backend pin `view=fixed` ([inventory](#retirement-inventory)).
+- The debug panel's **Unified top-down 3D** (**F3**, or **More → Debug**) and
+  `/r_topdown3d 1` / `0` in the console switch the current load.
 
 First-person and driving fog use the selected fixed view distance: Near 400,
 Medium 800 or Far 1600 world pixels. Since 2026-11-16, missing terrain never
@@ -132,7 +131,7 @@ row when a slice starts, delivers or is blocked.
 | 3 — Top-down camera, parity probe, draw calls, device scorecard | Done 2026-11-14: `?view=topdown3d` / `r_topdown3d` draws top-down play through the 3D scene; the parity probe gives the checklist numbers; static content is merged into 4 to 25 draws; measured on the Mac, Pixel 7a and Deck, with a go on draw-call cost | [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) |
 | 4 — XR on the shared scene | Done 2026-11-14 for owner play: the world menu's **Headset** buttons start a WebXR session as a floating screen, immersive first person or a tabletop miniature, with the headset's controllers as seat 0's pad; all three hold 72 Hz on a Quest 3 in `city` and `woods`. Comfort and the controller mapping are not yet checked by a wearer | [252](../tactical/252-xr-on-the-shared-scene.md) |
 | 5 — Top-down parity | In progress since 2026-11-15: building bodies match their artwork (solid props identical at 1×), grass blades are drawn (99% overlap), and since 2026-11-16 vehicles are the fixed view's outlined pixel images (identical at 1×). 2026-11-17: actors' feet show over the ground and excavation roofs fade; sprite edges waived | checklist below |
-| 6 — Opt-in, default, retirement | Opt-in and default done 2026-11-16 (owner instruction); retirement not started | gate below |
+| 6 — Opt-in, default, retirement | Opt-in and default done 2026-11-16 (owner instruction); the Options choice removed 2026-11-17, the first step of retirement | gate below |
 
 ## Top-down parity checklist
 
@@ -572,7 +571,7 @@ reported regressions, and the rows below are not all moved.
 
 | Consumer | Today | Before retirement |
 | --- | --- | --- |
-| Play, classic choice | Options, `?view=fixed`, `r_topdown3d 0` | Owner decision to drop the choice |
+| Play, classic choice | Options choice removed 2026-11-17; `?view=fixed` and `r_topdown3d 0` remain for specs and comparison | Remove with the pinned specs |
 | Software WebGL (SwiftShader, llvmpipe), the browser suite included | Classic view unless the unified one is chosen | Measure the 3D view in software; make it cheap enough, or keep a fallback |
 | Play fallbacks | The fixed view draws a view the 3D scene cannot: while its module loads or after it failed, graphics lost, a diagonal split-screen mask (probe only), `?rooms3d=0` | A 3D-only answer for each (a loading frame, a lost-context frame) |
 | Building mode with a seat in first person | Fixed view | Top-down 3D for that seat, or edit from first person |
