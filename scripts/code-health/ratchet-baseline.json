@@ -468,9 +468,9 @@
       "overLimit": 1
     },
     "src/rendering/firstperson/FirstPersonView.ts": {
-      "lines": 880,
-      "worst": 29,
-      "overLimit": 2
+      "lines": 828,
+      "worst": 27,
+      "overLimit": 1
     },
     "src/rendering/GpuMeshBodies.ts": {
       "lines": 318,

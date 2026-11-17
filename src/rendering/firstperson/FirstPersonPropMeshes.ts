@@ -3,6 +3,7 @@ import { ELEVATION_PX, TILE_SIZE } from "../../config/constants.js";
 import type { AABB } from "../../entities/collision.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { SurfacePatch } from "../../physics/SurfacePatch.js";
+import { SURFACE_GRID, surfaceColors } from "../SurfacePresentation.js";
 import { artCard, type Billboard, sheetFrame } from "./FirstPersonBillboards.js";
 import { BACKING_ALPHA, type FirstPersonImages, type PropImage } from "./FirstPersonImages.js";
 import {
@@ -67,6 +68,7 @@ export interface OverheadDeck {
   readonly patch: SurfacePatch;
   readonly bounds: AABB;
   readonly flat: ColoredTriangles;
+  readonly lines: ChunkProps["lines"];
 }
 
 export function texturedMesh(faces: TexturedFaces, material: THREE.Material): THREE.Mesh {
@@ -236,16 +238,39 @@ export class PropMeshes {
     } else {
       const surfaces = propSurfaces(prop);
       const overhead = isOverheadDeck(prop, ceilings) ? new TriangleWriter() : undefined;
-      this.appendSolid(prop, elevation, overhead ?? flat, facesFor, built, "outside");
+      const lines = { positions: [] as number[], colors: [] as number[] };
+      this.appendSolid(
+        prop,
+        elevation,
+        overhead ?? flat,
+        facesFor,
+        overhead ? { ...built, lines } : built,
+        "outside",
+      );
       built.surfaces.push(...surfaces);
       const [surface] = surfaces;
-      if (overhead?.vertexCount && surface)
+      if (overhead?.vertexCount && surface) {
+        // Bake the grid ink into the surface colour; its depth-writing lines
+        // can then fade once with the slab instead of blending over it twice.
+        const color = new THREE.Color(
+          surfaceColors(prop.type, surface.patch).top,
+        ).convertLinearToSRGB();
+        color
+          .lerp(new THREE.Color(SURFACE_GRID.color).convertLinearToSRGB(), SURFACE_GRID.opacity)
+          .convertSRGBToLinear();
+        for (let i = 0; i < lines.colors.length; i += 3) {
+          lines.colors[i] = color.r;
+          lines.colors[i + 1] = color.g;
+          lines.colors[i + 2] = color.b;
+        }
         built.decks.push({
           id: surface.patch.id,
           patch: surface.patch,
           bounds: surface.bounds,
           flat: overhead.finish(),
+          lines,
         });
+      }
     }
   }
 

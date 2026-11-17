@@ -88,7 +88,7 @@ the report hashes the actual substituted sources, without publishing private
 paths. [184](../../docs/tactical/184-ground-rendering-and-moving-racetrack.md)
 owns acceptance and limitations.
 
-## Ordered texture batches
+## Ordered texture batches (historical; retired by 253)
 
 `node scripts/instrumentation/fused-outline-composite.mjs --probe=batch --output=/tmp/tilefun-ordered-texture-batches`
 compares one-texture submission with four/eight textures through the production
@@ -116,7 +116,7 @@ uses `noDefaults` to avoid emulation, and disconnects without closing user Chrom
 Fixed 512px canvas readback qualifies the device shader; it is not an FPS sample.
 [180](../../docs/tactical/180-ordered-texture-batches.md) owns decisions/evidence.
 
-## Finished car image reuse
+## Finished car image reuse (historical; retired by 253)
 
 `node scripts/instrumentation/fused-outline-composite.mjs --probe=cache --output=/tmp/tilefun-car-cache`
 uses the production `GpuMeshBodies` adapter with reuse disabled and warm. It checks

@@ -133,7 +133,7 @@ There is no scheduled or sharded full browser run. The remaining browser
 contracts run locally through `npm run test:all`:
 - controller, mobile editing and touch;
 - multiplayer and vehicles;
-- labs, review and GPU parity.
+- labs, review and unified GPU presentation.
 
 Hosted validation takes about 6 min, and deploy about 2.6 min more (2026-11-09).
 `workflow_dispatch` reruns the push gate without deploying. Each job spends
@@ -142,8 +142,8 @@ projection JSON), which unit tests partly read. Keep CI changes to stable,
 browser-dependent boundaries; add coverage below the browser instead.
 
 Code-health ratchet: the 2026-11-09 baseline accepts growth from reviewed
-226/232-era work. Split candidates are `GpuRasterSurface.ts` and
-`PhysicsScene.ts` (both over 1,000 lines) and `ParticleSystem.ts`.
+226/232-era work. The fixed `GpuRasterSurface.ts` was removed by 253. Remaining split
+candidates include `PhysicsScene.ts` (over 1,000 lines) and `ParticleSystem.ts`.
 
 The 2026-10-24 wildlife delivery follow-up patches Electron to 44.9.1 and
 transitive body-parser to 1.20.9 after the existing dependency audit gate fails.

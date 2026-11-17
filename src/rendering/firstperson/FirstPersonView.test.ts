@@ -387,7 +387,7 @@ describe("the view's merged static world (251)", () => {
     const fades = new Map<string, { opacity: number; time: number }>();
     // North of the deck's middle: on screen the raised deck covers what stands under its north half.
     const player = (z: number) => ({ ...createPlayer(0, -40), wz: z });
-    const at = (observer: ReturnType<typeof player>, time: number): FirstPersonFrame => ({
+    const at = (observer: ReturnType<typeof player>, time: number) => ({
       ...frame(world(loaded), true),
       eye: { x: 0, y: 0, z: 0, yaw: 0, pitch: 0 },
       props,
@@ -395,11 +395,16 @@ describe("the view's merged static world (251)", () => {
     });
     const view = new FirstPersonView(new Map());
     settle(view, at(player(64), 0));
-    const materials = (view as unknown as { deckMaterials: Map<string, THREE.MeshBasicMaterial> })
-      .deckMaterials;
-    // The bridge and both ramps rise clear of the ground: each is its own mesh.
+    const materials = (
+      view as unknown as {
+        decks: {
+          materials: Map<string, { face: THREE.MeshBasicMaterial; grid: THREE.LineBasicMaterial }>;
+        };
+      }
+    ).decks.materials;
     expect([...materials.keys()].sort()).toEqual(["north-ramp", "road-bridge", "south-ramp"]);
-    const bridge = () => materials.get("road-bridge") as THREE.MeshBasicMaterial;
+    const bridge = () => materials.get("road-bridge")?.face as THREE.MeshBasicMaterial;
+    const grid = () => materials.get("road-bridge")?.grid as THREE.LineBasicMaterial;
     // On the bridge, nothing fades.
     expect(bridge().transparent).toBe(false);
     // Under it, the deck eases to the fixed view's reveal opacity, then back.
@@ -414,15 +419,25 @@ describe("the view's merged static world (251)", () => {
     const mesh = (view as unknown as { solidRoot: THREE.Group }).solidRoot.children.find(
       (child) => child instanceof THREE.Mesh && child.material === bridge(),
     );
-    expect(mesh?.renderOrder).toBe(3);
+    expect(mesh?.renderOrder).toBe(4);
+    expect(grid().opacity).toBeCloseTo(REVEAL_OPACITY, 6);
+    expect(grid().depthWrite).toBe(true);
     view.render(at(player(64), 2), target);
     view.render(at(player(64), 2.3), target);
     expect(bridge().transparent).toBe(false);
     expect(bridge().opacity).toBe(1);
+    view.render(at(player(0), 2.4), target);
+    view.render(at(player(0), 2.6), target);
+    expect(bridge().opacity).toBeCloseTo(REVEAL_OPACITY, 6);
+    const all = at(player(0), 2.6);
+    view.render({ ...all, cutaway: { ...all.cutaway, visibility: "all" } }, target);
+    expect(bridge().opacity).toBe(1); // Explicit views do not inherit an automatic fade.
+    expect(grid().opacity).toBe(1);
     const lower = at(player(0), 3);
-    view.render({ ...lower, cutaway: { ...lower.cutaway!, visibility: "lower" } }, target);
+    view.render({ ...lower, cutaway: { ...lower.cutaway, visibility: "lower" } }, target);
     expect(bridge().visible).toBe(false); // hidden materials cannot occlude the lower floor
-    view.render({ ...lower, cutaway: { ...lower.cutaway!, visibility: "all" } }, target);
+    expect(grid().visible).toBe(false);
+    view.render({ ...lower, cutaway: { ...lower.cutaway, visibility: "all" } }, target);
     expect(bridge().visible).toBe(true);
     expect(bridge().opacity).toBe(1);
     view.dispose();

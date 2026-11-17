@@ -12,9 +12,9 @@ export function deckOpacity(deck: OverheadDeck, cutaway: FirstPersonFrame["cutaw
     cutaway.visibility ?? "auto",
     cutaway.alpha,
   );
-  if (display === "hidden") {
+  if (display === "hidden" || (cutaway.visibility && cutaway.visibility !== "auto")) {
     cutaway.fades.delete(deck.id);
-    return 0;
+    return display === "hidden" ? 0 : 1;
   }
   return surfaceFadeOpacity(cutaway.fades, deck.id, display, cutaway.time);
 }

@@ -15,7 +15,7 @@ import { BodyImageCards } from "./FirstPersonBodyImages.js";
 import { cameraRight, type FirstPersonEye } from "./FirstPersonCamera.js";
 import { type HeadsetFrame, TABLE_BACKGROUND, ViewCameras } from "./FirstPersonCameras.js";
 import { chunkKey, chunksInReach, type TerrainEntry, terrainStale } from "./FirstPersonChunks.js";
-import { deckOpacity } from "./FirstPersonDeckFade.js";
+import { DeckMaterials } from "./FirstPersonDecks.js";
 import {
   type EffectItem,
   EffectQuads,
@@ -228,10 +228,7 @@ export class FirstPersonView {
   private readonly grass: GrassCards;
   private readonly effects: EffectQuads;
   private readonly underlay: FirstPersonUnderlay;
-  /** Overhead decks' materials by surface id (`revealDecks`). */
-  private readonly deckMaterials = new Map<string, THREE.MeshBasicMaterial>();
-  /** Some deck was fading last frame (its mesh drawn after grass and effects). */
-  private decksFading = false;
+  private readonly decks = new DeckMaterials((material) => this.lit(material, "faces"));
   /** Room props' two views (tree houses), by chunk key and prop id: the top-down
    * camera shows the inside one while the frame's observer is in one of its
    * rooms, as the fixed view does (`observerInsideRoom`), each picture's pieces
@@ -324,64 +321,6 @@ export class FirstPersonView {
       ),
     );
     this.vehicles.fog = this.fog;
-  }
-
-  /** Adds the sun's shadow to a material of the given receiver kind. */
-  /** An overhead deck's own copy of the flat material (`revealDecks`). */
-  private deckMaterial(id: string): THREE.MeshBasicMaterial {
-    let material = this.deckMaterials.get(id);
-    if (!material) {
-      material = this.lit(
-        new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide }),
-        "faces",
-      );
-      this.deckMaterials.set(id, material);
-    }
-    return material;
-  }
-
-  /**
-   * The fixed view's automatic cutaway (`surfaceDisplay`): an overhead deck that
-   * would cover the observer fades to `REVEAL_OPACITY`, and back, over the same
-   * per-view fades the fixed view keeps. Decks no chunk holds lose their material.
-   */
-  private revealDecks(frame: FirstPersonFrame): void {
-    const live = new Set<string>();
-    const cutaway = frame.cutaway;
-    let fading = false;
-    for (const chunk of this.chunks.values())
-      for (const deck of chunk.props?.decks ?? []) {
-        live.add(deck.id);
-        const material = this.deckMaterials.get(deck.id);
-        if (!material) continue;
-        const opacity = deckOpacity(deck, cutaway);
-        material.visible = opacity > 0;
-        const clear = opacity < 1;
-        if (material.transparent !== clear) {
-          material.transparent = clear;
-          material.needsUpdate = true;
-        }
-        material.opacity = opacity;
-        if (clear) fading = true;
-      }
-    for (const [id, material] of this.deckMaterials)
-      if (!live.has(id)) {
-        material.dispose();
-        this.deckMaterials.delete(id);
-      }
-    // A fading deck still writes depth: its faces are drawn top and front first,
-    // so only the nearest blends, once, as the fixed view's single slab does.
-    // It goes after grass and effects, which then show through it.
-    if (fading || this.decksFading)
-      for (const child of this.solidRoot.children)
-        if (child instanceof THREE.Mesh && !Array.isArray(child.material))
-          child.renderOrder = child.material.transparent && this.isDeck(child.material) ? 3 : 0;
-    this.decksFading = fading;
-  }
-
-  private isDeck(material: THREE.Material): boolean {
-    for (const deck of this.deckMaterials.values()) if (deck === material) return true;
-    return false;
   }
 
   private lit<T extends THREE.Material>(material: T, receiver: SunReceiver): T {
@@ -491,7 +430,7 @@ export class FirstPersonView {
       this.stats.sunRedraws = this.sun.redraws;
       // After the sun's map: casters beyond a tabletop's edge still shade it.
       renderer.clippingPlanes = this.cameras.cutFor(headset);
-      this.revealDecks(frame);
+      this.decks.update(this.chunks.values(), frame.cutaway, this.solidRoot);
       renderer.setClearColor(frame.background ?? this.background, 1);
       renderer.clear();
       renderer.render(this.scene, camera);
@@ -648,13 +587,23 @@ export class FirstPersonView {
           ...faces,
         });
       // Each overhead deck is its own mesh with its own material, to fade alone.
-      for (const deck of built.decks)
-        parts.push({
-          bucket: `deck:${deck.id}`,
-          material: this.deckMaterial(deck.id),
-          parent,
-          ...deck.flat,
-        });
+      for (const deck of built.decks) {
+        parts.push(
+          {
+            bucket: `deck:${deck.id}`,
+            material: this.decks.get(deck.id).face,
+            parent,
+            ...deck.flat,
+          },
+          {
+            bucket: `deck-grid:${deck.id}`,
+            material: this.decks.get(deck.id).grid,
+            parent,
+            ...deck.lines,
+            lines: true,
+          },
+        );
+      }
       this.dropRoomViews(key);
       for (const room of built.rooms) parts.push(...this.roomViewParts(key, cx, cy, room));
       this.faces.replace(`${key}:props`, parts);
@@ -864,8 +813,7 @@ export class FirstPersonView {
     this.blobs.dispose();
     this.effects.dispose();
     this.underlay.dispose();
-    for (const material of this.deckMaterials.values()) material.dispose();
-    this.deckMaterials.clear();
+    this.decks.dispose();
     this.grass.dispose();
     this.sun.dispose();
     this.propMeshes.dispose();

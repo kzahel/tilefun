@@ -9,23 +9,19 @@ GPU timer query where available and render plus `gl.finish()`. It runs against
 the isolated Vite server or a production origin (`--base`), in bundled Chromium,
 a phone's Chrome or the packaged Deck shell (`--cdp`, `--attach-page`).
 [236](../tactical/236-render-scorecard-and-gpu-shadows.md) owns the commands,
-limits, tables and next options. Since 2026-11-16 play's default, and so the
-bench's, is the unified top-down view; `--query=view=fixed` measures the classic
-fixed view ([renderer unification](renderer-unification.md#device-scorecard)).
-`--software-webgl` launches the same SwiftShader headless shell and flags as
-the software browser-test lane, verifies its renderer string and records the
-active world renderer in each cell (`drawing3d`). Use explicit
-`--query=view=fixed` and `--query=view=topdown3d` for a comparison: the default
-still selects the fixed fallback on software WebGL. The
+limits, tables and next options. Since 2026-11-17, the unified scene is mandatory
+on hardware and software WebGL ([253](../tactical/253-retire-fixed-world-renderer.md)).
+`--query=view=fixed` is rejected; comparisons use saved historical reports.
+`--software-webgl` launches the SwiftShader headless shell with the software-test
+flags, verifies its renderer string and records active scene drawing in each cell
+(`drawing3d`). The
 [software investigation](renderer-unification.md#software-webgl-investigation-2026-11-17)
-owns the paired results and browser-suite limits.
-Since [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) a cell
-also reports `meshDrawCallsPerFrame`: the vehicle meshes the fixed view draws
-into images, which its draw-call figure had left out (26 to 547 a frame in the
-city and crowd). `--query=view=topdown3d` and `--query=view=fps` measure the 3D
-scene, whose own count includes vehicles; the
+retains the earlier paired results and their limits.
+`meshDrawCallsPerFrame` counts offscreen work for native-pixel vehicle body images;
+the view's draw count includes their final cards. `--query=view=fps` chooses the
+first-person camera on the same scene. The
 [renderer unification scorecard](renderer-unification.md#device-scorecard)
-compares the three on the Mac, the Pixel 7a and the Deck. The `drive` scene now
+retains historical comparisons on the Mac, Pixel 7a and Deck. The `drive` scene now
 starts in first person on the phone as well. The `cars` scene parks 50 vehicles
 in the city without the crowd's rabbits, and `fleet` is the same scene with the
 vehicle image cache off, so every body is rendered again each frame as a moving

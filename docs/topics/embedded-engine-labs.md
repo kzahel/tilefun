@@ -993,20 +993,17 @@ Realm still startles the animal. Native Canvas/GPU landing checks record the
 maximum authority player vertical velocity throughout escape/recovery to catch
 an unintended relaunch. Explicit Jump retains ordinary input physics.
 
-## Unified top-down view in labs (2026-11-16)
+## Unified top-down view in labs (2026-11-17)
 
-`LabView` labs draw through the game's unified top-down path (`renderTopDown3d`,
-sharing `drawSeen` with play), with their own `FirstPersonControl` disposed with
-the lab. Since play made it the default the same day, labs follow the device's
-choice too (`unifiedTopDownChoice`: Options' saved choice, overridden by
-`?view=fixed` or `?view=topdown3d` on the Workshop URL). Slab fades run on the
-lab's display clock, as its fixed view's do; a fixture without terrain shows its
-background colour. A hook's `overlay` drawing goes on the render host's UI canvas
-above the 3D view (`RenderHost.drawUiOverlay`), so it sits above bodies. Room
-labs (`interior`) and labs with an `underlay` (the outdoor geometry test's grid
-under a prop) stay on the fixed view: neither has a 3D form yet. Review identities
-are unaffected: Workshop candidates and room reviews render through the review
-raster, not `LabView` ([renderer unification](renderer-unification.md)).
+Every `LabView` consumer draws through the game's unified path (`renderTopDown3d`,
+sharing `drawSeen` with play), with its own `FirstPersonControl` disposed with the
+lab. Slab fades run on the lab's display clock; fixtures without terrain show
+their background colour. A hook's `overlay` draws on the UI canvas above the scene.
+Room labs use the shared room scene, wall bands and anchor-placed furniture.
+Diagnostic `underlay` grids draw on a bounded ground-plane texture behind bodies.
+`?view=fixed` no longer selects a renderer. Review candidates and room approvals
+retain the immutable review raster independently of `LabView`.
+[253](../tactical/253-retire-fixed-world-renderer.md) records migration and validation.
 
 ## Change and validation discipline
 

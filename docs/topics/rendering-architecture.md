@@ -93,7 +93,10 @@ its own ceiling, preserving underpass shadows even when an exposed end is higher
 Receiver broadphase bounds use actual polygon vertices rather than extrapolated
 AABB corners. The collector uses the same displayed orientation as the mesh.
 
-[236](../tactical/236-render-scorecard-and-gpu-shadows.md) draws every body
+**Historical fixed pass, retired by 253.** The unified scene uses the sun/contact
+shadows described above; shared `GpuShadow` shapes remain.
+
+[236](../tactical/236-render-scorecard-and-gpu-shadows.md) drew every body
 shadow of the GPU fixed view in one pass (`GpuDeferredShadows`). There is no
 second path and no switch.
 - Collection attaches a `GpuShadow` (`GpuShadowShape.ts`) to the caster's sprite:
