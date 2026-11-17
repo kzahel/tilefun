@@ -115,11 +115,8 @@ test("CPU profile summary excludes origins and weights sampled functions", async
 test("uncached GPU control fails closed when the production branch changes", async () => {
   const { disableImageDimensionCache } = await import("./streaming-dimension-control.mjs");
   const { readFileSync } = await import("node:fs");
-  const source = readFileSync(
-    new URL("../src/rendering/GpuRasterSurface.ts", import.meta.url),
-    "utf8",
-  );
-  assert.match(disableImageDimensionCache(source), /if \(false\) \{/);
+  const source = readFileSync(new URL("../src/rendering/GpuPages.ts", import.meta.url), "utf8");
+  assert.match(disableImageDimensionCache(source), /if \(true\) return size\(image\);/);
   assert.throws(() => disableImageDimensionCache("unexpected source"));
   assert.throws(() => disableImageDimensionCache(source + source));
 });

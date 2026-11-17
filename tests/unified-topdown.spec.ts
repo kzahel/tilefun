@@ -1,8 +1,6 @@
 import { expect, type Page, test } from "@playwright/test";
 
-// The unified top-down view (renderer unification): play's default where WebGL
-// runs on a GPU. The suite's headless browser rasterises in software, where the
-// classic view stays the default, so this spec asks for the unified one.
+// Unified drawing is mandatory, including the software-WebGL browser lane.
 type GameCanvas = HTMLCanvasElement & {
   __game: { firstPerson: { drawing3d: boolean; topDown: boolean } };
 };
@@ -13,12 +11,12 @@ const drawing3d = (page: Page) =>
 const building = (page: Page) =>
   page.getByRole("button", { name: "Play", exact: true }).isVisible();
 
-test("play and building mode draw through the unified view; ?view=fixed keeps the classic one", async ({
+test("play and building mode use the unified scene and ignore retired fixed-view links", async ({
   page,
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/tilefun/?nogamepad&view=topdown3d");
+  await page.goto("/tilefun/?nogamepad");
   await page.locator('#game[data-ready="true"]').waitFor();
   await expect.poll(() => drawing3d(page)).toBe(true);
   // Building mode keeps drawing in 3D, its overlays on the UI canvas above.
@@ -37,6 +35,6 @@ test("play and building mode draw through the unified view; ?view=fixed keeps th
   await page.waitForTimeout(500);
   expect(
     await page.locator("#game").evaluate((c: GameCanvas) => c.__game.firstPerson.topDown),
-  ).toBe(false);
-  expect(await drawing3d(page)).toBe(false);
+  ).toBe(true);
+  expect(await drawing3d(page)).toBe(true);
 });

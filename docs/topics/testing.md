@@ -2,6 +2,13 @@
 
 ## Local validation
 
+[253](../tactical/253-retire-fixed-world-renderer.md) retires fixed GPU world
+passes and moves ordinary software-WebGL tests to unified drawing. The existing
+smoke pixel check now waits for an actual 3D world frame. Fixed-pass probes are
+removed with their renderer; gameplay checks observe the unified presented-sprite
+hook, shared page resources and actual view diagnostics. The immutable review
+raster and its exact pixel checks stay. 253 owns the current qualification record.
+
 The 2026-11-16 seven-failure browser repair updates stale gorilla, seahorse and
 shark inspection coordinates to existing natural homes, and makes two controller
 cases navigate to Host P2P after the local split-screen controls. The kangaroo

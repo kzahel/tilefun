@@ -1,21 +1,17 @@
 import { closeAssets, type GameAssets, loadGameAssets } from "../assets/GameAssets.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
-import { unifiedTopDownChoice } from "../config/unifiedTopDown.js";
 import { GameLoop } from "../core/GameLoop.js";
 import { PerformanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import type { Entity } from "../entities/Entity.js";
-import type { FurniturePlacement } from "../interiors/FurnitureCatalog.js";
-import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
-import { presentInterior } from "../interiors/presentInterior.js";
+import type { FirstPersonInterior } from "../rendering/firstperson/FirstPersonInterior.js";
 import { OverlayFrame } from "../rendering/OverlayFrame.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { cameraPixelSnap, type TerrainPacing } from "../rendering/PresentationSettings.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
 import { loadRenderHostFactory } from "../rendering/RenderHostLoader.js";
-import type { SceneItem } from "../rendering/SceneItem.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import { ViewLayouts } from "../rendering/ViewLayout.js";
-import { requireWebGl2, softwareWebGl } from "../rendering/WebGl2Support.js";
+import { requireWebGl2 } from "../rendering/WebGl2Support.js";
 import { LabInput } from "../scenarios/LabInput.js";
 import type { ScenarioCommand } from "../scenarios/ScenarioProtocol.js";
 import type { ScenarioRecipe } from "../scenarios/ScenarioRecipe.js";
@@ -43,11 +39,7 @@ export interface LabViewOptions {
   poseCycle?(): PoseCycle | undefined;
   /** An owned room cache drawn instead of terrain; its props still take part in
    * actor ordering. Disposal clears it. */
-  interior?: {
-    presentation: InteriorPresentation;
-    placements: readonly FurniturePlacement[];
-    drawProps: ReadonlySet<number>;
-  };
+  interior?: FirstPersonInterior;
   /** The lab's own scripted input (the Interiors playtest's walk, automatic walk
    * and place mode) in place of the game's controls. */
   input?(): Movement;
@@ -97,6 +89,7 @@ export class LabView {
   private readonly layouts = new ViewLayouts();
   private readonly effects = new ParticleSystem();
   private readonly overlays = new OverlayFrame();
+  private readonly underlays = new OverlayFrame();
   private readonly loop: GameLoop;
   private readonly timings = new PerformanceMetrics();
   private readonly vehicleControls: boolean;
@@ -114,9 +107,7 @@ export class LabView {
   private displayedPlayer: Entity | undefined;
   private renderX = 0;
   private renderY = 0;
-  /** The view draws through the unified 3D scene, as play does by default since
-   * 2026-11-16: the device's choice, or `?view=fixed` / `?view=topdown3d` on the
-   * lab's page. Room labs and labs with an underlay keep the fixed view. */
+  /** Every lab uses the shared world scene, including rooms and grid underlays. */
   private readonly unified: FirstPersonControl | undefined;
   /** Worlds loaded so far (`worldLoaded`). */
   private worlds = 0;
@@ -143,17 +134,12 @@ export class LabView {
     try {
       requireWebGl2();
     } catch {}
-    if (
-      unifiedTopDownChoice(location.search, softwareWebGl()) &&
-      !options.interior &&
-      !options.underlay
-    ) {
-      this.unified = new FirstPersonControl(
-        () => this.canvas,
-        () => this.assets?.sheets ?? new Map(),
-      );
-      this.unified.topDown = true;
-    }
+    this.unified = new FirstPersonControl(
+      () => this.canvas,
+      () => this.assets?.sheets ?? new Map(),
+    );
+    this.unified.topDown = true;
+    this.unified.sync([this.view], new Set([0]));
     this.setRegion(options.width, options.height);
     this.loop = new GameLoop({
       update: (dt) => {
@@ -373,24 +359,9 @@ export class LabView {
         ...(this.unified
           ? { draw3d: (view: View) => this.draw3d(view, entities, shown, now) }
           : {}),
-        ...(interior
-          ? {
-              room: {
-                drawProps: interior.drawProps,
-                present: (items: readonly SceneItem[]) =>
-                  presentInterior(
-                    host.renderer,
-                    camera,
-                    interior.presentation,
-                    interior.placements,
-                    items,
-                  ),
-              },
-            }
-          : {}),
       });
       // Drawn in 3D, the hooks' world overlays go on the UI canvas above it.
-      if (this.view.topDown3d) this.drawOverlay(this.options.overlay, true);
+      this.drawOverlay(this.options.overlay);
       this.options.uiOverlay?.(host.uiContext, this);
       this.input?.draw(host.uiContext);
       this.renderX = camera.x;
@@ -401,6 +372,7 @@ export class LabView {
     } finally {
       this.displayedPlayer = undefined;
       this.overlays.release();
+      this.underlays.release();
       camera.restoreActual();
       replica.endPresentation();
     }
@@ -410,6 +382,8 @@ export class LabView {
   private draw3d(view: View, entities: readonly Entity[], observer: Entity, now: number): boolean {
     const { host, unified } = this;
     if (!host?.view3d || !unified) return false;
+    this.underlays.begin();
+    this.options.underlay?.(this.underlays, this);
     return renderTopDown3d(
       {
         control: unified,
@@ -424,6 +398,17 @@ export class LabView {
         background:
           this.options.terrain === false ? (this.options.background ?? "#cbd5c3") : undefined,
         observer,
+        ...(this.options.interior
+          ? {
+              interior: this.options.interior,
+              props: this.client.replica.props.filter(
+                (p) => !!this.options.interior?.furniture(p.type),
+              ),
+            }
+          : {}),
+        underlay: this.underlays.items,
+        visibility: this.options.surfaceVisibility?.() ?? "auto",
+        meshSurfaceGeometry: host.renderer.meshSurfaceGeometry?.bind(host.renderer),
       },
       view,
       this.alpha,
@@ -459,19 +444,21 @@ export class LabView {
   }
 
   /** One pass of a hook's drawing, in the presented camera's screen space: into
-   * the fixed view's world, or on the UI canvas above a view drawn in 3D. */
-  private drawOverlay(collect: LabViewOptions["overlay"], ui = false) {
+   * the UI canvas above the unified world. */
+  private drawOverlay(collect: LabViewOptions["overlay"]) {
     if (!collect || !this.host) return;
     this.overlays.begin();
     collect(this.overlays, this);
     if (!this.overlays.items.length) return;
-    if (ui) this.host.drawUiOverlay(this.overlays.items);
-    else this.host.renderer.submit(this.camera, { kind: "overlay", items: this.overlays.items });
+    this.host.drawUiOverlay(this.overlays.items);
   }
 
   getDiagnostics(): LabDiagnostics {
+    const presentation = labPresentationDiagnostics(this.host, this.client.device, this.effects);
     return {
-      ...labPresentationDiagnostics(this.host, this.client.device, this.effects),
+      ...presentation,
+      receivers: this.unified?.frame.receiverStats ?? this.client.device.frame.receiverStats,
+      meshDraws: this.unified?.viewStats?.cars ?? presentation.meshDraws,
       alpha: this.alpha,
       steps: this.steps,
       authority: this.client.getDiagnostics(),
@@ -513,7 +500,7 @@ export class LabView {
     this.host = undefined;
     this.effects.clear();
     this.overlays.clear();
-    this.options.interior?.presentation.clear();
+    this.underlays.clear();
     if (this.assets) closeAssets(this.assets);
     this.assets = undefined;
     this.client.dispose();

@@ -86,12 +86,11 @@ beside the northern shore. Press **E / Drive boat** to board, steer with ordinar
 vehicle controls, and return beside a clear shore to get out. Boats are also in
 **Edit → Vehicles**. [Boat controls and lake generation](docs/topics/boats.md).
 
-The game defaults to **GPU + 3D car**: the existing fixed game view rendered with
-WebGL2, with all 45 authored vehicle models: compact cars, sedans, buses, police,
-ambulance, firetrucks and garbage trucks. Models load as needed; sprites remain
-available while loading or if a model cannot load.
+The game uses one WebGL2 scene for its pixel top-down view, first person,
+driving cameras, split screen and headsets. All 45 authored vehicle models load
+as needed; sprites cover models that are still loading or unavailable.
 Tilefun requires WebGL2; browsers without it get a "Tilefun needs WebGL2" screen.
-The separate 3D collision view is a debug option.
+The 3D collision view remains a separate debug overlay.
 
 - **Multiplayer** — Peer-to-peer via WebRTC (one browser hosts, others connect via URL — no server needed) or run a zero-dependency dedicated Node server. Parent crafts the world while the kid plays in it
 - **Collaborative editing** — See other players' editor cursors in real time, paint terrain together

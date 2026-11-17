@@ -92,6 +92,27 @@ describe("an actor's card", () => {
   });
 });
 
+it("keeps a supported room actor in front of furniture without moving its pixels", () => {
+  const sheet = new Spritesheet({ width: 64, height: 64 } as unknown as HTMLCanvasElement, 16, 16);
+  const actor = {
+    wx: 64,
+    wy: 70,
+    zOffset: 12,
+    sortKey: 90.001,
+    drawOffsetY: 0,
+    frameCol: 0,
+    frameRow: 1,
+    spriteWidth: 16,
+    spriteHeight: 16,
+  } as SpriteItem;
+  const ordinary = actorBillboard(actor, sheet, "south", new Set());
+  const supported = actorBillboard(actor, sheet, "south", new Set(), true);
+  expect(supported.y).toBeCloseTo(actor.sortKey);
+  expect(supported.y - supported.z).toBeCloseTo(ordinary.y - ordinary.z);
+  expect(supported.x).toBe(ordinary.x);
+  expect(supported.height).toBe(ordinary.height);
+});
+
 describe("an actor drawn below its standing point", () => {
   const sheet = new Spritesheet({ width: 64, height: 64 } as unknown as HTMLCanvasElement, 16, 16);
   const rabbit = {

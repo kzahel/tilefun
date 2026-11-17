@@ -4,6 +4,17 @@ test("ready game fills a nonzero viewport with rendered pixels", async ({ page }
   await page.goto("/tilefun/");
   await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
   await expect(page.locator("#game")).toBeVisible();
+  await expect
+    .poll(() =>
+      page
+        .locator("#game")
+        .evaluate(
+          (canvas) =>
+            (canvas as unknown as { __game: { firstPerson: { drawing3d: boolean } } }).__game
+              .firstPerson.drawing3d,
+        ),
+    )
+    .toBe(true);
   const box = await page.locator("#game").boundingBox();
   expect(box?.width).toBeGreaterThan(0);
   expect(box?.height).toBeGreaterThan(0);

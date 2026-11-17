@@ -4,14 +4,13 @@ import { vehiclePaint } from "../traffic/VehiclePaint.js";
 import { applyMeshInstance, loadAuthoredMesh } from "./AuthoredMeshPose.js";
 import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
-import type { Camera } from "./Camera.js";
 import { CarBodyImageCache, carBodyImageKey } from "./CarBodyImageCache.js";
 import type { CarMeshAsset } from "./CarMeshAsset.js";
 import { setCarMeshProjection } from "./CarMeshProjection.js";
 import { CarPixelOutline } from "./CarPixelOutline.js";
 import { CarRenderTargets } from "./CarRenderTargets.js";
 import { FrameCarImages } from "./FrameCarImages.js";
-import type { GpuRasterSurface } from "./GpuRasterSurface.js";
+import type { GpuSceneSurface } from "./GpuSceneSurface.js";
 import { GpuVehicleContents } from "./GpuVehicleContents.js";
 import { meshBedFoot, meshChildPoint } from "./MeshGradePose.js";
 import {
@@ -20,12 +19,10 @@ import {
   FIRE_TRUCK_MESH,
   resolveBody,
 } from "./MeshPresentation.js";
-import { projectWorld } from "./Projection.js";
 import { ResourceSlot } from "./ResourceSlot.js";
 import type { SpriteItem } from "./SceneItem.js";
 import { VehiclePaintResources } from "./VehiclePaintResources.js";
 import type { BodyImage } from "./View3dHost.js";
-import { WORLD_DEPTH_RANGE } from "./WorldDepth.js";
 
 /** A finished image and what the fixed view counts about it. */
 interface DrawnImage extends BodyImage {
@@ -52,7 +49,6 @@ export class GpuMeshBodies {
     [FIRE_TRUCK_MESH, this.fireTruck],
   ]);
   readonly ready = new Set<string>();
-  readonly shadowCasters = new Set<number>();
   private readonly scene = new THREE.Scene();
   private readonly camera = new THREE.Camera();
   readonly targets = new CarRenderTargets();
@@ -64,9 +60,7 @@ export class GpuMeshBodies {
   drawCalls = 0;
   paintDraws = 0;
   paintFallbacks = 0;
-  /** Diagnostic baseline keeps the old immediate cached-image submission. */
-  deferCachedImages = true;
-  constructor(private readonly surface: GpuRasterSurface) {}
+  constructor(private readonly surface: GpuSceneSurface) {}
   setEnabled(value: boolean) {
     if (!value) {
       this.surface.flush();
@@ -113,7 +107,6 @@ export class GpuMeshBodies {
   /** Called once before submissions; promise completions only become visible here.
    * `views`: the last display frame's view count, for the same-frame image memo. */
   beginFrame(views = 1) {
-    this.shadowCasters.clear();
     this.targets.beginFrame();
     this.images.beginFrame(views);
     this.held.beginFrame(true);
@@ -122,26 +115,6 @@ export class GpuMeshBodies {
     this.ready.clear();
     if (this.enabled)
       for (const [assetId, slot] of this.slots) if (slot.state === "ready") this.ready.add(assetId);
-  }
-  draw(
-    camera: Camera,
-    item: SpriteItem,
-    sheets: ReadonlyMap<string, Spritesheet> = new Map(),
-  ): boolean {
-    const image = this.image(item, sheets, undefined);
-    if (!image) return false;
-    this.composite(
-      camera,
-      item,
-      image.texture,
-      image.radius,
-      image.depth,
-      !image.reused || !this.deferCachedImages,
-    );
-    if (image.painted) this.paintDraws++;
-    if (item.bedGroup) this.bedDraws++;
-    if (item.shadowCasterId !== undefined) this.shadowCasters.add(item.shadowCasterId);
-    return true;
   }
   /**
    * The image `draw` would composite, for a 3D view to place in its own scene:
@@ -158,7 +131,13 @@ export class GpuMeshBodies {
     sheets: ReadonlyMap<string, Spritesheet>,
     shows: (radius: number) => boolean,
   ): BodyImage | null | undefined {
-    return this.image(item, sheets, shows);
+    const image = this.image(item, sheets, shows);
+    if (image) {
+      this.draws++;
+      if (image.painted) this.paintDraws++;
+      if (item.bedGroup) this.bedDraws++;
+    }
+    return image;
   }
   /** `shows`: a 3D view's test of what is in view. Its image must outlive later
    * images of this display frame, so it never lands in the scratch target and
@@ -314,37 +293,6 @@ export class GpuMeshBodies {
       this.scene.remove(this.contents.group);
     }
     return { texture, depth: output.depthTexture, radius, reused: false, painted };
-  }
-  private composite(
-    camera: Camera,
-    item: SpriteItem,
-    texture: THREE.Texture,
-    radius: number,
-    depth: THREE.Texture | null | undefined,
-    immediate = true,
-  ) {
-    const { surface } = this;
-    const anchor = projectWorld(camera, item.wx, item.wy, item.zOffset);
-    surface.save();
-    surface.globalAlpha = item.alpha ?? 1;
-    const subpixel = camera.worldRaster && item.subpixel;
-    surface.imageSmoothingEnabled = !!subpixel;
-    const size = subpixel ? Math.round(radius * 2 * camera.scale) : radius * 2 * camera.scale;
-    if (depth) {
-      surface.setDepthPlane(0, 0, 0.5 - (item.wy + item.zOffset - camera.y) / WORLD_DEPTH_RANGE);
-      surface.drawDepthTexture(
-        texture,
-        depth,
-        anchor.sx - size / 2,
-        anchor.sy - size / 2,
-        size,
-        size,
-        (8 * radius) / WORLD_DEPTH_RANGE,
-      );
-    } else surface.drawTexture(texture, anchor.sx - size / 2, anchor.sy - size / 2, size, size);
-    if (immediate) surface.flush();
-    surface.restore();
-    this.draws++;
   }
   recover() {
     this.surface.flush();

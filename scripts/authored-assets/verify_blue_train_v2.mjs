@@ -51,7 +51,7 @@ try {
     const { CarMeshAsset } = await import("/tilefun/src/rendering/CarMeshAsset.ts");
     const { AUTHORED_TRAIN_MESHES } = await import("/tilefun/src/rendering/AuthoredTrainMeshes.ts");
     const { EntityMeshPose } = await import("/tilefun/src/rendering/EntityMeshPose.ts");
-    const { GpuRenderBackend } = await import("/tilefun/src/rendering/GpuRenderBackend.ts");
+    const { GpuRenderResources } = await import("/tilefun/src/rendering/GpuRenderResources.ts");
     const { Camera } = await import("/tilefun/src/rendering/Camera.ts");
     const { Spritesheet } = await import("/tilefun/src/assets/Spritesheet.ts");
     const { ScenarioSession } = await import("/tilefun/src/scenarios/ScenarioSession.ts");
@@ -125,7 +125,7 @@ try {
     canvas.width = 600;
     canvas.height = 560;
     document.body.append(canvas);
-    const backend = new GpuRenderBackend(canvas);
+    const backend = new GpuRenderResources(canvas);
     backend.meshes.setEnabled(true);
     const camera = new Camera();
     camera.setViewport(canvas.width, canvas.height);

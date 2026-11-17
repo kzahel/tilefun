@@ -22,7 +22,6 @@ export interface ClientCVars {
   r_show3d: CVar<boolean>;
   r_firstperson: CVar<boolean>;
   r_fpshadows: CVar<boolean>;
-  r_topdown3d: CVar<boolean>;
   r_pixelcars3d: CVar<boolean>;
   r_groundnearest: CVar<boolean>;
   r_pixelgrid: CVar<boolean>;
@@ -201,15 +200,6 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "r",
   });
 
-  const r_topdown3d = engine.cvars.register<boolean>({
-    name: "r_topdown3d",
-    description:
-      "Draw the top-down view in the 3D scene, the default (0 for the classic fixed view; ?view=fixed for one load)",
-    type: "boolean",
-    defaultValue: false,
-    category: "r",
-  });
-
   const r_pixelcars3d = engine.cvars.register<boolean>({
     name: "r_pixelcars3d",
     description:
@@ -273,7 +263,6 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     r_show3d,
     r_firstperson,
     r_fpshadows,
-    r_topdown3d,
     r_pixelcars3d,
     r_groundnearest,
     r_pixelgrid,

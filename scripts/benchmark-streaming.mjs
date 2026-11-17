@@ -179,7 +179,7 @@ try {
                 name: "streaming-dimension-control",
                 enforce: "pre",
                 transform(code, id) {
-                  if (id.endsWith("/src/rendering/GpuRasterSurface.ts"))
+                  if (id.endsWith("/src/rendering/GpuPages.ts"))
                     return disableImageDimensionCache(code);
                 },
               },
@@ -416,11 +416,11 @@ try {
             });
           };
           instrument(game.renderHost, "beginFrame", "beginMs");
-          instrument(game.renderer, "prepareTerrain", "prepareMs");
+          instrument(game.renderer, "prepareTerrainViews", "prepareMs");
           instrument(game.renderer, "submit", "submitMs");
           instrument(game.renderer.surface?.pages, "get", "pageMs");
           instrument(game.renderer.surface, "flush", "flushMs");
-          instrument(game.renderer.meshes, "draw", "meshMs");
+          instrument(game.renderer.meshes, "bodyImage", "meshMs");
           const gpuStats = game.renderer.surface?.stats;
           let previousUpload = gpuStats?.uploadedBytes ?? 0;
           let previousVertex = gpuStats?.vertexUploadedBytes ?? 0;

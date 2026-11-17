@@ -107,7 +107,7 @@ it("keeps the native review raster to fingerprinted review rasters (232)", () =>
       .filter((f) => /extends RasterRenderBackend\b/.test(f.text))
       .map((f) => f.path)
       .sort(),
-  ).toEqual(["rendering/GpuRenderBackend.ts", "rendering/ReviewRasterBackend.ts"]);
+  ).toEqual(["rendering/ReviewRasterBackend.ts"]);
   expect(
     sources.filter((f) => /new RasterRenderBackend\(/.test(f.text)).map((f) => f.path),
   ).toEqual([]);

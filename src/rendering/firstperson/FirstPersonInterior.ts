@@ -10,6 +10,8 @@ import type { PropImageFrame, PropSolid } from "./FirstPersonProps.js";
 export interface InteriorFurnitureArt {
   readonly rect: readonly [number, number, number, number];
   readonly anchor: readonly [number, number];
+  /** Supported furniture shares its parent's sort row without changing image registration. */
+  readonly sortOffsetY?: number;
   /** Rugs and other floor-layer pieces lie flat on the floor. */
   readonly floor: boolean;
   /** Pictures and other wall-layer pieces hang on the wall that contains their anchor. */

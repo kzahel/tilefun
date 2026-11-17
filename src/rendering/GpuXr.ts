@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { headFromMatrix } from "../xr/XrRig.js";
-import type { GpuRasterSurface } from "./GpuRasterSurface.js";
+import type { GpuSceneSurface } from "./GpuSceneSurface.js";
 import type { ImmersiveOutput, ScreenOutput, View3dTarget, View3dXr } from "./View3dHost.js";
 
 const clearColor = new THREE.Color();
@@ -27,7 +27,7 @@ async function roomSpace(session: XRSession): Promise<XRReferenceSpace> {
  * any frame, and the canvas is copied into a quad layer.
  */
 export function createXrHost(
-  surface: GpuRasterSurface,
+  surface: GpuSceneSurface,
   target: (width: number, height: number) => View3dTarget,
   /** An immersive session ended and the renderer has its own size back: size it
    * to the page as the page is now. */

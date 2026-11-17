@@ -37,6 +37,9 @@ test(`furniture lab view shares presentation, captures the room and retires old 
     await expect.poll(() => workers().length).toBe(1);
     expect(workers()[0]).not.toBe(old);
     await expect(page.locator("#viewport canvas")).toHaveCount(2);
+    await page
+      .locator("#viewport")
+      .screenshot({ path: test.info().outputPath(`room-${scene}.png`) });
   }
   const worker = workers()[0];
   await page.setViewportSize({ width: 390, height: 844 });

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { GpuMeshBodies } from "./GpuMeshBodies.js";
-import type { GpuRasterSurface } from "./GpuRasterSurface.js";
+import type { GpuSceneSurface } from "./GpuSceneSurface.js";
 import { createView3dHost, GROUND_UPLOADS_PER_VIEW } from "./GpuView3d.js";
 
 /** A renderer that records the state calls the fixed view depends on. */
@@ -52,7 +52,7 @@ function fixture() {
   // Ground images by chunk; the page store uploads on first sight, as GpuPages does.
   const images = new Map<object, object>();
   const host = createView3dHost(
-    surface as unknown as GpuRasterSurface,
+    surface as unknown as GpuSceneSurface,
     bodies as unknown as GpuMeshBodies,
     (chunk) => (images.get(chunk) as CanvasImageSource | undefined) ?? null,
   );

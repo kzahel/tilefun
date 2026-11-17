@@ -6,14 +6,16 @@ import type { Entity } from "../../entities/Entity.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { World } from "../../world/World.js";
 import { observerInsideRoom, roomObserver } from "../collectScene.js";
+import type { OverlayDraw } from "../OverlayFrame.js";
 import type { GrassItem, SpriteItem } from "../SceneItem.js";
-import { SURFACE_GRID, surfaceDisplay, surfaceFadeOpacity } from "../SurfacePresentation.js";
+import { SURFACE_GRID } from "../SurfacePresentation.js";
 import type { PageRegion, SharedMeshAssets, SharedPages, View3dTarget } from "../View3dHost.js";
 import { actorBillboard, MovingCards, RecentPages, StaticCards } from "./FirstPersonBillboards.js";
 import { BodyImageCards } from "./FirstPersonBodyImages.js";
 import { cameraRight, type FirstPersonEye } from "./FirstPersonCamera.js";
 import { type HeadsetFrame, TABLE_BACKGROUND, ViewCameras } from "./FirstPersonCameras.js";
 import { chunkKey, chunksInReach, type TerrainEntry, terrainStale } from "./FirstPersonChunks.js";
+import { deckOpacity } from "./FirstPersonDeckFade.js";
 import {
   type EffectItem,
   EffectQuads,
@@ -39,6 +41,7 @@ import { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
 import { BlobShadows, plainShadow, SunShadows } from "./FirstPersonShadows.js";
 import { SUN_REACH } from "./FirstPersonSun.js";
 import { buildTerrainChunk } from "./FirstPersonTerrain.js";
+import { FirstPersonUnderlay } from "./FirstPersonUnderlay.js";
 import { FirstPersonVehicles } from "./FirstPersonVehicles.js";
 import {
   chunksInRect,
@@ -92,10 +95,13 @@ export interface FirstPersonFrame {
         readonly fades: Map<string, { opacity: number; time: number }>;
         readonly time: number;
         readonly alpha: number;
+        readonly visibility?: import("../SurfacePresentation.js").SurfaceVisibility | undefined;
       }
     | undefined;
   /** No ground: the clear colour instead (a Workshop fixture without terrain). */
   readonly background?: string | undefined;
+  /** Diagnostic geometry on the ground behind the world. */
+  readonly underlay?: readonly OverlayDraw[] | undefined;
   /** Play's particles and surface marks for this frame (`EffectQuads`). */
   readonly effects?: readonly EffectItem[] | undefined;
   /**
@@ -104,22 +110,6 @@ export interface FirstPersonFrame {
    * heading and actors show the row seen from it.
    */
   readonly headset?: HeadsetFrame | undefined;
-}
-
-/** Kinds of content a view draws. */
-export interface SceneLayers {
-  /** Ground and cliff walls. */
-  ground: boolean;
-  /** Props drawn as solid volumes wearing their artwork. */
-  solids: boolean;
-  /** Props drawn as standing cards. */
-  cards: boolean;
-  /** Moving actors drawn as cards. */
-  actors: boolean;
-  /** Authored vehicle and train meshes. */
-  vehicles: boolean;
-  /** Grass blades (top-down only). */
-  grass: boolean;
 }
 
 const SKY = 0x9fd3f0;
@@ -194,16 +184,6 @@ export class FirstPersonView {
     /** Vertices of merged faces put together again this frame. */
     merged: 0,
   };
-  /** Diagnostics: kinds of content to leave out. The parity probe (251) draws
-   * one kind at a time; play draws them all. */
-  readonly layers: SceneLayers = {
-    ground: true,
-    solids: true,
-    cards: true,
-    actors: true,
-    vehicles: true,
-    grass: true,
-  };
   private readonly scene = new THREE.Scene();
   private readonly worldRoot = new THREE.Group();
   /** One parent per kind of static content, so a kind can be hidden. */
@@ -247,6 +227,7 @@ export class FirstPersonView {
   private readonly blobs: BlobShadows;
   private readonly grass: GrassCards;
   private readonly effects: EffectQuads;
+  private readonly underlay: FirstPersonUnderlay;
   /** Overhead decks' materials by surface id (`revealDecks`). */
   private readonly deckMaterials = new Map<string, THREE.MeshBasicMaterial>();
   /** Some deck was fading last frame (its mesh drawn after grass and effects). */
@@ -325,6 +306,7 @@ export class FirstPersonView {
     );
     this.blobs = new BlobShadows(this.worldRoot);
     this.effects = new EffectQuads(this.worldRoot);
+    this.underlay = new FirstPersonUnderlay(this.worldRoot, sheets);
     // Blades blend (the zoom fade) and leave depth alone: see `GrassCards`.
     this.grass = new GrassCards(
       this.worldRoot,
@@ -372,14 +354,8 @@ export class FirstPersonView {
         live.add(deck.id);
         const material = this.deckMaterials.get(deck.id);
         if (!material) continue;
-        const opacity = cutaway
-          ? surfaceFadeOpacity(
-              cutaway.fades,
-              deck.id,
-              surfaceDisplay(deck.patch, deck.bounds, cutaway.observer, "auto", cutaway.alpha),
-              cutaway.time,
-            )
-          : 1;
+        const opacity = deckOpacity(deck, cutaway);
+        material.visible = opacity > 0;
         const clear = opacity < 1;
         if (material.transparent !== clear) {
           material.transparent = clear;
@@ -427,6 +403,13 @@ export class FirstPersonView {
     if (frame.props !== this.propsSource) this.groupProps(frame.props);
     const { pages } = target;
     const topDown = frame.topDown;
+    this.underlay.update(
+      frame.underlay,
+      frame.eye,
+      topDown?.scale ?? 1,
+      target.width,
+      target.height,
+    );
     const headset = topDown ? undefined : frame.headset;
     const table = headset?.table;
     const fog = frame.interior || topDown || table ? null : this.fog;
@@ -460,9 +443,7 @@ export class FirstPersonView {
     });
     this.stats.meshes = this.faces.count + this.ground.meshes + (this.cards.count ? 1 : 0);
     // A diagnostic fixture without terrain shows its plain background instead.
-    this.groundRoot.visible = this.layers.ground && frame.background === undefined;
-    this.solidRoot.visible = this.layers.solids;
-    this.cardRoot.visible = this.layers.cards;
+    this.groundRoot.visible = frame.background === undefined;
     // Outdoor fog follows the selected distance, independently of chunk arrival.
     // Without fog nothing hides far casters: the sun map's own reach decides.
     const fogEnd = fog ? frame.drawRadius : Infinity;
@@ -488,16 +469,12 @@ export class FirstPersonView {
         (frame.pixelBodies !== false && ground) || undefined,
       );
       this.grass.fill(
-        (topDown && this.layers.grass && frame.grass) || [],
+        (topDown && frame.grass) || [],
         this.sheets.get("grass-blades"),
         this.cardPages,
       );
       this.stats.grass = this.grass.count;
-      this.effects.fill(
-        (this.layers.actors && frame.effects) || [],
-        this.cardRight.value,
-        this.lamps,
-      );
+      this.effects.fill(frame.effects || [], this.cardRight.value, this.lamps);
       this.stats.effects = this.effects.count;
       // Read after the frame's page requests: the atlas is replaced when it grows.
       this.atlas.value = pages.atlas;
@@ -562,6 +539,11 @@ export class FirstPersonView {
     scene.adoptShell(this.propsSource);
     const mesh = texturedMesh(scene.floorFaces(), this.propMeshes.faceMaterial(scene.floor));
     this.worldRoot.add(mesh);
+    if (topDown && !interior.shellType && scene.bands) {
+      const faces = { positions: [] as number[], uvs: [] as number[], colors: [] as number[] };
+      scene.appendBands(() => faces);
+      mesh.add(texturedMesh(faces, this.propMeshes.faceMaterial(scene.bands.texture)));
+    }
     this.room = { scene, mesh };
   }
 
@@ -625,7 +607,7 @@ export class FirstPersonView {
   /** Rebuild a loaded chunk's stale ground or props; returns the number of builds. */
   private refreshChunk(world: FirstPersonWorld, cx: number, cy: number, key: string): number {
     const chunk = world.getChunkIfLoaded(cx, cy);
-    if (!chunk) return 0;
+    if (!chunk && !this.propsByChunk.has(key)) return 0;
     let scene = this.chunks.get(key);
     if (!scene) {
       scene = { cx, cy };
@@ -634,7 +616,7 @@ export class FirstPersonView {
     let builds = 0;
     const heightAt = (tx: number, ty: number) => world.getHeightAt(tx, ty);
     const area = `${Math.floor(cx / FACE_AREA_CHUNKS)},${Math.floor(cy / FACE_AREA_CHUNKS)}`;
-    if (!this.room && terrainStale(scene.terrain, chunk)) {
+    if (!this.room && chunk && terrainStale(scene.terrain, chunk)) {
       const { tops, cliffs, walls } = buildTerrainChunk(chunk, cx, cy, heightAt);
       this.ground.set(key, tops, cliffs);
       this.faces.replace(`${key}:walls`, [
@@ -814,7 +796,6 @@ export class FirstPersonView {
     return (
       !item.flashHidden &&
       item.alpha !== 0 &&
-      this.layers.vehicles &&
       !!item.mesh &&
       this.vehicles.drawable(meshes, item.mesh.assetId)
     );
@@ -832,7 +813,6 @@ export class FirstPersonView {
   ): void {
     if (item.flashHidden || item.alpha === 0) return;
     const body = !!item.mesh && this.vehicles.drawable(meshes, item.mesh.assetId);
-    if (!(body ? this.layers.vehicles : this.layers.actors)) return;
     // A mesh body's shadow belongs to the drawn body: sprite fallbacks have one baked in.
     const shadow =
       shadows &&
@@ -847,7 +827,10 @@ export class FirstPersonView {
     }
     const sheet = this.images.sheet(item.sheetKey);
     if (!sheet) return;
-    this.billboards.push(actorBillboard(item, sheet, eye, meshes.ready), this.cardPages);
+    this.billboards.push(
+      actorBillboard(item, sheet, eye, meshes.ready, this.room?.scene.topDown),
+      this.cardPages,
+    );
     const lamp = emergencyLamp(item);
     if (lamp) this.lamps.push(lamp);
   }
@@ -880,6 +863,7 @@ export class FirstPersonView {
     this.faces.dispose();
     this.blobs.dispose();
     this.effects.dispose();
+    this.underlay.dispose();
     for (const material of this.deckMaterials.values()) material.dispose();
     this.deckMaterials.clear();
     this.grass.dispose();

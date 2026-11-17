@@ -34,6 +34,7 @@ import type { TriangleWriter } from "./FirstPersonTerrain.js";
 /** Furniture placed by its anchor, with its composed artwork. */
 export interface RoomFurniture {
   readonly frame: PropImageFrame;
+  readonly sortOffsetY: number;
   /** Rugs and other floor-layer pieces lie flat on the floor. */
   readonly floor: boolean;
   /** Pictures hang on the wall containing their anchor. */
@@ -141,7 +142,7 @@ export class FirstPersonRoomScene {
 
   /** Top-down: the wall bands in place of the shell's volumes (the floor
    * already wears a non-editable room's walls). */
-  private appendBands(
+  appendBands(
     facesFor: (image: Pick<PropImage, "texture">) => TexturedTriangles | undefined,
   ): void {
     const bands = this.bands;
@@ -196,13 +197,26 @@ export class FirstPersonRoomScene {
   furniture(type: string, images: FirstPersonImages): RoomFurniture | undefined {
     const art = this.interior.furniture(type);
     if (!art) return undefined;
-    const frame = furnitureFrame(art);
+    const original = furnitureFrame(art);
+    const sortOffsetY = art.sortOffsetY ?? 0;
+    const frame = { ...original, top: original.top - sortOffsetY };
     return {
       frame,
+      sortOffsetY,
       floor: art.floor,
       wall: art.wall,
       image: (opaque) => images.region(MODERN_INTERIORS_SHEET_KEY, art.rect, frame, opaque),
     };
+  }
+
+  /** Keep supported furniture at its parent's sort row while its frame keeps the original pixels. */
+  placement(prop: Prop, furniture: RoomFurniture): Prop {
+    return furniture.sortOffsetY
+      ? {
+          ...prop,
+          position: { wx: prop.position.wx, wy: prop.position.wy + furniture.sortOffsetY },
+        }
+      : prop;
   }
 
   /**

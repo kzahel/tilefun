@@ -20,11 +20,11 @@ import { FURNITURE_CATALOG_VERSION, type FurniturePlacement } from "../Furniture
 import { furnitureDrawOrder, furnitureSignature } from "../FurnitureLayout.js";
 import { FurnitureMotion, MOTION_SCENES, MOTION_SKETCH, restingZ } from "../FurnitureMotion.js";
 import { FURNITURE_PHYSICS_VERSION, type FurnitureBodies } from "../FurniturePhysics.js";
-import { InteriorPresentation } from "../InteriorPresentation.js";
 import { motionSceneSignature, motionVerdict, nextUncheckedScene } from "../MotionReview.js";
 import spriteIndexUrl from "../review/assets/review-sprites.json?url";
 import spriteUrl from "../review/assets/review-sprites.png?url";
 import { parseReviewFeedback, type ReviewFeedback } from "../review/ReviewFeedback.js";
+import { furnitureRoomView } from "./RoomView.js";
 import "./playtest.css";
 
 const root = document.getElementById("app");
@@ -255,7 +255,8 @@ function restartSimulation() {
   presentation?.dispose();
   const width = model.map.width * 16,
     height = model.map.pixelHeight;
-  const next = new LabView(canvas, furnitureRecipe(model), {
+  const recipe = furnitureRecipe(model);
+  const next = new LabView(canvas, recipe, {
     width,
     height,
     terrain: false,
@@ -265,11 +266,7 @@ function restartSimulation() {
       viewOffsetY = Math.max(0, Math.ceil(24 + (interpolateWz(player, fraction) ?? 0) - p.wy));
       return { wx: width / 2, wy: height / 2 - viewOffsetY };
     }),
-    interior: {
-      presentation: new InteriorPresentation(model.map, model.plan, model.placementArea),
-      placements: model.furniture,
-      drawProps: new Set(),
-    },
+    interior: furnitureRoomView(model, recipe.props),
     loadAssets: async () => ({
       sheets: new Map(sheets),
       blendSheets: [],

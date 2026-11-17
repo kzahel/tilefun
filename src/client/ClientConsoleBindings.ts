@@ -1,10 +1,8 @@
-import { unifiedTopDownChoice } from "../config/unifiedTopDown.js";
 import { registerClientCommands } from "../console/clientCommands.js";
 import { registerClientCVars } from "../console/clientCVars.js";
 import { registerServerCommandStubs } from "../console/serverCommandStubs.js";
 import type { GameContext } from "../core/GameScene.js";
 import { directionHeading } from "../rendering/firstperson/FirstPersonCamera.js";
-import { softwareWebGl } from "../rendering/WebGl2Support.js";
 import type { NetEmulatedClientTransport } from "../transport/NetEmulatedClientTransport.js";
 
 /**
@@ -61,17 +59,7 @@ export function registerClientConsole(
   });
   if (new URLSearchParams(location.search).get("view") === "fps")
     clientCVars.r_firstperson.set(true);
-  // The top-down view through the 3D scene (251): the one view players get.
-  // The cvar and the debug panel switch to the fixed view for development.
-  clientCVars.r_topdown3d.onChange((val) => {
-    gc.debugPanel.topDown3d = val;
-    if (gc.firstPerson) gc.firstPerson.topDown = val;
-  });
-  gc.debugPanel.onTopDown3dChange((checked) => {
-    clientCVars.r_topdown3d.set(checked);
-  });
-  // `?view=fixed` / `?view=topdown3d` choose for this load (specs, probes).
-  if (unifiedTopDownChoice(location.search, softwareWebGl())) clientCVars.r_topdown3d.set(true);
+  if (gc.firstPerson) gc.firstPerson.topDown = true;
   clientCVars.r_fpshadows.onChange((val) => {
     if (gc.firstPerson) gc.firstPerson.shadows = val;
   });

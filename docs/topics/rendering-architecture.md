@@ -1,40 +1,31 @@
 # Rendering architecture and backend separation
 
-[248](../tactical/248-renderer-unification.md) (owner decision 2026-11-14) commits
-to one world renderer: the first-person 3D scene, with top-down as an oblique
-camera on it and WebXR on the same scene. Since 2026-11-16 that top-down camera
-is play's default; the fixed GPU backend described below stays selectable (and
-draws labs, probes and review captures) until the retirement gate in
-[renderer unification](renderer-unification.md), which owns that work's status,
-parity checklist and device scorecard. Do not delete or degrade the fixed view
-before that gate. This topic keeps backend boundaries and resource lifetimes.
-Since [249](../tactical/249-one-renderer-host.md) phase 1a the first-person view
-has no canvas or context of its own: `RenderHost.view3d` lends it the host's
-`WebGLRenderer`, bound to a region of the world canvas, and restores the host's
-render state afterwards. A 3D view draws straight to the canvas, not into the
-fixed view's world target. First person is a per-seat view kind: `renderViews`
-draws 3D views first and gives only the remaining views the fixed frame, and
-`View.interestRange()` is what each view asks to be streamed.
-Since [250](../tactical/250-ground-artwork-and-shared-pages.md) 3D views read the
-fixed view's page atlas (`View3dTarget.pages`): the ground wears each chunk's
-terrain image, and sprite cards read sheet pages instead of whole-sheet textures.
-The lifetime rule for a borrower: ask for a page every frame it is used. Asking
-keeps the page where it is; a page nobody asks for ages out, and a restored
-context or changed assets give every page a new region object, so anything that
-bakes a region into vertex data compares regions each frame and rewrites when
-one changes. 3D views take part in terrain preparation over their interest
-range, within the frame's one shared budget.
-Since [251](../tactical/251-top-down-camera-parity-and-merged-meshes.md) the 3D
-scene has the fixed view's camera as an opt-in top-down preset (`r_topdown3d`,
-`?view=topdown3d`). Such a view sets `View.topDown3d`, not `drawn3d`: it keeps
-the fixed view's controls, markers, picking and streaming interest, and rooms,
-the editor and masked regions still draw through the fixed backend. Chunks of
-the 3D scene no longer own meshes. Their static content lives in merged ones:
-tile tops in fixed slots of `GroundTops` blocks (a chunk change uploads its
-slot), cliff walls and flat prop faces per 4 × 4 chunks, and prop faces wearing
-artwork per texture (`MergedFaces`). New static content should join a merged
-mesh, not add one per chunk. `canvas.__parity()` draws one moment of play
-through both renderers and reports where their pixels differ, by kind of content.
+[248](../tactical/248-renderer-unification.md) established one world scene:
+`FirstPersonView`, with top-down, first-person, driving and XR cameras. The
+owner authorized fixed-world retirement on 2026-11-17; [253](../tactical/253-retire-fixed-world-renderer.md)
+tracks migration and validation. [Renderer unification](renderer-unification.md)
+owns the current inventory and device evidence.
+
+`RenderHost.view3d` lends each view the host's `WebGLRenderer`, bound to its
+canvas region, and restores renderer state after drawing. Interactive views
+never submit fixed world passes. Game, labs and the prop editor share this host;
+explorer tiles and the terrain study use the same scene through `TopDownPreview`.
+Loading and graphics loss draw UI frames rather than another world renderer.
+
+`GpuRenderResources` owns the shared page atlas, terrain preparation and outlined
+native-pixel vehicle images. `GpuSceneSurface` owns the WebGL context and
+`GpuPages`; the fixed quad batch, world target/composition, deferred shadows and
+surface decal passes are removed. `RasterRenderBackend` remains behind the
+immutable native review adapter only. The historical implementation notes below
+explain retained pixel contracts, not additional interactive renderer choices.
+
+Ground images still come from the CPU terrain rasterizer. The lifetime rule for
+a scene borrower is unchanged: ask for a page every frame it is used. Page
+replacement, eviction or restored graphics produces a new region object, and
+geometry that stores a region must compare it each frame. Every view's terrain
+interest participates in one preparation budget. Static terrain and prop geometry
+remain merged across chunks rather than allocating a mesh per chunk.
+
 Since [252](../tactical/252-xr-on-the-shared-scene.md) the host also presents
 to a headset (`View3dHost.xr`). The screen output copies the host's canvas into
 a quad layer and runs the session's frames itself. The immersive output goes
@@ -471,15 +462,15 @@ particle, prop and overlay references; retained pools have explicit bounds.
 
 | Surface | Boundary / intentional graphics dependency |
 | --- | --- |
-| Play/edit outdoor and indoor rendering | Neutral `renderWorld`, `renderInterior`, scene and overlay builders; `RenderBackend` only |
-| Explorer | `TilePreview` draws on an offscreen WebGL2 `GpuRenderBackend` at device pixels (232), copied into the map canvas over the regional map and under the coverage overlay; explicit preparation/submission, ready-chunk clips and lifecycle |
-| Interactive Traffic, Outdoor Geometry, World Geometry, Natural landscape, Character lab and furniture playtest | The game's `LabView`, the production GPU host and semantic scene/terrain/indoor passes; view-specific controls and diagnostics |
+| Play/edit outdoor and indoor rendering | Unified scene and shared sprite collection; editing overlays remain independent UI |
+| Explorer | `TilePreview` uses offscreen unified `TopDownPreview` at device pixels, copied over the regional map and under the coverage overlay; shared terrain preparation and bounded lifecycle |
+| Interactive Traffic, Outdoor Geometry, World Geometry, Natural landscape, Character lab and furniture playtest | The game's `LabView`, the production GPU host and unified scene/room presentation; view-specific controls and diagnostics |
 | Building/street/district reviews | Native Canvas2D review raster (`ReviewRasterBackend`) at platform entry: approval fingerprints hash these pixels, so they stay off the GPU (232 slice 2); shared semantic scene/terrain passes; separate stage/geometry diagnostics remain native |
 | Native character review | Source-hashed `CharacterTestScene.ts` is immutable approval input. Its `drawScene2D` reference adapter consumes the same scene-pass implementation; do not rewrite approved controller bytes merely to rename a call |
 | Indoor review/reference | Explicit native Canvas surfaces using shared furniture/room ordering. `CachedInteriorRenderer` consumes `InteriorPresentation`; uncached drawing remains the independent parity reference |
 | Pattern room/atlas previews and tree source composition | Native asset/pattern reference rasterization, separate from gameplay presentation; pattern terrain uses the native raster backend, whose pixels are the candidate fingerprint (232 slice 2) |
 | HUD, touch controls, menus, prop selection/collision diagnostics | Independent platform UI/debug surface; Canvas is permitted here and not exposed to neutral frame builders |
-| GPU gameplay and diagnostics | Game and labs require WebGL2 and always draw GPU + 3D car (232); renderer lab shares its body adapter |
+| GPU gameplay and diagnostics | Game and labs require WebGL2 and always draw GPU + 3D car (232); the fixed-only renderer lab is retired (253) |
 | Asset loaders and `Canvas*` / `TileRenderer` internals | Concrete source decoding, rasterization and resource ownership; not presentation policy |
 
 `TileRenderer` is now an internal terrain preparation/resource component (it
@@ -890,7 +881,7 @@ that fixed view. Detail the concrete frame types and depth-isolation strategy in
 that slice's tactical; do not build two competing APIs ahead of the evidence.
 
 
-## Delivered fixed-view backend (039–045)
+## Historical fixed-view backend (039–045; retired by 253)
 
 `RasterRenderBackend` owns common resource preparation and pass consumption.
 `Canvas2DRenderer` now draws through the narrow graphics-side `RasterSurface`;

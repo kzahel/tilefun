@@ -302,7 +302,7 @@ describe("first person per seat", () => {
     expect(turnGuestFrames(gc, [plain], 0.1)[0]?.sample).toBe(plain.sample);
   });
 
-  it("switches a guest back to the fixed view at once and frees its 3D scene", async () => {
+  it("switches a guest from first person to top-down and reuses its scene", async () => {
     const { control, guest, sync } = setup();
     control.setSeat(1, true, 0);
     sync();
@@ -315,10 +315,10 @@ describe("first person per seat", () => {
     control.setSeat(1, false);
     expect(guest.look).toBeNull();
     expect(guest.drawn3d).toBe(false);
-    expect(dispose).toHaveBeenCalledTimes(1);
-    expect(control.scene(guest)).toBeUndefined(); // the next frame builds nothing
+    expect(dispose).not.toHaveBeenCalled();
+    expect(control.scene(guest)).toBe(scene); // top-down reuses the same scene
     sync();
-    expect(control.scene(guest)).toBeUndefined();
+    expect(control.scene(guest)).toBe(scene);
   });
 
   it("resumes a guest's heading when its view is made again after leaving play", () => {
@@ -353,7 +353,7 @@ describe("first person per seat", () => {
     expect(dispose).not.toHaveBeenCalled();
     control.unhold();
     expect(view.look).toBeNull();
-    expect(dispose).toHaveBeenCalledOnce();
+    expect(dispose).not.toHaveBeenCalled();
     // A seat that chose first person keeps it, and its scene, after the session.
     control.setActive(true, 1);
     sync();
@@ -582,7 +582,7 @@ describe("top-down play in the 3D scene", () => {
     expect(views).toHaveLength(2);
   });
 
-  it("draws rooms as the fixed view's picture, or leaves them to it with ?rooms3d=0", () => {
+  it("draws rooms through the unified scene", () => {
     const room = {
       version: "interior-v1",
       parentWorldId: "world-1",
@@ -601,9 +601,6 @@ describe("top-down play in the 3D scene", () => {
     expect(frames[0]?.topDown).toBeDefined();
     expect(frames[0]?.interior?.map).toBeDefined();
     expect(frames[0]?.grass).toBeUndefined();
-    control.topDownRooms = false;
-    expect(renderFirstPerson(gc, view, 1)).toBe(false);
-    expect(view.topDown3d).toBe(false);
     expect(frames).toHaveLength(1);
   });
 });

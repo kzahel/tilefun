@@ -4,9 +4,10 @@ import type { TerrainPacing } from "../rendering/PresentationSettings.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
 import type { SceneItem } from "../rendering/SceneItem.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
+import { drawViewUnavailable } from "../rendering/ViewUnavailable.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import type { View } from "../session/View.js";
-import { drawViewScene, drawViewTerrain, renderViews } from "../session/ViewRender.js";
+import { renderViews } from "../session/ViewRender.js";
 import type { PlayerPredictor } from "./PlayerPredictor.js";
 
 export interface LabSceneOptions {
@@ -43,51 +44,17 @@ export function drawLabFrame(
   host: RenderHost,
   view: View,
   device: DeviceSession,
-  particles: ParticleSystem,
+  _particles: ParticleSystem,
   options: LabSceneOptions,
 ): void {
-  const { renderer } = host;
-  const { camera } = view;
-  const { replica } = device;
-  const world = options.terrain ? replica.world : undefined;
+  const world = options.terrain ? device.replica.world : undefined;
   host.beginFrame();
   renderViews(
     host,
     [view],
     world ? { world, pacing: options.pacing } : undefined,
     () => {
-      drawViewTerrain(renderer, camera, world, {
-        background: options.background,
-        pacing: options.pacing,
-        prepared: true,
-      });
-      options.underlay?.();
-      drawViewScene(
-        renderer,
-        camera,
-        device.frame,
-        view.fades,
-        {
-          world: replica.world,
-          props: replica.props,
-          entities: options.entities,
-          collectObserver: options.collectObserver,
-          surfaceObserver: replica.playerEntity,
-        },
-        {
-          alpha: options.alpha,
-          particles,
-          grass: options.terrain && renderer.assets.has("grass-blades"),
-          visibility: options.visibility,
-          presentationTime: options.presentationTime,
-          fadeSeconds: options.fadeSeconds,
-          pixelExactShadows: options.pixelExactShadows,
-          ...(options.room
-            ? { drawProps: options.room.drawProps, present: options.room.present }
-            : {}),
-        },
-      );
-      options.overlay?.();
+      if (host.view3d) drawViewUnavailable(host.drawUiOverlay.bind(host), view);
     },
     options.draw3d,
   );

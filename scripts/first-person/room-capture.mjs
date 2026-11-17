@@ -1,7 +1,6 @@
-// A room of the seed-2026 dense district in both renderers: an isolated Vite
+// A unified room of the seed-2026 dense district: an isolated Vite
 // server, bundled Chromium and a fresh regional world arriving at a lot's
-// entrance; E enters it, then the view is captured with and without
-// `?view=topdown3d` (plus `--query`).
+// entrance; E enters it, then the unified scene is captured (plus `--query`).
 //
 //   node scripts/first-person/room-capture.mjs [--kind=apartment|shop] [--query=a=b] [--out=DIR]
 //     [--sequence] (also frames while entering, then after walking north)
@@ -51,10 +50,10 @@ try {
     if (!lot) throw Error(`no ${wanted}`);
     return { generation, arrival: { x: lot.entrance.x, y: lot.entrance.y, generation } };
   }, kind);
-  for (const unified of [false, true]) {
+  {
     const params = [
       "nogamepad",
-      unified ? "view=topdown3d" : "view=fixed",
+      "view=topdown3d",
       query,
       `generation=${encodeURIComponent(JSON.stringify(generation))}`,
       `arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
@@ -68,7 +67,7 @@ try {
       { timeout: 120_000 },
     );
     await page.waitForTimeout(3000);
-    const tag = unified ? "-3d" : "";
+    const tag = "-3d";
     const shot = (name) =>
       page.locator("#game").screenshot({ path: path.join(out, `${kind}${tag}-${name}.png`) });
     await page.keyboard.press("e");
@@ -83,12 +82,12 @@ try {
       { timeout: 30_000 },
     );
     await page.waitForTimeout(4000);
-    const file = path.join(out, `${kind}${unified ? "-3d" : ""}.png`);
+    const file = path.join(out, `${kind}-3d.png`);
     await page.locator("#game").screenshot({ path: file });
     const drawn = await page.evaluate(
       () => document.querySelector("#game").__game.firstPerson?.drawing3d,
     );
-    console.log(file, unified ? `3D drawing: ${drawn}` : "");
+    console.log(file, `3D drawing: ${drawn}`);
     if (process.argv.includes("--sequence")) {
       await page.keyboard.down("ArrowUp");
       await page.waitForTimeout(1600);

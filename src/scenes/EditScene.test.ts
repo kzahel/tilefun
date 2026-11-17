@@ -95,17 +95,14 @@ describe("building mode", () => {
     expect(gc.sceneFrame.overlays.items).toEqual([]);
   });
 
-  it("falls back to the fixed view when the 3D view cannot draw, a seat looks in first person, or the fixed view is chosen", () => {
-    for (const [topDown, look, result] of [
-      [true, null, false],
-      [true, { yaw: 0, pitch: 0 }, true],
-      [false, null, true],
-    ] as const) {
-      drawn3d.result = result;
-      const { backend, gc, uiOverlays } = setup(topDown, look);
-      new EditScene().render(1, gc);
-      expect(backend.passes.map((p) => p.kind)).toEqual(["clear", "terrain", "overlay", "scene"]);
-      expect(uiOverlays).toHaveLength(0);
-    }
+  it("uses top-down drawing while a seat has a first-person look", () => {
+    drawn3d.result = true;
+    drawn3d.calls = 0;
+    const { backend, gc, uiOverlays } = setup(true, { yaw: 0, pitch: 0 });
+    new EditScene().render(1, gc);
+    expect(drawn3d.calls).toBe(1);
+    expect(backend.passes).toEqual([]);
+    expect(uiOverlays).toHaveLength(1);
+    expect(gc.view.look).toEqual({ yaw: 0, pitch: 0 });
   });
 });

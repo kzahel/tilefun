@@ -63,7 +63,7 @@
       "overLimit": 1
     },
     "src/client/GameClient.ts": {
-      "lines": 934,
+      "lines": 931,
       "worst": 0,
       "overLimit": 0
     },
@@ -71,11 +71,6 @@
       "lines": 950,
       "worst": 40,
       "overLimit": 3
-    },
-    "src/client/RendererParityProbe.ts": {
-      "lines": 621,
-      "worst": 0,
-      "overLimit": 0
     },
     "src/editor/collectEditorOverlay.ts": {
       "lines": 294,
@@ -118,7 +113,7 @@
       "overLimit": 2
     },
     "src/explorer/main.ts": {
-      "lines": 797,
+      "lines": 798,
       "worst": 0,
       "overLimit": 0
     },
@@ -133,8 +128,8 @@
       "overLimit": 1
     },
     "src/explorer/TilePreview.ts": {
-      "lines": 429,
-      "worst": 45,
+      "lines": 406,
+      "worst": 32,
       "overLimit": 1
     },
     "src/game/base-game.ts": {
@@ -298,7 +293,7 @@
       "overLimit": 1
     },
     "src/interiors/playtest/main.ts": {
-      "lines": 875,
+      "lines": 872,
       "worst": 0,
       "overLimit": 0
     },
@@ -422,11 +417,6 @@
       "worst": 80,
       "overLimit": 2
     },
-    "src/rendering/CameraStabilityProbe.ts": {
-      "lines": 141,
-      "worst": 44,
-      "overLimit": 1
-    },
     "src/rendering/CanvasInteriorMap.ts": {
       "lines": 117,
       "worst": 30,
@@ -468,33 +458,23 @@
       "overLimit": 1
     },
     "src/rendering/firstperson/FirstPersonFaces.ts": {
-      "lines": 125,
-      "worst": 27,
+      "lines": 135,
+      "worst": 35,
       "overLimit": 1
     },
     "src/rendering/firstperson/FirstPersonProps.ts": {
-      "lines": 630,
+      "lines": 651,
       "worst": 37,
       "overLimit": 1
     },
     "src/rendering/firstperson/FirstPersonView.ts": {
-      "lines": 901,
-      "worst": 32,
+      "lines": 880,
+      "worst": 29,
       "overLimit": 2
     },
     "src/rendering/GpuMeshBodies.ts": {
-      "lines": 370,
+      "lines": 318,
       "worst": 66,
-      "overLimit": 1
-    },
-    "src/rendering/GpuOverlayResources.ts": {
-      "lines": 150,
-      "worst": 28,
-      "overLimit": 1
-    },
-    "src/rendering/GpuRasterSurface.ts": {
-      "lines": 1004,
-      "worst": 72,
       "overLimit": 1
     },
     "src/rendering/GrassBladeRenderer.ts": {
@@ -542,19 +522,9 @@
       "worst": 124,
       "overLimit": 1
     },
-    "src/rendering/VehicleDepthProbe.ts": {
-      "lines": 193,
-      "worst": 59,
-      "overLimit": 1
-    },
     "src/rendering/VehicleGeometryBatches.ts": {
       "lines": 132,
       "worst": 26,
-      "overLimit": 1
-    },
-    "src/rendering/WorldRegistrationProbe.ts": {
-      "lines": 232,
-      "worst": 75,
       "overLimit": 1
     },
     "src/road/CitySurfaceRecipes.ts": {
@@ -583,7 +553,7 @@
       "overLimit": 1
     },
     "src/scenes/EditScene.ts": {
-      "lines": 327,
+      "lines": 322,
       "worst": 31,
       "overLimit": 1
     },
@@ -593,7 +563,7 @@
       "overLimit": 2
     },
     "src/scenes/PropEditorScene.ts": {
-      "lines": 660,
+      "lines": 651,
       "worst": 32,
       "overLimit": 1
     },

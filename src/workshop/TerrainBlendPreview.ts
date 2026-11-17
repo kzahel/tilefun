@@ -1,7 +1,7 @@
 import type { GameAssets } from "../assets/GameAssets.js";
 import { TerrainId, toBaseTerrainId } from "../autotile/TerrainId.js";
 import { Camera } from "../rendering/Camera.js";
-import type { GpuRenderBackend } from "../rendering/GpuRenderBackend.js";
+import type { TopDownPreview } from "../rendering/TopDownPreview.js";
 import {
   MATERIAL_COLOURS,
   STUDY_GRAPH,
@@ -10,7 +10,8 @@ import {
 } from "./TerrainBlendStudy.js";
 
 /** Draw the ordinary production terrain through WebGL, at one texel per pixel. */
-export function drawTerrainStudy(gpu: GpuRenderBackend, study: TerrainStudy): void {
+export function drawTerrainStudy(preview: TopDownPreview, study: TerrainStudy): void {
+  const gpu = preview.renderer;
   const camera = new Camera();
   camera.zoom = 1 / 3;
   camera.x = (study.x + study.size / 2) * 16;
@@ -30,11 +31,8 @@ export function drawTerrainStudy(gpu: GpuRenderBackend, study: TerrainStudy): vo
     rowBudget: Infinity,
     timeBudgetMs: Infinity,
   });
-  gpu.submit(camera, { kind: "clear", color: "#23312b" });
-  gpu.submit(camera, {
-    kind: "terrain",
-    draws: gpu.collectTerrain(camera, study.world, visible, { overscanPixels: 0 }),
-  });
+  // A fresh preview completes its bounded chunk builds and page uploads before capture.
+  for (let frame = 0; frame < 8; frame++) preview.draw(camera, study.world, []);
 }
 
 /** False-colour half-tile samples, before blending. No artwork inference. */

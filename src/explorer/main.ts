@@ -268,6 +268,7 @@ function requestDraw(): void {
     const pendingTiles = tilePreview.draw(canvas, width, height, view, preview.mode === "coverage");
     app.dataset.propIds = JSON.stringify(tilePreview.featureIds);
     app.dataset.actorIds = JSON.stringify(tilePreview.actorIds);
+    app.dataset.tileGroundPages = String(tilePreview.stats.groundPages);
     app.dataset.tileReady = String(tilePreview.stats.ready);
     app.dataset.tileComplete = String(tilePreview.complete);
     app.dataset.tileResident = String(tilePreview.stats.resident);

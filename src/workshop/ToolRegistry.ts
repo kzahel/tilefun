@@ -103,14 +103,7 @@ export const WORKSHOP_TOOLS = defineTools([
     mode: "source",
     sidebar: "link",
   },
-  {
-    id: "renderer-lab",
-    name: "Renderer lab",
-    description:
-      "Check the GPU sprite scene against pixel invariants, and inspect experimental mesh bodies.",
-    url: "renderer-lab.html",
-    mode: "source",
-  },
+
   {
     id: "car-projection",
     name: "Car projection lab",

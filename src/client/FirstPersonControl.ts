@@ -47,8 +47,8 @@ export interface LookStick {
  *
  * `View.drawn3d` is the per-frame answer to "is this seat shown in first
  * person?". Camera-relative movement, look input, streaming interest and pointer
- * lock all follow it, so the fixed-view fallbacks (loading, a failed module, the
- * editor, lost graphics) keep ordinary controls.
+ * lock all follow it. Loading, failed modules and lost graphics clear it while
+ * an explicit UI frame keeps ordinary controls.
  */
 export class FirstPersonControl {
   private keyboardChoice: FirstPersonControls = "simple";
@@ -72,7 +72,7 @@ export class FirstPersonControl {
   /** With shadows on, the sun's too (else contact shadows only); `r_sun3d` and
    * `?sun3d=0` set it. */
   sun = new URLSearchParams(location.search).get("sun3d") !== "0";
-  /** Top-down 3D views draw vehicles as the fixed view's outlined native-pixel
+  /** Top-down views draw vehicles as shared outlined native-pixel
    * images; `r_pixelcars3d` and `?pixelcars=0` set it. */
   pixelBodies = new URLSearchParams(location.search).get("pixelcars") !== "0";
   /** Prototype: the 3D ground sampled once per pixel, as trees and actors are;
@@ -82,19 +82,14 @@ export class FirstPersonControl {
    * pixels, with ground sampled as cards are (`PixelGrid`; owner-accepted
    * 2026-11-16). `r_pixelgrid` and `?pixelgrid=0` turn it off for comparison. */
   pixelGrid = new URLSearchParams(location.search).get("pixelgrid") !== "0";
-  /** Top-down 3D views draw rooms too, as the fixed view's picture (floor and
-   * wall bands); `?rooms3d=0` hands rooms back to the fixed view. */
-  topDownRooms = new URLSearchParams(location.search).get("rooms3d") !== "0";
   /** A headset's tabletop (252) sets how far its 3D view reaches, in place of
    * the view distance. World pixels. */
   reach: number | undefined;
   /** Captures only: raises every eye by this many world pixels for an overview. */
   lift = 0;
-  /** Top-down views draw in the 3D scene through the fixed view's camera (251).
-   * A device-wide choice (`r_topdown3d`, Options, `?view=fixed`), which the
-   * game turns on by default; off until then, as for labs and probes. */
-  private topDownChoice = false;
-  /** Presentation storage for 3D views; their mesh poses never share the fixed view's. */
+  /** Unified top-down drawing stays enabled until this control is disposed. */
+  private topDownChoice = true;
+  /** Presentation storage owned by the unified views. */
   readonly frame = new SceneFrame({
     allCars3d: new URLSearchParams(location.search).has("allcars3d"),
   });
@@ -149,7 +144,7 @@ export class FirstPersonControl {
     this.setSeat(0, value, heading);
   }
 
-  /** One seat's choice between the fixed view and first person. */
+  /** One seat's choice between top-down and first-person cameras. */
   setSeat(seat: number, value: boolean, heading = NORTH_YAW): void {
     if (value === this.chosen.has(seat) || (value && this.disposed)) return;
     if (value) this.chosen.set(seat, heading);
@@ -205,7 +200,7 @@ export class FirstPersonControl {
     return this.topDownChoice;
   }
 
-  /** Draw every top-down view in the 3D scene, or go back to the fixed view. */
+  /** Drawing gate used by disposal and isolated presentation fixtures. */
   set topDown(value: boolean) {
     if (value === this.topDownChoice || (value && this.disposed)) return;
     this.topDownChoice = value;
@@ -340,6 +335,12 @@ export class FirstPersonControl {
     return { x: dir.x, y: dir.y };
   }
 
+  get unavailableMessage(): string {
+    return this.failed
+      ? "World view could not load. Save and reload to try again."
+      : "Loading world…";
+  }
+
   /** The view's loaded 3D scene, or undefined while the module loads or after it
    * failed to load. */
   scene(view: View): FirstPersonView | undefined {
@@ -369,21 +370,25 @@ export class FirstPersonControl {
     return undefined;
   }
 
+  /** Opt-in synchronous observation of a drawn frame; items are borrowed only during the call. */
+  onPresented:
+    | ((view: View, sprites: readonly import("../rendering/SceneItem.js").SpriteItem[]) => void)
+    | undefined;
+
   /** Diagnostic counters from seat 0's loaded scene, for captures and benches. */
   get viewStats(): FirstPersonView["stats"] | undefined {
     const scene = this.host && this.scenes.get(this.host);
     return scene ? { ...scene.stats } : undefined;
   }
 
-  /** The fixed view draws this view instead (loading, failed to load, graphics lost). */
+  /** Clear active camera state during loading, failed modules or lost graphics. */
   hide(view: View): void {
     view.drawn3d = view.topDown3d = false;
     if (view === this.host && document.pointerLockElement === this.canvas())
       document.exitPointerLock();
   }
 
-  /** The fixed view draws every view (the editor and other scenes over play):
-   * give back ordinary controls and the pointer. */
+  /** A scene over play takes ordinary controls and releases the pointer. */
   hideView(): void {
     for (const view of this.scenes.keys()) view.drawn3d = view.topDown3d = false;
     if (this.host) this.hide(this.host);

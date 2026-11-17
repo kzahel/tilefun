@@ -15,9 +15,8 @@ import { descriptorKey, type GenerationDescriptor } from "../generation/Generati
 import type { ActorPlacement } from "../generation/Generator.js";
 import type { StructurePlacement } from "../generation/StructureGenerator.js";
 import { Camera } from "../rendering/Camera.js";
-import { collectScene } from "../rendering/collectScene.js";
-import { GpuRenderBackend } from "../rendering/GpuRenderBackend.js";
-import { collectSceneOrder } from "../rendering/RenderFrame.js";
+import type { GpuRenderResources } from "../rendering/GpuRenderResources.js";
+import { TopDownPreview } from "../rendering/TopDownPreview.js";
 import { requireWebGl2 } from "../rendering/WebGl2Support.js";
 import type { Chunk } from "../world/Chunk.js";
 import { type ChunkData, hydrateChunk } from "../world/ChunkData.js";
@@ -32,6 +31,21 @@ import type { ViewState } from "./ViewState.js";
 export class TilePreview {
   private chunks = new Map<string, Chunk>();
   private wanted = new Set<string>();
+  private needsDraw = true;
+  // Scene chunk retention is keyed by this stable world identity.
+  private readonly renderWorld = {
+    getChunkIfLoaded: (cx: number, cy: number) => this.chunks.get(`${cx},${cy}`),
+    getRoadAt: (tx: number, ty: number) =>
+      this.chunkAt(tx, ty)?.getRoad(this.local(tx), this.local(ty)) ?? 0,
+    getHeightAt: (tx: number, ty: number) =>
+      this.chunkAt(tx, ty)?.getHeight(this.local(tx), this.local(ty)) ?? 0,
+  };
+  private chunkAt(tx: number, ty: number) {
+    return this.chunks.get(`${Math.floor(tx / CHUNK_SIZE)},${Math.floor(ty / CHUNK_SIZE)}`);
+  }
+  private local(t: number) {
+    return ((Math.floor(t) % CHUNK_SIZE) + CHUNK_SIZE) % CHUNK_SIZE;
+  }
   private props: Prop[] = [];
   private actors: Entity[] = [];
   private propsReady = false;
@@ -41,19 +55,25 @@ export class TilePreview {
   private active = false;
   private disposed = false;
   private graph = new BlendGraph();
-  private renderer: GpuRenderBackend | null = null;
+  private renderer: GpuRenderResources | null = null;
+  private preview: TopDownPreview | undefined;
   /** Set once when WebGL2 or the GPU backend is unavailable; tiles stay off. */
   private unavailable = false;
   private readonly world = document.createElement("canvas");
   private readonly worldCamera = new Camera();
-  private readonly order: number[] = [];
-  private readonly clips: { x: number; y: number; width: number; height: number }[] = [];
-  private readonly clipPool: { x: number; y: number; width: number; height: number }[] = [];
   private assets: GameAssets | null = null;
   private loading: Promise<void> | null = null;
   private camera = new Camera();
   private visible: ChunkRange = { minCx: 0, minCy: 0, maxCx: -1, maxCy: -1 };
-  stats = { assetsMs: 0, autotileMs: 0, resident: 0, ready: 0, bytes: 0, error: "" };
+  stats = {
+    assetsMs: 0,
+    autotileMs: 0,
+    resident: 0,
+    ready: 0,
+    groundPages: 0,
+    bytes: 0,
+    error: "",
+  };
   constructor(private readonly changed: () => void) {
     registerDefaultTiles();
   }
@@ -140,6 +160,7 @@ export class TilePreview {
     return (
       this.active &&
       this.propsReady &&
+      !this.needsDraw &&
       this.stats.ready ===
         (this.visible.maxCx - this.visible.minCx + 1) *
           (this.visible.maxCy - this.visible.minCy + 1)
@@ -212,61 +233,11 @@ export class TilePreview {
     camera.y = this.camera.y;
     camera.zoom = this.camera.zoom * dpr;
     camera.setViewport(canvas.width, canvas.height);
-    const world = {
-      getChunkIfLoaded: (cx: number, cy: number) => this.chunks.get(`${cx},${cy}`),
-      getRoadAt: (tx: number, ty: number) =>
-        this.chunks
-          .get(`${Math.floor(tx / CHUNK_SIZE)},${Math.floor(ty / CHUNK_SIZE)}`)
-          ?.getRoad(
-            ((tx % CHUNK_SIZE) + CHUNK_SIZE) % CHUNK_SIZE,
-            ((ty % CHUNK_SIZE) + CHUNK_SIZE) % CHUNK_SIZE,
-          ) ?? 0,
-      getHeightAt: () => 0,
-    };
-    renderer.beginFrame();
-    renderer.prepareTerrain(camera, world, this.visible, { scope: "visible", rowBudget: 32 });
-    if (this.propsReady)
-      renderer.submit(camera, {
-        kind: "terrain",
-        draws: renderer.collectTerrain(camera, world, this.visible, { readyOnly: true }),
-      });
-    if (this.propsReady) {
-      this.clips.length = 0;
-      for (let cy = this.visible.minCy; cy <= this.visible.maxCy; cy++)
-        for (let cx = this.visible.minCx; cx <= this.visible.maxCx; cx++) {
-          const chunk = this.chunks.get(`${cx},${cy}`);
-          if (renderer.isTerrainReady(chunk)) {
-            const { sx, sy } = camera.worldToScreen(
-              cx * CHUNK_SIZE * TILE_SIZE,
-              cy * CHUNK_SIZE * TILE_SIZE,
-            );
-            const i = this.clips.length;
-            const rect = this.clipPool[i] ?? { x: 0, y: 0, width: 0, height: 0 };
-            if (i < 2048 && !this.clipPool[i]) this.clipPool.push(rect);
-            rect.x = sx;
-            rect.y = sy;
-            rect.width = rect.height = CHUNK_SIZE * view.zoom * dpr + 1;
-            this.clips.push(rect);
-          }
-        }
-      const items = collectScene(
-        this.actors,
-        this.props,
-        world,
-        camera,
-        this.visible,
-        1,
-        renderer,
-        [],
-        false,
-      );
-      renderer.submit(camera, {
-        kind: "scene",
-        items,
-        order: collectSceneOrder(items, this.order),
-        clipRects: this.clips,
-      });
-    }
+    renderer.prepareTerrain(camera, this.renderWorld, this.visible, {
+      scope: "visible",
+      rowBudget: 32,
+    });
+    if (this.propsReady) this.preview?.draw(camera, this.renderWorld, this.props, this.actors);
     // Over the regional map, under the coverage overlay. The GPU frame is read in
     // the task that drew it.
     ctx.save();
@@ -297,22 +268,28 @@ export class TilePreview {
       }
     }
     ctx.restore();
+    this.stats.groundPages = this.preview?.stats?.groundPages ?? 0;
+    this.needsDraw =
+      !this.propsReady ||
+      (this.preview?.stats?.builds ?? 0) > 0 ||
+      this.stats.groundPages < this.stats.ready;
     this.updateStats();
-    return pending;
+    return pending || this.needsDraw;
   }
   /** Created on first tile draw; without WebGL2 the map stays available. */
-  private ensureRenderer(assets: GameAssets): GpuRenderBackend | null {
+  private ensureRenderer(assets: GameAssets): GpuRenderResources | null {
     if (this.renderer || this.unavailable) return this.renderer;
     try {
       this.world.width = this.world.height = 1;
-      this.renderer = new GpuRenderBackend(this.world);
+      this.preview = new TopDownPreview(this.world);
+      this.renderer = this.preview.renderer;
     } catch (error) {
       this.fail(error);
       return null;
     }
     this.world.addEventListener("webglcontextlost", this.lost);
     this.world.addEventListener("webglcontextrestored", this.restored);
-    this.renderer.configureAssets(assets, this.graph);
+    this.preview?.setAssets(assets, this.graph);
     return this.renderer;
   }
   /** No retry: the map stays usable and the diagnostics show why tiles are off. */
@@ -405,11 +382,10 @@ export class TilePreview {
     this.propsSerial++;
     this.wanted.clear();
     this.renderer?.clear();
-    this.clips.length = 0;
-    this.clipPool.length = 0;
-    this.order.length = 0;
     this.stats.resident = 0;
     this.stats.ready = 0;
+    this.stats.groundPages = 0;
+    this.needsDraw = true;
     this.stats.bytes = 0;
   }
   reset(): void {
@@ -420,7 +396,8 @@ export class TilePreview {
     this.releaseChunks();
     this.world.removeEventListener("webglcontextlost", this.lost);
     this.world.removeEventListener("webglcontextrestored", this.restored);
-    this.renderer?.dispose();
+    this.preview?.dispose();
+    this.preview = undefined;
     this.renderer = null;
     this.world.width = this.world.height = 0;
     if (this.assets) closeAssets(this.assets);

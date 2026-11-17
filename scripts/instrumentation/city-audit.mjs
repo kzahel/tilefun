@@ -61,6 +61,20 @@ const deep = option("deep", "false") === "true",
 const trace = option("trace", "false") === "true",
   renderProfile = option("render-profile", "false") === "true";
 const meshImageCache = option("mesh-image-cache", "true") === "true";
+if (
+  process.argv.some((arg) =>
+    [
+      "--raster-reference=",
+      "--backend-reference=",
+      "--surface-scene-reference=",
+      "--batch-textures=",
+      "--defer-cached-images=",
+    ].some((flag) => arg.startsWith(flag)),
+  )
+)
+  throw Error(
+    "Fixed-renderer counterfactuals are retired; use render:bench for unified-scene measurements",
+  );
 const batchTextures = Number(option("batch-textures", "8"));
 const deferCachedImages = option("defer-cached-images", "true") === "true";
 if (![1, 2, 4, 8].includes(batchTextures)) throw Error("Invalid batch texture limit");
@@ -75,7 +89,7 @@ const rasterReferenceSHA256 = rasterReference
   : null;
 const presentationReferences = new Map();
 for (const [optionName, file] of [
-  ["backend-reference", "src/rendering/GpuRenderBackend.ts"],
+  ["backend-reference", "src/rendering/GpuRenderResources.ts"],
   ["surface-scene-reference", "src/rendering/presentSurfaceScene.ts"],
 ]) {
   const source = option(optionName, "");
@@ -174,9 +188,8 @@ for (const file of [
   "src/rendering/VehicleGeometryBatches.ts",
   "src/rendering/AuthoredVehicleMeshes.ts",
   "src/rendering/CarPixelOutline.ts",
-  "src/rendering/GpuRasterSurface.ts",
-  "src/rendering/GpuRenderBackend.ts",
-  "src/rendering/GpuOverlayResources.ts",
+  "src/rendering/GpuSceneSurface.ts",
+  "src/rendering/GpuRenderResources.ts",
   "src/rendering/presentSurfaceScene.ts",
   "src/rendering/TileRenderer.ts",
   "src/rendering/RasterRenderBackend.ts",
@@ -189,7 +202,7 @@ for (const file of [
   try {
     report.sourcesSHA256[file] = createHash("sha256")
       .update(
-        file === "src/rendering/GpuRasterSurface.ts" && rasterReference
+        file === "src/rendering/GpuSceneSurface.ts" && rasterReference
           ? rasterReference
           : (presentationReferences.get(file) ?? (await readFile(path.join(root, file)))),
       )
@@ -219,7 +232,7 @@ const server = await createServer({
           if (file.endsWith(`/${module}`) && !id.includes("?raw")) return source;
         if (
           rasterReference &&
-          file.endsWith("/src/rendering/GpuRasterSurface.ts") &&
+          file.endsWith("/src/rendering/GpuSceneSurface.ts") &&
           !id.includes("?raw")
         )
           return rasterReference;
@@ -441,14 +454,13 @@ try {
       }, driveModel);
     }
     await page.evaluate(
-      ({ enabled, limit, defer }) => {
+      ({ enabled, limit }) => {
         const backend = document.querySelector("#game").__game.renderer;
         backend.surface?.setBatchTextureLimit?.(limit);
         const meshes = backend.meshes;
         if (meshes?.images) {
           meshes.images.clear();
           meshes.images.enabled = enabled;
-          meshes.deferCachedImages = defer;
         }
       },
       { enabled: meshImageCache, limit: batchTextures, defer: deferCachedImages },

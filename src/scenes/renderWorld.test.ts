@@ -39,18 +39,19 @@ function context(graphics: boolean) {
     sceneFrame: new SceneFrame(),
     time: { presentationSeconds: 0 },
     stateView,
-    ...(graphics ? { beginView, endView } : {}),
+    ...(graphics ? { beginView, endView, drawUiOverlay: vi.fn() } : {}),
   } as unknown as GameContext;
   return { gc, backend, view, beginView, endView };
 }
 
-it("draws play through the view frame: one terrain preparation, then the view's passes", () => {
-  const { gc, backend, view, beginView, endView } = context(true);
+it("prepares play terrain and uses a loading UI frame when its unified scene is not ready", () => {
+  const { gc, backend, beginView, endView } = context(true);
   renderPlayViews(gc, 1, []);
   expect(backend.preparations).toBe(1);
-  expect(beginView).toHaveBeenCalledWith(view.camera, view.region);
-  expect(endView).toHaveBeenCalledTimes(1);
-  expect(backend.passes.map((p) => p.kind)).toEqual(["clear", "terrain", "scene"]);
+  expect(beginView).not.toHaveBeenCalled();
+  expect(endView).not.toHaveBeenCalled();
+  expect(backend.passes).toEqual([]);
+  expect(gc.drawUiOverlay).toHaveBeenCalledOnce();
 });
 
 it("headless fixtures without graphics still prepare and draw seat 0's view", () => {

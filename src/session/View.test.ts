@@ -3,12 +3,9 @@ import type { RemoteStateView } from "../client/ClientStateView.js";
 import { Direction } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import { Camera } from "../rendering/Camera.js";
-import type { RenderPass } from "../rendering/RenderFrame.js";
 import { RecordingBackend } from "../rendering/testing/RecordingBackend.js";
-import { layoutViews, type RenderRegion } from "../rendering/ViewLayout.js";
-import { WorldRasterFrame } from "../rendering/WorldRasterFrame.js";
+import { layoutViews } from "../rendering/ViewLayout.js";
 import { createVehicle } from "../traffic/Vehicle.js";
-import { Chunk } from "../world/Chunk.js";
 import { World } from "../world/World.js";
 import { DeviceSession } from "./DeviceSession.js";
 import { fixedCamera, followSeat, View } from "./View.js";
@@ -107,165 +104,68 @@ describe("camera policies", () => {
 
 describe("renderViews", () => {
   const world = new World();
-  for (let cy = -3; cy <= 3; cy++)
-    for (let cx = -3; cx <= 3; cx++) world.chunks.put(cx, cy, new Chunk());
-  const views = layoutViews("4", 768, 512).map(({ region }, i) => {
-    const view = new View(followSeat());
-    view.setRegion(region);
-    view.camera.zoom = 1 / 3;
-    view.camera.snapTo(i * 300 - 450, i * 200 - 300);
-    return view;
+  const views = layoutViews("4", 768, 512).map(({ region }) => {
+    const v = new View(followSeat());
+    v.setRegion(region);
+    return v;
   });
-
-  it("prepares every view's world-frame range once, then draws each view in its region", () => {
+  it("prepares the union of every view's interest once and shows UI only for undrawn views", () => {
     const backend = new RecordingBackend(new Map());
     const prepared: unknown[] = [];
     const prepare = vi.spyOn(backend, "prepareTerrainViews").mockImplementation((list) => {
-      // The list is borrowed for the call only; copy what preparation saw.
       prepared.push(list.map(({ view, visible }) => ({ view, visible: { ...visible } })));
     });
-    const opened: RenderRegion[] = [];
-    let open = 0;
-    const host = {
-      renderer: backend,
-      beginView: (camera: Camera, region: RenderRegion) => {
-        expect(open++).toBe(0);
-        expect(camera.worldRaster).toBe(false); // the host's own frame scope sets it
-        opened.push(region);
-      },
-      endView: () => {
-        open--;
-      },
-    };
+    const host = { renderer: backend, beginView: vi.fn(), endView: vi.fn() };
     const drawn: number[] = [];
-    renderViews(host, views, { world, pacing: "throughput" }, (view, i) => {
-      expect(view).toBe(views[i]);
-      drawn.push(i);
-    });
-    expect(drawn).toEqual([0, 1, 2, 3]);
-    expect(opened).toEqual(views.map((v) => v.region));
-    expect(prepare).toHaveBeenCalledTimes(1);
-    const scope = new WorldRasterFrame();
-    const expected = views.map(({ camera }) => {
-      scope.begin(camera);
-      const visible = camera.getVisibleChunkRange();
-      scope.end();
-      return { view: camera, visible };
-    });
-    expect(prepared).toEqual([expected]);
-    expect(prepare.mock.calls[0]?.[0]).toHaveLength(0); // released after the call
-    // Indoors (no terrain) nothing is prepared.
-    renderViews(host, views.slice(0, 1), undefined, () => {});
-    expect(prepare).toHaveBeenCalledTimes(1);
-  });
-
-  it("draws 3D views first, outside the fixed view's frame; their interest range is prepared (249, 250)", () => {
-    const backend = new RecordingBackend(new Map());
-    const prepared: unknown[][] = [];
-    vi.spyOn(backend, "prepareTerrainViews").mockImplementation((list) => {
-      prepared.push(list.map(({ view, visible }) => ({ view, visible: { ...visible } })));
-    });
-    const order: string[] = [];
-    const host = {
-      renderer: backend,
-      beginView: (_camera: Camera, region: RenderRegion) => order.push(`begin ${region.x}`),
-      endView: () => order.push("end"),
-    };
-    // Views 1 and 3 draw in 3D; view 2 asks for it and falls back (its scene is loading).
-    const threeD = new Set([views[1], views[3]]);
-    const draw3d = (view: View, i: number) => {
-      if (threeD.has(view)) order.push(`3d ${i}`);
-      // What the play scene does after drawing a view in 3D.
-      view.drawn3d = threeD.has(view);
-      view.interestRadius = 800;
-      return threeD.has(view);
-    };
+    const waiting: number[] = [];
     renderViews(
       host,
       views,
       { world, pacing: "throughput" },
-      (_view, i) => order.push(`fixed ${i}`),
-      draw3d,
+      (_v, i) => waiting.push(i),
+      (_v, i) => {
+        drawn.push(i);
+        return i % 2 === 1;
+      },
     );
-    expect(order).toEqual([
-      "3d 1",
-      "3d 3",
-      `begin ${views[0]?.region.x}`,
-      "fixed 0",
-      "end",
-      `begin ${views[2]?.region.x}`,
-      "fixed 2",
-      "end",
-    ]);
-    // One preparation for the frame: a fixed view's camera rectangle (world-frame
-    // scope), a 3D view's interest range. The 3D ground wears the same chunk images.
-    const scope = new WorldRasterFrame();
-    const expected = views.map((view) => {
-      if (threeD.has(view)) return { view: view.camera, visible: view.interestRange() };
-      scope.begin(view.camera);
-      const visible = view.camera.getVisibleChunkRange();
-      scope.end();
-      return { view: view.camera, visible };
-    });
-    expect(prepared).toEqual([expected]);
-    // View 1's camera is at (−150, −100): 800 px each way, in 256 px chunks. Its
-    // camera rectangle at this zoom is two chunks wide.
-    expect(prepared[0]?.[1]).toEqual({
-      view: views[1]?.camera,
-      visible: { minCx: -4, minCy: -4, maxCx: 2, maxCy: 2 },
-    });
-    const rectangle = views[1]?.camera.getVisibleChunkRange();
-    expect(rectangle).not.toEqual({ minCx: -4, minCy: -4, maxCx: 2, maxCy: 2 });
-    // Every view in 3D: terrain is still prepared, and no fixed frame opens.
-    order.length = 0;
-    for (const view of views) threeD.add(view);
-    renderViews(host, views, { world, pacing: "throughput" }, () => order.push("fixed"), draw3d);
-    expect(order).toEqual(["3d 0", "3d 1", "3d 2", "3d 3"]);
-    expect(prepared).toHaveLength(2);
-    expect(prepared[1]).toEqual(
+    expect(drawn).toEqual([0, 1, 2, 3]);
+    expect(waiting).toEqual([0, 2]);
+    expect(prepared).toEqual([
       views.map((view) => ({ view: view.camera, visible: view.interestRange() })),
-    );
-    for (const view of views) {
-      view.drawn3d = false;
-      view.interestRadius = undefined;
-    }
+    ]);
+    expect(prepare).toHaveBeenCalledOnce();
+    expect(prepare.mock.calls[0]?.[0]).toHaveLength(0);
+    expect(host.beginView).not.toHaveBeenCalled();
+    expect(host.endView).not.toHaveBeenCalled();
   });
-
-  it("ends a view whose drawing throws and leaves no camera in world scope", () => {
+  it("does not prepare outdoor terrain indoors", () => {
     const backend = new RecordingBackend(new Map());
-    const end = vi.fn();
-    const host = { renderer: backend, beginView: vi.fn(), endView: end };
-    expect(() =>
-      renderViews(host, views, { world, pacing: "throughput" }, (_view, i) => {
-        if (i === 1) throw Error("lost");
-      }),
-    ).toThrow("lost");
-    expect(end).toHaveBeenCalledTimes(2);
-    expect(views.every((v) => !v.camera.worldRaster && !v.camera.pixelSnap)).toBe(true);
-    // A range that cannot be read leaves no camera in world scope either.
-    const camera = views[2]?.camera;
-    if (!camera) throw Error("Missing view");
-    vi.spyOn(camera, "getVisibleChunkRange").mockImplementationOnce(() => {
-      throw Error("range");
-    });
-    expect(() => renderViews(host, views, { world, pacing: "throughput" }, () => {})).toThrow(
-      "range",
+    const prepare = vi.spyOn(backend, "prepareTerrainViews");
+    renderViews(
+      { renderer: backend, beginView() {}, endView() {} },
+      views,
+      undefined,
+      () => {},
+      () => true,
     );
-    expect(camera.worldRaster).toBe(false);
-    // Preparation failing midway also releases the scope and the borrowed cameras.
-    vi.spyOn(backend, "prepareTerrainViews").mockImplementationOnce(() => {
+    expect(prepare).not.toHaveBeenCalled();
+  });
+  it("releases borrowed preparation even when it fails without changing cameras", () => {
+    const backend = new RecordingBackend(new Map());
+    const prepare = vi.spyOn(backend, "prepareTerrainViews").mockImplementationOnce(() => {
       throw Error("prepare");
     });
-    expect(() => renderViews(host, views, { world, pacing: "throughput" }, () => {})).toThrow(
-      "prepare",
-    );
-    const passes: RenderPass[] = [];
-    backend.preparations = 0;
-    renderViews(host, views.slice(0, 2), { world, pacing: "throughput" }, (view) =>
-      backend.submit(view.camera, { kind: "clear", color: "#000" }),
-    );
-    passes.push(...backend.passes);
-    expect(passes).toHaveLength(2);
-    expect(backend.preparations).toBe(1);
+    const host = { renderer: backend, beginView() {}, endView() {} };
+    expect(() =>
+      renderViews(
+        host,
+        views,
+        { world, pacing: "throughput" },
+        () => {},
+        () => true,
+      ),
+    ).toThrow("prepare");
+    expect(prepare.mock.calls[0]?.[0]).toHaveLength(0);
+    expect(views.every((v) => !v.camera.worldRaster)).toBe(true);
   });
 });

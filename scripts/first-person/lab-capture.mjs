@@ -1,11 +1,11 @@
-// World geometry lab in both renderers: an isolated Vite server (no game server
-// or private data), bundled Chromium, the Workshop's world geometry lab with and
-// without `?view=topdown3d`, after pressing one of the fixture's start buttons.
+// World geometry lab in the unified renderer: an isolated Vite server (no game server
+// or private data), bundled Chromium, the Workshop's world geometry lab
+// after pressing one of the fixture's start buttons.
 //
 //   node scripts/first-person/lab-capture.mjs [FIXTURE=crossing] [START=trackside] [--out=DIR]
 //     [--query=a=b] (added to the unified view's URL)
 //
-// Writes `<fixture>-<start>.png` (fixed view) and `<fixture>-<start>-3d.png`.
+// Writes `<fixture>-<start>-3d.png`.
 import { mkdir } from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
@@ -37,17 +37,13 @@ try {
   const page = await browser.newPage({ viewport: { width: 1400, height: 1100 } });
   page.on("pageerror", (error) => console.log(`page error: ${error.message}`));
   const extra = process.argv.find((arg) => arg.startsWith("--query="))?.slice(8);
-  for (const query of ["&view=fixed", `&view=topdown3d${extra ? `&${extra}` : ""}`]) {
+  for (const query of [extra ? `&${extra}` : ""]) {
     await page.goto(`${origin}/workshop.html?geometry=${fixture}${query}#/tool/world-geometry`);
     await page.waitForSelector("canvas", { timeout: 60_000 });
     await page.waitForTimeout(6000);
     await page.getByRole("button", { name: start, exact: true }).click();
     await page.waitForTimeout(3000);
-    const unified = query.includes("topdown3d");
-    const file = path.join(
-      out,
-      `${fixture}-${start.replace(/ /g, "-")}${unified ? "-3d" : ""}.png`,
-    );
+    const file = path.join(out, `${fixture}-${start.replace(/ /g, "-")}-3d.png`);
     await page.locator("canvas").first().screenshot({ path: file });
     console.log(file);
   }

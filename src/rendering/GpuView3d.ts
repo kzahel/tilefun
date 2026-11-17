@@ -3,7 +3,7 @@ import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { Chunk } from "../world/Chunk.js";
 import type { GpuMeshBodies } from "./GpuMeshBodies.js";
 import { PAGE } from "./GpuPages.js";
-import type { GpuRasterSurface } from "./GpuRasterSurface.js";
+import type { GpuSceneSurface } from "./GpuSceneSurface.js";
 import { createXrHost } from "./GpuXr.js";
 import type { SharedMeshAssets, SharedPages, View3dHost, View3dTarget } from "./View3dHost.js";
 
@@ -13,23 +13,19 @@ const GROUND_SIZE = { width: CHUNK_SIZE_PX, height: CHUNK_SIZE_PX };
  * beyond that draw their flat colours until a later frame. */
 export const GROUND_UPLOADS_PER_VIEW = 4;
 
-/**
- * 3D views on the fixed view's renderer (248). A 3D view draws straight into its
- * region of the canvas: three.js encodes colours for display only there, and the
- * canvas has its own depth buffer. The fixed view's world target is left as it
- * was, so fixed and 3D views of one frame can follow each other in any order.
- */
+/** Unified views draw into their own canvas regions, with display colour encoding
+ * and a depth buffer shared by the scene's content. */
 export function createView3dHost(
-  surface: GpuRasterSurface,
+  surface: GpuSceneSurface,
   bodies: GpuMeshBodies,
   /** A chunk's prepared ground image, if it has one. */
   groundImage: (chunk: Chunk) => CanvasImageSource | null,
   /** A headset session gave the renderer back (252): size it to the page. */
   restored: () => void = () => surface.resize(surface.canvas.width, surface.canvas.height),
-  /** The fixed view's finished image of a vehicle body (`GpuMeshBodies.bodyImage`). */
+  /** The shared finished image of a vehicle body (`GpuMeshBodies.bodyImage`). */
   bodyImage?: SharedMeshAssets["bodyImage"],
 ): View3dHost {
-  // The fixed view's loaded vehicle meshes and paint atlases, lent to 3D views.
+  // Loaded vehicle meshes and paint atlases shared by every view.
   const meshes: SharedMeshAssets = {
     ready: bodies.ready,
     asset(assetId) {
@@ -40,8 +36,7 @@ export function createView3dHost(
     bindPaint: (object, texture) => bodies.paints.bind(object, texture),
     ...(bodyImage && { bodyImage }),
   };
-  // The fixed view's page atlas, lent the same way. A page a 3D view asks for is
-  // marked used this frame, exactly as if the fixed view had drawn it.
+  // Requested pages are marked used in the shared atlas for this frame.
   let uploads = 0;
   // The image each chunk's ground last came from: while a replacement waits for
   // its upload, the chunk keeps wearing this one instead of going flat.
@@ -80,6 +75,9 @@ export function createView3dHost(
     };
   };
   return {
+    get available() {
+      return !surface.disposed && !surface.lost;
+    },
     xr: createXrHost(surface, viewTarget, restored),
     draw(region, draw) {
       if (surface.disposed || surface.lost || region?.mask) return false;

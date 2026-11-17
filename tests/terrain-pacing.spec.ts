@@ -1,26 +1,37 @@
 import { expect, type Locator, type Page, test } from "@playwright/test";
-import type { RenderPass, RenderView, TerrainDiagnostics } from "../src/rendering/RenderFrame.js";
+import { createServer } from "vite";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
+import type { GpuRenderResources } from "../src/rendering/GpuRenderResources.js";
+import type { probeTerrainRasterCompletion } from "../src/rendering/TerrainRasterProbe.js";
 
 test.use({ channel: "chromium" });
 test.setTimeout(60000);
 
 test("completed terrain rows preserve partial, ready and edited pixels", async ({ page }) => {
-  await page.goto("/tilefun/renderer-lab.html");
-  await expect(page.locator("#gpu")).toHaveAttribute("data-ready", "true");
-  const result = await page.evaluate(() =>
-    (
-      window as unknown as {
-        rendererLab: {
-          probeTerrainRasterCompletion(): {
-            completedRows: number;
-            mismatches: number[];
-            digests: number[];
-            coloredBytes: number[];
-          };
-        };
-      }
-    ).rendererLab.probeTerrainRasterCompletion(),
-  );
+  const server = await createServer({
+    configFile: false,
+    base: "/tilefun/",
+    server: { host: "127.0.0.1", port: 0, watch: null },
+    optimizeDeps: { noDiscovery: true, include: [] },
+    logLevel: "error",
+  });
+  server.middlewares.use("/probe.html", (_req, res) => {
+    res.setHeader("Content-Type", "text/html");
+    res.end("<!doctype html><title>Terrain preparation oracle</title>");
+  });
+  let result: ReturnType<typeof probeTerrainRasterCompletion>;
+  try {
+    await server.listen();
+    const address = server.httpServer?.address();
+    if (!address || typeof address === "string") throw Error("Missing oracle address");
+    await page.goto(`http://127.0.0.1:${address.port}/probe.html`);
+    result = await page.evaluate(async () => {
+      const module = "/tilefun/src/rendering/TerrainRasterProbe.ts";
+      return (await import(/* @vite-ignore */ module)).probeTerrainRasterCompletion();
+    });
+  } finally {
+    await server.close();
+  }
   expect(result.completedRows).toBe(32);
   expect(result.mismatches).toEqual([0, 0, 0, 0]);
   expect(result.coloredBytes.every((n) => n > 10000)).toBe(true);
@@ -29,22 +40,13 @@ test("completed terrain rows preserve partial, ready and edited pixels", async (
 });
 
 type GameCanvas = HTMLCanvasElement & {
-  __game: {
-    camera: { zoom: number };
-    renderer: {
-      getDiagnostics(): TerrainDiagnostics & {
-        gpu?: { uploadedBytes: number };
-      };
-      submit(view: RenderView, pass: RenderPass): void;
-      surface?: { drawImage(image: CanvasImageSource, x: number, y: number): void };
-    };
-  };
+  __game: Omit<GameTestHooks, "renderer"> & { renderer: GpuRenderResources };
 };
 
 async function openDebug(page: Page) {
   await page.setViewportSize({ width: 390, height: 844 });
   // The fixed view's terrain passes: the classic view, behind its setting.
-  await page.goto("/tilefun/?nogamepad&view=fixed");
+  await page.goto("/tilefun/?nogamepad");
   const canvas = page.locator("#game");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   await expect(canvas).toHaveAttribute("data-renderer", "gpu");
@@ -76,18 +78,26 @@ function warm(canvas: Locator) {
   return canvas.evaluate(async (c: GameCanvas) => {
     const backend = c.__game.renderer;
     const before = backend.getDiagnostics();
-    const submit = backend.submit;
+    const pages = backend.surface.pages;
+    const get = pages.get;
+    const groundImages = new Set<CanvasImageSource>();
+    const range = c.__game.camera.getVisibleChunkRange();
+    for (let cy = range.minCy; cy <= range.maxCy; cy++)
+      for (let cx = range.minCx; cx <= range.maxCx; cx++) {
+        const chunk = c.__game.stateView.world.getChunkIfLoaded(cx, cy);
+        const image = chunk && backend.groundImage(chunk);
+        if (image) groundImages.add(image);
+      }
     let terrainUploadedBytes = 0;
     let terrainPasses = 0;
-    // Attribute uploads to terrain submission; traffic can introduce new
-    // sprite pages after terrain preparation has already settled.
-    backend.submit = function (view, pass) {
-      const uploadedBefore = this.getDiagnostics().gpu?.uploadedBytes ?? 0;
-      submit.call(this, view, pass);
-      if (pass.kind === "terrain") {
+    pages.get = function (...args) {
+      const before = backend.getDiagnostics().gpu.uploadedBytes;
+      const page = get.apply(this, args);
+      if (groundImages.has(args[0])) {
         terrainPasses++;
-        terrainUploadedBytes += (this.getDiagnostics().gpu?.uploadedBytes ?? 0) - uploadedBefore;
+        terrainUploadedBytes += backend.getDiagnostics().gpu.uploadedBytes - before;
       }
+      return page;
     };
     // A previously unseen sprite page may arrive while terrain is warm.
     // Force that unrelated upload so the terrain-only assertion below is
@@ -98,7 +108,7 @@ function warm(canvas: Locator) {
     try {
       for (let i = 0; i < 60; i++) {
         await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
-        if (i === 30) backend.surface?.drawImage(lateSprite, -16, -16);
+        if (i === 30) backend.surface.pages.get(lateSprite, 0, 0, { width: 8, height: 8 });
         rows += backend.getDiagnostics().rowsLastFrame;
       }
       return {
@@ -109,7 +119,7 @@ function warm(canvas: Locator) {
         terrainPasses,
       };
     } finally {
-      backend.submit = submit;
+      pages.get = get;
     }
   });
 }

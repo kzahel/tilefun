@@ -328,6 +328,7 @@ export class PropMeshes {
       this.appendProp(built, prop, elevation, flat, facesFor);
       return;
     }
+    prop = room.placement(prop, furniture);
     if (room.appendFlat(prop, furniture, elevation, facesFor)) return;
     // Top-down draws the fixed view's picture: furniture stands as its artwork at
     // its anchor row, where the fixed view sorts it, with the rows below that

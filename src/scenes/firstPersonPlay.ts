@@ -4,6 +4,7 @@ import type { FirstPersonControl } from "../client/FirstPersonControl.js";
 import { XR_WALK } from "../client/XrControl.js";
 import type { GameContext } from "../core/GameScene.js";
 import type { Entity } from "../entities/Entity.js";
+import type { Prop } from "../entities/Prop.js";
 import { controllerInput } from "../input/ControllerInput.js";
 import { furnitureDefinition } from "../interiors/FurnitureCatalog.js";
 import { furnitureAsset, INTERIOR_WALL_TYPE } from "../interiors/GameplayInterior.js";
@@ -23,6 +24,7 @@ import type {
 } from "../rendering/firstperson/FirstPersonView.js";
 import { grown, obliqueGround } from "../rendering/firstperson/ObliqueCamera.js";
 import { collectCameraGrass } from "../rendering/GrassBladeRenderer.js";
+import type { OverlayDraw } from "../rendering/OverlayFrame.js";
 import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
 import { bladesOnPixelGrid, onPixelGrid, particlesOnPixelGrid } from "../rendering/PixelGrid.js";
 import type { SceneItem, SpriteItem } from "../rendering/SceneItem.js";
@@ -232,8 +234,6 @@ function seen(
       topDown: undefined,
     } satisfies Seen;
   }
-  // `?rooms3d=0` leaves rooms to the fixed view.
-  if (gc.stateView.interior && !control.topDownRooms) return undefined;
   return topDownSeen(control, view);
 }
 
@@ -280,6 +280,11 @@ export interface Play3dSource {
   readonly grass: boolean;
   /** The view's body, for the overhead decks' cutaway. */
   readonly observer: Entity | undefined;
+  readonly props?: readonly Prop[];
+  readonly interior?: FirstPersonInterior;
+  readonly underlay?: readonly OverlayDraw[];
+  readonly meshSurfaceGeometry?: import("../rendering/TerrainPresentation.js").TerrainPresentation["meshSurfaceGeometry"];
+  readonly visibility?: import("../rendering/SurfacePresentation.js").SurfaceVisibility;
   /** Appends presentation-only sprites (opening doors), as the fixed view's
    * `collected` hook does. */
   readonly overlays?: ((items: SceneItem[]) => void) | undefined;
@@ -321,6 +326,7 @@ export function renderFirstPerson(
     fadeSeconds: gc.time?.presentationSeconds ?? 0,
     grass: gc.spriteCatalog.has("grass-blades"),
     overlays: (items) => gc.doorPresentation?.appendOverlays(items, realm),
+    meshSurfaceGeometry: gc.renderer?.meshSurfaceGeometry?.bind(gc.renderer),
     observer: (view.seat ? seatEntity(gc.session, view.seat) : undefined) ?? stateView.playerEntity,
   };
   const interior = currentInterior(gc, control);
@@ -340,13 +346,13 @@ export function renderTopDown3d(
   particles?: ParticlePresentation,
 ): boolean {
   const { control } = source;
-  const scene = !view.region.mask && !source.state.interior ? control.scene(view) : undefined;
+  const scene = !view.region.mask ? control.scene(view) : undefined;
   const from = scene ? topDownSeen(control, view) : undefined;
   if (!scene || !from) {
     control.hide(view);
     return false;
   }
-  return drawSeen(source, view, scene, from, alpha, particles, undefined, undefined);
+  return drawSeen(source, view, scene, from, alpha, particles, source.interior, undefined);
 }
 
 /** Collect and draw what `from` sees; marks the view drawn or hands it back. */
@@ -380,7 +386,7 @@ function drawSeen(
     collectWorldSprites({
       // First person hides the viewer's own body; a driver is drawn inside the vehicle.
       entities: from.own === undefined ? entities : entities.filter((e) => e.id !== from.own),
-      props: state.props,
+      props: source.props ?? state.props,
       world: state.world,
       alpha,
       cull: from.cull,
@@ -396,7 +402,7 @@ function drawSeen(
       eye,
       world: state.world,
       realm: source.realm,
-      props: state.props,
+      props: source.props ?? state.props,
       sprites: items.filter((item): item is SpriteItem => item.kind === "sprite"),
       drawRadius,
       interior,
@@ -414,8 +420,10 @@ function drawSeen(
         fades: view.fades,
         time: source.fadeSeconds,
         alpha,
+        visibility: source.visibility,
       },
       background: source.background,
+      underlay: source.underlay,
       headset: from.headset,
     };
     // Through the render host's own renderer (249): into this view's region, or
@@ -423,6 +431,7 @@ function drawSeen(
     drawn = headset
       ? headset.draw((target) => scene.render(content, target))
       : view3d.draw(view.region, (target) => scene.render(content, target));
+    if (drawn) control.onPresented?.(view, content.sprites);
   } finally {
     frame.release();
   }
@@ -452,11 +461,14 @@ function viewEffects(
     !topDown || view.camera.zoom >= SURFACE_RECEIVER_MIN_ZOOM
       ? new SurfaceReceivers(state.world, state.props, source.entities, alpha, {
           propCache: source.control.frame.propReceivers,
+          mesh: source.meshSurfaceGeometry,
         })
       : undefined;
-  return particles
+  const items = particles
     .collectItems(receivers)
     .filter((item): item is EffectItem => item.kind === "particle" || item.kind === "decal");
+  if (receivers) Object.assign(source.control.frame.receiverStats, receivers.diagnostics);
+  return items;
 }
 
 /** Small aiming mark at the centre of a view (context already at its region's origin). */

@@ -136,6 +136,7 @@ export interface View3dXr {
  * can sit side by side in one canvas.
  */
 export interface View3dHost {
+  readonly available?: boolean;
   /**
    * Draw a 3D view into `region` of the canvas (the whole canvas when omitted).
    * `draw` clears and renders through the given renderer; the host restores its own

@@ -1,6 +1,5 @@
 import { expect, test } from "@playwright/test";
 import type { GameTestHooks } from "../src/client/GameTestHooks.js";
-import type { RenderBackend } from "../src/rendering/RenderFrame.js";
 import { FROG_TYPE } from "../src/wildlife/Frog.js";
 
 test.use({ channel: "chromium", viewport: { width: 1000, height: 800 } });
@@ -10,7 +9,7 @@ test(`driving produces inert visible roadkill and saves its death`, async ({ pag
   page.on("pageerror", (e) => errors.push(e.message));
   const generation = { type: "flat", version: "flat-v1", seed: 42, preset: "grass" } as const;
   await page.goto(
-    `/tilefun/?nogamepad&view=fixed&generation=${encodeURIComponent(JSON.stringify(generation))}`,
+    `/tilefun/?nogamepad&generation=${encodeURIComponent(JSON.stringify(generation))}`,
   );
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true", { timeout: 15000 });
   await page.getByRole("button", { name: "New World", exact: true }).click();
@@ -56,23 +55,18 @@ test(`driving produces inert visible roadkill and saves its death`, async ({ pag
       wx: car.position.wx + c.offsetX + c.width / 2 + 3,
       wy: car.position.wy + c.offsetY - c.height / 2 + 2,
     });
-    // Observe production presentation submissions, without replacing their drawing.
-    const backend = (g as unknown as { renderer: RenderBackend }).renderer;
-    const submit = backend.submit.bind(backend);
-    backend.submit = (view, pass) => {
-      if (pass.kind === "scene") {
-        const remains = pass.items.find((i) => i.kind === "sprite" && i.scaleY === 0.3);
-        if (remains?.kind === "sprite")
-          canvas.dataset.roadkillRender = JSON.stringify({
-            sheet: remains.sheetKey,
-            scale: remains.scaleY,
-            shadow: remains.hasShadow,
-            alpha: remains.alpha,
-            frame: remains.frameCol,
-            offset: remains.drawOffsetY,
-          });
-      }
-      submit(view, pass);
+    // Observe the unified scene's borrowed actor presentation after a successful draw.
+    g.firstPerson.onPresented = (_view, sprites) => {
+      const remains = sprites.find((i) => i.scaleY === 0.3);
+      if (remains)
+        canvas.dataset.roadkillRender = JSON.stringify({
+          sheet: remains.sheetKey,
+          scale: remains.scaleY,
+          shadow: remains.hasShadow,
+          alpha: remains.alpha,
+          frame: remains.frameCol,
+          offset: remains.drawOffsetY,
+        });
     };
   }, FROG_TYPE);
   await page.locator("#game").focus();

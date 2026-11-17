@@ -203,6 +203,10 @@ test("real tile zoom uses bounded shared rendering, configurable settings, and r
   await expect
     .poll(async () => Number(await app.getAttribute("data-tile-ready")))
     .toBeGreaterThan(0);
+  await expect(app).toHaveAttribute("data-tile-complete", "true");
+  expect(Number(await app.getAttribute("data-tile-ground-pages"))).toBeGreaterThanOrEqual(
+    Number(await app.getAttribute("data-tile-ready")),
+  );
   expect(Number(await app.getAttribute("data-tile-resident"))).toBeLessThanOrEqual(81);
   const resources = await page.evaluate(() =>
     performance.getEntriesByType("resource").map((r) => r.name),

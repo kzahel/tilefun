@@ -99,10 +99,15 @@ export function actorBillboard(
   sheet: Spritesheet,
   eye: Pick<FirstPersonEye, "x" | "y"> | "south",
   ready: ReadonlySet<string>,
+  roomSort = false,
 ): Billboard {
   const shift = roofShift(item.meshRoofSupport, ready);
   const x = item.wx + shift.x,
     y = item.wy + shift.y;
+  // Illustrated room furniture sorts as one picture. Put a supported actor at
+  // its collected sort row along the top-down view ray, preserving every pixel
+  // of its screen position while keeping its whole body above its support.
+  const depth = roomSort && eye === "south" ? Math.max(0, item.sortKey - y) : 0;
   const row =
     item.facing === undefined || eye === "south"
       ? item.frameRow
@@ -111,8 +116,8 @@ export function actorBillboard(
     ...sheetFrame(sheet, item, row),
     flipX: item.flipX,
     x,
-    y,
-    z: item.zOffset - shift.z,
+    y: y + depth,
+    z: item.zOffset - shift.z + depth,
     width: item.spriteWidth,
     height: item.spriteHeight * (item.scaleY ?? 1),
     below: item.drawOffsetY,

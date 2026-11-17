@@ -79,13 +79,6 @@
       "mode": "source"
     },
     {
-      "id": "renderer-lab",
-      "name": "Renderer lab",
-      "description": "Check the GPU sprite scene against pixel invariants, and inspect experimental mesh bodies.",
-      "url": "renderer-lab.html",
-      "mode": "source"
-    },
-    {
       "id": "car-projection",
       "name": "Car projection lab",
       "description": "Orbit a car built from sprite artwork and fitted 3D surfaces. Compare the source view and approved collision box.",
@@ -56275,5 +56268,5 @@
       }
     }
   ],
-  "inputDigest": "9fc488a82894263bc07567cfde15015ac5432b0f4cb718df31ee7b3ca6d7fef4"
+  "inputDigest": "5b587d905071beeb1dbe33cfd069e15e6e08bce5599114099a1ef8eddb476805"
 }

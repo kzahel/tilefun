@@ -29334,42 +29334,6 @@
       ]
     },
     {
-      "id": "architecture:room-builder/floor-connectors/c00-r00",
-      "sheetId": "modern-interiors",
-      "rect": [
-        240,
-        8078,
-        16,
-        16
-      ],
-      "label": "room-builder/floor-connectors/c00-r00",
-      "kind": "architecture",
-      "consumers": [
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:429"
-        }
-      ]
-    },
-    {
-      "id": "architecture:room-builder/floor-connectors/c00-r01",
-      "sheetId": "modern-interiors",
-      "rect": [
-        256,
-        8078,
-        16,
-        16
-      ],
-      "label": "room-builder/floor-connectors/c00-r01",
-      "kind": "architecture",
-      "consumers": [
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:430"
-        }
-      ]
-    },
-    {
       "id": "sprite:car-transporter-ramp-v2",
       "sheetId": "car-transporter-ramp-v2",
       "rect": [
@@ -33891,22 +33855,6 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:306"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:371"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:374"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:378"
-        },
-        {
-          "system": "Gameplay",
           "source": "src/scenarios/VehicleDynamicsRecipe.ts:25"
         }
       ]
@@ -35463,7 +35411,7 @@
         },
         {
           "system": "Interiors",
-          "source": "src/interiors/playtest/main.ts:855"
+          "source": "src/interiors/playtest/main.ts:852"
         },
         {
           "system": "Gameplay",
@@ -35523,11 +35471,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioRecipe.ts:128"
+          "source": "src/scenarios/ScenarioRecipe.ts:131"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioRecipe.ts:130"
+          "source": "src/scenarios/ScenarioRecipe.ts:133"
         },
         {
           "system": "Gameplay",
@@ -38251,23 +38199,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LabScene.ts:80"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/client/LabView.ts:423"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/client/RendererParityProbe.ts:480"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/client/RendererParityProbe.ts:512"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/CameraStabilityProbe.ts:38"
+          "source": "src/client/LabView.ts:397"
         },
         {
           "system": "Gameplay",
@@ -38275,23 +38207,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:311"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/RendererLab.ts:315"
-        },
-        {
-          "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:492"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:473"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/firstPersonPlay.ts:322"
+          "source": "src/scenes/firstPersonPlay.ts:327"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/renderWorld.ts:61"
+          "source": "src/scenes/renderWorld.ts:62"
         },
         {
           "system": "Gameplay",

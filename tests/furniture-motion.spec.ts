@@ -367,17 +367,16 @@ test("the full player sprite remains visible at the back of the bed after landin
   await expectHeight(canvas, bed.height);
   // Feet plus height sort behind the bed's front; support lifts the player above it.
   expect(landed.depth).toBeGreaterThan(bottom);
-  // Actors draw at fractional positions with smoothing, so compare against the
-  // idle, facing-up frame smoothed at the same offset. Pixels the smoothed frame
-  // covers fully must show the sprite; the bed drawn over it fails most of them.
+  // Unified top-down cards use the accepted crisp pixel grid. Opaque pixels of
+  // the snapped idle, facing-up frame must stay visible over the support.
   const visible = () =>
     canvas.evaluate(async (el) => {
       const c = el as HTMLCanvasElement;
       const sx = Number(c.dataset.playerX) - 8;
       const sy =
         Number(c.dataset.playerY) - Number(c.dataset.playerZ) - 16 + Number(c.dataset.viewOffsetY);
-      const x = Math.floor(sx),
-        y = Math.floor(sy);
+      const x = Math.round(sx),
+        y = Math.round(sy);
       const source = new Image();
       source.src = "/tilefun/assets/sprites/player.png";
       await source.decode();
@@ -386,8 +385,8 @@ test("the full player sprite remains visible at the back of the bed after landin
       expected.height = 18;
       const ctx = expected.getContext("2d");
       if (!ctx) throw new Error("Missing context");
-      ctx.imageSmoothingEnabled = true;
-      ctx.drawImage(source, 0, 16, 16, 16, sx - x, sy - y, 16, 16);
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(source, 0, 16, 16, 16, 0, 0, 16, 16);
       const reference = ctx.getImageData(0, 0, 18, 18).data;
       // The world is a separate WebGL2 canvas: read the composed frame.
       const frame = (c as HTMLCanvasElement & { __capture(): HTMLCanvasElement }).__capture();

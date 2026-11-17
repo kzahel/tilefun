@@ -152,6 +152,34 @@ describe("the view's merged static world (251)", () => {
     view.dispose();
   });
 
+  it("draws streamed fixture props even when the fixture has no terrain chunks", () => {
+    const view = new FirstPersonView(new Map());
+    const f: FirstPersonFrame = {
+      ...frame(world(new Map()), true),
+      props: [
+        {
+          id: 1,
+          type: "fixture",
+          isProp: true,
+          position: { wx: 128, wy: 128 },
+          sprite: {
+            sheetKey: "missing",
+            frameCol: 0,
+            frameRow: 0,
+            spriteWidth: 16,
+            spriteHeight: 32,
+          },
+          collider: { offsetX: 0, offsetY: 0, width: 16, height: 16, zHeight: 32 },
+          walls: null,
+        },
+      ],
+    };
+    settle(view, f);
+    expect(view.stats.meshes).toBeGreaterThan(0);
+    expect(view.stats.groundPages).toBe(0);
+    view.dispose();
+  });
+
   it("keeps the same chunks when a seat switches to the top-down camera, and frees those that leave", () => {
     const loaded = new Map<string, Chunk>();
     for (let cy = -1; cy <= 1; cy++)
@@ -390,6 +418,12 @@ describe("the view's merged static world (251)", () => {
     view.render(at(player(64), 2), target);
     view.render(at(player(64), 2.3), target);
     expect(bridge().transparent).toBe(false);
+    expect(bridge().opacity).toBe(1);
+    const lower = at(player(0), 3);
+    view.render({ ...lower, cutaway: { ...lower.cutaway!, visibility: "lower" } }, target);
+    expect(bridge().visible).toBe(false); // hidden materials cannot occlude the lower floor
+    view.render({ ...lower, cutaway: { ...lower.cutaway!, visibility: "all" } }, target);
+    expect(bridge().visible).toBe(true);
     expect(bridge().opacity).toBe(1);
     view.dispose();
   });

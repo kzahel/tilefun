@@ -1,6 +1,7 @@
 import { VIEW_BACKDROP_CSS } from "../config/constants.js";
 import type { GameContext } from "../core/GameScene.js";
 import type { ParticlePresentation } from "../rendering/ParticleSystem.js";
+import { drawViewUnavailable } from "../rendering/ViewUnavailable.js";
 import { seatEntity } from "../session/SeatFocus.js";
 import { drawViewScene, drawViewTerrain, renderViews } from "../session/ViewRender.js";
 import { renderFirstPerson } from "./firstPersonPlay.js";
@@ -89,8 +90,15 @@ export function renderPlayViews(
     { renderer: gc.renderer, beginView, endView },
     gc.session.views,
     outdoors ? { world: gc.stateView.world, pacing: gc.debugPanel.terrainPacing } : undefined,
-    draw,
-    // A seat in first person draws in the 3D scene; the fixed view is its fallback.
+    (view) =>
+      drawViewUnavailable(
+        gc.drawUiOverlay,
+        view,
+        gc.view3d?.available === false
+          ? "Graphics paused. Waiting for your browser…"
+          : gc.firstPerson?.unavailableMessage,
+      ),
+    // The unified scene owns every world view.
     (view) => renderFirstPerson(gc, view, alpha, particles),
   );
 }

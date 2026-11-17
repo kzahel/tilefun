@@ -1,5 +1,10 @@
 # Diagnostic probes
 
+The fixed-renderer registration, fused-composite, ordered-texture, body-cache
+and surface-overlay runners retired with [253](../../docs/tactical/253-retire-fixed-world-renderer.md).
+Their historical measurements remain in the owning tacticals. Current world
+rendering uses `render:bench`; its shared terrain/atlas/body-image resources stay.
+
 ## Split-screen player pacing
 
 `node scripts/instrumentation/split-screen-pacing.mjs --regional --split-only --turn-seconds=3 --seconds=30 --rates=16,1`

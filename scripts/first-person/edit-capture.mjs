@@ -1,8 +1,7 @@
-// Building mode in both renderers: an isolated Vite server, bundled Chromium and
+// Unified building mode: an isolated Vite server, bundled Chromium and
 // a fresh seed-2026 regional world arriving at a dense-district lot's entrance.
 // Tab opens building mode (`--room` enters the building with E first); the
-// cursor rests over the view, then the view is captured with and without
-// `?view=topdown3d` (plus `--query`).
+// cursor rests over the view, then the unified scene is captured (plus `--query`).
 //
 //   node scripts/first-person/edit-capture.mjs [--room] [--query=a=b] [--out=DIR]
 import { mkdir } from "node:fs/promises";
@@ -54,10 +53,10 @@ try {
     if (!lot) throw Error("no condo");
     return { generation, arrival: { x: lot.entrance.x, y: lot.entrance.y, generation } };
   });
-  for (const unified of [false, true]) {
+  {
     const params = [
       "nogamepad",
-      unified ? "view=topdown3d" : "view=fixed",
+      "view=topdown3d",
       query,
       `generation=${encodeURIComponent(JSON.stringify(generation))}`,
       `arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
@@ -95,7 +94,7 @@ try {
     await page.waitForTimeout(3000);
     await page.mouse.move(704, 384);
     await page.waitForTimeout(500);
-    const file = path.join(out, `edit${room ? "-room" : ""}${unified ? "-3d" : ""}.png`);
+    const file = path.join(out, `edit${room ? "-room" : ""}-3d.png`);
     await page.locator("#game").screenshot({ path: file });
     const drawn = await page.evaluate(() => {
       const game = document.querySelector("#game").__game;

@@ -1,9 +1,8 @@
 import type { Camera } from "./Camera.js";
-import { GpuRenderBackend } from "./GpuRenderBackend.js";
+import { GpuRenderResources } from "./GpuRenderResources.js";
 import { createView3dHost } from "./GpuView3d.js";
 import type { RenderHost } from "./RenderHost.js";
 import type { RenderRegion } from "./ViewLayout.js";
-import { WorldRasterFrame } from "./WorldRasterFrame.js";
 
 /** The original canvas retains input and UI; the world canvas is a sibling below it. */
 export function createGpuRenderHost(
@@ -16,9 +15,9 @@ export function createGpuRenderHost(
   world.style.cssText = options?.embedded
     ? "position:absolute;pointer-events:none;"
     : "position:fixed;pointer-events:none;";
-  let renderer: GpuRenderBackend;
+  let renderer: GpuRenderResources;
   try {
-    renderer = new GpuRenderBackend(world);
+    renderer = new GpuRenderResources(world);
   } catch (error) {
     // `requireWebGl2` already found a context; any other failure is a fault.
     world.remove();
@@ -26,9 +25,6 @@ export function createGpuRenderHost(
   }
   // Vehicles are always 3D; their sprites only cover loading or failed meshes.
   renderer.meshes.setEnabled(true);
-  renderer.worldRaster = true;
-  renderer.surface.enableWorldComposition();
-  const frame = new WorldRasterFrame();
   const uiContext = canvas.getContext("2d");
   if (!uiContext) {
     renderer.dispose();
@@ -64,17 +60,8 @@ export function createGpuRenderHost(
   canvas.dataset.gpuDevice = "ready";
   const observer = new ResizeObserver(align);
   observer.observe(canvas);
-  let region: RenderRegion | undefined;
-  const beginView = (camera: Camera, viewRegion?: RenderRegion) => {
-    renderer.beginView();
-    frame.begin(camera);
-    region = viewRegion;
-  };
-  const endView = () => {
-    const offset = frame.end();
-    if (offset) renderer.presentWorld(offset.x, offset.y, region);
-    region = undefined;
-  };
+  const beginView = (_camera: Camera, _region?: RenderRegion) => {};
+  const endView = () => {};
   return {
     renderer,
     uiContext,
@@ -121,7 +108,6 @@ export function createGpuRenderHost(
     dispose() {
       if (disposed) return;
       disposed = true;
-      frame.end();
       observer.disconnect();
       world.removeEventListener("webglcontextlost", lost);
       world.removeEventListener("webglcontextrestored", restored);

@@ -1,11 +1,11 @@
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { collectEditorOverlay, collectRemoteCursors } from "../editor/collectEditorOverlay.js";
 import type { OverlayDraw } from "../rendering/OverlayFrame.js";
+import { drawViewUnavailable } from "../rendering/ViewUnavailable.js";
 import { renderViews } from "../session/ViewRender.js";
 import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
 import { renderFirstPerson } from "./firstPersonPlay.js";
 import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
-import { renderEntities, renderWorld } from "./renderWorld.js";
 
 type Unsubscribe = () => void;
 
@@ -264,7 +264,7 @@ export class EditScene implements GameScene {
     const { beginView, endView, drawUiOverlay } = gc;
     // Building mode draws as play does: in the unified top-down view when the
     // device chose it (renderer unification), its overlays on the UI canvas above.
-    if (beginView && endView && drawUiOverlay && gc.firstPerson?.topDown && !gc.view.look) {
+    if (beginView && endView && drawUiOverlay && gc.firstPerson?.topDown) {
       const views = gc.session.layoutViews(gc.canvas.width, gc.canvas.height, false);
       const [view] = views;
       // Seat 0 alone, as outside play; also when the game opens in building mode.
@@ -276,32 +276,27 @@ export class EditScene implements GameScene {
           { renderer: gc.renderer, beginView, endView },
           [view],
           outdoors ? { world: gc.stateView.world, pacing: gc.debugPanel.terrainPacing } : undefined,
-          () => this.drawFixed(gc, alpha, true),
+          () => drawViewUnavailable(gc.drawUiOverlay, view, gc.firstPerson?.unavailableMessage),
           () => {
-            unified = renderFirstPerson(gc, view, alpha);
+            const look = view.look;
+            view.look = null;
+            try {
+              unified = renderFirstPerson(gc, view, alpha);
+            } finally {
+              view.look = look;
+            }
             return unified;
           },
         );
         if (unified) this.collectOverlays(gc, drawUiOverlay);
       }
     } else {
-      gc.beginWorld?.();
-      this.drawFixed(gc, alpha, false);
-      gc.endWorld?.();
+      if (gc.drawUiOverlay) this.collectOverlays(gc, gc.drawUiOverlay);
     }
     drawPlayerMarkers(gc, alpha);
     renderDebugOverlay(gc, alpha);
     render3DDebug(gc);
     gc.camera.restoreActual();
-  }
-
-  /** The fixed view's world: editor overlays sit between terrain and bodies
-   * outdoors, above the room indoors. */
-  private drawFixed(gc: GameContext, alpha: number, prepared: boolean): void {
-    renderWorld(gc, prepared);
-    if (gc.stateView.interior) renderEntities(gc, alpha);
-    this.collectOverlays(gc, (items) => gc.renderer.submit(gc.camera, { kind: "overlay", items }));
-    if (!gc.stateView.interior) renderEntities(gc, alpha);
   }
 
   /** Editor overlays (grid, cursor, elevation tint, previews, remote cursors). */

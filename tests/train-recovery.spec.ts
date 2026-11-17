@@ -23,7 +23,7 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   page.on("pageerror", (e) => errors.push(e.message));
   const recipe = cityTrainRecipe();
   // Boarding, riding and display continuity are Worker/prediction/presentation behavior.
-  await page.goto("/tilefun/?nogamepad&view=fixed");
+  await page.goto("/tilefun/?nogamepad");
   await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
   await page.evaluate(async (recipe) => {
     const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
@@ -118,7 +118,7 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   await page.evaluate(() => {
     const canvas = document.querySelector("#game") as unknown as {
       __game: {
-        renderer: import("../src/rendering/RenderFrame.js").RenderBackend;
+        firstPerson: import("../src/client/FirstPersonControl.js").FirstPersonControl;
         time: { presentationSeconds: number; alpha: number };
         stateView: import("../src/client/ClientStateView.js").RemoteStateView;
       };
@@ -127,11 +127,12 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
       };
     };
     const g = canvas.__game,
-      submit = g.renderer.submit.bind(g.renderer);
+      presented = g.firstPerson.onPresented;
     const samples: TrainDisplaySample[] = [];
-    g.renderer.submit = (camera, pass) => {
-      if (pass.kind === "scene") {
-        const car = pass.items.find(
+    g.firstPerson.onPresented = (view, sprites) => {
+      const camera = view.camera;
+      {
+        const car = sprites.find(
           (i) =>
             i.kind === "sprite" &&
             ["train-carriage-v1:middle", "train-curve-proof-v1"].includes(i.sheetKey),
@@ -150,11 +151,11 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
           });
         }
       }
-      return submit(camera, pass);
+      presented?.(view, sprites);
     };
     canvas.__trainCapture = {
       stop() {
-        g.renderer.submit = submit;
+        g.firstPerson.onPresented = presented;
         return samples;
       },
     };
@@ -277,7 +278,7 @@ test("embedded station keeps its bench start, paused reload and shared recall co
 }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
-  await page.goto("/tilefun/workshop.html?geometry=train&view=fixed#/tool/world-geometry");
+  await page.goto("/tilefun/workshop.html?geometry=train#/tool/world-geometry");
   const canvas = page.getByLabel("World geometry scene");
   await expect(canvas).toHaveAttribute("data-ready", "true");
   const call = page.getByRole("button", { name: /^Call train/ });

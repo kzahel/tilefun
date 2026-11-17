@@ -1,5 +1,11 @@
 # Embedded engine labs
 
+[253](../tactical/253-retire-fixed-world-renderer.md) migrates room and grid labs
+to the same unified scene as play. Grids are diagnostic ground textures, room
+art uses the shared wall-band/furniture scene, and view diagnostics read actual
+unified presentation. Worker authority, prediction, clocks, input and persistence
+are unchanged; the lab retains no fixed-world fallback.
+
 [Split-screen replay progress](../research/split-screen-prediction-starvation.md)
 (2026-11-14) keeps the shared predictor's yielded replay endpoint fixed, retaining
 subsequent commands for the next work and preserving input/physics clock ownership.

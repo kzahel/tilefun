@@ -10,7 +10,7 @@ test("jump park opens on the default 3D mesh renderer and launches a boosted car
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   // No renderer parameter: labs default to GPU + 3D vehicle meshes.
-  await page.goto("/tilefun/workshop.html?geometry=car-jumps&view=fixed#/tool/world-geometry");
+  await page.goto("/tilefun/workshop.html?geometry=car-jumps#/tool/world-geometry");
   const c = page.getByLabel("World geometry scene");
   await expect(c).toHaveAttribute("data-ready", "true");
   await expect(c).toHaveAttribute("data-renderer", "gpu");

@@ -42,7 +42,7 @@ try {
   });
   await page.goto(`http://127.0.0.1:${server.httpServer.address().port}/tilefun/__engine_vehicles`);
   const report = await page.evaluate(async () => {
-    const { GpuRenderBackend } = await import("/tilefun/src/rendering/GpuRenderBackend.ts");
+    const { GpuRenderResources } = await import("/tilefun/src/rendering/GpuRenderResources.ts");
     const { Camera } = await import("/tilefun/src/rendering/Camera.ts");
     const { AUTHORED_VEHICLE_MESHES } = await import(
       "/tilefun/src/rendering/AuthoredVehicleMeshes.ts"
@@ -52,7 +52,7 @@ try {
     const canvas = document.createElement("canvas");
     canvas.width = canvas.height = 512;
     document.body.append(canvas);
-    const backend = new GpuRenderBackend(canvas);
+    const backend = new GpuRenderResources(canvas);
     const camera = new Camera();
     camera.setViewport(512, 512);
     camera.zoom = 1;

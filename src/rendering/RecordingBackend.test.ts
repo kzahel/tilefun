@@ -8,7 +8,6 @@ import { createPlayer } from "../entities/Player.js";
 import { createProp } from "../entities/PropFactories.js";
 import { parseFloorPlan } from "../interiors/ApartmentFloorPlan.js";
 import { createLayeredInteriorMap } from "../interiors/LayeredInteriorMap.js";
-import { EditScene } from "../scenes/EditScene.js";
 import { renderEntities, renderWorld } from "../scenes/renderWorld.js";
 import { Chunk } from "../world/Chunk.js";
 import { World } from "../world/World.js";
@@ -16,7 +15,7 @@ import { Camera } from "./Camera.js";
 import { SceneFrame } from "./SceneFrame.js";
 import { RecordingBackend } from "./testing/RecordingBackend.js";
 
-it("runs production outdoor/editor/indoor presentation on another backend without mutating simulation", () => {
+it("records reference outdoor/indoor presentation without mutating simulation", () => {
   const assets = new Map(
     ["player", "grass-blades", "modern-interiors", "me-complete"].map((key) => [
       key,
@@ -98,8 +97,6 @@ it("runs production outdoor/editor/indoor presentation on another backend withou
   expect(backend.resourceId(chunk, 0, 0)).toBe(terrainId);
   expect(backend.elevation.getDiagnostics().layoutBuilds).toBe(1);
   backend.passes.length = 0;
-  new EditScene().render(1, gc);
-  expect(backend.passes.map((p) => p.kind)).toEqual(["clear", "terrain", "overlay", "scene"]);
   expect(gc.sceneFrame.overlays.items).toEqual([]);
   expect(snapshot()).toEqual(before);
   other.prepareTerrain(camera, world, camera.getVisibleChunkRange());

@@ -1,13 +1,10 @@
 # Renderer unification
 
 Topic: renderer-unification
-Status: committed direction, 2026-11-14; slices 1 (one renderer host), 2 (ground
-artwork, shared page atlas), 3 (opt-in top-down camera, parity probe, merged
-meshes, device scorecard) and 4 (play in a headset) delivered the same day;
-slice 5 (top-down parity) started 2026-11-15 with building bodies and grass. Since
-2026-11-16 the unified top-down view is play's default (owner instruction, gate 2).
-Since 2026-11-17 it is the only player-facing choice; the fixed 2D view remains
-an internal fallback until the [retirement gate](#retirement-gate).
+Status: retiring the fixed GPU world renderer, owner-authorized 2026-11-17.
+The unified scene now owns all interactive consumers in the working change;
+validation and hosted Linux qualification are tracked in
+[253](../tactical/253-retire-fixed-world-renderer.md).
 Updated: 2026-11-17.
 
 Owns the move to one world renderer: its status, parity checklist, device
@@ -27,8 +24,8 @@ wanted as well, and a third renderer is not.
   into the fixed 2D backend.
 - The fixed 2D view stayed the default for top-down play until the unified one
   was good enough (owner, 2026-11-16: make it the default). Since 2026-11-17
-  it is available only through development controls and internal fallbacks
-  until retirement: not deleted, not degraded and not left unmaintained.
+  it remained behind development controls and internal fallbacks until the
+  owner authorized retirement later that day (253).
 
 ## Why this direction
 
@@ -45,49 +42,30 @@ wanted as well, and a third renderer is not.
 
 ## Guardrails
 
-- **Default.** Top-down play and building mode draw through the unified view
-  since 2026-11-16. The fixed GPU backend remains an internal fallback and
-  draws room/underlay labs, the explorer, probes and review captures until the
-  retirement gate. New top-down features keep working there.
-- **Review raster.** `ReviewRasterBackend` and fingerprinted review images are
-  outside this work and stay.
-- **No cost to the default.** A slice must not slow the fixed view. Check the
-  affected `render:bench` cells when shared code changes.
-- **One presentation evaluation.** Both renderers keep reading the shared
-  collector, mesh poses and shadow shapes. Nothing here changes simulation,
-  prediction or replication.
-- **Classic view kept as a fallback.** Players are no longer offered the fixed
-  view (2026-11-17); `?view=fixed` and `r_topdown3d 0` remain for development
-  until retirement.
-- **Device claims need device runs.** The Mac alone does not show that a change
-  is safe on the phone, the Deck or the headset.
-- **Labs.** Shared changes account for embedded labs
-  ([embedded engine labs](embedded-engine-labs.md)).
+- **One world scene.** Top-down, first-person, driving and XR cameras share
+  `FirstPersonView`. Game, labs, prop editing and offscreen previews use it.
+- **Shared resources stay.** `GpuRenderResources` owns CPU terrain rasters,
+  the shared page atlas and native-pixel vehicle body images. These are not a
+  second world renderer. `GpuSceneSurface` owns the WebGL context and pages.
+- **Review raster stays.** Immutable candidate images and `ReviewRasterBackend`
+  are outside retirement. Never regenerate frozen approval pixels to match play.
+- **One presentation evaluation.** Cameras share collection, mesh poses,
+  shadow shapes, simulation, prediction and replication.
+- **Device claims need device runs.** Local SwiftShader and hardware Chromium
+  runs do not establish hosted Linux, phone, Deck or headset performance.
 
 ## Choosing the view
 
-Since 2026-11-17 the unified top-down view is the only view players are
-offered (owner: "ready to be promoted to default entirely"). The Options choice
-**Pixel 3D top-down view** and its saved device setting are gone; a device that
-had saved the classic view now gets the unified one. It had been the default
-since 2026-11-16 and an opt-in earlier the same day.
+The unified scene is mandatory, including software WebGL. The player-facing
+choice was removed in `71f1e81d`; 253 removes `r_topdown3d`, the classic-view
+Debug checkbox, the software fallback and `?rooms3d=0`. Retired `?view=fixed`
+links now get unified drawing. `?view=fps`, per-seat first-person selection and
+camera settings still choose cameras on this scene.
 
-The fixed view remains in the code as a fallback and a development tool until
-the [retirement inventory](#retirement-inventory) is cleared:
-
-- Where WebGL is a software rasteriser (SwiftShader, llvmpipe: `softwareWebGl`
-  from the WebGL2 probe) the fixed view still stands in. That includes the
-  browser suite's headless Chromium; `tests/unified-topdown.spec.ts` asks for
-  the unified view explicitly. The previously reported threefold slowdown is
-  not reproduced by the [paired software-GPU investigation](#software-webgl-investigation-2026-11-17).
-  The first full suite on 2026-11-16 after the
-  default passed 553 of 560; seven failures also reproduced on that session's
-  starting commit, and the follow-up
-  [browser-suite repair](testing.md#local-validation) fixed them.
-- `?view=fixed` (or `2d`) and `?view=topdown3d` choose for one load; specs that
-  instrument the fixed backend pin `view=fixed` ([inventory](#retirement-inventory)).
-- The debug panel's **Unified top-down 3D** (**F3**, or **More → Debug**) and
-  `/r_topdown3d 1` / `0` in the console switch the current load.
+Loading, module failure and lost graphics show an opaque UI frame. Restoring
+WebGL resumes the scene without restarting the world. A failed module can be
+retried with the existing Save and reload action. No world raster draws beneath
+these frames.
 
 First-person and driving fog use the selected fixed view distance: Near 400,
 Medium 800 or Far 1600 world pixels. Since 2026-11-16, missing terrain never
@@ -144,7 +122,9 @@ Numbers are from the parity probe
 ([251](../tactical/251-top-down-camera-parity-and-merged-meshes.md#3b--delivered-2026-11-14),
 `node scripts/first-person/parity.mjs --headed`) in `city`, `woods` and `crowd`
 on the Mac. "Overlap" is the share of a kind's pixels that both renderers draw.
-Run the probe again when a row changes state. `--scenes=hills` raises ground first. The solid props and grass rows
+These measurements are historical: 253 retires the comparison renderer and
+probe. Current regressions exercise the unified scene directly. The historical
+`--scenes=hills` raised ground first. The solid props and grass rows
 were measured on 2026-11-15; the other rows are 251's.
 
 | Item | State | Notes |
@@ -166,14 +146,14 @@ were measured on 2026-11-15; the other rows are 251's.
 | Body shadows | Decided | Owner decision, 2026-11-16: top-down keeps the sun's shadows as well as contact shadows (`?sun3d=0` / `r_sun3d 0` turns the sun off for comparison). Sprites with a shadow but no depth-pass shape (gems, colliderless bodies) take the fixed view's plain oval at their feet (`plainShadow`), as every body does in rooms. Before: 3D has sun shadows and contact shadows; the fixed view has the deferred depth pass. The two are not comparable (340–6,800 pixels against 5,500–72,000). Choose one look for top-down. The fixed view's player shadow is hidden under the sprite in play ([renderer film](#renderer-film)). Since 2026-11-16 the sun's map follows the top-down zoom (`sunMapScale`): still 2,048 texels, but one texel is 1, 2, 4 or 8 world pixels so the shaded square covers the view and the tall faces south of it (scale 2 at 0.25×, 4 at 0.1× on 1,280 × 800); the snap step, fade and sampling offsets grow with it. First person keeps scale 1 |
 | Cutaways, slab fades, roof visibility | Done for the top-down camera | 2026-11-16: overhead decks (bridge decks and ramp ends, garage levels: `isOverheadDeck`) are each their own mesh and fade to `REVEAL_OPACITY` over the seat's body with the fixed view's rule (`surfaceDisplay`) and the view's own fades. Unit-tested on the rail-crossing recipe and seen in the world geometry lab (`lab-capture.mjs crossing trackside`): the south ramp fades over the player as in the fixed view. Ground-built slabs (motocross) occlude by depth instead. Since 2026-11-16 room props (tree houses: parts with an inside and an outside `view`) swap pictures with the fixed view's rule (`observerInsideRoom`): top-down, each picture's pieces stand on the depth planes the fixed view sorts them by (`appendPiecePlane`: upright at their row, or flat on the deck), the inside one while the view's body is in the cabin; first person keeps the volumes. The tree-house lab (`lab-capture.mjs tree-house ground|inside`) matches the fixed view both ways apart from sun shadows; before, its 120 px deck box wore shifted artwork above the cabin |
 | Rooms shown roofless | Done for play | 2026-11-16: the top-down 3D view draws rooms as the fixed view's picture (`FirstPersonRoomScene` with `topDown`): the floor raster on the floor; an editable room's walls in the fixed view's two-row bands (`wallBands`), each upright at its sort row with its rows below that lying on the floor, so bodies sort against walls as in the fixed view; a legacy room's walls on the floor, behind everything, as the fixed view draws them. Furniture stands as its artwork at its anchor row (rows below lie on the floor), rugs lie on the floor lifted along the view ray, and bodies take the fixed view's plain oval shadows (rooms have no depth pass). First person keeps full walls (230 slice 2). Seed-2026 apartment and shop: static content identical to the fixed view (`scripts/first-person/room-capture.mjs`; what differs is animation phase and shadow edges). `?rooms3d=0` hands rooms back to the fixed view. Room labs (`LabView` with an interior) stay on the fixed view |
-| Tow and bed groups posed together | Done for the top-down camera; missing elsewhere | 2026-11-16: a body's image holds its towed car and bed contents, posed as the fixed view poses them. First person and headset views: 229 limit, members draw at their own poses |
+| Tow and bed groups posed together | Done top-down; other cameras accepted for retirement | 2026-11-16: a body's image holds its towed car and bed contents, posed as the fixed view poses them. First person and headset views: members draw at their own poses (229 limit); owner accepted the flat-ground mesh comparison on 2026-11-17 for retirement |
 | Emergency lights and flashing sprites | Done | 2026-11-16: mesh vehicles flash through their lens materials, as meshes and as pixel images (lit bodies are drawn each frame, not cached). A vehicle drawn as its sprite gets the fixed view's 4 × 2 lamp in the effects draw (`emergencyLamp`). Invincibility flashes hide the card, as in the fixed view |
 | Excavations (garage ramps below ground) | Partial | 2026-11-17: an excavation's roof (`excavationCeilings`) is an overhead deck although it lies at ground level, so it fades over a body on the dug floor with the fixed view's rule; seen in the garage lab (`lab-capture.mjs garage garage`). The owner prefers the 3D view's sun shadows there. Still open: the fixed view hides the dug floor while the roof is opaque and the observer is outside; the 3D scene relies on ground to cover it, and the lab has none. Whether real ground gets a hole over a ramp is not checked: no generated world has a garage |
-| Building mode and editor overlays | Done | 2026-11-16: building mode (`EditScene`) draws through the unified top-down view whenever play would (same `renderFirstPerson` path, seat 0 alone), outdoors and in rooms. Its overlays (tile grid, cursor and brush shapes, elevation tint, pattern and room previews, remote cursors) are the same overlay items, drawn on the UI canvas above the 3D view (`RenderHost.drawUiOverlay`), so they sit above bodies; the fixed view draws them between terrain and bodies outdoors. Seed-2026 condo street and apartment room: identical to the fixed view apart from the sun's shadows (`scripts/first-person/edit-capture.mjs [--room]`). A seat in first person edits through the fixed view. The prop editor scene (`PropEditorScene`) keeps the fixed view |
+| Building mode and editor overlays | Done | 2026-11-16: building mode (`EditScene`) draws through the unified top-down view whenever play would (same `renderFirstPerson` path, seat 0 alone), outdoors and in rooms. Its overlays (tile grid, cursor and brush shapes, elevation tint, pattern and room previews, remote cursors) are the same overlay items, drawn on the UI canvas above the 3D view (`RenderHost.drawUiOverlay`), so they sit above bodies; the fixed view draws them between terrain and bodies outdoors. Seed-2026 condo street and apartment room: identical to the fixed view apart from the sun's shadows (`scripts/first-person/edit-capture.mjs [--room]`). Since 253, a first-person seat edits through the unified top-down camera, and `PropEditorScene` uses the same scene with collision guides above it |
 | Picking, tap and hold destinations | Done for the top-down camera | 251: it is the fixed view's own camera, so the fixed view's unprojection, markers and tap destinations are used unchanged. Cameras that turn (orbit, XR) still need a ray against the 3D ground |
-| Split-screen regions and diagonal masks | Done for play | Rectangular regions done (249), also for top-down 3D views. Play only lays out one view, two side by side or a 2×2 grid (`seatLayout`); the diagonal layout is used only by the GPU region probe, where a 3D view falls back to the fixed view. Not a retirement blocker unless play adopts it |
+| Split-screen regions and diagonal masks | Done for play | Rectangular regions done (249), also for top-down 3D views. Play only lays out one view, two side by side or a 2×2 grid (`seatLayout`); the unused diagonal GPU region probe was retired in 253. Play has no diagonal layout |
 | Door overlays and realm transitions | Done | 2026-11-16: the door-opening sprites (`DoorPresentation.appendOverlays`) join the 3D view's collection, and bodies crossing a door are the same presented copies as in the fixed view. A realm change resets the 3D scene's world |
-| Labs, explorer and renderer probes | Partial | 2026-11-16: labs on `LabView` (Workshop world geometry, traffic, parking, natural landscapes, characters, the driving bench) draw through the unified top-down view by default since play's default changed, by the game's own path (`renderTopDown3d` and `drawSeen` in `firstPersonPlay.ts`: one collection, pixel grid, grass, effects and cutaway); `?view=fixed` on the Workshop URL pins the classic view. A hook's `overlay` drawing goes on the UI canvas above the 3D view. Room labs and labs with an `underlay` stay fixed; a fixture without terrain shows its background colour. `scripts/first-person/lab-capture.mjs` captures a lab both ways. The explorer, the terrain blend study and the renderer lab's probes still draw through the fixed backend: see [retirement inventory](#retirement-inventory) |
+| Labs, explorer and renderer probes | Migrated/retired in 253 | All `LabView` consumers, including illustrated rooms and grid underlays, use the shared scene. Explorer tiles and the terrain blend study use its non-simulating `TopDownPreview` host. Fixed-only renderer lab/probes and parity/film captures are removed. Room/edit capture scripts capture unified drawing only; old comparison measurements below remain historical |
 | Context loss recovery | Done | 249 phase 1a; merged meshes re-upload (251) |
 
 Settled, owner 2026-11-17: in the `crowd` scene, cars parked north of the shop
@@ -566,29 +546,30 @@ Three owner decisions, in order. Each needs the evidence listed.
 
 ## Retirement inventory
 
-2026-11-16, after the default changed: what still draws through the fixed GPU
-backend (`GpuRenderBackend` world drawing), and what each needs before gate 3.
-The fixed renderer was not removed: gate 3 needs a period as the default without
-reported regressions, and the rows below are not all moved.
+253 migrates the following consumers; its execution record owns validation.
+The original inventory supplied the scope rather than permission to remove
+shared image resources.
 
-| Consumer | Today | Before retirement |
-| --- | --- | --- |
-| Play, classic choice | Options choice removed 2026-11-17; `?view=fixed` and `r_topdown3d 0` remain for specs and comparison | Remove with the pinned specs |
-| Software WebGL (SwiftShader, llvmpipe), the browser suite included | Classic view unless the unified one is chosen; paired local SwiftShader measurements below do not reproduce the claimed threefold slowdown | Migrate the suite deliberately and validate hosted Linux before removing this fallback |
-| Play fallbacks | The fixed view draws a view the 3D scene cannot: while its module loads or after it failed, graphics lost, a diagonal split-screen mask (probe only), `?rooms3d=0` | A 3D-only answer for each (a loading frame, a lost-context frame) |
-| Building mode with a seat in first person | Fixed view | Top-down 3D for that seat, or edit from first person |
-| Prop editor (`PropEditorScene`) | Fixed view | Move to the 3D scene or retire |
-| Room labs (`LabView` with `interior`: furniture playtest) | Fixed view | Play's top-down room form (`FirstPersonRoomScene`) for the lab's furnished room |
-| Labs with an `underlay` (outdoor geometry test's grid) | Fixed view | Draw the underlay in the 3D scene (a ground grid), as surface grids are |
-| World explorer tiles (`TilePreview`) | Fixed backend on an offscreen canvas | Draw tiles with the 3D scene's top-down camera, or keep a raster path |
-| Workshop terrain blend study (`TerrainBlendPreview`) | Fixed backend | The 3D ground, or the review raster |
-| Renderer lab probes (`renderer-lab.html`: registration, sprite seams, deferred shadows, surface decals, vehicle depth, camera stability, view regions) and `gpu-renderer.spec.ts` | Test the fixed backend itself | Retire with it; keep the parity probe until then |
-| Parity probe and film (`RendererParityProbe`, `parity.mjs`, `film.mjs`) | Draw both renderers | Retire with the fixed view |
-| Browser specs that instrument the fixed backend's scene pass or its vehicle-mesh counters (`gpu-renderer`, `jump-park`, `roadkill`, `train-recovery`, `vehicle-geometry`, `world-geometry` cutaway, `terrain-pacing`) | Pinned to `view=fixed` (2026-11-16); on GPU Chromium they would otherwise get the unified view | Unified-view equivalents (the 3D frame's collected items and body images), then retire the pins |
-| CPU terrain rasteriser and terrain pages | Shared: the 3D ground wears its chunk images | Stays |
-| Review raster (`ReviewRasterBackend`), showcases, patterns, Workshop candidates | Outside this work | Stays |
+| Consumer | Retirement change |
+| --- | --- |
+| Play/software WebGL | Always unified; software smoke asserts an actual 3D world frame |
+| Loading/failure/context loss | UI frames; automatic scene recovery after context restoration |
+| Building with a first-person seat | Temporarily use that seat's top-down camera, retaining its look for Play |
+| Prop editor | Shared scene over its editable prop geometry; collision guides remain UI |
+| Room labs | Shared room scene with wall bands and anchor-placed furniture |
+| Grid/underlay labs | Bounded diagnostic texture on a ground plane behind bodies |
+| Explorer tiles | Offscreen `TopDownPreview`, copied into the map at device pixels |
+| Terrain blend study | The same preview over its production terrain rasters |
+| Fixed-counter browser specs | Unified presented-sprite hooks, view counts and shared page-resource observations |
+| Renderer lab/fixed-only probes | Retired with their fixed sprite/shadow/decal/composition subjects |
+| Parity probe/film | Retired; no second world renderer to compare |
+| CPU terrain rasters, page atlas, vehicle images | Retained shared resources |
+| Review raster and immutable snapshots | Retained independently; all 2,130 candidate pixel identities unchanged at the first migration checkpoint |
 
 ## Software WebGL investigation (2026-11-17)
+
+Historical step-2 checkpoint, before the retirement implementation in 253.
+The fixed fallback described in this checkpoint is subsequently removed.
 
 Owner request: remove the player-facing choice and commit it, then investigate
 the software-GPU cost before retiring the fixed renderer. The choice removal is
@@ -688,18 +669,14 @@ changed by this investigation.
 
 ## Next
 
-Item order after the default (2026-11-16):
-
-- **Owner and child play review** of the unified default, the one part of gate 2
-  not yet done. Reports of regressions decide whether the default holds.
-- **Checklist rows still open:** the rest
-  of excavations (the dug floor seen from outside, a hole in real ground), tow
-  and bed groups in first person. Each is either fixed or waived by the owner. Sprite edges and the standing cards' one-pixel offset were waived on
-  2026-11-17.
-- **Retirement inventory** above: move or retire each fixed consumer; then gate
-  3 after a period as the default.
-- **Owner checks in the headset**
-  ([252](../tactical/252-xr-on-the-shared-scene.md#owner-checks-on-the-headset)):
-  the controller mapping, comfort in first person, the tabletop's placement and
-  scale, and the Resume flow.
-- 230's orbit camera and stereo on the page can land at any time.
+- Finish 253's broad local and hosted-Linux qualification; the retirement
+  implementation is already on the unified scene.
+- Family play review remains useful for feel and device regressions. No child
+  approval is inferred from the owner's retirement authorization.
+- Excavation floor visibility from outside and a real generated garage remain
+  separate content follow-ups. Tow/bed posing in first person was accepted for
+  retirement by the owner on 2026-11-17; that review used a flat-ground mesh
+  stand-in, not a captured first-person ramp traversal.
+- Owner headset checks remain in [252](../tactical/252-xr-on-the-shared-scene.md#owner-checks-on-the-headset):
+  controller mapping, comfort, tabletop placement/scale and Resume behavior.
+- 230's orbit camera and page stereo remain independent camera work.

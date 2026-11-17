@@ -13,11 +13,9 @@ import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import type { TerrainRenderWorld } from "../rendering/TerrainPresentation.js";
 import type { TerrainPreparationView } from "../rendering/TerrainResidency.js";
 import type { RenderRegion } from "../rendering/ViewLayout.js";
-import { WorldRasterFrame } from "../rendering/WorldRasterFrame.js";
 import type { World } from "../world/World.js";
 import type { View } from "./View.js";
 
-const scope = new WorldRasterFrame();
 const preparation: { view: View["camera"]; visible: TerrainPreparationView["visible"] }[] = [];
 
 /**
@@ -59,26 +57,17 @@ export function renderViews(
           preparation.push({ view: camera, visible: view.interestRange() });
           continue;
         }
-        // The world frame's own range: pixel-snapped, with the raster guard.
-        scope.begin(camera);
-        preparation.push({ view: camera, visible: camera.getVisibleChunkRange() });
-        scope.end();
+        preparation.push({ view: camera, visible: view.interestRange() });
       }
       prepareViewTerrain(host.renderer, preparation, terrain.world, terrain.pacing);
     } finally {
-      scope.end();
       preparation.length = 0;
     }
   }
   for (let index = 0; index < views.length; index++) {
     const view = views[index];
     if (!view || !fixed.includes(view)) continue;
-    host.beginView(view.camera, view.region);
-    try {
-      draw(view, index);
-    } finally {
-      host.endView();
-    }
+    draw(view, index);
   }
 }
 

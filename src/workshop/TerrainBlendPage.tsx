@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router";
 import { type GameAssets, loadTerrainAssets } from "../assets/GameAssets.js";
 import type { BaseFill } from "../autotile/BlendGraph.js";
 import { ALL_TERRAIN_IDS, TerrainId, toBaseTerrainId, VariantId } from "../autotile/TerrainId.js";
-import { GpuRenderBackend } from "../rendering/GpuRenderBackend.js";
+import { TopDownPreview } from "../rendering/TopDownPreview.js";
 import { drawStudySamples, drawStudyStack, drawTerrainStudy } from "./TerrainBlendPreview.js";
 import {
   inspectStudyTile,
@@ -37,7 +37,7 @@ export default function TerrainBlendPage() {
   const [error, setError] = useState("");
   const gpuCanvas = useRef<HTMLCanvasElement>(null),
     sampleCanvas = useRef<HTMLCanvasElement>(null);
-  const gpu = useRef<GpuRenderBackend | null>(null);
+  const gpu = useRef<TopDownPreview | null>(null);
   const study = useMemo(
     () => terrainStudy(example.id, foreground, background, bridges),
     [example.id, foreground, background, bridges],
@@ -55,11 +55,11 @@ export default function TerrainBlendPage() {
   useEffect(() => {
     let active = true;
     if (!gpuCanvas.current) return;
-    let renderer: GpuRenderBackend;
+    let renderer: TopDownPreview;
     try {
       // Each effect owns its GPU canvas, including React's setup/cleanup probe.
       // The visible canvas is a snapshot of the completed GPU frame.
-      renderer = new GpuRenderBackend(document.createElement("canvas"));
+      renderer = new TopDownPreview(document.createElement("canvas"));
     } catch (e) {
       setError(String(e));
       return;
@@ -71,7 +71,7 @@ export default function TerrainBlendPage() {
           closeAssets(loaded);
           return;
         }
-        renderer.configureAssets(loaded, STUDY_GRAPH);
+        renderer.setAssets(loaded, STUDY_GRAPH);
         setAssets(loaded);
       })
       .catch((e: unknown) => {
@@ -97,7 +97,7 @@ export default function TerrainBlendPage() {
       canvas.width = canvas.height = study.size * 16;
       const ctx = canvas.getContext("2d");
       if (!ctx) throw Error("Terrain snapshot unavailable");
-      ctx.drawImage(gpu.current.surface.canvas, 0, 0);
+      ctx.drawImage(gpu.current.renderer.surface.canvas, 0, 0);
       drawStudySamples(sampleCanvas.current, study);
       setError("");
     } catch (e) {

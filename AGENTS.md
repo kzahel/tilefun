@@ -43,12 +43,12 @@ Single-player authority runs in a Worker using the shared server implementation;
 prediction and rendering remain on the main thread. Read
 [client/server boundaries](docs/client-server-architecture.md) for ownership.
 
-Renderer work follows [renderer unification](docs/topics/renderer-unification.md):
-the 3D scene is becoming the one world renderer. Its top-down view is the only one
-players are offered since 2026-11-17; the fixed 2D view remains as a fallback
-(software WebGL, the browser suite, `?view=fixed`) until that topic's retirement
-inventory is cleared. Remove it only through that inventory; update the topic's
-tracker when a slice changes state.
+Renderer work follows [renderer unification](docs/topics/renderer-unification.md).
+The unified 3D scene owns interactive worlds; top-down, first person and XR are
+cameras on it. [253](docs/tactical/253-retire-fixed-world-renderer.md) tracks fixed-world
+retirement and qualification. Shared terrain rasters, page atlases, vehicle body
+images and the immutable review raster stay; do not remove them as legacy world
+passes. Update the owning topic when a renderer contract changes.
 
 Engine changes must account for affected embedded labs. Read
 [embedded engine labs](docs/topics/embedded-engine-labs.md) before changing shared

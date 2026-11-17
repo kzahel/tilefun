@@ -3,7 +3,6 @@ import type { GameAssets } from "../assets/GameAssets.js";
 import { TICK_RATE } from "../config/constants.js";
 import { Direction, type Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
-import type { InteriorPresentation } from "../interiors/InteriorPresentation.js";
 import type { OverlayFrame } from "../rendering/OverlayFrame.js";
 import type { RenderHost } from "../rendering/RenderHost.js";
 import { RecordingBackend } from "../rendering/testing/RecordingBackend.js";
@@ -122,9 +121,17 @@ afterEach(() => {
 
 function recordingHost() {
   const renderer = new RecordingBackend(new Map());
+  const uiFrames: import("../rendering/OverlayFrame.js").OverlayDraw[][] = [];
   return {
+    uiFrames,
+    view3d: { draw: () => true } as unknown as NonNullable<RenderHost["view3d"]>,
     renderer,
-    uiContext: {} as CanvasRenderingContext2D,
+    uiContext: {
+      save() {},
+      restore() {},
+      fillRect() {},
+      fillText() {},
+    } as unknown as CanvasRenderingContext2D,
     setAssets: vi.fn(),
     resize: vi.fn(),
     beginFrame: vi.fn(),
@@ -132,9 +139,11 @@ function recordingHost() {
     endWorld: vi.fn(),
     beginView: vi.fn(),
     endView: vi.fn(),
-    drawUiOverlay: vi.fn(),
+    drawUiOverlay: vi.fn((items: readonly import("../rendering/OverlayFrame.js").OverlayDraw[]) => {
+      uiFrames.push(items.map((i) => ({ ...i })));
+    }),
     dispose: vi.fn(),
-  } satisfies RenderHost;
+  } satisfies RenderHost & { uiFrames: import("../rendering/OverlayFrame.js").OverlayDraw[][] };
 }
 
 /** A lab on a focused 960×640 canvas, its recipe world on an in-process Worker. */
@@ -294,11 +303,10 @@ it("plays with the game's controls: predicted steps, a following camera and the 
   // Drawn through the shared lab frame: terrain prepared, a clear, terrain, the
   // replicated scene, then the touch controls on the UI layer.
   expect(host.beginFrame).toHaveBeenCalled();
-  expect(host.beginView).toHaveBeenCalledWith(lab.camera, { x: 0, y: 0, width: 960, height: 640 });
+  expect(host.beginView).not.toHaveBeenCalled();
   expect(host.renderer.preparations).toBeGreaterThan(0);
   const kinds = host.renderer.passes.map((pass) => pass.kind);
-  expect(kinds[0]).toBe("clear");
-  expect(kinds).toContain("scene");
+  expect(kinds).toEqual([]);
   expect(draw).toHaveBeenCalledWith(host.uiContext);
   // Each frame presents the replica and ends it; the draw sees the presented
   // player as its collect observer, the page's visibility and the lab's light time.
@@ -458,24 +466,13 @@ it("draws the page's underlay over the terrain and overlay over the scene, then 
   await until(frame, () => expect(lab.client.clock?.running).toBe(true));
   key("KeyD");
   for (let i = 0; i < 4; i++) frame();
-  const { passes, views } = host.renderer;
-  /** One frame's passes, each with the camera it was submitted for. */
-  const drawFrame = () => {
-    const start = passes.length;
-    frame();
-    return passes.slice(start).map((pass, i) => ({ pass, view: views[start + i] }));
-  };
-  const walking = drawFrame();
-  expect(walking.map(({ pass }) => pass.kind)).toEqual(["clear", "overlay", "scene", "overlay"]);
-  const [, under, , over] = walking;
-  expect(under?.pass).toMatchObject({ items: [{ kind: "line", width: 960, stroke: "#afc0ad" }] });
-  // Each hook starts from an empty frame.
-  expect(over?.pass).toMatchObject({
-    items: [
-      { kind: "rect", x: 1, height: 4, stroke: "#3472aa" },
-      { kind: "rect", x: 5, height: 8, fill: "#f4b032" },
-    ],
-  });
+  frame();
+  const over = host.uiFrames.at(-1);
+  expect(over).toMatchObject([
+    { kind: "rect", x: 1, height: 4, stroke: "#3472aa" },
+    { kind: "rect", x: 5, height: 8, fill: "#f4b032" },
+  ]);
+  expect(host.renderer.passes).toEqual([]);
   // The hooks see the frame's presented camera, player and sub-tick fraction.
   const shown = drawn.at(-1);
   const last = seen.at(-1);
@@ -485,14 +482,14 @@ it("draws the page's underlay over the terrain and overlay over the scene, then 
   expect(last?.alpha).toBe(shown?.options.alpha);
   expect(last?.alpha).toBeLessThan(1);
   expect(last?.x).toBe((shown?.presented.position.wx ?? Number.NaN) + 40);
-  expect(over?.view).toMatchObject({ x: last?.x, y: -20 });
   expect(shown?.options.pixelExactShadows).toBe(true);
   // An empty collection submits nothing.
   grid = false;
-  expect(drawFrame().map(({ pass }) => pass.kind)).toEqual(["clear", "scene", "overlay"]);
+  frame();
+  expect(host.renderer.passes).toEqual([]);
   // One owned frame, released after each display frame and cleared on dispose.
   const [owned] = frames;
-  expect(new Set(frames)).toEqual(new Set([owned]));
+  expect(new Set(frames).size).toBe(2); // separate ground-underlay and UI-overlay buffers
   expect(owned?.items).toHaveLength(0);
   const clear = vi.spyOn(owned as OverlayFrame, "clear");
   lab.dispose();
@@ -610,7 +607,7 @@ it("resizes the view and its renderer without restarting the world", async () =>
   expect(lab.view.region).toEqual({ x: 0, y: 0, width: 1152, height: 768 });
   expect([lab.camera.viewportWidth, lab.camera.viewportHeight]).toEqual([1152, 768]);
   frame();
-  expect(host.beginView).toHaveBeenLastCalledWith(lab.camera, lab.view.region);
+  expect(host.beginView).not.toHaveBeenCalled();
   // The same Worker and world, still running.
   expect(clear).not.toHaveBeenCalled();
   expect(lab.client.clock?.running).toBe(true);
@@ -688,7 +685,7 @@ it("draws the page's UI over the world and under the controls, and captures a fr
   expect(last?.lab).toBe(lab);
   expect(last?.draws).toBe(drawn.length);
   expect(last?.passes).toBe(host.renderer.passes.length);
-  expect(host.renderer.passes.at(-1)?.kind).toBe("scene");
+  expect(host.renderer.passes).toEqual([]);
   expect(last?.player).toBe(drawn.at(-1)?.presented);
   expect(drawn.at(-1)?.options.room).toBeUndefined();
   // A capture draws one more frame now, without a tick, at the whole step.
@@ -715,37 +712,20 @@ it("draws the page's UI over the world and under the controls, and captures a fr
   expect(() => lab.captureFrame()).toThrow("unavailable for capture");
 });
 
-it("draws an owned room instead of terrain and clears it on dispose", async () => {
-  const presentation = { clear: vi.fn() } as unknown as InteriorPresentation;
-  const placements = [{ id: "bed", asset: "bed", x: 40, y: 32 }];
-  const drawProps = new Set([3]);
-  // The frame's items, read while presented (the scene frame reuses its list).
-  const kinds: string[][] = [];
-  presentInterior.mockImplementation((...args: unknown[]) => {
-    kinds.push((args[4] as { kind: string }[]).map((item) => item.kind));
-  });
-  const { lab, host, frame } = open({
-    terrain: true,
-    interior: { presentation, placements, drawProps },
-  });
+it("passes an owned room to unified drawing instead of preparing outdoor terrain", async () => {
+  const interior = {
+    key: "room",
+    map: { width: 1, height: 1, pixelHeight: 16, cells: [] },
+    shellType: "",
+    furniture: () => undefined,
+  };
+  const { lab, host, frame } = open({ terrain: true, interior });
   await lab.ready;
-  await until(frame, () => expect(presentInterior).toHaveBeenCalled());
-  // The scene's items go to the room's cache, with the frame's camera, in place of the scene pass.
-  const [renderer, camera, room, placed] = presentInterior.mock.calls.at(-1) ?? [];
-  expect(renderer).toBe(host.renderer);
-  expect(camera).toBe(lab.camera);
-  expect(room).toBe(presentation);
-  expect(placed).toBe(placements);
-  expect(kinds.at(-1)).toContain("sprite"); // the player
-  const shown = drawn.at(-1);
-  expect(shown?.options.terrain).toBe(false);
-  expect(shown?.options.room?.drawProps).toBe(drawProps);
-  expect(host.renderer.passes.map((pass) => pass.kind)).not.toContain("scene");
+  frame();
+  expect(drawn.at(-1)?.options.terrain).toBe(false);
+  expect(drawn.at(-1)?.options.draw3d).toBeTypeOf("function");
   expect(host.renderer.preparations).toBe(0);
-  expect(presentation.clear).not.toHaveBeenCalled();
   lab.dispose();
-  lab.dispose();
-  expect(presentation.clear).toHaveBeenCalledTimes(1);
 });
 
 it("reports an authority failure once and releases the view", async () => {

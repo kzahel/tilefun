@@ -118,6 +118,10 @@ export class PropEditorScene implements GameScene {
   readonly transparent = false;
 
   private props: Prop[] = [];
+  private readonly previewWorld = {
+    getChunkIfLoaded: () => undefined,
+    getHeightAt: () => 0,
+  };
   private selectedIndex = 0;
   private wallIndex = -1;
 
@@ -233,36 +237,23 @@ export class PropEditorScene implements GameScene {
   render(alpha: number, gc: GameContext): void {
     gc.camera.applyInterpolation(alpha);
     const { ctx, camera } = gc;
-    gc.beginWorld?.();
-    gc.renderer.submit(camera, { kind: "clear", color: "#5a8a32" });
-    const overlays = gc.sceneFrame.overlays;
-    overlays.begin();
-    try {
-      for (const prop of this.props) {
-        const metadata = gc.spriteCatalog.get(prop.sprite.sheetKey);
-        if (!metadata) continue;
-        const { spriteWidth, spriteHeight, frameCol, frameRow } = prop.sprite;
-        const screen = camera.worldToScreen(
-          prop.position.wx - spriteWidth / 2,
-          prop.position.wy - spriteHeight,
-        );
-        const draw = overlays.next("sprite");
-        draw.sheetKey = prop.sprite.sheetKey;
-        draw.srcX = frameCol * metadata.tileWidth;
-        draw.srcY = frameRow * metadata.tileHeight;
-        draw.srcWidth = spriteWidth;
-        draw.srcHeight = spriteHeight;
-        draw.x = Math.floor(screen.sx);
-        draw.y = Math.floor(screen.sy);
-        draw.width = spriteWidth * camera.scale;
-        draw.height = spriteHeight * camera.scale;
-      }
-      gc.renderer.submit(camera, { kind: "overlay", items: overlays.items });
-    } finally {
-      overlays.release();
-    }
-
-    gc.endWorld?.();
+    const scene = gc.firstPerson?.scene(gc.view);
+    if (scene && gc.view3d)
+      gc.view3d.draw(gc.view.region, (target) =>
+        scene.render(
+          {
+            realm: `prop-editor:${JSON.stringify(this.props.map((p) => [p.collider, p.walls]))}`,
+            world: this.previewWorld,
+            props: this.props,
+            sprites: [],
+            eye: { x: camera.x, y: camera.y, z: 0, yaw: 0, pitch: 0 },
+            topDown: { scale: camera.scale },
+            drawRadius: Math.hypot(camera.viewportWidth, camera.viewportHeight) / camera.scale,
+            background: "#5a8a32",
+          },
+          target,
+        ),
+      );
     drawCollisionBoxes(ctx, camera, [], this.props);
 
     // Highlight selected prop

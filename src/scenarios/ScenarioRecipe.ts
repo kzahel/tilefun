@@ -90,6 +90,9 @@ export const FLAT_SCENARIO = {
   seed: 1,
   preset: "grass",
 } as const;
+/** Stable anonymous identity shared by recipe replication and lab presentation. */
+export const scenarioPropType = (index: number): string => `scenario-prop-${index}`;
+
 /** Check a session's own copy of a recipe and name its props; throws on
  * fixtures the Realm must not open. */
 export function prepareScenarioRecipe(recipe: ScenarioRecipe): void {
@@ -109,7 +112,7 @@ export function prepareScenarioRecipe(recipe: ScenarioRecipe): void {
   if ((recipe.actors?.length ?? 0) > 1024 || (recipe.parkedVehicles?.length ?? 0) > 256)
     throw Error("Scenario actor budget exceeded");
   recipe.props.forEach((prop, index) => {
-    prop.type = `scenario-prop-${index}`;
+    prop.type = scenarioPropType(index);
     for (const c of prop.walls ?? (prop.collider ? [prop.collider] : []))
       if (c.surface) validateSurfacePatch(c.surface, c.width, c.height);
   });

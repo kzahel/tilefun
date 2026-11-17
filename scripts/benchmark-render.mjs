@@ -6,9 +6,8 @@
 //   npm run render:bench -- --headed
 //   npm run render:bench -- --headed --scenes=crowd --zooms=0.25 --query=shadows=projected
 //   npm run render:bench -- --compare=/tmp/before.json
-//   npm run render:bench -- --headed --query=view=fixed   (the classic fixed view)
 //   npm run render:bench -- --software-webgl --query=view=topdown3d
-//     (the browser suite's SwiftShader lane; compare with --query=view=fixed)
+//     (the browser suite's SwiftShader lane; compare with saved reports)
 //
 // Per cell it reports frame cadence, main-thread render/update callbacks, the
 // time inside backend submits (the rest of render is collection and terrain
@@ -87,6 +86,8 @@ if (endpoint && !port && !base) throw Error("--cdp requires a dedicated --port o
 if (attachPage && !(endpoint && base)) throw Error("--attach-page requires --cdp and --base");
 // Extra game URL parameters, e.g. an opt-in renderer path under comparison.
 const query = option("query", "");
+if (["fixed", "2d"].includes(new URLSearchParams(query).get("view")))
+  throw Error("The fixed world renderer is retired; compare with a saved benchmark report instead");
 // Sample a CPU profile of each cell's main thread and print its top self-time
 // functions. Profiled timings are not the unprofiled baseline.
 const profile = process.argv.includes("--profile");
@@ -111,7 +112,6 @@ async function samplePage({ seconds, measureFinish = true }) {
   // By default (since 2026-11-16) and with `--query=view=fps` play is drawn by
   // the 3D scene on the same renderer (248): GPU time and the finish window need
   // no other context, and draw calls come from the view's own count.
-  // `--query=view=fixed` measures the classic fixed view.
   const firstPerson = !!game.firstPerson?.drawing3d;
   const gl = surface?.renderer?.getContext?.();
   const timer = gl?.getExtension("EXT_disjoint_timer_query_webgl2") ?? null;
@@ -225,8 +225,8 @@ async function samplePage({ seconds, measureFinish = true }) {
   };
   const stats = surface?.stats;
   const draws0 = stats?.drawCalls ?? 0;
-  // The fixed view draws vehicle meshes into images outside its batch count; the
-  // 3D scene's own count already includes them.
+  // Native-pixel vehicle images have their own offscreen mesh work; the scene
+  // count includes their final cards.
   const meshCalls0 = game.renderer.meshes?.drawCalls ?? 0;
   const viewCalls = [];
   const sunRedraws0 = firstPerson ? (game.firstPerson.viewStats?.sunRedraws ?? 0) : 0;
@@ -831,7 +831,7 @@ try {
           `    slow frame at ${f.atMs} ms: ${f.frameMs} ms (update ${f.updateMs} in ${f.updates}, render ${f.renderMs}, uploads ${f.uploadPages} pages ${f.uploadKiB} KiB)`,
         );
       console.log(
-        `${name.padEnd(6)} ${String(zoom).padEnd(5)} ${cell.drawing3d ? "3D" : "fixed"} frame ${cell.frameMs.p50}/${cell.frameMs.p95} ms, missed ${cell.missed}/${cell.frames}; render ${cell.renderMs.p50}/${cell.renderMs.p95} (submit ${cell.submitMs.p50}); gpu ${g}; render+finish ${cell.renderFinishMs?.p50 ?? "n/a"}; update ${cell.updateMs.p50}; draws ${cell.drawCallsPerFrame}${cell.meshDrawCallsPerFrame ? ` + ${cell.meshDrawCallsPerFrame} vehicle mesh` : ""}; tick ${cell.workerTickMs?.p50 ?? "?"}; ${cell.entities} entities`,
+        `${name.padEnd(6)} ${String(zoom).padEnd(5)} ${cell.drawing3d ? "3D" : "unavailable"} frame ${cell.frameMs.p50}/${cell.frameMs.p95} ms, missed ${cell.missed}/${cell.frames}; render ${cell.renderMs.p50}/${cell.renderMs.p95} (submit ${cell.submitMs.p50}); gpu ${g}; render+finish ${cell.renderFinishMs?.p50 ?? "n/a"}; update ${cell.updateMs.p50}; draws ${cell.drawCallsPerFrame}${cell.meshDrawCallsPerFrame ? ` + ${cell.meshDrawCallsPerFrame} vehicle mesh` : ""}; tick ${cell.workerTickMs?.p50 ?? "?"}; ${cell.entities} entities`,
       );
     }
   }
