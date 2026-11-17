@@ -412,3 +412,21 @@ describe("an excavation's roof", () => {
     expect(props.some((prop) => isOverheadDeck(prop))).toBe(false);
   });
 });
+
+describe("walls the fixed view never shows", () => {
+  it("are marked so the top-down camera can drop them: a box's east, west and north, not its top and south", () => {
+    const prop = createProp("prop-garden-fountain", 0, 0);
+    const textured: { positions: number[]; uvs: number[]; colors: number[]; unseen?: number[] } = {
+      positions: [],
+      uvs: [],
+      colors: [],
+    };
+    appendPropGeometry({ flat: new TriangleWriter(), textured, lines: undefined }, prop, 0, 0);
+    // Top and south come first, six vertices each; every later vertex is unseen.
+    const runs = textured.unseen ?? [];
+    expect(runs[0]).toBe(12);
+    let marked = 0;
+    for (let i = 1; i < runs.length; i += 2) marked += runs[i] ?? 0;
+    expect(marked).toBe(textured.positions.length / 3 - 12);
+  });
+});

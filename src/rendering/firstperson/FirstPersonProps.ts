@@ -296,6 +296,10 @@ export interface TexturedTriangles {
   uvs: number[];
   /** Linear grey per vertex: the face's baked shade. */
   colors: number[];
+  /** Runs of vertices (first, count) on walls the fixed view never shows: a
+   * box's east, west and north. The top-down camera could only see them from
+   * inside the box, through its artwork's holes, and does not draw them. */
+  unseen?: number[];
 }
 
 /**
@@ -480,6 +484,7 @@ export function appendPropGeometry(
       const [a, b, c, d] = face.map(corner);
       if (!a || !b || !c || !d) return;
       const grey = srgbToLinear(shade);
+      const first = target.positions.length / 3;
       for (const strip of wallStrips(from, to, artLeft, frame.width)) {
         const corners: [Point, number][] = [
           [between(a, b, strip.t0), strip.x0],
@@ -496,6 +501,8 @@ export function appendPropGeometry(
           target.colors.push(grey, grey, grey);
         }
       }
+      target.unseen ??= [];
+      target.unseen.push(first, target.positions.length / 3 - first);
     };
     if (shell && !solid.surface) {
       // Room art paints caps over the footprint, so a projected top would show the

@@ -11,6 +11,9 @@ export interface FacePart {
   readonly positions: ArrayLike<number>;
   readonly colors: ArrayLike<number>;
   readonly uvs?: ArrayLike<number> | undefined;
+  /** Runs of vertices (first, count) the top-down camera does not draw
+   * (`TexturedTriangles.unseen`); they become the `unseen` attribute. */
+  readonly unseen?: readonly number[] | undefined;
   /** Line segments in pairs of points instead of triangles (surface grids). */
   readonly lines?: boolean | undefined;
 }
@@ -87,7 +90,13 @@ export class MergedFaces {
         colors = new Float32Array(vertices * 3),
         uvs = first.uvs ? new Float32Array(vertices * 2) : undefined;
       let at = 0;
+      let unseen: Float32Array | undefined;
       for (const part of bucket.parts.values()) {
+        for (let i = 0; i + 1 < (part.unseen?.length ?? 0); i += 2) {
+          unseen ??= new Float32Array(vertices);
+          const first = at + (part.unseen?.[i] ?? 0);
+          unseen.fill(1, first, first + (part.unseen?.[i + 1] ?? 0));
+        }
         positions.set(part.positions, at * 3);
         colors.set(part.colors, at * 3);
         if (uvs && part.uvs) uvs.set(part.uvs, at * 2);
@@ -97,6 +106,7 @@ export class MergedFaces {
       geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
       geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
       if (uvs) geometry.setAttribute("uv", new THREE.BufferAttribute(uvs, 2));
+      if (unseen) geometry.setAttribute("unseen", new THREE.BufferAttribute(unseen, 1));
       geometry.computeBoundingSphere();
       if (bucket.mesh) {
         bucket.mesh.geometry = geometry;

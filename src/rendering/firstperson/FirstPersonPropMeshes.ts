@@ -90,7 +90,10 @@ export function disposeGroup(group: THREE.Object3D): void {
 
 /** Set per frame: faces drop their compositions' backing (`BACKING_ALPHA`), as
  * the top-down camera does, so what lies behind shows where the fixed view's
- * artwork is empty. First person keeps the backing, so no box shows its inside. */
+ * artwork is empty. First person keeps the backing, so no box shows its inside.
+ * Top-down, a hole would show the inside of the box's north wall, which wears
+ * the south face's picture again (a fountain's basin behind its statue), so
+ * the walls the fixed view never shows (`unseen`) are dropped with the backing. */
 export const ART_HOLES = { value: false };
 
 function artHoles(material: THREE.MeshBasicMaterial): THREE.MeshBasicMaterial {
@@ -100,12 +103,21 @@ function artHoles(material: THREE.MeshBasicMaterial): THREE.MeshBasicMaterial {
   material.onBeforeCompile = (shader, renderer) => {
     shade(shader, renderer);
     shader.uniforms.artHoles = ART_HOLES;
+    shader.vertexShader = shader.vertexShader
+      .replace(
+        "#include <common>",
+        "#include <common>\nattribute float unseen;\nvarying float vUnseen;",
+      )
+      .replace("#include <begin_vertex>", "#include <begin_vertex>\n  vUnseen = unseen;");
     shader.fragmentShader = shader.fragmentShader
-      .replace("#include <common>", "#include <common>\nuniform bool artHoles;")
+      .replace(
+        "#include <common>",
+        "#include <common>\nuniform bool artHoles;\nvarying float vUnseen;",
+      )
       .replace(
         "#include <map_fragment>",
         `#include <map_fragment>
-  if (artHoles && diffuseColor.a < ${((BACKING_ALPHA + 0.5) / 255).toFixed(4)}) discard;`,
+  if (artHoles && (vUnseen > 0.5 || diffuseColor.a < ${((BACKING_ALPHA + 0.5) / 255).toFixed(4)})) discard;`,
       );
   };
   material.needsUpdate = true;

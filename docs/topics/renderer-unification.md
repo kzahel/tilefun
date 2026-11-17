@@ -149,7 +149,7 @@ were measured on 2026-11-15; the other rows are 251's.
 | Item | State | Notes |
 | --- | --- | --- |
 | Framing and registration of actors and vehicles | Done at whole pixels | Actors identical in the city at 1× (3,735 pixels, none different). Vehicles identical at 1× since 2026-11-16 ([vehicles](#vehicles)); they overlapped 95–97% as meshes. Both align best with no move at zooms 1 and 0.25 |
-| Registration of standing cards (trees, posts, forest rows) | Partial | 98% overlap at 1×, best one pixel to the left: the fixed view floors a static sprite's screen edges to whole pixels and the 3D card is rasterised where it falls |
+| Registration of standing cards (trees, posts, forest rows) | Waived | 98% overlap at 1×, best one pixel to the left: the fixed view floors a static sprite's screen edges to whole pixels and the 3D card is rasterised where it falls. Owner, 2026-11-17: does not matter |
 | Solid props (buildings) | Done at 1×; partial zoomed out | 2026-11-15: identical at 1× in the city (28,672 pixels, none different; was 54% overlap) and 97.8% overlap at 0.25× (was 86%), where 12% of shared pixels differ in colour from sampling, as for ground. A building's physical box is now the one its artwork depicts ([building bodies](#building-bodies)). Since 2026-11-16 artwork outside the box is drawn too (`appendLeftover`): the composition minus the volumes' silhouettes, upright at the feet row above it (rooftop and side signs) and lying on the ground below it (the hotel's carpet), so each pixel lands where the fixed view draws it. Top-down faces also drop the average-colour backing of empty artwork (`ART_HOLES`), so ground shows where the fixed view shows ground (beside the hotel's carpets); first person keeps it. Mac city draws unchanged (27 at 1×, 72 at 0.25×) |
 | Ground artwork (terrain pages, road markings, paths) | Done at 1×; partial zoomed out | Identical at 1×, including the seeded pond shoreline ([pond comparison](#pond-shoreline-comparison)). At 0.25× in the city 1.1% of pixels differ on crosswalk stripes and lane dashes: four samples per pixel against the fixed view's one. The top-down camera still needs its own sampling rule |
 | Grass blades | Done for the top-down camera | 2026-11-15: 99% overlap at 1× in all three scenes (city 1,215 against 1,222 pixels, woods 30,252 against 30,382), about 1% of shared pixels a different colour; 99% at 0.4× and 0.5×, inside the zoom fade. What is left is the edge pixels of leaning blades. See [grass](#grass). First person and headset views draw none |
@@ -175,9 +175,17 @@ were measured on 2026-11-15; the other rows are 251's.
 | Labs, explorer and renderer probes | Partial | 2026-11-16: labs on `LabView` (Workshop world geometry, traffic, parking, natural landscapes, characters, the driving bench) draw through the unified top-down view by default since play's default changed, by the game's own path (`renderTopDown3d` and `drawSeen` in `firstPersonPlay.ts`: one collection, pixel grid, grass, effects and cutaway); `?view=fixed` on the Workshop URL pins the classic view. A hook's `overlay` drawing goes on the UI canvas above the 3D view. Room labs and labs with an `underlay` stay fixed; a fixture without terrain shows its background colour. `scripts/first-person/lab-capture.mjs` captures a lab both ways. The explorer, the terrain blend study and the renderer lab's probes still draw through the fixed backend: see [retirement inventory](#retirement-inventory) |
 | Context loss recovery | Done | 249 phase 1a; merged meshes re-upload (251) |
 
-Known disagreement to settle: in the `crowd` scene, cars parked north of the
-shop row draw over the roofs in the fixed view and behind the buildings in the
-3D scene.
+Settled, owner 2026-11-17: in the `crowd` scene, cars parked north of the shop
+row draw over the roofs in the fixed view and behind the buildings in the 3D
+scene. The 3D scene is correct; the fixed view is not matched. Where the two
+views differ, the unified one is the reference from here on.
+
+Fixed 2026-11-17: a solid prop whose artwork has holes (the park fountain's
+statue) showed the inside of its box top-down: the north wall, wearing the
+south face's picture again, stood dark behind the statue. Walls the fixed view
+never shows (east, west, north: `unseen`) are not drawn by the top-down camera.
+City solids unchanged (identical at 1×). The fountain's sun shadow is still its
+box's.
 
 ### Renderer film
 
@@ -622,10 +630,10 @@ Item order after the default (2026-11-16):
 
 - **Owner and child play review** of the unified default, the one part of gate 2
   not yet done. Reports of regressions decide whether the default holds.
-- **Checklist rows still open:** standing cards one pixel off at 1×, the rest
+- **Checklist rows still open:** the rest
   of excavations (the dug floor seen from outside, a hole in real ground), tow
-  and bed groups in first person, the `crowd` parked-cars disagreement. Each is
-  either fixed or waived by the owner. Sprite edges were waived on 2026-11-17.
+  and bed groups in first person. Each is either fixed or waived by the owner. Sprite edges and the standing cards' one-pixel offset were waived on
+  2026-11-17.
 - **Retirement inventory** above: move or retire each fixed consumer; then gate
   3 after a period as the default.
 - **Owner checks in the headset**
