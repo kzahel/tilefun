@@ -2,7 +2,7 @@
 
 Topic: startup-loading
 Status: visible HTML loading shell and actual startup stages delivered.
-Updated: 2026-11-17.
+Updated: 2026-11-18.
 
 The main page includes its loading UI and styles directly in HTML, before any
 application JavaScript or images arrive. A small bootstrap loads the game module
@@ -83,3 +83,26 @@ transferred about 425 KB across the many revalidated development requests.
 With the same HTTPS origin pointed directly at the proxy over LAN, three paired
 runs had medians of 2.85 s cold and 1.66 s on reload. Bundled delivery would
 reduce request round trips on the public path.
+
+## Versioned assets in Vite development (2026-11-18)
+
+The play bootstrap fetches a revalidated manifest alongside the game module
+graph. It contains the content hashes of the startup images, sounds and two
+atlas indexes. The game uses these hashes in the asset URLs. Vite serves the
+matching bytes with a one-year immutable cache policy. A new asset edit gets
+a new URL on the next navigation, alongside any unchanged cached assets.
+Assets use their ordinary URLs if the manifest is unavailable or if a file
+changes between the manifest and the asset request. Development modules keep
+Vite's normal validation, and the player still chooses **Save and reload**.
+
+A cold and reload pair through live public HTTPS reached play in 29.7 s and
+11.3 s. Cold time was comparable to the previous 29.8 s. On reload, Chromium
+reused all 474 versioned assets from cache, and the artwork stage took 0.94 s
+compared with 15.5 s in the earlier HTTPS run. The full reload previously took
+26.9 s. On the direct LAN HTTPS route, three paired runs had reload medians of
+1.51 s before and 1.70 s after. The cache eliminated roughly 470 network
+operations per reload on that route, where request latency is already low.
+
+The HTTP integration test verifies immutable responses, manifest revalidation,
+new hashes after a same-size edit, and rejection of stale versions and escaped
+symlinks. The public HTTPS trace verifies browser cache reuse.

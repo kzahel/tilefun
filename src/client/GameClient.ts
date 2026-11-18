@@ -1,3 +1,4 @@
+import { startupAssetCacheReady } from "../assets/AssetLoader.js";
 import { loadAtlasIndex } from "../assets/AtlasIndex.js";
 import { type GameAssets, loadGameAssets } from "../assets/GameAssets.js";
 import { generateGemSprite } from "../assets/GemSpriteGenerator.js";
@@ -376,8 +377,8 @@ export class GameClient implements GameTestHooks {
       "Loading artwork and sounds…",
       "Preparing images, sounds and tile data.",
     );
-    // Load all assets — BlendGraph is deterministic, construct locally
     const blendGraph = new BlendGraph();
+    await startupAssetCacheReady;
     const [assets] = await Promise.all([
       loadGameAssets(blendGraph, showStartupAssets),
       loadAtlasIndex(),

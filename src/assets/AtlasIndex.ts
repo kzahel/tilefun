@@ -1,3 +1,7 @@
+import { fetchAsset } from "./AssetLoader.js";
+
+export const ATLAS_INDEX_PATH = "data/me-atlas-index.json";
+
 export interface AtlasSprite {
   x: number;
   y: number;
@@ -39,7 +43,7 @@ function buildKey(theme: string, name: string): string {
 /** Fetch and inflate the compact atlas index. Must be called before using other functions. */
 export async function loadAtlasIndex(): Promise<void> {
   if (_sprites) return; // already loaded
-  const res = await fetch("data/me-atlas-index.json");
+  const res = await fetchAsset(ATLAS_INDEX_PATH);
   if (!res.ok) throw new Error(`Failed to load atlas index: ${res.status}`);
   const compact: CompactAtlasIndex = await res.json();
 

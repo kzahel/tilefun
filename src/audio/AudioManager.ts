@@ -1,3 +1,4 @@
+import { fetchAsset } from "../assets/AssetLoader.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { VehicleHornMessage } from "../shared/protocol.js";
 import { emergencyEnabled, isEmergencyVehicle, sirenStyle } from "../traffic/EmergencyVehicle.js";
@@ -393,17 +394,14 @@ export class AudioManager {
     return this.ctx?.state === "running";
   }
 
-  /**
-   * Preload audio files by fetching and decoding them.
-   * Entries with keys that are already loaded are skipped.
-   */
+  /** Fetch and decode any sounds missing from the buffer cache. */
   async preload(manifest: { key: string; path: string }[]): Promise<void> {
     const ctx = this.ensureContext();
     const pending: Promise<void>[] = [];
     for (const { key, path } of manifest) {
       if (this.buffers.has(key)) continue;
       pending.push(
-        fetch(path)
+        fetchAsset(path)
           .then((res) => {
             if (!res.ok) throw new Error(`Failed to fetch ${path}: ${res.status}`);
             return res.arrayBuffer();

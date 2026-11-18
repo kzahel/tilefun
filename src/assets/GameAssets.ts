@@ -181,6 +181,20 @@ export const SPRITE_MANIFEST: SpriteAsset[] = [
   { key: "grass-blades", path: "assets/sprites/grass-blades.png", w: 8, h: 8 },
 ];
 
+const GAME_EXTERIORS_ATLAS = "assets/tilesets/me-complete.webp";
+const GAME_INTERIORS_ATLAS = "assets/tilesets/modern-interiors-atlas.webp";
+const OBJECTS_ATLAS = "assets/tilesets/objects.png";
+
+export function gameImageAssetPaths(blendGraph: BlendGraph): string[] {
+  return [
+    ...blendGraph.allSheets.map((desc) => desc.assetPath),
+    ...SPRITE_MANIFEST.map((entry) => entry.path),
+    GAME_EXTERIORS_ATLAS,
+    GAME_INTERIORS_ATLAS,
+    OBJECTS_ATLAS,
+  ];
+}
+
 /**
  * Load all game assets (blend sheets, entity sprites, tileset).
  * Returns sheets map, indexed blend sheet array, and tile variants.
@@ -200,7 +214,7 @@ export async function loadTerrainAssets(
   const [blendImages, completeImg, objectsImg] = await Promise.all([
     Promise.all(blendDescs.map((desc) => load(desc.assetPath))),
     load(completeAtlasPath, completeAtlasPath.endsWith(".webp") ? webpAtlasOptions : undefined),
-    load("assets/tilesets/objects.png"),
+    load(OBJECTS_ATLAS),
   ]);
   const sheets = new Map<string, Spritesheet>();
   const blendSheets: Spritesheet[] = [];
@@ -231,7 +245,7 @@ export async function loadGameAssets(
   const loaded = () => onProgress?.(++completed, total);
   onProgress?.(0, total);
   const [terrain, spriteImages, modernInteriorsImg] = await Promise.all([
-    loadTerrainAssets(blendGraph, loaded, "assets/tilesets/me-complete.webp"),
+    loadTerrainAssets(blendGraph, loaded, GAME_EXTERIORS_ATLAS),
     Promise.all(
       SPRITE_MANIFEST.map(async (entry) => {
         const image = await loadSpriteAsset(entry);
@@ -239,7 +253,7 @@ export async function loadGameAssets(
         return image;
       }),
     ),
-    loadImage("assets/tilesets/modern-interiors-atlas.webp", webpAtlasOptions).then((image) => {
+    loadImage(GAME_INTERIORS_ATLAS, webpAtlasOptions).then((image) => {
       loaded();
       return image;
     }),

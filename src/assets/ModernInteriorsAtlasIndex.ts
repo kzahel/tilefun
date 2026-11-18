@@ -1,3 +1,6 @@
+import { fetchAsset } from "./AssetLoader.js";
+
+export const INTERIORS_INDEX_PATH = "data/modern-interiors-atlas.json";
 export const MODERN_INTERIORS_SHEET_KEY = "modern-interiors";
 
 export type ModernInteriorsSourceKind =
@@ -64,11 +67,9 @@ export function compareModernInteriorsLayers(
   return a.key.localeCompare(b.key, undefined, { numeric: true });
 }
 
-export async function loadModernInteriorsAtlasIndex(
-  url = "data/modern-interiors-atlas.json",
-): Promise<void> {
+export async function loadModernInteriorsAtlasIndex(url = INTERIORS_INDEX_PATH): Promise<void> {
   if (_index) return;
-  const res = await fetch(url);
+  const res = await fetchAsset(url);
   if (!res.ok) throw new Error(`Failed to load Modern Interiors atlas index: ${res.status}`);
   const index = (await res.json()) as ModernInteriorsAtlasIndex;
 

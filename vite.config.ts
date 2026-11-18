@@ -3,6 +3,12 @@ import { fileURLToPath } from "node:url";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import { ATLAS_INDEX_PATH } from "./src/assets/AtlasIndex.js";
+import { gameImageAssetPaths } from "./src/assets/GameAssets.js";
+import { INTERIORS_INDEX_PATH } from "./src/assets/ModernInteriorsAtlasIndex.js";
+import { buildAudioManifest } from "./src/audio/SurfaceType.js";
+import { BlendGraph } from "./src/autotile/BlendGraph.js";
+import { devStartupAssetCache } from "./src/server/devStartupAssetCache.js";
 import { devUpdatePlugin } from "./src/server/devUpdatePlugin.js";
 import { privateDataPlugin } from "./src/server/privateDataPlugin.js";
 import { tilefunServer } from "./src/server/vitePlugin.js";
@@ -27,6 +33,12 @@ export default defineConfig({
   },
   plugins: [
     privateDataPlugin(root),
+    devStartupAssetCache([
+      ...gameImageAssetPaths(new BlendGraph()),
+      ...buildAudioManifest().map(({ path }) => path),
+      ATLAS_INDEX_PATH,
+      INTERIORS_INDEX_PATH,
+    ]),
     devUpdatePlugin(),
     useHttps && basicSsl(),
     tilefunServer(),
