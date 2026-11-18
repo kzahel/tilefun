@@ -1,4 +1,5 @@
 import type { Entity } from "../entities/Entity.js";
+import type { BodyRotation } from "../physics/BodyRotation.js";
 
 export interface ReplayPose {
   x: number;
@@ -7,6 +8,7 @@ export interface ReplayPose {
   prevX: number;
   prevY: number;
   prevZ: number;
+  rotation: BodyRotation | undefined;
 }
 export function replayPose(entity: Entity): ReplayPose {
   return {
@@ -16,6 +18,7 @@ export function replayPose(entity: Entity): ReplayPose {
     prevX: entity.prevPosition?.wx ?? entity.position.wx,
     prevY: entity.prevPosition?.wy ?? entity.position.wy,
     prevZ: entity.prevWz ?? entity.wz ?? 0,
+    rotation: entity.bodyRotation,
   };
 }
 export function clonePredictionEntity(entity: Entity): Entity {

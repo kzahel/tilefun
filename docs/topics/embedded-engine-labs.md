@@ -1,5 +1,11 @@
 # Embedded engine labs
 
+[Brief steering presses](vehicles.md#brief-steering-presses-and-yaw-corrections)
+now keep local car orientation continuous across replay commits. The game's
+replica and the embedded LabView both sample the corrected chassis quaternion
+on the render clock. Fixed lab authority and replay pose readouts retain the
+solved rotation.
+
 [253](../tactical/253-retire-fixed-world-renderer.md) migrates room and grid labs
 to the same unified scene as play. Grids are diagnostic ground textures, room
 art uses the shared wall-band/furniture scene, and view diagnostics read actual

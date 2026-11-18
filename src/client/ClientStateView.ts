@@ -118,7 +118,7 @@ export class RemoteStateView implements ClientStateView {
       domain: "remote",
     };
     const entities = this.presentation.sample(this._entities, now, paused);
-    this.presentedEntities = this._predictor?.presentEntities(alpha, entities) ?? entities;
+    this.presentedEntities = this._predictor?.presentEntities(alpha, entities, now) ?? entities;
   }
   endPresentation(): void {
     this.presentedEntities = null;

@@ -22,6 +22,15 @@ proximity alone still leaves other actors buffered. The deterministic stop-and-g
 run matches continuous presentation exactly. A real Worker repeat records
 zero handoffs over 434 frames through a full stop and verifies dismount.
 
+[Brief steering presses](vehicles.md#brief-steering-presses-and-yaw-corrections)
+(2026-11-18) reproduce a yaw reversal on a locally driven car when authority
+admits the steering input on different ticks. Same-time interpolation
+endpoints show the jump across replay commits. Local drivers now carry a
+short-lived quaternion offset from the matching physics tick or the last
+drawn pose after a held replay or skipped tick. The offset decays on the
+render clock and belongs only to the displayed chassis, including local
+co-seats. Physics, input replay and ordinary traffic use their solved poses.
+
 [Split-screen starvation](../research/split-screen-prediction-starvation.md)
 (2026-11-14) fixes reproduced player-only freezing under slow replay and delayed
 input. A replay that exhausts its slice finishes a fixed input prefix; later

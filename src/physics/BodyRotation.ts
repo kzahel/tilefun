@@ -17,6 +17,16 @@ export const worldRotation = (q: { x: number; y: number; z: number; w: number })
 export function rotationsEqual(a?: BodyRotation, b?: BodyRotation): boolean {
   return a === b || (!!a && !!b && a.every((n, i) => n === b[i]));
 }
+export function multiplyRotations(a: BodyRotation, b: BodyRotation): BodyRotation {
+  const [x, y, z, w] = a;
+  const [i, j, k, r] = b;
+  return [
+    w * i + x * r + y * k - z * j,
+    w * j - x * k + y * r + z * i,
+    w * k + x * j - y * i + z * r,
+    w * r - x * i - y * j - z * k,
+  ];
+}
 /** Optional caller-owned output is scratch; omitted output is an independent value. */
 export function rotateBodyVector(
   q: BodyRotation,

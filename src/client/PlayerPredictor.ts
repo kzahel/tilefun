@@ -48,6 +48,7 @@ import {
   type SeatMovements,
   seatBodies,
 } from "./SeatInputs.js";
+import { VehicleRotationCorrection } from "./VehicleRotationCorrection.js";
 
 const MAX_HISTORY = 120;
 const REPLAY_STEPS_PER_UPDATE = 8;
@@ -133,6 +134,7 @@ export class PlayerPredictor {
   private readonly nearbyPresentation = new NearbyPredictionPresentation();
   private readonly lastPresentation = new Map<number, Entity>();
   private readonly carriers = new CarrierPresentation();
+  private readonly vehicleRotation = new VehicleRotationCorrection();
   private diagnostics: ReconcileDiagnostics | null = null;
   /** The co-seats of the latest stored input and their own display corrections (226). */
   private readonly coSeats: CoSeats;
@@ -191,6 +193,7 @@ export class PlayerPredictor {
     this.correctionMembers.clear();
     this.lastPresentation.clear();
     this.carriers.clear();
+    this.vehicleRotation.clear();
     this.nearbyPresentation.clear();
     this.activeUntil = -Infinity;
     this.diagnostics = null;
@@ -216,6 +219,7 @@ export class PlayerPredictor {
     this.correctionMembers.clear();
     this.lastPresentation.clear();
     this.carriers.clear();
+    this.vehicleRotation.clear();
     this.nearbyPresentation.clear();
     this.status = "waiting";
   }
@@ -322,6 +326,7 @@ export class PlayerPredictor {
       this.publishedPhysicsTick = undefined;
       this.correctionAnchor = undefined;
       this.correctionMembers.clear();
+      this.vehicleRotation.clear();
       this.status = state.omitted ? "overflow" : missing ? "waiting" : "history-gap";
       this.diagnostics = {
         ackSeq: request.ack,
@@ -449,6 +454,24 @@ export class PlayerPredictor {
     }
     return true;
   }
+  private reconcileVehicleRotation(
+    job: Replay,
+    scene: PhysicsScene,
+    before: ReadonlyMap<number, Entity>,
+  ): void {
+    const matched =
+      job.targetInputTick === undefined && scene.physicsTick <= job.beforePhysicsTick + 1
+        ? job.comparison?.bodies
+        : undefined;
+    this.vehicleRotation.reconcile(
+      this.drivenPresentationIds(job.request.player),
+      before,
+      this.published,
+      matched,
+      this.lastPresentation,
+      this.clock(),
+    );
+  }
   private drainReplay() {
     const job = this.replay,
       scene = this.scene;
@@ -461,6 +484,7 @@ export class PlayerPredictor {
       oldError = this.error();
     this.publish(job.request.player);
     this.carriers.reconcile(this.published, beforeBodies, job.comparison?.bodies, this.clock());
+    this.reconcileVehicleRotation(job, scene, beforeBodies);
     const seatCorrections = this.coSeats.settle(
       beforeBodies,
       job.comparison?.bodies,
@@ -703,10 +727,11 @@ export class PlayerPredictor {
   }
 
   /** Nearby bodies approach predicted time; solved contacts share one pose transform. */
-  presentEntities(alpha: number, buffered: readonly Entity[]): Entity[] {
+  presentEntities(alpha: number, buffered: readonly Entity[], presentationTime?: number): Entity[] {
     const player = this.predicted,
       scene = this.scene;
     const now = this.clock();
+    const renderTime = presentationTime ?? now;
     // The scene is scratch during sliced replay. Hold committed display poses;
     // departing actors ease with the buffer while unrelated actors advance.
     if (this.status === "replaying")
@@ -750,15 +775,13 @@ export class PlayerPredictor {
       const seatOffset = corrected ? undefined : this.coSeats.offset(entity.id, scene);
       const offset = carrierOffset ?? seatOffset ?? (corrected ? contactOffset : undefined);
       this.carriers.track(predicted, offset, supports.has(entity.id));
-      this.lastPresentation.set(
-        entity.id,
-        samplePredictedPose(
-          predicted,
-          alpha,
-          entity.id === player.id ? predicted.sprite : entity.sprite,
-          offset,
-        ),
+      const pose = samplePredictedPose(
+        predicted,
+        alpha,
+        entity.id === player.id ? predicted.sprite : entity.sprite,
+        offset,
       );
+      this.lastPresentation.set(entity.id, this.vehicleRotation.apply(pose, renderTime));
     }
     const presented = this.nearbyPresentation.present(
       releasing,

@@ -2,6 +2,7 @@ import { afterEach, expect, it, vi } from "vitest";
 import { createChicken } from "../entities/Chicken.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
+import { type BodyRotation, rotateBodyVector } from "../physics/BodyRotation.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { PhysicsScene } from "../physics/PhysicsScene.js";
 import { createTrainCarriages } from "../railway/Train.js";
@@ -558,6 +559,58 @@ it("keeps a driven car and rider on one timeline through braking, restart and id
   expect(f.predictor.presentEntities(0.5, f.view.serverEntities).find((e) => e.id === id)).toBe(
     parked,
   );
+});
+
+it("keeps driven-car yaw continuous across replay of a delayed steering tap", async () => {
+  const recipe = drivingBenchRecipe("clear");
+  recipe.roads = [{ left: -256, right: 1536, top: -256, bottom: 256 }];
+  const { s, view, predictor, receive, now, advanceClock } = await setup(recipe);
+  const id = required(s.handles.car);
+  await s.command({ kind: "enter-vehicle", entityId: id });
+  for (let tick = 0; tick < 45; tick++) await s.step(idle);
+  receive(s.frames());
+  view.setPredictor(predictor);
+  const inputs: ArrayBuffer[] = [],
+    frames: ArrayBuffer[][] = [];
+  function yaw(rotation: BodyRotation) {
+    const nose = rotateBodyVector(rotation, 1, 0, 0);
+    return Math.atan2(nose.y, nose.x);
+  }
+  function displayYaw(alpha: number) {
+    view.beginPresentation(now() + alpha * PHYSICS_DT, alpha);
+    const body = required(view.entities.find((e) => e.id === id));
+    const angle = yaw(required(body.bodyRotation));
+    expect(body.vehicleHeading).toBeCloseTo(angle, 5);
+    view.endPresentation();
+    return angle;
+  }
+  let lastEnd = 0,
+    maxBoundaryJump = 0,
+    maxCorrection = 0;
+  for (let tick = 0; tick < 130; tick++) {
+    // Each direction has 50 ms of delay. Prediction sees the turn before the
+    // authority applies it, then corrects when the intervening snapshots arrive.
+    if (frames.length > 3) receive(required(frames.shift()));
+    const movement = manualCarMovement({ ...idle, dy: -1, dx: tick >= 94 && tick < 97 ? 1 : 0 });
+    const seq = 47 + tick;
+    predictInput(predictor, seq, movement, PHYSICS_DT, view.world, view.props, view.serverEntities);
+    inputs.push(encodeClientMessage({ type: "player-input", seq, ...movement }));
+    if (inputs.length > 3) s.input(required(inputs.shift()));
+    frames.push(s.tick(true));
+
+    const from = displayYaw(0);
+    const to = displayYaw(1);
+    const raw = yaw(required(required(predictor.publishedBody(id).body).bodyRotation));
+    maxCorrection = Math.max(maxCorrection, Math.abs(to - raw));
+    maxBoundaryJump = Math.max(maxBoundaryJump, Math.abs(from - lastEnd));
+    lastEnd = to;
+    advanceClock(PHYSICS_DT);
+  }
+  expect(maxCorrection).toBeGreaterThan(0.01);
+  expect(maxBoundaryJump).toBeLessThan(0.0001);
+  const authority = required(s.realm.physicsScene?.bodyState(id));
+  expect(yaw(required(authority.rotation))).toBeGreaterThan(0.035);
+  expect(lastEnd).toBeCloseTo(yaw(required(authority.rotation)), 4);
 });
 
 it("does not transfer a player's display correction to a nearby car or NPC before contact", async () => {

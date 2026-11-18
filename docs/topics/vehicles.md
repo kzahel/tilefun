@@ -508,6 +508,51 @@ inputs remain explicit. Existing saved directional preferences remain readable.
 meshes: full rotations now retain authored body proportions, with legacy review
 registration and its fitted roof-rider offset restricted to nonphysical views.
 
+### Brief steering presses and yaw corrections
+
+The 2026-11-18 reproduction holds Up on a flat paved lane in a compact and
+adds Right for three 60 Hz ticks. Synchronized steering turns the chassis
+2.34° in total, with effectively continuous displayed yaw. A 15% horizontal
+command over the same interval turns 1.00° continuously. Delaying only
+snapshots by 50 ms retains continuity. A first steering command arriving
+one tick late makes displayed yaw reverse by 0.34° between 60 Hz samples.
+With 50 ms of input and snapshot delay, it reverses by 0.54°. Comparing
+adjacent interpolation endpoints at the same display time shows a 0.78°
+backward jump in the latter case.
+
+```sh
+npx tsx scripts/reproduce-car-steering-prediction.ts --json /tmp/tilefun-car-steering.json
+```
+
+The normal single-player Worker in bundled Chromium, with a loaded compact
+mesh and artificial 50 ms delay each way, showed a 1.41° backward step after
+a three-tick press. A six-tick press produced a 3.30° backward display step
+in 16.7 ms while authority turned 0.30° forward. Five comparable presses
+without added latency turned continuously. The original device and terrain
+are unverified.
+
+The manual axis directly selects a fraction of the current speed-limited
+front-wheel angle. A key press therefore requests full available steering on
+its first tick. When input is admitted on different ticks, reconciliation
+replaces the chassis rotation. The predictor now carries a display-only
+quaternion offset across a replay commit and eases it out on the render clock.
+When a commit skips ticks or resumes after holding the drawn frame, the
+first new fractional sample starts at the last displayed rotation. Relocations
+and large orientation resets take effect immediately.
+
+In the deterministic late-command and two-way-delay cases, the same-time
+boundary jump falls below 0.00001° with identical authority motion. Six delayed
+Worker repeats in bundled Chromium show a largest backward frame step of
+0.57° with the correction and 3.04° from the raw interpolated prediction in
+the same capture. Six ordinary presses require zero angular correction.
+
+For steering feel, prototype a rate-limited, self-centering front-wheel angle
+for relative manual input. Keys request full lock and analog axes request a
+proportional angle. Advance the angle on the shared physics tick, restore it
+before replay and keep the speed-dependent limit. Tune turn-in and return
+using both the resulting heading and how long the car keeps turning after
+release. Tap and hold destinations continue to supply a world-space bearing.
+
 ## Body contact and recovery
 
 Car bodies now cover the registered mesh and native footprint at every bearing.
