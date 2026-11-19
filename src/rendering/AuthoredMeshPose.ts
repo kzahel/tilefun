@@ -22,6 +22,12 @@ export function loadAuthoredMesh(assetId: string): Promise<CarMeshAsset> | undef
   });
 }
 
+/** Apply the top-down height fit in world Z, after the rigid-body rotation.
+ * Legacy sources already apply this fit inside the asset. */
+export function topDownVehicleHeightScale(asset: CarMeshAsset, mesh: MeshInstance): number {
+  return mesh.physical ? asset.spriteHeightScale : 1;
+}
+
 /**
  * Absolute pose per draw for one body: orientation, mesh-only grade/tow offsets
  * about the pivot and every rig part. The fixed-view body target and the

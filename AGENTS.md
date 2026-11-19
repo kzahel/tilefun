@@ -20,9 +20,8 @@ For cross-project context, see `~/code/dotfiles/projects/README.md` when availab
 - Update the owning doc when behavior, contracts, evidence or next work changes.
   Create a focused topic when continuity is useful, not for every small edit.
   New tacticals use the next zero-padded number and belong in the tactical index.
-- Wildlife agents must refresh the [production table](docs/wildlife-status.md)
-  after task checkpoints/completion/blocking and before handoff: persist fresh
-  progress first, then run `node scripts/wildlife/status.mjs`. See the wildlife topic.
+- After updating a tracked wildlife ledger linked by the
+  [status overview](docs/wildlife-status.md), run `node scripts/wildlife/status.mjs`.
 - Wildlife owner motion holds block broad art production; the tracked body-motion
   contract requires coordinator-reviewed correction prototypes before more repairs.
 - Wildlife art production follows `art-source/wildlife-v2/repair-scope.json`:

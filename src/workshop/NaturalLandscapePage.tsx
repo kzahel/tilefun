@@ -7,6 +7,11 @@ import { isBoat } from "../boats/Boat.js";
 import { LabView } from "../client/LabView.js";
 import { CHUNK_SIZE_PX } from "../config/constants.js";
 import {
+  loadWildlifeModels,
+  saveWildlifeModels,
+  wildlifeModelsInLink,
+} from "../config/wildlifeModels.js";
+import {
   LANDSCAPE_PROFILES,
   landscapeLabel,
   landscapeProfile,
@@ -52,6 +57,8 @@ export default function NaturalLandscapePage() {
   const [paused, setPaused] = useState(false),
     [follow, setFollow] = useState(caseId === "train");
   const [sounds, setSounds] = useState(false);
+  const [wildlifeModels, setWildlifeModels] = useState(loadWildlifeModels);
+  const [modelsVisible, setModelsVisible] = useState(false);
   const audio = useRef<AudioManager | null>(null),
     footsteps = useRef<FootstepSystem | null>(null);
   const audioTime = useRef(0);
@@ -65,8 +72,15 @@ export default function NaturalLandscapePage() {
   const [message, setMessage] = useState("");
   const canvas = useRef<HTMLCanvasElement>(null),
     host = useRef<LabView | null>(null);
-  const settings = useRef({ paused, follow, zoom, sounds, watchAnimal });
-  settings.current = { paused, follow, zoom, sounds, watchAnimal };
+  const openedPlayground = useRef(false);
+  const linkedView = wildlifeModelsInLink(initial) !== undefined;
+  useEffect(() => {
+    if (!linkedView || !ready || openedPlayground.current) return;
+    openedPlayground.current = true;
+    canvas.current?.scrollIntoView({ block: "center" });
+  }, [linkedView, ready]);
+  const settings = useRef({ paused, follow, zoom, sounds, watchAnimal, wildlifeModels });
+  settings.current = { paused, follow, zoom, sounds, watchAnimal, wildlifeModels };
   const custom = caseId === "explore",
     presentation = naturalCasePresentation(caseId);
   const predatorCase =
@@ -129,6 +143,7 @@ export default function NaturalLandscapePage() {
     if (!c || !recipe) return;
     let active = true;
     setReady(false);
+    setModelsVisible(false);
     setError("");
     setPaused(false);
     const { camera } = presentation;
@@ -176,6 +191,7 @@ export default function NaturalLandscapePage() {
         paused: settings.current.paused,
         zoom: settings.current.zoom,
         terrainPacing: "throughput",
+        wildlifeModels: settings.current.wildlifeModels,
       }),
       onFrame: (h) => {
         const sound = audio.current,
@@ -414,6 +430,11 @@ export default function NaturalLandscapePage() {
           })),
         );
         const diagnostics = h.getDiagnostics();
+        const wildlifeMeshes = String(diagnostics.wildlifeMeshes);
+        if (c.dataset.wildlifeMeshes !== wildlifeMeshes) {
+          c.dataset.wildlifeMeshes = wildlifeMeshes;
+          setModelsVisible(diagnostics.wildlifeMeshes > 0);
+        }
         c.dataset.authorityRunning = String(diagnostics.authority.clock?.running ?? false);
         c.dataset.terrainPending = String(diagnostics.terrain?.pending ?? -1);
         c.dataset.terrainResident = String(diagnostics.terrain?.resident ?? 0);
@@ -473,6 +494,7 @@ export default function NaturalLandscapePage() {
       audioTime.current = 0;
       host.current = null;
       delete c.dataset.ready;
+      delete c.dataset.wildlifeMeshes;
       window.removeEventListener("blur", release);
       window.removeEventListener("focus", focus);
     };
@@ -490,13 +512,7 @@ export default function NaturalLandscapePage() {
     history.replaceState(null, "", url);
   }
   function vote(verdict: "approved" | "changes") {
-    if (
-      !candidate ||
-      !ready ||
-      verified !== candidate.fingerprint ||
-      !(manifest.data?.reviewAllowed ?? manifest.data?.current)
-    )
-      return;
+    if (!candidate || !allowed) return;
     if (verdict === "changes" && !note.trim()) {
       setMessage("Add a note describing the change you want.");
       return;
@@ -514,6 +530,7 @@ export default function NaturalLandscapePage() {
   }
   const allowed =
     ready &&
+    !modelsVisible &&
     candidate &&
     verified === candidate.fingerprint &&
     (manifest.data?.reviewAllowed ?? manifest.data?.current);
@@ -713,6 +730,22 @@ export default function NaturalLandscapePage() {
       >
         {sounds ? "Creature sounds on" : "Enable creature sounds"}
       </button>
+      <label>
+        <input
+          type="checkbox"
+          checked={wildlifeModels}
+          onChange={(e) => {
+            const enabled = e.currentTarget.checked;
+            setWildlifeModels(enabled);
+            try {
+              saveWildlifeModels(enabled);
+            } catch {
+              setError("The 3D animals choice could not be saved.");
+            }
+          }}
+        />{" "}
+        3D animals
+      </label>
       {(prepared.error || error) && <p role="alert">{prepared.error || error}</p>}
       <div
         className="geometry-stage"
@@ -815,7 +848,9 @@ export default function NaturalLandscapePage() {
             </button>
           </div>
           <p role="status">
-            {message || (!verified ? "Checking the registered composition…" : "")}
+            {modelsVisible
+              ? "Turn off 3D animals to review the sprite scene."
+              : message || (!verified ? "Checking the registered composition…" : "")}
           </p>
         </div>
       )}

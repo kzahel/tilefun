@@ -1,7 +1,11 @@
 import * as THREE from "three";
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import { vehiclePaint } from "../traffic/VehiclePaint.js";
-import { applyMeshInstance, loadAuthoredMesh } from "./AuthoredMeshPose.js";
+import {
+  applyMeshInstance,
+  loadAuthoredMesh,
+  topDownVehicleHeightScale,
+} from "./AuthoredMeshPose.js";
 import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
 import { CarBodyImageCache, carBodyImageKey } from "./CarBodyImageCache.js";
@@ -50,6 +54,8 @@ export class GpuMeshBodies {
   ]);
   readonly ready = new Set<string>();
   private readonly scene = new THREE.Scene();
+  private readonly body = new THREE.Group();
+  private readonly towed = new THREE.Group();
   private readonly camera = new THREE.Camera();
   readonly targets = new CarRenderTargets();
   private readonly outline = new CarPixelOutline();
@@ -60,10 +66,11 @@ export class GpuMeshBodies {
   paintDraws = 0;
   paintFallbacks = 0;
   constructor(private readonly surface: GpuSceneSurface) {
+    this.scene.add(this.body, this.towed);
     for (const assetId of [COMPACT_CAR_MESH, AMBULANCE_MESH, FIRE_TRUCK_MESH])
       this.request(assetId);
   }
-  /** Lazy family loads never replace their source sprite before the next frame. */
+  /** Start a family load on demand. New models become drawable at the next frame boundary. */
   request(assetId: string) {
     if (!(authoredVehicleForAsset(assetId) ?? authoredTrainForAsset(assetId))) return undefined;
     let slot = this.slots.get(assetId);
@@ -107,10 +114,9 @@ export class GpuMeshBodies {
    * the same outlined native-pixel body, with its towed car and bed contents.
    * It stays valid until the next display frame. `shows(radius)` says whether a
    * square of that many world pixels each way from the body's anchor is in
-   * view; null when it is not, and nothing is rendered for it. Undefined while
-   * the fixed view would show the sprite (assets or paint still loading) or the
-   * frame's held images are over budget; the caller then draws the body some
-   * other way. Renders into offscreen targets and restores the renderer's target.
+   * view, and returns null when the model is out of view. Returns undefined when
+   * assets or paint are unavailable or the held images are over budget. The view
+   * can draw a ready model directly. Restores the render target after drawing.
    */
   bodyImage(
     item: SpriteItem,
@@ -141,7 +147,7 @@ export class GpuMeshBodies {
     const paintTexture = paint && this.paints.request(paint);
     if (paint && !paintTexture) {
       if (!hold) this.paintFallbacks++;
-      return undefined; // Complete matching sprite while pending/failed.
+      return undefined;
     }
     if (item.bedGroup && !this.contents.prepare(item, sheets)) return undefined;
     const child = item.towGroup,
@@ -215,10 +221,12 @@ export class GpuMeshBodies {
     if (!output) return undefined;
     const object = asset.object;
     applyMeshInstance(asset, item.mesh);
-    this.scene.add(object);
-    if (child?.mesh && childAsset) {
+    this.body.scale.z = topDownVehicleHeightScale(asset, item.mesh);
+    this.body.add(object);
+    if (child?.mesh && childAsset && childPoint) {
       const mesh = child.mesh,
         o = childAsset.object;
+      childAsset.setPhysical(!!mesh.physical);
       o.quaternion.set(...mesh.orientation);
       if (mesh.towPitch || mesh.gradePitch)
         o.quaternion.multiply(
@@ -231,7 +239,9 @@ export class GpuMeshBodies {
         o.quaternion.multiply(
           new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), mesh.gradeRoll),
         );
-      if (childPoint) o.position.set(childPoint.x, childPoint.y, childPoint.z);
+      this.towed.position.set(childPoint.x, childPoint.y, childPoint.z);
+      this.towed.scale.z = topDownVehicleHeightScale(childAsset, mesh);
+      o.position.set(0, 0, 0);
       if (item.mesh.gradePitch || item.mesh.gradeRoll) {
         const parentGrade = object.quaternion
           .clone()
@@ -243,7 +253,7 @@ export class GpuMeshBodies {
       childAsset.setTowLift(false);
       childAsset.setDumpBed(0, 0);
       childAsset.setEmergency(mesh.emergencyEnabled ?? false, mesh.presentationTime ?? 0);
-      this.scene.add(o);
+      this.towed.add(o);
     }
     if (item.bedGroup) this.scene.add(this.contents.group);
     setCarMeshProjection(this.camera.projectionMatrix, radius);
@@ -270,11 +280,11 @@ export class GpuMeshBodies {
     } finally {
       restorePaint?.();
       restoreChildPaint?.();
-      if (childAsset) this.scene.remove(childAsset.object);
+      if (childAsset) this.towed.remove(childAsset.object);
       renderer.setRenderTarget(previous);
       renderer.setScissorTest(scissor);
       renderer.setClearColor(this.clearColor, alpha);
-      this.scene.remove(object);
+      this.body.remove(object);
       this.scene.remove(this.contents.group);
     }
     return { texture, depth: output.depthTexture, radius, reused: false, painted };

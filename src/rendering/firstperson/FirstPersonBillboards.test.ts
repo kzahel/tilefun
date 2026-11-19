@@ -14,6 +14,7 @@ import {
   StaticCards,
 } from "./FirstPersonBillboards.js";
 import { shadeMaterial } from "./FirstPersonMaterials.js";
+import { obliqueScreen } from "./ObliqueCamera.js";
 
 const oak = { name: "oak" } as unknown as CanvasImageSource,
   pine = { name: "pine" } as unknown as CanvasImageSource;
@@ -89,6 +90,39 @@ describe("an actor's card", () => {
   it("shows its drawn row to the top-down camera wherever it stands", () => {
     for (const wx of [-500, 100, 900])
       expect(row(actorBillboard({ ...actor, wx }, sheet, "south", new Set()))).toBe(Direction.Left);
+  });
+
+  it("keeps a rider on the fitted roof in top-down once the vehicle mesh is ready", () => {
+    const rider: SpriteItem = {
+      ...actor,
+      zOffset: 30,
+      meshRoofSupport: { assetId: "truck", heightDelta: 0, topDownHeightDelta: 12 },
+    };
+    const ready = new Set(["truck"]);
+    expect(actorBillboard(rider, sheet, "south", ready).z).toBe(18);
+    expect(actorBillboard(rider, sheet, "south", new Set()).z).toBe(30);
+    expect(actorBillboard(rider, sheet, { x: 200, y: 100 }, ready).z).toBe(30);
+  });
+
+  it("puts an overhanging sprite in front of its anchor while preserving its screen position", () => {
+    const sprite = { ...actor, depthWy: 104, drawOffsetY: 6 };
+    const ready = new Set<string>();
+    const rooted = actorBillboard({ ...actor, drawOffsetY: 6 }, sheet, "south", ready);
+    const overhang = actorBillboard(sprite, sheet, "south", ready);
+    const leaf = (card: Billboard) =>
+      obliqueScreen(
+        { x: 100, y: 100, scale: 1 },
+        600,
+        400,
+        card.x,
+        card.y,
+        card.z + card.height - (card.below ?? 0),
+      );
+    expect(leaf(overhang).sx).toBeCloseTo(leaf(rooted).sx);
+    expect(leaf(overhang).sy).toBeCloseTo(leaf(rooted).sy);
+    expect(leaf(overhang).depth).toBeLessThan(leaf(rooted).depth);
+    expect(overhang.below).toBe(2);
+    expect(actorBillboard(sprite, sheet, { x: 200, y: 100 }, ready).y).toBe(actor.wy);
   });
 });
 

@@ -5,6 +5,8 @@ import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/co
 import { INDOOR_ROLES } from "../interiors/IndoorPeople.js";
 import trainBank from "../railway/rail-local-v1.json" with { type: "json" };
 import { TRAIN_CARRIAGES } from "../railway/Train.js";
+import { authoredVehicleForType } from "../rendering/AuthoredVehicleMeshes.js";
+import { WILDLIFE_MESHES } from "../rendering/WildlifeMeshCatalog.js";
 import { originalVehicle } from "../traffic/OriginalVehicles.js";
 import { DRIVABLE_MODELS } from "../traffic/Vehicle.js";
 import { VEHICLE_PAINTS, vehiclePaintSheet } from "../traffic/VehiclePaint.js";
@@ -185,6 +187,22 @@ const GAME_EXTERIORS_ATLAS = "assets/tilesets/me-complete.webp";
 const GAME_INTERIORS_ATLAS = "assets/tilesets/modern-interiors-atlas.webp";
 const OBJECTS_ATLAS = "assets/tilesets/objects.png";
 
+const deferredSprites = new Map(
+  SPRITE_MANIFEST.filter(
+    ({ key, path }) =>
+      WILDLIFE_MESHES.has(key) ||
+      authoredVehicleForType(key.split(":paint:")[0] ?? key) ||
+      path === trainBank.image,
+  ).map((entry) => [entry.key, entry]),
+);
+const gameSprites = new WeakMap<
+  ReadonlyMap<string, Spritesheet>,
+  {
+    assets: GameAssets;
+    requests: Map<string, Promise<void>>;
+  }
+>();
+
 export function gameImageAssetPaths(blendGraph: BlendGraph): string[] {
   return [
     ...blendGraph.allSheets.map((desc) => desc.assetPath),
@@ -240,14 +258,15 @@ export async function loadGameAssets(
   blendGraph: BlendGraph,
   onProgress?: (completed: number, total: number) => void,
 ): Promise<GameAssets> {
-  const total = blendGraph.allSheets.length + SPRITE_MANIFEST.length + 3;
+  const preload = SPRITE_MANIFEST.filter(({ key }) => !deferredSprites.has(key));
+  const total = blendGraph.allSheets.length + preload.length + 3;
   let completed = 0;
   const loaded = () => onProgress?.(++completed, total);
   onProgress?.(0, total);
   const [terrain, spriteImages, modernInteriorsImg] = await Promise.all([
     loadTerrainAssets(blendGraph, loaded, GAME_EXTERIORS_ATLAS),
     Promise.all(
-      SPRITE_MANIFEST.map(async (entry) => {
+      preload.map(async (entry) => {
         const image = await loadSpriteAsset(entry);
         loaded();
         return image;
@@ -258,7 +277,7 @@ export async function loadGameAssets(
       return image;
     }),
   ]);
-  for (const [i, manifest] of SPRITE_MANIFEST.entries()) {
+  for (const [i, manifest] of preload.entries()) {
     const img = spriteImages[i];
     if (img) terrain.sheets.set(manifest.key, new Spritesheet(img, manifest.w, manifest.h));
   }
@@ -266,6 +285,7 @@ export async function loadGameAssets(
     MODERN_INTERIORS_SHEET_KEY,
     new Spritesheet(modernInteriorsImg, TILE_SIZE, TILE_SIZE),
   );
+  gameSprites.set(terrain.sheets, { assets: terrain, requests: new Map() });
   return terrain;
 }
 
@@ -314,33 +334,55 @@ export function registerTileVariants(variants: Pick<TileVariants, "addTiles" | "
 
 const sceneLoads = new WeakMap<GameAssets, Map<string, Promise<void>>>();
 const closedAssets = new WeakSet<GameAssets>();
+
+/** Start a deferred gameplay sprite when a view or editor needs its pixels. */
+export function requestGameSprite(
+  sheets: ReadonlyMap<string, Spritesheet>,
+  key: string,
+): Promise<void> | undefined {
+  const game = gameSprites.get(sheets);
+  const entry = deferredSprites.get(key);
+  if (!game || !entry || sheets.has(key) || closedAssets.has(game.assets)) return undefined;
+  let pending = game.requests.get(key);
+  if (!pending) {
+    pending = loadSceneSprite(game.assets, entry).catch((error) => {
+      console.warn(`Fallback sprite could not load: ${entry.path}`, error);
+    });
+    game.requests.set(key, pending);
+  }
+  return pending;
+}
+
 /** Lazy source sprites for a diagnostic scene, using gameplay's exact manifest. */
 export async function loadSceneAssets(
   assets: GameAssets,
   keys: ReadonlySet<string>,
 ): Promise<void> {
   if (closedAssets.has(assets)) return;
+  await Promise.all(
+    SPRITE_MANIFEST.filter((entry) => keys.has(entry.key) && !assets.sheets.has(entry.key)).map(
+      (entry) => loadSceneSprite(assets, entry),
+    ),
+  );
+}
+
+function loadSceneSprite(assets: GameAssets, entry: SpriteAsset): Promise<void> {
   let loads = sceneLoads.get(assets);
   if (!loads) {
     loads = new Map();
     sceneLoads.set(assets, loads);
   }
-  const work: Promise<void>[] = [];
-  for (const entry of SPRITE_MANIFEST) {
-    if (!keys.has(entry.key) || assets.sheets.has(entry.key)) continue;
-    let pending = loads.get(entry.key);
-    if (!pending) {
-      pending = loadSpriteAsset(entry)
-        .then((image) => {
-          if (closedAssets.has(assets)) image.close();
-          else assets.sheets.set(entry.key, new Spritesheet(image, entry.w, entry.h));
-        })
-        .finally(() => loads?.delete(entry.key));
-      loads.set(entry.key, pending);
-    }
-    work.push(pending);
+  let pending = loads.get(entry.key);
+  if (!pending) {
+    pending = loadSpriteAsset(entry)
+      .then((image) => {
+        if (closedAssets.has(assets)) image.close();
+        else assets.sheets.set(entry.key, new Spritesheet(image, entry.w, entry.h));
+      })
+      .finally(() => loads.delete(entry.key));
+    loads.set(entry.key, pending);
   }
-  await Promise.all(work);
+  return pending;
 }
 export function closeAssets(assets: GameAssets): void {
   closedAssets.add(assets);

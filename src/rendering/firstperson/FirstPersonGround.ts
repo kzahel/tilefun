@@ -1,5 +1,11 @@
 import * as THREE from "three";
 import type { PageRegion } from "../View3dHost.js";
+import {
+  type GroundAtlas,
+  type GroundSurface,
+  type SunUniforms,
+  shadeMaterial,
+} from "./FirstPersonMaterials.js";
 import { CHUNK_TOP_VERTICES, type ColoredTriangles } from "./FirstPersonTerrain.js";
 
 /** Floats per vertex of each attribute. */
@@ -48,12 +54,22 @@ export class GroundTops {
   private readonly blocks: (Block | undefined)[] = [];
   private readonly slots = new Map<string, { block: Block; slot: number }>();
   private readonly cliffs = new Map<string, THREE.Mesh>();
+  private readonly material: THREE.MeshBasicMaterial;
+  private readonly cliffMaterial: THREE.MeshBasicMaterial;
 
   constructor(
     parent: THREE.Object3D,
-    private readonly material: THREE.Material,
+    atlas: GroundAtlas,
+    sun?: SunUniforms,
     private readonly made?: (mesh: THREE.Mesh) => void,
   ) {
+    const material = (surface: GroundSurface) =>
+      shadeMaterial(new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide }), {
+        ground: { atlas, surface },
+        sun: sun && { uniforms: sun, receiver: "faces" },
+      });
+    this.material = material("top");
+    this.cliffMaterial = material("cliff");
     parent.add(this.root);
   }
 
@@ -113,7 +129,7 @@ export class GroundTops {
       "groundPage",
       new THREE.BufferAttribute(new Float32Array(count * 3).fill(-1), 3),
     );
-    const mesh = new THREE.Mesh(geometry, this.material);
+    const mesh = new THREE.Mesh(geometry, this.cliffMaterial);
     this.root.add(mesh);
     this.cliffs.set(key, mesh);
     this.made?.(mesh);
@@ -169,6 +185,8 @@ export class GroundTops {
   dispose(): void {
     for (const block of this.blocks) block?.mesh.geometry.dispose();
     for (const mesh of this.cliffs.values()) mesh.geometry.dispose();
+    this.material.dispose();
+    this.cliffMaterial.dispose();
     this.cliffs.clear();
     this.blocks.length = 0;
     this.slots.clear();

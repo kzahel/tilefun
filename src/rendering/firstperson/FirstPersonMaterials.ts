@@ -1,4 +1,4 @@
-import type * as THREE from "three";
+import * as THREE from "three";
 import { CHUNK_SIZE_PX } from "../../config/constants.js";
 
 /** Shared by every material that receives the sun's shadow (tactical 247). Scene
@@ -30,12 +30,14 @@ export interface SunUniforms {
  *   the sunny side of their own shadow card, so only neighbours darken them.
  */
 export type SunReceiver = "faces" | "body" | "card";
+export type GroundAtlas = { value: THREE.Texture | null };
+export type GroundSurface = "top" | "cliff";
 
 export interface MaterialShading {
   /** Expand `corner` offsets along this horizontal axis (game axes). */
   card?: { value: THREE.Vector2 } | undefined;
   /** Ground faces wear their chunk's page of this atlas (see `FirstPersonGround`). */
-  ground?: { value: THREE.Texture | null } | undefined;
+  ground?: { atlas: GroundAtlas; surface: GroundSurface } | undefined;
   /** Cards show their `cardPage` place in this atlas (see `CardArrays`). */
   cardArt?: { value: THREE.Texture | null } | undefined;
   sun?: { uniforms: SunUniforms; receiver: SunReceiver } | undefined;
@@ -105,9 +107,13 @@ export const GROUND_NEAREST = { value: false };
 const GROUND_FRAGMENT = `
 uniform highp sampler2DArray groundAtlas;
 uniform bool groundNearest;
+uniform vec2 groundPixelNdc;
 varying vec2 vGroundTexel;
 varying float vGroundShade;
 varying vec3 vGroundPage;
+varying vec3 vGroundClip;
+flat varying vec3 vGroundAxisU;
+flat varying vec3 vGroundAxisV;
 vec3 groundAt(vec2 texel) {
   texel = clamp(texel, vec2(0.5), vec2(${CHUNK_SIZE_PX}.0 - 0.5));
   // Pages store their rows bottom first.
@@ -118,10 +124,23 @@ vec3 groundAt(vec2 texel) {
   vec4 art = textureLod(groundAtlas, uvw, 0.0);
   return sRGBTransferEOTF(vec4(art.rgb * vGroundShade, art.a)).rgb;
 }
-// dx and dy are the texel steps to the next screen pixel. The caller takes
-// them outside its branch: derivatives are undefined inside non-uniform control flow.
-vec3 groundArt(vec2 dx, vec2 dy) {
+vec3 groundArt() {
   if (groundNearest) return groundAt(vGroundTexel);
+  // Project the face's texture axes at this fragment and invert the result
+  // to get texels per screen pixel. Fragment derivatives can spike when a GPU
+  // quad straddles chunk edges, which sends filter taps far across the page.
+  vec2 ndc = vGroundClip.xy / vGroundClip.z;
+  vec2 u = vGroundAxisU.xy - ndc * vGroundAxisU.z;
+  vec2 v = vGroundAxisV.xy - ndc * vGroundAxisV.z;
+  float det = u.x * v.y - u.y * v.x;
+  if (abs(det) < 1e-8) return groundAt(vGroundTexel);
+  vec2 scale = groundPixelNdc * (vGroundClip.z / det);
+  vec2 dx = vec2(v.y, -u.y) * scale.x;
+  vec2 dy = vec2(-v.x, u.x) * scale.y;
+  #ifdef GROUND_CLIFF
+    // Cliff artwork repeats one row up the face.
+    dx.y = dy.y = 0.0;
+  #endif
   vec3 sum = vec3(0.0);
   ${GROUND_TAPS.map(([x, y]) => `sum += groundAt(vGroundTexel + ${x.toFixed(4)} * dx + ${y.toFixed(4)} * dy);`).join("\n  ")}
   return sum / ${GROUND_TAPS.length}.0;
@@ -149,7 +168,16 @@ export function shadeMaterial<T extends THREE.Material>(material: T, shading: Ma
   const { card, sun, ground, cardArt } = shading;
   if (!card && !sun && !ground && !cardArt) return material;
   material.customProgramCacheKey = () =>
-    `fp:${card ? "card" : ""}:${sun?.receiver ?? ""}:${ground ? "ground" : ""}:${cardArt ? "art" : ""}`;
+    `fp:${card ? "card" : ""}:${sun?.receiver ?? ""}:${ground ? `ground-${ground.surface}` : ""}:${cardArt ? "art" : ""}`;
+  const groundPixelNdc = ground && { value: new THREE.Vector2() };
+  if (groundPixelNdc) {
+    const viewport = new THREE.Vector4();
+    // Three sets the viewport before drawing each eye of an XR view.
+    material.onBeforeRender = (renderer) => {
+      renderer.getCurrentViewport(viewport);
+      groundPixelNdc.value.set(2 / viewport.z, 2 / viewport.w);
+    };
+  }
   material.onBeforeCompile = (shader) => {
     let vertex = shader.vertexShader;
     let fragment = shader.fragmentShader;
@@ -165,9 +193,10 @@ export function shadeMaterial<T extends THREE.Material>(material: T, shading: Ma
         .replace("#include <common>", `#include <common>${CARD_ART_FRAGMENT}`)
         .replace("#include <map_fragment>", "diffuseColor *= cardArt();");
     }
-    if (ground) {
-      shader.uniforms.groundAtlas = ground;
+    if (ground && groundPixelNdc) {
+      shader.uniforms.groundAtlas = ground.atlas;
       shader.uniforms.groundNearest = GROUND_NEAREST;
+      shader.uniforms.groundPixelNdc = groundPixelNdc;
       declare.push(
         "attribute vec2 groundTexel;",
         "attribute float groundShade;",
@@ -175,18 +204,34 @@ export function shadeMaterial<T extends THREE.Material>(material: T, shading: Ma
         "varying vec2 vGroundTexel;",
         "varying float vGroundShade;",
         "varying vec3 vGroundPage;",
+        "varying vec3 vGroundClip;",
+        "flat varying vec3 vGroundAxisU;",
+        "flat varying vec3 vGroundAxisV;",
       );
-      vertex = vertex.replace(
-        "#include <color_vertex>",
-        "#include <color_vertex>\n  vGroundTexel = groundTexel;\n  vGroundShade = groundShade;\n  vGroundPage = groundPage;",
-      );
+      vertex = vertex
+        .replace(
+          "#include <color_vertex>",
+          `#include <color_vertex>
+  vGroundTexel = groundTexel;
+  vGroundShade = groundShade;
+  vGroundPage = groundPage;`,
+        )
+        .replace(
+          "#include <project_vertex>",
+          `#include <project_vertex>
+  vGroundClip = gl_Position.xyw;
+  vGroundAxisU = (projectionMatrix * modelViewMatrix[0]).xyw;
+  vGroundAxisV = (projectionMatrix * modelViewMatrix[${ground.surface === "top" ? 1 : 2}]).xyw;`,
+        );
       fragment = fragment
-        .replace("#include <common>", `#include <common>${GROUND_FRAGMENT}`)
+        .replace(
+          "#include <common>",
+          `#include <common>\n${ground.surface === "cliff" ? "#define GROUND_CLIFF" : ""}${GROUND_FRAGMENT}`,
+        )
         .replace(
           "#include <color_fragment>",
-          `vec2 groundDx = dFdx(vGroundTexel), groundDy = dFdy(vGroundTexel);
-  if (vGroundPage.z > -0.5 && vGroundTexel.x > -0.5)
-    diffuseColor.rgb = groundArt(groundDx, groundDy);
+          `if (vGroundPage.z > -0.5 && vGroundTexel.x > -0.5)
+    diffuseColor.rgb = groundArt();
   else {
     #include <color_fragment>
   }`,

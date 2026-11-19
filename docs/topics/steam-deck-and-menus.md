@@ -34,6 +34,9 @@ without a saved preset retain mouse controls. Controller sticks, vehicle
 steering, headset input and local keyboard guests retain their own controls.
 There is no speed setting.
 
+**Options → 3D animals** uses a model where one is available. It defaults to on
+and saves the choice on this browser for both play and the Wildlife lab.
+
 Ship the ordinary Tilefun web engine inside a Linux x64 Electron application.
 The Chromium runtime, GPU renderer, committed assets and local authority Worker
 are bundled; single-player does not depend on the hosted site. Online P2P uses

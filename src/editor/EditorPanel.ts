@@ -1,5 +1,7 @@
+import { requestGameSprite } from "../assets/GameAssets.js";
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { BlendGraph } from "../autotile/BlendGraph.js";
+import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { PROP_PALETTE } from "../entities/PropFactories.js";
 import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 import { EditorBrushTools } from "./EditorBrushTools.js";
@@ -81,6 +83,8 @@ export class EditorPanel {
   private readonly entities: EditorEntityPalette;
   private readonly vehicles: EditorVehiclePalette;
   private readonly props: EditorPropPalette;
+  private spriteSheets?: Map<string, Spritesheet>;
+  private readonly requestedPalettes = new Set<EditorTab>();
   /** Palette sections in scroll-area order. */
   private readonly sections: readonly EditorSection[];
   private controllerOpen = false;
@@ -184,6 +188,7 @@ export class EditorPanel {
   private syncFromModel(): void {
     this.updateTabDisplay();
     for (const section of this.sections) section.sync();
+    this.requestPaletteSprites();
     this.updateTray();
     if (this.displayedTab !== this.model.editorTab) {
       this.displayedTab = this.model.editorTab;
@@ -282,6 +287,7 @@ export class EditorPanel {
     if (v) {
       this.updateTray();
       this.revealSelectedTab();
+      this.requestPaletteSprites();
     }
   }
 
@@ -291,10 +297,32 @@ export class EditorPanel {
     blendSheets: Spritesheet[],
     blendGraph: BlendGraph,
   ): void {
+    this.spriteSheets = sheets;
+    this.requestedPalettes.clear();
     this.terrain.setBlendAssets(blendSheets, blendGraph);
     this.entities.setAssets(sheets);
     this.vehicles.setAssets(sheets);
     this.props.setAssets(sheets);
     this.terrain.setRoadAssets(sheets);
+    this.requestPaletteSprites();
+  }
+
+  private requestPaletteSprites(): void {
+    const sheets = this.spriteSheets;
+    const tab = this.model.editorTab;
+    if (!sheets || !this.visible || this.requestedPalettes.has(tab)) return;
+    if (tab !== "entities" && tab !== "vehicles") return;
+    this.requestedPalettes.add(tab);
+    const entries = tab === "entities" ? ENTITY_PALETTE : VEHICLE_PALETTE;
+    const palette = tab === "entities" ? this.entities : this.vehicles;
+    const requests = entries.flatMap(({ type }) => {
+      const key = ENTITY_DEFS[type]?.sprite?.sheetKey ?? type;
+      const request = requestGameSprite(sheets, key);
+      return request ? [request] : [];
+    });
+    if (requests.length)
+      void Promise.all(requests).then(() => {
+        if (this.spriteSheets === sheets) palette.setAssets(sheets);
+      });
   }
 }

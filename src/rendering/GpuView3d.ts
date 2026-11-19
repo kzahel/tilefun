@@ -32,6 +32,12 @@ export function createView3dHost(
       const slot = bodies.request(assetId);
       return bodies.ready.has(assetId) ? (slot?.value ?? undefined) : undefined;
     },
+    pending(assetId) {
+      const slot = bodies.request(assetId);
+      return (
+        !!slot && !bodies.ready.has(assetId) && (slot.state === "loading" || slot.state === "ready")
+      );
+    },
     paint: (paint) => bodies.paints.request(paint),
     bindPaint: (object, texture) => bodies.paints.bind(object, texture),
     ...(bodyImage && { bodyImage }),

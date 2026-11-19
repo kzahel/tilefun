@@ -1,3 +1,4 @@
+import { saveWildlifeModels } from "../config/wildlifeModels.js";
 import type { ConsoleEngine } from "../console/ConsoleEngine.js";
 import type { SceneManager } from "../core/SceneManager.js";
 import { captureIdea, type IdeaSnapshot } from "../ideas/captureIdea.js";
@@ -108,6 +109,10 @@ export class GameMenuChrome {
         if (host.profile) host.profile.firstPersonControls = controls;
         await this.saveProfile({ firstPersonControls: controls });
       },
+      async (enabled) => {
+        host.firstPerson.wildlifeModels = enabled;
+        saveWildlifeModels(enabled);
+      },
     );
   }
 
@@ -152,6 +157,7 @@ export class GameMenuChrome {
       this.host.consoleEngine.cvars.get("r_firstperson")?.get() === true,
       this.host.firstPerson.viewDistance,
       this.host.firstPerson.controls,
+      this.host.firstPerson.wildlifeModels,
     );
   }
 

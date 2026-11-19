@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { requestGameSprite } from "../../assets/GameAssets.js";
 import { MODERN_INTERIORS_SHEET_KEY } from "../../assets/ModernInteriorsAtlasIndex.js";
 import type { Spritesheet } from "../../assets/Spritesheet.js";
 import { CHUNK_SIZE_PX, VIEW_BACKDROP_CSS } from "../../config/constants.js";
@@ -43,6 +44,7 @@ import { SUN_REACH } from "./FirstPersonSun.js";
 import { buildTerrainChunk } from "./FirstPersonTerrain.js";
 import { FirstPersonUnderlay } from "./FirstPersonUnderlay.js";
 import { FirstPersonVehicles } from "./FirstPersonVehicles.js";
+import { FirstPersonWildlifeMeshes } from "./FirstPersonWildlifeMeshes.js";
 import {
   chunksInRect,
   grown,
@@ -81,6 +83,8 @@ export interface FirstPersonFrame {
   /** Top-down only: vehicle bodies as the fixed view's outlined native-pixel
    * images instead of meshes at the screen's resolution; on unless false. */
   readonly pixelBodies?: boolean | undefined;
+  /** Draw registered animal models in place of their sprite cards. */
+  readonly wildlifeModels?: boolean | undefined;
   /** Prototype: ground artwork sampled once per pixel, as cards are
    * (`GROUND_NEAREST`). */
   readonly groundNearest?: boolean | undefined;
@@ -163,6 +167,7 @@ export class FirstPersonView {
     groundPages: 0,
     /** Moving actor cards written this frame. */
     billboards: 0,
+    wildlifeMeshes: 0,
     /** Standing prop cards in the merged static meshes. */
     cards: 0,
     /** Contact shadows drawn this frame. */
@@ -211,13 +216,12 @@ export class FirstPersonView {
   /** The host's page atlas as of this frame: ground meshes sample their chunk's
    * page, and cards their sheet's or composed image's pages. */
   private readonly atlas: { value: THREE.Texture | null } = { value: null };
-  private readonly groundMaterial = shadeMaterial(
-    new THREE.MeshBasicMaterial({ vertexColors: true, side: THREE.DoubleSide }),
-    { sun: { uniforms: this.sun.uniforms, receiver: "faces" }, ground: this.atlas },
-  );
-  /** Every chunk's tile tops in one mesh; cliff walls and prop faces in a few. */
-  private readonly ground = new GroundTops(this.groundRoot, this.groundMaterial, (mesh) =>
-    SunShadows.cast(mesh),
+  /** Tile tops share meshes; textured cliffs use their own vertical texture plane. */
+  private readonly ground = new GroundTops(
+    this.groundRoot,
+    this.atlas,
+    this.sun.uniforms,
+    SunShadows.cast,
   );
   private readonly faces = new MergedFaces();
   /** The frame's pages as cards ask for them. */
@@ -250,6 +254,9 @@ export class FirstPersonView {
     this.lit(material, "body");
   });
   private readonly bodyImages = new BodyImageCards(this.sun.uniforms);
+  private readonly wildlife = new FirstPersonWildlifeMeshes(this.worldRoot, (material) => {
+    this.lit(material, "body");
+  });
   private readonly propMeshes: PropMeshes;
   private readonly chunks = new Map<string, ChunkScene>();
   private readonly images: FirstPersonImages;
@@ -436,7 +443,7 @@ export class FirstPersonView {
       renderer.render(this.scene, camera);
       this.stats.cars = 0;
       for (const item of cars)
-        if (this.vehicles.draw(renderer, camera, meshes, item)) this.stats.cars++;
+        if (this.vehicles.draw(renderer, camera, meshes, item, !!topDown)) this.stats.cars++;
       this.bodyImages.draw(renderer, camera, topDown?.scale ?? 1);
       this.stats.bodyImages = this.bodyImages.count;
       this.stats.cars += this.bodyImages.count;
@@ -715,6 +722,7 @@ export class FirstPersonView {
       this.cardRight.value.set(right.x, right.y);
     }
     this.billboards.begin(topDown);
+    this.wildlife.begin(frame.wildlifeModels !== false, topDown);
     this.blobs.begin();
     this.lamps.length = 0;
     this.bodyImages.begin();
@@ -734,6 +742,7 @@ export class FirstPersonView {
         this.queueActor(content, eye, meshes, drawn, shadows);
     }
     this.billboards.end();
+    this.stats.wildlifeMeshes = this.wildlife.end();
     this.blobs.end();
     this.stats.billboards = this.billboards.count;
     this.stats.blobs = this.blobs.count;
@@ -750,9 +759,8 @@ export class FirstPersonView {
     );
   }
 
-  /** Ready authored meshes draw as models; loading, failed and plain actors as
-   * sprites. Without `cars` only the actor's shadow is queued: an image of its
-   * group already shows it. */
+  /** Pending models wait for their first draw. Sprites cover actors without a usable
+   * model. Without `cars`, an image of the actor's group already shows it. */
   private queueActor(
     item: SpriteItem,
     eye: FirstPersonEye | "south",
@@ -768,14 +776,30 @@ export class FirstPersonView {
       ((body || item.gpuShadow?.casterId === undefined) && item.gpuShadow
         ? item.gpuShadow
         : plainShadow(item));
-    if (shadow) this.blobs.push(shadow, this.supportUnder(shadow, item.zOffset));
+    if (shadow) {
+      const support = this.supportUnder(shadow, item.zOffset);
+      const roof = item.meshRoofSupport;
+      const roofDelta =
+        eye === "south" &&
+        roof &&
+        meshes.ready.has(roof.assetId) &&
+        Math.abs(support - item.zOffset) < 0.5
+          ? (roof.topDownHeightDelta ?? 0)
+          : 0;
+      this.blobs.push(shadow, support - roofDelta);
+    }
     if (!cars) return;
     if (body) {
       cars.push(item);
       return;
     }
+    if (item.mesh && meshes.pending?.(item.mesh.assetId)) return;
+    if (this.wildlife.push(item)) return;
     const sheet = this.images.sheet(item.sheetKey);
-    if (!sheet) return;
+    if (!sheet) {
+      void requestGameSprite(this.sheets, item.sheetKey);
+      return;
+    }
     this.billboards.push(
       actorBillboard(item, sheet, eye, meshes.ready, this.room?.scene.topDown),
       this.cardPages,
@@ -818,11 +842,11 @@ export class FirstPersonView {
     this.sun.dispose();
     this.propMeshes.dispose();
     this.vehicles.dispose();
+    this.wildlife.dispose();
     this.bodyImages.dispose();
     this.cameras.dispose();
     this.images.dispose();
     this.flatMaterial.dispose();
     this.gridMaterial.dispose();
-    this.groundMaterial.dispose();
   }
 }

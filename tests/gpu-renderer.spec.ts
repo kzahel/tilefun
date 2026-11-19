@@ -1,7 +1,86 @@
 import { expect, test } from "@playwright/test";
+import type { GameTestHooks } from "../src/client/GameTestHooks.js";
+import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import type { GeometryCanvas } from "../src/workshop/WorldGeometryPage.js";
 
 test.use({ channel: "chromium" });
+
+test("first-person filtering keeps grass continuous beside a road at a chunk boundary", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1166, height: 1266 });
+  const generation = createDescriptor("regional", 2026);
+  const arrival = { x: 300, y: 519, generation };
+  const query = new URLSearchParams({
+    nogamepad: "",
+    view: "fps",
+    fpshadows: "0",
+    generation: JSON.stringify(generation),
+    arrival: JSON.stringify(arrival),
+  });
+  await page.goto(`/tilefun/?${query}`);
+  await page.getByRole("button", { name: "New World", exact: true }).click();
+  const canvas = page.locator("#game");
+  await expect(canvas).toHaveAttribute("data-ready", "true");
+  await expect(page.getByTestId("world-menu")).toBeHidden();
+  await page.waitForFunction(
+    () =>
+      document.querySelector<HTMLCanvasElement & { __game: GameTestHooks }>("#game")?.__game
+        .firstPerson.drawing,
+  );
+  await canvas.evaluate(async (element) => {
+    const game = (element as HTMLCanvasElement & { __game: GameTestHooks }).__game;
+    game.firstPerson.look.yaw = 0;
+    game.firstPerson.look.pitch = -0.51;
+    game.firstPerson.lift = 38;
+    await game.gcSendRequest({
+      type: "rcon",
+      requestId: game.nextRequestId++,
+      command: "tp 4848 8304",
+    });
+  });
+  await page.waitForFunction(() => {
+    const canvas = document.querySelector<HTMLCanvasElement & { __game: GameTestHooks }>("#game");
+    const game = canvas?.__game;
+    const stats = game?.firstPerson.viewStats;
+    return (
+      game?.firstPerson.drawing &&
+      game.stateView.playerEntity.position.wx === 4848 &&
+      game.stateView.playerEntity.position.wy === 8304 &&
+      stats &&
+      stats.chunks > 0 &&
+      stats.chunks === stats.groundPages
+    );
+  });
+  const { peakDifference, greenPixels } = await canvas.evaluate(async (element) => {
+    const game = (element as HTMLCanvasElement & { __game: GameTestHooks }).__game;
+    const pixels = async (nearest: boolean) => {
+      game.firstPerson.groundNearest = nearest;
+      // Capture after rendering with the new sampling mode.
+      await new Promise<void>((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
+      );
+      const ctx = game.renderHost.captureFrame?.().getContext("2d");
+      if (!ctx) throw Error("Missing capture context");
+      // Uniform grass beside the eastbound road, spanning the projected edge at x=5120.
+      return ctx.getImageData(1005, 308, 75, 22).data;
+    };
+    const filtered = await pixels(false);
+    const nearest = await pixels(true);
+    let peakDifference = 0;
+    let greenPixels = 0;
+    for (let i = 0; i < nearest.length; i += 4) {
+      const red = nearest[i] ?? 0;
+      const green = nearest[i + 1] ?? 0;
+      if (green > red + 40) greenPixels++;
+      peakDifference = Math.max(peakDifference, Math.abs((filtered[i] ?? 0) - red));
+    }
+    return { peakDifference, greenPixels };
+  });
+  expect(greenPixels).toBe(75 * 22);
+  expect(peakDifference).toBeLessThanOrEqual(2);
+});
+
 test("default GPU mesh host runs the shared game and retains the input/UI canvas", async ({
   page,
 }) => {

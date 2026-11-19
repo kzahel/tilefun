@@ -19,6 +19,7 @@ function sharedAsset() {
   const rig = () => {};
   const asset = {
     object,
+    spriteHeightScale: 0.456,
     setPhysical: rig,
     setTransportRamp: rig,
     setTowLift: rig,
@@ -83,6 +84,35 @@ describe("first-person vehicles on the host's shared assets", () => {
     const renderer = { render: () => expect.unreachable() } as unknown as THREE.WebGLRenderer;
     expect(vehicles.drawable(host(undefined), "car")).toBe(false);
     expect(vehicles.draw(renderer, new THREE.Camera(), host(undefined), item())).toBe(false);
+  });
+
+  it("fits physical trucks in world Z only for the top-down draw", () => {
+    const { asset, object } = sharedAsset();
+    const vehicles = new FirstPersonVehicles(() => {});
+    const rolled = item();
+    if (!rolled.mesh) throw Error("Missing vehicle pose");
+    rolled.mesh = {
+      ...rolled.mesh,
+      physical: true,
+      orientation: [Math.SQRT1_2, 0, 0, Math.SQRT1_2],
+    };
+    const sizes: [number, number][] = [];
+    const renderer = {
+      render(scene: THREE.Scene) {
+        scene.updateMatrixWorld(true);
+        const origin = object.getWorldPosition(new THREE.Vector3());
+        sizes.push([
+          object.localToWorld(new THREE.Vector3(0, 0, 10)).y - origin.y,
+          object.localToWorld(new THREE.Vector3(0, 10, 0)).z - origin.z,
+        ]);
+      },
+    } as unknown as THREE.WebGLRenderer;
+    vehicles.draw(renderer, new THREE.Camera(), host(asset), rolled, true);
+    vehicles.draw(renderer, new THREE.Camera(), host(asset), rolled);
+    expect(sizes[0]?.[0]).toBeCloseTo(10);
+    expect(sizes[0]?.[1]).toBeCloseTo(4.56);
+    expect(sizes[1]?.[0]).toBeCloseTo(10);
+    expect(sizes[1]?.[1]).toBeCloseTo(10);
   });
 
   it("binds a painted vehicle's atlas for the draw and restores it afterwards", () => {

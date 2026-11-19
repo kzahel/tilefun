@@ -409,6 +409,19 @@ while the fitted support mesh is ready. Physical bounds, authority and sprite fa
 remain unchanged. Exact [fit inspection](https://tilefun.graehlarts.com/tilefun/assets/models/vehicles/review/game-fit-v2/)
 is registered separately from the immutable Blender/model comparisons.
 
+Physical vehicle meshes now use that height fit in the top-down view. The fit
+is applied along world Z after the rigid-body rotation, so pitch and roll still
+follow the physics pose. Both native-pixel body images and direct mesh draws
+use the same fit. A rider and its contact shadow follow the fitted roof in
+top-down when the mesh is ready. Perspective views keep full physical height.
+The green garbage truck's retained east/west reference is 76 pixels high. Its
+full-height mesh projects to 118 pixels and its fitted projection to 77 pixels.
+End views can still differ from the original directional drawings.
+
+In the shared 3D scene, authored vehicles first draw once their model is ready.
+If the model fails, the scene requests and draws the matching cardinal sprite.
+The editor requests sprites separately for its placement previews.
+
 ## Editor placement
 
 [128](../tactical/128-editor-vehicle-placement.md) adds **Edit → Vehicles** with all

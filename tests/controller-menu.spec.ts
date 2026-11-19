@@ -197,6 +197,34 @@ test("Deck-sized menu, worlds, text keyboard, character and Options are controll
   await press(page, 9);
   await expect(menu).toBeHidden();
 });
+
+test("3D animals is controller accessible and shared with the lab", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto(DECK_GAME);
+  await expect(page.getByTestId("world-menu")).toBeVisible();
+  await focusWithPad(page, "Options");
+  await press(page, 0);
+  const options = page.getByTestId("options-dialog");
+  const models = options.getByRole("button", { name: "3D animals", exact: true });
+  await expect(models).toHaveAttribute("aria-pressed", "true");
+  for (let n = 0; n < 8 && !(await models.evaluate((e) => e === document.activeElement)); n++) {
+    await press(page, 13);
+  }
+  await expect(models).toBeFocused();
+  await press(page, 0);
+  await expect(models).toHaveAttribute("aria-pressed", "false");
+  await expect(options.getByRole("status")).toContainText("3D animals preference saved");
+  await press(page, 1);
+  await expect(options).toBeHidden();
+
+  await page.goto("/tilefun/workshop.html?geometry=nature-behavior-rabbit#/tool/world-geometry");
+  await expect(page.getByRole("checkbox", { name: "3D animals" })).not.toBeChecked();
+  await expect(page.getByLabel("Natural landscape playground")).toHaveAttribute(
+    "data-wildlife-meshes",
+    "0",
+  );
+});
+
 test("multiplayer join, validation, public browse and cancellation use controller navigation", async ({
   page,
 }) => {

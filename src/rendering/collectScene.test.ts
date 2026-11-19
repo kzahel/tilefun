@@ -57,6 +57,7 @@ it("keeps physical roof riders at their world height while legacy fitted meshes 
   const physical = sample();
   if (physical?.kind !== "sprite") throw Error("Missing rider");
   expect(physical.meshRoofSupport?.heightDelta).toBe(0);
+  expect(physical.meshRoofSupport?.topDownHeightDelta).toBe(legacy.meshRoofSupport?.heightDelta);
   expect(physical.zOffset).toBe(rider.wz);
 });
 
@@ -416,9 +417,11 @@ function sceneDigest(variant: {
 // pass instead of projected decals.
 // 247 re-recorded the raster scenes for `gpuShadow.support` and `gpuShadow.upright`
 // only: with those keys omitted, all five earlier digests were reproduced exactly.
+// The later oblique vehicle fit adds only `meshRoofSupport.topDownHeightDelta`.
+// Omitting that field reproduces the pre-fit digests exactly.
 it.each([
-  [{ frame: false, grass: false, garage: false, time: 0 }, "8cb06b493c72350e"],
-  [{ frame: true, grass: true, garage: false, time: 0.05, zoom: 3 / 8 }, "6c28c08dccb1c409"],
+  [{ frame: false, grass: false, garage: false, time: 0 }, "c4ba33badb90c6b1"],
+  [{ frame: true, grass: true, garage: false, time: 0.05, zoom: 3 / 8 }, "618c3b010edf98e0"],
 ] as const)("collects a byte-identical characterization scene %o", (variant, digest) => {
   const result = sceneDigest(variant);
   expect(result.digest).toBe(digest);

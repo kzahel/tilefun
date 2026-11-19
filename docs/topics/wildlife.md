@@ -4,7 +4,13 @@ Topic: wildlife
 Status: all 196 roster animals implemented and available in the animated lab.
 New exact art remains pending human review; specialist behavior limits are
 recorded in the individual checkpoints.
-Updated: 2026-11-16.
+Updated: 2026-11-19.
+
+The [wildlife status overview](../wildlife-status.md) reads the tracked art,
+behavior and sound ledgers. Regenerate it with `node scripts/wildlife/status.mjs`
+after a ledger update. The [historical production snapshot](../archive/wildlife-production-status.md)
+records older draft statuses. The private ledger recovered from Rex and the
+exact evidence archive support historical audits on demand.
 
 Browser-suite repair (2026-11-16): gorilla, seahorse and shark inspection
 coordinates now point at current seed-2026 natural owners. The previous homes
@@ -16,9 +22,6 @@ no-automatic-bounce contract now runs at every native physics tick, checking the
 initial landing, contact velocity transfer and subsequent ballistic departure;
 the browser retains hopping, contact reactions and saved phases. See
 [testing](testing.md) for the full-suite delivery evidence.
-Production-table refresh was attempted with `node scripts/wildlife/status.mjs`,
-but this checkout lacks the ignored `data/wildlife-campaign-v2/progress.json`;
-the historical art-production table cannot be regenerated from local state.
 Hosted native qualification found the same stale-home issue for sheep, impala,
 capybara and frilled-neck lizard; their destinations are also refreshed, with
 the exact fauna-data snapshot updated for these intentional coordinate changes.
@@ -167,9 +170,6 @@ existing cases and five added NPC cases). Typecheck, lint and production build
 pass; lint retains existing warnings. The art catalog and 1,391-candidate
 Workshop manifest are regenerated. Next: playtest the new NPC pursuit pacing.
 
-The production-table refresh cannot run in this checkout: its required local
-`data/wildlife-campaign-v2/progress.json` is absent. The existing table is retained;
-the status command and failure are recorded rather than inventing campaign state.
 ## Completed eight-hour continuation
 
 Final verification closes the run with **196/196 roster animals implemented**:
@@ -1016,9 +1016,7 @@ Aquatic ball-hit fixtures start 75px away, within a minimum-force throw's first
 descending arc; at 100px the ball can splash before reaching the small fish body.
 Typechecks, lint, production build, 2,244 units, seven focused browser checks and
 all six streaming readiness phases pass. Mounted screenshots were inspected in
-the game and natural playground. Production-table refresh was attempted after
-persisting this checkpoint, but ignored `data/wildlife-campaign-v2/progress.json`
-is absent; the existing production table and art-review state remain intact.
+the game and natural playground.
 The full browser run passed 531/533. Its two car tap-to-drive failures pass on the
 isolated staged build without the pre-existing touch-control edits; horse cases
 and all other browser checks pass. The scoped build and both generated inventories
@@ -1357,18 +1355,9 @@ same production physics. Flight frame phase remains transient. The original ball
 scare cancellation gap is resolved; launched balls also ignore their thrower's
 collider until they clear it, avoiding an immediate self-hit at chest height.
 
-Art checkpoint refresh was attempted, but this checkout lacks the ignored
-`data/wildlife-campaign-v2/progress.json`. Preserve the last validated production
-table rather than fabricate receipts; gameplay work/evidence belongs in 076/077.
-
-For the whole-roster completion table and local animation links, see the generated
-[production status table](../wildlife-status.md). Agents persist fresh progress
-then regenerate it with `node scripts/wildlife/status.mjs` after task selection,
-meaningful checkpoints, completion, blocking or receipt revision, and before final
-handoff. Checkpoint helpers can call its exported `writeStatus()` automatically.
-Rows come from validated receipt hashes; do not hand-edit them or infer readiness
-from an attempt's existence. Its timestamp is explicit; reopen it to load updates.
-The ignored background checkpoint remains the detailed live execution record.
+See the [historical production snapshot](../archive/wildlife-production-status.md)
+for the old draft statuses and animation links. The pond gameplay evidence is
+in 076/077.
 
 The owner requested a fresh start after the stopped overnight campaign produced
 flat animal views and shrinking head animation. The entire previous tracked

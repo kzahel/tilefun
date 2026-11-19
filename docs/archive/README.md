@@ -16,6 +16,7 @@ remain in these copies; each points back to its current owner.
 | [Engine checklist](engine-architecture-checklist.md) | [Capability map](../ENGINE-ARCHITECTURE-CHECKLIST.md); several formerly proposed capabilities have shipped |
 | [Riding investigation](riding-debug-investigation.md) | [Riding diagnostics](../RIDING-DEBUG.md); historical snapping theories are not freshly reproduced failures |
 | [Physics drift reduction](physics-sim-drift-reduction-plan.md) | Existing archive; current movement owners are in [physics](../3D-PHYSICS-DESIGN.md) |
+| [Wildlife production snapshot](wildlife-production-status.md) | Earlier draft statuses and repair holds. See [wildlife status](../wildlife-status.md) for the active inventories |
 
 Completed numbered [tacticals](../tactical/README.md) stay in their original
 directory as indexed execution records. New accepted work gets a new tactical;

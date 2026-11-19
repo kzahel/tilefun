@@ -82,10 +82,15 @@ export function sheetFrame(
 function roofShift(
   support: SpriteItem["meshRoofSupport"],
   ready: ReadonlySet<string>,
+  topDown: boolean,
 ): { x: number; y: number; z: number } {
   if (!support || !ready.has(support.assetId)) return NO_SHIFT;
   if (support.ownerAssetId && !ready.has(support.ownerAssetId)) return NO_SHIFT;
-  return { x: support.offsetX ?? 0, y: support.offsetY ?? 0, z: support.heightDelta };
+  return {
+    x: support.offsetX ?? 0,
+    y: support.offsetY ?? 0,
+    z: topDown ? (support.topDownHeightDelta ?? support.heightDelta) : support.heightDelta,
+  };
 }
 
 /**
@@ -101,9 +106,13 @@ export function actorBillboard(
   ready: ReadonlySet<string>,
   roomSort = false,
 ): Billboard {
-  const shift = roofShift(item.meshRoofSupport, ready);
+  const shift = roofShift(item.meshRoofSupport, ready, eye === "south");
+  // Stand an overhanging sprite on its depth plane. Compensate in the
+  // draw offset so its texels keep their screen coordinates and the rows
+  // below the new plane still lie on the ground in the top-down view.
+  const plane = eye === "south" ? (item.depthWy ?? item.wy) - item.wy : 0;
   const x = item.wx + shift.x,
-    y = item.wy + shift.y;
+    y = item.wy + shift.y + plane;
   // Illustrated room furniture sorts as one picture. Put a supported actor at
   // its collected sort row along the top-down view ray, preserving every pixel
   // of its screen position while keeping its whole body above its support.
@@ -120,7 +129,7 @@ export function actorBillboard(
     z: item.zOffset - shift.z + depth,
     width: item.spriteWidth,
     height: item.spriteHeight * (item.scaleY ?? 1),
-    below: item.drawOffsetY,
+    below: item.drawOffsetY - plane,
   };
 }
 

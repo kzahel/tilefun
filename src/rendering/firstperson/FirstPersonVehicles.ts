@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { vehiclePaint } from "../../traffic/VehiclePaint.js";
-import { applyMeshInstance } from "../AuthoredMeshPose.js";
+import { applyMeshInstance, topDownVehicleHeightScale } from "../AuthoredMeshPose.js";
 import { authoredVehicleForAsset } from "../AuthoredVehicleMeshes.js";
 import type { CarMeshAsset } from "../CarMeshAsset.js";
 import type { SpriteItem } from "../SceneItem.js";
@@ -59,6 +59,7 @@ export class FirstPersonVehicles {
     camera: THREE.Camera,
     meshes: SharedMeshAssets,
     item: SpriteItem,
+    topDown = false,
   ): boolean {
     const mesh = item.mesh;
     const asset = mesh ? meshes.asset(mesh.assetId) : undefined;
@@ -69,6 +70,7 @@ export class FirstPersonVehicles {
     const twins = this.twinsFor(asset);
     applyMeshInstance(asset, mesh);
     this.holder.position.set(item.wx, item.wy, item.zOffset);
+    this.holder.scale.z = topDown ? topDownVehicleHeightScale(asset, mesh) : 1;
     this.holder.add(asset.object);
     // The paint goes onto the asset's own materials; the lit copies then follow them.
     const restore = paintTexture ? meshes.bindPaint(asset.object, paintTexture) : undefined;

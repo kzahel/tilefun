@@ -1,7 +1,7 @@
 import { expect, test } from "@playwright/test";
 import type { GameTestHooks } from "../src/client/GameTestHooks.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
-import { RABBIT_TYPE } from "../src/wildlife/Rabbit.js";
+import { RABBIT_IMAGE, RABBIT_TYPE } from "../src/wildlife/Rabbit.js";
 
 test.use({ channel: "chromium" });
 // Shared Rapier contacts rest bodies within solver slop of the ground rather
@@ -10,6 +10,89 @@ test.use({ channel: "chromium" });
 // bounces (c473f541) launched at 75-95 px/s.
 const grounded = (z: number) => Math.abs(z) < 0.5;
 const MAX_LANDING_VZ = 40;
+
+test("3D animals switch live in the rabbit lab and remember the choice", async ({ page }) => {
+  const lab = "/tilefun/workshop.html?geometry=nature-behavior-rabbit";
+  const tool = "#/tool/world-geometry";
+  const modelUrl = "**/assets/models/experiments/rabbit.glb";
+  const spriteUrl = (url: URL) => url.pathname.endsWith(`/${RABBIT_IMAGE}`);
+  const spriteRequests: string[] = [];
+  page.on("request", (request) => {
+    if (spriteUrl(new URL(request.url()))) spriteRequests.push(request.url());
+  });
+  let releaseModel!: () => void;
+  const waitForRelease = new Promise<void>((resolve) => {
+    releaseModel = resolve;
+  });
+  await page.route(
+    modelUrl,
+    async (route) => {
+      await waitForRelease;
+      await route.continue();
+    },
+    { times: 1 },
+  );
+  const requestedModel = page.waitForRequest(modelUrl);
+  await page.goto(lab + tool);
+  const stage = page.getByLabel("Natural landscape playground");
+  const models = page.getByRole("checkbox", { name: "3D animals", exact: true });
+  try {
+    await requestedModel;
+    await expect(stage).toHaveAttribute("data-ready", "true");
+    await expect(stage).toHaveAttribute("data-wildlife-meshes", "0");
+    expect(spriteRequests).toEqual([]);
+  } finally {
+    releaseModel();
+  }
+  await expect(stage).toHaveAttribute("data-wildlife-meshes", "1");
+  expect(spriteRequests).toEqual([]);
+  await expect(models).toBeChecked();
+  await expect(page.getByText("Turn off 3D animals to review the sprite scene.")).toBeVisible();
+  await expect(page.getByRole("button", { name: "Looks good", exact: true })).toBeDisabled();
+  await page.getByRole("button", { name: "Pause", exact: true }).click();
+  await expect(stage).toHaveAttribute("data-authority-running", "false");
+  const pose = await stage.getAttribute("data-rabbit-poses");
+  const requestedSprite = page.waitForResponse((response) => spriteUrl(new URL(response.url())));
+  await models.uncheck();
+  expect((await requestedSprite).ok()).toBe(true);
+  await expect(stage).toHaveAttribute("data-wildlife-meshes", "0");
+  await models.check();
+  await expect(stage).toHaveAttribute("data-wildlife-meshes", "1");
+  expect(await stage.getAttribute("data-rabbit-poses")).toBe(pose);
+
+  await models.uncheck();
+  await page.reload();
+  await expect(stage).toHaveAttribute("data-ready", "true");
+  await expect(models).not.toBeChecked();
+  await expect(stage).toHaveAttribute("data-wildlife-meshes", "0");
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`${lab}&wildlife3d=1${tool}`);
+  await expect(stage).toBeInViewport({ ratio: 0.65 });
+  await expect(stage).toHaveAttribute("data-wildlife-meshes", "1");
+  await expect(stage).toHaveAttribute("data-authority-running", "true");
+  await expect(models).toBeChecked();
+  await page.goto(lab + tool);
+  await expect(stage).toHaveAttribute("data-ready", "true");
+  await expect(models).not.toBeChecked();
+
+  const loadingOrder: string[] = [];
+  await page.route(modelUrl, (route) => {
+    loadingOrder.push("model");
+    return route.fulfill({ status: 404 });
+  });
+  await page.route(spriteUrl, (route) => {
+    loadingOrder.push("sprite");
+    return route.continue();
+  });
+  const fallback = page.waitForResponse((response) => spriteUrl(new URL(response.url())));
+  await page.goto(`${lab}&wildlife3d=1${tool}`);
+  expect((await fallback).ok()).toBe(true);
+  expect(loadingOrder).toEqual(["model", "sprite"]);
+  await expect(stage).toHaveAttribute("data-wildlife-meshes", "0");
+  await expect(stage).toHaveAttribute("data-ready", "true");
+});
+
 test("meadow rabbits physically hop, react to landing and reload their mid-hop pose", async ({
   page,
 }) => {

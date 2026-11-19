@@ -21,14 +21,13 @@ const slot = (ground: GroundTops, name: string, index: number, block = 0) => {
   return (a.array as Float32Array).subarray(index * count, (index + 1) * count);
 };
 const PAGE = { layer: 3, x: 512, y: 256, width: 256, height: 256 };
-const make = () => new GroundTops(new THREE.Group(), new THREE.MeshBasicMaterial());
+const make = (made?: (mesh: THREE.Mesh) => void) =>
+  new GroundTops(new THREE.Group(), { value: null }, undefined, made);
 
 describe("the 3D ground (250, merged since 251)", () => {
   it("gives raised ground's textured cliffs a mesh of their own on the chunk's page", () => {
     const made: THREE.Mesh[] = [];
-    const ground = new GroundTops(new THREE.Group(), new THREE.MeshBasicMaterial(), (m) =>
-      made.push(m),
-    );
+    const ground = make((m) => made.push(m));
     const raised = { ...flat, getHeight: (_lx: number, ly: number) => (ly < 4 ? 1 : 0) };
     const { tops: raisedTops, cliffs } = buildTerrainChunk(raised, 0, 0, () => 0);
     ground.set("0,0", raisedTops, cliffs);
@@ -171,12 +170,15 @@ describe("the 3D ground (250, merged since 251)", () => {
     expect(ground.count).toBe(0);
   });
 
-  it("edits the built-in shader where its anchors still exist", () => {
+  it.each([
+    ["top", 1],
+    ["cliff", 2],
+  ] as const)("projects the %s texture axes through Three's shader", (surface, secondAxis) => {
     // The shading is spliced into three.js's own shader text. A three.js upgrade
     // that renames an anchor would otherwise silently draw flat ground.
     const atlas = { value: null };
     const material = shadeMaterial(new THREE.MeshBasicMaterial({ vertexColors: true }), {
-      ground: atlas,
+      ground: { atlas, surface },
     });
     const shader = {
       uniforms: {} as Record<string, unknown>,
@@ -190,18 +192,17 @@ describe("the 3D ground (250, merged since 251)", () => {
     expect(shader.uniforms.groundAtlas).toBe(atlas);
     expect(shader.vertexShader).toContain("attribute vec3 groundPage;");
     expect(shader.vertexShader).toContain("vGroundPage = groundPage;");
+    expect(shader.vertexShader).toContain("vGroundClip = gl_Position.xyw;");
+    expect(shader.vertexShader).toContain(`projectionMatrix * modelViewMatrix[${secondAxis}]`);
     expect(shader.fragmentShader).toContain("uniform highp sampler2DArray groundAtlas;");
-    expect(shader.fragmentShader).toContain("diffuseColor.rgb = groundArt(groundDx, groundDy);");
-    // Derivatives are taken before the branch, and lookups name their level.
-    expect(shader.fragmentShader.indexOf("dFdx(vGroundTexel)")).toBeLessThan(
-      shader.fragmentShader.indexOf("if (vGroundPage.z"),
-    );
+    expect(shader.fragmentShader).toContain("diffuseColor.rgb = groundArt();");
     expect(shader.fragmentShader).not.toContain("texture(groundAtlas");
+    expect(shader.fragmentShader.includes("#define GROUND_CLIFF")).toBe(surface === "cliff");
     // The decode it calls is three.js's own, declared in every fragment prefix.
     expect(THREE.ShaderChunk.colorspace_pars_fragment).toContain("vec4 sRGBTransferEOTF(");
     // Offsets are float literals: GLSL ES has no implicit int conversion.
     expect(shader.fragmentShader).not.toMatch(/[^.\d]\d+ \* d[xy]/);
     // A different program from the plain flat material's.
-    expect(material.customProgramCacheKey()).toContain("ground");
+    expect(material.customProgramCacheKey()).toContain(`ground-${surface}`);
   });
 });

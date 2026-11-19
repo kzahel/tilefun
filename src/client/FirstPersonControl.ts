@@ -5,6 +5,7 @@ import {
   type FirstPersonViewDistance,
   VIEW_DISTANCES,
 } from "../config/firstPersonViewDistance.js";
+import { loadWildlifeModels } from "../config/wildlifeModels.js";
 import {
   angleDelta,
   cameraRelativeMovement,
@@ -75,6 +76,7 @@ export class FirstPersonControl {
   /** Top-down views draw vehicles as shared outlined native-pixel
    * images; `r_pixelcars3d` and `?pixelcars=0` set it. */
   pixelBodies = new URLSearchParams(location.search).get("pixelcars") !== "0";
+  wildlifeModels = loadWildlifeModels();
   /** Prototype: the 3D ground sampled once per pixel, as trees and actors are;
    * `r_groundnearest` and `?groundnearest=1` set it. */
   groundNearest = new URLSearchParams(location.search).get("groundnearest") === "1";

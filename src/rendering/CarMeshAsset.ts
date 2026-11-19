@@ -25,7 +25,7 @@ export interface CarMeshAssetOptions {
 export class CarMeshAsset {
   readonly object = new THREE.Group();
   private readonly registered = new THREE.Group();
-  private readonly spriteHeightScale: number;
+  readonly spriteHeightScale: number;
   private readonly resources = new Set<{ dispose(): void }>();
   private readonly bitmaps = new Set<ImageBitmap>();
   private readonly wheels: {

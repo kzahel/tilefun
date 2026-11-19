@@ -19,7 +19,7 @@ import { roofSupport } from "../../traffic/RoofSupport.js";
 import { isVehicle } from "../../traffic/Vehicle.js";
 import { isDrivable } from "../../traffic/VehicleSeats.js";
 import { faunaProfile } from "../../wildlife/Fauna.js";
-import { isCarryable } from "../../wildlife/ForageResources.js";
+import { forageType, isCarryable, sourceType } from "../../wildlife/ForageResources.js";
 import { isRoadkill, ROADKILL_FADE_SECONDS, ROADKILL_SCALE_Y } from "../../wildlife/Roadkill.js";
 import type { World } from "../../world/World.js";
 import { authoredTrainForType } from "../AuthoredTrainMeshes.js";
@@ -52,6 +52,8 @@ import { groupVehicleContents } from "./VehicleGroups.js";
  * surfaces that this heuristic alone cannot order correctly.
  */
 const Z_SORT_FACTOR = 1;
+const GREENS = forageType("greens");
+const GROWING_PLANT = sourceType("growing-plant");
 
 /** Per-collection surfaces and supports shared by every actor. */
 export interface EntityDepth {
@@ -249,6 +251,9 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefine
     shadowTerrainZ: shadow.shadowTerrainZ,
     flashHidden: e.flashHidden ?? false,
   };
+  // The greens artwork includes leaves overhanging the side of the root
+  // nearest the top-down camera. Put its card there for world occlusion.
+  if (e.type === GREENS || e.type === GROWING_PLANT) spriteItem.depthWy = pos.wy + 4;
   if (facingRows(e)) spriteItem.facing = e.sprite.direction;
   if (mesh) spriteItem.mesh = mesh;
   if (meshGroundShadow) {
@@ -314,17 +319,19 @@ function entityRoofSupport(pass: EntityPass, e: Entity): SpriteItem["meshRoofSup
   const supportId = !isVehicle(e) ? roofSupport(e, pass.depth.movingRoofs)?.id : undefined;
   const support = supportId === undefined ? undefined : pass.index.roofs.get(supportId);
   const supportMesh = support ? authoredVehicleForType(support.type ?? "") : undefined;
-  return supportMesh &&
-    support?.collider &&
-    (!support.bodyRotation || rotateBodyVector(support.bodyRotation, 0, 0, 1).z > 0.995)
-    ? {
-        assetId: supportMesh.assetId,
-        heightDelta: support.bodyRotation
-          ? 0
-          : (support.collider.physicalHeight ?? 0) *
-            (1 - vehicleMeshHeightScale(supportMesh.vehicle)),
-      }
-    : undefined;
+  if (
+    !supportMesh ||
+    !support?.collider ||
+    (support.bodyRotation && rotateBodyVector(support.bodyRotation, 0, 0, 1).z <= 0.995)
+  )
+    return undefined;
+  const fittedDelta =
+    (support.collider.physicalHeight ?? 0) * (1 - vehicleMeshHeightScale(supportMesh.vehicle));
+  return {
+    assetId: supportMesh.assetId,
+    heightDelta: support.bodyRotation ? 0 : fittedDelta,
+    topDownHeightDelta: support.bodyRotation ? fittedDelta : undefined,
+  };
 }
 
 function entityCulled(
@@ -339,14 +346,15 @@ function entityCulled(
 ): boolean {
   const halfW =
     Math.max(e.sprite.spriteWidth / 2, meshRadius) + Math.abs(meshRoofSupport?.offsetX ?? 0);
+  const heightDelta = meshRoofSupport?.topDownHeightDelta ?? meshRoofSupport?.heightDelta ?? 0;
   let top = meshRadius
     ? Math.min(spriteBottom - e.sprite.spriteHeight * scaleY, effectiveWy - meshRadius * Math.SQRT2)
     : spriteBottom - e.sprite.spriteHeight * scaleY;
   let bottom = meshRadius
     ? Math.max(spriteBottom, effectiveWy + meshRadius * Math.SQRT2)
-    : spriteBottom + (meshRoofSupport?.heightDelta ?? 0);
+    : spriteBottom + heightDelta;
   if (meshRoofSupport) {
-    const shift = (meshRoofSupport.offsetY ?? 0) + meshRoofSupport.heightDelta;
+    const shift = (meshRoofSupport.offsetY ?? 0) + heightDelta;
     top = Math.min(top, spriteBottom - e.sprite.spriteHeight * scaleY + shift);
     bottom = Math.max(bottom, spriteBottom, spriteBottom + shift);
   }

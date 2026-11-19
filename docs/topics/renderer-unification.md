@@ -9,7 +9,7 @@ corrections and passing hosted Linux qualification are recorded in
 fixed-pass orchestration, enable gates, empty host hooks and GPU raster adapters.
 Interactive `RenderResources` expose terrain preparation/resources only;
 `ReviewRenderBackend` exposes the immutable native review pass protocol.
-Updated: 2026-11-17.
+Updated: 2026-11-18.
 
 Owns the move to one world renderer: its status, parity checklist, device
 scorecard and decision gates. [Rendering architecture](rendering-architecture.md)
@@ -81,6 +81,14 @@ streaming concern; [fog investigation](../research/first-person-driving-fog.md).
 The persistent holes reproduced by cycling 0.1× ↔ 0.25× were fixed on 2026-11-16
 by clearing evicted chunks' replication baselines; the matched browser run has
 zero missing terrain or ground images. [Cause and evidence](../research/terrain-holes-on-zoom.md).
+
+The perspective ground filter keeps its four samples and computes their footprint
+from each face's projected texture plane and the current viewport. On macOS
+Chromium, fragment derivatives sometimes spiked where a pixel quad crossed a
+chunk edge, pulling unrelated colors from the same terrain page into one-pixel
+stripes. The town-road browser regression compares filtered and single-sample
+pixels in uniform grass beside the road. Top-down's pixel grid samples once at
+the pixel center.
 
 ## Target shape
 

@@ -7,7 +7,7 @@ export function vehicleMeshHeightScale(vehicle: string): number {
   return fits[vehicle as keyof typeof fits] ?? 1;
 }
 
-/** Retained own-model registrations; sprite bodies remain the loading/failure fallback. */
+/** Retained vehicle model registrations. Sprite bodies cover failed model loads. */
 export interface AuthoredVehicleMesh {
   readonly vehicle: string;
   readonly assetId: string;

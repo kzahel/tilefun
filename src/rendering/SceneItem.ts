@@ -33,6 +33,7 @@ export interface SpriteItem {
   meshRoofSupport?: {
     assetId: string;
     heightDelta: number;
+    topDownHeightDelta?: number | undefined;
     ownerAssetId?: string;
     offsetX?: number;
     offsetY?: number;

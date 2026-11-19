@@ -42,7 +42,12 @@ export interface LabViewOptions {
   /** The lab's own scripted input (the Interiors playtest's walk, automatic walk
    * and place mode) in place of the game's controls. */
   input?(): Movement;
-  settings(): { paused: boolean; zoom: number; terrainPacing: TerrainPacing };
+  settings(): {
+    paused: boolean;
+    zoom: number;
+    terrainPacing: TerrainPacing;
+    wildlifeModels?: boolean;
+  };
   /** Diagnostic drawing in screen space, over the terrain and over the scene. */
   underlay?(frame: OverlayFrame, lab: LabView): void;
   overlay?(frame: OverlayFrame, lab: LabView): void;
@@ -326,6 +331,8 @@ export class LabView {
     const { device } = this.client;
     const { replica } = device;
     const settings = this.options.settings();
+    if (this.unified && settings.wildlifeModels !== undefined)
+      this.unified.wildlifeModels = settings.wildlifeModels;
     camera.zoom = settings.zoom;
     this.alpha = this.paused || !this.interpolate ? 1 : alpha;
     replica.beginPresentation(now, this.alpha, this.paused);
@@ -447,6 +454,7 @@ export class LabView {
       ...presentation,
       receivers: this.unified?.frame.receiverStats ?? this.client.device.frame.receiverStats,
       meshDraws: this.unified?.viewStats?.cars ?? presentation.meshDraws,
+      wildlifeMeshes: this.unified?.viewStats?.wildlifeMeshes ?? 0,
       alpha: this.alpha,
       steps: this.steps,
       authority: this.client.getDiagnostics(),

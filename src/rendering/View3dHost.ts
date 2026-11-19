@@ -27,6 +27,8 @@ export interface SharedMeshAssets {
   readonly ready: ReadonlySet<string>;
   /** The asset if it is ready; otherwise starts its load on first sight. */
   asset(assetId: string): CarMeshAsset | undefined;
+  /** The model has been requested and will be published at a frame boundary. */
+  pending?(assetId: string): boolean;
   /** A paint scheme's atlas once loaded; starts its load on first sight. */
   paint(paint: VehiclePaintScheme): THREE.Texture | undefined;
   /** Put a paint atlas on an asset's own materials; call the result to restore them. */

@@ -24,6 +24,7 @@ export class OptionsDialog {
   private firstPersonControls = document.createElement("select");
   private firstPersonControlsHelp = document.createElement("p");
   private distance = document.createElement("select");
+  private wildlifeModels = document.createElement("button");
   private controls = document.createElement("p");
   constructor(
     private select: (mode: TouchMovementMode) => Promise<void>,
@@ -33,6 +34,7 @@ export class OptionsDialog {
     private selectFirstPerson: (enabled: boolean) => Promise<void>,
     private selectDistance: (distance: FirstPersonViewDistance) => Promise<void>,
     private selectFirstPersonControls: (controls: FirstPersonControls) => Promise<void>,
+    private selectWildlifeModels: (enabled: boolean) => Promise<void>,
   ) {
     const d = this.dialog;
     d.className = "options-dialog";
@@ -128,6 +130,17 @@ export class OptionsDialog {
     this.distance.onchange = () => {
       void this.chooseDistance();
     };
+    this.wildlifeModels.type = "button";
+    this.wildlifeModels.setAttribute("aria-label", "3D animals");
+    this.wildlifeModels.onclick = () => {
+      const enabled = this.wildlifeModels.getAttribute("aria-pressed") !== "true";
+      this.showWildlifeModels(enabled);
+      void this.save(
+        () => this.selectWildlifeModels(enabled),
+        "3D animals preference saved on this device.",
+        () => this.wildlifeModels,
+      );
+    };
     const drivingHelp = document.createElement("p");
     drivingHelp.id = "options-driving-help";
     drivingHelp.textContent =
@@ -145,6 +158,7 @@ export class OptionsDialog {
       drivingHelp,
       zoom,
       pinchHelp,
+      this.wildlifeModels,
       view,
       this.firstPersonHelp,
       firstPersonControls,
@@ -178,6 +192,7 @@ export class OptionsDialog {
     firstPerson = false,
     distance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE,
     controls: FirstPersonControls = "simple",
+    wildlifeModels = true,
   ): void {
     this.opener = opener;
     this.status.textContent = "";
@@ -187,6 +202,7 @@ export class OptionsDialog {
     this.firstPerson.checked = firstPerson;
     this.distance.value = distance;
     this.firstPersonControls.value = controls;
+    this.showWildlifeModels(wildlifeModels);
     this.updateFirstPersonControlsHelp();
     // Key labels follow the player's layout, which may be learned during play.
     const k = keyLabel;
@@ -215,6 +231,10 @@ export class OptionsDialog {
     b.onclick = action;
     return b;
   }
+  private showWildlifeModels(enabled: boolean): void {
+    this.wildlifeModels.setAttribute("aria-pressed", String(enabled));
+    this.wildlifeModels.textContent = `3D animals · ${enabled ? "On" : "Off"}`;
+  }
   private setMode(mode: TouchMovementMode): void {
     this.help.textContent = {
       tap: "Tap a place to walk there. Tap near your feet to stop.",
@@ -238,6 +258,7 @@ export class OptionsDialog {
       this.firstPerson,
       this.firstPersonControls,
       this.distance,
+      this.wildlifeModels,
     ];
     for (const c of controls) c.disabled = true;
     try {

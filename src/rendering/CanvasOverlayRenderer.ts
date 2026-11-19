@@ -1,3 +1,4 @@
+import { requestGameSprite } from "../assets/GameAssets.js";
 import type { Spritesheet } from "../assets/Spritesheet.js";
 import type { OverlayDraw } from "./OverlayFrame.js";
 
@@ -57,6 +58,7 @@ export function drawOverlayGeometry(
               d.width,
               d.height,
             );
+          else void requestGameSprite(sheets, d.sheetKey);
           break;
         }
       }

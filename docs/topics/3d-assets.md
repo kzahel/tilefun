@@ -2,6 +2,58 @@
 
 Topic: 3d-assets
 
+Use the [pixel-styled 3D asset runbook](../3d-asset-runbook.md) to start the next
+asset and capture comparable evidence.
+
+## Live 3D rabbit experiment (2026-11-18)
+
+**3D animals** defaults to on. The main game offers the switch under **Options**
+and the [rabbit playground](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-rabbit&wildlife3d=1#/tool/world-geometry)
+has the same switch by the canvas. It takes effect immediately and the browser
+remembers it across play and lab visits. Shared links can set `wildlife3d=1` for
+models or `wildlife3d=0` for sprites. The lab brings the running playground into
+view on those links. Opening one leaves the saved preference alone. The
+[mesh catalog](../../src/rendering/WildlifeMeshCatalog.ts) connects the rabbit's
+sprite identity to its model and poses. The shared 3D scene uses replicated
+position, height, facing and clip frame to drive placement, rigid-part hop poses
+and feeding. Nine parts share instanced draws across rabbits. Each view draws up
+to 24 animal models. Enabled, registered animals and authored vehicle bodies
+wait for their model to load before drawing. The game requests a fallback sheet
+when a model fails, the player selects sprites, or an actor needs a sprite for
+another draw path. Editor previews request their own sheets as needed.
+
+The rabbit has a wider, lower fit for the oblique top-down camera, which adds
+model depth and height into the same screen axis. The fit leaves its forward
+length, ground origin and perspective-view proportions intact.
+
+At feeding time the rabbit can share a position with the plant. In top-down,
+greens and growing-plant sprites use a depth plane four world pixels in front
+of their root. The foliage tests against the rabbit mesh in the shared depth
+buffer, preserving the plant's screen position and ground contact. This depth
+plane also applies when the rabbit is drawn as a sprite.
+
+The current paint uses a connected neck shadow across the shoulder and flank,
+a darker underside to the jaw, and a broad light patch on the rump. The
+[original sprite's paint masters](../../art-source/wildlife-v2/rabbit/pilot-v1/masters.json)
+motivate these shapes. Comparing the exports confirms identical triangles and
+primitive layout across the paint change. The GLB has 1,072 triangles (644 for
+the body and 428 for the dark contour), one material and one nearest-sampled
+32×32 palette texture. The embedded PNG is 826 bytes, and the GLB is 113,204
+bytes. The contour faces share world depth and the same nine instanced draws.
+
+Rex authored the first mesh, and later passes were built locally in Blender 5.2.2
+LTS. The [builder](../../art-source/experiments/rabbit/build.py) exports an
+editable `.blend` with packed paint, the GLB and a geometry report into the
+supplied directory. The landscape lab asks reviewers to switch to sprites while
+models are visible so a verdict refers to the registered sprite scene.
+
+```sh
+blender --background --factory-startup --python-exit-code 1 \
+  --python art-source/experiments/rabbit/build.py -- data/experiments/rabbit
+```
+
+## Earlier work
+
 Current investigation, 2026-10-20: [160](../tactical/160-live-3d-and-shared-depth-investigation.md)
 examines live character meshes alongside shared-world depth for passengers and
 truck cargo. Four actual Blender sources were inspected/exported without changing

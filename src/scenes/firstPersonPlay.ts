@@ -409,6 +409,7 @@ function drawSeen(
       sun: control.sun,
       topDown,
       pixelBodies: control.pixelBodies,
+      wildlifeModels: control.wildlifeModels,
       groundNearest: control.groundNearest || !!grid,
       grass,
       effects,
