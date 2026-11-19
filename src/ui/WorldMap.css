@@ -77,7 +77,8 @@
 .world-map-dialog footer {
   padding: 8px 14px 12px;
   flex: 0 0 auto;
-  max-height: 40%;
+  /* Destination results must never resize the canvas that bounds their query. */
+  height: min(12rem, 40%);
   overflow-y: auto;
 }
 .world-map-dialog p {

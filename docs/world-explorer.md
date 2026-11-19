@@ -44,6 +44,9 @@ centering does not travel. The standalone explorer also has a **Railways & stops
 layer toggle. Very broad overview scales omit planned routes/stops with the other
 bounded regional features; zoom in to see them.
 
+The map footer has a stable height for each dialog size and scrolls as needed.
+Destination buttons can appear or disappear without changing the visible map bounds.
+
 The map is a terrain overview from the current world's pinned generator,
 with authoritative player positions. Saved terrain edits are inspected through
 the standalone explorer's exact tile view.

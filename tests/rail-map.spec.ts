@@ -22,7 +22,7 @@ for (const phone of [false, true]) {
   test(`map shows production railways and named stops (${phone ? "phone" : "desktop"})`, async ({
     page,
   }) => {
-    if (phone) await page.setViewportSize({ width: 390, height: 844 });
+    await page.setViewportSize(phone ? { width: 390, height: 844 } : { width: 992, height: 650 });
     const errors: string[] = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.goto(
@@ -52,8 +52,9 @@ for (const phone of [false, true]) {
     await expect(map).toHaveAttribute("data-x", String(away.x));
     await expect(map).toHaveAttribute("data-y", String(away.y));
     await expect(map).toHaveAttribute("data-settled", "true");
+    const canvas = map.getByTestId("world-map-canvas");
     expect(
-      await map.getByTestId("world-map-canvas").evaluate((node) => {
+      await canvas.evaluate((node) => {
         const canvas = node as HTMLCanvasElement,
           ctx = canvas.getContext("2d");
         if (!ctx) throw Error("Missing map context");
@@ -69,6 +70,14 @@ for (const phone of [false, true]) {
         true,
       );
     await page.screenshot({ path: `/tmp/tilefun-rail-map-${phone ? "phone" : "desktop"}.png` });
+
+    // A broad view clears the stop list, but must leave the queried canvas bounds alone.
+    const height = await canvas.evaluate((node) => node.getBoundingClientRect().height);
+    for (let i = 0; i < 6; i++) await map.getByRole("button", { name: "Zoom out" }).click();
+    await expect(map).toHaveAttribute("data-settled", "true");
+    await expect(stops.getByRole("button")).toHaveCount(0);
+    expect(await canvas.evaluate((node) => node.getBoundingClientRect().height)).toBe(height);
+
     await page.keyboard.press("Escape");
     await expect(map).toBeHidden();
     await page.getByRole("button", { name: "Open world map" }).click();
