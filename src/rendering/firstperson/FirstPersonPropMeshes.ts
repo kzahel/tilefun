@@ -2,9 +2,13 @@ import * as THREE from "three";
 import { ELEVATION_PX, TILE_SIZE } from "../../config/constants.js";
 import type { AABB } from "../../entities/collision.js";
 import type { Prop } from "../../entities/Prop.js";
+import { forestRowDefinition } from "../../patterns/ForestThicket.js";
 import type { SurfacePatch } from "../../physics/SurfacePatch.js";
 import { SURFACE_GRID, surfaceColors } from "../SurfacePresentation.js";
 import { artCard, type Billboard, sheetFrame } from "./FirstPersonBillboards.js";
+import type { DeckMaterials } from "./FirstPersonDecks.js";
+import type { FacePart } from "./FirstPersonFaces.js";
+import { forestRowCards, forestTreeCards } from "./FirstPersonForest.js";
 import { BACKING_ALPHA, type FirstPersonImages, type PropImage } from "./FirstPersonImages.js";
 import {
   appendLeftover,
@@ -19,7 +23,6 @@ import {
   propForm,
   propImageFrame,
   propPieces,
-  propSlices,
   propSurfaces,
   solidSilhouettes,
 } from "./FirstPersonProps.js";
@@ -38,6 +41,8 @@ export interface ChunkProps {
   lines: { positions: number[]; colors: number[] };
   textured: Map<THREE.Texture, TexturedFaces>;
   billboards: Billboard[];
+  forestRows: Billboard[];
+  forestTrees: Billboard[];
   surfaces: PropSurface[];
   /** Decks a body can stand under, each apart so it can fade (`isOverheadDeck`). */
   decks: OverheadDeck[];
@@ -167,6 +172,44 @@ export class PropMeshes {
     return material;
   }
 
+  /** Static prop faces join the area's batches. Each deck keeps its own draw
+   * and material so it can fade on its own. */
+  faceParts(
+    built: ChunkProps,
+    area: string,
+    parent: THREE.Group,
+    flatMaterial: THREE.Material,
+    gridMaterial: THREE.Material,
+    decks: DeckMaterials,
+  ): FacePart[] {
+    const parts: FacePart[] = [];
+    if (built.flat)
+      parts.push({ bucket: `flat:${area}`, material: flatMaterial, parent, ...built.flat });
+    parts.push({
+      bucket: `grid:${area}`,
+      material: gridMaterial,
+      parent,
+      ...built.lines,
+      lines: true,
+    });
+    for (const [texture, faces] of built.textured)
+      parts.push({ bucket: texture, material: this.faceMaterial(texture), parent, ...faces });
+    for (const deck of built.decks) {
+      const material = decks.get(deck.id);
+      parts.push(
+        { bucket: `deck:${deck.id}`, material: material.face, parent, ...deck.flat },
+        {
+          bucket: `deck-grid:${deck.id}`,
+          material: material.grid,
+          parent,
+          ...deck.lines,
+          lines: true,
+        },
+      );
+    }
+    return parts;
+  }
+
   /** The texture is gone (evicted artwork, a released room): drop its material. */
   dropMaterial(texture: THREE.Texture): void {
     this.faceMaterials.get(texture)?.dispose();
@@ -186,6 +229,8 @@ export class PropMeshes {
       lines: { positions: [], colors: [] },
       textured,
       billboards: [],
+      forestRows: [],
+      forestTrees: [],
       surfaces: [],
       decks: [],
       rooms: [],
@@ -215,10 +260,18 @@ export class PropMeshes {
     facesFor: FacesFor,
     ceilings?: ReadonlySet<string>,
   ): void {
+    const forest = forestRowDefinition(prop.type);
+    if (forest) {
+      const sheet = this.images.sheet(prop.sprite.sheetKey);
+      if (sheet) {
+        built.forestRows.push(...forestRowCards(prop, elevation, sheet));
+        built.forestTrees.push(...forestTreeCards(prop, forest.kit.id, elevation, sheet));
+      }
+      return;
+    }
     const frame = propImageFrame(prop);
     const form = propForm(prop, frame);
-    if (form === "cards") built.billboards.push(...this.propCards(prop, elevation));
-    else if (form === "billboard") {
+    if (form === "billboard") {
       const billboard = this.propBillboard(prop, elevation);
       if (billboard) built.billboards.push(billboard);
     } else if (hasRoomViews(prop)) {
@@ -380,24 +433,6 @@ export class PropMeshes {
     }
     const card = furniture.image(false);
     if (card) built.billboards.push(artCard(prop, furniture.frame, card.image, elevation));
-  }
-
-  /** A forest row's slices as cards of its sheet's image. */
-  private propCards(prop: Prop, elevation: number): Billboard[] {
-    const sheet = this.images.sheet(prop.sprite.sheetKey);
-    if (!sheet) return [];
-    return propSlices(prop, (col, row) => sheet.getRegion(col, row)).map((slice) => ({
-      image: sheet.image as CanvasImageSource,
-      sx: slice.sheetX,
-      sy: slice.sheetY,
-      sw: slice.width,
-      sh: slice.height,
-      x: slice.x,
-      y: slice.y,
-      z: elevation,
-      width: slice.width,
-      height: slice.height,
-    }));
   }
 
   private propBillboard(prop: Prop, elevation: number): Billboard | undefined {

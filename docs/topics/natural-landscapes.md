@@ -2,13 +2,34 @@
 
 Topic: natural-landscapes
 Status: natural cover and patterned forests are the default current regional generation.
-Updated: 2026-11-15.
+Updated: 2026-11-19.
 
 Owns natural land cover, forest composition, scattered vegetation and small ponds
 in the current regional overworld. [City generation](city-generation.md) owns
 generator policy and settlements; [world geometry](world-geometry.md) owns physical
 terrain elevation, slopes and stacked spaces. [Tactical 068](../tactical/068-natural-landscape-preview.md)
 records the first review delivery and validation.
+
+## Dense forests in the unified renderer
+
+A forest mass is made of staggered rows, and a single row's artwork can span
+several chunks. The unified scene used to discard every row whose anchor chunk
+fell outside its normal render margin. In seed 2026 at world pixels
+`(-1856, -7168)`, the right side of a 1440 × 900 top-down view was bare even
+though the replica held all 16 nearby rows. The renderer now retains a streamed
+row's owner when its artwork overlaps the view. This admits extra prop meshes
+without broadening the terrain page requests.
+
+Top-down draws the atlas composition at its original world coordinates, including
+the shorter caps. Perspective cameras and the sun map use individually placed
+whole trees from the same atlas. They are staggered within the existing collision
+bands with a palette for each kit. This removes the visible cuts from turning
+strips of a composite towards the camera and gives the top-down composition
+tree-shaped cast shadows. The game and the landscape lab share this presentation.
+
+The render residency regression checks zooming across the edge of a nine-repeat
+row, zooming back out and deleting the row. Matched Chromium captures confirm the
+previously blank edge and check front, side and rear views of the same forest.
 
 ## Wider small-pond shores
 

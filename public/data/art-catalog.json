@@ -10635,7 +10635,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:42"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:48"
         }
       ]
     },
@@ -37459,7 +37459,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:42"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:48"
         }
       ]
     },
@@ -37999,7 +37999,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:419"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:418"
         },
         {
           "system": "Editor",
@@ -38007,7 +38007,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/workshop/NaturalLandscapeCandidate.ts:45"
+          "source": "src/workshop/NaturalLandscapeCandidate.ts:51"
         }
       ]
     },

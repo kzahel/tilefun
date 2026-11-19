@@ -1,6 +1,5 @@
 import { type AABB, getEntityAABB } from "../../entities/collision.js";
 import type { Prop, PropCollider } from "../../entities/Prop.js";
-import { forestRowDefinition } from "../../patterns/ForestThicket.js";
 import { type SurfacePatch, surfaceZAt } from "../../physics/SurfacePatch.js";
 import { isRoadDeck, roadDeckColors, roadDeckMarkings } from "../RoadDeckPresentation.js";
 import { SURFACE_GRID, surfaceColors, surfaceGridLines } from "../SurfacePresentation.js";
@@ -63,13 +62,8 @@ export function blockingColliders(prop: Prop): PropCollider[] {
  * Solid props draw their physical volumes, wearing the fixed-view artwork on the
  * faces it depicts. Props whose bodies are much narrower than their pictures
  * (trees, posts, signs) or that have no body at all stay upright billboards.
- * Forest rows are wide bodies of many trees: they stand as a row of cards (247).
  */
-export function propForm(
-  prop: Prop,
-  frame = propImageFrame(prop),
-): "billboard" | "solid" | "cards" {
-  if (forestRowDefinition(prop.type)) return "cards";
+export function propForm(prop: Prop, frame = propImageFrame(prop)): "billboard" | "solid" {
   const blocking = blockingColliders(prop);
   if (!blocking.length) return "billboard";
   if (blocking.some((c) => c.surface)) return "solid";
@@ -308,61 +302,6 @@ export interface TexturedTriangles {
  * so they sit just below a shadowed lit face.
  */
 export const ART_SHADE = { top: 1, south: 1, east: 0.92, west: 0.72, north: 0.66 };
-
-/** One upright slice of a prop's artwork, for props that stand as a row of cards. */
-export interface PropSlice {
-  /** Source rectangle in the sheet image, in pixels. */
-  sheetX: number;
-  sheetY: number;
-  width: number;
-  height: number;
-  /** Foot centre in world pixels. */
-  x: number;
-  y: number;
-}
-
-/** Widest card a forest row is cut into: each stays inside the row's body from any
- * side, and neighbouring rows (48 px apart) still overlap when seen along the row. */
-const SLICE_WIDTH = 64;
-
-/**
- * A forest row as upright cards: each piece of its artwork cut into slices that
- * stand at the middle of the row's body. Seen from the south they line up into the
- * fixed view's picture; from other sides each turns to face the eye like any tree.
- * `regionOf` returns a sheet frame's top-left pixel.
- */
-export function propSlices(
-  prop: Prop,
-  regionOf: (frameCol: number, frameRow: number) => { x: number; y: number },
-): PropSlice[] {
-  const blocking = blockingColliders(prop);
-  let top = Infinity,
-    bottom = -Infinity;
-  for (const c of blocking) {
-    const bounds = getEntityAABB(prop.position, c);
-    top = Math.min(top, bounds.top);
-    bottom = Math.max(bottom, bounds.bottom);
-  }
-  const y = blocking.length ? (top + bottom) / 2 : prop.position.wy;
-  const slices: PropSlice[] = [];
-  for (const piece of propPieces(prop)) {
-    const region = regionOf(piece.frameCol, piece.frameRow);
-    const count = Math.max(1, Math.ceil(piece.spriteWidth / SLICE_WIDTH));
-    const width = piece.spriteWidth / count;
-    const left = prop.position.wx + piece.dx - piece.spriteWidth / 2;
-    for (let i = 0; i < count; i++)
-      slices.push({
-        sheetX: region.x + i * width,
-        sheetY: region.y,
-        width,
-        height: piece.spriteHeight,
-        x: left + (i + 0.5) * width,
-        // A shorter, top-aligned piece stands further back rather than floating.
-        y: y + piece.dy,
-      });
-  }
-  return slices;
-}
 
 export interface PropGeometry {
   /** Faces the fixed view never shows, in the artwork's average colour. */

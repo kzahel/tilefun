@@ -1,6 +1,7 @@
 import type { ArtCatalog } from "../art/ArtCatalog.js";
 import { sha256 } from "../art/ArtSource.js";
 import {
+  DEFAULT_LANDSCAPE_PROFILE,
   LANDSCAPE_PROFILES,
   type LandscapeProfile,
 } from "../generation/regional/NaturalLandscape.js";
@@ -19,6 +20,10 @@ export async function buildNaturalCandidate(
   catalog: ArtCatalog,
 ): Promise<WorkshopCandidate> {
   const c = naturalCase(id);
+  const recipe = naturalLandscapeRecipe(id, profile);
+  const hasThickets =
+    recipe.generation.type === "regional" &&
+    (recipe.landscape ?? DEFAULT_LANDSCAPE_PROFILE) === "thicket";
   return {
     id: `nature:${id}:${profile}:v1`,
     batchId: "natural-landscapes",
@@ -35,8 +40,9 @@ export async function buildNaturalCandidate(
     fingerprint: await sha256(
       new TextEncoder().encode(
         JSON.stringify({
-          recipe: naturalLandscapeRecipe(id, profile),
+          recipe,
           engine: ENGINE_REVIEW_REVISION,
+          thicketPresentation: hasThickets ? 2 : undefined,
           sources: catalog.sheets.filter(
             (s) =>
               s.id === "prop-oak-tree" ||

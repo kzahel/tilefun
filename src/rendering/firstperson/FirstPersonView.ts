@@ -11,11 +11,22 @@ import type { OverlayDraw } from "../OverlayFrame.js";
 import type { GrassItem, SpriteItem } from "../SceneItem.js";
 import { SURFACE_GRID } from "../SurfacePresentation.js";
 import type { PageRegion, SharedMeshAssets, SharedPages, View3dTarget } from "../View3dHost.js";
-import { actorBillboard, MovingCards, RecentPages, StaticCards } from "./FirstPersonBillboards.js";
+import {
+  actorBillboard,
+  MovingCards,
+  PropCardBatches,
+  RecentPages,
+} from "./FirstPersonBillboards.js";
 import { BodyImageCards } from "./FirstPersonBodyImages.js";
 import { cameraRight, type FirstPersonEye } from "./FirstPersonCamera.js";
 import { type HeadsetFrame, TABLE_BACKGROUND, ViewCameras } from "./FirstPersonCameras.js";
-import { chunkKey, chunksInReach, type TerrainEntry, terrainStale } from "./FirstPersonChunks.js";
+import {
+  ChunkPropIndex,
+  chunksInReach,
+  type PropViewBounds,
+  type TerrainEntry,
+  terrainStale,
+} from "./FirstPersonChunks.js";
 import { DeckMaterials } from "./FirstPersonDecks.js";
 import {
   type EffectItem,
@@ -227,7 +238,7 @@ export class FirstPersonView {
   /** The frame's pages as cards ask for them. */
   private readonly cardPages = new RecentPages();
   private readonly billboards: MovingCards;
-  private readonly cards: StaticCards;
+  private readonly cards: PropCardBatches;
   private readonly blobs: BlobShadows;
   private readonly grass: GrassCards;
   private readonly effects: EffectQuads;
@@ -266,7 +277,7 @@ export class FirstPersonView {
   private world: FirstPersonWorld | null = null;
   private realm: string | null | undefined;
   private propsSource: readonly Prop[] | null = null;
-  private propsByChunk = new Map<string, { props: Prop[]; signature: string }>();
+  private readonly propsByChunk = new ChunkPropIndex();
   /** Every resident chunk's decks and ramps; rebuilt on demand after a chunk changes. */
   private surfaces: PropSurface[] | null = null;
   private room: { scene: FirstPersonRoomScene; mesh: THREE.Mesh } | null = null;
@@ -294,20 +305,7 @@ export class FirstPersonView {
     const sunk = card("body");
     bladeDepth(sunk, 1);
     this.billboards = new MovingCards(this.worldRoot, card("body"), sunk);
-    this.cards = new StaticCards(
-      this.cardRoot,
-      card("card"),
-      this.sun.cardRoot,
-      shadeMaterial(
-        new THREE.MeshBasicMaterial({
-          alphaTest: 0.5,
-          side: THREE.DoubleSide,
-          colorWrite: false,
-          fog: false,
-        }),
-        { card: this.sun.cardRight, cardArt: this.atlas },
-      ),
-    );
+    this.cards = new PropCardBatches(this.cardRoot, () => card("card"), this.sun, this.atlas);
     this.blobs = new BlobShadows(this.worldRoot);
     this.effects = new EffectQuads(this.worldRoot);
     this.underlay = new FirstPersonUnderlay(this.worldRoot, sheets);
@@ -370,24 +368,25 @@ export class FirstPersonView {
       );
     // What is kept and shadowed centres on the eye, or on a tabletop's middle.
     const centre = table ?? frame.eye;
+    const reach = frame.drawRadius + CHUNK_PX;
     this.cardPages.begin(pages);
     this.updateChunks(
       frame,
       pages,
       ground
         ? chunksInRect(grown(ground, TOP_DOWN_SIDE, TOP_DOWN_BELOW))
-        : chunksInReach(centre.x, centre.y, frame.drawRadius + CHUNK_PX),
+        : chunksInReach(centre.x, centre.y, reach),
+      ground || { x: centre.x, y: centre.y, reach },
     );
     // Card changes come with their chunk's rebuild, which already told the sun.
-    this.cards.keep(this.cardPages);
-    this.cards.flush();
-    this.stats.cards = this.cards.count;
+    const cards = this.cards.prepare(this.cardPages, !!topDown);
+    this.stats.cards = cards.count;
     // Room shells and furniture stay out of the sun's map: rooms have no sun.
     this.stats.merged = this.faces.flush((mesh) => {
       mesh.layers.set(0);
       if (!this.room) SunShadows.cast(mesh);
     });
-    this.stats.meshes = this.faces.count + this.ground.meshes + (this.cards.count ? 1 : 0);
+    this.stats.meshes = this.faces.count + this.ground.meshes + cards.meshes;
     // A diagnostic fixture without terrain shows its plain background instead.
     this.groundRoot.visible = frame.background === undefined;
     // Outdoor fog follows the selected distance, independently of chunk arrival.
@@ -507,20 +506,7 @@ export class FirstPersonView {
   private groupProps(props: readonly Prop[]): void {
     this.propsSource = props;
     this.room?.scene.adoptShell(props);
-    this.propsByChunk.clear();
-    for (const prop of props) {
-      const key = chunkKey(
-        Math.floor(prop.position.wx / CHUNK_PX),
-        Math.floor(prop.position.wy / CHUNK_PX),
-      );
-      let entry = this.propsByChunk.get(key);
-      if (!entry) {
-        entry = { props: [], signature: "" };
-        this.propsByChunk.set(key, entry);
-      }
-      entry.props.push(prop);
-      entry.signature += `${prop.id}@${prop.position.wx},${prop.position.wy}:${prop.type}|`;
-    }
+    this.propsByChunk.replace(props);
   }
 
   /** Nearest missing or stale chunks first, a few per frame; far chunks are released.
@@ -530,6 +516,7 @@ export class FirstPersonView {
     frame: FirstPersonFrame,
     pages: SharedPages,
     wanted: readonly { cx: number; cy: number; key: string; distance: number }[],
+    view: PropViewBounds,
   ): void {
     const keep = new Set<string>();
     let builds = 0;
@@ -539,6 +526,14 @@ export class FirstPersonView {
       if (builds < CHUNK_BUILDS_PER_FRAME) builds += this.refreshChunk(frame.world, cx, cy, key);
       const ground = this.chunks.get(key)?.terrain;
       if (ground && this.pageGround(key, ground, pages)) groundPages++;
+    }
+    // A thicket row can span several chunks beyond its anchor. Keep a streamed
+    // owner's props when its artwork reaches this view, without expanding the
+    // terrain work for every viewport.
+    for (const { key, cx, cy } of this.propsByChunk.overhanging(view, keep)) {
+      keep.add(key);
+      if (builds < CHUNK_BUILDS_PER_FRAME)
+        builds += this.refreshChunk(frame.world, cx, cy, key, false);
     }
     this.stats.groundPages = groundPages;
     for (const [key, chunk] of this.chunks)
@@ -551,11 +546,17 @@ export class FirstPersonView {
   }
 
   /** Rebuild a loaded chunk's stale ground or props; returns the number of builds. */
-  private refreshChunk(world: FirstPersonWorld, cx: number, cy: number, key: string): number {
-    const chunk = world.getChunkIfLoaded(cx, cy);
-    if (!chunk && !this.propsByChunk.has(key)) return 0;
+  private refreshChunk(
+    world: FirstPersonWorld,
+    cx: number,
+    cy: number,
+    key: string,
+    ground = true,
+  ): number {
+    const chunk = ground ? world.getChunkIfLoaded(cx, cy) : undefined;
     let scene = this.chunks.get(key);
     if (!scene) {
+      if (!chunk && !this.propsByChunk.get(key)) return 0;
       scene = { cx, cy };
       this.chunks.set(key, scene);
     }
@@ -574,48 +575,19 @@ export class FirstPersonView {
     const { props, signature } = this.propsByChunk.get(key) ?? { props: [], signature: "" };
     if (scene.props?.signature !== signature) {
       const built = this.propMeshes.build(props, heightAt, this.room?.scene);
-      const parent = this.solidRoot;
-      const parts: FacePart[] = [];
-      if (built.flat)
-        parts.push({ bucket: `flat:${area}`, material: this.flatMaterial, parent, ...built.flat });
-      parts.push({
-        bucket: `grid:${area}`,
-        material: this.gridMaterial,
-        parent,
-        ...built.lines,
-        lines: true,
-      });
-      // Faces wearing the same artwork are one mesh, whichever chunks they stand in.
-      for (const [texture, faces] of built.textured)
-        parts.push({
-          bucket: texture,
-          material: this.propMeshes.faceMaterial(texture),
-          parent,
-          ...faces,
-        });
-      // Each overhead deck is its own mesh with its own material, to fade alone.
-      for (const deck of built.decks) {
-        parts.push(
-          {
-            bucket: `deck:${deck.id}`,
-            material: this.decks.get(deck.id).face,
-            parent,
-            ...deck.flat,
-          },
-          {
-            bucket: `deck-grid:${deck.id}`,
-            material: this.decks.get(deck.id).grid,
-            parent,
-            ...deck.lines,
-            lines: true,
-          },
-        );
-      }
+      const parts = this.propMeshes.faceParts(
+        built,
+        area,
+        this.solidRoot,
+        this.flatMaterial,
+        this.gridMaterial,
+        this.decks,
+      );
       this.dropRoomViews(key);
       for (const room of built.rooms) parts.push(...this.roomViewParts(key, cx, cy, room));
       this.faces.replace(`${key}:props`, parts);
       scene.props = { signature, surfaces: built.surfaces, decks: built.decks };
-      this.cards.set(key, built.billboards, this.cardPages);
+      this.cards.set(key, built, this.cardPages);
       this.surfaces = null;
       builds++;
     }

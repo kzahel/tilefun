@@ -1,8 +1,10 @@
 import * as THREE from "three";
 import { describe, expect, it } from "vitest";
+import { type SpriteImage, Spritesheet } from "../../assets/Spritesheet.js";
 import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
 import { createPlayer } from "../../entities/Player.js";
 import { DECK_Z, treeHousePoint, treeHouseProp } from "../../entities/TreeHouse.js";
+import { forestRowProp, forestRowType } from "../../patterns/ForestThicket.js";
 import { railCrossingRecipe } from "../../scenarios/RailCrossingRecipe.js";
 import { Chunk } from "../../world/Chunk.js";
 import type { CarMeshAsset } from "../CarMeshAsset.js";
@@ -86,9 +88,9 @@ describe("the view's merged static world (251)", () => {
     shadows: false,
     topDown: topDown ? { scale: 3 } : undefined,
   });
-  const settle = (view: FirstPersonView, f: FirstPersonFrame) => {
+  const settle = (view: FirstPersonView, f: FirstPersonFrame, output = target) => {
     for (let i = 0; i < 60; i++) {
-      view.render(f, target);
+      view.render(f, output);
       if (!view.stats.builds) return;
     }
     throw Error("chunks kept building");
@@ -177,6 +179,35 @@ describe("the view's merged static world (251)", () => {
     settle(view, f);
     expect(view.stats.meshes).toBeGreaterThan(0);
     expect(view.stats.groundPages).toBe(0);
+    view.dispose();
+  });
+
+  it("keeps an overlapping forest row through zoom changes and drops it when out of view", () => {
+    const row = forestRowProp(forestRowType(1, 9), 1224, 150);
+    if (!row) throw Error("missing forest row");
+    const sheet = new Spritesheet({ width: 2816, height: 8224 } as SpriteImage, 16, 16);
+    const region = { x: 0, y: 0, width: 512, height: 512, layer: 0 };
+    const output = { ...target, pages: { ...pages, page: () => region } };
+    const f = {
+      ...frame(world(new Map()), true),
+      eye: { x: 0, y: 0, z: 20, yaw: 0, pitch: 0 },
+      props: [row],
+    };
+    const view = new FirstPersonView(new Map([[row.sprite.sheetKey, sheet]]));
+    const draw = (scale: number) => settle(view, { ...f, topDown: { scale } }, output);
+    draw(0.5);
+    expect(view.stats.cards).toBeGreaterThan(0);
+    const count = view.stats.cards;
+    // The right edge is now x=640. The art starts at x=608 while its anchor
+    // chunk starts at x=1024, well outside the ordinary 128 px render margin.
+    draw(1);
+    expect(view.stats.cards).toBe(count);
+    draw(1.5);
+    expect(view.stats.cards).toBe(0);
+    draw(1);
+    expect(view.stats.cards).toBe(count);
+    settle(view, { ...f, topDown: { scale: 1 }, props: [] }, output);
+    expect(view.stats.cards).toBe(0);
     view.dispose();
   });
 

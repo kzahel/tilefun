@@ -4,7 +4,9 @@ import type { Prop } from "../../entities/Prop.js";
 import type { SpriteItem } from "../SceneItem.js";
 import type { PageRegion, SharedPages } from "../View3dHost.js";
 import { apparentDirection, type FirstPersonEye } from "./FirstPersonCamera.js";
+import { type GroundAtlas, shadeMaterial } from "./FirstPersonMaterials.js";
 import type { PropImageFrame } from "./FirstPersonProps.js";
+import type { SunShadows } from "./FirstPersonShadows.js";
 
 /** Where cards find their artwork: the host's page atlas (250). */
 export type CardPages = Pick<SharedPages, "pageSize" | "page">;
@@ -452,6 +454,69 @@ export class StaticCards {
     this.casterMaterial?.dispose();
     this.chunks.clear();
     this.count = 0;
+  }
+}
+
+/** Shared static props plus the forest representation selected by each camera.
+ * Whole trees cast the forest shadows in both views. */
+export class PropCardBatches {
+  private readonly ordinary: StaticCards;
+  private readonly rows: StaticCards;
+  private readonly trees: StaticCards;
+  private readonly batches: readonly StaticCards[];
+
+  constructor(
+    parent: THREE.Object3D,
+    material: () => THREE.Material,
+    sun: Pick<SunShadows, "cardRoot" | "cardRight">,
+    atlas: GroundAtlas,
+  ) {
+    const caster = () =>
+      shadeMaterial(
+        new THREE.MeshBasicMaterial({
+          alphaTest: 0.5,
+          side: THREE.DoubleSide,
+          colorWrite: false,
+          fog: false,
+        }),
+        { card: sun.cardRight, cardArt: atlas },
+      );
+    this.ordinary = new StaticCards(parent, material(), sun.cardRoot, caster());
+    this.rows = new StaticCards(parent, material());
+    this.trees = new StaticCards(parent, material(), sun.cardRoot, caster());
+    this.batches = [this.ordinary, this.rows, this.trees];
+  }
+
+  set(
+    key: string,
+    cards: Record<"billboards" | "forestRows" | "forestTrees", readonly Billboard[]>,
+    pages: CardPages,
+  ): void {
+    this.ordinary.set(key, cards.billboards, pages);
+    this.rows.set(key, cards.forestRows, pages);
+    this.trees.set(key, cards.forestTrees, pages);
+  }
+
+  prepare(pages: CardPages, topDown: boolean) {
+    for (const batch of this.batches) {
+      batch.keep(pages);
+      batch.flush();
+    }
+    this.rows.mesh.visible = topDown && this.rows.count > 0;
+    this.trees.mesh.visible = !topDown && this.trees.count > 0;
+    const forest = topDown ? this.rows.count : this.trees.count;
+    return {
+      count: this.ordinary.count + forest,
+      meshes: Number(this.ordinary.count > 0) + Number(forest > 0),
+    };
+  }
+
+  delete(key: string): void {
+    for (const batch of this.batches) batch.delete(key);
+  }
+
+  dispose(): void {
+    for (const batch of this.batches) batch.dispose();
   }
 }
 

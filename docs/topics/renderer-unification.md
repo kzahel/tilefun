@@ -9,7 +9,7 @@ corrections and passing hosted Linux qualification are recorded in
 fixed-pass orchestration, enable gates, empty host hooks and GPU raster adapters.
 Interactive `RenderResources` expose terrain preparation/resources only;
 `ReviewRenderBackend` exposes the immutable native review pass protocol.
-Updated: 2026-11-18.
+Updated: 2026-11-19.
 
 Owns the move to one world renderer: its status, parity checklist, device
 scorecard and decision gates. [Rendering architecture](rendering-architecture.md)
@@ -89,6 +89,12 @@ chunk edge, pulling unrelated colors from the same terrain page into one-pixel
 stripes. The town-road browser regression compares filtered and single-sample
 pixels in uniform grass beside the road. Top-down's pixel grid samples once at
 the pixel center.
+
+Dense forest residency follows the row artwork when it extends past its anchor
+chunk. The oblique camera draws the native composition and perspective cameras
+draw whole tree cards, which also supply shadows for both. The
+[natural landscapes topic](natural-landscapes.md#dense-forests-in-the-unified-renderer)
+records the reproduction and the shared presentation.
 
 ## Target shape
 

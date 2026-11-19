@@ -1,4 +1,6 @@
 import { describe, expect, it } from "vitest";
+import { type SpriteImage, Spritesheet } from "../../assets/Spritesheet.js";
+import { getEntityAABB } from "../../entities/collision.js";
 import type { Prop, PropCollider } from "../../entities/Prop.js";
 import { createProp } from "../../entities/PropFactories.js";
 import { DECK_Z, treeHouseProp } from "../../entities/TreeHouse.js";
@@ -8,6 +10,7 @@ import { surfaceZAt } from "../../physics/SurfacePatch.js";
 import { roadRailBridgeProp } from "../../railway/RoadRailBridge.js";
 import { undergroundGarageRecipe } from "../../scenarios/UndergroundGarageRecipe.js";
 import { roadDeckMarkings } from "../RoadDeckPresentation.js";
+import { forestRowCards, forestTreeCards } from "./FirstPersonForest.js";
 import {
   appendLeftover,
   appendPiecePlane,
@@ -20,7 +23,6 @@ import {
   propForm,
   propImageFrame,
   propPieces,
-  propSlices,
   propSolids,
   propSurfaces,
   solidSilhouettes,
@@ -214,28 +216,36 @@ describe("first-person prop forms", () => {
     expect(colors[1]).toBe(0); // red, not the prop's grey
   });
 
-  it("stands a forest row up as cards cut from its artwork", () => {
+  it("preserves the native forest composition and gives perspective trees roots inside its footprint", () => {
     const row = forestRowProp(forestRowType(1, 2), 1000, 500);
     if (!row) throw Error("missing forest row");
-    expect(propForm(row)).toBe("cards");
-    const slices = propSlices(row, (col, rowIndex) => ({ x: col * 16, y: rowIndex * 16 }));
-    // A 48 px cap, two 128 px repeats cut in half, and a 32 px cap.
-    expect(slices.map((s) => s.width)).toEqual([48, 64, 64, 64, 64, 32]);
+    const sheet = new Spritesheet({ width: 2816, height: 8224 } as SpriteImage, 16, 16);
+    const cards = forestRowCards(row, 0, sheet);
+    expect(cards.map((card) => card.width)).toEqual([48, 128, 128, 32]);
     // Side by side they cover the artwork exactly, left to right.
     const frame = propImageFrame(row);
     let edge = row.position.wx + frame.left;
-    for (const slice of slices) {
-      expect(slice.x - slice.width / 2).toBeCloseTo(edge);
-      edge += slice.width;
+    for (const card of cards) {
+      expect(card.x - card.width / 2).toBe(edge);
+      expect(card.y - card.height).toBe(row.position.wy + frame.top);
+      edge += card.width;
     }
-    expect(edge).toBeCloseTo(row.position.wx + frame.left + frame.width);
-    // The two halves of a repeat read neighbouring halves of the same sheet frame.
-    expect(slices[2]?.sheetX).toBe((slices[1]?.sheetX ?? 0) + 64);
-    expect(slices[3]?.sheetX).toBe(slices[1]?.sheetX);
-    // Cards stand in the middle of the row's 48 px body; the shorter cap stands back.
-    expect(slices[1]?.y).toBe(500 - 24);
-    expect(slices[5]?.y).toBe(500 - 24 - 16);
-    expect(slices[5]?.height).toBe(96);
+    expect(edge).toBe(row.position.wx + frame.left + frame.width);
+    expect(cards.map((card) => card.sx)).toEqual([2448, 2512, 2512, 2656]);
+
+    const trees = forestTreeCards(row, 1, 0, sheet);
+    expect(trees.length).toBeGreaterThan(cards.length);
+    expect(forestTreeCards(row, 1, 0, sheet)).toEqual(trees);
+    const bands = blockingColliders(row).map((wall) => getEntityAABB(row.position, wall));
+    for (const tree of trees) {
+      expect(tree.sy).toBeLessThan(1600); // Whole tree art lives above the forest strips.
+      expect(
+        bands.some(
+          (band) =>
+            tree.x > band.left && tree.x < band.right && tree.y > band.top && tree.y < band.bottom,
+        ),
+      ).toBe(true);
+    }
   });
 
   it("finds the deck or ramp under a body", () => {
