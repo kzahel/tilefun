@@ -8,6 +8,8 @@
 //   npm run render:bench -- --compare=/tmp/before.json
 //   npm run render:bench -- --software-webgl --query=view=topdown3d
 //     (the browser suite's SwiftShader lane; compare with saved reports)
+//   DEBUG=pw:browser npm run render:bench -- --js-flags="--trace-opt --trace-deopt" 2> /tmp/v8.log
+//     (V8's optimization log, for scripts/instrumentation/deopt-census.mjs)
 //
 // Per cell it reports frame cadence, main-thread render/update callbacks, the
 // time inside backend submits (the rest of render is collection and terrain
@@ -84,10 +86,18 @@ if (!Number.isFinite(seconds) || seconds < 1 || seconds > 60) throw Error("--sec
 const [width, height] = option("viewport", "1280x800").split("x").map(Number);
 const headed = process.argv.includes("--headed");
 const softwareWebGl = process.argv.includes("--software-webgl");
+// V8 flags for the launched browser's pages, for diagnosis: with
+// `DEBUG=pw:browser`, `--js-flags="--trace-opt --trace-deopt"` prints every
+// optimization and bailout, which shows a function that is re-optimized without
+// end (`node scripts/instrumentation/deopt-census.mjs <log>` counts them).
+// Timings of such a run are not a baseline.
+const jsFlags = option("js-flags", "");
 const output = option("output", path.join(os.tmpdir(), "tilefun-render.json"));
 const compare = option("compare", "");
 const endpoint = option("cdp", "");
 if (softwareWebGl && endpoint) throw Error("--software-webgl requires a launched browser");
+if (jsFlags && (endpoint || softwareWebGl))
+  throw Error("--js-flags requires the launched hardware browser");
 const port = Number(option("port", "0"));
 // An existing production origin (a preview server or the packaged shell's
 // tilefun://app/tilefun) instead of the isolated Vite dev server.
@@ -586,7 +596,10 @@ try {
       channel: softwareWebGl ? undefined : "chromium",
       args: softwareWebGl
         ? ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--disable-gpu"]
-        : undefined,
+        : jsFlags
+          ? // Unsandboxed so the page's V8 can write to the browser's output.
+            [`--js-flags=${jsFlags}`, "--no-sandbox", "--enable-logging=stderr"]
+          : undefined,
     });
     page = await browser.newPage({ viewport: { width, height } });
   }
@@ -747,11 +760,23 @@ try {
         zoom,
       );
       // Terrain preparation and caches settle; a wide overview takes a while.
+      // Quiet for a second, uploads included: chunks still arriving for an
+      // overview leave moments with nothing pending, and a cell sampled then
+      // measured their page uploads (a 5 ms p95 against 2 ms).
+      await page.evaluate(() => {
+        window.__settle = { uploads: -1, quiet: 0 };
+      });
       await page
         .waitForFunction(
           () => {
-            const d = document.querySelector("#game").__game.renderer.getDiagnostics();
-            return d.pending === 0 && d.rowsLastFrame === 0;
+            const { renderer } = document.querySelector("#game").__game;
+            const d = renderer.getDiagnostics();
+            const uploads = renderer.surface?.stats?.uploads ?? 0;
+            const settle = window.__settle;
+            const quiet = d.pending === 0 && d.rowsLastFrame === 0 && uploads === settle.uploads;
+            settle.uploads = uploads;
+            settle.quiet = quiet ? settle.quiet + 1 : 0;
+            return settle.quiet >= 4;
           },
           undefined,
           { timeout: 45_000, polling: 250 },
@@ -880,6 +905,7 @@ try {
     browser: endpoint ? page.browserVersion : browser.version(),
     headed: endpoint ? true : headed,
     softwareWebGl,
+    jsFlags: jsFlags || undefined,
     label: option("device", endpoint ? "attached device" : os.hostname().split(".")[0]),
     build: base ? `existing origin ${base}` : "vite dev (unminified modules)",
     query,

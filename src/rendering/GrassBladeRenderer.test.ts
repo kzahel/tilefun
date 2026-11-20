@@ -183,3 +183,108 @@ describe("reusable grass frames", () => {
     expect(scratch.getDiagnostics().activeItems).toBe(0);
   });
 });
+
+describe("grass pushed by nearby entities", () => {
+  const RANGE = { minCx: 0, maxCx: 0, minCy: 0, maxCy: 0 };
+  type Position = { position: { wx: number; wy: number } };
+  const at = (wx: number, wy: number): Position => ({ position: { wx, wy } });
+
+  /** The push a scan of every entity in order gives: the rule the neighbour
+   * grid must reproduce exactly, ties and near-coincident entities included. */
+  function scanned(wx: number, wy: number, entities: readonly Position[]): number {
+    let push = 0;
+    let closest = 24 * 24;
+    for (const { position } of entities) {
+      const dx = wx - position.wx;
+      const dy = wy - position.wy;
+      const distSq = dx * dx + dy * dy;
+      if (distSq < closest && distSq > 0.1) {
+        closest = distSq;
+        const dist = Math.sqrt(distSq);
+        push = (dx / dist) * (1 - dist / 24) * 0.5;
+      }
+    }
+    return push;
+  }
+
+  function expectScanned(
+    entities: readonly Position[],
+    viewport: { minWx: number; maxWx: number; minWy: number; maxWy: number },
+    scratch?: GrassFrameBuffer,
+  ): number {
+    const world = { getChunkIfLoaded: () => grass };
+    const resting = collectGrassBladeItems(world, [], RANGE, viewport, 3);
+    const pushed = collectGrassBladeItems(world, entities, RANGE, viewport, 3, scratch);
+    expect(pushed).toHaveLength(resting.length);
+    let moved = 0;
+    for (const [i, item] of pushed.entries()) {
+      const sway = resting[i]?.angle ?? Number.NaN;
+      const push = scanned(item.wx, item.wy, entities);
+      expect(item.angle).toBe(push !== 0 ? push + sway * 0.3 : sway);
+      if (push !== 0) moved++;
+    }
+    return moved;
+  }
+
+  const grass = chunk();
+  const whole = { minWx: 0, maxWx: 256, minWy: 0, maxWy: 256 };
+  const blades = collect(grass);
+  const blade = blades[150] as (typeof blades)[number];
+
+  function scattered(count: number, low: number, high: number): Position[] {
+    let seed = 0x2f6e2b1;
+    const random = () => {
+      seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0;
+      return seed / 2 ** 32;
+    };
+    return Array.from({ length: count }, () =>
+      at(low + random() * (high - low), low + random() * (high - low)),
+    );
+  }
+
+  it("matches a scan of every entity for a crowd in and around the view", () => {
+    const crowd = scattered(600, -90, 346);
+    expect(expectScanned(crowd, whole)).toBeGreaterThan(200);
+    // A view that cuts the chunk, with entities beyond its culled margin.
+    const part = { minWx: 70, maxWx: 131, minWy: 40, maxWy: 190 };
+    expect(expectScanned(crowd, part)).toBeGreaterThan(20);
+  });
+
+  it("gives equal distances to the earlier entity and ignores one on the blade", () => {
+    const left = at(blade.wx - 5, blade.wy);
+    const right = at(blade.wx + 5, blade.wy);
+    const on = at(blade.wx, blade.wy);
+    // Mirror images push opposite ways, so the order decides the sign.
+    for (const entities of [
+      [left, right],
+      [right, left],
+      [on, right, left, at(blade.wx + 5, blade.wy)],
+      [at(blade.wx, blade.wy + 23.999), on, at(blade.wx, blade.wy - 23.999)],
+      [at(blade.wx + 24, blade.wy), at(blade.wx - 24.001, blade.wy)],
+      [at(Number.NaN, blade.wy), at(blade.wx + 3, Number.POSITIVE_INFINITY), left],
+    ])
+      expectScanned(entities, whole);
+    const [first, second] = [
+      collectGrassBladeItems({ getChunkIfLoaded: () => grass }, [left, right], RANGE, whole, 3),
+      collectGrassBladeItems({ getChunkIfLoaded: () => grass }, [right, left], RANGE, whole, 3),
+    ];
+    expect(first[150]?.angle).not.toBe(second[150]?.angle);
+  });
+
+  it("matches across grid shapes and reuse: coarse cells, one cell, then an ordinary view", () => {
+    const crowd = scattered(300, -60, 316);
+    const scratch = new GrassFrameBuffer();
+    const vast = { minWx: -9000, maxWx: 9000, minWy: -9000, maxWy: 9000 };
+    const unbounded = {
+      minWx: Number.NEGATIVE_INFINITY,
+      maxWx: Number.POSITIVE_INFINITY,
+      minWy: Number.NEGATIVE_INFINITY,
+      maxWy: Number.POSITIVE_INFINITY,
+    };
+    for (const viewport of [vast, unbounded, whole, vast, whole]) {
+      expect(expectScanned(crowd, viewport, scratch)).toBeGreaterThan(100);
+      expect(expectScanned(crowd.slice(0, 3), viewport, scratch)).toBeGreaterThan(0);
+      expect(expectScanned([], viewport, scratch)).toBe(0);
+    }
+  });
+});

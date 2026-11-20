@@ -408,6 +408,12 @@ Run from the repository root with `node scripts/instrumentation/<name>.mjs`:
 - `terrain-scheduler-allocation`: ready/pending residency bookkeeping and job order.
 - `grass-frame-allocation` / `grass-cache-retention`: warm frame pools and discarded
   chunk lifetime, with explicit GC only between retention batches.
+- `deopt-census <v8.log>`: counts V8 bailouts and optimized compiles per function
+  in a log from `render:bench --js-flags="--trace-opt --trace-deopt"` (run with
+  `DEBUG=pw:browser`). It reads a saved log and starts nothing itself. A few
+  bailouts per function are warm-up; hundreds in one cell are a function being
+  optimized and thrown away without end. See
+  [performance](../../docs/topics/performance.md#grass-collection-and-a-v8-re-optimization-loop-2026-11-20).
 
 Each owns an isolated Vite origin and bundled Chromium and closes both on exit.
 V8 sampling is not an allocation census or a frame-pacing measurement. Compare

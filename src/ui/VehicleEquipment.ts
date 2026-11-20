@@ -23,13 +23,15 @@ function nearest(
   match: (e: Entity) => boolean,
   height: number,
 ): Entity | undefined {
+  // Reach before occupancy: asking who rides a vehicle scans every entity, so a
+  // crowd beside a car park paid that for each car, every frame.
   return entities
     .filter(
       (e) =>
         match(e) &&
-        !entities.some((other) => other.parentId === e.id) &&
         boardingDistance(player, e) <= 32 &&
-        vehicleVerticalDistance(player, e) <= height,
+        vehicleVerticalDistance(player, e) <= height &&
+        !entities.some((other) => other.parentId === e.id),
     )
     .sort((a, b) => boardingDistance(player, a) - boardingDistance(player, b) || a.id - b.id)[0];
 }
@@ -43,10 +45,11 @@ export function driveCandidate(player: Entity, entities: readonly Entity[]): Ent
         isDrivable(e) &&
         !isVehicleOverturned(e) &&
         (e.towedBy ?? e.transportedBy) === undefined &&
-        !entities.some((other) => other.parentId === e.id) &&
         Math.hypot(e.velocity?.vx ?? 0, e.velocity?.vy ?? 0) <= 3 &&
+        // The whole-list questions (a transporter under it, a rider) last.
+        boardingDistance(player, e) <= 32 &&
         Math.abs((e.wz ?? 0) - (player.wz ?? 0)) <= boardingHeightLimit(e, entities) &&
-        boardingDistance(player, e) <= 32,
+        !entities.some((other) => other.parentId === e.id),
     )
     .sort((a, b) => boardingDistance(player, a) - boardingDistance(player, b) || a.id - b.id)[0];
 }

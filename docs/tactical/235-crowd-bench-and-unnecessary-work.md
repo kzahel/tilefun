@@ -825,6 +825,16 @@ First review the attributed baseline above. Proposed next order:
 
 1. Remove repeated appearance application and vehicle prompt search work; keep
    arrival, animation and prompt behavior covered in native tests.
+   - Prompt search delivered 2026-11-20: the drive and equipment candidates
+     asked who rides each car and whether a transporter is under it (two scans
+     of every entity) before testing whether the car is within reach. Reach is
+     now tested first, with the same result. Client lane on one recording:
+     `client.prompts` 0.933 → 0.077 ms p50, `client.update` 5.26 → 4.35 ms,
+     outcome hashes equal. In the game's crowd scene the prompt was 0.58 ms of
+     each update on the M4 Pro and is now 0.07 ms.
+   - Appearance application is still open: `client.appearances` is 3.8 ms of the
+     4.35 ms. It clones a collider and a sprite for every actor on every update,
+     in lab replicas only (`applyRecipeAppearances`); the game does not run it.
 2. Reduce sleeping-body reads/contact queries; add only the counters needed to
    show reads following movers/contacts and test each wake path.
 3. Change-tracked replication, including animation and non-motion gameplay edits.

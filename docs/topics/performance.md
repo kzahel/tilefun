@@ -7,6 +7,62 @@ are incompatible by default. Historical surface-shadow comparison and legacy
 GPU asset-capture harnesses are retired. Current measurements use the render,
 streaming and driving runners below.
 
+## Grass collection and a V8 re-optimization loop (2026-11-20)
+
+The same steady top-down view cost 0.7–0.9 ms of render in some browser sessions
+and 1.9–2.7 ms in others, for the whole session (M4 Pro, `render:bench
+--scenes=wildlife --zooms=1`, 158 entities, 485 blades drawn). All of the
+difference was `collectCameraGrass`: 0.2 against 1.7 ms a frame. Run a cell
+several times before trusting one sample of it.
+
+Cause:
+- A chunk's blades were `{ wx, wy, variant, phase, period }` records with integer
+  coordinates. V8 keeps one hidden-class tree for all object literals with the
+  same leading keys. Creating any other five-key record that starts `wx, wy`
+  with a fractional coordinate deprecated the class of the blades already built.
+- With a steady camera no new blades are built, so the replacement class does not
+  exist. The optimizer discards the only class it has seen, compiles the loop
+  with nothing to specialize on, bails out on the first blade and starts again:
+  about 4,300 compile and bailout rounds in 8 seconds. Whether a session lands
+  in it depends on load order (six of thirteen sessions here).
+- The loop tested every blade against every replicated entity, so the
+  unoptimized rounds were expensive and the cost grew with the population.
+
+Delivered:
+- Blades are typed arrays per chunk (`ChunkBlades`), with no object shape to
+  deprecate.
+- `GrassFrameBuffer.index` groups the entities around the view in a cell grid
+  and `closest` reads a blade's neighbouring cells. Angles are bit-identical to
+  the full scan: 300 random frames (1.76 million blades) against the previous
+  code, and unit tests cover ties, an entity on a blade, non-finite positions
+  and coarse or single-cell grids.
+- Fourteen runs after the change: render 0.7–1.1 ms, and at most nine grass
+  bailouts in each of the eight traced ones. In Node with both versions optimized,
+  a 640×400 px view with 1,019 blades takes 36 µs against 220 µs with 158
+  entities, and 60 µs against 1,236 µs with 1,000. Crowd render at zoom 1:
+  2.4 → 2.0 ms.
+
+Finding the next one: `render:bench --js-flags="--trace-opt --trace-deopt"`
+with `DEBUG=pw:browser` saves V8's optimization log, and
+`node scripts/instrumentation/deopt-census.mjs <log>` counts bailouts per
+function. Two traced runs of `city`, `crowd`, `woods` and `drive` at zoom 1 show
+no other function in a loop; `spriteRegion`, `getRegion`, `fill` and `drawTile`
+bail out 40–150 times a run, in step with the four world loads. A profile cannot show this: it
+credited the slow sessions to the grass functions, but not why. Per-frame loops
+over long-lived records are the exposed shape, since `{ wx, wy, ... }` literals
+are everywhere; typed arrays are immune.
+
+The same crowd profile showed the vehicle prompt search scanning every entity
+twice per parked car before testing reach: 0.58 ms of each update, now 0.07 ms
+([235](../tactical/235-crowd-bench-and-unnecessary-work.md#review-boundary-and-next-slices)).
+With both changes the crowd scene's main thread is busy 25% of the time at
+zoom 1, from 35% (profiled, M4 Pro, 60 Hz headless).
+
+`render:bench` now waits for a second without page uploads before sampling a
+cell. About half of `woods` 0.1× cells had started while chunks were still
+arriving, and reported a 5 ms render p95 (279 page uploads in the window)
+against 2.1–2.4 ms settled. A steady cell's `upload.pages` should be near zero.
+
 ## Render scorecard and GPU depth shadows (2026-11-10)
 
 `npm run render:bench` is the rendering scorecard: `city`, `crowd` and `woods`
