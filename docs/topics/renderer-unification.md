@@ -9,7 +9,15 @@ corrections and passing hosted Linux qualification are recorded in
 fixed-pass orchestration, enable gates, empty host hooks and GPU raster adapters.
 Interactive `RenderResources` expose terrain preparation/resources only;
 `ReviewRenderBackend` exposes the immutable native review pass protocol.
-Updated: 2026-11-19.
+[255](../tactical/255-wildlife-3d-model-campaign/progress.md) exercises skinned
+animal GLBs in the same game and lab scene. A development catalog maps each
+GLB to the actor's existing clip, frame phase and facing. Sprite fallback and
+a mixed-species crowd ran locally. The art disposition lives in the tactical.
+[256](../tactical/256-wildlife-3d-game-rollout.md) adds the approved wildlife
+bank and exact Workshop play links. The shared view falls through to the sprite
+for pending or failed loads or after using its 24-model draw budget. A view
+starts at most four model loads concurrently and retains up to 48 model batches.
+Updated: 2026-11-20.
 
 Owns the move to one world renderer: its status, parity checklist, device
 scorecard and decision gates. [Rendering architecture](rendering-architecture.md)

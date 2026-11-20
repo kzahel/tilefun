@@ -8106,6 +8106,1116 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "wildlife-3d-cat-pilot-v1",
+      "name": "wildlife 3d cat pilot v1",
+      "image": "demos/wildlife-3d/cat-pilot-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "d9d35750a6502067ca18f5ce86d292e9fc12508e912f4467db5302bc6190e355",
+      "source": "demos/wildlife-3d/cat-pilot-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-rabbit-pilot-v1",
+      "name": "wildlife 3d rabbit pilot v1",
+      "image": "demos/wildlife-3d/rabbit-pilot-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "129597c996962f9bc6caa197eadbee309eb9b56f484067bdb89098c5ca250738",
+      "source": "demos/wildlife-3d/rabbit-pilot-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-robin-pilot-v1",
+      "name": "wildlife 3d robin pilot v1",
+      "image": "demos/wildlife-3d/robin-pilot-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "fb8dbb59e0de3232d190d6eb5f7b0e90e80eae0fd372a21ac39a02f6568c9e9b",
+      "source": "demos/wildlife-3d/robin-pilot-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-fish-pilot-v1",
+      "name": "wildlife 3d fish pilot v1",
+      "image": "demos/wildlife-3d/fish-pilot-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "5345640e57cc1c9fe59b263960beaa980f77cb79357329bb524e40083cd269f4",
+      "source": "demos/wildlife-3d/fish-pilot-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-cat-ginger-pets-v1",
+      "name": "wildlife 3d cat ginger pets v1",
+      "image": "demos/wildlife-3d/cat-ginger-pets-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "304c5868a2d94784c8be4d97d054ca1e5026a3ae71bb9bf445f2ccfe6800ae1e",
+      "source": "demos/wildlife-3d/cat-ginger-pets-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-cat-black-pets-v1",
+      "name": "wildlife 3d cat black pets v1",
+      "image": "demos/wildlife-3d/cat-black-pets-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "1e818e272d242e6fd46a302e594f216e5d54eb4e3b61875a47a4eedfa9c824d7",
+      "source": "demos/wildlife-3d/cat-black-pets-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-dog-pets-v1",
+      "name": "wildlife 3d dog pets v1",
+      "image": "demos/wildlife-3d/dog-pets-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "2f93f023e103c99b936a7a40523d062a199d3fad95d28c630ed342f8fa001d3f",
+      "source": "demos/wildlife-3d/dog-pets-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-dog-shepherd-pets-v1",
+      "name": "wildlife 3d dog shepherd pets v1",
+      "image": "demos/wildlife-3d/dog-shepherd-pets-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "d395f897b3a880f55782da26839e0fcafd8110806073b8ae3396a719c62bcb32",
+      "source": "demos/wildlife-3d/dog-shepherd-pets-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-blue-whale-swimmers-v1",
+      "name": "wildlife 3d blue whale swimmers v1",
+      "image": "demos/wildlife-3d/blue-whale-swimmers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "ddde5ee53129686baebddb3729b4e4745ed3d0f6142ace35185df3691fbdff4a",
+      "source": "demos/wildlife-3d/blue-whale-swimmers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-humpback-whale-swimmers-v1",
+      "name": "wildlife 3d humpback whale swimmers v1",
+      "image": "demos/wildlife-3d/humpback-whale-swimmers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "a9110431df265f1703e94b74b6b2b1a069f189a62b33f7c9b8f8d7a92e0265cf",
+      "source": "demos/wildlife-3d/humpback-whale-swimmers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-dugong-swimmers-v1",
+      "name": "wildlife 3d dugong swimmers v1",
+      "image": "demos/wildlife-3d/dugong-swimmers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "e691596f18efbef1d2db0cf9caaaa354ffc66737975c2f5ea11f5e8a1b0e9a30",
+      "source": "demos/wildlife-3d/dugong-swimmers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-manatee-swimmers-v1",
+      "name": "wildlife 3d manatee swimmers v1",
+      "image": "demos/wildlife-3d/manatee-swimmers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "c7bcc0eb26d05d9a0962d5fcdeef841892cf2dfcff56d33fa5b72654e323f29f",
+      "source": "demos/wildlife-3d/manatee-swimmers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-dolphin-marine-hunters-v1",
+      "name": "wildlife 3d dolphin marine hunters v1",
+      "image": "demos/wildlife-3d/dolphin-marine-hunters-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6a5f9f6a166f8610e77c5e25767086a85bb894cae26214ed978398495d351d35",
+      "source": "demos/wildlife-3d/dolphin-marine-hunters-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-orca-marine-hunters-v1",
+      "name": "wildlife 3d orca marine hunters v1",
+      "image": "demos/wildlife-3d/orca-marine-hunters-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "925186b32fa364c0e8e9045cfc218114ecda7d8392f5c900187b3f6b63c94c37",
+      "source": "demos/wildlife-3d/orca-marine-hunters-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-narwhal-marine-hunters-v1",
+      "name": "wildlife 3d narwhal marine hunters v1",
+      "image": "demos/wildlife-3d/narwhal-marine-hunters-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "cd5e8a4bc0193d127666b7822b198d12afdb9daef453cf6ce76a78057ad16d89",
+      "source": "demos/wildlife-3d/narwhal-marine-hunters-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-swordfish-marine-hunters-v1",
+      "name": "wildlife 3d swordfish marine hunters v1",
+      "image": "demos/wildlife-3d/swordfish-marine-hunters-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "48af6511071f02f10259a914dcd67d32bfab4ff8f2b2abb5dd3aeb924005ee3f",
+      "source": "demos/wildlife-3d/swordfish-marine-hunters-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-harbor-seal-pinnipeds-v1",
+      "name": "wildlife 3d harbor seal pinnipeds v1",
+      "image": "demos/wildlife-3d/harbor-seal-pinnipeds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "99352f0099df236975a00ee6ee28a7351ad61d690f6b06bf961bc79045120810",
+      "source": "demos/wildlife-3d/harbor-seal-pinnipeds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-sea-lion-pinnipeds-v1",
+      "name": "wildlife 3d sea lion pinnipeds v1",
+      "image": "demos/wildlife-3d/sea-lion-pinnipeds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "842fdc1401febe6b4c8e5525b9b390abc6cb76d393c25c385c92687c5158e7fa",
+      "source": "demos/wildlife-3d/sea-lion-pinnipeds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-walrus-pinnipeds-v1",
+      "name": "wildlife 3d walrus pinnipeds v1",
+      "image": "demos/wildlife-3d/walrus-pinnipeds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6584d9581cb023e8e8a625a9974595de20f9e5b40921b55683349b14dd448bd6",
+      "source": "demos/wildlife-3d/walrus-pinnipeds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-shark-sharks-rays-v1",
+      "name": "wildlife 3d shark sharks rays v1",
+      "image": "demos/wildlife-3d/shark-sharks-rays-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "266231e935a5f13a3a527160ac4b42b804d1d5f804e651ff77c043e2f2e3d941",
+      "source": "demos/wildlife-3d/shark-sharks-rays-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-hammerhead-sharks-rays-v1",
+      "name": "wildlife 3d hammerhead sharks rays v1",
+      "image": "demos/wildlife-3d/hammerhead-sharks-rays-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "b3597b04b28c3313bf9db25bf6ee7e8b565a357d0c5c9389f11083af10b25a58",
+      "source": "demos/wildlife-3d/hammerhead-sharks-rays-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-whale-shark-sharks-rays-v1",
+      "name": "wildlife 3d whale shark sharks rays v1",
+      "image": "demos/wildlife-3d/whale-shark-sharks-rays-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6ecb503f371f9f084b9b1ac7a2744cefecaf7cb3fd04093ee4c2496739ad0806",
+      "source": "demos/wildlife-3d/whale-shark-sharks-rays-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-manta-ray-sharks-rays-v1",
+      "name": "wildlife 3d manta ray sharks rays v1",
+      "image": "demos/wildlife-3d/manta-ray-sharks-rays-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "2f8a9cf1844c91516af6e0e161298375bc878e13b08ccbe72cf0b1f28a7441ba",
+      "source": "demos/wildlife-3d/manta-ray-sharks-rays-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-anglerfish-distinct-fish-v1",
+      "name": "wildlife 3d anglerfish distinct fish v1",
+      "image": "demos/wildlife-3d/anglerfish-distinct-fish-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "b035b3cd0cd27c30a10744e30a626115fb4f25580f669e14dd91a56441bd273f",
+      "source": "demos/wildlife-3d/anglerfish-distinct-fish-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-pufferfish-distinct-fish-v1",
+      "name": "wildlife 3d pufferfish distinct fish v1",
+      "image": "demos/wildlife-3d/pufferfish-distinct-fish-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "fc210f6dcd08a225e3f2f24c0706d232946dd8679bed5d7f5ef1044b7d793e01",
+      "source": "demos/wildlife-3d/pufferfish-distinct-fish-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-ocean-sunfish-distinct-fish-v1",
+      "name": "wildlife 3d ocean sunfish distinct fish v1",
+      "image": "demos/wildlife-3d/ocean-sunfish-distinct-fish-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "13539870f71fa42a5f4e6fba7ab23b1a764b6bd9924a5713adaf457fa71921e6",
+      "source": "demos/wildlife-3d/ocean-sunfish-distinct-fish-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-electric-eel-eels-v1",
+      "name": "wildlife 3d electric eel eels v1",
+      "image": "demos/wildlife-3d/electric-eel-eels-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "748ad1736772be05e1d333aca33f86f35b0ac918e18125d9062b957a142704ec",
+      "source": "demos/wildlife-3d/electric-eel-eels-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-moray-eel-eels-v1",
+      "name": "wildlife 3d moray eel eels v1",
+      "image": "demos/wildlife-3d/moray-eel-eels-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "72860f97cbe6b5ee16400dcdd5f70a41b238c873238e87ab0d0414438f5d90fa",
+      "source": "demos/wildlife-3d/moray-eel-eels-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-cuttlefish-soft-bodied-marine-v1",
+      "name": "wildlife 3d cuttlefish soft bodied marine v1",
+      "image": "demos/wildlife-3d/cuttlefish-soft-bodied-marine-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "7d128c82cd1b61bc29734bdf5efdcb2b5734518f4147bdf569f34aa9700bfae7",
+      "source": "demos/wildlife-3d/cuttlefish-soft-bodied-marine-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-octopus-soft-bodied-marine-v1",
+      "name": "wildlife 3d octopus soft bodied marine v1",
+      "image": "demos/wildlife-3d/octopus-soft-bodied-marine-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "0e4228c67f338e882703a13d0a6327ce50812b5da4ebe44c114a614dfdd50cf8",
+      "source": "demos/wildlife-3d/octopus-soft-bodied-marine-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-nautilus-soft-bodied-marine-v1",
+      "name": "wildlife 3d nautilus soft bodied marine v1",
+      "image": "demos/wildlife-3d/nautilus-soft-bodied-marine-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "3dd3a4717344b29e67ba6923dcac8a6a26d6ec296ae929820ccadd28904e337c",
+      "source": "demos/wildlife-3d/nautilus-soft-bodied-marine-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-jellyfish-soft-bodied-marine-v1",
+      "name": "wildlife 3d jellyfish soft bodied marine v1",
+      "image": "demos/wildlife-3d/jellyfish-soft-bodied-marine-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "cd172f57ac5814b8b86c2fa9666aea75a8d6462c1fad1ca6054e17c67d65a2c9",
+      "source": "demos/wildlife-3d/jellyfish-soft-bodied-marine-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-lobster-marine-arthropods-v1",
+      "name": "wildlife 3d lobster marine arthropods v1",
+      "image": "demos/wildlife-3d/lobster-marine-arthropods-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "2f6b375a0c2a88b8ab445ca1cb3cb5fe1b4fc929fa2e7df9f57e14c78108bcee",
+      "source": "demos/wildlife-3d/lobster-marine-arthropods-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-mantis-shrimp-marine-arthropods-v1",
+      "name": "wildlife 3d mantis shrimp marine arthropods v1",
+      "image": "demos/wildlife-3d/mantis-shrimp-marine-arthropods-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "efd5a82136e7b0a244f403cb618eae2887cfc039e30069c8d2fcd707267341de",
+      "source": "demos/wildlife-3d/mantis-shrimp-marine-arthropods-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-shrimp-marine-arthropods-v1",
+      "name": "wildlife 3d shrimp marine arthropods v1",
+      "image": "demos/wildlife-3d/shrimp-marine-arthropods-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "baf09d2e7d4880389659b3ef09cd034b36911558d36bc190668ea05dc4ab9497",
+      "source": "demos/wildlife-3d/shrimp-marine-arthropods-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-horseshoe-crab-marine-arthropods-v1",
+      "name": "wildlife 3d horseshoe crab marine arthropods v1",
+      "image": "demos/wildlife-3d/horseshoe-crab-marine-arthropods-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "4ed06954cff2d26997b7e4a933f9a5123c0d8083ab9f7532edb5707568ff79b4",
+      "source": "demos/wildlife-3d/horseshoe-crab-marine-arthropods-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-seahorse-reef-fauna-v1",
+      "name": "wildlife 3d seahorse reef fauna v1",
+      "image": "demos/wildlife-3d/seahorse-reef-fauna-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "f2ab391bfcdc6a089b4be349311e39ab0475dbac2244227087ef231051253ede",
+      "source": "demos/wildlife-3d/seahorse-reef-fauna-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-leafy-seadragon-reef-fauna-v1",
+      "name": "wildlife 3d leafy seadragon reef fauna v1",
+      "image": "demos/wildlife-3d/leafy-seadragon-reef-fauna-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "9f0340b4798619ae167d6d2f1b83538ae9e7ce1693ca35b7e8a333d0b44da736",
+      "source": "demos/wildlife-3d/leafy-seadragon-reef-fauna-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-starfish-reef-fauna-v1",
+      "name": "wildlife 3d starfish reef fauna v1",
+      "image": "demos/wildlife-3d/starfish-reef-fauna-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "ad67428b441254427c3acce6ae3c679bae1fd7eb4cd1a6a83c9eac369b4d8937",
+      "source": "demos/wildlife-3d/starfish-reef-fauna-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-sea-turtle-reef-fauna-v1",
+      "name": "wildlife 3d sea turtle reef fauna v1",
+      "image": "demos/wildlife-3d/sea-turtle-reef-fauna-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "536db1bf1ecdf33278feb417e70bff4ba302313483801390b8ea376608a58f57",
+      "source": "demos/wildlife-3d/sea-turtle-reef-fauna-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-crab-crabs-v1",
+      "name": "wildlife 3d crab crabs v1",
+      "image": "demos/wildlife-3d/crab-crabs-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "3cccdb032e2060406bbff37533d0584e35c56df98d896dbea8ec91a66708b70d",
+      "source": "demos/wildlife-3d/crab-crabs-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-coconut-crab-crabs-v1",
+      "name": "wildlife 3d coconut crab crabs v1",
+      "image": "demos/wildlife-3d/coconut-crab-crabs-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "781e08169a6f4d075058741da42cceac9b05a6819c9d4e56565caefe3e513a38",
+      "source": "demos/wildlife-3d/coconut-crab-crabs-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-penguin-shore-fauna-v1",
+      "name": "wildlife 3d penguin shore fauna v1",
+      "image": "demos/wildlife-3d/penguin-shore-fauna-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6fec7a74450fc3a775fa764d3e2d0a33f3a295424b2a483f5a50f11715a153db",
+      "source": "demos/wildlife-3d/penguin-shore-fauna-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-platypus-shore-fauna-v1",
+      "name": "wildlife 3d platypus shore fauna v1",
+      "image": "demos/wildlife-3d/platypus-shore-fauna-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "0057d8b53cbc58cdb9bbe6825f34f687242ccd989330ff4e59293975a852f1e3",
+      "source": "demos/wildlife-3d/platypus-shore-fauna-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-river-otter-shore-fauna-v1",
+      "name": "wildlife 3d river otter shore fauna v1",
+      "image": "demos/wildlife-3d/river-otter-shore-fauna-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "f0f1369bb307fc6ebd51be566788c0b565d19ce6d605fdd63ebc67553a11ff48",
+      "source": "demos/wildlife-3d/river-otter-shore-fauna-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-hippopotamus-pond-fauna-v1",
+      "name": "wildlife 3d hippopotamus pond fauna v1",
+      "image": "demos/wildlife-3d/hippopotamus-pond-fauna-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "b763913a44e60fbaf372d10207239b4f5630a610790569d0b625f67bcc5165e7",
+      "source": "demos/wildlife-3d/hippopotamus-pond-fauna-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-axolotl-pond-fauna-v1",
+      "name": "wildlife 3d axolotl pond fauna v1",
+      "image": "demos/wildlife-3d/axolotl-pond-fauna-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "2ea6587ebbe71d891e5245eb57e338d00a71248911111e0ad5fbf6fd63fb1745",
+      "source": "demos/wildlife-3d/axolotl-pond-fauna-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-pond-turtle-pond-fauna-v1",
+      "name": "wildlife 3d pond turtle pond fauna v1",
+      "image": "demos/wildlife-3d/pond-turtle-pond-fauna-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "4ee8160265bb0a83316c6bf84c386b983a6c3b97d0c3dea4cf201f0d48b5a534",
+      "source": "demos/wildlife-3d/pond-turtle-pond-fauna-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-cow-farm-herd-v1",
+      "name": "wildlife 3d cow farm herd v1",
+      "image": "demos/wildlife-3d/cow-farm-herd-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "d44aafa9cfb6fac06d04d6b5f63cbd47fb1b235fd08e16e59b448615dabe1d87",
+      "source": "demos/wildlife-3d/cow-farm-herd-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-sheep-farm-herd-v1",
+      "name": "wildlife 3d sheep farm herd v1",
+      "image": "demos/wildlife-3d/sheep-farm-herd-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "cf8c0e6de18a2a092b494955007644f84965863ff5e15a54d949af5431271a87",
+      "source": "demos/wildlife-3d/sheep-farm-herd-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-horse-farm-herd-v1",
+      "name": "wildlife 3d horse farm herd v1",
+      "image": "demos/wildlife-3d/horse-farm-herd-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "128cf0783b7412f666a17eebfcf967c6bdb4935183704b157cf3094428a45b5d",
+      "source": "demos/wildlife-3d/horse-farm-herd-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-donkey-farm-herd-v1",
+      "name": "wildlife 3d donkey farm herd v1",
+      "image": "demos/wildlife-3d/donkey-farm-herd-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "5fbb22ba5eeb604debdf59c77f085cd69290cdc389dd87731affd678fae4729f",
+      "source": "demos/wildlife-3d/donkey-farm-herd-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-goat-farmyard-v1",
+      "name": "wildlife 3d goat farmyard v1",
+      "image": "demos/wildlife-3d/goat-farmyard-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "b89bd8a799064c998d1f28de78668d5ee8645b4106867a964ccc447c3ddd20e9",
+      "source": "demos/wildlife-3d/goat-farmyard-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-pig-farmyard-v1",
+      "name": "wildlife 3d pig farmyard v1",
+      "image": "demos/wildlife-3d/pig-farmyard-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "9b31e7ee93751c9b59a27371633c2c731e3076807f3add58b264e0e61aabe720",
+      "source": "demos/wildlife-3d/pig-farmyard-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-chicken-farmyard-v1",
+      "name": "wildlife 3d chicken farmyard v1",
+      "image": "demos/wildlife-3d/chicken-farmyard-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "d7be4ab121a40afdc344127fdd3075d53cf26fe29bd379641060b2dcb190ec12",
+      "source": "demos/wildlife-3d/chicken-farmyard-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-worm1-classic-worms-v1",
+      "name": "wildlife 3d worm1 classic worms v1",
+      "image": "demos/wildlife-3d/worm1-classic-worms-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "a763445ec7a106ca06ef9aa96cec3af656d7843ac4c745532dbd78a6d2b247e7",
+      "source": "demos/wildlife-3d/worm1-classic-worms-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-worm2-classic-worms-v1",
+      "name": "wildlife 3d worm2 classic worms v1",
+      "image": "demos/wildlife-3d/worm2-classic-worms-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "212b69b47e2aaa2785b222653e53195580c30d242cd9ebcd5f5b58c7b5f42815",
+      "source": "demos/wildlife-3d/worm2-classic-worms-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-worm3-classic-worms-v1",
+      "name": "wildlife 3d worm3 classic worms v1",
+      "image": "demos/wildlife-3d/worm3-classic-worms-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "e708121dbb625004acdb8d18ad61e8bccc51ff17adfdf45a6560347ea05313ca",
+      "source": "demos/wildlife-3d/worm3-classic-worms-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-worm4-classic-worms-v1",
+      "name": "wildlife 3d worm4 classic worms v1",
+      "image": "demos/wildlife-3d/worm4-classic-worms-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "fd4015752c153fbc44dad9169d6baf9fed7d2aa3dd5be62f9c9bf64c4fab06e8",
+      "source": "demos/wildlife-3d/worm4-classic-worms-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-chicken-classic-yard-v1",
+      "name": "wildlife 3d chicken classic yard v1",
+      "image": "demos/wildlife-3d/chicken-classic-yard-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "5bab180dfb58c5e2dd801a8e82d7cdea90cb6c2b783f05143b4e789ee1c442d2",
+      "source": "demos/wildlife-3d/chicken-classic-yard-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-cow-classic-yard-v1",
+      "name": "wildlife 3d cow classic yard v1",
+      "image": "demos/wildlife-3d/cow-classic-yard-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "c0879d2d2fcc42b58c8d3ff61ff7be1cbdb4e85a0ba9e846ca3c200210c35314",
+      "source": "demos/wildlife-3d/cow-classic-yard-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-pigeon-classic-yard-v1",
+      "name": "wildlife 3d pigeon classic yard v1",
+      "image": "demos/wildlife-3d/pigeon-classic-yard-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "597d655b9ec06af9df9e7d802323bd833b966ad75959aa7b0f5f9a3ec6915a62",
+      "source": "demos/wildlife-3d/pigeon-classic-yard-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-pigeon2-classic-yard-v1",
+      "name": "wildlife 3d pigeon2 classic yard v1",
+      "image": "demos/wildlife-3d/pigeon2-classic-yard-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "68b817ec5a3998505887e9b0c5e269d5cdf6cca9171dfe6b3e2b2b1f36755711",
+      "source": "demos/wildlife-3d/pigeon2-classic-yard-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-crow-classic-fliers-v1",
+      "name": "wildlife 3d crow classic fliers v1",
+      "image": "demos/wildlife-3d/crow-classic-fliers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "7b0e61f3da90106be8930dbf545c112e6e64c7fa3e06d69d9b6b46558d4a3857",
+      "source": "demos/wildlife-3d/crow-classic-fliers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-seagull-classic-fliers-v1",
+      "name": "wildlife 3d seagull classic fliers v1",
+      "image": "demos/wildlife-3d/seagull-classic-fliers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "dec95c050965964fdc175cf16570ea42ef844d8ec2f168d32225db7ebce5eb0d",
+      "source": "demos/wildlife-3d/seagull-classic-fliers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-fish1-classic-fish-v1",
+      "name": "wildlife 3d fish1 classic fish v1",
+      "image": "demos/wildlife-3d/fish1-classic-fish-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "9d0452917c33548ac7bca23474b11a775e55d45ed90ab28b2d9c574a6db10e0b",
+      "source": "demos/wildlife-3d/fish1-classic-fish-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-fish2-classic-fish-v1",
+      "name": "wildlife 3d fish2 classic fish v1",
+      "image": "demos/wildlife-3d/fish2-classic-fish-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "444a47a3cabf9245be3b3492c4886ec6a7cf8b58d59e10fe9fc43323b62c59d9",
+      "source": "demos/wildlife-3d/fish2-classic-fish-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-fish3-classic-fish-v1",
+      "name": "wildlife 3d fish3 classic fish v1",
+      "image": "demos/wildlife-3d/fish3-classic-fish-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "350d91e5b1ba401665fb84e18b49fe24cd13acdd26b74c000a057a4bb83298f7",
+      "source": "demos/wildlife-3d/fish3-classic-fish-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-gemsbok-oryx-browsing-antelopes-v1",
+      "name": "wildlife 3d gemsbok oryx browsing antelopes v1",
+      "image": "demos/wildlife-3d/gemsbok-oryx-browsing-antelopes-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6162b45f286dd1c0ba98c7c3d902934db56ce60da6c4af08575015ffda6b4f3f",
+      "source": "demos/wildlife-3d/gemsbok-oryx-browsing-antelopes-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-gazelle-browsing-antelopes-v1",
+      "name": "wildlife 3d gazelle browsing antelopes v1",
+      "image": "demos/wildlife-3d/gazelle-browsing-antelopes-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "e7f8de6e928fd577f4c79a0642ca039673c848c5108fa151ffd1e7ac84085e0a",
+      "source": "demos/wildlife-3d/gazelle-browsing-antelopes-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-springbok-browsing-antelopes-v1",
+      "name": "wildlife 3d springbok browsing antelopes v1",
+      "image": "demos/wildlife-3d/springbok-browsing-antelopes-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "ec891cf8caed2f99ff3b16d7d4912be5a768be4dab9aed37a58469851ff7eed8",
+      "source": "demos/wildlife-3d/springbok-browsing-antelopes-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-gerenuk-browsing-antelopes-v1",
+      "name": "wildlife 3d gerenuk browsing antelopes v1",
+      "image": "demos/wildlife-3d/gerenuk-browsing-antelopes-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "243dfb251d74fafdfe5585895e37cc7e31280ef3078d1bd2f5b9504964a6a0a0",
+      "source": "demos/wildlife-3d/gerenuk-browsing-antelopes-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-elk-cervids-v1",
+      "name": "wildlife 3d elk cervids v1",
+      "image": "demos/wildlife-3d/elk-cervids-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "132922059e18989799a35d9ca024b7d1e57192822fc9188366402e55dd36cb5c",
+      "source": "demos/wildlife-3d/elk-cervids-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-moose-cervids-v1",
+      "name": "wildlife 3d moose cervids v1",
+      "image": "demos/wildlife-3d/moose-cervids-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "4ecec2536d1050f1e2a906060baaa51b2478b708db3dcad37751d8e83665fee0",
+      "source": "demos/wildlife-3d/moose-cervids-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-american-bison-heavy-herds-v1",
+      "name": "wildlife 3d american bison heavy herds v1",
+      "image": "demos/wildlife-3d/american-bison-heavy-herds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "905a4e218700f7bb409ea836167de46e6ecf0b17b6e2a1b687cbd54595de9703",
+      "source": "demos/wildlife-3d/american-bison-heavy-herds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-water-buffalo-heavy-herds-v1",
+      "name": "wildlife 3d water buffalo heavy herds v1",
+      "image": "demos/wildlife-3d/water-buffalo-heavy-herds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "2c5821a7dc7adcebe9167c36603190ae9392d2c1a03a11a59f06c54939547bdb",
+      "source": "demos/wildlife-3d/water-buffalo-heavy-herds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-wildebeest-heavy-herds-v1",
+      "name": "wildlife 3d wildebeest heavy herds v1",
+      "image": "demos/wildlife-3d/wildebeest-heavy-herds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "01676447980f232e6265f330334a61a05f554149739df135b404baef6b3a7d03",
+      "source": "demos/wildlife-3d/wildebeest-heavy-herds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-musk-ox-heavy-herds-v1",
+      "name": "wildlife 3d musk ox heavy herds v1",
+      "image": "demos/wildlife-3d/musk-ox-heavy-herds-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "bb023213fd38308566aecd503cb06ebd28f02f31c1010325774ebddf315e8239",
+      "source": "demos/wildlife-3d/musk-ox-heavy-herds-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-impala-dryland-grazers-v1",
+      "name": "wildlife 3d impala dryland grazers v1",
+      "image": "demos/wildlife-3d/impala-dryland-grazers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "39f7dfc930e7e0e04fdbd86818ac90bc23d7ab39431828f08a78c36eb64f1ba0",
+      "source": "demos/wildlife-3d/impala-dryland-grazers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-saiga-antelope-dryland-grazers-v1",
+      "name": "wildlife 3d saiga antelope dryland grazers v1",
+      "image": "demos/wildlife-3d/saiga-antelope-dryland-grazers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "98d1d6985a6ae24543de47af1a0c0a4927402c0147d362419cf4149f91145bb5",
+      "source": "demos/wildlife-3d/saiga-antelope-dryland-grazers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-zebra-dryland-grazers-v1",
+      "name": "wildlife 3d zebra dryland grazers v1",
+      "image": "demos/wildlife-3d/zebra-dryland-grazers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "ae5f29f7de78e674d36aab0b328c19e87ff724c466b05a50d6aed2868034a31f",
+      "source": "demos/wildlife-3d/zebra-dryland-grazers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-rhinoceros-dryland-grazers-v1",
+      "name": "wildlife 3d rhinoceros dryland grazers v1",
+      "image": "demos/wildlife-3d/rhinoceros-dryland-grazers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "31782da02aa0bf0225b1c8f54a59c0768dc3044ddcacaa976268688f0efbcbe1",
+      "source": "demos/wildlife-3d/rhinoceros-dryland-grazers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-deer-woodland-browsers-v1",
+      "name": "wildlife 3d deer woodland browsers v1",
+      "image": "demos/wildlife-3d/deer-woodland-browsers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "eadfaafc5d43f25d4d8ab17fac18176a7ae458d4b78f28b8537694cc09ce21ea",
+      "source": "demos/wildlife-3d/deer-woodland-browsers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-okapi-woodland-browsers-v1",
+      "name": "wildlife 3d okapi woodland browsers v1",
+      "image": "demos/wildlife-3d/okapi-woodland-browsers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "1373d751fd91a75299cae1f74c31beb77dab891bdffc56340d08f66a63a6c9e1",
+      "source": "demos/wildlife-3d/okapi-woodland-browsers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-malayan-tapir-woodland-browsers-v1",
+      "name": "wildlife 3d malayan tapir woodland browsers v1",
+      "image": "demos/wildlife-3d/malayan-tapir-woodland-browsers-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "62270180182b5386b67c2216986086e3ba432ec33a626e7c2272c1c46020847c",
+      "source": "demos/wildlife-3d/malayan-tapir-woodland-browsers-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-llama-plateau-herbivores-v1",
+      "name": "wildlife 3d llama plateau herbivores v1",
+      "image": "demos/wildlife-3d/llama-plateau-herbivores-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "812141c06d50073086ff66999f01a5fa3ceb543c9d848d9122177a650079f514",
+      "source": "demos/wildlife-3d/llama-plateau-herbivores-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-alpaca-plateau-herbivores-v1",
+      "name": "wildlife 3d alpaca plateau herbivores v1",
+      "image": "demos/wildlife-3d/alpaca-plateau-herbivores-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "bcf388c4e837804bbeb0abdabdc4a2df4d7183304b96fb5f9b919f0d79f0845d",
+      "source": "demos/wildlife-3d/alpaca-plateau-herbivores-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-warthog-plateau-herbivores-v1",
+      "name": "wildlife 3d warthog plateau herbivores v1",
+      "image": "demos/wildlife-3d/warthog-plateau-herbivores-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "e0251c5fe935eeafc9c43f32b7b950cea7d7d636a1b7b03dd3eb3362516c4315",
+      "source": "demos/wildlife-3d/warthog-plateau-herbivores-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-gorilla-great-apes-v1",
+      "name": "wildlife 3d gorilla great apes v1",
+      "image": "demos/wildlife-3d/gorilla-great-apes-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6674ea5176df4cc03716ab41e7eae22a838bd1566dc38f7e5f731194a05a8dcb",
+      "source": "demos/wildlife-3d/gorilla-great-apes-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-chimpanzee-great-apes-v1",
+      "name": "wildlife 3d chimpanzee great apes v1",
+      "image": "demos/wildlife-3d/chimpanzee-great-apes-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "17a80ead08995a7734cd8b15affda80f6843dd2a32a0316b85a2393eaf296ea5",
+      "source": "demos/wildlife-3d/chimpanzee-great-apes-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-orangutan-great-apes-v1",
+      "name": "wildlife 3d orangutan great apes v1",
+      "image": "demos/wildlife-3d/orangutan-great-apes-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "71a9d94978d00a3d0d8b96e0634c586197e6b8e62d3729f1cfa278880256dc74",
+      "source": "demos/wildlife-3d/orangutan-great-apes-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-japanese-macaque-forest-primates-v1",
+      "name": "wildlife 3d japanese macaque forest primates v1",
+      "image": "demos/wildlife-3d/japanese-macaque-forest-primates-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "e04a215380fdb97c761ca47d47da74dfae3824fe248fe6ba40e4da288c6a2731",
+      "source": "demos/wildlife-3d/japanese-macaque-forest-primates-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-mandrill-forest-primates-v1",
+      "name": "wildlife 3d mandrill forest primates v1",
+      "image": "demos/wildlife-3d/mandrill-forest-primates-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "49a5c9a0fd2f9e67c1e7c675893ba25d4b7109811f1d50dbdb59efc413c13bd0",
+      "source": "demos/wildlife-3d/mandrill-forest-primates-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-proboscis-monkey-forest-primates-v1",
+      "name": "wildlife 3d proboscis monkey forest primates v1",
+      "image": "demos/wildlife-3d/proboscis-monkey-forest-primates-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "416b333a006ef4bbeb3591ef3f524cd3c21971969747773a0ecd95e72b384f39",
+      "source": "demos/wildlife-3d/proboscis-monkey-forest-primates-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-ring-tailed-lemur-forest-primates-v1",
+      "name": "wildlife 3d ring tailed lemur forest primates v1",
+      "image": "demos/wildlife-3d/ring-tailed-lemur-forest-primates-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "93ecf161422c42e270e0b734bf0f50dbee259a913800e23d7786d31251a32bf7",
+      "source": "demos/wildlife-3d/ring-tailed-lemur-forest-primates-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-elephant-upright-upright-herbivores-v1",
+      "name": "wildlife 3d elephant upright upright herbivores v1",
+      "image": "demos/wildlife-3d/elephant-upright-upright-herbivores-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "00daa0f27caffe7c612f9521353f07b4e218253c59070fdea8279c389ac1e678",
+      "source": "demos/wildlife-3d/elephant-upright-upright-herbivores-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-giraffe-upright-upright-herbivores-v1",
+      "name": "wildlife 3d giraffe upright upright herbivores v1",
+      "image": "demos/wildlife-3d/giraffe-upright-upright-herbivores-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "c42ebf0517e52097b0e92d401b1d11e22d026dfbbf83b7100a6d61ddb3691498",
+      "source": "demos/wildlife-3d/giraffe-upright-upright-herbivores-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-elephant-canopy-and-fruit-v1",
+      "name": "wildlife 3d elephant canopy and fruit v1",
+      "image": "demos/wildlife-3d/elephant-canopy-and-fruit-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "748daddb31b02fa892425fb85e562148838d49715195b4fcf2daaa3770ff157d",
+      "source": "demos/wildlife-3d/elephant-canopy-and-fruit-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-giraffe-canopy-and-fruit-v1",
+      "name": "wildlife 3d giraffe canopy and fruit v1",
+      "image": "demos/wildlife-3d/giraffe-canopy-and-fruit-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "bae21564416356bc6045be2ada663e1eab7b2b230691d24cf55e105a122384aa",
+      "source": "demos/wildlife-3d/giraffe-canopy-and-fruit-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-mule-pack-mounts-v1",
+      "name": "wildlife 3d mule pack mounts v1",
+      "image": "demos/wildlife-3d/mule-pack-mounts-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "34e66a80ff546511390ba44d507ab68814f74b596d2a584325b6e4fb37a9becb",
+      "source": "demos/wildlife-3d/mule-pack-mounts-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-camel-pack-mounts-v1",
+      "name": "wildlife 3d camel pack mounts v1",
+      "image": "demos/wildlife-3d/camel-pack-mounts-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "f06f0f0106dc3b6dba594f745d92f6cfbaa87d5df58e823a9af4fe54f8ae21b2",
+      "source": "demos/wildlife-3d/camel-pack-mounts-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-kangaroo-macropods-v1",
+      "name": "wildlife 3d kangaroo macropods v1",
+      "image": "demos/wildlife-3d/kangaroo-macropods-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6c892b45cead54b8582b16f214533208654013dd4241b27084fcb7daa70d9282",
+      "source": "demos/wildlife-3d/kangaroo-macropods-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-wallaby-macropods-v1",
+      "name": "wildlife 3d wallaby macropods v1",
+      "image": "demos/wildlife-3d/wallaby-macropods-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "23e6bfcfd56b15389ea6e6efdac8fdc76b695e697d1647ba0a8d86f546e55c7e",
+      "source": "demos/wildlife-3d/wallaby-macropods-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-guinea-pig-pet-rodents-v1",
+      "name": "wildlife 3d guinea pig pet rodents v1",
+      "image": "demos/wildlife-3d/guinea-pig-pet-rodents-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "f6ffccaea410c0262a891ea2be0c1b95a5d7b48cbbdb063258f4fa3536d3f868",
+      "source": "demos/wildlife-3d/guinea-pig-pet-rodents-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-hamster-pet-rodents-v1",
+      "name": "wildlife 3d hamster pet rodents v1",
+      "image": "demos/wildlife-3d/hamster-pet-rodents-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "ab7cbfdbc69ed297146071c60eb3f0cf8be06514ca2a66bbefff2917395d3328",
+      "source": "demos/wildlife-3d/hamster-pet-rodents-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-chinchilla-pet-rodents-v1",
+      "name": "wildlife 3d chinchilla pet rodents v1",
+      "image": "demos/wildlife-3d/chinchilla-pet-rodents-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "4c84b88b12706b2e435feee8dd34261932cc08d6edbdd722285ce96b7b0f50aa",
+      "source": "demos/wildlife-3d/chinchilla-pet-rodents-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-mouse-urban-small-mammals-v1",
+      "name": "wildlife 3d mouse urban small mammals v1",
+      "image": "demos/wildlife-3d/mouse-urban-small-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "43c2b485ef6f07b3eaae553fe6aa60951c27c330c47fb86b1928fb68509ae760",
+      "source": "demos/wildlife-3d/mouse-urban-small-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-rat-urban-small-mammals-v1",
+      "name": "wildlife 3d rat urban small mammals v1",
+      "image": "demos/wildlife-3d/rat-urban-small-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "af7da96d1b27e7be5614c0eef37f4709ef8912b4e4f5cbfed4cbe1671a2be43c",
+      "source": "demos/wildlife-3d/rat-urban-small-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-opossum-urban-small-mammals-v1",
+      "name": "wildlife 3d opossum urban small mammals v1",
+      "image": "demos/wildlife-3d/opossum-urban-small-mammals-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "cb27ec32dc498ee3ee48a6e08b5863a10bc36ec8ae703ef1b00101b869e9d972",
+      "source": "demos/wildlife-3d/opossum-urban-small-mammals-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-quokka-ground-marsupials-v1",
+      "name": "wildlife 3d quokka ground marsupials v1",
+      "image": "demos/wildlife-3d/quokka-ground-marsupials-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "7c4de9bf831b2b3e619800b62bc5f2bb55a0faabe67b61b9e8e8b179f54317dd",
+      "source": "demos/wildlife-3d/quokka-ground-marsupials-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-wombat-ground-marsupials-v1",
+      "name": "wildlife 3d wombat ground marsupials v1",
+      "image": "demos/wildlife-3d/wombat-ground-marsupials-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "6b8ee18328b0d4f870786a28e6ed87161f2042e9a995e9759dcc0e8e18761971",
+      "source": "demos/wildlife-3d/wombat-ground-marsupials-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -10473,6 +11583,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:50"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/server/RealmWildlife.ts:133"
         },
         {
@@ -10608,6 +11722,10 @@
         {
           "system": "Gameplay",
           "source": "src/scenarios/TreeHouseRecipe.ts:33"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:48"
         },
         {
           "system": "Gameplay",
@@ -34365,7 +35483,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:448"
+          "source": "src/rendering/scene/EntitySprites.ts:467"
         },
         {
           "system": "Gameplay",
@@ -35267,7 +36385,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:277"
+          "source": "src/rendering/scene/EntitySprites.ts:296"
         },
         {
           "system": "Gameplay",
@@ -35514,6 +36632,10 @@
         {
           "system": "Gameplay",
           "source": "src/wildlife/Roadkill.ts:13"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/WildlifeModelReviewBank.ts:39"
         }
       ]
     },
@@ -35664,6 +36786,10 @@
         {
           "system": "Gameplay",
           "source": "src/wildlife/HerdWork.ts:299"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/wildlife/WildlifeModelReviewBank.ts:39"
         }
       ]
     },
@@ -37293,6 +38419,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:50"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/server/RealmWildlife.ts:133"
         },
         {
@@ -37432,6 +38562,10 @@
         {
           "system": "Gameplay",
           "source": "src/scenarios/TreeHouseRecipe.ts:33"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/WildlifeModelReviewRecipe.ts:48"
         },
         {
           "system": "Gameplay",
@@ -37999,7 +39133,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:418"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:422"
         },
         {
           "system": "Editor",

@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-octopus-provisional-v1",
+  "version": 2,
+  "fit": [
+    12.33,
+    8.93,
+    12.18
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.59,
+  "clips": [
+    "idle",
+    "jet",
+    "action",
+    "flee"
+  ],
+  "water": true,
+  "ground": "#668488",
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

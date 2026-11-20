@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-sheep-provisional-v1",
+  "version": 2,
+  "fit": [
+    10.12,
+    9.11,
+    10.58
+  ],
+  "autoFit": true,
+  "portraitCenter": 1.07,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "bleat"
+  ],
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

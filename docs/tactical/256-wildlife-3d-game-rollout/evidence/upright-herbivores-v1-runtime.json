@@ -1,0 +1,70 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-elephant-upright-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "elephant-upright-upright-herbivores-v1",
+      "modelSha256": "3ecae9181dd0625f21460e5833ac8f87f397dc3e21fbf22a10943421f2a844f2"
+    },
+    {
+      "type": "wildlife-giraffe-upright-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "giraffe-upright-upright-herbivores-v1",
+      "modelSha256": "47800c6f8439c105fdf74495c4b8186c695020521b6f4c381250320d406c526a"
+    }
+  ],
+  "clipSamples": 224,
+  "testedDepth": false
+}

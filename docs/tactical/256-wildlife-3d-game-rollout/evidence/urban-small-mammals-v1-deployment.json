@@ -1,0 +1,99 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "242eb98e5676166a6fcceffd7d18ae2cdfeb47a68d55f2e31414f2fce5fcf2bb",
+  "results": [
+    {
+      "type": "wildlife-mouse-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "842a00667c47e6f8bae2e4f9b91cbc9d8775789c2c2fbe6661015e377704ef9d",
+      "modelSha256": "11acc2f4b27a44ac74795ad0b603caeba70acab7bfdb87bab8439b1a01d5a07e",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-mouse&wildlife3dStage=mouse-urban-small-mammals-v1&wildlife3dReview=mouse-urban-small-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009884405136108426,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-rat-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "0b3ed7dd15305604fc60cff72f563685c208b0c584cf7b42b197b2032ac39498",
+      "modelSha256": "63500da1c280666b48983e14f115ba334cd42c062fd393c7cd7abdec53734db7",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-rat&wildlife3dStage=rat-urban-small-mammals-v1&wildlife3dReview=rat-urban-small-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009697532653808627,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-opossum-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "da22ef90a5ddb5cbfbe5cfbbb81c10871796839ed82724edbf92e91c9e7df1fd",
+      "modelSha256": "80e2e1b7603b23bc8b716ed4386ebeff2002d513b54319c901230c23e66b3851",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-opossum&wildlife3dStage=opossum-urban-small-mammals-v1&wildlife3dReview=opossum-urban-small-mammals-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009745979309082069,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

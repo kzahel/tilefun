@@ -13,12 +13,17 @@ import vehicleStyleStudy from "../../public/demos/vehicle-style-study/manifest.j
 };
 import { CHARACTERS } from "../characters/CharacterCatalog.js";
 import wildlifeReviews from "../wildlife/reviews.json" with { type: "json" };
+import {
+  type WildlifeModelReview,
+  wildlifeModelReviewPath,
+  wildlifeModelRuntimePath,
+} from "../wildlife/WildlifeModelReviewBank.js";
 import type { WorkshopManifest } from "../workshop/WorkshopTypes.js";
 
 /** Broad render inputs are intentional: renderer/physics edits must reopen affected
  * candidates through freshly computed pixels, not silently retain a stale bank.
  */
-export async function workshopInputDigest(root = ".") {
+export async function workshopInputDigest(root = ".", verifyWildlifeModels = false) {
   const files: string[] = [];
   const walk = async (directory: string, include: (path: string) => boolean) => {
     for (const entry of await readdir(join(root, directory), { withFileTypes: true })) {
@@ -45,6 +50,22 @@ export async function workshopInputDigest(root = ".") {
       ...[draft.sheet, draft.scene, draft.contact].map((sheet) => `public/${sheet.image}`),
     );
   files.push("public/demos/wildlife-v2/index.html", "public/demos/wildlife-v2/reviews.json");
+  const wildlifeModels = JSON.parse(
+    await readFile(join(root, "src/wildlife/model-reviews.json"), "utf8"),
+  ) as WildlifeModelReview[];
+  const promotedWildlifeModels = JSON.parse(
+    await readFile(join(root, "src/wildlife/promoted-models.json"), "utf8"),
+  ) as Record<string, string>;
+  const modelHashes = new Map<string, string | undefined>();
+  for (const model of wildlifeModels)
+    for (const [file, digest] of Object.entries(model.files))
+      modelHashes.set(`public/${wildlifeModelReviewPath(model.id, file)}`, digest);
+  for (const [type, id] of Object.entries(promotedWildlifeModels)) {
+    const approved = wildlifeModels.find((row) => row.type === type && row.id === id);
+    if (!approved?.files["model.glb"]) throw new Error(`Missing promoted wildlife model: ${type}`);
+    modelHashes.set(`public/${wildlifeModelRuntimePath(id)}`, approved.files["model.glb"]);
+  }
+  files.push(...modelHashes.keys(), "src/workshop/WildlifeModelCandidates.ts");
   files.push(
     "public/demos/vehicle-style-study/manifest.json",
     "public/demos/vehicle-style-study/index.html",
@@ -125,7 +146,17 @@ export async function workshopInputDigest(root = ".") {
   for (const path of files.sort()) {
     hash.update(path);
     hash.update("\0");
-    hash.update(await readFile(join(root, path)));
+    const data = await readFile(join(root, path)).catch((error: NodeJS.ErrnoException) => {
+      if (verifyWildlifeModels || !modelHashes.has(path) || error.code !== "ENOENT") throw error;
+      return Buffer.from("missing wildlife review artifact");
+    });
+    if (
+      verifyWildlifeModels &&
+      modelHashes.has(path) &&
+      modelHashes.get(path) !== createHash("sha256").update(data).digest("hex")
+    )
+      throw new Error(`Wildlife model artifact changed: ${path}`);
+    hash.update(data);
     hash.update("\0");
   }
   return hash.digest("hex");

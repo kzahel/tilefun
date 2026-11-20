@@ -1,0 +1,168 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-goat-provisional-v1",
+      "clips": 8,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        },
+        {
+          "state": "rear",
+          "action": "rear",
+          "frames": 28,
+          "gameDurationMs": 600
+        },
+        {
+          "state": "browse",
+          "action": "browse",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "lower",
+          "action": "lower",
+          "frames": 28,
+          "gameDurationMs": 600
+        },
+        {
+          "state": "hop",
+          "action": "hop",
+          "frames": 28,
+          "gameDurationMs": 900
+        }
+      ],
+      "candidateId": "goat-farmyard-v1",
+      "modelSha256": "cb9840ce84014add7b4c3722c5204518fe28ef85361e519787869168d4b8647b"
+    },
+    {
+      "type": "wildlife-piglet-provisional-v1",
+      "clips": 8,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        },
+        {
+          "state": "sniff",
+          "action": "sniff",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "root",
+          "action": "root",
+          "frames": 28,
+          "gameDurationMs": 1500
+        },
+        {
+          "state": "pickup",
+          "action": "pickup",
+          "frames": 28,
+          "gameDurationMs": 700
+        },
+        {
+          "state": "eat",
+          "action": "eat",
+          "frames": 28,
+          "gameDurationMs": 1600
+        }
+      ],
+      "candidateId": "pig-farmyard-v1",
+      "modelSha256": "8bceabd19e3fa51cb3a7d369b6c73f09de05dc18faf79ed45730d92f924c570b"
+    },
+    {
+      "type": "wildlife-chicken-provisional-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "scratch",
+          "action": "scratch",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "peck",
+          "action": "peck",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "eat",
+          "action": "eat",
+          "frames": 28,
+          "gameDurationMs": 1200
+        }
+      ],
+      "candidateId": "chicken-farmyard-v1",
+      "modelSha256": "4afe62c34be6df929b7f6c2991ece7cce69e7778cbbe911c1197539e083c0053"
+    }
+  ],
+  "clipSamples": 644,
+  "testedDepth": false
+}

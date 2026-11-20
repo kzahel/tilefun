@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-blue-whale-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "blue-whale-swimmers-v1",
+      "modelSha256": "474b66b90bcb8c58e5e894dcb5d2b1ad84417f100545909465a9358b58c7bb34"
+    },
+    {
+      "type": "wildlife-humpback-whale-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "humpback-whale-swimmers-v1",
+      "modelSha256": "04898b83e81946b648a0ddb738a7ed32666ddfc62fb65885512e4fae8d42bd7d"
+    },
+    {
+      "type": "wildlife-dugong-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "dugong-swimmers-v1",
+      "modelSha256": "251a807a872245fbecd0d6abeaa2178660c024f99a97e1680af642ec14a56e58"
+    },
+    {
+      "type": "wildlife-manatee-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "manatee-swimmers-v1",
+      "modelSha256": "1c09428c31efc2ed32c55905cae8aacd37e5f7d54ce2ca4a2ba8311604b04adc"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

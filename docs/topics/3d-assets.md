@@ -52,6 +52,57 @@ blender --background --factory-startup --python-exit-code 1 \
   --python art-source/experiments/rabbit/build.py -- data/experiments/rabbit
 ```
 
+## Wildlife model campaign
+
+The owner-liked [tuxedo cat draft](../../art-source/experiments/cat/build.py)
+sets the finish target in [255](../tactical/255-wildlife-3d-model-campaign.md).
+The campaign has 219 sprite-guided, editable animal models. It retains the cat's
+first comparison against its active `finish-v1` sprite, plus cardinal stills,
+action poses and videos for the whole roster. The
+[progress log](../tactical/255-wildlife-3d-model-campaign/progress.md) records
+review disposition and the local gallery.
+
+The shared scene can sample a skinned GLB from the actor's replicated clip,
+frame phase and facing. Use `?wildlife3dDrafts=1&wildlife3d=1` in a development
+session for the cat, or the local campaign preview harness for the broader
+catalog. The Workshop switch and loading or failure fallback use the reference sprite.
+The live view still uses the existing rabbit entry by default. Tactical 256
+registered thirty-five batches as exact playable Workshop candidates. The
+review pages pin the Blender source, GLB, animation stills and video. Their
+play links select the same candidate in the game renderer. Owner decisions on
+those exact candidates govern activation in ordinary play.
+
+The owner requested normal-game 3D for all 219 animals with distinct animations
+for every reachable gameplay state. [256](../tactical/256-wildlife-3d-game-rollout.md)
+owns production qualification and rollout. Its
+[animation ledger](../tactical/256-wildlife-3d-game-rollout/animation-ledger.json)
+pins the draft models and tracks each state's release evidence.
+
+The grazer comparisons use the active sprite colors and head-dip poses.
+The revised zebra resolves its flank stripes at game size. Gemsbok and moose
+retain their characteristic horn and antler shapes in the oblique view.
+Review scenes for ordinary four-state ground fauna run the existing animal AI
+on a clear field with a player approach control for the escape transition.
+The white-tailed doe uses the existing forest-work scenario to verify the
+head-lowering, browsing and recovery sequence at a real shrub and the
+forehoof stamp before an escape. Ape, forest primate and upright companions
+use separate travel and escape cycles with rigged hands, feet and tails.
+The full-size elephant uses three trunk joints for reach, curl, eating and
+shaking. The giraffe uses two neck joints to preserve the proportions of its
+reach and browse cycle. The mule and camel have separate riding and sprint
+motions. The kangaroo and wallaby use the Realm's physical lift and their rigs
+pose the hind legs and tail through takeoff and landing.
+
+The original cat prototype capture uses the project's Playwright Chromium.
+Composition needs Pillow and FFmpeg on the authoring machine.
+
+```sh
+blender --background --factory-startup --python-exit-code 1 \
+  --python art-source/experiments/cat/build.py -- data/experiments/cat
+node art-source/experiments/cat/capture.mjs data/experiments/cat
+python3 art-source/experiments/cat/compare.py data/experiments/cat
+```
+
 ## Earlier work
 
 Current investigation, 2026-10-20: [160](../tactical/160-live-3d-and-shared-depth-investigation.md)

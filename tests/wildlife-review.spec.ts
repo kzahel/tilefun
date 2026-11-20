@@ -1,5 +1,6 @@
 import { existsSync, readFileSync } from "node:fs";
 import { chromium, expect, test } from "@playwright/test";
+import { wildlifeModelReviewPath } from "../src/wildlife/WildlifeModelReviewBank.js";
 import type { WildlifeReview } from "../src/workshop/WildlifeCandidates.js";
 import type { WorkshopManifest } from "../src/workshop/WorkshopTypes.js";
 import { WORKSHOP_TEST_STATE } from "./workshop-setup.js";
@@ -10,6 +11,29 @@ const manifest = JSON.parse(
 const definitions = JSON.parse(
   readFileSync("src/wildlife/reviews.json", "utf8"),
 ) as WildlifeReview[];
+
+test("3D pilot review enables feedback only with the exact model and comparison", async ({
+  page,
+}) => {
+  const id = "cat-pilot-v1";
+  const candidate = `pattern:wildlife-3d-${id}`;
+  const url = `/tilefun/workshop.html#/review/${encodeURIComponent(candidate)}`;
+  const modelPath = wildlifeModelReviewPath(id, "model.glb");
+  const approval = page.getByRole("button", { name: "Looks right ✓", exact: true });
+  await page.goto(url);
+  await expect(approval).toBeEnabled();
+  await expect(page.getByLabel("Cat sprite and model motion comparison")).toBeVisible();
+  await expect(page.getByRole("link", { name: "Play with this model" })).toHaveAttribute(
+    "href",
+    /wildlife3dReview=cat-pilot-v1/,
+  );
+  await page.route(`**/${modelPath}`, (route) => route.fulfill({ body: "different model" }));
+  await page.reload();
+  await expect(
+    page.getByText("Wildlife model evidence missing or changed: model.glb"),
+  ).toBeVisible();
+  await expect(approval).toBeDisabled();
+});
 
 test("portable pet and tiger drafts have exact pending review and usable native/travel playback", async ({
   page,

@@ -41,6 +41,10 @@ import { getRoadSheetKey, RoadType } from "../src/road/RoadType.js";
 import { composeStreetStarterSurface } from "../src/road/StreetStarterSurface.js";
 import { required } from "../src/shared/required.js";
 import wildlifeReviews from "../src/wildlife/reviews.json" with { type: "json" };
+import {
+  WILDLIFE_MODEL_REVIEWS,
+  wildlifeModelReviewPath,
+} from "../src/wildlife/WildlifeModelReviewBank.js";
 import type { WildlifeReview } from "../src/workshop/WildlifeCandidates.js";
 import { getTileDef, registerDefaultTiles, TileId } from "../src/world/TileRegistry.js";
 
@@ -121,6 +125,10 @@ const imageMap = new Map<string, string>([
   ...(wildlifeReviews as WildlifeReview[]).map(
     (d) => [d.sheet.id, d.sheet.image] as [string, string],
   ),
+  ...WILDLIFE_MODEL_REVIEWS.map(
+    ({ id }) =>
+      [`wildlife-3d-${id}`, wildlifeModelReviewPath(id, "appearance.png")] as [string, string],
+  ),
 ]);
 // Browse every extracted autotile, including those not currently registered with BlendGraph.
 for (const path of files("public/assets/tilesets").filter((p) => /me-autotile-\d+\.png$/.test(p))) {
@@ -157,6 +165,7 @@ const sheets: ArtSheet[] = [...imageMap].map(([id, image]) => {
   if (id.startsWith("character-"))
     sheet.source =
       "docs/pixel-character-roster.md (original authored art; tiger workflow in docs/blender-pixel-characters.md)";
+  if (id.startsWith("wildlife-3d-")) sheet.source = image.replace("appearance.png", "model.blend");
   if (id === "me-complete")
     Object.assign(sheet, {
       source: "assets/exteriors/Modern_Exteriors_16x16/Modern_Exteriors_Complete_Tileset.png",

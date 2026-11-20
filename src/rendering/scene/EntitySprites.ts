@@ -21,6 +21,7 @@ import { isDrivable } from "../../traffic/VehicleSeats.js";
 import { faunaProfile } from "../../wildlife/Fauna.js";
 import { forageType, isCarryable, sourceType } from "../../wildlife/ForageResources.js";
 import { isRoadkill, ROADKILL_FADE_SECONDS, ROADKILL_SCALE_Y } from "../../wildlife/Roadkill.js";
+import { classicWildlifeSideProfile } from "../../wildlife/WildlifeModelReviewBank.js";
 import type { World } from "../../world/World.js";
 import { authoredTrainForType } from "../AuthoredTrainMeshes.js";
 import { authoredVehicleForType, vehicleMeshHeightScale } from "../AuthoredVehicleMeshes.js";
@@ -43,6 +44,7 @@ import { surfaceShadowZ } from "../SurfacePresentation.js";
 import type { SurfaceReceivers } from "../SurfaceReceivers.js";
 import type { TerrainPresentation } from "../TerrainPresentation.js";
 import { isVehicleSprite } from "../VehicleGrassDepth.js";
+import { WILDLIFE_MESHES } from "../WildlifeMeshCatalog.js";
 import { type CullBounds, outsideView } from "./SceneCull.js";
 import { groupVehicleContents } from "./VehicleGroups.js";
 
@@ -255,6 +257,23 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefine
   // nearest the top-down camera. Put its card there for world occlusion.
   if (e.type === GREENS || e.type === GROWING_PLANT) spriteItem.depthWy = pos.wy + 4;
   if (facingRows(e)) spriteItem.facing = e.sprite.direction;
+  const wildlifeAnimation = WILDLIFE_MESHES.get(e.sprite.sheetKey)?.animation;
+  if (wildlifeAnimation) {
+    const { animTimer, clip, clipElapsedMs } = e.sprite;
+    const direction =
+      wildlifeAnimation.classicCycle && classicWildlifeSideProfile(e.type)
+        ? e.sprite.flipX
+          ? Direction.Left
+          : Direction.Right
+        : e.sprite.direction;
+    spriteItem.wildlifePose = {
+      clip: clip ?? (wildlifeAnimation.classicCycle && e.sprite.moving ? 1 : 0),
+      direction,
+      frameTimeMs: animTimer,
+      elapsedMs: clipElapsedMs,
+      idleTime: poseTime + e.id * 0.0625,
+    };
+  }
   if (mesh) spriteItem.mesh = mesh;
   if (meshGroundShadow) {
     spriteItem.meshGroundShadow = true;

@@ -1,0 +1,102 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-llama-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 2240
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 1120
+        }
+      ],
+      "candidateId": "llama-plateau-herbivores-v1",
+      "modelSha256": "ae5581e0d848445fa136cce04341eac0ae1be546450943229af33927c57e8edc"
+    },
+    {
+      "type": "wildlife-alpaca-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 2240
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 1120
+        }
+      ],
+      "candidateId": "alpaca-plateau-herbivores-v1",
+      "modelSha256": "453734abca89ae91cd94098e79282174e9339258cb21350dae558e903d4efcc6"
+    },
+    {
+      "type": "wildlife-warthog-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "warthog-plateau-herbivores-v1",
+      "modelSha256": "c8da08a8715fbf7de5a6390499cf64adeac8448c55b2e1536e4c5fc34dc11cae"
+    }
+  ],
+  "clipSamples": 336,
+  "testedDepth": false
+}

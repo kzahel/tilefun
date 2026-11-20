@@ -186,7 +186,7 @@ export class WorkshopService {
         )
           throw new HttpError(409, "Candidate changed. Reload the current review.");
         if (candidate.kind === "wildlife")
-          await verifyWildlifeEvidence(candidate.id, this.options.root);
+          await verifyWildlifeEvidence(candidate.id, this.options.root, candidate.review?.revision);
         if (
           !["approved", "changes", "clear"].includes(e.verdict) ||
           typeof e.note !== "string" ||

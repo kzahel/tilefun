@@ -4,6 +4,7 @@ import { reviewContext2D } from "../art/reviewCanvas.js";
 import { reviewCases } from "../interiors/review/ReviewCases.js";
 import { parseReviewPins } from "../interiors/review/ReviewFeedback.js";
 import { required } from "../shared/required.js";
+import { wildlifeModelReviewPath } from "../wildlife/WildlifeModelReviewBank.js";
 import {
   interiorFingerprint,
   loadReviewAtlas,
@@ -17,6 +18,7 @@ import { reviewAssets } from "./ReviewAssets.js";
 import { artReviewDefinitions, buildArtCandidate, renderArtCandidate } from "./ReviewCandidates.js";
 import { primaryScene, scenePath } from "./SceneReview.js";
 import { buildWildlifeCandidate, WILDLIFE_REVIEWS } from "./WildlifeCandidates.js";
+import { buildWildlifeModelCandidate, wildlifeModelReview } from "./WildlifeModelCandidates.js";
 import { candidateLabel, ErrorMessage, LegacyLink, reviewPath } from "./WorkshopCommon.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
 import type { CandidateSummary, WorkshopCandidate, WorkshopEvent } from "./WorkshopTypes.js";
@@ -229,7 +231,9 @@ function ReviewCase({
     const render = async () => {
       const temporary = document.createElement("canvas");
       if (c.kind === "wildlife") {
-        const actual = await buildWildlifeCandidate(temporary, c.id);
+        const actual = await (wildlifeModelReview(c.id)
+          ? buildWildlifeModelCandidate(temporary, c.id)
+          : buildWildlifeCandidate(temporary, c.id));
         if (actual.fingerprint !== c.fingerprint)
           throw new Error(
             "Wildlife preview changed. Reload the registered revision before reviewing.",
@@ -421,6 +425,7 @@ function ReviewCase({
     return () => window.removeEventListener("keydown", key);
   });
   const canVote = ready === c.id && currentManifest && !q.paused && !c.excluded;
+  const model = wildlifeModelReview(c.id);
   return (
     <section
       className="review-page"
@@ -513,7 +518,55 @@ function ReviewCase({
       ) : null}
       <div className="review-content" hidden={q.paused || !visible.length}>
         <div className="native-preview">
-          {c.kind === "wildlife" ? (
+          {model && ready === c.id ? (
+            <>
+              {/* biome-ignore lint/a11y/useMediaCaption: Silent comparison with labeled action stills below. */}
+              <video
+                aria-label={`${model.name} sprite and model motion comparison`}
+                src={`/tilefun/${wildlifeModelReviewPath(model.id, "comparison.mp4")}`}
+                controls
+                playsInline
+                preload="metadata"
+                style={{ maxWidth: "100%" }}
+              />
+              <p>
+                <a
+                  className="button"
+                  href={`/tilefun/workshop.html?geometry=nature-${model.lab}&wildlife3dStage=${model.id}&wildlife3dReview=${model.id}&wildlife3d=1#/tool/world-geometry`}
+                >
+                  Play with this model →
+                </a>{" "}
+                <a href={`/tilefun/${wildlifeModelReviewPath(model.id, "model.blend")}`} download>
+                  Blender source
+                </a>
+                {" · "}
+                <a href={`/tilefun/${wildlifeModelReviewPath(model.id, "model.glb")}`} download>
+                  GLB
+                </a>
+                {" · "}
+                <a href={`/tilefun/${wildlifeModelReviewPath(model.id, "native.png")}`}>
+                  Native-scale still
+                </a>
+              </p>
+              <details>
+                <summary>Action stills</summary>
+                <ul>
+                  {Object.keys(model.files)
+                    .filter(
+                      (name) =>
+                        name.endsWith(".png") && !["appearance.png", "native.png"].includes(name),
+                    )
+                    .map((name) => (
+                      <li key={name}>
+                        <a href={`/tilefun/${wildlifeModelReviewPath(model.id, name)}`}>
+                          {name.slice(0, -4)}
+                        </a>
+                      </li>
+                    ))}
+                </ul>
+              </details>
+            </>
+          ) : c.kind === "wildlife" && !model ? (
             <LegacyLink
               className="button"
               url={

@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-seahorse-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "seahorse-reef-fauna-v1",
+      "modelSha256": "99a54a6a2d89e8f61c41bbbbe3cb0e0914517bddc09434c8f701ffd8e18307ce"
+    },
+    {
+      "type": "wildlife-leafy-seadragon-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "leafy-seadragon-reef-fauna-v1",
+      "modelSha256": "49c0671c719528206efa93f8b3c91e62c2dc309bff504815faefe4514423c7d8"
+    },
+    {
+      "type": "wildlife-starfish-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "starfish-reef-fauna-v1",
+      "modelSha256": "a5cebd7963a79482b4c99609cb874df43c1c945e8dbf417fc20fb46da5fa2f38"
+    },
+    {
+      "type": "wildlife-sea-turtle-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "sea-turtle-reef-fauna-v1",
+      "modelSha256": "edbe9922c100622f76be82c2cbc63e1b0baee67748d7b3b0e6753c242cd13da7"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-nautilus-provisional-v1",
+  "version": 2,
+  "fit": [
+    12.33,
+    7.5,
+    10.98
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.59,
+  "clips": [
+    "idle",
+    "swim",
+    "action",
+    "flee"
+  ],
+  "water": true,
+  "ground": "#668488",
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

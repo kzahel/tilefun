@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-american-bison-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 2240
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 1120
+        }
+      ],
+      "candidateId": "american-bison-heavy-herds-v1",
+      "modelSha256": "a6b486024779c8e224287b2a79dda40b609b2b864524a1cd9d8bb7e9e68f19ee"
+    },
+    {
+      "type": "wildlife-water-buffalo-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 2240
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 1120
+        }
+      ],
+      "candidateId": "water-buffalo-heavy-herds-v1",
+      "modelSha256": "f9a1cecee2d8beae734e77555068e49892b3041cc1a7ac2e7915cf5933b1f936"
+    },
+    {
+      "type": "wildlife-wildebeest-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "wildebeest-heavy-herds-v1",
+      "modelSha256": "0687d5e0cc85ec6a03aa233e2dadf25da433e22ba4f7f3d1853482de8e667086"
+    },
+    {
+      "type": "wildlife-musk-ox-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 2240
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 1120
+        }
+      ],
+      "candidateId": "musk-ox-heavy-herds-v1",
+      "modelSha256": "9c66d48ccdb6a5e521701ab5cece7e14c959a48994a27a1e53ab54c8ad266955"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-wallaby-provisional-v1",
+  "version": 2,
+  "fit": [
+    10.8,
+    8.85,
+    12.91
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.94,
+  "clips": [
+    "idle",
+    "hop",
+    "action",
+    "flee"
+  ],
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

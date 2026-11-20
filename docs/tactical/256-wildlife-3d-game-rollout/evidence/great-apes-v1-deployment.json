@@ -1,0 +1,99 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "b7ffdd4d88393d45907fc87a24fdc195dda5dff1ef1704ff3c87029f471fc0c3",
+  "results": [
+    {
+      "type": "wildlife-gorilla-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "87d418da3d8b94fb2c3d1cf5b7e34913c4bfa8d7b18b8ad289682816efaf7c49",
+      "modelSha256": "30ddb33c7b5a01f1a76d6107e737d63205e908fba97009d6dbecb9edc21736a6",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-gorilla&wildlife3dStage=gorilla-great-apes-v1&wildlife3dReview=gorilla-great-apes-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0010013275146484413,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-chimpanzee-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "a201a4cf1847a5d106004abcda63d0446d627b29c48eb5c13912576266edc230",
+      "modelSha256": "408b1e904402d66a8099b8cea30965c1e7307b68147d884a8f871c73d0b2d528",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-chimpanzee&wildlife3dStage=chimpanzee-great-apes-v1&wildlife3dReview=chimpanzee-great-apes-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000939174652099618,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-orangutan-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b636e0b3b72db3ed6a31567aa3c2ec004b0f1a8d7996675bb877fed3ae9b575c",
+      "modelSha256": "2fb188e176e17288b628931fb26c3004fa68878132e0f1a830100ddb585bfacb",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-orangutan&wildlife3dStage=orangutan-great-apes-v1&wildlife3dReview=orangutan-great-apes-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009895992279052913,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

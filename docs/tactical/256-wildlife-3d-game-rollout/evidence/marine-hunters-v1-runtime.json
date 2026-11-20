@@ -1,0 +1,158 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-dolphin-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "dolphin-marine-hunters-v1",
+      "modelSha256": "1fbccd09dd091fd679abfe195e2c369ad5144623aacc23f583f3f3eb6b5518f0"
+    },
+    {
+      "type": "wildlife-orca-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "orca-marine-hunters-v1",
+      "modelSha256": "a82caad1ce738fd42d75277e7e775e05880a80d8e4be7f5a4496949fedf8864d"
+    },
+    {
+      "type": "wildlife-narwhal-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "narwhal-marine-hunters-v1",
+      "modelSha256": "5cea142fb60a86008f8a8a2afff6f4a5bf55552e4a7a902d20793d5909f37f08"
+    },
+    {
+      "type": "wildlife-swordfish-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "swordfish-marine-hunters-v1",
+      "modelSha256": "0784d623802e67aa17dfdfad734604057707de15802e53b37d6cd69143a04a7a"
+    }
+  ],
+  "clipSamples": 560,
+  "testedDepth": false
+}

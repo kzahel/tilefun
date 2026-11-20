@@ -1,0 +1,170 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-cat-provisional-v1",
+      "clips": 9,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "Idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "walk",
+          "action": "Walk",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "action",
+          "action": "Action",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "flee",
+          "action": "Flee",
+          "frames": 28,
+          "gameDurationMs": 320
+        },
+        {
+          "state": "stalk",
+          "action": "Stalk",
+          "frames": 28,
+          "gameDurationMs": 1000
+        },
+        {
+          "state": "pounce",
+          "action": "Pounce",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "bat",
+          "action": "Bat",
+          "frames": 28,
+          "gameDurationMs": 720
+        },
+        {
+          "state": "climb",
+          "action": "Climb",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "sit",
+          "action": "Sit",
+          "frames": 28,
+          "gameDurationMs": 1200
+        }
+      ],
+      "candidateId": "cat-pilot-v1",
+      "modelSha256": "b032d2fee20eb5666568fbc4154381670c1d28c8c5402d02ecbc357128f6826b"
+    },
+    {
+      "type": "wildlife-rabbit-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 125
+        },
+        {
+          "state": "hop",
+          "action": "hop",
+          "frames": 28,
+          "gameDurationMs": 1000
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 750
+        },
+        {
+          "state": "eat",
+          "action": "eat",
+          "frames": 28,
+          "gameDurationMs": 1200
+        }
+      ],
+      "candidateId": "rabbit-pilot-v1",
+      "modelSha256": "22e7dcc6e906a4bea9f421be9ddbd8c477dbba396a48d98ae11504af38145405"
+    },
+    {
+      "type": "wildlife-robin-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 120
+        },
+        {
+          "state": "hop",
+          "action": "hop",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "flap",
+          "action": "flap",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 720
+        },
+        {
+          "state": "eat",
+          "action": "eat",
+          "frames": 28,
+          "gameDurationMs": 1200
+        }
+      ],
+      "candidateId": "robin-pilot-v1",
+      "modelSha256": "16f91a4a1decbfbf426d9fae79d5264b240d5bbddd2a796f6874cd40d04ce0b7"
+    },
+    {
+      "type": "wildlife-fish-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "fish-pilot-v1",
+      "modelSha256": "08c8ded2846c84f96f3ff86f056af1d0692041bef9c1c3c94d29c1243f74dd57"
+    }
+  ],
+  "clipSamples": 616,
+  "testedDepth": true
+}

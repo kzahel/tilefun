@@ -1,0 +1,68 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "b7ffdd4d88393d45907fc87a24fdc195dda5dff1ef1704ff3c87029f471fc0c3",
+  "results": [
+    {
+      "type": "wildlife-elephant-upright-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "bdc65ab17b0b0d9956f1daebd83bb51ab456df346a557346fa063fa76a57d938",
+      "modelSha256": "3ecae9181dd0625f21460e5833ac8f87f397dc3e21fbf22a10943421f2a844f2",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-elephant-upright&wildlife3dStage=elephant-upright-upright-herbivores-v1&wildlife3dReview=elephant-upright-upright-herbivores-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009859161376953162,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-giraffe-upright-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b5dfb4b3ff3dc68a1d5efdf656072e9f477ce3500dc073a57fcdad5937117045",
+      "modelSha256": "47800c6f8439c105fdf74495c4b8186c695020521b6f4c381250320d406c526a",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-giraffe-upright&wildlife3dStage=giraffe-upright-upright-herbivores-v1&wildlife3dReview=giraffe-upright-upright-herbivores-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009725952148437677,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

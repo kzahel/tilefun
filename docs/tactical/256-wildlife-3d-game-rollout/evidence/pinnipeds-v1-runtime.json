@@ -1,0 +1,138 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-harbor-seal-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "haul",
+          "action": "haul",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "flee-swim",
+          "action": "flee-swim",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "harbor-seal-pinnipeds-v1",
+      "modelSha256": "5c638fda0d89af511a8af6698a8dd46d6245d88e8c648396ed2a59073473a1d3"
+    },
+    {
+      "type": "wildlife-sea-lion-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "flee-swim",
+          "action": "flee-swim",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "sea-lion-pinnipeds-v1",
+      "modelSha256": "56dc517504dc96dcb7bc551510a017e883086b9a86d9ba1d1c43ed737710059e"
+    },
+    {
+      "type": "wildlife-walrus-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "flee-swim",
+          "action": "flee-swim",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "walrus-pinnipeds-v1",
+      "modelSha256": "e1dcca38ad8a850f857447851cb46942e966d56ba3ce44b869edcd7d9f538be8"
+    }
+  ],
+  "clipSamples": 504,
+  "testedDepth": false
+}

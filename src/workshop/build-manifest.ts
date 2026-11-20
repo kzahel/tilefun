@@ -31,6 +31,7 @@ import { buildVehicleCandidates } from "./VehicleCandidates.js";
 import { buildVehicleGameFitCandidate } from "./VehicleGameFitCandidate.js";
 import { buildVehicleStyleStudyCandidates } from "./VehicleStyleStudyCandidates.js";
 import { buildWildlifeCandidates, WILDLIFE_BATCHES } from "./WildlifeCandidates.js";
+import { buildWildlifeModelCandidates, WILDLIFE_MODEL_BATCHES } from "./WildlifeModelCandidates.js";
 import type { WorkshopCandidate } from "./WorkshopTypes.js";
 import {
   buildCityTrainCandidate,
@@ -116,6 +117,7 @@ try {
     () => buildCharacterCandidates(catalog),
     () => buildWildlifeCandidates(),
     async () => buildVehicleCandidates(await loadVerifiedArtImage(source)),
+    () => buildWildlifeModelCandidates(),
   ];
   const candidates: WorkshopCandidate[] = [];
   for (const step of steps) candidates.push(...[await step()].flat());
@@ -147,6 +149,7 @@ try {
         },
         ...INTERIOR_BATCHES,
         ...WILDLIFE_BATCHES,
+        ...WILDLIFE_MODEL_BATCHES,
         {
           id: "motion",
           name: "Furniture movement sets",

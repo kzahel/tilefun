@@ -1,0 +1,94 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-mule-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1920
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "ride",
+          "action": "ride",
+          "frames": 28,
+          "gameDurationMs": 336
+        },
+        {
+          "state": "ride-sprint",
+          "action": "ride-sprint",
+          "frames": 28,
+          "gameDurationMs": 168
+        }
+      ],
+      "candidateId": "mule-pack-mounts-v1",
+      "modelSha256": "b958ad8e21b84510775f62acd70aa87bdc2c7a6714d15d956ba34321f683bdb1"
+    },
+    {
+      "type": "wildlife-camel-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 2240
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 1120
+        },
+        {
+          "state": "ride",
+          "action": "ride",
+          "frames": 28,
+          "gameDurationMs": 350
+        },
+        {
+          "state": "ride-sprint",
+          "action": "ride-sprint",
+          "frames": 28,
+          "gameDurationMs": 175
+        }
+      ],
+      "candidateId": "camel-pack-mounts-v1",
+      "modelSha256": "77209b5e268a45cf9c9f43ee45432b57dac7409251bb66b69c4a0b39708a11c7"
+    }
+  ],
+  "clipSamples": 336,
+  "testedDepth": false
+}

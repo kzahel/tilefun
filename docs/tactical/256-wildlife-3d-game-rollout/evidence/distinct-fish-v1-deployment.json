@@ -1,0 +1,82 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "511432925190c36c76b83c635b073a2027216868e8a94ddc06e4fe99c3b79d3d",
+  "results": [
+    {
+      "type": "wildlife-anglerfish-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c303a30c111698887c46217f7075e50d39574d04bdcb71052bc9414830f2e4b0",
+      "modelSha256": "0d156ddd475cedf9e9d598307f6357837610bc1133bbd243399af2961fb362cc",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-anglerfish&wildlife3dStage=anglerfish-distinct-fish-v1&wildlife3dReview=anglerfish-distinct-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009765167236328162,
+        -0.00008880615234373754
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-pufferfish-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "5a4e956c2e007056b6818531eb4233490246abd92a54fe24d6c7e8a4f0b5ccaf",
+      "modelSha256": "3c57535bf225986ff4a0a1e637deffa567099d141ce6c382edf9b862f20c79a8",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-pufferfish&wildlife3dStage=pufferfish-distinct-fish-v1&wildlife3dReview=pufferfish-distinct-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009664115905761795,
+        -0.000174194335937452
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-ocean-sunfish-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "d28d01c228231c9ede171f5f3750792502b7ccc2fac7ac7e8cd7a0af23d32838",
+      "modelSha256": "4ffcf2a85e7dd23f00afa98b78bfc105d60af4a72598192eb0901c2eaa428bbd",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-ocean-sunfish&wildlife3dStage=ocean-sunfish-distinct-fish-v1&wildlife3dReview=ocean-sunfish-distinct-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009688644409179756,
+        -0.00016596221923827935
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "b7ffdd4d88393d45907fc87a24fdc195dda5dff1ef1704ff3c87029f471fc0c3",
+  "results": [
+    {
+      "type": "wildlife-deer-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c4616fc715c88310c26ac56f014a9ee55078e5bff6b6e03ea15ae1ccd8db2fce",
+      "modelSha256": "79acb931a4656556579d52bcb670852027d51ba70a4bda8ace4a41cb743da92c",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-deer&wildlife3dStage=deer-woodland-browsers-v1&wildlife3dReview=deer-woodland-browsers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "lower",
+        "browse",
+        "raise",
+        "stamp"
+      ],
+      "heightRange": [
+        -0.0010573005676269742,
+        -0.0005970001220703125
+      ],
+      "statesOnApproachOrMount": [
+        "stamp",
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "lower",
+          "browse",
+          "raise",
+          "stamp"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-okapi-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "3bcc4ab6de9fa3939d5583bfa49fa7533dcf623714aee22043fac4b862d25a00",
+      "modelSha256": "aefbdc5b397679cb9fffa9cfdbfb3ac5c7c29020948b5a95fd2052cd655976a4",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-okapi&wildlife3dStage=okapi-woodland-browsers-v1&wildlife3dReview=okapi-woodland-browsers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000970779418945317,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-malayan-tapir-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "e26b3e0cf3389ed38f2ec1925b912fd1b360e6ed1b6e3635a11f02d235c18987",
+      "modelSha256": "54d6f41657a1edf81a09ae89524ea07b5730f6d225ba76fe6ad18d79424dc7e3",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-malayan-tapir&wildlife3dStage=malayan-tapir-woodland-browsers-v1&wildlife3dReview=malayan-tapir-woodland-browsers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009535827636718822,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

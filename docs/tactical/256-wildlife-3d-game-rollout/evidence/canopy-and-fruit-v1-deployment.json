@@ -1,0 +1,82 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "242eb98e5676166a6fcceffd7d18ae2cdfeb47a68d55f2e31414f2fce5fcf2bb",
+  "results": [
+    {
+      "type": "wildlife-elephant-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c01171b37f91839a3f27eb0175901803632465169e612199b0b4a905f9977719",
+      "modelSha256": "cf70da0c4c71aae8026bf91997ec3c259edb5cb1419c3cab1918dd69fd53c7a1",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-elephant&wildlife3dStage=elephant-canopy-and-fruit-v1&wildlife3dReview=elephant-canopy-and-fruit-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "reach",
+        "curl",
+        "eat",
+        "shake"
+      ],
+      "heightRange": [
+        -0.0010050811767578173,
+        -0.00008209609985353983
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "reach",
+          "curl",
+          "eat",
+          "shake"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-giraffe-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "4debab0e87047c8b0c60794e29d4e1e349be894ccd9c3cdb611b481b3e17b0eb",
+      "modelSha256": "7f2324138d34a47b4e76186087df2839b33c58aca291f2a666f982c3f7b0c6cb",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-giraffe&wildlife3dStage=giraffe-canopy-and-fruit-v1&wildlife3dReview=giraffe-canopy-and-fruit-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "reach",
+        "browse",
+        "lower"
+      ],
+      "heightRange": [
+        -0.001030487060547868,
+        -0.0001255645751953132
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "reach",
+          "browse",
+          "lower"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-hippopotamus-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 2240
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 1120
+        }
+      ],
+      "candidateId": "hippopotamus-pond-fauna-v1",
+      "modelSha256": "654fd026ba1525069169003f24b374d7e9ea7d90e00d5f408c02bbf47b6b132c"
+    },
+    {
+      "type": "wildlife-axolotl-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "axolotl-pond-fauna-v1",
+      "modelSha256": "5136e9ecbae92c5dc59da53fbd05f25a6a50a2dc627b0ba4f94d36381c8caa34"
+    },
+    {
+      "type": "wildlife-pond-turtle-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "pond-turtle-pond-fauna-v1",
+      "modelSha256": "9aebcb62d460324c03b7eb7e261689d0659bfab61aec3cfcc10b7c91911db6bb"
+    }
+  ],
+  "clipSamples": 336,
+  "testedDepth": false
+}

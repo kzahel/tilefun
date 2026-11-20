@@ -1,0 +1,99 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "242eb98e5676166a6fcceffd7d18ae2cdfeb47a68d55f2e31414f2fce5fcf2bb",
+  "results": [
+    {
+      "type": "wildlife-guinea-pig-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "26868f1bcb162ff50a82fcdf4277afbf1a6b4ad194e1aa031e6a797d18f249ad",
+      "modelSha256": "36a0be887a95f46acc010890ee85c8939e948fa92045741683d2881f56e943e3",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-guinea-pig&wildlife3dStage=guinea-pig-pet-rodents-v1&wildlife3dReview=guinea-pig-pet-rodents-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009698066711425826,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-hamster-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "cdbcdcd6c3c001a76ff31015dccc9e48f6126a022444d4e4a2cdd7342c665d4b",
+      "modelSha256": "d8a51d8efcb1849e47a04f7d4b732c9f004c1f3cc4cc63b1e50e7f2bb3bbfff3",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-hamster&wildlife3dStage=hamster-pet-rodents-v1&wildlife3dReview=hamster-pet-rodents-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009698333740234414,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-chinchilla-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "07b4bc2d6cc8001ed214682ea454c490cfe891d3c431e9b8614f00977bce80af",
+      "modelSha256": "55b0166898265282f99e9318c1f8ac4d6b4710c9e7853d95d85c376f5f9ffe81",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-chinchilla&wildlife3dStage=chinchilla-pet-rodents-v1&wildlife3dReview=chinchilla-pet-rodents-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000969845771789545,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

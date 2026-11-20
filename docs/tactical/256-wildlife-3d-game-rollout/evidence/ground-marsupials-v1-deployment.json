@@ -1,0 +1,68 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "242eb98e5676166a6fcceffd7d18ae2cdfeb47a68d55f2e31414f2fce5fcf2bb",
+  "results": [
+    {
+      "type": "wildlife-quokka-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "7d52f5f323e20af411cfdc15901f12b6c2b080398ede6a1965e892d4fc9e6c66",
+      "modelSha256": "ab5484f6b51e7426cf92ffca015ac62412fa2996ad8e947344843ad9c849b90c",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-quokka&wildlife3dStage=quokka-ground-marsupials-v1&wildlife3dReview=quokka-ground-marsupials-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009687728881835984,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-wombat-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "6cc8028017a00618d4312bfc730b32bd4b2ba68b694beb58a50121756889acaf",
+      "modelSha256": "57d14bbf33184b135393a4afe172f5706b76bc0891f84b34d96421c8c4fbf6e8",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-wombat&wildlife3dStage=wombat-ground-marsupials-v1&wildlife3dReview=wombat-ground-marsupials-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009812641143798876,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

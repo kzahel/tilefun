@@ -1,0 +1,146 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-lobster-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 320
+        }
+      ],
+      "candidateId": "lobster-marine-arthropods-v1",
+      "modelSha256": "5b7cc9ad1c7618a8c4436b8eca6654d353fa86abd053324526ddeeb2025802f0"
+    },
+    {
+      "type": "wildlife-mantis-shrimp-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 320
+        }
+      ],
+      "candidateId": "mantis-shrimp-marine-arthropods-v1",
+      "modelSha256": "69543c8c81208f90b2cdc730f8722020af96226a448b5882ee78b787127138d7"
+    },
+    {
+      "type": "wildlife-shrimp-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "shrimp-marine-arthropods-v1",
+      "modelSha256": "1507c375a04ed4d440ea854ca36e34d133703ab1d676328db127b43b6279b005"
+    },
+    {
+      "type": "wildlife-horseshoe-crab-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "horseshoe-crab-marine-arthropods-v1",
+      "modelSha256": "32836178efc1301adafe86f19b3290d515cbcc1d0031473d5c963159a552accb"
+    }
+  ],
+  "clipSamples": 504,
+  "testedDepth": false
+}

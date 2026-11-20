@@ -62,6 +62,10 @@ if (uncachedImageSizes && process.env.TILEFUN_DEV_URL)
   throw Error("--uncached-image-sizes requires the isolated benchmark server");
 const headed = process.argv.includes("--headed");
 const instrumentation = !process.argv.includes("--no-metrics");
+const wildlife = option("wildlife", "");
+const wildlifeReview = option("wildlife-review", "");
+if (wildlife && !["models", "sprites"].includes(wildlife))
+  throw Error("--wildlife requires models or sprites");
 const output = option("output", path.join(os.tmpdir(), "tilefun-streaming"));
 const versions = option("versions", "current").split(",");
 const cpuRate = Number(option("cpu", "1"));
@@ -257,9 +261,14 @@ try {
       },
       { version, scene, arrivalTile },
     );
-    await page.goto(
-      `${origin}/?nogamepad&${instrumentation ? "perf&" : ""}generation=${encodeURIComponent(JSON.stringify(arrival.generation))}&arrival=${encodeURIComponent(JSON.stringify(arrival))}`,
-    );
+    const gameUrl = new URL(`${origin}/`);
+    gameUrl.searchParams.set("nogamepad", "");
+    if (instrumentation) gameUrl.searchParams.set("perf", "");
+    gameUrl.searchParams.set("generation", JSON.stringify(arrival.generation));
+    gameUrl.searchParams.set("arrival", JSON.stringify(arrival));
+    if (wildlife) gameUrl.searchParams.set("wildlife3d", wildlife === "models" ? "1" : "0");
+    if (wildlifeReview) gameUrl.searchParams.set("wildlife3dReview", wildlifeReview);
+    await page.goto(gameUrl.href);
     try {
       await page.getByRole("button", { name: "New World", exact: true }).click();
     } catch (error) {

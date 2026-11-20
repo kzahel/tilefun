@@ -1,0 +1,81 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "b73571cea491e8107ab436e5f3a4acc06bbd4efebbc156bb5f95b5836587bd64",
+  "results": [
+    {
+      "type": "wildlife-hippopotamus-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "40dfd69f07510eee4f21149e5a890baf6df2de93d26bf893201dd9b94b64e62f",
+      "modelSha256": "654fd026ba1525069169003f24b374d7e9ea7d90e00d5f408c02bbf47b6b132c",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-hippopotamus&wildlife3dStage=hippopotamus-pond-fauna-v1&wildlife3dReview=hippopotamus-pond-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009745025634765664,
+        -0.0004490871429443347
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-axolotl-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c8fd3765083aa4486792641c2870fb97698c6ab3e65bdc23a7e986ced9a85f24",
+      "modelSha256": "5136e9ecbae92c5dc59da53fbd05f25a6a50a2dc627b0ba4f94d36381c8caa34",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-axolotl&wildlife3dStage=axolotl-pond-fauna-v1&wildlife3dReview=axolotl-pond-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009683990478515672,
+        -0.00017125320434569912
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-pond-turtle-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "97a37f6002f62b735dfa89e2ced916f0d454df44961ced86fe05561ff6ad6b13",
+      "modelSha256": "9aebcb62d460324c03b7eb7e261689d0659bfab61aec3cfcc10b7c91911db6bb",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-pond-turtle&wildlife3dStage=pond-turtle-pond-fauna-v1&wildlife3dReview=pond-turtle-pond-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009683799743652392,
+        -0.0001712455749511678
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

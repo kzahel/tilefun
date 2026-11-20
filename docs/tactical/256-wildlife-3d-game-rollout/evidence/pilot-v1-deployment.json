@@ -1,0 +1,98 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "304210c89926d56cb35a735552467194acbed7b7104a6580e01d9f4cda40023d",
+  "results": [
+    {
+      "type": "wildlife-cat-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "ec9b3968fdd73ab86bcb190610b8e12753c834353fc976b92945c5960e436178",
+      "modelSha256": "b032d2fee20eb5666568fbc4154381670c1d28c8c5402d02ecbc357128f6826b",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-cat&wildlife3dStage=cat-pilot-v1&wildlife3dReview=cat-pilot-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "stalk",
+        "pounce",
+        "bat"
+      ],
+      "heightRange": [
+        -0.7100508689886229,
+        5.973812030791565
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-rabbit-v1",
+      "mode": "review link",
+      "manifestFingerprint": "d22f96184bb5f4802c3edaf28a362b2d0991e89ad94ae88e3e9138ac703f0b32",
+      "modelSha256": "22e7dcc6e906a4bea9f421be9ddbd8c477dbba396a48d98ae11504af38145405",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-rabbit&wildlife3dStage=rabbit-pilot-v1&wildlife3dReview=rabbit-pilot-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "hop",
+        "action",
+        "eat"
+      ],
+      "heightRange": [
+        -0.08541021537779381,
+        9.90681092453003
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-robin-v1",
+      "mode": "review link",
+      "manifestFingerprint": "77d1b532492728bab517870f8e4242217e1989943c75f3d5527db141514583bc",
+      "modelSha256": "16f91a4a1decbfbf426d9fae79d5264b240d5bbddd2a796f6874cd40d04ce0b7",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-robin&wildlife3dStage=robin-pilot-v1&wildlife3dReview=robin-pilot-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "hop",
+        "flap",
+        "action",
+        "eat"
+      ],
+      "heightRange": [
+        -0.08530697917948238,
+        61.09328115844726
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-fish-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "797a277283b5511793083d085f10db201cc10bf4e7d284dc222419b18429268f",
+      "modelSha256": "08c8ded2846c84f96f3ff86f056af1d0692041bef9c1c3c94d29c1243f74dd57",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-fish&wildlife3dStage=fish-pilot-v1&wildlife3dReview=fish-pilot-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009290161132812715,
+        0.0000031590461731078733
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

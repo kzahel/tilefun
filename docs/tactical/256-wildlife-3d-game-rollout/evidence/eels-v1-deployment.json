@@ -1,0 +1,58 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "304210c89926d56cb35a735552467194acbed7b7104a6580e01d9f4cda40023d",
+  "results": [
+    {
+      "type": "wildlife-electric-eel-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "69ce8e6a5ff2cc8700710b2990601abdd5502f313cf5bd3c663dca798265abdd",
+      "modelSha256": "26136735c177727ee643e8552406572959c4c59b325b0d42264395a246346e60",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-electric-eel&wildlife3dStage=electric-eel-eels-v1&wildlife3dReview=electric-eel-eels-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009545059204101587,
+        -0.0003999710083007815
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-moray-eel-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "21e66cedafc4f1f40b68305b9af4185d3daae51605386d5db416724715efa004",
+      "modelSha256": "d974701c1ce84d5a1d781dee070c4e18ed31c368b54eff73c96e358775898deb",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-moray-eel&wildlife3dStage=moray-eel-eels-v1&wildlife3dReview=moray-eel-eels-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009433517456054853,
+        -0.00013037872314453213
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

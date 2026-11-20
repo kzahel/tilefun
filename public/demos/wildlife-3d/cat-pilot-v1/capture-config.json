@@ -1,0 +1,37 @@
+{
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "stalk",
+    "pounce",
+    "bat",
+    "climb",
+    "sit"
+  ],
+  "portraitCenter": 0.76,
+  "runtimeType": "wildlife-cat-provisional-v1",
+  "version": 1,
+  "model": "cat.glb",
+  "fit": [
+    6.8,
+    5.2,
+    6.7
+  ],
+  "autoFit": false,
+  "autoCrop": true,
+  "stageHeight": 1.1,
+  "modelClips": {
+    "idle": "Idle",
+    "walk": "Walk",
+    "action": "Action",
+    "flee": "Flee",
+    "stalk": "Stalk",
+    "pounce": "Pounce",
+    "bat": "Bat",
+    "climb": "Climb",
+    "sit": "Sit"
+  },
+  "rollout": true
+}

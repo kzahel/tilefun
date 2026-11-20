@@ -1,0 +1,90 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "b73571cea491e8107ab436e5f3a4acc06bbd4efebbc156bb5f95b5836587bd64",
+  "results": [
+    {
+      "type": "wildlife-penguin-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "4b3729e05dce863221d9209e5737608695017747908e5ce47de6e6da09f7a186",
+      "modelSha256": "970300d16bafe8a6902d63f411f376fe4731ebda3ce78c416f50feef0e2e035b",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-penguin&wildlife3dStage=penguin-shore-fauna-v1&wildlife3dReview=penguin-shore-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "swim",
+        "action",
+        "flee",
+        "flee-swim"
+      ],
+      "heightRange": [
+        -0.0009536743164062447,
+        -0.0001345443725585856
+      ],
+      "statesOnLanding": [
+        "flee",
+        "flee-swim"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-platypus-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "36d8566149b5920fd96bbce284344c1f083a017f2028e75ad5b4bc3b9ff1b056",
+      "modelSha256": "840c586d0e7f3b2860b9df0f163a16b9d910b80cef25bc4d96358558a20aab2e",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-platypus&wildlife3dStage=platypus-shore-fauna-v1&wildlife3dReview=platypus-shore-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "swim",
+        "action",
+        "flee",
+        "flee-swim"
+      ],
+      "heightRange": [
+        -0.000963607788085941,
+        -0.00010425567626952207
+      ],
+      "statesOnLanding": [
+        "flee",
+        "flee-swim"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-river-otter-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "065ad012e36b0597c243b9f296a04d11f62616029724b896179893e56b2bec99",
+      "modelSha256": "dabaa5d99b08604284e3f02fa29c65998ac2abd1c81729696a49daa64300518c",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-river-otter&wildlife3dStage=river-otter-shore-fauna-v1&wildlife3dReview=river-otter-shore-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "swim",
+        "action",
+        "flee",
+        "flee-swim"
+      ],
+      "heightRange": [
+        -0.0009950370788574289,
+        -0.00008202362060546824
+      ],
+      "statesOnLanding": [
+        "flee",
+        "flee-swim"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

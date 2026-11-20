@@ -334,6 +334,10 @@ export class FirstPersonView {
 
   /** Draw one frame into `target`: the host's renderer, bound to this view's region,
    * and the host's shared vehicle meshes. */
+  wildlifeModelDrawn(sheetKey: string): boolean {
+    return this.wildlife.drewSheet(sheetKey);
+  }
+
   render(frame: FirstPersonFrame, target: View3dTarget): void {
     if (this.disposed) return;
     const { renderer, generation, meshes } = target;

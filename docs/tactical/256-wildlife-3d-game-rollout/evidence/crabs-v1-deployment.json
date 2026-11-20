@@ -1,0 +1,57 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "b73571cea491e8107ab436e5f3a4acc06bbd4efebbc156bb5f95b5836587bd64",
+  "results": [
+    {
+      "type": "wildlife-crab-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "0ce51c2de6228b5ae73a000e2e8da05683083625a03b9e1a439d2233151fb589",
+      "modelSha256": "b021cf89418a0c4de1738928ed396077708b6f91f1a7957530f43f5ea9effbc8",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-crab&wildlife3dStage=crab-crabs-v1&wildlife3dReview=crab-crabs-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009717178344726609,
+        -0.00017452239990234375
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-coconut-crab-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "d3e33687b6e72a662408281edccd025aa83fc7a02eb1ef6b71f6aa4de645a4d5",
+      "modelSha256": "6d5e96a03502e0a58edc3ffeda04cc75829723e1befb274d53c2d8072e01028e",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-coconut-crab&wildlife3dStage=coconut-crab-crabs-v1&wildlife3dReview=coconut-crab-crabs-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009650611877441422,
+        0
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

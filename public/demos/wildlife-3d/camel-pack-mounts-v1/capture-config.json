@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-camel-provisional-v1",
+  "version": 2,
+  "fit": [
+    13.34,
+    10.2,
+    12.96
+  ],
+  "autoFit": true,
+  "portraitCenter": 1.07,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "ride",
+    "ride-sprint"
+  ],
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

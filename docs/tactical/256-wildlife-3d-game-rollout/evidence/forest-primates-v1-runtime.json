@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-japanese-macaque-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "japanese-macaque-forest-primates-v1",
+      "modelSha256": "12dcb40bbb8164aaaf93dccca9c1f780f830f9c2e197080dddc74d1b7bcd1986"
+    },
+    {
+      "type": "wildlife-mandrill-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "mandrill-forest-primates-v1",
+      "modelSha256": "9420db3044ec997eb727f2bba53ec620f58f9f4c232414bc04ad128497fe8a60"
+    },
+    {
+      "type": "wildlife-proboscis-monkey-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "proboscis-monkey-forest-primates-v1",
+      "modelSha256": "3e3c5e60f22b50f5202282df546c018d47b0677958e59f58283271eb07b51725"
+    },
+    {
+      "type": "wildlife-ring-tailed-lemur-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "ring-tailed-lemur-forest-primates-v1",
+      "modelSha256": "4c8d825fdcde83d25cf66a03c4ad4ae02e2b45d1cc8d2cba20fc3fb68cfa382e"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

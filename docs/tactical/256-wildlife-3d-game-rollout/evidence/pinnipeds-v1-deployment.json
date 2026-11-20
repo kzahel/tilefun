@@ -1,0 +1,90 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "215871b602607b30e47a5e13af33c2efba91f8666434935deefdd9a94e234959",
+  "results": [
+    {
+      "type": "wildlife-harbor-seal-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "afce29b4094209d20b38164994b2575834751a97f57d59b731b768ef23c5d514",
+      "modelSha256": "5c638fda0d89af511a8af6698a8dd46d6245d88e8c648396ed2a59073473a1d3",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-harbor-seal&wildlife3dStage=harbor-seal-pinnipeds-v1&wildlife3dReview=harbor-seal-pinnipeds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "haul",
+        "swim",
+        "action",
+        "flee",
+        "flee-swim"
+      ],
+      "heightRange": [
+        -0.0009679794311523438,
+        -0.0004027423858642565
+      ],
+      "statesOnLanding": [
+        "flee",
+        "flee-swim"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-sea-lion-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "d16e646fd10bf822a2b982ad88f4218361419625a66506bce0806abc5681989a",
+      "modelSha256": "56dc517504dc96dcb7bc551510a017e883086b9a86d9ba1d1c43ed737710059e",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-sea-lion&wildlife3dStage=sea-lion-pinnipeds-v1&wildlife3dReview=sea-lion-pinnipeds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "swim",
+        "action",
+        "flee",
+        "flee-swim"
+      ],
+      "heightRange": [
+        -0.0009754562377929779,
+        -0.00014608383178710456
+      ],
+      "statesOnLanding": [
+        "flee",
+        "flee-swim"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-walrus-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "26db8594a9ed02bb81bea4080711ad832c7e8f0e9c7576d6a473fea88a4c2f8d",
+      "modelSha256": "e1dcca38ad8a850f857447851cb46942e966d56ba3ce44b869edcd7d9f538be8",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-walrus&wildlife3dStage=walrus-pinnipeds-v1&wildlife3dReview=walrus-pinnipeds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "swim",
+        "action",
+        "flee",
+        "flee-swim"
+      ],
+      "heightRange": [
+        -0.0009850845336913925,
+        -0.00006581497192382758
+      ],
+      "statesOnLanding": [
+        "flee",
+        "flee-swim"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

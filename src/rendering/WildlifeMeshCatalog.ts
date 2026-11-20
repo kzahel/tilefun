@@ -1,19 +1,38 @@
+/// <reference types="vite/client" />
+
 import type { Euler } from "three";
+import { type AnimationClip, ENTITY_DEFS } from "../entities/EntityDefs.js";
+import { FAUNA_DEFS, faunaType } from "../wildlife/Fauna.js";
 import { RABBIT_CLIPS, RABBIT_TYPE } from "../wildlife/Rabbit.js";
+import {
+  PROMOTED_WILDLIFE_MODELS,
+  WILDLIFE_MODEL_REVIEWS,
+  wildlifeModelClips,
+  wildlifeModelReviewPath,
+  wildlifeModelRuntimePath,
+} from "../wildlife/WildlifeModelReviewBank.js";
 
 export interface WildlifeMeshDefinition {
   /** Self-contained GLB with feet on local ground and forward along glTF −Z. */
   readonly path: string;
   readonly height: number;
+  /** Authored fit maps Blender units directly to game pixels. */
+  readonly unitScale?: number;
   /** Asset-local width and height registration for the oblique gameplay view. */
   readonly topDown?: { readonly width: number; readonly height: number };
   /** Local rotation relative to the part's GLB pose, driven by the existing sprite frame. */
   readonly pose?: (part: string, frame: number, rotation: Euler) => void;
+  /** Embedded clips indexed by the existing runtime sprite clip slots. */
+  readonly animation?: {
+    readonly clips: readonly AnimationClip[];
+    readonly names?: Readonly<Record<string, string>>;
+    readonly classicCycle?: boolean;
+  };
 }
 
 const [, HOP, ACTION, EAT] = RABBIT_CLIPS;
 
-export const WILDLIFE_MESHES: ReadonlyMap<string, WildlifeMeshDefinition> = new Map([
+const meshes = new Map<string, WildlifeMeshDefinition>([
   [
     RABBIT_TYPE,
     {
@@ -39,3 +58,73 @@ export const WILDLIFE_MESHES: ReadonlyMap<string, WildlifeMeshDefinition> = new 
     },
   ],
 ]);
+
+const query = new URLSearchParams(globalThis.location?.search);
+const reviewId = query.get("wildlife3dReview");
+const isPreview = ({ id, batch }: { id: string; batch: string }) =>
+  id === reviewId || batch === reviewId;
+const selected = new Map(
+  WILDLIFE_MODEL_REVIEWS.filter(({ type, id }) => PROMOTED_WILDLIFE_MODELS[type] === id).map(
+    (review) => [review.type, review],
+  ),
+);
+for (const review of WILDLIFE_MODEL_REVIEWS)
+  if (isPreview(review)) selected.set(review.type, review);
+
+for (const review of selected.values()) {
+  const sprite = ENTITY_DEFS[review.type]?.sprite;
+  if (!sprite) throw new Error(`Missing wildlife sprite: ${review.type}`);
+  const clips = wildlifeModelClips(review.type, review.classicTravel);
+  if (!clips) throw new Error(`Missing wildlife clips: ${review.type}`);
+  meshes.set(sprite.sheetKey, {
+    path: isPreview(review)
+      ? wildlifeModelReviewPath(review.id, "model.glb")
+      : wildlifeModelRuntimePath(review.id),
+    height: 1,
+    unitScale: review.scale,
+    topDown: review.topDown,
+    animation: {
+      clips,
+      ...(review.actions ? { names: review.actions } : {}),
+      classicCycle: !sprite.clips,
+    },
+  });
+}
+
+// Local development preview for an exact campaign candidate. The registered
+// sprite remains the reference artwork in normal game and Workshop sessions.
+if (
+  import.meta.env?.DEV &&
+  typeof window !== "undefined" &&
+  query.get("wildlife3dDrafts") === "1"
+) {
+  const type = faunaType("cat");
+  const clips = FAUNA_DEFS[type]?.sprite?.clips;
+  if (clips)
+    meshes.set(type, {
+      path: "assets/models/experiments/cat.glb",
+      height: 12.6,
+      topDown: { width: 1.015, height: 0.776 },
+      animation: {
+        clips,
+        names: {
+          idle: "Idle",
+          walk: "Walk",
+          action: "Action",
+          flee: "Walk",
+          stalk: "Stalk",
+          pounce: "Pounce",
+          bat: "Bat",
+          climb: "Climb",
+          sit: "Sit",
+        },
+      },
+    });
+  const catalog = document.querySelector("#tilefun-wildlife-draft-catalog")?.textContent;
+  if (catalog) {
+    const drafts = JSON.parse(catalog) as Record<string, WildlifeMeshDefinition>;
+    for (const [type, definition] of Object.entries(drafts)) meshes.set(type, definition);
+  }
+}
+
+export const WILDLIFE_MESHES: ReadonlyMap<string, WildlifeMeshDefinition> = meshes;

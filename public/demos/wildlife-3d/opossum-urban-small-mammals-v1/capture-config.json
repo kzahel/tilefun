@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-opossum-provisional-v1",
+  "version": 1,
+  "fit": [
+    8.7,
+    7.5,
+    8.6
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.72,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "worldLift": {},
+  "rollout": true,
+  "autoCrop": true,
+  "model": "model.glb"
+}

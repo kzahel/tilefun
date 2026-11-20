@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-hamster-provisional-v1",
+  "version": 2,
+  "fit": [
+    11.6,
+    8.18,
+    9.21
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.72,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "worldLift": {},
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

@@ -1,0 +1,21 @@
+{
+  "runtimeType": "pigeon2",
+  "version": 2,
+  "fit": [
+    9.63,
+    8.04,
+    7.92
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.64,
+  "classicTravel": "walk",
+  "clips": [
+    "idle",
+    "walk"
+  ],
+  "water": false,
+  "ground": "#769276",
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

@@ -1,0 +1,134 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-gemsbok-oryx-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "gemsbok-oryx-browsing-antelopes-v1",
+      "modelSha256": "df546a563e86d23d183c5604e203fa9b83531056fc3468c09396d634f7e4a57b"
+    },
+    {
+      "type": "wildlife-gazelle-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "gazelle-browsing-antelopes-v1",
+      "modelSha256": "3cf241e2bd27f92f4ddccc2cac0337824759f026af912e98d8042b87b2bdb2da"
+    },
+    {
+      "type": "wildlife-springbok-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "springbok-browsing-antelopes-v1",
+      "modelSha256": "71920e9c848e2b5b97cc37f43d1784d45d2ff5bd70cfeb62e3945564cea05403"
+    },
+    {
+      "type": "wildlife-gerenuk-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "gerenuk-browsing-antelopes-v1",
+      "modelSha256": "2d0a98c0db5cf9f21fbf09bd955bf1088270bda87b0d4da5f6db286cb97c9741"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

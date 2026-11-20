@@ -1,0 +1,112 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-elephant-provisional-v1",
+      "clips": 8,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 200
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "reach",
+          "action": "reach",
+          "frames": 28,
+          "gameDurationMs": 1500
+        },
+        {
+          "state": "curl",
+          "action": "curl",
+          "frames": 28,
+          "gameDurationMs": 1500
+        },
+        {
+          "state": "eat",
+          "action": "eat",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "shake",
+          "action": "shake",
+          "frames": 28,
+          "gameDurationMs": 1500
+        }
+      ],
+      "candidateId": "elephant-canopy-and-fruit-v1",
+      "modelSha256": "cf70da0c4c71aae8026bf91997ec3c259edb5cb1419c3cab1918dd69fd53c7a1"
+    },
+    {
+      "type": "wildlife-giraffe-provisional-v1",
+      "clips": 7,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 3200
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "reach",
+          "action": "reach",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "browse",
+          "action": "browse",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "lower",
+          "action": "lower",
+          "frames": 28,
+          "gameDurationMs": 1200
+        }
+      ],
+      "candidateId": "giraffe-canopy-and-fruit-v1",
+      "modelSha256": "7f2324138d34a47b4e76186087df2839b33c58aca291f2a666f982c3f7b0c6cb"
+    }
+  ],
+  "clipSamples": 420,
+  "testedDepth": false
+}

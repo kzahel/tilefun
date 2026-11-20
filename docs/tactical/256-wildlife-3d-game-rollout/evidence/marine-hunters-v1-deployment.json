@@ -1,0 +1,102 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "215871b602607b30e47a5e13af33c2efba91f8666434935deefdd9a94e234959",
+  "results": [
+    {
+      "type": "wildlife-dolphin-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "491d3e66328f757d78b482d27a56e8838fe50b54058bfb418c6437d458ce36a8",
+      "modelSha256": "1fbccd09dd091fd679abfe195e2c369ad5144623aacc23f583f3f3eb6b5518f0",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-dolphin&wildlife3dStage=dolphin-marine-hunters-v1&wildlife3dReview=dolphin-marine-hunters-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009539585113522507,
+        -0.00015451431274413985
+      ],
+      "displayOnLanding": true,
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-orca-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b5b246659d63f2f31773a16a2d5a3c4de27189e712f2f0a9777dc018b2625fda",
+      "modelSha256": "a82caad1ce738fd42d75277e7e775e05880a80d8e4be7f5a4496949fedf8864d",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-orca&wildlife3dStage=orca-marine-hunters-v1&wildlife3dReview=orca-marine-hunters-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009538269042966435,
+        -0.00015092849731452234
+      ],
+      "displayOnLanding": true,
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-narwhal-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b16537980a543afa1911d19ce8a34ff349dc140787a9b2c16f4bb356c548a958",
+      "modelSha256": "5cea142fb60a86008f8a8a2afff6f4a5bf55552e4a7a902d20793d5909f37f08",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-narwhal&wildlife3dStage=narwhal-marine-hunters-v1&wildlife3dReview=narwhal-marine-hunters-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009544982910156294,
+        -0.00010234832763682441
+      ],
+      "displayOnLanding": true,
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-swordfish-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "db6c24c4771389bbcde918f2338a8a1a9a03bade2ef9559377a17d917521ca72",
+      "modelSha256": "0784d623802e67aa17dfdfad734604057707de15802e53b37d6cd69143a04a7a",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-swordfish&wildlife3dStage=swordfish-marine-hunters-v1&wildlife3dReview=swordfish-marine-hunters-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009492187499998365,
+        -0.00013268661499026233
+      ],
+      "displayOnLanding": true,
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

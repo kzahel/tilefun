@@ -1,0 +1,126 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-deer-v1",
+      "clips": 8,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        },
+        {
+          "state": "lower",
+          "action": "lower",
+          "frames": 28,
+          "gameDurationMs": 750
+        },
+        {
+          "state": "browse",
+          "action": "browse",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "raise",
+          "action": "raise",
+          "frames": 28,
+          "gameDurationMs": 750
+        },
+        {
+          "state": "stamp",
+          "action": "stamp",
+          "frames": 28,
+          "gameDurationMs": 600
+        }
+      ],
+      "candidateId": "deer-woodland-browsers-v1",
+      "modelSha256": "79acb931a4656556579d52bcb670852027d51ba70a4bda8ace4a41cb743da92c"
+    },
+    {
+      "type": "wildlife-okapi-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1920
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 960
+        }
+      ],
+      "candidateId": "okapi-woodland-browsers-v1",
+      "modelSha256": "aefbdc5b397679cb9fffa9cfdbfb3ac5c7c29020948b5a95fd2052cd655976a4"
+    },
+    {
+      "type": "wildlife-malayan-tapir-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "malayan-tapir-woodland-browsers-v1",
+      "modelSha256": "54d6f41657a1edf81a09ae89524ea07b5730f6d225ba76fe6ad18d79424dc7e3"
+    }
+  ],
+  "clipSamples": 448,
+  "testedDepth": false
+}

@@ -1,0 +1,31 @@
+{
+  "runtimeType": "wildlife-sea-lion-provisional-v1",
+  "version": 1,
+  "fit": [
+    8.79,
+    8.38,
+    8.91
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.72,
+  "clips": [
+    "idle",
+    "walk",
+    "swim",
+    "action",
+    "flee",
+    "flee-swim"
+  ],
+  "exportClips": [
+    "idle",
+    "walk",
+    "swim",
+    "action"
+  ],
+  "water": true,
+  "ground": "#668488",
+  "reviewContext": "Final planned candidate. V1's highest-impact note is preserved in the local revision brief. This pass targeted give the tail its requested silhouette. Compare this exact candidate against the active sprite and report any remaining quality gap. The first candidate images and completed review remain retained in the adjacent v1 folder.",
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

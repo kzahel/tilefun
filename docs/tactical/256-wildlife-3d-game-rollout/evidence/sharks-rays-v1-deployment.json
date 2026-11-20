@@ -1,0 +1,108 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "ad025e1b10e9257093e41d8081b7ac59080cb7678bb6d586b1adfd006f8191f3",
+  "results": [
+    {
+      "type": "wildlife-shark-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "dcd6996ae154ed3141f686f835ff7b6681b88406e074927b9683488b2ec64054",
+      "modelSha256": "ab7d40b6cbef17f378139693dcd65c4043d14cc484af7069c00a810ca7c2b493",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-shark&wildlife3dStage=shark-sharks-rays-v1&wildlife3dReview=shark-sharks-rays-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009425544738767019,
+        -0.00013084411621103328
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-hammerhead-shark-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "67ce5b6c5f11938171445fb638faa9e88c4cfd519813f535073c7c00bdbaea05",
+      "modelSha256": "43bec3cae41ae6442351379adbc3c009338f1117533f2478f13537b07ba301a9",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-hammerhead-shark&wildlife3dStage=hammerhead-sharks-rays-v1&wildlife3dReview=hammerhead-sharks-rays-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009559516906735755,
+        -0.00010236740112315317
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-whale-shark-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "1276292bebd7707a163b0836e0e3bc65f65750bd381038a278fd59ecf23d943b",
+      "modelSha256": "b85cc3821d352a867f67f682ade751dcd3b798096dc904ad86dcedcbf7e08aac",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-whale-shark&wildlife3dStage=whale-shark-sharks-rays-v1&wildlife3dReview=whale-shark-sharks-rays-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009688415527343811,
+        -0.0004023532867431656
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-manta-ray-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "ede929680cebe45c3b99b6f5633f898f8e2108cac99a621c53226664858d6ece",
+      "modelSha256": "20f7ee7f13f8f65c04ce4e5a319080b95d7c154c76551071732f3739a3a632d1",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-manta-ray&wildlife3dStage=manta-ray-sharks-rays-v1&wildlife3dReview=manta-ray-sharks-rays-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009490013122553766,
+        -0.00009771347045941112
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

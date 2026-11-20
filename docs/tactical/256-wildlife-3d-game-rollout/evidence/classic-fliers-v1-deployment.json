@@ -1,0 +1,54 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "66d5824e06c7b5c6e7809168bf342aae459984292b36df4375e61bad6af538d5",
+  "results": [
+    {
+      "type": "crow",
+      "mode": "review link",
+      "manifestFingerprint": "be56a8a89084a6919e19400396c8da90db0b137ecbc5c8305add418815845a0f",
+      "modelSha256": "a3957572d136a522dcafc6273a98b092fcdafe5cba9878b42c59c2aad56be296",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-robins&wildlife3dStage=crow-classic-fliers-v1&wildlife3dReview=crow-classic-fliers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly"
+      ],
+      "heightRange": [
+        -0.0000014219284057619675,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "fly",
+          "idle"
+        ]
+      }
+    },
+    {
+      "type": "seagull",
+      "mode": "review link",
+      "manifestFingerprint": "eed4c38350219d36e9397aab29fe2530c4aacfbc133cd2b7808120d3df170bb4",
+      "modelSha256": "2073119644673da5c617edd4cf4a65f1dad3a9f0567efc3ed9faa5eba13b9b31",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-robins&wildlife3dStage=seagull-classic-fliers-v1&wildlife3dReview=seagull-classic-fliers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "fly"
+      ],
+      "heightRange": [
+        -0.00000141906738281273,
+        0
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "fly",
+          "idle"
+        ]
+      }
+    }
+  ]
+}

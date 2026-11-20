@@ -1,0 +1,106 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "511432925190c36c76b83c635b073a2027216868e8a94ddc06e4fe99c3b79d3d",
+  "results": [
+    {
+      "type": "wildlife-blue-whale-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "c2f2dafca5b28ce840a3b7b93013008c9ae2cda7cc2d9db6c2ef119851847b05",
+      "modelSha256": "474b66b90bcb8c58e5e894dcb5d2b1ad84417f100545909465a9358b58c7bb34",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-blue-whale&wildlife3dStage=blue-whale-swimmers-v1&wildlife3dReview=blue-whale-swimmers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.00097825622558587,
+        -0.00023005485534785362
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-humpback-whale-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "1f5a8396e9a8eacf8ab2eaaac10d7efc542f05a6f4b9cfe1a24772ea7001e972",
+      "modelSha256": "04898b83e81946b648a0ddb738a7ed32666ddfc62fb65885512e4fae8d42bd7d",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-humpback-whale&wildlife3dStage=humpback-whale-swimmers-v1&wildlife3dReview=humpback-whale-swimmers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009765090942382841,
+        -0.00016983795166015757
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-dugong-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "eb153b13d6cb1f98b0be05d1c2a046543ca96dfe0699f2f26fea3b19bd96564a",
+      "modelSha256": "251a807a872245fbecd0d6abeaa2178660c024f99a97e1680af642ec14a56e58",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-dugong&wildlife3dStage=dugong-swimmers-v1&wildlife3dReview=dugong-swimmers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009639816284179743,
+        -0.00044890022277832033
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-manatee-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "ec0fa643be13e994b741c6bc3671e13c7d09e224e7211a5ec68b1f6f01c20c1c",
+      "modelSha256": "1c09428c31efc2ed32c55905cae8aacd37e5f7d54ce2ca4a2ba8311604b04adc",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-manatee&wildlife3dStage=manatee-swimmers-v1&wildlife3dReview=manatee-swimmers-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009668884277343863,
+        -0.00016983795166015646
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

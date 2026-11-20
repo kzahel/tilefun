@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "08cfec2ea11eb93efad64810dac7930bcf8b7be85240afd6d349fc6561158739",
+  "results": [
+    {
+      "type": "wildlife-gemsbok-oryx-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "7a9d72a2cdb9cd4cd3678f00e5bd05a5434920967d5d01edd18d5c896f9834df",
+      "modelSha256": "df546a563e86d23d183c5604e203fa9b83531056fc3468c09396d634f7e4a57b",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-gemsbok-oryx&wildlife3dStage=gemsbok-oryx-browsing-antelopes-v1&wildlife3dReview=gemsbok-oryx-browsing-antelopes-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009743690490722775,
+        0.00005037689208987911
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-gazelle-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "66fb486739dc3a6da2249d4b57d9c5893df948aa4c697598f6a8d62fb0195611",
+      "modelSha256": "3cf241e2bd27f92f4ddccc2cac0337824759f026af912e98d8042b87b2bdb2da",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-gazelle&wildlife3dStage=gazelle-browsing-antelopes-v1&wildlife3dReview=gazelle-browsing-antelopes-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009884414672851891,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-springbok-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "95fac1870d432403e55ade34fa49c3f25316c169520af46750b673679467d3e1",
+      "modelSha256": "71920e9c848e2b5b97cc37f43d1784d45d2ff5bd70cfeb62e3945564cea05403",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-springbok&wildlife3dStage=springbok-browsing-antelopes-v1&wildlife3dReview=springbok-browsing-antelopes-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009593353271484406,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-gerenuk-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "7e633e2fea5c7f9846e0e3f0271045e495ae71d6f44c840c23a4fff9bd223fc7",
+      "modelSha256": "2d0a98c0db5cf9f21fbf09bd955bf1088270bda87b0d4da5f6db286cb97c9741",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-gerenuk&wildlife3dStage=gerenuk-browsing-antelopes-v1&wildlife3dReview=gerenuk-browsing-antelopes-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000940280914306647,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

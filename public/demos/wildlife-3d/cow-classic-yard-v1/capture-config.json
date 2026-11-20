@@ -1,0 +1,21 @@
+{
+  "runtimeType": "cow",
+  "version": 2,
+  "fit": [
+    10.15,
+    6.8,
+    10.23
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.64,
+  "classicTravel": "walk",
+  "clips": [
+    "idle",
+    "walk"
+  ],
+  "water": false,
+  "ground": "#769276",
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

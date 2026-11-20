@@ -1,0 +1,23 @@
+{
+  "runtimeType": "wildlife-cuttlefish-predator-v1",
+  "version": 2,
+  "fit": [
+    12.33,
+    5.89,
+    12.18
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.59,
+  "clips": [
+    "idle",
+    "swim",
+    "feed",
+    "display",
+    "chase"
+  ],
+  "water": true,
+  "ground": "#668488",
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

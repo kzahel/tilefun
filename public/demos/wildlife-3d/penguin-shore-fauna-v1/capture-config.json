@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-penguin-provisional-v1",
+  "version": 2,
+  "fit": [
+    11.6,
+    8.7,
+    11.56
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.92,
+  "clips": [
+    "idle",
+    "walk",
+    "swim",
+    "action",
+    "flee",
+    "flee-swim"
+  ],
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

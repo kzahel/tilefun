@@ -1,0 +1,31 @@
+{
+  "runtimeType": "wildlife-harbor-seal-provisional-v1",
+  "version": 1,
+  "fit": [
+    11.13,
+    5.58,
+    12.04
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.72,
+  "clips": [
+    "idle",
+    "haul",
+    "swim",
+    "action",
+    "flee",
+    "flee-swim"
+  ],
+  "exportClips": [
+    "idle",
+    "walk",
+    "swim",
+    "action"
+  ],
+  "water": true,
+  "ground": "#668488",
+  "reviewContext": "Final planned candidate. V1's highest-impact note is preserved in the local revision brief. This pass targeted give the tail its requested silhouette, clarify the existing keyed travel and action. Compare this exact candidate against the active sprite and report any remaining quality gap. The first candidate images and completed review remain retained in the adjacent v1 folder.",
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

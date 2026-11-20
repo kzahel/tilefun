@@ -1,13 +1,75 @@
+import type { Page } from "@playwright/test";
 import { expect, test } from "@playwright/test";
 import type { RemoteStateView } from "../src/client/ClientStateView.js";
+import { ENTITY_DEFS } from "../src/entities/EntityDefs.js";
 import type { IClientTransport } from "../src/transport/Transport.js";
 import type { WorkerClientTransport } from "../src/transport/WorkerClientTransport.js";
 import { advancing, session, state } from "./helpers/p2pSession.js";
 
 test.use({ channel: "chromium" });
 type ClientCanvas = HTMLCanvasElement & {
-  __game: { transport: IClientTransport; stateView: RemoteStateView };
+  __game: {
+    transport: IClientTransport;
+    stateView: RemoteStateView;
+    firstPerson: { wildlifeModelDrawn(sheetKey: string): boolean };
+  };
 };
+
+test("P2P host and guest draw the same skinned animal and replicate its gameplay clips", async ({
+  browser,
+}) => {
+  test.setTimeout(75_000);
+  const type = "wildlife-cat-provisional-v1";
+  const sheetKey = ENTITY_DEFS[type]?.sprite?.sheetKey;
+  if (!sheetKey) throw Error("Missing cat sprite definition");
+  const { host, guest, dispose } = await session(browser, false, {
+    wildlife3dReview: "cat-pilot-v1",
+  });
+  try {
+    await host.evaluate((type) => {
+      const game = (document.querySelector("#game") as ClientCanvas).__game;
+      const { wx, wy } = game.stateView.playerEntity.position;
+      game.transport.send({ type: "set-editor-mode", enabled: true });
+      game.transport.send({ type: "edit-spawn", entityType: type, wx: wx + 20, wy: wy + 20 });
+      game.transport.send({ type: "set-editor-mode", enabled: false });
+    }, type);
+    const check = (page: Page) =>
+      page.evaluate(
+        ({ type, sheetKey }) => {
+          const game = (document.querySelector("#game") as ClientCanvas).__game;
+          const cat = game.stateView.entities.find((entity) => entity.type === type);
+          return {
+            id: cat?.id,
+            clip: cat?.sprite?.clip,
+            visible: game.firstPerson.wildlifeModelDrawn(sheetKey),
+          };
+        },
+        { type, sheetKey },
+      );
+    await expect
+      .poll(async () => {
+        const [author, replica] = await Promise.all([check(host), check(guest)]);
+        return !!author.id && author.id === replica.id && author.visible && replica.visible;
+      })
+      .toBe(true);
+
+    const clipsOnHost = new Set<number>();
+    const clipsOnGuest = new Set<number>();
+    await expect
+      .poll(
+        async () => {
+          const [author, replica] = await Promise.all([check(host), check(guest)]);
+          if (author.visible && author.clip !== undefined) clipsOnHost.add(author.clip);
+          if (replica.visible && replica.clip !== undefined) clipsOnGuest.add(replica.clip);
+          return [...clipsOnHost].filter((clip) => clipsOnGuest.has(clip)).length;
+        },
+        { timeout: 22_000 },
+      )
+      .toBeGreaterThan(1);
+  } finally {
+    await dispose();
+  }
+});
 type HostCanvas = HTMLCanvasElement & {
   __game: {
     netEmulatedTransport: { base: WorkerClientTransport };

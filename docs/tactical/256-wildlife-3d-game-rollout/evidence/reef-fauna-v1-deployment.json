@@ -1,0 +1,106 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "5eec6e74889c05bc183fb7fed3f2cd41786af4c683711fb2e810427a8064224d",
+  "results": [
+    {
+      "type": "wildlife-seahorse-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "d821fb8af56e39732fce6251d02794307bd565bd3b71d74427d1b94d732dc642",
+      "modelSha256": "99a54a6a2d89e8f61c41bbbbe3cb0e0914517bddc09434c8f701ffd8e18307ce",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-seahorse&wildlife3dStage=seahorse-reef-fauna-v1&wildlife3dReview=seahorse-reef-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009812698364257903,
+        -0.00015274047851561532
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-leafy-seadragon-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "f456aadae8c060e7cf14a92bfd7e4dfa4e69f59b266b5fa35e36255c117204ec",
+      "modelSha256": "49c0671c719528206efa93f8b3c91e62c2dc309bff504815faefe4514423c7d8",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-leafy-seadragon&wildlife3dStage=leafy-seadragon-reef-fauna-v1&wildlife3dReview=leafy-seadragon-reef-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009598731994628906,
+        -0.0001254425048828109
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-starfish-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "a844d7ff56613fd244eb164d85a373da9bf38b9b1810eb61076632758e8e4b6b",
+      "modelSha256": "a5cebd7963a79482b4c99609cb874df43c1c945e8dbf417fc20fb46da5fa2f38",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-starfish&wildlife3dStage=starfish-reef-fauna-v1&wildlife3dReview=starfish-reef-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009987354278564453,
+        -0.0001652479171752968
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-sea-turtle-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "22f693bd94777937540effd2b15675b8dd57ca82e124adefa6ab87619885f65d",
+      "modelSha256": "edbe9922c100622f76be82c2cbc63e1b0baee67748d7b3b0e6753c242cd13da7",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-sea-turtle&wildlife3dStage=sea-turtle-reef-fauna-v1&wildlife3dReview=sea-turtle-reef-fauna-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009696807861328121,
+        -0.00021190643310545985
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

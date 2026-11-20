@@ -1,0 +1,102 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-guinea-pig-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "guinea-pig-pet-rodents-v1",
+      "modelSha256": "36a0be887a95f46acc010890ee85c8939e948fa92045741683d2881f56e943e3"
+    },
+    {
+      "type": "wildlife-hamster-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "hamster-pet-rodents-v1",
+      "modelSha256": "d8a51d8efcb1849e47a04f7d4b732c9f004c1f3cc4cc63b1e50e7f2bb3bbfff3"
+    },
+    {
+      "type": "wildlife-chinchilla-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "chinchilla-pet-rodents-v1",
+      "modelSha256": "55b0166898265282f99e9318c1f8ac4d6b4710c9e7853d95d85c376f5f9ffe81"
+    }
+  ],
+  "clipSamples": 336,
+  "testedDepth": false
+}

@@ -1,0 +1,108 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "5eec6e74889c05bc183fb7fed3f2cd41786af4c683711fb2e810427a8064224d",
+  "results": [
+    {
+      "type": "wildlife-lobster-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "a748a280d41e331fa62204b451dc8b3a3760f325aa70781286f6115956874156",
+      "modelSha256": "5b7cc9ad1c7618a8c4436b8eca6654d353fa86abd053324526ddeeb2025802f0",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-lobster&wildlife3dStage=lobster-marine-arthropods-v1&wildlife3dReview=lobster-marine-arthropods-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.00097023963928223,
+        -0.0001841049194335912
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-mantis-shrimp-predator-v1",
+      "mode": "review link",
+      "manifestFingerprint": "41ccebd9d6f9f1bd784e8c01d9ed55cee41ff090d6cd14225e780e93ee75d11a",
+      "modelSha256": "69543c8c81208f90b2cdc730f8722020af96226a448b5882ee78b787127138d7",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-mantis-shrimp&wildlife3dStage=mantis-shrimp-marine-arthropods-v1&wildlife3dReview=mantis-shrimp-marine-arthropods-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "feed",
+        "display",
+        "chase"
+      ],
+      "heightRange": [
+        -0.0009700584411621287,
+        -0.00008701324462888794
+      ],
+      "statesOnLanding": [
+        "display"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-shrimp-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "64ce01779484b6b5a652f98d35b58f94de6971802a2b0828394dc9077af47e75",
+      "modelSha256": "1507c375a04ed4d440ea854ca36e34d133703ab1d676328db127b43b6279b005",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-shrimp&wildlife3dStage=shrimp-marine-arthropods-v1&wildlife3dReview=shrimp-marine-arthropods-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009745693206787172,
+        -0.00014213180541992047
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-horseshoe-crab-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "1b50d8f23285973eda681caedb1145a6cfaba7d1a7defadaba0df92be6232299",
+      "modelSha256": "32836178efc1301adafe86f19b3290d515cbcc1d0031473d5c963159a552accb",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-horseshoe-crab&wildlife3dStage=horseshoe-crab-marine-arthropods-v1&wildlife3dReview=horseshoe-crab-marine-arthropods-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009984283447265676,
+        -0.00021422195434569457
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

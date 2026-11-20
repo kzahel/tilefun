@@ -1,0 +1,86 @@
+{
+  "candidates": [
+    {
+      "type": "worm1",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "crawl",
+          "action": "crawl",
+          "frames": 28,
+          "gameDurationMs": 1080
+        }
+      ],
+      "candidateId": "worm1-classic-worms-v1",
+      "modelSha256": "527fc6f971855dcaccc1d22a3370115d83e63d6b8e0cfd0520bcdbe0aff9f684"
+    },
+    {
+      "type": "worm2",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "crawl",
+          "action": "crawl",
+          "frames": 28,
+          "gameDurationMs": 1080
+        }
+      ],
+      "candidateId": "worm2-classic-worms-v1",
+      "modelSha256": "70c879023ff73d482e0c2a56c8e381780659c7e79f925f44874ddb34943e993f"
+    },
+    {
+      "type": "worm3",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "crawl",
+          "action": "crawl",
+          "frames": 28,
+          "gameDurationMs": 1080
+        }
+      ],
+      "candidateId": "worm3-classic-worms-v1",
+      "modelSha256": "e56cd1bc969a1e35145c5187fbf0e02ee661679b1692024c7cc7b173485b262a"
+    },
+    {
+      "type": "worm4",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 180
+        },
+        {
+          "state": "crawl",
+          "action": "crawl",
+          "frames": 28,
+          "gameDurationMs": 1080
+        }
+      ],
+      "candidateId": "worm4-classic-worms-v1",
+      "modelSha256": "fe85aac1f5cc2ee2d30b2934fa449673a072217aa59ae13fe7d145f30fa5e3ac"
+    }
+  ],
+  "clipSamples": 224,
+  "testedDepth": false
+}

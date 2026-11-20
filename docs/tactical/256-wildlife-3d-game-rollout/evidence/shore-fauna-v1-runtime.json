@@ -1,0 +1,138 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-penguin-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "flee-swim",
+          "action": "flee-swim",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "penguin-shore-fauna-v1",
+      "modelSha256": "970300d16bafe8a6902d63f411f376fe4731ebda3ce78c416f50feef0e2e035b"
+    },
+    {
+      "type": "wildlife-platypus-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "flee-swim",
+          "action": "flee-swim",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "platypus-shore-fauna-v1",
+      "modelSha256": "840c586d0e7f3b2860b9df0f163a16b9d910b80cef25bc4d96358558a20aab2e"
+    },
+    {
+      "type": "wildlife-river-otter-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "flee-swim",
+          "action": "flee-swim",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "river-otter-shore-fauna-v1",
+      "modelSha256": "dabaa5d99b08604284e3f02fa29c65998ac2abd1c81729696a49daa64300518c"
+    }
+  ],
+  "clipSamples": 504,
+  "testedDepth": false
+}

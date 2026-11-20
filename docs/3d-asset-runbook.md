@@ -19,6 +19,13 @@ the conventions of the asset's engine consumer.
   readability, then use first person to check volume and overlap from a few
   angles. Keep the comparison scene, zoom and pose fixed while iterating.
 
+For new animal models, resolve the active game sprite and clip bank from the
+runtime entity first. Use that sprite to guide an original mesh and rig. Keep
+the proportions and markings that make the animal recognizable at play size,
+and map the model’s clips to existing gameplay states and timing. The
+[tuxedo cat builder](../art-source/experiments/cat/build.py) shows the model,
+palette paint and authored animation under one reproducible Blender export.
+
 ## Build and paint in Blender
 
 1. Model the silhouette and the pieces that move. Set the ground origin,
@@ -66,7 +73,9 @@ Normal game builds consume the retained GLB.
 2. Save matched evidence at game scale. Compare top-down cardinal facings, a
    close perspective view, and a characteristic animated pose. Check whether the
    light and dark regions remain distinct in motion. The [rabbit experiment](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-rabbit&wildlife3d=1#/tool/world-geometry)
-   exercises hop and feeding in the shared gameplay renderer.
+   exercises hop and feeding in the shared gameplay renderer. Include a
+   side-by-side motion clip and timestamped stills of takeoff, contact or
+   another signature action.
 3. Compare texture, triangle and draw counts with the previous version. Use the
    [performance workflow](topics/performance.md) when asset count, extra passes
    or target hardware make timings material. The rabbit's paint-only pass

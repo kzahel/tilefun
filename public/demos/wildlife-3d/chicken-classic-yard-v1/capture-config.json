@@ -1,0 +1,21 @@
+{
+  "runtimeType": "chicken",
+  "version": 2,
+  "fit": [
+    9.63,
+    6.23,
+    9.9
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.64,
+  "classicTravel": "walk",
+  "clips": [
+    "idle",
+    "walk"
+  ],
+  "water": false,
+  "ground": "#769276",
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

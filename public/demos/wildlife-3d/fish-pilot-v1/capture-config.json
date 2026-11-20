@@ -1,0 +1,23 @@
+{
+  "runtimeType": "wildlife-fish-provisional-v1",
+  "version": 1,
+  "fit": [
+    7.3,
+    6.3,
+    7.0
+  ],
+  "clips": [
+    "idle",
+    "swim",
+    "action",
+    "flee"
+  ],
+  "water": true,
+  "ground": "#617e82",
+  "portraitCenter": 0.43,
+  "reviewContext": "Final planned pond fish candidate. V1 was thin and its tail vanished edge-on. This version strengthens gold-brown side bars, thickens the footprint and fork, lowers tail swing extremes, and gives the pectoral fins area.",
+  "model": "model.glb",
+  "autoFit": false,
+  "autoCrop": true,
+  "rollout": true
+}

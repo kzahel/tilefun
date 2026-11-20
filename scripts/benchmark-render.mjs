@@ -45,6 +45,17 @@ const CAR_MODELS = [
   "vehicle-v1:dump-truck",
   "vehicle-v1:garbage-truck-orange",
 ];
+const WILDLIFE_MIX = option(
+  "wildlife-list",
+  [
+    "wildlife-rabbit-v1",
+    "wildlife-cat-provisional-v1",
+    "wildlife-dog-provisional-v1",
+    "wildlife-deer-v1",
+    "wildlife-fox-provisional-v1",
+    "wildlife-chicken-provisional-v1",
+  ].join(","),
+).split(",");
 /** Seed-2026 regional world. `city` is the generated city (apartment and shop
  * blocks, traffic, a station; the streaming bench's city arrival); `crowd` adds the
  * stress population there; `woods` is woodland beside the racetrack, with the most
@@ -61,6 +72,7 @@ const SCENES = {
   // image cache off, so each is rendered again every frame as a moving fleet is.
   cars: { arrival: [300, 519], rabbits: 0, cars: 50 },
   fleet: { arrival: [300, 519], rabbits: 0, cars: 50, uncached: true },
+  wildlife: { arrival: [-380, -364], rabbits: 0, cars: 0, wildlife: 24 },
 };
 const scenes = option("scenes", "city,crowd,woods").split(",");
 for (const name of scenes) if (!SCENES[name]) throw Error(`Unknown scene ${name}`);
@@ -80,6 +92,7 @@ const port = Number(option("port", "0"));
 // An existing production origin (a preview server or the packaged shell's
 // tilefun://app/tilefun) instead of the isolated Vite dev server.
 const base = option("base", "").replace(/\/$/, "");
+const campaign = process.argv.includes("--wildlife-campaign");
 // Drive the browser's existing page (the packaged shell has one window, no tabs).
 const attachPage = process.argv.includes("--attach-page");
 if (endpoint && !port && !base) throw Error("--cdp requires a dedicated --port or --base");
@@ -546,12 +559,17 @@ function topSelfTime(cpuProfile, limit = 18) {
 
 try {
   if (!base) {
+    const plugins = [react()];
+    if (campaign) {
+      const { campaignPreview } = await import("./wildlife/3d-campaign-preview.mjs");
+      plugins.unshift((await campaignPreview(undefined, new Set(WILDLIFE_MIX))).plugin);
+    }
     server = await createServer({
       configFile: false,
       base: "/tilefun/",
       cacheDir: path.join(temp, "vite-cache"),
       optimizeDeps: { entries: ["index.html"] },
-      plugins: [react()],
+      plugins,
       server: { host: "127.0.0.1", port, strictPort: !!port, hmr: false, watch: null },
       logLevel: "error",
     });
@@ -624,12 +642,12 @@ try {
       { timeout: 120_000 },
     );
     let placed;
-    if (scene.rabbits || scene.cars) {
+    if (scene.rabbits || scene.cars || scene.wildlife) {
       // Arrival finishes after the first ready frame; early edits are dropped.
       await page.waitForTimeout(2500);
       // The Worker channel bounds queued messages (1,024); spawn in paced batches.
       await page.evaluate(
-        async ({ rabbits, cars, models }) => {
+        async ({ rabbits, cars, wildlife, animals, models }) => {
           const g = document.querySelector("#game").__game;
           const p = g.stateView.playerEntity.position;
           const spawns = [];
@@ -646,6 +664,12 @@ try {
               wx: p.wx + ((i % side) - side / 2) * 28 + 8,
               wy: p.wy + 48 + Math.floor(i / side) * 28,
             });
+          for (let i = 0; i < wildlife; i++)
+            spawns.push({
+              entityType: animals[i % animals.length],
+              wx: p.wx + ((i % animals.length) - animals.length / 2 + 0.5) * 24,
+              wy: p.wy + Math.floor(i / animals.length) * 22 + 28,
+            });
           g.transport.send({ type: "set-editor-mode", enabled: true });
           for (let i = 0; i < spawns.length; i += 200) {
             for (const spawn of spawns.slice(i, i + 200))
@@ -654,28 +678,41 @@ try {
           }
           g.transport.send({ type: "set-editor-mode", enabled: false });
         },
-        { rabbits: scene.rabbits, cars: scene.cars, models: CAR_MODELS },
+        {
+          rabbits: scene.rabbits,
+          cars: scene.cars,
+          wildlife: scene.wildlife ?? 0,
+          animals: WILDLIFE_MIX,
+          models: CAR_MODELS,
+        },
       );
       // A slow authority (a phone at 1,000 rabbits) admits the batches late:
       // wait until the replicated population stops growing.
       const count = () =>
-        page.evaluate(() => {
+        page.evaluate((animals) => {
           const all = document.querySelector("#game").__game.stateView.serverEntities;
           return {
             rabbits: all.filter((e) => e.type === "wildlife-rabbit-v1").length,
             cars: all.filter((e) => e.type.startsWith("vehicle-v1:")).length,
+            wildlife: all.filter((e) => animals.includes(e.type)).length,
           };
-        });
+        }, WILDLIFE_MIX);
       for (let i = 0; i < 20; i++) {
         await page.waitForTimeout(3000);
         const next = await count();
-        const settled = placed && next.rabbits === placed.rabbits && next.cars === placed.cars;
+        const settled =
+          placed &&
+          next.rabbits === placed.rabbits &&
+          next.cars === placed.cars &&
+          (!scene.wildlife || next.wildlife === placed.wildlife);
         placed = next;
         if (settled) break;
       }
       console.log(`${name}: placed ${JSON.stringify(placed)}`);
       if (placed.rabbits < scene.rabbits * 0.7) throw Error(`${name}: crowd did not spawn`);
       if (placed.cars < scene.cars * 0.7) throw Error(`${name}: cars did not spawn`);
+      if (scene.wildlife && placed.wildlife < scene.wildlife * 0.7)
+        throw Error(`${name}: wildlife did not spawn`);
     }
     if (scene.uncached)
       await page.evaluate(() => {

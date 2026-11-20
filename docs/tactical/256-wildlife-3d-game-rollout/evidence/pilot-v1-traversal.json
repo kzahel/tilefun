@@ -1,0 +1,270 @@
+{
+  "models": {
+    "ready": true,
+    "failures": [],
+    "browserErrors": [],
+    "samples": [
+      {
+        "name": "cold",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.8,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 1.1,
+          "p95": 1.6,
+          "max": 3.5
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 6,
+        "displacement": {
+          "x": 0,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      },
+      {
+        "name": "standing",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.8,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 1.4,
+          "p95": 1.8,
+          "max": 3.5
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 6,
+        "displacement": {
+          "x": 0,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      },
+      {
+        "name": "walk",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.8,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 1.4,
+          "p95": 3.1,
+          "max": 3.6
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 8,
+        "displacement": {
+          "x": -193.0771484375,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      },
+      {
+        "name": "sprint",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.8,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 1.1,
+          "p95": 2.4,
+          "max": 3.8
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 10,
+        "displacement": {
+          "x": -642.16943359375,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      },
+      {
+        "name": "reverse",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.8,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 0.9,
+          "p95": 2.8,
+          "max": 5.8
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 10,
+        "displacement": {
+          "x": 642.14306640625,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      },
+      {
+        "name": "zoom-out",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.8,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 1.7,
+          "p95": 2.7,
+          "max": 5
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 15,
+        "displacement": {
+          "x": 0,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      }
+    ]
+  },
+  "sprites": {
+    "ready": true,
+    "failures": [],
+    "browserErrors": [],
+    "samples": [
+      {
+        "name": "cold",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.7,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 0.8,
+          "p95": 1.2,
+          "max": 2
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 6,
+        "displacement": {
+          "x": 0,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      },
+      {
+        "name": "standing",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.7,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 0.7,
+          "p95": 1.2,
+          "max": 2.3
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 6,
+        "displacement": {
+          "x": 0,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      },
+      {
+        "name": "walk",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.7,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 0.9,
+          "p95": 1.5,
+          "max": 3.3
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 8,
+        "displacement": {
+          "x": -193.0771484375,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      },
+      {
+        "name": "sprint",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.7,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 0.7,
+          "p95": 2.1,
+          "max": 3.1
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 10,
+        "displacement": {
+          "x": -642.16943359375,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      },
+      {
+        "name": "reverse",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.7,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 0.8,
+          "p95": 2.1,
+          "max": 3.9
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 10,
+        "displacement": {
+          "x": 644.2763671875,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      },
+      {
+        "name": "zoom-out",
+        "frames": {
+          "p50": 16.7,
+          "p95": 16.8,
+          "max": 16.8
+        },
+        "renderMs": {
+          "p50": 1.3,
+          "p95": 2.1,
+          "max": 4.6
+        },
+        "framesOver25Ms": 0,
+        "visitedChunks": 15,
+        "displacement": {
+          "x": -2.13330078125,
+          "y": 0
+        },
+        "missingDataFrames": 0,
+        "incompleteCacheFrames": 0
+      }
+    ]
+  },
+  "scenario": "Cold and settled woodland, walk, sprint and reverse, seed 2026 around tile \u2212380, \u2212364. Pilot review models or sprites.",
+  "device": "Apple M4 Pro"
+}

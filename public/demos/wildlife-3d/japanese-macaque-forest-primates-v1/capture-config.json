@@ -1,0 +1,21 @@
+{
+  "runtimeType": "wildlife-japanese-macaque-provisional-v1",
+  "version": 2,
+  "fit": [
+    11.14,
+    11.07,
+    12.91
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.94,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "worldLift": {},
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

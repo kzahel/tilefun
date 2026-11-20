@@ -1,0 +1,68 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "242eb98e5676166a6fcceffd7d18ae2cdfeb47a68d55f2e31414f2fce5fcf2bb",
+  "results": [
+    {
+      "type": "wildlife-kangaroo-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "f50d60c6fb33ac07ed8b64e9515eb1cd4b513efd792f65835141ec233be62e0f",
+      "modelSha256": "cf46eade1dffb27607857014d13c52b2846dcd3ffc2deab68c6cc9fa69e143c5",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-kangaroo&wildlife3dStage=kangaroo-macropods-v1&wildlife3dReview=kangaroo-macropods-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "hop",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.00086212158203125,
+        15.90933807373047
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "hop",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-wallaby-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "e5c160576262e280313525ef1510c9925c53785d549390323dbe7b0d444cca00",
+      "modelSha256": "81eca71fd85fbf799689c993f3181fe4130835d1e39c7bfc13ba4404d8b32db2",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-wallaby&wildlife3dStage=wallaby-macropods-v1&wildlife3dReview=wallaby-macropods-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "hop",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000942230224609375,
+        11.913114379882822
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "hop",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

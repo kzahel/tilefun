@@ -1,0 +1,78 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "66d5824e06c7b5c6e7809168bf342aae459984292b36df4375e61bad6af538d5",
+  "results": [
+    {
+      "type": "fish1",
+      "mode": "review link",
+      "manifestFingerprint": "862a49135c5741244ba1e2e7170b527bbdc6c031bff5411c92b74c8df6ecae65",
+      "modelSha256": "a5977f042b78d1125c38327fe25d99b107939254bc0728b40e1aaa9503815b56",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-pond&wildlife3dStage=fish1-classic-fish-v1&wildlife3dReview=fish1-classic-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim"
+      ],
+      "heightRange": [
+        -0.0008466243743896484,
+        -0.00009608840942382888
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim"
+        ]
+      }
+    },
+    {
+      "type": "fish2",
+      "mode": "review link",
+      "manifestFingerprint": "70918dedd4675208f825e1861dc7549024b1ccf1a53ee91f5d8461202ec33cad",
+      "modelSha256": "27405586949fd1d74dcabdd2c5c1a74889ce73746654a7aae610d54983f2203d",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-pond&wildlife3dStage=fish2-classic-fish-v1&wildlife3dReview=fish2-classic-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim"
+      ],
+      "heightRange": [
+        -0.0008579998016357413,
+        -0.0008465962409973146
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim"
+        ]
+      }
+    },
+    {
+      "type": "fish3",
+      "mode": "review link",
+      "manifestFingerprint": "39a11e3f30144cbd0fae0e3ef436319b5a32cad3e8ad1ac85dac8205692eb87f",
+      "modelSha256": "37e3575e75431611cca3d831b36a7296124273036402efcfc8aa3b6a15189ccf",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-pond&wildlife3dStage=fish3-classic-fish-v1&wildlife3dReview=fish3-classic-fish-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "swim"
+      ],
+      "heightRange": [
+        -0.0008579998016357415,
+        -0.0004953408241271982
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "swim"
+        ]
+      }
+    }
+  ]
+}

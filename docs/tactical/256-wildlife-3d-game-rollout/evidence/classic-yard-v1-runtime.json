@@ -1,0 +1,86 @@
+{
+  "candidates": [
+    {
+      "type": "chicken",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 200
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "chicken-classic-yard-v1",
+      "modelSha256": "c5d84a8fcfbe4e3f8166a0e504cea7fb57e3d873afde2b1cbed0b1a6620606eb"
+    },
+    {
+      "type": "cow",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 250
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 750
+        }
+      ],
+      "candidateId": "cow-classic-yard-v1",
+      "modelSha256": "b83b63c1df5642b2bbeff97405e4de6cb3d61e04dae91da2fdbe5ffddb2ce214"
+    },
+    {
+      "type": "pigeon",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 150
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 900
+        }
+      ],
+      "candidateId": "pigeon-classic-yard-v1",
+      "modelSha256": "469d795229456e6d2cff1a807a4f276272a578201d990ab5bfa9c875feefa9af"
+    },
+    {
+      "type": "pigeon2",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 150
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 900
+        }
+      ],
+      "candidateId": "pigeon2-classic-yard-v1",
+      "modelSha256": "15b45835fc3c13182e20fea6f41f6b816d00a6658021cda9239194f90cb87f2f"
+    }
+  ],
+  "clipSamples": 224,
+  "testedDepth": false
+}

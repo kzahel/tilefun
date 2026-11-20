@@ -1,0 +1,130 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "08cfec2ea11eb93efad64810dac7930bcf8b7be85240afd6d349fc6561158739",
+  "results": [
+    {
+      "type": "wildlife-american-bison-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "e6b858035a31045c96fd1ade96b3a1476f3785844d5509f9bccf5b1c7a1af407",
+      "modelSha256": "a6b486024779c8e224287b2a79dda40b609b2b864524a1cd9d8bb7e9e68f19ee",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-american-bison&wildlife3dStage=american-bison-heavy-herds-v1&wildlife3dReview=american-bison-heavy-herds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009707489013671922,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-water-buffalo-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "a8f6f77bfc3e7578f349c871a1bef4abd36df21f7cefd5294847b00655315d32",
+      "modelSha256": "f9a1cecee2d8beae734e77555068e49892b3041cc1a7ac2e7915cf5933b1f936",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-water-buffalo&wildlife3dStage=water-buffalo-heavy-herds-v1&wildlife3dReview=water-buffalo-heavy-herds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.000970657348632817,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-wildebeest-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "d470510bf69a0dbc36733ad7896eae90b0ffda70a2b75e5604c20d504b08a204",
+      "modelSha256": "0687d5e0cc85ec6a03aa233e2dadf25da433e22ba4f7f3d1853482de8e667086",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-wildebeest&wildlife3dStage=wildebeest-heavy-herds-v1&wildlife3dReview=wildebeest-heavy-herds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009647750854492389,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-musk-ox-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "372eea21d307d04d57efe68ca002f825ff2d21ec1be740050534fd77616973a7",
+      "modelSha256": "9c66d48ccdb6a5e521701ab5cece7e14c959a48994a27a1e53ab54c8ad266955",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-musk-ox&wildlife3dStage=musk-ox-heavy-herds-v1&wildlife3dReview=musk-ox-heavy-herds-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009612274169921905,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "25a6ae0e597d9c7445622807d7207e0b533f0e6443ad9a76bf2ca94a29af33d1",
+  "results": [
+    {
+      "type": "wildlife-goat-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "60cbe81477944204f73156240354d633e7d2e751916faea94ef1d28d217ed122",
+      "modelSha256": "cb9840ce84014add7b4c3722c5204518fe28ef85361e519787869168d4b8647b",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-goat&wildlife3dStage=goat-farmyard-v1&wildlife3dReview=goat-farmyard-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "rear",
+        "browse",
+        "lower",
+        "hop"
+      ],
+      "heightRange": [
+        -0.06498782920882318,
+        18.143716156005564
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-piglet-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "4a08a456fdce605d114ea30d48a7ab5cc7e575207956f13e3b2321f8b72f9492",
+      "modelSha256": "8bceabd19e3fa51cb3a7d369b6c73f09de05dc18faf79ed45730d92f924c570b",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-pig&wildlife3dStage=pig-farmyard-v1&wildlife3dReview=pig-farmyard-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "sniff",
+        "root",
+        "pickup",
+        "eat"
+      ],
+      "heightRange": [
+        -0.0010651693344128777,
+        -0.00007830047607421906
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-chicken-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "a3c343ee54fb3ee7220647eab2b43d8570462a7288638c6919109854e9dd51a7",
+      "modelSha256": "4afe62c34be6df929b7f6c2991ece7cce69e7778cbbe911c1197539e083c0053",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-chicken&wildlife3dStage=chicken-farmyard-v1&wildlife3dReview=chicken-farmyard-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "scratch",
+        "peck",
+        "eat"
+      ],
+      "heightRange": [
+        -0.0010106773376465405,
+        -0.000043392181396485595
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

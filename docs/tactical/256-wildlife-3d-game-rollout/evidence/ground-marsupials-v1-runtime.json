@@ -1,0 +1,70 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-quokka-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "quokka-ground-marsupials-v1",
+      "modelSha256": "ab5484f6b51e7426cf92ffca015ac62412fa2996ad8e947344843ad9c849b90c"
+    },
+    {
+      "type": "wildlife-wombat-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "wombat-ground-marsupials-v1",
+      "modelSha256": "57d14bbf33184b135393a4afe172f5706b76bc0891f84b34d96421c8c4fbf6e8"
+    }
+  ],
+  "clipSamples": 224,
+  "testedDepth": false
+}

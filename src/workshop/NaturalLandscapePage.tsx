@@ -5,12 +5,13 @@ import { FootstepSystem } from "../audio/FootstepSystem.js";
 import { buildAudioManifest } from "../audio/SurfaceType.js";
 import { isBoat } from "../boats/Boat.js";
 import { LabView } from "../client/LabView.js";
-import { CHUNK_SIZE_PX } from "../config/constants.js";
+import { CHUNK_SIZE_PX, TILE_SIZE } from "../config/constants.js";
 import {
   loadWildlifeModels,
   saveWildlifeModels,
   wildlifeModelsInLink,
 } from "../config/wildlifeModels.js";
+import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import {
   LANDSCAPE_PROFILES,
   landscapeLabel,
@@ -25,6 +26,13 @@ import {
   naturalExplorerUrl,
   naturalLandscapeRecipe,
 } from "../scenarios/NaturalLandscapeRecipe.js";
+import {
+  isFarmModelReviewCase,
+  isGroundFaunaModelReview,
+  isPackMountModelReview,
+  wildlifeFeedingReview,
+  wildlifeModelReviewRecipe,
+} from "../scenarios/WildlifeModelReviewRecipe.js";
 import { fixedCamera } from "../session/View.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaProfile, faunaType } from "../wildlife/Fauna.js";
@@ -35,12 +43,20 @@ import { MALLARD_TYPE } from "../wildlife/Mallard.js";
 import { PREDATOR_PROFILES, predatorType } from "../wildlife/Predator.js";
 import { RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import { ROBIN_TYPE } from "../wildlife/Robin.js";
+import { WILDLIFE_MODEL_REVIEWS } from "../wildlife/WildlifeModelReviewBank.js";
+import { CollisionFlag } from "../world/TileRegistry.js";
 import AnimalBrowser from "./AnimalBrowser.js";
 import { ANIMAL_BROWSER_ENTRIES } from "./AnimalBrowserData.js";
 import { naturalCasePresentation, naturalCaseZoom } from "./NaturalCasePresentation.js";
 import { buildNaturalCandidate } from "./NaturalLandscapeCandidate.js";
 import { useInbox, useManifest } from "./WorkshopQueries.js";
 import { useWorkspace } from "./WorkspaceStore.js";
+
+interface LandingTarget {
+  type: string;
+  label: string;
+  water?: boolean;
+}
 
 /** Natural fixtures of the existing World geometry lab; all simulation/presentation is shared. */
 export default function NaturalLandscapePage() {
@@ -97,21 +113,55 @@ export default function NaturalLandscapePage() {
         : naturalCase(caseId),
     [caseId, custom, initial],
   );
+  const modelStage = initial.get("wildlife3dStage");
   const prepared = useMemo(() => {
     try {
+      const selected = WILDLIFE_MODEL_REVIEWS.find(
+        (row) => row.id === modelStage && row.lab === caseId,
+      );
+      const review =
+        selected && wildlifeModelReviewRecipe(selected.type, caseId, selected.classicTravel);
       return {
-        recipe: naturalLandscapeRecipe(caseId, profile, custom ? point : undefined),
+        recipe: review ?? naturalLandscapeRecipe(caseId, profile, custom ? point : undefined),
+        modelReview: !!review,
+        reviewSheet: selected && ENTITY_DEFS[selected.type]?.sprite?.sheetKey,
+        reviewAnimal: review && selected,
         error: "",
       };
     } catch (e) {
-      return { recipe: undefined, error: String(e) };
+      return { recipe: undefined, modelReview: false, error: String(e) };
     }
-  }, [caseId, profile, point, custom]);
+  }, [caseId, profile, point, custom, modelStage]);
   const manifest = useManifest(),
     inbox = useInbox();
-  const candidate = manifest.data?.candidates.find(
-    (c) => c.id === `nature:${caseId}:${profile}:v1`,
-  );
+  const candidate = prepared.modelReview
+    ? undefined
+    : manifest.data?.candidates.find((c) => c.id === `nature:${caseId}:${profile}:v1`);
+  const reviewAnimal = prepared.reviewAnimal;
+  const farmAnimal =
+    reviewAnimal?.classicTravel || !isFarmModelReviewCase(caseId) ? undefined : reviewAnimal;
+  const approachAnimal =
+    farmAnimal ??
+    (reviewAnimal &&
+    (wildlifeFeedingReview(reviewAnimal.type, caseId) ||
+      isPackMountModelReview(reviewAnimal.type, caseId) ||
+      isGroundFaunaModelReview(reviewAnimal.type, caseId))
+      ? reviewAnimal
+      : undefined);
+  const fauna = FAUNA_PROFILES.find((animal) => animal.species === caseId);
+  const landingTargets: readonly LandingTarget[] =
+    reviewAnimal && fauna?.habitat === "shore"
+      ? [
+          { type: reviewAnimal.type, label: `${reviewAnimal.name} ashore`, water: false },
+          { type: reviewAnimal.type, label: `${reviewAnimal.name} in water`, water: true },
+        ]
+      : fauna
+        ? [{ type: faunaType(fauna.species), label: fauna.label }]
+        : reviewAnimal &&
+            !reviewAnimal.classicTravel &&
+            (!farmAnimal || faunaProfile(farmAnimal.type)?.rideSpeed)
+          ? [{ type: reviewAnimal.type, label: reviewAnimal.name }]
+          : (presentation.mounts ?? []);
   const noteKey = `nature-note:${candidate?.id ?? caseId}`;
   const note = useWorkspace((s) => s.drafts[noteKey] ?? "");
   const events = useWorkspace((s) => s.outbox);
@@ -327,6 +377,7 @@ export default function NaturalLandscapePage() {
         c.dataset.deerPoses = JSON.stringify(
           deer.map((e) => ({
             id: e.id,
+            type: e.type,
             x: e.position.wx,
             y: e.position.wy,
             z: e.wz ?? 0,
@@ -435,6 +486,18 @@ export default function NaturalLandscapePage() {
           c.dataset.wildlifeMeshes = wildlifeMeshes;
           setModelsVisible(diagnostics.wildlifeMeshes > 0);
         }
+        if (prepared.reviewSheet) {
+          const drawn = String(h.wildlifeModelDrawn(prepared.reviewSheet));
+          if (c.dataset.wildlifeReviewModelDrawn !== drawn)
+            c.dataset.wildlifeReviewModelDrawn = drawn;
+        }
+        if (reviewAnimal?.classicTravel) {
+          c.dataset.classicWildlifePoses = JSON.stringify(
+            view.entities
+              .filter((e) => e.type === reviewAnimal.type && e.sprite)
+              .map((e) => ({ type: e.type, clip: e.sprite?.moving ? 1 : 0, z: e.wz ?? 0 })),
+          );
+        }
         c.dataset.authorityRunning = String(diagnostics.authority.clock?.running ?? false);
         c.dataset.terrainPending = String(diagnostics.terrain?.pending ?? -1);
         c.dataset.terrainResident = String(diagnostics.terrain?.resident ?? 0);
@@ -495,6 +558,7 @@ export default function NaturalLandscapePage() {
       host.current = null;
       delete c.dataset.ready;
       delete c.dataset.wildlifeMeshes;
+      delete c.dataset.wildlifeReviewModelDrawn;
       window.removeEventListener("blur", release);
       window.removeEventListener("focus", focus);
     };
@@ -785,24 +849,54 @@ export default function NaturalLandscapePage() {
         >
           Save / reload scene
         </button>
-        {(FAUNA_PROFILES.some((p) => p.species === caseId)
-          ? FAUNA_PROFILES.filter((p) => p.species === caseId).map((p) => ({
-              type: faunaType(p.species),
-              label: p.label,
-            }))
-          : (presentation.mounts ?? [])
-        ).map((animal) => (
+        {approachAnimal && (
           <button
-            key={animal.type}
             type="button"
             disabled={!ready || paused}
             onClick={() => {
               const h = host.current;
-              const target = h?.client.replica.entities.find(
-                (e) =>
-                  e.type === animal.type && e.wanderAI?.state !== "scared" && (e.wz ?? 0) < 0.5,
+              const profile = faunaProfile(approachAnimal.type);
+              if (!h) return;
+              const target = h.client.replica.entities.find(
+                (e) => e.type === approachAnimal.type && (e.wz ?? 0) < 0.5,
               );
-              if (!h || !target) return;
+              if (!target) return;
+              const distance = profile
+                ? Math.min(profile.alarmDistance - 1, profile.body[0] / 2 + 7)
+                : 24;
+              void h
+                .command({
+                  kind: "teleport",
+                  position: { wx: target.position.wx - distance, wy: target.position.wy },
+                  z: 0,
+                })
+                .catch((e) => setError(String(e)));
+              canvas.current?.focus();
+            }}
+          >
+            Start near {approachAnimal.name}
+          </button>
+        )}
+        {landingTargets.map((animal) => (
+          <button
+            key={animal.label}
+            type="button"
+            disabled={!ready || paused}
+            onClick={() => {
+              const h = host.current;
+              if (!h) return;
+              const { entities, world } = h.client.replica;
+              const target = entities.find((e) => {
+                if (e.type !== animal.type || e.wanderAI?.state === "scared" || (e.wz ?? 0) >= 0.5)
+                  return false;
+                if (animal.water === undefined) return true;
+                const tile = world.getCollisionIfLoaded(
+                  Math.floor(e.position.wx / TILE_SIZE),
+                  Math.floor(e.position.wy / TILE_SIZE),
+                );
+                return ((tile & CollisionFlag.Water) !== 0) === animal.water;
+              });
+              if (!target) return;
               if (canvas.current) canvas.current.dataset.playerMaxVz = "0";
               void h
                 .command({
@@ -811,7 +905,7 @@ export default function NaturalLandscapePage() {
                   // Mounts need a real falling landing, above the automatic step-down range.
                   z:
                     (target.wz ?? 0) +
-                    (faunaProfile(target.type)?.body[2] ?? 24) +
+                    (faunaProfile(target.type)?.body[2] ?? target.collider?.physicalHeight ?? 24) +
                     (faunaProfile(target.type)?.rideSpeed ? 8 : 2),
                 })
                 .catch((e) => setError(String(e)));

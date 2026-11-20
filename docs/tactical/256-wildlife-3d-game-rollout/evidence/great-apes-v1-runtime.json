@@ -1,0 +1,102 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-gorilla-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 2240
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 1120
+        }
+      ],
+      "candidateId": "gorilla-great-apes-v1",
+      "modelSha256": "30ddb33c7b5a01f1a76d6107e737d63205e908fba97009d6dbecb9edc21736a6"
+    },
+    {
+      "type": "wildlife-chimpanzee-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1120
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 560
+        }
+      ],
+      "candidateId": "chimpanzee-great-apes-v1",
+      "modelSha256": "408b1e904402d66a8099b8cea30965c1e7307b68147d884a8f871c73d0b2d528"
+    },
+    {
+      "type": "wildlife-orangutan-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "orangutan-great-apes-v1",
+      "modelSha256": "2fb188e176e17288b628931fb26c3004fa68878132e0f1a830100ddb585bfacb"
+    }
+  ],
+  "clipSamples": 336,
+  "testedDepth": false
+}

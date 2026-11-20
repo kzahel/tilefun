@@ -4,7 +4,7 @@ import { createServer } from "vite";
 import { loadWorkshopManifest, workshopInputDigest } from "../src/server/workshopManifest.js";
 import type { WorkshopManifest } from "../src/workshop/WorkshopTypes.js";
 
-const digest = await workshopInputDigest();
+const digest = await workshopInputDigest(".", true);
 if (process.argv.includes("--check")) {
   const manifest = await loadWorkshopManifest();
   if (manifest.inputDigest !== digest)
@@ -74,7 +74,7 @@ if (process.argv.includes("--check")) {
     } finally {
       await normalBrowser.close();
     }
-    if ((await workshopInputDigest()) !== digest)
+    if ((await workshopInputDigest(".", true)) !== digest)
       throw new Error(
         "Review inputs changed during manifest generation. Rerun after edits finish.",
       );

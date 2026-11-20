@@ -1,0 +1,70 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-kangaroo-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "hop",
+          "action": "hop",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "kangaroo-macropods-v1",
+      "modelSha256": "cf46eade1dffb27607857014d13c52b2846dcd3ffc2deab68c6cc9fa69e143c5"
+    },
+    {
+      "type": "wildlife-wallaby-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "hop",
+          "action": "hop",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 400
+        }
+      ],
+      "candidateId": "wallaby-macropods-v1",
+      "modelSha256": "81eca71fd85fbf799689c993f3181fe4130835d1e39c7bfc13ba4404d8b32db2"
+    }
+  ],
+  "clipSamples": 224,
+  "testedDepth": false
+}

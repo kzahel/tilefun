@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-dog-provisional-v1",
+  "version": 1,
+  "fit": [
+    8.1,
+    6.2,
+    8.5
+  ],
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "pickup",
+    "release"
+  ],
+  "reviewContext": "Final planned dog candidate. V1 had a charming close-up but a short and boxy native silhouette. This revision lengthens and lowers the back, extends and thickens the white-tipped tail, gives the ears a darker broader drape, separates foot contact and makes the pickup dip more obvious.",
+  "model": "model.glb",
+  "autoFit": false,
+  "autoCrop": true,
+  "rollout": true
+}

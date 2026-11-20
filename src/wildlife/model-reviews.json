@@ -1,0 +1,2662 @@
+[
+  {
+    "id": "cat-pilot-v1",
+    "type": "wildlife-cat-provisional-v1",
+    "name": "Cat",
+    "batch": "wildlife-3d-pilot-v1",
+    "lab": "behavior-cat",
+    "scale": 6.7,
+    "topDown": {
+      "width": 1.0149253731343284,
+      "height": 0.7761194029850746
+    },
+    "actions": {
+      "idle": "Idle",
+      "walk": "Walk",
+      "action": "Action",
+      "flee": "Flee",
+      "stalk": "Stalk",
+      "pounce": "Pounce",
+      "bat": "Bat",
+      "climb": "Climb",
+      "sit": "Sit"
+    },
+    "files": {
+      "action.png": "4aab4a4b45d16e9cc2912270f1fbe431fe27da304065e262beb19ff92d9dddbf",
+      "appearance.png": "d9d35750a6502067ca18f5ce86d292e9fc12508e912f4467db5302bc6190e355",
+      "bat.png": "7febd197c7c96e34e8e2d29d00ae7748e0aa75c3c324871f49030636fdf40686",
+      "capture-config.json": "9ce3a0c02472fdbc21d2d11b72270f12a49c570d96c14e0aaef479636d21b4f0",
+      "climb.png": "a82bac86b0de654f383b89b2ec7be3335195ab1af3cf711aeade38c8221d6148",
+      "comparison.mp4": "9912f8bef9e27b2c0b293c318327395d2bd9742f409ebf4c0fb2f7e0a437c326",
+      "flee.png": "aedf4763290c3d1f668661ec931a1c036cfd364a2e211c3934dba162a80f1340",
+      "model.blend": "fb848648333d6f8c2432e0df5d7ef681353d5c33b7820b899340595db2549066",
+      "model.glb": "b032d2fee20eb5666568fbc4154381670c1d28c8c5402d02ecbc357128f6826b",
+      "native.png": "a8d3e9959f787192908d9e0430600b80e7ec6f9369c2fd9fdf48ff4e7369dee8",
+      "pounce.png": "9650249937e4e058c5d0085172a9dcf4565f60434004b47c11ca0f90084fe04e",
+      "sit.png": "a0a4571147325b96d594ba562cd9dfe6c540ac8ad73df4a9b5588704061fc6cc",
+      "stalk.png": "0a06823ff1526e9eecad5b3502209e8608fe0d7ce36869620e04ae4222eea8b2",
+      "walk.png": "a6bb8bb16b2ebe80b63379171e6dce1bd2c8a1bc97b5b6f7d56b352d04165ae7"
+    }
+  },
+  {
+    "id": "rabbit-pilot-v1",
+    "type": "wildlife-rabbit-v1",
+    "name": "Rabbit",
+    "batch": "wildlife-3d-pilot-v1",
+    "lab": "behavior-rabbit",
+    "scale": 7.1,
+    "topDown": {
+      "width": 1.0422535211267607,
+      "height": 0.795774647887324
+    },
+    "files": {
+      "action.png": "717cba1f150ca708d6a96e0961057ca2daeb75b8c6a104a7c5222529b6783a7e",
+      "appearance.png": "129597c996962f9bc6caa197eadbee309eb9b56f484067bdb89098c5ca250738",
+      "capture-config.json": "6ce0f8235a3043f265faa079ee56eca5a6e4d26987933b9aa35a7e205ab6ce4a",
+      "comparison.mp4": "196fa1e995112449d6a68a757c80d57f2ded79164aaef7582fb0ad2d96877185",
+      "eat.png": "20edf54ebaeb4fa497516fbc1b27af140e3b36d492d6174e3e4ea4c2e47dbde6",
+      "hop.png": "40772c6cb315f15867d6bd502f45e761c53f59386df179e9a865df100dfc4cbd",
+      "model.blend": "22fd9fef68178238778ba88bce1d3402500e25338821a64ee6ca5d126d33c32a",
+      "model.glb": "22e7dcc6e906a4bea9f421be9ddbd8c477dbba396a48d98ae11504af38145405",
+      "native.png": "b0410e3cda0cd7b5ef5ea3cdc7c99545963e17079617e2270d82810a10c73d21"
+    }
+  },
+  {
+    "id": "robin-pilot-v1",
+    "type": "wildlife-robin-v1",
+    "name": "Robin",
+    "batch": "wildlife-3d-pilot-v1",
+    "lab": "behavior-robin",
+    "scale": 6.5,
+    "topDown": {
+      "width": 1.276923076923077,
+      "height": 0.9615384615384616
+    },
+    "files": {
+      "action.png": "358c659b0e2ac12e04513fcc7d5505b551f69aaa142919e0ce22cbae47c9a5b0",
+      "appearance.png": "fb8dbb59e0de3232d190d6eb5f7b0e90e80eae0fd372a21ac39a02f6568c9e9b",
+      "capture-config.json": "64651a71eeaf539bb525d0cf62778607ea75e1b388349507036d4ddbd00fd0a3",
+      "comparison.mp4": "812d939a851aaffcc81d1dff3077d7cf6a5fff54a3a96cca365fe3b98e2c9a4b",
+      "eat.png": "2df3a186a3ac645695839182ffe8bdcb28f3c5d82849fcce8c84b4dcd79b41bc",
+      "flap.png": "7e514ea6099c18c13e99fb8f0a2b4f5f2c96fdd5d2d0eb52c20873052db8ddef",
+      "hop.png": "714e992e94cd3840de8ab6a47c74ab71c9a3a536245e30a3f405e20094bbc86b",
+      "model.blend": "7f053f0689ea43bddd13308f655864b904c574387af4c5d32a41cf0ff6a76a1d",
+      "model.glb": "16f91a4a1decbfbf426d9fae79d5264b240d5bbddd2a796f6874cd40d04ce0b7",
+      "native.png": "a171fd196960663acee49141d156d2e0475c8a72dd902d33c879e8ebe5d87282"
+    }
+  },
+  {
+    "id": "fish-pilot-v1",
+    "type": "wildlife-fish-provisional-v1",
+    "name": "Pond fish",
+    "batch": "wildlife-3d-pilot-v1",
+    "lab": "fish",
+    "scale": 7,
+    "topDown": {
+      "width": 1.042857142857143,
+      "height": 0.9
+    },
+    "files": {
+      "action.png": "c604b6452ff4ac5996c13a50b9e1d5be8cad9e6b762bd966795e7c4c0ecedbea",
+      "appearance.png": "5345640e57cc1c9fe59b263960beaa980f77cb79357329bb524e40083cd269f4",
+      "capture-config.json": "1b2885b150d5e10a2d1123fb6a841c8d6da90354d1efdd10f7b08e4a78560a6b",
+      "comparison.mp4": "58851097df210bff82296c5c04916ff874ecc93a8867a6f8f1064b6716f3f62a",
+      "flee.png": "7bbc79aaca1a40cb73749f3daa00e20c304cd791ef20c64fbf4d9fc351482158",
+      "model.blend": "8b5ff8f1b1e6954c0ef5b627a2bee2fdceda440e34c53754865080bc2c57f9cf",
+      "model.glb": "08c8ded2846c84f96f3ff86f056af1d0692041bef9c1c3c94d29c1243f74dd57",
+      "native.png": "66d8c8ee0879ba5bdb84a7a8cb8f3d1132292092685a9e180c6f43cadfa21f6b",
+      "swim.png": "b417b471cd55984a6a362bd0646be372b4174088c3ec0f33dfbf03306d04e1d2"
+    }
+  },
+  {
+    "id": "cat-ginger-pets-v1",
+    "type": "wildlife-cat-ginger-provisional-v1",
+    "name": "Ginger tabby",
+    "batch": "wildlife-3d-pets-v1",
+    "lab": "behavior-cat-ginger",
+    "scale": 6.7,
+    "topDown": {
+      "width": 1.037313432835821,
+      "height": 0.7985074626865671
+    },
+    "actions": {
+      "idle": "Idle",
+      "walk": "Walk",
+      "action": "Action",
+      "flee": "Flee",
+      "stalk": "Stalk",
+      "pounce": "Pounce",
+      "bat": "Bat",
+      "climb": "Climb",
+      "sit": "Sit"
+    },
+    "files": {
+      "action.png": "0c7a6f0b31ae885de15c468487e0909ef2b7ebe33413485139eca3b959e53530",
+      "appearance.png": "304c5868a2d94784c8be4d97d054ca1e5026a3ae71bb9bf445f2ccfe6800ae1e",
+      "bat.png": "2fab2d5efbd007762009406a2b19afb40f36584be687fe1de03711428d162e36",
+      "capture-config.json": "6ec315fd02d30dab9e23c7b2bf53d31c132e4fb8f9e479302f9a3e2bb68347af",
+      "climb.png": "90d6e8023d7a86e58341dde78552f469a111362d60ad39afeda9846ef289fdf2",
+      "comparison.mp4": "78c87de10433d26863210e3d6f3df9bc292485d8eda3d4ec493c0cf690b0b38f",
+      "flee.png": "431773e340bd4300e46ca86f60bc9f56a4c86c1dbca0dc7ca8c26d1fca368c3e",
+      "model.blend": "3958b1d8002c535e436290fb8088c05ab2afc1384bf3bc0b58c48de62cd65afb",
+      "model.glb": "5f1891b420a02ba1f38ded6828cedf622e70acfdb96c048935ffed7a323a99a0",
+      "native.png": "fb65358fe805cdd12307c6fd9b191da58f187188216e9c0f0366f2030f2c22e3",
+      "pounce.png": "5d03df0cb28e2d99d1de93c74182633ad40bb9d071572766997540946dee32c1",
+      "sit.png": "8a8816e2b396742da9f73b016ce0163d8c97f83895a60cca5f1d60d86073e9fe",
+      "stalk.png": "0d051ef3bf5a2aeb496ee039e0a817f71a1151866b550686ae37a7d39c07237e",
+      "walk.png": "69ae7f0c10537c0dc2543da01fa759734bf1590030305fa342b1b9396e986ce1"
+    }
+  },
+  {
+    "id": "cat-black-pets-v1",
+    "type": "wildlife-cat-black-provisional-v1",
+    "name": "Black cat",
+    "batch": "wildlife-3d-pets-v1",
+    "lab": "behavior-cat-black",
+    "scale": 6.7,
+    "topDown": {
+      "width": 1.037313432835821,
+      "height": 0.7985074626865671
+    },
+    "actions": {
+      "idle": "Idle",
+      "walk": "Walk",
+      "action": "Action",
+      "flee": "Flee",
+      "stalk": "Stalk",
+      "pounce": "Pounce",
+      "bat": "Bat",
+      "climb": "Climb",
+      "sit": "Sit"
+    },
+    "files": {
+      "action.png": "e8d1867a28ef25f1e254205026239071c06f19208ce26e7ca95f3cd5406fb0ec",
+      "appearance.png": "1e818e272d242e6fd46a302e594f216e5d54eb4e3b61875a47a4eedfa9c824d7",
+      "bat.png": "b68c2aed9e65f125821c93d14cfc868fcae29a1c4d9af65895fd1ceb20f096c3",
+      "capture-config.json": "d41e83741797ac53eae5cc5ecb610b143b98ace25eea7d06a11f528dffc9fcae",
+      "climb.png": "a036ebea23abfff94e9d9d39ab8f050bbab78956a1329ee315138e21a49a80ff",
+      "comparison.mp4": "f55200f58dd516713e0abec2792778800c87856fb601da6d620f694760eff563",
+      "flee.png": "e8e1af701b2409bb50cedd5e726ef836822a1f0d0a1935873db4dc3b3f5612a4",
+      "model.blend": "c007fc79c8581a10834e714171863d0c000b49249b43f7e7d01f899798a637a3",
+      "model.glb": "f94b81425e877e5aa0a7effa59b14f939857e356ac7b94df96efc5c3397199ed",
+      "native.png": "5903ec4f6a1f40c2fbeb0e162017ee5f94fe73cda32c319ba480c071aec3d655",
+      "pounce.png": "193d8b2eb89cf1280271829df8eb1f7f320c9a270706fda46c1cc27d54e7a093",
+      "sit.png": "2f33252ca4cdbc01cf969a856446a7f4fe89811843a71bc022e43d54ae04116d",
+      "stalk.png": "a89083f93857c33211c28fe568ff952112f5c039be41f33dc06d836774f1ac6c",
+      "walk.png": "064e10463c2c5ae8ff1963683dc966c16d75451ba25d99ff87bf51985aa38358"
+    }
+  },
+  {
+    "id": "dog-pets-v1",
+    "type": "wildlife-dog-provisional-v1",
+    "name": "Dog",
+    "batch": "wildlife-3d-pets-v1",
+    "lab": "behavior-dog",
+    "scale": 8.5,
+    "topDown": {
+      "width": 0.9529411764705882,
+      "height": 0.7294117647058824
+    },
+    "files": {
+      "action.png": "14e813a92c3fd18a79a830207ef97892f778f6fdf174cfbefbb8ef91b0dc51d2",
+      "appearance.png": "2f93f023e103c99b936a7a40523d062a199d3fad95d28c630ed342f8fa001d3f",
+      "capture-config.json": "4611c90278385430b62a0d7c51b277f3d72440c120bdea75c816a290eca3d4ec",
+      "comparison.mp4": "42ab94e68ab09fda87dfdb25442d15a784ac1d4584f1baec488adb6238dd3aa7",
+      "flee.png": "8f829703425b4937141a71773bb47ff3c832ae6896626b5b34d7b49842551145",
+      "model.blend": "46f116b268cc119df63fafb0d2a40ff51ff863bcee6e47cd0ca7b4d21b58ee84",
+      "model.glb": "742283f7ef50b1ae301697bd4c8015672b683f1f89b619b87a8616020bc25604",
+      "native.png": "067ec94f21f45521f8678d9cef58ca04105970ed9eae84bf83aef6c984413e01",
+      "pickup.png": "fa0f1459f68843a840c5c21c866eb9a1fafebc70820266643713965fbecc475a",
+      "release.png": "9b11c2ee93adc6580ff8692b4e7c175e3ff7cacc68c53872cdc7e35f8ff0fb19",
+      "walk.png": "ba7c77f47ea75461ba77b4e82e0ef9ad16cc8b47db031aef2f9caebc6b840980"
+    }
+  },
+  {
+    "id": "dog-shepherd-pets-v1",
+    "type": "wildlife-dog-shepherd-provisional-v1",
+    "name": "Pointed-ear shepherd",
+    "batch": "wildlife-3d-pets-v1",
+    "lab": "dog-shepherd",
+    "scale": 9.05,
+    "topDown": {
+      "width": 1.0320441988950275,
+      "height": 0.8220994475138121
+    },
+    "files": {
+      "action.png": "4f0abc53e061b02ba6ffb13f365eebf1ce024da318c6040d654569af29f129f8",
+      "appearance.png": "d395f897b3a880f55782da26839e0fcafd8110806073b8ae3396a719c62bcb32",
+      "capture-config.json": "c56d2814f1f6f0125840ffe9549da735941fbd57791e40d00c236dc60594776d",
+      "comparison.mp4": "d5afc4e034a178d3c7bed450e9f3536b36f454d51f281b67e0774f66de37e8e9",
+      "flee.png": "607551338f7a77e32f5659be79b671add3949442e46efd65431e290e96810bd2",
+      "model.blend": "8a85add4e011ee66b4cd170a8c83edc5e3e4ebe36ad3c2ec87c3a1ed24f7aae7",
+      "model.glb": "92bd60e17e0eb1f5207ca90bdd0eafd1d143f19ef9f428c6d6fb4f47d7b58659",
+      "native.png": "251bb26e9008cb46e060bf3bcf88396de934fbf6d28ebfe78efdc173d2897e6e",
+      "walk.png": "cd8abec7eb7df9cf26bb15335732dfa14923ddd19081ccc611e996355258c879"
+    }
+  },
+  {
+    "id": "blue-whale-swimmers-v1",
+    "type": "wildlife-blue-whale-provisional-v1",
+    "name": "Blue whale",
+    "batch": "wildlife-3d-swimmers-v1",
+    "lab": "blue-whale",
+    "scale": 17.46,
+    "topDown": {
+      "width": 0.9873997709049254,
+      "height": 0.47537227949599087
+    },
+    "files": {
+      "action.png": "264b839345ae69c670f16df604a937d91236789660025dfcdac9c9270dcaf122",
+      "appearance.png": "ddde5ee53129686baebddb3729b4e4745ed3d0f6142ace35185df3691fbdff4a",
+      "capture-config.json": "cb6712dc663c3ac18a994d6e8b450261503f622afdb838db9187a121b66e9c8d",
+      "comparison.mp4": "45ff98f642b1f9041cbe734714d937d1c359691b9dc7f793df2f310a371bd4ea",
+      "flee.png": "c116d0a00214cfbda0260abebfd8290a9c73450b4c5b9382f18cf17e33e1d3ae",
+      "model.blend": "4d9cca54f222240dd1cf8f8e41b07498c708853c11677721d8499446d9e304ec",
+      "model.glb": "474b66b90bcb8c58e5e894dcb5d2b1ad84417f100545909465a9358b58c7bb34",
+      "native.png": "bac4495c6617c606a3366c18271893d79dcf749e43310734c7efc4b8d33ab2c8",
+      "swim.png": "de7615844bd45f7afc18550f80b97cb26ced4c51511da345bf75d3b8a4349ca6"
+    }
+  },
+  {
+    "id": "humpback-whale-swimmers-v1",
+    "type": "wildlife-humpback-whale-provisional-v1",
+    "name": "Humpback whale",
+    "batch": "wildlife-3d-swimmers-v1",
+    "lab": "humpback-whale",
+    "scale": 16.63,
+    "topDown": {
+      "width": 1.0366806975345761,
+      "height": 0.3084786530366807
+    },
+    "files": {
+      "action.png": "69abed07f7082c5f59302251ecb37491c21334a484b2a0cefa4e1e1b04aba770",
+      "appearance.png": "a9110431df265f1703e94b74b6b2b1a069f189a62b33f7c9b8f8d7a92e0265cf",
+      "capture-config.json": "f077472e1bbe53341780f80faf9f8b0ebd9c5832ad03217af04872951b136d80",
+      "comparison.mp4": "91e757f2ff39decfac5eac6945b9a451307181c32332af2e3f17679be0db7559",
+      "flee.png": "a0734530099762d1dff8b5ad4b2f294c4b797e1aac272563d54dabda28b919d3",
+      "model.blend": "92d8f053852f71a4da14e556fa8086b1fe95a95c07e576a190c20706010759d5",
+      "model.glb": "04898b83e81946b648a0ddb738a7ed32666ddfc62fb65885512e4fae8d42bd7d",
+      "native.png": "2c4fe7d41163d4b6985169bed53958e6534ab3d3d68081152a95392e3fde91a8",
+      "swim.png": "f9f44b65b405634a7f31b45ef487cdf8571ce92ba157052864933b4bbc55fde7"
+    }
+  },
+  {
+    "id": "dugong-swimmers-v1",
+    "type": "wildlife-dugong-provisional-v1",
+    "name": "Dugong",
+    "batch": "wildlife-3d-swimmers-v1",
+    "lab": "dugong",
+    "scale": 11.36,
+    "topDown": {
+      "width": 1.137323943661972,
+      "height": 0.426056338028169
+    },
+    "files": {
+      "action.png": "d7b9f9b099f5769ecabec439d3d6c4709a8c51c1fe9585974a4f24c25958e3e6",
+      "appearance.png": "e691596f18efbef1d2db0cf9caaaa354ffc66737975c2f5ea11f5e8a1b0e9a30",
+      "capture-config.json": "31b3d333bac1974b24cae7695c42eaa8c839dd1fdb6f3e69bd4f970b4fabe2db",
+      "comparison.mp4": "84b3147d8cab3099b5810807b25bee229c5bfcda9137dca0b43c952774796886",
+      "flee.png": "3c5f047a4faacdab344d0213936e42fa1765a0a78cba963e819bcef32ada5c47",
+      "model.blend": "0cc445e640f6cb9d2d6e75f2200e1c0a66ce3428da5130e2a09a9ada1e45cf58",
+      "model.glb": "251a807a872245fbecd0d6abeaa2178660c024f99a97e1680af642ec14a56e58",
+      "native.png": "c6c040c42b9484ae2c80eee39db6dc22161cd530c16bf77ef5daa2e85ff6dfe5",
+      "swim.png": "146854cc8d4f80681f2ca4a999314f50a3cc8ec927b1cc92545dae1d4b6ddb6a"
+    }
+  },
+  {
+    "id": "manatee-swimmers-v1",
+    "type": "wildlife-manatee-provisional-v1",
+    "name": "West Indian manatee",
+    "batch": "wildlife-3d-swimmers-v1",
+    "lab": "manatee",
+    "scale": 12.27,
+    "topDown": {
+      "width": 1.0097799511002445,
+      "height": 0.33659331703341483
+    },
+    "files": {
+      "action.png": "0b76ce470a6726b2825bc6911e6e244df373568e82ab81cb2644cb9fb2d78e86",
+      "appearance.png": "c7bcc0eb26d05d9a0962d5fcdeef841892cf2dfcff56d33fa5b72654e323f29f",
+      "capture-config.json": "2137e831cc0cad32f4ec780fb2ecceb7327172648438cf95a01d94b70333cc8d",
+      "comparison.mp4": "57ea38944c6ce1a48d5684b75cbfd96166f454e9d3f93128d752f5d2f3eac193",
+      "flee.png": "b210e40d95e0deabd7d2e319a59453d2be8fd13753e15dbad1a7a273d1a7711f",
+      "model.blend": "fee7e636570338bb257a5d47a4cc2981e7106f31c5d272eabca545d4b61369b6",
+      "model.glb": "1c09428c31efc2ed32c55905cae8aacd37e5f7d54ce2ca4a2ba8311604b04adc",
+      "native.png": "e753493aac6f2d55a1c848a58f0910d15707bc828630ddb6df28a73971211a63",
+      "swim.png": "02ee5b536d519c75298d0e5eaa99838a85c42928b2626b36074f97b23da385e0"
+    }
+  },
+  {
+    "id": "dolphin-marine-hunters-v1",
+    "type": "wildlife-dolphin-predator-v1",
+    "name": "Dolphin",
+    "batch": "wildlife-3d-marine-hunters-v1",
+    "lab": "dolphin",
+    "scale": 11.6,
+    "topDown": {
+      "width": 1.2810344827586206,
+      "height": 0.5663793103448276
+    },
+    "files": {
+      "appearance.png": "6a5f9f6a166f8610e77c5e25767086a85bb894cae26214ed978398495d351d35",
+      "capture-config.json": "138e3e8b785ef80465e4c104905773753846cf48cdbc0a18a11862b571d95731",
+      "chase.png": "20031f115069c636bcc00c7042f5dceabad3df6733d58d2d6de261b32c651fd1",
+      "comparison.mp4": "a1a0afbe2492cbe8a788815e82d4dd84038b47cff15072e2738f50d002520d09",
+      "display.png": "144292d9f98dc637fbc2818ca3bb355bf0160a07da110eae63d851e4b0a171d4",
+      "feed.png": "bae87e1d105c862c78d1264633b4863b7316308d3d1665c5ff02f94c9b5764a5",
+      "model.blend": "b321e942074ec14c6d823057ca51d4d602336df5260810b255dbc048dcba6907",
+      "model.glb": "1fbccd09dd091fd679abfe195e2c369ad5144623aacc23f583f3f3eb6b5518f0",
+      "native.png": "6fd405f0268bf8ad92f48c39f31de161f85b5baec3b8fd8a156638f3391a09c8",
+      "swim.png": "4a539344b8af08f32eea3468021832627f1f37f030a9fb45a6be5814dd75fdea"
+    }
+  },
+  {
+    "id": "orca-marine-hunters-v1",
+    "type": "wildlife-orca-predator-v1",
+    "name": "Orca",
+    "batch": "wildlife-3d-marine-hunters-v1",
+    "lab": "orca",
+    "scale": 13.46,
+    "topDown": {
+      "width": 0.9442793462109955,
+      "height": 0.4561664190193164
+    },
+    "files": {
+      "appearance.png": "925186b32fa364c0e8e9045cfc218114ecda7d8392f5c900187b3f6b63c94c37",
+      "capture-config.json": "83df62a86bdaad749561c91612d92a007bbbea3f416725f941b2400970796c54",
+      "chase.png": "8ae3854dd2a97a60599897556997523e77b1b8d4b69e761196d5949a5203d0cf",
+      "comparison.mp4": "264c379f6fb9b9eac797983b97014b5257ddf19c3fba3e88cba9780f50b0b7ae",
+      "display.png": "a1df9c864e36b146d1cc1bc4174cd8e1eb449dd17eed33763e702326a48f425b",
+      "feed.png": "19816b6d46390121848221046d5d28046ae03f26a150a59a344d1add0a96d764",
+      "model.blend": "28615e3458f8a8530708e9e58e8d71c687985fe8ab958d2b94dfabd0ba4ee987",
+      "model.glb": "a82caad1ce738fd42d75277e7e775e05880a80d8e4be7f5a4496949fedf8864d",
+      "native.png": "a5c227b9a17b79938f6530004ca2fe4b931c8c59c60bb644a1e5036d1ce91989",
+      "swim.png": "c1a47ddaa6198698f08d84ad4bbd719f7b1b515bb57bd760aed3917d93aa9338"
+    }
+  },
+  {
+    "id": "narwhal-marine-hunters-v1",
+    "type": "wildlife-narwhal-predator-v1",
+    "name": "Narwhal",
+    "batch": "wildlife-3d-marine-hunters-v1",
+    "lab": "narwhal",
+    "scale": 14.08,
+    "topDown": {
+      "width": 0.9708806818181818,
+      "height": 0.41477272727272724
+    },
+    "files": {
+      "appearance.png": "cd5e8a4bc0193d127666b7822b198d12afdb9daef453cf6ce76a78057ad16d89",
+      "capture-config.json": "a00aa9ee7fc026a1f8605d084f3eb9da47e634c0faa8cf979a00d539bceae6e5",
+      "chase.png": "1c6fa0698429596a75fcb30641da32357cab4bab527422f5572d44087fa7067c",
+      "comparison.mp4": "d9307742bdf2e72e1f2462329fd188c6455561f49ed2982a0f8a4abc1f588bca",
+      "display.png": "a9cd21ab27f04bb972346a4b5c252b615d5d6f23add3b6202e429d6e08447491",
+      "feed.png": "849038b5cca26ca54e2f932f91c7f95633f03f5fa5ce73e12e6c49339861f2e3",
+      "model.blend": "bda4a2b8b1fa5e1dc075a972563e9ce1d6f32b149553436056dc288e62ceea12",
+      "model.glb": "5cea142fb60a86008f8a8a2afff6f4a5bf55552e4a7a902d20793d5909f37f08",
+      "native.png": "b4b0100b1eb89407047d5764a542ed6efa596c41d73df9d6aab65d2a01f4c299",
+      "swim.png": "1dfe58be444aed943548dddc977920b67b1bc0fa9f5959620374dd3a7050f8aa"
+    }
+  },
+  {
+    "id": "swordfish-marine-hunters-v1",
+    "type": "wildlife-swordfish-predator-v1",
+    "name": "Swordfish",
+    "batch": "wildlife-3d-marine-hunters-v1",
+    "lab": "swordfish",
+    "scale": 14.52,
+    "topDown": {
+      "width": 1.18732782369146,
+      "height": 0.5743801652892562
+    },
+    "files": {
+      "appearance.png": "48af6511071f02f10259a914dcd67d32bfab4ff8f2b2abb5dd3aeb924005ee3f",
+      "capture-config.json": "30f2752c6fea3a56fbf2f0459ee59309a36dd3ed05dfafe8f635a282a3fb45db",
+      "chase.png": "61844e2ffbeb5be561bcf53baf9a5c4cbe8e2dc0b397aa8a018e5401d4b41d75",
+      "comparison.mp4": "a4b8740d870ef99d7ae48574f36b19c1b16917846fc056dd4ebeacc21f7c8d13",
+      "display.png": "120b54e798713f7e88f4b5893faac4b07ed1499491971f39034972e36731db10",
+      "feed.png": "d41b98c6a8c57099e1c387cfc7d1e570e1bbec874cb8c36fa7a103eb4644ccaa",
+      "model.blend": "e749fede2244c5eebd87c7cdfb51f827ae3dc071449aed3a77fbe07ad12a98f0",
+      "model.glb": "0784d623802e67aa17dfdfad734604057707de15802e53b37d6cd69143a04a7a",
+      "native.png": "a8a5f6151f15f9aafaf3747739c87e1a13bb5c3ad50c75e87c400739c6fa41a8",
+      "swim.png": "8a5be53415d625e3442fabf9704a055fd50958eb22455202e77642a6ca946171"
+    }
+  },
+  {
+    "id": "harbor-seal-pinnipeds-v1",
+    "type": "wildlife-harbor-seal-provisional-v1",
+    "name": "Harbor seal",
+    "batch": "wildlife-3d-pinnipeds-v1",
+    "lab": "harbor-seal",
+    "scale": 11.47,
+    "topDown": {
+      "width": 1.024411508282476,
+      "height": 0.38448125544899736
+    },
+    "files": {
+      "action.png": "a4f1b03e740dcf336776f3a6108d26b18f4496fea4b0bcbfa0f8048559f54056",
+      "appearance.png": "99352f0099df236975a00ee6ee28a7351ad61d690f6b06bf961bc79045120810",
+      "capture-config.json": "e89ba3323d38afeac18efab6e31262a32b342e480dfaec49651363e8cfed1acf",
+      "comparison.mp4": "5c74994d479cddf4a8a246f8cead20694702890275c15eaf50be12de4c69bee3",
+      "flee-swim.png": "d9e38ed7709b06592f6f8b3468cfae695d251c1fddbbb985cbd87175d9034f92",
+      "flee.png": "77f5d0c9d2c94da7bfe12a716818c27318362e3ce85a994465c8eee2c1a91f10",
+      "haul.png": "10a6e57d94264b7d926a9bb59187d61f8eaa0bf5d329ef5e7eabeff0e3688e26",
+      "model.blend": "0144abac67b4c45df490a84b0641fa6c63fdf68cbfd266d88d0d2d83c5dbbd62",
+      "model.glb": "5c638fda0d89af511a8af6698a8dd46d6245d88e8c648396ed2a59073473a1d3",
+      "native.png": "9c5ee7b98b3aa527e1b7568002a65fb2d63c81168113e21c0f6f585207a106ad",
+      "swim.png": "548b9ec4fa9586dc6a15030e24ca636e6ec480b869078f8f240269763f61960b"
+    }
+  },
+  {
+    "id": "sea-lion-pinnipeds-v1",
+    "type": "wildlife-sea-lion-provisional-v1",
+    "name": "California sea lion",
+    "batch": "wildlife-3d-pinnipeds-v1",
+    "lab": "sea-lion",
+    "scale": 9.57,
+    "topDown": {
+      "width": 0.9843260188087773,
+      "height": 0.7962382445141065
+    },
+    "files": {
+      "action.png": "74a280e2be9ed3d56890ca5f2ef3d5dee0744793a2db1edf47f144cf626e2d61",
+      "appearance.png": "842fdc1401febe6b4c8e5525b9b390abc6cb76d393c25c385c92687c5158e7fa",
+      "capture-config.json": "bfb6cb4b2967ff6df7cb8b16641d7e6b371c49e091ab9182fb441964c255e930",
+      "comparison.mp4": "34c30ddf74093e0b815728b636ab42dbdda2dba64bd48ecb836da7d9312b7c76",
+      "flee-swim.png": "398505328cf180536a70c03edcbb16fa1d4c50254135ecb40a4db781f1b2b5fa",
+      "flee.png": "48827b4a8185bb9b07c876d0d11d4cce02779c7287eaaa5cec9489a8746e0bdf",
+      "model.blend": "5278e6ee8d131e8c42a828bd098289d6c091c2d120dd81ab081af63f6e6b2228",
+      "model.glb": "56dc517504dc96dcb7bc551510a017e883086b9a86d9ba1d1c43ed737710059e",
+      "native.png": "4b8c0c50682395901091cb37af3f9b8fbb2895f081e5eb5291a9e5274751c774",
+      "swim.png": "92752811d03ddc0c3bdeca99abbbeb0bfe20dadd104d703482d31ae4cabaab9c",
+      "walk.png": "3a7b1ed5e791296e90452ff3aac597701a16e04c660302c9e6d60dd7df49b0b4"
+    }
+  },
+  {
+    "id": "walrus-pinnipeds-v1",
+    "type": "wildlife-walrus-provisional-v1",
+    "name": "Walrus",
+    "batch": "wildlife-3d-pinnipeds-v1",
+    "lab": "walrus",
+    "scale": 9.48,
+    "topDown": {
+      "width": 0.8934599156118144,
+      "height": 0.9504219409282699
+    },
+    "files": {
+      "action.png": "f571b3127c777d5c73681079e3b29359dd6208a080d8b94ed1fe9c4ffac85c6c",
+      "appearance.png": "6584d9581cb023e8e8a625a9974595de20f9e5b40921b55683349b14dd448bd6",
+      "capture-config.json": "d0bccd2270e4c9ad603dca72826510b2053d9ec7f94252ed4200a25d8ec2666f",
+      "comparison.mp4": "e3855c2165d8c7c70aae130f6dc9d39a79dca123f4087a703667652119991d6f",
+      "flee-swim.png": "515d4bbf09816f7fc4e5929deac0adc128aed195c65662aac6e2ca054eff39f4",
+      "flee.png": "42e2cf5aad5feafdf49fe195a595e01aa07a2e8d44329e1384f5aaf36ba0a542",
+      "model.blend": "89d790be4b69f5153094af2ffb3274d5895ca36f47038b5cb08b9c6763b13e50",
+      "model.glb": "e1dcca38ad8a850f857447851cb46942e966d56ba3ce44b869edcd7d9f538be8",
+      "native.png": "e16a257387c1f7fea1fe7aa55fa0f234ae267be79cfd743ef21901ac06dc3588",
+      "swim.png": "b793cab2edab4f3e7802ed1fec8e615aab9312071138b497b935033df350015d",
+      "walk.png": "47e2cb161b2a4fba9d717d30c0021343d03db87be077059ea44dcf730e3ce67d"
+    }
+  },
+  {
+    "id": "shark-sharks-rays-v1",
+    "type": "wildlife-shark-predator-v1",
+    "name": "Shark",
+    "batch": "wildlife-3d-sharks-rays-v1",
+    "lab": "shark",
+    "scale": 13.24,
+    "topDown": {
+      "width": 0.7953172205438066,
+      "height": 0.486404833836858
+    },
+    "files": {
+      "appearance.png": "266231e935a5f13a3a527160ac4b42b804d1d5f804e651ff77c043e2f2e3d941",
+      "capture-config.json": "0161dd2110e535f18eb3a77cfe8350b1f90a8d783f5cca0e9de729edcd705bb3",
+      "chase.png": "0c57d596df1c81376f339b86567f75b97f74ea7dc8b6d212994999d15ca3473e",
+      "comparison.mp4": "e78cd89770ecacd482d2aee6314bab55c848023ed84dea3b64ffccca02096f06",
+      "display.png": "d2510f7da3d58a9cafade781e8507601bef09a9a3639427e83d9d9d2b303aec8",
+      "feed.png": "77189323f74b1b52609c0998bccad0645088cede50bd45f2b411ba2495752e82",
+      "model.blend": "12343183515226670045453ef56b2c5db3cfc858183c32df01be31241d2de832",
+      "model.glb": "ab7d40b6cbef17f378139693dcd65c4043d14cc484af7069c00a810ca7c2b493",
+      "native.png": "a0192fac317cffe1dc676b1ed6bc2d1ee6516c4ea7bac8ff7b355c93a0c9a1cc",
+      "swim.png": "ee3b88545af0b67c74c6552b8668f5d3ed789edf5c702967f61ba64ed8b136a1"
+    }
+  },
+  {
+    "id": "hammerhead-sharks-rays-v1",
+    "type": "wildlife-hammerhead-shark-predator-v1",
+    "name": "Hammerhead shark",
+    "batch": "wildlife-3d-sharks-rays-v1",
+    "lab": "hammerhead-shark",
+    "scale": 14.4,
+    "topDown": {
+      "width": 0.8388888888888889,
+      "height": 0.4618055555555556
+    },
+    "files": {
+      "appearance.png": "b3597b04b28c3313bf9db25bf6ee7e8b565a357d0c5c9389f11083af10b25a58",
+      "capture-config.json": "7711176d7ee05dd8621db76c3839e613a938281d159f2cc9cad7289ac2ac1ab3",
+      "chase.png": "ad8b718bb4c27a1b51c6b934144ff0ee6cdb5c769b69cbad0f4a9f98e5a10a04",
+      "comparison.mp4": "1300ab10d9745a7f32b0a9abf10a4cb5aa58353ffc9a841c00c7c07c61bd13f1",
+      "display.png": "e34d048375ea2fc77023a94abd4e7d53039883b15a27ed368a84f0a244cb0955",
+      "feed.png": "a1f93b84826363b16817f8c64d7fca7cac678a30916b78fc10c53760659e89ea",
+      "model.blend": "964ac16da67be4be79652573225884a2c6e4ed3316a1c0f3c11f4d7e1c12da79",
+      "model.glb": "43bec3cae41ae6442351379adbc3c009338f1117533f2478f13537b07ba301a9",
+      "native.png": "a3f2b104abf017bc327d1292e144759803f4a874035442d3da8c0401bc167e55",
+      "swim.png": "7a2067f71a7f855b0dac175cde11547347d97875a057a65423e4212f15c14d17"
+    }
+  },
+  {
+    "id": "whale-shark-sharks-rays-v1",
+    "type": "wildlife-whale-shark-provisional-v1",
+    "name": "Whale shark",
+    "batch": "wildlife-3d-sharks-rays-v1",
+    "lab": "whale-shark",
+    "scale": 14.33,
+    "topDown": {
+      "width": 0.8527564549895325,
+      "height": 0.4431263084438241
+    },
+    "files": {
+      "action.png": "c215329d6143886cd5e5af39db6986befd247a5b345000b3f7dc03af600ce56a",
+      "appearance.png": "6ecb503f371f9f084b9b1ac7a2744cefecaf7cb3fd04093ee4c2496739ad0806",
+      "capture-config.json": "fa397a43eba2c7f8aed03e2ea417e6f8aeecc64ae5dd375cca55f4173cbe6e9b",
+      "comparison.mp4": "883577bde191f5f1c3ff76e26c38929c0c1c160c6e8b2dc5e27a095cd462b67e",
+      "flee.png": "0b34c76bfe561e6ab850b93510e48668281794fb42fedf5a07b7b1e074c3b035",
+      "model.blend": "b19fb2a135f331447556022878fa03a008d234a01a1580588da1c205336c500c",
+      "model.glb": "b85cc3821d352a867f67f682ade751dcd3b798096dc904ad86dcedcbf7e08aac",
+      "native.png": "692f090ee914fbec34010d4632835b20a8ac2c64d9d0c5def79e5b50985ddf49",
+      "swim.png": "0eded00215fe8b980da8e9a1607b40a594a92fac36d120e164f97e9725a08e00"
+    }
+  },
+  {
+    "id": "manta-ray-sharks-rays-v1",
+    "type": "wildlife-manta-ray-provisional-v1",
+    "name": "Manta ray",
+    "batch": "wildlife-3d-sharks-rays-v1",
+    "lab": "manta-ray",
+    "scale": 15.56,
+    "topDown": {
+      "width": 0.9222365038560411,
+      "height": 0.474293059125964
+    },
+    "files": {
+      "action.png": "dc5c3deda9dc0756b3c648f346724be64b95ff19836591097217b0566f0f1f17",
+      "appearance.png": "2f8a9cf1844c91516af6e0e161298375bc878e13b08ccbe72cf0b1f28a7441ba",
+      "capture-config.json": "dfeb9463d3cd03be9a3d1d983db61ec7ecc0466571580dcdbf92b4b2becd6db5",
+      "comparison.mp4": "e3c2d1599f572a220bfb12e7ba526bfa7b276e717af21f4fc934571f6bd73351",
+      "flee.png": "4420e1ebea82c922f5cfdac07617da18ec73a1a8fa4ed90c5a77df4aaf284f24",
+      "model.blend": "13a0995d08a369daa37e616db32b8e6b751295aa47bc1f0a98afa1fb2d3e1646",
+      "model.glb": "20f7ee7f13f8f65c04ce4e5a319080b95d7c154c76551071732f3739a3a632d1",
+      "native.png": "e4893f5e99d6ce917f5cd2ee0743303560d46139ec76bee8b04fad6aa2aa34b3",
+      "swim.png": "6f77fc847ca1cdbea988bc7bddb61503b2334fd2e15eb3ec9f2768a73c13f948"
+    }
+  },
+  {
+    "id": "anglerfish-distinct-fish-v1",
+    "type": "wildlife-anglerfish-predator-v1",
+    "name": "Anglerfish",
+    "batch": "wildlife-3d-distinct-fish-v1",
+    "lab": "anglerfish",
+    "scale": 12.73,
+    "topDown": {
+      "width": 0.99528672427337,
+      "height": 0.6441476826394343
+    },
+    "files": {
+      "appearance.png": "b035b3cd0cd27c30a10744e30a626115fb4f25580f669e14dd91a56441bd273f",
+      "capture-config.json": "d6cc8c68f974a4515559a0d809968ed7091a39f8cd4ab9b94f935cf4e44c324e",
+      "chase.png": "c97cf85a196f158336457796bc6bf9141ac43389afa9b7750b5fd71e021d68c7",
+      "comparison.mp4": "bf6512796ac7ab4a512329ac7a87d4990f72aebda9be34d7ae338990ad833522",
+      "display.png": "af3aad8b67b8d0ba3d8bc3494957395d0a193d17f12a50716a76aab7f14bad1a",
+      "feed.png": "19ae6e341b755fc03bfa7fcb177b4485e2a5e0176de6b1af778c1a747de217cf",
+      "model.blend": "83fcea16fa97145811f5aa44abbc2ed440f9c0e10292ce9330f1790907fd4be9",
+      "model.glb": "0d156ddd475cedf9e9d598307f6357837610bc1133bbd243399af2961fb362cc",
+      "native.png": "f7491f32b574daed1d86e6d3978f9fa4ab7f7096f8ba3665cfaf09613d90abbb",
+      "swim.png": "855fc0bba9f12e0029a7a425f5a498e142c0fbacbf00ddd3f8500373f6e2d420"
+    }
+  },
+  {
+    "id": "pufferfish-distinct-fish-v1",
+    "type": "wildlife-pufferfish-provisional-v1",
+    "name": "Pufferfish",
+    "batch": "wildlife-3d-distinct-fish-v1",
+    "lab": "pufferfish",
+    "scale": 15.02,
+    "topDown": {
+      "width": 0.8155792276964048,
+      "height": 0.5226364846870839
+    },
+    "files": {
+      "action.png": "d08364cc1ce559c28395e39d478db6c85b19b133195925a45877133a9f7b3d56",
+      "appearance.png": "fc210f6dcd08a225e3f2f24c0706d232946dd8679bed5d7f5ef1044b7d793e01",
+      "capture-config.json": "9380ccfe2c9d792b405731238d22a5ebdfd38f30726a5ae167a1449001cd827f",
+      "comparison.mp4": "f3a46e3758aeb6813beb430832663f8d5192a385574030812d50f11b04618fa6",
+      "flee.png": "792c64a647057af94d3f02501e36f5182b2b0e1a8cda5591549bbc70b662c2a9",
+      "model.blend": "6eed081f8f805e8094590fba18637fc74fe3cd0fd40d907529ebfae12c251303",
+      "model.glb": "3c57535bf225986ff4a0a1e637deffa567099d141ce6c382edf9b862f20c79a8",
+      "native.png": "923ab1d7056dd66d95eb3d64299918a02cee845c55f47da79f92e9392267243f",
+      "swim.png": "2afe3b3a60d7c65e878014dc02b9cf9789886adb25497d8bd45c71130c6cb60e"
+    }
+  },
+  {
+    "id": "ocean-sunfish-distinct-fish-v1",
+    "type": "wildlife-ocean-sunfish-provisional-v1",
+    "name": "Ocean sunfish",
+    "batch": "wildlife-3d-distinct-fish-v1",
+    "lab": "ocean-sunfish",
+    "scale": 21.03,
+    "topDown": {
+      "width": 0.7370423204945316,
+      "height": 0.6552543984783642
+    },
+    "files": {
+      "action.png": "d12cbbb2e88a30cde8f000ae50ead1e173ea4049d03237689554964177ce9faa",
+      "appearance.png": "13539870f71fa42a5f4e6fba7ab23b1a764b6bd9924a5713adaf457fa71921e6",
+      "capture-config.json": "ef34354f07b31705b54f016bd814dbbe687dd1120e047c3475100e25765930d2",
+      "comparison.mp4": "1cfaa9b86084b473f768eaf09add7c226e5db45444f4cfb380a2602d24d23db6",
+      "flee.png": "c84e1d1eb59fdcb33eb5d89dd1d06360c4cb581739d1bd2381bd70ae0abce7e9",
+      "model.blend": "db262b5c420321f963eccdb9baf862cc62a2142b4bd3f8af429e0acda619f6b2",
+      "model.glb": "4ffcf2a85e7dd23f00afa98b78bfc105d60af4a72598192eb0901c2eaa428bbd",
+      "native.png": "50c2b33c11dd14f80ae26394fa3500ba73b647837740ac482a39e2b37d3129cc",
+      "swim.png": "83d074c6713f6264aabdbf8916a3445c4856ac42e241c58912c38488c92dcdf8"
+    }
+  },
+  {
+    "id": "electric-eel-eels-v1",
+    "type": "wildlife-electric-eel-predator-v1",
+    "name": "Electric eel",
+    "batch": "wildlife-3d-eels-v1",
+    "lab": "electric-eel",
+    "scale": 13.47,
+    "topDown": {
+      "width": 0.8611729769858946,
+      "height": 0.9747587230883444
+    },
+    "files": {
+      "appearance.png": "748ad1736772be05e1d333aca33f86f35b0ac918e18125d9062b957a142704ec",
+      "capture-config.json": "f5fe978e3810adb5291b9f3342c14efd019254e612fd537106dab99e8d653986",
+      "chase.png": "34a9606c6c466ca7d40119537ac97406c8dcf7e393913eeb031614092f846c1f",
+      "comparison.mp4": "f56d12f8129c03bb5ad67bcae62104e07c709ea04551fe2a666d65d695712889",
+      "display.png": "9e9d4abb27d70a576f76a64b4e859f794b577f52022a6c7f1c731eef45389b69",
+      "feed.png": "f927abd8c9850bab843cade81cc684d1217769816101f28dd806ad31542c2259",
+      "model.blend": "3870d29c293924a6c590d34cb4502074177e97fc53faf81232751083b27baf02",
+      "model.glb": "26136735c177727ee643e8552406572959c4c59b325b0d42264395a246346e60",
+      "native.png": "ff6f8ba104eaca13903a1bda403f92e2d7d6b3d89730021fcae0ba80d3a1a193",
+      "swim.png": "6690d4fcd8e27f0712cb701c602dbcd07989116c32f7163ea7a15966e107a12e"
+    }
+  },
+  {
+    "id": "moray-eel-eels-v1",
+    "type": "wildlife-moray-eel-predator-v1",
+    "name": "Moray eel",
+    "batch": "wildlife-3d-eels-v1",
+    "lab": "moray-eel",
+    "scale": 12.95,
+    "topDown": {
+      "width": 0.8957528957528957,
+      "height": 1.088030888030888
+    },
+    "files": {
+      "appearance.png": "72860f97cbe6b5ee16400dcdd5f70a41b238c873238e87ab0d0414438f5d90fa",
+      "capture-config.json": "a6f44615a5f7912154ed990954ccc6cdc4ca22d5ba38618c37a7f1c82050284f",
+      "chase.png": "ed74ddc6bf0d731abd921cbc9251e38dfe6216f806606942c5bbde2b3bc7f0f3",
+      "comparison.mp4": "4f9fa4e9d3cf552ae9604d831f1cb03ca097bf98c432fe6a492b6399ba8b31a2",
+      "display.png": "050e84cccc7d366f1033f1c1effc016c7f6d8db29f5ff14b4b699c659fc26b45",
+      "feed.png": "557dd8bd15bbfb8b722f298c65255ec86c4a4136e5721943da7d0dbc5ccbf4e5",
+      "model.blend": "c607a9f2923e4f3c70ee39472f23565e353aa7781644241a845a090652fded53",
+      "model.glb": "d974701c1ce84d5a1d781dee070c4e18ed31c368b54eff73c96e358775898deb",
+      "native.png": "282c1b1722f1ff32ef7bde9032289d0a176fec6d1ee95184151da03799e8e44d",
+      "swim.png": "da3cf102198a92634ec9a3add7d95cc54eac3e54c5856c2a7875d60332520f48"
+    }
+  },
+  {
+    "id": "cuttlefish-soft-bodied-marine-v1",
+    "type": "wildlife-cuttlefish-predator-v1",
+    "name": "Cuttlefish",
+    "batch": "wildlife-3d-soft-bodied-marine-v1",
+    "lab": "cuttlefish",
+    "scale": 15.96,
+    "topDown": {
+      "width": 0.7243107769423559,
+      "height": 0.2656641604010025
+    },
+    "files": {
+      "appearance.png": "7d128c82cd1b61bc29734bdf5efdcb2b5734518f4147bdf569f34aa9700bfae7",
+      "capture-config.json": "c9f9c951c51513c917c4bc86fa45d462bada909881954a5d64dfb09212955383",
+      "chase.png": "7532b31fdc4564ced9ccdecac4564f9a01ef78eea12e95865d4ae916eb109eae",
+      "comparison.mp4": "97dd09ff075d8d6839f24a81d9cb6dfa13372b6af296a302048448870b114b18",
+      "display.png": "533ca3fdf542c8d21547d43040b252a51073d345c52c36ade1beb058bcb4a261",
+      "feed.png": "2a89800bc95b2d698ad6fa8891e7bdc5af6aa9c381179fc1f907a957e1561378",
+      "model.blend": "25600fb758f6fe393584a55ed48c9780f07ed90bfbbfc946eca5e7d927322efc",
+      "model.glb": "74a76131ffa11f01a822dabe3607a7a7cf8f69d395468750aa02c3e04cf7ac55",
+      "native.png": "a6b649bfb73f0ea147e04db9781026db805b78220ff5ce0dfd231063913cb6dd",
+      "swim.png": "fe558efc5547ee666fbad2c1e7901a63b0615b852b6930671c741cb6559668b7"
+    }
+  },
+  {
+    "id": "octopus-soft-bodied-marine-v1",
+    "type": "wildlife-octopus-provisional-v1",
+    "name": "Rust octopus",
+    "batch": "wildlife-3d-soft-bodied-marine-v1",
+    "lab": "octopus",
+    "scale": 12.93,
+    "topDown": {
+      "width": 0.991492652745553,
+      "height": 0.6643464810518175
+    },
+    "files": {
+      "action.png": "04a70439e32a1a2d261359b322be7cfd91dbd9bd4bcaf387754dce411e85b3cd",
+      "appearance.png": "0e4228c67f338e882703a13d0a6327ce50812b5da4ebe44c114a614dfdd50cf8",
+      "capture-config.json": "624e22efa184c8384e8dd4332f8bda67f5787ddc1c9780c6fc557c13a0d373be",
+      "comparison.mp4": "6aaaa747b0ed6129d6e3bfcac4f07da03bce0015cc980afc333dabf70b879087",
+      "flee.png": "c1e5b866778deb858e6086aeb80af3c354c3c412f13dc166abba45806c6e28f8",
+      "jet.png": "71a2c17514d24b366e303513b1f62e39c04127ea8bed392510632f0f8e8e571d",
+      "model.blend": "6f2c8893454a8e457f83c88eaebb54180e8c06e5b03e5ea971f6f66d9122db33",
+      "model.glb": "0313c7b45db85beb52d8992c02eb8c799ffb1d7c4d01ccc0da23ba2231df8aa7",
+      "native.png": "3473d7ca65d7a24fe2b7e452e7686a7b40ad66cc2eb1e5c32bc2024b419a46af"
+    }
+  },
+  {
+    "id": "nautilus-soft-bodied-marine-v1",
+    "type": "wildlife-nautilus-provisional-v1",
+    "name": "Nautilus",
+    "batch": "wildlife-3d-soft-bodied-marine-v1",
+    "lab": "nautilus",
+    "scale": 13.33,
+    "topDown": {
+      "width": 1.3413353338334584,
+      "height": 0.46361590397599395
+    },
+    "files": {
+      "action.png": "7d5c530f8ffb79a8e56d329e1ec759f2533bce6813a8a2b65d9793dc20741a77",
+      "appearance.png": "3dd3a4717344b29e67ba6923dcac8a6a26d6ec296ae929820ccadd28904e337c",
+      "capture-config.json": "3d1b12cb4ffaf513418015aa4bfa24b31ab331846f43123872d8caccdc7c279b",
+      "comparison.mp4": "5af4fdf848a2cd96d97e83c7d33e5936c8910da55e24d4f7562612ca22311e1d",
+      "flee.png": "8a8aadd109e21c2198ca657cb0b93f56733d01f2ecb444c432f46a3d8ce05237",
+      "model.blend": "6a6235072054ee18efb719f3a264b9c176f274f4982fd4ece9669192fb1dffab",
+      "model.glb": "ac35eb1f1d6c071a05190c72b5f08ae009ef769cd668111b2ada759a0a5fced7",
+      "native.png": "135512e276c6b05fc6389024f9555940164de6299941dfab047176b44956d79a",
+      "swim.png": "35f07a32a27b0da2354b376f100ebc9a9aa089b9719a96c7474e205e273f0875"
+    }
+  },
+  {
+    "id": "jellyfish-soft-bodied-marine-v1",
+    "type": "wildlife-jellyfish-provisional-v1",
+    "name": "Moon jellyfish",
+    "batch": "wildlife-3d-soft-bodied-marine-v1",
+    "lab": "jellyfish",
+    "scale": 11.05,
+    "topDown": {
+      "width": 0.9701357466063348,
+      "height": 0.7303167420814479
+    },
+    "files": {
+      "action.png": "cd5f8082ec70b7db586070dab35cdea1e7ec795dbed0841478e05f64a1eada36",
+      "appearance.png": "cd172f57ac5814b8b86c2fa9666aea75a8d6462c1fad1ca6054e17c67d65a2c9",
+      "capture-config.json": "334f66b5cec219bd1b97fb5d1246469c5fdaf542f5bd7fc6323f643b6b4406a7",
+      "comparison.mp4": "78af1198dc58abeb43e4e82d19ee2bb066aac3253b6c41e4d942051e6be9d7a0",
+      "flee.png": "af65c48f16480f3e6ccfceb026a3253be6af512ce8d01e48fa71f42891d4e440",
+      "model.blend": "d9b7f04856054b88deb84bfeff10feab40ac6a0f619addb4910e592e2ab07bc1",
+      "model.glb": "6fecdfbea96fed605362c83bbd9fbea8ae090d01946fd83bf6ec279ecb1d71ec",
+      "native.png": "cd64b65001fde4b734ba74b3043886da58d342c1368a0c2ae0b7be4cff9caab9",
+      "pulse.png": "87916aa7819f9947c263bde844b29ffce426a83420257ae7b8bf72e93e91e425"
+    }
+  },
+  {
+    "id": "lobster-marine-arthropods-v1",
+    "type": "wildlife-lobster-predator-v1",
+    "name": "Lobster",
+    "batch": "wildlife-3d-marine-arthropods-v1",
+    "lab": "lobster",
+    "scale": 11.51,
+    "topDown": {
+      "width": 1.0799304952215465,
+      "height": 0.4682884448305821
+    },
+    "files": {
+      "appearance.png": "2f6b375a0c2a88b8ab445ca1cb3cb5fe1b4fc929fa2e7df9f57e14c78108bcee",
+      "capture-config.json": "cbbcfd5491450d552de997042f9febeae91a8793ca727776b8b44d1c102b5fb1",
+      "chase.png": "cfeb150bff349b377b371696215ef7beb702f5cc7c5b672ccb4016307f7475f5",
+      "comparison.mp4": "26a03602186225bc35d7e1e5ec23499876fff7487969f4d1a9ca2a38504862b6",
+      "display.png": "59396d9e6ae9703c0913d22eb486f9574c4f3bdee069707ca123f54beb6cd070",
+      "feed.png": "f1c8025481e4607160ff2b712639c10442777cbfbb803482bd172c2698f0b1b1",
+      "model.blend": "d9172555a56033b1cc7fe8b064ffc7a33726f61245f43a5dca0bf3b3f1a63642",
+      "model.glb": "5b7cc9ad1c7618a8c4436b8eca6654d353fa86abd053324526ddeeb2025802f0",
+      "native.png": "50f77b78103a7948d5dd90a9d11656f02d92a7d0b58ada2634706b29d314f381",
+      "swim.png": "2de27650190d5a7541989091bcbecad8d107ab32a1ada6e0025bf387f3cf9c47"
+    }
+  },
+  {
+    "id": "mantis-shrimp-marine-arthropods-v1",
+    "type": "wildlife-mantis-shrimp-predator-v1",
+    "name": "Peacock mantis shrimp",
+    "batch": "wildlife-3d-marine-arthropods-v1",
+    "lab": "mantis-shrimp",
+    "scale": 12.27,
+    "topDown": {
+      "width": 1.1817440912795436,
+      "height": 0.5541972290138549
+    },
+    "files": {
+      "appearance.png": "efd5a82136e7b0a244f403cb618eae2887cfc039e30069c8d2fcd707267341de",
+      "capture-config.json": "1c70f6fe6e900cddc5d38bb757fde792990e17d437fb02341b9e091cdd77ca3d",
+      "chase.png": "af89607edc41c07ca67a77c690f731ff565a380ac1254c560719eebed67f366e",
+      "comparison.mp4": "4e64677a13fd5a99bffea4f4ea838170ef451e7a54661af4164bef18626e76fe",
+      "display.png": "a1a3702f505943760069f7dc7922447c6a578ba02fcd8f803f4b3543c846310c",
+      "feed.png": "3dca044a1e900108a58ab5b5df061d349e71f6e33b76f748377b268d068e5f48",
+      "model.blend": "0f6585b7601646ad2754aaff2e6197c4351aa8a457d055ee50bdf6ac49436313",
+      "model.glb": "69543c8c81208f90b2cdc730f8722020af96226a448b5882ee78b787127138d7",
+      "native.png": "91c71c6bf2032dcb809ada98d5e67a7757ecaa682b7ab025d7a2d5d3816c538c",
+      "swim.png": "14879e690f34d12e2950d5e7459ecef10ed1d58df299ec5421b7cab384ed7096"
+    }
+  },
+  {
+    "id": "shrimp-marine-arthropods-v1",
+    "type": "wildlife-shrimp-provisional-v1",
+    "name": "Shrimp",
+    "batch": "wildlife-3d-marine-arthropods-v1",
+    "lab": "shrimp",
+    "scale": 12.09,
+    "topDown": {
+      "width": 0.9975186104218363,
+      "height": 0.5004135649296939
+    },
+    "files": {
+      "action.png": "37df920149223a01a3b9e18bffcc5f69a10f88d9d24ac41368c54c86f37a469c",
+      "appearance.png": "baf09d2e7d4880389659b3ef09cd034b36911558d36bc190668ea05dc4ab9497",
+      "capture-config.json": "1704ca906c4d0d7fe5ae37ef90e910b13e687f639ec18d7e028c3b6fd100035f",
+      "comparison.mp4": "504f7a8f44ac29aa4668e96575a7bbd293bb174bfed21b5731c3563865e991ef",
+      "flee.png": "65e9a8f8db13906a235cc95727a7aed0bedaecd3211284acd41273dad9283655",
+      "model.blend": "ebbd7e1c9bd5e98c3af891d52409d768908164646dd390f642ec6749b0e3d35e",
+      "model.glb": "1507c375a04ed4d440ea854ca36e34d133703ab1d676328db127b43b6279b005",
+      "native.png": "314198fe4bbda28b2429007e5f2db45b5a525f43339e22ecaf75e112a6e6490a",
+      "swim.png": "08009a05316e3ee526b358e4a35def407262dfb59ba479194e847260d92c0145"
+    }
+  },
+  {
+    "id": "horseshoe-crab-marine-arthropods-v1",
+    "type": "wildlife-horseshoe-crab-provisional-v1",
+    "name": "Horseshoe crab",
+    "batch": "wildlife-3d-marine-arthropods-v1",
+    "lab": "horseshoe-crab",
+    "scale": 12.39,
+    "topDown": {
+      "width": 0.9717514124293785,
+      "height": 0.48748991121872476
+    },
+    "files": {
+      "action.png": "83416c3e2ae8a397e7bc89e07e9dad266884fac7087cbaec09db1a6ea1cdb597",
+      "appearance.png": "4ed06954cff2d26997b7e4a933f9a5123c0d8083ab9f7532edb5707568ff79b4",
+      "capture-config.json": "8198ff3ac19c5d1c84e2a0009fc04a26b70f2fa70d39c34a3e81101f5937c130",
+      "comparison.mp4": "10687ee624464aabfe40d92e5e744657a8090401dcdea6cab9c248d3941947bf",
+      "flee.png": "6f08f1c3d7221b5ddbb4d201d11d87e30d5ce6e8dd22cdc294f8e509b258741d",
+      "model.blend": "c90e5efb4f8af5dd0fe896864a3dbd645ed13f6670389f408083f549dc42920b",
+      "model.glb": "32836178efc1301adafe86f19b3290d515cbcc1d0031473d5c963159a552accb",
+      "native.png": "3d2c4fb8517e971f5c1f851129b5eef9614df5822479c3173b5d1315df1ab9d6",
+      "swim.png": "3230470781e969793cbcc6110b886af7555c7220e059fff8d7a15347ff95ec20"
+    }
+  },
+  {
+    "id": "seahorse-reef-fauna-v1",
+    "type": "wildlife-seahorse-provisional-v1",
+    "name": "Seahorse",
+    "batch": "wildlife-3d-reef-fauna-v1",
+    "lab": "seahorse",
+    "scale": 12.9,
+    "topDown": {
+      "width": 0.9558139534883721,
+      "height": 0.665891472868217
+    },
+    "files": {
+      "action.png": "e9c90dd3bc5bd4921720eee0f71251a9bd8a231d07f786e1064b5e1eae4e57f6",
+      "appearance.png": "f2ab391bfcdc6a089b4be349311e39ab0475dbac2244227087ef231051253ede",
+      "capture-config.json": "63586eba0d6d46576c0c2ac051d57f0794bcdfe1f40b14d130e66014aa13c656",
+      "comparison.mp4": "0e01953b15277201ca31dce20134fb20d12926c5df7d6816bee5c7e2473a942d",
+      "flee.png": "7ab301cf5ec40d5aa2414d073a42a5655ff95c45d8b4cea9fba9f79034c6c372",
+      "model.blend": "cd1575da5b7593a2f6d14010511856b77aadefb7fac1062ec9486cee118e72fc",
+      "model.glb": "99a54a6a2d89e8f61c41bbbbe3cb0e0914517bddc09434c8f701ffd8e18307ce",
+      "native.png": "6ce428999f63d8e5ed5247c599a7756277ae76b4d3db1170cd8750ca682d6608",
+      "swim.png": "b20cea2568c71b78706cb460e39a26382a4b41cfdfd147a6c82a41032821ec91"
+    }
+  },
+  {
+    "id": "leafy-seadragon-reef-fauna-v1",
+    "type": "wildlife-leafy-seadragon-provisional-v1",
+    "name": "Leafy seadragon",
+    "batch": "wildlife-3d-reef-fauna-v1",
+    "lab": "leafy-seadragon",
+    "scale": 15.23,
+    "topDown": {
+      "width": 0.93827971109652,
+      "height": 0.2659225213394616
+    },
+    "files": {
+      "action.png": "f2552ec9a1dcfcda4303502e98b6318eae70ce32b0c16e14f4efac9c9bbd25a2",
+      "appearance.png": "9f0340b4798619ae167d6d2f1b83538ae9e7ce1693ca35b7e8a333d0b44da736",
+      "capture-config.json": "549d7e0278950d1b2ba0cacb523c4db0be2fb95567c279fefeccea7e92816338",
+      "comparison.mp4": "b0db551b1ec8a3d5f165bdbf92528800d6afe911e643f5f5a73508c79ba4a72d",
+      "flee.png": "018d7d75eb59966bd6b20bffa75d1278d29a6a1c29c46490d48c155d998050f7",
+      "model.blend": "251ef6d55d3e0b921f1ea8bdc610561b9c5a26bfc098762af179ba0479029f21",
+      "model.glb": "49c0671c719528206efa93f8b3c91e62c2dc309bff504815faefe4514423c7d8",
+      "native.png": "30165f6018d10df1a87bb585fdba47017254e4f9204216c8acf651aa33e70db7",
+      "swim.png": "3aa25d780b190ddfe3eda5e7bdec5e239bbdfcac955c3ccee60db5fed5a0c835"
+    }
+  },
+  {
+    "id": "starfish-reef-fauna-v1",
+    "type": "wildlife-starfish-provisional-v1",
+    "name": "Starfish",
+    "batch": "wildlife-3d-reef-fauna-v1",
+    "lab": "starfish",
+    "scale": 8.69,
+    "topDown": {
+      "width": 0.947065592635213,
+      "height": 0.44764096662830843
+    },
+    "files": {
+      "action.png": "b7d40d4560d70459a10ae2207510a603c29f46fc0e22ebbbef87c54416721051",
+      "appearance.png": "ad67428b441254427c3acce6ae3c679bae1fd7eb4cd1a6a83c9eac369b4d8937",
+      "capture-config.json": "3c0464e28e8a396acceaac0cbb046db971c23d61aa053456f45eaaa35d8bbfbd",
+      "comparison.mp4": "53176550d8d0255751a45281a80c6f4892789086e4881951cca5c3030ef08538",
+      "flee.png": "accbd2613342f882bae97d22997a32b17d534fc7f94d735e273d2db754102ed8",
+      "model.blend": "d837c5a1dcb6bcb17aff4edaa6e29c3726af79d397cf6ea402a5c22304a60bba",
+      "model.glb": "a5cebd7963a79482b4c99609cb874df43c1c945e8dbf417fc20fb46da5fa2f38",
+      "native.png": "1afe9eff2fa14a7ccddc9130ba86ff00fcf80e33409b17c081b558e4748719e5",
+      "swim.png": "d5d34c42f0dbb4388aad9700b47cc3a7c85f715c49ed609b6ee2370cb7b05a79"
+    }
+  },
+  {
+    "id": "sea-turtle-reef-fauna-v1",
+    "type": "wildlife-sea-turtle-provisional-v1",
+    "name": "Sea turtle",
+    "batch": "wildlife-3d-reef-fauna-v1",
+    "lab": "sea-turtle",
+    "scale": 15.13,
+    "topDown": {
+      "width": 0.6959682749504296,
+      "height": 0.24586913417052214
+    },
+    "files": {
+      "action.png": "e2c346249acaacf678cdbfc47fd75afd39b197c0cdc1ae13b5f99410e077c598",
+      "appearance.png": "536db1bf1ecdf33278feb417e70bff4ba302313483801390b8ea376608a58f57",
+      "capture-config.json": "5d55c1e850e057797f30e089d1689b925f949fde0f1c62aa778664c20a39a673",
+      "comparison.mp4": "3cd19149aae44987ccee73f88baca80b15cfedc173fd5c775732d76626911648",
+      "flee.png": "8101e03a52b109b9d59da289497b1c6234d23d5f5631ef569cce57c0676d135b",
+      "model.blend": "00722ac56a4dbae5492abe48e07cc0683384d3832a04de8035eada7cfbad5928",
+      "model.glb": "edbe9922c100622f76be82c2cbc63e1b0baee67748d7b3b0e6753c242cd13da7",
+      "native.png": "ac1961b2b763ba5851e380526e79fde6ef2403c5d138fdee3ab522ac2e2e9da3",
+      "swim.png": "dfb1d1be156b1e80559176b9e7fe043e95b2d41c6cc431cb52fd72d088c8800f"
+    }
+  },
+  {
+    "id": "crab-crabs-v1",
+    "type": "wildlife-crab-provisional-v1",
+    "name": "Rust crab",
+    "batch": "wildlife-3d-crabs-v1",
+    "lab": "crab",
+    "scale": 11.89,
+    "topDown": {
+      "width": 1.1379310344827585,
+      "height": 0.29520605550883094
+    },
+    "files": {
+      "action.png": "2fee60aee7c65dcee6be1ebfcd1e62e7348d37946dd594aa107f7281a2317b20",
+      "appearance.png": "3cccdb032e2060406bbff37533d0584e35c56df98d896dbea8ec91a66708b70d",
+      "capture-config.json": "a36b1f9565f84e90fae5b425712cac5140eabafa75cfe7e04ccc877f7247bc01",
+      "comparison.mp4": "d42c8d4367ee71fe1e7870cf0e4565baa062359aece5082be862cce445d7b753",
+      "flee.png": "a87269bbffdb527951d187062fde32562749d6c9e0aa9a6fc21ada53c0b3fab2",
+      "model.blend": "6c56d9b4054d07930ca892cad5dce0a497bdd135ab4ee3c671bb9216b532a5cd",
+      "model.glb": "b021cf89418a0c4de1738928ed396077708b6f91f1a7957530f43f5ea9effbc8",
+      "native.png": "165a237eb2a33d3ff4fb4b6963db0468361249e5f54795bf68bc57c33e6fde10",
+      "walk.png": "21a5bd875feea806e00082c9ce66732990ee509a7d438d551ecb341d970f4e4b"
+    }
+  },
+  {
+    "id": "coconut-crab-crabs-v1",
+    "type": "wildlife-coconut-crab-predator-v1",
+    "name": "Coconut crab",
+    "batch": "wildlife-3d-crabs-v1",
+    "lab": "coconut-crab",
+    "scale": 13.38,
+    "topDown": {
+      "width": 0.9850523168908818,
+      "height": 0.39312406576980563
+    },
+    "files": {
+      "appearance.png": "781e08169a6f4d075058741da42cceac9b05a6819c9d4e56565caefe3e513a38",
+      "capture-config.json": "345cb3e5d3ca5280fc627010050cbad40c52391c4e718e6cb4d5c75c762eccb5",
+      "chase.png": "0dd62e8bca7cd82bf9bda8e9ec994acec39028a2cc26d953d542a381eebb6d47",
+      "comparison.mp4": "5c078dbd2eed347f63441562b17c353a59d9260b74b915140304127e5b5e19a0",
+      "display.png": "4661a02e842d9a0452ceb5b80bf3691ea7f6461d7ce2c88a9394254c1a059cf4",
+      "feed.png": "b3c1b31cf2b86c0f4b08c0d3c1ace930a7531155dab6e249c1566459a5ce1ccc",
+      "model.blend": "0466d882fbe2e015ce4c3f39f9b16634164dd29de1f84892b72123a1d3b3f980",
+      "model.glb": "6d5e96a03502e0a58edc3ffeda04cc75829723e1befb274d53c2d8072e01028e",
+      "native.png": "9075b101305ae814c3ea6ec24dfe72fce418888fe575582779cb696e1ff3a6bc",
+      "walk.png": "969fe16840c21946ca5b9dcea6667a85c691688c78f1078693059b7ccfd2fded"
+    }
+  },
+  {
+    "id": "penguin-shore-fauna-v1",
+    "type": "wildlife-penguin-provisional-v1",
+    "name": "Penguin",
+    "batch": "wildlife-3d-shore-fauna-v1",
+    "lab": "penguin",
+    "scale": 12.52,
+    "topDown": {
+      "width": 1.343450479233227,
+      "height": 0.7276357827476038
+    },
+    "files": {
+      "action.png": "b49ac600ea6d199c3c92855dcd4487bcd5d09dc3b7d8616c6ad39db7b93660f0",
+      "appearance.png": "6fec7a74450fc3a775fa764d3e2d0a33f3a295424b2a483f5a50f11715a153db",
+      "capture-config.json": "72607480ec4d99afc00e3acaa104233f08debe9938ac20d7688aa2e344fd2f4e",
+      "comparison.mp4": "51c94af4a85166422a367e957d06f811ff13dd3008b0be0732fd88346e5e5ebe",
+      "flee-swim.png": "55a9cd5d3debec638a52e49cd6e52c5a097a221bd2775da7f8a6278cd635ba5d",
+      "flee.png": "4d58aa4109efb0abb3f5b6757ab7587a810784a5b62d1939840bd0d38714e566",
+      "model.blend": "27255b4bf71a1298431fd467d569ef2175a8ab5b5c1d8f1edffb158ba7bf4a1b",
+      "model.glb": "970300d16bafe8a6902d63f411f376fe4731ebda3ce78c416f50feef0e2e035b",
+      "native.png": "bde38208cd34a67b3958fa9e2edc1300c5ec6fb2b55119736f3e8689da166d8d",
+      "swim.png": "2d64aed0494096a328bdb7f2be8a6db6eafd40a76346540b530c8a2e96ab6c8b",
+      "walk.png": "f96b7bd908ce4a8b7665e2ba8ad0eb6e9cdf44fc095f401c25b0bd331f1f8007"
+    }
+  },
+  {
+    "id": "platypus-shore-fauna-v1",
+    "type": "wildlife-platypus-provisional-v1",
+    "name": "Platypus",
+    "batch": "wildlife-3d-shore-fauna-v1",
+    "lab": "platypus",
+    "scale": 12.49,
+    "topDown": {
+      "width": 0.9255404323458767,
+      "height": 0.5540432345876701
+    },
+    "files": {
+      "action.png": "d22a5db42ce8598df3fcc61918d4b11ffc47b3534d61dbc1bbc06abd9d60e2a6",
+      "appearance.png": "0057d8b53cbc58cdb9bbe6825f34f687242ccd989330ff4e59293975a852f1e3",
+      "capture-config.json": "1939db13c7c4379f761a4d5d69ac86dd70a0ae635620f739286d1fed5f49ddb4",
+      "comparison.mp4": "a50331b370848cef665ddb454fd9f6c72e814876cd4b9a5d58d5f51714496b8f",
+      "flee-swim.png": "4a931df8583f36a9091913fb63f53de85a90d80eeae623fd1cd476c31427f4b5",
+      "flee.png": "82b3528d5e7ec945ee3229ead393b7887d62f8f57035bbf1c08b24bccd278bc3",
+      "model.blend": "5678aaed55807863d42a29e1a6c5962a888af76ef961d3fd5b429eb68a3d1b0f",
+      "model.glb": "840c586d0e7f3b2860b9df0f163a16b9d910b80cef25bc4d96358558a20aab2e",
+      "native.png": "fb023839bfb40fe9ac48ade067f60e0d463f8583f70599ddbc2f3e0efbf07d5f",
+      "swim.png": "8a7baad8f5fd552a3060cfa9ab0e57672b36e7c2416f4ce145201f623a3fe9c4",
+      "walk.png": "3fcdcc3193b7dd27922babf760580c4ede3effe8b233cec7557bea1cba188b9a"
+    }
+  },
+  {
+    "id": "river-otter-shore-fauna-v1",
+    "type": "wildlife-river-otter-provisional-v1",
+    "name": "River otter",
+    "batch": "wildlife-3d-shore-fauna-v1",
+    "lab": "river-otter",
+    "scale": 11.97,
+    "topDown": {
+      "width": 0.7903091060985798,
+      "height": 0.7560568086883876
+    },
+    "files": {
+      "action.png": "50bb9bc064b73e5e39c094d032e66a2f0728e541736e2251220942d21d146907",
+      "appearance.png": "f0f1369bb307fc6ebd51be566788c0b565d19ce6d605fdd63ebc67553a11ff48",
+      "capture-config.json": "2ce3df706ea8b6222de2cc4fc92b9a2ada71bc6b2000492f91f09ed9166e42d4",
+      "comparison.mp4": "9377c9f3513c52266893e9d5becffec7e1b4e16ae689ba010ccf049d90ba48cf",
+      "flee-swim.png": "a9fe08e945bf3e614a3bb3168053acd7ecf1862fee36221ba606aeb2922291d7",
+      "flee.png": "51725d00ab2e7919a8dbd98f6ac158f33acbe67c85ea250751ba94b233ae6858",
+      "model.blend": "8e3980b5be13d47a481a01b54105c0475a1f592efaca5ea84509cdb7738b2b6e",
+      "model.glb": "dabaa5d99b08604284e3f02fa29c65998ac2abd1c81729696a49daa64300518c",
+      "native.png": "7ca1583d09ed7542775a8c12c60e8660e8a0c356749d671fc6c122da598adb96",
+      "swim.png": "884ab5b822d574c4dbfae9faf37d9170bc6c47d60850f33ed2368de958dc6c9a",
+      "walk.png": "a7e916ccad6e27ef13f024b055e5858fb65da4706991a6ab6131fa9ed3abc825"
+    }
+  },
+  {
+    "id": "hippopotamus-pond-fauna-v1",
+    "type": "wildlife-hippopotamus-provisional-v1",
+    "name": "Hippopotamus",
+    "batch": "wildlife-3d-pond-fauna-v1",
+    "lab": "hippopotamus",
+    "scale": 17.85,
+    "topDown": {
+      "width": 0.8717086834733894,
+      "height": 0.48235294117647054
+    },
+    "files": {
+      "action.png": "966c15d02931dc4f74502c4bfe2a6e9011b06ba5365dd404e693b6f568c770af",
+      "appearance.png": "b763913a44e60fbaf372d10207239b4f5630a610790569d0b625f67bcc5165e7",
+      "capture-config.json": "e98de62980f616885320ee1fd2911dfa3ce137b978e863ad4b5068f7acc233f3",
+      "comparison.mp4": "c322d0a41994c201b3475f6f56c87a56e724f21282e93140bcfc47459692cb64",
+      "flee.png": "365fe20e92fe66c7cdcfb95d71f526bc598dafd15be468adf83cc0e5e8940581",
+      "model.blend": "120a95fe827446e1730e32da65bb62cd07c69aede111df6d6b4d8b591e42abb6",
+      "model.glb": "654fd026ba1525069169003f24b374d7e9ea7d90e00d5f408c02bbf47b6b132c",
+      "native.png": "8064d0848f44e107095f9944e387f709f970b7b42f515056164207591a17bceb",
+      "walk.png": "701651e7773cd7116e94184a2aa1245e32d0883d24263a76671fd0aea6774e2e"
+    }
+  },
+  {
+    "id": "axolotl-pond-fauna-v1",
+    "type": "wildlife-axolotl-provisional-v1",
+    "name": "Axolotl",
+    "batch": "wildlife-3d-pond-fauna-v1",
+    "lab": "axolotl",
+    "scale": 14.7,
+    "topDown": {
+      "width": 1.1095238095238096,
+      "height": 0.33605442176870753
+    },
+    "files": {
+      "action.png": "061ac290a64ce6dc3c226b97159878afc7eb431012fc6daec827eee59be9fbbb",
+      "appearance.png": "2ea6587ebbe71d891e5245eb57e338d00a71248911111e0ad5fbf6fd63fb1745",
+      "capture-config.json": "d16c07e8ca97f237d3c42bcad23527254371228fa305b57f1a4044a21642fb3f",
+      "comparison.mp4": "5310c66609473d459a298ad8af85a6d53d2256b65cbe1b4d8192b3208e245724",
+      "flee.png": "94bba46125cf99d77608c8f80e1a5359d7ccd82b3f228160339cc27ef133c9ba",
+      "model.blend": "ec72533fc501835a267791305ac150e80d22c1f223db3c8256c5b80c101d1dc3",
+      "model.glb": "5136e9ecbae92c5dc59da53fbd05f25a6a50a2dc627b0ba4f94d36381c8caa34",
+      "native.png": "0221a5ed1f89f6c89c7b8663eea7b742ac7e73b18aaef82915645567477c47c4",
+      "walk.png": "0acfa9c395cf7de1ae991e9c15e084854c223405cbdc617ed463bd40680896cb"
+    }
+  },
+  {
+    "id": "pond-turtle-pond-fauna-v1",
+    "type": "wildlife-pond-turtle-provisional-v1",
+    "name": "Pond turtle",
+    "batch": "wildlife-3d-pond-fauna-v1",
+    "lab": "pond-turtle",
+    "scale": 14.93,
+    "topDown": {
+      "width": 0.9906229068988613,
+      "height": 0.2578700602813128
+    },
+    "files": {
+      "action.png": "9fe8beb67556e9e23e6b6e4ec44b08cd4853449cd942fa001885c355360fb8d1",
+      "appearance.png": "4ee8160265bb0a83316c6bf84c386b983a6c3b97d0c3dea4cf201f0d48b5a534",
+      "capture-config.json": "f1a9dcfa0b9112aee5bc25b089d92b26d30a4fa4d533b28cc4bca2dbc5e9514a",
+      "comparison.mp4": "45fa6a972880734ee1ce95693c165b25ca4ebea8ba9518740cf388f2082b7f76",
+      "flee.png": "f3e33d3c2e5912a002431a8bd44a4729574d31ca94f7663f6a2a82b855ef1217",
+      "model.blend": "8c0f566ac6ad11c8ce345045a6df1102e061724723f852eed4c7970925678cc6",
+      "model.glb": "9aebcb62d460324c03b7eb7e261689d0659bfab61aec3cfcc10b7c91911db6bb",
+      "native.png": "5cd4f99758663548c600dbb2a90d033e8cc7394a09446040597f928f3c244f9d",
+      "walk.png": "2362d29bcb86900fe41d1da4674919b5404591990cc47efa2a029b6702b935b7"
+    }
+  },
+  {
+    "id": "cow-farm-herd-v1",
+    "type": "wildlife-cow-provisional-v1",
+    "name": "Pasture cow",
+    "batch": "wildlife-3d-farm-herd-v1",
+    "lab": "behavior-cow",
+    "scale": 12.61,
+    "topDown": {
+      "width": 1.2093576526566219,
+      "height": 0.7272006344171293
+    },
+    "files": {
+      "action.png": "1d14d6f59b0f66ca514ca5d11fd89686e8a995ab6d8133885bd08c10f5884585",
+      "appearance.png": "d44aafa9cfb6fac06d04d6b5f63cbd47fb1b235fd08e16e59b448615dabe1d87",
+      "capture-config.json": "f12466bb222e49fea19a644b1b26efd5fef9e1e6d850261289a144631886cb10",
+      "comparison.mp4": "5061d68e9e3489f6523e3614f8e6b8387ab0f640c2cd49b83512690181538ed4",
+      "flee.png": "d8149c64be101f3d0e29f59e086068eefe424257ea0aed3eee43cb7aa024b487",
+      "graze.png": "ff92addd9ae2f56fef51ab3333c7627b86ddeb372174133cacd8d717916a21dd",
+      "lie.png": "ef492731be1975a72d1bf08d4ef18be26769177a3301a273663293b45546c9c7",
+      "lower.png": "f9f969ea4d13d14c0fc38ab6c57356988751f08c70a62d80946a91ac346602b6",
+      "model.blend": "afcda2d72f752a368b3864046e382b85564f82e293cbb5ccdee751d04b5e711e",
+      "model.glb": "f22c6efbfa457dd1c19ee479cae12005e587226ee2069c0851c3766b1e80026d",
+      "native.png": "e899478a6f778743d5250b728d6bc5c2a7cb9ce61f03ea00e0c4ff1e53b7c2d1",
+      "raise.png": "2b652934086c2a9e72b689afecf5f75d7208625f99e4143d334357d5688084a3",
+      "ruminate.png": "ecde8cbf25586a570aceb47750b624501c9fa8a2dd77ed11b93932904c070cb8",
+      "stand.png": "6718ffcc2266eed84e4ccc86cce0435eb353b3c15ef5266438b37a1a98c2db4a",
+      "walk.png": "0bed91b3af68667f16f6fb1544ca764ce55ead52769275379c6c72f183a44da9"
+    }
+  },
+  {
+    "id": "sheep-farm-herd-v1",
+    "type": "wildlife-sheep-provisional-v1",
+    "name": "Sheep",
+    "batch": "wildlife-3d-farm-herd-v1",
+    "lab": "behavior-sheep",
+    "scale": 10.36,
+    "topDown": {
+      "width": 1.0743243243243246,
+      "height": 0.8793436293436293
+    },
+    "files": {
+      "action.png": "5802d4e6b662da715ad44232f000889975a7d92398406d3b703ea1e91a702f8d",
+      "appearance.png": "cf8c0e6de18a2a092b494955007644f84965863ff5e15a54d949af5431271a87",
+      "bleat.png": "930ce420803b1d6bc29e519fc4a4742495797da3aace38eb6f19d273268560e8",
+      "capture-config.json": "0abe862c5bd2c7bd8e0ba80e6427b500f26605300c286b2956436790b884e04b",
+      "comparison.mp4": "1831a71276334e933a0735de3ad7561c5f8b43cec584b7231c1d754393b71897",
+      "flee.png": "0d03b17610bd95372b318fef05a0b1fee7ce1cc446967e3f6d0596c73dcc6431",
+      "model.blend": "1dab0c7bc0c229a1a7e394291fede9edbc1efd3a580eaf5b52b6dcf001dc08a5",
+      "model.glb": "069417fcf8b9297e29c4f80ad5bdf2ab8533f8ebbacdbd2a6f23b26c6e444cdf",
+      "native.png": "5300b51f53622edb6405430ab345cc2513c6d0f2874d251b6b9790eb800753d3",
+      "walk.png": "68105dd901a922b60930b156dcbe0e7e22ebcf390d6f6f05f3c2410f3358e37d"
+    }
+  },
+  {
+    "id": "horse-farm-herd-v1",
+    "type": "wildlife-horse-provisional-v1",
+    "name": "Horse",
+    "batch": "wildlife-3d-farm-herd-v1",
+    "lab": "behavior-horse",
+    "scale": 12.36,
+    "topDown": {
+      "width": 1.4029126213592233,
+      "height": 0.9773462783171522
+    },
+    "files": {
+      "action.png": "36a1bc60a4946bee5f2826cd0c265b310f4c9f1ad940ed31438b497e717b3251",
+      "appearance.png": "128cf0783b7412f666a17eebfcf967c6bdb4935183704b157cf3094428a45b5d",
+      "capture-config.json": "b7d9038091307824c9d23d21d38fda9406d2894c9a3f367f7c1fefa35584f6b6",
+      "comparison.mp4": "cc4044a0772fd0b356c580c0db804a629bb2a9f1528f25187183867372c5af6e",
+      "drink.png": "b5908e01a10c322aa8e47bdc4313b43a4da19a7bdb1d0fe32b4f05eaaf7b13cd",
+      "flee.png": "178be9b891d5f6919c8697359a8aa43961dc0ffeefba89328b46b42f59de7e0c",
+      "graze.png": "d3034a4290e54e71c0c3a0d43aa2c7b63b9a4aa512744f87d2df3277a695fa7b",
+      "lower.png": "ee0106797ed6ff07c903ac1f3e03d19d2e0be6afae5457745844f7966a078e4e",
+      "model.blend": "f6cef0db807003a4b92e50014bf2a3c8118beb664187f34d0682e5fcced4c9f7",
+      "model.glb": "b9c25c70d4587d1fb624bf73d0726b9b701d9a9eca7094675238ec5aa53538ed",
+      "native.png": "720bac7fb9361ee0188fe542491a1ee314144b5eb0ff34620602065b28780fe6",
+      "raise.png": "daf0be6b0bd2bc28c1e0e797133936504c2097c7546fd1cefb8a378abc8caf31",
+      "ride-sprint.png": "7f63ffa06603768480400153f59c6aed821b14ce908651e42a600691d38f56af",
+      "ride.png": "1ae93ddac2f31af6995e1b0e8aae7e6a9ab9d3b3bfb1a9a25fed9c6dd1f544c6",
+      "walk.png": "7012557f4ed053db48a18072e0de7b1d1ee27fe5bdfc0e42217db89a95d80e6e"
+    }
+  },
+  {
+    "id": "donkey-farm-herd-v1",
+    "type": "wildlife-donkey-provisional-v1",
+    "name": "Grey donkey",
+    "batch": "wildlife-3d-farm-herd-v1",
+    "lab": "behavior-donkey",
+    "scale": 12.01,
+    "topDown": {
+      "width": 1.443796835970025,
+      "height": 0.8434637801831808
+    },
+    "files": {
+      "action.png": "e72d6c0c3674953484ef5e6ea23df37cdcc8403dc01507f8cd5a57da47f728b9",
+      "appearance.png": "5fbb22ba5eeb604debdf59c77f085cd69290cdc389dd87731affd678fae4729f",
+      "capture-config.json": "ed65ebe39cb3445403c4bf97087110a374baca85066f30030b4964f4f95065c7",
+      "comparison.mp4": "8c99dd330fa47b01c8acdf3ac7932383a0db36bd18280e1bd4b74199e52d7189",
+      "flee.png": "8bcee529f374caa1b7a104f37716b86838d3b370336d01d4329dead9a4ed5b83",
+      "lie.png": "c6c13eb3d3381fa7e730ff09099449a43d305357c65665499266ed6c9d027f61",
+      "model.blend": "90d38f08ca1695105d617f9c82fdec635df67c756877094dc0ef2b7e6cb5eaba",
+      "model.glb": "cf51d304773c8f2be5cebf5da056d20566b094d86bdb9fb91ec261ad5ab93541",
+      "native.png": "3d885b49cef4548b2dfce10daf3bea120a6396e60cd976c48465ba722e2515ad",
+      "ride-sprint.png": "35ee476601b735d924aba110d19a4c6d3effe91f2b615f3cbbadb17971dba09f",
+      "ride.png": "58489be5273f1eb2fd38c7554f3c9a7ed3e0b2530a6d06324e9c0ee28be04b24",
+      "roll.png": "a08b6222fe512e5b9b0859a012d60d435b907b1ae2721c6806d3457b6675810e",
+      "stand.png": "5e8388187ed6fce2c41d5761900cc10c8cbb994fb6b237a1700d17f09ed5bb7c",
+      "walk.png": "8f22a3e82a21c18a2891c61581e672f37b8f16d594b59a5285a54854d98ee145"
+    }
+  },
+  {
+    "id": "goat-farmyard-v1",
+    "type": "wildlife-goat-provisional-v1",
+    "name": "Goat",
+    "batch": "wildlife-3d-farmyard-v1",
+    "lab": "behavior-goat",
+    "scale": 10.39,
+    "topDown": {
+      "width": 1.4119345524542828,
+      "height": 0.8970163618864292
+    },
+    "files": {
+      "action.png": "2bf57dc2c3cc7142a59b858e2f6b2fa7b615ccfe2dcc3d0a9203c30096fd0eac",
+      "appearance.png": "b89bd8a799064c998d1f28de78668d5ee8645b4106867a964ccc447c3ddd20e9",
+      "browse.png": "8826a207285de96158a6a1ec7cce23551c64b56299f79f0eff25f4103c1543b3",
+      "capture-config.json": "efc796f8c9e66ab11f420f081a4c27be78ad7652acb83880e107d413c98d130b",
+      "comparison.mp4": "85cea019e633eaccf1a1dc16d5a028a0052ac89b5ebebc73b30828c6c59bef59",
+      "flee.png": "414ac99f9739d292e791b5a15e795b591ff461b6d7936d0cf6068200db4109b7",
+      "hop.png": "b95ead8abdfb06843a98889bc8a946d2693e5a15d1db937c3765fb4316d1542a",
+      "lower.png": "4e203b23c891fc5e7196e395ec4833f7b071f2fbda762f67933f0df60d50b000",
+      "model.blend": "d811c0f0f3ce3fce9173ea9c3d177f136b22f484151d0a9baae6fcd5637288ab",
+      "model.glb": "cb9840ce84014add7b4c3722c5204518fe28ef85361e519787869168d4b8647b",
+      "native.png": "0773565f13f5661abca63736f43ae37d1763a9ad8b797db3f045147fc1bacff1",
+      "rear.png": "be86c6220473f4697ab0cbdd7435eee6e71b729823882df64683300beabe9561",
+      "walk.png": "e162eaf92dc151e9cc5557577a76c00b940c3a4fbb0e318968a4433971e4b027"
+    }
+  },
+  {
+    "id": "pig-farmyard-v1",
+    "type": "wildlife-piglet-provisional-v1",
+    "name": "Pig",
+    "batch": "wildlife-3d-farmyard-v1",
+    "lab": "behavior-pig",
+    "scale": 12.83,
+    "topDown": {
+      "width": 1.0397505845674202,
+      "height": 0.7100545596258768
+    },
+    "files": {
+      "action.png": "b35b65472de1f7a07fb00ee1d6920608d706079f1c30c55620ab79a592cca0e5",
+      "appearance.png": "9b31e7ee93751c9b59a27371633c2c731e3076807f3add58b264e0e61aabe720",
+      "capture-config.json": "5af7da0af67bdbb8908a8f7cfb90b8f57d9fcf38608c2010d185aa14b6e76b52",
+      "comparison.mp4": "ef8037aa9a2827926096a03694084e7f97c21b849d76329084a20631adfd1051",
+      "eat.png": "c48f200b9cf613ed8ed8108ca051bb074f6d08779ccc83dc78efafe76a1a68a4",
+      "flee.png": "93816c7b87c961d74517c457e2416e2e8f00c96062b02e419477ea0065d45b24",
+      "model.blend": "e6f99ffbd58df4cf8e7d32f65a9dfd03dda9a8e53be50bd87e6de7a97b5c5df4",
+      "model.glb": "8bceabd19e3fa51cb3a7d369b6c73f09de05dc18faf79ed45730d92f924c570b",
+      "native.png": "aacdb4bdfe4a2bbded5384a96c8565534ccd892b85c9a8e612dabd6a42dde686",
+      "pickup.png": "9614780120b619d268e891864c106ec7a2dbc6f85ded35ec50eccb563aebd14f",
+      "root.png": "a32879b10ad769ccca9216ef5ad7f95b5ebc02523d26c564c5df016145949dbf",
+      "sniff.png": "4eda4387a9390750bb063970a02abcacee2151c79deb32d19a3227d070247100",
+      "walk.png": "74aaa51014c4ae97f666f0280ef581bb2f9f3a1c769a26df318e453054cfd3b7"
+    }
+  },
+  {
+    "id": "chicken-farmyard-v1",
+    "type": "wildlife-chicken-provisional-v1",
+    "name": "Buff hen",
+    "batch": "wildlife-3d-farmyard-v1",
+    "lab": "behavior-chicken",
+    "scale": 11.26,
+    "topDown": {
+      "width": 0.5754884547069272,
+      "height": 1.0106571936056838
+    },
+    "files": {
+      "action.png": "08f0752905a2586b8a009414ddae785b927c5f6d96b760a38de86be88e1790e8",
+      "appearance.png": "d7be4ab121a40afdc344127fdd3075d53cf26fe29bd379641060b2dcb190ec12",
+      "capture-config.json": "802d49be13ed3dac7c53e7f93b8d598d030206bc051329e1d3ac45ddb3ddb549",
+      "comparison.mp4": "c2bca2bc01f086bb13db90142f625ae72bdc292e52f99697e585a93a107ba908",
+      "eat.png": "9cb367a12db90ebcd2a43ff6dd3f954cde3f33b9842f23ba8cf82124f651b875",
+      "flee.png": "7bfd9b4a49403b3e05366f7231d1cea284429086869360ca9c01a803464aaf22",
+      "model.blend": "c495c65dacc34c66e0985130211608ffe341f842670390a9baf1bf2ac1204614",
+      "model.glb": "4afe62c34be6df929b7f6c2991ece7cce69e7778cbbe911c1197539e083c0053",
+      "native.png": "81e776e11d1e507db8e8099b48c00c512b2cad0548375447c6596a7ae4a1aa78",
+      "peck.png": "0b822caef78d0803ba26455ffcee3d18fd0bf6a68ccb673a186c8d12b79c5ccd",
+      "scratch.png": "6d4cd95be65ab7f573bd850df25ff253838098b2109494a36feda78cd0901092",
+      "walk.png": "54247e1b9df56c54cf3d001cc0db314b6f08068afcdd9f10b37fff544028ebdd"
+    }
+  },
+  {
+    "id": "worm1-classic-worms-v1",
+    "type": "worm1",
+    "name": "Worm 1",
+    "batch": "wildlife-3d-classic-worms-v1",
+    "lab": "meadow",
+    "scale": 3.73,
+    "topDown": {
+      "width": 2.7211796246648796,
+      "height": 0.9463806970509383
+    },
+    "classicTravel": "crawl",
+    "files": {
+      "appearance.png": "a763445ec7a106ca06ef9aa96cec3af656d7843ac4c745532dbd78a6d2b247e7",
+      "capture-config.json": "6b0dd523f44d47db70414f3d0b94607a2457e39196b9676073490d519a7f9146",
+      "comparison.mp4": "3bdc4542e3bd74eff18a85909c81e20b85dcd302117ef5d9c85901291cbb61a2",
+      "crawl.png": "a04698eae9c24d8046db99c6f42e295bcc47fc0bed63f798c1fd496cff5c4021",
+      "model.blend": "62d1ba37a1622ffb76627c94285ab51f7f24b720ab196c0bafb354d47481105f",
+      "model.glb": "527fc6f971855dcaccc1d22a3370115d83e63d6b8e0cfd0520bcdbe0aff9f684",
+      "native.png": "c3f543bb4bbb1f41ae2abf52c9e1b598dc95047d42964cd2cd6a61dd354ba5ca"
+    }
+  },
+  {
+    "id": "worm2-classic-worms-v1",
+    "type": "worm2",
+    "name": "Worm 2",
+    "batch": "wildlife-3d-classic-worms-v1",
+    "lab": "meadow",
+    "scale": 3.73,
+    "topDown": {
+      "width": 2.7211796246648796,
+      "height": 0.9463806970509383
+    },
+    "classicTravel": "crawl",
+    "files": {
+      "appearance.png": "212b69b47e2aaa2785b222653e53195580c30d242cd9ebcd5f5b58c7b5f42815",
+      "capture-config.json": "3e80012839b4a27d9cde327d8eda79468cb4fb9011813ff0ef5ed28960a04beb",
+      "comparison.mp4": "7e8678bc80f29b2e9680cdbd48c95eeb023cae2d92f069496686bb216a5004a9",
+      "crawl.png": "017d2ecb680618f65099841b195d9bffe89d002df3f3bad728835a51be0c5efe",
+      "model.blend": "1df38b3dd4da7a3def2192bfc8b76b02b1d769006a4827f0b8266ea2d0c9d03f",
+      "model.glb": "70c879023ff73d482e0c2a56c8e381780659c7e79f925f44874ddb34943e993f",
+      "native.png": "1756e3dd5407809ce1b0a16e932e0a3c7588942d594ce1ad434be8cfe0503ed6"
+    }
+  },
+  {
+    "id": "worm3-classic-worms-v1",
+    "type": "worm3",
+    "name": "Worm 3",
+    "batch": "wildlife-3d-classic-worms-v1",
+    "lab": "meadow",
+    "scale": 3.73,
+    "topDown": {
+      "width": 2.7211796246648796,
+      "height": 0.9463806970509383
+    },
+    "classicTravel": "crawl",
+    "files": {
+      "appearance.png": "e708121dbb625004acdb8d18ad61e8bccc51ff17adfdf45a6560347ea05313ca",
+      "capture-config.json": "e2834f8306758a847c9dc1893e1b683d9046f14ebcc831d8ada9fae23029d077",
+      "comparison.mp4": "42752e0ae4c79ddc8cd027c7d4e8541aa5cd4ae17e3f2f05cd9aece827d6b07c",
+      "crawl.png": "01a56417d760738529d687c01afeca7ddc797838e61ffd3b7f9e1c6f921ca1f3",
+      "model.blend": "8fed5e752b0051d73795e4394a534b5428d178a9f76fe5173eba641608334059",
+      "model.glb": "e56cd1bc969a1e35145c5187fbf0e02ee661679b1692024c7cc7b173485b262a",
+      "native.png": "fcf4af3bc63b636d45cfae74561f82fd199b1d44449aa3a85a5d8cf7bffcf912"
+    }
+  },
+  {
+    "id": "worm4-classic-worms-v1",
+    "type": "worm4",
+    "name": "Worm 4",
+    "batch": "wildlife-3d-classic-worms-v1",
+    "lab": "meadow",
+    "scale": 3.73,
+    "topDown": {
+      "width": 2.7211796246648796,
+      "height": 0.9463806970509383
+    },
+    "classicTravel": "crawl",
+    "files": {
+      "appearance.png": "fd4015752c153fbc44dad9169d6baf9fed7d2aa3dd5be62f9c9bf64c4fab06e8",
+      "capture-config.json": "a14dcb558a8e032124d8fa1f934555efaf5fad61e86f3933b08ff4b3369e345d",
+      "comparison.mp4": "0a48ba1e8577d860672d51caebfad9c3db348672b0f360898e725768f51ae1cd",
+      "crawl.png": "454e517b17f23ba315e02da4fe6f5474101f167b21fee3052dfdd1e5e64994a6",
+      "model.blend": "e0e7822ba0c313ddccdf1b0bf52b8ffbeef8306bbf2f17d15579e6c3e3eadc0c",
+      "model.glb": "fe85aac1f5cc2ee2d30b2934fa449673a072217aa59ae13fe7d145f30fa5e3ac",
+      "native.png": "1c3e03e8ffada4b1e6dca84f35941a506f65a1f7774e50a22462695340634d3a"
+    }
+  },
+  {
+    "id": "chicken-classic-yard-v1",
+    "type": "chicken",
+    "name": "Chicken",
+    "batch": "wildlife-3d-classic-yard-v1",
+    "lab": "meadow",
+    "scale": 8.38,
+    "topDown": {
+      "width": 1.1491646778042959,
+      "height": 0.6813842482100237
+    },
+    "classicTravel": "walk",
+    "files": {
+      "appearance.png": "5bab180dfb58c5e2dd801a8e82d7cdea90cb6c2b783f05143b4e789ee1c442d2",
+      "capture-config.json": "04356bdd357e59eff191c161970e8cc13394d293f8058bbd46caefadc5d10b7f",
+      "comparison.mp4": "3afdbb2f8f132571a20df71bf02a48a797bcba1c940856bb83fcf49c4afd93bf",
+      "model.blend": "f1b322a8f92d63e2aa53404039ed037f40f879aca0891d23f02d2798d4af8978",
+      "model.glb": "c5d84a8fcfbe4e3f8166a0e504cea7fb57e3d873afde2b1cbed0b1a6620606eb",
+      "native.png": "590c5471cf4c0263415ae199bef320bb1415742b8e90f91fe2b09864711dc02e",
+      "walk.png": "f8cff66f993f9a6a7ba02f0eea1fd8c11990ac060684677f0042613fa9832d91"
+    }
+  },
+  {
+    "id": "cow-classic-yard-v1",
+    "type": "cow",
+    "name": "Cow",
+    "batch": "wildlife-3d-classic-yard-v1",
+    "lab": "meadow",
+    "scale": 9.52,
+    "topDown": {
+      "width": 1.0661764705882353,
+      "height": 0.7594537815126051
+    },
+    "classicTravel": "walk",
+    "files": {
+      "appearance.png": "c0879d2d2fcc42b58c8d3ff61ff7be1cbdb4e85a0ba9e846ca3c200210c35314",
+      "capture-config.json": "f8355d02e9e3765ee7134f14aff2b35542255483c071dc0c727565cc6edea71b",
+      "comparison.mp4": "7ff8888d27c3e9d58e5951f1b1d0b715305ab134d9fbdb5a57291bf550943641",
+      "model.blend": "fd07f299ab3e50e328f8d75951651be1201b48bb0082a09631962e256048761b",
+      "model.glb": "b83b63c1df5642b2bbeff97405e4de6cb3d61e04dae91da2fdbe5ffddb2ce214",
+      "native.png": "6cd3da75e1f70d5b4d2ad8c4bc9558dfc978d1e2322a2a33c5d36b39faa2b00b",
+      "walk.png": "1d99ee20bfc5bd7344044605a037af06b58d064cf425e28ed1604d3f4671ea1f"
+    }
+  },
+  {
+    "id": "pigeon-classic-yard-v1",
+    "type": "pigeon",
+    "name": "Pigeon",
+    "batch": "wildlife-3d-classic-yard-v1",
+    "lab": "meadow",
+    "scale": 10.44,
+    "topDown": {
+      "width": 1.264367816091954,
+      "height": 0.8726053639846744
+    },
+    "classicTravel": "walk",
+    "files": {
+      "appearance.png": "597d655b9ec06af9df9e7d802323bd833b966ad75959aa7b0f5f9a3ec6915a62",
+      "capture-config.json": "655085f34e2cac92b7789d41ea5d41a1e761e120e82d54cb52ed716084bdb48c",
+      "comparison.mp4": "5f15225d2fdb83ac7b49154cb2ce7aa8571dc19f2fe028f6c0e63e05ae28912b",
+      "model.blend": "5cd35d56ea0943f54638d6f2d492fb4a6b4453d438635ca964bfed6e1fb62672",
+      "model.glb": "469d795229456e6d2cff1a807a4f276272a578201d990ab5bfa9c875feefa9af",
+      "native.png": "5c6d145f06aad50e5182a007043b43c63c748f46dc95a5c7f7243041a0c7526a",
+      "walk.png": "5415172d46e1d56afbb4417bbbe75248a1d73d05aca80b7eea42e06bd82455b1"
+    }
+  },
+  {
+    "id": "pigeon2-classic-yard-v1",
+    "type": "pigeon2",
+    "name": "Pigeon 2",
+    "batch": "wildlife-3d-classic-yard-v1",
+    "lab": "meadow",
+    "scale": 7.92,
+    "topDown": {
+      "width": 1.3371212121212122,
+      "height": 1.099747474747475
+    },
+    "classicTravel": "walk",
+    "files": {
+      "appearance.png": "68b817ec5a3998505887e9b0c5e269d5cdf6cca9171dfe6b3e2b2b1f36755711",
+      "capture-config.json": "b7a28f587fa9320ada095639a29076774b3701a8c5b18c884d4f592be7f8ea51",
+      "comparison.mp4": "6755da057cf01c0054baa5a35cdb849b421b17332a1497ac87690e6d15804274",
+      "model.blend": "0ae1f441ee5cdb704bc86931d642ad3c8b7567e88aeb9cdd2e94a3f389858fa4",
+      "model.glb": "15b45835fc3c13182e20fea6f41f6b816d00a6658021cda9239194f90cb87f2f",
+      "native.png": "a24c56eac91107978740e6ca8a181e984e1519483b15a9f60ca44af7076656f2",
+      "walk.png": "afcbb74eecfa4b71d0bf2293cf8f2ffe2c0a5b6d3e8202be97f7a304502065c1"
+    }
+  },
+  {
+    "id": "crow-classic-fliers-v1",
+    "type": "crow",
+    "name": "Crow",
+    "batch": "wildlife-3d-classic-fliers-v1",
+    "lab": "robins",
+    "scale": 12.28,
+    "topDown": {
+      "width": 1.0749185667752443,
+      "height": 0.7043973941368079
+    },
+    "classicTravel": "fly",
+    "files": {
+      "appearance.png": "7b0e61f3da90106be8930dbf545c112e6e64c7fa3e06d69d9b6b46558d4a3857",
+      "capture-config.json": "b926b8f1c2612f68e2ad8cb2fd4ac2beb19a9ea8ed4493c11e6b53c9543afa03",
+      "comparison.mp4": "51fdfa7612668a28a6f5f4b2a0995a6d7102d721ebbf4bd47aad0ee7479ce4a4",
+      "fly.png": "5afd48d0b28ee3ebed26647b71242adae386903ed6347829180af1de5d153b76",
+      "model.blend": "996f966f5a89930424521104f70b7c4950d6c45606ac15b9ed41d02752b93649",
+      "model.glb": "a3957572d136a522dcafc6273a98b092fcdafe5cba9878b42c59c2aad56be296",
+      "native.png": "628a8e159c9e182f67ad6f36f294f9fca1450d8e09e03f61856f45809e47247f"
+    }
+  },
+  {
+    "id": "seagull-classic-fliers-v1",
+    "type": "seagull",
+    "name": "Seagull",
+    "batch": "wildlife-3d-classic-fliers-v1",
+    "lab": "robins",
+    "scale": 15.14,
+    "topDown": {
+      "width": 0.9722589167767504,
+      "height": 0.7661822985468956
+    },
+    "classicTravel": "fly",
+    "files": {
+      "appearance.png": "dec95c050965964fdc175cf16570ea42ef844d8ec2f168d32225db7ebce5eb0d",
+      "capture-config.json": "2a861b433875da4d10b25046fea4b190ad402f53bc9ed971a1738244c708cbe0",
+      "comparison.mp4": "2d46b4fb71087f5e21d134baf4a4e32b6d8d2f2fb5786f6f7748b3a755432ce1",
+      "fly.png": "33bffdd02a16dba0e51a09bc55f6246fb480045f9297fd642fccc1bc37ca67b1",
+      "model.blend": "58b7384d57cd04250bb92bb3b18864f37d6f0c7685a102d21b634770a702a463",
+      "model.glb": "2073119644673da5c617edd4cf4a65f1dad3a9f0567efc3ed9faa5eba13b9b31",
+      "native.png": "1a5051efca2766ed1caa4f424da8d16e14b6c61ee07ec42d9955688e8a3192e2"
+    }
+  },
+  {
+    "id": "fish1-classic-fish-v1",
+    "type": "fish1",
+    "name": "Fish 1",
+    "batch": "wildlife-3d-classic-fish-v1",
+    "lab": "pond",
+    "scale": 6.03,
+    "topDown": {
+      "width": 1.625207296849088,
+      "height": 0.867330016583748
+    },
+    "classicTravel": "swim",
+    "files": {
+      "appearance.png": "9d0452917c33548ac7bca23474b11a775e55d45ed90ab28b2d9c574a6db10e0b",
+      "capture-config.json": "8b53694695d82ce67365bc7395597da0465ed59331d1c12e967dbbbd675416e7",
+      "comparison.mp4": "224c83c15339eff6bc6e3d9ab9120e092a003c8092d9c9cf993fec45c64cd0a4",
+      "model.blend": "42e5637f2cd5ecca35e25d1f57440bcdc18f66acf1f354518a32f07ff3ab5700",
+      "model.glb": "a5977f042b78d1125c38327fe25d99b107939254bc0728b40e1aaa9503815b56",
+      "native.png": "fb3447ca482721f81a9385fde21b2e9052397cda24a7099eccfc5b53a821ce86",
+      "swim.png": "0caa0b446c3773b1f0b770fdbcdb952221c9b32132804f55ff8c0cb3ba6da36a"
+    }
+  },
+  {
+    "id": "fish2-classic-fish-v1",
+    "type": "fish2",
+    "name": "Fish 2",
+    "batch": "wildlife-3d-classic-fish-v1",
+    "lab": "pond",
+    "scale": 6.03,
+    "topDown": {
+      "width": 1.625207296849088,
+      "height": 0.867330016583748
+    },
+    "classicTravel": "swim",
+    "files": {
+      "appearance.png": "444a47a3cabf9245be3b3492c4886ec6a7cf8b58d59e10fe9fc43323b62c59d9",
+      "capture-config.json": "6b3e501491ccdbefb5eb3573330daa3ff452d4aaeccc48bb4b55809c73ee810e",
+      "comparison.mp4": "f396526faaf64be60c7f9c0a69a645772fa900ad0c7e7e268e7e72d224c16299",
+      "model.blend": "ab38ecb6ea020b8222b0b00f775a0942905d9f0199ce5124bb735f62f277ad25",
+      "model.glb": "27405586949fd1d74dcabdd2c5c1a74889ce73746654a7aae610d54983f2203d",
+      "native.png": "f77aeb6240aee8f1d2c71079d3e4554a158b260ff2022e7e5e9792ccc5d627c8",
+      "swim.png": "5b12e31a4f2d1b74e822c925cb55c0c023448d67266080401b2f62872909c690"
+    }
+  },
+  {
+    "id": "fish3-classic-fish-v1",
+    "type": "fish3",
+    "name": "Fish 3",
+    "batch": "wildlife-3d-classic-fish-v1",
+    "lab": "pond",
+    "scale": 5.63,
+    "topDown": {
+      "width": 1.6163410301953818,
+      "height": 1.0976909413854352
+    },
+    "classicTravel": "swim",
+    "files": {
+      "appearance.png": "350d91e5b1ba401665fb84e18b49fe24cd13acdd26b74c000a057a4bb83298f7",
+      "capture-config.json": "7b6bc02471aa5047c08331cf645a7d9fb50511c2ea48275b312189c5090b1243",
+      "comparison.mp4": "a3e0d814afe620f3004f36ed94b68447d8d2f99cc605e922d86423540760d8aa",
+      "model.blend": "102c2b604b41a28588cf970e7a0a12ff2acce1fb80b44012337d6b531e7e493d",
+      "model.glb": "37e3575e75431611cca3d831b36a7296124273036402efcfc8aa3b6a15189ccf",
+      "native.png": "b43155369a33fdae33c59d7a85d8385da5a75c25ece5031b819b3b5013f4989a",
+      "swim.png": "4a093c6552d0a7dbce7a8bdea447105e3648caa67a80c1c97a23b1a13a4b29c5"
+    }
+  },
+  {
+    "id": "gemsbok-oryx-browsing-antelopes-v1",
+    "type": "wildlife-gemsbok-oryx-provisional-v1",
+    "name": "Gemsbok",
+    "batch": "wildlife-3d-browsing-antelopes-v1",
+    "lab": "gemsbok-oryx",
+    "scale": 11.35,
+    "topDown": {
+      "width": 1.226431718061674,
+      "height": 1.1533039647577092
+    },
+    "files": {
+      "action.png": "b035eda569d65ed91e090ba8210a78a0bba1bd5875cb0f803fccdf9b26af14ba",
+      "appearance.png": "6162b45f286dd1c0ba98c7c3d902934db56ce60da6c4af08575015ffda6b4f3f",
+      "capture-config.json": "079026451138215a6344349e589090bb49ac6aeea6470a8d56f7719f6ffc3e19",
+      "comparison.mp4": "ede4168ca9c5d0f9422a544f902cb8c39307553df8c14bdd68ada12f529e0ff7",
+      "flee.png": "d57e6780a5cae378201d9df38b2e043b29f56e0b07296ee68d904a580116411d",
+      "model.blend": "8de3b48deba1ff375a1d67c9c72ef62ec9d754b6aa63f601247a88a1ecd3831c",
+      "model.glb": "df546a563e86d23d183c5604e203fa9b83531056fc3468c09396d634f7e4a57b",
+      "native.png": "aa412e8ddbf4c30808d38863818a61b7737e7ec18ab88b9c6972cc000ffa6b66",
+      "walk.png": "3505db0bb84fb536e43ad571fc9c0c4981dfb36a8ce1b661c88c9e92f459892a"
+    }
+  },
+  {
+    "id": "gazelle-browsing-antelopes-v1",
+    "type": "wildlife-gazelle-provisional-v1",
+    "name": "Gazelle",
+    "batch": "wildlife-3d-browsing-antelopes-v1",
+    "lab": "gazelle",
+    "scale": 12.16,
+    "topDown": {
+      "width": 1.3404605263157896,
+      "height": 0.912828947368421
+    },
+    "files": {
+      "action.png": "73430e25c1481959ad228794f9e54f0e8bae15a573c68329c7910895c8d16a3d",
+      "appearance.png": "e7f8de6e928fd577f4c79a0642ca039673c848c5108fa151ffd1e7ac84085e0a",
+      "capture-config.json": "201549200dd12e4a07c1ded1b07dcb30bf37e418eea2d6b90fa065c3b2f49f98",
+      "comparison.mp4": "736d1127898b0ff4870d979843a0a2b27a84a863a82599df634ada283b970a53",
+      "flee.png": "80c9a3eea73f56731eed1432e2cbafddaa4ce9e18695c2b4ea5f54b5b084edd1",
+      "model.blend": "f5cb9450545f35ee2386c5d5c4f3c31199afe2c1f44dd2d57f07b648abd59e11",
+      "model.glb": "3cf241e2bd27f92f4ddccc2cac0337824759f026af912e98d8042b87b2bdb2da",
+      "native.png": "022e75c273e75c20fa3e3e154c43bdd9bb658735dd837dbcb6aeb9a20f52356f",
+      "walk.png": "ba512daebce0da9a9788d2dc2422f4f5fbc133565ffd8d999dd2282c700e2657"
+    }
+  },
+  {
+    "id": "springbok-browsing-antelopes-v1",
+    "type": "wildlife-springbok-provisional-v1",
+    "name": "Springbok",
+    "batch": "wildlife-3d-browsing-antelopes-v1",
+    "lab": "springbok",
+    "scale": 12.16,
+    "topDown": {
+      "width": 1.3404605263157896,
+      "height": 1.0041118421052633
+    },
+    "files": {
+      "action.png": "af1f641869a49b88eefedf2e1f6a10cdac463d7e125f0f182e4e8a8c6aa5643d",
+      "appearance.png": "ec891cf8caed2f99ff3b16d7d4912be5a768be4dab9aed37a58469851ff7eed8",
+      "capture-config.json": "89b9d8080fc963ce657fefee7bd87f649c35b310c38d2e7c348200b5714ee09a",
+      "comparison.mp4": "5dabb61b0dddcb4725a7cb54578bb5455323cc18f56873b7dc096b391914c87e",
+      "flee.png": "760daad5d2ad008afb9d3f6d1c9d54db366cc658a08ef46e4e8fb696178b84c0",
+      "model.blend": "481380abee5a22bb318aee56be76aab1d636e0057cfd31c1d72738f05708370d",
+      "model.glb": "71920e9c848e2b5b97cc37f43d1784d45d2ff5bd70cfeb62e3945564cea05403",
+      "native.png": "5df14c66fdd8d69a4bb16975ab6d3635fc1415faf1da3a7977540a979ef8aaec",
+      "walk.png": "a03601e480467a6772dde614f1e60e5c8657e4e13fa2effba7d29537bdc6cd8a"
+    }
+  },
+  {
+    "id": "gerenuk-browsing-antelopes-v1",
+    "type": "wildlife-gerenuk-provisional-v1",
+    "name": "Gerenuk",
+    "batch": "wildlife-3d-browsing-antelopes-v1",
+    "lab": "gerenuk",
+    "scale": 12.61,
+    "topDown": {
+      "width": 1.2926249008723236,
+      "height": 1.048374306106265
+    },
+    "files": {
+      "action.png": "e52649be23bb2e6de39f27f205588d57de824882ed54050f6dc062252a7d9453",
+      "appearance.png": "243dfb251d74fafdfe5585895e37cc7e31280ef3078d1bd2f5b9504964a6a0a0",
+      "capture-config.json": "43aa71e0d206b26c40d4940f0a0f98a050f076daa0a576b1ce7cf2b4077fc9ee",
+      "comparison.mp4": "0a74e0fa1ef64352a0460b7f49392aec84d027d3fe5aaf367b3bd5fb296716c1",
+      "flee.png": "f8e8080af9709628ffdfaf41a56f0dbdbda352eecf168ce46ef0be9bc1b4c4e5",
+      "model.blend": "ceeaec0b615a0b1b992ac1f321c4d4fec510aba7e8909599f3a0cb733363281f",
+      "model.glb": "2d0a98c0db5cf9f21fbf09bd955bf1088270bda87b0d4da5f6db286cb97c9741",
+      "native.png": "7f6697cd5ec8870ebcb72249046894802d9056f674fe3ad8e7d9b7f885e571b1",
+      "walk.png": "5185a47972115f4b022f8816b5d8d8c7e14a1ad0fc40dd18905ef4c628d1da24"
+    }
+  },
+  {
+    "id": "elk-cervids-v1",
+    "type": "wildlife-elk-provisional-v1",
+    "name": "Elk",
+    "batch": "wildlife-3d-cervids-v1",
+    "lab": "elk",
+    "scale": 12.52,
+    "topDown": {
+      "width": 1.5447284345047925,
+      "height": 1.1733226837060702
+    },
+    "files": {
+      "action.png": "632858430336222d61fd59e52fa2f74b3ee90f266f29c52ddcff578f56d3491e",
+      "appearance.png": "132922059e18989799a35d9ca024b7d1e57192822fc9188366402e55dd36cb5c",
+      "capture-config.json": "81bd135ad656fadbdf31f36efccde6d0f29296b7cfa4cb3c09f7d506bebef8af",
+      "comparison.mp4": "3398b39a1cef16b394e9d43e8979027891d6664d81e8433e98765344fbcad1db",
+      "flee.png": "2b7078cdb7ec1c3c84d05f36f70b3b0161bdfdf20ffe7664a59173c7468c3fe1",
+      "model.blend": "af18ed537e2be66c1edc35064c19c29462451370dcddb4c3dd911bf7413b523b",
+      "model.glb": "e1385b3360b7e1490eb470712a0ffbea8e93baf362916d6860b61e6bd0119f45",
+      "native.png": "8fa4a0aa1c7cdbc9590ce44bb6fc111003f92a2d2623137c3ed9488da5669f0a",
+      "walk.png": "900d3d1ed3ada4b0858f69406743c5414fb5d7c78c68259f80ec31fccff6d0a6"
+    }
+  },
+  {
+    "id": "moose-cervids-v1",
+    "type": "wildlife-moose-provisional-v1",
+    "name": "Moose",
+    "batch": "wildlife-3d-cervids-v1",
+    "lab": "moose",
+    "scale": 13.58,
+    "topDown": {
+      "width": 1.4241531664212077,
+      "height": 1.0346097201767306
+    },
+    "files": {
+      "action.png": "afb64f513d2ba6184be20bc9d3545677f574131a56235b2daaa24de4ac9a02c6",
+      "appearance.png": "4ecec2536d1050f1e2a906060baaa51b2478b708db3dcad37751d8e83665fee0",
+      "capture-config.json": "fa35cc08b0589eed84437755ce4d9ce1a91bb76601376f3f80d3fd827dafcf2c",
+      "comparison.mp4": "17039903787e3406120eee83d7202b347f0f8c605ede5f2f76107cb42abf0c8c",
+      "flee.png": "422b021af84d3a5fc774abef227b7ad9c969669aafa022f1592914f677c315ef",
+      "model.blend": "d0b20bbdc1cfb684a2320d357f143391475a4c4fc63e2898449219ecaefbacdf",
+      "model.glb": "e842b8108f9265d1a5029da22f71e74a6a1e8c3c67251175e44ffc9a57065e2c",
+      "native.png": "cf69eb5fb27e59cd7e7f881a846d9657f5b24969b527e031ff953ac3f6cf8cfb",
+      "walk.png": "c49be6e0d06c52b4d3161a258963988f912849b4343117e550015cc1689f0105"
+    }
+  },
+  {
+    "id": "american-bison-heavy-herds-v1",
+    "type": "wildlife-american-bison-provisional-v1",
+    "name": "American bison",
+    "batch": "wildlife-3d-heavy-herds-v1",
+    "lab": "american-bison",
+    "scale": 10.67,
+    "topDown": {
+      "width": 1.4170571696344891,
+      "height": 0.9756326148078726
+    },
+    "files": {
+      "action.png": "5c1aa7e86559ddf63aced601b442b5621464c284bddce84dbcfa39cca06a9067",
+      "appearance.png": "905a4e218700f7bb409ea836167de46e6ecf0b17b6e2a1b687cbd54595de9703",
+      "capture-config.json": "493963d86f9d6daba7519c2c188058026520e08f8640ced294dbd24adab61b0b",
+      "comparison.mp4": "5e87a0ef177a3b5778ba1004e17a483d25e8726004a51f97bd36a4850213144d",
+      "flee.png": "9dc6b15bb95ffa1035f301b1246e81a88b51495c9e4978814ea6dd6c336ca9b5",
+      "model.blend": "4f335e7a00657a3a8556d86673c60e5c6adc48bc23df927ed2542eafbadf0c08",
+      "model.glb": "a6b486024779c8e224287b2a79dda40b609b2b864524a1cd9d8bb7e9e68f19ee",
+      "native.png": "c1535c8405496813fbe308359b37cf0ad6856f6fc9162bde927b4e357205aec5",
+      "walk.png": "c53a02c698790edb345ec332e2123e72334afa2a7a55da3f08d65981039139aa"
+    }
+  },
+  {
+    "id": "water-buffalo-heavy-herds-v1",
+    "type": "wildlife-water-buffalo-provisional-v1",
+    "name": "Water buffalo",
+    "batch": "wildlife-3d-heavy-herds-v1",
+    "lab": "water-buffalo",
+    "scale": 11.78,
+    "topDown": {
+      "width": 1.6417657045840408,
+      "height": 0.967741935483871
+    },
+    "files": {
+      "action.png": "77e249e95076c6a589465246ad119e2bc0ad54bcab78c4235f0d80520e8381df",
+      "appearance.png": "2c5821a7dc7adcebe9167c36603190ae9392d2c1a03a11a59f06c54939547bdb",
+      "capture-config.json": "255e1d426c0fbdd618cb2695af904d1b61fb8947a9b9fe20b45271af50fb43eb",
+      "comparison.mp4": "04a18fbdc7d795d40dec7f53ee1adf23df0b1f36686d750efc157b020f360da1",
+      "flee.png": "c55b0a636fb09c4d68b51ddbffa3ce7ca1e61ef798edc9fafece4e27da54c8b5",
+      "model.blend": "ed69abd261d4431c5c8783bc09f1eee7c3ef8a38deb757b30d9492587ae07f17",
+      "model.glb": "f9a1cecee2d8beae734e77555068e49892b3041cc1a7ac2e7915cf5933b1f936",
+      "native.png": "2c4949b71ba69648bc86702a9eaf35c72639748d9e8369dc4802ffb8081882f1",
+      "walk.png": "31758432111d1b3d30fa5ad84558e28a98014f4c7f91a5a54113b8b164c67ba7"
+    }
+  },
+  {
+    "id": "wildebeest-heavy-herds-v1",
+    "type": "wildlife-wildebeest-provisional-v1",
+    "name": "Wildebeest",
+    "batch": "wildlife-3d-heavy-herds-v1",
+    "lab": "wildebeest",
+    "scale": 10.81,
+    "topDown": {
+      "width": 1.481036077705828,
+      "height": 0.9777983348751156
+    },
+    "files": {
+      "action.png": "0fe07d97a8aa172d58530751e96bd9d8c1527efb3e1b68081125c76f2f662e45",
+      "appearance.png": "01676447980f232e6265f330334a61a05f554149739df135b404baef6b3a7d03",
+      "capture-config.json": "cfb66d6d2f83443dee322cd37388f364389f95a48654fdc7f1a900e4c61f4343",
+      "comparison.mp4": "70daee3304d6435725f35c19a25a529c203cf683cd6d120ff5b11bee30c71584",
+      "flee.png": "3be0b74d755b7f7cdebe8255e369a334201b3a25f8f6b7270f976271352eab7c",
+      "model.blend": "4b9755586465c2ddbdfc8dff2500442fd188516f8108d76be26dd80b4759774c",
+      "model.glb": "0687d5e0cc85ec6a03aa233e2dadf25da433e22ba4f7f3d1853482de8e667086",
+      "native.png": "df768d88679d20465ea7bd63e91e6b9a353182fa75b34f0f1c85251091f6349a",
+      "walk.png": "2d6b97945360e36f5a8d2bf2e9ce7e156abecb094ccc075a79d54bf72d66e440"
+    }
+  },
+  {
+    "id": "musk-ox-heavy-herds-v1",
+    "type": "wildlife-musk-ox-provisional-v1",
+    "name": "Musk ox",
+    "batch": "wildlife-3d-heavy-herds-v1",
+    "lab": "musk-ox",
+    "scale": 11.9,
+    "topDown": {
+      "width": 1.2705882352941176,
+      "height": 0.7411764705882353
+    },
+    "files": {
+      "action.png": "dc00b24b3cc8ebbe33f1541f7c38a4d93f3c17a380c9e8133bcce7f092001cf5",
+      "appearance.png": "bb023213fd38308566aecd503cb06ebd28f02f31c1010325774ebddf315e8239",
+      "capture-config.json": "e6346bccb2a4e44d78b49a987b28feb4de333616c815baa622bd195a5ef1a910",
+      "comparison.mp4": "7e19cbcb0f8ac86e61efaf76c5e4e2531ac581a13770b758771d5d38ab2f9647",
+      "flee.png": "dceac9d127b38b46a7273da79b32e72f05cf5bd3dbb3b763ac0e468d6cf25410",
+      "model.blend": "5ce152d8f088e840f0adf04dc0eedd066e33b179e2475051856562f43dea31f8",
+      "model.glb": "9c66d48ccdb6a5e521701ab5cece7e14c959a48994a27a1e53ab54c8ad266955",
+      "native.png": "50cb13824d2bedebcc5aa180e3a9c94dcdc7072897278b5648d32dfa0a005869",
+      "walk.png": "7d53de87564914dbafb0240b1057de4ff888c90bf3017007867417c31be3b875"
+    }
+  },
+  {
+    "id": "impala-dryland-grazers-v1",
+    "type": "wildlife-impala-provisional-v1",
+    "name": "Impala",
+    "batch": "wildlife-3d-dryland-grazers-v1",
+    "lab": "impala",
+    "scale": 12,
+    "topDown": {
+      "width": 1.3583333333333334,
+      "height": 1.04
+    },
+    "files": {
+      "action.png": "1eb82c82183f4aa31b546b621885a69c8480316bdafe721068452abcf804f4bf",
+      "appearance.png": "39f7dfc930e7e0e04fdbd86818ac90bc23d7ab39431828f08a78c36eb64f1ba0",
+      "capture-config.json": "53e81588f243ad8ca245108924021c316d3c0b78a2c2d7a73d92533673d070c9",
+      "comparison.mp4": "866869c4504790155f76d0700d828c7e518e584c7c9a6460b4cdd39f70c1c4f5",
+      "flee.png": "2bee146e618baf97c630202cc1d2a659ef2f69c95e3bbfd5b956631196712001",
+      "model.blend": "d6da22f0bd9b46e5143e9bc5f17ffcc7ee295b70b08ab57d9af4e1aed22e7ba5",
+      "model.glb": "390090b11edd28dff6608536c010851246036a2fff89de28586444f6f7929a0e",
+      "native.png": "c88be5c24d14c55ea77b3d230b2a5edec07b3bd418a8c852a0b8e9e37f11819b",
+      "walk.png": "cf9d4b68f8b020f4095d6a9b4f8475d72ac979f670830a7bac9c00fcad40e156"
+    }
+  },
+  {
+    "id": "saiga-antelope-dryland-grazers-v1",
+    "type": "wildlife-saiga-antelope-provisional-v1",
+    "name": "Saiga antelope",
+    "batch": "wildlife-3d-dryland-grazers-v1",
+    "lab": "saiga-antelope",
+    "scale": 12,
+    "topDown": {
+      "width": 1.2225,
+      "height": 1.0541666666666667
+    },
+    "files": {
+      "action.png": "32fe2eee04b3deeee5b72d44ef659dfa8dda4a1fe0bea483e8ecd59341cbe92a",
+      "appearance.png": "98d1d6985a6ae24543de47af1a0c0a4927402c0147d362419cf4149f91145bb5",
+      "capture-config.json": "22ce57656f797f22e9e2db3af253cd79a052326031a5aa5bea213e55afef1929",
+      "comparison.mp4": "e75188118c3eab723f49e510d8a5a468d1844fa2441039357f2b39c387aa388b",
+      "flee.png": "f6ffcfc38f254f30c583c73218b802c6e9e61115334f3415d3b3adb6e41888ec",
+      "model.blend": "f5ef72cafa4cd925266d63ab59d304e33c1068db6562e75c6f5b74cde363be4c",
+      "model.glb": "259bdb0a8d7f1296f2f6273c035a8e239ac6cd09ba4405a071c46cc4eb65df70",
+      "native.png": "d559d1c53edd241e1c7564e9a88d0bba4904285766e6d77e0a9de3ffa16cdf60",
+      "walk.png": "eced2d329a0c0b211dd9fd163d5d2c1b71e7bcc9a33be194e4fc47b044df37e1"
+    }
+  },
+  {
+    "id": "zebra-dryland-grazers-v1",
+    "type": "wildlife-zebra-provisional-v1",
+    "name": "Zebra",
+    "batch": "wildlife-3d-dryland-grazers-v1",
+    "lab": "zebra",
+    "scale": 10.67,
+    "topDown": {
+      "width": 1.477975632614808,
+      "height": 0.9906279287722587
+    },
+    "files": {
+      "action.png": "fb7693e2ed6e1ca36404a449907cb6c9dcf0093e029e8766d4b1292f1ec8a9cb",
+      "appearance.png": "ae5f29f7de78e674d36aab0b328c19e87ff724c466b05a50d6aed2868034a31f",
+      "capture-config.json": "480aad614fce19a46bd5a1835504fc914ed5a011b59949786aa25dab66a9d304",
+      "comparison.mp4": "a0838e907946cc38abc0184c27140e7ca0c8c8cfa57eb39dff33439f375198ca",
+      "flee.png": "07c5d86a08d2c2e0ed8b3619105d45a932aed2f35612d58e4ee4a5545f37d228",
+      "model.blend": "375aa0cbeb899f93a3c83333acc6d412c053d914bf18d0e79d369f8d9373f6e5",
+      "model.glb": "dfc45e47daa040f68bc93af1eb5be295bf2e587dd6f63f91cdd6d7022f3d4905",
+      "native.png": "0a090e4dee9d1e2c8e410c5adf38ea445c09161a975e7bcb023128951eb767b4",
+      "walk.png": "e75051116ea409486e600b56ab56c7b295ef8013e31f9e1c5ddf56848f9529d3"
+    }
+  },
+  {
+    "id": "rhinoceros-dryland-grazers-v1",
+    "type": "wildlife-rhinoceros-provisional-v1",
+    "name": "White rhinoceros",
+    "batch": "wildlife-3d-dryland-grazers-v1",
+    "lab": "rhinoceros",
+    "scale": 14.84,
+    "topDown": {
+      "width": 1.123989218328841,
+      "height": 0.8483827493261455
+    },
+    "files": {
+      "action.png": "ebd8f42a69f0ce134d951a330b5eb7e48be02195ed71d53751e84c291409535f",
+      "appearance.png": "31782da02aa0bf0225b1c8f54a59c0768dc3044ddcacaa976268688f0efbcbe1",
+      "capture-config.json": "1d87dff76515a0dd31807245f63bcaa9c8accce93f67d10fa23b020b6f70e240",
+      "comparison.mp4": "f0aea88a276c8af6c76b4d5d5c588b23684de576ce63a33d6c2f3bf5176a4599",
+      "flee.png": "bb771d82fe9d7677b106771d8cdcc7384dbc45ac6b7c32085cfa7c4f3e5c615a",
+      "model.blend": "eaf7b36bdface0228ac682610bed03262e19831d5dfabebc20e44535abbde554",
+      "model.glb": "0340082e3911c5d3b4fec9270efc2136183e0f9e0dddc016061055a62775f779",
+      "native.png": "e5466433d8ca4310d519dbc5044411848c8c204b9c748b7a93eba444074f5e4c",
+      "walk.png": "30d5ee927afd2aa9ace170cef0474de76d214d0219f45d097ce05cc0413765b4"
+    }
+  },
+  {
+    "id": "deer-woodland-browsers-v1",
+    "type": "wildlife-deer-v1",
+    "name": "White-tailed deer",
+    "batch": "wildlife-3d-woodland-browsers-v1",
+    "lab": "behavior-deer",
+    "scale": 12.8,
+    "topDown": {
+      "width": 1.1984374999999998,
+      "height": 0.8664062499999999
+    },
+    "files": {
+      "action.png": "97648218f826fa08028d907857be1d69eaff714ca81e9f5973a8f1b333e261cf",
+      "appearance.png": "eadfaafc5d43f25d4d8ab17fac18176a7ae458d4b78f28b8537694cc09ce21ea",
+      "browse.png": "a1bfde06e8dcdd712b24a266d749d3e12b8bb58762b5c668b5bf56ba33e81f47",
+      "capture-config.json": "60b314e73ee53de974c2b28ae330d9caafce47787ccc2cefb02c5c30b2aaba41",
+      "comparison.mp4": "f88a085aa957d02db4d5cda639b700c0008eb7045b4d92ced0242f7fd213421e",
+      "flee.png": "3437b37f92d72da10c84e85891993cbc04b365de10466486b4bab88c5db64fd9",
+      "lower.png": "b605113f6ed8849a2995198a27ab64eae9025f1e5526857f384854818538a8d9",
+      "model.blend": "b9ae819d444b5ee5bdcba226f16a25f483a737cbce73cd5dd717ef2d3826f07d",
+      "model.glb": "79acb931a4656556579d52bcb670852027d51ba70a4bda8ace4a41cb743da92c",
+      "native.png": "c3d14e35cc4a320ca02c15a3adeec9512548d3bdd6323a3a0318f989b90a2c6d",
+      "raise.png": "bfa0d173ec695eab51f26e3c0e750611554e5d8f84852d4a66a47c2a83ff78f1",
+      "stamp.png": "e0873cccc4235ee81e9196b2f7d90429f2b304d635930b1875b7576986196b59",
+      "walk.png": "a9a733dcb3a48a1f3ababa889dbdd38563931b97e3b324b73311c0315d2582c7"
+    }
+  },
+  {
+    "id": "okapi-woodland-browsers-v1",
+    "type": "wildlife-okapi-provisional-v1",
+    "name": "Okapi",
+    "batch": "wildlife-3d-woodland-browsers-v1",
+    "lab": "okapi",
+    "scale": 12.52,
+    "topDown": {
+      "width": 1.1621405750798723,
+      "height": 0.8282747603833865
+    },
+    "files": {
+      "action.png": "653c4be71b293d429ae4a5d6892e157b697cde48465a7e5ea3b62caa7df1459e",
+      "appearance.png": "1373d751fd91a75299cae1f74c31beb77dab891bdffc56340d08f66a63a6c9e1",
+      "capture-config.json": "147c8369c9cf26819f73e5676367e4e502cbc5457475956346a7b1fecd50621e",
+      "comparison.mp4": "ab33a4c6543a305fab8a13a23b07719cbfcf223ee6c925dbc45761c91493e675",
+      "flee.png": "fc0e9cbd4b1924e8aab5cede57fbd4d37397d0e5ff5041e6de7f0421bb5e61ec",
+      "model.blend": "6e39fb04f4ecc458f1e7fc5bb5ecd12a6feb38c122424607779cdf200beab778",
+      "model.glb": "aefbdc5b397679cb9fffa9cfdbfb3ac5c7c29020948b5a95fd2052cd655976a4",
+      "native.png": "f1e5369c2dc342c48c15282ee2af411edbaa6e6fdfb7172bae973d9852273bb6",
+      "walk.png": "9511577e6329b19be2e3a42a20341286bf5ac7bb0cb913e21c4e19ddb41bc2a3"
+    }
+  },
+  {
+    "id": "malayan-tapir-woodland-browsers-v1",
+    "type": "wildlife-malayan-tapir-provisional-v1",
+    "name": "Malayan tapir",
+    "batch": "wildlife-3d-woodland-browsers-v1",
+    "lab": "malayan-tapir",
+    "scale": 14.59,
+    "topDown": {
+      "width": 1.1103495544893762,
+      "height": 0.9664153529814942
+    },
+    "files": {
+      "action.png": "6439fe89ecbd9e0f876b62883255afae594a7e778ff1de31e5f39ec9aa624560",
+      "appearance.png": "62270180182b5386b67c2216986086e3ba432ec33a626e7c2272c1c46020847c",
+      "capture-config.json": "638085f685e366ccf221f826e6667c6b58951a60837ee775b55e359015203a82",
+      "comparison.mp4": "db2bd534ac6e8d67e5e2d7e107ebcbf633f80ec83e20a7962368ef66d0a0f595",
+      "flee.png": "50ec4b9770ec92c0d34b2b3cf90116cdc360e9b99ce23d7fe583af29bb82f3e9",
+      "model.blend": "5ff418f8be1c67ee7579bb41626e6d09dca97b2d9ba65e7c05e898a93d925cbe",
+      "model.glb": "54d6f41657a1edf81a09ae89524ea07b5730f6d225ba76fe6ad18d79424dc7e3",
+      "native.png": "f7bb63926c2967d6cc607ebe2d07d5cc836395b7120d8135c45a44dc515de097",
+      "walk.png": "5f60c494025950bba46f73fb545982da08cb20ed6b5646c1cbfb0350e20ec45c"
+    }
+  },
+  {
+    "id": "llama-plateau-herbivores-v1",
+    "type": "wildlife-llama-provisional-v1",
+    "name": "Brown llama",
+    "batch": "wildlife-3d-plateau-herbivores-v1",
+    "lab": "llama",
+    "scale": 13.1,
+    "topDown": {
+      "width": 1.3236641221374046,
+      "height": 0.9465648854961832
+    },
+    "files": {
+      "action.png": "78233806bdfabfd9dfb6bab13e72580230177f4ceb115ae31d04f889b576217c",
+      "appearance.png": "812141c06d50073086ff66999f01a5fa3ceb543c9d848d9122177a650079f514",
+      "capture-config.json": "ec2fb95e88c7ca1a1a1be7f83b509a9772d3de6459136b11be9543ff70f3cd6d",
+      "comparison.mp4": "80f1ff481ba04366c67504a650a468fba167fb7f973d32903bfa1a4891dfa3cd",
+      "flee.png": "49ad2de911515eaa87ed0c6408d2a15ab2bfba745fa2b46bac38ded5a6abd1f5",
+      "model.blend": "c284a7a2b482542568acc91bcae3b70f560b5bac9e7d843127beb26c601dd970",
+      "model.glb": "ae5581e0d848445fa136cce04341eac0ae1be546450943229af33927c57e8edc",
+      "native.png": "eb36054ecac6a51f135e9fae8e948b67cc2d93dc6821e272585465ff90fa1d9c",
+      "walk.png": "14453c7db3646d2b83ad114af592272395fc78ebc39b4ae8b349514a0ed88a6d"
+    }
+  },
+  {
+    "id": "alpaca-plateau-herbivores-v1",
+    "type": "wildlife-alpaca-provisional-v1",
+    "name": "Cream alpaca",
+    "batch": "wildlife-3d-plateau-herbivores-v1",
+    "lab": "alpaca",
+    "scale": 12.6,
+    "topDown": {
+      "width": 1.3238095238095238,
+      "height": 0.803968253968254
+    },
+    "files": {
+      "action.png": "352a2f70a3d9489eaf10c6d2d2320e19f2e2aa6e6c707a627f48362f776a524a",
+      "appearance.png": "bcf388c4e837804bbeb0abdabdc4a2df4d7183304b96fb5f9b919f0d79f0845d",
+      "capture-config.json": "52389347142008ee007a1ed82ecf8c3caab73de0fe397d8f30b2536d52dbdbf8",
+      "comparison.mp4": "b1af6ce7614fc55354df614bc0b3963e16fa23dfdeda7df5c734a0b76940664b",
+      "flee.png": "acda25dad3872c84b3fea0e0d3cd2d2bb420e3b95600219867cc1c643096d718",
+      "model.blend": "0c93886d96f111191b1dbffb83e068a27bee96f00a0fb83d8af3130c87714fe1",
+      "model.glb": "453734abca89ae91cd94098e79282174e9339258cb21350dae558e903d4efcc6",
+      "native.png": "7dfc2a9347e75ff878ad2d5e4076f804ef66e95186af25c87452ecdc02a4f81b",
+      "walk.png": "df6797ed5071a0db64762643532ab673ba17b69867c5324ebc2c285fea924e36"
+    }
+  },
+  {
+    "id": "warthog-plateau-herbivores-v1",
+    "type": "wildlife-warthog-provisional-v1",
+    "name": "Warthog",
+    "batch": "wildlife-3d-plateau-herbivores-v1",
+    "lab": "warthog",
+    "scale": 12.4,
+    "topDown": {
+      "width": 1.0758064516129031,
+      "height": 0.7282258064516128
+    },
+    "files": {
+      "action.png": "ed5c7af5c8e07d17a13c8c6a82b3d26201bd8b72b29f2e34467960938f41a0fd",
+      "appearance.png": "e0251c5fe935eeafc9c43f32b7b950cea7d7d636a1b7b03dd3eb3362516c4315",
+      "capture-config.json": "b6c340ebdcfa5d06a33b2842fb42ec9094ca8f81b138b53196266af9e714450e",
+      "comparison.mp4": "1c52ab5dfb60de42016be9ba380e3fd15ef7a2ff821971f2c94c85b7f5ec05a7",
+      "flee.png": "25c71dcb9e343cc133d5fe67771bbb828d8be41f85a815fb2033757a4a641b87",
+      "model.blend": "52ddff344296a6196de37a6b1b09b7572e206b381735b45780c571689203b98c",
+      "model.glb": "c8da08a8715fbf7de5a6390499cf64adeac8448c55b2e1536e4c5fc34dc11cae",
+      "native.png": "b41d1ff4018bf1e926007a104bcf58207a1d2ec962bab8f104b363747dd03840",
+      "walk.png": "442ecf8dd9657626f78e8e7f5e0705a5a832a3cd7cf369bb96f71ed827a4d577"
+    }
+  },
+  {
+    "id": "gorilla-great-apes-v1",
+    "type": "wildlife-gorilla-provisional-v1",
+    "name": "Silverback gorilla",
+    "batch": "wildlife-3d-great-apes-v1",
+    "lab": "gorilla",
+    "scale": 18.72,
+    "topDown": {
+      "width": 0.9102564102564102,
+      "height": 0.7414529914529916
+    },
+    "files": {
+      "action.png": "ae4c4981987f32c3646022c13c6dd40081425857c480c29e14444f2271ad0dd0",
+      "appearance.png": "6674ea5176df4cc03716ab41e7eae22a838bd1566dc38f7e5f731194a05a8dcb",
+      "capture-config.json": "f83bceee17ad710a6c7ec97e3b969c4d6dd92a9d9faaef8011dab7bb5b34593e",
+      "comparison.mp4": "e4c52cfd7a8c7de0126bafc1850d880a2b4e05e64ac23f13b38dfab738d9ec65",
+      "flee.png": "44cda2855f92b5515095c6ca50a61ab53c6595d40c6c855597a33f4fd97035ba",
+      "model.blend": "aeaa1c383f6584437524d338dedf470f0556172158b867b59ddee17dc2169457",
+      "model.glb": "30ddb33c7b5a01f1a76d6107e737d63205e908fba97009d6dbecb9edc21736a6",
+      "native.png": "3caa6c8efebb68d526ae35fa6f563207067491af14e0281522eb85adc3668872",
+      "walk.png": "bb46bbce739ab96a0f9bce0bac1d6c4e3a5ee826be58d27706522d81105e9f68"
+    }
+  },
+  {
+    "id": "chimpanzee-great-apes-v1",
+    "type": "wildlife-chimpanzee-provisional-v1",
+    "name": "Chimpanzee",
+    "batch": "wildlife-3d-great-apes-v1",
+    "lab": "chimpanzee",
+    "scale": 17.47,
+    "topDown": {
+      "width": 0.7286777332570121,
+      "height": 0.7784773898111048
+    },
+    "files": {
+      "action.png": "bcd7dbdcdd15ceff4dcd7b6e173877a28e1eeb7b627d5354eb58ffd72fd07a4b",
+      "appearance.png": "17a80ead08995a7734cd8b15affda80f6843dd2a32a0316b85a2393eaf296ea5",
+      "capture-config.json": "5645b0f7ea49cd89e24dbdd21603be6c574fcdd09f6e4a882cd02c02afe48c4e",
+      "comparison.mp4": "409e98da12502b481c9fe4c00d22530e854133cbd0d90b2196df3b5ccc9e25ef",
+      "flee.png": "13ce9c5f8d58ea796badc102acd0961647ac2fa470acb5d654f997a6e5f0f115",
+      "model.blend": "2c5b0dd238e9394f39839bb14827ac1f4164a583ed4ecfd47f6c075e6a453538",
+      "model.glb": "408b1e904402d66a8099b8cea30965c1e7307b68147d884a8f871c73d0b2d528",
+      "native.png": "17b6bdb5528675b48471f11e2fa536e92408316e6e0aaeee53e39daa03516c47",
+      "walk.png": "7e2320788650c9ae73615ab807ed3ba9a2f5cc85a8fda1cdccd893b5fa35c60a"
+    }
+  },
+  {
+    "id": "orangutan-great-apes-v1",
+    "type": "wildlife-orangutan-provisional-v1",
+    "name": "Orangutan",
+    "batch": "wildlife-3d-great-apes-v1",
+    "lab": "orangutan",
+    "scale": 18.72,
+    "topDown": {
+      "width": 0.7622863247863249,
+      "height": 0.7574786324786326
+    },
+    "files": {
+      "action.png": "6b329a91f22f8f23c0762c987b38d5219d5c5c8bca3c19fbadd58f6112311f58",
+      "appearance.png": "71a9d94978d00a3d0d8b96e0634c586197e6b8e62d3729f1cfa278880256dc74",
+      "capture-config.json": "6e58531ca9d76aa65d5e1495df361de7db5cfda8204a50c8c244c0b0f1820a98",
+      "comparison.mp4": "346d8e0f2a6e9e8e7219b8f1267ff6e1e11c25d5db24f90d2fbeabf4a848806c",
+      "flee.png": "b12fce87723ccf6681a5369219719373468cd853f672d7a75bc7d9e19bbfb37a",
+      "model.blend": "4ccdbf0b61c8815ee4dc40c9f99025439c56b53e0da25126067e060d99f9e2a0",
+      "model.glb": "2fb188e176e17288b628931fb26c3004fa68878132e0f1a830100ddb585bfacb",
+      "native.png": "cee7889cb612bed1b818944acd895379875bb150b1a8d28750d3f700fa86beea",
+      "walk.png": "94306b7e6bbad1df980c88270509f849e7e810ff3ac1ca1e8178af7360b37570"
+    }
+  },
+  {
+    "id": "japanese-macaque-forest-primates-v1",
+    "type": "wildlife-japanese-macaque-provisional-v1",
+    "name": "Japanese macaque",
+    "batch": "wildlife-3d-forest-primates-v1",
+    "lab": "japanese-macaque",
+    "scale": 18.72,
+    "topDown": {
+      "width": 0.6543803418803419,
+      "height": 0.6474358974358975
+    },
+    "files": {
+      "action.png": "9518db2961ea8e880c237e6fc5039671bed11c207e96f14b2b2213182fc5ed82",
+      "appearance.png": "e04a215380fdb97c761ca47d47da74dfae3824fe248fe6ba40e4da288c6a2731",
+      "capture-config.json": "1805e8b7ee73fa461eb3f5af46c5dce71f1b7eba67ba7b45a2b4d7b496ae0724",
+      "comparison.mp4": "8f33e26563a93e6c367332dbaadf7f6f332c83f7fb59ec5fc317e73665a9e69a",
+      "flee.png": "a593e6fd54338f0cfa203b03ca88b5fb615c1db9a0e9c917372c75b724f825fa",
+      "model.blend": "b2ff41aa93fd9349d2ce16a8a8cb94714c841c5d34387d7e4af6fb9cf927195f",
+      "model.glb": "12dcb40bbb8164aaaf93dccca9c1f780f830f9c2e197080dddc74d1b7bcd1986",
+      "native.png": "9d7bc5f3c0b80626ed36d17c7ade7a656b820bfcf443311ef2ea6d856bac0b2a",
+      "walk.png": "bdb85da9a4d3b6ef7530c27b9dc41da2fee750732cb6936feadfeac08b8edeab"
+    }
+  },
+  {
+    "id": "mandrill-forest-primates-v1",
+    "type": "wildlife-mandrill-provisional-v1",
+    "name": "Mandrill",
+    "batch": "wildlife-3d-forest-primates-v1",
+    "lab": "mandrill",
+    "scale": 18.72,
+    "topDown": {
+      "width": 0.7847222222222222,
+      "height": 0.7264957264957265
+    },
+    "files": {
+      "action.png": "5a1e32c2ae0a833f97321393db98b3508e35ad4c9c7bce569e9ed19729da506b",
+      "appearance.png": "49a5c9a0fd2f9e67c1e7c675893ba25d4b7109811f1d50dbdb59efc413c13bd0",
+      "capture-config.json": "a6455a99be15b132085f7690fa06b92c56fb98081705aeb860eb01f9b921c180",
+      "comparison.mp4": "b8502a6211437eeef40d2a59a922acb06a3970e38cabcb2a2f5ba96d7a3df845",
+      "flee.png": "f30aea101dd44b2a3fff639e29624d60ab7a03b9a763ddd54280bc3440f40b97",
+      "model.blend": "5c80f7cdc7d601271b3669d2010c218e85f462fc623170ee8a9d0c561bdd639a",
+      "model.glb": "9420db3044ec997eb727f2bba53ec620f58f9f4c232414bc04ad128497fe8a60",
+      "native.png": "8c3a5be658998d232fb2aced14a5752b74c20f47b74b7301abd23dd7e11c7417",
+      "walk.png": "212fb13a18c19d16c14aa59c263a39ac79882263c39a10dd752a2fe41e8a2c23"
+    }
+  },
+  {
+    "id": "proboscis-monkey-forest-primates-v1",
+    "type": "wildlife-proboscis-monkey-provisional-v1",
+    "name": "Proboscis monkey",
+    "batch": "wildlife-3d-forest-primates-v1",
+    "lab": "proboscis-monkey",
+    "scale": 18.72,
+    "topDown": {
+      "width": 0.6800213675213675,
+      "height": 0.795405982905983
+    },
+    "files": {
+      "action.png": "a4aa3ac95f5ab24d6e3a08d082c28330102c9804eb65f6a1000091399d547e9e",
+      "appearance.png": "416b333a006ef4bbeb3591ef3f524cd3c21971969747773a0ecd95e72b384f39",
+      "capture-config.json": "5ba1e0c46d4981b5abe16719532655b1aebc300f3b83151ced9c5ac527e81e6d",
+      "comparison.mp4": "f1f5e613025d1cb27dbc2373e626a4f2a365816ffd3bcb25fbf62d2de98de8f7",
+      "flee.png": "0feed9b26fb7ae209b282c112d9da4729be32b7a4917377ceeaa6d862fb0b6dc",
+      "model.blend": "01a24b93cd3759f6937d7a5fc1a303a01db972fca2893e3dbfe3247e7a4bcf3c",
+      "model.glb": "3e3c5e60f22b50f5202282df546c018d47b0677958e59f58283271eb07b51725",
+      "native.png": "a7d519b6f838fd7f2a179f6264ce695f3cc2b7268db40ecb5ec52e9ece1296b1",
+      "walk.png": "a9a9aef4a15a25355deb3cefd5e0fbb17a64b2f51d4a9dca75dbae7cf8ef7328"
+    }
+  },
+  {
+    "id": "ring-tailed-lemur-forest-primates-v1",
+    "type": "wildlife-ring-tailed-lemur-provisional-v1",
+    "name": "Ring-tailed lemur",
+    "batch": "wildlife-3d-forest-primates-v1",
+    "lab": "ring-tailed-lemur",
+    "scale": 16.88,
+    "topDown": {
+      "width": 0.7659952606635071,
+      "height": 0.9597156398104265
+    },
+    "files": {
+      "action.png": "b85c54f8585a8490a3deec1f22f1d6252862bca3697879e9c54f51e90fa1cac7",
+      "appearance.png": "93ecf161422c42e270e0b734bf0f50dbee259a913800e23d7786d31251a32bf7",
+      "capture-config.json": "2f6433ad54b1d71c872f520b6f4fa3e25bfff658c097ce87d1ecf90f45370745",
+      "comparison.mp4": "df3e3d41b95d7317744587430d305112ec17cb069c803633010063da8c49225b",
+      "flee.png": "bb0613f82edc2b57f5a59e24bf000f9892d8b56cf296fd4815cd046dda673c35",
+      "model.blend": "2af0f50b3868d190172e7a4a766f7feab4605af63e236d094e4e8e7219a80419",
+      "model.glb": "4c8d825fdcde83d25cf66a03c4ad4ae02e2b45d1cc8d2cba20fc3fb68cfa382e",
+      "native.png": "7851f432ff3e4727176ef755206e0e5b405508411f06beb54f8f9f6f77b67306",
+      "walk.png": "c1ad397701870578f49198efd96ee78f9ebb6cd1790648920122172b97092dc6"
+    }
+  },
+  {
+    "id": "elephant-upright-upright-herbivores-v1",
+    "type": "wildlife-elephant-upright-provisional-v1",
+    "name": "Upright elephant",
+    "batch": "wildlife-3d-upright-herbivores-v1",
+    "lab": "elephant-upright",
+    "scale": 15.68,
+    "topDown": {
+      "width": 1.086734693877551,
+      "height": 0.798469387755102
+    },
+    "files": {
+      "action.png": "64e284fc87cc7e150696812958bdcf0903153357bb4ac868e935c0e5dd3afaf6",
+      "appearance.png": "00daa0f27caffe7c612f9521353f07b4e218253c59070fdea8279c389ac1e678",
+      "capture-config.json": "5423bbff8aa901e0bf9ae3cb8d2f3605155393ca74af67f46707734f7ae8a5f6",
+      "comparison.mp4": "99c5b0ad150965522c6c815d4ac1e1235cdf59367b124505f8cbdc152e9b3c38",
+      "flee.png": "831bac49efd1e0d702c20bda6c1ccfe786250354db82cdbfdf79c224668e908c",
+      "model.blend": "9a46effa69bfe45fdd70bee84ae347f5ee83d306619d8d5ca468c734e8bb6d68",
+      "model.glb": "3ecae9181dd0625f21460e5833ac8f87f397dc3e21fbf22a10943421f2a844f2",
+      "native.png": "c12108e182a28fee110f253962f5e2b5a61ea9720dfdc2b38c551d6033566b50",
+      "walk.png": "3ccd6f24e5870607092258e9e90b33814fcd2cca05721d9e3f99bad76d2d17d2"
+    }
+  },
+  {
+    "id": "giraffe-upright-upright-herbivores-v1",
+    "type": "wildlife-giraffe-upright-provisional-v1",
+    "name": "Upright giraffe",
+    "batch": "wildlife-3d-upright-herbivores-v1",
+    "lab": "giraffe-upright",
+    "scale": 12.66,
+    "topDown": {
+      "width": 1.20695102685624,
+      "height": 1.2061611374407581
+    },
+    "files": {
+      "action.png": "0fd5ff123b11baeea5cfd511406c3994ff6399f7c887c0e9f45f0a2dcf2c51e2",
+      "appearance.png": "c42ebf0517e52097b0e92d401b1d11e22d026dfbbf83b7100a6d61ddb3691498",
+      "capture-config.json": "5a9ac536b96f16ae854773854772b6525ad16f787f2f75ed4d0270e34a8f5fc1",
+      "comparison.mp4": "c356b1babe111b7a8d120a444740695cf68633969e62930352bf7bd0a9a33d49",
+      "flee.png": "5e165326116174b8c8e8d26e872e92e10c66719eef4db4f52e3d19428a699341",
+      "model.blend": "c9a48b931c237446433ef4824d991c4f1c38fcfea4c1cb3a1b46ca781e6e7fbf",
+      "model.glb": "47800c6f8439c105fdf74495c4b8186c695020521b6f4c381250320d406c526a",
+      "native.png": "410ea4f61b53d0ce4b95156f6c8e2df08c9720919fb202c8704fa80af3a4729d",
+      "walk.png": "a83e477babc4232c07635d800562271e9f2d031ee330099e60dccc345fbf66f8"
+    }
+  },
+  {
+    "id": "elephant-canopy-and-fruit-v1",
+    "type": "wildlife-elephant-provisional-v1",
+    "name": "Elephant",
+    "batch": "wildlife-3d-canopy-and-fruit-v1",
+    "lab": "behavior-elephant",
+    "scale": 18.92,
+    "topDown": {
+      "width": 1.022198731501057,
+      "height": 0.7690274841437632
+    },
+    "files": {
+      "action.png": "ffd0edc14df6cc3fa013276340cb0c896bd2a7528feae40b3662c0043d105a33",
+      "appearance.png": "748daddb31b02fa892425fb85e562148838d49715195b4fcf2daaa3770ff157d",
+      "capture-config.json": "17a06f99906bbe7a9d34b7a5c7e28f37a788a62c4563640147ae39f51db0cbd6",
+      "comparison.mp4": "229bb2778757a7a15085eb2ede33426b7197beeb7ae8bead56d6053135e28a12",
+      "curl.png": "2b6af00019af66d68c69048a4e70dc198cd2365da2266e9b2e973df38794f6bd",
+      "eat.png": "8c275fa3c6036d6aadbbc0e75f777e3999b07c85dfc390c15186810d59eda5df",
+      "flee.png": "1746a8b2be4549d5dfe0a90f3d72324f133c4b5d4c93789616969107f455220f",
+      "model.blend": "b216754202fd77f2486ccdfa98ac825ab92166310177f0155f6c38f908d29baf",
+      "model.glb": "cf70da0c4c71aae8026bf91997ec3c259edb5cb1419c3cab1918dd69fd53c7a1",
+      "native.png": "7e61c0c8face6f3421a02247fe100ff57dc7e544b89cb4c9e33e11d8c2c3673e",
+      "reach.png": "37d29ad8fb0e5746586807fb5b059a0fe00aa02834131470dc8a0f2a59c7a26f",
+      "shake.png": "261ff80138cae8652f0b0b27a283e0efad49d1d9d21ac60d273156132798f7fd",
+      "walk.png": "84538b5c6412f10da034ec283a57a3ec10c4227324308377c896a918209dee8c"
+    }
+  },
+  {
+    "id": "giraffe-canopy-and-fruit-v1",
+    "type": "wildlife-giraffe-provisional-v1",
+    "name": "Giraffe",
+    "batch": "wildlife-3d-canopy-and-fruit-v1",
+    "lab": "behavior-giraffe",
+    "scale": 18.92,
+    "topDown": {
+      "width": 1.022198731501057,
+      "height": 0.9006342494714586
+    },
+    "files": {
+      "action.png": "736e9565b9e5c4cb4adecc9a034dbd40cdc5a0a693da6798e419a59b9b148f39",
+      "appearance.png": "bae21564416356bc6045be2ada663e1eab7b2b230691d24cf55e105a122384aa",
+      "browse.png": "50f16bc9ddb734d18f410b927f3238f21f0d3e9d165968166a81b4bc5d3eee4b",
+      "capture-config.json": "8b8c5ab6bb668b00b2b22bc58ab470c47c6457dd46e1f7a33a7b4fcca0c1289a",
+      "comparison.mp4": "9ceccbb055f1781c698a391d2796bb10b736dbb300a5547957eb5793664ac592",
+      "flee.png": "0fdaa7c9674863d3a66f09a680e5fcea2c1d9b4bebabb25e47468d93d6fcfdb9",
+      "lower.png": "a5425fa8fd79954908b04d6304ca6bdf233cd6cad653924b7239a9e96ca2a196",
+      "model.blend": "ccb48c1038da799925abd06dfa03a159a1d2f0bb0424414ca5c373850a7655fc",
+      "model.glb": "7f2324138d34a47b4e76186087df2839b33c58aca291f2a666f982c3f7b0c6cb",
+      "native.png": "fa6893047b88e35e6806081d8e2b536f900bf94e5ce5587ad4ec5ac2db9c54a2",
+      "reach.png": "e970509728220a239fa66a7d46279106aff7b6ccf6d08294a2d3894555b11f7c",
+      "walk.png": "501b18054ffd390b9addb08316e7ce57c930f0f0ef2e946ead1ac3df9f7d6da7"
+    }
+  },
+  {
+    "id": "mule-pack-mounts-v1",
+    "type": "wildlife-mule-provisional-v1",
+    "name": "Brown mule",
+    "batch": "wildlife-3d-pack-mounts-v1",
+    "lab": "mule",
+    "scale": 11.88,
+    "topDown": {
+      "width": 1.3905723905723903,
+      "height": 0.9309764309764309
+    },
+    "files": {
+      "action.png": "11d59325ab431e8b204603e38835d639fa83a93a5b47ed74e012f8e8a27ca7e0",
+      "appearance.png": "34e66a80ff546511390ba44d507ab68814f74b596d2a584325b6e4fb37a9becb",
+      "capture-config.json": "86b0d3a1458b06f29a54974a5e12d4a90bb38557bddbac9e484ca1da18d1ec73",
+      "comparison.mp4": "859dcb5bc174eb435ac905997594c8b1e9496850a682d2a502de322cd99cf581",
+      "flee.png": "570173548c1c4d51500e32e7421fdd705f8a7b40d3c10dd9c83f247e1be3447a",
+      "model.blend": "ad894c7c1558857ed3ae71d69c9a59adc838460c90df582b5be3d9d533b61d0a",
+      "model.glb": "b958ad8e21b84510775f62acd70aa87bdc2c7a6714d15d956ba34321f683bdb1",
+      "native.png": "fb7e9aa3c79ad433317a731a4d85b96ab2b535ad1d2cf8924814d9cecb57eb4c",
+      "ride-sprint.png": "1463c0807cef06d7195abbf753a9161dcad63d6be3cf3f5676823d4cfe170e9f",
+      "ride.png": "aefffaa3cb9d616b63cd43dd6dd01fa5bf43fcc84665df851d694b98a67c96f6",
+      "walk.png": "364030079bb8e3def3fb83e4bfe34008c06f65e709ee6692bb146aacc7e18814"
+    }
+  },
+  {
+    "id": "camel-pack-mounts-v1",
+    "type": "wildlife-camel-provisional-v1",
+    "name": "Dromedary camel",
+    "batch": "wildlife-3d-pack-mounts-v1",
+    "lab": "camel",
+    "scale": 12.96,
+    "topDown": {
+      "width": 1.287037037037037,
+      "height": 0.787037037037037
+    },
+    "files": {
+      "action.png": "51d35a2ce686ff087280ad99983ef9e9a086c2724ac6699f3e8ff68fcf73006d",
+      "appearance.png": "f06f0f0106dc3b6dba594f745d92f6cfbaa87d5df58e823a9af4fe54f8ae21b2",
+      "capture-config.json": "e302091af3746ca16357346bac12a5feb74b758b0859a92efd6b340ad04c58eb",
+      "comparison.mp4": "f1017241798a3dfe06cd0d29ea71018eb3caa1289188da45001693c5ce0f5cbb",
+      "flee.png": "3d592c5710cd92151884d8bff7e3072e4c508688de2726391174893297c5dceb",
+      "model.blend": "f893a5794fb9d1774834cab1a950c72313c9a64aed259935f43351df4dc3c059",
+      "model.glb": "77209b5e268a45cf9c9f43ee45432b57dac7409251bb66b69c4a0b39708a11c7",
+      "native.png": "b47ba6d21123f37301e281ea4305f8f40b0e757a448c2c99d7c8926fdf286961",
+      "ride-sprint.png": "12fb450dd1126d0898d0b2bc7efda0286f93609c0d18874445983a746aa3e6c6",
+      "ride.png": "6c515c7a9db96f221185f0e15d6961439e71b1a972cf614eae4404be6a27e5f1",
+      "walk.png": "62b68220794e4f65688b1a4ed106f0878948a1cafee4d02e1440ca8eee02e6ea"
+    }
+  },
+  {
+    "id": "kangaroo-macropods-v1",
+    "type": "wildlife-kangaroo-provisional-v1",
+    "name": "Kangaroo",
+    "batch": "wildlife-3d-macropods-v1",
+    "lab": "kangaroo",
+    "scale": 18.72,
+    "topDown": {
+      "width": 0.8162393162393162,
+      "height": 0.8018162393162394
+    },
+    "files": {
+      "action.png": "aaeabb08c48c68a50701c2ffc223114a1ef025d0c1dad152f782cec7e130efce",
+      "appearance.png": "6c892b45cead54b8582b16f214533208654013dd4241b27084fcb7daa70d9282",
+      "capture-config.json": "87f38ea0785f57888a8ecd18750e760d2ac73c0201059bd015b23bbd1351847b",
+      "comparison.mp4": "e48ce2561987b728b6b0a13bd0ef32c9badc4787fa47c2c82ac9adc48cc78536",
+      "flee.png": "55625b12d34f231f088799bf8aa54e43d816e6ffb75f25c7ea19780570c7b9e5",
+      "hop.png": "ffdfedf4309219269d4628d28803bd420d0fd147cc3b2b5eaf3bd90883b432b9",
+      "model.blend": "0556e38946136999a90a6f5168180c935c50c3f851d409f042b5a5053620b7dc",
+      "model.glb": "cf46eade1dffb27607857014d13c52b2846dcd3ffc2deab68c6cc9fa69e143c5",
+      "native.png": "a18a393eb6219510936f17216c8ba0fc4728f898d554d3fe209216712a70590c"
+    }
+  },
+  {
+    "id": "wallaby-macropods-v1",
+    "type": "wildlife-wallaby-provisional-v1",
+    "name": "Red-necked wallaby",
+    "batch": "wildlife-3d-macropods-v1",
+    "lab": "wallaby",
+    "scale": 14.08,
+    "topDown": {
+      "width": 0.7670454545454546,
+      "height": 0.6569602272727273
+    },
+    "files": {
+      "action.png": "b256eace32cad421e53cca866c7b395cf2ac4181db8f40ff68bd8472b1e391de",
+      "appearance.png": "23e6bfcfd56b15389ea6e6efdac8fdc76b695e697d1647ba0a8d86f546e55c7e",
+      "capture-config.json": "713b3579edf7c4431680e9db15e6c8300122888c0516c179067bb176d7f8e378",
+      "comparison.mp4": "e8a667f1534dabadc76ae2056578926458d051e633a7ef609a25e02df8fc64c6",
+      "flee.png": "fcb768831b59f3a9597aec7bb33dda4c5f27fe052d1e5f8a58bbe2050cf55077",
+      "hop.png": "2e14eb4a53e2891ca69dee8107768c129cf77291f5cd61d9bd0cd0c428940d54",
+      "model.blend": "1bf8ad1430b54ecd9ba38a2db7f73cc687b11014cb5611b31dcbd15e37c47b71",
+      "model.glb": "81eca71fd85fbf799689c993f3181fe4130835d1e39c7bfc13ba4404d8b32db2",
+      "native.png": "c1c1c62f8f06cb853aec03238a369618416ccfc8b805d1ca3b1f7a50f950022b"
+    }
+  },
+  {
+    "id": "guinea-pig-pet-rodents-v1",
+    "type": "wildlife-guinea-pig-provisional-v1",
+    "name": "Guinea pig",
+    "batch": "wildlife-3d-pet-rodents-v1",
+    "lab": "guinea-pig",
+    "scale": 9.67,
+    "topDown": {
+      "width": 1.138572905894519,
+      "height": 0.8459152016546019
+    },
+    "files": {
+      "action.png": "7f149ec05e168e3b09854af936487c3994a1df7a0a6b6a83ccbee3e3cd27f6e5",
+      "appearance.png": "f6ffccaea410c0262a891ea2be0c1b95a5d7b48cbbdb063258f4fa3536d3f868",
+      "capture-config.json": "76f151e93440d42def78ff1c3929207833b82086a873caf6d97802210bc92918",
+      "comparison.mp4": "2fc414c19f823f6ca7ba3bdf7c197ac67ccb6b5c4ed723af5e702575f7eb8d87",
+      "flee.png": "379a17c40e62f449a2376f2781197596be163eb2e19d84f781f363934c9e723f",
+      "model.blend": "efcb4d443d9c810fc8b7df990e48bfd238b84325174e21975843306029ea69c2",
+      "model.glb": "36a0be887a95f46acc010890ee85c8939e948fa92045741683d2881f56e943e3",
+      "native.png": "9fb1e89e55e02af6be76de53ee7b2209b3345dd3819cff456c55c3f7f27f3c9c",
+      "walk.png": "4b89f7800425790a88faac5eceeca44dd0ee612b0f9df658046644ac085a95bf"
+    }
+  },
+  {
+    "id": "hamster-pet-rodents-v1",
+    "type": "wildlife-hamster-provisional-v1",
+    "name": "Hamster",
+    "batch": "wildlife-3d-pet-rodents-v1",
+    "lab": "hamster",
+    "scale": 9.87,
+    "topDown": {
+      "width": 1.1752786220871327,
+      "height": 0.828774062816616
+    },
+    "files": {
+      "action.png": "93621f069fb95df4bb582dcb7c0d6f6e67c75068c90ea317b08394e561f7594a",
+      "appearance.png": "ab7cbfdbc69ed297146071c60eb3f0cf8be06514ca2a66bbefff2917395d3328",
+      "capture-config.json": "c5fa3a00fa496dc5217edac0a5188af4302f758acceacb11d706db5847a39ef4",
+      "comparison.mp4": "f630f75ce28235b835dcd23db32d337e98950060de506f3aba7ceb9fc3a1765e",
+      "flee.png": "94fa446c318320629350203eba76b9a38e754c000a2ed584f762868b13c489b5",
+      "model.blend": "db142b237862c8b977ef018deaed94a6386ac34365214fa21d593d1b294e3ffd",
+      "model.glb": "d8a51d8efcb1849e47a04f7d4b732c9f004c1f3cc4cc63b1e50e7f2bb3bbfff3",
+      "native.png": "10eeb658f566d042598b5d8ea2b9e9b216df1143d439918bb3d6d2fc7af32f77",
+      "walk.png": "7838d7e1b1034a2a00bc5c96f3ef16141355fbfc5460bafde5d4d99b43ee5765"
+    }
+  },
+  {
+    "id": "chinchilla-pet-rodents-v1",
+    "type": "wildlife-chinchilla-provisional-v1",
+    "name": "Chinchilla",
+    "batch": "wildlife-3d-pet-rodents-v1",
+    "lab": "chinchilla",
+    "scale": 10.24,
+    "topDown": {
+      "width": 1.1083984375,
+      "height": 0.7890625
+    },
+    "files": {
+      "action.png": "4e4a5c2dcf808b6cc70c4c46d780799b3ad750501e8a5b50f2d0c659e4b7a05c",
+      "appearance.png": "4c84b88b12706b2e435feee8dd34261932cc08d6edbdd722285ce96b7b0f50aa",
+      "capture-config.json": "5a9b1c6c2cd9c2d93fa16defaced67cefda8fc246c1c4b26b62397422fd19ea0",
+      "comparison.mp4": "d1a0102c51b52e61a490ebf3176c4d061b511f015534c263c444f077a2a61f80",
+      "flee.png": "1843514f95c52cb6b77972f97aa217a6599b9d6ca0790414e04e35f38ff55e21",
+      "model.blend": "ee6a7caf742be6f62310055d367cd6ba2a4a5b79c094fc3855a0a6e7c49b9246",
+      "model.glb": "55b0166898265282f99e9318c1f8ac4d6b4710c9e7853d95d85c376f5f9ffe81",
+      "native.png": "ae9252d46a4cb84fe5fe852c365ea43aacec0360262ef811010bcdfa7df5ae5a",
+      "walk.png": "afacffcfe3fb09e52fff51cc1324ab7d96673df763332e11e4f14652c6d70601"
+    }
+  },
+  {
+    "id": "mouse-urban-small-mammals-v1",
+    "type": "wildlife-mouse-provisional-v1",
+    "name": "Mouse",
+    "batch": "wildlife-3d-urban-small-mammals-v1",
+    "lab": "mouse",
+    "scale": 8.62,
+    "topDown": {
+      "width": 1.2679814385150814,
+      "height": 0.7911832946635732
+    },
+    "files": {
+      "action.png": "b1d0b76c5669fadd363c805c36397ef93f29eddf0042bb4099065c5d3ece6490",
+      "appearance.png": "43c2b485ef6f07b3eaae553fe6aa60951c27c330c47fb86b1928fb68509ae760",
+      "capture-config.json": "4febec96ae9d2b17dcda79ee6f951afd239a9ac1252abe8427dc591fded35959",
+      "comparison.mp4": "6712186416f124d8143786333eb8bfd741cc66ad45bbb32d0dc8a9d6850c6910",
+      "flee.png": "dd163dc751c01167b493fd2d922211987ba6191133c812c66b74e9ee8ab63259",
+      "model.blend": "d127e5e88b5d8da2d08bb58dbfb3f3260dce44aae856882f4c09304f5fc8e877",
+      "model.glb": "11acc2f4b27a44ac74795ad0b603caeba70acab7bfdb87bab8439b1a01d5a07e",
+      "native.png": "8872295826b87a1014a4ee02b7f08346897dbe0f685a32adf542448161c144c3",
+      "walk.png": "86a42742748e599554be64130b1f8783e93b17d0df33fd2fb7dbae17daf794d3"
+    }
+  },
+  {
+    "id": "rat-urban-small-mammals-v1",
+    "type": "wildlife-rat-provisional-v1",
+    "name": "Rat",
+    "batch": "wildlife-3d-urban-small-mammals-v1",
+    "lab": "rat",
+    "scale": 11.61,
+    "topDown": {
+      "width": 0.8742463393626185,
+      "height": 0.768303186907838
+    },
+    "files": {
+      "action.png": "06e1fbdd82771e762280ae1fa7df493c9eafec5fabaeceb87913b9ae5621076c",
+      "appearance.png": "af7da96d1b27e7be5614c0eef37f4709ef8912b4e4f5cbfed4cbe1671a2be43c",
+      "capture-config.json": "47fc09e5b5386e5c9ed5dd6dca597afad75bd221a3f3eab62a7e3d8867933cdd",
+      "comparison.mp4": "05f02a1a7e62d5acb85f794964e24f1161765da14b59f212870f69ac5b56886c",
+      "flee.png": "f6d3472a6c9aa4fc7f13e1cb87f2af3249db7b892a914a660fcdeb0a099bb079",
+      "model.blend": "d41cbb5520cb223879c48c48054da2adf8f1febad6d1582349a2014fa7c5b4d2",
+      "model.glb": "63500da1c280666b48983e14f115ba334cd42c062fd393c7cd7abdec53734db7",
+      "native.png": "35ff90842573036f6f8ad895b43182d1246eba56e8991ee213d676c67f665118",
+      "walk.png": "05e2e42f750cbaa6960f4abea6cc4d58635a9b8d5c0e529aa43e10e757f1444f"
+    }
+  },
+  {
+    "id": "opossum-urban-small-mammals-v1",
+    "type": "wildlife-opossum-provisional-v1",
+    "name": "Virginia opossum",
+    "batch": "wildlife-3d-urban-small-mammals-v1",
+    "lab": "opossum",
+    "scale": 12.47,
+    "topDown": {
+      "width": 1.011226944667201,
+      "height": 0.6415396952686447
+    },
+    "files": {
+      "action.png": "b46134fa2a1cddfbd4e523c2218a6496acc672404a5e914816aa1351c9ef27f1",
+      "appearance.png": "cb27ec32dc498ee3ee48a6e08b5863a10bc36ec8ae703ef1b00101b869e9d972",
+      "capture-config.json": "ec3783396992e2d8c9ddc3ead7d64375e6501a67c24498666090d72633dc3796",
+      "comparison.mp4": "dc3a8632317d6c1ffbc3255071024bbbef00b85298e7b414b123ffdd2314b2bb",
+      "flee.png": "c30608c1dee04d726387b5aabbebe81477f8c55eb802a8aaaf299a5ca9c7a73b",
+      "model.blend": "e210ab5ba16f8c76b022a0a62797361fce6bdd8d780a36f3b174803b3fa782a2",
+      "model.glb": "80e2e1b7603b23bc8b716ed4386ebeff2002d513b54319c901230c23e66b3851",
+      "native.png": "1aa52d27531b7ffffa8cc6a64d7960c659213abd2b86bd16c2b43c90f35cd52f",
+      "walk.png": "94edf6f7de6cb528522059e0ced6128c5494a352e068f3b2f8bab3cb67e92775"
+    }
+  },
+  {
+    "id": "quokka-ground-marsupials-v1",
+    "type": "wildlife-quokka-provisional-v1",
+    "name": "Quokka",
+    "batch": "wildlife-3d-ground-marsupials-v1",
+    "lab": "quokka",
+    "scale": 11.65,
+    "topDown": {
+      "width": 0.7622317596566524,
+      "height": 0.6935622317596566
+    },
+    "files": {
+      "action.png": "f82b4a0fba3c368ecf7cff15064f9a4ace443749230bf4d08a2519c1a6b331d8",
+      "appearance.png": "7c4de9bf831b2b3e619800b62bc5f2bb55a0faabe67b61b9e8e8b179f54317dd",
+      "capture-config.json": "eecbcabd4225e627fe222a8d59419cd199a5b94382e751c6e11e97b0bbb123ae",
+      "comparison.mp4": "2c302b70b376c4565538ec88e970d8e680ee85da9e08a896aecb552d08d8fde7",
+      "flee.png": "23f01e189cbdc3ea96c1b6956ee59535a223b110e654331e4609183b83b16aa6",
+      "model.blend": "7f13400884fc51cc3883de8082fde2358172af4bd3648bf1179cab80004d91c0",
+      "model.glb": "ab5484f6b51e7426cf92ffca015ac62412fa2996ad8e947344843ad9c849b90c",
+      "native.png": "825d00d099b1ff8b6bf60d73ff0b382463984076e648091091cfdcdcde3baca9",
+      "walk.png": "8e350c162b58536f0e0d59e6de7a4e509ebd9b5f8b7554b5d1e41097028fa8fa"
+    }
+  },
+  {
+    "id": "wombat-ground-marsupials-v1",
+    "type": "wildlife-wombat-provisional-v1",
+    "name": "Wombat",
+    "batch": "wildlife-3d-ground-marsupials-v1",
+    "lab": "wombat",
+    "scale": 12.47,
+    "topDown": {
+      "width": 1.0553327987169205,
+      "height": 0.7642341619887729
+    },
+    "files": {
+      "action.png": "b8f2e258882a73039e52572286efb63ca70fabef2f54d80abadec120ed1745b5",
+      "appearance.png": "6b8ee18328b0d4f870786a28e6ed87161f2042e9a995e9759dcc0e8e18761971",
+      "capture-config.json": "eab94e488886f5dce680146b3fc2cbdf65a3f2c7bf9e6d92c89b70cb4c7d9954",
+      "comparison.mp4": "b7f184134ba423c3e1060331a5ba467b89923ad17e6e67c7fdb365559f0f4f89",
+      "flee.png": "6c56ba612f0212b88bc5317a770e9346636127cee140bc8f384db084d6677268",
+      "model.blend": "50f55c47cdea19af0fb81407e09f29371ad027e5f6b55a47a2ccbc013d6c12c7",
+      "model.glb": "57d14bbf33184b135393a4afe172f5706b76bc0891f84b34d96421c8c4fbf6e8",
+      "native.png": "b49c29d0cbe1b462b624585840637c5f82c4baade33cb3a9aa24d16bc224c000",
+      "walk.png": "ae1c2eab958ba5c79cdb5d85093eb15807e624c7780bce57f2bb97c55ae37668"
+    }
+  }
+]

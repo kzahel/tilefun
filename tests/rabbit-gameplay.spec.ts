@@ -33,6 +33,7 @@ test("3D animals switch live in the rabbit lab and remember the choice", async (
     { times: 1 },
   );
   const requestedModel = page.waitForRequest(modelUrl);
+  const loadingSprite = page.waitForResponse((response) => spriteUrl(new URL(response.url())));
   await page.goto(lab + tool);
   const stage = page.getByLabel("Natural landscape playground");
   const models = page.getByRole("checkbox", { name: "3D animals", exact: true });
@@ -40,21 +41,20 @@ test("3D animals switch live in the rabbit lab and remember the choice", async (
     await requestedModel;
     await expect(stage).toHaveAttribute("data-ready", "true");
     await expect(stage).toHaveAttribute("data-wildlife-meshes", "0");
-    expect(spriteRequests).toEqual([]);
+    expect((await loadingSprite).ok()).toBe(true);
+    expect(spriteRequests).toHaveLength(1);
   } finally {
     releaseModel();
   }
   await expect(stage).toHaveAttribute("data-wildlife-meshes", "1");
-  expect(spriteRequests).toEqual([]);
+  expect(spriteRequests).toHaveLength(1);
   await expect(models).toBeChecked();
   await expect(page.getByText("Turn off 3D animals to review the sprite scene.")).toBeVisible();
   await expect(page.getByRole("button", { name: "Looks good", exact: true })).toBeDisabled();
   await page.getByRole("button", { name: "Pause", exact: true }).click();
   await expect(stage).toHaveAttribute("data-authority-running", "false");
   const pose = await stage.getAttribute("data-rabbit-poses");
-  const requestedSprite = page.waitForResponse((response) => spriteUrl(new URL(response.url())));
   await models.uncheck();
-  expect((await requestedSprite).ok()).toBe(true);
   await expect(stage).toHaveAttribute("data-wildlife-meshes", "0");
   await models.check();
   await expect(stage).toHaveAttribute("data-wildlife-meshes", "1");
@@ -76,19 +76,12 @@ test("3D animals switch live in the rabbit lab and remember the choice", async (
   await expect(stage).toHaveAttribute("data-ready", "true");
   await expect(models).not.toBeChecked();
 
-  const loadingOrder: string[] = [];
-  await page.route(modelUrl, (route) => {
-    loadingOrder.push("model");
-    return route.fulfill({ status: 404 });
-  });
-  await page.route(spriteUrl, (route) => {
-    loadingOrder.push("sprite");
-    return route.continue();
-  });
+  await page.route(modelUrl, (route) => route.fulfill({ status: 404 }));
+  const failedModel = page.waitForResponse(modelUrl);
   const fallback = page.waitForResponse((response) => spriteUrl(new URL(response.url())));
   await page.goto(`${lab}&wildlife3d=1${tool}`);
   expect((await fallback).ok()).toBe(true);
-  expect(loadingOrder).toEqual(["model", "sprite"]);
+  expect((await failedModel).status()).toBe(404);
   await expect(stage).toHaveAttribute("data-wildlife-meshes", "0");
   await expect(stage).toHaveAttribute("data-ready", "true");
 });

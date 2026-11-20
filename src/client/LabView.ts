@@ -448,6 +448,10 @@ export class LabView {
     this.host.drawUiOverlay(this.overlays.items);
   }
 
+  wildlifeModelDrawn(sheetKey: string): boolean {
+    return this.unified?.wildlifeModelDrawn(sheetKey) ?? false;
+  }
+
   getDiagnostics(): LabDiagnostics {
     const presentation = labPresentationDiagnostics(this.host, this.client.device, this.effects);
     return {

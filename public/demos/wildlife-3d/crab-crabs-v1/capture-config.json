@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-crab-provisional-v1",
+  "version": 2,
+  "fit": [
+    11.6,
+    4.88,
+    11.89
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.47,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "water": false,
+  "ground": "#769276",
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}

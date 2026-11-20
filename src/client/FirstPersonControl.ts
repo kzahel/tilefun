@@ -359,6 +359,10 @@ export class FirstPersonControl {
     return scene ? { ...scene.stats } : undefined;
   }
 
+  wildlifeModelDrawn(sheetKey: string): boolean {
+    return !!this.host && (this.scenes.get(this.host)?.wildlifeModelDrawn(sheetKey) ?? false);
+  }
+
   /** Clear active camera state during loading, failed modules or lost graphics. */
   hide(view: View): void {
     view.drawn3d = view.topDown3d = false;

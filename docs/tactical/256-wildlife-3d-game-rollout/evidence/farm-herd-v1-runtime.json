@@ -1,0 +1,242 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-cow-provisional-v1",
+      "clips": 10,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "lower",
+          "action": "lower",
+          "frames": 28,
+          "gameDurationMs": 750
+        },
+        {
+          "state": "graze",
+          "action": "graze",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "raise",
+          "action": "raise",
+          "frames": 28,
+          "gameDurationMs": 750
+        },
+        {
+          "state": "lie",
+          "action": "lie",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "ruminate",
+          "action": "ruminate",
+          "frames": 28,
+          "gameDurationMs": 2400
+        },
+        {
+          "state": "stand",
+          "action": "stand",
+          "frames": 28,
+          "gameDurationMs": 1200
+        }
+      ],
+      "candidateId": "cow-farm-herd-v1",
+      "modelSha256": "f22c6efbfa457dd1c19ee479cae12005e587226ee2069c0851c3766b1e80026d"
+    },
+    {
+      "type": "wildlife-sheep-provisional-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        },
+        {
+          "state": "bleat",
+          "action": "bleat",
+          "frames": 28,
+          "gameDurationMs": 1200
+        }
+      ],
+      "candidateId": "sheep-farm-herd-v1",
+      "modelSha256": "069417fcf8b9297e29c4f80ad5bdf2ab8533f8ebbacdbd2a6f23b26c6e444cdf"
+    },
+    {
+      "type": "wildlife-horse-provisional-v1",
+      "clips": 10,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 50
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 400
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "lower",
+          "action": "lower",
+          "frames": 28,
+          "gameDurationMs": 750
+        },
+        {
+          "state": "graze",
+          "action": "graze",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "drink",
+          "action": "drink",
+          "frames": 28,
+          "gameDurationMs": 1500
+        },
+        {
+          "state": "raise",
+          "action": "raise",
+          "frames": 28,
+          "gameDurationMs": 750
+        },
+        {
+          "state": "ride",
+          "action": "ride",
+          "frames": 28,
+          "gameDurationMs": 200
+        },
+        {
+          "state": "ride-sprint",
+          "action": "ride-sprint",
+          "frames": 28,
+          "gameDurationMs": 100
+        }
+      ],
+      "candidateId": "horse-farm-herd-v1",
+      "modelSha256": "b9c25c70d4587d1fb624bf73d0726b9b701d9a9eca7094675238ec5aa53538ed"
+    },
+    {
+      "type": "wildlife-donkey-provisional-v1",
+      "clips": 9,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1920
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "lie",
+          "action": "lie",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "roll",
+          "action": "roll",
+          "frames": 28,
+          "gameDurationMs": 3600
+        },
+        {
+          "state": "stand",
+          "action": "stand",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "ride",
+          "action": "ride",
+          "frames": 28,
+          "gameDurationMs": 360
+        },
+        {
+          "state": "ride-sprint",
+          "action": "ride-sprint",
+          "frames": 28,
+          "gameDurationMs": 180
+        }
+      ],
+      "candidateId": "donkey-farm-herd-v1",
+      "modelSha256": "cf51d304773c8f2be5cebf5da056d20566b094d86bdb9fb91ec261ad5ab93541"
+    }
+  ],
+  "clipSamples": 952,
+  "testedDepth": false
+}

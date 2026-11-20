@@ -1,0 +1,36 @@
+{
+  "runtimeType": "wildlife-cat-black-provisional-v1",
+  "version": 1,
+  "fit": [
+    6.95,
+    5.35,
+    6.7
+  ],
+  "model": "cat.glb",
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee",
+    "stalk",
+    "pounce",
+    "bat",
+    "climb",
+    "sit"
+  ],
+  "reviewContext": "Final planned candidate. V1's highest-impact note is preserved in the local revision brief. This pass targeted raise the upper silhouette above standing contact, open space under the belly, adjust the profile of the ears, crest or crown, make the feet and limb edges easier to read, give the tail its requested silhouette. Compare this exact candidate against the active sprite and report any remaining quality gap. The first candidate images and completed review remain retained in the adjacent v1 folder.",
+  "autoFit": false,
+  "autoCrop": true,
+  "rollout": true,
+  "modelClips": {
+    "idle": "Idle",
+    "walk": "Walk",
+    "action": "Action",
+    "flee": "Flee",
+    "stalk": "Stalk",
+    "pounce": "Pounce",
+    "bat": "Bat",
+    "climb": "Climb",
+    "sit": "Sit"
+  }
+}

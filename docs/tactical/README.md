@@ -12,6 +12,8 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [256 Wildlife 3D game rollout](256-wildlife-3d-game-rollout.md) | Queued for a new session. Ship all 219 identities in normal play with distinct animation for every gameplay state. The ledger pins the draft inputs and current bindings. |
+| [255 Wildlife 3D model campaign](255-wildlife-3d-model-campaign.md) | 219 comparison packets and shared game/lab preview delivered. Review and disposition tracked in the [progress log](255-wildlife-3d-model-campaign/progress.md) |
 | [254 Remove renderer scaffolding](254-remove-renderer-scaffolding.md) | Remove fixed-pass helpers, no-op host hooks, inactive sampling/depth adapters and mode gates; retain immutable native review pixels and shared resources |
 | [253 Retire fixed world rendering](253-retire-fixed-world-renderer.md) | In progress, owner-authorized 2026-11-17: migrate the remaining interactive consumers and browser contracts, preserve shared raster resources and immutable review output, then remove fixed world drawing |
 | [252 XR on the shared scene](252-xr-on-the-shared-scene.md) | 248 slice 4, delivered 2026-11-14 for owner play: the world menu's Headset buttons start a WebXR session as a floating screen, immersive first person or a tabletop miniature on the shared renderer, with the headset's controllers as seat 0's pad. All three hold 72 Hz on a Quest 3. Found and fixed: the page atlas lost pages when it grew inside a session. Comfort and the mapping await a wearer |

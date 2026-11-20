@@ -1,0 +1,99 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "b7ffdd4d88393d45907fc87a24fdc195dda5dff1ef1704ff3c87029f471fc0c3",
+  "results": [
+    {
+      "type": "wildlife-llama-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "e8af1d7952c795596e923bf8cabcfa97906165559c398047e4002809bef37c55",
+      "modelSha256": "ae5581e0d848445fa136cce04341eac0ae1be546450943229af33927c57e8edc",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-llama&wildlife3dStage=llama-plateau-herbivores-v1&wildlife3dReview=llama-plateau-herbivores-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009708404541015569,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-alpaca-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "6aecc3d67ac7b08a0e02c54f663e66476d89840291d1a6e44a5d8cfcda5519fb",
+      "modelSha256": "453734abca89ae91cd94098e79282174e9339258cb21350dae558e903d4efcc6",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-alpaca&wildlife3dStage=alpaca-plateau-herbivores-v1&wildlife3dReview=alpaca-plateau-herbivores-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009734535217285318,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    },
+    {
+      "type": "wildlife-warthog-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "3b635f8cf56d425d3ae0fed3df5252b13372a422e49eb9e8459e1c370ccff897",
+      "modelSha256": "c8da08a8715fbf7de5a6390499cf64adeac8448c55b2e1536e4c5fc34dc11cae",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-warthog&wildlife3dStage=warthog-plateau-herbivores-v1&wildlife3dReview=warthog-plateau-herbivores-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee"
+      ],
+      "heightRange": [
+        -0.0009572620391845835,
+        0
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee"
+        ]
+      }
+    }
+  ]
+}

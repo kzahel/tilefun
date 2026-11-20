@@ -1,0 +1,144 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-cuttlefish-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "cuttlefish-soft-bodied-marine-v1",
+      "modelSha256": "74a76131ffa11f01a822dabe3607a7a7cf8f69d395468750aa02c3e04cf7ac55"
+    },
+    {
+      "type": "wildlife-octopus-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "jet",
+          "action": "jet",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        }
+      ],
+      "candidateId": "octopus-soft-bodied-marine-v1",
+      "modelSha256": "0313c7b45db85beb52d8992c02eb8c799ffb1d7c4d01ccc0da23ba2231df8aa7"
+    },
+    {
+      "type": "wildlife-nautilus-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "nautilus-soft-bodied-marine-v1",
+      "modelSha256": "ac35eb1f1d6c071a05190c72b5f08ae009ef769cd668111b2ada759a0a5fced7"
+    },
+    {
+      "type": "wildlife-jellyfish-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100,
+          "peakBoneScale": 1.0240146307630378
+        },
+        {
+          "state": "pulse",
+          "action": "pulse",
+          "frames": 28,
+          "gameDurationMs": 1280,
+          "peakBoneScale": 1.218864917755127
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800,
+          "peakBoneScale": 1.1350324118369306
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640,
+          "peakBoneScale": 1.268402107014128
+        }
+      ],
+      "candidateId": "jellyfish-soft-bodied-marine-v1",
+      "modelSha256": "6fecdfbea96fed605362c83bbd9fbea8ae090d01946fd83bf6ec279ecb1d71ec"
+    }
+  ],
+  "clipSamples": 476,
+  "testedDepth": false
+}

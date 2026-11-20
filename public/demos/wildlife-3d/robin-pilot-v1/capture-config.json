@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-robin-v1",
+  "version": 1,
+  "fit": [
+    8.3,
+    6.25,
+    6.5
+  ],
+  "clips": [
+    "idle",
+    "hop",
+    "flap",
+    "action",
+    "eat"
+  ],
+  "portraitCenter": 0.6,
+  "reviewContext": "Final planned robin candidate. The first review requested a rounder compact body, dark back, visible orange bib and wing area, and clear feeding. This version darkens the back, widens those markings and feathers, adjusts the flap arc, and deepens the head dip.",
+  "model": "model.glb",
+  "autoFit": false,
+  "autoCrop": true,
+  "rollout": true
+}

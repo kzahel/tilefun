@@ -1,0 +1,88 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "5eec6e74889c05bc183fb7fed3f2cd41786af4c683711fb2e810427a8064224d",
+  "scenario": "Headed bundled Chromium on the built-in 120 Hz display. Fixed camera at 1x in seed 2026 woodland, with 24 editor-placed animals split across the four reef candidate species. Five seconds per lane after warmup. The workload measures drawing in the normal world. The public review stage exercises behavior in water.",
+  "device": {
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+    "cores": 14,
+    "viewport": {
+      "width": 1280,
+      "height": 800,
+      "devicePixelRatio": 1
+    },
+    "canvas": {
+      "width": 1280,
+      "height": 800
+    },
+    "gpu": "ANGLE (Apple, ANGLE Metal Renderer: Apple M4 Pro, Unspecified Version)",
+    "gpuTimer": true
+  },
+  "types": [
+    {
+      "type": "wildlife-seahorse-provisional-v1",
+      "modelSha256": "99a54a6a2d89e8f61c41bbbbe3cb0e0914517bddc09434c8f701ffd8e18307ce"
+    },
+    {
+      "type": "wildlife-leafy-seadragon-provisional-v1",
+      "modelSha256": "49c0671c719528206efa93f8b3c91e62c2dc309bff504815faefe4514423c7d8"
+    },
+    {
+      "type": "wildlife-starfish-provisional-v1",
+      "modelSha256": "a5cebd7963a79482b4c99609cb874df43c1c945e8dbf417fc20fb46da5fa2f38"
+    },
+    {
+      "type": "wildlife-sea-turtle-provisional-v1",
+      "modelSha256": "edbe9922c100622f76be82c2cbc63e1b0baee67748d7b3b0e6753c242cd13da7"
+    }
+  ],
+  "models": {
+    "frames": 600,
+    "missed": 0,
+    "frameMs": {
+      "p50": 8.3,
+      "p95": 10.3,
+      "max": 10.5
+    },
+    "renderMs": {
+      "p50": 1.2,
+      "p95": 1.4,
+      "max": 2.2
+    },
+    "gpuMs": {
+      "p50": 0.63,
+      "p95": 0.67,
+      "max": 1.36,
+      "samples": 600,
+      "disjoint": 0
+    },
+    "drawCallsPerFrame": 35.7,
+    "entities": 162,
+    "placedWildlife": 24,
+    "wildlifeMeshes": 24
+  },
+  "sprites": {
+    "frames": 600,
+    "missed": 0,
+    "frameMs": {
+      "p50": 8.3,
+      "p95": 10,
+      "max": 10.5
+    },
+    "renderMs": {
+      "p50": 0.8,
+      "p95": 1.1,
+      "max": 2.1
+    },
+    "gpuMs": {
+      "p50": 0.47,
+      "p95": 0.51,
+      "max": 2.72,
+      "samples": 600,
+      "disjoint": 0
+    },
+    "drawCallsPerFrame": 6,
+    "entities": 162,
+    "placedWildlife": 24,
+    "wildlifeMeshes": 0
+  }
+}

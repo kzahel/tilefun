@@ -1,0 +1,128 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "25a6ae0e597d9c7445622807d7207e0b533f0e6443ad9a76bf2ca94a29af33d1",
+  "results": [
+    {
+      "type": "wildlife-cow-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "82be65e5aa70adfb2726fe823934485403e03efab8f95d9691404f06ee866eb9",
+      "modelSha256": "f22c6efbfa457dd1c19ee479cae12005e587226ee2069c0851c3766b1e80026d",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-cow&wildlife3dStage=cow-farm-herd-v1&wildlife3dReview=cow-farm-herd-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "lower",
+        "graze",
+        "raise",
+        "lie",
+        "ruminate",
+        "stand"
+      ],
+      "heightRange": [
+        -0.0010233764648433137,
+        0.000016204833984374984
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-sheep-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "e9309f39719c8c450444271fbaaa39ce903201d50719d3b48a3d91492d716550",
+      "modelSha256": "069417fcf8b9297e29c4f80ad5bdf2ab8533f8ebbacdbd2a6f23b26c6e444cdf",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-sheep&wildlife3dStage=sheep-farm-herd-v1&wildlife3dReview=sheep-farm-herd-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "bleat"
+      ],
+      "heightRange": [
+        -0.001046100616455077,
+        0.000025747299194335844
+      ],
+      "statesOnApproachOrMount": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-horse-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "b5f84f35506980a861ba6bdb74d5efe2e99909eb063d689ca71763ff6a268b6a",
+      "modelSha256": "b9c25c70d4587d1fb624bf73d0726b9b701d9a9eca7094675238ec5aa53538ed",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-horse&wildlife3dStage=horse-farm-herd-v1&wildlife3dReview=horse-farm-herd-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "lower",
+        "graze",
+        "drink",
+        "raise",
+        "ride",
+        "ride-sprint"
+      ],
+      "heightRange": [
+        -0.0010034046173096208,
+        -0.00004005432128906244
+      ],
+      "statesOnApproachOrMount": [
+        "flee",
+        "ride",
+        "ride-sprint"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-donkey-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "4423af0338b2a8a7a415a835a0867129d956e5dd0ca334248cc9aea228c8fca4",
+      "modelSha256": "cf51d304773c8f2be5cebf5da056d20566b094d86bdb9fb91ec261ad5ab93541",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-donkey&wildlife3dStage=donkey-farm-herd-v1&wildlife3dReview=donkey-farm-herd-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "lie",
+        "roll",
+        "stand",
+        "ride",
+        "ride-sprint"
+      ],
+      "heightRange": [
+        -0.0010608692169186505,
+        -0.000355926513671876
+      ],
+      "statesOnApproachOrMount": [
+        "flee",
+        "ride",
+        "ride-sprint"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

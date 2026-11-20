@@ -1,0 +1,109 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-anglerfish-predator-v1",
+      "clips": 5,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "feed",
+          "action": "feed",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "display",
+          "action": "display",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "chase",
+          "action": "chase",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ],
+      "candidateId": "anglerfish-distinct-fish-v1",
+      "modelSha256": "0d156ddd475cedf9e9d598307f6357837610bc1133bbd243399af2961fb362cc"
+    },
+    {
+      "type": "wildlife-pufferfish-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800,
+          "peakBoneScale": 1.2880223989486694
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "pufferfish-distinct-fish-v1",
+      "modelSha256": "3c57535bf225986ff4a0a1e637deffa567099d141ce6c382edf9b862f20c79a8"
+    },
+    {
+      "type": "wildlife-ocean-sunfish-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "ocean-sunfish-distinct-fish-v1",
+      "modelSha256": "4ffcf2a85e7dd23f00afa98b78bfc105d60af4a72598192eb0901c2eaa428bbd"
+    }
+  ],
+  "clipSamples": 364,
+  "testedDepth": false
+}

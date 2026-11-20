@@ -64,6 +64,14 @@ export interface SpriteItem {
   sheetKey: string;
   frameCol: number;
   frameRow: number;
+  /** Phase of a registered animated wildlife model, sampled on the render clock. */
+  wildlifePose?: {
+    readonly clip: number | undefined;
+    readonly frameTimeMs: number;
+    readonly elapsedMs: number | undefined;
+    readonly idleTime: number;
+    readonly direction: Direction;
+  };
   /** Facing of a four-direction sheet (players, turning wanderers) whose current row
    * is that facing. Views that see the actor from other sides (first person, 229)
    * reselect the row; the fixed view ignores it. Absent for every other sprite. */

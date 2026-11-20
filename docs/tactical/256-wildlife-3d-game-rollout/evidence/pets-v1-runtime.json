@@ -1,0 +1,198 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-cat-ginger-provisional-v1",
+      "clips": 9,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "Idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "walk",
+          "action": "Walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "Action",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "flee",
+          "action": "Flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        },
+        {
+          "state": "stalk",
+          "action": "Stalk",
+          "frames": 28,
+          "gameDurationMs": 1000
+        },
+        {
+          "state": "pounce",
+          "action": "Pounce",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "bat",
+          "action": "Bat",
+          "frames": 28,
+          "gameDurationMs": 720
+        },
+        {
+          "state": "climb",
+          "action": "Climb",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "sit",
+          "action": "Sit",
+          "frames": 28,
+          "gameDurationMs": 1200
+        }
+      ]
+    },
+    {
+      "type": "wildlife-cat-black-provisional-v1",
+      "clips": 9,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "Idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "walk",
+          "action": "Walk",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "action",
+          "action": "Action",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "flee",
+          "action": "Flee",
+          "frames": 28,
+          "gameDurationMs": 480
+        },
+        {
+          "state": "stalk",
+          "action": "Stalk",
+          "frames": 28,
+          "gameDurationMs": 1000
+        },
+        {
+          "state": "pounce",
+          "action": "Pounce",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "bat",
+          "action": "Bat",
+          "frames": 28,
+          "gameDurationMs": 720
+        },
+        {
+          "state": "climb",
+          "action": "Climb",
+          "frames": 28,
+          "gameDurationMs": 1200
+        },
+        {
+          "state": "sit",
+          "action": "Sit",
+          "frames": 28,
+          "gameDurationMs": 1200
+        }
+      ]
+    },
+    {
+      "type": "wildlife-dog-provisional-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 640
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 320
+        },
+        {
+          "state": "pickup",
+          "action": "pickup",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "release",
+          "action": "release",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ]
+    },
+    {
+      "type": "wildlife-dog-shepherd-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 640
+        }
+      ]
+    }
+  ],
+  "clipSamples": 784,
+  "testedDepth": false
+}

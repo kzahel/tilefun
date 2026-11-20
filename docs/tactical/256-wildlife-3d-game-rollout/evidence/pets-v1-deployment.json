@@ -1,0 +1,96 @@
+{
+  "deployment": "https://tilefun.graehlarts.com/tilefun/",
+  "workshopInputDigest": "99a1efe60a75311b5dbabad6e2101dff4275cd64acbc37adb57d74b383abe505",
+  "results": [
+    {
+      "type": "wildlife-cat-ginger-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "92aa6affdfe26783787675cb4265e165f95b800c7cde52d648bc2ceb1d130758",
+      "modelSha256": "5f1891b420a02ba1f38ded6828cedf622e70acfdb96c048935ffed7a323a99a0",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-cat-ginger&wildlife3dReview=cat-ginger-pets-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "stalk",
+        "pounce",
+        "bat"
+      ],
+      "heightRange": [
+        -0.07401428031466206,
+        5.910312175750518
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-cat-black-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "d102bfc5e671af200bbd990ab695c27e523b2ebf06b7b36060adc9bdae088bbe",
+      "modelSha256": "f94b81425e877e5aa0a7effa59b14f939857e356ac7b94df96efc5c3397199ed",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-cat-black&wildlife3dReview=cat-black-pets-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "stalk",
+        "pounce",
+        "bat"
+      ],
+      "heightRange": [
+        -0.0752687950087838,
+        5.910181045532008
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-dog-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "a6dba18418e734975b9ad750c91a5b0c5d7d3978bd691b5141862895918fe14c",
+      "modelSha256": "742283f7ef50b1ae301697bd4c8015672b683f1f89b619b87a8616020bc25604",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-dog&wildlife3dReview=dog-pets-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "pickup",
+        "release"
+      ],
+      "heightRange": [
+        -0.0010295104980468995,
+        0
+      ],
+      "carriedItemObserved": true,
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    },
+    {
+      "type": "wildlife-dog-shepherd-provisional-v1",
+      "mode": "review link",
+      "manifestFingerprint": "3cb383a08ff2df551a9fe0704d537b64d9707ba72a002a65625dbc8d8cf8a4ef",
+      "modelSha256": "92bd60e17e0eb1f5207ca90bdd0eafd1d143f19ef9f428c6d6fb4f47d7b58659",
+      "lab": "https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-dog-shepherd&wildlife3dReview=dog-shepherd-pets-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action"
+      ],
+      "heightRange": [
+        -0.0009756088256835938,
+        0.000027576446533207225
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true
+      }
+    }
+  ]
+}

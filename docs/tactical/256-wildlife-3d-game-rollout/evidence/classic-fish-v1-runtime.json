@@ -1,0 +1,66 @@
+{
+  "candidates": [
+    {
+      "type": "fish1",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 200
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "fish1-classic-fish-v1",
+      "modelSha256": "a5977f042b78d1125c38327fe25d99b107939254bc0728b40e1aaa9503815b56"
+    },
+    {
+      "type": "fish2",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 200
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "fish2-classic-fish-v1",
+      "modelSha256": "27405586949fd1d74dcabdd2c5c1a74889ce73746654a7aae610d54983f2203d"
+    },
+    {
+      "type": "fish3",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 200
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "fish3-classic-fish-v1",
+      "modelSha256": "37e3575e75431611cca3d831b36a7296124273036402efcfc8aa3b6a15189ccf"
+    }
+  ],
+  "clipSamples": 168,
+  "testedDepth": false
+}

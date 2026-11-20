@@ -1,0 +1,70 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-elk-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1600
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "elk-cervids-v1",
+      "modelSha256": "e1385b3360b7e1490eb470712a0ffbea8e93baf362916d6860b61e6bd0119f45"
+    },
+    {
+      "type": "wildlife-moose-provisional-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 100
+        },
+        {
+          "state": "walk",
+          "action": "walk",
+          "frames": 28,
+          "gameDurationMs": 1920
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 800
+        },
+        {
+          "state": "flee",
+          "action": "flee",
+          "frames": 28,
+          "gameDurationMs": 960
+        }
+      ],
+      "candidateId": "moose-cervids-v1",
+      "modelSha256": "e842b8108f9265d1a5029da22f71e74a6a1e8c3c67251175e44ffc9a57065e2c"
+    }
+  ],
+  "clipSamples": 224,
+  "testedDepth": false
+}

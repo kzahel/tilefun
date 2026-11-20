@@ -1,0 +1,20 @@
+{
+  "runtimeType": "wildlife-rabbit-v1",
+  "version": 1,
+  "fit": [
+    7.4,
+    5.65,
+    7.1
+  ],
+  "clips": [
+    "idle",
+    "hop",
+    "action",
+    "eat"
+  ],
+  "reviewContext": "Final planned rabbit candidate. V1 feedback was subtle hop and feeding, a scattered pale coat, and weak grounding. The new sprite-guided model has one warm dark saddle, thicker earlines, hip and body follow-through, bigger planted push and gathered takeoff, and a head-and-ears feeding dip. A shared illustrative jump trajectory moves both sprite and model over the stationary shadow.",
+  "model": "model.glb",
+  "autoFit": false,
+  "autoCrop": true,
+  "rollout": true
+}

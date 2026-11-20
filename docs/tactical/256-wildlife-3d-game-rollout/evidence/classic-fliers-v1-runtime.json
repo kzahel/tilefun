@@ -1,0 +1,46 @@
+{
+  "candidates": [
+    {
+      "type": "crow",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 150
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 900
+        }
+      ],
+      "candidateId": "crow-classic-fliers-v1",
+      "modelSha256": "a3957572d136a522dcafc6273a98b092fcdafe5cba9878b42c59c2aad56be296"
+    },
+    {
+      "type": "seagull",
+      "clips": 2,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "fly",
+          "action": "fly",
+          "frames": 28,
+          "gameDurationMs": 960
+        }
+      ],
+      "candidateId": "seagull-classic-fliers-v1",
+      "modelSha256": "2073119644673da5c617edd4cf4a65f1dad3a9f0567efc3ed9faa5eba13b9b31"
+    }
+  ],
+  "clipSamples": 112,
+  "testedDepth": false
+}

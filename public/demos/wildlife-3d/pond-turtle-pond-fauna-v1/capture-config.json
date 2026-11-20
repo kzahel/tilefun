@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-pond-turtle-provisional-v1",
+  "version": 2,
+  "fit": [
+    12.18,
+    5.23,
+    12.33
+  ],
+  "autoFit": true,
+  "portraitCenter": 0.49,
+  "clips": [
+    "idle",
+    "walk",
+    "action",
+    "flee"
+  ],
+  "water": false,
+  "ground": "#769276",
+  "model": "model.glb",
+  "rollout": true,
+  "autoCrop": true
+}
