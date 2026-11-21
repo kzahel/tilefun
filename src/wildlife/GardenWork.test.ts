@@ -1,12 +1,13 @@
 import { expect, it } from "vitest";
 import type { Entity } from "../entities/Entity.js";
+import { FARM_FACTORIES, SCATTERED_CORN } from "../farming/FarmActors.js";
 import { gardenWorkRecipe } from "../scenarios/GardenWorkRecipe.js";
 import { naturalLandscapeRecipe } from "../scenarios/NaturalLandscapeRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { required } from "../shared/required.js";
 import { createFauna } from "./Fauna.js";
 import { tickFoodSources } from "./FoodGrowth.js";
-import { createFoodSource, sourceType } from "./ForageResources.js";
+import { createFoodSource, createForageItem, sourceType } from "./ForageResources.js";
 import { prepareFaunaTravel, startleFauna } from "./faunaInteractions.js";
 import { pollinateFlower } from "./GardenWork.js";
 
@@ -187,6 +188,24 @@ it("chicken uncovers exactly one real seed, reloads it at its beak, then eats it
     await s.close();
   }
 }, 60000);
+
+it("a hen walks to scattered corn and eats it before scratching up more seed", async () => {
+  const s = await ScenarioSession.create(gardenWorkRecipe("chicken"));
+  try {
+    const a = subject(s);
+    const patch = required(sources(s)[0]);
+    const { wx, wy } = patch.position;
+    const corn = required(FARM_FACTORIES[SCATTERED_CORN])(wx, wy + 14);
+    corn.workItem = required(createForageItem("seed", wx, wy).workItem);
+    corn.farm = { effectUntil: Date.now() + 30_000 };
+    s.realm.entityManager.spawn(corn);
+    await until(s, () => a.animalWork?.eaten === 1);
+    expect(corn.workItem.units).toBe(0);
+    expect(patch.workItem?.units).toBe(3);
+  } finally {
+    await s.close();
+  }
+}, 60_000);
 
 it.each(["scratch", "peck"] as const)(
   "interrupting a chicken during %s conserves all three seeds",

@@ -18,6 +18,7 @@ evidence instead of duplicating tactical histories. When a commit series uses
 
 | Topic | Scope and next direction |
 | --- | --- |
+| [Farming](farming.md) | Town farm discovery, garden and chicken feeding, woodlot and private baskets |
 | [Gem progression](gem-progression.md) | Exploration gems, saved balances and future shop/unlock decisions |
 | [Startup loading](startup-loading.md) | First-paint loading shell, actual asset counts and startup readiness/error stages |
 | [Code health](code-health.md) | Module boundaries, god-file decomposition, lint/typecheck coverage and refactoring sequence |

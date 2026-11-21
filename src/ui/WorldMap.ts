@@ -9,6 +9,7 @@ import {
 } from "../explorer/ViewState.js";
 import { descriptorKey } from "../generation/GenerationDescriptor.js";
 import type { OverviewResult } from "../generation/Overview.js";
+import type { FarmDestination } from "../generation/regional/FarmsteadPlanner.js";
 import { type Point, QUERY_LIMITS } from "../generation/regional/RegionalPlanner.js";
 import { townStops } from "../railway/RailwayPlanner.js";
 import type { WorldMapMessage, WorldMapPlayer } from "../shared/protocol.js";
@@ -29,6 +30,9 @@ export class WorldMap {
   private readonly title = document.createElement("h2");
   private readonly status = document.createElement("p");
   private readonly roster = document.createElement("div");
+  private readonly farms = document.createElement("div");
+  private nearestFarm: FarmDestination | undefined;
+  private didFindFarm = false;
   private readonly depots = document.createElement("div");
   private readonly tracks = document.createElement("div");
   private readonly stops = document.createElement("div");
@@ -118,6 +122,9 @@ export class WorldMap {
     const trackLegend = document.createElement("small");
     trackLegend.textContent =
       "Red ovals / checkered flags: racetracks · brown loops: motocross parks (select, then Travel)";
+    this.farms.className = "world-map-roster";
+    this.farms.setAttribute("role", "group");
+    this.farms.setAttribute("aria-label", "Farms");
     this.depots.className = "world-map-roster";
     this.depots.setAttribute("role", "group");
     this.depots.setAttribute("aria-label", "Vehicle depots");
@@ -125,6 +132,7 @@ export class WorldMap {
     depotLegend.textContent = "Orange trucks: vehicle depots · select a depot, then Travel";
     footer.append(
       hint,
+      this.farms,
       legend,
       this.stops,
       trackLegend,
@@ -248,6 +256,9 @@ export class WorldMap {
         this.query?.dispose();
         this.result = null;
         this.target = null;
+        this.nearestFarm = undefined;
+        this.didFindFarm = false;
+        this.farms.replaceChildren();
         this.query = new QueryClient(
           new Worker(new URL("../explorer/regional.worker.ts", import.meta.url), {
             type: "module",
@@ -256,6 +267,11 @@ export class WorldMap {
             if (!this.open || epoch !== this.epoch) return;
             if (response.type === "result") {
               this.result = response.result;
+              if (!this.didFindFarm) {
+                this.nearestFarm = response.nearestFarm;
+                this.didFindFarm = true;
+              }
+              this.updateFarms();
               this.stops.replaceChildren();
               for (const s of townStops(this.result.railways ?? []))
                 this.stops.append(
@@ -316,6 +332,28 @@ export class WorldMap {
       if (this.open && epoch === this.epoch)
         this.pollTimer = setTimeout(() => void this.refresh(epoch), 1000);
     }
+  }
+
+  private updateFarms(): void {
+    const visible = this.result?.farms ?? [];
+    const nearest = this.nearestFarm;
+    const farms = nearest
+      ? [nearest, ...visible.filter((farm) => farm.id !== nearest.id)]
+      : visible;
+    const current = Array.from(this.farms.querySelectorAll<HTMLButtonElement>("button"));
+    if (
+      farms.length === current.length &&
+      farms.every((farm, index) => current[index]?.dataset.farmId === farm.id)
+    )
+      return;
+    this.farms.replaceChildren(
+      ...farms.map((farm) =>
+        this.place(`🌽 ${farm.name}`, farm.arrival, true, {
+          testid: "world-map-farm",
+          farmId: farm.id,
+        }),
+      ),
+    );
   }
 
   private updateRoster(): void {
@@ -399,12 +437,21 @@ export class WorldMap {
     clearTimeout(this.queryTimer);
     this.queryTimer = setTimeout(() => {
       if (!this.map || !this.open) return;
-      this.query?.submit(this.map.generation, {
-        bounds: visibleBounds(this.view, this.width, this.height),
-        detail: "region",
-        sampleStep: 4 / this.view.zoom,
-        limits: { ...QUERY_LIMITS, maxSamples: 16_384 },
-      });
+      const self = this.didFindFarm ? undefined : this.map.players.find((player) => player.self);
+      this.query?.submit(
+        this.map.generation,
+        {
+          bounds: visibleBounds(this.view, this.width, this.height),
+          detail: "region",
+          sampleStep: 4 / this.view.zoom,
+          limits: { ...QUERY_LIMITS, maxSamples: 16_384 },
+        },
+        undefined,
+        undefined,
+        undefined,
+        undefined,
+        self && { x: self.x, y: self.y },
+      );
     }, 80);
   }
 
@@ -425,6 +472,22 @@ export class WorldMap {
       x: (p.x - this.view.x) * this.view.zoom + this.width / 2,
       y: (p.y - this.view.y) * this.view.zoom + this.height / 2,
     });
+    for (const farm of this.result?.farms ?? []) {
+      const p = screen(farm.arrival);
+      if (p.x < -12 || p.y < -12 || p.x > this.width + 12 || p.y > this.height + 12) continue;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 8, 0, Math.PI * 2);
+      ctx.fillStyle = "#684d29";
+      ctx.fill();
+      ctx.strokeStyle = "#ffec94";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+      ctx.font = "12px system-ui";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText("🌽", p.x, p.y);
+    }
+    ctx.textBaseline = "alphabetic";
     for (const player of this.map?.players ?? []) {
       const p = screen(player);
       if (p.x < -10 || p.y < -10 || p.x > this.width + 10 || p.y > this.height + 10) continue;

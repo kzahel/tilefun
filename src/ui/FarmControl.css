@@ -1,0 +1,38 @@
+.farm-control {
+  position: fixed;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  left: 16px;
+  z-index: 80;
+  max-width: min(360px, calc(100vw - 180px));
+  color: #fff7d9;
+  font:
+    15px system-ui,
+    sans-serif;
+}
+.farm-control button,
+.farm-control p {
+  margin: 0;
+  padding: 10px 16px;
+  border: 1px solid #d2bc82;
+  border-radius: 6px;
+  background: #3d3326;
+  color: inherit;
+  font: inherit;
+}
+.farm-control button {
+  cursor: pointer;
+}
+.farm-control button + p {
+  margin-top: 4px;
+}
+.gem-hud .farm-basket {
+  border-top: 1px solid #718479;
+  padding-top: 5px;
+  font-size: 15px;
+}
+.gem-hud:has(.farm-basket:not([hidden])) {
+  flex-wrap: wrap;
+}
+.gem-hud .farm-basket:not([hidden]) {
+  flex: 1 0 100%;
+}

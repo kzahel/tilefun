@@ -1,5 +1,14 @@
 import { TerrainId } from "../../autotile/TerrainId.js";
+import { CHUNK_SIZE, CHUNK_SIZE_PX } from "../../config/constants.js";
 import { createProp } from "../../entities/PropFactories.js";
+import {
+  CHICKEN_FEEDER,
+  FENCE_STAKES,
+  GARDEN_BED,
+  GARDEN_FENCE,
+  GARDEN_FENCE_SIDE,
+  WOODLOT_TREE,
+} from "../../farming/FarmActors.js";
 import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
 import type { ActorPlacement } from "../Generator.js";
@@ -18,6 +27,7 @@ import {
   QUERY_LIMITS,
   queryRegion,
   REGION_SIZE,
+  settlementForOwner,
 } from "./RegionalPlanner.js";
 import { regionalTerrainForElevation } from "./RegionalTerrain.js";
 import { residentFauna } from "./ResidentFauna.js";
@@ -26,6 +36,10 @@ import type { RegionalWorld } from "./WorldDescriptor.js";
 export interface Farmstead {
   id: string;
   connectionId: string;
+  townName: string;
+  nearTown: boolean;
+  arrival: Point;
+  garden: ActorPlacement[];
   center: Point;
   bounds: Bounds;
   reservation: Bounds;
@@ -35,12 +49,23 @@ export interface Farmstead {
   props: FeaturePlacement[];
   actors: ActorPlacement[];
 }
+export interface FarmDestination {
+  id: string;
+  name: string;
+  arrival: Point;
+}
+
+export function farmDestination(farm: Farmstead): FarmDestination {
+  return { id: farm.id, name: `${farm.townName} Farm`, arrival: farm.arrival };
+}
+
 const inside = (b: Bounds, x: number, y: number, r = 0) =>
   x >= b.minX - r && x <= b.maxX + r && y >= b.minY - r && y <= b.maxY + r;
 
 /** Pure upstream rural reservations: no natural-cover or wildlife planner calls. */
 export class FarmsteadSource {
   private cache = new Map<string, Farmstead | null>();
+  private townCache = new Map<string, Farmstead | null>();
   private railways: RailwayPlanner;
   private readonly districts: DenseDistrictSource;
   private readonly racetracks: RacetrackSource;
@@ -59,10 +84,25 @@ export class FarmsteadSource {
     if (this.cache.size > 64) this.cache.delete(this.cache.keys().next().value ?? "");
     return plan;
   }
-  private build(cx: number, cy: number, axis: "east" | "south"): Farmstead | null {
+  /** One road-connected farm on each town's outskirts when the terrain admits it. */
+  townOwner(cx: number, cy: number): Farmstead | null {
+    const key = `${cx}:${cy}`;
+    if (this.townCache.has(key)) return this.townCache.get(key) ?? null;
+    const plan = this.build(cx, cy, "east", true) ?? this.build(cx, cy, "south", true);
+    this.townCache.set(key, plan);
+    if (this.townCache.size > 64) this.townCache.delete(this.townCache.keys().next().value ?? "");
+    return plan;
+  }
+
+  private build(
+    cx: number,
+    cy: number,
+    axis: "east" | "south",
+    nearTown = false,
+  ): Farmstead | null {
     const seed = this.world.seed;
     const salt = axis === "east" ? 32101 : 32117;
-    if (edgeHash(cx, cy, seed + salt) > 0.65) return null;
+    if (!nearTown && edgeHash(cx, cy, seed + salt) > 0.65) return null;
     const connection = connectionForOwner(this.world, cx, cy, axis);
     if (!connection) return null;
     const segments = connection.points
@@ -73,10 +113,19 @@ export class FarmsteadSource {
         return { a, b, length: Math.hypot(b.x - a.x, b.y - a.y) };
       })
       .sort((a, b) => b.length - a.length);
-    const segment = segments[0];
-    if (!segment || segment.length < 360) return null;
+    const segment = nearTown ? segments.find((s) => s.a === connection.points[0]) : segments[0];
+    if (!segment || segment.length < (nearTown ? 260 : 360)) return null;
+    const town = settlementForOwner(this.world, cx, cy);
+    const nextTown = settlementForOwner(
+      this.world,
+      cx + Number(axis === "east"),
+      cy + Number(axis === "south"),
+    );
+    if (!town || !nextTown) return null;
     const horizontal = segment.a.y === segment.b.y;
-    const t = 0.4 + edgeHash(cx, cy, seed + salt + 4) * 0.2;
+    const t = nearTown
+      ? Math.min(205 / segment.length, 0.5)
+      : 0.4 + edgeHash(cx, cy, seed + salt + 4) * 0.2;
     const entry = {
       x: Math.round(segment.a.x + (segment.b.x - segment.a.x) * t),
       y: Math.round(segment.a.y + (segment.b.y - segment.a.y) * t),
@@ -114,6 +163,8 @@ export class FarmsteadSource {
         maxX: Math.max(bounds.maxX, entry.x + 4),
         maxY: Math.max(bounds.maxY, entry.y + 4),
       };
+      const legacy = nearTown ? this.owner(cx, cy, axis) : null;
+      if (legacy && intersects(legacy.reservation, reservation)) continue;
       const region = queryRegion(this.world, {
         bounds: reservation,
         detail: "region",
@@ -177,7 +228,12 @@ export class FarmsteadSource {
           }
         }
       if (!valid) continue;
-      const id = `farmstead:${cx}:${cy}:${axis}`;
+      const id = `${nearTown ? "town-farm" : "farmstead"}:${cx}:${cy}:${axis}`;
+      const closest =
+        Math.hypot(town.center.x - x, town.center.y - y) <=
+        Math.hypot(nextTown.center.x - x, nextTown.center.y - y)
+          ? town
+          : nextTown;
       const props: FeaturePlacement[] = [
         {
           featureId: `${id}:house`,
@@ -212,8 +268,29 @@ export class FarmsteadSource {
             `${id}:${species}`,
           ),
         );
+      const garden = this.garden(id, x, y);
+      // The south-side opening leads in from the feeder.
+      for (const [dx, dy, type] of [
+        ...[-21, -19, -17, -15].map((dx) => [dx, 13, GARDEN_FENCE] as const),
+        ...[14, 16, 18, 20].flatMap((dy) => [
+          [-22.5, dy, GARDEN_FENCE_SIDE] as const,
+          [-14, dy, GARDEN_FENCE_SIDE] as const,
+        ]),
+        [-21, 20, GARDEN_FENCE],
+        [-16, 20, GARDEN_FENCE],
+      ] as const)
+        props.push({
+          featureId: `${id}:pen:${dx}:${dy}`,
+          propType: type,
+          wx: (x + dx) * 16,
+          wy: (y + dy) * 16,
+        });
       return {
         id,
+        townName: closest.name,
+        nearTown,
+        arrival: { x: x - 26, y: y + 13.5 },
+        garden,
         connectionId: connection.id,
         center: { x, y },
         bounds,
@@ -227,6 +304,35 @@ export class FarmsteadSource {
     }
     return null;
   }
+  private garden(id: string, x: number, y: number): ActorPlacement[] {
+    const placement = (suffix: string, type: string, dx: number, dy: number): ActorPlacement => ({
+      featureId: `${id}:garden:${suffix}`,
+      type,
+      wx: (x + dx) * 16,
+      wy: (y + dy) * 16,
+      route: [],
+    });
+    const pen = { minX: x - 22, minY: y + 13, maxX: x - 15, maxY: y + 20 };
+    return [
+      ...[-32, -29, -26, -23].map((dx, i) => placement(`bed:${i}`, GARDEN_BED, dx, 15)),
+      placement("feeder", CHICKEN_FEEDER, -19, 19),
+      placement("tree", WOODLOT_TREE, -31, 21),
+      placement("tree:2", WOODLOT_TREE, -33, 24),
+      placement("fence", FENCE_STAKES, -26, 18),
+      ...[0, 1, 2].map((i) =>
+        residentFauna(
+          "chicken",
+          `${id}:garden:hen:${i}`,
+          x - 21 + i * 2,
+          y + 16,
+          pen,
+          this.world.seed,
+          `${id}:garden:hens`,
+        ),
+      ),
+    ];
+  }
+
   query(bounds: Bounds): Farmstead[] {
     const result: Farmstead[] = [];
     const minX = Math.floor(bounds.minX / REGION_SIZE) - 1,
@@ -235,13 +341,51 @@ export class FarmsteadSource {
       maxY = Math.floor(bounds.maxY / REGION_SIZE) + 1;
     if ((maxX - minX + 1) * (maxY - minY + 1) > 144) return result;
     for (let cy = minY; cy <= maxY; cy++)
-      for (let cx = minX; cx <= maxX; cx++)
+      for (let cx = minX; cx <= maxX; cx++) {
         for (const axis of ["east", "south"] as const) {
           const p = this.owner(cx, cy, axis);
           if (p && intersects(p.reservation, bounds)) result.push(p);
         }
+        const town = this.townOwner(cx, cy);
+        if (town && intersects(town.reservation, bounds)) result.push(town);
+      }
     return result;
   }
+
+  gardenActors(cx: number, cy: number): ActorPlacement[] {
+    const bounds = {
+      minX: cx * CHUNK_SIZE,
+      minY: cy * CHUNK_SIZE,
+      maxX: (cx + 1) * CHUNK_SIZE,
+      maxY: (cy + 1) * CHUNK_SIZE,
+    };
+    return this.query(bounds)
+      .flatMap((farm) => farm.garden)
+      .filter(
+        (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
+      );
+  }
+
+  /** A bounded map search around the player, including when the nearest farm is offscreen. */
+  nearestTownFarm(point: Point): FarmDestination | undefined {
+    const radius = 3 * REGION_SIZE;
+    const farms = this.query({
+      minX: point.x - radius,
+      minY: point.y - radius,
+      maxX: point.x + radius,
+      maxY: point.y + radius,
+    });
+    const distance = ({ arrival }: Farmstead) =>
+      Math.hypot(point.x - arrival.x, point.y - arrival.y);
+    const first = farms.sort(
+      (a, b) =>
+        Number(b.nearTown) - Number(a.nearTown) ||
+        distance(a) - distance(b) ||
+        a.id.localeCompare(b.id),
+    )[0];
+    return first && farmDestination(first);
+  }
+
   reserved(plans: readonly Farmstead[], x: number, y: number, r: number): boolean {
     return plans.some(
       (p) => inside(p.bounds, x, y, r) || p.paths.some((path) => pathDistance(path, x, y) <= 3 + r),

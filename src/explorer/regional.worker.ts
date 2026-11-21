@@ -6,6 +6,8 @@ import { centralActorPlacements } from "../generation/ActorPlacements.js";
 import { deriveTerrain } from "../generation/deriveTerrain.js";
 import { descriptorKey } from "../generation/GenerationDescriptor.js";
 import { normalizeGeneration } from "../generation/Overview.js";
+import { FarmsteadSource } from "../generation/regional/FarmsteadPlanner.js";
+import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
 import type { StructurePlacement } from "../generation/StructureGenerator.js";
 import { Chunk } from "../world/Chunk.js";
 import { chunkData, chunkDataTransfers } from "../world/ChunkData.js";
@@ -39,6 +41,13 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
       computeMs += performance.now() - sliceStart;
       if (step.done) {
         const result = step.value;
+        const generation = normalizeGeneration(message.world);
+        const nearestFarm =
+          message.farmOrigin && generation.type === "regional"
+            ? new FarmsteadSource(regionalWorld(generation.seed)).nearestTownFarm(
+                message.farmOrigin,
+              )
+            : undefined;
         const chunks: Extract<WorkerResponse, { type: "result" }>["chunks"] = [];
         let terrainMs = 0;
         if (message.exact?.length) {
@@ -132,6 +141,7 @@ async function run(message: Extract<WorkerRequest, { type: "query" }>): Promise<
             type: "result",
             id: message.id,
             result,
+            ...(nearestFarm ? { nearestFarm } : {}),
             chunks,
             terrainMs,
             placements: [...placements.values()],

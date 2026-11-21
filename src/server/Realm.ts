@@ -73,6 +73,7 @@ import type { ChunkRange } from "../world/ChunkManager.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import { World } from "../world/World.js";
 import { AiPlanningScheduler } from "./AiPlanningScheduler.js";
+import { updateFarm } from "./FarmPlay.js";
 import { around } from "./InterestManager.js";
 import { MutationQueue } from "./MutationQueue.js";
 import { mutationRange } from "./MutationRange.js";
@@ -406,6 +407,7 @@ export class Realm {
     session.gameplaySession = {
       player,
       gemsCollected: gems,
+      farmBasket: saved?.farmBasket,
       invincibilityTimer: 0,
       knockbackVx: 0,
       knockbackVy: 0,
@@ -527,6 +529,7 @@ export class Realm {
         ? { ...session.gameplaySession.lastSafePosition }
         : null,
       gemsCollected: session.gameplaySession.gemsCollected,
+      farmBasket: session.gameplaySession.farmBasket,
       x: session.player.position.wx,
       y: session.player.position.wy,
       ...(session.player.wz === undefined ? {} : { wz: session.player.wz }),
@@ -593,6 +596,7 @@ export class Realm {
       this.simulate(activeSessions, controls, controlTicks, storagePaused, gravity);
 
     this.updateSpawners(activeSessions, storagePaused, dormantClientIds);
+    if (!this.interior && this.tickCounter % 6 === 0) updateFarm(this, activeSessions);
     for (const session of activeSessions) this.savePlayerData(session);
     this.worldAPI.advanceTime(dt);
     this.records?.tick(dt);

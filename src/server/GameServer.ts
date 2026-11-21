@@ -41,6 +41,7 @@ import { DeviceTransport } from "./DeviceTransport.js";
 import { DeviceTravel } from "./DeviceTravel.js";
 import { DoorTransitions } from "./DoorTransitions.js";
 import { runEquipment } from "./EquipmentControl.js";
+import { performFarmAction } from "./FarmPlay.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { RealmDirectory } from "./RealmDirectory.js";
@@ -682,6 +683,19 @@ export class GameServer {
   private readonly requests: {
     [K in RequestType]: (request: RequestContext<RequestOf<K>>) => void;
   } = {
+    "farm-action": ({ msg, session, respond }) =>
+      respond(() => {
+        const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+        if (
+          !realm ||
+          realm.interior ||
+          session.transitioning ||
+          Date.now() < session.doorArrivalUntil ||
+          realm.saveManager?.pressured
+        )
+          throw new Error("Farming is unavailable right now.");
+        performFarmAction(realm, session, msg);
+      }, noFields),
     "call-train": ({ msg, session, respond }) =>
       respond(async () => {
         const realm = session.realmId ? this.realms.get(session.realmId) : undefined;

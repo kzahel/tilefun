@@ -54,6 +54,7 @@ export class QueryClient {
     footprint?: Bounds,
     snapshot?: import("../persistence/WorldInspection.js").InspectionSnapshot,
     landscape?: import("../generation/regional/NaturalLandscape.js").LandscapeProfile,
+    farmOrigin?: import("../generation/regional/RegionalPlanner.js").Point,
   ): void {
     if (this.disposed) return;
     this.invalidate();
@@ -62,6 +63,7 @@ export class QueryClient {
       id: this.wanted,
       world,
       request,
+      ...(farmOrigin ? { farmOrigin } : {}),
       ...(exact ? { exact } : {}),
       ...(footprint ? { footprint } : {}),
       ...(snapshot ? { snapshot } : {}),

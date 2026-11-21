@@ -33,6 +33,7 @@ export interface ClientStateView {
   readonly props: readonly Prop[];
   readonly playerEntity: Entity;
   readonly gemsCollected: number;
+  readonly farmBasket?: import("../farming/FarmActors.js").FarmBasket | undefined;
   readonly invincibilityTimer: number;
   readonly editorEnabled: boolean;
   readonly remoteCursors: readonly RemoteEditorCursor[];
@@ -86,6 +87,7 @@ export class RemoteStateView implements ClientStateView {
   private _props: Prop[] = [];
   private _playerEntityId = -1;
   private _gemsCollected = 0;
+  farmBasket?: import("../farming/FarmActors.js").FarmBasket | undefined;
   private _invincibilityTimer = 0;
   private _invincibilityStartTick = -1;
   private _invincibilityDurationTicks = 0;
@@ -337,6 +339,7 @@ export class RemoteStateView implements ClientStateView {
       );
     }
     this._gemsCollected = msg.gemsCollected;
+    this.farmBasket = msg.farmBasket;
     this._editorEnabled = msg.editorEnabled;
     this._mountEntityId = msg.mountEntityId ?? undefined;
   }
@@ -413,6 +416,7 @@ export class RemoteStateView implements ClientStateView {
     this._playerEntityId = -1;
     this.seats.clear();
     this._gemsCollected = 0;
+    this.farmBasket = undefined;
     this._invincibilityTimer = 0;
     this._invincibilityStartTick = -1;
     this._invincibilityDurationTicks = 0;

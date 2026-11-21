@@ -734,8 +734,28 @@ export class GameClient implements GameTestHooks {
         return scene instanceof PlayScene ? scene.lastMovement : client.actions.getMovement();
       },
       clearPlayInput: (sendNeutral) => this.playInput.clearPlayInput(sendNeutral),
-      request: (message, seat) =>
-        this.gcSendRequest({ ...message, requestId: this.nextRequestId++ }, seat),
+      request: async (message, seat) => {
+        const result = await this.gcSendRequest(
+          { ...message, requestId: this.nextRequestId++ },
+          seat,
+        );
+        if (message.type === "farm-action") {
+          const sound =
+            message.action === "harvest"
+              ? "gem_pickup"
+              : message.action === "chop" || message.action === "fence"
+                ? "impact_wood_light_000"
+                : undefined;
+          const buffer = sound && this.audioManager.getBuffer(sound);
+          if (buffer)
+            this.audioManager.playOneShot({
+              buffer,
+              volume: 0.36,
+              pitch: message.action === "harvest" ? 1.24 : 0.9,
+            });
+        }
+        return result;
+      },
     };
   }
 

@@ -1,9 +1,11 @@
+import { type FarmRequest, farmChoice } from "../farming/FarmInteraction.js";
 import type { ActionManager } from "../input/ActionManager.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { NO_INSET, pageInset } from "../input/ViewRect.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import { DoorControl } from "../ui/DoorControl.js";
+import { FarmControl } from "../ui/FarmControl.js";
 import type { DoorRequest, VehicleRequest } from "../ui/PlacePrompts.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
 import type { RemoteStateView } from "./ClientStateView.js";
@@ -30,7 +32,7 @@ export interface PlaceControlsHost {
   readonly movement: { dx: number; dy: number };
   clearPlayInput(sendNeutral?: boolean): void;
   /** A request from a seat (a guest's travels in its envelope). */
-  request(message: DoorRequest | VehicleRequest, seat?: number): Promise<unknown>;
+  request(message: DoorRequest | VehicleRequest | FarmRequest, seat?: number): Promise<unknown>;
 }
 
 /**
@@ -42,6 +44,7 @@ export interface PlaceControlsHost {
 export class PlaceControls {
   readonly door: DoorControl;
   readonly vehicle: VehicleControl;
+  private readonly farm: FarmControl;
   private readonly guests: GuestPlaces;
   private readonly unsubscribe: (() => void)[];
 
@@ -66,6 +69,7 @@ export class PlaceControls {
       host.clearPlayInput();
       return host.request(request);
     });
+    this.farm = new FarmControl((request) => host.request(request));
     this.guests = new GuestPlaces(host);
     this.unsubscribe = [
       actions.on("vehicle_recover", () => {
@@ -73,7 +77,10 @@ export class PlaceControls {
       }),
       actions.on("enter_place", () => {
         if (!host.playing || host.inputBlocked) return;
-        if (!this.vehicle.activate()) this.door.activate();
+        if (this.vehicle.activate()) return;
+        this.door.activate();
+        if (!host.storagePaused && !host.doorPresentation.busy && !host.overlayOpen)
+          this.farm.activate();
       }),
     ];
   }
@@ -89,12 +96,27 @@ export class PlaceControls {
       host.movementMode,
       host.carDriving,
     );
-    this.door.update(
+    const doorPrompt = this.door.update(
       host.stateView,
       !vehiclePrompt && ready && !host.overlayOpen,
       host.movement,
       dt,
       busy || host.inputBlocked,
+    );
+    const view = host.stateView;
+    this.farm.update(
+      ready &&
+        host.playing &&
+        !host.overlayOpen &&
+        !busy &&
+        !host.inputBlocked &&
+        !host.storagePaused &&
+        !vehiclePrompt &&
+        !doorPrompt &&
+        !view.editorEnabled &&
+        !view.interior
+        ? farmChoice(view.playerEntity, view.entities, view.farmBasket)
+        : undefined,
     );
     this.guests.update(dt, ready);
     this.placeInHostView();
@@ -105,6 +127,7 @@ export class PlaceControls {
     this.guests.destroy();
     this.door.destroy();
     this.vehicle.destroy();
+    this.farm.destroy();
   }
 
   /** In split screen seat 0's page controls move inside its view's region. */
@@ -120,5 +143,6 @@ export class PlaceControls {
       : NO_INSET;
     this.door.place(inset);
     this.vehicle.place(inset);
+    this.farm.place(inset);
   }
 }

@@ -4,6 +4,7 @@ import type { PlayerSession } from "./PlayerSession.js";
 /** What a seat's client last heard of its own session; sentinels force a full first send. */
 export interface SeatSyncState {
   gemsCollected: number;
+  farmBasket?: import("../farming/FarmActors.js").FarmBasket | undefined;
   /** Last observed server-side timer, used to detect invincibility starts/resets. */
   invincibilityTimer: number;
   editorEnabled: boolean;
@@ -36,16 +37,21 @@ export function seatSync(
   const currentMount = session.gameplaySession.mountId;
   const sessionDirty =
     gems !== state.gemsCollected ||
+    session.gameplaySession.farmBasket !== state.farmBasket ||
     session.editorEnabled !== state.editorEnabled ||
     currentMount !== state.mountEntityId;
   if (sessionDirty) {
     messages.push({
       type: "sync-session",
       gemsCollected: gems,
+      ...(session.gameplaySession.farmBasket
+        ? { farmBasket: session.gameplaySession.farmBasket }
+        : {}),
       editorEnabled: session.editorEnabled,
       mountEntityId: currentMount,
     });
     state.gemsCollected = gems;
+    state.farmBasket = session.gameplaySession.farmBasket;
     state.editorEnabled = session.editorEnabled;
     state.mountEntityId = currentMount;
   }

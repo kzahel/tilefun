@@ -28,7 +28,7 @@ export class DoorControl {
     movement: { dx: number; dy: number },
     dt: number,
     locked: boolean,
-  ): void {
+  ): boolean {
     const choice = doorChoice(view, allowed);
     this.request = choice.request;
     if (this.walk.update(view, choice, allowed, locked, movement, dt)) this.activate(true);
@@ -37,6 +37,7 @@ export class DoorControl {
     const label = choice.label && hint ? `${choice.label} · ${hint}` : choice.label;
     if (this.button.textContent !== label) this.button.textContent = label;
     this.button.disabled = this.busy || locked;
+    return !!this.request;
   }
   /** Seat 0's page controls sit inside its view in split screen. */
   place(inset: PageInset): void {

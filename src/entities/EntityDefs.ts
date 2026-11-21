@@ -1,4 +1,5 @@
 import { CHARACTER_ENTITY_DEFS } from "../characters/PromotedCharacters.js";
+import { FARM_DEFS } from "../farming/FarmActors.js";
 import { INDOOR_PEOPLE_DEFS } from "../interiors/IndoorPeople.js";
 import { CURVE_TRAIN_DEFS } from "../railway/CurveTrain.js";
 import { TRAIN_CARRIAGE_DEFS, TRAIN_DEF, TRAIN_TYPE } from "../railway/Train.js";
@@ -166,6 +167,7 @@ function wormDef(n: number): EntityDef {
 
 export const ENTITY_DEFS: Record<string, EntityDef> = {
   ...FORAGE_DEFS,
+  ...FARM_DEFS,
   ...CHARACTER_ENTITY_DEFS,
   ...INDOOR_PEOPLE_DEFS,
   ...FAUNA_DEFS,

@@ -1,3 +1,4 @@
+import type { FarmState } from "../farming/FarmActors.js";
 import type { AngularVelocity, BodyRotation } from "../physics/BodyRotation.js";
 import type { AnimalWork, WorkItem } from "../wildlife/AnimalWork.js";
 import type { DeerBehavior } from "../wildlife/Deer.js";
@@ -154,6 +155,7 @@ export interface Entity {
 
   /** Runtime towing links; zero means durable partner is not resident yet. */
 
+  farm?: FarmState;
   mallard?: MallardBehavior;
   frog?: FrogBehavior;
   rabbit?: RabbitBehavior;

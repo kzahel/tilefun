@@ -237,8 +237,10 @@ export class RealmTransitions {
     const restored = t.prepared ? { ...t.prepared } : t.prepared;
     if (position && restored) delete restored.driving;
     await target.addPlayer(session, restored);
-    if (source && previous && sameWorld(source, target))
+    if (source && previous && sameWorld(source, target)) {
       session.gameplaySession.gemsCollected = previous.gameplaySession.gemsCollected;
+      session.gameplaySession.farmBasket = previous.gameplaySession.farmBasket;
+    }
     if (destination.returnLocation !== undefined)
       session.returnLocation = destination.returnLocation;
     session.inputQueue = [];

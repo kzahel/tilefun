@@ -2,6 +2,7 @@ import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { BOAT_MODEL, BOAT_SPRITE } from "../boats/Boat.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
+import { FARM_IMAGE, FARM_SHEET, GARDEN_FENCE, GARDEN_FENCE_SIDE } from "../farming/FarmActors.js";
 import { INDOOR_ROLES } from "../interiors/IndoorPeople.js";
 import trainBank from "../railway/rail-local-v1.json" with { type: "json" };
 import { TRAIN_CARRIAGES } from "../railway/Train.js";
@@ -68,6 +69,9 @@ export const SPRITE_MANIFEST: SpriteAsset[] = [
       h: 224,
     })),
   ),
+  { key: FARM_SHEET, path: FARM_IMAGE, w: 32, h: 32 },
+  { key: GARDEN_FENCE, path: "assets/farming/fence.png", w: 16, h: 16 },
+  { key: GARDEN_FENCE_SIDE, path: "assets/farming/fence-side.png", w: 16, h: 16 },
   { key: FORAGE_SHEET, path: FORAGE_IMAGE, w: 32, h: 32 },
   ...FIERCE_DENS.map((d) => ({
     key: d.type,

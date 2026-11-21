@@ -153,6 +153,7 @@ export class ServerMessageRouter {
         host.chatHUD.addMessage(`[${msg.sender}] ${msg.text}`);
         break;
       // Replies that only resolve their pending request.
+      case "farm-action-done":
       case "vehicle-controlled":
       case "world-map":
       case "request-error":

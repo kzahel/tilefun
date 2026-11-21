@@ -148,6 +148,13 @@ export const NATURAL_CASES = [
     x: p.inspection[0],
     y: p.inspection[1],
   })),
+  {
+    id: "town-farm",
+    name: "Town outskirts · corn garden and chicken pen",
+    seed: 2026,
+    x: 354,
+    y: 737.5,
+  },
   { id: "farmstead", name: "Countryside · connected farmstead", seed: 2026, x: 380, y: 897 },
   { id: "village-pets", name: "Village · cats & dogs", seed: 2026, x: 672, y: -592 },
   { id: "city-center", name: "City · dense center & neighborhoods", seed: 2026, x: 300, y: 519 },
@@ -308,10 +315,14 @@ export function naturalLandscapeRecipe(
       props: [],
     };
   }
-  if (!at && ["farmstead", "village-pets", "city-pets", "city-center"].includes(id)) {
+  if (!at && ["town-farm", "farmstead", "village-pets", "city-pets", "city-center"].includes(id)) {
     const world = regionalWorld(point.seed);
     let player: ReturnType<typeof createPlayer>;
-    if (id === "farmstead") {
+    if (id === "town-farm") {
+      const farm = new FarmsteadSource(world).townOwner(0, 0);
+      if (!farm) throw Error("Missing town farm inspection");
+      player = createPlayer(farm.arrival.x * 16, farm.arrival.y * 16);
+    } else if (id === "farmstead") {
       const farm = new FarmsteadSource(world).owner(0, 0, "south");
       if (!farm) throw Error("Missing connected farmstead inspection");
       player = createPlayer(farm.center.x * 16, (farm.center.y + 3) * 16);

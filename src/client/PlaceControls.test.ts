@@ -405,7 +405,10 @@ describe("place controls characterization (pre-226 wiring)", () => {
     const guest = { ...createPlayer(400, 200), id: 2 };
     const car = { ...createVehicle("compact-1", 416, 200), id: 7 };
     h.view.entities = [h.player, guest, car];
-    Object.assign(h.view, { seats: { entities: new Map([[1, 2]]) }, serverEntities: [guest] });
+    Object.assign(h.view, {
+      seats: { session: () => undefined, entities: new Map([[1, 2]]) },
+      serverEntities: [guest],
+    });
     const keys = new ActionManager(seatKeyMap("right"));
     keys.disableGamepad();
     const seats = h.host.session.seats;

@@ -10,6 +10,7 @@ import { OnionStrategy } from "./OnionStrategy.js";
 import type { CountryPlan } from "./regional/CountrysidePlanner.js";
 import { DenseDistrictSource } from "./regional/DenseDistrictSource.js";
 import type { DistrictPlan } from "./regional/DistrictPlan.js";
+import { type FarmDestination, farmDestination } from "./regional/FarmsteadPlanner.js";
 import { type MotocrossPark, MotocrossSource } from "./regional/MotocrossPlanner.js";
 import {
   DEFAULT_LANDSCAPE_PROFILE,
@@ -34,6 +35,7 @@ export type OverviewResult = Omit<RegionalResult, "world"> & {
   world: GenerationDescriptor | RegionalWorld;
   districts?: DistrictPlan[];
   countryside?: CountryPlan[];
+  farms?: FarmDestination[];
   /** Current generated routes; station coordinates are tiles, optional paths are world pixels. */
   railways?: RailLine[];
   racetracks?: Pick<Racetrack, "id" | "name" | "center" | "bounds" | "access">[];
@@ -140,9 +142,17 @@ export function* overviewSteps(
     );
     const countryside: CountryPlan[] = [];
     const ponds: NaturalPond[] = [];
+    let farms: FarmDestination[] = [];
     if (landscape) {
       const world = regionalWorld(descriptor.seed);
       const nature = new NaturalLandscape(world, landscape);
+      if (result.detail === "region") {
+        const visible = nature.farms.query(request.bounds).map(farmDestination);
+        if (result.stats.features + visible.length <= request.limits.maxFeatures) {
+          farms = visible;
+          result.stats.features += visible.length;
+        }
+      }
       for (let row = 0; row < result.grid.height; row++) {
         for (let col = 0; col < result.grid.width; col++) {
           const i = row * result.grid.width + col;
@@ -192,6 +202,7 @@ export function* overviewSteps(
       world: descriptor,
       districts,
       countryside,
+      farms,
       railways,
       racetracks,
       vehicleDepots,

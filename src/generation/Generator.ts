@@ -72,9 +72,14 @@ export function createGenerator(
       return {
         descriptor,
         terrain,
-        actors: (cx, cy) => [...terrain.actors(cx, cy), ...outdoorGems(terrain, cx, cy)],
+        actors: (cx, cy) => [
+          ...terrain.actors(cx, cy),
+          ...terrain.nature.farms.gardenActors(cx, cy),
+          ...outdoorGems(terrain, cx, cy),
+        ],
         actorAdditions: (cx, cy) => [
           ...terrain.spectators(cx, cy),
+          ...terrain.nature.farms.gardenActors(cx, cy),
           ...outdoorGems(terrain, cx, cy),
         ],
         placements: (cx, cy) => ({

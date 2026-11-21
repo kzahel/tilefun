@@ -1,6 +1,7 @@
 import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { Direction } from "../entities/Entity.js";
+import { CHICKEN_FEEDER, FENCE_STAKES, GARDEN_BED, WOODLOT_TREE } from "../farming/FarmActors.js";
 import { RoadType } from "../road/RoadType.js";
 import { originalVehicle } from "../traffic/OriginalVehicles.js";
 import { EDITOR_VEHICLE_MODELS } from "../traffic/Vehicle.js";
@@ -148,6 +149,10 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
   { type: ROBIN_TYPE, label: "Robin", color: "#bc5836", previewRow: Direction.Right },
   { type: RABBIT_TYPE, label: "Rabbit", color: "#ad967a", previewRow: Direction.Right },
   { type: "chicken", label: "Chicken", color: "#f0c040" },
+  { type: GARDEN_BED, label: "Garden bed", color: "#ab714c" },
+  { type: CHICKEN_FEEDER, label: "Chicken feeder", color: "#ab714c" },
+  { type: WOODLOT_TREE, label: "Woodlot tree", color: "#43854e" },
+  { type: FENCE_STAKES, label: "Fence stakes", color: "#ab714c" },
   { type: "cow", label: "Cow", color: "#d4a880" },
   { type: "pigeon", label: "Pigeon", color: "#8888cc" },
   { type: "pigeon2", label: "Pigeon 2", color: "#9999aa" },

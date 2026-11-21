@@ -3,6 +3,7 @@ import type { Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import type { Prop } from "../entities/Prop.js";
 import { createProp } from "../entities/PropFactories.js";
+import { restoreFarmPose } from "../farming/FarmPose.js";
 import { restoreResidentPose } from "../interiors/ResidentBehavior.js";
 import { generateUUID } from "../shared/uuid.js";
 import { restoreAnimalWorkPose } from "../wildlife/AnimalWorkPose.js";
@@ -43,6 +44,7 @@ export const DURABLE_ENTITY_FIELDS = [
   "fauna",
   "animalWork",
   "workItem",
+  "farm",
   "predator",
   "routeAI",
   "resident",
@@ -150,6 +152,7 @@ export function decodeActor(record: ActorRecord, definitions?: ActorDefinitions)
     restoreWorkItemPose(actor);
     restorePredatorPose(actor);
     restoreResidentPose(actor);
+    restoreFarmPose(actor);
   }
   actor.persistentId = record.persistentId;
   if (record.proceduralId) actor.proceduralId = record.proceduralId;

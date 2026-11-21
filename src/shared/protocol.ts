@@ -60,6 +60,7 @@ export type VehicleHornMessage = {
 };
 
 export type ClientMessage =
+  | (import("../farming/FarmInteraction.js").FarmRequest & { requestId: number })
   | { type: "call-train"; requestId: number; benchId: number }
   | { type: "vehicle-horn"; active: boolean }
   | { type: "enter-vehicle"; requestId: number; entityId: number }
@@ -359,6 +360,7 @@ export interface FrameSeat {
 export interface SyncSessionMessage {
   type: "sync-session";
   gemsCollected: number;
+  farmBasket?: import("../farming/FarmActors.js").FarmBasket;
   editorEnabled: boolean;
   /** null = not riding. Absence of entire SyncSession = unchanged. */
   mountEntityId: number | null;
@@ -417,6 +419,7 @@ export type BufferedMessage = FrameMessage | SyncMessage;
 export type ServerMessage =
   | VehicleHornMessage
   | { type: "vehicle-controlled"; requestId: number }
+  | { type: "farm-action-done"; requestId: number }
   | import("../interiors/DoorTraversal.js").DoorMotion
   | { type: "storage-status"; paused: boolean; message: string }
   | ({ type: "room-edit-status" } & import("../interiors/GameplayRoom.js").RoomEditStatus)

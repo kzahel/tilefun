@@ -1,4 +1,5 @@
 import type { GameContext } from "../core/GameScene.js";
+import { farmBasketLabel } from "../farming/FarmInteraction.js";
 import { cssRegion } from "../input/ViewRect.js";
 import { projectWorld } from "../rendering/Projection.js";
 import { layoutViews } from "../rendering/ViewLayout.js";
@@ -148,16 +149,16 @@ function seatEntityId(gc: GameContext, seat: number): number {
  * when the view touches the page's top right corner). */
 function drawSeatBadge(gc: GameContext, view: View): void {
   const { ctx } = gc;
-  const gems =
-    view.seat === 0
-      ? gc.stateView.gemsCollected
-      : (gc.stateView.seats.session(view.seat, gc.stateView.serverTick)?.gemsCollected ?? 0);
+  const own =
+    view.seat === 0 ? gc.stateView : gc.stateView.seats.session(view.seat, gc.stateView.serverTick);
+  const gems = own?.gemsCollected ?? 0;
+  const basket = farmBasketLabel(own?.farmBasket);
   const label = `Player ${view.seat + 1}`;
   const count = gems.toLocaleString();
   ctx.font = "bold 16px system-ui, sans-serif";
   ctx.textBaseline = "middle";
   const textWidth = ctx.measureText(label).width + ctx.measureText(count).width;
-  const width = textWidth + 24 + 20 + 12;
+  const width = Math.max(textWidth + 24 + 20 + 12, ctx.measureText(basket).width + 20);
   const cornered = view.region.y === 0 && view.region.x + view.region.width >= gc.canvas.width;
   const left = view.region.width - width - 8;
   const top = cornered ? 60 : 8;
@@ -165,7 +166,7 @@ function drawSeatBadge(gc: GameContext, view: View): void {
   ctx.strokeStyle = "#c9a857";
   ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.roundRect(left, top, width, 32, 8);
+  ctx.roundRect(left, top, width, basket ? 54 : 32, 8);
   ctx.fill();
   ctx.stroke();
   ctx.fillStyle = "#f4f5ec";
@@ -177,6 +178,7 @@ function drawSeatBadge(gc: GameContext, view: View): void {
   }
   ctx.fillStyle = "#ffe38a";
   ctx.fillText(count, iconX + 24, top + 16);
+  if (basket) ctx.fillText(basket, left + 10, top + 39);
 }
 
 /** A guest's place prompts at the bottom of its view, nearest the player last

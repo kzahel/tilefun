@@ -1,5 +1,6 @@
 import { Direction, type Entity } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
+import { SCATTERED_CORN } from "../farming/FarmActors.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { gap } from "../shared/gap.js";
@@ -235,13 +236,17 @@ export class GardenWork {
           a.sprite.frameRow = t.facing;
         }
         enterFaunaWork(a, kind === "chicken" ? "scratch" : "sip");
+        // Scattered corn is already on the surface, so go directly to the pickup.
+        if (target?.type === SCATTERED_CORN) t.elapsed = 1.8;
       } else if (!this.work.go(a, point, point.z, c, planning)) this.stop(a);
       return true;
     }
     const sources = this.nearby(a)
       .filter(
         (e) =>
-          e.type === sourceType(kind === "chicken" ? "scratch-patch" : "nectar-flower") &&
+          (kind === "chicken"
+            ? e.type === SCATTERED_CORN || e.type === sourceType("scratch-patch")
+            : e.type === sourceType("nectar-flower")) &&
           e.workItem &&
           e.workItem.units > 0 &&
           e.parentId === undefined &&
@@ -250,10 +255,12 @@ export class GardenWork {
       )
       .sort(
         (x, y) =>
+          Number(y.type === SCATTERED_CORN) - Number(x.type === SCATTERED_CORN) ||
           Number(x.persistentId === t.lastFlowerId) * 1000 -
             Number(y.persistentId === t.lastFlowerId) * 1000 +
             gap(x.position, a.position) -
-            gap(y.position, a.position) || durableId(x).localeCompare(durableId(y)),
+            gap(y.position, a.position) ||
+          durableId(x).localeCompare(durableId(y)),
       );
     for (const food of sources.slice(0, 8)) {
       if (planning && !planning.candidate(a)) break;

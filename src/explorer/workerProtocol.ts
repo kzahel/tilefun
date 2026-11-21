@@ -13,6 +13,7 @@ export type WorkerRequest =
       id: number;
       world: RegionalWorld | GenerationDescriptor;
       request: RegionalRequest;
+      farmOrigin?: import("../generation/regional/RegionalPlanner.js").Point;
       exact?: { cx: number; cy: number }[];
       footprint?: Bounds;
       snapshot?: InspectionSnapshot;
@@ -25,6 +26,7 @@ export type WorkerResponse =
       type: "result";
       id: number;
       result: OverviewResult;
+      nearestFarm?: import("../generation/regional/FarmsteadPlanner.js").FarmDestination;
       chunks: { cx: number; cy: number; data: ChunkData }[];
       terrainMs: number;
       placements: StructurePlacement[];

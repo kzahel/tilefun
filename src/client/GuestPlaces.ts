@@ -1,3 +1,4 @@
+import { type FarmChoice, type FarmRequest, farmChoice } from "../farming/FarmInteraction.js";
 import type { ClientSeat } from "../session/ClientSeat.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import {
@@ -21,7 +22,7 @@ export interface GuestPlacesHost {
   readonly inputBlocked: boolean;
   readonly storagePaused: boolean;
   clearPlayInput(sendNeutral?: boolean): void;
-  request(message: DoorRequest | VehicleRequest, seat: number): Promise<unknown>;
+  request(message: DoorRequest | VehicleRequest | FarmRequest, seat: number): Promise<unknown>;
 }
 
 /** A guest's own body as its place choices read it: predicted where the predictor
@@ -56,6 +57,7 @@ class GuestPlace {
   private readonly walk = new DoorWalk();
   private vehicle: VehicleChoice | null = null;
   private door: DoorChoice | null = null;
+  private farm: FarmChoice | undefined;
   private busy = false;
   private status = "";
   private targetKey = "";
@@ -81,6 +83,7 @@ class GuestPlace {
     if (!view) {
       this.walk.reset();
       this.vehicle = this.door = null;
+      this.farm = undefined;
       seat.prompts = [];
       return;
     }
@@ -92,7 +95,20 @@ class GuestPlace {
     const walking = seat.composer.lastMovement;
     if (this.walk.update(view, this.door, doorAllowed, busy || host.inputBlocked, walking, dt))
       this.goThrough(true);
-    const key = this.vehicle.key || (this.door.request ? JSON.stringify(this.door.request) : "");
+    const replica = host.session.replica;
+    const basket = replica.seats.session(seat.seat, replica.serverTick)?.farmBasket;
+    this.farm =
+      doorAllowed &&
+      !this.door.request &&
+      host.playing &&
+      !busy &&
+      !host.inputBlocked &&
+      !host.storagePaused &&
+      !view.editorEnabled &&
+      !view.interior
+        ? farmChoice(view.playerEntity, view.entities, basket)
+        : undefined;
+    const key = this.vehicle.key || JSON.stringify(this.door.request ?? this.farm?.request ?? null);
     if (key !== this.targetKey) {
       this.status = "";
       this.targetKey = key;
@@ -111,7 +127,13 @@ class GuestPlace {
     if (!host.playing || host.inputBlocked) return;
     const request = this.vehicle?.request;
     if (!request) {
-      this.goThrough(false);
+      const farm = this.farm?.request;
+      if (farm && !this.vehicleLocked) {
+        const key = this.targetKey;
+        void this.run(farm).catch((error: Error) => {
+          if (this.targetKey === key) this.status = error.message;
+        });
+      } else this.goThrough(false);
       return;
     }
     if (!this.vehicleLocked) this.board(request);
@@ -159,7 +181,7 @@ class GuestPlace {
     });
   }
 
-  private async run(request: DoorRequest | VehicleRequest): Promise<void> {
+  private async run(request: DoorRequest | VehicleRequest | FarmRequest): Promise<void> {
     this.busy = true;
     this.status = "";
     try {
@@ -180,6 +202,8 @@ class GuestPlace {
     if (vehicle?.equipment) lines.push(`${vehicle.equipment.label}${hint("vehicle_recover")}`);
     if (vehicle?.request) lines.push(`${vehicle.label}${hint("enter_place")}`);
     else if (door?.request) lines.push(`${door.label}${hint("enter_place")}`);
+    else if (this.farm)
+      lines.push(`${this.farm.label}${this.farm.request ? hint("enter_place") : ""}`);
     if (this.status) lines.push(this.status);
     return lines;
   }

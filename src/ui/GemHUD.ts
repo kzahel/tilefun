@@ -1,4 +1,6 @@
 import type { Entity } from "../entities/Entity.js";
+import type { FarmBasket } from "../farming/FarmActors.js";
+import { farmBasketLabel } from "../farming/FarmInteraction.js";
 import "./GemHUD.css";
 
 /** Persistent player progress, independent of scene and world renderer. */
@@ -7,6 +9,8 @@ export class GemHUD {
   private readonly icon = document.createElement("canvas");
   private readonly count = document.createElement("span");
   private readonly buddies = document.createElement("span");
+  private readonly basket = document.createElement("span");
+  private lastBasket: FarmBasket | undefined;
   private lastGems = -1;
   private lastBuddies = -1;
 
@@ -24,7 +28,10 @@ export class GemHUD {
     this.count.dataset.testid = "gem-count";
     this.buddies.className = "gem-hud-buddies";
     this.buddies.hidden = true;
-    this.element.append(this.icon, label, this.count, this.buddies);
+    this.basket.className = "farm-basket";
+    this.basket.dataset.testid = "farm-basket";
+    this.basket.hidden = true;
+    this.element.append(this.icon, label, this.count, this.buddies, this.basket);
     document.body.append(this.element);
   }
 
@@ -34,19 +41,30 @@ export class GemHUD {
 
   /** Seat 0's gems and following buddies; hidden while split-screen views draw each
    * seat's own badge (226). */
-  present(state: { gemsCollected: number; entities: readonly Entity[] }, shown: boolean): void {
+  present(
+    state: {
+      gemsCollected: number;
+      entities: readonly Entity[];
+      farmBasket?: FarmBasket | undefined;
+    },
+    shown: boolean,
+  ): void {
     if (!shown) {
       this.element.hidden = true;
       return;
     }
     let buddies = 0;
     for (const entity of state.entities) if (entity.wanderAI?.following) buddies++;
-    this.update(state.gemsCollected, buddies);
+    this.update(state.gemsCollected, buddies, state.farmBasket);
   }
 
-  update(gems: number, buddies: number): void {
+  update(gems: number, buddies: number, basket?: FarmBasket): void {
     this.element.hidden = false;
-    if (gems === this.lastGems && buddies === this.lastBuddies) return;
+    if (gems === this.lastGems && buddies === this.lastBuddies && basket === this.lastBasket)
+      return;
+    this.lastBasket = basket;
+    this.basket.hidden = !basket;
+    this.basket.textContent = farmBasketLabel(basket);
     this.lastGems = gems;
     this.lastBuddies = buddies;
     this.count.textContent = gems.toLocaleString();
@@ -54,7 +72,7 @@ export class GemHUD {
     this.buddies.textContent = buddies ? `♥ ${buddies}` : "";
     this.element.setAttribute(
       "aria-label",
-      `Gems: ${gems}${buddies ? `; Buddies: ${buddies}` : ""}`,
+      `Gems: ${gems}${buddies ? `; Buddies: ${buddies}` : ""}${basket ? `; Corn: ${basket.corn}; Wood: ${basket.wood}` : ""}`,
     );
   }
 

@@ -31,6 +31,7 @@ async function harness() {
   const guest: Entity = { ...createPlayer(400, 100), id: 2 };
   const replica = {
     seats: {
+      session: () => undefined,
       entities: new Map([
         [0, 1],
         [1, 2],

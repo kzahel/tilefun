@@ -227,6 +227,9 @@ A recipe's `groundDepth` only sets the lot's street margin. See
 
 ## Connected countryside and larger settlements
 
+[Farming](farming.md) owns the playable gardens, chicken pens and Map destinations
+at rural farmsteads and the additional farms on town outskirts.
+
 On 2026-10-09 the owner requested farmhouses and smaller dirt roads branching
 from inter-town roads, larger denser cities, and cats/dogs in towns and cities,
 then authorized proceeding. [083](../tactical/083-farms-town-pets-and-larger-cities.md)
