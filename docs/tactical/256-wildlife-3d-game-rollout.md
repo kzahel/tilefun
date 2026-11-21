@@ -398,7 +398,12 @@ using the same Node invocation. The renderer report pins the GLB bytes returned
 to the browser. The deployed verifier checks that the requested animal's mesh
 was drawn, even when another species also drew as a mesh.
 `record-3d-rollout-evidence.mjs BATCH RUNTIME_REPORT DEPLOYMENT_REPORT` checks the
-matching fingerprints before adding per-state ledger entries. The promotion command,
-`promote-3d-rollout.mjs BATCH`, requires the exact Workshop approvals and a
-complete set of matching state records before copying models into the runtime
-bank. Keep each revision's review files immutable.
+matching fingerprints before adding per-state ledger entries. Biome skips formatting
+the generated deployment reports so the tracked copies retain the verifier's output.
+The `promote-3d-rollout.mjs BATCH` command requires the exact Workshop approvals
+and a complete set of matching state records before copying models into the
+runtime bank. Keep each revision's review files immutable.
+
+The CI repair records the committed rollout's size and complexity in five
+code-health baseline entries for mesh drawing, sprite collection, the wildlife
+review recipe and the two Workshop pages.

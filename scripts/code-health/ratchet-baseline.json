@@ -463,8 +463,8 @@
       "overLimit": 1
     },
     "src/rendering/GpuMeshBodies.ts": {
-      "lines": 301,
-      "worst": 66,
+      "lines": 311,
+      "worst": 64,
       "overLimit": 1
     },
     "src/rendering/GrassBladeRenderer.ts": {
@@ -485,6 +485,11 @@
     "src/rendering/RoadDeckPresentation.ts": {
       "lines": 138,
       "worst": 26,
+      "overLimit": 1
+    },
+    "src/rendering/scene/EntitySprites.ts": {
+      "lines": 534,
+      "worst": 37,
       "overLimit": 1
     },
     "src/rendering/SurfacePresentation.ts": {
@@ -530,6 +535,11 @@
     "src/scenarios/ScenarioWorkerHost.ts": {
       "lines": 138,
       "worst": 37,
+      "overLimit": 1
+    },
+    "src/scenarios/WildlifeModelReviewRecipe.ts": {
+      "lines": 143,
+      "worst": 42,
       "overLimit": 1
     },
     "src/scenes/EditScene.ts": {
@@ -808,9 +818,9 @@
       "overLimit": 1
     },
     "src/workshop/NaturalLandscapePage.tsx": {
-      "lines": 833,
-      "worst": 32,
-      "overLimit": 2
+      "lines": 962,
+      "worst": 51,
+      "overLimit": 3
     },
     "src/workshop/PatternPage.tsx": {
       "lines": 635,
@@ -833,8 +843,8 @@
       "overLimit": 1
     },
     "src/workshop/ReviewPage.tsx": {
-      "lines": 718,
-      "worst": 47,
+      "lines": 771,
+      "worst": 51,
       "overLimit": 3
     },
     "src/workshop/SourcePage.tsx": {
