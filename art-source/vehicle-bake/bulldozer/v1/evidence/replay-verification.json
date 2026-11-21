@@ -1,0 +1,11 @@
+{
+  "method": "Ran Blender 5.2.2 LTS from a directory containing only build.py and family.json; compared GLB and atlas bytes.",
+  "inputHashes": {
+    "art-source/vehicle-bake/bulldozer/v1/build.py": "2710fe9c8657132474e8b9f21bceed07345f6624dd66fd1124a4d88426f7cd96",
+    "art-source/vehicle-bake/bulldozer/v1/family.json": "a94ffa2092f6870f0a72abe2df87bbf23217ad87007f70ba99f4e9046856af64"
+  },
+  "glbSha256": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa",
+  "atlasSha256": "0851b3e41f82537c0f9b201d301260c9ddda904080f79f5cf26f2a8626136aa1",
+  "byteIdentical": true,
+  "scratchInputDependencies": []
+}

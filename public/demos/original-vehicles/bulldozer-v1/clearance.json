@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "bulldozer--v1",
+    "glbSha256": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa",
+    "triangles": 3042,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.000000000000303,
+        "minimumGap": 3.499999999999697,
+        "nearestBody": "Bulldozer_body"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.000000000000303,
+        "minimumGap": 3.499999999999697,
+        "nearestBody": "Bulldozer_body"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.000000000000303,
+        "minimumGap": 2.5440037453172275,
+        "nearestBody": "Bulldozer_body"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.000000000000303,
+        "minimumGap": 2.5440037453172275,
+        "nearestBody": "Bulldozer_body"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

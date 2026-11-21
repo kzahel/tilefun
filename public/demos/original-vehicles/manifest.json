@@ -65787,6 +65787,476 @@
           "sha256": "5061d8147c6dacd2a5f2743bbd770593b2eb8d1705beb94b6330d711347ef6f4"
         }
       ]
+    },
+    {
+      "id": "bulldozer-v1",
+      "name": "Bulldozer",
+      "title": "Bulldozer \u00b7 heavy tracked prototype",
+      "nativeSize": 188,
+      "engineRadius": 94.0,
+      "dimensions": [
+        188,
+        188
+      ],
+      "groundOrigins": {
+        "study": [
+          94,
+          122
+        ],
+        "engine": [
+          94,
+          94
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original low-poly bulldozer with face-owned UV swatches, a curved steel-edged moldboard and four independently rolling road wheels inside fixed track rails.",
+      "audit": {
+        "triangles": 3042,
+        "vertices": 5694,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 204328,
+        "sha256": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/bulldozer/v1/atlas.png",
+          "retained": "demos/original-vehicles/bulldozer-v1/inputs/atlas.png",
+          "sha256": "0851b3e41f82537c0f9b201d301260c9ddda904080f79f5cf26f2a8626136aa1"
+        },
+        {
+          "source": "demos/vehicle-bake/bulldozer/v1/model.glb",
+          "retained": "demos/original-vehicles/bulldozer-v1/inputs/model.glb",
+          "sha256": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa"
+        },
+        {
+          "source": "demos/vehicle-bake/bulldozer/v1/report.json",
+          "retained": "demos/original-vehicles/bulldozer-v1/inputs/report.json",
+          "sha256": "35a0326677a3f4d17db8cb70fa9ee4d26508006520080b8eceb493d679cc439c"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "url": "demos/original-vehicles/bulldozer-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "bulldozer--v1",
+          "glbSha256": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa",
+          "triangles": 3042,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 6.000000000000303,
+              "minimumGap": 3.499999999999697,
+              "nearestBody": "Bulldozer_body"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 6.000000000000303,
+              "minimumGap": 3.499999999999697,
+              "nearestBody": "Bulldozer_body"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 6.000000000000303,
+              "minimumGap": 2.5440037453172275,
+              "nearestBody": "Bulldozer_body"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 6.000000000000303,
+              "minimumGap": 2.5440037453172275,
+              "nearestBody": "Bulldozer_body"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 6,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 6,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 6,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 6,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/browser-qa.json",
+          "sha256": "52d0cb8e3f00f19b4cf67bdc85c57978dd5b73c601099a50eb30eabbd4bedd67"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/candidate.json",
+          "sha256": "f86b22131cabdddc55f33044bbfb3817b52af91395139ae625569125f152661c"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/capture.json",
+          "sha256": "5e2c88ec76c49512039dedaeef9699de897b14a1f154311041ebc58ab6c5a85c"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/contact-sheet.png",
+          "sha256": "5f3dd220418df8d79d0776d5e368aeb5b2391955170dde7883fb45aac872b057"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-0.png",
+          "sha256": "17c08c15d2de2703b088ba483c94848f34105129082bedcbb34fcc195c4d6d48"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-1.png",
+          "sha256": "65ee6d6706ddbe36c10fad5935ff76b8118933ed781040d2c54705583a8395e8"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-10.png",
+          "sha256": "66e448ad717fb2a1449d50ad99eceeff10eaca02119ab80c0cc31f4828ec1360"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-11.png",
+          "sha256": "f52851bf5acbf8382fafa1dcbf6168f69a00277b606814a2601507f186c08236"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-12.png",
+          "sha256": "0941cd8768551029075e52b3a53f1fc8a492cdf37d3d945ae244e453f8d180a5"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-13.png",
+          "sha256": "c57c2d5ecc518783a1408aa5c311b0c889856143c4086bad39eb71b24108f37f"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-14.png",
+          "sha256": "8966b2e623ad263fd5f0747fe087faf65ab454f8743a608ab2d9f71cf96123da"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-15.png",
+          "sha256": "8154be28f0cc0ec7e961d255b7f75ea48a727a223bc6d580cc6f268b4b42ae3d"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-1x.png",
+          "sha256": "8cfef1d4b0c6e276a5831dd48eaeb43f89837f287d30b1c61bb1532d484848fc"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-2.png",
+          "sha256": "04a932f95ea7f03202a9e556b7e08670ea2e95695a0cf082825ac3e18c964968"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-2x.png",
+          "sha256": "e4e96915f21b925d6c74577473f8e06ba25db0d7f2870ad49fdee2ae99add4d2"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-3.png",
+          "sha256": "e7f5d6984e0be2413d3622a58ea105e4a8d258c8d916a6f1bab66dd71952b507"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-3x.png",
+          "sha256": "701081a9ac0b3c9089a53ce0bc22e6db8f5a1dda9dc598aeb162e43e7407c89b"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-4.png",
+          "sha256": "6e1fda618b4ec22395803fd69f6e321c60cb8cb9a6ef1f4a09e725c7e3da958a"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-5.png",
+          "sha256": "2ac81f25084280260f0b02190c57e391550018d4a0a32508d0a6f6b315646480"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-6.png",
+          "sha256": "6e103aaf657a189cb45f547235f4d7633a23ebf2a4511903aa3c286b60cc99a7"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-7.png",
+          "sha256": "18c0cc12fc524dbb97affd5c8d94ad1de1c8728dfce81ca456bffa701bf43b39"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-8.png",
+          "sha256": "f25a22c1c44dad1ed6cc56bcbb2fa4f2b3328431ecb364cf2902e342375e2968"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/engine-9.png",
+          "sha256": "a0988730ff9adc1c01266736b3e20352bf41ac6e310b1bc8ad2aacffd4aedb2a"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/game-roll-0.png",
+          "sha256": "04a932f95ea7f03202a9e556b7e08670ea2e95695a0cf082825ac3e18c964968"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/game-roll-1.png",
+          "sha256": "04a932f95ea7f03202a9e556b7e08670ea2e95695a0cf082825ac3e18c964968"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/game-roll-2.png",
+          "sha256": "929d5bcff72055844be229eaef6c530c1a00fb14ea1bc75cb823a1113bde2734"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/game-roll-3.png",
+          "sha256": "04a932f95ea7f03202a9e556b7e08670ea2e95695a0cf082825ac3e18c964968"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/game-roll-4.png",
+          "sha256": "04a932f95ea7f03202a9e556b7e08670ea2e95695a0cf082825ac3e18c964968"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/game-roll-5.png",
+          "sha256": "34e15ccdbd949aa591997ca1dd12651ea90db8f626f0cf7171728cfc1ba7accd"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/game-roll-6.png",
+          "sha256": "edffbe54e6d6d9bb69c16dc8f8f2fbb6a87e108df5dab546b1244c5eaa3ef9b5"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/game-roll-7.png",
+          "sha256": "f5cd93fccff1a4445aa6faba9c5c77f4c9b1c7e7aa746a43b73df241f5dfdbac"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/game-turntable.gif",
+          "sha256": "cb705390cd6532ce457228e6221244cc4d342d933daab7a4e3eacf9f4591e45f"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/roll-0.png",
+          "sha256": "a5deb1be91af876e0575d777cc66c740e27496efbf55d04c2fb99fb4e2d7bbf0"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/roll-1.png",
+          "sha256": "fc5ee05b34b1ec5d5d478fa48ca7d52876841792e7a12196472c30279ecc59bc"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/roll-2.png",
+          "sha256": "a5deb1be91af876e0575d777cc66c740e27496efbf55d04c2fb99fb4e2d7bbf0"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/roll-3.png",
+          "sha256": "f23ba36a9ccf1279feec65ef7e03b58e8e39dcf2990f0d05a6470c6411ed77e9"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/roll-4.png",
+          "sha256": "c064156158b46680cc1642ccf35d517b06db0205021e35d7c65f632f0fea7fac"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/roll-5.png",
+          "sha256": "fc5ee05b34b1ec5d5d478fa48ca7d52876841792e7a12196472c30279ecc59bc"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/roll-6.png",
+          "sha256": "a5deb1be91af876e0575d777cc66c740e27496efbf55d04c2fb99fb4e2d7bbf0"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/roll-7.png",
+          "sha256": "fc5ee05b34b1ec5d5d478fa48ca7d52876841792e7a12196472c30279ecc59bc"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-0.png",
+          "sha256": "9a1bf42dca5f81ee454d4f0eb1eed57129e8c33ff1227dd8e340f39765fbc51d"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-1.png",
+          "sha256": "27edc59f64403180e6d6afce69ca6cd44defb9b4c32e772636d06d1788da2926"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-10.png",
+          "sha256": "44f12fc7542e435c3167b70f96b292e5d939e3ea6304003eb170eaf3efb69ff0"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-11.png",
+          "sha256": "fea6102170b148f118ee2b36f3b4644e61f6ae0ff62a094eb549b7f99332ce77"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-12.png",
+          "sha256": "966d1f800f098523e5ca755997031f5306e307686051f5e371801172a6c48713"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-13.png",
+          "sha256": "5017a5f6772009569cea54af385f14e694e315720e6478dac45a84c6a441822d"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-14.png",
+          "sha256": "ee75a9166bae49413e2f0112e5952269f84ee9f0cbfdcfd174873e1a8c13c7fa"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-15.png",
+          "sha256": "ab711a8d27f0c100c203536ca0ffa437a210be0c431aad5b46a111eb455e9715"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-1x.png",
+          "sha256": "34165d5cfb3474a1b20ab24d786b5a81a0dd031064dc8887930347df3f3f0099"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-2.png",
+          "sha256": "a5deb1be91af876e0575d777cc66c740e27496efbf55d04c2fb99fb4e2d7bbf0"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-2x.png",
+          "sha256": "c177546aa24a452771b2ca846916bea7d7f2dbbe9acfdbf9a20b7d9d91b93fd9"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-3.png",
+          "sha256": "9ddb7f1df2d14912086cf6249c669162a0a75d202356d836fbd71dfff5190c67"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-3x.png",
+          "sha256": "a174a887580f499615d0cee946f7c06d53bed7818f28e63cd1367c3a80398263"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-4.png",
+          "sha256": "4eb1610202fe25b2315fd3d2ead67cfcc10a8adfa2d4afe189b359899c1bee89"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-5.png",
+          "sha256": "8f40fbc1c8bd81c4829c2351e2aaa44bd9f31cf0ede383338355606dd2958618"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-6.png",
+          "sha256": "6e4039f0ee39f3ee5ed97edf38272f428b23dfb36ca65d890c9c91fa97be7864"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-7.png",
+          "sha256": "f3f4aa5d1c212e0a43c2bbfa1d1cf4b5e72fe5032cfba2e5e5c871dccd26a617"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-8.png",
+          "sha256": "51b0f9f5d67d2dffad8f6580c26a26780b3c9bf46ebcb445dfb4b993d485ee9d"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/study-9.png",
+          "sha256": "ef731e7498f4feb8b861983f592c6a5c5b9fde254e1ab3dc0854f2bd554ca292"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/turntable.gif",
+          "sha256": "9a74b4e1dac2992dc3ef2934229634d20876bfd26036a99c6da3b8337b722a9f"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/viewer-desktop.png",
+          "sha256": "85a9f7680b88ef916a8ae46aa69520ce6a330e28824ac5994852743dbdc69aa2"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/viewer-mobile.png",
+          "sha256": "cfd90b4952c74ce3c312fe50b532f88cb40ee90b51ff7321f26b9c9d7175c1bc"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/wheel-phases.png",
+          "sha256": "65871d5057a690c015edac655a6a59fba1fc4afcc14c27ca4526bbe4fd8d5672"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/wire-engine.png",
+          "sha256": "874594f2b772b968f7e45f83e0832098299c2b72974faa9342fcffcf54a76a21"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/captures/wire-study.png",
+          "sha256": "e3f83459839335c8d13dad27d0831c7ff9f9ddd3365b4c46e9949fb0c89fca42"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/clearance.json",
+          "sha256": "92fe8bbcf1935ed99ffeb53642b8c2c7cdf0cbd43c72836a9a211f4cc7840624"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/inputs/atlas.png",
+          "sha256": "0851b3e41f82537c0f9b201d301260c9ddda904080f79f5cf26f2a8626136aa1"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/inputs/model.glb",
+          "sha256": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/inputs/report.json",
+          "sha256": "35a0326677a3f4d17db8cb70fa9ee4d26508006520080b8eceb493d679cc439c"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/viewer.js",
+          "sha256": "d5874c800b87d8729b28103dc5f301a3a84bb66f0866158be3905b20849f2e9f"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/visual-inspection.json",
+          "sha256": "419632ed31113768a8a554378fda27bcf0587a7c46d62ce8a0ff26722ce97e01"
+        },
+        {
+          "url": "demos/original-vehicles/bulldozer-v1/review-manifest.json",
+          "sha256": "7d1539f4cf3e70bbf360b9f00e8ec5140602cc717c9cbd2557fda737e6579d82"
+        }
+      ]
     }
   ]
 }

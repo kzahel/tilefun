@@ -39,6 +39,7 @@ const FIXTURES = [
   "car-bridge",
   "car-garage",
   "car-dynamics",
+  "bulldozer-yard",
   "car-jumps",
   "tree-house",
   "outskirts-park",

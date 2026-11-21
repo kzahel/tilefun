@@ -1,0 +1,6 @@
+{
+  "status": "complete",
+  "method": "Original low-poly bulldozer with face-owned UV swatches, a curved steel-edged moldboard and four independently rolling road wheels inside fixed track rails.",
+  "sourceBlend": "art-source/vehicle-bake/bulldozer/v1/bulldozer.blend",
+  "recipe": "art-source/vehicle-bake/bulldozer/v1/build.py"
+}

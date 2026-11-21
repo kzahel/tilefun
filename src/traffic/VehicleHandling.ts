@@ -31,6 +31,7 @@ const OFFROAD_ALL = [
   "pickup",
   "farm-tractor",
   "snowplow",
+  "bulldozer",
 ];
 const OFFROAD_REAR = ["beach-buggy"];
 const ROAD_REAR = [

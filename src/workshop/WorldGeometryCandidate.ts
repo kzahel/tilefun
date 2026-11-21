@@ -1,4 +1,5 @@
 import { sha256 } from "../art/ArtSource.js";
+import { bulldozerYardRecipe } from "../scenarios/BulldozerYardRecipe.js";
 import {
   GENERATED_CROSSINGS,
   generatedCrossingRecipe,
@@ -51,6 +52,12 @@ const GEOMETRY_FIXTURES = {
     id: "geometry:car-dynamics-v1",
     name: driving("car-dynamics"),
     recipe: () => vehicleDynamicsRecipe(),
+  },
+  "bulldozer-yard": {
+    id: "geometry:bulldozer-yard-v1",
+    name: "Bulldozer yard",
+    recipe: bulldozerYardRecipe,
+    prompt: "Drive the bulldozer into the parked car and judge how it pushes at low speed.",
   },
   "car-surfaces": {
     id: "geometry:car-surfaces-v1",

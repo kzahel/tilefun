@@ -1,5 +1,10 @@
 # Vehicles: shared physics baseline
 
+[257](../tactical/257-bulldozer-yard.md) adds a Workshop **Bulldozer yard** with
+a parked car to push. Chassis mass is optionally authored per model and shared
+by authority and prediction. The dozer uses a 36-unit chassis, all-wheel drive
+and a 44 px/s speed cap. Its blade and tread belts are fixed for this pass.
+
 [246](../tactical/246-stable-fast-landing-contacts.md) repairs the F1 sky-jump
 landing correction in shared collision response: a one-pixel chassis bevel and
 a bounded second CCD pass reduce the original same-tick error from 13.56px to

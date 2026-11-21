@@ -1,5 +1,11 @@
 # Original vehicle authoring
 
+[257](../tactical/257-bulldozer-yard.md) adds a playable **Bulldozer yard**
+prototype in Workshop. Its heavy, slow chassis can shove a parked car using
+shared contacts. The yellow tracked model and exact fallback have retained
+source and a frozen appearance candidate. Owner play and appearance review
+are pending.
+
 [173](../tactical/173-single-car-transporter.md) adds an owner-authorized original Car transporter after run153: 2,822 triangles, six draw groups, retained cab/independent wheels plus its own longer platform and ramp. Normal editor/traffic integration and source/pixel replay are delivered locally; appearance awaits inspection. Current fleet is **34 originals / 79 road types / 45 source ports**; earlier batch counts below remain historical.
 
 Topic: original-vehicles

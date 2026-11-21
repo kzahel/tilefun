@@ -1,3 +1,4 @@
+import { bulldozerYardRecipe } from "../scenarios/BulldozerYardRecipe.js";
 import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import { CROWD_VIEW, crowdBenchRecipe } from "../scenarios/CrowdBenchRecipe.js";
 import { JUMP_STARTS, type JumpLane, jumpParkRecipe } from "../scenarios/JumpParkRecipe.js";
@@ -40,6 +41,7 @@ const STATIC_FIXTURES: Record<
   { recipe: () => ScenarioRecipe; starts?: Record<string, Start> }
 > = {
   "tree-house": { recipe: treeHouseRecipe, starts: TREE_HOUSE_STARTS },
+  "bulldozer-yard": { recipe: bulldozerYardRecipe, starts: {} },
   "outskirts-park": { recipe: outskirtsParkRecipe, starts: PARK_STARTS },
   crossing: { recipe: railCrossingRecipe, starts: CROSSING_STARTS },
   garage: { recipe: undergroundGarageRecipe, starts: GARAGE_STARTS },
@@ -86,6 +88,7 @@ export function geometryStarts(
 }
 
 const TERRAIN_FIXTURES = new Set([
+  "bulldozer-yard",
   "realm",
   "crowd",
   "traffic",
@@ -98,6 +101,7 @@ const TERRAIN_FIXTURES = new Set([
 ]);
 const FOLLOW_FIXTURES = new Set(["outskirts-park", "realm", "train"]);
 const ZOOMS: Record<string, number> = {
+  "bulldozer-yard": 0.6,
   "traffic-crowd": 0.125,
   crowd: CROWD_VIEW.zoom,
   "car-jumps": 0.25,
@@ -128,6 +132,17 @@ export function geometryView({ fixture, generated, ambient }: FixtureChoice) {
 }
 
 export function GeometryIntro({ fixture }: { fixture: string }) {
+  if (fixture === "bulldozer-yard")
+    return (
+      <>
+        <h1>Bulldozer yard</h1>
+        <p>
+          Hop into the dozer with E or Interact. Hold ↑ / W to push the parked car across the yard.
+          Use ↓ / S to reverse and ← / → to steer. Touch and controller use the same driving
+          controls.
+        </p>
+      </>
+    );
   if (fixture === "outskirts-park")
     return (
       <>

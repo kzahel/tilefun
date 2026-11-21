@@ -1,0 +1,93 @@
+{
+  "modelSha256": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa",
+  "spriteSha256": "4bfc505e42e60fd0e17c28159a36734e1e0ef7e0285dfc6ac3f346d47a734a8d",
+  "inputs": {
+    "scripts/vehicle-bake/runtime-bulldozer-v1.json": "c50112f99ada4f9fab30368835e0615e893e77d3fa1fa60ec2b7f9190eaac106",
+    "scripts/vehicle-bake/runtime-export-v3.py": "84fa8fbfdb8367875c1b44aa89c5351b74ce6a16de462ce83a8a83bb9f5b6734",
+    "scripts/vehicle-bake/runtime-measure.py": "c6474e949d4a97008f0e214907586dff2742b3b1328ea7c75d1784b866a4b579",
+    "public/demos/original-vehicles/bulldozer-v1/review-manifest.json": "7d1539f4cf3e70bbf360b9f00e8ec5140602cc717c9cbd2557fda737e6579d82",
+    "public/demos/original-vehicles/bulldozer-v1/inputs/model.glb": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa",
+    "public/demos/original-vehicles/bulldozer-v1/inputs/atlas.png": "0851b3e41f82537c0f9b201d301260c9ddda904080f79f5cf26f2a8626136aa1",
+    "public/demos/original-vehicles/bulldozer-v1/captures/capture.json": "5e2c88ec76c49512039dedaeef9699de897b14a1f154311041ebc58ab6c5a85c",
+    "art-source/vehicle-bake/bulldozer/v1/evidence/replay-verification.json": "c55c0e739fab6393abaf487b6099263bcdd1d0fb75f6291050e6701ee6cde0c8",
+    "art-source/vehicle-bake/bulldozer/v1/build.py": "2710fe9c8657132474e8b9f21bceed07345f6624dd66fd1124a4d88426f7cd96",
+    "art-source/vehicle-bake/bulldozer/v1/family.json": "a94ffa2092f6870f0a72abe2df87bbf23217ad87007f70ba99f4e9046856af64",
+    "public/demos/original-vehicles/bulldozer-v1/captures/engine-4.png": "6e1fda618b4ec22395803fd69f6e321c60cb8cb9a6ef1f4a09e725c7e3da958a",
+    "public/demos/original-vehicles/bulldozer-v1/captures/engine-12.png": "0941cd8768551029075e52b3a53f1fc8a492cdf37d3d945ae244e453f8d180a5",
+    "public/demos/original-vehicles/bulldozer-v1/captures/engine-8.png": "f25a22c1c44dad1ed6cc56bcbb2fa4f2b3328431ecb364cf2902e342375e2968",
+    "public/demos/original-vehicles/bulldozer-v1/captures/engine-0.png": "17c08c15d2de2703b088ba483c94848f34105129082bedcbb34fcc195c4d6d48"
+  },
+  "physicalBounds": [
+    100,
+    64,
+    44
+  ],
+  "measurement": {
+    "modelSha256": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa",
+    "measurement": "Actual imported GLB mesh vertices transformed by matrix_world; no re-export",
+    "blenderVersion": "5.2.2 LTS",
+    "axes": {
+      "length": "Blender X",
+      "width": "Blender Y",
+      "height": "Blender Z"
+    },
+    "worldBounds": {
+      "min": [
+        -49.79999923706055,
+        -32.0,
+        0.0
+      ],
+      "max": [
+        44.0,
+        32.0,
+        44.0
+      ],
+      "size": [
+        93.80000305175781,
+        64.0,
+        44.0
+      ]
+    },
+    "triangles": 3042,
+    "meshes": 5
+  },
+  "colliderMeasurement": "Ceil twice the maximum absolute imported X/Y extent about the unchanged authored ground origin; ceil maximum Z",
+  "frameSize": [
+    192,
+    224
+  ],
+  "groundOrigin": [
+    96,
+    144
+  ],
+  "capture": {
+    "frameSize": [
+      188,
+      188
+    ],
+    "groundOrigin": [
+      94,
+      94
+    ],
+    "cardinals": {
+      "south": 4,
+      "north": 12,
+      "west": 8,
+      "east": 0
+    }
+  },
+  "rows": [
+    "south",
+    "north",
+    "west",
+    "east"
+  ],
+  "sourceOnlyReplay": {
+    "receipt": "art-source/vehicle-bake/bulldozer/v1/evidence/replay-verification.json",
+    "sha256": "c55c0e739fab6393abaf487b6099263bcdd1d0fb75f6291050e6701ee6cde0c8",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "projection": "Unchanged shared game projection and native dimensions; exact reviewed GLB/capture pixels",
+  "replay": "python scripts/vehicle-bake/runtime-export-v3.py --config scripts/vehicle-bake/runtime-bulldozer-v1.json --blender BLENDER"
+}

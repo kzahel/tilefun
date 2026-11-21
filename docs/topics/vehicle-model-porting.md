@@ -1,5 +1,11 @@
 # Vehicle model porting checklist
 
+The original tracked bulldozer is a Workshop prototype with its own
+[retained source](../../art-source/vehicle-bake/bulldozer/v1/) and
+[frozen model review](../../public/demos/original-vehicles/bulldozer-v1/).
+[257](../tactical/257-bulldozer-yard.md) owns gameplay and contact evidence.
+The source-port queue below covers the 45 original sprite-bank types.
+
 The new original Car transporter in [173](../tactical/173-single-car-transporter.md) is outside the 45-source port queue. Its source, independent wheel/ramp qualification and pending appearance inspection belong to [original vehicles](original-vehicles.md) and the [transporter workflow](../vehicle-transporter.md). Source-port counts and old asset revisions are unchanged.
 
 Topic: vehicle-model-porting

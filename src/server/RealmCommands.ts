@@ -8,6 +8,7 @@ import { furnitureAsset, INTERIOR_WALL_TYPE } from "../interiors/GameplayInterio
 import { type compileGameplayRoom, validateRoomOccupancy } from "../interiors/GameplayRoom.js";
 import { launchBody, setBodyPose, setHorizontalVelocity } from "../physics/PhysicalEdits.js";
 import type { ClientMessage } from "../shared/protocol.js";
+import { SCENARIO_ONLY_MODELS } from "../traffic/OriginalVehicles.js";
 import { freshBallWork } from "../wildlife/ForageResources.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
@@ -338,13 +339,9 @@ function spawn(
   let changed = false;
   if (realm.interior && (!furnitureAsset(entityType) || !realm.roomState)) return;
   if (entityType.startsWith("vehicle-v1:")) {
-    changed = !!realm.vehicleRegistry?.place(
-      entityType.slice(11),
-      wx,
-      wy,
-      undefined,
-      paintSchemeId,
-    );
+    const model = entityType.slice(11);
+    if (SCENARIO_ONLY_MODELS.has(model)) return;
+    changed = !!realm.vehicleRegistry?.place(model, wx, wy, undefined, paintSchemeId);
   } else if (isPropType(entityType)) {
     changed = spawnProp(ctx, entityType, wx, wy);
   } else {

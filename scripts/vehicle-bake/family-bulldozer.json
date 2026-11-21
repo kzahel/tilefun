@@ -1,0 +1,14 @@
+{
+  "id": "bulldozer-v1",
+  "clearanceId": "bulldozer--v1",
+  "name": "Bulldozer",
+  "title": "Bulldozer · heavy tracked prototype",
+  "source": "public/demos/vehicle-bake/bulldozer/v1",
+  "glb": "public/demos/vehicle-bake/bulldozer/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/bulldozer/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/bulldozer/v1/report.json",
+  "output": "public/demos/original-vehicles/bulldozer-v1",
+  "qa": "data/vehicle-bake/bulldozer-qa",
+  "offline": "data/vehicle-bake/bulldozer-review.html",
+  "nativeSize": 188
+}

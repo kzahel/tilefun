@@ -7,6 +7,8 @@ export interface VehiclePerformance {
   acceleration: number;
   pushSpeed: number;
   pushWeight: number;
+  /** Chassis mass in physics units. Unspecified vehicles use the standard mass. */
+  mass?: number;
   /** Shift/boost top-speed multiplier; ordinary vehicles use DEFAULT_BOOST. */
   boost?: number;
 }

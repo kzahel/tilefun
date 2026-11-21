@@ -16751,6 +16751,17 @@
       "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
     },
     {
+      "id": "projection:original-vehicle-bulldozer-v1",
+      "batchId": "original-vehicles",
+      "name": "Bulldozer · heavy tracked prototype",
+      "prompt": "Review the shape, palette, outlines and fender coverage at game scale and intermediate angles.",
+      "url": "/tilefun/demos/original-vehicles/bulldozer-v1/index.html",
+      "kind": "projection",
+      "fingerprint": "d2f3375b4ce45e9804a2b848dd6f0d9e13750121dd57a848b4086d7f0424b655",
+      "sourceFingerprint": "d2f3375b4ce45e9804a2b848dd6f0d9e13750121dd57a848b4086d7f0424b655",
+      "excluded": "Original vehicle awaiting owner appearance review; gameplay activation is a separate checkpoint."
+    },
+    {
       "id": "projection:original-vehicle-explorer-boat-v1",
       "batchId": "original-vehicles",
       "name": "Explorer motorboat · hollow hull and outboard v1",
@@ -16862,6 +16873,16 @@
       "prompt": "Inspect traversal, support, headroom, underpass and save/reload against the ordinary shared game kernel. Cars are independently controlled freely rotating chassis with suspension. Schematic geometry; no art promotion.",
       "url": "/tilefun/workshop.html?geometry=car-dynamics#/tool/world-geometry",
       "fingerprint": "b534183e9df0e8f8da5caa65c3a3eb55e605ea32d99b5981ea9b893352f63f3d",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
+      "id": "geometry:bulldozer-yard-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "Bulldozer yard",
+      "prompt": "Drive the bulldozer into the parked car and judge how it pushes at low speed.",
+      "url": "/tilefun/workshop.html?geometry=bulldozer-yard#/tool/world-geometry",
+      "fingerprint": "8cdf709c284feed067423d85435ab81a3279e233155bb21b09451f86cd07fcfe",
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
@@ -61140,5 +61161,5 @@
       }
     }
   ],
-  "inputDigest": "6d9fe67d699429ff7345abda16e32113612a2f6416e17f0241a397a97e98bd23"
+  "inputDigest": "3ca1d06f79d7e2b6333edd801f798c70fb6dd4965565d81b9a899745f3728a3c"
 }

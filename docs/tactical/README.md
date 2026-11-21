@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [257 Bulldozer yard](257-bulldozer-yard.md) | Playable Workshop prototype with a retained tracked model and a heavy shared-physics chassis that pushes a parked car at low speed. Owner gameplay and appearance review pending. |
 | [256 Wildlife 3D game rollout](256-wildlife-3d-game-rollout.md) | Queued for a new session. Ship all 219 identities in normal play with distinct animation for every gameplay state. The ledger pins the draft inputs and current bindings. |
 | [255 Wildlife 3D model campaign](255-wildlife-3d-model-campaign.md) | 219 comparison packets and shared game/lab preview delivered. Review and disposition tracked in the [progress log](255-wildlife-3d-model-campaign/progress.md) |
 | [254 Remove renderer scaffolding](254-remove-renderer-scaffolding.md) | Remove fixed-pass helpers, no-op host hooks, inactive sampling/depth adapters and mode gates; retain immutable native review pixels and shared resources |

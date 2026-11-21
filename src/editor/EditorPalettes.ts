@@ -3,7 +3,7 @@ import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { Direction } from "../entities/Entity.js";
 import { RoadType } from "../road/RoadType.js";
 import { originalVehicle } from "../traffic/OriginalVehicles.js";
-import { DRIVABLE_MODELS } from "../traffic/Vehicle.js";
+import { EDITOR_VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { DEER_TYPE } from "../wildlife/Deer.js";
 import { FAUNA_PROFILES, faunaType } from "../wildlife/Fauna.js";
 import { forageType, SOURCE_KINDS, sourceType } from "../wildlife/ForageResources.js";
@@ -181,7 +181,7 @@ const vehicleNames: Record<string, string> = {
   "garbage-truck-orange": "Orange garbage truck",
   "sedan-12": "Beige sedan 12",
 };
-export const VEHICLE_PALETTE: EntityPaletteEntry[] = DRIVABLE_MODELS.map((model) => {
+export const VEHICLE_PALETTE: EntityPaletteEntry[] = EDITOR_VEHICLE_MODELS.map((model) => {
   const color = model.replace("unindexed-sedan-", "");
   const label =
     (model === "explorer-boat" ? "Explorer motorboat" : undefined) ??

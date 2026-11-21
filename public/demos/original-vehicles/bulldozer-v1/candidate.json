@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "bulldozer-v1",
+      "name": "Bulldozer",
+      "title": "Bulldozer \u00b7 heavy tracked prototype",
+      "nativeSize": 188,
+      "engineRadius": 94.0,
+      "dimensions": [
+        188,
+        188
+      ],
+      "groundOrigins": {
+        "study": [
+          94,
+          122
+        ],
+        "engine": [
+          94,
+          94
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Original low-poly bulldozer with face-owned UV swatches, a curved steel-edged moldboard and four independently rolling road wheels inside fixed track rails.",
+      "audit": {
+        "triangles": 3042,
+        "vertices": 5694,
+        "meshes": 5,
+        "primitives": 5,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 204328,
+        "sha256": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/bulldozer/v1/atlas.png",
+          "retained": "demos/original-vehicles/bulldozer-v1/inputs/atlas.png",
+          "sha256": "0851b3e41f82537c0f9b201d301260c9ddda904080f79f5cf26f2a8626136aa1"
+        },
+        {
+          "source": "demos/vehicle-bake/bulldozer/v1/model.glb",
+          "retained": "demos/original-vehicles/bulldozer-v1/inputs/model.glb",
+          "sha256": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa"
+        },
+        {
+          "source": "demos/vehicle-bake/bulldozer/v1/report.json",
+          "retained": "demos/original-vehicles/bulldozer-v1/inputs/report.json",
+          "sha256": "35a0326677a3f4d17db8cb70fa9ee4d26508006520080b8eceb493d679cc439c"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target."
+    }
+  ]
+}

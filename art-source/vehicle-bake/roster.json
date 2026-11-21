@@ -530,6 +530,16 @@
       "status": "idea",
       "authorization": "2026-10-20 owner requested adding this idea to the backlog",
       "next": "Choose an authoring batch; plan the giant duck silhouette and vehicle clearance."
+    },
+    {
+      "id": "bulldozer",
+      "name": "Bulldozer",
+      "family": "Tracked construction machinery",
+      "priority": 53,
+      "status": "prototype",
+      "authorization": "Owner requested the first playable bulldozer and a push demonstration.",
+      "next": "Try the Workshop bulldozer yard and review the fixed blade, crawl speed and contact feel. See tactical 257.",
+      "candidate": "bulldozer-v1"
     }
   ]
 }

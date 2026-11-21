@@ -4,6 +4,7 @@ import type { Entity } from "../entities/Entity.js";
 import { isTrain } from "../railway/Train.js";
 import { hasDumpBed } from "../traffic/DumpBed.js";
 import { isTransporter } from "../traffic/Transporter.js";
+import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import { rapierRotation, rotateBodyVector, yawRotation } from "./BodyRotation.js";
 import { DumpBedBody, setChassisBoxMass } from "./DumpBedBody.js";
 import { type physicsBodyDimensions, physicsBodyMotion } from "./PhysicsBodies.js";
@@ -147,7 +148,7 @@ function colliderDesc(
       hx,
       halfY - clearance / 2,
       hz,
-      8,
+      vehiclePerformance(entity.type).mass ?? 8,
       halfY * (2 * CHASSIS_CENTRE_OF_MASS - 1) - clearance / 2,
     );
   else shape.setMass(kind === "vehicle" ? 8 : kind === "loose" ? 0.2 : 1);

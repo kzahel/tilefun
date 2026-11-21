@@ -3456,6 +3456,16 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "vehicle-v1:bulldozer",
+      "name": "vehicle v1:bulldozer",
+      "image": "assets/vehicles/bulldozer-v1.png",
+      "width": 192,
+      "height": 896,
+      "tileSize": 16,
+      "fingerprint": "4bfc505e42e60fd0e17c28159a36734e1e0ef7e0285dfc6ac3f346d47a734a8d",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "vehicle-v1:explorer-boat",
       "name": "vehicle v1:explorer boat",
       "image": "assets/vehicles/explorer-boat-v1.png",
@@ -35487,7 +35497,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/traffic/Vehicle.ts:109"
+          "source": "src/traffic/Vehicle.ts:111"
         }
       ]
     },
@@ -36226,6 +36236,24 @@
       ]
     },
     {
+      "id": "sprite:vehicle-v1:bulldozer",
+      "sheetId": "vehicle-v1:bulldozer",
+      "rect": [
+        0,
+        0,
+        192,
+        896
+      ],
+      "label": "vehicle-v1:bulldozer · registered 192×224 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        }
+      ]
+    },
+    {
       "id": "sprite:vehicle-v1:explorer-boat",
       "sheetId": "vehicle-v1:explorer-boat",
       "rect": [
@@ -36433,7 +36461,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmCommands.ts:221"
+          "source": "src/server/RealmCommands.ts:222"
         },
         {
           "system": "Gameplay",
@@ -37525,11 +37553,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/SceneBody.ts:121"
+          "source": "src/physics/SceneBody.ts:122"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/SceneBody.ts:139"
+          "source": "src/physics/SceneBody.ts:140"
         },
         {
           "system": "Gameplay",
@@ -37545,7 +37573,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmCommands.ts:276"
+          "source": "src/server/RealmCommands.ts:277"
         },
         {
           "system": "Gameplay",

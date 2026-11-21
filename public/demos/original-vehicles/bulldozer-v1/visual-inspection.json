@@ -1,0 +1,16 @@
+{
+  "status": "no-blocking-issues",
+  "humanApproval": false,
+  "glbSha256": "371c5ef94475c750916f2c0007e8b8a0e92f125403bfbeb63742803173b840aa",
+  "reviewed": [
+    "16 study headings",
+    "16 game headings",
+    "8 signed wheel phases per view",
+    "study and game wireframes"
+  ],
+  "observations": [
+    "Wide blade, steel edge, cab windows, exhaust and dark treads read at native size.",
+    "Both tread openings, far-side rail and the brace arms remain visible at oblique angles. Four road wheels roll independently within the rails.",
+    "Blade and tread belts are fixed in this prototype."
+  ]
+}
