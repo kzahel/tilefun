@@ -1,27 +1,39 @@
 import type { Entity } from "../entities/Entity.js";
-import { gap } from "../shared/gap.js";
+import type { Prop } from "../entities/Prop.js";
 import {
-  CHICKEN_FEEDER,
-  EMPTY_BASKET,
-  type FarmBasket,
-  FENCE_STAKES,
-  GARDEN_BED,
-  WOODLOT_TREE,
-} from "./FarmActors.js";
+  CORN,
+  EMPTY_INVENTORY,
+  heldItem,
+  type Inventory,
+  itemCount,
+  WOOD,
+} from "../inventory/Inventory.js";
+import { gap } from "../shared/gap.js";
+import { faunaType } from "../wildlife/Fauna.js";
+import { FENCE_STAKES, GARDEN_BED, WOODLOT_TREE } from "./FarmActors.js";
+import { FARM_GATE, isFarmGate } from "./FarmGate.js";
 
-export const FARM_REACH = 32;
+const FARM_REACH = 32;
+export const FEED_REACH = 96;
+export const DOMESTIC_HEN = faunaType("chicken");
 export const FARM_LABELS = {
   plant: "Plant corn",
   water: "Water corn",
   harvest: "Harvest corn",
-  feed: "Feed chickens",
+  feed: "Scatter corn",
   chop: "Chop tree",
   replant: "Plant tree",
   fence: "Build fence",
+  "open-gate": "Open gate",
+  "close-gate": "Close gate",
 } as const;
 
-export type FarmAction = keyof typeof FARM_LABELS;
-export type FarmRequest = { type: "farm-action"; action: FarmAction; entityId: number };
+export type GateAction = "open-gate" | "close-gate";
+export type FarmAction = Exclude<keyof typeof FARM_LABELS, GateAction>;
+export type FarmRequest = { type: "farm-action" } & (
+  | { action: FarmAction; entityId: number }
+  | { action: GateAction; propId: number }
+);
 export type FarmChoice = { request: FarmRequest | null; label: string };
 
 export function farmAction(target: Entity): FarmAction | undefined {
@@ -29,7 +41,7 @@ export function farmAction(target: Entity): FarmAction | undefined {
   switch (target.type) {
     case GARDEN_BED:
       return clip === 0 ? "plant" : clip === 1 ? "water" : clip === 3 ? "harvest" : undefined;
-    case CHICKEN_FEEDER:
+    case DOMESTIC_HEN:
       return "feed";
     case WOODLOT_TREE:
       return clip < 3 ? "chop" : clip === 4 ? "replant" : undefined;
@@ -40,7 +52,13 @@ export function farmAction(target: Entity): FarmAction | undefined {
   }
 }
 
-export function canReachFarmTarget(player: Entity, target: Entity, reach = FARM_REACH): boolean {
+type FarmTarget = Pick<Entity, "position"> & { wz?: number | undefined };
+
+export function canReachFarmTarget(
+  player: Entity,
+  target: FarmTarget,
+  reach = FARM_REACH,
+): boolean {
   return (
     player.parentId === undefined &&
     Math.abs((player.wz ?? 0) - (target.wz ?? 0)) <= 7 &&
@@ -48,25 +66,44 @@ export function canReachFarmTarget(player: Entity, target: Entity, reach = FARM_
   );
 }
 
-/** Prop/vehicle priorities are handled by place controls. Choose just one farm target. */
+export function farmGateChoice(player: Entity, props: readonly Prop[]): FarmChoice | undefined {
+  let nearest: Prop | undefined;
+  let distance = FARM_REACH;
+  for (const gate of props) {
+    if (!isFarmGate(gate.type) || !canReachFarmTarget(player, gate, distance)) continue;
+    nearest = gate;
+    distance = gap(player.position, gate.position);
+  }
+  if (!nearest) return undefined;
+  const action = nearest.type === FARM_GATE ? "open-gate" : "close-gate";
+  return {
+    request: { type: "farm-action", action, propId: nearest.id },
+    label: FARM_LABELS[action],
+  };
+}
+
+/** Nearby tools and plants take precedence over scattering at longer range. */
 export function farmChoice(
   player: Entity,
   entities: readonly Entity[],
-  basket: FarmBasket = EMPTY_BASKET,
+  inventory: Inventory = EMPTY_INVENTORY,
 ): FarmChoice | undefined {
   let best: FarmChoice | undefined;
-  let distance = FARM_REACH;
+  let distance = Infinity;
   for (const target of entities) {
     const action = farmAction(target);
-    if (!action || !canReachFarmTarget(player, target)) continue;
+    if (!action || !canReachFarmTarget(player, target, action === "feed" ? FEED_REACH : FARM_REACH))
+      continue;
     const missing =
-      action === "feed" && !basket.corn
-        ? "Harvest corn to feed chickens"
-        : action === "fence" && !basket.wood
+      action === "feed" && heldItem(inventory) !== CORN
+        ? itemCount(inventory, CORN)
+          ? "Hold corn to feed chickens"
+          : "Harvest corn to feed chickens"
+        : action === "fence" && !itemCount(inventory, WOOD)
           ? "Chop a tree for fence wood"
           : "";
-    // A useful neighboring garden action should beat an unavailable material hint.
-    const nextDistance = gap(player.position, target.position);
+    const nextDistance =
+      gap(player.position, target.position) + (action === "feed" ? FARM_REACH : 0);
     if (
       best &&
       (missing
@@ -81,8 +118,4 @@ export function farmChoice(
     };
   }
   return best;
-}
-
-export function farmBasketLabel(basket: FarmBasket | undefined): string {
-  return basket ? `🌽 ${basket.corn}   🪵 ${basket.wood}` : "";
 }

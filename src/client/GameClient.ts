@@ -25,6 +25,7 @@ import { EditorMode } from "../editor/EditorMode.js";
 import { EditorModel } from "../editor/EditorModel.js";
 import { EditorPanel } from "../editor/EditorPanel.js";
 import { startIdeaDelivery } from "../ideas/IdeaDialog.js";
+import { HELD_SHEET } from "../inventory/Inventory.js";
 import type { RenderResources } from "../rendering/RenderFrame.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
@@ -876,6 +877,9 @@ export class GameClient implements GameTestHooks {
       actions: this.actions,
       stateView: this.stateView,
       transport: this.transport,
+      get heldItemSheet() {
+        return client.sheets.get(HELD_SHEET);
+      },
       get spriteCatalog() {
         return client.renderer.assets;
       },

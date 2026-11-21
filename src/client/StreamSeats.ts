@@ -12,7 +12,7 @@ export type BufferedSeatSync = { type: "seat"; seat: number; message: SeatSyncMe
 
 interface SeatSync {
   gemsCollected: number;
-  farmBasket?: import("../farming/FarmActors.js").FarmBasket | undefined;
+  inventory?: import("../inventory/Inventory.js").Inventory | undefined;
   mountEntityId: number | undefined;
   invincibility: { startTick: number; durationTicks: number };
 }
@@ -43,7 +43,7 @@ export class StreamSeats {
     };
     if (msg.type === "sync-session") {
       sync.gemsCollected = msg.gemsCollected;
-      sync.farmBasket = msg.farmBasket;
+      sync.inventory = msg.inventory;
       sync.mountEntityId = msg.mountEntityId ?? undefined;
     } else sync.invincibility = { startTick: msg.startTick, durationTicks: msg.durationTicks };
     this.syncs.set(seat, sync);

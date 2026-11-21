@@ -61,6 +61,7 @@ export type VehicleHornMessage = {
 
 export type ClientMessage =
   | (import("../farming/FarmInteraction.js").FarmRequest & { requestId: number })
+  | (import("../inventory/Inventory.js").InventoryRequest & { requestId: number })
   | { type: "call-train"; requestId: number; benchId: number }
   | { type: "vehicle-horn"; active: boolean }
   | { type: "enter-vehicle"; requestId: number; entityId: number }
@@ -268,6 +269,7 @@ export interface EntitySnapshot {
   vehicleBedTarget?: number;
   towTargetId?: number;
   towedBy?: number;
+  heldItem?: number;
   vehicleRamp?: number;
   transportLoadId?: number;
   transportedBy?: number;
@@ -360,7 +362,7 @@ export interface FrameSeat {
 export interface SyncSessionMessage {
   type: "sync-session";
   gemsCollected: number;
-  farmBasket?: import("../farming/FarmActors.js").FarmBasket;
+  inventory?: import("../inventory/Inventory.js").Inventory;
   editorEnabled: boolean;
   /** null = not riding. Absence of entire SyncSession = unchanged. */
   mountEntityId: number | null;
@@ -420,6 +422,7 @@ export type ServerMessage =
   | VehicleHornMessage
   | { type: "vehicle-controlled"; requestId: number }
   | { type: "farm-action-done"; requestId: number }
+  | { type: "inventory-selected"; requestId: number }
   | import("../interiors/DoorTraversal.js").DoorMotion
   | { type: "storage-status"; paused: boolean; message: string }
   | ({ type: "room-edit-status" } & import("../interiors/GameplayRoom.js").RoomEditStatus)

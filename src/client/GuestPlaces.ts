@@ -1,9 +1,8 @@
-import { type FarmChoice, type FarmRequest, farmChoice } from "../farming/FarmInteraction.js";
+import { type FarmChoice, farmChoice, farmGateChoice } from "../farming/FarmInteraction.js";
 import type { ClientSeat } from "../session/ClientSeat.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import {
   type DoorChoice,
-  type DoorRequest,
   DoorWalk,
   doorChoice,
   type PlaceView,
@@ -12,6 +11,7 @@ import {
   vehicleChoice,
 } from "../ui/PlacePrompts.js";
 import type { DoorPresentation } from "./DoorPresentation.js";
+import type { PlaceRequest } from "./PlaceControls.js";
 
 /** Client state guests' place controls read (seat 0's place controls host). */
 export interface GuestPlacesHost {
@@ -22,7 +22,7 @@ export interface GuestPlacesHost {
   readonly inputBlocked: boolean;
   readonly storagePaused: boolean;
   clearPlayInput(sendNeutral?: boolean): void;
-  request(message: DoorRequest | VehicleRequest | FarmRequest, seat: number): Promise<unknown>;
+  request(message: PlaceRequest, seat: number): Promise<unknown>;
 }
 
 /** A guest's own body as its place choices read it: predicted where the predictor
@@ -58,6 +58,7 @@ class GuestPlace {
   private vehicle: VehicleChoice | null = null;
   private door: DoorChoice | null = null;
   private farm: FarmChoice | undefined;
+  private hotbarAllowed = false;
   private busy = false;
   private status = "";
   private targetKey = "";
@@ -72,6 +73,8 @@ class GuestPlace {
       ? [
           input.on("enter_place", () => this.enter()),
           input.on("vehicle_recover", () => this.equip()),
+          input.on("hotbar_previous", () => this.selectHotbar(-1)),
+          input.on("hotbar_next", () => this.selectHotbar(1)),
         ]
       : [];
   }
@@ -84,6 +87,7 @@ class GuestPlace {
       this.walk.reset();
       this.vehicle = this.door = null;
       this.farm = undefined;
+      this.hotbarAllowed = false;
       seat.prompts = [];
       return;
     }
@@ -96,7 +100,8 @@ class GuestPlace {
     if (this.walk.update(view, this.door, doorAllowed, busy || host.inputBlocked, walking, dt))
       this.goThrough(true);
     const replica = host.session.replica;
-    const basket = replica.seats.session(seat.seat, replica.serverTick)?.farmBasket;
+    const inventory = replica.seats.session(seat.seat, replica.serverTick)?.inventory;
+    this.hotbarAllowed = ready && !view.editorEnabled && view.playerEntity.parentId === undefined;
     this.farm =
       doorAllowed &&
       !this.door.request &&
@@ -106,7 +111,8 @@ class GuestPlace {
       !host.storagePaused &&
       !view.editorEnabled &&
       !view.interior
-        ? farmChoice(view.playerEntity, view.entities, basket)
+        ? (farmGateChoice(view.playerEntity, view.props) ??
+          farmChoice(view.playerEntity, view.entities, inventory))
         : undefined;
     const key = this.vehicle.key || JSON.stringify(this.door.request ?? this.farm?.request ?? null);
     if (key !== this.targetKey) {
@@ -137,6 +143,20 @@ class GuestPlace {
       return;
     }
     if (!this.vehicleLocked) this.board(request);
+  }
+
+  private selectHotbar(step: -1 | 1): void {
+    const { host } = this;
+    if (
+      this.hotbarAllowed &&
+      host.playing &&
+      !host.overlayOpen &&
+      !this.vehicleLocked &&
+      !this.vehicle?.inside
+    )
+      void host
+        .request({ type: "inventory-select", selection: { step } }, this.seat.seat)
+        .catch(() => {});
   }
 
   private equip(): void {
@@ -181,7 +201,7 @@ class GuestPlace {
     });
   }
 
-  private async run(request: DoorRequest | VehicleRequest | FarmRequest): Promise<void> {
+  private async run(request: PlaceRequest): Promise<void> {
     this.busy = true;
     this.status = "";
     try {

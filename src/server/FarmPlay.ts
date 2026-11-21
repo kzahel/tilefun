@@ -4,7 +4,6 @@ import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
 import { createProp } from "../entities/PropFactories.js";
 import {
-  EMPTY_BASKET,
   FALL_MS,
   FARM_FACTORIES,
   GARDEN_BED,
@@ -14,14 +13,22 @@ import {
   SCATTERED_CORN,
   WOODLOT_TREE,
 } from "../farming/FarmActors.js";
-import { canReachFarmTarget, type FarmRequest, farmAction } from "../farming/FarmInteraction.js";
+import { FARM_GATE, OPEN_FARM_GATE } from "../farming/FarmGate.js";
+import {
+  canReachFarmTarget,
+  type FarmAction,
+  type FarmRequest,
+  FEED_REACH,
+  farmAction,
+} from "../farming/FarmInteraction.js";
 import { restoreFarmPose } from "../farming/FarmPose.js";
+import { CORN, changeStack, EMPTY_INVENTORY, heldItem, WOOD } from "../inventory/Inventory.js";
 import { PERSISTENCE_BUDGET } from "../persistence/PersistenceBudget.js";
 import { gap } from "../shared/gap.js";
 import { required } from "../shared/required.js";
-import { faunaType } from "../wildlife/Fauna.js";
 import { createForageItem } from "../wildlife/ForageResources.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
+import { setInventory } from "./PlayerInventory.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 
@@ -30,7 +37,6 @@ type FarmRealm = Pick<
   "entityManager" | "propManager" | "world" | "records" | "savePlayerData"
 >;
 const SEED_LIFE_MS = 25_000;
-const CHICKEN = faunaType("chicken");
 
 const UNREACHABLE = "Move closer to use this.";
 
@@ -53,20 +59,55 @@ function dryGround(realm: FarmRealm, p: PositionComponent): number | undefined {
     : realm.world.getHeightAt(tx, ty) * ELEVATION_PX;
 }
 
-function feedChickens(realm: FarmRealm, feeder: Entity, now: number): void {
+function clearFeedPath(
+  realm: FarmRealm,
+  from: PositionComponent,
+  to: PositionComponent,
+  z: number,
+): boolean {
+  const steps = Math.ceil(gap(from, to) / 4);
+  for (let i = 1; i <= steps; i++) {
+    const t = i / steps;
+    const wx = from.wx + (to.wx - from.wx) * t,
+      wy = from.wy + (to.wy - from.wy) * t;
+    const height = dryGround(realm, { wx, wy });
+    if (
+      height === undefined ||
+      Math.abs(height - z) > 4 ||
+      realm.propManager.overlapsAnyProp({
+        left: wx - 1,
+        right: wx + 1,
+        top: wy - 1,
+        bottom: wy + 1,
+      })
+    )
+      return false;
+  }
+  return true;
+}
+
+function feedChickens(realm: FarmRealm, player: Entity, hen: Entity, now: number): void {
   const manager = realm.entityManager;
-  const local = nearby(manager, feeder.position, 150);
+  const local = nearby(manager, player.position, FEED_REACH);
   if (local.some((e) => e.type === SCATTERED_CORN && (e.workItem?.units ?? 0) > 0))
     throw new Error("The chickens still have corn to eat.");
-  const chickens = local.filter((e) => e.type === CHICKEN && e.parentId === undefined);
-  const spills = [0, -14, 14].flatMap((dx) => {
-    const spot = { wx: feeder.position.wx + dx, wy: feeder.position.wy - 16 };
+  const { wx, wy } = player.position;
+  const distance = gap(player.position, hen.position);
+  const dx = distance > 0 ? (hen.position.wx - wx) / distance : 0;
+  const dy = distance > 0 ? (hen.position.wy - wy) / distance : -1;
+  const forward = Math.min(20, distance / 2 + 4);
+  const spills = [0, -10, 10].flatMap((side) => {
+    const spot = { wx: wx + dx * forward - dy * side, wy: wy + dy * forward + dx * side };
     const z = dryGround(realm, spot);
-    if (z === undefined || !chickens.some((chicken) => gap(spot, chicken.position) <= 155))
+    if (z === undefined || Math.abs(z - (player.wz ?? 0)) > 4) return [];
+    if (
+      !clearFeedPath(realm, player.position, spot, z) ||
+      !clearFeedPath(realm, hen.position, spot, z)
+    )
       return [];
     return [{ spot, z }];
   });
-  if (!spills.length) throw new Error("Bring a Buff hen near the feeder.");
+  if (!spills.length) throw new Error("Find clear ground beside the chickens.");
   if (manager.entities.length + spills.length > PERSISTENCE_BUDGET.actors)
     throw new Error("The area is too crowded to scatter corn.");
   for (const { spot, z } of spills) {
@@ -75,6 +116,36 @@ function feedChickens(realm: FarmRealm, feeder: Entity, now: number): void {
     corn.farm = { effectUntil: now + SEED_LIFE_MS };
     manager.spawn(corn);
   }
+}
+
+function toggleGate(
+  realm: FarmRealm,
+  player: Entity,
+  request: Extract<FarmRequest, { propId: number }>,
+): void {
+  const gate = realm.propManager.props.find((p) => p.id === request.propId);
+  const closing = request.action === "close-gate";
+  if (!gate || gate.type !== (closing ? OPEN_FARM_GATE : FARM_GATE))
+    throw new Error("This gate has already changed.");
+  const z = dryGround(realm, gate.position);
+  if (z === undefined || !canReachFarmTarget(player, { position: gate.position, wz: z }))
+    throw new Error(UNREACHABLE);
+  const { wx, wy } = gate.position;
+  const replacement = createProp(closing ? FARM_GATE : OPEN_FARM_GATE, wx, wy);
+  if (closing && replacement.collider) {
+    const bounds = getEntityAABB(gate.position, replacement.collider);
+    if (
+      nearby(realm.entityManager, gate.position, 80).some(
+        (entity) =>
+          entity.collider &&
+          entity.collider.solid !== false &&
+          Math.abs((entity.wz ?? 0) - z) < 14 &&
+          aabbsOverlap(bounds, getEntityAABB(entity.position, entity.collider)),
+      )
+    )
+      throw new Error("Clear the gateway first.");
+  }
+  realm.propManager.replace(gate.id, replacement);
 }
 
 /** The authority rechecks the displayed verb so simultaneous harvests/watering stay single-use. */
@@ -86,23 +157,33 @@ export function performFarmAction(
 ): void {
   const { entityManager } = realm;
   const player = session.player;
-  const target = entityManager.byId.get(request.entityId);
   if (
-    !target ||
     session.editorEnabled ||
     session.debugPaused ||
     session.gameplaySession.mountId !== null ||
-    !canReachFarmTarget(player, target) ||
+    player.parentId !== undefined
+  )
+    throw new Error(UNREACHABLE);
+  if ("propId" in request) {
+    if (request.action !== "open-gate" && request.action !== "close-gate")
+      throw new Error(UNREACHABLE);
+    toggleGate(realm, player, request);
+    return;
+  }
+  const target = entityManager.byId.get(request.entityId);
+  if (
+    !target ||
+    !canReachFarmTarget(player, target, request.action === "feed" ? FEED_REACH : undefined) ||
     dryGround(realm, target.position) === undefined
   )
     throw new Error(UNREACHABLE);
   restoreFarmPose(target, now);
-  const action = farmAction(target);
-  if (action === undefined || action !== request.action)
-    throw new Error("This has already changed.");
+  const available = farmAction(target);
+  if (!available || available !== request.action) throw new Error("This has already changed.");
 
-  const basket = session.gameplaySession.farmBasket ?? EMPTY_BASKET;
-  switch (request.action) {
+  const action: FarmAction = request.action;
+  const inventory = session.gameplaySession.inventory ?? EMPTY_INVENTORY;
+  switch (action) {
     case "plant":
       target.farm = { ripeAt: now + GROW_MS };
       break;
@@ -112,15 +193,21 @@ export function performFarmAction(
         watered: true,
       };
       break;
-    case "harvest":
+    case "harvest": {
+      const updated = changeStack(inventory, CORN, 1);
+      if (!updated) throw new Error("Your inventory is full.");
       delete target.farm;
-      session.gameplaySession.farmBasket = { ...basket, corn: basket.corn + 1 };
+      setInventory(session, updated);
       break;
-    case "feed":
-      if (basket.corn < 1) throw new Error("Harvest some corn first.");
-      feedChickens(realm, target, now);
-      session.gameplaySession.farmBasket = { ...basket, corn: basket.corn - 1 };
+    }
+    case "feed": {
+      if (heldItem(inventory) !== CORN) throw new Error("Hold corn first.");
+      const updated = changeStack(inventory, CORN, -1);
+      if (!updated) throw new Error("Harvest some corn first.");
+      feedChickens(realm, player, target, now);
+      setInventory(session, updated);
       break;
+    }
     case "chop": {
       if ((target.farm?.effectUntil ?? 0) > now) throw new Error("Wait for the tree to settle.");
       const chops = (target.farm?.chops ?? 0) + 1;
@@ -138,7 +225,8 @@ export function performFarmAction(
       delete target.farm;
       break;
     case "fence": {
-      if (basket.wood < 1) throw new Error("Chop a tree for wood first.");
+      const updated = changeStack(inventory, WOOD, -1);
+      if (!updated) throw new Error("Chop a tree for wood first.");
       const { wx, wy } = target.position;
       const fence = createProp(GARDEN_FENCE, wx, wy);
       const bounds = getEntityAABB(fence.position, required(fence.collider));
@@ -157,7 +245,7 @@ export function performFarmAction(
         throw new Error("Take a step back to build the fence.");
       realm.propManager.add(fence);
       entityManager.remove(target.id);
-      session.gameplaySession.farmBasket = { ...basket, wood: basket.wood - 1 };
+      setInventory(session, updated);
       break;
     }
   }
@@ -165,7 +253,7 @@ export function performFarmAction(
     restoreFarmPose(target, now);
     if (action !== "feed") realm.records?.changed(target);
   }
-  if (session.gameplaySession.farmBasket !== basket) realm.savePlayerData(session);
+  if (session.gameplaySession.inventory !== inventory) realm.savePlayerData(session);
 }
 
 /** Absolute deadlines catch up when a chunk returns. Only query occupied neighborhoods. */
@@ -190,11 +278,10 @@ export function updateFarm(
         !session.editorEnabled &&
         session.gameplaySession.mountId === null &&
         (target.farm?.effectUntil ?? 0) <= now &&
-        canReachFarmTarget(player, target, 13) &&
-        manager.remove(target.id)
+        canReachFarmTarget(player, target, 13)
       ) {
-        const basket = session.gameplaySession.farmBasket ?? EMPTY_BASKET;
-        session.gameplaySession.farmBasket = { ...basket, wood: basket.wood + 1 };
+        const updated = changeStack(session.gameplaySession.inventory ?? EMPTY_INVENTORY, WOOD, 1);
+        if (updated && manager.remove(target.id)) setInventory(session, updated);
       }
     }
   }

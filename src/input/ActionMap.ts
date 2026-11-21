@@ -27,6 +27,8 @@ export type ActionName =
   | "toggle_tab"
   // Play mode (discrete)
   | "enter_place"
+  | "hotbar_previous"
+  | "hotbar_next"
   | "throw"
   | "honk"
   | "reverse"
@@ -90,6 +92,8 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   { action: "vehicle_style", keys: ["KeyK"] },
   { action: "vehicle_recover", keys: ["KeyF"] },
   { action: "enter_place", keys: ["KeyE"] },
+  { action: "hotbar_previous", keys: ["BracketLeft"] },
+  { action: "hotbar_next", keys: ["BracketRight"] },
   // Play mode zoom presets
   { action: "zoom_0", keys: ["Digit0"] },
   { action: "zoom_1", keys: ["Digit1"] },

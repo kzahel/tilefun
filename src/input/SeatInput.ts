@@ -51,7 +51,7 @@ export interface SeatInput {
 }
 
 /** Presses a guest's place controls listen for. */
-export type SeatPlacePress = "enter_place" | "vehicle_recover";
+export type SeatPlacePress = "enter_place" | "vehicle_recover" | "hotbar_previous" | "hotbar_next";
 
 /** The action-set calls a seat reads (an `ActionManager` for one scheme or pad). */
 export interface SeatActions {

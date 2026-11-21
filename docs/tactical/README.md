@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [260 Hotbar and hen handling](260-hotbar-and-hen-handling.md) | Saved slots, visible held items, corn luring and operable farm gates. |
 | [259 Town farming](259-town-farming.md) | Garden, chicken feeding and woodlot in Play, with named Map destinations near settlements. |
 | [257 Bulldozer yard](257-bulldozer-yard.md) | Playable Workshop prototype with a retained tracked model and a heavy shared-physics chassis that pushes a parked car at low speed. Owner gameplay and appearance review pending. |
 | [256 Wildlife 3D game rollout](256-wildlife-3d-game-rollout.md) | Queued for a new session. Ship all 219 identities in normal play with distinct animation for every gameplay state. The ledger pins the draft inputs and current bindings. |

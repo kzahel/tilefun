@@ -1,0 +1,57 @@
+.play-hotbar {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: max(9px, env(safe-area-inset-bottom));
+  z-index: 81;
+  display: grid;
+  grid-template-columns: repeat(4, max-content);
+  gap: 3px;
+  padding: 4px;
+  border: 1px solid #9b8560;
+  border-radius: 7px;
+  background: #252319ed;
+  color: #f9ebc9;
+  font:
+    13px / 1 system-ui,
+    sans-serif;
+}
+.play-hotbar[hidden] {
+  display: none;
+}
+.play-hotbar button {
+  min-width: 33px;
+  min-height: 34px;
+  padding: 2px 4px;
+  background: #392f22;
+  border: 1px solid #7c6a4d;
+  border-radius: 4px;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.play-hotbar button:disabled {
+  cursor: default;
+  opacity: 0.72;
+}
+.play-hotbar button[aria-pressed="true"] {
+  border-color: #ffe19a;
+  outline: 1px solid #ffe19a;
+  background: #604925;
+}
+.play-hotbar small {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff4d3;
+  white-space: nowrap;
+  text-shadow:
+    0 1px 3px #17110b,
+    0 0 3px #17110b;
+}
+@media (max-width: 600px) {
+  .play-hotbar {
+    bottom: max(5px, env(safe-area-inset-bottom));
+  }
+}

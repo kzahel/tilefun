@@ -1,11 +1,13 @@
-import { type FarmRequest, farmChoice } from "../farming/FarmInteraction.js";
+import { type FarmRequest, farmChoice, farmGateChoice } from "../farming/FarmInteraction.js";
 import type { ActionManager } from "../input/ActionManager.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { NO_INSET, pageInset } from "../input/ViewRect.js";
+import type { InventoryRequest } from "../inventory/Inventory.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import { DoorControl } from "../ui/DoorControl.js";
 import { FarmControl } from "../ui/FarmControl.js";
+import { HotbarControl } from "../ui/HotbarControl.js";
 import type { DoorRequest, VehicleRequest } from "../ui/PlacePrompts.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
 import type { RemoteStateView } from "./ClientStateView.js";
@@ -32,8 +34,10 @@ export interface PlaceControlsHost {
   readonly movement: { dx: number; dy: number };
   clearPlayInput(sendNeutral?: boolean): void;
   /** A request from a seat (a guest's travels in its envelope). */
-  request(message: DoorRequest | VehicleRequest | FarmRequest, seat?: number): Promise<unknown>;
+  request(message: PlaceRequest, seat?: number): Promise<unknown>;
 }
+
+export type PlaceRequest = DoorRequest | VehicleRequest | FarmRequest | InventoryRequest;
 
 /**
  * E/F place controls: the vehicle prompt (enter, exit, call a train, equipment)
@@ -45,6 +49,7 @@ export class PlaceControls {
   readonly door: DoorControl;
   readonly vehicle: VehicleControl;
   private readonly farm: FarmControl;
+  private readonly hotbar: HotbarControl;
   private readonly guests: GuestPlaces;
   private readonly unsubscribe: (() => void)[];
 
@@ -70,8 +75,14 @@ export class PlaceControls {
       return host.request(request);
     });
     this.farm = new FarmControl((request) => host.request(request));
+    this.hotbar = new HotbarControl((selection) => {
+      if (this.hotbarAllowed)
+        void host.request({ type: "inventory-select", selection }).catch(() => {});
+    });
     this.guests = new GuestPlaces(host);
     this.unsubscribe = [
+      actions.on("hotbar_previous", () => this.hotbar.choose({ step: -1 })),
+      actions.on("hotbar_next", () => this.hotbar.choose({ step: 1 })),
       actions.on("vehicle_recover", () => {
         if (host.playing && !host.inputBlocked) this.vehicle.activateEquipment();
       }),
@@ -83,6 +94,19 @@ export class PlaceControls {
           this.farm.activate();
       }),
     ];
+  }
+
+  private get hotbarAllowed(): boolean {
+    const { host } = this;
+    return (
+      host.playing &&
+      !host.overlayOpen &&
+      !host.inputBlocked &&
+      !host.storagePaused &&
+      !host.doorPresentation.busy &&
+      !host.stateView.editorEnabled &&
+      host.stateView.playerEntity.parentId === undefined
+    );
   }
 
   /** `ready`: startup is done and the player's room or terrain is presentable. */
@@ -104,6 +128,8 @@ export class PlaceControls {
       busy || host.inputBlocked,
     );
     const view = host.stateView;
+    const walking = ready && this.hotbarAllowed;
+    this.hotbar.update(view.inventory, walking, walking);
     this.farm.update(
       ready &&
         host.playing &&
@@ -115,7 +141,8 @@ export class PlaceControls {
         !doorPrompt &&
         !view.editorEnabled &&
         !view.interior
-        ? farmChoice(view.playerEntity, view.entities, view.farmBasket)
+        ? (farmGateChoice(view.playerEntity, view.props) ??
+            farmChoice(view.playerEntity, view.entities, view.inventory))
         : undefined,
     );
     this.guests.update(dt, ready);
@@ -128,6 +155,7 @@ export class PlaceControls {
     this.door.destroy();
     this.vehicle.destroy();
     this.farm.destroy();
+    this.hotbar.destroy();
   }
 
   /** In split screen seat 0's page controls move inside its view's region. */
@@ -144,5 +172,6 @@ export class PlaceControls {
     this.door.place(inset);
     this.vehicle.place(inset);
     this.farm.place(inset);
+    this.hotbar.place(inset);
   }
 }

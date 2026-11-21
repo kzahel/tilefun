@@ -42,6 +42,7 @@ import { DeviceTravel } from "./DeviceTravel.js";
 import { DoorTransitions } from "./DoorTransitions.js";
 import { runEquipment } from "./EquipmentControl.js";
 import { performFarmAction } from "./FarmPlay.js";
+import { selectInventory } from "./PlayerInventory.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { RealmDirectory } from "./RealmDirectory.js";
@@ -683,6 +684,19 @@ export class GameServer {
   private readonly requests: {
     [K in RequestType]: (request: RequestContext<RequestOf<K>>) => void;
   } = {
+    "inventory-select": ({ msg, session, respond }) =>
+      respond(() => {
+        const realm = session.realmId ? this.realms.get(session.realmId) : undefined;
+        if (
+          realm &&
+          !session.editorEnabled &&
+          !session.transitioning &&
+          !session.debugPaused &&
+          !realm.saveManager?.pressured &&
+          selectInventory(session, msg.selection)
+        )
+          realm.savePlayerData(session);
+      }, noFields),
     "farm-action": ({ msg, session, respond }) =>
       respond(() => {
         const realm = session.realmId ? this.realms.get(session.realmId) : undefined;

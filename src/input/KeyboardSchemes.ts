@@ -24,6 +24,8 @@ export const SEAT_ACTIONS = [
   "vehicle_style",
   "vehicle_recover",
   "enter_place",
+  "hotbar_previous",
+  "hotbar_next",
 ] as const satisfies readonly ActionName[];
 export type SeatAction = (typeof SEAT_ACTIONS)[number];
 
@@ -60,6 +62,8 @@ const LEFT: Record<SeatAction, string[]> = {
   vehicle_style: ["KeyX"],
   vehicle_recover: ["KeyF"],
   enter_place: ["KeyE"],
+  hotbar_previous: ["BracketLeft"],
+  hotbar_next: ["BracketRight"],
 };
 
 /** Right hand: the arrows with the keys around them. Enter is avoided so a
@@ -78,6 +82,8 @@ const RIGHT: Record<SeatAction, string[]> = {
   vehicle_style: ["KeyK"],
   vehicle_recover: ["Semicolon"],
   enter_place: ["Quote"],
+  hotbar_previous: ["Minus"],
+  hotbar_next: ["Equal"],
 };
 
 function bindings(keys: Record<SeatAction, string[]>): ActionMapConfig {

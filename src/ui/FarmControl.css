@@ -1,6 +1,6 @@
 .farm-control {
   position: fixed;
-  bottom: max(24px, env(safe-area-inset-bottom));
+  bottom: calc(max(9px, env(safe-area-inset-bottom)) + 46px);
   left: 16px;
   z-index: 80;
   max-width: min(360px, calc(100vw - 180px));
@@ -24,15 +24,4 @@
 }
 .farm-control button + p {
   margin-top: 4px;
-}
-.gem-hud .farm-basket {
-  border-top: 1px solid #718479;
-  padding-top: 5px;
-  font-size: 15px;
-}
-.gem-hud:has(.farm-basket:not([hidden])) {
-  flex-wrap: wrap;
-}
-.gem-hud .farm-basket:not([hidden]) {
-  flex: 1 0 100%;
 }

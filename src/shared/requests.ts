@@ -6,6 +6,7 @@ export type RequestOf<K extends RequestType> = Extract<RequestMessage, { type: K
 
 const RESPONSES = {
   "farm-action": "farm-action-done",
+  "inventory-select": "inventory-selected",
   "call-train": "vehicle-controlled",
   "enter-vehicle": "vehicle-controlled",
   "exit-vehicle": "vehicle-controlled",

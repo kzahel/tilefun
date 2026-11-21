@@ -9,7 +9,7 @@ import type { ChunkRange } from "../world/ChunkManager.js";
 export interface GameplaySession {
   player: Entity;
   gemsCollected: number;
-  farmBasket?: import("../farming/FarmActors.js").FarmBasket | undefined;
+  inventory?: import("../inventory/Inventory.js").Inventory | undefined;
   invincibilityTimer: number;
   knockbackVx: number;
   knockbackVy: number;

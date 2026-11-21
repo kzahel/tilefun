@@ -53,6 +53,7 @@ export function seatRoute(message: ServerMessage): SeatRoute {
     case "realm-list":
     case "realm-player-count":
     case "chat":
+    case "inventory-selected":
     case "farm-action-done":
     case "vehicle-controlled":
     case "world-map":

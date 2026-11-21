@@ -1122,6 +1122,8 @@ const profilesByType = new Map(FAUNA_PROFILES.map((p) => [faunaType(p.species), 
 export const faunaProfile = (type: string | undefined) =>
   type === undefined ? undefined : profilesByType.get(type);
 export interface FaunaBehavior {
+  /** A led hen can settle at a new home when its carrier puts the corn away. */
+  lured?: true;
   /** Last authority-facing direction, including stationary and controlled poses. */
   facing?: Direction;
   home: PositionComponent;

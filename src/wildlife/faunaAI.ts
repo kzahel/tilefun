@@ -27,7 +27,11 @@ export function updateFaunaAI(
   if (!ai || !velocity || !animal.sprite || !p) return;
   if (animal.wanderAI?.state === "ridden") return;
   syncFaunaWater(animal, environment.isWater(animal.position));
-  const nearby = players.find((player) => gap(player, animal.position) < p.alarmDistance);
+  if (p.species === "chicken" && environment.lureChicken?.(animal)) return;
+  const nearby =
+    p.species === "chicken" && environment.lureChicken
+      ? undefined
+      : players.find((player) => gap(player, animal.position) < p.alarmDistance);
   const herdAlarm = ai.groupId
     ? animals.find(
         (a) =>

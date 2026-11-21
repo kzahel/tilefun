@@ -104,6 +104,7 @@ const ENTITY_FIELDS: { readonly [K in FieldKey]: EntityField<K> } = {
   vehicleRamp: { key: "vehicleRamp", bit: 22, wire: U8 },
   transportLoadId: { key: "transportLoadId", bit: 23, wire: U32 },
   transportedBy: { key: "transportedBy", bit: 24, wire: U32 },
+  heldItem: { key: "heldItem", bit: 25, wire: U8 },
 };
 
 /** Every replicated field in wire order (index === `bit`). */
@@ -292,7 +293,8 @@ export function mirroredFieldsMatch(entity: Mirror, snap: Mirror): boolean {
     entity.towedBy === snap.towedBy &&
     entity.vehicleRamp === snap.vehicleRamp &&
     entity.transportLoadId === snap.transportLoadId &&
-    entity.transportedBy === snap.transportedBy
+    entity.transportedBy === snap.transportedBy &&
+    entity.heldItem === snap.heldItem
   );
 }
 const MATCHED = [
@@ -318,6 +320,7 @@ const MATCHED = [
   "vehicleRamp",
   "transportLoadId",
   "transportedBy",
+  "heldItem",
 ] as const satisfies readonly MirroredKey[];
 /** `true` only while `MATCHED` names every mirrored field. */
 const everyMirroredFieldMatched: Exclude<MirroredKey, (typeof MATCHED)[number]> extends never

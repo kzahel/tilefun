@@ -48,7 +48,8 @@ export interface SavedPlayerData {
   airborneVelocity?: { vx: number; vy: number };
   mount?: { id: string; offsetX: number; offsetY: number; wz: number; jumpZ: number };
   returnLocation?: import("../server/PlayerSession.js").PlayerSession["returnLocation"];
-  farmBasket?: import("../farming/FarmActors.js").FarmBasket | undefined;
+  inventory?: import("../inventory/Inventory.js").Inventory | undefined;
+  farmBasket?: import("../inventory/Inventory.js").LegacyFarmBasket | undefined;
   gemsCollected: number;
   x: number;
   y: number;

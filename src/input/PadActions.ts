@@ -13,8 +13,10 @@ const PRESSES: Partial<Record<number, PadPress>> = {
   3: "enter_place",
   9: "toggle_menu",
   13: "vehicle_recover",
+  14: "hotbar_previous",
+  15: "hotbar_next",
 };
-export type PadPress = "jump" | "enter_place" | "toggle_menu" | "vehicle_recover";
+type PadPress = "jump" | "toggle_menu" | import("./SeatInput.js").SeatPlacePress;
 
 /** The parts of a `Gamepad` a seat reads. */
 export interface PadReading {

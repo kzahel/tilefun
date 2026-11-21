@@ -150,7 +150,7 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
   { type: RABBIT_TYPE, label: "Rabbit", color: "#ad967a", previewRow: Direction.Right },
   { type: "chicken", label: "Chicken", color: "#f0c040" },
   { type: GARDEN_BED, label: "Garden bed", color: "#ab714c" },
-  { type: CHICKEN_FEEDER, label: "Chicken feeder", color: "#ab714c" },
+  { type: CHICKEN_FEEDER, label: "Chicken pen sign", color: "#ab714c" },
   { type: WOODLOT_TREE, label: "Woodlot tree", color: "#43854e" },
   { type: FENCE_STAKES, label: "Fence stakes", color: "#ab714c" },
   { type: "cow", label: "Cow", color: "#d4a880" },

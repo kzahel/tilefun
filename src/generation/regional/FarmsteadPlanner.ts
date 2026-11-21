@@ -9,6 +9,7 @@ import {
   GARDEN_FENCE_SIDE,
   WOODLOT_TREE,
 } from "../../farming/FarmActors.js";
+import { FARM_GATE } from "../../farming/FarmGate.js";
 import { nearestRail } from "../../railway/RailPath.js";
 import { RailwayPlanner } from "../../railway/RailwayPlanner.js";
 import type { ActorPlacement } from "../Generator.js";
@@ -269,7 +270,13 @@ export class FarmsteadSource {
           ),
         );
       const garden = this.garden(id, x, y);
-      // The south-side opening leads in from the feeder.
+      props.push({
+        featureId: `${id}:hen-gate`,
+        propType: FARM_GATE,
+        wx: (x - 18.5) * 16,
+        wy: (y + 20) * 16,
+      });
+      // The south gate leads in from the feeder.
       for (const [dx, dy, type] of [
         ...[-21, -19, -17, -15].map((dx) => [dx, 13, GARDEN_FENCE] as const),
         ...[14, 16, 18, 20].flatMap((dy) => [

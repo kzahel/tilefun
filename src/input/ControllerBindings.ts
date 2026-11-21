@@ -36,6 +36,8 @@ export const CONTROLLER_BUTTONS: Record<number, ControllerCommand> = {
 export const CONTROLLER_ACTIONS: Partial<Record<ControllerCommand, ActionName>> = {
   menu: "toggle_menu",
   down: "vehicle_recover",
+  left: "hotbar_previous",
+  right: "hotbar_next",
   confirm: "jump",
   throw: "throw",
   interact: "enter_place",

@@ -1,6 +1,6 @@
 import type { GameContext } from "../core/GameScene.js";
-import { farmBasketLabel } from "../farming/FarmInteraction.js";
 import { cssRegion } from "../input/ViewRect.js";
+import { EMPTY_INVENTORY, heldItem, ITEMS } from "../inventory/Inventory.js";
 import { projectWorld } from "../rendering/Projection.js";
 import { layoutViews } from "../rendering/ViewLayout.js";
 import { seatBody } from "../session/SeatFocus.js";
@@ -113,13 +113,18 @@ export function drawViewOverlays(gc: GameContext, alpha: number): void {
         ctx.translate(x, y);
       }
       // Markers are placed through the fixed camera; a 3D view gets its aiming mark.
-      if (view.drawn3d) drawCrosshair(ctx, width, height);
-      else {
+      if (view.drawn3d) {
+        drawCrosshair(ctx, width, height);
+        drawHeldItem(gc, view);
+      } else {
         const own = view.seat === 0 ? gc.stateView.playerEntity.id : seatEntityId(gc, view.seat);
         drawPlayerMarkers({ ctx, camera: view.camera, stateView: gc.stateView }, alpha, own);
       }
       if (split) drawSeatBadge(gc, view);
-      if (view.seat !== 0) drawSeatPrompts(gc, view);
+      if (view.seat !== 0) {
+        const hotbar = drawGuestHotbar(gc, view);
+        drawSeatPrompts(gc, view, hotbar);
+      }
     } finally {
       ctx.restore();
     }
@@ -149,16 +154,16 @@ function seatEntityId(gc: GameContext, seat: number): number {
  * when the view touches the page's top right corner). */
 function drawSeatBadge(gc: GameContext, view: View): void {
   const { ctx } = gc;
-  const own =
-    view.seat === 0 ? gc.stateView : gc.stateView.seats.session(view.seat, gc.stateView.serverTick);
-  const gems = own?.gemsCollected ?? 0;
-  const basket = farmBasketLabel(own?.farmBasket);
+  const gems =
+    view.seat === 0
+      ? gc.stateView.gemsCollected
+      : (gc.stateView.seats.session(view.seat, gc.stateView.serverTick)?.gemsCollected ?? 0);
   const label = `Player ${view.seat + 1}`;
   const count = gems.toLocaleString();
   ctx.font = "bold 16px system-ui, sans-serif";
   ctx.textBaseline = "middle";
   const textWidth = ctx.measureText(label).width + ctx.measureText(count).width;
-  const width = Math.max(textWidth + 24 + 20 + 12, ctx.measureText(basket).width + 20);
+  const width = textWidth + 24 + 20 + 12;
   const cornered = view.region.y === 0 && view.region.x + view.region.width >= gc.canvas.width;
   const left = view.region.width - width - 8;
   const top = cornered ? 60 : 8;
@@ -166,7 +171,7 @@ function drawSeatBadge(gc: GameContext, view: View): void {
   ctx.strokeStyle = "#c9a857";
   ctx.lineWidth = 1;
   ctx.beginPath();
-  ctx.roundRect(left, top, width, basket ? 54 : 32, 8);
+  ctx.roundRect(left, top, width, 32, 8);
   ctx.fill();
   ctx.stroke();
   ctx.fillStyle = "#f4f5ec";
@@ -178,12 +183,54 @@ function drawSeatBadge(gc: GameContext, view: View): void {
   }
   ctx.fillStyle = "#ffe38a";
   ctx.fillText(count, iconX + 24, top + 16);
-  if (basket) ctx.fillText(basket, left + 10, top + 39);
+}
+
+function drawHeldItem(gc: GameContext, view: View): void {
+  const own =
+    view.seat === 0 ? gc.stateView : gc.stateView.seats.session(view.seat, gc.stateView.serverTick);
+  const item = heldItem(own?.inventory);
+  if (
+    item === undefined ||
+    !gc.heldItemSheet ||
+    seatBody(gc.session, view.seat)?.parentId !== undefined
+  )
+    return;
+  const { ctx } = gc;
+  ctx.imageSmoothingEnabled = false;
+  gc.heldItemSheet.drawTile(ctx, item - 1, 0, view.region.width * 0.69, view.region.height - 87, 5);
+}
+
+function drawGuestHotbar(gc: GameContext, view: View): boolean {
+  const seat = gc.session.seats.get(view.seat);
+  const sync = gc.stateView.seats.session(view.seat, gc.stateView.serverTick);
+  if (!sync || seatBody(gc.session, view.seat)?.parentId !== undefined) return false;
+  const { ctx } = gc;
+  const bar = sync.inventory ?? EMPTY_INVENTORY;
+  const left = view.region.width / 2 - 68;
+  const top = view.region.height - 40;
+  ctx.font = "13px system-ui, sans-serif";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  for (const [index, stack] of bar.slots.entries()) {
+    const x = left + index * 35;
+    ctx.fillStyle = index === bar.selected ? "#604925" : "#392f22";
+    ctx.strokeStyle = index === bar.selected ? "#ffe19a" : "#7c6a4d";
+    ctx.beginPath();
+    ctx.roundRect(x, top, 32, 30, 4);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = "#f9ebc9";
+    ctx.fillText(stack ? `${ITEMS[stack.item].icon} ${stack.count}` : "·", x + 16, top + 15, 29);
+  }
+  const previous = seat?.input?.hint("hotbar_previous");
+  const next = seat?.input?.hint("hotbar_next");
+  if (previous && next) ctx.fillText(`${previous} / ${next}`, view.region.width / 2, top - 9);
+  return true;
 }
 
 /** A guest's place prompts at the bottom of its view, nearest the player last
  * (seat 0's are page controls inside its view). */
-function drawSeatPrompts(gc: GameContext, view: View): void {
+function drawSeatPrompts(gc: GameContext, view: View, hotbar: boolean): void {
   const lines = gc.session.seats.get(view.seat)?.prompts ?? [];
   if (!lines.length) return;
   const { ctx } = gc;
@@ -191,7 +238,7 @@ function drawSeatPrompts(gc: GameContext, view: View): void {
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   const centre = view.region.width / 2;
-  let top = view.region.height - 16 - lines.length * 36;
+  let top = view.region.height - (hotbar ? 58 : 16) - lines.length * 36;
   for (const line of lines) {
     const width = Math.min(view.region.width - 24, ctx.measureText(line).width + 24);
     ctx.fillStyle = "#243a32ee";

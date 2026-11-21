@@ -1,12 +1,13 @@
 import { expect, test } from "@playwright/test";
 import type { GameTestHooks } from "../src/client/GameTestHooks.js";
-import { CHICKEN_FEEDER } from "../src/farming/FarmActors.js";
+import { FARM_GATE } from "../src/farming/FarmGate.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
+import { CORN } from "../src/inventory/Inventory.js";
 import { stopLocalWorld } from "./helpers/local-world.js";
 
 test.use({ channel: "chromium", hasTouch: true });
 
-test("finds a town farm from the map and plants, waters, harvests and feeds in Play", async ({
+test("finds a town farm, equips harvested corn and feeds by the flock through an opened gate", async ({
   page,
 }) => {
   test.setTimeout(90_000);
@@ -42,20 +43,45 @@ test("finds a town farm from the map and plants, waters, harvests and feeds in P
   await action("Water corn").tap();
   await expect(action("Harvest corn")).toBeVisible({ timeout: 22_000 });
   await action("Harvest corn").tap();
-  await expect(page.getByTestId("farm-basket")).toHaveText(/🌽 1/);
+  const hotbar = page.getByRole("group", { name: "Hotbar" });
+  const corn = hotbar.getByRole("button", { name: "Corn ×1" });
+  await expect(corn).toBeVisible();
+  await page.keyboard.press("BracketRight");
+  await expect(corn).toHaveAttribute("aria-pressed", "true");
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+        return g.stateView.serverPlayerEntity.heldItem;
+      }),
+    )
+    .toBe(CORN);
 
-  // Select the feeder from the streamed farm. Only the walk there is skipped.
-  await page.evaluate(async (type) => {
+  // Stage short approaches; the real Play control opens the generated gate.
+  const gate = await page.evaluate(async (type) => {
     const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
-    const feeder = g.stateView.entities.find((e) => e.type === type);
-    if (!feeder) throw Error("The farm's feeder did not stream");
+    const gate = g.stateView.props.find((prop) => prop.type === type);
+    if (!gate) throw Error("The farm's gate did not stream");
+    const { wx, wy } = gate.position;
     await g.gcSendRequest({
       type: "rcon",
       requestId: g.nextRequestId++,
-      command: `tp ${feeder.position.wx} ${feeder.position.wy + 17}`,
+      command: `tp ${wx} ${wy + 22}`,
     });
-  }, CHICKEN_FEEDER);
-  await action("Feed chickens").tap();
-  await expect(page.getByTestId("farm-basket")).toHaveText(/🌽 0/);
+    return gate.position;
+  }, FARM_GATE);
+  await action("Open gate").tap();
+  await expect(action("Close gate")).toBeVisible();
+  await page.evaluate(async ({ wx, wy }) => {
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+    await g.gcSendRequest({
+      type: "rcon",
+      requestId: g.nextRequestId++,
+      command: `tp ${wx} ${wy - 47}`,
+    });
+  }, gate);
+  await action("Scatter corn").tap();
+  await expect(hotbar.getByRole("button", { name: "Empty slot 1" })).toBeVisible();
+  await expect(hotbar.getByRole("button", { pressed: true })).toHaveCount(0);
   await stopLocalWorld(page);
 });

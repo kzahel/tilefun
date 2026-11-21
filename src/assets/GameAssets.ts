@@ -3,7 +3,9 @@ import { BOAT_MODEL, BOAT_SPRITE } from "../boats/Boat.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
 import { FARM_IMAGE, FARM_SHEET, GARDEN_FENCE, GARDEN_FENCE_SIDE } from "../farming/FarmActors.js";
+import { FARM_GATE_SHEET } from "../farming/FarmGate.js";
 import { INDOOR_ROLES } from "../interiors/IndoorPeople.js";
+import { HELD_IMAGE, HELD_SHEET } from "../inventory/Inventory.js";
 import trainBank from "../railway/rail-local-v1.json" with { type: "json" };
 import { TRAIN_CARRIAGES } from "../railway/Train.js";
 import { authoredVehicleForType } from "../rendering/AuthoredVehicleMeshes.js";
@@ -69,6 +71,8 @@ export const SPRITE_MANIFEST: SpriteAsset[] = [
       h: 224,
     })),
   ),
+  { key: FARM_GATE_SHEET, path: "assets/farming/gate.png", w: 16, h: 16 },
+  { key: HELD_SHEET, path: HELD_IMAGE, w: 8, h: 8 },
   { key: FARM_SHEET, path: FARM_IMAGE, w: 32, h: 32 },
   { key: GARDEN_FENCE, path: "assets/farming/fence.png", w: 16, h: 16 },
   { key: GARDEN_FENCE_SIDE, path: "assets/farming/fence-side.png", w: 16, h: 16 },

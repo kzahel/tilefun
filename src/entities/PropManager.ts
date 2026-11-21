@@ -137,10 +137,26 @@ export class PropManager {
 
   move(id: number, wx: number, wy: number): boolean {
     if (!Number.isFinite(wx) || !Number.isFinite(wy)) return false;
+    return this.edit(id, (prop) => {
+      prop.position = { wx, wy };
+    });
+  }
+
+  /** Replace a prop's physical and visual definition, retaining its saved identity. */
+  replace(id: number, replacement: Prop): boolean {
+    return this.edit(id, (prop) => {
+      prop.type = replacement.type;
+      prop.sprite = replacement.sprite;
+      prop.collider = replacement.collider;
+      prop.walls = replacement.walls;
+    });
+  }
+
+  private edit(id: number, change: (prop: Prop) => void): boolean {
     const prop = this.props.find((p) => p.id === id);
     if (!prop) return false;
     this.remove(id, false);
-    prop.position = { wx, wy };
+    change(prop);
     const next = this.nextId;
     this.nextId = id;
     this.add(prop);

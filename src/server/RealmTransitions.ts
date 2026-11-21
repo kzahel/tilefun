@@ -1,6 +1,8 @@
 import { CHUNK_SIZE_PX, ELEVATION_PX, TILE_SIZE } from "../config/constants.js";
+import { EMPTY_INVENTORY } from "../inventory/Inventory.js";
 import type { SavedPlayerData } from "../persistence/SaveManager.js";
 import { teleportBody } from "../physics/PhysicalEdits.js";
+import { setInventory } from "./PlayerInventory.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { type Arrival, raisedStanding, safeArrival } from "./SafeArrival.js";
@@ -239,7 +241,7 @@ export class RealmTransitions {
     await target.addPlayer(session, restored);
     if (source && previous && sameWorld(source, target)) {
       session.gameplaySession.gemsCollected = previous.gameplaySession.gemsCollected;
-      session.gameplaySession.farmBasket = previous.gameplaySession.farmBasket;
+      setInventory(session, previous.gameplaySession.inventory ?? EMPTY_INVENTORY);
     }
     if (destination.returnLocation !== undefined)
       session.returnLocation = destination.returnLocation;

@@ -47,6 +47,7 @@ import {
 } from "../interiors/GameplayRoom.js";
 import { withInteriorGems } from "../interiors/InteriorGems.js";
 import { updateResident } from "../interiors/ResidentBehavior.js";
+import { inventoryFromSave } from "../inventory/Inventory.js";
 import { TreeBrushEditor } from "../patterns/TreeBrushEditor.js";
 import { actorScope } from "../persistence/ActorRecords.js";
 import type { IWorldRegistry } from "../persistence/IWorldRegistry.js";
@@ -77,6 +78,7 @@ import { updateFarm } from "./FarmPlay.js";
 import { around } from "./InterestManager.js";
 import { MutationQueue } from "./MutationQueue.js";
 import { mutationRange } from "./MutationRange.js";
+import { setInventory } from "./PlayerInventory.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import { RealmActivity } from "./RealmActivity.js";
 import { handleRealmCommand, type RealmCommandContext } from "./RealmCommands.js";
@@ -407,7 +409,6 @@ export class Realm {
     session.gameplaySession = {
       player,
       gemsCollected: gems,
-      farmBasket: saved?.farmBasket,
       invincibilityTimer: 0,
       knockbackVx: 0,
       knockbackVy: 0,
@@ -415,6 +416,7 @@ export class Realm {
       lastDismountedId: null,
       lastSafePosition: respawn,
     };
+    setInventory(session, inventoryFromSave(saved?.inventory, saved?.farmBasket));
     restoreSavedMount(this, session, saved);
     session.cameraX = camX;
     session.cameraY = camY;
@@ -529,7 +531,7 @@ export class Realm {
         ? { ...session.gameplaySession.lastSafePosition }
         : null,
       gemsCollected: session.gameplaySession.gemsCollected,
-      farmBasket: session.gameplaySession.farmBasket,
+      inventory: session.gameplaySession.inventory,
       x: session.player.position.wx,
       y: session.player.position.wy,
       ...(session.player.wz === undefined ? {} : { wz: session.player.wz }),

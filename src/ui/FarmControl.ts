@@ -3,6 +3,14 @@ import type { FarmChoice, FarmRequest } from "../farming/FarmInteraction.js";
 import { inputHint, keyboardHint } from "../input/InputHints.js";
 import { type PageInset, shift } from "../input/ViewRect.js";
 
+function targetKey(request: FarmRequest | null | undefined): string {
+  return request
+    ? "entityId" in request
+      ? `actor:${request.entityId}`
+      : `prop:${request.propId}`
+    : "";
+}
+
 export class FarmControl {
   private readonly root = document.createElement("div");
   private readonly button = document.createElement("button");
@@ -23,7 +31,7 @@ export class FarmControl {
 
   update(choice: FarmChoice | undefined): void {
     if (
-      choice?.request?.entityId !== this.choice?.request?.entityId ||
+      targetKey(choice?.request) !== targetKey(this.choice?.request) ||
       choice?.label !== this.choice?.label
     )
       this.feedback = "";
@@ -47,7 +55,7 @@ export class FarmControl {
     this.feedback = "";
     void this.send(request)
       .catch((error: Error) => {
-        if (this.choice?.request?.entityId === request.entityId) this.feedback = error.message;
+        if (targetKey(this.choice?.request) === targetKey(request)) this.feedback = error.message;
       })
       .finally(() => {
         this.busy = false;

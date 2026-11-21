@@ -7,11 +7,14 @@ import {
   getEntityAABB,
 } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
+import { SCATTERED_CORN } from "../farming/FarmActors.js";
+import { CORN } from "../inventory/Inventory.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import { setBodyPose } from "../physics/PhysicalEdits.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
 import type { WorkContext } from "../wildlife/AnimalWorkSystem.js";
 import { browsingRocks } from "../wildlife/BrowsingRocks.js";
+import { lureChicken } from "../wildlife/ChickenLure.js";
 import { createFierceDen, denForPredator } from "../wildlife/FierceDens.js";
 import { robinTreePerches } from "../wildlife/robinPerches.js";
 import { climbTrees } from "../wildlife/TreeClimbing.js";
@@ -27,6 +30,9 @@ export function createRealmWorkContext(
   sessions: readonly PlayerSession[],
 ): WorkContext {
   const getHeight = (x: number, y: number) => realm.world.getHeightAt(x, y);
+  const carriers = sessions
+    .filter((session) => !session.editorEnabled && session.player.heldItem === CORN)
+    .map((session) => session.player);
   const workPlayers = sessions.map((session) => ({
     identity: session.persistId,
     entity: session.player,
@@ -60,6 +66,24 @@ export function createRealmWorkContext(
             Math.hypot(e.position.wx - hunter.position.wx, e.position.wy - hunter.position.wy) <=
               radius,
         ),
+    lureChicken: (hen) =>
+      lureChicken(
+        hen,
+        carriers,
+        wildlifeEnvironment,
+        () => {
+          if (!hen.fauna?.lured && carriers.length === 0) return false;
+          const { wx, wy } = hen.position;
+          return realm.entityManager.spatialHash
+            .queryRadius(wx, wy, 110)
+            .some(
+              (e) =>
+                e.type === SCATTERED_CORN &&
+                ((e.workItem?.units ?? 0) > 0 || e.workItem?.claimedBy),
+            );
+        },
+        () => realm.animalWork.cancel(hen, 0),
+      ),
     animalWork: (animal, elapsed, planning) =>
       realm.animalWork.update(
         animal,

@@ -3,6 +3,7 @@ import { outdoorRuntimeAsset, outdoorRuntimeProp } from "../assets/outdoor/Outdo
 import { MaterialType } from "../audio/SurfaceType.js";
 import { STEP_UP_THRESHOLD } from "../config/constants.js";
 import { GARDEN_FENCE, GARDEN_FENCE_SIDE } from "../farming/FarmActors.js";
+import { FARM_GATE, FARM_GATE_SHEET, OPEN_FARM_GATE } from "../farming/FarmGate.js";
 import {
   buildingBody,
   buildingRecipe,
@@ -110,6 +111,23 @@ function makeStairSteps(config: {
 
 /** Prop definitions keyed by type string. Coordinates match TileRegistry.ts. */
 const PROP_DEFS: Record<string, PropDef> = {
+  [FARM_GATE]: {
+    sheetKey: FARM_GATE_SHEET,
+    col: 0,
+    row: 0,
+    width: 64,
+    height: 32,
+    collider: { offsetX: 0, offsetY: 0, width: 56, height: 6, zHeight: 14 },
+    material: MaterialType.Wood,
+  },
+  [OPEN_FARM_GATE]: {
+    sheetKey: FARM_GATE_SHEET,
+    col: 4,
+    row: 0,
+    width: 64,
+    height: 32,
+    collider: null,
+  },
   [GARDEN_FENCE]: {
     sheetKey: GARDEN_FENCE,
     col: 0,
@@ -734,6 +752,7 @@ export interface PropPaletteEntry {
 }
 
 export const PROP_PALETTE: PropPaletteEntry[] = [
+  { type: FARM_GATE, label: "Garden gate", color: "#ab714c", category: "nature" },
   { type: GARDEN_FENCE, label: "Garden fence", color: "#ab714c", category: "nature" },
   ...FIERCE_DENS.map(
     (d): PropPaletteEntry => ({

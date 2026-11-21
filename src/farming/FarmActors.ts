@@ -21,9 +21,6 @@ export interface FarmState {
   effectUntil?: number;
 }
 
-export type FarmBasket = { corn: number; wood: number };
-export const EMPTY_BASKET: Readonly<FarmBasket> = { corn: 0, wood: 0 };
-
 const clip = (name: string, start: number, count = 1): AnimationClip => ({
   name,
   start,

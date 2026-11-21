@@ -155,6 +155,8 @@ export interface Entity {
 
   /** Runtime towing links; zero means durable partner is not resident yet. */
 
+  /** The equipped stack’s item code. Inventory contents are private. */
+  heldItem?: number;
   farm?: FarmState;
   mallard?: MallardBehavior;
   frog?: FrogBehavior;
