@@ -3,6 +3,7 @@ export type ActionName =
   // Global
   | "toggle_menu"
   | "toggle_world_map"
+  | "toggle_phone"
   | "toggle_debug"
   | "toggle_editor"
   // Play mode (continuous)
@@ -61,6 +62,7 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   // Global
   { action: "toggle_menu", keys: ["Escape"] },
   { action: "toggle_world_map", keys: ["KeyG"] },
+  { action: "toggle_phone", keys: ["KeyP"] },
   { action: "toggle_debug", keys: ["F3"] },
   { action: "toggle_console", keys: ["Backquote"] },
   { action: "toggle_editor", keys: ["Tab"] },

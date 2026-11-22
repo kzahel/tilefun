@@ -1,5 +1,13 @@
 # Embedded engine labs
 
+[268](../tactical/268-day-night-and-weather.md) adds a world clock and weather to
+the game. A realm has a sky only where a server's `RealmDirectory` gives it
+clocks, so `RecipeWorldAuthority`, scenario sessions and every lab keep plain
+daylight and send no `sync-sky`. The shared scene draws the sky from an optional
+`atmosphere` on its frame, which a lab's `Play3dSource` leaves unset. Review
+captures do not change with time. See
+[day, night and weather](day-night-and-weather.md).
+
 [Brief steering presses](vehicles.md#brief-steering-presses-and-yaw-corrections)
 now keep local car orientation continuous across replay commits. The game's
 replica and the embedded LabView both sample the corrected chassis quaternion

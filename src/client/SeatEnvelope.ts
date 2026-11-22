@@ -38,6 +38,7 @@ export function seatRoute(message: ServerMessage): SeatRoute {
     case "sync-chunks":
     case "sync-props":
     case "sync-cvars":
+    case "sync-sky":
     case "sync-player-names":
     case "sync-editor-cursors":
     case "vehicle-horn":

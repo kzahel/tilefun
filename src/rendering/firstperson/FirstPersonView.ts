@@ -5,6 +5,7 @@ import type { Spritesheet } from "../../assets/Spritesheet.js";
 import { CHUNK_SIZE_PX, VIEW_BACKDROP_CSS } from "../../config/constants.js";
 import type { Entity } from "../../entities/Entity.js";
 import type { Prop } from "../../entities/Prop.js";
+import type { Atmosphere } from "../../sky/Atmosphere.js";
 import type { World } from "../../world/World.js";
 import { observerInsideRoom, roomObserver } from "../collectScene.js";
 import type { GpuShadow } from "../GpuShadowShape.js";
@@ -12,6 +13,7 @@ import type { OverlayDraw } from "../OverlayFrame.js";
 import type { GrassItem, SpriteItem } from "../SceneItem.js";
 import { SURFACE_GRID } from "../SurfacePresentation.js";
 import type { PageRegion, SharedMeshAssets, SharedPages, View3dTarget } from "../View3dHost.js";
+import { FirstPersonAtmosphere } from "./FirstPersonAtmosphere.js";
 import {
   actorBillboard,
   MovingCards,
@@ -128,6 +130,8 @@ export interface FirstPersonFrame {
   readonly underlay?: readonly OverlayDraw[] | undefined;
   /** Play's particles and surface marks for this frame (`EffectQuads`). */
   readonly effects?: readonly EffectItem[] | undefined;
+  /** The sky over the view: night's tint, rain and lightning. None is a clear day. */
+  readonly atmosphere?: Atmosphere | undefined;
   /**
    * A headset (252): both eyes through the session's head pose, from a room
    * placed in the world. `eye` is then the head in the world: cards turn to its
@@ -224,6 +228,7 @@ export class FirstPersonView {
   private readonly fog = new THREE.Fog(SKY, 200, 600);
   private readonly sun = new SunShadows();
   private readonly dynamic = new DynamicShadows(this.sun.uniforms);
+  private readonly atmosphere = new FirstPersonAtmosphere();
   /** The frame's mesh bodies in reach of the dynamic map, with the contact
    * shadow each keeps where the map does not show its own. */
   private readonly casters: {
@@ -517,6 +522,7 @@ export class FirstPersonView {
       this.bodyImages.draw(renderer, camera, topDown?.scale ?? 1);
       this.stats.bodyImages = this.bodyImages.count;
       this.stats.cars += this.bodyImages.count;
+      this.atmosphere.draw(renderer, frame.atmosphere, target, frame.eye, topDown?.scale);
       this.stats.calls = info.render.calls;
     } finally {
       info.autoReset = true;
@@ -925,6 +931,7 @@ export class FirstPersonView {
     this.vehicles.dispose();
     this.wildlife.dispose();
     this.bodyImages.dispose();
+    this.atmosphere.dispose();
     this.cameras.dispose();
     this.images.dispose();
     this.flatMaterial.dispose();

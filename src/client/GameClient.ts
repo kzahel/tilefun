@@ -482,7 +482,7 @@ export class GameClient implements GameTestHooks {
     );
     if (this.initDone && ready) this.startupWorldReady = true;
     this.doorPresentation.update(this.mainMenu.currentWorldId, ready);
-    this.chrome.updateMapHint();
+    this.chrome.update();
     this.placeControls.update(dt, this.initDone && ready);
   }
 
@@ -541,7 +541,7 @@ export class GameClient implements GameTestHooks {
     this.requests.dispose();
     this.transport.close();
     this.worldMap.destroy();
-    this.chrome.mapButton?.remove();
+    this.chrome.destroy();
     this.actions.detach();
     this.consoleUI.destroy();
     this.mainMenu.destroy();
@@ -561,6 +561,7 @@ export class GameClient implements GameTestHooks {
 
   private bindActions(): void {
     this.actions.on("toggle_world_map", () => this.toggleWorldMap());
+    this.actions.on("toggle_phone", () => this.chrome.sky.phone.toggle());
     this.actions.on("toggle_menu", () => {
       // The map, a catalog or the menu closes; otherwise the menu opens.
       const { scenes } = this;
@@ -786,6 +787,9 @@ export class GameClient implements GameTestHooks {
       renderHost: this.renderHost,
       get stateView() {
         return client.stateView;
+      },
+      get audioManager() {
+        return client.audioManager;
       },
       mainMenu: this.mainMenu,
       get scenes() {

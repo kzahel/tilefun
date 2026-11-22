@@ -33,6 +33,8 @@ import type { View3dHost } from "../rendering/View3dHost.js";
 import type { SeatFrame } from "../session/DeviceSeats.js";
 import { seatEntity } from "../session/SeatFocus.js";
 import type { View } from "../session/View.js";
+import type { SkyClockView } from "../sky/Sky.js";
+import { playAtmosphere } from "./playAtmosphere.js";
 
 /**
  * Seat 0's view while play shows it in first person (249), per fixed tick: apply
@@ -287,6 +289,8 @@ export interface Play3dSource {
   /** Appends presentation-only sprites (opening doors), as the fixed view's
    * `collected` hook does. */
   readonly overlays?: ((items: SceneItem[]) => void) | undefined;
+  /** The world's clock and weather; without them the view shows a clear day. */
+  readonly sky?: SkyClockView | undefined;
 }
 
 /**
@@ -327,6 +331,8 @@ export function renderFirstPerson(
     overlays: (items) => gc.doorPresentation?.appendOverlays(items, realm),
     meshSurfaceGeometry: gc.renderer?.meshSurfaceGeometry?.bind(gc.renderer),
     observer: (view.seat ? seatEntity(gc.session, view.seat) : undefined) ?? stateView.playerEntity,
+    // Building shows the world in plain daylight, so painted colours read true.
+    sky: stateView.editorEnabled ? undefined : stateView.sky.now,
   };
   const interior = currentInterior(gc, control);
   const headset = from.headset && gc.xr;
@@ -426,6 +432,17 @@ function drawSeen(
       background: source.background,
       underlay: source.underlay,
       headset: from.headset,
+      atmosphere:
+        source.sky &&
+        playAtmosphere(source.sky, {
+          entities,
+          eye,
+          scale: topDown?.scale,
+          region: view.region,
+          indoors: !!interior,
+          headset: !!headset,
+          seconds: source.presentationTime,
+        }),
     };
     // Through the render host's own renderer (249): into this view's region, or
     // to a headset's eyes.

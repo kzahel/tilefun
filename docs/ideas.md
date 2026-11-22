@@ -85,7 +85,9 @@ Ideas requested by the project owner on 2026-10-03; uncommitted and unordered.
 - Families that live in houses, potentially with Sims-style household behavior.
   Explore `~/code/playbox` as a reference before choosing a design.
 - Multi-floor buildings with steps/stairs and elevators connecting floors.
-- Weather patterns and day/night cycles; possibly seasons as a later extension.
+- Seasons, and weather that changes play (watered crops, sheltering animals,
+  sleeping through the night). Day, night, rain and storms are delivered:
+  [day, night and weather](topics/day-night-and-weather.md).
 - Naturally spawning wildlife, taking inspiration from the ecology in
   `~/code/mclone`.
 - More art and wildlife characters, aiming for breadth comparable to mclone's

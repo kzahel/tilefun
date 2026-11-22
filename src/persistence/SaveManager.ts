@@ -25,6 +25,8 @@ export interface SavedMeta {
   cameraZoom: number;
   /** Total gems collected (absent in older saves → defaults to 0). */
   gemsCollected?: number;
+  /** The world's clock when this realm last saved (`SkyClocks.adopt`). */
+  skyTime?: number;
 }
 
 /** Bounded inspection DTO; never persisted as a world-wide actor snapshot. */

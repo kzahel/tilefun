@@ -33,7 +33,7 @@
       "overLimit": 1
     },
     "src/audio/AudioManager.ts": {
-      "lines": 513,
+      "lines": 516,
       "worst": 46,
       "overLimit": 2
     },
@@ -58,12 +58,12 @@
       "overLimit": 1
     },
     "src/client/ClientStateView.ts": {
-      "lines": 547,
+      "lines": 551,
       "worst": 35,
       "overLimit": 1
     },
     "src/client/GameClient.ts": {
-      "lines": 958,
+      "lines": 962,
       "worst": 0,
       "overLimit": 0
     },
@@ -468,7 +468,7 @@
       "overLimit": 1
     },
     "src/rendering/firstperson/FirstPersonView.ts": {
-      "lines": 933,
+      "lines": 940,
       "worst": 48,
       "overLimit": 2
     },
@@ -603,7 +603,7 @@
       "overLimit": 1
     },
     "src/server/GameServer.ts": {
-      "lines": 930,
+      "lines": 934,
       "worst": 0,
       "overLimit": 0
     },
@@ -623,7 +623,7 @@
       "overLimit": 1
     },
     "src/server/Realm.ts": {
-      "lines": 1332,
+      "lines": 1339,
       "worst": 0,
       "overLimit": 0
     },

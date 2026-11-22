@@ -65,6 +65,12 @@ one Realm) through `LocalServerRuntime`, and the lab connects with
 packet on the local host channel, ordered with play and answered after a full
 snapshot; `GameServer` refuses them.
 
+Each world has one clock on authority, shared by its outdoor realm and its
+building interiors ([SkyClocks](../src/server/SkyClocks.ts)) and saved in each
+realm's meta. Day, night and weather are a pure function of the world's seed and
+that clock, so a replica needs only one `sync-sky` message per stream and its
+frame ticks. See [day, night and weather](topics/day-night-and-weather.md).
+
 ## Transport and requests
 
 Frame tag `0x16` carries normal entity baselines/deltas plus the bounded numerical

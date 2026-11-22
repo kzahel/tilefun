@@ -16,6 +16,7 @@ import type { PersistenceStore } from "../persistence/PersistenceStore.js";
 import { worldCompatibility } from "../persistence/WorldCompatibility.js";
 import type { RealmInfo } from "../shared/protocol.js";
 import { Realm } from "./Realm.js";
+import { SkyClocks } from "./SkyClocks.js";
 
 /** How long an empty (non-default) realm stays loaded before being destroyed. */
 const REALM_IDLE_TIMEOUT_MS = 5 * 60 * 1000;
@@ -105,10 +106,13 @@ export class RealmDirectory {
   private readonly loadingRealms = new Map<string, Promise<Realm>>();
   /** The default realm's worldId (set during init, used for new connections). */
   defaultRealmId: string | null = null;
+  /** World clocks and weather, one per world across its realms. */
+  readonly sky = new SkyClocks();
 
   constructor(private readonly deps: RealmDirectoryDeps) {
     // Create a default realm (will be loaded with a world in init() or loadWorld())
     const defaultRealm = new Realm([baseGameMod]);
+    defaultRealm.sky.clocks = this.sky;
     // Use a sentinel key until a real world is loaded
     defaultRealm.currentWorldId = "__default__";
     this.realms.set("__default__", defaultRealm);
@@ -127,8 +131,10 @@ export class RealmDirectory {
     return this.realms.entries();
   }
 
+  /** A realm that was destroyed. A world's clock goes with its outdoor realm. */
   delete(worldId: string): void {
     this.realms.delete(worldId);
+    this.sky.forget(worldId);
   }
 
   /**
@@ -158,6 +164,7 @@ export class RealmDirectory {
 
   private async load(worldId: string): Promise<Realm> {
     const realm = new Realm([baseGameMod]);
+    realm.sky.clocks = this.sky;
     try {
       await realm.loadWorld(
         worldId,
@@ -228,6 +235,8 @@ export class RealmDirectory {
    * Called from tick(); `residentsMoving` holds every realm while a resident crosses a door.
    */
   checkIdle(residentsMoving: boolean): void {
+    // Once per server tick: the clocks count it.
+    this.sky.tick++;
     const now = Date.now();
     for (const [worldId, realm] of this.realms) {
       if (worldId === this.defaultRealmId) continue;

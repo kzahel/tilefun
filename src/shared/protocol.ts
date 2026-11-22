@@ -403,6 +403,20 @@ export interface SyncCVarsMessage {
   cvars: PhysicsCVars;
 }
 
+/**
+ * The world's clock and weather (`sky/Sky.ts`): `time` seconds at the realm's
+ * tick `tick`. Frame ticks keep it current from there. Applied on arrival, ahead
+ * of buffered frames.
+ */
+export interface SyncSkyMessage {
+  type: "sync-sky";
+  seed: number;
+  time: number;
+  tick: number;
+  /** Weather held by a command instead of the seed's own. */
+  weather?: import("../sky/Sky.js").WeatherKind;
+}
+
 export interface SyncPlayerNamesMessage {
   type: "sync-player-names";
   playerNames: Record<number, string>;
@@ -452,6 +466,7 @@ export type ServerMessage =
       cameraY: number;
       cameraZoom: number;
     }
+  | SyncSkyMessage
   | { type: "request-error"; requestId: number; message: string }
   | { type: "world-created"; requestId: number; meta: WorldMeta }
   | { type: "world-deleted"; requestId: number }

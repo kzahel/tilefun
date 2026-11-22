@@ -33,6 +33,7 @@ export type SeatAction = (typeof SEAT_ACTIONS)[number];
 export const SHARED_PAGE_ACTIONS = [
   "toggle_menu",
   "toggle_world_map",
+  "toggle_phone",
   "toggle_debug",
   "toggle_console",
   "toggle_editor",

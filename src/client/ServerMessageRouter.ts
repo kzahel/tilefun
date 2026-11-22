@@ -133,6 +133,9 @@ export class ServerMessageRouter {
       case "sync-editor-cursors":
         host.stateView.bufferMessage(msg);
         break;
+      case "sync-sky":
+        host.stateView.sky.apply(msg);
+        break;
       case "realm-list":
         this.receiveRealmList(msg);
         break;

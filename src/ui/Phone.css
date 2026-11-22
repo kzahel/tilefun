@@ -1,0 +1,158 @@
+.phone-button {
+  position: fixed;
+  top: max(8px, env(safe-area-inset-top));
+  left: calc(max(8px, env(safe-area-inset-left)) + 104px);
+  z-index: 200;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid #9ab59c;
+  border-radius: 8px;
+  background: #243a32;
+  color: #fff;
+  font:
+    bold 10px / 11px system-ui,
+    sans-serif;
+  cursor: pointer;
+}
+.phone-button[aria-pressed="true"] {
+  background: #3a5c4e;
+  border-color: #ffe38a;
+}
+.phone-button svg {
+  width: 22px;
+  height: 22px;
+}
+
+.phone {
+  position: fixed;
+  top: calc(max(8px, env(safe-area-inset-top)) + 58px);
+  left: max(8px, env(safe-area-inset-left));
+  z-index: 90;
+  box-sizing: border-box;
+  width: 176px;
+  padding: 14px 8px 12px;
+  border: 2px solid #0c0f14;
+  border-radius: 18px;
+  background: #1c2028;
+  box-shadow: 0 6px 18px #0008;
+  color: #fff;
+  font:
+    13px / 18px system-ui,
+    sans-serif;
+  font-variant-numeric: tabular-nums;
+  /* The phone only shows things: touches and clicks go on to the game. */
+  pointer-events: none;
+  user-select: none;
+  transform-origin: top left;
+  transition:
+    transform 0.18s ease-out,
+    opacity 0.18s ease-out;
+}
+.phone[hidden] {
+  display: block;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-12px) scale(0.92);
+  transition:
+    transform 0.14s ease-in,
+    opacity 0.14s ease-in,
+    visibility 0s 0.14s;
+}
+.phone::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  width: 36px;
+  height: 4px;
+  margin-left: -18px;
+  border-radius: 2px;
+  background: #0c0f14;
+}
+.phone-screen {
+  overflow: hidden;
+  border-radius: 10px;
+  background: linear-gradient(#4aa3e0, #9fd3f0);
+  transition: background 1s;
+}
+.phone-screen[data-sky="dusk"] {
+  background: linear-gradient(#5b5a9c, #f0a36b);
+}
+.phone-screen[data-sky="night"] {
+  background: linear-gradient(#141b3c, #2c3a6e);
+}
+.phone-now {
+  padding: 10px 10px 8px;
+  text-align: center;
+  text-shadow: 0 1px 2px #0006;
+}
+.phone-time {
+  font:
+    bold 26px / 30px system-ui,
+    sans-serif;
+}
+.phone-day {
+  font-size: 12px;
+  opacity: 0.9;
+}
+.phone-weather {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-weight: bold;
+}
+.phone svg {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  image-rendering: pixelated;
+}
+.phone-later {
+  margin: 0;
+  padding: 4px 8px 6px;
+  list-style: none;
+  background: #0006;
+}
+.phone-later li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+}
+.phone-later li.phone-tomorrow {
+  margin-top: 2px;
+  padding: 2px 0 0;
+  border-top: 1px solid #fff4;
+  font-size: 10px;
+  line-height: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+.phone-later svg {
+  width: 20px;
+  height: 20px;
+}
+.phone-when {
+  width: 62px;
+  opacity: 0.9;
+}
+/* A short screen (a phone held sideways) keeps the clock and two rows. */
+@media (max-height: 460px) {
+  .phone-later li:nth-child(n + 3),
+  .phone-later li.phone-tomorrow {
+    display: none;
+  }
+  .phone-time {
+    font-size: 20px;
+    line-height: 24px;
+  }
+}

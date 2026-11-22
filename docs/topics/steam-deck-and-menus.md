@@ -74,7 +74,8 @@ or credentials in this repository.
   source, radial dead zone, press edges and bounded UI repeat; neutral input is
   required after blur, reconnect and context changes to prevent action leakage.
 - A jump/confirm; B contextual actions/back; X throw; Y interact; RT sprint; RB horn; LB build/play;
-  View map; Menu pause. In editing, Y opens controller tools, left stick pans,
+  View map; Menu pause; R3 (right stick click) or P brings up or puts away the
+  [phone](day-night-and-weather.md), which takes no focus. In editing, Y opens controller tools, left stick pans,
   right stick positions the cursor, RT places/paints and LT erases.
   The same screen cursor reaches DOM tools and map controls: A/RT selects, with
   UI holds consumed until release. Cars default to forward/reverse throttle and

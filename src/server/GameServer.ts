@@ -116,6 +116,10 @@ export interface GameServerDeps {
 }
 
 export class GameServer {
+  /** The clock and weather of the world a session is in. */
+  skyOf(session: PlayerSession | undefined) {
+    return this.realms.get(session?.realmId ?? "")?.sky.clock ?? null;
+  }
   teleport(session: PlayerSession, wx: number, wy: number): void {
     const realm = this.realms.get(session.realmId ?? "");
     if (

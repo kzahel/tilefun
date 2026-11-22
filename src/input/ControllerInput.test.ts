@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { controllerAxes } from "./ControllerBindings.js";
+import { controllerActionHint, controllerAxes } from "./ControllerBindings.js";
 import { CONTROLLER_ACTIONS, ControllerInput } from "./ControllerInput.js";
 
 function pad(buttons: number[] = [], axes = [0, 0, 0, 0], index = 0): Gamepad {
@@ -26,6 +26,14 @@ describe("controller session", () => {
     session.sample([pad()], 3);
     expect(session.sample([pad([1])], 4)).toEqual(["back"]);
     expect([...session.held]).toEqual([]);
+  });
+  it("brings up the phone with a right stick click, once per press", () => {
+    const session = new ControllerInput();
+    session.sample([pad()], 0);
+    expect(session.sample([pad([11])], 1)).toEqual(["phone"]);
+    expect(session.sample([pad([11])], 2)).toEqual([]);
+    expect(CONTROLLER_ACTIONS.phone).toBe("toggle_phone");
+    expect(controllerActionHint("toggle_phone")).toBe("R3");
   });
   it("uses a radial dead zone and preserves browser/world Y direction", () => {
     expect(controllerAxes(0.1, 0.1)).toEqual({ dx: 0, dy: 0 });

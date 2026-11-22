@@ -593,4 +593,28 @@ describe("the view's merged static world (251)", () => {
     expect(bridge().opacity).toBe(1);
     view.dispose();
   });
+
+  it("draws the sky over the finished view, and nothing on a clear day", () => {
+    const view = new FirstPersonView(new Map());
+    const f = frame(world(new Map([["0,0", new Chunk()]])), true);
+    settle(view, f);
+    const clear = { tint: [1, 1, 1], rain: 0, flash: 0, glow: 0 } as const;
+    drawn.length = 0;
+    view.render({ ...f, atmosphere: clear }, target);
+    const plain = drawn.length;
+    drawn.length = 0;
+    // Night, rain or a flash each add one render after the world's.
+    for (const atmosphere of [
+      { ...clear, tint: [0.42, 0.48, 0.78] as const },
+      { ...clear, rain: 0.5 },
+      { ...clear, flash: 0.3 },
+    ]) {
+      drawn.length = 0;
+      view.render({ ...f, atmosphere }, target);
+      expect(drawn).toHaveLength(plain + 1);
+      const { atmosphere: pass } = view as unknown as { atmosphere: { camera: THREE.Camera } };
+      expect(drawn.at(-1)?.camera).toBe(pass.camera);
+    }
+    view.dispose();
+  });
 });

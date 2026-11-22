@@ -423,7 +423,10 @@ describe("top-down play in the 3D scene", () => {
     expect(control.scene(guest)).toBeUndefined();
   });
 
+  /** The replica's clock: none, until a test gives it a night. */
+  const sky: { now?: object } = {};
   function drawable(interior?: object) {
+    delete sky.now;
     const made = setup();
     const { control, view } = made;
     const frames: FirstPersonFrame[] = [];
@@ -437,7 +440,14 @@ describe("top-down play in the 3D scene", () => {
     const gc = {
       ...made.gc,
       spriteCatalog: new Map([["grass-blades", {}]]),
-      stateView: { entities: [], props: [], world: { getChunkIfLoaded: () => lawn }, interior },
+      stateView: {
+        entities: [],
+        props: [],
+        world: { getChunkIfLoaded: () => lawn },
+        interior,
+        sky,
+        editorEnabled: false,
+      },
       view3d: {
         draw(_region: unknown, draw: (target: object) => void) {
           draw({});
@@ -470,6 +480,21 @@ describe("top-down play in the 3D scene", () => {
     view.camera.zoom = 0.2;
     expect(renderFirstPerson(gc, view, 1)).toBe(true);
     expect(frames[1]?.grass).toEqual([]);
+  });
+
+  it("shows the world's sky in play, and plain daylight without a clock or while building", () => {
+    const { gc, view, frames, sync } = drawable();
+    sync();
+    renderFirstPerson(gc, view, 1);
+    expect(frames[0]?.atmosphere).toBeUndefined();
+    // Midnight of day 2 in a storm.
+    sky.now = { seed: 42, time: 24 * 60, held: "storm" };
+    renderFirstPerson(gc, view, 1);
+    expect(frames[1]?.atmosphere).toMatchObject({ rain: 1 });
+    expect(frames[1]?.atmosphere?.tint[0]).toBeLessThan(0.5);
+    (gc.stateView as { editorEnabled: boolean }).editorEnabled = true;
+    renderFirstPerson(gc, view, 1);
+    expect(frames[2]?.atmosphere).toBeUndefined();
   });
 
   it("draws seat 0 to a headset's eyes and uses the unified scene for every view (252)", () => {

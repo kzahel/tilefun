@@ -1,3 +1,4 @@
+import type { AudioManager } from "../audio/AudioManager.js";
 import { saveDynamicShadows } from "../config/dynamicShadows.js";
 import { saveWildlifeModels } from "../config/wildlifeModels.js";
 import type { ConsoleEngine } from "../console/ConsoleEngine.js";
@@ -12,6 +13,7 @@ import { PropEditorScene } from "../scenes/PropEditorScene.js";
 import type { MainMenu } from "../ui/MainMenu.js";
 import { activateMenu, deactivateMenu } from "../ui/MenuNavigation.js";
 import { OptionsDialog } from "../ui/OptionsDialog.js";
+import { ClientSky } from "./ClientSky.js";
 import type { RemoteStateView } from "./ClientStateView.js";
 import type { FirstPersonControl } from "./FirstPersonControl.js";
 import type { GameClientOptions } from "./GameClient.js";
@@ -26,6 +28,7 @@ export interface MenuChromeHost {
   readonly canvas: HTMLCanvasElement;
   readonly renderHost: RenderHost;
   readonly stateView: RemoteStateView;
+  readonly audioManager: AudioManager;
   readonly mainMenu: MainMenu;
   readonly scenes: SceneManager;
   readonly consoleEngine: ConsoleEngine;
@@ -62,6 +65,8 @@ export class GameMenuChrome {
   readonly optionsDialog: OptionsDialog;
   optionsButton: HTMLButtonElement | null = null;
   mapButton: HTMLButtonElement | null = null;
+  /** The phone (time and weather) and the weather's sound. */
+  readonly sky: ClientSky;
   /** Edit/Play toggle in the side panel; scenes relabel it. */
   editorButton: HTMLButtonElement | null = null;
   private hamburgerOpen = false;
@@ -121,6 +126,13 @@ export class GameMenuChrome {
         saveDynamicShadows(enabled);
       },
     );
+    this.sky = new ClientSky(host);
+  }
+
+  /** Remove what the chrome put on the page outside its panel. */
+  destroy(): void {
+    this.mapButton?.remove();
+    this.sky.destroy();
   }
 
   /** The hamburger panel or the Options dialog is open. */
@@ -169,8 +181,9 @@ export class GameMenuChrome {
     );
   }
 
-  /** Keep the map button's controller/keyboard hint current. */
-  updateMapHint(): void {
+  /** Once per client tick: the sky's phone and sound, and the map button's hint. */
+  update(): void {
+    this.sky.update();
     if (!this.mapButton) return;
     const hint = inputHint(keyboardHint("toggle_world_map"), "View");
     const label = `Map${hint ? ` · ${hint}` : ""}`;

@@ -1,6 +1,6 @@
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
-import { SERVER_CVAR_DEFS } from "./serverCVarDefs.js";
+import { SERVER_CVAR_DEFS, TIME_COMMAND, WEATHER_COMMAND } from "./serverCVarDefs.js";
 
 const entityTypeNames = () => Object.keys(ENTITY_FACTORIES);
 
@@ -103,4 +103,6 @@ export function registerServerCommandStubs(engine: ConsoleEngine): void {
     serverSide: true,
     execute: noop,
   });
+  engine.commands.register({ ...TIME_COMMAND, execute: noop });
+  engine.commands.register({ ...WEATHER_COMMAND, execute: noop });
 }

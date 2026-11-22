@@ -19,6 +19,7 @@ import type {
   SyncSessionMessage,
 } from "../shared/protocol.js";
 import { applyChunkSnapshot, deserializeEntity, deserializeProp } from "../shared/serialization.js";
+import { SkyReplica } from "../sky/SkyReplica.js";
 import { Chunk } from "../world/Chunk.js";
 import type { World } from "../world/World.js";
 import type { PlayerPredictor, ReconcileDiagnostics } from "./PlayerPredictor.js";
@@ -100,6 +101,8 @@ export class RemoteStateView implements ClientStateView {
   private _stateAppliedThisTick = false;
   private _serverTick = 0;
   private _simulationTime: number | undefined;
+  /** The world's clock and weather as the server last gave them. */
+  readonly sky = new SkyReplica(() => this._serverTick);
   private _physicsState: import("../physics/PhysicsState.js").PhysicsState | undefined;
   get physicsState() {
     return this._physicsState;
@@ -410,6 +413,7 @@ export class RemoteStateView implements ClientStateView {
     this._entityMap.clear();
     this.authoritativeClipPhases.clear();
     this._simulationTime = undefined;
+    this.sky.clear();
     this._physicsState = undefined;
     this._entities = [];
     this._props = [];

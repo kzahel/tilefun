@@ -19,7 +19,8 @@ export type ControllerCommand =
   | "interact"
   | "throw"
   | "edit"
-  | "map";
+  | "map"
+  | "phone";
 export const CONTROLLER_BUTTONS: Record<number, ControllerCommand> = {
   0: "confirm",
   1: "back",
@@ -28,6 +29,7 @@ export const CONTROLLER_BUTTONS: Record<number, ControllerCommand> = {
   4: "edit",
   8: "map",
   9: "menu",
+  11: "phone",
   12: "up",
   13: "down",
   14: "left",
@@ -43,6 +45,7 @@ export const CONTROLLER_ACTIONS: Partial<Record<ControllerCommand, ActionName>> 
   interact: "enter_place",
   edit: "toggle_editor",
   map: "toggle_world_map",
+  phone: "toggle_phone",
 };
 
 export const CONTROLLER_HELD_ACTIONS: Partial<Record<number, ActionName>> = {
@@ -65,6 +68,7 @@ const LABELS: Record<number, string> = {
   7: "RT",
   8: "View",
   9: "Menu",
+  11: "R3",
   12: "D↑",
   13: "D↓",
   14: "D←",

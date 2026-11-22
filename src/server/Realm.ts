@@ -106,6 +106,7 @@ import { resolveSimulationGameplay } from "./RealmSimulation.js";
 import { RealmStreaming } from "./RealmStreaming.js";
 import { RealmTrafficPopulation } from "./RealmTrafficPopulation.js";
 import { createRealmWorkContext } from "./RealmWildlife.js";
+import { RealmSky } from "./SkyClocks.js";
 import { tickAllAI } from "./tickAllAI.js";
 import { VehicleControl } from "./VehicleControl.js";
 import type { Mod, Unsubscribe } from "./WorldAPI.js";
@@ -230,6 +231,8 @@ export class Realm {
   private readonly replication = new RealmReplicator();
   /** Monotonic tick counter. */
   private tickCounter = 0;
+  /** The world's clock and weather, where the server keeps them. */
+  readonly sky = new RealmSky();
   private readonly trafficPopulation = new RealmTrafficPopulation(this);
   /** Bumped when sessions join/leave (affects playerNames). */
   private playerNamesRevision = 0;
@@ -602,6 +605,7 @@ export class Realm {
     for (const session of activeSessions) this.savePlayerData(session);
     this.worldAPI.advanceTime(dt);
     this.records?.tick(dt);
+    if (this.sky.tick(dt, this.sessions.size, this.tickCounter)) this.saveManager?.markMetaDirty();
 
     this.publishState(transport, dormantClientIds, broadcasting);
   }
@@ -865,6 +869,7 @@ export class Realm {
         aiPlanning: this.aiPlanning,
         tickCounter: this.tickCounter,
         simulationTime: this.worldAPI.time,
+        sky: this.sky.clock,
         tickRate: this.tickRate,
         ...(scene ? { physicsSnapshot: scene.snapshotAround.bind(scene) } : {}),
         playerNamesRevision: this.playerNamesRevision,
@@ -944,6 +949,7 @@ export class Realm {
     const savedMeta = await saveManager.loadMeta();
     await loadWildlifeReturns(this, saveManager, this.entityManager);
     this.restoreInterior(worldMeta, savedMeta);
+    this.sky.load(worldId, worldMeta, savedMeta);
     // Bind save accessors
     saveManager.bind(
       (key) => this.world.chunks.getChunkDataByKey(key),
@@ -1265,6 +1271,7 @@ export class Realm {
       cameraY,
       cameraZoom,
       gemsCollected,
+      ...this.sky.saved(),
     };
   }
 

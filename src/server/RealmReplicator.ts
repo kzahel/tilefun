@@ -10,6 +10,7 @@ import type {
   RemoteEditorCursor,
   ServerMessage,
   SyncChunksMessage,
+  SyncSkyMessage,
 } from "../shared/protocol.js";
 import { reuseEntitySnapshot, serializeProp } from "../shared/serialization.js";
 import type { World } from "../world/World.js";
@@ -23,6 +24,10 @@ import {
   StreamInterest,
 } from "./ReplicationInterest.js";
 import { createSeatSyncState, type SeatSyncState, seatSync } from "./SeatSync.js";
+import type { SkyClock } from "./SkyClocks.js";
+
+/** A realm's ticks and the world's clock may part by this much before a resend. */
+const SKY_DRIFT_SECONDS = 0.25;
 
 interface ReplicationSource {
   readonly roomState?: import("../interiors/GameplayRoom.js").GameplayRoomState | null;
@@ -33,6 +38,8 @@ interface ReplicationSource {
   readonly aiPlanning: AiPlanningScheduler;
   readonly tickCounter: number;
   readonly simulationTime?: number;
+  /** The world's clock and weather; absent in a realm without one. */
+  readonly sky?: SkyClock | null;
   /** Prediction context around one anchor per seat in the stream. */
   readonly physicsSnapshot?: (
     anchorIds: readonly number[],
@@ -58,6 +65,8 @@ interface StreamDeltaState {
   propRevision: number;
   propRangeKey: string;
   cvarsRevision: number;
+  /** The clock last sent. */
+  sky?: SyncSkyMessage;
   playerNamesRevision: number;
   editorCursorsRevision: number;
 
@@ -271,8 +280,39 @@ export class RealmReplicator {
       messages.push({ type: "sync-cvars", cvars: { gravity: getGravityScale() } });
       delta.cvarsRevision = cvarsRev;
     }
+    const sky = source.sky && skySync(source.sky, source.tickCounter, source.tickRate, delta.sky);
+    if (sky) {
+      messages.push(sky);
+      delta.sky = sky;
+    }
     return messages;
   }
+}
+
+/**
+ * The world's clock against this realm's ticks, which every frame carries: sent
+ * once, and again when a command moves the clock or holds weather.
+ */
+function skySync(
+  clock: SkyClock,
+  tick: number,
+  tickRate: number,
+  sent: SyncSkyMessage | undefined,
+): SyncSkyMessage | undefined {
+  if (
+    sent &&
+    sent.seed === clock.seed &&
+    sent.weather === clock.held &&
+    Math.abs(sent.time + (tick - sent.tick) / tickRate - clock.time) < SKY_DRIFT_SECONDS
+  )
+    return undefined;
+  return {
+    type: "sync-sky",
+    seed: clock.seed,
+    time: clock.time,
+    tick,
+    ...(clock.held ? { weather: clock.held } : {}),
+  };
 }
 
 /** Other devices' editor cursors; a device's own seats are local to it. */

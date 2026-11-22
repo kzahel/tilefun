@@ -389,6 +389,11 @@ export class AudioManager {
     }
   }
 
+  /** Where the game's sounds go while the context runs. */
+  get output(): AudioNode | null {
+    return this.ctx?.state === "running" ? (this.master ?? this.ctx.destination) : null;
+  }
+
   /** True when the AudioContext is in "running" state and ready to play. */
   get ready(): boolean {
     return this.ctx?.state === "running";

@@ -37021,7 +37021,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/ClientStateView.ts:65"
+          "source": "src/client/ClientStateView.ts:66"
         },
         {
           "system": "Gameplay",
@@ -37033,11 +37033,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/console/serverCommands.ts:83"
+          "source": "src/console/serverCommands.ts:98"
         },
         {
           "system": "Gameplay",
-          "source": "src/console/serverCommands.ts:155"
+          "source": "src/console/serverCommands.ts:170"
         },
         {
           "system": "Editor",
@@ -37132,6 +37132,10 @@
           "source": "src/scenarios/ScenarioSession.ts:187"
         },
         {
+          "system": "Editor",
+          "source": "src/scenes/playAtmosphere.ts:47"
+        },
+        {
           "system": "Gameplay",
           "source": "src/server/EntityHandle.ts:179"
         },
@@ -37153,7 +37157,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/Realm.ts:305"
+          "source": "src/server/Realm.ts:308"
         },
         {
           "system": "Gameplay",
@@ -39885,11 +39889,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:474"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:479"
         },
         {
           "system": "Editor",
-          "source": "src/scenes/firstPersonPlay.ts:326"
+          "source": "src/scenes/firstPersonPlay.ts:330"
         },
         {
           "system": "Gameplay",

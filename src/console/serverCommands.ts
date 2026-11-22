@@ -1,8 +1,23 @@
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { setGravityScale } from "../physics/Gravity.js";
 import type { GameServer } from "../server/GameServer.js";
+import {
+  clockLabel,
+  forecast,
+  nextHour,
+  skyAt,
+  WEATHER_KINDS,
+  type WeatherKind,
+} from "../sky/Sky.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
-import { SERVER_CVAR_DEFS } from "./serverCVarDefs.js";
+import {
+  SERVER_CVAR_DEFS,
+  TIME_COMMAND,
+  TIME_WORDS,
+  TIMES_OF_DAY,
+  WEATHER_COMMAND,
+  WEATHER_WORDS,
+} from "./serverCVarDefs.js";
 
 const entityTypeNames = () => Object.keys(ENTITY_FACTORIES);
 
@@ -221,6 +236,40 @@ export function registerServerCommands(engine: ConsoleEngine, server: GameServer
       const sender = from ? from.displayName || from.clientId : "Server";
       server.broadcastChat(sender, text);
       out(`[${sender}] ${text}`);
+    },
+  });
+
+  engine.commands.register({
+    ...TIME_COMMAND,
+    execute: (args, out) => {
+      const clock = server.skyOf(getFirstSession(server));
+      if (!clock) return out("This world has no clock");
+      const to = args.to as string | undefined;
+      if (to !== undefined) {
+        const hour = TIMES_OF_DAY[to] ?? Number(to);
+        if (!(hour >= 0 && hour < 24)) return out(`Usage: time [0-23|${TIME_WORDS.join("|")}]`);
+        // Forward to the next such hour: a world's clock never runs back.
+        clock.time = nextHour(clock.time, hour);
+      }
+      const sky = skyAt(clock.seed, clock.time, clock.held);
+      out(`Day ${sky.day}, ${clockLabel(sky.hour)}, ${sky.kind}`);
+    },
+  });
+
+  engine.commands.register({
+    ...WEATHER_COMMAND,
+    execute: (args, out) => {
+      const clock = server.skyOf(getFirstSession(server));
+      if (!clock) return out("This world has no weather");
+      const kind = args.kind as string | undefined;
+      if (kind === "auto") clock.held = undefined;
+      else if (WEATHER_KINDS.includes(kind as WeatherKind)) clock.held = kind as WeatherKind;
+      else if (kind !== undefined) return out(`Usage: weather [${WEATHER_WORDS.join("|")}]`);
+      out(
+        `Weather: ${skyAt(clock.seed, clock.time, clock.held).kind}${clock.held ? " (held)" : ""}`,
+      );
+      for (const entry of forecast(clock.seed, clock.time, 5).slice(1))
+        out(`  Day ${entry.day}, ${clockLabel(entry.hour)}: ${entry.kind}`);
     },
   });
 }
