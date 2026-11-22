@@ -1,12 +1,10 @@
-import { THROW_ANGLE, THROW_MAX_SPEED, THROW_MIN_SPEED } from "../config/constants.js";
-import { createBall } from "../entities/Ball.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import { ENTITY_FACTORIES } from "../entities/EntityFactories.js";
 import { createProp, isPropType } from "../entities/PropFactories.js";
 import { furnitureAsset, INTERIOR_WALL_TYPE } from "../interiors/GameplayInterior.js";
 import { type compileGameplayRoom, validateRoomOccupancy } from "../interiors/GameplayRoom.js";
-import { launchBody, setBodyPose, setHorizontalVelocity } from "../physics/PhysicalEdits.js";
+import { setHorizontalVelocity } from "../physics/PhysicalEdits.js";
 import { isExcavatorAction } from "../shared/ExcavatorInput.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import {
@@ -14,7 +12,7 @@ import {
   normalizeSharedScreenSpan,
 } from "../shared/SharedScreenSpan.js";
 import { STAGED_VEHICLE_MODELS } from "../traffic/OriginalVehicles.js";
-import { freshBallWork } from "../wildlife/ForageResources.js";
+import { useItem } from "./ItemUse.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { dismountPlayer } from "./RealmRiding.js";
@@ -36,6 +34,9 @@ export interface RealmCommandContext {
     | "vehicleRegistry"
     | "flush"
     | "invalidateAllChunks"
+    | "world"
+    | "records"
+    | "savePlayerData"
   >;
   random(): number;
   roomGeometry(): ReturnType<typeof compileGameplayRoom> | null;
@@ -47,7 +48,7 @@ type RealmCommandType =
   | "player-interact"
   | "vehicle-horn"
   | "vehicle-emergency"
-  | "throw-ball"
+  | "use-item"
   | "edit-terrain-tile"
   | "edit-terrain-subgrid"
   | "edit-terrain-corner"
@@ -113,7 +114,7 @@ const COMMANDS: { [K in RealmCommandType]: RealmCommandHandler<K> } = {
     realm.worldAPI.events.emit("player-interact", { wx: msg.wx, wy: msg.wy }),
   "vehicle-horn": ({ realm }, session, msg) => realm.vehicles.honk(session, msg.active),
   "vehicle-emergency": ({ realm }, session, msg) => realm.vehicles.emergency(session, msg.action),
-  "throw-ball": (ctx, session, msg) => throwBall(ctx, session, msg),
+  "use-item": (ctx, session, msg) => useItem(ctx, session, msg),
   "edit-terrain-tile": ({ realm }, _session, msg) =>
     realm.terrainEditor.applyTileEdit(
       msg.tx,
@@ -254,91 +255,6 @@ function interiorMoveAllowed(
     return false;
   }
   return true;
-}
-
-/** A throw with finite values, force 0..1 and a unit direction (every client path). */
-export function isValidThrow(msg: { dirX: number; dirY: number; force: number }): boolean {
-  const length = Math.hypot(msg.dirX, msg.dirY);
-  return (
-    [msg.dirX, msg.dirY, msg.force].every(Number.isFinite) &&
-    msg.force >= 0 &&
-    msg.force <= 1 &&
-    length >= 0.001 &&
-    length <= 1.001
-  );
-}
-
-function throwBall(
-  ctx: RealmCommandContext,
-  session: PlayerSession,
-  msg: RealmCommandOf<"throw-ball">,
-): void {
-  const { realm } = ctx;
-  if (!isValidThrow(msg) || realm.vehicles.get(session)) return;
-  const player = session.player;
-  const speed = THROW_MIN_SPEED + msg.force * (THROW_MAX_SPEED - THROW_MIN_SPEED);
-  // Add random jitter so consecutive throws spread out
-  const speedJitter = 1 + (ctx.random() - 0.5) * 0.15; // ±7.5% speed
-  const angleJitter = (ctx.random() - 0.5) * 0.18; // ±~5° direction
-  const baseAngle = Math.atan2(msg.dirY, msg.dirX) + angleJitter;
-  const jitteredSpeed = speed * speedJitter;
-  const xySpeed = jitteredSpeed * Math.cos(THROW_ANGLE);
-  const zSpeed = jitteredSpeed * Math.sin(THROW_ANGLE);
-  const owner = session.persistId;
-  const reusable = realm.entityManager.entities.find(
-    (e) =>
-      e.type === "ball" &&
-      e.workItem?.returned &&
-      e.workItem.owner === owner &&
-      e.parentId === undefined &&
-      Math.hypot(e.position.wx - player.position.wx, e.position.wy - player.position.wy) < 36,
-  );
-  const ball = reusable ?? createBall(player.position.wx, player.position.wy);
-  const { x, y, z, radius } = throwOrigin(player, ball, baseAngle);
-  if (realm.physicsScene && !realm.physicsScene.canPlaceSphere(x, y, z, radius, reusable?.id))
-    return;
-  const position = {
-    wx: x - (ball.collider?.offsetX ?? 0),
-    wy: y - (ball.collider?.offsetY ?? 0) + (ball.collider?.height ?? 4) / 2,
-  };
-  setBodyPose(ball, position);
-  const order = ball.workItem?.ballOrder;
-  ball.workItem = {
-    ...freshBallWork(owner, player.position),
-    ...(order !== undefined ? { ballOrder: order } : {}),
-  };
-  if (!realm.ownedBalls.admit(owner, ball)) return;
-  delete ball.deathTimer;
-  ball.ballThrowerId = player.id;
-  setBodyPose(ball, { wz: z });
-  launchBody(ball, {
-    vx: Math.cos(baseAngle) * xySpeed,
-    vy: Math.sin(baseAngle) * xySpeed,
-    vz: zSpeed,
-  });
-  ball.jumpZ = 8;
-  if (!reusable) realm.entityManager.spawn(ball);
-}
-
-/**
- * Start beyond the fixed player hull instead of spawning a physical
- * projectile inside its thrower. A blocked hand cannot create a body in a wall.
- */
-function throwOrigin(player: Entity, ball: Entity, baseAngle: number) {
-  const radius = (ball.collider?.width ?? 4) / 2;
-  const dx = Math.cos(baseAngle),
-    dy = Math.sin(baseAngle),
-    c = player.collider;
-  const reach = c
-    ? Math.min(
-        (c.width / 2 + radius + 0.1) / Math.max(1e-6, Math.abs(dx)),
-        (c.height / 2 + radius + 0.1) / Math.max(1e-6, Math.abs(dy)),
-      )
-    : radius + 1;
-  const x = player.position.wx + (c?.offsetX ?? 0) + dx * reach;
-  const y = player.position.wy + (c?.offsetY ?? 0) - (c?.height ?? 0) / 2 + dy * reach;
-  const z = (player.wz ?? 0) + 8;
-  return { x, y, z, radius };
 }
 
 function spawn(

@@ -85,11 +85,11 @@ it.each(subjects.filter((p) => ["dog", "frog", "robin", "capybara"].includes(p.s
       let recovered = false;
       for (let tick = 0; tick < 1200; tick++) {
         if (!scared && tick % 12 === 0) {
-          // Authority drops non-unit throws (RealmCommands.isValidThrow).
+          // Authority drops non-unit throws (ItemUse.isValidThrow).
           const dx = animal.position.wx - session.player.player.position.wx,
             dy = animal.position.wy - session.player.player.position.wy,
             length = Math.hypot(dx, dy);
-          send({ type: "throw-ball", dirX: dx / length, dirY: dy / length, force: 1 });
+          send({ type: "use-item", dirX: dx / length, dirY: dy / length, force: 1 });
         }
         // Explicit fixed stepping runs the real authority without wall-clock waits.
         session.tick();

@@ -549,10 +549,10 @@
       "id": "farm-held-items",
       "name": "farm held items",
       "image": "assets/farming/held-items.png",
-      "width": 16,
-      "height": 8,
+      "width": 48,
+      "height": 24,
       "tileSize": 16,
-      "fingerprint": "3e6d68dfe72dc0cf24d095f79aab7060335f58ddbd9c6f86570987c54a4adf07",
+      "fingerprint": "20e3b929df62876d27b2eae2be6fcc10be77d3de32a766ae085aee294be22d68",
       "source": "public/assets/SOURCES.md"
     },
     {
@@ -31151,8 +31151,8 @@
       "rect": [
         0,
         0,
-        16,
-        8
+        48,
+        24
       ],
       "label": "farm-held-items · registered 8×8 frames",
       "kind": "sprite",
@@ -31163,7 +31163,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/inventory/Inventory.ts:86"
+          "source": "src/inventory/Inventory.ts:168"
         }
       ]
     },
@@ -36175,7 +36175,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:493"
+          "source": "src/rendering/scene/EntitySprites.ts:472"
         },
         {
           "system": "Gameplay",
@@ -37129,7 +37129,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/scene/EntitySprites.ts:321"
+          "source": "src/rendering/scene/EntitySprites.ts:300"
         },
         {
           "system": "Gameplay",
@@ -37145,11 +37145,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:129"
+          "source": "src/scenarios/ScenarioSession.ts:131"
         },
         {
           "system": "Gameplay",
-          "source": "src/scenarios/ScenarioSession.ts:187"
+          "source": "src/scenarios/ScenarioSession.ts:189"
         },
         {
           "system": "Editor",
@@ -37173,6 +37173,10 @@
         },
         {
           "system": "Gameplay",
+          "source": "src/server/ItemUse.ts:103"
+        },
+        {
+          "system": "Gameplay",
           "source": "src/server/PlayerSession.ts:101"
         },
         {
@@ -37181,7 +37185,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmCommands.ts:235"
+          "source": "src/server/RealmCommands.ts:236"
         },
         {
           "system": "Gameplay",
@@ -38305,11 +38309,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmActivity.ts:55"
+          "source": "src/server/ItemUse.ts:120"
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmCommands.ts:290"
+          "source": "src/server/ItemUse.ts:214"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/server/RealmActivity.ts:55"
         },
         {
           "system": "Gameplay",

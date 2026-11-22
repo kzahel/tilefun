@@ -61,12 +61,12 @@ describe("a guest's pad actions (226)", () => {
     expect(actions.getMovement().dx).toBe(1);
     actions.clearHeld();
     actions.poll(pad([2], [1, 0]), false);
-    expect([actions.getMovement().dx, actions.isHeld("throw")]).toEqual([0, false]);
+    expect([actions.getMovement().dx, actions.isHeld("use_item")]).toEqual([0, false]);
     actions.poll(pad(), false);
     actions.poll(pad([2]), false);
-    expect(actions.isHeld("throw")).toBe(true);
+    expect(actions.isHeld("use_item")).toBe(true);
     actions.poll(undefined, false);
-    expect(actions.isHeld("throw")).toBe(false);
+    expect(actions.isHeld("use_item")).toBe(false);
   });
 
   it("drives a seat through the action-set adapter, releasing the pad on dispose", () => {

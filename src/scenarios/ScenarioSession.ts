@@ -2,14 +2,16 @@ import { CHUNK_SIZE_PX } from "../config/constants.js";
 import { performanceMetrics } from "../diagnostics/PerformanceMetrics.js";
 import { createProp } from "../entities/PropFactories.js";
 import { baseGameMod } from "../game/base-game.js";
+import { BALL } from "../inventory/Inventory.js";
 import { MemoryRecordStore } from "../persistence/MemoryRecordStore.js";
 import { RecordPersistenceStore } from "../persistence/RecordPersistenceStore.js";
 import { replaceBodyCollider, teleportBody } from "../physics/PhysicalEdits.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { runEquipment } from "../server/EquipmentControl.js";
+import { isValidThrow } from "../server/ItemUse.js";
+import { holdItem } from "../server/PlayerInventory.js";
 import { PlayerSession } from "../server/PlayerSession.js";
 import { Realm } from "../server/Realm.js";
-import { isValidThrow } from "../server/RealmCommands.js";
 import { endNaps } from "../server/RealmNaps.js";
 import {
   decodeClientMessage,
@@ -33,8 +35,8 @@ import { scenarioRegistry } from "./ScenarioRegistry.js";
 import { paintScenarioRoads, paintScenarioTerrain } from "./ScenarioTerrain.js";
 import { scenarioVehicleSource } from "./ScenarioTraffic.js";
 
-/** Presses composed with a seat's movement (horn, sirens, throw). */
-const SEAT_PRESSES = new Set<string>(["vehicle-horn", "vehicle-emergency", "throw-ball"]);
+/** Presses composed with a seat's movement (horn, sirens, item use). */
+const SEAT_PRESSES = new Set<string>(["vehicle-horn", "vehicle-emergency", "use-item"]);
 
 /** Where seat 0's server messages go: the session's own buffers (headless tests,
  * the scenario Worker) or a live connection (the recipe-world authority, 226). */
@@ -285,8 +287,10 @@ export class ScenarioSession {
         return;
       case "throw-ball":
         if (!isValidThrow(command)) throw Error("Invalid scenario throw");
+        // The instrument throws a ball whatever the seat was holding.
+        holdItem(this.player, BALL);
         this.realm.handleMessage(this.player.clientId, this.player, {
-          type: "throw-ball",
+          type: "use-item",
           ...command,
         });
         return;

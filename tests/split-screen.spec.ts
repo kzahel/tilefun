@@ -240,7 +240,7 @@ test("shared screen uses the viewport width and each player can click their hotb
   await expect(hostWood).toHaveAttribute("aria-pressed", "true");
   await page.keyboard.press("BracketRight");
   await expect(hostWood).toHaveAttribute("aria-pressed", "false");
-  await page.keyboard.press("Equal");
+  await page.keyboard.press("Minus");
   await expect(guestWood).toHaveAttribute("aria-pressed", "true");
   await page.setViewportSize({ width: 1280, height: 800 });
   await expect.poll(async () => (await snapshot(page)).views).toEqual([[0, 0, 1280]]);

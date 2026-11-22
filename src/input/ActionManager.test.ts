@@ -47,7 +47,7 @@ describe("ActionManager", () => {
     const context = vi.fn(),
       throwing = vi.fn();
     actions.on("enter_place", context);
-    actions.on("throw", throwing);
+    actions.on("use_item", throwing);
     actions.pressKey("KeyE");
     expect(context).toHaveBeenCalledOnce();
     expect(throwing).not.toHaveBeenCalled();

@@ -8,7 +8,6 @@ import {
   type SpriteComponent,
 } from "../../entities/Entity.js";
 import type { Prop } from "../../entities/Prop.js";
-import { HELD_SHEET } from "../../inventory/Inventory.js";
 import { rotateBodyVector } from "../../physics/BodyRotation.js";
 import { terrainBaseZ } from "../../physics/TerrainExcavation.js";
 import {
@@ -34,6 +33,7 @@ import {
   trainMeshHeading,
 } from "../EntityMeshPose.js";
 import { ovalShadow, vehicleShadow } from "../GpuShadowShape.js";
+import { heldItemSprite } from "../HandPose.js";
 import { vehicleMeshRadius, yawOrientation } from "../MeshPresentation.js";
 import { onPixelGrid } from "../PixelGrid.js";
 import type { PropDepthIndex } from "../PropDepthIndex.js";
@@ -284,30 +284,9 @@ function collectEntity(pass: EntityPass, e: SpriteEntity): SpriteItem | undefine
   if (hasVehicleLights(e)) Object.assign(spriteItem, emergencyLights(e, poseTime));
   if (remains) Object.assign(spriteItem, roadkillFade(e, scaleY));
   pass.items.push(spriteItem);
-  if (e.heldItem !== undefined && e.parentId === undefined && !spriteItem.flashHidden) {
-    const { direction } = e.sprite;
-    const handX = direction === Direction.Left ? -7 : direction === Direction.Right ? 7 : 5;
-    const handY = direction === Direction.Up ? -2 : 2;
-    pass.items.push({
-      kind: "sprite",
-      sortKey: sortKey + 0.05,
-      wx: pos.wx + handX,
-      wy: pos.wy + handY,
-      zOffset: zOffset + 7,
-      sheetKey: HELD_SHEET,
-      frameCol: e.heldItem - 1,
-      frameRow: 0,
-      spriteWidth: 8,
-      spriteHeight: 8,
-      flipX: false,
-      hasShadow: false,
-      drawOffsetY: 0,
-      shadowFeetWy: pos.wy,
-      shadowWidth: 0,
-      shadowTerrainZ: zOffset,
-      flashHidden: false,
-    });
-  }
+  const held =
+    !spriteItem.flashHidden && heldItemSprite(e, e.sprite.direction, pos, sortKey, zOffset);
+  if (held) pass.items.push(held);
   if (pass.depthShadows && hasShadow && e.collider && (!meshGroundShadow || spriteItem.mesh))
     depthShadow(pass, e, spriteItem, pos, zOffset, meshGroundShadow);
   if (pass.grassVehicles && isVehicleSprite(e.type)) pass.grassVehicles.push(spriteItem);

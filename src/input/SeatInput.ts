@@ -15,7 +15,7 @@ export function neutralSample(
     honk: false,
     lights: false,
     style: false,
-    throw: false,
+    use: false,
     reverse: false,
     hornPressed: false,
     ...sample,
@@ -33,8 +33,9 @@ export function neutralSample(
 export interface SeatInput {
   /** Cars use relative steering (the seat's Options choice). */
   readonly steering: boolean;
-  /** Lights and style keys held now: boarding ignores keys held while getting in. */
-  held(action: "vehicle_lights" | "vehicle_style"): boolean;
+  /** Keys held now: boarding ignores lights and style keys held while getting in,
+   * and a held hotbar step keeps stepping. */
+  held(action: HeldSeatAction): boolean;
   /** This tick's devices; still movement while `locked`. */
   sample(locked: boolean, vehicle: Entity | undefined): SeatSample;
   /** Release held keys and latched presses (play stopped or the seat was cancelled). */
@@ -50,8 +51,16 @@ export interface SeatInput {
   look?(): { dx: number; dy: number } | undefined;
 }
 
+/** Held keys a seat's controls read outside its movement sample. */
+export type HeldSeatAction = "vehicle_lights" | "vehicle_style" | "hotbar_previous" | "hotbar_next";
+
 /** Presses a guest's place controls listen for. */
-export type SeatPlacePress = "enter_place" | "vehicle_recover" | "hotbar_previous" | "hotbar_next";
+export type SeatPlacePress =
+  | "enter_place"
+  | "vehicle_recover"
+  | "hotbar_previous"
+  | "hotbar_next"
+  | "hotbar_swap";
 
 /** The action-set calls a seat reads (an `ActionManager` for one scheme or pad). */
 export interface SeatActions {
@@ -82,7 +91,7 @@ export class ActionSeatInput implements SeatInput {
     });
   }
 
-  held(action: "vehicle_lights" | "vehicle_style"): boolean {
+  held(action: HeldSeatAction): boolean {
     return this.actions.isHeld(action);
   }
 

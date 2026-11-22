@@ -4,7 +4,7 @@ import type { RemoteStateView } from "../client/ClientStateView.js";
 import { nextInputSequence, observeInputSequence } from "../client/InputSequence.js";
 import type { GameContext, GameScene } from "../core/GameScene.js";
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
-import { normalizesDiagonal, seatPresses, vehicleButtons } from "../input/SeatComposer.js";
+import { normalizesDiagonal, seatButtons, seatPresses } from "../input/SeatComposer.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import type { DeviceSeats, SeatFrame } from "../session/DeviceSeats.js";
@@ -238,7 +238,7 @@ export class PlayScene implements GameScene {
       gc.touchHold?.reset();
       gc.touchButtons.reset();
     }
-    Object.assign(gc.touchButtons, vehicleButtons(vehicle));
+    Object.assign(gc.touchButtons, seatButtons(vehicle, gc.stateView.playerEntity));
     // Authority holds the device still during a storage pause or a door transition.
     const doorBusy = !!gc.doorPresentation?.busy;
     const held = !!gc.storagePaused || doorBusy;

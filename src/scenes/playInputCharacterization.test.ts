@@ -471,11 +471,11 @@ describe("play input characterization (pre-226 composition)", () => {
     if (h.player.sprite) h.player.sprite.direction = Direction.Left;
     h.actions.pressKey("KeyB");
     h.step(30);
-    expect(h.take().some((m) => m.type === "throw-ball")).toBe(false);
+    expect(h.take().some((m) => m.type === "use-item")).toBe(false);
     h.actions.releaseKey("KeyB");
     h.step();
-    const thrown = h.take().filter((m) => m.type === "throw-ball");
-    expect(thrown).toEqual([{ type: "throw-ball", dirX: -1, dirY: 0, force: expect.any(Number) }]);
+    const thrown = h.take().filter((m) => m.type === "use-item");
+    expect(thrown).toEqual([{ type: "use-item", dirX: -1, dirY: 0, force: expect.any(Number) }]);
     expect((thrown[0] as { force: number }).force).toBeCloseTo(0.5, 6);
 
     h.actions.pressKey("KeyB");
@@ -483,8 +483,8 @@ describe("play input characterization (pre-226 composition)", () => {
     h.step(90);
     h.actions.releaseKey("KeyB");
     h.step();
-    expect(h.take().filter((m) => m.type === "throw-ball")).toEqual([
-      { type: "throw-ball", dirX: 0, dirY: 1, force: 1 },
+    expect(h.take().filter((m) => m.type === "use-item")).toEqual([
+      { type: "use-item", dirX: 0, dirY: 1, force: 1 },
     ]);
   });
 
@@ -495,7 +495,7 @@ describe("play input characterization (pre-226 composition)", () => {
     h.step(10);
     h.actions.releaseKey("KeyB");
     h.step();
-    expect(h.take().some((m) => m.type === "throw-ball")).toBe(false);
+    expect(h.take().some((m) => m.type === "use-item")).toBe(false);
   });
 
   it("drives the player from the touch joystick in joystick mode only", () => {
@@ -836,10 +836,10 @@ describe("play pointer characterization (226 slice 2, before composition moves)"
 function guestDevices(movement = { dx: -1, dy: 0, sprinting: false, jump: false }) {
   const devices = {
     steering: false,
-    throwing: false,
+    using: false,
     held: () => false,
     sample(locked: boolean): SeatSample {
-      const presses = { ...neutralSample(), throw: devices.throwing };
+      const presses = { ...neutralSample(), use: devices.using };
       return locked ? neutralSample(presses) : { ...presses, manual: movement, steered: movement };
     },
     clear: vi.fn(),
@@ -884,15 +884,15 @@ describe("device seats on the play path (226 slice 5-i)", () => {
     h.step();
     expect(h.lastInput()).toMatchObject({ dx: 0, seats: [{ seat: 1, dx: 0 }] });
     h.host.menuOpen = false;
-    devices.throwing = true;
+    devices.using = true;
     h.step(10);
     h.take();
-    devices.throwing = false;
+    devices.using = false;
     h.step();
     expect(h.take().find((m) => m.type === "seat")).toMatchObject({
       type: "seat",
       seat: 1,
-      message: { type: "throw-ball" },
+      message: { type: "use-item" },
     });
   });
 

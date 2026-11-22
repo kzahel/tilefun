@@ -309,13 +309,13 @@ it("plays with the game's controls: predicted steps, a following camera and the 
     visibility: "lower",
   });
   expect(last?.options.presentationTime).toBeGreaterThan(0.1);
-  // A throw is released after that tick's movement.
+  // A use (throw) is released after that tick's movement.
   const press = vi.spyOn(lab.client, "submitPress");
   key("KeyB");
   for (let i = 0; i < 10; i++) frame();
   key("KeyB", "keyup");
   frame();
-  expect(press).toHaveBeenCalledWith(expect.objectContaining({ type: "throw-ball" }));
+  expect(press).toHaveBeenCalledWith(expect.objectContaining({ type: "use-item" }));
 });
 
 it("streams the camera's range while paused and drops presses made meanwhile", async () => {
@@ -347,13 +347,13 @@ it("streams the camera's range while paused and drops presses made meanwhile", a
   await until(frame, () => expect(submit).toHaveBeenCalled());
   expect(submit.mock.calls[0]?.[0]).toMatchObject({ jump: false, jumpPressed: false });
   frame();
-  expect(press).not.toHaveBeenCalledWith(expect.objectContaining({ type: "throw-ball" }));
+  expect(press).not.toHaveBeenCalledWith(expect.objectContaining({ type: "use-item" }));
   // The same throw while playing is released.
   key("KeyB");
   frame();
   key("KeyB", "keyup");
   frame();
-  expect(press).toHaveBeenCalledWith(expect.objectContaining({ type: "throw-ball" }));
+  expect(press).toHaveBeenCalledWith(expect.objectContaining({ type: "use-item" }));
 });
 
 it("snaps the camera after commands; reload and reset clear the renderer's world caches", async () => {

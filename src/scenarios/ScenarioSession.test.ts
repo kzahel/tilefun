@@ -132,9 +132,9 @@ it("takes horn, siren and throw presses on a seat's ordered input path", async (
       { dirX: 1, dirY: 0, force: 1.5 },
       { dirX: 1, dirY: 0, force: -0.1 },
     ])
-      session.input(encodeClientMessage({ type: "throw-ball", ...bad }));
+      session.input(encodeClientMessage({ type: "use-item", ...bad }));
     expect(balls()).toHaveLength(0);
-    session.input(encodeClientMessage({ type: "throw-ball", dirX: 1, dirY: 0, force: 1 }));
+    session.input(encodeClientMessage({ type: "use-item", dirX: 1, dirY: 0, force: 1 }));
     expect(balls()).toHaveLength(1);
     // Presses never take part in the seat's input sequence.
     expect(session.player.lastProcessedInputSeq).toBe(0);

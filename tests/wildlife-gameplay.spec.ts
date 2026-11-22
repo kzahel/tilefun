@@ -73,8 +73,8 @@ test("an ordinary game ball throw startles a duck into flight and plays a quack"
             const d = g.stateView.entities.find((e) => e.type === type);
             if (d)
               g.transport.send({
-                type: "throw-ball",
-                // Authority drops non-unit throws (RealmCommands.isValidThrow).
+                type: "use-item",
+                // Authority drops non-unit throws (ItemUse.isValidThrow).
                 dirX:
                   (d.position.wx - p.wx) / Math.hypot(d.position.wx - p.wx, d.position.wy - p.wy),
                 dirY:

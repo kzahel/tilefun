@@ -4,6 +4,18 @@ Topic: steam-deck-and-menus
 Status: shared controller/touch UX and reverse driving delivered; hands-on tuning next.
 Updated: 2026-11-22.
 
+## Held-item actions
+
+[269](../tactical/269-held-item-actions.md): **X uses what is in your hand; Y uses
+what is in front of you.** X (Q/B on the left keys, `.` on the right, the touch
+paddle) uses the held item: hold to charge, release to throw the ball, swing the
+stick (bats balls, shoos animals), chop with the axe, scatter corn or wave with
+empty hands. The touch paddle names the verb. Every player carries the ball,
+stick and axe in an eight-slot hotbar. D-pad ←/→ steps (hold to keep stepping)
+and a picker strip names the item and its verb; D-pad ↑ swaps back to the last
+item. The game is never paused to choose. Prompts for held-item verbs (chop,
+scatter) show the Use button; Interact still performs them.
+
 ## Contextual gameplay actions
 
 [171](../tactical/171-contextual-controller-actions.md) adds **B / Q / Actions**
@@ -73,7 +85,7 @@ or credentials in this repository.
 - Standard gamepad snapshots feed semantic gameplay/menu commands. One active
   source, radial dead zone, press edges and bounded UI repeat; neutral input is
   required after blur, reconnect and context changes to prevent action leakage.
-- A jump/confirm; B contextual actions/back; X throw; Y interact; RT sprint; RB horn; LB build/play;
+- A jump/confirm; B contextual actions/back; X use held item; Y interact; RT sprint; RB horn; LB build/play;
   View map; Menu pause; R3 (right stick click) or P brings up or puts away the
   [phone](day-night-and-weather.md), which takes no focus. In editing, Y opens controller tools, left stick pans,
   right stick positions the cursor, RT places/paints and LT erases.
@@ -81,7 +93,8 @@ or credentials in this repository.
   UI holds consumed until release. Cars default to forward/reverse throttle and
   relative left/right steering. Options retains directional aim with automatic reverse.
   LT or the keyboard's reverse key (R on the left, Comma on the right) overrides it.
-  D-pad Up toggles vehicle lights and D-pad Right changes siren style.
+  D-pad Up toggles vehicle lights and D-pad Right changes siren style while driving;
+  on foot D-pad ←/→ pick from the hotbar (held to repeat) and D-pad ↑ swaps to the last item.
   The keyboard uses Z/X on the left and L/K on the right.
   Named on-screen paddles and interaction prompts follow the last input source.
 - Local players (226): split screen in the game.
@@ -98,7 +111,9 @@ or credentials in this repository.
     | Jump / horn | Space | `/` |
     | Interact | E | `'` |
     | Sprint | Left Shift | Right Shift |
-    | Throw | Q | `.` |
+    | Use held item | Q | `.` |
+    | Pick item | `[` / `]` | `-` / `=` |
+    | Last item | C | `\` |
 
   - **Layout:** select **Use shared screen** in **Multiplayer → Local multiplayer**
     for one top-down view. Players can spread out across the playable area,

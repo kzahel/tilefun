@@ -21,7 +21,7 @@ function sample(overrides: Partial<SeatSample> = {}): SeatSample {
     honk: false,
     lights: false,
     style: false,
-    throw: false,
+    use: false,
     reverse: false,
     hornPressed: false,
     jumpPressed: false,
@@ -130,22 +130,22 @@ describe("SeatComposer", () => {
     const seat = new SeatComposer();
     const facingLeft = onFoot({ facing: Direction.Left });
     for (let i = 0; i < 30; i++)
-      expect(seat.tick(sample({ throw: true }), facingLeft, DT).after).toEqual([]);
+      expect(seat.tick(sample({ use: true }), facingLeft, DT).after).toEqual([]);
     const [thrown] = seat.tick(sample(), facingLeft, DT).after;
-    expect(thrown).toMatchObject({ type: "throw-ball", dirX: -1, dirY: 0 });
+    expect(thrown).toMatchObject({ type: "use-item", dirX: -1, dirY: 0 });
     expect((thrown as { force: number }).force).toBeCloseTo(0.5, 6);
-    for (let i = 0; i < 90; i++) seat.tick(sample({ throw: true }), facingLeft, DT);
+    for (let i = 0; i < 90; i++) seat.tick(sample({ use: true }), facingLeft, DT);
     expect(seat.tick(sample({ manual: { ...still, dy: 1 } }), facingLeft, DT).after).toEqual([
-      { type: "throw-ball", dirX: 0, dirY: 1, force: 1 },
+      { type: "use-item", dirX: 0, dirY: 1, force: 1 },
     ]);
     // Each throw charges from zero again.
-    for (let i = 0; i < 15; i++) seat.tick(sample({ throw: true }), facingLeft, DT);
+    for (let i = 0; i < 15; i++) seat.tick(sample({ use: true }), facingLeft, DT);
     const [quick] = seat.tick(sample(), facingLeft, DT).after;
     expect((quick as { force: number }).force).toBeCloseTo(0.25, 6);
     // No throw from a vehicle, or when the release lands while input is locked.
-    seat.tick(sample({ throw: true }), onFoot({ vehicle: car() }), DT);
+    seat.tick(sample({ use: true }), onFoot({ vehicle: car() }), DT);
     expect(seat.tick(sample(), onFoot({ vehicle: car() }), DT).after).toEqual([]);
-    seat.tick(sample({ throw: true }), facingLeft, DT);
+    seat.tick(sample({ use: true }), facingLeft, DT);
     expect(seat.tick(sample(), { ...facingLeft, locked: true }, DT).after).toEqual([]);
   });
 
@@ -179,7 +179,7 @@ describe("SeatComposer", () => {
 
   it("cancel drops movement and a charged throw", () => {
     const seat = new SeatComposer();
-    seat.tick(sample({ manual: { ...still, dx: 1 }, throw: true }), onFoot(), DT);
+    seat.tick(sample({ manual: { ...still, dx: 1 }, use: true }), onFoot(), DT);
     seat.cancel();
     expect(seat.lastMovement).toEqual({ dx: 0, dy: 0 });
     expect(seat.tick(sample(), onFoot(), DT).after).toEqual([]);

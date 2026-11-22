@@ -43,8 +43,8 @@ describe("controller session", () => {
   it("emits edges once, repeats menu direction, and keeps gameplay held actions", () => {
     const session = new ControllerInput();
     session.sample([pad()], 0);
-    expect(session.sample([pad([0, 2, 5, 7])], 10)).toEqual(["confirm", "throw"]);
-    expect([...session.held]).toEqual(["jump", "throw", "honk", "sprint"]);
+    expect(session.sample([pad([0, 2, 5, 7])], 10)).toEqual(["confirm", "use_item"]);
+    expect([...session.held]).toEqual(["jump", "use_item", "honk", "sprint"]);
     expect(session.sample([pad([0, 2])], 20)).toEqual([]);
     session.uiActive = () => true;
     session.sample([pad()], 30);

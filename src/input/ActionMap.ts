@@ -30,7 +30,8 @@ export type ActionName =
   | "enter_place"
   | "hotbar_previous"
   | "hotbar_next"
-  | "throw"
+  | "hotbar_swap"
+  | "use_item"
   | "honk"
   | "reverse"
   | "vehicle_lights"
@@ -87,7 +88,7 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   { action: "paint_unpaint", keys: ["KeyC"] },
   { action: "toggle_tab", keys: ["KeyT"] },
   // Play mode actions
-  { action: "throw", keys: ["KeyB"] },
+  { action: "use_item", keys: ["KeyB"] },
   { action: "honk", keys: ["Space", "KeyH"] },
   { action: "reverse", keys: ["KeyR"] },
   { action: "vehicle_lights", keys: ["KeyL"] },
@@ -96,6 +97,7 @@ export const DEFAULT_ACTION_MAP: ActionMapConfig = [
   { action: "enter_place", keys: ["KeyE"] },
   { action: "hotbar_previous", keys: ["BracketLeft"] },
   { action: "hotbar_next", keys: ["BracketRight"] },
+  { action: "hotbar_swap", keys: ["KeyC"] },
   // Play mode zoom presets
   { action: "zoom_0", keys: ["Digit0"] },
   { action: "zoom_1", keys: ["Digit1"] },

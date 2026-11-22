@@ -362,14 +362,14 @@ export class OptionsDialog {
     const map = hostKeyMap(side);
     const k = (action: ActionName) => keyboardHint(action, map);
     const shift = side === "left" ? "Left Shift" : "Right Shift";
-    this.keyboardHelp.textContent = `${k("jump")} Jump · ${k("enter_place")} Interact · ${shift} Run · ${k("throw")} Throw. This side works in solo and local multiplayer.`;
+    this.keyboardHelp.textContent = `${k("jump")} Jump · ${k("enter_place")} Interact · ${shift} Run · ${k("use_item")} Use held item · ${k("hotbar_previous")}/${k("hotbar_next")} Pick item · ${k("hotbar_swap")} Last item. This side works in solo and local multiplayer.`;
     const forward = `${k("move_up")}/${k("move_down")}`;
     const sideways = `${k("move_left")}/${k("move_right")}`;
     this.firstPersonControlsHelp.textContent =
       this.firstPersonControls.value === "simple"
         ? `${forward} walk forward/back. ${sideways} turn. Hold forward and turn to walk in a curve.`
         : `${forward} walk forward/back. ${sideways} strafe. Click the world to look around with the mouse. Press Escape to release it.`;
-    this.controls.textContent = `A / ${k("jump")} Jump · X / ${k("throw")} Throw · Y / ${k("enter_place")} Interact · RT / ${shift} Fast · RB / ${k("honk")} Horn · D-pad ↑ / ${k("vehicle_lights")} Lights · D-pad → / ${k("vehicle_style")} Siren style. LB / Tab Build–Play · View / ${k("toggle_world_map")} Map · Menu / Escape Pause. Right stick moves the cursor over the world and tools (in first person it looks around); A or RT selects. In menus: A Select · B Back. While building: RT Paint · LT Erase · Y Tools.`;
+    this.controls.textContent = `A / ${k("jump")} Jump · X / ${k("use_item")} Use held item (hold to charge) · Y / ${k("enter_place")} Interact · RT / ${shift} Fast · D-pad ← → / ${k("hotbar_previous")} ${k("hotbar_next")} Pick item (hold to keep stepping) · D-pad ↑ / ${k("hotbar_swap")} Last item. Driving: RB / ${k("honk")} Horn · D-pad ↑ / ${k("vehicle_lights")} Lights · D-pad → / ${k("vehicle_style")} Siren style. LB / Tab Build–Play · View / ${k("toggle_world_map")} Map · Menu / Escape Pause. Right stick moves the cursor over the world and tools (in first person it looks around); A or RT selects. In menus: A Select · B Back. While building: RT Paint · LT Erase · Y Tools.`;
   }
   private chooseKeyboardSide(): Promise<void> {
     this.updateKeyboardHelp();

@@ -1,7 +1,8 @@
 import type { GameContext } from "../core/GameScene.js";
+import { Direction } from "../entities/Entity.js";
 import { cssRegion } from "../input/ViewRect.js";
-import { heldItem } from "../inventory/Inventory.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
+import { handFrame } from "../rendering/HandPose.js";
 import { projectWorld } from "../rendering/Projection.js";
 import { layoutViews } from "../rendering/ViewLayout.js";
 import { presentedSeatBody, seatBody, seatEntity } from "../session/SeatFocus.js";
@@ -205,12 +206,16 @@ function drawSeatBadge(gc: GameContext, view: View): void {
   ctx.fillText(count, iconX + 24, top + 16);
 }
 
+/** First person: the held item (or a waving glove) at the lower right, posed like the avatar's. */
 function drawHeldItem(gc: GameContext, view: View): void {
-  const own =
-    view.seat === 0 ? gc.stateView : gc.stateView.seats.session(view.seat, gc.stateView.serverTick);
-  const item = heldItem(own?.inventory);
-  if (item === undefined || seatBody(gc.session, view.seat)?.parentId !== undefined) return;
-  gc.drawHeldItemIcon?.(item - 1, view.region.width * 0.69, view.region.height - 87);
+  const body = seatBody(gc.session, view.seat);
+  if (!body || body.parentId !== undefined) return;
+  const hand = handFrame(body, Direction.Down);
+  if (!hand) return;
+  // The icon draws at 5× scale; a swing sweeps it toward the middle of the view.
+  const x = view.region.width * 0.69 - hand.dx * 5 - (hand.row === 2 ? 40 : 0);
+  const y = view.region.height - 87 - hand.lift * 5 - hand.dy * 3;
+  gc.drawHeldItemIcon?.(hand.column, hand.row, x, y);
 }
 
 function drawSharedGuests(gc: GameContext, view: View, alpha: number): void {

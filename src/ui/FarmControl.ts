@@ -42,7 +42,7 @@ export class FarmControl {
     this.root.hidden = !choice;
     this.button.hidden = !choice?.request;
     this.button.disabled = this.busy;
-    const hint = actionHint("enter_place", this.keyHint);
+    const hint = actionHint(choice?.use ? "use_item" : "enter_place", this.keyHint);
     const label = choice?.request ? [choice.label, hint].filter(Boolean).join(" · ") : "";
     if (this.button.textContent !== label) this.button.textContent = label;
     const status =

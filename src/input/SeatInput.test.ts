@@ -106,7 +106,7 @@ describe("neutralSample", () => {
       honk: true,
       lights: false,
       style: true,
-      throw: true,
+      use: true,
       reverse: false,
       hornPressed: true,
     };

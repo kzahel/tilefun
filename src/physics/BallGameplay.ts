@@ -56,11 +56,11 @@ function keepBedCargo(manager: EntityManager, ball: Entity, supportId: number | 
   return true;
 }
 
-/** Gameplay hit reactions after shared physics contacts; no position resolution. */
+/** Hit reactions to a ball contact or a swung tool (`source`); no position resolution. */
 export function applyBallImpact(
   entityManager: EntityManager,
   other: Entity,
-  ball: Entity,
+  source: Entity,
   hitNx: number,
   hitNy: number,
 ) {
@@ -76,7 +76,7 @@ export function applyBallImpact(
       other.motionIntent.vy = 0;
     }
     entityManager.spawn(createGem(other.position.wx, other.position.wy));
-  } else if (!startleWildlife(other, ball.position) && ai && !ai.hostile) {
+  } else if (!startleWildlife(other, source.position) && ai && !ai.hostile) {
     // Scare NPCs (non-hostile entities with wander AI)
     ai.state = "scared";
     ai.scaredTimer = BALL_SCARE_DURATION;

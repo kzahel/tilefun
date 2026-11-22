@@ -6,8 +6,8 @@ import {
   normalizesDiagonal,
   SeatComposer,
   type SeatTick,
+  seatButtons,
   seatPresses,
-  vehicleButtons,
 } from "../input/SeatComposer.js";
 import { TouchButtons } from "../input/TouchButtons.js";
 import { TouchJoystick } from "../input/TouchJoystick.js";
@@ -58,7 +58,7 @@ export class LabInput {
     const vehicle = occupiedVehicle(view.playerEntity, view.entities);
     if (seat.board(vehicle, actions.isHeld("vehicle_lights"), actions.isHeld("vehicle_style")))
       this.buttons.reset();
-    Object.assign(this.buttons, vehicleButtons(vehicle));
+    Object.assign(this.buttons, seatButtons(vehicle, view.playerEntity));
     const steering = DEFAULT_CAR_DRIVING === "steering";
     const manual = actions.getMovement(normalizesDiagonal(vehicle, steering));
     const jumpPressed = this.jumped;
@@ -77,7 +77,7 @@ export class LabInput {
   skip(): void {
     this.jumped = false;
     this.actions.consumeHornPress();
-    this.seat.dropThrow();
+    this.seat.dropUse();
   }
 
   /** Action buttons exist only on touch screens: never invisible mouse targets, and

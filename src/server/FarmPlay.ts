@@ -4,7 +4,6 @@ import type { EntityManager } from "../entities/EntityManager.js";
 import { createProp } from "../entities/PropFactories.js";
 import {
   CHICKEN_FEEDER,
-  FALL_MS,
   FARM_EGG,
   FARM_FACTORIES,
   GARDEN_BED,
@@ -24,13 +23,14 @@ import {
   farmAction,
 } from "../farming/FarmInteraction.js";
 import { restoreFarmPose } from "../farming/FarmPose.js";
-import { CORN, changeStack, EMPTY_INVENTORY, heldItem, WOOD } from "../inventory/Inventory.js";
+import { AXE, CORN, changeStack, EMPTY_INVENTORY, heldItem, WOOD } from "../inventory/Inventory.js";
 import { PERSISTENCE_BUDGET } from "../persistence/PersistenceBudget.js";
 import { gap } from "../shared/gap.js";
 import { required } from "../shared/required.js";
 import { createForageItem } from "../wildlife/ForageResources.js";
 import { dryFarmGround } from "./FarmGround.js";
 import { growFarmChick, updateChickenPen } from "./FarmPoultry.js";
+import { chopTree } from "./FarmWoodlot.js";
 import { setInventory } from "./PlayerInventory.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
@@ -205,17 +205,9 @@ export function performFarmAction(
       setInventory(session, updated);
       break;
     }
-    case "chop": {
-      if ((target.farm?.effectUntil ?? 0) > now) throw new Error("Wait for the tree to settle.");
-      const chops = (target.farm?.chops ?? 0) + 1;
-      if (chops === 3) {
-        const bundle = farmEntity(LOG_BUNDLE, player.position, player.wz);
-        bundle.farm = { effectUntil: now + FALL_MS };
-        entityManager.spawn(bundle);
-      }
-      target.farm = { chops, effectUntil: now + (chops === 3 ? FALL_MS : 350) };
+    case "chop":
+      chopTree(entityManager, player, target, heldItem(inventory) === AXE, now);
       break;
-    }
     case "replant":
       if (nearby(entityManager, target.position, 32).some((e) => e.type === LOG_BUNDLE))
         throw new Error("Pick up the logs first.");

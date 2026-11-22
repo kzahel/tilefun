@@ -202,7 +202,7 @@ export type ClientMessage =
       brushMode: string;
     }
   | { type: "vehicle-emergency"; action: "toggle" | "style" }
-  | { type: "throw-ball"; dirX: number; dirY: number; force: number }
+  | { type: "use-item"; dirX: number; dirY: number; force: number }
   | { type: "identify"; displayName: string; profileId?: string; playerModel?: string }
   | { type: "set-player-model"; requestId: number; model: string }
   | { type: "list-realms"; requestId: number }
@@ -275,7 +275,7 @@ export interface EntitySnapshot {
   vehicleBedTarget?: number;
   towTargetId?: number;
   towedBy?: number;
-  heldItem?: number;
+  hand?: number;
   vehicleRamp?: number;
   transportLoadId?: number;
   transportedBy?: number;

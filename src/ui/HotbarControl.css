@@ -5,7 +5,7 @@
   bottom: max(9px, env(safe-area-inset-bottom));
   z-index: 81;
   display: grid;
-  grid-template-columns: repeat(4, max-content);
+  grid-template-columns: repeat(8, max-content);
   gap: 3px;
   padding: 4px;
   border: 1px solid #9b8560;
@@ -41,8 +41,8 @@
 }
 .guest-hotbar {
   box-sizing: border-box;
-  width: 150px;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  width: 232px;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
 }
 .guest-hotbar button {
   min-width: 0;
@@ -61,7 +61,28 @@
     0 1px 3px #17110b,
     0 0 3px #17110b;
 }
+/* The picker strip names the selection while choosing (replaces the key hint). */
+.play-hotbar .hotbar-picker {
+  position: absolute;
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 4px 9px;
+  border: 1px solid #ffe19a;
+  border-radius: 6px;
+  background: #3d301c;
+  color: #fff4d3;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.play-hotbar .hotbar-picker[hidden] {
+  display: none;
+}
 @media (max-width: 600px) {
+  .play-hotbar button {
+    min-width: 28px;
+    padding: 2px 2px;
+  }
   .play-hotbar {
     bottom: max(5px, env(safe-area-inset-bottom));
   }

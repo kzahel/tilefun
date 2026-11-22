@@ -265,7 +265,7 @@ it("returns the same ball, preserves an occupied mouth through save/reload and r
       ),
     ).toBeLessThan(45);
     s.realm.handleMessage(s.player.clientId, s.player, {
-      type: "throw-ball",
+      type: "use-item",
       dirX: 1,
       dirY: 0,
       force: 0,

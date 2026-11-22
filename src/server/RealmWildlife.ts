@@ -8,7 +8,7 @@ import {
 } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import { SCATTERED_CORN } from "../farming/FarmActors.js";
-import { CORN } from "../inventory/Inventory.js";
+import { CORN, handItem } from "../inventory/Inventory.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import { setBodyPose } from "../physics/PhysicalEdits.js";
 import { getSurfaceZ } from "../physics/surfaceHeight.js";
@@ -31,7 +31,7 @@ export function createRealmWorkContext(
 ): WorkContext {
   const getHeight = (x: number, y: number) => realm.world.getHeightAt(x, y);
   const carriers = sessions
-    .filter((session) => !session.editorEnabled && session.player.heldItem === CORN)
+    .filter((session) => !session.editorEnabled && handItem(session.player) === CORN)
     .map((session) => session.player);
   const workPlayers = sessions.map((session) => ({
     identity: session.persistId,

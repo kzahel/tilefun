@@ -1,6 +1,7 @@
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import {
+  AXE,
   CORN,
   EMPTY_INVENTORY,
   heldItem,
@@ -41,7 +42,14 @@ export type FarmRequest = { type: "farm-action" } & (
   | { action: FarmAction; entityId: number }
   | { action: GateAction; propId: number }
 );
-export type FarmChoice = { request: FarmRequest | null; label: string; status?: string };
+/** `use`: the verb belongs to the item in hand, so prompts name the use button
+ * (Interact still performs it; a tap on the prompt sends the request directly). */
+export type FarmChoice = {
+  request: FarmRequest | null;
+  label: string;
+  status?: string;
+  use?: true;
+};
 
 export function farmAction(target: Entity): FarmAction | undefined {
   const clip = target.sprite?.clip ?? 0;
@@ -126,6 +134,8 @@ function describeFarmChoice(target: Entity, action: FarmAction, inventory: Inven
         ? "Hold corn to feed chickens"
         : "Harvest corn to feed chickens",
     };
+  if (action === "chop" && heldItem(inventory) !== AXE)
+    return { request: null, label: "Hold the 🪓 axe to chop this tree" };
   if (action === "fence" && !itemCount(inventory, WOOD))
     return { request: null, label: "Bring a wood bundle to these fence stakes" };
   const status =
@@ -134,5 +144,6 @@ function describeFarmChoice(target: Entity, action: FarmAction, inventory: Inven
     request: { type: "farm-action", action, entityId: target.id },
     label: FARM_LABELS[action],
     ...(status && { status }),
+    ...((action === "chop" || action === "feed") && { use: true as const }),
   };
 }

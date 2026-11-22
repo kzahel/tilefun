@@ -879,11 +879,11 @@ export class GameClient implements GameTestHooks {
       actions: this.actions,
       stateView: this.stateView,
       transport: this.transport,
-      drawHeldItemIcon(column, x, y) {
+      drawHeldItemIcon(column, row, x, y) {
         const sheet = client.sheets.get(HELD_SHEET);
         if (!sheet) return;
         client.ctx.imageSmoothingEnabled = false;
-        sheet.drawTile(client.ctx, column, 0, x, y, 5);
+        sheet.drawTile(client.ctx, column, row, x, y, 5);
       },
       get spriteCatalog() {
         return client.renderer.assets;

@@ -33,7 +33,7 @@ export function mutationRange(
     }
   } else if ("gsx" in msg && "gsy" in msg)
     points = [{ x: (msg.gsx * TILE_SIZE) / 2, y: (msg.gsy * TILE_SIZE) / 2 }];
-  else if (msg.type === "throw-ball")
+  else if (msg.type === "use-item")
     points = [{ x: session.player.position.wx, y: session.player.position.wy }];
   if (!points.length) return;
   if (

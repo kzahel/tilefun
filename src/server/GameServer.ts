@@ -79,7 +79,7 @@ function privileged(msg: RequestMessage): boolean {
 function isMutation(msg: ClientMessage): boolean {
   return (
     msg.type.startsWith("edit-") ||
-    msg.type === "throw-ball" ||
+    msg.type === "use-item" ||
     msg.type === "vehicle-emergency" ||
     msg.type === "vehicle-horn" ||
     msg.type === "player-interact"

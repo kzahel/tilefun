@@ -19,7 +19,7 @@ export const SEAT_ACTIONS = [
   "move_right",
   "sprint",
   "jump",
-  "throw",
+  "use_item",
   "honk",
   "reverse",
   "vehicle_lights",
@@ -28,6 +28,7 @@ export const SEAT_ACTIONS = [
   "enter_place",
   "hotbar_previous",
   "hotbar_next",
+  "hotbar_swap",
 ] as const satisfies readonly ActionName[];
 export type SeatAction = (typeof SEAT_ACTIONS)[number];
 type SeatKeys = Record<SeatAction, [string, ...string[]]>;
@@ -40,7 +41,7 @@ const LEFT: SeatKeys = {
   move_right: ["KeyD"],
   sprint: ["ShiftLeft"],
   jump: ["Space"],
-  throw: ["KeyQ", "KeyB"],
+  use_item: ["KeyQ", "KeyB"],
   honk: ["Space", "KeyH"],
   reverse: ["KeyR"],
   vehicle_lights: ["KeyZ"],
@@ -49,6 +50,7 @@ const LEFT: SeatKeys = {
   enter_place: ["KeyE"],
   hotbar_previous: ["BracketLeft"],
   hotbar_next: ["BracketRight"],
+  hotbar_swap: ["KeyC"],
 };
 
 /** Right hand: the arrows with the keys around them. Enter is avoided so a
@@ -60,7 +62,7 @@ const RIGHT: SeatKeys = {
   move_right: ["ArrowRight"],
   sprint: ["ShiftRight"],
   jump: ["Slash"],
-  throw: ["Period"],
+  use_item: ["Period"],
   honk: ["Slash"],
   reverse: ["Comma"],
   vehicle_lights: ["KeyL"],
@@ -69,6 +71,7 @@ const RIGHT: SeatKeys = {
   enter_place: ["Quote"],
   hotbar_previous: ["Minus"],
   hotbar_next: ["Equal"],
+  hotbar_swap: ["Backslash"],
 };
 
 /** A keyboard guest uses one side. Labs can use the full default map. */

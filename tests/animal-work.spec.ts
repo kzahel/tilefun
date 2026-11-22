@@ -87,7 +87,7 @@ test(`ordinary game dog fetches a player-thrown ball`, async ({ page }) => {
   await page.evaluate(() =>
     (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game.transport.send(
       {
-        type: "throw-ball",
+        type: "use-item",
         dirX: 1,
         dirY: 0,
         force: 0,

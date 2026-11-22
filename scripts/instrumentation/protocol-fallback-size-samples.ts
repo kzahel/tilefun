@@ -132,7 +132,7 @@ const clientSamples: Array<[string, ClientMessage]> = [
     "editor-cursor",
     { type: "editor-cursor", tileX: 40, tileY: 55, editorTab: "terrain", brushMode: "paint" },
   ],
-  ["throw-ball", { type: "throw-ball", dirX: 1, dirY: 0, force: 0.8 }],
+  ["use-item", { type: "use-item", dirX: 1, dirY: 0, force: 0.8 }],
   ["identify", { type: "identify", displayName: "Player 12", profileId: "profile-abc-123" }],
   ["list-realms", { type: "list-realms", requestId: 107 }],
   ["join-realm", { type: "join-realm", requestId: 108, worldId: "world-1234567890" }],

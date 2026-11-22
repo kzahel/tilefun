@@ -5,7 +5,7 @@ describe("semantic action hints", () => {
   it("matches gameplay bindings and hides physical hints for touch", () => {
     noteInputSource("controller");
     expect(
-      ["jump", "throw", "enter_place", "sprint", "reverse", "honk"].map((action) =>
+      ["jump", "use_item", "enter_place", "sprint", "reverse", "honk"].map((action) =>
         actionHint(action as import("./ActionMap.js").ActionName),
       ),
     ).toEqual(["A", "X", "Y", "RT", "LT", "RB"]);

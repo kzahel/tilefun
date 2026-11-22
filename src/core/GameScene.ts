@@ -59,7 +59,7 @@ export interface GameContext {
   readonly stateView: RemoteStateView;
   readonly transport: IClientTransport;
   readonly spriteCatalog: SpriteCatalog;
-  drawHeldItemIcon?(column: number, x: number, y: number): void;
+  drawHeldItemIcon?(column: number, row: number, x: number, y: number): void;
   readonly renderer: RenderResources;
   /** Overlay items on the UI canvas above every view (see RenderHost.drawUiOverlay). */
   drawUiOverlay?(items: readonly OverlayDraw[]): void;

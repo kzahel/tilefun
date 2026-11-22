@@ -1,5 +1,5 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
-import { CORN } from "../inventory/Inventory.js";
+import { CORN, handItem } from "../inventory/Inventory.js";
 import { gap } from "../shared/gap.js";
 import { restoreFaunaPose, settleFauna } from "./faunaInteractions.js";
 import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
@@ -12,7 +12,7 @@ const leaders = new WeakMap<Entity, number>();
 
 function canFollow(hen: Entity, player: Entity, range: number): boolean {
   return (
-    player.heldItem === CORN &&
+    handItem(player) === CORN &&
     player.parentId === undefined &&
     Math.abs((player.wz ?? 0) - (hen.wz ?? 0)) < 8 &&
     gap(hen.position, player.position) <= range

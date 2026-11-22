@@ -54,13 +54,18 @@ test("finds a town farm, feeds its flock and breaks a newly laid egg", async ({ 
   const hotbar = page.getByRole("group", { name: "Hotbar" });
   const corn = hotbar.getByRole("button", { name: "Corn ×1" });
   await expect(corn).toBeVisible();
-  await page.keyboard.press("BracketRight");
+  // New players carry the ball, stick and axe ahead of the harvest.
+  await expect(hotbar.getByRole("button", { name: "Ball" })).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await corn.click();
   await expect(corn).toHaveAttribute("aria-pressed", "true");
   await expect
     .poll(() =>
       page.evaluate(() => {
         const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
-        return g.stateView.serverPlayerEntity.heldItem;
+        return (g.stateView.serverPlayerEntity.hand ?? 0) & 31;
       }),
     )
     .toBe(CORN);
@@ -89,7 +94,7 @@ test("finds a town farm, feeds its flock and breaks a newly laid egg", async ({ 
     });
   }, gate);
   await action("Scatter corn").tap();
-  await expect(hotbar.getByRole("button", { name: "Empty slot 1" })).toBeVisible();
+  await expect(hotbar.getByRole("button", { name: "Empty slot 4" })).toBeVisible();
   await expect(hotbar.getByRole("button", { pressed: true })).toHaveCount(0);
 
   const fertileEgg = () =>

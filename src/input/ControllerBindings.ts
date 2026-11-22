@@ -17,14 +17,14 @@ export type ControllerCommand =
   | "back"
   | "menu"
   | "interact"
-  | "throw"
+  | "use_item"
   | "edit"
   | "map"
   | "phone";
 export const CONTROLLER_BUTTONS: Record<number, ControllerCommand> = {
   0: "confirm",
   1: "back",
-  2: "throw",
+  2: "use_item",
   3: "interact",
   4: "edit",
   8: "map",
@@ -37,26 +37,35 @@ export const CONTROLLER_BUTTONS: Record<number, ControllerCommand> = {
 };
 export const CONTROLLER_ACTIONS: Partial<Record<ControllerCommand, ActionName>> = {
   menu: "toggle_menu",
+  up: "hotbar_swap",
   down: "vehicle_recover",
   left: "hotbar_previous",
   right: "hotbar_next",
   confirm: "jump",
-  throw: "throw",
+  use_item: "use_item",
   interact: "enter_place",
   edit: "toggle_editor",
   map: "toggle_world_map",
   phone: "toggle_phone",
 };
 
-export const CONTROLLER_HELD_ACTIONS: Partial<Record<number, ActionName>> = {
-  0: "jump",
-  2: "throw",
-  5: "honk",
-  6: "reverse",
-  7: "sprint",
-  12: "vehicle_lights",
-  15: "vehicle_style",
+/** Buttons held down. D-pad Up and Right drive vehicle lights and siren style
+ * while driving; on foot the D-pad picks from the hotbar (held to keep stepping). */
+export const CONTROLLER_HELD_ACTIONS: Partial<Record<number, readonly ActionName[]>> = {
+  0: ["jump"],
+  2: ["use_item"],
+  5: ["honk"],
+  6: ["reverse"],
+  7: ["sprint"],
+  12: ["vehicle_lights"],
+  14: ["hotbar_previous"],
+  15: ["vehicle_style", "hotbar_next"],
 };
+/** Add the actions held by the pressed buttons (`pressed(index)`) to `held`. */
+export function addHeldActions(pressed: (index: number) => boolean, held: Set<ActionName>): void {
+  for (const [index, actions] of Object.entries(CONTROLLER_HELD_ACTIONS))
+    if (pressed(Number(index))) for (const action of actions ?? []) held.add(action);
+}
 const LABELS: Record<number, string> = {
   0: "A",
   1: "B",
@@ -81,8 +90,8 @@ export function controllerActionHint(action: ActionName): string {
         ([command, binding]) => command === CONTROLLER_BUTTONS[Number(key)] && binding === action,
       ),
     ) ??
-    Object.keys(CONTROLLER_HELD_ACTIONS).find(
-      (key) => CONTROLLER_HELD_ACTIONS[Number(key)] === action,
+    Object.keys(CONTROLLER_HELD_ACTIONS).find((key) =>
+      CONTROLLER_HELD_ACTIONS[Number(key)]?.includes(action),
     );
   return index === undefined ? "" : (LABELS[Number(index)] ?? "");
 }

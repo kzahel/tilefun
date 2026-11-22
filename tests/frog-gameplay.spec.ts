@@ -146,8 +146,8 @@ test("frog ball contact dispatches client croaks through the live Worker", async
               f = g.stateView.entities.find((e) => e.type === type);
             if (f)
               g.transport.send({
-                type: "throw-ball",
-                // Authority drops non-unit throws (RealmCommands.isValidThrow).
+                type: "use-item",
+                // Authority drops non-unit throws (ItemUse.isValidThrow).
                 dirX:
                   (f.position.wx - p.wx) / Math.hypot(f.position.wx - p.wx, f.position.wy - p.wy),
                 dirY:

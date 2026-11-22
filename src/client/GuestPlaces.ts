@@ -4,7 +4,7 @@ import type { RenderRegion } from "../rendering/ViewLayout.js";
 import type { ClientSeat } from "../session/ClientSeat.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import { sharedGuestRegion } from "../session/SharedScreenCamera.js";
-import { HotbarControl } from "../ui/HotbarControl.js";
+import { HotbarControl, heldStep } from "../ui/HotbarControl.js";
 import {
   type DoorChoice,
   DoorWalk,
@@ -86,8 +86,9 @@ class GuestPlace {
       ? [
           input.on("enter_place", () => this.enter()),
           input.on("vehicle_recover", () => this.equip()),
-          input.on("hotbar_previous", () => this.hotbar.choose({ step: -1 })),
-          input.on("hotbar_next", () => this.hotbar.choose({ step: 1 })),
+          input.on("hotbar_previous", () => this.hotbar.press(-1)),
+          input.on("hotbar_next", () => this.hotbar.press(1)),
+          input.on("hotbar_swap", () => this.hotbar.choose({ swap: true })),
         ]
       : [];
   }
@@ -118,7 +119,9 @@ class GuestPlace {
     const inventory = sync?.inventory;
     this.hotbarReady = ready && !view.editorEnabled && view.playerEntity.parentId === undefined;
     const allowed = this.hotbarAllowed;
-    this.hotbar.update(inventory, !!region && !!sync && allowed, allowed);
+    this.hotbar.update(inventory, !!region && !!sync && allowed, allowed, dt);
+    const { input } = seat;
+    this.hotbar.hold(input ? heldStep({ isHeld: (action) => input.held(action) }) : 0, dt);
     if (region && sync && allowed) {
       const { clientWidth: width, clientHeight: height } = document.documentElement;
       this.hotbar.place(
@@ -235,7 +238,7 @@ class GuestPlace {
 
   /** Each line with this seat's own key or button ("Drive car · '", "Enter shop · Y"). */
   private prompts(): string[] {
-    const hint = (action: "enter_place" | "vehicle_recover") => {
+    const hint = (action: "enter_place" | "vehicle_recover" | "use_item") => {
       const label = this.seat.input?.hint(action) ?? "";
       return label ? ` · ${label}` : "";
     };
@@ -245,7 +248,8 @@ class GuestPlace {
     if (vehicle?.request) lines.push(`${vehicle.label}${hint("enter_place")}`);
     else if (door?.request) lines.push(`${door.label}${hint("enter_place")}`);
     else if (this.farm) {
-      lines.push(`${this.farm.label}${this.farm.request ? hint("enter_place") : ""}`);
+      const key = this.farm.use ? "use_item" : "enter_place";
+      lines.push(`${this.farm.label}${this.farm.request ? hint(key) : ""}`);
       if (this.farm.status) lines.push(this.farm.status);
     }
     if (this.status) lines.push(this.status);

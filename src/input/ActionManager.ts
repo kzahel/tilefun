@@ -127,7 +127,7 @@ export class ActionManager {
     if (this.touchButtons) {
       if (action === "jump" && this.touchButtons.jumpPressed) return true;
       if (action === "honk" && this.touchButtons.hornPressed) return true;
-      if (action === "throw" && this.touchButtons.throwPressed) return true;
+      if (action === "use_item" && this.touchButtons.usePressed) return true;
       if (action === "sprint" && this.touchButtons.sprintPressed) return true;
       if (action === "reverse" && this.touchButtons.reversePressed) return true;
       if (action === "vehicle_lights" && this.touchButtons.lightsPressed) return true;

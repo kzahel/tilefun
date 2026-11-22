@@ -1,4 +1,5 @@
 import type { Direction, Entity } from "../entities/Entity.js";
+import { handItem, itemVerb } from "../inventory/Inventory.js";
 import { quantizeAxis } from "../shared/binaryCodec.js";
 import type { Movement } from "../shared/Movement.js";
 import type { ClientMessage } from "../shared/protocol.js";
@@ -10,15 +11,15 @@ import {
 } from "../traffic/EmergencyVehicle.js";
 import { throwDirection } from "./throwDirection.js";
 
-/** Max hold time in seconds before throw force reaches 1.0. */
-const THROW_CHARGE_DURATION = 1.0;
+/** Max hold time in seconds before a use (throw or swing) reaches full force. */
+const USE_CHARGE_DURATION = 1.0;
 /** A held horn is re-sent about this often so a lost release cannot stick. */
 const HORN_REFRESH_SECONDS = 0.2;
 
 /** Semantic presses a seat sends alongside its movement commands. */
 export type SeatPress = Extract<
   ClientMessage,
-  { type: "vehicle-horn" } | { type: "vehicle-emergency" } | { type: "throw-ball" }
+  { type: "vehicle-horn" } | { type: "vehicle-emergency" } | { type: "use-item" }
 >;
 type PlayerInput = Extract<ClientMessage, { type: "player-input" }>;
 
@@ -31,7 +32,7 @@ export interface SeatSample {
   honk: boolean;
   lights: boolean;
   style: boolean;
-  throw: boolean;
+  use: boolean;
   reverse: boolean;
   /** A horn press since the last tick (a tap shorter than one tick still honks). */
   hornPressed: boolean;
@@ -49,7 +50,7 @@ export interface SeatSituation {
   steering: boolean;
   /** Touch movement uses the joystick (relative steering applies to it). */
   joystick: boolean;
-  /** Sprite facing and first-person look, for throws while standing still. */
+  /** Sprite facing and first-person look, for uses while standing still. */
   facing?: Direction | undefined;
   look?: { x: number; y: number } | undefined;
 }
@@ -63,22 +64,24 @@ export interface SeatTick {
 
 /** The held and pressed seat actions from one input set (keys, pad and touch). */
 export function seatPresses(actions: {
-  isHeld(action: "honk" | "vehicle_lights" | "vehicle_style" | "throw" | "reverse"): boolean;
+  isHeld(action: "honk" | "vehicle_lights" | "vehicle_style" | "use_item" | "reverse"): boolean;
   consumeHornPress(): boolean;
 }): Omit<SeatSample, "manual" | "steered" | "jumpPressed"> {
   return {
     honk: actions.isHeld("honk"),
     lights: actions.isHeld("vehicle_lights"),
     style: actions.isHeld("vehicle_style"),
-    throw: actions.isHeld("throw"),
+    use: actions.isHeld("use_item"),
     reverse: actions.isHeld("reverse"),
     hornPressed: actions.consumeHornPress(),
   };
 }
 
-/** Which on-screen controls a seat shows for its vehicle (TouchButtons fields). */
-export function vehicleButtons(vehicle: Entity | undefined) {
+/** Which on-screen controls a seat shows for its vehicle and what its use paddle
+ * says for the held item (TouchButtons fields). */
+export function seatButtons(vehicle: Entity | undefined, player: Entity | undefined) {
   return {
+    useLabel: itemVerb(player && handItem(player)) ?? "Use",
     driving: !!vehicle,
     emergency: !!vehicle && isEmergencyVehicle(vehicle),
     warning: !!vehicle && isWarningVehicle(vehicle),
@@ -94,7 +97,7 @@ export function normalizesDiagonal(vehicle: Entity | undefined, steering: boolea
 /**
  * Pure per-seat input composition (tactical 226): turns one seat's sampled
  * devices and situation into its movement command and semantic presses (horn,
- * sirens, throw, jump edge). The game and embedded labs share it; devices,
+ * sirens, item use, jump edge). The game and embedded labs share it; devices,
  * view turning and tap/hold steering stay with the caller.
  */
 export class SeatComposer {
@@ -105,8 +108,8 @@ export class SeatComposer {
   private hornRefresh = 0;
   private lightsHeld = false;
   private styleHeld = false;
-  private throwCharge = 0;
-  private throwHeld = false;
+  private useCharge = 0;
+  private useHeld = false;
   private jumpHeld = false;
 
   /** Record the occupied vehicle before each `tick`; true when it changed. Keys
@@ -158,32 +161,33 @@ export class SeatComposer {
         (!!sample.manual.dx || !!sample.manual.dy || situation.joystick),
     };
 
-    const throwing = !vehicle && !locked && sample.throw;
-    if (throwing) this.throwCharge += dt;
-    else if (this.throwHeld && !locked && !vehicle) {
-      const force = Math.min(this.throwCharge / THROW_CHARGE_DURATION, 1);
+    // Hold to charge, release to use what is in hand (throw, swing, chop, scatter, wave).
+    const using = !vehicle && !locked && sample.use;
+    if (using) this.useCharge += dt;
+    else if (this.useHeld && !locked && !vehicle) {
+      const force = Math.min(this.useCharge / USE_CHARGE_DURATION, 1);
       after.push({
-        type: "throw-ball",
+        type: "use-item",
         ...throwDirection(movement, situation.facing, situation.look),
         force,
       });
-      this.throwCharge = 0;
+      this.useCharge = 0;
     }
-    this.throwHeld = throwing;
+    this.useHeld = using;
     return { before, movement, after };
   }
 
-  /** Drop movement, jump and throw state (cancelled input; the horn is separate). */
+  /** Drop movement, jump and item-use state (cancelled input; the horn is separate). */
   cancel(): void {
     this.lastMovement = { dx: 0, dy: 0 };
     this.jumpHeld = false;
-    this.dropThrow();
+    this.dropUse();
   }
 
-  /** Forget a charging throw, so a release during skipped ticks never throws. */
-  dropThrow(): void {
-    this.throwHeld = false;
-    this.throwCharge = 0;
+  /** Forget a charging use, so a release during skipped ticks never fires. */
+  dropUse(): void {
+    this.useHeld = false;
+    this.useCharge = 0;
   }
 
   /** Forget held horn and siren keys (play stopped); the caller sends the horn release. */

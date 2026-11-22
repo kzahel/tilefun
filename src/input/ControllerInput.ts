@@ -1,7 +1,7 @@
 import type { ActionName } from "./ActionMap.js";
 import {
+  addHeldActions,
   CONTROLLER_BUTTONS,
-  CONTROLLER_HELD_ACTIONS,
   type ControllerCommand,
   controllerAxes,
 } from "./ControllerBindings.js";
@@ -117,10 +117,7 @@ export class ControllerInput {
     );
     this.erase = !ui && !!buttons[6]?.pressed;
     this.held.clear();
-    if (!ui) {
-      for (const [index, action] of Object.entries(CONTROLLER_HELD_ACTIONS))
-        if (buttons[Number(index)]?.pressed && action) this.held.add(action);
-    }
+    if (!ui) addHeldActions((index) => !!buttons[index]?.pressed, this.held);
     this.movement = {
       ...(!ui ? axes : { dx: 0, dy: 0 }),
       sprinting: this.held.has("sprint"),

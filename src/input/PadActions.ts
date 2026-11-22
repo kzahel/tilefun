@@ -1,10 +1,6 @@
 import type { Movement } from "../shared/Movement.js";
 import type { ActionName } from "./ActionMap.js";
-import {
-  CONTROLLER_HELD_ACTIONS,
-  controllerActionHint,
-  controllerAxes,
-} from "./ControllerBindings.js";
+import { addHeldActions, controllerActionHint, controllerAxes } from "./ControllerBindings.js";
 import type { SeatActions } from "./SeatInput.js";
 
 /** Buttons a guest pad presses as actions (standard mapping, as seat 0's pad). */
@@ -12,6 +8,7 @@ const PRESSES: Partial<Record<number, PadPress>> = {
   0: "jump",
   3: "enter_place",
   9: "toggle_menu",
+  12: "hotbar_swap",
   13: "vehicle_recover",
   14: "hotbar_previous",
   15: "hotbar_next",
@@ -62,10 +59,7 @@ export class PadActions implements SeatActions {
     }
     this.blocked = false;
     this.held.clear();
-    for (const index of pressed) {
-      const action = CONTROLLER_HELD_ACTIONS[index];
-      if (action) this.held.add(action);
-    }
+    addHeldActions((index) => pressed.has(index), this.held);
     const axes = controllerAxes(pad.axes[0] ?? 0, pad.axes[1] ?? 0);
     this.movement = { ...axes, sprinting: this.held.has("sprint"), jump: this.held.has("jump") };
     this.lookStick = rightStick(pad);

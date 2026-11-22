@@ -21,6 +21,8 @@ export class TouchButtons {
   emergency = false;
   warning = false;
   emergencyState = 2;
+  /** What the use paddle does with the item in hand ("Throw", "Swing", "Wave"). */
+  useLabel = "Use";
   region: ViewRegion | null = null; // layout region in canvas CSS px; null = whole canvas
   private mouseButton: number | null = null;
   private hornPressLatched = false;
@@ -40,7 +42,7 @@ export class TouchButtons {
   }
   private buttons: ButtonDef[] = [
     { label: "Jump", pressed: false, touchId: null }, // jump
-    { label: "Throw", pressed: false, touchId: null }, // throw
+    { label: "Use", pressed: false, touchId: null }, // use the item in hand
     { label: "Fast", pressed: false, touchId: null }, // sprint
     { label: "Horn", pressed: false, touchId: null },
     { label: "Lights", pressed: false, touchId: null },
@@ -74,7 +76,7 @@ export class TouchButtons {
     return this.enabled && (this.buttons[0]?.pressed ?? false);
   }
 
-  get throwPressed(): boolean {
+  get usePressed(): boolean {
     return this.enabled && (this.buttons[1]?.pressed ?? false);
   }
 
@@ -144,11 +146,10 @@ export class TouchButtons {
       ctx.font = LABEL_FONT;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      const label = i === 4 ? (this.warning ? "Beacon" : "Siren") : btn.label;
-      ctx.fillText(label, pos.x, pos.y - 5);
+      ctx.fillText(this.label(i, btn), pos.x, pos.y - 5);
       const actions: ActionName[] = [
         "jump",
-        "throw",
+        "use_item",
         "sprint",
         "honk",
         "vehicle_lights",
@@ -169,6 +170,11 @@ export class TouchButtons {
       );
       ctx.restore();
     }
+  }
+
+  private label(index: number, button: ButtonDef): string {
+    if (index === 4) return this.warning ? "Beacon" : "Siren";
+    return index === 1 ? this.useLabel : button.label;
   }
 
   /** Button centers in CSS pixels of the canvas, in the bottom-right of the region. */

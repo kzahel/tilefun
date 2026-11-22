@@ -20,10 +20,15 @@ import { FARM_GATE, OPEN_FARM_GATE } from "../farming/FarmGate.js";
 import { type FarmAction, farmAction } from "../farming/FarmInteraction.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import {
+  AXE,
+  BALL,
   CORN,
+  changeStack,
   EMPTY_INVENTORY,
+  handItem,
   inventoryFromSave,
   itemCount,
+  STICK,
   selectHotbar,
   WOOD,
 } from "../inventory/Inventory.js";
@@ -34,7 +39,7 @@ import { createFauna } from "../wildlife/Fauna.js";
 import { World } from "../world/World.js";
 import { performFarmAction, updateFarm } from "./FarmPlay.js";
 import { FIRST_EGG_MS, GROW_CHICK_MS, HATCH_MS, LAY_AGAIN_MS, PEN_BIRDS } from "./FarmPoultry.js";
-import { selectInventory, setInventory } from "./PlayerInventory.js";
+import { holdItem, selectInventory, setInventory } from "./PlayerInventory.js";
 import { PlayerSession } from "./PlayerSession.js";
 
 function fixture() {
@@ -85,10 +90,10 @@ it("shares planted growth across seats, restores ripeness and grants a harvest o
   expect(() => act(guest, "feed", hen.id, 17_500)).toThrow("Hold corn");
   expect(guest.gameplaySession.inventory?.slots[0]).toEqual({ item: CORN, count: 1 });
   expect(selectInventory(guest, { step: 1 })).toBe(true);
-  expect(guest.player.heldItem).toBe(CORN);
+  expect(handItem(guest.player)).toBe(CORN);
   act(guest, "feed", hen.id, 18_000);
-  expect(guest.gameplaySession.inventory).toEqual(EMPTY_INVENTORY);
-  expect(guest.player.heldItem).toBeUndefined();
+  expect(guest.gameplaySession.inventory).toMatchObject(EMPTY_INVENTORY);
+  expect(handItem(guest.player)).toBeUndefined();
   expect(realm.entityManager.entities.filter((e) => e.type === SCATTERED_CORN)).toHaveLength(3);
 });
 
@@ -99,17 +104,20 @@ it("gates chopping on reach, awards a log once and replaces the stakes with a fe
   const tree = spawn(WOODLOT_TREE);
   guest.player.position.wx = 0;
   expect(() => act(guest, "chop", tree.id, 1_000)).toThrow("Move closer");
+  expect(() => act(first, "chop", tree.id, 1_000)).toThrow("Hold the axe");
+  holdItem(first, AXE);
   act(first, "chop", tree.id, 1_000);
   expect(() => act(first, "chop", tree.id, 1_100)).toThrow("settle");
   act(first, "chop", tree.id, 1_400);
   act(first, "chop", tree.id, 1_800);
   expect(realm.entityManager.entities.filter((e) => e.type === LOG_BUNDLE)).toHaveLength(1);
   guest.player.position = { ...first.player.position };
+  const firstInventory = first.gameplaySession.inventory;
   updateFarm(realm, [first, guest], 2_399);
-  expect(first.gameplaySession.inventory).toBeUndefined();
+  expect(first.gameplaySession.inventory).toBe(firstInventory);
   updateFarm(realm, [guest, first], 2_400);
   expect(guest.gameplaySession.inventory?.slots[0]).toEqual({ item: WOOD, count: 1 });
-  expect(first.gameplaySession.inventory).toBeUndefined();
+  expect(first.gameplaySession.inventory).toBe(firstInventory);
   expect(farmAction(tree)).toBe("replant");
 
   const stakes = spawn(FENCE_STAKES, 118, 112);
@@ -197,16 +205,55 @@ it("migrates stored corn and wood into private slots and cycles through occupied
   const { seat } = fixture();
   const player = seat("local");
   const previous = inventoryFromSave(undefined, { corn: 4, wood: 2 });
-  expect(previous.slots).toEqual([{ item: CORN, count: 4 }, { item: WOOD, count: 2 }, null, null]);
+  expect(previous.slots).toEqual([
+    { item: CORN, count: 4 },
+    { item: WOOD, count: 2 },
+    { item: BALL, count: 1 },
+    { item: STICK, count: 1 },
+    { item: AXE, count: 1 },
+    null,
+    null,
+    null,
+  ]);
+  // Gaining the starter tools puts the ball in empty hands, so the use button still throws.
+  expect(previous.selected).toBe(2);
   setInventory(player, previous);
-  expect(player.player.heldItem).toBeUndefined();
+  expect(handItem(player.player)).toBe(BALL);
   const before = serializeEntity(player.player);
   expect(selectInventory(player, { step: -1 })).toBe(true);
-  expect(player.player.heldItem).toBe(WOOD);
-  expect(reuseEntitySnapshot(player.player, before).heldItem).toBe(WOOD);
-  expect(selectHotbar(required(player.gameplaySession.inventory), { slot: 3 }).selected).toBe(1);
-  expect(selectInventory(player, { step: 1 })).toBe(true);
-  expect(player.player.heldItem).toBeUndefined();
+  expect(handItem(player.player)).toBe(WOOD);
+  expect(reuseEntitySnapshot(player.player, before).hand).toBe(WOOD);
+  expect(selectHotbar(required(player.gameplaySession.inventory), { slot: 6 }).selected).toBe(1);
+  // The quick swap goes back to the ball, then to the wood again.
+  expect(selectInventory(player, { swap: true })).toBe(true);
+  expect(handItem(player.player)).toBe(BALL);
+  expect(selectInventory(player, { swap: true })).toBe(true);
+  expect(handItem(player.player)).toBe(WOOD);
+  expect(selectInventory(player, { step: -1 })).toBe(true);
+  expect(selectInventory(player, { step: -1 })).toBe(true);
+  expect(handItem(player.player)).toBeUndefined();
+});
+
+it("pads four-slot saves, keeps their choice and never spends or duplicates tools", () => {
+  const saved = {
+    slots: [{ item: WOOD, count: 3 }, null, null, null],
+    selected: 0,
+  } as const;
+  const loaded = inventoryFromSave(saved);
+  expect(loaded.slots).toHaveLength(8);
+  expect(loaded.selected).toBe(0);
+  expect(loaded.slots.slice(0, 4)).toEqual([
+    { item: WOOD, count: 3 },
+    { item: BALL, count: 1 },
+    { item: STICK, count: 1 },
+    { item: AXE, count: 1 },
+  ]);
+  expect(inventoryFromSave(loaded)).toEqual(loaded);
+  expect(changeStack(loaded, AXE, -1)).toBeNull();
+  expect(changeStack(loaded, BALL, 1)).toBeNull();
+  expect(
+    inventoryFromSave({ slots: [{ item: 99 as never, count: 1 }], selected: 0 }).slots,
+  ).toEqual(inventoryFromSave(undefined).slots);
 });
 
 it("changes a gate's saved identity in place and refuses to close over a body", () => {

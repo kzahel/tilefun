@@ -105,7 +105,7 @@ const ENTITY_FIELDS: { readonly [K in FieldKey]: EntityField<K> } = {
   vehicleRamp: { key: "vehicleRamp", bit: 22, wire: U8 },
   transportLoadId: { key: "transportLoadId", bit: 23, wire: U32 },
   transportedBy: { key: "transportedBy", bit: 24, wire: U32 },
-  heldItem: { key: "heldItem", bit: 25, wire: U8 },
+  hand: { key: "hand", bit: 25, wire: U8 },
   vehicleExcavator: { key: "vehicleExcavator", bit: 26, wire: EXCAVATOR_POSE },
   vehicleExcavatorTarget: { key: "vehicleExcavatorTarget", bit: 27, wire: EXCAVATOR_POSE },
   vehicleExcavatorRate: { key: "vehicleExcavatorRate", bit: 28, wire: F32 },
@@ -299,7 +299,7 @@ export function mirroredFieldsMatch(entity: Mirror, snap: Mirror): boolean {
     entity.vehicleRamp === snap.vehicleRamp &&
     entity.transportLoadId === snap.transportLoadId &&
     entity.transportedBy === snap.transportedBy &&
-    entity.heldItem === snap.heldItem &&
+    entity.hand === snap.hand &&
     entity.vehicleExcavator === snap.vehicleExcavator &&
     entity.vehicleExcavatorTarget === snap.vehicleExcavatorTarget &&
     entity.vehicleExcavatorRate === snap.vehicleExcavatorRate &&
@@ -329,7 +329,7 @@ const MATCHED = [
   "vehicleRamp",
   "transportLoadId",
   "transportedBy",
-  "heldItem",
+  "hand",
   "vehicleExcavator",
   "vehicleExcavatorTarget",
   "vehicleExcavatorRate",

@@ -8,7 +8,7 @@ import type { DeviceSession } from "../session/DeviceSession.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import { DoorControl } from "../ui/DoorControl.js";
 import { FarmControl } from "../ui/FarmControl.js";
-import { HotbarControl } from "../ui/HotbarControl.js";
+import { HotbarControl, heldStep } from "../ui/HotbarControl.js";
 import type { DoorRequest, VehicleRequest } from "../ui/PlacePrompts.js";
 import { VehicleControl } from "../ui/VehicleControl.js";
 import type { RemoteStateView } from "./ClientStateView.js";
@@ -56,7 +56,7 @@ export class PlaceControls {
 
   constructor(
     private readonly host: PlaceControlsHost,
-    actions: ActionManager,
+    private readonly actions: ActionManager,
   ) {
     const keyHint: KeyHint = (action) => actions.hint(action);
     this.door = new DoorControl(async (request) => {
@@ -86,8 +86,9 @@ export class PlaceControls {
     );
     this.guests = new GuestPlaces(host);
     this.unsubscribe = [
-      actions.on("hotbar_previous", () => this.hotbar.choose({ step: -1 })),
-      actions.on("hotbar_next", () => this.hotbar.choose({ step: 1 })),
+      actions.on("hotbar_previous", () => this.hotbar.press(-1)),
+      actions.on("hotbar_next", () => this.hotbar.press(1)),
+      actions.on("hotbar_swap", () => this.hotbar.choose({ swap: true })),
       actions.on("vehicle_recover", () => {
         if (host.playing && !host.inputBlocked) this.vehicle.activateEquipment();
       }),
@@ -134,7 +135,8 @@ export class PlaceControls {
     );
     const view = host.stateView;
     const walking = ready && this.hotbarAllowed;
-    this.hotbar.update(view.inventory, walking, walking);
+    this.hotbar.update(view.inventory, walking, walking, dt);
+    this.hotbar.hold(heldStep(this.actions), dt);
     this.farm.update(
       ready &&
         host.playing &&

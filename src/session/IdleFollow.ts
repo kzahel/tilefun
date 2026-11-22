@@ -43,7 +43,7 @@ function active(sample: SeatSample): boolean {
     manual.sprinting ||
     manual.jump ||
     sample.jumpPressed ||
-    sample.throw ||
+    sample.use ||
     sample.honk ||
     sample.hornPressed ||
     sample.lights ||

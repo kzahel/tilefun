@@ -1,7 +1,7 @@
 import { expect, it } from "vitest";
 import { createPlayer } from "../entities/Player.js";
 import { FARM_GATE, OPEN_FARM_GATE } from "../farming/FarmGate.js";
-import { CORN, inventoryFromSave } from "../inventory/Inventory.js";
+import { CORN, handItem, inventoryFromSave } from "../inventory/Inventory.js";
 import { FLAT_SCENARIO } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
 import { performFarmAction } from "../server/FarmPlay.js";
@@ -44,7 +44,7 @@ it("uses solid gate geometry while leading a hen and saves the moved hen and sel
     for (let i = 0; i < 100; i++) await scenario.step(idle);
     expect(testHen.position.wy).toBeGreaterThan(140);
     await scenario.reload();
-    expect(scenario.player.player.heldItem).toBe(CORN);
+    expect(handItem(scenario.player.player)).toBe(CORN);
     expect(scenario.player.gameplaySession.inventory?.slots[0]?.count).toBe(2);
     expect(
       scenario.realm.propManager.props.find((p) => p.type === OPEN_FARM_GATE)?.collider,

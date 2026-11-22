@@ -161,8 +161,9 @@ export interface Entity {
 
   /** Runtime towing links; zero means durable partner is not resident yet. */
 
-  /** The equipped stack’s item code. Inventory contents are private. */
-  heldItem?: number;
+  /** Replicated hand byte (see `handItem` in Inventory.ts): the equipped item and a use counter.
+   * Inventory contents are private. */
+  hand?: number;
   farm?: FarmState;
   mallard?: MallardBehavior;
   frog?: FrogBehavior;

@@ -18,7 +18,7 @@ const PLAY = new Set<ClientMessage["type"]>([
   "player-input",
   "vehicle-horn",
   "vehicle-emergency",
-  "throw-ball",
+  "use-item",
 ]);
 
 /**

@@ -65,7 +65,7 @@ it("a real throw clears its owner, hits a duck, and preserves the duck through e
   });
   try {
     s.realm.handleMessage(s.player.clientId, s.player, {
-      type: "throw-ball",
+      type: "use-item",
       dirX: 1,
       dirY: 0,
       force: 0,
