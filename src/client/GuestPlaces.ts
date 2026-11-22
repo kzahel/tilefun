@@ -244,8 +244,10 @@ class GuestPlace {
     if (vehicle?.equipment) lines.push(`${vehicle.equipment.label}${hint("vehicle_recover")}`);
     if (vehicle?.request) lines.push(`${vehicle.label}${hint("enter_place")}`);
     else if (door?.request) lines.push(`${door.label}${hint("enter_place")}`);
-    else if (this.farm)
+    else if (this.farm) {
       lines.push(`${this.farm.label}${this.farm.request ? hint("enter_place") : ""}`);
+      if (this.farm.status) lines.push(this.farm.status);
+    }
     if (this.status) lines.push(this.status);
     return lines;
   }

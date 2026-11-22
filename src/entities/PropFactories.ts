@@ -754,6 +754,7 @@ export interface PropPaletteEntry {
 export const PROP_PALETTE: PropPaletteEntry[] = [
   { type: FARM_GATE, label: "Garden gate", color: "#ab714c", category: "nature" },
   { type: GARDEN_FENCE, label: "Garden fence", color: "#ab714c", category: "nature" },
+  { type: GARDEN_FENCE_SIDE, label: "Garden fence (side)", color: "#ab714c", category: "nature" },
   ...FIERCE_DENS.map(
     (d): PropPaletteEntry => ({
       type: d.type,

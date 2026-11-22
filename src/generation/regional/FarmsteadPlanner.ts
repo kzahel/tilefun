@@ -326,6 +326,7 @@ export class FarmsteadSource {
       placement("tree", WOODLOT_TREE, -31, 21),
       placement("tree:2", WOODLOT_TREE, -33, 24),
       placement("fence", FENCE_STAKES, -26, 18),
+      residentFauna("rooster", `${id}:garden:rooster`, x - 16, y + 18, pen, this.world.seed),
       ...[0, 1, 2].map((i) =>
         residentFauna(
           "chicken",

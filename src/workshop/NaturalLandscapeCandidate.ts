@@ -26,19 +26,21 @@ export async function buildNaturalCandidate(
     (recipe.landscape ?? DEFAULT_LANDSCAPE_PROFILE) === "thicket";
   return {
     id: `nature:${id}:${profile}:v1`,
-    batchId: "natural-landscapes",
+    batchId: id === "chicken-pen" ? "farm-chickens" : "natural-landscapes",
     kind: "geometry",
     name: `${c.name} · ${profile}`,
     prompt:
-      id === "town-farm"
-        ? "Inspect the farm arrival, four garden beds, chicken pen and small woodlot. Check whether the paths and crops are easy to read at game zoom."
-        : id === "motocross"
-          ? "Drive the generated city-outskirts motocross park: dirt loop, sky lip, double, curved kicker, tabletop and infield rollers on the shared jump profiles, with race-tuned pit cars. Schematic dirt surfaces; awaiting play review."
-          : id === "racetrack"
-            ? "Inspect the generated city-outskirts oval, two racing lanes, checkered start line, red/white kerbs and spectator seating. Cars use ordinary collision, driving, roof riding and saved traffic. This composition is awaiting review."
-            : "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
+      id === "chicken-pen"
+        ? "Compare the rooster's comb and dark tail, the hen, the smaller yellow chick and the egg at game zoom."
+        : id === "town-farm"
+          ? "Inspect the farm arrival, four garden beds, chicken pen and small woodlot. Check whether the paths and crops are easy to read at game zoom."
+          : id === "motocross"
+            ? "Drive the generated city-outskirts motocross park: dirt loop, sky lip, double, curved kicker, tabletop and infield rollers on the shared jump profiles, with race-tuned pit cars. Schematic dirt surfaces; awaiting play review."
+            : id === "racetrack"
+              ? "Inspect the generated city-outskirts oval, two racing lanes, checkered start line, red/white kerbs and spectator seating. Cars use ordinary collision, driving, roof riding and saved traffic. This composition is awaiting review."
+              : "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
     url: `/tilefun/workshop.html?geometry=nature-${id}&landscape=${profile}#/tool/world-geometry`,
-    exploreUrl: naturalExplorerUrl(c, profile),
+    ...(id !== "chicken-pen" && { exploreUrl: naturalExplorerUrl(c, profile) }),
     fingerprint: await sha256(
       new TextEncoder().encode(
         JSON.stringify({
@@ -51,7 +53,8 @@ export async function buildNaturalCandidate(
               s.id === "me-complete" ||
               s.image.includes("me-autotile") ||
               s.id === "grass-blades" ||
-              ((id === "town-farm" || id === "farmstead") && s.image.includes("assets/farming/")),
+              ((id === "town-farm" || id === "farmstead" || id === "chicken-pen") &&
+                s.image.includes("assets/farming/")),
           ),
         }),
       ),
@@ -61,7 +64,9 @@ export async function buildNaturalCandidate(
 export async function buildNaturalCandidates(catalog: ArtCatalog) {
   return Promise.all(
     NATURAL_CASES.flatMap((c) =>
-      LANDSCAPE_PROFILES.map((p) => buildNaturalCandidate(c.id, p, catalog)),
+      (c.id === "chicken-pen" ? [DEFAULT_LANDSCAPE_PROFILE] : LANDSCAPE_PROFILES).map((p) =>
+        buildNaturalCandidate(c.id, p, catalog),
+      ),
     ),
   );
 }

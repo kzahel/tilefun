@@ -83,7 +83,7 @@
       "overLimit": 2
     },
     "src/editor/EditorPalettes.ts": {
-      "lines": 218,
+      "lines": 219,
       "worst": 55,
       "overLimit": 1
     },
@@ -103,7 +103,7 @@
       "overLimit": 1
     },
     "src/entities/PropFactories.ts": {
-      "lines": 819,
+      "lines": 820,
       "worst": 0,
       "overLimit": 0
     },
@@ -130,11 +130,6 @@
     "src/explorer/TilePreview.ts": {
       "lines": 406,
       "worst": 32,
-      "overLimit": 1
-    },
-    "src/farming/FarmInteraction.ts": {
-      "lines": 121,
-      "worst": 30,
       "overLimit": 1
     },
     "src/game/base-game.ts": {
@@ -178,7 +173,7 @@
       "overLimit": 2
     },
     "src/generation/regional/FarmsteadPlanner.ts": {
-      "lines": 426,
+      "lines": 427,
       "worst": 82,
       "overLimit": 1
     },
@@ -548,8 +543,8 @@
       "overLimit": 1
     },
     "src/scenarios/NaturalLandscapeRecipe.ts": {
-      "lines": 390,
-      "worst": 114,
+      "lines": 393,
+      "worst": 115,
       "overLimit": 1
     },
     "src/scenarios/ScenarioSession.ts": {
@@ -598,7 +593,7 @@
       "overLimit": 1
     },
     "src/server/FarmPlay.ts": {
-      "lines": 288,
+      "lines": 311,
       "worst": 41,
       "overLimit": 1
     },
@@ -728,13 +723,13 @@
       "overLimit": 1
     },
     "src/wildlife/Fauna.ts": {
-      "lines": 1247,
+      "lines": 1252,
       "worst": 0,
       "overLimit": 0
     },
     "src/wildlife/faunaAI.ts": {
-      "lines": 191,
-      "worst": 81,
+      "lines": 192,
+      "worst": 80,
       "overLimit": 1
     },
     "src/wildlife/faunaInteractions.ts": {

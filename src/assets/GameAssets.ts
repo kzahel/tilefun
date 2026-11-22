@@ -4,7 +4,15 @@ import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
 import { CONSTRUCTION_CARGO } from "../entities/ConstructionCargo.js";
 import { CONSTRUCTION_RUBBLE } from "../entities/ConstructionRubble.js";
-import { FARM_IMAGE, FARM_SHEET, GARDEN_FENCE, GARDEN_FENCE_SIDE } from "../farming/FarmActors.js";
+import {
+  EGG_IMAGE,
+  EGG_SHEET,
+  FARM_IMAGE,
+  FARM_SHEET,
+  GARDEN_FENCE,
+  GARDEN_FENCE_SIDE,
+} from "../farming/FarmActors.js";
+import { FARM_FOWL_PROFILES } from "../farming/FarmFowl.js";
 import { FARM_GATE_SHEET } from "../farming/FarmGate.js";
 import { INDOOR_ROLES } from "../interiors/IndoorPeople.js";
 import { HELD_IMAGE, HELD_SHEET } from "../inventory/Inventory.js";
@@ -83,6 +91,7 @@ export const SPRITE_MANIFEST: SpriteAsset[] = [
   { key: FARM_GATE_SHEET, path: "assets/farming/gate.png", w: 16, h: 16 },
   { key: HELD_SHEET, path: HELD_IMAGE, w: 8, h: 8 },
   { key: FARM_SHEET, path: FARM_IMAGE, w: 32, h: 32 },
+  { key: EGG_SHEET, path: EGG_IMAGE, w: 16, h: 16 },
   { key: GARDEN_FENCE, path: "assets/farming/fence.png", w: 16, h: 16 },
   { key: GARDEN_FENCE_SIDE, path: "assets/farming/fence-side.png", w: 16, h: 16 },
   { key: FORAGE_SHEET, path: FORAGE_IMAGE, w: 32, h: 32 },
@@ -98,7 +107,7 @@ export const SPRITE_MANIFEST: SpriteAsset[] = [
     w: p.size,
     h: p.size,
   })),
-  ...FAUNA_PROFILES.map((p) => ({
+  ...[...FAUNA_PROFILES, ...FARM_FOWL_PROFILES].map((p) => ({
     key: faunaType(p.species),
     path: p.image,
     w: p.size,

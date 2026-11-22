@@ -3,6 +3,9 @@ import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
 
 export const FARM_SHEET = "farm-garden";
 export const FARM_IMAGE = "assets/farming/garden.png";
+export const EGG_SHEET = "farm-eggs-v1";
+export const EGG_IMAGE = "assets/farming/egg-v1.png";
+export const FARM_EGG = "farm-hen-egg";
 export const GARDEN_BED = "farm-garden-bed";
 export const WOODLOT_TREE = "farm-woodlot-tree";
 export const LOG_BUNDLE = "farm-log-bundle";
@@ -19,7 +22,18 @@ export interface FarmState {
   watered?: boolean;
   chops?: number;
   effectUntil?: number;
+  layAt?: number;
+  hatchAt?: number;
+  growAt?: number;
 }
+
+export const EGG_POSE = { plain: 0, incubating: 1, missingRooster: 2, crowded: 3, broken: 4 };
+export const EGG_STATUS = [
+  "Unfertilized egg",
+  "Fertile egg · hatching soon",
+  "Waiting for a rooster in the pen",
+  "Waiting for room in the pen",
+];
 
 const clip = (name: string, start: number, count = 1): AnimationClip => ({
   name,
@@ -54,6 +68,26 @@ function def(clips: AnimationClip[], trunk = false): EntityDef {
 }
 
 export const FARM_DEFS: Record<string, EntityDef> = {
+  [FARM_EGG]: {
+    sprite: {
+      sheetKey: EGG_SHEET,
+      spriteWidth: 16,
+      spriteHeight: 16,
+      clips: [
+        clip("plain", 0),
+        clip("fertile", 1),
+        clip("missing-rooster", 1),
+        clip("crowded", 1),
+        clip("broken", 2),
+      ],
+      frameCount: 1,
+      frameDuration: 150,
+    },
+    collider: { offsetX: 0, offsetY: 0, width: 8, height: 6, physicalHeight: 3, solid: false },
+    wanderAI: null,
+    hasVelocity: false,
+    noShadow: true,
+  },
   [GARDEN_BED]: def([clip("soil", 0), clip("sprout", 1), clip("watered", 2), clip("ripe", 3)]),
   [WOODLOT_TREE]: def(
     [

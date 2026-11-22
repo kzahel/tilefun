@@ -1,5 +1,6 @@
 import { Direction, type Entity, type PositionComponent } from "../entities/Entity.js";
 import type { AnimationClip, EntityDef } from "../entities/EntityDefs.js";
+import { FARM_FOWL_PROFILES } from "../farming/FarmFowl.js";
 import { positionSeed } from "../shared/Determinism.js";
 import { ANTELOPE_PROFILES } from "./Antelopes.js";
 import { behaviorArt } from "./BehaviorArt.js";
@@ -56,6 +57,8 @@ export const FAUNA_ROSTER = [
   "manta-ray",
 ] as const;
 export type FaunaSpecies =
+  | "rooster"
+  | "chick"
   | (typeof UPRIGHT_COMPANION_SPECIES)[number]
   | (typeof FAUNA_ROSTER)[number]
   | (typeof FAUNA_EXPANSION_ROSTER)[number]
@@ -1118,7 +1121,9 @@ export function petCoat(species: "cat" | "dog", roll: number): FaunaSpecies {
   return coats[Math.min(coats.length - 1, Math.max(0, Math.floor(roll * coats.length)))] ?? species;
 }
 export const faunaType = (species: FaunaSpecies) => `wildlife-${species}-provisional-v1`;
-const profilesByType = new Map(FAUNA_PROFILES.map((p) => [faunaType(p.species), p]));
+const profilesByType = new Map(
+  [...FAUNA_PROFILES, ...FARM_FOWL_PROFILES].map((p) => [faunaType(p.species), p]),
+);
 export const faunaProfile = (type: string | undefined) =>
   type === undefined ? undefined : profilesByType.get(type);
 export interface FaunaBehavior {
@@ -1198,7 +1203,7 @@ export function faunaDefinition(p: FaunaProfile) {
   } satisfies EntityDef;
 }
 export const FAUNA_DEFS: Record<string, EntityDef> = Object.fromEntries(
-  FAUNA_PROFILES.map((p) => [faunaType(p.species), faunaDefinition(p)]),
+  [...profilesByType].map(([type, p]) => [type, faunaDefinition(p)]),
 );
 export function createFauna(species: FaunaSpecies, wx: number, wy: number): Entity {
   const type = faunaType(species),
@@ -1240,8 +1245,8 @@ export function createFauna(species: FaunaSpecies, wx: number, wy: number): Enti
 }
 export const FAUNA_FACTORIES: Record<string, (wx: number, wy: number) => Entity> =
   Object.fromEntries(
-    FAUNA_PROFILES.map((p) => [
-      faunaType(p.species),
+    [...profilesByType].map(([type, p]) => [
+      type,
       (wx: number, wy: number) => createFauna(p.species, wx, wy),
     ]),
   );

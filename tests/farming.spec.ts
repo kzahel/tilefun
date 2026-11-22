@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 import type { GameTestHooks } from "../src/client/GameTestHooks.js";
+import { EGG_POSE, FARM_EGG } from "../src/farming/FarmActors.js";
+import { ROOSTER } from "../src/farming/FarmFowl.js";
 import { FARM_GATE } from "../src/farming/FarmGate.js";
 import { createDescriptor } from "../src/generation/GenerationDescriptor.js";
 import { CORN } from "../src/inventory/Inventory.js";
@@ -7,9 +9,7 @@ import { stopLocalWorld } from "./helpers/local-world.js";
 
 test.use({ channel: "chromium", hasTouch: true });
 
-test("finds a town farm, equips harvested corn and feeds by the flock through an opened gate", async ({
-  page,
-}) => {
+test("finds a town farm, feeds its flock and breaks a newly laid egg", async ({ page }) => {
   test.setTimeout(90_000);
   const generation = createDescriptor("regional", 2026);
   const game = page.locator("#game");
@@ -38,6 +38,14 @@ test("finds a town farm, equips harvested corn and feeds by the flock through an
   await page.getByRole("button", { name: "Travel to selected point" }).tap();
   await expect(page.getByTestId("world-map")).toBeHidden();
   await expect(action("Plant corn")).toBeVisible();
+  await expect
+    .poll(() =>
+      page.evaluate((type) => {
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+        return g.stateView.entities.some((actor) => actor.type === type);
+      }, ROOSTER),
+    )
+    .toBe(true);
   await page.keyboard.press("e");
   await expect(action("Water corn")).toBeVisible();
   await action("Water corn").tap();
@@ -83,5 +91,41 @@ test("finds a town farm, equips harvested corn and feeds by the flock through an
   await action("Scatter corn").tap();
   await expect(hotbar.getByRole("button", { name: "Empty slot 1" })).toBeVisible();
   await expect(hotbar.getByRole("button", { pressed: true })).toHaveCount(0);
+
+  const fertileEgg = () =>
+    page.evaluate(
+      ({ type, clip }) => {
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+        return g.stateView.entities
+          .filter((actor) => actor.type === type && actor.sprite?.clip === clip)
+          .sort((a, b) => a.position.wy - b.position.wy)[0]?.id;
+      },
+      { type: FARM_EGG, clip: EGG_POSE.incubating },
+    );
+  await expect.poll(fertileEgg, { timeout: 30_000 }).toBeDefined();
+  const eggId = await fertileEgg();
+  await page.evaluate(async (id) => {
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+    const egg = g.stateView.entities.find((actor) => actor.id === id);
+    if (!egg) throw Error("Missing fertile egg");
+    const { wx, wy } = egg.position;
+    await g.gcSendRequest({
+      type: "rcon",
+      requestId: g.nextRequestId++,
+      command: `tp ${wx} ${wy}`,
+    });
+  }, eggId);
+  await expect(
+    page.locator(".farm-control").getByText("Fertile egg · hatching soon"),
+  ).toBeVisible();
+  await action("Break egg").tap();
+  await expect
+    .poll(() =>
+      page.evaluate((id) => {
+        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+        return g.stateView.entities.find((actor) => actor.id === id)?.sprite?.clip;
+      }, eggId),
+    )
+    .toBe(EGG_POSE.broken);
   await stopLocalWorld(page);
 });

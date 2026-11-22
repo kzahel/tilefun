@@ -1,8 +1,8 @@
 # Farming
 
 Topic: farming
-Status: garden, woodlot, hotbar and chicken handling in Play
-Updated: 2026-11-21
+Status: garden, woodlot, hotbar and the chicken life cycle in Play
+Updated: 2026-11-22
 
 Open **Map**, select a 🌽 farm and choose **Travel to selected point**. The
 first farm button also works when the destination is outside the visible map.
@@ -19,17 +19,37 @@ Use **E**, controller **Y**, or the on-screen action in Play.
   The local keyboard guest uses **- / =**. In shared-screen and split-screen
   co-op, click or tap a filled slot in either player's hotbar to select it for
   that player. Each hotbar shows its own shortcut hints.
-- Hold corn near Buff hens and they'll follow. Use **Scatter corn** beside the
-  flock to feed them on clear ground. The farm sign marks the pen.
+- Hold corn near hens, roosters or chicks and they'll follow. Use **Scatter corn**
+  beside the hens to feed them on clear ground. The farm sign marks the pen.
 - Use **Open gate** and **Close gate** in Play. Walk slowly with corn to lead
   the hens through. Put the corn away after moving them and they can settle
   around their new location. A closed gate blocks movement, and a hen or
   player in the opening holds it open.
 - Chop a small woodlot tree three times, then walk over the fallen logs. Bring
-  one bundle to the fence stakes to add a solid fence panel. Interact with a
-  stump to plant the tree again after collecting the wood.
-- In Build, place beds, pen signs, Buff hens, woodlot trees and fence stakes under
-  Entities. Garden fences and gates are under Props and cost nothing in Build.
+  one bundle to the fence stakes and use **Build fence**. The wood can stay in
+  your hotbar. Leave a step of space between yourself and the stakes so the
+  panel fits. Interact with a stump to plant a tree again after collecting wood.
+- In **Build → Entities**, place beds, chicken pen signs, hens, roosters, chicks,
+  woodlot trees and fence stakes. **Build → Props** offers **Garden fence**,
+  **Garden fence (side)** and **Garden gate** for free placement.
+
+## Chickens and eggs
+
+- Generated chicken pens start with three Buff hens and one rooster. The
+  chicken pen sign defines the breeding yard. For a custom yard, put the sign
+  near the middle of the south edge. Its area measures 136 × 112 world pixels
+  and extends 96 pixels north of the sign.
+- Visiting the pen starts the hens' laying timers. A hen lays its first egg
+  after about 20 seconds and can lay again after another 55 seconds. A pen
+  holds up to four unbroken eggs at a time.
+- An egg is fertile if a rooster is in the same pen when it is laid. After
+  25 seconds the egg can hatch if a rooster is in the pen and the flock has
+  fewer than six birds, counting hens, roosters and chicks. Until then, the
+  tooltip says what it is waiting for. Use corn to lead some birds out and
+  open up space.
+- Chicks grow into adults after about one minute, once the adult can fit.
+  Use **Break egg** beside any whole egg to leave a little broken shell and
+  clear an egg slot. The shell goes away after a few seconds.
 
 The outdoor authority validates the seat, reach, current action, usable ground,
 and material cost. Farm actors use world persistence and the ordinary actor
@@ -41,8 +61,8 @@ A crop, log bundle or stake pays out once per use. The authoritative prop store
 persists gate position and state, and hens use ordinary fauna movement and
 collision while following a player.
 
-The next farm slice can use these systems for rooster-dependent fertile eggs,
-chicks and a town stand that residents can visit.
+Eggs, chicks and laying deadlines persist through saves. Pen checks wait for the
+whole yard to load before counting birds or hatching an egg. [Chicken life cycle](../tactical/267-farm-chicken-life-cycle.md).
 
 Existing farmsteads retain their original placement. There is also one
 outskirts farm per settlement where the road, dry land and competing regional

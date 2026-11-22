@@ -16,6 +16,7 @@ import { createPredator, PREDATOR_PROFILES } from "../wildlife/Predator.js";
 import { createRabbit } from "../wildlife/Rabbit.js";
 import { animalWorkRecipe } from "./AnimalWorkRecipe.js";
 import { cityTrainRecipe } from "./CityTrainRecipe.js";
+import { farmFlockRecipe } from "./FarmFlockRecipe.js";
 import { forestWorkRecipe } from "./ForestWorkRecipe.js";
 import { gardenWorkRecipe } from "./GardenWorkRecipe.js";
 import { herdWorkRecipe } from "./HerdWorkRecipe.js";
@@ -155,6 +156,7 @@ export const NATURAL_CASES = [
     x: 354,
     y: 737.5,
   },
+  { id: "chicken-pen", name: "Chicken pen · rooster, hen, chick and egg", seed: 0, x: 5.5, y: 9.5 },
   { id: "farmstead", name: "Countryside · connected farmstead", seed: 2026, x: 380, y: 897 },
   { id: "village-pets", name: "Village · cats & dogs", seed: 2026, x: 672, y: -592 },
   { id: "city-center", name: "City · dense center & neighborhoods", seed: 2026, x: 300, y: 519 },
@@ -186,6 +188,7 @@ export function naturalLandscapeRecipe(
   profile: LandscapeProfile,
   at?: { seed: number; x: number; y: number },
 ): ScenarioRecipe {
+  if (id === "chicken-pen") return farmFlockRecipe();
   if (id === "behavior-hedgehog" || id === "behavior-porcupine" || id === "behavior-fox")
     return threatWorkRecipe(id.slice(9) as "hedgehog" | "porcupine" | "fox");
   if (id === "behavior-deer" || id === "behavior-peacock" || id === "behavior-raven")

@@ -2,6 +2,7 @@ import { TerrainId, VariantId } from "../autotile/TerrainId.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { Direction } from "../entities/Entity.js";
 import { CHICKEN_FEEDER, FENCE_STAKES, GARDEN_BED, WOODLOT_TREE } from "../farming/FarmActors.js";
+import { FARM_FOWL_PROFILES } from "../farming/FarmFowl.js";
 import { RoadType } from "../road/RoadType.js";
 import { originalVehicle } from "../traffic/OriginalVehicles.js";
 import { EDITOR_VEHICLE_MODELS } from "../traffic/Vehicle.js";
@@ -139,7 +140,7 @@ export const ENTITY_PALETTE: EntityPaletteEntry[] = [
     color: "#ad713a",
     previewRow: Direction.Right,
   })),
-  ...FAUNA_PROFILES.map((p) => ({
+  ...[...FAUNA_PROFILES, ...FARM_FOWL_PROFILES].map((p) => ({
     type: faunaType(p.species),
     label: p.label,
     color: "#b59365",

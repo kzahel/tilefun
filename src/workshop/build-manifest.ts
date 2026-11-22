@@ -135,6 +135,12 @@ try {
       batches: [
         ...CITY_BATCHES,
         {
+          id: "farm-chickens",
+          name: "Farm chicken life cycle",
+          description: "Original rooster, chick and egg sprites in the playable farm pen.",
+          toolId: "world-geometry",
+        },
+        {
           id: "natural-landscapes",
           name: "Natural landscapes",
           description:

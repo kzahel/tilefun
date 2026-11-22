@@ -42,7 +42,8 @@ export class FarmControl {
     const hint = inputHint(keyboardHint("enter_place"), "Y");
     const label = choice?.request ? [choice.label, hint].filter(Boolean).join(" · ") : "";
     if (this.button.textContent !== label) this.button.textContent = label;
-    const status = this.feedback || (choice?.request ? "" : (choice?.label ?? ""));
+    const status =
+      this.feedback || (choice?.request ? (choice.status ?? "") : (choice?.label ?? ""));
     if (this.text.textContent !== status) this.text.textContent = status;
     this.text.hidden = !status;
   }

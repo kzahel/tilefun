@@ -1,4 +1,5 @@
 import type { Entity, PositionComponent } from "../entities/Entity.js";
+import { isFarmFowl } from "../farming/FarmFowl.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
 import { lcgNext } from "../shared/Determinism.js";
 import { gap } from "../shared/gap.js";
@@ -27,11 +28,11 @@ export function updateFaunaAI(
   if (!ai || !velocity || !animal.sprite || !p) return;
   if (animal.wanderAI?.state === "ridden") return;
   syncFaunaWater(animal, environment.isWater(animal.position));
-  if (p.species === "chicken" && environment.lureChicken?.(animal)) return;
-  const nearby =
-    p.species === "chicken" && environment.lureChicken
-      ? undefined
-      : players.find((player) => gap(player, animal.position) < p.alarmDistance);
+  const lurable = isFarmFowl(animal.type) ? environment.lureChicken : undefined;
+  if (lurable?.(animal)) return;
+  const nearby = lurable
+    ? undefined
+    : players.find((player) => gap(player, animal.position) < p.alarmDistance);
   const herdAlarm = ai.groupId
     ? animals.find(
         (a) =>

@@ -418,6 +418,12 @@
       "toolId": "streets"
     },
     {
+      "id": "farm-chickens",
+      "name": "Farm chicken life cycle",
+      "description": "Original rooster, chick and egg sprites in the playable farm pen.",
+      "toolId": "world-geometry"
+    },
+    {
       "id": "natural-landscapes",
       "name": "Natural landscapes",
       "description": "Nine seeded scenes, including three solid forest kits and a train journey. Compare sparse, balanced, lush and extra-dense landscapes.",
@@ -14733,7 +14739,7 @@
       "prompt": "Inspect the farm arrival, four garden beds, chicken pen and small woodlot. Check whether the paths and crops are easy to read at game zoom.",
       "url": "/tilefun/workshop.html?geometry=nature-town-farm&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=354&y=737.5&landscape=sparse&zoom=0.8",
-      "fingerprint": "58236940b4865f099d8626b1a8fdc8d573e7ea1bc9d93ed2a8bb84ec8bb468cf"
+      "fingerprint": "f675b8d06dc3bcf572589b92d3c8c8ec04460f8287c0c24c7c0bd77509e9a221"
     },
     {
       "id": "nature:town-farm:balanced:v1",
@@ -14743,7 +14749,7 @@
       "prompt": "Inspect the farm arrival, four garden beds, chicken pen and small woodlot. Check whether the paths and crops are easy to read at game zoom.",
       "url": "/tilefun/workshop.html?geometry=nature-town-farm&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=354&y=737.5&landscape=balanced&zoom=0.8",
-      "fingerprint": "3fef09e5ed2f1b85e2d07731ad48aba9a30237e966c295b7b0cc58d4204adfe6"
+      "fingerprint": "0110ac49da08b9133a5a247d47c8ca5a85b7a1c6b8ff590f66b3d6c7a92e5482"
     },
     {
       "id": "nature:town-farm:lush:v1",
@@ -14753,7 +14759,7 @@
       "prompt": "Inspect the farm arrival, four garden beds, chicken pen and small woodlot. Check whether the paths and crops are easy to read at game zoom.",
       "url": "/tilefun/workshop.html?geometry=nature-town-farm&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=354&y=737.5&landscape=lush&zoom=0.8",
-      "fingerprint": "3b66fdd8f8c97dd23a8ca79bd436bf148a5eedddcc1ad2729a3bbb33d7e295f0"
+      "fingerprint": "1978a8a4737f10cad6976e163fbb634ebf9e4d2d9658df6a030535ad2a296f9d"
     },
     {
       "id": "nature:town-farm:thicket:v1",
@@ -14763,7 +14769,16 @@
       "prompt": "Inspect the farm arrival, four garden beds, chicken pen and small woodlot. Check whether the paths and crops are easy to read at game zoom.",
       "url": "/tilefun/workshop.html?geometry=nature-town-farm&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=354&y=737.5&landscape=thicket&zoom=0.8",
-      "fingerprint": "34b9404e2a003977346a427d5c0a78129da76835e31360a6b24271511b4658a8"
+      "fingerprint": "024372c89127ac5a3d744f482fb042cfd48421ef2fc0a2738a8f7ff7cd69a0b6"
+    },
+    {
+      "id": "nature:chicken-pen:thicket:v1",
+      "batchId": "farm-chickens",
+      "kind": "geometry",
+      "name": "Chicken pen · rooster, hen, chick and egg · thicket",
+      "prompt": "Compare the rooster's comb and dark tail, the hen, the smaller yellow chick and the egg at game zoom.",
+      "url": "/tilefun/workshop.html?geometry=nature-chicken-pen&landscape=thicket#/tool/world-geometry",
+      "fingerprint": "006aa343b205f2b6eeb0de93ed8cbe558764a4b05e49bc5c60408ab50d5b20f7"
     },
     {
       "id": "nature:farmstead:sparse:v1",
@@ -14773,7 +14788,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-farmstead&landscape=sparse#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=380&y=897&landscape=sparse&zoom=0.8",
-      "fingerprint": "7455b4a2608cbe9d1c2faf9d054dfad8472eaf87a466fb1004807a02440bbbd0"
+      "fingerprint": "c4a2d6ebca6e66a643c1e5f95af276074e33714487c54ed5644eba9c2b9c07a6"
     },
     {
       "id": "nature:farmstead:balanced:v1",
@@ -14783,7 +14798,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-farmstead&landscape=balanced#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=380&y=897&landscape=balanced&zoom=0.8",
-      "fingerprint": "39068c9c0a985381fa37f27c33c2a6dda729546a233f7af3d0cde3109a79fe99"
+      "fingerprint": "dff8d38b8e874ac47bf9e3cd12cfc229ef43ed23604855c4fb4adf6ddcdbf63d"
     },
     {
       "id": "nature:farmstead:lush:v1",
@@ -14793,7 +14808,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-farmstead&landscape=lush#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=380&y=897&landscape=lush&zoom=0.8",
-      "fingerprint": "7ad14954265513dcf556a0d08372a44e6b64159a0c5b19a1093dcdc748be275c"
+      "fingerprint": "8f771beb4f861245fdc4648fbc5a25cd7860f9b5d03c317128a8c04b1099f78c"
     },
     {
       "id": "nature:farmstead:thicket:v1",
@@ -14803,7 +14818,7 @@
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-farmstead&landscape=thicket#/tool/world-geometry",
       "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=380&y=897&landscape=thicket&zoom=0.8",
-      "fingerprint": "dbca7b9aba5cb7b71d8569fb664671be168a59d600e56c88fb013453a2faf724"
+      "fingerprint": "02011d3760b80223d0a589b870317db874f3a0c395f2b2155bfe949dd60c7e79"
     },
     {
       "id": "nature:village-pets:sparse:v1",
@@ -61272,5 +61287,5 @@
       }
     }
   ],
-  "inputDigest": "5be940a1964474ac5c528134193d915678d0dcb053b517520764f28b91f278ba"
+  "inputDigest": "679cb6b83dc1d7bd64e19f9e1da3505c334d75fb363888ce963cc929d6d857ab"
 }
