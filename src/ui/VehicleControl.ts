@@ -10,14 +10,16 @@ import {
   vehicleChoice,
 } from "./PlacePrompts.js";
 
+const armLabels = { crane: "Work crane", excavator: "Work arm", forklift: "Work forks" };
+
 /** Basic land-vehicle interactions, shared by touch, keyboard and controller: the
  * primary seat button plus one contextual equipment button (right car / dump bed). */
 export class VehicleControl {
   readonly root = document.createElement("div");
   readonly button = document.createElement("button");
   readonly equipmentButton = document.createElement("button");
-  private excavatorId: number | undefined;
-  private excavator?: ExcavatorPanel;
+  private arm: VehicleChoice["workArm"];
+  private excavator: ExcavatorPanel | undefined;
   private equipment: VehicleChoice["equipment"] = null;
   private status = document.createElement("p");
   private request: VehicleRequest | null = null;
@@ -52,9 +54,13 @@ export class VehicleControl {
     const choice = vehicleChoice(view, allowed);
     const { equipment } = choice;
     this.equipment = equipment;
-    this.excavatorId = choice.excavatorId;
-    if (this.excavatorId === undefined || (locked && !this.busy)) this.excavator?.close(false);
-    const workAvailable = this.excavatorId !== undefined;
+    if (this.arm?.id !== choice.workArm?.id) {
+      this.excavator?.close(false);
+      this.excavator = undefined;
+    }
+    this.arm = choice.workArm;
+    if (locked && !this.busy) this.excavator?.close(false);
+    const workAvailable = !!this.arm;
     const showEquipment = !!equipment || workAvailable;
     this.equipmentButton.hidden = !showEquipment;
     this.equipmentButton.style.display = showEquipment ? "" : "none";
@@ -62,7 +68,7 @@ export class VehicleControl {
     if (equipment)
       this.equipmentButton.textContent = `${equipment.label} · ${actionHint("vehicle_recover") || "F"}`;
     if (workAvailable)
-      this.equipmentButton.textContent = `Work arm · ${actionHint("vehicle_recover") || "F"}`;
+      this.equipmentButton.textContent = `${this.arm ? armLabels[this.arm.kind] : "Work arm"} · ${actionHint("vehicle_recover") || "F"}`;
     if (choice.key !== this.targetKey) {
       this.status.textContent = "";
       this.error = false;
@@ -89,12 +95,12 @@ export class VehicleControl {
     return this.excavator?.movement;
   }
   activateEquipment(): boolean {
-    if (this.equipmentButton.disabled) return !!this.equipment || this.excavatorId !== undefined;
-    if (this.excavatorId !== undefined) {
+    if (this.equipmentButton.disabled) return !!this.equipment || !!this.arm;
+    const arm = this.arm;
+    if (arm) {
       this.excavator ??= new ExcavatorPanel((action) => {
-        if (this.excavatorId !== undefined)
-          this.activate({ type: "vehicle-equipment", entityId: this.excavatorId, action });
-      });
+        this.activate({ type: "vehicle-equipment", entityId: arm.id, action });
+      }, arm.kind);
       this.excavator.open(this.root.parentElement ?? document.body, this.equipmentButton);
       return true;
     }

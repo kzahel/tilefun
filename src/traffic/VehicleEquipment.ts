@@ -3,8 +3,13 @@
 import type { ExcavatorAction } from "../shared/ExcavatorInput.js";
 
 type TruckAction = "tip" | "lower" | "attach" | "release" | "deploy" | "stow";
-export type EquipmentAction = TruckAction | ExcavatorAction;
+export type CraneToolAction = "crane-hook" | "crane-tool";
+export type EquipmentAction = TruckAction | ExcavatorAction | CraneToolAction;
+export const isCraneToolAction = (action: string): action is CraneToolAction =>
+  action === "crane-hook" || action === "crane-tool";
 export const EQUIPMENT_LABELS: Record<EquipmentAction, string> = {
+  "crane-hook": "Hook / release",
+  "crane-tool": "Switch hook / ball",
   tip: "Tip bed",
   lower: "Lower bed",
   attach: "Attach car",

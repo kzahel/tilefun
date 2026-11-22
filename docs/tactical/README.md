@@ -12,7 +12,10 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [264 Forklift](264-forklift.md) | Physical sliding and tilting forks lift the existing pallets and crates in the construction yard. |
+| [263 Construction crate run](263-construction-crate-run.md) | A drive-through stack of freely rotating wooden crates in generated construction yards. |
 | [262 Leashed shared screen](262-leashed-shared-screen.md) | One top-down view for up to four local seats, with hard limits for walking and driving and fixed split screen still available. Owner play review pending. |
+| [261 Mobile crane](261-mobile-crane.md) | Working telescopic boom, pallet loading and a swinging wrecking ball in generated construction yards. |
 | [260 Hotbar and hen handling](260-hotbar-and-hen-handling.md) | Saved slots, visible held items, corn luring and operable farm gates. |
 | [259 Town farming](259-town-farming.md) | Garden, chicken feeding and woodlot in Play, with named Map destinations near settlements. |
 | [258 Construction yards](258-construction-yards.md) | Generated city-edge construction yards and a working tracked excavator. Owner play review pending. |

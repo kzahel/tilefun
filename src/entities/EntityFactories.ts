@@ -13,6 +13,13 @@ import { createRobin, ROBIN_TYPE } from "../wildlife/Robin.js";
 import { createBall } from "./Ball.js";
 import { createCampfire } from "./Campfire.js";
 import { createChicken } from "./Chicken.js";
+import {
+  CONSTRUCTION_BLOCK,
+  CONSTRUCTION_CRATE,
+  CONSTRUCTION_PALLET,
+  createConstructionCargo,
+  WRECKING_BALL,
+} from "./ConstructionCargo.js";
 import { CONSTRUCTION_RUBBLE, createConstructionRubble } from "./ConstructionRubble.js";
 import { createCow } from "./Cow.js";
 import { createCrow } from "./Crow.js";
@@ -61,6 +68,10 @@ export const ENTITY_FACTORIES: Record<string, (wx: number, wy: number) => Entity
   [ROBIN_TYPE]: createRobin,
   [DEER_TYPE]: createDeer,
   ball: createBall,
+  [CONSTRUCTION_CRATE]: (x, y) => createConstructionCargo(CONSTRUCTION_CRATE, x, y),
+  [CONSTRUCTION_PALLET]: (x, y) => createConstructionCargo(CONSTRUCTION_PALLET, x, y),
+  [CONSTRUCTION_BLOCK]: (x, y) => createConstructionCargo(CONSTRUCTION_BLOCK, x, y),
+  [WRECKING_BALL]: (x, y) => createConstructionCargo(WRECKING_BALL, x, y),
   [CONSTRUCTION_RUBBLE]: createConstructionRubble,
   chicken: createChicken,
   cow: createCow,

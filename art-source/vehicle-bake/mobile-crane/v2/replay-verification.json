@@ -1,0 +1,24 @@
+{
+  "replay": "Independent output directory reproduced the runtime GLB byte for byte.",
+  "inputs": {
+    "art-source/vehicle-bake/mobile-crane/v1/master.blend": "88bf0f03d8f7efdfca1d3cda3979bdaf0d3c6f304171d284dd94afeb26df8de4",
+    "art-source/vehicle-bake/mobile-crane/v1/recipe.json": "19686fb534cda62fcace9059446ac9ec2a112eda28e929f3ed8bbcae8a73ab96",
+    "art-source/vehicle-bake/mobile-crane/v2/build.py": "0b850df6c6b384f5ee696092c40169fb56df323d00934ce921d73e560497d85a"
+  },
+  "output": {
+    "public/assets/models/vehicles/mobile-crane-v2.glb": "eca3d34bf42c841fd31e757f5696ba4ae79769e895825ab744dbb9868eb5b256"
+  },
+  "geometry": {
+    "meshes": 12,
+    "triangles": 4010,
+    "wheels": [
+      "Wheel_FL_Roll",
+      "Wheel_FR_Roll",
+      "Wheel_ML_Roll",
+      "Wheel_MR_Roll",
+      "Wheel_RL_Roll",
+      "Wheel_RR_Roll"
+    ],
+    "unlitMaterials": 1
+  }
+}

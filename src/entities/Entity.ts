@@ -138,6 +138,8 @@ export interface Entity {
   vehicleExcavator?: number;
   vehicleExcavatorTarget?: number;
   vehicleExcavatorRate?: number;
+  vehicleCraneLoadId?: number;
+  vehicleCraneLoadKey?: string;
   /** Wheel-lift towing partners (tow truck → car, car → tow truck); see Towing. */
   towTargetId?: number;
   towedBy?: number;

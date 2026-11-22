@@ -1,0 +1,13 @@
+{
+  "replay": "Independent output reproduced the working GLB byte for byte.",
+  "inputs": {
+    "art-source/vehicle-bake/forklift/v1/master.blend": "de61ca4ccf313345da5987b2022fcae62d7e5bbc606327ff683a74070f2e1614",
+    "art-source/vehicle-bake/forklift/v1/recipe.json": "8864e12cc377762fcac11e36097ee9c462633e489f644a6ba137011a68cab51c",
+    "art-source/vehicle-bake/forklift/v2/build.py": "fde7f873c0757632ff4417e2bdc522fd177febf93908be648423e2578748e4ad"
+  },
+  "output": {
+    "public/assets/models/vehicles/forklift-v2.glb": "55b5e27c7f4580a15b333e4670d24885cb1f322274517821fc7b66397dc0d3f3"
+  },
+  "wheelNodes": "Four wheel centers and roll extras match the retained v1 GLB.",
+  "triangleCount": 2940
+}

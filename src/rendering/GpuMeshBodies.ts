@@ -3,10 +3,10 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import { vehiclePaint } from "../traffic/VehiclePaint.js";
 import {
   applyMeshInstance,
+  hasAuthoredMesh,
   loadAuthoredMesh,
   topDownVehicleHeightScale,
 } from "./AuthoredMeshPose.js";
-import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
 import { CarBodyImageCache, carBodyImageKey } from "./CarBodyImageCache.js";
 import type { CarMeshAsset } from "./CarMeshAsset.js";
@@ -72,7 +72,7 @@ export class GpuMeshBodies {
   }
   /** Start a family load on demand. New models become drawable at the next frame boundary. */
   request(assetId: string) {
-    if (!(authoredVehicleForAsset(assetId) ?? authoredTrainForAsset(assetId))) return undefined;
+    if (!hasAuthoredMesh(assetId)) return undefined;
     let slot = this.slots.get(assetId);
     if (!slot) {
       slot = new ResourceSlot<CarMeshAsset>();

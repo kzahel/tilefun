@@ -8,6 +8,7 @@ import { admitEntityEdits } from "./BodyEdits.js";
 import { driveMotor, isIdle, supportMotions } from "./BodyMotor.js";
 import { keepRest, publishBody } from "./BodyReadback.js";
 import { rapierRotation, rotateBodyVector, worldRotation, yawRotation } from "./BodyRotation.js";
+import { CraneCables } from "./CraneCables.js";
 import { DumpBedBody } from "./DumpBedBody.js";
 import { ExcavatorBody } from "./ExcavatorBody.js";
 import type { GroundMaterial } from "./GroundMaterial.js";
@@ -25,7 +26,7 @@ import {
 } from "./HeldBodies.js";
 import { playerClimbIntent } from "./Ladders.js";
 import { teleportBody } from "./PhysicalEdits.js";
-import { physicsBodyDimensions, physicsBodyKind } from "./PhysicsBodies.js";
+import { physicsBodyDimensions, physicsBodyKind, tracksBodyRotation } from "./PhysicsBodies.js";
 import {
   initializePhysics,
   PHYSICS_DT,
@@ -106,6 +107,7 @@ export class PhysicsScene {
   private originInitialized = false;
   private tick = 0;
   private syncPass = 0;
+  private readonly craneCables = new CraneCables();
   private epoch = nextSceneEpoch++;
   readonly metrics = {
     worldSteps: 0,
@@ -414,9 +416,18 @@ export class PhysicsScene {
           input?.controlUntil === undefined || this.tick < input.controlUntil
             ? input?.excavatorAction
             : undefined;
-        e.excavator.advance(e.state, e.body, e.collider, this.staticGeometry, action);
+        e.excavator.advance(
+          e.state,
+          e.body,
+          e.collider,
+          this.staticGeometry,
+          this.world,
+          action,
+          e.entity.vehicleCraneLoadId !== undefined,
+        );
       }
     }
+    this.craneCables.sync(this.world, this.bodies, this.live);
     this.world.gravity = { x: 0, y: (-JUMP_GRAVITY * gravity) / SCALE, z: 0 };
     const blockedRails = blockedRailGroups(this.live, this.bodies, this.staticGeometry, intents);
     // Read support motion before changing any motors: actor order cannot change it.
@@ -549,6 +560,8 @@ export class PhysicsScene {
     // Woken once every body is read: no readback depends on the order of bodies.
     for (const body of this.rousing.splice(0)) body.wakeUp();
     for (const pair of this.couplings.pairs()) this.addContact(...pair);
+    for (const { crane, payload } of this.craneCables.pairs())
+      this.addContact(crane.entity.id, payload.entity.id);
     this.metrics.stepMs = performance.now() - started;
   }
 
@@ -588,7 +601,7 @@ export class PhysicsScene {
     const state = entry.state;
     const rotation = worldRotation(q);
     const center = rotateBodyVector(rotation, 0, 0, entry.halfY, this.readVector);
-    if (entry.kind === "vehicle") {
+    if (tracksBodyRotation(entry.entity, entry.kind)) {
       state.sleeping = asleep;
       state.prevRotation = state.rotation ?? rotation;
       state.rotation = rotation;

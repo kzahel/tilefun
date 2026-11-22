@@ -288,6 +288,7 @@ describe("the view's merged static world (251)", () => {
       setTransportRamp: rig,
       setTowLift: rig,
       setTravel: rig,
+      setExcavator: rig,
       setDumpBed: rig,
       setEmergency: rig,
     } as unknown as CarMeshAsset;

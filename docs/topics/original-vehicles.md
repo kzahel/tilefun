@@ -1,5 +1,14 @@
 # Original vehicle authoring
 
+[264](../tactical/264-forklift.md) gives the retained forklift a working v2
+mast and carriage. The body paint and four wheel rigs come from the same
+master. Appearance review for the moving revision is pending.
+
+[261](../tactical/261-mobile-crane.md) retains a working v2 revision of the
+existing mobile crane. The six wheels and semantic paint come from the retained
+v1 master. The new joints are playable in the generated yard. Appearance review
+for the working revision is pending.
+
 [258](../tactical/258-construction-yards.md) delivers the retained tracked
 excavator to generated construction yards and the shared Workshop preview.
 The work rig uses four independent joints and handles loose rubble. Owner

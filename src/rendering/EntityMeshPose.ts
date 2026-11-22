@@ -1,6 +1,7 @@
 import { Direction, type Entity } from "../entities/Entity.js";
 import { emergencyEnabled } from "../traffic/EmergencyVehicle.js";
 import { isVehicle } from "../traffic/Vehicle.js";
+import { authoredCargoForType } from "./AuthoredCargoMeshes.js";
 import { authoredTrainForType } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForType } from "./AuthoredVehicleMeshes.js";
 import { equipmentMeshPose } from "./EquipmentMeshPose.js";
@@ -23,6 +24,7 @@ export function meshAssetFor(
   return (
     (authoredTrains ? authoredTrainForType(entity.type)?.assetId : undefined) ??
     authoredVehicleForType(entity.type)?.assetId ??
+    authoredCargoForType(entity.type)?.assetId ??
     (allCars3d && entity.type.startsWith("vehicle-v1:") ? COMPACT_CAR_MESH : undefined)
   );
 }

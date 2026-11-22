@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { authoredCargoForAsset } from "./AuthoredCargoMeshes.js";
 import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForAsset, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
@@ -8,18 +9,31 @@ const X_AXIS = new THREE.Vector3(1, 0, 0);
 const Y_AXIS = new THREE.Vector3(0, 1, 0);
 const turn = new THREE.Quaternion();
 
-/** Gameplay loading options for one registered vehicle or train asset, shared by
+export function hasAuthoredMesh(assetId: string): boolean {
+  return !!(
+    authoredVehicleForAsset(assetId) ??
+    authoredTrainForAsset(assetId) ??
+    authoredCargoForAsset(assetId)
+  );
+}
+
+/** Gameplay loading options for retained rigid models, shared by
  * every view that draws authored bodies. Unregistered IDs return undefined. */
 export function loadAuthoredMesh(assetId: string): Promise<CarMeshAsset> | undefined {
   const vehicle = authoredVehicleForAsset(assetId);
-  const definition = vehicle ?? authoredTrainForAsset(assetId);
+  const cargo = authoredCargoForAsset(assetId);
+  const definition = vehicle ?? authoredTrainForAsset(assetId) ?? cargo;
   if (!definition) return undefined;
-  return loadCarMesh(definition.path, definition.lateralScale, {
-    batch: !!vehicle,
+  const load = loadCarMesh(definition.path, definition.lateralScale, {
+    batch: !!vehicle || !!cargo,
+    cargo: !!cargo,
     heightScale: vehicle ? vehicleMeshHeightScale(vehicle.vehicle) : 1,
     contactShadow: !!vehicle,
     preserveParts: vehicle?.batchPreserveParts ?? [],
   });
+  return vehicle?.vehicle === "forklift"
+    ? load.catch(async () => (await import("./ForkliftFallback.js")).forkliftFallback())
+    : load;
 }
 
 /** Apply the top-down height fit in world Z, after the rigid-body rotation.
@@ -54,7 +68,7 @@ export function applyMeshInstance(asset: CarMeshAsset, mesh: MeshInstance): void
   asset.setTransportRamp(mesh.transportRamp ?? false);
   asset.setTowLift(mesh.towActive ?? false);
   asset.setTravel(mesh.wheelTravel ?? 0, !!mesh.towPitch);
-  asset.setExcavator(mesh.excavatorPose);
+  asset.setExcavator(mesh.excavatorPose, mesh.craneCableEnd);
   asset.setDumpBed(mesh.bedTilt ?? 0, mesh.bedGateAngle ?? 0);
   asset.setEmergency(mesh.emergencyEnabled ?? false, mesh.presentationTime ?? 0);
 }

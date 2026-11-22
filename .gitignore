@@ -175,6 +175,8 @@ data/
 !/public/demos/vehicle-bake/cement-mixer/v1/
 /art-source/vehicle-bake/mobile-crane/*
 !/art-source/vehicle-bake/mobile-crane/v1/
+!/art-source/vehicle-bake/mobile-crane/v2/
+
 /public/demos/vehicle-bake/mobile-crane/*
 !/public/demos/vehicle-bake/mobile-crane/v1/
 /art-source/vehicle-bake/street-sweeper/*
@@ -191,6 +193,7 @@ data/
 !/public/demos/vehicle-bake/farm-tractor/v1/
 /art-source/vehicle-bake/forklift/*
 !/art-source/vehicle-bake/forklift/v1/
+!/art-source/vehicle-bake/forklift/v2/
 /public/demos/vehicle-bake/forklift/*
 !/public/demos/vehicle-bake/forklift/v1/
 /art-source/vehicle-bake/sidecar-motorcycle/*

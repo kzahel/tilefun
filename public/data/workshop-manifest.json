@@ -16947,6 +16947,36 @@
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
+      "id": "geometry:construction-crane-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "City outskirts · Mobile crane",
+      "prompt": "Lift a pallet onto the flatbed, then knock down the practice blocks with the wrecking ball.",
+      "url": "/tilefun/workshop.html?geometry=construction-crane#/tool/world-geometry",
+      "fingerprint": "ed54f876aff63edc4768ae0e3b5dc51583b19484600f62d61889d84ba423af35",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
+      "id": "geometry:construction-forklift-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "Construction · Forklift loading yard",
+      "prompt": "Drive the forks into a pallet, lift it onto the flatbed and back out, or build a stack of wooden crates.",
+      "url": "/tilefun/workshop.html?geometry=construction-forklift#/tool/world-geometry",
+      "fingerprint": "fc64e98b0f30a016a451e786245bc97afe2d84915c8d921c5105655bef7b2395",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
+      "id": "geometry:construction-crate-run-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "City outskirts · Crate run",
+      "prompt": "Drive the racing coupe through the stack of 3D crates and watch them tumble.",
+      "url": "/tilefun/workshop.html?geometry=construction-crate-run#/tool/world-geometry",
+      "fingerprint": "5cfd5cd8ef88f32918f35f4fd3fcc346770a529c918584716ea09bc5348f5585",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
       "id": "geometry:car-surfaces-v1",
       "batchId": "world-geometry",
       "kind": "geometry",
@@ -61222,5 +61252,5 @@
       }
     }
   ],
-  "inputDigest": "62e21e274103159aa1716adc38385e6a29d64d4ef5532ec3fe65d8ae9aab6640"
+  "inputDigest": "791d38d4d1ba7ce3532dca56be20711385e91668a7b23627c3e4da00a1cb542c"
 }

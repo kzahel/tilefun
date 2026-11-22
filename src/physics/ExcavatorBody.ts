@@ -3,12 +3,17 @@ import type { Entity } from "../entities/Entity.js";
 import type { ExcavatorAction } from "../shared/ExcavatorInput.js";
 import { required } from "../shared/required.js";
 import {
+  type ArmMotorProfile,
   advanceExcavatorPose,
   excavatorBrakeTarget,
   excavatorHoldTarget,
   excavatorLinkage,
   fineExcavatorPose,
 } from "../traffic/Excavator.js";
+import { FORKLIFT, FORKLIFT_REST, forkliftRig, isForklift } from "../traffic/Forklift.js";
+import { CRANE_REST, craneLinkage, isMobileCrane } from "../traffic/MobileCrane.js";
+import { rotateBodyVector, worldRotation } from "./BodyRotation.js";
+import { forkliftShapes } from "./ForkliftShapes.js";
 import { PHYSICS_DT, PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
 import type { MotionIntent, PhysicsBodyState } from "./PhysicsState.js";
 
@@ -26,16 +31,19 @@ const PROFILES = [
  * prediction. The joints change the body's contact shape, not its inertia. */
 export class ExcavatorBody {
   private pose: number;
+  private readonly profile: ArmMotorProfile | undefined;
+  private stabilized = false;
   private readonly chassis: RAPIER.RoundCuboid;
 
   constructor(
     entity: Entity,
     hx: number,
     private halfY: number,
-    hz: number,
+    private hz: number,
     private clearance: number,
   ) {
-    this.pose = fineExcavatorPose(entity.vehicleExcavator);
+    this.profile = isMobileCrane(entity) ? "crane" : isForklift(entity) ? "forklift" : undefined;
+    this.pose = this.readPose(entity);
     const bevel = 1 / SCALE;
     this.chassis = new RAPIER.RoundCuboid(
       hx - bevel,
@@ -46,6 +54,26 @@ export class ExcavatorBody {
   }
 
   private links(pose: number, whole: boolean) {
+    if (this.profile === "forklift")
+      return forkliftShapes(pose, this.halfY, this.hz, this.clearance, whole);
+    const arm = this.profile === "crane" ? craneLinkage(pose) : undefined;
+    if (arm) {
+      const { start, tip, yaw, pitch, length } = arm;
+      const sy = -Math.sin(yaw / 2);
+      const cy = Math.cos(yaw / 2);
+      const sp = Math.sin(pitch / 2);
+      const cp = Math.cos(pitch / 2);
+      const translation = {
+        x: (start.x + tip.x) / (2 * SCALE),
+        y: (start.z + tip.z) / (2 * SCALE) - this.halfY - this.clearance / 2,
+        z: (start.y + tip.y) / (2 * SCALE),
+      };
+      const rotation = { x: sy * sp, y: sy * cp, z: cy * sp, w: cy * cp };
+      const boom = new RAPIER.Cuboid(length / (2 * SCALE), 4 / SCALE, 4.5 / SCALE);
+      return whole
+        ? new RAPIER.Compound([this.chassis, boom], [ZERO, translation], [IDENTITY, rotation])
+        : new RAPIER.Compound([boom], [translation], [rotation]);
+    }
     const { points, yaw, pitches } = excavatorLinkage(pose);
     const shapes: RAPIER.Shape[] = [];
     const translations: RAPIER.Vector[] = [];
@@ -85,8 +113,18 @@ export class ExcavatorBody {
     return new RAPIER.ColliderDesc(this.links(this.pose, true));
   }
 
+  private readPose(entity: Entity) {
+    const rest =
+      this.profile === "crane"
+        ? CRANE_REST
+        : this.profile === "forklift"
+          ? FORKLIFT_REST
+          : undefined;
+    return fineExcavatorPose(entity.vehicleExcavator ?? rest);
+  }
+
   admit(entity: Entity, state: PhysicsBodyState, collider: RAPIER.Collider) {
-    state.excavatorPose = fineExcavatorPose(entity.vehicleExcavator);
+    state.excavatorPose = this.readPose(entity);
     if (entity.vehicleExcavatorTarget === undefined) delete state.excavatorTarget;
     else state.excavatorTarget = fineExcavatorPose(entity.vehicleExcavatorTarget);
     if (entity.vehicleExcavatorRate === undefined) delete state.excavatorRate;
@@ -99,20 +137,31 @@ export class ExcavatorBody {
     body: RAPIER.RigidBody,
     collider: RAPIER.Collider,
     statics: RAPIER.Collider | undefined,
+    world: RAPIER.World,
     action: ExcavatorAction | undefined,
+    loaded = false,
   ) {
     const pose = state.excavatorPose ?? this.pose;
     this.acceptControl(state, pose, action);
     const target = state.excavatorTarget;
-    if (target === undefined || Math.hypot(state.vx, state.vy) > 3) return;
+    const moving = Math.hypot(state.vx, state.vy) > 3;
+    if (this.profile === "crane")
+      this.stabilize(body, (loaded || action !== undefined || target !== undefined) && !moving);
+    if (target === undefined || moving) return;
     const { pose: next, rate } = advanceExcavatorPose(
       pose,
       target,
       state.excavatorRate ?? 0,
       PHYSICS_DT,
+      this.profile,
     );
     if (
-      statics?.intersectsShape(this.links(next, false), collider.translation(), collider.rotation())
+      statics?.intersectsShape(
+        this.links(next, false),
+        collider.translation(),
+        collider.rotation(),
+      ) ||
+      this.forksWouldPressDown(pose, next, world, body, collider)
     ) {
       delete state.excavatorTarget;
       delete state.excavatorRate;
@@ -126,6 +175,56 @@ export class ExcavatorBody {
     this.reshape(next, collider);
   }
 
+  private forksWouldPressDown(
+    pose: number,
+    next: number,
+    world: RAPIER.World,
+    body: RAPIER.RigidBody,
+    collider: RAPIER.Collider,
+  ) {
+    if (this.profile !== "forklift" || next === pose) return false;
+    const from = forkliftRig(pose);
+    const to = forkliftRig(next);
+    if (to.lift >= from.lift && to.tilt >= from.tilt) return false;
+    const pivot = collider.translation();
+    const rotation = collider.rotation();
+    const { mastX, mastZ, deck } = FORKLIFT;
+    const dx = (deck.back + deck.tip) / 2 - mastX;
+    const dz = deck.bottom + to.lift - mastZ;
+    const tiltSin = Math.sin(to.tilt);
+    const tiltCos = Math.cos(to.tilt);
+    const underside = rotateBodyVector(
+      worldRotation(rotation),
+      mastX + dx * tiltCos - dz * tiltSin,
+      0,
+      mastZ + dx * tiltSin + dz * tiltCos - (this.halfY + this.clearance / 2) * SCALE,
+    );
+    // The object carried above may overlap the probe as it settles. Only
+    // bodies with their centre at or beneath the blades oppose lowering.
+    const supportHeight = pivot.y + (underside.z + 1) / SCALE;
+    return !!world.intersectionWithShape(
+      pivot,
+      rotation,
+      forkliftShapes(next, this.halfY, this.hz, this.clearance, false, true),
+      RAPIER.QueryFilterFlags.EXCLUDE_SENSORS,
+      undefined,
+      collider,
+      body,
+      (candidate) => candidate.translation().y <= supportHeight,
+    );
+  }
+
+  private stabilize(body: RAPIER.RigidBody, active: boolean) {
+    if (active === this.stabilized) return;
+    this.stabilized = active;
+    body.lockTranslations(active, true);
+    body.lockRotations(active, true);
+    if (active) {
+      body.setLinvel(ZERO, true);
+      body.setAngvel(ZERO, true);
+    }
+  }
+
   private acceptControl(
     state: PhysicsBodyState,
     pose: number,
@@ -136,7 +235,7 @@ export class ExcavatorBody {
     if (held && held !== action) {
       delete state.excavatorHeld;
       if (target !== undefined) {
-        const stop = excavatorBrakeTarget(pose, target, state.excavatorRate ?? 0);
+        const stop = excavatorBrakeTarget(pose, target, state.excavatorRate ?? 0, this.profile);
         if (stop !== pose) {
           state.excavatorTarget = stop;
           return;

@@ -1,14 +1,21 @@
 import type { Entity } from "../entities/Entity.js";
 import { type ExcavatorAction, isExcavatorAction } from "../shared/ExcavatorInput.js";
 import { DUMP_BED, hasDumpBed } from "../traffic/DumpBed.js";
-import { isExcavator } from "../traffic/Excavator.js";
+import { isExcavator, nextExcavatorPose } from "../traffic/Excavator.js";
+import { FORKLIFT_REST, isForklift, isForkliftControl } from "../traffic/Forklift.js";
+import { isMobileCrane } from "../traffic/MobileCrane.js";
 import { isTowTruck, towCandidate } from "../traffic/Towing.js";
 import { isTransporter, transporterLoadCandidate } from "../traffic/Transporter.js";
 import { isVehicleOverturned } from "../traffic/Vehicle.js";
-import type { EquipmentAction } from "../traffic/VehicleEquipment.js";
+import {
+  type CraneToolAction,
+  type EquipmentAction,
+  isCraneToolAction,
+} from "../traffic/VehicleEquipment.js";
 import { linkedPartnerId, linkVehicles, unlinkVehicle } from "../traffic/VehicleLinks.js";
 import type { VehicleState } from "../traffic/VehicleRegistry.js";
 import { boardingDistance, vehicleVerticalDistance } from "../traffic/VehicleSeats.js";
+import { runCraneTool } from "./CraneControl.js";
 import { workExcavator } from "./ExcavatorControl.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
@@ -21,7 +28,7 @@ interface Context {
 }
 /** Each action changes only durable targets and couplings on its vehicle type. */
 const ACTIONS: Record<
-  Exclude<EquipmentAction, ExcavatorAction>,
+  Exclude<EquipmentAction, ExcavatorAction | CraneToolAction>,
   [(e: Entity) => boolean, (c: Context) => void]
 > = {
   tip: [
@@ -113,6 +120,21 @@ export function runEquipment(
     registry = realm.vehicleRegistry,
     car = Number.isSafeInteger(entityId) ? registry?.states.get(entityId) : undefined;
   if (!car || !registry) throw Error("Vehicle equipment unavailable.");
+  if (isMobileCrane(car.entity) && (isExcavatorAction(action) || isCraneToolAction(action))) {
+    if (!checkOperator(vehicles, session, car)) throw Error("Board the crane to work the boom.");
+    runCraneTool(realm, car.entity, action);
+    registry.onChange?.(car, false);
+    return;
+  }
+  if (isExcavatorAction(action) && isForklift(car.entity) && isForkliftControl(action)) {
+    if (!checkOperator(vehicles, session, car))
+      throw Error("Board the forklift to work the forks.");
+    if (car.entity.vehicleExcavatorTarget !== undefined) throw Error("The forks are still moving.");
+    const pose = car.entity.vehicleExcavator ?? FORKLIFT_REST;
+    const next = nextExcavatorPose(pose, action);
+    if (next !== pose) car.entity.vehicleExcavatorTarget = next;
+    return;
+  }
   if (isExcavatorAction(action)) {
     if (!isExcavator(car.entity)) throw Error("Vehicle equipment unavailable.");
     if (!checkOperator(vehicles, session, car)) throw Error("Board the excavator to work the arm.");
@@ -121,6 +143,7 @@ export function runEquipment(
     registry.onChange?.(car, false);
     return;
   }
+  if (isCraneToolAction(action)) throw Error("Vehicle equipment unavailable.");
   const entry = Object.hasOwn(ACTIONS, action) ? ACTIONS[action] : undefined;
   if (!entry?.[0](car.entity)) throw Error("Vehicle equipment unavailable.");
   const driving = checkOperator(vehicles, session, car),

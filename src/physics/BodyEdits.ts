@@ -22,7 +22,7 @@ export function admitEntityEdits(
     (entity.jumpVZ !== undefined && entity.jumpVZ !== s.vz);
   const grounded = entity.jumpVZ === undefined;
   const rotated =
-    entry.kind === "vehicle" &&
+    s.rotation !== undefined &&
     !!entity.bodyRotation &&
     !rotationsEqual(entity.bodyRotation, s.rotation);
   if (!moved && !rotated && !velocityChanged && grounded === s.grounded) return;

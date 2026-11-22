@@ -1,10 +1,13 @@
 import { bulldozerYardRecipe } from "../scenarios/BulldozerYardRecipe.js";
 import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
 import {
+  constructionCraneRecipe,
+  constructionCrateRunRecipe,
   constructionYardRecipe,
   constructionYardSite,
 } from "../scenarios/ConstructionYardRecipe.js";
 import { CROWD_VIEW, crowdBenchRecipe } from "../scenarios/CrowdBenchRecipe.js";
+import { forkliftYardRecipe } from "../scenarios/ForkliftYardRecipe.js";
 import { JUMP_STARTS, type JumpLane, jumpParkRecipe } from "../scenarios/JumpParkRecipe.js";
 import { outskirtsParkRecipe, PARK_STARTS } from "../scenarios/OutskirtsParkRecipe.js";
 import { CROSSING_STARTS, railCrossingRecipe } from "../scenarios/RailCrossingRecipe.js";
@@ -47,6 +50,9 @@ const STATIC_FIXTURES: Record<
   "tree-house": { recipe: treeHouseRecipe, starts: TREE_HOUSE_STARTS },
   "bulldozer-yard": { recipe: bulldozerYardRecipe, starts: {} },
   "construction-yard": { recipe: constructionYardRecipe, starts: {} },
+  "construction-crane": { recipe: constructionCraneRecipe, starts: {} },
+  "construction-forklift": { recipe: forkliftYardRecipe, starts: {} },
+  "construction-crate-run": { recipe: constructionCrateRunRecipe, starts: {} },
   "outskirts-park": { recipe: outskirtsParkRecipe, starts: PARK_STARTS },
   crossing: { recipe: railCrossingRecipe, starts: CROSSING_STARTS },
   garage: { recipe: undergroundGarageRecipe, starts: GARAGE_STARTS },
@@ -95,6 +101,9 @@ export function geometryStarts(
 const TERRAIN_FIXTURES = new Set([
   "bulldozer-yard",
   "construction-yard",
+  "construction-crane",
+  "construction-forklift",
+  "construction-crate-run",
   "realm",
   "crowd",
   "traffic",
@@ -109,6 +118,9 @@ const FOLLOW_FIXTURES = new Set(["outskirts-park", "realm", "train"]);
 const ZOOMS: Record<string, number> = {
   "bulldozer-yard": 0.6,
   "construction-yard": 0.55,
+  "construction-crane": 0.8,
+  "construction-forklift": 0.9,
+  "construction-crate-run": 0.68,
   "traffic-crowd": 0.125,
   crowd: CROWD_VIEW.zoom,
   "car-jumps": 0.25,
@@ -123,9 +135,14 @@ const ZOOMS: Record<string, number> = {
 /** Terrain, camera and zoom per fixture. `&zoom=` overrides zoom for overview captures. */
 export function geometryView({ fixture, generated, ambient }: FixtureChoice) {
   const follow = fixture.startsWith("car-") || FOLLOW_FIXTURES.has(fixture);
-  const yard = fixture === "construction-yard" ? constructionYardSite() : undefined;
+  const crane = fixture === "construction-crane";
+  const crateRun = fixture === "construction-crate-run";
+  const yard =
+    fixture === "construction-yard" || crane || crateRun ? constructionYardSite() : undefined;
   const fixed = yard
-    ? { wx: (yard.center.x - 4) * 16, wy: yard.center.y * 16 - 38 }
+    ? crateRun
+      ? { wx: yard.center.x * 16, wy: (yard.center.y + 6) * 16 }
+      : { wx: (yard.center.x + (crane ? 7 : -4)) * 16, wy: yard.center.y * 16 - (crane ? 52 : 38) }
     : generated?.bridge
       ? { wx: generated.bridge.x * 16, wy: generated.bridge.y * 16 - 16 }
       : fixture === "tree-house"
@@ -142,6 +159,39 @@ export function geometryView({ fixture, generated, ambient }: FixtureChoice) {
 }
 
 export function GeometryIntro({ fixture }: { fixture: string }) {
+  if (fixture === "construction-forklift")
+    return (
+      <>
+        <h1>Forklift loading yard</h1>
+        <p>
+          Board the forklift with E or Interact. Drive straight into the pallet’s slots. Open Work
+          forks with F or D-pad Down, then raise the forks and tilt them back a little. Close the
+          controls to drive. Lower the load onto the flatbed and reverse out.
+        </p>
+      </>
+    );
+  if (fixture === "construction-crate-run")
+    return (
+      <>
+        <h1>Crate run</h1>
+        <p>
+          Press E or Interact to get in the racing coupe. Hold forward to drive through the stack.
+          Use Reset scene to stack the crates again.
+        </p>
+      </>
+    );
+  if (fixture === "construction-crane")
+    return (
+      <>
+        <h1>Mobile crane</h1>
+        <p>
+          Board with E or Interact, then open Work crane. Hold a control to move the boom or cable.
+          Extend toward a pallet and pay out the cable. Press Hook / release to grab it. Reel in,
+          raise the boom and slew over the flatbed to set it down. Switch to the wrecking ball and
+          swing at the concrete blocks.
+        </p>
+      </>
+    );
   if (fixture === "construction-yard")
     return (
       <>

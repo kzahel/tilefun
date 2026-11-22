@@ -2,12 +2,16 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { excavatorAngles } from "../traffic/Excavator.js";
 import { COMPACT_CAR_GLB } from "./CarMeshDefinition.js";
+import { type CraneCableEnd, CraneMeshRig } from "./CraneMeshRig.js";
+import { ForkliftMeshRig } from "./ForkliftMeshRig.js";
 import type { Point3, SurfaceMesh } from "./SurfaceReceivers.js";
 import { VehicleEmergencyLights } from "./VehicleEmergencyLights.js";
 import { batchVehicleGeometry } from "./VehicleGeometryBatches.js";
 
 export interface CarMeshAssetOptions {
   batch?: boolean;
+  /** Rigid cargo uses the body renderer without a wheel or vehicle rig. */
+  cargo?: boolean;
   /** Legacy sprite-height registration. Physical residents retain authored height. */
   heightScale?: number;
   /** Ground-plane contact cue; native sprite fallback already contains its shadow. */
@@ -41,6 +45,8 @@ export class CarMeshAsset {
   /** Compiled draw meshes; meshCount retains the authored source-part count. */
   readonly drawMeshCount: number;
   readonly surfaceGeometry: SurfaceMesh;
+  private forklift: ForkliftMeshRig | undefined;
+  private crane: CraneMeshRig | undefined;
   private excavator?: {
     slew: THREE.Object3D;
     boom: THREE.Object3D;
@@ -260,6 +266,8 @@ export class CarMeshAsset {
         if (!propeller) throw Error("Missing authored boat propeller");
         this.propeller = propeller;
         this.propellerRest = this.propeller.quaternion.clone();
+      } else if (options?.cargo) {
+        if (rolls.size || !meshes) throw Error("Invalid authored cargo mesh");
       } else {
         for (const id of ["FL", "FR", "RL", "RR"])
           if (!rolls.has(id)) throw Error(`Missing authored car wheel ${id}`);
@@ -367,6 +375,10 @@ export class CarMeshAsset {
         this.resources.add(geometry);
         this.resources.add(material);
       }
+      this.forklift = ForkliftMeshRig.load(scene);
+      this.forklift?.set();
+      this.crane = CraneMeshRig.load(scene, (resource) => this.resources.add(resource));
+      this.crane?.set(undefined);
       this.lights = new VehicleEmergencyLights(scene, {
         periodSeconds: 1,
         pulseWindows: [
@@ -424,7 +436,9 @@ export class CarMeshAsset {
   setEmergency(enabled: boolean, time: number) {
     this.lights?.setState(enabled, time);
   }
-  setExcavator(pose?: number) {
+  setExcavator(pose?: number, cableEnd?: CraneCableEnd) {
+    this.crane?.set(pose, cableEnd);
+    this.forklift?.set(pose);
     const parts = this.excavator;
     if (!parts) return;
     const angles = excavatorAngles(pose);

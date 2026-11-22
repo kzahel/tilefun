@@ -3,6 +3,11 @@ import { AudioManager } from "../audio/AudioManager.js";
 import type { LabDiagnostics } from "../client/LabScene.js";
 import { LabView } from "../client/LabView.js";
 import type { RecipeWorldClient } from "../client/RecipeWorldClient.js";
+import {
+  CONSTRUCTION_BLOCK,
+  CONSTRUCTION_CRATE,
+  CONSTRUCTION_PALLET,
+} from "../entities/ConstructionCargo.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import {
   GENERATED_CROSSINGS,
@@ -13,6 +18,9 @@ import { DYNAMICS_STARTS } from "../scenarios/VehicleDynamicsRecipe.js";
 import { fixedCamera } from "../session/View.js";
 import { required } from "../shared/required.js";
 import { excavatorAngles, isExcavator } from "../traffic/Excavator.js";
+import { isFlatbed, onFlatbed } from "../traffic/Flatbed.js";
+import { forkliftRig, isForklift } from "../traffic/Forklift.js";
+import { craneRig, isMobileCrane } from "../traffic/MobileCrane.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { RACE_MODELS } from "../traffic/VehiclePerformance.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
@@ -42,6 +50,9 @@ const FIXTURES = [
   "car-dynamics",
   "bulldozer-yard",
   "construction-yard",
+  "construction-crane",
+  "construction-forklift",
+  "construction-crate-run",
   "car-jumps",
   "tree-house",
   "outskirts-park",
@@ -137,6 +148,56 @@ function GeometryFixtures({ initial }: { initial: string }) {
       }),
       onFrame: ({ client }) => {
         const p = client.replica.playerEntity;
+        if (fixture === "construction-crane") {
+          const crane = client.replica.entities.find(isMobileCrane);
+          if (crane) {
+            const flatbed = client.replica.entities.find(isFlatbed);
+            c.dataset.cranePalletsOnDeck = String(
+              flatbed
+                ? client.replica.entities.filter(
+                    (e) => e.type === CONSTRUCTION_PALLET && onFlatbed(flatbed, e),
+                  ).length
+                : 0,
+            );
+            c.dataset.craneBlocksUp = String(
+              client.replica.entities.filter(
+                (e) => e.type === CONSTRUCTION_BLOCK && (e.wz ?? 0) > 12,
+              ).length,
+            );
+            const rig = craneRig(crane.vehicleExcavator);
+            c.dataset.cranePose = JSON.stringify(rig);
+            c.dataset.craneMoving = String(crane.vehicleExcavatorTarget !== undefined);
+            const load = client.replica.entities.find((e) => e.id === crane.vehicleCraneLoadId);
+            c.dataset.craneLoad = load?.type ?? "";
+            c.dataset.cranePalletRotation =
+              load?.type === CONSTRUCTION_PALLET ? JSON.stringify(load.bodyRotation ?? []) : "";
+          }
+        }
+        if (fixture === "construction-forklift") {
+          const forklift = client.replica.entities.find(isForklift);
+          const flatbed = client.replica.entities.find(isFlatbed);
+          const pallets = client.replica.entities.filter((e) => e.type === CONSTRUCTION_PALLET);
+          if (forklift) {
+            c.dataset.forkliftPose = JSON.stringify(forkliftRig(forklift.vehicleExcavator));
+            c.dataset.forkliftX = String(forklift.position.wx);
+            c.dataset.forkliftMoving = String(forklift.vehicleExcavatorTarget !== undefined);
+          }
+          c.dataset.forkliftPalletZ = String(Math.max(0, ...pallets.map((e) => e.wz ?? 0)));
+          c.dataset.forkliftLoadedDeck = String(
+            !!flatbed && pallets.some((e) => onFlatbed(flatbed, e)),
+          );
+        }
+        if (fixture === "construction-crate-run") {
+          const crates = client.replica.entities.filter((e) => e.type === CONSTRUCTION_CRATE);
+          c.dataset.crateCount = String(crates.length);
+          c.dataset.cratesStacked = String(crates.filter((e) => (e.wz ?? 0) > 27).length);
+          c.dataset.cratesTumbling = String(
+            crates.filter(
+              ({ bodyRotation }) =>
+                bodyRotation && Math.hypot(bodyRotation[0], bodyRotation[1]) > 0.5,
+            ).length,
+          );
+        }
         if (fixture === "construction-yard") {
           const excavator = client.replica.entities.find(isExcavator);
           if (excavator) {

@@ -4,6 +4,8 @@ import { buildingDoors, exteriorDoors } from "../interiors/BuildingDoors.js";
 import { DoorApproach, doorwayReached, towardDoor } from "../interiors/DoorTraversal.js";
 import { nearestStationBench } from "../railway/StationBench.js";
 import { isExcavator } from "../traffic/Excavator.js";
+import { isForklift } from "../traffic/Forklift.js";
+import { isMobileCrane } from "../traffic/MobileCrane.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { driveCandidate, type EquipmentRequest, equipmentPrompt } from "./VehicleEquipment.js";
 
@@ -30,6 +32,8 @@ export type DoorRequest =
   | { type: "enter-building"; featureId: string; doorId?: string; walkThrough?: boolean }
   | { type: "exit-building"; doorId?: string; walkThrough?: boolean };
 
+export type WorkArmKind = "crane" | "excavator" | "forklift";
+
 export interface VehicleChoice {
   /** Get in or out, or call a train; null when there is none or it is not allowed. */
   readonly request: VehicleRequest | null;
@@ -41,7 +45,7 @@ export interface VehicleChoice {
   readonly key: string;
   /** The seat is in a vehicle (its driving hints show). */
   readonly inside: boolean;
-  readonly excavatorId?: number;
+  readonly workArm?: { id: number; kind: WorkArmKind };
 }
 
 export function vehicleChoice(view: PlaceView, allowed: boolean): VehicleChoice {
@@ -61,17 +65,31 @@ export function vehicleChoice(view: PlaceView, allowed: boolean): VehicleChoice 
           ? `station:${bench.id}`
           : "";
   const request = allowed && !view.editorEnabled ? seatRequest(current, candidate, bench) : null;
-  const label = current ? "Get out" : bench ? "Call train" : "Drive car";
+  const label = current
+    ? "Get out"
+    : bench
+      ? "Call train"
+      : candidate && isForklift(candidate)
+        ? "Drive forklift"
+        : "Drive car";
+  const armKind = current && workArmKind(current);
   return {
     request,
     label,
     equipment,
     key,
     inside: !!current,
-    ...(allowed && !view.editorEnabled && current && isExcavator(current) && !equipment
-      ? { excavatorId: current.id }
+    ...(allowed && !view.editorEnabled && current && armKind && !equipment
+      ? { workArm: { id: current.id, kind: armKind } }
       : {}),
   };
+}
+
+function workArmKind(entity: { type: string }): WorkArmKind | undefined {
+  if (isExcavator(entity)) return "excavator";
+  if (isMobileCrane(entity)) return "crane";
+  if (isForklift(entity)) return "forklift";
+  return undefined;
 }
 
 /** Out of the vehicle the seat is in, into the nearest one, or a train to its bench. */

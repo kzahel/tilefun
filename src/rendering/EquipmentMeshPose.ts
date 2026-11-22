@@ -1,6 +1,8 @@
 import type { Entity } from "../entities/Entity.js";
 import { clampBedTilt, gateAngleForTilt, hasDumpBed } from "../traffic/DumpBed.js";
 import { EXCAVATOR_REST, isExcavator } from "../traffic/Excavator.js";
+import { FORKLIFT_REST, isForklift } from "../traffic/Forklift.js";
+import { CRANE_REST, isMobileCrane } from "../traffic/MobileCrane.js";
 import { isTowTruck } from "../traffic/Towing.js";
 import { isTransporter } from "../traffic/Transporter.js";
 import type { MeshInstance } from "./MeshPresentation.js";
@@ -15,6 +17,8 @@ export function equipmentMeshPose(
 ): Partial<
   Pick<MeshInstance, "bedTilt" | "excavatorPose" | "bedGateAngle" | "towActive" | "transportRamp">
 > {
+  if (isForklift(entity)) return { excavatorPose: entity.vehicleExcavator ?? FORKLIFT_REST };
+  if (isMobileCrane(entity)) return { excavatorPose: entity.vehicleExcavator ?? CRANE_REST };
   if (isExcavator(entity)) return { excavatorPose: entity.vehicleExcavator ?? EXCAVATOR_REST };
   if (hasDumpBed(entity)) {
     const tilt = clampBedTilt(entity.vehicleBedTilt);

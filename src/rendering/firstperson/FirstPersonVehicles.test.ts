@@ -24,6 +24,7 @@ function sharedAsset() {
     setTransportRamp: rig,
     setTowLift: rig,
     setTravel: rig,
+    setExcavator: rig,
     setDumpBed: rig,
     // The shared pose changes the asset's own material, as emergency lights do.
     setEmergency: (on: boolean) => body.color.setRGB(on ? 2 : 1, 1, 1),

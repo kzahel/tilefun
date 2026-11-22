@@ -129,6 +129,18 @@ export class NaturalStrategy extends RailwayStrategy {
   boats(cx: number, cy: number) {
     return this.nature.boats(cx, cy);
   }
+  constructionCargo(cx: number, cy: number) {
+    const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
+    return this.motocross
+      .query(bounds)
+      .flatMap((park) => constructionYard(park).cargo)
+      .filter(
+        (actor) =>
+          Math.floor(actor.wx / CHUNK_SIZE_PX) === cx &&
+          Math.floor(actor.wy / CHUNK_SIZE_PX) === cy,
+      );
+  }
+
   override actors(cx: number, cy: number) {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
     const residents = this.nature.farms
@@ -149,6 +161,7 @@ export class NaturalStrategy extends RailwayStrategy {
       ...residents,
       ...pets,
       ...this.spectators(cx, cy),
+      ...this.constructionCargo(cx, cy),
       ...this.motocross
         .query(bounds)
         .flatMap((p) => constructionYard(p).rubble)

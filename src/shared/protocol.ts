@@ -281,6 +281,7 @@ export interface EntitySnapshot {
   vehicleExcavator?: number;
   vehicleExcavatorTarget?: number;
   vehicleExcavatorRate?: number;
+  vehicleCraneLoadId?: number;
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

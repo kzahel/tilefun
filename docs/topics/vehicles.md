@@ -1,5 +1,15 @@
 # Vehicles: shared physics baseline
 
+[264](../tactical/264-forklift.md) adds a working forklift to construction
+yards. The hold controls slide the forks up the mast and tilt them. Physical
+fork tines fit between wooden runners and lift the load through contact.
+
+[261](../tactical/261-mobile-crane.md) gives the six-wheel mobile crane powered
+slew, lift, telescope and winch controls. Hook a pallet onto the flatbed or
+swap in a wrecking ball to knock down the practice stack. The shared solver
+uses a rope joint for suspended cargo and a measured deck collider. The 3D
+pallet can pitch, roll and twist around its lift eye.
+
 [258](../tactical/258-construction-yards.md) adds a tracked excavator to
 generated construction yards. Its four working joints and bucket load are
 replicated and durable. Hold a Work arm control for continuous motion. The

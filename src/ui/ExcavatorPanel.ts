@@ -2,10 +2,33 @@ import { controllerInput } from "../input/ControllerInput.js";
 import { EXCAVATOR_ACTIONS, type ExcavatorAction } from "../shared/ExcavatorInput.js";
 import type { Movement } from "../shared/Movement.js";
 import { required } from "../shared/required.js";
-import { EQUIPMENT_LABELS } from "../traffic/VehicleEquipment.js";
+import { EQUIPMENT_LABELS, type EquipmentAction } from "../traffic/VehicleEquipment.js";
 import { activateMenu, deactivateMenu } from "./MenuNavigation.js";
+import type { WorkArmKind } from "./PlacePrompts.js";
 
+const craneLabels = [
+  "Slew left",
+  "Slew right",
+  "Lower boom",
+  "Raise boom",
+  "Retract boom",
+  "Extend boom",
+  "Reel in",
+  "Pay out",
+];
 const shortcuts: readonly string[] = ["j", "l", "k", "i", "u", "o", "n", "m"];
+
+const forkliftControls = [
+  { action: "stick-in", key: "k", label: "Lower forks" },
+  { action: "stick-out", key: "i", label: "Raise forks" },
+  { action: "boom-down", key: "u", label: "Tilt forward" },
+  { action: "boom-up", key: "o", label: "Tilt back" },
+] as const;
+const names = {
+  crane: "Crane controls",
+  excavator: "Excavator controls",
+  forklift: "Forklift controls",
+};
 
 export class ExcavatorPanel {
   private readonly root = document.createElement("div");
@@ -13,22 +36,31 @@ export class ExcavatorPanel {
   private listeners: AbortController | undefined;
   private held: { action: ExcavatorAction; source: string | number } | undefined;
 
-  constructor(send: (action: ExcavatorAction) => void) {
+  constructor(send: (action: EquipmentAction) => void, kind: WorkArmKind) {
+    const crane = kind === "crane";
+    const controls =
+      kind === "forklift"
+        ? forkliftControls
+        : EXCAVATOR_ACTIONS.map((action, index) => ({
+            action,
+            key: required(shortcuts[index]),
+            label: crane ? required(craneLabels[index]) : EQUIPMENT_LABELS[action],
+          }));
     this.root.dataset.excavatorControls = "";
     this.root.setAttribute("role", "group");
-    this.root.setAttribute("aria-label", "Excavator controls");
+    this.root.setAttribute("aria-label", names[kind]);
     this.root.style.cssText =
       "position:absolute;top:12px;right:12px;z-index:81;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;padding:7px;max-width:230px;color:white;background:#243a32f2;border-radius:8px";
     const hint = document.createElement("span");
     hint.textContent = "Hold a button, key or A";
     hint.style.gridColumn = "span 2";
     this.root.append(hint);
-    EXCAVATOR_ACTIONS.forEach((action, index) => {
+    for (const { action, key, label } of controls) {
       const button = document.createElement("button");
       button.type = "button";
       button.style.minHeight = "40px";
-      const shortcut = required(shortcuts[index]).toUpperCase();
-      button.textContent = `${EQUIPMENT_LABELS[action]} · ${shortcut}`;
+      const shortcut = key.toUpperCase();
+      button.textContent = `${label} · ${shortcut}`;
       button.setAttribute("aria-keyshortcuts", shortcut);
       button.style.touchAction = "none";
       button.onpointerdown = (event) => {
@@ -48,7 +80,20 @@ export class ExcavatorPanel {
         if (event.code === "Enter" || event.code === "Space") this.holdKey(event, action);
       };
       this.root.append(button);
-    });
+    }
+    if (crane) {
+      const add = (action: EquipmentAction, key: string) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.style.minHeight = "40px";
+        button.textContent = `${EQUIPMENT_LABELS[action]} · ${key}`;
+        button.setAttribute("aria-keyshortcuts", key);
+        button.onclick = () => send(action);
+        this.root.append(button);
+      };
+      add("crane-hook", "H");
+      add("crane-tool", "T");
+    }
     const close = document.createElement("button");
     close.type = "button";
     close.textContent = "Back to driving · Esc / B";
@@ -56,8 +101,14 @@ export class ExcavatorPanel {
     close.onclick = () => this.close();
     this.root.append(close);
     this.root.onkeydown = (event) => {
-      const actionIndex = shortcuts.indexOf(event.key.toLowerCase());
-      const action = EXCAVATOR_ACTIONS[actionIndex];
+      const key = event.key.toLowerCase();
+      if (crane && (key === "h" || key === "t")) {
+        event.preventDefault();
+        event.stopPropagation();
+        if (!event.repeat) send(key === "h" ? "crane-hook" : "crane-tool");
+        return;
+      }
+      const action = controls.find((control) => control.key === key)?.action;
       if (!action) return;
       this.holdKey(event, action);
     };

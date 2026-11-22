@@ -2,6 +2,7 @@ import type { BlendGraph } from "../autotile/BlendGraph.js";
 import { BOAT_MODEL, BOAT_SPRITE } from "../boats/Boat.js";
 import { PROMOTED_CHARACTERS } from "../characters/PromotedCharacters.js";
 import { CHICKEN_SPRITE_SIZE, PLAYER_SPRITE_SIZE, TILE_SIZE } from "../config/constants.js";
+import { CONSTRUCTION_CARGO } from "../entities/ConstructionCargo.js";
 import { CONSTRUCTION_RUBBLE } from "../entities/ConstructionRubble.js";
 import { FARM_IMAGE, FARM_SHEET, GARDEN_FENCE, GARDEN_FENCE_SIDE } from "../farming/FarmActors.js";
 import { FARM_GATE_SHEET } from "../farming/FarmGate.js";
@@ -55,6 +56,12 @@ async function loadSpriteAsset(entry: SpriteAsset): Promise<ImageBitmap> {
   }
 }
 export const SPRITE_MANIFEST: SpriteAsset[] = [
+  ...[...new Set(Object.values(CONSTRUCTION_CARGO).map(({ sprite }) => sprite))].map((sprite) => ({
+    key: sprite.sheetKey,
+    path: `assets/vehicles/${sprite.sheetKey}.png`,
+    w: sprite.spriteWidth,
+    h: sprite.spriteHeight,
+  })),
   { key: CONSTRUCTION_RUBBLE, path: "assets/vehicles/construction-rubble.png", w: 16, h: 12 },
   {
     key: "car-transporter-ramp-v2",

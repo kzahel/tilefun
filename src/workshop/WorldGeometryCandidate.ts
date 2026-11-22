@@ -1,6 +1,11 @@
 import { sha256 } from "../art/ArtSource.js";
 import { bulldozerYardRecipe } from "../scenarios/BulldozerYardRecipe.js";
-import { constructionYardRecipe } from "../scenarios/ConstructionYardRecipe.js";
+import {
+  constructionCraneRecipe,
+  constructionCrateRunRecipe,
+  constructionYardRecipe,
+} from "../scenarios/ConstructionYardRecipe.js";
+import { forkliftYardRecipe } from "../scenarios/ForkliftYardRecipe.js";
 import {
   GENERATED_CROSSINGS,
   generatedCrossingRecipe,
@@ -53,6 +58,26 @@ const GEOMETRY_FIXTURES = {
     id: "geometry:car-dynamics-v1",
     name: driving("car-dynamics"),
     recipe: () => vehicleDynamicsRecipe(),
+  },
+  "construction-forklift": {
+    id: "geometry:construction-forklift-v1",
+    name: "Construction · Forklift loading yard",
+    recipe: forkliftYardRecipe,
+    prompt:
+      "Drive the forks into a pallet, lift it onto the flatbed and back out, or build a stack of wooden crates.",
+  },
+  "construction-crate-run": {
+    id: "geometry:construction-crate-run-v1",
+    name: "City outskirts · Crate run",
+    recipe: constructionCrateRunRecipe,
+    prompt: "Drive the racing coupe through the stack of 3D crates and watch them tumble.",
+  },
+  "construction-crane": {
+    id: "geometry:construction-crane-v1",
+    name: "City outskirts · Mobile crane",
+    recipe: constructionCraneRecipe,
+    prompt:
+      "Lift a pallet onto the flatbed, then knock down the practice blocks with the wrecking ball.",
   },
   "construction-yard": {
     id: "geometry:construction-yard-v1",

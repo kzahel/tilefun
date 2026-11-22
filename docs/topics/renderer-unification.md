@@ -17,6 +17,9 @@ a mixed-species crowd ran locally. The art disposition lives in the tactical.
 bank and exact Workshop play links. The shared view falls through to the sprite
 for pending or failed loads or after using its 24-model draw budget. A view
 starts at most four model loads concurrently and retains up to 48 model batches.
+[261](../tactical/261-mobile-crane.md) uses the same rigid model path for the
+four-axis crane and its loose wooden pallet. The pallet draws its solved
+quaternion in the shared scene, with a sprite fallback while the model loads.
 Updated: 2026-11-20.
 
 Owns the move to one world renderer: its status, parity checklist, device

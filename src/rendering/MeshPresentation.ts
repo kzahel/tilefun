@@ -1,5 +1,7 @@
+import { authoredCargoForAsset } from "./AuthoredCargoMeshes.js";
 import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
+import type { CraneCableEnd } from "./CraneMeshRig.js";
 
 /** Data-only optional presentation. SpriteItem remains the complete fallback. */
 export interface MeshInstance {
@@ -16,6 +18,7 @@ export interface MeshInstance {
   readonly presentationTime?: number;
   readonly bedTilt?: number;
   readonly excavatorPose?: number;
+  readonly craneCableEnd?: CraneCableEnd;
   readonly bedGateAngle?: number;
   readonly transportRamp?: boolean;
   readonly gradePitch?: number;
@@ -31,7 +34,12 @@ export const AMBULANCE_MESH = "ambulance-authored-v3";
 export const COMPACT_CAR_MESH = "compact-1-authored-v7";
 /** Shared conservative sphere for culling and the isolated body target. */
 export function vehicleMeshRadius(assetId: string): number {
-  return authoredVehicleForAsset(assetId)?.radius ?? authoredTrainForAsset(assetId)?.radius ?? 64;
+  return (
+    authoredVehicleForAsset(assetId)?.radius ??
+    authoredTrainForAsset(assetId)?.radius ??
+    authoredCargoForAsset(assetId)?.radius ??
+    64
+  );
 }
 export function yawOrientation(yaw: number): MeshInstance["orientation"] {
   return [0, 0, Math.sin(yaw / 2), Math.cos(yaw / 2)];

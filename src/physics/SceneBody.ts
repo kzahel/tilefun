@@ -1,15 +1,31 @@
 import RAPIER from "@dimforge/rapier3d-compat";
 import { isBoat } from "../boats/Boat.js";
+import {
+  CONSTRUCTION_BLOCK,
+  CONSTRUCTION_CRATE,
+  CONSTRUCTION_PALLET,
+  isWoodenCargo,
+  WRECKING_BALL,
+} from "../entities/ConstructionCargo.js";
 import type { Entity } from "../entities/Entity.js";
 import { isTrain } from "../railway/Train.js";
 import { hasDumpBed } from "../traffic/DumpBed.js";
 import { fineExcavatorPose, isExcavator } from "../traffic/Excavator.js";
+import { isFlatbed } from "../traffic/Flatbed.js";
+import { FORKLIFT_REST, isForklift } from "../traffic/Forklift.js";
+import { CRANE_REST, isMobileCrane } from "../traffic/MobileCrane.js";
 import { isTransporter } from "../traffic/Transporter.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import { rapierRotation, rotateBodyVector, yawRotation } from "./BodyRotation.js";
 import { DumpBedBody, setChassisBoxMass } from "./DumpBedBody.js";
 import { ExcavatorBody } from "./ExcavatorBody.js";
-import { type physicsBodyDimensions, physicsBodyMotion } from "./PhysicsBodies.js";
+import { flatbedCollider } from "./FlatbedBody.js";
+import { woodenCargoShape } from "./ForkliftShapes.js";
+import {
+  type physicsBodyDimensions,
+  physicsBodyMotion,
+  tracksBodyRotation,
+} from "./PhysicsBodies.js";
 import { PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
 import type { PhysicsBodyKind, PhysicsBodyState } from "./PhysicsState.js";
 import { TransporterBody } from "./TransporterBody.js";
@@ -85,8 +101,10 @@ function rigidBody(
     (entity.wz ?? 0) / SCALE + center.z,
     entity.position.wy / SCALE + d.offsetY / SCALE + center.y - origin.z,
   );
-  if (kind === "vehicle") desc.setRotation(rapierRotation(rotation));
+  if (tracksBodyRotation(entity, kind)) desc.setRotation(rapierRotation(rotation));
   if (car) desc.setAngularDamping(0.35);
+  else if (entity.type === CONSTRUCTION_CRATE) desc.setAngularDamping(0.35).setLinearDamping(0.6);
+  else if (isWoodenCargo(entity.type)) desc.setAngularDamping(0.65).setLinearDamping(1.5);
   else if (kind !== "loose") desc.enabledRotations(false, kind === "vehicle", false);
   else desc.lockRotations().setLinearDamping(1.5);
   const body = world.createRigidBody(desc);
@@ -122,18 +140,22 @@ function colliderDesc(
   // travel instead of soft-CCD's premature face constraint at the seam.
   const bevel = Math.min(car ? 1 / SCALE : 0.01, hx / 4, halfY / 4, hz / 4);
   const shape =
-    entity.type === "ball"
+    entity.type === "ball" || entity.type === WRECKING_BALL
       ? RAPIER.ColliderDesc.ball(Math.min(hx, hz, halfY))
-      : articulated
-        ? articulated.colliderDesc()
-        : kind === "character" || kind === "vehicle"
-          ? RAPIER.ColliderDesc.roundCuboid(
-              hx - bevel,
-              halfY - clearance / 2 - bevel,
-              hz - bevel,
-              bevel,
-            )
-          : RAPIER.ColliderDesc.cuboid(hx, halfY, hz);
+      : isWoodenCargo(entity.type)
+        ? new RAPIER.ColliderDesc(woodenCargoShape(entity.type))
+        : articulated
+          ? articulated.colliderDesc()
+          : car && isFlatbed(entity)
+            ? flatbedCollider(hx, halfY, hz, clearance)
+            : kind === "character" || kind === "vehicle"
+              ? RAPIER.ColliderDesc.roundCuboid(
+                  hx - bevel,
+                  halfY - clearance / 2 - bevel,
+                  hz - bevel,
+                  bevel,
+                )
+              : RAPIER.ColliderDesc.cuboid(hx, halfY, hz);
   shape
     .setTranslation(0, clearance / 2, 0)
     // The transporter's ramp and deck carry cars on their wheels, not by scraping.
@@ -154,6 +176,11 @@ function colliderDesc(
       vehiclePerformance(entity.type).mass ?? 8,
       halfY * (2 * CHASSIS_CENTRE_OF_MASS - 1) - clearance / 2,
     );
+  else if (entity.type === WRECKING_BALL) shape.setMass(1.5);
+  else if (entity.type === CONSTRUCTION_CRATE)
+    shape.setMass(0.24).setFriction(0.72).setRestitution(0.2);
+  else if (entity.type === CONSTRUCTION_PALLET || entity.type === CONSTRUCTION_BLOCK)
+    shape.setMass(entity.type === CONSTRUCTION_PALLET ? 0.45 : 0.32);
   else shape.setMass(kind === "vehicle" ? 8 : kind === "loose" ? 0.2 : 1);
   return shape;
 }
@@ -180,7 +207,7 @@ function initialState(
     vz: entity.jumpVZ ?? 0,
     heading: vehicle ? d.yaw : 0,
     prevHeading: vehicle ? d.yaw : 0,
-    ...(vehicle
+    ...(tracksBodyRotation(entity, kind)
       ? {
           rotation,
           prevRotation: rotation,
@@ -213,8 +240,12 @@ export function createSceneBody(
     hz = d.depth / 2 / SCALE;
   const clearance = car ? Math.min(4, d.height * 0.22) / SCALE : 0;
   const bed = car && hasDumpBed(entity) ? new DumpBedBody(entity, halfY, clearance) : undefined;
+  const crane = isMobileCrane(entity);
+  const forklift = isForklift(entity);
   const excavator =
-    car && isExcavator(entity) ? new ExcavatorBody(entity, hx, halfY, hz, clearance) : undefined;
+    car && (isExcavator(entity) || crane || forklift)
+      ? new ExcavatorBody(entity, hx, halfY, hz, clearance)
+      : undefined;
   const transporter =
     car && isTransporter(entity) ? new TransporterBody(entity, halfY, clearance) : undefined;
   const { body, rotation } = rigidBody(world, origin, entity, kind, d, car);
@@ -252,7 +283,14 @@ export function createSceneBody(
     held: false,
     state: {
       ...initialState(entity, kind, d, rotation, bed),
-      ...(excavator ? { excavatorPose: fineExcavatorPose(entity.vehicleExcavator) } : {}),
+      ...(excavator
+        ? {
+            excavatorPose: fineExcavatorPose(
+              entity.vehicleExcavator ??
+                (crane ? CRANE_REST : forklift ? FORKLIFT_REST : undefined),
+            ),
+          }
+        : {}),
       ...(excavator && entity.vehicleExcavatorTarget !== undefined
         ? { excavatorTarget: fineExcavatorPose(entity.vehicleExcavatorTarget) }
         : {}),

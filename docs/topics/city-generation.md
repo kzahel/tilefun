@@ -4,6 +4,12 @@
 dry east infield of each admitted motocross park. The yard uses the normal
 terrain, prop, actor and parked-vehicle paths. Map travel lands beside the
 working excavator. Use a fresh regional world for the complete layout.
+[261](../tactical/261-mobile-crane.md) adds the mobile crane, flatbed, two
+pallets and a block stack inside the same yard. Each uses a stable yard identity.
+[263](../tactical/263-construction-crate-run.md) puts a racing coupe and a
+nine-crate stack on the yard’s south apron.
+[264](../tactical/264-forklift.md) parks a working forklift and two pallets
+near the yard’s north fence.
 
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.

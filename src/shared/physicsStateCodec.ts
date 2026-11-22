@@ -32,7 +32,11 @@ const FIELDS = [
 const BODY_BYTES = 118;
 const LEGACY_EXCAVATOR_BYTES = 8;
 const EXCAVATOR_BYTES = 20;
-const VEHICLE_BYTES = 53; // Sleep, rotations, angular velocity, dump-bed tilt/target.
+const ROTATION_BYTES = 44; // Current and previous quaternions and angular velocity.
+const VEHICLE_BYTES = 1 + ROTATION_BYTES + 8; // Flags, rotation and bed angles.
+const JUMP_QUEUED = 1;
+const LOOSE_ROTATION = 2;
+const LOOSE_SLEEPING = 4;
 const HEADER_BYTES = 16;
 const CONTACT_BYTES = 8;
 const MAX_CONTACTS = (MAX_PREDICTION_BODIES * (MAX_PREDICTION_BODIES - 1)) / 2;
@@ -54,7 +58,9 @@ export function physicsStateBytes(state?: PhysicsState): number {
             (b.kind === "vehicle"
               ? VEHICLE_BYTES +
                 (b.excavatorPose === undefined ? 0 : EXCAVATOR_BYTES + (b.excavatorHeld ? 1 : 0))
-              : 0),
+              : b.kind === "loose" && b.rotation
+                ? ROTATION_BYTES
+                : 0),
           0,
         ) +
         state.contacts.length * CONTACT_BYTES
@@ -74,6 +80,31 @@ function finite(value: number) {
   if (!Number.isFinite(value)) throw Error("Non-finite physics state");
   return value;
 }
+function writeBodyRotation(view: DataView, offset: number, body: PhysicsBodyState) {
+  for (const value of [
+    ...(body.rotation ?? yawRotation(body.heading)),
+    ...(body.prevRotation ?? body.rotation ?? yawRotation(body.prevHeading)),
+    ...(body.angularVelocity ?? [0, 0, 0]),
+  ]) {
+    view.setFloat32(offset, finite(Math.fround(value)), true);
+    offset += 4;
+  }
+  return offset;
+}
+
+function readBodyRotation(view: DataView, offset: number, body: PhysicsBodyState) {
+  if (offset + ROTATION_BYTES > view.byteLength) throw Error("Invalid physics rotation length");
+  const read = () => {
+    const value = finite(view.getFloat32(offset, true));
+    offset += 4;
+    return value;
+  };
+  body.rotation = [read(), read(), read(), read()];
+  body.prevRotation = [read(), read(), read(), read()];
+  body.angularVelocity = [read(), read(), read()];
+  return offset;
+}
+
 export function writePhysicsState(view: DataView, offset: number, state?: PhysicsState): number {
   physicsStateBytes(state);
   view.setUint8(offset++, state ? 1 : 0);
@@ -108,7 +139,12 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
         (body.desiredDriveSpeed === undefined ? 0 : 64) |
         (body.desiredSteering === undefined ? 0 : 128),
     );
-    view.setUint8(offset++, body.jumpQueued ? 1 : 0);
+    const looseRotates = body.kind === "loose" && body.rotation !== undefined;
+    view.setUint8(
+      offset++,
+      (body.jumpQueued ? JUMP_QUEUED : 0) |
+        (looseRotates ? LOOSE_ROTATION | (body.sleeping ? LOOSE_SLEEPING : 0) : 0),
+    );
     for (const field of POSITIONS) {
       view.setFloat64(offset, finite(body[field]), true);
       offset += 8;
@@ -129,12 +165,8 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
       const hasExcavator = body.excavatorPose !== undefined;
       const held = hasExcavator && body.excavatorHeld;
       view.setUint8(offset++, (body.sleeping ? 1 : 0) | (hasExcavator ? 6 : 0) | (held ? 8 : 0));
-      for (const value of [
-        ...(body.rotation ?? yawRotation(body.heading)),
-        ...(body.prevRotation ?? body.rotation ?? yawRotation(body.prevHeading)),
-        ...(body.angularVelocity ?? [0, 0, 0]),
-        ...bedAngles(body),
-      ]) {
+      offset = writeBodyRotation(view, offset, body);
+      for (const value of bedAngles(body)) {
         view.setFloat32(offset, finite(Math.fround(value)), true);
         offset += 4;
       }
@@ -145,7 +177,7 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
         offset += EXCAVATOR_BYTES;
         if (held) view.setUint8(offset++, excavatorActionId(held));
       }
-    }
+    } else if (looseRotates) offset = writeBodyRotation(view, offset, body);
   }
   const pairs = new Set<string>();
   for (const [a, b] of state.contacts) {
@@ -217,9 +249,15 @@ export function readPhysicsState(
       normalY: 1,
       normalZ: 0,
     };
-    const jumpQueued = view.getUint8(offset++);
-    if (jumpQueued > 1) throw Error("Invalid queued jump flag");
-    if (jumpQueued) body.jumpQueued = true;
+    const bodyFlags = view.getUint8(offset++);
+    const looseRotates = (bodyFlags & LOOSE_ROTATION) !== 0;
+    if (
+      bodyFlags > (JUMP_QUEUED | LOOSE_ROTATION | LOOSE_SLEEPING) ||
+      (looseRotates && kind !== "loose") ||
+      (bodyFlags & LOOSE_SLEEPING && !looseRotates)
+    )
+      throw Error("Invalid physics body extra flags");
+    if (bodyFlags & JUMP_QUEUED) body.jumpQueued = true;
     if (supportId !== NONE) body.supportId = supportId;
     if (controlUntil !== NONE) body.controlUntil = controlUntil;
     for (const field of POSITIONS) {
@@ -255,15 +293,15 @@ export function readPhysicsState(
       )
         throw Error("Invalid physics vehicle flags");
       body.sleeping = !!(vehicleFlags & 1);
-      const read = () => {
-        const value = finite(view.getFloat32(offset, true));
-        offset += 4;
-        return value;
-      };
-      body.rotation = [read(), read(), read(), read()];
-      body.prevRotation = [read(), read(), read(), read()];
-      body.angularVelocity = [read(), read(), read()];
-      Object.assign(body, nonzero({ bedTilt: read(), bedTarget: read() }));
+      offset = readBodyRotation(view, offset, body);
+      Object.assign(
+        body,
+        nonzero({
+          bedTilt: finite(view.getFloat32(offset, true)),
+          bedTarget: finite(view.getFloat32(offset + 4, true)),
+        }),
+      );
+      offset += 8;
       if (vehicleFlags & 4) {
         if (offset + EXCAVATOR_BYTES > view.byteLength)
           throw Error("Invalid physics excavator length");
@@ -287,6 +325,9 @@ export function readPhysicsState(
         if (target !== NONE) body.excavatorTarget = target;
         offset += LEGACY_EXCAVATOR_BYTES;
       }
+    } else if (looseRotates) {
+      body.sleeping = (bodyFlags & LOOSE_SLEEPING) !== 0;
+      offset = readBodyRotation(view, offset, body);
     }
     bodies.push(body);
   }

@@ -56,6 +56,10 @@ export class ProceduralActors {
         const entity = factory(p.wx, p.wy);
         entity.proceduralId = p.featureId;
         entity.naturalSpawnId = p.featureId;
+        if (p.wz !== undefined) {
+          entity.wz = p.wz;
+          entity.jumpVZ = 0;
+        }
         if (p.resident) {
           entity.resident = structuredClone(p.resident);
           entity.persistentId = p.featureId;

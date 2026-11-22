@@ -1,5 +1,14 @@
 # Vehicle model porting checklist
 
+[264](../tactical/264-forklift.md) retains a [working forklift revision](../../art-source/vehicle-bake/forklift/v2/)
+with the original carrier and four wheel rigs. The v1 appearance package and
+source-vehicle port counts retain their identities.
+
+[261](../tactical/261-mobile-crane.md) adds a [working crane revision](../../art-source/vehicle-bake/mobile-crane/v2/)
+to the original vehicle catalog's live mesh resolver. The frozen stowed v1
+and the 45-source port queue retain their existing review identities. Review
+the working bounds, articulation and load swing in the construction yard.
+
 The tracked excavator has a [retained source](../../art-source/vehicle-bake/excavator/v1/)
 and a [frozen art preview](../../public/demos/original-vehicles/excavator-v1/).
 [258](../tactical/258-construction-yards.md) owns its work rig and generated deployment.

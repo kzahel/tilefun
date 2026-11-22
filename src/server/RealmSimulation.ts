@@ -4,6 +4,7 @@ import { rotationsEqual } from "../physics/BodyRotation.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import type { PhysicsScene } from "../physics/PhysicsScene.js";
 import { isTrain } from "../railway/Train.js";
+import { isExcavator } from "../traffic/Excavator.js";
 import type { WorkContext } from "../wildlife/AnimalWorkSystem.js";
 import { tickFoodSources } from "../wildlife/FoodGrowth.js";
 import { resolvePredatorCatches } from "../wildlife/predatorAI.js";
@@ -55,7 +56,7 @@ export function resolveSimulationGameplay(
   for (const e of participants) {
     const car = realm.vehicleRegistry?.states.get(e.id);
     if (!car) continue;
-    finishExcavatorStroke(realm, e, persistedExcavator.get(e));
+    if (isExcavator(e)) finishExcavatorStroke(realm, e, persistedExcavator.get(e));
     const excavatorChanged =
       e.vehicleExcavator !== undefined && persistedExcavator.get(e) !== e.vehicleExcavator;
     if (

@@ -12,6 +12,7 @@ import { vehicleLinks } from "../traffic/VehicleLinks.js";
 import { isWildlife } from "../wildlife/WildlifeKinds.js";
 import { CollisionFlag } from "../world/TileRegistry.js";
 import type { World } from "../world/World.js";
+import { resolveCraneLoads } from "./CraneControl.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import { handlePlayerStepOutcome, updateLastSafePosition } from "./RealmRiding.js";
@@ -133,6 +134,7 @@ export class RealmPhysics {
     this.napping = napping;
     // Couplings publish resident partner IDs before the scene builds their joints.
     if (this.realm.vehicleRegistry) vehicleLinks(this.realm.vehicleRegistry).tick();
+    resolveCraneLoads(participants, entityManager.entities);
     this.stepPass = scene.synchronize(participants, undefined, napping);
     scene.step(intents, this.environment(), gravity, groups);
     this.realm.railways?.finish();

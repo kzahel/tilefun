@@ -55,6 +55,8 @@ export const DURABLE_ENTITY_FIELDS = [
   "localOffsetX",
   "localOffsetY",
   "weight",
+  "bodyRotation",
+  "bodyAngularVelocity",
 ] as const;
 
 export function actorScope(position: { wx: number; wy: number }): string {

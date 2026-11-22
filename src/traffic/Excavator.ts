@@ -105,6 +105,15 @@ const motors = [
   { speed: 90, acceleration: 460 },
 ] as const;
 
+const winch = { speed: 30, acceleration: 180 };
+const forkliftLift = { speed: 28, acceleration: 105 };
+export type ArmMotorProfile = "crane" | "forklift";
+function armMotor(joint: number, profile?: ArmMotorProfile) {
+  if (profile === "crane" && joint === 3) return winch;
+  if (profile === "forklift" && joint === 2) return forkliftLift;
+  return required(motors[joint]);
+}
+
 /** A held pitch joint heads for its hard stop. The cab can swing all the way
  * around, so give it a target one quarter turn ahead on each tick. */
 export function excavatorHoldTarget(pose: number, action: ExcavatorAction) {
@@ -128,8 +137,14 @@ function jointDifference(joint: number, angle: number, goal: number) {
 }
 
 /** Put a new target at the stopping distance when the operator lets go. */
-export function excavatorBrakeTarget(pose: number, target: number, rate: number) {
-  for (const [joint, { acceleration }] of motors.entries()) {
+export function excavatorBrakeTarget(
+  pose: number,
+  target: number,
+  rate: number,
+  profile?: ArmMotorProfile,
+) {
+  for (const joint of motors.keys()) {
+    const { acceleration } = armMotor(joint, profile);
     const angle = jointAt(pose, joint);
     const remaining = jointDifference(joint, angle, jointAt(target, joint));
     if (remaining === 0) continue;
@@ -141,8 +156,15 @@ export function excavatorBrakeTarget(pose: number, target: number, rate: number)
 }
 
 /** Limit angular acceleration and reserve travel to brake before the target. */
-export function advanceExcavatorPose(pose: number, target: number, rate: number, dt: number) {
-  for (const [joint, motor] of motors.entries()) {
+export function advanceExcavatorPose(
+  pose: number,
+  target: number,
+  rate: number,
+  dt: number,
+  profile?: ArmMotorProfile,
+) {
+  for (const joint of motors.keys()) {
+    const motor = armMotor(joint, profile);
     const angle = jointAt(pose, joint);
     const goal = jointAt(target, joint);
     const remaining = jointDifference(joint, angle, goal);

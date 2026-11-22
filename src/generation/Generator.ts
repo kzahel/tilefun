@@ -26,6 +26,7 @@ export interface ActorPlacement {
   readonly type: string;
   readonly wx: number;
   readonly wy: number;
+  readonly wz?: number;
   readonly route: readonly RouteWaypoint[];
 }
 export interface WorldGenerator {
@@ -79,6 +80,7 @@ export function createGenerator(
         ],
         actorAdditions: (cx, cy) => [
           ...terrain.spectators(cx, cy),
+          ...terrain.constructionCargo(cx, cy),
           ...terrain.nature.farms.gardenActors(cx, cy),
           ...outdoorGems(terrain, cx, cy),
         ],

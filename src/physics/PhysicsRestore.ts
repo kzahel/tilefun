@@ -1,4 +1,5 @@
 import { rotateBodyVector, yawRotation } from "./BodyRotation.js";
+import { tracksBodyRotation } from "./PhysicsBodies.js";
 import { PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
 import type { PhysicsBodyState } from "./PhysicsState.js";
 import type { SceneBody } from "./SceneBody.js";
@@ -48,10 +49,12 @@ export class PhysicsRestore {
     const entity = entry.entity;
     entity.prevPosition = { wx: state.prevX, wy: state.prevY };
     entity.prevWz = state.prevZ;
-    if (entry.kind === "vehicle") {
+    if (tracksBodyRotation(entity, entry.kind)) {
       entity.bodyRotation = state.rotation ?? rotation;
       entity.prevBodyRotation = state.prevRotation ?? rotation;
       entity.bodyAngularVelocity = state.angularVelocity ?? [0, 0, 0];
+    }
+    if (entry.kind === "vehicle") {
       entity.vehicleHeading = state.heading;
       entity.prevVehicleHeading = state.prevHeading;
     }

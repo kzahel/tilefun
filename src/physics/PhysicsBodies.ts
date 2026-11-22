@@ -1,4 +1,5 @@
 import { DEFAULT_PHYSICAL_HEIGHT } from "../config/constants.js";
+import { isConstructionCargo, isWoodenCargo } from "../entities/ConstructionCargo.js";
 import { CONSTRUCTION_RUBBLE } from "../entities/ConstructionRubble.js";
 import type { Entity } from "../entities/Entity.js";
 import { curveTrainView, isCurveTrain } from "../railway/CurveTrain.js";
@@ -21,7 +22,12 @@ export function carryingSupportId(
 }
 export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
   if (entity.type.startsWith("vehicle-v1:") || isTrain(entity)) return "vehicle";
-  if (entity.type === "ball" || entity.type === CONSTRUCTION_RUBBLE) return "loose";
+  if (
+    entity.type === "ball" ||
+    entity.type === CONSTRUCTION_RUBBLE ||
+    isConstructionCargo(entity.type)
+  )
+    return "loose";
   if (entity.workItem || entity.type.startsWith("wildlife-resource-")) {
     // Ground supplies/sites are anchors. Only real carryable items become loose
     // bodies; type identity also works on replicas without private work state.
@@ -31,6 +37,11 @@ export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
   if (entity.type === "player" || entity.wanderAI || entity.routeAI || entity.resident)
     return "character";
   return "fixed";
+}
+
+/** Body types with a full solved orientation, independent of their motors. */
+export function tracksBodyRotation(entity: Entity, kind: PhysicsBodyKind): boolean {
+  return kind === "vehicle" || isWoodenCargo(entity.type);
 }
 
 /** How the solver admits motion. Prescribed bodies follow their own trajectory

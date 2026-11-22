@@ -337,9 +337,10 @@ function entityMesh(
     (meshAsset
       ? {
           assetId: meshAsset,
-          orientation: yawOrientation(
-            authoredTrainForType(e.type) ? trainMeshHeading(e) : entityHeading(e),
-          ),
+          ...(e.bodyRotation ? { physical: true } : {}),
+          orientation:
+            e.bodyRotation ??
+            yawOrientation(authoredTrainForType(e.type) ? trainMeshHeading(e) : entityHeading(e)),
           radius: meshRadius,
         }
       : undefined)

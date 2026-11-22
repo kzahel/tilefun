@@ -23,6 +23,14 @@ export function carBodyImageKey(
     mesh.wheelTravel ?? 0,
     mesh.bedTilt ?? 0,
     ...(mesh.excavatorPose === undefined ? [] : [mesh.excavatorPose]),
+    ...(mesh.craneCableEnd
+      ? [
+          mesh.craneCableEnd.x,
+          mesh.craneCableEnd.y,
+          mesh.craneCableEnd.z,
+          Number(mesh.craneCableEnd.wrecking),
+        ]
+      : []),
     mesh.bedGateAngle ?? 0,
     mesh.towActive ?? false,
     mesh.towPitch ?? 0,

@@ -1,6 +1,9 @@
+import { WRECKING_BALL } from "../../entities/ConstructionCargo.js";
 import { CONSTRUCTION_RUBBLE } from "../../entities/ConstructionRubble.js";
 import type { Entity } from "../../entities/Entity.js";
+import { rotateBodyVector, yawRotation } from "../../physics/BodyRotation.js";
 import { clampBedTilt, hasDumpBed, insideDumpBed } from "../../traffic/DumpBed.js";
+import { craneCargoHook } from "../../traffic/MobileCrane.js";
 import { isTransporter, onTransporter } from "../../traffic/Transporter.js";
 import { isVehicle } from "../../traffic/Vehicle.js";
 import { isCarryable } from "../../wildlife/ForageResources.js";
@@ -21,8 +24,25 @@ export function groupVehicleContents(items: SceneItem[], collected: readonly Col
   const towing = collected.filter(
     (c) => c.entity.towTargetId !== undefined || c.entity.transportLoadId !== undefined,
   );
-  if (!trucks.length && !towing.length) return;
+  const cranes = collected.filter(({ entity }) => entity.vehicleCraneLoadId !== undefined);
+  if (!trucks.length && !towing.length && !cranes.length) return;
   const byId = new Map(collected.map((c) => [c.entity.id, c]));
+  for (const { entity, item } of cranes) {
+    const payload = byId.get(entity.vehicleCraneLoadId ?? -1)?.entity;
+    if (!payload || !item.mesh) continue;
+    const [x, y, z, w] = entity.bodyRotation ?? yawRotation(entityHeading(entity));
+    const eye = craneCargoHook(payload);
+    const end = rotateBodyVector(
+      [-x, -y, -z, w],
+      eye.wx - entity.position.wx,
+      eye.wy - entity.position.wy,
+      eye.wz - (entity.wz ?? 0),
+    );
+    item.mesh = {
+      ...item.mesh,
+      craneCableEnd: { ...end, wrecking: payload.type === WRECKING_BALL },
+    };
+  }
   const grouped = new Set<SceneItem>();
   for (const { entity, item } of [...towing, ...trucks.filter((t) => isTransporter(t.entity))]) {
     if (item.towGroup) continue;

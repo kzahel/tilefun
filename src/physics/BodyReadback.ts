@@ -4,7 +4,6 @@ import { Direction } from "../entities/Entity.js";
 import { applyCurveTrainFacing, isCurveTrain } from "../railway/CurveTrain.js";
 import { headingFrame } from "../railway/RailPath.js";
 import { applyVehicleFacing } from "../traffic/Vehicle.js";
-import { yawRotation } from "./BodyRotation.js";
 import { PHYSICS_DT, PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
 import type { SceneBody } from "./SceneBody.js";
 
@@ -79,15 +78,16 @@ export function publishBody(
   state.groundZ = entity.groundZ ?? state.z;
   entry.bed?.publish(entity, state, entry.collider);
   entry.excavator?.publish(entity, state, entry.collider);
+  if (state.rotation) {
+    entity.prevBodyRotation = state.prevRotation ?? state.rotation;
+    entity.bodyRotation = state.rotation;
+    entity.bodyAngularVelocity = state.angularVelocity ?? [0, 0, 0];
+  }
   if (entry.kind === "vehicle") publishVehicle(entity, state);
   entity.jumpInputState = state.jumpHeld ? 3 : 0;
 }
 
 function publishVehicle(entity: Entity, state: SceneBody["state"]) {
-  const rotation = state.rotation ?? yawRotation(state.heading);
-  entity.prevBodyRotation = state.prevRotation ?? rotation;
-  entity.bodyRotation = rotation;
-  entity.bodyAngularVelocity = state.angularVelocity ?? [0, 0, 0];
   entity.prevVehicleHeading = entity.vehicleHeading ?? state.heading;
   entity.vehicleHeading = state.heading;
   const x = Math.cos(state.heading),

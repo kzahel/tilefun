@@ -29,6 +29,20 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
           radius: 144,
         }
       : {}),
+    ...(vehicle.id === "forklift"
+      ? {
+          assetId: "forklift-authored-v2",
+          path: "assets/models/vehicles/forklift-v2.glb",
+          radius: 96,
+        }
+      : {}),
+    ...(vehicle.id === "mobile-crane"
+      ? {
+          assetId: "mobile-crane-authored-v2",
+          path: "assets/models/vehicles/mobile-crane-v2.glb",
+          radius: 200,
+        }
+      : {}),
     ...(vehicle.id === "dump-truck"
       ? {
           assetId: "dump-truck-authored-v2",
