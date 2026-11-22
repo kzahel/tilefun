@@ -5,7 +5,7 @@ Topic: 3d-assets
 Use the [pixel-styled 3D asset runbook](../3d-asset-runbook.md) to start the next
 asset and capture comparable evidence.
 
-## Live 3D rabbit experiment (2026-11-18)
+## 3D animals in ordinary play (2026-11-22)
 
 **3D animals** defaults to on. The main game offers the switch under **Options**
 and the [rabbit playground](https://tilefun.graehlarts.com/tilefun/workshop.html?geometry=nature-behavior-rabbit&wildlife3d=1#/tool/world-geometry)
@@ -13,14 +13,22 @@ has the same switch by the canvas. It takes effect immediately and the browser
 remembers it across play and lab visits. Shared links can set `wildlife3d=1` for
 models or `wildlife3d=0` for sprites. The lab brings the running playground into
 view on those links. Opening one leaves the saved preference alone. The
-[mesh catalog](../../src/rendering/WildlifeMeshCatalog.ts) connects the rabbit's
-sprite identity to its model and poses. The shared 3D scene uses replicated
-position, height, facing and clip frame to drive placement, rigid-part hop poses
-and feeding. Nine parts share instanced draws across rabbits. Each view draws up
-to 24 animal models. Enabled, registered animals and authored vehicle bodies
-wait for their model to load before drawing. The game requests a fallback sheet
-when a model fails, the player selects sprites, or an actor needs a sprite for
-another draw path. Editor previews request their own sheets as needed.
+[mesh catalog](../../src/rendering/WildlifeMeshCatalog.ts) connects sprite
+identities to their models and poses. The shared 3D scene uses replicated
+position, height, facing and clip phase to drive placement and animation.
+Each view draws up to 24 animal models. The game requests a fallback sheet
+while a model loads, when the model cannot draw, or when the player chooses
+sprites. Editor previews request their own sheets as needed.
+
+The owner authorized default models for every animal with a distinct 3D
+action for each gameplay animation. The same committed GLBs serve normal play
+and Workshop. At load, a missing, empty or reused action sends the animal
+through the sprite path. The current bank covers 113 animals and 515 state
+bindings, including both cows, the skinned rabbit, the frog and the mallard.
+The other 106 campaign animals remain on sprites. Farm-only rooster and chick
+forms also use sprites. Workshop reviews are available for feedback.
+
+## Original 3D rabbit experiment (2026-11-18)
 
 The rabbit has a wider, lower fit for the oblique top-down camera, which adds
 model depth and height into the same screen axis. The fit leaves its forward
@@ -65,12 +73,10 @@ review disposition and the local gallery.
 The shared scene can sample a skinned GLB from the actor's replicated clip,
 frame phase and facing. Use `?wildlife3dDrafts=1&wildlife3d=1` in a development
 session for the cat, or the local campaign preview harness for the broader
-catalog. The Workshop switch and loading or failure fallback use the reference sprite.
-The live view still uses the existing rabbit entry by default. Tactical 256
-registered thirty-five batches as exact playable Workshop candidates. The
-review pages pin the Blender source, GLB, animation stills and video. Their
-play links select the same candidate in the game renderer. Owner decisions on
-those exact candidates govern activation in ordinary play.
+catalog. The Workshop switch and loading or failure fallback use the reference
+sprite. Tactical 256 registered the exact playable Workshop candidates with
+Blender source, GLB, animation stills and video. Their play links select the
+exact candidate in the game renderer.
 
 The owner requested normal-game 3D for all 219 animals with distinct animations
 for every reachable gameplay state. [256](../tactical/256-wildlife-3d-game-rollout.md)

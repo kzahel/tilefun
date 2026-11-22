@@ -1,7 +1,8 @@
 # 256 Wildlife 3D game rollout
 
-Owner requested the full rollout on 2026-11-20. The production path and
-registered playable review batches are in progress.
+Owner requested the full rollout on 2026-11-20. On 2026-11-22 the owner
+authorized ordinary-play activation by animation coverage. The default bank
+now covers 113 animals.
 
 [Animation ledger](256-wildlife-3d-game-rollout/animation-ledger.json) ·
 [New-session handoff](256-wildlife-3d-game-rollout/handoff.md) ·
@@ -31,9 +32,8 @@ shared game/lab rendering, sprite fallback and performance.
   bindings still need their distinct motion and gameplay timing checked.
 - The prior campaign left 211 animals at its two-pass review cap and eight
   reviews pending. Preserve its exact evidence and open findings. The current
-  request authorizes authoring and polishing rollout assets with the new
-  motions. Revisions and approvals for this rollout get their own identities.
-  Apply the existing Workshop promotion rules to the exact assets that ship.
+  rollout authorizes authoring and polishing assets with the new motions.
+  Preserve each exact candidate and its evidence under its own identity.
 - Use one distinct animated performance for each existing reachable state of
   each animal. Qualify distinct motion from the poses and action curves at
   the actual gameplay speed.
@@ -62,22 +62,15 @@ shared game/lab rendering, sprite fallback and performance.
    Keep an editable Blender source, optimized GLB, matched stills and short
    action video per animal. Preserve existing sprite references for comparison
    and fallback.
-3. **Review exact assets and promote in batches.** Use
-   [Workshop art review](../topics/art-review.md), register each batch, capture
-   the actual served revision, and record owner decisions for that fingerprint.
-   Check the inbox and existing notes before changing a batch, and honor the
-   existing pause after two Needs changes reports. The 255 model campaign
-   submitted 443 Yep Anywhere launch requests in 83 minutes and the provider
-   stopped accepting connections during that run. Use the Workshop flow for
-   256. If separately authorized to use Opus, use one live reviewer session
-   and submit one bounded batch at a time. Check the verdict and retire the
-   reviewer before starting another. Keep uncertain receipts for
-   reconciliation and pause dispatch on transport failure.
-4. **Ship through normal play.** Put approved GLBs in the committed runtime
-   asset bank and register their exact identities in the shared wildlife
-   catalog. A fresh browser on the normal game entry shows 3D animals by
-   default, with the existing **3D animals** preference and sprite fallback
-   for loading, errors and the view's performance budget. Check existing and
+3. **Register exact assets in batches.** Commit the GLB, Blender source and
+   comparisons and register the model with the existing Workshop tools.
+   Check each required action through the shared renderer. Workshop still
+   accepts feedback on individual candidates.
+4. **Ship through normal play.** The shared catalog selects the latest
+   registered model for each animal and checks its actions on load. A fresh
+   browser shows eligible models by default. **3D animals** switches the
+   whole view to sprites. Unavailable or incomplete models and animals beyond
+   the view's model budget draw as sprites. Check existing and
    newly placed animals, save/reload and replicated play. Reuse the shared
    scene in Workshop. Production builds need the complete asset bank from
    a fresh checkout. Use the repository's [release and CI path](../topics/testing.md#ci-and-deployment)
@@ -95,9 +88,8 @@ runtime scope reconciliation in the execution notes.
 
 - Add a key to `qualifiedClips` only after testing that state's own exported
   action, with its action name, exact candidate hash and evidence path.
-- Fill `promotion` with the exact Workshop candidate, asset fingerprint and
-  owner disposition. Fill `live` with the served revision, URL and verification
-  result. Record any unresolved gap in the relevant animal or batch.
+- Fill `live` with the served revision, URL and verification result. Record
+  any unresolved gap in the relevant animal or batch.
 - Check the complete runtime definition and GLB registry below the browser.
   Assert that every required state reaches its own action and flag duplicated
   motion data as well as reused names. Extend the existing renderer harness
@@ -108,12 +100,29 @@ runtime scope reconciliation in the execution notes.
   [performance workflow](../topics/performance.md) and existing benchmark
   scripts. Run the affected tests, production build, art catalog and Workshop
   manifest checks.
-- Completion means 219 current roster entries served and verified in normal
-  play, with every reachable state qualified and each exact promoted asset
-  traceable to its review. Recompute totals from current runtime definitions
+- Completion means 219 campaign roster entries served and verified in normal
+  play, with every reachable state qualified and each exact asset traceable
+  to its model files. Recompute totals from current runtime definitions
   and verify the actual live build before closing the goal.
 
 ## Delivery log
+
+### Default activation, 2026-11-22
+
+113 of the 219 campaign models cover all current sprite states with distinct
+actions. The 111 existing registrations and the retained frog and mallard
+GLBs now share the same paths in ordinary play and exact Workshop previews.
+The shared renderer verified 14,420 samples across all 515 enabled states
+and exercised sprite fallback with models disabled. The 106 other campaign
+models reuse at least one action and remain on sprites. Farm-only rooster
+and chick forms also use sprites.
+
+The [frog and mallard report](256-wildlife-3d-game-rollout/evidence/frogs-and-ducks-v1-runtime.json)
+pins both original GLBs and their 280 state samples. A fresh production game
+placed the two cows and a fox. Both cows drew as models at default settings,
+the fox drew as a sprite, and the global setting survived a saved-world reload.
+
+### Initial registration, 2026-11-20
 
 2026-11-20. Pinned 219 editable inputs and model fingerprints against the
 current roster and checked all 1,023 draft bindings against the exported GLBs.
@@ -121,11 +130,10 @@ current roster and checked all 1,023 draft bindings against the exported GLBs.
 ### Playable review batches
 
 The active roster still has 206 Animal Browser entries and 13 classic animals.
-The runtime definition audit finds the same 1,023 states as the handoff. The
-candidate bank and the owner-approved runtime registry share one scene and
-animation clock. An explicit review link loads the exact pending GLB in play or
-Workshop. Normal play loads a new model once its exact approval and model are in
-the runtime bank. The legacy rigid rabbit remains available in ordinary play.
+The runtime definition audit found the same 1,023 states as the handoff.
+The candidate bank and the runtime registry shared one scene and animation
+clock. An explicit review link loaded the exact pending GLB in play or
+Workshop, and ordinary play used the legacy rigid rabbit.
 
 | Batch | Candidate animals | State bindings | Shared renderer samples | Review |
 | --- | --- | ---: | ---: | --- |
@@ -393,16 +401,16 @@ the testbed check.
 Use `node --import tsx scripts/wildlife/audit-3d-rollout.mjs --drafts` to check
 the inventory, draft hashes and registered action names. Run
 `verify-3d-campaign-runtime.mjs --rollout=BATCH REPORT` for render samples and
-`verify-3d-rollout-deployment.mjs BASE_URL BATCH REPORT` for served evidence,
+`verify-3d-campaign-runtime.mjs --defaults REPORT` for every default model.
+Run `verify-3d-rollout-deployment.mjs BASE_URL BATCH REPORT` for served evidence,
 using the same Node invocation. The renderer report pins the GLB bytes returned
-to the browser. The deployed verifier checks that the requested animal's mesh
-was drawn, even when another species also drew as a mesh.
+to the browser in exact batch mode. The deployed verifier checks that the
+requested animal's mesh was drawn, even when another species also drew as
+a mesh. Append `--review` to verify an exact preview instead of normal entry.
 `record-3d-rollout-evidence.mjs BATCH RUNTIME_REPORT DEPLOYMENT_REPORT` checks the
 matching fingerprints before adding per-state ledger entries. Biome skips formatting
 the generated deployment reports so the tracked copies retain the verifier's output.
-The `promote-3d-rollout.mjs BATCH` command requires the exact Workshop approvals
-and a complete set of matching state records before copying models into the
-runtime bank. Keep each revision's review files immutable.
+Keep each revision's review files immutable.
 
 The CI repair records the committed rollout's size and complexity in five
 code-health baseline entries for mesh drawing, sprite collection, the wildlife

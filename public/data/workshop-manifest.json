@@ -928,6 +928,12 @@
       "toolId": "animal-browser"
     },
     {
+      "id": "wildlife-3d-frogs-and-ducks-v1",
+      "name": "3D wildlife · frogs and ducks v1",
+      "description": "Compare each animated model with its gameplay sprite and review the exact revision.",
+      "toolId": "animal-browser"
+    },
+    {
       "id": "motion",
       "name": "Furniture movement sets",
       "description": "Default layouts and physics. Custom layouts remain individually reviewable in the tool.",
@@ -61285,7 +61291,91 @@
           "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-wombat-ground-marsupials-v1"
         }
       }
+    },
+    {
+      "id": "pattern:wildlife-3d-frog-frogs-and-ducks-v1",
+      "batchId": "wildlife-3d-frogs-and-ducks-v1",
+      "kind": "wildlife",
+      "name": "Frog",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-frog-frogs-and-ducks-v1",
+      "fingerprint": "92ea935e2d873d81887868a285db949795c48a38d327ff438fac2d3f1362fb7a",
+      "sourceFingerprint": "7b0ebf490e3c95761badee8e44b6c13c1df3e3d32d3cf31d1d0680306838dee6",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-frog-frogs-and-ducks-v1",
+        "prefabIds": [],
+        "revision": "3fc5b06c841fc46aa18a3d12e13752441b3e9875cfc57fde89f549bf1e0a4f02",
+        "renderFingerprint": "92ea935e2d873d81887868a285db949795c48a38d327ff438fac2d3f1362fb7a",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-frog-frogs-and-ducks-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-frog-frogs-and-ducks-v1",
+        "fingerprint": "7b0ebf490e3c95761badee8e44b6c13c1df3e3d32d3cf31d1d0680306838dee6",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-frog-frogs-and-ducks-v1",
+          "prefabIds": [],
+          "revision": "3fc5b06c841fc46aa18a3d12e13752441b3e9875cfc57fde89f549bf1e0a4f02",
+          "renderFingerprint": "92ea935e2d873d81887868a285db949795c48a38d327ff438fac2d3f1362fb7a",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-frog-frogs-and-ducks-v1"
+        }
+      }
+    },
+    {
+      "id": "pattern:wildlife-3d-mallard-frogs-and-ducks-v1",
+      "batchId": "wildlife-3d-frogs-and-ducks-v1",
+      "kind": "wildlife",
+      "name": "Mallard duck",
+      "prompt": "Compare the silhouette, ground or water contact, and each named action at game size and speed.",
+      "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-mallard-frogs-and-ducks-v1",
+      "fingerprint": "6cc73d7065a9b5470f0851fe132c00528422c6e76d7dcf31f1cc160981c7d9c5",
+      "sourceFingerprint": "c69a6818e768bda3917fbaed3e52eeb540845c9041f3dcfc46520e9d7149ee4b",
+      "review": {
+        "scene": "pattern",
+        "caseId": "wildlife-3d-mallard-frogs-and-ducks-v1",
+        "prefabIds": [],
+        "revision": "5e163f51fb8a90e8fc9f0330d86d0467f600063fadc0811b6b5ce7e4f7ac272c",
+        "renderFingerprint": "6cc73d7065a9b5470f0851fe132c00528422c6e76d7dcf31f1cc160981c7d9c5",
+        "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-mallard-frogs-and-ducks-v1"
+      },
+      "art": {
+        "sheetId": "wildlife-3d-mallard-frogs-and-ducks-v1",
+        "fingerprint": "c69a6818e768bda3917fbaed3e52eeb540845c9041f3dcfc46520e9d7149ee4b",
+        "sheetSize": [
+          966,
+          422
+        ],
+        "rect": [
+          0,
+          0,
+          966,
+          422
+        ],
+        "sliceKeys": [],
+        "intent": "pattern",
+        "buildingReview": {
+          "scene": "pattern",
+          "caseId": "wildlife-3d-mallard-frogs-and-ducks-v1",
+          "prefabIds": [],
+          "revision": "5e163f51fb8a90e8fc9f0330d86d0467f600063fadc0811b6b5ce7e4f7ac272c",
+          "renderFingerprint": "6cc73d7065a9b5470f0851fe132c00528422c6e76d7dcf31f1cc160981c7d9c5",
+          "url": "/tilefun/workshop.html#/review/pattern%3Awildlife-3d-mallard-frogs-and-ducks-v1"
+        }
+      }
     }
   ],
-  "inputDigest": "6634e142518f7b2eb671cb98c2496f901df85ee7f94f3731cde5616c43c1899c"
+  "inputDigest": "5eac2b5863c9b8ed8ecf147f456302291942e619bdecbbed149fd76b84d6ed2d"
 }

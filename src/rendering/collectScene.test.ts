@@ -420,9 +420,10 @@ function sceneDigest(variant: {
 // The later oblique vehicle fit adds only `meshRoofSupport.topDownHeightDelta`.
 // Omitting that field reproduces the pre-fit digests exactly.
 // 261 preserves the solved bus quaternion in the frameless fallback and marks it physical.
+// 256 adds model poses for animals whose complete animation sets now draw by default.
 it.each([
-  [{ frame: false, grass: false, garage: false, time: 0 }, "53e04481637213e3"],
-  [{ frame: true, grass: true, garage: false, time: 0.05, zoom: 3 / 8 }, "618c3b010edf98e0"],
+  [{ frame: false, grass: false, garage: false, time: 0 }, "4689ea7f2a000f24"],
+  [{ frame: true, grass: true, garage: false, time: 0.05, zoom: 3 / 8 }, "a8698b5ee80ef39c"],
 ] as const)("collects a byte-identical characterization scene %o", (variant, digest) => {
   const result = sceneDigest(variant);
   expect(result.digest).toBe(digest);

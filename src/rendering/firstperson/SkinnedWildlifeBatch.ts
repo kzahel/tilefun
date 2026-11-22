@@ -19,6 +19,30 @@ interface ClipSample {
 
 const HEADING = [0, Math.PI, Math.PI / 2, -Math.PI / 2] as const;
 
+/** Gameplay playback scales each action to its sprite clip's duration. */
+function sameMotion(first: THREE.AnimationClip, second: THREE.AnimationClip): boolean {
+  if (first === second) return true;
+  if (first.tracks.length !== second.tracks.length) return false;
+  const byName = new Map(second.tracks.map((track) => [track.name, track]));
+  return first.tracks.every((track) => {
+    const other = byName.get(track.name);
+    return (
+      !!other &&
+      track.getInterpolation() === other.getInterpolation() &&
+      track.times.length === other.times.length &&
+      track.values.length === other.values.length &&
+      track.values.every((value, i) => value === other.values[i]) &&
+      track.times.every((time, i) => {
+        const otherTime = other.times[i];
+        return (
+          otherTime !== undefined &&
+          Math.abs(time / first.duration - otherTime / second.duration) < 1e-6
+        );
+      })
+    );
+  });
+}
+
 /** Pose the same source GLB independently for each visible animal. Copies share
  * mesh buffers and paint, and only the skeleton and animation player vary. */
 export class SkinnedWildlifeBatch {
@@ -37,10 +61,15 @@ export class SkinnedWildlifeBatch {
     private readonly cast: (mesh: THREE.Object3D) => void = () => {},
   ) {
     const bank = new Map(animations.map((animation) => [animation.name, animation]));
+    const bound: THREE.AnimationClip[] = [];
     this.samples = (definition.animation?.clips ?? []).map(
       ({ name, start, count, frameDuration, loop }) => {
         const clip = bank.get(definition.animation?.names?.[name] ?? name);
-        if (!clip || !(clip.duration > 0)) throw new Error(`Missing wildlife animation: ${name}`);
+        if (!clip || !(clip.duration > 0) || !clip.tracks.length)
+          throw new Error(`Missing wildlife animation: ${name}`);
+        if (bound.some((previous) => sameMotion(previous, clip)))
+          throw new Error(`Reused wildlife animation: ${name}`);
+        bound.push(clip);
         return { clip, start, count, frameDuration, loop };
       },
     );

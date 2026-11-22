@@ -14,18 +14,16 @@ import { DEER_TYPE } from "../../src/wildlife/Deer.ts";
 import { faunaProfile } from "../../src/wildlife/Fauna.ts";
 import { predatorProfile } from "../../src/wildlife/Predator.ts";
 import {
-  PROMOTED_WILDLIFE_MODELS,
   WILDLIFE_MODEL_REVIEW_PREFIX,
   WILDLIFE_MODEL_REVIEWS,
   wildlifeModelClips,
   wildlifeModelReviewPath,
-  wildlifeModelRuntimePath,
 } from "../../src/wildlife/WildlifeModelReviewBank.ts";
 
-const [deployment, batch, reportPath] = process.argv.slice(2);
+const [deployment, batch, reportPath, mode] = process.argv.slice(2);
 assert(
   deployment && batch && reportPath,
-  "Usage: verify-3d-rollout-deployment.mjs BASE_URL BATCH REPORT",
+  "Usage: verify-3d-rollout-deployment.mjs BASE_URL BATCH REPORT [--review]",
 );
 const base = new URL(deployment);
 const candidates = WILDLIFE_MODEL_REVIEWS.filter((row) => row.batch === batch);
@@ -41,15 +39,12 @@ try {
     const id = WILDLIFE_MODEL_REVIEW_PREFIX + candidate.id;
     const registered = manifest.candidates.find((row) => row.id === id);
     assert(registered?.fingerprint, `${id} missing from the served Workshop manifest`);
-    const promoted = PROMOTED_WILDLIFE_MODELS[candidate.type] === candidate.id;
-    const modelPath = promoted
-      ? wildlifeModelRuntimePath(candidate.id)
-      : wildlifeModelReviewPath(candidate.id, "model.glb");
+    const preview = mode === "--review";
+    const modelPath = wildlifeModelReviewPath(candidate.id, "model.glb");
     const files = Object.entries(candidate.files).map(([file, sha]) => [
       wildlifeModelReviewPath(candidate.id, file),
       sha,
     ]);
-    if (promoted) files.push([modelPath, candidate.files["model.glb"]]);
     for (const [file, sha] of files) {
       const response = await get(file);
       assert(response.ok, `Failed to load ${file}: ${response.status}`);
@@ -70,7 +65,7 @@ try {
       lab.searchParams.set("geometry", `nature-${candidate.lab}`);
       lab.searchParams.set("wildlife3dStage", candidate.id);
       lab.hash = "/tool/world-geometry";
-      if (!promoted) lab.searchParams.set("wildlife3dReview", candidate.id);
+      if (preview) lab.searchParams.set("wildlife3dReview", candidate.id);
       const requested = page.waitForResponse(
         (response) => response.url() === new URL(modelPath, base).href,
       );
@@ -226,7 +221,7 @@ try {
       assert(poses.clips.length > 1, `No gameplay clip transition observed for ${candidate.type}`);
       if (groundStage && faunaProfile(candidate.type)?.hop)
         assert(poses.maxZ > 2, `No physical hop observed for ${candidate.type}`);
-      const game = await verifyGameEntry(page, candidate, promoted, {
+      const game = await verifyGameEntry(page, candidate, preview, {
         verifyGroundStates: groundStage || packStage || !!feeding,
         packStage,
         approachClips: contactClips,
@@ -236,7 +231,7 @@ try {
       assert.deepEqual(errors, []);
       results.push({
         type: candidate.type,
-        mode: promoted ? "default" : "review link",
+        mode: preview ? "review link" : "default",
         manifestFingerprint: registered.fingerprint,
         modelSha256: candidate.files["model.glb"],
         lab: lab.href,
@@ -401,7 +396,7 @@ async function waitForAnimalClip(page, expected, timeout) {
   );
 }
 
-async function verifyGameEntry(page, candidate, promoted, options) {
+async function verifyGameEntry(page, candidate, preview, options) {
   const { verifyGroundStates, packStage, approachClips, states, feeding } = options;
   await page.evaluate(() => localStorage.removeItem("tilefun-3d-animals"));
   const generation = createDescriptor("flat", 1);
@@ -410,7 +405,7 @@ async function verifyGameEntry(page, candidate, promoted, options) {
   gameUrl.searchParams.set("nogamepad", "");
   gameUrl.searchParams.set("generation", JSON.stringify(generation));
   gameUrl.searchParams.set("arrival", JSON.stringify(arrival));
-  if (!promoted) gameUrl.searchParams.set("wildlife3dReview", candidate.id);
+  if (preview) gameUrl.searchParams.set("wildlife3dReview", candidate.id);
   await page.goto(gameUrl.href, { waitUntil: "commit" });
   await page.getByRole("button", { name: "New World", exact: true }).click({ timeout: 45_000 });
   await gameReady(page);

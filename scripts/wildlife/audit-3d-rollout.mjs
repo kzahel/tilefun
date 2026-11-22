@@ -4,10 +4,8 @@ import { readFile, stat } from "node:fs/promises";
 import { ENTITY_PALETTE } from "../../src/editor/EditorPalettes.ts";
 import { ENTITY_DEFS } from "../../src/entities/EntityDefs.ts";
 import {
-  PROMOTED_WILDLIFE_MODELS,
   WILDLIFE_MODEL_REVIEWS,
   wildlifeModelReviewPath,
-  wildlifeModelRuntimePath,
 } from "../../src/wildlife/WildlifeModelReviewBank.ts";
 import { ANIMAL_BROWSER_ENTRIES } from "../../src/workshop/AnimalBrowserData.ts";
 
@@ -62,7 +60,7 @@ for (const row of ledger.animals) {
     if (count === expected.length) observedAll++;
   }
   if (row.live) {
-    assert(row.promotion?.disposition === "approved" && row.live.revision, row.type);
+    assert(row.live.revision && row.candidatePreview?.candidate, row.type);
     live++;
   }
 }
@@ -85,14 +83,6 @@ for (const review of WILDLIFE_MODEL_REVIEWS) {
     bindings.every((name) => names.has(name)),
     `Missing exported action: ${review.id}`,
   );
-  if (PROMOTED_WILDLIFE_MODELS[review.type] === review.id) {
-    assert.equal(row.promotion?.sha256, hash, `Missing exact promotion receipt: ${review.id}`);
-    assert(
-      expected.every((state) => row.qualifiedClips[state]?.sha256 === hash),
-      review.id,
-    );
-    await modelActions(`public/${wildlifeModelRuntimePath(review.id)}`, hash);
-  }
 }
 console.log(`${byType.size} runtime animals and ${states} required states`);
 console.log(

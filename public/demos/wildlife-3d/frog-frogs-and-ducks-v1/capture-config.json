@@ -1,0 +1,25 @@
+{
+  "runtimeType": "wildlife-frog-v1",
+  "version": 2,
+  "fit": [
+    7.8,
+    6,
+    7.1
+  ],
+  "clips": [
+    "idle",
+    "hop",
+    "swim",
+    "action"
+  ],
+  "worldLift": {
+    "hop": 4
+  },
+  "portraitCenter": 0.44,
+  "reviewContext": "Final planned candidate. V1's highest-impact note is preserved in the local revision brief. This pass targeted make the feet and limb edges easier to read, separate the dark feet from the body, clarify the existing keyed travel and action, separate coat and contour values, restore the sprite\u2019s narrow dark contour. Compare this exact candidate against the active sprite and report any remaining quality gap. The first candidate images and completed review remain retained in the adjacent v1 folder.",
+  "model": "model.glb",
+  "autoFit": false,
+  "modelClips": {},
+  "autoCrop": true,
+  "stageHeight": 1.1
+}

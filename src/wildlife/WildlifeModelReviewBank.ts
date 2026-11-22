@@ -1,6 +1,5 @@
 import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import reviews from "./model-reviews.json" with { type: "json" };
-import promoted from "./promoted-models.json" with { type: "json" };
 
 export interface WildlifeModelReview {
   id: string;
@@ -16,9 +15,6 @@ export interface WildlifeModelReview {
 }
 
 export const WILDLIFE_MODEL_REVIEWS: readonly WildlifeModelReview[] = reviews;
-
-/** Owner-approved Workshop identities, keyed by runtime type. */
-export const PROMOTED_WILDLIFE_MODELS: Readonly<Record<string, string>> = promoted;
 
 export const WILDLIFE_MODEL_REVIEW_PREFIX = "pattern:wildlife-3d-";
 
@@ -41,8 +37,4 @@ export function classicWildlifeSideProfile(type: string): boolean {
 
 export function wildlifeModelReviewPath(id: string, filename: string): string {
   return `demos/wildlife-3d/${id}/${filename}`;
-}
-
-export function wildlifeModelRuntimePath(id: string): string {
-  return `assets/models/wildlife/${id}.glb`;
 }

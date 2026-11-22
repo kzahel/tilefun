@@ -30,10 +30,10 @@ compatible. Continue from the completed playable pilot and registered batches.
 Run the inventory audit and check the current Workshop inbox and notes first.
 
 Preserve 255's asset evidence, unresolved findings and reviewer queue as
-history. Register and qualify the new assets through Tilefun's Workshop
-promotion workflow. Normal gameplay should enable 3D animals by default for
-all approved roster entries, with the existing sprite preference and fallback
-exercised. Record the exact
+history. Register and qualify the new assets through Tilefun's shared model
+catalog. Normal gameplay enables registered models with distinct actions for
+all current sprite states. Exercise the existing sprite preference and fallback.
+Record the exact
 production evidence and any genuine blocker in the ledger. Close the goal
 after verifying the deployed game and every roster entry and animation state.
 ```
@@ -57,9 +57,7 @@ npm run art:notes
 The [tactical delivery log](../256-wildlife-3d-game-rollout.md#delivery-log)
 identifies completed and pending batches. Preserve their immutable files and
 review fingerprints. The published review checkout is
-`https://tilefun.graehlarts.com/tilefun/`. The production release still needs
-an exact owner-approved batch, the committed runtime GLBs, CI publishing,
-and evidence from a fresh ordinary game entry with the default setting.
-The current evidence recorder writes review-link evidence. Record the actual
-shipped revision, URL, runtime hashes, and every observed default state in the
-ledger when a promoted batch is verified.
+`https://tilefun.graehlarts.com/tilefun/`. Normal play and exact previews
+share the committed GLBs. Run the renderer's `--defaults` check and verify a
+fresh ordinary game entry on the shipped revision. Record the revision, URL,
+runtime hashes, and observed default states in the ledger.

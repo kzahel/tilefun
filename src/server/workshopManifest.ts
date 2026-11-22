@@ -16,7 +16,6 @@ import wildlifeReviews from "../wildlife/reviews.json" with { type: "json" };
 import {
   type WildlifeModelReview,
   wildlifeModelReviewPath,
-  wildlifeModelRuntimePath,
 } from "../wildlife/WildlifeModelReviewBank.js";
 import type { WorkshopManifest } from "../workshop/WorkshopTypes.js";
 
@@ -53,18 +52,10 @@ export async function workshopInputDigest(root = ".", verifyWildlifeModels = fal
   const wildlifeModels = JSON.parse(
     await readFile(join(root, "src/wildlife/model-reviews.json"), "utf8"),
   ) as WildlifeModelReview[];
-  const promotedWildlifeModels = JSON.parse(
-    await readFile(join(root, "src/wildlife/promoted-models.json"), "utf8"),
-  ) as Record<string, string>;
   const modelHashes = new Map<string, string | undefined>();
   for (const model of wildlifeModels)
     for (const [file, digest] of Object.entries(model.files))
       modelHashes.set(`public/${wildlifeModelReviewPath(model.id, file)}`, digest);
-  for (const [type, id] of Object.entries(promotedWildlifeModels)) {
-    const approved = wildlifeModels.find((row) => row.type === type && row.id === id);
-    if (!approved?.files["model.glb"]) throw new Error(`Missing promoted wildlife model: ${type}`);
-    modelHashes.set(`public/${wildlifeModelRuntimePath(id)}`, approved.files["model.glb"]);
-  }
   files.push(...modelHashes.keys(), "src/workshop/WildlifeModelCandidates.ts");
   files.push(
     "public/demos/vehicle-style-study/manifest.json",

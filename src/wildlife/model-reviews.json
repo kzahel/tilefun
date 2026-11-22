@@ -2658,5 +2658,54 @@
       "native.png": "b49c29d0cbe1b462b624585840637c5f82c4baade33cb3a9aa24d16bc224c000",
       "walk.png": "ae1c2eab958ba5c79cdb5d85093eb15807e624c7780bce57f2bb97c55ae37668"
     }
+  },
+  {
+    "id": "frog-frogs-and-ducks-v1",
+    "type": "wildlife-frog-v1",
+    "name": "Frog",
+    "batch": "wildlife-3d-frogs-and-ducks-v1",
+    "lab": "frogs",
+    "scale": 7.1,
+    "topDown": {
+      "width": 1.0985915492957747,
+      "height": 0.8450704225352114
+    },
+    "actions": {},
+    "files": {
+      "action.png": "8e936fa3eae187246c420c1f796ee5e581d8f2e62c5aeb0b388d405d80ec434e",
+      "appearance.png": "7b0ebf490e3c95761badee8e44b6c13c1df3e3d32d3cf31d1d0680306838dee6",
+      "capture-config.json": "68c861778ba9322abb1acdf6f43af99a6dcd1e4253f46894fd0105b7b1c75548",
+      "comparison.mp4": "d8bb26bbe5c3dc42fc6952054fed154038031b453e3c8fc6d499ea63b12810df",
+      "hop.png": "290f60e2dd9575056a08c5909c2b47a931a89988a63870f83e48c4b0170c503c",
+      "model.blend": "7b4700c418db9eefe8099f75f90aa6ee4188e5a2e7aa1ba8cea82be79df6efd0",
+      "model.glb": "e396f211b735520de31c96afc8948a81116a13695a03c551a06f0580d33db19a",
+      "native.png": "0a62f2f12d04dbf3da4938db5d2f3535b618a066b5cab50d4227a9c23f7b63d5",
+      "swim.png": "30307a169ca197e2d64f81ea1e18d11683d20c4719fc36eab4b221be062bb59e"
+    }
+  },
+  {
+    "id": "mallard-frogs-and-ducks-v1",
+    "type": "wildlife-mallard-v1",
+    "name": "Mallard duck",
+    "batch": "wildlife-3d-frogs-and-ducks-v1",
+    "lab": "pond",
+    "scale": 7.4,
+    "topDown": {
+      "width": 1.0472972972972971,
+      "height": 0.777027027027027
+    },
+    "actions": {},
+    "files": {
+      "action.png": "a4f2e9e1a0f58066b59b45f2a8aa178ec0ed5960d4a0d51a33066f564d444fad",
+      "appearance.png": "c69a6818e768bda3917fbaed3e52eeb540845c9041f3dcfc46520e9d7149ee4b",
+      "capture-config.json": "d4319a8bf488cf2dce336248b7c57da20fb162a9158ebcdcb297f97fa52277d2",
+      "comparison.mp4": "9d4ce0177afe4209c7b7726f210897458038f4c8e6267f8dc38a0f77a842a3b0",
+      "flap.png": "e940dd717980526b1781678d96c13b443c91c3a05c829de560e0afba711f80de",
+      "model.blend": "405aa63f832d205b7a4707cc9f69b11aa0469a589ab667bf22966e9a7101a108",
+      "model.glb": "11e584959e4049378d33e19b80ba674eef16c78200f5d741e28f4dca1b2cceed",
+      "native.png": "5b95d77098876501d615b5879f5d639cfc3d24a9d29665d042c131cb565927cb",
+      "swim.png": "40e3c987bfad22b494773bf17b015325cc005cd429f1ee7d8b7c4c610beed5b8",
+      "waddle.png": "7284da2455fe7083a1d663970a170729b570b2ba1da82767f1a24b29f04215ec"
+    }
   }
 ]

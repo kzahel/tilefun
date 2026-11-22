@@ -13,8 +13,9 @@ Interactive `RenderResources` expose terrain preparation/resources only;
 animal GLBs in the same game and lab scene. A development catalog maps each
 GLB to the actor's existing clip, frame phase and facing. Sprite fallback and
 a mixed-species crowd ran locally. The art disposition lives in the tactical.
-[256](../tactical/256-wildlife-3d-game-rollout.md) adds the approved wildlife
-bank and exact Workshop play links. The shared view falls through to the sprite
+[256](../tactical/256-wildlife-3d-game-rollout.md) adds the wildlife model
+bank and exact Workshop play links. Registered models need distinct actions
+for every current sprite animation. The shared view falls through to the sprite
 for pending or failed loads or after using its 24-model draw budget. A view
 starts at most four model loads concurrently and retains up to 48 model batches.
 [261](../tactical/261-mobile-crane.md) uses the same rigid model path for the

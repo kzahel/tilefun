@@ -1,0 +1,22 @@
+{
+  "runtimeType": "wildlife-mallard-v1",
+  "version": 2,
+  "fit": [
+    7.75,
+    5.75,
+    7.4
+  ],
+  "clips": [
+    "idle",
+    "waddle",
+    "swim",
+    "flap",
+    "action"
+  ],
+  "modelClips": {},
+  "reviewContext": "Final planned mallard candidate. V1 feedback was a pale body, pinched view, underplayed waddle and wing gestures. This revision darkens the flank, moves the chestnut bib forward and up into view, adds a black rump with white tail edge and a short drake curl, and increases visible waddle and feather width. Compare the local quack and wing motions at the same stage.",
+  "model": "model.glb",
+  "autoFit": false,
+  "autoCrop": true,
+  "stageHeight": 1.1
+}

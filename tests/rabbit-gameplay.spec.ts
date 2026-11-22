@@ -14,7 +14,7 @@ const MAX_LANDING_VZ = 40;
 test("3D animals switch live in the rabbit lab and remember the choice", async ({ page }) => {
   const lab = "/tilefun/workshop.html?geometry=nature-behavior-rabbit";
   const tool = "#/tool/world-geometry";
-  const modelUrl = "**/assets/models/experiments/rabbit.glb";
+  const modelUrl = "**/demos/wildlife-3d/rabbit-pilot-v1/model.glb";
   const spriteUrl = (url: URL) => url.pathname.endsWith(`/${RABBIT_IMAGE}`);
   const spriteRequests: string[] = [];
   page.on("request", (request) => {

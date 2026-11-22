@@ -5,11 +5,9 @@ import { type AnimationClip, ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { FAUNA_DEFS, faunaType } from "../wildlife/Fauna.js";
 import { RABBIT_CLIPS, RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import {
-  PROMOTED_WILDLIFE_MODELS,
   WILDLIFE_MODEL_REVIEWS,
   wildlifeModelClips,
   wildlifeModelReviewPath,
-  wildlifeModelRuntimePath,
 } from "../wildlife/WildlifeModelReviewBank.js";
 
 export interface WildlifeMeshDefinition {
@@ -63,11 +61,7 @@ const query = new URLSearchParams(globalThis.location?.search);
 const reviewId = query.get("wildlife3dReview");
 const isPreview = ({ id, batch }: { id: string; batch: string }) =>
   id === reviewId || batch === reviewId;
-const selected = new Map(
-  WILDLIFE_MODEL_REVIEWS.filter(({ type, id }) => PROMOTED_WILDLIFE_MODELS[type] === id).map(
-    (review) => [review.type, review],
-  ),
-);
+const selected = new Map(WILDLIFE_MODEL_REVIEWS.map((model) => [model.type, model]));
 for (const review of WILDLIFE_MODEL_REVIEWS)
   if (isPreview(review)) selected.set(review.type, review);
 
@@ -77,9 +71,7 @@ for (const review of selected.values()) {
   const clips = wildlifeModelClips(review.type, review.classicTravel);
   if (!clips) throw new Error(`Missing wildlife clips: ${review.type}`);
   meshes.set(sprite.sheetKey, {
-    path: isPreview(review)
-      ? wildlifeModelReviewPath(review.id, "model.glb")
-      : wildlifeModelRuntimePath(review.id),
+    path: wildlifeModelReviewPath(review.id, "model.glb"),
     height: 1,
     unitScale: review.scale,
     topDown: review.topDown,
@@ -91,8 +83,7 @@ for (const review of selected.values()) {
   });
 }
 
-// Local development preview for an exact campaign candidate. The registered
-// sprite remains the reference artwork in normal game and Workshop sessions.
+// Local development preview for the original campaign drafts.
 if (
   import.meta.env?.DEV &&
   typeof window !== "undefined" &&

@@ -9396,6 +9396,26 @@
       "source": "demos/wildlife-3d/wombat-ground-marsupials-v1/model.blend"
     },
     {
+      "id": "wildlife-3d-frog-frogs-and-ducks-v1",
+      "name": "wildlife 3d frog frogs and ducks v1",
+      "image": "demos/wildlife-3d/frog-frogs-and-ducks-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "7b0ebf490e3c95761badee8e44b6c13c1df3e3d32d3cf31d1d0680306838dee6",
+      "source": "demos/wildlife-3d/frog-frogs-and-ducks-v1/model.blend"
+    },
+    {
+      "id": "wildlife-3d-mallard-frogs-and-ducks-v1",
+      "name": "wildlife 3d mallard frogs and ducks v1",
+      "image": "demos/wildlife-3d/mallard-frogs-and-ducks-v1/appearance.png",
+      "width": 966,
+      "height": 422,
+      "tileSize": 16,
+      "fingerprint": "c69a6818e768bda3917fbaed3e52eeb540845c9041f3dcfc46520e9d7149ee4b",
+      "source": "demos/wildlife-3d/mallard-frogs-and-ducks-v1/model.blend"
+    },
+    {
       "id": "me04",
       "name": "Modern Exteriors · autotile 04",
       "image": "assets/tilesets/me-autotile-04.png",
@@ -37379,7 +37399,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/WildlifeModelReviewBank.ts:39"
+          "source": "src/wildlife/WildlifeModelReviewBank.ts:35"
         }
       ]
     },
@@ -37533,7 +37553,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/wildlife/WildlifeModelReviewBank.ts:39"
+          "source": "src/wildlife/WildlifeModelReviewBank.ts:35"
         }
       ]
     },

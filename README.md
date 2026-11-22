@@ -207,6 +207,10 @@ preview; public-asset links let Vite apply the deployment prefix exactly once.
 
 ## Wildlife
 
+**Options → 3D animals** defaults to on. Animals with a complete set of 3D
+gameplay animations, including both cows, use their models. The rest use
+sprites. Turn the option off to use sprites for all animals.
+
 Regional ponds have small seeded duck and frog populations using existing provisional
 art. Ducks waddle, swim, rest, quack and exercise their wings; frogs hop with real
 push-off/landing phases, swim, rest, blink and croak around grassy banks.

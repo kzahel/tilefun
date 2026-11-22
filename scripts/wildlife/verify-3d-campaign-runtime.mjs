@@ -17,7 +17,11 @@ const rollout = rolloutArg
   ? WILDLIFE_MODEL_REVIEWS.filter(({ batch }) => batch === rolloutArg.slice("--rollout=".length))
   : undefined;
 assert(!rollout || rollout.length, "No registered rollout candidates in the requested batch");
-const campaign = rollout ? undefined : await campaignPreview();
+const defaults = process.argv.includes("--defaults")
+  ? [...new Map(WILDLIFE_MODEL_REVIEWS.map((review) => [review.type, review])).values()]
+  : undefined;
+assert(!(rollout && defaults), "Choose --defaults or --rollout");
+const campaign = rollout || defaults ? undefined : await campaignPreview();
 if (campaign) assert.equal(campaign.count, 219);
 const module = await build({
   stdin: {
@@ -27,7 +31,7 @@ const module = await build({
       import { WILDLIFE_MESHES } from "./src/rendering/WildlifeMeshCatalog.ts";
       import { obliqueProjection } from "./src/rendering/firstperson/ObliqueCamera.ts";
       import { FirstPersonWildlifeMeshes } from "./src/rendering/firstperson/FirstPersonWildlifeMeshes.ts";
-      window.verifyCampaign = (review) => (${verifyCampaign.toString()})(THREE, WILDLIFE_MESHES, obliqueProjection, FirstPersonWildlifeMeshes, review);
+      window.verifyCampaign = (reviews) => (${verifyCampaign.toString()})(THREE, WILDLIFE_MESHES, obliqueProjection, FirstPersonWildlifeMeshes, reviews);
     `,
   },
   define: { "import.meta.env": JSON.stringify({ DEV: true, BASE_URL: "/tilefun/" }) },
@@ -79,17 +83,17 @@ try {
   });
   const parts = [];
   for (const review of rollout ?? [null]) {
-    const query = review ? `wildlife3dReview=${review.id}` : "wildlife3dDrafts=1";
+    const query = review ? `wildlife3dReview=${review.id}` : defaults ? "" : "wildlife3dDrafts=1";
     await page.goto(`http://127.0.0.1:${port}/tilefun/verify-campaign?${query}`);
     await page.waitForFunction(() => typeof window.verifyCampaign === "function");
     if (!review) {
-      parts.push(await page.evaluate(() => window.verifyCampaign(null)));
+      parts.push(await page.evaluate((models) => window.verifyCampaign(models), defaults));
       continue;
     }
     const path = `/tilefun/${wildlifeModelReviewPath(review.id, "model.glb")}`;
     const [response, part] = await Promise.all([
       page.waitForResponse((res) => new URL(res.url()).pathname === path),
-      page.evaluate((candidate) => window.verifyCampaign(candidate), review),
+      page.evaluate((candidate) => window.verifyCampaign([candidate]), review),
     ]);
     assert(response.ok(), path);
     const modelSha256 = createHash("sha256")
@@ -111,7 +115,7 @@ try {
     problems.filter((message) => /wildlife|GLTF|WebGL|shader|texture/i.test(message)),
     [],
   );
-  assert.equal(result.candidates.length, campaign?.count ?? rollout.length);
+  assert.equal(result.candidates.length, campaign?.count ?? defaults?.length ?? rollout.length);
   await writeFile(
     resolve(
       process.argv.slice(2).find((arg) => !arg.startsWith("--")) ??
@@ -134,7 +138,7 @@ async function verifyCampaign(
   WILDLIFE_MESHES,
   obliqueProjection,
   FirstPersonWildlifeMeshes,
-  review,
+  reviews,
 ) {
   const size = 192;
   const renderer = new THREE.WebGLRenderer({ alpha: true });
@@ -149,6 +153,9 @@ async function verifyCampaign(
   camera.projectionMatrix.fromArray(obliqueProjection(1, size, size)).transpose();
   const pixels = new Uint8Array(size * size * 4);
   const candidates = [];
+  const reviewsByPath = new Map(
+    reviews?.map((review) => [`demos/wildlife-3d/${review.id}/model.glb`, review]),
+  );
   let clipSamples = 0;
   let testedDepth = false;
 
@@ -159,12 +166,8 @@ async function verifyCampaign(
   }
   for (const [sheetKey, definition] of WILDLIFE_MESHES) {
     const path = definition.path;
-    if (
-      review
-        ? path !== `demos/wildlife-3d/${review.id}/model.glb`
-        : !path.startsWith("assets/models/wildlife3d-review/")
-    )
-      continue;
+    const review = reviewsByPath.get(path);
+    if (reviews ? !review : !path.startsWith("assets/models/wildlife3d-review/")) continue;
     const type = review?.type ?? path.split("/").at(-1).replace(".glb", "");
     const clips = definition.animation.clips;
     const batch = new FirstPersonWildlifeMeshes(world, () => {});

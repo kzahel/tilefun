@@ -1,0 +1,82 @@
+{
+  "candidates": [
+    {
+      "type": "wildlife-frog-v1",
+      "clips": 4,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 140
+        },
+        {
+          "state": "hop",
+          "action": "hop",
+          "frames": 28,
+          "gameDurationMs": 1120
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1120
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 840
+        }
+      ],
+      "candidateId": "frog-frogs-and-ducks-v1",
+      "modelSha256": "e396f211b735520de31c96afc8948a81116a13695a03c551a06f0580d33db19a"
+    },
+    {
+      "type": "wildlife-mallard-v1",
+      "clips": 6,
+      "measuredClips": [
+        {
+          "state": "idle",
+          "action": "idle",
+          "frames": 28,
+          "gameDurationMs": 160
+        },
+        {
+          "state": "waddle",
+          "action": "waddle",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "swim",
+          "action": "swim",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "flap",
+          "action": "flap",
+          "frames": 28,
+          "gameDurationMs": 1280
+        },
+        {
+          "state": "action",
+          "action": "action",
+          "frames": 28,
+          "gameDurationMs": 960
+        },
+        {
+          "state": "flight",
+          "action": "flight",
+          "frames": 28,
+          "gameDurationMs": 800
+        }
+      ],
+      "candidateId": "mallard-frogs-and-ducks-v1",
+      "modelSha256": "11e584959e4049378d33e19b80ba674eef16c78200f5d741e28f4dca1b2cceed"
+    }
+  ],
+  "clipSamples": 280,
+  "testedDepth": false
+}

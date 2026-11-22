@@ -429,9 +429,53 @@
         "action": "action",
         "flight": "flight"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "11e584959e4049378d33e19b80ba674eef16c78200f5d741e28f4dca1b2cceed",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/frogs-and-ducks-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/mallard-frogs-and-ducks-v1/native.png"
+        },
+        "waddle": {
+          "action": "waddle",
+          "sha256": "11e584959e4049378d33e19b80ba674eef16c78200f5d741e28f4dca1b2cceed",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/frogs-and-ducks-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/mallard-frogs-and-ducks-v1/waddle.png"
+        },
+        "swim": {
+          "action": "swim",
+          "sha256": "11e584959e4049378d33e19b80ba674eef16c78200f5d741e28f4dca1b2cceed",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/frogs-and-ducks-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/mallard-frogs-and-ducks-v1/swim.png"
+        },
+        "flap": {
+          "action": "flap",
+          "sha256": "11e584959e4049378d33e19b80ba674eef16c78200f5d741e28f4dca1b2cceed",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/frogs-and-ducks-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/mallard-frogs-and-ducks-v1/flap.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "11e584959e4049378d33e19b80ba674eef16c78200f5d741e28f4dca1b2cceed",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/frogs-and-ducks-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/mallard-frogs-and-ducks-v1/action.png"
+        },
+        "flight": {
+          "action": "flight",
+          "sha256": "11e584959e4049378d33e19b80ba674eef16c78200f5d741e28f4dca1b2cceed",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/frogs-and-ducks-v1-runtime.json"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-mallard-frogs-and-ducks-v1",
+        "fingerprint": "6cc73d7065a9b5470f0851fe132c00528422c6e76d7dcf31f1cc160981c7d9c5",
+        "model": "public/demos/wildlife-3d/mallard-frogs-and-ducks-v1/model.glb",
+        "source": "public/demos/wildlife-3d/mallard-frogs-and-ducks-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/mallard-frogs-and-ducks-v1/comparison.mp4",
+        "review": "pending"
+      }
     },
     {
       "type": "wildlife-marabou-stork-provisional-v1",
@@ -7203,9 +7247,42 @@
         "swim": "swim",
         "action": "action"
       },
-      "qualifiedClips": {},
+      "qualifiedClips": {
+        "idle": {
+          "action": "idle",
+          "sha256": "e396f211b735520de31c96afc8948a81116a13695a03c551a06f0580d33db19a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/frogs-and-ducks-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/frog-frogs-and-ducks-v1/native.png"
+        },
+        "hop": {
+          "action": "hop",
+          "sha256": "e396f211b735520de31c96afc8948a81116a13695a03c551a06f0580d33db19a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/frogs-and-ducks-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/frog-frogs-and-ducks-v1/hop.png"
+        },
+        "swim": {
+          "action": "swim",
+          "sha256": "e396f211b735520de31c96afc8948a81116a13695a03c551a06f0580d33db19a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/frogs-and-ducks-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/frog-frogs-and-ducks-v1/swim.png"
+        },
+        "action": {
+          "action": "action",
+          "sha256": "e396f211b735520de31c96afc8948a81116a13695a03c551a06f0580d33db19a",
+          "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/frogs-and-ducks-v1-runtime.json",
+          "comparison": "public/demos/wildlife-3d/frog-frogs-and-ducks-v1/action.png"
+        }
+      },
       "promotion": null,
-      "live": null
+      "live": null,
+      "candidatePreview": {
+        "candidate": "pattern:wildlife-3d-frog-frogs-and-ducks-v1",
+        "fingerprint": "92ea935e2d873d81887868a285db949795c48a38d327ff438fac2d3f1362fb7a",
+        "model": "public/demos/wildlife-3d/frog-frogs-and-ducks-v1/model.glb",
+        "source": "public/demos/wildlife-3d/frog-frogs-and-ducks-v1/model.blend",
+        "comparison": "public/demos/wildlife-3d/frog-frogs-and-ducks-v1/comparison.mp4",
+        "review": "pending"
+      }
     },
     {
       "type": "wildlife-gaboon-viper-predator-v1",
