@@ -78,6 +78,16 @@ contract, select the relevant Playwright file and, where useful, `--grep` cases;
 build first only when production output is required. Rendering or integration
 changes do not automatically require the full browser suite.
 
+`npm run test:render-aspect` uses an isolated Vite session and bundled Chromium
+to measure sphere silhouettes on the game renderer. The fixture loads the
+wrecking ball and generates a skinned character and authored car as spheres.
+It checks dimensions, centering and which draw path ran in landscape and
+portrait. Perspective expects all three spheres to be round. In top-down,
+the ball has its roundness correction and the two unadjusted reference shapes
+have the camera's expected vertical stretch. The car and ball also exercise
+the native-pixel image path. `-- --software` selects SwiftShader, which runs
+once in CI's browser smoke job. The full local suite includes the hardware run.
+
 Reserve `npm test`, repository-wide `npm run check`, and the full Playwright suite
 for broad changes, evidence of wider impact, explicit requests or before a push
 that touches shared behavior. Broaden validation when focused checks expose
