@@ -31,7 +31,7 @@ export const ANTELOPE_PROFILES: readonly FaunaProfile[] = [
     sha256: "1315a5ab4f3c3f36cd30c9ad867c14869b65043230d171b68840942de07e68d3",
     size: 64,
     anchor: [32, 48],
-    inspection: [358, 733],
+    inspection: [920, 1636],
     clips: standardClips("walk", 40),
     body: [20, 10, 30],
     speed: 18,

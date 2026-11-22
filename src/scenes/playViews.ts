@@ -204,15 +204,8 @@ function drawHeldItem(gc: GameContext, view: View): void {
   const own =
     view.seat === 0 ? gc.stateView : gc.stateView.seats.session(view.seat, gc.stateView.serverTick);
   const item = heldItem(own?.inventory);
-  if (
-    item === undefined ||
-    !gc.heldItemSheet ||
-    seatBody(gc.session, view.seat)?.parentId !== undefined
-  )
-    return;
-  const { ctx } = gc;
-  ctx.imageSmoothingEnabled = false;
-  gc.heldItemSheet.drawTile(ctx, item - 1, 0, view.region.width * 0.69, view.region.height - 87, 5);
+  if (item === undefined || seatBody(gc.session, view.seat)?.parentId !== undefined) return;
+  gc.drawHeldItemIcon?.(item - 1, view.region.width * 0.69, view.region.height - 87);
 }
 
 function drawSharedGuests(gc: GameContext, view: View, alpha: number): void {

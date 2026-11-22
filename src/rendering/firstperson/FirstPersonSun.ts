@@ -29,7 +29,7 @@ export const SUN_FADE_START = 760;
 export const SUN_FADE_END = SUN_RADIUS - SUN_SNAP - 24;
 /** Farthest a caster outside the covered square can throw a shadow into it. */
 export const SUN_REACH = 256;
-/** Largest map scale: one texel per this many world pixels. */
+/** Largest scale shared by both shadow maps, in world pixels per texel. */
 export const SUN_MAX_SCALE = 8;
 
 /**
@@ -54,9 +54,8 @@ const CHUNK_PX = CHUNK_SIZE * TILE_SIZE;
  * share one set of rules: `sunProjection(texel)` covers `SUN_RADIUS × texel`
  * world pixels each way from its origin.
  */
-/** Finest and coarsest texel of the dynamic map, in world pixels. */
+/** Finest texel of the dynamic map, in world pixels. */
 export const DYNAMIC_MIN_TEXEL = 0.25;
-export const DYNAMIC_MAX_TEXEL = SUN_MAX_SCALE;
 /** The origin moves in steps of this many texels, so a resting body's shadow
  * keeps its edge while the camera moves. */
 export const DYNAMIC_SNAP = 16;
@@ -77,7 +76,7 @@ export const DYNAMIC_MAX_BODIES = 64;
  * pixels from its centre: a power of two, so zooming changes it rarely. */
 export function dynamicTexel(cover: number): number {
   let texel = DYNAMIC_MIN_TEXEL;
-  while (texel < DYNAMIC_MAX_TEXEL && cover > DYNAMIC_FADE_START * texel) texel *= 2;
+  while (texel < SUN_MAX_SCALE && cover > DYNAMIC_FADE_START * texel) texel *= 2;
   return texel;
 }
 

@@ -127,7 +127,7 @@ describe("DeviceSession prediction", () => {
     session.startPrediction(p as unknown as PlayerPredictor);
     const coSeats = new Map([[1, walk]]); // keyed by seat
     session.predict(2, walk, 1 / 60, coSeats);
-    expect(p.storeInput).toHaveBeenCalledWith(2, walk, 1 / 60, coSeats);
+    expect(p.storeInput).toHaveBeenCalledWith(2, walk, 1 / 60, coSeats, undefined);
     expect(p.update).toHaveBeenCalledWith(1 / 60, walk, view.world, [], [player]);
     expect(p.storeInput.mock.invocationCallOrder[0]).toBeLessThan(
       p.update.mock.invocationCallOrder[0] ?? 0,

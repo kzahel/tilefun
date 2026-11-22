@@ -2,6 +2,15 @@
 
 ## Local validation
 
+The construction, farming, shared-screen and shadow changes refresh the measured
+code-health caps for their affected files under the existing 600-line and
+25-complexity thresholds. Vehicle checks cover the working crane and forklift
+rigs alongside the frozen v1 mesh and sprite receipts. The frameless collector
+digest records the bus's solved orientation, and the HUD draws the held-item
+icon through game composition. The seed-2026 gazelle arrival follows its
+current generated herd at (920, 1636), with fresh Workshop identities for all
+four landscape profiles.
+
 [253](../tactical/253-retire-fixed-world-renderer.md) retires fixed GPU world
 passes and moves ordinary software-WebGL tests to unified drawing. The existing
 smoke pixel check now waits for an actual 3D world frame. Fixed-pass probes are

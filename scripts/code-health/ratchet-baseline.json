@@ -58,19 +58,19 @@
       "overLimit": 1
     },
     "src/client/ClientStateView.ts": {
-      "lines": 543,
+      "lines": 547,
       "worst": 35,
       "overLimit": 1
     },
     "src/client/GameClient.ts": {
-      "lines": 923,
+      "lines": 958,
       "worst": 0,
       "overLimit": 0
     },
     "src/client/PlayerPredictor.ts": {
-      "lines": 925,
+      "lines": 896,
       "worst": 40,
-      "overLimit": 2
+      "overLimit": 1
     },
     "src/editor/collectEditorOverlay.ts": {
       "lines": 294,
@@ -83,7 +83,7 @@
       "overLimit": 2
     },
     "src/editor/EditorPalettes.ts": {
-      "lines": 213,
+      "lines": 218,
       "worst": 55,
       "overLimit": 1
     },
@@ -103,7 +103,7 @@
       "overLimit": 1
     },
     "src/entities/PropFactories.ts": {
-      "lines": 780,
+      "lines": 819,
       "worst": 0,
       "overLimit": 0
     },
@@ -119,17 +119,22 @@
     },
     "src/explorer/MapRenderer.ts": {
       "lines": 566,
-      "worst": 160,
+      "worst": 161,
       "overLimit": 1
     },
     "src/explorer/regional.worker.ts": {
-      "lines": 179,
-      "worst": 112,
+      "lines": 189,
+      "worst": 119,
       "overLimit": 1
     },
     "src/explorer/TilePreview.ts": {
       "lines": 406,
       "worst": 32,
+      "overLimit": 1
+    },
+    "src/farming/FarmInteraction.ts": {
+      "lines": 121,
+      "worst": 30,
       "overLimit": 1
     },
     "src/game/base-game.ts": {
@@ -143,13 +148,13 @@
       "overLimit": 1
     },
     "src/generation/Overview.ts": {
-      "lines": 248,
-      "worst": 144,
+      "lines": 270,
+      "worst": 159,
       "overLimit": 1
     },
     "src/generation/ProceduralActors.ts": {
-      "lines": 106,
-      "worst": 69,
+      "lines": 110,
+      "worst": 72,
       "overLimit": 1
     },
     "src/generation/ProceduralProps.ts": {
@@ -173,8 +178,8 @@
       "overLimit": 2
     },
     "src/generation/regional/FarmsteadPlanner.ts": {
-      "lines": 275,
-      "worst": 64,
+      "lines": 426,
+      "worst": 82,
       "overLimit": 1
     },
     "src/generation/regional/NaturalLandscape.ts": {
@@ -183,8 +188,8 @@
       "overLimit": 10
     },
     "src/generation/regional/NaturalStrategy.ts": {
-      "lines": 197,
-      "worst": 52,
+      "lines": 232,
+      "worst": 57,
       "overLimit": 1
     },
     "src/generation/regional/ParkingLayout.ts": {
@@ -208,7 +213,7 @@
       "overLimit": 1
     },
     "src/input/ControllerInput.ts": {
-      "lines": 157,
+      "lines": 160,
       "worst": 60,
       "overLimit": 1
     },
@@ -343,7 +348,7 @@
       "overLimit": 1
     },
     "src/persistence/ActorRecords.ts": {
-      "lines": 157,
+      "lines": 162,
       "worst": 39,
       "overLimit": 1
     },
@@ -363,8 +368,8 @@
       "overLimit": 1
     },
     "src/physics/PhysicsScene.ts": {
-      "lines": 884,
-      "worst": 65,
+      "lines": 925,
+      "worst": 75,
       "overLimit": 3
     },
     "src/physics/rapier/ClippedTerrain.ts": {
@@ -376,6 +381,11 @@
       "lines": 183,
       "worst": 117,
       "overLimit": 1
+    },
+    "src/physics/SceneBody.ts": {
+      "lines": 315,
+      "worst": 51,
+      "overLimit": 2
     },
     "src/physics/surfaceHeight.ts": {
       "lines": 151,
@@ -413,8 +423,8 @@
       "overLimit": 3
     },
     "src/rendering/CarMeshAsset.ts": {
-      "lines": 439,
-      "worst": 64,
+      "lines": 491,
+      "worst": 72,
       "overLimit": 2
     },
     "src/rendering/CollisionDebug.ts": {
@@ -443,7 +453,7 @@
       "overLimit": 1
     },
     "src/rendering/EntityMeshPose.ts": {
-      "lines": 163,
+      "lines": 165,
       "worst": 42,
       "overLimit": 1
     },
@@ -452,13 +462,23 @@
       "worst": 35,
       "overLimit": 1
     },
+    "src/rendering/firstperson/FirstPersonMaterials.ts": {
+      "lines": 346,
+      "worst": 26,
+      "overLimit": 1
+    },
     "src/rendering/firstperson/FirstPersonProps.ts": {
       "lines": 651,
       "worst": 37,
       "overLimit": 1
     },
     "src/rendering/firstperson/FirstPersonView.ts": {
-      "lines": 828,
+      "lines": 933,
+      "worst": 48,
+      "overLimit": 2
+    },
+    "src/rendering/ForkliftFallback.ts": {
+      "lines": 89,
       "worst": 27,
       "overLimit": 1
     },
@@ -488,8 +508,13 @@
       "overLimit": 1
     },
     "src/rendering/scene/EntitySprites.ts": {
-      "lines": 534,
-      "worst": 37,
+      "lines": 560,
+      "worst": 46,
+      "overLimit": 1
+    },
+    "src/rendering/scene/VehicleGroups.ts": {
+      "lines": 88,
+      "worst": 30,
       "overLimit": 1
     },
     "src/rendering/SurfacePresentation.ts": {
@@ -523,8 +548,8 @@
       "overLimit": 1
     },
     "src/scenarios/NaturalLandscapeRecipe.ts": {
-      "lines": 379,
-      "worst": 109,
+      "lines": 390,
+      "worst": 114,
       "overLimit": 1
     },
     "src/scenarios/ScenarioSession.ts": {
@@ -548,8 +573,8 @@
       "overLimit": 1
     },
     "src/scenes/PlayScene.ts": {
-      "lines": 639,
-      "worst": 45,
+      "lines": 647,
+      "worst": 48,
       "overLimit": 2
     },
     "src/scenes/PropEditorScene.ts": {
@@ -567,13 +592,23 @@
       "worst": 28,
       "overLimit": 1
     },
+    "src/server/EquipmentControl.ts": {
+      "lines": 159,
+      "worst": 31,
+      "overLimit": 1
+    },
+    "src/server/FarmPlay.ts": {
+      "lines": 288,
+      "worst": 41,
+      "overLimit": 1
+    },
     "src/server/faultReports.ts": {
       "lines": 130,
       "worst": 42,
       "overLimit": 1
     },
     "src/server/GameServer.ts": {
-      "lines": 902,
+      "lines": 930,
       "worst": 0,
       "overLimit": 0
     },
@@ -593,7 +628,7 @@
       "overLimit": 1
     },
     "src/server/Realm.ts": {
-      "lines": 1335,
+      "lines": 1332,
       "worst": 0,
       "overLimit": 0
     },
@@ -633,8 +668,8 @@
       "overLimit": 1
     },
     "src/shared/physicsStateCodec.ts": {
-      "lines": 259,
-      "worst": 48,
+      "lines": 346,
+      "worst": 92,
       "overLimit": 2
     },
     "src/shared/serialization.ts": {
@@ -673,8 +708,8 @@
       "overLimit": 1
     },
     "src/ui/WorldMap.ts": {
-      "lines": 673,
-      "worst": 34,
+      "lines": 742,
+      "worst": 43,
       "overLimit": 1
     },
     "src/wildlife/AnimalWorkSystem.ts": {
@@ -682,19 +717,24 @@
       "worst": 170,
       "overLimit": 2
     },
+    "src/wildlife/ChickenLure.ts": {
+      "lines": 120,
+      "worst": 27,
+      "overLimit": 1
+    },
     "src/wildlife/deerAI.ts": {
       "lines": 138,
       "worst": 60,
       "overLimit": 1
     },
     "src/wildlife/Fauna.ts": {
-      "lines": 1245,
+      "lines": 1247,
       "worst": 0,
       "overLimit": 0
     },
     "src/wildlife/faunaAI.ts": {
-      "lines": 187,
-      "worst": 77,
+      "lines": 191,
+      "worst": 81,
       "overLimit": 1
     },
     "src/wildlife/faunaInteractions.ts": {
@@ -738,8 +778,8 @@
       "overLimit": 1
     },
     "src/wildlife/GardenWork.ts": {
-      "lines": 285,
-      "worst": 110,
+      "lines": 292,
+      "worst": 113,
       "overLimit": 1
     },
     "src/wildlife/HerdWork.ts": {
@@ -860,6 +900,16 @@
     "src/workshop/WorkshopProjection.ts": {
       "lines": 174,
       "worst": 52,
+      "overLimit": 1
+    },
+    "src/workshop/WorldGeometryFixtures.tsx": {
+      "lines": 302,
+      "worst": 27,
+      "overLimit": 1
+    },
+    "src/workshop/WorldGeometryPage.tsx": {
+      "lines": 438,
+      "worst": 64,
       "overLimit": 1
     }
   }

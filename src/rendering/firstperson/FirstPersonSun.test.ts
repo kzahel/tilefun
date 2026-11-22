@@ -7,7 +7,6 @@ import {
   DYNAMIC_EYE_RANGE,
   DYNAMIC_FADE_END,
   DYNAMIC_FADE_START,
-  DYNAMIC_MAX_TEXEL,
   DYNAMIC_MIN_TEXEL,
   DYNAMIC_SNAP,
   DYNAMIC_VIEW_MARGIN,
@@ -114,7 +113,7 @@ describe("the dynamic shadow map (266)", () => {
     expect(dynamicTexel(DYNAMIC_EYE_RANGE)).toBe(0.5);
     // 0.25×: about 1,000 px. The map never gets coarser than the sun's coarsest.
     expect(dynamicTexel(1006 + DYNAMIC_VIEW_MARGIN)).toBe(2);
-    expect(dynamicTexel(1e6)).toBe(DYNAMIC_MAX_TEXEL);
+    expect(dynamicTexel(1e6)).toBe(SUN_MAX_SCALE);
   });
 
   it("shares the sun's projection, so both maps agree where a shadow falls", () => {

@@ -419,8 +419,9 @@ function sceneDigest(variant: {
 // only: with those keys omitted, all five earlier digests were reproduced exactly.
 // The later oblique vehicle fit adds only `meshRoofSupport.topDownHeightDelta`.
 // Omitting that field reproduces the pre-fit digests exactly.
+// 261 preserves the solved bus quaternion in the frameless fallback and marks it physical.
 it.each([
-  [{ frame: false, grass: false, garage: false, time: 0 }, "c4ba33badb90c6b1"],
+  [{ frame: false, grass: false, garage: false, time: 0 }, "53e04481637213e3"],
   [{ frame: true, grass: true, garage: false, time: 0.05, zoom: 3 / 8 }, "618c3b010edf98e0"],
 ] as const)("collects a byte-identical characterization scene %o", (variant, digest) => {
   const result = sceneDigest(variant);

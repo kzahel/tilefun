@@ -1,3 +1,29 @@
+/** Working rig expectations alongside the frozen model and sprite receipts below. */
+export const ACTIVE_EQUIPMENT_MESHES: Partial<
+  Record<string, { readonly assetId: string; readonly path: string; readonly radius: number }>
+> = {
+  "dump-truck": {
+    assetId: "dump-truck-authored-v2",
+    path: "assets/models/vehicles/dump-truck-v2.glb",
+    radius: 128,
+  },
+  "tow-truck": {
+    assetId: "tow-truck-authored-v2",
+    path: "assets/models/vehicles/tow-truck-v2.glb",
+    radius: 144,
+  },
+  "mobile-crane": {
+    assetId: "mobile-crane-authored-v2",
+    path: "assets/models/vehicles/mobile-crane-v2.glb",
+    radius: 200,
+  },
+  forklift: {
+    assetId: "forklift-authored-v2",
+    path: "assets/models/vehicles/forklift-v2.glb",
+    radius: 96,
+  },
+};
+
 /** Independent accepted-runtime expectations. Append only after the parent freezes
  * and authorizes a family. Shared unit/browser checks intentionally do not derive
  * this list or its expected hashes/bounds from the production catalog. */

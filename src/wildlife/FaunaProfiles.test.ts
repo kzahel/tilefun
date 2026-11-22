@@ -10,9 +10,9 @@ function canonical(value: unknown): string {
 describe("fauna profile data", () => {
   it("keeps the complete FAUNA_PROFILES serialization byte-identical", () => {
     expect(FAUNA_PROFILES).toHaveLength(153);
-    // 2026-11-16: refresh six natural inspection destinations; art and gait data stay fixed.
+    // Construction and town farms changed the seed-2026 gazelle inspection destination.
     expect(createHash("sha256").update(canonical(FAUNA_PROFILES)).digest("hex")).toBe(
-      "08342200cbeeed7e553702ed610756848a791c35c68cd7a6310a75639da43290",
+      "15fdf07719f4aa4221a79adf86cf5b5ed78a3cd06d6a0ad0389abda7dce7563b",
     );
   });
 });

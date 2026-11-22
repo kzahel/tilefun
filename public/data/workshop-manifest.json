@@ -9772,8 +9772,8 @@
       "name": "Gazelle · open refuge · sparse",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-gazelle&landscape=sparse#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=358&y=733&landscape=sparse&zoom=0.8",
-      "fingerprint": "bae5cf7dcdef6f08acc80cee7bd98be7feff99e5923edba624a6fe25819d458c"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=920&y=1636&landscape=sparse&zoom=0.8",
+      "fingerprint": "7ded2927e753812f3915ccf0c0deb146a1fc9533a510f5bb1dc3b2f6df66d321"
     },
     {
       "id": "nature:gazelle:balanced:v1",
@@ -9782,8 +9782,8 @@
       "name": "Gazelle · open refuge · balanced",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-gazelle&landscape=balanced#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=358&y=733&landscape=balanced&zoom=0.8",
-      "fingerprint": "ea6ad4865959f85e34586422b8be3b67d1e70c3f79e6a3da9f4470d877d6710d"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=920&y=1636&landscape=balanced&zoom=0.8",
+      "fingerprint": "dee45c5728825f6bea52f880f5d9ce4ec61aa861400ce2a2a9b684eb2cc17870"
     },
     {
       "id": "nature:gazelle:lush:v1",
@@ -9792,8 +9792,8 @@
       "name": "Gazelle · open refuge · lush",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-gazelle&landscape=lush#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=358&y=733&landscape=lush&zoom=0.8",
-      "fingerprint": "ed69054d53c36829d9b25bd86b3dce9d3bc889f32a81ce39ba8e603ca4111c36"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=920&y=1636&landscape=lush&zoom=0.8",
+      "fingerprint": "92261ea0f3cd6934a5eece1fa18e781786f391448c58d30728d4a6e166c30836"
     },
     {
       "id": "nature:gazelle:thicket:v1",
@@ -9802,8 +9802,8 @@
       "name": "Gazelle · open refuge · thicket",
       "prompt": "Review woodland, solid forest thickets, pond shores and scenery during travel. Extra dense is the current regional default, using staggered native forest patterns with impassable interiors.",
       "url": "/tilefun/workshop.html?geometry=nature-gazelle&landscape=thicket#/tool/world-geometry",
-      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=358&y=733&landscape=thicket&zoom=0.8",
-      "fingerprint": "cc11b855081d28ce7292d0804e8a8071c21cd0fa2c339524a999c4e3ccce5bd8"
+      "exploreUrl": "/tilefun/world-explorer.html?seed=2026&x=920&y=1636&landscape=thicket&zoom=0.8",
+      "fingerprint": "be19f52d88af16d64b9860126717d1b8690e09b7b40923b82721abfe7ebe50db"
     },
     {
       "id": "nature:impala:sparse:v1",
@@ -61272,5 +61272,5 @@
       }
     }
   ],
-  "inputDigest": "18456d74bbcaa7ee144bd0c25894da0b3653eb198be55963e5db7fcb53e64b99"
+  "inputDigest": "e77622cf023f5a245d9826f0fb6ed9c353c5da2d85ea95dd42df26399a3b9088"
 }

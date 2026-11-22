@@ -27,7 +27,10 @@ import {
 } from "../src/traffic/Vehicle.js";
 import { RACE_TUNES, vehiclePerformance } from "../src/traffic/VehiclePerformance.js";
 import meshBodies from "../src/traffic/vehicle-body-bounds.json" with { type: "json" };
-import { AUTONOMOUS_ORIGINAL_VEHICLES } from "./AutonomousOriginalVehicles.fixture.js";
+import {
+  ACTIVE_EQUIPMENT_MESHES,
+  AUTONOMOUS_ORIGINAL_VEHICLES,
+} from "./AutonomousOriginalVehicles.fixture.js";
 import { verifyOriginalWheelGeometryAndTravel } from "./AutonomousOriginalVehicles.test-helper.js";
 import { readRetainedReplayInput } from "./RetainedReplayInputs.test-helper.js";
 import { testPart } from "./TestParts.test-helper.js";
@@ -51,13 +54,8 @@ export function defineOriginalVehicleSuite(partFileUrl: string): void {
           path,
         ).toBe(expected);
       }
-      expect(authoredVehicleForType(type)?.path).toBe(
-        family.model === "dump-truck"
-          ? "assets/models/vehicles/dump-truck-v2.glb"
-          : family.model === "tow-truck"
-            ? "assets/models/vehicles/tow-truck-v2.glb"
-            : definition.mesh.path,
-      );
+      const activeMesh = ACTIVE_EQUIPMENT_MESHES[family.model];
+      expect(authoredVehicleForType(type)?.path).toBe(activeMesh?.path ?? family.modelPath);
       expect(VEHICLE_BANK.views).toHaveLength(180);
       expect(TRAFFIC_MODELS).toContain(definition.id);
       expect(VEHICLE_PALETTE.find((entry) => entry.type === type)?.label).toBe(family.name);
@@ -125,18 +123,8 @@ export function defineOriginalVehicleSuite(partFileUrl: string): void {
       const car = createVehicle(family.model, 120, 240, Direction.Down);
       expect(new EntityMeshPose().evaluate(car, 1)).toMatchObject({
         // Historical v1 receipt above stays frozen; active equipment uses the separately qualified v2 rig.
-        assetId:
-          family.model === "dump-truck"
-            ? "dump-truck-authored-v2"
-            : family.model === "tow-truck"
-              ? "tow-truck-authored-v2"
-              : definition.mesh.assetId,
-        radius:
-          family.model === "dump-truck"
-            ? 128
-            : family.model === "tow-truck"
-              ? 144
-              : family.nativeSize / 2,
+        assetId: activeMesh?.assetId ?? family.assetId,
+        radius: activeMesh?.radius ?? family.nativeSize / 2,
       });
     },
   );

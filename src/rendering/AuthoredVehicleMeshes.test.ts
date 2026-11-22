@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { expect, it } from "vitest";
+import { ACTIVE_EQUIPMENT_MESHES } from "../../tests-support/AutonomousOriginalVehicles.fixture.js";
 import { BOAT_MESH, BOAT_MODEL } from "../boats/Boat.js";
 import { ORIGINAL_VEHICLES } from "../traffic/OriginalVehicles.js";
 import { DRIVABLE_MODELS } from "../traffic/Vehicle.js";
@@ -28,20 +29,7 @@ it("registers every source type exactly once and consumes its latest retained ex
       expect(definition).toEqual({
         vehicle: original.id,
         ...original.mesh,
-        ...(original.id === "tow-truck"
-          ? {
-              assetId: "tow-truck-authored-v2",
-              path: "assets/models/vehicles/tow-truck-v2.glb",
-              radius: 144,
-            }
-          : {}),
-        ...(original.id === "dump-truck"
-          ? {
-              assetId: "dump-truck-authored-v2",
-              path: "assets/models/vehicles/dump-truck-v2.glb",
-              radius: 128,
-            }
-          : {}),
+        ...ACTIVE_EQUIPMENT_MESHES[original.id],
       });
       continue;
     }
