@@ -56,6 +56,7 @@ import type {
   PhysicsBodyKind,
   PhysicsBodyState,
   PhysicsState,
+  SharedScreenGroup,
 } from "./PhysicsState.js";
 import { selectAround } from "./PredictionSelection.js";
 
@@ -399,7 +400,7 @@ export class PhysicsScene {
     intents: ReadonlyMap<number, MotionIntent>,
     geometry: PhysicsGeometry,
     gravity = 1,
-    sharedScreenGroups?: readonly (readonly number[])[],
+    sharedScreenGroups?: readonly SharedScreenGroup[],
   ) {
     if (this.disposed) throw Error("Physics scene is disposed");
     const started = performance.now();
@@ -808,7 +809,6 @@ export class PhysicsScene {
     return true;
   }
 
-  /** Spawn clearance is a read-only query of this same collision authority. */
   canPlaceSphere(x: number, y: number, z: number, radius: number, excludeId?: number): boolean {
     return (
       this.world.intersectionWithShape(

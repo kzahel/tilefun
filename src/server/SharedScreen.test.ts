@@ -4,13 +4,14 @@ import { PlayerPredictor } from "../client/PlayerPredictor.js";
 import { getEntityAABB } from "../entities/collision.js";
 import { createPlayer } from "../entities/Player.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
-import { SHARED_SCREEN_SPAN } from "../physics/SharedScreenLeash.js";
 import { FLAT_SCENARIO, scenarioWalls } from "../scenarios/ScenarioRecipe.js";
 import { ScenarioSession } from "../scenarios/ScenarioSession.js";
+import { LEGACY_SHARED_SCREEN_SPAN } from "../shared/SharedScreenSpan.js";
 import { World } from "../world/World.js";
 import { PlayerSession, seatSessionId } from "./PlayerSession.js";
 
 const idle = { dx: 0, dy: 0, jump: false, sprinting: false };
+const wideSpan = { x: 512, y: 176 };
 
 it("brakes the driving seat at the shared edge, lets it reverse, and leaves another device free", async () => {
   const scenario = await ScenarioSession.create({
@@ -39,11 +40,11 @@ it("brakes the driving seat at the shared edge, lets it reverse, and leaves anot
       await realm.addPlayer(session);
       session.visibleRange = { ...host.visibleRange };
     }
-    guest.player.position = { wx: 64 - SHARED_SCREEN_SPAN.x + 12, wy: 64 };
+    guest.player.position = { wx: 64 - wideSpan.x + 12, wy: 64 };
     remote.player.position = { wx: 64, wy: 116 };
     await scenario.ready();
     let sequence = 0;
-    function step(driver: number, walker = 0, sharedScreen = true) {
+    function step(driver: number, walker = 0, sharedScreen: typeof wideSpan | false = wideSpan) {
       ++sequence;
       for (const [session, dx] of [
         [host, driver],
@@ -62,7 +63,7 @@ it("brakes the driving seat at the shared edge, lets it reverse, and leaves anot
     }
     const spread = () => car.position.wx - guest.player.position.wx;
     for (let i = 0; i < 60; i++) step(1);
-    expect(spread()).toBeCloseTo(SHARED_SCREEN_SPAN.x, 0);
+    expect(spread()).toBeCloseTo(wideSpan.x, 0);
     expect(Math.abs(car.velocity?.vx ?? 0)).toBeLessThan(1);
     expect(remote.player.position.wx).toBeGreaterThan(car.position.wx + 30);
 
@@ -88,24 +89,24 @@ it("brakes the driving seat at the shared edge, lets it reverse, and leaves anot
     );
     for (let i = 1; i <= 8; i++) {
       const move = { ...idle, dx: 1 };
-      predictor.storeInput(sequence + i, move, PHYSICS_DT, new Map([[1, idle]]), true);
+      predictor.storeInput(sequence + i, move, PHYSICS_DT, new Map([[1, idle]]), wideSpan);
       predictor.update(PHYSICS_DT, move, view.world, view.props, view.entities);
     }
     const predictedCar = predictor.publishedBody(car.id).body;
     expect(predictedCar?.position.wx).toBeCloseTo(car.position.wx, 0);
 
     for (let i = 0; i < 20; i++) step(-1);
-    expect(spread()).toBeLessThan(SHARED_SCREEN_SPAN.x - 5);
+    expect(spread()).toBeLessThan(wideSpan.x - 5);
     for (let i = 0; i < 40; i++) step(1);
     const edge = car.position.wx;
     for (let i = 0; i < 30; i++) step(1, 1);
     expect(car.position.wx).toBeGreaterThan(edge + 10);
-    expect(spread()).toBeLessThanOrEqual(SHARED_SCREEN_SPAN.x + 0.1);
+    expect(spread()).toBeLessThanOrEqual(wideSpan.x + 0.1);
 
     for (let i = 0; i < 30; i++) step(1, 0, false);
-    expect(spread()).toBeGreaterThan(SHARED_SCREEN_SPAN.x + 12);
+    expect(spread()).toBeGreaterThan(wideSpan.x + 12);
     const separated = spread();
-    for (let i = 0; i < 15; i++) step(1);
+    for (let i = 0; i < 15; i++) step(1, 0, LEGACY_SHARED_SCREEN_SPAN);
     expect(spread()).toBeCloseTo(separated, 0);
   } finally {
     predictor.clearPredicted();
@@ -118,7 +119,7 @@ it("does not let a leading seat creep away when the trailing seat walks into a w
     version: 1,
     id: "shared-screen-wall",
     generation: FLAT_SCENARIO,
-    player: createPlayer(SHARED_SCREEN_SPAN.x, 0),
+    player: createPlayer(LEGACY_SHARED_SCREEN_SPAN.x, 0),
     props: scenarioWalls(-80, -80, 8, 80),
   });
   try {
@@ -141,7 +142,10 @@ it("does not let a leading seat creep away when the trailing seat walks into a w
       scenario.tick();
     }
     expect(guest.player.position.wx).toBeLessThan(8);
-    expect(host.player.position.wx - guest.player.position.wx).toBeCloseTo(SHARED_SCREEN_SPAN.x, 0);
+    expect(host.player.position.wx - guest.player.position.wx).toBeCloseTo(
+      LEGACY_SHARED_SCREEN_SPAN.x,
+      0,
+    );
   } finally {
     await scenario.close();
   }

@@ -1,5 +1,5 @@
 import type { PhysicsGeometry, PhysicsScene } from "../physics/PhysicsScene.js";
-import type { MotionIntent } from "../physics/PhysicsState.js";
+import type { MotionIntent, SharedScreenGroup } from "../physics/PhysicsState.js";
 
 const empty = () => ({
   inputs: 0,
@@ -41,7 +41,7 @@ export class PredictionWork {
     geometry: PhysicsGeometry,
     gravity: number,
     replay: boolean,
-    sharedScreenGroup?: readonly number[],
+    sharedScreenGroup?: SharedScreenGroup,
   ) {
     const groups = sharedScreenGroup ? [sharedScreenGroup] : undefined;
     if (!this.enabled) {

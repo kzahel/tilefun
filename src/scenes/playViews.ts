@@ -1,11 +1,11 @@
 import type { GameContext } from "../core/GameScene.js";
 import { cssRegion } from "../input/ViewRect.js";
-import { EMPTY_INVENTORY, heldItem, ITEMS } from "../inventory/Inventory.js";
+import { heldItem } from "../inventory/Inventory.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
 import { projectWorld } from "../rendering/Projection.js";
 import { layoutViews } from "../rendering/ViewLayout.js";
 import { presentedSeatBody, seatBody } from "../session/SeatFocus.js";
-import { sharedHudTop } from "../session/SharedScreenCamera.js";
+import { sharedGuestRegion, sharedHudTop } from "../session/SharedScreenCamera.js";
 import type { View } from "../session/View.js";
 import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
 import { drawCrosshair } from "./firstPersonPlay.js";
@@ -137,7 +137,9 @@ export function drawViewOverlays(gc: GameContext, alpha: number): void {
       if (split) drawSeatBadge(gc, view);
       if (view.sharedScreen) drawSharedGuests(gc, view, alpha);
       if (view.seat !== 0) {
-        const hotbar = drawGuestHotbar(gc, view);
+        const hotbar =
+          !!gc.stateView.seats.session(view.seat, gc.stateView.serverTick) &&
+          seatBody(gc.session, view.seat)?.parentId === undefined;
         drawSeatPrompts(gc, view, hotbar);
       }
     } finally {
@@ -210,10 +212,10 @@ function drawHeldItem(gc: GameContext, view: View): void {
 
 function drawSharedGuests(gc: GameContext, view: View, alpha: number): void {
   const guests = gc.session.seats.list().filter(({ seat }) => seat !== 0);
-  const column = view.region.width / guests.length;
   const hudTop = sharedHudTop(view.region.height);
   for (const [index, { seat }] of guests.entries()) {
-    const centre = column * (index + 0.5);
+    const column = sharedGuestRegion(view.region, index, guests.length);
+    const centre = column.x - view.region.x + column.width / 2;
     const sync = gc.stateView.seats.session(seat, gc.stateView.serverTick);
     if (sync) {
       const { ctx } = gc;
@@ -224,10 +226,9 @@ function drawSharedGuests(gc: GameContext, view: View, alpha: number): void {
       ctx.fillText(
         `Player ${seat + 1} · ${sync.gemsCollected.toLocaleString()} gems`,
         centre,
-        hudTop - 24,
-        column - 8,
+        hudTop - 28,
+        column.width - 8,
       );
-      drawGuestHotbar(gc, view, seat, centre, hudTop, Math.max(8, Math.min(35, (column - 8) / 4)));
     }
     const body = presentedSeatBody(gc.session, seat);
     if (!body) continue;
@@ -241,45 +242,6 @@ function drawSharedGuests(gc: GameContext, view: View, alpha: number): void {
     const y = Math.max(8, Math.min(maxY, p.sy + 16));
     drawSeatPrompts(gc, view, false, seat, x, y, width);
   }
-}
-
-function drawGuestHotbar(
-  gc: GameContext,
-  view: View,
-  id = view.seat,
-  centre = view.region.width / 2,
-  top = view.region.height - 40,
-  pitch = 35,
-): boolean {
-  const seat = gc.session.seats.get(id);
-  const sync = gc.stateView.seats.session(id, gc.stateView.serverTick);
-  if (!sync || seatBody(gc.session, id)?.parentId !== undefined) return false;
-  const { ctx } = gc;
-  const bar = sync.inventory ?? EMPTY_INVENTORY;
-  const left = centre - 2 * pitch + 2;
-  ctx.font = "13px system-ui, sans-serif";
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  for (const [index, stack] of bar.slots.entries()) {
-    const x = left + index * pitch;
-    ctx.fillStyle = index === bar.selected ? "#604925" : "#392f22";
-    ctx.strokeStyle = index === bar.selected ? "#ffe19a" : "#7c6a4d";
-    ctx.beginPath();
-    ctx.roundRect(x, top, pitch - 3, 30, 4);
-    ctx.fill();
-    ctx.stroke();
-    ctx.fillStyle = "#f9ebc9";
-    ctx.fillText(
-      stack ? `${ITEMS[stack.item].icon} ${stack.count}` : "·",
-      x + (pitch - 3) / 2,
-      top + 15,
-      pitch - 6,
-    );
-  }
-  const previous = seat?.input?.hint("hotbar_previous");
-  const next = seat?.input?.hint("hotbar_next");
-  if (previous && next) ctx.fillText(`${previous} / ${next}`, centre, top - 9);
-  return true;
 }
 
 /** A guest's place prompts at the bottom of its view, nearest the player last
@@ -299,7 +261,7 @@ function drawSeatPrompts(
   ctx.font = "15px system-ui, sans-serif";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  let top = anchorY ?? view.region.height - (hotbar ? 58 : 16) - lines.length * 36;
+  let top = anchorY ?? view.region.height - (hotbar ? 72 : 16) - lines.length * 36;
   for (const line of lines) {
     const width = Math.min(maxWidth, ctx.measureText(line).width + 24);
     ctx.fillStyle = "#243a32ee";

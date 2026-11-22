@@ -2,7 +2,7 @@
  * Guests' place controls (226 slice 5-ii-b): a guest's own enter and equipment keys
  * (or pad buttons) act for its own body, in its envelope, with prompts in its view.
  */
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { Entity } from "../entities/Entity.js";
 import { createPlayer } from "../entities/Player.js";
 import type { Prop } from "../entities/Prop.js";
@@ -17,6 +17,14 @@ import { GuestPlaces, type GuestPlacesHost } from "./GuestPlaces.js";
 
 const DT = 1 / 60;
 const requester = async () => ({}) as never;
+
+beforeEach(() => {
+  vi.stubGlobal("document", {
+    createElement: () => ({ append() {}, setAttribute() {}, remove() {} }),
+    body: { append() {} },
+  });
+});
+afterEach(() => vi.unstubAllGlobals());
 
 /** A country house whose street door threshold is at (100, 100). */
 const house = {
@@ -59,7 +67,13 @@ async function harness() {
     }),
   };
   const host = {
-    session: { seats, replica, prediction: null } as unknown as GuestPlacesHost["session"],
+    session: {
+      seats,
+      replica,
+      prediction: null,
+      views: [],
+    } as unknown as GuestPlacesHost["session"],
+    canvas: {} as HTMLCanvasElement,
     doorPresentation: presentation,
     playing: true,
     overlayOpen: false,

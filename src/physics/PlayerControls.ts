@@ -1,6 +1,7 @@
 import { PLAYER_SPEED, PLAYER_SPRINT_MULTIPLIER } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Movement } from "../shared/Movement.js";
+import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import { isExcavator } from "../traffic/Excavator.js";
 import { isForklift, isForkliftControl } from "../traffic/Forklift.js";
 import { isMobileCrane } from "../traffic/MobileCrane.js";
@@ -11,7 +12,7 @@ import { angleDifference } from "./VehicleMotor.js";
 
 export interface ControlCommand extends Movement {
   seq: number;
-  sharedScreen?: boolean;
+  sharedScreen?: SharedScreenSpan;
 }
 const NEUTRAL: Movement = { dx: 0, dy: 0, jump: false, sprinting: false };
 export const CONTROL_HOLD_TICKS = 15;
@@ -23,7 +24,7 @@ export class PlayerControls {
   private held: Movement = { ...NEUTRAL };
   private receivedAt = -Infinity;
   private sequence = 0;
-  sharedScreen = false;
+  sharedScreen: SharedScreenSpan | undefined;
 
   reset(ack = this.sequence) {
     this.sequence = ack;
@@ -43,7 +44,7 @@ export class PlayerControls {
         jumpPressed: false,
       };
       this.sequence = command.seq;
-      this.sharedScreen = command.sharedScreen === true;
+      this.sharedScreen = command.sharedScreen;
       this.receivedAt = tick;
     }
     if (tick - this.receivedAt >= CONTROL_HOLD_TICKS) this.held = { ...NEUTRAL };

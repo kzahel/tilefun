@@ -1,9 +1,8 @@
 import { isTrain } from "../railway/Train.js";
+import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import { PHYSICS_DT, PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
+import type { SharedScreenGroup } from "./PhysicsState.js";
 import type { SceneBody } from "./SceneBody.js";
-
-/** World-pixel spread, independent of screen size, camera zoom and jump height. */
-export const SHARED_SCREEN_SPAN = { x: 352, y: 224 };
 
 interface Travel {
   body: SceneBody["body"];
@@ -14,15 +13,20 @@ interface Travel {
   nextY: number;
 }
 
+interface GroupTravel {
+  members: Travel[];
+  span: SharedScreenSpan;
+}
+
 const STEP = PHYSICS_DT * SCALE;
 
 /** Brake after the motors, including wheel impulses, and before contact solving. */
 export function prepareSharedScreenTravel(
   bodies: ReadonlyMap<number, SceneBody>,
-  groups: readonly (readonly number[])[],
-): Travel[][] {
-  const prepared: Travel[][] = [];
-  for (const ids of groups) {
+  groups: readonly SharedScreenGroup[],
+): GroupTravel[] {
+  const prepared: GroupTravel[] = [];
+  for (const { ids, span } of groups) {
     const group: Travel[] = [];
     const unique = new Set(ids);
     for (const id of unique) {
@@ -42,8 +46,8 @@ export function prepareSharedScreenTravel(
     }
     if (group.length !== unique.size || group.length < 2) continue;
     // Contacts can change the relative travel even when the motors fit.
-    prepared.push(group);
-    if (!limitSpread(group)) continue;
+    prepared.push({ members: group, span });
+    if (!limitSpread(group, span)) continue;
     for (const { body, x, y, nextX, nextY } of group) {
       const velocity = body.linvel();
       const vx = (nextX - x) / STEP;
@@ -57,9 +61,9 @@ export function prepareSharedScreenTravel(
 
 /** A collision can stop the player who was making room, or push another one
  * outward. Trim any resulting excess before publishing this tick's poses. */
-export function settleSharedScreenTravel(groups: readonly Travel[][]): boolean {
+export function settleSharedScreenTravel(groups: readonly GroupTravel[]): boolean {
   let adjusted = false;
-  for (const group of groups) {
+  for (const { members: group, span } of groups) {
     const positions = group.map(({ body }) => body.translation());
     group.forEach((member, i) => {
       const p = positions[i] as Travel["start"];
@@ -67,7 +71,7 @@ export function settleSharedScreenTravel(groups: readonly Travel[][]): boolean {
       member.nextY = member.y + (p.z - member.start.z) * SCALE;
     });
     const travel = group.map(({ nextX, nextY }) => ({ nextX, nextY }));
-    if (!limitSpread(group)) continue;
+    if (!limitSpread(group, span)) continue;
     group.forEach(({ body, nextX, nextY }, i) => {
       const p = positions[i] as Travel["start"];
       const end = travel[i] as (typeof travel)[number];
@@ -83,13 +87,18 @@ export function settleSharedScreenTravel(groups: readonly Travel[][]): boolean {
   return adjusted;
 }
 
-function limitSpread(group: Travel[]): boolean {
-  const x = limitAxis(group, "x", "nextX");
-  const y = limitAxis(group, "y", "nextY");
+function limitSpread(group: Travel[], span: SharedScreenSpan): boolean {
+  const x = limitAxis(group, "x", "nextX", span.x);
+  const y = limitAxis(group, "y", "nextY", span.y);
   return x || y;
 }
 
-function limitAxis(group: Travel[], axis: "x" | "y", next: "nextX" | "nextY"): boolean {
+function limitAxis(
+  group: Travel[],
+  axis: "x" | "y",
+  next: "nextX" | "nextY",
+  limit: number,
+): boolean {
   const start = group.map((body) => body[axis]);
   const end = group.map((body) => body[next]);
   const left = Math.min(...start);
@@ -97,7 +106,7 @@ function limitAxis(group: Travel[], axis: "x" | "y", next: "nextX" | "nextY"): b
   const nextLeft = Math.min(...end);
   const nextRight = Math.max(...end);
   // An already-spread party can move inward without snapping anyone into place.
-  const span = Math.max(SHARED_SCREEN_SPAN[axis], right - left);
+  const span = Math.max(limit, right - left);
   const excess = nextRight - nextLeft - span;
   if (excess <= 0) return false;
   const leftGrowth = Math.max(0, left - nextLeft);

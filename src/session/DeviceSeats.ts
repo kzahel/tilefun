@@ -3,6 +3,7 @@ import { devicePacket, type SeatSample, type SeatSituation } from "../input/Seat
 import { NEUTRAL_MOVEMENT, neutralSample, type SeatInput } from "../input/SeatInput.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
+import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { ClientSeat } from "./ClientSeat.js";
 
@@ -170,12 +171,12 @@ export class DeviceSeats {
 
   /** One still command for every seat, sent at once: off cadence, so prediction does
    * not store it, and a hidden page may never tick again to send it. */
-  neutralPacket(seq: number, sharedScreen = false): ClientMessage {
+  neutralPacket(seq: number, sharedScreen?: SharedScreenSpan): ClientMessage {
     const { input } = devicePacket(
       seq,
       this.list().map((seat) => ({ seat: seat.seat, movement: NEUTRAL_MOVEMENT })),
     );
-    if (sharedScreen) input.sharedScreen = true;
+    if (sharedScreen) input.sharedScreen = sharedScreen;
     return input;
   }
 }

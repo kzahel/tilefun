@@ -2,10 +2,9 @@ import { describe, expect, it, vi } from "vitest";
 import type { RemoteStateView } from "../client/ClientStateView.js";
 import type { GameContext } from "../core/GameScene.js";
 import { createPlayer } from "../entities/Player.js";
-import { SHARED_SCREEN_SPAN } from "../physics/SharedScreenLeash.js";
 import { Camera } from "../rendering/Camera.js";
 import { DeviceSession } from "../session/DeviceSession.js";
-import { sharedHudTop } from "../session/SharedScreenCamera.js";
+import { sharedHudTop, sharedScreenSpan } from "../session/SharedScreenCamera.js";
 import { followSeat, View } from "../session/View.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import {
@@ -121,8 +120,11 @@ describe("play's split-screen views (226)", () => {
     session.sharedScreen = true;
     const guest = replica.entities[1];
     if (!guest) throw Error("Missing guest");
+    const [view] = beginViewTick(gc);
+    if (!view) throw Error("Missing host view");
+    const span = sharedScreenSpan(view.camera);
     const car = {
-      ...createPlayer(100 + SHARED_SCREEN_SPAN.x, 100 + SHARED_SCREEN_SPAN.y),
+      ...createPlayer(100 + span.x, 100 + span.y),
       id: 3,
       type: "vehicle-v1:compact-1",
       collider: { width: 176, height: 54, physicalHeight: 24, offsetX: 0, offsetY: 0 },
@@ -130,8 +132,6 @@ describe("play's split-screen views (226)", () => {
     guest.parentId = car.id;
     replica.entities.push(car);
     replica.serverEntities.push(car);
-    const [view] = beginViewTick(gc);
-    if (!view) throw Error("Missing host view");
     view.policy.tick(view.camera, session);
     const carRadius = Math.hypot(176, 54) / 2;
     const carEdge = view.camera.worldToScreen(

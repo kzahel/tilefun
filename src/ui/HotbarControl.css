@@ -39,6 +39,17 @@
   outline: 1px solid #ffe19a;
   background: #604925;
 }
+.guest-hotbar {
+  box-sizing: border-box;
+  width: 150px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.guest-hotbar button {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 .play-hotbar small {
   position: absolute;
   top: -15px;

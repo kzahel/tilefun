@@ -9,6 +9,10 @@ import { type compileGameplayRoom, validateRoomOccupancy } from "../interiors/Ga
 import { launchBody, setBodyPose, setHorizontalVelocity } from "../physics/PhysicalEdits.js";
 import { isExcavatorAction } from "../shared/ExcavatorInput.js";
 import type { ClientMessage } from "../shared/protocol.js";
+import {
+  LEGACY_SHARED_SCREEN_SPAN,
+  normalizeSharedScreenSpan,
+} from "../shared/SharedScreenSpan.js";
 import { STAGED_VEHICLE_MODELS } from "../traffic/OriginalVehicles.js";
 import { freshBallWork } from "../wildlife/ForageResources.js";
 import type { PlayerSession } from "./PlayerSession.js";
@@ -86,6 +90,7 @@ const COMMANDS: { [K in RealmCommandType]: RealmCommandHandler<K> } = {
       session.lastProcessedInputSeq = msg.seq;
       return;
     }
+    const sharedScreen = session.seat === 0 ? msg.sharedScreen : undefined;
     session.inputQueue.push({
       dx: msg.dx,
       dy: msg.dy,
@@ -95,7 +100,12 @@ const COMMANDS: { [K in RealmCommandType]: RealmCommandHandler<K> } = {
       ...(msg.relativeDriving === true ? { relativeDriving: true } : {}),
       ...(isExcavatorAction(msg.excavatorAction) && { excavatorAction: msg.excavatorAction }),
       seq: msg.seq,
-      ...(session.seat === 0 && msg.sharedScreen === true ? { sharedScreen: true } : {}),
+      ...(sharedScreen && {
+        sharedScreen:
+          sharedScreen === true
+            ? LEGACY_SHARED_SCREEN_SPAN
+            : normalizeSharedScreenSpan(sharedScreen),
+      }),
       ...(msg.jumpPressed !== undefined ? { jumpPressed: msg.jumpPressed } : {}),
     });
   },

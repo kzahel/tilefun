@@ -1,4 +1,5 @@
 import { expect, type Page, test } from "@playwright/test";
+import { LOG_BUNDLE } from "../src/farming/FarmActors.js";
 import { flushLocalWorld, stopLocalWorld, worldRecords } from "./helpers/local-world.js";
 
 // Split screen (226): real `KeyboardEvent.code` routing for two keyboard schemes, and
@@ -114,7 +115,7 @@ test("a second keyboard player joins with Slash and plays the arrows in its own 
   expect(errors).toEqual([]);
 });
 
-test("local multiplayer can share one top-down camera and switch back to split screen", async ({
+test("shared screen uses the viewport width and each player can click their hotbar", async ({
   page,
 }) => {
   const errors: string[] = [];
@@ -146,9 +147,15 @@ test("local multiplayer can share one top-down camera and switch back to split s
   await page.keyboard.down("KeyA");
   await page.keyboard.down("ArrowRight");
   try {
-    await expect.poll(gap).toBeGreaterThan(348);
-    await page.waitForTimeout(450);
-    expect(await gap()).toBeLessThan(353);
+    await expect.poll(gap).toBeGreaterThan(378);
+    await page.waitForTimeout(350);
+    const narrowLimit = await gap();
+    expect(narrowLimit).toBeLessThan(383);
+    await page.setViewportSize({ width: 2160, height: 800 });
+    await expect.poll(async () => (await snapshot(page)).views).toEqual([[0, 0, 2160]]);
+    await expect.poll(gap).toBeGreaterThan(narrowLimit + 290);
+    await page.waitForTimeout(350);
+    expect(await gap()).toBeLessThan(676);
   } finally {
     await page.keyboard.up("KeyA");
     await page.keyboard.up("ArrowRight");
@@ -163,14 +170,47 @@ test("local multiplayer can share one top-down camera and switch back to split s
         const bodies = [...replica.seats.entities.values()].map((id) =>
           replica.serverEntityMap.get(id),
         );
-        return bodies.map((body) => {
+        return bodies.map((body, index) => {
           const x = body?.position.wx ?? Number.NaN;
           const sx = view.camera.worldToScreen(x, view.camera.y).sx;
-          return sx > 28 && sx < view.region.width - 28;
+          const edge = index === 0 ? sx : view.region.width - sx;
+          return edge > 20 && edge < 85;
         });
       }),
     )
     .toEqual([true, true]);
+  // Place separate bundles so the authority awards one to each seat.
+  await page.evaluate((entityType) => {
+    const game = (document.querySelector("#game") as unknown as { __game: Game }).__game;
+    const replica = game.stateView;
+    for (const id of replica.seats.entities.values()) {
+      const player = replica.serverEntityMap.get(id);
+      if (player) game.transport.send({ type: "edit-spawn", entityType, ...player.position });
+    }
+  }, LOG_BUNDLE);
+  const hostBar = page.getByRole("group", { name: "Hotbar", exact: true });
+  const guestBar = page.getByRole("group", { name: "Player 2 hotbar" });
+  for (const bar of [hostBar, guestBar]) {
+    const hint = bar.getByText(/^\S+ \/ \S+$/);
+    await expect(hint).toBeVisible();
+  }
+  const hostWood = hostBar.getByRole("button", { name: "Wood ×1" });
+  const guestWood = guestBar.getByRole("button", { name: "Wood ×1" });
+  await guestWood.click();
+  await expect(guestWood).toHaveAttribute("aria-pressed", "true");
+  await expect(hostWood).toHaveAttribute("aria-pressed", "false");
+  await hostWood.click();
+  await expect(hostWood).toHaveAttribute("aria-pressed", "true");
+  await guestWood.click();
+  await expect(guestWood).toHaveAttribute("aria-pressed", "false");
+  await expect(hostWood).toHaveAttribute("aria-pressed", "true");
+  await page.keyboard.press("BracketRight");
+  await expect(hostWood).toHaveAttribute("aria-pressed", "false");
+  await page.keyboard.press("Equal");
+  await expect(guestWood).toHaveAttribute("aria-pressed", "true");
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await expect.poll(async () => (await snapshot(page)).views).toEqual([[0, 0, 1280]]);
+  expect(await gap()).toBeGreaterThan(660); // resizing does not move either player
   await page.keyboard.press("Escape");
   await menu.getByRole("button", { name: "Multiplayer", exact: true }).click();
   await menu.getByRole("button", { name: "Use split screen", exact: true }).click();
@@ -182,6 +222,7 @@ test("local multiplayer can share one top-down camera and switch back to split s
       [0, 0, 640],
       [1, 640, 640],
     ]);
+  await expect(guestWood).toBeVisible();
   expect(errors).toEqual([]);
 });
 

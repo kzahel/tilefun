@@ -5,7 +5,7 @@ import { updatePlayerSpriteFromInput } from "../entities/Player.js";
 import { groundMaterialAt } from "../physics/GroundMaterial.js";
 import { PHYSICS_DT } from "../physics/PhysicsDefaults.js";
 import { PhysicsScene } from "../physics/PhysicsScene.js";
-import type { MotionIntent } from "../physics/PhysicsState.js";
+import type { MotionIntent, SharedScreenGroup } from "../physics/PhysicsState.js";
 import { playerMotionIntent, vehicleMotionIntent } from "../physics/PlayerControls.js";
 import type { Movement } from "../shared/Movement.js";
 import { vehicleLinks } from "../traffic/VehicleLinks.js";
@@ -146,12 +146,13 @@ export class RealmPhysics {
     activeSessions: readonly PlayerSession[],
     controls: ReadonlyMap<number, Movement>,
     controlTicks: ReadonlyMap<number, number>,
-  ): readonly number[][] {
-    const shared = new Map(
-      activeSessions
-        .filter((s) => s.seat === 0 && s.controls.sharedScreen && controls.has(s.player.id))
-        .map((s) => [s.connectionId, [] as number[]]),
-    );
+  ): readonly SharedScreenGroup[] {
+    const shared = new Map<string, SharedScreenGroup & { ids: number[] }>();
+    for (const session of activeSessions) {
+      const span = session.controls.sharedScreen;
+      if (session.seat === 0 && span && controls.has(session.player.id))
+        shared.set(session.connectionId, { span, ids: [] });
+    }
     for (const session of activeSessions) {
       const vehicle = this.realm.vehicles.get(session);
       const mount =
@@ -159,7 +160,7 @@ export class RealmPhysics {
           ? undefined
           : this.realm.entityManager.byId.get(session.gameplaySession.mountId);
       const controlled = vehicle ?? mount ?? session.player;
-      shared.get(session.connectionId)?.push(controlled.id);
+      shared.get(session.connectionId)?.ids.push(controlled.id);
       const movement = controls.get(session.player.id);
       if (!movement) continue;
       intents.set(controlled.id, {
@@ -169,7 +170,7 @@ export class RealmPhysics {
       // Facing/animation is intent-derived; readback publishes physical velocity.
       if (!vehicle) updatePlayerSpriteFromInput(session.player, movement);
     }
-    return [...shared.values()].filter((ids) => ids.length > 1);
+    return [...shared.values()].filter(({ ids }) => ids.length > 1);
   }
 
   /** Read back the step and resolve each player's landing/water outcome. */

@@ -1,3 +1,4 @@
+import type { ActionName } from "../input/ActionMap.js";
 import { actionHint } from "../input/InputHints.js";
 import { type PageInset, shift } from "../input/ViewRect.js";
 import {
@@ -15,11 +16,14 @@ export class HotbarControl {
   private inventory: Inventory = EMPTY_INVENTORY;
   private allowed = false;
 
-  constructor(private readonly select: (selection: HotbarSelection) => void) {
-    this.root.className = "play-hotbar";
+  constructor(
+    private readonly select: (selection: HotbarSelection) => void,
+    private readonly guest?: { label: string; hint: (action: ActionName) => string },
+  ) {
+    this.root.className = guest ? "play-hotbar guest-hotbar" : "play-hotbar";
     this.root.hidden = true;
     this.root.setAttribute("role", "group");
-    this.root.setAttribute("aria-label", "Hotbar");
+    this.root.setAttribute("aria-label", guest?.label ?? "Hotbar");
     this.slots = EMPTY_INVENTORY.slots.map((_, index) => {
       const button = document.createElement("button");
       button.type = "button";
@@ -36,7 +40,8 @@ export class HotbarControl {
     this.allowed = allowed;
     if (!visible) return;
     this.inventory = inventory ?? EMPTY_INVENTORY;
-    const hint = [actionHint("hotbar_previous"), actionHint("hotbar_next")]
+    const inputHint = this.guest?.hint ?? actionHint;
+    const hint = [inputHint("hotbar_previous"), inputHint("hotbar_next")]
       .filter(Boolean)
       .join(" / ");
     if (this.hint.textContent !== hint) this.hint.textContent = hint;
@@ -46,10 +51,8 @@ export class HotbarControl {
       const label = stack ? `${ITEMS[stack.item].label} ×${stack.count}` : `Empty slot ${i + 1}`;
       const text = stack ? `${ITEMS[stack.item].icon} ${stack.count}` : "·";
       const selected = this.inventory.selected === i;
-      if (button.textContent !== text) {
-        button.textContent = text;
-        button.setAttribute("aria-label", label);
-      }
+      if (button.textContent !== text) button.textContent = text;
+      button.setAttribute("aria-label", label);
       button.setAttribute("aria-pressed", String(selected));
       button.disabled = !allowed || !stack;
     });
@@ -59,8 +62,12 @@ export class HotbarControl {
     if (this.allowed) this.select(selection);
   }
 
-  place(inset: PageInset): void {
+  place(inset: PageInset, width?: number): void {
     shift(this.root, (inset.left - inset.right) / 2, -inset.bottom);
+    if (width !== undefined) {
+      const maxWidth = `${Math.max(0, Math.floor(width) - 8)}px`;
+      if (this.root.style.maxWidth !== maxWidth) this.root.style.maxWidth = maxWidth;
+    }
   }
 
   destroy(): void {

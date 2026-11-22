@@ -5,6 +5,7 @@
  *   0x16 = FrameMessage (vehicle rotation, equipment and couplings, prescribed groups, momentum and solved pairs; optional seat list) (server→client)
  *   0x03 = SyncChunksMessage (server→client)
  *   0x81 = fixed-tick device input, one packet per device tick (client→server; inputCodec)
+ *   0x82 = fixed-tick device input with shared-screen dimensions (client→server; inputCodec)
  *   0xFF = JSON fallback (UTF-8 JSON string follows)
  *
  * All multi-byte values are little-endian. All offsets measured in bytes.
@@ -22,7 +23,12 @@ import {
 import { ENTITY_TYPE_TO_INDEX, indexToEntityType } from "./entityTypeIndex.js";
 import type { WireCursor } from "./entityWire.js";
 import { frameSeatBytes, readFrameSeats, writeFrameSeats } from "./frameSeatCodec.js";
-import { decodePlayerInput, encodePlayerInput, TAG_PLAYER_INPUT } from "./inputCodec.js";
+import {
+  decodePlayerInput,
+  encodePlayerInput,
+  TAG_PLAYER_INPUT,
+  TAG_SHARED_SCREEN_INPUT,
+} from "./inputCodec.js";
 import { physicsStateBytes, readPhysicsState, writePhysicsState } from "./physicsStateCodec.js";
 import type {
   ChunkSnapshot,
@@ -73,7 +79,7 @@ export function encodeClientMessage(msg: ClientMessage): ArrayBuffer {
 export function decodeClientMessage(buf: ArrayBuffer): ClientMessage {
   const view = new DataView(buf);
   const tag = view.getUint8(0);
-  if (tag === TAG_PLAYER_INPUT) return decodePlayerInput(view);
+  if (tag === TAG_PLAYER_INPUT || tag === TAG_SHARED_SCREEN_INPUT) return decodePlayerInput(view);
   if (tag === TAG_JSON) return decodeJsonFallback(buf) as ClientMessage;
   throw new Error(`Unknown client message tag: 0x${tag.toString(16)}`);
 }

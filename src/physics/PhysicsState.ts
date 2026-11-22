@@ -1,4 +1,5 @@
 import type { ExcavatorAction } from "../shared/ExcavatorInput.js";
+import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import type { AngularVelocity, BodyRotation } from "./BodyRotation.js";
 export interface MotionIntent {
   vx: number;
@@ -13,6 +14,12 @@ export interface MotionIntent {
   excavatorAction?: ExcavatorAction;
   controlUntil?: number;
 }
+
+export interface SharedScreenGroup {
+  readonly ids: readonly number[];
+  readonly span: SharedScreenSpan;
+}
+
 /** Bounded numerical replay state; no WASM world or gameplay objects on the wire. */
 export const MAX_PREDICTION_BODIES = 128;
 export const PREDICTION_RADIUS = 160;

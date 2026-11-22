@@ -84,8 +84,10 @@ or credentials in this repository.
   Named on-screen paddles and interaction prompts follow the last input source.
 - Local players (226): split screen in the game.
   - **Layout:** select **Use shared screen** in **Multiplayer → Local multiplayer**
-    for one top-down view with a limit on how far local players can spread out.
-    Walkers and drivers can move back toward the group at the edge.
+    for one top-down view. Players can spread out across the playable area,
+    leaving a small border and room for the HUD. Wider windows give the party
+    more room side to side. Walkers and drivers can move along the edge or
+    back toward the group.
     **Use split screen** restores independent views. [Shared screen](../tactical/262-leashed-shared-screen.md).
   - **Joining:** **Multiplayer → Local multiplayer → Add Player 2 (keyboard)**
     joins a keyboard player on this device and resumes Play (leaving Build mode

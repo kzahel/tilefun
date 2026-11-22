@@ -171,6 +171,10 @@ The intermittent train check remains separate follow-up work.
 - [binaryCodec](../../src/shared/binaryCodec.ts) handles frame, player-input and
   chunk binary encoding with JSON envelopes for other message types. Consult
   code/tests for sizes; old JSON bandwidth estimates are historical.
+- Viewport-aware shared-screen input uses tag `0x82` with the device's
+  horizontal and vertical spread in whole world pixels. The same values are
+  used in authority and prediction for that sequence. It requires an updated
+  authority. Tag `0x81` retains ordinary input and the older fixed-spread bit.
 - Replicated entity fields are declared once in
   [`ENTITY_FIELDS`](../../src/shared/entityFields.ts) (name, mask bit, wire kind,
   equality/copy); snapshot/delta encode, decode, diff, apply and serialization

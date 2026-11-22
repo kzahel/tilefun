@@ -1,6 +1,7 @@
 import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { Movement } from "../shared/Movement.js";
+import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import type { World } from "../world/World.js";
 import type { PlayerPredictor } from "./PlayerPredictor.js";
 import type { SeatMovements } from "./SeatInputs.js";
@@ -15,7 +16,7 @@ export function predictInput(
   props: readonly Prop[],
   entities: readonly Entity[],
   seats?: SeatMovements,
-  sharedScreen?: boolean,
+  sharedScreen?: SharedScreenSpan,
 ) {
   predictor.storeInput(seq, movement, dt, seats, sharedScreen);
   predictor.update(dt, movement, world, props, entities);

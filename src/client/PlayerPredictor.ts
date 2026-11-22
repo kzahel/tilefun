@@ -15,6 +15,7 @@ import {
 } from "../physics/PlayerControls.js";
 import type { CameraPresentationTime } from "../rendering/CameraFollow.js";
 import type { Movement } from "../shared/Movement.js";
+import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import { isDrivable } from "../traffic/VehicleSeats.js";
 import type { World } from "../world/World.js";
 import { CarrierPresentation } from "./CarrierPresentation.js";
@@ -111,7 +112,7 @@ export class PlayerPredictor {
   private retiredEpochs = new Set<number>();
   private ackInputTick = 0;
   /** The acknowledged device layout survives physics resets. */
-  private acknowledgedSharedScreen = false;
+  private acknowledgedSharedScreen: SharedScreenSpan | undefined;
   private latestSeq = 0;
   private discardedThroughSeq: number | undefined;
   private receivedAck = -1;
@@ -225,13 +226,12 @@ export class PlayerPredictor {
     this.nearbyPresentation.clear();
     this.status = "waiting";
   }
-  /** `seats` carries every co-seat's movement, idle or not, under the same sequence (226). */
   storeInput(
     seq: number,
     movement: Movement,
     _dt: number,
     seats?: SeatMovements,
-    sharedScreen?: boolean,
+    sharedScreen?: SharedScreenSpan,
   ): void {
     if (!this.predicted || seq <= Math.max(this.latestSeq, this.receivedAck)) return;
     this.work.record("inputs");
@@ -291,7 +291,7 @@ export class PlayerPredictor {
     const acknowledged = [...this.inputHistory].reverse().find((input) => input.seq <= ack);
     if (acknowledged) {
       this.ackInputTick = acknowledged.tick;
-      this.acknowledgedSharedScreen = acknowledged.sharedScreen === true;
+      this.acknowledgedSharedScreen = acknowledged.sharedScreen;
     }
     this.inputHistory = this.inputHistory.filter((input) => input.seq > ack);
     const request: Request = {
@@ -426,23 +426,21 @@ export class PlayerPredictor {
       jumpPressed ||= movement.jumpPressed === true || (movement.jump && !job.jumpHeld);
       job.jumpHeld = movement.jump;
       job.seats.consume(input.seats);
-      job.sharedScreen = input.sharedScreen === true;
+      job.sharedScreen = input.sharedScreen;
       job.inputIndex++;
     }
     if (movement) {
       // Coalesce overdue axes, retaining jump edges just like authority admission.
       job.heldMovement = { ...movement, jumpPressed: false };
-      this.step(
-        { ...movement, jumpPressed },
-        job.request.player,
-        job.seats.take(),
-        job.sharedScreen,
-      );
+      this.step({ ...movement, jumpPressed }, job.request.player, {
+        seats: job.seats.take(),
+        sharedScreen: job.sharedScreen,
+      });
     } else {
       // No new local command is due: continue the snapshot's held motor targets.
       const { player, seatBodies } = job.request;
       const group = job.sharedScreen
-        ? [player.parentId ?? player.id, ...seatBodies.values()]
+        ? { ids: [player.parentId ?? player.id, ...seatBodies.values()], span: job.sharedScreen }
         : undefined;
       this.work.step(scene, this.motorIntents, this.geometry, this.gravity(), true, group);
     }
@@ -583,11 +581,16 @@ export class PlayerPredictor {
       seatCorrections,
     };
   }
-  private step(movement: Movement, player: Entity, seats?: SeatMovements, sharedScreen?: boolean) {
+  private step(
+    movement: Movement,
+    player: Entity,
+    input?: Pick<StoredInput, "seats" | "sharedScreen">,
+  ) {
     const scene = this.scene;
     if (!scene || !this.geometry) return;
     const controlled = this.bodies.get(player.parentId ?? player.id);
     if (!controlled) return;
+    const { seats, sharedScreen } = input ?? {};
     // Co-seats first so the primary seat's intent wins if a body collides.
     this.coSeats.intents(seats, this.bodies, this.motorIntents, scene.physicsTick);
     const intent = controlled.type.startsWith("vehicle-v1:")
@@ -598,7 +601,9 @@ export class PlayerPredictor {
       controlUntil: scene.physicsTick + CONTROL_HOLD_TICKS,
     });
     const group =
-      sharedScreen && seats ? [controlled.id, ...this.coSeats.bodyIds(seats.keys())] : undefined;
+      sharedScreen && seats
+        ? { ids: [controlled.id, ...this.coSeats.bodyIds(seats.keys())], span: sharedScreen }
+        : undefined;
     this.work.step(scene, this.motorIntents, this.geometry, this.gravity(), !!this.replay, group);
     updatePlayerSpriteFromInput(this.bodies.get(player.id) ?? player, movement);
   }
@@ -683,12 +688,7 @@ export class PlayerPredictor {
       // order rather than skipping to the latest axes and losing a jump edge.
       const submitted = this.inputHistory.find((input) => input.tick > this.appliedInputTick);
       this.appliedInputTick = submitted?.tick ?? this.inputTick;
-      this.step(
-        submitted?.movement ?? movement,
-        this.predicted,
-        submitted?.seats,
-        submitted?.sharedScreen,
-      );
+      this.step(submitted?.movement ?? movement, this.predicted, submitted);
       this.publish(this.predicted);
     }
     if (this.animationInputTick < this.inputTick) {

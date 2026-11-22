@@ -1,19 +1,43 @@
 import { PIXEL_SCALE } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
-import { SHARED_SCREEN_SPAN } from "../physics/SharedScreenLeash.js";
 import type { Camera } from "../rendering/Camera.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
+import type { RenderRegion } from "../rendering/ViewLayout.js";
+import { normalizeSharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import { isVehicle } from "../traffic/Vehicle.js";
 import type { DeviceSession } from "./DeviceSession.js";
 import { presentedSeatBody, seatBody } from "./SeatFocus.js";
 import type { CameraPolicy } from "./View.js";
 
-const GUTTER = 20;
+const GUTTER = 20; // Canvas pixels around the framed party.
+const PLAYER_ROOM = 32; // World pixels for a pair of ordinary character sprites.
 const MIN_ZOOM = 0.05;
 const ELEVATION_ROOM = 96;
 
 export function sharedHudTop(height: number): number {
-  return height - Math.min(96, Math.max(40, height / 4));
+  return Math.max(0, height - 96);
+}
+
+export function sharedGuestRegion(view: RenderRegion, index: number, count: number): RenderRegion {
+  const width = view.width / count;
+  return { x: view.x + index * width, y: view.y + sharedHudTop(view.height), width, height: 52 };
+}
+
+function playableHeight(viewportHeight: number): number {
+  return Math.max(1, sharedHudTop(viewportHeight) - 32);
+}
+
+/** Measure at the chosen zoom, before any temporary zoom-out to fit the party. */
+export function sharedScreenSpan({
+  viewportWidth,
+  viewportHeight,
+  zoom,
+}: Pick<Camera, "viewportWidth" | "viewportHeight" | "zoom">) {
+  const scale = PIXEL_SCALE * Math.max(MIN_ZOOM, zoom);
+  return normalizeSharedScreenSpan({
+    x: (viewportWidth - 2 * GUTTER) / scale - PLAYER_ROOM,
+    y: (playableHeight(viewportHeight) - 2 * GUTTER) / scale - PLAYER_ROOM,
+  });
 }
 
 interface Bounds {
@@ -78,14 +102,21 @@ function frame(
   const top = Math.min(...bounds.map((b) => b.top));
   const bottom = Math.max(...bounds.map((b) => b.bottom));
   const width = Math.max(1, camera.viewportWidth);
-  const height = Math.max(1, sharedHudTop(camera.viewportHeight) - 32);
+  const height = playableHeight(camera.viewportHeight);
+  const innerWidth = Math.max(1, width - 2 * GUTTER);
+  const innerHeight = Math.max(1, height - 2 * GUTTER);
   const fitZoom = (spanX: number, spanY: number) =>
-    Math.min(width / (spanX + 2 * GUTTER), height / (spanY + 2 * GUTTER)) / PIXEL_SCALE;
+    Math.min(innerWidth / spanX, innerHeight / spanY) / PIXEL_SCALE;
+  const span = sharedScreenSpan({
+    viewportWidth: width,
+    viewportHeight: camera.viewportHeight,
+    zoom: preferredZoom,
+  });
   const floor = Math.max(
     MIN_ZOOM,
     fitZoom(
-      SHARED_SCREEN_SPAN.x + Math.max(...bounds.map((b) => b.right - b.left)),
-      SHARED_SCREEN_SPAN.y + Math.max(...bounds.map((b) => b.bottom - b.top)) + ELEVATION_ROOM,
+      span.x + Math.max(...bounds.map((b) => b.right - b.left)),
+      span.y + Math.max(...bounds.map((b) => b.bottom - b.top)) + ELEVATION_ROOM,
     ),
   );
   camera.zoom = Math.max(
@@ -93,9 +124,9 @@ function frame(
     Math.min(preferredZoom, Math.max(floor, fitZoom(right - left, bottom - top))),
   );
   const scale = camera.scale;
-  camera.x = keepInView((left + right) / 2, primary.left, primary.right, width / scale);
+  camera.x = keepInView((left + right) / 2, primary.left, primary.right, innerWidth / scale);
   camera.y =
-    keepInView((top + bottom) / 2, primary.top, primary.bottom, height / scale) +
+    keepInView((top + bottom) / 2, primary.top, primary.bottom, innerHeight / scale) +
     (camera.viewportHeight - height) / (2 * scale);
   return true;
 }
@@ -104,6 +135,6 @@ function frame(
  * The ordinary off-screen markers still point to distant guests. */
 function keepInView(target: number, min: number, max: number, span: number): number {
   const centre = (min + max) / 2;
-  const room = Math.max(0, (span - (max - min)) / 2 - GUTTER);
+  const room = Math.max(0, (span - (max - min)) / 2);
   return Math.min(centre + room, Math.max(centre - room, target));
 }

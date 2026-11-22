@@ -1,6 +1,10 @@
 import { type FarmChoice, farmChoice, farmGateChoice } from "../farming/FarmInteraction.js";
+import { cssRegion, pageInset } from "../input/ViewRect.js";
+import type { RenderRegion } from "../rendering/ViewLayout.js";
 import type { ClientSeat } from "../session/ClientSeat.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
+import { sharedGuestRegion } from "../session/SharedScreenCamera.js";
+import { HotbarControl } from "../ui/HotbarControl.js";
 import {
   type DoorChoice,
   DoorWalk,
@@ -15,7 +19,8 @@ import type { PlaceRequest } from "./PlaceControls.js";
 
 /** Client state guests' place controls read (seat 0's place controls host). */
 export interface GuestPlacesHost {
-  readonly session: Pick<DeviceSession, "seats" | "replica" | "prediction">;
+  readonly session: Pick<DeviceSession, "seats" | "replica" | "prediction" | "views">;
+  readonly canvas: HTMLCanvasElement;
   readonly doorPresentation: Pick<DoorPresentation, "busy" | "begin" | "cancel">;
   readonly playing: boolean;
   readonly overlayOpen: boolean;
@@ -58,7 +63,8 @@ class GuestPlace {
   private vehicle: VehicleChoice | null = null;
   private door: DoorChoice | null = null;
   private farm: FarmChoice | undefined;
-  private hotbarAllowed = false;
+  private readonly hotbar: HotbarControl;
+  private hotbarReady = false;
   private busy = false;
   private status = "";
   private targetKey = "";
@@ -69,25 +75,33 @@ class GuestPlace {
     private readonly host: GuestPlacesHost,
   ) {
     const { input } = seat;
+    this.hotbar = new HotbarControl(
+      (selection) => {
+        if (this.hotbarAllowed)
+          void host.request({ type: "inventory-select", selection }, seat.seat).catch(() => {});
+      },
+      { label: `Player ${seat.seat + 1} hotbar`, hint: (action) => input?.hint(action) ?? "" },
+    );
     this.offs = input
       ? [
           input.on("enter_place", () => this.enter()),
           input.on("vehicle_recover", () => this.equip()),
-          input.on("hotbar_previous", () => this.selectHotbar(-1)),
-          input.on("hotbar_next", () => this.selectHotbar(1)),
+          input.on("hotbar_previous", () => this.hotbar.choose({ step: -1 })),
+          input.on("hotbar_next", () => this.hotbar.choose({ step: 1 })),
         ]
       : [];
   }
 
   /** `ready`: startup is done and the device's room or terrain is presentable. */
-  update(dt: number, ready: boolean): void {
+  update(dt: number, ready: boolean, region: RenderRegion | undefined): void {
     const { host, seat } = this;
     const view = guestPlaceView(host.session, seat.seat);
     if (!view) {
       this.walk.reset();
       this.vehicle = this.door = null;
       this.farm = undefined;
-      this.hotbarAllowed = false;
+      this.hotbarReady = false;
+      this.hotbar.update(undefined, false, false);
       seat.prompts = [];
       return;
     }
@@ -100,8 +114,18 @@ class GuestPlace {
     if (this.walk.update(view, this.door, doorAllowed, busy || host.inputBlocked, walking, dt))
       this.goThrough(true);
     const replica = host.session.replica;
-    const inventory = replica.seats.session(seat.seat, replica.serverTick)?.inventory;
-    this.hotbarAllowed = ready && !view.editorEnabled && view.playerEntity.parentId === undefined;
+    const sync = replica.seats.session(seat.seat, replica.serverTick);
+    const inventory = sync?.inventory;
+    this.hotbarReady = ready && !view.editorEnabled && view.playerEntity.parentId === undefined;
+    const allowed = this.hotbarAllowed;
+    this.hotbar.update(inventory, !!region && !!sync && allowed, allowed);
+    if (region && sync && allowed) {
+      const { clientWidth: width, clientHeight: height } = document.documentElement;
+      this.hotbar.place(
+        pageInset(host.canvas, region, { width, height }),
+        cssRegion(host.canvas, region).width,
+      );
+    }
     this.farm =
       doorAllowed &&
       !this.door.request &&
@@ -124,6 +148,7 @@ class GuestPlace {
 
   dispose(): void {
     for (const off of this.offs) off();
+    this.hotbar.destroy();
     this.seat.prompts = [];
   }
 
@@ -145,18 +170,15 @@ class GuestPlace {
     if (!this.vehicleLocked) this.board(request);
   }
 
-  private selectHotbar(step: -1 | 1): void {
+  private get hotbarAllowed(): boolean {
     const { host } = this;
-    if (
-      this.hotbarAllowed &&
+    return (
+      this.hotbarReady &&
       host.playing &&
       !host.overlayOpen &&
       !this.vehicleLocked &&
       !this.vehicle?.inside
-    )
-      void host
-        .request({ type: "inventory-select", selection: { step } }, this.seat.seat)
-        .catch(() => {});
+    );
   }
 
   private equip(): void {
@@ -240,7 +262,15 @@ export class GuestPlaces {
   }
 
   update(dt: number, ready: boolean): void {
-    for (const place of this.places.values()) place.update(dt, ready);
+    const { seats, views } = this.host.session;
+    const shared = views[0]?.sharedScreen ? views[0].region : undefined;
+    const guests = seats.list().filter(({ seat }) => seat !== 0);
+    for (const [index, { seat }] of guests.entries()) {
+      const region = shared
+        ? sharedGuestRegion(shared, index, guests.length)
+        : views.find((view) => view.seat === seat)?.region;
+      this.places.get(seat)?.update(dt, ready, region);
+    }
   }
 
   destroy(): void {

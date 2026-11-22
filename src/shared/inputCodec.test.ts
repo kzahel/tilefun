@@ -50,6 +50,24 @@ describe("device input packet (226)", () => {
     expect(decodeClientMessage(buffer)).toEqual(input);
   });
 
+  it("round-trips viewport spread for a full device with the host operating equipment", () => {
+    const input: PlayerInput = {
+      type: "player-input",
+      seq: 78,
+      dx: 0,
+      dy: 0,
+      sprinting: false,
+      jump: false,
+      excavatorAction: "bucket-curl",
+      sharedScreen: { x: 1101, y: 272 },
+      seats: [1, 2, 3].map((seat) => ({ seat, ...seat0 })),
+    };
+    const buffer = encodeClientMessage(input);
+    expect(buffer.byteLength).toBe(24);
+    expect(decodeClientMessage(buffer)).toEqual(input);
+    expect(() => decodeClientMessage(buffer.slice(0, 8))).toThrow("input length");
+  });
+
   it("refuses seats outside the device and malformed lengths", () => {
     const base: PlayerInput = { type: "player-input", seq: 1, ...seat0 };
     const other = { dx: 0, dy: 0, sprinting: false, jump: false };

@@ -6,6 +6,7 @@ import { CHUNK_SIZE_PX } from "../config/constants.js";
 import type { RenderResources } from "../rendering/RenderFrame.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import type { Movement } from "../shared/Movement.js";
+import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import { DeviceSeats } from "./DeviceSeats.js";
 import { SeatViews } from "./SeatViews.js";
 import type { View } from "./View.js";
@@ -118,7 +119,13 @@ export class DeviceSession {
   }
 
   /** Store seat 0's command (with the other seats' movement by seat) and predict it. */
-  predict(seq: number, movement: Movement, dt: number, coSeats?: SeatMovements): void {
+  predict(
+    seq: number,
+    movement: Movement,
+    dt: number,
+    coSeats?: SeatMovements,
+    sharedScreen?: SharedScreenSpan,
+  ): void {
     const { predictor, replica } = this;
     if (!predictor) return;
     predictInput(
@@ -130,7 +137,7 @@ export class DeviceSession {
       replica.props,
       replica.entities,
       coSeats,
-      this.seatViews?.host.sharedScreen || undefined,
+      sharedScreen,
     );
   }
 

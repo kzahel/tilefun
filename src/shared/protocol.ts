@@ -11,6 +11,7 @@ import type { BodyRotation } from "../physics/BodyRotation.js";
 import type { RailPath } from "../railway/RailPath.js";
 import type { ExcavatorAction } from "./ExcavatorInput.js";
 import type { EntityDelta } from "./entityDelta.js";
+import type { SharedScreenSpan } from "./SharedScreenSpan.js";
 
 /** Requested outdoor arrival point, validated by the server before a realm change. */
 export interface Arrival {
@@ -106,8 +107,8 @@ export type ClientMessage =
       reversing?: boolean;
       relativeDriving?: boolean;
       excavatorAction?: ExcavatorAction;
-      /** The device is playing through one leashed top-down camera. */
-      sharedScreen?: boolean;
+      /** The device's shared-camera spread, or the legacy fixed-spread mode bit. */
+      sharedScreen?: true | SharedScreenSpan | undefined;
       /** Every other joined seat's movement on the same device tick (226). */
       seats?: SeatMovement[];
     }

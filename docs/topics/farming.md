@@ -16,7 +16,9 @@ Use **E**, controller **Y**, or the on-screen action in Play.
 - Harvest puts an ear of corn in the acting player's four-slot hotbar. Tap a slot
   to hold its item, then tap it again to put it away. **[ / ]** or controller
   **D-pad Left / Right** cycle through the occupied slots and empty hands.
-  The split-screen keyboard guest uses **- / =**.
+  The local keyboard guest uses **- / =**. In shared-screen and split-screen
+  co-op, click or tap a filled slot in either player's hotbar to select it for
+  that player. Each hotbar shows its own shortcut hints.
 - Hold corn near Buff hens and they'll follow. Use **Scatter corn** beside the
   flock to feed them on clear ground. The farm sign marks the pen.
 - Use **Open gate** and **Close gate** in Play. Walk slowly with corn to lead

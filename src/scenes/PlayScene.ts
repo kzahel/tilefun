@@ -9,6 +9,8 @@ import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import type { DeviceSeats } from "../session/DeviceSeats.js";
 import { composeDeviceTick } from "../session/DeviceTick.js";
+import { sharedScreenSpan } from "../session/SharedScreenCamera.js";
+import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import type { IClientTransport } from "../transport/Transport.js";
 import {
@@ -31,8 +33,7 @@ import { render3DDebug, renderDebugOverlay } from "./renderDebug.js";
 import { renderPlayViews } from "./renderPlayViews.js";
 
 /**
- * Play mode scene.
- * Handles: player movement input, camera follow, gem HUD, touch joystick.
+ * Play-mode input, camera follow, HUD and touch controls.
  * Runs client-side prediction for the player entity.
  */
 const HIT_SHAKE_INTENSITY = 6;
@@ -77,7 +78,7 @@ export class PlayScene implements GameScene {
   readonly transparent = false;
   /** The device's local players (226), whose input this scene sends each tick. */
   private seats: DeviceSeats | null = null;
-  private sharedScreen = false;
+  private sharedScreen: SharedScreenSpan | undefined;
   private prevInvincibilityTimer = 0;
   private readonly guestFeedback = new GuestFeedback();
   private zoomUnsubs: (() => void)[] = [];
@@ -85,7 +86,6 @@ export class PlayScene implements GameScene {
   private effectsRealmId: string | null | undefined;
   private footsteps: FootstepSystem | null = null;
   private ambient: AmbientSystem | null = null;
-  /** Player position last frame while airborne (for detecting water-respawn teleport). */
   private prevGemsCollected = 0;
   /** Entity IDs that have been seen with deathTimer (to detect ghost death onset). */
   private dyingEntities = new Set<number>();
@@ -202,7 +202,7 @@ export class PlayScene implements GameScene {
     }
     // One view per seat (226); each camera saves its pose for render interpolation.
     beginViewTick(gc);
-    this.sharedScreen = gc.view.sharedScreen;
+    this.sharedScreen = gc.view.sharedScreen ? sharedScreenSpan(gc.camera) : undefined;
     if (gc.debugPanel.consumeBaseModeChange() || gc.debugPanel.consumeConvexChange()) {
       gc.transport.send({ type: "invalidate-all-chunks" });
     }
@@ -313,7 +313,7 @@ export class PlayScene implements GameScene {
       gc.stateView.playerEntity.position,
       !inputLocked && !gc.debugPanel.paused && !document.hidden,
     );
-    if (gc.view.sharedScreen) tick.input.sharedScreen = true;
+    tick.input.sharedScreen = this.sharedScreen;
     gc.transport.send(tick.input);
     for (const message of tick.after) gc.transport.send(message);
 
@@ -327,7 +327,7 @@ export class PlayScene implements GameScene {
     if (remoteView.stateAppliedThisTick && gc.session.reconcile(doorBusy))
       this.maybeLogReconcile(gc, remoteView);
     // Store the tick (locked seats still) and predict it; a held device stays put.
-    if (!held) gc.session.predict(seq, tick.host.movement, 1 / 60, tick.coSeats);
+    if (!held) gc.session.predict(seq, tick.host.movement, 1 / 60, tick.coSeats, this.sharedScreen);
 
     // Camera follows the predicted player (placeholder id -1 is skipped, so a
     // pending camera.requestSnap() waits for the first real position).

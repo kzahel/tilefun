@@ -2,6 +2,7 @@ import type { Entity } from "../entities/Entity.js";
 import type { Prop } from "../entities/Prop.js";
 import type { PhysicsState } from "../physics/PhysicsState.js";
 import type { Movement } from "../shared/Movement.js";
+import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import type { World } from "../world/World.js";
 import type { ReplayPose } from "./PredictionSnapshots.js";
 import type { SeatMovements, SeatReplay } from "./SeatInputs.js";
@@ -11,8 +12,8 @@ export interface StoredInput {
   tick: number;
   movement: Movement;
   /** Co-seats' movement on the same device tick (226). */
-  seats?: SeatMovements;
-  sharedScreen?: boolean;
+  seats?: SeatMovements | undefined;
+  sharedScreen?: SharedScreenSpan | undefined;
 }
 
 export interface ReplayRequest {
@@ -25,7 +26,7 @@ export interface ReplayRequest {
   props: readonly Prop[];
   /** Each co-seat's controlled body at this snapshot (226). */
   seatBodies: ReadonlyMap<number, number>;
-  sharedScreen: boolean;
+  sharedScreen: SharedScreenSpan | undefined;
 }
 
 export interface PredictionReplay {
@@ -36,7 +37,7 @@ export interface PredictionReplay {
   inputIndex: number;
   jumpHeld: boolean;
   heldMovement?: Movement;
-  sharedScreen: boolean;
+  sharedScreen: SharedScreenSpan | undefined;
   steps: number;
   ms: number;
   before: Entity;

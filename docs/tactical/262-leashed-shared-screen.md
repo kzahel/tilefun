@@ -33,3 +33,14 @@ Anywhere and confirmed the camera fixes on re-review.
 
 Next: family playtest with one driver and one explorer, then tune the
 separation limit or add a small edge cue if drivers miss why they stopped.
+
+## Viewport and hotbar follow-up
+
+The current limit uses the shared viewport width and the playable height
+above the HUD at the chosen zoom. It leaves a 20 canvas-pixel margin and room
+for the character sprites. The camera can zoom out temporarily for larger
+chassis or elevation changes. After a resize or zoom change the party can
+regroup from outside the new limit without moving either player abruptly.
+The host's fixed-tick input carries both dimensions for the authority and
+prediction to apply. Guest inventories use the same clickable slot buttons
+as the host with each guest's own keyboard or controller hints.
