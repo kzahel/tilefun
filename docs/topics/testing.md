@@ -9,7 +9,8 @@ rigs alongside the frozen v1 mesh and sprite receipts. The frameless collector
 digest records the bus's solved orientation, and the HUD draws the held-item
 icon through game composition. The seed-2026 gazelle arrival follows its
 current generated herd at (920, 1636), with fresh Workshop identities for all
-four landscape profiles.
+four landscape profiles. The mobile placement test counts the editor roster
+and waits for the authority to confirm dismount before measuring parked drift.
 
 [253](../tactical/253-retire-fixed-world-renderer.md) retires fixed GPU world
 passes and moves ordinary software-WebGL tests to unified drawing. The existing

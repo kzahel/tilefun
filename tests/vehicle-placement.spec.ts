@@ -1,6 +1,6 @@
 import { expect, type Page, test } from "@playwright/test";
 import type { GameTestHooks } from "../src/client/GameTestHooks.js";
-import { DRIVABLE_MODELS } from "../src/traffic/Vehicle.js";
+import { EDITOR_VEHICLE_MODELS } from "../src/traffic/Vehicle.js";
 
 const vehicles = (page: Page) =>
   page.evaluate(() => {
@@ -14,6 +14,11 @@ const vehicles = (page: Page) =>
         wy: e.position.wy,
         state: e.emergencyState,
       }));
+  });
+const vehicleParent = (page: Page) =>
+  page.evaluate(() => {
+    const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
+    return g.stateView.serverPlayerEntity.parentId;
   });
 async function point(page: Page, wx: number, wy: number) {
   return page.evaluate(
@@ -87,7 +92,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
   await page.getByRole("button", { name: "Edit", exact: true }).tap();
   await page.locator('[data-editor-tab="vehicles"]').tap();
   const picker = page.getByRole("group", { name: "Vehicle picker" });
-  await expect(picker.getByRole("button")).toHaveCount(DRIVABLE_MODELS.length + 1);
+  await expect(picker.getByRole("button")).toHaveCount(EDITOR_VEHICLE_MODELS.length + 1);
   expect((await page.getByTestId("editor-panel").boundingBox())?.height).toBeLessThanOrEqual(400);
   await picker.getByRole("button", { name: "Raised-ladder firetruck", exact: true }).tap();
   await expect(page.getByTestId("editor-selection")).toHaveText("Raised-ladder firetruck");
@@ -168,14 +173,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
     });
   }, car);
   await page.getByRole("button", { name: /^Drive car(?: · [^\s·]{1,3})?$/ }).tap();
-  await expect
-    .poll(() =>
-      page.evaluate(() => {
-        const g = (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game;
-        return g.stateView.serverPlayerEntity.parentId;
-      }),
-    )
-    .toBe(car.id);
+  await expect.poll(() => vehicleParent(page)).toBe(car.id);
   await page.locator("#game").focus();
   // Cars default to relative steering: Up is throttle along the placed right-facing nose.
   await page.keyboard.down("ArrowUp");
@@ -186,6 +184,7 @@ test(`place, drive, save and delete ${model} through the mobile editor in a road
 
   await expect(page.getByRole("button", { name: /^Get out(?: · [^\s·]{1,3})?$/ })).toBeVisible();
   await page.getByRole("button", { name: /^Get out(?: · [^\s·]{1,3})?$/ }).tap();
+  await expect.poll(() => vehicleParent(page)).toBeUndefined();
   const parked = (await vehicles(page))[0];
   if (!parked) throw Error("Lost vehicle");
   await page.waitForTimeout(350);
