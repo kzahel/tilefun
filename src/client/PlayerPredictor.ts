@@ -110,6 +110,8 @@ export class PlayerPredictor {
   private animationInputTick = 0;
   private retiredEpochs = new Set<number>();
   private ackInputTick = 0;
+  /** The acknowledged device layout survives physics resets. */
+  private acknowledgedSharedScreen = false;
   private latestSeq = 0;
   private discardedThroughSeq: number | undefined;
   private receivedAck = -1;
@@ -224,7 +226,13 @@ export class PlayerPredictor {
     this.status = "waiting";
   }
   /** `seats` carries every co-seat's movement, idle or not, under the same sequence (226). */
-  storeInput(seq: number, movement: Movement, _dt: number, seats?: SeatMovements): void {
+  storeInput(
+    seq: number,
+    movement: Movement,
+    _dt: number,
+    seats?: SeatMovements,
+    sharedScreen?: boolean,
+  ): void {
     if (!this.predicted || seq <= Math.max(this.latestSeq, this.receivedAck)) return;
     this.work.record("inputs");
     this.latestSeq = seq;
@@ -235,6 +243,7 @@ export class PlayerPredictor {
       tick: this.inputTick,
       movement: normalizedMovement(movement),
       ...(co ? { seats: co } : {}),
+      ...(sharedScreen ? { sharedScreen } : {}),
     });
     const submitted = this.inputHistory[this.inputHistory.length - 1];
     if (this.replay && this.replay.targetInputTick === undefined && submitted)
@@ -280,7 +289,10 @@ export class PlayerPredictor {
     this.receivedAck = ack;
     this.receivedServerTick = timing?.serverTick ?? this.receivedServerTick + 1;
     const acknowledged = [...this.inputHistory].reverse().find((input) => input.seq <= ack);
-    if (acknowledged) this.ackInputTick = acknowledged.tick;
+    if (acknowledged) {
+      this.ackInputTick = acknowledged.tick;
+      this.acknowledgedSharedScreen = acknowledged.sharedScreen === true;
+    }
     this.inputHistory = this.inputHistory.filter((input) => input.seq > ack);
     const request: Request = {
       player: clone(player),
@@ -290,6 +302,7 @@ export class PlayerPredictor {
       world,
       props,
       seatBodies: seatBodies(timing?.seats, entities),
+      sharedScreen: this.acknowledgedSharedScreen,
     };
     // Retain the parent's replicated seat metadata even though it has no body.
     this.riderLift = (player.wz ?? 0) - (entities.get(player.parentId ?? -1)?.wz ?? 0);
@@ -385,6 +398,7 @@ export class PlayerPredictor {
         overdue,
       ),
       inputIndex: 0,
+      sharedScreen: request.sharedScreen,
       jumpHeld: state.bodies.find((body) => body.id === anchorId)?.jumpHeld ?? false,
       steps: 0,
       ms: 0,
@@ -412,15 +426,25 @@ export class PlayerPredictor {
       jumpPressed ||= movement.jumpPressed === true || (movement.jump && !job.jumpHeld);
       job.jumpHeld = movement.jump;
       job.seats.consume(input.seats);
+      job.sharedScreen = input.sharedScreen === true;
       job.inputIndex++;
     }
     if (movement) {
       // Coalesce overdue axes, retaining jump edges just like authority admission.
       job.heldMovement = { ...movement, jumpPressed: false };
-      this.step({ ...movement, jumpPressed }, job.request.player, job.seats.take());
+      this.step(
+        { ...movement, jumpPressed },
+        job.request.player,
+        job.seats.take(),
+        job.sharedScreen,
+      );
     } else {
       // No new local command is due: continue the snapshot's held motor targets.
-      this.work.step(scene, this.motorIntents, this.geometry, this.gravity(), true);
+      const { player, seatBodies } = job.request;
+      const group = job.sharedScreen
+        ? [player.parentId ?? player.id, ...seatBodies.values()]
+        : undefined;
+      this.work.step(scene, this.motorIntents, this.geometry, this.gravity(), true, group);
     }
   }
   private captureReplayComparison(job: Replay) {
@@ -559,7 +583,7 @@ export class PlayerPredictor {
       seatCorrections,
     };
   }
-  private step(movement: Movement, player: Entity, seats?: SeatMovements) {
+  private step(movement: Movement, player: Entity, seats?: SeatMovements, sharedScreen?: boolean) {
     const scene = this.scene;
     if (!scene || !this.geometry) return;
     const controlled = this.bodies.get(player.parentId ?? player.id);
@@ -573,7 +597,9 @@ export class PlayerPredictor {
       ...intent,
       controlUntil: scene.physicsTick + CONTROL_HOLD_TICKS,
     });
-    this.work.step(scene, this.motorIntents, this.geometry, this.gravity(), !!this.replay);
+    const group =
+      sharedScreen && seats ? [controlled.id, ...this.coSeats.bodyIds(seats.keys())] : undefined;
+    this.work.step(scene, this.motorIntents, this.geometry, this.gravity(), !!this.replay, group);
     updatePlayerSpriteFromInput(this.bodies.get(player.id) ?? player, movement);
   }
   private samplePlayer(authority: Entity): Entity {
@@ -657,7 +683,12 @@ export class PlayerPredictor {
       // order rather than skipping to the latest axes and losing a jump edge.
       const submitted = this.inputHistory.find((input) => input.tick > this.appliedInputTick);
       this.appliedInputTick = submitted?.tick ?? this.inputTick;
-      this.step(submitted?.movement ?? movement, this.predicted, submitted?.seats);
+      this.step(
+        submitted?.movement ?? movement,
+        this.predicted,
+        submitted?.seats,
+        submitted?.sharedScreen,
+      );
       this.publish(this.predicted);
     }
     if (this.animationInputTick < this.inputTick) {

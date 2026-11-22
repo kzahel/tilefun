@@ -115,9 +115,9 @@ export class CoSeats {
   }
 
   /** Bodies the latest input's co-seats control at the replayed snapshot. */
-  bodyIds(): number[] {
+  bodyIds(seats: Iterable<number> = this.keys): number[] {
     const ids: number[] = [];
-    for (const seat of this.keys) {
+    for (const seat of seats) {
       const id = this.bodies.get(seat);
       if (id !== undefined) ids.push(id);
     }

@@ -1,9 +1,11 @@
 import type { GameContext } from "../core/GameScene.js";
 import { cssRegion } from "../input/ViewRect.js";
 import { EMPTY_INVENTORY, heldItem, ITEMS } from "../inventory/Inventory.js";
+import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
 import { projectWorld } from "../rendering/Projection.js";
 import { layoutViews } from "../rendering/ViewLayout.js";
-import { seatBody } from "../session/SeatFocus.js";
+import { presentedSeatBody, seatBody } from "../session/SeatFocus.js";
+import { sharedHudTop } from "../session/SharedScreenCamera.js";
 import type { View } from "../session/View.js";
 import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
 import { drawCrosshair } from "./firstPersonPlay.js";
@@ -19,7 +21,7 @@ const GUEST_HIT_SHAKE = 6;
 
 /** Lay the views out for this tick and start each camera's step. */
 export function beginViewTick(gc: GameContext): readonly View[] {
-  const views = gc.session.layoutViews(gc.canvas.width, gc.canvas.height, true);
+  const views = gc.session.layoutViews(gc.canvas.width, gc.canvas.height, true, !gc.xr?.immersive);
   for (const view of views) {
     view.camera.savePrev();
     view.camera.zoom = gc.debugPanel.zoom * view.zoomScale;
@@ -36,6 +38,17 @@ export function beginViewTick(gc: GameContext): readonly View[] {
 /** After the predicted step: guests' cameras follow and send their ranges (none
  * until the guest's body is streamed, so no range goes around the world origin). */
 export function followGuestViews(gc: GameContext): void {
+  if (gc.view.sharedScreen) {
+    const guests = gc.session.seats.list().filter(({ seat }) => seat !== 0);
+    const range = gc.view.interestRange();
+    const key = `${range.minCx},${range.minCy},${range.maxCx},${range.maxCy}:${guests.map(({ seat }) => seat)}`;
+    if (key !== gc.view.rangeKey) {
+      gc.view.rangeKey = key;
+      for (const { seat } of guests)
+        gc.transport.send({ type: "seat", seat, message: { type: "visible-range", ...range } });
+    }
+    return;
+  }
   for (const view of gc.session.views) {
     if (view.seat === 0 || !seatBody(gc.session, view.seat)) continue;
     view.policy.tick(view.camera, gc.session);
@@ -64,18 +77,19 @@ export class GuestFeedback {
 
   update(gc: GameContext, sound: (kind: "hit" | "gem") => void): void {
     const seen = new Set<number>();
-    for (const view of gc.session.views) {
-      if (view.seat === 0) continue;
-      const sync = gc.stateView.seats.session(view.seat, gc.stateView.serverTick);
+    for (const { seat } of gc.session.seats.list()) {
+      if (seat === 0) continue;
+      const sync = gc.stateView.seats.session(seat, gc.stateView.serverTick);
       if (!sync) continue;
-      seen.add(view.seat);
-      const last = this.last.get(view.seat);
+      seen.add(seat);
+      const last = this.last.get(seat);
       if (last && sync.invincibilityTimer > 0 && last.hit === 0) {
+        const view = gc.session.views.find((view) => view.seat === seat) ?? gc.view;
         view.camera.shake(GUEST_HIT_SHAKE);
         sound("hit");
       }
       if (last && sync.gemsCollected > last.gems) sound("gem");
-      this.last.set(view.seat, { gems: sync.gemsCollected, hit: sync.invincibilityTimer });
+      this.last.set(seat, { gems: sync.gemsCollected, hit: sync.invincibilityTimer });
     }
     for (const seat of this.last.keys()) if (!seen.has(seat)) this.last.delete(seat);
   }
@@ -117,10 +131,11 @@ export function drawViewOverlays(gc: GameContext, alpha: number): void {
         drawCrosshair(ctx, width, height);
         drawHeldItem(gc, view);
       } else {
-        const own = view.seat === 0 ? gc.stateView.playerEntity.id : seatEntityId(gc, view.seat);
+        const own = view.sharedScreen ? -1 : seatEntityId(gc, view.seat);
         drawPlayerMarkers({ ctx, camera: view.camera, stateView: gc.stateView }, alpha, own);
       }
       if (split) drawSeatBadge(gc, view);
+      if (view.sharedScreen) drawSharedGuests(gc, view, alpha);
       if (view.seat !== 0) {
         const hotbar = drawGuestHotbar(gc, view);
         drawSeatPrompts(gc, view, hotbar);
@@ -147,7 +162,7 @@ function drawJoinHint(gc: GameContext): void {
 }
 
 function seatEntityId(gc: GameContext, seat: number): number {
-  return gc.stateView.seats.entities.get(seat) ?? -1;
+  return seat === 0 ? gc.stateView.playerEntity.id : (gc.stateView.seats.entities.get(seat) ?? -1);
 }
 
 /** A seat's name and gems at the top right of its view (below the page's map button
@@ -200,47 +215,100 @@ function drawHeldItem(gc: GameContext, view: View): void {
   gc.heldItemSheet.drawTile(ctx, item - 1, 0, view.region.width * 0.69, view.region.height - 87, 5);
 }
 
-function drawGuestHotbar(gc: GameContext, view: View): boolean {
-  const seat = gc.session.seats.get(view.seat);
-  const sync = gc.stateView.seats.session(view.seat, gc.stateView.serverTick);
-  if (!sync || seatBody(gc.session, view.seat)?.parentId !== undefined) return false;
+function drawSharedGuests(gc: GameContext, view: View, alpha: number): void {
+  const guests = gc.session.seats.list().filter(({ seat }) => seat !== 0);
+  const column = view.region.width / guests.length;
+  const hudTop = sharedHudTop(view.region.height);
+  for (const [index, { seat }] of guests.entries()) {
+    const centre = column * (index + 0.5);
+    const sync = gc.stateView.seats.session(seat, gc.stateView.serverTick);
+    if (sync) {
+      const { ctx } = gc;
+      ctx.fillStyle = "#f9ebc9";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.font = "bold 13px system-ui, sans-serif";
+      ctx.fillText(
+        `Player ${seat + 1} · ${sync.gemsCollected.toLocaleString()} gems`,
+        centre,
+        hudTop - 24,
+        column - 8,
+      );
+      drawGuestHotbar(gc, view, seat, centre, hudTop, Math.max(8, Math.min(35, (column - 8) / 4)));
+    }
+    const body = presentedSeatBody(gc.session, seat);
+    if (!body) continue;
+    const pos = interpolatePosition(body.position, body.prevPosition, alpha);
+    const p = projectWorld(view.camera, pos.wx, pos.wy, interpolateWz(body, alpha));
+    if (p.sx < 0 || p.sx > view.region.width || p.sy < 0 || p.sy > hudTop - 32) continue;
+    const lines = gc.session.seats.get(seat)?.prompts ?? [];
+    const width = Math.min(210, view.region.width - 16);
+    const x = Math.min(view.region.width - width / 2 - 8, Math.max(width / 2 + 8, p.sx));
+    const maxY = hudTop - 36 - lines.length * 36;
+    const y = Math.max(8, Math.min(maxY, p.sy + 16));
+    drawSeatPrompts(gc, view, false, seat, x, y, width);
+  }
+}
+
+function drawGuestHotbar(
+  gc: GameContext,
+  view: View,
+  id = view.seat,
+  centre = view.region.width / 2,
+  top = view.region.height - 40,
+  pitch = 35,
+): boolean {
+  const seat = gc.session.seats.get(id);
+  const sync = gc.stateView.seats.session(id, gc.stateView.serverTick);
+  if (!sync || seatBody(gc.session, id)?.parentId !== undefined) return false;
   const { ctx } = gc;
   const bar = sync.inventory ?? EMPTY_INVENTORY;
-  const left = view.region.width / 2 - 68;
-  const top = view.region.height - 40;
+  const left = centre - 2 * pitch + 2;
   ctx.font = "13px system-ui, sans-serif";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   for (const [index, stack] of bar.slots.entries()) {
-    const x = left + index * 35;
+    const x = left + index * pitch;
     ctx.fillStyle = index === bar.selected ? "#604925" : "#392f22";
     ctx.strokeStyle = index === bar.selected ? "#ffe19a" : "#7c6a4d";
     ctx.beginPath();
-    ctx.roundRect(x, top, 32, 30, 4);
+    ctx.roundRect(x, top, pitch - 3, 30, 4);
     ctx.fill();
     ctx.stroke();
     ctx.fillStyle = "#f9ebc9";
-    ctx.fillText(stack ? `${ITEMS[stack.item].icon} ${stack.count}` : "·", x + 16, top + 15, 29);
+    ctx.fillText(
+      stack ? `${ITEMS[stack.item].icon} ${stack.count}` : "·",
+      x + (pitch - 3) / 2,
+      top + 15,
+      pitch - 6,
+    );
   }
   const previous = seat?.input?.hint("hotbar_previous");
   const next = seat?.input?.hint("hotbar_next");
-  if (previous && next) ctx.fillText(`${previous} / ${next}`, view.region.width / 2, top - 9);
+  if (previous && next) ctx.fillText(`${previous} / ${next}`, centre, top - 9);
   return true;
 }
 
 /** A guest's place prompts at the bottom of its view, nearest the player last
  * (seat 0's are page controls inside its view). */
-function drawSeatPrompts(gc: GameContext, view: View, hotbar: boolean): void {
-  const lines = gc.session.seats.get(view.seat)?.prompts ?? [];
+function drawSeatPrompts(
+  gc: GameContext,
+  view: View,
+  hotbar: boolean,
+  id = view.seat,
+  centre = view.region.width / 2,
+  anchorY?: number,
+  maxWidth = view.region.width - 24,
+): void {
+  const lines = gc.session.seats.get(id)?.prompts ?? [];
   if (!lines.length) return;
   const { ctx } = gc;
   ctx.font = "15px system-ui, sans-serif";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  const centre = view.region.width / 2;
-  let top = view.region.height - (hotbar ? 58 : 16) - lines.length * 36;
+  let top = anchorY ?? view.region.height - (hotbar ? 58 : 16) - lines.length * 36;
   for (const line of lines) {
-    const width = Math.min(view.region.width - 24, ctx.measureText(line).width + 24);
+    const width = Math.min(maxWidth, ctx.measureText(line).width + 24);
     ctx.fillStyle = "#243a32ee";
     ctx.strokeStyle = "#c5d3b6";
     ctx.lineWidth = 1;

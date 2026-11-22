@@ -123,7 +123,7 @@ export class RealmPhysics {
       this.scene?.physicsTick ?? 0,
     ) ?? [])
       intents.set(id, intent);
-    this.addControlIntents(intents, activeSessions, controls, controlTicks);
+    const groups = this.addControlIntents(intents, activeSessions, controls, controlTicks);
     const participants = active.filter(
       (e) => entityManager.byId.get(e.id) === e && !e.tags?.has("passage"),
     );
@@ -134,7 +134,7 @@ export class RealmPhysics {
     // Couplings publish resident partner IDs before the scene builds their joints.
     if (this.realm.vehicleRegistry) vehicleLinks(this.realm.vehicleRegistry).tick();
     this.stepPass = scene.synchronize(participants, undefined, napping);
-    scene.step(intents, this.environment(), gravity);
+    scene.step(intents, this.environment(), gravity, groups);
     this.realm.railways?.finish();
     return { scene, participants, wasAirborne };
   }
@@ -144,16 +144,22 @@ export class RealmPhysics {
     activeSessions: readonly PlayerSession[],
     controls: ReadonlyMap<number, Movement>,
     controlTicks: ReadonlyMap<number, number>,
-  ): void {
+  ): readonly number[][] {
+    const shared = new Map(
+      activeSessions
+        .filter((s) => s.seat === 0 && s.controls.sharedScreen && controls.has(s.player.id))
+        .map((s) => [s.connectionId, [] as number[]]),
+    );
     for (const session of activeSessions) {
-      const movement = controls.get(session.player.id);
-      if (!movement) continue;
       const vehicle = this.realm.vehicles.get(session);
       const mount =
         session.gameplaySession.mountId === null
           ? undefined
           : this.realm.entityManager.byId.get(session.gameplaySession.mountId);
       const controlled = vehicle ?? mount ?? session.player;
+      shared.get(session.connectionId)?.push(controlled.id);
+      const movement = controls.get(session.player.id);
+      if (!movement) continue;
       intents.set(controlled.id, {
         ...(vehicle ? vehicleMotionIntent(vehicle, movement) : playerMotionIntent(movement)),
         controlUntil: (this.scene?.physicsTick ?? 0) + (controlTicks.get(session.player.id) ?? 0),
@@ -161,6 +167,7 @@ export class RealmPhysics {
       // Facing/animation is intent-derived; readback publishes physical velocity.
       if (!vehicle) updatePlayerSpriteFromInput(session.player, movement);
     }
+    return [...shared.values()].filter((ids) => ids.length > 1);
   }
 
   /** Read back the step and resolve each player's landing/water outcome. */

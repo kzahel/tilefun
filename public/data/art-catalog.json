@@ -34659,7 +34659,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:578"
+          "source": "src/scenes/PlayScene.ts:583"
         },
         {
           "system": "Gameplay",
@@ -34715,7 +34715,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:578"
+          "source": "src/scenes/PlayScene.ts:583"
         },
         {
           "system": "Gameplay",
@@ -34767,7 +34767,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:578"
+          "source": "src/scenes/PlayScene.ts:583"
         },
         {
           "system": "Gameplay",
@@ -36645,11 +36645,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LocalPlayers.ts:230"
+          "source": "src/client/LocalPlayers.ts:234"
         },
         {
           "system": "Gameplay",
-          "source": "src/client/LocalPlayers.ts:233"
+          "source": "src/client/LocalPlayers.ts:237"
         },
         {
           "system": "Gameplay",
@@ -36721,7 +36721,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsScene.ts:550"
+          "source": "src/physics/PhysicsScene.ts:561"
         },
         {
           "system": "Gameplay",
@@ -36777,7 +36777,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmCommands.ts:224"
+          "source": "src/server/RealmCommands.ts:225"
         },
         {
           "system": "Gameplay",
@@ -37897,7 +37897,7 @@
         },
         {
           "system": "Editor",
-          "source": "src/scenes/PlayScene.ts:495"
+          "source": "src/scenes/PlayScene.ts:500"
         },
         {
           "system": "Gameplay",
@@ -37905,7 +37905,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/server/RealmCommands.ts:279"
+          "source": "src/server/RealmCommands.ts:280"
         },
         {
           "system": "Gameplay",

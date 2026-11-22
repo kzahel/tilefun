@@ -106,6 +106,8 @@ export type ClientMessage =
       reversing?: boolean;
       relativeDriving?: boolean;
       excavatorAction?: ExcavatorAction;
+      /** The device is playing through one leashed top-down camera. */
+      sharedScreen?: boolean;
       /** Every other joined seat's movement on the same device tick (226). */
       seats?: SeatMovement[];
     }

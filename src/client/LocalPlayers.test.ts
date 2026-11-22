@@ -108,7 +108,11 @@ describe("local players joining from the keyboard (226)", () => {
   it("the Multiplayer menu joins one keyboard guest and offers leave/rejoin there", async () => {
     const h = harness();
     h.state.blocked = true; // Menu actions work while gameplay input is blocked.
-    const [add] = h.localButtons();
+    const [screen, add] = h.localButtons();
+    expect(screen?.label).toBe("Use shared screen");
+    screen?.run();
+    expect(h.session.sharedScreen).toBe(true);
+    expect(h.localButtons()[0]?.label).toBe("Use split screen");
     expect(add?.label).toBe("Add Player 2 (keyboard)");
     add?.run();
     add?.run(); // A repeated activation cannot add another keyboard guest.
@@ -117,14 +121,14 @@ describe("local players joining from the keyboard (226)", () => {
     expect(h.requests).toHaveLength(1);
     expect(h.session.seats.get(1)?.input).toBeTruthy();
     expect(h.actions.getConfig()).toEqual(hostKeyMap());
-    const [leave] = h.localButtons();
+    const [, leave] = h.localButtons();
     expect(leave?.label).toBe("Player 2 leaves");
     leave?.run();
     await settle();
     expect(h.session.seats.get(1)).toBeUndefined();
     expect(h.actions.getConfig()).toBe(DEFAULT_ACTION_MAP);
     expect(h.mainMenu.openPage).toHaveBeenLastCalledWith("multiplayer");
-    expect(h.localButtons()[0]?.label).toBe("Add Player 2 (keyboard)");
+    expect(h.localButtons()[1]?.label).toBe("Add Player 2 (keyboard)");
   });
 
   it("scheme B's action key seats a guest on the right hand; seat 0 keeps the rest", async () => {

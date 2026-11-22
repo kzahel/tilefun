@@ -9,6 +9,7 @@ import { angleDifference } from "./VehicleMotor.js";
 
 export interface ControlCommand extends Movement {
   seq: number;
+  sharedScreen?: boolean;
 }
 const NEUTRAL: Movement = { dx: 0, dy: 0, jump: false, sprinting: false };
 export const CONTROL_HOLD_TICKS = 15;
@@ -20,6 +21,7 @@ export class PlayerControls {
   private held: Movement = { ...NEUTRAL };
   private receivedAt = -Infinity;
   private sequence = 0;
+  sharedScreen = false;
 
   reset(ack = this.sequence) {
     this.sequence = ack;
@@ -39,6 +41,7 @@ export class PlayerControls {
         jumpPressed: false,
       };
       this.sequence = command.seq;
+      this.sharedScreen = command.sharedScreen === true;
       this.receivedAt = tick;
     }
     if (tick - this.receivedAt >= CONTROL_HOLD_TICKS) this.held = { ...NEUTRAL };

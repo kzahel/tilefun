@@ -170,10 +170,12 @@ export class DeviceSeats {
 
   /** One still command for every seat, sent at once: off cadence, so prediction does
    * not store it, and a hidden page may never tick again to send it. */
-  neutralPacket(seq: number): ClientMessage {
-    return devicePacket(
+  neutralPacket(seq: number, sharedScreen = false): ClientMessage {
+    const { input } = devicePacket(
       seq,
       this.list().map((seat) => ({ seat: seat.seat, movement: NEUTRAL_MOVEMENT })),
-    ).input;
+    );
+    if (sharedScreen) input.sharedScreen = true;
+    return input;
   }
 }

@@ -79,7 +79,11 @@ or credentials in this repository.
   lights and D-pad Right/K changes siren style. Jump/Throw retain their meanings.
   Named on-screen paddles and interaction prompts follow the last input source.
 - Local players (226): split screen in the game.
-  - **Joining:** **Multiplayer → Local split screen → Add Player 2 (keyboard)**
+  - **Layout:** select **Use shared screen** in **Multiplayer → Local multiplayer**
+    for one top-down view with a limit on how far local players can spread out.
+    Walkers and drivers can move back toward the group at the edge.
+    **Use split screen** restores independent views. [Shared screen](../tactical/262-leashed-shared-screen.md).
+  - **Joining:** **Multiplayer → Local multiplayer → Add Player 2 (keyboard)**
     joins a keyboard player on this device and resumes Play (leaving Build mode
     if needed). The menu explains each player's controls and also lists each
     guest's **Player N leaves** button. It offers only one keyboard guest;

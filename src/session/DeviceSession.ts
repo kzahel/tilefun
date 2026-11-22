@@ -22,6 +22,8 @@ export class DeviceSession {
   readonly views: View[] = [];
   /** The device's local players: seat 0 and any guests (226). */
   readonly seats = new DeviceSeats();
+  /** The device's layout choice, kept while visiting worlds in this session. */
+  sharedScreen = false;
   private predictor: PlayerPredictor | null = null;
   /** Split screen: one view per seat, when the device has seat 0's own view. */
   private readonly seatViews: SeatViews | null;
@@ -35,11 +37,16 @@ export class DeviceSession {
     if (options.view) this.views.push(options.view);
   }
 
-  /** Lay the views out over the canvas: one per seat in play (226), seat 0's alone
-   * otherwise. Without seat views (labs) the views keep their regions. */
-  layoutViews(width: number, height: number, split: boolean): readonly View[] {
+  /** Lay play views out over the canvas. Devices without seat views keep their regions. */
+  layoutViews(
+    width: number,
+    height: number,
+    playing: boolean,
+    allowShared = true,
+  ): readonly View[] {
     if (!this.seatViews) return this.views;
-    const views = this.seatViews.layout(width, height, split);
+    const shared = playing && allowShared && this.sharedScreen && this.seats.list().length > 1;
+    const views = this.seatViews.layout(width, height, playing, shared);
     this.views.splice(0, this.views.length, ...views);
     return views;
   }
@@ -123,6 +130,7 @@ export class DeviceSession {
       replica.props,
       replica.entities,
       coSeats,
+      this.seatViews?.host.sharedScreen || undefined,
     );
   }
 

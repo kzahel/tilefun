@@ -1,7 +1,8 @@
 import { Camera } from "../rendering/Camera.js";
 import { type ViewLayout, ViewLayouts } from "../rendering/ViewLayout.js";
 import type { DeviceSeats } from "./DeviceSeats.js";
-import { followSeat, View } from "./View.js";
+import { frameParty } from "./SharedScreenCamera.js";
+import { type CameraPolicy, followSeat, View } from "./View.js";
 
 /** Views zoom out to this share of the chosen zoom when four regions share the canvas
  * (3–4 players; decided under autonomy, 226). */
@@ -20,14 +21,26 @@ export function seatLayout(count: number): ViewLayout {
 export class SeatViews {
   private readonly layouts = new ViewLayouts();
   private readonly guests = new Map<number, View>();
+  private readonly soloPolicy: CameraPolicy;
+  private readonly sharedPolicy: CameraPolicy;
 
   constructor(
     private readonly seats: DeviceSeats,
     readonly host: View,
-  ) {}
+  ) {
+    this.soloPolicy = host.policy;
+    this.sharedPolicy = frameParty(this.soloPolicy);
+  }
 
   /** The views to draw, with their regions and zoom set for this canvas size. */
-  layout(width: number, height: number, split: boolean): View[] {
+  layout(width: number, height: number, playing: boolean, shared: boolean): View[] {
+    if (shared !== this.host.sharedScreen) {
+      this.host.sharedScreen = shared;
+      this.host.policy = shared ? this.sharedPolicy : this.soloPolicy;
+      this.host.camera.requestSnap();
+      this.host.rangeKey = undefined;
+    }
+    const split = playing && !shared;
     // Guests' views go with their seats, and outside play (they start afresh).
     for (const seat of this.guests.keys())
       if (!split || !this.seats.get(seat)) this.guests.delete(seat);

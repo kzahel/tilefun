@@ -15,7 +15,8 @@ export function predictInput(
   props: readonly Prop[],
   entities: readonly Entity[],
   seats?: SeatMovements,
+  sharedScreen?: boolean,
 ) {
-  predictor.storeInput(seq, movement, dt, seats);
+  predictor.storeInput(seq, movement, dt, seats, sharedScreen);
   predictor.update(dt, movement, world, props, entities);
 }

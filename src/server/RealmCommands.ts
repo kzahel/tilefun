@@ -95,6 +95,7 @@ const COMMANDS: { [K in RealmCommandType]: RealmCommandHandler<K> } = {
       ...(msg.relativeDriving === true ? { relativeDriving: true } : {}),
       ...(isExcavatorAction(msg.excavatorAction) && { excavatorAction: msg.excavatorAction }),
       seq: msg.seq,
+      ...(session.seat === 0 && msg.sharedScreen === true ? { sharedScreen: true } : {}),
       ...(msg.jumpPressed !== undefined ? { jumpPressed: msg.jumpPressed } : {}),
     });
   },

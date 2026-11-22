@@ -138,6 +138,8 @@ export function fixedCamera(
  * presentation (slab fades).
  */
 export class View {
+  /** One top-down view for the entire local party. */
+  sharedScreen = false;
   region: RenderRegion = { x: 0, y: 0, width: 1, height: 1 };
   /** Observer-local slab fades (used by the unified deck presentation). */
   readonly fades: SurfaceFades = new Map();

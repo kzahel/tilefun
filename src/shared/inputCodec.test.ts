@@ -37,6 +37,19 @@ describe("device input packet (226)", () => {
     );
   });
 
+  it("round-trips the shared-screen bit alongside seat controls", () => {
+    const input: PlayerInput = {
+      type: "player-input",
+      seq: 77,
+      ...seat0,
+      sharedScreen: true,
+      seats: [{ seat: 2, ...seat0 }],
+    };
+    const buffer = encodeClientMessage(input);
+    expect(buffer.byteLength).toBe(12);
+    expect(decodeClientMessage(buffer)).toEqual(input);
+  });
+
   it("refuses seats outside the device and malformed lengths", () => {
     const base: PlayerInput = { type: "player-input", seq: 1, ...seat0 };
     const other = { dx: 0, dy: 0, sprinting: false, jump: false };

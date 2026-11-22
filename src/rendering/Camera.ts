@@ -32,6 +32,7 @@ export class Camera {
   /** Actual position saved during interpolation, restored after render. */
   private actualX = 0;
   private actualY = 0;
+  private actualZoom = 1;
   private presentedFollow: CameraFollowState | null = null;
   private presentedDomain: CameraPresentationTime["domain"] = "";
 
@@ -105,6 +106,7 @@ export class Camera {
   applyInterpolation(alpha: number): void {
     this.actualX = this.x;
     this.actualY = this.y;
+    this.actualZoom = this.zoom;
     this.x = this.prevX + (this.x - this.prevX) * alpha;
     this.y = this.prevY + (this.y - this.prevY) * alpha;
   }
@@ -138,6 +140,7 @@ export class Camera {
   restoreActual(): void {
     this.x = this.actualX;
     this.y = this.actualY;
+    this.zoom = this.actualZoom;
   }
 
   /** Trigger a screen shake effect. */

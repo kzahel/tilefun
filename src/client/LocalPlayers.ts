@@ -87,6 +87,10 @@ export class LocalPlayers implements PadPool {
         add(label, run);
     };
     gc.mainMenu.localPlayerActions = (add) => {
+      add(gc.session.sharedScreen ? "Use split screen" : "Use shared screen", () => {
+        gc.session.sharedScreen = !gc.session.sharedScreen;
+        gc.mainMenu.openPage("multiplayer");
+      });
       const seat = this.freeSeat();
       if (this.keyboardSeat === undefined && seat !== undefined) {
         add(
@@ -314,7 +318,7 @@ export class LocalPlayers implements PadPool {
    * seat 0's choice is in Options. */
   private viewActions(): { label: string; run: () => void }[] {
     const { mainMenu, session, firstPerson } = this.gc;
-    if (!firstPerson) return [];
+    if (!firstPerson || session.sharedScreen) return [];
     return session.seats
       .list()
       .filter((seat) => seat.seat !== 0)

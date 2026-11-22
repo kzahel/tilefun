@@ -405,7 +405,11 @@ recorded decision. Device performance runs are owner checkpoints.
 Lab code is deleted in slices 2, 4a and 6 rather than in one final phase.
 `ScenarioSession` stays as the headless harness and recipe-world opener.
 
-### Later: shared-screen modes (separate tacticals)
+### Shared-screen follow-up
+
+[262](262-leashed-shared-screen.md) implements the leashed mode with a hard
+movement limit for walking and driving. Dynamic split is still a separate
+follow-up. The original proposals for both modes follow.
 
 - **Group camera policy:** frame all players in one view, within zoom limits.
   The streaming range covers the framed area.

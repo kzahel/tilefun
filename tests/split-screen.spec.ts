@@ -114,6 +114,77 @@ test("a second keyboard player joins with Slash and plays the arrows in its own 
   expect(errors).toEqual([]);
 });
 
+test("local multiplayer can share one top-down camera and switch back to split screen", async ({
+  page,
+}) => {
+  const errors: string[] = [];
+  await startFlatWorld(page, errors);
+  await page.keyboard.press("Escape");
+  const menu = page.getByTestId("world-menu");
+  await menu.getByRole("button", { name: "Multiplayer", exact: true }).click();
+  await menu.getByRole("button", { name: "Use shared screen", exact: true }).click();
+  await menu.getByRole("button", { name: "Add Player 2 (keyboard)", exact: true }).click();
+  await expect.poll(async () => (await snapshot(page)).positions[1]).toBeTruthy();
+  await expect.poll(async () => (await snapshot(page)).views).toEqual([[0, 0, 1280]]);
+  const apart = await moved(
+    page,
+    async () => {
+      await page.keyboard.down("KeyA");
+      await page.keyboard.down("ArrowRight");
+    },
+    async () => {
+      await page.keyboard.up("KeyA");
+      await page.keyboard.up("ArrowRight");
+    },
+  );
+  expect(apart[0][0]).toBeLessThan(-20);
+  expect(apart[1][0]).toBeGreaterThan(20);
+  const gap = async () => {
+    const { positions } = await snapshot(page);
+    return (positions[1]?.[0] ?? 0) - (positions[0]?.[0] ?? 0);
+  };
+  await page.keyboard.down("KeyA");
+  await page.keyboard.down("ArrowRight");
+  try {
+    await expect.poll(gap).toBeGreaterThan(348);
+    await page.waitForTimeout(450);
+    expect(await gap()).toBeLessThan(353);
+  } finally {
+    await page.keyboard.up("KeyA");
+    await page.keyboard.up("ArrowRight");
+  }
+  await expect
+    .poll(() =>
+      page.evaluate(() => {
+        const game = (document.querySelector("#game") as unknown as { __game: Game }).__game;
+        const view = game.device.views[0];
+        if (!view?.sharedScreen || !view.topDown3d) return undefined;
+        const replica = game.device.replica;
+        const bodies = [...replica.seats.entities.values()].map((id) =>
+          replica.serverEntityMap.get(id),
+        );
+        return bodies.map((body) => {
+          const x = body?.position.wx ?? Number.NaN;
+          const sx = view.camera.worldToScreen(x, view.camera.y).sx;
+          return sx > 28 && sx < view.region.width - 28;
+        });
+      }),
+    )
+    .toEqual([true, true]);
+  await page.keyboard.press("Escape");
+  await menu.getByRole("button", { name: "Multiplayer", exact: true }).click();
+  await menu.getByRole("button", { name: "Use split screen", exact: true }).click();
+  await page.keyboard.press("Escape");
+  await page.keyboard.press("Escape");
+  await expect
+    .poll(async () => (await snapshot(page)).views)
+    .toEqual([
+      [0, 0, 640],
+      [1, 640, 640],
+    ]);
+  expect(errors).toEqual([]);
+});
+
 test.describe("two pads", () => {
   test.beforeEach(async ({ page }) => {
     await page.addInitScript(() => {

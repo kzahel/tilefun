@@ -9,7 +9,7 @@ export interface DeviceTick {
   /** Every seat's presses that precede the movement packet, each in its seat's envelope. */
   before: ClientMessage[];
   /** One packet with every seat's command under the device's sequence. */
-  input: ClientMessage;
+  input: Extract<ClientMessage, { type: "player-input" }>;
   after: ClientMessage[];
   /** Seat 0's composed tick (its movement and presses). */
   host: SeatTick;

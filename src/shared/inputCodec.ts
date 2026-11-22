@@ -19,6 +19,7 @@ type Controls = Omit<SeatMovement, "seat">;
 
 const SEAT_ZERO_BYTES = 8;
 const SEAT_BYTES = 4;
+const SHARED_SCREEN = 0x40; // Device-wide flag in the host controls byte only.
 
 /** Analog [-1,1] as int8 [-127,127]: 0.8% precision, plenty for a joystick. */
 function axis(value: number): number {
@@ -81,6 +82,7 @@ export function encodePlayerInput(msg: PlayerInput): ArrayBuffer {
   view.setUint8(0, TAG_PLAYER_INPUT);
   view.setUint32(1, msg.seq, true);
   writeControls(view, 5, msg);
+  if (msg.sharedScreen) view.setUint8(7, view.getUint8(7) | SHARED_SCREEN);
   seats.forEach((seat, i) => {
     const offset = SEAT_ZERO_BYTES + i * SEAT_BYTES;
     view.setUint8(offset, otherSeat(seat.seat));
@@ -102,6 +104,7 @@ export function decodePlayerInput(view: DataView): PlayerInput {
     type: "player-input",
     seq: view.getUint32(1, true),
     ...readControls(view, 5),
+    ...(view.getUint8(7) & SHARED_SCREEN ? { sharedScreen: true } : {}),
     ...(seats.length ? { seats } : {}),
   };
 }

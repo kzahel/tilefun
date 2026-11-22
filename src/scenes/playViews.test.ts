@@ -2,8 +2,10 @@ import { describe, expect, it, vi } from "vitest";
 import type { RemoteStateView } from "../client/ClientStateView.js";
 import type { GameContext } from "../core/GameScene.js";
 import { createPlayer } from "../entities/Player.js";
+import { SHARED_SCREEN_SPAN } from "../physics/SharedScreenLeash.js";
 import { Camera } from "../rendering/Camera.js";
 import { DeviceSession } from "../session/DeviceSession.js";
+import { sharedHudTop } from "../session/SharedScreenCamera.js";
 import { followSeat, View } from "../session/View.js";
 import type { ClientMessage } from "../shared/protocol.js";
 import {
@@ -112,6 +114,47 @@ describe("play's split-screen views (226)", () => {
     ]);
     await session.seats.join(requester, 2, 2, noInput);
     expect(beginViewTick(gc).map((v) => v.camera.zoom)).toEqual([1.5, 1.5, 1.5]);
+  });
+
+  it("keeps a large vehicle above the guest HUD and bounds the zoom for a distant guest", async () => {
+    const { gc, session, replica } = await playing();
+    session.sharedScreen = true;
+    const guest = replica.entities[1];
+    if (!guest) throw Error("Missing guest");
+    const car = {
+      ...createPlayer(100 + SHARED_SCREEN_SPAN.x, 100 + SHARED_SCREEN_SPAN.y),
+      id: 3,
+      type: "vehicle-v1:compact-1",
+      collider: { width: 176, height: 54, physicalHeight: 24, offsetX: 0, offsetY: 0 },
+    };
+    guest.parentId = car.id;
+    replica.entities.push(car);
+    replica.serverEntities.push(car);
+    const [view] = beginViewTick(gc);
+    if (!view) throw Error("Missing host view");
+    view.policy.tick(view.camera, session);
+    const carRadius = Math.hypot(176, 54) / 2;
+    const carEdge = view.camera.worldToScreen(
+      car.position.wx + carRadius,
+      car.position.wy + carRadius,
+    );
+    expect(carEdge.sx).toBeLessThan(view.region.width);
+    expect(carEdge.sy).toBeLessThan(sharedHudTop(view.region.height) - 32);
+    const nearZoom = view.camera.zoom;
+
+    car.position = { wx: 15_000, wy: 7000 };
+    beginViewTick(gc);
+    view.policy.tick(view.camera, session);
+    expect(view.camera.zoom).toBeGreaterThan(0.3);
+    expect(view.camera.zoom).toBeLessThanOrEqual(nearZoom);
+    const host = view.camera.worldToScreen(100, 100);
+    expect(host.sx).toBeGreaterThan(0);
+    expect(host.sx).toBeLessThan(view.region.width);
+    expect(host.sy).toBeGreaterThan(0);
+    expect(host.sy).toBeLessThan(sharedHudTop(view.region.height) - 32);
+    expect(view.camera.worldToScreen(car.position.wx, car.position.wy).sx).toBeGreaterThan(
+      view.region.width,
+    );
   });
 
   it("guests' cameras follow their seat and send its range in their envelope when it changes", async () => {

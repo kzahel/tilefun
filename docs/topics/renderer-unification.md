@@ -24,6 +24,11 @@ scorecard and decision gates. [Rendering architecture](rendering-architecture.md
 still owns backend boundaries and resource lifetimes. The plan and its slices are
 in [248](../tactical/248-renderer-unification.md).
 
+[262](../tactical/262-leashed-shared-screen.md) adds a shared top-down camera
+policy to the existing host view. It frames the projected poses of two to four
+local seats using the same scene as solo play, and reports its visible chunk
+range for the party. Split screen retains one view per seat.
+
 ## Decision
 
 Owner, 2026-11-14: unify the renderers, accepting that it takes time. WebXR is

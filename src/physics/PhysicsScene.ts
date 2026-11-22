@@ -37,6 +37,7 @@ import {
   compileCollisionGeometry,
 } from "./rapier/CollisionGeometry.js";
 import { createSceneBody, type SceneBody } from "./SceneBody.js";
+import { prepareSharedScreenTravel, settleSharedScreenTravel } from "./SharedScreenLeash.js";
 import type { WheelContact } from "./VehicleChassis.js";
 import { VehicleCouplings } from "./VehicleCouplings.js";
 import { WheelGrid } from "./WheelGrid.js";
@@ -392,7 +393,12 @@ export class PhysicsScene {
     return hit;
   }
 
-  step(intents: ReadonlyMap<number, MotionIntent>, geometry: PhysicsGeometry, gravity = 1) {
+  step(
+    intents: ReadonlyMap<number, MotionIntent>,
+    geometry: PhysicsGeometry,
+    gravity = 1,
+    sharedScreenGroups?: readonly (readonly number[])[],
+  ) {
     if (this.disposed) throw Error("Physics scene is disposed");
     const started = performance.now();
     this.prepareGeometry(geometry);
@@ -515,9 +521,14 @@ export class PhysicsScene {
         if (support?.isDynamic())
           support.applyImpulseAtPoint({ x: -impulse.x, y: -impulse.y, z: -impulse.z }, point, true);
       }
+    const leash = sharedScreenGroups?.length
+      ? prepareSharedScreenTravel(this.bodies, sharedScreenGroups)
+      : undefined;
     for (const { entry } of prepared) entry.incomingVelocity = entry.body.linvel();
     this.world.step();
     resettle(resting, -this.world.gravity.y * PHYSICS_DT);
+    if (leash && settleSharedScreenTravel(leash))
+      this.world.propagateModifiedBodyPositionsToColliders();
     this.contacts.clear();
     this.tick++;
     this.metrics.worldSteps++;

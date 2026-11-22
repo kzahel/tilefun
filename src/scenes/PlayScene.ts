@@ -77,6 +77,7 @@ export class PlayScene implements GameScene {
   readonly transparent = false;
   /** The device's local players (226), whose input this scene sends each tick. */
   private seats: DeviceSeats | null = null;
+  private sharedScreen = false;
   private prevInvincibilityTimer = 0;
   private readonly guestFeedback = new GuestFeedback();
   private zoomUnsubs: (() => void)[] = [];
@@ -184,7 +185,7 @@ export class PlayScene implements GameScene {
   }
 
   onPause(gc: GameContext): void {
-    if (gc.session.views.length > 1) gc.sendDebugState(true); // a menu pauses the device (226)
+    if (gc.session.seats.list().length > 1) gc.sendDebugState(true); // a menu pauses the device (226)
     this.stopMovement(gc);
     gc.touchPinch?.detach();
     gc.touchTap?.detach();
@@ -200,12 +201,15 @@ export class PlayScene implements GameScene {
       this.effectsRealmId = gc.realmId;
     }
     // One view per seat (226); each camera saves its pose for render interpolation.
-    const split = beginViewTick(gc).length > 1;
+    beginViewTick(gc);
+    this.sharedScreen = gc.view.sharedScreen;
     if (gc.debugPanel.consumeBaseModeChange() || gc.debugPanel.consumeConvexChange()) {
       gc.transport.send({ type: "invalidate-all-chunks" });
     }
     // While guests play, whatever blocks the device's input (a menu) pauses it.
-    gc.sendDebugState(gc.debugPanel.paused || (split && !!gc.inputBlocked));
+    gc.sendDebugState(
+      gc.debugPanel.paused || (gc.session.seats.list().length > 1 && !!gc.inputBlocked),
+    );
 
     // Update debug panel player info
     if (gc.debugEnabled && gc.profile) {
@@ -309,6 +313,7 @@ export class PlayScene implements GameScene {
       gc.stateView.playerEntity.position,
       !inputLocked && !gc.debugPanel.paused && !document.hidden,
     );
+    if (gc.view.sharedScreen) tick.input.sharedScreen = true;
     gc.transport.send(tick.input);
     for (const message of tick.after) gc.transport.send(message);
 
@@ -328,7 +333,7 @@ export class PlayScene implements GameScene {
     // pending camera.requestSnap() waits for the first real position).
     gc.view.policy.tick(gc.camera, gc.session);
     followGuestViews(gc);
-    if (gc.debugPanel.observer && gc.camera.zoom !== 1) {
+    if (!gc.view.sharedScreen && gc.debugPanel.observer && gc.camera.zoom !== 1) {
       const savedZoom = gc.camera.zoom;
       gc.camera.zoom = 1;
       gc.sendVisibleRange();
@@ -438,7 +443,7 @@ export class PlayScene implements GameScene {
     const seats = this.seats;
     if (!seats) return;
     seats.clear();
-    transport.send(seats.neutralPacket(nextInputSequence(transport)));
+    transport.send(seats.neutralPacket(nextInputSequence(transport), this.sharedScreen));
   }
 
   private maybeLogReconcile(gc: GameContext, remoteView: RemoteStateView): void {

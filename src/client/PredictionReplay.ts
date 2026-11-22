@@ -12,6 +12,7 @@ export interface StoredInput {
   movement: Movement;
   /** Co-seats' movement on the same device tick (226). */
   seats?: SeatMovements;
+  sharedScreen?: boolean;
 }
 
 export interface ReplayRequest {
@@ -24,6 +25,7 @@ export interface ReplayRequest {
   props: readonly Prop[];
   /** Each co-seat's controlled body at this snapshot (226). */
   seatBodies: ReadonlyMap<number, number>;
+  sharedScreen: boolean;
 }
 
 export interface PredictionReplay {
@@ -34,6 +36,7 @@ export interface PredictionReplay {
   inputIndex: number;
   jumpHeld: boolean;
   heldMovement?: Movement;
+  sharedScreen: boolean;
   steps: number;
   ms: number;
   before: Entity;

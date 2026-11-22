@@ -85,6 +85,7 @@ function playHarness(options: HarnessOptions = {}) {
     invincibilityTimer: 0,
     gemsCollected: 0,
     editorEnabled: false,
+    seats: { session: () => undefined },
     setPredictor: () => {},
   };
   const camera = new Camera();
@@ -322,7 +323,7 @@ describe("play input characterization (pre-226 composition)", () => {
     expect(h.scene.lastMovement).toEqual({ dx: 0, dy: 0 });
     expect(store).toHaveBeenCalledTimes(stored);
     if (stored === 2)
-      expect(store).toHaveBeenLastCalledWith(before + 1, stillPacket, 1 / 60, undefined);
+      expect(store).toHaveBeenLastCalledWith(before + 1, stillPacket, 1 / 60, undefined, undefined);
     expect(h.gc.touchButtons.enabled).toBe(false);
     expect(h.gc.touchJoystick.enabled).toBe(false);
     // Locks do not clear held keys: movement resumes when the lock lifts.
@@ -854,6 +855,7 @@ async function seatGuest(h: ReturnType<typeof playHarness>, devices = guestDevic
   const guest: Entity = { ...createPlayer(140, 100), id: 2 };
   Object.assign(h.view, {
     seats: {
+      session: () => undefined,
       entities: new Map([
         [0, 1],
         [1, 2],
@@ -951,7 +953,6 @@ describe("split screen on the play path (226 slice 5-ii-a)", () => {
     await seatGuest(h);
     const guest = (h.view.serverEntities as Entity[])[1] as Entity;
     h.view.entities = [h.player, guest];
-    Object.assign((h.view as unknown as { seats: object }).seats, { session: () => undefined });
     const guestView = new View(followSeat({ seat: 1 }), undefined, 1);
     guestView.setRegion({ x: 400, y: 0, width: 400, height: 600 });
     h.gc.session.views.push(guestView);

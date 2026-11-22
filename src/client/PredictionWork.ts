@@ -41,9 +41,11 @@ export class PredictionWork {
     geometry: PhysicsGeometry,
     gravity: number,
     replay: boolean,
+    sharedScreenGroup?: readonly number[],
   ) {
+    const groups = sharedScreenGroup ? [sharedScreenGroup] : undefined;
     if (!this.enabled) {
-      scene.step(intents, geometry, gravity);
+      scene.step(intents, geometry, gravity, groups);
       return;
     }
     const m = scene.metrics,
@@ -52,7 +54,7 @@ export class PredictionWork {
       motors = m.motorUpdates,
       wheels = m.wheelQueries,
       builds = m.geometryBuilds;
-    scene.step(intents, geometry, gravity);
+    scene.step(intents, geometry, gravity, groups);
     this.counts[replay ? "replaySteps" : "forwardSteps"]++;
     this.counts.worldSteps += m.worldSteps - steps;
     this.counts.bodyReads += m.bodyReads - reads;

@@ -217,8 +217,10 @@ export class FirstPersonControl {
   }
 
   private apply(view: View): void {
-    const heading = this.heading(view.seat);
+    const heading = view.sharedScreen ? undefined : this.heading(view.seat);
     if (heading === undefined) {
+      if (view.sharedScreen && view.look && document.pointerLockElement === this.canvas())
+        document.exitPointerLock();
       view.look = null;
       // A top-down view may keep drawing in the same scene.
       view.drawn3d = false;

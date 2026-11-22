@@ -945,6 +945,11 @@ export class GameClient implements GameTestHooks {
     // Use the canvas's actual displayed size (respects split-screen CSS when 3D view is active)
     const rect = this.canvas.getBoundingClientRect();
     this.renderHost.resize(Math.round(rect.width), Math.round(rect.height));
-    this.device.layoutViews(this.canvas.width, this.canvas.height, this.scenes.has(PlayScene));
+    this.device.layoutViews(
+      this.canvas.width,
+      this.canvas.height,
+      this.scenes.has(PlayScene),
+      !this.xr?.immersive,
+    );
   }
 }

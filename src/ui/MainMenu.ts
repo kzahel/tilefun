@@ -258,7 +258,7 @@ export class MainMenu {
         this.content.append(...this.roadControls);
     } else if (page === "multiplayer") {
       const localTitle = document.createElement("h2");
-      localTitle.textContent = "Local split screen";
+      localTitle.textContent = "Local multiplayer";
       this.content.append(localTitle);
       if (this.currentWorldId) {
         this.message(
@@ -271,7 +271,7 @@ export class MainMenu {
           "For more controllers, resume play and press a button on another controller to join.",
         );
       } else {
-        this.message("Open a world to start local split screen.");
+        this.message("Open a world to play local multiplayer.");
       }
       const onlineTitle = document.createElement("h2");
       onlineTitle.textContent = "Online multiplayer";
