@@ -107,7 +107,8 @@ choices remain open.
 
 - Local multiplayer with split-screen or a shared screen.
 - For shared-screen play, explore automatic following and rubber-banding to
-  keep players together.
+  keep players together. The leash and minute-idle follow mode exist (see
+  [Steam Deck and menus](topics/steam-deck-and-menus.md)).
 - Controller support suitable for local co-op. Optional gamepad support already
   exists according to the [README](../README.md); assess and extend it for these
   play modes rather than treating controller input as wholly new work.

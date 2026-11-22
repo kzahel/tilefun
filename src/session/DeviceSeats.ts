@@ -6,6 +6,7 @@ import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { ClientSeat } from "./ClientSeat.js";
+import { IdleFollow } from "./IdleFollow.js";
 
 /** One seat's devices and situation for a device tick. */
 export interface SeatFrame {
@@ -34,6 +35,8 @@ export class DeviceSeats {
   private readonly bySeat = new Map<number, ClientSeat>([[0, new ClientSeat(0)]]);
   private readonly joinedAs = new Map<number, JoinOptions>();
   private readonly listeners = new Set<() => void>();
+  /** Shared screen: idle seats follow an active player (the play scene steers). */
+  readonly idleFollow = new IdleFollow();
   /** The connection dropped since the guests were last seated. */
   private lost = false;
 
@@ -130,6 +133,7 @@ export class DeviceSeats {
   /** Every seat starts afresh, as a new play scene does. */
   restart(): void {
     for (const seat of this.bySeat.values()) seat.restart();
+    this.idleFollow.reset();
   }
 
   /** Each guest's devices and situation; a guest without devices stands still. */

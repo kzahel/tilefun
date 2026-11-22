@@ -4,7 +4,7 @@ import { heldItem } from "../inventory/Inventory.js";
 import { interpolatePosition, interpolateWz } from "../rendering/EntityInterpolation.js";
 import { projectWorld } from "../rendering/Projection.js";
 import { layoutViews } from "../rendering/ViewLayout.js";
-import { presentedSeatBody, seatBody } from "../session/SeatFocus.js";
+import { presentedSeatBody, seatBody, seatEntity } from "../session/SeatFocus.js";
 import { sharedGuestRegion, sharedHudTop } from "../session/SharedScreenCamera.js";
 import type { View } from "../session/View.js";
 import { drawPlayerMarkers } from "../ui/PlayerMarkers.js";
@@ -135,7 +135,10 @@ export function drawViewOverlays(gc: GameContext, alpha: number): void {
         drawPlayerMarkers({ ctx, camera: view.camera, stateView: gc.stateView }, alpha, own);
       }
       if (split) drawSeatBadge(gc, view);
-      if (view.sharedScreen) drawSharedGuests(gc, view, alpha);
+      if (view.sharedScreen) {
+        drawSharedGuests(gc, view, alpha);
+        drawFollowers(gc, view, alpha);
+      }
       if (view.seat !== 0) {
         const hotbar =
           !!gc.stateView.seats.session(view.seat, gc.stateView.serverTick) &&
@@ -242,6 +245,40 @@ function drawSharedGuests(gc: GameContext, view: View, alpha: number): void {
     const y = Math.max(8, Math.min(maxY, p.sy + 16));
     drawSeatPrompts(gc, view, false, seat, x, y, width);
   }
+}
+
+/** Shared screen: a tag over each idle seat that is following another player. */
+function drawFollowers(gc: GameContext, view: View, alpha: number): void {
+  const { ctx, session } = gc;
+  const hudTop = sharedHudTop(view.region.height);
+  for (const { seat } of session.seats.list()) {
+    const leader = session.seats.idleFollow.leaderOf(seat);
+    if (leader === undefined) continue;
+    const body = presentedSeatBody(session, seat) ?? seatEntity(session, seat);
+    if (!body) continue;
+    const pos = interpolatePosition(body.position, body.prevPosition, alpha);
+    // Above the head: a character stands about two tiles tall.
+    const p = projectWorld(view.camera, pos.wx, pos.wy, (interpolateWz(body, alpha) ?? 0) + 34);
+    const label = `💤 following ${playerLabel(leader)}`;
+    ctx.save();
+    ctx.font = "bold 12px system-ui, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    const width = ctx.measureText(label).width + 14;
+    const x = Math.min(view.region.width - width / 2 - 4, Math.max(width / 2 + 4, p.sx));
+    const y = Math.max(14, Math.min(hudTop - 14, p.sy));
+    ctx.fillStyle = "#14251ecc";
+    ctx.beginPath();
+    ctx.roundRect(x - width / 2, y - 10, width, 20, 10);
+    ctx.fill();
+    ctx.fillStyle = "#f4f5ec";
+    ctx.fillText(label, x, y);
+    ctx.restore();
+  }
+}
+
+function playerLabel(seat: number): string {
+  return `Player ${seat + 1}`;
 }
 
 /** A guest's place prompts at the bottom of its view, nearest the player last

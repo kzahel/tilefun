@@ -7,8 +7,9 @@ import { ENTITY_DEFS } from "../entities/EntityDefs.js";
 import { normalizesDiagonal, seatPresses, vehicleButtons } from "../input/SeatComposer.js";
 import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
-import type { DeviceSeats } from "../session/DeviceSeats.js";
+import type { DeviceSeats, SeatFrame } from "../session/DeviceSeats.js";
 import { composeDeviceTick } from "../session/DeviceTick.js";
+import { seatBody, seatEntity } from "../session/SeatFocus.js";
 import { sharedScreenSpan } from "../session/SharedScreenCamera.js";
 import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
@@ -272,26 +273,30 @@ export class PlayScene implements GameScene {
         gc.touchHold?.sample(gc.stateView.playerEntity.position, manual, vehicle ? 24 : 0) ??
         manual;
     const seq = nextInputSequence(gc.transport);
-    const tick = composeDeviceTick(
-      [
-        {
-          seat: host,
-          sample: { manual, steered, ...seatPresses(gc.actions), jumpPressed: host.takeJump() },
-          situation: {
-            vehicle,
-            locked: hostLocked,
-            steering,
-            joystick: (gc.touchMovement ?? "joystick") === "joystick",
-            facing: gc.stateView.playerEntity.sprite?.direction,
-            look: firstPersonAim(gc, firstPerson),
-          },
+    const frames: SeatFrame[] = [
+      {
+        seat: host,
+        sample: { manual, steered, ...seatPresses(gc.actions), jumpPressed: host.takeJump() },
+        situation: {
+          vehicle,
+          locked: hostLocked,
+          steering,
+          joystick: (gc.touchMovement ?? "joystick") === "joystick",
+          facing: gc.stateView.playerEntity.sprite?.direction,
+          look: firstPersonAim(gc, firstPerson),
         },
-        ...turnGuestFrames(gc, seats.guestFrames(gc.stateView, inputLocked), dt),
-      ],
-      seq,
-      dt,
-      excavatorMovement,
-    );
+      },
+      ...turnGuestFrames(gc, seats.guestFrames(gc.stateView, inputLocked), dt),
+    ];
+    // Shared screen: a seat idle for a minute follows an active player.
+    if (gc.view.sharedScreen)
+      seats.idleFollow.steer(
+        frames,
+        (seat) => (seatBody(gc.session, seat) ?? seatEntity(gc.session, seat))?.position,
+        dt,
+      );
+    else seats.idleFollow.reset();
+    const tick = composeDeviceTick(frames, seq, dt, excavatorMovement);
     for (const message of tick.before) gc.transport.send(message);
     if (inputLocked) gc.audioManager.stopHorns();
     gc.audioManager.updateSirens(

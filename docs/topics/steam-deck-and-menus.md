@@ -106,6 +106,11 @@ or credentials in this repository.
     more room side to side. Walkers and drivers can move along the edge or
     back toward the group.
     **Use split screen** restores independent views. [Shared screen](../tactical/262-leashed-shared-screen.md).
+    A shared-screen player who touches nothing for a minute follows the nearest
+    active player like an NPC companion (`IdleFollow`), tagged
+    "💤 following Player N": it walks or runs after its leader, stops nearby,
+    hops or sidesteps when stuck, and hands control back on any press. Menus and
+    travel do not count as idle time; a follower in a vehicle stays put.
   - **Joining:** **Multiplayer → Local multiplayer → Add Player 2 (keyboard)**
     joins a keyboard player on this device and resumes Play (leaving Build mode
     if needed). The menu explains each player's controls and also lists each
