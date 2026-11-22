@@ -224,6 +224,8 @@ export class SunShadows {
  * (`dynamicTexel`). Beyond its fade a body keeps its contact shadow.
  */
 export class DynamicShadows {
+  /** Sun-facing axis for actor artwork, with its right side to the east. */
+  readonly cardRight = { value: new THREE.Vector2() };
   /** Parent for the frame's actor cards facing the sun; mirrored like the
    * view's world root. Drawn only into the map. */
   readonly cardRoot = new THREE.Group();
@@ -247,6 +249,8 @@ export class DynamicShadows {
   private origin = { x: 0, y: 0 };
 
   constructor(private readonly uniforms: SunUniforms) {
+    const right = sunCardRight();
+    this.cardRight.value.set(-right.x, -right.y);
     this.cardRoot.scale.set(1, -1, 1);
     this.cards.add(this.cardRoot);
   }

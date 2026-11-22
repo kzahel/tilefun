@@ -350,7 +350,7 @@ export class FirstPersonView {
           colorWrite: false,
           fog: false,
         }),
-        { card: this.sun.cardRight, cardArt: this.atlas },
+        { card: this.dynamic.cardRight, cardArt: this.atlas },
       ),
     );
     this.cards = new PropCardBatches(this.cardRoot, () => card("card"), this.sun, this.atlas);

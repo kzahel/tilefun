@@ -99,9 +99,11 @@ browser preference. `r_dynshadows 0` and `?dynshadows=0` turn them off for a ses
   bodies only and is redrawn every frame; the static map stays cached. Receivers
   take the darker of the two, so bodies shade the world, each other and themselves.
 - Casters are the shared vehicle and cargo meshes (also where top-down shows
-  images), animal models and actor cards facing the sun. A new kind of moving
-  body must be drawn into the map to cast, and must choose a receiver in
-  `shadeMaterial` that keeps it clear of its own shadow (`solid`, `actor`, `image`).
+  images), animal models and actor cards facing the sun. Actor shadow cards
+  preserve the top-down sprite's left-right orientation, including mirrored
+  poses. A new kind of moving body must be drawn into the map to cast and must
+  choose a receiver in `shadeMaterial` that keeps it clear of its own shadow
+  (`solid`, `actor`, `image`).
 - A caster in the map drops its contact shadow; beyond the map's fade, and for
   bodies past the per-frame limit, the contact shadow remains.
 

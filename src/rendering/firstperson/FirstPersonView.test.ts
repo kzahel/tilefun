@@ -13,6 +13,7 @@ import type { SpriteItem } from "../SceneItem.js";
 import { REVEAL_OPACITY } from "../SurfacePresentation.js";
 import type { BodyImage, View3dTarget } from "../View3dHost.js";
 import { chunksInReach, terrainStale } from "./FirstPersonChunks.js";
+import { SUN } from "./FirstPersonSun.js";
 import {
   type FirstPersonFrame,
   FirstPersonView,
@@ -481,6 +482,23 @@ describe("the view's merged static world (251)", () => {
     expect(strengths.getW(0)).toBe(1);
     expect(strengths.getW(4)).toBeGreaterThan(0);
     expect(strengths.getW(4)).toBeLessThan(1);
+    view.dispose();
+  });
+
+  it("keeps east and west in order when casting a top-down sprite's shadow", () => {
+    const view = new FirstPersonView(new Map());
+    const { shadowCards } = view as unknown as {
+      shadowCards: { mesh: THREE.Mesh<THREE.BufferGeometry, THREE.Material> };
+    };
+    const shader = { ...THREE.ShaderLib.basic, uniforms: {} as Record<string, THREE.IUniform> };
+    shadowCards.mesh.material.onBeforeCompile(
+      shader as Parameters<THREE.Material["onBeforeCompile"]>[0],
+      renderer,
+    );
+    const right = shader.uniforms.cardRight?.value as THREE.Vector2;
+    expect(right.x).toBeGreaterThan(0);
+    expect(right.length()).toBeCloseTo(1);
+    expect(right.x * SUN.x + right.y * SUN.y).toBeCloseTo(0);
     view.dispose();
   });
 
