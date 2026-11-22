@@ -91,8 +91,10 @@ and fuller props without per-frame cost:
   vertex shader turns them to the eye. Only moving actors are written per frame.
 - Building walls all wear the south-face artwork; forest rows stand as cards.
 
-[266](../tactical/266-dynamic-shadows.md) adds opt-in dynamic shadows
-(**Options → Dynamic shadows**, `r_dynshadows`, `?dynshadows=1`; off by default):
+[266](../tactical/266-dynamic-shadows.md) adds dynamic shadows. They default to
+on in the game and Workshop labs. **Options → Dynamic shadows** saves the
+browser preference. `r_dynshadows 0` and `?dynshadows=0` turn them off for a session.
+
 - A second map with the sun map's projection (`DynamicShadows`) holds moving
   bodies only and is redrawn every frame; the static map stays cached. Receivers
   take the darker of the two, so bodies shade the world, each other and themselves.

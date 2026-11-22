@@ -1,3 +1,4 @@
+import { DEFAULT_DYNAMIC_SHADOWS } from "../config/dynamicShadows.js";
 import { type FirstPersonControls, firstPersonControls } from "../config/firstPersonControls.js";
 import {
   DEFAULT_VIEW_DISTANCE,
@@ -234,7 +235,7 @@ export class OptionsDialog {
     distance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE,
     controls: FirstPersonControls = "simple",
     wildlifeModels = true,
-    dynamicShadows = false,
+    dynamicShadows = DEFAULT_DYNAMIC_SHADOWS,
     side: KeyboardSide = "left",
   ): void {
     this.opener = opener;

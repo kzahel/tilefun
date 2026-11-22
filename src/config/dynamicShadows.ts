@@ -1,5 +1,6 @@
 const KEY = "tilefun-dynamic-shadows";
 const PARAMETER = "dynshadows";
+export const DEFAULT_DYNAMIC_SHADOWS = true;
 
 export function dynamicShadowsInLink(
   query = new URLSearchParams(globalThis.location?.search),
@@ -9,14 +10,15 @@ export function dynamicShadowsInLink(
 }
 
 /** Visual preference shared by the game and Workshop on this browser: moving
- * bodies cast the sun's shadows in the 3D scene (266). Off until chosen. */
+ * bodies cast the sun's shadows in the 3D scene (266). */
 export function loadDynamicShadows(): boolean {
   const linked = dynamicShadowsInLink();
   if (linked !== undefined) return linked;
   try {
-    return localStorage.getItem(KEY) === "on";
+    const saved = localStorage.getItem(KEY);
+    return saved === null ? DEFAULT_DYNAMIC_SHADOWS : saved === "on";
   } catch {
-    return false;
+    return DEFAULT_DYNAMIC_SHADOWS;
   }
 }
 

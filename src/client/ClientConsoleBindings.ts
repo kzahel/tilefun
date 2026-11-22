@@ -80,7 +80,7 @@ export function registerClientConsole(
   });
   if (gc.firstPerson && !gc.firstPerson.sun) clientCVars.r_sun3d.set(false);
   // Options owns the saved choice; the cvar changes it until the next reload.
-  if (gc.firstPerson?.dynamicShadows) clientCVars.r_dynshadows.set(true);
+  if (gc.firstPerson) clientCVars.r_dynshadows.set(gc.firstPerson.dynamicShadows);
   clientCVars.r_dynshadows.onChange((val) => {
     if (gc.firstPerson) gc.firstPerson.dynamicShadows = val;
   });

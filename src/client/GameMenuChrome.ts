@@ -127,7 +127,7 @@ export class GameMenuChrome {
         await this.saveProfile({ keyboardSide: side });
       },
       async (enabled) => {
-        // The cvar owns the live state (console, ?dynshadows=1); this device remembers it.
+        // Apply the live change and save the device preference.
         host.firstPerson.dynamicShadows = enabled;
         host.consoleEngine.cvars.get("r_dynshadows")?.set(enabled);
         saveDynamicShadows(enabled);

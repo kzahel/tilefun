@@ -75,7 +75,7 @@ export class FirstPersonControl {
    * `?sun3d=0` set it. */
   sun = new URLSearchParams(location.search).get("sun3d") !== "0";
   /** With the sun's shadows, moving bodies cast them too (266). Saved on this
-   * device (Options); `r_dynshadows` and `?dynshadows=1` set it. */
+   * device (Options); `r_dynshadows 0` and `?dynshadows=0` turn it off. */
   dynamicShadows = loadDynamicShadows();
   /** Top-down views draw vehicles as shared outlined native-pixel
    * images; `r_pixelcars3d` and `?pixelcars=0` set it. */

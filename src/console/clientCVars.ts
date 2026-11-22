@@ -1,4 +1,5 @@
 import { XR_FRAME_RATE } from "../client/XrControl.js";
+import { DEFAULT_DYNAMIC_SHADOWS } from "../config/dynamicShadows.js";
 import type { ConsoleEngine } from "./ConsoleEngine.js";
 import type { CVar } from "./CVar.js";
 
@@ -239,9 +240,9 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
   const r_dynshadows = engine.cvars.register<boolean>({
     name: "r_dynshadows",
     description:
-      "3D views: moving bodies cast the sun's shadows onto the world, each other and themselves (?dynshadows=1; Options saves it)",
+      "3D views: moving bodies cast the sun's shadows onto the world, each other and themselves (?dynshadows=0 turns it off; Options saves it)",
     type: "boolean",
-    defaultValue: false,
+    defaultValue: DEFAULT_DYNAMIC_SHADOWS,
     category: "r",
   });
 

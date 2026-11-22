@@ -38,7 +38,7 @@ There is no speed setting.
 and saves the choice on this browser for both play and the Wildlife lab.
 
 **Options → Dynamic shadows** ([266](../tactical/266-dynamic-shadows.md)) lets
-moving bodies cast the sun's shadow. It defaults to off and saves the choice on
+moving bodies cast the sun's shadow. It defaults to on and saves the choice on
 this browser for play and the Workshop labs.
 
 Ship the ordinary Tilefun web engine inside a Linux x64 Electron application.

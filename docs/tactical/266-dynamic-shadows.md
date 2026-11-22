@@ -1,6 +1,6 @@
 # 266 Dynamic shadows
 
-Status: delivered as an opt-in · 2026-11-22. Owner request after the
+Status: delivered and enabled by default · 2026-11-22. Owner request after the
 [construction playground](265-construction-playground.md): moving bodies only
 shaded the floor under them, as soft contact shadows. Any moving body should
 cast onto the ground and onto other bodies, without a large frame cost.
@@ -8,16 +8,16 @@ Owner: [rendering architecture](../topics/rendering-architecture.md).
 
 ## What changed
 
-**Options → Dynamic shadows** (saved on this browser, shared with the Workshop;
-`r_dynshadows 1` or `?dynshadows=1` for a session) gives every moving body the
-sun's shadow in the 3D scene, top-down and first person:
+Moving bodies cast the sun's shadow in top-down and first-person views.
+**Options → Dynamic shadows** saves the choice in the browser for both the game
+and Workshop. `r_dynshadows 0` and `?dynshadows=0` turn it off for a session.
 
 - Vehicles, boats, cargo, the crane, the marble, chute and seesaw, 3D animals and
   sprite actors cast onto the ground, buildings, decks, each other and themselves.
   The forklift's mast throws its lattice on the ground and crates shade each other.
 - A body that casts drops its soft contact shadow. In first person a mesh's
   sides turned away from the sun are in shadow, as a building's are.
-- It is off by default. Rooms and views with the sun's shadows off are unchanged.
+- It defaults to on. Rooms and views with the sun's shadows off use contact shadows.
 
 ## How it works
 
@@ -90,7 +90,7 @@ offsets and which bodies cast, not the passes.
 Off against clean HEAD, same bench (`city`, `cars`, `crowd` at 1× and 0.25×,
 one run each): render 0.6–3.0 ms and GPU 0.72–2.97 ms are equal within 0.1 ms
 in every cell except the crowd's GPU time at 0.25× (5.53 → 3.80 ms), which
-varies with where the rabbits wander. No default cost was measured.
+varies with where the rabbits wander.
 
 Limits: one desktop only. The Steam Deck and phones are CPU-bound in rendering
 ([performance](../topics/performance.md)), where doubled vehicle draw calls
@@ -134,8 +134,7 @@ viewer's own shadow and the carried vehicle's pose.
 
 ## Next
 
-- Measure on the Steam Deck and a phone, and split screen, before considering
-  it as the default.
+- Measure on the Steam Deck, on a phone and in split screen.
 - Collect the viewer's own body for its shadow in first person, and pose a
   carried vehicle once for its image and its shadow.
 - If draw calls matter there, draw each shared mesh's instances without a

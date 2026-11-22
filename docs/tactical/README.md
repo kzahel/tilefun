@@ -14,7 +14,7 @@ Several early plans contain original unchecked lists superseded by later work.
 | --- | --- |
 | [268 Day, night and weather](268-day-night-and-weather.md) | A saved world clock, deterministic weather with rain, storms and lightning, a night tint with player lanterns, and a phone showing the time and forecast. [Day, night and weather](../topics/day-night-and-weather.md) owns the contracts. |
 | [267 Farm chicken life cycle](267-farm-chicken-life-cycle.md) | Generated roosters, breakable eggs, bounded hatching and chicks that grow into hens. [Farming](../topics/farming.md) owns the controls. |
-| [266 Dynamic shadows](266-dynamic-shadows.md) | Opt-in second sun map of moving bodies: vehicles, cargo, animals and actors cast onto the world, each other and themselves. Device measurements and owner review pending. |
+| [266 Dynamic shadows](266-dynamic-shadows.md) | Enabled by default. Vehicles, cargo, animals and actors cast onto the world, each other and themselves. Device measurements and owner review pending. |
 | [265 Construction playground](265-construction-playground.md) | A crane-fed marble run, forklift-movable exit chute, and a seesaw that tips under a vehicle. |
 | [264 Forklift](264-forklift.md) | Physical sliding and tilting forks lift the existing pallets and crates in the construction yard. |
 | [263 Construction crate run](263-construction-crate-run.md) | A drive-through stack of freely rotating wooden crates in generated construction yards. |

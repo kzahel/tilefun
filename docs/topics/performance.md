@@ -66,7 +66,7 @@ against 2.1–2.4 ms settled. A steady cell's `upload.pages` should be near zero
 ## Dynamic shadows (2026-11-22)
 
 [266](../tactical/266-dynamic-shadows.md) draws moving bodies a second time into
-a per-frame sun map when **Options → Dynamic shadows** is on (off by default).
+a per-frame sun map when **Options → Dynamic shadows** is on.
 On the M4 Pro at 120 Hz, `render:bench` with `--query=dynshadows=1` against `=0`
 missed no frames in `city`, `cars`, `fleet`, `crowd` or `wildlife` at 1× and
 0.25×. The render callback grows by 0.1–0.7 ms (50 parked cars at 0.25×: 1.4 →
