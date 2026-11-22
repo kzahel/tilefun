@@ -134,6 +134,10 @@ export interface Entity {
   /** Dump-bed tilt and requested target in radians; the shared physics step owns the clock. */
   vehicleBedTilt?: number;
   vehicleBedTarget?: number;
+  /** Excavator slew, boom, stick, bucket and scoop state. */
+  vehicleExcavator?: number;
+  vehicleExcavatorTarget?: number;
+  vehicleExcavatorRate?: number;
   /** Wheel-lift towing partners (tow truck → car, car → tow truck); see Towing. */
   towTargetId?: number;
   towedBy?: number;

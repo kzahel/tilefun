@@ -518,6 +518,9 @@ describe("immutable snapshot reuse", () => {
         "vehicleRamp",
         "transportLoadId",
         "transportedBy",
+        "vehicleExcavator",
+        "vehicleExcavatorTarget",
+        "vehicleExcavatorRate",
       ] as const
     ).map(
       (key) =>

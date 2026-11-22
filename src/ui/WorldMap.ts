@@ -303,6 +303,12 @@ export class WorldMap {
                     depotId: depot.id,
                   }),
                 );
+              for (const yard of this.result.constructionYards ?? [])
+                this.depots.append(
+                  this.place(yard.name, yard.arrival, true, {
+                    testid: "world-map-construction-yard",
+                  }),
+                );
               this.root.dataset.vehicleDepots = String(this.result.vehicleDepots?.length ?? 0);
               this.root.dataset.racetracks = String(this.result.racetracks?.length ?? 0);
               this.root.dataset.motocross = String(this.result.motocross?.length ?? 0);

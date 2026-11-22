@@ -218,6 +218,7 @@ function wireMovement(m: Movement) {
     jumpPressed: m.jumpPressed ?? false,
     reversing: m.reversing ?? false,
     relativeDriving: m.relativeDriving ?? false,
+    ...(m.excavatorAction && { excavatorAction: m.excavatorAction }),
   };
 }
 

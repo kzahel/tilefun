@@ -1,0 +1,38 @@
+{
+  "sourceInputs": {
+    "art-source/vehicle-bake/excavator/v1/build.py": "bb30075d3fe0b1a46f4d82f011e291906414492963c3da6c4963fb454a4e0cbd",
+    "art-source/vehicle-bake/excavator/v1/family.json": "2ba6209f3b05f8fe661cbc6e07bcda45017569a6502dacda029e84e13769929d"
+  },
+  "replay": {
+    "tool": "Blender 5.2.2 LTS",
+    "byteIdentical": true,
+    "scratchInputDependencies": []
+  },
+  "reviewAndRuntime": {
+    "public/demos/original-vehicles/excavator-v1/review-manifest.json": "94e12b558da1dac15adf3fd80ae25e0b93b2cf3902e13b3d5e2b122475559937",
+    "public/assets/models/vehicles/excavator-v1.glb": "1c0ef158591079043c9b5f1f046321204541de039376bcf193447a7ba11e1f9a",
+    "public/assets/vehicles/excavator-v1.png": "b00a986bc38074913d9f399a2b64f8a67203f339013ae4fcb69c6864340e5ff4"
+  },
+  "atlasSha256": "95dc1d509de8345f2bf5d186317306641aa82f2aeea13eadf41be7e30a507232",
+  "chassisBounds": [
+    70,
+    51,
+    52
+  ],
+  "arm": {
+    "boomPivot": [
+      10,
+      0,
+      24
+    ],
+    "boomLength": 43,
+    "stickLength": 32,
+    "bucketReach": 16
+  },
+  "cardinalFrames": {
+    "south": 4,
+    "north": 12,
+    "west": 8,
+    "east": 0
+  }
+}

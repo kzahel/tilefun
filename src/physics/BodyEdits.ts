@@ -12,6 +12,7 @@ export function admitEntityEdits(
   const entity = entry.entity,
     s = entry.state;
   entry.bed?.admit(entity, s, entry.collider);
+  entry.excavator?.admit(entity, s, entry.collider);
   entry.transporter?.admit(entity, entry.collider, entry.body);
   const moved =
     entity.position.wx !== s.x || entity.position.wy !== s.y || (entity.wz ?? 0) !== s.z;

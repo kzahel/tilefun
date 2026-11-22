@@ -2,6 +2,7 @@ import { actionHint, inputHint, movementKeysHint } from "../input/InputHints.js"
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { type PageInset, shift } from "../input/ViewRect.js";
 import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
+import { ExcavatorPanel } from "./ExcavatorPanel.js";
 import {
   type PlaceView,
   type VehicleChoice,
@@ -15,6 +16,8 @@ export class VehicleControl {
   readonly root = document.createElement("div");
   readonly button = document.createElement("button");
   readonly equipmentButton = document.createElement("button");
+  private excavatorId: number | undefined;
+  private excavator?: ExcavatorPanel;
   private equipment: VehicleChoice["equipment"] = null;
   private status = document.createElement("p");
   private request: VehicleRequest | null = null;
@@ -49,11 +52,17 @@ export class VehicleControl {
     const choice = vehicleChoice(view, allowed);
     const { equipment } = choice;
     this.equipment = equipment;
-    this.equipmentButton.hidden = !equipment;
-    this.equipmentButton.style.display = equipment ? "" : "none";
+    this.excavatorId = choice.excavatorId;
+    if (this.excavatorId === undefined || (locked && !this.busy)) this.excavator?.close(false);
+    const workAvailable = this.excavatorId !== undefined;
+    const showEquipment = !!equipment || workAvailable;
+    this.equipmentButton.hidden = !showEquipment;
+    this.equipmentButton.style.display = showEquipment ? "" : "none";
     this.equipmentButton.disabled = this.busy || locked;
     if (equipment)
       this.equipmentButton.textContent = `${equipment.label} · ${actionHint("vehicle_recover") || "F"}`;
+    if (workAvailable)
+      this.equipmentButton.textContent = `Work arm · ${actionHint("vehicle_recover") || "F"}`;
     if (choice.key !== this.targetKey) {
       this.status.textContent = "";
       this.error = false;
@@ -76,8 +85,19 @@ export class VehicleControl {
     shift(this.button, -inset.right, -inset.bottom);
     shift(this.equipmentButton, -inset.right, -inset.bottom);
   }
+  get excavatorMovement() {
+    return this.excavator?.movement;
+  }
   activateEquipment(): boolean {
-    if (this.equipmentButton.disabled) return !!this.equipment;
+    if (this.equipmentButton.disabled) return !!this.equipment || this.excavatorId !== undefined;
+    if (this.excavatorId !== undefined) {
+      this.excavator ??= new ExcavatorPanel((action) => {
+        if (this.excavatorId !== undefined)
+          this.activate({ type: "vehicle-equipment", entityId: this.excavatorId, action });
+      });
+      this.excavator.open(this.root.parentElement ?? document.body, this.equipmentButton);
+      return true;
+    }
     return this.activate(this.equipment?.request ?? null);
   }
   activate(request: VehicleRequest | null = this.request): boolean {
@@ -113,6 +133,7 @@ export class VehicleControl {
     container.append(this.root, this.button, this.equipmentButton);
   }
   destroy() {
+    this.excavator?.close(false);
     this.equipmentButton.remove();
     this.button.remove();
     this.root.remove();

@@ -1,0 +1,38 @@
+[
+  {
+    "status": "passed",
+    "id": "excavator--v1",
+    "glbSha256": "1c0ef158591079043c9b5f1f046321204541de039376bcf193447a7ba11e1f9a",
+    "triangles": 2840,
+    "clearance": [
+      {
+        "wheel": "Wheel_FL_Roll",
+        "radius": 6.000000000000303,
+        "minimumGap": 3.999999999999697,
+        "nearestBody": "Crawler chassis"
+      },
+      {
+        "wheel": "Wheel_FR_Roll",
+        "radius": 6.000000000000303,
+        "minimumGap": 3.999999999999697,
+        "nearestBody": "Crawler chassis"
+      },
+      {
+        "wheel": "Wheel_RL_Roll",
+        "radius": 6.000000000000303,
+        "minimumGap": 3.999999999999697,
+        "nearestBody": "Crawler chassis"
+      },
+      {
+        "wheel": "Wheel_RR_Roll",
+        "radius": 6.000000000000303,
+        "minimumGap": 3.999999999999697,
+        "nearestBody": "Crawler chassis"
+      }
+    ],
+    "allNeutralRollAngles": true,
+    "collidingBodyRejected": true,
+    "baselineRestored": true,
+    "steering": "unqualified"
+  }
+]

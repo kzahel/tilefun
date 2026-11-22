@@ -1,5 +1,6 @@
 import { sha256 } from "../art/ArtSource.js";
 import { bulldozerYardRecipe } from "../scenarios/BulldozerYardRecipe.js";
+import { constructionYardRecipe } from "../scenarios/ConstructionYardRecipe.js";
 import {
   GENERATED_CROSSINGS,
   generatedCrossingRecipe,
@@ -52,6 +53,12 @@ const GEOMETRY_FIXTURES = {
     id: "geometry:car-dynamics-v1",
     name: driving("car-dynamics"),
     recipe: () => vehicleDynamicsRecipe(),
+  },
+  "construction-yard": {
+    id: "geometry:construction-yard-v1",
+    name: "City outskirts · Construction yard",
+    recipe: constructionYardRecipe,
+    prompt: "Scoop rubble, swing the excavator and drop a load into the dump truck.",
   },
   "bulldozer-yard": {
     id: "geometry:bulldozer-yard-v1",

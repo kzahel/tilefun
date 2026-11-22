@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+import { excavatorAngles } from "../traffic/Excavator.js";
 import { COMPACT_CAR_GLB } from "./CarMeshDefinition.js";
 import type { Point3, SurfaceMesh } from "./SurfaceReceivers.js";
 import { VehicleEmergencyLights } from "./VehicleEmergencyLights.js";
@@ -40,6 +41,13 @@ export class CarMeshAsset {
   /** Compiled draw meshes; meshCount retains the authored source-part count. */
   readonly drawMeshCount: number;
   readonly surfaceGeometry: SurfaceMesh;
+  private excavator?: {
+    slew: THREE.Object3D;
+    boom: THREE.Object3D;
+    stick: THREE.Object3D;
+    bucket: THREE.Object3D;
+    load: THREE.Object3D;
+  };
   private lights?: VehicleEmergencyLights;
   private propeller?: THREE.Object3D;
   private propellerRest?: THREE.Quaternion;
@@ -83,6 +91,26 @@ export class CarMeshAsset {
     });
     this.meshCount = meshes;
     try {
+      const slew = scene.getObjectByName("Excavator_Slew");
+      if (slew) {
+        const boom = scene.getObjectByName("Excavator_Boom");
+        const stick = scene.getObjectByName("Excavator_Stick");
+        const bucket = scene.getObjectByName("Excavator_Bucket");
+        const load = scene.getObjectByName("Excavator_Load");
+        if (
+          !boom ||
+          !stick ||
+          !bucket ||
+          !load ||
+          boom.parent !== slew ||
+          stick.parent !== boom ||
+          bucket.parent !== stick ||
+          load.parent !== bucket
+        )
+          throw Error("Invalid excavator rig");
+        this.excavator = { slew, boom, stick, bucket, load };
+        this.setExcavator();
+      }
       const ramp = scene.getObjectByName("Transport_Loading_Ramp");
       if (ramp) {
         if (ramp.userData.tilefun_transport_ramp !== 1) throw Error("Invalid transporter ramp");
@@ -395,6 +423,16 @@ export class CarMeshAsset {
   }
   setEmergency(enabled: boolean, time: number) {
     this.lights?.setState(enabled, time);
+  }
+  setExcavator(pose?: number) {
+    const parts = this.excavator;
+    if (!parts) return;
+    const angles = excavatorAngles(pose);
+    parts.slew.rotation.set(0, angles.yaw, 0);
+    parts.boom.rotation.set(0, 0, -angles.boom);
+    parts.stick.rotation.set(0, 0, -angles.stick);
+    parts.bucket.rotation.set(0, 0, -angles.bucket);
+    parts.load.visible = angles.loaded;
   }
   setDumpBed(tilt = 0, gateAngle = 0) {
     if (!this.dumpBed || !this.dumpGate) return;

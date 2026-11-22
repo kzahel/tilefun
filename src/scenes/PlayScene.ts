@@ -238,10 +238,12 @@ export class PlayScene implements GameScene {
     const doorBusy = !!gc.doorPresentation?.busy;
     const held = !!gc.storagePaused || doorBusy;
     const inputLocked = held || !!gc.inputBlocked;
-    gc.touchButtons.enabled = !inputLocked;
-    if (inputLocked) gc.touchButtons.reset();
-    gc.touchJoystick.enabled = (gc.touchMovement ?? "joystick") === "joystick" && !inputLocked;
-    if (inputLocked) {
+    const excavatorMovement = inputLocked ? undefined : gc.excavatorMovement;
+    const hostLocked = inputLocked || !!excavatorMovement;
+    gc.touchButtons.enabled = !hostLocked;
+    if (hostLocked) gc.touchButtons.reset();
+    gc.touchJoystick.enabled = (gc.touchMovement ?? "joystick") === "joystick" && !hostLocked;
+    if (hostLocked) {
       gc.touchHold?.reset();
       gc.tapMovement?.cancel();
     }
@@ -252,16 +254,16 @@ export class PlayScene implements GameScene {
       gc,
       firstPerson,
       vehicle,
-      inputLocked
+      hostLocked
         ? { dx: 0, dy: 0, sprinting: false, jump: false }
         : gc.actions.getMovement(normalizesDiagonal(vehicle, steering)),
       dt,
     );
     let steered =
-      !inputLocked && gc.touchMovement === "tap" && gc.tapMovement
+      !hostLocked && gc.touchMovement === "tap" && gc.tapMovement
         ? gc.tapMovement.sample(gc.stateView.playerEntity.position, manual, dt, vehicle ? 24 : 0)
         : manual;
-    if (!inputLocked && gc.touchMovement === "hold")
+    if (!hostLocked && gc.touchMovement === "hold")
       steered =
         gc.touchHold?.sample(gc.stateView.playerEntity.position, manual, vehicle ? 24 : 0) ??
         manual;
@@ -273,7 +275,7 @@ export class PlayScene implements GameScene {
           sample: { manual, steered, ...seatPresses(gc.actions), jumpPressed: host.takeJump() },
           situation: {
             vehicle,
-            locked: inputLocked,
+            locked: hostLocked,
             steering,
             joystick: (gc.touchMovement ?? "joystick") === "joystick",
             facing: gc.stateView.playerEntity.sprite?.direction,
@@ -284,6 +286,7 @@ export class PlayScene implements GameScene {
       ],
       seq,
       dt,
+      excavatorMovement,
     );
     for (const message of tick.before) gc.transport.send(message);
     if (inputLocked) gc.audioManager.stopHorns();

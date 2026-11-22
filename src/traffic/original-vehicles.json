@@ -1,6 +1,5 @@
 {
   "version": 1,
-  "scenarioOnly": ["bulldozer"],
   "vehicles": [
     {
       "id": "rosso-coupe",
@@ -4308,6 +4307,132 @@
           }
         }
       ]
+    },
+    {
+      "id": "excavator",
+      "name": "Tracked excavator",
+      "sprite": "assets/vehicles/excavator-v1.png",
+      "mesh": {
+        "assetId": "excavator-authored-v1",
+        "path": "assets/models/vehicles/excavator-v1.glb",
+        "radius": 164,
+        "lateralScale": 1
+      },
+      "performance": {
+        "speed": 37,
+        "acceleration": 112,
+        "pushSpeed": 36,
+        "pushWeight": 650,
+        "mass": 22,
+        "boost": 1
+      },
+      "views": [
+        {
+          "id": "original-vehicle:excavator:south",
+          "vehicleId": "excavator",
+          "direction": "south",
+          "rect": [70, 84, 51, 95],
+          "metadata": {
+            "name": "Tracked excavator · south",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "construction", "excavator"],
+            "settings": ["site"],
+            "facing": "south",
+            "anchor": [26, 95.0],
+            "footprint": [-25.5, -70, 51, 70],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 51,
+                "height": 70,
+                "zHeight": 52
+              }
+            ],
+            "depthOffset": -35.0
+          }
+        },
+        {
+          "id": "original-vehicle:excavator:north",
+          "vehicleId": "excavator",
+          "direction": "north",
+          "rect": [70, 268, 51, 130],
+          "metadata": {
+            "name": "Tracked excavator · north",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "construction", "excavator"],
+            "settings": ["site"],
+            "facing": "north",
+            "anchor": [26, 135.0],
+            "footprint": [-25.5, -70, 51, 70],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 51,
+                "height": 70,
+                "zHeight": 52
+              }
+            ],
+            "depthOffset": -35.0
+          }
+        },
+        {
+          "id": "original-vehicle:excavator:west",
+          "vehicleId": "excavator",
+          "direction": "west",
+          "rect": [36, 525, 95, 93],
+          "metadata": {
+            "name": "Tracked excavator · west",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "construction", "excavator"],
+            "settings": ["site"],
+            "facing": "west",
+            "anchor": [60, 92.5],
+            "footprint": [-35.0, -51, 70, 51],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 70,
+                "height": 51,
+                "zHeight": 52
+              }
+            ],
+            "depthOffset": -25.5
+          }
+        },
+        {
+          "id": "original-vehicle:excavator:east",
+          "vehicleId": "excavator",
+          "direction": "east",
+          "rect": [61, 750, 95, 92],
+          "metadata": {
+            "name": "Tracked excavator · east",
+            "category": "vehicle",
+            "kind": "prop",
+            "tags": ["vehicle", "construction", "excavator"],
+            "settings": ["site"],
+            "facing": "east",
+            "anchor": [35, 91.5],
+            "footprint": [-35.0, -51, 70, 51],
+            "colliders": [
+              {
+                "offsetX": 0,
+                "offsetY": 0,
+                "width": 70,
+                "height": 51,
+                "zHeight": 52
+              }
+            ],
+            "depthOffset": -25.5
+          }
+        }
+      ]
     }
-  ]
+  ],
+  "stagedOnly": ["bulldozer", "excavator"]
 }

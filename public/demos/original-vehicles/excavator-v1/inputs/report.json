@@ -1,0 +1,6 @@
+{
+  "status": "complete",
+  "method": "Face-owned UV swatches, independent crawler wheels and a nested slew, boom, dipper and bucket rig.",
+  "sourceBlend": "art-source/vehicle-bake/excavator/v1/excavator.blend",
+  "recipe": "art-source/vehicle-bake/excavator/v1/build.py"
+}

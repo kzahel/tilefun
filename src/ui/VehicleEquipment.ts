@@ -2,6 +2,7 @@ import { isBoat } from "../boats/Boat.js";
 import type { ClientStateView } from "../client/ClientStateView.js";
 import type { Entity } from "../entities/Entity.js";
 import { hasDumpBed } from "../traffic/DumpBed.js";
+import { isExcavator } from "../traffic/Excavator.js";
 import { isTowTruck, towCandidate } from "../traffic/Towing.js";
 import { boardingHeightLimit, isTransporter } from "../traffic/Transporter.js";
 import { isVehicleOverturned } from "../traffic/Vehicle.js";
@@ -58,6 +59,7 @@ const hasEquipment = (e: Entity) => hasDumpBed(e) || isTowTruck(e) || isTranspor
 
 /** The next useful action for one stopped equipment vehicle, if any. */
 function equipmentAction(truck: Entity, entities: readonly Entity[]): EquipmentAction | undefined {
+  if (isExcavator(truck)) return;
   if (hasDumpBed(truck)) return (truck.vehicleBedTarget ?? 0) > 0 ? "lower" : "tip";
   if (isTransporter(truck)) return truck.vehicleRamp === 1 ? "stow" : "deploy";
   if (truck.towTargetId !== undefined) return "release";

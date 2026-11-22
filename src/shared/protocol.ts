@@ -9,6 +9,7 @@ import type { FacadePiece } from "../generation/regional/BuildingRecipes.js";
 import type { WorldMeta, WorldType } from "../persistence/WorldRegistry.js";
 import type { BodyRotation } from "../physics/BodyRotation.js";
 import type { RailPath } from "../railway/RailPath.js";
+import type { ExcavatorAction } from "./ExcavatorInput.js";
 import type { EntityDelta } from "./entityDelta.js";
 
 /** Requested outdoor arrival point, validated by the server before a realm change. */
@@ -46,6 +47,7 @@ export interface SeatMovement {
   jumpPressed?: boolean;
   reversing?: boolean;
   relativeDriving?: boolean;
+  excavatorAction?: ExcavatorAction;
 }
 
 // ---- Client → Server messages ----
@@ -103,6 +105,7 @@ export type ClientMessage =
       jumpPressed?: boolean;
       reversing?: boolean;
       relativeDriving?: boolean;
+      excavatorAction?: ExcavatorAction;
       /** Every other joined seat's movement on the same device tick (226). */
       seats?: SeatMovement[];
     }
@@ -273,6 +276,9 @@ export interface EntitySnapshot {
   vehicleRamp?: number;
   transportLoadId?: number;
   transportedBy?: number;
+  vehicleExcavator?: number;
+  vehicleExcavatorTarget?: number;
+  vehicleExcavatorRate?: number;
   wz?: number;
   parentId?: number;
   localOffsetX?: number;

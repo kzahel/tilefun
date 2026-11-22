@@ -26,6 +26,7 @@ export function composeDeviceTick(
   frames: readonly SeatFrame[],
   seq: number,
   dt: number,
+  hostMovement?: Movement,
 ): DeviceTick {
   const before: ClientMessage[] = [],
     after: ClientMessage[] = [],
@@ -37,6 +38,7 @@ export function composeDeviceTick(
       situation,
       dt,
     );
+    if (seat.seat === 0 && hostMovement) tick.movement = hostMovement;
     host ??= tick;
     before.push(...tick.before.map((press) => seat.address(press)));
     after.push(...tick.after.map((press) => seat.address(press)));

@@ -54,6 +54,7 @@ export function applyMeshInstance(asset: CarMeshAsset, mesh: MeshInstance): void
   asset.setTransportRamp(mesh.transportRamp ?? false);
   asset.setTowLift(mesh.towActive ?? false);
   asset.setTravel(mesh.wheelTravel ?? 0, !!mesh.towPitch);
+  asset.setExcavator(mesh.excavatorPose);
   asset.setDumpBed(mesh.bedTilt ?? 0, mesh.bedGateAngle ?? 0);
   asset.setEmergency(mesh.emergencyEnabled ?? false, mesh.presentationTime ?? 0);
 }

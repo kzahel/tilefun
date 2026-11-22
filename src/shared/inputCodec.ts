@@ -9,6 +9,7 @@
  * A single-seat packet keeps the original eight bytes. Little-endian.
  */
 
+import { excavatorActionFromId, excavatorActionId } from "./ExcavatorInput.js";
 import { type ClientMessage, MAX_SEATS, type SeatMovement } from "./protocol.js";
 
 export const TAG_PLAYER_INPUT = 0x81;
@@ -25,6 +26,12 @@ function axis(value: number): number {
 }
 
 function writeControls(view: DataView, offset: number, m: Controls): void {
+  // Work-arm control and driving axes are mutually exclusive.
+  if (m.excavatorAction) {
+    view.setUint8(offset, excavatorActionId(m.excavatorAction));
+    view.setUint8(offset + 2, 0x20);
+    return;
+  }
   view.setInt8(offset, axis(m.dx));
   view.setInt8(offset + 1, axis(m.dy));
   let flags = 0;
@@ -38,6 +45,16 @@ function writeControls(view: DataView, offset: number, m: Controls): void {
 
 function readControls(view: DataView, offset: number): Controls {
   const flags = view.getUint8(offset + 2);
+  if (flags & 0x20) {
+    const excavatorAction = excavatorActionFromId(view.getUint8(offset));
+    return {
+      dx: 0,
+      dy: 0,
+      sprinting: false,
+      jump: false,
+      ...(excavatorAction && { excavatorAction }),
+    };
+  }
   return {
     dx: view.getInt8(offset) / 127,
     dy: view.getInt8(offset + 1) / 127,

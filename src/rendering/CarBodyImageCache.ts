@@ -22,6 +22,7 @@ export function carBodyImageKey(
     mesh.gradeOffsetZ ?? 0,
     mesh.wheelTravel ?? 0,
     mesh.bedTilt ?? 0,
+    ...(mesh.excavatorPose === undefined ? [] : [mesh.excavatorPose]),
     mesh.bedGateAngle ?? 0,
     mesh.towActive ?? false,
     mesh.towPitch ?? 0,

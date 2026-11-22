@@ -1,12 +1,15 @@
 import type { Entity } from "../entities/Entity.js";
+import { type ExcavatorAction, isExcavatorAction } from "../shared/ExcavatorInput.js";
 import { DUMP_BED, hasDumpBed } from "../traffic/DumpBed.js";
+import { isExcavator } from "../traffic/Excavator.js";
 import { isTowTruck, towCandidate } from "../traffic/Towing.js";
 import { isTransporter, transporterLoadCandidate } from "../traffic/Transporter.js";
 import { isVehicleOverturned } from "../traffic/Vehicle.js";
-import { EQUIPMENT_ACTIONS, type EquipmentAction } from "../traffic/VehicleEquipment.js";
+import type { EquipmentAction } from "../traffic/VehicleEquipment.js";
 import { linkedPartnerId, linkVehicles, unlinkVehicle } from "../traffic/VehicleLinks.js";
 import type { VehicleState } from "../traffic/VehicleRegistry.js";
 import { boardingDistance, vehicleVerticalDistance } from "../traffic/VehicleSeats.js";
+import { workExcavator } from "./ExcavatorControl.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
 import type { VehicleControl } from "./VehicleControl.js";
@@ -17,7 +20,10 @@ interface Context {
   partner: (id: number | undefined) => Entity | undefined;
 }
 /** Each action changes only durable targets and couplings on its vehicle type. */
-const ACTIONS: Record<EquipmentAction, [(e: Entity) => boolean, (c: Context) => void]> = {
+const ACTIONS: Record<
+  Exclude<EquipmentAction, ExcavatorAction>,
+  [(e: Entity) => boolean, (c: Context) => void]
+> = {
   tip: [
     hasDumpBed,
     ({ truck }) => {
@@ -106,8 +112,17 @@ export function runEquipment(
   const realm = vehicles.realm,
     registry = realm.vehicleRegistry,
     car = Number.isSafeInteger(entityId) ? registry?.states.get(entityId) : undefined;
-  const entry = EQUIPMENT_ACTIONS.includes(action) ? ACTIONS[action] : undefined;
-  if (!car || !registry || !entry?.[0](car.entity)) throw Error("Vehicle equipment unavailable.");
+  if (!car || !registry) throw Error("Vehicle equipment unavailable.");
+  if (isExcavatorAction(action)) {
+    if (!isExcavator(car.entity)) throw Error("Vehicle equipment unavailable.");
+    if (!checkOperator(vehicles, session, car)) throw Error("Board the excavator to work the arm.");
+    workExcavator(realm, car.entity, action);
+    vehicles.stop(session);
+    registry.onChange?.(car, false);
+    return;
+  }
+  const entry = Object.hasOwn(ACTIONS, action) ? ACTIONS[action] : undefined;
+  if (!entry?.[0](car.entity)) throw Error("Vehicle equipment unavailable.");
   const driving = checkOperator(vehicles, session, car),
     truck = car.entity;
   const before = registry.states.get(linkedPartnerId(truck) ?? -1);

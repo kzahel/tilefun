@@ -44,6 +44,7 @@ export class PhysicsRestore {
     entry.dormant = entry.centred = entry.unmoved = entry.held = false;
     entry.touching.length = 0;
     entry.bed?.publish(entry.entity, entry.state, entry.collider);
+    entry.excavator?.publish(entry.entity, entry.state, entry.collider);
     const entity = entry.entity;
     entity.prevPosition = { wx: state.prevX, wy: state.prevY };
     entity.prevWz = state.prevZ;

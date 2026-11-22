@@ -78,6 +78,7 @@ export function publishBody(
   }
   state.groundZ = entity.groundZ ?? state.z;
   entry.bed?.publish(entity, state, entry.collider);
+  entry.excavator?.publish(entity, state, entry.collider);
   if (entry.kind === "vehicle") publishVehicle(entity, state);
   entity.jumpInputState = state.jumpHeld ? 3 : 0;
 }

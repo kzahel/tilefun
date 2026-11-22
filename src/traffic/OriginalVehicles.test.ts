@@ -6,12 +6,12 @@ import { TRANSPORTER_EXPECTATIONS } from "../../tests-support/Transporter.fixtur
 import { SPRITE_MANIFEST } from "../assets/GameAssets.js";
 import { VEHICLE_PALETTE } from "../editor/EditorPalettes.js";
 import { AUTHORED_VEHICLE_MESHES } from "../rendering/AuthoredVehicleMeshes.js";
-import { ORIGINAL_VEHICLES, SCENARIO_ONLY_MODELS } from "./OriginalVehicles.js";
+import { ORIGINAL_VEHICLES, STAGED_VEHICLE_MODELS } from "./OriginalVehicles.js";
 import { DRIVABLE_MODELS, TRAFFIC_MODELS, VEHICLE_BANK, VEHICLE_MODELS } from "./Vehicle.js";
 
 it("covers every active original with independent frozen expectations", () => {
   const models = ORIGINAL_VEHICLES.map((vehicle) => vehicle.id);
-  expect(models.filter((id) => !SCENARIO_ONLY_MODELS.has(id)).sort()).toEqual(
+  expect(models.filter((id) => !STAGED_VEHICLE_MODELS.has(id)).sort()).toEqual(
     [
       ...AUTONOMOUS_ORIGINAL_VEHICLES.map((family) => family.model),
       TRANSPORTER_EXPECTATIONS.model,
@@ -28,7 +28,7 @@ it("registers every combined model exactly once across editor, assets, traffic a
   expect(VEHICLE_MODELS).toHaveLength(
     new Set(VEHICLE_BANK.views.map((view) => view.vehicleId)).size +
       ORIGINAL_VEHICLES.length -
-      SCENARIO_ONLY_MODELS.size,
+      STAGED_VEHICLE_MODELS.size,
   );
   expect(new Set(VEHICLE_MODELS).size).toBe(VEHICLE_MODELS.length);
   expect(TRAFFIC_MODELS).toHaveLength(VEHICLE_MODELS.length - 1);
@@ -36,7 +36,7 @@ it("registers every combined model exactly once across editor, assets, traffic a
   for (const model of DRIVABLE_MODELS) {
     const type = `vehicle-v1:${model}`;
     expect(VEHICLE_PALETTE.filter((entry) => entry.type === type)).toHaveLength(
-      SCENARIO_ONLY_MODELS.has(model) ? 0 : 1,
+      STAGED_VEHICLE_MODELS.has(model) ? 0 : 1,
     );
     expect(SPRITE_MANIFEST.filter((entry) => entry.key === type)).toHaveLength(1);
     expect(AUTHORED_VEHICLE_MESHES.filter((entry) => entry.vehicle === model)).toHaveLength(1);

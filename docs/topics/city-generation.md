@@ -1,5 +1,10 @@
 # City generation and promotion
 
+[258](../tactical/258-construction-yards.md) adds a construction yard to the
+dry east infield of each admitted motocross park. The yard uses the normal
+terrain, prop, actor and parked-vehicle paths. Map travel lands beside the
+working excavator. Use a fresh regional world for the complete layout.
+
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.
 Updated: 2026-11-17.

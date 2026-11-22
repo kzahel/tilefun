@@ -48,7 +48,10 @@ export class LabInput {
 
   /** One device tick: movement plus horn, siren and throw presses. */
   tick(view: { playerEntity: Entity; entities: readonly Entity[] }, dt: number): SeatTick {
-    if (document.activeElement === this.canvas)
+    if (
+      document.activeElement === this.canvas ||
+      document.activeElement?.closest("[data-excavator-controls]")
+    )
       controllerInput.sample(navigator.getGamepads?.() ?? [], performance.now());
     const { actions, seat } = this;
     this.buttons.enabled = this.showButtons;

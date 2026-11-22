@@ -13,6 +13,7 @@ import { PREDATOR_DEFS } from "../wildlife/Predator.js";
 import { RABBIT_DEF, RABBIT_TYPE } from "../wildlife/Rabbit.js";
 import { isSmallAnimal, roadkillDefinition, roadkillType } from "../wildlife/Roadkill.js";
 import { ROBIN_DEF, ROBIN_TYPE } from "../wildlife/Robin.js";
+import { CONSTRUCTION_RUBBLE, CONSTRUCTION_RUBBLE_DEF } from "./ConstructionRubble.js";
 import type { ColliderComponent, Direction } from "./Entity.js";
 
 // ---- Static definition types ----
@@ -178,6 +179,7 @@ export const ENTITY_DEFS: Record<string, EntityDef> = {
   [ROBIN_TYPE]: ROBIN_DEF,
   [DEER_TYPE]: DEER_DEF,
   ...VEHICLE_DEFS,
+  [CONSTRUCTION_RUBBLE]: CONSTRUCTION_RUBBLE_DEF,
   [TRAIN_TYPE]: TRAIN_DEF,
   ...TRAIN_CARRIAGE_DEFS,
   ...CURVE_TRAIN_DEFS,

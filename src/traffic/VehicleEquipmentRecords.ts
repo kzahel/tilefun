@@ -1,5 +1,6 @@
 import type { Entity } from "../entities/Entity.js";
 import { DUMP_BED, DUMP_TRUCK_TYPE } from "./DumpBed.js";
+import { EXCAVATOR_TYPE, validExcavatorPose } from "./Excavator.js";
 import { type ShoppingVisit, validShoppingVisit } from "./ShoppingVisits.js";
 
 /** Durable equipment state on a saved vehicle: dump-bed angles, a deployed
@@ -9,15 +10,17 @@ export interface SavedEquipment {
   visit?: ShoppingVisit;
   bed?: readonly [tilt: number, target: number];
   ramp?: 1;
+  excavator?: number;
   link?: { kind: "tow" | "carry"; lead: boolean; partner: string };
 }
 type EquipmentEntity = Pick<
   Entity,
-  "vehicleBedTilt" | "vehicleBedTarget" | "vehicleRamp" | "vehicleLink"
+  "vehicleBedTilt" | "vehicleBedTarget" | "vehicleRamp" | "vehicleLink" | "vehicleExcavator"
 >;
 
 export function savedEquipment(e: EquipmentEntity, visit?: ShoppingVisit): SavedEquipment {
   return {
+    ...(e.vehicleExcavator === undefined ? {} : { excavator: e.vehicleExcavator }),
     ...(visit ? { visit: { ...visit } } : {}),
     ...(e.vehicleBedTilt || e.vehicleBedTarget
       ? { bed: [e.vehicleBedTilt ?? 0, e.vehicleBedTarget ?? 0] as const }
@@ -31,6 +34,8 @@ export function validSavedEquipment(model: string, record: SavedEquipment): bool
   const { bed, ramp, link } = record;
   return (
     validShoppingVisit(record.visit) &&
+    (record.excavator === undefined ||
+      (EXCAVATOR_TYPE === `vehicle-v1:${model}` && validExcavatorPose(record.excavator))) &&
     (bed === undefined ||
       (`vehicle-v1:${model}` === DUMP_TRUCK_TYPE &&
         Array.isArray(bed) &&
@@ -47,6 +52,7 @@ export function validSavedEquipment(model: string, record: SavedEquipment): bool
   );
 }
 export function restoreSavedEquipment(e: EquipmentEntity, record: SavedEquipment) {
+  if (record.excavator !== undefined) e.vehicleExcavator = record.excavator;
   if (record.bed?.[0]) e.vehicleBedTilt = record.bed[0];
   if (record.bed?.[1]) e.vehicleBedTarget = record.bed[1];
   if (record.ramp === 1) e.vehicleRamp = 1;

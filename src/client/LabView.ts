@@ -309,7 +309,10 @@ export class LabView {
         : this.input?.tick(device.replica, dt);
       if (!tick) return;
       for (const press of tick.before) client.submitPress(press);
-      this.interpolate = client.submitInput(tick.movement, camera.getVisibleChunkRange());
+      const movement = script
+        ? tick.movement
+        : (this.vehicleControl?.excavatorMovement ?? tick.movement);
+      this.interpolate = client.submitInput(movement, camera.getVisibleChunkRange());
       for (const press of tick.after) client.submitPress(press);
       if (!this.interpolate) return;
       this.steps++;

@@ -20,6 +20,7 @@ export class ControllerInput {
   held = new Set<ActionName>();
   rightStick = { dx: 0, dy: 0 };
   erase = false;
+  confirmHeld = false;
   get connected(): boolean {
     return this.source >= 0;
   }
@@ -54,6 +55,7 @@ export class ControllerInput {
     this.held.clear();
     this.rightStick = { dx: 0, dy: 0 };
     this.erase = false;
+    this.confirmHeld = false;
     this.movement = { dx: 0, dy: 0, sprinting: false, jump: false };
     this.previous.clear();
     this.repeating = undefined;
@@ -104,6 +106,7 @@ export class ControllerInput {
     )
       controllerPointer.reset();
     this.rightStick = controllerAxes(gp.axes[2] ?? 0, gp.axes[3] ?? 0);
+    this.confirmHeld = !!buttons[0]?.pressed;
     const pointerSelected = controllerPointer.update(
       this.rightStick.dx,
       this.rightStick.dy,

@@ -1,3 +1,4 @@
+import { isExcavatorAction } from "../shared/ExcavatorInput.js";
 import type { ClientMessage, SeatMovement, ServerMessage } from "../shared/protocol.js";
 import {
   type ConnectionIdentity,
@@ -163,5 +164,6 @@ function seatInput(seq: number, move: Partial<SeatMovement> | undefined): Player
     ...(move?.jumpPressed === true ? { jumpPressed: true } : {}),
     ...(move?.reversing === true ? { reversing: true } : {}),
     ...(move?.relativeDriving === true ? { relativeDriving: true } : {}),
+    ...(isExcavatorAction(move?.excavatorAction) && { excavatorAction: move.excavatorAction }),
   };
 }

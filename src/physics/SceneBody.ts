@@ -3,10 +3,12 @@ import { isBoat } from "../boats/Boat.js";
 import type { Entity } from "../entities/Entity.js";
 import { isTrain } from "../railway/Train.js";
 import { hasDumpBed } from "../traffic/DumpBed.js";
+import { fineExcavatorPose, isExcavator } from "../traffic/Excavator.js";
 import { isTransporter } from "../traffic/Transporter.js";
 import { vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import { rapierRotation, rotateBodyVector, yawRotation } from "./BodyRotation.js";
 import { DumpBedBody, setChassisBoxMass } from "./DumpBedBody.js";
+import { ExcavatorBody } from "./ExcavatorBody.js";
 import { type physicsBodyDimensions, physicsBodyMotion } from "./PhysicsBodies.js";
 import { PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
 import type { PhysicsBodyKind, PhysicsBodyState } from "./PhysicsState.js";
@@ -34,6 +36,7 @@ export interface SceneBody {
   incomingVelocity: RAPIER.Vector;
   chassis?: VehicleChassis;
   bed?: DumpBedBody;
+  excavator?: ExcavatorBody;
   transporter?: TransporterBody;
   queryRadius: number;
   queryCenter: RAPIER.Vector;
@@ -111,7 +114,7 @@ function colliderDesc(
   hz: number,
   car: boolean,
   clearance: number,
-  articulated: DumpBedBody | TransporterBody | undefined,
+  articulated: DumpBedBody | ExcavatorBody | TransporterBody | undefined,
 ) {
   // Keep the exact outer box footprint. Wheeled chassis need a one-pixel
   // bevel: the old 0.16px edge could catch a coplanar slab join on landing,
@@ -210,11 +213,13 @@ export function createSceneBody(
     hz = d.depth / 2 / SCALE;
   const clearance = car ? Math.min(4, d.height * 0.22) / SCALE : 0;
   const bed = car && hasDumpBed(entity) ? new DumpBedBody(entity, halfY, clearance) : undefined;
+  const excavator =
+    car && isExcavator(entity) ? new ExcavatorBody(entity, hx, halfY, hz, clearance) : undefined;
   const transporter =
     car && isTransporter(entity) ? new TransporterBody(entity, halfY, clearance) : undefined;
   const { body, rotation } = rigidBody(world, origin, entity, kind, d, car);
   const collider = world.createCollider(
-    colliderDesc(entity, kind, hx, halfY, hz, car, clearance, bed ?? transporter),
+    colliderDesc(entity, kind, hx, halfY, hz, car, clearance, bed ?? excavator ?? transporter),
     body,
   );
   transporter?.anchor(body);
@@ -230,10 +235,11 @@ export function createSceneBody(
     offsetY: d.offsetY / SCALE,
     incomingVelocity: { x: 0, y: 0, z: 0 },
     ...(bed ? { bed } : {}),
+    ...(excavator ? { excavator } : {}),
     ...(transporter ? { transporter } : {}),
     ...(car ? { chassis: new VehicleChassis(body, entity.type, d.width, d.depth, d.height) } : {}),
     // A raised tub or deployed ramp reaches beyond the level body envelope.
-    queryRadius: Math.hypot(hx, halfY, hz) + (bed ? 1.5 : transporter ? 5 : 0.1),
+    queryRadius: Math.hypot(hx, halfY, hz) + (bed ? 1.5 : transporter ? 5 : excavator ? 6 : 0.1),
     queryCenter: body.translation(),
     rested: 0,
     dormant: false,
@@ -244,6 +250,15 @@ export function createSceneBody(
     beside: false,
     touching: [],
     held: false,
-    state: initialState(entity, kind, d, rotation, bed),
+    state: {
+      ...initialState(entity, kind, d, rotation, bed),
+      ...(excavator ? { excavatorPose: fineExcavatorPose(entity.vehicleExcavator) } : {}),
+      ...(excavator && entity.vehicleExcavatorTarget !== undefined
+        ? { excavatorTarget: fineExcavatorPose(entity.vehicleExcavatorTarget) }
+        : {}),
+      ...(excavator && entity.vehicleExcavatorRate !== undefined
+        ? { excavatorRate: entity.vehicleExcavatorRate }
+        : {}),
+    },
   };
 }

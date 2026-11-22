@@ -1,3 +1,4 @@
+import { CONSTRUCTION_RUBBLE } from "../../entities/ConstructionRubble.js";
 import type { Entity } from "../../entities/Entity.js";
 import { clampBedTilt, hasDumpBed, insideDumpBed } from "../../traffic/DumpBed.js";
 import { isTransporter, onTransporter } from "../../traffic/Transporter.js";
@@ -39,7 +40,11 @@ export function groupVehicleContents(items: SceneItem[], collected: readonly Col
     grouped.add(load.item);
   }
   for (const { entity: actor, item } of collected) {
-    if (actor.parentId !== undefined || (actor.type !== "player" && !isCarryable(actor))) continue;
+    if (
+      actor.parentId !== undefined ||
+      (actor.type !== "player" && actor.type !== CONSTRUCTION_RUBBLE && !isCarryable(actor))
+    )
+      continue;
     const owner = trucks.find(({ entity: t }) =>
       hasDumpBed(t) ? insideDumpBed(t, actor, entityHeading(t)) : onTransporter(t, actor),
     );

@@ -58,6 +58,22 @@ export const U32: WireKind<number> = {
   },
 };
 
+/** Preserve historical U32 pose words and mark longer fixed-point poses. */
+export const EXCAVATOR_POSE: WireKind<number> = {
+  maxBytes: 8,
+  write(view, off, value) {
+    const high = Math.floor(value / 2 ** 32);
+    if (high === 0) return U32.write(view, off, value);
+    view.setUint32(off, high + 2 ** 31, true);
+    view.setUint32(off + 4, value % 2 ** 32, true);
+    return off + 8;
+  },
+  read(c) {
+    const high = U32.read(c);
+    return high >= 2 ** 31 ? (high - 2 ** 31) * 2 ** 32 + U32.read(c) : high;
+  },
+};
+
 export const F32: WireKind<number> = {
   maxBytes: 4,
   write(view, off, value) {

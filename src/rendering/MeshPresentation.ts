@@ -15,6 +15,7 @@ export interface MeshInstance {
   readonly emergencyEnabled?: boolean;
   readonly presentationTime?: number;
   readonly bedTilt?: number;
+  readonly excavatorPose?: number;
   readonly bedGateAngle?: number;
   readonly transportRamp?: boolean;
   readonly gradePitch?: number;

@@ -1,5 +1,9 @@
 # Vehicle model porting checklist
 
+The tracked excavator has a [retained source](../../art-source/vehicle-bake/excavator/v1/)
+and a [frozen art preview](../../public/demos/original-vehicles/excavator-v1/).
+[258](../tactical/258-construction-yards.md) owns its work rig and generated deployment.
+
 The original tracked bulldozer is a Workshop prototype with its own
 [retained source](../../art-source/vehicle-bake/bulldozer/v1/) and
 [frozen model review](../../public/demos/original-vehicles/bulldozer-v1/).

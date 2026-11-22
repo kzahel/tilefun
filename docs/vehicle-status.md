@@ -2,7 +2,7 @@
 
 Generated from [the roster](../art-source/vehicle-bake/roster.json) by `node scripts/vehicle-bake/status.mjs`.
 
-**34 integrated · 7 deferred · 11 idea · 1 prototype.**
+**34 integrated · 7 deferred · 11 idea · 2 prototype.**
 
 The owner-authorized run153 production batch is complete within its eight-hour limit (2026-10-19 21:19:36 UTC–2026-10-20 05:19:36 UTC). All33 ordinary entries are integrated; seven cycle styles retain diagnostic source/shared reviews but remain deferred for normal rider presentation. Per-family appearance pauses were waived for this delivered batch only; formal review states remain unchanged. Follow the current owner gate before further production.
 
@@ -63,5 +63,6 @@ The owner-authorized run153 production batch is complete within its eight-hour l
 | 51 | Ice resurfacer | Ice maintenance vehicle | idea | Choose an authoring batch and appearance direction. |
 | 52 | Giant duck advertising van | Novelty advertising vehicle | idea | Choose an authoring batch; plan the giant duck silhouette and vehicle clearance. |
 | 53 | Bulldozer | Tracked construction machinery | prototype | Try the Workshop bulldozer yard and review the fixed blade, crawl speed and contact feel. See tactical 257. |
+| 54 | Tracked excavator | Tracked construction machinery | prototype | Try the work controls and loading loop in the generated construction yard. See tactical 258. |
 
 Authorization lives in each roster entry; idea entries remain proposals. Exact model review and gameplay activation are separate checkpoints.

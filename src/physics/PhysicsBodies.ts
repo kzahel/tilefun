@@ -1,4 +1,5 @@
 import { DEFAULT_PHYSICAL_HEIGHT } from "../config/constants.js";
+import { CONSTRUCTION_RUBBLE } from "../entities/ConstructionRubble.js";
 import type { Entity } from "../entities/Entity.js";
 import { curveTrainView, isCurveTrain } from "../railway/CurveTrain.js";
 import { isTrain } from "../railway/Train.js";
@@ -20,7 +21,7 @@ export function carryingSupportId(
 }
 export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
   if (entity.type.startsWith("vehicle-v1:") || isTrain(entity)) return "vehicle";
-  if (entity.type === "ball") return "loose";
+  if (entity.type === "ball" || entity.type === CONSTRUCTION_RUBBLE) return "loose";
   if (entity.workItem || entity.type.startsWith("wildlife-resource-")) {
     // Ground supplies/sites are anchors. Only real carryable items become loose
     // bodies; type identity also works on replicas without private work state.

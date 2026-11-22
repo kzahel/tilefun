@@ -7,8 +7,9 @@ import { createProp, isPropType } from "../entities/PropFactories.js";
 import { furnitureAsset, INTERIOR_WALL_TYPE } from "../interiors/GameplayInterior.js";
 import { type compileGameplayRoom, validateRoomOccupancy } from "../interiors/GameplayRoom.js";
 import { launchBody, setBodyPose, setHorizontalVelocity } from "../physics/PhysicalEdits.js";
+import { isExcavatorAction } from "../shared/ExcavatorInput.js";
 import type { ClientMessage } from "../shared/protocol.js";
-import { SCENARIO_ONLY_MODELS } from "../traffic/OriginalVehicles.js";
+import { STAGED_VEHICLE_MODELS } from "../traffic/OriginalVehicles.js";
 import { freshBallWork } from "../wildlife/ForageResources.js";
 import type { PlayerSession } from "./PlayerSession.js";
 import type { Realm } from "./Realm.js";
@@ -92,6 +93,7 @@ const COMMANDS: { [K in RealmCommandType]: RealmCommandHandler<K> } = {
       jump: msg.jump,
       ...(msg.reversing === true ? { reversing: true } : {}),
       ...(msg.relativeDriving === true ? { relativeDriving: true } : {}),
+      ...(isExcavatorAction(msg.excavatorAction) && { excavatorAction: msg.excavatorAction }),
       seq: msg.seq,
       ...(msg.jumpPressed !== undefined ? { jumpPressed: msg.jumpPressed } : {}),
     });
@@ -340,7 +342,7 @@ function spawn(
   if (realm.interior && (!furnitureAsset(entityType) || !realm.roomState)) return;
   if (entityType.startsWith("vehicle-v1:")) {
     const model = entityType.slice(11);
-    if (SCENARIO_ONLY_MODELS.has(model)) return;
+    if (STAGED_VEHICLE_MODELS.has(model)) return;
     changed = !!realm.vehicleRegistry?.place(model, wx, wy, undefined, paintSchemeId);
   } else if (isPropType(entityType)) {
     changed = spawnProp(ctx, entityType, wx, wy);

@@ -1,5 +1,9 @@
 import { bulldozerYardRecipe } from "../scenarios/BulldozerYardRecipe.js";
 import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
+import {
+  constructionYardRecipe,
+  constructionYardSite,
+} from "../scenarios/ConstructionYardRecipe.js";
 import { CROWD_VIEW, crowdBenchRecipe } from "../scenarios/CrowdBenchRecipe.js";
 import { JUMP_STARTS, type JumpLane, jumpParkRecipe } from "../scenarios/JumpParkRecipe.js";
 import { outskirtsParkRecipe, PARK_STARTS } from "../scenarios/OutskirtsParkRecipe.js";
@@ -42,6 +46,7 @@ const STATIC_FIXTURES: Record<
 > = {
   "tree-house": { recipe: treeHouseRecipe, starts: TREE_HOUSE_STARTS },
   "bulldozer-yard": { recipe: bulldozerYardRecipe, starts: {} },
+  "construction-yard": { recipe: constructionYardRecipe, starts: {} },
   "outskirts-park": { recipe: outskirtsParkRecipe, starts: PARK_STARTS },
   crossing: { recipe: railCrossingRecipe, starts: CROSSING_STARTS },
   garage: { recipe: undergroundGarageRecipe, starts: GARAGE_STARTS },
@@ -89,6 +94,7 @@ export function geometryStarts(
 
 const TERRAIN_FIXTURES = new Set([
   "bulldozer-yard",
+  "construction-yard",
   "realm",
   "crowd",
   "traffic",
@@ -102,6 +108,7 @@ const TERRAIN_FIXTURES = new Set([
 const FOLLOW_FIXTURES = new Set(["outskirts-park", "realm", "train"]);
 const ZOOMS: Record<string, number> = {
   "bulldozer-yard": 0.6,
+  "construction-yard": 0.55,
   "traffic-crowd": 0.125,
   crowd: CROWD_VIEW.zoom,
   "car-jumps": 0.25,
@@ -116,13 +123,16 @@ const ZOOMS: Record<string, number> = {
 /** Terrain, camera and zoom per fixture. `&zoom=` overrides zoom for overview captures. */
 export function geometryView({ fixture, generated, ambient }: FixtureChoice) {
   const follow = fixture.startsWith("car-") || FOLLOW_FIXTURES.has(fixture);
-  const fixed = generated?.bridge
-    ? { wx: generated.bridge.x * 16, wy: generated.bridge.y * 16 - 16 }
-    : fixture === "tree-house"
-      ? { wx: TREE_HOUSE_AT.wx, wy: TREE_HOUSE_AT.wy - 72 }
-      : fixture === "crowd"
-        ? CROWD_VIEW.camera
-        : (ambient?.camera ?? { wx: 0, wy: -16 });
+  const yard = fixture === "construction-yard" ? constructionYardSite() : undefined;
+  const fixed = yard
+    ? { wx: (yard.center.x - 4) * 16, wy: yard.center.y * 16 - 38 }
+    : generated?.bridge
+      ? { wx: generated.bridge.x * 16, wy: generated.bridge.y * 16 - 16 }
+      : fixture === "tree-house"
+        ? { wx: TREE_HOUSE_AT.wx, wy: TREE_HOUSE_AT.wy - 72 }
+        : fixture === "crowd"
+          ? CROWD_VIEW.camera
+          : (ambient?.camera ?? { wx: 0, wy: -16 });
   const override = Number(new URLSearchParams(location.search).get("zoom")) || undefined;
   return {
     terrain: !!generated || !!ambient || TERRAIN_FIXTURES.has(fixture),
@@ -132,6 +142,17 @@ export function geometryView({ fixture, generated, ambient }: FixtureChoice) {
 }
 
 export function GeometryIntro({ fixture }: { fixture: string }) {
+  if (fixture === "construction-yard")
+    return (
+      <>
+        <h1>Construction yard</h1>
+        <p>
+          Board the excavator with E or Interact, then open Work arm with F or D-pad Down. Lower and
+          curl the bucket beside the rubble pile. Raise the boom, swing over the dump truck, then
+          open the bucket. Hold an on-screen button, its key, or A on the focused control to move.
+        </p>
+      </>
+    );
   if (fixture === "bulldozer-yard")
     return (
       <>

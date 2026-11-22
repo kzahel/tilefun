@@ -1,0 +1,14 @@
+{
+  "id": "excavator-v1",
+  "clearanceId": "excavator--v1",
+  "name": "Tracked excavator",
+  "title": "Tracked excavator · working boom and bucket",
+  "source": "public/demos/vehicle-bake/excavator/v1",
+  "glb": "public/demos/vehicle-bake/excavator/v1/model.glb",
+  "atlas": "public/demos/vehicle-bake/excavator/v1/atlas.png",
+  "report": "public/demos/vehicle-bake/excavator/v1/report.json",
+  "output": "public/demos/original-vehicles/excavator-v1",
+  "qa": "data/vehicle-bake/excavator-qa",
+  "offline": "data/vehicle-bake/excavator-review.html",
+  "nativeSize": 256
+}

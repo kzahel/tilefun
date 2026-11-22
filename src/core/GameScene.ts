@@ -26,6 +26,7 @@ import type { SceneFrame } from "../rendering/SceneFrame.js";
 import type { View3dHost } from "../rendering/View3dHost.js";
 import type { DeviceSession } from "../session/DeviceSession.js";
 import type { View } from "../session/View.js";
+import type { Movement } from "../shared/Movement.js";
 import type { RequestMessage, RequestResponse } from "../shared/requests.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
 import type { IClientTransport } from "../transport/Transport.js";
@@ -43,6 +44,7 @@ export interface GameContext {
   readonly realmId?: string | null;
   readonly storagePaused?: boolean;
   readonly inputBlocked?: boolean;
+  readonly excavatorMovement?: Movement | undefined;
   readonly touchMovement?: TouchMovementMode;
   readonly carDriving?: CarDrivingStyle;
   readonly tapMovement?: TapMovement;

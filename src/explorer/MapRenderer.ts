@@ -408,7 +408,7 @@ export class MapRenderer {
       }
     // Depot markers remain visible independently of the road overlay. Their
     // data comes from the exact same admitted infield plan as real generation.
-    for (const depot of result.vehicleDepots ?? []) {
+    for (const depot of [...(result.vehicleDepots ?? []), ...(result.constructionYards ?? [])]) {
       const x = sx(depot.center.x),
         y = sy(depot.center.y);
       if (x < -120 || x > width + 120 || y < -24 || y > height + 24) continue;

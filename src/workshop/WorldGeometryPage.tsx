@@ -12,6 +12,7 @@ import { JUMP_STARTS, type JumpLane } from "../scenarios/JumpParkRecipe.js";
 import { DYNAMICS_STARTS } from "../scenarios/VehicleDynamicsRecipe.js";
 import { fixedCamera } from "../session/View.js";
 import { required } from "../shared/required.js";
+import { excavatorAngles, isExcavator } from "../traffic/Excavator.js";
 import { VEHICLE_MODELS } from "../traffic/Vehicle.js";
 import { RACE_MODELS } from "../traffic/VehiclePerformance.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
@@ -40,6 +41,7 @@ const FIXTURES = [
   "car-garage",
   "car-dynamics",
   "bulldozer-yard",
+  "construction-yard",
   "car-jumps",
   "tree-house",
   "outskirts-park",
@@ -135,6 +137,14 @@ function GeometryFixtures({ initial }: { initial: string }) {
       }),
       onFrame: ({ client }) => {
         const p = client.replica.playerEntity;
+        if (fixture === "construction-yard") {
+          const excavator = client.replica.entities.find(isExcavator);
+          if (excavator) {
+            c.dataset.excavatorPose = String(excavator.vehicleExcavator ?? "");
+            c.dataset.excavatorMoving = String(excavator.vehicleExcavatorTarget !== undefined);
+            c.dataset.excavatorLoaded = String(excavatorAngles(excavator.vehicleExcavator).loaded);
+          }
+        }
         audio.current?.updateCarEngine(
           occupiedVehicle(p, client.replica.entities),
           settings.current.sounds &&

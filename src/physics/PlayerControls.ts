@@ -1,7 +1,8 @@
 import { PLAYER_SPEED, PLAYER_SPRINT_MULTIPLIER } from "../config/constants.js";
 import type { Entity } from "../entities/Entity.js";
 import type { Movement } from "../shared/Movement.js";
-import { vehicleNoseHeading } from "../traffic/Vehicle.js";
+import { isExcavator } from "../traffic/Excavator.js";
+import { isVehicleOverturned, vehicleNoseHeading } from "../traffic/Vehicle.js";
 import { DEFAULT_BOOST, vehiclePerformance } from "../traffic/VehiclePerformance.js";
 import type { MotionIntent } from "./PhysicsState.js";
 import { angleDifference } from "./VehicleMotor.js";
@@ -61,6 +62,8 @@ export function playerMotionIntent(movement: Movement): MotionIntent {
 
 /** Input mapping only; the scene owns all vehicle motion and collision. */
 export function vehicleMotionIntent(vehicle: Entity, movement: Movement): MotionIntent {
+  if (movement.excavatorAction && isExcavator(vehicle) && !isVehicleOverturned(vehicle))
+    return { vx: 0, vy: 0, driveSpeed: 0, excavatorAction: movement.excavatorAction };
   const heading = vehicleNoseHeading(vehicle);
   const performance = vehiclePerformance(vehicle.type);
   const base = performance.speed;

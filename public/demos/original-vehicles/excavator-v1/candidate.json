@@ -1,0 +1,94 @@
+{
+  "version": 1,
+  "candidates": [
+    {
+      "id": "excavator-v1",
+      "name": "Tracked excavator",
+      "title": "Tracked excavator \u00b7 working boom and bucket",
+      "nativeSize": 256,
+      "engineRadius": 128.0,
+      "dimensions": [
+        256,
+        256
+      ],
+      "groundOrigins": {
+        "study": [
+          128,
+          156
+        ],
+        "engine": [
+          128,
+          128
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Face-owned UV swatches, independent crawler wheels and a nested slew, boom, dipper and bucket rig.",
+      "audit": {
+        "triangles": 2840,
+        "vertices": 5214,
+        "meshes": 10,
+        "primitives": 10,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 192052,
+        "sha256": "1c0ef158591079043c9b5f1f046321204541de039376bcf193447a7ba11e1f9a",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/excavator/v1/atlas.png",
+          "retained": "demos/original-vehicles/excavator-v1/inputs/atlas.png",
+          "sha256": "95dc1d509de8345f2bf5d186317306641aa82f2aeea13eadf41be7e30a507232"
+        },
+        {
+          "source": "demos/vehicle-bake/excavator/v1/model.glb",
+          "retained": "demos/original-vehicles/excavator-v1/inputs/model.glb",
+          "sha256": "1c0ef158591079043c9b5f1f046321204541de039376bcf193447a7ba11e1f9a"
+        },
+        {
+          "source": "demos/vehicle-bake/excavator/v1/report.json",
+          "retained": "demos/original-vehicles/excavator-v1/inputs/report.json",
+          "sha256": "839fde469ebdb326b15d35ada5ee6c4e744df5da8e3280a68a4173f461b1600f"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target."
+    }
+  ]
+}

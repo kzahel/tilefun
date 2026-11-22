@@ -363,6 +363,7 @@ export class PlayerPredictor {
           vy: body.desiredVy,
           jump: body.jumpHeld,
           ...(body.controlUntil === undefined ? {} : { controlUntil: body.controlUntil }),
+          ...(body.excavatorHeld && { excavatorAction: body.excavatorHeld }),
           ...(body.altitude === undefined ? {} : { altitude: body.altitude }),
           ...(body.desiredHeading === undefined ? {} : { heading: body.desiredHeading }),
           ...(body.desiredDriveSpeed === undefined ? {} : { driveSpeed: body.desiredDriveSpeed }),

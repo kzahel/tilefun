@@ -9,10 +9,12 @@ import { tickFoodSources } from "../wildlife/FoodGrowth.js";
 import { resolvePredatorCatches } from "../wildlife/predatorAI.js";
 import { runOverSmallAnimals } from "../wildlife/Roadkill.js";
 import { tickWildlifeRespawns } from "../wildlife/WildlifeRespawns.js";
+import { finishExcavatorStroke } from "./ExcavatorControl.js";
 import type { Realm } from "./Realm.js";
 
 /** Last bed angle marked durable per vehicle; the step owns the clock, not a command. */
 const persistedBedTilts = new WeakMap<Entity, number>();
+const persistedExcavator = new WeakMap<Entity, number>();
 
 type GameplayRealm = Pick<
   Realm,
@@ -53,15 +55,20 @@ export function resolveSimulationGameplay(
   for (const e of participants) {
     const car = realm.vehicleRegistry?.states.get(e.id);
     if (!car) continue;
+    finishExcavatorStroke(realm, e, persistedExcavator.get(e));
+    const excavatorChanged =
+      e.vehicleExcavator !== undefined && persistedExcavator.get(e) !== e.vehicleExcavator;
     if (
       e.position.wx !== e.prevPosition?.wx ||
       e.position.wy !== e.prevPosition?.wy ||
       e.wz !== e.prevWz ||
       e.vehicleHeading !== e.prevVehicleHeading ||
       !rotationsEqual(e.bodyRotation, e.prevBodyRotation) ||
-      (persistedBedTilts.get(e) ?? 0) !== (e.vehicleBedTilt ?? 0)
+      (persistedBedTilts.get(e) ?? 0) !== (e.vehicleBedTilt ?? 0) ||
+      excavatorChanged
     ) {
       persistedBedTilts.set(e, e.vehicleBedTilt ?? 0);
+      if (e.vehicleExcavator !== undefined) persistedExcavator.set(e, e.vehicleExcavator);
       realm.vehicleRegistry?.onChange?.(car, false);
     }
   }

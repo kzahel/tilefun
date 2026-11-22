@@ -861,6 +861,9 @@ export class GameClient implements GameTestHooks {
       get inputBlocked() {
         return input.inputBlocked;
       },
+      get excavatorMovement() {
+        return client.placeControls.vehicle.excavatorMovement;
+      },
       get touchMovement() {
         return input.movementMode;
       },

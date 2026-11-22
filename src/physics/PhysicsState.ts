@@ -1,3 +1,4 @@
+import type { ExcavatorAction } from "../shared/ExcavatorInput.js";
 import type { AngularVelocity, BodyRotation } from "./BodyRotation.js";
 export interface MotionIntent {
   vx: number;
@@ -9,6 +10,7 @@ export interface MotionIntent {
   heading?: number;
   driveSpeed?: number;
   steering?: number;
+  excavatorAction?: ExcavatorAction;
   controlUntil?: number;
 }
 /** Bounded numerical replay state; no WASM world or gameplay objects on the wire. */
@@ -56,6 +58,12 @@ export interface PhysicsBodyState {
   /** Dump-bed angle and requested target (radians); advanced only by the shared step. */
   bedTilt?: number;
   bedTarget?: number;
+  excavatorPose?: number;
+  excavatorTarget?: number;
+  /** Signed speed of the active equipment joint in degrees/s. */
+  excavatorRate?: number;
+  /** Held direction for the arm motor, carried through physics replay. */
+  excavatorHeld?: ExcavatorAction;
   /** Exclusive physics tick deadline for a network-controlled motor. */
   controlUntil?: number;
 }

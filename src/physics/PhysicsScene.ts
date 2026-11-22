@@ -9,6 +9,7 @@ import { driveMotor, isIdle, supportMotions } from "./BodyMotor.js";
 import { keepRest, publishBody } from "./BodyReadback.js";
 import { rapierRotation, rotateBodyVector, worldRotation, yawRotation } from "./BodyRotation.js";
 import { DumpBedBody } from "./DumpBedBody.js";
+import { ExcavatorBody } from "./ExcavatorBody.js";
 import type { GroundMaterial } from "./GroundMaterial.js";
 import {
   hold,
@@ -399,7 +400,17 @@ export class PhysicsScene {
     const resting = this.reshaped ? restingBodies(this.bodies.values()) : NOBODY;
     this.reshaped = false;
     this.world.propagateModifiedBodyPositionsToColliders();
-    for (const e of this.live) e.bed?.advance(e.state, e.body, e.collider, this.staticGeometry);
+    for (const e of this.live) {
+      e.bed?.advance(e.state, e.body, e.collider, this.staticGeometry);
+      if (e.excavator) {
+        const input = intents.get(e.entity.id);
+        const action =
+          input?.controlUntil === undefined || this.tick < input.controlUntil
+            ? input?.excavatorAction
+            : undefined;
+        e.excavator.advance(e.state, e.body, e.collider, this.staticGeometry, action);
+      }
+    }
     this.world.gravity = { x: 0, y: (-JUMP_GRAVITY * gravity) / SCALE, z: 0 };
     const blockedRails = blockedRailGroups(this.live, this.bodies, this.staticGeometry, intents);
     // Read support motion before changing any motors: actor order cannot change it.
@@ -461,7 +472,13 @@ export class PhysicsScene {
           input,
           this.bodies,
         );
-        vehicleInputs.push({ entry, input: DumpBedBody.driveIntent(entry.state, locked) });
+        vehicleInputs.push({
+          entry,
+          input: ExcavatorBody.driveIntent(
+            entry.state,
+            DumpBedBody.driveIntent(entry.state, locked),
+          ),
+        });
         continue;
       }
       driveMotor(entry, input, isIdle(submitted), supports, this.bodies, gravity);

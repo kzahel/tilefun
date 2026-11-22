@@ -7,6 +7,7 @@ import {
   resolveDescriptor,
 } from "./GenerationDescriptor.js";
 import { OnionStrategy } from "./OnionStrategy.js";
+import { constructionYard } from "./regional/ConstructionYard.js";
 import type { CountryPlan } from "./regional/CountrysidePlanner.js";
 import { DenseDistrictSource } from "./regional/DenseDistrictSource.js";
 import type { DistrictPlan } from "./regional/DistrictPlan.js";
@@ -40,6 +41,7 @@ export type OverviewResult = Omit<RegionalResult, "world"> & {
   railways?: RailLine[];
   racetracks?: Pick<Racetrack, "id" | "name" | "center" | "bounds" | "access">[];
   vehicleDepots?: Pick<VehicleDepot, "id" | "name" | "center" | "arrival" | "bounds">[];
+  constructionYards?: OverviewResult["vehicleDepots"];
   motocross?: Pick<
     MotocrossPark,
     "id" | "name" | "center" | "arrival" | "bounds" | "access" | "straight"
@@ -101,6 +103,7 @@ export function* overviewSteps(
         result.stats.features += tracks.length * 2;
       }
     }
+    const constructionYards: NonNullable<OverviewResult["constructionYards"]> = [];
     const motocross: NonNullable<OverviewResult["motocross"]> = [];
     if (result.detail === "region") {
       const parks = yield* new MotocrossSource(regionalWorld(descriptor.seed)).querySteps(
@@ -110,6 +113,13 @@ export function* overviewSteps(
       if (result.stats.features + parks.length <= request.limits.maxFeatures) {
         for (const { id, name, center, arrival, bounds, access, straight } of parks)
           motocross.push({ id, name, center, arrival, bounds, access, straight });
+        result.stats.features += parks.length;
+      }
+      if (motocross.length && result.stats.features + parks.length <= request.limits.maxFeatures) {
+        for (const park of parks) {
+          const { id, name, center, arrival, bounds } = constructionYard(park);
+          constructionYards.push({ id, name, center, arrival, bounds });
+        }
         result.stats.features += parks.length;
       }
     }
@@ -207,6 +217,7 @@ export function* overviewSteps(
       racetracks,
       vehicleDepots,
       motocross,
+      constructionYards,
       ...(landscape ? { landscape, ponds } : {}),
     };
   }

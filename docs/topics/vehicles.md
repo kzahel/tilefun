@@ -1,5 +1,11 @@
 # Vehicles: shared physics baseline
 
+[258](../tactical/258-construction-yards.md) adds a tracked excavator to
+generated construction yards. Its four working joints and bucket load are
+replicated and durable. Hold a Work arm control for continuous motion. The
+links accelerate, brake on release or at a joint limit, and make real contacts
+on the shared physics clock. The same controls run in the game and Workshop.
+
 [257](../tactical/257-bulldozer-yard.md) adds a Workshop **Bulldozer yard** with
 a parked car to push. Chassis mass is optionally authored per model and shared
 by authority and prediction. The dozer uses a 36-unit chassis, all-wheel drive

@@ -540,6 +540,16 @@
       "authorization": "Owner requested the first playable bulldozer and a push demonstration.",
       "next": "Try the Workshop bulldozer yard and review the fixed blade, crawl speed and contact feel. See tactical 257.",
       "candidate": "bulldozer-v1"
+    },
+    {
+      "id": "excavator",
+      "name": "Tracked excavator",
+      "family": "Tracked construction machinery",
+      "priority": 54,
+      "status": "prototype",
+      "authorization": "Owner requested a working city-edge construction yard and excavator.",
+      "next": "Try the work controls and loading loop in the generated construction yard. See tactical 258.",
+      "candidate": "excavator-v1"
     }
   ]
 }

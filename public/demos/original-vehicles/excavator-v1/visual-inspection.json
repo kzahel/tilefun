@@ -1,0 +1,16 @@
+{
+  "status": "no-blocking-issues",
+  "humanApproval": false,
+  "glbSha256": "1c0ef158591079043c9b5f1f046321204541de039376bcf193447a7ba11e1f9a",
+  "reviewed": [
+    "16 study headings",
+    "16 game headings",
+    "signed wheel previews",
+    "wireframes",
+    "full scoop-and-drop scene"
+  ],
+  "observations": [
+    "The boom, dipper, bucket, windowed cab and crawler tracks are distinct at native scale.",
+    "The cab rotates independently from the crawler chassis. The working pivots and carried material remain visible through the loading sequence."
+  ]
+}

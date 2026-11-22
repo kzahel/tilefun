@@ -11,6 +11,7 @@ import { pastureHabitatProps } from "../../wildlife/PastureHabitat.js";
 import { rangeHabitatProps } from "../../wildlife/RangeHabitat.js";
 import type { Chunk } from "../../world/Chunk.js";
 import { deriveTerrain } from "../deriveTerrain.js";
+import { constructionYard, yardRoad } from "./ConstructionYard.js";
 import { insideDenseBounds } from "./DenseDistrictPlanner.js";
 import {
   motocrossPlacements,
@@ -20,6 +21,7 @@ import {
 } from "./MotocrossPlanner.js";
 import { type LandscapeProfile, NaturalLandscape } from "./NaturalLandscape.js";
 import { racetrackReserved, racetrackSurface } from "./RacetrackPlanner.js";
+import { intersects } from "./RegionalPlanner.js";
 import { settlementPets } from "./SettlementPets.js";
 import { depotPlacements, depotSurface, vehicleDepot } from "./VehicleDepotPlanner.js";
 import type { RegionalWorld } from "./WorldDescriptor.js";
@@ -37,6 +39,7 @@ export class NaturalStrategy extends RailwayStrategy {
     const farms = this.nature.farms.query(bounds);
     const tracks = this.racetracks.query(bounds);
     const parks = this.motocross.query(bounds);
+    const yards = parks.map(constructionYard).filter((yard) => intersects(yard.bounds, bounds));
     let changed = false;
     for (let sy = 0; sy < 33; sy++)
       for (let sx = 0; sx < 33; sx++) {
@@ -49,7 +52,13 @@ export class NaturalStrategy extends RailwayStrategy {
         }
         const park = parks.find((p) => motocrossReserved(p, x, y));
         if (park) {
-          chunk.setSubgrid(sx, sy, motocrossTerrain(park, x, y));
+          chunk.setSubgrid(
+            sx,
+            sy,
+            yards.some((yard) => insideDenseBounds(yard.bounds, x, y))
+              ? TerrainId.DirtWarm
+              : motocrossTerrain(park, x, y),
+          );
           changed = true;
           continue;
         }
@@ -92,7 +101,7 @@ export class NaturalStrategy extends RailwayStrategy {
           }
         for (const park of parks)
           if (motocrossReserved(park, x + 0.5, y + 0.5)) {
-            const surface = motocrossRoad(park, x, y);
+            const surface = yardRoad(constructionYard(park), x, y) ?? motocrossRoad(park, x, y);
             const existing = chunk.getRoad(lx, ly);
             // Keep the city's own outbound road where the access road joins it.
             if (
@@ -110,7 +119,9 @@ export class NaturalStrategy extends RailwayStrategy {
     const bounds = { minX: cx * 16, minY: cy * 16, maxX: (cx + 1) * 16, maxY: (cy + 1) * 16 };
     return [
       ...this.racetracks.query(bounds).flatMap((t) => vehicleDepot(t).vehicles),
-      ...this.motocross.query(bounds).flatMap((p) => p.vehicles),
+      ...this.motocross
+        .query(bounds)
+        .flatMap((p) => [...p.vehicles, ...constructionYard(p).vehicles]),
     ].filter(
       (p) => Math.floor(p.wx / CHUNK_SIZE_PX) === cx && Math.floor(p.wy / CHUNK_SIZE_PX) === cy,
     );
@@ -138,6 +149,12 @@ export class NaturalStrategy extends RailwayStrategy {
       ...residents,
       ...pets,
       ...this.spectators(cx, cy),
+      ...this.motocross
+        .query(bounds)
+        .flatMap((p) => constructionYard(p).rubble)
+        .filter(
+          (a) => Math.floor(a.wx / CHUNK_SIZE_PX) === cx && Math.floor(a.wy / CHUNK_SIZE_PX) === cy,
+        ),
       ...wildlife,
       ...foragePlacements(
         [
@@ -176,7 +193,12 @@ export class NaturalStrategy extends RailwayStrategy {
       ...pastureHabitatProps(this.nature, cx, cy),
       ...rangeHabitatProps(this.nature, cx, cy),
       ...this.racetracks.query(bounds).flatMap((t) => depotPlacements(vehicleDepot(t), bounds)),
-      ...this.motocross.query(bounds).flatMap((p) => motocrossPlacements(p, bounds)),
+      ...this.motocross
+        .query(bounds)
+        .flatMap((p) => [
+          ...motocrossPlacements(p, bounds),
+          ...depotPlacements(constructionYard(p), bounds),
+        ]),
       ...this.racetracks
         .query({
           minX: bounds.minX - 4,

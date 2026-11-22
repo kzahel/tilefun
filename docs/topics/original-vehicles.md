@@ -1,5 +1,10 @@
 # Original vehicle authoring
 
+[258](../tactical/258-construction-yards.md) delivers the retained tracked
+excavator to generated construction yards and the shared Workshop preview.
+The work rig uses four independent joints and handles loose rubble. Owner
+appearance and gameplay review are pending.
+
 [257](../tactical/257-bulldozer-yard.md) adds a playable **Bulldozer yard**
 prototype in Workshop. Its heavy, slow chassis can shove a parked car using
 shared contacts. The yellow tracked model and exact fallback have retained

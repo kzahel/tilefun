@@ -24,7 +24,13 @@ export function normalizedMovement(movement: Movement): Movement {
 }
 
 export function hasMovement(movement: Movement): boolean {
-  return !!(movement.dx || movement.dy || movement.jump || movement.jumpPressed);
+  return !!(
+    movement.dx ||
+    movement.dy ||
+    movement.jump ||
+    movement.jumpPressed ||
+    movement.excavatorAction
+  );
 }
 
 /** Per-replay held movement and jump edges for co-seats, mirroring the primary seat. */

@@ -21,6 +21,7 @@ import type { SpriteState, WanderAIState } from "../entities/EntityDefs.js";
 import { rotationsEqual } from "../physics/BodyRotation.js";
 import {
   BOOL8,
+  EXCAVATOR_POSE,
   F32,
   PAINT,
   ROTATION,
@@ -105,6 +106,9 @@ const ENTITY_FIELDS: { readonly [K in FieldKey]: EntityField<K> } = {
   transportLoadId: { key: "transportLoadId", bit: 23, wire: U32 },
   transportedBy: { key: "transportedBy", bit: 24, wire: U32 },
   heldItem: { key: "heldItem", bit: 25, wire: U8 },
+  vehicleExcavator: { key: "vehicleExcavator", bit: 26, wire: EXCAVATOR_POSE },
+  vehicleExcavatorTarget: { key: "vehicleExcavatorTarget", bit: 27, wire: EXCAVATOR_POSE },
+  vehicleExcavatorRate: { key: "vehicleExcavatorRate", bit: 28, wire: F32 },
 };
 
 /** Every replicated field in wire order (index === `bit`). */
@@ -294,7 +298,10 @@ export function mirroredFieldsMatch(entity: Mirror, snap: Mirror): boolean {
     entity.vehicleRamp === snap.vehicleRamp &&
     entity.transportLoadId === snap.transportLoadId &&
     entity.transportedBy === snap.transportedBy &&
-    entity.heldItem === snap.heldItem
+    entity.heldItem === snap.heldItem &&
+    entity.vehicleExcavator === snap.vehicleExcavator &&
+    entity.vehicleExcavatorTarget === snap.vehicleExcavatorTarget &&
+    entity.vehicleExcavatorRate === snap.vehicleExcavatorRate
   );
 }
 const MATCHED = [
@@ -321,6 +328,9 @@ const MATCHED = [
   "transportLoadId",
   "transportedBy",
   "heldItem",
+  "vehicleExcavator",
+  "vehicleExcavatorTarget",
+  "vehicleExcavatorRate",
 ] as const satisfies readonly MirroredKey[];
 /** `true` only while `MATCHED` names every mirrored field. */
 const everyMirroredFieldMatched: Exclude<MirroredKey, (typeof MATCHED)[number]> extends never

@@ -5,6 +5,7 @@ import {
   type PhysicsBodyState,
   type PhysicsState,
 } from "../physics/PhysicsState.js";
+import { excavatorActionFromId, excavatorActionId } from "./ExcavatorInput.js";
 
 const KINDS: readonly PhysicsBodyKind[] = ["character", "vehicle", "loose", "fixed"];
 const POSITIONS = ["x", "y", "z"] as const;
@@ -29,6 +30,8 @@ const FIELDS = [
   "inheritedVy",
 ] as const;
 const BODY_BYTES = 118;
+const LEGACY_EXCAVATOR_BYTES = 8;
+const EXCAVATOR_BYTES = 20;
 const VEHICLE_BYTES = 53; // Sleep, rotations, angular velocity, dump-bed tilt/target.
 const HEADER_BYTES = 16;
 const CONTACT_BYTES = 8;
@@ -45,7 +48,13 @@ export function physicsStateBytes(state?: PhysicsState): number {
     (state
       ? HEADER_BYTES +
         state.bodies.reduce(
-          (bytes, b) => bytes + BODY_BYTES + (b.kind === "vehicle" ? VEHICLE_BYTES : 0),
+          (bytes, b) =>
+            bytes +
+            BODY_BYTES +
+            (b.kind === "vehicle"
+              ? VEHICLE_BYTES +
+                (b.excavatorPose === undefined ? 0 : EXCAVATOR_BYTES + (b.excavatorHeld ? 1 : 0))
+              : 0),
           0,
         ) +
         state.contacts.length * CONTACT_BYTES
@@ -117,7 +126,9 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
       offset += 4;
     }
     if (body.kind === "vehicle") {
-      view.setUint8(offset++, body.sleeping ? 1 : 0);
+      const hasExcavator = body.excavatorPose !== undefined;
+      const held = hasExcavator && body.excavatorHeld;
+      view.setUint8(offset++, (body.sleeping ? 1 : 0) | (hasExcavator ? 6 : 0) | (held ? 8 : 0));
       for (const value of [
         ...(body.rotation ?? yawRotation(body.heading)),
         ...(body.prevRotation ?? body.rotation ?? yawRotation(body.prevHeading)),
@@ -126,6 +137,13 @@ export function writePhysicsState(view: DataView, offset: number, state?: Physic
       ]) {
         view.setFloat32(offset, finite(Math.fround(value)), true);
         offset += 4;
+      }
+      if (body.excavatorPose !== undefined) {
+        view.setFloat64(offset, finite(body.excavatorPose), true);
+        view.setFloat64(offset + 8, finite(body.excavatorTarget ?? -1), true);
+        view.setFloat32(offset + 16, finite(body.excavatorRate ?? 0), true);
+        offset += EXCAVATOR_BYTES;
+        if (held) view.setUint8(offset++, excavatorActionId(held));
       }
     }
   }
@@ -229,9 +247,14 @@ export function readPhysicsState(
     }
     if (kind === "vehicle") {
       if (offset + VEHICLE_BYTES > view.byteLength) throw Error("Invalid physics vehicle length");
-      const sleeping = view.getUint8(offset++);
-      if (sleeping > 1) throw Error("Invalid physics sleeping flag");
-      body.sleeping = !!sleeping;
+      const vehicleFlags = view.getUint8(offset++);
+      if (
+        vehicleFlags > 15 ||
+        (vehicleFlags & 4 && !(vehicleFlags & 2)) ||
+        (vehicleFlags & 8 && !(vehicleFlags & 4))
+      )
+        throw Error("Invalid physics vehicle flags");
+      body.sleeping = !!(vehicleFlags & 1);
       const read = () => {
         const value = finite(view.getFloat32(offset, true));
         offset += 4;
@@ -241,6 +264,29 @@ export function readPhysicsState(
       body.prevRotation = [read(), read(), read(), read()];
       body.angularVelocity = [read(), read(), read()];
       Object.assign(body, nonzero({ bedTilt: read(), bedTarget: read() }));
+      if (vehicleFlags & 4) {
+        if (offset + EXCAVATOR_BYTES > view.byteLength)
+          throw Error("Invalid physics excavator length");
+        body.excavatorPose = finite(view.getFloat64(offset, true));
+        const target = finite(view.getFloat64(offset + 8, true));
+        if (target !== -1) body.excavatorTarget = target;
+        const rate = finite(view.getFloat32(offset + 16, true));
+        if (rate) body.excavatorRate = rate;
+        offset += EXCAVATOR_BYTES;
+        if (vehicleFlags & 8) {
+          if (offset >= view.byteLength) throw Error("Invalid physics excavator length");
+          const action = excavatorActionFromId(view.getUint8(offset++));
+          if (!action) throw Error("Invalid excavator direction");
+          body.excavatorHeld = action;
+        }
+      } else if (vehicleFlags & 2) {
+        if (offset + LEGACY_EXCAVATOR_BYTES > view.byteLength)
+          throw Error("Invalid physics excavator length");
+        body.excavatorPose = view.getUint32(offset, true);
+        const target = view.getUint32(offset + 4, true);
+        if (target !== NONE) body.excavatorTarget = target;
+        offset += LEGACY_EXCAVATOR_BYTES;
+      }
     }
     bodies.push(body);
   }

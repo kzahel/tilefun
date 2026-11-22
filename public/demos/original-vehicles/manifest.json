@@ -66257,6 +66257,476 @@
           "sha256": "7d1539f4cf3e70bbf360b9f00e8ec5140602cc717c9cbd2557fda737e6579d82"
         }
       ]
+    },
+    {
+      "id": "excavator-v1",
+      "name": "Tracked excavator",
+      "title": "Tracked excavator \u00b7 working boom and bucket",
+      "nativeSize": 256,
+      "engineRadius": 128.0,
+      "dimensions": [
+        256,
+        256
+      ],
+      "groundOrigins": {
+        "study": [
+          128,
+          156
+        ],
+        "engine": [
+          128,
+          128
+        ]
+      },
+      "glb": "inputs/model.glb",
+      "atlas": "inputs/atlas.png",
+      "report": "inputs/report.json",
+      "method": "Face-owned UV swatches, independent crawler wheels and a nested slew, boom, dipper and bucket rig.",
+      "audit": {
+        "triangles": 2840,
+        "vertices": 5214,
+        "meshes": 10,
+        "primitives": 10,
+        "materials": 1,
+        "textures": 1,
+        "glbBytes": 192052,
+        "sha256": "1c0ef158591079043c9b5f1f046321204541de039376bcf193447a7ba11e1f9a",
+        "wheels": {
+          "FL": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "FR": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RL": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          },
+          "RR": {
+            "wheel_radius": 6.0,
+            "roll_axis_gltf": [
+              0,
+              0,
+              -1
+            ]
+          }
+        }
+      },
+      "sourceInputs": [
+        {
+          "source": "demos/vehicle-bake/excavator/v1/atlas.png",
+          "retained": "demos/original-vehicles/excavator-v1/inputs/atlas.png",
+          "sha256": "95dc1d509de8345f2bf5d186317306641aa82f2aeea13eadf41be7e30a507232"
+        },
+        {
+          "source": "demos/vehicle-bake/excavator/v1/model.glb",
+          "retained": "demos/original-vehicles/excavator-v1/inputs/model.glb",
+          "sha256": "1c0ef158591079043c9b5f1f046321204541de039376bcf193447a7ba11e1f9a"
+        },
+        {
+          "source": "demos/vehicle-bake/excavator/v1/report.json",
+          "retained": "demos/original-vehicles/excavator-v1/inputs/report.json",
+          "sha256": "839fde469ebdb326b15d35ada5ee6c4e744df5da8e3280a68a4173f461b1600f"
+        }
+      ],
+      "status": "awaiting-owner-review",
+      "runtime": "not integrated",
+      "styleReferenceNote": "Accepted red coupe actual GLB image; STYLE reference, not target.",
+      "url": "demos/original-vehicles/excavator-v1/index.html",
+      "qualification": {
+        "neutralRollClearance": {
+          "status": "passed",
+          "id": "excavator--v1",
+          "glbSha256": "1c0ef158591079043c9b5f1f046321204541de039376bcf193447a7ba11e1f9a",
+          "triangles": 2840,
+          "clearance": [
+            {
+              "wheel": "Wheel_FL_Roll",
+              "radius": 6.000000000000303,
+              "minimumGap": 3.999999999999697,
+              "nearestBody": "Crawler chassis"
+            },
+            {
+              "wheel": "Wheel_FR_Roll",
+              "radius": 6.000000000000303,
+              "minimumGap": 3.999999999999697,
+              "nearestBody": "Crawler chassis"
+            },
+            {
+              "wheel": "Wheel_RL_Roll",
+              "radius": 6.000000000000303,
+              "minimumGap": 3.999999999999697,
+              "nearestBody": "Crawler chassis"
+            },
+            {
+              "wheel": "Wheel_RR_Roll",
+              "radius": 6.000000000000303,
+              "minimumGap": 3.999999999999697,
+              "nearestBody": "Crawler chassis"
+            }
+          ],
+          "allNeutralRollAngles": true,
+          "collidingBodyRejected": true,
+          "baselineRestored": true,
+          "steering": "unqualified"
+        },
+        "sharedEngine": {
+          "wheels": [
+            {
+              "id": "FL",
+              "radius": 6,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "FR",
+              "radius": 6,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RL",
+              "radius": 6,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            },
+            {
+              "id": "RR",
+              "radius": 6,
+              "quarterTurn": true,
+              "pivotFixed": true,
+              "independent": true,
+              "reverseQuarterTurn": true,
+              "absoluteReset": true
+            }
+          ],
+          "forwardReverseAbsoluteReset": true
+        },
+        "art": "awaiting owner review",
+        "runtime": "not integrated",
+        "steering": "unqualified"
+      },
+      "files": [
+        {
+          "url": "demos/original-vehicles/excavator-v1/browser-qa.json",
+          "sha256": "8786241c4e6a68e3bdae3ac9b826cc9d43ae6bc9b3a27c4da89abb09e6d5a308"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/candidate.json",
+          "sha256": "f33aa067d5f5619e44ce53dc2b6d4eeb4acaba2360645eaad0ac6b4dd8c2cd2b"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/capture.json",
+          "sha256": "b33d6ed2b6e7df745460a35cae5cdd0ab23714e829e31bcc0aa68e2db97ba038"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/contact-sheet.png",
+          "sha256": "d582fa98353d8d7793a00e53c7940df4f186e620710c38685e7de7d7fe015a72"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-0.png",
+          "sha256": "0bbc068ea750ac4a49534e272bfb3ce8e049e6032b8d4e465c2ab64fa1f3d178"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-1.png",
+          "sha256": "4033c6593bd8f3a1c7f9a3e5ba093ed200cd0d2e9cd798bbeba89fc3e149b699"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-10.png",
+          "sha256": "40440c3cc7878d2a9a1c8ee077198f84087e68189109075d74a7dbccab7e64be"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-11.png",
+          "sha256": "89df2d112fd6355afee2153a59a95f44521ec61258fcee6b768db5268f7c6711"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-12.png",
+          "sha256": "21899986de1e965d0442f5c435480973064a44f0083b52b4b64a524760e6351b"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-13.png",
+          "sha256": "0dd0f78fc85ef4d45d463de3f58ef5e829d62955cb6fd5f283bb91be428e9bad"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-14.png",
+          "sha256": "4a321349e2fcde20da00a8d420fc75f0b2c3c37a453ed1333fe686226f75b637"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-15.png",
+          "sha256": "481b3d8c8d5b0bda444b00e655b181b31ea189866f558e8b9a06db91d8de557d"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-1x.png",
+          "sha256": "09abe1e9896ed8e636b959f95c92e6909e961338d584f2ea9b3c0a893076a691"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-2.png",
+          "sha256": "5421a2ebfecb1d3e13771ff0bbc707e336b322619b515d51d481c328234ad90f"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-2x.png",
+          "sha256": "5ab36caf2128f85e4b58e0af9859fcf2befb4757ffe9c2305454311bf1cf79f2"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-3.png",
+          "sha256": "32ae144b38e1f1e0887e7ca0ac42aa3901854f63f807c22551fcda4d67219c53"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-3x.png",
+          "sha256": "cb28bea693423a2ba0334413025c70ef2b05eb015ff563a2999b0d1c4da395ed"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-4.png",
+          "sha256": "291eaeb5a7351c713c42044cecbae63941979b36997b6926ff9d1dde6185978d"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-5.png",
+          "sha256": "c0f0a13ee9668085397ed72888bb149292c84367cb74d7256397187fe3a70b96"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-6.png",
+          "sha256": "a40fe9c60977f7c9121cdf8612ce2bb03e1d614de761d91159f82374be904f77"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-7.png",
+          "sha256": "1d524c10cf9dba5de30186dc7490e747055ff46da5f0ff5bdf4a8883f6467de9"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-8.png",
+          "sha256": "9a1cec6a6f32958e305bf6b255698f20029e69362f8d8eed1209892c2224551a"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/engine-9.png",
+          "sha256": "c9ccc1541b4cbbe4a61fbaf3b325863db3d4a401368b90414fa6a9ab3291ec8c"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/game-roll-0.png",
+          "sha256": "5421a2ebfecb1d3e13771ff0bbc707e336b322619b515d51d481c328234ad90f"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/game-roll-1.png",
+          "sha256": "48a60b649f31eda8435cb0b48d6ba99417b2ca1c62fd4a90d0e05c49b9f0deb2"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/game-roll-2.png",
+          "sha256": "bacde2a8d06374b5d4b3d9e4f9ddb78b5bbf37f488dbda52f48ddc15ac194409"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/game-roll-3.png",
+          "sha256": "fb535c321c254fb769a5b28f7d37a689116a787ef99a2ccf1f405d2d7ff7d093"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/game-roll-4.png",
+          "sha256": "966d1cdbb585623c2fc5e1f0a174dc383904e6e7f778c712000529a958c81258"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/game-roll-5.png",
+          "sha256": "2990fef14248493e63e7ccc00f28155c7252ec1593782b88998e929b3a6baba0"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/game-roll-6.png",
+          "sha256": "4bbf5a5c557ae7903d59aacf531e0e38e5ac62c28b2b9c4ad51748bc360b65f0"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/game-roll-7.png",
+          "sha256": "48a60b649f31eda8435cb0b48d6ba99417b2ca1c62fd4a90d0e05c49b9f0deb2"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/game-turntable.gif",
+          "sha256": "0fbb6c215d5b96114ac509d7d32fc7bec6e0891c6588dff4c2c22ee07eaad0d7"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/roll-0.png",
+          "sha256": "8d8d4152170054921c2f0607f2e3f5420fbbf6207fec40f700587a8cb65f5a9e"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/roll-1.png",
+          "sha256": "85f0bbf6075bd37a034c9e7b413a67248818ba6e630c65fa7fca6f6013dd1be2"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/roll-2.png",
+          "sha256": "4754837374c7e27404ed3cee89fb7a4412e01a6006f6cf8d46719b6f69c525a8"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/roll-3.png",
+          "sha256": "97adcb7c8601563ead5cc0ff6cdc25efc598fe5525a6b87bfd0ff2b2cea09d3f"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/roll-4.png",
+          "sha256": "c757e4c0a3a170d351a5fe4d8a7736045d4400cfc74ef8e64a802f706cc94fb3"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/roll-5.png",
+          "sha256": "eeab7bffaa7686dc26c8d21286f1687267803c273f5605a245168f628025a360"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/roll-6.png",
+          "sha256": "8d8d4152170054921c2f0607f2e3f5420fbbf6207fec40f700587a8cb65f5a9e"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/roll-7.png",
+          "sha256": "85f0bbf6075bd37a034c9e7b413a67248818ba6e630c65fa7fca6f6013dd1be2"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-0.png",
+          "sha256": "c235cf356267834405e70179a4aa2e5f9acc2913773b0bd41a4ff8e89dbbcd3f"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-1.png",
+          "sha256": "e80a94accdf81500a595ec87417c44a3d01d957a9b2dfec164be8a700626f5e0"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-10.png",
+          "sha256": "913dd78bfb2a7262d59ac560499fe0fe0d700f465719ef7606012e03132d6b72"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-11.png",
+          "sha256": "a9fb66015bcd0499c274136f5ba2096ae726535ca32afd5300b244f547c457e8"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-12.png",
+          "sha256": "3f164b090e7a10e0c911a8fcd5f246a63530a67c3d3d73e1eb9265476f94f0a1"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-13.png",
+          "sha256": "5a130f2fdc841821c16401fdfb5a0a17db3d08603ac37735efd49cc6fd1912b4"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-14.png",
+          "sha256": "38b0a770cd5e0698845279acac60de17fecd1ba8a525f7d58db23e4c3b0cd994"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-15.png",
+          "sha256": "d8408f642c3f1b75f512803462f8f963f454f4d24f139024cb532c40eedec52c"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-1x.png",
+          "sha256": "ad90b4caccb0c774ab8dd72c95bad38f6a8c1d8c4b204c8c2353aef0e5a5099e"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-2.png",
+          "sha256": "8d8d4152170054921c2f0607f2e3f5420fbbf6207fec40f700587a8cb65f5a9e"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-2x.png",
+          "sha256": "d31b1dfac07c44c12a8694993bcf814f112dfd4e7b2b141253bc301f16617931"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-3.png",
+          "sha256": "a9128b2543690ce277471727de3859af3c831c179172f7a46c5ecc5abdc718dc"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-3x.png",
+          "sha256": "ddb3867bdf434ab2ede473f55a2136473d3a0cebf19f250e9e905c6cb9b02a1c"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-4.png",
+          "sha256": "aac928081c122bb371ac3fd81e3f7ed67ab0f39dd47b04942fa75bc91ac27236"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-5.png",
+          "sha256": "df1347880ce4c7624b9101c6884d01d953b74c7a6c91e45966fa452f34333c87"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-6.png",
+          "sha256": "95c8c290f573e6abda29c0f708abdf03ffed03a3606d2d97ae3a2b4acfcce8fb"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-7.png",
+          "sha256": "995d0a3bf94512e5e8a81cb0a71f02ba12d59cae87646221cf8937c9fb485795"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-8.png",
+          "sha256": "1745ae02ededeeb804c2c8397ca5eed20f487d5d1d5c923f8494e03f60b54380"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/study-9.png",
+          "sha256": "0d61c6373e195fa2a0c6e380954c502969f81b6253d179268cccf0a975e83608"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/turntable.gif",
+          "sha256": "20688e1c39127f2b8ba666a19397604bdd66b9e0dfbb77a8dcbe681b3a14735a"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/viewer-desktop.png",
+          "sha256": "0ba41fde6df7d4cd1f79e60621ad93da7bb10f61178601d05552cbb0a4a3cd76"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/viewer-mobile.png",
+          "sha256": "956f19cff5da12a75c96ab1f7c4449569e706c15381b582302f7a8018ac25129"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/wheel-phases.png",
+          "sha256": "0a04546a30b1f5bc7813bff5a81b8aac675deebb13dd6f35d24fe19db6611c37"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/wire-engine.png",
+          "sha256": "e428cbc9c40ac13bb86436fcef749035978a2df01a54e602f117b06e9a12fe5b"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/captures/wire-study.png",
+          "sha256": "e88e04384dd74b5ef810139228b0310d12f3d42bf800446ec0030208e8f01c47"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/clearance.json",
+          "sha256": "98dc89f92dd385132ed1ab29ec62c62aa1761a5f41cf23b34de2fd8958274a2a"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/index.html",
+          "sha256": "3238743752b268b38a64a2b1e7f86a1b5c3386f2924b1583eb989b0a6eb350be"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/inputs/atlas.png",
+          "sha256": "95dc1d509de8345f2bf5d186317306641aa82f2aeea13eadf41be7e30a507232"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/inputs/model.glb",
+          "sha256": "1c0ef158591079043c9b5f1f046321204541de039376bcf193447a7ba11e1f9a"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/inputs/report.json",
+          "sha256": "839fde469ebdb326b15d35ada5ee6c4e744df5da8e3280a68a4173f461b1600f"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/review.css",
+          "sha256": "a00b688be2a5dd35b289213add4e0eda194663f14ed1651451b9a7b38a5b3075"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/viewer.js",
+          "sha256": "a0921338a5c154ac994aab5df044ef60ab9e57f004adcf1c325a669fcd7eaeb1"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/visual-inspection.json",
+          "sha256": "cbc4d4276ff7b24626dc1f9c8fee9873563a1c2d2d0add87ba5e6ece18f77ff4"
+        },
+        {
+          "url": "demos/original-vehicles/excavator-v1/review-manifest.json",
+          "sha256": "94e12b558da1dac15adf3fd80ae25e0b93b2cf3902e13b3d5e2b122475559937"
+        }
+      ]
     }
   ]
 }

@@ -3,6 +3,7 @@ import { buildingRecipe } from "../generation/regional/BuildingRecipes.js";
 import { buildingDoors, exteriorDoors } from "../interiors/BuildingDoors.js";
 import { DoorApproach, doorwayReached, towardDoor } from "../interiors/DoorTraversal.js";
 import { nearestStationBench } from "../railway/StationBench.js";
+import { isExcavator } from "../traffic/Excavator.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
 import { driveCandidate, type EquipmentRequest, equipmentPrompt } from "./VehicleEquipment.js";
 
@@ -40,6 +41,7 @@ export interface VehicleChoice {
   readonly key: string;
   /** The seat is in a vehicle (its driving hints show). */
   readonly inside: boolean;
+  readonly excavatorId?: number;
 }
 
 export function vehicleChoice(view: PlaceView, allowed: boolean): VehicleChoice {
@@ -60,7 +62,16 @@ export function vehicleChoice(view: PlaceView, allowed: boolean): VehicleChoice 
           : "";
   const request = allowed && !view.editorEnabled ? seatRequest(current, candidate, bench) : null;
   const label = current ? "Get out" : bench ? "Call train" : "Drive car";
-  return { request, label, equipment, key, inside: !!current };
+  return {
+    request,
+    label,
+    equipment,
+    key,
+    inside: !!current,
+    ...(allowed && !view.editorEnabled && current && isExcavator(current) && !equipment
+      ? { excavatorId: current.id }
+      : {}),
+  };
 }
 
 /** Out of the vehicle the seat is in, into the nearest one, or a train to its bench. */

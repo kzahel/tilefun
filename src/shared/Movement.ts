@@ -1,3 +1,4 @@
+import type { ExcavatorAction } from "./ExcavatorInput.js";
 /** One frame of player movement intent, shared by input, prediction and authority. */
 export interface Movement {
   dx: number;
@@ -8,4 +9,5 @@ export interface Movement {
   jumpPressed?: boolean;
   reversing?: boolean;
   relativeDriving?: boolean;
+  excavatorAction?: ExcavatorAction;
 }
