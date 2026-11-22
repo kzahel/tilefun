@@ -1,4 +1,5 @@
 import type { Spritesheet } from "../assets/Spritesheet.js";
+import { loadDynamicShadows } from "../config/dynamicShadows.js";
 import type { FirstPersonControls } from "../config/firstPersonControls.js";
 import {
   DEFAULT_VIEW_DISTANCE,
@@ -73,6 +74,9 @@ export class FirstPersonControl {
   /** With shadows on, the sun's too (else contact shadows only); `r_sun3d` and
    * `?sun3d=0` set it. */
   sun = new URLSearchParams(location.search).get("sun3d") !== "0";
+  /** With the sun's shadows, moving bodies cast them too (266). Saved on this
+   * device (Options); `r_dynshadows` and `?dynshadows=1` set it. */
+  dynamicShadows = loadDynamicShadows();
   /** Top-down views draw vehicles as shared outlined native-pixel
    * images; `r_pixelcars3d` and `?pixelcars=0` set it. */
   pixelBodies = new URLSearchParams(location.search).get("pixelcars") !== "0";

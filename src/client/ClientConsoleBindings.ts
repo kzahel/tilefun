@@ -79,6 +79,11 @@ export function registerClientConsole(
     if (gc.firstPerson) gc.firstPerson.sun = val;
   });
   if (gc.firstPerson && !gc.firstPerson.sun) clientCVars.r_sun3d.set(false);
+  // Options owns the saved choice; the cvar changes it until the next reload.
+  if (gc.firstPerson?.dynamicShadows) clientCVars.r_dynshadows.set(true);
+  clientCVars.r_dynshadows.onChange((val) => {
+    if (gc.firstPerson) gc.firstPerson.dynamicShadows = val;
+  });
   // A headset session's display rate (252); a running session keeps its own.
   clientCVars.xr_rate.onChange((val) => {
     if (gc.xr) gc.xr.frameRate = Math.max(0, val);

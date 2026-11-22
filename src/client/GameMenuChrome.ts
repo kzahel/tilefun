@@ -1,3 +1,4 @@
+import { saveDynamicShadows } from "../config/dynamicShadows.js";
 import { saveWildlifeModels } from "../config/wildlifeModels.js";
 import type { ConsoleEngine } from "../console/ConsoleEngine.js";
 import type { SceneManager } from "../core/SceneManager.js";
@@ -113,6 +114,12 @@ export class GameMenuChrome {
         host.firstPerson.wildlifeModels = enabled;
         saveWildlifeModels(enabled);
       },
+      async (enabled) => {
+        // The cvar owns the live state (console, ?dynshadows=1); this device remembers it.
+        host.firstPerson.dynamicShadows = enabled;
+        host.consoleEngine.cvars.get("r_dynshadows")?.set(enabled);
+        saveDynamicShadows(enabled);
+      },
     );
   }
 
@@ -158,6 +165,7 @@ export class GameMenuChrome {
       this.host.firstPerson.viewDistance,
       this.host.firstPerson.controls,
       this.host.firstPerson.wildlifeModels,
+      this.host.firstPerson.dynamicShadows,
     );
   }
 

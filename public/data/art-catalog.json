@@ -39785,7 +39785,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/rendering/firstperson/FirstPersonView.ts:422"
+          "source": "src/rendering/firstperson/FirstPersonView.ts:474"
         },
         {
           "system": "Editor",

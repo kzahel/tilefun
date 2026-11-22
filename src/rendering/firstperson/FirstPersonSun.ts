@@ -48,6 +48,55 @@ export function sunMapScale(cover = 0): number {
 
 const CHUNK_PX = CHUNK_SIZE * TILE_SIZE;
 
+/**
+ * Dynamic shadows (tactical 266): a second map of moving bodies only, redrawn
+ * every frame. It uses the sun map's projection at a finer scale, so both maps
+ * share one set of rules: `sunProjection(texel)` covers `SUN_RADIUS × texel`
+ * world pixels each way from its origin.
+ */
+/** Finest and coarsest texel of the dynamic map, in world pixels. */
+export const DYNAMIC_MIN_TEXEL = 0.25;
+export const DYNAMIC_MAX_TEXEL = SUN_MAX_SCALE;
+/** The origin moves in steps of this many texels, so a resting body's shadow
+ * keeps its edge while the camera moves. */
+export const DYNAMIC_SNAP = 16;
+/** The shadows fade out between these distances from the view's centre, in
+ * texels. The far end leaves the map's edge a snap step and a margin away. */
+export const DYNAMIC_FADE_START = 820;
+export const DYNAMIC_FADE_END = 960;
+/** How far a first-person eye sees dynamic shadows; contact shadows take over
+ * beyond it. */
+export const DYNAMIC_EYE_RANGE = 400;
+/** Ground beyond the top-down view's corners that is still covered. */
+export const DYNAMIC_VIEW_MARGIN = 48;
+/** Mesh bodies drawn into the map in one frame, nearest first; the rest keep
+ * their contact shadows. */
+export const DYNAMIC_MAX_BODIES = 64;
+
+/** The dynamic map's texel for a view that must be shaded out to `cover` world
+ * pixels from its centre: a power of two, so zooming changes it rarely. */
+export function dynamicTexel(cover: number): number {
+  let texel = DYNAMIC_MIN_TEXEL;
+  while (texel < DYNAMIC_MAX_TEXEL && cover > DYNAMIC_FADE_START * texel) texel *= 2;
+  return texel;
+}
+
+/** The dynamic map's origin for a view centre, on its snap grid. */
+export function dynamicOrigin(x: number, y: number, texel: number): { x: number; y: number } {
+  const snap = DYNAMIC_SNAP * texel;
+  return { x: Math.round(x / snap) * snap, y: Math.round(y / snap) * snap };
+}
+
+/** How much of its dynamic shadow a point `distance` from the view's centre
+ * shows: 1 inside the fade, 0 beyond it. The receivers' shaders use the same
+ * curve, and a caster's contact shadow takes the remainder. */
+export function dynamicStrength(distance: number, texel: number): number {
+  const start = DYNAMIC_FADE_START * texel,
+    end = DYNAMIC_FADE_END * texel;
+  const t = Math.max(0, Math.min(1, (distance - start) / (end - start)));
+  return 1 - t * t * (3 - 2 * t);
+}
+
 /** Ground offset of a shadow per unit of caster height. */
 export const SUN_SLOPE = { x: -SUN.x / SUN.z, y: -SUN.y / SUN.z } as const;
 

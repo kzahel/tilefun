@@ -41,6 +41,7 @@ class WildlifeMeshBatch {
     root: THREE.Group,
     private readonly shade: (material: THREE.Material) => void,
     private readonly definition: WildlifeMeshDefinition,
+    private readonly cast: (mesh: THREE.Object3D) => void,
   ) {
     root.add(this.group);
     shade(this.material);
@@ -138,6 +139,7 @@ class WildlifeMeshBatch {
           animations,
           this.definition,
           this.definition.unitScale ?? this.definition.height / height,
+          this.cast,
         );
         return;
       }
@@ -155,6 +157,7 @@ class WildlifeMeshBatch {
         // Each batch can span the whole view and is rebuilt from visible actors every frame.
         instances.frustumCulled = false;
         instances.count = 0;
+        this.cast(instances);
         this.group.add(instances);
         this.parts.push({ source, instances, base: source.quaternion.clone() });
       });
@@ -219,6 +222,8 @@ export class FirstPersonWildlifeMeshes {
   constructor(
     private readonly root: THREE.Group,
     private readonly shade: (material: THREE.Material) => void,
+    /** Marks a model's meshes as casters of dynamic shadows (266). */
+    private readonly cast: (mesh: THREE.Object3D) => void = () => {},
   ) {}
 
   begin(enabled: boolean, topDown: boolean): void {
@@ -246,7 +251,7 @@ export class FirstPersonWildlifeMeshes {
     if (!batch) {
       const definition = WILDLIFE_MESHES.get(item.sheetKey);
       if (!definition || this.loading >= MAX_MODEL_LOADS || !this.makeRoom()) return false;
-      batch = new WildlifeMeshBatch(this.root, this.shade, definition);
+      batch = new WildlifeMeshBatch(this.root, this.shade, definition, this.cast);
       this.batches.set(item.sheetKey, batch);
       this.loading++;
     }

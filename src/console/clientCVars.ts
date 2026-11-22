@@ -26,6 +26,7 @@ export interface ClientCVars {
   r_groundnearest: CVar<boolean>;
   r_pixelgrid: CVar<boolean>;
   r_sun3d: CVar<boolean>;
+  r_dynshadows: CVar<boolean>;
   xr_rate: CVar<number>;
 }
 
@@ -235,6 +236,15 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     category: "r",
   });
 
+  const r_dynshadows = engine.cvars.register<boolean>({
+    name: "r_dynshadows",
+    description:
+      "3D views: moving bodies cast the sun's shadows onto the world, each other and themselves (?dynshadows=1; Options saves it)",
+    type: "boolean",
+    defaultValue: false,
+    category: "r",
+  });
+
   const xr_rate = engine.cvars.register<number>({
     name: "xr_rate",
     description: "Display rate a headset session asks for, in Hz (0 keeps the headset's own)",
@@ -267,6 +277,7 @@ export function registerClientCVars(engine: ConsoleEngine): ClientCVars {
     r_groundnearest,
     r_pixelgrid,
     r_sun3d,
+    r_dynshadows,
     xr_rate,
   };
 }

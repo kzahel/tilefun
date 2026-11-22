@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [266 Dynamic shadows](266-dynamic-shadows.md) | Opt-in second sun map of moving bodies: vehicles, cargo, animals and actors cast onto the world, each other and themselves. Device measurements and owner review pending. |
 | [265 Construction playground](265-construction-playground.md) | A crane-fed marble run, forklift-movable exit chute, and a seesaw that tips under a vehicle. |
 | [264 Forklift](264-forklift.md) | Physical sliding and tilting forks lift the existing pallets and crates in the construction yard. |
 | [263 Construction crate run](263-construction-crate-run.md) | A drive-through stack of freely rotating wooden crates in generated construction yards. |

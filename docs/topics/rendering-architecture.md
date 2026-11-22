@@ -91,6 +91,18 @@ and fuller props without per-frame cost:
   vertex shader turns them to the eye. Only moving actors are written per frame.
 - Building walls all wear the south-face artwork; forest rows stand as cards.
 
+[266](../tactical/266-dynamic-shadows.md) adds opt-in dynamic shadows
+(**Options → Dynamic shadows**, `r_dynshadows`, `?dynshadows=1`; off by default):
+- A second map with the sun map's projection (`DynamicShadows`) holds moving
+  bodies only and is redrawn every frame; the static map stays cached. Receivers
+  take the darker of the two, so bodies shade the world, each other and themselves.
+- Casters are the shared vehicle and cargo meshes (also where top-down shows
+  images), animal models and actor cards facing the sun. A new kind of moving
+  body must be drawn into the map to cast, and must choose a receiver in
+  `shadeMaterial` that keeps it clear of its own shadow (`solid`, `actor`, `image`).
+- A caster in the map drops its contact shadow; beyond the map's fade, and for
+  bodies past the per-frame limit, the contact shadow remains.
+
 [220](../tactical/220-world-anchors-shadows-and-jump-transitions.md) projected
 vehicle shadows on the CPU (replaced by the GPU depth pass in 236, below). It cast
 them from the displayed rotated bounding volume's finite upper faces.

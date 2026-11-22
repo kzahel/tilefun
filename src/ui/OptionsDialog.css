@@ -108,8 +108,12 @@
   accent-color: #fce5a1;
 }
 #options-pinch-help,
+#options-shadows-help,
 #options-view-help {
   font-size: 14px;
+}
+.options-dialog > button + button {
+  margin-top: 8px;
 }
 /* Back stays reachable on short phone screens however long the options grow. */
 .options-back {

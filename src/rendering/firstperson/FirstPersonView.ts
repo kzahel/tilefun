@@ -7,6 +7,7 @@ import type { Entity } from "../../entities/Entity.js";
 import type { Prop } from "../../entities/Prop.js";
 import type { World } from "../../world/World.js";
 import { observerInsideRoom, roomObserver } from "../collectScene.js";
+import type { GpuShadow } from "../GpuShadowShape.js";
 import type { OverlayDraw } from "../OverlayFrame.js";
 import type { GrassItem, SpriteItem } from "../SceneItem.js";
 import { SURFACE_GRID } from "../SurfacePresentation.js";
@@ -50,8 +51,13 @@ import {
 } from "./FirstPersonPropMeshes.js";
 import { type PropSurface, surfaceUnder } from "./FirstPersonProps.js";
 import { FirstPersonRoomScene } from "./FirstPersonRoomScene.js";
-import { BlobShadows, plainShadow, SunShadows } from "./FirstPersonShadows.js";
-import { SUN_REACH } from "./FirstPersonSun.js";
+import { BlobShadows, DynamicShadows, plainShadow, SunShadows } from "./FirstPersonShadows.js";
+import {
+  DYNAMIC_EYE_RANGE,
+  DYNAMIC_MAX_BODIES,
+  DYNAMIC_VIEW_MARGIN,
+  SUN_REACH,
+} from "./FirstPersonSun.js";
 import { buildTerrainChunk } from "./FirstPersonTerrain.js";
 import { FirstPersonUnderlay } from "./FirstPersonUnderlay.js";
 import { FirstPersonVehicles } from "./FirstPersonVehicles.js";
@@ -84,6 +90,9 @@ export interface FirstPersonFrame {
   readonly shadows?: boolean | undefined;
   /** With shadows, the sun's as well as contact shadows; on unless false. */
   readonly sun?: boolean | undefined;
+  /** With the sun's shadows, moving bodies cast them too (266): onto the ground,
+   * the static world, each other and themselves. Off unless true. */
+  readonly dynamicShadows?: boolean | undefined;
   /**
    * Top-down play (251): draw through the fixed view's camera centred on the
    * eye's x and y, at `scale` screen pixels per world pixel. The eye's height and
@@ -189,6 +198,11 @@ export class FirstPersonView {
     effects: 0,
     /** Sun shadow map redraws since the view was created. */
     sunRedraws: 0,
+    /** World pixels per texel of this frame's dynamic shadow map; 0 while off. */
+    dynamicTexel: 0,
+    /** Mesh bodies and actor cards drawn into it this frame. */
+    dynamicBodies: 0,
+    dynamicCards: 0,
     /** Vehicle bodies drawn, as meshes or images. */
     cars: 0,
     /** Of those, the ones drawn as the fixed view's images (top-down only). */
@@ -209,6 +223,16 @@ export class FirstPersonView {
   private readonly cameras = new ViewCameras(this.scene);
   private readonly fog = new THREE.Fog(SKY, 200, 600);
   private readonly sun = new SunShadows();
+  private readonly dynamic = new DynamicShadows(this.sun.uniforms);
+  /** The frame's mesh bodies in reach of the dynamic map, with the contact
+   * shadow each keeps where the map does not show its own. */
+  private readonly casters: {
+    item: SpriteItem;
+    /** Absent for a body without a contact shadow (boats). */
+    shadow: GpuShadow | undefined;
+    support: number;
+    distance: number;
+  }[] = [];
   /** Horizontal axis the cards are expanded along: the camera's right (game axes). */
   private readonly cardRight = { value: new THREE.Vector2(1, 0) };
   private readonly flatMaterial = this.lit(
@@ -238,6 +262,9 @@ export class FirstPersonView {
   /** The frame's pages as cards ask for them. */
   private readonly cardPages = new RecentPages();
   private readonly billboards: MovingCards;
+  /** The frame's actor cards that cast, facing the sun: drawn only into the
+   * dynamic shadow map. */
+  private readonly shadowCards: MovingCards;
   private readonly cards: PropCardBatches;
   private readonly blobs: BlobShadows;
   private readonly grass: GrassCards;
@@ -262,12 +289,16 @@ export class FirstPersonView {
   /** Emergency lamps of vehicles drawn as sprites this frame. */
   private readonly lamps: LampItem[] = [];
   private readonly vehicles = new FirstPersonVehicles((material) => {
-    this.lit(material, "body");
+    this.lit(material, "solid");
   });
   private readonly bodyImages = new BodyImageCards(this.sun.uniforms);
-  private readonly wildlife = new FirstPersonWildlifeMeshes(this.worldRoot, (material) => {
-    this.lit(material, "body");
-  });
+  private readonly wildlife = new FirstPersonWildlifeMeshes(
+    this.worldRoot,
+    (material) => {
+      this.lit(material, "solid");
+    },
+    DynamicShadows.cast,
+  );
   private readonly propMeshes: PropMeshes;
   private readonly chunks = new Map<string, ChunkScene>();
   private readonly images: FirstPersonImages;
@@ -302,9 +333,21 @@ export class FirstPersonView {
       });
     // Top-down, an actor's rows under its standing point (its near feet) show
     // over the ground as in the fixed view; other cameras leave them under it.
-    const sunk = card("body");
+    const sunk = card("actor");
     bladeDepth(sunk, 1);
-    this.billboards = new MovingCards(this.worldRoot, card("body"), sunk);
+    this.billboards = new MovingCards(this.worldRoot, card("actor"), sunk);
+    this.shadowCards = new MovingCards(
+      this.dynamic.cardRoot,
+      shadeMaterial(
+        new THREE.MeshBasicMaterial({
+          alphaTest: 0.5,
+          side: THREE.DoubleSide,
+          colorWrite: false,
+          fog: false,
+        }),
+        { card: this.sun.cardRight, cardArt: this.atlas },
+      ),
+    );
     this.cards = new PropCardBatches(this.cardRoot, () => card("card"), this.sun, this.atlas);
     this.blobs = new BlobShadows(this.worldRoot);
     this.effects = new EffectQuads(this.worldRoot);
@@ -400,6 +443,15 @@ export class FirstPersonView {
     const camera = this.cameras.place(frame, topDown, headset, target, this.fog, fogEnd);
     // Rooms have contact shadows but no sun.
     const shadows = frame.shadows !== false;
+    const sunlit = shadows && frame.sun !== false && !frame.interior;
+    this.dynamic.place(
+      centre,
+      topDown
+        ? Math.hypot(target.width, target.height) / (2 * topDown.scale) + DYNAMIC_VIEW_MARGIN
+        : Math.min(fogEnd, DYNAMIC_EYE_RANGE),
+      sunlit && frame.dynamicShadows === true,
+    );
+    this.stats.dynamicTexel = this.dynamic.texel;
     GROUND_NEAREST.value = !!frame.groundNearest;
     ART_HOLES.value = !!topDown;
     // Draw calls are counted over every render of this view: vehicle images and
@@ -433,11 +485,26 @@ export class FirstPersonView {
         this.scene,
         centre,
         fogEnd,
-        shadows && frame.sun !== false && !frame.interior,
+        sunlit,
         // Top-down: the whole view, and tall faces standing south of its ground.
         topDown ? frame.drawRadius + SUN_REACH : undefined,
       );
       this.stats.sunRedraws = this.sun.redraws;
+      this.stats.dynamicBodies = 0;
+      this.dynamic.draw(renderer, this.scene, (sunCamera) => {
+        for (const { item } of this.casters)
+          if (
+            this.vehicles.drawDepth(
+              renderer,
+              sunCamera,
+              meshes,
+              item,
+              !!topDown,
+              this.dynamic.depth,
+            )
+          )
+            this.stats.dynamicBodies++;
+      });
       // After the sun's map: casters beyond a tabletop's edge still shade it.
       renderer.clippingPlanes = this.cameras.cutFor(headset);
       this.decks.update(this.chunks.values(), frame.cutaway, this.solidRoot);
@@ -698,6 +765,8 @@ export class FirstPersonView {
       this.cardRight.value.set(right.x, right.y);
     }
     this.billboards.begin(topDown);
+    this.shadowCards.begin();
+    this.casters.length = 0;
     this.wildlife.begin(frame.wildlifeModels !== false, topDown);
     this.blobs.begin();
     this.lamps.length = 0;
@@ -718,7 +787,21 @@ export class FirstPersonView {
         this.queueActor(content, eye, meshes, drawn, shadows);
     }
     this.billboards.end();
+    this.shadowCards.end();
+    this.stats.dynamicCards = this.shadowCards.count;
     this.stats.wildlifeMeshes = this.wildlife.end();
+    // The nearest mesh bodies cast into the dynamic map; each keeps as much of
+    // its contact shadow as the map's fade leaves out, and the rest all of it.
+    const { casters } = this;
+    if (casters.length > DYNAMIC_MAX_BODIES) casters.sort((a, b) => a.distance - b.distance);
+    for (const [index, { shadow, support }] of casters.entries())
+      if (shadow)
+        this.blobs.push(
+          shadow,
+          support,
+          index < DYNAMIC_MAX_BODIES ? 1 - this.dynamic.strength(shadow.x, shadow.y) : 1,
+        );
+    if (casters.length > DYNAMIC_MAX_BODIES) casters.length = DYNAMIC_MAX_BODIES;
     this.blobs.end();
     this.stats.billboards = this.billboards.count;
     this.stats.blobs = this.blobs.count;
@@ -752,36 +835,56 @@ export class FirstPersonView {
       ((body || item.gpuShadow?.casterId === undefined) && item.gpuShadow
         ? item.gpuShadow
         : plainShadow(item));
+    let support = 0;
     if (shadow) {
-      const support = this.supportUnder(shadow, item.zOffset);
+      support = this.supportUnder(shadow, item.zOffset);
       const roof = item.meshRoofSupport;
-      const roofDelta =
+      if (
         eye === "south" &&
         roof &&
         meshes.ready.has(roof.assetId) &&
         Math.abs(support - item.zOffset) < 0.5
-          ? (roof.topDownHeightDelta ?? 0)
-          : 0;
-      this.blobs.push(shadow, support - roofDelta);
+      )
+        support -= roof.topDownHeightDelta ?? 0;
     }
-    if (!cars) return;
-    if (body) {
-      cars.push(item);
+    if (body && item.mesh) {
+      // Every drawn mesh casts into the dynamic map, with or without a contact
+      // shadow of its own (boats have none on water).
+      if (shadows && this.dynamic.reaches(item.wx, item.wy, item.zOffset, item.mesh.radius))
+        this.casters.push({
+          item,
+          shadow: shadow || undefined,
+          support,
+          distance: this.dynamic.distance(item.wx, item.wy),
+        });
+      else if (shadow) this.blobs.push(shadow, support);
+      cars?.push(item);
       return;
     }
-    if (item.mesh && meshes.pending?.(item.mesh.assetId)) return;
-    if (this.wildlife.push(item)) return;
-    const sheet = this.images.sheet(item.sheetKey);
-    if (!sheet) {
-      void requestGameSprite(this.sheets, item.sheetKey);
-      return;
+    // A sprite casts only where the collector gives it a shadow.
+    const dynamic = !!shadow && this.dynamic.texel > 0;
+    let cast = false;
+    if (!(item.mesh && meshes.pending?.(item.mesh.assetId))) {
+      if (cars && this.wildlife.push(item)) cast = dynamic;
+      else if (cars || dynamic) {
+        const sheet = this.images.sheet(item.sheetKey);
+        if (sheet) {
+          const card = actorBillboard(item, sheet, eye, meshes.ready, this.room?.scene.topDown);
+          if (cars) {
+            this.billboards.push(card, this.cardPages);
+            const lamp = emergencyLamp(item);
+            if (lamp) this.lamps.push(lamp);
+          }
+          // Without `cars` the card is only its shadow: the image shows the actor.
+          cast =
+            dynamic &&
+            this.dynamic.reaches(card.x, card.y, card.z, Math.max(card.width, card.height)) &&
+            this.shadowCards.push(card, this.cardPages);
+        } else if (cars) void requestGameSprite(this.sheets, item.sheetKey);
+      }
     }
-    this.billboards.push(
-      actorBillboard(item, sheet, eye, meshes.ready, this.room?.scene.topDown),
-      this.cardPages,
-    );
-    const lamp = emergencyLamp(item);
-    if (lamp) this.lamps.push(lamp);
+    if (shadow)
+      this.blobs.push(shadow, support, cast ? 1 - this.dynamic.strength(shadow.x, shadow.y) : 1);
   }
 
   /** The collector resolves support without surface queries here, so a body above the
@@ -807,6 +910,8 @@ export class FirstPersonView {
     this.dropChunks();
     this.disposeRoom();
     this.billboards.dispose();
+    this.shadowCards.dispose();
+    this.dynamic.dispose();
     this.cards.dispose();
     this.ground.dispose();
     this.faces.dispose();

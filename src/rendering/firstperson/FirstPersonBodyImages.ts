@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import type { BodyImage } from "../View3dHost.js";
-import { SUN_BODY_LIGHT, type SunUniforms } from "./FirstPersonMaterials.js";
+import { SUN_IMAGE_LIGHT, type SunUniforms } from "./FirstPersonMaterials.js";
 
 /** Where a body's image goes: its anchor in game axes, and its opacity. */
 export interface ImagedBody {
@@ -67,7 +67,7 @@ uniform float opacity;
 uniform vec3 sunOrigin;
 varying vec2 vUv;
 varying vec2 vDepth;
-${SUN_BODY_LIGHT}
+${SUN_IMAGE_LIGHT}
 void main() {
   vec2 size = vec2(textureSize(image, 0));
   vec2 p = vUv * side - 0.5;

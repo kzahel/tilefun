@@ -312,8 +312,11 @@ export class MovingCards {
     this.arrays.count = 0;
   }
 
-  push(billboard: Billboard, pages: CardPages): void {
-    if (this.arrays.push(billboard, pages)) this.count++;
+  /** False, writing nothing, when a page the card needs is not in the atlas. */
+  push(billboard: Billboard, pages: CardPages): boolean {
+    const written = this.arrays.push(billboard, pages);
+    if (written) this.count++;
+    return written;
   }
 
   end(): void {

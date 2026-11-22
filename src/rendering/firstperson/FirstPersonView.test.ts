@@ -365,6 +365,125 @@ describe("the view's merged static world (251)", () => {
     view.dispose();
   });
 
+  it("draws moving bodies into their own shadow map in place of contact shadows (266)", () => {
+    const rig = () => {};
+    const asset = {
+      object: new THREE.Group(),
+      setPhysical: rig,
+      setTransportRamp: rig,
+      setTowLift: rig,
+      setTravel: rig,
+      setExcavator: rig,
+      setDumpBed: rig,
+      setEmergency: rig,
+    } as unknown as CarMeshAsset;
+    const body = (wx: number, wy = 128, more: Partial<SpriteItem> = {}) =>
+      ({
+        kind: "sprite",
+        wx,
+        wy,
+        zOffset: 0,
+        sheetKey: "none",
+        mesh: { assetId: "car", orientation: [0, 0, 0, 1], radius: 8 },
+        gpuShadow: {
+          x: wx,
+          y: wy,
+          ux: 8,
+          uy: 0,
+          vx: 0,
+          vy: 4,
+          plane: [0, 0, 4],
+          band: 8,
+          support: 0,
+          mask: "vehicle",
+          casterId: 1,
+        },
+        ...more,
+      }) as unknown as SpriteItem;
+    const image: BodyImage = { texture: new THREE.Texture(), depth: null, radius: 8 };
+    const withImages = {
+      ...target,
+      meshes: {
+        ready: new Set(["car"]),
+        asset: () => asset,
+        paint: () => undefined,
+        bindPaint: () => () => {},
+        bodyImage: (_item: SpriteItem, shows: (radius: number) => boolean) =>
+          shows(8) ? image : null,
+      },
+    } as unknown as View3dTarget;
+    const towed = body(110);
+    // One world object: a new one would rebuild the chunks and the sun's map.
+    const w = world(new Map([["0,0", new Chunk()]]));
+    const view = new FirstPersonView(new Map());
+    const scene = (topDown: boolean, more: Partial<FirstPersonFrame> = {}): FirstPersonFrame => ({
+      ...frame(w, topDown),
+      shadows: true,
+      // Two bodies in view (one towing a third) and one far beyond any map.
+      sprites: [body(100, 128, { towGroup: towed }), body(140), body(128 + 5000)],
+      ...more,
+    });
+    settle(view, scene(true), withImages);
+
+    // Off: no second map, and every body keeps its contact shadow.
+    drawn.length = 0;
+    view.render(scene(true), withImages);
+    expect(view.stats.dynamicTexel).toBe(0);
+    expect(view.stats.dynamicBodies).toBe(0);
+    expect(view.stats.blobs).toBe(4);
+    // The world and every image at once (the sun's own map was drawn while settling).
+    const plain = drawn.length;
+    expect(plain).toBe(2);
+
+    // On: the bodies in reach are drawn as meshes into the map, although the view
+    // itself shows them as images, and only the far one keeps a contact shadow.
+    drawn.length = 0;
+    view.render(scene(true, { dynamicShadows: true }), withImages);
+    expect(view.stats.dynamicTexel).toBe(0.5);
+    expect(view.stats.dynamicBodies).toBe(3);
+    expect(view.stats.blobs).toBe(1);
+    expect(view.stats.bodyImages).toBe(2);
+    // The map's renders come before the view's own, through the map's camera:
+    // the scene's marked meshes, the actor cards, then each body.
+    const mapCamera = (view as unknown as { dynamic: { camera: THREE.Camera } }).dynamic.camera;
+    const mapDraws = drawn.flatMap((draw, index) => (draw.camera === mapCamera ? [index] : []));
+    expect(mapDraws).toHaveLength(5);
+    expect((mapDraws[4] ?? 0) - (mapDraws[0] ?? 0)).toBe(4);
+    expect(drawn.slice((mapDraws[4] ?? 0) + 1)).toHaveLength(plain);
+
+    // A mesh without a contact shadow (a boat on water) still casts.
+    const boat = body(120, 160);
+    delete (boat as { gpuShadow?: unknown }).gpuShadow;
+    view.render(scene(true, { dynamicShadows: true, sprites: [boat] }), withImages);
+    expect(view.stats.dynamicBodies).toBe(1);
+    expect(view.stats.blobs).toBe(0);
+
+    // The sun's shadows off, or a room, leaves nothing for moving bodies to cast.
+    view.render(scene(true, { dynamicShadows: true, sun: false }), withImages);
+    expect(view.stats.dynamicTexel).toBe(0);
+    expect(view.stats.blobs).toBe(4);
+
+    // First person: the map reaches a set distance from the eye, and a body in
+    // its fade keeps part of its contact shadow.
+    const near = body(128 + 100),
+      fading = body(128 + 440),
+      beyond = body(128 + 700);
+    const eye = { dynamicShadows: true, drawRadius: 1600, sprites: [near, fading, beyond] };
+    settle(view, scene(false, eye), withImages);
+    view.render(scene(false, eye), withImages);
+    expect(view.stats.dynamicTexel).toBe(0.5);
+    expect(view.stats.dynamicBodies).toBe(2);
+    expect(view.stats.blobs).toBe(2);
+    const { blobs } = view as unknown as {
+      blobs: { mesh: THREE.Mesh };
+    };
+    const strengths = blobs.mesh.geometry.getAttribute("mask");
+    expect(strengths.getW(0)).toBe(1);
+    expect(strengths.getW(4)).toBeGreaterThan(0);
+    expect(strengths.getW(4)).toBeLessThan(1);
+    view.dispose();
+  });
+
   it("swaps a tree house to its inside picture top-down while the observer is in its cabin", () => {
     const loaded = new Map<string, Chunk>();
     for (let cy = -2; cy <= 1; cy++)

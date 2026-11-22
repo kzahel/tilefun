@@ -33,6 +33,8 @@ export class SkinnedWildlifeBatch {
     animations: readonly THREE.AnimationClip[],
     private readonly definition: WildlifeMeshDefinition,
     private readonly scale: number,
+    /** Marks each copy's meshes as casters of dynamic shadows (266). */
+    private readonly cast: (mesh: THREE.Object3D) => void = () => {},
   ) {
     const bank = new Map(animations.map((animation) => [animation.name, animation]));
     this.samples = (definition.animation?.clips ?? []).map(
@@ -123,6 +125,7 @@ export class SkinnedWildlifeBatch {
     this.group.add(pivot);
     const skeletons = new Set<THREE.Skeleton>();
     model.traverse((object) => {
+      if (object instanceof THREE.Mesh) this.cast(object);
       if (object instanceof THREE.SkinnedMesh) {
         object.frustumCulled = false;
         skeletons.add(object.skeleton);

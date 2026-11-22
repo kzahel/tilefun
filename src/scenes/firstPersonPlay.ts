@@ -407,6 +407,7 @@ function drawSeen(
       interior,
       shadows: control.shadows,
       sun: control.sun,
+      dynamicShadows: control.dynamicShadows,
       topDown,
       pixelBodies: control.pixelBodies,
       wildlifeModels: control.wildlifeModels,

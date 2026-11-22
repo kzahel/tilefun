@@ -25,6 +25,7 @@ export class OptionsDialog {
   private firstPersonControlsHelp = document.createElement("p");
   private distance = document.createElement("select");
   private wildlifeModels = document.createElement("button");
+  private dynamicShadows = document.createElement("button");
   private controls = document.createElement("p");
   constructor(
     private select: (mode: TouchMovementMode) => Promise<void>,
@@ -35,6 +36,7 @@ export class OptionsDialog {
     private selectDistance: (distance: FirstPersonViewDistance) => Promise<void>,
     private selectFirstPersonControls: (controls: FirstPersonControls) => Promise<void>,
     private selectWildlifeModels: (enabled: boolean) => Promise<void>,
+    private selectDynamicShadows: (enabled: boolean) => Promise<void> = async () => {},
   ) {
     const d = this.dialog;
     d.className = "options-dialog";
@@ -141,6 +143,22 @@ export class OptionsDialog {
         () => this.wildlifeModels,
       );
     };
+    this.dynamicShadows.type = "button";
+    this.dynamicShadows.setAttribute("aria-label", "Dynamic shadows");
+    this.dynamicShadows.setAttribute("aria-describedby", "options-shadows-help");
+    this.dynamicShadows.onclick = () => {
+      const enabled = this.dynamicShadows.getAttribute("aria-pressed") !== "true";
+      this.showDynamicShadows(enabled);
+      void this.save(
+        () => this.selectDynamicShadows(enabled),
+        "Dynamic shadows preference saved on this device.",
+        () => this.dynamicShadows,
+      );
+    };
+    const shadowsHelp = document.createElement("p");
+    shadowsHelp.id = "options-shadows-help";
+    shadowsHelp.textContent =
+      "Vehicles, animals and people cast real shadows onto the ground and each other. Turn off if the game feels slow.";
     const drivingHelp = document.createElement("p");
     drivingHelp.id = "options-driving-help";
     drivingHelp.textContent =
@@ -159,6 +177,8 @@ export class OptionsDialog {
       zoom,
       pinchHelp,
       this.wildlifeModels,
+      this.dynamicShadows,
+      shadowsHelp,
       view,
       this.firstPersonHelp,
       firstPersonControls,
@@ -193,6 +213,7 @@ export class OptionsDialog {
     distance: FirstPersonViewDistance = DEFAULT_VIEW_DISTANCE,
     controls: FirstPersonControls = "simple",
     wildlifeModels = true,
+    dynamicShadows = false,
   ): void {
     this.opener = opener;
     this.status.textContent = "";
@@ -203,6 +224,7 @@ export class OptionsDialog {
     this.distance.value = distance;
     this.firstPersonControls.value = controls;
     this.showWildlifeModels(wildlifeModels);
+    this.showDynamicShadows(dynamicShadows);
     this.updateFirstPersonControlsHelp();
     // Key labels follow the player's layout, which may be learned during play.
     const k = keyLabel;
@@ -235,6 +257,10 @@ export class OptionsDialog {
     this.wildlifeModels.setAttribute("aria-pressed", String(enabled));
     this.wildlifeModels.textContent = `3D animals · ${enabled ? "On" : "Off"}`;
   }
+  private showDynamicShadows(enabled: boolean): void {
+    this.dynamicShadows.setAttribute("aria-pressed", String(enabled));
+    this.dynamicShadows.textContent = `Dynamic shadows · ${enabled ? "On" : "Off"}`;
+  }
   private setMode(mode: TouchMovementMode): void {
     this.help.textContent = {
       tap: "Tap a place to walk there. Tap near your feet to stop.",
@@ -259,6 +285,7 @@ export class OptionsDialog {
       this.firstPersonControls,
       this.distance,
       this.wildlifeModels,
+      this.dynamicShadows,
     ];
     for (const c of controls) c.disabled = true;
     try {

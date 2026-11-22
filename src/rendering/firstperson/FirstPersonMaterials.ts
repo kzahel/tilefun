@@ -17,6 +17,15 @@ export interface SunUniforms {
   /** World pixels per map texel (`sunMapScale`): receivers sample this much
    * further off their surface. */
   sunTexel: { value: number };
+  /** Dynamic shadows (266): the frame's map of moving bodies. While they are off
+   * it is the sun's own map, since a sampler must have a depth texture bound. */
+  dynMap: { value: THREE.Texture | null };
+  /** `sunOrigin`-relative scene position → the dynamic map's clip coordinates. */
+  dynMatrix: { value: THREE.Matrix4 };
+  /** As `sunFade`, for the dynamic map; a fade ending at 0 turns it off. */
+  dynFade: { value: THREE.Vector4 };
+  /** World pixels per texel of the dynamic map. */
+  dynTexel: { value: number };
 }
 
 /**
@@ -24,12 +33,21 @@ export interface SunUniforms {
  * - `faces`: static world geometry, which is also drawn into the shadow map. Faces
  *   turned away from the sun keep their baked shade; lit faces sample from just
  *   off their surface.
- * - `body`: moving bodies that are not in the map (vehicles, actors): every pixel
- *   samples at its own position.
+ * - `body`: surfaces in neither map (grass): every pixel samples at its own
+ *   position.
+ * - `solid`: moving meshes (vehicles, cargo, animal models). The sun's map as
+ *   `body`. They are in the dynamic map, so there their sides turned away from
+ *   the sun are in shadow and the rest sample from just off their surface.
+ * - `actor`: moving cards. The sun's map as `body`. The dynamic map holds them
+ *   facing the sun, so there the half behind that card samples from further
+ *   along its own ray to the sun, past the card.
  * - `card`: standing cards that are in the map facing the sun. They sample from
- *   the sunny side of their own shadow card, so only neighbours darken them.
+ *   the sunny side of their own shadow card, so only neighbours darken them. The
+ *   dynamic map does not hold them: there they sample where they stand.
+ * - `image`: vehicle images, whose pixels work out their own positions. As
+ *   `solid` without a surface direction: they sample further towards the sun.
  */
-export type SunReceiver = "faces" | "body" | "card";
+export type SunReceiver = "faces" | "body" | "solid" | "actor" | "card" | "image";
 export type GroundAtlas = { value: THREE.Texture | null };
 export type GroundSurface = "top" | "cliff";
 
@@ -43,38 +61,76 @@ export interface MaterialShading {
   sun?: { uniforms: SunUniforms; receiver: SunReceiver } | undefined;
 }
 
+/** Where a receiver samples the dynamic map from, and its light there (GLSL).
+ * `p` is the surface, `n` its side facing the eye (`faces`, `solid`). */
+const DYNAMIC_LIGHT: Record<SunReceiver, string> = {
+  // Static surfaces are not in the map: nothing to keep clear of but its texels.
+  faces: "sunMapLight(dynMap, dynMatrix, p + n * dynTexel + sunDir * 0.5 * dynTexel)",
+  body: "sunMapLight(dynMap, dynMatrix, p + sunDir * 0.5 * dynTexel)",
+  // `p` was moved towards the sun for the sun's own map: back to the card.
+  card: "sunMapLight(dynMap, dynMatrix, p - vec3(normalize(sunDir.xy) * vSunLift, 0.0) + sunDir * 0.5 * dynTexel)",
+  solid: `(facing <= 0.02 ? 0.0
+      : sunMapLight(dynMap, dynMatrix, p + n * dynTexel + sunDir * 0.5 * dynTexel))`,
+  // Along the ray to the sun, so the lookup stays on the texel the point's own
+  // shadow falls on: only what is higher on that ray than its own card shades it.
+  actor:
+    "sunMapLight(dynMap, dynMatrix, p + sunDir * (vSunLift / length(sunDir.xy) + 0.5 * dynTexel))",
+  // An image's texel is a world pixel: its position is that coarse.
+  image: "sunMapLight(dynMap, dynMatrix, p + sunDir * (1.5 * dynTexel + 1.0))",
+};
+
 /** `sunLightAt(p)`: the colour multiplier at `p`, a scene position relative to
- * `sunOrigin`. */
-const SUN_LIGHT = (receiver: SunReceiver) => `
+ * `sunOrigin`: the darker of the sun's map and the dynamic map. */
+const SUN_LIGHT = (receiver: SunReceiver) => {
+  const sided = receiver === "faces" || receiver === "solid";
+  return `
 uniform highp sampler2DShadow sunMap;
+uniform highp sampler2DShadow dynMap;
 uniform mat4 sunMatrix;
+uniform mat4 dynMatrix;
 uniform vec3 sunDir;
 uniform vec4 sunFade;
+uniform vec4 dynFade;
 uniform vec3 sunShade;
 uniform float sunTexel;
+uniform float dynTexel;
+${receiver === "actor" || receiver === "card" ? "varying float vSunLift;" : ""}
+float sunMapLight(highp sampler2DShadow map, mat4 matrix, vec3 p) {
+  vec3 at = (matrix * vec4(p, 1.0)).xyz * 0.5 + 0.5;
+  // A high point near the fade's end can project past the map's edge: lit.
+  if (at.x < 0.0 || at.x > 1.0 || at.y < 0.0 || at.y > 1.0) return 1.0;
+  return texture(map, at);
+}
 vec3 sunLightAt(vec3 p) {
-  float fade = smoothstep(sunFade.z, sunFade.w, distance(p.xy, sunFade.xy));
-  if (fade >= 1.0) return vec3(1.0);
   ${
-    receiver === "faces"
-      ? `vec3 n = normalize(cross(dFdx(p), dFdy(p)));
-  if (dot(n, sunDir) <= 0.02) return vec3(1.0);
-  p += n * sunTexel;`
+    sided
+      ? `// Before any branch: derivatives are undefined after one.
+  vec3 n = normalize(cross(dFdx(p), dFdy(p)));
+  float facing = dot(n, sunDir);`
       : ""
   }
-  p += sunDir * 1.5 * sunTexel;
-  vec3 at = (sunMatrix * vec4(p, 1.0)).xyz * 0.5 + 0.5;
-  // A high point near the fade's end can project past the map's edge: lit.
-  if (at.x < 0.0 || at.x > 1.0 || at.y < 0.0 || at.y > 1.0) return vec3(1.0);
-  float lit = mix(texture(sunMap, at), 1.0, fade);
+  float fade = smoothstep(sunFade.z, sunFade.w, distance(p.xy, sunFade.xy));
+  float dynamicFade = smoothstep(dynFade.z, dynFade.w, distance(p.xy, dynFade.xy));
+  if (fade >= 1.0 && dynamicFade >= 1.0) return vec3(1.0);
+  ${receiver === "faces" ? "if (facing <= 0.02) return vec3(1.0);" : ""}
+  float lit = 1.0;
+  if (fade < 1.0) {
+    vec3 at = p + sunDir * 1.5 * sunTexel${receiver === "faces" ? " + n * sunTexel" : ""};
+    lit = mix(sunMapLight(sunMap, sunMatrix, at), 1.0, fade);
+  }
+  if (dynamicFade < 1.0) {
+    float moving = ${DYNAMIC_LIGHT[receiver]};
+    lit = min(lit, mix(moving, 1.0, dynamicFade));
+  }
   return mix(sunShade, vec3(1.0), lit);
 }
 `;
+};
 
-/** The `body` receiver's `sunLightAt`, for shaders that work out their own
+/** The `image` receiver's `sunLightAt`, for shaders that work out their own
  * positions (vehicle images, whose pixels carry a depth). They declare
  * `sunOrigin` and take the rest of `SunUniforms` as they are. */
-export const SUN_BODY_LIGHT = SUN_LIGHT("body");
+export const SUN_IMAGE_LIGHT = SUN_LIGHT("image");
 
 const SUN_FRAGMENT = (receiver: SunReceiver) => `${SUN_LIGHT(receiver)}
 varying vec3 vSunLocal;
@@ -248,7 +304,8 @@ export function shadeMaterial<T extends THREE.Material>(material: T, shading: Ma
     if (sun) {
       Object.assign(shader.uniforms, sun.uniforms);
       declare.push("uniform vec3 sunOrigin;", "varying vec3 vSunLocal;");
-      if (sun.receiver === "card") declare.push("uniform vec3 sunDir;");
+      if (sun.receiver === "card" || sun.receiver === "actor")
+        declare.push("uniform vec3 sunDir;", "varying float vSunLift;");
       vertex = vertex.replace(
         "#include <project_vertex>",
         `#include <project_vertex>
@@ -261,7 +318,14 @@ export function shadeMaterial<T extends THREE.Material>(material: T, shading: Ma
   #endif
   vSunLocal = (modelMatrix * sunPosition).xyz - sunOrigin;
   ${
-    sun.receiver === "card" ? "vSunLocal.xy += normalize(sunDir.xy) * (abs(corner.x) + 2.0);" : ""
+    sun.receiver === "card"
+      ? `vSunLift = abs(corner.x) + 2.0;
+  vSunLocal.xy += normalize(sunDir.xy) * vSunLift;`
+      : sun.receiver === "actor"
+        ? // How far behind its sun-facing card the vertex stands (`cardRight` is in
+          // game axes, `sunDir` in the scene's), and a pixel to clear the card.
+          "vSunLift = max(0.0, -corner.x * dot(vec2(cardRight.x, -cardRight.y), normalize(sunDir.xy))) + 1.0;"
+        : ""
   }`,
       );
       fragment = fragment

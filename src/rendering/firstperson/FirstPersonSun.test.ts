@@ -1,8 +1,19 @@
 import { describe, expect, it } from "vitest";
 import { CHUNK_SIZE, TILE_SIZE } from "../../config/constants.js";
 import type { GpuShadow } from "../GpuShadowShape.js";
+import { DynamicShadows, SunShadows } from "./FirstPersonShadows.js";
 import {
   chunkNearSun,
+  DYNAMIC_EYE_RANGE,
+  DYNAMIC_FADE_END,
+  DYNAMIC_FADE_START,
+  DYNAMIC_MAX_TEXEL,
+  DYNAMIC_MIN_TEXEL,
+  DYNAMIC_SNAP,
+  DYNAMIC_VIEW_MARGIN,
+  dynamicOrigin,
+  dynamicStrength,
+  dynamicTexel,
   SUN,
   SUN_FADE_END,
   SUN_FADE_START,
@@ -91,6 +102,66 @@ describe("first-person sun projection", () => {
     expect(chunkNearSun(2, 0, eye, range)).toBe(true); // nearest edge 1.5 chunks away
     expect(chunkNearSun(3, 0, eye, range)).toBe(false); // 2.5 chunks: beyond the fog
     expect(chunkNearSun(-3, -3, eye, range)).toBe(false);
+  });
+});
+
+describe("the dynamic shadow map (266)", () => {
+  it("is as fine as the view it must cover allows", () => {
+    // Play at 3× on a 1,280 × 800 view: about 250 px from centre to corner.
+    expect(dynamicTexel(Math.hypot(1280, 800) / 6 + DYNAMIC_VIEW_MARGIN)).toBe(0.5);
+    // Close up, a marble's shadow gets four texels per world pixel.
+    expect(dynamicTexel(150)).toBe(DYNAMIC_MIN_TEXEL);
+    expect(dynamicTexel(DYNAMIC_EYE_RANGE)).toBe(0.5);
+    // 0.25×: about 1,000 px. The map never gets coarser than the sun's coarsest.
+    expect(dynamicTexel(1006 + DYNAMIC_VIEW_MARGIN)).toBe(2);
+    expect(dynamicTexel(1e6)).toBe(DYNAMIC_MAX_TEXEL);
+  });
+
+  it("shares the sun's projection, so both maps agree where a shadow falls", () => {
+    const texel = 0.5,
+      height = 40;
+    const top = sunClip(10, -20, height, texel);
+    const shadow = sunClip(10 + SUN_SLOPE.x * height, -20 + SUN_SLOPE.y * height, 0, texel);
+    expect(top.x).toBeCloseTo(shadow.x, 9);
+    expect(top.y).toBeCloseTo(shadow.y, 9);
+    expect(sunClip(SUN_RADIUS * texel, 0, 0, texel).x).toBeCloseTo(1);
+  });
+
+  it("moves in whole texels and keeps its fade inside the map", () => {
+    for (const texel of [0.25, 0.5, 4]) {
+      const origin = dynamicOrigin(1234.56, -789.01, texel);
+      expect((origin.x / texel) % DYNAMIC_SNAP).toBeCloseTo(0);
+      expect((origin.y / texel) % DYNAMIC_SNAP).toBeCloseTo(0);
+      expect(Math.abs(origin.x - 1234.56)).toBeLessThanOrEqual((DYNAMIC_SNAP * texel) / 2);
+    }
+    // In texels, as the sun's map: the eye strays at most half a step.
+    expect(DYNAMIC_FADE_END + DYNAMIC_SNAP / 2).toBeLessThan(SUN_RADIUS);
+  });
+
+  it("hands a caster's shadow over to its contact shadow across the fade", () => {
+    const texel = 0.5;
+    expect(dynamicStrength(0, texel)).toBe(1);
+    expect(dynamicStrength(DYNAMIC_FADE_START * texel, texel)).toBe(1);
+    expect(dynamicStrength(DYNAMIC_FADE_END * texel, texel)).toBe(0);
+    expect(dynamicStrength(1e6, texel)).toBe(0);
+    const middle = dynamicStrength(((DYNAMIC_FADE_START + DYNAMIC_FADE_END) / 2) * texel, texel);
+    expect(middle).toBeCloseTo(0.5);
+  });
+
+  it("admits a raised caster by where its shadow falls, not where it stands", () => {
+    const map = new DynamicShadows(new SunShadows().uniforms);
+    // Off: nothing reaches.
+    expect(map.reaches(0, 0, 0, 8)).toBe(false);
+    map.place({ x: 0, y: 0 }, DYNAMIC_EYE_RANGE, true);
+    const edge = SUN_RADIUS * map.texel;
+    expect(map.reaches(0, 0, 0, 8)).toBe(true);
+    expect(map.reaches(0, edge + 40, 0, 8)).toBe(false);
+    // 160 px up, the same body's shadow lands about 108 px further north: inside.
+    expect(map.reaches(0, edge + 40, 160, 8)).toBe(true);
+    // North of the map its shadow only moves further away.
+    expect(map.reaches(0, -edge + 40, 0, 8)).toBe(true);
+    expect(map.reaches(0, -edge + 40, 160, 8)).toBe(false);
+    map.dispose();
   });
 });
 
