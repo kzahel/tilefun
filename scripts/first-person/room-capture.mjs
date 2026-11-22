@@ -89,9 +89,9 @@ try {
     );
     console.log(file, `3D drawing: ${drawn}`);
     if (process.argv.includes("--sequence")) {
-      await page.keyboard.down("ArrowUp");
+      await page.keyboard.down("KeyW");
       await page.waitForTimeout(1600);
-      await page.keyboard.up("ArrowUp");
+      await page.keyboard.up("KeyW");
       await page.waitForTimeout(500);
       await shot("north");
     }

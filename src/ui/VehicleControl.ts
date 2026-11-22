@@ -1,4 +1,10 @@
-import { actionHint, inputHint, movementKeysHint } from "../input/InputHints.js";
+import {
+  actionHint,
+  inputHint,
+  type KeyHint,
+  keyboardHint,
+  movementKeysHint,
+} from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { type PageInset, shift } from "../input/ViewRect.js";
 import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
@@ -26,7 +32,10 @@ export class VehicleControl {
   private busy = false;
   private error = false;
   private targetKey = "";
-  constructor(private send: (request: VehicleRequest) => Promise<unknown>) {
+  constructor(
+    private send: (request: VehicleRequest) => Promise<unknown>,
+    private readonly keyHint?: KeyHint,
+  ) {
     this.root.style.cssText =
       "position:fixed;bottom:calc(196px + env(safe-area-inset-bottom));left:16px;z-index:80;max-width:min(360px,calc(100vw - 212px));text-align:left;color:white;font:15px sans-serif";
     this.button.style.cssText =
@@ -66,9 +75,9 @@ export class VehicleControl {
     this.equipmentButton.style.display = showEquipment ? "" : "none";
     this.equipmentButton.disabled = this.busy || locked;
     if (equipment)
-      this.equipmentButton.textContent = `${equipment.label} · ${actionHint("vehicle_recover") || "F"}`;
+      this.equipmentButton.textContent = `${equipment.label} · ${actionHint("vehicle_recover", this.keyHint) || "Tap"}`;
     if (workAvailable)
-      this.equipmentButton.textContent = `${this.arm ? armLabels[this.arm.kind] : "Work arm"} · ${actionHint("vehicle_recover") || "F"}`;
+      this.equipmentButton.textContent = `${this.arm ? armLabels[this.arm.kind] : "Work arm"} · ${actionHint("vehicle_recover", this.keyHint) || "Tap"}`;
     if (choice.key !== this.targetKey) {
       this.status.textContent = "";
       this.error = false;
@@ -79,10 +88,10 @@ export class VehicleControl {
     this.button.hidden = !this.request;
     this.button.style.display = this.request ? "" : "none";
     this.button.disabled = this.busy || locked;
-    const hint = actionHint("enter_place");
+    const hint = actionHint("enter_place", this.keyHint);
     this.button.textContent = `${choice.label}${hint ? ` · ${hint}` : ""}`;
     if (choice.inside && !this.busy && !this.error)
-      this.status.textContent = drivingHint(movementMode, carDriving);
+      this.status.textContent = drivingHint(movementMode, carDriving, this.keyHint);
     return !!this.request || !!equipment;
   }
   /** Seat 0's page controls sit inside its view in split screen. */
@@ -147,14 +156,20 @@ export class VehicleControl {
 }
 
 /** How to drive, for the device in use (touch: the chosen movement mode). */
-function drivingHint(movementMode: TouchMovementMode, carDriving: CarDrivingStyle): string {
+function drivingHint(
+  movementMode: TouchMovementMode,
+  carDriving: CarDrivingStyle,
+  hint?: KeyHint,
+): string {
+  const keys = hint ?? keyboardHint;
+  const steering = hint
+    ? `${keys("move_up")}/${keys("move_down")} Forward/Reverse · ${keys("move_left")}/${keys("move_right")} Steer`
+    : "↑/↓ Forward/Reverse · ←/→ Steer";
+  const direction = hint ? movementKeysHint(hint) : `${movementKeysHint(keys)} / arrows`;
   return (
     (carDriving === "steering"
-      ? inputHint("↑/↓ Forward/Reverse · ←/→ Steer", "Stick ↑/↓ Forward/Reverse · ←/→ Steer")
-      : inputHint(
-          `${movementKeysHint()} / arrows · aim behind to reverse`,
-          "Left stick · aim behind to reverse",
-        )) ||
+      ? inputHint(steering, "Stick ↑/↓ Forward/Reverse · ←/→ Steer")
+      : inputHint(`${direction} · aim behind to reverse`, "Left stick · aim behind to reverse")) ||
     (movementMode === "hold"
       ? "Hold a direction · aim behind to reverse"
       : movementMode === "tap"

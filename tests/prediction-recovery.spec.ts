@@ -67,9 +67,9 @@ test(`input sequence and authority recovery survive repeated edit/play replaceme
         (document.querySelector("#game") as unknown as { __game: GameTestHooks }).__game.stateView
           .playerEntity.position.wx,
     );
-    await page.keyboard.down("ArrowRight");
+    await page.keyboard.down("KeyD");
     await page.waitForTimeout(250);
-    await page.keyboard.up("ArrowRight");
+    await page.keyboard.up("KeyD");
     await expect
       .poll(() =>
         page.evaluate(() => {

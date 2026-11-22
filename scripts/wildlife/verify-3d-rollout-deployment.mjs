@@ -599,7 +599,7 @@ async function verifyPackMountInGame(page, expected, clips) {
     game.transport.send({ type: "set-debug", paused: false });
     for (const [key, code] of [
       [" ", "Space"],
-      ["ArrowRight", "ArrowRight"],
+      ["d", "KeyD"],
     ])
       window.dispatchEvent(new KeyboardEvent("keydown", { key, code, bubbles: true }));
   });
@@ -634,7 +634,7 @@ async function verifyPackMountInGame(page, expected, clips) {
   } finally {
     await page.keyboard.up("ShiftLeft");
     await page.keyboard.up("Space");
-    await page.keyboard.up("ArrowRight");
+    await page.keyboard.up("KeyD");
   }
   return ["ride", "ride-sprint"];
 }

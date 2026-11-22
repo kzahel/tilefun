@@ -68,9 +68,9 @@ test("dev full reload restores the indoor player and scopes the editor camera to
     if (!street) throw new Error("Missing street entrance");
     await expect.poll(async () => (await state()).player.wy).toBeCloseTo(street.arrival.wy, 0);
     const entryY = street.arrival.wy;
-    await page.keyboard.down("ArrowUp");
+    await page.keyboard.down("KeyW");
     await expect.poll(async () => (await state()).player.wy).toBeLessThan(entryY - 40);
-    await page.keyboard.up("ArrowUp");
+    await page.keyboard.up("KeyW");
     await page.keyboard.press("Tab");
     await page.evaluate(() => {
       history.replaceState(null, "", "/tilefun/");
@@ -177,7 +177,7 @@ test("dev reload during the guided doorway walk settles into the saved destinati
           requestAnimationFrame(() => requestAnimationFrame(() => resolve())),
         ),
     );
-    await page.keyboard.down("ArrowDown");
+    await page.keyboard.down("KeyS");
     await page.waitForFunction(
       (y) =>
         (
@@ -187,10 +187,10 @@ test("dev reload during the guided doorway walk settles into the saved destinati
         ).__game.stateView.playerEntity.position.wy > y,
       lot.entrance.y * 16 + 96,
     );
-    await page.keyboard.up("ArrowDown");
-    await page.keyboard.down("ArrowUp");
+    await page.keyboard.up("KeyS");
+    await page.keyboard.down("KeyW");
     await expect(page.locator('[data-door-fade="true"]')).toHaveAttribute("data-stage", "depart");
-    await page.keyboard.up("ArrowUp");
+    await page.keyboard.up("KeyW");
     await page.evaluate(() => history.replaceState(null, "", "/tilefun/"));
     const navigation = page.waitForEvent("framenavigated", {
       predicate: (frame) => frame === page.mainFrame(),

@@ -1,5 +1,6 @@
 import { type FarmRequest, farmChoice, farmGateChoice } from "../farming/FarmInteraction.js";
 import type { ActionManager } from "../input/ActionManager.js";
+import { actionHint, type KeyHint } from "../input/InputHints.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { NO_INSET, pageInset } from "../input/ViewRect.js";
 import type { InventoryRequest } from "../inventory/Inventory.js";
@@ -57,6 +58,7 @@ export class PlaceControls {
     private readonly host: PlaceControlsHost,
     actions: ActionManager,
   ) {
+    const keyHint: KeyHint = (action) => actions.hint(action);
     this.door = new DoorControl(async (request) => {
       if (host.doorPresentation.busy) return;
       // Authority validates a walking approach against the last directional input.
@@ -69,16 +71,19 @@ export class PlaceControls {
         host.doorPresentation.cancel();
         throw error;
       }
-    });
+    }, keyHint);
     this.vehicle = new VehicleControl(async (request) => {
       host.clearPlayInput();
       return host.request(request);
-    });
-    this.farm = new FarmControl((request) => host.request(request));
-    this.hotbar = new HotbarControl((selection) => {
-      if (this.hotbarAllowed)
-        void host.request({ type: "inventory-select", selection }).catch(() => {});
-    });
+    }, keyHint);
+    this.farm = new FarmControl((request) => host.request(request), keyHint);
+    this.hotbar = new HotbarControl(
+      (selection) => {
+        if (this.hotbarAllowed)
+          void host.request({ type: "inventory-select", selection }).catch(() => {});
+      },
+      { hint: (action) => actionHint(action, keyHint) },
+    );
     this.guests = new GuestPlaces(host);
     this.unsubscribe = [
       actions.on("hotbar_previous", () => this.hotbar.choose({ step: -1 })),

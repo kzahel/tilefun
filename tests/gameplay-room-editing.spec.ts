@@ -147,9 +147,9 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   });
   await page.keyboard.press("Tab");
   // Walk through the actual new vertical doorway, then into the extension.
-  await page.keyboard.down("ArrowRight");
+  await page.keyboard.down("KeyD");
   await expect.poll(async () => (await state(page)).player.wx).toBeGreaterThan(360);
-  await page.keyboard.up("ArrowRight");
+  await page.keyboard.up("KeyD");
   await page.screenshot({ path: "/tmp/tilefun-edited-room-walking.png" });
   await page.evaluate(() => {
     const game = (
@@ -194,13 +194,13 @@ test("draws a connected gameplay room with real walls, validates, undoes, walks 
   await expect.poll(async () => (await state(page)).player.wx).toBeGreaterThan(360);
   const returnToStreet = page.getByRole("button", { name: "Return to street" });
   if (!(await returnToStreet.isVisible())) {
-    await page.keyboard.down("ArrowLeft");
+    await page.keyboard.down("KeyA");
     try {
       // The default expanding poll intervals can hold Left past the whole door
       // activation range. Stop on the real control, sampling each frame.
       await expect.poll(() => returnToStreet.isVisible(), { intervals: [16] }).toBe(true);
     } finally {
-      await page.keyboard.up("ArrowLeft");
+      await page.keyboard.up("KeyA");
     }
   }
   await returnToStreet.click();

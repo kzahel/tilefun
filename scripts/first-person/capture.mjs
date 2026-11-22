@@ -255,7 +255,10 @@ try {
   // The Options button still has focus from turning first person on; a focused
   // control keeps its keys.
   await game(() => document.activeElement?.blur());
-  await page.keyboard.press("Slash");
+  await page.keyboard.press("Escape");
+  const menu = page.getByTestId("world-menu");
+  await menu.getByRole("button", { name: "Multiplayer", exact: true }).click();
+  await menu.getByRole("button", { name: "Add Player 2 (keyboard)", exact: true }).click();
   await page.waitForFunction(
     () => document.querySelector("#game").__game.device.views.length === 2,
   );

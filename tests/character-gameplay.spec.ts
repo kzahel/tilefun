@@ -84,7 +84,7 @@ test("approved NPCs place, save and reload in the Worker; player choice persists
       (document.querySelector("#game") as unknown as { __game: GameHarness }).__game.stateView
         .playerEntity.position.wx,
   );
-  await page.keyboard.down("ArrowRight");
+  await page.keyboard.down("KeyD");
   await expect
     .poll(() =>
       page.evaluate(
@@ -94,7 +94,7 @@ test("approved NPCs place, save and reload in the Worker; player choice persists
       ),
     )
     .toBeGreaterThan(before + 10);
-  await page.keyboard.up("ArrowRight");
+  await page.keyboard.up("KeyD");
   await page.evaluate(async () => {
     const g = (document.querySelector("#game") as unknown as { __game: GameHarness }).__game;
     g.loop.stop();

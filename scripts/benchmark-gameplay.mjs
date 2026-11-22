@@ -103,9 +103,9 @@ try {
   const before = await page.evaluate(() => ({
     ...document.querySelector("#game").__game.stateView.playerEntity.position,
   }));
-  await page.keyboard.down("ArrowRight");
+  await page.keyboard.down("KeyD");
   await page.waitForTimeout(150);
-  await page.keyboard.up("ArrowRight");
+  await page.keyboard.up("KeyD");
   const after = await page.evaluate(() => ({
     ...document.querySelector("#game").__game.stateView.playerEntity.position,
   }));

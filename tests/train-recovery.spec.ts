@@ -93,12 +93,12 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
     }
   };
   // The car's north face is at carY - 12; jump assist needs a gap of at most 24px.
-  await hold(["ArrowDown"], () => until("y", start.carY - 34));
-  await hold(["ArrowRight"], () => until("x", start.carX - 193));
+  await hold(["KeyS"], () => until("y", start.carY - 34));
+  await hold(["KeyD"], () => until("x", start.carX - 193));
   // The first recall provides eight seconds to board. Approach leaves bench
   // range, so do not request a redundant recall from beside the carriage.
   // Land near the middle of the roof ([carY - 12, carY + 12]).
-  await hold(["ArrowDown", "Space"], async () => {
+  await hold(["KeyS", "Space"], async () => {
     await until("z", 44);
     await until("y", start.carY - 2);
   });
@@ -198,10 +198,10 @@ test("station recall and assisted train roof riding use ordinary game Worker aut
   // Jump off the side, then remain on the ground long enough to hand the train
   // back to ordinary buffered presentation while it remains visible.
   await page.keyboard.down("Space");
-  await page.keyboard.down("ArrowDown");
+  await page.keyboard.down("KeyS");
   await page.waitForTimeout(550);
   await page.keyboard.up("Space");
-  await page.keyboard.up("ArrowDown");
+  await page.keyboard.up("KeyS");
   await expect
     .poll(async () => {
       const p = await state();

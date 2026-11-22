@@ -59,7 +59,7 @@ saves first. Online play requires signaling and a working peer connection.
 | RT | Sprint; paint/place while building |
 | Right stick / LT | Building cursor / erase |
 | Driving | Aim behind to reverse; optional Up/Down forward/reverse and Left/Right steering in Options |
-| D-pad ↑ / → | Vehicle lights / siren style (L / K on keyboard) |
+| D-pad ↑ / → | Vehicle lights / siren style |
 
 D-pad/stick focus, A select, B back and an on-screen text keyboard cover game
 menus and editor tools. **Save and quit** flushes the authority before closing.
@@ -73,6 +73,12 @@ Browser saves and packaged saves are separate. See
 [Steam Deck and menus](docs/topics/steam-deck-and-menus.md) for runtime, installation
 and acceptance details.
 
+In **Options → Keyboard side**, choose **Left** (WASD, Space to jump, E to
+interact) or **Right** (arrow keys, `/` to jump, `'` to interact). Tilefun
+remembers the choice for your profile in solo and co-op. Use **Multiplayer →
+Local multiplayer → Add Player 2 (keyboard)** to give the other player the
+remaining side.
+
 ## Features
 
 City speedways now have a **Vehicle depot** in the infield: a transporter, tow
@@ -82,8 +88,8 @@ supports ordinary walking and driving; vehicle equipment controls remain deferre
 [Depot controls and generation](docs/vehicle-depot.md).
 
 Regional worlds now include large wildlife lakes with an explorer motorboat
-beside the northern shore. Press **E / Drive boat** to board, steer with ordinary
-vehicle controls, and return beside a clear shore to get out. Boats are also in
+beside the northern shore. Use **Drive boat** or your Interact key to board.
+Steer with ordinary vehicle controls and return beside a clear shore to get out. Boats are also in
 **Edit → Vehicles**. [Boat controls and lake generation](docs/topics/boats.md).
 
 The game uses one WebGL2 scene for its pixel top-down view, first person,
@@ -139,10 +145,10 @@ ground to place it parked, including in existing worlds without roads. **Vehicle
 → Delete** removes one by tapping its body. Placed vehicles stay parked after you
 get out and save their position, lights and occupied driver seat.
 
-In Play mode, stand beside a stopped vehicle and tap **Drive car / Drive train · E**
-(or press E). Your character disappears inside; other players can ride visibly on
-its roof. Cars use ordinary directional movement controls, including diagonals, or a
-Tap-to-move destination. The nose turns along a curved rolling path: it cannot
+In Play mode, stand beside a stopped vehicle and tap **Drive car / Drive train**
+or press your Interact key. Your character disappears inside. Other players can
+ride visibly on its roof. Cars use directional movement controls, including
+diagonals, or a Tap-to-move destination. The nose turns along a curved rolling path: it cannot
 pivot at rest or slide sideways. Aim substantially behind the car to reverse at
 half speed; guide the direction around its side to turn forward. **Options → Car
 controls** also offers Up/Down forward/reverse with Left/Right steering for keys,
@@ -150,12 +156,12 @@ controller and joystick. Tap and hold destinations still aim where to drive with
 either choice. Longer vehicles need wider turns. Trains stay on their track: up/right moves one way,
 down/left the other. In tap mode, tap the right/left half of the screen to start;
 tap the same side again to stop. In Hold to move, hold the right/left half
-to travel and lift to stop; cars steer toward the held finger. **Get out · E**
+to travel and lift to stop; cars steer toward the held finger. **Get out**
 stops and finds clear ground.
 Off-road cars stay parked and saved; cars on suitable roads resume traffic.
 See [vehicle driving](docs/tactical/087-player-driven-cars-and-trains.md). Driving keeps on-screen action buttons visible even on desktop:
-hold **Fast / Shift** to go faster and hold **Horn / H** to honk for as long as you
-hold it (**Whistle / H** in trains). Release to stop.
+hold **Fast** or your side's Shift to go faster. Hold **Horn** (**Whistle** in
+trains) or your Jump key to sound it until you release.
 Honking makes nearby people, cats, dogs and other animals briefly scatter away
 from the vehicle, then settle back to their usual behavior.
 Sportier cars drive faster; buses and heavy trucks accelerate more slowly. Driven
@@ -164,9 +170,10 @@ pushing from heavier vehicles. A blocked push stops the vehicle. Driven cars and
 trains run over small wildlife such as frogs, rabbits and grounded birds, leaving
 still, flattened remains that disappear after 30 seconds. Pets and following/ridden
 animals stay protected; other bodies retain gentle pushing. Automatic road traffic
-keeps yielding. In an ambulance, police car or firetruck, **Siren / L / D-pad Up** toggles flashing
-lights and sound; **Style / K / D-pad Right** cycles EU-style two-tone, US-style wail and
-lights-only. Garbage trucks use **Beacon / L / D-pad Up** for silent amber lights.
+keeps yielding. In an ambulance, police car or firetruck, **Siren** (Z on the left,
+L on the right, D-pad Up) toggles flashing lights and sound. **Style** (X on the
+left, K on the right, D-pad Right) cycles EU-style two-tone, US-style wail and
+lights-only. Garbage trucks use **Beacon** for silent amber lights.
 Try any of the 45 vehicle choices in the Traffic playground.
 
 
@@ -174,7 +181,7 @@ Moving trains chug and clatter faster as they speed up, with a two-part whistle
 on departure and during the journey. Nearby trains sound louder; stopped trains are quiet.
 
 Waiting for a train? Go beside or onto a station bench in Play mode and tap
-**Call train · E** (or press E). The same train appears immediately at that station
+**Call train** or press your Interact key. The same train appears at that station
 and waits eight seconds to let you board. If someone is driving or riding it,
 call again after they get off. The station track must be clear and intact.
 

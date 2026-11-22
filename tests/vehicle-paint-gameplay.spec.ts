@@ -121,7 +121,7 @@ test(`mobile editor places and reloads ${model}/${paint} on GPU`, async ({ page 
     .toEqual({ id: car.id, paint, sheet: `vehicle-v1:${model}:paint:${paint}` });
   await page.locator("#game").focus();
   // Cars default to relative steering (f1cd9d28): Up drives forward, Right steers.
-  await page.keyboard.down("ArrowUp");
+  await page.keyboard.down("KeyW");
   await expect
     .poll(() =>
       page.evaluate((id) => {
@@ -130,7 +130,7 @@ test(`mobile editor places and reloads ${model}/${paint} on GPU`, async ({ page 
       }, car.id),
     )
     .toBeGreaterThan(car.wx + 30);
-  await page.keyboard.up("ArrowUp");
+  await page.keyboard.up("KeyW");
   await flushLocalWorld(page);
   await stopLocalWorld(page);
   await page.goto("/tilefun/?nogamepad");

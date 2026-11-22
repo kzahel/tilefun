@@ -2,20 +2,15 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { ActionManager } from "./ActionManager.js";
 import { DEFAULT_ACTION_MAP } from "./ActionMap.js";
 import { controllerInput } from "./ControllerInput.js";
-import {
-  hostKeyMap,
-  KEYBOARD_JOIN_KEY,
-  SEAT_ACTIONS,
-  SHARED_PAGE_ACTIONS,
-  seatKeyMap,
-  seatOnly,
-} from "./KeyboardSchemes.js";
+import { hostKeyMap, keyboardSide, SEAT_ACTIONS, seatKeyMap, seatOnly } from "./KeyboardSchemes.js";
 import { acceptsGameKey, ownsKeys } from "./KeyFocus.js";
 
 const keysOf = (map: { keys: string[] }[]) => new Set(map.flatMap((b) => b.keys));
 
 describe("keyboard schemes", () => {
-  it("one player keeps today's full map", () => {
+  it("older profiles default to the left side and labs keep the full map", () => {
+    expect(keyboardSide(undefined)).toBe("left");
+    expect(keyboardSide("right")).toBe("right");
     expect(seatKeyMap("solo")).toBe(DEFAULT_ACTION_MAP);
   });
 
@@ -39,25 +34,17 @@ describe("keyboard schemes", () => {
       expect(lab.has(key), key).toBe(false);
   });
 
-  it("seat 0 beside a keyboard guest keeps page and editor keys but none of the right hand's", () => {
-    const host = hostKeyMap();
-    const right = keysOf(seatKeyMap("right"));
-    const hostKeys = keysOf(host);
-    for (const key of hostKeys) expect(right.has(key), key).toBe(false);
-    expect(right.has(KEYBOARD_JOIN_KEY)).toBe(true);
-    expect(seatKeyMap("right").find((b) => b.action === "jump")?.keys).toEqual([KEYBOARD_JOIN_KEY]);
-    // Every page action keeps its keys (none of them is on the right hand).
-    const solo = new Map(DEFAULT_ACTION_MAP.map((b) => [b.action, b.keys]));
-    for (const action of SHARED_PAGE_ACTIONS)
-      expect(host.find((b) => b.action === action)?.keys, action).toEqual(solo.get(action));
-    // Editor keys stay; the left scheme's seat keys are added.
-    for (const key of ["KeyM", "KeyB", "KeyT", "KeyC", "KeyQ", "KeyZ", "KeyX", "ShiftLeft"])
-      expect(hostKeys.has(key), key).toBe(true);
-    for (const binding of seatKeyMap("left"))
-      for (const key of binding.keys)
-        expect(host.find((b) => b.action === binding.action)?.keys, binding.action).toContain(key);
-    expect(host.find((b) => b.action === "move_up")?.keys).toEqual(["KeyW"]);
-    expect(host.find((b) => b.action === "pan_left")?.keys).toEqual(["KeyA"]);
+  it.each(["left", "right"] as const)("the %s host gets the same play keys as a guest", (side) => {
+    const host = hostKeyMap(side);
+    expect(seatOnly(host)).toEqual(seatKeyMap(side));
+    for (const binding of DEFAULT_ACTION_MAP) {
+      if (
+        binding.action === "toggle_base_mode" ||
+        SEAT_ACTIONS.some((action) => action === binding.action)
+      )
+        continue;
+      expect(host).toContainEqual(binding);
+    }
   });
 
   it("two managers on one keyboard each move only their own seat", () => {

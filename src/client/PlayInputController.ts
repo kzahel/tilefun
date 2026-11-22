@@ -72,7 +72,7 @@ export class PlayInputController {
     this.touchJoystick.onLook = (dx, dy) => {
       if (this.playActive()) this.host.firstPerson?.touchLook(dx, dy);
     };
-    this.touchButtons = new TouchButtons(canvas);
+    this.touchButtons = new TouchButtons(canvas, (action) => actions.hint(action));
     this.touchTap = new TouchTap(
       canvas,
       this.touchButtons.claimedTouches,

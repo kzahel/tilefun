@@ -93,12 +93,12 @@ test(`${version} prepares terrain before sprinting and revisiting it`, async ({ 
       };
     }, direction);
   await page.keyboard.down("Shift");
-  await page.keyboard.down("ArrowLeft");
+  await page.keyboard.down("KeyA");
   const outward = await sample(-1);
-  await page.keyboard.up("ArrowLeft");
-  await page.keyboard.down("ArrowRight");
+  await page.keyboard.up("KeyA");
+  await page.keyboard.down("KeyD");
   const back = await sample(1);
-  await page.keyboard.up("ArrowRight");
+  await page.keyboard.up("KeyD");
   await page.keyboard.up("Shift");
   expect(outward.dx).toBeLessThan(-400);
   expect(back.dx).toBeGreaterThan(400);

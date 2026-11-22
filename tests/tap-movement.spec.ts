@@ -257,9 +257,9 @@ test("walks, redirects, arrives and cancels with manual input", async ({ page })
     16,
   );
   await tapOffset(page, 40);
-  await page.keyboard.down("ArrowLeft");
+  await page.keyboard.down("KeyA");
   await expect.poll(async () => (await state(page)).target).toBeNull();
-  await page.keyboard.up("ArrowLeft");
+  await page.keyboard.up("KeyA");
   await tapOffset(page, 40);
   await tapOffset(page, 0);
   await expect.poll(async () => (await state(page)).target).toBeNull();

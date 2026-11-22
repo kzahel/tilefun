@@ -148,7 +148,7 @@ export function drawViewOverlays(gc: GameContext, alpha: number): void {
   }
 }
 
-export const JOIN_HINT = "Press / or a controller button to join";
+export const JOIN_HINT = "Press a controller button to join";
 
 function drawJoinHint(gc: GameContext): void {
   const empty = layoutViews("4", gc.canvas.width, gc.canvas.height)[3]?.region;

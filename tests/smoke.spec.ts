@@ -50,9 +50,7 @@ test("ready game fills a nonzero viewport with rendered pixels", async ({ page }
   expect(allHaveContent).toBe(true);
 });
 
-test("arrow and WASD input keep the game rendering without console or page errors", async ({
-  page,
-}) => {
+test("WASD input keeps the game rendering without console or page errors", async ({ page }) => {
   const errors: string[] = [];
   page.on("console", (msg) => {
     if (msg.type() === "error") errors.push(msg.text());
@@ -63,18 +61,18 @@ test("arrow and WASD input keep the game rendering without console or page error
   await page.locator('#game[data-ready="true"]').waitFor({ timeout: 10_000 });
 
   // Rapidly scroll in all directions to trigger chunk generation/autotile/caching
-  for (const key of ["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp", "w", "a", "s", "d"]) {
+  for (const key of ["KeyW", "KeyA", "KeyS", "KeyD"]) {
     await page.keyboard.down(key);
     await page.waitForTimeout(500);
     await page.keyboard.up(key);
   }
 
   // Diagonal movement
-  await page.keyboard.down("ArrowRight");
-  await page.keyboard.down("ArrowDown");
+  await page.keyboard.down("KeyD");
+  await page.keyboard.down("KeyS");
   await page.waitForTimeout(500);
-  await page.keyboard.up("ArrowRight");
-  await page.keyboard.up("ArrowDown");
+  await page.keyboard.up("KeyD");
+  await page.keyboard.up("KeyS");
 
   await page.waitForTimeout(200);
 

@@ -132,13 +132,13 @@ try {
       const spawnX = await host.evaluate(
         () => document.querySelector("#game").__game.stateView.playerEntity.position.wx,
       );
-      await host.keyboard.down("ArrowRight");
+      await host.keyboard.down("KeyD");
       await host.waitForFunction(
         (x) => document.querySelector("#game").__game.stateView.playerEntity.position.wx > x + 48,
         spawnX,
         { timeout: 5000 },
       );
-      await host.keyboard.up("ArrowRight");
+      await host.keyboard.up("KeyD");
       if (mode === "one-guest") {
         const guest = await guestContext.newPage();
         guest.on("pageerror", (error) => errors.push(error.message));
@@ -159,7 +159,7 @@ try {
         () => !document.querySelector("#game").__game.stateView.editorEnabled,
       );
       await host.evaluate(() => new Promise((resolve) => setTimeout(resolve, 2000)));
-      await host.keyboard.down("ArrowRight");
+      await host.keyboard.down("KeyD");
       const sample = await host.evaluate(async () => {
         const g = document.querySelector("#game").__game;
         const { performanceMetrics } = await import(
@@ -215,7 +215,7 @@ try {
           authority: await g.transport.getDiagnostics?.(),
         };
       });
-      await host.keyboard.up("ArrowRight");
+      await host.keyboard.up("KeyD");
       if (
         sample.inputAckAdvance < 30 ||
         Math.hypot(

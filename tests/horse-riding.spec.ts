@@ -84,7 +84,7 @@ test(`default keyboard jump mounts a horse and Jump gets off`, async ({ page }) 
     // Gameplay binds physical keys (KeyboardEvent.code).
     for (const [key, code] of [
       [" ", "Space"],
-      ["ArrowRight", "ArrowRight"],
+      ["d", "KeyD"],
     ] as const)
       window.dispatchEvent(new KeyboardEvent("keydown", { key, code, bubbles: true }));
   });
@@ -98,11 +98,11 @@ test(`default keyboard jump mounts a horse and Jump gets off`, async ({ page }) 
   expect(mounted.parent).toBe(mounted.horse);
   await expect.poll(async () => (await read()).x).toBeGreaterThan(mounted.x + 30);
   await page.screenshot({ path: `/tmp/tilefun-horse-riding-game.png` });
-  await page.keyboard.up("ArrowRight");
+  await page.keyboard.up("KeyD");
   await expect.poll(async () => (await read()).speed).toBe(0);
-  await page.keyboard.down("ArrowLeft");
+  await page.keyboard.down("KeyA");
   await page.keyboard.press("Space");
   await expect.poll(async () => (await read()).parent).toBeNull();
-  await page.keyboard.up("ArrowLeft");
+  await page.keyboard.up("KeyA");
   expect(errors).toEqual([]);
 });

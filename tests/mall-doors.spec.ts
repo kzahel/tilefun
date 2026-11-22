@@ -52,13 +52,13 @@ for (const [kind, type] of [
       );
     });
     await page.screenshot({ path: `/tmp/tilefun-mall-${kind}-street.png` });
-    await page.keyboard.down("ArrowUp");
+    await page.keyboard.down("KeyW");
     const fade = page.locator('[data-door-fade="true"]');
     await page.waitForFunction(
       () =>
         document.querySelector('[data-door-fade="true"]')?.getAttribute("data-stage") === "depart",
     );
-    await page.keyboard.up("ArrowUp");
+    await page.keyboard.up("KeyW");
     await expect(game).toHaveAttribute("data-interior", /interior-v1/);
     await expect(fade).toHaveAttribute("data-stage", "idle");
     const state = () =>
@@ -79,17 +79,17 @@ for (const [kind, type] of [
     expect(before.interior?.layout).toBe("restaurant-v3");
     await page.screenshot({ path: `/tmp/tilefun-mall-${kind}-interior.png` });
     // Leave the arrival latch, then physically walk out through the entrance.
-    await page.keyboard.down("ArrowUp");
+    await page.keyboard.down("KeyW");
     const inside = before.interior?.doors?.[0]?.inside;
     if (!inside) throw new Error("Missing interior entrance");
     await expect.poll(async () => (await state()).player.wy).toBeLessThan(inside.wy - 40);
-    await page.keyboard.up("ArrowUp");
-    await page.keyboard.down("ArrowDown");
+    await page.keyboard.up("KeyW");
+    await page.keyboard.down("KeyS");
     await page.waitForFunction(
       () =>
         document.querySelector('[data-door-fade="true"]')?.getAttribute("data-stage") === "depart",
     );
-    await page.keyboard.up("ArrowDown");
+    await page.keyboard.up("KeyS");
     await expect(game).toHaveAttribute("data-interior", "");
     await expect(fade).toHaveAttribute("data-stage", "idle");
     await expect.poll(async () => (await state()).player).toEqual(door.outside);

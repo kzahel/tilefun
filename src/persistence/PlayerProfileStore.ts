@@ -1,5 +1,6 @@
 import type { FirstPersonControls } from "../config/firstPersonControls.js";
 import type { FirstPersonViewDistance } from "../config/firstPersonViewDistance.js";
+import type { KeyboardSide } from "../input/KeyboardSchemes.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { generateUUID } from "../shared/uuid.js";
 import type { CarDrivingStyle } from "../traffic/CarControls.js";
@@ -13,6 +14,7 @@ export interface PlayerProfile {
   touchMovement?: TouchMovementMode;
   pinchZoom?: boolean;
   carDriving?: CarDrivingStyle;
+  keyboardSide?: KeyboardSide;
   /** Experimental first-person play view (tactical 229). */
   firstPerson?: boolean;
   /** First-person fog and streaming distance (tactical 230). */
@@ -29,6 +31,7 @@ const UPDATABLE_FIELDS = [
   "touchMovement",
   "pinchZoom",
   "carDriving",
+  "keyboardSide",
   "firstPerson",
   "firstPersonViewDistance",
   "firstPersonControls",

@@ -149,7 +149,7 @@ try {
       },
       { kind, ms },
     );
-    await page.keyboard.down("ArrowRight");
+    await page.keyboard.down("KeyD");
     await page.waitForTimeout(300);
     let stall = null;
     if (kind === "worker") {
@@ -172,7 +172,7 @@ try {
         return { start, end: Date.now() };
       }, ms);
     await page.waitForTimeout(kind === "tx-delay" ? ms + 700 : 700);
-    await page.keyboard.up("ArrowRight");
+    await page.keyboard.up("KeyD");
     const data = await page.evaluate(async () => {
       const g = document.querySelector("#game").__game;
       return { samples: window.__samples, host: await g.transport.getDiagnostics() };

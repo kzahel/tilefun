@@ -1,5 +1,4 @@
-import type { ActionName } from "../input/ActionMap.js";
-import { actionHint } from "../input/InputHints.js";
+import { actionHint, type KeyHint } from "../input/InputHints.js";
 import { type PageInset, shift } from "../input/ViewRect.js";
 import {
   EMPTY_INVENTORY,
@@ -18,12 +17,12 @@ export class HotbarControl {
 
   constructor(
     private readonly select: (selection: HotbarSelection) => void,
-    private readonly guest?: { label: string; hint: (action: ActionName) => string },
+    private readonly presentation?: { label?: string; hint: KeyHint },
   ) {
-    this.root.className = guest ? "play-hotbar guest-hotbar" : "play-hotbar";
+    this.root.className = presentation?.label ? "play-hotbar guest-hotbar" : "play-hotbar";
     this.root.hidden = true;
     this.root.setAttribute("role", "group");
-    this.root.setAttribute("aria-label", guest?.label ?? "Hotbar");
+    this.root.setAttribute("aria-label", presentation?.label ?? "Hotbar");
     this.slots = EMPTY_INVENTORY.slots.map((_, index) => {
       const button = document.createElement("button");
       button.type = "button";
@@ -40,7 +39,7 @@ export class HotbarControl {
     this.allowed = allowed;
     if (!visible) return;
     this.inventory = inventory ?? EMPTY_INVENTORY;
-    const inputHint = this.guest?.hint ?? actionHint;
+    const inputHint = this.presentation?.hint ?? actionHint;
     const hint = [inputHint("hotbar_previous"), inputHint("hotbar_next")]
       .filter(Boolean)
       .join(" / ");

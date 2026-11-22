@@ -1,4 +1,4 @@
-import { type ActionName, DEFAULT_ACTION_MAP } from "./ActionMap.js";
+import { type ActionMapConfig, type ActionName, DEFAULT_ACTION_MAP } from "./ActionMap.js";
 import { controllerActionHint } from "./ControllerBindings.js";
 import { keyLabel, learnKeyLabel, loadLayoutLabels } from "./KeyLabels.js";
 export type InputSource = "keyboard" | "controller" | "touch";
@@ -28,17 +28,24 @@ if (typeof window !== "undefined") {
 }
 
 /** The keyboard label of an action's first binding, on the player's layout. */
-export function keyboardHint(action: ActionName): string {
-  const code = DEFAULT_ACTION_MAP.find((binding) => binding.action === action)?.keys[0];
+export function keyboardHint(
+  action: ActionName,
+  map: ActionMapConfig = DEFAULT_ACTION_MAP,
+): string {
+  const code = map.find((binding) => binding.action === action)?.keys[0];
   return code ? keyLabel(code) : "";
 }
 
 /** The four movement keys in up/left/down/right order ("WASD" on QWERTY). */
-export function movementKeysHint(): string {
-  return (["move_up", "move_left", "move_down", "move_right"] as const).map(keyboardHint).join("");
+export type KeyHint = (action: ActionName) => string;
+
+export function movementKeysHint(hint: KeyHint): string {
+  return (["move_up", "move_left", "move_down", "move_right"] as const)
+    .map((action) => hint(action))
+    .join("");
 }
 
-/** Display the same default semantic bindings that input actually consumes. */
-export function actionHint(action: ActionName): string {
-  return inputHint(keyboardHint(action), controllerActionHint(action));
+/** Display the bindings that input actually consumes. */
+export function actionHint(action: ActionName, hint: KeyHint = keyboardHint): string {
+  return inputHint(hint(action), controllerActionHint(action));
 }

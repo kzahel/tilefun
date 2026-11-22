@@ -17,6 +17,7 @@ import { ClientSky } from "./ClientSky.js";
 import type { RemoteStateView } from "./ClientStateView.js";
 import type { FirstPersonControl } from "./FirstPersonControl.js";
 import type { GameClientOptions } from "./GameClient.js";
+import type { LocalPlayers } from "./LocalPlayers.js";
 import type { PlayInputController } from "./PlayInputController.js";
 
 type ProfileUpdates = Parameters<
@@ -33,6 +34,7 @@ export interface MenuChromeHost {
   readonly scenes: SceneManager;
   readonly consoleEngine: ConsoleEngine;
   readonly firstPerson: FirstPersonControl;
+  readonly localPlayers: Pick<LocalPlayers, "keyboardSide"> | null;
   readonly profile: NonNullable<GameClientOptions["profile"]> | null;
   readonly profileStore: GameClientOptions["profileStore"];
   readonly doorBusy: boolean;
@@ -119,6 +121,11 @@ export class GameMenuChrome {
         host.firstPerson.wildlifeModels = enabled;
         saveWildlifeModels(enabled);
       },
+      async (side) => {
+        if (host.localPlayers) host.localPlayers.keyboardSide = side;
+        if (host.profile) host.profile.keyboardSide = side;
+        await this.saveProfile({ keyboardSide: side });
+      },
       async (enabled) => {
         // The cvar owns the live state (console, ?dynshadows=1); this device remembers it.
         host.firstPerson.dynamicShadows = enabled;
@@ -178,6 +185,7 @@ export class GameMenuChrome {
       this.host.firstPerson.controls,
       this.host.firstPerson.wildlifeModels,
       this.host.firstPerson.dynamicShadows,
+      this.host.localPlayers?.keyboardSide,
     );
   }
 

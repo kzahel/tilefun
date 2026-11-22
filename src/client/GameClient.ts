@@ -11,8 +11,8 @@ import { AudioManager } from "../audio/AudioManager.js";
 import { buildAudioManifest } from "../audio/SurfaceType.js";
 import { BlendGraph } from "../autotile/BlendGraph.js";
 import { normalizePlayerModel } from "../characters/PlayerModels.js";
-import { type FirstPersonControls, firstPersonControls } from "../config/firstPersonControls.js";
-import { type FirstPersonViewDistance, viewDistance } from "../config/firstPersonViewDistance.js";
+import { firstPersonControls } from "../config/firstPersonControls.js";
+import { viewDistance } from "../config/firstPersonViewDistance.js";
 import { ConsoleEngine } from "../console/ConsoleEngine.js";
 import { ConsoleUI } from "../console/ConsoleUI.js";
 import { GameLoop } from "../core/GameLoop.js";
@@ -29,7 +29,7 @@ import { HELD_SHEET } from "../inventory/Inventory.js";
 import type { RenderResources } from "../rendering/RenderFrame.js";
 import type { RenderHost, RenderHostFactory } from "../rendering/RenderHost.js";
 import { IdeaScene } from "../scenes/IdeaScene.js";
-import { type CarDrivingStyle, carDrivingStyle } from "../traffic/CarControls.js";
+import { carDrivingStyle } from "../traffic/CarControls.js";
 import { finishStartup, showStartupAssets, showStartupStage } from "../ui/StartupProgress.js";
 import { DoorPresentation } from "./DoorPresentation.js";
 import type { GameTestHooks } from "./GameTestHooks.js";
@@ -41,11 +41,13 @@ import { PropCatalog } from "../editor/PropCatalog.js";
 import { FlatStrategy } from "../generation/FlatStrategy.js";
 import { descriptorChoice, type GenerationDescriptor } from "../generation/GenerationDescriptor.js";
 import { ActionManager } from "../input/ActionManager.js";
-import type { TapMovement, TouchMovementMode } from "../input/TapMovement.js";
+import { keyboardSide } from "../input/KeyboardSchemes.js";
+import type { TapMovement } from "../input/TapMovement.js";
 import { touchMovementMode } from "../input/TapMovement.js";
 import type { TouchButtons } from "../input/TouchButtons.js";
 import type { TouchJoystick } from "../input/TouchJoystick.js";
 import { interiorRealmId } from "../interiors/GameplayInterior.js";
+import type { PlayerProfile } from "../persistence/PlayerProfileStore.js";
 import { Camera } from "../rendering/Camera.js";
 import { DebugPanel } from "../rendering/DebugPanel.js";
 import { cameraPixelSnap } from "../rendering/PresentationSettings.js";
@@ -82,17 +84,7 @@ import { WorldSessionActions, type WorldSessionHost } from "./WorldSessionAction
 export interface GameClientOptions {
   /** The WebGL2 world host (232); simulation and presentation stay shared. */
   renderHostFactory: RenderHostFactory;
-  profile?: {
-    id: string;
-    name: string;
-    playerModel?: string;
-    touchMovement?: TouchMovementMode;
-    pinchZoom?: boolean;
-    carDriving?: CarDrivingStyle;
-    firstPerson?: boolean;
-    firstPersonViewDistance?: FirstPersonViewDistance;
-    firstPersonControls?: FirstPersonControls;
-  };
+  profile?: Omit<PlayerProfile, "pin" | "createdAt">;
   profileStore?: {
     listProfiles(): Promise<{ id: string; name: string; pin: string | null; createdAt: number }[]>;
     createProfile(name: string): Promise<{ id: string; name: string }>;
@@ -357,7 +349,7 @@ export class GameClient implements GameTestHooks {
     // Build GameContext and wire it into the scene manager
     const gc = this.buildGameContext();
     this.scenes.setContext(gc);
-    this.localPlayers = new LocalPlayers(gc);
+    this.localPlayers = new LocalPlayers(gc, keyboardSide(this.profile?.keyboardSide));
     this.xr = createHeadset(gc, {
       loop: this.loop,
       pads: this.localPlayers,
@@ -799,6 +791,9 @@ export class GameClient implements GameTestHooks {
         return client.consoleEngine;
       },
       firstPerson: this.firstPerson,
+      get localPlayers() {
+        return client.localPlayers;
+      },
       profile: this.profile,
       profileStore: this.profileStore,
       get doorBusy() {

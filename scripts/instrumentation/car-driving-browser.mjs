@@ -172,7 +172,7 @@ try {
       return end(...args);
     };
   });
-  const key = ["ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight"][direction];
+  const key = ["KeyS", "KeyW", "KeyA", "KeyD"][direction];
   await page.keyboard.down(key);
   await page.waitForTimeout(8000);
   await page.keyboard.up(key);

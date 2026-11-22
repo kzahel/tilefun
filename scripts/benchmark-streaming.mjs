@@ -742,14 +742,14 @@ try {
         await move(-1, false, true);
         await move(-1, true);
       } else {
-        await page.keyboard.down("ArrowLeft");
+        await page.keyboard.down("KeyA");
         await page.keyboard.down("Shift");
       }
       sprint = await sample("motion", 100000, false, movementSeconds * 1000);
       samples.push(sprint);
       if (touch) await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
       else {
-        await page.keyboard.up("ArrowLeft");
+        await page.keyboard.up("KeyA");
         await page.keyboard.up("Shift");
       }
       samples.push(await sample("recovery-catchup", 100000, true, settleSeconds * 1000));
@@ -760,7 +760,7 @@ try {
       await page.screenshot({ path: path.join(output, `${version}-settled.png`) });
       samples.push(await sample("standing", 120));
       if (touch) await move(-1, false, true);
-      else await page.keyboard.down("ArrowLeft");
+      else await page.keyboard.down("KeyA");
       samples.push(await sample("walk", 180));
       if (touch) await move(-1, true);
       else await page.keyboard.down("Shift");
@@ -771,13 +771,13 @@ try {
         await move(1, false, true);
         await move(1, true);
       } else {
-        await page.keyboard.up("ArrowLeft");
-        await page.keyboard.down("ArrowRight");
+        await page.keyboard.up("KeyA");
+        await page.keyboard.down("KeyD");
       }
       samples.push(await sample("reverse", 300));
       if (touch) await cdp.send("Input.dispatchTouchEvent", { type: "touchEnd", touchPoints: [] });
       else {
-        await page.keyboard.up("ArrowRight");
+        await page.keyboard.up("KeyD");
         await page.keyboard.up("Shift");
       }
       await page.evaluate(

@@ -1,4 +1,4 @@
-import { inputHint, keyboardHint } from "../input/InputHints.js";
+import { actionHint, type KeyHint } from "../input/InputHints.js";
 import { type PageInset, shift } from "../input/ViewRect.js";
 import { type DoorRequest, DoorWalk, doorChoice, type PlaceView } from "./PlacePrompts.js";
 
@@ -10,7 +10,10 @@ export class DoorControl {
   private request: DoorRequest | null = null;
   private busy = false;
   private readonly walk = new DoorWalk();
-  constructor(private readonly send: (request: DoorRequest) => Promise<unknown>) {
+  constructor(
+    private readonly send: (request: DoorRequest) => Promise<unknown>,
+    private readonly keyHint?: KeyHint,
+  ) {
     this.root.style.cssText =
       "position:fixed;bottom:max(24px,env(safe-area-inset-bottom));left:16px;z-index:80;max-width:min(360px,calc(100vw - 180px));text-align:center;color:white;font:15px sans-serif;";
     this.button.style.cssText =
@@ -33,7 +36,7 @@ export class DoorControl {
     this.request = choice.request;
     if (this.walk.update(view, choice, allowed, locked, movement, dt)) this.activate(true);
     this.button.hidden = !this.request;
-    const hint = inputHint(keyboardHint("enter_place"), "Y");
+    const hint = actionHint("enter_place", this.keyHint);
     const label = choice.label && hint ? `${choice.label} · ${hint}` : choice.label;
     if (this.button.textContent !== label) this.button.textContent = label;
     this.button.disabled = this.busy || locked;

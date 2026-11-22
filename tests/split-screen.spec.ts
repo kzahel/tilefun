@@ -38,6 +38,13 @@ async function startFlatWorld(page: Page, errors: string[]) {
   await expect.poll(async () => (await snapshot(page)).positions[0]).toBeTruthy();
 }
 
+async function addKeyboardPlayer(page: Page) {
+  await page.keyboard.press("Escape");
+  const menu = page.getByTestId("world-menu");
+  await menu.getByRole("button", { name: "Multiplayer", exact: true }).click();
+  await menu.getByRole("button", { name: "Add Player 2 (keyboard)", exact: true }).click();
+}
+
 /** Hold keys for a while and return each seat's movement. */
 async function moved(page: Page, hold: () => Promise<void>, release: () => Promise<void>) {
   const before = await snapshot(page);
@@ -54,12 +61,34 @@ async function moved(page: Page, hold: () => Promise<void>, release: () => Promi
   return { 0: delta(0), 1: delta(1) };
 }
 
-test("a second keyboard player joins with Slash and plays the arrows in its own view", async ({
-  page,
-}) => {
+test("the saved arrow layout follows Player 1 from solo to co-op and back", async ({ page }) => {
   const errors: string[] = [];
   await startFlatWorld(page, errors);
-  await page.keyboard.press("Slash");
+  const optionsButton = page.locator('button[aria-label="Options"]');
+  await optionsButton.click();
+  const options = page.getByTestId("options-dialog");
+  const keyboard = options.getByLabel("Keyboard side");
+  await expect(keyboard).toHaveValue("left");
+  await keyboard.selectOption("right");
+  await expect(options.getByRole("status")).toHaveText("Keyboard side saved for this player.");
+  await expect(options.locator("#options-keyboard-help")).toContainText("Right Shift Run");
+  await options.getByRole("button", { name: "Back to game" }).click();
+  await Promise.all([
+    page.waitForFunction(() => {
+      const game = (document.querySelector("#game") as unknown as { __game: Game }).__game;
+      return (game.stateView.playerEntity.wz ?? 0) > 2;
+    }),
+    page.keyboard.press("Slash"),
+  ]);
+  const solo = await moved(
+    page,
+    () => page.keyboard.down("ArrowUp"),
+    () => page.keyboard.up("ArrowUp"),
+  );
+  expect(solo[0][1]).toBeLessThan(-20);
+  expect((await snapshot(page)).seats).toEqual([0]);
+
+  await addKeyboardPlayer(page);
   await expect
     .poll(async () => (await snapshot(page)).views)
     .toEqual([
@@ -75,17 +104,16 @@ test("a second keyboard player joins with Slash and plays the arrows in its own 
       return Reflect.get(Reflect.get(game, "tapMovement"), "region");
     });
   await expect.poll(tapRegion).toMatchObject({ x: 0, y: 0, width: 640 });
-  // Real physical codes: seat 0 keeps WASD, the guest (joined one tile to its right)
-  // has the arrows; they walk apart.
+  // Player 1 keeps the arrow keys. The guest gets WASD and they walk apart.
   const apart = await moved(
     page,
     async () => {
-      await page.keyboard.down("KeyA");
-      await page.keyboard.down("ArrowRight");
+      await page.keyboard.down("ArrowLeft");
+      await page.keyboard.down("KeyD");
     },
     async () => {
-      await page.keyboard.up("KeyA");
-      await page.keyboard.up("ArrowRight");
+      await page.keyboard.up("ArrowLeft");
+      await page.keyboard.up("KeyD");
     },
   );
   expect(apart[0][0]).toBeLessThan(-20);
@@ -95,9 +123,8 @@ test("a second keyboard player joins with Slash and plays the arrows in its own 
     () => page.keyboard.down("ArrowDown"),
     () => page.keyboard.up("ArrowDown"),
   );
-  expect(Math.abs(down[0][1])).toBeLessThan(1); // the arrows no longer move seat 0
-  expect(down[1][1]).toBeGreaterThan(20);
-  // The guest leaves from the menu; seat 0 gets the arrows back.
+  expect(down[0][1]).toBeGreaterThan(20);
+  expect(Math.abs(down[1][1])).toBeLessThan(1);
   await page.keyboard.press("Escape");
   const menu = page.getByTestId("world-menu");
   await expect(menu).toHaveAttribute("data-page", "home");
@@ -106,12 +133,19 @@ test("a second keyboard player joins with Slash and plays the arrows in its own 
   await menu.getByRole("button", { name: "Resume", exact: true }).click();
   await expect.poll(async () => (await snapshot(page)).views).toEqual([[0, 0, 1280]]);
   await expect(page.getByTestId("gem-hud")).toBeVisible();
-  const solo = await moved(
+  const afterLeave = await moved(
     page,
     () => page.keyboard.down("ArrowUp"),
     () => page.keyboard.up("ArrowUp"),
   );
-  expect(solo[0][1]).toBeLessThan(-20);
+  expect(afterLeave[0][1]).toBeLessThan(-20);
+
+  await flushLocalWorld(page);
+  await stopLocalWorld(page);
+  await page.goto("/tilefun/");
+  await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
+  await optionsButton.click();
+  await expect(keyboard).toHaveValue("right");
   expect(errors).toEqual([]);
 });
 
@@ -382,7 +416,7 @@ test("the world saves both seats; after a reload seat 0 resumes and a guest join
 }) => {
   const errors: string[] = [];
   await startFlatWorld(page, errors);
-  await page.keyboard.press("Slash");
+  await addKeyboardPlayer(page);
   await expect.poll(async () => (await snapshot(page)).positions[1]).toBeTruthy();
   await moved(
     page,
@@ -416,7 +450,7 @@ test("the world saves both seats; after a reload seat 0 resumes and a guest join
   expect(resumed.seats).toEqual([0]); // guests join again themselves
   expect(resumed.positions[0]?.[0]).toBeCloseTo(hostX, -1);
   expect(resumed.positions[0]?.[1]).toBeCloseTo(hostY, -1);
-  await page.keyboard.press("Slash");
+  await addKeyboardPlayer(page);
   await expect.poll(async () => (await snapshot(page)).positions[1]).toBeTruthy();
   const rejoined = await snapshot(page);
   // Guests follow seat 0 (226): the returning guest plays beside it with its own record.

@@ -1,9 +1,13 @@
 import type { GameContext } from "../core/GameScene.js";
 import { ActionManager } from "../input/ActionManager.js";
 import { controllerInput } from "../input/ControllerInput.js";
-import { hostKeyMap, KEYBOARD_JOIN_KEY, seatKeyMap } from "../input/KeyboardSchemes.js";
-import { ownsKeys } from "../input/KeyFocus.js";
-import { eventCode } from "../input/KeyLabels.js";
+import {
+  hostKeyMap,
+  type KeyboardSide,
+  keyboardSideLabel,
+  otherKeyboardSide,
+  seatKeyMap,
+} from "../input/KeyboardSchemes.js";
 import { PadActions } from "../input/PadActions.js";
 import { EVERY_PAD, PadAssignment, type PadPool, padsAway } from "../input/PadAssignment.js";
 import { ActionSeatInput, type SeatInput } from "../input/SeatInput.js";
@@ -48,10 +52,9 @@ interface Controller {
 }
 
 /**
- * The page's local players (226): guests join from the second keyboard scheme's
- * action key or a pad that seat 0 does not use, and leave from the world menu.
- * A keyboard guest plays the right-hand scheme while seat 0 keeps the rest of
- * the keyboard; a pad guest keeps its pad until it leaves or the pad disconnects.
+ * Keyboard guests join from the Multiplayer menu and use the other side of the
+ * keyboard. Pad guests join by pressing a button and keep their pad until they
+ * leave or it disconnects.
  * Seat 0's controller and menus ignore guests' pads, except that a guest who opens
  * the menu drives it until it closes.
  */
@@ -60,11 +63,9 @@ export class LocalPlayers implements PadPool {
   private readonly padInputs = new Map<number, PadActions>();
   private readonly joining = new Set<number>();
   private readonly models = new Map<number, string>();
-  private readonly solo;
-  private keyboardSeat: number | undefined;
+  private keyboardGuest: { seat: number; keys: ActionManager; input: ActionSeatInput } | undefined;
   private readonly retries = new Set<ReturnType<typeof setTimeout>>();
   private destroyed = false;
-  private sharedKeys = false;
   private uiPad: number | undefined;
   private wasUI = false;
   private readonly offs: (() => void)[];
@@ -73,11 +74,11 @@ export class LocalPlayers implements PadPool {
 
   constructor(
     private readonly gc: Host,
+    private side: KeyboardSide = "left",
     private readonly controller: Controller = controllerInput,
   ) {
-    this.solo = gc.actions.getConfig();
+    gc.actions.setConfig(hostKeyMap(side));
     controller.seats = this;
-    window.addEventListener("keydown", this.onKey);
     gc.mainMenu.seatActions = (add) => {
       for (const { label, run } of [
         ...this.viewActions(),
@@ -86,13 +87,18 @@ export class LocalPlayers implements PadPool {
       ])
         add(label, run);
     };
+    gc.mainMenu.localKeyboardHelp = () => {
+      const primary = keyboardSideLabel(this.side);
+      const guest = keyboardSideLabel(otherKeyboardSide(this.side));
+      return `Your movement keys are ${primary}. The other keyboard player uses ${guest}. Change your side in Options.`;
+    };
     gc.mainMenu.localPlayerActions = (add) => {
       add(gc.session.sharedScreen ? "Use split screen" : "Use shared screen", () => {
         gc.session.sharedScreen = !gc.session.sharedScreen;
         gc.mainMenu.openPage("multiplayer");
       });
       const seat = this.freeSeat();
-      if (this.keyboardSeat === undefined && seat !== undefined) {
+      if (!this.keyboardGuest && seat !== undefined) {
         add(
           `Add ${playerName(seat)} (keyboard)`,
           () => {
@@ -118,6 +124,21 @@ export class LocalPlayers implements PadPool {
         this.uiPad = undefined;
       }),
     ];
+  }
+
+  get keyboardSide(): KeyboardSide {
+    return this.side;
+  }
+
+  set keyboardSide(side: KeyboardSide) {
+    if (this.side === side) return;
+    this.side = side;
+    this.gc.actions.clearHeld();
+    this.gc.actions.setConfig(hostKeyMap(side));
+    if (this.keyboardGuest) {
+      this.keyboardGuest.input.clear();
+      this.keyboardGuest.keys.setConfig(seatKeyMap(otherKeyboardSide(side)));
+    }
   }
 
   /** Play is on top with nothing blocking the device's input. */
@@ -176,36 +197,22 @@ export class LocalPlayers implements PadPool {
     this.destroyed = true;
     for (const retry of this.retries) clearTimeout(retry);
     if (this.controller.seats === this) this.controller.seats = EVERY_PAD;
-    window.removeEventListener("keydown", this.onKey);
     for (const off of this.offs) off();
     this.gc.mainMenu.seatActions = () => {};
+    this.gc.mainMenu.localKeyboardHelp = () => "";
     this.gc.mainMenu.localPlayerActions = () => {};
   }
 
-  private readonly onKey = (event: KeyboardEvent): void => {
-    if (eventCode(event) !== KEYBOARD_JOIN_KEY || event.repeat || event.ctrlKey || event.metaKey)
-      return;
-    if (this.keyboardSeat !== undefined || ownsKeys(event.target) || !this.joinable) return;
-    if (this.freeSeat() === undefined) return;
-    event.preventDefault(); // Firefox's Quick Find would take the joining slash
-    this.joinKeyboard();
-  };
-
   private joinKeyboard(): void {
-    if (this.destroyed || this.keyboardSeat !== undefined) return;
+    if (this.destroyed || this.keyboardGuest) return;
     const seat = this.freeSeat();
     if (seat === undefined) return;
-    // Attached during this keydown, the scheme does not also see the joining press.
-    // It reads no pads, so clearing or detaching it leaves seat 0's pad alone.
-    const keys = new ActionManager(seatKeyMap("right"));
+    const keys = new ActionManager(seatKeyMap(otherKeyboardSide(this.side)));
     keys.disableGamepad();
     keys.attach();
-    this.keyboardSeat = seat;
-    void this.join(seat, new ActionSeatInput(keys, this.steering, () => keys.detach())).then(
-      (joined) => {
-        if (!joined && this.keyboardSeat === seat) this.keyboardSeat = undefined;
-      },
-    );
+    const input = new ActionSeatInput(keys, this.steering, () => keys.detach());
+    this.keyboardGuest = { seat, keys, input };
+    void this.join(seat, input);
   }
 
   private async joinPad(index: number): Promise<void> {
@@ -291,20 +298,15 @@ export class LocalPlayers implements PadPool {
     this.uiPad = index;
   }
 
-  /** Follow the device's seats, whatever changed them: seat 0's keys, pads and models. */
+  /** Release device assignments when authority or the menu drops a guest. */
   private sync(): void {
     const { seats } = this.gc.session;
     for (const seat of [...this.models.keys()])
       if (!seats.get(seat) && !this.joining.has(seat)) {
         this.models.delete(seat);
         this.pads.release(seat);
-        if (this.keyboardSeat === seat) this.keyboardSeat = undefined;
+        if (this.keyboardGuest?.seat === seat) this.keyboardGuest = undefined;
       }
-    const shared = this.keyboardSeat !== undefined && !!seats.get(this.keyboardSeat);
-    if (shared !== this.sharedKeys) {
-      this.sharedKeys = shared;
-      this.gc.actions.setConfig(shared ? hostKeyMap() : this.solo);
-    }
   }
 
   private freeSeat(): number | undefined {

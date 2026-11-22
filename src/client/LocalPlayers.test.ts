@@ -1,8 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { GameContext } from "../core/GameScene.js";
 import { ActionManager } from "../input/ActionManager.js";
-import { DEFAULT_ACTION_MAP } from "../input/ActionMap.js";
-import { hostKeyMap } from "../input/KeyboardSchemes.js";
+import { hostKeyMap, type KeyboardSide } from "../input/KeyboardSchemes.js";
 import { EVERY_PAD, type PadPool } from "../input/PadAssignment.js";
 import { XR_PAD_INDEX } from "../input/XrPad.js";
 import { PlayScene } from "../scenes/PlayScene.js";
@@ -23,7 +22,7 @@ function gamepad(index: number, buttons: number[] = [], axes = [0, 0, 0, 0]): Ga
 
 const settle = () => new Promise((resolve) => setTimeout(resolve, 0));
 
-function harness() {
+function harness(side: KeyboardSide = "left") {
   const requests: RequestMessage[] = [];
   let refuse = false;
   const session = new DeviceSession({} as RemoteStateView);
@@ -34,6 +33,7 @@ function harness() {
   actions.on("toggle_menu", () => menus.push(1));
   const mainMenu = {
     seatActions: (_add: (label: string, run: () => void) => void) => {},
+    localKeyboardHelp: () => "",
     localPlayerActions: (_add: (label: string, run: () => void, disabled?: boolean) => void) => {},
     visible: true,
     openPage: vi.fn(),
@@ -75,7 +75,7 @@ function harness() {
     },
     takeRequestId: () => nextId++,
   } as unknown as GameContext;
-  const players = new LocalPlayers(gc, controller);
+  const players = new LocalPlayers(gc, side, controller);
   const key = (type: "keydown" | "keyup", code: string, target: unknown = null) => {
     const event = Object.assign(new Event(type), { code, key: "" });
     if (target) Object.defineProperty(event, "target", { value: target });
@@ -85,6 +85,10 @@ function harness() {
     players,
     leaveButtons,
     localButtons,
+    addKeyboard: () =>
+      localButtons()
+        .find(({ label }) => label.endsWith("(keyboard)"))
+        ?.run(),
     session,
     actions,
     mainMenu,
@@ -120,44 +124,50 @@ describe("local players joining from the keyboard (226)", () => {
     expect(h.mainMenu.onClose).toHaveBeenCalled();
     expect(h.requests).toHaveLength(1);
     expect(h.session.seats.get(1)?.input).toBeTruthy();
-    expect(h.actions.getConfig()).toEqual(hostKeyMap());
+    expect(h.actions.getConfig()).toEqual(hostKeyMap("left"));
     const [, leave] = h.localButtons();
     expect(leave?.label).toBe("Player 2 leaves");
     leave?.run();
     await settle();
     expect(h.session.seats.get(1)).toBeUndefined();
-    expect(h.actions.getConfig()).toBe(DEFAULT_ACTION_MAP);
+    expect(h.actions.getConfig()).toEqual(hostKeyMap("left"));
     expect(h.mainMenu.openPage).toHaveBeenLastCalledWith("multiplayer");
     expect(h.localButtons()[1]?.label).toBe("Add Player 2 (keyboard)");
   });
 
-  it("scheme B's action key seats a guest on the right hand; seat 0 keeps the rest", async () => {
-    const h = harness();
-    const press = Object.assign(new Event("keydown", { cancelable: true }), { code: "Slash" });
-    window.dispatchEvent(press);
-    expect(press.defaultPrevented).toBe(true); // no browser Quick Find
+  it("Slash jumps for a right-side host, and a menu join gives the guest the left side", async () => {
+    const h = harness("right");
+    const jump = vi.fn();
+    h.actions.on("jump", jump);
+    h.key("keydown", "Slash");
+    h.key("keyup", "Slash");
+    expect(jump).toHaveBeenCalledOnce();
+    expect(h.requests).toEqual([]);
+    h.addKeyboard();
     await settle();
     expect(h.requests).toEqual([
       { type: "join-seat", requestId: 1, seat: 1, displayName: "Player 2", playerModel: "person2" },
     ]);
     const guest = h.session.seats.get(1);
     expect(guest?.input).toBeTruthy();
-    expect(h.actions.getConfig()).toEqual(hostKeyMap());
-    // The joining press did not jump; the guest moves with the arrows, seat 0 does not.
+    expect(h.actions.getConfig()).toEqual(hostKeyMap("right"));
     expect(guest?.input?.sample(false, undefined).jumpPressed).toBe(false);
     h.key("keydown", "ArrowUp");
-    expect(guest?.input?.sample(false, undefined).manual).toMatchObject({ dx: 0, dy: -1 });
-    expect(h.actions.getMovement().dy).toBe(0);
-    h.key("keyup", "ArrowUp");
-    // One keyboard guest only.
+    h.key("keydown", "KeyA");
+    h.key("keydown", "Space");
     h.key("keydown", "Slash");
-    await settle();
+    expect(h.actions.getMovement()).toMatchObject({ dx: 0, dy: -1 });
+    expect(jump).toHaveBeenCalledTimes(2);
+    expect(guest?.input?.sample(false, undefined)).toMatchObject({
+      manual: { dx: -1, dy: 0 },
+      jumpPressed: true,
+    });
     expect(h.requests).toHaveLength(1);
   });
 
-  it("leaves from the menu: seat 0 gets its full map back and the scheme stops listening", async () => {
-    const h = harness();
-    h.key("keydown", "Slash");
+  it("leaving releases the guest's keys while the host keeps its chosen side", async () => {
+    const h = harness("right");
+    h.addKeyboard();
     await settle();
     const input = h.session.seats.get(1)?.input;
     const [leave] = h.leaveButtons();
@@ -166,68 +176,66 @@ describe("local players joining from the keyboard (226)", () => {
     await settle();
     expect(h.requests.at(-1)).toEqual({ type: "leave-seat", requestId: 2, seat: 1 });
     expect(h.session.seats.get(1)).toBeUndefined();
-    expect(h.actions.getConfig()).toBe(DEFAULT_ACTION_MAP);
+    expect(h.actions.getConfig()).toEqual(hostKeyMap("right"));
     expect(h.mainMenu.openPage).toHaveBeenCalledWith("home");
     h.key("keydown", "ArrowLeft");
     expect(input?.sample(false, undefined).manual.dx).toBe(0);
     expect(h.actions.getMovement().dx).toBe(-1);
     h.key("keyup", "ArrowLeft");
-    // A new keyboard guest may join again.
-    h.key("keydown", "Slash");
+    h.addKeyboard();
     await settle();
     expect(h.session.seats.get(1)).toBeTruthy();
   });
 
-  it("joins wait for play: a blocked device, another scene or a refusal seat no one", async () => {
+  it("a menu join needs play and can be retried after a refusal", async () => {
     const h = harness();
-    h.state.blocked = true;
-    h.key("keydown", "Slash");
-    h.state.blocked = false;
     h.scenes.current = {}; // the editor or another scene
-    const plain = Object.assign(new Event("keydown", { cancelable: true }), { code: "Slash" });
-    window.dispatchEvent(plain);
-    expect(plain.defaultPrevented).toBe(false); // refused: the key is left alone
+    h.addKeyboard();
     h.scenes.current = new PlayScene();
-    h.key("keydown", "KeyQ"); // only scheme B's action key joins
-    h.key("keydown", "Slash", { tagName: "INPUT", type: "text" }); // typing a slash
-    await settle();
     expect(h.requests).toEqual([]);
     h.refuse(true);
-    h.key("keydown", "Slash");
+    h.addKeyboard();
     await settle();
     expect(h.session.seats.list()).toHaveLength(1);
-    expect(h.actions.getConfig()).toBe(DEFAULT_ACTION_MAP);
-    h.key("keydown", "ArrowUp");
+    expect(h.actions.getConfig()).toEqual(hostKeyMap("left"));
+    h.key("keydown", "KeyW");
     expect(h.actions.getMovement().dy).toBe(-1);
     // The refused scheme stopped listening: nothing claims its own keys.
     const period = Object.assign(new Event("keydown", { cancelable: true }), { code: "Period" });
     window.dispatchEvent(period);
     expect(period.defaultPrevented).toBe(false);
-    // A later press may join again.
     h.refuse(false);
-    h.key("keydown", "Slash");
+    h.addKeyboard();
     await settle();
     expect(h.session.seats.get(1)).toBeTruthy();
   });
 
   it("a refused leave (travel in progress) keeps the guest and its button", async () => {
     const h = harness();
-    h.key("keydown", "Slash");
+    h.addKeyboard();
     await settle();
     h.refuse(true);
     h.leaveButtons()[0]?.run();
     await settle();
     expect(h.session.seats.get(1)).toBeTruthy();
     expect(h.leaveButtons().map((b) => b.label)).toEqual(["Player 2 leaves"]);
-    expect(h.actions.getConfig()).toEqual(hostKeyMap());
+    expect(h.actions.getConfig()).toEqual(hostKeyMap("left"));
   });
 
-  it("authority dropping the guest restores seat 0's keys", async () => {
+  it("an explicit side change swaps both maps and clears held keys and pending jump", async () => {
     const h = harness();
-    h.key("keydown", "Slash");
+    h.addKeyboard();
     await settle();
+    const guest = h.session.seats.get(1)?.input;
+    h.key("keydown", "KeyW");
+    h.key("keydown", "Slash");
+    h.players.keyboardSide = "right";
+    expect(h.actions.getMovement()).toMatchObject({ dx: 0, dy: 0, jump: false });
+    expect(guest?.sample(false, undefined)).toMatchObject({ jumpPressed: false });
+    expect(guest?.hint("jump")).toBe("Space");
     h.session.seats.drop(1);
-    expect(h.actions.getConfig()).toBe(DEFAULT_ACTION_MAP);
+    expect(h.actions.hint("jump")).toBe("/");
+    expect(h.localButtons()[1]?.label).toBe("Add Player 2 (keyboard)");
   });
 });
 
@@ -263,7 +271,7 @@ describe("local players joining from pads (226)", () => {
     expect(guest?.input?.sample(false, undefined).manual.dx).toBe(0);
     h.poll([gamepad(0), gamepad(1, [], [1, 0, 0, 0])]);
     expect(guest?.input?.sample(false, undefined).manual.dx).toBe(1);
-    expect(h.actions.getConfig()).toBe(DEFAULT_ACTION_MAP); // pads leave the keyboard alone
+    expect(h.actions.getConfig()).toEqual(hostKeyMap("left")); // pads leave the keyboard alone
     // Two more pads pressing at once join the next two seats with distinct characters.
     h.poll([gamepad(0), gamepad(1), gamepad(2, [9]), gamepad(3, [0])]);
     await settle();
@@ -363,7 +371,7 @@ describe("local players joining from pads (226)", () => {
       h.refuse(false);
       h.leaveButtons()[0]?.run();
       await vi.advanceTimersByTimeAsync(0);
-      h.key("keydown", "Slash");
+      h.addKeyboard();
       await vi.advanceTimersByTimeAsync(0);
       const newcomer = h.session.seats.get(1);
       expect(newcomer).toBeTruthy();
@@ -399,7 +407,7 @@ describe("local players joining from pads (226)", () => {
   it("the device pauses while guests play and a scene covers play or input is blocked", async () => {
     const h = harness();
     expect(h.players.paused).toBe(false);
-    h.key("keydown", "Slash");
+    h.addKeyboard();
     await settle();
     const play = h.scenes.current;
     const stack = [play];
@@ -427,7 +435,7 @@ describe("local players joining from pads (226)", () => {
     expect(h.requests).toEqual([]);
     h.players.destroy();
     expect(h.controller.seats).toBe(EVERY_PAD);
-    h.key("keydown", "Slash");
+    h.addKeyboard();
     await settle();
     expect(h.requests).toEqual([]);
   });

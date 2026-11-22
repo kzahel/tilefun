@@ -207,11 +207,11 @@ test("Worker saves player and edits before shutdown and restores them on reopen"
     )
     .toBe(0);
   const start = await hostState(page);
-  await page.keyboard.down("ArrowRight");
+  await page.keyboard.down("KeyD");
   await expect
     .poll(async () => (await hostState(page)).position.wx)
     .toBeGreaterThan(start.position.wx + 32);
-  await page.keyboard.up("ArrowRight");
+  await page.keyboard.up("KeyD");
   await page.evaluate(async () => {
     // biome-ignore lint/suspicious/noExplicitAny: test hook
     const g = (document.querySelector("#game") as any).__game;

@@ -1,5 +1,5 @@
 import type { ActionName } from "./ActionMap.js";
-import { actionHint } from "./InputHints.js";
+import { actionHint, type KeyHint } from "./InputHints.js";
 import { canvasPoint, type ViewRegion, wholeCanvas, withCssPixels } from "./ViewRect.js";
 
 /** Named action paddles, shared by touch, mouse, keyboard and controller hints. */
@@ -38,7 +38,6 @@ export class TouchButtons {
       (index === 5 && this.emergency)
     );
   }
-  private canvas: HTMLCanvasElement;
   private buttons: ButtonDef[] = [
     { label: "Jump", pressed: false, touchId: null }, // jump
     { label: "Throw", pressed: false, touchId: null }, // throw
@@ -52,9 +51,10 @@ export class TouchButtons {
   /** Touch IDs claimed by buttons (shared with TouchJoystick to avoid conflicts). */
   readonly claimedTouches = new Set<number>();
 
-  constructor(canvas: HTMLCanvasElement) {
-    this.canvas = canvas;
-  }
+  constructor(
+    private readonly canvas: HTMLCanvasElement,
+    private readonly keyHint?: KeyHint,
+  ) {}
 
   get reversePressed(): boolean {
     return this.enabled && this.driving && !!this.buttons[6]?.pressed;
@@ -156,7 +156,7 @@ export class TouchButtons {
         "reverse",
       ];
       const action = actions[i];
-      const badge = action ? actionHint(action) : "";
+      const badge = action ? actionHint(action, this.keyHint) : "";
       ctx.font = "10px sans-serif";
       ctx.fillText(
         i === 4

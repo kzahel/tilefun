@@ -2,7 +2,7 @@
 
 Topic: steam-deck-and-menus
 Status: shared controller/touch UX and reverse driving delivered; hands-on tuning next.
-Updated: 2026-11-14.
+Updated: 2026-11-22.
 
 ## Contextual gameplay actions
 
@@ -25,10 +25,10 @@ secondary settings/views may remain in controller-accessible menus.
 ## Direction and ownership
 
 First-person controls are in **gear → Options → First-person controls**, saved
-with the selected player profile. **Simple keyboard** uses W/S or up/down to
-walk and A/D or left/right to turn; forward and turn together walk in a curve
-at full walking speed. Keyboard movement levels the camera, and world clicks
-leave the mouse free. **Keyboard + mouse** retains strafing and click-to-capture
+with the selected player profile. **Simple keyboard** uses the chosen side's
+forward/back keys to walk and its left/right keys to turn. Hold forward and turn
+to walk in a curve at full speed. Keyboard movement levels the camera, and world
+clicks leave the mouse free. **Keyboard + mouse** retains strafing and click-to-capture
 mouse look (Escape releases it). New profiles choose Simple; existing profiles
 without a saved preset retain mouse controls. Controller sticks, vehicle
 steering, headset input and local keyboard guests retain their own controls.
@@ -79,11 +79,27 @@ or credentials in this repository.
   right stick positions the cursor, RT places/paints and LT erases.
   The same screen cursor reaches DOM tools and map controls: A/RT selects, with
   UI holds consumed until release. Cars default to forward/reverse throttle and
-  relative left/right steering. Options retains directional aim with automatic reverse. LT/R remains a compatibility
-  override. D-pad Up/L toggles vehicle
-  lights and D-pad Right/K changes siren style. Jump/Throw retain their meanings.
+  relative left/right steering. Options retains directional aim with automatic reverse.
+  LT or the keyboard's reverse key (R on the left, Comma on the right) overrides it.
+  D-pad Up toggles vehicle lights and D-pad Right changes siren style.
+  The keyboard uses Z/X on the left and L/K on the right.
   Named on-screen paddles and interaction prompts follow the last input source.
 - Local players (226): split screen in the game.
+  - **Keyboard side:** **Options → Keyboard side** saves the main player's side
+    to their browser profile. Left is the default, including for existing
+    profiles. The main player uses the same play keys in solo and co-op. A
+    keyboard guest uses the opposite side, and changing the setting with a
+    guest present swaps the two assignments. Key labels follow the physical
+    keyboard layout. Arrow-key navigation in menus works with either side.
+
+    | Action | Left | Right |
+    | --- | --- | --- |
+    | Move | WASD | Arrow keys |
+    | Jump / horn | Space | `/` |
+    | Interact | E | `'` |
+    | Sprint | Left Shift | Right Shift |
+    | Throw | Q | `.` |
+
   - **Layout:** select **Use shared screen** in **Multiplayer → Local multiplayer**
     for one top-down view. Players can spread out across the playable area,
     leaving a small border and room for the HUD. Wider windows give the party
@@ -93,17 +109,14 @@ or credentials in this repository.
   - **Joining:** **Multiplayer → Local multiplayer → Add Player 2 (keyboard)**
     joins a keyboard player on this device and resumes Play (leaving Build mode
     if needed). The menu explains each player's controls and also lists each
-    guest's **Player N leaves** button. It offers only one keyboard guest;
-    leaving restores the join button. Slash remains a shortcut during Play.
+    guest's **Player N leaves** button. It offers one keyboard guest and restores
+    the join button when that guest leaves. The slash key is the right side's
+    jump. Use the menu to join when Player 1 is on a controller as well.
     A press on a pad that seat 0 does not use joins Player 2–4
     (`PadAssignment` by `Gamepad.index`). Seat 0 keeps the first pad it uses
     (a button or the stick), as single player does, so the Deck's own controls
     stay player 1's. A guest keeps its pad until it leaves or the pad
-    disconnects, which leaves its seat. Slash (scheme B's jump) joins a
-    keyboard player on the right-hand scheme (arrows, Slash, RShift, Period,
-    Comma, L, K, Semicolon, Quote). Seat 0 then keeps every key the right hand
-    does not use, plus the left scheme's Q, Z and X (`hostKeyMap`). Keyboard and
-    pad co-op: play seat 0 on the pad and join the keyboard player with Slash.
+    disconnects, which leaves its seat.
   - **Menus:** while guests play, a menu, the map, catalogs, Options or lost
     focus pause the whole device. A guest's Menu button opens the world menu,
     and only that pad drives it until it closes. The home page has one
@@ -116,9 +129,9 @@ or credentials in this repository.
     corner says how to join. Edit mode shows seat 0 alone. Each player's view
     can be top-down or first person; a pad's right stick looks, and a keyboard
     guest's left and right keys turn.
-  - **Places:** a guest's enter key (its scheme's Quote, a pad's Y) gets in or
+  - **Places:** a guest's enter key (E, Quote or a pad's Y) gets in or
     out of the nearest car, calls a train or takes everyone through the nearest
-    door, and its equipment key (Semicolon, a pad's D↓) runs the equipment
+    door, and its equipment key (F, Semicolon or a pad's D↓) runs the equipment
     action. Its prompts show in its own view with its own key or button, on the
     player's layout. Seat 0's on-screen controls, touch controls, taps and
     clicks stay inside seat 0's view; a click in a guest's view does nothing.

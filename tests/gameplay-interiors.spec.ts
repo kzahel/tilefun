@@ -65,16 +65,16 @@ for (const kind of ["apartment", "shop"] as const)
       await page.keyboard.up("Space");
       await expect.poll(async () => Math.abs((await player()).wz ?? 0)).toBeLessThan(1);
       const y = (await player()).position.wy;
-      await page.keyboard.down("ArrowUp");
+      await page.keyboard.down("KeyW");
       await expect.poll(async () => y - (await player()).position.wy).toBeGreaterThan(4);
-      await page.keyboard.up("ArrowUp");
+      await page.keyboard.up("KeyW");
       // Under load the held walk can carry us beyond the doorway's interaction
       // radius before the assertion returns. Walk back to the visible exit.
       const exit = page.getByRole("button", { name: "Return to street" });
       if (!(await exit.isVisible())) {
-        await page.keyboard.down("ArrowDown");
+        await page.keyboard.down("KeyS");
         await expect(exit).toBeVisible();
-        await page.keyboard.up("ArrowDown");
+        await page.keyboard.up("KeyS");
       }
     }
     await page.getByRole("button", { name: "Return to street" }).click();

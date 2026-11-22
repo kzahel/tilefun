@@ -158,7 +158,10 @@ try {
   const cdp = await context.newCDPSession(page);
   for (const split of process.argv.includes("--split-only") ? [true] : [false, true]) {
     if (split) {
-      await page.keyboard.press("Slash");
+      await page.keyboard.press("Escape");
+      const menu = page.getByTestId("world-menu");
+      await menu.getByRole("button", { name: "Multiplayer", exact: true }).click();
+      await menu.getByRole("button", { name: "Add Player 2 (keyboard)", exact: true }).click();
       await page.waitForFunction(
         () => document.querySelector("#game").__game.device.views.length === 2,
       );

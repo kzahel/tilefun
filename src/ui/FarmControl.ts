@@ -1,6 +1,6 @@
 import "./FarmControl.css";
 import type { FarmChoice, FarmRequest } from "../farming/FarmInteraction.js";
-import { inputHint, keyboardHint } from "../input/InputHints.js";
+import { actionHint, type KeyHint } from "../input/InputHints.js";
 import { type PageInset, shift } from "../input/ViewRect.js";
 
 function targetKey(request: FarmRequest | null | undefined): string {
@@ -19,7 +19,10 @@ export class FarmControl {
   private busy = false;
   private feedback = "";
 
-  constructor(private readonly send: (request: FarmRequest) => Promise<unknown>) {
+  constructor(
+    private readonly send: (request: FarmRequest) => Promise<unknown>,
+    private readonly keyHint?: KeyHint,
+  ) {
     this.root.className = "farm-control";
     this.root.hidden = true;
     this.button.type = "button";
@@ -39,7 +42,7 @@ export class FarmControl {
     this.root.hidden = !choice;
     this.button.hidden = !choice?.request;
     this.button.disabled = this.busy;
-    const hint = inputHint(keyboardHint("enter_place"), "Y");
+    const hint = actionHint("enter_place", this.keyHint);
     const label = choice?.request ? [choice.label, hint].filter(Boolean).join(" · ") : "";
     if (this.button.textContent !== label) this.button.textContent = label;
     const status =

@@ -4,6 +4,14 @@ import {
   type FirstPersonViewDistance,
   viewDistance,
 } from "../config/firstPersonViewDistance.js";
+import type { ActionName } from "../input/ActionMap.js";
+import { keyboardHint } from "../input/InputHints.js";
+import {
+  hostKeyMap,
+  type KeyboardSide,
+  keyboardSide,
+  keyboardSideLabel,
+} from "../input/KeyboardSchemes.js";
 import { keyLabel } from "../input/KeyLabels.js";
 import type { TouchMovementMode } from "../input/TapMovement.js";
 import { type CarDrivingStyle, DEFAULT_CAR_DRIVING } from "../traffic/CarControls.js";
@@ -18,6 +26,8 @@ export class OptionsDialog {
   private status = document.createElement("p");
   private pinch = document.createElement("input");
   private saving = false;
+  private keyboard = document.createElement("select");
+  private keyboardHelp = document.createElement("p");
   private carStyle = document.createElement("select");
   private firstPerson = document.createElement("input");
   private firstPersonHelp = document.createElement("p");
@@ -36,6 +46,7 @@ export class OptionsDialog {
     private selectDistance: (distance: FirstPersonViewDistance) => Promise<void>,
     private selectFirstPersonControls: (controls: FirstPersonControls) => Promise<void>,
     private selectWildlifeModels: (enabled: boolean) => Promise<void>,
+    private selectKeyboardSide: (side: KeyboardSide) => Promise<void>,
     private selectDynamicShadows: (enabled: boolean) => Promise<void> = async () => {},
   ) {
     const d = this.dialog;
@@ -78,6 +89,14 @@ export class OptionsDialog {
     pinchHelp.id = "options-pinch-help";
     pinchHelp.textContent =
       "Put two fingers on the world together, then spread or pinch them. Joystick movement and action buttons block zoom.";
+    const keyboard = document.createElement("label");
+    keyboard.className = "options-driving";
+    keyboard.append("Keyboard side ", this.keyboard);
+    this.keyboard.setAttribute("aria-describedby", "options-keyboard-help");
+    this.keyboardHelp.id = "options-keyboard-help";
+    this.keyboard.onchange = () => {
+      void this.chooseKeyboardSide();
+    };
     const driving = document.createElement("label");
     driving.className = "options-driving";
     driving.append("Car controls ", this.carStyle);
@@ -162,7 +181,7 @@ export class OptionsDialog {
     const drivingHelp = document.createElement("p");
     drivingHelp.id = "options-driving-help";
     drivingHelp.textContent =
-      "Point behind to reverse. Steering: ↑ forward, ↓ reverse, ←/→ steer. Taps always aim.";
+      "Point behind to reverse. In steering mode, use forward/back to drive and left/right to steer. Taps always aim.";
     this.status.setAttribute("role", "status");
     this.status.className = "options-status";
     const back = this.button("Back to game", () => this.hide());
@@ -172,6 +191,8 @@ export class OptionsDialog {
       heading,
       choices,
       this.help,
+      keyboard,
+      this.keyboardHelp,
       driving,
       drivingHelp,
       zoom,
@@ -214,22 +235,27 @@ export class OptionsDialog {
     controls: FirstPersonControls = "simple",
     wildlifeModels = true,
     dynamicShadows = false,
+    side: KeyboardSide = "left",
   ): void {
     this.opener = opener;
     this.status.textContent = "";
     this.setMode(mode);
     this.pinch.checked = pinchZoom;
     this.carStyle.value = carDriving;
+    this.keyboard.replaceChildren(
+      new Option(`Left · ${keyboardSideLabel("left")}`, "left"),
+      new Option(`Right · ${keyboardSideLabel("right")}`, "right"),
+    );
+    this.keyboard.value = side;
     this.firstPerson.checked = firstPerson;
     this.distance.value = distance;
     this.firstPersonControls.value = controls;
     this.showWildlifeModels(wildlifeModels);
     this.showDynamicShadows(dynamicShadows);
-    this.updateFirstPersonControlsHelp();
+    this.updateKeyboardHelp();
     // Key labels follow the player's layout, which may be learned during play.
     const k = keyLabel;
     this.firstPersonHelp.textContent = `${k("KeyV")} switches first-person view until you reload; this box is the saved choice. A controller's right stick looks around in either control mode. With touch Joystick, drag on the left half to move and on the right half to look around.`;
-    this.controls.textContent = `A / ${k("Space")} Jump · X / ${k("KeyB")} Throw · Y / ${k("KeyE")} Interact · RT / Shift Fast · RB / ${k("KeyH")} Horn · D-pad ↑ / ${k("KeyL")} Lights · D-pad → / ${k("KeyK")} Siren style. LB / Tab Build–Play · View / ${k("KeyG")} Map · Menu / Escape Pause. Right stick moves the cursor over the world and tools (in first person it looks around); A or RT selects. In menus: A Select · B Back. While building: RT Paint · LT Erase · Y Tools.`;
     if (!this.visible) this.dialog.showModal();
     activateMenu(this.dialog, () => this.hide(), false);
     this.cards.find((c) => c.dataset.mode === mode)?.focus();
@@ -279,6 +305,7 @@ export class OptionsDialog {
     this.saving = true;
     const controls = [
       ...this.cards,
+      this.keyboard,
       this.pinch,
       this.carStyle,
       this.firstPerson,
@@ -329,15 +356,30 @@ export class OptionsDialog {
       () => this.distance,
     );
   }
-  private updateFirstPersonControlsHelp(): void {
-    const k = keyLabel;
+  private updateKeyboardHelp(): void {
+    const side = keyboardSide(this.keyboard.value);
+    const map = hostKeyMap(side);
+    const k = (action: ActionName) => keyboardHint(action, map);
+    const shift = side === "left" ? "Left Shift" : "Right Shift";
+    this.keyboardHelp.textContent = `${k("jump")} Jump · ${k("enter_place")} Interact · ${shift} Run · ${k("throw")} Throw. This side works in solo and local multiplayer.`;
+    const forward = `${k("move_up")}/${k("move_down")}`;
+    const sideways = `${k("move_left")}/${k("move_right")}`;
     this.firstPersonControlsHelp.textContent =
       this.firstPersonControls.value === "simple"
-        ? `${k("KeyW")}/${k("KeyS")} or ↑/↓ walk forward/back. ${k("KeyA")}/${k("KeyD")} or ←/→ turn. Hold forward and turn to walk in a curve. No mouse needed.`
-        : `${k("KeyW")}/${k("KeyS")} walk forward/back; ${k("KeyA")}/${k("KeyD")} strafe. Click the world to capture the mouse and look around; Escape releases it.`;
+        ? `${forward} walk forward/back. ${sideways} turn. Hold forward and turn to walk in a curve.`
+        : `${forward} walk forward/back. ${sideways} strafe. Click the world to look around with the mouse. Press Escape to release it.`;
+    this.controls.textContent = `A / ${k("jump")} Jump · X / ${k("throw")} Throw · Y / ${k("enter_place")} Interact · RT / ${shift} Fast · RB / ${k("honk")} Horn · D-pad ↑ / ${k("vehicle_lights")} Lights · D-pad → / ${k("vehicle_style")} Siren style. LB / Tab Build–Play · View / ${k("toggle_world_map")} Map · Menu / Escape Pause. Right stick moves the cursor over the world and tools (in first person it looks around); A or RT selects. In menus: A Select · B Back. While building: RT Paint · LT Erase · Y Tools.`;
+  }
+  private chooseKeyboardSide(): Promise<void> {
+    this.updateKeyboardHelp();
+    return this.save(
+      () => this.selectKeyboardSide(keyboardSide(this.keyboard.value)),
+      "Keyboard side saved for this player.",
+      () => this.keyboard,
+    );
   }
   private chooseFirstPersonControls(): Promise<void> {
-    this.updateFirstPersonControlsHelp();
+    this.updateKeyboardHelp();
     return this.save(
       () => this.selectFirstPersonControls(firstPersonControls(this.firstPersonControls.value)),
       "First-person controls saved for this player.",

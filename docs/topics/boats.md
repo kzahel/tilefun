@@ -31,8 +31,9 @@ imply appearance approval.
 
 Use **Edit → Vehicles → Explorer motorboat** to place it on clear loaded water,
 or find a natural boat at the quiet northern beach of a new large regional lake.
-Stand beside it and press **E / Drive boat**. WASD/arrows, touch and controller
-use ordinary vehicle inputs; R/Reverse backs up. The visible driver is parented
+Stand beside it and use **Drive boat** or your Interact key. Steer with your
+movement keys, touch or controller. Use Reverse to back up (R on the left
+keyboard layout, Comma on the right). The visible driver is parented
 to the open seat. Return beside a clear dry shore to get out. Open-water exit
 is refused. Boats stay parked, save their position/heading and occupied seat,
 and retain deletion through normal streaming and reload.

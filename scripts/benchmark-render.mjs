@@ -408,13 +408,11 @@ const playerAt = (page) =>
 function autopilot() {
   const g = document.querySelector("#game").__game;
   const held = new Set();
-  const key = (name, down) => {
-    if (held.has(name) === down) return;
-    if (down) held.add(name);
-    else held.delete(name);
-    window.dispatchEvent(
-      new KeyboardEvent(down ? "keydown" : "keyup", { key: name, code: name, bubbles: true }),
-    );
+  const key = (code, down) => {
+    if (held.has(code) === down) return;
+    if (down) held.add(code);
+    else held.delete(code);
+    window.dispatchEvent(new KeyboardEvent(down ? "keydown" : "keyup", { code, bubbles: true }));
   };
   const DIRS = [
     [1, 0],
@@ -463,9 +461,9 @@ function autopilot() {
     const offset = ((right - left) / 2 + (right + left + 1) / 4) * 16;
     const want = dir * (Math.PI / 2) + Math.max(-0.5, Math.min(0.5, offset / 48));
     const error = Math.atan2(Math.sin(want - heading), Math.cos(want - heading));
-    key("ArrowRight", error > 0.06);
-    key("ArrowLeft", error < -0.06);
-    key("ArrowUp", true);
+    key("KeyD", error > 0.06);
+    key("KeyA", error < -0.06);
+    key("KeyW", true);
   }, 100);
   window.__driven = () => Math.round(path);
   window.__autopilot = () => {

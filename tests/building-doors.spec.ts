@@ -68,7 +68,7 @@ for (const kind of ["butcher", "condo-bay"]) {
         async () => {
           const delta = exit.arrival.wx - (await state()).player.wx;
           if (Math.abs(delta) < 15) return true;
-          await page.keyboard.press(delta > 0 ? "ArrowRight" : "ArrowLeft", {
+          await page.keyboard.press(delta > 0 ? "KeyD" : "KeyA", {
             delay: Math.max(75, Math.min(1000, (Math.abs(delta) / 60) * 500)),
           });
           return false;
@@ -189,7 +189,7 @@ for (const kind of ["butcher", "condo-bay"]) {
       };
     });
     // Clear the arrival latch with real movement before making a fresh approach.
-    await page.keyboard.down("ArrowDown");
+    await page.keyboard.down("KeyS");
     await page.waitForFunction(
       (y) =>
         (
@@ -199,22 +199,22 @@ for (const kind of ["butcher", "condo-bay"]) {
         ).__game.stateView.playerEntity.position.wy > y,
       door.outside.wy + 64,
     );
-    await page.keyboard.up("ArrowDown");
-    await page.keyboard.down("ArrowUp");
+    await page.keyboard.up("KeyS");
+    await page.keyboard.down("KeyW");
     const fade = page.locator('[data-door-fade="true"]');
     await expect(fade).toHaveAttribute("data-stage", "depart");
-    await page.keyboard.up("ArrowUp");
+    await page.keyboard.up("KeyW");
     await page.screenshot({ path: `/tmp/tilefun-auto-door-${kind}-opening.png` });
     await expect(page.locator("#game")).toHaveAttribute("data-interior", /interior-v1/);
     await expect(fade).toHaveAttribute("data-stage", "idle");
     await page.screenshot({ path: `/tmp/tilefun-auto-door-${kind}.png` });
     // The arrival latch requires walking clear before attempting the reverse trip.
-    await page.keyboard.down("ArrowUp");
+    await page.keyboard.down("KeyW");
     await page.waitForTimeout(300);
-    await page.keyboard.up("ArrowUp");
-    await page.keyboard.down("ArrowDown");
+    await page.keyboard.up("KeyW");
+    await page.keyboard.down("KeyS");
     await expect(fade).toHaveAttribute("data-stage", "depart");
-    await page.keyboard.up("ArrowDown");
+    await page.keyboard.up("KeyS");
     await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
     await expect(fade).toHaveAttribute("data-stage", "arrive");
     await page.screenshot({ path: `/tmp/tilefun-exit-${kind}-emerging.png` });
@@ -242,9 +242,9 @@ for (const kind of ["butcher", "condo-bay"]) {
     ).toBe(true);
     await page.reload();
     await expect(page.locator("#game")).toHaveAttribute("data-ready", "true");
-    await page.keyboard.down("ArrowUp");
+    await page.keyboard.down("KeyW");
     await page.waitForTimeout(450);
-    await page.keyboard.up("ArrowUp");
+    await page.keyboard.up("KeyW");
     await expect(page.locator("#game")).toHaveAttribute("data-interior", "");
     expect(errors).toEqual([]);
   });

@@ -1,13 +1,15 @@
 import { type ActionMapConfig, type ActionName, DEFAULT_ACTION_MAP } from "./ActionMap.js";
+import { keyLabel } from "./KeyLabels.js";
 
-/**
- * Keyboard ownership for local players (tactical 226). One player owning the
- * keyboard keeps today's full map, both WASD and the arrows. A second player
- * joins with the right-hand scheme; seat 0 then keeps every key the right hand
- * does not use, plus the left scheme's own keys (`hostKeyMap`), so the page and
- * editor keys stay with it and neither scheme can press the other's keys.
- */
-export type KeyboardScheme = "solo" | "left" | "right";
+export type KeyboardSide = "left" | "right";
+
+export function keyboardSide(value: unknown): KeyboardSide {
+  return value === "right" ? "right" : "left";
+}
+
+export function otherKeyboardSide(side: KeyboardSide): KeyboardSide {
+  return side === "left" ? "right" : "left";
+}
 
 /** Actions that belong to one seat rather than to the page. */
 export const SEAT_ACTIONS = [
@@ -28,36 +30,18 @@ export const SEAT_ACTIONS = [
   "hotbar_next",
 ] as const satisfies readonly ActionName[];
 export type SeatAction = (typeof SEAT_ACTIONS)[number];
-
-/** Page-owned actions seat 0 keeps while a keyboard guest plays. */
-export const SHARED_PAGE_ACTIONS = [
-  "toggle_menu",
-  "toggle_world_map",
-  "toggle_phone",
-  "toggle_debug",
-  "toggle_console",
-  "toggle_editor",
-  "zoom_0",
-  "zoom_1",
-  "zoom_2",
-  "zoom_3",
-  "zoom_4",
-  "toggle_first_person",
-] as const satisfies readonly ActionName[];
-
-/** The key a keyboard guest presses to join: the right-hand scheme's jump. */
-export const KEYBOARD_JOIN_KEY = "Slash";
+type SeatKeys = Record<SeatAction, [string, ...string[]]>;
 
 /** Left hand: WASD with nearby actions. */
-const LEFT: Record<SeatAction, string[]> = {
+const LEFT: SeatKeys = {
   move_up: ["KeyW"],
   move_down: ["KeyS"],
   move_left: ["KeyA"],
   move_right: ["KeyD"],
   sprint: ["ShiftLeft"],
   jump: ["Space"],
-  throw: ["KeyQ"],
-  honk: ["Space"],
+  throw: ["KeyQ", "KeyB"],
+  honk: ["Space", "KeyH"],
   reverse: ["KeyR"],
   vehicle_lights: ["KeyZ"],
   vehicle_style: ["KeyX"],
@@ -69,7 +53,7 @@ const LEFT: Record<SeatAction, string[]> = {
 
 /** Right hand: the arrows with the keys around them. Enter is avoided so a
  * focused button keeps its activation key. */
-const RIGHT: Record<SeatAction, string[]> = {
+const RIGHT: SeatKeys = {
   move_up: ["ArrowUp"],
   move_down: ["ArrowDown"],
   move_left: ["ArrowLeft"],
@@ -87,14 +71,18 @@ const RIGHT: Record<SeatAction, string[]> = {
   hotbar_next: ["Equal"],
 };
 
-function bindings(keys: Record<SeatAction, string[]>): ActionMapConfig {
+/** A keyboard guest uses one side. Labs can use the full default map. */
+export function seatKeyMap(scheme: KeyboardSide | "solo"): ActionMapConfig {
+  if (scheme === "solo") return DEFAULT_ACTION_MAP;
+  const keys = scheme === "left" ? LEFT : RIGHT;
   return SEAT_ACTIONS.map((action) => ({ action, keys: [...keys[action]] }));
 }
 
-/** A seat's key map. "solo" is the whole default map, page keys included. */
-export function seatKeyMap(scheme: KeyboardScheme): ActionMapConfig {
-  if (scheme === "solo") return DEFAULT_ACTION_MAP;
-  return bindings(scheme === "left" ? LEFT : RIGHT);
+export function keyboardSideLabel(side: KeyboardSide): string {
+  if (side === "right") return "arrow keys";
+  return [LEFT.move_up, LEFT.move_left, LEFT.move_down, LEFT.move_right]
+    .map(([code]) => keyLabel(code))
+    .join("");
 }
 
 /** A seat's keys without page keys: embedded labs leave Tab, Escape, digits
@@ -104,13 +92,18 @@ export function seatOnly(map: ActionMapConfig): ActionMapConfig {
   return map.filter((binding) => seat.has(binding.action));
 }
 
-/** Seat 0's keys while a keyboard guest plays the right-hand scheme: the whole map
- * without the right hand's keys, plus the left scheme. */
-export function hostKeyMap(): ActionMapConfig {
-  const right = new Set(Object.values(RIGHT).flat());
-  return DEFAULT_ACTION_MAP.map(({ action, keys }) => {
-    const own = keys.filter((key) => !right.has(key));
-    const left = (LEFT as Partial<Record<ActionName, string[]>>)[action] ?? [];
-    return { action, keys: [...new Set([...own, ...left])] };
-  }).filter((binding) => binding.keys.length > 0);
+/** The main player adds page and editor shortcuts to the same play map as a guest. */
+export function hostKeyMap(side: KeyboardSide): ActionMapConfig {
+  const page = DEFAULT_ACTION_MAP.filter(
+    ({ action }) => !SEAT_ACTIONS.some((seat) => seat === action),
+  );
+  return [
+    ...seatKeyMap(side),
+    // Leave D available to the guest when the host plays on the right.
+    ...page.map((binding) =>
+      binding.action === "toggle_base_mode" && side === "right"
+        ? { ...binding, keys: ["F4"] }
+        : binding,
+    ),
+  ];
 }

@@ -71,6 +71,8 @@ export class MainMenu {
   onDevelopmentReload: (() => void) | null = null;
   /** Adds local guests' buttons to the home page (226: a guest leaves from the menu). */
   seatActions: (add: (label: string, run: () => void) => void) => void = () => {};
+  /** The current keyboard assignments for the Local multiplayer menu. */
+  localKeyboardHelp: () => string = () => "Add a player to share this device.";
   /** Local join/leave controls, separate from online hosting and invitations. */
   localPlayerActions: (add: (label: string, run: () => void, disabled?: boolean) => void) => void =
     () => {};
@@ -261,9 +263,7 @@ export class MainMenu {
       localTitle.textContent = "Local multiplayer";
       this.content.append(localTitle);
       if (this.currentWorldId) {
-        this.message(
-          "Play together on this device. Player 1 uses WASD or the first controller. Add a keyboard player for arrow keys and / to jump.",
-        );
+        this.message(this.localKeyboardHelp());
         this.localPlayerActions((label, run, disabled) => {
           this.button(label, run).disabled = disabled ?? false;
         });

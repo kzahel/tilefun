@@ -83,15 +83,15 @@ test("saved car controls, keyboard steering, automatic reverse taps and dynamic 
   await expect(page.getByLabel("Car controls", { exact: true })).toHaveValue("steering");
   await page.getByRole("button", { name: "Back to game", exact: true }).click();
   const start = await state(page);
-  await page.keyboard.down("ArrowUp");
+  await page.keyboard.down("KeyW");
   await expect.poll(async () => (await state(page)).x).toBeGreaterThan(start.x + 12);
-  await page.keyboard.up("ArrowUp");
+  await page.keyboard.up("KeyW");
   await expect.poll(async () => (await state(page)).speed).toBeLessThan(0.1);
   expect((await state(page)).heading).toBeCloseTo(0, 5);
   const forward = await state(page);
-  await page.keyboard.down("ArrowDown");
+  await page.keyboard.down("KeyS");
   await expect.poll(async () => (await state(page)).x).toBeLessThan(forward.x - 12);
-  await page.keyboard.up("ArrowDown");
+  await page.keyboard.up("KeyS");
   await expect.poll(async () => (await state(page)).speed).toBeLessThan(0.1);
   // Tap targets stay world-relative even with the manual steering preference.
   const beforeTap = await state(page);
@@ -124,21 +124,21 @@ test("saved car controls, keyboard steering, automatic reverse taps and dynamic 
   await expect(page.getByRole("status").filter({ hasText: "Car controls saved" })).toBeVisible();
   await page.getByRole("button", { name: "Back to game", exact: true }).click();
   const parkedX = (await state(page)).otherX;
-  await page.keyboard.down("ArrowRight");
+  await page.keyboard.down("KeyD");
   await expect.poll(async () => (await state(page)).x).toBeGreaterThan(75);
   // Both cars are dynamic: contact pushes the parked chassis instead of acting
   // as an immovable wall. Releasing the throttle must still bring us to rest.
   await expect.poll(async () => (await state(page)).otherX).toBeGreaterThan(parkedX + 6);
-  await page.keyboard.up("ArrowRight");
+  await page.keyboard.up("KeyD");
   await expect.poll(async () => (await state(page)).speed).toBeLessThan(0.1);
   const contact = await state(page);
   // Full rotating shape separation belongs to native physics tests; an XY
   // envelope overlap is not penetration. Here verify the input/contact flow.
   expect(contact.x).toBeLessThan(contact.otherX);
   await page.screenshot({ path: testInfo.outputPath("car-contact.png") });
-  await page.keyboard.down("ArrowLeft");
+  await page.keyboard.down("KeyA");
   await expect.poll(async () => (await state(page)).x).toBeLessThan(contact.x - 12);
-  await page.keyboard.up("ArrowLeft");
+  await page.keyboard.up("KeyA");
   await expect.poll(async () => (await state(page)).speed).toBeLessThan(0.1);
   await page.locator('button[aria-label="Options"]').click();
   await page.getByLabel("Car controls", { exact: true }).selectOption("steering");

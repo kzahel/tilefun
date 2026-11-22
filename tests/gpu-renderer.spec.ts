@@ -146,9 +146,9 @@ test("default GPU mesh host runs the shared game and retains the input/UI canvas
   expect(capture.visible).toBe(true);
   expect(capture.independentSnapshot).toBe(true);
   await page.keyboard.press("Escape");
-  await page.keyboard.down("ArrowRight");
+  await page.keyboard.down("KeyD");
   await page.waitForTimeout(250);
-  await page.keyboard.up("ArrowRight");
+  await page.keyboard.up("KeyD");
   expect(errors).toEqual([]);
 });
 
