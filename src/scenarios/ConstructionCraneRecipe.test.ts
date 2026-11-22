@@ -27,7 +27,11 @@ it("loads a real pallet onto the flatbed and swings the ball through the practic
     };
     await wait(55);
     const { entityManager } = session.realm;
-    const crane = required(entityManager.entities.find(isMobileCrane));
+    const crane = required(
+      entityManager.entities.find(
+        (e) => isMobileCrane(e) && e.proceduralId?.endsWith(":mobile-crane"),
+      ),
+    );
     const flatbed = required(entityManager.entities.find(isFlatbed));
     session.realm.vehicles.enter(session.player, crane.id);
     const rig = () => craneRig(crane.vehicleExcavator);
@@ -123,7 +127,11 @@ it("loads a real pallet onto the flatbed and swings the ball through the practic
     const oldBall = ball.persistentId;
     await session.reload();
     await wait(10);
-    const restored = required(session.realm.entityManager.entities.find(isMobileCrane));
+    const restored = required(
+      session.realm.entityManager.entities.find(
+        (e) => isMobileCrane(e) && e.proceduralId?.endsWith(":mobile-crane"),
+      ),
+    );
     expect(restored.vehicleExcavator).toBe(oldPose);
     const restoredBall = required(
       session.realm.entityManager.byId.get(required(restored.vehicleCraneLoadId)),

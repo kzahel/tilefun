@@ -8,6 +8,7 @@ import {
   WRECKING_BALL,
 } from "../entities/ConstructionCargo.js";
 import type { Entity } from "../entities/Entity.js";
+import { isPlaygroundBody, MARBLE_CHUTE, SEESAW } from "../entities/PhysicsPlayground.js";
 import { isTrain } from "../railway/Train.js";
 import { hasDumpBed } from "../traffic/DumpBed.js";
 import { fineExcavatorPose, isExcavator } from "../traffic/Excavator.js";
@@ -28,6 +29,7 @@ import {
 } from "./PhysicsBodies.js";
 import { PHYSICS_PIXELS_PER_METRE as SCALE } from "./PhysicsDefaults.js";
 import type { PhysicsBodyKind, PhysicsBodyState } from "./PhysicsState.js";
+import { playgroundShape } from "./PlaygroundShapes.js";
 import { TransporterBody } from "./TransporterBody.js";
 import { VehicleChassis } from "./VehicleChassis.js";
 
@@ -105,6 +107,10 @@ function rigidBody(
   if (car) desc.setAngularDamping(0.35);
   else if (entity.type === CONSTRUCTION_CRATE) desc.setAngularDamping(0.35).setLinearDamping(0.6);
   else if (isWoodenCargo(entity.type)) desc.setAngularDamping(0.65).setLinearDamping(1.5);
+  else if (entity.type === SEESAW)
+    desc.lockTranslations().enabledRotations(false, false, true).setAngularDamping(1.2);
+  else if (entity.type === MARBLE_CHUTE) desc.setLinearDamping(1.2).setAngularDamping(0.8);
+  else if (entity.type === WRECKING_BALL) desc.setLinearDamping(0.08).setAngularDamping(0.16);
   else if (kind !== "loose") desc.enabledRotations(false, kind === "vehicle", false);
   else desc.lockRotations().setLinearDamping(1.5);
   const body = world.createRigidBody(desc);
@@ -142,20 +148,22 @@ function colliderDesc(
   const shape =
     entity.type === "ball" || entity.type === WRECKING_BALL
       ? RAPIER.ColliderDesc.ball(Math.min(hx, hz, halfY))
-      : isWoodenCargo(entity.type)
-        ? new RAPIER.ColliderDesc(woodenCargoShape(entity.type))
-        : articulated
-          ? articulated.colliderDesc()
-          : car && isFlatbed(entity)
-            ? flatbedCollider(hx, halfY, hz, clearance)
-            : kind === "character" || kind === "vehicle"
-              ? RAPIER.ColliderDesc.roundCuboid(
-                  hx - bevel,
-                  halfY - clearance / 2 - bevel,
-                  hz - bevel,
-                  bevel,
-                )
-              : RAPIER.ColliderDesc.cuboid(hx, halfY, hz);
+      : isPlaygroundBody(entity.type)
+        ? new RAPIER.ColliderDesc(playgroundShape(entity.type))
+        : isWoodenCargo(entity.type)
+          ? new RAPIER.ColliderDesc(woodenCargoShape(entity.type))
+          : articulated
+            ? articulated.colliderDesc()
+            : car && isFlatbed(entity)
+              ? flatbedCollider(hx, halfY, hz, clearance)
+              : kind === "character" || kind === "vehicle"
+                ? RAPIER.ColliderDesc.roundCuboid(
+                    hx - bevel,
+                    halfY - clearance / 2 - bevel,
+                    hz - bevel,
+                    bevel,
+                  )
+                : RAPIER.ColliderDesc.cuboid(hx, halfY, hz);
   shape
     .setTranslation(0, clearance / 2, 0)
     // The transporter's ramp and deck carry cars on their wheels, not by scraping.
@@ -177,6 +185,11 @@ function colliderDesc(
       halfY * (2 * CHASSIS_CENTRE_OF_MASS - 1) - clearance / 2,
     );
   else if (entity.type === WRECKING_BALL) shape.setMass(1.5);
+  else if (entity.type === SEESAW) {
+    // The translation lock acts at the centre of mass. Put it on the deck's axle.
+    setChassisBoxMass(shape, hx, halfY, hz, 6, 0);
+    shape.setFriction(0.9);
+  } else if (entity.type === MARBLE_CHUTE) shape.setMass(0.65).setFriction(0.85);
   else if (entity.type === CONSTRUCTION_CRATE)
     shape.setMass(0.24).setFriction(0.72).setRestitution(0.2);
   else if (entity.type === CONSTRUCTION_PALLET || entity.type === CONSTRUCTION_BLOCK)

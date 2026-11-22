@@ -7,7 +7,9 @@ import {
   CONSTRUCTION_BLOCK,
   CONSTRUCTION_CRATE,
   CONSTRUCTION_PALLET,
+  WRECKING_BALL,
 } from "../entities/ConstructionCargo.js";
+import { MARBLE_CHUTE, SEESAW } from "../entities/PhysicsPlayground.js";
 import type { SurfaceVisibility } from "../rendering/SurfacePresentation.js";
 import {
   GENERATED_CROSSINGS,
@@ -53,6 +55,8 @@ const FIXTURES = [
   "construction-crane",
   "construction-forklift",
   "construction-crate-run",
+  "construction-marble-run",
+  "construction-seesaw",
   "car-jumps",
   "tree-house",
   "outskirts-park",
@@ -148,8 +152,22 @@ function GeometryFixtures({ initial }: { initial: string }) {
       }),
       onFrame: ({ client }) => {
         const p = client.replica.playerEntity;
-        if (fixture === "construction-crane") {
-          const crane = client.replica.entities.find(isMobileCrane);
+        if (fixture === "construction-marble-run" || fixture === "construction-crane") {
+          const crane = client.replica.entities.find(
+            (e) =>
+              isMobileCrane(e) &&
+              (fixture === "construction-marble-run" ||
+                e.position.wy > recipe.player.position.wy - 26),
+          );
+          if (fixture === "construction-marble-run") {
+            const ball = client.replica.entities.find((e) => e.type === WRECKING_BALL);
+            const chute = client.replica.entities.find((e) => e.type === MARBLE_CHUTE);
+            c.dataset.marbleX = String(ball?.position.wx ?? "");
+            c.dataset.marbleChuteZ = String(chute?.wz ?? 0);
+            c.dataset.marbleForkliftY = String(
+              client.replica.entities.find(isForklift)?.position.wy ?? 0,
+            );
+          }
           if (crane) {
             const flatbed = client.replica.entities.find(isFlatbed);
             c.dataset.cranePalletsOnDeck = String(
@@ -187,8 +205,14 @@ function GeometryFixtures({ initial }: { initial: string }) {
             !!flatbed && pallets.some((e) => onFlatbed(flatbed, e)),
           );
         }
+        if (fixture === "construction-seesaw") {
+          const deck = client.replica.entities.find((e) => e.type === SEESAW);
+          c.dataset.seesawTilt = String(deck?.bodyRotation?.[1] ?? 0);
+        }
         if (fixture === "construction-crate-run") {
-          const crates = client.replica.entities.filter((e) => e.type === CONSTRUCTION_CRATE);
+          const crates = client.replica.entities.filter(
+            (e) => e.type === CONSTRUCTION_CRATE && e.position.wy > recipe.player.position.wy - 112,
+          );
           c.dataset.crateCount = String(crates.length);
           c.dataset.cratesStacked = String(crates.filter((e) => (e.wz ?? 0) > 27).length);
           c.dataset.cratesTumbling = String(

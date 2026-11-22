@@ -50,6 +50,7 @@ import {
   createPerson19,
   createPerson20,
 } from "./Person.js";
+import { MARBLE_CHUTE, MARBLE_TRACK, SEESAW, SEESAW_PIVOT } from "./PhysicsPlayground.js";
 import { createPigeon } from "./Pigeon.js";
 import { createPigeon2 } from "./Pigeon2.js";
 import { createSeagull } from "./Seagull.js";
@@ -71,6 +72,10 @@ export const ENTITY_FACTORIES: Record<string, (wx: number, wy: number) => Entity
   [CONSTRUCTION_CRATE]: (x, y) => createConstructionCargo(CONSTRUCTION_CRATE, x, y),
   [CONSTRUCTION_PALLET]: (x, y) => createConstructionCargo(CONSTRUCTION_PALLET, x, y),
   [CONSTRUCTION_BLOCK]: (x, y) => createConstructionCargo(CONSTRUCTION_BLOCK, x, y),
+  [MARBLE_TRACK]: (x, y) => createConstructionCargo(MARBLE_TRACK, x, y),
+  [MARBLE_CHUTE]: (x, y) => createConstructionCargo(MARBLE_CHUTE, x, y),
+  [SEESAW]: (x, y) => createConstructionCargo(SEESAW, x, y),
+  [SEESAW_PIVOT]: (x, y) => createConstructionCargo(SEESAW_PIVOT, x, y),
   [WRECKING_BALL]: (x, y) => createConstructionCargo(WRECKING_BALL, x, y),
   [CONSTRUCTION_RUBBLE]: createConstructionRubble,
   chicken: createChicken,

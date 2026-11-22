@@ -1,5 +1,8 @@
 # Vehicles: shared physics baseline
 
+[265](../tactical/265-construction-playground.md) adds a crane-fed marble
+run with a forklift-movable exit chute and a vehicle-weight-driven seesaw.
+
 [264](../tactical/264-forklift.md) adds a working forklift to construction
 yards. The hold controls slide the forks up the mast and tilt them. Physical
 fork tines fit between wooden runners and lift the load through contact.

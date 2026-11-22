@@ -8,6 +8,12 @@ import { CONSTRUCTION_RUBBLE } from "../../entities/ConstructionRubble.js";
 import { Direction } from "../../entities/Entity.js";
 import { RoadType } from "../../road/RoadType.js";
 import type { ActorPlacement } from "../Generator.js";
+import {
+  MARBLE_CRANE_START,
+  marbleRunActors,
+  SEESAW_CAR_START,
+  seesawActors,
+} from "./ConstructionPlayground.js";
 import type { MotocrossPark } from "./MotocrossPlanner.js";
 import type { VehicleDepot } from "./VehicleDepotPlanner.js";
 
@@ -17,6 +23,9 @@ export interface ConstructionYard extends VehicleDepot {
 }
 
 export const CRATE_RUN_CAR = "race-coupe";
+
+export const YARD_MARBLE_RUN = { x: -1.5, y: -12.75 };
+export const YARD_SEESAW = { x: -14.875, y: 2.9 };
 
 const plans = new WeakMap<MotocrossPark, ConstructionYard>();
 
@@ -34,8 +43,8 @@ export function constructionYard(park: MotocrossPark): ConstructionYard {
     wx: (x + dx) * 16,
     wy: (y + dy) * 16,
   });
-  const vehicle = (model: string, dx: number, dy: number) => ({
-    identity: `placed-vehicle-v1:${id}:${model}`,
+  const vehicle = (model: string, dx: number, dy: number, role = model) => ({
+    identity: `placed-vehicle-v1:${id}:${role}`,
     model,
     wx: (x + dx) * 16,
     wy: (y + dy) * 16,
@@ -54,7 +63,7 @@ export function constructionYard(park: MotocrossPark): ConstructionYard {
     name: park.name.replace(/Motocross park$/, "Construction yard"),
     center: at(0, 0),
     arrival: at(-6, -2.5),
-    bounds: { minX: x - 17, maxX: x + 17, minY: y - 12, maxY: y + 15 },
+    bounds: { minX: x - 26, maxX: x + 17, minY: y - 15, maxY: y + 15 },
     vehicles: [
       vehicle("excavator", -6, 0),
       vehicle("dump-truck", -4, 4.5),
@@ -63,6 +72,18 @@ export function constructionYard(park: MotocrossPark): ConstructionYard {
       vehicle("forklift", -5.25, -6.6),
       vehicle("flatbed-truck", 6.4, 3.25),
       vehicle(CRATE_RUN_CAR, -11.5, 9.2),
+      vehicle(
+        "mobile-crane",
+        YARD_MARBLE_RUN.x + MARBLE_CRANE_START.wx / 16,
+        YARD_MARBLE_RUN.y + MARBLE_CRANE_START.wy / 16,
+        "marble-crane",
+      ),
+      vehicle(
+        "rally-hatchback",
+        YARD_SEESAW.x + SEESAW_CAR_START.wx / 16,
+        YARD_SEESAW.y,
+        "seesaw-car",
+      ),
     ],
     props: [
       prop("shed", "prop-shed", 11, -7),
@@ -80,6 +101,23 @@ export function constructionYard(park: MotocrossPark): ConstructionYard {
       ].map(([dx = 0, dy = 0], i) => prop(`stone:${i}`, "prop-low-rock", dx, dy)),
     ],
     cargo: [
+      ...marbleRunActors().map((actor) =>
+        cargo(
+          `marble:${actor.name}`,
+          actor.type,
+          YARD_MARBLE_RUN.x + actor.wx / 16,
+          YARD_MARBLE_RUN.y + actor.wy / 16,
+          "wz" in actor ? actor.wz : undefined,
+        ),
+      ),
+      ...seesawActors().map((actor) =>
+        cargo(
+          `seesaw:${actor.name}`,
+          actor.type,
+          YARD_SEESAW.x + actor.wx / 16,
+          YARD_SEESAW.y + actor.wy / 16,
+        ),
+      ),
       cargo("pallet:1", CONSTRUCTION_PALLET, 10.3, -4.38),
       cargo("pallet:2", CONSTRUCTION_PALLET, 10.65, -5.75),
       cargo("forklift:pallet", CONSTRUCTION_PALLET, -1.55, -6.6),
@@ -127,6 +165,8 @@ export function yardRoad(yard: ConstructionYard, x: number, y: number): RoadType
   const dx = x - yard.center.x;
   const dy = y - yard.center.y;
   if (Math.abs(dx) < 3 && dy >= 10 && dy < 16) return RoadType.Asphalt;
+  if (dx >= -26 && dx < -8 && dy >= 1 && dy < 6) return RoadType.Asphalt;
+  if (Math.abs(dx) < 16 && dy >= -15 && dy < -10) return RoadType.Asphalt;
   if (Math.abs(dx) >= 17 || dy < -12 || dy >= 12) return;
   return dy >= 6 || (dx > 6 && dx < 15 && dy > -8) ? RoadType.Asphalt : RoadType.None;
 }

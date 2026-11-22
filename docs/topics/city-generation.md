@@ -10,6 +10,8 @@ pallets and a block stack inside the same yard. Each uses a stable yard identity
 nine-crate stack on the yard’s south apron.
 [264](../tactical/264-forklift.md) parks a working forklift and two pallets
 near the yard’s north fence.
+[265](../tactical/265-construction-playground.md) adds the marble run and
+staged crane on the north apron, with a vehicle seesaw on the west apron.
 
 Topic: city-generation
 Status: one evolving regional generator; same-seed recreation for retired saves.

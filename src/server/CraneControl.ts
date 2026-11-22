@@ -28,8 +28,7 @@ export function runCraneTool(
   const manager = realm.entityManager;
   const load = manager.byId.get(crane.vehicleCraneLoadId ?? -1);
   if (load?.type === WRECKING_BALL) {
-    if (action === "crane-hook") throw Error("Switch back to the hook to lift a pallet.");
-    manager.remove(load.id);
+    if (action === "crane-tool") manager.remove(load.id);
     releaseCraneLoad(crane);
     return;
   }
@@ -52,7 +51,9 @@ export function runCraneTool(
 
   const attached = new Set(manager.entities.map((e) => e.vehicleCraneLoadId));
   const candidates = manager.entities
-    .filter((e) => e.type === CONSTRUCTION_PALLET && !attached.has(e.id))
+    .filter(
+      (e) => (e.type === CONSTRUCTION_PALLET || e.type === WRECKING_BALL) && !attached.has(e.id),
+    )
     .map((e) => {
       const eye = craneCargoHook(e);
       const flat = Math.hypot(eye.wx - tip.wx, eye.wy - tip.wy);
@@ -62,7 +63,7 @@ export function runCraneTool(
     .filter(({ flat, distance }) => flat <= 13 && distance <= 15)
     .sort((a, b) => a.distance - b.distance || a.e.id - b.e.id);
   const target = candidates[0]?.e;
-  if (!target) throw Error("Lower the hook to a nearby pallet.");
+  if (!target) throw Error("Lower the hook to a nearby pallet or ball.");
   hookCraneLoad(crane, target);
 }
 

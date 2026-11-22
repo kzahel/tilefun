@@ -306,6 +306,46 @@
       "source": "public/assets/SOURCES.md"
     },
     {
+      "id": "construction-marble-track",
+      "name": "construction marble track",
+      "image": "assets/vehicles/construction-marble-track.png",
+      "width": 182,
+      "height": 101,
+      "tileSize": 16,
+      "fingerprint": "96cdae6d89b14cd4e1fdd27a34c1a147fcd16c534eea10503847a7b64487a911",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "construction-marble-chute",
+      "name": "construction marble chute",
+      "image": "assets/vehicles/construction-marble-chute.png",
+      "width": 48,
+      "height": 48,
+      "tileSize": 16,
+      "fingerprint": "f35178d163274dd32571c86117907f84c25cd743af6eae053d30801bb57e8c51",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "construction-seesaw",
+      "name": "construction seesaw",
+      "image": "assets/vehicles/construction-seesaw.png",
+      "width": 176,
+      "height": 72,
+      "tileSize": 16,
+      "fingerprint": "792b3b43ef2dc16e9f4e947820dde876ebd31bacdad394f022260479a3235a04",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
+      "id": "construction-seesaw-pivot",
+      "name": "construction seesaw pivot",
+      "image": "assets/vehicles/construction-seesaw-pivot.png",
+      "width": 32,
+      "height": 60,
+      "tileSize": 16,
+      "fingerprint": "a9fab052fd2e5dc1b4987a7ead80b27cdf8f4f2039e8ffc12d82d8609b052c4a",
+      "source": "public/assets/SOURCES.md"
+    },
+    {
       "id": "construction-rubble",
       "name": "construction rubble",
       "image": "assets/vehicles/construction-rubble.png",
@@ -10955,11 +10995,15 @@
       "consumers": [
         {
           "system": "World generation",
-          "source": "src/generation/regional/ConstructionYard.ts:72"
+          "source": "src/generation/regional/ConstructionYard.ts:93"
         },
         {
           "system": "Street starter review (candidate)",
           "source": "src/generation/regional/StreetRecipes.ts:31"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/ConstructionPlaygroundRecipe.ts:30"
         },
         {
           "system": "Gameplay",
@@ -11447,7 +11491,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/ConstructionYard.ts:80"
+          "source": "src/generation/regional/ConstructionYard.ts:101"
         },
         {
           "system": "Gameplay",
@@ -12085,7 +12129,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/ConstructionYard.ts:68"
+          "source": "src/generation/regional/ConstructionYard.ts:89"
         },
         {
           "system": "World generation",
@@ -12102,6 +12146,10 @@
         {
           "system": "Interiors",
           "source": "src/interiors/review/BuildingLayoutReviewCases.ts:90"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/ConstructionPlaygroundRecipe.ts:26"
         },
         {
           "system": "Gameplay",
@@ -12707,11 +12755,11 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/ConstructionYard.ts:69"
+          "source": "src/generation/regional/ConstructionYard.ts:90"
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/ConstructionYard.ts:70"
+          "source": "src/generation/regional/ConstructionYard.ts:91"
         },
         {
           "system": "World generation",
@@ -12756,6 +12804,14 @@
         {
           "system": "Gameplay",
           "source": "src/railway/RailwayStrategy.ts:136"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/ConstructionPlaygroundRecipe.ts:27"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/ConstructionPlaygroundRecipe.ts:28"
         },
         {
           "system": "Gameplay",
@@ -30495,7 +30551,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/ConstructionCargo.ts:4"
+          "source": "src/entities/ConstructionCargo.ts:16"
         }
       ]
     },
@@ -30517,7 +30573,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/ConstructionCargo.ts:6"
+          "source": "src/entities/ConstructionCargo.ts:18"
         }
       ]
     },
@@ -30539,7 +30595,103 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/ConstructionCargo.ts:7"
+          "source": "src/entities/ConstructionCargo.ts:19"
+        }
+      ]
+    },
+    {
+      "id": "sprite:construction-marble-track",
+      "sheetId": "construction-marble-track",
+      "rect": [
+        0,
+        0,
+        182,
+        101
+      ],
+      "label": "construction-marble-track · registered 182×101 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PhysicsPlayground.ts:4"
+        }
+      ]
+    },
+    {
+      "id": "sprite:construction-marble-chute",
+      "sheetId": "construction-marble-chute",
+      "rect": [
+        0,
+        0,
+        48,
+        48
+      ],
+      "label": "construction-marble-chute · registered 48×48 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PhysicsPlayground.ts:5"
+        }
+      ]
+    },
+    {
+      "id": "sprite:construction-seesaw",
+      "sheetId": "construction-seesaw",
+      "rect": [
+        0,
+        0,
+        176,
+        72
+      ],
+      "label": "construction-seesaw · registered 176×72 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PhysicsPlayground.ts:6"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/workshop/WorldGeometryCandidate.ts:77"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/workshop/build-manifest.ts:105"
+        }
+      ]
+    },
+    {
+      "id": "sprite:construction-seesaw-pivot",
+      "sheetId": "construction-seesaw-pivot",
+      "rect": [
+        0,
+        0,
+        32,
+        60
+      ],
+      "label": "construction-seesaw-pivot · registered 32×60 frames",
+      "kind": "sprite",
+      "consumers": [
+        {
+          "system": "Shared asset loader (registered)",
+          "source": "src/assets/GameAssets.ts"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/entities/PhysicsPlayground.ts:7"
         }
       ]
     },
@@ -36841,11 +36993,11 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsBodies.ts:21"
+          "source": "src/physics/PhysicsBodies.ts:26"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsBodies.ts:37"
+          "source": "src/physics/PhysicsBodies.ts:43"
         },
         {
           "system": "Gameplay",
@@ -37639,7 +37791,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityFactories.ts:87"
+          "source": "src/entities/EntityFactories.ts:92"
         }
       ]
     },
@@ -38009,15 +38161,15 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/PhysicsBodies.ts:26"
+          "source": "src/physics/PhysicsBodies.ts:32"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/SceneBody.ts:143"
+          "source": "src/physics/SceneBody.ts:149"
         },
         {
           "system": "Gameplay",
-          "source": "src/physics/SceneBody.ts:165"
+          "source": "src/physics/SceneBody.ts:173"
         },
         {
           "system": "Gameplay",
@@ -38119,7 +38271,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityFactories.ts:85"
+          "source": "src/entities/EntityFactories.ts:90"
         },
         {
           "system": "Gameplay",
@@ -38177,7 +38329,7 @@
         },
         {
           "system": "Gameplay",
-          "source": "src/entities/EntityFactories.ts:86"
+          "source": "src/entities/EntityFactories.ts:91"
         },
         {
           "system": "Gameplay",
@@ -39227,7 +39379,7 @@
         },
         {
           "system": "World generation",
-          "source": "src/generation/regional/ConstructionYard.ts:68"
+          "source": "src/generation/regional/ConstructionYard.ts:89"
         },
         {
           "system": "World generation",
@@ -39244,6 +39396,10 @@
         {
           "system": "Interiors",
           "source": "src/interiors/review/BuildingLayoutReviewCases.ts:90"
+        },
+        {
+          "system": "Gameplay",
+          "source": "src/scenarios/ConstructionPlaygroundRecipe.ts:26"
         },
         {
           "system": "Gameplay",

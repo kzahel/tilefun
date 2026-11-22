@@ -23,7 +23,7 @@ export function constructionYardRecipe(): ScenarioRecipe {
 
 export function constructionCraneRecipe(): ScenarioRecipe {
   const yard = constructionYardSite();
-  const crane = required(yard.vehicles.find((v) => v.model === "mobile-crane"));
+  const crane = required(yard.vehicles.find((v) => v.identity.endsWith(":mobile-crane")));
   return {
     ...constructionYardRecipe(),
     id: "construction-crane-v1",

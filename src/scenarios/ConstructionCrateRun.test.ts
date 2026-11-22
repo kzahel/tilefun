@@ -16,7 +16,9 @@ it("lets the racing coupe drive through a settled stack and tumble the crates", 
     const carStart = required(yard.vehicles.find((v) => v.model === CRATE_RUN_CAR));
     const { entities } = session.realm.entityManager;
     const car = required(entities.find((e) => e.proceduralId === carStart.identity));
-    const crates = entities.filter((e) => e.type === CONSTRUCTION_CRATE);
+    const crates = entities.filter(
+      (e) => e.type === CONSTRUCTION_CRATE && e.proceduralId?.startsWith(`${yard.id}:crate:`),
+    );
     expect(crates).toHaveLength(9);
     expect(crates.filter((e) => (e.wz ?? 0) > 20)).toHaveLength(2);
     const starts = new Map(crates.map((e) => [e.id, { ...e.position }]));

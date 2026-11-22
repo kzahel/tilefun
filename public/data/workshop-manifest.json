@@ -16977,6 +16977,26 @@
       "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
     },
     {
+      "id": "geometry:construction-marble-run-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "Construction · Giant marble run",
+      "prompt": "Use the crane to drop the steel ball and watch it reach the crates. Move the green chute with the forklift.",
+      "url": "/tilefun/workshop.html?geometry=construction-marble-run#/tool/world-geometry",
+      "fingerprint": "a1b826616b3594307aa764a0261bb2ea132db304a8d961b30ca889ccc942f4fd",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
+      "id": "geometry:construction-seesaw-v1",
+      "batchId": "world-geometry",
+      "kind": "geometry",
+      "name": "Construction · Vehicle seesaw",
+      "prompt": "Drive across the pivot and try balancing a car against the dump truck.",
+      "url": "/tilefun/workshop.html?geometry=construction-seesaw#/tool/world-geometry",
+      "fingerprint": "4e18ccd7b505d66efe4d54531392bcf4ac8cac4cb936a82cfccb9dd5854e8fbe",
+      "excluded": "Interactive engine experiment; not an immutable art approval snapshot."
+    },
+    {
       "id": "geometry:car-surfaces-v1",
       "batchId": "world-geometry",
       "kind": "geometry",
@@ -61252,5 +61272,5 @@
       }
     }
   ],
-  "inputDigest": "791d38d4d1ba7ce3532dca56be20711385e91668a7b23627c3e4da00a1cb542c"
+  "inputDigest": "211da1261128f852aafc9d5e9b5c13595628b56d529b58e8145347d9a180afca"
 }

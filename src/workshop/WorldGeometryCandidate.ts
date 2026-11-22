@@ -1,5 +1,6 @@
 import { sha256 } from "../art/ArtSource.js";
 import { bulldozerYardRecipe } from "../scenarios/BulldozerYardRecipe.js";
+import { marbleRunRecipe, seesawRecipe } from "../scenarios/ConstructionPlaygroundRecipe.js";
 import {
   constructionCraneRecipe,
   constructionCrateRunRecipe,
@@ -65,6 +66,19 @@ const GEOMETRY_FIXTURES = {
     recipe: forkliftYardRecipe,
     prompt:
       "Drive the forks into a pallet, lift it onto the flatbed and back out, or build a stack of wooden crates.",
+  },
+  "construction-marble-run": {
+    id: "geometry:construction-marble-run-v1",
+    name: "Construction · Giant marble run",
+    recipe: marbleRunRecipe,
+    prompt:
+      "Use the crane to drop the steel ball and watch it reach the crates. Move the green chute with the forklift.",
+  },
+  "construction-seesaw": {
+    id: "geometry:construction-seesaw-v1",
+    name: "Construction · Vehicle seesaw",
+    recipe: seesawRecipe,
+    prompt: "Drive across the pivot and try balancing a car against the dump truck.",
   },
   "construction-crate-run": {
     id: "geometry:construction-crate-run-v1",

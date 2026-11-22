@@ -12,6 +12,7 @@ Several early plans contain original unchecked lists superseded by later work.
 
 | Plan | Recorded state / continuing owner |
 | --- | --- |
+| [265 Construction playground](265-construction-playground.md) | A crane-fed marble run, forklift-movable exit chute, and a seesaw that tips under a vehicle. |
 | [264 Forklift](264-forklift.md) | Physical sliding and tilting forks lift the existing pallets and crates in the construction yard. |
 | [263 Construction crate run](263-construction-crate-run.md) | A drive-through stack of freely rotating wooden crates in generated construction yards. |
 | [262 Leashed shared screen](262-leashed-shared-screen.md) | One top-down view for up to four local seats, with hard limits for walking and driving and fixed split screen still available. Owner play review pending. |

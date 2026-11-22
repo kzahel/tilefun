@@ -1,7 +1,12 @@
 import { DEFAULT_PHYSICAL_HEIGHT } from "../config/constants.js";
-import { isConstructionCargo, isWoodenCargo } from "../entities/ConstructionCargo.js";
+import {
+  isConstructionCargo,
+  isWoodenCargo,
+  WRECKING_BALL,
+} from "../entities/ConstructionCargo.js";
 import { CONSTRUCTION_RUBBLE } from "../entities/ConstructionRubble.js";
 import type { Entity } from "../entities/Entity.js";
+import { MARBLE_CHUTE, MARBLE_TRACK, SEESAW, SEESAW_PIVOT } from "../entities/PhysicsPlayground.js";
 import { curveTrainView, isCurveTrain } from "../railway/CurveTrain.js";
 import { isTrain } from "../railway/Train.js";
 import { vehicleBodySize, vehicleNoseHeading } from "../traffic/Vehicle.js";
@@ -22,6 +27,7 @@ export function carryingSupportId(
 }
 export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
   if (entity.type.startsWith("vehicle-v1:") || isTrain(entity)) return "vehicle";
+  if (entity.type === MARBLE_TRACK || entity.type === SEESAW_PIVOT) return "fixed";
   if (
     entity.type === "ball" ||
     entity.type === CONSTRUCTION_RUBBLE ||
@@ -41,7 +47,13 @@ export function physicsBodyKind(entity: Entity): PhysicsBodyKind {
 
 /** Body types with a full solved orientation, independent of their motors. */
 export function tracksBodyRotation(entity: Entity, kind: PhysicsBodyKind): boolean {
-  return kind === "vehicle" || isWoodenCargo(entity.type);
+  return (
+    kind === "vehicle" ||
+    isWoodenCargo(entity.type) ||
+    entity.type === WRECKING_BALL ||
+    entity.type === MARBLE_CHUTE ||
+    entity.type === SEESAW
+  );
 }
 
 /** How the solver admits motion. Prescribed bodies follow their own trajectory

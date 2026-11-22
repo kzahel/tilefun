@@ -1,5 +1,6 @@
 import { bulldozerYardRecipe } from "../scenarios/BulldozerYardRecipe.js";
 import { cityTrainRecipe } from "../scenarios/CityTrainRecipe.js";
+import { marbleRunRecipe, seesawRecipe } from "../scenarios/ConstructionPlaygroundRecipe.js";
 import {
   constructionCraneRecipe,
   constructionCrateRunRecipe,
@@ -52,6 +53,8 @@ const STATIC_FIXTURES: Record<
   "construction-yard": { recipe: constructionYardRecipe, starts: {} },
   "construction-crane": { recipe: constructionCraneRecipe, starts: {} },
   "construction-forklift": { recipe: forkliftYardRecipe, starts: {} },
+  "construction-marble-run": { recipe: marbleRunRecipe, starts: {} },
+  "construction-seesaw": { recipe: seesawRecipe, starts: {} },
   "construction-crate-run": { recipe: constructionCrateRunRecipe, starts: {} },
   "outskirts-park": { recipe: outskirtsParkRecipe, starts: PARK_STARTS },
   crossing: { recipe: railCrossingRecipe, starts: CROSSING_STARTS },
@@ -104,6 +107,8 @@ const TERRAIN_FIXTURES = new Set([
   "construction-crane",
   "construction-forklift",
   "construction-crate-run",
+  "construction-marble-run",
+  "construction-seesaw",
   "realm",
   "crowd",
   "traffic",
@@ -121,6 +126,8 @@ const ZOOMS: Record<string, number> = {
   "construction-crane": 0.8,
   "construction-forklift": 0.9,
   "construction-crate-run": 0.68,
+  "construction-marble-run": 0.7,
+  "construction-seesaw": 0.84,
   "traffic-crowd": 0.125,
   crowd: CROWD_VIEW.zoom,
   "car-jumps": 0.25,
@@ -159,6 +166,27 @@ export function geometryView({ fixture, generated, ambient }: FixtureChoice) {
 }
 
 export function GeometryIntro({ fixture }: { fixture: string }) {
+  if (fixture === "construction-marble-run")
+    return (
+      <>
+        <h1>Giant marble run</h1>
+        <p>
+          Board the crane with E or Interact. Open Work crane with F or D-pad Down, raise and extend
+          the boom over the chute, then select Switch hook / ball. Select Hook / release to drop it.
+          The forklift can move the green exit chute.
+        </p>
+      </>
+    );
+  if (fixture === "construction-seesaw")
+    return (
+      <>
+        <h1>Vehicle seesaw</h1>
+        <p>
+          Board the car with E or Interact. Drive slowly onto the low end and feel the deck tip as
+          you pass the pivot. Try parking the dump truck at the other end.
+        </p>
+      </>
+    );
   if (fixture === "construction-forklift")
     return (
       <>

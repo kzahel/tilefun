@@ -101,6 +101,8 @@ try {
     () => buildWorldGeometryCandidate("construction-crane"),
     () => buildWorldGeometryCandidate("construction-forklift"),
     () => buildWorldGeometryCandidate("construction-crate-run"),
+    () => buildWorldGeometryCandidate("construction-marble-run"),
+    () => buildWorldGeometryCandidate("construction-seesaw"),
     () => buildWorldGeometryCandidate("car-surfaces"),
     () => buildWorldGeometryCandidate("car-jumps"),
     () => buildWorldGeometryCandidate("tree-house"),
