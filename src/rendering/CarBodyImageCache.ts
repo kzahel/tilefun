@@ -29,6 +29,13 @@ export function carBodyImageKey(
           mesh.craneCableEnd.y,
           mesh.craneCableEnd.z,
           Number(mesh.craneCableEnd.wrecking),
+          ...(mesh.craneCableEnd.topDown
+            ? [
+                mesh.craneCableEnd.topDown.x,
+                mesh.craneCableEnd.topDown.y,
+                mesh.craneCableEnd.topDown.z,
+              ]
+            : []),
         ]
       : []),
     mesh.bedGateAngle ?? 0,

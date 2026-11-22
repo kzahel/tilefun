@@ -5,6 +5,8 @@ import {
 } from "../entities/ConstructionCargo.js";
 import { MARBLE_CHUTE, MARBLE_TRACK, SEESAW, SEESAW_PIVOT } from "../entities/PhysicsPlayground.js";
 
+export const WRECKING_BALL_MESH = `${WRECKING_BALL}-authored-v1`;
+
 const playgroundModel = (type: string, radius: number) => ({
   assetId: `${type}-authored-v1`,
   path: `assets/models/construction/${type.replace(/^construction-/, "")}.glb`,
@@ -25,7 +27,9 @@ const models: ReadonlyMap<
   [MARBLE_CHUTE, playgroundModel(MARBLE_CHUTE, 30)],
   [SEESAW, playgroundModel(SEESAW, 91)],
   [SEESAW_PIVOT, playgroundModel(SEESAW_PIVOT, 28)],
-  [WRECKING_BALL, playgroundModel(WRECKING_BALL, 11)],
+  // The sphere rotates around its base anchor. A vertex can be 16 px from it,
+  // and the y-z projection can reach sqrt(2) times that distance.
+  [WRECKING_BALL, playgroundModel(WRECKING_BALL, 24)],
   [
     CONSTRUCTION_PALLET,
     {

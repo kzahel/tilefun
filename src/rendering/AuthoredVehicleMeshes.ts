@@ -40,7 +40,8 @@ export const AUTHORED_VEHICLE_MESHES: readonly AuthoredVehicleMesh[] = [
       ? {
           assetId: "mobile-crane-authored-v2",
           path: "assets/models/vehicles/mobile-crane-v2.glb",
-          radius: 200,
+          // Bound the extended boom and empty hook even on a tilted chassis.
+          radius: 272,
         }
       : {}),
     ...(vehicle.id === "dump-truck"

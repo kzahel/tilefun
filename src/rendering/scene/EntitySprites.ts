@@ -168,7 +168,7 @@ export function collectEntitySprites(stage: EntityStage): void {
     const item = collectEntity(pass, e);
     if (item) collected.push({ entity: e, item });
   }
-  groupVehicleContents(stage.items, collected);
+  groupVehicleContents(stage.items, collected, stage.entities);
 }
 
 function hasSprite(e: Entity): e is SpriteEntity {

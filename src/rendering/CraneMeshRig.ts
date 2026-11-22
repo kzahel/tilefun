@@ -6,6 +6,7 @@ export interface CraneCableEnd {
   y: number;
   z: number;
   wrecking: boolean;
+  topDown?: { x: number; y: number; z: number };
 }
 
 const UP = new THREE.Vector3(0, 1, 0);

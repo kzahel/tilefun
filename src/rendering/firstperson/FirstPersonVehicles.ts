@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { vehiclePaint } from "../../traffic/VehiclePaint.js";
-import { applyMeshInstance, topDownVehicleHeightScale } from "../AuthoredMeshPose.js";
+import { applyMeshInstance, fitMeshHolder } from "../AuthoredMeshPose.js";
 import { authoredVehicleForAsset } from "../AuthoredVehicleMeshes.js";
 import type { CarMeshAsset } from "../CarMeshAsset.js";
 import type { SpriteItem } from "../SceneItem.js";
@@ -74,9 +74,9 @@ export class FirstPersonVehicles {
     const paint = definition && vehiclePaint(definition.vehicle, mesh.paintSchemeId);
     const paintTexture = paint ? meshes.paint(paint) : undefined;
     const twins = this.twinsFor(asset);
-    applyMeshInstance(asset, mesh);
+    applyMeshInstance(asset, mesh, topDown);
     this.holder.position.set(item.wx, item.wy, item.zOffset);
-    this.holder.scale.z = topDown ? topDownVehicleHeightScale(asset, mesh) : 1;
+    fitMeshHolder(this.holder, asset, mesh, topDown);
     this.holder.add(asset.object);
     // The paint goes onto the asset's own materials; the lit copies then follow them.
     const restore = paintTexture ? meshes.bindPaint(asset.object, paintTexture) : undefined;
@@ -110,9 +110,9 @@ export class FirstPersonVehicles {
     const asset = mesh ? meshes.asset(mesh.assetId) : undefined;
     if (!mesh || !asset) return false;
     const twins = this.twinsFor(asset);
-    applyMeshInstance(asset, mesh);
+    applyMeshInstance(asset, mesh, topDown);
     this.holder.position.set(item.wx, item.wy, item.zOffset);
-    this.holder.scale.z = topDown ? topDownVehicleHeightScale(asset, mesh) : 1;
+    fitMeshHolder(this.holder, asset, mesh, topDown);
     this.holder.add(asset.object);
     // The asset's contact disc lies on the ground; it is a shadow, not a caster.
     let disc = this.discs.get(asset);

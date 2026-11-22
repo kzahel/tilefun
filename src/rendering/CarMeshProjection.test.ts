@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { expect, it } from "vitest";
 import { setCarMeshProjection } from "./CarMeshProjection.js";
+import { obliqueScreen } from "./firstperson/ObliqueCamera.js";
 import { poseOrientation } from "./MeshPresentation.js";
 import { projectWorld } from "./Projection.js";
 
@@ -51,4 +52,30 @@ it("keeps a car's ground-forward screen angle aligned with world movement, inclu
     expect(error).toBeCloseTo(0);
   }
   expect(matrix.determinant()).not.toBe(0);
+});
+
+it("keeps a level boom the same screen length as it slews, even when the pivot is elevated", () => {
+  const length = 120;
+  const radius = 240;
+  const width = 900;
+  const height = 600;
+  const camera = { x: -24, y: 12, scale: 2 };
+  const matrix = new THREE.Matrix4();
+  setCarMeshProjection(matrix, radius);
+
+  for (const z of [0, 40, 120]) {
+    const pivot = new THREE.Vector3(-20, 5, z);
+    const start = obliqueScreen(camera, width, height, ...pivot.toArray());
+    const imageStart = pivot.clone().applyMatrix4(matrix);
+    for (let degrees = 0; degrees < 360; degrees += 5) {
+      const yaw = (degrees * Math.PI) / 180;
+      const tip = new THREE.Vector3(length * Math.cos(yaw), length * Math.sin(yaw), 0).add(pivot);
+      const end = obliqueScreen(camera, width, height, ...tip.toArray());
+      const imageEnd = tip.clone().applyMatrix4(matrix);
+      expect(Math.hypot(end.sx - start.sx, end.sy - start.sy)).toBeCloseTo(length * camera.scale);
+      expect(Math.hypot(imageEnd.x - imageStart.x, imageEnd.y - imageStart.y) * radius).toBeCloseTo(
+        length,
+      );
+    }
+  }
 });

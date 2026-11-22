@@ -3,9 +3,9 @@ import type { Spritesheet } from "../assets/Spritesheet.js";
 import { vehiclePaint } from "../traffic/VehiclePaint.js";
 import {
   applyMeshInstance,
+  fitMeshHolder,
   hasAuthoredMesh,
   loadAuthoredMesh,
-  topDownVehicleHeightScale,
 } from "./AuthoredMeshPose.js";
 import { authoredVehicleForAsset } from "./AuthoredVehicleMeshes.js";
 import { CarBodyImageCache, carBodyImageKey } from "./CarBodyImageCache.js";
@@ -220,8 +220,8 @@ export class GpuMeshBodies {
       (hold ? this.held.take(key ?? `group:${this.heldGroups++}`, resolution) : scratch.outline);
     if (!output) return undefined;
     const object = asset.object;
-    applyMeshInstance(asset, item.mesh);
-    this.body.scale.z = topDownVehicleHeightScale(asset, item.mesh);
+    applyMeshInstance(asset, item.mesh, true);
+    fitMeshHolder(this.body, asset, item.mesh, true);
     this.body.add(object);
     if (child?.mesh && childAsset && childPoint) {
       const mesh = child.mesh,
@@ -240,7 +240,7 @@ export class GpuMeshBodies {
           new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1, 0, 0), mesh.gradeRoll),
         );
       this.towed.position.set(childPoint.x, childPoint.y, childPoint.z);
-      this.towed.scale.z = topDownVehicleHeightScale(childAsset, mesh);
+      fitMeshHolder(this.towed, childAsset, mesh, true);
       o.position.set(0, 0, 0);
       if (item.mesh.gradePitch || item.mesh.gradeRoll) {
         const parentGrade = object.quaternion

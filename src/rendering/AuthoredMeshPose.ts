@@ -1,9 +1,11 @@
 import * as THREE from "three";
-import { authoredCargoForAsset } from "./AuthoredCargoMeshes.js";
+import { rotateBodyVector } from "../physics/BodyRotation.js";
+import { authoredCargoForAsset, WRECKING_BALL_MESH } from "./AuthoredCargoMeshes.js";
 import { authoredTrainForAsset } from "./AuthoredTrainMeshes.js";
 import { authoredVehicleForAsset, vehicleMeshHeightScale } from "./AuthoredVehicleMeshes.js";
 import { type CarMeshAsset, loadCarMesh } from "./CarMeshAsset.js";
 import type { MeshInstance } from "./MeshPresentation.js";
+import { WRECKING_BALL_CENTER_Z, WRECKING_BALL_SHEAR } from "./WreckingBallProjection.js";
 
 const X_AXIS = new THREE.Vector3(1, 0, 0);
 const Y_AXIS = new THREE.Vector3(0, 1, 0);
@@ -36,10 +38,40 @@ export function loadAuthoredMesh(assetId: string): Promise<CarMeshAsset> | undef
     : load;
 }
 
-/** Apply the top-down height fit in world Z, after the rigid-body rotation.
- * Legacy sources already apply this fit inside the asset. */
-export function topDownVehicleHeightScale(asset: CarMeshAsset, mesh: MeshInstance): number {
-  return mesh.physical ? asset.spriteHeightScale : 1;
+/** View-specific fitting happens after rigid-body rotation, in game axes. */
+export function fitMeshHolder(
+  holder: THREE.Group,
+  asset: CarMeshAsset,
+  mesh: MeshInstance,
+  topDown: boolean,
+): void {
+  const roundBall = topDown && mesh.assetId === WRECKING_BALL_MESH;
+  holder.matrixAutoUpdate = !roundBall;
+  holder.scale.z = topDown && mesh.physical ? asset.spriteHeightScale : 1;
+  if (!roundBall) return;
+  const { x, y, z } = holder.position;
+  const center = rotateBodyVector(mesh.orientation, 0, 0, WRECKING_BALL_CENTER_Z);
+  const shear = WRECKING_BALL_SHEAR;
+  const offset = shear * (center.y - center.z);
+  holder.matrix.set(
+    1,
+    0,
+    0,
+    x,
+    0,
+    1 - shear,
+    shear,
+    y + offset,
+    0,
+    shear,
+    1 - shear,
+    z - offset,
+    0,
+    0,
+    0,
+    1,
+  );
+  holder.matrixWorldNeedsUpdate = true;
 }
 
 /**
@@ -50,7 +82,7 @@ export function topDownVehicleHeightScale(asset: CarMeshAsset, mesh: MeshInstanc
  * group members as separate bodies. A shared asset never carries another
  * instance's phase.
  */
-export function applyMeshInstance(asset: CarMeshAsset, mesh: MeshInstance): void {
+export function applyMeshInstance(asset: CarMeshAsset, mesh: MeshInstance, topDown = false): void {
   const object = asset.object;
   asset.setPhysical(!!mesh.physical);
   object.quaternion.set(...mesh.orientation);
@@ -68,7 +100,11 @@ export function applyMeshInstance(asset: CarMeshAsset, mesh: MeshInstance): void
   asset.setTransportRamp(mesh.transportRamp ?? false);
   asset.setTowLift(mesh.towActive ?? false);
   asset.setTravel(mesh.wheelTravel ?? 0, !!mesh.towPitch);
-  asset.setExcavator(mesh.excavatorPose, mesh.craneCableEnd);
+  const cable = mesh.craneCableEnd;
+  asset.setExcavator(
+    mesh.excavatorPose,
+    topDown && cable?.topDown ? { ...cable, ...cable.topDown } : cable,
+  );
   asset.setDumpBed(mesh.bedTilt ?? 0, mesh.bedGateAngle ?? 0);
   asset.setEmergency(mesh.emergencyEnabled ?? false, mesh.presentationTime ?? 0);
 }

@@ -407,6 +407,54 @@ headset views keep meshes.
   Over that budget, or while assets or paint load, the view draws the mesh.
 - `r_pixelcars3d` and `?pixelcars=0` turn it off for comparison.
 
+**Construction yard reproduction (2026-11-22).** In seed 2026, board the crane
+on the marble run's west side, open **Work crane**, and switch to the wrecking
+ball. The ball's original top-down image used an 11-world-pixel half-size, but
+the posed ball reached 16.2 world pixels above its anchor in the top-down
+projection. A matched Chromium capture placed the ball near the top of the
+viewport, clear of other bodies. The top row of the ball was at screen pixel
+19 with the image and pixel 4 with the direct mesh. The same cutoff occurred
+with the ball in the middle of the viewport. Beside the track, the rail hid
+part of the ball in both modes, and the image clipped more of its silhouette.
+
+The main track kept the same rotation across 1,058 frames of keyboard co-op
+with the shared camera, including 214 frames when the right viewport edge
+crossed the track. The green exit chute also kept its orientation during that
+pass. The reported rotation remains unreproduced.
+
+**Crane slew test.** The top-down camera maps world positions to `(x, y − z)`.
+A level arm keeps its projected length as it turns, even when mounted high.
+An inclined arm's rise subtracts from its southward reach and adds to its
+northward reach. At one screen pixel per world pixel, the extended crane on a
+level chassis measured 132.3–133.7 px pivot to sheave through a full turn at
+zero boom pitch, with the small range explained by the sheave's 0.7 px rise
+above the boom axis. At 48° of boom pitch, the same 133.0-world-pixel span
+projected to 10.8 px pointing south and 187.8 px pointing north. The GLB rig
+and the physics linkage agreed at each of the 24 headings tested per pitch.
+
+The native image cut an additional 30 rows from the crane's north-pointing
+silhouette at 48°. The old crane image extended 200 world pixels above its anchor,
+and the raised sheave projects almost 229 world pixels above it. The isolated
+ball also showed a projection effect. An uncorrected sphere becomes an ellipse
+about 1.41 times as tall as it is wide in this camera. At 8 screen pixels per
+world pixel, the direct mesh measured 128 × 180 px. The default image's cutoff left
+128 × 112 px. `CarMeshProjection.test.ts` exercises the level reference arm at
+three mounting heights in both projections.
+
+The crane's top-down target now has a 272-world-pixel half-size for its
+articulated rig. An attached cable can grow that target in 32-pixel steps to
+include the hook and its end, even when the payload itself is off screen. The
+ball's 24-pixel half-size covers its silhouette at any orientation. Chromium
+matched the direct crane mesh's silhouette bounds at all 48 sampled poses.
+At 8× screen scale the clipping fix restored the ball to 128 × 176 px in its
+native image. The game and Workshop share these bounds.
+
+The top-down ball now compensates for the camera's vertical stretch around
+the sphere's centre, preserving its screen centre and per-vertex depth. The
+cable uses the same correction at its attachment point. Chromium measured
+128 × 128 px in both the default image path and the direct top-down mesh.
+Perspective views and the physics solver still use the original sphere.
+
 Cost, `render:bench` with `--scenes=city,cars,fleet --zooms=1,0.25` (`cars`:
 50 parked bodies from the cache; `fleet`: the same with the cache off, the
 moving-fleet worst case). Fixed view / unified with meshes / unified with images:
