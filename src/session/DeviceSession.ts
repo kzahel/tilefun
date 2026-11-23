@@ -7,7 +7,8 @@ import type { RenderResources } from "../rendering/RenderFrame.js";
 import { SceneFrame } from "../rendering/SceneFrame.js";
 import type { Movement } from "../shared/Movement.js";
 import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
-import { DeviceSeats } from "./DeviceSeats.js";
+import { DeviceSeats, type SeatFrame } from "./DeviceSeats.js";
+import { seatBody, seatEntity } from "./SeatFocus.js";
 import { SeatViews } from "./SeatViews.js";
 import type { View } from "./View.js";
 
@@ -50,6 +51,17 @@ export class DeviceSession {
     const views = this.seatViews.layout(width, height, playing, shared);
     this.views.splice(0, this.views.length, ...views);
     return views;
+  }
+
+  /** Give idle seats a movement sample from the current predicted bodies in shared screen. */
+  steerIdleSeats(frames: SeatFrame[], sharedScreen: boolean, dt: number): void {
+    if (sharedScreen)
+      this.seats.idleFollow.steer(
+        frames,
+        (seat) => (seatBody(this, seat) ?? seatEntity(this, seat))?.position,
+        dt,
+      );
+    else this.seats.idleFollow.reset();
   }
 
   /** The active predictor, or null outside play. */

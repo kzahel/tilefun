@@ -15,7 +15,7 @@ export const ACTIVE_EQUIPMENT_MESHES: Partial<
   "mobile-crane": {
     assetId: "mobile-crane-authored-v2",
     path: "assets/models/vehicles/mobile-crane-v2.glb",
-    radius: 200,
+    radius: 272,
   },
   forklift: {
     assetId: "forklift-authored-v2",

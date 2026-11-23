@@ -1,9 +1,11 @@
 import { expect, it } from "vitest";
 import { TerrainId } from "../autotile/TerrainId.js";
+import { FARM_EGG } from "../farming/FarmActors.js";
 import { createDescriptor } from "../generation/GenerationDescriptor.js";
 import { createGenerator } from "../generation/Generator.js";
 import { NaturalLandscape } from "../generation/regional/NaturalLandscape.js";
 import { regionalWorld } from "../generation/regional/WorldDescriptor.js";
+import { faunaType } from "../wildlife/Fauna.js";
 import { NATURAL_CASES, naturalLandscapeRecipe } from "./NaturalLandscapeRecipe.js";
 import { ScenarioSession } from "./ScenarioSession.js";
 
@@ -49,7 +51,16 @@ it.each(NATURAL_CASES)("$id keeps its explicit generation and landscape profile"
   else {
     expect(r.generation.type).toBe("flat");
     expect(r.landscape).toBeUndefined();
-    if (c.id.startsWith("behavior-"))
+    if (c.id === "chicken-pen")
+      expect(r.actors?.map((e) => e.type)).toEqual(
+        expect.arrayContaining([
+          faunaType("rooster"),
+          faunaType("chicken"),
+          faunaType("chick"),
+          FARM_EGG,
+        ]),
+      );
+    else if (c.id.startsWith("behavior-"))
       expect(r.actors?.some((e) => e.fauna || e.rabbit || e.robin || e.deer)).toBe(true);
     else expect(r.actors?.some((e) => e.predator)).toBe(true);
   }

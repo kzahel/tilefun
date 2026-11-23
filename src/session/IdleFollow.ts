@@ -23,6 +23,20 @@ interface Point {
   wy: number;
 }
 
+interface Leader {
+  seat: number;
+  at: Point;
+}
+
+function nearestLeader(leaders: readonly Leader[], at: Point) {
+  let nearest: (Leader & { distance: number }) | undefined;
+  for (const leader of leaders) {
+    const distance = Math.hypot(leader.at.wx - at.wx, leader.at.wy - at.wy);
+    if (!nearest || distance < nearest.distance) nearest = { ...leader, distance };
+  }
+  return nearest;
+}
+
 interface SeatIdle {
   idle: number;
   moving: boolean;
@@ -98,17 +112,13 @@ export class IdleFollow {
     const leaders = frames
       .filter((frame) => !idle(frame.seat.seat))
       .map((frame) => ({ seat: frame.seat.seat, at: position(frame.seat.seat) }))
-      .filter((leader): leader is { seat: number; at: Point } => !!leader.at);
+      .filter((leader): leader is Leader => !!leader.at);
     for (const frame of frames) {
       const seat = frame.seat.seat;
       if (!idle(seat)) continue;
       const at = position(seat);
       if (!at) continue;
-      let nearest: { seat: number; at: Point; distance: number } | undefined;
-      for (const leader of leaders) {
-        const distance = Math.hypot(leader.at.wx - at.wx, leader.at.wy - at.wy);
-        if (!nearest || distance < nearest.distance) nearest = { ...leader, distance };
-      }
+      const nearest = nearestLeader(leaders, at);
       if (!nearest) continue;
       this.leaders.set(seat, nearest.seat);
       if (frame.situation.locked || frame.situation.vehicle) continue;

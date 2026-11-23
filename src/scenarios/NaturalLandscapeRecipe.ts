@@ -156,7 +156,7 @@ export const NATURAL_CASES = [
     x: 354,
     y: 737.5,
   },
-  { id: "chicken-pen", name: "Chicken pen · rooster, hen, chick and egg", seed: 0, x: 5.5, y: 9.5 },
+  { id: "chicken-pen", name: "Chicken pen · rooster, hen, chick and egg", seed: 1, x: 5.5, y: 9.5 },
   { id: "farmstead", name: "Countryside · connected farmstead", seed: 2026, x: 380, y: 897 },
   { id: "village-pets", name: "Village · cats & dogs", seed: 2026, x: 672, y: -592 },
   { id: "city-center", name: "City · dense center & neighborhoods", seed: 2026, x: 300, y: 519 },

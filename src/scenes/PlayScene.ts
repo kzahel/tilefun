@@ -9,7 +9,6 @@ import { ParticleSystem } from "../rendering/ParticleSystem.js";
 import { ZOOM_PRESETS } from "../rendering/PresentationSettings.js";
 import type { DeviceSeats, SeatFrame } from "../session/DeviceSeats.js";
 import { composeDeviceTick } from "../session/DeviceTick.js";
-import { seatBody, seatEntity } from "../session/SeatFocus.js";
 import { sharedScreenSpan } from "../session/SharedScreenCamera.js";
 import type { SharedScreenSpan } from "../shared/SharedScreenSpan.js";
 import { occupiedVehicle } from "../traffic/VehicleSeats.js";
@@ -288,14 +287,7 @@ export class PlayScene implements GameScene {
       },
       ...turnGuestFrames(gc, seats.guestFrames(gc.stateView, inputLocked), dt),
     ];
-    // Shared screen: a seat idle for a minute follows an active player.
-    if (gc.view.sharedScreen)
-      seats.idleFollow.steer(
-        frames,
-        (seat) => (seatBody(gc.session, seat) ?? seatEntity(gc.session, seat))?.position,
-        dt,
-      );
-    else seats.idleFollow.reset();
+    gc.session.steerIdleSeats(frames, gc.view.sharedScreen, dt);
     const tick = composeDeviceTick(frames, seq, dt, excavatorMovement);
     for (const message of tick.before) gc.transport.send(message);
     if (inputLocked) gc.audioManager.stopHorns();

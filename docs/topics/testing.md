@@ -2,6 +2,11 @@
 
 ## Local validation
 
+The crane registration and pose checks expect the active rig's 272-pixel image
+radius. The chicken pen case checks its flat seed and staged rooster, hen, chick
+and egg. `DeviceSession` applies shared-screen idle steering. A separate function
+selects the nearest leader to keep the steering code within the code-health limits.
+
 The construction, farming, shared-screen and shadow changes refresh the measured
 code-health caps for their affected files under the existing 600-line and
 25-complexity thresholds. Vehicle checks cover the working crane and forklift
