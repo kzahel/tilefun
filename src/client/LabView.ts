@@ -462,6 +462,7 @@ export class LabView {
       receivers: this.unified?.frame.receiverStats ?? this.client.device.frame.receiverStats,
       meshDraws: this.unified?.viewStats?.cars ?? presentation.meshDraws,
       wildlifeMeshes: this.unified?.viewStats?.wildlifeMeshes ?? 0,
+      wildlifeModelsSelected: this.unified?.viewStats?.wildlifeModelsSelected ?? 0,
       alpha: this.alpha,
       steps: this.steps,
       authority: this.client.getDiagnostics(),

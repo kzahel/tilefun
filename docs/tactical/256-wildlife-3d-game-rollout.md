@@ -69,9 +69,9 @@ shared game/lab rendering, sprite fallback and performance.
 4. **Ship through normal play.** The shared catalog selects the latest
    registered model for each animal and checks its actions on load. A fresh
    browser shows eligible models by default. **3D animals** switches the
-   whole view to sprites. Unavailable or incomplete models and animals beyond
-   the view's model budget draw as sprites. Check existing and
-   newly placed animals, save/reload and replicated play. Reuse the shared
+   whole view to sprites. In model mode animals with a registered asset
+   appear when it is ready. Animals without a registered asset use sprites.
+   Check existing and newly placed animals, save/reload and replicated play. Reuse the shared
    scene in Workshop. Production builds need the complete asset bank from
    a fresh checkout. Use the repository's [release and CI path](../topics/testing.md#ci-and-deployment)
    for the live build, and record the served revision and URL in the ledger.
@@ -106,6 +106,14 @@ runtime scope reconciliation in the execution notes.
   and verify the actual live build before closing the goal.
 
 ## Delivery log
+
+### Model-only rendering for registered animals
+
+Every ready wildlife model in range draws when **3D animals** is on. The former
+24-instance budget and automatic sprite fallback are retired. The four-load
+concurrency limit remains, and idle model batches can be evicted above the
+48-batch cache target. Sprite-scene reviews require the explicit sprite setting
+when the view has selected models, including while those models are unavailable.
 
 ### Default activation, 2026-11-22
 

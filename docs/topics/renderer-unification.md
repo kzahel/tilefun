@@ -15,9 +15,10 @@ GLB to the actor's existing clip, frame phase and facing. Sprite fallback and
 a mixed-species crowd ran locally. The art disposition lives in the tactical.
 [256](../tactical/256-wildlife-3d-game-rollout.md) adds the wildlife model
 bank and exact Workshop play links. Registered models need distinct actions
-for every current sprite animation. The shared view falls through to the sprite
-for pending or failed loads or after using its 24-model draw budget. A view
-starts at most four model loads concurrently and retains up to 48 model batches.
+for every current sprite animation. With 3D animals on, registered animals
+appear as soon as their model is ready. Every ready model in range draws.
+A view starts at most four loads concurrently and evicts idle model batches
+when the cache grows past 48.
 [261](../tactical/261-mobile-crane.md) uses the same rigid model path for the
 four-axis crane and its loose wooden pallet. The pallet draws its solved
 quaternion in the shared scene, with a sprite fallback while the model loads.

@@ -174,15 +174,7 @@ interface ChunkScene {
   props?: { signature: string; surfaces: PropSurface[]; decks: OverheadDeck[] };
 }
 
-/**
- * Experimental first-person world view (tactical 229). Flat-coloured terrain,
- * prop collision volumes wearing their projected fixed-view artwork, upright
- * billboards for actors and narrow props, and the authored vehicle meshes.
- * Reads shared presentation output only; it never advances simulation.
- *
- * Draws through the render host's WebGL renderer into a region of its canvas
- * (248): the view owns scene content, never a context or a canvas.
- */
+/** Owns a view's scene content and draws shared presentation into the render host's canvas. */
 export class FirstPersonView {
   readonly stats = {
     chunks: 0,
@@ -192,6 +184,7 @@ export class FirstPersonView {
     /** Moving actor cards written this frame. */
     billboards: 0,
     wildlifeMeshes: 0,
+    wildlifeModelsSelected: 0,
     /** Standing prop cards in the merged static meshes. */
     cards: 0,
     /** Contact shadows drawn this frame. */
@@ -796,6 +789,7 @@ export class FirstPersonView {
     this.shadowCards.end();
     this.stats.dynamicCards = this.shadowCards.count;
     this.stats.wildlifeMeshes = this.wildlife.end();
+    this.stats.wildlifeModelsSelected = this.wildlife.selected;
     // The nearest mesh bodies cast into the dynamic map; each keeps as much of
     // its contact shadow as the map's fade leaves out, and the rest all of it.
     const { casters } = this;
@@ -824,8 +818,8 @@ export class FirstPersonView {
     );
   }
 
-  /** Pending models wait for their first draw. Sprites cover actors without a usable
-   * model. Without `cars`, an image of the actor's group already shows it. */
+  /** Pending models wait for their first draw. Without `cars`, an image of the
+   * actor's group already shows it. */
   private queueActor(
     item: SpriteItem,
     eye: FirstPersonEye | "south",
@@ -868,26 +862,26 @@ export class FirstPersonView {
       return;
     }
     // A sprite casts only where the collector gives it a shadow.
+    const pending = item.mesh && meshes.pending?.(item.mesh.assetId);
+    const model = !pending && cars ? this.wildlife.push(item) : "sprite";
+    if (model === "unavailable") return;
     const dynamic = !!shadow && this.dynamic.texel > 0;
-    let cast = false;
-    if (!(item.mesh && meshes.pending?.(item.mesh.assetId))) {
-      if (cars && this.wildlife.push(item)) cast = dynamic;
-      else if (cars || dynamic) {
-        const sheet = this.images.sheet(item.sheetKey);
-        if (sheet) {
-          const card = actorBillboard(item, sheet, eye, meshes.ready, this.room?.scene.topDown);
-          if (cars) {
-            this.billboards.push(card, this.cardPages);
-            const lamp = emergencyLamp(item);
-            if (lamp) this.lamps.push(lamp);
-          }
-          // Without `cars` the card is only its shadow: the image shows the actor.
-          cast =
-            dynamic &&
-            this.dynamic.reaches(card.x, card.y, card.z, Math.max(card.width, card.height)) &&
-            this.shadowCards.push(card, this.cardPages);
-        } else if (cars) void requestGameSprite(this.sheets, item.sheetKey);
-      }
+    let cast = model === "drawn" && dynamic;
+    if (!pending && model === "sprite" && (cars || dynamic)) {
+      const sheet = this.images.sheet(item.sheetKey);
+      if (sheet) {
+        const card = actorBillboard(item, sheet, eye, meshes.ready, this.room?.scene.topDown);
+        if (cars) {
+          this.billboards.push(card, this.cardPages);
+          const lamp = emergencyLamp(item);
+          if (lamp) this.lamps.push(lamp);
+        }
+        // Without `cars` the card is only its shadow: the image shows the actor.
+        cast =
+          dynamic &&
+          this.dynamic.reaches(card.x, card.y, card.z, Math.max(card.width, card.height)) &&
+          this.shadowCards.push(card, this.cardPages);
+      } else if (cars) void requestGameSprite(this.sheets, item.sheetKey);
     }
     if (shadow)
       this.blobs.push(shadow, support, cast ? 1 - this.dynamic.strength(shadow.x, shadow.y) : 1);

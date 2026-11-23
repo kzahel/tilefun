@@ -42,7 +42,7 @@ try {
       notices.push(message.text());
     }
   });
-  const modelPath = "/assets/models/experiments/cat.glb";
+  const modelPath = "/demos/wildlife-3d/cat-pilot-v1/model.glb";
   const spritePath = "/demos/wildlife-v2/cat/finish-v1/sheet.png";
   const isAsset = (request, path) => new URL(request.url()).pathname.endsWith(path);
   const root = `http://127.0.0.1:${address.port}/tilefun/workshop.html?geometry=nature-behavior-cat`;
@@ -63,13 +63,13 @@ try {
     if (isAsset(request, modelPath)) normalAssets.push(request.url());
   };
   page.on("request", spy);
-  await page.goto(root + route);
+  await page.goto(`${root}&wildlife3d=0${route}`);
   await stageReady(0);
   assert.deepEqual(normalAssets, []);
   page.off("request", spy);
 
   const actualModel = page.waitForResponse((response) => isAsset(response, modelPath));
-  await page.goto(`${root}&wildlife3dDrafts=1&wildlife3d=1${route}`);
+  await page.goto(`${root}&wildlife3d=1${route}`);
   assert((await actualModel).ok());
   await stageReady(1);
   await lab.screenshot({ path: join(output, "cat-lab-model.png") });
@@ -79,30 +79,33 @@ try {
   await switchModels.check();
   await stageReady(1);
 
-  const fallbackPage = await browser.newPage({ viewport: { width: 1240, height: 900 } });
-  let rejected = false;
-  await fallbackPage.route(
+  const failurePage = await browser.newPage({ viewport: { width: 1240, height: 900 } });
+  const spriteRequests = [];
+  failurePage.on("request", (request) => {
+    if (isAsset(request, spritePath)) spriteRequests.push(request.url());
+  });
+  await failurePage.route(
     (url) => url.pathname.endsWith(modelPath),
-    async (route) => {
-      rejected = true;
-      await route.fulfill({ status: 404 });
-    },
+    (route) => route.fulfill({ status: 404 }),
   );
-  const fallback = fallbackPage.waitForResponse((response) => isAsset(response, spritePath));
-  await fallbackPage.goto(`${root}&wildlife3dDrafts=1&wildlife3d=1${route}`);
-  assert((await fallback).ok());
-  assert(rejected);
-  await fallbackPage.waitForFunction(() => {
+  const failure = failurePage.waitForEvent("console", {
+    predicate: (message) =>
+      message.type() === "warning" && message.text().includes("3D animal could not load"),
+  });
+  await failurePage.goto(`${root}&wildlife3d=1${route}`);
+  await failure;
+  await failurePage.waitForFunction(() => {
     const stage = document.querySelector("[aria-label='Natural landscape playground']");
     return (
       stage?.getAttribute("data-ready") === "true" &&
       stage.getAttribute("data-wildlife-meshes") === "0"
     );
   });
+  assert.deepEqual(spriteRequests, []);
   assert.deepEqual(errors, []);
   assert.deepEqual(notices, []);
   console.log(
-    "Skinned cat in the shared scene, opt-in, immediate sprite switch and load-failure fallback verified.",
+    "Skinned cat in the shared scene, immediate sprite switch and model-only load failure verified.",
   );
 } finally {
   await browser?.close();

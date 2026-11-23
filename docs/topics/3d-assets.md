@@ -16,14 +16,15 @@ view on those links. Opening one leaves the saved preference alone. The
 [mesh catalog](../../src/rendering/WildlifeMeshCatalog.ts) connects sprite
 identities to their models and poses. The shared 3D scene uses replicated
 position, height, facing and clip phase to drive placement and animation.
-Each view draws up to 24 animal models. The game requests a fallback sheet
-while a model loads, when the model cannot draw, or when the player chooses
-sprites. Editor previews request their own sheets as needed.
+With **3D animals** on, each view draws every registered animal model in range.
+Registered animals appear once their model loads and stay hidden if it fails.
+Sprites cover animals without a registered model, flattened remains and the
+explicit sprite setting. Editor previews request their own sheets as needed.
 
 The owner authorized default models for every animal with a distinct 3D
 action for each gameplay animation. The same committed GLBs serve normal play
-and Workshop. At load, a missing, empty or reused action sends the animal
-through the sprite path. The current bank covers 113 animals and 515 state
+and Workshop. At load, a missing, empty or reused action rejects the model.
+The current bank covers 113 animals and 515 state
 bindings, including both cows, the skinned rabbit, the frog and the mallard.
 The other 106 campaign animals remain on sprites. Farm-only rooster and chick
 forms also use sprites. Workshop reviews are available for feedback.
@@ -73,8 +74,8 @@ review disposition and the local gallery.
 The shared scene can sample a skinned GLB from the actor's replicated clip,
 frame phase and facing. Use `?wildlife3dDrafts=1&wildlife3d=1` in a development
 session for the cat, or the local campaign preview harness for the broader
-catalog. The Workshop switch and loading or failure fallback use the reference
-sprite. Tactical 256 registered the exact playable Workshop candidates with
+catalog. The Workshop switch selects the reference sprite for sprite reviews.
+Tactical 256 registered the exact playable Workshop candidates with
 Blender source, GLB, animation stills and video. Their play links select the
 exact candidate in the game renderer.
 

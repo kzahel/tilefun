@@ -35,6 +35,7 @@ export type LabDiagnostics = ReturnType<typeof labPresentationDiagnostics> & {
   prediction: PlayerPredictor["lastReconcileDiagnostics"];
   pixelSnap: boolean;
   wildlifeMeshes: number;
+  wildlifeModelsSelected: number;
 };
 
 /** The presentation part of a lab's diagnostics. */

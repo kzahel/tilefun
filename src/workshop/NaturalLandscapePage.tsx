@@ -74,7 +74,7 @@ export default function NaturalLandscapePage() {
     [follow, setFollow] = useState(caseId === "train");
   const [sounds, setSounds] = useState(false);
   const [wildlifeModels, setWildlifeModels] = useState(loadWildlifeModels);
-  const [modelsVisible, setModelsVisible] = useState(false);
+  const [usingModels, setUsingModels] = useState(false);
   const audio = useRef<AudioManager | null>(null),
     footsteps = useRef<FootstepSystem | null>(null);
   const audioTime = useRef(0);
@@ -193,7 +193,7 @@ export default function NaturalLandscapePage() {
     if (!c || !recipe) return;
     let active = true;
     setReady(false);
-    setModelsVisible(false);
+    setUsingModels(false);
     setError("");
     setPaused(false);
     const { camera } = presentation;
@@ -482,10 +482,8 @@ export default function NaturalLandscapePage() {
         );
         const diagnostics = h.getDiagnostics();
         const wildlifeMeshes = String(diagnostics.wildlifeMeshes);
-        if (c.dataset.wildlifeMeshes !== wildlifeMeshes) {
-          c.dataset.wildlifeMeshes = wildlifeMeshes;
-          setModelsVisible(diagnostics.wildlifeMeshes > 0);
-        }
+        if (c.dataset.wildlifeMeshes !== wildlifeMeshes) c.dataset.wildlifeMeshes = wildlifeMeshes;
+        setUsingModels(diagnostics.wildlifeModelsSelected > 0);
         if (prepared.reviewSheet) {
           const drawn = String(h.wildlifeModelDrawn(prepared.reviewSheet));
           if (c.dataset.wildlifeReviewModelDrawn !== drawn)
@@ -594,7 +592,7 @@ export default function NaturalLandscapePage() {
   }
   const allowed =
     ready &&
-    !modelsVisible &&
+    !usingModels &&
     candidate &&
     verified === candidate.fingerprint &&
     (manifest.data?.reviewAllowed ?? manifest.data?.current);
@@ -942,7 +940,7 @@ export default function NaturalLandscapePage() {
             </button>
           </div>
           <p role="status">
-            {modelsVisible
+            {usingModels
               ? "Turn off 3D animals to review the sprite scene."
               : message || (!verified ? "Checking the registered composition…" : "")}
           </p>

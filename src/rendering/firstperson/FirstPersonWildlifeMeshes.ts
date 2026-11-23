@@ -4,14 +4,14 @@ import type { SpriteItem } from "../SceneItem.js";
 import { WILDLIFE_MESHES, type WildlifeMeshDefinition } from "../WildlifeMeshCatalog.js";
 import { SkinnedWildlifeBatch } from "./SkinnedWildlifeBatch.js";
 
-const MAX_ANIMALS = 24;
-const MAX_RESIDENT_MODELS = MAX_ANIMALS * 2;
+const INITIAL_INSTANCE_CAPACITY = 8;
+const CACHED_MODELS = 48;
 const MAX_MODEL_LOADS = 4;
 const HEADING = [0, Math.PI, Math.PI / 2, -Math.PI / 2] as const;
 
 interface Part {
   readonly source: THREE.Mesh;
-  readonly instances: THREE.InstancedMesh;
+  instances: THREE.InstancedMesh;
   readonly base: THREE.Quaternion;
 }
 
@@ -35,6 +35,7 @@ class WildlifeMeshBatch {
   private source: THREE.Group | undefined;
   private disposed = false;
   private count = 0;
+  private capacity = INITIAL_INSTANCE_CAPACITY;
   private scale = 1;
 
   constructor(
@@ -59,6 +60,7 @@ class WildlifeMeshBatch {
       return true;
     }
     if (!this.source) return false;
+    if (this.count === this.capacity) this.growInstances();
 
     this.body.position.set(item.wx, item.wy, item.zOffset);
     this.body.rotation.z = HEADING[item.facing ?? item.frameRow] ?? HEADING[Direction.Down];
@@ -93,6 +95,29 @@ class WildlifeMeshBatch {
     for (const { instances } of this.parts) {
       instances.count = this.count;
       if (this.count) instances.instanceMatrix.needsUpdate = true;
+    }
+  }
+
+  private createInstances(geometry: THREE.BufferGeometry): THREE.InstancedMesh {
+    const instances = new THREE.InstancedMesh(geometry, this.material, this.capacity);
+    instances.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    // Each batch can span the whole view and is rebuilt from collected actors every frame.
+    instances.frustumCulled = false;
+    instances.count = 0;
+    this.cast(instances);
+    this.group.add(instances);
+    return instances;
+  }
+
+  private growInstances(): void {
+    this.capacity *= 2;
+    for (const part of this.parts) {
+      const previous = part.instances;
+      const instances = this.createInstances(previous.geometry);
+      instances.instanceMatrix.array.set(previous.instanceMatrix.array);
+      previous.removeFromParent();
+      previous.dispose();
+      part.instances = instances;
     }
   }
 
@@ -152,13 +177,7 @@ class WildlifeMeshBatch {
           source.geometry.dispose();
           return;
         }
-        const instances = new THREE.InstancedMesh(source.geometry, this.material, MAX_ANIMALS);
-        instances.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
-        // Each batch can span the whole view and is rebuilt from visible actors every frame.
-        instances.frustumCulled = false;
-        instances.count = 0;
-        this.cast(instances);
-        this.group.add(instances);
+        const instances = this.createInstances(source.geometry);
         this.parts.push({ source, instances, base: source.quaternion.clone() });
       });
       for (const material of materials) {
@@ -212,6 +231,7 @@ class WildlifeMeshBatch {
 }
 
 export class FirstPersonWildlifeMeshes {
+  selected = 0;
   private readonly batches = new Map<string, WildlifeMeshBatch>();
   private enabled = true;
   private topDown = false;
@@ -229,6 +249,7 @@ export class FirstPersonWildlifeMeshes {
   begin(enabled: boolean, topDown: boolean): void {
     this.enabled = enabled;
     this.topDown = topDown;
+    this.selected = 0;
     this.count = 0;
     this.frame++;
     this.loading = 0;
@@ -238,32 +259,35 @@ export class FirstPersonWildlifeMeshes {
     }
   }
 
-  push(item: SpriteItem): boolean {
+  /** Reserve the model path even if the asset is still loading or failed to load. */
+  push(item: SpriteItem): "drawn" | "unavailable" | "sprite" {
     if (
       !this.enabled ||
-      this.count === MAX_ANIMALS ||
       item.scaleY !== undefined ||
       (item.alpha !== undefined && item.alpha !== 1)
     )
-      return false;
+      return "sprite";
 
+    const definition = WILDLIFE_MESHES.get(item.sheetKey);
+    if (!definition) return "sprite";
+    this.selected++;
     let batch = this.batches.get(item.sheetKey);
     if (!batch) {
-      const definition = WILDLIFE_MESHES.get(item.sheetKey);
-      if (!definition || this.loading >= MAX_MODEL_LOADS || !this.makeRoom()) return false;
+      if (this.loading >= MAX_MODEL_LOADS) return "unavailable";
       batch = new WildlifeMeshBatch(this.root, this.shade, definition, this.cast);
       this.batches.set(item.sheetKey, batch);
       this.loading++;
     }
     batch.lastWantedFrame = this.frame;
-    if (!batch.push(item, this.topDown)) return false;
+    if (!batch.push(item, this.topDown)) return "unavailable";
     batch.lastDrawnFrame = this.frame;
     this.count++;
-    return true;
+    return "drawn";
   }
 
   end(): number {
     for (const batch of this.batches.values()) batch.end();
+    if (this.batches.size > CACHED_MODELS) this.trimCache();
     return this.count;
   }
 
@@ -271,18 +295,16 @@ export class FirstPersonWildlifeMeshes {
     return this.batches.get(sheetKey)?.lastDrawnFrame === this.frame;
   }
 
-  private makeRoom(): boolean {
-    if (this.batches.size < MAX_RESIDENT_MODELS) return true;
-    let earliest = this.frame - 1;
-    let oldest: string | undefined;
-    for (const [key, batch] of this.batches) {
-      if (batch.loading || batch.lastWantedFrame >= earliest) continue;
-      oldest = key;
-      earliest = batch.lastWantedFrame;
+  private trimCache(): void {
+    // Keep every model the scene needs, even when it exceeds the cache target.
+    const idle = [...this.batches.entries()]
+      .filter(([, batch]) => !batch.loading && batch.lastWantedFrame < this.frame - 1)
+      .sort(([, a], [, b]) => a.lastWantedFrame - b.lastWantedFrame);
+    for (const [key, batch] of idle) {
+      if (this.batches.size <= CACHED_MODELS) break;
+      batch.dispose();
+      this.batches.delete(key);
     }
-    if (!oldest) return false;
-    this.batches.get(oldest)?.dispose();
-    return this.batches.delete(oldest);
   }
 
   dispose(): void {
