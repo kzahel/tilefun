@@ -55,6 +55,16 @@ export const FAUNA_TORSO_FITS: Readonly<
   beaver: [11, 8.5],
   panda: [14, 14],
   fox: [7.5, 9],
+  chinchilla: [7.5, 6.5],
+  "guinea-pig": [8, 6],
+  hamster: [7, 6],
+  mouse: [5, 4.5],
+  rat: [6, 6.5],
+  opossum: [8.5, 8],
+  raccoon: [8.5, 8.5],
+  skunk: [6, 7.5],
+  quokka: [6.5, 7.5],
+  binturong: [10, 11],
 };
 
 export function centeredTorsoCollider(size: number, support: number): ColliderComponent {

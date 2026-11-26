@@ -367,8 +367,10 @@ export class WoodlandWork {
         if (w.kind !== "cache" || !w.contents.length) continue;
         const cover = trees.find((tree) => gap(tree, a.position) < ai.radius);
         if (!cover) continue;
+        // Keep the cover position tied to the authored body width.
+        const bodyWidth = faunaProfile(a.type)?.body[0] ?? 12;
         t.sitePosition = {
-          wx: cover.gripX + Math.max(0, (a.collider?.width ?? 12) / 2 - 7),
+          wx: cover.gripX + Math.max(0, bodyWidth / 2 - 7),
           wy: cover.gripY,
           z: cover.ground,
         };
