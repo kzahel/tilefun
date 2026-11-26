@@ -1,4 +1,5 @@
 import { JUMP_VELOCITY } from "../config/constants.js";
+import { CLASSIC_COW_INTERACTION_FOOTPRINT } from "../entities/Cow.js";
 import { aabbsOverlap, getEntityAABB } from "../entities/collision.js";
 import type { Entity } from "../entities/Entity.js";
 import type { SavedPlayerData } from "../persistence/SaveManager.js";
@@ -28,9 +29,6 @@ interface PlayerStepOutcome {
  * Expanding by a few pixels detects nearby rideable entities on landing.
  */
 const MOUNT_MARGIN = 4;
-
-// Classic cows have always allowed mounting after a jump that lands nearby.
-const CLASSIC_COW_MOUNT_FOOTPRINT = { offsetX: 0, offsetY: 0, width: 22, height: 10 };
 
 /** Dismount the player from their current mount (or vehicle seat). */
 export function dismountPlayer(
@@ -203,7 +201,10 @@ function tryMountOnLanding(realm: RidingRealm, session: PlayerSession, contactId
       !!entity.collider &&
       (aabbsOverlap(expandedBox, getEntityAABB(entity.position, entity.collider)) ||
         (entity.type === "cow" &&
-          aabbsOverlap(expandedBox, getEntityAABB(entity.position, CLASSIC_COW_MOUNT_FOOTPRINT)))),
+          aabbsOverlap(
+            expandedBox,
+            getEntityAABB(entity.position, CLASSIC_COW_INTERACTION_FOOTPRINT),
+          ))),
   );
   if (mount) mountOn(session, mount);
 }

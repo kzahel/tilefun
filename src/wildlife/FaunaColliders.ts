@@ -46,20 +46,21 @@ export const FAUNA_TORSO_FITS: Readonly<
   "malayan-tapir": [15, 17],
 };
 
+export function centeredTorsoCollider(size: number, support: number): ColliderComponent {
+  // Entity collider offsets refer to the bottom edge on Y.
+  return {
+    offsetX: 0,
+    offsetY: size / 2,
+    width: size,
+    height: size,
+    physicalHeight: support,
+    solid: true,
+  };
+}
+
 export function faunaCollider({ species, body }: FaunaProfile): ColliderComponent {
   const fit = FAUNA_TORSO_FITS[species];
-  if (fit) {
-    const [size, support] = fit;
-    // Entity collider offsets refer to the bottom edge on Y.
-    return {
-      offsetX: 0,
-      offsetY: size / 2,
-      width: size,
-      height: size,
-      physicalHeight: support,
-      solid: true,
-    };
-  }
+  if (fit) return centeredTorsoCollider(...fit);
   const [width, height, physicalHeight] = body;
   return { offsetX: 0, offsetY: 0, width, height, physicalHeight, solid: true };
 }

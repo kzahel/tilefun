@@ -1,3 +1,4 @@
+import { CLASSIC_COW_INTERACTION_FOOTPRINT } from "../entities/Cow.js";
 import { getEntityAABB } from "../entities/collision.js";
 import type { Entity, PositionComponent } from "../entities/Entity.js";
 import type { EntityManager } from "../entities/EntityManager.js";
@@ -19,12 +20,15 @@ export { clearPredatorFlight } from "./PredatorPaths.js";
 import { directionFromVelocity } from "../entities/wanderAI.js";
 import { durableId } from "../persistence/ActorRecords.js";
 import type { AiPlanningScheduler } from "../server/AiPlanningScheduler.js";
+import { DEER_TYPE } from "./Deer.js";
 import { startleDeer } from "./deerInteractions.js";
+import { faunaProfile } from "./Fauna.js";
+import { FAUNA_TORSO_FITS } from "./FaunaColliders.js";
 import { canEat, creatureSpecies } from "./FoodWeb.js";
 import { startleFauna } from "./faunaInteractions.js";
 import { startleFrog } from "./frogInteractions.js";
 import { startleMallard } from "./mallardInteractions.js";
-import { predatorProfile } from "./Predator.js";
+import { PREDATOR_TORSO_FITS, predatorProfile } from "./Predator.js";
 import { startleRabbit } from "./rabbitInteractions.js";
 import { startleRobin } from "./robinInteractions.js";
 import type { WildlifeEnvironment } from "./WildlifeEnvironment.js";
@@ -84,10 +88,30 @@ export function startlePredator(e: Entity, from: PositionComponent): void {
   e.predator.alarmFrom = { ...from };
   e.predator.cooldown = Math.max(e.predator.cooldown, 12);
 }
-function bodyGap(a: Entity, b: Entity): number {
-  if (!a.collider || !b.collider) return Infinity;
-  const x = getEntityAABB(a.position, a.collider),
-    y = getEntityAABB(b.position, b.collider);
+function physicalBounds(e: Entity) {
+  return e.collider ? getEntityAABB(e.position, e.collider) : undefined;
+}
+
+/** Hunting reach uses the authored horizontal footprint independently of back support. */
+function huntBounds(e: Entity) {
+  if (!e.collider) return;
+  if (e.type === "cow") return getEntityAABB(e.position, CLASSIC_COW_INTERACTION_FOOTPRINT);
+  const predator = predatorProfile(e.type);
+  const fauna = faunaProfile(e.type);
+  let body: readonly [width: number, height: number, support?: number] | undefined;
+  if (predator && PREDATOR_TORSO_FITS[predator.species]) body = predator.body;
+  else if (fauna && FAUNA_TORSO_FITS[fauna.species]) body = fauna.body;
+  // The dedicated woodland deer has no fauna profile.
+  else if (e.type === DEER_TYPE) body = [20, 10];
+  if (!body) return physicalBounds(e);
+  const [width, height] = body;
+  return getEntityAABB(e.position, { offsetX: 0, offsetY: 0, width, height });
+}
+
+function bodyGap(a: Entity, b: Entity, bounds = huntBounds): number {
+  const x = bounds(a),
+    y = bounds(b);
+  if (!x || !y) return Infinity;
   return Math.hypot(
     Math.max(x.left - y.right, y.left - x.right, 0),
     Math.max(x.top - y.bottom, y.top - x.bottom, 0),
@@ -103,7 +127,7 @@ function raptorOnPrey(hunter: Entity, prey: Entity): boolean {
     (hunter.jumpZ ?? 0) <= 1 &&
     Math.abs((hunter.wz ?? 0) - top) < 0.1 &&
     Math.abs((hunter.groundZ ?? -Infinity) - top) < 0.1 &&
-    bodyGap(hunter, prey) === 0
+    bodyGap(hunter, prey, physicalBounds) === 0
   );
 }
 function launchPredatorFlight(

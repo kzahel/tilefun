@@ -5,6 +5,14 @@ const COW_SPEED = 12;
 const COW_FRAME_DURATION = 250;
 const COW_FRAME_COUNT = 3;
 
+// Nearby mounting and hunting use the classic cow's authored horizontal reach.
+export const CLASSIC_COW_INTERACTION_FOOTPRINT = {
+  offsetX: 0,
+  offsetY: 0,
+  width: 22,
+  height: 10,
+};
+
 export const CLASSIC_COW_COLLIDER = {
   offsetX: 0,
   offsetY: 5,

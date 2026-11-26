@@ -5,6 +5,7 @@ import { positionSeed } from "../shared/Determinism.js";
 import { required } from "../shared/required.js";
 import { AQUATIC_HUNTER_PROFILES, type AquaticHunterSpecies } from "./AquaticHunters.js";
 import type { FaunaSpecies } from "./Fauna.js";
+import { centeredTorsoCollider } from "./FaunaColliders.js";
 import {
   FIERCE_PROFILES,
   type FierceBehaviorProfile,
@@ -84,6 +85,31 @@ export const PREDATOR_PROFILES: readonly PredatorProfile[] = [
 export const predatorType = (species: string) => `wildlife-${species}-predator-v1`;
 const profilesByType = new Map(PREDATOR_PROFILES.map((p) => [predatorType(p.species), p]));
 export const predatorProfile = (type: string) => profilesByType.get(type);
+
+// Centered torso supports measured across idle and walk in both camera scales.
+// Profile bodies still describe the dimensions used by population placement.
+export const PREDATOR_TORSO_FITS: Readonly<
+  Partial<Record<PredatorSpecies, readonly [size: number, support: number]>>
+> = {
+  bobcat: [7, 11.5],
+  cheetah: [5, 13.5],
+  jaguar: [8.5, 11.5],
+  leopard: [7.5, 10.5],
+  lion: [12, 13],
+  lynx: [6.5, 11.5],
+  panther: [10, 14],
+  tiger: [8.5, 14.5],
+  "brown-bear": [15, 15.5],
+  "polar-bear": [12, 15.5],
+};
+
+function predatorCollider({ species, body }: PredatorProfile) {
+  const fit = PREDATOR_TORSO_FITS[species];
+  if (fit) return centeredTorsoCollider(...fit);
+  const [width, height, physicalHeight] = body;
+  return { offsetX: 0, offsetY: 0, width, height, physicalHeight, solid: true };
+}
+
 export interface PredatorBehavior {
   /** Semantic heading retained across saves and residency. */
   facing?: number;
@@ -167,14 +193,7 @@ export const PREDATOR_DEFS: Record<string, EntityDef> = Object.fromEntries(
             : []),
         ],
       },
-      collider: {
-        offsetX: 0,
-        offsetY: 0,
-        width: p.body[0],
-        height: p.body[1],
-        physicalHeight: p.body[2],
-        solid: true,
-      },
+      collider: predatorCollider(p),
       wanderAI: {
         idleMin: 2,
         idleMax: 5,
