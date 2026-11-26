@@ -227,7 +227,13 @@
           "comparison": "public/demos/wildlife-3d/atlantic-puffin-seabirds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-atlantic-puffin-seabirds-v1",
+        "fingerprint": "37000d7892fd82cd226347226f98866bcd30a4e3333e7f6dcb09c29ab0010c4c",
+        "sha256": "c205fac093284b88cb5c837f6086e888ba0bc193525162ff6f6a03e5516ed828",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.740Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-atlantic-puffin-seabirds-v1",
@@ -302,7 +308,13 @@
           "comparison": "public/demos/wildlife-3d/eagle-raptors-v1/flight.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-eagle-raptors-v1",
+        "fingerprint": "6c360c7d0f81ae95c57ef431afd6cc758a7d0e6b3398bddc5309f92dabb26129",
+        "sha256": "e3c799f71ff7da95b40f7039a36ec67d814268dce6109422c5484abc4560b9a6",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.763Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-eagle-raptors-v1",
@@ -356,7 +368,13 @@
           "comparison": "public/demos/wildlife-3d/blue-footed-booby-seabirds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-blue-footed-booby-seabirds-v1",
+        "fingerprint": "aab16a8b762d5c7e12649c65e2cdb287e763763d19bb7f73a1fc2a89c16f352d",
+        "sha256": "04b4b842703af31cf47cac6e0e3e98deb81fa54169ae02d75c00b5b5871a8241",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.791Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-blue-footed-booby-seabirds-v1",
@@ -506,7 +524,13 @@
           "comparison": "public/demos/wildlife-3d/crow-working-and-display-birds-v1/build.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-crow-working-and-display-birds-v1",
+        "fingerprint": "8dc0d4ed0726bd6b4bce870a7a9ed2f6f0f36bb1427e0fbe4fc1684cb09d5367",
+        "sha256": "c34196a83cb84aaf0347aa492e0bc00e1f2458e9b84de362f83813906cbf2bbe",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.813Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-crow-working-and-display-birds-v1",
@@ -560,7 +584,13 @@
           "comparison": "public/demos/wildlife-3d/cassowary-ratites-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-cassowary-ratites-v1",
+        "fingerprint": "6b3feeda327f259b05a9a08a25ad85adb5ffb5823b80a8bd86e3271d83bd48f5",
+        "sha256": "561abbfdeaf8cbfec13c7331601c319ad8dfb0f882d642e1a3e5aa0db67d2c59",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.836Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-cassowary-ratites-v1",
@@ -614,7 +644,13 @@
           "comparison": "public/demos/wildlife-3d/dove-yard-and-canopy-birds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-dove-yard-and-canopy-birds-v1",
+        "fingerprint": "708db28a3036927aec7280258b6526f91390a016012aa4921571b8dc70df3d75",
+        "sha256": "ee228c4342eefd7fd2519734907663aa69bf8cb7030c810112a7db6d58713af6",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.863Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-dove-yard-and-canopy-birds-v1",
@@ -668,7 +704,13 @@
           "comparison": "public/demos/wildlife-3d/emu-ratites-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-emu-ratites-v1",
+        "fingerprint": "5f5bff7e3ac911adf87ab2f2e820314f578a0e7994de2e03455870bd376b6fcb",
+        "sha256": "b769d3a6c8bef534604f58fd5ce2aa3775bdcdccbf39216c1172a03f2d57777b",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.886Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-emu-ratites-v1",
@@ -722,7 +764,13 @@
           "comparison": "public/demos/wildlife-3d/flamingo-waders-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-flamingo-waders-v1",
+        "fingerprint": "109f07f21bed78c44b901d48a2587eee191308149708720be26243908d3f9d4d",
+        "sha256": "1bc0f02ae31ee6e3ba6d8fc2b9a7efb0d252ea3fa4524604d3aec8d7d6c509be",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.909Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-flamingo-waders-v1",
@@ -776,7 +824,13 @@
           "comparison": "public/demos/wildlife-3d/great-blue-heron-waders-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-great-blue-heron-waders-v1",
+        "fingerprint": "4da1d34276429c5782a635eb319417575151774b0d0b0348505217c963d10db7",
+        "sha256": "204f024c6dc3e565ff20f71221fcb7bbcf65ced1182399626551606aec343f7e",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.934Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-great-blue-heron-waders-v1",
@@ -830,7 +884,13 @@
           "comparison": "public/demos/wildlife-3d/great-frigatebird-seabirds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-great-frigatebird-seabirds-v1",
+        "fingerprint": "aeacdee81995e28a26dc74d3e34ebc9de257187eec420496fb7a5e1aec09a4fb",
+        "sha256": "075884968a21bbd448f3c462459cd5cfc5c4c419c115f9fea1d3cebd54d8ee89",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.957Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-great-frigatebird-seabirds-v1",
@@ -884,7 +944,13 @@
           "comparison": "public/demos/wildlife-3d/great-hornbill-forest-birds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-great-hornbill-forest-birds-v1",
+        "fingerprint": "7842fbac95a28de14af741ac0cf75c1951f743582d4ae5dee4c2cb62cfe68b15",
+        "sha256": "22b3b812accb711f3ea3b9152968133be93fe2cbadebfa495d61c5d6e26290da",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:08.980Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-great-hornbill-forest-birds-v1",
@@ -938,7 +1004,13 @@
           "comparison": "public/demos/wildlife-3d/kakapo-forest-birds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-kakapo-forest-birds-v1",
+        "fingerprint": "944e98bff1396e861f06215ef40cb4c2c1a42e1dccb1661d38ae3f5458c6f4b3",
+        "sha256": "7d6b0cf7cda68f69ded5c37257e6c913980287c5d28b828dc90f151970caf46f",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.006Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-kakapo-forest-birds-v1",
@@ -992,7 +1064,13 @@
           "comparison": "public/demos/wildlife-3d/kiwi-ratites-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-kiwi-ratites-v1",
+        "fingerprint": "0e98243a2c18d99fe637c6f2932c2b2dfc7383c5c235bb2ea5c7e5a320d50c30",
+        "sha256": "01c452f609658e62eb837262274d68d7b96325886bc3f3630f173cbdc4240ad5",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.028Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-kiwi-ratites-v1",
@@ -1119,7 +1197,13 @@
           "comparison": "public/demos/wildlife-3d/marabou-stork-waders-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-marabou-stork-waders-v1",
+        "fingerprint": "4cb35308e8e2be52d3e1fa0cc5140208279d7e0287f5c24ee1f95d996f6a3e6b",
+        "sha256": "0e00495447b0b2778f111eff6662446df881486849c20eaf186439d7c6c985a2",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.052Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-marabou-stork-waders-v1",
@@ -1173,7 +1257,13 @@
           "comparison": "public/demos/wildlife-3d/ostrich-ratites-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-ostrich-ratites-v1",
+        "fingerprint": "0008e12c75dc7b6875bb08ff40f061fe36325793a6f95f70c110f4d176cc7c71",
+        "sha256": "47bb61d03cc5e18f510c33fd79ff85315fe884f9f80939edd4242f433232fda6",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.079Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-ostrich-ratites-v1",
@@ -1227,7 +1317,13 @@
           "comparison": "public/demos/wildlife-3d/parrot-yard-and-canopy-birds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-parrot-yard-and-canopy-birds-v1",
+        "fingerprint": "5559637571e8eab342a2c3ea4cb5d6572795b32de92e55ed2471aa7e6eadcd9e",
+        "sha256": "8e44224c210d30a3bb591d17d489b9150615aa9bb2b32bcf810981db613ae4ed",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.102Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-parrot-yard-and-canopy-birds-v1",
@@ -1302,7 +1398,13 @@
           "comparison": "public/demos/wildlife-3d/peacock-working-and-display-birds-v1/close.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-peacock-working-and-display-birds-v1",
+        "fingerprint": "54031608a680ab7c6b99337602f97362b5a77c651140d55a7ab7723d35c9eb16",
+        "sha256": "8e935e65d86ecf418b83a7b2740369013b7bb24f6f5cb38767dac1d311368a45",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.125Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-peacock-working-and-display-birds-v1",
@@ -1356,7 +1458,13 @@
           "comparison": "public/demos/wildlife-3d/pelican-seabirds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-pelican-seabirds-v1",
+        "fingerprint": "fa500694d0717c48d5dabebfc94a056a5a8b66933de7ca71f1007f74f7db664d",
+        "sha256": "4c60b706d211c39b0f19de4acd10620be706651b4534b392a2637b476bdc6194",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.151Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-pelican-seabirds-v1",
@@ -1499,7 +1607,13 @@
           "comparison": "public/demos/wildlife-3d/raven-working-and-display-birds-v1/bury.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-raven-working-and-display-birds-v1",
+        "fingerprint": "66c6669c9b03e101483dd5987de41efa2fd7e45a3caf32d7193b7a22bad88ec3",
+        "sha256": "cc996d398cf49c4966f7b659ab2bc5194677593a8b08bc1450c02bb21829c47e",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.174Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-raven-working-and-display-birds-v1",
@@ -1574,7 +1688,13 @@
           "comparison": "public/demos/wildlife-3d/hawk-raptors-v1/flight.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-hawk-raptors-v1",
+        "fingerprint": "90e106306f0549133b669e289c90552246eddb5e1615d4e207bde7bed8fd60ca",
+        "sha256": "a04b657c3787044e97e40a197d7302745e68789c02875e37d821aca13c18b9e0",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.196Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-hawk-raptors-v1",
@@ -1696,7 +1816,13 @@
           "comparison": "public/demos/wildlife-3d/pigeon-yard-and-canopy-birds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-pigeon-yard-and-canopy-birds-v1",
+        "fingerprint": "2a9cec73bcaeb449a28dd4a4010b8ffcad21e56b36c45be863e404fcbe737e96",
+        "sha256": "fb844f27cc526fb23cf5dda1f7392e0342c2b9eda9c019efeeb4bf278edc7700",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.222Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-pigeon-yard-and-canopy-birds-v1",
@@ -1764,7 +1890,13 @@
           "comparison": "public/demos/wildlife-3d/hummingbird-working-and-display-birds-v1/guard.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-hummingbird-working-and-display-birds-v1",
+        "fingerprint": "525a7bb1610096c57cc5f11280acbbfbd2604fe4f3f505177b41f576c526e4a0",
+        "sha256": "ec41d8cebc2d5ed9357a7ec30f1c8024a4e1471ef685ce3c4550cd77b8acf659",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.244Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-hummingbird-working-and-display-birds-v1",
@@ -1825,7 +1957,13 @@
           "comparison": "public/demos/wildlife-3d/secretary-bird-raptors-v1/chase.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-secretary-bird-raptors-v1",
+        "fingerprint": "bd7cefb0650924ce007f88b82fdb71bbcbc8621e38a2f17a4f70c399bc485cec",
+        "sha256": "44ab024e0d7f3416e3935ec0eff49401934bc74be00560da0b89e1e0b38d1308",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.267Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-secretary-bird-raptors-v1",
@@ -1879,7 +2017,13 @@
           "comparison": "public/demos/wildlife-3d/shoebill-waders-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-shoebill-waders-v1",
+        "fingerprint": "9f49572c768862a482c41ed2ea8b484c1db8f3536f9ec0532b584e213e5d753b",
+        "sha256": "602d294c17ee193fb01e093ccb76876586e31eca09d282ea171968df941cb42a",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.292Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-shoebill-waders-v1",
@@ -1933,7 +2077,13 @@
           "comparison": "public/demos/wildlife-3d/sparrow-yard-and-canopy-birds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-sparrow-yard-and-canopy-birds-v1",
+        "fingerprint": "29f8dba36dcc8b69464ecc9b3456771d34a5e827e3acbcd9d8832c4a1ac3eaad",
+        "sha256": "2c0115bcb39344b5e748621c413867aa2371b823b883db56dd3d33dbfd795a28",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.314Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-sparrow-yard-and-canopy-birds-v1",
@@ -2008,7 +2158,13 @@
           "comparison": "public/demos/wildlife-3d/owl-raptors-v1/flight.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-owl-raptors-v1",
+        "fingerprint": "560878a32898f9dc16d129c1a566354a4f9e1c4e6548b83c39a5c0ff9854aa76",
+        "sha256": "c19e51243eb983af82a4c9a200d9ee02b63a1ce3386a4ea962afd8668d85ba2e",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.337Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-owl-raptors-v1",
@@ -2062,7 +2218,13 @@
           "comparison": "public/demos/wildlife-3d/toucan-forest-birds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-toucan-forest-birds-v1",
+        "fingerprint": "be83a328f7378b5bf8d7d4f1d190a69a862643c996b8f6f0736889d55f610d29",
+        "sha256": "f9c8ea01461e4294a4a2038e6a09fab70d9da1fa63782a041223eb062bde88f8",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.362Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-toucan-forest-birds-v1",
@@ -3502,7 +3664,13 @@
           "comparison": "public/demos/wildlife-3d/wild-turkey-forest-birds-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-wild-turkey-forest-birds-v1",
+        "fingerprint": "625bd47cb156c0a767661ae5a03d4d144dab807a4b981a70c1dd6494765ea913",
+        "sha256": "cda6faf4882fd2dcd3825a48bad83eed1c3a6b4e650eb482acc6d149d455bbd5",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:09.480Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-wild-turkey-forest-birds-v1",
@@ -9969,7 +10137,13 @@
           "comparison": "public/demos/wildlife-3d/golden-retriever-v1/flee.png"
         }
       },
-      "promotion": null,
+      "promotion": {
+        "candidate": "pattern:wildlife-3d-golden-retriever-v1",
+        "fingerprint": "7874f9a2b918a7e8da781509ea6c016209b4ccbb50ae69db2a3d3722c602ff9c",
+        "sha256": "34f47b6923ebe6d84f5428f3d19e2b06af5862833fc4ce8337ebd4d2300bda1b",
+        "disposition": "approved",
+        "reviewedAt": "2026-11-26T08:58:10.333Z"
+      },
       "live": null,
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-golden-retriever-v1",

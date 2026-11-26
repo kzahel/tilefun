@@ -57,3 +57,18 @@ it("rejects unsafe wildlife review identities", () => {
   unsafe.buildingReview.caseId = "wildlife-v2-../elephant";
   expect(() => parseArtNote(unsafe, catalog)).toThrow();
 });
+
+it("accepts an exact 3D wildlife review and rejects retargeting it", () => {
+  const caseId = "wildlife-3d-dove-yard-and-canopy-birds-v1";
+  const modelCatalog = {
+    ...catalog,
+    sheets: [{ ...required(catalog.sheets[0]), id: caseId }],
+  };
+  const approval = note();
+  approval.sheetId = caseId;
+  approval.buildingReview.caseId = caseId;
+  approval.buildingReview.url = `/tilefun/workshop.html#/review/pattern%3A${caseId}`;
+  expect(parseArtNote(approval, modelCatalog).buildingReview?.caseId).toBe(caseId);
+  approval.buildingReview.caseId = "wildlife-3d-sparrow-yard-and-canopy-birds-v1";
+  expect(() => parseArtNote(approval, modelCatalog)).toThrow("Invalid pattern review context");
+});

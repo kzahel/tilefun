@@ -107,6 +107,16 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### Owner-approved default rollout, 2026-11-26
+
+The owner explicitly approved the 106 outstanding exact candidates in the
+Tactical 256 conversation. The local Workshop API recorded an attributed note
+and an approved decision against each candidate fingerprint. The review
+validator now accepts 3D wildlife review identities through the same
+exact-version path as the sprite reviews. The first release selects the
+remaining 28 birds and the golden retriever. Each release gets its own
+production playback receipt before the next one ships.
+
 ### Complete preview roster, 2026-11-26
 
 The remaining archived models cover the land reptiles, crawling fauna,

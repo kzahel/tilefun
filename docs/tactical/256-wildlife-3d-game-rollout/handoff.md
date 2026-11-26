@@ -66,7 +66,8 @@ revision, URL, runtime hashes and observed default states in the ledger.
 The November 26 resume began from base commit `23e99752` and reused the
 archived Blender drafts. All 219 animals have registered exact candidates
 and all 1,023 states have distinct qualified actions and observed gameplay.
-The ledger has full production evidence for the 113 selected defaults and
-their 515 states. The remaining 106 animals, including the golden retriever,
-await exact Workshop approvals. Promote them as approvals arrive, then
-record all 508 remaining states in the deployed default game.
+The ledger initially had production evidence for 113 defaults and their 515
+states. The owner then approved all 106 remaining candidates expressly in the
+rollout conversation, and Workshop recorded the exact decisions. Use the
+delivery log and ledger for the promotion batches and verify the remaining
+508 states in the deployed default game.
