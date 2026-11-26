@@ -1,0 +1,35 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "fc248ea0b9a3d8a3f11524ba85b978514ec75693",
+  "workshopInputDigest": "2aba7e526f97ed5fdd54ed08773cdd3a4a2059acd4d4f7ad019f58946d08893a",
+  "results": [
+    {
+      "type": "wildlife-frog-v1",
+      "mode": "default",
+      "manifestFingerprint": "92ea935e2d873d81887868a285db949795c48a38d327ff438fac2d3f1362fb7a",
+      "modelSha256": "e396f211b735520de31c96afc8948a81116a13695a03c551a06f0580d33db19a",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-frogs&wildlife3dStage=frog-frogs-and-ducks-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "hop",
+        "swim",
+        "action"
+      ],
+      "heightRange": [
+        -0.0009834766387939453,
+        7.907152721405032
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "hop",
+          "swim",
+          "action"
+        ]
+      }
+    }
+  ]
+}

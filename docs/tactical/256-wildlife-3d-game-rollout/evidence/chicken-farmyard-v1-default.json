@@ -1,0 +1,44 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "fc248ea0b9a3d8a3f11524ba85b978514ec75693",
+  "workshopInputDigest": "2aba7e526f97ed5fdd54ed08773cdd3a4a2059acd4d4f7ad019f58946d08893a",
+  "results": [
+    {
+      "type": "wildlife-chicken-provisional-v1",
+      "mode": "default",
+      "manifestFingerprint": "a3c343ee54fb3ee7220647eab2b43d8570462a7288638c6919109854e9dd51a7",
+      "modelSha256": "4afe62c34be6df929b7f6c2991ece7cce69e7778cbbe911c1197539e083c0053",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-behavior-chicken&wildlife3dStage=chicken-farmyard-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "walk",
+        "action",
+        "flee",
+        "scratch",
+        "peck",
+        "eat"
+      ],
+      "heightRange": [
+        -0.0010106773376465405,
+        -0.0005746288299560546
+      ],
+      "statesOnLanding": [
+        "flee"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "walk",
+          "action",
+          "flee",
+          "scratch",
+          "peck",
+          "eat"
+        ]
+      }
+    }
+  ]
+}

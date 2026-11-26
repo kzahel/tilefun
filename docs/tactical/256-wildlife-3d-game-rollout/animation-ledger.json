@@ -432,7 +432,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "fc248ea0b9a3d8a3f11524ba85b978514ec75693",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-chicken-farmyard-v1",
+        "sha256": "4afe62c34be6df929b7f6c2991ece7cce69e7778cbbe911c1197539e083c0053",
+        "states": ["action", "eat", "flee", "idle", "peck", "scratch", "walk"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/chicken-farmyard-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-chicken-farmyard-v1",
         "fingerprint": "a3c343ee54fb3ee7220647eab2b43d8570462a7288638c6919109854e9dd51a7",
@@ -1053,7 +1060,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "fc248ea0b9a3d8a3f11524ba85b978514ec75693",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-mallard-frogs-and-ducks-v1",
+        "sha256": "11e584959e4049378d33e19b80ba674eef16c78200f5d741e28f4dca1b2cceed",
+        "states": ["action", "flap", "flight", "idle", "swim", "waddle"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/mallard-frogs-and-ducks-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-mallard-frogs-and-ducks-v1",
         "fingerprint": "6cc73d7065a9b5470f0851fe132c00528422c6e76d7dcf31f1cc160981c7d9c5",
@@ -10070,7 +10084,14 @@
         }
       },
       "promotion": null,
-      "live": null,
+      "live": {
+        "revision": "fc248ea0b9a3d8a3f11524ba85b978514ec75693",
+        "url": "https://kzahel.github.io/tilefun/",
+        "candidate": "pattern:wildlife-3d-frog-frogs-and-ducks-v1",
+        "sha256": "e396f211b735520de31c96afc8948a81116a13695a03c551a06f0580d33db19a",
+        "states": ["action", "hop", "idle", "swim"],
+        "evidence": "docs/tactical/256-wildlife-3d-game-rollout/evidence/frog-frogs-and-ducks-v1-default.json"
+      },
       "candidatePreview": {
         "candidate": "pattern:wildlife-3d-frog-frogs-and-ducks-v1",
         "fingerprint": "92ea935e2d873d81887868a285db949795c48a38d327ff438fac2d3f1362fb7a",

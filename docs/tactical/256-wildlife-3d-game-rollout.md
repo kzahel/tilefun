@@ -107,6 +107,16 @@ runtime scope reconciliation in the execution notes.
 
 ## Delivery log
 
+### All current defaults verified, 2026-11-26
+
+The hen, frog and mallard passed the production repeat on `fc248ea0`.
+The hen fled after contact, and the pond checks observed swimming,
+ground travel, and the mallard's flight in reopened game worlds. This
+completes per-state production verification for the 113 models already
+selected as defaults. [Hen](256-wildlife-3d-game-rollout/evidence/chicken-farmyard-v1-default.json) ·
+[Frog](256-wildlife-3d-game-rollout/evidence/frog-frogs-and-ducks-v1-default.json) ·
+[Mallard](256-wildlife-3d-game-rollout/evidence/mallard-frogs-and-ducks-v1-default.json)
+
 ### Small hunters and woodland mammals, 2026-11-26
 
 Fossa, honey badger, mongoose and white-nosed coati use independent chase

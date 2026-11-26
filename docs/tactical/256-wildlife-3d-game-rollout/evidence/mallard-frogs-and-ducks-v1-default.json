@@ -1,0 +1,42 @@
+{
+  "deployment": "https://kzahel.github.io/tilefun/",
+  "revision": "fc248ea0b9a3d8a3f11524ba85b978514ec75693",
+  "workshopInputDigest": "2aba7e526f97ed5fdd54ed08773cdd3a4a2059acd4d4f7ad019f58946d08893a",
+  "results": [
+    {
+      "type": "wildlife-mallard-v1",
+      "mode": "default",
+      "manifestFingerprint": "6cc73d7065a9b5470f0851fe132c00528422c6e76d7dcf31f1cc160981c7d9c5",
+      "modelSha256": "11e584959e4049378d33e19b80ba674eef16c78200f5d741e28f4dca1b2cceed",
+      "lab": "https://kzahel.github.io/tilefun/workshop.html?geometry=nature-pond&wildlife3dStage=mallard-frogs-and-ducks-v1#/tool/world-geometry",
+      "statesObserved": [
+        "idle",
+        "waddle",
+        "swim",
+        "flap",
+        "action",
+        "flight"
+      ],
+      "heightRange": [
+        -0.0009678192138672023,
+        -0.00007584762573241974
+      ],
+      "statesOnLanding": [
+        "flight"
+      ],
+      "spritePreferenceRoundTrip": true,
+      "game": {
+        "createdAndDrawn": true,
+        "savedAndDrawnAfterReload": true,
+        "statesAfterReload": [
+          "idle",
+          "waddle",
+          "swim",
+          "flap",
+          "action",
+          "flight"
+        ]
+      }
+    }
+  ]
+}
